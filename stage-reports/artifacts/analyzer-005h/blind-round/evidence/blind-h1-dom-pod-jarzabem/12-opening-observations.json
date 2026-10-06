@@ -1,0 +1,206 @@
+{
+  "callouts": [
+    {
+      "box": {
+        "x0": 670,
+        "x1": 690,
+        "y0": 113,
+        "y1": 133
+      },
+      "id": "metric-callout-ring-0fde750296",
+      "rawText": "111/111",
+      "value": 111
+    },
+    {
+      "box": {
+        "x0": 298,
+        "x1": 318,
+        "y0": 367,
+        "y1": 387
+      },
+      "id": "metric-callout-ring-3768fd166a",
+      "rawText": "444/78",
+      "value": 444
+    },
+    {
+      "box": {
+        "x0": 148,
+        "x1": 170,
+        "y0": 487,
+        "y1": 509
+      },
+      "id": "metric-callout-ring-47dc260582",
+      "rawText": "41/40",
+      "value": 41
+    },
+    {
+      "box": {
+        "x0": 197,
+        "x1": 221,
+        "y0": 209,
+        "y1": 233
+      },
+      "id": "metric-callout-ring-5ea9b10a7d",
+      "rawText": "105/210",
+      "value": 105
+    },
+    {
+      "box": {
+        "x0": 415,
+        "x1": 455,
+        "y0": 534,
+        "y1": 574
+      },
+      "id": "metric-callout-ring-6ab249e548",
+      "rawText": "86/400",
+      "value": 86
+    },
+    {
+      "box": {
+        "x0": 510,
+        "x1": 536,
+        "y0": 269,
+        "y1": 295
+      },
+      "id": "metric-callout-ring-6d20943a8e",
+      "rawText": "401/400",
+      "value": 401
+    },
+    {
+      "box": {
+        "x0": 692,
+        "x1": 716,
+        "y0": 603,
+        "y1": 627
+      },
+      "id": "metric-callout-ring-98c39cb65d",
+      "rawText": "601/147",
+      "value": 601
+    },
+    {
+      "box": {
+        "x0": 334,
+        "x1": 358,
+        "y0": 603,
+        "y1": 627
+      },
+      "id": "metric-callout-ring-9a49748c0c",
+      "rawText": "111/117",
+      "value": 111
+    },
+    {
+      "box": {
+        "x0": 474,
+        "x1": 510,
+        "y0": 529,
+        "y1": 565
+      },
+      "id": "metric-callout-ring-c9f31962e2",
+      "rawText": "241/400",
+      "value": 241
+    },
+    {
+      "box": {
+        "x0": 316,
+        "x1": 350,
+        "y0": 435,
+        "y1": 469
+      },
+      "id": "metric-callout-ring-e1ce5ea5ad",
+      "rawText": "646/72",
+      "value": 646
+    },
+    {
+      "box": {
+        "x0": 583,
+        "x1": 605,
+        "y0": 571,
+        "y1": 593
+      },
+      "id": "metric-callout-ring-ecd076097a",
+      "rawText": "110/147",
+      "value": 110
+    }
+  ],
+  "frameId": "frame-asset-rzut-9354eb066f-397808a266",
+  "gapClasses": {
+    "DRAWING_BREAK_SUPPORTED": 700,
+    "OPENING_SUPPORTED": 25,
+    "TRUE_EXTERIOR_GAP": 196,
+    "UNKNOWN_GAP": 46
+  },
+  "wideOpenings": [
+    {
+      "axis": "X",
+      "decision": "OPEN_SIDE",
+      "fromPx": 328,
+      "id": "opening-0",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 774,
+      "score": 0.473611,
+      "toPx": 472,
+      "why": "a 3.98 m gap between two pieces of one wall, wider than a lintel conventionally spans, with only 24% of it drawn across: where the wall stops",
+      "widthM": 3.983904
+    },
+    {
+      "axis": "X",
+      "decision": "OPEN_SIDE",
+      "fromPx": 328,
+      "id": "opening-1",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 785,
+      "score": 0.473611,
+      "toPx": 472,
+      "why": "a 3.98 m gap between two pieces of one wall, wider than a lintel conventionally spans, with only 24% of it drawn across: where the wall stops",
+      "widthM": 3.983904
+    },
+    {
+      "axis": "Y",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 443,
+      "id": "opening-2",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 205.875,
+      "score": 0.8,
+      "toPx": 582,
+      "why": "a 3.78 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+      "widthM": 3.775379
+    },
+    {
+      "axis": "Y",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 443,
+      "id": "opening-3",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 212,
+      "score": 0.8,
+      "toPx": 582,
+      "why": "a 3.78 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+      "widthM": 3.775379
+    },
+    {
+      "axis": "Y",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 443,
+      "id": "opening-4",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 220.5,
+      "score": 0.8,
+      "toPx": 582,
+      "why": "a 3.78 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+      "widthM": 3.775379
+    },
+    {
+      "axis": "Y",
+      "decision": "OPEN_SIDE",
+      "fromPx": 263,
+      "id": "opening-5",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 562.875,
+      "score": 0.543658,
+      "toPx": 477,
+      "why": "a 5.81 m gap between two pieces of one wall, wider than a lintel conventionally spans, with only 34% of it drawn across: where the wall stops",
+      "widthM": 5.812454
+    }
+  ]
+}

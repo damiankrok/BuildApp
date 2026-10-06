@@ -1,0 +1,373 @@
+{
+ "schema": "buildapp.005h-development-matrix-off",
+ "version": 1,
+ "what": "BUILDPLAN-ANALYZER-005H, recogniser OFF: the 22 development rows (005F's 20 and round 6's two houses) run offline from their sealed source packages, Evidence Pack on, and compared hash for hash with the frozen code: 005F's final matrix run at 41e26be (whose production code is the 005H start c6fe174's) and, for the round-6 houses, their sealed blind runs. Compared: every hash of the result summary (source package, observation graph, metric evidence, candidate, model, scene content, scene bytes) or the failure code, and the metric evidence's own content hash.",
+ "baseline": {
+  "developmentRows": "/work005f/m-g at 41e26be (005F final matrix; packages/ and apps/local-analyzer/src unchanged to c6fe174)",
+  "roundSixRows": "005F blind round 6 runs at 65ae015 (PRE_HOLDOUT_6_SHA)"
+ },
+ "runs": {
+  "d04ebc4": "first 005H commit",
+  "d14304c": "after the post-review fixes"
+ },
+ "summary": {
+  "rows": 22,
+  "identicalAtD04ebc4": 22,
+  "identicalAtD14304c": 22
+ },
+ "verdict": "OFF_PATH_BYTE_IDENTICAL",
+ "rows": [
+  {
+   "row": "alt-marcowki",
+   "outcome": "FAILED",
+   "failure": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+   "modelHash": null,
+   "atD04ebc4": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   },
+   "atD14304c": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   }
+  },
+  {
+   "row": "aster-viii",
+   "outcome": "FAILED",
+   "failure": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+   "modelHash": null,
+   "atD04ebc4": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   },
+   "atD14304c": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   }
+  },
+  {
+   "row": "dom-w-azaliach",
+   "outcome": "FAILED",
+   "failure": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE",
+   "modelHash": null,
+   "atD04ebc4": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   },
+   "atD14304c": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   }
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "outcome": "FAILED",
+   "failure": "RECONSTRUCTION_FAILED/BOUNDARY_RESOLUTION_INCONCLUSIVE",
+   "modelHash": null,
+   "atD04ebc4": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   },
+   "atD14304c": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   }
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "outcome": "COMPLETED",
+   "failure": null,
+   "modelHash": "37c8f6f1fd55",
+   "atD04ebc4": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   },
+   "atD14304c": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   }
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "outcome": "FAILED",
+   "failure": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+   "modelHash": null,
+   "atD04ebc4": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   },
+   "atD14304c": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   }
+  },
+  {
+   "row": "dom-w-modrzykach",
+   "outcome": "COMPLETED",
+   "failure": null,
+   "modelHash": "86ed8afd4ede",
+   "atD04ebc4": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   },
+   "atD14304c": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   }
+  },
+  {
+   "row": "dom-w-morelach",
+   "outcome": "COMPLETED",
+   "failure": null,
+   "modelHash": "c3eb20a9727b",
+   "atD04ebc4": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   },
+   "atD14304c": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   }
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "outcome": "COMPLETED",
+   "failure": null,
+   "modelHash": "86580d74ccbe",
+   "atD04ebc4": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   },
+   "atD14304c": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   }
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "outcome": "COMPLETED",
+   "failure": null,
+   "modelHash": "31ba5eea2aa6",
+   "atD04ebc4": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   },
+   "atD14304c": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   }
+  },
+  {
+   "row": "eoze-legacy-area",
+   "outcome": "COMPLETED",
+   "failure": null,
+   "modelHash": "a27f3a5e808e",
+   "atD04ebc4": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   },
+   "atD14304c": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   }
+  },
+  {
+   "row": "eoze-legacy-every",
+   "outcome": "COMPLETED",
+   "failure": null,
+   "modelHash": "0a0e019df52a",
+   "atD04ebc4": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   },
+   "atD14304c": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   }
+  },
+  {
+   "row": "galaktyka",
+   "outcome": "FAILED",
+   "failure": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+   "modelHash": null,
+   "atD04ebc4": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   },
+   "atD14304c": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   }
+  },
+  {
+   "row": "kosacce-area-alone",
+   "outcome": "FAILED",
+   "failure": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE",
+   "modelHash": null,
+   "atD04ebc4": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   },
+   "atD14304c": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   }
+  },
+  {
+   "row": "kosacce-clean",
+   "outcome": "COMPLETED",
+   "failure": null,
+   "modelHash": "5b5ffcf1afcd",
+   "atD04ebc4": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   },
+   "atD14304c": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   }
+  },
+  {
+   "row": "kosacce-tracked",
+   "outcome": "COMPLETED",
+   "failure": null,
+   "modelHash": "5b5ffcf1afcd",
+   "atD04ebc4": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   },
+   "atD14304c": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   }
+  },
+  {
+   "row": "marcowki",
+   "outcome": "COMPLETED",
+   "failure": null,
+   "modelHash": "6152770f43f4",
+   "atD04ebc4": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   },
+   "atD14304c": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   }
+  },
+  {
+   "row": "rarytasy-eoze",
+   "outcome": "COMPLETED",
+   "failure": null,
+   "modelHash": "75c4ea224908",
+   "atD04ebc4": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   },
+   "atD14304c": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   }
+  },
+  {
+   "row": "rarytasy-g2e",
+   "outcome": "COMPLETED",
+   "failure": null,
+   "modelHash": "9f5fd342a53e",
+   "atD04ebc4": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   },
+   "atD14304c": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   }
+  },
+  {
+   "row": "willa-miranda",
+   "outcome": "COMPLETED",
+   "failure": null,
+   "modelHash": "1ce47cfbbdb5",
+   "atD04ebc4": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   },
+   "atD14304c": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   }
+  },
+  {
+   "row": "dom-pod-milorzebem",
+   "outcome": "FAILED",
+   "failure": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+   "modelHash": null,
+   "atD04ebc4": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   },
+   "atD14304c": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   }
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "outcome": "COMPLETED",
+   "failure": null,
+   "modelHash": "7a59ba63f58b",
+   "atD04ebc4": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   },
+   "atD14304c": {
+    "status": "IDENTICAL",
+    "metricEvidence": "IDENTICAL",
+    "differ": []
+   }
+  }
+ ]
+}

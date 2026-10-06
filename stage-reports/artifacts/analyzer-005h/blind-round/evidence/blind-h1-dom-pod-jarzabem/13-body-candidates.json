@@ -1,0 +1,356 @@
+{
+  "bays": [],
+  "bodies": [
+    {
+      "areaM2": 11.852451,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": false,
+      "id": "body-0",
+      "junctionWallShare": 0.246201,
+      "mouthM": 1.964286,
+      "rect": {
+        "x0": 609.5,
+        "x1": 785,
+        "y0": 116,
+        "y1": 205.875
+      },
+      "relation": "COVERED_TERRACE",
+      "sideWallShare": 0.040098
+    },
+    {
+      "areaM2": 1.129315,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": true,
+      "id": "body-1",
+      "junctionWallShare": 1,
+      "rect": {
+        "x0": 774,
+        "x1": 785,
+        "y0": 205.875,
+        "y1": 342.5
+      },
+      "relation": "FLUSH_ATTACHED",
+      "sideWallShare": 1
+    },
+    {
+      "areaM2": 43.62153,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": false,
+      "id": "body-2",
+      "junctionWallShare": 0.240713,
+      "mouthM": 5.486522,
+      "rect": {
+        "x0": 417.25,
+        "x1": 774,
+        "y0": 292,
+        "y1": 492
+      },
+      "relation": "RECESSED_ATTACHED",
+      "sideWallShare": 0.203402
+    },
+    {
+      "areaM2": 2.356504,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": false,
+      "id": "body-3",
+      "junctionWallShare": 0.34,
+      "mouthM": 0.857646,
+      "rect": {
+        "x0": 774,
+        "x1": 802.5,
+        "y0": 342.5,
+        "y1": 468.5
+      },
+      "relation": "UNKNOWN",
+      "sideWallShare": 0.414637
+    },
+    {
+      "areaM2": 0.111776,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": true,
+      "id": "body-4",
+      "junctionWallShare": 0,
+      "rect": {
+        "x0": 785,
+        "x1": 802.5,
+        "y0": 342.5,
+        "y1": 351
+      },
+      "relation": "SEPARATE_BODY",
+      "sideWallShare": 1
+    },
+    {
+      "areaM2": 0.230127,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": true,
+      "id": "body-5",
+      "junctionWallShare": 0,
+      "rect": {
+        "x0": 785,
+        "x1": 802.5,
+        "y0": 451,
+        "y1": 468.5
+      },
+      "relation": "SEPARATE_BODY",
+      "sideWallShare": 1
+    },
+    {
+      "areaM2": 1.024208,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": false,
+      "id": "body-6",
+      "junctionWallShare": 0.306477,
+      "mouthM": 0.869152,
+      "rect": {
+        "x0": 258,
+        "x1": 316,
+        "y0": 468.5,
+        "y1": 492
+      },
+      "relation": "RECESSED_ATTACHED",
+      "sideWallShare": 0.121951
+    },
+    {
+      "areaM2": 0.780085,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": true,
+      "id": "body-7",
+      "junctionWallShare": 0,
+      "rect": {
+        "x0": 774,
+        "x1": 785,
+        "y0": 468.5,
+        "y1": 562.875
+      },
+      "relation": "SEPARATE_BODY",
+      "sideWallShare": 1
+    },
+    {
+      "areaM2": 9.160383,
+      "built": true,
+      "decision": "BUILT",
+      "enclosed": true,
+      "id": "body-8",
+      "junctionWallShare": 0.419355,
+      "rect": {
+        "x0": 103,
+        "x1": 275,
+        "y0": 492,
+        "y1": 562.875
+      },
+      "relation": "PROJECTING_WING",
+      "sideWallShare": 0.670378
+    },
+    {
+      "areaM2": 26.575763,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": false,
+      "id": "body-9",
+      "junctionWallShare": 0.484441,
+      "mouthM": 5.486522,
+      "rect": {
+        "x0": 275,
+        "x1": 774,
+        "y0": 492,
+        "y1": 562.875
+      },
+      "relation": "COVERED_TERRACE",
+      "sideWallShare": 0.250287
+    }
+  ],
+  "completions": [
+    {
+      "areaBeforeM2": 1.129315,
+      "areaM2": 0,
+      "decision": "REJECTED",
+      "evidence": {
+        "chains": 1,
+        "glazing": 0,
+        "returns": 0,
+        "strictEncloses": false,
+        "vehicleDoors": 0
+      },
+      "id": "completion-0",
+      "junction": {
+        "doorM": 0,
+        "lengthM": 0,
+        "openM": 0
+      },
+      "kind": "ATTACHED_ROOM",
+      "reason": "WALL_SLIVER: no free floor three quarters of a wall across — the thickness of a wall, not a room",
+      "rect": {
+        "x0": 774,
+        "x1": 785,
+        "y0": 205.875,
+        "y1": 342.5
+      },
+      "rectBefore": {
+        "x0": 774,
+        "x1": 785,
+        "y0": 205.875,
+        "y1": 342.5
+      },
+      "sides": {
+        "lengthM": 0,
+        "postShare": 0,
+        "wallShare": 0
+      },
+      "weakGaps": []
+    },
+    {
+      "areaBeforeM2": 0.780085,
+      "areaM2": 0,
+      "decision": "REJECTED",
+      "evidence": {
+        "chains": 0,
+        "glazing": 0,
+        "returns": 0,
+        "strictEncloses": false,
+        "vehicleDoors": 0
+      },
+      "id": "completion-1",
+      "junction": {
+        "doorM": 0,
+        "lengthM": 0,
+        "openM": 0
+      },
+      "kind": "ATTACHED_ROOM",
+      "reason": "WALL_SLIVER: no free floor three quarters of a wall across — the thickness of a wall, not a room",
+      "rect": {
+        "x0": 774,
+        "x1": 785,
+        "y0": 468.5,
+        "y1": 562.875
+      },
+      "rectBefore": {
+        "x0": 774,
+        "x1": 785,
+        "y0": 468.5,
+        "y1": 562.875
+      },
+      "sides": {
+        "lengthM": 0,
+        "postShare": 0,
+        "wallShare": 0
+      },
+      "weakGaps": []
+    },
+    {
+      "areaBeforeM2": 0.230127,
+      "areaM2": 0,
+      "decision": "REJECTED",
+      "evidence": {
+        "chains": 0,
+        "glazing": 0,
+        "returns": 1,
+        "strictEncloses": false,
+        "vehicleDoors": 0
+      },
+      "id": "completion-2",
+      "junction": {
+        "doorM": 0,
+        "lengthM": 0,
+        "openM": 0
+      },
+      "kind": "ATTACHED_ROOM",
+      "reason": "WALL_SLIVER: no free floor three quarters of a wall across — the thickness of a wall, not a room",
+      "rect": {
+        "x0": 785,
+        "x1": 802.5,
+        "y0": 451,
+        "y1": 468.5
+      },
+      "rectBefore": {
+        "x0": 785,
+        "x1": 802.5,
+        "y0": 451,
+        "y1": 468.5
+      },
+      "side": "E",
+      "sides": {
+        "lengthM": 0,
+        "postShare": 0,
+        "wallShare": 0
+      },
+      "weakGaps": []
+    },
+    {
+      "areaBeforeM2": 0.111776,
+      "areaM2": 0,
+      "decision": "REJECTED",
+      "evidence": {
+        "chains": 1,
+        "glazing": 0,
+        "returns": 1,
+        "strictEncloses": false,
+        "vehicleDoors": 0
+      },
+      "id": "completion-3",
+      "junction": {
+        "doorM": 0,
+        "lengthM": 0,
+        "openM": 0
+      },
+      "kind": "ATTACHED_ROOM",
+      "reason": "WALL_SLIVER: no free floor three quarters of a wall across — the thickness of a wall, not a room",
+      "rect": {
+        "x0": 785,
+        "x1": 802.5,
+        "y0": 342.5,
+        "y1": 351
+      },
+      "rectBefore": {
+        "x0": 785,
+        "x1": 802.5,
+        "y0": 342.5,
+        "y1": 351
+      },
+      "side": "E",
+      "sides": {
+        "lengthM": 0,
+        "postShare": 0,
+        "wallShare": 0
+      },
+      "weakGaps": []
+    }
+  ],
+  "frameId": "frame-asset-rzut-9354eb066f-397808a266",
+  "masses": [
+    {
+      "id": "mass-0",
+      "rect": {
+        "x0": 103,
+        "x1": 401,
+        "y0": 205.875,
+        "y1": 451
+      }
+    },
+    {
+      "id": "mass-1",
+      "rect": {
+        "x0": 103,
+        "x1": 258,
+        "y0": 451,
+        "y1": 562.875
+      }
+    },
+    {
+      "id": "mass-2",
+      "rect": {
+        "x0": 457,
+        "x1": 547,
+        "y0": 292,
+        "y1": 372
+      }
+    }
+  ]
+}

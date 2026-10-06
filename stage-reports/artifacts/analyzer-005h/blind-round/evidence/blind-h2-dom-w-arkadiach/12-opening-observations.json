@@ -1,0 +1,170 @@
+{
+  "callouts": [
+    {
+      "box": {
+        "x0": 349,
+        "x1": 369,
+        "y0": 624,
+        "y1": 644
+      },
+      "id": "metric-callout-ring-139902959f",
+      "rawText": "41/41",
+      "value": 41
+    },
+    {
+      "box": {
+        "x0": 405,
+        "x1": 429,
+        "y0": 149,
+        "y1": 173
+      },
+      "id": "metric-callout-ring-14b9f9b3e8",
+      "rawText": "80/400",
+      "value": 80
+    },
+    {
+      "box": {
+        "x0": 429,
+        "x1": 483,
+        "y0": 491,
+        "y1": 545
+      },
+      "id": "metric-callout-ring-4c690cb766",
+      "rawText": "495/90",
+      "value": 495
+    },
+    {
+      "box": {
+        "x0": 443,
+        "x1": 467,
+        "y0": 78,
+        "y1": 102
+      },
+      "id": "metric-callout-ring-4cf678f462",
+      "rawText": "406/400",
+      "value": 406
+    },
+    {
+      "box": {
+        "x0": 367,
+        "x1": 391,
+        "y0": 149,
+        "y1": 173
+      },
+      "id": "metric-callout-ring-896bb851ae",
+      "rawText": "80/400",
+      "value": 80
+    },
+    {
+      "box": {
+        "x0": 405,
+        "x1": 429,
+        "y0": 78,
+        "y1": 102
+      },
+      "id": "metric-callout-ring-99836189ae",
+      "rawText": "406/400",
+      "value": 406
+    },
+    {
+      "box": {
+        "x0": 443,
+        "x1": 467,
+        "y0": 149,
+        "y1": 173
+      },
+      "id": "metric-callout-ring-a00ae86ad5",
+      "rawText": "80/400",
+      "value": 80
+    },
+    {
+      "box": {
+        "x0": 387,
+        "x1": 409,
+        "y0": 149,
+        "y1": 171
+      },
+      "id": "metric-callout-ring-b35fff115f",
+      "rawText": "41/116",
+      "value": 41
+    },
+    {
+      "box": {
+        "x0": 257,
+        "x1": 303,
+        "y0": 605,
+        "y1": 651
+      },
+      "id": "metric-callout-ring-b6d7a31c6a",
+      "rawText": "80/301",
+      "value": 80
+    },
+    {
+      "box": {
+        "x0": 389,
+        "x1": 439,
+        "y0": 438,
+        "y1": 488
+      },
+      "id": "metric-callout-ring-bd3e6dae15",
+      "rawText": "441/400",
+      "value": 441
+    },
+    {
+      "box": {
+        "x0": 387,
+        "x1": 407,
+        "y0": 82,
+        "y1": 102
+      },
+      "id": "metric-callout-ring-ff005ce4dc",
+      "rawText": "41/41",
+      "value": 41
+    }
+  ],
+  "frameId": "frame-asset-rzut-16680ee739-bb2ced8b98",
+  "gapClasses": {
+    "DRAWING_BREAK_SUPPORTED": 268,
+    "OPENING_SUPPORTED": 16,
+    "TRUE_EXTERIOR_GAP": 72,
+    "UNKNOWN_GAP": 23
+  },
+  "wideOpenings": [
+    {
+      "axis": "X",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 407,
+      "id": "opening-0",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 138,
+      "score": 0.8,
+      "toPx": 627,
+      "why": "a 4.06 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+      "widthM": 4.06296
+    },
+    {
+      "axis": "X",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 407,
+      "id": "opening-1",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 171,
+      "score": 0.8,
+      "toPx": 627,
+      "why": "a 4.06 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+      "widthM": 4.06296
+    },
+    {
+      "axis": "Y",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 236,
+      "id": "opening-2",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 213,
+      "score": 1,
+      "toPx": 442,
+      "why": "a 3.80 m gap between two pieces of one wall with 100% of it spanned by one drawn line and a callout of 400 cm beside it: an opening in a wall that carries on",
+      "widthM": 3.801524
+    }
+  ]
+}

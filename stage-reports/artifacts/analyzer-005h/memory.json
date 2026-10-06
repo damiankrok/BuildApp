@@ -1,0 +1,335 @@
+{
+ "schema": "buildapp.005h-memory",
+ "version": 1,
+ "sha": "5315ff8ff1cfbc1fd69d8fb5032374d2ed230733",
+ "rows": [
+  {
+   "row": "marcowki",
+   "off": {
+    "wholeRunPeakRssMB": 871,
+    "reconstructionPeakRssMB": 850,
+    "metricFramesPeakRssMB": 721
+   },
+   "on": {
+    "wholeRunPeakRssMB": 983,
+    "reconstructionPeakRssMB": 921,
+    "metricFramesPeakRssMB": 911,
+    "workers": [
+     {
+      "labels": 50,
+      "outcome": "READ",
+      "beforeMB": 363,
+      "afterLoadMB": 447,
+      "afterOcrMB": 486,
+      "afterExitMB": 372
+     },
+     {
+      "labels": 22,
+      "outcome": "READ",
+      "beforeMB": 709,
+      "afterLoadMB": 802,
+      "afterOcrMB": 824,
+      "afterExitMB": 776
+     },
+     {
+      "labels": 13,
+      "outcome": "READ",
+      "beforeMB": 783,
+      "afterLoadMB": 828,
+      "afterOcrMB": 847,
+      "afterExitMB": 799
+     },
+     {
+      "labels": 32,
+      "outcome": "READ",
+      "beforeMB": 801,
+      "afterLoadMB": 799,
+      "afterOcrMB": 828,
+      "afterExitMB": 771
+     },
+     {
+      "labels": 38,
+      "outcome": "READ",
+      "beforeMB": 793,
+      "afterLoadMB": 830,
+      "afterOcrMB": 845,
+      "afterExitMB": 794
+     },
+     {
+      "labels": 59,
+      "outcome": "READ",
+      "beforeMB": 859,
+      "afterLoadMB": 895,
+      "afterOcrMB": 911,
+      "afterExitMB": 859
+     },
+     {
+      "labels": 53,
+      "outcome": "READ",
+      "beforeMB": 860,
+      "afterLoadMB": 896,
+      "afterOcrMB": 911,
+      "afterExitMB": 859
+     },
+     {
+      "labels": 33,
+      "outcome": "READ",
+      "beforeMB": 860,
+      "afterLoadMB": 896,
+      "afterOcrMB": 912,
+      "afterExitMB": 861
+     }
+    ]
+   },
+   "workerSummary": {
+    "loadDeltaMB": {
+     "max": 93
+    },
+    "reclaimedAfterExitMB": {
+     "min": 48
+    },
+    "residueAfterExitMB": {
+     "max": 67
+    }
+   }
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "off": {
+    "wholeRunPeakRssMB": 774,
+    "reconstructionPeakRssMB": 715,
+    "metricFramesPeakRssMB": 770
+   },
+   "on": {
+    "wholeRunPeakRssMB": 969,
+    "reconstructionPeakRssMB": 777,
+    "metricFramesPeakRssMB": 967,
+    "workers": [
+     {
+      "labels": 42,
+      "outcome": "READ",
+      "beforeMB": 392,
+      "afterLoadMB": 498,
+      "afterOcrMB": 536,
+      "afterExitMB": 425
+     },
+     {
+      "labels": 14,
+      "outcome": "READ",
+      "beforeMB": 702,
+      "afterLoadMB": 783,
+      "afterOcrMB": 818,
+      "afterExitMB": 717
+     },
+     {
+      "labels": 25,
+      "outcome": "READ",
+      "beforeMB": 735,
+      "afterLoadMB": 822,
+      "afterOcrMB": 847,
+      "afterExitMB": 803
+     },
+     {
+      "labels": 22,
+      "outcome": "READ",
+      "beforeMB": 797,
+      "afterLoadMB": 834,
+      "afterOcrMB": 847,
+      "afterExitMB": 798
+     },
+     {
+      "labels": 41,
+      "outcome": "READ",
+      "beforeMB": 805,
+      "afterLoadMB": 841,
+      "afterOcrMB": 862,
+      "afterExitMB": 755
+     },
+     {
+      "labels": 81,
+      "outcome": "READ",
+      "beforeMB": 774,
+      "afterLoadMB": 860,
+      "afterOcrMB": 915,
+      "afterExitMB": 833
+     },
+     {
+      "labels": 24,
+      "outcome": "READ",
+      "beforeMB": 874,
+      "afterLoadMB": 925,
+      "afterOcrMB": 967,
+      "afterExitMB": 874
+     },
+     {
+      "labels": 23,
+      "outcome": "READ",
+      "beforeMB": 824,
+      "afterLoadMB": 860,
+      "afterOcrMB": 900,
+      "afterExitMB": 783
+     }
+    ]
+   },
+   "workerSummary": {
+    "loadDeltaMB": {
+     "max": 106
+    },
+    "reclaimedAfterExitMB": {
+     "min": 44
+    },
+    "residueAfterExitMB": {
+     "max": 68
+    }
+   }
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "off": {
+    "wholeRunPeakRssMB": 764,
+    "reconstructionPeakRssMB": 718,
+    "metricFramesPeakRssMB": 732
+   },
+   "on": {
+    "wholeRunPeakRssMB": 981,
+    "reconstructionPeakRssMB": 800,
+    "metricFramesPeakRssMB": 975,
+    "workers": [
+     {
+      "labels": 47,
+      "outcome": "READ",
+      "beforeMB": 366,
+      "afterLoadMB": 474,
+      "afterOcrMB": 525,
+      "afterExitMB": 399
+     },
+     {
+      "labels": 19,
+      "outcome": "READ",
+      "beforeMB": 751,
+      "afterLoadMB": 842,
+      "afterOcrMB": 860,
+      "afterExitMB": 811
+     },
+     {
+      "labels": 27,
+      "outcome": "READ",
+      "beforeMB": 764,
+      "afterLoadMB": 850,
+      "afterOcrMB": 881,
+      "afterExitMB": 780
+     },
+     {
+      "labels": 11,
+      "outcome": "READ",
+      "beforeMB": 770,
+      "afterLoadMB": 825,
+      "afterOcrMB": 844,
+      "afterExitMB": 747
+     },
+     {
+      "labels": 44,
+      "outcome": "READ",
+      "beforeMB": 775,
+      "afterLoadMB": 862,
+      "afterOcrMB": 908,
+      "afterExitMB": 819
+     },
+     {
+      "labels": 60,
+      "outcome": "READ",
+      "beforeMB": 758,
+      "afterLoadMB": 846,
+      "afterOcrMB": 895,
+      "afterExitMB": 763
+     },
+     {
+      "labels": 75,
+      "outcome": "READ",
+      "beforeMB": 848,
+      "afterLoadMB": 930,
+      "afterOcrMB": 975,
+      "afterExitMB": 848
+     },
+     {
+      "labels": 27,
+      "outcome": "READ",
+      "beforeMB": 800,
+      "afterLoadMB": 883,
+      "afterOcrMB": 902,
+      "afterExitMB": 831
+     }
+    ]
+   },
+   "workerSummary": {
+    "loadDeltaMB": {
+     "max": 108
+    },
+    "reclaimedAfterExitMB": {
+     "min": 49
+    },
+    "residueAfterExitMB": {
+     "max": 60
+    }
+   }
+  },
+  {
+   "row": "kosacce-clean",
+   "off": {
+    "wholeRunPeakRssMB": 881,
+    "reconstructionPeakRssMB": 821,
+    "metricFramesPeakRssMB": 837
+   },
+   "on": {
+    "wholeRunPeakRssMB": 1046,
+    "reconstructionPeakRssMB": 933,
+    "metricFramesPeakRssMB": 1046,
+    "workers": [
+     {
+      "labels": 69,
+      "outcome": "READ",
+      "beforeMB": 514,
+      "afterLoadMB": 619,
+      "afterOcrMB": 677,
+      "afterExitMB": 541
+     },
+     {
+      "labels": 47,
+      "outcome": "READ",
+      "beforeMB": 755,
+      "afterLoadMB": 850,
+      "afterOcrMB": 884,
+      "afterExitMB": 830
+     },
+     {
+      "labels": 87,
+      "outcome": "READ",
+      "beforeMB": 832,
+      "afterLoadMB": 917,
+      "afterOcrMB": 939,
+      "afterExitMB": 833
+     },
+     {
+      "labels": 132,
+      "outcome": "READ",
+      "beforeMB": 900,
+      "afterLoadMB": 989,
+      "afterOcrMB": 1041,
+      "afterExitMB": 966
+     }
+    ]
+   },
+   "workerSummary": {
+    "loadDeltaMB": {
+     "max": 105
+    },
+    "reclaimedAfterExitMB": {
+     "min": 54
+    },
+    "residueAfterExitMB": {
+     "max": 75
+    }
+   }
+  }
+ ]
+}

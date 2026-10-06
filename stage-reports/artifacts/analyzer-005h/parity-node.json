@@ -1,0 +1,180 @@
+{
+ "schema": "buildapp.005h-parity-node",
+ "version": 1,
+ "commit": "5315ff8ff1cfbc1fd69d8fb5032374d2ed230733",
+ "machine": "x86-64 Linux (cloud container); one process per run; the bundle built from the commit",
+ "selfTest": {
+  "node22": {
+   "runtime": {
+    "node": "v22.22.2",
+    "v8": "12.4.254.21-node.39",
+    "arch": "x64",
+    "platform": "linux"
+   },
+   "parity": "MATCH",
+   "recogniser": {
+    "id": "ocr.ppocrv6-tiny-rec@9ef676d6",
+    "modelSha256": "9ef676d6ed3c88256a2d92c640c44f25b0c40947e111b14b8be8f594091563e6",
+    "runtime": "onnxruntime-web@1.30.0/wasm-simd/1-thread"
+   },
+   "wasmSha256": "3398c10d07d229bd91b364548e130e0e51a8e5704b88c7c083ebbeb78842dee2",
+   "corpus": {
+    "name": "buildapp.ocr-parity-corpus",
+    "version": 1,
+    "labels": 96,
+    "sha256": "734300d22abe5593b57d0cc579a8306c3d5dbedb5b2fe33bf0f0a639248245a7"
+   },
+   "outputSha256": "396c9f54b64b37bfbbf2331a383817d44b1c9d839be4400f7f57b375f8c43f2a",
+   "exact": 92,
+   "timing": {
+    "drawMs": 7198,
+    "totalMs": 10264,
+    "loadMs": 359,
+    "perLabelMeanMs": 102,
+    "perLabelP95Ms": 129
+   },
+   "peakRssBytes": 297848832
+  },
+  "node18": {
+   "runtime": {
+    "node": "v18.20.4",
+    "v8": "10.2.154.26-node.37",
+    "arch": "x64",
+    "platform": "linux"
+   },
+   "parity": "MATCH",
+   "recogniser": {
+    "id": "ocr.ppocrv6-tiny-rec@9ef676d6",
+    "modelSha256": "9ef676d6ed3c88256a2d92c640c44f25b0c40947e111b14b8be8f594091563e6",
+    "runtime": "onnxruntime-web@1.30.0/wasm-simd/1-thread"
+   },
+   "wasmSha256": "3398c10d07d229bd91b364548e130e0e51a8e5704b88c7c083ebbeb78842dee2",
+   "corpus": {
+    "name": "buildapp.ocr-parity-corpus",
+    "version": 1,
+    "labels": 96,
+    "sha256": "734300d22abe5593b57d0cc579a8306c3d5dbedb5b2fe33bf0f0a639248245a7"
+   },
+   "outputSha256": "396c9f54b64b37bfbbf2331a383817d44b1c9d839be4400f7f57b375f8c43f2a",
+   "exact": 92,
+   "timing": {
+    "drawMs": 7923,
+    "totalMs": 11244,
+    "loadMs": 580,
+    "perLabelMeanMs": 107,
+    "perLabelP95Ms": 138
+   },
+   "peakRssBytes": 361029632
+  },
+  "node18-no-icu": {
+   "runtime": {
+    "node": "v18.20.4",
+    "v8": "10.2.154.26-node.37",
+    "arch": "x64",
+    "platform": "linux"
+   },
+   "parity": "MATCH",
+   "recogniser": {
+    "id": "ocr.ppocrv6-tiny-rec@9ef676d6",
+    "modelSha256": "9ef676d6ed3c88256a2d92c640c44f25b0c40947e111b14b8be8f594091563e6",
+    "runtime": "onnxruntime-web@1.30.0/wasm-simd/1-thread"
+   },
+   "wasmSha256": "3398c10d07d229bd91b364548e130e0e51a8e5704b88c7c083ebbeb78842dee2",
+   "corpus": {
+    "name": "buildapp.ocr-parity-corpus",
+    "version": 1,
+    "labels": 96,
+    "sha256": "734300d22abe5593b57d0cc579a8306c3d5dbedb5b2fe33bf0f0a639248245a7"
+   },
+   "outputSha256": "396c9f54b64b37bfbbf2331a383817d44b1c9d839be4400f7f57b375f8c43f2a",
+   "exact": 92,
+   "timing": {
+    "drawMs": 8810,
+    "totalMs": 10817,
+    "loadMs": 541,
+    "perLabelMeanMs": 103,
+    "perLabelP95Ms": 130
+   },
+   "peakRssBytes": 351416320
+  }
+ },
+ "fixtureAnalyses": {
+  "larchfield-lf01": {
+   "desktop": {
+    "runtime": "v22.22.2",
+    "sourcePackageHash": "4e40736479d51c0e42b2ac5b766c070d28204701cc2fb0850134ff974f7cfe8b",
+    "observationGraphHash": "5f377e03bdfa9c88f3e147564d8f990615ffb0880ffac4d388c0d3687bd245c4",
+    "metricEvidenceHash": "1d9394c443881a60298214ce3dcbbec48598f0a6dcec6b448b7b4f41e90754c0",
+    "candidateHash": "f403a202e46e26f5552f2859a7c2ce6c2949295a9cb421736925216aab720032",
+    "modelHash": "0f074a7c842b730d3dbb871c354b7e28b351a076128d1b19ab7badf077a72cf3",
+    "sceneContentHash": "0c1ba245a2b372e60d61add7afffa72ad534133b1453d2167f25b127302db2e4",
+    "sceneSha256": "68b8edfe8b88b6a3cf9ee96c49608e502d897a7859b4ef787575412e4df8fb73",
+    "recogniser": {
+     "crops": 32,
+     "decisions": {
+      "AGREES": 16,
+      "NOT_COMPARABLE": 10,
+      "NOT_CORROBORATING": 4,
+      "NO_VALUE": 2
+     }
+    }
+   },
+   "bundles": {
+    "node22": {
+     "exit": 0,
+     "equal": true,
+     "differ": []
+    },
+    "node18": {
+     "exit": 0,
+     "equal": true,
+     "differ": []
+    },
+    "node18-no-icu": {
+     "exit": 0,
+     "equal": true,
+     "differ": []
+    }
+   }
+  },
+  "holloway-hw02": {
+   "desktop": {
+    "runtime": "v22.22.2",
+    "sourcePackageHash": "eb2e3a901bd7f5108f7acfa3ada3e4ff492ae12b08b4341012ab28d9c03be81a",
+    "observationGraphHash": "f3dc98199844eb965474ad348682d6e91a84550daa7d3590f88d921e25fde34b",
+    "metricEvidenceHash": "a7921564a037597b89376530458354603d135b734ba6cd01f14190a6ff32203c",
+    "candidateHash": "bcbb8099ed770be7cbae347f51170c14eba972bafa4e8dd25dd3a59e6eb1a44d",
+    "modelHash": "f4d347b47a7cff6175660cfd17b2ca157175092f4377aced560bf1c65f978235",
+    "sceneContentHash": "d8aec866274d948f90e63f6c9c0bd81c6241d9dece1ad1e5a7bbbaf8327c7bd6",
+    "sceneSha256": "7f7867f9842d1d6a49b6090a850864c764613bfc18f87cff64e920ef235cd0d8",
+    "recogniser": {
+     "crops": 22,
+     "decisions": {
+      "AGREES": 14,
+      "NOT_COMPARABLE": 5,
+      "NO_VALUE": 3
+     }
+    }
+   },
+   "bundles": {
+    "node22": {
+     "exit": 0,
+     "equal": true,
+     "differ": []
+    },
+    "node18": {
+     "exit": 0,
+     "equal": true,
+     "differ": []
+    },
+    "node18-no-icu": {
+     "exit": 0,
+     "equal": true,
+     "differ": []
+    }
+   }
+  }
+ },
+ "ci": "CI job \"Local analyzer / Node 18 parity\" repeats both on GitHub runners (vitest apps/local-analyzer with LOCAL_ANALYZER_NODE18, and the OCR self-test step on Node 22, Node 18 and Node 18 without ICU against the desktop fixture record).",
+ "verdict": "PASS"
+}

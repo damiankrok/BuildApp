@@ -1,0 +1,61 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": 29,
+  "assetsByDocument": {
+    "ELEVATION": 4,
+    "FLOOR_PLAN": 8,
+    "PERSPECTIVE_RENDER": 13,
+    "SECTION": 1,
+    "SITE_PLAN": 1,
+    "UNKNOWN": 2
+  },
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-arkadiach-6-m168264238cc55",
+  "contentHash": "1c5051d47f28789e15bad1c8f7caa6db4b6d7adbbe1701779882e39464b6af03",
+  "failuresByCode": {
+    "BYTE_IDENTICAL": 5,
+    "HTTP_STATUS": 9
+  },
+  "note": "facts and hashes only; no publisher drawing, page or render is in this pack",
+  "packageId": "src-m168264238cc55-15a67e2a6b",
+  "publishedFacts": [
+    {
+      "key": "building_height",
+      "unit": "m",
+      "value": 8.43
+    },
+    {
+      "key": "floor_area",
+      "unit": "m2",
+      "value": 102.17
+    },
+    {
+      "key": "footprint_area",
+      "unit": "m2",
+      "value": 69.9
+    },
+    {
+      "key": "roof_area",
+      "unit": "m2",
+      "value": 93.6
+    },
+    {
+      "key": "total_area",
+      "unit": "m2",
+      "value": 139.8
+    },
+    {
+      "key": "usable_area_without_stairs",
+      "unit": "m2",
+      "value": 89.95
+    },
+    {
+      "key": "volume",
+      "unit": "none",
+      "value": 470.54
+    }
+  ],
+  "runId": "h2-dom-w-arkadiach"
+}

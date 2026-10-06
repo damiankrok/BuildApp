@@ -1,0 +1,76 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": 16,
+  "assetsByDocument": {
+    "ELEVATION": 4,
+    "FLOOR_PLAN": 4,
+    "PERSPECTIVE_RENDER": 4,
+    "SECTION": 1,
+    "SITE_PLAN": 1,
+    "UNKNOWN": 2
+  },
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-pod-jarzabem-15-g-mbad2613634abe",
+  "contentHash": "d03312fc1bd0865a2334340b96564bde9ebb366fb5218acfde19b4d983c7d8d2",
+  "failuresByCode": {
+    "BYTE_IDENTICAL": 5,
+    "HTTP_STATUS": 7
+  },
+  "note": "facts and hashes only; no publisher drawing, page or render is in this pack",
+  "packageId": "src-mbad2613634abe-9ad3a99865",
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "unit": "m2",
+      "value": 5.15
+    },
+    {
+      "key": "building_height",
+      "unit": "m",
+      "value": 7.18
+    },
+    {
+      "key": "floor_area",
+      "unit": "m2",
+      "value": 157.33
+    },
+    {
+      "key": "footprint_area",
+      "unit": "m2",
+      "value": 216.76
+    },
+    {
+      "key": "garage_area",
+      "unit": "m2",
+      "value": 33.53
+    },
+    {
+      "key": "house_net_area",
+      "unit": "m2",
+      "value": 118.65
+    },
+    {
+      "key": "roof_area",
+      "unit": "m2",
+      "value": 318.72
+    },
+    {
+      "key": "total_area",
+      "unit": "m2",
+      "value": 198.96
+    },
+    {
+      "key": "usable_area",
+      "unit": "m2",
+      "value": 157.33
+    },
+    {
+      "key": "volume",
+      "unit": "none",
+      "value": 1057.14
+    }
+  ],
+  "runId": "h1-dom-pod-jarzabem"
+}

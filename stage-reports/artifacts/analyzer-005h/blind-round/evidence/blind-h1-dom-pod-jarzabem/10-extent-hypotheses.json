@@ -1,0 +1,36 @@
+{
+  "chosen": {
+    "provenance": {
+      "x": "DIMENSION_CHAIN_EXTENT",
+      "y": "DIMENSION_CHAIN_EXTENT"
+    },
+    "rect": {
+      "x0": 103,
+      "x1": 802.5,
+      "y0": 116,
+      "y1": 562.875
+    },
+    "refusedChains": [],
+    "weak": false
+  },
+  "frameId": "frame-asset-rzut-9354eb066f-397808a266",
+  "otherCopies": [],
+  "resolverReadings": [
+    {
+      "key": "reading1",
+      "summary": "copy dimensioned 19f8c2fa6e, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 191.4 m² (-11.7% of 216.76), UNKNOWN (the figure is spent)"
+    },
+    {
+      "key": "reading2",
+      "summary": "copy area_table 4813950087, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 175.7 m² (-18.9% of 216.76), UNKNOWN (the figure is spent)"
+    },
+    {
+      "key": "reading3",
+      "summary": "copy area_table 4813950087, chain extent, registered scale, largest-first tiling, outer faces: 1 body, 184.0 m² (-15.1% of 216.76), UNKNOWN (the figure is spent)"
+    },
+    {
+      "key": "reading4",
+      "summary": "copy dimensioned 30609bfc8e, wall-ink extent, registered scale, largest-first tiling, outer faces: 1 body, 4.1 m² (-98.1% of 216.76), WRONG"
+    }
+  ]
+}

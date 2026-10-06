@@ -1,0 +1,63 @@
+{
+  "run": "/home/user/work005h/blind7/h2-dom-w-arkadiach",
+  "completed": true,
+  "labelledPlanStoreys": [
+    "ATTIC",
+    "GROUND"
+  ],
+  "publishedFootprintM2": 69.9,
+  "checklist": {
+    "noFloorPlan": false,
+    "legibleOverallDimension": {
+      "ocrTokensOnGroundCopies": 130,
+      "tallestPx": 47,
+      "needsRawMeasurement": false
+    },
+    "wallsUnder4pxOnEveryGroundCopy": false,
+    "groundWallPx": [
+      {
+        "frameId": "frame-asset-rzut-16680ee739-bb2ced8b98",
+        "sizePx": {
+          "height": 853,
+          "width": 853
+        },
+        "wallPx": 17
+      }
+    ],
+    "floorPlanAssetsLost": []
+  },
+  "conditions": {
+    "storeys": {
+      "model": 2,
+      "plans": 2,
+      "holds": true
+    },
+    "openingsAllBuilt": {
+      "holds": true,
+      "message": null
+    },
+    "footprint": {
+      "builtM2": 69.56,
+      "publishedM2": 69.9,
+      "residualPct": -0.49,
+      "holds": true
+    },
+    "resolvedWithAWitness": {
+      "holds": true,
+      "note": "the first reading held"
+    },
+    "replacedByTheDrawing": {
+      "holds": true,
+      "note": "no challenge"
+    }
+  },
+  "bodies": 1,
+  "unresolved": 17,
+  "warnings": [
+    "INFO:DETERMINISTIC_ONLY",
+    "INFO:SOURCE_BYTE_IDENTICAL",
+    "INFO:GUESSED_ADDRESS_HTTP_STATUS",
+    "LIMITING:RESIDUALS_OUTSIDE_TOLERANCE"
+  ],
+  "verdict": "PASS"
+}

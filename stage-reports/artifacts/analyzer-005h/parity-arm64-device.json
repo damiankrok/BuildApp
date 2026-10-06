@@ -1,0 +1,53 @@
+{
+ "schema": "buildapp.005h-parity-arm64-device",
+ "version": 1,
+ "verdict": "PENDING",
+ "why": "No physical arm64 phone was reachable from this environment (cloud container, no USB, no device farm). The brief requires a REAL arm64 phone for this verdict; nothing below substitutes for it.",
+ "required": {
+  "what": "the APK's OCR self-test on a physical arm64-v8a phone, run once from the app",
+  "where": "Dodaj dom z linku → section \"Test zgodności odczytu wymiarów\" → \"Uruchom test\"",
+  "pass": {
+   "parity": "Zgodny z komputerem (MATCH)",
+   "corpusSha256": "734300d22abe5593b57d0cc579a8306c3d5dbedb5b2fe33bf0f0a639248245a7",
+   "outputSha256": "396c9f54b64b37bfbbf2331a383817d44b1c9d839be4400f7f57b375f8c43f2a",
+   "exact": "92 of 96 (\"zgodne z korpusem testowym (to nie miara dokładności)\")",
+   "recogniser": "ocr.ppocrv6-tiny-rec@9ef676d6",
+   "modelSha256": "9ef676d6ed3c88256a2d92c640c44f25b0c40947e111b14b8be8f594091563e6",
+   "wasmSha256": "3398c10d07d229bd91b364548e130e0e51a8e5704b88c7c083ebbeb78842dee2"
+  },
+  "record": ["the copied result (\"Kopiuj wynik\")", "time per label", "phone model, Android version, RAM"],
+  "fail": "NIEZGODNY z komputerem, a different corpus hash (\"Telefon narysował inne etykiety…\"), or any \"Test nie powiódł się\""
+ },
+ "supplementary": {
+  "kind": "arm64 Linux user-mode emulation on an x86-64 desktop (QEMU qemu-aarch64-static) — NOT a phone, NOT Android, NOT arm64 silicon",
+  "runtime": { "node": "v18.20.4 (official linux-arm64 build, full ICU)", "v8": "10.2.154.26-node.37", "arch": "arm64", "platform": "linux" },
+  "bundle": "the APK's runtime bundle built at 5315ff8 (PRE_HOLDOUT_7_SHA): main.mjs sha256 f1a69daac12fba70…, ocr-self-test.mjs, ocr-worker.mjs, the WebAssembly and the model, run as `node main.mjs --self-test ocr --watchdog-scale 20`",
+  "attempts": [
+   {
+    "attempt": 1,
+    "watchdogScale": 1,
+    "outcome": "SELF_TEST_FAILED after 909 s — \"the recogniser worker gave no sign of life for 120 s while reading a label\"",
+    "cause": "an emulated CPU compiles and runs the WebAssembly ~75× slower than native; the production watchdog (120 s per label) is correct for a phone and wrong for QEMU. `--watchdog-scale` (self-test only, 1–100, the app never passes it) was added before the freeze for this measurement."
+   },
+   {
+    "attempt": 2,
+    "watchdogScale": 20,
+    "outcome": "MATCH",
+    "corpus": { "labels": 96, "sha256": "734300d22abe5593b57d0cc579a8306c3d5dbedb5b2fe33bf0f0a639248245a7" },
+    "outputSha256": "396c9f54b64b37bfbbf2331a383817d44b1c9d839be4400f7f57b375f8c43f2a",
+    "exact": 92,
+    "wasmSha256": "3398c10d07d229bd91b364548e130e0e51a8e5704b88c7c083ebbeb78842dee2",
+    "modelSha256": "9ef676d6ed3c88256a2d92c640c44f25b0c40947e111b14b8be8f594091563e6",
+    "timing": { "wallS": 1564, "drawMs": 599213, "loadMs": 90959, "perLabelMeanMs": 7736, "perLabelP95Ms": 8186 },
+    "peakRssMB": 781,
+    "timingNote": "emulated: not a phone's timing and not a basis for any performance claim"
+   }
+  ],
+  "whatItShows": "The arm64 build of Node 18 with the same bundle, WebAssembly and model draws the same corpus and reads it to the same bytes as the x86-64 desktop, Node 22, Node 18 without ICU and the x86_64 Android emulator. It exercises the arm64 code paths of V8's WebAssembly compiler under emulation; it does not exercise nodejs-mobile, Android's process limits, a phone's memory pressure or arm64 silicon.",
+  "whatItDoesNot": "It does not close ARM64_DEVICE_PARITY."
+ },
+ "otherParity": {
+  "node": "parity-node.json — PASS (Node 22, Node 18, Node 18 without ICU; same output hash)",
+  "x86Emulator": "parity-emulator.json — PASS (CI run 157, the APK on an x86_64 Android emulator)"
+ }
+}

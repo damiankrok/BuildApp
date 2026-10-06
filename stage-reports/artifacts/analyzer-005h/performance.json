@@ -1,0 +1,156 @@
+{
+ "schema": "buildapp.005h-performance",
+ "version": 1,
+ "sha": "5315ff8ff1cfbc1fd69d8fb5032374d2ed230733",
+ "machine": "x86-64 Linux cloud container, 4 vCPU, Node 22, one run at a time (OFF then ON), offline from the sealed packages, the recogniser in a worker per plan as on the phone",
+ "rows": [
+  {
+   "row": "marcowki",
+   "off": {
+    "exit": 0,
+    "wallS": 147.1,
+    "totalMs": 144100,
+    "metricFramesMs": 122867,
+    "maxTickGapMs": 1709,
+    "longestTelemetrySilenceMs": 2419
+   },
+   "on": {
+    "exit": 0,
+    "wallS": 182.1,
+    "totalMs": 179166,
+    "metricFramesMs": 157748,
+    "maxTickGapMs": 1780,
+    "longestTelemetrySilenceMs": 2406,
+    "recogniser": {
+     "batches": 8,
+     "labels": 300,
+     "loadMs": {
+      "mean": 277,
+      "max": 307
+     },
+     "ocrMsTotal": 31597,
+     "perLabelMs": {
+      "mean": 102,
+      "p95": 128,
+      "max": 237
+     },
+     "outcomes": {
+      "READ": 8
+     }
+    }
+   },
+   "addedMs": 35066
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "off": {
+    "exit": 0,
+    "wallS": 156.4,
+    "totalMs": 150838,
+    "metricFramesMs": 135018,
+    "maxTickGapMs": 2998,
+    "longestTelemetrySilenceMs": 3544
+   },
+   "on": {
+    "exit": 0,
+    "wallS": 187.7,
+    "totalMs": 181462,
+    "metricFramesMs": 165374,
+    "maxTickGapMs": 3095,
+    "longestTelemetrySilenceMs": 3562,
+    "recogniser": {
+     "batches": 8,
+     "labels": 272,
+     "loadMs": {
+      "mean": 275,
+      "max": 322
+     },
+     "ocrMsTotal": 28455,
+     "perLabelMs": {
+      "mean": 100,
+      "p95": 132,
+      "max": 330
+     },
+     "outcomes": {
+      "READ": 8
+     }
+    }
+   },
+   "addedMs": 30624
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "off": {
+    "exit": 0,
+    "wallS": 179.3,
+    "totalMs": 173259,
+    "metricFramesMs": 150374,
+    "maxTickGapMs": 1202,
+    "longestTelemetrySilenceMs": 1763
+   },
+   "on": {
+    "exit": 0,
+    "wallS": 203.3,
+    "totalMs": 197754,
+    "metricFramesMs": 177329,
+    "maxTickGapMs": 1092,
+    "longestTelemetrySilenceMs": 1685,
+    "recogniser": {
+     "batches": 8,
+     "labels": 310,
+     "loadMs": {
+      "mean": 284,
+      "max": 318
+     },
+     "ocrMsTotal": 32335,
+     "perLabelMs": {
+      "mean": 101,
+      "p95": 133,
+      "max": 191
+     },
+     "outcomes": {
+      "READ": 8
+     }
+    }
+   },
+   "addedMs": 24495
+  },
+  {
+   "row": "kosacce-clean",
+   "off": {
+    "exit": 0,
+    "wallS": 142,
+    "totalMs": 139190,
+    "metricFramesMs": 94942,
+    "maxTickGapMs": 1439,
+    "longestTelemetrySilenceMs": 1982
+   },
+   "on": {
+    "exit": 0,
+    "wallS": 178.3,
+    "totalMs": 175507,
+    "metricFramesMs": 129300,
+    "maxTickGapMs": 1590,
+    "longestTelemetrySilenceMs": 2544,
+    "recogniser": {
+     "batches": 4,
+     "labels": 335,
+     "loadMs": {
+      "mean": 371,
+      "max": 570
+     },
+     "ocrMsTotal": 33277,
+     "perLabelMs": {
+      "mean": 97,
+      "p95": 116,
+      "max": 193
+     },
+     "outcomes": {
+      "READ": 4
+     }
+    }
+   },
+   "addedMs": 36317
+  }
+ ]
+}

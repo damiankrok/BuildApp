@@ -1,0 +1,358 @@
+{
+  "bands": [
+    {
+      "axis": "H",
+      "bounds": {
+        "x0": 175,
+        "x1": 201,
+        "y0": 14,
+        "y1": 22
+      },
+      "decision": "ACCEPTED",
+      "id": "band-0",
+      "reason": "a run of wall-thick ink",
+      "thickness": 11
+    },
+    {
+      "axis": "H",
+      "bounds": {
+        "x0": 163,
+        "x1": 236,
+        "y0": 213,
+        "y1": 237
+      },
+      "decision": "ACCEPTED",
+      "id": "band-1",
+      "reason": "a run of wall-thick ink",
+      "thickness": 24
+    },
+    {
+      "axis": "H",
+      "bounds": {
+        "x0": 442,
+        "x1": 515,
+        "y0": 213,
+        "y1": 237
+      },
+      "decision": "ACCEPTED",
+      "id": "band-2",
+      "reason": "a run of wall-thick ink",
+      "thickness": 24
+    },
+    {
+      "axis": "H",
+      "bounds": {
+        "x0": 448,
+        "x1": 514,
+        "y0": 427,
+        "y1": 440
+      },
+      "decision": "ACCEPTED",
+      "id": "band-3",
+      "reason": "a run of wall-thick ink",
+      "thickness": 14
+    },
+    {
+      "axis": "H",
+      "bounds": {
+        "x0": 411,
+        "x1": 477,
+        "y0": 544,
+        "y1": 551
+      },
+      "decision": "ACCEPTED",
+      "id": "band-4",
+      "reason": "a run of wall-thick ink",
+      "thickness": 8
+    },
+    {
+      "axis": "H",
+      "bounds": {
+        "x0": 263,
+        "x1": 300,
+        "y0": 544,
+        "y1": 557
+      },
+      "decision": "ACCEPTED",
+      "id": "band-5",
+      "reason": "a run of wall-thick ink",
+      "thickness": 14
+    },
+    {
+      "axis": "H",
+      "bounds": {
+        "x0": 271,
+        "x1": 301,
+        "y0": 611,
+        "y1": 631
+      },
+      "decision": "ACCEPTED",
+      "id": "band-6",
+      "reason": "a run of wall-thick ink",
+      "thickness": 21
+    },
+    {
+      "axis": "H",
+      "bounds": {
+        "x0": 375,
+        "x1": 406,
+        "y0": 698,
+        "y1": 722
+      },
+      "decision": "ACCEPTED",
+      "id": "band-7",
+      "reason": "a run of wall-thick ink",
+      "thickness": 24
+    },
+    {
+      "axis": "H",
+      "bounds": {
+        "x0": 462,
+        "x1": 515,
+        "y0": 698,
+        "y1": 722
+      },
+      "decision": "ACCEPTED",
+      "id": "band-8",
+      "reason": "a run of wall-thick ink",
+      "thickness": 24.5
+    },
+    {
+      "axis": "H",
+      "bounds": {
+        "x0": 163,
+        "x1": 301,
+        "y0": 699,
+        "y1": 722
+      },
+      "decision": "ACCEPTED",
+      "id": "band-9",
+      "reason": "a run of wall-thick ink",
+      "thickness": 24
+    },
+    {
+      "axis": "H",
+      "bounds": {
+        "x0": 675,
+        "x1": 783,
+        "y0": 781,
+        "y1": 789
+      },
+      "decision": "ACCEPTED",
+      "id": "band-10",
+      "reason": "a run of wall-thick ink",
+      "thickness": 10
+    },
+    {
+      "axis": "H",
+      "bounds": {
+        "x0": 559,
+        "x1": 657,
+        "y0": 780,
+        "y1": 791
+      },
+      "decision": "ACCEPTED",
+      "id": "band-11",
+      "reason": "a run of wall-thick ink",
+      "thickness": 10
+    },
+    {
+      "axis": "H",
+      "bounds": {
+        "x0": 557,
+        "x1": 584,
+        "y0": 792,
+        "y1": 801
+      },
+      "decision": "ACCEPTED",
+      "id": "band-12",
+      "reason": "a run of wall-thick ink",
+      "thickness": 9
+    },
+    {
+      "axis": "H",
+      "bounds": {
+        "x0": 509,
+        "x1": 540,
+        "y0": 794,
+        "y1": 825
+      },
+      "decision": "ACCEPTED",
+      "id": "band-13",
+      "reason": "a run of wall-thick ink",
+      "thickness": 32
+    },
+    {
+      "axis": "H",
+      "bounds": {
+        "x0": 557,
+        "x1": 741,
+        "y0": 814,
+        "y1": 825
+      },
+      "decision": "ACCEPTED",
+      "id": "band-14",
+      "reason": "a run of wall-thick ink",
+      "thickness": 9.75
+    },
+    {
+      "axis": "V",
+      "bounds": {
+        "x0": 138,
+        "x1": 162,
+        "y0": 238,
+        "y1": 407
+      },
+      "decision": "ACCEPTED",
+      "id": "band-15",
+      "reason": "a run of wall-thick ink",
+      "thickness": 24
+    },
+    {
+      "axis": "V",
+      "bounds": {
+        "x0": 138,
+        "x1": 162,
+        "y0": 627,
+        "y1": 698
+      },
+      "decision": "ACCEPTED",
+      "id": "band-16",
+      "reason": "a run of wall-thick ink",
+      "thickness": 24.5
+    },
+    {
+      "axis": "V",
+      "bounds": {
+        "x0": 211,
+        "x1": 218,
+        "y0": 651,
+        "y1": 690
+      },
+      "decision": "ACCEPTED",
+      "id": "band-17",
+      "reason": "a run of wall-thick ink",
+      "thickness": 8
+    },
+    {
+      "axis": "V",
+      "bounds": {
+        "x0": 263,
+        "x1": 270,
+        "y0": 632,
+        "y1": 690
+      },
+      "decision": "ACCEPTED",
+      "id": "band-18",
+      "reason": "a run of wall-thick ink",
+      "thickness": 8
+    },
+    {
+      "axis": "V",
+      "bounds": {
+        "x0": 331,
+        "x1": 347,
+        "y0": 392,
+        "y1": 439
+      },
+      "decision": "ACCEPTED",
+      "id": "band-19",
+      "reason": "a run of wall-thick ink",
+      "thickness": 9
+    },
+    {
+      "axis": "V",
+      "bounds": {
+        "x0": 509,
+        "x1": 540,
+        "y0": 794,
+        "y1": 825
+      },
+      "decision": "ACCEPTED",
+      "id": "band-20",
+      "reason": "a run of wall-thick ink",
+      "thickness": 32
+    },
+    {
+      "axis": "V",
+      "bounds": {
+        "x0": 515,
+        "x1": 539,
+        "y0": 238,
+        "y1": 698
+      },
+      "decision": "ACCEPTED",
+      "id": "band-21",
+      "reason": "a run of wall-thick ink",
+      "thickness": 24.5
+    },
+    {
+      "axis": "V",
+      "bounds": {
+        "x0": 598,
+        "x1": 609,
+        "y0": 782,
+        "y1": 824
+      },
+      "decision": "ACCEPTED",
+      "id": "band-22",
+      "reason": "a run of wall-thick ink",
+      "thickness": 10
+    },
+    {
+      "axis": "V",
+      "bounds": {
+        "x0": 664,
+        "x1": 674,
+        "y0": 767,
+        "y1": 824
+      },
+      "decision": "ACCEPTED",
+      "id": "band-23",
+      "reason": "a run of wall-thick ink",
+      "thickness": 11
+    },
+    {
+      "axis": "V",
+      "bounds": {
+        "x0": 692,
+        "x1": 701,
+        "y0": 790,
+        "y1": 824
+      },
+      "decision": "ACCEPTED",
+      "id": "band-24",
+      "reason": "a run of wall-thick ink",
+      "thickness": 10
+    },
+    {
+      "axis": "V",
+      "bounds": {
+        "x0": 756,
+        "x1": 766,
+        "y0": 790,
+        "y1": 824
+      },
+      "decision": "ACCEPTED",
+      "id": "band-25",
+      "reason": "a run of wall-thick ink",
+      "thickness": 10
+    },
+    {
+      "axis": "V",
+      "bounds": {
+        "x0": 784,
+        "x1": 794,
+        "y0": 790,
+        "y1": 824
+      },
+      "decision": "ACCEPTED",
+      "id": "band-26",
+      "reason": "a run of wall-thick ink",
+      "thickness": 11
+    }
+  ],
+  "frameId": "frame-asset-rzut-16680ee739-bb2ced8b98",
+  "omitted": 0,
+  "wallPx": 17
+}

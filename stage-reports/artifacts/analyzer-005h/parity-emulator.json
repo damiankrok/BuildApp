@@ -1,0 +1,29 @@
+{
+ "schema": "buildapp.005h-parity-emulator",
+ "version": 1,
+ "ci": { "run": 157, "runId": 37393928441, "job": "Local analyzer / APK size + emulator", "jobId": 112045257065, "commit": "5315ff8ff1cfbc1fd69d8fb5032374d2ed230733", "conclusion": "success" },
+ "device": { "kind": "Android emulator (CI, KVM) — not a phone", "abi": "x86_64", "sdk": 34, "model": "Android SDK built for x86_64", "cpus": 4, "memTotalKB": 6074332, "runtime": "nodejs-mobile v18.20.4 (no ICU), the APK's own bundle, worker, WebAssembly and model" },
+ "ocrSelfTest": {
+  "test": "LocalAnalyzerDeviceTest.ocrSelfTestMatchesTheDesktop",
+  "required": { "corpusSha256": "734300d22abe5593b57d0cc579a8306c3d5dbedb5b2fe33bf0f0a639248245a7", "outputSha256": "396c9f54b64b37bfbbf2331a383817d44b1c9d839be4400f7f57b375f8c43f2a", "parity": "MATCH" },
+  "result": "PASS — the instrumentation asserts both hashes and parity MATCH; the run's state was Done"
+ },
+ "fixtureAnalysis": {
+  "test": "LocalAnalyzerDeviceTest (Larchfield through the embedded analyzer, recogniser on)",
+  "requiredFromDesktop": { "candidateHash": "f403a202e46e26f5552f2859a7c2ce6c2949295a9cb421736925216aab720032", "modelHash": "0f074a7c842b730d3dbb871c354b7e28b351a076128d1b19ab7badf077a72cf3", "sceneContentHash": "0c1ba245a2b372e60d61add7afffa72ad534133b1453d2167f25b127302db2e4", "sceneSha256": "68b8edfe8b88b6a3cf9ee96c49608e502d897a7859b4ef787575412e4df8fb73" },
+  "result": "PASS", "totalS": 12.4, "printedNumbersS": 8.8, "peakRssMiB": 455
+ },
+ "liveMarcowki": {
+  "result": "LIVE_ANDROID_ANALYSIS_PASS", "totalS": 297.9, "printedNumbersS": 268.0, "peakRssMiB": 899,
+  "deviceVsDesktop": { "sourcePackageHash": "equal", "observationGraphHash": "equal", "metricEvidenceHash": "equal (9261b2839e2beaed…)", "candidateHash": "equal", "modelHash": "equal (6152770f43f4970a…)", "sceneContentHash": "equal", "sceneSha256": "equal", "pageHash": "differs (two fetches of a live page)" }
+ },
+ "liveSecondHouse": { "result": "LIVE_ANDROID_ANALYSIS_PASS", "totalS": 282.2, "printedNumbersS": 226.7, "peakRssMiB": 981 },
+ "cancel": { "whileDownloading": { "outcome": "Cancelled", "totalS": 0.5 }, "whileComputing": { "outcome": "Cancelled", "totalS": 1.0 } },
+ "uiEvidence": { "job": "android-ui-evidence / Android / UI evidence gate", "jobId": 112045257389, "conclusion": "success", "note": "the reference links analysed through the app on the emulator, recogniser on" },
+ "history": "Run 156 (d14304c) failed here: every analysis ended EXTERNAL_RECOGNISER_FAILED — the worker wrote its private loader copy under os.tmpdir(), which on Android resolves to the missing /tmp. Fixed in 5315ff8 (process.env.TMPDIR, the verified file in place as fallback); run 157 green.",
+ "verdict": "PASS",
+ "notes": [
+  "The printed-numbers phase includes the external recogniser (a worker per plan, four reads per label) on an emulated x86_64 CPU; a phone's timings are pending (parity-arm64-device.json).",
+  "The self-test's per-label timing on the emulator is in the CI artifact (local-analyzer-reports/ocr-self-test.json), not reproduced here."
+ ]
+}
