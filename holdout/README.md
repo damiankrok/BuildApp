@@ -276,7 +276,12 @@ The protocol of round 6, steps 1–6, with these differences only. Everything he
    (`--recogniser`, as in 005H), the Evidence Pack ON (`ANALYZER_EVIDENCE=1`). The research boundary providers
    (DeepLSD, ELSED, MobileSAM) are not in the production analyzer and are not run. The packs — with the
    dimension-topology layer — are committed with the verdicts; no pack is regenerated after the draw from changed code.
-6. **Verdict** by `holdout/verdict.mjs` as committed at the freeze, unchanged from round 7.
+6. **Verdict** by `holdout/verdict.mjs` as committed at the freeze. It differs from round 7's in one reading, fixed
+   before the freeze (development matrix, the e-OZE row): `resolvedWithAWitness` reads the witness of the reading a
+   run was resolved to from whichever step chose it — the plan resolver (`PLAN_RESOLUTION`) or the metric challenge
+   (`METRIC_CHALLENGE REPLACED`, R9). Both emit `PLAN_RESOLVED_BY_HYPOTHESIS`; before, only the resolver's record was
+   read, so a replacement R9 admits could never show its witness. No threshold or other condition changed
+   (`tests/architecture/verdict-witness.test.ts`).
    - `PASS`, `SOURCE_LIMITED_PARTIAL` (a checklist item confirmed on the raw copies) or `ALGORITHMIC_FAIL`.
    - An `ALGORITHMIC_FAIL` is not patched in 005I. Its first bad decision is named from the Evidence Pack (SOURCE, OCR,
      DIMENSION_TOPOLOGY, METRIC, BOUNDARY, BODY_RELATION, STOREY, RECONSTRUCTION, VERIFICATION, OTHER). If a research

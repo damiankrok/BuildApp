@@ -28,6 +28,10 @@ const resolution = trace?.entries?.find((e) => e.substage === 'PLAN_RESOLUTION')
 // 005D (R9): a first reading the drawing itself contradicted may be replaced by a reading it states
 // (METRIC_CHALLENGE REPLACED); the published figure may only have verified it, never chosen it.
 const challenge = trace?.entries?.find((e) => e.substage === 'METRIC_CHALLENGE')?.counts
+// 005I: the reading a run was resolved to is recorded by whichever step chose it — the plan resolver (PLAN_RESOLUTION)
+// or the metric challenge (METRIC_CHALLENGE, REPLACED). Both emit PLAN_RESOLVED_BY_HYPOTHESIS; before 005I only the
+// resolver's record was read, so a replacement the drawing chose (005D R9) could never show its witness.
+const chosenBy = resolution ?? (challenge?.outcome === 'REPLACED' ? challenge : undefined)
 
 const ringArea = (poly) => Math.abs(poly.reduce((a, p, i) => { const q = poly[(i + 1) % poly.length]; return a + p.x * q.z - q.x * p.z }, 0)) / 2
 
@@ -62,7 +66,7 @@ if (summary && model) {
     storeys: { model: model.levels.length, plans: labelled.size, holds: model.levels.length === labelled.size },
     openingsAllBuilt: { holds: !warnings.some((w) => w.code === 'OPENINGS_NOT_BUILT'), message: warnings.find((w) => w.code === 'OPENINGS_NOT_BUILT')?.message ?? null },
     footprint: published === undefined ? { holds: true, builtM2: +footprint.toFixed(2), note: 'no footprint published' } : { builtM2: +footprint.toFixed(2), publishedM2: published, residualPct: +((footprint / published - 1) * 100).toFixed(2), holds: Math.abs(footprint / published - 1) <= 0.06 },
-    resolvedWithAWitness: resolved ? { chosen: resolution?.chosen ?? null, corroborations: resolution?.chosenCorroborations ?? '', holds: Boolean(resolution?.chosenCorroborations) } : { holds: true, note: 'the first reading held' },
+    resolvedWithAWitness: resolved ? { chosen: chosenBy?.chosen ?? null, by: resolution ? 'PLAN_RESOLUTION' : chosenBy ? 'METRIC_CHALLENGE' : null, corroborations: chosenBy?.chosenCorroborations ?? '', holds: Boolean(chosenBy?.chosenCorroborations) } : { holds: true, note: 'the first reading held' },
     replacedByTheDrawing:
       challenge?.outcome === 'REPLACED'
         ? {
