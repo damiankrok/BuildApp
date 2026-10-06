@@ -2,7 +2,7 @@
  "stage": "BUILDPLAN-ANALYZER-005J",
  "kind": "RESEARCH PROOF - not a production candidate",
  "licence": {
-  "code": "BuildPlan (UNet-lite and MiT-B0 SegFormer written from the papers; no NVIDIA / smp / timm code copied)",
+  "code": "BuildPlan: UNet-lite is a textbook U-Net; the MiT-B0 SegFormer is an independent re-implementation, not clean-room - its structure follows the Apache-2.0 PVTv2 / HF transformers code (post-review D2); no NVIDIA / smp / timm code",
   "weights": "BuildPlan-owned (trained from random initialisation in this stage)",
   "pretrainedBackbone": "NONE",
   "trainingData": "BuildPlan synthetic drawings only (research/analyzer-005j/synthetic/vrgen.py); no CubiCasa, ResPlan, Structured3D or publisher pixels",
@@ -1592,6 +1592,17 @@
     },
     "pier between porch and garage (wall)": {
      "box": [
+      435,
+      541,
+      452,
+      590
+     ],
+     "background": 0.0,
+     "wall": 1.0,
+     "opening": 0.0
+    },
+    "first box, x 418-434 (porch floor + vestibule wall end; misplaced, post-review C2)": {
+     "box": [
       418,
       541,
       434,
@@ -1605,29 +1616,29 @@
   },
   "referee": {
    "all": {
-    "total": 512,
+    "total": 508,
     "correct": 256,
     "wrong": 23,
-    "unresolved": 233,
+    "unresolved": 229,
     "correctConfident": 134,
     "wrongConfident": 15,
-    "coverage": 0.5449,
+    "coverage": 0.5492,
     "accuracyAnswered": 0.9176,
-    "confidentWrongRate": 0.0293,
-    "usefulCoverage": 0.2617,
+    "confidentWrongRate": 0.0295,
+    "usefulCoverage": 0.2638,
     "confidentPrecision": 0.8993
    },
    "mirror": {
-    "pairs": 204,
-    "consistent": 193,
-    "rate": 0.9461,
+    "pairs": 203,
+    "consistent": 192,
+    "rate": 0.9458,
     "pairsWithAnAnswer": 103,
     "rateWithAnAnswer": 0.8932
    },
    "rotation": {
-    "pairs": 104,
-    "consistent": 97,
-    "rate": 0.9327,
+    "pairs": 102,
+    "consistent": 95,
+    "rate": 0.9314,
     "pairsWithAnAnswer": 89,
     "rateWithAnAnswer": 0.9213
    },
@@ -1666,16 +1677,16 @@
      "confidentPrecision": 0.8333
     },
     "REAL_BLIND8": {
-     "total": 28,
+     "total": 24,
      "correct": 23,
      "wrong": 0,
-     "unresolved": 5,
+     "unresolved": 1,
      "correctConfident": 15,
      "wrongConfident": 0,
-     "coverage": 0.8214,
+     "coverage": 0.9583,
      "accuracyAnswered": 1.0,
      "confidentWrongRate": 0.0,
-     "usefulCoverage": 0.5357,
+     "usefulCoverage": 0.625,
      "confidentPrecision": 1.0
     }
    },
@@ -1803,22 +1814,22 @@
       "confidentPrecision": null
      },
      "WALL_CONTINUATION": {
-      "total": 16,
+      "total": 12,
       "correct": 12,
       "wrong": 0,
-      "unresolved": 4,
+      "unresolved": 0,
       "correctConfident": 8,
       "wrongConfident": 0,
-      "coverage": 0.75,
+      "coverage": 1.0,
       "accuracyAnswered": 1.0,
       "confidentWrongRate": 0.0,
-      "usefulCoverage": 0.5,
+      "usefulCoverage": 0.6667,
       "confidentPrecision": 1.0
      }
     }
    },
-   "summary": "SYNTHETIC 129/149 answered right, 31 unresolved of 180; confident wrong 13; REAL_DEV 104/107 answered right, 197 unresolved of 304; confident wrong 2; REAL_BLIND8 23/23 answered right, 5 unresolved of 28; confident wrong 0",
-   "confidentWrong": "2.9 % (15/512)",
+   "summary": "SYNTHETIC 129/149 answered right, 31 unresolved of 180; confident wrong 13; REAL_DEV 104/107 answered right, 197 unresolved of 304; confident wrong 2; REAL_BLIND8 23/23 answered right, 1 unresolved of 24; confident wrong 0",
+   "confidentWrong": "2.9 % (15/508)",
    "blind8Answers": [
     {
      "qid": "real-dom-w-gozdzikowcach-OPEN_SIDE_VS_OPENINGS-0-NORMAL",
@@ -1837,14 +1848,6 @@
      "conf": 0.8338
     },
     {
-     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-1-NORMAL",
-     "cls": "WALL_CONTINUATION",
-     "transform": "NORMAL",
-     "expected": "TERMINATES",
-     "answer": "UNRESOLVED",
-     "conf": 1.0
-    },
-    {
      "qid": "real-dom-w-gozdzikowcach-OPEN_SIDE_VS_OPENINGS-0-MIRROR",
      "cls": "OPEN_SIDE_VS_OPENINGS",
      "transform": "MIRROR",
@@ -1859,14 +1862,6 @@
      "expected": "CONTINUES",
      "answer": "CONTINUES",
      "conf": 0.7867
-    },
-    {
-     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-1-MIRROR",
-     "cls": "WALL_CONTINUATION",
-     "transform": "MIRROR",
-     "expected": "TERMINATES",
-     "answer": "UNRESOLVED",
-     "conf": 1.0
     },
     {
      "qid": "real-dom-w-gozdzikowcach-OPEN_SIDE_VS_OPENINGS-0-ROT90",
@@ -1885,14 +1880,6 @@
      "conf": 0.7197
     },
     {
-     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-1-ROT90",
-     "cls": "WALL_CONTINUATION",
-     "transform": "ROT90",
-     "expected": "TERMINATES",
-     "answer": "UNRESOLVED",
-     "conf": 1.0
-    },
-    {
      "qid": "real-dom-w-gozdzikowcach-OPEN_SIDE_VS_OPENINGS-0-ROT180",
      "cls": "OPEN_SIDE_VS_OPENINGS",
      "transform": "ROT180",
@@ -1907,14 +1894,6 @@
      "expected": "CONTINUES",
      "answer": "CONTINUES",
      "conf": 0.6954
-    },
-    {
-     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-1-ROT180",
-     "cls": "WALL_CONTINUATION",
-     "transform": "ROT180",
-     "expected": "TERMINATES",
-     "answer": "UNRESOLVED",
-     "conf": 1.0
     },
     {
      "qid": "real-dom-w-cyklamenach-OPENING_VS_PATTERN-0-NORMAL",
@@ -2086,7 +2065,58 @@
     548.3
    ]
   },
-  "verdict": "TRAIN (proof passed its purpose): from-scratch, synthetic-only, 1.56 M params, transfers to real sheets (exterior-wall recall 0.91-1.00) and reads the decisive round-8 gaps (cyklamenach window 97 % opening, gozdzikowcach garage door 75 % opening, porch mouth 100 % background). Adds ~0 exterior-wall coverage over source-cv: its value is the OPENING class at gap seams, not more wall. NOT a referee yet: real gap questions are one-sided (minority 10/12 right, 2 confident wrong), WALL_CONTINUATION rule unresolved on the gozdzikowcach porch mouth (pier read 36 % wall), synthetic open-gap shortcut (12 confident wrong CONTINUES). Basis for 005K."
+  "axisRemeasure": {
+   "note": "post-review A2/C1: the 005I truth segments lie on the wall OUTER FACE; the same model and rules re-run with every REAL_DEV gap segment moved inward by half a wall (0.22 m) onto the axis. NORMAL frames only. Tallies by class: n, right, wrong, unresolved, rightConfident, wrongConfident (confident = share >= 0.80).",
+   "halfWallM": 0.22,
+   "questions": 152,
+   "facePlaced": {
+    "CANOPY_PERGOLA_VS_WALL": {
+     "n": 24,
+     "right": 6,
+     "rightConfident": 3,
+     "unresolved": 17,
+     "wrong": 1,
+     "wrongConfident": 0
+    },
+    "OPENING_VS_PATTERN": {
+     "n": 63,
+     "unresolved": 40,
+     "right": 23,
+     "rightConfident": 0
+    },
+    "WALL_CONTINUATION": {
+     "n": 65,
+     "right": 23,
+     "rightConfident": 2,
+     "unresolved": 41,
+     "wrong": 1,
+     "wrongConfident": 1
+    }
+   },
+   "axisPlaced": {
+    "CANOPY_PERGOLA_VS_WALL": {
+     "n": 24,
+     "right": 23,
+     "rightConfident": 23,
+     "wrong": 1,
+     "wrongConfident": 1
+    },
+    "OPENING_VS_PATTERN": {
+     "n": 63,
+     "right": 61,
+     "rightConfident": 47,
+     "unresolved": 2
+    },
+    "WALL_CONTINUATION": {
+     "n": 65,
+     "right": 50,
+     "rightConfident": 44,
+     "unresolved": 15
+    }
+   }
+  },
+  "checkpointSha256": "6411dd4171979cabc3fa33e63b8f2533ca2108a8758eeff469c1f38edb307260",
+  "verdict": "TRAIN (proof passed its purpose): from-scratch, synthetic-only, 1.56 M params. Transfers to real sheets: exterior-wall recall 0.91-1.00; on the wall axis 61/63 real openings OPENING (47 at >= 0.8, 0 wrong) and 50/65 continuations (44 at >= 0.8, 0 wrong) - the first, face-placed run gave 23/63 (post-review A2/C1). Round-8: cyklamenach window 97 % opening; gozdzikowcach porch mouth 100 % background, pier 100 % wall (first pier box misplaced, C2), the 0.41 m LEAF_FACE gap ~94 % opening on its axis - the one gap whose upgrade completes gozdzikowcach in the oracle replay. Adds ~0 exterior wall over source-cv: its value is the OPENING / BACKGROUND reading at a gap. NOT a referee yet: over-reads open gaps (12 synthetic confident-wrong; false OPENING on dimension ink 18 %), real evidence small and one-sided. Basis for 005K-a."
  },
  "segformer": {
   "arch": "segformer",
@@ -2338,6 +2368,17 @@
     },
     "pier between porch and garage (wall)": {
      "box": [
+      435,
+      541,
+      452,
+      590
+     ],
+     "background": 0.0,
+     "wall": 1.0,
+     "opening": 0.0
+    },
+    "first box, x 418-434 (porch floor + vestibule wall end; misplaced, post-review C2)": {
+     "box": [
       418,
       541,
       434,
@@ -2351,29 +2392,29 @@
   },
   "referee": {
    "all": {
-    "total": 512,
+    "total": 508,
     "correct": 285,
     "wrong": 32,
-    "unresolved": 195,
+    "unresolved": 191,
     "correctConfident": 147,
     "wrongConfident": 24,
-    "coverage": 0.6191,
+    "coverage": 0.624,
     "accuracyAnswered": 0.8991,
-    "confidentWrongRate": 0.0469,
-    "usefulCoverage": 0.2871,
+    "confidentWrongRate": 0.0472,
+    "usefulCoverage": 0.2894,
     "confidentPrecision": 0.8596
    },
    "mirror": {
-    "pairs": 204,
-    "consistent": 193,
-    "rate": 0.9461,
+    "pairs": 203,
+    "consistent": 192,
+    "rate": 0.9458,
     "pairsWithAnAnswer": 123,
     "rateWithAnAnswer": 0.9106
    },
    "rotation": {
-    "pairs": 104,
-    "consistent": 96,
-    "rate": 0.9231,
+    "pairs": 102,
+    "consistent": 94,
+    "rate": 0.9216,
     "pairsWithAnAnswer": 89,
     "rateWithAnAnswer": 0.9101
    },
@@ -2412,16 +2453,16 @@
      "confidentPrecision": 0.4118
     },
     "REAL_BLIND8": {
-     "total": 28,
+     "total": 24,
      "correct": 16,
      "wrong": 4,
-     "unresolved": 8,
+     "unresolved": 4,
      "correctConfident": 14,
      "wrongConfident": 4,
-     "coverage": 0.7143,
+     "coverage": 0.8333,
      "accuracyAnswered": 0.8,
-     "confidentWrongRate": 0.1429,
-     "usefulCoverage": 0.5,
+     "confidentWrongRate": 0.1667,
+     "usefulCoverage": 0.5833,
      "confidentPrecision": 0.7778
     }
    },
@@ -2549,22 +2590,22 @@
       "confidentPrecision": null
      },
      "WALL_CONTINUATION": {
-      "total": 16,
+      "total": 12,
       "correct": 8,
       "wrong": 4,
-      "unresolved": 4,
+      "unresolved": 0,
       "correctConfident": 7,
       "wrongConfident": 4,
-      "coverage": 0.75,
+      "coverage": 1.0,
       "accuracyAnswered": 0.6667,
-      "confidentWrongRate": 0.25,
-      "usefulCoverage": 0.4375,
+      "confidentWrongRate": 0.3333,
+      "usefulCoverage": 0.5833,
       "confidentPrecision": 0.6364
      }
     }
    },
-   "summary": "SYNTHETIC 141/149 answered right, 31 unresolved of 180; confident wrong 0; REAL_DEV 128/148 answered right, 156 unresolved of 304; confident wrong 20; REAL_BLIND8 16/20 answered right, 8 unresolved of 28; confident wrong 4",
-   "confidentWrong": "4.7 % (24/512)",
+   "summary": "SYNTHETIC 141/149 answered right, 31 unresolved of 180; confident wrong 0; REAL_DEV 128/148 answered right, 156 unresolved of 304; confident wrong 20; REAL_BLIND8 16/20 answered right, 4 unresolved of 24; confident wrong 4",
+   "confidentWrong": "4.7 % (24/508)",
    "blind8Answers": [
     {
      "qid": "real-dom-w-gozdzikowcach-OPEN_SIDE_VS_OPENINGS-0-NORMAL",
@@ -2583,14 +2624,6 @@
      "conf": 0.8011
     },
     {
-     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-1-NORMAL",
-     "cls": "WALL_CONTINUATION",
-     "transform": "NORMAL",
-     "expected": "TERMINATES",
-     "answer": "UNRESOLVED",
-     "conf": 1.0
-    },
-    {
      "qid": "real-dom-w-gozdzikowcach-OPEN_SIDE_VS_OPENINGS-0-MIRROR",
      "cls": "OPEN_SIDE_VS_OPENINGS",
      "transform": "MIRROR",
@@ -2605,14 +2638,6 @@
      "expected": "CONTINUES",
      "answer": "TERMINATES",
      "conf": 0.8472
-    },
-    {
-     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-1-MIRROR",
-     "cls": "WALL_CONTINUATION",
-     "transform": "MIRROR",
-     "expected": "TERMINATES",
-     "answer": "UNRESOLVED",
-     "conf": 1.0
     },
     {
      "qid": "real-dom-w-gozdzikowcach-OPEN_SIDE_VS_OPENINGS-0-ROT90",
@@ -2631,14 +2656,6 @@
      "conf": 0.934
     },
     {
-     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-1-ROT90",
-     "cls": "WALL_CONTINUATION",
-     "transform": "ROT90",
-     "expected": "TERMINATES",
-     "answer": "UNRESOLVED",
-     "conf": 1.0
-    },
-    {
      "qid": "real-dom-w-gozdzikowcach-OPEN_SIDE_VS_OPENINGS-0-ROT180",
      "cls": "OPEN_SIDE_VS_OPENINGS",
      "transform": "ROT180",
@@ -2653,14 +2670,6 @@
      "expected": "CONTINUES",
      "answer": "TERMINATES",
      "conf": 0.8829
-    },
-    {
-     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-1-ROT180",
-     "cls": "WALL_CONTINUATION",
-     "transform": "ROT180",
-     "expected": "TERMINATES",
-     "answer": "UNRESOLVED",
-     "conf": 1.0
     },
     {
      "qid": "real-dom-w-cyklamenach-OPENING_VS_PATTERN-0-NORMAL",
@@ -2832,39 +2841,90 @@
     2064.5
    ]
   },
-  "verdict": "DEFER: clean-room MiT-B0 (3.71 M) at the same budget is slower (4.5 s vs 1.2 s per 864^2 frame in WASM, >= 928 vs >= 340 MiB), reads fewer real openings (0.58-0.81 vs 0.72-0.90) and misses the gozdzikowcach garage door (82 % background); fewer false walls inside exclusions (<= 0.8 % vs <= 3.6 %) and no synthetic confident-wrong, but 20 confident-wrong on REAL_DEV gap questions. Revisit only if 005K's UNet cannot meet the false-wall gate."
+  "axisRemeasure": {
+   "note": "post-review A2/C1: the 005I truth segments lie on the wall OUTER FACE; the same model and rules re-run with every REAL_DEV gap segment moved inward by half a wall (0.22 m) onto the axis. NORMAL frames only. Tallies by class: n, right, wrong, unresolved, rightConfident, wrongConfident (confident = share >= 0.80).",
+   "halfWallM": 0.22,
+   "questions": 152,
+   "facePlaced": {
+    "CANOPY_PERGOLA_VS_WALL": {
+     "n": 24,
+     "right": 8,
+     "rightConfident": 5,
+     "unresolved": 16
+    },
+    "OPENING_VS_PATTERN": {
+     "n": 63,
+     "unresolved": 32,
+     "right": 27,
+     "rightConfident": 0,
+     "wrong": 4,
+     "wrongConfident": 4
+    },
+    "WALL_CONTINUATION": {
+     "n": 65,
+     "right": 27,
+     "rightConfident": 2,
+     "unresolved": 32,
+     "wrong": 6,
+     "wrongConfident": 6
+    }
+   },
+   "axisPlaced": {
+    "CANOPY_PERGOLA_VS_WALL": {
+     "n": 24,
+     "right": 24,
+     "rightConfident": 24
+    },
+    "OPENING_VS_PATTERN": {
+     "n": 63,
+     "right": 52,
+     "rightConfident": 39,
+     "unresolved": 11
+    },
+    "WALL_CONTINUATION": {
+     "n": 65,
+     "right": 47,
+     "rightConfident": 39,
+     "unresolved": 16,
+     "wrong": 2,
+     "wrongConfident": 2
+    }
+   }
+  },
+  "checkpointSha256": "98b0db869bb078d57a0e06644eaa019dc0c28fd07f0c83c20a624432bfe06b50",
+  "verdict": "DEFER: MiT-B0 (3.71 M; independent re-implementation, not clean-room — its structure follows the Apache-2.0 PVTv2 / HF code) at the same budget is slower (4.5 s vs 1.2 s per 864^2 frame in WASM, >= 928 vs >= 340 MiB), reads fewer real openings (0.58-0.81 vs 0.72-0.90) and misses the gozdzikowcach garage door (82 % background); fewer false walls inside exclusions (<= 0.8 % vs <= 3.6 %), no synthetic confident-wrong, and fewer false OPENING readings (post-review A, P2); its 20 face-placed REAL_DEV confident-wrong fall to 2 on the wall axis (post-review C1), so they are not a reason to defer it. The reasons are speed, memory and the missed garage door. Revisit if 005K's UNet cannot meet the false-OPENING gate."
  },
  "routeCPilot": {
   "params": 1065796,
-  "summary": "SYNTHETIC 574/672 answered right, 0 unresolved of 672; confident wrong 18; REAL_DEV 280/564 answered right, 0 unresolved of 564; confident wrong 192; REAL_BLIND8 48/68 answered right, 0 unresolved of 68; confident wrong 5",
-  "confidentWrong": "16.5 % (215/1304)",
+  "summary": "SYNTHETIC 574/672 answered right, 0 unresolved of 672; confident wrong 18; REAL_DEV 280/564 answered right, 0 unresolved of 564; confident wrong 192; REAL_BLIND8 47/64 answered right, 0 unresolved of 64; confident wrong 5",
+  "confidentWrong": "16.5 % (215/1300)",
   "referee": {
    "all": {
-    "total": 1304,
-    "correct": 902,
-    "wrong": 402,
+    "total": 1300,
+    "correct": 901,
+    "wrong": 399,
     "unresolved": 0,
     "correctConfident": 675,
     "wrongConfident": 215,
     "coverage": 1.0,
-    "accuracyAnswered": 0.6917,
-    "confidentWrongRate": 0.1649,
-    "usefulCoverage": 0.5176,
+    "accuracyAnswered": 0.6931,
+    "confidentWrongRate": 0.1654,
+    "usefulCoverage": 0.5192,
     "confidentPrecision": 0.7584
    },
    "mirror": {
-    "pairs": 467,
+    "pairs": 466,
     "consistent": 410,
-    "rate": 0.8779,
-    "pairsWithAnAnswer": 467,
-    "rateWithAnAnswer": 0.8779
+    "rate": 0.8798,
+    "pairsWithAnAnswer": 466,
+    "rateWithAnAnswer": 0.8798
    },
    "rotation": {
-    "pairs": 370,
+    "pairs": 368,
     "consistent": 330,
-    "rate": 0.8919,
-    "pairsWithAnAnswer": 370,
-    "rateWithAnAnswer": 0.8919
+    "rate": 0.8967,
+    "pairsWithAnAnswer": 368,
+    "rateWithAnAnswer": 0.8967
    },
    "counterfactual": {
     "pairsWithDifferentTruth": 288,
@@ -2901,16 +2961,16 @@
      "confidentPrecision": 0.4667
     },
     "REAL_BLIND8": {
-     "total": 68,
-     "correct": 48,
-     "wrong": 20,
+     "total": 64,
+     "correct": 47,
+     "wrong": 17,
      "unresolved": 0,
      "correctConfident": 27,
      "wrongConfident": 5,
      "coverage": 1.0,
-     "accuracyAnswered": 0.7059,
-     "confidentWrongRate": 0.0735,
-     "usefulCoverage": 0.3971,
+     "accuracyAnswered": 0.7344,
+     "confidentWrongRate": 0.0781,
+     "usefulCoverage": 0.4219,
      "confidentPrecision": 0.8438
     }
    },
@@ -3272,22 +3332,22 @@
       "confidentPrecision": 0.5
      },
      "WALL_CONTINUATION": {
-      "total": 16,
-      "correct": 11,
-      "wrong": 5,
+      "total": 12,
+      "correct": 10,
+      "wrong": 2,
       "unresolved": 0,
       "correctConfident": 6,
       "wrongConfident": 0,
       "coverage": 1.0,
-      "accuracyAnswered": 0.6875,
+      "accuracyAnswered": 0.8333,
       "confidentWrongRate": 0.0,
-      "usefulCoverage": 0.375,
+      "usefulCoverage": 0.5,
       "confidentPrecision": 1.0
      }
     }
    },
-   "summary": "SYNTHETIC 574/672 answered right, 0 unresolved of 672; confident wrong 18; REAL_DEV 280/564 answered right, 0 unresolved of 564; confident wrong 192; REAL_BLIND8 48/68 answered right, 0 unresolved of 68; confident wrong 5",
-   "confidentWrong": "16.5 % (215/1304)",
+   "summary": "SYNTHETIC 574/672 answered right, 0 unresolved of 672; confident wrong 18; REAL_DEV 280/564 answered right, 0 unresolved of 564; confident wrong 192; REAL_BLIND8 47/64 answered right, 0 unresolved of 64; confident wrong 5",
+   "confidentWrong": "16.5 % (215/1300)",
    "blind8Answers": [
     {
      "qid": "real-dom-w-gozdzikowcach-BODY_REGION-0-NORMAL",
@@ -3312,14 +3372,6 @@
      "expected": "CONTINUES",
      "answer": "TERMINATES",
      "conf": 0.63105
-    },
-    {
-     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-1-NORMAL",
-     "cls": "WALL_CONTINUATION",
-     "transform": "NORMAL",
-     "expected": "TERMINATES",
-     "answer": "TERMINATES",
-     "conf": 0.75473
     },
     {
      "qid": "real-dom-w-gozdzikowcach-TERRACE_VS_BODY-0-NORMAL",
@@ -3378,14 +3430,6 @@
      "conf": 0.63377
     },
     {
-     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-1-MIRROR",
-     "cls": "WALL_CONTINUATION",
-     "transform": "MIRROR",
-     "expected": "TERMINATES",
-     "answer": "CONTINUES",
-     "conf": 0.6434
-    },
-    {
      "qid": "real-dom-w-gozdzikowcach-TERRACE_VS_BODY-0-MIRROR",
      "cls": "TERRACE_VS_BODY",
      "transform": "MIRROR",
@@ -3442,14 +3486,6 @@
      "conf": 0.74151
     },
     {
-     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-1-ROT90",
-     "cls": "WALL_CONTINUATION",
-     "transform": "ROT90",
-     "expected": "TERMINATES",
-     "answer": "CONTINUES",
-     "conf": 0.74841
-    },
-    {
      "qid": "real-dom-w-gozdzikowcach-TERRACE_VS_BODY-0-ROT90",
      "cls": "TERRACE_VS_BODY",
      "transform": "ROT90",
@@ -3504,14 +3540,6 @@
      "expected": "CONTINUES",
      "answer": "CONTINUES",
      "conf": 0.65977
-    },
-    {
-     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-1-ROT180",
-     "cls": "WALL_CONTINUATION",
-     "transform": "ROT180",
-     "expected": "TERMINATES",
-     "answer": "CONTINUES",
-     "conf": 0.52971
     },
     {
      "qid": "real-dom-w-gozdzikowcach-TERRACE_VS_BODY-0-ROT180",
@@ -3853,6 +3881,7 @@
    "STOREY_COVERAGE": 2,
    "DIMENSION_LINE_VS_BUILDING_LINE": 2
   },
+  "checkpointSha256": "5fa108ad8f9e977e6f4f11f988ab5bd128b7061b323d7e7ff077ea107fa45274",
   "wasmLatency": "70 ms per question (median of 20, 256² crop); load 0.9 s",
   "wasmMemory": "≥ 214 MiB RSS (lower bound)",
   "verdict": "PILOT RESULT: NEGATIVE ON REAL. A 1.07 M-param image-level classifier trained only on synthetic question images learns the synthetic task (85 % on held-out seeds, 2.7 % confident-wrong at 0.80, 0 at >= 0.98) but does not transfer: REAL_DEV 49.7 % (below the 76 % majority floor), 34 % confident-wrong at 0.80, still 1.2 % at 0.999. Image-level questions need real-style data and/or a pixel-level observation underneath; feasible on device (70 ms per question in WASM)."

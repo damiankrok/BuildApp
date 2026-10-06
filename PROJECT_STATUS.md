@@ -43,6 +43,7 @@
 | STAGE BUILDPLAN-ANALYZER-005G — OPEN-SOURCE ANALYZER TECHNOLOGY AUDIT + CONTROLLED BAKE-OFF | `analyzer/open-source-technology-audit-v1` (from `analyzer/adaptive-segmentation-envelope-v1` @ `6b4ab1f`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | audit, research harness and report: the commits after `6b4ab1f` on the branch (`git log analyzer/open-source-technology-audit-v1 ^6b4ab1f`); CI run 153 green on `2c6b615`; the CI record: the commit after it | **PASS_BUILDPLAN_ANALYZER_005G_OPEN_SOURCE_TECH_AUDIT_READY_FOR_COORDINATOR** — audit and bake-off only, **no production change** (§ "Where the open-source technology audit stands"). On the same 775 crops (103 real, 672 synthetic) the production reader trusts 309 readings and 75 are wrong; PaddleOCR PP-OCRv6 tiny (official ONNX, Apache-2.0, 4.46 MB) is wrong in 4 of 707 (real: 103/103 exact, 0 of 99). It runs as ONNX Runtime Web (WASM) inside the existing Node-18 analyzer bundle, bit-identical across Node 18/22 and arm64 V8. **ADOPT_NEXT:** PP-OCRv6 tiny on onnxruntime-web, as an ensemble member with a stability bracket (005H). PILOT: PDF.js document evidence (after 005H). REJECT: ONNX Runtime Android (telemetry provider + permissions ≥ 1.29, second engine), Tesseract, ML Kit, OpenCV Android, every pretrained floor-plan model (weights/data) |
 | STAGE BUILDPLAN-ANALYZER-005H — EXTERNAL NUMERIC RECOGNISER ENSEMBLE + ARM64 DEVICE PARITY + FRESH BLIND ROUND | `analyzer/external-numeric-recogniser-v1` (from `analyzer/open-source-technology-audit-v1` @ `c6fe174`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | recogniser, seam, rule, packaging, self-test, tests, CI `d04ebc4` (CI 155 red: a bundle job without the model); red-team fixes `d14304c` (CI 156 red: the worker's loader copy under `/tmp` on Android); the Android loader copy and coded failures `5315ff8` = **PRE_HOLDOUT_7_SHA** (CI run 157 green); round-7 draw `6e931ee`; blind runs, parity, measurements `85ccf42`; report and status `863b525` = final build (CI run 160 green at the first attempt, the `workflow_dispatch` with the OWNER APK, versionCode 1160, APK sha256 `c9cf22da…`); the APK record: the commit after it | Eleven verdicts (§ "Where the external numeric recogniser stands"): **EXTERNAL NUMERIC RECOGNISER INTEGRATION: PASS**; **OCR ENSEMBLE NON-CIRCULARITY: PASS**; **NUMERIC TARGET LABELS: PARTIAL**; **NODE PARITY: PASS**; **X86 EMULATOR PARITY: PASS**; **ARM64 DEVICE PARITY: PENDING** (no phone reachable; QEMU arm64 MATCH is supplementary only); **OCR MEMORY / LIFECYCLE: PASS**; **EVIDENCE PACK: PASS**; **CURRENT e-OZE: PASS**; **BLIND ROUND 7 PROJECT 1 (`dom-pod-jarzabem`): ALGORITHMIC_FAIL** (label binding between parallel chains; not OCR); **BLIND ROUND 7 PROJECT 2 (`dom-w-arkadiach`): PASS** (decided by the external reader). The terminal line is PARTIAL |
 | STAGE BUILDPLAN-ANALYZER-005I — PARALLEL DIMENSION TOPOLOGY + BOUNDARY OBSERVATION BAKE-OFF + FRESH BLIND ROUND 8 | `analyzer/dimension-topology-boundary-bakeoff-v1` (from `analyzer/external-numeric-recogniser-v1` @ `29ab643`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | topology `c150896`; council fixes `bc22547`, `16bcd73`, `c0ad2e8` (the frozen production code); Track B research `c90ffd9` … `bfcfb1f`; development matrix and records `869cb01` = **PRE_HOLDOUT_8_SHA** (CI run 169 green); round-8 draw `0c67728`; blind round, report and status `a7f009a` = final build (CI run 172 green at the first attempt, the `workflow_dispatch` with the OWNER APK, versionCode 1172, APK sha256 `70b4ff90…`); the APK record: the commit after it | **DIMENSION TOPOLOGY: PARTIAL** — the blind-7 label-binding defect is fixed generically and `dom-pod-jarzabem` now completes; OCR byte-identical; no development verdict changed; but both blind-8 houses are ALGORITHMIC_FAIL on boundary interpretation downstream of a correct metric. **BOUNDARY OBSERVATION BAKE-OFF: PASS_RESEARCH**, BEST_BOUNDARY_CANDIDATE **NONE** (ELSED DEFER, DeepLSD REJECT, MobileSAM REJECT), PRODUCTION_INTEGRATION NONE_IN_005I. INHERITED ARM64 DEVICE PARITY: PENDING. Terminal line PARTIAL (§ "Where the dimension topology and the boundary bake-off stand") |
+| STAGE BUILDPLAN-ANALYZER-005J — FLOORPLAN INTELLIGENCE TECHNOLOGY AUDIT + VISUAL REFEREE OPPORTUNITY MAP + TRAINING ROUTE | `analyzer/floorplan-intelligence-audit-v1` (from `analyzer/dimension-topology-boundary-bakeoff-v1` @ `64b78b4`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | research harness, artifacts and report: the commits after `64b78b4` on the branch (`git log analyzer/floorplan-intelligence-audit-v1 ^64b78b4`); ⟪CI_CELL⟫ | ⟪STATUS_RESULT⟫ — research and audit only, **no production change** (§ "Where the floor-plan intelligence audit stands"). Small VLMs (Florence-2, SmolVLM2, Moondream) at or below chance on BuildPlan's closed questions; no commercially clean floor-plan model exists; a from-scratch BuildPlan-trained UNet-lite (6 MB) transfers to real sheets and reads the gap that, in an oracle replay of the frozen code, completes `dom-w-gozdzikowcach`. **PRIMARY_NEXT: TRAIN_BUILDPLAN_WALL_MODEL** (two-signal gap witness; 005K-a research with a stop rule, then 005K-b). SECONDARY_LATER: TRAIN_BUILDPLAN_VISUAL_REFEREE. REJECT: small-VLM referee, every pretrained floor-plan model |
 ## Current capabilities
 
 - **CanonicalBuildingModel** (`packages/model`): versioned Zod schema
@@ -1205,6 +1206,59 @@ zgodności odczytu wymiarów").
 `.so`, preview signer `6e48fac4…`, model `9ef676d6…` and WASM `3398c10d…` inside, verified from the downloaded file
 (report §R).
 
+## Where the floor-plan intelligence audit stands (STAGE BUILDPLAN-ANALYZER-005J)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005J_FLOORPLAN_INTELLIGENCE_AUDIT.md`. Evidence:
+`stage-reports/artifacts/analyzer-005j/`:
+- the opportunity map, the technology and licensing matrices, the floor-plan model audits and the VLM audit;
+- the question corpus (coordinates and hashes only), the bake-off, the wall-model proof and the oracle replay;
+- the training plan, the Android deployment matrix and server feasibility;
+- the reuse map, the six-reviewer post-review and the recommendation.
+
+**What exists.** Research only. `research/analyzer-005j/` holds the harness:
+- a counterfactual synthetic question generator;
+- the real-question builder;
+- the VLM runners and the pre-registered scorer;
+- two from-scratch wall networks and a micro-referee pilot;
+- a WASM probe;
+- an oracle replay of the frozen solver.
+
+No production file, model, dependency, Evidence Pack format or APK input changed. No publisher pixel or model file is
+in the repository; `tests/architecture/research-isolation.test.ts` (005J block) holds this.
+
+- **DECISION SEAMS — PASS.** 52 seams from the code (12 P0). The P0 list is dominated by gap decisions. Both round-8
+  first divergences are gap misreads (gozdzikowcach's porch + garage door read as one OPEN_SIDE; cyklamenach's window
+  read as pattern).
+- **FLOOR-PLAN OSS — PASS (none adoptable).**
+  - ResPlan: DATA_CANDIDATE_WITH_COUNSEL (CC BY 4.0 vs CC BY-NC-SA 4.0 conflict, scraped listings, canvas units not
+    metres).
+  - fpvec-lab: one README, nothing published — REIMPLEMENT_FROM_PAPER.
+  - MitUNet: non-commercial on several grounds — ARCHITECTURE_CANDIDATE_FOR_RETRAINING.
+  - The only commercially clean training route is BuildPlan's own synthetic data, from scratch.
+- **SMALL-VLM REFEREE — REJECT.**
+  - On identical crops, prompts and closed enums, SmolVLM2-500M is right on 45 % of answered questions, with 7.2 %
+    confident-wrong and 43 % mirror consistency.
+  - Moondream 0.5B is right on 46 % and Florence-2-base on 41 %.
+  - In the shipped WASM runtime SmolVLM2 costs ≈ 16 s and ≥ 1.9 GiB per question.
+  - The in-session strong model (blind) is right on 98 %, with 0 confident-wrong: the questions are answerable.
+- **WALL / OPENING MODEL — PASS_RESEARCH.**
+  - UNet-lite (1.56 M, 6.25 MB ONNX) was trained from scratch on synthetic data only.
+  - It reaches exterior-wall recall 0.91–1.00 on 7 development sheets.
+  - On the wall axis, 61 of 63 real openings read OPENING.
+  - It runs at 1.19 s per 864² frame in ORT-web WASM.
+  - It adds no wall over source-cv: its value is the reading at a gap.
+  - MiT-B0 is DEFERRED.
+- **ROUTE-C PILOT — NEGATIVE ON REAL.** A whole-image classifier trained on synthetic questions only reaches 85 % on
+  synthetic but 49.6 % on real, with 34 % confident-wrong.
+- **ORACLE REPLAY — PASS_RESEARCH.** The frozen solver was re-run on the sealed evidence with an oracle gap witness.
+  - Upgrading one 0.41 m drawn gap completes `dom-w-gozdzikowcach` at −3.75 % (the storey count still fails).
+  - `dom-w-cyklamenach` is stopped by NO_CONTINUATION / TOO_LARGE, not by a gap.
+  - On 19 development rows no verdict changes.
+- **COUNCIL — ⟪COUNCIL_STATUS⟫.**
+- **Stage: ⟪STAGE_TOKEN⟫.** No blind project consumed; round 9 not drawn; 005I production code not reopened.
+
+⟪CI_LINE⟫
+
 ## Where the dimension topology and the boundary bake-off stand (STAGE BUILDPLAN-ANALYZER-005I)
 
 Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005I_DIMENSION_TOPOLOGY_BOUNDARY_BAKEOFF.md`. Evidence:
@@ -1283,6 +1337,28 @@ All of it is in the metric evidence 1.7.0 / 1.8.0 and its hash, and in the Evide
 **CI:** run 169 (`37464801271`) on `869cb01` (PRE_HOLDOUT_8_SHA) green. **Final CI:** run 172 (`workflow_dispatch`, id 37474671669) on `a7f009a` — green at the first attempt (41 jobs, 40 green, `preview-latest` skipped by design). **OWNER APK:** `owner-preview-latest/BuildPlan-owner-preview.apk`, versionCode 1172, 39.4 MB (+11 KB: the topology code), sha256 `70b4ff90aa4f5170a334377fc17e1a1a3ea84b9d6c45cd8e92a73b685f4df0b5`, arm64-v8a only, the same five `.so`, preview signer `6e48fac4…`, model `9ef676d6…` and WASM `3398c10d…` unchanged, no research asset; verified from the downloaded file (report §T).
 
 ## Recommended technical next step
+
+**For the analyzer line (after 005J): return to the coordinator.** `stage-reports/artifacts/analyzer-005j/recommendation.md`.
+
+**PRIMARY_NEXT: TRAIN_BUILDPLAN_WALL_MODEL.**
+- **005K-a (research):**
+  - per-gap Evidence Pack records with `axisPx`;
+  - generator v2: open-gap negatives, faint-symbol positives, patterns on the wall line;
+  - a balanced, human-verified real gap set;
+  - UNet-lite to the gates;
+  - a two-signal witness at IP-01, as a pre-pass;
+  - a model-in-the-loop replay gate, including "the witness says no to drawn-but-open gaps".
+- **005K-a stop rule:** if a gate fails, return. The recorded fallback is NO_AI_YET with the deterministic drawn-gap
+  upgrade.
+- **005K-b (integration):** only after 005K-a passes.
+- **The coordinator decides the order** against 005I's PATH B (PDF.js), which reaches only 2 of 26 development and
+  round-8 sources. The deterministic downstream rules the replay names are scheduled separately: REC-17 / TOO_LARGE for
+  cyklamenach, storey coverage for gozdzikowcach.
+
+OWNER: run "Test zgodności odczytu wymiarów" on the arm64 phone.
+
+The 005I recommendation below (PATH B) is superseded by the 005J recommendation, subject to the coordinator.
+
 
 **For the analyzer line (after 005I): return to the coordinator.** No boundary provider earned ADOPT_NEXT, so by the
 005I brief (§59) the route is **PATH B — the PDF.js vector-document evidence pilot**. ELSED stays DEFER.

@@ -1,6 +1,22 @@
 # STAGE BUILDPLAN-ANALYZER-005J — floor-plan intelligence technology audit, Visual Referee opportunity map and training route
 
-⟪VERDICT_TABLE⟫
+| verdict | result |
+| --- | --- |
+| SINGLE_REPO_AUDIT | **PASS**: BuildApp only. Legacy untouched; no submodule, dependency or lockfile change (§A) |
+| NO PRODUCTION CHANGE | **PASS**: every production tree hash is identical to the start (`sha256(git ls-files -s)`); the production diff against `64b78b4` is empty (§M) |
+| DECISION-SEAM MAP (Q1) | **PASS**: 52 seams read from the code (12 P0, 14 P1, 26 P2), injection points and the crop contract (§B) |
+| FLOOR-PLAN OSS AUDIT (Q2) | **PASS**: no commercially clean model exists. ResPlan is DATA_CANDIDATE_WITH_COUNSEL, fpvec-lab is REIMPLEMENT_FROM_PAPER, MitUNet is ARCHITECTURE_CANDIDATE_FOR_RETRAINING (§C) |
+| LICENSING | **PASS**: code, weights, training data, backbone and runtime are separated for every candidate; real crops are evaluation-only in every route (§C, `licensing-matrix.md`) |
+| QUESTION CORPUS | **PASS**: 1,868 questions (synthetic counterfactual pairs × 4 transforms, 7 development houses, both round-8 houses) and no publisher pixel committed (§D) |
+| SMALL-VLM BAKE-OFF (Q3) | **PASS_RESEARCH**: Florence-2, SmolVLM2 and Moondream are at or below chance, with confident-wrong 1.8–23 % against a 0.5 % gate. The strong oracle is right on 98 %, with 0 confident-wrong. Runs were cut at a declared limit; coverage is stated (§E) |
+| WALL-MODEL PROOF (Part F) | **PASS_RESEARCH**: a from-scratch UNet-lite (1.56 M) on synthetic data transfers to real sheets (61/63 real openings on the axis) and reads the decisive gaps. It adds no wall over source-cv. MiT-B0 is DEFERRED (§F) |
+| ROUTE-C PILOT | **NEGATIVE ON REAL**: 85 % on synthetic, 49.6 % on REAL_DEV with 34 % confident-wrong (§G) |
+| ORACLE REPLAY | **PASS_RESEARCH**: one correct gap reading completes gozdzikowcach (−3.75 %; storeys still fail). Cyklamenach does not move. The development matrix is unchanged in verdicts (§E, `oracle-replay.json`) |
+| ANDROID / DELIVERY (Part H) | **MEASURED IN THE SHIPPED WASM RUNTIME, no device**: UNet 1.19 s per frame; micro-referee 70 ms; SmolVLM2 ≈ 16 s per question and ≥ 1.9 GiB. Delivery is local and embedded (§I) |
+| TRAINING ROUTE (Q4) | **COMMERCIAL-CLEAN**: BuildPlan synthetic data, from scratch. A teacher on real crops is CONDITIONAL on counsel (§H) |
+| COUNCIL (Part J) | ⟪COUNCIL_ROW⟫ |
+| DECISION (Part K, Q5) | **PRIMARY_NEXT: TRAIN_BUILDPLAN_WALL_MODEL** (two-signal gap witness; 005K-a research with a stop rule, then 005K-b integration). **SECONDARY_LATER: TRAIN_BUILDPLAN_VISUAL_REFEREE** (§L) |
+| **Stage** | ⟪FINAL_TOKEN_ROW⟫ |
 
 **Branch and history.**
 - Branch `analyzer/floorplan-intelligence-audit-v1`, from `analyzer/dimension-topology-boundary-bakeoff-v1` @
@@ -29,7 +45,23 @@ measurement instrument, not a dependency (residual recorded in `licensing-matrix
 **No blind project was consumed. Round 9 was not drawn. 005I's production code was not reopened and blind round 8 was
 not patched.** The two round-8 houses are development evidence since 005I and are used here only as such.
 
-⟪HEADLINE⟫
+**The headline.**
+- **Generic small VLMs cannot referee BuildPlan's questions.** On the same closed questions:
+  - SmolVLM2-500M is right on 45 % of those it answers, with 7.2 % confident-wrong and 43 % mirror consistency;
+  - Moondream and Florence-2 are no better.
+  - In the shipped runtime, one SmolVLM2 question costs ≈ 16 s and ≥ 1.9 GiB.
+  - A strong model answers 98 % with no confident-wrong answer, so the questions are fine and small models are the
+    limit.
+- **No floor-plan model on the market is commercially clean.** ResPlan's data licence is in conflict, fpvec-lab
+  publishes nothing, and MitUNet is non-commercial on several independent grounds.
+- **A BuildPlan-trained, from-scratch, 6 MB wall / opening network transfers to real sheets.** It reads 61 of 63 real
+  openings on the wall axis, and it reads the gap that decides gozdzikowcach (≈ 94 % OPENING).
+- **A replay of the frozen code shows the effect on outcomes:**
+  - correcting that one gap completes gozdzikowcach at −3.75 %;
+  - cyklamenach needs deterministic rule changes instead;
+  - no development verdict changes.
+- **The next step is TRAIN_BUILDPLAN_WALL_MODEL, as a two-signal witness, in two parts with a stop rule.** If the
+  witness cannot reject drawn-but-open gaps, the recorded fallback is a deterministic upgrade rule (NO_AI_YET).
 
 ---
 
@@ -134,7 +166,91 @@ repositories, files, datasets and papers.
   holds their SHA-256s and coordinates. `research-isolation.test.ts` fails if an image, model or embedded data URL is
   tracked under the 005J harness or artifacts.
 
-⟪SECTION_E⟫
+## E. Can small VLMs answer the narrow questions? The bake-off (brief Parts C and E, Q3)
+
+`vlm-bakeoff.{json,md}`, `vlm/vlm-audit.{md,json}`; code `research/analyzer-005j/vlm_bench.py`, `score.py`,
+`summarize.py`; pins `research/analyzer-005j/models.json`.
+
+**Arms.**
+- **Florence-2-base:** `florence-community@00921df`, native transformers, fp32.
+- **SmolVLM2-500M-Video-Instruct:** `@7b375e1`, official ONNX: fp32 vision + int8 decoder and embeddings.
+- **Moondream 0.5B int8:** `vikhyatk/moondream2@9dddae8`, branch `onnx`, legacy client 0.0.6.
+- **SERVER_ORACLE:** this session's own model, blind.
+- Run beside them through the same scorer: the two wall proofs (pre-set strip rules) and the Route-C pilot.
+
+**Same input for every arm.** Every model received the same image bytes (SHA-256 asserted by the scorer) and the same
+prompt, with a closed enum that always includes UNRESOLVED.
+
+**Read-outs, scored apart.**
+- **ENUM_SCORE:** the model's own probability of each enum answer, forced inside the demanded JSON and normalised over the
+  enum.
+- **GEN_JSON:** strict JSON, or lenient (the first enum word).
+- **STRUCTURED:** Florence grounding, on RAW opening and column crops only.
+
+**Fixed before scoring.**
+- Confident means p ≥ 0.80.
+- UNRESOLVED or invalid never counts as wrong.
+- The red metric is CONFIDENT_WRONG_RATE.
+- Modes are never pooled.
+
+**Coverage.** The runs shared 4 CPU cores and were stopped at a declared cut-off (18:13:38 UTC). Before the cut-off the
+remaining items were re-ordered so that the blind-8 and real CANDIDATE_OVERLAY questions came first. Every model has
+the complete blind-8 CANDIDATE_OVERLAY set; n per model, mode and set is in `vlm-bakeoff.md` §2.
+
+**Exclusion.** The malformed gozdzikowcach porch-mouth question is excluded for every arm (`exclusions.json`, post-review
+C2).
+
+| CANDIDATE_OVERLAY, primary read-out | n | answered | right among answered | CONFIDENT_WRONG_RATE | mirror (answered pairs) |
+| --- | --- | --- | --- | --- | --- |
+| SERVER_ORACLE (blind sub-agents) | 148 | 99.3 % | **98.0 %** (REAL_DEV 30/30, blind-8 16/16) | **0.0 %** | 100 % |
+| UNet-lite gap rules (gap classes only; real strips face-placed) | 508 | 54.9 % | 91.8 % | 2.9 % | 89.3 % |
+| MiT-B0 gap rules | 508 | 62.4 % | 89.9 % | 4.7 % | 91.1 % |
+| Route-C pilot | 1,300 | 100 % | 69.3 % (REAL_DEV 49.6 %) | 16.5 % (REAL_DEV 34.0 %) | 88.0 % |
+| **SmolVLM2-500M**, ENUM_SCORE | 967 | 71.9 % | **45.0 %** (REAL_DEV 47.4 %, blind-8 36.6 %) | **7.2 %** | **43.0 %** |
+| SmolVLM2-500M, GEN_JSON strict | 695 | **2.0 %** | 64.3 % | 0.6 % | — |
+| Moondream 0.5B, ENUM_SCORE | 513 | 39.8 % | 46.1 % | 1.8 % | 73.0 % |
+| Florence-2-base, ENUM_SCORE (real sets only) | 95 | 39.0 % | 40.5 % | 23.2 % | — |
+
+- **The small VLMs are at or below chance and below the majority floor.**
+  - A constant guesser would score 76.8 % on REAL_DEV and 81.3 % on blind-8.
+  - SmolVLM2 gives the same answer to 31 % of counterfactual pairs whose truth differs.
+  - On outline A/B questions SmolVLM2 answers NEITHER in 79 of 82 answered cases.
+  - Its generation almost never yields valid JSON (2 %).
+  - RAW and SEMANTIC_OVERLAY are no better than CANDIDATE_OVERLAY: 54 % and 46 % right among answered.
+  - Florence's grounding found no window in the cyklamenach crop (8 of 8 UNRESOLVED).
+- **The questions are answerable.** The strong oracle is right on 98 % with no confident-wrong answer. Small models are
+  the limit, not the question design.
+- **Round-8 questions** (NORMAL orientation, development evidence):
+  - **gozdzikowcach:** oracle 7/7; SmolVLM2 2/7 right (3 UNRESOLVED, NEITHER on both outline questions); Moondream 0/7
+    answered right; Florence 1/7 (ONE_OPEN_SIDE — the analyzer's error — at 1.00); UNet gap rules 2/2.
+  - **cyklamenach:** oracle 9/9; SmolVLM2 1/9 right (TERMINATES on both continuation questions); UNet gap rules 4/4
+    (window OPENING 0.97).
+- **On-device cost** (§I): SmolVLM2 ≈ 16 s and ≥ 1.9 GiB per question in the shipped WASM runtime.
+- **Desktop medians, contended:** SmolVLM2 2.5 s (enum), Moondream 15 s, Florence 23 s.
+- **Verdict:** ADOPT_SMALL_VLM_REFEREE is rejected. The fine-tuning route (Route A) is "not now" (§H).
+
+**Oracle replay (post-review A1 / E4) — would a correct gap reading move a failing house?** Full record:
+`oracle-replay.json`, `recommendation.md` §3.
+
+**Method.**
+- The frozen production code was re-solved from the sealed source package, observation graph and metric evidence.
+- A research copy of `boundary-evidence.ts` was swapped in only inside the replay process. It upgrades WEAK gaps
+  between two WALL jambs that carry drawn evidence to STRONG.
+- **Fidelity:** with the oracle OFF, the replay reproduced the sealed model hash or failure code on 21 of 23 runs. The
+  2 that did not had no source bytes in any cache and are excluded.
+
+**Results.**
+- **dom-w-gozdzikowcach.** Upgrading **one** 0.41 m LEAF_FACE gap (`gap-Y-538-322-338`) turns PLAN_RESOLUTION_INCONCLUSIVE
+  (105.47 m²) into a completed reading of **127.54 m² (−3.75 %; the footprint holds)**.
+  - The verdict stays ALGORITHMIC_FAIL on the storey count (1 modelled, 2 drawn), a separate seam.
+  - The UNet reads that gap ≈ 94 % OPENING on its axis.
+- **dom-w-cyklamenach.** Nothing moves it: 91 upgrades, and NO_CONTINUATION / TOO_LARGE stop it first.
+- **Development matrix (19 valid rows).** Upgrading *every* drawn weak gap (2–73 per house) changes one model
+  (zurawkach, −0.81 % → −1.68 %) and no verdict. Every PASS row keeps its model hash.
+
+**What follows.** A deterministic single-signal rule would also complete gozdzikowcach. So the witness's value is to say
+**no** to drawn gaps that are open, such as gozdzikowcach's dashed porch front, which the UNet reads as 100 %
+background. That is what 005K-a must prove (§L).
 
 ## F. A commercially clean wall / opening model, proved in miniature (brief Part F)
 
@@ -164,7 +280,7 @@ sheets with 005I truth (never trained on).
 | round-8 regions: cyklamenach window gap / double door / textured terrace | **96.6 % / 74.0 % opening; terrace 95.5 % background** | 96.8 % / 82.4 % opening; terrace 97.5 % background |
 | round-8 regions: gozdzikowcach garage door / porch mouth / entrance door / pier (x 435–452) | **75.3 % opening** / 100 % background / 99.7 % opening / **100 % wall** | **81.6 % background** (missed) / 99.4 % background / 99.7 % opening / 100 % wall |
 | gozdzikowcach 0.41 m LEAF_FACE gap (`gap-Y-538-322-338`), rows 542–550 on its axis | **≈ 94 % opening** | 71–88 % opening |
-| as a gap referee (pre-registered strip rules), CANDIDATE_OVERLAY questions | ⟪UNET_REF⟫ | ⟪SEG_REF⟫ |
+| as a gap referee (pre-registered strip rules), CANDIDATE_OVERLAY questions | synthetic 129/149 right of 180, 13 confident-wrong; REAL_DEV (face-placed) 104/107 right of 304, 2 confident-wrong; blind-8 23/23 right of 24, 0 confident-wrong | synthetic 141/149 right of 180, 0 confident-wrong; REAL_DEV (face-placed) 128/148 right of 304, 20 confident-wrong; blind-8 16/20 right of 24, 4 confident-wrong |
 | ONNX fp32 / ORT-web WASM per 864² frame (1 thread, Node 18) / RSS | 6.25 MB / **1.19 s** / ≥ 340 MiB | 14.95 MB / 4.46 s / ≥ 928 MiB |
 
 **Reading.**
@@ -339,7 +455,15 @@ bound, Evidence Pack format or sealed record; any Gradle file or Android asset; 
 
 ## N. Gates
 
-⟪GATES⟫
+| gate | result |
+| --- | --- |
+| `npm run typecheck` | **pass** |
+| `npm test` | **pass**: 164 files passed, 1 skipped; 2,170 tests passed, 11 skipped (the existing environment-gated ones); 398 s; includes `research-isolation.test.ts` with the 005J block |
+| `npm run build` | **pass** (typecheck + web production build) |
+| e2e / Android | no production or UI change, so nothing new to exercise; the repository's Android and emulator jobs run in CI (below) |
+| analyzer regression | production unchanged (§M): the analyzer gates in CI run on byte-identical production code. In addition, the replay with the oracle OFF reproduced the sealed model hash or failure code on 21 of 23 rows (§E) |
+| research deps | none added to any `package.json` or lockfile; Python environments live outside the repository, frozen in `research/analyzer-005j/requirements-*.lock.txt` |
+| CI | ⟪CI_RESULT⟫ |
 
 ## O. Limitations and deviations, stated plainly
 
@@ -350,7 +474,15 @@ bound, Evidence Pack format or sealed record; any Gradle file or Android asset; 
    - Before the cut, item order was set so the blind-8 questions and the real CANDIDATE_OVERLAY questions came first.
    - Moondream's free-text read-out was restricted to a sample and then dropped; its strict JSON was never valid in that
      sample.
-   - Exact n per model, mode and set is in `vlm-bakeoff.md` §2: ⟪COVERAGE⟫.
+   - Exact n per model, mode and set is in `vlm-bakeoff.md` §2. At the cut-off (18:13:38 UTC):
+     - **SmolVLM2:** 1,670 records — all three modes on synthetic and blind-8, REAL_DEV CANDIDATE_OVERLAY NORMAL and
+       part of MIRROR;
+     - **Moondream:** 538 — CANDIDATE_OVERLAY on synthetic, REAL_DEV NORMAL (part) and all blind-8 transforms; a token
+       RAW / SEMANTIC sample;
+     - **Florence-2:** 114 — all blind-8 CANDIDATE_OVERLAY transforms, the blind-8 RAW opening grounding, 29 REAL_DEV,
+       and almost no synthetic.
+
+   The conclusions rest on the blind-8 and REAL_DEV CANDIDATE_OVERLAY sets, which every model has.
 3. **The real gap questions are one-sided.** All 126 REAL_DEV OPENING_VS_PATTERN questions expect OPENING, and 126 of 130
    WALL_CONTINUATION questions expect CONTINUES, because they were generated from the 005I truth (openings and solid
    wall stretches). Real discrimination on gap classes rests on few minority questions.
