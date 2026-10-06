@@ -1,0 +1,1848 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005K",
+ "kind": "development replay (solver alone on sealed evidence; research harness, production unchanged by it)",
+ "gitSha": "c244ff70b67ea439700c3e065e792c8c95fe1295",
+ "rows": [
+  {
+   "row": "dom-pod-jarzabem",
+   "sealed": {
+    "outcome": "COMPLETED",
+    "modelHash": "df2aa66c8591107a1ff3608d02164ad80f4a7609c963915cb17fe7312e64553f",
+    "code": null
+   },
+   "off": {
+    "outcome": "COMPLETED",
+    "modelHash": "df2aa66c8591107a1ff3608d02164ad80f4a7609c963915cb17fe7312e64553f",
+    "code": null,
+    "footprintM2": 191,
+    "storeys": 1,
+    "gapRecords": 7,
+    "eligible": 0
+   },
+   "offReproducesSealed": true,
+   "on": {
+    "outcome": "COMPLETED",
+    "modelHash": "df2aa66c8591107a1ff3608d02164ad80f4a7609c963915cb17fe7312e64553f",
+    "code": null,
+    "footprintM2": 191,
+    "storeys": 1,
+    "gapRecords": 7,
+    "upgraded": 0
+   },
+   "modelChanged": false,
+   "upgradedGaps": [],
+   "firstChangedDecision": null,
+   "decoy": {
+    "outcome": {
+     "outcome": "FAILED",
+     "modelHash": null,
+     "code": "RECONSTRUCTION_FAILED/PLAN_NO_BUILT_REGIONS"
+    },
+    "sharedRecords": 0,
+    "differingRecords": 0,
+    "differing": []
+   }
+  },
+  {
+   "row": "dom-w-arkadiach",
+   "sealed": {
+    "outcome": "COMPLETED",
+    "modelHash": "a1ac7a1b67b195839e7150e1da7a508b4b583d266a96d10b9c9322deae1f10b7",
+    "code": null
+   },
+   "off": {
+    "outcome": "COMPLETED",
+    "modelHash": "a1ac7a1b67b195839e7150e1da7a508b4b583d266a96d10b9c9322deae1f10b7",
+    "code": null,
+    "footprintM2": 69.56,
+    "storeys": 2,
+    "gapRecords": 25,
+    "eligible": 3
+   },
+   "offReproducesSealed": true,
+   "on": {
+    "outcome": "COMPLETED",
+    "modelHash": "a1ac7a1b67b195839e7150e1da7a508b4b583d266a96d10b9c9322deae1f10b7",
+    "code": null,
+    "footprintM2": 69.56,
+    "storeys": 2,
+    "gapRecords": 25,
+    "upgraded": 3
+   },
+   "modelChanged": false,
+   "upgradedGaps": [
+    {
+     "frameId": "frame-asset-rzut-16680ee739-bb2ced8b98",
+     "storey": "GROUND",
+     "decompositionId": "dec-c51451046a328db6",
+     "gapId": "gap-X-138-408-516",
+     "widthM": 1.994544,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-16680ee739-bb2ced8b98",
+     "storey": "GROUND",
+     "decompositionId": "dec-c51451046a328db6",
+     "gapId": "gap-X-147-408-516",
+     "widthM": 1.994544,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-16680ee739-bb2ced8b98",
+     "storey": "GROUND",
+     "decompositionId": "dec-c51451046a328db6",
+     "gapId": "gap-Y-406-448-515",
+     "widthM": 1.236418,
+     "signature": "LEAF_FACE",
+     "drawnVia": "SIGNATURE",
+     "outlineOff": "NOT_REACHED",
+     "outlineOn": "BRIDGED_STRONG"
+    }
+   ],
+   "firstChangedDecision": {
+    "stage": "BOUNDARY_GAPS",
+    "object": "gap:frame-asset-rzut-16680ee739-bb2ced8b98/dec-c51451046a328db6/gap-X-138-408-516",
+    "before": "WEAK:POCKET_MOUTH",
+    "after": "STRONG:BRIDGED_STRONG"
+   },
+   "decoy": {
+    "outcome": {
+     "outcome": "FAILED",
+     "modelHash": null,
+     "code": "RECONSTRUCTION_FAILED/PLAN_LAYOUT_REJECTED"
+    },
+    "sharedRecords": 25,
+    "differingRecords": 0,
+    "differing": []
+   }
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "sealed": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE"
+   },
+   "off": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "footprintM2": null,
+    "storeys": null,
+    "gapRecords": 0,
+    "eligible": 0
+   },
+   "offReproducesSealed": true,
+   "on": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "footprintM2": null,
+    "storeys": null,
+    "gapRecords": 0,
+    "upgraded": 0
+   },
+   "modelChanged": false,
+   "upgradedGaps": [],
+   "firstChangedDecision": null,
+   "decoy": {
+    "outcome": {
+     "outcome": "FAILED",
+     "modelHash": null,
+     "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE"
+    },
+    "sharedRecords": 0,
+    "differingRecords": 0,
+    "differing": []
+   }
+  },
+  {
+   "row": "dom-w-morelach",
+   "sealed": {
+    "outcome": "COMPLETED",
+    "modelHash": "29299ff9ca7e9b4ffdc8092b203b0ca5de7229d7ad2f58544f78774c159a05a5",
+    "code": null
+   },
+   "off": {
+    "outcome": "COMPLETED",
+    "modelHash": "29299ff9ca7e9b4ffdc8092b203b0ca5de7229d7ad2f58544f78774c159a05a5",
+    "code": null,
+    "footprintM2": 112.05,
+    "storeys": 2,
+    "gapRecords": 17,
+    "eligible": 2
+   },
+   "offReproducesSealed": true,
+   "on": {
+    "outcome": "COMPLETED",
+    "modelHash": "29299ff9ca7e9b4ffdc8092b203b0ca5de7229d7ad2f58544f78774c159a05a5",
+    "code": null,
+    "footprintM2": 112.05,
+    "storeys": 2,
+    "gapRecords": 17,
+    "upgraded": 2
+   },
+   "modelChanged": false,
+   "upgradedGaps": [
+    {
+     "frameId": "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+     "storey": "GROUND",
+     "decompositionId": "dec-5ad0db6521b191b1",
+     "gapId": "gap-X-61-421-511",
+     "widthM": 1.8243,
+     "signature": "LEAF_FACE",
+     "drawnVia": "SIGNATURE",
+     "outlineOff": "BRIDGED_WEAK",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+     "storey": "GROUND",
+     "decompositionId": "dec-5ad0db6521b191b1",
+     "gapId": "gap-Y-276-135-184",
+     "widthM": 0.97804,
+     "signature": "LEAF_FACE",
+     "drawnVia": "SIGNATURE",
+     "outlineOff": "NOT_REACHED",
+     "outlineOn": "BRIDGED_STRONG"
+    }
+   ],
+   "firstChangedDecision": {
+    "stage": "BOUNDARY_GAPS",
+    "object": "gap:frame-asset-rzut-63ae7d4e86-027bb2e82d/dec-5ad0db6521b191b1/gap-X-61-421-511",
+    "before": "WEAK:BRIDGED_WEAK",
+    "after": "STRONG:BRIDGED_STRONG"
+   },
+   "decoy": {
+    "outcome": {
+     "outcome": "FAILED",
+     "modelHash": null,
+     "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE"
+    },
+    "sharedRecords": 17,
+    "differingRecords": 0,
+    "differing": []
+   }
+  },
+  {
+   "row": "marcowki",
+   "sealed": {
+    "outcome": "COMPLETED",
+    "modelHash": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+    "code": null
+   },
+   "off": {
+    "outcome": "COMPLETED",
+    "modelHash": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+    "code": null,
+    "footprintM2": 130.79,
+    "storeys": 2,
+    "gapRecords": 43,
+    "eligible": 6
+   },
+   "offReproducesSealed": true,
+   "on": {
+    "outcome": "COMPLETED",
+    "modelHash": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+    "code": null,
+    "footprintM2": 130.79,
+    "storeys": 2,
+    "gapRecords": 43,
+    "upgraded": 6
+   },
+   "modelChanged": false,
+   "upgradedGaps": [
+    {
+     "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+     "storey": "GROUND",
+     "decompositionId": "dec-131bb6e6573347ea",
+     "gapId": "gap-X-357-294-406",
+     "widthM": 2.964416,
+     "signature": "DASHED",
+     "drawnVia": "WITHOUT_RUNS_PAST",
+     "outlineOff": "NOT_REACHED",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-117027f690-fed2722c38",
+     "storey": "ATTIC",
+     "decompositionId": "dec-4fb696032cae1b83",
+     "gapId": "gap-X-50-415-430",
+     "widthM": 0.55008,
+     "signature": "DASHED",
+     "drawnVia": "WITHOUT_RUNS_PAST",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-117027f690-fed2722c38",
+     "storey": "ATTIC",
+     "decompositionId": "dec-4fb696032cae1b83",
+     "gapId": "gap-X-50-497-512",
+     "widthM": 0.55008,
+     "signature": "DASHED",
+     "drawnVia": "WITHOUT_RUNS_PAST",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-117027f690-fed2722c38",
+     "storey": "ATTIC",
+     "decompositionId": "dec-4fb696032cae1b83",
+     "gapId": "gap-X-66-412-433",
+     "widthM": 0.770112,
+     "signature": "DASHED",
+     "drawnVia": "WITHOUT_RUNS_PAST",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-117027f690-fed2722c38",
+     "storey": "ATTIC",
+     "decompositionId": "dec-4fb696032cae1b83",
+     "gapId": "gap-X-337-496-512",
+     "widthM": 0.586752,
+     "signature": "DASHED",
+     "drawnVia": "WITHOUT_RUNS_PAST",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-117027f690-fed2722c38",
+     "storey": "ATTIC",
+     "decompositionId": "dec-4fb696032cae1b83",
+     "gapId": "gap-Y-553-274-313",
+     "widthM": 1.441674,
+     "signature": "DASHED",
+     "drawnVia": "WITHOUT_RUNS_PAST",
+     "outlineOff": "NOT_REACHED",
+     "outlineOn": "BRIDGED_STRONG"
+    }
+   ],
+   "firstChangedDecision": {
+    "stage": "BOUNDARY_GAPS",
+    "object": "gap:frame-asset-rzut-19a11bc745-33a5ff46cd/dec-131bb6e6573347ea/gap-X-357-294-406",
+    "before": "WEAK:NOT_REACHED",
+    "after": "STRONG:BRIDGED_STRONG"
+   },
+   "decoy": {
+    "outcome": {
+     "outcome": "FAILED",
+     "modelHash": null,
+     "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE"
+    },
+    "sharedRecords": 43,
+    "differingRecords": 0,
+    "differing": []
+   }
+  },
+  {
+   "row": "rarytasy-g2e",
+   "sealed": {
+    "outcome": "COMPLETED",
+    "modelHash": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+    "code": null
+   },
+   "off": {
+    "outcome": "COMPLETED",
+    "modelHash": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+    "code": null,
+    "footprintM2": 184.55,
+    "storeys": 1,
+    "gapRecords": 28,
+    "eligible": 1
+   },
+   "offReproducesSealed": true,
+   "on": {
+    "outcome": "COMPLETED",
+    "modelHash": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+    "code": null,
+    "footprintM2": 184.55,
+    "storeys": 1,
+    "gapRecords": 28,
+    "upgraded": 1
+   },
+   "modelChanged": false,
+   "upgradedGaps": [
+    {
+     "frameId": "frame-asset-rzut-e8520c3ad3-59a406b738",
+     "storey": "GROUND",
+     "decompositionId": "dec-685149aa403d288d",
+     "gapId": "gap-Y-480-569-659",
+     "widthM": 2.48211,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    }
+   ],
+   "firstChangedDecision": {
+    "stage": "BOUNDARY_GAPS",
+    "object": "gap:frame-asset-rzut-e8520c3ad3-59a406b738/dec-685149aa403d288d/gap-Y-480-569-659",
+    "before": "WEAK:POCKET_MOUTH",
+    "after": "STRONG:BRIDGED_STRONG"
+   },
+   "decoy": {
+    "outcome": {
+     "outcome": "FAILED",
+     "modelHash": null,
+     "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE"
+    },
+    "sharedRecords": 28,
+    "differingRecords": 0,
+    "differing": []
+   }
+  },
+  {
+   "row": "kosacce-clean",
+   "sealed": {
+    "outcome": "COMPLETED",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "code": null
+   },
+   "off": {
+    "outcome": "COMPLETED",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "code": null,
+    "footprintM2": 162.28,
+    "storeys": 1,
+    "gapRecords": 56,
+    "eligible": 4
+   },
+   "offReproducesSealed": true,
+   "on": {
+    "outcome": "COMPLETED",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "code": null,
+    "footprintM2": 162.28,
+    "storeys": 1,
+    "gapRecords": 56,
+    "upgraded": 4
+   },
+   "modelChanged": false,
+   "upgradedGaps": [
+    {
+     "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+     "storey": "GROUND",
+     "decompositionId": "dec-decb8f82d22f47ae",
+     "gapId": "gap-X-46-378-468",
+     "widthM": 2.16603,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+     "storey": "GROUND",
+     "decompositionId": "dec-decb8f82d22f47ae",
+     "gapId": "gap-Y-703-120-210",
+     "widthM": 2.16522,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "NOT_REACHED",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+     "storey": "GROUND",
+     "decompositionId": "dec-decb8f82d22f47ae",
+     "gapId": "gap-Y-703-273-363",
+     "widthM": 2.16522,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "NOT_REACHED",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+     "storey": "GROUND",
+     "decompositionId": "dec-decb8f82d22f47ae",
+     "gapId": "gap-Y-703-585-692",
+     "widthM": 2.574206,
+     "signature": "DASHED",
+     "drawnVia": "WITHOUT_RUNS_PAST",
+     "outlineOff": "NOT_REACHED",
+     "outlineOn": "BRIDGED_STRONG"
+    }
+   ],
+   "firstChangedDecision": {
+    "stage": "BOUNDARY_GAPS",
+    "object": "gap:frame-asset-rzut-f530d6ebf2-668d857ed9/dec-decb8f82d22f47ae/gap-X-46-378-468",
+    "before": "WEAK:POCKET_MOUTH",
+    "after": "STRONG:BRIDGED_STRONG"
+   },
+   "decoy": {
+    "outcome": {
+     "outcome": "FAILED",
+     "modelHash": null,
+     "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE"
+    },
+    "sharedRecords": 56,
+    "differingRecords": 0,
+    "differing": []
+   }
+  },
+  {
+   "row": "kosacce-tracked",
+   "sealed": {
+    "outcome": "COMPLETED",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "code": null
+   },
+   "off": {
+    "outcome": "COMPLETED",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "code": null,
+    "footprintM2": 162.28,
+    "storeys": 1,
+    "gapRecords": 56,
+    "eligible": 4
+   },
+   "offReproducesSealed": true,
+   "on": {
+    "outcome": "COMPLETED",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "code": null,
+    "footprintM2": 162.28,
+    "storeys": 1,
+    "gapRecords": 56,
+    "upgraded": 4
+   },
+   "modelChanged": false,
+   "upgradedGaps": [
+    {
+     "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+     "storey": "GROUND",
+     "decompositionId": "dec-decb8f82d22f47ae",
+     "gapId": "gap-X-46-378-468",
+     "widthM": 2.16603,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+     "storey": "GROUND",
+     "decompositionId": "dec-decb8f82d22f47ae",
+     "gapId": "gap-Y-703-120-210",
+     "widthM": 2.16522,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "NOT_REACHED",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+     "storey": "GROUND",
+     "decompositionId": "dec-decb8f82d22f47ae",
+     "gapId": "gap-Y-703-273-363",
+     "widthM": 2.16522,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "NOT_REACHED",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+     "storey": "GROUND",
+     "decompositionId": "dec-decb8f82d22f47ae",
+     "gapId": "gap-Y-703-585-692",
+     "widthM": 2.574206,
+     "signature": "DASHED",
+     "drawnVia": "WITHOUT_RUNS_PAST",
+     "outlineOff": "NOT_REACHED",
+     "outlineOn": "BRIDGED_STRONG"
+    }
+   ],
+   "firstChangedDecision": {
+    "stage": "BOUNDARY_GAPS",
+    "object": "gap:frame-asset-rzut-f530d6ebf2-668d857ed9/dec-decb8f82d22f47ae/gap-X-46-378-468",
+    "before": "WEAK:POCKET_MOUTH",
+    "after": "STRONG:BRIDGED_STRONG"
+   },
+   "decoy": {
+    "outcome": {
+     "outcome": "FAILED",
+     "modelHash": null,
+     "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE"
+    },
+    "sharedRecords": 56,
+    "differingRecords": 0,
+    "differing": []
+   }
+  },
+  {
+   "row": "rarytasy-eoze",
+   "sealed": {
+    "outcome": "COMPLETED",
+    "modelHash": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
+    "code": null
+   },
+   "off": {
+    "outcome": "COMPLETED",
+    "modelHash": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
+    "code": null,
+    "footprintM2": 123.99,
+    "storeys": 1,
+    "gapRecords": 39,
+    "eligible": 1
+   },
+   "offReproducesSealed": true,
+   "on": {
+    "outcome": "COMPLETED",
+    "modelHash": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
+    "code": null,
+    "footprintM2": 123.99,
+    "storeys": 1,
+    "gapRecords": 39,
+    "upgraded": 1
+   },
+   "modelChanged": false,
+   "upgradedGaps": [
+    {
+     "frameId": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+     "storey": "GROUND",
+     "decompositionId": "dec-0dc119d2b12978e5",
+     "gapId": "gap-Y-579-141-186",
+     "widthM": 0.99999,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    }
+   ],
+   "firstChangedDecision": {
+    "stage": "BOUNDARY_GAPS",
+    "object": "gap:frame-asset-rzut-b747b42ad2-e3a3d0015d/dec-0dc119d2b12978e5/gap-Y-579-141-186",
+    "before": "WEAK:POCKET_MOUTH",
+    "after": "STRONG:BRIDGED_STRONG"
+   },
+   "decoy": {
+    "outcome": {
+     "outcome": "COMPLETED",
+     "modelHash": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
+     "code": null
+    },
+    "sharedRecords": 39,
+    "differingRecords": 0,
+    "differing": []
+   }
+  },
+  {
+   "row": "eoze-legacy-every",
+   "sealed": {
+    "outcome": "COMPLETED",
+    "modelHash": "0a0e019df52a473a95e977cae5e88bfe08a8c417e64cb8866e47bc572a602603",
+    "code": null
+   },
+   "off": {
+    "outcome": "COMPLETED",
+    "modelHash": "0a0e019df52a473a95e977cae5e88bfe08a8c417e64cb8866e47bc572a602603",
+    "code": null,
+    "footprintM2": 116.94,
+    "storeys": 1,
+    "gapRecords": 32,
+    "eligible": 3
+   },
+   "offReproducesSealed": true,
+   "on": {
+    "outcome": "COMPLETED",
+    "modelHash": "0a0e019df52a473a95e977cae5e88bfe08a8c417e64cb8866e47bc572a602603",
+    "code": null,
+    "footprintM2": 116.94,
+    "storeys": 1,
+    "gapRecords": 32,
+    "upgraded": 3
+   },
+   "modelChanged": false,
+   "upgradedGaps": [
+    {
+     "frameId": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+     "storey": "GROUND",
+     "decompositionId": "dec-c07911438ef7e17c",
+     "gapId": "gap-Y-569-141-186",
+     "widthM": 1.00062,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+     "storey": "GROUND",
+     "decompositionId": "dec-c07911438ef7e17c",
+     "gapId": "gap-Y-569-370-414",
+     "widthM": 0.978384,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "NOT_REACHED",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+     "storey": "GROUND",
+     "decompositionId": "dec-c07911438ef7e17c",
+     "gapId": "gap-Y-579-141-186",
+     "widthM": 1.00062,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    }
+   ],
+   "firstChangedDecision": {
+    "stage": "BOUNDARY_GAPS",
+    "object": "gap:frame-asset-rzut-b747b42ad2-e3a3d0015d/dec-c07911438ef7e17c/gap-Y-569-141-186",
+    "before": "WEAK:POCKET_MOUTH",
+    "after": "STRONG:BRIDGED_STRONG"
+   },
+   "decoy": {
+    "outcome": {
+     "outcome": "FAILED",
+     "modelHash": null,
+     "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE"
+    },
+    "sharedRecords": 0,
+    "differingRecords": 0,
+    "differing": []
+   }
+  },
+  {
+   "row": "alt-marcowki",
+   "sealed": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE"
+   },
+   "off": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "footprintM2": null,
+    "storeys": null,
+    "gapRecords": 0,
+    "eligible": 0
+   },
+   "offReproducesSealed": true,
+   "on": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "footprintM2": null,
+    "storeys": null,
+    "gapRecords": 0,
+    "upgraded": 0
+   },
+   "modelChanged": false,
+   "upgradedGaps": [],
+   "firstChangedDecision": null,
+   "decoy": {
+    "outcome": {
+     "outcome": "FAILED",
+     "modelHash": null,
+     "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE"
+    },
+    "sharedRecords": 0,
+    "differingRecords": 0,
+    "differing": []
+   }
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "sealed": {
+    "outcome": "COMPLETED",
+    "modelHash": "a81652d034b4f9de2c0f43cce1365a0d6d9414d90ed0fb83056fd6582700a4bb",
+    "code": null
+   },
+   "off": {
+    "outcome": "COMPLETED",
+    "modelHash": "a81652d034b4f9de2c0f43cce1365a0d6d9414d90ed0fb83056fd6582700a4bb",
+    "code": null,
+    "footprintM2": 99,
+    "storeys": 2,
+    "gapRecords": 34,
+    "eligible": 4
+   },
+   "offReproducesSealed": true,
+   "on": {
+    "outcome": "COMPLETED",
+    "modelHash": "a81652d034b4f9de2c0f43cce1365a0d6d9414d90ed0fb83056fd6582700a4bb",
+    "code": null,
+    "footprintM2": 99,
+    "storeys": 2,
+    "gapRecords": 34,
+    "upgraded": 4
+   },
+   "modelChanged": false,
+   "upgradedGaps": [
+    {
+     "frameId": "frame-asset-rzut-d52f958fd6-d2646b4dce",
+     "storey": "ATTIC",
+     "decompositionId": "dec-b1880ba8fc5c6e15",
+     "gapId": "gap-X-167-212-227",
+     "widthM": 0.44559,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-d52f958fd6-d2646b4dce",
+     "storey": "ATTIC",
+     "decompositionId": "dec-b1880ba8fc5c6e15",
+     "gapId": "gap-X-219-212-228",
+     "widthM": 0.475296,
+     "signature": "LEAF_FACE",
+     "drawnVia": "SIGNATURE",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-d52f958fd6-d2646b4dce",
+     "storey": "ATTIC",
+     "decompositionId": "dec-b1880ba8fc5c6e15",
+     "gapId": "gap-X-657-212-228",
+     "widthM": 0.475296,
+     "signature": "DASHED",
+     "drawnVia": "WITHOUT_RUNS_PAST",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-d52f958fd6-d2646b4dce",
+     "storey": "ATTIC",
+     "decompositionId": "dec-b1880ba8fc5c6e15",
+     "gapId": "gap-X-671-212-227",
+     "widthM": 0.44559,
+     "signature": "DASHED",
+     "drawnVia": "WITHOUT_RUNS_PAST",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    }
+   ],
+   "firstChangedDecision": {
+    "stage": "BOUNDARY_GAPS",
+    "object": "gap:frame-asset-rzut-d52f958fd6-d2646b4dce/dec-b1880ba8fc5c6e15/gap-X-167-212-227",
+    "before": "WEAK:POCKET_MOUTH",
+    "after": "STRONG:BRIDGED_STRONG"
+   },
+   "decoy": {
+    "outcome": {
+     "outcome": "FAILED",
+     "modelHash": null,
+     "code": "RECONSTRUCTION_FAILED/PLAN_LAYOUT_REJECTED"
+    },
+    "sharedRecords": 34,
+    "differingRecords": 0,
+    "differing": []
+   }
+  },
+  {
+   "row": "willa-miranda",
+   "sealed": {
+    "outcome": "COMPLETED",
+    "modelHash": "84af704b09664eb5997d5a12265663ba45f2aaf456098190e43f914f34c34c81",
+    "code": null
+   },
+   "off": {
+    "outcome": "COMPLETED",
+    "modelHash": "84af704b09664eb5997d5a12265663ba45f2aaf456098190e43f914f34c34c81",
+    "code": null,
+    "footprintM2": 167.36,
+    "storeys": 1,
+    "gapRecords": 54,
+    "eligible": 7
+   },
+   "offReproducesSealed": true,
+   "on": {
+    "outcome": "COMPLETED",
+    "modelHash": "84af704b09664eb5997d5a12265663ba45f2aaf456098190e43f914f34c34c81",
+    "code": null,
+    "footprintM2": 167.36,
+    "storeys": 1,
+    "gapRecords": 54,
+    "upgraded": 7
+   },
+   "modelChanged": false,
+   "upgradedGaps": [
+    {
+     "frameId": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+     "storey": "GROUND",
+     "decompositionId": "dec-53a114e4b0b71c66",
+     "gapId": "gap-X-776-430-480",
+     "widthM": 1.3295,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "BRIDGED_WEAK",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+     "storey": "GROUND",
+     "decompositionId": "dec-53a114e4b0b71c66",
+     "gapId": "gap-X-783-430-480",
+     "widthM": 1.3295,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+     "storey": "GROUND",
+     "decompositionId": "dec-53a114e4b0b71c66",
+     "gapId": "gap-X-794-430-480",
+     "widthM": 1.3295,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-07b69dcbb8-2088494fef",
+     "storey": "UPPER",
+     "decompositionId": "dec-b54ee6351fb52eb6",
+     "gapId": "gap-X-666-261-309",
+     "widthM": 1.662048,
+     "signature": "DASHED",
+     "drawnVia": "WITHOUT_RUNS_PAST",
+     "outlineOff": "NOT_REACHED",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-07b69dcbb8-2088494fef",
+     "storey": "UPPER",
+     "decompositionId": "dec-b54ee6351fb52eb6",
+     "gapId": "gap-Y-177-597-637",
+     "widthM": 1.38148,
+     "signature": "DASHED",
+     "drawnVia": "WITHOUT_RUNS_PAST",
+     "outlineOff": "NOT_REACHED",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-07b69dcbb8-2088494fef",
+     "storey": "UPPER",
+     "decompositionId": "dec-b54ee6351fb52eb6",
+     "gapId": "gap-Y-493-381-433",
+     "widthM": 1.795924,
+     "signature": "DASHED",
+     "drawnVia": "WITHOUT_RUNS_PAST",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-07b69dcbb8-2088494fef",
+     "storey": "UPPER",
+     "decompositionId": "dec-b54ee6351fb52eb6",
+     "gapId": "gap-Y-493-467-518",
+     "widthM": 1.761387,
+     "signature": "LEAF_FACE",
+     "drawnVia": "SIGNATURE",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    }
+   ],
+   "firstChangedDecision": {
+    "stage": "BOUNDARY_GAPS",
+    "object": "gap:frame-asset-rzut-73ee27c4b6-7102a805c6/dec-53a114e4b0b71c66/gap-X-776-430-480",
+    "before": "WEAK:BRIDGED_WEAK",
+    "after": "STRONG:BRIDGED_STRONG"
+   },
+   "decoy": {
+    "outcome": {
+     "outcome": "FAILED",
+     "modelHash": null,
+     "code": "RECONSTRUCTION_FAILED/BOUNDARY_RESOLUTION_INCONCLUSIVE"
+    },
+    "sharedRecords": 54,
+    "differingRecords": 0,
+    "differing": []
+   }
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "sealed": {
+    "outcome": "COMPLETED",
+    "modelHash": "31ba5eea2aa67b69579ebd912a35c596010bdb39a3dd70cf2a64e3db16f9463f",
+    "code": null
+   },
+   "off": {
+    "outcome": "COMPLETED",
+    "modelHash": "31ba5eea2aa67b69579ebd912a35c596010bdb39a3dd70cf2a64e3db16f9463f",
+    "code": null,
+    "footprintM2": 100.88,
+    "storeys": 1,
+    "gapRecords": 35,
+    "eligible": 7
+   },
+   "offReproducesSealed": true,
+   "on": {
+    "outcome": "COMPLETED",
+    "modelHash": "e2167366366279e3b0512313151328803b1dfe12120c34d3d470ec89de3243b1",
+    "code": null,
+    "footprintM2": 99.99,
+    "storeys": 1,
+    "gapRecords": 35,
+    "upgraded": 7
+   },
+   "modelChanged": true,
+   "upgradedGaps": [
+    {
+     "frameId": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+     "storey": "GROUND",
+     "decompositionId": "dec-0a7614428531a993",
+     "gapId": "gap-X-260-236-316",
+     "widthM": 1.77328,
+     "signature": "LEAF_FACE",
+     "drawnVia": "SIGNATURE",
+     "outlineOff": "BRIDGED_WEAK",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+     "storey": "GROUND",
+     "decompositionId": "dec-0a7614428531a993",
+     "gapId": "gap-X-780-299-379",
+     "widthM": 1.77328,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "BRIDGED_WEAK",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+     "storey": "GROUND",
+     "decompositionId": "dec-0a7614428531a993",
+     "gapId": "gap-X-792-299-379",
+     "widthM": 1.77328,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+     "storey": "GROUND",
+     "decompositionId": "dec-0a7614428531a993",
+     "gapId": "gap-Y-95-619-646",
+     "widthM": 0.598914,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+     "storey": "GROUND",
+     "decompositionId": "dec-0a7614428531a993",
+     "gapId": "gap-Y-95-725-751",
+     "widthM": 0.576732,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+     "storey": "GROUND",
+     "decompositionId": "dec-0a7614428531a993",
+     "gapId": "gap-Y-104-619-646",
+     "widthM": 0.598914,
+     "signature": "LEAF_FACE",
+     "drawnVia": "SIGNATURE",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+     "storey": "GROUND",
+     "decompositionId": "dec-0a7614428531a993",
+     "gapId": "gap-Y-104-725-751",
+     "widthM": 0.576732,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    }
+   ],
+   "firstChangedDecision": {
+    "stage": "BOUNDARY_GAPS",
+    "object": "gap:frame-asset-rzut-0dfaf7d6ba-6fe6f9c445/dec-0a7614428531a993/gap-X-260-236-316",
+    "before": "WEAK:BRIDGED_WEAK",
+    "after": "STRONG:BRIDGED_STRONG"
+   },
+   "decoy": {
+    "outcome": {
+     "outcome": "FAILED",
+     "modelHash": null,
+     "code": "RECONSTRUCTION_FAILED/BOUNDARY_RESOLUTION_INCONCLUSIVE"
+    },
+    "sharedRecords": 35,
+    "differingRecords": 0,
+    "differing": []
+   }
+  },
+  {
+   "row": "dom-w-modrzykach",
+   "sealed": {
+    "outcome": "COMPLETED",
+    "modelHash": "b125b9d24f1fb1fcb0004d45f2034fb949247f917a20893ea8b857d837946615",
+    "code": null
+   },
+   "off": {
+    "outcome": "COMPLETED",
+    "modelHash": "b125b9d24f1fb1fcb0004d45f2034fb949247f917a20893ea8b857d837946615",
+    "code": null,
+    "footprintM2": 185.68,
+    "storeys": 1,
+    "gapRecords": 22,
+    "eligible": 0
+   },
+   "offReproducesSealed": true,
+   "on": {
+    "outcome": "COMPLETED",
+    "modelHash": "b125b9d24f1fb1fcb0004d45f2034fb949247f917a20893ea8b857d837946615",
+    "code": null,
+    "footprintM2": 185.68,
+    "storeys": 1,
+    "gapRecords": 22,
+    "upgraded": 0
+   },
+   "modelChanged": false,
+   "upgradedGaps": [],
+   "firstChangedDecision": null,
+   "decoy": {
+    "outcome": {
+     "outcome": "COMPLETED",
+     "modelHash": "b125b9d24f1fb1fcb0004d45f2034fb949247f917a20893ea8b857d837946615",
+     "code": null
+    },
+    "sharedRecords": 22,
+    "differingRecords": 0,
+    "differing": []
+   }
+  },
+  {
+   "row": "dom-w-azaliach",
+   "sealed": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE"
+   },
+   "off": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE",
+    "footprintM2": null,
+    "storeys": null,
+    "gapRecords": 24,
+    "eligible": 4
+   },
+   "offReproducesSealed": true,
+   "on": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE",
+    "footprintM2": null,
+    "storeys": null,
+    "gapRecords": 24,
+    "upgraded": 4
+   },
+   "modelChanged": false,
+   "upgradedGaps": [
+    {
+     "frameId": "frame-asset-rzut-86bef468f3-19006df9bc",
+     "storey": "GROUND",
+     "decompositionId": "dec-d74ddd09be4dbe4c",
+     "gapId": "gap-X-77-233-275",
+     "widthM": 0.78288,
+     "signature": "LEAF_FACE",
+     "drawnVia": "SIGNATURE",
+     "outlineOff": "NOT_REACHED",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-86bef468f3-19006df9bc",
+     "storey": "GROUND",
+     "decompositionId": "dec-d74ddd09be4dbe4c",
+     "gapId": "gap-X-77-319-361",
+     "widthM": 0.78288,
+     "signature": "LEAF_FACE",
+     "drawnVia": "SIGNATURE",
+     "outlineOff": "NOT_REACHED",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-86bef468f3-19006df9bc",
+     "storey": "GROUND",
+     "decompositionId": "dec-d74ddd09be4dbe4c",
+     "gapId": "gap-X-406-416-496",
+     "widthM": 1.4912,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-86bef468f3-19006df9bc",
+     "storey": "GROUND",
+     "decompositionId": "dec-d74ddd09be4dbe4c",
+     "gapId": "gap-Y-160-289-385",
+     "widthM": 1.78704,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "NOT_REACHED",
+     "outlineOn": "BRIDGED_STRONG"
+    }
+   ],
+   "firstChangedDecision": {
+    "stage": "BOUNDARY_GAPS",
+    "object": "gap:frame-asset-rzut-86bef468f3-19006df9bc/dec-d74ddd09be4dbe4c/gap-X-77-233-275",
+    "before": "WEAK:NOT_REACHED",
+    "after": "STRONG:BRIDGED_STRONG"
+   },
+   "decoy": {
+    "outcome": {
+     "outcome": "FAILED",
+     "modelHash": null,
+     "code": "RECONSTRUCTION_FAILED/PLAN_LAYOUT_REJECTED"
+    },
+    "sharedRecords": 24,
+    "differingRecords": 0,
+    "differing": []
+   }
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "sealed": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/BOUNDARY_RESOLUTION_INCONCLUSIVE"
+   },
+   "off": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/BOUNDARY_RESOLUTION_INCONCLUSIVE",
+    "footprintM2": null,
+    "storeys": null,
+    "gapRecords": 65,
+    "eligible": 1
+   },
+   "offReproducesSealed": true,
+   "on": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/BOUNDARY_RESOLUTION_INCONCLUSIVE",
+    "footprintM2": null,
+    "storeys": null,
+    "gapRecords": 65,
+    "upgraded": 1
+   },
+   "modelChanged": false,
+   "upgradedGaps": [
+    {
+     "frameId": "frame-asset-rzut-1a56066c62-10b0ec4131",
+     "storey": "GROUND",
+     "decompositionId": "dec-6aeda76b7ecbc86c",
+     "gapId": "gap-Y-461-409-462",
+     "widthM": 1.489989,
+     "signature": "LEAF_FACE",
+     "drawnVia": "SIGNATURE",
+     "outlineOff": "NOT_REACHED",
+     "outlineOn": "BRIDGED_STRONG"
+    }
+   ],
+   "firstChangedDecision": {
+    "stage": "BOUNDARY_GAPS",
+    "object": "gap:frame-asset-rzut-1a56066c62-10b0ec4131/dec-6aeda76b7ecbc86c/gap-Y-461-409-462",
+    "before": "WEAK:NOT_REACHED",
+    "after": "STRONG:BRIDGED_STRONG"
+   },
+   "decoy": {
+    "outcome": {
+     "outcome": "FAILED",
+     "modelHash": null,
+     "code": "RECONSTRUCTION_FAILED/BOUNDARY_RESOLUTION_INCONCLUSIVE"
+    },
+    "sharedRecords": 65,
+    "differingRecords": 0,
+    "differing": []
+   }
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "sealed": {
+    "outcome": "COMPLETED",
+    "modelHash": "9fa7cb890aa6eae191119f58b5a47737b7a2274f33f8641e972eaf79b3972890",
+    "code": null
+   },
+   "off": {
+    "outcome": "COMPLETED",
+    "modelHash": "9fa7cb890aa6eae191119f58b5a47737b7a2274f33f8641e972eaf79b3972890",
+    "code": null,
+    "footprintM2": 117.3,
+    "storeys": 1,
+    "gapRecords": 17,
+    "eligible": 0
+   },
+   "offReproducesSealed": true,
+   "on": {
+    "outcome": "COMPLETED",
+    "modelHash": "9fa7cb890aa6eae191119f58b5a47737b7a2274f33f8641e972eaf79b3972890",
+    "code": null,
+    "footprintM2": 117.3,
+    "storeys": 1,
+    "gapRecords": 17,
+    "upgraded": 0
+   },
+   "modelChanged": false,
+   "upgradedGaps": [],
+   "firstChangedDecision": null,
+   "decoy": {
+    "outcome": {
+     "outcome": "COMPLETED",
+     "modelHash": "a42a00a617ff879a187947bb9ef854ea6d5261b6c92eacbea6b83705eb44a359",
+     "code": null
+    },
+    "sharedRecords": 0,
+    "differingRecords": 0,
+    "differing": []
+   }
+  },
+  {
+   "row": "aster-viii",
+   "sealed": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE"
+   },
+   "off": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "footprintM2": null,
+    "storeys": null,
+    "gapRecords": 0,
+    "eligible": 0
+   },
+   "offReproducesSealed": true,
+   "on": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "footprintM2": null,
+    "storeys": null,
+    "gapRecords": 0,
+    "upgraded": 0
+   },
+   "modelChanged": false,
+   "upgradedGaps": [],
+   "firstChangedDecision": null,
+   "decoy": {
+    "outcome": {
+     "outcome": "FAILED",
+     "modelHash": null,
+     "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE"
+    },
+    "sharedRecords": 0,
+    "differingRecords": 0,
+    "differing": []
+   }
+  },
+  {
+   "row": "galaktyka",
+   "sealed": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE"
+   },
+   "off": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "footprintM2": null,
+    "storeys": null,
+    "gapRecords": 0,
+    "eligible": 0
+   },
+   "offReproducesSealed": true,
+   "on": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "footprintM2": null,
+    "storeys": null,
+    "gapRecords": 0,
+    "upgraded": 0
+   },
+   "modelChanged": false,
+   "upgradedGaps": [],
+   "firstChangedDecision": null,
+   "decoy": {
+    "outcome": {
+     "outcome": "FAILED",
+     "modelHash": null,
+     "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE"
+    },
+    "sharedRecords": 0,
+    "differingRecords": 0,
+    "differing": []
+   }
+  },
+  {
+   "row": "eoze-legacy-area",
+   "sealed": {
+    "outcome": "COMPLETED",
+    "modelHash": "a27f3a5e808ee09feae908ba2295f9762087993401a8e111ea9291b16719fc51",
+    "code": null
+   },
+   "off": {
+    "outcome": "COMPLETED",
+    "modelHash": "a27f3a5e808ee09feae908ba2295f9762087993401a8e111ea9291b16719fc51",
+    "code": null,
+    "footprintM2": 116.74,
+    "storeys": 1,
+    "gapRecords": 15,
+    "eligible": 3
+   },
+   "offReproducesSealed": true,
+   "on": {
+    "outcome": "COMPLETED",
+    "modelHash": "a27f3a5e808ee09feae908ba2295f9762087993401a8e111ea9291b16719fc51",
+    "code": null,
+    "footprintM2": 116.74,
+    "storeys": 1,
+    "gapRecords": 15,
+    "upgraded": 3
+   },
+   "modelChanged": false,
+   "upgradedGaps": [
+    {
+     "frameId": "frame-asset-rzut-2abfc5825d-e842a14c7f",
+     "storey": "GROUND",
+     "decompositionId": "dec-e7578a6c025377d8",
+     "gapId": "gap-Y-569-141-186",
+     "widthM": 1.00062,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "BRIDGED_WEAK",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-2abfc5825d-e842a14c7f",
+     "storey": "GROUND",
+     "decompositionId": "dec-e7578a6c025377d8",
+     "gapId": "gap-Y-569-370-414",
+     "widthM": 0.978384,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "NOT_REACHED",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-2abfc5825d-e842a14c7f",
+     "storey": "GROUND",
+     "decompositionId": "dec-e7578a6c025377d8",
+     "gapId": "gap-Y-579-141-186",
+     "widthM": 1.00062,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    }
+   ],
+   "firstChangedDecision": {
+    "stage": "BOUNDARY_GAPS",
+    "object": "gap:frame-asset-rzut-2abfc5825d-e842a14c7f/dec-e7578a6c025377d8/gap-Y-569-141-186",
+    "before": "WEAK:BRIDGED_WEAK",
+    "after": "STRONG:BRIDGED_STRONG"
+   },
+   "decoy": {
+    "outcome": {
+     "outcome": "FAILED",
+     "modelHash": null,
+     "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE"
+    },
+    "sharedRecords": 0,
+    "differingRecords": 0,
+    "differing": []
+   }
+  },
+  {
+   "row": "dom-pod-milorzebem",
+   "sealed": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE"
+   },
+   "off": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "footprintM2": null,
+    "storeys": null,
+    "gapRecords": 4,
+    "eligible": 0
+   },
+   "offReproducesSealed": true,
+   "on": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "footprintM2": null,
+    "storeys": null,
+    "gapRecords": 4,
+    "upgraded": 0
+   },
+   "modelChanged": false,
+   "upgradedGaps": [],
+   "firstChangedDecision": null,
+   "decoy": {
+    "outcome": {
+     "outcome": "FAILED",
+     "modelHash": null,
+     "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE"
+    },
+    "sharedRecords": 4,
+    "differingRecords": 0,
+    "differing": []
+   }
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "sealed": {
+    "outcome": "COMPLETED",
+    "modelHash": "27642deb363a860dfb9dca75d2dd143499242704666d07c937f3ef41db7d4be0",
+    "code": null
+   },
+   "off": {
+    "outcome": "COMPLETED",
+    "modelHash": "27642deb363a860dfb9dca75d2dd143499242704666d07c937f3ef41db7d4be0",
+    "code": null,
+    "footprintM2": 77.56,
+    "storeys": 1,
+    "gapRecords": 11,
+    "eligible": 2
+   },
+   "offReproducesSealed": true,
+   "on": {
+    "outcome": "COMPLETED",
+    "modelHash": "27642deb363a860dfb9dca75d2dd143499242704666d07c937f3ef41db7d4be0",
+    "code": null,
+    "footprintM2": 77.56,
+    "storeys": 1,
+    "gapRecords": 11,
+    "upgraded": 2
+   },
+   "modelChanged": false,
+   "upgradedGaps": [
+    {
+     "frameId": "frame-asset-rzut-d5842da623-4c943a2b00",
+     "storey": "GROUND",
+     "decompositionId": "dec-293d03e6830a3d03",
+     "gapId": "gap-X-158-329-406",
+     "widthM": 1.776467,
+     "signature": "DASHED",
+     "drawnVia": "WITHOUT_RUNS_PAST",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-d5842da623-4c943a2b00",
+     "storey": "GROUND",
+     "decompositionId": "dec-293d03e6830a3d03",
+     "gapId": "gap-X-166-329-406",
+     "widthM": 1.776467,
+     "signature": "DASHED",
+     "drawnVia": "WITHOUT_RUNS_PAST",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    }
+   ],
+   "firstChangedDecision": {
+    "stage": "BOUNDARY_GAPS",
+    "object": "gap:frame-asset-rzut-d5842da623-4c943a2b00/dec-293d03e6830a3d03/gap-X-158-329-406",
+    "before": "WEAK:POCKET_MOUTH",
+    "after": "STRONG:BRIDGED_STRONG"
+   },
+   "decoy": {
+    "outcome": {
+     "outcome": "FAILED",
+     "modelHash": null,
+     "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE"
+    },
+    "sharedRecords": 11,
+    "differingRecords": 0,
+    "differing": []
+   }
+  },
+  {
+   "row": "kosacce-area-alone",
+   "sealed": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE"
+   },
+   "off": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE",
+    "footprintM2": null,
+    "storeys": null,
+    "gapRecords": 27,
+    "eligible": 5
+   },
+   "offReproducesSealed": true,
+   "on": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE",
+    "footprintM2": null,
+    "storeys": null,
+    "gapRecords": 27,
+    "upgraded": 5
+   },
+   "modelChanged": false,
+   "upgradedGaps": [
+    {
+     "frameId": "frame-asset-rzut-94f54ada01-bdf7aa09e8",
+     "storey": "GROUND",
+     "decompositionId": "dec-c9d4a1f5318d005a",
+     "gapId": "gap-X-46-378-468",
+     "widthM": 2.16603,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-94f54ada01-bdf7aa09e8",
+     "storey": "GROUND",
+     "decompositionId": "dec-c9d4a1f5318d005a",
+     "gapId": "gap-X-46-524-561",
+     "widthM": 0.890479,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-94f54ada01-bdf7aa09e8",
+     "storey": "GROUND",
+     "decompositionId": "dec-c9d4a1f5318d005a",
+     "gapId": "gap-Y-703-120-210",
+     "widthM": 2.16513,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "NOT_REACHED",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-94f54ada01-bdf7aa09e8",
+     "storey": "GROUND",
+     "decompositionId": "dec-c9d4a1f5318d005a",
+     "gapId": "gap-Y-703-273-363",
+     "widthM": 2.16513,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "NOT_REACHED",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-94f54ada01-bdf7aa09e8",
+     "storey": "GROUND",
+     "decompositionId": "dec-c9d4a1f5318d005a",
+     "gapId": "gap-Y-703-585-692",
+     "widthM": 2.574099,
+     "signature": "DASHED",
+     "drawnVia": "WITHOUT_RUNS_PAST",
+     "outlineOff": "NOT_REACHED",
+     "outlineOn": "BRIDGED_STRONG"
+    }
+   ],
+   "firstChangedDecision": {
+    "stage": "BOUNDARY_GAPS",
+    "object": "gap:frame-asset-rzut-94f54ada01-bdf7aa09e8/dec-c9d4a1f5318d005a/gap-X-46-378-468",
+    "before": "WEAK:POCKET_MOUTH",
+    "after": "STRONG:BRIDGED_STRONG"
+   },
+   "decoy": {
+    "outcome": {
+     "outcome": "FAILED",
+     "modelHash": null,
+     "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE"
+    },
+    "sharedRecords": 27,
+    "differingRecords": 0,
+    "differing": []
+   }
+  },
+  {
+   "row": "dom-w-gozdzikowcach",
+   "sealed": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE"
+   },
+   "off": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE",
+    "footprintM2": null,
+    "storeys": null,
+    "gapRecords": 28,
+    "eligible": 3
+   },
+   "offReproducesSealed": true,
+   "on": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE",
+    "footprintM2": null,
+    "storeys": null,
+    "gapRecords": 28,
+    "upgraded": 3
+   },
+   "modelChanged": false,
+   "upgradedGaps": [
+    {
+     "frameId": "frame-asset-rzut-01d4b6474c-64bd1e0f2f",
+     "storey": "GROUND",
+     "decompositionId": "dec-842fc600add31e2a",
+     "gapId": "gap-X-96-367-445",
+     "widthM": 1.965522,
+     "signature": "LEAF_FACE",
+     "drawnVia": "SIGNATURE",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-01d4b6474c-64bd1e0f2f",
+     "storey": "GROUND",
+     "decompositionId": "dec-842fc600add31e2a",
+     "gapId": "gap-X-115-368-445",
+     "widthM": 1.940323,
+     "signature": "DASHED",
+     "drawnVia": "WITHOUT_RUNS_PAST",
+     "outlineOff": "BRIDGED_WEAK",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-01d4b6474c-64bd1e0f2f",
+     "storey": "GROUND",
+     "decompositionId": "dec-842fc600add31e2a",
+     "gapId": "gap-X-628-351-463",
+     "widthM": 2.822288,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "NOT_REACHED",
+     "outlineOn": "BRIDGED_STRONG"
+    }
+   ],
+   "firstChangedDecision": {
+    "stage": "BOUNDARY_GAPS",
+    "object": "gap:frame-asset-rzut-01d4b6474c-64bd1e0f2f/dec-842fc600add31e2a/gap-X-96-367-445",
+    "before": "WEAK:POCKET_MOUTH",
+    "after": "STRONG:BRIDGED_STRONG"
+   },
+   "decoy": {
+    "outcome": {
+     "outcome": "FAILED",
+     "modelHash": null,
+     "code": "RECONSTRUCTION_FAILED/PLAN_LAYOUT_REJECTED"
+    },
+    "sharedRecords": 28,
+    "differingRecords": 0,
+    "differing": []
+   }
+  },
+  {
+   "row": "dom-w-cyklamenach",
+   "sealed": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE"
+   },
+   "off": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE",
+    "footprintM2": null,
+    "storeys": null,
+    "gapRecords": 27,
+    "eligible": 3
+   },
+   "offReproducesSealed": true,
+   "on": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE",
+    "footprintM2": null,
+    "storeys": null,
+    "gapRecords": 27,
+    "upgraded": 3
+   },
+   "modelChanged": false,
+   "upgradedGaps": [
+    {
+     "frameId": "frame-asset-rzut-fa38f527ea-8e7eb2ad66",
+     "storey": "GROUND",
+     "decompositionId": "dec-ab38220413a10aab",
+     "gapId": "gap-Y-196-166-254",
+     "widthM": 1.783936,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-fa38f527ea-8e7eb2ad66",
+     "storey": "GROUND",
+     "decompositionId": "dec-ab38220413a10aab",
+     "gapId": "gap-Y-221-469-520",
+     "widthM": 1.033872,
+     "signature": "LEAF_FACE",
+     "drawnVia": "SIGNATURE",
+     "outlineOff": "BRIDGED_WEAK",
+     "outlineOn": "BRIDGED_STRONG"
+    },
+    {
+     "frameId": "frame-asset-rzut-fa38f527ea-8e7eb2ad66",
+     "storey": "GROUND",
+     "decompositionId": "dec-ab38220413a10aab",
+     "gapId": "gap-Y-694-170-238",
+     "widthM": 1.378496,
+     "signature": "DASHED",
+     "drawnVia": "BEFORE_PATTERN",
+     "outlineOff": "POCKET_MOUTH",
+     "outlineOn": "BRIDGED_STRONG"
+    }
+   ],
+   "firstChangedDecision": {
+    "stage": "BOUNDARY_GAPS",
+    "object": "gap:frame-asset-rzut-fa38f527ea-8e7eb2ad66/dec-ab38220413a10aab/gap-Y-196-166-254",
+    "before": "WEAK:POCKET_MOUTH",
+    "after": "STRONG:BRIDGED_STRONG"
+   },
+   "decoy": {
+    "outcome": {
+     "outcome": "FAILED",
+     "modelHash": null,
+     "code": "RECONSTRUCTION_FAILED/PLAN_LAYOUT_REJECTED"
+    },
+    "sharedRecords": 27,
+    "differingRecords": 0,
+    "differing": []
+   }
+  }
+ ]
+}
