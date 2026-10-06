@@ -39,7 +39,9 @@ import type { Band, Mask } from '@buildapp/source-cv'
 import type { CoordinateRegistration, DimensionChain, DimensionObservation } from '@buildapp/source-metrics'
 import { exteriorSpan, framingChains, outerTotalSpans } from './plan-extent.js'
 import type { ChainRoleRecord, WallWitness } from './plan-extent.js'
-import { BOUNDARY_EVIDENCE_VERSION, assignCallouts, cornerLegs, readWallLine, solidLayer, withCallout } from './boundary-evidence.js'
+import { BOUNDARY_EVIDENCE_VERSION, assignCallouts, because, cornerLegs, readWallLine, solidLayer, withCallout } from './boundary-evidence.js'
+import { decompositionIdOf, gapEvidenceRecords } from './gap-evidence.js'
+import type { GapEvidenceRecord } from './gap-evidence.js'
 import type { BoundaryGap, GapCallout, GapClass, SolidLayer, WallLine } from './boundary-evidence.js'
 import { outlineSupport, solveOutline } from './boundary-outline.js'
 import type { OutlineEdge, OutlineGrid, OutlineResult, OutlineSupport } from './boundary-outline.js'
@@ -327,9 +329,14 @@ export type PlanDecompositionOptions = {
    * the only way a part beyond the box joined through a door or a drawn line may be judged an attached room.
    */
   extentSides?: readonly ExtentSideStatement[]
+  /**
+   * 005K, experimental: the drawn-gap rule (`DrawnGapCheck` in `boundary-evidence.ts`). OFF unless asked for; the
+   * product never asks. Every reading records the rule's conditions on each WEAK gap either way.
+   */
+  drawnGapRule?: 'OFF' | 'ON'
 }
 
-type CoreOptions = Required<Omit<PlanDecompositionOptions, 'sheetWallPx' | 'exteriorTicks' | 'openingAware' | 'checkpoint' | 'extentSides'>>
+type CoreOptions = Required<Omit<PlanDecompositionOptions, 'sheetWallPx' | 'exteriorTicks' | 'openingAware' | 'checkpoint' | 'extentSides' | 'drawnGapRule'>>
 
 const DEFAULTS: CoreOptions = {
   snapPx: 5,
@@ -2650,6 +2657,9 @@ export type BoundaryExtension = {
 /** What the opening-aware boundary found on a plan (`decomposition.boundary`). */
 export type BoundaryRecord = {
   version: string
+  /** 005K: this reading's identity (`decompositionIdOf`) and scale: a gap id is unique only within one reading. */
+  decompositionId: string
+  mpp: { x: number; y: number }
   wallPx: number
   /** Lines the shadow grid added at exterior-chain ticks with no grid line near them. */
   shadowLines: { x: number[]; y: number[] }
@@ -2677,6 +2687,10 @@ export type BoundaryRecord = {
   completionsUnjudged: number
   box: PixelRect | null
   why: string
+  /** 005K: one record per gap left WEAK (or upgraded by the drawn-gap rule), in canonical order; and the rule's mode. */
+  gapEvidence: GapEvidenceRecord[]
+  gapEvidenceOmitted: number
+  drawnGapRule: 'OFF' | 'ON'
 }
 
 /** The pocket rule's floor (the pipeline's `max(6 m², 2.5 w²)`): a recess no larger is a pocket of the body around it. */
@@ -2793,7 +2807,8 @@ export function boundaryExtension(
   const linesY = sy.lines
   const nx = linesX.length - 1
   const ny = linesY.length - 1
-  const lineOptions = (mppAlong: number) => ({ wallPx, mppAlong, maxOpeningM: opt.maxOpeningM, maxWideOpeningM: opt.maxWideOpeningM })
+  const drawnGapRule = options.drawnGapRule ?? 'OFF'
+  const lineOptions = (mppAlong: number) => ({ wallPx, mppAlong, maxOpeningM: opt.maxOpeningM, maxWideOpeningM: opt.maxWideOpeningM, drawnGapRule })
   // Progress, write-only: one tick per line read and per weak gap judged.
   const linesTotal = linesX.length + linesY.length
   let linesRead = 0
@@ -2995,10 +3010,12 @@ export function boundaryExtension(
   const garages = options.shutPocketMouths ? bodies.filter((b) => b.relation === 'OPEN_MOUTH_GARAGE' && b.mouth) : []
   let outline = exclusion
   let chosen = reading
+  let outlineWalls = { x: wallsX, y: wallsY }
   if (garages.length > 0) {
     const mouths = new Set(garages.map((b) => b.mouth?.gapId))
-    const shut = (line: WallLine): WallLine => ({ ...line, gaps: line.gaps.map((g) => (mouths.has(g.id) ? { ...g, cls: 'OPENING_SUPPORTED' as const, boundary: 'STRONG' as const, occupancy: 'OPENING' as const, why: `${g.why}; shut as a garage mouth in the reading that shuts pocket mouths` } : g)) })
-    const shutGrid: OutlineGrid = { ...grid, wallsX: wallsX.map(shut), wallsY: wallsY.map(shut) }
+    const shut = (line: WallLine): WallLine => ({ ...line, gaps: line.gaps.map((g) => (mouths.has(g.id) ? { ...g, cls: 'OPENING_SUPPORTED' as const, boundary: 'STRONG' as const, occupancy: 'OPENING' as const, why: `${g.why}; shut as a garage mouth in the reading that shuts pocket mouths`, ...because(g, 'SHUT_GARAGE_MOUTH') } : g)) })
+    outlineWalls = { x: wallsX.map(shut), y: wallsY.map(shut) }
+    const shutGrid: OutlineGrid = { ...grid, wallsX: outlineWalls.x, wallsY: outlineWalls.y }
     const forced = new Uint8Array(nx * ny)
     for (let iy = 0; iy < ny; iy += 1) for (let ix = 0; ix < nx; ix += 1) if (garages.some((b) => centreIn(ix, iy, b.rect))) forced[index(ix, iy)] = 1
     outline = solveOutline(shutGrid, { onJudge })
@@ -3043,8 +3060,13 @@ export function boundaryExtension(
   const strictM2 = round6(areaOf(strictAdopted.final))
   const exclusionM2 = round6(areaOf(reading.final))
   const disagree = policiesDisagree({ adopted: strictAdopted.any, areaM2: strictM2 }, { adopted: reading.any, areaM2: exclusionM2 })
+  // 005K: the reading's open questions, as source-addressable records (observational: nothing below reads them)
+  const decompositionId = decompositionIdOf({ extent, mppX: round6(mppX), mppY: round6(mppY), wallPx: round6(wallPx), linesX: linesX.map((l) => l.px), linesY: linesY.map((l) => l.px), shutPocketMouths: options.shutPocketMouths === true })
+  const evidence = gapEvidenceRecords({ mask, wallsX: outlineWalls.x, wallsY: outlineWalls.y, mppX, mppY, wallPx, decompositionId, outline, drawnGapRule })
   const record: BoundaryRecord = {
     version: BOUNDARY_EVIDENCE_VERSION,
+    decompositionId,
+    mpp: { x: round6(mppX), y: round6(mppY) },
     wallPx: round6(wallPx),
     shadowLines: { x: sx.added, y: sy.added },
     gaps: counts,
@@ -3075,6 +3097,9 @@ export function boundaryExtension(
         : completed.length > 0
           ? `the box stands, and ${completed.length} part${completed.length === 1 ? '' : 's'} the outline encloses ${completed.length === 1 ? 'is' : 'are'} completed (${completed.map((p) => p.kind.toLowerCase().replace('_', ' ')).join(', ')}): the plan is cut on the outline with the box's bodies as they were`
           : 'the outline adds nothing the box leaves open: the box stands',
+    gapEvidence: evidence.records,
+    gapEvidenceOmitted: evidence.omitted,
+    drawnGapRule,
   }
   const debug = { walls: { x: wallsX, y: wallsY }, lines: { x: linesX.map((l) => l.px), y: linesY.map((l) => l.px) }, outline }
   if (!anyAccepted && completed.length === 0) return { record, ...debug }

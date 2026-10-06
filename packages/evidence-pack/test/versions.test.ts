@@ -16,6 +16,11 @@ describe('evidence-pack versions', () => {
 
   it('a 1.0.0 pack is complete without the 1.1.0 topology files; 1.1.0 and every later version need them', () => {
     expect(requiredFiles('1.0.0')).not.toContain('07b-dimension-topology.json')
-    for (const v of ['1.1.0', '1.2.0', '1.10.0', '2.0.0']) expect(requiredFiles(v)).toEqual([...PACK_FILES])
+    for (const v of ['1.1.0', '1.2.0', '1.10.0', '2.0.0']) expect(requiredFiles(v)).toContain('07b-dimension-topology.json')
+  })
+
+  it('005K: a 1.1.0 pack is complete without the gap evidence; 1.2.0 and every later version need it', () => {
+    expect(requiredFiles('1.1.0')).toEqual(PACK_FILES.filter((f) => f !== '12b-gap-evidence.json'))
+    for (const v of ['1.2.0', '1.10.0', '2.0.0']) expect(requiredFiles(v)).toEqual([...PACK_FILES])
   })
 })

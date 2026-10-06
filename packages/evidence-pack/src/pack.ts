@@ -15,11 +15,15 @@ import { TIMELINE_STAGES } from './types.js'
 import type { AssignmentJson, ChainJson, DecisionEvent, LatticeJson, MarkJson, ObservationJson, PlanJson, Rect, RunRecord, SolutionJson, TimelineStage, TopologyJson } from './types.js'
 
 export const EVIDENCE_PACK_SCHEMA = 'buildapp.evidence-pack' as const
-/** 1.1.0 (005I): `07b-dimension-topology`, the DIMENSION_AXIS_GROUPS and LABEL_ASSIGNMENT stages, extent end spans and refutations. */
-export const EVIDENCE_PACK_VERSION = '1.1.0' as const
+/**
+ * 1.1.0 (005I): `07b-dimension-topology`, the DIMENSION_AXIS_GROUPS and LABEL_ASSIGNMENT stages, extent end spans and refutations.
+ * 1.2.0 (005K): `12b-gap-evidence.json` — every gap a reading left WEAK, source-addressable (frame, copy, decomposition,
+ * scale, coordinates, crop hash, strokes, signatures, rules, decisions) — and the BOUNDARY_GAPS stage of the timeline.
+ */
+export const EVIDENCE_PACK_VERSION = '1.2.0' as const
 
 /** 005I: the files a pack of an earlier version was made without — a pack is complete for its own version (`requiredFiles`). */
-export const PACK_FILES_SINCE: Readonly<Record<string, readonly string[]>> = { '1.1.0': ['07b-dimension-topology.svg', '07b-dimension-topology.json'] }
+export const PACK_FILES_SINCE: Readonly<Record<string, readonly string[]>> = { '1.1.0': ['07b-dimension-topology.svg', '07b-dimension-topology.json'], '1.2.0': ['12b-gap-evidence.json'] }
 
 /** Semantic versions compared numerically, component by component: 1.10.0 is after 1.9.0 (post-review D5). */
 export function compareVersions(a: string, b: string): number {
@@ -73,6 +77,7 @@ export const PACK_FILES = [
   '11-envelope-candidates.json',
   '12-opening-observations.svg',
   '12-opening-observations.json',
+  '12b-gap-evidence.json',
   '13-body-candidates.svg',
   '13-body-candidates.json',
   '14-selected-layout.svg',
@@ -641,6 +646,36 @@ export function buildEvidencePack(run: RunRecord): EvidencePack {
     for (const c of topK(callouts).items) if (c.textBox) s.rect(c.textBox.x0, c.textBox.y0, c.textBox.x1, c.textBox.y1, { stroke: COLOURS.AMBIGUOUS, width: 1 }, c.id, { value: c.value })
     files.set('12-opening-observations.svg', s.render())
     files.set('12-opening-observations.json', json({ frameId: selected?.frameId ?? null, wideOpenings: openings, gapClasses: selected?.boundary?.gaps ?? {}, callouts: topK(callouts).items.map((c) => ({ id: c.id, value: c.value, rawText: c.rawText ?? null, box: c.textBox ?? null })) }))
+  }
+
+  // 12b (005K): every gap a reading left WEAK, per analysed copy, addressed by frame, decomposition and gap id — the
+  // bare gap id recurs on other copies and at other scales. Coordinates and the ink-mask crop hash, never pixels.
+  {
+    const scaleHypothesisOf = (frameId: string): string | null => metrics.metricSolutions?.find((m) => m.frameId === frameId)?.selectedHypothesisId ?? null
+    const copies = frames.map((f) => {
+      const b = f.boundary
+      const gaps = (b?.gapEvidence ?? []).map((r) => ({ key: `${f.frameId}/${r.decompositionId}/${r.gapId}`, ...r }))
+      return {
+        frameId: f.frameId,
+        assetId: f.assetId ?? null,
+        variantByteHash: f.variantByteHash ?? null,
+        storey: f.storey ?? null,
+        sizePx: f.sizePx,
+        scale: f.scale,
+        scaleHypothesisId: scaleHypothesisOf(f.frameId),
+        decompositionId: b?.decompositionId ?? null,
+        drawnGapRule: b?.drawnGapRule ?? null,
+        recorded: b?.gapEvidence !== undefined,
+        gaps,
+        omitted: b?.gapEvidenceOmitted ?? 0,
+        wideOpenings: (f.wideOpenings ?? []).map((w) => ({ id: w.id ?? null, kind: w.kind, axis: w.axis, linePx: w.linePx, fromPx: w.fromPx, toPx: w.toPx, widthM: w.widthM, decision: w.decision })),
+      }
+    })
+    const unrecorded = copies.filter((c) => !c.recorded).length
+    files.set('12b-gap-evidence.json', json({ selectedPlanFrameId: selected?.frameId ?? null, ...(unrecorded > 0 ? { note: `${unrecorded} cop${unrecorded === 1 ? 'y has' : 'ies have'} no per-gap records: boundary evidence before 1.2.0, or no boundary read on that copy` } : {}), copies }))
+    for (const c of copies) {
+      for (const g of c.gaps) event('BOUNDARY_GAPS', `gap:${g.key}`, `${g.final.boundary}:${g.outline}`, `${round(g.widthM, 3)} m ${g.signature} (${g.reasons.join(' > ')})${g.drawnGapRule.check ? `; drawn-gap rule ${g.drawnGapRule.check.eligible ? 'eligible' : 'not eligible'}${g.drawnGapRule.upgraded ? ', upgraded' : ''}` : ''}`)
+    }
   }
 
   // 13: bodies

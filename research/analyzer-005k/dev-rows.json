@@ -1,0 +1,269 @@
+{
+ "_comment": "BUILDPLAN-ANALYZER-005K development rows: the 005I development matrix (work005i-a/matrix.sh, 24 rows) and the two blind-round-8 houses, development evidence since 005J. Paths starting with / are outside the repository (sealed runs and offline byte caches with publisher bytes; never committed). Each row is replayed with the solver alone on its sealed package, observation graph and metric evidence, so OCR and metric are held fixed.",
+ "rows": [
+  {
+   "row": "dom-pod-jarzabem",
+   "sealed": "/home/user/work005i-a/m-on/dom-pod-jarzabem",
+   "cache": "/home/user/work005h/blind7/cache",
+   "inputs": {
+    "package": "/home/user/work005i-a/m-on/dom-pod-jarzabem/source-package.json",
+    "graph": "/home/user/work005i-a/m-on/dom-pod-jarzabem/observation-graph.json",
+    "metrics": "/home/user/work005i-a/m-on/dom-pod-jarzabem/metric-evidence.json"
+   }
+  },
+  {
+   "row": "dom-w-arkadiach",
+   "sealed": "/home/user/work005i-a/m-on/dom-w-arkadiach",
+   "cache": "/home/user/work005h/blind7/cache",
+   "inputs": {
+    "package": "/home/user/work005i-a/m-on/dom-w-arkadiach/source-package.json",
+    "graph": "/home/user/work005i-a/m-on/dom-w-arkadiach/observation-graph.json",
+    "metrics": "/home/user/work005i-a/m-on/dom-w-arkadiach/metric-evidence.json"
+   }
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "sealed": "/home/user/work005i-a/m-on/dom-w-modrzewnicy",
+   "cache": "/home/user/work005e/blind5/cache",
+   "inputs": {
+    "package": "/home/user/work005i-a/m-on/dom-w-modrzewnicy/source-package.json",
+    "graph": "/home/user/work005i-a/m-on/dom-w-modrzewnicy/observation-graph.json",
+    "metrics": "/home/user/work005i-a/m-on/dom-w-modrzewnicy/metric-evidence.json"
+   }
+  },
+  {
+   "row": "dom-w-morelach",
+   "sealed": "/home/user/work005i-a/m-on/dom-w-morelach",
+   "cache": "/home/user/work005e/blind5/cache",
+   "inputs": {
+    "package": "/home/user/work005i-a/m-on/dom-w-morelach/source-package.json",
+    "graph": "/home/user/work005i-a/m-on/dom-w-morelach/observation-graph.json",
+    "metrics": "/home/user/work005i-a/m-on/dom-w-morelach/metric-evidence.json"
+   }
+  },
+  {
+   "row": "marcowki",
+   "sealed": "/home/user/work005i-a/m-on/marcowki",
+   "cache": "/home/user/work005d/cache",
+   "inputs": {
+    "package": "/home/user/work005i-a/m-on/marcowki/source-package.json",
+    "graph": "/home/user/work005i-a/m-on/marcowki/observation-graph.json",
+    "metrics": "/home/user/work005i-a/m-on/marcowki/metric-evidence.json"
+   }
+  },
+  {
+   "row": "rarytasy-g2e",
+   "sealed": "/home/user/work005i-a/m-on/rarytasy-g2e",
+   "cache": "/home/user/work005d/cache",
+   "inputs": {
+    "package": "/home/user/work005i-a/m-on/rarytasy-g2e/source-package.json",
+    "graph": "/home/user/work005i-a/m-on/rarytasy-g2e/observation-graph.json",
+    "metrics": "/home/user/work005i-a/m-on/rarytasy-g2e/metric-evidence.json"
+   }
+  },
+  {
+   "row": "kosacce-clean",
+   "sealed": "/home/user/work005i-a/m-on/kosacce-clean",
+   "cache": "/home/user/work005d/cache",
+   "inputs": {
+    "package": "/home/user/work005i-a/m-on/kosacce-clean/source-package.json",
+    "graph": "/home/user/work005i-a/m-on/kosacce-clean/observation-graph.json",
+    "metrics": "/home/user/work005i-a/m-on/kosacce-clean/metric-evidence.json"
+   }
+  },
+  {
+   "row": "kosacce-tracked",
+   "sealed": "/home/user/work005i-a/m-on/kosacce-tracked",
+   "cache": "/home/user/work005d/cache",
+   "inputs": {
+    "package": "/home/user/work005i-a/m-on/kosacce-tracked/source-package.json",
+    "graph": "/home/user/work005i-a/m-on/kosacce-tracked/observation-graph.json",
+    "metrics": "/home/user/work005i-a/m-on/kosacce-tracked/metric-evidence.json"
+   }
+  },
+  {
+   "row": "rarytasy-eoze",
+   "sealed": "/home/user/work005i-a/m-on/rarytasy-eoze",
+   "cache": "/home/user/work005d/cache",
+   "inputs": {
+    "package": "/home/user/work005i-a/m-on/rarytasy-eoze/source-package.json",
+    "graph": "/home/user/work005i-a/m-on/rarytasy-eoze/observation-graph.json",
+    "metrics": "/home/user/work005i-a/m-on/rarytasy-eoze/metric-evidence.json"
+   }
+  },
+  {
+   "row": "eoze-legacy-every",
+   "sealed": "/home/user/work005i-a/m-on/eoze-legacy-every",
+   "cache": "/home/user/work005d/cache",
+   "inputs": {
+    "package": "stage-reports/artifacts/analyzer-005a/before/rarytasy-eoze/source-package.json",
+    "graph": "stage-reports/artifacts/analyzer-005a/before/rarytasy-eoze/observation-graph.json",
+    "metrics": "stage-reports/artifacts/analyzer-005a/before/rarytasy-eoze/metric-evidence.json"
+   }
+  },
+  {
+   "row": "alt-marcowki",
+   "sealed": "/home/user/work005i-a/m-on/alt-marcowki",
+   "cache": "/home/user/work005d/cache",
+   "inputs": {
+    "package": "/home/user/work005i-a/m-on/alt-marcowki/source-package.json",
+    "graph": "/home/user/work005i-a/m-on/alt-marcowki/observation-graph.json",
+    "metrics": "/home/user/work005i-a/m-on/alt-marcowki/metric-evidence.json"
+   }
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "sealed": "/home/user/work005i-a/m-on/dom-w-jablonkach",
+   "cache": "/home/user/work005d/cache",
+   "inputs": {
+    "package": "/home/user/work005i-a/m-on/dom-w-jablonkach/source-package.json",
+    "graph": "/home/user/work005i-a/m-on/dom-w-jablonkach/observation-graph.json",
+    "metrics": "/home/user/work005i-a/m-on/dom-w-jablonkach/metric-evidence.json"
+   }
+  },
+  {
+   "row": "willa-miranda",
+   "sealed": "/home/user/work005i-a/m-on/willa-miranda",
+   "cache": "/home/user/work005d/cache",
+   "inputs": {
+    "package": "/home/user/work005i-a/m-on/willa-miranda/source-package.json",
+    "graph": "/home/user/work005i-a/m-on/willa-miranda/observation-graph.json",
+    "metrics": "/home/user/work005i-a/m-on/willa-miranda/metric-evidence.json"
+   }
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "sealed": "/home/user/work005i-a/m-on/dom-w-zurawkach",
+   "cache": "/home/user/work005d/cache",
+   "inputs": {
+    "package": "/home/user/work005i-a/m-on/dom-w-zurawkach/source-package.json",
+    "graph": "/home/user/work005i-a/m-on/dom-w-zurawkach/observation-graph.json",
+    "metrics": "/home/user/work005i-a/m-on/dom-w-zurawkach/metric-evidence.json"
+   }
+  },
+  {
+   "row": "dom-w-modrzykach",
+   "sealed": "/home/user/work005i-a/m-on/dom-w-modrzykach",
+   "cache": "/home/user/work005d/cache",
+   "inputs": {
+    "package": "/home/user/work005i-a/m-on/dom-w-modrzykach/source-package.json",
+    "graph": "/home/user/work005i-a/m-on/dom-w-modrzykach/observation-graph.json",
+    "metrics": "/home/user/work005i-a/m-on/dom-w-modrzykach/metric-evidence.json"
+   }
+  },
+  {
+   "row": "dom-w-azaliach",
+   "sealed": "/home/user/work005i-a/m-on/dom-w-azaliach",
+   "cache": "/home/user/work005d/cache",
+   "inputs": {
+    "package": "/home/user/work005i-a/m-on/dom-w-azaliach/source-package.json",
+    "graph": "/home/user/work005i-a/m-on/dom-w-azaliach/observation-graph.json",
+    "metrics": "/home/user/work005i-a/m-on/dom-w-azaliach/metric-evidence.json"
+   }
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "sealed": "/home/user/work005i-a/m-on/dom-w-dabecjach",
+   "cache": "/home/user/work005d/blind-cache",
+   "inputs": {
+    "package": "/home/user/work005i-a/m-on/dom-w-dabecjach/source-package.json",
+    "graph": "/home/user/work005i-a/m-on/dom-w-dabecjach/observation-graph.json",
+    "metrics": "/home/user/work005i-a/m-on/dom-w-dabecjach/metric-evidence.json"
+   }
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "sealed": "/home/user/work005i-a/m-on/dom-w-tunbergiach",
+   "cache": "/home/user/work005d/blind-cache",
+   "inputs": {
+    "package": "/home/user/work005i-a/m-on/dom-w-tunbergiach/source-package.json",
+    "graph": "/home/user/work005i-a/m-on/dom-w-tunbergiach/observation-graph.json",
+    "metrics": "/home/user/work005i-a/m-on/dom-w-tunbergiach/metric-evidence.json"
+   }
+  },
+  {
+   "row": "aster-viii",
+   "sealed": "/home/user/work005i-a/m-on/aster-viii",
+   "cache": "/home/user/work005d/cache",
+   "inputs": {
+    "package": "/home/user/work005i-a/m-on/aster-viii/source-package.json",
+    "graph": "/home/user/work005i-a/m-on/aster-viii/observation-graph.json",
+    "metrics": "/home/user/work005i-a/m-on/aster-viii/metric-evidence.json"
+   }
+  },
+  {
+   "row": "galaktyka",
+   "sealed": "/home/user/work005i-a/m-on/galaktyka",
+   "cache": "/home/user/work005d/cache",
+   "inputs": {
+    "package": "/home/user/work005i-a/m-on/galaktyka/source-package.json",
+    "graph": "/home/user/work005i-a/m-on/galaktyka/observation-graph.json",
+    "metrics": "/home/user/work005i-a/m-on/galaktyka/metric-evidence.json"
+   }
+  },
+  {
+   "row": "eoze-legacy-area",
+   "sealed": "/home/user/work005i-a/m-on/eoze-legacy-area",
+   "cache": "/home/user/work005d/cache",
+   "inputs": {
+    "package": "stage-reports/artifacts/analyzer-005a/before/rarytasy-eoze/source-package.json",
+    "graph": "stage-reports/artifacts/analyzer-005a/before/rarytasy-eoze/observation-graph.json",
+    "metrics": "stage-reports/artifacts/analyzer-005a/before/rarytasy-eoze/metric-evidence.json"
+   },
+   "dropDimensionedGroundFrames": "rarytasy-eoze"
+  },
+  {
+   "row": "dom-pod-milorzebem",
+   "sealed": "/home/user/work005i-a/m-on/dom-pod-milorzebem",
+   "cache": "/home/user/work005f/blind6/cache",
+   "inputs": {
+    "package": "/home/user/work005i-a/m-on/dom-pod-milorzebem/source-package.json",
+    "graph": "/home/user/work005i-a/m-on/dom-pod-milorzebem/observation-graph.json",
+    "metrics": "/home/user/work005i-a/m-on/dom-pod-milorzebem/metric-evidence.json"
+   }
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "sealed": "/home/user/work005i-a/m-on/dom-w-helikoniach",
+   "cache": "/home/user/work005f/blind6/cache",
+   "inputs": {
+    "package": "/home/user/work005i-a/m-on/dom-w-helikoniach/source-package.json",
+    "graph": "/home/user/work005i-a/m-on/dom-w-helikoniach/observation-graph.json",
+    "metrics": "/home/user/work005i-a/m-on/dom-w-helikoniach/metric-evidence.json"
+   }
+  },
+  {
+   "row": "kosacce-area-alone",
+   "sealed": "/home/user/work005i-a/m-on/kosacce-area-alone",
+   "cache": "/home/user/work005d/cache",
+   "inputs": {
+    "package": "stage-reports/artifacts/analyzer-005a/before/kosacce-clean/source-package.json",
+    "graph": "stage-reports/artifacts/analyzer-005a/before/kosacce-clean/observation-graph.json",
+    "metrics": "stage-reports/artifacts/analyzer-005a/before/kosacce-clean/metric-evidence.json"
+   },
+   "dropDimensionedGroundFrames": "kosacce-clean"
+  },
+  {
+   "row": "dom-w-gozdzikowcach",
+   "sealed": "/home/user/work005i-a/blind8/h1-dom-w-gozdzikowcach",
+   "cache": "/home/user/work005i-a/blind8/cache",
+   "inputs": {
+    "package": "/home/user/work005i-a/blind8/h1-dom-w-gozdzikowcach/source-package.json",
+    "graph": "/home/user/work005i-a/blind8/h1-dom-w-gozdzikowcach/observation-graph.json",
+    "metrics": "/home/user/work005i-a/blind8/h1-dom-w-gozdzikowcach/metric-evidence.json"
+   },
+   "note": "blind round 8 (005I), development evidence since 005J"
+  },
+  {
+   "row": "dom-w-cyklamenach",
+   "sealed": "/home/user/work005i-a/blind8/h2-dom-w-cyklamenach",
+   "cache": "/home/user/work005i-a/blind8/cache",
+   "inputs": {
+    "package": "/home/user/work005i-a/blind8/h2-dom-w-cyklamenach/source-package.json",
+    "graph": "/home/user/work005i-a/blind8/h2-dom-w-cyklamenach/observation-graph.json",
+    "metrics": "/home/user/work005i-a/blind8/h2-dom-w-cyklamenach/metric-evidence.json"
+   },
+   "note": "blind round 8 (005I), development evidence since 005J"
+  }
+ ]
+}

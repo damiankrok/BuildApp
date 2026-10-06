@@ -31,6 +31,9 @@
  * runtime verified against their pins, one worker per batch. Without it the
  * lattice reads alone, as every gate before 005H did.
  *
+ * `--drawn-gap-rule ON` (005K, research only) turns on the experimental
+ * drawn-gap rule of the boundary (`DrawnGapCheck`); the product never does.
+ *
  * As a CI gate: `--expect COMPLETED` fails the command unless the run
  * completes; `--same-as <result-summary.json>` also requires the candidate,
  * model and scene hashes of an earlier run (a replay of sealed evidence must
@@ -98,6 +101,9 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
   const packagePath = value(argv, 'package')
   const graphPath = value(argv, 'graph')
   const metricsPath = value(argv, 'metrics')
+  // 005K, research only: `--drawn-gap-rule ON` measures the experimental boundary rule; the product never sets it
+  const drawnGapRule = value(argv, 'drawn-gap-rule') === 'ON' ? ('ON' as const) : ('OFF' as const)
+  if (drawnGapRule === 'ON') log('drawn-gap rule: ON (005K experiment)')
   const rasters = new Map<string, Raster | undefined>()
   const rasterOf = (hash: string): Raster | undefined => rasters.get(hash)
   const loadRasters = async (pkg: SourcePackage): Promise<void> => {
@@ -134,7 +140,7 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
     const entries: AnalysisTrace['entries'] = []
     try {
       const identity = identityOf(pkg, [archonAdapter, genericProjectPageAdapter])
-      const r = reconstructV2({ label: identity.label, slug: identity.slug, modelId: identity.modelId, sourcePackageId: pkg.id, sourcePackageHash: pkg.contentHash, graph, metrics, raster: (f) => rasterOf(f.variantByteHash), frameFilter: dropped.size > 0 ? (f) => !dropped.has(f.id) : undefined, publishedAreas, publishedRooms: pkg.publishedRooms, trace: (e) => events.push(e) })
+      const r = reconstructV2({ label: identity.label, slug: identity.slug, modelId: identity.modelId, sourcePackageId: pkg.id, sourcePackageHash: pkg.contentHash, graph, metrics, raster: (f) => rasterOf(f.variantByteHash), frameFilter: dropped.size > 0 ? (f) => !dropped.has(f.id) : undefined, publishedAreas, publishedRooms: pkg.publishedRooms, trace: (e) => events.push(e), ...(drawnGapRule === 'ON' ? { drawnGapRule } : {}) })
       for (const e of events) entries.push({ stage: PHASE_STAGE[e.phase], substage: e.substage, status: e.status, startedAtMs: 0, durationMs: 0, counts: e.counts, ...(e.reasonCode ? { reasonCode: e.reasonCode } : {}), ...(e.detail ? { detail: e.detail } : {}) })
       write('analysis-trace.json', { schema: 'buildapp.analysis-trace', schemaVersion: '1.0.0', outcome: 'COMPLETED', entries })
       write('result-summary.json', { outcome: 'COMPLETED', modelHash: r.candidate.modelHash, commands: r.candidate.program.length, masses: r.building.masses.length, levels: levelsFrom(metrics, graph.coordinateFrames.find((f) => f.roles.projection === 'ORTHOGRAPHIC_SECTION')?.id) })
@@ -198,6 +204,7 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
         phases = s
       },
       recogniser,
+      ...(drawnGapRule === 'ON' ? { drawnGapRule } : {}),
       // no identity override: the model is named from its package exactly as the
       // phone and the service name it, so their hashes can be compared with these
       progress: process.env.PROGRESS ? (e) => process.stderr.write(`  ${(e.progress * 100).toFixed(0).padStart(3)}% ${e.stage}${e.detail ? ` — ${e.detail}` : ''}\n`) : undefined,

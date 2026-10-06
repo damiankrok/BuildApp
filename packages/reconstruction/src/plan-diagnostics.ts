@@ -60,7 +60,8 @@ export function planDiagnosticsOf(draft: StructuralLayoutDraft, graph: SourceObs
       linesY: d.linesY.map((l) => round6(l.px)),
       cells: d.cells.map((c) => ({ ix: c.ix, iy: c.iy, rect: rect(c.rect), cls: c.classification === 'BUILT' ? ('B' as const) : c.classification === 'RECESS' ? ('R' as const) : ('O' as const), enclosed: c.enclosed })),
       regions: d.regions.filter((r) => r.classification !== 'OUTSIDE').map((r) => ({ id: r.id, cls: r.classification as 'BUILT' | 'RECESS', rect: rect(r.rect) })),
-      wideOpenings: d.wideOpenings.map((w) => ({ kind: w.kind, axis: w.axis, linePx: round6(w.linePx), fromPx: round6(w.fromPx), toPx: round6(w.toPx), widthM: w.widthM, decision: w.decision, score: w.score, why: w.why })),
+      // 005K: a wide opening's geometric identity in its frame (its line and ends), beside its decision
+      wideOpenings: d.wideOpenings.map((w) => ({ id: `wide-${w.axis}-${Math.round(w.linePx)}-${Math.round(w.fromPx)}-${Math.round(w.toPx)}`, kind: w.kind, axis: w.axis, linePx: round6(w.linePx), fromPx: round6(w.fromPx), toPx: round6(w.toPx), widthM: w.widthM, decision: w.decision, score: w.score, why: w.why })),
       bays: d.bays.map((b) => ({ side: b.side, rect: rect(b.rect), mouth: b.mouth.decision })),
       hypotheses: d.hypotheses.map((h) => ({ id: h.id, builtCells: h.builtCells, closedOpenings: h.closedOpenings, score: h.score, chosen: d.chosenHypothesis === h.id, why: h.why })),
       ...(d.boundary ? { boundary: boundaryOf(d.boundary) } : {}),
@@ -88,6 +89,11 @@ function boundaryOf(b: BoundaryRecord): NonNullable<PlanDiagnostics['boundary']>
     ...(b.completionsUnjudged > 0 ? { completionsUnjudged: b.completionsUnjudged } : {}),
     ...(b.box && (b.extentConflicts.length > 0 || b.completions.length > 0) ? { box: rect(b.box) } : {}),
     why: b.why,
+    decompositionId: b.decompositionId,
+    mpp: b.mpp,
+    drawnGapRule: b.drawnGapRule,
+    gapEvidence: b.gapEvidence,
+    ...(b.gapEvidenceOmitted > 0 ? { gapEvidenceOmitted: b.gapEvidenceOmitted } : {}),
   }
 }
 

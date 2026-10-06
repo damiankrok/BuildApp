@@ -69,6 +69,11 @@ export type AnalysisOptions = {
    * before reconstruction begins, and the result says which recogniser read and what it decided.
    */
   recogniser?: LabelRecogniser
+  /**
+   * BUILDPLAN-ANALYZER-005K, experimental: the boundary's drawn-gap rule. Absent or OFF — the default, and all the
+   * product ever runs — the boundary reads exactly as before; the research harness asks for ON to measure the rule.
+   */
+  drawnGapRule?: 'OFF' | 'ON'
   /** Override the derived identity. The CLI does, to reproduce a sealed candidate under its sealed name. */
   identity?: Partial<AnalysisIdentity>
   signal?: AbortSignal
@@ -419,6 +424,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
         checkpoint.tick({ done: e.index, total: e.total, candidateIndex: e.index, candidateTotal: e.total, subphase: e.stage === 1 ? { id: 'READINGS', label: 'weighing a reading of the plan' } : { id: 'COMPOSITIONS', label: 'composing a reading in full' } })
       },
       trace: (e) => trace.record(PHASE_STAGE[e.phase], e.substage, e.status, e.counts, { reasonCode: e.reasonCode, detail: e.detail }),
+      ...(options.drawnGapRule === 'ON' ? { drawnGapRule: 'ON' as const } : {}),
     })
     throwIfAborted(signal)
     const model = reconstruction.model

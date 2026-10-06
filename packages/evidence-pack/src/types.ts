@@ -163,9 +163,31 @@ export type MetricsJson = {
   coordinateRegistrations?: Array<{ frameId: string; plane: string; metresPerPixelX: number; metresPerPixelY: number; anchors?: unknown[] }>
   evidence?: Array<{ id: string; kind: string; frameId: string; value: number; unit: string; origin?: string; rawText?: string; textBox?: Rect }>
 }
+/**
+ * 005K: one gap a reading of the plan left WEAK, as the boundary records it (`gap-evidence.ts`): source-addressable
+ * with its frame and decomposition, never a picture.
+ */
+export type GapRecordJson = {
+  gapId: string
+  decompositionId: string
+  axis: 'X' | 'Y'
+  linePx: number
+  axisPx: number
+  fromPx: number
+  toPx: number
+  widthM: number
+  signature: string
+  classified: { cls: string; boundary: string }
+  final: { cls: string; boundary: string; occupancy: string }
+  outline: string
+  drawnGapRule: { mode: string; check: Record<string, boolean | string | null> | null; upgraded: boolean }
+  reasons: string[]
+  [key: string]: unknown
+}
 export type PlanJson = {
   frameId: string
   assetId?: string
+  variantByteHash?: string
   storey?: string
   annotation?: string
   sizePx: { width: number; height: number }
@@ -186,7 +208,7 @@ export type PlanJson = {
   linesY?: number[]
   cells?: Array<{ ix: number; iy: number; rect: Rect; cls: string; enclosed: boolean }>
   regions?: Array<{ id: string; cls: string; rect: Rect }>
-  wideOpenings?: Array<{ kind: string; axis: 'X' | 'Y'; linePx: number; fromPx: number; toPx: number; widthM: number; decision: string; score: number; why: string }>
+  wideOpenings?: Array<{ id?: string; kind: string; axis: 'X' | 'Y'; linePx: number; fromPx: number; toPx: number; widthM: number; decision: string; score: number; why: string }>
   bays?: Array<{ side: string; rect: Rect; mouth: string }>
   boundary?: {
     accepted: boolean
@@ -201,6 +223,12 @@ export type PlanJson = {
     completionsUnjudged?: number
     box?: Rect
     why?: string
+    /** 005K (boundary evidence 1.2.0): the reading's identity and scale, its WEAK gaps and the drawn-gap rule's mode. */
+    decompositionId?: string
+    mpp?: { x: number; y: number }
+    drawnGapRule?: string
+    gapEvidence?: GapRecordJson[]
+    gapEvidenceOmitted?: number
   }
   masses: Array<{ id: string; rect: Rect }>
 }
@@ -242,6 +270,7 @@ export const TIMELINE_STAGES = [
   'REGISTRATION',
   'FRAME_SELECTION',
   'EXTENT',
+  'BOUNDARY_GAPS',
   'ENVELOPE',
   'ENVELOPE_EXTENT_CONFLICT',
   'BODIES',

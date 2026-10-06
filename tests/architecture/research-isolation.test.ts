@@ -154,3 +154,36 @@ describe('005J production cannot reach the floor-plan intelligence audit, and th
     expect(assets.filter((a) => AUDIT.test(a) || (/\.(onnx|ort|gguf|mf\.gz|safetensors|tflite|litertlm|bin|npz|npy|pkl|pt|pth)$/i.test(a) && !/numeric-recogniser|ppocr|paddle/i.test(a)))).toEqual([])
   })
 })
+
+/**
+ * BUILDPLAN-ANALYZER-005K — the fresh-sheet gap set and its harness are research. The harness (`research/analyzer-005k/`)
+ * draws sheets, extracts each WEAK gap with the frozen analyzer, composes the crops a reviewer labels and scores the rule,
+ * all on publisher drawings read locally and kept outside the repository. What the repository may keep is code and text:
+ * gap ids, coordinates, crop rectangles and the SHA-256 of the bytes and masks — never a crop, a sheet or an overlay.
+ */
+describe('005K production cannot reach the gap-set harness, and the gap set commits no pixels', () => {
+  const HARNESS = /research\/analyzer-005k|gap-set-labels|gap-set-manifest/i
+
+  it('no production source imports research/analyzer-005k or names the gap set', () => {
+    const offenders: string[] = []
+    for (const f of productionSources()) {
+      const text = read(f)
+      for (const spec of importsOf(text)) if (/analyzer-005k/.test(spec)) offenders.push(`${f} imports ${spec}`)
+      if (HARNESS.test(codeOf(text))) offenders.push(`${f} names the 005K gap set`)
+    }
+    expect(offenders).toEqual([])
+  })
+
+  it('the 005K harness and artifacts track only code and text — no crop, sheet, overlay or archive', () => {
+    const tracked = execFileSync('git', ['ls-files'], { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(Boolean)
+    const harness = tracked.filter((f) => f.startsWith('research/analyzer-005k/') || f.startsWith('stage-reports/artifacts/analyzer-005k/'))
+    expect(harness.filter((f) => !/\.(py|ts|mjs|cjs|json|md|txt|sh)$/i.test(f))).toEqual([])
+    for (const f of harness) {
+      const text = read(f)
+      expect(text, f).not.toMatch(/(data:(image|application)\/[\w.+-]+;base64,|iVBORw0KGgo|\/9j\/4|UklGR|R0lGOD)[A-Za-z0-9+/]{40,}/)
+      expect(text, f).not.toMatch(/[A-Za-z0-9+/]{256,}={0,2}/)
+      expect(text, f).not.toMatch(/\[(\s*-?\d+(\.\d+)?\s*,){64,}/)
+      expect(statSync(join(ROOT, f)).size, f).toBeLessThanOrEqual(4 * 2 ** 20)
+    }
+  })
+})

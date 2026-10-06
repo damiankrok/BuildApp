@@ -39,7 +39,7 @@ export const post = (r: Raster, cx: number, cy: number): void => fillRect(r, cx 
 
 export type Run = { d: PlanDecomposition; builtM2: number }
 /** The plan as the layout pass reads it: sheet wall, witness-checked extent, exterior ticks. */
-export function run(r: Raster, xs: number[], ys: number[], callouts: PlanCallout[] = [], options: { openingAware?: boolean; shutPocketMouths?: boolean; cmPerPx?: number; sheetWallPx?: number; extentSides?: boolean; unreadTicks?: { x?: number[]; y?: number[] }; extraChains?: DimensionChain[] } = {}): Run {
+export function run(r: Raster, xs: number[], ys: number[], callouts: PlanCallout[] = [], options: { openingAware?: boolean; shutPocketMouths?: boolean; drawnGapRule?: 'OFF' | 'ON'; cmPerPx?: number; sheetWallPx?: number; extentSides?: boolean; unreadTicks?: { x?: number[]; y?: number[] }; extraChains?: DimensionChain[] } = {}): Run {
   const m = mask(r)
   const bands = runLengthBands(m, BANDS)
   const wallPx = bandWallThickness(bands, WALL)

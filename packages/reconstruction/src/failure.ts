@@ -13,6 +13,7 @@
  * path, a stack or a line of source, so all of it may cross to a client. A
  * generic failure is left for what nobody expected.
  */
+import type { GapEvidenceRecord } from './gap-evidence.js'
 
 export const RECONSTRUCTION_FAILURE_CODES = [
   // --- reading the plans --------------------------------------------------------
@@ -174,7 +175,7 @@ export type PlanDiagnostics = {
   linesY: number[]
   cells: Array<{ ix: number; iy: number; rect: Rect; cls: 'B' | 'R' | 'O'; enclosed: boolean }>
   regions: Array<{ id: string; cls: 'BUILT' | 'RECESS'; rect: Rect }>
-  wideOpenings: Array<{ kind: string; axis: 'X' | 'Y'; linePx: number; fromPx: number; toPx: number; widthM: number; decision: string; score: number; why: string }>
+  wideOpenings: Array<{ id?: string; kind: string; axis: 'X' | 'Y'; linePx: number; fromPx: number; toPx: number; widthM: number; decision: string; score: number; why: string }>
   bays: Array<{ side: string; rect: Rect; mouth: string }>
   hypotheses: Array<{ id: string; builtCells: number; closedOpenings: number; score: number; chosen: boolean; why: string }>
   /** 005C: the opening-aware boundary: gap classes, the candidates' support, the policies and every part's relation. */
@@ -194,6 +195,12 @@ export type PlanDiagnostics = {
     completionsUnjudged?: number
     box?: Rect
     why: string
+    /** 005K: the reading's identity and scale, and one record per gap it left WEAK (`gap-evidence.ts`). */
+    decompositionId?: string
+    mpp?: { x: number; y: number }
+    drawnGapRule?: 'OFF' | 'ON'
+    gapEvidence?: GapEvidenceRecord[]
+    gapEvidenceOmitted?: number
   }
   masses: Array<{ id: string; rect: Rect }>
 }

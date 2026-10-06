@@ -149,6 +149,8 @@ export type StructuralLayoutOptions = {
   sheetCache?: Map<string, PlanSheet>
   /** Told at each plan copy read, for progress and cancellation. Write-only. */
   checkpoint?: Checkpoint
+  /** 005K, experimental: the boundary's drawn-gap rule (`PlanDecompositionOptions.drawnGapRule`). OFF unless asked for. */
+  drawnGapRule?: 'OFF' | 'ON'
 }
 
 /** The ink, wall bands and wall thickness of one plan copy: a function of its pixels alone. */
@@ -302,7 +304,7 @@ export function readPlans(options: StructuralLayoutOptions): { plans: PlanReadin
       // resolver asks for the same one under several merges and faces.
       const shutMouths = chosen === frame && choice?.mouths === 'SHUT'
       const key = `${extent.rect.x0},${extent.rect.y0},${extent.rect.x1},${extent.rect.y1}|${registration.metresPerPixelX},${registration.metresPerPixelY}${shutMouths ? '|mouths-shut' : ''}`
-      const decomposition = sheet.decompositions.get(key) ?? decomposePlan(mask, chains, bands, registration, extent.rect, { callouts: planCallouts(options.metrics, frame.id), sheetWallPx: wallPx, exteriorTicks: exteriorTicksOf(chains, extent.roles), extentSides: extentSidesOf(chains, extent, wallPx), checkpoint: options.checkpoint, ...(shutMouths ? { shutPocketMouths: true } : {}) })
+      const decomposition = sheet.decompositions.get(key) ?? decomposePlan(mask, chains, bands, registration, extent.rect, { callouts: planCallouts(options.metrics, frame.id), sheetWallPx: wallPx, exteriorTicks: exteriorTicksOf(chains, extent.roles), extentSides: extentSidesOf(chains, extent, wallPx), checkpoint: options.checkpoint, ...(shutMouths ? { shutPocketMouths: true } : {}), ...(options.drawnGapRule === 'ON' ? { drawnGapRule: 'ON' as const } : {}) })
       sheet.decompositions.set(key, decomposition)
       plans.push({
         frame,
