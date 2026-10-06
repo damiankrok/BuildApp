@@ -1,0 +1,311 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005K",
+ "kind": "the 14 fresh gap-set projects as development material: the committed verdict predicates (holdout/verdict.mjs) applied to their single live run at FREEZE_SHA, rule OFF; first failing decision read from each run's trace (STRUCTURAL_LAYOUT / PLAN_REGISTRATION / PLAN_RESOLUTION / METRIC_RESOLUTION / EMISSION). Not a blind round: these projects were drawn for the gap set and are excluded from future blinds",
+ "freezeSha": "892853e7de140f2a9fb45895acfea93700c4a053",
+ "projects": [
+  {
+   "project": "A00",
+   "publisher": "archon",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-goldstarach-2-m3622914468605",
+   "run": {
+    "outcome": "FAILED",
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE"
+   },
+   "verdict": "ALGORITHMIC_FAIL",
+   "failingConditions": [],
+   "conditions": {},
+   "firstFailingDecision": "PLAN_RESOLUTION_INCONCLUSIVE (first reading 30.34 of 147.01 m2)"
+  },
+  {
+   "project": "A01",
+   "publisher": "archon",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-jarzmiankach-m60124f28f071a",
+   "run": {
+    "outcome": "FAILED",
+    "code": "RECONSTRUCTION_FAILED/MODEL_EMISSION_FAILED"
+   },
+   "verdict": "ALGORITHMIC_FAIL",
+   "failingConditions": [],
+   "conditions": {},
+   "firstFailingDecision": "MODEL_EMISSION_FAILED FILL_TOO_LARGE (placeWindow)"
+  },
+  {
+   "project": "A02",
+   "publisher": "archon",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-czosnkach-e-ma7f290037d154",
+   "run": {
+    "outcome": "COMPLETED",
+    "modelHash": "98229d5fa8d6ff8e682001061ff703e6e8c0be4a5412a71b77439e2b8aa92155"
+   },
+   "verdict": "PASS",
+   "failingConditions": [],
+   "conditions": {
+    "storeys": {
+     "model": 1,
+     "plans": 1,
+     "holds": true
+    },
+    "openingsAllBuilt": {
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 133.82,
+     "publishedM2": 130.07,
+     "residualPct": 2.88,
+     "holds": true
+    },
+    "resolvedWithAWitness": {
+     "holds": true
+    },
+    "replacedByTheDrawing": {
+     "holds": true
+    }
+   },
+   "firstFailingDecision": null
+  },
+  {
+   "project": "A03",
+   "publisher": "archon",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-arletach-3-e-oze-m504267f869cbe",
+   "run": {
+    "outcome": "COMPLETED",
+    "modelHash": "4b0fc06a76054bf95be60b9ab84df3c8fcb2bb7c6c77d24f253bafc3ddcc03c7"
+   },
+   "verdict": "PASS",
+   "failingConditions": [],
+   "conditions": {
+    "storeys": {
+     "model": 2,
+     "plans": 2,
+     "holds": true
+    },
+    "openingsAllBuilt": {
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 109.35,
+     "publishedM2": 109.62,
+     "residualPct": -0.24,
+     "holds": true
+    },
+    "resolvedWithAWitness": {
+     "holds": true
+    },
+    "replacedByTheDrawing": {
+     "holds": true
+    }
+   },
+   "firstFailingDecision": null
+  },
+  {
+   "project": "A04",
+   "publisher": "archon",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-ligolach-m-ma3023a3277371",
+   "run": {
+    "outcome": "FAILED",
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE"
+   },
+   "verdict": "ALGORITHMIC_FAIL",
+   "failingConditions": [],
+   "conditions": {},
+   "firstFailingDecision": "PLAN_RESOLUTION_INCONCLUSIVE (first reading 54.67 of 111.79 m2)"
+  },
+  {
+   "project": "A05",
+   "publisher": "archon",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-we-wrzosach-ver-2-m3c91f90ec5ffe",
+   "run": {
+    "outcome": "FAILED",
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE"
+   },
+   "verdict": "ALGORITHMIC_FAIL",
+   "failingConditions": [],
+   "conditions": {},
+   "firstFailingDecision": "PLAN_RESOLUTION_INCONCLUSIVE (first reading 96.73 of 126.23 m2)"
+  },
+  {
+   "project": "A06",
+   "publisher": "archon",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-bratkach-26-r2be-m953292c7d56c7",
+   "run": {
+    "outcome": "COMPLETED",
+    "modelHash": "3e4b69073dfd13873ffdfbbcc02770148c3fa1f2ec04cc4b8f1e03dc555128a6"
+   },
+   "verdict": "ALGORITHMIC_FAIL",
+   "failingConditions": [
+    "storeys"
+   ],
+   "conditions": {
+    "storeys": {
+     "model": 1,
+     "plans": 2,
+     "holds": false
+    },
+    "openingsAllBuilt": {
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 79.06,
+     "publishedM2": 78.92,
+     "residualPct": 0.18,
+     "holds": true
+    },
+    "resolvedWithAWitness": {
+     "holds": true
+    },
+    "replacedByTheDrawing": {
+     "holds": true
+    }
+   },
+   "firstFailingDecision": "NO_MASS_REACHES_UP + PLAN_STOREY_ALIGNMENT_FAILED"
+  },
+  {
+   "project": "A07",
+   "publisher": "archon",
+   "url": "https://www.archon.pl/projekty-domow/projekt-willa-maja-r2-mcc7297f3e22da",
+   "run": {
+    "outcome": "COMPLETED",
+    "modelHash": "dddf99f78c650ad431431fa462fd3574b05b5cfe398b1c321ccdf5279502fa7f"
+   },
+   "verdict": "ALGORITHMIC_FAIL",
+   "failingConditions": [
+    "storeys"
+   ],
+   "conditions": {
+    "storeys": {
+     "model": 1,
+     "plans": 2,
+     "holds": false
+    },
+    "openingsAllBuilt": {
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 134.32,
+     "publishedM2": 134.82,
+     "residualPct": -0.37,
+     "holds": true
+    },
+    "resolvedWithAWitness": {
+     "holds": true
+    },
+    "replacedByTheDrawing": {
+     "holds": true
+    }
+   },
+   "firstFailingDecision": "NO_MASS_REACHES_UP"
+  },
+  {
+   "project": "D00",
+   "publisher": "dobredomy",
+   "url": "https://www.dobredomy.pl/projekt/mars/",
+   "run": {
+    "outcome": "COMPLETED",
+    "modelHash": "0bb85a2dc698b532b601bae8a686defacac4d29bdd33b06383e2dd003052f8a7"
+   },
+   "verdict": "ALGORITHMIC_FAIL",
+   "failingConditions": [
+    "storeys",
+    "footprint"
+   ],
+   "conditions": {
+    "storeys": {
+     "model": 1,
+     "plans": 2,
+     "holds": false
+    },
+    "openingsAllBuilt": {
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 154.2,
+     "publishedM2": 189.7,
+     "residualPct": -18.71,
+     "holds": false
+    },
+    "resolvedWithAWitness": {
+     "holds": true
+    },
+    "replacedByTheDrawing": {
+     "holds": true
+    }
+   },
+   "firstFailingDecision": "NO_MASS_REACHES_UP + PLAN_STOREY_ALIGNMENT_FAILED"
+  },
+  {
+   "project": "D01",
+   "publisher": "dobredomy",
+   "url": "https://www.dobredomy.pl/projekt/faunIII/",
+   "run": {
+    "outcome": "FAILED",
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE"
+   },
+   "verdict": "ALGORITHMIC_FAIL",
+   "failingConditions": [],
+   "conditions": {},
+   "firstFailingDecision": "METRIC_RESOLUTION_INCONCLUSIVE (no usable printed dimension)"
+  },
+  {
+   "project": "D02",
+   "publisher": "dobredomy",
+   "url": "https://www.dobredomy.pl/projekt/alex/",
+   "run": {
+    "outcome": "FAILED",
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE"
+   },
+   "verdict": "ALGORITHMIC_FAIL",
+   "failingConditions": [],
+   "conditions": {},
+   "firstFailingDecision": "METRIC_RESOLUTION_INCONCLUSIVE (no usable printed dimension)"
+  },
+  {
+   "project": "D03",
+   "publisher": "dobredomy",
+   "url": "https://www.dobredomy.pl/projekt/meganIV/",
+   "run": {
+    "outcome": "FAILED",
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE"
+   },
+   "verdict": "ALGORITHMIC_FAIL",
+   "failingConditions": [],
+   "conditions": {},
+   "firstFailingDecision": "METRIC_RESOLUTION_INCONCLUSIVE (no usable printed dimension)"
+  },
+  {
+   "project": "D04",
+   "publisher": "dobredomy",
+   "url": "https://www.dobredomy.pl/projekt/aiko/",
+   "run": {
+    "outcome": "FAILED",
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE"
+   },
+   "verdict": "ALGORITHMIC_FAIL",
+   "failingConditions": [],
+   "conditions": {},
+   "firstFailingDecision": "METRIC_RESOLUTION_INCONCLUSIVE (plan prints no dimension chain)"
+  },
+  {
+   "project": "D05",
+   "publisher": "dobredomy",
+   "url": "https://www.dobredomy.pl/projekt/dobry/",
+   "run": {
+    "outcome": "FAILED",
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE"
+   },
+   "verdict": "ALGORITHMIC_FAIL",
+   "failingConditions": [],
+   "conditions": {},
+   "firstFailingDecision": "METRIC_RESOLUTION_INCONCLUSIVE (plan prints no dimension chain)"
+  }
+ ],
+ "counts": {
+  "verdicts": {
+   "ALGORITHMIC_FAIL": 12,
+   "PASS": 2
+  },
+  "storeysOnly": [
+   "A06",
+   "A07"
+  ]
+ }
+}
