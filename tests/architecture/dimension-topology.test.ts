@@ -14,11 +14,14 @@
  *  - the end-span and wall-refutation rules in reconstruction read the chain records and the wall witness only — never
  *    the published facts or the model.
  */
-import { readFileSync } from 'node:fs'
-import { join, resolve } from 'node:path'
+import { existsSync, readFileSync } from 'node:fs'
+import { dirname, join, resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
-import { assignLabels } from '@buildapp/source-metrics'
+import { LARCHFIELD, renderGroundPlan } from '@buildapp/synthetic-drawings'
+import { sha256Hex } from '@buildapp/source-common'
+import { assignLabels, extractMetricEvidence } from '@buildapp/source-metrics'
 import type { RawChain, TextToken } from '@buildapp/source-metrics'
+import type { SourceCoordinateFrame, SourceObservationGraph } from '@buildapp/source-observations'
 
 const ROOT = resolve(import.meta.dirname, '../..')
 const read = (p: string): string => readFileSync(join(ROOT, p), 'utf8')
@@ -26,7 +29,7 @@ const codeOf = (source: string): string => source.replace(/\/\*[\s\S]*?\*\//g, '
 const importsOf = (source: string): string[] => [...source.matchAll(/^\s*(?:import|export)[^'"]*?from\s+['"]([^'"]+)['"]/gm)].map((m) => m[1])
 
 /** What a binding may never be chosen by (§8). Matched on code, comments removed. */
-const FORBIDDEN = /publish|footprint|area\b|areaM2|reconstruct|sealCandidate|buildingCandidate|gold|expected|house|slug|family|archon|verdict|model\b/i
+const FORBIDDEN = /publish|footprint|area\b|areaM2|reconstruct|sealCandidate|buildingCandidate|gold|expected|house|slug|family|archon|verdict|model\b|truth|oracle|benchmark|specification|figure|target/i
 
 /** The function body of `name` in `source` (from its signature to the next top-level function). */
 const bodyOf = (source: string, name: string): string => {
@@ -52,10 +55,10 @@ describe('§8 the dimension topology knows the drawing, not the building', () =>
     expect(bodyOf(extract, 'labelInkOf').match(FORBIDDEN)).toBeNull()
   })
 
-  it('the label-ink trace sees boxes, never what a label reads', () => {
+  it('the label-ink trace sees boxes, text axes and whether glyphs are digits — never what a label reads as a value', () => {
     const extract = codeOf(read('packages/source-metrics/src/extract.ts'))
     const ink = bodyOf(extract, 'labelInkOf')
-    expect(ink).not.toMatch(/\.text\b|readings|valueCm|lattice/)
+    expect(ink).not.toMatch(/\.text\b|readings|valueCm|lattice|parse|Number\(|toCentimetres/)
     const lines = codeOf(read('packages/source-metrics/src/dimension-lines.ts'))
     expect(bodyOf(lines, 'markLabelInk')).not.toMatch(/\.text\b|readings|valueCm|lattice/)
   })
@@ -65,6 +68,36 @@ describe('§8 the dimension topology knows the drawing, not the building', () =>
     expect(bodyOf(topology, 'labelCandidates')).not.toMatch(/readings|valueCm|\.text\b|parse/)
     expect(bodyOf(topology, 'solveNeighbourhood')).not.toMatch(/readings|valueCm|\.text\b/)
     expect(bodyOf(topology, 'hungarian')).not.toMatch(/readings|valueCm|\.text\b/)
+  })
+
+  it('everything that decides what binding sees — chains, solvers, marks — imports nothing that holds a published fact or a building (post-review E3)', () => {
+    // The import closure, inside source-metrics, of the topology and of every caller that hands it tokens and options.
+    const SRC = 'packages/source-metrics/src'
+    const closure = new Set<string>()
+    const visit = (file: string): void => {
+      if (closure.has(file)) return
+      closure.add(file)
+      for (const spec of importsOf(read(file))) {
+        if (!spec.startsWith('.')) continue
+        const next = join(dirname(file), spec.replace(/\.js$/, '.ts'))
+        if (existsSync(join(ROOT, next))) visit(next)
+      }
+    }
+    for (const f of ['axis-topology.ts', 'chains.ts', 'metric-solution.ts', 'dimension-lines.ts']) visit(`${SRC}/${f}`)
+    const files = [...closure].sort()
+    expect(files.filter((f) => /specifications|source-package|registration|plan-|model/.test(f))).toEqual([])
+    for (const f of files) for (const spec of importsOf(read(f))) expect(spec, f).not.toMatch(/@buildapp\/(reconstruction|canonical|geometry|source-package|analysis-service|numeric-recogniser)/)
+  })
+
+  it('extraction reads the published specifications only after every frame was bound and solved (post-review E3)', () => {
+    const extract = codeOf(read('packages/source-metrics/src/extract.ts'))
+    const firstSpec = Math.min(...['options.specifications', 'readSpecifications('].map((k) => extract.indexOf(k)).filter((i) => i >= 0))
+    for (const call of ['dimensionChainsOf', 'solveFrameChains', 'solveFrameMetric', 'dimensionAxisGroups']) {
+      // every call site (not the function's own definition)
+      const sites = [...extract.matchAll(new RegExp(`(?<!function )\\b${call}\\(`, 'g'))].map((m) => m.index ?? -1)
+      expect(sites.length, call).toBeGreaterThan(0)
+      expect(Math.max(...sites), `${call} called after the specifications are read`).toBeLessThan(firstSpec)
+    }
   })
 
   it('the end-span and wall-refutation rules read chain records and the wall witness, never the published facts', () => {
@@ -105,6 +138,35 @@ describe('§8 behaviour: values do not choose lines', () => {
     const reference = bindings(layout(['1100', '100', '900', '100']))
     for (const texts of [['1000', '100', '900', '100'], ['1100', '250', '600', '250'], ['999', '11', '777', '55'], ['2200', '200', '1800', '200']] as Array<[string, string, string, string]>) {
       expect(bindings(layout(texts))).toEqual(reference)
+    }
+  })
+})
+
+// --- behaviour: the production entry, with and without published facts (post-review E3) -----------------------------
+
+describe('§8 behaviour: extraction binds the same with any published facts, or none', () => {
+  const raster = renderGroundPlan(LARCHFIELD).toRaster()
+  const frame = {
+    id: 'frame-plan',
+    assetId: 'asset-plan',
+    variantByteHash: sha256Hex('plan').padEnd(64, '0').slice(0, 64),
+    size: { width: raster.width, height: raster.height },
+    roles: { document: 'FLOOR_PLAN', storey: 'GROUND', annotation: 'DIMENSIONED', view: 'NOT_APPLICABLE', projection: 'ORTHOGRAPHIC_PLAN' },
+  } as SourceCoordinateFrame
+  const graph: SourceObservationGraph = { schema: 'buildapp.source-observation-graph', schemaVersion: '1.0.0', id: 'g', sourcePackageId: 'p', sourcePackageHash: 'b'.repeat(64), extractors: [], coordinateFrames: [frame], observations: [], relations: [], conflicts: [], unresolved: [], contentHash: 'c'.repeat(64) }
+  const run = (specifications?: Array<{ key: string; label: string; text: string }>) =>
+    extractMetricEvidence({ sourcePackageId: 'p', sourcePackageHash: 'b'.repeat(64), graph, raster: () => raster, slug: 'synthetic', ...(specifications ? { specifications, specificationHash: sha256Hex(JSON.stringify(specifications)) } : {}) })
+
+  it('the dimension topology and every chain are byte-identical whatever area, footprint or angle the page publishes', () => {
+    const none = run()
+    const reference = JSON.stringify({ topology: none.dimensionTopology, chains: none.chains })
+    expect(none.dimensionTopology?.length).toBeGreaterThan(0)
+    for (const specs of [
+      [{ key: 'footprint', label: 'Powierzchnia zabudowy', text: '216,76 m²' }],
+      [{ key: 'footprint', label: 'Powierzchnia zabudowy', text: '80,00 m²' }, { key: 'usable', label: 'Powierzchnia użytkowa', text: '310,5 m²' }, { key: 'roof', label: 'Kąt nachylenia dachu', text: '40°' }],
+    ]) {
+      const withFacts = run(specs)
+      expect(JSON.stringify({ topology: withFacts.dimensionTopology, chains: withFacts.chains })).toBe(reference)
     }
   })
 })

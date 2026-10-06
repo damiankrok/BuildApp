@@ -514,10 +514,15 @@ export function buildEvidencePack(run: RunRecord): EvidencePack {
   for (const frameId of metricFrames) {
     const topo = topologyOf(frameId)
     if (!topo) continue
+    const conventions = topo.sideConventions ? (topo.sideConventions.final ?? topo.sideConventions.legacy) : undefined
+    for (const [axis, c] of Object.entries(conventions ?? {}).sort(([a], [b]) => (a < b ? -1 : 1)))
+      event('LABEL_ASSIGNMENT', `side-convention:${frameId}:${axis}`, c.side ?? 'NONE', `${c.basis.toLowerCase()}: uncontested labels ${c.anchors.before} before, ${c.anchors.across} across, ${c.anchors.after} after their only line`)
     for (const a of topo.assignment.final ?? topo.assignment.legacy) {
       const decision = a.status === 'BOUND' && a.chosen ? `BOUND:${a.chosen.chainId}:${a.chosen.interval}` : a.status
-      const reason = a.candidates.map((c) => `${c.chainId}#${c.interval} ${c.side.toLowerCase()} ${round(c.offset, 2)}h${c.centred ? '' : ' uncentred'} cost ${round(c.cost, 3)}`).join('; ') + (a.margin !== undefined ? `; margin ${round(a.margin, 3)}` : '')
-      event('LABEL_ASSIGNMENT', assignmentId(frameId, a), decision, reason, { supportIds: a.chosen ? [a.chosen.chainId] : [], conflictIds: a.candidates.filter((c) => !a.chosen || c.chainId !== a.chosen.chainId).map((c) => c.chainId) })
+      const reason = a.candidates.map((c) => `${c.chainId}#${c.interval} ${c.side.toLowerCase()}${c.againstConvention ? ' against the convention' : ''} ${round(c.offset, 2)}h${c.centred ? '' : ' uncentred'} cost ${round(c.cost, 3)}`).join('; ') + (a.margin !== undefined ? `; margin ${round(a.margin, 3)}` : '')
+      // Only a BOUND label supports a line; a refused one names every candidate as what it could not choose between.
+      const bound = a.status === 'BOUND' ? a.chosen : undefined
+      event('LABEL_ASSIGNMENT', assignmentId(frameId, a), decision, reason, { supportIds: bound ? [bound.chainId] : [], conflictIds: a.candidates.filter((c) => !bound || c.chainId !== bound.chainId).map((c) => c.chainId) })
     }
   }
   // 16: the selected frame's dimension topology — axis groups, label-ink marks, and every label's assignment.
@@ -548,7 +553,7 @@ export function buildEvidencePack(run: RunRecord): EvidencePack {
     const statusColour = (st: string): string => (st === 'BOUND' ? COLOURS.PRIMARY : st === 'AMBIGUOUS' ? COLOURS.AMBIGUOUS : COLOURS.ALTERNATIVE)
     for (const a of assignment) {
       s.rect(a.box.x0, a.box.y0, a.box.x1, a.box.y1, { stroke: statusColour(a.status), width: 1 }, assignmentId(selected?.frameId ?? '', a), { status: a.status, text: a.text })
-      const c = a.chosen ? chainById.get(a.chosen.chainId) : undefined
+      const c = a.status === 'BOUND' && a.chosen ? chainById.get(a.chosen.chainId) : undefined
       if (c) {
         const [cx, cy] = [(a.box.x0 + a.box.x1) / 2, (a.box.y0 + a.box.y1) / 2]
         if (c.axis === 'HORIZONTAL') s.line(cx, cy, cx, c.baselinePx, { stroke: statusColour(a.status), width: 1, dash: '2 2' })
@@ -570,6 +575,7 @@ export function buildEvidencePack(run: RunRecord): EvidencePack {
         groups: (topo?.groups ?? []).filter((g) => g.chainIds.length > 1),
         singleLines: (topo?.groups ?? []).filter((g) => g.chainIds.length === 1).length,
         assignmentSource: topo ? (topo.assignment.final ? 'FINAL' : 'LEGACY') : null,
+        sideConventions: topo?.sideConventions ? (topo.sideConventions.final ?? topo.sideConventions.legacy) : null,
         counts: { bound: assignment.filter((a) => a.status === 'BOUND').length, ambiguous: assignment.filter((a) => a.status === 'AMBIGUOUS').length, unassigned: assignment.filter((a) => a.status === 'UNASSIGNED').length },
         assignment: shown.items,
         omitted: shown.omitted,

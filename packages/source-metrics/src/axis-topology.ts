@@ -26,10 +26,15 @@
  *      chain of parts share their end marks) and which ends a neighbour corroborates are recorded.
  *
  * The side of a line a label sits on is the drawing convention this module leans on, stated so it
- * can be argued with: a dimension's number is printed parallel to its line and on the line's far side
- * from the text's own baseline — "above" the line as the text reads (ISO 129, PN-ISO) — or, in the
- * in-line style, across the line itself. A line lying beyond the TOPS of the glyphs is the label's
- * neighbour, not its own line. It is a cost, never a prohibition: a label with only that line keeps it.
+ * can be argued with. ISO 129 (PN-ISO 129-1, method 1) prints a dimension's number parallel to its
+ * line, above a horizontal line and, read from the right, left of a vertical one — on the page, on the
+ * side of smaller coordinates (BEFORE) on both axes — or, in the in-line style, across the line itself.
+ * The side is taken from where the label's ink lies on the page, never from which way up it was read: a
+ * label the reader took for upside down is still on the same side of its line. The convention is the
+ * sheet's to state: its uncontested labels (one line only, centred on a span of it) can confirm it,
+ * contradict it (and then no side is preferred on that axis) or state the other one; with nothing on
+ * the sheet either way the ISO side stands. It is a cost, never a prohibition: a label with only one
+ * line keeps it.
  */
 import { round6, stableId } from '@buildapp/source-common'
 import type { PixelRect } from '@buildapp/source-common'
@@ -40,14 +45,16 @@ import { parseNumber, readingLattice } from './parse.js'
 import { toCentimetres } from './schema.js'
 
 export const AXIS_TOPOLOGY_NAME = 'metrics.axis-topology' as const
-export const AXIS_TOPOLOGY_VERSION = '1.0.0' as const
+/** 1.1.0: the label side is the page side of the ink, and the side convention is the sheet's (post-review E1). */
+export const AXIS_TOPOLOGY_VERSION = '1.1.0' as const
 
 /**
  * The costs of a label-to-line candidate, in the label's own text heights, and the bounds of the assignment.
  *
- * - `topSide`: the line lies beyond the tops of the label's glyphs (the convention puts a label's own line at or past
- *   its baseline). One text height: a label two thirds of a height from a neighbour on its top side and three quarters
- *   of a height from its own line on its baseline side goes to its own line.
+ * - `againstConvention`: the label lies on the side of the line the sheet's convention does not print on (a label above
+ *   a horizontal line under ISO is that line's; one below it is the line below's). One text height: a label two
+ *   thirds of a height from a neighbour it lies on the wrong side of and three quarters of a height from its own line
+ *   goes to its own line.
  * - `uncentred`: no span of the line within two skipped marks is centred on the label (only where the caller asks for
  *   centring, as the 005B solver does): more than any offset difference, as the 005B order had it.
  * - `reward`: what binding one label is worth. Larger than any candidate's cost, so a label that competes with
@@ -58,7 +65,7 @@ export const AXIS_TOPOLOGY_VERSION = '1.0.0' as const
  * - `componentLabels`: the most labels one connected neighbourhood may hold for an exact re-solve per label; above it
  *   (no development sheet comes near) each label is checked against its own next-best candidate only, and says so.
  */
-export const ASSIGNMENT_BOUNDS = { topSide: 1, uncentred: 2.5, reward: 6, ambiguity: 0.1, componentLabels: 96 } as const
+export const ASSIGNMENT_BOUNDS = { againstConvention: 1, uncentred: 2.5, reward: 6, ambiguity: 0.1, componentLabels: 96 } as const
 
 /** Parallel lines within this many label heights of each other, overlapping along their axis by half the shorter, are one group. */
 export const AXIS_GROUP_BOUNDS = { separationHeights: 4, overlapShare: 0.5, alignHeights: 0.2, alignMinPx: 2 } as const
@@ -83,32 +90,56 @@ export function measurementChain(chain: RawChain): RawChain {
 // 2. label assignment
 // ---------------------------------------------------------------------------
 
-/** Which side of a label a line lies on, in the label's own reading frame. */
-export type LabelSide = 'BASELINE' | 'THROUGH' | 'TOP'
+/** Where a label lies on the page with respect to a line: BEFORE it (above a horizontal line, left of a vertical one), ACROSS it, or AFTER it. */
+export type LabelSide = 'BEFORE' | 'ACROSS' | 'AFTER'
 
-/** Where a label's glyph tops are and which way its text runs down, in the frame's pixels across a line of `axis`. */
-function readingFrame(token: TextToken): { top: number; down: 1 | -1; across: number } {
-  const b = token.box
-  switch (token.orientation) {
-    case 'HORIZONTAL':
-      return { top: b.y0, down: 1, across: b.y1 - b.y0 }
-    case 'INVERTED':
-      return { top: b.y1, down: -1, across: b.y1 - b.y0 }
-    case 'ROTATED_CW':
-      // Read bottom to top: the glyphs' tops point to −x.
-      return { top: b.x0, down: 1, across: b.x1 - b.x0 }
-    case 'ROTATED_CCW':
-      return { top: b.x1, down: -1, across: b.x1 - b.x0 }
-  }
+/** The page side of a label's ink with respect to a line of `axis` at `baselinePx`. Which way up the label was read does not enter. */
+export function labelSide(box: PixelRect, axis: ChainAxis, baselinePx: number): LabelSide {
+  const [lo, hi] = axis === 'HORIZONTAL' ? [box.y0, box.y1] : [box.x0, box.x1]
+  if (hi < baselinePx) return 'BEFORE'
+  if (lo > baselinePx) return 'AFTER'
+  return 'ACROSS'
 }
 
-/** The side of the label a line at `baselinePx` lies on: past its glyph tops, through its body, or at or past its baseline. */
-export function labelSide(token: TextToken, baselinePx: number): LabelSide {
-  const f = readingFrame(token)
-  const u = (baselinePx - f.top) * f.down
-  if (u < 0) return 'TOP'
-  if (u <= f.across) return 'THROUGH'
-  return 'BASELINE'
+/**
+ * How the sheet's uncontested labels decide the side convention of an axis.
+ *
+ * An anchor is a label with exactly one line it could be printed on, centred on a span of that line, of the sheet's
+ * label size (`minHeight`–`maxHeight` of the median) and of at least two digits. Anchors are evidence, not truth: a
+ * label whose own line was not found has another line as its only candidate, on the wrong side of it, so anchors lean
+ * toward contradicting whatever the sheet does. Hence the asymmetry:
+ *
+ * - STATED: at least `stating` anchors on one side and `statingRatio` times as many as on the other — that side;
+ * - CONTRADICTED: at least `contradicting` anchors AFTER and no fewer than BEFORE — no side is preferred on the axis;
+ * - CONSISTENT / SILENT: otherwise the ISO side (BEFORE) stands, with anchors for it or with none either way.
+ *
+ * (On the development sheets no axis has more than two anchors AFTER its line: none states the other convention.)
+ */
+export const SIDE_CONVENTION_BOUNDS = { minHeight: 0.75, maxHeight: 4 / 3, minDigits: 2, contradicting: 2, stating: 4, statingRatio: 4 } as const
+
+export type SideConventionBasis = 'STATED' | 'CONSISTENT' | 'SILENT' | 'CONTRADICTED'
+export type SideConvention = {
+  /** The side the sheet prints labels on, along lines of this axis; null when the sheet contradicts any one side. */
+  side: 'BEFORE' | 'AFTER' | null
+  basis: SideConventionBasis
+  anchors: { before: number; across: number; after: number }
+}
+export type SideConventions = Record<ChainAxis, SideConvention>
+
+/** The convention an axis's anchors state (`SIDE_CONVENTION_BOUNDS`). */
+export function sideConventionOf(anchors: SideConvention['anchors']): SideConvention {
+  const B = SIDE_CONVENTION_BOUNDS
+  const { before, after } = anchors
+  if (after >= B.stating && after >= B.statingRatio * before) return { side: 'AFTER', basis: 'STATED', anchors }
+  if (before >= B.stating && before >= B.statingRatio * after) return { side: 'BEFORE', basis: 'STATED', anchors }
+  if (after >= B.contradicting && after >= before) return { side: null, basis: 'CONTRADICTED', anchors }
+  return { side: 'BEFORE', basis: before > 0 ? 'CONSISTENT' : 'SILENT', anchors }
+}
+
+/** ISO 129 with nothing on the sheet either way: what a caller that has no labels to learn from assumes. */
+export const ISO_SIDE_CONVENTIONS: SideConventions = {
+  HORIZONTAL: sideConventionOf({ before: 0, across: 0, after: 0 }),
+  VERTICAL: sideConventionOf({ before: 0, across: 0, after: 0 }),
 }
 
 /** One line a label could be printed on, and what it would cost to say it is. */
@@ -120,12 +151,17 @@ export type LabelCandidate = {
   along: number
   /** |label centre − line| / label height. */
   offset: number
+  /** Where the label lies on the page with respect to the line. */
   side: LabelSide
+  /** The label lies on the side of the line the sheet's convention does not print on (`againstConvention` paid). */
+  againstConvention: boolean
+  /** Whether a span of the line within two skipped marks is centred on the label (recorded always; a cost only with `preferCentred`). */
   centred: boolean
   cost: number
 }
 
-export type LabelAssignmentStatus = 'BOUND' | 'AMBIGUOUS' | 'UNASSIGNED' | 'NO_CANDIDATE'
+/** A label with no line it could be printed on is no label of any line and is not in the assignment at all. */
+export type LabelAssignmentStatus = 'BOUND' | 'AMBIGUOUS' | 'UNASSIGNED'
 
 /** The record of one label's assignment: every candidate, what was chosen, and by how much. */
 export type LabelAssignmentDecision = {
@@ -135,7 +171,7 @@ export type LabelAssignmentDecision = {
   box: PixelRect
   candidates: LabelCandidate[]
   status: LabelAssignmentStatus
-  /** The candidate bound, when one was. */
+  /** The candidate bound — only when the label is BOUND: a refused label names no line. */
   chosen?: { chain: number; interval: number }
   /**
    * How much worse the best assignment that does NOT bind the label there is, in cost units (text heights): the
@@ -146,12 +182,14 @@ export type LabelAssignmentDecision = {
   bounded?: boolean
 }
 
-export type LabelAssignment = { perChain: ChainToken[][]; decisions: LabelAssignmentDecision[] }
+export type LabelAssignment = { perChain: ChainToken[][]; decisions: LabelAssignmentDecision[]; conventions: SideConventions }
 
 /** A canonical key for a token: its geometry and reading, never its position in an input list. */
 const tokenKey = (t: TextToken): string => `${round6(t.box.x0)}|${round6(t.box.y0)}|${round6(t.box.x1)}|${round6(t.box.y1)}|${t.orientation}|${t.text}`
 const chainKey = (c: RawChain): string => `${c.axis}|${round6(c.baselinePx)}|${c.ticks.map((t) => round6(t.atPx)).join(',')}`
 const compareKeys = (a: string, b: string): number => (a < b ? -1 : a > b ? 1 : 0)
+/** Everything else a token carries, so that of two tokens with one key the same one survives whatever order they came in. */
+const tokenDetail = (t: TextToken): string => JSON.stringify([t.height, t.score, t.confidence, t.shearDeg, t.glyphs.map((g) => [g.char, g.score, g.confidence, g.box.x0, g.box.y0, g.box.x1, g.box.y1])])
 
 /** Whether some span of the chain, across at most two marks, is centred on `along` (005B's `centredOn`). */
 function centredOn(chain: RawChain, along: number): boolean {
@@ -167,7 +205,12 @@ function centredOn(chain: RawChain, along: number): boolean {
 }
 
 /** Every line a token could be printed on (the 005B geometric test), with each candidate's cost. */
-export function labelCandidates(chains: readonly RawChain[], token: TextToken, options: { maxOffsetHeights?: number; preferCentred?: boolean } = {}): LabelCandidate[] {
+export function labelCandidates(
+  chains: readonly RawChain[],
+  token: TextToken,
+  options: { maxOffsetHeights?: number; preferCentred?: boolean; conventions?: SideConventions } = {},
+): LabelCandidate[] {
+  const conventions = options.conventions ?? ISO_SIDE_CONVENTIONS
   const maxOffset = options.maxOffsetHeights ?? 2.2
   const cx = (token.box.x0 + token.box.x1) / 2
   const cy = (token.box.y0 + token.box.y1) / 2
@@ -182,10 +225,13 @@ export function labelCandidates(chains: readonly RawChain[], token: TextToken, o
     if (along < chain.ticks[0].atPx || along > chain.ticks[chain.ticks.length - 1].atPx) return
     let interval = 0
     while (interval + 2 < chain.ticks.length && chain.ticks[interval + 1].atPx < along) interval += 1
-    const side = labelSide(token, chain.baselinePx)
-    const centred = options.preferCentred ? centredOn(chain, along) : true
-    const cost = round6(offset + (side === 'TOP' ? ASSIGNMENT_BOUNDS.topSide : 0) + (centred ? 0 : ASSIGNMENT_BOUNDS.uncentred))
-    out.push({ chain: index, interval, along: round6(along), offset: round6(offset), side, centred, cost })
+    const side = labelSide(token.box, chain.axis, chain.baselinePx)
+    const convention = conventions[chain.axis].side
+    const againstConvention = convention !== null && side !== 'ACROSS' && side !== convention
+    // Recorded as found; it costs only where the caller asks for centring (the 005B solver, the final re-read).
+    const centred = centredOn(chain, along)
+    const cost = round6(offset + (againstConvention ? ASSIGNMENT_BOUNDS.againstConvention : 0) + (options.preferCentred && !centred ? ASSIGNMENT_BOUNDS.uncentred : 0))
+    out.push({ chain: index, interval, along: round6(along), offset: round6(offset), side, againstConvention, centred, cost })
   })
   return out
 }
@@ -284,20 +330,21 @@ export function assignLabels(
   tokens: readonly TextToken[],
   options: { maxOffsetHeights?: number; preferCentred?: boolean; readingsOf?: (token: TextToken) => ChainToken['readings'] | undefined } = {},
 ): LabelAssignment {
+  const geometry = { maxOffsetHeights: options.maxOffsetHeights, preferCentred: options.preferCentred }
   const perChain: ChainToken[][] = chains.map(() => [])
   // Canonical order: chains by geometry, tokens by geometry and reading. Indices below are canonical.
   const chainOrder = chains.map((c, i) => ({ i, key: chainKey(c) })).sort((a, b) => compareKeys(a.key, b.key) || a.i - b.i)
   const canonicalChains = chainOrder.map((o) => chains[o.i])
   type Entry = { token: TextToken; readings: ChainToken['readings']; candidates: LabelCandidate[] }
+  type Read = { token: TextToken; readings: ChainToken['readings'] }
   const seen = new Set<string>()
-  const entries: Entry[] = []
-  for (const token of [...tokens].sort((a, b) => compareKeys(tokenKey(a), tokenKey(b)))) {
+  const labels: Read[] = []
+  for (const token of [...tokens].sort((a, b) => compareKeys(tokenKey(a), tokenKey(b)) || compareKeys(tokenDetail(a), tokenDetail(b)))) {
     const key = tokenKey(token)
     // One ink read once: an identical token listed twice is one label.
     if (seen.has(key)) continue
     seen.add(key)
-    const candidates = labelCandidates(canonicalChains, token, options)
-    if (candidates.length === 0) continue
+    if (labelCandidates(canonicalChains, token, geometry).length === 0) continue
     const supplied = options.readingsOf?.(token)
     const readings: ChainToken['readings'] = supplied ? [...supplied] : []
     if (!supplied) {
@@ -309,8 +356,11 @@ export function assignLabels(
       }
     }
     if (readings.length === 0) continue
-    entries.push({ token, readings, candidates })
+    labels.push({ token, readings })
   }
+  // The sheet's side convention, from its uncontested labels; then every candidate's cost under it.
+  const conventions = sideConventionsOf(canonicalChains, labels.map((l) => l.token), geometry)
+  const entries: Entry[] = labels.map((l) => ({ ...l, candidates: labelCandidates(canonicalChains, l.token, { ...geometry, conventions }) }))
 
   // Slots and neighbourhoods: labels joined by a slot they could both take.
   const slotKey = (c: LabelCandidate): string => `${c.chain}:${c.interval}`
@@ -366,8 +416,10 @@ export function assignLabels(
             const alternative = solveNeighbourhoodBound(bound, slots.length, r)
             margin = alternative === undefined ? undefined : round6(alternative - best.total)
           } else margin = round6(solveNeighbourhood(forbid, slots.length).total - best.total)
-        } else {
-          const own = s >= 0 ? costs[r][s] : 0
+        } else if (s >= 0) {
+          // Bounded: against the label's own next-best (another slot, or none). A label the bounded solve left
+          // unassigned has no local margin: it is UNASSIGNED, marked bounded, never called ambiguous for it.
+          const own = costs[r][s]
           const others = [...costs[r].filter((_, j) => j !== s), 0].sort((a, b) => a - b)
           margin = round6(others[0] - own)
         }
@@ -381,7 +433,7 @@ export function assignLabels(
         box: e.token.box,
         candidates: e.candidates.map((c) => ({ ...c, chain: chainOrder[c.chain].i })),
         status,
-        ...(chosenCandidate ? { chosen: { chain: chainOrder[chosenCandidate.chain].i, interval: chosenCandidate.interval } } : {}),
+        ...(status === 'BOUND' && chosenCandidate ? { chosen: { chain: chainOrder[chosenCandidate.chain].i, interval: chosenCandidate.interval } } : {}),
         ...(margin !== undefined ? { margin } : {}),
         ...(competed && !exact ? { bounded: true } : {}),
       })
@@ -392,7 +444,33 @@ export function assignLabels(
   return {
     perChain: perChain.map((list) => list.sort((a, b) => a.atPx - b.atPx || compareKeys(tokenKey(a.token), tokenKey(b.token)))),
     decisions,
+    conventions,
   }
+}
+
+/**
+ * The side convention of each axis, from the labels that compete for nothing: exactly one line they could be printed
+ * on, a span of it centred on them, of the sheet's label size and at least two digits (`SIDE_CONVENTION_BOUNDS`). Their
+ * page side is counted per axis and `sideConventionOf` decides. `labels` are dimension labels (they have readings).
+ */
+export function sideConventionsOf(chains: readonly RawChain[], labels: readonly TextToken[], options: { maxOffsetHeights?: number } = {}): SideConventions {
+  const B = SIDE_CONVENTION_BOUNDS
+  const placed = labels.map((token) => ({ token, candidates: labelCandidates(chains, token, { maxOffsetHeights: options.maxOffsetHeights, conventions: ISO_SIDE_CONVENTIONS }) })).filter((x) => x.candidates.length > 0)
+  const heights = placed.map((x) => Math.max(1, x.token.height)).sort((a, b) => a - b)
+  const median = heights.length > 0 ? heights[Math.floor(heights.length / 2)] : 0
+  const tally: Record<ChainAxis, SideConvention['anchors']> = { HORIZONTAL: { before: 0, across: 0, after: 0 }, VERTICAL: { before: 0, across: 0, after: 0 } }
+  for (const { token, candidates } of placed) {
+    if (candidates.length !== 1) continue
+    const [only] = candidates
+    const chain = chains[only.chain]
+    const height = Math.max(1, token.height)
+    if (height < B.minHeight * median || height > B.maxHeight * median) continue
+    if (token.text.replace(/[^0-9]/g, '').length < B.minDigits) continue
+    if (!centredOn(chain, only.along)) continue
+    const side = only.side === 'BEFORE' ? 'before' : only.side === 'AFTER' ? 'after' : 'across'
+    tally[chain.axis][side] += 1
+  }
+  return { HORIZONTAL: sideConventionOf(tally.HORIZONTAL), VERTICAL: sideConventionOf(tally.VERTICAL) }
 }
 
 /** The least total cost of the neighbourhood with label `row` bound to some slot (never unassigned), or undefined if it has none. */
@@ -420,10 +498,14 @@ export type DimensionAxisGroup = {
   members: number[]
   /** Distance between consecutive members' lines, in pixels and in label heights. */
   separations: Array<{ from: number; to: number; px: number; heights: number }>
-  /** How the members stand to each other: `a` SUBDIVIDES `b` when `a` has marks at both of `b`'s ends and one between. */
+  /**
+   * How the members stand to each other: `a` SUBDIVIDES `b` when `a` has marks at both of `b`'s ends and one between.
+   * `alignedEnds`: whether the two lines END together (their first, resp. last, TICK-class marks), at each end.
+   */
   relations: Array<{ a: number; b: number; kind: AxisRelationKind; alignedEnds: [boolean, boolean] }>
 }
 
+/** `alignedEnds`: whether, at the chain's first (resp. last) TICK-class mark, a neighbouring line ENDS too — at its own first or last TICK-class mark (post-review A4/E4: a neighbour's interior mark, or a doubted one, is no end). */
 export type ChainAxisTopology = { groupId: string; roles: AxisRole[]; alignedEnds: [boolean, boolean] }
 
 /**
@@ -459,6 +541,15 @@ export function dimensionAxisGroups(frameId: string, chains: readonly RawChain[]
     if (usable[i]) byRoot.set(find(i), [...(byRoot.get(find(i)) ?? []), i])
   })
   const hasMarkNear = (c: RawChain, px: number): boolean => c.ticks.some((t) => Math.abs(t.atPx - px) <= tol)
+  // A line's ends: its first and last marks that are ticks (a record without classes counts every mark a tick).
+  const endsOf = (c: RawChain): [number, number] | null => {
+    const t = c.ticks.filter((m) => (m.class ?? 'TICK') === 'TICK')
+    return t.length >= 2 ? [t[0].atPx, t[t.length - 1].atPx] : null
+  }
+  const endsNear = (c: RawChain, px: number): boolean => {
+    const e = endsOf(c)
+    return e !== null && (Math.abs(e[0] - px) <= tol || Math.abs(e[1] - px) <= tol)
+  }
   const groups: DimensionAxisGroup[] = []
   const perChain: Array<ChainAxisTopology | undefined> = chains.map(() => undefined)
   for (const members of [...byRoot.values()]) {
@@ -472,7 +563,8 @@ export function dimensionAxisGroups(frameId: string, chains: readonly RawChain[]
         if (a === b) continue
         const [a0, a1] = range(chains[a])
         const [b0, b1] = range(chains[b])
-        const ends: [boolean, boolean] = [hasMarkNear(chains[b], a0), hasMarkNear(chains[b], a1)]
+        const ea = endsOf(chains[a])
+        const ends: [boolean, boolean] = ea ? [endsNear(chains[b], ea[0]), endsNear(chains[b], ea[1])] : [false, false]
         const held = aligned.get(a) as [boolean, boolean]
         aligned.set(a, [held[0] || ends[0], held[1] || ends[1]])
         if (a >= b) continue
@@ -496,7 +588,8 @@ export function dimensionAxisGroups(frameId: string, chains: readonly RawChain[]
         else kind = 'OVERLAPS'
         const [f0, f1] = range(chains[first])
         const [s0, s1] = range(chains[second])
-        relations.push({ a: first, b: second, kind, alignedEnds: [Math.abs(f0 - s0) <= tol, Math.abs(f1 - s1) <= tol] })
+        const [ef, es] = [endsOf(chains[first]), endsOf(chains[second])]
+        relations.push({ a: first, b: second, kind, alignedEnds: ef && es ? [Math.abs(ef[0] - es[0]) <= tol, Math.abs(ef[1] - es[1]) <= tol] : [false, false] })
         if (kind === 'SUBDIVIDES') {
           roles.get(first)?.add('SUBDIVISION')
           roles.get(second)?.add('OVERALL')

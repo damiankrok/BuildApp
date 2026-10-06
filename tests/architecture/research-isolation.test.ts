@@ -5,7 +5,8 @@
  * `research/analyzer-005i-boundary-bakeoff/`, with Python, PyTorch and OpenCV in a virtual environment outside the
  * repository. None of it may become a production dependency by accident:
  *
- *  - no production source (packages' and apps' `src`, the Android app's Kotlin and Gradle) imports or names anything
+ *  - no production source (packages' and apps' `src` and `scripts`, the apps' bundler configs, the Android app's Kotlin
+ *    and Gradle) imports or names anything
  *    under `research/`, or names DeepLSD, ELSED, MobileSAM / Segment Anything, PyTorch or a Python runtime in code;
  *  - `research/` is no npm workspace, and neither the type check nor the test runner collects it;
  *  - the repository tracks no model checkpoint (`.pt`, `.pth`, `.ckpt`, `.safetensors`) anywhere, and the research
@@ -44,6 +45,11 @@ function filesUnder(dir: string, ext: RegExp): string[] {
 const productionSources = (): string[] => [
   ...readdirSync(join(ROOT, 'packages')).flatMap((p) => filesUnder(`packages/${p}/src`, /\.(ts|tsx|mjs|js)$/)),
   ...readdirSync(join(ROOT, 'apps')).flatMap((a) => filesUnder(`apps/${a}/src`, /\.(ts|tsx|mjs|js)$/)),
+  // post-review E8: the runners too — the blind round runs `packages/analysis-service/scripts/second-house.ts`, and a
+  // bundler config under an app's scripts could alias research in.
+  ...readdirSync(join(ROOT, 'packages')).flatMap((p) => filesUnder(`packages/${p}/scripts`, /\.(ts|tsx|mjs|js|cjs)$/)),
+  ...readdirSync(join(ROOT, 'apps')).flatMap((a) => filesUnder(`apps/${a}/scripts`, /\.(ts|tsx|mjs|js|cjs)$/)),
+  ...readdirSync(join(ROOT, 'apps')).flatMap((a) => filesUnder(`apps/${a}`, /^(vite|vitest|rollup|esbuild|webpack)\.config\.(ts|mjs|js|cjs)$/)),
   ...filesUnder('apps/android/app/src/main', /\.(kt|java)$/),
   ...filesUnder('apps/android', /\.gradle\.kts$/),
 ]

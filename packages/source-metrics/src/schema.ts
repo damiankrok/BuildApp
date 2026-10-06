@@ -396,13 +396,22 @@ export const DimensionChainSchema = z
   .strict()
 export type DimensionChain = z.infer<typeof DimensionChainSchema>
 
+const SideConventionRecordSchema = z
+  .object({
+    side: z.enum(['BEFORE', 'AFTER']).nullable(),
+    basis: z.enum(['STATED', 'CONSISTENT', 'SILENT', 'CONTRADICTED']),
+    anchors: z.object({ before: z.number().int().nonnegative(), across: z.number().int().nonnegative(), after: z.number().int().nonnegative() }).strict(),
+  })
+  .strict()
+const SideConventionsRecordSchema = z.object({ HORIZONTAL: SideConventionRecordSchema, VERTICAL: SideConventionRecordSchema }).strict()
+
 /** 005I: one label's place in the global assignment (`assignLabels`), with every line it could have named. */
 export const LabelAssignmentRecordSchema = z
   .object({
     text: z.string().min(1),
     orientation: TextOrientationSchema,
     box: PixelRectSchema,
-    status: z.enum(['BOUND', 'AMBIGUOUS', 'UNASSIGNED', 'NO_CANDIDATE']),
+    status: z.enum(['BOUND', 'AMBIGUOUS', 'UNASSIGNED']),
     chosen: z.object({ chainId: z.string().min(1), interval: z.number().int().nonnegative() }).strict().optional(),
     margin: z.number().optional(),
     bounded: z.literal(true).optional(),
@@ -412,7 +421,10 @@ export const LabelAssignmentRecordSchema = z
           chainId: z.string().min(1),
           interval: z.number().int().nonnegative(),
           offset: z.number().nonnegative(),
-          side: z.enum(['BASELINE', 'THROUGH', 'TOP']),
+          /** Where the label lies on the page with respect to the line (above / left of it: BEFORE). */
+          side: z.enum(['BEFORE', 'ACROSS', 'AFTER']),
+          /** It lies on the side the sheet's convention does not print on, and paid for it. */
+          againstConvention: z.boolean(),
           centred: z.boolean(),
           cost: z.number(),
         })
@@ -445,6 +457,8 @@ export const DimensionTopologyRecordSchema = z
         .strict(),
     ),
     assignment: z.object({ legacy: z.array(LabelAssignmentRecordSchema), final: z.array(LabelAssignmentRecordSchema).optional() }).strict(),
+    /** The side convention each assignment read from the sheet's uncontested labels (`sideConventionsOf`). */
+    sideConventions: z.object({ legacy: SideConventionsRecordSchema, final: SideConventionsRecordSchema.optional() }).strict(),
   })
   .strict()
 export type DimensionTopologyRecord = z.infer<typeof DimensionTopologyRecordSchema>

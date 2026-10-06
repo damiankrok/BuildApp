@@ -134,7 +134,8 @@ export type LatticeJson = {
   ensemble?: { decision: string; external: { text: string; valueCm?: number; posterior: number; meanP: number; stable: boolean; confident: boolean }; lattice: { asRead: string; valueCm?: number; ocrClass: string }; asRead: string; asReadValueCm?: number; ocrClass: string; rival?: { text: string; valueCm: number; witness: string }; why: string }
 }
 /** 005I: one label's place in the global assignment, as the metric evidence records it. */
-export type AssignmentJson = { text: string; orientation: string; box: Rect; status: string; chosen?: { chainId: string; interval: number }; margin?: number; bounded?: boolean; candidates: Array<{ chainId: string; interval: number; offset: number; side: string; centred: boolean; cost: number }> }
+export type AssignmentJson = { text: string; orientation: string; box: Rect; status: string; chosen?: { chainId: string; interval: number }; margin?: number; bounded?: boolean; candidates: Array<{ chainId: string; interval: number; offset: number; side: string; againstConvention?: boolean; centred: boolean; cost: number }> }
+export type SideConventionJson = { side: string | null; basis: string; anchors: { before: number; across: number; after: number } }
 export type TopologyJson = {
   frameId: string
   labelHeightPx: number
@@ -142,6 +143,8 @@ export type TopologyJson = {
   labelInkLines: Array<{ axis: string; baselinePx: number; fromPx: number; toPx: number; marks: number }>
   groups: Array<{ id: string; axis: string; chainIds: string[]; separations: Array<{ fromChainId: string; toChainId: string; px: number; heights: number }>; relations: Array<{ aChainId: string; bChainId: string; kind: string; alignedEnds: [boolean, boolean] }> }>
   assignment: { legacy: AssignmentJson[]; final?: AssignmentJson[] }
+  /** 1.7.0+ after the 005I post-review: the side convention each assignment read from the sheet. */
+  sideConventions?: { legacy: Record<string, SideConventionJson>; final?: Record<string, SideConventionJson> }
 }
 export type MetricsJson = {
   schemaVersion?: string

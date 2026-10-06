@@ -26,8 +26,8 @@ import type { PixelRect } from '@buildapp/source-common'
 
 /** 005D: the reader that measures each crossing mark against its line and classifies it. */
 export const DIMENSION_TOPOLOGY_NAME = 'metrics.dimension-topology' as const
-/** 1.1.0 (005I): a mark that is only label ink beside the line is `TEXT_INK` (`markLabelInk`). */
-export const DIMENSION_TOPOLOGY_VERSION = '1.1.0' as const
+/** 1.1.0 (005I): a mark that is only label ink beside the line is `TEXT_INK` (`markLabelInk`); 1.2.0: a stroke reaching the line between labels is not (post-review A2), and only text running along the line is label ink. */
+export const DIMENSION_TOPOLOGY_VERSION = '1.2.0' as const
 
 export type DimensionLineAxis = 'HORIZONTAL' | 'VERTICAL'
 
@@ -557,7 +557,13 @@ export function classifyMarks(line: DimensionLine, hitRuns: ReadonlyArray<[numbe
 // ---------------------------------------------------------------------------
 
 /** The ink of one printed label: its box and its glyphs' boxes, in the frame's pixels. */
-export type LabelInk = { box: PixelRect; glyphs: readonly PixelRect[] }
+/**
+ * A printed label as ink: its box, its glyph boxes and the axis its text runs along (`textAxisOf` of the pass that read
+ * it — the axis only, never which way up). A dimension's number is printed parallel to its line (ISO 129), so only a
+ * label whose text runs along a line can be that line's label ink; text read across a line — often linework the reader
+ * formed into a short token, a tick's own stroke among it — is not.
+ */
+export type LabelInk = { box: PixelRect; glyphs: readonly PixelRect[]; axis: 'HORIZONTAL' | 'VERTICAL' }
 
 /**
  * Where label ink makes a crossing mark (BUILDPLAN-ANALYZER-005I).
@@ -576,10 +582,16 @@ export type LabelInk = { box: PixelRect; glyphs: readonly PixelRect[] }
  *   - one side label ink: the label may hide a real tick's other half, or a witness line ends against the label.
  *     The mark is at most QUESTIONABLE, `TEXT_INK`: the uncertainty is kept, not resolved.
  *
+ * Only labels printed along the line count (`LabelInk.axis`, post-review: on a sheet whose reader forms short tokens
+ * out of linework, a token read across a horizontal line had a real tick's stroke inside its box).
+ *
  * Real linework crossing text is not erased: a side whose ink is not (all but a tenth) inside label glyphs is
- * evidence of a stroke, and the mark keeps its class. Image only: label boxes, never what a label reads.
+ * evidence of a stroke, and the mark keeps its class. Nor is a stroke the labels happen to cover: label ink beside a
+ * line leaves a gap between the line and the glyphs, a stroke crossing the line does not — ink outside every glyph in
+ * the `contactRows` rows next to the line, within the hit run, is a stroke reaching the line, and that side is not
+ * label ink (post-review A2). Image only: label boxes, never what a label reads.
  */
-export const LABEL_INK_BOUNDS = { glyphPadPx: 1, labelShare: 0.9, spread: 2 } as const
+export const LABEL_INK_BOUNDS = { glyphPadPx: 1, labelShare: 0.9, spread: 2, contactRows: 2 } as const
 
 export function markLabelInk(lines: readonly DimensionLine[], labels: readonly LabelInk[], mask: Mask, options: { markReachPx?: number } = {}): DimensionLine[] {
   const reach = options.markReachPx ?? DEFAULTS.markReachPx
@@ -602,6 +614,7 @@ export function markLabelInk(lines: readonly DimensionLine[], labels: readonly L
     }
     const glyphs: Array<{ box: PixelRect; side: -1 | 1 }> = []
     for (const label of labels) {
+      if (label.axis !== line.axis) continue
       const side = sideOfBox(label.box)
       if (side === 0) continue
       const [lo, hi] = acrossOf(label.box)
@@ -622,8 +635,11 @@ export function markLabelInk(lines: readonly DimensionLine[], labels: readonly L
           for (let a = Math.round(m.hitFromPx) - B.spread; a <= Math.round(m.hitToPx) + B.spread; a += 1) {
             const [x, y] = horizontal ? [a, across] : [across, a]
             if (maskAt(mask, x, y) !== 1) continue
+            const glyph = inGlyph(x, y, sign)
+            // A stroke reaching the line: ink outside every glyph, next to the line, inside the hit run.
+            if (!glyph && d <= clear + B.contactRows && a >= Math.round(m.hitFromPx) && a <= Math.round(m.hitToPx)) return false
             ink += 1
-            if (inGlyph(x, y, sign)) text += 1
+            if (glyph) text += 1
           }
         }
         return ink > 0 && text >= B.labelShare * ink

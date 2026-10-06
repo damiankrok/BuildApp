@@ -28,7 +28,7 @@ import type { SourceObservation } from '@buildapp/source-observations'
 import type { DimensionLine, DimensionMarkClass, DimensionMarkReason } from './dimension-lines.js'
 import type { TextToken } from './ocr.js'
 import { assignLabels } from './axis-topology.js'
-import type { LabelAssignmentDecision } from './axis-topology.js'
+import type { LabelAssignmentDecision, SideConventions } from './axis-topology.js'
 import type { ParsedNumber } from './parse.js'
 
 /**
@@ -509,6 +509,8 @@ export type FrameChainSolution = {
   scaleDecision?: ScaleDecision
   /** 005I: how every number met the chains — each one's candidate lines, and what the global assignment made of it. */
   assignment: LabelAssignmentDecision[]
+  /** 005I: the side convention that assignment read from the sheet. */
+  assignmentConventions: SideConventions
 }
 
 /**
@@ -594,6 +596,7 @@ export function solveFrameChains(
     tokensPerChain,
     ...(decided.decision ? { scaleDecision: decided.decision } : {}),
     assignment: assignment.decisions,
+    assignmentConventions: assignment.conventions,
   }
 }
 

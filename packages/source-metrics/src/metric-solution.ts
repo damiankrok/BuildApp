@@ -44,7 +44,7 @@ import type { Checkpoint, PixelRect } from '@buildapp/source-common'
 import { rectIoU } from '@buildapp/source-common'
 import { assignTokens, solveChain, spansFor } from './chains.js'
 import { assignLabels } from './axis-topology.js'
-import type { LabelAssignmentDecision } from './axis-topology.js'
+import type { LabelAssignmentDecision, SideConventions } from './axis-topology.js'
 import type { ChainToken, FrameChainSolution, RawChain, ScalePlausibility, SolvedChain } from './chains.js'
 import { compareTokens, textAxisOf, tokenMerit } from './ocr.js'
 import type { TextOrientation, TextToken } from './ocr.js'
@@ -129,6 +129,8 @@ export type FrameMetricOutput = {
   chainOrientation: Array<{ orientation: TextOrientation | null; dependsOnScale: boolean }>
   /** 005I: the global assignment of the labels the chains were read from at the end (each chain in its decided orientation). */
   assignment: LabelAssignmentDecision[]
+  /** 005I: the side convention that assignment read from the sheet. */
+  assignmentConventions: SideConventions
 }
 
 // ---------------------------------------------------------------------------
@@ -1481,6 +1483,7 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
     ...(scaleY !== undefined ? { scaleY } : {}),
     chainOrientation,
     assignment: finalAssignment.decisions,
+    assignmentConventions: finalAssignment.conventions,
   }
 }
 
@@ -1565,7 +1568,9 @@ function parallelCopiesOf(chains: readonly RawChain[], labelHeight: number): Map
 }
 
 /**
- * 005I: the cap height a sheet sets its dimension labels at — the median of the label-sized tokens on its chains — the
+ * 005I: the cap height a sheet sets its dimension labels at — the median height of the tokens `dimensionLabels` admits
+ * (within `maxOffsetHeights` of their own heights of a line of their axis, along its span, in the sheet's label-height
+ * band: tokens near a chain, not tokens bound to one) — the
  * unit neighbouring lines are measured in (`dimensionAxisGroups`). 14 px when the sheet has none to measure.
  */
 export const labelHeightOf = (chains: readonly RawChain[], tokens: readonly TextToken[], maxOffsetHeights = 2.2): number => medianLabelHeight(dimensionLabels(chains.filter((c) => c.ticks.length >= 2), tokens, maxOffsetHeights))

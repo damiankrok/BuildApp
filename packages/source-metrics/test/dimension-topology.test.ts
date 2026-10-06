@@ -224,7 +224,9 @@ describe('§39 dimension topology on drawn chains', () => {
     // the one the `500` states, and a single witness states it WEAKLY.
     expect(r.legacy.assignment.filter((d) => d.text === '400' || d.text === '300').map((d) => d.status)).toEqual(['AMBIGUOUS', 'AMBIGUOUS'])
     expect(near(r.metric.pooledScale, SCALE)).toBe(true)
-    expect(['WEAK', 'INCONCLUSIVE']).toContain(r.solution.confidence)
+    // post-review A10: pinned — the page vote's scale (the `500`'s) is confirmed by the one witness, weakly.
+    expect(r.solution.relation).toBe('CONFIRMED')
+    expect(r.solution.confidence).toBe('WEAK')
   })
 
   it('(11) duplicate ticks a few pixels apart are one mark: the span moves by a pixel, never splits', () => {

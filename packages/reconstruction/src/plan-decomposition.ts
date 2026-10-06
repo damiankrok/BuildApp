@@ -806,16 +806,24 @@ export function dimensionedAxis(chains: readonly DimensionChain[], axis: 'HORIZO
 
 /**
  * 005I: whether the drawing states a short unread end segment, and why — or null. Both of its marks must be ticks (a
- * questionable or label-ink mark ends nothing on its own), and either a number is printed on it and bound to it, or,
- * at the chain's own end, a neighbouring parallel line has a mark where it ends (`DimensionChain.topology`). A record
- * made before 005D (no mark classes) counts every mark a tick, as it always did.
+ * questionable or label-ink mark ends nothing on its own), and either a number is printed on it and bound to it, or
+ * it ends where the chain ends — at the chain's first (resp. last) tick — and a neighbouring parallel line ENDS there
+ * too (`DimensionChain.topology.alignedEnds`, computed at the lines' first and last ticks). A record made before 005D
+ * (no mark classes) counts every mark a tick, as it always did.
  */
 function endSpanSupport(chain: DimensionChain, seg: DimensionChain['segments'][number], end: 'LO' | 'HI', outer: boolean): string | null {
-  const classAt = (px: number): string => (chain.marks?.find((m) => Math.abs(m.atPx - px) < 0.5)?.class ?? 'TICK')
+  const classOf = (i: number): string => (chain.marks?.length === chain.ticksPx.length ? chain.marks[i].class : 'TICK')
+  const classAt = (px: number): string => {
+    const i = chain.ticksPx.findIndex((t) => Math.abs(t - px) < 0.5)
+    return i < 0 ? 'TICK' : classOf(i)
+  }
   if (classAt(seg.fromPx) !== 'TICK' || classAt(seg.toPx) !== 'TICK') return null
   if (seg.labelled) return `a number is printed on it and bound to it, between two ticks`
-  const aligned = outer && chain.topology?.alignedEnds[end === 'LO' ? 0 : 1] === true
-  if (aligned) return `it ends at a tick where a neighbouring parallel line also has a mark (${chain.topology?.groupId ?? ''})`
+  const ticks = chain.ticksPx.filter((_, i) => classOf(i) === 'TICK')
+  const chainEnd = end === 'LO' ? ticks[0] : ticks[ticks.length - 1]
+  const segEnd = end === 'LO' ? seg.fromPx : seg.toPx
+  const aligned = outer && chainEnd !== undefined && Math.abs(chainEnd - segEnd) < 0.5 && chain.topology?.alignedEnds[end === 'LO' ? 0 : 1] === true
+  if (aligned) return `it ends at the chain's end tick, where a neighbouring parallel line ends too (${chain.topology?.groupId ?? ''})`
   return null
 }
 
@@ -883,9 +891,11 @@ export type ExtentProvenance = 'DIMENSION_CHAIN_EXTENT' | 'EXTERIOR_CHAIN_TICKS'
 /**
  * 005I: a side of a dimension-stated frame that the wall witness contradicts — at least two of its walls run on past
  * the side by more than two wall thicknesses. The walls state no dimension, so they never move the side themselves:
- * the side is moved only to a dimension mark the drawing prints further out, within that overshoot, on a line drawn
- * beside the building (ALTERNATE_DIMENSION_MARK); with none, the frame is kept and marked weak (DOWNGRADED), which the
- * resolver weighs as a frame its chains do not stand behind.
+ * the side is moved only to where a dimension line drawn beside the building ENDS — its first or last tick — within a
+ * wall of where the contradicting walls end, and only if no two walls still run on past it (ALTERNATE_DIMENSION_MARK);
+ * otherwise the frame is kept (DOWNGRADED). Either way the frame is marked weak: a side the walls had to question is
+ * one the resolver weighs, not a dimension statement it takes on trust. A side framed by the drawing's own overall
+ * dimension (OUTER_TOTAL_MARKS) or by the walls is never asked.
  */
 export type ExtentRefutation = {
   side: 'W' | 'E' | 'N' | 'S'
@@ -941,39 +951,43 @@ export function refuteByWalls(extent: PlanExtent, chains: readonly DimensionChai
   ]
   for (const d of sides) {
     const provenance = d.axis === 'HORIZONTAL' ? extent.provenance?.x : extent.provenance?.y
-    if (provenance === 'WALL_GEOMETRY_EXTENT') continue
+    if (provenance === 'WALL_GEOMETRY_EXTENT' || provenance === 'OUTER_TOTAL_MARKS') continue
     const at = d.axis === 'HORIZONTAL' ? (d.low ? rect.x0 : rect.x1) : d.low ? rect.y0 : rect.y1
     // Walls across the side: bands along the other axis whose run crosses the side's line and goes on past it.
     const across = witness.bands.filter((b) => (d.axis === 'HORIZONTAL' ? b.axis === 'HORIZONTAL' : b.axis === 'VERTICAL'))
-    const beyond = across
-      .map((b) => {
-        const [lo, hi] = d.axis === 'HORIZONTAL' ? [b.bounds.x0, b.bounds.x1] : [b.bounds.y0, b.bounds.y1]
-        return d.low ? (hi > at + wallPx && lo < at - past ? at - lo : 0) : lo < at - wallPx && hi > at + past ? hi - at : 0
-      })
-      .filter((v) => v > 0)
+    const beyondOf = (side: number): number[] =>
+      across
+        .map((b) => {
+          const [lo, hi] = d.axis === 'HORIZONTAL' ? [b.bounds.x0, b.bounds.x1] : [b.bounds.y0, b.bounds.y1]
+          return d.low ? (hi > side + wallPx && lo < side - past ? side - lo : 0) : lo < side - wallPx && hi > side + past ? hi - side : 0
+        })
+        .filter((v) => v > 0)
+    const beyond = beyondOf(at)
     if (beyond.length < B.walls) continue
     const overshoot = round6(Math.max(...beyond))
-    // A dimension mark further out, within the overshoot, on a line on this axis that is not drawn across the building.
+    const wallsEnd = d.low ? at - overshoot : at + overshoot
+    // Where a dimension line on this axis, not drawn across the building, ENDS (its first or last tick), within a wall
+    // of where the contradicting walls end — never a tick inside a line (a window, a pier, a terrace post).
     const roles = new Map((extent.roles ?? []).map((r) => [r.chainId, r.role]))
     const marks = chains
       .filter((c) => c.axis === d.axis && roles.get(c.id) !== 'INTERIOR')
-      .flatMap((c) =>
-        c.ticksPx
-          .map((px, i) => ({ px, chainId: c.id, cls: c.marks?.length === c.ticksPx.length ? c.marks[i].class : 'TICK' }))
-          .filter((m) => m.cls === 'TICK' && (d.low ? m.px < at - wallPx / 2 && m.px >= at - overshoot - wallPx : m.px > at + wallPx / 2 && m.px <= at + overshoot + wallPx)),
-      )
-      .sort((a, b) => (d.low ? b.px - a.px : a.px - b.px) || (a.chainId < b.chainId ? -1 : a.chainId > b.chainId ? 1 : 0))
-    const alternate = marks[0]
+      .flatMap((c) => {
+        const ticks = c.ticksPx.map((px, i) => ({ px, chainId: c.id, cls: c.marks?.length === c.ticksPx.length ? c.marks[i].class : 'TICK' })).filter((m) => m.cls === 'TICK')
+        return ticks.length >= 2 ? [ticks[0], ticks[ticks.length - 1]] : []
+      })
+      .filter((m) => Math.abs(m.px - wallsEnd) <= wallPx && (d.low ? m.px < at - wallPx / 2 : m.px > at + wallPx / 2))
+      .sort((a, b) => Math.abs(a.px - wallsEnd) - Math.abs(b.px - wallsEnd) || (a.chainId < b.chainId ? -1 : a.chainId > b.chainId ? 1 : 0))
+    const alternate = marks.find((m) => beyondOf(m.px).length < B.walls)
     const why = `${beyond.length} wall${beyond.length === 1 ? '' : 's'} run on past the ${d.side} side by up to ${Math.round(overshoot)} px (more than ${B.pastWalls} walls)`
     if (alternate) {
       const moved = round6(alternate.px)
       if (d.axis === 'HORIZONTAL') rect = d.low ? { ...rect, x0: moved } : { ...rect, x1: moved }
       else rect = d.low ? { ...rect, y0: moved } : { ...rect, y1: moved }
-      refutations.push({ side: d.side, atPx: round6(at), wallsPast: beyond.length, overshootPx: overshoot, action: 'ALTERNATE_DIMENSION_MARK', movedToPx: moved, chainId: alternate.chainId, why: `${why}; the side is taken to the next tick the drawing prints out there, on ${alternate.chainId}` })
-    } else refutations.push({ side: d.side, atPx: round6(at), wallsPast: beyond.length, overshootPx: overshoot, action: 'DOWNGRADED', why: `${why}; no dimension mark out there states where the side is, so the frame stands, weak` })
+      refutations.push({ side: d.side, atPx: round6(at), wallsPast: beyond.length, overshootPx: overshoot, action: 'ALTERNATE_DIMENSION_MARK', movedToPx: moved, chainId: alternate.chainId, why: `${why}; ${alternate.chainId} ends within a wall of where they end, and no two walls run on past it: the side is taken there, weak` })
+    } else refutations.push({ side: d.side, atPx: round6(at), wallsPast: beyond.length, overshootPx: overshoot, action: 'DOWNGRADED', why: `${why}; no dimension line out there ends where they end, so the frame stands, weak` })
   }
   if (refutations.length === 0) return extent
-  return { ...extent, rect, weak: extent.weak || refutations.some((r) => r.action === 'DOWNGRADED'), why: `${extent.why}; the walls contradict ${refutations.map((r) => r.side).join(', ')}: ${refutations.map((r) => r.why).join('; ')}`, refutations }
+  return { ...extent, rect, weak: true, why: `${extent.why}; the walls contradict ${refutations.map((r) => r.side).join(', ')}: ${refutations.map((r) => r.why).join('; ')}`, refutations }
 }
 
 /**

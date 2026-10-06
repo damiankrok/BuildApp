@@ -33,7 +33,7 @@ import type { RawChain, ScalePlausibility, SolvedChain } from './chains.js'
 import { DIMENSION_TOPOLOGY_NAME, DIMENSION_TOPOLOGY_VERSION, findDimensionLines, findStraightRuns, markLabelInk } from './dimension-lines.js'
 import type { DimensionLine, LabelInk } from './dimension-lines.js'
 import { AXIS_TOPOLOGY_NAME, AXIS_TOPOLOGY_VERSION, dimensionAxisGroups, measurementChain } from './axis-topology.js'
-import type { ChainAxisTopology, LabelAssignmentDecision } from './axis-topology.js'
+import type { ChainAxisTopology, LabelAssignmentDecision, SideConventions } from './axis-topology.js'
 import { readNumbers } from './ocr.js'
 import { METRIC_SOLVER_NAME, METRIC_SOLVER_VERSION, labelHeightOf, solveFrameMetric, textRegions } from './metric-solution.js'
 import { NUMERIC_LATTICE_ENSEMBLE_VERSION, NUMERIC_LATTICE_NAME, NUMERIC_LATTICE_VERSION, dimensionStyleOf, labelLattice, styleFor } from './numeric-lattice.js'
@@ -416,6 +416,7 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
     const labelHeightPx = labelHeightOf(measured, read.raw ?? read.tokens)
     const axisGroups = dimensionAxisGroups(frame.id, measured, ids, labelHeightPx)
     let finalAssignment: LabelAssignmentDecision[] | undefined
+    let finalConventions: SideConventions | undefined
     if (isPlan && read.raw) {
       // 005E: the numeric lattice of every ink that lies on a dimension line — the geometric test the label assignment
       // makes, before any scale — re-read from the very ink field its pass read. Image only.
@@ -458,6 +459,7 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
       const metric = solveFrameMetric({ frameId: frame.id, assetId: frame.assetId, chains: measured, chainIds: ids, raw: read.raw, legacyTokens: read.tokens, legacy: solution, tolerancePx, plausibility, checkpoint, lattices })
       solvedChains = metric.solved
       finalAssignment = metric.assignment
+      finalConventions = metric.assignmentConventions
       orientationOf = metric.chainOrientation
       scaleStands = metric.solution.relation !== 'REPLACED' && metric.solution.relation !== 'ADDED'
       reread = new Set(ids.map((id, i) => (metric.solution.rereadChainIds.includes(id) || !scaleStands ? i : -1)).filter((i) => i >= 0))
@@ -491,7 +493,7 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
             ...(d.chosen ? { chosen: { chainId: ids[d.chosen.chain], interval: d.chosen.interval } } : {}),
             ...(d.margin !== undefined ? { margin: d.margin } : {}),
             ...(d.bounded ? { bounded: true as const } : {}),
-            candidates: d.candidates.map((c) => ({ chainId: ids[c.chain], interval: c.interval, offset: c.offset, side: c.side, centred: c.centred, cost: c.cost })),
+            candidates: d.candidates.map((c) => ({ chainId: ids[c.chain], interval: c.interval, offset: c.offset, side: c.side, againstConvention: c.againstConvention, centred: c.centred, cost: c.cost })),
           }))
           .sort((a, b) => a.box.y0 - b.box.y0 || a.box.x0 - b.box.x0 || (a.orientation < b.orientation ? -1 : a.orientation > b.orientation ? 1 : 0) || (a.text < b.text ? -1 : a.text > b.text ? 1 : 0))
       dimensionTopology.push({
@@ -509,6 +511,7 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
           relations: g.relations.map((r) => ({ aChainId: ids[r.a], bChainId: ids[r.b], kind: r.kind, alignedEnds: r.alignedEnds })),
         })),
         assignment: { legacy: assignmentRecord(solution.assignment), ...(finalAssignment ? { final: assignmentRecord(finalAssignment) } : {}) },
+        sideConventions: { legacy: solution.assignmentConventions, ...(finalConventions ? { final: finalConventions } : {}) },
       })
     }
     // A label a re-read chain took in another orientation is the same ink as the page vote's token
@@ -1049,10 +1052,17 @@ export function dimensionChainsOf(lines: readonly DimensionLine[], tokens: reado
 
 /**
  * 005I: the ink of every printed label on a sheet — tokens of two to six glyphs (the labels the numeric lattice would
- * read), every way up — as boxes only. What `markLabelInk` traces a crossing mark's ink to; a reading is never used.
+ * read), every way up — as boxes, with the axis their text runs along. What `markLabelInk` traces a crossing mark's ink
+ * to. A label is a numeral: at least two of its glyphs are digits and at most one is not (post-review: a reader that
+ * forms tokens out of linework — `±+-+`, `0/5/` — made a real tick's stroke "label ink"). Whether a glyph is a digit is
+ * all that is asked of what was read; no value, reading or lattice is used.
  */
 function labelInkOf(tokens: readonly TextToken[]): LabelInk[] {
-  return tokens.filter((t) => t.glyphs.length >= 2 && t.glyphs.length <= LATTICE_LABEL_GLYPHS).map((t) => ({ box: t.box, glyphs: t.glyphs.map((g) => g.box) }))
+  const numeral = (t: TextToken): boolean => {
+    const digits = t.glyphs.filter((g) => g.char >= '0' && g.char <= '9').length
+    return digits >= 2 && t.glyphs.length - digits <= 1
+  }
+  return tokens.filter((t) => t.glyphs.length >= 2 && t.glyphs.length <= LATTICE_LABEL_GLYPHS && numeral(t)).map((t) => ({ box: t.box, glyphs: t.glyphs.map((g) => g.box), axis: textAxisOf(t.orientation) }))
 }
 
 /**

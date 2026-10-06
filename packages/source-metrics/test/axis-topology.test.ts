@@ -13,11 +13,13 @@ import {
   hungarian,
   labelHeightOf,
   labelSide,
+  markLabelInk,
   readNumbers,
+  sideConventionOf,
   solveFrameChains,
   solveFrameMetric,
 } from '../src/index.js'
-import type { ChainTick, RawChain, TextOrientation, TextToken } from '../src/index.js'
+import type { ChainTick, DimensionLine, RawChain, TextOrientation, TextToken } from '../src/index.js'
 
 /**
  * BUILDPLAN-ANALYZER-005I §18: the dimension-topology corpus.
@@ -230,6 +232,71 @@ describe('§18 (6, 7) label ink and real ticks', () => {
   })
 })
 
+describe('§11 a real tick the labels cover on both sides (post-review A2)', () => {
+  it('a stroke reaching the line between two labels is not label ink: kept, at most doubted, and measured', () => {
+    let checked = 0
+    for (const gap of [3, 4]) {
+      const c = new Canvas(600, 300)
+      hRule(c, 150, 100, 500, [100, 300, 500])
+      const w = c.textWidth('800', CAP)
+      c.text('800', 300 - w / 2, 150 - gap - CAP, CAP)
+      c.text('500', 300 - w / 2, 150 + gap, CAP)
+      const r = analyse(c.toRaster())
+      const i = lineNear(r, 'HORIZONTAL', 150)
+      if (i < 0) continue // at 3 px the labels swallow the line for the line finder: nothing to classify
+      const mid = r.rawChains[i].ticks.find((t) => Math.abs(t.atPx - 300) <= 3)
+      expect(mid?.class).not.toBe('REJECTED')
+      expect(r.measured[i].ticks.some((t) => Math.abs(t.atPx - 300) <= 3)).toBe(true)
+      checked += 1
+    }
+    expect(checked).toBeGreaterThan(0)
+  })
+})
+
+describe('§11 text read across a line is not its label ink (post-review)', () => {
+  it('a real tick under a parallel label and beside text running across the line keeps its place on the chain', () => {
+    const c = new Canvas(600, 300)
+    hRule(c, 150, 100, 500, [100, 300, 500])
+    const w = c.textWidth('800', CAP)
+    c.text('800', 300 - w / 2, 150 - 3 - CAP, CAP)
+    // below the line, text running down the page across it — the kind of short token a reader forms from linework
+    c.text('11', 300 - CAP / 2, 150 + 2 + c.textWidth('11', CAP), CAP, { rotate: 'CW' })
+    const r = analyse(c.toRaster())
+    const i = lineNear(r, 'HORIZONTAL', 150)
+    expect(i).toBeGreaterThanOrEqual(0)
+    const mid = r.rawChains[i].ticks.find((t) => Math.abs(t.atPx - 300) <= 3)
+    expect(mid?.class).not.toBe('REJECTED')
+    expect(r.measured[i].ticks.some((t) => Math.abs(t.atPx - 300) <= 3)).toBe(true)
+  })
+})
+
+describe('§11 label ink is text along the line (post-review)', () => {
+  // A horizontal line at y = 50 with one mark at x = 100; ink 3–8 px above and below it at the mark (two glyph blocks).
+  const W = 200
+  const mask = { width: W, height: 100, data: new Uint8Array(W * 100) }
+  for (let x = 20; x <= 180; x += 1) mask.data[50 * W + x] = 1
+  for (const [y0, y1] of [[42, 47], [53, 58]]) for (let y = y0; y <= y1; y += 1) for (let x = 96; x <= 104; x += 1) mask.data[y * W + x] = 1
+  const line: DimensionLine = {
+    axis: 'HORIZONTAL',
+    baselinePx: 50,
+    fromPx: 20,
+    toPx: 180,
+    thicknessPx: 1,
+    ticksPx: [100],
+    fill: 1,
+    marks: [{ atPx: 100, hitFromPx: 96, hitToPx: 104, class: 'TICK', reasons: [], peakContrast: 1, weakContrast: 1, supportRows: [5, 5], rowsPerSide: 5, widthPx: [9, 9], narrows: [false, false], colourDiff: 0 }],
+  }
+  const block = (y0: number, y1: number) => ({ box: { x0: 94, x1: 106, y0, y1 }, glyphs: [{ x0: 94, x1: 99, y0, y1 }, { x0: 100, x1: 106, y0, y1 }] })
+  it('two numerals printed along the line on either side of it: label ink, rejected', () => {
+    const out = markLabelInk([line], [{ ...block(40, 47), axis: 'HORIZONTAL' }, { ...block(53, 62), axis: 'HORIZONTAL' }], mask)
+    expect(out[0].marks?.[0]).toMatchObject({ class: 'REJECTED', reasons: ['TEXT_INK'] })
+  })
+  it('the same ink, the lower block read as text running across the line: that side is not label ink', () => {
+    const out = markLabelInk([line], [{ ...block(40, 47), axis: 'HORIZONTAL' }, { ...block(53, 62), axis: 'VERTICAL' }], mask)
+    expect(out[0].marks?.[0].class).not.toBe('REJECTED')
+  })
+})
+
 describe('§18 (8, 9) missing and spurious marks', () => {
   it('(8) a missing part tick is never invented: the overall still reads its whole span, the parts do not invent one', () => {
     const r = analyse(margin({ missingTick: 2 }).toRaster())
@@ -359,6 +426,130 @@ describe('§18 (14, 15) the same topology turned and laid flat', () => {
   })
 })
 
+/**
+ * Post-review E2 / A5: the same topology at other lettering, separations, scales and values, and under the other side
+ * convention. `sheet` draws a margin of an overall line and its parts `sepH` label heights apart — on the LEFT of the
+ * building (overall outermost) or on the RIGHT (overall outermost again, so under ISO its number sits between the two
+ * lines) — numbers printed `gap` = a quarter of a label height off their lines, on the ISO side (above / left) or the
+ * OTHER (below / right); a dimension line under the building for the other axis; and, with `anchors`, a far margin of
+ * uncontested labels printed the same way, as a real sheet has.
+ */
+type Convention = 'ISO' | 'OTHER'
+function sheet(o: { cap: number; sepH: number; scale: number; parts: number[]; convention: Convention; side?: 'LEFT' | 'RIGHT'; anchors?: number; drop?: number[] }): { canvas: Canvas; outer: number; inner: number; total: number } {
+  const total = o.parts.reduce((a, b) => a + b, 0)
+  const length = total / o.scale
+  const W = 900
+  const top = 120
+  const bottom = top + length
+  const c = new Canvas(W, Math.ceil(bottom + 260))
+  const cap = o.cap
+  const gap = Math.max(2, Math.round(cap / 4))
+  const sep = Math.round(o.sepH * cap)
+  const [outer, inner] = o.side === 'RIGHT' ? [W - 100, W - 100 - sep] : [60, 60 + sep]
+  const vText = (text: string, x: number, from: number, to: number): void => {
+    const w = c.textWidth(text, cap)
+    c.text(text, o.convention === 'ISO' ? x - gap - cap : x + gap, (from + to) / 2 + w / 2, cap, { rotate: 'CW' })
+  }
+  const hText = (text: string, y: number, from: number, to: number): void => {
+    const w = c.textWidth(text, cap)
+    c.text(text, (from + to) / 2 - w / 2, o.convention === 'ISO' ? y - gap - cap : y + gap, cap, { slant: 0.18 })
+  }
+  vRule(c, outer, top, bottom, [top, bottom])
+  vText(String(total), outer, top, bottom)
+  const ticks = [top]
+  for (const p of o.parts) ticks.push(ticks[ticks.length - 1] + p / o.scale)
+  vRule(c, inner, top, bottom, ticks)
+  o.parts.forEach((p, i) => {
+    if (!(o.drop ?? []).includes(i)) vText(String(p), inner, ticks[i], ticks[i + 1])
+  })
+  const n = o.anchors ?? 2
+  const [x0, x1] = [o.side === 'RIGHT' ? 160 : 200, (o.side === 'RIGHT' ? 160 : 200) + 1200 / o.scale]
+  const yb = bottom + 120
+  const step = (x1 - x0) / n
+  hRule(c, yb, x0, x1, Array.from({ length: n + 1 }, (_, k) => x0 + k * step))
+  for (let k = 0; k < n; k += 1) hText(String(1200 / n), yb, x0 + k * step, x0 + (k + 1) * step)
+  if (o.anchors) {
+    const far = o.side === 'RIGHT' ? 60 : W - 80
+    const s2 = length / o.anchors
+    vRule(c, far, top, bottom, Array.from({ length: o.anchors + 1 }, (_, k) => top + k * s2))
+    for (let k = 0; k < o.anchors; k += 1) vText(String(Math.round(total / o.anchors)), far, top + k * s2, top + (k + 1) * s2)
+  }
+  return { canvas: c, outer, inner, total }
+}
+/** What the final assignment made of a vertical label: `O:i` / `I:i` (outer / inner line, interval) or its status. */
+function sheetBindings(r: Run, outer: number, inner: number, text: string): string[] {
+  const [o, i] = [lineNear(r, 'VERTICAL', outer), lineNear(r, 'VERTICAL', inner)]
+  return r.metric.assignment
+    .filter((d) => d.text === text && onAxis(d.orientation, 'V'))
+    .map((d) => (d.status === 'BOUND' && d.chosen ? `${d.chosen.chain === o ? 'O' : d.chosen.chain === i ? 'I' : `#${d.chosen.chain}`}:${d.chosen.interval}` : d.status))
+    .sort()
+}
+
+describe('§18 (16) the same margin at other lettering, separations, scales and values (post-review E2)', () => {
+  const values = [
+    [300, 600, 450],
+    [250, 850, 250],
+    [120, 1000, 120],
+  ]
+  const scales = [2.0, 2.5, 3.2]
+  let k = 0
+  for (const cap of [13, 16, 22]) {
+    for (const sepH of [1.5, 2.5, 3.8]) {
+      const parts = values[(k + Math.floor(k / 3)) % 3]
+      const scale = scales[k % 3]
+      k += 1
+      it(`cap ${cap} px, lines ${sepH} label heights apart, ${parts.join(' / ')} at ${scale} cm/px: every number on its own line`, () => {
+        const { canvas, outer, inner, total } = sheet({ cap, sepH, scale, parts, convention: 'ISO' })
+        const r = analyse(canvas.toRaster())
+        // The overall line holds exactly one number, and it is the ink printed beside it — the overall's, whatever the
+        // reader made of its digits (at 22 px the lattice reads `1240` as `1210`: an OCR matter, not a topology one).
+        const o = lineNear(r, 'VERTICAL', outer)
+        const onOuter = r.metric.assignment.filter((d) => d.status === 'BOUND' && d.chosen?.chain === o)
+        expect(onOuter).toHaveLength(1)
+        const gap = Math.max(2, Math.round(cap / 4))
+        expect(onOuter[0].box.x1).toBeLessThanOrEqual(outer - gap + 2)
+        expect(onOuter[0].box.x0).toBeGreaterThanOrEqual(outer - gap - cap - 3)
+        if (onOuter[0].text === String(total)) expect(sheetBindings(r, outer, inner, String(total))).toEqual(['O:0'])
+        // A part's number is on its own interval of the part line, or (unread at this lettering) nowhere — never on the overall.
+        parts.forEach((p, i) => {
+          const own = parts.map((q, j) => (q === p ? `I:${j}` : null)).filter((x): x is string => x !== null)
+          for (const b of sheetBindings(r, outer, inner, String(p))) expect(own).toContain(b)
+        })
+        expect(close(r.metric.pooledScale, scale)).toBe(true)
+      })
+    }
+  }
+})
+
+describe('§18 (17–19) the side convention is the sheet’s (post-review E1 / A5)', () => {
+  it('(17) the other convention, stated by the sheet: numbers right of / below their lines — the same assignment', () => {
+    for (const cap of [13, 16, 22]) {
+      const { canvas, outer, inner } = sheet({ cap, sepH: 1.5, scale: 2.5, parts: [250, 850, 250], convention: 'OTHER', anchors: 4 })
+      const r = analyse(canvas.toRaster())
+      expect(r.metric.assignmentConventions.VERTICAL).toMatchObject({ side: 'AFTER', basis: 'STATED' })
+      expect(sheetBindings(r, outer, inner, '1350')).toEqual(['O:0'])
+      expect(sheetBindings(r, outer, inner, '850')).toEqual(['I:1'])
+      expect(sheetBindings(r, outer, inner, '250')).toEqual(['I:0', 'I:2'])
+    }
+  })
+
+  it('(18) an ISO right-hand margin: the overall’s own number sits between the two lines and is still the overall’s', () => {
+    const { canvas, outer, inner } = sheet({ cap: 16, sepH: 1.5, scale: 2.5, parts: [250, 850, 250], convention: 'ISO', side: 'RIGHT' })
+    const r = analyse(canvas.toRaster())
+    expect(sheetBindings(r, outer, inner, '1350')).toEqual(['O:0'])
+    expect(sheetBindings(r, outer, inner, '850')).toEqual(['I:1'])
+    expect(sheetBindings(r, outer, inner, '250')).toEqual(['I:0', 'I:2'])
+  })
+
+  it('(19) the other convention on a sparse sheet, the middle part unread: the overall’s number is never handed to the part line', () => {
+    const { canvas, outer, inner } = sheet({ cap: 16, sepH: 1.5, scale: 2.5, parts: [250, 850, 250], convention: 'OTHER', drop: [1] })
+    const r = analyse(canvas.toRaster())
+    // Two uncontested numbers right of their line contradict ISO; no side is preferred, and a tie is refused.
+    expect(r.metric.assignmentConventions.VERTICAL).toMatchObject({ side: null, basis: 'CONTRADICTED' })
+    for (const b of sheetBindings(r, outer, inner, '1350')) expect(['O:0', 'AMBIGUOUS']).toContain(b)
+  })
+})
+
 // ---------------------------------------------------------------------------
 // token level: the assignment's own contract
 // ---------------------------------------------------------------------------
@@ -389,21 +580,115 @@ const above = (text: string, y: number, at: number, gap: number): TextToken => t
 /** A label below a line (its glyph tops toward it), `gap` px below. */
 const below = (text: string, y: number, at: number, gap: number): TextToken => token(text, { x0: at - text.length * 5, x1: at + text.length * 5, y0: y + gap, y1: y + gap + H })
 
-describe('label side: the convention, in each orientation', () => {
-  it('a line past the baseline is BASELINE, through the body THROUGH, past the glyph tops TOP', () => {
-    const t = token('500', { x0: 0, x1: 30, y0: 100, y1: 116 })
-    expect(labelSide(t, 120)).toBe('BASELINE')
-    expect(labelSide(t, 108)).toBe('THROUGH')
-    expect(labelSide(t, 96)).toBe('TOP')
-    const cw = token('500', { x0: 100, x1: 116, y0: 0, y1: 30 }, 'ROTATED_CW')
-    expect(labelSide(cw, 120)).toBe('BASELINE')
-    expect(labelSide(cw, 96)).toBe('TOP')
-    const ccw = token('500', { x0: 100, x1: 116, y0: 0, y1: 30 }, 'ROTATED_CCW')
-    expect(labelSide(ccw, 96)).toBe('BASELINE')
-    expect(labelSide(ccw, 120)).toBe('TOP')
-    const inv = token('500', { x0: 0, x1: 30, y0: 100, y1: 116 }, 'INVERTED')
-    expect(labelSide(inv, 96)).toBe('BASELINE')
-    expect(labelSide(inv, 120)).toBe('TOP')
+describe('label side: where the ink lies on the page, whichever way up it was read', () => {
+  it('above / left of a line is BEFORE, across it ACROSS, below / right of it AFTER — in every orientation', () => {
+    for (const o of ['HORIZONTAL', 'INVERTED'] as const) {
+      const t = token('500', { x0: 0, x1: 30, y0: 100, y1: 116 }, o)
+      expect(labelSide(t.box, 'HORIZONTAL', 120)).toBe('BEFORE')
+      expect(labelSide(t.box, 'HORIZONTAL', 108)).toBe('ACROSS')
+      expect(labelSide(t.box, 'HORIZONTAL', 96)).toBe('AFTER')
+    }
+    for (const o of ['ROTATED_CW', 'ROTATED_CCW'] as const) {
+      const t = token('500', { x0: 100, x1: 116, y0: 0, y1: 30 }, o)
+      expect(labelSide(t.box, 'VERTICAL', 120)).toBe('BEFORE')
+      expect(labelSide(t.box, 'VERTICAL', 108)).toBe('ACROSS')
+      expect(labelSide(t.box, 'VERTICAL', 96)).toBe('AFTER')
+    }
+  })
+})
+
+const vChainT = (x: number, ys: number[]): RawChain => ({ axis: 'VERTICAL', baselinePx: x, ticks: ys.map((atPx) => ({ atPx, baselinePx: x, observationId: '' })), observationIds: [] })
+/** A vertical label `gap` px left (or right) of a line at `x`, centred on `from`–`to`, read as `orientation`. */
+const beside = (text: string, x: number, from: number, to: number, gap: number, where: 'LEFT' | 'RIGHT', orientation: TextOrientation = 'ROTATED_CW'): TextToken =>
+  token(text, { x0: where === 'LEFT' ? x - gap - H : x + gap, x1: where === 'LEFT' ? x - gap : x + gap + H, y0: (from + to) / 2 - text.length * 5, y1: (from + to) / 2 + text.length * 5 }, orientation)
+const decisionsOf = (chains: RawChain[], tokens: TextToken[]): string[] =>
+  assignLabels(chains, tokens).decisions.map((d) => `${d.text}@${Math.round(d.box.y0)}:${d.status}:${d.chosen ? `${d.chosen.chain}#${d.chosen.interval}` : '-'}`).sort()
+
+describe('the side convention is read from the sheet (post-review E1 / A5)', () => {
+  // The margin of case (1) at token level: overall at x 60 (120–560), parts at x 84 (120 / 160 / 520 / 560).
+  const margin2 = (): RawChain[] => [vChainT(60, [120, 560]), vChainT(84, [120, 160, 520, 560])]
+
+  it('which way up a label was read changes nothing: ISO labels read bottom to top or top to bottom bind alike', () => {
+    for (const unread of [[] as string[], ['1100']]) {
+      const make = (o: TextOrientation): TextToken[] =>
+        [beside('1100', 60, 120, 560, 4, 'LEFT', o), beside('100', 84, 120, 160, 4, 'LEFT', o), beside('900', 84, 160, 520, 4, 'LEFT', o), beside('100', 84, 520, 560, 4, 'LEFT', o)].filter((t) => !unread.includes(t.text))
+      const cw = decisionsOf(margin2(), make('ROTATED_CW'))
+      expect(decisionsOf(margin2(), make('ROTATED_CCW'))).toEqual(cw)
+      // the parts on the part line, whatever is unread
+      expect(cw.filter((d) => d.startsWith('900@'))).toEqual([expect.stringMatching(/:BOUND:1#1$/)])
+    }
+  })
+
+  it('labels printed right of their lines on a sheet that says nothing else: the overall’s number is never handed to the part line', () => {
+    // Middle part unread: the overall's number is between the lines, 4 px from each. ISO would send it to the part line.
+    const tokens = [beside('1100', 60, 120, 560, 4, 'RIGHT'), beside('100', 84, 120, 160, 4, 'RIGHT'), beside('100', 84, 520, 560, 4, 'RIGHT')]
+    const r = assignLabels(margin2(), tokens)
+    expect(r.conventions.VERTICAL).toMatchObject({ side: null, basis: 'CONTRADICTED' })
+    const overall = r.decisions.find((d) => d.text === '1100')
+    expect(overall?.status === 'BOUND' ? overall.chosen : overall?.status).not.toEqual({ chain: 1, interval: 1 })
+  })
+
+  it('a sheet whose uncontested labels all sit right of their lines states that convention, and it binds as ISO does on an ISO sheet', () => {
+    const far = [vChainT(300, [120, 230, 340, 450, 560])]
+    const anchors = [0, 1, 2, 3].map((k) => beside('275', 300, 120 + k * 110, 230 + k * 110, 4, 'RIGHT'))
+    const tokens = [beside('1100', 60, 120, 560, 4, 'RIGHT'), beside('100', 84, 120, 160, 4, 'RIGHT'), beside('100', 84, 520, 560, 4, 'RIGHT'), ...anchors]
+    const r = assignLabels([...margin2(), ...far], tokens)
+    expect(r.conventions.VERTICAL).toMatchObject({ side: 'AFTER', basis: 'STATED' })
+    expect(r.decisions.find((d) => d.text === '1100')).toMatchObject({ status: 'BOUND', chosen: { chain: 0, interval: 0 } })
+  })
+
+  it('an in-line label (the line runs through it) costs nothing for its side and is its line’s, beside a neighbour', () => {
+    const across = token('500', { x0: 185, x1: 215, y0: 92, y1: 108 })
+    expect(labelSide(across.box, 'HORIZONTAL', 100)).toBe('ACROSS')
+    const r = assignLabels([hChain(100, [0, 400]), hChain(118, [0, 400])], [across])
+    expect(r.decisions[0]).toMatchObject({ status: 'BOUND', chosen: { chain: 0, interval: 0 } })
+    expect(r.decisions[0].candidates.find((c) => c.chain === 0)).toMatchObject({ side: 'ACROSS', againstConvention: false })
+  })
+
+  it('the rule: stated by four to one, contradicted by two against, otherwise ISO stands — with or without anchors for it', () => {
+    expect(sideConventionOf({ before: 0, across: 0, after: 0 })).toMatchObject({ side: 'BEFORE', basis: 'SILENT' })
+    expect(sideConventionOf({ before: 3, across: 1, after: 1 })).toMatchObject({ side: 'BEFORE', basis: 'CONSISTENT' })
+    expect(sideConventionOf({ before: 8, across: 0, after: 2 })).toMatchObject({ side: 'BEFORE', basis: 'STATED' })
+    expect(sideConventionOf({ before: 1, across: 0, after: 1 })).toMatchObject({ side: 'BEFORE', basis: 'CONSISTENT' })
+    expect(sideConventionOf({ before: 2, across: 0, after: 2 })).toMatchObject({ side: null, basis: 'CONTRADICTED' })
+    expect(sideConventionOf({ before: 1, across: 0, after: 3 })).toMatchObject({ side: null, basis: 'CONTRADICTED' })
+    expect(sideConventionOf({ before: 1, across: 0, after: 4 })).toMatchObject({ side: 'AFTER', basis: 'STATED' })
+  })
+})
+
+describe('the record says what was decided (post-review A3 / A6 / A9 / E9)', () => {
+  it('a refused label names no line: AMBIGUOUS carries every candidate and no `chosen`', () => {
+    const chains = [hChain(100, [0, 400])]
+    const { decisions } = assignLabels(chains, [above('1000', 100, 190, 3), above('1000', 100, 210, 3)])
+    expect(decisions.every((d) => d.status === 'AMBIGUOUS' && d.chosen === undefined && d.candidates.length === 1)).toBe(true)
+  })
+
+  it('`centred` is recorded as found even where it costs nothing (the page vote)', () => {
+    const chains = [hChain(100, [0, 100, 400])]
+    const off = above('300', 100, 380, 3) // near the end of the 100–400 interval: no span is centred on it
+    const { decisions } = assignLabels(chains, [off])
+    expect(decisions[0].candidates[0].centred).toBe(false)
+    expect(decisions[0].candidates[0].cost).toBeLessThan(ASSIGNMENT_BOUNDS.uncentred)
+  })
+
+  it('of two tokens with one geometry and reading, the same one is kept whichever comes first', () => {
+    const chains = [hChain(100, [0, 400])]
+    const a = above('1000', 100, 200, 3)
+    const b = { ...above('1000', 100, 200, 3), height: 20 }
+    const pick = (ts: TextToken[]): number | undefined => assignLabels(chains, ts).decisions[0]?.candidates[0]?.offset
+    expect(pick([a, b])).toBe(pick([b, a]))
+  })
+})
+
+describe('axis groups: a line ends where its first and last ticks are (post-review A4 / E4)', () => {
+  it('a neighbour’s interior mark, or its doubted end, does not align an end; its own tick end does', () => {
+    const parts = vChainT(84, [120, 160, 520, 560])
+    const interior = vChainT(60, [100, 120, 580]) // a mark at 120, but the line runs on past it
+    expect(dimensionAxisGroups('f', [interior, parts], ['a', 'b'], 16).perChain[1]?.alignedEnds).toEqual([false, false])
+    const ends = vChainT(60, [120, 560])
+    expect(dimensionAxisGroups('f', [ends, parts], ['a', 'b'], 16).perChain[1]?.alignedEnds).toEqual([true, true])
+    const doubted: RawChain = { ...ends, ticks: ends.ticks.map((t) => (t.atPx === 560 ? { ...t, class: 'QUESTIONABLE' as const, reasons: ['TEXT_INK' as const] } : t)) }
+    expect(dimensionAxisGroups('f', [{ ...doubted, ticks: [...doubted.ticks, { atPx: 600, baselinePx: 60, observationId: '' }] }, parts], ['a', 'b'], 16).perChain[1]?.alignedEnds).toEqual([true, false])
   })
 })
 
@@ -439,7 +724,7 @@ describe('§13 global assignment', () => {
     // centre past its baseline: equal costs by construction.
     const label = token('500', { x0: 100, x1: 130, y0: 100, y1: 116 })
     const top = hChain(108 - 0.75 * H, [0, 400])
-    const base = hChain(108 + (0.75 + ASSIGNMENT_BOUNDS.topSide) * H, [0, 400])
+    const base = hChain(108 + (0.75 + ASSIGNMENT_BOUNDS.againstConvention) * H, [0, 400])
     const { decisions } = assignLabels([top, base], [label])
     expect(decisions[0].status).toBe('AMBIGUOUS')
     expect(decisions[0].margin).toBeLessThan(ASSIGNMENT_BOUNDS.ambiguity)

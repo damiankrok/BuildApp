@@ -112,8 +112,35 @@ describe('§16 walls refute a side, never state one', () => {
     const out = refuteByWalls(extent, [overall], witness, 12)
     expect(out.rect.y1).toBe(560)
     expect(out.refutations?.[0]).toMatchObject({ side: 'S', action: 'ALTERNATE_DIMENSION_MARK', movedToPx: 560, chainId: 'overall' })
-    // The move is a dimension statement: the frame is not marked weak for it.
-    expect(out.weak).toBe(false)
+    // A side the walls had to question is weighed by the resolver, not taken on trust (post-review A1/E5).
+    expect(out.weak).toBe(true)
+  })
+
+  // post-review A1/E5: a garage whose two walls run on 240 px past the main block's south side.
+  const garage: WallWitness = {
+    rect: { x0: 100, y0: 120, x1: 500, y1: 760 },
+    bands: [band('VERTICAL', 100, 120, 112, 520), band('VERTICAL', 488, 120, 500, 760), band('VERTICAL', 300, 120, 312, 760), band('HORIZONTAL', 100, 120, 500, 132), band('HORIZONTAL', 100, 508, 300, 520), band('HORIZONTAL', 300, 748, 500, 760)],
+    detached: 0,
+    why: 'test',
+  }
+
+  it('a tick inside a line out there (a window jamb) is no side: only where a line ENDS, where the walls end', () => {
+    const openings = vChain('openings', 540, [120, 520, 535, 560, 680, 760], [seg(120, 520, 'READ'), seg(520, 535, 'DERIVED'), seg(535, 560, 'DERIVED'), seg(560, 680, 'DERIVED'), seg(680, 760, 'DERIVED')])
+    const out = refuteByWalls(extent, [openings], garage, 12)
+    expect(out.refutations?.[0]).toMatchObject({ side: 'S', action: 'ALTERNATE_DIMENSION_MARK', movedToPx: 760, chainId: 'openings' })
+    expect(out.weak).toBe(true)
+  })
+
+  it('a line that ends short of where the walls end moves nothing: the walls would still run on past it', () => {
+    const short = vChain('short', 540, [120, 520, 535, 560], [seg(120, 520, 'READ'), seg(520, 535, 'DERIVED'), seg(535, 560, 'DERIVED')])
+    const out = refuteByWalls(extent, [short], garage, 12)
+    expect(out.rect).toEqual(extent.rect)
+    expect(out.refutations?.map((r) => `${r.side}:${r.action}`)).toEqual(['S:DOWNGRADED'])
+    expect(out.weak).toBe(true)
+  })
+
+  it('a side the drawing frames with its own overall dimension (OUTER_TOTAL_MARKS) is never asked', () => {
+    expect(refuteByWalls({ ...extent, provenance: { x: 'DIMENSION_CHAIN_EXTENT', y: 'OUTER_TOTAL_MARKS' } }, [], garage, 12).refutations).toBeUndefined()
   })
 
   it('walls that stop at the side refute nothing; a side the walls framed is never asked', () => {
