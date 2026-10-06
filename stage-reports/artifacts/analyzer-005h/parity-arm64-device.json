@@ -21,7 +21,7 @@
  "supplementary": {
   "kind": "arm64 Linux user-mode emulation on an x86-64 desktop (QEMU qemu-aarch64-static) — NOT a phone, NOT Android, NOT arm64 silicon",
   "runtime": { "node": "v18.20.4 (official linux-arm64 build, full ICU)", "v8": "10.2.154.26-node.37", "arch": "arm64", "platform": "linux" },
-  "bundle": "the APK's runtime bundle built at 5315ff8 (PRE_HOLDOUT_7_SHA): main.mjs sha256 f1a69daac12fba70…, ocr-self-test.mjs, ocr-worker.mjs, the WebAssembly and the model, run as `node main.mjs --self-test ocr --watchdog-scale 20`",
+  "bundle": "the runtime bundle built locally at 5315ff8 (PRE_HOLDOUT_7_SHA) with apps/local-analyzer/build.mjs: main.mjs sha256 f1a69daac12fba70…, ocr-self-test.mjs, ocr-worker.mjs, the WebAssembly and the model, run as `node main.mjs --self-test ocr --watchdog-scale 20`. Against the OWNER APK (run 160): main.mjs, the WASM, its loader and the model are byte-identical; analyzer.mjs, ocr-worker.mjs and ocr-self-test.mjs are identical apart from esbuild's source-path comments and module keys (the APK build runs from apps/android/app)",
   "attempts": [
    {
     "attempt": 1,

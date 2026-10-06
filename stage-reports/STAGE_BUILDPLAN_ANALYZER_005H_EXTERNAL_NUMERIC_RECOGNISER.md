@@ -51,7 +51,7 @@ recogniser the generator never yields and the bytes are the sync path's.
 | layer | files |
 | --- | --- |
 | `source-metrics` | `recogniser.ts` (types only), `ensemble.ts`, `extract.ts` (async seam, opaque keys), metric-solution reads `ensemble` |
-| `numeric-recogniser-ort` (new) | `manifest.ts` (pins, verified bytes), `engine.ts` (the only ORT import), `paddle.ts`, `bracket.ts`, `worker.ts`, `client.ts` (worker per batch, watchdog, RSS samples), `inline.ts` (tests), `scripts/fetch-model.mjs`, `scripts/synthetic-gate.ts` |
+| `numeric-recogniser-ort` (new) | `manifest.ts` (pins, verified bytes), `engine.ts` (the only ORT import), `paddle.ts`, `bracket.ts`, `worker.ts`, `client.ts` (worker per batch, watchdog, RSS samples), `inline.ts` (tests), `tools/fetch-model.mjs` (also a Gradle build-time task, not a dependency), `scripts/synthetic-gate.ts` |
 | `analysis-service` | the recogniser option, `OCR_EXTERNAL` substage with heartbeats, typed `RecogniserFailure` → `EXTERNAL_RECOGNISER_FAILED`, the summary counts |
 | `local-analyzer` / APK | bundle ships `ocr-worker.mjs`, the WASM and loader, `models/`, `ocr-self-test.mjs`, each hashed in the bundle manifest; Android: the OCR self-test card, `runtimeBusy`, Polish failure texts |
 | `evidence-pack` | `EXTERNAL_OCR_CANDIDATES`, the recogniser record |
@@ -363,9 +363,12 @@ re-scored.
 | 155 | push | `d04ebc4` | **red**: `Analyzer / progress` ran the bundle tests without the model → model cache and verified fetch added to the job |
 | 156 | push | `d14304c` | **red**: the emulator jobs — every analysis `EXTERNAL_RECOGNISER_FAILED` (`os.tmpdir()` → `/tmp` on Android) → fixed in `5315ff8` |
 | **157** | push | **`5315ff8`** = PRE_HOLDOUT_7_SHA | **green**, every job (preview / OWNER APK skipped by design) |
-| 158 | push | `6e931ee` (the ledger line) | superseded by the report's push |
+| 158 | push | `6e931ee` (the ledger line) | cancelled by the next push (concurrency group) |
+| 159 | push | `863b525` (this report) | cancelled by the dispatch on the same commit |
+| **160** | `workflow_dispatch` (`owner_apk`) | **`863b525`** | **green** at the first attempt: 39 jobs, 38 green — the emulator, the UI evidence gate (53 min) and the OWNER APK among them — and `preview-latest` skipped by design. The final CI (§R) |
 
-The final CI and the OWNER APK dispatch on the report's commit are recorded in §R.
+No production file changed after `PRE_HOLDOUT_7_SHA`: `5315ff8..863b525` touches only `holdout/LEDGER.ndjson`,
+`stage-reports/` and `PROJECT_STATUS.md`.
 
 ## Q. Commits
 
@@ -376,15 +379,39 @@ On `analyzer/external-numeric-recogniser-v1` from `c6fe174`, each pushed to the 
 - `5315ff8` — the Android loader copy and coded failures (the freeze);
 - `6e931ee` — the ledger line;
 - `85ccf42` — blind round 7, parity, measurements;
-- then this report and PROJECT_STATUS, and the OWNER APK record (§R).
+- `863b525` — this report and PROJECT_STATUS (the final CI and OWNER APK, run 160);
+- then the OWNER APK record (this section and §P, §R).
 
 ## R. OWNER APK
 
-Recorded in the commit after this report, from the `workflow_dispatch` (`owner_apk`) run on it: ABI, version, run and
-commit, APK SHA-256, signer, model and WASM SHA-256, recogniser id, schema and lattice versions, native libraries and
-permissions — each verified from the downloaded file.
+`https://github.com/damiankrok/BuildApp/releases/download/owner-preview-latest/BuildPlan-owner-preview.apk`, from
+`workflow_dispatch` run 160 attempt 1 (`37399397739`) on `863b525`, which is also the final CI. Its analyzer code is the
+frozen code (`PRE_HOLDOUT_7_SHA`); only the ledger, documents and sealed evidence differ.
+
+Verified from the downloaded file, not from the notes:
+
+| check | result |
+| --- | --- |
+| direct link | serves the APK itself: 39 419 927 bytes, `application/vnd.android.package-archive`; prerelease updated 02:24:58Z, downloaded after run 160 completed |
+| SHA-256 | `c9cf22daf59cd7f38422d4d59eef89c1d06c15af2e1ba03c2a78694db0f24e90`, equal to the release notes and to GitHub's asset digest |
+| ABI | `native-code: 'arm64-v8a'` only; 5 libraries under `lib/arm64-v8a/` — `libnode`, `libbuildapp_node_bridge`, `libfilament-jni`, `libc++_shared`, `libandroidx.graphics.path` — the same five as before 005H: **no new `.so`** |
+| version | `com.buildplan.preview`, **versionCode 1160**, versionName `0.160.0-preview`, minSdk 26, targetSdk 35 |
+| commit / run | the notes give run 160 (attempt 1) from `claude/new-session-3kzcgh` @ `863b5259f494104f369ad8b6236942cc72c00df6` |
+| signer | `apksigner verify --print-certs`: "BuildPlan Model Preview, Preview builds (not a production key)", certificate SHA-256 `6e48fac4…a0da`, equal to the notes; installs over build 1151 |
+| permissions | `INTERNET` and AndroidX's own `DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION` — nothing added by 005H (the manifest is unchanged; the Gradle change is a build-time model fetch task, not a dependency) |
+| recogniser assets | `assets/local-analyzer/models/PP-OCRv6_tiny_rec.onnx` sha256 `9ef676d6…63e6` (4 462 639 bytes), `…dict.json` `9a8199f8…`, `ort-wasm-simd-threaded.wasm` sha256 `3398c10d…dee2` (14 239 897 bytes), its loader `e13f7f94…`, `ocr-worker.mjs`, `ocr-self-test.mjs` — every file equal to the bundle manifest's pin |
+| recogniser id | `ocr.ppocrv6-tiny-rec@9ef676d6` in `analyzer.mjs`, `ocr-worker.mjs` and `ocr-self-test.mjs` |
+| versions | `analyzer.mjs` declares `METRIC_EVIDENCE_SCHEMA_VERSION = "1.5.0"` / `METRIC_EVIDENCE_ENSEMBLE_SCHEMA_VERSION = "1.6.0"` and `NUMERIC_LATTICE_VERSION = "1.1.0"` / `NUMERIC_LATTICE_ENSEMBLE_VERSION = "1.2.0"` (the second of each only when a label was read) |
+| engine placement | `analyzer.mjs` has no `InferenceSession` (ONNX Runtime is only in the worker); its "onnxruntime" strings are the licence pins |
+| licences | `assets/licenses/`: PaddleOCR Apache-2.0 and notice, ONNX Runtime licence and third-party notices |
+| reproducibility | a local build of the bundle from the same commit equals the APK's `analyzer.mjs`, `ocr-worker.mjs` and `ocr-self-test.mjs` apart from esbuild's source-path comments and module keys (the APK build runs from `apps/android/app`); `main.mjs`, the WASM, its loader and the model are byte-identical |
+
+The APK is 39.4 MB (build 1151: 30.8 MB): the model and the WebAssembly add about 8.5 MB compressed. No APK binary is
+committed.
 
 ### OWNER phone checklist
+
+Install `BuildPlan-owner-preview.apk` (versionCode 1160) over build 1151, then:
 
 1. **arm64 parity (closes ARM64_DEVICE_PARITY).** Open "Dodaj dom z linku" → "Test zgodności odczytu wymiarów" →
    "Uruchom test", then copy the result ("Kopiuj wynik").
