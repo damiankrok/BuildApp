@@ -116,6 +116,32 @@ describe('the worker the analyzer runs', () => {
     expect(worker.stats().map((x) => x.outcome)).toEqual(['CANCELLED', 'CANCELLED'])
   })
 
+  it('where no private copy of the loader can be written (no $TMPDIR, as on Android), it reads from the verified file', async () => {
+    const before = process.env.TMPDIR
+    process.env.TMPDIR = join(tmpdir(), 'no-such-scratch-dir', 'deeper')
+    try {
+      // the worker's environment is the parent's, copied when it starts
+      const worker = workerRecogniser({ workerUrl, paths: workspaceAssetPaths() })
+      const inline = inlineRecogniser({ paths: workspaceAssetPaths() })
+      const expected = await inline.recognise(crops)
+      await inline.release()
+      expect(await worker.recognise(crops)).toEqual(expected)
+    } finally {
+      if (before === undefined) delete process.env.TMPDIR
+      else process.env.TMPDIR = before
+    }
+  })
+
+  it('a worker that fails says how, by code (never a path) — not that it exited', async () => {
+    const worker = workerRecogniser({ workerUrl, paths: { ...workspaceAssetPaths(), dictionary: join(tmpdir(), 'no-such-dictionary.json') } })
+    const error = await worker.recognise(crops).then(
+      () => undefined,
+      (e: unknown) => e as Error & { code?: string },
+    )
+    expect(error?.name).toBe('RecogniserAssetError')
+    expect(error?.message).not.toMatch(/exited \(/)
+  })
+
   it('in the worker, fetch fails by name: no code path can reach the network (red team B4)', async () => {
     const scope: { fetch?: unknown } = { fetch: () => Promise.resolve('network') }
     forbidNetwork(scope)

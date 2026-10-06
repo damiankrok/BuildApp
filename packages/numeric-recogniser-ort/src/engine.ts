@@ -5,7 +5,12 @@
  * pool, no SharedArrayBuffer), no proxy worker, the WebAssembly binary handed over as the verified bytes
  * (`wasmBinary`) rather than located, and its loader imported from a private copy of the verified bytes — written to a
  * fresh temporary directory and removed on release, so the code that runs is the code that was hashed. The model is
- * handed over as verified bytes too. A session is opened per batch of crops and released after it (`release`); the process
+ * handed over as verified bytes too.
+ *
+ * The temporary directory is `$TMPDIR` read from `process.env`, not `os.tmpdir()`: Node reads that through
+ * `safeGetenv`, which ignores the environment in a process the kernel marks AT_SECURE — as Android may mark an app
+ * process — and falls back to `/tmp`, which Android does not have. Where no private copy can be written, the loader is
+ * imported from the file it was verified from, a moment before. A session is opened per batch of crops and released after it (`release`); the process
  * that holds it is the one that gives its memory back — which is why the analyzer runs it in a worker that exits.
  */
 import * as ort from 'onnxruntime-web'
@@ -38,12 +43,23 @@ export async function openEngine(paths: RecogniserAssetPaths, clock: () => numbe
   const classes = classesOf(assets.dictionary)
   if (classes.length !== MODEL.dictionary.classes) throw new Error(`the dictionary gives ${classes.length} classes, the manifest ${MODEL.dictionary.classes}`)
   onStep?.('VERIFIED')
-  const loaderDir = mkdtempSync(join(tmpdir(), 'ort-loader-'))
-  const removeLoader = (): void => rmSync(loaderDir, { recursive: true, force: true })
+  const privateLoader = (): { file: string; dir: string } | undefined => {
+    try {
+      const dir = mkdtempSync(join(process.env.TMPDIR || tmpdir(), 'ort-loader-'))
+      const file = join(dir, WASM_LOADER_FILE)
+      writeFileSync(file, assets.wasmLoader, { mode: 0o600 })
+      return { file, dir }
+    } catch {
+      return undefined
+    }
+  }
+  const copy = privateLoader()
+  const removeLoader = (): void => {
+    if (copy) rmSync(copy.dir, { recursive: true, force: true })
+  }
   let session: ort.InferenceSession
   try {
-    const loader = join(loaderDir, WASM_LOADER_FILE)
-    writeFileSync(loader, assets.wasmLoader, { mode: 0o600 })
+    const loader = copy?.file ?? paths.wasmLoader
     ort.env.wasm.numThreads = 1
     ort.env.wasm.proxy = false
     ort.env.wasm.wasmBinary = assets.wasm

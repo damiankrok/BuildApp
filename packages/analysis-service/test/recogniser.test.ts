@@ -36,8 +36,19 @@ describe('a recogniser that fails stops the run by name', () => {
       substage: 'OCR_EXTERNAL',
       diagnostics: { recogniserFailure: 'OUT_OF_MEMORY' },
     })
-    // the raw message never crosses to a client
+    // the raw message never crosses to a client; its code does
     expect(JSON.stringify((error as AnalysisError).failure())).not.toContain('heap')
+    expect((error as AnalysisError).failure().diagnostics).toMatchObject({ recogniserError: 'ERR_WORKER_OUT_OF_MEMORY' })
+  }, 120_000)
+
+  it('a failure with a path in its message carries its code and never the path', async () => {
+    const error = await run(failingWith(Object.assign(new Error("the recogniser worker failed: ENOENT: no such file or directory, mkdtemp '/data/user/0/app/files/x'"), { code: 'ENOENT' }))).then(
+      () => undefined,
+      (e: unknown) => e,
+    )
+    const failure = (error as AnalysisError).failure()
+    expect(failure).toMatchObject({ reasonCode: 'EXTERNAL_RECOGNISER_FAILED', diagnostics: { recogniserFailure: 'FAILED', recogniserError: 'ENOENT' } })
+    expect(JSON.stringify(failure)).not.toContain('/data/')
   }, 120_000)
 
   it('names each kind of failure', () => {
@@ -47,6 +58,8 @@ describe('a recogniser that fails stops the run by name', () => {
     expect(recogniserFailureKind(Object.assign(new Error('no sign of life'), { name: 'RecogniserTimeout' }))).toBe('TIMEOUT')
     expect(recogniserFailureKind(new Error('the recogniser worker exited (1) before it answered'))).toBe('WORKER_EXITED')
     expect(recogniserFailureKind(new Error('something else'))).toBe('FAILED')
+    // a worker that answered with an error did not exit: it failed, and says how by its code
+    expect(recogniserFailureKind(Object.assign(new Error("the recogniser worker failed: ENOENT: no such file or directory, mkdtemp '/tmp/x'"), { code: 'ENOENT' }))).toBe('FAILED')
   })
 
   it('a cancel is still a cancel, not a recogniser failure', async () => {

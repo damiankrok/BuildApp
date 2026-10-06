@@ -27,7 +27,7 @@ export type WorkerReply =
   | { type: 'ready'; loadMs: number }
   | { type: 'progress'; done: number; total: number }
   | { type: 'result'; readings: ExternalReading[]; perCropMs: number[] }
-  | { type: 'error'; name: string; message: string }
+  | { type: 'error'; name: string; code?: string; message: string }
 
 /** The worker reaches nothing: a `fetch` anywhere in it — ONNX Runtime's included — fails at once, by name. */
 export function forbidNetwork(scope: { fetch?: unknown } = globalThis): void {
@@ -38,7 +38,10 @@ export function forbidNetwork(scope: { fetch?: unknown } = globalThis): void {
   })
 }
 
-const failure = (error: unknown): WorkerReply => ({ type: 'error', name: (error as Error)?.name ?? 'Error', message: (error as Error)?.message ?? String(error) })
+const failure = (error: unknown): WorkerReply => {
+  const code = (error as { code?: unknown } | null)?.code
+  return { type: 'error', name: (error as Error)?.name ?? 'Error', ...(typeof code === 'string' ? { code } : {}), message: (error as Error)?.message ?? String(error) }
+}
 
 /** Run the worker's side of the protocol on `port`. */
 export async function serveRecogniser(port: NonNullable<typeof parentPort>, init: WorkerRequest['init']): Promise<void> {

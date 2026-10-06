@@ -150,7 +150,7 @@ export function workerRecogniser(options: { workerUrl: URL; paths: RecogniserAss
           afterOcrBytes = rss()
           finish({ readings: message.readings, perCropMs: message.perCropMs })
         } else if (message.type === 'error') {
-          const error = new Error(`the recogniser worker failed: ${message.message}`)
+          const error = Object.assign(new Error(`the recogniser worker failed: ${message.message}`), message.code ? { code: message.code } : {})
           error.name = message.name
           finish({ error })
         }

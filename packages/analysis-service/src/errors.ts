@@ -99,10 +99,15 @@ export type RecogniserFailureKind = 'OUT_OF_MEMORY' | 'WORKER_EXITED' | 'ASSETS_
  */
 export class RecogniserFailure extends Error {
   readonly kind: RecogniserFailureKind
+  /** The error's own code or name (`ENOENT`, `ERR_WORKER_OUT_OF_MEMORY`, `RangeError`) — never its message, which may carry a path. */
+  readonly detail: string
   constructor(override readonly cause: unknown) {
     super('the external numeric recogniser failed')
     this.name = 'RecogniserFailure'
     this.kind = recogniserFailureKind(cause)
+    const e = cause as { code?: unknown; name?: unknown } | null
+    const raw = typeof e?.code === 'string' ? e.code : typeof e?.name === 'string' ? e.name : 'Error'
+    this.detail = raw.replace(/[^A-Za-z0-9_]/g, '').slice(0, 48) || 'Error'
   }
 }
 
@@ -112,7 +117,7 @@ export function recogniserFailureKind(error: unknown): RecogniserFailureKind {
   if (e?.code === 'ERR_WORKER_OUT_OF_MEMORY' || /out of memory|OOM|memory access out of bounds|Cannot allocate|WebAssembly\.Memory/i.test(text)) return 'OUT_OF_MEMORY'
   if (e?.name === 'RecogniserAssetError') return 'ASSETS_REFUSED'
   if (e?.name === 'RecogniserTimeout') return 'TIMEOUT'
-  if (/exited|worker/i.test(text)) return 'WORKER_EXITED'
+  if (/exited \(|ERR_WORKER_/.test(text)) return 'WORKER_EXITED'
   return 'FAILED'
 }
 
@@ -177,7 +182,7 @@ export function toAnalysisError(error: unknown, signal?: AbortSignal, context: {
       stage: 'EXTRACTING_OBSERVATIONS',
       substage: 'OCR_EXTERNAL',
       title: 'The dimension reader could not run',
-      diagnostics: { recogniserFailure: error.kind },
+      diagnostics: { recogniserFailure: error.kind, recogniserError: error.detail },
     })
   }
   if (isReconstructionFailure(error)) {

@@ -1,0 +1,169 @@
+{
+ "schema": "buildapp.005h-model-runtime-integrity",
+ "version": 1,
+ "recogniser": {
+  "id": "ocr.ppocrv6-tiny-rec@9ef676d6",
+  "runtime": "onnxruntime-web@1.30.0/wasm-simd/1-thread"
+ },
+ "model": {
+  "name": "PP-OCRv6_tiny_rec",
+  "upstream": {
+   "host": "huggingface.co",
+   "repo": "PaddlePaddle/PP-OCRv6_tiny_rec_onnx",
+   "commit": "2612ab37152ae0a677521bae4e1e3d4fb4cf7c30",
+   "file": "inference.onnx"
+  },
+  "file": "PP-OCRv6_tiny_rec.onnx",
+  "sha256": "9ef676d6ed3c88256a2d92c640c44f25b0c40947e111b14b8be8f594091563e6",
+  "bytes": 4462639,
+  "dictionary": {
+   "source": "inference.yml",
+   "sourceSha256": "66170210bad538e83fff3c4a3867e547d6bf20b50d64b20347c4b913f3034ea1",
+   "key": "PostProcess.character_dict",
+   "file": "PP-OCRv6_tiny_rec.dict.json",
+   "sha256": "9a8199f82393355db5423a9ac7ed6f821350c17237a7c9d8fc40566bc3eafd6b",
+   "entries": 6904,
+   "classes": 6906
+  },
+  "license": {
+   "spdx": "Apache-2.0",
+   "evidence": "Hugging Face API cardData.license = apache-2.0 at the pinned commit (005G licensing-matrix.md)",
+   "notice": "licenses/PaddleOCR-PP-OCRv6-NOTICE.txt",
+   "text": "licenses/PaddleOCR-LICENSE-Apache-2.0.txt"
+  },
+  "trainingData": "UNDISCLOSED: PaddleOCR does not publish its recognition training sets per dataset; whether any non-commercial data was used is unverified. A named residual data-provenance risk (005G), not a licence finding."
+ },
+ "runtime": {
+  "package": "onnxruntime-web",
+  "version": "1.30.0",
+  "lockfile": {
+   "version": "1.30.0",
+   "resolved": "https://registry.npmjs.org/onnxruntime-web/-/onnxruntime-web-1.30.0.tgz",
+   "integrity": "sha512-q0y+JrrtukXSzsBWEMccVfqX25LRmosXHF+CaRJmg8pZClzcV7svNc4rKY3jL02Vb7QmRMDs1SigqR4CXAfKYQ==",
+   "license": "MIT"
+  },
+  "dependencies": [
+   {
+    "name": "flatbuffers",
+    "version": "25.9.23",
+    "integrity": "sha512-MI1qs7Lo4Syw0EOzUl0xjs2lsoeqFku44KpngfIduHBYvzm8h2+7K8YMQh1JtVVVrUvhLpNwqVi4DERegUJhPQ==",
+    "license": "Apache-2.0"
+   },
+   {
+    "name": "guid-typescript",
+    "version": "1.0.9",
+    "integrity": "sha512-Y8T4vYhEfwJOTbouREvG+3XDsjr8E3kIr7uf+JZ0BYloFsttiHU0WfvANVsR7TxNUJa/WpCnw/Ino/p+DeBhBQ==",
+    "license": "ISC"
+   },
+   {
+    "name": "long",
+    "version": "5.3.2",
+    "integrity": "sha512-mNAgZ1GmyNhD7AuqnTG3/VQ26o760+ZYBPKjPvugO8+nLbYfX6TVpJPseBvopbdY+qpZ/lKUnmEc1LeZYS3QAA==",
+    "license": "Apache-2.0"
+   },
+   {
+    "name": "onnxruntime-common",
+    "version": "1.30.0",
+    "integrity": "sha512-7fdVWjAID1dVhH/G8qK3APARunV4VkBFoCQAP7qp4Wkab0mrorvmc+sqiT+mKXOzDqdjN5j+/Z9nb4gzNPWcyA==",
+    "license": "MIT"
+   },
+   {
+    "name": "platform",
+    "version": "1.3.6",
+    "integrity": "sha512-fnWVljUchTro6RiCFvCXBbNhJc2NijN7oIQxbwsyL0buWJPG85v81ehlHI9fXrJsMNgTofEoWIQeClKpgxFLrg==",
+    "license": "MIT"
+   },
+   {
+    "name": "protobufjs",
+    "version": "7.6.6",
+    "integrity": "sha512-dYDWdjSl5RNb7SgPxGQcRU+GtvP7s2fpkrY0r432PcOIaZ0/rBcxEZnQN67iJhFuQiVw754JDoPruPCNdGsbjg==",
+    "license": "BSD-3-Clause"
+   }
+  ],
+  "configuration": {
+   "numThreads": 1,
+   "proxy": false,
+   "wasmBinary": "verified bytes from the manifest pin",
+   "wasmPaths": "{ mjs: a private copy of the verified loader bytes }",
+   "fetch": "replaced in the worker by a function that throws",
+   "executionProviders": [
+    "wasm"
+   ]
+  }
+ },
+ "files": [
+  {
+   "role": "model",
+   "path": "packages/numeric-recogniser-ort/models/PP-OCRv6_tiny_rec.onnx",
+   "pinnedSha256": "9ef676d6ed3c88256a2d92c640c44f25b0c40947e111b14b8be8f594091563e6",
+   "sha256": "9ef676d6ed3c88256a2d92c640c44f25b0c40947e111b14b8be8f594091563e6",
+   "bytes": 4462639,
+   "pinnedBytes": 4462639,
+   "verdict": "MATCH"
+  },
+  {
+   "role": "dictionary",
+   "path": "packages/numeric-recogniser-ort/models/PP-OCRv6_tiny_rec.dict.json",
+   "pinnedSha256": "9a8199f82393355db5423a9ac7ed6f821350c17237a7c9d8fc40566bc3eafd6b",
+   "sha256": "9a8199f82393355db5423a9ac7ed6f821350c17237a7c9d8fc40566bc3eafd6b",
+   "bytes": 40967,
+   "pinnedBytes": null,
+   "verdict": "MATCH"
+  },
+  {
+   "role": "wasm",
+   "path": "node_modules/onnxruntime-web/dist/ort-wasm-simd-threaded.wasm",
+   "pinnedSha256": "3398c10d07d229bd91b364548e130e0e51a8e5704b88c7c083ebbeb78842dee2",
+   "sha256": "3398c10d07d229bd91b364548e130e0e51a8e5704b88c7c083ebbeb78842dee2",
+   "bytes": 14239897,
+   "pinnedBytes": 14239897,
+   "verdict": "MATCH"
+  },
+  {
+   "role": "wasmLoader",
+   "path": "node_modules/onnxruntime-web/dist/ort-wasm-simd-threaded.mjs",
+   "pinnedSha256": "e13f7f94fc51b4ca72b12faeb1ee95f4ace6dfbc8939bc718aabdc0a27c4299b",
+   "sha256": "e13f7f94fc51b4ca72b12faeb1ee95f4ace6dfbc8939bc718aabdc0a27c4299b",
+   "bytes": 24381,
+   "pinnedBytes": 24381,
+   "verdict": "MATCH"
+  },
+  {
+   "role": "licence",
+   "path": "apps/android/app/src/main/assets/licenses/onnxruntime-LICENSE.txt",
+   "pinnedSha256": "2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c",
+   "sha256": "2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c",
+   "bytes": 1073,
+   "pinnedBytes": null,
+   "verdict": "MATCH"
+  },
+  {
+   "role": "licence",
+   "path": "apps/android/app/src/main/assets/licenses/onnxruntime-ThirdPartyNotices.txt",
+   "pinnedSha256": "143764b952fdb1a7c69ce653bfba74a7744d6a8a573bfb73e235fba356c83de3",
+   "sha256": "143764b952fdb1a7c69ce653bfba74a7744d6a8a573bfb73e235fba356c83de3",
+   "bytes": 338088,
+   "pinnedBytes": null,
+   "verdict": "MATCH"
+  },
+  {
+   "role": "licence",
+   "path": "apps/android/app/src/main/assets/licenses/PaddleOCR-LICENSE-Apache-2.0.txt",
+   "pinnedSha256": "3840c5c0c61c294264d2dd77b8777be6ddd90121ef4e0e64abcd22edea581d6e",
+   "sha256": "3840c5c0c61c294264d2dd77b8777be6ddd90121ef4e0e64abcd22edea581d6e",
+   "bytes": 11376,
+   "pinnedBytes": null,
+   "verdict": "MATCH"
+  }
+ ],
+ "allMatch": true,
+ "fetchTool": {
+  "path": "packages/numeric-recogniser-ort/tools/fetch-model.mjs",
+  "when": "build time only (CI step, Gradle fetchRecogniserModel)",
+  "verifies": "SHA-256 and size of inference.onnx at the pinned commit; the dictionary derived from inference.yml (source SHA-256 pinned) and verified",
+  "runtimeNetwork": "none"
+ },
+ "apk": {
+  "note": "filled from the CI-built APK in the stage report (ABI, sizes, entries, native libraries)"
+ }
+}
