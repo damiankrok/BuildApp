@@ -1,0 +1,3151 @@
+{
+ "schema": "buildapp.005i.topology-performance",
+ "commit": "c0ad2e8",
+ "method": "packages/source-metrics/scripts/topology-probe.ts replays axis grouping, candidate generation and the global assignment on every sealed plan frame of the final development matrix (recogniser ON), from the sealed metric evidence alone; metricTopologyMs is each run's own telemetry (METRIC_FRAMES subphases CHAINS, LABEL_ASSIGNMENT, ORIENTATION, SCALE: chain finding, mark classification, the page vote, the independent solver and the final re-read). Timings on a shared 4-core container; not a phone. Telemetry attributes time to the subphase of the last tick, so LABEL_ASSIGNMENT runs from the first neighbourhood heartbeat to the next subphase and includes the page vote and chain solves after it; the assignment itself is the probe's `totals.assignmentMs` (all 135 frames).",
+ "bounds": {
+  "componentLabels": 96,
+  "solveWork": 600000000
+ },
+ "frames": 135,
+ "neighbourhoods": {
+  "total": 733,
+  "largest": 7,
+  "exact": 733,
+  "bounded": 0,
+  "unsolved": 0
+ },
+ "totals": {
+  "axisGroupsMs": 74.086,
+  "candidatesMs": 19.058,
+  "assignmentMs": 142.89
+ },
+ "maxAssignmentMs": 14.453,
+ "stress": {
+  "test": "packages/source-metrics/test/axis-topology.test.ts \u00a743 bounded: 40 parallel lines, 480 labels",
+  "bound": "all 480 BOUND, identical twice, < 2 s",
+  "workCap": "axis-topology.test.ts \u00a743 post-review D2: one 120-label neighbourhood solved bounded; one above the work bound left unsolved, one checkpoint tick"
+ },
+ "runs": [
+  {
+   "row": "alt-marcowki",
+   "metricFramesMs": 84296,
+   "subphaseMs": {
+    "CALLOUT_RINGS": 54700,
+    "CALLOUT_SEARCH": 5396,
+    "CHAINS": 563,
+    "FRAME": 103,
+    "LABEL_ASSIGNMENT": 355,
+    "OCR": 1054,
+    "OCR_EXTERNAL": 19680,
+    "OCR_LATTICE": 2424,
+    "ORIENTATION": 13,
+    "SCALE": 7
+   },
+   "metricTopologyMs": 938,
+   "peakRssMB": 848,
+   "maxTickGapMs": 1994
+  },
+  {
+   "row": "aster-viii",
+   "metricFramesMs": 25761,
+   "subphaseMs": {
+    "CALLOUT_RINGS": 16396,
+    "CALLOUT_SEARCH": 2574,
+    "CHAINS": 476,
+    "FRAME": 241,
+    "LABEL_ASSIGNMENT": 269,
+    "OCR": 1174,
+    "OCR_EXTERNAL": 3861,
+    "OCR_LATTICE": 760,
+    "ORIENTATION": 5,
+    "SCALE": 3
+   },
+   "metricTopologyMs": 753,
+   "peakRssMB": 820,
+   "maxTickGapMs": 2549
+  },
+  {
+   "row": "dom-pod-jarzabem",
+   "metricFramesMs": 203438,
+   "subphaseMs": {
+    "CALLOUT_RINGS": 133503,
+    "CALLOUT_SEARCH": 10910,
+    "CHAINS": 1313,
+    "FRAME": 559,
+    "LABEL_ASSIGNMENT": 1509,
+    "OCR": 3787,
+    "OCR_EXTERNAL": 41723,
+    "OCR_LATTICE": 9981,
+    "ORIENTATION": 82,
+    "SCALE": 65
+   },
+   "metricTopologyMs": 2969,
+   "peakRssMB": 950,
+   "maxTickGapMs": 2074
+  },
+  {
+   "row": "dom-pod-milorzebem",
+   "metricFramesMs": 156761,
+   "subphaseMs": {
+    "CALLOUT_RINGS": 112506,
+    "CALLOUT_SEARCH": 8501,
+    "CHAINS": 1303,
+    "FRAME": 416,
+    "LABEL_ASSIGNMENT": 932,
+    "OCR": 4159,
+    "OCR_EXTERNAL": 24438,
+    "OCR_LATTICE": 4450,
+    "ORIENTATION": 39,
+    "SCALE": 13
+   },
+   "metricTopologyMs": 2287,
+   "peakRssMB": 951,
+   "maxTickGapMs": 1883
+  },
+  {
+   "row": "dom-w-arkadiach",
+   "metricFramesMs": 200090,
+   "subphaseMs": {
+    "CALLOUT_RINGS": 125196,
+    "CALLOUT_SEARCH": 12914,
+    "CHAINS": 2777,
+    "FRAME": 883,
+    "LABEL_ASSIGNMENT": 1584,
+    "OCR": 7714,
+    "OCR_EXTERNAL": 43672,
+    "OCR_LATTICE": 5257,
+    "ORIENTATION": 49,
+    "SCALE": 40
+   },
+   "metricTopologyMs": 4450,
+   "peakRssMB": 921,
+   "maxTickGapMs": 2130
+  },
+  {
+   "row": "dom-w-azaliach",
+   "metricFramesMs": 219654,
+   "subphaseMs": {
+    "CALLOUT_RINGS": 145755,
+    "CALLOUT_SEARCH": 12194,
+    "CHAINS": 2208,
+    "FRAME": 484,
+    "LABEL_ASSIGNMENT": 1629,
+    "OCR": 5583,
+    "OCR_EXTERNAL": 42309,
+    "OCR_LATTICE": 9375,
+    "ORIENTATION": 77,
+    "SCALE": 38
+   },
+   "metricTopologyMs": 3952,
+   "peakRssMB": 947,
+   "maxTickGapMs": 1836
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "metricFramesMs": 257855,
+   "subphaseMs": {
+    "CALLOUT_RINGS": 182711,
+    "CALLOUT_SEARCH": 10970,
+    "CHAINS": 2191,
+    "FRAME": 446,
+    "LABEL_ASSIGNMENT": 1651,
+    "OCR": 3893,
+    "OCR_EXTERNAL": 45608,
+    "OCR_LATTICE": 10271,
+    "ORIENTATION": 88,
+    "SCALE": 22
+   },
+   "metricTopologyMs": 3952,
+   "peakRssMB": 967,
+   "maxTickGapMs": 1561
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "metricFramesMs": 184073,
+   "subphaseMs": {
+    "CALLOUT_RINGS": 125236,
+    "CALLOUT_SEARCH": 10903,
+    "CHAINS": 1434,
+    "FRAME": 439,
+    "LABEL_ASSIGNMENT": 892,
+    "OCR": 4161,
+    "OCR_EXTERNAL": 36248,
+    "OCR_LATTICE": 4717,
+    "ORIENTATION": 29,
+    "SCALE": 12
+   },
+   "metricTopologyMs": 2367,
+   "peakRssMB": 923,
+   "maxTickGapMs": 1311
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "metricFramesMs": 257930,
+   "subphaseMs": {
+    "CALLOUT_RINGS": 178884,
+    "CALLOUT_SEARCH": 17622,
+    "CHAINS": 1873,
+    "FRAME": 463,
+    "LABEL_ASSIGNMENT": 1225,
+    "OCR": 4641,
+    "OCR_EXTERNAL": 43351,
+    "OCR_LATTICE": 9809,
+    "ORIENTATION": 41,
+    "SCALE": 17
+   },
+   "metricTopologyMs": 3156,
+   "peakRssMB": 1053,
+   "maxTickGapMs": 2416
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "metricFramesMs": 261212,
+   "subphaseMs": {
+    "CALLOUT_RINGS": 186912,
+    "CALLOUT_SEARCH": 13475,
+    "CHAINS": 1794,
+    "FRAME": 491,
+    "LABEL_ASSIGNMENT": 1124,
+    "OCR": 4763,
+    "OCR_EXTERNAL": 45131,
+    "OCR_LATTICE": 7386,
+    "ORIENTATION": 70,
+    "SCALE": 64
+   },
+   "metricTopologyMs": 3052,
+   "peakRssMB": 958,
+   "maxTickGapMs": 3616
+  },
+  {
+   "row": "dom-w-modrzykach",
+   "metricFramesMs": 181340,
+   "subphaseMs": {
+    "CALLOUT_RINGS": 128620,
+    "CALLOUT_SEARCH": 10229,
+    "CHAINS": 1271,
+    "FRAME": 310,
+    "LABEL_ASSIGNMENT": 826,
+    "OCR": 2549,
+    "OCR_EXTERNAL": 33715,
+    "OCR_LATTICE": 3735,
+    "ORIENTATION": 51,
+    "SCALE": 32
+   },
+   "metricTopologyMs": 2180,
+   "peakRssMB": 881,
+   "maxTickGapMs": 1642
+  },
+  {
+   "row": "dom-w-morelach",
+   "metricFramesMs": 218729,
+   "subphaseMs": {
+    "CALLOUT_RINGS": 127765,
+    "CALLOUT_SEARCH": 25508,
+    "CHAINS": 1884,
+    "FRAME": 561,
+    "LABEL_ASSIGNMENT": 1898,
+    "OCR": 5280,
+    "OCR_EXTERNAL": 46889,
+    "OCR_LATTICE": 8802,
+    "ORIENTATION": 111,
+    "SCALE": 29
+   },
+   "metricTopologyMs": 3922,
+   "peakRssMB": 990,
+   "maxTickGapMs": 2712
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "metricFramesMs": 239562,
+   "subphaseMs": {
+    "CALLOUT_RINGS": 160638,
+    "CALLOUT_SEARCH": 16488,
+    "CHAINS": 2575,
+    "FRAME": 665,
+    "LABEL_ASSIGNMENT": 1775,
+    "OCR": 6761,
+    "OCR_EXTERNAL": 42131,
+    "OCR_LATTICE": 8404,
+    "ORIENTATION": 80,
+    "SCALE": 25
+   },
+   "metricTopologyMs": 4455,
+   "peakRssMB": 952,
+   "maxTickGapMs": 2141
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "metricFramesMs": 257391,
+   "subphaseMs": {
+    "CALLOUT_RINGS": 178784,
+    "CALLOUT_SEARCH": 18669,
+    "CHAINS": 1791,
+    "FRAME": 558,
+    "LABEL_ASSIGNMENT": 1232,
+    "OCR": 5298,
+    "OCR_EXTERNAL": 45975,
+    "OCR_LATTICE": 4983,
+    "ORIENTATION": 60,
+    "SCALE": 33
+   },
+   "metricTopologyMs": 3116,
+   "peakRssMB": 930,
+   "maxTickGapMs": 1911
+  },
+  {
+   "row": "galaktyka",
+   "metricFramesMs": 86492,
+   "subphaseMs": {
+    "CALLOUT_RINGS": 56098,
+    "CALLOUT_SEARCH": 14034,
+    "CHAINS": 1636,
+    "FRAME": 373,
+    "LABEL_ASSIGNMENT": 987,
+    "OCR": 2249,
+    "OCR_EXTERNAL": 9683,
+    "OCR_LATTICE": 1353,
+    "ORIENTATION": 68,
+    "SCALE": 9
+   },
+   "metricTopologyMs": 2700,
+   "peakRssMB": 900,
+   "maxTickGapMs": 3877
+  },
+  {
+   "row": "kosacce-clean",
+   "metricFramesMs": 186626,
+   "subphaseMs": {
+    "CALLOUT_RINGS": 112910,
+    "CALLOUT_SEARCH": 10379,
+    "CHAINS": 1389,
+    "FRAME": 423,
+    "LABEL_ASSIGNMENT": 1225,
+    "OCR": 4285,
+    "OCR_EXTERNAL": 47612,
+    "OCR_LATTICE": 8307,
+    "ORIENTATION": 49,
+    "SCALE": 44
+   },
+   "metricTopologyMs": 2707,
+   "peakRssMB": 1010,
+   "maxTickGapMs": 1837
+  },
+  {
+   "row": "kosacce-tracked",
+   "metricFramesMs": 186102,
+   "subphaseMs": {
+    "CALLOUT_RINGS": 112822,
+    "CALLOUT_SEARCH": 9470,
+    "CHAINS": 1643,
+    "FRAME": 397,
+    "LABEL_ASSIGNMENT": 1253,
+    "OCR": 4327,
+    "OCR_EXTERNAL": 47766,
+    "OCR_LATTICE": 8321,
+    "ORIENTATION": 52,
+    "SCALE": 44
+   },
+   "metricTopologyMs": 2992,
+   "peakRssMB": 1034,
+   "maxTickGapMs": 1847
+  },
+  {
+   "row": "marcowki",
+   "metricFramesMs": 246311,
+   "subphaseMs": {
+    "CALLOUT_RINGS": 171694,
+    "CALLOUT_SEARCH": 11502,
+    "CHAINS": 1959,
+    "FRAME": 622,
+    "LABEL_ASSIGNMENT": 1318,
+    "OCR": 4042,
+    "OCR_EXTERNAL": 49548,
+    "OCR_LATTICE": 5512,
+    "ORIENTATION": 68,
+    "SCALE": 38
+   },
+   "metricTopologyMs": 3383,
+   "peakRssMB": 979,
+   "maxTickGapMs": 2316
+  },
+  {
+   "row": "rarytasy-eoze",
+   "metricFramesMs": 177606,
+   "subphaseMs": {
+    "CALLOUT_RINGS": 114070,
+    "CALLOUT_SEARCH": 7568,
+    "CHAINS": 1561,
+    "FRAME": 448,
+    "LABEL_ASSIGNMENT": 1578,
+    "OCR": 4785,
+    "OCR_EXTERNAL": 41608,
+    "OCR_LATTICE": 5914,
+    "ORIENTATION": 37,
+    "SCALE": 35
+   },
+   "metricTopologyMs": 3211,
+   "peakRssMB": 1025,
+   "maxTickGapMs": 3255
+  },
+  {
+   "row": "rarytasy-g2e",
+   "metricFramesMs": 190463,
+   "subphaseMs": {
+    "CALLOUT_RINGS": 129974,
+    "CALLOUT_SEARCH": 11123,
+    "CHAINS": 1803,
+    "FRAME": 682,
+    "LABEL_ASSIGNMENT": 1159,
+    "OCR": 4573,
+    "OCR_EXTERNAL": 34570,
+    "OCR_LATTICE": 6490,
+    "ORIENTATION": 69,
+    "SCALE": 16
+   },
+   "metricTopologyMs": 3047,
+   "peakRssMB": 1039,
+   "maxTickGapMs": 2081
+  },
+  {
+   "row": "willa-miranda",
+   "metricFramesMs": 239910,
+   "subphaseMs": {
+    "CALLOUT_RINGS": 174666,
+    "CALLOUT_SEARCH": 17165,
+    "CHAINS": 1703,
+    "FRAME": 465,
+    "LABEL_ASSIGNMENT": 966,
+    "OCR": 3916,
+    "OCR_EXTERNAL": 36716,
+    "OCR_LATTICE": 4229,
+    "ORIENTATION": 44,
+    "SCALE": 37
+   },
+   "metricTopologyMs": 2750,
+   "peakRssMB": 980,
+   "maxTickGapMs": 2139
+  }
+ ],
+ "perFrame": [
+  {
+   "row": "alt-marcowki",
+   "frameId": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.568,
+    "candidates": 0.184,
+    "assignment": 1.815
+   }
+  },
+  {
+   "row": "alt-marcowki",
+   "frameId": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-e3e35d1f7-c68728b8e4",
+   "chains": 24,
+   "labels": 16,
+   "candidates": 38,
+   "neighbourhoods": {
+    "labels": 16,
+    "neighbourhoods": 10,
+    "largest": 4,
+    "exact": 10,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 5.04,
+    "candidates": 0.788,
+    "assignment": 14.453
+   }
+  },
+  {
+   "row": "alt-marcowki",
+   "frameId": "frame-asset-dom-w-marcowkach-ge-rzut-poddasza-613dc728-2183d6fd56",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.032,
+    "candidates": 0.045,
+    "assignment": 0.181
+   }
+  },
+  {
+   "row": "alt-marcowki",
+   "frameId": "frame-asset-dom-w-marcowkach-ge-rzut-poddasza-9d93d74c-caf043c45a",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.031,
+    "candidates": 0.016,
+    "assignment": 0.154
+   }
+  },
+  {
+   "row": "aster-viii",
+   "frameId": "frame-asset-aster-viii-rzut-parter-7e90859c03-b39fd620c2",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.044,
+    "candidates": 0.028,
+    "assignment": 0.395
+   }
+  },
+  {
+   "row": "dom-pod-jarzabem",
+   "frameId": "frame-asset-gotowy-projekt-dom-pod-jarzabem-15-g-rzut-19f8c2fa6e",
+   "chains": 39,
+   "labels": 16,
+   "candidates": 51,
+   "neighbourhoods": {
+    "labels": 16,
+    "neighbourhoods": 11,
+    "largest": 4,
+    "exact": 11,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 1.201,
+    "candidates": 0.423,
+    "assignment": 1.719
+   }
+  },
+  {
+   "row": "dom-pod-jarzabem",
+   "frameId": "frame-asset-projekt-dom-pod-jarzabem-15-g-651d2c1bf9-30609bfc8e",
+   "chains": 28,
+   "labels": 7,
+   "candidates": 29,
+   "neighbourhoods": {
+    "labels": 7,
+    "neighbourhoods": 4,
+    "largest": 4,
+    "exact": 4,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.729,
+    "candidates": 0.08,
+    "assignment": 0.627
+   }
+  },
+  {
+   "row": "dom-pod-jarzabem",
+   "frameId": "frame-asset-rzut-9354eb066f-397808a266",
+   "chains": 80,
+   "labels": 21,
+   "candidates": 79,
+   "neighbourhoods": {
+    "labels": 21,
+    "neighbourhoods": 13,
+    "largest": 4,
+    "exact": 13,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 1.993,
+    "candidates": 0.312,
+    "assignment": 1.75
+   }
+  },
+  {
+   "row": "dom-pod-jarzabem",
+   "frameId": "frame-asset-rzut-cafd34a77a-4813950087",
+   "chains": 52,
+   "labels": 19,
+   "candidates": 51,
+   "neighbourhoods": {
+    "labels": 19,
+    "neighbourhoods": 13,
+    "largest": 4,
+    "exact": 13,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.807,
+    "candidates": 0.333,
+    "assignment": 1.797
+   }
+  },
+  {
+   "row": "dom-pod-milorzebem",
+   "frameId": "frame-asset-gotowy-projekt-dom-pod-mi-orzebem-21-gb-rz-70d82b7242",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.073,
+    "candidates": 0.072,
+    "assignment": 0.268
+   }
+  },
+  {
+   "row": "dom-pod-milorzebem",
+   "frameId": "frame-asset-gotowy-projekt-dom-pod-mi-orzebem-21-gb-rz-c959c394d8",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.03,
+    "candidates": 0.02,
+    "assignment": 0.254
+   }
+  },
+  {
+   "row": "dom-pod-milorzebem",
+   "frameId": "frame-asset-projekt-dom-pod-mi-orzebem-21-gb-9f4dcb88c-6f393519ca",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.02,
+    "candidates": 0.017,
+    "assignment": 0.209
+   }
+  },
+  {
+   "row": "dom-pod-milorzebem",
+   "frameId": "frame-asset-projekt-dom-pod-mi-orzebem-21-gb-f91207841-87dd091192",
+   "chains": 10,
+   "labels": 1,
+   "candidates": 5,
+   "neighbourhoods": {
+    "labels": 1,
+    "neighbourhoods": 1,
+    "largest": 1,
+    "exact": 1,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.376,
+    "candidates": 0.074,
+    "assignment": 0.366
+   }
+  },
+  {
+   "row": "dom-pod-milorzebem",
+   "frameId": "frame-asset-rzut-01cd92e4b4-0f7c5bafc8",
+   "chains": 19,
+   "labels": 5,
+   "candidates": 14,
+   "neighbourhoods": {
+    "labels": 5,
+    "neighbourhoods": 4,
+    "largest": 2,
+    "exact": 4,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.624,
+    "candidates": 0.188,
+    "assignment": 1.906
+   }
+  },
+  {
+   "row": "dom-pod-milorzebem",
+   "frameId": "frame-asset-rzut-2d9464b3c8-72b753f17d",
+   "chains": 29,
+   "labels": 4,
+   "candidates": 11,
+   "neighbourhoods": {
+    "labels": 4,
+    "neighbourhoods": 4,
+    "largest": 1,
+    "exact": 4,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.905,
+    "candidates": 0.117,
+    "assignment": 0.84
+   }
+  },
+  {
+   "row": "dom-pod-milorzebem",
+   "frameId": "frame-asset-rzut-3f1ea58c66-7182ea0aef",
+   "chains": 47,
+   "labels": 6,
+   "candidates": 26,
+   "neighbourhoods": {
+    "labels": 6,
+    "neighbourhoods": 5,
+    "largest": 2,
+    "exact": 5,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 1.419,
+    "candidates": 0.187,
+    "assignment": 0.904
+   }
+  },
+  {
+   "row": "dom-pod-milorzebem",
+   "frameId": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.037,
+    "candidates": 0.02,
+    "assignment": 0.295
+   }
+  },
+  {
+   "row": "dom-w-arkadiach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-arkadiach-6-rzut-part-6a7a5261ea",
+   "chains": 24,
+   "labels": 5,
+   "candidates": 17,
+   "neighbourhoods": {
+    "labels": 5,
+    "neighbourhoods": 5,
+    "largest": 1,
+    "exact": 5,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.667,
+    "candidates": 0.166,
+    "assignment": 1.133
+   }
+  },
+  {
+   "row": "dom-w-arkadiach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-arkadiach-6-rzut-podd-a91d8b76fe",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.024,
+    "candidates": 0.013,
+    "assignment": 0.164
+   }
+  },
+  {
+   "row": "dom-w-arkadiach",
+   "frameId": "frame-asset-projekt-dom-w-arkadiach-6-190b6d5491-b3ebe503f8",
+   "chains": 15,
+   "labels": 4,
+   "candidates": 10,
+   "neighbourhoods": {
+    "labels": 4,
+    "neighbourhoods": 4,
+    "largest": 1,
+    "exact": 4,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.444,
+    "candidates": 0.063,
+    "assignment": 0.499
+   }
+  },
+  {
+   "row": "dom-w-arkadiach",
+   "frameId": "frame-asset-projekt-dom-w-arkadiach-6-1b8f291acd-d42f1d7520",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.029,
+    "candidates": 0.014,
+    "assignment": 0.262
+   }
+  },
+  {
+   "row": "dom-w-arkadiach",
+   "frameId": "frame-asset-rzut-16680ee739-bb2ced8b98",
+   "chains": 45,
+   "labels": 19,
+   "candidates": 39,
+   "neighbourhoods": {
+    "labels": 19,
+    "neighbourhoods": 15,
+    "largest": 2,
+    "exact": 15,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 1.322,
+    "candidates": 0.231,
+    "assignment": 1.791
+   }
+  },
+  {
+   "row": "dom-w-arkadiach",
+   "frameId": "frame-asset-rzut-6f316481e2-0c42c49252",
+   "chains": 45,
+   "labels": 8,
+   "candidates": 28,
+   "neighbourhoods": {
+    "labels": 8,
+    "neighbourhoods": 6,
+    "largest": 2,
+    "exact": 6,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.907,
+    "candidates": 0.225,
+    "assignment": 1.09
+   }
+  },
+  {
+   "row": "dom-w-arkadiach",
+   "frameId": "frame-asset-rzut-cc4d20932a-b363732485",
+   "chains": 40,
+   "labels": 8,
+   "candidates": 11,
+   "neighbourhoods": {
+    "labels": 8,
+    "neighbourhoods": 8,
+    "largest": 1,
+    "exact": 8,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.757,
+    "candidates": 0.176,
+    "assignment": 0.81
+   }
+  },
+  {
+   "row": "dom-w-arkadiach",
+   "frameId": "frame-asset-rzut-cdf9ec1681-da5e3aefce",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.04,
+    "candidates": 0.022,
+    "assignment": 0.544
+   }
+  },
+  {
+   "row": "dom-w-azaliach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-azaliach-3-rzut-parte-38849e6936",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.054,
+    "candidates": 0.022,
+    "assignment": 0.393
+   }
+  },
+  {
+   "row": "dom-w-azaliach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-azaliach-3-rzut-podda-feb8ac994e",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.032,
+    "candidates": 0.012,
+    "assignment": 0.235
+   }
+  },
+  {
+   "row": "dom-w-azaliach",
+   "frameId": "frame-asset-projekt-dom-w-azaliach-3-34c5ca8606-a0edbd164d",
+   "chains": 18,
+   "labels": 7,
+   "candidates": 17,
+   "neighbourhoods": {
+    "labels": 7,
+    "neighbourhoods": 6,
+    "largest": 2,
+    "exact": 6,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.425,
+    "candidates": 0.125,
+    "assignment": 0.706
+   }
+  },
+  {
+   "row": "dom-w-azaliach",
+   "frameId": "frame-asset-projekt-dom-w-azaliach-3-73b0fd883d-c8090d6f57",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.026,
+    "candidates": 0.009,
+    "assignment": 0.153
+   }
+  },
+  {
+   "row": "dom-w-azaliach",
+   "frameId": "frame-asset-rzut-2468eb43d4-3e18dd4bcc",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.042,
+    "candidates": 0.028,
+    "assignment": 0.542
+   }
+  },
+  {
+   "row": "dom-w-azaliach",
+   "frameId": "frame-asset-rzut-2e7e66ff80-78651ec3ee",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.042,
+    "candidates": 0.017,
+    "assignment": 0.329
+   }
+  },
+  {
+   "row": "dom-w-azaliach",
+   "frameId": "frame-asset-rzut-86bef468f3-19006df9bc",
+   "chains": 60,
+   "labels": 13,
+   "candidates": 43,
+   "neighbourhoods": {
+    "labels": 13,
+    "neighbourhoods": 11,
+    "largest": 2,
+    "exact": 11,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 1.154,
+    "candidates": 0.382,
+    "assignment": 1.894
+   }
+  },
+  {
+   "row": "dom-w-azaliach",
+   "frameId": "frame-asset-rzut-cbf8168d6d-79ba9b7966",
+   "chains": 47,
+   "labels": 8,
+   "candidates": 24,
+   "neighbourhoods": {
+    "labels": 8,
+    "neighbourhoods": 6,
+    "largest": 2,
+    "exact": 6,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.601,
+    "candidates": 0.21,
+    "assignment": 0.884
+   }
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-dabecjach-2-g2-rzut-p-ce9a927d9b",
+   "chains": 37,
+   "labels": 15,
+   "candidates": 32,
+   "neighbourhoods": {
+    "labels": 15,
+    "neighbourhoods": 11,
+    "largest": 4,
+    "exact": 11,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.693,
+    "candidates": 0.141,
+    "assignment": 0.972
+   }
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-dabecjach-2-g2-rzut-p-d5664432a6",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.027,
+    "candidates": 0.01,
+    "assignment": 0.206
+   }
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "frameId": "frame-asset-projekt-dom-w-dabecjach-2-g2-37c01c6f73-c936d50299",
+   "chains": 24,
+   "labels": 5,
+   "candidates": 20,
+   "neighbourhoods": {
+    "labels": 5,
+    "neighbourhoods": 5,
+    "largest": 1,
+    "exact": 5,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.317,
+    "candidates": 0.069,
+    "assignment": 0.507
+   }
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "frameId": "frame-asset-projekt-dom-w-dabecjach-2-g2-8d87bfd6e1-64a19de9b4",
+   "chains": 17,
+   "labels": 2,
+   "candidates": 15,
+   "neighbourhoods": {
+    "labels": 2,
+    "neighbourhoods": 2,
+    "largest": 1,
+    "exact": 2,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.234,
+    "candidates": 0.054,
+    "assignment": 0.461
+   }
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "frameId": "frame-asset-rzut-03a05dd085-0fd2019dc2",
+   "chains": 63,
+   "labels": 10,
+   "candidates": 30,
+   "neighbourhoods": {
+    "labels": 10,
+    "neighbourhoods": 7,
+    "largest": 3,
+    "exact": 7,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.867,
+    "candidates": 0.272,
+    "assignment": 1.153
+   }
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "frameId": "frame-asset-rzut-15a246c0c6-5322551032",
+   "chains": 69,
+   "labels": 18,
+   "candidates": 35,
+   "neighbourhoods": {
+    "labels": 18,
+    "neighbourhoods": 15,
+    "largest": 4,
+    "exact": 15,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.926,
+    "candidates": 0.192,
+    "assignment": 1.191
+   }
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "frameId": "frame-asset-rzut-1a56066c62-10b0ec4131",
+   "chains": 83,
+   "labels": 17,
+   "candidates": 35,
+   "neighbourhoods": {
+    "labels": 17,
+    "neighbourhoods": 14,
+    "largest": 3,
+    "exact": 14,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 1.581,
+    "candidates": 0.421,
+    "assignment": 2.025
+   }
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "frameId": "frame-asset-rzut-a07b4e4a8c-c7b096400c",
+   "chains": 65,
+   "labels": 5,
+   "candidates": 11,
+   "neighbourhoods": {
+    "labels": 5,
+    "neighbourhoods": 4,
+    "largest": 2,
+    "exact": 4,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 1.242,
+    "candidates": 0.261,
+    "assignment": 1.007
+   }
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-helikoniach-3-e-oze-r-0b91cfbf4f",
+   "chains": 16,
+   "labels": 7,
+   "candidates": 18,
+   "neighbourhoods": {
+    "labels": 7,
+    "neighbourhoods": 6,
+    "largest": 2,
+    "exact": 6,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.529,
+    "candidates": 0.085,
+    "assignment": 0.738
+   }
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-helikoniach-3-e-oze-r-56cc318ca1",
+   "chains": 30,
+   "labels": 10,
+   "candidates": 25,
+   "neighbourhoods": {
+    "labels": 10,
+    "neighbourhoods": 8,
+    "largest": 2,
+    "exact": 8,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.639,
+    "candidates": 0.14,
+    "assignment": 0.947
+   }
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "frameId": "frame-asset-projekt-dom-w-helikoniach-3-e-oze-74ede617-37e0340300",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.034,
+    "candidates": 0.016,
+    "assignment": 0.314
+   }
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "frameId": "frame-asset-projekt-dom-w-helikoniach-3-e-oze-8a257daf-bc02f8e306",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.032,
+    "candidates": 0.013,
+    "assignment": 0.21
+   }
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "frameId": "frame-asset-rzut-6f73b6499a-b883fffd61",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.072,
+    "candidates": 0.023,
+    "assignment": 0.515
+   }
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "frameId": "frame-asset-rzut-d209d7bdfe-0af152d058",
+   "chains": 32,
+   "labels": 9,
+   "candidates": 17,
+   "neighbourhoods": {
+    "labels": 9,
+    "neighbourhoods": 6,
+    "largest": 3,
+    "exact": 6,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.785,
+    "candidates": 0.229,
+    "assignment": 1.449
+   }
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "frameId": "frame-asset-rzut-d5842da623-4c943a2b00",
+   "chains": 45,
+   "labels": 18,
+   "candidates": 29,
+   "neighbourhoods": {
+    "labels": 18,
+    "neighbourhoods": 13,
+    "largest": 3,
+    "exact": 13,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.598,
+    "candidates": 0.189,
+    "assignment": 1.111
+   }
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "frameId": "frame-asset-rzut-f6160738fd-6e7c8b2a23",
+   "chains": 31,
+   "labels": 6,
+   "candidates": 23,
+   "neighbourhoods": {
+    "labels": 6,
+    "neighbourhoods": 6,
+    "largest": 1,
+    "exact": 6,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.529,
+    "candidates": 0.184,
+    "assignment": 0.656
+   }
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-jab-onkach-22-rzut-pa-1ad9e4dc60",
+   "chains": 34,
+   "labels": 9,
+   "candidates": 27,
+   "neighbourhoods": {
+    "labels": 9,
+    "neighbourhoods": 9,
+    "largest": 1,
+    "exact": 9,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.628,
+    "candidates": 0.113,
+    "assignment": 0.876
+   }
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-jab-onkach-22-rzut-po-8b7d8287ca",
+   "chains": 40,
+   "labels": 4,
+   "candidates": 14,
+   "neighbourhoods": {
+    "labels": 4,
+    "neighbourhoods": 4,
+    "largest": 1,
+    "exact": 4,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.692,
+    "candidates": 0.118,
+    "assignment": 0.603
+   }
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "frameId": "frame-asset-projekt-dom-w-jab-onkach-22-09655213e4-f96f526406",
+   "chains": 27,
+   "labels": 7,
+   "candidates": 18,
+   "neighbourhoods": {
+    "labels": 7,
+    "neighbourhoods": 7,
+    "largest": 1,
+    "exact": 7,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.602,
+    "candidates": 0.179,
+    "assignment": 0.992
+   }
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "frameId": "frame-asset-projekt-dom-w-jab-onkach-22-2db71d499e-2a49940358",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.026,
+    "candidates": 0.012,
+    "assignment": 0.116
+   }
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "frameId": "frame-asset-rzut-07bdad2581-a80195dc44",
+   "chains": 60,
+   "labels": 18,
+   "candidates": 35,
+   "neighbourhoods": {
+    "labels": 18,
+    "neighbourhoods": 11,
+    "largest": 3,
+    "exact": 11,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.939,
+    "candidates": 0.207,
+    "assignment": 1.264
+   }
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "frameId": "frame-asset-rzut-2389a8baf9-0c491c2999",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.03,
+    "candidates": 0.019,
+    "assignment": 0.288
+   }
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "frameId": "frame-asset-rzut-a8bdd8cd1d-d80b709d74",
+   "chains": 69,
+   "labels": 25,
+   "candidates": 52,
+   "neighbourhoods": {
+    "labels": 25,
+    "neighbourhoods": 20,
+    "largest": 3,
+    "exact": 20,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 1.802,
+    "candidates": 0.25,
+    "assignment": 1.543
+   }
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "frameId": "frame-asset-rzut-d52f958fd6-d2646b4dce",
+   "chains": 44,
+   "labels": 13,
+   "candidates": 34,
+   "neighbourhoods": {
+    "labels": 13,
+    "neighbourhoods": 11,
+    "largest": 2,
+    "exact": 11,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.575,
+    "candidates": 0.131,
+    "assignment": 0.806
+   }
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-modrzewnicy-10-g2e-oz-1f0c5c3416",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.055,
+    "candidates": 0.022,
+    "assignment": 0.427
+   }
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-modrzewnicy-10-g2e-oz-d1b6e020ab",
+   "chains": 31,
+   "labels": 2,
+   "candidates": 13,
+   "neighbourhoods": {
+    "labels": 2,
+    "neighbourhoods": 2,
+    "largest": 1,
+    "exact": 2,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.773,
+    "candidates": 0.114,
+    "assignment": 0.496
+   }
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-projekt-dom-w-modrzewnicy-10-g2e-oze-5e77e-0b6db21ae2",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.032,
+    "candidates": 0.012,
+    "assignment": 0.166
+   }
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-projekt-dom-w-modrzewnicy-10-g2e-oze-8eccb-0f790237c2",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.029,
+    "candidates": 0.015,
+    "assignment": 0.239
+   }
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-6f2eb0b36f-39a1396dc9",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.036,
+    "candidates": 0.02,
+    "assignment": 0.38
+   }
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.046,
+    "candidates": 0.033,
+    "assignment": 0.553
+   }
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-9304612e3c-5bc09da99c",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.084,
+    "candidates": 0.016,
+    "assignment": 0.281
+   }
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-dcec61c952-f7856a12c2",
+   "chains": 31,
+   "labels": 2,
+   "candidates": 15,
+   "neighbourhoods": {
+    "labels": 2,
+    "neighbourhoods": 2,
+    "largest": 1,
+    "exact": 2,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.662,
+    "candidates": 0.108,
+    "assignment": 0.577
+   }
+  },
+  {
+   "row": "dom-w-modrzykach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-modrzykach-3-g2-rzut-0378cbcdae",
+   "chains": 43,
+   "labels": 16,
+   "candidates": 35,
+   "neighbourhoods": {
+    "labels": 16,
+    "neighbourhoods": 15,
+    "largest": 2,
+    "exact": 15,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.763,
+    "candidates": 0.145,
+    "assignment": 1.091
+   }
+  },
+  {
+   "row": "dom-w-modrzykach",
+   "frameId": "frame-asset-projekt-dom-w-modrzykach-3-g2-cd6587ddfb-a668fac9d0",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.029,
+    "candidates": 0.015,
+    "assignment": 0.296
+   }
+  },
+  {
+   "row": "dom-w-modrzykach",
+   "frameId": "frame-asset-rzut-0a0a6be1b9-b3f1538ca6",
+   "chains": 60,
+   "labels": 14,
+   "candidates": 32,
+   "neighbourhoods": {
+    "labels": 14,
+    "neighbourhoods": 11,
+    "largest": 2,
+    "exact": 11,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.959,
+    "candidates": 0.231,
+    "assignment": 1.217
+   }
+  },
+  {
+   "row": "dom-w-modrzykach",
+   "frameId": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+   "chains": 72,
+   "labels": 22,
+   "candidates": 52,
+   "neighbourhoods": {
+    "labels": 22,
+    "neighbourhoods": 19,
+    "largest": 2,
+    "exact": 19,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.907,
+    "candidates": 0.291,
+    "assignment": 1.645
+   }
+  },
+  {
+   "row": "dom-w-morelach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-morelach-n-rzut-parte-4c4bf673d0",
+   "chains": 36,
+   "labels": 15,
+   "candidates": 27,
+   "neighbourhoods": {
+    "labels": 15,
+    "neighbourhoods": 12,
+    "largest": 2,
+    "exact": 12,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.918,
+    "candidates": 0.186,
+    "assignment": 1.347
+   }
+  },
+  {
+   "row": "dom-w-morelach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-morelach-n-rzut-podda-722edb9b99",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.03,
+    "candidates": 0.015,
+    "assignment": 0.284
+   }
+  },
+  {
+   "row": "dom-w-morelach",
+   "frameId": "frame-asset-projekt-dom-w-morelach-n-43e86a4c6b-42ac1f9c49",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.03,
+    "candidates": 0.013,
+    "assignment": 0.17
+   }
+  },
+  {
+   "row": "dom-w-morelach",
+   "frameId": "frame-asset-projekt-dom-w-morelach-n-f056da2b1c-54adf16733",
+   "chains": 30,
+   "labels": 11,
+   "candidates": 22,
+   "neighbourhoods": {
+    "labels": 11,
+    "neighbourhoods": 9,
+    "largest": 2,
+    "exact": 9,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.487,
+    "candidates": 0.073,
+    "assignment": 0.494
+   }
+  },
+  {
+   "row": "dom-w-morelach",
+   "frameId": "frame-asset-rzut-1355c555c3-029c4d1238",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.044,
+    "candidates": 0.054,
+    "assignment": 0.472
+   }
+  },
+  {
+   "row": "dom-w-morelach",
+   "frameId": "frame-asset-rzut-44aea220ce-796940fe12",
+   "chains": 38,
+   "labels": 4,
+   "candidates": 11,
+   "neighbourhoods": {
+    "labels": 4,
+    "neighbourhoods": 4,
+    "largest": 1,
+    "exact": 4,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.657,
+    "candidates": 0.188,
+    "assignment": 0.776
+   }
+  },
+  {
+   "row": "dom-w-morelach",
+   "frameId": "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+   "chains": 59,
+   "labels": 24,
+   "candidates": 42,
+   "neighbourhoods": {
+    "labels": 24,
+    "neighbourhoods": 16,
+    "largest": 5,
+    "exact": 16,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 1.123,
+    "candidates": 0.271,
+    "assignment": 1.372
+   }
+  },
+  {
+   "row": "dom-w-morelach",
+   "frameId": "frame-asset-rzut-7d856c8254-d73cb6d54e",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.047,
+    "candidates": 0.033,
+    "assignment": 0.686
+   }
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-tunbergiach-7-r2-rzut-18016ee823",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.05,
+    "candidates": 0.016,
+    "assignment": 0.187
+   }
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-tunbergiach-7-r2-rzut-638e5c452b",
+   "chains": 25,
+   "labels": 6,
+   "candidates": 22,
+   "neighbourhoods": {
+    "labels": 6,
+    "neighbourhoods": 5,
+    "largest": 2,
+    "exact": 5,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.555,
+    "candidates": 0.085,
+    "assignment": 0.57
+   }
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-tunbergiach-7-r2-rzut-93af01a3d8",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.032,
+    "candidates": 0.014,
+    "assignment": 0.139
+   }
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "frameId": "frame-asset-projekt-dom-w-tunbergiach-7-r2-044a679235-c9d4cb4c25",
+   "chains": 21,
+   "labels": 7,
+   "candidates": 15,
+   "neighbourhoods": {
+    "labels": 7,
+    "neighbourhoods": 7,
+    "largest": 1,
+    "exact": 7,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.597,
+    "candidates": 0.068,
+    "assignment": 0.428
+   }
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "frameId": "frame-asset-projekt-dom-w-tunbergiach-7-r2-1b6baeb067-54c089a10e",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.031,
+    "candidates": 0.013,
+    "assignment": 0.19
+   }
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "frameId": "frame-asset-projekt-dom-w-tunbergiach-7-r2-2b354a9533-90154fc4da",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.036,
+    "candidates": 0.014,
+    "assignment": 0.212
+   }
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "frameId": "frame-asset-rzut-0b3cd56ccf-1b5c1a1e03",
+   "chains": 53,
+   "labels": 10,
+   "candidates": 31,
+   "neighbourhoods": {
+    "labels": 10,
+    "neighbourhoods": 7,
+    "largest": 2,
+    "exact": 7,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 1.067,
+    "candidates": 0.302,
+    "assignment": 2.151
+   }
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "frameId": "frame-asset-rzut-13c10e841e-a2d3302e3a",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.028,
+    "candidates": 0.012,
+    "assignment": 0.172
+   }
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "frameId": "frame-asset-rzut-7394e69c3a-5c0f9a89fe",
+   "chains": 36,
+   "labels": 5,
+   "candidates": 18,
+   "neighbourhoods": {
+    "labels": 5,
+    "neighbourhoods": 5,
+    "largest": 1,
+    "exact": 5,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.611,
+    "candidates": 0.171,
+    "assignment": 1.744
+   }
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "frameId": "frame-asset-rzut-83377e8ffc-c1a88b7f25",
+   "chains": 61,
+   "labels": 10,
+   "candidates": 35,
+   "neighbourhoods": {
+    "labels": 10,
+    "neighbourhoods": 9,
+    "largest": 2,
+    "exact": 9,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.847,
+    "candidates": 0.211,
+    "assignment": 0.878
+   }
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "frameId": "frame-asset-rzut-96d0ccd771-6997c88674",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.03,
+    "candidates": 0.012,
+    "assignment": 0.222
+   }
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "frameId": "frame-asset-rzut-b94c3eb0ba-1193124e61",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.033,
+    "candidates": 0.012,
+    "assignment": 0.156
+   }
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-zurawkach-3-p-rzut-pa-2d7956d088",
+   "chains": 27,
+   "labels": 12,
+   "candidates": 30,
+   "neighbourhoods": {
+    "labels": 12,
+    "neighbourhoods": 8,
+    "largest": 3,
+    "exact": 8,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 1.062,
+    "candidates": 0.325,
+    "assignment": 1.862
+   }
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-zurawkach-3-p-rzut-pi-6b227d5070",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.027,
+    "candidates": 0.01,
+    "assignment": 0.159
+   }
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-zurawkach-3-p-rzut-po-82c29b6462",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.042,
+    "candidates": 0.01,
+    "assignment": 0.12
+   }
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "frameId": "frame-asset-projekt-dom-w-zurawkach-3-p-02c4fd7f8a-fc6b98f2d0",
+   "chains": 21,
+   "labels": 2,
+   "candidates": 15,
+   "neighbourhoods": {
+    "labels": 2,
+    "neighbourhoods": 2,
+    "largest": 1,
+    "exact": 2,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.411,
+    "candidates": 0.039,
+    "assignment": 0.283
+   }
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "frameId": "frame-asset-projekt-dom-w-zurawkach-3-p-7199f69925-45095f59cd",
+   "chains": 25,
+   "labels": 10,
+   "candidates": 25,
+   "neighbourhoods": {
+    "labels": 10,
+    "neighbourhoods": 7,
+    "largest": 3,
+    "exact": 7,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.517,
+    "candidates": 0.104,
+    "assignment": 0.529
+   }
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "frameId": "frame-asset-projekt-dom-w-zurawkach-3-p-7ec46c158b-1303e6adfb",
+   "chains": 9,
+   "labels": 3,
+   "candidates": 6,
+   "neighbourhoods": {
+    "labels": 3,
+    "neighbourhoods": 3,
+    "largest": 1,
+    "exact": 3,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.322,
+    "candidates": 0.045,
+    "assignment": 0.487
+   }
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "frameId": "frame-asset-rzut-007f8fc320-7e7086524f",
+   "chains": 41,
+   "labels": 13,
+   "candidates": 30,
+   "neighbourhoods": {
+    "labels": 13,
+    "neighbourhoods": 9,
+    "largest": 3,
+    "exact": 9,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 1.098,
+    "candidates": 0.206,
+    "assignment": 1.53
+   }
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "frameId": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+   "chains": 47,
+   "labels": 17,
+   "candidates": 31,
+   "neighbourhoods": {
+    "labels": 17,
+    "neighbourhoods": 12,
+    "largest": 3,
+    "exact": 12,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.857,
+    "candidates": 0.127,
+    "assignment": 0.989
+   }
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "frameId": "frame-asset-rzut-1c5a322c92-0ad907a579",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.102,
+    "candidates": 0.018,
+    "assignment": 0.194
+   }
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "frameId": "frame-asset-rzut-9b943f5354-6b4a1371b9",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.028,
+    "candidates": 0.018,
+    "assignment": 0.23
+   }
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "frameId": "frame-asset-rzut-b33f1d0952-a82d8da7c0",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.024,
+    "candidates": 0.014,
+    "assignment": 0.167
+   }
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "frameId": "frame-asset-rzut-d59c6b8717-92f3653883",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.023,
+    "candidates": 0.013,
+    "assignment": 0.153
+   }
+  },
+  {
+   "row": "galaktyka",
+   "frameId": "frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.133,
+    "candidates": 0.03,
+    "assignment": 0.682
+   }
+  },
+  {
+   "row": "galaktyka",
+   "frameId": "frame-asset-galaktyka-i-rzut-poddasze-03a9d2528c-1d3d743da5",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.063,
+    "candidates": 0.035,
+    "assignment": 0.915
+   }
+  },
+  {
+   "row": "kosacce-clean",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-kosaccach-46-rzut-par-803d3d68d8",
+   "chains": 45,
+   "labels": 19,
+   "candidates": 71,
+   "neighbourhoods": {
+    "labels": 19,
+    "neighbourhoods": 11,
+    "largest": 4,
+    "exact": 11,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.902,
+    "candidates": 0.293,
+    "assignment": 1.604
+   }
+  },
+  {
+   "row": "kosacce-clean",
+   "frameId": "frame-asset-projekt-dom-w-kosaccach-46-bdb822242d-a00d047246",
+   "chains": 30,
+   "labels": 11,
+   "candidates": 34,
+   "neighbourhoods": {
+    "labels": 11,
+    "neighbourhoods": 6,
+    "largest": 4,
+    "exact": 6,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.411,
+    "candidates": 0.12,
+    "assignment": 0.698
+   }
+  },
+  {
+   "row": "kosacce-clean",
+   "frameId": "frame-asset-rzut-94f54ada01-bdf7aa09e8",
+   "chains": 69,
+   "labels": 14,
+   "candidates": 72,
+   "neighbourhoods": {
+    "labels": 14,
+    "neighbourhoods": 7,
+    "largest": 7,
+    "exact": 7,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.862,
+    "candidates": 0.367,
+    "assignment": 1.725
+   }
+  },
+  {
+   "row": "kosacce-clean",
+   "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+   "chains": 80,
+   "labels": 33,
+   "candidates": 110,
+   "neighbourhoods": {
+    "labels": 33,
+    "neighbourhoods": 21,
+    "largest": 7,
+    "exact": 21,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 1.589,
+    "candidates": 0.671,
+    "assignment": 3.473
+   }
+  },
+  {
+   "row": "kosacce-tracked",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-kosaccach-46-rzut-par-803d3d68d8",
+   "chains": 45,
+   "labels": 19,
+   "candidates": 71,
+   "neighbourhoods": {
+    "labels": 19,
+    "neighbourhoods": 11,
+    "largest": 4,
+    "exact": 11,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.858,
+    "candidates": 0.263,
+    "assignment": 1.302
+   }
+  },
+  {
+   "row": "kosacce-tracked",
+   "frameId": "frame-asset-projekt-dom-w-kosaccach-46-bdb822242d-a00d047246",
+   "chains": 30,
+   "labels": 11,
+   "candidates": 34,
+   "neighbourhoods": {
+    "labels": 11,
+    "neighbourhoods": 6,
+    "largest": 4,
+    "exact": 6,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.653,
+    "candidates": 0.18,
+    "assignment": 1.257
+   }
+  },
+  {
+   "row": "kosacce-tracked",
+   "frameId": "frame-asset-rzut-94f54ada01-bdf7aa09e8",
+   "chains": 69,
+   "labels": 14,
+   "candidates": 72,
+   "neighbourhoods": {
+    "labels": 14,
+    "neighbourhoods": 7,
+    "largest": 7,
+    "exact": 7,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 1.308,
+    "candidates": 0.686,
+    "assignment": 2.752
+   }
+  },
+  {
+   "row": "kosacce-tracked",
+   "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+   "chains": 80,
+   "labels": 33,
+   "candidates": 110,
+   "neighbourhoods": {
+    "labels": 33,
+    "neighbourhoods": 21,
+    "largest": 7,
+    "exact": 21,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.926,
+    "candidates": 0.435,
+    "assignment": 2.009
+   }
+  },
+  {
+   "row": "marcowki",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-pa-6eb2541c24",
+   "chains": 24,
+   "labels": 16,
+   "candidates": 38,
+   "neighbourhoods": {
+    "labels": 16,
+    "neighbourhoods": 10,
+    "largest": 4,
+    "exact": 10,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.46,
+    "candidates": 0.082,
+    "assignment": 1.757
+   }
+  },
+  {
+   "row": "marcowki",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-po-5926d3fb6c",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.033,
+    "candidates": 0.013,
+    "assignment": 0.151
+   }
+  },
+  {
+   "row": "marcowki",
+   "frameId": "frame-asset-projekt-dom-w-marcowkach-ge-09d7473020-20f3864e88",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.019,
+    "candidates": 0.01,
+    "assignment": 0.153
+   }
+  },
+  {
+   "row": "marcowki",
+   "frameId": "frame-asset-projekt-dom-w-marcowkach-ge-e1f7fc10fc-2ffc3c0fba",
+   "chains": 18,
+   "labels": 8,
+   "candidates": 22,
+   "neighbourhoods": {
+    "labels": 8,
+    "neighbourhoods": 5,
+    "largest": 4,
+    "exact": 5,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.278,
+    "candidates": 0.051,
+    "assignment": 0.384
+   }
+  },
+  {
+   "row": "marcowki",
+   "frameId": "frame-asset-rzut-117027f690-fed2722c38",
+   "chains": 47,
+   "labels": 13,
+   "candidates": 21,
+   "neighbourhoods": {
+    "labels": 13,
+    "neighbourhoods": 13,
+    "largest": 1,
+    "exact": 13,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.776,
+    "candidates": 0.099,
+    "assignment": 0.682
+   }
+  },
+  {
+   "row": "marcowki",
+   "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+   "chains": 57,
+   "labels": 19,
+   "candidates": 43,
+   "neighbourhoods": {
+    "labels": 19,
+    "neighbourhoods": 11,
+    "largest": 4,
+    "exact": 11,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.62,
+    "candidates": 0.165,
+    "assignment": 1.26
+   }
+  },
+  {
+   "row": "marcowki",
+   "frameId": "frame-asset-rzut-aa1526220f-863ec969ff",
+   "chains": 45,
+   "labels": 18,
+   "candidates": 38,
+   "neighbourhoods": {
+    "labels": 18,
+    "neighbourhoods": 12,
+    "largest": 4,
+    "exact": 12,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.871,
+    "candidates": 0.285,
+    "assignment": 1.397
+   }
+  },
+  {
+   "row": "marcowki",
+   "frameId": "frame-asset-rzut-f028d28aba-d7b403e37e",
+   "chains": 35,
+   "labels": 13,
+   "candidates": 20,
+   "neighbourhoods": {
+    "labels": 13,
+    "neighbourhoods": 11,
+    "largest": 2,
+    "exact": 11,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.481,
+    "candidates": 0.105,
+    "assignment": 0.689
+   }
+  },
+  {
+   "row": "rarytasy-eoze",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-rarytasach-e-oze-rzut-1dede27c71",
+   "chains": 37,
+   "labels": 17,
+   "candidates": 42,
+   "neighbourhoods": {
+    "labels": 17,
+    "neighbourhoods": 13,
+    "largest": 3,
+    "exact": 13,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.527,
+    "candidates": 0.165,
+    "assignment": 1.252
+   }
+  },
+  {
+   "row": "rarytasy-eoze",
+   "frameId": "frame-asset-projekt-dom-w-rarytasach-e-oze-be1be080d9-4d5002ec06",
+   "chains": 28,
+   "labels": 11,
+   "candidates": 25,
+   "neighbourhoods": {
+    "labels": 11,
+    "neighbourhoods": 8,
+    "largest": 3,
+    "exact": 8,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.631,
+    "candidates": 0.195,
+    "assignment": 1.192
+   }
+  },
+  {
+   "row": "rarytasy-eoze",
+   "frameId": "frame-asset-rzut-2abfc5825d-e842a14c7f",
+   "chains": 62,
+   "labels": 20,
+   "candidates": 73,
+   "neighbourhoods": {
+    "labels": 20,
+    "neighbourhoods": 16,
+    "largest": 3,
+    "exact": 16,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 1.172,
+    "candidates": 0.488,
+    "assignment": 6.094
+   }
+  },
+  {
+   "row": "rarytasy-eoze",
+   "frameId": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+   "chains": 81,
+   "labels": 22,
+   "candidates": 103,
+   "neighbourhoods": {
+    "labels": 22,
+    "neighbourhoods": 18,
+    "largest": 3,
+    "exact": 18,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 1.515,
+    "candidates": 0.599,
+    "assignment": 3.174
+   }
+  },
+  {
+   "row": "rarytasy-g2e",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-rzut-7d0192a519",
+   "chains": 38,
+   "labels": 14,
+   "candidates": 30,
+   "neighbourhoods": {
+    "labels": 14,
+    "neighbourhoods": 12,
+    "largest": 3,
+    "exact": 12,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.626,
+    "candidates": 0.165,
+    "assignment": 11.365
+   }
+  },
+  {
+   "row": "rarytasy-g2e",
+   "frameId": "frame-asset-projekt-dom-w-rarytasach-5-g2e-463bb48357-5c5a32742b",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.025,
+    "candidates": 0.016,
+    "assignment": 0.266
+   }
+  },
+  {
+   "row": "rarytasy-g2e",
+   "frameId": "frame-asset-rzut-e8520c3ad3-59a406b738",
+   "chains": 80,
+   "labels": 24,
+   "candidates": 62,
+   "neighbourhoods": {
+    "labels": 24,
+    "neighbourhoods": 19,
+    "largest": 3,
+    "exact": 19,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 1.029,
+    "candidates": 0.362,
+    "assignment": 1.692
+   }
+  },
+  {
+   "row": "rarytasy-g2e",
+   "frameId": "frame-asset-rzut-e85d3de75a-666b0a8861",
+   "chains": 70,
+   "labels": 16,
+   "candidates": 52,
+   "neighbourhoods": {
+    "labels": 16,
+    "neighbourhoods": 8,
+    "largest": 5,
+    "exact": 8,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 1.282,
+    "candidates": 0.553,
+    "assignment": 3.611
+   }
+  },
+  {
+   "row": "willa-miranda",
+   "frameId": "frame-asset-gotowy-projekt-willa-miranda-11-g2-rzut-pa-122944115c",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.064,
+    "candidates": 0.043,
+    "assignment": 0.467
+   }
+  },
+  {
+   "row": "willa-miranda",
+   "frameId": "frame-asset-gotowy-projekt-willa-miranda-11-g2-rzut-pi-e4e00f65e2",
+   "chains": 17,
+   "labels": 4,
+   "candidates": 6,
+   "neighbourhoods": {
+    "labels": 4,
+    "neighbourhoods": 4,
+    "largest": 1,
+    "exact": 4,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.51,
+    "candidates": 0.08,
+    "assignment": 0.476
+   }
+  },
+  {
+   "row": "willa-miranda",
+   "frameId": "frame-asset-projekt-willa-miranda-11-g2-c5d1ceb07a-ee536bd73c",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.026,
+    "candidates": 0.012,
+    "assignment": 0.192
+   }
+  },
+  {
+   "row": "willa-miranda",
+   "frameId": "frame-asset-projekt-willa-miranda-11-g2-c8409d3300-076f8887d9",
+   "chains": 0,
+   "labels": 0,
+   "candidates": 0,
+   "neighbourhoods": {
+    "labels": 0,
+    "neighbourhoods": 0,
+    "largest": 0,
+    "exact": 0,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.03,
+    "candidates": 0.015,
+    "assignment": 0.215
+   }
+  },
+  {
+   "row": "willa-miranda",
+   "frameId": "frame-asset-rzut-07b69dcbb8-2088494fef",
+   "chains": 50,
+   "labels": 12,
+   "candidates": 22,
+   "neighbourhoods": {
+    "labels": 12,
+    "neighbourhoods": 11,
+    "largest": 2,
+    "exact": 11,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 1.028,
+    "candidates": 0.261,
+    "assignment": 1.288
+   }
+  },
+  {
+   "row": "willa-miranda",
+   "frameId": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+   "chains": 72,
+   "labels": 19,
+   "candidates": 35,
+   "neighbourhoods": {
+    "labels": 19,
+    "neighbourhoods": 12,
+    "largest": 5,
+    "exact": 12,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.83,
+    "candidates": 0.192,
+    "assignment": 1.218
+   }
+  },
+  {
+   "row": "willa-miranda",
+   "frameId": "frame-asset-rzut-891a78d924-c2d04897b9",
+   "chains": 68,
+   "labels": 14,
+   "candidates": 30,
+   "neighbourhoods": {
+    "labels": 14,
+    "neighbourhoods": 8,
+    "largest": 4,
+    "exact": 8,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 2.023,
+    "candidates": 0.255,
+    "assignment": 0.978
+   }
+  },
+  {
+   "row": "willa-miranda",
+   "frameId": "frame-asset-rzut-dac34cc718-1ac18b4545",
+   "chains": 40,
+   "labels": 3,
+   "candidates": 16,
+   "neighbourhoods": {
+    "labels": 3,
+    "neighbourhoods": 3,
+    "largest": 1,
+    "exact": 3,
+    "bounded": 0,
+    "unsolved": 0
+   },
+   "ms": {
+    "axisGroups": 0.49,
+    "candidates": 0.106,
+    "assignment": 0.487
+   }
+  }
+ ],
+ "summary": {
+  "framesReplayed": 135,
+  "largestNeighbourhood": 7,
+  "neighbourhoodsSolvedExactly": 733,
+  "bounded": 0,
+  "unsolved": 0,
+  "replayAxisGroupsMs": 74.086,
+  "replayCandidatesMs": 19.058,
+  "replayAssignmentMs": 142.89,
+  "maxFrameAssignmentMs": 14.453,
+  "metricTopologyMsPerRun": [
+   753,
+   4455
+  ],
+  "metricFramesMsPerRun": [
+   25761,
+   261212
+  ],
+  "maxTickGapMsPerRun": 3877
+ }
+}

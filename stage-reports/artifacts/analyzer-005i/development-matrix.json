@@ -1,0 +1,1889 @@
+{
+ "schema": "buildapp.005i.development-matrix",
+ "before": "005H ON (d14304c; analysis code identical to 29ab643) and the sealed blind-7 runs",
+ "after": "005I ON at c0ad2e8 (the production code frozen for round 8), recogniser ON, Evidence Pack ON, offline from the same source packages and byte caches; run in a separate worktree with the research harness present and not invoked",
+ "rows": [
+  {
+   "row": "alt-marcowki",
+   "before": {
+    "outcome": "FAILED",
+    "failure": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "footprint": null
+   },
+   "after": {
+    "outcome": "FAILED",
+    "failure": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "footprint": null
+   },
+   "modelMoved": false,
+   "hashes": {
+    "metricEvidenceHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "candidateHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "modelHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "sceneContentHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "sceneSha256": {
+     "before": null,
+     "after": null,
+     "same": true
+    }
+   },
+   "metricEvidence": {
+    "before": "29a4c8c9bdaffe422ceb9218ec57f8ebc598ea3ee9c817c3656de88842a82229",
+    "after": "7425dd4063ff83aa1410cc43b9a71b201061572a8270a6b629086f66efa391ce",
+    "schemaAfter": "1.8.0"
+   },
+   "firstDivergence": {
+    "stage": "DIMENSION_AXIS_GROUPS",
+    "object": "axis-group:axis-group-horizontal-177-7945e4b9c1",
+    "before": "ABSENT",
+    "after": "GROUPED:2",
+    "differing": 21,
+    "stagesDiffering": [
+     "DIMENSION_AXIS_GROUPS",
+     "GLYPH_COUNT_HYPOTHESES",
+     "OCR_SEQUENCE_CANDIDATES",
+     "EXTERNAL_OCR_CANDIDATES",
+     "OCR_READING",
+     "LABEL_ASSIGNMENT",
+     "LABEL_BINDING",
+     "SCALE_HYPOTHESIS",
+     "METRIC_RELATION",
+     "REGISTRATION",
+     "ENVELOPE",
+     "ENVELOPE_EXTENT_CONFLICT",
+     "BODIES"
+    ]
+   },
+   "topology": {
+    "frames": 4,
+    "labelInkMarks": 14,
+    "labelInkLines": 0,
+    "groups": 21,
+    "ambiguous": 6
+   }
+  },
+  {
+   "row": "aster-viii",
+   "before": {
+    "outcome": "FAILED",
+    "failure": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "footprint": null
+   },
+   "after": {
+    "outcome": "FAILED",
+    "failure": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "footprint": null
+   },
+   "modelMoved": false,
+   "hashes": {
+    "metricEvidenceHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "candidateHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "modelHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "sceneContentHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "sceneSha256": {
+     "before": null,
+     "after": null,
+     "same": true
+    }
+   },
+   "metricEvidence": {
+    "before": "2d6dff2f69cdf15680eee25982a85b612cd0919384babc96bae40cd9b6dfa544",
+    "after": "3e00bda04c35620ab4c29b48ac54de9151236b86626929cdc4a1e6da7f71c227",
+    "schemaAfter": "1.8.0"
+   },
+   "firstDivergence": {
+    "stage": "DIMENSION_AXIS_GROUPS",
+    "object": "axis-group:axis-group-horizontal-390-78d6689383",
+    "before": "ABSENT",
+    "after": "GROUPED:2",
+    "differing": 9,
+    "stagesDiffering": [
+     "DIMENSION_AXIS_GROUPS",
+     "OCR_SEQUENCE_CANDIDATES",
+     "EXTERNAL_OCR_CANDIDATES",
+     "OCR_READING",
+     "LABEL_ASSIGNMENT",
+     "LABEL_BINDING",
+     "SCALE_HYPOTHESIS"
+    ]
+   },
+   "topology": {
+    "frames": 1,
+    "labelInkMarks": 7,
+    "labelInkLines": 0,
+    "groups": 9,
+    "ambiguous": 0
+   }
+  },
+  {
+   "row": "dom-pod-jarzabem",
+   "before": {
+    "outcome": "FAILED",
+    "failure": "RECONSTRUCTION_FAILED/BOUNDARY_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "footprint": null
+   },
+   "after": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "footprint": {
+     "builtM2": 191,
+     "publishedM2": 216.76,
+     "residualPct": -11.88,
+     "holds": false
+    }
+   },
+   "modelMoved": true,
+   "hashes": {
+    "metricEvidenceHash": {
+     "before": null,
+     "after": "7dba5532e6fa0d8fd4293cc002827e78f9dc8f6d95211129a4c88ea045035e99",
+     "same": false
+    },
+    "candidateHash": {
+     "before": null,
+     "after": "d514b3903fe6840b1eadddc40a409abe1ee709548dc5108daff1bb862b3d60b1",
+     "same": false
+    },
+    "modelHash": {
+     "before": null,
+     "after": "df2aa66c8591107a1ff3608d02164ad80f4a7609c963915cb17fe7312e64553f",
+     "same": false
+    },
+    "sceneContentHash": {
+     "before": null,
+     "after": "2d1fec7425ebf8051bfb217a09b59ba567ed65789479f60594516790818f9db5",
+     "same": false
+    },
+    "sceneSha256": {
+     "before": null,
+     "after": "3659219c3429c976c29a613dfca7e110617edccd85b66bc90e1db2e41e6ac77c",
+     "same": false
+    }
+   },
+   "metricEvidence": {
+    "before": "40568aff8d683603fb0120774845992c447351b3b2dfe0d15dc76338ad69cd62",
+    "after": "7dba5532e6fa0d8fd4293cc002827e78f9dc8f6d95211129a4c88ea045035e99",
+    "schemaAfter": "1.8.0"
+   },
+   "firstDivergence": {
+    "stage": "DIMENSION_TICK_CLASSIFICATION",
+    "object": "tick:chain-vertical-32-2550f0fe2f:396",
+    "before": "ACCEPTED",
+    "after": "REJECTED",
+    "differing": 6,
+    "stagesDiffering": [
+     "DIMENSION_TICK_CLASSIFICATION",
+     "DIMENSION_AXIS_GROUPS",
+     "OCR_SEQUENCE_CANDIDATES",
+     "EXTERNAL_OCR_CANDIDATES",
+     "OCR_READING",
+     "LABEL_ASSIGNMENT",
+     "LABEL_BINDING",
+     "DIMENSION_HIERARCHY",
+     "SCALE_HYPOTHESIS",
+     "METRIC_RELATION",
+     "REGISTRATION",
+     "FRAME_SELECTION",
+     "EXTENT",
+     "ENVELOPE",
+     "ENVELOPE_EXTENT_CONFLICT",
+     "BODIES",
+     "PLAN_RESOLUTION",
+     "FINAL"
+    ]
+   },
+   "topology": {
+    "frames": 4,
+    "labelInkMarks": 29,
+    "labelInkLines": 1,
+    "groups": 45,
+    "ambiguous": 2
+   }
+  },
+  {
+   "row": "dom-pod-milorzebem",
+   "before": {
+    "outcome": "FAILED",
+    "failure": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "footprint": null
+   },
+   "after": {
+    "outcome": "FAILED",
+    "failure": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "footprint": null
+   },
+   "modelMoved": false,
+   "hashes": {
+    "metricEvidenceHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "candidateHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "modelHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "sceneContentHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "sceneSha256": {
+     "before": null,
+     "after": null,
+     "same": true
+    }
+   },
+   "metricEvidence": {
+    "before": "15da9526459b56ab4ddc4beb3f9bb97aa9511672bf2b93c23426a42d18fdab95",
+    "after": "bbb064596ee6ccd2bb446e08de2868eeb2e1cca43a4905a9d0f7ae9ce6ce972c",
+    "schemaAfter": "1.8.0"
+   },
+   "firstDivergence": {
+    "stage": "DIMENSION_AXIS_GROUPS",
+    "object": "axis-group:axis-group-horizontal-162-a0ce2212b4",
+    "before": "ABSENT",
+    "after": "GROUPED:4",
+    "differing": 33,
+    "stagesDiffering": [
+     "DIMENSION_AXIS_GROUPS",
+     "LABEL_ASSIGNMENT",
+     "DIMENSION_HIERARCHY"
+    ]
+   },
+   "topology": {
+    "frames": 8,
+    "labelInkMarks": 14,
+    "labelInkLines": 0,
+    "groups": 33,
+    "ambiguous": 0
+   }
+  },
+  {
+   "row": "dom-w-arkadiach",
+   "before": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "PASS",
+    "footprint": {
+     "builtM2": 69.56,
+     "publishedM2": 69.9,
+     "residualPct": -0.49,
+     "holds": true
+    }
+   },
+   "after": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "PASS",
+    "footprint": {
+     "builtM2": 69.56,
+     "publishedM2": 69.9,
+     "residualPct": -0.49,
+     "holds": true
+    }
+   },
+   "modelMoved": false,
+   "hashes": {
+    "metricEvidenceHash": {
+     "before": "eb102285a29a44aec3f5f498c709de0bcee6d7980a3e75be3abbcc546dfdba91",
+     "after": "d926901fdcebc1ca49ade83b15be257bf3200d89e124eea367eeb6d31d812b6b",
+     "same": false
+    },
+    "candidateHash": {
+     "before": "36b07ed09e11e9ff12d631a721781bb6132b628b0075e03e9b3e1c90e045867a",
+     "after": "8362e5711233b8b1ab4bad5c91b96adfd20e4a53bde8286f009fed665f8d3e79",
+     "same": false
+    },
+    "modelHash": {
+     "before": "a1ac7a1b67b195839e7150e1da7a508b4b583d266a96d10b9c9322deae1f10b7",
+     "after": "a1ac7a1b67b195839e7150e1da7a508b4b583d266a96d10b9c9322deae1f10b7",
+     "same": true
+    },
+    "sceneContentHash": {
+     "before": "9d08eb7d6c093ad0990ffa6271b16f166e9e2c22a42f23828cb05cd289085609",
+     "after": "9d08eb7d6c093ad0990ffa6271b16f166e9e2c22a42f23828cb05cd289085609",
+     "same": true
+    },
+    "sceneSha256": {
+     "before": "84e56d2189f6b2f4e701f9a1d4eefcabb6940f59e1af4246d0a4c8d42208644c",
+     "after": "84e56d2189f6b2f4e701f9a1d4eefcabb6940f59e1af4246d0a4c8d42208644c",
+     "same": true
+    }
+   },
+   "metricEvidence": {
+    "before": "eb102285a29a44aec3f5f498c709de0bcee6d7980a3e75be3abbcc546dfdba91",
+    "after": "d926901fdcebc1ca49ade83b15be257bf3200d89e124eea367eeb6d31d812b6b",
+    "schemaAfter": "1.8.0"
+   },
+   "firstDivergence": {
+    "stage": "DIMENSION_AXIS_GROUPS",
+    "object": "axis-group:axis-group-horizontal-14-64e63c96c8",
+    "before": "ABSENT",
+    "after": "GROUPED:2",
+    "differing": 45,
+    "stagesDiffering": [
+     "DIMENSION_AXIS_GROUPS",
+     "OCR_SEQUENCE_CANDIDATES",
+     "EXTERNAL_OCR_CANDIDATES",
+     "OCR_READING",
+     "LABEL_ASSIGNMENT",
+     "LABEL_BINDING",
+     "SCALE_HYPOTHESIS",
+     "REGISTRATION"
+    ]
+   },
+   "topology": {
+    "frames": 8,
+    "labelInkMarks": 29,
+    "labelInkLines": 0,
+    "groups": 45,
+    "ambiguous": 0
+   }
+  },
+  {
+   "row": "dom-w-azaliach",
+   "before": {
+    "outcome": "FAILED",
+    "failure": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "footprint": null
+   },
+   "after": {
+    "outcome": "FAILED",
+    "failure": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "footprint": null
+   },
+   "modelMoved": false,
+   "hashes": {
+    "metricEvidenceHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "candidateHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "modelHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "sceneContentHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "sceneSha256": {
+     "before": null,
+     "after": null,
+     "same": true
+    }
+   },
+   "metricEvidence": {
+    "before": "ede6eb5844103ab647e4caabf5df2cfbeb5eb3863e614449968d32b928a78bc8",
+    "after": "802ba4af386ba8afb570f54f785f78707f1997ddbd0283949ce3568c5cf9dc42",
+    "schemaAfter": "1.8.0"
+   },
+   "firstDivergence": {
+    "stage": "DIMENSION_AXIS_GROUPS",
+    "object": "axis-group:axis-group-horizontal-132-39694b7613",
+    "before": "ABSENT",
+    "after": "GROUPED:3",
+    "differing": 68,
+    "stagesDiffering": [
+     "DIMENSION_AXIS_GROUPS",
+     "OCR_SEQUENCE_CANDIDATES",
+     "EXTERNAL_OCR_CANDIDATES",
+     "OCR_READING",
+     "LABEL_ASSIGNMENT",
+     "LABEL_BINDING",
+     "SCALE_HYPOTHESIS",
+     "REGISTRATION"
+    ]
+   },
+   "topology": {
+    "frames": 8,
+    "labelInkMarks": 43,
+    "labelInkLines": 0,
+    "groups": 68,
+    "ambiguous": 0
+   }
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "before": {
+    "outcome": "FAILED",
+    "failure": "RECONSTRUCTION_FAILED/BOUNDARY_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "footprint": null
+   },
+   "after": {
+    "outcome": "FAILED",
+    "failure": "RECONSTRUCTION_FAILED/BOUNDARY_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "footprint": null
+   },
+   "modelMoved": false,
+   "hashes": {
+    "metricEvidenceHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "candidateHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "modelHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "sceneContentHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "sceneSha256": {
+     "before": null,
+     "after": null,
+     "same": true
+    }
+   },
+   "metricEvidence": {
+    "before": "41e0a6f0aa24500cce0e7e2eca68a061358dea3ec3667ffe2199bd1c4b070d33",
+    "after": "2ae8409dba5651e4c1c81d4d6802c358b9e7dffdea700f13fc7adcdb214e4a25",
+    "schemaAfter": "1.8.0"
+   },
+   "firstDivergence": {
+    "stage": "DIMENSION_TICK_CLASSIFICATION",
+    "object": "tick:chain-vertical-189-6e70873d71:339",
+    "before": "ACCEPTED_QUESTIONABLE",
+    "after": "REJECTED",
+    "differing": 2,
+    "stagesDiffering": [
+     "DIMENSION_TICK_CLASSIFICATION",
+     "DIMENSION_AXIS_GROUPS",
+     "OCR_SEQUENCE_CANDIDATES",
+     "EXTERNAL_OCR_CANDIDATES",
+     "OCR_READING",
+     "LABEL_ASSIGNMENT",
+     "LABEL_BINDING",
+     "SCALE_HYPOTHESIS",
+     "REGISTRATION"
+    ]
+   },
+   "topology": {
+    "frames": 8,
+    "labelInkMarks": 34,
+    "labelInkLines": 0,
+    "groups": 72,
+    "ambiguous": 0
+   }
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "before": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "footprint": {
+     "builtM2": 77.56,
+     "publishedM2": 95.61,
+     "residualPct": -18.88,
+     "holds": false
+    }
+   },
+   "after": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "footprint": {
+     "builtM2": 77.56,
+     "publishedM2": 95.61,
+     "residualPct": -18.88,
+     "holds": false
+    }
+   },
+   "modelMoved": true,
+   "hashes": {
+    "metricEvidenceHash": {
+     "before": "09c46248ba4ad5ed16668dfe9fb79353f27299a138646f4808950d84cb8334bf",
+     "after": "edf95076afc4767f30ef9e78795b5af67739a9bbc7a299d759ff5fa17a496f7b",
+     "same": false
+    },
+    "candidateHash": {
+     "before": "3dd6a51f944dbc2f42f92a737c65c8818a515f4e143c4e3c2bba772569dd5f17",
+     "after": "7ded200ac0bbd8ab4fd795f601dd3d1833ee01e6d810303c1e970b04869cadff",
+     "same": false
+    },
+    "modelHash": {
+     "before": "7a59ba63f58b7cdbc13ad4c2355f91b75fd04c62403d464d53614203681e2aa6",
+     "after": "27642deb363a860dfb9dca75d2dd143499242704666d07c937f3ef41db7d4be0",
+     "same": false
+    },
+    "sceneContentHash": {
+     "before": "5bd243ec6e148d90e16f12577e673c80a3d3c276703c23efef6e8ea027a6a294",
+     "after": "13904e78c34574daf501c5b5c2d9fab63bfef9a3bb6a1091db1d76be46f0ebee",
+     "same": false
+    },
+    "sceneSha256": {
+     "before": "4d8de28caee81be970e40a0d08abe8c3475d26af5a5c28349ada3e7fc9f9130d",
+     "after": "cfe8869c008df012358c8a9c4a4ac47c7787eae2ec58dd3d2f8466228489b896",
+     "same": false
+    }
+   },
+   "metricEvidence": {
+    "before": "09c46248ba4ad5ed16668dfe9fb79353f27299a138646f4808950d84cb8334bf",
+    "after": "edf95076afc4767f30ef9e78795b5af67739a9bbc7a299d759ff5fa17a496f7b",
+    "schemaAfter": "1.8.0"
+   },
+   "firstDivergence": {
+    "stage": "DIMENSION_TICK_CLASSIFICATION",
+    "object": "tick:chain-vertical-64-f8bf6e9d49:290",
+    "before": "ACCEPTED_QUESTIONABLE",
+    "after": "REJECTED",
+    "differing": 1,
+    "stagesDiffering": [
+     "DIMENSION_TICK_CLASSIFICATION",
+     "DIMENSION_AXIS_GROUPS",
+     "LABEL_ASSIGNMENT",
+     "DIMENSION_HIERARCHY",
+     "SCALE_HYPOTHESIS",
+     "METRIC_RELATION",
+     "REGISTRATION"
+    ]
+   },
+   "topology": {
+    "frames": 8,
+    "labelInkMarks": 36,
+    "labelInkLines": 0,
+    "groups": 43,
+    "ambiguous": 0
+   }
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "before": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "PASS",
+    "footprint": {
+     "builtM2": 99,
+     "publishedM2": 99.4,
+     "residualPct": -0.4,
+     "holds": true
+    }
+   },
+   "after": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "PASS",
+    "footprint": {
+     "builtM2": 99,
+     "publishedM2": 99.4,
+     "residualPct": -0.4,
+     "holds": true
+    }
+   },
+   "modelMoved": false,
+   "hashes": {
+    "metricEvidenceHash": {
+     "before": "1a83c40b983957c58d5a72d88de5978de7707c9ddfc72c5136e5532dd1f559f9",
+     "after": "b1012972b4523eafe96032a00577b4b8366685362c1715737a4c011f67630ca4",
+     "same": false
+    },
+    "candidateHash": {
+     "before": "25502fda9c2208369131ad170d1f35c1fa5db133526947c40d1752b2bdfdb85e",
+     "after": "4c410744a7cb8c200a58c750eabd30ab406455d5fae3f82ee3e42a359cf6da47",
+     "same": false
+    },
+    "modelHash": {
+     "before": "a81652d034b4f9de2c0f43cce1365a0d6d9414d90ed0fb83056fd6582700a4bb",
+     "after": "a81652d034b4f9de2c0f43cce1365a0d6d9414d90ed0fb83056fd6582700a4bb",
+     "same": true
+    },
+    "sceneContentHash": {
+     "before": "79b5024f0bbfbfba5214302da75e6463d949d6da0144b29e5ffeaae668267ceb",
+     "after": "79b5024f0bbfbfba5214302da75e6463d949d6da0144b29e5ffeaae668267ceb",
+     "same": true
+    },
+    "sceneSha256": {
+     "before": "d61ed4f1847997338c04dcead41076ff07793f1d5803c64e910be5da104cbfcd",
+     "after": "d61ed4f1847997338c04dcead41076ff07793f1d5803c64e910be5da104cbfcd",
+     "same": true
+    }
+   },
+   "metricEvidence": {
+    "before": "1a83c40b983957c58d5a72d88de5978de7707c9ddfc72c5136e5532dd1f559f9",
+    "after": "b1012972b4523eafe96032a00577b4b8366685362c1715737a4c011f67630ca4",
+    "schemaAfter": "1.8.0"
+   },
+   "firstDivergence": {
+    "stage": "DIMENSION_AXIS_GROUPS",
+    "object": "axis-group:axis-group-horizontal-242-6f59175238",
+    "before": "ABSENT",
+    "after": "GROUPED:5",
+    "differing": 79,
+    "stagesDiffering": [
+     "DIMENSION_AXIS_GROUPS",
+     "OCR_SEQUENCE_CANDIDATES",
+     "EXTERNAL_OCR_CANDIDATES",
+     "OCR_READING",
+     "LABEL_ASSIGNMENT",
+     "LABEL_BINDING",
+     "SCALE_HYPOTHESIS",
+     "REGISTRATION"
+    ]
+   },
+   "topology": {
+    "frames": 8,
+    "labelInkMarks": 20,
+    "labelInkLines": 0,
+    "groups": 79,
+    "ambiguous": 7
+   }
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "before": {
+    "outcome": "FAILED",
+    "failure": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "footprint": null
+   },
+   "after": {
+    "outcome": "FAILED",
+    "failure": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "footprint": null
+   },
+   "modelMoved": false,
+   "hashes": {
+    "metricEvidenceHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "candidateHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "modelHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "sceneContentHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "sceneSha256": {
+     "before": null,
+     "after": null,
+     "same": true
+    }
+   },
+   "metricEvidence": {
+    "before": "396aa332eeea0c930c2b1da28c7c1bbabe91b23eea71110849a587b90ad39032",
+    "after": "65f1a72537051e68d52bb51752f54cbe77d3722ed17a0a720081c3aa6e0144c7",
+    "schemaAfter": "1.8.0"
+   },
+   "firstDivergence": {
+    "stage": "DIMENSION_AXIS_GROUPS",
+    "object": "axis-group:axis-group-horizontal-141-052a4e9d7f",
+    "before": "ABSENT",
+    "after": "GROUPED:4",
+    "differing": 60,
+    "stagesDiffering": [
+     "DIMENSION_AXIS_GROUPS",
+     "OCR_SEQUENCE_CANDIDATES",
+     "EXTERNAL_OCR_CANDIDATES",
+     "OCR_READING",
+     "LABEL_ASSIGNMENT",
+     "LABEL_BINDING",
+     "SCALE_HYPOTHESIS"
+    ]
+   },
+   "topology": {
+    "frames": 8,
+    "labelInkMarks": 30,
+    "labelInkLines": 0,
+    "groups": 60,
+    "ambiguous": 2
+   }
+  },
+  {
+   "row": "dom-w-modrzykach",
+   "before": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "PASS",
+    "footprint": {
+     "builtM2": 185.68,
+     "publishedM2": 181.98,
+     "residualPct": 2.03,
+     "holds": true
+    }
+   },
+   "after": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "PASS",
+    "footprint": {
+     "builtM2": 185.68,
+     "publishedM2": 181.98,
+     "residualPct": 2.03,
+     "holds": true
+    }
+   },
+   "modelMoved": false,
+   "hashes": {
+    "metricEvidenceHash": {
+     "before": "fe7dc973c1cecdd042ceb31ba11de4bd6d6bece970132200841397eb954d5779",
+     "after": "28eae99b951860f66786a37848eff18e13fc36b55858670c2acf8d37bfde9abe",
+     "same": false
+    },
+    "candidateHash": {
+     "before": "40f6bda8f9239cd7ddbf3efc4120eebbd40e99bf7ce4c5346050e69fe14a8806",
+     "after": "79f5cfd8a8c380ad508e3ce5637b143beda9619b161d3aa3d2e79977f5c60008",
+     "same": false
+    },
+    "modelHash": {
+     "before": "b125b9d24f1fb1fcb0004d45f2034fb949247f917a20893ea8b857d837946615",
+     "after": "b125b9d24f1fb1fcb0004d45f2034fb949247f917a20893ea8b857d837946615",
+     "same": true
+    },
+    "sceneContentHash": {
+     "before": "75c7bc0c48d05380418377fe487564a367f05ec3817eaad48c0d36605f8d3797",
+     "after": "75c7bc0c48d05380418377fe487564a367f05ec3817eaad48c0d36605f8d3797",
+     "same": true
+    },
+    "sceneSha256": {
+     "before": "aa56786349cd89d6155dc3bf76df0978959b5b54ece5999deefe1c18c5f4d5bf",
+     "after": "aa56786349cd89d6155dc3bf76df0978959b5b54ece5999deefe1c18c5f4d5bf",
+     "same": true
+    }
+   },
+   "metricEvidence": {
+    "before": "fe7dc973c1cecdd042ceb31ba11de4bd6d6bece970132200841397eb954d5779",
+    "after": "28eae99b951860f66786a37848eff18e13fc36b55858670c2acf8d37bfde9abe",
+    "schemaAfter": "1.8.0"
+   },
+   "firstDivergence": {
+    "stage": "DIMENSION_TICK_CLASSIFICATION",
+    "object": "tick:chain-vertical-287-696d8b0610:306",
+    "before": "ACCEPTED_QUESTIONABLE",
+    "after": "REJECTED",
+    "differing": 1,
+    "stagesDiffering": [
+     "DIMENSION_TICK_CLASSIFICATION",
+     "DIMENSION_AXIS_GROUPS",
+     "LABEL_ASSIGNMENT",
+     "EXTENT"
+    ]
+   },
+   "topology": {
+    "frames": 4,
+    "labelInkMarks": 20,
+    "labelInkLines": 0,
+    "groups": 48,
+    "ambiguous": 2
+   }
+  },
+  {
+   "row": "dom-w-morelach",
+   "before": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "PASS",
+    "footprint": {
+     "builtM2": 110.96,
+     "publishedM2": 114.53,
+     "residualPct": -3.12,
+     "holds": true
+    }
+   },
+   "after": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "PASS",
+    "footprint": {
+     "builtM2": 112.05,
+     "publishedM2": 114.53,
+     "residualPct": -2.17,
+     "holds": true
+    }
+   },
+   "modelMoved": true,
+   "hashes": {
+    "metricEvidenceHash": {
+     "before": "8839bbf6663d81f71e54a151183441046ba5e3161e1993d2c11f59f676b34405",
+     "after": "2a64c7d6061066f7fdd60d36555b29ec70deeba6f32df71ba708ece04696a543",
+     "same": false
+    },
+    "candidateHash": {
+     "before": "71f8c5dc86dce002d06742c23306d3fb3489a561ca3b67e8afd0c0f1a2238a56",
+     "after": "eed144405ad5cd76ffa788fe836a5acfbb284240b700d599c2d0285860a1eb59",
+     "same": false
+    },
+    "modelHash": {
+     "before": "c3eb20a9727b5cb15861791c7253ad571f290c6035407cabc227189339b9119b",
+     "after": "29299ff9ca7e9b4ffdc8092b203b0ca5de7229d7ad2f58544f78774c159a05a5",
+     "same": false
+    },
+    "sceneContentHash": {
+     "before": "334e1872619c7d633d7db5e53c30a024fa10d3a9a28279671503233bd9db821e",
+     "after": "e8bcf697b6b25f8632016dcb2a560d53ddab11dcee75dc21563a1a18845f0017",
+     "same": false
+    },
+    "sceneSha256": {
+     "before": "65fd1a111c6ea07d4237fbc2c988a721257650765b421b1182061978fdf9b597",
+     "after": "24eb52dc145b5a6ab713812e40b97e6ecf398473551c40e0f5e889e3aa247197",
+     "same": false
+    }
+   },
+   "metricEvidence": {
+    "before": "8839bbf6663d81f71e54a151183441046ba5e3161e1993d2c11f59f676b34405",
+    "after": "2a64c7d6061066f7fdd60d36555b29ec70deeba6f32df71ba708ece04696a543",
+    "schemaAfter": "1.8.0"
+   },
+   "firstDivergence": {
+    "stage": "DIMENSION_TICK_CLASSIFICATION",
+    "object": "tick:chain-horizontal-131-0f98d1e474:432.5",
+    "before": "ACCEPTED_QUESTIONABLE",
+    "after": "REJECTED",
+    "differing": 5,
+    "stagesDiffering": [
+     "DIMENSION_TICK_CLASSIFICATION",
+     "DIMENSION_AXIS_GROUPS",
+     "GLYPH_COUNT_HYPOTHESES",
+     "OCR_SEQUENCE_CANDIDATES",
+     "EXTERNAL_OCR_CANDIDATES",
+     "OCR_READING",
+     "LABEL_ASSIGNMENT",
+     "LABEL_BINDING",
+     "DIMENSION_HIERARCHY",
+     "SCALE_HYPOTHESIS",
+     "METRIC_RELATION",
+     "REGISTRATION",
+     "EXTENT",
+     "ENVELOPE",
+     "BODIES"
+    ]
+   },
+   "topology": {
+    "frames": 8,
+    "labelInkMarks": 38,
+    "labelInkLines": 0,
+    "groups": 60,
+    "ambiguous": 0
+   }
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "before": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "footprint": {
+     "builtM2": 117.3,
+     "publishedM2": 117.74,
+     "residualPct": -0.37,
+     "holds": true
+    }
+   },
+   "after": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "footprint": {
+     "builtM2": 117.3,
+     "publishedM2": 117.74,
+     "residualPct": -0.37,
+     "holds": true
+    }
+   },
+   "modelMoved": false,
+   "hashes": {
+    "metricEvidenceHash": {
+     "before": "744915683130ad480000a578279ea17088e6f8654448e3201fa65a20461438e3",
+     "after": "364d95dd05c8b65ceb87d5483cde89b19c612a23ba45e5de63c5dca0238aa762",
+     "same": false
+    },
+    "candidateHash": {
+     "before": "1d6f7a9717ce2a36e837c856ceb5b80c1d9efa55ceefbe5ec4b472b40a2f494a",
+     "after": "8bda382d0fca23a6e9543c37c90d032bbc88cfb9b8fe6b7bc1f4dd2953cecb45",
+     "same": false
+    },
+    "modelHash": {
+     "before": "9fa7cb890aa6eae191119f58b5a47737b7a2274f33f8641e972eaf79b3972890",
+     "after": "9fa7cb890aa6eae191119f58b5a47737b7a2274f33f8641e972eaf79b3972890",
+     "same": true
+    },
+    "sceneContentHash": {
+     "before": "ba67658dffed41c73f65518aeb4492bbab5bbdfc8e1a881251b8549b357436a3",
+     "after": "ba67658dffed41c73f65518aeb4492bbab5bbdfc8e1a881251b8549b357436a3",
+     "same": true
+    },
+    "sceneSha256": {
+     "before": "e94bc17be5560508ce21ca54365823bfba17b2f213e1fb3e34566f35957d1dd5",
+     "after": "e94bc17be5560508ce21ca54365823bfba17b2f213e1fb3e34566f35957d1dd5",
+     "same": true
+    }
+   },
+   "metricEvidence": {
+    "before": "744915683130ad480000a578279ea17088e6f8654448e3201fa65a20461438e3",
+    "after": "364d95dd05c8b65ceb87d5483cde89b19c612a23ba45e5de63c5dca0238aa762",
+    "schemaAfter": "1.8.0"
+   },
+   "firstDivergence": {
+    "stage": "DIMENSION_AXIS_GROUPS",
+    "object": "axis-group:axis-group-horizontal-107-040a571210",
+    "before": "ABSENT",
+    "after": "GROUPED:2",
+    "differing": 55,
+    "stagesDiffering": [
+     "DIMENSION_AXIS_GROUPS",
+     "OCR_READING",
+     "LABEL_ASSIGNMENT",
+     "LABEL_BINDING",
+     "DIMENSION_HIERARCHY",
+     "SCALE_HYPOTHESIS"
+    ]
+   },
+   "topology": {
+    "frames": 12,
+    "labelInkMarks": 22,
+    "labelInkLines": 0,
+    "groups": 58,
+    "ambiguous": 0
+   }
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "before": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "footprint": {
+     "builtM2": 100.88,
+     "publishedM2": 101.7,
+     "residualPct": -0.81,
+     "holds": true
+    }
+   },
+   "after": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "footprint": {
+     "builtM2": 100.88,
+     "publishedM2": 101.7,
+     "residualPct": -0.81,
+     "holds": true
+    }
+   },
+   "modelMoved": false,
+   "hashes": {
+    "metricEvidenceHash": {
+     "before": "8a2870c54aa60415f1e34a0875354161496729fa2ff8e740385969306ef5ca8c",
+     "after": "056868f08e3af35751236e6fd42df247c256f6af9ce825e5db25b568093632a1",
+     "same": false
+    },
+    "candidateHash": {
+     "before": "774187442d867fa45b7baf994881b9adab2091cb053e63c59fcbee7fcbddce75",
+     "after": "2e0fedee08b85dfe15f6ae88dd294c7925ff3e65725ad7aa41e95a6356ecd7b6",
+     "same": false
+    },
+    "modelHash": {
+     "before": "31ba5eea2aa67b69579ebd912a35c596010bdb39a3dd70cf2a64e3db16f9463f",
+     "after": "31ba5eea2aa67b69579ebd912a35c596010bdb39a3dd70cf2a64e3db16f9463f",
+     "same": true
+    },
+    "sceneContentHash": {
+     "before": "2f02bdd1d9b6688ac665fcb17be2ac5ddf839b0ff5d1d09f29f44c7f7814dda3",
+     "after": "2f02bdd1d9b6688ac665fcb17be2ac5ddf839b0ff5d1d09f29f44c7f7814dda3",
+     "same": true
+    },
+    "sceneSha256": {
+     "before": "20aa16657e5897911ca4ec54886b3731c66db829e433d2ddafb057f22fe0aaa2",
+     "after": "20aa16657e5897911ca4ec54886b3731c66db829e433d2ddafb057f22fe0aaa2",
+     "same": true
+    }
+   },
+   "metricEvidence": {
+    "before": "8a2870c54aa60415f1e34a0875354161496729fa2ff8e740385969306ef5ca8c",
+    "after": "056868f08e3af35751236e6fd42df247c256f6af9ce825e5db25b568093632a1",
+    "schemaAfter": "1.8.0"
+   },
+   "firstDivergence": {
+    "stage": "DIMENSION_AXIS_GROUPS",
+    "object": "axis-group:axis-group-horizontal-174-06425b83b8",
+    "before": "ABSENT",
+    "after": "GROUPED:5",
+    "differing": 43,
+    "stagesDiffering": [
+     "DIMENSION_AXIS_GROUPS",
+     "OCR_SEQUENCE_CANDIDATES",
+     "EXTERNAL_OCR_CANDIDATES",
+     "OCR_READING",
+     "LABEL_ASSIGNMENT",
+     "LABEL_BINDING",
+     "SCALE_HYPOTHESIS"
+    ]
+   },
+   "topology": {
+    "frames": 12,
+    "labelInkMarks": 26,
+    "labelInkLines": 0,
+    "groups": 71,
+    "ambiguous": 1
+   }
+  },
+  {
+   "row": "eoze-legacy-area",
+   "before": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "PASS",
+    "footprint": {
+     "builtM2": 116.74,
+     "publishedM2": 122.07,
+     "residualPct": -4.37,
+     "holds": true
+    }
+   },
+   "after": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "PASS",
+    "footprint": {
+     "builtM2": 116.74,
+     "publishedM2": 122.07,
+     "residualPct": -4.37,
+     "holds": true
+    }
+   },
+   "modelMoved": false,
+   "hashes": {
+    "metricEvidenceHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "candidateHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "modelHash": {
+     "before": "a27f3a5e808ee09feae908ba2295f9762087993401a8e111ea9291b16719fc51",
+     "after": "a27f3a5e808ee09feae908ba2295f9762087993401a8e111ea9291b16719fc51",
+     "same": true
+    },
+    "sceneContentHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "sceneSha256": {
+     "before": null,
+     "after": null,
+     "same": true
+    }
+   },
+   "metricEvidence": {
+    "before": "c1aef4811725d4b6e12f4c3e9ff0ed0c9670df093f85bf3a97c5427b602f0f67",
+    "after": "c1aef4811725d4b6e12f4c3e9ff0ed0c9670df093f85bf3a97c5427b602f0f67",
+    "schemaAfter": "1.1.0"
+   },
+   "firstDivergence": {
+    "stage": "NONE",
+    "object": null,
+    "before": null,
+    "after": null,
+    "differing": 0,
+    "stagesDiffering": []
+   },
+   "topology": null
+  },
+  {
+   "row": "eoze-legacy-every",
+   "before": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "PASS",
+    "footprint": {
+     "builtM2": 116.94,
+     "publishedM2": 122.07,
+     "residualPct": -4.21,
+     "holds": true
+    }
+   },
+   "after": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "PASS",
+    "footprint": {
+     "builtM2": 116.94,
+     "publishedM2": 122.07,
+     "residualPct": -4.21,
+     "holds": true
+    }
+   },
+   "modelMoved": false,
+   "hashes": {
+    "metricEvidenceHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "candidateHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "modelHash": {
+     "before": "0a0e019df52a473a95e977cae5e88bfe08a8c417e64cb8866e47bc572a602603",
+     "after": "0a0e019df52a473a95e977cae5e88bfe08a8c417e64cb8866e47bc572a602603",
+     "same": true
+    },
+    "sceneContentHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "sceneSha256": {
+     "before": null,
+     "after": null,
+     "same": true
+    }
+   },
+   "metricEvidence": {
+    "before": "c1aef4811725d4b6e12f4c3e9ff0ed0c9670df093f85bf3a97c5427b602f0f67",
+    "after": "c1aef4811725d4b6e12f4c3e9ff0ed0c9670df093f85bf3a97c5427b602f0f67",
+    "schemaAfter": "1.1.0"
+   },
+   "firstDivergence": {
+    "stage": "NONE",
+    "object": null,
+    "before": null,
+    "after": null,
+    "differing": 0,
+    "stagesDiffering": []
+   },
+   "topology": null
+  },
+  {
+   "row": "galaktyka",
+   "before": {
+    "outcome": "FAILED",
+    "failure": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "footprint": null
+   },
+   "after": {
+    "outcome": "FAILED",
+    "failure": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "footprint": null
+   },
+   "modelMoved": false,
+   "hashes": {
+    "metricEvidenceHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "candidateHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "modelHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "sceneContentHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "sceneSha256": {
+     "before": null,
+     "after": null,
+     "same": true
+    }
+   },
+   "metricEvidence": {
+    "before": "9631bf56b23e2981e87a6c826fa4cb378f2b36bba7adbd825f684d4ca24d63fd",
+    "after": "47bdc066018696ac528c62b1252c4c6ec1cd25eaab3aa056c2b0c807484e3b8a",
+    "schemaAfter": "1.8.0"
+   },
+   "firstDivergence": {
+    "stage": "DIMENSION_AXIS_GROUPS",
+    "object": "axis-group:axis-group-horizontal-1227-e3a0a0ca6c",
+    "before": "ABSENT",
+    "after": "GROUPED:2",
+    "differing": 42,
+    "stagesDiffering": [
+     "DIMENSION_AXIS_GROUPS",
+     "OCR_SEQUENCE_CANDIDATES",
+     "EXTERNAL_OCR_CANDIDATES",
+     "OCR_READING",
+     "LABEL_ASSIGNMENT",
+     "LABEL_BINDING",
+     "SCALE_HYPOTHESIS"
+    ]
+   },
+   "topology": {
+    "frames": 2,
+    "labelInkMarks": 4,
+    "labelInkLines": 0,
+    "groups": 42,
+    "ambiguous": 0
+   }
+  },
+  {
+   "row": "kosacce-area-alone",
+   "before": {
+    "outcome": "FAILED",
+    "failure": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE",
+    "verdict": "PENDING_RAW_LEGIBILITY_MEASUREMENT",
+    "footprint": null
+   },
+   "after": {
+    "outcome": "FAILED",
+    "failure": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE",
+    "verdict": "PENDING_RAW_LEGIBILITY_MEASUREMENT",
+    "footprint": null
+   },
+   "modelMoved": false,
+   "hashes": {
+    "metricEvidenceHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "candidateHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "modelHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "sceneContentHash": {
+     "before": null,
+     "after": null,
+     "same": true
+    },
+    "sceneSha256": {
+     "before": null,
+     "after": null,
+     "same": true
+    }
+   },
+   "metricEvidence": {
+    "before": "b309767db31749bcaa9dcf27161e26780af0cf0dca1c21e77f607c142f783a82",
+    "after": "b309767db31749bcaa9dcf27161e26780af0cf0dca1c21e77f607c142f783a82",
+    "schemaAfter": "1.1.0"
+   },
+   "firstDivergence": {
+    "stage": "NONE",
+    "object": null,
+    "before": null,
+    "after": null,
+    "differing": 0,
+    "stagesDiffering": []
+   },
+   "topology": null
+  },
+  {
+   "row": "kosacce-clean",
+   "before": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "PASS",
+    "footprint": {
+     "builtM2": 162.28,
+     "publishedM2": 164.47,
+     "residualPct": -1.33,
+     "holds": true
+    }
+   },
+   "after": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "PASS",
+    "footprint": {
+     "builtM2": 162.28,
+     "publishedM2": 164.47,
+     "residualPct": -1.33,
+     "holds": true
+    }
+   },
+   "modelMoved": false,
+   "hashes": {
+    "metricEvidenceHash": {
+     "before": "5e03f6dcba1b5068c6c06304a26cba6360d86c8744d624d6f9c9a3f04d2c08ed",
+     "after": "d1fe182e7d29c53e6b0e49fe6232a9f5784df5c0c0850cb6c9bd26be86515e8f",
+     "same": false
+    },
+    "candidateHash": {
+     "before": "2b61bbfe9a408035136916ef33914eaf3304d7ea8d1dbede70a2ee99b429e44a",
+     "after": "a993556fbe6726a23e817e7a8423ca7223542eba67464d96f00a11cd514ffad7",
+     "same": false
+    },
+    "modelHash": {
+     "before": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+     "after": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+     "same": true
+    },
+    "sceneContentHash": {
+     "before": "50217b856dfc3d05e97baeb69cdbf681844a6e0eb78acb03a28adc91b2d34be9",
+     "after": "50217b856dfc3d05e97baeb69cdbf681844a6e0eb78acb03a28adc91b2d34be9",
+     "same": true
+    },
+    "sceneSha256": {
+     "before": "0a9119cdf2b4a6dfc1aa0a9554176c255f779170379209fb90f6b56df886c5ef",
+     "after": "0a9119cdf2b4a6dfc1aa0a9554176c255f779170379209fb90f6b56df886c5ef",
+     "same": true
+    }
+   },
+   "metricEvidence": {
+    "before": "5e03f6dcba1b5068c6c06304a26cba6360d86c8744d624d6f9c9a3f04d2c08ed",
+    "after": "d1fe182e7d29c53e6b0e49fe6232a9f5784df5c0c0850cb6c9bd26be86515e8f",
+    "schemaAfter": "1.8.0"
+   },
+   "firstDivergence": {
+    "stage": "DIMENSION_AXIS_GROUPS",
+    "object": "axis-group:axis-group-horizontal-226-a61e6de00b",
+    "before": "ABSENT",
+    "after": "GROUPED:4",
+    "differing": 50,
+    "stagesDiffering": [
+     "DIMENSION_AXIS_GROUPS",
+     "OCR_SEQUENCE_CANDIDATES",
+     "EXTERNAL_OCR_CANDIDATES",
+     "OCR_READING",
+     "LABEL_ASSIGNMENT",
+     "LABEL_BINDING",
+     "SCALE_HYPOTHESIS",
+     "REGISTRATION"
+    ]
+   },
+   "topology": {
+    "frames": 4,
+    "labelInkMarks": 41,
+    "labelInkLines": 1,
+    "groups": 49,
+    "ambiguous": 4
+   }
+  },
+  {
+   "row": "kosacce-tracked",
+   "before": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "PASS",
+    "footprint": {
+     "builtM2": 162.28,
+     "publishedM2": 164.47,
+     "residualPct": -1.33,
+     "holds": true
+    }
+   },
+   "after": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "PASS",
+    "footprint": {
+     "builtM2": 162.28,
+     "publishedM2": 164.47,
+     "residualPct": -1.33,
+     "holds": true
+    }
+   },
+   "modelMoved": false,
+   "hashes": {
+    "metricEvidenceHash": {
+     "before": "5e03f6dcba1b5068c6c06304a26cba6360d86c8744d624d6f9c9a3f04d2c08ed",
+     "after": "d1fe182e7d29c53e6b0e49fe6232a9f5784df5c0c0850cb6c9bd26be86515e8f",
+     "same": false
+    },
+    "candidateHash": {
+     "before": "2b61bbfe9a408035136916ef33914eaf3304d7ea8d1dbede70a2ee99b429e44a",
+     "after": "a993556fbe6726a23e817e7a8423ca7223542eba67464d96f00a11cd514ffad7",
+     "same": false
+    },
+    "modelHash": {
+     "before": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+     "after": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+     "same": true
+    },
+    "sceneContentHash": {
+     "before": "50217b856dfc3d05e97baeb69cdbf681844a6e0eb78acb03a28adc91b2d34be9",
+     "after": "50217b856dfc3d05e97baeb69cdbf681844a6e0eb78acb03a28adc91b2d34be9",
+     "same": true
+    },
+    "sceneSha256": {
+     "before": "0a9119cdf2b4a6dfc1aa0a9554176c255f779170379209fb90f6b56df886c5ef",
+     "after": "0a9119cdf2b4a6dfc1aa0a9554176c255f779170379209fb90f6b56df886c5ef",
+     "same": true
+    }
+   },
+   "metricEvidence": {
+    "before": "5e03f6dcba1b5068c6c06304a26cba6360d86c8744d624d6f9c9a3f04d2c08ed",
+    "after": "d1fe182e7d29c53e6b0e49fe6232a9f5784df5c0c0850cb6c9bd26be86515e8f",
+    "schemaAfter": "1.8.0"
+   },
+   "firstDivergence": {
+    "stage": "DIMENSION_AXIS_GROUPS",
+    "object": "axis-group:axis-group-horizontal-226-a61e6de00b",
+    "before": "ABSENT",
+    "after": "GROUPED:4",
+    "differing": 50,
+    "stagesDiffering": [
+     "DIMENSION_AXIS_GROUPS",
+     "OCR_SEQUENCE_CANDIDATES",
+     "EXTERNAL_OCR_CANDIDATES",
+     "OCR_READING",
+     "LABEL_ASSIGNMENT",
+     "LABEL_BINDING",
+     "SCALE_HYPOTHESIS",
+     "REGISTRATION"
+    ]
+   },
+   "topology": {
+    "frames": 4,
+    "labelInkMarks": 41,
+    "labelInkLines": 1,
+    "groups": 49,
+    "ambiguous": 4
+   }
+  },
+  {
+   "row": "marcowki",
+   "before": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "PASS",
+    "footprint": {
+     "builtM2": 130.79,
+     "publishedM2": 131.16,
+     "residualPct": -0.29,
+     "holds": true
+    }
+   },
+   "after": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "PASS",
+    "footprint": {
+     "builtM2": 130.79,
+     "publishedM2": 131.16,
+     "residualPct": -0.29,
+     "holds": true
+    }
+   },
+   "modelMoved": false,
+   "hashes": {
+    "metricEvidenceHash": {
+     "before": "9261b2839e2beaedd1dfd0dd71b90a72cdade3efa38960980d88f583c91ee925",
+     "after": "0e0374957d08f1113a09f1bb8e147b7542a9fb422f098421c6554aea2e8c55c2",
+     "same": false
+    },
+    "candidateHash": {
+     "before": "39ca0d2e8bb3ddb2ffec460de04b584a1ab863dce36a39506a07a2ee40270395",
+     "after": "bdbec5ddb236f2e3cb990819e4d00cc75aef07e55a51ed426625acd4baa643a6",
+     "same": false
+    },
+    "modelHash": {
+     "before": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+     "after": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+     "same": true
+    },
+    "sceneContentHash": {
+     "before": "8c7d43956d74d2522d4edb35e6bf3cfb1cc1455cd6772b0e257b808e5a965a33",
+     "after": "8c7d43956d74d2522d4edb35e6bf3cfb1cc1455cd6772b0e257b808e5a965a33",
+     "same": true
+    },
+    "sceneSha256": {
+     "before": "6b74b0999e351f74ff71e9dd2df872c9800798cc6a7f54984e10350a0a16d799",
+     "after": "6b74b0999e351f74ff71e9dd2df872c9800798cc6a7f54984e10350a0a16d799",
+     "same": true
+    }
+   },
+   "metricEvidence": {
+    "before": "9261b2839e2beaedd1dfd0dd71b90a72cdade3efa38960980d88f583c91ee925",
+    "after": "0e0374957d08f1113a09f1bb8e147b7542a9fb422f098421c6554aea2e8c55c2",
+    "schemaAfter": "1.8.0"
+   },
+   "firstDivergence": {
+    "stage": "DIMENSION_AXIS_GROUPS",
+    "object": "axis-group:axis-group-horizontal-26-8c4f85ec01",
+    "before": "ABSENT",
+    "after": "GROUPED:2",
+    "differing": 71,
+    "stagesDiffering": [
+     "DIMENSION_AXIS_GROUPS",
+     "GLYPH_COUNT_HYPOTHESES",
+     "OCR_SEQUENCE_CANDIDATES",
+     "EXTERNAL_OCR_CANDIDATES",
+     "OCR_READING",
+     "LABEL_ASSIGNMENT",
+     "LABEL_BINDING",
+     "SCALE_HYPOTHESIS",
+     "REGISTRATION",
+     "EXTENT"
+    ]
+   },
+   "topology": {
+    "frames": 8,
+    "labelInkMarks": 22,
+    "labelInkLines": 0,
+    "groups": 71,
+    "ambiguous": 8
+   }
+  },
+  {
+   "row": "rarytasy-eoze",
+   "before": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "PASS",
+    "footprint": {
+     "builtM2": 123.91,
+     "publishedM2": 122.07,
+     "residualPct": 1.51,
+     "holds": true
+    }
+   },
+   "after": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "PASS",
+    "footprint": {
+     "builtM2": 123.99,
+     "publishedM2": 122.07,
+     "residualPct": 1.57,
+     "holds": true
+    }
+   },
+   "modelMoved": true,
+   "hashes": {
+    "metricEvidenceHash": {
+     "before": "1fcea5a0027c65a6a21ce46b14e3625e3cd240226a7d0464c229a28c09c6cade",
+     "after": "5c5b23ffea0b70b7a80a452a68bbdd125738a4a75e9c7817256def0ba9fa5717",
+     "same": false
+    },
+    "candidateHash": {
+     "before": "adfcf0b5a102eda1ff57cd7dec9d4f07d66b4020883f221af4e34d93b5937ccc",
+     "after": "b2e1241a4d9e28539668bc7c0c50f2b99c8001ca3db8b68ba33b1bb0a148f7de",
+     "same": false
+    },
+    "modelHash": {
+     "before": "252339bbfb6840afa5726dd04968c604fb4a5eea563849e9b083cf5031dd2b47",
+     "after": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
+     "same": false
+    },
+    "sceneContentHash": {
+     "before": "8963c7c63055b76e4b242dc408dd6e718934ea21a5d57af49db1cc395795e164",
+     "after": "fe24515bfb4851a6e965ec10d95f0ffeb1edceda2e71937f10385b5a3448ef65",
+     "same": false
+    },
+    "sceneSha256": {
+     "before": "87ff177ea4c12dfd2f747506a0defed9e51a521ca47ea928c10503ed88756e64",
+     "after": "b2dbf60cef0fe3cff159b0d51d0d8b087003ad08916364f76f711349911812df",
+     "same": false
+    }
+   },
+   "metricEvidence": {
+    "before": "1fcea5a0027c65a6a21ce46b14e3625e3cd240226a7d0464c229a28c09c6cade",
+    "after": "5c5b23ffea0b70b7a80a452a68bbdd125738a4a75e9c7817256def0ba9fa5717",
+    "schemaAfter": "1.8.0"
+   },
+   "firstDivergence": {
+    "stage": "DIMENSION_TICK_CLASSIFICATION",
+    "object": "tick:chain-horizontal-531-31d9e2ca45:661",
+    "before": "ACCEPTED",
+    "after": "REJECTED",
+    "differing": 3,
+    "stagesDiffering": [
+     "DIMENSION_TICK_CLASSIFICATION",
+     "DIMENSION_AXIS_GROUPS",
+     "OCR_SEQUENCE_CANDIDATES",
+     "EXTERNAL_OCR_CANDIDATES",
+     "OCR_READING",
+     "LABEL_ASSIGNMENT",
+     "LABEL_BINDING",
+     "DIMENSION_HIERARCHY",
+     "SCALE_HYPOTHESIS",
+     "METRIC_RELATION",
+     "REGISTRATION",
+     "EXTENT",
+     "FIRST_SUCCESS_CHALLENGE"
+    ]
+   },
+   "topology": {
+    "frames": 4,
+    "labelInkMarks": 23,
+    "labelInkLines": 0,
+    "groups": 45,
+    "ambiguous": 0
+   }
+  },
+  {
+   "row": "rarytasy-g2e",
+   "before": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "footprint": {
+     "builtM2": 184.55,
+     "publishedM2": 189.77,
+     "residualPct": -2.75,
+     "holds": true
+    }
+   },
+   "after": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "footprint": {
+     "builtM2": 184.55,
+     "publishedM2": 189.77,
+     "residualPct": -2.75,
+     "holds": true
+    }
+   },
+   "modelMoved": false,
+   "hashes": {
+    "metricEvidenceHash": {
+     "before": "d8523181c64883b5379040333b0081fc75ca277a54d80bc3970584abe76d0874",
+     "after": "173daa5706cb3a7a2d5431a02f11f04f4115ef92838270a8de4ae55d5aeb277b",
+     "same": false
+    },
+    "candidateHash": {
+     "before": "e7b29ce5e6ee99bf58e366a77eb0eeb45cb72fec169bea6f216c2fa35332f32e",
+     "after": "51866e3e8034ae73aa3d07436583f816ef7281ba20c57d4e0f8fc9cd7aabd067",
+     "same": false
+    },
+    "modelHash": {
+     "before": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+     "after": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+     "same": true
+    },
+    "sceneContentHash": {
+     "before": "bb40b9cfa2e136b09f193ca123cd3a46ff1f3298d848193bea441136dc1da362",
+     "after": "bb40b9cfa2e136b09f193ca123cd3a46ff1f3298d848193bea441136dc1da362",
+     "same": true
+    },
+    "sceneSha256": {
+     "before": "9896cd83b74f406bc58c6fc8ecd67544bd5a0eff0075aa04d32904a3e6ea1b60",
+     "after": "9896cd83b74f406bc58c6fc8ecd67544bd5a0eff0075aa04d32904a3e6ea1b60",
+     "same": true
+    }
+   },
+   "metricEvidence": {
+    "before": "d8523181c64883b5379040333b0081fc75ca277a54d80bc3970584abe76d0874",
+    "after": "173daa5706cb3a7a2d5431a02f11f04f4115ef92838270a8de4ae55d5aeb277b",
+    "schemaAfter": "1.8.0"
+   },
+   "firstDivergence": {
+    "stage": "DIMENSION_TICK_CLASSIFICATION",
+    "object": "tick:chain-vertical-164-d81df082ad:335.5",
+    "before": "ACCEPTED",
+    "after": "REJECTED",
+    "differing": 1,
+    "stagesDiffering": [
+     "DIMENSION_TICK_CLASSIFICATION",
+     "DIMENSION_AXIS_GROUPS",
+     "LABEL_ASSIGNMENT",
+     "SCALE_HYPOTHESIS",
+     "METRIC_RELATION"
+    ]
+   },
+   "topology": {
+    "frames": 4,
+    "labelInkMarks": 32,
+    "labelInkLines": 0,
+    "groups": 46,
+    "ambiguous": 2
+   }
+  },
+  {
+   "row": "willa-miranda",
+   "before": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "footprint": {
+     "builtM2": 167.36,
+     "publishedM2": 169.9,
+     "residualPct": -1.49,
+     "holds": true
+    }
+   },
+   "after": {
+    "outcome": "COMPLETED",
+    "failure": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "footprint": {
+     "builtM2": 167.36,
+     "publishedM2": 169.9,
+     "residualPct": -1.49,
+     "holds": true
+    }
+   },
+   "modelMoved": false,
+   "hashes": {
+    "metricEvidenceHash": {
+     "before": "ecfbd37b7cd1101a8c803cdc8a598f3e47ee9ee6ea0febbdc886e3cccabf12ab",
+     "after": "8bda4bae5a8ce03a56d06f22576bdffbde35c0fd6ef9dde2f6a4af928dac3d3b",
+     "same": false
+    },
+    "candidateHash": {
+     "before": "908bd6c1cfc2ad815c72520f20df148602e191e57a03a977f68483567b3823d4",
+     "after": "3d264d6128240b33b85f4eca922c6d78d290739cb3ab850cf53531a69ec8e698",
+     "same": false
+    },
+    "modelHash": {
+     "before": "84af704b09664eb5997d5a12265663ba45f2aaf456098190e43f914f34c34c81",
+     "after": "84af704b09664eb5997d5a12265663ba45f2aaf456098190e43f914f34c34c81",
+     "same": true
+    },
+    "sceneContentHash": {
+     "before": "00e6bd6880deec32dca871d9d35a1351c01853502dce8365248fb7fbacb24b2d",
+     "after": "00e6bd6880deec32dca871d9d35a1351c01853502dce8365248fb7fbacb24b2d",
+     "same": true
+    },
+    "sceneSha256": {
+     "before": "b27b4c40c9126d29d31dd0d95c0ae9c8d786a3bdd3f4e28e75cdf9fdab05a24a",
+     "after": "b27b4c40c9126d29d31dd0d95c0ae9c8d786a3bdd3f4e28e75cdf9fdab05a24a",
+     "same": true
+    }
+   },
+   "metricEvidence": {
+    "before": "ecfbd37b7cd1101a8c803cdc8a598f3e47ee9ee6ea0febbdc886e3cccabf12ab",
+    "after": "8bda4bae5a8ce03a56d06f22576bdffbde35c0fd6ef9dde2f6a4af928dac3d3b",
+    "schemaAfter": "1.8.0"
+   },
+   "firstDivergence": {
+    "stage": "DIMENSION_AXIS_GROUPS",
+    "object": "axis-group:axis-group-horizontal-183-141d6859fb",
+    "before": "ABSENT",
+    "after": "GROUPED:3",
+    "differing": 60,
+    "stagesDiffering": [
+     "DIMENSION_AXIS_GROUPS",
+     "LABEL_ASSIGNMENT",
+     "SCALE_HYPOTHESIS"
+    ]
+   },
+   "topology": {
+    "frames": 8,
+    "labelInkMarks": 19,
+    "labelInkLines": 0,
+    "groups": 60,
+    "ambiguous": 0
+   }
+  }
+ ],
+ "summary": {
+  "rows": 24,
+  "verdictChanges": 0,
+  "outcomeChanges": [
+   "dom-pod-jarzabem"
+  ],
+  "modelMoved": [
+   "dom-pod-jarzabem",
+   "dom-w-helikoniach",
+   "dom-w-morelach",
+   "rarytasy-eoze"
+  ],
+  "ocrIdentical": true,
+  "eoze": "rarytasy-eoze MUST_COMPLETE: PASS (+1.57 %; 005H +1.51 %); eoze-legacy-area and eoze-legacy-every identical (no divergence)",
+  "note": "Every row whose model moved is explained in `movements`; no verdict and no verdict condition changed on any row. The packs' OCR stages (OCR_SEQUENCE_CANDIDATES, EXTERNAL_OCR_CANDIDATES, OCR_READING) differ where they list candidates per dimension line or binding \u2014 the lines and bindings changed \u2014 while every OCR token and every numeric lattice is byte-identical to 005H (ocr-regression.json)."
+ },
+ "movements": {
+  "dom-pod-jarzabem": {
+   "expected": true,
+   "class": "the target fix (blind round 7 #1)",
+   "what": "FAILED BOUNDARY_RESOLUTION_INCONCLUSIVE -> COMPLETED, 1 body, 14 openings, 191.0 m2 (-11.88 % of 216.76): still ALGORITHMIC_FAIL on the footprint. First divergence: the mark at 396 px on the overall line (chain-vertical-32) ACCEPTED -> REJECTED TEXT_INK; the 1100 binds to the overall line, the 900 to the parts line; scale REPLACED / STRONG 2.797 x 2.806 cm/px (005H 2.716 LEGACY_UNCONFIRMED); the south side is the drawn south wall. The old first bad decision is gone; the new one is BODY_RELATION (baseline.md)."
+  },
+  "rarytasy-eoze": {
+   "expected": true,
+   "class": "label ink removed from a measurement chain",
+   "what": "PASS -> PASS, +1.51 % -> +1.57 %, every structure count identical. First divergence: the mark at 661 px on chain-horizontal-531 (copy e3a3d0015d) ACCEPTED -> REJECTED TEXT_INK. That copy's page vote now reads 2.2236 cm/px and the independent solver CONFIRMS it, where in 005H it REPLACED a wrong vote with 2.2222; the dimensions move by that 0.06 %."
+  },
+  "dom-w-morelach": {
+   "expected": true,
+   "class": "unconfirmed page votes on non-confirming copies",
+   "what": "PASS -> PASS, -3.12 % -> -2.17 %; every verdict condition holds before and after. The CONFIRMED copy (027bb2e82d) moves 1.98903 -> 1.98964 cm/px. Label-ink marks rejected (first: 432.5 px on chain-horizontal-131) and the exact assignment change the INCONCLUSIVE page votes of three other copies (4c4bf673d0 5.18 -> 2.92, 54adf16733 6.49 -> 4.02, 029c4d1238 1.10 -> none); registrations 5 -> 4. Openings 33 -> 28, doors 23 -> 19, windows 10 -> 9, rooms 7 -> 6 (openingsAllBuilt holds both times). Which opening and room count is right is not established here: recorded as residual debt."
+  },
+  "dom-w-helikoniach": {
+   "expected": true,
+   "class": "an unconfirmed page vote that no longer forms",
+   "what": "ALGORITHMIC_FAIL -> ALGORITHMIC_FAIL (storeys and footprint fail both times; 77.56 m2, -18.88 %, unchanged). First divergence: the mark at 290 px on chain-vertical-64 (copy 56cc318ca1) QUESTIONABLE -> REJECTED TEXT_INK \u2014 checked locally on the pixels: the line is clean there, the ink is the neighbouring line's label. On the 400-px copy bc02f8e306 the INCONCLUSIVE page vote (4.474 cm/px from readings such as /71, 13, 11, 44) no longer forms under the exact assignment: NO_SCALE, and the copy leaves registration. Pooled dimensions move 0.05 %; openings 11 -> 10, doors 5 -> 4, walls 11 -> 12, rooms 4 -> 3. Recorded as residual debt with morelach."
+  }
+ }
+}

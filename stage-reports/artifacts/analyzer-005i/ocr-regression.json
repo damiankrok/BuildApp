@@ -1,0 +1,368 @@
+{
+ "schema": "buildapp.005i.ocr-regression",
+ "rule": "pre-topology OCR \u2014 every OCR token and every numeric lattice (custom reading, external reading, ensemble decision) \u2014 byte-identical to 005H",
+ "rows": [
+  {
+   "row": "alt-marcowki",
+   "ocrTokens": {
+    "count": 737,
+    "identical": true
+   },
+   "numericLattices": {
+    "count": 135,
+    "identical": true,
+    "external": 135
+   },
+   "recogniser": {
+    "identical": true
+   }
+  },
+  {
+   "row": "aster-viii",
+   "ocrTokens": {
+    "count": 456,
+    "identical": true
+   },
+   "numericLattices": {
+    "count": 22,
+    "identical": true,
+    "external": 22
+   },
+   "recogniser": {
+    "identical": true
+   }
+  },
+  {
+   "row": "dom-pod-jarzabem",
+   "ocrTokens": {
+    "count": 1580,
+    "identical": true
+   },
+   "numericLattices": {
+    "count": 259,
+    "identical": true,
+    "external": 259
+   },
+   "recogniser": {
+    "identical": true
+   }
+  },
+  {
+   "row": "dom-pod-milorzebem",
+   "ocrTokens": {
+    "count": 1922,
+    "identical": true
+   },
+   "numericLattices": {
+    "count": 164,
+    "identical": true,
+    "external": 164
+   },
+   "recogniser": {
+    "identical": true
+   }
+  },
+  {
+   "row": "dom-w-arkadiach",
+   "ocrTokens": {
+    "count": 2012,
+    "identical": true
+   },
+   "numericLattices": {
+    "count": 228,
+    "identical": true,
+    "external": 228
+   },
+   "recogniser": {
+    "identical": true
+   }
+  },
+  {
+   "row": "dom-w-azaliach",
+   "ocrTokens": {
+    "count": 2310,
+    "identical": true
+   },
+   "numericLattices": {
+    "count": 277,
+    "identical": true,
+    "external": 277
+   },
+   "recogniser": {
+    "identical": true
+   }
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "ocrTokens": {
+    "count": 2452,
+    "identical": true
+   },
+   "numericLattices": {
+    "count": 310,
+    "identical": true,
+    "external": 310
+   },
+   "recogniser": {
+    "identical": true
+   }
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "ocrTokens": {
+    "count": 1906,
+    "identical": true
+   },
+   "numericLattices": {
+    "count": 252,
+    "identical": true,
+    "external": 252
+   },
+   "recogniser": {
+    "identical": true
+   }
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "ocrTokens": {
+    "count": 2241,
+    "identical": true
+   },
+   "numericLattices": {
+    "count": 304,
+    "identical": true,
+    "external": 304
+   },
+   "recogniser": {
+    "identical": true
+   }
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "ocrTokens": {
+    "count": 1665,
+    "identical": true
+   },
+   "numericLattices": {
+    "count": 272,
+    "identical": true,
+    "external": 272
+   },
+   "recogniser": {
+    "identical": true
+   }
+  },
+  {
+   "row": "dom-w-modrzykach",
+   "ocrTokens": {
+    "count": 1425,
+    "identical": true
+   },
+   "numericLattices": {
+    "count": 243,
+    "identical": true,
+    "external": 243
+   },
+   "recogniser": {
+    "identical": true
+   }
+  },
+  {
+   "row": "dom-w-morelach",
+   "ocrTokens": {
+    "count": 2629,
+    "identical": true
+   },
+   "numericLattices": {
+    "count": 272,
+    "identical": true,
+    "external": 272
+   },
+   "recogniser": {
+    "identical": true
+   }
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "ocrTokens": {
+    "count": 3150,
+    "identical": true
+   },
+   "numericLattices": {
+    "count": 258,
+    "identical": true,
+    "external": 258
+   },
+   "recogniser": {
+    "identical": true
+   }
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "ocrTokens": {
+    "count": 2313,
+    "identical": true
+   },
+   "numericLattices": {
+    "count": 291,
+    "identical": true,
+    "external": 291
+   },
+   "recogniser": {
+    "identical": true
+   }
+  },
+  {
+   "row": "eoze-legacy-area",
+   "ocrTokens": {
+    "count": 1020,
+    "identical": true
+   },
+   "numericLattices": {
+    "count": 0,
+    "identical": true,
+    "external": 0
+   },
+   "recogniser": {
+    "identical": true
+   }
+  },
+  {
+   "row": "eoze-legacy-every",
+   "ocrTokens": {
+    "count": 1020,
+    "identical": true
+   },
+   "numericLattices": {
+    "count": 0,
+    "identical": true,
+    "external": 0
+   },
+   "recogniser": {
+    "identical": true
+   }
+  },
+  {
+   "row": "galaktyka",
+   "ocrTokens": {
+    "count": 1049,
+    "identical": true
+   },
+   "numericLattices": {
+    "count": 71,
+    "identical": true,
+    "external": 71
+   },
+   "recogniser": {
+    "identical": true
+   }
+  },
+  {
+   "row": "kosacce-area-alone",
+   "ocrTokens": {
+    "count": 826,
+    "identical": true
+   },
+   "numericLattices": {
+    "count": 0,
+    "identical": true,
+    "external": 0
+   },
+   "recogniser": {
+    "identical": true
+   }
+  },
+  {
+   "row": "kosacce-clean",
+   "ocrTokens": {
+    "count": 1602,
+    "identical": true
+   },
+   "numericLattices": {
+    "count": 335,
+    "identical": true,
+    "external": 335
+   },
+   "recogniser": {
+    "identical": true
+   }
+  },
+  {
+   "row": "kosacce-tracked",
+   "ocrTokens": {
+    "count": 1602,
+    "identical": true
+   },
+   "numericLattices": {
+    "count": 335,
+    "identical": true,
+    "external": 335
+   },
+   "recogniser": {
+    "identical": true
+   }
+  },
+  {
+   "row": "marcowki",
+   "ocrTokens": {
+    "count": 1622,
+    "identical": true
+   },
+   "numericLattices": {
+    "count": 300,
+    "identical": true,
+    "external": 300
+   },
+   "recogniser": {
+    "identical": true
+   }
+  },
+  {
+   "row": "rarytasy-eoze",
+   "ocrTokens": {
+    "count": 1799,
+    "identical": true
+   },
+   "numericLattices": {
+    "count": 296,
+    "identical": true,
+    "external": 296
+   },
+   "recogniser": {
+    "identical": true
+   }
+  },
+  {
+   "row": "rarytasy-g2e",
+   "ocrTokens": {
+    "count": 1649,
+    "identical": true
+   },
+   "numericLattices": {
+    "count": 218,
+    "identical": true,
+    "external": 218
+   },
+   "recogniser": {
+    "identical": true
+   }
+  },
+  {
+   "row": "willa-miranda",
+   "ocrTokens": {
+    "count": 1750,
+    "identical": true
+   },
+   "numericLattices": {
+    "count": 247,
+    "identical": true,
+    "external": 247
+   },
+   "recogniser": {
+    "identical": true
+   }
+  }
+ ],
+ "allIdentical": true,
+ "after": "005I ON at c0ad2e8"
+}

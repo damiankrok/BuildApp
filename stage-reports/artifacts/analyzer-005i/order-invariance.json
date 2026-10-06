@@ -1,0 +1,963 @@
+{
+ "schema": "buildapp.005i.order-invariance",
+ "commit": "c0ad2e8",
+ "method": "For every sealed plan frame of the final development matrix: the assignment in canonical order against `permutations` seeded shuffles of labels and lines, and the axis groups (relations, roles, aligned ends) against the same shuffles of lines. A decision is its label, status, chosen line id and interval, and margin; a group relation is named by chain ids.",
+ "permutations": 24,
+ "frames": 135,
+ "framesWithAMovedDecision": 0,
+ "framesWithAMovedGroup": 0,
+ "synthetic": [
+  "axis-topology.test.ts §16: 24 shuffles of labels and lines on a three-line sheet",
+  "axis-topology.test.ts post-review D4: all 24 orders of four lines, two with equal ranges",
+  "axis-topology.test.ts §17: two labels tied for one interval are both refused, never handed out by list order",
+  "dimension-topology.test.ts: reordered equivalent copies decide the same scale",
+  "extract.test.ts / metric-solution.test.ts: the production extraction and solver are order-independent, byte for byte"
+ ],
+ "perFrame": [
+  {
+   "row": "alt-marcowki",
+   "frameId": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "alt-marcowki",
+   "frameId": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-e3e35d1f7-c68728b8e4",
+   "labels": 16,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "alt-marcowki",
+   "frameId": "frame-asset-dom-w-marcowkach-ge-rzut-poddasza-613dc728-2183d6fd56",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "alt-marcowki",
+   "frameId": "frame-asset-dom-w-marcowkach-ge-rzut-poddasza-9d93d74c-caf043c45a",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "aster-viii",
+   "frameId": "frame-asset-aster-viii-rzut-parter-7e90859c03-b39fd620c2",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-pod-jarzabem",
+   "frameId": "frame-asset-gotowy-projekt-dom-pod-jarzabem-15-g-rzut-19f8c2fa6e",
+   "labels": 16,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-pod-jarzabem",
+   "frameId": "frame-asset-projekt-dom-pod-jarzabem-15-g-651d2c1bf9-30609bfc8e",
+   "labels": 7,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-pod-jarzabem",
+   "frameId": "frame-asset-rzut-9354eb066f-397808a266",
+   "labels": 21,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-pod-jarzabem",
+   "frameId": "frame-asset-rzut-cafd34a77a-4813950087",
+   "labels": 19,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-pod-milorzebem",
+   "frameId": "frame-asset-gotowy-projekt-dom-pod-mi-orzebem-21-gb-rz-70d82b7242",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-pod-milorzebem",
+   "frameId": "frame-asset-gotowy-projekt-dom-pod-mi-orzebem-21-gb-rz-c959c394d8",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-pod-milorzebem",
+   "frameId": "frame-asset-projekt-dom-pod-mi-orzebem-21-gb-9f4dcb88c-6f393519ca",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-pod-milorzebem",
+   "frameId": "frame-asset-projekt-dom-pod-mi-orzebem-21-gb-f91207841-87dd091192",
+   "labels": 1,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-pod-milorzebem",
+   "frameId": "frame-asset-rzut-01cd92e4b4-0f7c5bafc8",
+   "labels": 5,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-pod-milorzebem",
+   "frameId": "frame-asset-rzut-2d9464b3c8-72b753f17d",
+   "labels": 4,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-pod-milorzebem",
+   "frameId": "frame-asset-rzut-3f1ea58c66-7182ea0aef",
+   "labels": 6,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-pod-milorzebem",
+   "frameId": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-arkadiach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-arkadiach-6-rzut-part-6a7a5261ea",
+   "labels": 5,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-arkadiach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-arkadiach-6-rzut-podd-a91d8b76fe",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-arkadiach",
+   "frameId": "frame-asset-projekt-dom-w-arkadiach-6-190b6d5491-b3ebe503f8",
+   "labels": 4,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-arkadiach",
+   "frameId": "frame-asset-projekt-dom-w-arkadiach-6-1b8f291acd-d42f1d7520",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-arkadiach",
+   "frameId": "frame-asset-rzut-16680ee739-bb2ced8b98",
+   "labels": 19,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-arkadiach",
+   "frameId": "frame-asset-rzut-6f316481e2-0c42c49252",
+   "labels": 8,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-arkadiach",
+   "frameId": "frame-asset-rzut-cc4d20932a-b363732485",
+   "labels": 8,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-arkadiach",
+   "frameId": "frame-asset-rzut-cdf9ec1681-da5e3aefce",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-azaliach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-azaliach-3-rzut-parte-38849e6936",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-azaliach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-azaliach-3-rzut-podda-feb8ac994e",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-azaliach",
+   "frameId": "frame-asset-projekt-dom-w-azaliach-3-34c5ca8606-a0edbd164d",
+   "labels": 7,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-azaliach",
+   "frameId": "frame-asset-projekt-dom-w-azaliach-3-73b0fd883d-c8090d6f57",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-azaliach",
+   "frameId": "frame-asset-rzut-2468eb43d4-3e18dd4bcc",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-azaliach",
+   "frameId": "frame-asset-rzut-2e7e66ff80-78651ec3ee",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-azaliach",
+   "frameId": "frame-asset-rzut-86bef468f3-19006df9bc",
+   "labels": 13,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-azaliach",
+   "frameId": "frame-asset-rzut-cbf8168d6d-79ba9b7966",
+   "labels": 8,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-dabecjach-2-g2-rzut-p-ce9a927d9b",
+   "labels": 15,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-dabecjach-2-g2-rzut-p-d5664432a6",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "frameId": "frame-asset-projekt-dom-w-dabecjach-2-g2-37c01c6f73-c936d50299",
+   "labels": 5,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "frameId": "frame-asset-projekt-dom-w-dabecjach-2-g2-8d87bfd6e1-64a19de9b4",
+   "labels": 2,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "frameId": "frame-asset-rzut-03a05dd085-0fd2019dc2",
+   "labels": 10,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "frameId": "frame-asset-rzut-15a246c0c6-5322551032",
+   "labels": 18,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "frameId": "frame-asset-rzut-1a56066c62-10b0ec4131",
+   "labels": 17,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "frameId": "frame-asset-rzut-a07b4e4a8c-c7b096400c",
+   "labels": 5,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-helikoniach-3-e-oze-r-0b91cfbf4f",
+   "labels": 7,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-helikoniach-3-e-oze-r-56cc318ca1",
+   "labels": 10,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "frameId": "frame-asset-projekt-dom-w-helikoniach-3-e-oze-74ede617-37e0340300",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "frameId": "frame-asset-projekt-dom-w-helikoniach-3-e-oze-8a257daf-bc02f8e306",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "frameId": "frame-asset-rzut-6f73b6499a-b883fffd61",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "frameId": "frame-asset-rzut-d209d7bdfe-0af152d058",
+   "labels": 9,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "frameId": "frame-asset-rzut-d5842da623-4c943a2b00",
+   "labels": 18,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "frameId": "frame-asset-rzut-f6160738fd-6e7c8b2a23",
+   "labels": 6,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-jab-onkach-22-rzut-pa-1ad9e4dc60",
+   "labels": 9,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-jab-onkach-22-rzut-po-8b7d8287ca",
+   "labels": 4,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "frameId": "frame-asset-projekt-dom-w-jab-onkach-22-09655213e4-f96f526406",
+   "labels": 7,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "frameId": "frame-asset-projekt-dom-w-jab-onkach-22-2db71d499e-2a49940358",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "frameId": "frame-asset-rzut-07bdad2581-a80195dc44",
+   "labels": 18,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "frameId": "frame-asset-rzut-2389a8baf9-0c491c2999",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "frameId": "frame-asset-rzut-a8bdd8cd1d-d80b709d74",
+   "labels": 25,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "frameId": "frame-asset-rzut-d52f958fd6-d2646b4dce",
+   "labels": 13,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-modrzewnicy-10-g2e-oz-1f0c5c3416",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-modrzewnicy-10-g2e-oz-d1b6e020ab",
+   "labels": 2,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-projekt-dom-w-modrzewnicy-10-g2e-oze-5e77e-0b6db21ae2",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-projekt-dom-w-modrzewnicy-10-g2e-oze-8eccb-0f790237c2",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-6f2eb0b36f-39a1396dc9",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-9304612e3c-5bc09da99c",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-dcec61c952-f7856a12c2",
+   "labels": 2,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-modrzykach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-modrzykach-3-g2-rzut-0378cbcdae",
+   "labels": 16,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-modrzykach",
+   "frameId": "frame-asset-projekt-dom-w-modrzykach-3-g2-cd6587ddfb-a668fac9d0",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-modrzykach",
+   "frameId": "frame-asset-rzut-0a0a6be1b9-b3f1538ca6",
+   "labels": 14,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-modrzykach",
+   "frameId": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+   "labels": 22,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-morelach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-morelach-n-rzut-parte-4c4bf673d0",
+   "labels": 15,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-morelach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-morelach-n-rzut-podda-722edb9b99",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-morelach",
+   "frameId": "frame-asset-projekt-dom-w-morelach-n-43e86a4c6b-42ac1f9c49",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-morelach",
+   "frameId": "frame-asset-projekt-dom-w-morelach-n-f056da2b1c-54adf16733",
+   "labels": 11,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-morelach",
+   "frameId": "frame-asset-rzut-1355c555c3-029c4d1238",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-morelach",
+   "frameId": "frame-asset-rzut-44aea220ce-796940fe12",
+   "labels": 4,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-morelach",
+   "frameId": "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+   "labels": 24,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-morelach",
+   "frameId": "frame-asset-rzut-7d856c8254-d73cb6d54e",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-tunbergiach-7-r2-rzut-18016ee823",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-tunbergiach-7-r2-rzut-638e5c452b",
+   "labels": 6,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-tunbergiach-7-r2-rzut-93af01a3d8",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "frameId": "frame-asset-projekt-dom-w-tunbergiach-7-r2-044a679235-c9d4cb4c25",
+   "labels": 7,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "frameId": "frame-asset-projekt-dom-w-tunbergiach-7-r2-1b6baeb067-54c089a10e",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "frameId": "frame-asset-projekt-dom-w-tunbergiach-7-r2-2b354a9533-90154fc4da",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "frameId": "frame-asset-rzut-0b3cd56ccf-1b5c1a1e03",
+   "labels": 10,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "frameId": "frame-asset-rzut-13c10e841e-a2d3302e3a",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "frameId": "frame-asset-rzut-7394e69c3a-5c0f9a89fe",
+   "labels": 5,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "frameId": "frame-asset-rzut-83377e8ffc-c1a88b7f25",
+   "labels": 10,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "frameId": "frame-asset-rzut-96d0ccd771-6997c88674",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "frameId": "frame-asset-rzut-b94c3eb0ba-1193124e61",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-zurawkach-3-p-rzut-pa-2d7956d088",
+   "labels": 12,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-zurawkach-3-p-rzut-pi-6b227d5070",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-zurawkach-3-p-rzut-po-82c29b6462",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "frameId": "frame-asset-projekt-dom-w-zurawkach-3-p-02c4fd7f8a-fc6b98f2d0",
+   "labels": 2,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "frameId": "frame-asset-projekt-dom-w-zurawkach-3-p-7199f69925-45095f59cd",
+   "labels": 10,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "frameId": "frame-asset-projekt-dom-w-zurawkach-3-p-7ec46c158b-1303e6adfb",
+   "labels": 3,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "frameId": "frame-asset-rzut-007f8fc320-7e7086524f",
+   "labels": 13,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "frameId": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+   "labels": 17,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "frameId": "frame-asset-rzut-1c5a322c92-0ad907a579",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "frameId": "frame-asset-rzut-9b943f5354-6b4a1371b9",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "frameId": "frame-asset-rzut-b33f1d0952-a82d8da7c0",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "frameId": "frame-asset-rzut-d59c6b8717-92f3653883",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "galaktyka",
+   "frameId": "frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "galaktyka",
+   "frameId": "frame-asset-galaktyka-i-rzut-poddasze-03a9d2528c-1d3d743da5",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "kosacce-clean",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-kosaccach-46-rzut-par-803d3d68d8",
+   "labels": 19,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "kosacce-clean",
+   "frameId": "frame-asset-projekt-dom-w-kosaccach-46-bdb822242d-a00d047246",
+   "labels": 11,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "kosacce-clean",
+   "frameId": "frame-asset-rzut-94f54ada01-bdf7aa09e8",
+   "labels": 14,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "kosacce-clean",
+   "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+   "labels": 33,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "kosacce-tracked",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-kosaccach-46-rzut-par-803d3d68d8",
+   "labels": 19,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "kosacce-tracked",
+   "frameId": "frame-asset-projekt-dom-w-kosaccach-46-bdb822242d-a00d047246",
+   "labels": 11,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "kosacce-tracked",
+   "frameId": "frame-asset-rzut-94f54ada01-bdf7aa09e8",
+   "labels": 14,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "kosacce-tracked",
+   "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+   "labels": 33,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "marcowki",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-pa-6eb2541c24",
+   "labels": 16,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "marcowki",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-po-5926d3fb6c",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "marcowki",
+   "frameId": "frame-asset-projekt-dom-w-marcowkach-ge-09d7473020-20f3864e88",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "marcowki",
+   "frameId": "frame-asset-projekt-dom-w-marcowkach-ge-e1f7fc10fc-2ffc3c0fba",
+   "labels": 8,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "marcowki",
+   "frameId": "frame-asset-rzut-117027f690-fed2722c38",
+   "labels": 13,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "marcowki",
+   "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+   "labels": 19,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "marcowki",
+   "frameId": "frame-asset-rzut-aa1526220f-863ec969ff",
+   "labels": 18,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "marcowki",
+   "frameId": "frame-asset-rzut-f028d28aba-d7b403e37e",
+   "labels": 13,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "rarytasy-eoze",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-rarytasach-e-oze-rzut-1dede27c71",
+   "labels": 17,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "rarytasy-eoze",
+   "frameId": "frame-asset-projekt-dom-w-rarytasach-e-oze-be1be080d9-4d5002ec06",
+   "labels": 11,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "rarytasy-eoze",
+   "frameId": "frame-asset-rzut-2abfc5825d-e842a14c7f",
+   "labels": 20,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "rarytasy-eoze",
+   "frameId": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+   "labels": 22,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "rarytasy-g2e",
+   "frameId": "frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-rzut-7d0192a519",
+   "labels": 14,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "rarytasy-g2e",
+   "frameId": "frame-asset-projekt-dom-w-rarytasach-5-g2e-463bb48357-5c5a32742b",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "rarytasy-g2e",
+   "frameId": "frame-asset-rzut-e8520c3ad3-59a406b738",
+   "labels": 24,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "rarytasy-g2e",
+   "frameId": "frame-asset-rzut-e85d3de75a-666b0a8861",
+   "labels": 16,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "willa-miranda",
+   "frameId": "frame-asset-gotowy-projekt-willa-miranda-11-g2-rzut-pa-122944115c",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "willa-miranda",
+   "frameId": "frame-asset-gotowy-projekt-willa-miranda-11-g2-rzut-pi-e4e00f65e2",
+   "labels": 4,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "willa-miranda",
+   "frameId": "frame-asset-projekt-willa-miranda-11-g2-c5d1ceb07a-ee536bd73c",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "willa-miranda",
+   "frameId": "frame-asset-projekt-willa-miranda-11-g2-c8409d3300-076f8887d9",
+   "labels": 0,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "willa-miranda",
+   "frameId": "frame-asset-rzut-07b69dcbb8-2088494fef",
+   "labels": 12,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "willa-miranda",
+   "frameId": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+   "labels": 19,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "willa-miranda",
+   "frameId": "frame-asset-rzut-891a78d924-c2d04897b9",
+   "labels": 14,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  },
+  {
+   "row": "willa-miranda",
+   "frameId": "frame-asset-rzut-dac34cc718-1ac18b4545",
+   "labels": 3,
+   "permutationsThatMovedADecision": 0,
+   "permutationsThatMovedAGroup": 0
+  }
+ ]
+}
