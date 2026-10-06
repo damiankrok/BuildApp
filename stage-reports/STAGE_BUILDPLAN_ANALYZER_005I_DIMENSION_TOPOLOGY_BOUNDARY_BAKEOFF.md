@@ -372,7 +372,8 @@ No physical arm64 phone result was supplied during 005I, and none was obtained h
 | 166 | push | `16bcd73` | green |
 | 167, 168 | push | `c0ad2e8`, `d59a3e8` | cancelled by the next push (same production code) |
 | **169** | push | **`869cb01`** = PRE_HOLDOUT_8_SHA | **green**: 39 jobs, 2 skipped by design |
-| next | `workflow_dispatch` (`owner_apk`) | the report commit | the final CI and the OWNER APK: §T |
+| 170, 171 | push | `0c67728`, `a7f009a` | cancelled by the next run (no code change) |
+| **172** | `workflow_dispatch` (`owner_apk`) | **`a7f009a`** (report and blind evidence) | **green** at the first attempt: 41 jobs, 40 green — the emulator, the UI evidence gate and the OWNER APK among them — and `preview-latest` skipped by design. The final CI (§T) |
 
 The development rows CI runs include both blind-7 houses, with the recogniser off (`.github/workflows/buildapp-ci.yml`):
 
@@ -400,16 +401,36 @@ On `analyzer/dimension-topology-boundary-bakeoff-v1` from `29ab643`, each pushed
 - `d59a3e8`, `869cb01` — the synthetic record, mutations, development matrix, OCR regression, order invariance and
   performance at the frozen code (**PRE_HOLDOUT_8_SHA**);
 - `0c67728` — the round-8 ledger line;
-- the report commit — blind round 8, this report and PROJECT_STATUS; then the OWNER APK record.
+- `a7f009a` — blind round 8, this report and PROJECT_STATUS (the final CI and OWNER APK, run 172);
+- then the OWNER APK record (§R, §T).
 
 ## T. OWNER APK
 
-The `workflow_dispatch` (`owner_apk`) on the report commit builds and publishes the APK. Its verification from the
-downloaded file is recorded here in the commit after it.
+`https://github.com/damiankrok/BuildApp/releases/download/owner-preview-latest/BuildPlan-owner-preview.apk`, from
+`workflow_dispatch` run 172 attempt 1 (`37474671669`) on `a7f009a`, which is also the final CI. Its analyzer code is the
+frozen code (`c0ad2e8`; `PRE_HOLDOUT_8_SHA` `869cb01`); only the ledger, documents and sealed evidence differ.
+
+Verified from the downloaded file, not from the notes:
+
+| check | result |
+| --- | --- |
+| direct link | serves the APK itself: 39 430 971 bytes, `application/vnd.android.package-archive`; asset updated 14:49:07Z, downloaded after run 172 completed |
+| SHA-256 | `70b4ff90aa4f5170a334377fc17e1a1a3ea84b9d6c45cd8e92a73b685f4df0b5`, equal to the release notes and to GitHub's asset digest |
+| version | `com.buildplan.preview`, **versionCode 1172**, versionName `0.172.0-preview`, targetSdk 35 |
+| commit / run | the notes give run 172 (attempt 1) from `claude/new-session-3kzcgh` @ `a7f009a08917b28e15f5027f18de366950a822b2` |
+| signer | `apksigner verify --print-certs`: "BuildPlan Model Preview, Preview builds (not a production key)", certificate SHA-256 `6e48fac4…a0da`, equal to the notes; installs over build 1160 |
+| ABI / native libraries | `native-code: 'arm64-v8a'` only; the same five libraries as 005H — `libnode`, `libbuildapp_node_bridge`, `libfilament-jni`, `libc++_shared`, `libandroidx.graphics.path`; **no new `.so`** |
+| permissions | `INTERNET` and AndroidX's own `DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION` — unchanged |
+| OCR model / WASM | `models/PP-OCRv6_tiny_rec.onnx` sha256 `9ef676d6…63e6` (4 462 639 bytes), `…dict.json` `9a8199f8…`, `ort-wasm-simd-threaded.wasm` `3398c10d…dee2` (14 239 897 bytes), its loader `e13f7f94…`, `ocr-worker.mjs`, `ocr-self-test.mjs` (the self-test is unchanged); recogniser id `ocr.ppocrv6-tiny-rec@9ef676d6` in the analyzer, the worker and the self-test |
+| topology in the bundle | `analyzer.mjs` declares `AXIS_TOPOLOGY_VERSION = "1.1.0"`, `DIMENSION_TOPOLOGY_VERSION = "1.2.0"`, `METRIC_EVIDENCE_TOPOLOGY_SCHEMA_VERSION = "1.7.0"` / `…_ENSEMBLE_… = "1.8.0"` and the `solveWork: 6e8` bound |
+| no research asset | no file in the APK names DeepLSD, ELSED, MobileSAM / Segment Anything, PyTorch, OpenCV, a checkpoint extension, `research` or the bake-off. The only "PyTorch" strings are ONNX Runtime's own operator documentation inside its WASM and its third-party notices, both byte-identical to 005H's |
+| size | 39 430 971 B against 005H's 39 419 927 B: **+11 044 B**, of which the analyzer bundle accounts for +11 039 B compressed (2 175 926 → 2 210 281 B uncompressed: the topology code); every dex, `resources.arsc` and the licence files are identical. Track B adds nothing |
+
+No APK binary is committed.
 
 ### OWNER phone checklist (po polsku)
 
-Zainstaluj `BuildPlan-owner-preview.apk` (numer wersji w tabeli wyżej) na poprzednią wersję, potem:
+Zainstaluj `BuildPlan-owner-preview.apk` (versionCode 1172) na poprzednią wersję (1160), potem:
 
 1. **Test zgodności odczytu wymiarów** (z 005H, wciąż otwarty). „Dodaj dom z linku” → „Test zgodności odczytu
    wymiarów” → „Uruchom test”, potem „Kopiuj wynik”.
