@@ -1,0 +1,1310 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005K",
+ "kind": "fresh-sheet gap set: labels, sealed before any evaluation (gap-set-protocol.md §5)",
+ "freezeSha": "892853e7de140f2a9fb45895acfea93700c4a053",
+ "manifestListSha256": "a37f0d726d3f8f5b3b587aa57edac0320f2a99df51ee09d50f8ea67946195c2d",
+ "note": "NOT HUMAN GROUND TRUTH. Every vote is a blind sub-agent of this session's own model (AI_SUBAGENT), shown only the neutral picture and the label definitions (research/analyzer-005k/label-instructions.md). TWO_REVIEWER_AGREEMENT: A and B agree. INDEPENDENT_SOURCE_REVIEW: A and B disagree and a third blind sub-agent sides with one of them. UNRESOLVED: no majority, or the majority says the drawing does not settle it.",
+ "reviewers": {
+  "A": "AI_SUBAGENT",
+  "B": "AI_SUBAGENT",
+  "C": "AI_SUBAGENT (disagreements only)"
+ },
+ "agreement": {
+  "pairs": 60,
+  "agree": 56,
+  "cohenKappaAB": 0.8451
+ },
+ "counts": {
+  "OPENING": 44,
+  "OPEN": 0,
+  "NOT_A_WALL_LINE": 10,
+  "UNRESOLVED": 6
+ },
+ "bySource": {
+  "TWO_REVIEWER_AGREEMENT": 56,
+  "INDEPENDENT_SOURCE_REVIEW": 3,
+  "UNRESOLVED": 1
+ },
+ "labels": [
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-X-310-230-332",
+   "qid": "q023",
+   "label": "NOT_A_WALL_LINE",
+   "label_source": "INDEPENDENT_SOURCE_REVIEW",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "UNRESOLVED",
+     "confidence": 0.45,
+     "why": "Band covers solid central partition and cabinet interiors; no gap or opening visible."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "NOT_A_WALL_LINE",
+     "confidence": 0.55,
+     "why": "Bracketed line lies inside wardrobe column beside a continuous black partition; furniture, not wall."
+    },
+    "C": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "NOT_A_WALL_LINE",
+     "confidence": 0.55,
+     "why": "Bracket runs through back-to-back crossed wardrobes; central partition wall stays solid, no opening or open side."
+    }
+   }
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-X-441-486-559",
+   "qid": "q001",
+   "label": "NOT_A_WALL_LINE",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "NOT_A_WALL_LINE",
+     "confidence": 0.6,
+     "why": "Bracketed line runs through a crossed rectangle (built-in wardrobe), furniture not wall."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "NOT_A_WALL_LINE",
+     "confidence": 0.45,
+     "why": "Bracketed line runs through X-marked box (wardrobe/shaft) between walls, no wall drawn along it."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-X-450-486-559",
+   "qid": "q049",
+   "label": "NOT_A_WALL_LINE",
+   "label_source": "INDEPENDENT_SOURCE_REVIEW",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "NOT_A_WALL_LINE",
+     "confidence": 0.55,
+     "why": "Bracketed line passes through crossed wardrobe box, furniture not wall."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPEN",
+     "confidence": 0.5,
+     "why": "Hall wall ends; wardrobe niche front stands open to the hallway, no wall or door across."
+    },
+    "C": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "NOT_A_WALL_LINE",
+     "confidence": 0.55,
+     "why": "Bracket spans a crossed built-in wardrobe in a niche; solid wall lies behind it, line is furniture front."
+    }
+   }
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-X-457-486-559",
+   "qid": "q058",
+   "label": "UNRESOLVED",
+   "label_source": "UNRESOLVED",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPEN",
+     "confidence": 0.5,
+     "why": "Wall ends at niche holding X-box wardrobe; only thin furniture front spans gap."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "UNRESOLVED",
+     "confidence": 0.5,
+     "why": "Thick wall replaced by thin edge of X-marked box; unclear whether wardrobe niche or shaft wall."
+    },
+    "C": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "NOT_A_WALL_LINE",
+     "confidence": 0.55,
+     "why": "Same wardrobe niche: bracket covers crossed built-in wardrobe front, solid wall behind, no door or window."
+    }
+   }
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-X-726-267-397",
+   "qid": "q027",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Large 300/460 glazing frame fills gap in black exterior wall."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Tall glazed window 300/460 drawn between black wall blocks in the exterior wall."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-Y-229-102-132",
+   "qid": "q020",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Door 90/230 with frame and swing arc between black wall segments."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Door 90/230 with leaf and arc between two black walls."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-Y-229-196-264",
+   "qid": "q018",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Door 170/230 with frame and swing arc between two black wall segments."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.85,
+     "why": "Door 170/230 with swing leaf and frame line spans gap between black wall ends."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-Y-229-339-406",
+   "qid": "q042",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Wall gap with door leaf and swing arc, tag 170/230."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Door 170/230 with swing leaf and glazing line between black wall ends."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-Y-229-482-515",
+   "qid": "q026",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Wall gap with door leaf and swing arc, tag 100/230."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Door 100/230 with swing arc spanning gap between black walls."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-Y-475-431-439",
+   "qid": "q024",
+   "label": "NOT_A_WALL_LINE",
+   "label_source": "INDEPENDENT_SOURCE_REVIEW",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "UNRESOLVED",
+     "confidence": 0.45,
+     "why": "Only toilet, WC floor and solid black wall under band; no gap or opening drawn."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "NOT_A_WALL_LINE",
+     "confidence": 0.5,
+     "why": "Short bracket crosses WC bowl area inside room above a continuous wall; no wall gap drawn."
+    },
+    "C": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "NOT_A_WALL_LINE",
+     "confidence": 0.45,
+     "why": "Bracket centre falls in bathroom by the WC; the bathroom wall below is solid with no gap."
+    }
+   }
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-Y-559-463-521",
+   "qid": "q031",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Entrance door with leaf and swing arc in wall gap, tag 150/210."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.85,
+     "why": "Door 150/210 with swing arc between black walls onto terrace."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-Y-597-221-259",
+   "qid": "q017",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window 90/140 frame lines and sill in exterior wall between black segments."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window 90/140 with frame lines between black wall blocks."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-Y-597-320-358",
+   "qid": "q037",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window 90/140 frame lines and sill between black exterior wall segments."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window 90/140 with frame lines between black exterior wall segments."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-Y-597-89-188",
+   "qid": "q035",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window frame lines between wall ends, tag 230/140."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window 230/140 drawn with frame lines spanning gap between black wall ends."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-Y-605-221-259",
+   "qid": "q003",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window with 90/140 tag fills gap between black exterior wall piers."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window 90/140 shown as glazing lines between dark wall segments."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-Y-605-320-358",
+   "qid": "q059",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window 90/140 frame lines and sill between black exterior wall segments."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window 90/140 glazing lines between black wall ends."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-Y-605-89-188",
+   "qid": "q060",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window frame lines between wall ends, tag 230/140."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window 230/140 glazing lines between black wall segments."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A02/frame-asset-rzut-2c17aa3eda-b6cebfd23d/dec-f9758600a9347dc6/gap-X-109-376-414",
+   "qid": "q047",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window 100/140 frame lines and sill in exterior wall between black segments."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window 100/140 drawn as thin lines in gap of black exterior wall."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A02/frame-asset-rzut-2c17aa3eda-b6cebfd23d/dec-f9758600a9347dc6/gap-X-280-177-303",
+   "qid": "q043",
+   "label": "NOT_A_WALL_LINE",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "NOT_A_WALL_LINE",
+     "confidence": 0.5,
+     "why": "Thin black wall continues; bracketed stretch runs along built-in wardrobes flanking it, not an opening."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "NOT_A_WALL_LINE",
+     "confidence": 0.45,
+     "why": "Black wall runs solid the whole length; bracketed band adds a tall cabinet beside it, no gap."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A02/frame-asset-rzut-2c17aa3eda-b6cebfd23d/dec-f9758600a9347dc6/gap-X-90-374-414",
+   "qid": "q057",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window with 100/140 tag fills gap in black exterior wall."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.85,
+     "why": "Window 100/140 with thin frame lines fills gap in black bathroom exterior wall."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A02/frame-asset-rzut-2c17aa3eda-b6cebfd23d/dec-f9758600a9347dc6/gap-X-90-467-547",
+   "qid": "q051",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window frame lines between black wall ends, tag 200/140."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window 200/140 with frame lines fills gap between black wall segments."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A03/frame-asset-rzut-1f95f4ce4d-eaa13be831/dec-2f9938d6f2b70e36/gap-X-390-561-602",
+   "qid": "q033",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.7,
+     "why": "Entrance door frame and tag 105/210 span the stretch between wall masses."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.85,
+     "why": "Entrance door 105/210 with swing arc and frame between black wall segments."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A03/frame-asset-rzut-1f95f4ce4d-eaa13be831/dec-2f9938d6f2b70e36/gap-X-402-561-602",
+   "qid": "q028",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.85,
+     "why": "Entrance door 105/210 with swing arc between wall above and black block below."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.85,
+     "why": "Door 105/210 with swing arc between black wall pieces on the entrance wall."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A03/frame-asset-rzut-1f95f4ce4d-eaa13be831/dec-2f9938d6f2b70e36/gap-X-418-561-602",
+   "qid": "q019",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.85,
+     "why": "Entrance door 105/210 with swing arc in exterior wall between black wall segments."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.8,
+     "why": "Entrance door 105/210 with leaf and swing between black wall ends, exterior paving outside."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A03/frame-asset-rzut-1f95f4ce4d-eaa13be831/dec-2f9938d6f2b70e36/gap-Y-604-338-363",
+   "qid": "q040",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.85,
+     "why": "Gap in thick exterior wall with thin frame lines, tagged 75/230 door/window."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.85,
+     "why": "Window (75/230) drawn with thin frame lines between two black exterior wall segments."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A03/frame-asset-rzut-1f95f4ce4d-eaa13be831/dec-2f9938d6f2b70e36/gap-Y-624-336-359",
+   "qid": "q012",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.85,
+     "why": "Gap in thick exterior wall with thin frame lines, tagged 75/230."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.85,
+     "why": "Window 75/230 frame lines span gap between black wall blocks in exterior wall."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A04/frame-asset-rzut-1b82f82f43-ced10ac33a/dec-e457655e37634b05/gap-Y-196-405-418",
+   "qid": "q005",
+   "label": "UNRESOLVED",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "UNRESOLVED",
+     "confidence": 0.5,
+     "why": "Strip of white cells between thin black bars; unclear if windows, facade cladding or railing; stretch spans a bar."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "UNRESOLVED",
+     "confidence": 0.45,
+     "why": "Stretch continues past wall corner across an unidentified barred strip; crop cannot tell what it is."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A04/frame-asset-rzut-1b82f82f43-ced10ac33a/dec-e457655e37634b05/gap-Y-510-405-418",
+   "qid": "q038",
+   "label": "UNRESOLVED",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "UNRESOLVED",
+     "confidence": 0.5,
+     "why": "Stretch crosses strip of white cells between black wall and blue-grey band; strip unidentifiable."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "UNRESOLVED",
+     "confidence": 0.55,
+     "why": "Stretch crosses white barred strip inside exterior wall assembly; cannot tell window, wall layer or wall end."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A04/frame-asset-rzut-1b82f82f43-ced10ac33a/dec-e457655e37634b05/gap-Y-541-374-387",
+   "qid": "q025",
+   "label": "UNRESOLVED",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "UNRESOLVED",
+     "confidence": 0.5,
+     "why": "Stretch crosses a narrow barred strip between black wall and grey block; no clear wall line."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "UNRESOLVED",
+     "confidence": 0.6,
+     "why": "Confusing strip of white cells, bars, dashed lines and blue-gray band; wall continuity unclear."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A04/frame-asset-rzut-1b82f82f43-ced10ac33a/dec-e457655e37634b05/gap-Y-708-374-387",
+   "qid": "q032",
+   "label": "UNRESOLVED",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "UNRESOLVED",
+     "confidence": 0.5,
+     "why": "Wall line meets a strip of white cells by a blue-grey band; strip's meaning unclear."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "UNRESOLVED",
+     "confidence": 0.55,
+     "why": "Wall ends at strip of white cells and bars beside blue-gray band; meaning of strip unclear."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A04/frame-asset-rzut-4f91f26bdf-589c8abdb3/dec-35a0d14044b5d0d8/gap-X-350-530-552",
+   "qid": "q014",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.85,
+     "why": "Narrow window 60/230 with frame lines between black exterior wall segments."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Narrow window 60/230 with frame lines between black wall segments."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A04/frame-asset-rzut-4f91f26bdf-589c8abdb3/dec-35a0d14044b5d0d8/gap-X-366-455-492",
+   "qid": "q050",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.85,
+     "why": "Door 105/210 with swing arc in exterior wall between black wall portions."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.8,
+     "why": "Entrance door 105/210 with swing arc between dark wall ends facing exterior paving."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A04/frame-asset-rzut-4f91f26bdf-589c8abdb3/dec-35a0d14044b5d0d8/gap-X-366-530-552",
+   "qid": "q016",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.85,
+     "why": "Frame lines with 60/230 tag fill gap in black exterior wall."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.85,
+     "why": "Door 60/230 drawn as thin frame lines in gap of black wall."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A04/frame-asset-rzut-4f91f26bdf-589c8abdb3/dec-35a0d14044b5d0d8/gap-Y-471-80-183",
+   "qid": "q034",
+   "label": "UNRESOLVED",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "UNRESOLVED",
+     "confidence": 0.5,
+     "why": "Stretch mixes open passage, short wall stub and door into room 8."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "UNRESOLVED",
+     "confidence": 0.45,
+     "why": "Stretch mixes room 9 space with no wall and room 8 wall stub plus door."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A05/frame-asset-rzut-238dfbc50b-38cf8e09f5/dec-9d43b45f77fd46c0/gap-X-806-324-456",
+   "qid": "q010",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window frame lines with mullion between black wall stubs, tagged 280/170."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window 280/170 with frame lines spans the gap between black wall blocks."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A05/frame-asset-rzut-238dfbc50b-38cf8e09f5/dec-9d43b45f77fd46c0/gap-Y-209-163-248",
+   "qid": "q054",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window 180/150 frame lines and sill between black exterior wall segments."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window 180/150 glazing lines between two black wall ends."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A05/frame-asset-rzut-238dfbc50b-38cf8e09f5/dec-9d43b45f77fd46c0/gap-Y-209-311-396",
+   "qid": "q045",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window 180/150 frame lines and sill between black exterior wall segments."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window 180/150 drawn as thin glazing lines between two black wall ends."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A05/frame-asset-rzut-238dfbc50b-38cf8e09f5/dec-9d43b45f77fd46c0/gap-Y-622-624-709",
+   "qid": "q030",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.92,
+     "why": "Window with 180/140 tag fills gap between black exterior wall piers."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window 180/140 glazing lines between black wall pieces."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A05/frame-asset-rzut-238dfbc50b-38cf8e09f5/dec-9d43b45f77fd46c0/gap-Y-634-427-474",
+   "qid": "q015",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Door with leaf, swing arc and 100/210 tag between black wall pieces."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.85,
+     "why": "Entrance door 100/210 with leaf and swing between black wall blocks, paving outside."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A05/frame-asset-rzut-238dfbc50b-38cf8e09f5/dec-9d43b45f77fd46c0/gap-Y-634-624-709",
+   "qid": "q055",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window frame lines spanning gap between black wall ends, tag 180/140."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window 180/140 with frame lines spanning gap between black wall segments."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A05/frame-asset-rzut-238dfbc50b-38cf8e09f5/dec-9d43b45f77fd46c0/gap-Y-670-273-357",
+   "qid": "q039",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.92,
+     "why": "Window frame with 180/150 tag fills gap between black exterior wall piers."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window 180/150 with frame lines between black wall blocks."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A06/frame-asset-rzut-f08001e3c4-8b24c71f3f/dec-58be3e00acd8ae8d/gap-X-353-587-740",
+   "qid": "q004",
+   "label": "NOT_A_WALL_LINE",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "NOT_A_WALL_LINE",
+     "confidence": 0.6,
+     "why": "Line runs through column of crossed wardrobe boxes beside the stair wall."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "NOT_A_WALL_LINE",
+     "confidence": 0.45,
+     "why": "Line runs through middle of stacked X-marked boxes beside stair wall, not along a wall."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A06/frame-asset-rzut-f08001e3c4-8b24c71f3f/dec-58be3e00acd8ae8d/gap-Y-762-308-353",
+   "qid": "q048",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Gap in exterior wall with door leaf and swing arc, tag 105/210."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Door 105/210 with swing arc in gap between black walls."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A06/frame-asset-rzut-f08001e3c4-8b24c71f3f/dec-58be3e00acd8ae8d/gap-Y-762-428-470",
+   "qid": "q022",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Wall gap with door leaf and swing arc, tag 105/210."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Door 105/210 with swing arc in gap between black wall segments."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A07/frame-asset-rzut-dec884e019-46909f56cf/dec-0b2a34a1a9ce2609/gap-X-790-299-376",
+   "qid": "q011",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Glazed door frame lines in gap of thick wall, tag 180/230."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Glazed door/window 180/230 thin lines between black wall ends."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A07/frame-asset-rzut-dec884e019-46909f56cf/dec-0b2a34a1a9ce2609/gap-Y-228-326-363",
+   "qid": "q002",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Wall gap with door leaf and swing arc, tag 110/230."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Door 110/230 with leaf and swing arc between two black wall ends."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "A07/frame-asset-rzut-dec884e019-46909f56cf/dec-0b2a34a1a9ce2609/gap-Y-228-473-511",
+   "qid": "q008",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Door 110/230 with frame and swing arc between black wall segments."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.85,
+     "why": "Door 110/230 with leaf and arc between black wall ends of exterior wall."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "D00/frame-asset-mars-rzut-parter-0022b323f2-20137a1a68/dec-a3d4b0af75dc48c7/gap-X-1139-322-346",
+   "qid": "q013",
+   "label": "NOT_A_WALL_LINE",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "NOT_A_WALL_LINE",
+     "confidence": 0.75,
+     "why": "Line runs through bedroom floor beside nightstand below wall; no wall drawn."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "NOT_A_WALL_LINE",
+     "confidence": 0.65,
+     "why": "Stretch lies inside the bedroom below the wall: beige floor and nightstand edge, no wall."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "D00/frame-asset-mars-rzut-parter-0022b323f2-20137a1a68/dec-a3d4b0af75dc48c7/gap-X-1158-322-346",
+   "qid": "q029",
+   "label": "NOT_A_WALL_LINE",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "NOT_A_WALL_LINE",
+     "confidence": 0.55,
+     "why": "Bracketed line runs through bedroom floor beside nightstand; no wall drawn there."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "NOT_A_WALL_LINE",
+     "confidence": 0.65,
+     "why": "Stretch is inside the room under the wall: floor and nightstand edge, no wall line."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "D00/frame-asset-mars-rzut-parter-0022b323f2-20137a1a68/dec-a3d4b0af75dc48c7/gap-X-1179-986-1085",
+   "qid": "q046",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.95,
+     "why": "Window frame lines drawn in exterior wall between gray wall segments."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window with glazing lines between gray exterior wall segments."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "D00/frame-asset-mars-rzut-parter-0022b323f2-20137a1a68/dec-a3d4b0af75dc48c7/gap-X-1195-734-830",
+   "qid": "q006",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.95,
+     "why": "Window frame lines drawn in bathroom exterior wall between gray wall segments."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window with frame lines in the bathroom exterior wall between gray wall piers."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "D00/frame-asset-mars-rzut-parter-0022b323f2-20137a1a68/dec-a3d4b0af75dc48c7/gap-X-1195-986-1085",
+   "qid": "q041",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.95,
+     "why": "Window frame lines drawn in exterior wall between two gray wall segments."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window with glazing lines between gray exterior wall segments."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "D00/frame-asset-mars-rzut-parter-0022b323f2-20137a1a68/dec-a3d4b0af75dc48c7/gap-X-1211-477-575",
+   "qid": "q007",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.92,
+     "why": "Window frame lines fill gap between two pieces of exterior wall."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window with glazing lines between gray exterior wall segments."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "D00/frame-asset-mars-rzut-parter-0022b323f2-20137a1a68/dec-a3d4b0af75dc48c7/gap-X-1211-734-830",
+   "qid": "q052",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.92,
+     "why": "Window frame lines fill gap in grey exterior bathroom wall."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window with frame lines in the bathroom exterior wall between gray wall piers."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "D00/frame-asset-mars-rzut-parter-0022b323f2-20137a1a68/dec-a3d4b0af75dc48c7/gap-X-1211-986-1085",
+   "qid": "q044",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window frame lines in gap of grey exterior wall."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.9,
+     "why": "Window with frame lines in the exterior wall between gray wall piers."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "D00/frame-asset-mars-rzut-parter-0022b323f2-20137a1a68/dec-a3d4b0af75dc48c7/gap-X-141-476-502",
+   "qid": "q036",
+   "label": "NOT_A_WALL_LINE",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "NOT_A_WALL_LINE",
+     "confidence": 0.5,
+     "why": "Bracket centre is on room floor beside solid, uninterrupted wall; nothing drawn there."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "NOT_A_WALL_LINE",
+     "confidence": 0.6,
+     "why": "Bracket sits on room floor beside wall inner face; no wall line runs there."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "D00/frame-asset-mars-rzut-parter-0022b323f2-20137a1a68/dec-a3d4b0af75dc48c7/gap-X-721-329-347",
+   "qid": "q009",
+   "label": "NOT_A_WALL_LINE",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "NOT_A_WALL_LINE",
+     "confidence": 0.85,
+     "why": "Bracketed line lies inside the room below the wall, along bed outline and floor."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "NOT_A_WALL_LINE",
+     "confidence": 0.6,
+     "why": "Bracket floats on bedroom floor beside the bed, below the wall; no wall line drawn there."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "D00/frame-asset-mars-rzut-parter-0022b323f2-20137a1a68/dec-a3d4b0af75dc48c7/gap-Y-1176-980-1044",
+   "qid": "q053",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.85,
+     "why": "Door leaf and swing arc between two grey wall pieces."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.85,
+     "why": "Door leaf and swing arc in gap between gray wall ends, jamb stubs visible."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "D00/frame-asset-mars-rzut-parter-0022b323f2-20137a1a68/dec-a3d4b0af75dc48c7/gap-Y-304-1067-1091",
+   "qid": "q021",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.75,
+     "why": "Stretch falls on the window frame drawn in the exterior wall, ending at the pier."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.75,
+     "why": "Stretch lies within long window glazing ending at gray wall corner."
+    },
+    "C": null
+   }
+  },
+  {
+   "key": "D00/frame-asset-mars-rzut-parter-0022b323f2-20137a1a68/dec-a3d4b0af75dc48c7/gap-Y-304-785-861",
+   "qid": "q056",
+   "label": "OPENING",
+   "label_source": "TWO_REVIEWER_AGREEMENT",
+   "votes": {
+    "A": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.75,
+     "why": "Stretch covers window frame lines between two grey exterior wall piers."
+    },
+    "B": {
+     "reviewer": "AI_SUBAGENT",
+     "label": "OPENING",
+     "confidence": 0.75,
+     "why": "Window drawn with frame lines in the exterior wall between two solid gray wall piers."
+    },
+    "C": null
+   }
+  }
+ ]
+}
