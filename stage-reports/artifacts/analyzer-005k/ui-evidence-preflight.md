@@ -77,7 +77,24 @@ CI run 37533180890 (BuildApp CI run 183) on `b747440`, the patched harness and n
 | UI evidence gate green at least once on the patched harness | yes: run 183, attempt 1 |
 | product main code unchanged | yes: `git diff 1314df7 b747440 -- apps/android/app/src/main` is empty |
 
-The analyzer production change (`c244ff7`) was committed after this commit and pushed only after this gate was green.
+**Deviation D2 (council D2): production work began before the gate was green.** The brief asks for the gate to be
+green before analyzer production changes. The production change was written while run 183 ran:
+
+| event (UTC) | time |
+| --- | --- |
+| run 183 on `b747440` created | 21:20:28 |
+| `c244ff7` (production change) committed locally | 21:45:37 |
+| `d653b1b`, `cdcd490` committed locally | 21:52:35, 22:10:10 |
+| UI evidence gate green | 22:15:11 |
+| first push of any production change (`892853e`) | 22:16:53 |
+
+What limits the damage:
+- run 183 tested `b747440` alone, the harness fix on the 005J head;
+- nothing was pushed before the gate was green;
+- no sealed step (draw, extraction, labels) ran before it.
+
+Had the gate failed, the harness would have been fixed first and the production commits rebased onto that fix before
+any push. The order is nonetheless not the one the brief asks for, and it is stated here and in the stage report.
 
 **UI_EVIDENCE_HARNESS: PASS.** One green run proves that the harness can pass. It does not prove that the race is gone.
 Every later CI run of this stage is a further sample, and the stage report lists them.

@@ -27,7 +27,7 @@
    "verdict": "ALGORITHMIC_FAIL",
    "failingConditions": [],
    "conditions": {},
-   "firstFailingDecision": "MODEL_EMISSION_FAILED FILL_TOO_LARGE (placeWindow)"
+   "firstFailingDecision": "NO_MASS_REACHES_UP + PLAN_STOREY_ALIGNMENT_FAILED, then MODEL_EMISSION_FAILED FILL_TOO_LARGE (placeWindow); boundary read, records not emitted (the failure record carries no plan digest)"
   },
   {
    "project": "A02",
@@ -230,7 +230,7 @@
      "holds": true
     }
    },
-   "firstFailingDecision": "NO_MASS_REACHES_UP + PLAN_STOREY_ALIGNMENT_FAILED"
+   "firstFailingDecision": "FOOTPRINT_AREA_NEAR + NO_MASS_REACHES_UP (co-first) + PLAN_STOREY_ALIGNMENT_FAILED"
   },
   {
    "project": "D01",
@@ -243,7 +243,8 @@
    "verdict": "ALGORITHMIC_FAIL",
    "failingConditions": [],
    "conditions": {},
-   "firstFailingDecision": "METRIC_RESOLUTION_INCONCLUSIVE (no usable printed dimension)"
+   "firstFailingDecision": "METRIC_RESOLUTION_INCONCLUSIVE (no usable printed dimension)",
+   "sourceLimitedByJudgment": true
   },
   {
    "project": "D02",
@@ -256,7 +257,8 @@
    "verdict": "ALGORITHMIC_FAIL",
    "failingConditions": [],
    "conditions": {},
-   "firstFailingDecision": "METRIC_RESOLUTION_INCONCLUSIVE (no usable printed dimension)"
+   "firstFailingDecision": "METRIC_RESOLUTION_INCONCLUSIVE (no usable printed dimension)",
+   "sourceLimitedByJudgment": true
   },
   {
    "project": "D03",
@@ -269,7 +271,8 @@
    "verdict": "ALGORITHMIC_FAIL",
    "failingConditions": [],
    "conditions": {},
-   "firstFailingDecision": "METRIC_RESOLUTION_INCONCLUSIVE (no usable printed dimension)"
+   "firstFailingDecision": "METRIC_RESOLUTION_INCONCLUSIVE (no usable printed dimension)",
+   "sourceLimitedByJudgment": true
   },
   {
    "project": "D04",
@@ -282,7 +285,8 @@
    "verdict": "ALGORITHMIC_FAIL",
    "failingConditions": [],
    "conditions": {},
-   "firstFailingDecision": "METRIC_RESOLUTION_INCONCLUSIVE (plan prints no dimension chain)"
+   "firstFailingDecision": "METRIC_RESOLUTION_INCONCLUSIVE (plan prints no dimension chain)",
+   "sourceLimitedByJudgment": true
   },
   {
    "project": "D05",
@@ -295,7 +299,8 @@
    "verdict": "ALGORITHMIC_FAIL",
    "failingConditions": [],
    "conditions": {},
-   "firstFailingDecision": "METRIC_RESOLUTION_INCONCLUSIVE (plan prints no dimension chain)"
+   "firstFailingDecision": "METRIC_RESOLUTION_INCONCLUSIVE (plan prints no dimension chain)",
+   "sourceLimitedByJudgment": true
   }
  ],
  "counts": {
@@ -307,5 +312,6 @@
    "A06",
    "A07"
   ]
- }
+ },
+ "note": "D01-D05: verdict.mjs says ALGORITHMIC_FAIL; the recommendation treats them as source-limited by judgment (no dimension chain printed on the plan: D03-D05 messages; D01-D03 rasters viewed by council reviewer B). First failing decisions corrected after council B2."
 }

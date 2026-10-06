@@ -107,3 +107,50 @@ becomes `OPENING_SUPPORTED` / `STRONG` / `OPENING`, and its reasons end with `DR
 
 `tests/architecture/gap-evidence.test.ts` holds this by the code: the imports, the vocabulary, the frozen literals and
 the call site.
+
+## Known limits of boundary evidence 1.2.0 (council, stated, not fixed in 005K)
+
+These are recorded as limits rather than fixed: a schema change after the sealed evaluation would itself be a protocol
+change. A successor that needs them bumps boundary evidence to 1.3.0.
+
+**`outline` does not separate the cases it lumps together (council A5).**
+- `NOT_REACHED` covers two different cases:
+  - gaps the flood never reached, which are interior;
+  - weak gaps past the 48-gap judging budget. `solveOutline` never judges these and leaves them **bridged by
+    default**: 12 of the 60 sealed records (10 OPENING, 2 NOT_A_WALL_LINE), all on A00.
+- `BRIDGED_STRONG` is given to every STRONG gap, on the outline or not: an interior gap the rule upgraded reads
+  BRIDGED_STRONG.
+- A blank gap the outline never judged can still decide a reading's adoption (A05's X-758) and reads NOT_REACHED.
+- Absent from the record:
+  - the pocket rule's `exposedM2` / `limitM2`;
+  - each jamb's own axis and piece extent, so the jamb-ink window and the 1.25-wall along test cannot be replayed;
+  - per-stroke flags: `inWall` and `continuous` are counted separately, so `inWallBand` and `signatureLoose` cannot be
+    recomputed;
+  - the gap's fate under the STRICT policy.
+- Only the digest's selected decomposition is recorded. A05 weighed 23.
+
+**The Evidence Pack covers the selected storey's copies only (council C6).**
+- `12b-gap-evidence.json` holds the copies of the selected storey.
+- A04's attic sheet is in the digest but not in the pack: 8 of 313 weak records, 4 of them in the sealed set.
+- `pack.ts`'s "every gap a reading left WEAK" is read as "every such gap on the selected storey's copies".
+
+**Keys (council C7).**
+- `frameId / decompositionId / gapId` is unique: 313 / 313 in the fresh runs, 60 / 60 in the manifest.
+- `decompositionId` excludes the rule mode (on purpose: OFF and ON compare one to one), the callouts and recogniser, and
+  the raster bytes. A join across packs needs `variantByteHash` and the run's metric-evidence hash beside it.
+- Inserting the `BOUNDARY_GAPS` timeline stage changes what the timeline lists as downstream of `EXTENT`.
+
+**"Observational" means read-only, not decision-free (council C8).**
+- `final`, `outline` and `reasons` are the pipeline's own decisions, recorded.
+- Which reading's records are published is chosen by the resolver, which can score readings against the published
+  figure. On the fresh set all 9 read sheets are first readings, so its population is free of the figure.
+
+**The decomposition cache key in `layout.ts` omits the rule mode (council C9).** It is safe only while every cache
+lives for a single run, as it does today.
+
+**Order (council C2).**
+- The records are deterministic for the source as enumerated: shuffling copies, callouts, observations and
+  registrations moves nothing.
+- They are not invariant to the order of the dimension chains. `gridLines` snaps first-come (pre-existing, upstream of
+  the boundary), so a shuffled chain order can move the grid and with it every key.
+- The sealed keys are pinned to the chain order the fresh runs produced: metric evidence 1.8.0, chain solver 1.4.0.

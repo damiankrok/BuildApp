@@ -44,6 +44,7 @@
 | STAGE BUILDPLAN-ANALYZER-005H — EXTERNAL NUMERIC RECOGNISER ENSEMBLE + ARM64 DEVICE PARITY + FRESH BLIND ROUND | `analyzer/external-numeric-recogniser-v1` (from `analyzer/open-source-technology-audit-v1` @ `c6fe174`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | recogniser, seam, rule, packaging, self-test, tests, CI `d04ebc4` (CI 155 red: a bundle job without the model); red-team fixes `d14304c` (CI 156 red: the worker's loader copy under `/tmp` on Android); the Android loader copy and coded failures `5315ff8` = **PRE_HOLDOUT_7_SHA** (CI run 157 green); round-7 draw `6e931ee`; blind runs, parity, measurements `85ccf42`; report and status `863b525` = final build (CI run 160 green at the first attempt, the `workflow_dispatch` with the OWNER APK, versionCode 1160, APK sha256 `c9cf22da…`); the APK record: the commit after it | Eleven verdicts (§ "Where the external numeric recogniser stands"): **EXTERNAL NUMERIC RECOGNISER INTEGRATION: PASS**; **OCR ENSEMBLE NON-CIRCULARITY: PASS**; **NUMERIC TARGET LABELS: PARTIAL**; **NODE PARITY: PASS**; **X86 EMULATOR PARITY: PASS**; **ARM64 DEVICE PARITY: PENDING** (no phone reachable; QEMU arm64 MATCH is supplementary only); **OCR MEMORY / LIFECYCLE: PASS**; **EVIDENCE PACK: PASS**; **CURRENT e-OZE: PASS**; **BLIND ROUND 7 PROJECT 1 (`dom-pod-jarzabem`): ALGORITHMIC_FAIL** (label binding between parallel chains; not OCR); **BLIND ROUND 7 PROJECT 2 (`dom-w-arkadiach`): PASS** (decided by the external reader). The terminal line is PARTIAL |
 | STAGE BUILDPLAN-ANALYZER-005I — PARALLEL DIMENSION TOPOLOGY + BOUNDARY OBSERVATION BAKE-OFF + FRESH BLIND ROUND 8 | `analyzer/dimension-topology-boundary-bakeoff-v1` (from `analyzer/external-numeric-recogniser-v1` @ `29ab643`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | topology `c150896`; council fixes `bc22547`, `16bcd73`, `c0ad2e8` (the frozen production code); Track B research `c90ffd9` … `bfcfb1f`; development matrix and records `869cb01` = **PRE_HOLDOUT_8_SHA** (CI run 169 green); round-8 draw `0c67728`; blind round, report and status `a7f009a` = final build (CI run 172 green at the first attempt, the `workflow_dispatch` with the OWNER APK, versionCode 1172, APK sha256 `70b4ff90…`); the APK record: the commit after it | **DIMENSION TOPOLOGY: PARTIAL** — the blind-7 label-binding defect is fixed generically and `dom-pod-jarzabem` now completes; OCR byte-identical; no development verdict changed; but both blind-8 houses are ALGORITHMIC_FAIL on boundary interpretation downstream of a correct metric. **BOUNDARY OBSERVATION BAKE-OFF: PASS_RESEARCH**, BEST_BOUNDARY_CANDIDATE **NONE** (ELSED DEFER, DeepLSD REJECT, MobileSAM REJECT), PRODUCTION_INTEGRATION NONE_IN_005I. INHERITED ARM64 DEVICE PARITY: PENDING. Terminal line PARTIAL (§ "Where the dimension topology and the boundary bake-off stand") |
 | STAGE BUILDPLAN-ANALYZER-005J — FLOORPLAN INTELLIGENCE TECHNOLOGY AUDIT + VISUAL REFEREE OPPORTUNITY MAP + TRAINING ROUTE | `analyzer/floorplan-intelligence-audit-v1` (from `analyzer/dimension-topology-boundary-bakeoff-v1` @ `64b78b4`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | research harness, artifacts and report: the commits after `64b78b4` on the branch (`git log analyzer/floorplan-intelligence-audit-v1 ^64b78b4`); BuildApp CI run 37514203211 on `d287aba` (the last content commit): 38 jobs pass, 2 skipped, **1 red** — the Android UI evidence gate (`VerticalSliceDeviceTest`), red on both attempts on a code path this stage did not touch | **PARTIAL** (`PARTIAL_BUILDPLAN_ANALYZER_005J_CI_UI_EVIDENCE_RED`) — research and audit only, **no production change** (§ "Where the floor-plan intelligence audit stands"). Small VLMs (Florence-2, SmolVLM2, Moondream) at or below chance on BuildPlan's closed questions; no commercially clean floor-plan model exists; a from-scratch BuildPlan-trained UNet-lite (6 MB) is a clean research proof. In an oracle replay of the frozen code, a deterministic drawn-gap upgrade completes `dom-w-gozdzikowcach`'s footprint exactly as a perfect witness does, and nothing moves a verdict. **PRIMARY_NEXT: NO_AI_YET** (005K: per-gap evidence records, a sealed fresh-sheet gap set, the deterministic upgrade measured on it). SECONDARY_LATER: TRAIN_BUILDPLAN_WALL_MODEL as the challenger. REJECT: small-VLM referee, every pretrained floor-plan model |
+| STAGE BUILDPLAN-ANALYZER-005K — GAP EVIDENCE + SEALED FRESH-SHEET GAP SET + DETERMINISTIC DRAWN-GAP RULE | `analyzer/gap-evidence-drawn-gap-v1` (from `analyzer/floorplan-intelligence-audit-v1` @ `1314df7`; pushes also to `claude/new-session-3kzcgh`, except the seal-to-evaluation commits; Legacy untouched) | Phase 0 `b747440`; production `c244ff7` (rule OFF); freeze `892853e` (FREEZE_SHA); manifest seal `70aa0a4`; label seal `6672a89`; evaluation `591197d`; council fixes `44f7128`; closing: the commit that carries this row. CI: run 37533180890 (`b747440`) and run 37539569712 (`892853e`) green, UI evidence gate included; the closing run is recorded in § "Where the gap evidence stands" | see § "Where the gap evidence stands (STAGE BUILDPLAN-ANALYZER-005K)". UI evidence harness fixed (test code only); per-gap evidence records (boundary evidence 1.2.0, Evidence Pack 1.2.0); a sealed fresh-sheet set of 60 gaps (14 projects, ARCHON + DobreDomy) labelled by blind AI sub-agents (not human); **DRAWN_GAP_RULE: INSUFFICIENT_EVIDENCE — stays OFF** (10 resolved negatives, none an open side; a known recess-mouth closure path). No production decision changed; no OWNER APK; blind round 9 NOT_RUN_BY_DESIGN. **NEXT: FIX_STOREY_COUNT** |
 ## Current capabilities
 
 - **CanonicalBuildingModel** (`packages/model`): versioned Zod schema
@@ -1206,6 +1207,76 @@ zgodności odczytu wymiarów").
 `.so`, preview signer `6e48fac4…`, model `9ef676d6…` and WASM `3398c10d…` inside, verified from the downloaded file
 (report §R).
 
+## Where the gap evidence stands (STAGE BUILDPLAN-ANALYZER-005K)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005K_GAP_EVIDENCE_DRAWN_GAP.md`. Evidence: `stage-reports/artifacts/analyzer-005k/`.
+It holds:
+- the baseline and the UI preflight;
+- the gap-evidence schema;
+- the gap-set protocol, exclusion manifest, draw ledger, manifest and labels;
+- the results and the constant control;
+- the development matrix, mutation results, order invariance and performance;
+- the fresh-set verdicts, the post-review and the recommendation.
+
+**What changed in production.** One change, behind an OFF flag (`drawnGapRule`; the product never sets it):
+- every WEAK boundary gap carries a trace and a source-addressable record (`frameId / decompositionId / gapId`, crop
+  rectangle + ink-mask SHA-256, never pixels);
+- digest and Evidence Pack `12b-gap-evidence.json`;
+- boundary evidence 1.2.0, Evidence Pack 1.2.0.
+
+With the rule OFF every model hash equals the pre-005K one.
+
+- **UI EVIDENCE HARNESS — PASS.**
+  - The 005J `openStage` race is fixed in test code only (`Evidence.awaitExactlyOne`, `clickExactlyOne`, `stageList`,
+    `openStage`).
+  - The gate is green on the patched harness: run 37533180890, and the freeze run 37539569712.
+  - Deviation D2: the production change was committed locally while the gate ran, and pushed only after it was green.
+- **PER-GAP EVIDENCE — PASS.**
+  - Deterministic for the source as enumerated.
+  - Known limits are stated in `gap-evidence-schema.md`. The outline fate lumps over-budget gaps into NOT_REACHED, there
+    are no jamb or stroke geometry tuples, the pack covers the selected storey only, and the keys are pinned to chain
+    order.
+- **FRESH-SHEET GAP SET — PASS (below target).**
+  - 14 projects drawn by lot from `892853e` (8 ARCHON, 6 DobreDomy). Attrition: 5 DobreDomy plans print no dimension
+    chain; A01's failure record carries no plan digest.
+  - 60 gaps on 9 read sheets: ARCHON 47, DobreDomy 13.
+  - Sealed before any label.
+  - Labels by blind AI sub-agents, **not human**: OPENING 44, OPEN 0, NOT_A_WALL_LINE 10, UNRESOLVED 6; κ 0.845.
+  - These projects are excluded from future whole-house blinds.
+- **DRAWN-GAP RULE — INSUFFICIENT_EVIDENCE, OFF.**
+  - Rule: 25 upgrades, OPENING recall 24 / 44, false upgrades 1 / 10 [0.018, 0.404], 0 outcome-critical.
+  - Adoption gate item 4 fails: 10 resolved negatives, 0 open sides.
+  - Items 5 and 7 are uninformative, 6 is untested, and 10 is not established.
+  - Known closure path (council A1): it can close recess, porch and loggia mouths up to 3.2 m, because no condition
+    reads what lies behind a gap.
+- **CONSTANT CONTROL.** 60 upgrades, 10 / 10 false, 0 outcome-critical.
+- **DEVELOPMENT MATRIX — PASS.**
+  - OFF reproduces 26 / 26.
+  - ON changes one model (dom-w-zurawkach, 100.88 → 99.99 m², verdict unchanged). The change is not fully explained:
+    a 0.89 m² corner leaves.
+  - Decoy: 595 shared records, 0 differing.
+- **GOZDZIKOWCACH.** Unchanged under ON. The 0.41 m gap is not taken (jamb ink 0.06); storeys not touched.
+- **CYKLAMENACH.** Unchanged. REC-17 not weakened.
+- **ORDER INVARIANCE — PASS (family A).**
+  - Family A: 0 / 192 shuffles of copies, callouts, observations and registrations move a record.
+  - Family B: the chain order moves the decomposition grid on 83 / 192 shuffles (`gridLines`, pre-existing, upstream).
+- **NON-CIRCULARITY — PASS.**
+  - Architecture gates: imports, vocabulary, frozen literals.
+  - Every production mention of the option is in a fixed form.
+  - M1–M6 all killed; limits stated (C5).
+- **PERFORMANCE — PASS.** OFF +0.1 %, ON +1.5 % solver time; 0.2 ms and about 1.7 KB a record; RSS unchanged.
+- **COUNCIL.**
+  - A, B and C CONDITIONAL PASS; D CHANGES REQUESTED.
+  - 1 P0 fixed: the research-isolation allowlist, red from the seal on.
+  - 12 P1 fixed or stated (`post-review/resolution.md`).
+- **PRODUCTION ADOPTION — NOT ADOPTED.**
+- **BLIND ROUND 9 — NOT_RUN_BY_DESIGN.**
+- **INHERITED ARM64 DEVICE PARITY — PENDING.** 005H's on-device check is the OWNER's.
+- **OWNER APK — not published.** No production decision changed. The next OWNER APK will carry boundary evidence 1.2.0 /
+  Evidence Pack 1.2.0.
+
+**CI (closing).** Run on the closing commit: recorded in the report's handoff and the stage-table row above.
+
 ## Where the floor-plan intelligence audit stands (STAGE BUILDPLAN-ANALYZER-005J)
 
 Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005J_FLOORPLAN_INTELLIGENCE_AUDIT.md`. Evidence:
@@ -1340,6 +1411,22 @@ All of it is in the metric evidence 1.7.0 / 1.8.0 and its hash, and in the Evide
 **CI:** run 169 (`37464801271`) on `869cb01` (PRE_HOLDOUT_8_SHA) green. **Final CI:** run 172 (`workflow_dispatch`, id 37474671669) on `a7f009a` — green at the first attempt (41 jobs, 40 green, `preview-latest` skipped by design). **OWNER APK:** `owner-preview-latest/BuildPlan-owner-preview.apk`, versionCode 1172, 39.4 MB (+11 KB: the topology code), sha256 `70b4ff90aa4f5170a334377fc17e1a1a3ea84b9d6c45cd8e92a73b685f4df0b5`, arm64-v8a only, the same five `.so`, preview signer `6e48fac4…`, model `9ef676d6…` and WASM `3398c10d…` unchanged, no research asset; verified from the downloaded file (report §T).
 
 ## Recommended technical next step
+
+**For the analyzer line (after 005K): return to the coordinator.** `stage-reports/artifacts/analyzer-005k/recommendation.md`.
+
+**NEXT: FIX_STOREY_COUNT.**
+- On the 14 fresh 005K projects, the upper storey is not stacked (`NO_MASS_REACHES_UP`) first on A01, A06 and A07, and
+  co-first with the footprint on D00.
+- A06 and A07 pass every other predicate.
+- Storeys are also the most frequent verdict blocker in the development matrix.
+
+The drawn-gap rule stays OFF (INSUFFICIENT_EVIDENCE). A successor needs:
+- a sealed set with ≥ 30 negatives, including open sides, drawn by a pre-declared stratified protocol;
+- the recess-mouth closure path closed first.
+
+The wall model stays the challenger: the fresh set found no false bridge that matters, so it gives no veto target.
+
+The 005J recommendation below is superseded by this one, subject to the coordinator.
 
 **For the analyzer line (after 005J): return to the coordinator.** `stage-reports/artifacts/analyzer-005j/recommendation.md`.
 
