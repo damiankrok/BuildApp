@@ -1,0 +1,407 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005K",
+ "method": "research/analyzer-005k/perf.sh: six development rows; for each, the solver alone (reconstructV2) on the row's sealed evidence after one warm-up, 3 timed repeats, two passes each of: the 005K sources rule OFF, the 005K sources rule ON, and the pre-005K sources (1314df7, the seven changed reconstruction files swapped in place and restored with git checkout; the tree checked clean after). Medians over the 6 timings per configuration. The record builder (gapEvidenceRecords) timed alone, 20 times, median, over each read plan's own walls and outline. digestBytes: the records as the digest serialises them (stableJson). Peak RSS per process (one process per pass and configuration; dominated by the decoded rasters). Same container, sequential, nothing else run from the tree.",
+ "node": "v22.22.2",
+ "rows": [
+  {
+   "row": "marcowki",
+   "solverMs": {
+    "pre005K": 4655,
+    "off": 4782,
+    "on": 4770,
+    "all": {
+     "pre005K": [
+      [
+       4857,
+       4559,
+       4619
+      ],
+      [
+       4691,
+       4692,
+       4466
+      ]
+     ],
+     "off": [
+      [
+       5078,
+       4778,
+       4563
+      ],
+      [
+       4895,
+       4786,
+       4298
+      ]
+     ],
+     "on": [
+      [
+       4874,
+       4711,
+       4411
+      ],
+      [
+       4828,
+       5131,
+       4486
+      ]
+     ]
+    }
+   },
+   "offDeltaPct": 2.7,
+   "onDeltaPct": 2.5,
+   "result": {
+    "pre005K": "401f84c371d93c2ef57205577bb03b94c920a5750e7b70b9ae2b2223247d2c9d",
+    "off": "401f84c371d93c2ef57205577bb03b94c920a5750e7b70b9ae2b2223247d2c9d",
+    "on": "401f84c371d93c2ef57205577bb03b94c920a5750e7b70b9ae2b2223247d2c9d",
+    "offEqualsPre005K": true
+   },
+   "recordBuilder": {
+    "plans": 2,
+    "records": 27,
+    "msMedianSum": 4.545,
+    "msMedianSumOn": 4.482,
+    "digestBytes": 46810,
+    "digestBytesOn": 46965
+   }
+  },
+  {
+   "row": "kosacce-clean",
+   "solverMs": {
+    "pre005K": 4496,
+    "off": 4284,
+    "on": 4346,
+    "all": {
+     "pre005K": [
+      [
+       4380,
+       4389,
+       4402
+      ],
+      [
+       4969,
+       4712,
+       4589
+      ]
+     ],
+     "off": [
+      [
+       4280,
+       4465,
+       4287
+      ],
+      [
+       4600,
+       4207,
+       4186
+      ]
+     ],
+     "on": [
+      [
+       4606,
+       4341,
+       4284
+      ],
+      [
+       4417,
+       4289,
+       4352
+      ]
+     ]
+    }
+   },
+   "offDeltaPct": -4.7,
+   "onDeltaPct": -3.3,
+   "result": {
+    "pre005K": "b9047ff5b2dbbf7c544898de1ff6f80c2bbab5cd611d0d43b99b97299028a1fb",
+    "off": "b9047ff5b2dbbf7c544898de1ff6f80c2bbab5cd611d0d43b99b97299028a1fb",
+    "on": "b9047ff5b2dbbf7c544898de1ff6f80c2bbab5cd611d0d43b99b97299028a1fb",
+    "offEqualsPre005K": true
+   },
+   "recordBuilder": {
+    "plans": 1,
+    "records": 26,
+    "msMedianSum": 5.473,
+    "msMedianSumOn": 7.982,
+    "digestBytes": 45068,
+    "digestBytesOn": 45187
+   }
+  },
+  {
+   "row": "willa-miranda",
+   "solverMs": {
+    "pre005K": 4376,
+    "off": 4440,
+    "on": 4312,
+    "all": {
+     "pre005K": [
+      [
+       4333,
+       4378,
+       4426
+      ],
+      [
+       4375,
+       4252,
+       4544
+      ]
+     ],
+     "off": [
+      [
+       4744,
+       4569,
+       4501
+      ],
+      [
+       4242,
+       4379,
+       4278
+      ]
+     ],
+     "on": [
+      [
+       4580,
+       4550,
+       4314
+      ],
+      [
+       4296,
+       4311,
+       4310
+      ]
+     ]
+    }
+   },
+   "offDeltaPct": 1.5,
+   "onDeltaPct": -1.5,
+   "result": {
+    "pre005K": "5fb00dacb39bfda66d152bfba8201d19f92881403bb89a509bd0ed4c501f72c9",
+    "off": "5fb00dacb39bfda66d152bfba8201d19f92881403bb89a509bd0ed4c501f72c9",
+    "on": "5fb00dacb39bfda66d152bfba8201d19f92881403bb89a509bd0ed4c501f72c9",
+    "offEqualsPre005K": true
+   },
+   "recordBuilder": {
+    "plans": 2,
+    "records": 18,
+    "msMedianSum": 2.917,
+    "msMedianSumOn": 2.832,
+    "digestBytes": 30901,
+    "digestBytesOn": 30956
+   }
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "solverMs": {
+    "pre005K": 2310,
+    "off": 2242,
+    "on": 2494,
+    "all": {
+     "pre005K": [
+      [
+       2220,
+       2218,
+       2277
+      ],
+      [
+       2561,
+       2381,
+       2343
+      ]
+     ],
+     "off": [
+      [
+       2257,
+       2377,
+       2219
+      ],
+      [
+       2174,
+       2227,
+       2358
+      ]
+     ],
+     "on": [
+      [
+       2568,
+       2688,
+       2420
+      ],
+      [
+       2332,
+       2578,
+       2296
+      ]
+     ]
+    }
+   },
+   "offDeltaPct": -2.9,
+   "onDeltaPct": 8.0,
+   "result": {
+    "pre005K": "7946ec251392ae4a4b42a9bb7ce4e86e4bfe07fdd027a0ef5a2afa6ed4b26496",
+    "off": "7946ec251392ae4a4b42a9bb7ce4e86e4bfe07fdd027a0ef5a2afa6ed4b26496",
+    "on": "ebfc627647e6751c08bd8cce5e5e8f759183ce4aa0cedea4ef6607048bed99ca",
+    "offEqualsPre005K": true
+   },
+   "recordBuilder": {
+    "plans": 1,
+    "records": 14,
+    "msMedianSum": 3.524,
+    "msMedianSumOn": 3.424,
+    "digestBytes": 24062,
+    "digestBytesOn": 24193
+   }
+  },
+  {
+   "row": "dom-w-gozdzikowcach",
+   "solverMs": {
+    "pre005K": 1290,
+    "off": 1279,
+    "on": 1330,
+    "all": {
+     "pre005K": [
+      [
+       1279,
+       1220,
+       1380
+      ],
+      [
+       1426,
+       1276,
+       1302
+      ]
+     ],
+     "off": [
+      [
+       1254,
+       1232,
+       1270
+      ],
+      [
+       1288,
+       1302,
+       1349
+      ]
+     ],
+     "on": [
+      [
+       1268,
+       1394,
+       1358
+      ],
+      [
+       1302,
+       1456,
+       1158
+      ]
+     ]
+    }
+   },
+   "offDeltaPct": -0.9,
+   "onDeltaPct": 3.1,
+   "result": {
+    "pre005K": "FAILED PLAN_RESOLUTION_INCONCLUSIVE",
+    "off": "FAILED PLAN_RESOLUTION_INCONCLUSIVE",
+    "on": "FAILED PLAN_RESOLUTION_INCONCLUSIVE",
+    "offEqualsPre005K": true
+   },
+   "recordBuilder": {
+    "plans": 1,
+    "records": 8,
+    "msMedianSum": 1.862,
+    "msMedianSumOn": 1.75,
+    "digestBytes": 13758,
+    "digestBytesOn": 13787
+   }
+  },
+  {
+   "row": "dom-w-cyklamenach",
+   "solverMs": {
+    "pre005K": 2423,
+    "off": 2545,
+    "on": 2600,
+    "all": {
+     "pre005K": [
+      [
+       2380,
+       2466,
+       2483
+      ],
+      [
+       2371,
+       3088,
+       2376
+      ]
+     ],
+     "off": [
+      [
+       2485,
+       2540,
+       2625
+      ],
+      [
+       2521,
+       2550,
+       2717
+      ]
+     ],
+     "on": [
+      [
+       2590,
+       2578,
+       2745
+      ],
+      [
+       2569,
+       2610,
+       2906
+      ]
+     ]
+    }
+   },
+   "offDeltaPct": 5.0,
+   "onDeltaPct": 7.3,
+   "result": {
+    "pre005K": "FAILED PLAN_RESOLUTION_INCONCLUSIVE",
+    "off": "FAILED PLAN_RESOLUTION_INCONCLUSIVE",
+    "on": "FAILED PLAN_RESOLUTION_INCONCLUSIVE",
+    "offEqualsPre005K": true
+   },
+   "recordBuilder": {
+    "plans": 2,
+    "records": 12,
+    "msMedianSum": 2.386,
+    "msMedianSumOn": 2.612,
+    "digestBytes": 20860,
+    "digestBytesOn": 20920
+   }
+  }
+ ],
+ "peakRssMB": {
+  "new-off": [
+   672,
+   705
+  ],
+  "new-on": [
+   721,
+   703
+  ],
+  "old": [
+   699,
+   714
+  ]
+ },
+ "summary": {
+  "solverMsSum": {
+   "pre005K": 19550,
+   "off": 19572,
+   "on": 19852
+  },
+  "recordBuilderMsSum": 20.707,
+  "recordsSum": 105,
+  "digestBytesSum": 181459,
+  "modelHashesUnchangedOffVsPre005K": true,
+  "offDeltaPct": 0.1,
+  "onDeltaPct": 1.5,
+  "reading": "The trace, the records and the rule OFF cost nothing measurable (+0.1 % summed solver time, inside the \u00b15 % run-to-run spread of single rows). Rule ON: +1.5 % summed; dom-w-zurawkach +8 % because its model changes and re-tiles. The record builder alone: 20.7 ms for 105 records on 6 rows (about 0.2 ms a record). The records add about 1.7 KB a record to the digest and to the Evidence Pack (12b-gap-evidence.json): 181 KB on these 6 rows. Peak RSS is unchanged within process noise (672-721 MB, every configuration). The model hash with the rule OFF equals the pre-005K hash on every row."
+ }
+}

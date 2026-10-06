@@ -23,6 +23,7 @@ Research harness of BUILDPLAN-ANALYZER-005K. It holds code and text only. It is:
 | `draw.mjs` | the draw by lot from the frozen commit: 8 ARCHON + 6 DobreDomy projects, one per family (`gap-set-protocol.md` §3) |
 | `extract.mjs` | from the frozen live runs, the population (WEAK, WALL/WALL, drawn) on every sheet whose boundary was read, frozen into `gap-set-manifest.json` with neutral question ids |
 | `compose.py` | the pictures a reviewer labels: the crop beside the same crop with brackets outside the wall band and a 1 m bar; neutral names; key apart |
+| `labels.mjs` | the blind review: reviewer A and B batches, each in its own order; collection; reviewer C on disagreements; majority of three; Cohen's kappa; `gap-set-labels.json` (never human ground truth) |
 | `constant-replay.mjs` | the CONSTANT control as a replay-only copy of `boundary-evidence.ts` swapped in through a Vite alias (005J's method) |
 | `evaluate.mjs` | BASELINE / CONSTANT / DRAWN_RULE on the sealed set, with Wilson intervals, the protocol's splits and outcome-critical false bridges |
 | `mutations.mjs` | M1–M5: temporary in-place patches, the 005K suites, restore and check clean |
@@ -44,7 +45,11 @@ node research/analyzer-005k/extract.mjs --runs $W/gapset/runs --ledger $W/gapset
      --out stage-reports/artifacts/analyzer-005k/gap-set-manifest.json      # commit + push: the seal
 python3 -I research/analyzer-005k/compose.py --manifest stage-reports/artifacts/analyzer-005k/gap-set-manifest.json \
      --runs $W/gapset/runs --cache $W/gapset/cache --out $W/gapset/label
-# blind reviewers label $W/gapset/label/img/q###.png; labels committed + pushed before any evaluation
+node research/analyzer-005k/labels.mjs batches --label $W/gapset/label --freeze-sha <FREEZE_SHA>
+# blind reviewers A and B answer every batch into $W/gapset/label/answers/<reviewer>-<n>.ndjson (label-instructions.md)
+node research/analyzer-005k/labels.mjs collect --label $W/gapset/label --manifest stage-reports/artifacts/analyzer-005k/gap-set-manifest.json \
+     --out stage-reports/artifacts/analyzer-005k/gap-set-labels.json     # exit 3: reviewer C batches written; answer, collect again
+# labels committed + pushed before any evaluation
 # replays per project (solver alone on the live run's sealed evidence): OFF, ON, CONSTANT
 node research/analyzer-005k/constant-replay.mjs setup --work $W/constant
 node research/analyzer-005k/evaluate.mjs --manifest ... --labels ... --runs $W/gapset/runs --replay $W/gapset/replay

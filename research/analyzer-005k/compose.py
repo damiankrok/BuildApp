@@ -71,13 +71,17 @@ def main():
             d.line([P(g['fromPx'], o), P(g['toPx'], o)], fill=RED, width=lw)
             for end in (g['fromPx'], g['toPx']):
                 d.line([P(end, o), P(end, o + side * tick)], fill=RED, width=lw)
-        # a 1 m bar along the bottom-left corner, in the line's direction
-        mpp = g['mppAlong']
-        bar = (1.0 / mpp) * s
-        y0 = marked.size[1] - 8
-        d.line([(8, y0), (8 + bar, y0)], fill=RED, width=lw)
-        d.line([(8, y0 - 4), (8, y0 + 3)], fill=RED, width=lw)
-        d.line([(8 + bar, y0 - 4), (8 + bar, y0 + 3)], fill=RED, width=lw)
+        # a 1 m bar from the bottom-left corner, in the line's direction (mppAlong is the scale along the line)
+        bar = (1.0 / g['mppAlong']) * s
+        x0, y0 = 8, marked.size[1] - 8
+        if g['axis'] == 'Y':
+            d.line([(x0, y0), (x0 + bar, y0)], fill=RED, width=lw)
+            d.line([(x0, y0 - 4), (x0, y0 + 3)], fill=RED, width=lw)
+            d.line([(x0 + bar, y0 - 4), (x0 + bar, y0 + 3)], fill=RED, width=lw)
+        else:
+            d.line([(x0, y0), (x0, y0 - bar)], fill=RED, width=lw)
+            d.line([(x0 - 4, y0), (x0 + 3, y0)], fill=RED, width=lw)
+            d.line([(x0 - 4, y0 - bar), (x0 + 3, y0 - bar)], fill=RED, width=lw)
         sheet = Image.new('RGB', (raw.size[0] * 2 + 16, raw.size[1]), (255, 255, 255))
         sheet.paste(raw, (0, 0))
         sheet.paste(marked, (raw.size[0] + 16, 0))

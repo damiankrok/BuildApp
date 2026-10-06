@@ -1,0 +1,352 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005K",
+ "mode": "ON",
+ "method": "readPlans (the production entry) on every development row, in the sealed order and under seeded shuffles. Family A shuffles what the boundary and its records enumerate: the coordinate frames (copies), the metric evidence (callouts), the dimension observations and the registrations. Family B shuffles the dimension chains alone, an input of the decomposition grid upstream of the boundary. A plan moves when its decompositionId or any gap record differs, byte for byte; a grid move is a changed decompositionId",
+ "permutations": 8,
+ "rows": [
+  {
+   "row": "dom-pod-jarzabem",
+   "plans": 1,
+   "records": 48,
+   "permutations": 8,
+   "moved": 0,
+   "movedPlans": [],
+   "chainOrder": {
+    "moved": 8,
+    "movedPlans": [
+     "frame-asset-rzut-9354eb066f-397808a266"
+    ],
+    "gridMoved": 8
+   }
+  },
+  {
+   "row": "dom-w-arkadiach",
+   "plans": 2,
+   "records": 25,
+   "permutations": 8,
+   "moved": 0,
+   "movedPlans": [],
+   "chainOrder": {
+    "moved": 8,
+    "movedPlans": [
+     "frame-asset-rzut-16680ee739-bb2ced8b98",
+     "frame-asset-rzut-cc4d20932a-b363732485"
+    ],
+    "gridMoved": 8
+   }
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "plans": 2,
+   "records": 0,
+   "permutations": 8,
+   "moved": 0,
+   "movedPlans": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedPlans": [],
+    "gridMoved": 0
+   }
+  },
+  {
+   "row": "dom-w-morelach",
+   "plans": 2,
+   "records": 17,
+   "permutations": 8,
+   "moved": 0,
+   "movedPlans": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedPlans": [],
+    "gridMoved": 0
+   }
+  },
+  {
+   "row": "marcowki",
+   "plans": 2,
+   "records": 43,
+   "permutations": 8,
+   "moved": 0,
+   "movedPlans": [],
+   "chainOrder": {
+    "moved": 6,
+    "movedPlans": [
+     "frame-asset-rzut-117027f690-fed2722c38"
+    ],
+    "gridMoved": 6
+   }
+  },
+  {
+   "row": "rarytasy-g2e",
+   "plans": 1,
+   "records": 28,
+   "permutations": 8,
+   "moved": 0,
+   "movedPlans": [],
+   "chainOrder": {
+    "moved": 6,
+    "movedPlans": [
+     "frame-asset-rzut-e8520c3ad3-59a406b738"
+    ],
+    "gridMoved": 6
+   }
+  },
+  {
+   "row": "kosacce-clean",
+   "plans": 1,
+   "records": 56,
+   "permutations": 8,
+   "moved": 0,
+   "movedPlans": [],
+   "chainOrder": {
+    "moved": 7,
+    "movedPlans": [
+     "frame-asset-rzut-f530d6ebf2-668d857ed9"
+    ],
+    "gridMoved": 7
+   }
+  },
+  {
+   "row": "kosacce-tracked",
+   "plans": 1,
+   "records": 56,
+   "permutations": 8,
+   "moved": 0,
+   "movedPlans": [],
+   "chainOrder": {
+    "moved": 8,
+    "movedPlans": [
+     "frame-asset-rzut-f530d6ebf2-668d857ed9"
+    ],
+    "gridMoved": 8
+   }
+  },
+  {
+   "row": "rarytasy-eoze",
+   "plans": 1,
+   "records": 41,
+   "permutations": 8,
+   "moved": 0,
+   "movedPlans": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedPlans": [],
+    "gridMoved": 0
+   }
+  },
+  {
+   "row": "eoze-legacy-every",
+   "plans": 1,
+   "records": 28,
+   "permutations": 8,
+   "moved": 0,
+   "movedPlans": [],
+   "chainOrder": {
+    "moved": 6,
+    "movedPlans": [
+     "frame-asset-rzut-b747b42ad2-e3a3d0015d"
+    ],
+    "gridMoved": 6
+   }
+  },
+  {
+   "row": "alt-marcowki",
+   "plans": 2,
+   "records": 0,
+   "permutations": 8,
+   "moved": 0,
+   "movedPlans": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedPlans": [],
+    "gridMoved": 0
+   }
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "plans": 2,
+   "records": 34,
+   "permutations": 8,
+   "moved": 0,
+   "movedPlans": [],
+   "chainOrder": {
+    "moved": 5,
+    "movedPlans": [
+     "frame-asset-rzut-d52f958fd6-d2646b4dce"
+    ],
+    "gridMoved": 5
+   }
+  },
+  {
+   "row": "willa-miranda",
+   "plans": 2,
+   "records": 54,
+   "permutations": 8,
+   "moved": 0,
+   "movedPlans": [],
+   "chainOrder": {
+    "moved": 5,
+    "movedPlans": [
+     "frame-asset-rzut-07b69dcbb8-2088494fef"
+    ],
+    "gridMoved": 5
+   }
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "plans": 3,
+   "records": 35,
+   "permutations": 8,
+   "moved": 0,
+   "movedPlans": [],
+   "chainOrder": {
+    "moved": 5,
+    "movedPlans": [
+     "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445"
+    ],
+    "gridMoved": 5
+   }
+  },
+  {
+   "row": "dom-w-modrzykach",
+   "plans": 1,
+   "records": 22,
+   "permutations": 8,
+   "moved": 0,
+   "movedPlans": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedPlans": [],
+    "gridMoved": 0
+   }
+  },
+  {
+   "row": "dom-w-azaliach",
+   "plans": 2,
+   "records": 24,
+   "permutations": 8,
+   "moved": 0,
+   "movedPlans": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedPlans": [],
+    "gridMoved": 0
+   }
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "plans": 2,
+   "records": 65,
+   "permutations": 8,
+   "moved": 0,
+   "movedPlans": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedPlans": [],
+    "gridMoved": 0
+   }
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "plans": 3,
+   "records": 17,
+   "permutations": 8,
+   "moved": 0,
+   "movedPlans": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedPlans": [],
+    "gridMoved": 0
+   }
+  },
+  {
+   "row": "aster-viii",
+   "plans": 1,
+   "records": 0,
+   "permutations": 8,
+   "moved": 0,
+   "movedPlans": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedPlans": [],
+    "gridMoved": 0
+   }
+  },
+  {
+   "row": "galaktyka",
+   "plans": 2,
+   "records": 0,
+   "permutations": 8,
+   "moved": 0,
+   "movedPlans": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedPlans": [],
+    "gridMoved": 0
+   }
+  },
+  {
+   "row": "dom-pod-milorzebem",
+   "plans": 2,
+   "records": 4,
+   "permutations": 8,
+   "moved": 0,
+   "movedPlans": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedPlans": [],
+    "gridMoved": 0
+   }
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "plans": 2,
+   "records": 11,
+   "permutations": 8,
+   "moved": 0,
+   "movedPlans": [],
+   "chainOrder": {
+    "moved": 5,
+    "movedPlans": [
+     "frame-asset-rzut-d5842da623-4c943a2b00"
+    ],
+    "gridMoved": 5
+   }
+  },
+  {
+   "row": "dom-w-gozdzikowcach",
+   "plans": 2,
+   "records": 28,
+   "permutations": 8,
+   "moved": 0,
+   "movedPlans": [],
+   "chainOrder": {
+    "moved": 6,
+    "movedPlans": [
+     "frame-asset-rzut-01d4b6474c-64bd1e0f2f"
+    ],
+    "gridMoved": 6
+   }
+  },
+  {
+   "row": "dom-w-cyklamenach",
+   "plans": 2,
+   "records": 27,
+   "permutations": 8,
+   "moved": 0,
+   "movedPlans": [],
+   "chainOrder": {
+    "moved": 8,
+    "movedPlans": [
+     "frame-asset-rzut-fa38f527ea-8e7eb2ad66",
+     "frame-asset-rzut-083dceba54-1b73e155d5"
+    ],
+    "gridMoved": 8
+   }
+  }
+ ],
+ "rowsWithAMove": 0,
+ "rowsWhereChainOrderMovesTheGrid": 13,
+ "rowsWhereChainOrderMovesRecordsOnAnUnchangedGrid": 0,
+ "totalRecords": 663
+}
