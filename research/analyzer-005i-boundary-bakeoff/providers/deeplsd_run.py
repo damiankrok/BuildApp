@@ -63,6 +63,7 @@ def main():
     torch.set_num_threads(a.threads)
     t_start = time.perf_counter()
     ck_sha = common.sha256_file(a.ckpt)
+    in_sha = common.sha256_file(a.gray)  # the exact bytes read below (same-input rule, post-review B5)
     img = common.read_gray(a.gray)
     ckpt = load_ckpt(a.ckpt)
     inputs = {"image": torch.tensor(img, dtype=torch.float)[None, None] / 255.0}
@@ -114,6 +115,7 @@ def main():
         "config": {"id": a.config, "detect": DETECT_CONF if a.refine is None else None, "refine": REFINE_CONF if a.refine else None, "checkpointSha256": ck_sha},
         "configHash": chash,
         "frameId": a.frame_id,
+        "input": {"gray": {"file": a.gray, "sha256": in_sha}, **({"refineLines": {"file": a.refine, "sha256": common.sha256_file(a.refine)}} if a.refine else {})},
         "observations": obs,
         "perf": {"wallMs": common.r3((time.perf_counter() - t_start) * 1000), "inferMs": common.r3(infer_ms), "peakRssMB": common.peak_rss_mb(), "count": len(obs), "threads": a.threads, **extra},
     })

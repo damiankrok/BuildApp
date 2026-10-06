@@ -37,6 +37,7 @@ def main():
     p.add_argument("--out", required=True)
     a = p.parse_args()
     chash = common.config_hash(CONFIG, common.sha256_file(a.cli))
+    in_sha = common.sha256_file(a.gray)  # the exact bytes handed to the CLI (same-input rule, post-review B5)
     args = [a.cli, a.gray] + [str(CONFIG[k]) for k in ["sigma", "gradientThreshold", "minLineLen", "lineFitErrThreshold", "pxToSegmentDistTh", "validationTh", "validate", "treatJunctions"]]
     t0 = time.perf_counter()
     out = subprocess.run(args, check=True, capture_output=True, text=True).stdout
@@ -58,6 +59,7 @@ def main():
         "config": CONFIG,
         "configHash": chash,
         "frameId": a.frame_id,
+        "input": {"gray": {"file": a.gray, "sha256": in_sha}},
         "observations": obs,
         "perf": {"wallMs": common.r3(wall_ms), "detectMs": det_ms, "peakRssMB": common.peak_rss_mb(children=True), "count": len(obs)},
     })

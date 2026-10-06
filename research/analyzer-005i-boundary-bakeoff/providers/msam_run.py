@@ -83,13 +83,15 @@ def main():
     model = sam_model_registry["vit_t"](checkpoint=None)
     model.load_state_dict(torch.load(a.ckpt, map_location="cpu", weights_only=True), strict=True)
     model.eval()
+    in_sha = common.sha256_file(a.rgb)  # the exact bytes read below (same-input rule, post-review B5)
+    meta_sha = common.sha256_file(a.meta)
     img = common.read_rgb(a.rgb)
     H, W = img.shape[:2]
     meta = json.load(open(a.meta))
     os.makedirs(a.masks_dir, exist_ok=True)
     obs, perf, configs = [], {}, {}
     if meta.get("msamPrompt") is None:
-        common.write_json(a.out, {"researchOnly": common.RESEARCH_ONLY, "provider": "MOBILESAM", "frameId": a.frame_id, "observations": [], "perf": {}, "skipped": "no source-cv extent for this frame, so no BOX or SOURCE prompt can be derived"})
+        common.write_json(a.out, {"researchOnly": common.RESEARCH_ONLY, "provider": "MOBILESAM", "frameId": a.frame_id, "input": {"rgb": {"file": a.rgb, "sha256": in_sha}, "meta": {"file": a.meta, "sha256": meta_sha}}, "observations": [], "perf": {}, "skipped": "no source-cv extent for this frame, so no BOX or SOURCE prompt can be derived"})
         return
     box, pos, neg, w, grown2 = prompts_from_meta(meta, W, H)
     pred = SamPredictor(model)
@@ -152,7 +154,7 @@ def main():
     perf["wallMs"] = common.r3((time.perf_counter() - t_start) * 1000)
     perf["peakRssMB"] = common.peak_rss_mb()
     perf["threads"] = a.threads
-    common.write_json(a.out, {"researchOnly": common.RESEARCH_ONLY, "provider": "MOBILESAM", "checkpointSha256": ck_sha, "frameId": a.frame_id, "observations": obs, "perf": perf, "prompts": {"box": [common.r3(v) for v in box], "positives": [[common.r3(x), common.r3(y)] for x, y in pos], "negatives": [[common.r3(x), common.r3(y)] for x, y in neg], "wallPx": w}})
+    common.write_json(a.out, {"researchOnly": common.RESEARCH_ONLY, "provider": "MOBILESAM", "checkpointSha256": ck_sha, "frameId": a.frame_id, "input": {"rgb": {"file": a.rgb, "sha256": in_sha}, "meta": {"file": a.meta, "sha256": meta_sha}}, "observations": obs, "perf": perf, "prompts": {"box": [common.r3(v) for v in box], "positives": [[common.r3(x), common.r3(y)] for x, y in pos], "negatives": [[common.r3(x), common.r3(y)] for x, y in neg], "wallPx": w}})
 
 
 if __name__ == "__main__":
