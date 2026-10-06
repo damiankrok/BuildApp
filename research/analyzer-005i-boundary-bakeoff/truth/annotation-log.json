@@ -1,0 +1,633 @@
+{
+ "annotator": "the study agent itself (not an independent annotator) \u2014 a limitation stated in methodology \u00a76.2",
+ "composites": "look/s-grid1.png, look/s-grid2.png (05:44, synthetic sheets tiled) and look/t-sheet1.png (05:56:40, the four t-*.png tiled) were made with cv2 from the look.py outputs listed here, not by look.py",
+ "firstScoringRunUtc": "2026-10-06T06:01:39Z (scores/real-test.json, one house)",
+ "invocations": [
+  {
+   "crop": "full",
+   "frame": "/home/user/work005i/frames/real/dom-w-helikoniach.rgb.png",
+   "grid": 50,
+   "out": "/home/user/work005i/look/heli-full.png",
+   "overlay": "none",
+   "scale": 1.0,
+   "utc": "2026-10-06T05:39:51Z"
+  },
+  {
+   "crop": "full",
+   "frame": "/home/user/work005i/synth/attached-garage.png",
+   "grid": 100,
+   "out": "/home/user/work005i/look/s-attached-garage.png",
+   "overlay": "synthetic generator truth polygon (generator check)",
+   "scale": 1,
+   "utc": "2026-10-06T05:44:06Z"
+  },
+  {
+   "crop": "full",
+   "frame": "/home/user/work005i/synth/bay-window.png",
+   "grid": 100,
+   "out": "/home/user/work005i/look/s-bay-window.png",
+   "overlay": "synthetic generator truth polygon (generator check)",
+   "scale": 1,
+   "utc": "2026-10-06T05:44:06Z"
+  },
+  {
+   "crop": "full",
+   "frame": "/home/user/work005i/synth/attached-garage.png",
+   "grid": 100,
+   "out": "/home/user/work005i/look/s-attached-garage.png",
+   "overlay": "synthetic generator truth polygon (generator check)",
+   "scale": 1,
+   "utc": "2026-10-06T05:44:28Z"
+  },
+  {
+   "crop": "full",
+   "frame": "/home/user/work005i/synth/bay-window.png",
+   "grid": 100,
+   "out": "/home/user/work005i/look/s-bay-window.png",
+   "overlay": "synthetic generator truth polygon (generator check)",
+   "scale": 1,
+   "utc": "2026-10-06T05:44:28Z"
+  },
+  {
+   "crop": "full",
+   "frame": "/home/user/work005i/synth/double-line-walls.png",
+   "grid": 100,
+   "out": "/home/user/work005i/look/s-double-line-walls.png",
+   "overlay": "synthetic generator truth polygon (generator check)",
+   "scale": 1,
+   "utc": "2026-10-06T05:44:28Z"
+  },
+  {
+   "crop": "full",
+   "frame": "/home/user/work005i/synth/terrace-adjacent.png",
+   "grid": 100,
+   "out": "/home/user/work005i/look/s-terrace-adjacent.png",
+   "overlay": "synthetic generator truth polygon (generator check)",
+   "scale": 1,
+   "utc": "2026-10-06T05:44:28Z"
+  },
+  {
+   "crop": "full",
+   "frame": "/home/user/work005i/synth/pergola-outside.png",
+   "grid": 100,
+   "out": "/home/user/work005i/look/s-pergola-outside.png",
+   "overlay": "synthetic generator truth polygon (generator check)",
+   "scale": 1,
+   "utc": "2026-10-06T05:44:28Z"
+  },
+  {
+   "crop": "full",
+   "frame": "/home/user/work005i/synth/text-crossing-walls.png",
+   "grid": 100,
+   "out": "/home/user/work005i/look/s-text-crossing-walls.png",
+   "overlay": "synthetic generator truth polygon (generator check)",
+   "scale": 1,
+   "utc": "2026-10-06T05:44:28Z"
+  },
+  {
+   "crop": "full",
+   "frame": "/home/user/work005i/synth/rotated-plan.png",
+   "grid": 100,
+   "out": "/home/user/work005i/look/s-rotated-plan.png",
+   "overlay": "synthetic generator truth polygon (generator check)",
+   "scale": 1,
+   "utc": "2026-10-06T05:44:28Z"
+  },
+  {
+   "crop": "full",
+   "frame": "/home/user/work005i/synth/glazed-facade.png",
+   "grid": 100,
+   "out": "/home/user/work005i/look/s-glazed-facade.png",
+   "overlay": "synthetic generator truth polygon (generator check)",
+   "scale": 1,
+   "utc": "2026-10-06T05:44:28Z"
+  },
+  {
+   "crop": [
+    140,
+    140,
+    480,
+    480
+   ],
+   "frame": "/home/user/work005i/frames/real/dom-w-helikoniach.rgb.png",
+   "grid": 20,
+   "out": "/home/user/work005i/look/heli-top.png",
+   "overlay": "none",
+   "scale": 2.4,
+   "utc": "2026-10-06T05:48:43Z"
+  },
+  {
+   "crop": [
+    140,
+    440,
+    480,
+    780
+   ],
+   "frame": "/home/user/work005i/frames/real/dom-w-helikoniach.rgb.png",
+   "grid": 20,
+   "out": "/home/user/work005i/look/heli-bot.png",
+   "overlay": "none",
+   "scale": 2.4,
+   "utc": "2026-10-06T05:48:58Z"
+  },
+  {
+   "crop": [
+    150,
+    640,
+    480,
+    790
+   ],
+   "frame": "/home/user/work005i/frames/real/dom-w-helikoniach.rgb.png",
+   "grid": 10,
+   "out": "/home/user/work005i/look/heli-bot2.png",
+   "overlay": "none",
+   "scale": 3.0,
+   "utc": "2026-10-06T05:49:20Z"
+  },
+  {
+   "crop": [
+    140,
+    0,
+    570,
+    190
+   ],
+   "frame": "/home/user/work005i/frames/real/dom-w-helikoniach.rgb.png",
+   "grid": 20,
+   "out": "/home/user/work005i/look/heli-n.png",
+   "overlay": "none",
+   "scale": 2.0,
+   "utc": "2026-10-06T05:49:47Z"
+  },
+  {
+   "crop": [
+    400,
+    300,
+    560,
+    640
+   ],
+   "frame": "/home/user/work005i/frames/real/dom-w-helikoniach.rgb.png",
+   "grid": 20,
+   "out": "/home/user/work005i/look/heli-e.png",
+   "overlay": "none",
+   "scale": 2.4,
+   "utc": "2026-10-06T05:49:47Z"
+  },
+  {
+   "crop": "full",
+   "frame": "/home/user/work005i/frames/real/dom-w-morelach.rgb.png",
+   "grid": 50,
+   "out": "/home/user/work005i/look/more-full.png",
+   "overlay": "none",
+   "scale": 1.0,
+   "utc": "2026-10-06T05:50:23Z"
+  },
+  {
+   "crop": [
+    40,
+    190,
+    360,
+    470
+   ],
+   "frame": "/home/user/work005i/frames/real/dom-w-morelach.rgb.png",
+   "grid": 20,
+   "out": "/home/user/work005i/look/m1.png",
+   "overlay": "none",
+   "scale": 2.4,
+   "utc": "2026-10-06T05:50:30Z"
+  },
+  {
+   "crop": [
+    340,
+    190,
+    690,
+    470
+   ],
+   "frame": "/home/user/work005i/frames/real/dom-w-morelach.rgb.png",
+   "grid": 20,
+   "out": "/home/user/work005i/look/m2.png",
+   "overlay": "none",
+   "scale": 2.2,
+   "utc": "2026-10-06T05:50:30Z"
+  },
+  {
+   "crop": [
+    40,
+    450,
+    360,
+    770
+   ],
+   "frame": "/home/user/work005i/frames/real/dom-w-morelach.rgb.png",
+   "grid": 20,
+   "out": "/home/user/work005i/look/m3.png",
+   "overlay": "none",
+   "scale": 2.4,
+   "utc": "2026-10-06T05:50:30Z"
+  },
+  {
+   "crop": [
+    340,
+    450,
+    690,
+    770
+   ],
+   "frame": "/home/user/work005i/frames/real/dom-w-morelach.rgb.png",
+   "grid": 20,
+   "out": "/home/user/work005i/look/m4.png",
+   "overlay": "none",
+   "scale": 2.2,
+   "utc": "2026-10-06T05:50:30Z"
+  },
+  {
+   "crop": [
+    560,
+    190,
+    690,
+    330
+   ],
+   "frame": "/home/user/work005i/frames/real/dom-w-morelach.rgb.png",
+   "grid": 10,
+   "out": "/home/user/work005i/look/m5.png",
+   "overlay": "none",
+   "scale": 4.0,
+   "utc": "2026-10-06T05:51:05Z"
+  },
+  {
+   "crop": [
+    520,
+    640,
+    650,
+    760
+   ],
+   "frame": "/home/user/work005i/frames/real/dom-w-morelach.rgb.png",
+   "grid": 10,
+   "out": "/home/user/work005i/look/m6.png",
+   "overlay": "none",
+   "scale": 4.0,
+   "utc": "2026-10-06T05:51:05Z"
+  },
+  {
+   "crop": "full",
+   "frame": "/home/user/work005i/frames/real/willa-miranda.rgb.png",
+   "grid": 50,
+   "out": "/home/user/work005i/look/wm-full.png",
+   "overlay": "none",
+   "scale": 1.0,
+   "utc": "2026-10-06T05:51:51Z"
+  },
+  {
+   "crop": [
+    220,
+    70,
+    560,
+    360
+   ],
+   "frame": "/home/user/work005i/frames/real/willa-miranda.rgb.png",
+   "grid": 20,
+   "out": "/home/user/work005i/look/w1.png",
+   "overlay": "none",
+   "scale": 2.25,
+   "utc": "2026-10-06T05:51:59Z"
+  },
+  {
+   "crop": [
+    520,
+    70,
+    810,
+    360
+   ],
+   "frame": "/home/user/work005i/frames/real/willa-miranda.rgb.png",
+   "grid": 20,
+   "out": "/home/user/work005i/look/w2.png",
+   "overlay": "none",
+   "scale": 2.4,
+   "utc": "2026-10-06T05:51:59Z"
+  },
+  {
+   "crop": [
+    220,
+    330,
+    560,
+    630
+   ],
+   "frame": "/home/user/work005i/frames/real/willa-miranda.rgb.png",
+   "grid": 20,
+   "out": "/home/user/work005i/look/w3.png",
+   "overlay": "none",
+   "scale": 2.25,
+   "utc": "2026-10-06T05:51:59Z"
+  },
+  {
+   "crop": [
+    520,
+    330,
+    810,
+    630
+   ],
+   "frame": "/home/user/work005i/frames/real/willa-miranda.rgb.png",
+   "grid": 20,
+   "out": "/home/user/work005i/look/w4.png",
+   "overlay": "none",
+   "scale": 2.4,
+   "utc": "2026-10-06T05:51:59Z"
+  },
+  {
+   "crop": "full",
+   "frame": "/home/user/work005i/frames/real/dom-w-zurawkach.rgb.png",
+   "grid": 50,
+   "out": "/home/user/work005i/look/z-full.png",
+   "overlay": "none",
+   "scale": 1.0,
+   "utc": "2026-10-06T05:52:58Z"
+  },
+  {
+   "crop": [
+    240,
+    80,
+    530,
+    300
+   ],
+   "frame": "/home/user/work005i/frames/real/dom-w-zurawkach.rgb.png",
+   "grid": 20,
+   "out": "/home/user/work005i/look/z1.png",
+   "overlay": "none",
+   "scale": 2.6,
+   "utc": "2026-10-06T05:53:06Z"
+  },
+  {
+   "crop": [
+    500,
+    80,
+    810,
+    300
+   ],
+   "frame": "/home/user/work005i/frames/real/dom-w-zurawkach.rgb.png",
+   "grid": 20,
+   "out": "/home/user/work005i/look/z2.png",
+   "overlay": "none",
+   "scale": 2.5,
+   "utc": "2026-10-06T05:53:06Z"
+  },
+  {
+   "crop": [
+    240,
+    280,
+    530,
+    550
+   ],
+   "frame": "/home/user/work005i/frames/real/dom-w-zurawkach.rgb.png",
+   "grid": 20,
+   "out": "/home/user/work005i/look/z3.png",
+   "overlay": "none",
+   "scale": 2.6,
+   "utc": "2026-10-06T05:53:06Z"
+  },
+  {
+   "crop": [
+    500,
+    280,
+    810,
+    550
+   ],
+   "frame": "/home/user/work005i/frames/real/dom-w-zurawkach.rgb.png",
+   "grid": 20,
+   "out": "/home/user/work005i/look/z4.png",
+   "overlay": "none",
+   "scale": 2.5,
+   "utc": "2026-10-06T05:53:06Z"
+  },
+  {
+   "crop": "full",
+   "frame": "/home/user/work005i/frames/real/dom-w-azaliach.rgb.png",
+   "grid": 50,
+   "out": "/home/user/work005i/look/a-full.png",
+   "overlay": "none",
+   "scale": 1.0,
+   "utc": "2026-10-06T05:53:47Z"
+  },
+  {
+   "crop": [
+    60,
+    140,
+    360,
+    540
+   ],
+   "frame": "/home/user/work005i/frames/real/dom-w-azaliach.rgb.png",
+   "grid": 20,
+   "out": "/home/user/work005i/look/a1.png",
+   "overlay": "none",
+   "scale": 2.0,
+   "utc": "2026-10-06T05:54:35Z"
+  },
+  {
+   "crop": [
+    340,
+    140,
+    660,
+    540
+   ],
+   "frame": "/home/user/work005i/frames/real/dom-w-azaliach.rgb.png",
+   "grid": 20,
+   "out": "/home/user/work005i/look/a2.png",
+   "overlay": "none",
+   "scale": 2.0,
+   "utc": "2026-10-06T05:54:35Z"
+  },
+  {
+   "crop": "full",
+   "frame": "/home/user/work005i/frames/real/dom-pod-jarzabem.rgb.png",
+   "grid": 50,
+   "out": "/home/user/work005i/look/j-full.png",
+   "overlay": "none",
+   "scale": 1.0,
+   "utc": "2026-10-06T05:55:03Z"
+  },
+  {
+   "crop": [
+    90,
+    190,
+    450,
+    610
+   ],
+   "frame": "/home/user/work005i/frames/real/dom-pod-jarzabem.rgb.png",
+   "grid": 20,
+   "out": "/home/user/work005i/look/j1.png",
+   "overlay": "none",
+   "scale": 1.9,
+   "utc": "2026-10-06T05:55:11Z"
+  },
+  {
+   "crop": [
+    430,
+    190,
+    820,
+    610
+   ],
+   "frame": "/home/user/work005i/frames/real/dom-pod-jarzabem.rgb.png",
+   "grid": 20,
+   "out": "/home/user/work005i/look/j2.png",
+   "overlay": "none",
+   "scale": 1.9,
+   "utc": "2026-10-06T05:55:11Z"
+  },
+  {
+   "crop": [
+    250,
+    530,
+    530,
+    620
+   ],
+   "frame": "/home/user/work005i/frames/real/dom-pod-jarzabem.rgb.png",
+   "grid": 10,
+   "out": "/home/user/work005i/look/j3.png",
+   "overlay": "none",
+   "scale": 3.0,
+   "utc": "2026-10-06T05:55:30Z"
+  },
+  {
+   "crop": [
+    520,
+    530,
+    800,
+    620
+   ],
+   "frame": "/home/user/work005i/frames/real/dom-pod-jarzabem.rgb.png",
+   "grid": 10,
+   "out": "/home/user/work005i/look/j4.png",
+   "overlay": "none",
+   "scale": 3.0,
+   "utc": "2026-10-06T05:55:30Z"
+  },
+  {
+   "crop": "full",
+   "frame": "/home/user/work005i/frames/real/dom-w-arkadiach.rgb.png",
+   "grid": 50,
+   "out": "/home/user/work005i/look/k-full.png",
+   "overlay": "none",
+   "scale": 1.0,
+   "utc": "2026-10-06T05:56:10Z"
+  },
+  {
+   "crop": [
+    120,
+    200,
+    560,
+    470
+   ],
+   "frame": "/home/user/work005i/frames/real/dom-w-arkadiach.rgb.png",
+   "grid": 20,
+   "out": "/home/user/work005i/look/k1.png",
+   "overlay": "none",
+   "scale": 1.75,
+   "utc": "2026-10-06T05:56:16Z"
+  },
+  {
+   "crop": [
+    120,
+    450,
+    560,
+    740
+   ],
+   "frame": "/home/user/work005i/frames/real/dom-w-arkadiach.rgb.png",
+   "grid": 20,
+   "out": "/home/user/work005i/look/k2.png",
+   "overlay": "none",
+   "scale": 1.75,
+   "utc": "2026-10-06T05:56:16Z"
+  },
+  {
+   "crop": "full",
+   "frame": "/home/user/work005i/frames/real/dom-w-helikoniach.rgb.png",
+   "grid": 100,
+   "out": "/home/user/work005i/look/t-dom-w-helikoniach.png",
+   "overlay": "truth exterior polygon (check of the annotation against the pixels)",
+   "scale": 1,
+   "utc": "2026-10-06T05:56:38Z"
+  },
+  {
+   "crop": "full",
+   "frame": "/home/user/work005i/frames/real/dom-w-morelach.rgb.png",
+   "grid": 100,
+   "out": "/home/user/work005i/look/t-dom-w-morelach.png",
+   "overlay": "truth exterior polygon (check of the annotation against the pixels)",
+   "scale": 1,
+   "utc": "2026-10-06T05:56:38Z"
+  },
+  {
+   "crop": "full",
+   "frame": "/home/user/work005i/frames/real/willa-miranda.rgb.png",
+   "grid": 100,
+   "out": "/home/user/work005i/look/t-willa-miranda.png",
+   "overlay": "truth exterior polygon (check of the annotation against the pixels)",
+   "scale": 1,
+   "utc": "2026-10-06T05:56:38Z"
+  },
+  {
+   "crop": "full",
+   "frame": "/home/user/work005i/frames/real/dom-w-zurawkach.rgb.png",
+   "grid": 100,
+   "out": "/home/user/work005i/look/t-dom-w-zurawkach.png",
+   "overlay": "truth exterior polygon (check of the annotation against the pixels)",
+   "scale": 1,
+   "utc": "2026-10-06T05:56:38Z"
+  },
+  {
+   "crop": "full",
+   "frame": "/home/user/work005i/frames/real/dom-pod-jarzabem.rgb.png",
+   "grid": 100,
+   "out": "/home/user/work005i/look/j-msam.png",
+   "overlay": "truth exterior polygon + mask out/msam/real/dom-pod-jarzabem/msam-box-base.png",
+   "scale": 1.0,
+   "utc": "2026-10-06T06:16:38Z"
+  }
+ ],
+ "overlaysBeforeScoring": "none with provider output: until the truth was final every real-plan crop had no overlay, and the only overlays were the truth polygon itself (05:56:38, four houses, to check the annotation against the pixels) and the synthetic generator's own truth (05:44, generator check). --segs was never used; --mask was used once, at 06:16:38, after the truth was final and after scoring (dom-pod-jarzabem MSAM-BOX, to read the metric-control failure).",
+ "researchOnly": true,
+ "timesFrom": "UTC tool-call times recorded in the study session's transcript; they agree with the output files' modification times under /home/user/work005i/look/",
+ "tool": "tools/look.py (crop + labelled pixel grid in frame coordinates; optional --poly / --segs / --mask overlays)",
+ "truthFiles": {
+  "dom-pod-jarzabem": {
+   "file": "truth/real/dom-pod-jarzabem.json",
+   "geometryWrittenUtc": "2026-10-06T05:56:10Z",
+   "metresPerPxAddedUtc": "2026-10-06T05:59:53Z",
+   "sha256": "108549912da06b9b9583333ea31a266bef3d68919f36fb7bfa8f57721e45bdc6"
+  },
+  "dom-w-arkadiach": {
+   "file": "truth/real/dom-w-arkadiach.json",
+   "geometryWrittenUtc": "2026-10-06T05:56:38Z",
+   "metresPerPxAddedUtc": "2026-10-06T05:59:53Z",
+   "sha256": "9a42fe8a5ef8ecc5390ca0210814ea2e519fc77138ae36acf20a76360313217e"
+  },
+  "dom-w-azaliach": {
+   "file": "truth/real/dom-w-azaliach.json",
+   "geometryWrittenUtc": "2026-10-06T05:55:03Z",
+   "metresPerPxAddedUtc": "2026-10-06T05:59:53Z",
+   "sha256": "5db8d11574b8a9aa27d8560858a4a6b271da942ee8f1922c47138b53ac1239b0"
+  },
+  "dom-w-helikoniach": {
+   "file": "truth/real/dom-w-helikoniach.json",
+   "geometryWrittenUtc": "2026-10-06T05:50:16Z",
+   "metresPerPxAddedUtc": "2026-10-06T05:59:53Z",
+   "sha256": "3c722b10c7c0e05cd08700a64c4546560fc77e2a9c0bf492c181d748e618b5db"
+  },
+  "dom-w-morelach": {
+   "file": "truth/real/dom-w-morelach.json",
+   "geometryWrittenUtc": "2026-10-06T05:51:51Z",
+   "metresPerPxAddedUtc": "2026-10-06T05:59:53Z",
+   "sha256": "4799a7ab7ca3e40d532d8a5c4df31a7f85c81f4082c14aea0d831b4075768b18"
+  },
+  "dom-w-zurawkach": {
+   "file": "truth/real/dom-w-zurawkach.json",
+   "geometryWrittenUtc": "2026-10-06T05:53:47Z",
+   "metresPerPxAddedUtc": "2026-10-06T05:59:53Z",
+   "sha256": "7137d33b1f4798571a5f628e1da00f771adef75e80b24677f9ec1a85093419d4"
+  },
+  "willa-miranda": {
+   "file": "truth/real/willa-miranda.json",
+   "geometryWrittenUtc": "2026-10-06T05:52:58Z",
+   "metresPerPxAddedUtc": "2026-10-06T05:59:53Z",
+   "sha256": "f782757b7f859be10ec1b203e2888d235e83ee0ebd6dbe22666329dfd2958d63"
+  }
+ },
+ "truthFilesUnchangedSince": "2026-10-06T05:59:53Z (metresPerPx from the printed overall dimensions added to all seven); the SHA-256 above is the content every scoring run read",
+ "what": "Provenance of the manual real-set truth (methodology \u00a76.2, post-review B9). Text facts only: every crop is publisher pixels and stays outside the repository."
+}

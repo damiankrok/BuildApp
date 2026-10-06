@@ -42,6 +42,11 @@ source-cv runs inside the same process on the same `Raster`. Model-internal norm
 (`source-manifest.json`). No image is cleaned, cropped, rotated or resized for any provider. No EXIF orientation is
 applied by the production decoder; none is applied here.
 
+The rule is machine-checked (added after review, §11): every provider output records the SHA-256 of the PNG it read
+(the refiner also its `SCV-LINES` file, MobileSAM also the meta its prompts come from), the fusion replay records the
+frame PNG and every observation file it read, and `score.py` stops unless each equals the hash in the frame's meta
+(or of the current file).
+
 ## 4. Observation schema (research only)
 
 `research/analyzer-005i-boundary-bakeoff/observation.ts`: `BoundaryObservationCandidate { id, provider, configId,
@@ -113,7 +118,11 @@ conclusion must be robust to the stated per-vertex uncertainty.
   supporting segments' projections onto the edge.
 - Region boundary tolerance `τ_b = max(3 px, 0.5 t)` (boundary precision / recall, boundary IoU band).
 - Real vertices: a region metric is reported with the per-vertex uncertainty; conclusions that flip within it are
-  marked fragile.
+  marked fragile. Implemented after review (§11): every real-set number is re-scored with the truth exterior buffered
+  by `−u` and `+u` (mitred; opening runs move with their face; exclusions and bodies as drawn), `u` = the house's
+  largest stated vertex uncertainty (2–5 px). A region comparison, a line threshold, an evidence tally or a scorecard
+  cell that is not the same at `−u`, `0` and `+u` is FRAGILE (`development-results.json` → `truthBufferFragility`).
+  Synthetic truth is exact (`u = 0`).
 
 ## 7. Metrics
 
@@ -127,8 +136,11 @@ on the synthetic sheets. The boundary layer is given:
   MobileSAM BOX prompt, the SOURCE-PROMPTS negatives and the AUTO selection window use this same extent, exactly as they
   use the production extent on the real houses. Where `planExtent` returns nothing (the double-line-walls case: no
   wall-thick ink) there is no boundary layer and no MobileSAM prompt, and the row says so;
-- an **ORACLE SCALE** (the generator's metres per pixel, registration confidence 1), labelled as such. The scale only
-  sets the boundary layer's metric thresholds (gap widths in metres); it is neither a prompt nor a selection.
+- an **ORACLE SCALE** (the generator's metres per pixel, registration confidence 1), labelled as such. It sets the
+  boundary layer's metric thresholds (gap widths in metres), so it shapes the gap classes, the `SCV-OUTLINE` /
+  `SCV-BUILT` comparators and the BUILT cells whose centres are the `MSAM-SOURCE-PROMPTS` positives. It never enters
+  the BOX prompt, the AUTO selection or any line detector. (Reworded after review, §11: the first wording, "neither a
+  prompt nor a selection", was too narrow.)
 
 No chains, callouts, ticks or extent sides are given. Line detectors use none of this.
 
@@ -219,7 +231,9 @@ Two research-only replays are therefore made, both offline, with the production 
    on a truth exterior edge (within `τ`): would the provider bridge it (lines: a supporting segment covering ≥ 80 % of
    the gap; masks: the mask is inside on ≥ 80 % of the gap's samples one wall inward and the gap line itself) — a
    useful bridge; on a line outside the truth polygon (terrace, pergola, paving edges): a bridge there is **false
-   evidence**.
+   evidence**. "Inward" is the truth edge's inward normal for a gap on a truth exterior edge and, for a gap outside the
+   building, the side nearer to the truth polygon. (The first scorer sampled the gap line only; the rule as written
+   here was implemented after review and both tallies are reported — §11.)
 
 Individual providers first; combinations (`+DEEPLSD+ELSED`, `+ELSED+MOBILESAM`, …) only after the individual results
 are recorded. No per-provider threshold, no per-house choice, no oracle selection, no published area.
@@ -235,9 +249,25 @@ oracle-selected SAM mask, published-area agreement or synthetic-only success. A 
 
 ## 11. Changes after scoring started
 
-Timeline (UTC, 2026-10-06): this file written ≈ 05:47, before any scoring; first scoring run 06:01 (one real house),
-first full real-set run ≈ 06:04; the additions below 06:05–06:15 (item 4: 07:10); the synthetic-extent correction
-06:21; final synthetic scoring 07:03.
+Timeline (UTC, 2026-10-06), from file modification times and the study session's tool-call log (corrected after
+review B9; the first version of this paragraph left out the provider start and the overwritten run):
+
+- 05:33–05:40 harness written; the MobileSAM protocols of §5 were coded in `providers/msam_run.py` at 05:38.
+  **Provider runs began at 05:40** (real set 05:40–05:53, synthetic from 05:54), before this file was written. No
+  provider reads the truth or this file, and no provider parameter was changed afterwards.
+- ≈ 05:48 this file written, before any scoring.
+- 05:48–05:56 real truth annotated (`truth/annotation-log.json` lists every `look.py` crop; no provider output was
+  overlaid before the truth was final); 05:57–05:58 the frames were re-extracted to add their PNG hashes to the meta
+  (same decoder, same pixels); 05:59:53 the scale was added to the truth files, which have not changed since (SHA-256
+  in `development-results.json` and in the annotation log).
+- 06:01:39 first scoring run (one house; `scores/real-test.json`, retained, without `TRIVIAL-*`).
+- ≈ 06:03 first full real-set scoring → `scores/real.json`, **overwritten** at 06:05 by the run with the `TRIVIAL-*`
+  comparators; it is not retained. Its MSAM-BOX IoUs on the rectangular houses motivated item 1 below.
+- 06:05–06:15 items 1–3 and 5 below; 06:14 real fusion replay re-run with the control; 06:21 the E6 correction;
+  06:33–07:01 synthetic MobileSAM re-run on the corrected extent; 07:03 synthetic scoring; 07:10 item 4.
+- `LOG.md` (outside the repository) reads "06:0x real providers done": that line was written at 06:05 as a summary;
+  by their file times the real provider outputs were complete at 05:53.
+- From 07:27: the post-review changes at the end of this section.
 
 **One protocol change (council review E6, 06:21).** The first synthetic extraction gave the boundary layer — and
 through it the MobileSAM BOX prompt, the SOURCE-PROMPTS negatives and the AUTO selection window — the bounding box
@@ -270,3 +300,41 @@ number interpretable; none changes any provider's own score:
    **frame-level** added boundary-distractor length (conservative: it can only make HURT more likely); "lines on an
    exclusion outline not in SCV-UNION" is computed against SCV-LINES per 1-px sample on each exclusion edge that is
    not shared with the building.
+
+**Post-review changes (council B and D, 2026-10-06 07:27–12:30).** None changes a protocol, a prompt, a selection
+rule, a tolerance, a truth file or a provider configuration. Every artifact number now comes from the outputs below.
+
+- **B5 — same-input rule machine-checked; full provider re-run.** The runners now write the SHA-256 of the PNG they
+  read (and the refiner its `SCV-LINES` file, MobileSAM its prompt meta); the fusion replay writes the frame hash and
+  the hash of every observation file it reads; `score.py` stops on any mismatch (§3). Every provider configuration
+  was re-run on every frame (real 07:27–07:45, synthetic 07:45–08:29), the fusion replay re-run (real 07:45, synthetic
+  12:01), both sets re-scored (real 07:46, synthetic 12:03). Against a copy of the first run's outputs (`determinism.py --compare-prev`,
+  `performance.json` → `fullRerunComparison`): ELSED, DeepLSD-MD, DeepLSD-WF and every MobileSAM mask (AUTO's full set
+  included) are identical on all 30 frames — so the first run, made on frames written before the 05:57 re-extraction,
+  saw the same pixels. **DeepLSD-MD-REFINE-SCV differs on all 30 frames**: GC-RANSAC (inside Progressive-X) seeds its
+  generator from `std::random_device`, so the refiner is not reproducible run to run (9–57 % of refined lines move by
+  > 0.1 px). The first version of this study listed it as "not re-run". Its coverage numbers are unchanged; its
+  angles, duplicates and fusion row move between runs. Only refine numbers and timings changed in the re-scoring.
+- **B3 — ±u truth buffer** (§6.3): promised before scoring, implemented now. Fragile conclusions are listed in
+  `development-results.json` → `truthBufferFragility` and marked † in the scorecard.
+- **B8 — rules applied as written.** (a) Mask evidence availability now samples the gap line **and** one wall inward,
+  as §9 states; the first implementation sampled the gap line only, and its tally is kept beside the new one
+  (`gapLineOnlyRule`). Real MSAM-BOX false bridges stay at 15; synthetic MSAM-BOX unique useful bridges go from 9 to 7.
+  (b) The window rule's numerator now counts the same opening kinds as its denominator (WINDOW / GLAZED / DOOR, both
+  from the per-edge samples); the first implementation added GARAGE_DOOR runs to the numerator only. (c) A mask class
+  that does not apply is NOT_APPLICABLE before anything else, also when no mask is selected. (d) `SCV-UNION`
+  sensitivity rows: the union with ink-supported segments only, and without the resolver's bridged gaps. (e) Dead code
+  removed. The scorecard totals are unchanged by (b)–(c).
+- **B7** — §7.1 reworded (the oracle scale shapes the BUILT cells and therefore the SOURCE-PROMPTS positives).
+- **B1, B2** — the recommendation states MobileSAM against the fixed `TRIVIAL-EXTENT` comparator, not against a
+  per-house best BuildPlan region (that choice used the truth); ORACLE numbers (MSAM-AUTO's best of all its masks,
+  `ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION`) appear only in the results files.
+- **B6** — the control row is described as "no external information", of comparable magnitude on different houses,
+  with unmatched density; no placebo was added.
+- **B4** — the `sidesOf` side finding was first seen in the superseded pre-E6 run; it was reproduced with a retained
+  log (`repro-sidesof.ts`).
+- **B9** — this timeline; `truth/annotation-log.json` (every `look.py` invocation, truth write times and SHA-256);
+  the SHA-256 of each scoring output is in the results files (`scoringOutput`: real `5b13c086910a…`, synthetic `501746f5d616…`).
+- **D8** — the APK baseline is 005H's 39 419 927 B (was 005F's 30 785 427 B); the WASM probe's memory figure is RSS
+  after inference, a lower bound on the peak, and is labelled so.
+

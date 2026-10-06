@@ -246,7 +246,7 @@
    "generatorSha256": "d4442ac4153bc3d9856434ac1ab5f5bb1c22f872ebba249801362db2ba44e58c",
    "oracleScale": {
     "scaleMetresPerPx": 0.0222,
-    "why": "ORACLE SCALE only (generator metres per pixel): the metric layer is not under test; the scale is neither a prompt nor a selection"
+    "why": "ORACLE SCALE (generator metres per pixel), labelled: the metric layer is not under test. It sets the boundary layer's metric thresholds, so it shapes the gap classes, the SCV-OUTLINE / SCV-BUILT comparators and the BUILT cells whose centres are the MSAM-SOURCE-PROMPTS positives; it never enters the BOX prompt, the AUTO selection or any line detector (post-review B7; the frame meta carries the earlier, narrower wording)"
    },
    "orientation": "as decoded",
    "pngSha256": {
@@ -286,7 +286,7 @@
    "generatorSha256": "d4442ac4153bc3d9856434ac1ab5f5bb1c22f872ebba249801362db2ba44e58c",
    "oracleScale": {
     "scaleMetresPerPx": 0.0222,
-    "why": "ORACLE SCALE only (generator metres per pixel): the metric layer is not under test; the scale is neither a prompt nor a selection"
+    "why": "ORACLE SCALE (generator metres per pixel), labelled: the metric layer is not under test. It sets the boundary layer's metric thresholds, so it shapes the gap classes, the SCV-OUTLINE / SCV-BUILT comparators and the BUILT cells whose centres are the MSAM-SOURCE-PROMPTS positives; it never enters the BOX prompt, the AUTO selection or any line detector (post-review B7; the frame meta carries the earlier, narrower wording)"
    },
    "orientation": "as decoded",
    "pngSha256": {
@@ -326,7 +326,7 @@
    "generatorSha256": "d4442ac4153bc3d9856434ac1ab5f5bb1c22f872ebba249801362db2ba44e58c",
    "oracleScale": {
     "scaleMetresPerPx": 0.0222,
-    "why": "ORACLE SCALE only (generator metres per pixel): the metric layer is not under test; the scale is neither a prompt nor a selection"
+    "why": "ORACLE SCALE (generator metres per pixel), labelled: the metric layer is not under test. It sets the boundary layer's metric thresholds, so it shapes the gap classes, the SCV-OUTLINE / SCV-BUILT comparators and the BUILT cells whose centres are the MSAM-SOURCE-PROMPTS positives; it never enters the BOX prompt, the AUTO selection or any line detector (post-review B7; the frame meta carries the earlier, narrower wording)"
    },
    "orientation": "as decoded",
    "pngSha256": {
@@ -353,7 +353,7 @@
    "generatorSha256": "d4442ac4153bc3d9856434ac1ab5f5bb1c22f872ebba249801362db2ba44e58c",
    "oracleScale": {
     "scaleMetresPerPx": 0.0222,
-    "why": "ORACLE SCALE only (generator metres per pixel): the metric layer is not under test; the scale is neither a prompt nor a selection"
+    "why": "ORACLE SCALE (generator metres per pixel), labelled: the metric layer is not under test. It sets the boundary layer's metric thresholds, so it shapes the gap classes, the SCV-OUTLINE / SCV-BUILT comparators and the BUILT cells whose centres are the MSAM-SOURCE-PROMPTS positives; it never enters the BOX prompt, the AUTO selection or any line detector (post-review B7; the frame meta carries the earlier, narrower wording)"
    },
    "orientation": "as decoded",
    "pngSha256": {
@@ -393,7 +393,7 @@
    "generatorSha256": "d4442ac4153bc3d9856434ac1ab5f5bb1c22f872ebba249801362db2ba44e58c",
    "oracleScale": {
     "scaleMetresPerPx": 0.0222,
-    "why": "ORACLE SCALE only (generator metres per pixel): the metric layer is not under test; the scale is neither a prompt nor a selection"
+    "why": "ORACLE SCALE (generator metres per pixel), labelled: the metric layer is not under test. It sets the boundary layer's metric thresholds, so it shapes the gap classes, the SCV-OUTLINE / SCV-BUILT comparators and the BUILT cells whose centres are the MSAM-SOURCE-PROMPTS positives; it never enters the BOX prompt, the AUTO selection or any line detector (post-review B7; the frame meta carries the earlier, narrower wording)"
    },
    "orientation": "as decoded",
    "pngSha256": {
@@ -433,7 +433,7 @@
    "generatorSha256": "d4442ac4153bc3d9856434ac1ab5f5bb1c22f872ebba249801362db2ba44e58c",
    "oracleScale": {
     "scaleMetresPerPx": 0.0222,
-    "why": "ORACLE SCALE only (generator metres per pixel): the metric layer is not under test; the scale is neither a prompt nor a selection"
+    "why": "ORACLE SCALE (generator metres per pixel), labelled: the metric layer is not under test. It sets the boundary layer's metric thresholds, so it shapes the gap classes, the SCV-OUTLINE / SCV-BUILT comparators and the BUILT cells whose centres are the MSAM-SOURCE-PROMPTS positives; it never enters the BOX prompt, the AUTO selection or any line detector (post-review B7; the frame meta carries the earlier, narrower wording)"
    },
    "orientation": "as decoded",
    "pngSha256": {
@@ -473,7 +473,7 @@
    "generatorSha256": "d4442ac4153bc3d9856434ac1ab5f5bb1c22f872ebba249801362db2ba44e58c",
    "oracleScale": {
     "scaleMetresPerPx": 0.0222,
-    "why": "ORACLE SCALE only (generator metres per pixel): the metric layer is not under test; the scale is neither a prompt nor a selection"
+    "why": "ORACLE SCALE (generator metres per pixel), labelled: the metric layer is not under test. It sets the boundary layer's metric thresholds, so it shapes the gap classes, the SCV-OUTLINE / SCV-BUILT comparators and the BUILT cells whose centres are the MSAM-SOURCE-PROMPTS positives; it never enters the BOX prompt, the AUTO selection or any line detector (post-review B7; the frame meta carries the earlier, narrower wording)"
    },
    "orientation": "as decoded",
    "pngSha256": {
@@ -513,7 +513,7 @@
    "generatorSha256": "d4442ac4153bc3d9856434ac1ab5f5bb1c22f872ebba249801362db2ba44e58c",
    "oracleScale": {
     "scaleMetresPerPx": 0.0222,
-    "why": "ORACLE SCALE only (generator metres per pixel): the metric layer is not under test; the scale is neither a prompt nor a selection"
+    "why": "ORACLE SCALE (generator metres per pixel), labelled: the metric layer is not under test. It sets the boundary layer's metric thresholds, so it shapes the gap classes, the SCV-OUTLINE / SCV-BUILT comparators and the BUILT cells whose centres are the MSAM-SOURCE-PROMPTS positives; it never enters the BOX prompt, the AUTO selection or any line detector (post-review B7; the frame meta carries the earlier, narrower wording)"
    },
    "orientation": "as decoded",
    "pngSha256": {
@@ -553,7 +553,7 @@
    "generatorSha256": "d4442ac4153bc3d9856434ac1ab5f5bb1c22f872ebba249801362db2ba44e58c",
    "oracleScale": {
     "scaleMetresPerPx": 0.0222,
-    "why": "ORACLE SCALE only (generator metres per pixel): the metric layer is not under test; the scale is neither a prompt nor a selection"
+    "why": "ORACLE SCALE (generator metres per pixel), labelled: the metric layer is not under test. It sets the boundary layer's metric thresholds, so it shapes the gap classes, the SCV-OUTLINE / SCV-BUILT comparators and the BUILT cells whose centres are the MSAM-SOURCE-PROMPTS positives; it never enters the BOX prompt, the AUTO selection or any line detector (post-review B7; the frame meta carries the earlier, narrower wording)"
    },
    "orientation": "as decoded",
    "pngSha256": {
@@ -593,7 +593,7 @@
    "generatorSha256": "d4442ac4153bc3d9856434ac1ab5f5bb1c22f872ebba249801362db2ba44e58c",
    "oracleScale": {
     "scaleMetresPerPx": 0.0222,
-    "why": "ORACLE SCALE only (generator metres per pixel): the metric layer is not under test; the scale is neither a prompt nor a selection"
+    "why": "ORACLE SCALE (generator metres per pixel), labelled: the metric layer is not under test. It sets the boundary layer's metric thresholds, so it shapes the gap classes, the SCV-OUTLINE / SCV-BUILT comparators and the BUILT cells whose centres are the MSAM-SOURCE-PROMPTS positives; it never enters the BOX prompt, the AUTO selection or any line detector (post-review B7; the frame meta carries the earlier, narrower wording)"
    },
    "orientation": "as decoded",
    "pngSha256": {
@@ -633,7 +633,7 @@
    "generatorSha256": "d4442ac4153bc3d9856434ac1ab5f5bb1c22f872ebba249801362db2ba44e58c",
    "oracleScale": {
     "scaleMetresPerPx": 0.0222,
-    "why": "ORACLE SCALE only (generator metres per pixel): the metric layer is not under test; the scale is neither a prompt nor a selection"
+    "why": "ORACLE SCALE (generator metres per pixel), labelled: the metric layer is not under test. It sets the boundary layer's metric thresholds, so it shapes the gap classes, the SCV-OUTLINE / SCV-BUILT comparators and the BUILT cells whose centres are the MSAM-SOURCE-PROMPTS positives; it never enters the BOX prompt, the AUTO selection or any line detector (post-review B7; the frame meta carries the earlier, narrower wording)"
    },
    "orientation": "as decoded",
    "pngSha256": {
@@ -673,7 +673,7 @@
    "generatorSha256": "d4442ac4153bc3d9856434ac1ab5f5bb1c22f872ebba249801362db2ba44e58c",
    "oracleScale": {
     "scaleMetresPerPx": 0.0222,
-    "why": "ORACLE SCALE only (generator metres per pixel): the metric layer is not under test; the scale is neither a prompt nor a selection"
+    "why": "ORACLE SCALE (generator metres per pixel), labelled: the metric layer is not under test. It sets the boundary layer's metric thresholds, so it shapes the gap classes, the SCV-OUTLINE / SCV-BUILT comparators and the BUILT cells whose centres are the MSAM-SOURCE-PROMPTS positives; it never enters the BOX prompt, the AUTO selection or any line detector (post-review B7; the frame meta carries the earlier, narrower wording)"
    },
    "orientation": "as decoded",
    "pngSha256": {
@@ -713,7 +713,7 @@
    "generatorSha256": "d4442ac4153bc3d9856434ac1ab5f5bb1c22f872ebba249801362db2ba44e58c",
    "oracleScale": {
     "scaleMetresPerPx": 0.0222,
-    "why": "ORACLE SCALE only (generator metres per pixel): the metric layer is not under test; the scale is neither a prompt nor a selection"
+    "why": "ORACLE SCALE (generator metres per pixel), labelled: the metric layer is not under test. It sets the boundary layer's metric thresholds, so it shapes the gap classes, the SCV-OUTLINE / SCV-BUILT comparators and the BUILT cells whose centres are the MSAM-SOURCE-PROMPTS positives; it never enters the BOX prompt, the AUTO selection or any line detector (post-review B7; the frame meta carries the earlier, narrower wording)"
    },
    "orientation": "as decoded",
    "pngSha256": {
@@ -753,7 +753,7 @@
    "generatorSha256": "d4442ac4153bc3d9856434ac1ab5f5bb1c22f872ebba249801362db2ba44e58c",
    "oracleScale": {
     "scaleMetresPerPx": 0.0222,
-    "why": "ORACLE SCALE only (generator metres per pixel): the metric layer is not under test; the scale is neither a prompt nor a selection"
+    "why": "ORACLE SCALE (generator metres per pixel), labelled: the metric layer is not under test. It sets the boundary layer's metric thresholds, so it shapes the gap classes, the SCV-OUTLINE / SCV-BUILT comparators and the BUILT cells whose centres are the MSAM-SOURCE-PROMPTS positives; it never enters the BOX prompt, the AUTO selection or any line detector (post-review B7; the frame meta carries the earlier, narrower wording)"
    },
    "orientation": "as decoded",
    "pngSha256": {
@@ -793,7 +793,7 @@
    "generatorSha256": "d4442ac4153bc3d9856434ac1ab5f5bb1c22f872ebba249801362db2ba44e58c",
    "oracleScale": {
     "scaleMetresPerPx": 0.0222,
-    "why": "ORACLE SCALE only (generator metres per pixel): the metric layer is not under test; the scale is neither a prompt nor a selection"
+    "why": "ORACLE SCALE (generator metres per pixel), labelled: the metric layer is not under test. It sets the boundary layer's metric thresholds, so it shapes the gap classes, the SCV-OUTLINE / SCV-BUILT comparators and the BUILT cells whose centres are the MSAM-SOURCE-PROMPTS positives; it never enters the BOX prompt, the AUTO selection or any line detector (post-review B7; the frame meta carries the earlier, narrower wording)"
    },
    "orientation": "as decoded",
    "pngSha256": {
@@ -833,7 +833,7 @@
    "generatorSha256": "d4442ac4153bc3d9856434ac1ab5f5bb1c22f872ebba249801362db2ba44e58c",
    "oracleScale": {
     "scaleMetresPerPx": 0.0222,
-    "why": "ORACLE SCALE only (generator metres per pixel): the metric layer is not under test; the scale is neither a prompt nor a selection"
+    "why": "ORACLE SCALE (generator metres per pixel), labelled: the metric layer is not under test. It sets the boundary layer's metric thresholds, so it shapes the gap classes, the SCV-OUTLINE / SCV-BUILT comparators and the BUILT cells whose centres are the MSAM-SOURCE-PROMPTS positives; it never enters the BOX prompt, the AUTO selection or any line detector (post-review B7; the frame meta carries the earlier, narrower wording)"
    },
    "orientation": "as decoded",
    "pngSha256": {
@@ -873,7 +873,7 @@
    "generatorSha256": "d4442ac4153bc3d9856434ac1ab5f5bb1c22f872ebba249801362db2ba44e58c",
    "oracleScale": {
     "scaleMetresPerPx": 0.0222,
-    "why": "ORACLE SCALE only (generator metres per pixel): the metric layer is not under test; the scale is neither a prompt nor a selection"
+    "why": "ORACLE SCALE (generator metres per pixel), labelled: the metric layer is not under test. It sets the boundary layer's metric thresholds, so it shapes the gap classes, the SCV-OUTLINE / SCV-BUILT comparators and the BUILT cells whose centres are the MSAM-SOURCE-PROMPTS positives; it never enters the BOX prompt, the AUTO selection or any line detector (post-review B7; the frame meta carries the earlier, narrower wording)"
    },
    "orientation": "as decoded",
    "pngSha256": {
@@ -913,7 +913,7 @@
    "generatorSha256": "d4442ac4153bc3d9856434ac1ab5f5bb1c22f872ebba249801362db2ba44e58c",
    "oracleScale": {
     "scaleMetresPerPx": 0.0222,
-    "why": "ORACLE SCALE only (generator metres per pixel): the metric layer is not under test; the scale is neither a prompt nor a selection"
+    "why": "ORACLE SCALE (generator metres per pixel), labelled: the metric layer is not under test. It sets the boundary layer's metric thresholds, so it shapes the gap classes, the SCV-OUTLINE / SCV-BUILT comparators and the BUILT cells whose centres are the MSAM-SOURCE-PROMPTS positives; it never enters the BOX prompt, the AUTO selection or any line detector (post-review B7; the frame meta carries the earlier, narrower wording)"
    },
    "orientation": "as decoded",
    "pngSha256": {
@@ -953,7 +953,7 @@
    "generatorSha256": "d4442ac4153bc3d9856434ac1ab5f5bb1c22f872ebba249801362db2ba44e58c",
    "oracleScale": {
     "scaleMetresPerPx": 0.0222,
-    "why": "ORACLE SCALE only (generator metres per pixel): the metric layer is not under test; the scale is neither a prompt nor a selection"
+    "why": "ORACLE SCALE (generator metres per pixel), labelled: the metric layer is not under test. It sets the boundary layer's metric thresholds, so it shapes the gap classes, the SCV-OUTLINE / SCV-BUILT comparators and the BUILT cells whose centres are the MSAM-SOURCE-PROMPTS positives; it never enters the BOX prompt, the AUTO selection or any line detector (post-review B7; the frame meta carries the earlier, narrower wording)"
    },
    "orientation": "as decoded",
    "pngSha256": {
@@ -993,7 +993,7 @@
    "generatorSha256": "d4442ac4153bc3d9856434ac1ab5f5bb1c22f872ebba249801362db2ba44e58c",
    "oracleScale": {
     "scaleMetresPerPx": 0.0222,
-    "why": "ORACLE SCALE only (generator metres per pixel): the metric layer is not under test; the scale is neither a prompt nor a selection"
+    "why": "ORACLE SCALE (generator metres per pixel), labelled: the metric layer is not under test. It sets the boundary layer's metric thresholds, so it shapes the gap classes, the SCV-OUTLINE / SCV-BUILT comparators and the BUILT cells whose centres are the MSAM-SOURCE-PROMPTS positives; it never enters the BOX prompt, the AUTO selection or any line detector (post-review B7; the frame meta carries the earlier, narrower wording)"
    },
    "orientation": "as decoded",
    "pngSha256": {
@@ -1033,7 +1033,7 @@
    "generatorSha256": "d4442ac4153bc3d9856434ac1ab5f5bb1c22f872ebba249801362db2ba44e58c",
    "oracleScale": {
     "scaleMetresPerPx": 0.0222,
-    "why": "ORACLE SCALE only (generator metres per pixel): the metric layer is not under test; the scale is neither a prompt nor a selection"
+    "why": "ORACLE SCALE (generator metres per pixel), labelled: the metric layer is not under test. It sets the boundary layer's metric thresholds, so it shapes the gap classes, the SCV-OUTLINE / SCV-BUILT comparators and the BUILT cells whose centres are the MSAM-SOURCE-PROMPTS positives; it never enters the BOX prompt, the AUTO selection or any line detector (post-review B7; the frame meta carries the earlier, narrower wording)"
    },
    "orientation": "as decoded",
    "pngSha256": {
@@ -1073,7 +1073,7 @@
    "generatorSha256": "d4442ac4153bc3d9856434ac1ab5f5bb1c22f872ebba249801362db2ba44e58c",
    "oracleScale": {
     "scaleMetresPerPx": 0.0222,
-    "why": "ORACLE SCALE only (generator metres per pixel): the metric layer is not under test; the scale is neither a prompt nor a selection"
+    "why": "ORACLE SCALE (generator metres per pixel), labelled: the metric layer is not under test. It sets the boundary layer's metric thresholds, so it shapes the gap classes, the SCV-OUTLINE / SCV-BUILT comparators and the BUILT cells whose centres are the MSAM-SOURCE-PROMPTS positives; it never enters the BOX prompt, the AUTO selection or any line detector (post-review B7; the frame meta carries the earlier, narrower wording)"
    },
    "orientation": "as decoded",
    "pngSha256": {
@@ -1113,7 +1113,7 @@
    "generatorSha256": "d4442ac4153bc3d9856434ac1ab5f5bb1c22f872ebba249801362db2ba44e58c",
    "oracleScale": {
     "scaleMetresPerPx": 0.0222,
-    "why": "ORACLE SCALE only (generator metres per pixel): the metric layer is not under test; the scale is neither a prompt nor a selection"
+    "why": "ORACLE SCALE (generator metres per pixel), labelled: the metric layer is not under test. It sets the boundary layer's metric thresholds, so it shapes the gap classes, the SCV-OUTLINE / SCV-BUILT comparators and the BUILT cells whose centres are the MSAM-SOURCE-PROMPTS positives; it never enters the BOX prompt, the AUTO selection or any line detector (post-review B7; the frame meta carries the earlier, narrower wording)"
    },
    "orientation": "as decoded",
    "pngSha256": {

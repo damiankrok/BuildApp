@@ -1,10 +1,12 @@
 """aggregate.py — RESEARCH ONLY (BUILDPLAN-ANALYZER-005I Track B).
 
-python -I aggregate.py --work /home/user/work005i --repo <BuildApp> --out <stage-reports/artifacts/analyzer-005i/boundary-bakeoff>
+python -I -B aggregate.py --work /home/user/work005i --repo <BuildApp> --out <stage-reports/artifacts/analyzer-005i/boundary-bakeoff>
 
 Turns the scorer's per-frame numbers into the committed artifacts (text facts only): synthetic-results.json,
 development-results.json, performance.json, fusion-replay.json, source-manifest.json, providers.json and
 failure-type-scorecard.md (methodology.md §8 rules, applied mechanically). Deterministic: sorted keys, rounded numbers.
+Post-review (council B): ±u truth-buffer fragility (B3), same-input check summary (B5), SCV-UNION sensitivity rows and
+the §8 rule fixes (B8), ORACLE numbers labelled as such and kept out of the recommendation (B2).
 """
 import argparse
 import glob
@@ -52,8 +54,9 @@ def dump(path, data):
         f.write("\n")
 
 
-LINE_KEYS = ["count", "exteriorWallCoverage", "continuityAcrossOpenings", "longWallRecovery", "cornerEndpointErrorMedianPx", "cornersWithoutSegment", "angularErrorDeg", "fragmentationSegmentsPerMetre", "duplicateRate", "unsupportedLineRate", "additionalSolidCoverageM", "additionalOpeningCoverageM", "additionalSolidCoverageShare", "additionalOpeningCoverageShare", "falseLinesDistractors", "falseLinesDistractorsLengthPx", "supportedLineRecall", "boundaryDistractors", "boundaryDistractorsLengthM", "additionalDistractorLengthM", "exclusionOutlineLinesM", "exclusionOutlineAddedOverScvM", "additionalIds"]
-REGION_KEYS = ["regionIoU", "boundaryIoU", "boundaryPrecision", "boundaryRecall", "openingRecall", "buildingCoverage", "areaRatio", "outsideArea", "overreach", "bodyCoverage", "openingLeakage", "textDimensionInclusion", "components", "significantComponents", "failureTypes", "predictedIoU", "promptSensitivity", "oracleUpperBoundIoU_NOT_A_SELECTION", "autoMasks", "noMask"]
+LINE_KEYS = ["count", "exteriorWallCoverage", "continuityAcrossOpenings", "longWallRecovery", "cornerEndpointErrorMedianPx", "cornersWithoutSegment", "angularErrorDeg", "fragmentationSegmentsPerMetre", "duplicateRate", "unsupportedLineRate", "additionalSolidCoverageM", "additionalOpeningCoverageM", "additionalSolidCoverageShare", "additionalOpeningCoverageShare", "falseLinesDistractors", "falseLinesDistractorsLengthPx", "supportedLineRecall", "boundaryDistractors", "boundaryDistractorsLengthM", "additionalDistractorLengthM", "exclusionOutlineLinesM", "exclusionOutlineAddedOverScvM", "additionalIds", "unionSensitivity"]
+REGION_KEYS = ["regionIoU", "boundaryIoU", "boundaryPrecision", "boundaryRecall", "openingRecall", "buildingCoverage", "areaRatio", "outsideArea", "overreach", "bodyCoverage", "openingLeakage", "textDimensionInclusion", "components", "significantComponents", "failureTypes", "predictedIoU", "promptSensitivity", "autoMasks", "noMask"]
+ORACLE_KEY = "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION"
 
 
 def frame_rows(scores):
@@ -61,8 +64,11 @@ def frame_rows(scores):
     for fid, f in sorted(scores.items()):
         lines = {c: {k: f["lines"][c].get(k) for k in LINE_KEYS if k in f["lines"][c]} for c in LINE_CFGS if c in f["lines"] and not f["lines"][c].get("missing")}
         regions = {c: {k: f["regions"][c].get(k) for k in REGION_KEYS if k in f["regions"][c]} for c in MASK_CFGS + REGION_CMP if c in f["regions"]}
+        if "oracleUpperBoundIoU_NOT_A_SELECTION" in f["regions"].get("MSAM-AUTO", {}):
+            regions["MSAM-AUTO"][ORACLE_KEY] = f["regions"]["MSAM-AUTO"]["oracleUpperBoundIoU_NOT_A_SELECTION"]
         out[fid] = {"frameId": f["frameId"], "metresPerPx": f["metresPerPx"], "wallPxTruth": f["wallPxTruth"], "tolerancesPx": {"tau": r(f["tau"], 2), "tauB": r(f["tauB"], 2)},
-                    "exteriorEdges": f["exteriorEdges"], "solidLengthM": f["solidLengthM"], "openingLengthM": f["openingLengthM"], "scvUnion": f["SCV-UNION"], "lines": lines, "regions": regions}
+                    "exteriorEdges": f["exteriorEdges"], "solidLengthM": f["solidLengthM"], "openingLengthM": f["openingLengthM"], "scvUnion": f["SCV-UNION"], "scvUnionSensitivity": f.get("SCV-UNION-SENSITIVITY"),
+                    "sameInputChecked": sorted(f.get("sameInput", {})), "lines": lines, "regions": regions}
     return out
 
 
@@ -83,6 +89,11 @@ def aggregates(scores):
             if vals:
                 a["sum_" + k] = r(sum(vals), 3)
         a["framesWithAdditionalSolidCoverage>=0.5m"] = sum(1 for x in rows if (x.get("additionalSolidCoverageM") or 0) >= 0.5)
+        us = [x["unionSensitivity"] for x in rows if x.get("unionSensitivity")]
+        if us:
+            a["unionSensitivity"] = {k: {"sum_additionalSolidCoverageM": r(sum(u[k]["additionalSolidCoverageM"] for u in us), 3), "max_additionalSolidCoverageM": r(max(u[k]["additionalSolidCoverageM"] for u in us), 3),
+                                         "sum_additionalOpeningCoverageM": r(sum(u[k]["additionalOpeningCoverageM"] for u in us), 3), "max_additionalOpeningCoverageM": r(max(u[k]["additionalOpeningCoverageM"] for u in us), 3),
+                                         "framesWithAdditionalSolidCoverage>=0.5m": sum(1 for u in us if u[k]["additionalSolidCoverageM"] >= 0.5)} for k in sorted(us[0])}
         agg["lines"][c] = a
     for c in MASK_CFGS + REGION_CMP:
         rows = [f["regions"][c] for f in scores.values() if c in f["regions"] and not f["regions"][c].get("noMask")]
@@ -96,8 +107,8 @@ def aggregates(scores):
              "min_regionIoU": r(min(x.get("regionIoU") or 0 for x in rows)), "mean_boundaryIoU": mean([x.get("boundaryIoU") for x in rows]),
              "mean_boundaryPrecision": mean([x.get("boundaryPrecision") for x in rows]), "mean_boundaryRecall": mean([x.get("boundaryRecall") for x in rows]),
              "failureTypeCounts": dict(sorted(ft.items())), "framesOK": sum(1 for x in rows if x.get("failureTypes") == ["OK"])}
-        if c == "MSAM-AUTO":
-            a["mean_oracleUpperBoundIoU_NOT_A_SELECTION"] = mean([x.get("oracleUpperBoundIoU_NOT_A_SELECTION") for x in rows])
+        if c == "MSAM-AUTO" and any("oracleUpperBoundIoU_NOT_A_SELECTION" in x for x in rows):
+            a["mean_" + ORACLE_KEY] = mean([x.get("oracleUpperBoundIoU_NOT_A_SELECTION") for x in rows])
         ps = [x.get("promptSensitivity") for x in rows if x.get("promptSensitivity")]
         if ps:
             a["min_variantIoUWithBase"] = r(min(p["minIoUWithBase"] for p in ps))
@@ -130,38 +141,52 @@ def fusion_rows(scores):
                 d = avail.setdefault(p, {"usefulBridges": 0, "falseBridges": 0})
                 if p in row["bridgedBy"]:
                     d["usefulBridges" if row["where"] == "EXTERIOR_EDGE" else "falseBridges"] += 1
+                if p in MASK_CFGS:
+                    d2 = d.setdefault("gapLineOnlyRule", {"usefulBridges": 0, "falseBridges": 0})
+                    if p in row.get("maskOnGapLineOnly", []):
+                        d2["usefulBridges" if row["where"] == "EXTERIOR_EDGE" else "falseBridges"] += 1
         out[fid] = {"maskUnion": rows, "evidenceAvailability": {"gapsOnTruthExterior": sum(1 for x in ev if x["where"] == "EXTERIOR_EDGE"), "gapsOutsideBuilding": sum(1 for x in ev if x["where"] == "OUTSIDE"), "byProvider": avail,
                                                                  "usefulBridgesNotAlreadyInScvLines": {p: sum(1 for x in ev if x["where"] == "EXTERIOR_EDGE" and p in x["bridgedBy"] and "SCV-LINES" not in x["bridgedBy"]) for p in EXT_LINE_CFGS + MASK_CFGS}}}
     return out
 
 
 # ------------------------------------------------------------ scorecard (methodology §8)
-def body_edges(truth, f, kind):
-    """indices of exterior edges lying on the boundary of the bodies of `kind`"""
+def body_edges(truth, f, kind, tol=3.0):
+    """indices of exterior edges lying on the boundary of the bodies of `kind` (tol grows by u for a buffered truth)"""
     from shapely.geometry import Point, Polygon
     polys = [Polygon(b["polygon"]) for b in truth["bodies"] if b["kind"] == kind]
     idx = []
     for e in f["edges"]:
         mid = Point((e["a"][0] + e["b"][0]) / 2, (e["a"][1] + e["b"][1]) / 2)
-        if any(p.exterior.distance(mid) <= 3 for p in polys):
+        if any(p.exterior.distance(mid) <= tol for p in polys):
             idx.append(e["i"])
     return idx
 
 
-def scorecard(scores, truths):
+MASK_NA_FIRST = "post-review B8: a class that does not apply is NOT_APPLICABLE even when no mask was selected"
+
+
+def variant_view(f, variant):
+    """the frame's numbers re-scored against the truth displaced by -u / +u (score.py truthBuffer), or f itself"""
+    if variant is None:
+        return f, 3.0
+    tb = f["truthBuffer"]
+    return dict(f, **tb["variants"][variant]), 3.0 + tb["uPx"]
+
+
+def scorecard(scores, truths, variant=None):
     rows = []
-    for fid, f in sorted(scores.items()):
+    for fid, f0 in sorted(scores.items()):
+        f, btol = variant_view(f0, variant)
         t = truths[fid]
         kinds_open = set(o["kind"] for o in t["openings"])
         excl_kinds = set(e["kind"] for e in t["exclusions"])
         body_kinds = set(b["kind"] for b in t["bodies"])
         edges = f["edges"]
         weak = [e["i"] for e in edges if e["lengthM"] >= 3 and (e["unionSolidCov"] or 0) < 0.6]
-        open_len = sum(1 for _ in [])
-        win_len = 0.0
-        for e in edges:
-            pass
-        win_runs_m = sum(((o["b"][0] - o["a"][0]) ** 2 + (o["b"][1] - o["a"][1]) ** 2) ** 0.5 for o in t["openings"] if o["kind"] in ("WINDOW", "GLAZED", "DOOR")) * f["metresPerPx"]
+        # window rule (post-review B8): numerator and denominator over the same opening kinds (WINDOW / GLAZED / DOOR;
+        # GARAGE_DOOR has its own class), both from the per-edge samples of the truth opening runs
+        win_runs_m = sum(e.get("windowRunM") or 0.0 for e in edges)
         scv_o = f["regions"].get("SCV-OUTLINE", {})
         for p in EXT_LINE_CFGS + MASK_CFGS + ["TRIVIAL-EXTENT"]:
             is_mask = p in MASK_CFGS or p == "TRIVIAL-EXTENT"
@@ -169,8 +194,11 @@ def scorecard(scores, truths):
             if is_mask:
                 m = f["regions"].get(p)
                 if not m or m.get("noMask"):
-                    for k in ["longWeakExteriorWall", "wallInterruptedByWindows", "garageDoorFacade", "attachedGarage", "bay", "exteriorVsTerrace", "mainBodyMask", "innerRoomVsBuilding"]:
-                        cells[k] = ("NOT_APPLICABLE" if k == "longWeakExteriorWall" else "HURT" if k in ("mainBodyMask",) else "NEUTRAL", ["no mask selected"])
+                    na = {"longWeakExteriorWall": True, "wallInterruptedByWindows": not kinds_open & {"WINDOW", "GLAZED", "DOOR"}, "garageDoorFacade": "GARAGE_DOOR" not in kinds_open,
+                          "attachedGarage": "GARAGE" not in body_kinds, "bay": "BAY" not in body_kinds, "exteriorVsTerrace": not [k for k in ("TERRACE", "PERGOLA", "PORCH") if k in excl_kinds],
+                          "mainBodyMask": False, "innerRoomVsBuilding": False}
+                    for k, is_na in na.items():
+                        cells[k] = ("NOT_APPLICABLE", []) if is_na else ("HURT" if k == "mainBodyMask" else "NEUTRAL", ["no mask selected"])
                     rows.append({"frame": fid, "provider": p, "cells": cells})
                     continue
                 oid = "trivial-extent (no model)" if p == "TRIVIAL-EXTENT" else "mobilesam-%s-%s" % (p.lower(), "selected" if p == "MSAM-AUTO" else "base")
@@ -240,8 +268,8 @@ def scorecard(scores, truths):
                 if not kinds_open & {"WINDOW", "GLAZED", "DOOR"}:
                     cells["wallInterruptedByWindows"] = ("NOT_APPLICABLE", [])
                 else:
-                    addo = sum(x["addOpenM"] for x in per)
-                    cells["wallInterruptedByWindows"] = ("HELPED" if win_runs_m and addo >= 0.2 * win_runs_m else "NEUTRAL", (ids[:6] if addo else []) + ["+%.2f m of %.2f m opening runs beyond SCV-UNION" % (addo, win_runs_m)])
+                    addo = sum(x["addWindowM"] for x in per)
+                    cells["wallInterruptedByWindows"] = ("HELPED" if win_runs_m and addo >= 0.2 * win_runs_m else "NEUTRAL", (ids[:6] if addo else []) + ["+%.2f m of %.2f m window / glazing / door runs beyond SCV-UNION" % (addo, win_runs_m)])
                 if "GARAGE_DOOR" not in kinds_open:
                     cells["garageDoorFacade"] = ("NOT_APPLICABLE", [])
                 else:
@@ -252,7 +280,7 @@ def scorecard(scores, truths):
                     if kind not in body_kinds:
                         cells[cls] = ("NOT_APPLICABLE", [])
                         continue
-                    be = body_edges(t, f, kind)
+                    be = body_edges(t, f, kind, btol)
                     add = sum(per[i]["addSolidM"] for i in be)
                     cells[cls] = ("HELPED" if add >= 0.5 else "NEUTRAL", ["+%.2f m on %d %s edges beyond SCV-UNION" % (add, len(be), kind)])
                 ek = [k for k in ("TERRACE", "PERGOLA", "PORCH") if k in excl_kinds]
@@ -268,6 +296,120 @@ def scorecard(scores, truths):
     return rows
 
 
+# ------------------------------------------------------------ ±u truth-buffer fragility (post-review B3, methodology §6.3)
+VARIANTS = [("-u", "-u"), ("0", None), ("+u", "+u")]
+REGION_PAIRS = [("MSAM-BOX", "TRIVIAL-EXTENT"), ("MSAM-BOX", "TRIVIAL-BOX"), ("MSAM-BOX", "SCV-BUILT"), ("MSAM-BOX", "PROD-MASSES-005H"), ("MSAM-BOX", "SCV-OUTLINE"),
+                ("MSAM-SOURCE-PROMPTS", "TRIVIAL-EXTENT"), ("MSAM-SOURCE-PROMPTS", "SCV-BUILT"), ("MSAM-AUTO", "TRIVIAL-EXTENT")]
+
+
+def at(f, v):
+    return f if v is None else f["truthBuffer"]["variants"][v]
+
+
+def sgn(x):
+    return 0 if abs(x) < 5e-4 else (1 if x > 0 else -1)
+
+
+def evidence_totals(scores, v):
+    tot = {}
+    for f in scores.values():
+        for row in at(f, v)["evidenceAvailability"]:
+            for p in LINE_CFGS + MASK_CFGS:
+                d = tot.setdefault(p, {"usefulBridges": 0, "falseBridges": 0, "usefulNotInScvLines": 0})
+                if p in row["bridgedBy"]:
+                    if row["where"] == "EXTERIOR_EDGE":
+                        d["usefulBridges"] += 1
+                        if "SCV-LINES" not in row["bridgedBy"]:
+                            d["usefulNotInScvLines"] += 1
+                    else:
+                        d["falseBridges"] += 1
+    return tot
+
+
+def fragility(real, sc_rows):
+    """Every real-set comparison the recommendation reads, at the stated truth and at the truth displaced by -u / +u.
+    FRAGILE = the conclusion (sign of an IoU difference, a threshold crossing, a scorecard cell) is not the same at all
+    three; a difference under 0.0005 counts as a tie (FRAGILE)."""
+    out = {"rule": "u = the house's largest stated vertex uncertainty (truth/real/<house>.json vertexUncertaintyPx); the exterior is buffered by -u and +u px with mitred joins and the opening runs move with their face (score.py buffer_truth); exclusions and bodies stay as drawn. A conclusion is FRAGILE when it is not the same at -u, 0 and +u; an IoU difference under 0.0005 is a tie and counts as FRAGILE.",
+           "uPx": {fid: f["truthBuffer"]["uPx"] for fid, f in sorted(real.items())}}
+    comps = []
+    for fid, f in sorted(real.items()):
+        for a_, b_ in REGION_PAIRS:
+            ia = [at(f, v)["regions"].get(a_, {}).get("regionIoU") for _, v in VARIANTS]
+            ib = [at(f, v)["regions"].get(b_, {}).get("regionIoU") for _, v in VARIANTS]
+            if None in ia or None in ib:
+                continue
+            d = [x - y for x, y in zip(ia, ib)]
+            sg = {sgn(x) for x in d}
+            comps.append({"house": fid, "pair": "%s vs %s" % (a_, b_), "regionIoU": {k: [r(x), r(y)] for (k, _), x, y in zip(VARIANTS, ia, ib)}, "deltaIoU": {k: r(x) for (k, _), x in zip(VARIANTS, d)},
+                          "verdict": "ROBUST" if len(sg) == 1 and 0 not in sg else "FRAGILE"})
+    for a_, b_ in REGION_PAIRS:
+        ds = []
+        for _, v in VARIANTS:
+            xs = [at(f, v)["regions"][a_]["regionIoU"] - at(f, v)["regions"][b_]["regionIoU"] for f in real.values() if at(f, v)["regions"].get(a_, {}).get("regionIoU") is not None and at(f, v)["regions"].get(b_, {}).get("regionIoU") is not None]
+            ds.append(sum(xs) / len(xs) if xs else None)
+        if None in ds:
+            continue
+        sg = {sgn(x) for x in ds}
+        comps.append({"house": "MEAN over the 7 houses", "pair": "%s vs %s" % (a_, b_), "deltaIoU": {k: r(x) for (k, _), x in zip(VARIANTS, ds)}, "verdict": "ROBUST" if len(sg) == 1 and 0 not in sg else "FRAGILE"})
+    out["regionComparisons"] = comps
+    out["fragileRegionComparisons"] = ["%s: %s" % (c["house"], c["pair"]) for c in comps if c["verdict"] == "FRAGILE"]
+    out["meanRegionIoU"] = {c: {k: mean([at(f, v)["regions"].get(c, {}).get("regionIoU") for f in real.values()]) for k, v in VARIANTS} for c in MASK_CFGS + REGION_CMP}
+    md = {}
+    for k, v in VARIANTS:
+        ds = [at(f, v)["regions"]["MSAM-BOX"]["regionIoU"] - at(f, v)["regions"]["TRIVIAL-EXTENT"]["regionIoU"] for f in real.values() if "MSAM-BOX" in at(f, v)["regions"] and "TRIVIAL-EXTENT" in at(f, v)["regions"]]
+        md[k] = {"mean": r(sum(ds) / len(ds)), "min": r(min(ds)), "max": r(max(ds))}
+    out["msamBoxMinusTrivialExtent"] = md
+    lc = []
+    for fid, f in sorted(real.items()):
+        for c in EXT_LINE_CFGS:
+            sol = {k: at(f, v)["lines"].get(c, {}).get("additionalSolidCoverageM") for k, v in VARIANTS}
+            opn = {k: at(f, v)["lines"].get(c, {}).get("additionalOpeningCoverageM") for k, v in VARIANTS}
+            if None in sol.values():
+                continue
+            below = {x < 0.5 for x in sol.values()}
+            lc.append({"house": fid, "provider": c, "additionalSolidCoverageM": sol, "additionalOpeningCoverageM": opn, "verdict": "ROBUST" if len(below) == 1 else "FRAGILE"})
+    out["lineConclusions"] = {"conclusion": "external line provider adds < 0.5 m of ink-supported exterior solid coverage beyond SCV-UNION", "rows": lc, "fragile": ["%s: %s" % (x["house"], x["provider"]) for x in lc if x["verdict"] == "FRAGILE"],
+                              "maxAdditionalSolidCoverageM": {k: r(max(x["additionalSolidCoverageM"][k] for x in lc), 3) for k, _ in VARIANTS},
+                              "maxAdditionalOpeningCoverageM": {k: r(max(x["additionalOpeningCoverageM"][k] for x in lc), 3) for k, _ in VARIANTS},
+                              "scvUnionMinCoverage": {k: {"solid": r(min(at(f, v)["SCV-UNION"]["exteriorWallCoverage"] for f in real.values())), "opening": r(min(at(f, v)["SCV-UNION"]["continuityAcrossOpenings"] for f in real.values()))} for k, v in VARIANTS}}
+    ev = {k: evidence_totals(real, v) for k, v in VARIANTS}
+    out["evidenceAvailability"] = {"totals": ev, "msamBoxFalseBridgesExceedScvLines": {k: ev[k]["MSAM-BOX"]["falseBridges"] > ev[k]["SCV-LINES"]["falseBridges"] for k, _ in VARIANTS}}
+    base = {(x["frame"], x["provider"]): x["cells"] for x in sc_rows[None]}
+    cells = {}
+    for k in ("-u", "+u"):
+        for row in sc_rows[k]:
+            for c, (val, _) in row["cells"].items():
+                b0 = base[(row["frame"], row["provider"])][c][0]
+                if val != b0:
+                    cells.setdefault((row["frame"], row["provider"], c), {"house": row["frame"], "provider": row["provider"], "class": c, "0": b0})[k] = val
+    out["fragileScorecardCells"] = [cells[k] for k in sorted(cells)]
+    return out
+
+
+def control_comparison(scores):
+    """per house: outline / BUILT IoU change of the no-external-information control and of each provider row (B6)"""
+    out = {"perHouse": {}, "addedSegmentsRange": {}}
+    segs = {}
+    for fid, f in sorted(scores.items()):
+        rows = fusion_rows({fid: f})[fid]["maskUnion"]
+        out["perHouse"][fid] = {c: {"deltaOutlineIoU": x.get("deltaOutlineIoU"), "deltaBuiltIoU": x.get("deltaBuiltIoU"), "addedSegments": x.get("addedSegments")} for c, x in rows.items() if c != "BASELINE" and x and "deltaOutlineIoU" in x}
+        for c, x in out["perHouse"][fid].items():
+            segs.setdefault(c, []).append(x["addedSegments"])
+    out["addedSegmentsRange"] = {c: [min(v), max(v)] for c, v in sorted(segs.items())}
+    return out
+
+
+def same_input_summary(scores):
+    """B5: score.py stops on any mismatch, so reaching here means every listed output read its frame's PNG bytes"""
+    per = {}
+    for f in scores.values():
+        for k in f.get("sameInput", {}):
+            per[k] = per.get(k, 0) + 1
+    return {"rule": "every provider output records the SHA-256 of the frame PNG it read (the refiner also its SCV-LINES file, MobileSAM also its prompt meta; the fusion replay the frame PNG and every observation file); score.py asserts each against the frame meta / the current file and stops on any mismatch (post-review B5)",
+            "framesChecked": len(scores), "outputsCheckedPerProvider": dict(sorted(per.items()))}
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--work", default="/home/user/work005i")
@@ -279,13 +421,16 @@ def main():
     synth = load(os.path.join(W, "scores", "synthetic.json"))
     corpus = load(os.path.join(W, "synth", "corpus.json"))
     truths_real = {k: load(os.path.join(H, "truth", "real", k + ".json")) for k in real}
+    sc_rows = {v: scorecard(real, truths_real, v) for v in (None, "-u", "+u")}
 
     # ---------------- synthetic-results.json
     dump(os.path.join(a.out, "synthetic-results.json"), {
         "researchOnly": True,
         "generator": {"file": "research/analyzer-005i-boundary-bakeoff/synthetic/generate.py", "sha256": corpus["generatorSha256"], "opencv": corpus["opencv"], "numpy": corpus["numpy"], "pxPerM": corpus["pxPerM"], "supersampling": corpus["supersampling"], "exteriorWallM": corpus["exteriorWallM"], "partitionM": corpus["partitionM"]},
         "cases": [{"id": c["id"], "seed": c["seed"], "degradation": c["degradation"], "bytesSha256": c["sha256"], "truthSha256": c["truthSha256"]} for c in corpus["cases"]],
-        "baselineInputs": "extent = production planExtent with no chains (wall witness), never the truth; it feeds the boundary layer, the MobileSAM BOX / SOURCE prompts and the AUTO selection window. ORACLE SCALE only (generator metres per pixel; thresholds, not a prompt). No chains (methodology §7.1, §11 E6 correction)",
+        "baselineInputs": "extent = production planExtent with no chains (wall witness), never the truth; it feeds the boundary layer, the MobileSAM BOX / SOURCE prompts and the AUTO selection window. ORACLE SCALE (generator metres per pixel, labelled): it sets the boundary layer's metric thresholds, so it shapes the SCV-OUTLINE / SCV-BUILT comparators, the BUILT cells whose centres are the MSAM-SOURCE-PROMPTS positives, and the gap classes; it never enters the BOX prompt, the AUTO selection or any line detector. No chains (methodology §7.1, §11 E6 correction, post-review B7)",
+        "sameInputCheck": same_input_summary(synth),
+        "scoringOutput": {"file": "/home/user/work005i/scores/synthetic.json (outside the repository)", "sha256": sha(os.path.join(W, "scores", "synthetic.json"))},
         "perCase": frame_rows(synth),
         "aggregates": aggregates(synth),
         "fusion": fusion_rows(synth),
@@ -302,13 +447,18 @@ def main():
         "perHouse": dev,
         "aggregates": aggregates(real),
         "aggregatesBoundaryHousesOnly": aggregates({k: v for k, v in real.items() if truths_real[k].get("purpose", "DEV_BOUNDARY") == "DEV_BOUNDARY"}),
+        "truthBufferFragility": fragility(real, sc_rows),
+        "sameInputCheck": same_input_summary(real),
+        "scoringOutput": {"file": "/home/user/work005i/scores/real.json (outside the repository)", "sha256": sha(os.path.join(W, "scores", "real.json"))},
     })
     # ---------------- fusion-replay.json
     dump(os.path.join(a.out, "fusion-replay.json"), {
         "researchOnly": True,
         "seam": "NONE. The production boundary resolver (decomposePlan -> boundaryExtension -> solveOutline / classifyBodies / completeBoundary) takes only the ink Mask, bands, chains, registration, extent and options. No line list or region mask can be passed without changing production code.",
         "replay1_maskUnion": "Out-of-contract input perturbation: mask' = mask OR rasterise(provider segments, 1 px); the same production boundary layer re-run with identical bands, chains, registration, extent and options (fusion-replay.ts). A 1-px line cannot become wall-thick ink on its own, but many added lines can raise the ink density of a wall-thick window past readWallLine's 80 % — openingsReadAsWall measures exactly that side effect.",
-        "replay2_evidenceAvailability": "Per baseline TRUE_EXTERIOR_GAP / UNKNOWN_GAP: on a truth exterior edge, does the provider bridge it (lines: >= 80 % covered by parallel segments within a wall of the gap line; masks: mask = 1 on >= 80 % of the gap line) — useful; outside the truth building — false evidence.",
+        "replay2_evidenceAvailability": "Per baseline TRUE_EXTERIOR_GAP / UNKNOWN_GAP: on a truth exterior edge, does the provider bridge it (lines: >= 80 % covered by parallel segments within a wall of the gap line; masks, as methodology §9 states: mask = 1 on >= 80 % of the gap line's samples AND of the same samples one wall inward, inward = the truth edge's inward normal, or for a gap outside the building the side nearer to the truth polygon) — useful; outside the truth building — false evidence. The first implementation sampled the gap line only (post-review B8); that tally is kept per mask as byProvider.<mask>.gapLineOnlyRule.",
+        "controlRow": "+SCV-LINES-CONTROL rasterises BuildPlan's own SCV-LINES into the mask exactly like a provider's lines: no EXTERNAL information (the resolver does not otherwise consume SCV-LINES). It shows that ink density alone moves outlines by changes of comparable magnitude to the providers', on different houses (controlComparison). It is one perturbation per house and its density is NOT matched (controlComparison.addedSegmentsRange): evidence that the resolver is density-sensitive, not a calibrated null distribution.",
+        "controlComparison": control_comparison(real),
         "real": fusion_rows(real),
         "synthetic": fusion_rows(synth),
         "noOracleFusion": "no per-house provider choice, no per-provider threshold, no published area; combinations only after the individual rows",
@@ -341,9 +491,33 @@ def main():
     sc = [v["sourceCv"]["timingsMs"] for v in perf["frames"].values() if v["sourceCv"].get("timingsMs")]
     summ["SOURCE_CV"] = {"frames": len(sc), "median_linesMs": r(st.median([x.get("sourceCvLines", 0) for x in sc]), 1), "median_planSheetAndSolidMs": r(st.median([x.get("planSheetAndSolid", 0) for x in sc]), 1), "median_boundaryLayerMs": r(st.median([x.get("boundaryLayer", 0) for x in sc]), 1)}
     perf["summary"] = summ
+    # post-review B5: the scored outputs come from the full re-run that added input hashes (07:27-, box busier than the
+    # first run). The first run's timings, from the copy taken before the re-run, are kept beside them for reference.
+    prev = os.path.join(W, "obs-prev")
+    if os.path.isdir(prev):
+        first = {}
+        pat = {"ELSED-DEFAULT": "elsed/*/*.json", "DEEPLSD-MD": "deeplsd/*/*.md.json", "DEEPLSD-WF": "deeplsd/*/*.wf.json", "DEEPLSD-MD-REFINE-SCV": "deeplsd/*/*.md-refine-scv.json", "MOBILESAM": "mobilesam/*/*.json"}
+        for c, g in pat.items():
+            rows = [load(fp).get("perf") or {} for fp in sorted(glob.glob(os.path.join(prev, g)))]
+            rows = [x for x in rows if x]
+            s_ = {"frames": len(rows)}
+            for k in ("wallMs", "detectMs", "inferMs", "peakRssMB", "encoderMs", "autoMs"):
+                vals = [x.get(k) for x in rows if isinstance(x.get(k), (int, float))]
+                if vals:
+                    s_["median_" + k] = r(st.median(vals), 1)
+                    s_["max_" + k] = r(max(vals), 1)
+            first[c] = s_
+        perf["summaryFirstRun"] = first
+        perf["timingNote"] = "summary = the scored outputs (full re-run with input hashes, post-review B5); summaryFirstRun = the first run of the same providers on the same frames. Both on a shared 4-vCPU box: upper bounds, not phone timings. peakRssMB here is the process maximum RSS from the kernel (ru_maxrss), a true peak; the WASM probe's figure is not (see wasmProbeNode18.memoryNote)."
     wp = os.path.join(W, "onnx", "wasm-probe-node18.json")
     if os.path.exists(wp):
-        perf["wasmProbeNode18"] = load(wp)
+        wpd = load(wp)
+        # post-review D8: the probe samples RSS every 20 ms on an event loop that single-thread WASM inference blocks,
+        # so the figure is the RSS AFTER inference — a lower bound on the peak, not the peak. Published under that name.
+        if "peakRssMiBPerModel" in wpd:
+            wpd["rssAfterInferenceMiBPerModel_lowerBoundOnPeak"] = wpd.pop("peakRssMiBPerModel")
+        wpd["memoryNote"] = "rssAfterMiB / rssAfterInferenceMiBPerModel_lowerBoundOnPeak = RSS after inference, sampled on an event loop that the single-thread WASM call blocks: a lower bound on the peak, not the peak (post-review D8)"
+        perf["wasmProbeNode18"] = wpd
     ex = os.path.join(W, "onnx", "export.json")
     if os.path.exists(ex):
         e = load(ex)
@@ -351,6 +525,9 @@ def main():
     det = os.path.join(W, "determinism.json")
     if os.path.exists(det):
         perf["determinism"] = load(det)
+    rc = os.path.join(W, "rerun-b5-compare.json")
+    if os.path.exists(rc):
+        perf["fullRerunComparison"] = load(rc)
     dump(os.path.join(a.out, "performance.json"), perf)
     # ---------------- source-manifest.json
     sm = {"researchOnly": True, "rule": "every provider sees the same decoded pixels per frame (methodology §3)", "providerInputs": {
@@ -366,7 +543,10 @@ def main():
             if setname == "real":
                 row.update({"sourceByteSha256": m["variant"]["byteSha256"], "variantId": m["variant"]["id"], "mediaType": m["variant"]["mediaType"], "byteLength": m["variant"]["byteLength"], "packageSha256": m["packageSha256"], "frameSelection": m["frameSelection"], "frameRoles": m["frameRoles"], "frozenRun": m["frozenRun"]})
             else:
-                row.update({"sourceByteSha256": m["sourceBytes"]["sha256"], "sourceFile": m["sourceBytes"]["file"], "generatorSha256": m["generatorSha256"], "oracleScale": m.get("oracle"), "extent": m.get("extent")})
+                orc = m.get("oracle")
+                if orc:
+                    orc = dict(orc, why="ORACLE SCALE (generator metres per pixel), labelled: the metric layer is not under test. It sets the boundary layer's metric thresholds, so it shapes the gap classes, the SCV-OUTLINE / SCV-BUILT comparators and the BUILT cells whose centres are the MSAM-SOURCE-PROMPTS positives; it never enters the BOX prompt, the AUTO selection or any line detector (post-review B7; the frame meta carries the earlier, narrower wording)")
+                row.update({"sourceByteSha256": m["sourceBytes"]["sha256"], "sourceFile": m["sourceBytes"]["file"], "generatorSha256": m["generatorSha256"], "oracleScale": orc, "extent": m.get("extent")})
             sm["frames"]["%s/%s" % (setname, fid)] = row
     dump(os.path.join(a.out, "source-manifest.json"), sm)
     # ---------------- providers.json
@@ -399,21 +579,30 @@ def main():
             pv["configHashCount"] = len(pv["configHashes"])
     dump(os.path.join(a.out, "providers.json"), {"researchOnly": True, "providers": provs, "os": man["runtime"]["os"], "python": man["runtime"]["python"]})
     # ---------------- failure-type-scorecard.md
-    rows = scorecard(real, truths_real)
+    rows = sc_rows[None]
+    fragile = {}
+    for k in ("-u", "+u"):
+        for row in sc_rows[k]:
+            for c, (val, _) in row["cells"].items():
+                if val != next(x for x in rows if x["frame"] == row["frame"] and x["provider"] == row["provider"])["cells"][c][0]:
+                    fragile.setdefault((row["frame"], row["provider"], c), {})[k] = val
     classes = ["longWeakExteriorWall", "wallInterruptedByWindows", "garageDoorFacade", "attachedGarage", "bay", "exteriorVsTerrace", "mainBodyMask", "innerRoomVsBuilding"]
     names = {"longWeakExteriorWall": "long weak ext. wall", "wallInterruptedByWindows": "wall interrupted by windows", "garageDoorFacade": "garage-door facade", "attachedGarage": "attached garage", "bay": "bay", "exteriorVsTerrace": "exterior vs terrace", "mainBodyMask": "main-body mask", "innerRoomVsBuilding": "inner room vs building"}
     short = {"HELPED": "**HELPED**", "NEUTRAL": "NEUTRAL", "HURT": "**HURT**", "NOT_APPLICABLE": "n/a"}
     md = ["# 005I Track B — failure-type scorecard (real development set)", "",
           "Rules: `methodology.md` §8, fixed before scoring and applied mechanically by `aggregate.py`. Baselines are the same-frame",
           "source-cv layers: `SCV-UNION` (SCV-LINES ∪ wall bands ∪ boundary pieces ∪ bridged gaps) for line providers, `SCV-OUTLINE` (the",
-          "default reading's opening-aware outline) for masks. Truth is the agent's manual annotation (a limitation). No single scalar.", ""]
+          "default reading's opening-aware outline) for masks. Truth is the agent's manual annotation (a limitation). No single scalar.", "",
+          "**†** = FRAGILE: the cell changes when the truth is displaced by ±u (u = the house's largest stated vertex uncertainty,",
+          "2–5 px; `development-results.json` → `truthBufferFragility`). Rule fixes after review B8 (window-rule kinds, not-applicable",
+          "before NEUTRAL when no mask is selected) are listed in `methodology.md` §11.", ""]
     totals = {}
     for p in EXT_LINE_CFGS + MASK_CFGS + ["TRIVIAL-EXTENT"]:
         if p == "TRIVIAL-EXTENT":
             md += ["## Reference: TRIVIAL-EXTENT (no model)", "", "The same mask rules applied to the production plan-extent rectangle itself (the information the MSAM-BOX prompt", "already carries). Not a provider; added so the MobileSAM cells can be read against what the box alone earns.", ""]
         md += ["## %s" % p, "", "| house | " + " | ".join(names[c] for c in classes) + " |", "| --- |" + " --- |" * len(classes)]
         for row in [x for x in rows if x["provider"] == p]:
-            md.append("| `%s` | " % row["frame"] + " | ".join(short[row["cells"][c][0]] for c in classes) + " |")
+            md.append("| `%s` | " % row["frame"] + " | ".join(short[row["cells"][c][0]] + (" †" if (row["frame"], p, c) in fragile else "") for c in classes) + " |")
             for c in classes:
                 v = row["cells"][c][0]
                 totals.setdefault(p, {}).setdefault(v, 0)
@@ -425,10 +614,19 @@ def main():
             notes = ["%s: %s" % (names[c], "; ".join(str(s) for s in row["cells"][c][1])) for c in classes if row["cells"][c][0] != "NOT_APPLICABLE" and row["cells"][c][1]]
             md.append("- `%s` — " % row["frame"] + (" · ".join(notes) if notes else "nothing applicable"))
         md.append("")
-    md += ["## Totals (cells, all classes and houses)", "", "| provider | HELPED | NEUTRAL | HURT | n/a |", "| --- | --- | --- | --- | --- |"]
+    md += ["## Totals (cells, all classes and houses)", "", "| provider | HELPED | NEUTRAL | HURT | n/a | fragile (±u) |", "| --- | --- | --- | --- | --- | --- |"]
     for p in EXT_LINE_CFGS + MASK_CFGS + ["TRIVIAL-EXTENT"]:
         tt = totals.get(p, {})
-        md.append("| %s | %d | %d | %d | %d |" % (p, tt.get("HELPED", 0), tt.get("NEUTRAL", 0), tt.get("HURT", 0), tt.get("NOT_APPLICABLE", 0)))
+        md.append("| %s | %d | %d | %d | %d | %d |" % (p, tt.get("HELPED", 0), tt.get("NEUTRAL", 0), tt.get("HURT", 0), tt.get("NOT_APPLICABLE", 0), sum(1 for k in fragile if k[1] == p)))
+    md.append("")
+    md += ["## Fragile cells (±u truth buffer)", ""]
+    if fragile:
+        md += ["| house | provider | class | stated truth | −u | +u |", "| --- | --- | --- | --- | --- | --- |"]
+        for (fid, p, c), v in sorted(fragile.items()):
+            b0 = next(x for x in rows if x["frame"] == fid and x["provider"] == p)["cells"][c][0]
+            md.append("| `%s` | %s | %s | %s | %s | %s |" % (fid, p, names[c], b0, v.get("-u", b0), v.get("+u", b0)))
+    else:
+        md.append("None: every cell is the same at −u, 0 and +u.")
     md.append("")
     with open(os.path.join(a.out, "failure-type-scorecard.md"), "w") as fo:
         fo.write("\n".join(md))

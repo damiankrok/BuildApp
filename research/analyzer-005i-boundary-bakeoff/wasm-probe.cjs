@@ -6,8 +6,12 @@
  *
  * Loads the ONNX graphs exported by providers/onnx_export.py into onnxruntime-web (WebAssembly SIMD, ONE thread —
  * the 005H route the phone already uses for the numeric recogniser) under the phone's Node line (18.20.4), runs one
- * inference on a real frame's input, and records load time, inference time, peak RSS and the max abs difference
- * against PyTorch's output on the same input. Nothing here is shipped or integrated.
+ * inference on a real frame's input, and records load time, inference time, RSS after inference and the max abs
+ * difference against PyTorch's output on the same input. Nothing here is shipped or integrated.
+ *
+ * Memory caveat (post-review D8): RSS is sampled every 20 ms on the event loop, and a single-threaded WASM inference
+ * blocks that loop, so the sampler cannot see the in-inference peak. `rssAfterMiB` (and the sampled maximum) is the
+ * RSS after inference: a LOWER BOUND on the peak, not the peak.
  */
 const fs = require('node:fs')
 const path = require('node:path')
@@ -75,7 +79,8 @@ async function main() {
     orig_im_size: new ort.Tensor('float32', new Float32Array([853, 853]), [2]),
   })
   clearInterval(tick)
-  out.peakRssMiB = Math.round(peak / 2 ** 20)
+  // the event-loop sampler is blocked during inference: a lower bound on the peak, not the peak (D8)
+  out.sampledMaxRssMiB_lowerBoundOnPeak = Math.round(peak / 2 ** 20)
   fs.writeFileSync(arg('out'), JSON.stringify(out, null, 1))
 }
 

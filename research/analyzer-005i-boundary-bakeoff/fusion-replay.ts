@@ -18,7 +18,7 @@ import type { Mask } from '@buildapp/source-cv'
 import type { SourceObservationGraph } from '@buildapp/source-observations'
 import type { MetricEvidenceSet } from '@buildapp/source-metrics'
 import { boundaryExtension, decomposePlan, exteriorTicksOf, extentSidesOf, planCallouts, planExtent, planSheet } from '@buildapp/reconstruction'
-import { r3 } from './baseline.js'
+import { r3, sha256 } from './baseline.js'
 
 const arg = (name: string): string | undefined => {
   const i = process.argv.indexOf(`--${name}`)
@@ -71,7 +71,11 @@ async function main(): Promise<void> {
     const id = m.replace(/\.meta\.json$/, '')
     const meta = JSON.parse(readFileSync(join(framesDir, m), 'utf8')) as { frameId: string; oracle?: { scaleMetresPerPx: number } }
     // The decoded frame (the very pixels every provider saw): RGBA as the production decoder returned it.
-    const raster = decodeRgbaPng(join(framesDir, `${id}.rgb.png`))
+    const rgbFile = join(framesDir, `${id}.rgb.png`)
+    const raster = decodeRgbaPng(rgbFile)
+    // Same-input record (post-review B5): the frame bytes and every observation file this replay reads, by hash;
+    // score.py asserts them against the frame meta and the current observation files.
+    const input: { rgbPngSha256: string; observationFiles: Record<string, string> } = { rgbPngSha256: sha256(readFileSync(rgbFile)), observationFiles: {} }
     const sheet = planSheet({ id: meta.frameId } as never, { raster: () => raster } as never)
     if (!sheet) continue
     const { mask, bands, wallPx } = sheet
@@ -103,7 +107,9 @@ async function main(): Promise<void> {
           missing = true
           continue
         }
-        const d = JSON.parse(readFileSync(p, 'utf8')) as { observations: Array<{ geometry: { type: string; a: [number, number]; b: [number, number] } }> }
+        const bytes = readFileSync(p)
+        input.observationFiles[f.replace('{set}', set).replace('{id}', id)] = sha256(bytes)
+        const d = JSON.parse(bytes.toString('utf8')) as { observations: Array<{ geometry: { type: string; a: [number, number]; b: [number, number] } }> }
         for (const o of d.observations as Array<{ configId?: string; geometry: { type: string; a: [number, number]; b: [number, number] } }>) {
           if (o.geometry?.type !== 'SEGMENT') continue
           if (f.startsWith('source-cv/') && o.configId !== 'SCV-LINES') continue
@@ -140,7 +146,7 @@ async function main(): Promise<void> {
         results[cfg.id] = { error: String((e as Error).message) }
       }
     }
-    writeFileSync(join(outDir, `${id}.json`), JSON.stringify({ researchOnly: true, id, frameId: meta.frameId, wallPx, results }))
+    writeFileSync(join(outDir, `${id}.json`), JSON.stringify({ researchOnly: true, id, frameId: meta.frameId, wallPx, input, results }))
     console.log(`${set}/${id}: ${Object.entries(results).map(([k, v]) => `${k}=${JSON.stringify((v as { gapTallies?: unknown }).gapTallies ?? v)}`).join(' ').slice(0, 400)}`)
   }
 }

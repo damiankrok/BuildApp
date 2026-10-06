@@ -20,28 +20,60 @@
     "sum_additionalSolidCoverageM": 0.999,
     "sum_cornersWithoutSegment": 3,
     "sum_exclusionOutlineAddedOverScvM": 2.974,
-    "sum_falseLinesDistractors": 1670.0
+    "sum_falseLinesDistractors": 1670.0,
+    "unionSensitivity": {
+     "inkOnlyUnion": {
+      "framesWithAdditionalSolidCoverage>=0.5m": 1,
+      "max_additionalOpeningCoverageM": 0.733,
+      "max_additionalSolidCoverageM": 0.999,
+      "sum_additionalOpeningCoverageM": 0.733,
+      "sum_additionalSolidCoverageM": 0.999
+     },
+     "noGapsUnion": {
+      "framesWithAdditionalSolidCoverage>=0.5m": 1,
+      "max_additionalOpeningCoverageM": 0.733,
+      "max_additionalSolidCoverageM": 0.999,
+      "sum_additionalOpeningCoverageM": 0.733,
+      "sum_additionalSolidCoverageM": 0.999
+     }
+    }
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "frames": 23,
     "framesWithAdditionalSolidCoverage>=0.5m": 0,
     "mean_additionalOpeningCoverageShare": 0.0,
     "mean_additionalSolidCoverageShare": 0.0,
-    "mean_angularErrorDeg": 0.3364,
-    "mean_continuityAcrossOpenings": 0.8621,
-    "mean_duplicateRate": 1.0753,
+    "mean_angularErrorDeg": 0.3355,
+    "mean_continuityAcrossOpenings": 0.864,
+    "mean_duplicateRate": 1.0781,
     "mean_exteriorWallCoverage": 0.9844,
-    "mean_fragmentationSegmentsPerMetre": 2.1892,
+    "mean_fragmentationSegmentsPerMetre": 2.1692,
     "mean_longWallRecovery": 0.9075,
-    "mean_supportedLineRecall": 0.9776,
-    "mean_unsupportedLineRate": 0.0134,
+    "mean_supportedLineRecall": 0.9779,
+    "mean_unsupportedLineRate": 0.013,
     "median_cornerEndpointErrorPx": 1.0,
     "median_count": 456.0,
     "sum_additionalOpeningCoverageM": 0.0,
     "sum_additionalSolidCoverageM": 0.0,
     "sum_cornersWithoutSegment": 2,
     "sum_exclusionOutlineAddedOverScvM": 0.133,
-    "sum_falseLinesDistractors": 4680.0
+    "sum_falseLinesDistractors": 4722.0,
+    "unionSensitivity": {
+     "inkOnlyUnion": {
+      "framesWithAdditionalSolidCoverage>=0.5m": 0,
+      "max_additionalOpeningCoverageM": 0.0,
+      "max_additionalSolidCoverageM": 0.0,
+      "sum_additionalOpeningCoverageM": 0.0,
+      "sum_additionalSolidCoverageM": 0.0
+     },
+     "noGapsUnion": {
+      "framesWithAdditionalSolidCoverage>=0.5m": 0,
+      "max_additionalOpeningCoverageM": 0.0,
+      "max_additionalSolidCoverageM": 0.0,
+      "sum_additionalOpeningCoverageM": 0.0,
+      "sum_additionalSolidCoverageM": 0.0
+     }
+    }
    },
    "DEEPLSD-WF": {
     "frames": 23,
@@ -62,7 +94,23 @@
     "sum_additionalSolidCoverageM": 0.955,
     "sum_cornersWithoutSegment": 2,
     "sum_exclusionOutlineAddedOverScvM": 3.196,
-    "sum_falseLinesDistractors": 1709.0
+    "sum_falseLinesDistractors": 1709.0,
+    "unionSensitivity": {
+     "inkOnlyUnion": {
+      "framesWithAdditionalSolidCoverage>=0.5m": 1,
+      "max_additionalOpeningCoverageM": 0.733,
+      "max_additionalSolidCoverageM": 0.955,
+      "sum_additionalOpeningCoverageM": 0.733,
+      "sum_additionalSolidCoverageM": 0.955
+     },
+     "noGapsUnion": {
+      "framesWithAdditionalSolidCoverage>=0.5m": 1,
+      "max_additionalOpeningCoverageM": 0.733,
+      "max_additionalSolidCoverageM": 0.955,
+      "sum_additionalOpeningCoverageM": 0.733,
+      "sum_additionalSolidCoverageM": 0.955
+     }
+    }
    },
    "ELSED-DEFAULT": {
     "frames": 23,
@@ -83,7 +131,23 @@
     "sum_additionalSolidCoverageM": 0.688,
     "sum_cornersWithoutSegment": 2,
     "sum_exclusionOutlineAddedOverScvM": 2.486,
-    "sum_falseLinesDistractors": 718.0
+    "sum_falseLinesDistractors": 718.0,
+    "unionSensitivity": {
+     "inkOnlyUnion": {
+      "framesWithAdditionalSolidCoverage>=0.5m": 1,
+      "max_additionalOpeningCoverageM": 0.755,
+      "max_additionalSolidCoverageM": 0.688,
+      "sum_additionalOpeningCoverageM": 0.755,
+      "sum_additionalSolidCoverageM": 0.688
+     },
+     "noGapsUnion": {
+      "framesWithAdditionalSolidCoverage>=0.5m": 1,
+      "max_additionalOpeningCoverageM": 0.755,
+      "max_additionalSolidCoverageM": 0.688,
+      "sum_additionalOpeningCoverageM": 0.755,
+      "sum_additionalSolidCoverageM": 0.688
+     }
+    }
    },
    "SCV-LINES": {
     "frames": 23,
@@ -114,10 +178,10 @@
     },
     "frames": 22,
     "framesOK": 0,
+    "mean_ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.4215,
     "mean_boundaryIoU": 0.0221,
     "mean_boundaryPrecision": 0.0715,
     "mean_boundaryRecall": 0.036,
-    "mean_oracleUpperBoundIoU_NOT_A_SELECTION": 0.4215,
     "mean_regionIoU": 0.324,
     "median_regionIoU": 0.35,
     "min_regionIoU": 0.0159
@@ -241,7 +305,7 @@
    }
   }
  },
- "baselineInputs": "extent = production planExtent with no chains (wall witness), never the truth; it feeds the boundary layer, the MobileSAM BOX / SOURCE prompts and the AUTO selection window. ORACLE SCALE only (generator metres per pixel; thresholds, not a prompt). No chains (methodology \u00a77.1, \u00a711 E6 correction)",
+ "baselineInputs": "extent = production planExtent with no chains (wall witness), never the truth; it feeds the boundary layer, the MobileSAM BOX / SOURCE prompts and the AUTO selection window. ORACLE SCALE (generator metres per pixel, labelled): it sets the boundary layer's metric thresholds, so it shapes the SCV-OUTLINE / SCV-BUILT comparators, the BUILT cells whose centres are the MSAM-SOURCE-PROMPTS positives, and the gap classes; it never enters the BOX prompt, the AUTO selection or any line detector. No chains (methodology \u00a77.1, \u00a711 E6 correction, post-review B7)",
  "cases": [
   {
    "bytesSha256": "5b0dc4a69e4bee34a11403f4a391c7ad87d5b471e98f3d23af4cb3f8fa2836af",
@@ -427,14 +491,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "MSAM-BOX": {
       "falseBridges": 0,
-      "usefulBridges": 2
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 2
+      },
+      "usefulBridges": 1
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 2
+      },
       "usefulBridges": 2
      },
      "SCV-LINES": {
@@ -450,7 +526,7 @@
      "DEEPLSD-WF": 0,
      "ELSED-DEFAULT": 0,
      "MSAM-AUTO": 0,
-     "MSAM-BOX": 1,
+     "MSAM-BOX": 0,
      "MSAM-SOURCE-PROMPTS": 1
     }
    },
@@ -671,14 +747,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "SCV-LINES": {
@@ -915,14 +1003,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "SCV-LINES": {
@@ -1184,14 +1284,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
-      "usefulBridges": 1
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
+      "usefulBridges": 0
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "SCV-LINES": {
@@ -1207,7 +1319,7 @@
      "DEEPLSD-WF": 0,
      "ELSED-DEFAULT": 0,
      "MSAM-AUTO": 0,
-     "MSAM-BOX": 1,
+     "MSAM-BOX": 0,
      "MSAM-SOURCE-PROMPTS": 0
     }
    },
@@ -1428,14 +1540,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 3
+      },
       "usefulBridges": 3
      },
      "SCV-LINES": {
@@ -1672,14 +1796,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "SCV-LINES": {
@@ -1916,14 +2052,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "SCV-LINES": {
@@ -1976,24 +2124,24 @@
      "addedSegments": 463,
      "bridged": {
       "pocketMouths": 0,
-      "strong": 3,
+      "strong": 4,
       "unjudged": 0,
-      "weak": 2
+      "weak": 1
      },
      "builtFailureTypes": [
       "OK"
      ],
      "builtRegionIoU": 0.9122,
      "deltaBuiltIoU": 0.0,
-     "deltaOpeningsReadAsWall": 0.0066,
+     "deltaOpeningsReadAsWall": 0.0,
      "deltaOutlineIoU": 0.0,
      "gapTallies": {
       "DRAWING_BREAK_SUPPORTED": 0,
-      "OPENING_SUPPORTED": 3,
+      "OPENING_SUPPORTED": 4,
       "TRUE_EXTERIOR_GAP": 0,
-      "UNKNOWN_GAP": 2
+      "UNKNOWN_GAP": 1
      },
-     "openingsReadAsWall": 0.043,
+     "openingsReadAsWall": 0.0364,
      "outlineAccepted": false,
      "outlineFailureTypes": [
       "OK"
@@ -2160,14 +2308,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "SCV-LINES": {
@@ -2229,7 +2389,7 @@
      ],
      "builtRegionIoU": 0.9087,
      "deltaBuiltIoU": 0.0,
-     "deltaOpeningsReadAsWall": 0.0062,
+     "deltaOpeningsReadAsWall": 0.0093,
      "deltaOutlineIoU": 0.0,
      "gapTallies": {
       "DRAWING_BREAK_SUPPORTED": 2,
@@ -2237,7 +2397,7 @@
       "TRUE_EXTERIOR_GAP": 1,
       "UNKNOWN_GAP": 1
      },
-     "openingsReadAsWall": 0.0431,
+     "openingsReadAsWall": 0.0462,
      "outlineAccepted": false,
      "outlineFailureTypes": [
       "OK"
@@ -2404,14 +2564,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "SCV-LINES": {
@@ -2648,14 +2820,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "SCV-LINES": {
@@ -2717,7 +2901,7 @@
      ],
      "builtRegionIoU": 0.9087,
      "deltaBuiltIoU": 0.0,
-     "deltaOpeningsReadAsWall": 0.0031,
+     "deltaOpeningsReadAsWall": 0.0,
      "deltaOutlineIoU": 0.0,
      "gapTallies": {
       "DRAWING_BREAK_SUPPORTED": 1,
@@ -2725,7 +2909,7 @@
       "TRUE_EXTERIOR_GAP": 1,
       "UNKNOWN_GAP": 1
      },
-     "openingsReadAsWall": 0.04,
+     "openingsReadAsWall": 0.0369,
      "outlineAccepted": false,
      "outlineFailureTypes": [
       "OK"
@@ -2892,14 +3076,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 3
+      },
       "usefulBridges": 3
      },
      "SCV-LINES": {
@@ -2964,7 +3160,7 @@
      "deltaOpeningsReadAsWall": 0.0,
      "deltaOutlineIoU": 0.0,
      "gapTallies": {
-      "DRAWING_BREAK_SUPPORTED": 3,
+      "DRAWING_BREAK_SUPPORTED": 2,
       "OPENING_SUPPORTED": 3,
       "TRUE_EXTERIOR_GAP": 5,
       "UNKNOWN_GAP": 3
@@ -3136,14 +3332,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "SCV-LINES": {
@@ -3380,14 +3588,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "SCV-LINES": {
@@ -3624,14 +3844,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 2
+      },
       "usefulBridges": 2
      },
      "SCV-LINES": {
@@ -3693,15 +3925,15 @@
      ],
      "builtRegionIoU": 0.8884,
      "deltaBuiltIoU": 0.0,
-     "deltaOpeningsReadAsWall": 0.0099,
+     "deltaOpeningsReadAsWall": 0.0066,
      "deltaOutlineIoU": 0.0091,
      "gapTallies": {
-      "DRAWING_BREAK_SUPPORTED": 4,
+      "DRAWING_BREAK_SUPPORTED": 3,
       "OPENING_SUPPORTED": 4,
-      "TRUE_EXTERIOR_GAP": 1,
+      "TRUE_EXTERIOR_GAP": 0,
       "UNKNOWN_GAP": 2
      },
-     "openingsReadAsWall": 0.0462,
+     "openingsReadAsWall": 0.0429,
      "outlineAccepted": false,
      "outlineFailureTypes": [
       "IMPRECISE"
@@ -3868,14 +4100,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "SCV-LINES": {
@@ -3937,7 +4181,7 @@
      ],
      "builtRegionIoU": 0.9122,
      "deltaBuiltIoU": 0.0,
-     "deltaOpeningsReadAsWall": 0.0033,
+     "deltaOpeningsReadAsWall": 0.0066,
      "deltaOutlineIoU": 0.0,
      "gapTallies": {
       "DRAWING_BREAK_SUPPORTED": 0,
@@ -3945,7 +4189,7 @@
       "TRUE_EXTERIOR_GAP": 0,
       "UNKNOWN_GAP": 1
      },
-     "openingsReadAsWall": 0.0397,
+     "openingsReadAsWall": 0.043,
      "outlineAccepted": false,
      "outlineFailureTypes": [
       "OK"
@@ -4151,7 +4395,7 @@
      "deltaOpeningsReadAsWall": 0.0,
      "deltaOutlineIoU": 0.0,
      "gapTallies": {
-      "DRAWING_BREAK_SUPPORTED": 7,
+      "DRAWING_BREAK_SUPPORTED": 5,
       "OPENING_SUPPORTED": 0,
       "TRUE_EXTERIOR_GAP": 4,
       "UNKNOWN_GAP": 3
@@ -4323,14 +4567,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 2
+      },
       "usefulBridges": 2
      },
      "SCV-LINES": {
@@ -4383,7 +4639,7 @@
      "addedSegments": 492,
      "bridged": {
       "pocketMouths": 0,
-      "strong": 4,
+      "strong": 0,
       "unjudged": 1,
       "weak": 1
      },
@@ -4392,15 +4648,15 @@
      ],
      "builtRegionIoU": 0.8964,
      "deltaBuiltIoU": 0.0,
-     "deltaOpeningsReadAsWall": 0.4862,
+     "deltaOpeningsReadAsWall": 0.5724,
      "deltaOutlineIoU": 0.8964,
      "gapTallies": {
-      "DRAWING_BREAK_SUPPORTED": 34,
-      "OPENING_SUPPORTED": 4,
-      "TRUE_EXTERIOR_GAP": 3,
+      "DRAWING_BREAK_SUPPORTED": 21,
+      "OPENING_SUPPORTED": 0,
+      "TRUE_EXTERIOR_GAP": 4,
       "UNKNOWN_GAP": 2
      },
-     "openingsReadAsWall": 0.8,
+     "openingsReadAsWall": 0.8862,
      "outlineAccepted": false,
      "outlineFailureTypes": [
       "IMPRECISE"
@@ -4567,14 +4823,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "SCV-LINES": {
@@ -4639,9 +4907,9 @@
      "deltaOpeningsReadAsWall": 0.0123,
      "deltaOutlineIoU": 0.0,
      "gapTallies": {
-      "DRAWING_BREAK_SUPPORTED": 1,
+      "DRAWING_BREAK_SUPPORTED": 2,
       "OPENING_SUPPORTED": 3,
-      "TRUE_EXTERIOR_GAP": 2,
+      "TRUE_EXTERIOR_GAP": 3,
       "UNKNOWN_GAP": 2
      },
      "openingsReadAsWall": 0.0432,
@@ -4811,14 +5079,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "SCV-LINES": {
@@ -5055,14 +5335,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
-      "usefulBridges": 2
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 2
+      },
+      "usefulBridges": 1
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "SCV-LINES": {
@@ -5115,9 +5407,9 @@
      "addedSegments": 450,
      "bridged": {
       "pocketMouths": 0,
-      "strong": 7,
+      "strong": 5,
       "unjudged": 0,
-      "weak": 1
+      "weak": 2
      },
      "builtFailureTypes": [
       "OK"
@@ -5128,9 +5420,9 @@
      "deltaOutlineIoU": 0.0,
      "gapTallies": {
       "DRAWING_BREAK_SUPPORTED": 15,
-      "OPENING_SUPPORTED": 7,
+      "OPENING_SUPPORTED": 5,
       "TRUE_EXTERIOR_GAP": 0,
-      "UNKNOWN_GAP": 1
+      "UNKNOWN_GAP": 2
      },
      "openingsReadAsWall": 0.1523,
      "outlineAccepted": false,
@@ -5299,14 +5591,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 2
+      },
       "usefulBridges": 2
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 2
+      },
       "usefulBridges": 2
      },
      "SCV-LINES": {
@@ -5359,8 +5663,8 @@
      "addedSegments": 457,
      "bridged": {
       "pocketMouths": 0,
-      "strong": 5,
-      "unjudged": 1,
+      "strong": 6,
+      "unjudged": 0,
       "weak": 1
      },
      "builtFailureTypes": [
@@ -5372,9 +5676,9 @@
      "deltaOutlineIoU": 0.0,
      "gapTallies": {
       "DRAWING_BREAK_SUPPORTED": 2,
-      "OPENING_SUPPORTED": 5,
+      "OPENING_SUPPORTED": 6,
       "TRUE_EXTERIOR_GAP": 2,
-      "UNKNOWN_GAP": 2
+      "UNKNOWN_GAP": 1
      },
      "openingsReadAsWall": 0.0332,
      "outlineAccepted": false,
@@ -5543,14 +5847,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "SCV-LINES": {
@@ -5802,6 +6118,16 @@
      "fragmentationSegmentsPerMetre": 0.823,
      "longWallRecovery": 0.9316,
      "supportedLineRecall": 0.6934,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -5810,21 +6136,31 @@
      "additionalOpeningCoverageShare": 0.0,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 0.228,
+     "angularErrorDeg": 0.238,
      "continuityAcrossOpenings": 0.888,
      "cornerEndpointErrorMedianPx": 1.0,
      "cornersWithoutSegment": 0,
      "count": 460,
-     "duplicateRate": 1.189,
+     "duplicateRate": 1.156,
      "exclusionOutlineAddedOverScvM": 0.0,
      "exclusionOutlineLinesM": 0.0,
      "exteriorWallCoverage": 1.0,
-     "falseLinesDistractors": 230,
-     "falseLinesDistractorsLengthPx": 16422.3,
+     "falseLinesDistractors": 231,
+     "falseLinesDistractorsLengthPx": 16439.7,
      "fragmentationSegmentsPerMetre": 2.053,
      "longWallRecovery": 0.9564,
-     "supportedLineRecall": 0.9948,
-     "unsupportedLineRate": 0.0065
+     "supportedLineRecall": 0.9973,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
+     "unsupportedLineRate": 0.0043
     },
     "DEEPLSD-WF": {
      "additionalIds": [],
@@ -5846,6 +6182,16 @@
      "fragmentationSegmentsPerMetre": 0.893,
      "longWallRecovery": 0.9545,
      "supportedLineRecall": 0.9973,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "ELSED-DEFAULT": {
@@ -5868,6 +6214,16 @@
      "fragmentationSegmentsPerMetre": 0.755,
      "longWallRecovery": 0.9529,
      "supportedLineRecall": 0.9914,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "SCV-LINES": {
@@ -5891,6 +6247,7 @@
    "openingLengthM": 8.125,
    "regions": {
     "MSAM-AUTO": {
+     "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.4881,
      "areaRatio": 0.4881,
      "autoMasks": 10,
      "bodyCoverage": {
@@ -5906,7 +6263,6 @@
      ],
      "openingLeakage": 0.0,
      "openingRecall": 0.3709,
-     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.4881,
      "outsideArea": 0.0,
      "overreach": {},
      "predictedIoU": 0.975,
@@ -6075,9 +6431,28 @@
      "textDimensionInclusion": 0.0
     }
    },
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "FUSION_REPLAY",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 1.0,
     "exteriorWallCoverage": 1.0
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    }
    },
    "solidLengthM": 36.63,
    "tolerancesPx": {
@@ -6118,6 +6493,16 @@
      "fragmentationSegmentsPerMetre": 1.11,
      "longWallRecovery": 0.8867,
      "supportedLineRecall": 0.6795,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.733,
+       "additionalSolidCoverageM": 0.999
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.733,
+       "additionalSolidCoverageM": 0.999
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -6126,21 +6511,31 @@
      "additionalOpeningCoverageShare": 0.0,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 0.385,
+     "angularErrorDeg": 0.311,
      "continuityAcrossOpenings": 0.7863,
      "cornerEndpointErrorMedianPx": 1.0,
      "cornersWithoutSegment": 0,
      "count": 462,
-     "duplicateRate": 1.069,
+     "duplicateRate": 1.118,
      "exclusionOutlineAddedOverScvM": 0.0,
      "exclusionOutlineLinesM": 0.0,
      "exteriorWallCoverage": 0.9399,
-     "falseLinesDistractors": 208,
-     "falseLinesDistractorsLengthPx": 12771.7,
-     "fragmentationSegmentsPerMetre": 2.124,
+     "falseLinesDistractors": 213,
+     "falseLinesDistractorsLengthPx": 13027.5,
+     "fragmentationSegmentsPerMetre": 2.006,
      "longWallRecovery": 1.0,
      "supportedLineRecall": 0.9882,
-     "unsupportedLineRate": 0.0152
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
+     "unsupportedLineRate": 0.0195
     },
     "DEEPLSD-WF": {
      "additionalIds": [
@@ -6171,6 +6566,16 @@
      "fragmentationSegmentsPerMetre": 1.375,
      "longWallRecovery": 0.9992,
      "supportedLineRecall": 0.9982,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.733,
+       "additionalSolidCoverageM": 0.955
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.733,
+       "additionalSolidCoverageM": 0.955
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "ELSED-DEFAULT": {
@@ -6201,6 +6606,16 @@
      "fragmentationSegmentsPerMetre": 1.17,
      "longWallRecovery": 0.9957,
      "supportedLineRecall": 0.9985,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.755,
+       "additionalSolidCoverageM": 0.688
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.755,
+       "additionalSolidCoverageM": 0.688
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "SCV-LINES": {
@@ -6224,6 +6639,7 @@
    "openingLengthM": 7.792,
    "regions": {
     "MSAM-AUTO": {
+     "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.3422,
      "areaRatio": 0.3422,
      "autoMasks": 11,
      "bodyCoverage": {
@@ -6240,7 +6656,6 @@
      ],
      "openingLeakage": 0.0,
      "openingRecall": 0.0,
-     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.3422,
      "outsideArea": 0.0,
      "overreach": {},
      "predictedIoU": 0.977,
@@ -6408,9 +6823,28 @@
      "textDimensionInclusion": 0.0
     }
    },
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "FUSION_REPLAY",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 0.9031,
     "exteriorWallCoverage": 0.9564
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 0.7863,
+     "exteriorWallCoverage": 0.9564
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 0.7863,
+     "exteriorWallCoverage": 0.9564
+    }
    },
    "solidLengthM": 29.548,
    "tolerancesPx": {
@@ -6443,6 +6877,16 @@
      "fragmentationSegmentsPerMetre": 0.915,
      "longWallRecovery": 0.945,
      "supportedLineRecall": 0.7752,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -6451,21 +6895,31 @@
      "additionalOpeningCoverageShare": 0.0,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 0.312,
+     "angularErrorDeg": 0.367,
      "continuityAcrossOpenings": 1.0,
      "cornerEndpointErrorMedianPx": 0.51,
      "cornersWithoutSegment": 0,
      "count": 441,
-     "duplicateRate": 1.757,
+     "duplicateRate": 1.837,
      "exclusionOutlineAddedOverScvM": 0.0,
      "exclusionOutlineLinesM": 0.0,
      "exteriorWallCoverage": 1.0,
-     "falseLinesDistractors": 191,
-     "falseLinesDistractorsLengthPx": 14260.9,
-     "fragmentationSegmentsPerMetre": 2.864,
+     "falseLinesDistractors": 184,
+     "falseLinesDistractorsLengthPx": 13946.9,
+     "fragmentationSegmentsPerMetre": 2.892,
      "longWallRecovery": 1.0,
      "supportedLineRecall": 1.0,
-     "unsupportedLineRate": 0.0045
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
+     "unsupportedLineRate": 0.0023
     },
     "DEEPLSD-WF": {
      "additionalIds": [],
@@ -6487,6 +6941,16 @@
      "fragmentationSegmentsPerMetre": 1.059,
      "longWallRecovery": 0.945,
      "supportedLineRecall": 0.9997,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "ELSED-DEFAULT": {
@@ -6509,6 +6973,16 @@
      "fragmentationSegmentsPerMetre": 0.804,
      "longWallRecovery": 0.7485,
      "supportedLineRecall": 0.9945,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "SCV-LINES": {
@@ -6532,6 +7006,7 @@
    "openingLengthM": 6.704,
    "regions": {
     "MSAM-AUTO": {
+     "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.7631,
      "areaRatio": 0.3532,
      "autoMasks": 5,
      "bodyCoverage": {},
@@ -6545,7 +7020,6 @@
      ],
      "openingLeakage": 0.0,
      "openingRecall": 0.0,
-     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.7631,
      "outsideArea": 0.0,
      "overreach": {},
      "predictedIoU": 0.989,
@@ -6700,9 +7174,28 @@
      "textDimensionInclusion": 0.0
     }
    },
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "FUSION_REPLAY",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 1.0,
     "exteriorWallCoverage": 1.0
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    }
    },
    "solidLengthM": 29.26,
    "tolerancesPx": {
@@ -6735,6 +7228,16 @@
      "fragmentationSegmentsPerMetre": 1.465,
      "longWallRecovery": 0.9259,
      "supportedLineRecall": 0.9958,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -6743,7 +7246,7 @@
      "additionalOpeningCoverageShare": 0.0,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 1.087,
+     "angularErrorDeg": 1.145,
      "continuityAcrossOpenings": 0.8677,
      "cornerEndpointErrorMedianPx": 1.98,
      "cornersWithoutSegment": 0,
@@ -6752,11 +7255,21 @@
      "exclusionOutlineAddedOverScvM": 0.0,
      "exclusionOutlineLinesM": 0.0,
      "exteriorWallCoverage": 1.0,
-     "falseLinesDistractors": 60,
-     "falseLinesDistractorsLengthPx": 8582.0,
+     "falseLinesDistractors": 59,
+     "falseLinesDistractorsLengthPx": 8534.8,
      "fragmentationSegmentsPerMetre": 1.195,
      "longWallRecovery": 0.9289,
-     "supportedLineRecall": 0.9744,
+     "supportedLineRecall": 0.9808,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "DEEPLSD-WF": {
@@ -6779,6 +7292,16 @@
      "fragmentationSegmentsPerMetre": 1.88,
      "longWallRecovery": 0.9273,
      "supportedLineRecall": 0.997,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "ELSED-DEFAULT": {
@@ -6801,6 +7324,16 @@
      "fragmentationSegmentsPerMetre": 1.002,
      "longWallRecovery": 0.926,
      "supportedLineRecall": 0.9906,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "SCV-LINES": {
@@ -6823,9 +7356,27 @@
    "metresPerPx": 0.0222,
    "openingLengthM": 7.215,
    "regions": {},
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 0.8677,
     "exteriorWallCoverage": 1.0
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 0.8677,
+     "exteriorWallCoverage": 1.0
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 0.8677,
+     "exteriorWallCoverage": 1.0
+    }
    },
    "solidLengthM": 34.743,
    "tolerancesPx": {
@@ -6858,6 +7409,16 @@
      "fragmentationSegmentsPerMetre": 0.96,
      "longWallRecovery": 0.9285,
      "supportedLineRecall": 0.6927,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -6866,21 +7427,31 @@
      "additionalOpeningCoverageShare": 0.0,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 0.221,
+     "angularErrorDeg": 0.198,
      "continuityAcrossOpenings": 0.899,
      "cornerEndpointErrorMedianPx": 1.0,
      "cornersWithoutSegment": 0,
      "count": 459,
-     "duplicateRate": 1.105,
+     "duplicateRate": 1.103,
      "exclusionOutlineAddedOverScvM": 0.0,
      "exclusionOutlineLinesM": 0.0,
      "exteriorWallCoverage": 1.0,
-     "falseLinesDistractors": 230,
-     "falseLinesDistractorsLengthPx": 16434.6,
-     "fragmentationSegmentsPerMetre": 1.961,
+     "falseLinesDistractors": 236,
+     "falseLinesDistractorsLengthPx": 16666.5,
+     "fragmentationSegmentsPerMetre": 1.984,
      "longWallRecovery": 0.9564,
      "supportedLineRecall": 0.9984,
-     "unsupportedLineRate": 0.0044
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
+     "unsupportedLineRate": 0.0065
     },
     "DEEPLSD-WF": {
      "additionalIds": [],
@@ -6902,6 +7473,16 @@
      "fragmentationSegmentsPerMetre": 1.01,
      "longWallRecovery": 0.9545,
      "supportedLineRecall": 0.9977,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "ELSED-DEFAULT": {
@@ -6924,6 +7505,16 @@
      "fragmentationSegmentsPerMetre": 0.732,
      "longWallRecovery": 0.9533,
      "supportedLineRecall": 0.9922,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "SCV-LINES": {
@@ -6947,6 +7538,7 @@
    "openingLengthM": 9.013,
    "regions": {
     "MSAM-AUTO": {
+     "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.492,
      "areaRatio": 0.492,
      "autoMasks": 10,
      "bodyCoverage": {
@@ -6962,7 +7554,6 @@
      ],
      "openingLeakage": 0.0,
      "openingRecall": 0.4332,
-     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.492,
      "outsideArea": 0.0,
      "overreach": {},
      "predictedIoU": 0.977,
@@ -7130,9 +7721,28 @@
      "textDimensionInclusion": 0.0
     }
    },
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "FUSION_REPLAY",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 1.0,
     "exteriorWallCoverage": 1.0
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    }
    },
    "solidLengthM": 35.742,
    "tolerancesPx": {
@@ -7165,6 +7775,16 @@
      "fragmentationSegmentsPerMetre": 1.007,
      "longWallRecovery": 0.7482,
      "supportedLineRecall": 0.6307,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -7173,21 +7793,31 @@
      "additionalOpeningCoverageShare": 0.0,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 0.35,
-     "continuityAcrossOpenings": 0.9057,
+     "angularErrorDeg": 0.277,
+     "continuityAcrossOpenings": 0.9101,
      "cornerEndpointErrorMedianPx": 1.0,
      "cornersWithoutSegment": 0,
      "count": 454,
-     "duplicateRate": 1.056,
+     "duplicateRate": 1.027,
      "exclusionOutlineAddedOverScvM": 0.0,
      "exclusionOutlineLinesM": 0.0,
      "exteriorWallCoverage": 1.0,
-     "falseLinesDistractors": 216,
-     "falseLinesDistractorsLengthPx": 13633.9,
-     "fragmentationSegmentsPerMetre": 1.946,
+     "falseLinesDistractors": 225,
+     "falseLinesDistractorsLengthPx": 14119.5,
+     "fragmentationSegmentsPerMetre": 1.97,
      "longWallRecovery": 0.7525,
-     "supportedLineRecall": 0.9935,
-     "unsupportedLineRate": 0.011
+     "supportedLineRecall": 1.0,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
+     "unsupportedLineRate": 0.0154
     },
     "DEEPLSD-WF": {
      "additionalIds": [],
@@ -7209,6 +7839,16 @@
      "fragmentationSegmentsPerMetre": 1.005,
      "longWallRecovery": 0.7505,
      "supportedLineRecall": 1.0,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "ELSED-DEFAULT": {
@@ -7231,6 +7871,16 @@
      "fragmentationSegmentsPerMetre": 0.763,
      "longWallRecovery": 0.751,
      "supportedLineRecall": 1.0,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "SCV-LINES": {
@@ -7254,6 +7904,7 @@
    "openingLengthM": 10.123,
    "regions": {
     "MSAM-AUTO": {
+     "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.4351,
      "areaRatio": 0.4351,
      "autoMasks": 6,
      "bodyCoverage": {},
@@ -7267,7 +7918,6 @@
      ],
      "openingLeakage": 0.0,
      "openingRecall": 0.0,
-     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.4351,
      "outsideArea": 0.0,
      "overreach": {},
      "predictedIoU": 0.947,
@@ -7424,9 +8074,28 @@
      "textDimensionInclusion": 0.0
     }
    },
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "FUSION_REPLAY",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 1.0,
     "exteriorWallCoverage": 1.0
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    }
    },
    "solidLengthM": 27.839,
    "tolerancesPx": {
@@ -7459,6 +8128,16 @@
      "fragmentationSegmentsPerMetre": 0.675,
      "longWallRecovery": 0.8058,
      "supportedLineRecall": 0.6969,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -7467,21 +8146,31 @@
      "additionalOpeningCoverageShare": 0.0,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 0.209,
+     "angularErrorDeg": 0.195,
      "continuityAcrossOpenings": 0.8248,
      "cornerEndpointErrorMedianPx": 1.0,
      "cornersWithoutSegment": 0,
      "count": 457,
-     "duplicateRate": 0.98,
+     "duplicateRate": 1.02,
      "exclusionOutlineAddedOverScvM": 0.0,
-     "exclusionOutlineLinesM": 16.352,
+     "exclusionOutlineLinesM": 17.198,
      "exteriorWallCoverage": 1.0,
-     "falseLinesDistractors": 374,
-     "falseLinesDistractorsLengthPx": 27493.1,
+     "falseLinesDistractors": 375,
+     "falseLinesDistractorsLengthPx": 27679.9,
      "fragmentationSegmentsPerMetre": 1.398,
      "longWallRecovery": 0.9456,
      "supportedLineRecall": 1.0,
-     "unsupportedLineRate": 0.0044
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
+     "unsupportedLineRate": 0.0022
     },
     "DEEPLSD-WF": {
      "additionalIds": [],
@@ -7503,6 +8192,16 @@
      "fragmentationSegmentsPerMetre": 0.916,
      "longWallRecovery": 0.9189,
      "supportedLineRecall": 1.0,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "ELSED-DEFAULT": {
@@ -7525,6 +8224,16 @@
      "fragmentationSegmentsPerMetre": 0.773,
      "longWallRecovery": 0.941,
      "supportedLineRecall": 0.9997,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "SCV-LINES": {
@@ -7548,6 +8257,7 @@
    "openingLengthM": 5.195,
    "regions": {
     "MSAM-AUTO": {
+     "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.3539,
      "areaRatio": 0.3539,
      "autoMasks": 9,
      "bodyCoverage": {},
@@ -7561,7 +8271,6 @@
      ],
      "openingLeakage": 0.0,
      "openingRecall": 0.0,
-     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.3539,
      "outsideArea": 0.0,
      "overreach": {
       "TERRACE": 0.0
@@ -7730,9 +8439,28 @@
      "textDimensionInclusion": 0.0
     }
    },
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "FUSION_REPLAY",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 1.0,
     "exteriorWallCoverage": 1.0
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    }
    },
    "solidLengthM": 30.769,
    "tolerancesPx": {
@@ -7765,6 +8493,16 @@
      "fragmentationSegmentsPerMetre": 1.155,
      "longWallRecovery": 0.9346,
      "supportedLineRecall": 0.8649,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -7773,21 +8511,31 @@
      "additionalOpeningCoverageShare": 0.0,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 0.278,
+     "angularErrorDeg": 0.328,
      "continuityAcrossOpenings": 0.8642,
      "cornerEndpointErrorMedianPx": 0.99,
      "cornersWithoutSegment": 0,
      "count": 463,
-     "duplicateRate": 1.041,
+     "duplicateRate": 1.066,
      "exclusionOutlineAddedOverScvM": 0.0,
      "exclusionOutlineLinesM": 0.0,
      "exteriorWallCoverage": 1.0,
-     "falseLinesDistractors": 195,
-     "falseLinesDistractorsLengthPx": 12343.4,
-     "fragmentationSegmentsPerMetre": 2.083,
+     "falseLinesDistractors": 198,
+     "falseLinesDistractorsLengthPx": 12465.1,
+     "fragmentationSegmentsPerMetre": 2.168,
      "longWallRecovery": 0.9456,
      "supportedLineRecall": 0.998,
-     "unsupportedLineRate": 0.0043
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
+     "unsupportedLineRate": 0.0022
     },
     "DEEPLSD-WF": {
      "additionalIds": [],
@@ -7809,6 +8557,16 @@
      "fragmentationSegmentsPerMetre": 1.174,
      "longWallRecovery": 0.9444,
      "supportedLineRecall": 0.9978,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "ELSED-DEFAULT": {
@@ -7831,6 +8589,16 @@
      "fragmentationSegmentsPerMetre": 0.888,
      "longWallRecovery": 0.941,
      "supportedLineRecall": 0.9973,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "SCV-LINES": {
@@ -7854,6 +8622,7 @@
    "openingLengthM": 6.704,
    "regions": {
     "MSAM-AUTO": {
+     "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.866,
      "areaRatio": 0.0159,
      "autoMasks": 4,
      "bodyCoverage": {},
@@ -7867,7 +8636,6 @@
      ],
      "openingLeakage": 0.0,
      "openingRecall": 0.0598,
-     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.866,
      "outsideArea": 0.0,
      "overreach": {},
      "predictedIoU": 0.914,
@@ -8022,9 +8790,28 @@
      "textDimensionInclusion": 0.0
     }
    },
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "FUSION_REPLAY",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 1.0,
     "exteriorWallCoverage": 1.0
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    }
    },
    "solidLengthM": 29.26,
    "tolerancesPx": {
@@ -8057,6 +8844,16 @@
      "fragmentationSegmentsPerMetre": 2.084,
      "longWallRecovery": 0.5432,
      "supportedLineRecall": 0.6428,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.2378
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -8065,21 +8862,31 @@
      "additionalOpeningCoverageShare": 0.0,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 0.199,
-     "continuityAcrossOpenings": 0.8769,
+     "angularErrorDeg": 0.191,
+     "continuityAcrossOpenings": 0.9169,
      "cornerEndpointErrorMedianPx": 2.0,
      "cornersWithoutSegment": 0,
      "count": 454,
-     "duplicateRate": 1.158,
+     "duplicateRate": 1.113,
      "exclusionOutlineAddedOverScvM": 0.0,
      "exclusionOutlineLinesM": 0.0,
      "exteriorWallCoverage": 1.0,
-     "falseLinesDistractors": 210,
-     "falseLinesDistractorsLengthPx": 18227.6,
-     "fragmentationSegmentsPerMetre": 2.313,
+     "falseLinesDistractors": 209,
+     "falseLinesDistractorsLengthPx": 18068.8,
+     "fragmentationSegmentsPerMetre": 2.345,
      "longWallRecovery": 0.9289,
      "supportedLineRecall": 0.9404,
-     "unsupportedLineRate": 0.0264
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
+     "unsupportedLineRate": 0.022
     },
     "DEEPLSD-WF": {
      "additionalIds": [],
@@ -8101,6 +8908,16 @@
      "fragmentationSegmentsPerMetre": 1.442,
      "longWallRecovery": 0.9264,
      "supportedLineRecall": 0.9995,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.2901
     },
     "ELSED-DEFAULT": {
@@ -8123,6 +8940,16 @@
      "fragmentationSegmentsPerMetre": 1.052,
      "longWallRecovery": 0.7465,
      "supportedLineRecall": 0.9998,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "SCV-LINES": {
@@ -8146,6 +8973,7 @@
    "openingLengthM": 7.215,
    "regions": {
     "MSAM-AUTO": {
+     "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.2739,
      "areaRatio": 0.2739,
      "autoMasks": 16,
      "bodyCoverage": {
@@ -8162,7 +8990,6 @@
      ],
      "openingLeakage": 0.0,
      "openingRecall": 0.0,
-     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.2739,
      "outsideArea": 0.0,
      "overreach": {},
      "predictedIoU": 0.981,
@@ -8331,9 +9158,28 @@
      "textDimensionInclusion": 0.0
     }
    },
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "FUSION_REPLAY",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 1.0,
     "exteriorWallCoverage": 1.0
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    }
    },
    "solidLengthM": 34.743,
    "tolerancesPx": {
@@ -8366,6 +9212,16 @@
      "fragmentationSegmentsPerMetre": 0.947,
      "longWallRecovery": 0.8615,
      "supportedLineRecall": 0.73,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -8374,20 +9230,30 @@
      "additionalOpeningCoverageShare": 0.0,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 0.243,
+     "angularErrorDeg": 0.246,
      "continuityAcrossOpenings": 0.8677,
      "cornerEndpointErrorMedianPx": 1.0,
      "cornersWithoutSegment": 0,
      "count": 456,
-     "duplicateRate": 1.053,
+     "duplicateRate": 1.078,
      "exclusionOutlineAddedOverScvM": 0.0,
      "exclusionOutlineLinesM": 0.0,
      "exteriorWallCoverage": 1.0,
-     "falseLinesDistractors": 201,
-     "falseLinesDistractorsLengthPx": 14347.0,
-     "fragmentationSegmentsPerMetre": 2.292,
+     "falseLinesDistractors": 204,
+     "falseLinesDistractorsLengthPx": 14331.9,
+     "fragmentationSegmentsPerMetre": 2.195,
      "longWallRecovery": 0.9289,
      "supportedLineRecall": 0.9404,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.011
     },
     "DEEPLSD-WF": {
@@ -8410,6 +9276,16 @@
      "fragmentationSegmentsPerMetre": 1.221,
      "longWallRecovery": 0.9275,
      "supportedLineRecall": 1.0,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "ELSED-DEFAULT": {
@@ -8432,6 +9308,16 @@
      "fragmentationSegmentsPerMetre": 1.149,
      "longWallRecovery": 0.8899,
      "supportedLineRecall": 1.0,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "SCV-LINES": {
@@ -8455,6 +9341,7 @@
    "openingLengthM": 7.215,
    "regions": {
     "MSAM-AUTO": {
+     "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.2735,
      "areaRatio": 0.2735,
      "autoMasks": 17,
      "bodyCoverage": {
@@ -8471,7 +9358,6 @@
      ],
      "openingLeakage": 0.0,
      "openingRecall": 0.0,
-     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.2735,
      "outsideArea": 0.0,
      "overreach": {},
      "predictedIoU": 0.973,
@@ -8641,9 +9527,28 @@
      "textDimensionInclusion": 0.0
     }
    },
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "FUSION_REPLAY",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 1.0,
     "exteriorWallCoverage": 1.0
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    }
    },
    "solidLengthM": 34.743,
    "tolerancesPx": {
@@ -8676,6 +9581,16 @@
      "fragmentationSegmentsPerMetre": 1.125,
      "longWallRecovery": 0.9267,
      "supportedLineRecall": 0.9111,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -8684,21 +9599,31 @@
      "additionalOpeningCoverageShare": 0.0,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 0.207,
+     "angularErrorDeg": 0.195,
      "continuityAcrossOpenings": 0.8677,
      "cornerEndpointErrorMedianPx": 1.0,
      "cornersWithoutSegment": 0,
      "count": 464,
-     "duplicateRate": 1.252,
+     "duplicateRate": 1.241,
      "exclusionOutlineAddedOverScvM": 0.0,
      "exclusionOutlineLinesM": 0.0,
      "exteriorWallCoverage": 1.0,
-     "falseLinesDistractors": 185,
-     "falseLinesDistractorsLengthPx": 14231.4,
-     "fragmentationSegmentsPerMetre": 2.805,
+     "falseLinesDistractors": 192,
+     "falseLinesDistractorsLengthPx": 14461.3,
+     "fragmentationSegmentsPerMetre": 2.731,
      "longWallRecovery": 0.9289,
      "supportedLineRecall": 1.0,
-     "unsupportedLineRate": 0.0259
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
+     "unsupportedLineRate": 0.0237
     },
     "DEEPLSD-WF": {
      "additionalIds": [],
@@ -8720,6 +9645,16 @@
      "fragmentationSegmentsPerMetre": 1.221,
      "longWallRecovery": 0.9275,
      "supportedLineRecall": 1.0,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "ELSED-DEFAULT": {
@@ -8742,6 +9677,16 @@
      "fragmentationSegmentsPerMetre": 1.028,
      "longWallRecovery": 0.9265,
      "supportedLineRecall": 0.999,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "SCV-LINES": {
@@ -8765,6 +9710,7 @@
    "openingLengthM": 7.215,
    "regions": {
     "MSAM-AUTO": {
+     "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.274,
      "areaRatio": 0.274,
      "autoMasks": 18,
      "bodyCoverage": {
@@ -8781,7 +9727,6 @@
      ],
      "openingLeakage": 0.0,
      "openingRecall": 0.0,
-     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.274,
      "outsideArea": 0.0,
      "overreach": {},
      "predictedIoU": 0.924,
@@ -8950,9 +9895,28 @@
      "textDimensionInclusion": 0.0
     }
    },
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "FUSION_REPLAY",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 1.0,
     "exteriorWallCoverage": 1.0
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    }
    },
    "solidLengthM": 34.743,
    "tolerancesPx": {
@@ -8985,6 +9949,16 @@
      "fragmentationSegmentsPerMetre": 0.799,
      "longWallRecovery": 0.9251,
      "supportedLineRecall": 0.78,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -8993,21 +9967,31 @@
      "additionalOpeningCoverageShare": 0.0,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 0.291,
+     "angularErrorDeg": 0.258,
      "continuityAcrossOpenings": 0.832,
      "cornerEndpointErrorMedianPx": 0.27,
      "cornersWithoutSegment": 0,
      "count": 468,
-     "duplicateRate": 1.154,
+     "duplicateRate": 1.139,
      "exclusionOutlineAddedOverScvM": 0.0,
      "exclusionOutlineLinesM": 0.0,
      "exteriorWallCoverage": 1.0,
-     "falseLinesDistractors": 228,
-     "falseLinesDistractorsLengthPx": 14574.1,
-     "fragmentationSegmentsPerMetre": 2.448,
+     "falseLinesDistractors": 221,
+     "falseLinesDistractorsLengthPx": 14983.6,
+     "fragmentationSegmentsPerMetre": 2.406,
      "longWallRecovery": 0.9291,
      "supportedLineRecall": 0.9988,
-     "unsupportedLineRate": 0.0064
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
+     "unsupportedLineRate": 0.0085
     },
     "DEEPLSD-WF": {
      "additionalIds": [],
@@ -9029,6 +10013,16 @@
      "fragmentationSegmentsPerMetre": 0.964,
      "longWallRecovery": 0.9286,
      "supportedLineRecall": 0.9988,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "ELSED-DEFAULT": {
@@ -9051,6 +10045,16 @@
      "fragmentationSegmentsPerMetre": 0.841,
      "longWallRecovery": 0.9255,
      "supportedLineRecall": 0.9983,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "SCV-LINES": {
@@ -9074,6 +10078,7 @@
    "openingLengthM": 5.417,
    "regions": {
     "MSAM-AUTO": {
+     "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.4671,
      "areaRatio": 0.2452,
      "autoMasks": 10,
      "bodyCoverage": {
@@ -9092,7 +10097,6 @@
      ],
      "openingLeakage": 0.0,
      "openingRecall": 0.1157,
-     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.4671,
      "outsideArea": 0.0,
      "overreach": {},
      "predictedIoU": 0.973,
@@ -9267,9 +10271,28 @@
      "textDimensionInclusion": 0.0
     }
    },
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "FUSION_REPLAY",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 1.0,
     "exteriorWallCoverage": 1.0
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    }
    },
    "solidLengthM": 43.29,
    "tolerancesPx": {
@@ -9302,6 +10325,16 @@
      "fragmentationSegmentsPerMetre": 0.947,
      "longWallRecovery": 0.7127,
      "supportedLineRecall": 0.6186,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -9310,7 +10343,7 @@
      "additionalOpeningCoverageShare": 0.0,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 0.224,
+     "angularErrorDeg": 0.185,
      "continuityAcrossOpenings": 0.5754,
      "cornerEndpointErrorMedianPx": 1.0,
      "cornersWithoutSegment": 2,
@@ -9319,12 +10352,22 @@
      "exclusionOutlineAddedOverScvM": 0.0,
      "exclusionOutlineLinesM": 0.0,
      "exteriorWallCoverage": 0.7035,
-     "falseLinesDistractors": 182,
-     "falseLinesDistractorsLengthPx": 11254.1,
+     "falseLinesDistractors": 184,
+     "falseLinesDistractorsLengthPx": 11567.4,
      "fragmentationSegmentsPerMetre": 2.518,
      "longWallRecovery": 0.7159,
      "supportedLineRecall": 0.7514,
-     "unsupportedLineRate": 0.0045
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
+     "unsupportedLineRate": 0.0023
     },
     "DEEPLSD-WF": {
      "additionalIds": [],
@@ -9346,6 +10389,16 @@
      "fragmentationSegmentsPerMetre": 1.226,
      "longWallRecovery": 0.7138,
      "supportedLineRecall": 0.8108,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "ELSED-DEFAULT": {
@@ -9368,6 +10421,16 @@
      "fragmentationSegmentsPerMetre": 1.123,
      "longWallRecovery": 0.6761,
      "supportedLineRecall": 0.811,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "SCV-LINES": {
@@ -9391,6 +10454,7 @@
    "openingLengthM": 7.215,
    "regions": {
     "MSAM-AUTO": {
+     "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.3566,
      "areaRatio": 0.3566,
      "autoMasks": 15,
      "bodyCoverage": {
@@ -9407,7 +10471,6 @@
      ],
      "openingLeakage": 0.0,
      "openingRecall": 0.0,
-     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.3566,
      "outsideArea": 0.0,
      "overreach": {},
      "predictedIoU": 0.96,
@@ -9539,9 +10602,28 @@
      "textDimensionInclusion": 0.0
     }
    },
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "FUSION_REPLAY",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 0.5754,
     "exteriorWallCoverage": 0.7035
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 0.5754,
+     "exteriorWallCoverage": 0.7035
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 0.5754,
+     "exteriorWallCoverage": 0.7035
+    }
    },
    "solidLengthM": 34.743,
    "tolerancesPx": {
@@ -9574,6 +10656,16 @@
      "fragmentationSegmentsPerMetre": 0.896,
      "longWallRecovery": 0.9346,
      "supportedLineRecall": 0.7518,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -9582,21 +10674,31 @@
      "additionalOpeningCoverageShare": 0.0,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 0.335,
+     "angularErrorDeg": 0.336,
      "continuityAcrossOpenings": 0.8642,
      "cornerEndpointErrorMedianPx": 1.0,
      "cornersWithoutSegment": 0,
      "count": 449,
-     "duplicateRate": 1.171,
+     "duplicateRate": 1.192,
      "exclusionOutlineAddedOverScvM": 0.133,
-     "exclusionOutlineLinesM": 40.386,
+     "exclusionOutlineLinesM": 41.556,
      "exteriorWallCoverage": 1.0,
-     "falseLinesDistractors": 215,
-     "falseLinesDistractorsLengthPx": 16393.2,
-     "fragmentationSegmentsPerMetre": 2.168,
+     "falseLinesDistractors": 213,
+     "falseLinesDistractorsLengthPx": 16350.8,
+     "fragmentationSegmentsPerMetre": 2.225,
      "longWallRecovery": 0.9456,
      "supportedLineRecall": 1.0,
-     "unsupportedLineRate": 0.0134
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
+     "unsupportedLineRate": 0.0156
     },
     "DEEPLSD-WF": {
      "additionalIds": [],
@@ -9618,6 +10720,16 @@
      "fragmentationSegmentsPerMetre": 1.06,
      "longWallRecovery": 0.9444,
      "supportedLineRecall": 0.9997,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "ELSED-DEFAULT": {
@@ -9640,6 +10752,16 @@
      "fragmentationSegmentsPerMetre": 0.888,
      "longWallRecovery": 0.941,
      "supportedLineRecall": 0.9997,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "SCV-LINES": {
@@ -9663,6 +10785,7 @@
    "openingLengthM": 6.704,
    "regions": {
     "MSAM-AUTO": {
+     "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.361,
      "areaRatio": 0.361,
      "autoMasks": 9,
      "bodyCoverage": {},
@@ -9676,7 +10799,6 @@
      ],
      "openingLeakage": 0.0,
      "openingRecall": 0.0997,
-     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.361,
      "outsideArea": 0.0,
      "overreach": {
       "PERGOLA": 0.0
@@ -9846,9 +10968,28 @@
      "textDimensionInclusion": 0.0
     }
    },
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "FUSION_REPLAY",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 1.0,
     "exteriorWallCoverage": 1.0
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    }
    },
    "solidLengthM": 29.26,
    "tolerancesPx": {
@@ -9881,6 +11022,16 @@
      "fragmentationSegmentsPerMetre": 0.918,
      "longWallRecovery": 0.8867,
      "supportedLineRecall": 0.6844,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -9889,21 +11040,31 @@
      "additionalOpeningCoverageShare": 0.0,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 0.3,
+     "angularErrorDeg": 0.301,
      "continuityAcrossOpenings": 0.8614,
      "cornerEndpointErrorMedianPx": 0.99,
      "cornersWithoutSegment": 0,
      "count": 458,
-     "duplicateRate": 0.943,
+     "duplicateRate": 0.902,
      "exclusionOutlineAddedOverScvM": 0.0,
      "exclusionOutlineLinesM": 0.114,
      "exteriorWallCoverage": 1.0,
-     "falseLinesDistractors": 237,
-     "falseLinesDistractorsLengthPx": 14204.3,
-     "fragmentationSegmentsPerMetre": 2.315,
+     "falseLinesDistractors": 248,
+     "falseLinesDistractorsLengthPx": 14739.8,
+     "fragmentationSegmentsPerMetre": 2.158,
      "longWallRecovery": 1.0,
      "supportedLineRecall": 1.0,
-     "unsupportedLineRate": 0.0066
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
+     "unsupportedLineRate": 0.0131
     },
     "DEEPLSD-WF": {
      "additionalIds": [],
@@ -9925,6 +11086,16 @@
      "fragmentationSegmentsPerMetre": 1.187,
      "longWallRecovery": 1.0,
      "supportedLineRecall": 1.0,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "ELSED-DEFAULT": {
@@ -9947,6 +11118,16 @@
      "fragmentationSegmentsPerMetre": 1.03,
      "longWallRecovery": 0.9962,
      "supportedLineRecall": 0.9972,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "SCV-LINES": {
@@ -9970,6 +11151,7 @@
    "openingLengthM": 6.727,
    "regions": {
     "MSAM-AUTO": {
+     "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.3719,
      "areaRatio": 0.3719,
      "autoMasks": 8,
      "bodyCoverage": {},
@@ -9983,7 +11165,6 @@
      ],
      "openingLeakage": 0.0,
      "openingRecall": 0.0,
-     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.3719,
      "outsideArea": 0.0,
      "overreach": {
       "RECESS": 0.0
@@ -10156,9 +11337,28 @@
      "textDimensionInclusion": 0.0
     }
    },
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "FUSION_REPLAY",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 1.0,
     "exteriorWallCoverage": 1.0
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    }
    },
    "solidLengthM": 32.212,
    "tolerancesPx": {
@@ -10191,6 +11391,16 @@
      "fragmentationSegmentsPerMetre": 0.821,
      "longWallRecovery": 0.8325,
      "supportedLineRecall": 0.6804,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -10199,20 +11409,30 @@
      "additionalOpeningCoverageShare": 0.0,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 0.266,
+     "angularErrorDeg": 0.322,
      "continuityAcrossOpenings": 0.8642,
      "cornerEndpointErrorMedianPx": 0.99,
      "cornersWithoutSegment": 0,
      "count": 441,
-     "duplicateRate": 1.045,
+     "duplicateRate": 0.953,
      "exclusionOutlineAddedOverScvM": 0.0,
      "exclusionOutlineLinesM": 0.0,
      "exteriorWallCoverage": 1.0,
-     "falseLinesDistractors": 210,
-     "falseLinesDistractorsLengthPx": 13523.7,
-     "fragmentationSegmentsPerMetre": 1.883,
+     "falseLinesDistractors": 212,
+     "falseLinesDistractorsLengthPx": 13462.6,
+     "fragmentationSegmentsPerMetre": 1.826,
      "longWallRecovery": 0.9456,
      "supportedLineRecall": 1.0,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0068
     },
     "DEEPLSD-WF": {
@@ -10235,6 +11455,16 @@
      "fragmentationSegmentsPerMetre": 1.06,
      "longWallRecovery": 0.9444,
      "supportedLineRecall": 1.0,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "ELSED-DEFAULT": {
@@ -10257,6 +11487,16 @@
      "fragmentationSegmentsPerMetre": 0.888,
      "longWallRecovery": 0.941,
      "supportedLineRecall": 0.9997,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "SCV-LINES": {
@@ -10280,6 +11520,7 @@
    "openingLengthM": 6.704,
    "regions": {
     "MSAM-AUTO": {
+     "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.3552,
      "areaRatio": 0.3552,
      "autoMasks": 7,
      "bodyCoverage": {},
@@ -10293,7 +11534,6 @@
      ],
      "openingLeakage": 0.0,
      "openingRecall": 0.0,
-     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.3552,
      "outsideArea": 0.0,
      "overreach": {},
      "predictedIoU": 0.995,
@@ -10448,9 +11688,28 @@
      "textDimensionInclusion": 0.0
     }
    },
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "FUSION_REPLAY",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 1.0,
     "exteriorWallCoverage": 1.0
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    }
    },
    "solidLengthM": 29.26,
    "tolerancesPx": {
@@ -10483,6 +11742,16 @@
      "fragmentationSegmentsPerMetre": 1.101,
      "longWallRecovery": 0.9259,
      "supportedLineRecall": 0.9279,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -10491,21 +11760,31 @@
      "additionalOpeningCoverageShare": 0.0,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 0.396,
+     "angularErrorDeg": 0.386,
      "continuityAcrossOpenings": 0.8731,
      "cornerEndpointErrorMedianPx": 1.32,
      "cornersWithoutSegment": 0,
      "count": 421,
-     "duplicateRate": 0.962,
+     "duplicateRate": 0.92,
      "exclusionOutlineAddedOverScvM": 0.0,
      "exclusionOutlineLinesM": 0.0,
      "exteriorWallCoverage": 1.0,
-     "falseLinesDistractors": 136,
-     "falseLinesDistractorsLengthPx": 9210.4,
-     "fragmentationSegmentsPerMetre": 2.558,
+     "falseLinesDistractors": 145,
+     "falseLinesDistractorsLengthPx": 9603.8,
+     "fragmentationSegmentsPerMetre": 2.436,
      "longWallRecovery": 0.9294,
-     "supportedLineRecall": 0.9621,
-     "unsupportedLineRate": 0.0095
+     "supportedLineRecall": 0.9559,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
+     "unsupportedLineRate": 0.0071
     },
     "DEEPLSD-WF": {
      "additionalIds": [],
@@ -10527,6 +11806,16 @@
      "fragmentationSegmentsPerMetre": 1.221,
      "longWallRecovery": 0.9262,
      "supportedLineRecall": 0.9998,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "ELSED-DEFAULT": {
@@ -10549,6 +11838,16 @@
      "fragmentationSegmentsPerMetre": 1.004,
      "longWallRecovery": 0.9246,
      "supportedLineRecall": 0.9988,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "SCV-LINES": {
@@ -10572,6 +11871,7 @@
    "openingLengthM": 7.171,
    "regions": {
     "MSAM-AUTO": {
+     "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.1721,
      "areaRatio": 0.1721,
      "autoMasks": 13,
      "bodyCoverage": {
@@ -10588,7 +11888,6 @@
      ],
      "openingLeakage": 0.0,
      "openingRecall": 0.0,
-     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.1721,
      "outsideArea": 0.0,
      "overreach": {},
      "predictedIoU": 0.963,
@@ -10758,9 +12057,28 @@
      "textDimensionInclusion": 0.054
     }
    },
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "FUSION_REPLAY",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 0.8731,
     "exteriorWallCoverage": 1.0
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 0.8731,
+     "exteriorWallCoverage": 1.0
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 0.8731,
+     "exteriorWallCoverage": 1.0
+    }
    },
    "solidLengthM": 34.787,
    "tolerancesPx": {
@@ -10793,6 +12111,16 @@
      "fragmentationSegmentsPerMetre": 0.955,
      "longWallRecovery": 0.9256,
      "supportedLineRecall": 0.9988,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -10801,21 +12129,31 @@
      "additionalOpeningCoverageShare": 0.0,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 0.536,
+     "angularErrorDeg": 0.452,
      "continuityAcrossOpenings": 0.8862,
-     "cornerEndpointErrorMedianPx": 1.02,
+     "cornerEndpointErrorMedianPx": 1.01,
      "cornersWithoutSegment": 0,
      "count": 492,
-     "duplicateRate": 0.531,
+     "duplicateRate": 0.56,
      "exclusionOutlineAddedOverScvM": 0.0,
      "exclusionOutlineLinesM": 0.0,
      "exteriorWallCoverage": 1.0,
-     "falseLinesDistractors": 61,
-     "falseLinesDistractorsLengthPx": 9310.2,
-     "fragmentationSegmentsPerMetre": 1.969,
+     "falseLinesDistractors": 58,
+     "falseLinesDistractorsLengthPx": 8653.8,
+     "fragmentationSegmentsPerMetre": 1.823,
      "longWallRecovery": 0.9314,
-     "supportedLineRecall": 0.9512,
-     "unsupportedLineRate": 0.1057
+     "supportedLineRecall": 0.9488,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
+     "unsupportedLineRate": 0.1016
     },
     "DEEPLSD-WF": {
      "additionalIds": [],
@@ -10837,6 +12175,16 @@
      "fragmentationSegmentsPerMetre": 0.954,
      "longWallRecovery": 0.9262,
      "supportedLineRecall": 1.0,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "ELSED-DEFAULT": {
@@ -10859,6 +12207,16 @@
      "fragmentationSegmentsPerMetre": 1.011,
      "longWallRecovery": 0.7236,
      "supportedLineRecall": 0.9961,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "SCV-LINES": {
@@ -10882,6 +12240,7 @@
    "openingLengthM": 7.215,
    "regions": {
     "MSAM-AUTO": {
+     "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.5061,
      "areaRatio": 0.2758,
      "autoMasks": 12,
      "bodyCoverage": {
@@ -10898,7 +12257,6 @@
      ],
      "openingLeakage": 0.0,
      "openingRecall": 0.0,
-     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.5061,
      "outsideArea": 0.0,
      "overreach": {},
      "predictedIoU": 0.94,
@@ -11067,9 +12425,28 @@
      "textDimensionInclusion": 0.0
     }
    },
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "FUSION_REPLAY",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 1.0,
     "exteriorWallCoverage": 1.0
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    }
    },
    "solidLengthM": 34.743,
    "tolerancesPx": {
@@ -11102,6 +12479,16 @@
      "fragmentationSegmentsPerMetre": 1.198,
      "longWallRecovery": 0.927,
      "supportedLineRecall": 0.955,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -11110,21 +12497,31 @@
      "additionalOpeningCoverageShare": 0.0,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 0.471,
+     "angularErrorDeg": 0.491,
      "continuityAcrossOpenings": 0.8673,
-     "cornerEndpointErrorMedianPx": 0.5,
+     "cornerEndpointErrorMedianPx": 0.51,
      "cornersWithoutSegment": 0,
      "count": 433,
-     "duplicateRate": 1.5,
+     "duplicateRate": 1.466,
      "exclusionOutlineAddedOverScvM": 0.0,
      "exclusionOutlineLinesM": 0.0,
      "exteriorWallCoverage": 1.0,
-     "falseLinesDistractors": 143,
-     "falseLinesDistractorsLengthPx": 10056.1,
-     "fragmentationSegmentsPerMetre": 3.268,
+     "falseLinesDistractors": 151,
+     "falseLinesDistractorsLengthPx": 10409.6,
+     "fragmentationSegmentsPerMetre": 3.195,
      "longWallRecovery": 0.8973,
      "supportedLineRecall": 1.0,
-     "unsupportedLineRate": 0.0185
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
+     "unsupportedLineRate": 0.0115
     },
     "DEEPLSD-WF": {
      "additionalIds": [],
@@ -11146,6 +12543,16 @@
      "fragmentationSegmentsPerMetre": 1.221,
      "longWallRecovery": 0.9274,
      "supportedLineRecall": 0.9995,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "ELSED-DEFAULT": {
@@ -11168,6 +12575,16 @@
      "fragmentationSegmentsPerMetre": 1.15,
      "longWallRecovery": 0.8662,
      "supportedLineRecall": 0.9978,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "SCV-LINES": {
@@ -11191,6 +12608,7 @@
    "openingLengthM": 7.193,
    "regions": {
     "MSAM-AUTO": {
+     "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.2747,
      "areaRatio": 0.2747,
      "autoMasks": 16,
      "bodyCoverage": {
@@ -11207,7 +12625,6 @@
      ],
      "openingLeakage": 0.0,
      "openingRecall": 0.0,
-     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.2747,
      "outsideArea": 0.0,
      "overreach": {},
      "predictedIoU": 0.934,
@@ -11376,9 +12793,28 @@
      "textDimensionInclusion": 0.0002
     }
    },
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "FUSION_REPLAY",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 1.0,
     "exteriorWallCoverage": 1.0
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 0.8673,
+     "exteriorWallCoverage": 1.0
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 0.8673,
+     "exteriorWallCoverage": 1.0
+    }
    },
    "solidLengthM": 34.765,
    "tolerancesPx": {
@@ -11411,6 +12847,16 @@
      "fragmentationSegmentsPerMetre": 0.896,
      "longWallRecovery": 0.7874,
      "supportedLineRecall": 0.7423,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -11419,21 +12865,31 @@
      "additionalOpeningCoverageShare": 0.0,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 0.259,
+     "angularErrorDeg": 0.313,
      "continuityAcrossOpenings": 0.8877,
      "cornerEndpointErrorMedianPx": 0.99,
      "cornersWithoutSegment": 0,
      "count": 462,
-     "duplicateRate": 0.939,
+     "duplicateRate": 0.971,
      "exclusionOutlineAddedOverScvM": 0.0,
-     "exclusionOutlineLinesM": 25.14,
+     "exclusionOutlineLinesM": 26.387,
      "exteriorWallCoverage": 1.0,
-     "falseLinesDistractors": 339,
-     "falseLinesDistractorsLengthPx": 26836.1,
-     "fragmentationSegmentsPerMetre": 1.883,
+     "falseLinesDistractors": 342,
+     "falseLinesDistractorsLengthPx": 26948.0,
+     "fragmentationSegmentsPerMetre": 1.968,
      "longWallRecovery": 0.79,
      "supportedLineRecall": 1.0,
-     "unsupportedLineRate": 0.0065
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
+     "unsupportedLineRate": 0.0087
     },
     "DEEPLSD-WF": {
      "additionalIds": [],
@@ -11455,6 +12911,16 @@
      "fragmentationSegmentsPerMetre": 1.06,
      "longWallRecovery": 0.7882,
      "supportedLineRecall": 0.9997,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "ELSED-DEFAULT": {
@@ -11477,6 +12943,16 @@
      "fragmentationSegmentsPerMetre": 0.861,
      "longWallRecovery": 0.784,
      "supportedLineRecall": 0.9997,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "SCV-LINES": {
@@ -11500,6 +12976,7 @@
    "openingLengthM": 8.103,
    "regions": {
     "MSAM-AUTO": {
+     "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.5245,
      "areaRatio": 0.3573,
      "autoMasks": 10,
      "bodyCoverage": {},
@@ -11513,7 +12990,6 @@
      ],
      "openingLeakage": 0.0,
      "openingRecall": 0.0,
-     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.5245,
      "outsideArea": 0.0,
      "overreach": {
       "TERRACE": 0.0
@@ -11683,9 +13159,28 @@
      "textDimensionInclusion": 0.0
     }
    },
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "FUSION_REPLAY",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 1.0,
     "exteriorWallCoverage": 1.0
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    }
    },
    "solidLengthM": 27.861,
    "tolerancesPx": {
@@ -11718,6 +13213,16 @@
      "fragmentationSegmentsPerMetre": 1.044,
      "longWallRecovery": 0.526,
      "supportedLineRecall": 0.6694,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -11726,21 +13231,31 @@
      "additionalOpeningCoverageShare": 0.0,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 0.448,
+     "angularErrorDeg": 0.443,
      "continuityAcrossOpenings": 0.8642,
-     "cornerEndpointErrorMedianPx": 0.99,
+     "cornerEndpointErrorMedianPx": 1.0,
      "cornersWithoutSegment": 0,
      "count": 450,
-     "duplicateRate": 1.037,
+     "duplicateRate": 1.096,
      "exclusionOutlineAddedOverScvM": 0.0,
      "exclusionOutlineLinesM": 0.0,
      "exteriorWallCoverage": 0.997,
-     "falseLinesDistractors": 248,
-     "falseLinesDistractorsLengthPx": 14443.8,
-     "fragmentationSegmentsPerMetre": 2.345,
+     "falseLinesDistractors": 241,
+     "falseLinesDistractorsLengthPx": 14126.2,
+     "fragmentationSegmentsPerMetre": 2.374,
      "longWallRecovery": 0.711,
      "supportedLineRecall": 0.9933,
-     "unsupportedLineRate": 0.0089
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
+     "unsupportedLineRate": 0.0022
     },
     "DEEPLSD-WF": {
      "additionalIds": [],
@@ -11762,6 +13277,16 @@
      "fragmentationSegmentsPerMetre": 1.162,
      "longWallRecovery": 0.6407,
      "supportedLineRecall": 0.9592,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "ELSED-DEFAULT": {
@@ -11784,6 +13309,16 @@
      "fragmentationSegmentsPerMetre": 0.989,
      "longWallRecovery": 0.6546,
      "supportedLineRecall": 0.9562,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "SCV-LINES": {
@@ -11807,6 +13342,7 @@
    "openingLengthM": 6.704,
    "regions": {
     "MSAM-AUTO": {
+     "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.6232,
      "areaRatio": 0.3576,
      "autoMasks": 6,
      "bodyCoverage": {},
@@ -11820,7 +13356,6 @@
      ],
      "openingLeakage": 0.0,
      "openingRecall": 0.0,
-     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.6232,
      "outsideArea": 0.0,
      "overreach": {},
      "predictedIoU": 1.006,
@@ -11977,9 +13512,28 @@
      "textDimensionInclusion": 0.0
     }
    },
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "FUSION_REPLAY",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 1.0,
     "exteriorWallCoverage": 1.0
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    }
    },
    "solidLengthM": 29.26,
    "tolerancesPx": {
@@ -12012,6 +13566,16 @@
      "fragmentationSegmentsPerMetre": 0.691,
      "longWallRecovery": 0.8934,
      "supportedLineRecall": 0.5845,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -12020,21 +13584,31 @@
      "additionalOpeningCoverageShare": 0.0,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 0.168,
+     "angularErrorDeg": 0.18,
      "continuityAcrossOpenings": 0.8864,
      "cornerEndpointErrorMedianPx": 1.0,
      "cornersWithoutSegment": 0,
      "count": 457,
-     "duplicateRate": 1.039,
+     "duplicateRate": 1.049,
      "exclusionOutlineAddedOverScvM": 0.0,
      "exclusionOutlineLinesM": 0.059,
      "exteriorWallCoverage": 1.0,
      "falseLinesDistractors": 220,
-     "falseLinesDistractorsLengthPx": 14881.6,
-     "fragmentationSegmentsPerMetre": 1.853,
+     "falseLinesDistractorsLengthPx": 14935.1,
+     "fragmentationSegmentsPerMetre": 1.872,
      "longWallRecovery": 0.9291,
      "supportedLineRecall": 1.0,
-     "unsupportedLineRate": 0.0088
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
+     "unsupportedLineRate": 0.0109
     },
     "DEEPLSD-WF": {
      "additionalIds": [],
@@ -12056,6 +13630,16 @@
      "fragmentationSegmentsPerMetre": 0.893,
      "longWallRecovery": 0.9275,
      "supportedLineRecall": 0.9971,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "ELSED-DEFAULT": {
@@ -12078,6 +13662,16 @@
      "fragmentationSegmentsPerMetre": 0.747,
      "longWallRecovery": 0.9275,
      "supportedLineRecall": 0.935,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "SCV-LINES": {
@@ -12101,6 +13695,7 @@
    "openingLengthM": 8.014,
    "regions": {
     "MSAM-AUTO": {
+     "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.4204,
      "areaRatio": 0.4204,
      "autoMasks": 16,
      "bodyCoverage": {
@@ -12117,7 +13712,6 @@
      ],
      "openingLeakage": 0.0,
      "openingRecall": 0.2312,
-     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.4204,
      "outsideArea": 0.0,
      "overreach": {
       "COURTYARD": 0.0
@@ -12304,9 +13898,28 @@
      "textDimensionInclusion": 0.0
     }
    },
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "FUSION_REPLAY",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 1.0,
     "exteriorWallCoverage": 1.0
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    }
    },
    "solidLengthM": 47.93,
    "tolerancesPx": {
@@ -12339,6 +13952,16 @@
      "fragmentationSegmentsPerMetre": 1.043,
      "longWallRecovery": 0.8457,
      "supportedLineRecall": 0.6126,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -12347,21 +13970,31 @@
      "additionalOpeningCoverageShare": 0.0,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 0.325,
+     "angularErrorDeg": 0.359,
      "continuityAcrossOpenings": 0.9175,
      "cornerEndpointErrorMedianPx": 1.0,
      "cornersWithoutSegment": 0,
      "count": 446,
-     "duplicateRate": 1.168,
+     "duplicateRate": 1.206,
      "exclusionOutlineAddedOverScvM": 0.0,
      "exclusionOutlineLinesM": 0.0,
      "exteriorWallCoverage": 1.0,
      "falseLinesDistractors": 161,
-     "falseLinesDistractorsLengthPx": 14019.2,
-     "fragmentationSegmentsPerMetre": 2.109,
+     "falseLinesDistractorsLengthPx": 14027.8,
+     "fragmentationSegmentsPerMetre": 2.153,
      "longWallRecovery": 0.8753,
      "supportedLineRecall": 1.0,
-     "unsupportedLineRate": 0.0
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
+     "unsupportedLineRate": 0.0022
     },
     "DEEPLSD-WF": {
      "additionalIds": [],
@@ -12383,6 +14016,16 @@
      "fragmentationSegmentsPerMetre": 1.202,
      "longWallRecovery": 0.8747,
      "supportedLineRecall": 0.9984,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "ELSED-DEFAULT": {
@@ -12405,6 +14048,16 @@
      "fragmentationSegmentsPerMetre": 1.068,
      "longWallRecovery": 0.8734,
      "supportedLineRecall": 0.9232,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0
     },
     "SCV-LINES": {
@@ -12428,6 +14081,7 @@
    "openingLengthM": 11.033,
    "regions": {
     "MSAM-AUTO": {
+     "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.2784,
      "areaRatio": 0.2784,
      "autoMasks": 6,
      "bodyCoverage": {},
@@ -12441,7 +14095,6 @@
      ],
      "openingLeakage": 0.0,
      "openingRecall": 0.0,
-     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.2784,
      "outsideArea": 0.0,
      "overreach": {},
      "predictedIoU": 0.963,
@@ -12596,9 +14249,28 @@
      "textDimensionInclusion": 0.0
     }
    },
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "FUSION_REPLAY",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 1.0,
     "exteriorWallCoverage": 1.0
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    }
    },
    "solidLengthM": 34.921,
    "tolerancesPx": {
@@ -12608,5 +14280,22 @@
    "wallPxTruth": 18.0
   }
  },
- "researchOnly": true
+ "researchOnly": true,
+ "sameInputCheck": {
+  "framesChecked": 23,
+  "outputsCheckedPerProvider": {
+   "DEEPLSD-MD": 23,
+   "DEEPLSD-MD-REFINE-SCV": 23,
+   "DEEPLSD-WF": 23,
+   "ELSED-DEFAULT": 23,
+   "FUSION_REPLAY": 22,
+   "MOBILESAM": 23,
+   "SOURCE_CV": 23
+  },
+  "rule": "every provider output records the SHA-256 of the frame PNG it read (the refiner also its SCV-LINES file, MobileSAM also its prompt meta; the fusion replay the frame PNG and every observation file); score.py asserts each against the frame meta / the current file and stops on any mismatch (post-review B5)"
+ },
+ "scoringOutput": {
+  "file": "/home/user/work005i/scores/synthetic.json (outside the repository)",
+  "sha256": "501746f5d61606573c87322e385967c5d0386f48f3e11e1f199dbcf2337a4615"
+ }
 }

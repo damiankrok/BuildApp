@@ -60,43 +60,43 @@
   "real/dom-pod-jarzabem": {
    "DEEPLSD-MD": {
     "count": 897,
-    "inferMs": 11451.087,
-    "peakRssMB": 1836.1,
+    "inferMs": 28465.359,
+    "peakRssMB": 1836.0,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 12260.042
+    "wallMs": 30410.962
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "count": 870,
-    "inferMs": 15751.301,
+    "inferMs": 36031.43,
     "inputLines": 870,
     "missingKeys": 0,
-    "peakRssMB": 1886.1,
+    "peakRssMB": 1885.9,
     "threads": 2,
     "unexpectedKeys": 0,
-    "wallMs": 16712.189
+    "wallMs": 37388.826
    },
    "DEEPLSD-WF": {
     "count": 948,
-    "inferMs": 11298.846,
+    "inferMs": 23433.646,
     "peakRssMB": 1836.1,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 12064.894
+    "wallMs": 24667.627
    },
    "ELSED-DEFAULT": {
     "count": 767,
-    "detectMs": 19.778,
-    "peakRssMB": 63.1,
-    "wallMs": 106.082
+    "detectMs": 97.192,
+    "peakRssMB": 63.3,
+    "wallMs": 216.785
    },
    "MOBILESAM": {
     "autoMasks": 42,
-    "autoMs": 42857.571,
-    "encoderMs": 2146.051,
-    "peakRssMB": 2449.8,
+    "autoMs": 68065.941,
+    "encoderMs": 6224.415,
+    "peakRssMB": 2441.1,
     "threads": 2,
-    "wallMs": 47825.635
+    "wallMs": 89245.291
    },
    "sourceCv": {
     "counts": {
@@ -119,43 +119,43 @@
   "real/dom-w-arkadiach": {
    "DEEPLSD-MD": {
     "count": 611,
-    "inferMs": 10065.896,
-    "peakRssMB": 1902.3,
+    "inferMs": 16257.66,
+    "peakRssMB": 1836.1,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 10792.456
+    "wallMs": 17124.345
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "count": 674,
-    "inferMs": 17358.217,
+    "inferMs": 22233.016,
     "inputLines": 674,
     "missingKeys": 0,
-    "peakRssMB": 1884.5,
+    "peakRssMB": 1962.1,
     "threads": 2,
     "unexpectedKeys": 0,
-    "wallMs": 18191.503
+    "wallMs": 23246.316
    },
    "DEEPLSD-WF": {
     "count": 610,
-    "inferMs": 10260.721,
-    "peakRssMB": 1836.2,
+    "inferMs": 17788.836,
+    "peakRssMB": 1836.3,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 10991.211
+    "wallMs": 18751.951
    },
    "ELSED-DEFAULT": {
     "count": 484,
-    "detectMs": 14.307,
-    "peakRssMB": 62.7,
-    "wallMs": 86.407
+    "detectMs": 21.692,
+    "peakRssMB": 62.6,
+    "wallMs": 124.405
    },
    "MOBILESAM": {
     "autoMasks": 28,
-    "autoMs": 59964.23,
-    "encoderMs": 2091.692,
-    "peakRssMB": 2404.8,
+    "autoMs": 79824.479,
+    "encoderMs": 2559.593,
+    "peakRssMB": 2416.1,
     "threads": 2,
-    "wallMs": 64795.38
+    "wallMs": 86078.82
    },
    "sourceCv": {
     "counts": {
@@ -178,43 +178,43 @@
   "real/dom-w-azaliach": {
    "DEEPLSD-MD": {
     "count": 635,
-    "inferMs": 12545.563,
-    "peakRssMB": 1847.0,
+    "inferMs": 15558.538,
+    "peakRssMB": 1902.3,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 13404.085
+    "wallMs": 16393.855
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "count": 818,
-    "inferMs": 24276.816,
+    "inferMs": 18749.623,
     "inputLines": 818,
     "missingKeys": 0,
-    "peakRssMB": 1940.6,
+    "peakRssMB": 1862.8,
     "threads": 2,
     "unexpectedKeys": 0,
-    "wallMs": 25229.247
+    "wallMs": 19884.166
    },
    "DEEPLSD-WF": {
     "count": 633,
-    "inferMs": 12657.082,
-    "peakRssMB": 1813.9,
+    "inferMs": 18527.85,
+    "peakRssMB": 1836.3,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 13506.31
+    "wallMs": 19377.45
    },
    "ELSED-DEFAULT": {
     "count": 452,
-    "detectMs": 20.303,
+    "detectMs": 25.279,
     "peakRssMB": 62.8,
-    "wallMs": 98.055
+    "wallMs": 148.35
    },
    "MOBILESAM": {
     "autoMasks": 52,
-    "autoMs": 53605.297,
-    "encoderMs": 2767.202,
-    "peakRssMB": 2462.7,
+    "autoMs": 66839.559,
+    "encoderMs": 2549.411,
+    "peakRssMB": 2466.0,
     "threads": 2,
-    "wallMs": 59824.029
+    "wallMs": 73914.89
    },
    "sourceCv": {
     "counts": {
@@ -237,43 +237,43 @@
   "real/dom-w-helikoniach": {
    "DEEPLSD-MD": {
     "count": 548,
-    "inferMs": 14832.087,
-    "peakRssMB": 1891.5,
+    "inferMs": 14410.871,
+    "peakRssMB": 1836.3,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 15827.152
+    "wallMs": 15259.701
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "count": 922,
-    "inferMs": 29815.339,
+    "inferMs": 20308.685,
     "inputLines": 922,
     "missingKeys": 0,
-    "peakRssMB": 1952.0,
+    "peakRssMB": 1885.6,
     "threads": 2,
     "unexpectedKeys": 0,
-    "wallMs": 31101.091
+    "wallMs": 21322.35
    },
    "DEEPLSD-WF": {
     "count": 534,
-    "inferMs": 12881.516,
-    "peakRssMB": 1836.1,
+    "inferMs": 14514.459,
+    "peakRssMB": 1814.2,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 13806.019
+    "wallMs": 15509.806
    },
    "ELSED-DEFAULT": {
     "count": 395,
-    "detectMs": 13.419,
+    "detectMs": 12.392,
     "peakRssMB": 62.7,
-    "wallMs": 93.372
+    "wallMs": 89.64
    },
    "MOBILESAM": {
     "autoMasks": 32,
-    "autoMs": 52065.731,
-    "encoderMs": 3730.837,
-    "peakRssMB": 2440.8,
+    "autoMs": 58673.14,
+    "encoderMs": 3053.81,
+    "peakRssMB": 2451.7,
     "threads": 2,
-    "wallMs": 60723.176
+    "wallMs": 66167.861
    },
    "sourceCv": {
     "counts": {
@@ -296,43 +296,43 @@
   "real/dom-w-morelach": {
    "DEEPLSD-MD": {
     "count": 773,
-    "inferMs": 11831.961,
-    "peakRssMB": 1847.0,
+    "inferMs": 12346.576,
+    "peakRssMB": 1836.2,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 12617.626
+    "wallMs": 13185.284
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "count": 1195,
-    "inferMs": 26526.771,
+    "inferMs": 36309.98,
     "inputLines": 1195,
     "missingKeys": 0,
-    "peakRssMB": 1852.9,
+    "peakRssMB": 1864.3,
     "threads": 2,
     "unexpectedKeys": 0,
-    "wallMs": 27794.647
+    "wallMs": 37215.997
    },
    "DEEPLSD-WF": {
     "count": 782,
-    "inferMs": 12471.363,
-    "peakRssMB": 1836.1,
+    "inferMs": 12114.131,
+    "peakRssMB": 1891.6,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 13270.048
+    "wallMs": 13043.129
    },
    "ELSED-DEFAULT": {
     "count": 651,
-    "detectMs": 17.278,
+    "detectMs": 16.891,
     "peakRssMB": 62.7,
-    "wallMs": 90.848
+    "wallMs": 88.089
    },
    "MOBILESAM": {
     "autoMasks": 55,
-    "autoMs": 50513.318,
-    "encoderMs": 2518.257,
-    "peakRssMB": 2453.3,
+    "autoMs": 57463.862,
+    "encoderMs": 2413.317,
+    "peakRssMB": 2450.9,
     "threads": 2,
-    "wallMs": 56772.98
+    "wallMs": 63110.718
    },
    "sourceCv": {
     "counts": {
@@ -355,43 +355,43 @@
   "real/dom-w-zurawkach": {
    "DEEPLSD-MD": {
     "count": 647,
-    "inferMs": 12366.584,
-    "peakRssMB": 1825.2,
+    "inferMs": 13684.718,
+    "peakRssMB": 1803.1,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 13162.953
+    "wallMs": 14533.74
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "count": 834,
-    "inferMs": 19978.552,
+    "inferMs": 22651.982,
     "inputLines": 834,
     "missingKeys": 0,
-    "peakRssMB": 1952.0,
+    "peakRssMB": 1941.3,
     "threads": 2,
     "unexpectedKeys": 0,
-    "wallMs": 20853.828
+    "wallMs": 23813.199
    },
    "DEEPLSD-WF": {
     "count": 615,
-    "inferMs": 12747.812,
-    "peakRssMB": 1836.1,
+    "inferMs": 15844.673,
+    "peakRssMB": 1836.2,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 13608.599
+    "wallMs": 16712.208
    },
    "ELSED-DEFAULT": {
     "count": 545,
-    "detectMs": 16.409,
-    "peakRssMB": 62.7,
-    "wallMs": 94.472
+    "detectMs": 15.289,
+    "peakRssMB": 62.9,
+    "wallMs": 87.235
    },
    "MOBILESAM": {
     "autoMasks": 33,
-    "autoMs": 44302.227,
-    "encoderMs": 2682.374,
-    "peakRssMB": 2435.3,
+    "autoMs": 52864.317,
+    "encoderMs": 2291.308,
+    "peakRssMB": 2443.4,
     "threads": 2,
-    "wallMs": 49774.909
+    "wallMs": 58107.008
    },
    "sourceCv": {
     "counts": {
@@ -414,43 +414,43 @@
   "real/willa-miranda": {
    "DEEPLSD-MD": {
     "count": 787,
-    "inferMs": 11653.327,
-    "peakRssMB": 1846.9,
+    "inferMs": 11795.056,
+    "peakRssMB": 1825.2,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 12479.68
+    "wallMs": 12643.362
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "count": 785,
-    "inferMs": 18204.838,
+    "inferMs": 19814.072,
     "inputLines": 785,
     "missingKeys": 0,
-    "peakRssMB": 1886.4,
+    "peakRssMB": 1886.5,
     "threads": 2,
     "unexpectedKeys": 0,
-    "wallMs": 19106.105
+    "wallMs": 20847.508
    },
    "DEEPLSD-WF": {
     "count": 783,
-    "inferMs": 10412.823,
-    "peakRssMB": 1836.1,
+    "inferMs": 11356.913,
+    "peakRssMB": 1835.9,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 11180.009
+    "wallMs": 12124.745
    },
    "ELSED-DEFAULT": {
     "count": 692,
-    "detectMs": 15.817,
-    "peakRssMB": 62.9,
-    "wallMs": 93.328
+    "detectMs": 21.089,
+    "peakRssMB": 62.8,
+    "wallMs": 105.185
    },
    "MOBILESAM": {
     "autoMasks": 42,
-    "autoMs": 42723.503,
-    "encoderMs": 2297.066,
-    "peakRssMB": 2453.5,
+    "autoMs": 48932.085,
+    "encoderMs": 2982.369,
+    "peakRssMB": 2457.4,
     "threads": 2,
-    "wallMs": 47790.745
+    "wallMs": 55678.707
    },
    "sourceCv": {
     "counts": {
@@ -473,43 +473,43 @@
   "synthetic/attached-garage": {
    "DEEPLSD-MD": {
     "count": 114,
-    "inferMs": 12423.038,
-    "peakRssMB": 2153.9,
+    "inferMs": 15690.838,
+    "peakRssMB": 2222.6,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 13178.253
+    "wallMs": 16540.435
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "count": 460,
-    "inferMs": 15853.848,
+    "inferMs": 16807.865,
     "inputLines": 460,
     "missingKeys": 0,
-    "peakRssMB": 2283.8,
+    "peakRssMB": 2283.9,
     "threads": 2,
     "unexpectedKeys": 0,
-    "wallMs": 16703.914
+    "wallMs": 17633.257
    },
    "DEEPLSD-WF": {
     "count": 121,
-    "inferMs": 11953.183,
-    "peakRssMB": 2154.0,
+    "inferMs": 15617.958,
+    "peakRssMB": 2153.9,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 12655.413
+    "wallMs": 16489.106
    },
    "ELSED-DEFAULT": {
     "count": 80,
-    "detectMs": 11.627,
-    "peakRssMB": 64.6,
-    "wallMs": 81.368
+    "detectMs": 12.535,
+    "peakRssMB": 64.8,
+    "wallMs": 104.569
    },
    "MOBILESAM": {
     "autoMasks": 10,
-    "autoMs": 68282.763,
-    "encoderMs": 2714.223,
-    "peakRssMB": 2436.2,
+    "autoMs": 62107.996,
+    "encoderMs": 2448.506,
+    "peakRssMB": 2466.6,
     "threads": 2,
-    "wallMs": 74876.619
+    "wallMs": 67686.276
    },
    "sourceCv": {
     "counts": {
@@ -532,43 +532,43 @@
   "synthetic/bay-window": {
    "DEEPLSD-MD": {
     "count": 132,
-    "inferMs": 13968.94,
-    "peakRssMB": 1988.2,
+    "inferMs": 17101.988,
+    "peakRssMB": 2050.2,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 14758.236
+    "wallMs": 18019.194
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "count": 462,
-    "inferMs": 25014.011,
+    "inferMs": 26420.041,
     "inputLines": 462,
     "missingKeys": 0,
-    "peakRssMB": 2035.9,
+    "peakRssMB": 2011.5,
     "threads": 2,
     "unexpectedKeys": 0,
-    "wallMs": 26067.603
+    "wallMs": 27262.8
    },
    "DEEPLSD-WF": {
     "count": 144,
-    "inferMs": 15586.218,
-    "peakRssMB": 1988.2,
+    "inferMs": 17812.626,
+    "peakRssMB": 2050.2,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 16365.7
+    "wallMs": 18697.883
    },
    "ELSED-DEFAULT": {
     "count": 107,
-    "detectMs": 11.271,
+    "detectMs": 10.918,
     "peakRssMB": 63.4,
-    "wallMs": 79.767
+    "wallMs": 80.189
    },
    "MOBILESAM": {
     "autoMasks": 11,
-    "autoMs": 57122.988,
-    "encoderMs": 4097.066,
-    "peakRssMB": 2462.0,
+    "autoMs": 62906.338,
+    "encoderMs": 3178.091,
+    "peakRssMB": 2419.4,
     "threads": 2,
-    "wallMs": 66406.826
+    "wallMs": 70503.038
    },
    "sourceCv": {
     "counts": {
@@ -591,43 +591,43 @@
   "synthetic/dimension-lines-near-facade": {
    "DEEPLSD-MD": {
     "count": 76,
-    "inferMs": 11849.38,
-    "peakRssMB": 1988.2,
+    "inferMs": 14521.588,
+    "peakRssMB": 2062.4,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 12619.508
+    "wallMs": 15306.1
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "count": 441,
-    "inferMs": 22994.126,
+    "inferMs": 19246.883,
     "inputLines": 441,
     "missingKeys": 0,
-    "peakRssMB": 2011.1,
+    "peakRssMB": 2098.0,
     "threads": 2,
     "unexpectedKeys": 0,
-    "wallMs": 23895.361
+    "wallMs": 20116.066
    },
    "DEEPLSD-WF": {
     "count": 85,
-    "inferMs": 13296.784,
+    "inferMs": 15743.749,
     "peakRssMB": 2000.6,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 14080.307
+    "wallMs": 16673.18
    },
    "ELSED-DEFAULT": {
     "count": 64,
-    "detectMs": 10.001,
-    "peakRssMB": 63.3,
-    "wallMs": 82.336
+    "detectMs": 14.001,
+    "peakRssMB": 63.6,
+    "wallMs": 106.851
    },
    "MOBILESAM": {
     "autoMasks": 5,
-    "autoMs": 63247.055,
-    "encoderMs": 3309.195,
-    "peakRssMB": 2415.8,
+    "autoMs": 73035.341,
+    "encoderMs": 2841.566,
+    "peakRssMB": 2424.6,
     "threads": 2,
-    "wallMs": 71628.27
+    "wallMs": 79613.283
    },
    "sourceCv": {
     "counts": {
@@ -650,35 +650,35 @@
   "synthetic/double-line-walls": {
    "DEEPLSD-MD": {
     "count": 247,
-    "inferMs": 13702.102,
-    "peakRssMB": 2062.3,
+    "inferMs": 13002.342,
+    "peakRssMB": 1951.6,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 14447.253
+    "wallMs": 13854.475
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "count": 420,
-    "inferMs": 18768.666,
+    "inferMs": 19796.182,
     "inputLines": 420,
     "missingKeys": 0,
-    "peakRssMB": 2097.5,
+    "peakRssMB": 2023.6,
     "threads": 2,
     "unexpectedKeys": 0,
-    "wallMs": 19745.215
+    "wallMs": 20662.973
    },
    "DEEPLSD-WF": {
     "count": 202,
-    "inferMs": 13748.583,
-    "peakRssMB": 2000.6,
+    "inferMs": 12957.998,
+    "peakRssMB": 2000.4,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 14559.6
+    "wallMs": 13807.202
    },
    "ELSED-DEFAULT": {
     "count": 121,
-    "detectMs": 10.108,
-    "peakRssMB": 63.6,
-    "wallMs": 75.409
+    "detectMs": 15.413,
+    "peakRssMB": 63.4,
+    "wallMs": 93.045
    },
    "sourceCv": {
     "counts": {
@@ -695,43 +695,43 @@
   "synthetic/garage-door-interruption": {
    "DEEPLSD-MD": {
     "count": 118,
-    "inferMs": 16872.82,
-    "peakRssMB": 2236.4,
+    "inferMs": 15493.103,
+    "peakRssMB": 2154.1,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 17678.364
+    "wallMs": 16340.04
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "count": 459,
-    "inferMs": 23902.757,
+    "inferMs": 17043.514,
     "inputLines": 459,
     "missingKeys": 0,
-    "peakRssMB": 2201.7,
+    "peakRssMB": 2201.6,
     "threads": 2,
     "unexpectedKeys": 0,
-    "wallMs": 24780.445
+    "wallMs": 17921.338
    },
    "DEEPLSD-WF": {
     "count": 125,
-    "inferMs": 14740.626,
-    "peakRssMB": 2153.9,
+    "inferMs": 15623.376,
+    "peakRssMB": 2126.9,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 15566.994
+    "wallMs": 16473.17
    },
    "ELSED-DEFAULT": {
     "count": 79,
-    "detectMs": 11.91,
-    "peakRssMB": 64.6,
-    "wallMs": 80.077
+    "detectMs": 12.425,
+    "peakRssMB": 64.5,
+    "wallMs": 87.093
    },
    "MOBILESAM": {
     "autoMasks": 10,
-    "autoMs": 55682.711,
-    "encoderMs": 3447.738,
-    "peakRssMB": 2464.5,
+    "autoMs": 55520.175,
+    "encoderMs": 3111.372,
+    "peakRssMB": 2452.2,
     "threads": 2,
-    "wallMs": 62670.331
+    "wallMs": 62599.283
    },
    "sourceCv": {
     "counts": {
@@ -754,43 +754,43 @@
   "synthetic/glazed-facade": {
    "DEEPLSD-MD": {
     "count": 80,
-    "inferMs": 15010.188,
-    "peakRssMB": 2062.4,
+    "inferMs": 13420.191,
+    "peakRssMB": 1988.2,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 15805.597
+    "wallMs": 14342.447
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "count": 454,
-    "inferMs": 16302.525,
+    "inferMs": 20370.78,
     "inputLines": 454,
     "missingKeys": 0,
-    "peakRssMB": 2097.8,
+    "peakRssMB": 2011.4,
     "threads": 2,
     "unexpectedKeys": 0,
-    "wallMs": 17138.608
+    "wallMs": 21325.236
    },
    "DEEPLSD-WF": {
     "count": 83,
-    "inferMs": 11944.173,
-    "peakRssMB": 2050.0,
+    "inferMs": 14019.27,
+    "peakRssMB": 2050.1,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 12787.678
+    "wallMs": 14756.62
    },
    "ELSED-DEFAULT": {
     "count": 64,
-    "detectMs": 13.823,
-    "peakRssMB": 63.4,
-    "wallMs": 95.743
+    "detectMs": 11.435,
+    "peakRssMB": 63.3,
+    "wallMs": 79.75
    },
    "MOBILESAM": {
     "autoMasks": 6,
-    "autoMs": 52531.416,
-    "encoderMs": 3373.949,
-    "peakRssMB": 2422.5,
+    "autoMs": 55663.759,
+    "encoderMs": 3289.112,
+    "peakRssMB": 2472.4,
     "threads": 2,
-    "wallMs": 60930.895
+    "wallMs": 62651.282
    },
    "sourceCv": {
     "counts": {
@@ -813,43 +813,43 @@
   "synthetic/hatch-floor-patterns": {
    "DEEPLSD-MD": {
     "count": 328,
-    "inferMs": 18821.288,
-    "peakRssMB": 1963.7,
-    "strictLoad": "<All keys matched successfully>",
-    "threads": 2,
-    "wallMs": 19610.298
-   },
-   "DEEPLSD-MD-REFINE-SCV": {
-    "count": 457,
-    "inferMs": 23948.697,
-    "inputLines": 457,
-    "missingKeys": 0,
-    "peakRssMB": 2110.0,
-    "threads": 2,
-    "unexpectedKeys": 0,
-    "wallMs": 25037.041
-   },
-   "DEEPLSD-WF": {
-    "count": 335,
-    "inferMs": 18210.96,
+    "inferMs": 13277.265,
     "peakRssMB": 1988.2,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 19054.335
+    "wallMs": 14099.662
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 457,
+    "inferMs": 18169.451,
+    "inputLines": 457,
+    "missingKeys": 0,
+    "peakRssMB": 2109.9,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 19012.548
+   },
+   "DEEPLSD-WF": {
+    "count": 335,
+    "inferMs": 14293.409,
+    "peakRssMB": 1988.3,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 15217.221
    },
    "ELSED-DEFAULT": {
     "count": 121,
-    "detectMs": 11.708,
-    "peakRssMB": 63.5,
-    "wallMs": 90.455
+    "detectMs": 10.843,
+    "peakRssMB": 63.6,
+    "wallMs": 79.323
    },
    "MOBILESAM": {
     "autoMasks": 9,
-    "autoMs": 71228.976,
-    "encoderMs": 2631.958,
-    "peakRssMB": 2406.7,
+    "autoMs": 53923.654,
+    "encoderMs": 2494.79,
+    "peakRssMB": 2422.7,
     "threads": 2,
-    "wallMs": 77879.976
+    "wallMs": 59676.039
    },
    "sourceCv": {
     "counts": {
@@ -872,43 +872,43 @@
   "synthetic/interior-partitions-near-exterior": {
    "DEEPLSD-MD": {
     "count": 105,
-    "inferMs": 15774.68,
-    "peakRssMB": 1976.0,
+    "inferMs": 14820.238,
+    "peakRssMB": 1963.6,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 16574.516
+    "wallMs": 15721.243
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "count": 463,
-    "inferMs": 28806.669,
+    "inferMs": 19856.896,
     "inputLines": 463,
     "missingKeys": 0,
-    "peakRssMB": 2036.1,
+    "peakRssMB": 2097.9,
     "threads": 2,
     "unexpectedKeys": 0,
-    "wallMs": 30850.279
+    "wallMs": 20744.025
    },
    "DEEPLSD-WF": {
     "count": 113,
-    "inferMs": 22911.552,
+    "inferMs": 14430.921,
     "peakRssMB": 1988.1,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 23913.814
+    "wallMs": 15279.402
    },
    "ELSED-DEFAULT": {
     "count": 75,
-    "detectMs": 11.805,
-    "peakRssMB": 63.4,
-    "wallMs": 81.081
+    "detectMs": 11.259,
+    "peakRssMB": 63.5,
+    "wallMs": 79.309
    },
    "MOBILESAM": {
     "autoMasks": 4,
-    "autoMs": 71667.477,
-    "encoderMs": 3567.144,
-    "peakRssMB": 2462.2,
+    "autoMs": 52297.52,
+    "encoderMs": 2936.141,
+    "peakRssMB": 2452.2,
     "threads": 2,
-    "wallMs": 80437.058
+    "wallMs": 58228.764
    },
    "sourceCv": {
     "counts": {
@@ -931,43 +931,43 @@
   "synthetic/jpeg-compression": {
    "DEEPLSD-MD": {
     "count": 144,
-    "inferMs": 21572.359,
-    "peakRssMB": 1988.1,
+    "inferMs": 13064.416,
+    "peakRssMB": 1988.4,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 22564.053
+    "wallMs": 13884.799
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "count": 454,
-    "inferMs": 26324.012,
+    "inferMs": 18850.01,
     "inputLines": 454,
     "missingKeys": 0,
-    "peakRssMB": 2036.1,
+    "peakRssMB": 2035.9,
     "threads": 2,
     "unexpectedKeys": 0,
-    "wallMs": 27459.724
+    "wallMs": 19949.8
    },
    "DEEPLSD-WF": {
     "count": 162,
-    "inferMs": 14571.026,
-    "peakRssMB": 2050.2,
+    "inferMs": 13497.39,
+    "peakRssMB": 1988.2,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 15382.144
+    "wallMs": 14285.806
    },
    "ELSED-DEFAULT": {
     "count": 88,
-    "detectMs": 15.7,
-    "peakRssMB": 63.3,
-    "wallMs": 160.992
+    "detectMs": 17.058,
+    "peakRssMB": 63.5,
+    "wallMs": 116.324
    },
    "MOBILESAM": {
     "autoMasks": 16,
-    "autoMs": 71585.49,
-    "encoderMs": 4161.586,
-    "peakRssMB": 2413.6,
+    "autoMs": 52404.717,
+    "encoderMs": 2479.341,
+    "peakRssMB": 2404.1,
     "threads": 2,
-    "wallMs": 82042.906
+    "wallMs": 57811.96
    },
    "sourceCv": {
     "counts": {
@@ -990,43 +990,43 @@
   "synthetic/l-shape": {
    "DEEPLSD-MD": {
     "count": 108,
-    "inferMs": 13555.68,
-    "peakRssMB": 1975.9,
+    "inferMs": 11859.366,
+    "peakRssMB": 1988.1,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 14269.29
+    "wallMs": 12652.578
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "count": 456,
-    "inferMs": 20924.014,
+    "inferMs": 16712.056,
     "inputLines": 456,
     "missingKeys": 0,
-    "peakRssMB": 2035.8,
+    "peakRssMB": 2097.7,
     "threads": 2,
     "unexpectedKeys": 0,
-    "wallMs": 21794.678
+    "wallMs": 17600.481
    },
    "DEEPLSD-WF": {
     "count": 123,
-    "inferMs": 14853.829,
-    "peakRssMB": 2062.5,
+    "inferMs": 13151.711,
+    "peakRssMB": 1988.3,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 15739.677
+    "wallMs": 14139.428
    },
    "ELSED-DEFAULT": {
     "count": 89,
-    "detectMs": 11.196,
-    "peakRssMB": 63.4,
-    "wallMs": 82.261
+    "detectMs": 11.422,
+    "peakRssMB": 63.3,
+    "wallMs": 86.627
    },
    "MOBILESAM": {
     "autoMasks": 17,
-    "autoMs": 71863.215,
-    "encoderMs": 4115.035,
-    "peakRssMB": 2407.3,
+    "autoMs": 47361.781,
+    "encoderMs": 2139.836,
+    "peakRssMB": 2475.7,
     "threads": 2,
-    "wallMs": 82013.915
+    "wallMs": 52137.338
    },
    "sourceCv": {
     "counts": {
@@ -1049,43 +1049,43 @@
   "synthetic/low-contrast": {
    "DEEPLSD-MD": {
     "count": 115,
-    "inferMs": 14076.737,
-    "peakRssMB": 2062.3,
+    "inferMs": 12338.709,
+    "peakRssMB": 2050.1,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 14880.39
+    "wallMs": 13188.934
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "count": 464,
-    "inferMs": 18392.552,
+    "inferMs": 16601.68,
     "inputLines": 464,
     "missingKeys": 0,
-    "peakRssMB": 2011.5,
+    "peakRssMB": 2097.8,
     "threads": 2,
     "unexpectedKeys": 0,
-    "wallMs": 19269.58
+    "wallMs": 17565.572
    },
    "DEEPLSD-WF": {
     "count": 119,
-    "inferMs": 14420.962,
-    "peakRssMB": 1988.1,
+    "inferMs": 12132.664,
+    "peakRssMB": 2050.1,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 15224.695
+    "wallMs": 12882.098
    },
    "ELSED-DEFAULT": {
     "count": 90,
-    "detectMs": 18.113,
-    "peakRssMB": 63.5,
-    "wallMs": 112.545
+    "detectMs": 10.718,
+    "peakRssMB": 63.3,
+    "wallMs": 86.609
    },
    "MOBILESAM": {
     "autoMasks": 18,
-    "autoMs": 73238.788,
-    "encoderMs": 4050.436,
-    "peakRssMB": 2422.2,
+    "autoMs": 50476.45,
+    "encoderMs": 2133.204,
+    "peakRssMB": 2426.3,
     "threads": 2,
-    "wallMs": 82758.037
+    "wallMs": 55516.881
    },
    "sourceCv": {
     "counts": {
@@ -1108,43 +1108,43 @@
   "synthetic/narrow-connector": {
    "DEEPLSD-MD": {
     "count": 147,
-    "inferMs": 19418.03,
-    "peakRssMB": 2222.6,
+    "inferMs": 14680.739,
+    "peakRssMB": 2236.4,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 20431.469
+    "wallMs": 15448.013
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "count": 468,
-    "inferMs": 27528.812,
+    "inferMs": 17734.225,
     "inputLines": 468,
     "missingKeys": 0,
-    "peakRssMB": 2160.8,
+    "peakRssMB": 2201.9,
     "threads": 2,
     "unexpectedKeys": 0,
-    "wallMs": 28453.315
+    "wallMs": 18657.362
    },
    "DEEPLSD-WF": {
     "count": 155,
-    "inferMs": 16583.803,
-    "peakRssMB": 2112.9,
+    "inferMs": 13867.813,
+    "peakRssMB": 2153.7,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 17346.892
+    "wallMs": 14771.241
    },
    "ELSED-DEFAULT": {
     "count": 97,
-    "detectMs": 13.706,
-    "peakRssMB": 64.8,
-    "wallMs": 97.206
+    "detectMs": 11.432,
+    "peakRssMB": 64.6,
+    "wallMs": 90.785
    },
    "MOBILESAM": {
     "autoMasks": 10,
-    "autoMs": 68132.303,
-    "encoderMs": 4513.228,
-    "peakRssMB": 2408.4,
+    "autoMs": 48395.574,
+    "encoderMs": 2139.468,
+    "peakRssMB": 2418.6,
     "threads": 2,
-    "wallMs": 79154.653
+    "wallMs": 53193.643
    },
    "sourceCv": {
     "counts": {
@@ -1167,43 +1167,43 @@
   "synthetic/partial-crop": {
    "DEEPLSD-MD": {
     "count": 81,
-    "inferMs": 6439.101,
-    "peakRssMB": 1328.4,
+    "inferMs": 6415.623,
+    "peakRssMB": 1289.9,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 7208.843
+    "wallMs": 7350.535
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "count": 444,
-    "inferMs": 10003.795,
+    "inferMs": 11102.917,
     "inputLines": 444,
     "missingKeys": 0,
-    "peakRssMB": 1375.9,
+    "peakRssMB": 1363.2,
     "threads": 2,
     "unexpectedKeys": 0,
-    "wallMs": 10861.902
+    "wallMs": 11911.742
    },
    "DEEPLSD-WF": {
     "count": 90,
-    "inferMs": 6485.493,
-    "peakRssMB": 1315.8,
+    "inferMs": 6984.542,
+    "peakRssMB": 1289.8,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 7211.363
+    "wallMs": 7839.925
    },
    "ELSED-DEFAULT": {
     "count": 62,
-    "detectMs": 10.715,
-    "peakRssMB": 58.3,
-    "wallMs": 91.683
+    "detectMs": 10.591,
+    "peakRssMB": 58.5,
+    "wallMs": 79.636
    },
    "MOBILESAM": {
     "autoMasks": 15,
-    "autoMs": 51677.947,
-    "encoderMs": 2101.465,
-    "peakRssMB": 2440.0,
+    "autoMs": 44481.017,
+    "encoderMs": 2141.359,
+    "peakRssMB": 2437.1,
     "threads": 2,
-    "wallMs": 55565.587
+    "wallMs": 48300.188
    },
    "sourceCv": {
     "counts": {
@@ -1226,43 +1226,43 @@
   "synthetic/pergola-outside": {
    "DEEPLSD-MD": {
     "count": 122,
-    "inferMs": 13515.1,
-    "peakRssMB": 2044.8,
+    "inferMs": 12895.76,
+    "peakRssMB": 2070.8,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 14313.224
+    "wallMs": 13590.699
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "count": 449,
-    "inferMs": 21219.995,
+    "inferMs": 18949.818,
     "inputLines": 449,
     "missingKeys": 0,
-    "peakRssMB": 2118.6,
+    "peakRssMB": 2105.4,
     "threads": 2,
     "unexpectedKeys": 0,
-    "wallMs": 22255.899
+    "wallMs": 19781.539
    },
    "DEEPLSD-WF": {
     "count": 128,
-    "inferMs": 13322.223,
-    "peakRssMB": 2070.6,
+    "inferMs": 12881.625,
+    "peakRssMB": 2057.8,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 14140.614
+    "wallMs": 13617.325
    },
    "ELSED-DEFAULT": {
     "count": 69,
-    "detectMs": 11.051,
+    "detectMs": 13.735,
     "peakRssMB": 64.2,
-    "wallMs": 82.296
+    "wallMs": 88.459
    },
    "MOBILESAM": {
     "autoMasks": 9,
-    "autoMs": 63423.101,
-    "encoderMs": 3776.077,
-    "peakRssMB": 2465.9,
+    "autoMs": 51004.211,
+    "encoderMs": 2453.668,
+    "peakRssMB": 2427.8,
     "threads": 2,
-    "wallMs": 71321.659
+    "wallMs": 56279.696
    },
    "sourceCv": {
     "counts": {
@@ -1285,43 +1285,43 @@
   "synthetic/recessed-entrance": {
    "DEEPLSD-MD": {
     "count": 104,
-    "inferMs": 21664.78,
-    "peakRssMB": 1988.4,
+    "inferMs": 12472.39,
+    "peakRssMB": 1988.2,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 22662.041
+    "wallMs": 13283.236
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "count": 458,
-    "inferMs": 15719.453,
+    "inferMs": 17665.563,
     "inputLines": 458,
     "missingKeys": 0,
-    "peakRssMB": 2036.0,
+    "peakRssMB": 2098.0,
     "threads": 2,
     "unexpectedKeys": 0,
-    "wallMs": 16597.366
+    "wallMs": 18539.32
    },
    "DEEPLSD-WF": {
     "count": 124,
-    "inferMs": 11768.205,
-    "peakRssMB": 2050.2,
+    "inferMs": 12823.86,
+    "peakRssMB": 2000.6,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 12816.837
+    "wallMs": 13608.133
    },
    "ELSED-DEFAULT": {
     "count": 86,
-    "detectMs": 11.751,
-    "peakRssMB": 63.6,
-    "wallMs": 76.998
+    "detectMs": 17.813,
+    "peakRssMB": 63.2,
+    "wallMs": 92.798
    },
    "MOBILESAM": {
     "autoMasks": 8,
-    "autoMs": 46351.576,
-    "encoderMs": 2717.31,
-    "peakRssMB": 2418.0,
+    "autoMs": 52073.698,
+    "encoderMs": 2406.609,
+    "peakRssMB": 2411.2,
     "threads": 2,
-    "wallMs": 52082.204
+    "wallMs": 57442.361
    },
    "sourceCv": {
     "counts": {
@@ -1344,43 +1344,43 @@
   "synthetic/rect": {
    "DEEPLSD-MD": {
     "count": 79,
-    "inferMs": 12024.978,
-    "peakRssMB": 2049.9,
+    "inferMs": 13608.057,
+    "peakRssMB": 1951.2,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 12805.269
+    "wallMs": 14463.852
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "count": 441,
-    "inferMs": 15638.592,
+    "inferMs": 17031.305,
     "inputLines": 441,
     "missingKeys": 0,
-    "peakRssMB": 2035.8,
+    "peakRssMB": 2011.3,
     "threads": 2,
     "unexpectedKeys": 0,
-    "wallMs": 16581.285
+    "wallMs": 17921.694
    },
    "DEEPLSD-WF": {
     "count": 93,
-    "inferMs": 11913.619,
-    "peakRssMB": 2074.7,
+    "inferMs": 13068.965,
+    "peakRssMB": 2062.2,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 12757.979
+    "wallMs": 13999.967
    },
    "ELSED-DEFAULT": {
     "count": 68,
-    "detectMs": 11.359,
-    "peakRssMB": 63.4,
-    "wallMs": 99.831
+    "detectMs": 12.029,
+    "peakRssMB": 63.3,
+    "wallMs": 101.949
    },
    "MOBILESAM": {
     "autoMasks": 7,
-    "autoMs": 54575.174,
-    "encoderMs": 1890.739,
-    "peakRssMB": 2486.0,
+    "autoMs": 51252.994,
+    "encoderMs": 2261.586,
+    "peakRssMB": 2419.0,
     "threads": 2,
-    "wallMs": 58857.365
+    "wallMs": 56173.884
    },
    "sourceCv": {
     "counts": {
@@ -1403,43 +1403,43 @@
   "synthetic/rotated-plan": {
    "DEEPLSD-MD": {
     "count": 105,
-    "inferMs": 11972.454,
-    "peakRssMB": 2049.9,
+    "inferMs": 12119.189,
+    "peakRssMB": 2062.3,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 12839.941
+    "wallMs": 12916.532
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "count": 421,
-    "inferMs": 15717.119,
+    "inferMs": 17031.845,
     "inputLines": 421,
     "missingKeys": 0,
     "peakRssMB": 2035.9,
     "threads": 2,
     "unexpectedKeys": 0,
-    "wallMs": 16533.684
+    "wallMs": 17980.353
    },
    "DEEPLSD-WF": {
     "count": 110,
-    "inferMs": 11400.868,
-    "peakRssMB": 2000.5,
+    "inferMs": 13389.973,
+    "peakRssMB": 2050.0,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 12111.288
+    "wallMs": 14279.746
    },
    "ELSED-DEFAULT": {
     "count": 93,
-    "detectMs": 15.482,
-    "peakRssMB": 63.3,
-    "wallMs": 120.394
+    "detectMs": 12.078,
+    "peakRssMB": 63.2,
+    "wallMs": 89.246
    },
    "MOBILESAM": {
     "autoMasks": 13,
-    "autoMs": 49056.049,
-    "encoderMs": 2350.932,
-    "peakRssMB": 2474.6,
+    "autoMs": 48381.128,
+    "encoderMs": 2336.658,
+    "peakRssMB": 2463.3,
     "threads": 2,
-    "wallMs": 53971.941
+    "wallMs": 53414.338
    },
    "sourceCv": {
     "counts": {
@@ -1462,43 +1462,43 @@
   "synthetic/scan-blur": {
    "DEEPLSD-MD": {
     "count": 116,
-    "inferMs": 13211.272,
-    "peakRssMB": 1988.3,
+    "inferMs": 13239.555,
+    "peakRssMB": 2050.1,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 13964.315
+    "wallMs": 14020.603
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "count": 492,
-    "inferMs": 15694.391,
+    "inferMs": 16660.305,
     "inputLines": 492,
     "missingKeys": 0,
-    "peakRssMB": 1999.2,
+    "peakRssMB": 2023.8,
     "threads": 2,
     "unexpectedKeys": 0,
-    "wallMs": 16539.147
+    "wallMs": 17565.105
    },
    "DEEPLSD-WF": {
     "count": 129,
-    "inferMs": 12002.015,
-    "peakRssMB": 2050.2,
+    "inferMs": 12755.533,
+    "peakRssMB": 1988.3,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 12787.689
+    "wallMs": 13564.861
    },
    "ELSED-DEFAULT": {
     "count": 108,
-    "detectMs": 11.323,
-    "peakRssMB": 63.5,
-    "wallMs": 92.559
+    "detectMs": 11.326,
+    "peakRssMB": 63.3,
+    "wallMs": 109.737
    },
    "MOBILESAM": {
     "autoMasks": 12,
-    "autoMs": 46371.948,
-    "encoderMs": 2499.126,
-    "peakRssMB": 2469.2,
+    "autoMs": 49044.455,
+    "encoderMs": 2397.688,
+    "peakRssMB": 2413.0,
     "threads": 2,
-    "wallMs": 51968.224
+    "wallMs": 54445.364
    },
    "sourceCv": {
     "counts": {
@@ -1521,43 +1521,43 @@
   "synthetic/skew": {
    "DEEPLSD-MD": {
     "count": 126,
-    "inferMs": 11573.03,
-    "peakRssMB": 1951.1,
-    "strictLoad": "<All keys matched successfully>",
-    "threads": 2,
-    "wallMs": 12336.075
-   },
-   "DEEPLSD-MD-REFINE-SCV": {
-    "count": 433,
-    "inferMs": 25808.987,
-    "inputLines": 433,
-    "missingKeys": 0,
-    "peakRssMB": 2023.8,
-    "threads": 2,
-    "unexpectedKeys": 0,
-    "wallMs": 26670.043
-   },
-   "DEEPLSD-WF": {
-    "count": 125,
-    "inferMs": 13880.605,
+    "inferMs": 12983.446,
     "peakRssMB": 1988.2,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 14783.329
+    "wallMs": 13793.39
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 433,
+    "inferMs": 17898.031,
+    "inputLines": 433,
+    "missingKeys": 0,
+    "peakRssMB": 2110.1,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 18770.869
+   },
+   "DEEPLSD-WF": {
+    "count": 125,
+    "inferMs": 13076.672,
+    "peakRssMB": 2062.2,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 13995.175
    },
    "ELSED-DEFAULT": {
     "count": 99,
-    "detectMs": 18.943,
+    "detectMs": 14.29,
     "peakRssMB": 63.4,
-    "wallMs": 122.359
+    "wallMs": 92.606
    },
    "MOBILESAM": {
     "autoMasks": 16,
-    "autoMs": 45230.706,
-    "encoderMs": 2112.418,
-    "peakRssMB": 2409.2,
+    "autoMs": 50409.845,
+    "encoderMs": 2223.895,
+    "peakRssMB": 2411.8,
     "threads": 2,
-    "wallMs": 49853.193
+    "wallMs": 55315.049
    },
    "sourceCv": {
     "counts": {
@@ -1580,43 +1580,43 @@
   "synthetic/terrace-adjacent": {
    "DEEPLSD-MD": {
     "count": 369,
-    "inferMs": 16891.09,
-    "peakRssMB": 2070.5,
+    "inferMs": 13328.001,
+    "peakRssMB": 2070.8,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 17750.536
+    "wallMs": 14057.553
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "count": 462,
-    "inferMs": 20638.589,
+    "inferMs": 18653.004,
     "inputLines": 462,
     "missingKeys": 0,
-    "peakRssMB": 2079.4,
+    "peakRssMB": 2105.6,
     "threads": 2,
     "unexpectedKeys": 0,
-    "wallMs": 21495.607
+    "wallMs": 19661.882
    },
    "DEEPLSD-WF": {
     "count": 394,
-    "inferMs": 18172.542,
-    "peakRssMB": 2070.7,
+    "inferMs": 14878.976,
+    "peakRssMB": 2031.8,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 19235.164
+    "wallMs": 15674.171
    },
    "ELSED-DEFAULT": {
     "count": 131,
-    "detectMs": 12.905,
-    "peakRssMB": 64.1,
-    "wallMs": 97.253
+    "detectMs": 20.09,
+    "peakRssMB": 64.0,
+    "wallMs": 98.28
    },
    "MOBILESAM": {
     "autoMasks": 10,
-    "autoMs": 44419.44,
-    "encoderMs": 1972.317,
-    "peakRssMB": 2486.0,
+    "autoMs": 51880.452,
+    "encoderMs": 2266.631,
+    "peakRssMB": 2424.5,
     "threads": 2,
-    "wallMs": 48582.262
+    "wallMs": 56703.54
    },
    "sourceCv": {
     "counts": {
@@ -1639,43 +1639,43 @@
   "synthetic/text-crossing-walls": {
    "DEEPLSD-MD": {
     "count": 101,
-    "inferMs": 14046.203,
-    "peakRssMB": 2050.3,
+    "inferMs": 13953.849,
+    "peakRssMB": 1988.1,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 14769.275
+    "wallMs": 14904.216
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "count": 450,
-    "inferMs": 24578.365,
+    "inferMs": 17384.402,
     "inputLines": 450,
     "missingKeys": 0,
-    "peakRssMB": 2035.9,
+    "peakRssMB": 2011.3,
     "threads": 2,
     "unexpectedKeys": 0,
-    "wallMs": 25653.243
+    "wallMs": 18379.319
    },
    "DEEPLSD-WF": {
     "count": 110,
-    "inferMs": 15001.661,
-    "peakRssMB": 2050.3,
+    "inferMs": 13571.521,
+    "peakRssMB": 1988.2,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 15809.051
+    "wallMs": 14306.636
    },
    "ELSED-DEFAULT": {
     "count": 78,
-    "detectMs": 10.533,
-    "peakRssMB": 63.4,
-    "wallMs": 74.818
+    "detectMs": 16.387,
+    "peakRssMB": 63.1,
+    "wallMs": 111.262
    },
    "MOBILESAM": {
     "autoMasks": 6,
-    "autoMs": 45125.921,
-    "encoderMs": 1982.684,
-    "peakRssMB": 2425.3,
+    "autoMs": 52071.626,
+    "encoderMs": 2271.544,
+    "peakRssMB": 2480.6,
     "threads": 2,
-    "wallMs": 49441.263
+    "wallMs": 57007.051
    },
    "sourceCv": {
     "counts": {
@@ -1698,43 +1698,43 @@
   "synthetic/u-shape": {
    "DEEPLSD-MD": {
     "count": 114,
-    "inferMs": 18248.144,
-    "peakRssMB": 1988.2,
+    "inferMs": 11801.473,
+    "peakRssMB": 1951.1,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 19086.472
+    "wallMs": 12500.352
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "count": 457,
-    "inferMs": 20097.365,
+    "inferMs": 16111.41,
     "inputLines": 457,
     "missingKeys": 0,
-    "peakRssMB": 2035.9,
+    "peakRssMB": 2036.0,
     "threads": 2,
     "unexpectedKeys": 0,
-    "wallMs": 20981.719
+    "wallMs": 16994.541
    },
    "DEEPLSD-WF": {
     "count": 121,
-    "inferMs": 13779.293,
-    "peakRssMB": 2074.7,
+    "inferMs": 12634.026,
+    "peakRssMB": 2062.3,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 14698.54
+    "wallMs": 13345.627
    },
    "ELSED-DEFAULT": {
     "count": 88,
-    "detectMs": 10.977,
-    "peakRssMB": 63.7,
-    "wallMs": 78.903
+    "detectMs": 13.09,
+    "peakRssMB": 63.4,
+    "wallMs": 118.805
    },
    "MOBILESAM": {
     "autoMasks": 16,
-    "autoMs": 43896.023,
-    "encoderMs": 1875.074,
-    "peakRssMB": 2460.0,
+    "autoMs": 47049.34,
+    "encoderMs": 2388.255,
+    "peakRssMB": 2459.8,
     "threads": 2,
-    "wallMs": 48232.414
+    "wallMs": 52441.623
    },
    "sourceCv": {
     "counts": {
@@ -1757,43 +1757,43 @@
   "synthetic/windows-long-facade": {
    "DEEPLSD-MD": {
     "count": 96,
-    "inferMs": 13328.893,
-    "peakRssMB": 2043.8,
+    "inferMs": 13545.835,
+    "peakRssMB": 2043.7,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 14076.945
+    "wallMs": 14273.907
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "count": 446,
-    "inferMs": 19839.929,
+    "inferMs": 17925.486,
     "inputLines": 446,
     "missingKeys": 0,
     "peakRssMB": 2091.4,
     "threads": 2,
     "unexpectedKeys": 0,
-    "wallMs": 20736.053
+    "wallMs": 18754.592
    },
    "DEEPLSD-WF": {
     "count": 101,
-    "inferMs": 13725.559,
-    "peakRssMB": 2031.0,
+    "inferMs": 12199.335,
+    "peakRssMB": 2043.6,
     "strictLoad": "<All keys matched successfully>",
     "threads": 2,
-    "wallMs": 14636.95
+    "wallMs": 13015.168
    },
    "ELSED-DEFAULT": {
     "count": 87,
-    "detectMs": 13.698,
-    "peakRssMB": 63.9,
-    "wallMs": 85.44
+    "detectMs": 10.332,
+    "peakRssMB": 64.0,
+    "wallMs": 74.803
    },
    "MOBILESAM": {
     "autoMasks": 6,
-    "autoMs": 49964.653,
-    "encoderMs": 2346.461,
-    "peakRssMB": 2439.2,
+    "autoMs": 49736.163,
+    "encoderMs": 2112.232,
+    "peakRssMB": 2439.1,
     "threads": 2,
-    "wallMs": 55276.249
+    "wallMs": 54371.62
    },
    "sourceCv": {
     "counts": {
@@ -1811,6 +1811,378 @@
      "sourceCvLines": 351.964,
      "total": 621.203
     }
+   }
+  }
+ },
+ "fullRerunComparison": {
+  "comparedWith": "copy of obs/ taken before the full provider re-run (post-review B5)",
+  "configs": {
+   "DEEPLSD-MD": {
+    "differing": {},
+    "differingCount": 0,
+    "identicalCount": 30
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "differing": {
+     "real/dom-pod-jarzabem": {
+      "count": [
+       870,
+       870
+      ],
+      "idsCompared": 870,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 29.998,
+      "shareMovedOver0.1px": 0.1759,
+      "shareMovedOver1px": 0.0494
+     },
+     "real/dom-w-arkadiach": {
+      "count": [
+       674,
+       674
+      ],
+      "idsCompared": 674,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 7.801,
+      "shareMovedOver0.1px": 0.2923,
+      "shareMovedOver1px": 0.0772
+     },
+     "real/dom-w-azaliach": {
+      "count": [
+       818,
+       818
+      ],
+      "idsCompared": 818,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 199.622,
+      "shareMovedOver0.1px": 0.2861,
+      "shareMovedOver1px": 0.0844
+     },
+     "real/dom-w-helikoniach": {
+      "count": [
+       922,
+       922
+      ],
+      "idsCompared": 922,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 286.188,
+      "shareMovedOver0.1px": 0.1649,
+      "shareMovedOver1px": 0.0607
+     },
+     "real/dom-w-morelach": {
+      "count": [
+       1195,
+       1195
+      ],
+      "idsCompared": 1195,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 42.401,
+      "shareMovedOver0.1px": 0.0862,
+      "shareMovedOver1px": 0.0351
+     },
+     "real/dom-w-zurawkach": {
+      "count": [
+       834,
+       834
+      ],
+      "idsCompared": 834,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 23.861,
+      "shareMovedOver0.1px": 0.1871,
+      "shareMovedOver1px": 0.0731
+     },
+     "real/willa-miranda": {
+      "count": [
+       785,
+       785
+      ],
+      "idsCompared": 785,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 29.858,
+      "shareMovedOver0.1px": 0.1592,
+      "shareMovedOver1px": 0.0535
+     },
+     "synthetic/attached-garage": {
+      "count": [
+       460,
+       460
+      ],
+      "idsCompared": 460,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 50.641,
+      "shareMovedOver0.1px": 0.3478,
+      "shareMovedOver1px": 0.1109
+     },
+     "synthetic/bay-window": {
+      "count": [
+       462,
+       462
+      ],
+      "idsCompared": 462,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 133.868,
+      "shareMovedOver0.1px": 0.4481,
+      "shareMovedOver1px": 0.1602
+     },
+     "synthetic/dimension-lines-near-facade": {
+      "count": [
+       441,
+       441
+      ],
+      "idsCompared": 441,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 431.915,
+      "shareMovedOver0.1px": 0.3039,
+      "shareMovedOver1px": 0.0884
+     },
+     "synthetic/double-line-walls": {
+      "count": [
+       420,
+       420
+      ],
+      "idsCompared": 420,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 10.254,
+      "shareMovedOver0.1px": 0.381,
+      "shareMovedOver1px": 0.1262
+     },
+     "synthetic/garage-door-interruption": {
+      "count": [
+       459,
+       459
+      ],
+      "idsCompared": 459,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 46.984,
+      "shareMovedOver0.1px": 0.3094,
+      "shareMovedOver1px": 0.0784
+     },
+     "synthetic/glazed-facade": {
+      "count": [
+       454,
+       454
+      ],
+      "idsCompared": 454,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 20.034,
+      "shareMovedOver0.1px": 0.4537,
+      "shareMovedOver1px": 0.2004
+     },
+     "synthetic/hatch-floor-patterns": {
+      "count": [
+       457,
+       457
+      ],
+      "idsCompared": 457,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 458.918,
+      "shareMovedOver0.1px": 0.4004,
+      "shareMovedOver1px": 0.0832
+     },
+     "synthetic/interior-partitions-near-exterior": {
+      "count": [
+       463,
+       463
+      ],
+      "idsCompared": 463,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 311.647,
+      "shareMovedOver0.1px": 0.4125,
+      "shareMovedOver1px": 0.1901
+     },
+     "synthetic/jpeg-compression": {
+      "count": [
+       454,
+       454
+      ],
+      "idsCompared": 454,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 624.979,
+      "shareMovedOver0.1px": 0.4449,
+      "shareMovedOver1px": 0.2401
+     },
+     "synthetic/l-shape": {
+      "count": [
+       456,
+       456
+      ],
+      "idsCompared": 456,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 425.27,
+      "shareMovedOver0.1px": 0.3487,
+      "shareMovedOver1px": 0.1118
+     },
+     "synthetic/low-contrast": {
+      "count": [
+       464,
+       464
+      ],
+      "idsCompared": 464,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 779.125,
+      "shareMovedOver0.1px": 0.3901,
+      "shareMovedOver1px": 0.1272
+     },
+     "synthetic/narrow-connector": {
+      "count": [
+       468,
+       468
+      ],
+      "idsCompared": 468,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 45.456,
+      "shareMovedOver0.1px": 0.3611,
+      "shareMovedOver1px": 0.0769
+     },
+     "synthetic/partial-crop": {
+      "count": [
+       444,
+       444
+      ],
+      "idsCompared": 444,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 98.1,
+      "shareMovedOver0.1px": 0.5203,
+      "shareMovedOver1px": 0.1689
+     },
+     "synthetic/pergola-outside": {
+      "count": [
+       449,
+       449
+      ],
+      "idsCompared": 449,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 342.045,
+      "shareMovedOver0.1px": 0.4365,
+      "shareMovedOver1px": 0.1782
+     },
+     "synthetic/recessed-entrance": {
+      "count": [
+       458,
+       458
+      ],
+      "idsCompared": 458,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 500.576,
+      "shareMovedOver0.1px": 0.5371,
+      "shareMovedOver1px": 0.2183
+     },
+     "synthetic/rect": {
+      "count": [
+       441,
+       441
+      ],
+      "idsCompared": 441,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 539.529,
+      "shareMovedOver0.1px": 0.4626,
+      "shareMovedOver1px": 0.1497
+     },
+     "synthetic/rotated-plan": {
+      "count": [
+       421,
+       421
+      ],
+      "idsCompared": 421,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 294.997,
+      "shareMovedOver0.1px": 0.399,
+      "shareMovedOver1px": 0.1449
+     },
+     "synthetic/scan-blur": {
+      "count": [
+       492,
+       492
+      ],
+      "idsCompared": 492,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 2733.384,
+      "shareMovedOver0.1px": 0.5691,
+      "shareMovedOver1px": 0.4411
+     },
+     "synthetic/skew": {
+      "count": [
+       433,
+       433
+      ],
+      "idsCompared": 433,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 316.076,
+      "shareMovedOver0.1px": 0.4226,
+      "shareMovedOver1px": 0.1917
+     },
+     "synthetic/terrace-adjacent": {
+      "count": [
+       462,
+       462
+      ],
+      "idsCompared": 462,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 75.439,
+      "shareMovedOver0.1px": 0.3658,
+      "shareMovedOver1px": 0.0823
+     },
+     "synthetic/text-crossing-walls": {
+      "count": [
+       450,
+       450
+      ],
+      "idsCompared": 450,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 311.741,
+      "shareMovedOver0.1px": 0.48,
+      "shareMovedOver1px": 0.2067
+     },
+     "synthetic/u-shape": {
+      "count": [
+       457,
+       457
+      ],
+      "idsCompared": 457,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 7.483,
+      "shareMovedOver0.1px": 0.4617,
+      "shareMovedOver1px": 0.1247
+     },
+     "synthetic/windows-long-facade": {
+      "count": [
+       446,
+       446
+      ],
+      "idsCompared": 446,
+      "idsOnlyInOne": 0,
+      "maxMovePx": 138.233,
+      "shareMovedOver0.1px": 0.4417,
+      "shareMovedOver1px": 0.1031
+     }
+    },
+    "differingCount": 30,
+    "differingSummary": {
+     "maxMovePx": 2733.384,
+     "shareMovedOver0.1px": [
+      0.0862,
+      0.5691
+     ],
+     "shareMovedOver1px": [
+      0.0351,
+      0.4411
+     ]
+    },
+    "identicalCount": 0
+   },
+   "DEEPLSD-WF": {
+    "differing": {},
+    "differingCount": 0,
+    "identicalCount": 30
+   },
+   "ELSED-DEFAULT": {
+    "differing": {},
+    "differingCount": 0,
+    "identicalCount": 30
+   },
+   "MOBILESAM": {
+    "differing": {},
+    "differingCount": 0,
+    "identicalCount": 30
    }
   }
  },
@@ -1841,43 +2213,98 @@
   "DEEPLSD-MD": {
    "frames": 30,
    "max_count": 897.0,
+   "max_inferMs": 28465.4,
+   "max_peakRssMB": 2236.4,
+   "max_wallMs": 30411.0,
+   "median_count": 120.0,
+   "median_inferMs": 13374.1,
+   "median_peakRssMB": 1988.2,
+   "median_wallMs": 14186.8
+  },
+  "DEEPLSD-MD-REFINE-SCV": {
+   "frames": 30,
+   "max_count": 1195.0,
+   "max_inferMs": 36310.0,
+   "max_peakRssMB": 2283.9,
+   "max_wallMs": 37388.8,
+   "median_count": 458.5,
+   "median_inferMs": 18411.2,
+   "median_peakRssMB": 2035.9,
+   "median_wallMs": 19337.2
+  },
+  "DEEPLSD-WF": {
+   "frames": 30,
+   "max_count": 948.0,
+   "max_inferMs": 23433.6,
+   "max_peakRssMB": 2153.9,
+   "max_wallMs": 24667.6,
+   "median_count": 126.5,
+   "median_inferMs": 13534.5,
+   "median_peakRssMB": 2000.5,
+   "median_wallMs": 14296.2
+  },
+  "ELSED-DEFAULT": {
+   "frames": 30,
+   "max_count": 767.0,
+   "max_detectMs": 97.2,
+   "max_peakRssMB": 64.8,
+   "max_wallMs": 216.8,
+   "median_count": 91.5,
+   "median_detectMs": 12.8,
+   "median_peakRssMB": 63.3,
+   "median_wallMs": 91.7
+  },
+  "MOBILESAM": {
+   "frames": 29,
+   "max_autoMs": 79824.5,
+   "max_encoderMs": 6224.4,
+   "max_peakRssMB": 2480.6,
+   "max_wallMs": 89245.3,
+   "median_autoMs": 52073.7,
+   "median_encoderMs": 2413.3,
+   "median_peakRssMB": 2439.1,
+   "median_wallMs": 57442.4
+  },
+  "SOURCE_CV": {
+   "frames": 30,
+   "median_boundaryLayerMs": 111.6,
+   "median_linesMs": 354.8,
+   "median_planSheetAndSolidMs": 202.9
+  }
+ },
+ "summaryFirstRun": {
+  "DEEPLSD-MD": {
+   "frames": 30,
    "max_inferMs": 21664.8,
    "max_peakRssMB": 2236.4,
    "max_wallMs": 22662.0,
-   "median_count": 120.0,
    "median_inferMs": 13535.4,
    "median_peakRssMB": 1988.2,
    "median_wallMs": 14291.3
   },
   "DEEPLSD-MD-REFINE-SCV": {
    "frames": 30,
-   "max_count": 1195.0,
    "max_inferMs": 29815.3,
    "max_peakRssMB": 2283.8,
    "max_wallMs": 31101.1,
-   "median_count": 458.5,
    "median_inferMs": 20368.0,
    "median_peakRssMB": 2035.9,
    "median_wallMs": 21238.7
   },
   "DEEPLSD-WF": {
    "frames": 30,
-   "max_count": 948.0,
    "max_inferMs": 22911.6,
    "max_peakRssMB": 2154.0,
    "max_wallMs": 23913.8,
-   "median_count": 126.5,
    "median_inferMs": 13309.5,
    "median_peakRssMB": 2000.6,
    "median_wallMs": 14110.5
   },
   "ELSED-DEFAULT": {
    "frames": 30,
-   "max_count": 767.0,
    "max_detectMs": 20.3,
    "max_peakRssMB": 64.8,
    "max_wallMs": 161.0,
-   "median_count": 91.5,
    "median_detectMs": 12.4,
    "median_peakRssMB": 63.4,
    "median_wallMs": 91.3
@@ -1892,15 +2319,11 @@
    "median_encoderMs": 2682.4,
    "median_peakRssMB": 2440.0,
    "median_wallMs": 59824.0
-  },
-  "SOURCE_CV": {
-   "frames": 30,
-   "median_boundaryLayerMs": 111.6,
-   "median_linesMs": 354.8,
-   "median_planSheetAndSolidMs": 202.9
   }
  },
+ "timingNote": "summary = the scored outputs (full re-run with input hashes, post-review B5); summaryFirstRun = the first run of the same providers on the same frames. Both on a shared 4-vCPU box: upper bounds, not phone timings. peakRssMB here is the process maximum RSS from the kernel (ru_maxrss), a true peak; the WASM probe's figure is not (see wasmProbeNode18.memoryNote).",
  "wasmProbeNode18": {
+  "memoryNote": "rssAfterMiB / rssAfterInferenceMiBPerModel_lowerBoundOnPeak = RSS after inference, sampled on an event loop that the single-thread WASM call blocks: a lower bound on the peak, not the peak (post-review D8)",
   "models": {
    "deeplsd_md_fields": {
     "bytes": 34310477,
@@ -1932,7 +2355,7 @@
   },
   "node": "v18.20.4",
   "note": "one process per model (isolated RSS); box shared with a concurrent development matrix (load average 7.5-8.5 on 4 vCPU): timings are upper bounds on this x86-64 box, not phone timings",
-  "peakRssMiBPerModel": {
+  "rssAfterInferenceMiBPerModel_lowerBoundOnPeak": {
    "deeplsd_md_fields": 1207,
    "mobile_sam_decoder": 404,
    "mobile_sam_encoder": 637

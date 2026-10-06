@@ -14,8 +14,11 @@
  *     WALL_GEOMETRY_EXTENT). Nothing about it comes from the truth. It also feeds the MobileSAM BOX / SOURCE prompts
  *     and the AUTO selection window, exactly as the production extent does on the real houses (council E6: an extent
  *     taken from the truth bbox would be a prompt taken from the answer);
- *   - an ORACLE SCALE (the generator's metres per pixel, registration confidence 1), labelled as such: the scale only
- *     sets the metric thresholds (gap widths in metres) and is neither a prompt nor a selection.
+ *   - an ORACLE SCALE (the generator's metres per pixel, registration confidence 1), labelled as such. It sets the
+ *     boundary layer's metric thresholds (gap widths in metres), so it shapes the gap classes, the SCV-OUTLINE /
+ *     SCV-BUILT comparators and the BUILT cells whose centres become the MSAM-SOURCE-PROMPTS positives; it never
+ *     enters the BOX prompt, the AUTO selection or any line detector (post-review B7: the earlier wording "neither a
+ *     prompt nor a selection" was too narrow).
  * No chain, callout, tick or extent side is given.
  */
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
@@ -119,7 +122,7 @@ async function main(): Promise<void> {
       orientation: 'as decoded',
       crop: 'none at extraction (the partial-crop case is cropped by the generator)',
       resize: 'none at the frame',
-      oracle: { scaleMetresPerPx: mpp, why: 'ORACLE SCALE only (generator metres per pixel): the metric layer is not under test; the scale is neither a prompt nor a selection' },
+      oracle: { scaleMetresPerPx: mpp, why: 'ORACLE SCALE (generator metres per pixel): the metric layer is not under test. It sets the boundary layer metric thresholds, so it shapes the gap classes, the SCV-OUTLINE / SCV-BUILT comparators and the BUILT cells whose centres are the MSAM-SOURCE-PROMPTS positives; it never enters the BOX prompt, the AUTO selection or any line detector' },
       extent: extentUsed ? { rect: extentUsed, source: 'production planExtent with no chains (wall witness); no truth', detail: extentWhy } : { rect: null, source: 'production planExtent returned null: no boundary layer, no MobileSAM prompt' },
       wallPx: r3(res.wallPx),
       boundary: res.boundary,

@@ -1,4 +1,259 @@
 {
+ "controlComparison": {
+  "addedSegmentsRange": {
+   "+DEEPLSD-MD": [
+    548,
+    897
+   ],
+   "+DEEPLSD-MD-REFINE-SCV": [
+    674,
+    1195
+   ],
+   "+DEEPLSD-WF": [
+    534,
+    948
+   ],
+   "+ELSED": [
+    395,
+    767
+   ],
+   "+ELSED+DEEPLSD-MD": [
+    943,
+    1664
+   ],
+   "+SCV-LINES-CONTROL": [
+    674,
+    1195
+   ]
+  },
+  "perHouse": {
+   "dom-pod-jarzabem": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 897,
+     "deltaBuiltIoU": -0.0122,
+     "deltaOutlineIoU": 0.0461
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 870,
+     "deltaBuiltIoU": 0.2625,
+     "deltaOutlineIoU": 0.5283
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 948,
+     "deltaBuiltIoU": -0.0122,
+     "deltaOutlineIoU": 0.0406
+    },
+    "+ELSED": {
+     "addedSegments": 767,
+     "deltaBuiltIoU": 0.0061,
+     "deltaOutlineIoU": 0.012
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 1664,
+     "deltaBuiltIoU": -0.0032,
+     "deltaOutlineIoU": 0.0102
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 870,
+     "deltaBuiltIoU": -0.0843,
+     "deltaOutlineIoU": -0.1266
+    }
+   },
+   "dom-w-arkadiach": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 611,
+     "deltaBuiltIoU": 0.0,
+     "deltaOutlineIoU": -0.0145
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 674,
+     "deltaBuiltIoU": 0.0,
+     "deltaOutlineIoU": 0.0599
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 610,
+     "deltaBuiltIoU": 0.0,
+     "deltaOutlineIoU": -0.0404
+    },
+    "+ELSED": {
+     "addedSegments": 484,
+     "deltaBuiltIoU": 0.0,
+     "deltaOutlineIoU": -0.0658
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 1095,
+     "deltaBuiltIoU": 0.0,
+     "deltaOutlineIoU": -0.0701
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 674,
+     "deltaBuiltIoU": 0.0,
+     "deltaOutlineIoU": 0.0599
+    }
+   },
+   "dom-w-azaliach": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 635,
+     "deltaBuiltIoU": -0.07,
+     "deltaOutlineIoU": -0.1005
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 818,
+     "deltaBuiltIoU": 0.7823,
+     "deltaOutlineIoU": 0.7589
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 633,
+     "deltaBuiltIoU": -0.07,
+     "deltaOutlineIoU": -0.0552
+    },
+    "+ELSED": {
+     "addedSegments": 452,
+     "deltaBuiltIoU": 0.8088,
+     "deltaOutlineIoU": 0.8063
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 1087,
+     "deltaBuiltIoU": 0.8088,
+     "deltaOutlineIoU": 0.8063
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 818,
+     "deltaBuiltIoU": 0.7576,
+     "deltaOutlineIoU": 0.7552
+    }
+   },
+   "dom-w-helikoniach": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 548,
+     "deltaBuiltIoU": 0.0385,
+     "deltaOutlineIoU": 0.0464
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 922,
+     "deltaBuiltIoU": -0.4506,
+     "deltaOutlineIoU": -0.7424
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 534,
+     "deltaBuiltIoU": -0.4512,
+     "deltaOutlineIoU": -0.7348
+    },
+    "+ELSED": {
+     "addedSegments": 395,
+     "deltaBuiltIoU": 0.0388,
+     "deltaOutlineIoU": 0.0464
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 943,
+     "deltaBuiltIoU": -0.4506,
+     "deltaOutlineIoU": -0.7375
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 922,
+     "deltaBuiltIoU": -0.4506,
+     "deltaOutlineIoU": -0.723
+    }
+   },
+   "dom-w-morelach": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 773,
+     "deltaBuiltIoU": -0.0287,
+     "deltaOutlineIoU": 0.0087
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 1195,
+     "deltaBuiltIoU": -0.0287,
+     "deltaOutlineIoU": 0.5931
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 782,
+     "deltaBuiltIoU": -0.0287,
+     "deltaOutlineIoU": -0.0027
+    },
+    "+ELSED": {
+     "addedSegments": 651,
+     "deltaBuiltIoU": 0.0,
+     "deltaOutlineIoU": 0.0139
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 1424,
+     "deltaBuiltIoU": -0.0287,
+     "deltaOutlineIoU": 0.0153
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 1195,
+     "deltaBuiltIoU": -0.0803,
+     "deltaOutlineIoU": 0.3582
+    }
+   },
+   "dom-w-zurawkach": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 647,
+     "deltaBuiltIoU": -0.0112,
+     "deltaOutlineIoU": -0.1354
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 834,
+     "deltaBuiltIoU": -0.073,
+     "deltaOutlineIoU": -0.581
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 615,
+     "deltaBuiltIoU": -0.0298,
+     "deltaOutlineIoU": -0.221
+    },
+    "+ELSED": {
+     "addedSegments": 545,
+     "deltaBuiltIoU": 0.0117,
+     "deltaOutlineIoU": -0.1683
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 1192,
+     "deltaBuiltIoU": -0.0356,
+     "deltaOutlineIoU": -0.0585
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 834,
+     "deltaBuiltIoU": -0.1588,
+     "deltaOutlineIoU": -0.2998
+    }
+   },
+   "willa-miranda": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 787,
+     "deltaBuiltIoU": -0.0462,
+     "deltaOutlineIoU": -0.0451
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 785,
+     "deltaBuiltIoU": -0.1513,
+     "deltaOutlineIoU": -0.2316
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 783,
+     "deltaBuiltIoU": 0.0,
+     "deltaOutlineIoU": 0.0025
+    },
+    "+ELSED": {
+     "addedSegments": 692,
+     "deltaBuiltIoU": -0.0376,
+     "deltaOutlineIoU": -0.0366
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 1479,
+     "deltaBuiltIoU": -0.0208,
+     "deltaOutlineIoU": -0.1156
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 785,
+     "deltaBuiltIoU": -0.1513,
+     "deltaOutlineIoU": -0.2895
+    }
+   }
+  }
+ },
+ "controlRow": "+SCV-LINES-CONTROL rasterises BuildPlan's own SCV-LINES into the mask exactly like a provider's lines: no EXTERNAL information (the resolver does not otherwise consume SCV-LINES). It shows that ink density alone moves outlines by changes of comparable magnitude to the providers', on different houses (controlComparison). It is one perturbation per house and its density is NOT matched (controlComparison.addedSegmentsRange): evidence that the resolver is density-sensitive, not a calibrated null distribution.",
  "noOracleFusion": "no per-house provider choice, no per-provider threshold, no published area; combinations only after the individual rows",
  "real": {
   "dom-pod-jarzabem": {
@@ -22,14 +277,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 10,
+      "gapLineOnlyRule": {
+       "falseBridges": 10,
+       "usefulBridges": 9
+      },
       "usefulBridges": 9
      },
      "MSAM-SOURCE-PROMPTS": {
-      "falseBridges": 9,
+      "falseBridges": 7,
+      "gapLineOnlyRule": {
+       "falseBridges": 9,
+       "usefulBridges": 6
+      },
       "usefulBridges": 6
      },
      "SCV-LINES": {
@@ -83,30 +350,30 @@
     "+DEEPLSD-MD-REFINE-SCV": {
      "addedSegments": 870,
      "bridged": {
-      "pocketMouths": 5,
-      "strong": 29,
-      "unjudged": 60,
+      "pocketMouths": 6,
+      "strong": 30,
+      "unjudged": 51,
       "weak": 0
      },
      "builtFailureTypes": [
       "GARAGE_EXCLUDED"
      ],
-     "builtRegionIoU": 0.7867,
-     "deltaBuiltIoU": 0.2627,
+     "builtRegionIoU": 0.7865,
+     "deltaBuiltIoU": 0.2625,
      "deltaOpeningsReadAsWall": 0.0197,
-     "deltaOutlineIoU": 0.5286,
+     "deltaOutlineIoU": 0.5283,
      "gapTallies": {
-      "DRAWING_BREAK_SUPPORTED": 1037,
-      "OPENING_SUPPORTED": 29,
-      "TRUE_EXTERIOR_GAP": 238,
-      "UNKNOWN_GAP": 65
+      "DRAWING_BREAK_SUPPORTED": 1049,
+      "OPENING_SUPPORTED": 30,
+      "TRUE_EXTERIOR_GAP": 243,
+      "UNKNOWN_GAP": 57
      },
      "openingsReadAsWall": 0.0695,
      "outlineAccepted": true,
      "outlineFailureTypes": [
       "GARAGE_EXCLUDED"
      ],
-     "outlineRegionIoU": 0.7764
+     "outlineRegionIoU": 0.7761
     },
     "+DEEPLSD-WF": {
      "addedSegments": 948,
@@ -282,14 +549,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 4
+      },
       "usefulBridges": 4
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 3
+      },
       "usefulBridges": 3
      },
      "SCV-LINES": {
@@ -342,8 +621,8 @@
      "addedSegments": 674,
      "bridged": {
       "pocketMouths": 5,
-      "strong": 24,
-      "unjudged": 35,
+      "strong": 18,
+      "unjudged": 33,
       "weak": 1
      },
      "builtFailureTypes": [
@@ -351,15 +630,15 @@
      ],
      "builtRegionIoU": 0.9838,
      "deltaBuiltIoU": 0.0,
-     "deltaOpeningsReadAsWall": 0.016,
+     "deltaOpeningsReadAsWall": 0.012,
      "deltaOutlineIoU": 0.0599,
      "gapTallies": {
-      "DRAWING_BREAK_SUPPORTED": 435,
-      "OPENING_SUPPORTED": 24,
-      "TRUE_EXTERIOR_GAP": 82,
-      "UNKNOWN_GAP": 41
+      "DRAWING_BREAK_SUPPORTED": 431,
+      "OPENING_SUPPORTED": 18,
+      "TRUE_EXTERIOR_GAP": 84,
+      "UNKNOWN_GAP": 39
      },
-     "openingsReadAsWall": 0.104,
+     "openingsReadAsWall": 0.1,
      "outlineAccepted": false,
      "outlineFailureTypes": [
       "OK"
@@ -526,14 +805,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "SCV-LINES": {
@@ -586,30 +877,30 @@
     "+DEEPLSD-MD-REFINE-SCV": {
      "addedSegments": 818,
      "bridged": {
-      "pocketMouths": 0,
-      "strong": 19,
+      "pocketMouths": 2,
+      "strong": 22,
       "unjudged": 24,
       "weak": 7
      },
      "builtFailureTypes": [
-      "OK"
+      "IMPRECISE"
      ],
-     "builtRegionIoU": 0.9936,
-     "deltaBuiltIoU": 0.8785,
-     "deltaOpeningsReadAsWall": 0.0373,
-     "deltaOutlineIoU": 0.8551,
+     "builtRegionIoU": 0.8974,
+     "deltaBuiltIoU": 0.7823,
+     "deltaOpeningsReadAsWall": 0.0269,
+     "deltaOutlineIoU": 0.7589,
      "gapTallies": {
-      "DRAWING_BREAK_SUPPORTED": 254,
-      "OPENING_SUPPORTED": 19,
-      "TRUE_EXTERIOR_GAP": 78,
-      "UNKNOWN_GAP": 31
+      "DRAWING_BREAK_SUPPORTED": 249,
+      "OPENING_SUPPORTED": 22,
+      "TRUE_EXTERIOR_GAP": 76,
+      "UNKNOWN_GAP": 33
      },
-     "openingsReadAsWall": 0.1343,
+     "openingsReadAsWall": 0.1239,
      "outlineAccepted": true,
      "outlineFailureTypes": [
-      "OK"
+      "IMPRECISE"
      ],
-     "outlineRegionIoU": 0.9936
+     "outlineRegionIoU": 0.8974
     },
     "+DEEPLSD-WF": {
      "addedSegments": 633,
@@ -772,14 +1063,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "SCV-LINES": {
@@ -831,30 +1134,30 @@
     "+DEEPLSD-MD-REFINE-SCV": {
      "addedSegments": 922,
      "bridged": {
-      "pocketMouths": 24,
-      "strong": 27,
-      "unjudged": 25,
-      "weak": 0
+      "pocketMouths": 26,
+      "strong": 31,
+      "unjudged": 21,
+      "weak": 1
      },
      "builtFailureTypes": [
       "INTERNAL_ROOM_SELECTED"
      ],
      "builtRegionIoU": 0.3917,
      "deltaBuiltIoU": -0.4506,
-     "deltaOpeningsReadAsWall": 0.1099,
-     "deltaOutlineIoU": -0.7463,
+     "deltaOpeningsReadAsWall": 0.1114,
+     "deltaOutlineIoU": -0.7424,
      "gapTallies": {
-      "DRAWING_BREAK_SUPPORTED": 512,
-      "OPENING_SUPPORTED": 27,
-      "TRUE_EXTERIOR_GAP": 102,
-      "UNKNOWN_GAP": 49
+      "DRAWING_BREAK_SUPPORTED": 489,
+      "OPENING_SUPPORTED": 31,
+      "TRUE_EXTERIOR_GAP": 96,
+      "UNKNOWN_GAP": 48
      },
-     "openingsReadAsWall": 0.142,
+     "openingsReadAsWall": 0.1435,
      "outlineAccepted": false,
      "outlineFailureTypes": [
       "FRAGMENTED"
      ],
-     "outlineRegionIoU": 0.1204
+     "outlineRegionIoU": 0.1243
     },
     "+DEEPLSD-WF": {
      "addedSegments": 534,
@@ -1020,15 +1323,27 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 11
+      },
       "usefulBridges": 11
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
-      "usefulBridges": 10
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 10
+      },
+      "usefulBridges": 9
      },
      "SCV-LINES": {
       "falseBridges": 0,
@@ -1079,8 +1394,8 @@
     "+DEEPLSD-MD-REFINE-SCV": {
      "addedSegments": 1195,
      "bridged": {
-      "pocketMouths": 5,
-      "strong": 35,
+      "pocketMouths": 3,
+      "strong": 34,
       "unjudged": 25,
       "weak": 5
      },
@@ -1092,10 +1407,10 @@
      "deltaOpeningsReadAsWall": 0.0804,
      "deltaOutlineIoU": 0.5931,
      "gapTallies": {
-      "DRAWING_BREAK_SUPPORTED": 603,
-      "OPENING_SUPPORTED": 35,
-      "TRUE_EXTERIOR_GAP": 119,
-      "UNKNOWN_GAP": 35
+      "DRAWING_BREAK_SUPPORTED": 588,
+      "OPENING_SUPPORTED": 34,
+      "TRUE_EXTERIOR_GAP": 122,
+      "UNKNOWN_GAP": 33
      },
      "openingsReadAsWall": 0.1496,
      "outlineAccepted": false,
@@ -1268,14 +1583,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 10
+      },
       "usefulBridges": 10
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 1,
+      "gapLineOnlyRule": {
+       "falseBridges": 1,
+       "usefulBridges": 13
+      },
       "usefulBridges": 13
      },
      "SCV-LINES": {
@@ -1327,31 +1654,30 @@
     "+DEEPLSD-MD-REFINE-SCV": {
      "addedSegments": 834,
      "bridged": {
-      "pocketMouths": 13,
+      "pocketMouths": 18,
       "strong": 22,
-      "unjudged": 43,
-      "weak": 3
+      "unjudged": 38,
+      "weak": 2
      },
      "builtFailureTypes": [
-      "GARAGE_EXCLUDED"
+      "IMPRECISE"
      ],
-     "builtRegionIoU": 0.7585,
-     "deltaBuiltIoU": -0.2104,
-     "deltaOpeningsReadAsWall": 0.3066,
-     "deltaOutlineIoU": -0.2874,
+     "builtRegionIoU": 0.8959,
+     "deltaBuiltIoU": -0.073,
+     "deltaOpeningsReadAsWall": 0.2783,
+     "deltaOutlineIoU": -0.581,
      "gapTallies": {
-      "DRAWING_BREAK_SUPPORTED": 504,
+      "DRAWING_BREAK_SUPPORTED": 502,
       "OPENING_SUPPORTED": 22,
-      "TRUE_EXTERIOR_GAP": 125,
-      "UNKNOWN_GAP": 59
+      "TRUE_EXTERIOR_GAP": 129,
+      "UNKNOWN_GAP": 58
      },
-     "openingsReadAsWall": 0.378,
-     "outlineAccepted": false,
+     "openingsReadAsWall": 0.3497,
+     "outlineAccepted": true,
      "outlineFailureTypes": [
-      "PORCH_INCLUDED",
-      "GARAGE_EXCLUDED"
+      "PORCH_INCLUDED"
      ],
-     "outlineRegionIoU": 0.5846
+     "outlineRegionIoU": 0.291
     },
     "+DEEPLSD-WF": {
      "addedSegments": 615,
@@ -1514,14 +1840,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 5,
+      "gapLineOnlyRule": {
+       "falseBridges": 5,
+       "usefulBridges": 9
+      },
       "usefulBridges": 9
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 5,
+      "gapLineOnlyRule": {
+       "falseBridges": 5,
+       "usefulBridges": 10
+      },
       "usefulBridges": 10
      },
      "SCV-LINES": {
@@ -1575,7 +1913,7 @@
      "bridged": {
       "pocketMouths": 12,
       "strong": 25,
-      "unjudged": 66,
+      "unjudged": 75,
       "weak": 1
      },
      "builtFailureTypes": [
@@ -1583,21 +1921,21 @@
      ],
      "builtRegionIoU": 0.8303,
      "deltaBuiltIoU": -0.1513,
-     "deltaOpeningsReadAsWall": 0.1079,
-     "deltaOutlineIoU": -0.2334,
+     "deltaOpeningsReadAsWall": 0.1044,
+     "deltaOutlineIoU": -0.2316,
      "gapTallies": {
-      "DRAWING_BREAK_SUPPORTED": 918,
+      "DRAWING_BREAK_SUPPORTED": 903,
       "OPENING_SUPPORTED": 25,
-      "TRUE_EXTERIOR_GAP": 231,
-      "UNKNOWN_GAP": 79
+      "TRUE_EXTERIOR_GAP": 222,
+      "UNKNOWN_GAP": 88
      },
-     "openingsReadAsWall": 0.1665,
+     "openingsReadAsWall": 0.163,
      "outlineAccepted": false,
      "outlineFailureTypes": [
       "TERRACE_INCLUDED",
       "GARAGE_EXCLUDED"
      ],
-     "outlineRegionIoU": 0.702
+     "outlineRegionIoU": 0.7038
     },
     "+DEEPLSD-WF": {
      "addedSegments": 783,
@@ -1743,7 +2081,7 @@
   }
  },
  "replay1_maskUnion": "Out-of-contract input perturbation: mask' = mask OR rasterise(provider segments, 1 px); the same production boundary layer re-run with identical bands, chains, registration, extent and options (fusion-replay.ts). A 1-px line cannot become wall-thick ink on its own, but many added lines can raise the ink density of a wall-thick window past readWallLine's 80 % \u2014 openingsReadAsWall measures exactly that side effect.",
- "replay2_evidenceAvailability": "Per baseline TRUE_EXTERIOR_GAP / UNKNOWN_GAP: on a truth exterior edge, does the provider bridge it (lines: >= 80 % covered by parallel segments within a wall of the gap line; masks: mask = 1 on >= 80 % of the gap line) \u2014 useful; outside the truth building \u2014 false evidence.",
+ "replay2_evidenceAvailability": "Per baseline TRUE_EXTERIOR_GAP / UNKNOWN_GAP: on a truth exterior edge, does the provider bridge it (lines: >= 80 % covered by parallel segments within a wall of the gap line; masks, as methodology \u00a79 states: mask = 1 on >= 80 % of the gap line's samples AND of the same samples one wall inward, inward = the truth edge's inward normal, or for a gap outside the building the side nearer to the truth polygon) \u2014 useful; outside the truth building \u2014 false evidence. The first implementation sampled the gap line only (post-review B8); that tally is kept per mask as byProvider.<mask>.gapLineOnlyRule.",
  "researchOnly": true,
  "seam": "NONE. The production boundary resolver (decomposePlan -> boundaryExtension -> solveOutline / classifyBodies / completeBoundary) takes only the ink Mask, bands, chains, registration, extent and options. No line list or region mask can be passed without changing production code.",
  "synthetic": {
@@ -1768,14 +2106,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "MSAM-BOX": {
       "falseBridges": 0,
-      "usefulBridges": 2
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 2
+      },
+      "usefulBridges": 1
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 2
+      },
       "usefulBridges": 2
      },
      "SCV-LINES": {
@@ -1791,7 +2141,7 @@
      "DEEPLSD-WF": 0,
      "ELSED-DEFAULT": 0,
      "MSAM-AUTO": 0,
-     "MSAM-BOX": 1,
+     "MSAM-BOX": 0,
      "MSAM-SOURCE-PROMPTS": 1
     }
    },
@@ -2012,14 +2362,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "SCV-LINES": {
@@ -2256,14 +2618,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "SCV-LINES": {
@@ -2525,14 +2899,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
-      "usefulBridges": 1
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
+      "usefulBridges": 0
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "SCV-LINES": {
@@ -2548,7 +2934,7 @@
      "DEEPLSD-WF": 0,
      "ELSED-DEFAULT": 0,
      "MSAM-AUTO": 0,
-     "MSAM-BOX": 1,
+     "MSAM-BOX": 0,
      "MSAM-SOURCE-PROMPTS": 0
     }
    },
@@ -2769,14 +3155,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 3
+      },
       "usefulBridges": 3
      },
      "SCV-LINES": {
@@ -3013,14 +3411,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "SCV-LINES": {
@@ -3257,14 +3667,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "SCV-LINES": {
@@ -3317,24 +3739,24 @@
      "addedSegments": 463,
      "bridged": {
       "pocketMouths": 0,
-      "strong": 3,
+      "strong": 4,
       "unjudged": 0,
-      "weak": 2
+      "weak": 1
      },
      "builtFailureTypes": [
       "OK"
      ],
      "builtRegionIoU": 0.9122,
      "deltaBuiltIoU": 0.0,
-     "deltaOpeningsReadAsWall": 0.0066,
+     "deltaOpeningsReadAsWall": 0.0,
      "deltaOutlineIoU": 0.0,
      "gapTallies": {
       "DRAWING_BREAK_SUPPORTED": 0,
-      "OPENING_SUPPORTED": 3,
+      "OPENING_SUPPORTED": 4,
       "TRUE_EXTERIOR_GAP": 0,
-      "UNKNOWN_GAP": 2
+      "UNKNOWN_GAP": 1
      },
-     "openingsReadAsWall": 0.043,
+     "openingsReadAsWall": 0.0364,
      "outlineAccepted": false,
      "outlineFailureTypes": [
       "OK"
@@ -3501,14 +3923,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "SCV-LINES": {
@@ -3570,7 +4004,7 @@
      ],
      "builtRegionIoU": 0.9087,
      "deltaBuiltIoU": 0.0,
-     "deltaOpeningsReadAsWall": 0.0062,
+     "deltaOpeningsReadAsWall": 0.0093,
      "deltaOutlineIoU": 0.0,
      "gapTallies": {
       "DRAWING_BREAK_SUPPORTED": 2,
@@ -3578,7 +4012,7 @@
       "TRUE_EXTERIOR_GAP": 1,
       "UNKNOWN_GAP": 1
      },
-     "openingsReadAsWall": 0.0431,
+     "openingsReadAsWall": 0.0462,
      "outlineAccepted": false,
      "outlineFailureTypes": [
       "OK"
@@ -3745,14 +4179,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "SCV-LINES": {
@@ -3989,14 +4435,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "SCV-LINES": {
@@ -4058,7 +4516,7 @@
      ],
      "builtRegionIoU": 0.9087,
      "deltaBuiltIoU": 0.0,
-     "deltaOpeningsReadAsWall": 0.0031,
+     "deltaOpeningsReadAsWall": 0.0,
      "deltaOutlineIoU": 0.0,
      "gapTallies": {
       "DRAWING_BREAK_SUPPORTED": 1,
@@ -4066,7 +4524,7 @@
       "TRUE_EXTERIOR_GAP": 1,
       "UNKNOWN_GAP": 1
      },
-     "openingsReadAsWall": 0.04,
+     "openingsReadAsWall": 0.0369,
      "outlineAccepted": false,
      "outlineFailureTypes": [
       "OK"
@@ -4233,14 +4691,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 3
+      },
       "usefulBridges": 3
      },
      "SCV-LINES": {
@@ -4305,7 +4775,7 @@
      "deltaOpeningsReadAsWall": 0.0,
      "deltaOutlineIoU": 0.0,
      "gapTallies": {
-      "DRAWING_BREAK_SUPPORTED": 3,
+      "DRAWING_BREAK_SUPPORTED": 2,
       "OPENING_SUPPORTED": 3,
       "TRUE_EXTERIOR_GAP": 5,
       "UNKNOWN_GAP": 3
@@ -4477,14 +4947,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "SCV-LINES": {
@@ -4721,14 +5203,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "SCV-LINES": {
@@ -4965,14 +5459,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 2
+      },
       "usefulBridges": 2
      },
      "SCV-LINES": {
@@ -5034,15 +5540,15 @@
      ],
      "builtRegionIoU": 0.8884,
      "deltaBuiltIoU": 0.0,
-     "deltaOpeningsReadAsWall": 0.0099,
+     "deltaOpeningsReadAsWall": 0.0066,
      "deltaOutlineIoU": 0.0091,
      "gapTallies": {
-      "DRAWING_BREAK_SUPPORTED": 4,
+      "DRAWING_BREAK_SUPPORTED": 3,
       "OPENING_SUPPORTED": 4,
-      "TRUE_EXTERIOR_GAP": 1,
+      "TRUE_EXTERIOR_GAP": 0,
       "UNKNOWN_GAP": 2
      },
-     "openingsReadAsWall": 0.0462,
+     "openingsReadAsWall": 0.0429,
      "outlineAccepted": false,
      "outlineFailureTypes": [
       "IMPRECISE"
@@ -5209,14 +5715,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "SCV-LINES": {
@@ -5278,7 +5796,7 @@
      ],
      "builtRegionIoU": 0.9122,
      "deltaBuiltIoU": 0.0,
-     "deltaOpeningsReadAsWall": 0.0033,
+     "deltaOpeningsReadAsWall": 0.0066,
      "deltaOutlineIoU": 0.0,
      "gapTallies": {
       "DRAWING_BREAK_SUPPORTED": 0,
@@ -5286,7 +5804,7 @@
       "TRUE_EXTERIOR_GAP": 0,
       "UNKNOWN_GAP": 1
      },
-     "openingsReadAsWall": 0.0397,
+     "openingsReadAsWall": 0.043,
      "outlineAccepted": false,
      "outlineFailureTypes": [
       "OK"
@@ -5492,7 +6010,7 @@
      "deltaOpeningsReadAsWall": 0.0,
      "deltaOutlineIoU": 0.0,
      "gapTallies": {
-      "DRAWING_BREAK_SUPPORTED": 7,
+      "DRAWING_BREAK_SUPPORTED": 5,
       "OPENING_SUPPORTED": 0,
       "TRUE_EXTERIOR_GAP": 4,
       "UNKNOWN_GAP": 3
@@ -5664,14 +6182,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 2
+      },
       "usefulBridges": 2
      },
      "SCV-LINES": {
@@ -5724,7 +6254,7 @@
      "addedSegments": 492,
      "bridged": {
       "pocketMouths": 0,
-      "strong": 4,
+      "strong": 0,
       "unjudged": 1,
       "weak": 1
      },
@@ -5733,15 +6263,15 @@
      ],
      "builtRegionIoU": 0.8964,
      "deltaBuiltIoU": 0.0,
-     "deltaOpeningsReadAsWall": 0.4862,
+     "deltaOpeningsReadAsWall": 0.5724,
      "deltaOutlineIoU": 0.8964,
      "gapTallies": {
-      "DRAWING_BREAK_SUPPORTED": 34,
-      "OPENING_SUPPORTED": 4,
-      "TRUE_EXTERIOR_GAP": 3,
+      "DRAWING_BREAK_SUPPORTED": 21,
+      "OPENING_SUPPORTED": 0,
+      "TRUE_EXTERIOR_GAP": 4,
       "UNKNOWN_GAP": 2
      },
-     "openingsReadAsWall": 0.8,
+     "openingsReadAsWall": 0.8862,
      "outlineAccepted": false,
      "outlineFailureTypes": [
       "IMPRECISE"
@@ -5908,14 +6438,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "SCV-LINES": {
@@ -5980,9 +6522,9 @@
      "deltaOpeningsReadAsWall": 0.0123,
      "deltaOutlineIoU": 0.0,
      "gapTallies": {
-      "DRAWING_BREAK_SUPPORTED": 1,
+      "DRAWING_BREAK_SUPPORTED": 2,
       "OPENING_SUPPORTED": 3,
-      "TRUE_EXTERIOR_GAP": 2,
+      "TRUE_EXTERIOR_GAP": 3,
       "UNKNOWN_GAP": 2
      },
      "openingsReadAsWall": 0.0432,
@@ -6152,14 +6694,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "SCV-LINES": {
@@ -6396,14 +6950,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
-      "usefulBridges": 2
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 2
+      },
+      "usefulBridges": 1
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 1
+      },
       "usefulBridges": 1
      },
      "SCV-LINES": {
@@ -6456,9 +7022,9 @@
      "addedSegments": 450,
      "bridged": {
       "pocketMouths": 0,
-      "strong": 7,
+      "strong": 5,
       "unjudged": 0,
-      "weak": 1
+      "weak": 2
      },
      "builtFailureTypes": [
       "OK"
@@ -6469,9 +7035,9 @@
      "deltaOutlineIoU": 0.0,
      "gapTallies": {
       "DRAWING_BREAK_SUPPORTED": 15,
-      "OPENING_SUPPORTED": 7,
+      "OPENING_SUPPORTED": 5,
       "TRUE_EXTERIOR_GAP": 0,
-      "UNKNOWN_GAP": 1
+      "UNKNOWN_GAP": 2
      },
      "openingsReadAsWall": 0.1523,
      "outlineAccepted": false,
@@ -6640,14 +7206,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 2
+      },
       "usefulBridges": 2
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 2
+      },
       "usefulBridges": 2
      },
      "SCV-LINES": {
@@ -6700,8 +7278,8 @@
      "addedSegments": 457,
      "bridged": {
       "pocketMouths": 0,
-      "strong": 5,
-      "unjudged": 1,
+      "strong": 6,
+      "unjudged": 0,
       "weak": 1
      },
      "builtFailureTypes": [
@@ -6713,9 +7291,9 @@
      "deltaOutlineIoU": 0.0,
      "gapTallies": {
       "DRAWING_BREAK_SUPPORTED": 2,
-      "OPENING_SUPPORTED": 5,
+      "OPENING_SUPPORTED": 6,
       "TRUE_EXTERIOR_GAP": 2,
-      "UNKNOWN_GAP": 2
+      "UNKNOWN_GAP": 1
      },
      "openingsReadAsWall": 0.0332,
      "outlineAccepted": false,
@@ -6884,14 +7462,26 @@
      },
      "MSAM-AUTO": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-BOX": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "MSAM-SOURCE-PROMPTS": {
       "falseBridges": 0,
+      "gapLineOnlyRule": {
+       "falseBridges": 0,
+       "usefulBridges": 0
+      },
       "usefulBridges": 0
      },
      "SCV-LINES": {

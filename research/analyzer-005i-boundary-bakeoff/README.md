@@ -23,9 +23,11 @@ in `$WORK` (default `/home/user/work005i`). The repository holds code, pins, tru
 | `manifest.json`, `fetch.sh`, `build.sh` | pins (commits, checkpoint URLs, SHA-256, sizes) and the reproducible fetch / CPU build |
 | `providers/*.py`, `providers/elsed_cli.cpp` | provider runners (ELSED, DeepLSD detect + refine, MobileSAM with the fixed prompt protocols), ONNX export |
 | `run-providers.sh` | every provider configuration on every frame of a set, one process per frame |
-| `fusion-replay.ts` | the mask-union replay through the production boundary layer (+ a no-information control) |
-| `score.py`, `aggregate.py`, `determinism.py`, `wasm-probe.cjs` | scorer, artifact writer, reproducibility re-run, Node 18 WASM probe |
+| `fusion-replay.ts` | the mask-union replay through the production boundary layer (+ a no-external-information control) |
+| `score.py`, `aggregate.py`, `determinism.py`, `wasm-probe.cjs` | scorer (asserts the same-input hashes; ±u truth-buffer pass), artifact writer, reproducibility re-run / whole-set re-run comparison, Node 18 WASM probe |
+| `repro-sidesof.ts` | reproduces the production boundary layer's `sidesOf` TypeError on a sheet with no wall-thick ink (side finding; production imported read-only) |
 | `tools/look.py` | annotation aid: crops with a labelled pixel grid (outputs stay outside the repository) |
+| `truth/annotation-log.json` | provenance of the manual truth: every `look.py` invocation, truth write times and SHA-256 (text facts only) |
 
 ## Reproduce (from the BuildApp root)
 
@@ -50,11 +52,15 @@ $P/score.py --set synthetic --truth $WORK/synth --out $WORK/scores/synthetic.jso
 $P/providers/onnx_export.py --deeplsd-repo $WORK/upstream/DeepLSD --deeplsd-ckpt $WORK/ckpt/deeplsd_md.tar \
   --msam-repo $WORK/upstream/MobileSAM --msam-ckpt $WORK/ckpt/mobile_sam.pt \
   --gray $WORK/frames/real/dom-w-helikoniach.gray.png --rgb $WORK/frames/real/dom-w-helikoniach.rgb.png --out $WORK/onnx
-for m in deeplsd_md_fields mobile_sam_encoder mobile_sam_decoder; do   # one process per model: isolated peak RSS
+for m in deeplsd_md_fields mobile_sam_encoder mobile_sam_decoder; do   # one process per model: isolated RSS
   <node-v18.20.4>/bin/node research/analyzer-005i-boundary-bakeoff/wasm-probe.cjs --only $m \
     --ort <BuildApp>/research/analyzer-005g/node_modules/onnxruntime-web --onnx-dir $WORK/onnx --out $WORK/onnx/wasm-probe-$m.json
 done   # then merge the three into $WORK/onnx/wasm-probe-node18.json ({models, peakRssMiBPerModel}) for aggregate.py
+# NB the per-model RSS is sampled on the event loop that single-thread WASM blocks: it is the RSS AFTER inference,
+# a lower bound on the peak; aggregate.py publishes it under that name (post-review D8)
 $P/determinism.py --frames real/dom-w-helikoniach,synthetic/l-shape --out $WORK/determinism.json
+$P/determinism.py --compare-prev <copy of $WORK/obs from an earlier full run> --out $WORK/rerun-b5-compare.json   # optional
+npx vite-node research/analyzer-005i-boundary-bakeoff/repro-sidesof.ts -- --work $WORK   # side finding, from $WORK/snapshot
 $P/aggregate.py --out <BuildApp>/stage-reports/artifacts/analyzer-005i/boundary-bakeoff
 ```
 

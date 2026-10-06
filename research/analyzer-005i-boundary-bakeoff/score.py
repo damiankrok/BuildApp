@@ -1,13 +1,19 @@
 """score.py — RESEARCH ONLY (BUILDPLAN-ANALYZER-005I Track B). The bake-off scorer.
 
-python -I score.py --set real|synthetic --work /home/user/work005i --truth <dir> --out <per-frame metrics json>
+python -I -B score.py --set real|synthetic --work /home/user/work005i --truth <dir> --out <per-frame metrics json>
 
 Implements methodology.md §6–§9 exactly (tolerances, metrics, failure types, scorecard rules, evidence availability).
 Reads observations written by the providers and by baseline.ts, truth (synthetic: generator; real: manual), the
 production ink mask of each frame, MobileSAM masks and the fusion replay outputs. Writes numbers only.
+
+Post-review additions (council B, methodology §11): the same-input rule is asserted on every provider and fusion
+output (B5); real-set numbers are re-scored against the truth displaced by ±u, u = the house's largest stated vertex
+uncertainty (B3); SCV-UNION sensitivity rows (no bridged gaps, ink-supported segments only) and the mask "one wall
+inward" evidence rule as written in §9 (B8).
 """
 import argparse
 import glob
+import hashlib
 import json
 import math
 import os
@@ -504,6 +510,337 @@ def cells_mask(shape, rings):
     return raster_poly(shape, rings)
 
 
+def rect_rings(cells):
+    return [[[c[0], c[1]], [c[2], c[1]], [c[2], c[3]], [c[0], c[3]]] for c in cells]
+
+
+def sha_file(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        h.update(f.read())
+    return h.hexdigest()
+
+
+# ---------------------------------------------------------------- same-input rule (post-review B5)
+def check_same_input(d, meta, key, path, extra=None):
+    """Methodology §3, machine-checked: a provider output records the SHA-256 of the frame PNG it read, and it must
+    equal the hash the extractor recorded for that frame (meta.files). `extra` = {input key: file whose current bytes
+    the output must have read} (the refiner's SCV-LINES file, MobileSAM's prompt meta). Any mismatch stops the scorer."""
+    want = meta["files"]["grayPngSha256" if key == "gray" else "rgbPngSha256"]
+    inp = d.get("input") or {}
+    got = (inp.get(key) or {}).get("sha256")
+    if got != want:
+        raise SystemExit("SAME-INPUT VIOLATION %s: input.%s.sha256 = %s, frame meta = %s" % (path, key, got, want))
+    if d.get("frameId") != meta["frameId"]:
+        raise SystemExit("FRAME MISMATCH %s: %s vs %s" % (path, d.get("frameId"), meta["frameId"]))
+    checked = {key: got}
+    for k, f in (extra or {}).items():
+        want_k = sha_file(f)
+        got_k = (inp.get(k) or {}).get("sha256")
+        if got_k != want_k:
+            raise SystemExit("SAME-INPUT VIOLATION %s: input.%s.sha256 = %s, current %s = %s" % (path, k, got_k, f, want_k))
+        checked[k] = got_k
+    return checked
+
+
+# ---------------------------------------------------------------- truth buffer (post-review B3, methodology §6.3)
+def buffer_truth(truth, d):
+    """The truth displaced by d px along the outward normal (d > 0 grows the building, d < 0 shrinks it): the exterior
+    polygon buffered with mitred joins, and every exterior opening run translated with the face it lies on. Exclusions
+    and bodies are separate annotations and stay as drawn. d = ±u with u = the house's largest stated vertex
+    uncertainty moves every vertex by the worst stated amount at once (conservative)."""
+    poly = Polygon(truth["exterior"]).buffer(0)
+    ring = truth["exterior"]
+    t = float(truth["exteriorWallThicknessPx"])
+    tau = max(3.0, 0.25 * t)
+    edges0 = [Edge(ring[i], ring[(i + 1) % len(ring)], poly, [], t, tau) for i in range(len(ring))]
+    P = poly.buffer(d, join_style=2, mitre_limit=10.0)
+    if P.geom_type != "Polygon":
+        P = max(P.geoms, key=lambda g: g.area)
+    ext = [[float(x), float(y)] for x, y in list(P.exterior.coords)[:-1]]
+    ops = []
+    for o in truth["openings"]:
+        pa, pb = np.array(o["a"], float), np.array(o["b"], float)
+        shift = np.zeros(2)
+        for e in edges0:
+            if abs(np.dot(pa - e.a, e.n_in)) > 3 or abs(np.dot(pb - e.a, e.n_in)) > 3 or ang_diff(angle_of(pa, pb), e.ang) > 5:
+                continue
+            ta, tb = sorted([np.dot(pa - e.a, e.u), np.dot(pb - e.a, e.u)])
+            if tb < 0 or ta > e.L:
+                continue
+            shift = -e.n_in * d
+            break
+        ops.append(dict(o, a=[float(v) for v in pa + shift], b=[float(v) for v in pb + shift]))
+    return dict(truth, exterior=ext, openings=ops)
+
+
+def union_variant_coverage(edges, usegs, ink_dil, drop_gaps=False, ink_only=False):
+    """SCV-UNION sensitivity (post-review B8): the union without the resolver's bridged gaps, or with only the union
+    segments that pass the same ink-support test the provider additions must pass."""
+    keep = [s for s in usegs if not (drop_gaps and s[2]["configId"] == "SCV-BOUNDARY-GAP")]
+    if ink_only:
+        ok = ink_support(keep, ink_dil)
+        keep = [s for s, k in zip(keep, ok) if k >= 0.5]
+    cov = []
+    for e in edges:
+        c = np.zeros(len(e.ts), bool)
+        for a_, b_, _ in keep:
+            s = e.support(a_, b_)
+            if s is not None:
+                c |= s[0]
+        cov.append(c)
+    return cov
+
+
+def union_cov_summary(cov, edges):
+    solid_tot = sum(int((~e.opening).sum()) for e in edges)
+    open_tot = sum(int(e.opening.sum()) for e in edges)
+    return {"exteriorWallCoverage": r(sum(int((c & ~e.opening).sum()) for c, e in zip(cov, edges)) / solid_tot) if solid_tot else None,
+            "continuityAcrossOpenings": r(sum(int((c & e.opening).sum()) for c, e in zip(cov, edges)) / open_tot) if open_tot else None}
+
+
+WINDOW_KINDS = ("WINDOW", "GLAZED", "DOOR")
+
+
+def score_truth(truth, ctx, full):
+    """Every truth-dependent number of one frame. `full` adds what is only reported at the stated truth (fusion replay,
+    prompt sensitivity, the MSAM-AUTO ORACLE bound, the union sensitivity rows)."""
+    set_name, meta, shape, ink_dil, scv = ctx["set"], ctx["meta"], ctx["shape"], ctx["ink_dil"], ctx["scv"]
+    mpp = truth["metresPerPx"]
+    t = float(truth["exteriorWallThicknessPx"])
+    tau = max(3.0, 0.25 * t)
+    tb = max(3.0, 0.5 * t)
+    poly = Polygon(truth["exterior"]).buffer(0)
+    ring = truth["exterior"]
+    openings = truth["openings"]
+    edges = [Edge(ring[i], ring[(i + 1) % len(ring)], poly, openings, t, tau) for i in range(len(ring))]
+    edges = [e for e in edges if e.L >= 2]
+    ucov, usegs = union_coverage(edges, scv)
+    fr = {"frameId": meta["frameId"], "metresPerPx": mpp, "wallPxTruth": t, "tau": tau, "tauB": tb, "exteriorEdges": len(edges),
+          "solidLengthM": r(sum((~e.opening).sum() for e in edges) * mpp, 3), "openingLengthM": r(sum(e.opening.sum() for e in edges) * mpp, 3)}
+    # SCV-UNION coverage itself
+    fr["SCV-UNION"] = union_cov_summary(ucov, edges)
+    unions = {}
+    if full:
+        unions = {"noGapsUnion": union_variant_coverage(edges, usegs, ink_dil, drop_gaps=True), "inkOnlyUnion": union_variant_coverage(edges, usegs, ink_dil, ink_only=True)}
+        fr["SCV-UNION-SENSITIVITY"] = {k: union_cov_summary(v, edges) for k, v in unions.items()}
+    lines = {}
+    segs_by_cfg = {}
+    for cid, pat, cfg in LINE_CONFIGS:
+        if cid not in ctx["prov"]:
+            lines[cid] = {"missing": True}
+            continue
+        d, segs = ctx["prov"][cid]
+        segs_by_cfg[cid] = segs
+        m = line_metrics(segs, edges, mpp, ink_dil, truth, set_name, poly, ucov if cid != "SCV-LINES" else None, usegs)
+        if "perf" in d:
+            m["perf"] = d["perf"]
+        if unions and cid != "SCV-LINES":
+            sens = {}
+            for k, uc_ in unions.items():
+                sens[k] = {"additionalSolidCoverageM": r(sum(int((ci & ~uc & ~e.opening).sum()) for ci, uc, e in zip(m["_covInk"], uc_, edges)) * mpp, 3),
+                           "additionalOpeningCoverageM": r(sum(int((ci & ~uc & e.opening).sum()) for ci, uc, e in zip(m["_covInk"], uc_, edges)) * mpp, 3)}
+            m["unionSensitivity"] = sens
+        lines[cid] = m
+    # additional distractors not in source-cv (real)
+    if set_name == "real":
+        scl = segs_by_cfg.get("SCV-LINES", [])
+        for cid in lines:
+            m = lines[cid]
+            if m.get("missing") or cid == "SCV-LINES":
+                continue
+            add_len = 0.0
+            for (pa, pb, _) in m.get("_distractorSegs", []):
+                L = np.linalg.norm(pb - pa)
+                n = max(2, int(L))
+                pts = np.linspace(pa, pb, n)
+                cov = np.zeros(n, bool)
+                for (qa, qb, _) in scl:
+                    if ang_diff(angle_of(qa, qb), angle_of(pa, pb)) > ANG:
+                        continue
+                    v = qb - qa
+                    Lq = np.linalg.norm(v)
+                    if Lq < 1e-6:
+                        continue
+                    uq = v / Lq
+                    nq = np.array([-uq[1], uq[0]])
+                    cov |= (np.abs((pts - qa) @ nq) <= 2) & ((pts - qa) @ uq >= -1) & ((pts - qa) @ uq <= Lq + 1)
+                add_len += (~cov).mean() * L
+            m["additionalDistractorLengthM"] = r(add_len * mpp, 3)
+    # exclusion-outline lines (terrace / pergola / porch / paving edges not shared with the building) that the
+    # provider draws and SCV-LINES does not: per-sample set difference on each exclusion edge
+    ex_edges = []
+    for ex in truth.get("exclusions", []):
+        pts_ = ex["polygon"]
+        for i_ in range(len(pts_)):
+            pa_, pb_ = np.array(pts_[i_], float), np.array(pts_[(i_ + 1) % len(pts_)], float)
+            L_ = float(np.linalg.norm(pb_ - pa_))
+            if L_ < 2 or poly.exterior.distance(Point(*((pa_ + pb_) / 2))) <= tau + 1:
+                continue
+            ex_edges.append((pa_, pb_, L_))
+
+    def ex_cov(segs):
+        ink_ok = ink_support(segs, ink_dil)
+        covs = []
+        for pa_, pb_, L_ in ex_edges:
+            u_ = (pb_ - pa_) / L_
+            n_ = np.array([-u_[1], u_[0]])
+            ts_ = np.arange(0.5, L_, 1.0)
+            c_ = np.zeros(len(ts_), bool)
+            for (a_, b_, _), ok in zip(segs, ink_ok):
+                if ok < 0.5 or ang_diff(angle_of(a_, b_), angle_of(pa_, pb_)) > ANG:
+                    continue
+                if abs(np.dot(a_ - pa_, n_)) <= 3 and abs(np.dot(b_ - pa_, n_)) <= 3:
+                    t0_, t1_ = sorted([np.dot(a_ - pa_, u_), np.dot(b_ - pa_, u_)])
+                    c_ |= (ts_ >= t0_) & (ts_ <= t1_)
+            covs.append(c_)
+        return covs
+    base_cov = ex_cov(segs_by_cfg.get("SCV-LINES", []))
+    for cid, m in lines.items():
+        if m.get("missing") or cid == "SCV-LINES":
+            continue
+        pc = ex_cov(segs_by_cfg[cid])
+        m["exclusionOutlineAddedOverScvM"] = r(sum(int((p_ & ~b_).sum()) for p_, b_ in zip(pc, base_cov)) * mpp, 3)
+        m["exclusionIds"] = sorted(set(m.get("_exclusionIds", [])))[:25]
+    # per-edge class helpers for the scorecard (solid coverage by union and per provider)
+    edge_info = []
+    for ei, e in enumerate(edges):
+        win = np.isin(e.opening_kind, WINDOW_KINDS)
+        info = {"i": ei, "a": [r(e.a[0], 2), r(e.a[1], 2)], "b": [r(e.b[0], 2), r(e.b[1], 2)], "lengthM": r(e.L * mpp, 3), "solidM": r((~e.opening).sum() * mpp, 3), "unionSolidCov": r(((ucov[ei] & ~e.opening).sum() / max(1, (~e.opening).sum()))), "openingKinds": sorted(set(k for k in e.opening_kind if k)),
+                "windowRunM": r(win.sum() * mpp, 3)}
+        edge_info.append(info)
+    fr["edges"] = edge_info
+    for cid, m in lines.items():
+        if m.get("missing"):
+            continue
+        per = []
+        for ei, e in enumerate(edges):
+            ci = m["_covInk"][ei]
+            win = np.isin(e.opening_kind, WINDOW_KINDS)
+            per.append({"addSolidM": r(((ci & ~ucov[ei] & ~e.opening).sum()) * mpp, 3), "addOpenM": r(((ci & ~ucov[ei] & e.opening).sum()) * mpp, 3),
+                        "addWindowM": r(((ci & ~ucov[ei] & win).sum()) * mpp, 3),
+                        "addGarageDoorM": r(((ci & ~ucov[ei] & (e.opening_kind == "GARAGE_DOOR")).sum()) * mpp, 3), "garageDoorM": r((e.opening_kind == "GARAGE_DOOR").sum() * mpp, 3)})
+        m["perEdge"] = per
+    # regions
+    R = raster_poly(shape, [truth["exterior"]])
+    open_lines = [(o["a"], o["b"]) for o in openings]
+
+    def mm(M):
+        return mask_metrics(M, R, truth, open_lines, tb, truth["exclusions"], truth["bodies"], shape, set_name)
+    regions = {}
+    for cid, M in ctx["fixed_regions"]:
+        regions[cid] = mm(M)
+    for cid, M in ctx["msam_base"].items():
+        if M is None:
+            regions[cid] = {"noMask": True}
+            continue
+        regions[cid] = mm(M)
+        regions[cid]["predictedIoU"] = ctx["msam_conf"][cid]
+    if full:
+        for cid, files in ctx["msam_auto_all"].items():
+            best = None
+            for f in files:
+                A = cv2.imread(f, cv2.IMREAD_GRAYSCALE) > 0
+                u = (A | R).sum()
+                iou = (A & R).sum() / u if u else 0
+                best = iou if best is None else max(best, iou)
+            regions[cid]["oracleUpperBoundIoU_NOT_A_SELECTION"] = r(best)
+            regions[cid]["autoMasks"] = len(files)
+        for cid, vs in ctx["msam_variants"].items():
+            B = ctx["msam_base"].get(cid)
+            if B is None:
+                continue
+            ious = []
+            tious = []
+            for variant, M in vs:
+                u = (M | B).sum()
+                ious.append((variant, r((M & B).sum() / u if u else 1.0)))
+                ut = (M | R).sum()
+                tious.append((M & R).sum() / ut if ut else 0)
+            regions[cid]["promptSensitivity"] = {"variantIoUWithBase": dict(ious), "minIoUWithBase": r(min(v for _, v in ious)), "regionIoURange": [r(min(tious + [regions[cid]["regionIoU"]])), r(max(tious + [regions[cid]["regionIoU"]]))]}
+    # fusion replay outputs (mask-union)
+    fusion = {}
+    if full and ctx["fusion"] is not None:
+        for cid, res in ctx["fusion"]["results"].items():
+            if "outlineCells" not in res:
+                fusion[cid] = res
+                continue
+            fo = mm(cells_mask(shape, rect_rings(res["outlineCells"])))
+            fb = mm(cells_mask(shape, rect_rings(res["builtCells"])))
+            orw = openings_read_as_wall(res.get("pieces", []), edges, t, tau)
+            fusion[cid] = {"openingsReadAsWall": orw, "gapTallies": res["gapTallies"], "bridged": res["bridged"], "outlineAccepted": res["outlineAccepted"], "addedSegments": res["addedSegments"],
+                           "outline": {k: fo[k] for k in ("regionIoU", "boundaryIoU", "buildingCoverage", "outsideArea", "failureTypes", "bodyCoverage", "overreach")},
+                           "built": {k: fb[k] for k in ("regionIoU", "boundaryIoU", "buildingCoverage", "outsideArea", "failureTypes", "bodyCoverage", "overreach")}}
+    # evidence availability on baseline gaps (methodology §9.2)
+    gaps = [o for o in scv if o["configId"] == "SCV-BOUNDARY-GAP" and o["provenance"]["cls"] in ("TRUE_EXTERIOR_GAP", "UNKNOWN_GAP")]
+    gap_rows = []
+    polyb = poly.buffer(t + tau)
+    wp = meta.get("wallPx") or t
+    for g in gaps:
+        ga, gb = np.array(g["geometry"]["a"], float), np.array(g["geometry"]["b"], float)
+        on_edge = None
+        for ei, e in enumerate(edges):
+            if e.support(ga, gb) is not None:
+                on_edge = ei
+                break
+        mid = Point(*((ga + gb) / 2))
+        where = "EXTERIOR_EDGE" if on_edge is not None else ("OUTSIDE" if not polyb.contains(mid) else "INTERIOR")
+        if where == "INTERIOR":
+            continue
+        row = {"gap": g["id"], "cls": g["provenance"]["cls"], "where": where, "widthM": g["provenance"]["widthM"], "bridgedBy": [], "maskOnGapLineOnly": []}
+        L = np.linalg.norm(gb - ga)
+        if L < 1:
+            continue
+        u = (gb - ga) / L
+        nrm = np.array([-u[1], u[0]])
+        ts = np.arange(0.5, L, 1.0)
+        for cid, m in lines.items():
+            if m.get("missing"):
+                continue
+            cov = np.zeros(len(ts), bool)
+            for (sa, sb, _) in segs_by_cfg[cid]:
+                if ang_diff(angle_of(sa, sb), angle_of(ga, gb)) > ANG:
+                    continue
+                if abs(np.dot(sa - ga, nrm)) > wp or abs(np.dot(sb - ga, nrm)) > wp:
+                    continue
+                t0, t1 = sorted([np.dot(sa - ga, u), np.dot(sb - ga, u)])
+                cov |= (ts >= t0) & (ts <= t1)
+            if cov.mean() >= 0.8:
+                row["bridgedBy"].append(cid)
+        # masks (§9.2 as written): inside on >= 80 % of the gap line's samples AND of the same samples one wall inward.
+        # Inward = the truth edge's inward normal for a gap on a truth exterior edge; for a gap outside the building,
+        # the normal side nearer to the truth polygon (towards the building). The first implementation sampled the
+        # gap line only; that count is kept as maskOnGapLineOnly (post-review B8).
+        if on_edge is not None:
+            n_in = edges[on_edge].n_in
+        else:
+            mid_ = (ga + gb) / 2
+            n_in = nrm if poly.distance(Point(*(mid_ + nrm * wp))) <= poly.distance(Point(*(mid_ - nrm * wp))) else -nrm
+        pts = ga[None, :] + ts[:, None] * u[None, :]
+        pts_in = pts + n_in[None, :] * wp
+
+        def inside(M, P_):
+            xs = np.clip(np.round(P_[:, 0]).astype(int), 0, shape[1] - 1)
+            ys = np.clip(np.round(P_[:, 1]).astype(int), 0, shape[0] - 1)
+            return M[ys, xs].mean()
+        for cid in ("MSAM-BOX", "MSAM-SOURCE-PROMPTS", "MSAM-AUTO"):
+            M = ctx["msam_base"].get(cid)
+            if M is None:
+                continue
+            on_line = inside(M, pts) >= 0.8
+            if on_line:
+                row["maskOnGapLineOnly"].append(cid)
+            if on_line and inside(M, pts_in) >= 0.8:
+                row["bridgedBy"].append(cid)
+        gap_rows.append(row)
+    fr["lines"] = {k: {kk: vv for kk, vv in v.items() if not kk.startswith("_")} for k, v in lines.items()}
+    fr["regions"] = regions
+    if full:
+        fr["fusionMaskUnion"] = fusion
+    fr["evidenceAvailability"] = gap_rows
+    return fr
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--set", required=True)
@@ -521,129 +858,36 @@ def main():
             continue
         meta = load(mp)
         truth = load(os.path.join(a.truth, fid + ".truth.json" if a.set == "synthetic" else fid + ".json"))
-        mpp = truth["metresPerPx"]
         ink = cv2.imread(os.path.join(W, "frames", a.set, fid + ".inkmask.png"), cv2.IMREAD_GRAYSCALE)
         shape = ink.shape
         ink_dil = cv2.dilate((ink > 0).astype(np.uint8), np.ones((5, 5), np.uint8)).astype(bool)
-        t = float(truth["exteriorWallThicknessPx"])
-        tau = max(3.0, 0.25 * t)
-        tb = max(3.0, 0.5 * t)
-        poly = Polygon(truth["exterior"]).buffer(0)
-        ring = truth["exterior"]
-        openings = truth["openings"]
-        edges = [Edge(ring[i], ring[(i + 1) % len(ring)], poly, openings, t, tau) for i in range(len(ring))]
-        edges = [e for e in edges if e.L >= 2]
-        scv = load(os.path.join(W, "obs", "source-cv", a.set, fid + ".json"))["observations"]
-        ucov, usegs = union_coverage(edges, scv)
-        fr = {"frameId": meta["frameId"], "metresPerPx": mpp, "wallPxTruth": t, "tau": tau, "tauB": tb, "exteriorEdges": len(edges),
-              "solidLengthM": r(sum((~e.opening).sum() for e in edges) * mpp, 3), "openingLengthM": r(sum(e.opening.sum() for e in edges) * mpp, 3)}
-        # SCV-UNION coverage itself
-        solid_tot = sum(int((~e.opening).sum()) for e in edges)
-        open_tot = sum(int(e.opening.sum()) for e in edges)
-        fr["SCV-UNION"] = {"exteriorWallCoverage": r(sum(int((c & ~e.opening).sum()) for c, e in zip(ucov, edges)) / solid_tot) if solid_tot else None,
-                           "continuityAcrossOpenings": r(sum(int((c & e.opening).sum()) for c, e in zip(ucov, edges)) / open_tot) if open_tot else None}
-        lines = {}
-        segs_by_cfg = {}
+        scv_path = os.path.join(W, "obs", "source-cv", a.set, fid + ".json")
+        scv_doc = load(scv_path)
+        if scv_doc.get("frameId") != meta["frameId"]:
+            raise SystemExit("FRAME MISMATCH %s" % scv_path)
+        scv = scv_doc["observations"]
+        same = {"SOURCE_CV": "in-process with the extractor that wrote this frame's PNGs and meta (frameId checked)"}
+        # provider outputs, loaded once; the same-input rule is asserted on each (post-review B5)
+        prov = {}
         for cid, pat, cfg in LINE_CONFIGS:
             p = os.path.join(W, "obs", pat.format(set=a.set, id=fid))
             if not os.path.exists(p):
-                lines[cid] = {"missing": True}
                 continue
             d = load(p)
-            segs = seg_list(d["observations"], cfg)
-            segs_by_cfg[cid] = segs
-            m = line_metrics(segs, edges, mpp, ink_dil, truth, a.set, poly, ucov if cid != "SCV-LINES" else None, usegs)
-            if "perf" in d:
-                m["perf"] = d["perf"]
-            lines[cid] = m
-        # additional distractors not in source-cv (real)
-        if a.set == "real":
-            scl = seg_list(scv, "SCV-LINES")
-            for cid in lines:
-                m = lines[cid]
-                if m.get("missing") or cid == "SCV-LINES":
-                    continue
-                add_len = 0.0
-                for (pa, pb, _) in m.get("_distractorSegs", []):
-                    L = np.linalg.norm(pb - pa)
-                    n = max(2, int(L))
-                    pts = np.linspace(pa, pb, n)
-                    cov = np.zeros(n, bool)
-                    for (qa, qb, _) in scl:
-                        if ang_diff(angle_of(qa, qb), angle_of(pa, pb)) > ANG:
-                            continue
-                        v = qb - qa
-                        Lq = np.linalg.norm(v)
-                        if Lq < 1e-6:
-                            continue
-                        uq = v / Lq
-                        nq = np.array([-uq[1], uq[0]])
-                        cov |= (np.abs((pts - qa) @ nq) <= 2) & ((pts - qa) @ uq >= -1) & ((pts - qa) @ uq <= Lq + 1)
-                    add_len += (~cov).mean() * L
-                m["additionalDistractorLengthM"] = r(add_len * mpp, 3)
-        # exclusion-outline lines (terrace / pergola / porch / paving edges not shared with the building) that the
-        # provider draws and SCV-LINES does not: per-sample set difference on each exclusion edge
-        ex_edges = []
-        for ex in truth.get("exclusions", []):
-            pts_ = ex["polygon"]
-            for i_ in range(len(pts_)):
-                pa_, pb_ = np.array(pts_[i_], float), np.array(pts_[(i_ + 1) % len(pts_)], float)
-                L_ = float(np.linalg.norm(pb_ - pa_))
-                if L_ < 2 or poly.exterior.distance(Point(*((pa_ + pb_) / 2))) <= tau + 1:
-                    continue
-                ex_edges.append((pa_, pb_, L_))
-
-        def ex_cov(segs):
-            ink_ok = ink_support(segs, ink_dil)
-            covs = []
-            for pa_, pb_, L_ in ex_edges:
-                u_ = (pb_ - pa_) / L_
-                n_ = np.array([-u_[1], u_[0]])
-                ts_ = np.arange(0.5, L_, 1.0)
-                c_ = np.zeros(len(ts_), bool)
-                for (a_, b_, _), ok in zip(segs, ink_ok):
-                    if ok < 0.5 or ang_diff(angle_of(a_, b_), angle_of(pa_, pb_)) > ANG:
-                        continue
-                    if abs(np.dot(a_ - pa_, n_)) <= 3 and abs(np.dot(b_ - pa_, n_)) <= 3:
-                        t0_, t1_ = sorted([np.dot(a_ - pa_, u_), np.dot(b_ - pa_, u_)])
-                        c_ |= (ts_ >= t0_) & (ts_ <= t1_)
-                covs.append(c_)
-            return covs
-        base_cov = ex_cov(segs_by_cfg.get("SCV-LINES", []))
-        for cid, m in lines.items():
-            if m.get("missing") or cid == "SCV-LINES":
-                continue
-            pc = ex_cov(segs_by_cfg[cid])
-            m["exclusionOutlineAddedOverScvM"] = r(sum(int((p_ & ~b_).sum()) for p_, b_ in zip(pc, base_cov)) * mpp, 3)
-            m["exclusionIds"] = sorted(set(m.get("_exclusionIds", [])))[:25]
-        # per-edge class helpers for the scorecard (solid coverage by union and per provider)
-        edge_info = []
-        for ei, e in enumerate(edges):
-            info = {"i": ei, "a": [r(e.a[0], 2), r(e.a[1], 2)], "b": [r(e.b[0], 2), r(e.b[1], 2)], "lengthM": r(e.L * mpp, 3), "solidM": r((~e.opening).sum() * mpp, 3), "unionSolidCov": r(((ucov[ei] & ~e.opening).sum() / max(1, (~e.opening).sum()))), "openingKinds": sorted(set(k for k in e.opening_kind if k))}
-            edge_info.append(info)
-        fr["edges"] = edge_info
-        for cid, m in lines.items():
-            if m.get("missing"):
-                continue
-            per = []
-            for ei, e in enumerate(edges):
-                ci = m["_covInk"][ei]
-                per.append({"addSolidM": r(((ci & ~ucov[ei] & ~e.opening).sum()) * mpp, 3), "addOpenM": r(((ci & ~ucov[ei] & e.opening).sum()) * mpp, 3),
-                            "addGarageDoorM": r(((ci & ~ucov[ei] & (e.opening_kind == "GARAGE_DOOR")).sum()) * mpp, 3), "garageDoorM": r((e.opening_kind == "GARAGE_DOOR").sum() * mpp, 3)})
-            m["perEdge"] = per
-        # regions
-        R = raster_poly(shape, [truth["exterior"]])
-        open_lines = [(o["a"], o["b"]) for o in openings]
-        regions = {}
+            if cid != "SCV-LINES":
+                same[cid] = check_same_input(d, meta, "gray", p, {"refineLines": scv_path} if cid == "DEEPLSD-MD-REFINE-SCV" else None)
+            prov[cid] = (d, seg_list(d["observations"], cfg))
+        # region comparators that do not depend on the truth
+        fixed = []
         scv_outline = next((o for o in scv if o["configId"] == "SCV-OUTLINE"), None)
         scv_built = next((o for o in scv if o["configId"] == "SCV-BUILT"), None)
         if scv_outline:
-            regions["SCV-OUTLINE"] = mask_metrics(cells_mask(shape, scv_outline["geometry"]["rings"]), R, truth, open_lines, tb, truth["exclusions"], truth["bodies"], shape, a.set)
+            fixed.append(("SCV-OUTLINE", cells_mask(shape, scv_outline["geometry"]["rings"])))
         if scv_built:
-            regions["SCV-BUILT"] = mask_metrics(cells_mask(shape, scv_built["geometry"]["rings"]), R, truth, open_lines, tb, truth["exclusions"], truth["bodies"], shape, a.set)
+            fixed.append(("SCV-BUILT", cells_mask(shape, scv_built["geometry"]["rings"])))
         if a.set == "real" and meta.get("frozenDigest") and meta["frozenDigest"].get("masses"):
             rings = [[[mm["rect"]["x0"], mm["rect"]["y0"]], [mm["rect"]["x1"], mm["rect"]["y0"]], [mm["rect"]["x1"], mm["rect"]["y1"]], [mm["rect"]["x0"], mm["rect"]["y1"]]] for mm in meta["frozenDigest"]["masses"]]
-            regions["PROD-MASSES-005H"] = mask_metrics(cells_mask(shape, rings), R, truth, open_lines, tb, truth["exclusions"], truth["bodies"], shape, a.set)
+            fixed.append(("PROD-MASSES-005H", cells_mask(shape, rings)))
         # trivial comparators (added after the first scoring run, §11): what the prompt geometry alone scores
         ext = (meta.get("msamPrompt") or {}).get("extent")
         if ext:
@@ -652,124 +896,59 @@ def main():
             ex = [[ext["x0"], ext["y0"]], [ext["x1"], ext["y0"]], [ext["x1"], ext["y1"]], [ext["x0"], ext["y1"]]]
             bx0, by0 = max(0.0, ext["x0"] - wpx), max(0.0, ext["y0"] - wpx)
             bx1, by1 = min(W_ - 1.0, ext["x1"] + wpx), min(H_ - 1.0, ext["y1"] + wpx)
-            regions["TRIVIAL-EXTENT"] = mask_metrics(cells_mask(shape, [ex]), R, truth, open_lines, tb, truth["exclusions"], truth["bodies"], shape, a.set)
-            regions["TRIVIAL-BOX"] = mask_metrics(cells_mask(shape, [[[bx0, by0], [bx1, by0], [bx1, by1], [bx0, by1]]]), R, truth, open_lines, tb, truth["exclusions"], truth["bodies"], shape, a.set)
+            fixed.append(("TRIVIAL-EXTENT", cells_mask(shape, [ex])))
+            fixed.append(("TRIVIAL-BOX", cells_mask(shape, [[[bx0, by0], [bx1, by0], [bx1, by1], [bx0, by1]]])))
         msp = os.path.join(W, "obs", "mobilesam", a.set, fid + ".json")
-        sens = {}
+        msam_base, msam_conf, msam_variants, msam_auto_all = {}, {}, {}, {}
+        md = None
         if os.path.exists(msp):
             md = load(msp)
-            fr["msamPerf"] = md.get("perf")
-            fr["msamPrompts"] = md.get("prompts")
-            base_masks = {}
+            same["MOBILESAM"] = check_same_input(md, meta, "rgb", msp, {"meta": mp})
             for o in md["observations"]:
                 g = o.get("geometry")
+                variant = o["provenance"].get("variant", "selected")
+                is_base = variant in ("base", None) or o["configId"] == "MSAM-AUTO"
                 if not g:
-                    regions[o["configId"]] = {"noMask": True}
+                    if is_base:
+                        msam_base[o["configId"]] = None
                     continue
                 M = cv2.imread(g["file"], cv2.IMREAD_GRAYSCALE) > 0
-                variant = o["provenance"].get("variant", "selected")
-                if variant in ("base", None) or o["configId"] == "MSAM-AUTO":
-                    regions[o["configId"]] = mask_metrics(M, R, truth, open_lines, tb, truth["exclusions"], truth["bodies"], shape, a.set)
-                    regions[o["configId"]]["predictedIoU"] = o["confidence"]
-                    base_masks[o["configId"]] = M
+                if sha_file(g["file"]) != g["sha256"]:
+                    raise SystemExit("MASK HASH MISMATCH %s" % g["file"])
+                if is_base:
+                    msam_base[o["configId"]] = M
+                    msam_conf[o["configId"]] = o["confidence"]
                     if o["configId"] == "MSAM-AUTO":
-                        best = None
-                        for am in o["provenance"].get("allMasks", []):
-                            A = cv2.imread(am["file"], cv2.IMREAD_GRAYSCALE) > 0
-                            u = (A | R).sum()
-                            iou = (A & R).sum() / u if u else 0
-                            best = iou if best is None else max(best, iou)
-                        regions["MSAM-AUTO"]["oracleUpperBoundIoU_NOT_A_SELECTION"] = r(best)
-                        regions["MSAM-AUTO"]["autoMasks"] = len(o["provenance"].get("allMasks", []))
+                        msam_auto_all[o["configId"]] = [am["file"] for am in o["provenance"].get("allMasks", [])]
                 else:
-                    sens.setdefault(o["configId"], []).append((variant, M))
-            for cid, vs in sens.items():
-                B = base_masks.get(cid)
-                if B is None:
-                    continue
-                ious = []
-                tious = []
-                for variant, M in vs:
-                    u = (M | B).sum()
-                    ious.append((variant, r((M & B).sum() / u if u else 1.0)))
-                    ut = (M | R).sum()
-                    tious.append((M & R).sum() / ut if ut else 0)
-                regions[cid]["promptSensitivity"] = {"variantIoUWithBase": dict(ious), "minIoUWithBase": r(min(v for _, v in ious)), "regionIoURange": [r(min(tious + [regions[cid]["regionIoU"]])), r(max(tious + [regions[cid]["regionIoU"]]))]}
-        # fusion replay outputs (mask-union)
+                    msam_variants.setdefault(o["configId"], []).append((variant, M))
+        # fusion replay output: it must have read these frame pixels and the current provider outputs (B5)
         fp = os.path.join(W, "fusion", a.set, fid + ".json")
-        fusion = {}
+        fd = None
         if os.path.exists(fp):
             fd = load(fp)
-            for cid, res in fd["results"].items():
-                if "outlineCells" not in res:
-                    fusion[cid] = res
-                    continue
-                O = cells_mask(shape, [[[c[0], c[1]], [c[2], c[1]], [c[2], c[3]], [c[0], c[3]]] for c in res["outlineCells"]])
-                Bm = cells_mask(shape, [[[c[0], c[1]], [c[2], c[1]], [c[2], c[3]], [c[0], c[3]]] for c in res["builtCells"]])
-                fo = mask_metrics(O, R, truth, open_lines, tb, truth["exclusions"], truth["bodies"], shape, a.set)
-                fb = mask_metrics(Bm, R, truth, open_lines, tb, truth["exclusions"], truth["bodies"], shape, a.set)
-                orw = openings_read_as_wall(res.get("pieces", []), edges, t, tau)
-                fusion[cid] = {"openingsReadAsWall": orw, "gapTallies": res["gapTallies"], "bridged": res["bridged"], "outlineAccepted": res["outlineAccepted"], "addedSegments": res["addedSegments"],
-                               "outline": {k: fo[k] for k in ("regionIoU", "boundaryIoU", "buildingCoverage", "outsideArea", "failureTypes", "bodyCoverage", "overreach")},
-                               "built": {k: fb[k] for k in ("regionIoU", "boundaryIoU", "buildingCoverage", "outsideArea", "failureTypes", "bodyCoverage", "overreach")}}
-        # evidence availability on baseline gaps
-        gaps = [o for o in scv if o["configId"] == "SCV-BOUNDARY-GAP" and o["provenance"]["cls"] in ("TRUE_EXTERIOR_GAP", "UNKNOWN_GAP")]
-        gap_rows = []
-        polyb = poly.buffer(t + tau)
-        for g in gaps:
-            ga, gb = np.array(g["geometry"]["a"], float), np.array(g["geometry"]["b"], float)
-            on_edge = None
-            for ei, e in enumerate(edges):
-                if e.support(ga, gb) is not None:
-                    on_edge = ei
-                    break
-            mid = Point(*((ga + gb) / 2))
-            where = "EXTERIOR_EDGE" if on_edge is not None else ("OUTSIDE" if not polyb.contains(mid) else "INTERIOR")
-            if where == "INTERIOR":
-                continue
-            row = {"gap": g["id"], "cls": g["provenance"]["cls"], "where": where, "widthM": g["provenance"]["widthM"], "bridgedBy": []}
-            L = np.linalg.norm(gb - ga)
-            if L < 1:
-                continue
-            u = (gb - ga) / L
-            nrm = np.array([-u[1], u[0]])
-            for cid, m in lines.items():
-                if m.get("missing"):
-                    continue
-                d = load(os.path.join(W, "obs", dict((c, pth) for c, pth, _ in LINE_CONFIGS)[cid].format(set=a.set, id=fid)))
-                segs = seg_list(d["observations"], "SCV-LINES" if cid == "SCV-LINES" else None)
-                ts = np.arange(0.5, L, 1.0)
-                cov = np.zeros(len(ts), bool)
-                wp = meta.get("wallPx") or t
-                for (sa, sb, _) in segs:
-                    if ang_diff(angle_of(sa, sb), angle_of(ga, gb)) > ANG:
-                        continue
-                    if abs(np.dot(sa - ga, nrm)) > wp or abs(np.dot(sb - ga, nrm)) > wp:
-                        continue
-                    t0, t1 = sorted([np.dot(sa - ga, u), np.dot(sb - ga, u)])
-                    cov |= (ts >= t0) & (ts <= t1)
-                if cov.mean() >= 0.8:
-                    row["bridgedBy"].append(cid)
-            for cid in ("MSAM-BOX", "MSAM-SOURCE-PROMPTS", "MSAM-AUTO"):
-                if cid not in regions or regions[cid].get("noMask"):
-                    continue
-                o = next((x for x in load(msp)["observations"] if x["configId"] == cid and x["provenance"].get("variant", "selected") in ("base", "selected", None) and x.get("geometry")), None)
-                if not o:
-                    continue
-                M = cv2.imread(o["geometry"]["file"], cv2.IMREAD_GRAYSCALE) > 0
-                ts = np.arange(0.5, L, 1.0)
-                pts = ga[None, :] + ts[:, None] * u[None, :]
-                xs = np.clip(np.round(pts[:, 0]).astype(int), 0, shape[1] - 1)
-                ys = np.clip(np.round(pts[:, 1]).astype(int), 0, shape[0] - 1)
-                if M[ys, xs].mean() >= 0.8:
-                    row["bridgedBy"].append(cid)
-            gap_rows.append(row)
-        fr["lines"] = {k: {kk: vv for kk, vv in v.items() if not kk.startswith("_")} for k, v in lines.items()}
-        fr["regions"] = regions
-        fr["fusionMaskUnion"] = fusion
-        fr["evidenceAvailability"] = gap_rows
+            fin = fd.get("input") or {}
+            if fin.get("rgbPngSha256") != meta["files"]["rgbPngSha256"]:
+                raise SystemExit("SAME-INPUT VIOLATION %s: fusion rgb %s vs frame %s" % (fp, fin.get("rgbPngSha256"), meta["files"]["rgbPngSha256"]))
+            for rel, sha_ in (fin.get("observationFiles") or {}).items():
+                if sha_file(os.path.join(W, "obs", rel)) != sha_:
+                    raise SystemExit("STALE FUSION INPUT %s: %s changed since the replay" % (fp, rel))
+            same["FUSION_REPLAY"] = {"rgb": fin.get("rgbPngSha256"), "observationFiles": len(fin.get("observationFiles") or {})}
+        ctx = {"set": a.set, "meta": meta, "shape": shape, "ink_dil": ink_dil, "scv": scv, "prov": prov, "fixed_regions": fixed,
+               "msam_base": msam_base, "msam_conf": msam_conf, "msam_variants": msam_variants, "msam_auto_all": msam_auto_all, "fusion": fd}
+        fr = score_truth(truth, ctx, True)
+        if md is not None:
+            fr["msamPerf"] = md.get("perf")
+            fr["msamPrompts"] = md.get("prompts")
+        fr["sameInput"] = same
+        # ±u truth buffer (post-review B3): the same truth-dependent numbers with the real truth displaced by the
+        # house's largest stated vertex uncertainty, outward and inward. Synthetic truth is exact (u = 0).
+        if a.set == "real":
+            u = max(truth.get("vertexUncertaintyPx") or [0])
+            fr["truthBuffer"] = {"uPx": u, "rule": "exterior buffered by -u and +u px (mitred), opening runs moved with their face; exclusions and bodies as drawn",
+                                 "variants": {key: score_truth(buffer_truth(truth, dd), ctx, False) for key, dd in (("-u", -u), ("+u", u))}}
         results[fid] = fr
-        print(fid, "lines", {k: (v.get("exteriorWallCoverage"), v.get("continuityAcrossOpenings"), v.get("additionalSolidCoverageM")) for k, v in fr["lines"].items()}, "regions", {k: (v.get("regionIoU"), v.get("failureTypes")) for k, v in regions.items()})
+        print(fid, "lines", {k: (v.get("exteriorWallCoverage"), v.get("continuityAcrossOpenings"), v.get("additionalSolidCoverageM")) for k, v in fr["lines"].items()}, "regions", {k: (v.get("regionIoU"), v.get("failureTypes")) for k, v in fr["regions"].items()})
     with open(a.out, "w") as f:
         json.dump(results, f, sort_keys=True)
 

@@ -21,29 +21,61 @@
     "sum_additionalSolidCoverageM": 0.0,
     "sum_boundaryDistractorsLengthM": 732.556,
     "sum_cornersWithoutSegment": 1,
-    "sum_exclusionOutlineAddedOverScvM": 26.874
+    "sum_exclusionOutlineAddedOverScvM": 26.874,
+    "unionSensitivity": {
+     "inkOnlyUnion": {
+      "framesWithAdditionalSolidCoverage>=0.5m": 0,
+      "max_additionalOpeningCoverageM": 0.531,
+      "max_additionalSolidCoverageM": 0.0,
+      "sum_additionalOpeningCoverageM": 0.551,
+      "sum_additionalSolidCoverageM": 0.0
+     },
+     "noGapsUnion": {
+      "framesWithAdditionalSolidCoverage>=0.5m": 0,
+      "max_additionalOpeningCoverageM": 0.531,
+      "max_additionalSolidCoverageM": 0.0,
+      "sum_additionalOpeningCoverageM": 0.551,
+      "sum_additionalSolidCoverageM": 0.0
+     }
+    }
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "frames": 7,
     "framesWithAdditionalSolidCoverage>=0.5m": 0,
     "mean_additionalOpeningCoverageShare": 0.003,
     "mean_additionalSolidCoverageShare": 0.0,
-    "mean_angularErrorDeg": 0.1427,
+    "mean_angularErrorDeg": 0.1444,
     "mean_continuityAcrossOpenings": 0.9872,
-    "mean_duplicateRate": 0.5434,
+    "mean_duplicateRate": 0.538,
     "mean_exteriorWallCoverage": 0.9941,
-    "mean_fragmentationSegmentsPerMetre": 1.9161,
+    "mean_fragmentationSegmentsPerMetre": 1.9077,
     "mean_longWallRecovery": 0.6235,
     "mean_supportedLineRecall": null,
-    "mean_unsupportedLineRate": 0.0222,
+    "mean_unsupportedLineRate": 0.0211,
     "median_cornerEndpointErrorPx": 1.0,
     "median_count": 834.0,
     "sum_additionalDistractorLengthM": 27.869,
     "sum_additionalOpeningCoverageM": 0.31,
     "sum_additionalSolidCoverageM": 0.0,
-    "sum_boundaryDistractorsLengthM": 1002.952,
+    "sum_boundaryDistractorsLengthM": 1004.374,
     "sum_cornersWithoutSegment": 0,
-    "sum_exclusionOutlineAddedOverScvM": 7.645
+    "sum_exclusionOutlineAddedOverScvM": 6.925,
+    "unionSensitivity": {
+     "inkOnlyUnion": {
+      "framesWithAdditionalSolidCoverage>=0.5m": 0,
+      "max_additionalOpeningCoverageM": 0.62,
+      "max_additionalSolidCoverageM": 0.0,
+      "sum_additionalOpeningCoverageM": 0.62,
+      "sum_additionalSolidCoverageM": 0.0
+     },
+     "noGapsUnion": {
+      "framesWithAdditionalSolidCoverage>=0.5m": 0,
+      "max_additionalOpeningCoverageM": 0.62,
+      "max_additionalSolidCoverageM": 0.0,
+      "sum_additionalOpeningCoverageM": 0.62,
+      "sum_additionalSolidCoverageM": 0.0
+     }
+    }
    },
    "DEEPLSD-WF": {
     "frames": 7,
@@ -65,7 +97,23 @@
     "sum_additionalSolidCoverageM": 0.0,
     "sum_boundaryDistractorsLengthM": 735.77,
     "sum_cornersWithoutSegment": 0,
-    "sum_exclusionOutlineAddedOverScvM": 23.239
+    "sum_exclusionOutlineAddedOverScvM": 23.239,
+    "unionSensitivity": {
+     "inkOnlyUnion": {
+      "framesWithAdditionalSolidCoverage>=0.5m": 0,
+      "max_additionalOpeningCoverageM": 0.531,
+      "max_additionalSolidCoverageM": 0.0,
+      "sum_additionalOpeningCoverageM": 0.531,
+      "sum_additionalSolidCoverageM": 0.0
+     },
+     "noGapsUnion": {
+      "framesWithAdditionalSolidCoverage>=0.5m": 0,
+      "max_additionalOpeningCoverageM": 0.531,
+      "max_additionalSolidCoverageM": 0.0,
+      "sum_additionalOpeningCoverageM": 0.531,
+      "sum_additionalSolidCoverageM": 0.0
+     }
+    }
    },
    "ELSED-DEFAULT": {
     "frames": 7,
@@ -87,7 +135,23 @@
     "sum_additionalSolidCoverageM": 0.0,
     "sum_boundaryDistractorsLengthM": 483.974,
     "sum_cornersWithoutSegment": 0,
-    "sum_exclusionOutlineAddedOverScvM": 10.298
+    "sum_exclusionOutlineAddedOverScvM": 10.298,
+    "unionSensitivity": {
+     "inkOnlyUnion": {
+      "framesWithAdditionalSolidCoverage>=0.5m": 0,
+      "max_additionalOpeningCoverageM": 0.509,
+      "max_additionalSolidCoverageM": 0.0,
+      "sum_additionalOpeningCoverageM": 0.509,
+      "sum_additionalSolidCoverageM": 0.0
+     },
+     "noGapsUnion": {
+      "framesWithAdditionalSolidCoverage>=0.5m": 0,
+      "max_additionalOpeningCoverageM": 0.509,
+      "max_additionalSolidCoverageM": 0.0,
+      "sum_additionalOpeningCoverageM": 0.509,
+      "sum_additionalSolidCoverageM": 0.0
+     }
+    }
    },
    "SCV-LINES": {
     "frames": 7,
@@ -120,10 +184,10 @@
     },
     "frames": 7,
     "framesOK": 0,
+    "mean_ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.1404,
     "mean_boundaryIoU": 0.004,
     "mean_boundaryPrecision": 0.0914,
     "mean_boundaryRecall": 0.0203,
-    "mean_oracleUpperBoundIoU_NOT_A_SELECTION": 0.1404,
     "mean_regionIoU": 0.0458,
     "median_regionIoU": 0.05,
     "min_regionIoU": 0.0033
@@ -279,29 +343,61 @@
     "sum_additionalSolidCoverageM": 0.0,
     "sum_boundaryDistractorsLengthM": 471.59,
     "sum_cornersWithoutSegment": 1,
-    "sum_exclusionOutlineAddedOverScvM": 17.164
+    "sum_exclusionOutlineAddedOverScvM": 17.164,
+    "unionSensitivity": {
+     "inkOnlyUnion": {
+      "framesWithAdditionalSolidCoverage>=0.5m": 0,
+      "max_additionalOpeningCoverageM": 0.531,
+      "max_additionalSolidCoverageM": 0.0,
+      "sum_additionalOpeningCoverageM": 0.551,
+      "sum_additionalSolidCoverageM": 0.0
+     },
+     "noGapsUnion": {
+      "framesWithAdditionalSolidCoverage>=0.5m": 0,
+      "max_additionalOpeningCoverageM": 0.531,
+      "max_additionalSolidCoverageM": 0.0,
+      "sum_additionalOpeningCoverageM": 0.551,
+      "sum_additionalSolidCoverageM": 0.0
+     }
+    }
    },
    "DEEPLSD-MD-REFINE-SCV": {
     "frames": 5,
     "framesWithAdditionalSolidCoverage>=0.5m": 0,
     "mean_additionalOpeningCoverageShare": 0.0042,
     "mean_additionalSolidCoverageShare": 0.0,
-    "mean_angularErrorDeg": 0.1598,
+    "mean_angularErrorDeg": 0.1618,
     "mean_continuityAcrossOpenings": 0.9821,
-    "mean_duplicateRate": 0.5808,
+    "mean_duplicateRate": 0.5732,
     "mean_exteriorWallCoverage": 0.9961,
-    "mean_fragmentationSegmentsPerMetre": 2.1084,
+    "mean_fragmentationSegmentsPerMetre": 2.0966,
     "mean_longWallRecovery": 0.5543,
     "mean_supportedLineRecall": null,
-    "mean_unsupportedLineRate": 0.0259,
+    "mean_unsupportedLineRate": 0.0244,
     "median_cornerEndpointErrorPx": 1.0,
     "median_count": 834.0,
     "sum_additionalDistractorLengthM": 21.101,
     "sum_additionalOpeningCoverageM": 0.31,
     "sum_additionalSolidCoverageM": 0.0,
-    "sum_boundaryDistractorsLengthM": 662.468,
+    "sum_boundaryDistractorsLengthM": 663.89,
     "sum_cornersWithoutSegment": 0,
-    "sum_exclusionOutlineAddedOverScvM": 2.508
+    "sum_exclusionOutlineAddedOverScvM": 2.49,
+    "unionSensitivity": {
+     "inkOnlyUnion": {
+      "framesWithAdditionalSolidCoverage>=0.5m": 0,
+      "max_additionalOpeningCoverageM": 0.62,
+      "max_additionalSolidCoverageM": 0.0,
+      "sum_additionalOpeningCoverageM": 0.62,
+      "sum_additionalSolidCoverageM": 0.0
+     },
+     "noGapsUnion": {
+      "framesWithAdditionalSolidCoverage>=0.5m": 0,
+      "max_additionalOpeningCoverageM": 0.62,
+      "max_additionalSolidCoverageM": 0.0,
+      "sum_additionalOpeningCoverageM": 0.62,
+      "sum_additionalSolidCoverageM": 0.0
+     }
+    }
    },
    "DEEPLSD-WF": {
     "frames": 5,
@@ -323,7 +419,23 @@
     "sum_additionalSolidCoverageM": 0.0,
     "sum_boundaryDistractorsLengthM": 466.881,
     "sum_cornersWithoutSegment": 0,
-    "sum_exclusionOutlineAddedOverScvM": 11.062
+    "sum_exclusionOutlineAddedOverScvM": 11.062,
+    "unionSensitivity": {
+     "inkOnlyUnion": {
+      "framesWithAdditionalSolidCoverage>=0.5m": 0,
+      "max_additionalOpeningCoverageM": 0.531,
+      "max_additionalSolidCoverageM": 0.0,
+      "sum_additionalOpeningCoverageM": 0.531,
+      "sum_additionalSolidCoverageM": 0.0
+     },
+     "noGapsUnion": {
+      "framesWithAdditionalSolidCoverage>=0.5m": 0,
+      "max_additionalOpeningCoverageM": 0.531,
+      "max_additionalSolidCoverageM": 0.0,
+      "sum_additionalOpeningCoverageM": 0.531,
+      "sum_additionalSolidCoverageM": 0.0
+     }
+    }
    },
    "ELSED-DEFAULT": {
     "frames": 5,
@@ -345,7 +457,23 @@
     "sum_additionalSolidCoverageM": 0.0,
     "sum_boundaryDistractorsLengthM": 385.004,
     "sum_cornersWithoutSegment": 0,
-    "sum_exclusionOutlineAddedOverScvM": 10.298
+    "sum_exclusionOutlineAddedOverScvM": 10.298,
+    "unionSensitivity": {
+     "inkOnlyUnion": {
+      "framesWithAdditionalSolidCoverage>=0.5m": 0,
+      "max_additionalOpeningCoverageM": 0.509,
+      "max_additionalSolidCoverageM": 0.0,
+      "sum_additionalOpeningCoverageM": 0.509,
+      "sum_additionalSolidCoverageM": 0.0
+     },
+     "noGapsUnion": {
+      "framesWithAdditionalSolidCoverage>=0.5m": 0,
+      "max_additionalOpeningCoverageM": 0.509,
+      "max_additionalSolidCoverageM": 0.0,
+      "sum_additionalOpeningCoverageM": 0.509,
+      "sum_additionalSolidCoverageM": 0.0
+     }
+    }
    },
    "SCV-LINES": {
     "frames": 5,
@@ -378,10 +506,10 @@
     },
     "frames": 5,
     "framesOK": 0,
+    "mean_ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.0556,
     "mean_boundaryIoU": 0.0056,
     "mean_boundaryPrecision": 0.1279,
     "mean_boundaryRecall": 0.0284,
-    "mean_oracleUpperBoundIoU_NOT_A_SELECTION": 0.0556,
     "mean_regionIoU": 0.0483,
     "median_regionIoU": 0.06,
     "min_regionIoU": 0.0033
@@ -533,6 +661,16 @@
      "exteriorWallCoverage": 0.8016,
      "fragmentationSegmentsPerMetre": 1.571,
      "longWallRecovery": 0.7136,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0173
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -542,7 +680,7 @@
      "additionalOpeningCoverageShare": 0.0,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 0.112,
+     "angularErrorDeg": 0.099,
      "boundaryDistractors": 25,
      "boundaryDistractorsLengthM": 227.627,
      "continuityAcrossOpenings": 1.0,
@@ -555,6 +693,16 @@
      "exteriorWallCoverage": 0.9799,
      "fragmentationSegmentsPerMetre": 1.56,
      "longWallRecovery": 0.8338,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0035
     },
     "DEEPLSD-WF": {
@@ -577,6 +725,16 @@
      "exteriorWallCoverage": 0.8397,
      "fragmentationSegmentsPerMetre": 1.607,
      "longWallRecovery": 0.7411,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0184
     },
     "ELSED-DEFAULT": {
@@ -599,6 +757,16 @@
      "exteriorWallCoverage": 0.9662,
      "fragmentationSegmentsPerMetre": 1.317,
      "longWallRecovery": 0.8215,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0104
     },
     "SCV-LINES": {
@@ -621,6 +789,7 @@
    "openingLengthM": 24.112,
    "regions": {
     "MSAM-AUTO": {
+     "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.0427,
      "areaRatio": 0.0427,
      "autoMasks": 42,
      "bodyCoverage": {
@@ -639,7 +808,6 @@
      ],
      "openingLeakage": 0.0,
      "openingRecall": 0.0,
-     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.0427,
      "outsideArea": 0.0,
      "overreach": {
       "PAVING": 0.0,
@@ -879,9 +1047,28 @@
      "significantComponents": 1
     }
    },
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "FUSION_REPLAY",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 1.0,
     "exteriorWallCoverage": 0.9978
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 0.9978
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 0.9978
+    }
    },
    "solidLengthM": 38.865,
    "tolerancesPx": {
@@ -934,6 +1121,16 @@
      "exteriorWallCoverage": 0.7375,
      "fragmentationSegmentsPerMetre": 1.478,
      "longWallRecovery": 0.3208,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0239
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -943,7 +1140,7 @@
      "additionalOpeningCoverageShare": 0.0,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 0.088,
+     "angularErrorDeg": 0.103,
      "boundaryDistractors": 22,
      "boundaryDistractorsLengthM": 112.857,
      "continuityAcrossOpenings": 1.0,
@@ -951,12 +1148,22 @@
      "cornersWithoutSegment": 0,
      "count": 674,
      "duplicateRate": 0.364,
-     "exclusionOutlineAddedOverScvM": 1.7,
-     "exclusionOutlineLinesM": 31.853,
+     "exclusionOutlineAddedOverScvM": 0.998,
+     "exclusionOutlineLinesM": 32.001,
      "exteriorWallCoverage": 0.9985,
      "fragmentationSegmentsPerMetre": 1.311,
      "longWallRecovery": 0.7593,
-     "unsupportedLineRate": 0.0223
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
+     "unsupportedLineRate": 0.0224
     },
     "DEEPLSD-WF": {
      "additionalDistractorLengthM": 6.154,
@@ -978,6 +1185,16 @@
      "exteriorWallCoverage": 0.9203,
      "fragmentationSegmentsPerMetre": 1.336,
      "longWallRecovery": 0.6735,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0186
     },
     "ELSED-DEFAULT": {
@@ -1000,6 +1217,16 @@
      "exteriorWallCoverage": 0.9871,
      "fragmentationSegmentsPerMetre": 1.032,
      "longWallRecovery": 0.6268,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0331
     },
     "SCV-LINES": {
@@ -1022,6 +1249,7 @@
    "openingLengthM": 9.24,
    "regions": {
     "MSAM-AUTO": {
+     "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.6618,
      "areaRatio": 0.0367,
      "autoMasks": 28,
      "bodyCoverage": {},
@@ -1035,7 +1263,6 @@
      ],
      "openingLeakage": 0.0,
      "openingRecall": 0.0,
-     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.6618,
      "outsideArea": 0.0,
      "overreach": {
       "PERGOLA": 0.0,
@@ -1235,9 +1462,28 @@
      "significantComponents": 1
     }
    },
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "FUSION_REPLAY",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 1.0,
     "exteriorWallCoverage": 0.9985
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 0.9985
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 0.9985
+    }
    },
    "solidLengthM": 24.357,
    "tolerancesPx": {
@@ -1286,6 +1532,16 @@
      "exteriorWallCoverage": 0.5052,
      "fragmentationSegmentsPerMetre": 2.989,
      "longWallRecovery": 0.2126,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0292
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -1295,20 +1551,30 @@
      "additionalOpeningCoverageShare": 0.0,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 0.117,
+     "angularErrorDeg": 0.143,
      "boundaryDistractors": 18,
      "boundaryDistractorsLengthM": 95.229,
      "continuityAcrossOpenings": 1.0,
      "cornerEndpointErrorMedianPx": 2.25,
      "cornersWithoutSegment": 0,
      "count": 818,
-     "duplicateRate": 0.571,
-     "exclusionOutlineAddedOverScvM": 0.711,
-     "exclusionOutlineLinesM": 33.513,
+     "duplicateRate": 0.533,
+     "exclusionOutlineAddedOverScvM": 0.693,
+     "exclusionOutlineLinesM": 33.512,
      "exteriorWallCoverage": 1.0,
-     "fragmentationSegmentsPerMetre": 2.26,
+     "fragmentationSegmentsPerMetre": 2.201,
      "longWallRecovery": 0.4167,
-     "unsupportedLineRate": 0.0147
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
+     "unsupportedLineRate": 0.0111
     },
     "DEEPLSD-WF": {
      "additionalDistractorLengthM": 1.011,
@@ -1330,6 +1596,16 @@
      "exteriorWallCoverage": 0.7843,
      "fragmentationSegmentsPerMetre": 2.246,
      "longWallRecovery": 0.4572,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0229
     },
     "ELSED-DEFAULT": {
@@ -1352,6 +1628,16 @@
      "exteriorWallCoverage": 0.9991,
      "fragmentationSegmentsPerMetre": 1.885,
      "longWallRecovery": 0.5048,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0243
     },
     "SCV-LINES": {
@@ -1374,6 +1660,7 @@
    "openingLengthM": 12.542,
    "regions": {
     "MSAM-AUTO": {
+     "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.058,
      "areaRatio": 0.058,
      "autoMasks": 52,
      "bodyCoverage": {},
@@ -1387,7 +1674,6 @@
      ],
      "openingLeakage": 0.0,
      "openingRecall": 0.0,
-     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.058,
      "outsideArea": 0.0,
      "overreach": {
       "PERGOLA": 0.0,
@@ -1593,9 +1879,28 @@
      "significantComponents": 1
     }
    },
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "FUSION_REPLAY",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 1.0,
     "exteriorWallCoverage": 1.0
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    }
    },
    "solidLengthM": 21.528,
    "tolerancesPx": {
@@ -1645,6 +1950,16 @@
      "exteriorWallCoverage": 0.7928,
      "fragmentationSegmentsPerMetre": 2.02,
      "longWallRecovery": 0.6226,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0555
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -1654,7 +1969,7 @@
      "additionalOpeningCoverageShare": 0.0,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 0.196,
+     "angularErrorDeg": 0.178,
      "boundaryDistractors": 33,
      "boundaryDistractorsLengthM": 210.477,
      "continuityAcrossOpenings": 1.0,
@@ -1663,11 +1978,21 @@
      "count": 922,
      "duplicateRate": 0.813,
      "exclusionOutlineAddedOverScvM": 0.0,
-     "exclusionOutlineLinesM": 94.323,
+     "exclusionOutlineLinesM": 93.472,
      "exteriorWallCoverage": 1.0,
      "fragmentationSegmentsPerMetre": 2.48,
      "longWallRecovery": 0.4167,
-     "unsupportedLineRate": 0.0337
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
+     "unsupportedLineRate": 0.0326
     },
     "DEEPLSD-WF": {
      "additionalDistractorLengthM": 4.715,
@@ -1689,6 +2014,16 @@
      "exteriorWallCoverage": 0.9681,
      "fragmentationSegmentsPerMetre": 1.693,
      "longWallRecovery": 0.7561,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0494
     },
     "ELSED-DEFAULT": {
@@ -1711,6 +2046,16 @@
      "exteriorWallCoverage": 0.9894,
      "fragmentationSegmentsPerMetre": 1.129,
      "longWallRecovery": 0.4108,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0557
     },
     "SCV-LINES": {
@@ -1733,6 +2078,7 @@
    "openingLengthM": 15.065,
    "regions": {
     "MSAM-AUTO": {
+     "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.0399,
      "areaRatio": 0.0493,
      "autoMasks": 32,
      "bodyCoverage": {},
@@ -1747,7 +2093,6 @@
      ],
      "openingLeakage": 0.0137,
      "openingRecall": 0.0995,
-     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.0399,
      "outsideArea": 0.032,
      "overreach": {
       "PERGOLA": 0.0,
@@ -1958,9 +2303,28 @@
      "significantComponents": 1
     }
    },
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "FUSION_REPLAY",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 1.0,
     "exteriorWallCoverage": 1.0
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    }
    },
    "solidLengthM": 28.083,
    "tolerancesPx": {
@@ -2011,6 +2375,16 @@
      "exteriorWallCoverage": 0.79,
      "fragmentationSegmentsPerMetre": 2.567,
      "longWallRecovery": 0.2506,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.02,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.02,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0708
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -2020,7 +2394,7 @@
      "additionalOpeningCoverageShare": 0.0,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 0.207,
+     "angularErrorDeg": 0.205,
      "boundaryDistractors": 41,
      "boundaryDistractorsLengthM": 192.158,
      "continuityAcrossOpenings": 0.9888,
@@ -2029,11 +2403,21 @@
      "count": 1195,
      "duplicateRate": 0.528,
      "exclusionOutlineAddedOverScvM": 0.0,
-     "exclusionOutlineLinesM": 36.672,
+     "exclusionOutlineLinesM": 35.733,
      "exteriorWallCoverage": 0.9949,
      "fragmentationSegmentsPerMetre": 2.728,
      "longWallRecovery": 0.4693,
-     "unsupportedLineRate": 0.0513
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
+     "unsupportedLineRate": 0.0496
     },
     "DEEPLSD-WF": {
      "additionalDistractorLengthM": 0.04,
@@ -2055,6 +2439,16 @@
      "exteriorWallCoverage": 0.916,
      "fragmentationSegmentsPerMetre": 2.262,
      "longWallRecovery": 0.3366,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0719
     },
     "ELSED-DEFAULT": {
@@ -2077,6 +2471,16 @@
      "exteriorWallCoverage": 0.9855,
      "fragmentationSegmentsPerMetre": 1.793,
      "longWallRecovery": 0.333,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0614
     },
     "SCV-LINES": {
@@ -2099,6 +2503,7 @@
    "openingLengthM": 17.875,
    "regions": {
     "MSAM-AUTO": {
+     "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.0595,
      "areaRatio": 0.0595,
      "autoMasks": 55,
      "bodyCoverage": {
@@ -2117,7 +2522,6 @@
      ],
      "openingLeakage": 0.0,
      "openingRecall": 0.0,
-     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.0595,
      "outsideArea": 0.0,
      "overreach": {
       "PAVING": 0.0,
@@ -2337,9 +2741,28 @@
      "significantComponents": 1
     }
    },
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "FUSION_REPLAY",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 0.9888,
     "exteriorWallCoverage": 1.0
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 0.9888,
+     "exteriorWallCoverage": 1.0
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 0.9888,
+     "exteriorWallCoverage": 1.0
+    }
    },
    "solidLengthM": 27.551,
    "tolerancesPx": {
@@ -2393,6 +2816,16 @@
      "exteriorWallCoverage": 0.9353,
      "fragmentationSegmentsPerMetre": 1.756,
      "longWallRecovery": 0.5982,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.531,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.531,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0157
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -2404,7 +2837,7 @@
      "additionalOpeningCoverageShare": 0.0208,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 0.141,
+     "angularErrorDeg": 0.144,
      "boundaryDistractors": 6,
      "boundaryDistractorsLengthM": 28.171,
      "continuityAcrossOpenings": 1.0,
@@ -2413,10 +2846,20 @@
      "count": 834,
      "duplicateRate": 0.595,
      "exclusionOutlineAddedOverScvM": 0.0,
-     "exclusionOutlineLinesM": 15.072,
+     "exclusionOutlineLinesM": 14.518,
      "exteriorWallCoverage": 0.9984,
      "fragmentationSegmentsPerMetre": 1.857,
      "longWallRecovery": 0.7758,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.62,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.62,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0121
     },
     "DEEPLSD-WF": {
@@ -2441,6 +2884,16 @@
      "exteriorWallCoverage": 0.738,
      "fragmentationSegmentsPerMetre": 1.834,
      "longWallRecovery": 0.5679,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.531,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.531,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0149
     },
     "ELSED-DEFAULT": {
@@ -2465,6 +2918,16 @@
      "exteriorWallCoverage": 0.9952,
      "fragmentationSegmentsPerMetre": 1.357,
      "longWallRecovery": 0.6888,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.509,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.509,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0092
     },
     "SCV-LINES": {
@@ -2487,6 +2950,7 @@
    "openingLengthM": 14.871,
    "regions": {
     "MSAM-AUTO": {
+     "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.0748,
      "areaRatio": 0.0748,
      "autoMasks": 33,
      "bodyCoverage": {
@@ -2503,7 +2967,6 @@
      ],
      "openingLeakage": 0.0,
      "openingRecall": 0.0,
-     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.0748,
      "outsideArea": 0.0,
      "overreach": {
       "PAVING": 0.0,
@@ -2718,9 +3181,28 @@
      "significantComponents": 1
     }
    },
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "FUSION_REPLAY",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 0.9792,
     "exteriorWallCoverage": 0.9984
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 0.9583,
+     "exteriorWallCoverage": 0.9984
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 0.9583,
+     "exteriorWallCoverage": 0.9984
+    }
    },
    "solidLengthM": 27.707,
    "tolerancesPx": {
@@ -2770,6 +3252,16 @@
      "exteriorWallCoverage": 0.946,
      "fragmentationSegmentsPerMetre": 1.446,
      "longWallRecovery": 0.557,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0299
     },
     "DEEPLSD-MD-REFINE-SCV": {
@@ -2779,9 +3271,9 @@
      "additionalOpeningCoverageShare": 0.0,
      "additionalSolidCoverageM": 0.0,
      "additionalSolidCoverageShare": 0.0,
-     "angularErrorDeg": 0.138,
-     "boundaryDistractors": 14,
-     "boundaryDistractorsLengthM": 136.433,
+     "angularErrorDeg": 0.139,
+     "boundaryDistractors": 15,
+     "boundaryDistractorsLengthM": 137.855,
      "continuityAcrossOpenings": 0.9215,
      "cornerEndpointErrorMedianPx": 1.5,
      "cornersWithoutSegment": 0,
@@ -2792,7 +3284,17 @@
      "exteriorWallCoverage": 0.9871,
      "fragmentationSegmentsPerMetre": 1.217,
      "longWallRecovery": 0.6931,
-     "unsupportedLineRate": 0.0179
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
+     "unsupportedLineRate": 0.0166
     },
     "DEEPLSD-WF": {
      "additionalDistractorLengthM": 19.901,
@@ -2814,6 +3316,16 @@
      "exteriorWallCoverage": 0.9894,
      "fragmentationSegmentsPerMetre": 1.395,
      "longWallRecovery": 0.5152,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0276
     },
     "ELSED-DEFAULT": {
@@ -2836,6 +3348,16 @@
      "exteriorWallCoverage": 0.9878,
      "fragmentationSegmentsPerMetre": 1.081,
      "longWallRecovery": 0.6503,
+     "unionSensitivity": {
+      "inkOnlyUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      },
+      "noGapsUnion": {
+       "additionalOpeningCoverageM": 0.0,
+       "additionalSolidCoverageM": 0.0
+      }
+     },
      "unsupportedLineRate": 0.0087
     },
     "SCV-LINES": {
@@ -2858,6 +3380,7 @@
    "openingLengthM": 22.877,
    "regions": {
     "MSAM-AUTO": {
+     "ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION": 0.0459,
      "areaRatio": 0.0459,
      "autoMasks": 42,
      "bodyCoverage": {
@@ -2876,7 +3399,6 @@
      ],
      "openingLeakage": 0.0,
      "openingRecall": 0.0,
-     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.0459,
      "outsideArea": 0.0,
      "overreach": {
       "PAVING": 0.0,
@@ -3111,9 +3633,28 @@
      "significantComponents": 1
     }
    },
+   "sameInputChecked": [
+    "DEEPLSD-MD",
+    "DEEPLSD-MD-REFINE-SCV",
+    "DEEPLSD-WF",
+    "ELSED-DEFAULT",
+    "FUSION_REPLAY",
+    "MOBILESAM",
+    "SOURCE_CV"
+   ],
    "scvUnion": {
     "continuityAcrossOpenings": 1.0,
     "exteriorWallCoverage": 1.0
+   },
+   "scvUnionSensitivity": {
+    "inkOnlyUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    },
+    "noGapsUnion": {
+     "continuityAcrossOpenings": 1.0,
+     "exteriorWallCoverage": 1.0
+    }
    },
    "solidLengthM": 35.268,
    "tolerancesPx": {
@@ -3144,5 +3685,2181 @@
   }
  },
  "researchOnly": true,
+ "sameInputCheck": {
+  "framesChecked": 7,
+  "outputsCheckedPerProvider": {
+   "DEEPLSD-MD": 7,
+   "DEEPLSD-MD-REFINE-SCV": 7,
+   "DEEPLSD-WF": 7,
+   "ELSED-DEFAULT": 7,
+   "FUSION_REPLAY": 7,
+   "MOBILESAM": 7,
+   "SOURCE_CV": 7
+  },
+  "rule": "every provider output records the SHA-256 of the frame PNG it read (the refiner also its SCV-LINES file, MobileSAM also its prompt meta; the fusion replay the frame PNG and every observation file); score.py asserts each against the frame meta / the current file and stops on any mismatch (post-review B5)"
+ },
+ "scoringOutput": {
+  "file": "/home/user/work005i/scores/real.json (outside the repository)",
+  "sha256": "5b13c086910ae2956f37c250d00e5101e02cb4665212214d54245ed7c818a294"
+ },
+ "truthBufferFragility": {
+  "evidenceAvailability": {
+   "msamBoxFalseBridgesExceedScvLines": {
+    "+u": true,
+    "-u": true,
+    "0": true
+   },
+   "totals": {
+    "+u": {
+     "DEEPLSD-MD": {
+      "falseBridges": 6,
+      "usefulBridges": 52,
+      "usefulNotInScvLines": 3
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 10,
+      "usefulBridges": 50,
+      "usefulNotInScvLines": 0
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 6,
+      "usefulBridges": 52,
+      "usefulNotInScvLines": 3
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 2,
+      "usefulBridges": 47,
+      "usefulNotInScvLines": 3
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0,
+      "usefulNotInScvLines": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 14,
+      "usefulBridges": 34,
+      "usefulNotInScvLines": 3
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 12,
+      "usefulBridges": 33,
+      "usefulNotInScvLines": 6
+     },
+     "SCV-LINES": {
+      "falseBridges": 7,
+      "usefulBridges": 50,
+      "usefulNotInScvLines": 0
+     }
+    },
+    "-u": {
+     "DEEPLSD-MD": {
+      "falseBridges": 9,
+      "usefulBridges": 54,
+      "usefulNotInScvLines": 3
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 14,
+      "usefulBridges": 53,
+      "usefulNotInScvLines": 0
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 9,
+      "usefulBridges": 56,
+      "usefulNotInScvLines": 3
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 3,
+      "usefulBridges": 50,
+      "usefulNotInScvLines": 3
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0,
+      "usefulNotInScvLines": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 18,
+      "usefulBridges": 43,
+      "usefulNotInScvLines": 5
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 16,
+      "usefulBridges": 41,
+      "usefulNotInScvLines": 7
+     },
+     "SCV-LINES": {
+      "falseBridges": 11,
+      "usefulBridges": 55,
+      "usefulNotInScvLines": 0
+     }
+    },
+    "0": {
+     "DEEPLSD-MD": {
+      "falseBridges": 6,
+      "usefulBridges": 59,
+      "usefulNotInScvLines": 3
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 10,
+      "usefulBridges": 57,
+      "usefulNotInScvLines": 0
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 6,
+      "usefulBridges": 60,
+      "usefulNotInScvLines": 3
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 2,
+      "usefulBridges": 52,
+      "usefulNotInScvLines": 3
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0,
+      "usefulNotInScvLines": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 15,
+      "usefulBridges": 44,
+      "usefulNotInScvLines": 4
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 13,
+      "usefulBridges": 42,
+      "usefulNotInScvLines": 7
+     },
+     "SCV-LINES": {
+      "falseBridges": 7,
+      "usefulBridges": 59,
+      "usefulNotInScvLines": 0
+     }
+    }
+   }
+  },
+  "fragileRegionComparisons": [
+   "dom-w-zurawkach: MSAM-BOX vs SCV-BUILT",
+   "MEAN over the 7 houses: MSAM-BOX vs TRIVIAL-EXTENT"
+  ],
+  "fragileScorecardCells": [
+   {
+    "+u": "NEUTRAL",
+    "0": "HURT",
+    "class": "mainBodyMask",
+    "house": "dom-pod-jarzabem",
+    "provider": "MSAM-BOX"
+   },
+   {
+    "-u": "HURT",
+    "0": "NEUTRAL",
+    "class": "mainBodyMask",
+    "house": "dom-pod-jarzabem",
+    "provider": "MSAM-SOURCE-PROMPTS"
+   },
+   {
+    "-u": "HELPED",
+    "0": "NEUTRAL",
+    "class": "wallInterruptedByWindows",
+    "house": "dom-w-azaliach",
+    "provider": "MSAM-BOX"
+   },
+   {
+    "+u": "NEUTRAL",
+    "0": "HELPED",
+    "class": "mainBodyMask",
+    "house": "dom-w-helikoniach",
+    "provider": "MSAM-BOX"
+   },
+   {
+    "-u": "HURT",
+    "0": "NEUTRAL",
+    "class": "bay",
+    "house": "dom-w-morelach",
+    "provider": "MSAM-AUTO"
+   },
+   {
+    "-u": "HURT",
+    "0": "NEUTRAL",
+    "class": "garageDoorFacade",
+    "house": "dom-w-morelach",
+    "provider": "MSAM-BOX"
+   },
+   {
+    "-u": "HURT",
+    "0": "NEUTRAL",
+    "class": "wallInterruptedByWindows",
+    "house": "dom-w-morelach",
+    "provider": "MSAM-BOX"
+   },
+   {
+    "+u": "NEUTRAL",
+    "-u": "NEUTRAL",
+    "0": "HELPED",
+    "class": "mainBodyMask",
+    "house": "dom-w-morelach",
+    "provider": "MSAM-SOURCE-PROMPTS"
+   },
+   {
+    "-u": "NEUTRAL",
+    "0": "HELPED",
+    "class": "mainBodyMask",
+    "house": "dom-w-morelach",
+    "provider": "TRIVIAL-EXTENT"
+   },
+   {
+    "+u": "HELPED",
+    "0": "NEUTRAL",
+    "class": "mainBodyMask",
+    "house": "dom-w-zurawkach",
+    "provider": "TRIVIAL-EXTENT"
+   }
+  ],
+  "lineConclusions": {
+   "conclusion": "external line provider adds < 0.5 m of ink-supported exterior solid coverage beyond SCV-UNION",
+   "fragile": [],
+   "maxAdditionalOpeningCoverageM": {
+    "+u": 0.221,
+    "-u": 0.268,
+    "0": 0.31
+   },
+   "maxAdditionalSolidCoverageM": {
+    "+u": 0.0,
+    "-u": 0.0,
+    "0": 0.0
+   },
+   "rows": [
+    {
+     "additionalOpeningCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "additionalSolidCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "house": "dom-pod-jarzabem",
+     "provider": "ELSED-DEFAULT",
+     "verdict": "ROBUST"
+    },
+    {
+     "additionalOpeningCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "additionalSolidCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "house": "dom-pod-jarzabem",
+     "provider": "DEEPLSD-MD",
+     "verdict": "ROBUST"
+    },
+    {
+     "additionalOpeningCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "additionalSolidCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "house": "dom-pod-jarzabem",
+     "provider": "DEEPLSD-WF",
+     "verdict": "ROBUST"
+    },
+    {
+     "additionalOpeningCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "additionalSolidCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "house": "dom-pod-jarzabem",
+     "provider": "DEEPLSD-MD-REFINE-SCV",
+     "verdict": "ROBUST"
+    },
+    {
+     "additionalOpeningCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "additionalSolidCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "house": "dom-w-arkadiach",
+     "provider": "ELSED-DEFAULT",
+     "verdict": "ROBUST"
+    },
+    {
+     "additionalOpeningCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "additionalSolidCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "house": "dom-w-arkadiach",
+     "provider": "DEEPLSD-MD",
+     "verdict": "ROBUST"
+    },
+    {
+     "additionalOpeningCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "additionalSolidCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "house": "dom-w-arkadiach",
+     "provider": "DEEPLSD-WF",
+     "verdict": "ROBUST"
+    },
+    {
+     "additionalOpeningCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "additionalSolidCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "house": "dom-w-arkadiach",
+     "provider": "DEEPLSD-MD-REFINE-SCV",
+     "verdict": "ROBUST"
+    },
+    {
+     "additionalOpeningCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "additionalSolidCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "house": "dom-w-azaliach",
+     "provider": "ELSED-DEFAULT",
+     "verdict": "ROBUST"
+    },
+    {
+     "additionalOpeningCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "additionalSolidCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "house": "dom-w-azaliach",
+     "provider": "DEEPLSD-MD",
+     "verdict": "ROBUST"
+    },
+    {
+     "additionalOpeningCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "additionalSolidCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "house": "dom-w-azaliach",
+     "provider": "DEEPLSD-WF",
+     "verdict": "ROBUST"
+    },
+    {
+     "additionalOpeningCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "additionalSolidCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "house": "dom-w-azaliach",
+     "provider": "DEEPLSD-MD-REFINE-SCV",
+     "verdict": "ROBUST"
+    },
+    {
+     "additionalOpeningCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "additionalSolidCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "house": "dom-w-helikoniach",
+     "provider": "ELSED-DEFAULT",
+     "verdict": "ROBUST"
+    },
+    {
+     "additionalOpeningCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "additionalSolidCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "house": "dom-w-helikoniach",
+     "provider": "DEEPLSD-MD",
+     "verdict": "ROBUST"
+    },
+    {
+     "additionalOpeningCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "additionalSolidCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "house": "dom-w-helikoniach",
+     "provider": "DEEPLSD-WF",
+     "verdict": "ROBUST"
+    },
+    {
+     "additionalOpeningCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "additionalSolidCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "house": "dom-w-helikoniach",
+     "provider": "DEEPLSD-MD-REFINE-SCV",
+     "verdict": "ROBUST"
+    },
+    {
+     "additionalOpeningCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "additionalSolidCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "house": "dom-w-morelach",
+     "provider": "ELSED-DEFAULT",
+     "verdict": "ROBUST"
+    },
+    {
+     "additionalOpeningCoverageM": {
+      "+u": 0.02,
+      "-u": 0.04,
+      "0": 0.02
+     },
+     "additionalSolidCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "house": "dom-w-morelach",
+     "provider": "DEEPLSD-MD",
+     "verdict": "ROBUST"
+    },
+    {
+     "additionalOpeningCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "additionalSolidCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "house": "dom-w-morelach",
+     "provider": "DEEPLSD-WF",
+     "verdict": "ROBUST"
+    },
+    {
+     "additionalOpeningCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "additionalSolidCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "house": "dom-w-morelach",
+     "provider": "DEEPLSD-MD-REFINE-SCV",
+     "verdict": "ROBUST"
+    },
+    {
+     "additionalOpeningCoverageM": {
+      "+u": 0.199,
+      "-u": 0.0,
+      "0": 0.199
+     },
+     "additionalSolidCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "house": "dom-w-zurawkach",
+     "provider": "ELSED-DEFAULT",
+     "verdict": "ROBUST"
+    },
+    {
+     "additionalOpeningCoverageM": {
+      "+u": 0.221,
+      "-u": 0.0,
+      "0": 0.221
+     },
+     "additionalSolidCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "house": "dom-w-zurawkach",
+     "provider": "DEEPLSD-MD",
+     "verdict": "ROBUST"
+    },
+    {
+     "additionalOpeningCoverageM": {
+      "+u": 0.221,
+      "-u": 0.0,
+      "0": 0.221
+     },
+     "additionalSolidCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "house": "dom-w-zurawkach",
+     "provider": "DEEPLSD-WF",
+     "verdict": "ROBUST"
+    },
+    {
+     "additionalOpeningCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.31
+     },
+     "additionalSolidCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "house": "dom-w-zurawkach",
+     "provider": "DEEPLSD-MD-REFINE-SCV",
+     "verdict": "ROBUST"
+    },
+    {
+     "additionalOpeningCoverageM": {
+      "+u": 0.0,
+      "-u": 0.241,
+      "0": 0.0
+     },
+     "additionalSolidCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "house": "willa-miranda",
+     "provider": "ELSED-DEFAULT",
+     "verdict": "ROBUST"
+    },
+    {
+     "additionalOpeningCoverageM": {
+      "+u": 0.0,
+      "-u": 0.268,
+      "0": 0.0
+     },
+     "additionalSolidCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "house": "willa-miranda",
+     "provider": "DEEPLSD-MD",
+     "verdict": "ROBUST"
+    },
+    {
+     "additionalOpeningCoverageM": {
+      "+u": 0.0,
+      "-u": 0.241,
+      "0": 0.0
+     },
+     "additionalSolidCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "house": "willa-miranda",
+     "provider": "DEEPLSD-WF",
+     "verdict": "ROBUST"
+    },
+    {
+     "additionalOpeningCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "additionalSolidCoverageM": {
+      "+u": 0.0,
+      "-u": 0.0,
+      "0": 0.0
+     },
+     "house": "willa-miranda",
+     "provider": "DEEPLSD-MD-REFINE-SCV",
+     "verdict": "ROBUST"
+    }
+   ],
+   "scvUnionMinCoverage": {
+    "+u": {
+     "opening": 0.9807,
+     "solid": 0.9691
+    },
+    "-u": {
+     "opening": 0.9823,
+     "solid": 1.0
+    },
+    "0": {
+     "opening": 0.9792,
+     "solid": 0.9978
+    }
+   }
+  },
+  "meanRegionIoU": {
+   "MSAM-AUTO": {
+    "+u": 0.0451,
+    "-u": 0.047,
+    "0": 0.0458
+   },
+   "MSAM-BOX": {
+    "+u": 0.8832,
+    "-u": 0.8876,
+    "0": 0.8947
+   },
+   "MSAM-SOURCE-PROMPTS": {
+    "+u": 0.6289,
+    "-u": 0.6215,
+    "0": 0.6304
+   },
+   "PROD-MASSES-005H": {
+    "+u": 0.7256,
+    "-u": 0.7383,
+    "0": 0.7433
+   },
+   "SCV-BUILT": {
+    "+u": 0.7519,
+    "-u": 0.7635,
+    "0": 0.7684
+   },
+   "SCV-OUTLINE": {
+    "+u": 0.6048,
+    "-u": 0.609,
+    "0": 0.6154
+   },
+   "TRIVIAL-BOX": {
+    "+u": 0.8262,
+    "-u": 0.7823,
+    "0": 0.8041
+   },
+   "TRIVIAL-EXTENT": {
+    "+u": 0.8897,
+    "-u": 0.8723,
+    "0": 0.8901
+   }
+  },
+  "msamBoxMinusTrivialExtent": {
+   "+u": {
+    "max": 0.0429,
+    "mean": -0.0064,
+    "min": -0.0455
+   },
+   "-u": {
+    "max": 0.104,
+    "mean": 0.0153,
+    "min": -0.0533
+   },
+   "0": {
+    "max": 0.0806,
+    "mean": 0.0045,
+    "min": -0.0513
+   }
+  },
+  "regionComparisons": [
+   {
+    "deltaIoU": {
+     "+u": -0.0455,
+     "-u": -0.0533,
+     "0": -0.0513
+    },
+    "house": "dom-pod-jarzabem",
+    "pair": "MSAM-BOX vs TRIVIAL-EXTENT",
+    "regionIoU": {
+     "+u": [
+      0.7021,
+      0.7476
+     ],
+     "-u": [
+      0.6811,
+      0.7344
+     ],
+     "0": [
+      0.6936,
+      0.7449
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.0187,
+     "-u": -0.0134,
+     "0": -0.0142
+    },
+    "house": "dom-pod-jarzabem",
+    "pair": "MSAM-BOX vs TRIVIAL-BOX",
+    "regionIoU": {
+     "+u": [
+      0.7021,
+      0.7208
+     ],
+     "-u": [
+      0.6811,
+      0.6945
+     ],
+     "0": [
+      0.6936,
+      0.7078
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": 0.1854,
+     "-u": 0.1554,
+     "0": 0.1696
+    },
+    "house": "dom-pod-jarzabem",
+    "pair": "MSAM-BOX vs SCV-BUILT",
+    "regionIoU": {
+     "+u": [
+      0.7021,
+      0.5167
+     ],
+     "-u": [
+      0.6811,
+      0.5257
+     ],
+     "0": [
+      0.6936,
+      0.524
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": 0.353,
+     "-u": 0.3295,
+     "0": 0.3408
+    },
+    "house": "dom-pod-jarzabem",
+    "pair": "MSAM-BOX vs PROD-MASSES-005H",
+    "regionIoU": {
+     "+u": [
+      0.7021,
+      0.3491
+     ],
+     "-u": [
+      0.6811,
+      0.3516
+     ],
+     "0": [
+      0.6936,
+      0.3528
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": 0.4575,
+     "-u": 0.4368,
+     "0": 0.4458
+    },
+    "house": "dom-pod-jarzabem",
+    "pair": "MSAM-BOX vs SCV-OUTLINE",
+    "regionIoU": {
+     "+u": [
+      0.7021,
+      0.2446
+     ],
+     "-u": [
+      0.6811,
+      0.2443
+     ],
+     "0": [
+      0.6936,
+      0.2478
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.0387,
+     "-u": -0.0426,
+     "0": -0.0422
+    },
+    "house": "dom-pod-jarzabem",
+    "pair": "MSAM-SOURCE-PROMPTS vs TRIVIAL-EXTENT",
+    "regionIoU": {
+     "+u": [
+      0.7089,
+      0.7476
+     ],
+     "-u": [
+      0.6918,
+      0.7344
+     ],
+     "0": [
+      0.7027,
+      0.7449
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": 0.1922,
+     "-u": 0.1661,
+     "0": 0.1787
+    },
+    "house": "dom-pod-jarzabem",
+    "pair": "MSAM-SOURCE-PROMPTS vs SCV-BUILT",
+    "regionIoU": {
+     "+u": [
+      0.7089,
+      0.5167
+     ],
+     "-u": [
+      0.6918,
+      0.5257
+     ],
+     "0": [
+      0.7027,
+      0.524
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.706,
+     "-u": -0.6905,
+     "0": -0.7022
+    },
+    "house": "dom-pod-jarzabem",
+    "pair": "MSAM-AUTO vs TRIVIAL-EXTENT",
+    "regionIoU": {
+     "+u": [
+      0.0416,
+      0.7476
+     ],
+     "-u": [
+      0.0439,
+      0.7344
+     ],
+     "0": [
+      0.0427,
+      0.7449
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.0209,
+     "-u": -0.0168,
+     "0": -0.0235
+    },
+    "house": "dom-w-arkadiach",
+    "pair": "MSAM-BOX vs TRIVIAL-EXTENT",
+    "regionIoU": {
+     "+u": [
+      0.9553,
+      0.9762
+     ],
+     "-u": [
+      0.9619,
+      0.9787
+     ],
+     "0": [
+      0.9603,
+      0.9838
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": 0.0786,
+     "-u": 0.1159,
+     "0": 0.099
+    },
+    "house": "dom-w-arkadiach",
+    "pair": "MSAM-BOX vs TRIVIAL-BOX",
+    "regionIoU": {
+     "+u": [
+      0.9553,
+      0.8767
+     ],
+     "-u": [
+      0.9619,
+      0.846
+     ],
+     "0": [
+      0.9603,
+      0.8613
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.0209,
+     "-u": -0.0168,
+     "0": -0.0235
+    },
+    "house": "dom-w-arkadiach",
+    "pair": "MSAM-BOX vs SCV-BUILT",
+    "regionIoU": {
+     "+u": [
+      0.9553,
+      0.9762
+     ],
+     "-u": [
+      0.9619,
+      0.9787
+     ],
+     "0": [
+      0.9603,
+      0.9838
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.0209,
+     "-u": -0.0168,
+     "0": -0.0235
+    },
+    "house": "dom-w-arkadiach",
+    "pair": "MSAM-BOX vs PROD-MASSES-005H",
+    "regionIoU": {
+     "+u": [
+      0.9553,
+      0.9762
+     ],
+     "-u": [
+      0.9619,
+      0.9787
+     ],
+     "0": [
+      0.9603,
+      0.9838
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": 0.0658,
+     "-u": 0.0674,
+     "0": 0.0622
+    },
+    "house": "dom-w-arkadiach",
+    "pair": "MSAM-BOX vs SCV-OUTLINE",
+    "regionIoU": {
+     "+u": [
+      0.9553,
+      0.8895
+     ],
+     "-u": [
+      0.9619,
+      0.8945
+     ],
+     "0": [
+      0.9603,
+      0.8981
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.3011,
+     "-u": -0.3105,
+     "0": -0.3118
+    },
+    "house": "dom-w-arkadiach",
+    "pair": "MSAM-SOURCE-PROMPTS vs TRIVIAL-EXTENT",
+    "regionIoU": {
+     "+u": [
+      0.6751,
+      0.9762
+     ],
+     "-u": [
+      0.6682,
+      0.9787
+     ],
+     "0": [
+      0.672,
+      0.9838
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.3011,
+     "-u": -0.3105,
+     "0": -0.3118
+    },
+    "house": "dom-w-arkadiach",
+    "pair": "MSAM-SOURCE-PROMPTS vs SCV-BUILT",
+    "regionIoU": {
+     "+u": [
+      0.6751,
+      0.9762
+     ],
+     "-u": [
+      0.6682,
+      0.9787
+     ],
+     "0": [
+      0.672,
+      0.9838
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.9402,
+     "-u": -0.9414,
+     "0": -0.9471
+    },
+    "house": "dom-w-arkadiach",
+    "pair": "MSAM-AUTO vs TRIVIAL-EXTENT",
+    "regionIoU": {
+     "+u": [
+      0.036,
+      0.9762
+     ],
+     "-u": [
+      0.0373,
+      0.9787
+     ],
+     "0": [
+      0.0367,
+      0.9838
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.0416,
+     "-u": -0.0199,
+     "0": -0.0338
+    },
+    "house": "dom-w-azaliach",
+    "pair": "MSAM-BOX vs TRIVIAL-EXTENT",
+    "regionIoU": {
+     "+u": [
+      0.9484,
+      0.99
+     ],
+     "-u": [
+      0.9538,
+      0.9737
+     ],
+     "0": [
+      0.9581,
+      0.9919
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": 0.0325,
+     "-u": 0.0709,
+     "0": 0.0588
+    },
+    "house": "dom-w-azaliach",
+    "pair": "MSAM-BOX vs TRIVIAL-BOX",
+    "regionIoU": {
+     "+u": [
+      0.9484,
+      0.9159
+     ],
+     "-u": [
+      0.9538,
+      0.8829
+     ],
+     "0": [
+      0.9581,
+      0.8993
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": 0.8343,
+     "-u": 0.8386,
+     "0": 0.843
+    },
+    "house": "dom-w-azaliach",
+    "pair": "MSAM-BOX vs SCV-BUILT",
+    "regionIoU": {
+     "+u": [
+      0.9484,
+      0.1141
+     ],
+     "-u": [
+      0.9538,
+      0.1152
+     ],
+     "0": [
+      0.9581,
+      0.1151
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": 0.8572,
+     "-u": 0.8623,
+     "0": 0.8663
+    },
+    "house": "dom-w-azaliach",
+    "pair": "MSAM-BOX vs PROD-MASSES-005H",
+    "regionIoU": {
+     "+u": [
+      0.9484,
+      0.0912
+     ],
+     "-u": [
+      0.9538,
+      0.0915
+     ],
+     "0": [
+      0.9581,
+      0.0918
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": 0.8113,
+     "-u": 0.8193,
+     "0": 0.8196
+    },
+    "house": "dom-w-azaliach",
+    "pair": "MSAM-BOX vs SCV-OUTLINE",
+    "regionIoU": {
+     "+u": [
+      0.9484,
+      0.1371
+     ],
+     "-u": [
+      0.9538,
+      0.1345
+     ],
+     "0": [
+      0.9581,
+      0.1385
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.8442,
+     "-u": -0.8259,
+     "0": -0.8446
+    },
+    "house": "dom-w-azaliach",
+    "pair": "MSAM-SOURCE-PROMPTS vs TRIVIAL-EXTENT",
+    "regionIoU": {
+     "+u": [
+      0.1458,
+      0.99
+     ],
+     "-u": [
+      0.1478,
+      0.9737
+     ],
+     "0": [
+      0.1473,
+      0.9919
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": 0.0317,
+     "-u": 0.0326,
+     "0": 0.0322
+    },
+    "house": "dom-w-azaliach",
+    "pair": "MSAM-SOURCE-PROMPTS vs SCV-BUILT",
+    "regionIoU": {
+     "+u": [
+      0.1458,
+      0.1141
+     ],
+     "-u": [
+      0.1478,
+      0.1152
+     ],
+     "0": [
+      0.1473,
+      0.1151
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.9331,
+     "-u": -0.9146,
+     "0": -0.9339
+    },
+    "house": "dom-w-azaliach",
+    "pair": "MSAM-AUTO vs TRIVIAL-EXTENT",
+    "regionIoU": {
+     "+u": [
+      0.0569,
+      0.99
+     ],
+     "-u": [
+      0.0591,
+      0.9737
+     ],
+     "0": [
+      0.058,
+      0.9919
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.0414,
+     "-u": -0.0136,
+     "0": -0.0248
+    },
+    "house": "dom-w-helikoniach",
+    "pair": "MSAM-BOX vs TRIVIAL-EXTENT",
+    "regionIoU": {
+     "+u": [
+      0.9016,
+      0.943
+     ],
+     "-u": [
+      0.9232,
+      0.9368
+     ],
+     "0": [
+      0.922,
+      0.9468
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": 0.0276,
+     "-u": 0.1036,
+     "0": 0.0753
+    },
+    "house": "dom-w-helikoniach",
+    "pair": "MSAM-BOX vs TRIVIAL-BOX",
+    "regionIoU": {
+     "+u": [
+      0.9016,
+      0.874
+     ],
+     "-u": [
+      0.9232,
+      0.8196
+     ],
+     "0": [
+      0.922,
+      0.8467
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": 0.0728,
+     "-u": 0.0676,
+     "0": 0.0797
+    },
+    "house": "dom-w-helikoniach",
+    "pair": "MSAM-BOX vs SCV-BUILT",
+    "regionIoU": {
+     "+u": [
+      0.9016,
+      0.8288
+     ],
+     "-u": [
+      0.9232,
+      0.8556
+     ],
+     "0": [
+      0.922,
+      0.8423
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": 0.098,
+     "-u": 0.0693,
+     "0": 0.0925
+    },
+    "house": "dom-w-helikoniach",
+    "pair": "MSAM-BOX vs PROD-MASSES-005H",
+    "regionIoU": {
+     "+u": [
+      0.9016,
+      0.8036
+     ],
+     "-u": [
+      0.9232,
+      0.8539
+     ],
+     "0": [
+      0.922,
+      0.8295
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": 0.0394,
+     "-u": 0.0538,
+     "0": 0.0553
+    },
+    "house": "dom-w-helikoniach",
+    "pair": "MSAM-BOX vs SCV-OUTLINE",
+    "regionIoU": {
+     "+u": [
+      0.9016,
+      0.8622
+     ],
+     "-u": [
+      0.9232,
+      0.8694
+     ],
+     "0": [
+      0.922,
+      0.8667
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.3952,
+     "-u": -0.3753,
+     "0": -0.3867
+    },
+    "house": "dom-w-helikoniach",
+    "pair": "MSAM-SOURCE-PROMPTS vs TRIVIAL-EXTENT",
+    "regionIoU": {
+     "+u": [
+      0.5478,
+      0.943
+     ],
+     "-u": [
+      0.5615,
+      0.9368
+     ],
+     "0": [
+      0.5601,
+      0.9468
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.281,
+     "-u": -0.2941,
+     "0": -0.2822
+    },
+    "house": "dom-w-helikoniach",
+    "pair": "MSAM-SOURCE-PROMPTS vs SCV-BUILT",
+    "regionIoU": {
+     "+u": [
+      0.5478,
+      0.8288
+     ],
+     "-u": [
+      0.5615,
+      0.8556
+     ],
+     "0": [
+      0.5601,
+      0.8423
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.9358,
+     "-u": -0.9349,
+     "0": -0.9435
+    },
+    "house": "dom-w-helikoniach",
+    "pair": "MSAM-AUTO vs TRIVIAL-EXTENT",
+    "regionIoU": {
+     "+u": [
+      0.0072,
+      0.943
+     ],
+     "-u": [
+      0.0019,
+      0.9368
+     ],
+     "0": [
+      0.0033,
+      0.9468
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": 0.0422,
+     "-u": 0.0756,
+     "0": 0.0614
+    },
+    "house": "dom-w-morelach",
+    "pair": "MSAM-BOX vs TRIVIAL-EXTENT",
+    "regionIoU": {
+     "+u": [
+      0.9183,
+      0.8761
+     ],
+     "-u": [
+      0.9254,
+      0.8498
+     ],
+     "0": [
+      0.9398,
+      0.8784
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": 0.099,
+     "-u": 0.1689,
+     "0": 0.1522
+    },
+    "house": "dom-w-morelach",
+    "pair": "MSAM-BOX vs TRIVIAL-BOX",
+    "regionIoU": {
+     "+u": [
+      0.9183,
+      0.8193
+     ],
+     "-u": [
+      0.9254,
+      0.7565
+     ],
+     "0": [
+      0.9398,
+      0.7876
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.0091,
+     "-u": -0.0347,
+     "0": -0.0236
+    },
+    "house": "dom-w-morelach",
+    "pair": "MSAM-BOX vs SCV-BUILT",
+    "regionIoU": {
+     "+u": [
+      0.9183,
+      0.9274
+     ],
+     "-u": [
+      0.9254,
+      0.9601
+     ],
+     "0": [
+      0.9398,
+      0.9634
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.0157,
+     "-u": -0.0376,
+     "0": -0.0293
+    },
+    "house": "dom-w-morelach",
+    "pair": "MSAM-BOX vs PROD-MASSES-005H",
+    "regionIoU": {
+     "+u": [
+      0.9183,
+      0.934
+     ],
+     "-u": [
+      0.9254,
+      0.963
+     ],
+     "0": [
+      0.9398,
+      0.9691
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": 0.5818,
+     "-u": 0.5864,
+     "0": 0.5907
+    },
+    "house": "dom-w-morelach",
+    "pair": "MSAM-BOX vs SCV-OUTLINE",
+    "regionIoU": {
+     "+u": [
+      0.9183,
+      0.3365
+     ],
+     "-u": [
+      0.9254,
+      0.339
+     ],
+     "0": [
+      0.9398,
+      0.3491
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.0306,
+     "-u": -0.0086,
+     "0": -0.0195
+    },
+    "house": "dom-w-morelach",
+    "pair": "MSAM-SOURCE-PROMPTS vs TRIVIAL-EXTENT",
+    "regionIoU": {
+     "+u": [
+      0.8455,
+      0.8761
+     ],
+     "-u": [
+      0.8412,
+      0.8498
+     ],
+     "0": [
+      0.8589,
+      0.8784
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.0819,
+     "-u": -0.1189,
+     "0": -0.1045
+    },
+    "house": "dom-w-morelach",
+    "pair": "MSAM-SOURCE-PROMPTS vs SCV-BUILT",
+    "regionIoU": {
+     "+u": [
+      0.8455,
+      0.9274
+     ],
+     "-u": [
+      0.8412,
+      0.9601
+     ],
+     "0": [
+      0.8589,
+      0.9634
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.8189,
+     "-u": -0.7878,
+     "0": -0.8189
+    },
+    "house": "dom-w-morelach",
+    "pair": "MSAM-AUTO vs TRIVIAL-EXTENT",
+    "regionIoU": {
+     "+u": [
+      0.0572,
+      0.8761
+     ],
+     "-u": [
+      0.062,
+      0.8498
+     ],
+     "0": [
+      0.0595,
+      0.8784
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": 0.0429,
+     "-u": 0.104,
+     "0": 0.0806
+    },
+    "house": "dom-w-zurawkach",
+    "pair": "MSAM-BOX vs TRIVIAL-EXTENT",
+    "regionIoU": {
+     "+u": [
+      0.9377,
+      0.8948
+     ],
+     "-u": [
+      0.9589,
+      0.8549
+     ],
+     "0": [
+      0.9684,
+      0.8878
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": 0.1153,
+     "-u": 0.1957,
+     "0": 0.1759
+    },
+    "house": "dom-w-zurawkach",
+    "pair": "MSAM-BOX vs TRIVIAL-BOX",
+    "regionIoU": {
+     "+u": [
+      0.9377,
+      0.8224
+     ],
+     "-u": [
+      0.9589,
+      0.7632
+     ],
+     "0": [
+      0.9684,
+      0.7925
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.0007,
+     "-u": 0.013,
+     "0": -0.0005
+    },
+    "house": "dom-w-zurawkach",
+    "pair": "MSAM-BOX vs SCV-BUILT",
+    "regionIoU": {
+     "+u": [
+      0.9377,
+      0.9384
+     ],
+     "-u": [
+      0.9589,
+      0.9459
+     ],
+     "0": [
+      0.9684,
+      0.9689
+     ]
+    },
+    "verdict": "FRAGILE"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.0239,
+     "-u": -0.0062,
+     "0": -0.0242
+    },
+    "house": "dom-w-zurawkach",
+    "pair": "MSAM-BOX vs PROD-MASSES-005H",
+    "regionIoU": {
+     "+u": [
+      0.9377,
+      0.9616
+     ],
+     "-u": [
+      0.9589,
+      0.9651
+     ],
+     "0": [
+      0.9684,
+      0.9926
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": 0.094,
+     "-u": 0.0996,
+     "0": 0.0964
+    },
+    "house": "dom-w-zurawkach",
+    "pair": "MSAM-BOX vs SCV-OUTLINE",
+    "regionIoU": {
+     "+u": [
+      0.9377,
+      0.8437
+     ],
+     "-u": [
+      0.9589,
+      0.8593
+     ],
+     "0": [
+      0.9684,
+      0.872
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.1141,
+     "-u": -0.0947,
+     "0": -0.108
+    },
+    "house": "dom-w-zurawkach",
+    "pair": "MSAM-SOURCE-PROMPTS vs TRIVIAL-EXTENT",
+    "regionIoU": {
+     "+u": [
+      0.7807,
+      0.8948
+     ],
+     "-u": [
+      0.7602,
+      0.8549
+     ],
+     "0": [
+      0.7798,
+      0.8878
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.1577,
+     "-u": -0.1857,
+     "0": -0.1891
+    },
+    "house": "dom-w-zurawkach",
+    "pair": "MSAM-SOURCE-PROMPTS vs SCV-BUILT",
+    "regionIoU": {
+     "+u": [
+      0.7807,
+      0.9384
+     ],
+     "-u": [
+      0.7602,
+      0.9459
+     ],
+     "0": [
+      0.7798,
+      0.9689
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.8227,
+     "-u": -0.7772,
+     "0": -0.813
+    },
+    "house": "dom-w-zurawkach",
+    "pair": "MSAM-AUTO vs TRIVIAL-EXTENT",
+    "regionIoU": {
+     "+u": [
+      0.0721,
+      0.8948
+     ],
+     "-u": [
+      0.0777,
+      0.8549
+     ],
+     "0": [
+      0.0748,
+      0.8878
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": 0.0193,
+     "-u": 0.0309,
+     "0": 0.0232
+    },
+    "house": "willa-miranda",
+    "pair": "MSAM-BOX vs TRIVIAL-EXTENT",
+    "regionIoU": {
+     "+u": [
+      0.8192,
+      0.7999
+     ],
+     "-u": [
+      0.8089,
+      0.778
+     ],
+     "0": [
+      0.8206,
+      0.7974
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": 0.0651,
+     "-u": 0.0953,
+     "0": 0.0869
+    },
+    "house": "willa-miranda",
+    "pair": "MSAM-BOX vs TRIVIAL-BOX",
+    "regionIoU": {
+     "+u": [
+      0.8192,
+      0.7541
+     ],
+     "-u": [
+      0.8089,
+      0.7136
+     ],
+     "0": [
+      0.8206,
+      0.7337
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.1425,
+     "-u": -0.1543,
+     "0": -0.161
+    },
+    "house": "willa-miranda",
+    "pair": "MSAM-BOX vs SCV-BUILT",
+    "regionIoU": {
+     "+u": [
+      0.8192,
+      0.9617
+     ],
+     "-u": [
+      0.8089,
+      0.9632
+     ],
+     "0": [
+      0.8206,
+      0.9816
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.1445,
+     "-u": -0.1553,
+     "0": -0.163
+    },
+    "house": "willa-miranda",
+    "pair": "MSAM-BOX vs PROD-MASSES-005H",
+    "regionIoU": {
+     "+u": [
+      0.8192,
+      0.9637
+     ],
+     "-u": [
+      0.8089,
+      0.9642
+     ],
+     "0": [
+      0.8206,
+      0.9836
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.1006,
+     "-u": -0.113,
+     "0": -0.1148
+    },
+    "house": "willa-miranda",
+    "pair": "MSAM-BOX vs SCV-OUTLINE",
+    "regionIoU": {
+     "+u": [
+      0.8192,
+      0.9198
+     ],
+     "-u": [
+      0.8089,
+      0.9219
+     ],
+     "0": [
+      0.8206,
+      0.9354
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.1011,
+     "-u": -0.0985,
+     "0": -0.1054
+    },
+    "house": "willa-miranda",
+    "pair": "MSAM-SOURCE-PROMPTS vs TRIVIAL-EXTENT",
+    "regionIoU": {
+     "+u": [
+      0.6988,
+      0.7999
+     ],
+     "-u": [
+      0.6795,
+      0.778
+     ],
+     "0": [
+      0.692,
+      0.7974
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.2629,
+     "-u": -0.2837,
+     "0": -0.2896
+    },
+    "house": "willa-miranda",
+    "pair": "MSAM-SOURCE-PROMPTS vs SCV-BUILT",
+    "regionIoU": {
+     "+u": [
+      0.6988,
+      0.9617
+     ],
+     "-u": [
+      0.6795,
+      0.9632
+     ],
+     "0": [
+      0.692,
+      0.9816
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.7553,
+     "-u": -0.7308,
+     "0": -0.7515
+    },
+    "house": "willa-miranda",
+    "pair": "MSAM-AUTO vs TRIVIAL-EXTENT",
+    "regionIoU": {
+     "+u": [
+      0.0446,
+      0.7999
+     ],
+     "-u": [
+      0.0472,
+      0.778
+     ],
+     "0": [
+      0.0459,
+      0.7974
+     ]
+    },
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.0064,
+     "-u": 0.0153,
+     "0": 0.0045
+    },
+    "house": "MEAN over the 7 houses",
+    "pair": "MSAM-BOX vs TRIVIAL-EXTENT",
+    "verdict": "FRAGILE"
+   },
+   {
+    "deltaIoU": {
+     "+u": 0.0571,
+     "-u": 0.1053,
+     "0": 0.0906
+    },
+    "house": "MEAN over the 7 houses",
+    "pair": "MSAM-BOX vs TRIVIAL-BOX",
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": 0.1313,
+     "-u": 0.1241,
+     "0": 0.1262
+    },
+    "house": "MEAN over the 7 houses",
+    "pair": "MSAM-BOX vs SCV-BUILT",
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": 0.1576,
+     "-u": 0.1493,
+     "0": 0.1514
+    },
+    "house": "MEAN over the 7 houses",
+    "pair": "MSAM-BOX vs PROD-MASSES-005H",
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": 0.2785,
+     "-u": 0.2786,
+     "0": 0.2793
+    },
+    "house": "MEAN over the 7 houses",
+    "pair": "MSAM-BOX vs SCV-OUTLINE",
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.2607,
+     "-u": -0.2509,
+     "0": -0.2597
+    },
+    "house": "MEAN over the 7 houses",
+    "pair": "MSAM-SOURCE-PROMPTS vs TRIVIAL-EXTENT",
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.123,
+     "-u": -0.142,
+     "0": -0.138
+    },
+    "house": "MEAN over the 7 houses",
+    "pair": "MSAM-SOURCE-PROMPTS vs SCV-BUILT",
+    "verdict": "ROBUST"
+   },
+   {
+    "deltaIoU": {
+     "+u": -0.8446,
+     "-u": -0.8253,
+     "0": -0.8443
+    },
+    "house": "MEAN over the 7 houses",
+    "pair": "MSAM-AUTO vs TRIVIAL-EXTENT",
+    "verdict": "ROBUST"
+   }
+  ],
+  "rule": "u = the house's largest stated vertex uncertainty (truth/real/<house>.json vertexUncertaintyPx); the exterior is buffered by -u and +u px with mitred joins and the opening runs move with their face (score.py buffer_truth); exclusions and bodies stay as drawn. A conclusion is FRAGILE when it is not the same at -u, 0 and +u; an IoU difference under 0.0005 is a tie and counts as FRAGILE.",
+  "uPx": {
+   "dom-pod-jarzabem": 3,
+   "dom-w-arkadiach": 2,
+   "dom-w-azaliach": 2,
+   "dom-w-helikoniach": 3,
+   "dom-w-morelach": 5,
+   "dom-w-zurawkach": 4,
+   "willa-miranda": 3
+  }
+ },
  "truthKind": "agent manual review of plan pixels (methodology \u00a76.2); a limitation"
 }
