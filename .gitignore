@@ -34,3 +34,7 @@ apps/android/third_party/
 packages/numeric-recogniser-ort/models/*.onnx
 packages/numeric-recogniser-ort/models/*.dict.json
 packages/numeric-recogniser-ort/models/*.partial
+
+# BUILDPLAN-ANALYZER-005I: Python bytecode from the research harness; never committed.
+__pycache__/
+*.pyc

@@ -17,7 +17,7 @@
 import { createHash } from 'node:crypto'
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs'
 import { join, relative } from 'node:path'
-import { FORBIDDEN_IN_SVG, PACK_BOUNDS, PACK_FILES } from '../src/index.js'
+import { FORBIDDEN_IN_SVG, PACK_BOUNDS, requiredFiles } from '../src/index.js'
 import type { PackManifest } from '../src/index.js'
 
 const PREVIEW = '16-final-model-preview.png'
@@ -37,7 +37,8 @@ export function verifyPack(dir: string): string[] {
   const problems: string[] = []
   const manifest = JSON.parse(readFileSync(join(dir, 'manifest.json'), 'utf8')) as PackManifest
   const listed = new Map(manifest.files.map((f) => [f.name, f]))
-  for (const name of PACK_FILES) if (!listed.has(name)) problems.push(`missing ${name}`)
+  // A pack is complete for the version it was written at (005I added a layer; the 005D–005H packs predate it).
+  for (const name of requiredFiles(manifest.evidenceModeVersion ?? '1.0.0')) if (!listed.has(name)) problems.push(`missing ${name}`)
   for (const name of readdirSync(dir)) if (name !== 'manifest.json' && !listed.has(name)) problems.push(`${name} is not in the manifest`)
   for (const f of manifest.files) {
     const path = join(dir, f.name)

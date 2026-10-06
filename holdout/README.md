@@ -246,3 +246,39 @@ The protocol of round 5, steps 1–6, with these differences only. Everything he
      count or a body the image does not support; one passing subsystem averaged against a failing one.
    - An `ALGORITHMIC_FAIL` is not patched in 005F. Its first bad decision is named from the Evidence Pack and becomes
      the next stage's input.
+
+## Round 8 (BUILDPLAN-ANALYZER-005I)
+
+The protocol of round 6, steps 1–6, with these differences only. Everything here is fixed before the freeze.
+
+1. **Two ARCHON families, one pick each, from the committed round-1 pool** (`holdout/pool.txt`,
+   `POOL_SHA256 = 800c2a1e…2ed41`). 005I is about dimension topology between parallel lines (production) and a
+   research-only boundary bake-off; one publisher, as in rounds 4–7.
+2. **Excluded families** (`excluded-families-round-8.txt`, 68 families, 948 pool addresses; 2137 drawable):
+   - round 7's 47 families;
+   - the two round-7 draws, now development houses (`dom-pod-jarzabem`, `dom-w-arkadiach`);
+   - every family the two round-7 pages link to ("similar projects"), read from their cached HTML, addresses only —
+     19 families not already excluded. Their names were on pages the analyzer read during development, so they do
+     not count as unseen. One of them, `dom-w-renetach`, is also a family round 1 disclosed for its dummy-SHA draw;
+     it is excluded here because a development page links to it, not because of that draw;
+   - the boundary bake-off (Track B) read only development houses (`dom-w-helikoniach`, `dom-w-morelach`,
+     `willa-miranda`, `dom-w-zurawkach`, `dom-w-azaliach`, and the two round-7 houses) and synthetic drawings; 005G's
+     OCR bake-off read no other family; no candidate project page was opened.
+   - `EXCLUDED_FAMILIES_ROUND_8_SHA256 = 4202abe005e651ba902097b0431e282be4baa89af016d268da4ac8d3c26c43d2`.
+3. **Freeze.** `PRE_HOLDOUT_8_SHA` is the pushed HEAD whose full CI is green, with the boundary bake-off recorded and
+   its recommendation frozen. Nothing is committed between the freeze and the draw.
+4. **Draw.** `node holdout/select.mjs select --round 8 --pool holdout/pool.txt --pool-sha256 800c2a1ed9daee9efd2654c64b061e430094dc38fc459b805af27ff9fad2ed41 --pre-holdout-sha <sha>`.
+   - `seed = SHA256(PRE_HOLDOUT_8_SHA + "BUILDPLAN-005I-DIMENSION-TOPOLOGY-BOUNDARY-BAKEOFF-HOLDOUT")`, `i1 = seed mod n`;
+     the second pick is uniform over every drawable address of another family, `SHA256(seed + ":second") mod m`.
+   - One ledger line (`BUILDPLAN-005I-DIMENSION-TOPOLOGY-BOUNDARY-BAKEOFF-HOLDOUT`) records both picks, the seed, the
+     indices, the pool and exclusion hashes.
+5. **Run once each**, the production analyzer only, as the phone runs it: the external numeric recogniser ON
+   (`--recogniser`, as in 005H), the Evidence Pack ON (`ANALYZER_EVIDENCE=1`). The research boundary providers
+   (DeepLSD, ELSED, MobileSAM) are not in the production analyzer and are not run. The packs — with the
+   dimension-topology layer — are committed with the verdicts; no pack is regenerated after the draw from changed code.
+6. **Verdict** by `holdout/verdict.mjs` as committed at the freeze, unchanged from round 7.
+   - `PASS`, `SOURCE_LIMITED_PARTIAL` (a checklist item confirmed on the raw copies) or `ALGORITHMIC_FAIL`.
+   - An `ALGORITHMIC_FAIL` is not patched in 005I. Its first bad decision is named from the Evidence Pack (SOURCE, OCR,
+     DIMENSION_TOPOLOGY, METRIC, BOUNDARY, BODY_RELATION, STOREY, RECONSTRUCTION, VERIFICATION, OTHER). If a research
+     boundary provider would have helped, that is recorded only after the verdict is sealed, as future-stage
+     evidence; production is never re-run with it.

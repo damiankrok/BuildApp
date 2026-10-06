@@ -15,8 +15,17 @@ import { TIMELINE_STAGES } from './types.js'
 import type { AssignmentJson, ChainJson, DecisionEvent, LatticeJson, MarkJson, ObservationJson, PlanJson, Rect, RunRecord, SolutionJson, TimelineStage, TopologyJson } from './types.js'
 
 export const EVIDENCE_PACK_SCHEMA = 'buildapp.evidence-pack' as const
-/** 1.1.0 (005I): `16-dimension-topology`, the DIMENSION_AXIS_GROUPS and LABEL_ASSIGNMENT stages, extent end spans and refutations. */
+/** 1.1.0 (005I): `07b-dimension-topology`, the DIMENSION_AXIS_GROUPS and LABEL_ASSIGNMENT stages, extent end spans and refutations. */
 export const EVIDENCE_PACK_VERSION = '1.1.0' as const
+
+/** 005I: the files a pack of an earlier version was made without — a pack is complete for its own version (`requiredFiles`). */
+export const PACK_FILES_SINCE: Readonly<Record<string, readonly string[]>> = { '1.1.0': ['07b-dimension-topology.svg', '07b-dimension-topology.json'] }
+
+/** The files a pack of `version` must carry: every file but those a later version added. */
+export function requiredFiles(version: string): string[] {
+  const later = Object.entries(PACK_FILES_SINCE).filter(([since]) => version < since).flatMap(([, files]) => files)
+  return PACK_FILES.filter((f) => !later.includes(f))
+}
 
 /**
  * Size bounds: a pack is something a reviewer opens on GitHub. Pictures carry at most `svgElements`
@@ -41,6 +50,8 @@ export const PACK_FILES = [
   '06-tick-candidates.json',
   '07-ocr-labels.svg',
   '07-ocr-labels.json',
+  '07b-dimension-topology.svg',
+  '07b-dimension-topology.json',
   '08-dimension-span-hypotheses.svg',
   '08-dimension-span-hypotheses.json',
   '09-scale-hypotheses.svg',
@@ -56,8 +67,6 @@ export const PACK_FILES = [
   '14-selected-layout.svg',
   '14-selected-layout.json',
   '15-canonical-model-summary.json',
-  '16-dimension-topology.svg',
-  '16-dimension-topology.json',
   '17-evidence-trace.json',
   '18-decision-timeline.json',
   'evidence-summary.svg',
@@ -547,9 +556,9 @@ export function buildEvidencePack(run: RunRecord): EvidencePack {
       }
     }
     const shown = topK(assignment)
-    files.set('16-dimension-topology.svg', s.render())
+    files.set('07b-dimension-topology.svg', s.render())
     files.set(
-      '16-dimension-topology.json',
+      '07b-dimension-topology.json',
       json({
         frameId: selected?.frameId ?? null,
         recorded: topo !== undefined,
