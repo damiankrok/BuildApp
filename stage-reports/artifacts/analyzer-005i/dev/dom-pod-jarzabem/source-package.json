@@ -1,0 +1,1455 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "caption": "gotowy projekt Dom pod jarząbem 15 (G) elewacja boczna",
+      "id": "asset-gotowy-projekt-dom-pod-jarzabem-15-g-elewacja-bo-2f0f84d061",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom pod jarzabem 15 (g) elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom pod jarzabem 15 (g) elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom pod jarzabem 15 (g) elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom pod jarzabem 15 (g) elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-pod-jarzabem-15-g-5a4d3ca10273ead2b7-8b411f3148",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x594 over 550x255",
+      "variants": [
+        {
+          "aspect": 2.154882,
+          "byteHash": "fcc48a1f781834498e583cbc4b6c088bfd2a32c30091a257e58ce3d7721ba592",
+          "byteLength": 199023,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 594,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-pod-jarzabem-15-g-mbad2613634abe",
+          "id": "var-projekt-dom-pod-jarzabem-15-g-5a4d3ca10273ead2b7-8b411f3148",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mbad2613634abe/projekt-dom-pod-jarzabem-15-g-5a4d3ca10273ead2b7d28b5206ef1f07__11266.jpg"
+        },
+        {
+          "aspect": 2.156863,
+          "byteHash": "759a0fd97d4f278e6458d62ebbdfc0208e8a68e4df181cf78d9eb5ac869eddd9",
+          "byteLength": 44370,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 255,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-pod-jarzabem-15-g-mbad2613634abe",
+          "id": "var-elewacja-boczna-projekt-dom-pod-jarzabem-15-g-d6-06d02e93a8",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mbad2613634abe/elewacja-boczna-projekt-dom-pod-jarzabem-15-g-d6dfd2b585aea61a1851d84ea55cb42b__266.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom pod jarząbem 15 (G) elewacja boczna ",
+      "id": "asset-gotowy-projekt-dom-pod-jarzabem-15-g-elewacja-bo-b8b036ea91",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom pod jarzabem 15 (g) elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom pod jarzabem 15 (g) elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom pod jarzabem 15 (g) elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom pod jarzabem 15 (g) elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-pod-jarzabem-15-g-c84b9909b381e62a72-8a9e6a71fa",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x594 over 550x255",
+      "variants": [
+        {
+          "aspect": 2.154882,
+          "byteHash": "00be87f0c88a645fdf9c6eed213b04cec1a59e38e43acd54352592d864ed6e2c",
+          "byteLength": 203523,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 594,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-pod-jarzabem-15-g-mbad2613634abe",
+          "id": "var-projekt-dom-pod-jarzabem-15-g-c84b9909b381e62a72-8a9e6a71fa",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mbad2613634abe/projekt-dom-pod-jarzabem-15-g-c84b9909b381e62a72a2b3977bf55c60__11265.jpg"
+        },
+        {
+          "aspect": 2.156863,
+          "byteHash": "d175cfd4061222a94701b8318dd463637324ed9dcf70f83ae3c04d37d7c9be56",
+          "byteLength": 44893,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 255,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-pod-jarzabem-15-g-mbad2613634abe",
+          "id": "var-elewacja-boczna-projekt-dom-pod-jarzabem-15-g-d6-c2eb7e919f",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mbad2613634abe/elewacja-boczna-projekt-dom-pod-jarzabem-15-g-d65eb17bae26a9924d37abb11bc80434__265.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom pod jarząbem 15 (G) elewacja frontowa",
+      "id": "asset-gotowy-projekt-dom-pod-jarzabem-15-g-elewacja-fr-7c9e509e35",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-frontowa-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom pod jarzabem 15 (g) elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom pod jarzabem 15 (g) elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"frontowa\" is the front (matched \"elewacja-frontowa-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom pod jarzabem 15 (g) elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom pod jarzabem 15 (g) elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-projekt-dom-pod-jarzabem-15-g-8f85b329a7ba2b26bb-32da78bf72",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x594 over 550x255",
+      "variants": [
+        {
+          "aspect": 2.154882,
+          "byteHash": "bdb16521aea7d3f7ab07793c27c1fe9bbc072362cb81220a493a8f862e04175d",
+          "byteLength": 173133,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 594,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-pod-jarzabem-15-g-mbad2613634abe",
+          "id": "var-projekt-dom-pod-jarzabem-15-g-8f85b329a7ba2b26bb-32da78bf72",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mbad2613634abe/projekt-dom-pod-jarzabem-15-g-8f85b329a7ba2b26bbee0fe86ba66314__11264.jpg"
+        },
+        {
+          "aspect": 2.156863,
+          "byteHash": "a85d772e1a4924cbdffabbfb029795377541f577a5e8add84bf891a10c6739c2",
+          "byteLength": 40009,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 255,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-pod-jarzabem-15-g-mbad2613634abe",
+          "id": "var-elewacja-frontowa-projekt-dom-pod-jarzabem-15-g-372bf01d3c",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mbad2613634abe/elewacja-frontowa-projekt-dom-pod-jarzabem-15-g-66ae749d122b18ed1b50d1b12737a400__264.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom pod jarząbem 15 (G) elewacja ogrodowa",
+      "id": "asset-gotowy-projekt-dom-pod-jarzabem-15-g-elewacja-og-f1edfc1544",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-ogrodowa-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom pod jarzabem 15 (g) elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom pod jarzabem 15 (g) elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"elewacja-ogrodowa-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom pod jarzabem 15 (g) elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom pod jarzabem 15 (g) elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-projekt-dom-pod-jarzabem-15-g-864ea1b4a9fb02d872-237900e291",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x594 over 550x255",
+      "variants": [
+        {
+          "aspect": 2.154882,
+          "byteHash": "928d92a1eb0020fc91b9bd6dc7c708e84ec4d1a464c9f618cf0985fdf4ac3789",
+          "byteLength": 181920,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 594,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-pod-jarzabem-15-g-mbad2613634abe",
+          "id": "var-projekt-dom-pod-jarzabem-15-g-864ea1b4a9fb02d872-237900e291",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mbad2613634abe/projekt-dom-pod-jarzabem-15-g-864ea1b4a9fb02d872c7d4a4f3dea358__11267.jpg"
+        },
+        {
+          "aspect": 2.156863,
+          "byteHash": "895d1442faccd50829c5f39315efe7d2233f0768061030eb48a95b057a98c7ec",
+          "byteLength": 41150,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 255,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-pod-jarzabem-15-g-mbad2613634abe",
+          "id": "var-elewacja-ogrodowa-projekt-dom-pod-jarzabem-15-g-2b7a444102",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mbad2613634abe/elewacja-ogrodowa-projekt-dom-pod-jarzabem-15-g-8dc2ac85b0e14021d3b2231c8bc295f2__267.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom pod jarząbem 15 (G) przekroj budynku",
+      "id": "asset-gotowy-projekt-dom-pod-jarzabem-15-g-przekroj-bu-d7025ef146",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom pod jarzabem 15 (g) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom pod jarzabem 15 (g) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom pod jarzabem 15 (g) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-przekroj-budynku-projekt-dom-pod-jarzabem-15-g-1-ecdc4d7409",
+      "selectionReason": "largest decoded raster of 2 variants: 1145x854 over 401x300",
+      "variants": [
+        {
+          "aspect": 1.340749,
+          "byteHash": "488a7ef52c903824b4eeb4cbc2c4e8e6a9a052c21d291171ef6bcf1df601617c",
+          "byteLength": 74348,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1145
+          },
+          "discoveredVia": "VARIANT_CONVENTION:resolution-convention@https://assets.archon.pl/images/products/mbad2613634abe/przekroj-budynku-projekt-dom-pod-jarzabem-15-g-1aab44a0043ab627fc5a213d09df00fd__256.jpg",
+          "id": "var-przekroj-budynku-projekt-dom-pod-jarzabem-15-g-1-ecdc4d7409",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mbad2613634abe/przekroj-budynku-projekt-dom-pod-jarzabem-15-g-1aab44a0043ab627fc5a213d09df00fd__11256.jpg"
+        },
+        {
+          "aspect": 1.336667,
+          "byteHash": "6b13a3f48cf2e75c6a5b61630505f18301f010cb99d39ba60416e5cf6e7483bd",
+          "byteLength": 19498,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 300,
+            "width": 401
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-pod-jarzabem-15-g-mbad2613634abe",
+          "id": "var-przekroj-budynku-projekt-dom-pod-jarzabem-15-g-1-2b255d381c",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mbad2613634abe/przekroj-budynku-projekt-dom-pod-jarzabem-15-g-1aab44a0043ab627fc5a213d09df00fd__256.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom pod jarząbem 15 (G) rzut parteru",
+      "id": "asset-gotowy-projekt-dom-pod-jarzabem-15-g-rzut-parter-daeac73f7e",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom pod jarzabem 15 (g) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom pod jarzabem 15 (g) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-pod-jarzabem-15-g-1ee13-3a4b4cff5f",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "5f32dbf816d2434da8f000dea229f1b43dd20ca0ee0844027f902fbd16d29756",
+          "byteLength": 50451,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mbad2613634abe/carousel_images",
+          "id": "var-rzut-parteru-projekt-dom-pod-jarzabem-15-g-1ee13-3a4b4cff5f",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mbad2613634abe/rzut-parteru-projekt-dom-pod-jarzabem-15-g-1ee1336f98484ef877dad582ded6ab05__706.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom pod jarząbem 15 (G) sytuacja",
+      "id": "asset-gotowy-projekt-dom-pod-jarzabem-15-g-sytuacja-b4936d99b1",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"sytuacja\" names a site plan (matched \"sytuacja-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom pod jarzabem 15 (g) sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom pod jarzabem 15 (g) sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-pod-jarzabem-15-g-a941690fe1c1530b04-6028135926",
+      "selectionReason": "largest decoded raster of 2 variants: 734x854 over 344x400",
+      "variants": [
+        {
+          "aspect": 0.859485,
+          "byteHash": "86377ec280f990afbf4a2c9520b4541f66e541d0231acd35676b5d1d21408159",
+          "byteLength": 152964,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 734
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-pod-jarzabem-15-g-mbad2613634abe",
+          "id": "var-projekt-dom-pod-jarzabem-15-g-a941690fe1c1530b04-6028135926",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mbad2613634abe/projekt-dom-pod-jarzabem-15-g-a941690fe1c1530b04fe8d22ed624d03__11255.jpg"
+        },
+        {
+          "aspect": 0.86,
+          "byteHash": "020379a697a5c66679b07f3207f077725477d37183822225747f027d1704851d",
+          "byteLength": 37026,
+          "declared": {
+            "height": 400,
+            "width": 344
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 344
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-pod-jarzabem-15-g-mbad2613634abe",
+          "id": "var-sytuacja-projekt-dom-pod-jarzabem-15-g-5aedf4555-6e1cb0d2bb",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mbad2613634abe/sytuacja-projekt-dom-pod-jarzabem-15-g-5aedf4555259027708b2edf4c948c2f6__255.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom pod jarząbem 15 (G) widok 1",
+      "id": "asset-gotowy-projekt-dom-pod-jarzabem-15-g-widok-1-b50c38a4bc",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom pod jarzabem 15 (g) widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-pod-jarzabem-15-g-084918d0ca-48d846ed11",
+      "selectionReason": "only variant (200x150, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "92d73877659b65291e93936a1e314a44be0ab0c309d149184c04cf968015aa93",
+          "byteLength": 10374,
+          "declared": {
+            "height": 150,
+            "width": 200
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 150,
+            "width": 200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-pod-jarzabem-15-g-mbad2613634abe",
+          "id": "var-widok-1-projekt-dom-pod-jarzabem-15-g-084918d0ca-48d846ed11",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mbad2613634abe/widok-1-projekt-dom-pod-jarzabem-15-g-084918d0caa0f308a83a27fee515aeb8__259.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt dom pod jarzabem 15 g 5673bdbfb9c2869a543b7b0a8272db0e  41289",
+      "id": "asset-projekt-dom-pod-jarzabem-15-g-5673bdbfb9c2869a54-257532a086",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-pod-jarzabem-15-g-5673bdbfb9c2869a54-fc8ed75064",
+      "selectionReason": "only variant (1280x720, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "aefee3b6f40f0ac29683d25284f3acb93ad97e5dd594b50964c1bda799addc35",
+          "byteLength": 254634,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 720,
+            "width": 1280
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/product_fancybox_hotspot/mbad2613634abe/image/41289?showHotspots=false",
+          "id": "var-projekt-dom-pod-jarzabem-15-g-5673bdbfb9c2869a54-fc8ed75064",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn1.archon.pl/images/products/mbad2613634abe/i/projekt-dom-pod-jarzabem-15-g-5673bdbfb9c2869a543b7b0a8272db0e__41289.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom pod jarząbem 15 (G)",
+      "id": "asset-projekt-dom-pod-jarzabem-15-g-651d2c1bf9",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-pod-jarzabem-15-g-19f5e-555aa5d127",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "ea914ac30cae51bcb198e5b608b7bf9f8e595bf63019df5049f2b86956a7a352",
+          "byteLength": 33352,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mbad2613634abe/related?scope=family",
+          "id": "var-rzut-parteru-projekt-dom-pod-jarzabem-15-g-19f5e-555aa5d127",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mbad2613634abe/rzut-parteru-projekt-dom-pod-jarzabem-15-g-19f5ea84e9738278818d9b9b1a5ac612__269.gif"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom pod jarząbem 15 (G)",
+      "id": "asset-projekt-dom-pod-jarzabem-15-g-a45a97be1e",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-pod-jarzabem-15-g-f3183781fdf17d1773-c117b5c997",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "5b7a800ca7102d974d91cb3bb732204c6d3df60176657bbc6622ba4ce262423a",
+          "byteLength": 31840,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mbad2613634abe/related?scope=family",
+          "id": "var-projekt-dom-pod-jarzabem-15-g-f3183781fdf17d1773-c117b5c997",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mbad2613634abe/projekt-dom-pod-jarzabem-15-g-f3183781fdf17d1773a42b9cc742ccf6__252.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom pod jarząbem 15 (G)",
+      "id": "asset-projekt-dom-pod-jarzabem-15-g-c68c8f88d2",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-pod-jarzabem-15-g-d132d7bc98-f5e850da1b",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "1c65e26de1c7e4d7bc2660dea01423dac21409398f3120fa920b7af20e8b2753",
+          "byteLength": 33732,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mbad2613634abe/related?scope=family",
+          "id": "var-widok-2-projekt-dom-pod-jarzabem-15-g-d132d7bc98-f5e850da1b",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mbad2613634abe/widok-2-projekt-dom-pod-jarzabem-15-g-d132d7bc980de854642b9abae91dfaec__260.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-9354eb066f",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mbad2613634abe/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom pod jarzabem 15 (g) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mbad2613634abe/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom pod jarzabem 15 (g) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-pod-jarzabem-15-g-7794cf523388c6b536-65ae997005",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "b1256ba71c5f7972d2d75ba0936135fa0f05f78111c08be1b33a6157bd1937c6",
+          "byteLength": 97456,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-pod-jarzabem-15-g-mbad2613634abe",
+          "id": "var-projekt-dom-pod-jarzabem-15-g-7794cf523388c6b536-65ae997005",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mbad2613634abe/projekt-dom-pod-jarzabem-15-g-7794cf523388c6b5363c714ff54c98d4__11815.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-cafd34a77a",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mbad2613634abe/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom pod jarzabem 15 (g) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mbad2613634abe/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom pod jarzabem 15 (g) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-z-powierzchniami-projekt-dom-pod-ja-a1fa983808",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "68e902d96f1f1b88a6daa4109216c87d63831d1d1e81863e2301335c7cb76e69",
+          "byteLength": 88909,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-pod-jarzabem-15-g-mbad2613634abe",
+          "id": "var-rzut-parteru-z-powierzchniami-projekt-dom-pod-ja-a1fa983808",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mbad2613634abe/rzut-parteru-z-powierzchniami-projekt-dom-pod-jarzabem-15-g-456879e8148bf7ab010f800f5b6224da__11915.gif"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-1-projekt-dom-pod-jarzabem-15-g-54b8bb5b1f",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom pod jarzabem 15 (g) widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-pod-jarzabem-15-g-43fb3bd342-fa9e7a96ed",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "e0c42dfb4739e3354c53b8f569daab6fb4f1b37c4e7b5dbcd433f45725d554a5",
+          "byteLength": 143603,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-pod-jarzabem-15-g-mbad2613634abe",
+          "id": "var-widok-1-projekt-dom-pod-jarzabem-15-g-43fb3bd342-fa9e7a96ed",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mbad2613634abe/widok-1-projekt-dom-pod-jarzabem-15-g-43fb3bd342f8af376f7e7240d55236a7__289.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-2-projekt-dom-pod-jarzabem-15-g-44baac5bab",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-pod-jarzabem-15-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom pod jarzabem 15 (g) widok 2\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-pod-jarzabem-15-g-e5d50e9d6e-e4032f1d2f",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "201e8b150732de60909e2137c3815f5d9a119bad7c8888c25350cdcd1df4d27d",
+          "byteLength": 155562,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-pod-jarzabem-15-g-mbad2613634abe",
+          "id": "var-widok-2-projekt-dom-pod-jarzabem-15-g-e5d50e9d6e-e4032f1d2f",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mbad2613634abe/widok-2-projekt-dom-pod-jarzabem-15-g-e5d50e9d6ede211ed104de048052f4e7__290.jpg"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-pod-jarzabem-15-g-mbad2613634abe",
+  "contentHash": "d03312fc1bd0865a2334340b96564bde9ebb366fb5218acfde19b4d983c7d8d2",
+  "failures": [
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mbad2613634abe/projekt-dom-pod-jarzabem-15-g-f3183781fdf17d1773a42b9cc742ccf6__11252.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mbad2613634abe/rzut-parteru-projekt-dom-pod-jarzabem-15-g-19f5ea84e9738278818d9b9b1a5ac612__11269.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mbad2613634abe/rzut-parteru-projekt-dom-pod-jarzabem-15-g-1ee1336f98484ef877dad582ded6ab05__11706.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mbad2613634abe/widok-1-projekt-dom-pod-jarzabem-15-g-084918d0caa0f308a83a27fee515aeb8__11259.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mbad2613634abe/widok-1-projekt-dom-pod-jarzabem-15-g-43fb3bd342f8af376f7e7240d55236a7__11289.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mbad2613634abe/widok-2-projekt-dom-pod-jarzabem-15-g-d132d7bc980de854642b9abae91dfaec__11260.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mbad2613634abe/widok-2-projekt-dom-pod-jarzabem-15-g-e5d50e9d6ede211ed104de048052f4e7__11290.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mbad2613634abe/projekt-dom-pod-jarzabem-15-g-c84b9909b381e62a72a2b3977bf55c60__11265.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mbad2613634abe/elewacja-boczna-projekt-dom-pod-jarzabem-15-g-d65eb17bae26a9924d37abb11bc80434__11265.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mbad2613634abe/projekt-dom-pod-jarzabem-15-g-5a4d3ca10273ead2b7d28b5206ef1f07__11266.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mbad2613634abe/elewacja-boczna-projekt-dom-pod-jarzabem-15-g-d6dfd2b585aea61a1851d84ea55cb42b__11266.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mbad2613634abe/projekt-dom-pod-jarzabem-15-g-8f85b329a7ba2b26bbee0fe86ba66314__11264.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mbad2613634abe/elewacja-frontowa-projekt-dom-pod-jarzabem-15-g-66ae749d122b18ed1b50d1b12737a400__11264.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mbad2613634abe/projekt-dom-pod-jarzabem-15-g-864ea1b4a9fb02d872c7d4a4f3dea358__11267.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mbad2613634abe/elewacja-ogrodowa-projekt-dom-pod-jarzabem-15-g-8dc2ac85b0e14021d3b2231c8bc295f2__11267.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mbad2613634abe/projekt-dom-pod-jarzabem-15-g-a941690fe1c1530b04fe8d22ed624d03__11255.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mbad2613634abe/sytuacja-projekt-dom-pod-jarzabem-15-g-5aedf4555259027708b2edf4c948c2f6__11255.jpg"
+    }
+  ],
+  "id": "src-mbad2613634abe-9ad3a99865",
+  "pageHash": "97a5080a68fd743f663c8f6f24d93895313cdefea460d00a4e8337bfa4adc664",
+  "project": {
+    "externalId": "mbad2613634abe",
+    "name": "Projekt domu Dom pod jarząbem 15 (G) Dane projektu",
+    "publisher": "archon.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "label": "Powierzchnia kotłowni",
+      "raw": "5,15 m&sup2;",
+      "unit": "m2",
+      "value": 5.15
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "raw": "7,18 m",
+      "unit": "m",
+      "value": 7.18
+    },
+    {
+      "key": "floor_area",
+      "label": "Powierzchnia podłóg",
+      "raw": "157,33 m&sup2;",
+      "unit": "m2",
+      "value": 157.33
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "raw": "216,76 m&sup2;",
+      "unit": "m2",
+      "value": 216.76
+    },
+    {
+      "key": "garage_area",
+      "label": "Powierzchnia garażu",
+      "raw": "33,53 m&sup2;",
+      "unit": "m2",
+      "value": 33.53
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto domu bez kotłowni, garażu",
+      "raw": "118,65 m&sup2;",
+      "unit": "m2",
+      "value": 118.65
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "raw": "318,72 m&sup2;",
+      "unit": "m2",
+      "value": 318.72
+    },
+    {
+      "key": "total_area",
+      "label": "Powierzchnia całkowita",
+      "raw": "198,96 m&sup2;",
+      "unit": "m2",
+      "value": 198.96
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "raw": "157,33 m&sup2;",
+      "unit": "m2",
+      "value": 157.33
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "raw": "1057,14 m&sup3;",
+      "unit": "none",
+      "value": 1057.14
+    }
+  ],
+  "publishedRooms": [
+    {
+      "area": 3.53,
+      "index": 1,
+      "label": "Wiatrołap",
+      "raw": "1. Wiatrołap | 3,53 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 12.34,
+      "index": 2,
+      "label": "Korytarz",
+      "raw": "2. Korytarz | 12,34 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 3.2,
+      "index": 3,
+      "label": "Spiżarnia",
+      "raw": "3. Spiżarnia | 3,20 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 1.79,
+      "index": 4,
+      "label": "Toaleta",
+      "raw": "4. Toaleta | 1,79 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 12.27,
+      "index": 5,
+      "label": "Kuchnia",
+      "raw": "5. Kuchnia | 12,27 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 29.23,
+      "index": 6,
+      "label": "Salon + Jadalnia",
+      "raw": "6. Salon + Jadalnia | 29,23 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 10.38,
+      "index": 7,
+      "label": "Pokój",
+      "raw": "7. Pokój | 10,38 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 10.38,
+      "index": 8,
+      "label": "Pokój",
+      "raw": "8. Pokój | 10,38 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 14.18,
+      "index": 9,
+      "label": "Pokój",
+      "raw": "9. Pokój | 14,18 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 3.26,
+      "index": 10,
+      "label": "Garderoba",
+      "raw": "10. Garderoba | 3,26 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 6.66,
+      "index": 11,
+      "label": "Łazienka",
+      "raw": "11. Łazienka | 6,66 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 11.43,
+      "index": 12,
+      "label": "Gabinet",
+      "raw": "12. Gabinet | 11,43 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 5.15,
+      "index": 13,
+      "label": "Kotłownia z pralnią",
+      "raw": "13. Kotłownia z pralnią | 5,15 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 33.53,
+      "index": 14,
+      "label": "Garaż",
+      "raw": "14. Garaż | 33,53 | ",
+      "storey": "GROUND"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Atrakcyjny dom parterowy, którego bryłę wieńczy dach czterospadowy, a do bocznej ściany przylega jednostanowiskowy garaż. Prezentowany projekt wzbogaca rodzinę „Domów pod jarząbem” i spełni oczekiwania Inwestorów, poszukujących komfortowych, funkcjonalnych w użytkowaniu parterówek. Z jasnym tynkiem pięknie współgrają grafitowe akcenty i naturalna okładzina, urozmaicająca wejściowy podcień, strefę tarasową oraz boczny wykusz. Pełne zadaszenie nad tarasem zapewnia idealne warunki do relaksu w każdą pogodę. Można zaaranżować tutaj zewnętrzną jadalnię, do której wygodny dostęp otwiera przesuwne przeszklenie w salonie. Przed kinem domowym oraz kominkiem przewidziano miejsce na zestaw wypoczynkowy z narożną sofą, a w pobliżu efektowną jadalnię z dużym stołem. Przeszklony wykusz efektownie powiększa jej przestrzeń, gwarantując atrakcyjne doświetlenie jadalni i widok na ogród. Zaprojektowana we frontowej części budynku kuchnia posiada miejsce na pojemną zabudowę z licznymi szafkami, obszernymi blatami, a także przyległą spiżarnię, z której można wyjść na zewnątrz. Przestrzeń prywatna to klarownie zdefiniowana przestrzeń, w której mieszczą się dwa pokoje dla dzieci, sypialnia rodziców z garderobą, a także gabinet z widokiem na strefę wejściową domu. W korytarzu zaprojektowano praktyczną wnękę na pojemne szafy, ponadto odpowiednią powierzchnię do przechowywania uwzględniono także we wszystkich pokojach strefy prywatnej. Układ funkcjonalny domu obejmuje także toaletę przy wiatrołapie, łazienkę z wanną, prysznicem i zestawem umywalek oraz gazową kotłownię połączoną z pralnią, przez którą dostępy jest garaż. Domownicy mają w nim miejsce zarówno na samochód, jak i sportowe sprzęty i narzędzia ogrodnicze. Garaż posiada bezpośrednie połączenie z ogrodem. „Dom pod jarząbem 15 (G)” to interesująca propozycja należąca do kolekcji: projekty domów parterowych , projekty domów z dachem czterospadowym , projekty domów z garażem jednostanowiskowym ."
+    },
+    {
+      "key": "floor_structure",
+      "label": "strop",
+      "text": "płyta żelbetowa"
+    },
+    {
+      "key": "garage_door",
+      "label": "brama garażowa",
+      "text": "HÖRMANN"
+    },
+    {
+      "key": "other",
+      "label": "kocioł",
+      "text": "gazowy"
+    },
+    {
+      "key": "other",
+      "label": "ogrzewanie podłogowe",
+      "text": "zastosowano we wszystkich pomieszczeniach mieszkalnych"
+    },
+    {
+      "key": "other",
+      "label": "wentylacja",
+      "text": "grawitacyjna"
+    },
+    {
+      "key": "roof",
+      "label": "dach",
+      "text": "czterospadowy, nachylenie 30 st. , więźba drewniana, dachówka ceramiczna swissporTON"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Dom jednorodzinny parterowy , strop płyta żelbetowa , 118.65 m² + 33.53 m² + 5.15 m² , 5 pokoi, kuchnia, łazienka, spiżarka, toaleta, kotłownia, garderoba, kominek, garaż"
+    },
+    {
+      "key": "walls",
+      "label": "ściany",
+      "text": "pustak ceramiczny Porotherm 25 cm, styropian Termo Organika 20 cm, tynk"
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

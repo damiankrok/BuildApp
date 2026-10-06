@@ -1267,7 +1267,7 @@ jobs:
     # Pack (uploaded with the record, verified against its manifest), and the
     # rows whose scale a dimension chain decides carry the metric gate. 005E: the two
     # round-4 blind houses join; their scale is gated against the printed overall
-    # dimensions, which the numeric lattice now reads.
+    # dimensions, which the numeric lattice now reads. 005I: the two round-7 blind houses join.
     name: Analyzer / development house (${{ matrix.house }})
     if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.only_ui_evidence) }}
     runs-on: ubuntu-latest
@@ -1359,6 +1359,20 @@ jobs:
             expect: pass
             limits: METRIC_SCALE_UNSUPPORTED
             metric: "--metric CONFIRMED --metric-scale 1.996"
+          # 005I: the round-7 blind houses (read here without the recogniser, as every row). dom-pod-jarzabem: its
+          # left margin's label ink no longer cuts the overall line and every number binds to its own line, so the
+          # overall decides the scale (REPLACED, 2.80 cm/px) and the plan completes — its footprint is still 11.9 %
+          # short (a recessed entrance strip, report: BODY_RELATION), so the row is `complete`, not `pass`.
+          # dom-w-arkadiach passes with the recogniser (the development matrix) and, without it, is refused by name
+          # exactly as in 005H: its page vote has no independent reading.
+          - house: dom-pod-jarzabem
+            pkg: stage-reports/artifacts/analyzer-005i/dev/dom-pod-jarzabem/source-package.json
+            expect: "complete:1"
+            metric: "--metric REPLACED --metric-overall --metric-scale 2.80"
+          - house: dom-w-arkadiach
+            pkg: stage-reports/artifacts/analyzer-005i/dev/dom-w-arkadiach/source-package.json
+            expect: "refuse:METRIC_RESOLUTION_INCONCLUSIVE"
+            metric: "--dimension-evidence DIMENSION_EVIDENCE_INCONCLUSIVE"
     env:
       DEV: stage-reports/artifacts/analyzer-005b/dev
     steps:
