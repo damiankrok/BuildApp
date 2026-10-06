@@ -81,7 +81,7 @@
    "CPU": "yes",
    "GPU": "yes",
    "memory": "≈ 1.76 GB (desktop process)",
-   "latency": "2.5 s median enum / 3.6 s median gen (desktop CPU)",
+   "latency": "4.5 s median enum with the vision encoder (2.5 s median pooled with feature-reusing rows) / 3.6 s median gen (desktop CPU, 2 threads, contended; post-review B4)",
    "quality_on_BuildPlan": "SYNTHETIC: 198/443 answered right of 614; REAL_DEV: 100/211 answered right of 289; REAL_BLIND8: 15/41 answered right of 64; mirror 43.0 % (answered pairs)",
    "confident_wrong": "7.2 % (70/967)",
    "integration_complexity": "high (0.4–0.8 GB pack, seconds per question)",

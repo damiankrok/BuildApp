@@ -220,6 +220,10 @@ def main():
             for k in ('gen', 'score'):
                 if k in rec:
                     lat[(rec['model'], k)].append(rec[k]['ms'])
+            if 'score' in rec and 'gen' not in rec:
+                # post-review B4: a score-only record ran the vision encoder itself; a record with a generation pass
+                # reused that pass's image features, so the pooled 'score' median mixes two populations
+                lat[(rec['model'], 'score-with-vision')].append(rec['score']['ms'])
     if a.oracle:
         key = json.load(open(os.path.join(a.oracle, 'key-DO-NOT-SHOW.json')))
         for part in sorted(f for f in os.listdir(a.oracle) if f.startswith('answers-part')):

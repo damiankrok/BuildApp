@@ -59,7 +59,7 @@ def main():
                      runtime='ONNX Runtime / LiteRT-LM (community) / llama.cpp', code_license='Apache-2.0', weight_license='Apache-2.0', training_data='mixed; incl. academic-only and CC-BY-NC video sets',
                      commercial_status='CONDITIONAL', pretrained_available='yes', actual_artifact_verified='yes (run in 005J)', wall_output='no', opening_output='no', room_output='no', mask_output='no', VQA='yes',
                      ONNX='yes (int8 vision needs ConvInteger: not on ORT CPU)', LiteRT='community bundle', Android='AI pack + WASM or LiteRT-LM', CPU='yes', GPU='yes', memory='≈ 1.76 GB (desktop process)',
-                     latency=L('smolvlm2-500m-onnx-int8dec', 'score') + ' enum / ' + L('smolvlm2-500m-onnx-int8dec', 'gen') + ' gen (desktop CPU)', quality_on_BuildPlan=q, confident_wrong=cw,
+                     latency=L('smolvlm2-500m-onnx-int8dec', 'score-with-vision') + ' enum with the vision encoder (' + L('smolvlm2-500m-onnx-int8dec', 'score') + ' pooled with feature-reusing rows) / ' + L('smolvlm2-500m-onnx-int8dec', 'gen') + ' gen (desktop CPU, 2 threads, contended; post-review B4)', quality_on_BuildPlan=q, confident_wrong=cw,
                      integration_complexity='high (0.4–0.8 GB pack, seconds per question)', verdict='REJECT zero-shot; fine-tune base candidate (prefer SmolVLM-500M-Instruct v1) for Route A'))
     q, cw = vlm_quality(bk, 'moondream-0.5b-int8')
     rows.append(dict(technology='Moondream 0.5B int8 (moondream2@9dddae8, branch onnx)', task='query / caption / detect / point', parameters='≈ 0.5 B', artifact_size='622 MB int8 / 442 MB int4 (.mf.gz)',

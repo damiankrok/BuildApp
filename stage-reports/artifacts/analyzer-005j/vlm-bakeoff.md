@@ -160,11 +160,15 @@ The real sets are one-sided in several classes (all 126 REAL_DEV OPENING_VS_PATT
 | model / read-out | n | median ms | p95 ms |
 | --- | --- | --- | --- |
 | florence2-base|score | 109 | 23083.0 | 31300.4 |
+| florence2-base|score-with-vision | 109 | 23083.0 | 31300.4 |
 | micro-referee-pilot|score | 1300 | 22.4 | 32.0 |
+| micro-referee-pilot|score-with-vision | 1300 | 22.4 | 32.0 |
 | moondream-0.5b-int8|gen | 39 | 16829.0 | 20777.4 |
 | moondream-0.5b-int8|score | 532 | 15106.9 | 20959.9 |
+| moondream-0.5b-int8|score-with-vision | 493 | 15644.9 | 21109.7 |
 | smolvlm2-500m-onnx-int8dec|gen | 875 | 3587.8 | 7895.9 |
 | smolvlm2-500m-onnx-int8dec|score | 1658 | 2467.2 | 5323.4 |
+| smolvlm2-500m-onnx-int8dec|score-with-vision | 783 | 4476.3 | 6126.3 |
 
 ## 8. Matched subsets (post-review B1, B7)
 

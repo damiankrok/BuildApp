@@ -31,7 +31,7 @@ part decide anything; asking about every gap would be the "one request per analy
 
 | model | per-question time, desktop x86-64 CPU (image path, measured) | cold load (measured) | process peak RSS (measured, Python) |
 | --- | --- | --- | --- |
-| SmolVLM2-500M (fp32 vision + int8 decoder ONNX, 512² single tile) | ENUM_SCORE ≈ 1.2–3.5 s, GEN_JSON ≈ 1.3–3.7 s (2–4 threads, contended) | ≈ 7.7 s | ≈ 1.76 GB |
+| SmolVLM2-500M (fp32 vision + int8 decoder ONNX, 512² single tile) | ENUM_SCORE ≈ 1.2–3.5 s, GEN_JSON ≈ 1.3–3.7 s (2–4 threads, contended). Post-review B4: in the bake-off a score-only question that runs the vision encoder takes a median **4.5 s** (783 rows); 1.6 s only when it reuses a generation pass's features (887 rows) | ≈ 7.7 s | ≈ 1.76 GB |
 | Moondream 0.5B int8 (legacy client) | ENUM_SCORE ≈ 5–6 s, generation ≈ 5–9 s | ≈ 9.2 s | ≈ 2.34 GB |
 | Florence-2-base fp32 (torch) | ENUM_SCORE (3–4 options batched) ≈ 6 s | ≈ 5.4 s | (not recorded under load) |
 | UNet-lite wall / opening model (Route B, 1.56 M) | **1.19 s per 864² frame** in ORT-web WASM, one thread, Node 18 (measured); ≈ 0.1 s per 256² gap crop | 2.8 s | ≥ 340 MiB (WASM, lower bound) |
@@ -45,7 +45,8 @@ milliseconds on an RTX 4090-class card; batching 16–64 concurrent questions fi
 `SERVER_ORACLE` class runs only as a hosted API (per-token pricing, seconds per answer).
 
 **Capacity:** at the planning figure (≈ 1 question per house, p90 6), one CPU core running SmolVLM2-class inference
-handles roughly **1,000–2,500 questions per hour**, i.e. thousands of analyses per day; one consumer GPU handles one to two
+handles roughly **800 questions per hour** (a 2-thread process at the 4.5 s with-vision median; the earlier
+"1,000–2,500" used the pooled median, post-review B4), i.e. hundreds to thousands of analyses per day; one consumer GPU handles one to two
 orders of magnitude more. **Cost class:** a single small always-on CPU VM (tens of USD per month) covers early volume; a
 GPU instance (USD 0.4–4 per hour) only matters at large scale. Free tiers are for experiments only — **no "free
 production server" is claimed.**

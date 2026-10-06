@@ -1240,7 +1240,7 @@ in the repository; `tests/architecture/research-isolation.test.ts` (005J block) 
     `vlm-bakeoff.md` §8), SmolVLM2-500M in its deployable 64-image-token configuration is right on 45 % of answered
     questions, with 7.2 % confident-wrong; on the oracle's items 46 of 100 against the oracle's 138 of 141.
   - Moondream 0.5B is right on 46 % and Florence-2-base on 41 %.
-  - In the shipped WASM runtime SmolVLM2 costs ≈ 17–20 s and ≥ 1.9 GiB per question, ≈ 7 min per median house.
+  - In the shipped WASM runtime SmolVLM2 costs ≈ 17–20 s per question with a ≥ 1.9 GiB process peak, ≈ 7 min per median house.
   - The in-session strong model (blind) is right on 98 %, with 0 confident-wrong at 0.80: the questions are answerable.
 - **WALL / OPENING MODEL — PASS_RESEARCH (challenger).**
   - UNet-lite (1.56 M, 6.25 MB ONNX) was trained from scratch on synthetic data only.

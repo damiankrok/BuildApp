@@ -22166,10 +22166,20 @@
    "median": 2467.2,
    "p95": 5323.4
   },
+  "smolvlm2-500m-onnx-int8dec|score-with-vision": {
+   "n": 783,
+   "median": 4476.3,
+   "p95": 6126.3
+  },
   "moondream-0.5b-int8|score": {
    "n": 532,
    "median": 15106.9,
    "p95": 20959.9
+  },
+  "moondream-0.5b-int8|score-with-vision": {
+   "n": 493,
+   "median": 15644.9,
+   "p95": 21109.7
   },
   "moondream-0.5b-int8|gen": {
    "n": 39,
@@ -22181,7 +22191,17 @@
    "median": 23083.0,
    "p95": 31300.4
   },
+  "florence2-base|score-with-vision": {
+   "n": 109,
+   "median": 23083.0,
+   "p95": 31300.4
+  },
   "micro-referee-pilot|score": {
+   "n": 1300,
+   "median": 22.4,
+   "p95": 32.0
+  },
+  "micro-referee-pilot|score-with-vision": {
    "n": 1300,
    "median": 22.4,
    "p95": 32.0

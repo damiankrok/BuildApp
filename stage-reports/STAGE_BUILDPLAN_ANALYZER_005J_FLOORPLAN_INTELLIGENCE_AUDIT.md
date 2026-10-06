@@ -51,7 +51,7 @@ not patched.** The two round-8 houses are development evidence since 005I and ar
   - SmolVLM2-500M is right on 45 % of what it answers, with 7.2 % confident-wrong. On the questions the oracle also
     answered it is right on 46 of 100; the oracle on 138 of 141 (post-review B1).
   - Moondream and Florence-2 are no better.
-  - In the shipped runtime one SmolVLM2 question costs ≈ 17–20 s and ≥ 1.9 GiB; a witness asked for every eligible
+  - In the shipped runtime one SmolVLM2 question costs ≈ 17–20 s, with a process peak of ≥ 1.9 GiB; a witness asked for every eligible
     gap costs ≈ 7 min per median house on a desktop core (post-review B4).
   - A strong model answers 98 % with no confident-wrong answer at 0.80, so the questions are answerable.
 - **No floor-plan model on the market is commercially clean.**
@@ -273,9 +273,10 @@ C2).
     answered right; Florence 1/7 (ONE_OPEN_SIDE — the analyzer's error — at 1.00); UNet gap rules 2/2.
   - **cyklamenach:** oracle 9/9; SmolVLM2 1/9 right (TERMINATES on both continuation questions); UNet gap rules 4/4
     (window OPENING 0.97).
-- **On-device cost** (§I): SmolVLM2 ≈ 17–20 s and ≥ 1.9 GiB per question in the shipped WASM runtime; ≈ 7 min per
+- **On-device cost** (§I): SmolVLM2 ≈ 17–20 s per question and a ≥ 1.9 GiB process peak in the shipped WASM runtime; ≈ 7 min per
   median house (24 gaps), 2–19 min per house, on a desktop core.
-- **Desktop medians, contended:** SmolVLM2 2.5 s (enum), Moondream 15 s, Florence 23 s.
+- **Desktop medians, contended:** SmolVLM2 4.5 s per enum-scored question when it runs the vision encoder (1.6 s when
+  it reuses a generation pass's features; the pooled 2.5 s mixed both, post-review B4), Moondream 15 s, Florence 23 s.
 - **Verdict:** ADOPT_SMALL_VLM_REFEREE is rejected. The fine-tuning route (Route A) is "not now" (§H).
 
 **Oracle replay (post-review A1 / E4) — would a correct gap reading move a failing house?** Full record:
@@ -471,7 +472,7 @@ without seeing each other's reviews. The resolution of every finding is in `post
 | reviewer | topic | verdict | P0 | P1 | what it changed |
 | --- | --- | --- | --- | --- | --- |
 | A | floor-plan computer vision | CHANGES REQUESTED | 1 | 6 | the oracle replay was run (A1); REAL_DEV re-measured on the wall axis (A2); two-signal witness; the P0 count de-duplicated |
-| B | VLM / edge AI | CONDITIONAL PASS | 0 | 4 | matched subsets (B1); the 64-token scope (B2); the degenerate grounding test restated (B3); per-house latency (B4) |
+| B | VLM / edge AI | CONDITIONAL PASS | 0 | 3 | matched subsets (B1); the degenerate grounding test restated (B3); per-house latency and the memory figure as a process peak (B4); its default-resolution probe settled B2 (no better at 1,088 tokens) |
 | C | training data and evaluation | CONDITIONAL PASS | 0 | 6 | the malformed porch-mouth question excluded for every arm (C2); the unit and n of the gate; generator v2 families |
 | D | licensing, provenance, supply chain | CONDITIONAL PASS | 0 | 2 | real crops are evaluation data only in every route (D1); "independent re-implementation, not clean-room" (D2) |
 | E | BuildPlan architecture and integration | CHANGES REQUESTED (spec); freeze PASS | 0 | 8 | no OPEN_SIDE split; pre-pass design; unconditional asking; PATH B reconciled; 005H items |
