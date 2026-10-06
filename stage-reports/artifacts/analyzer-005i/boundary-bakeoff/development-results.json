@@ -1,0 +1,3148 @@
+{
+ "aggregates": {
+  "lines": {
+   "DEEPLSD-MD": {
+    "frames": 7,
+    "framesWithAdditionalSolidCoverage>=0.5m": 0,
+    "mean_additionalOpeningCoverageShare": 0.0023,
+    "mean_additionalSolidCoverageShare": 0.0,
+    "mean_angularErrorDeg": 0.3863,
+    "mean_continuityAcrossOpenings": 0.9823,
+    "mean_duplicateRate": 0.1153,
+    "mean_exteriorWallCoverage": 0.7869,
+    "mean_fragmentationSegmentsPerMetre": 1.9753,
+    "mean_longWallRecovery": 0.4679,
+    "mean_supportedLineRecall": null,
+    "mean_unsupportedLineRate": 0.0346,
+    "median_cornerEndpointErrorPx": 1.38,
+    "median_count": 647.0,
+    "sum_additionalDistractorLengthM": 59.168,
+    "sum_additionalOpeningCoverageM": 0.241,
+    "sum_additionalSolidCoverageM": 0.0,
+    "sum_boundaryDistractorsLengthM": 732.556,
+    "sum_cornersWithoutSegment": 1,
+    "sum_exclusionOutlineAddedOverScvM": 26.874
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "frames": 7,
+    "framesWithAdditionalSolidCoverage>=0.5m": 0,
+    "mean_additionalOpeningCoverageShare": 0.003,
+    "mean_additionalSolidCoverageShare": 0.0,
+    "mean_angularErrorDeg": 0.1427,
+    "mean_continuityAcrossOpenings": 0.9872,
+    "mean_duplicateRate": 0.5434,
+    "mean_exteriorWallCoverage": 0.9941,
+    "mean_fragmentationSegmentsPerMetre": 1.9161,
+    "mean_longWallRecovery": 0.6235,
+    "mean_supportedLineRecall": null,
+    "mean_unsupportedLineRate": 0.0222,
+    "median_cornerEndpointErrorPx": 1.0,
+    "median_count": 834.0,
+    "sum_additionalDistractorLengthM": 27.869,
+    "sum_additionalOpeningCoverageM": 0.31,
+    "sum_additionalSolidCoverageM": 0.0,
+    "sum_boundaryDistractorsLengthM": 1002.952,
+    "sum_cornersWithoutSegment": 0,
+    "sum_exclusionOutlineAddedOverScvM": 7.645
+   },
+   "DEEPLSD-WF": {
+    "frames": 7,
+    "framesWithAdditionalSolidCoverage>=0.5m": 0,
+    "mean_additionalOpeningCoverageShare": 0.0021,
+    "mean_additionalSolidCoverageShare": 0.0,
+    "mean_angularErrorDeg": 0.3117,
+    "mean_continuityAcrossOpenings": 0.9766,
+    "mean_duplicateRate": 0.1397,
+    "mean_exteriorWallCoverage": 0.8794,
+    "mean_fragmentationSegmentsPerMetre": 1.7676,
+    "mean_longWallRecovery": 0.5782,
+    "mean_supportedLineRecall": null,
+    "mean_unsupportedLineRate": 0.032,
+    "median_cornerEndpointErrorPx": 1.0,
+    "median_count": 633.0,
+    "sum_additionalDistractorLengthM": 56.94,
+    "sum_additionalOpeningCoverageM": 0.221,
+    "sum_additionalSolidCoverageM": 0.0,
+    "sum_boundaryDistractorsLengthM": 735.77,
+    "sum_cornersWithoutSegment": 0,
+    "sum_exclusionOutlineAddedOverScvM": 23.239
+   },
+   "ELSED-DEFAULT": {
+    "frames": 7,
+    "framesWithAdditionalSolidCoverage>=0.5m": 0,
+    "mean_additionalOpeningCoverageShare": 0.0019,
+    "mean_additionalSolidCoverageShare": 0.0,
+    "mean_angularErrorDeg": 0.1934,
+    "mean_continuityAcrossOpenings": 0.955,
+    "mean_duplicateRate": 0.1259,
+    "mean_exteriorWallCoverage": 0.9872,
+    "mean_fragmentationSegmentsPerMetre": 1.3706,
+    "mean_longWallRecovery": 0.5766,
+    "mean_supportedLineRecall": null,
+    "mean_unsupportedLineRate": 0.029,
+    "median_cornerEndpointErrorPx": 1.0,
+    "median_count": 545.0,
+    "sum_additionalDistractorLengthM": 17.862,
+    "sum_additionalOpeningCoverageM": 0.199,
+    "sum_additionalSolidCoverageM": 0.0,
+    "sum_boundaryDistractorsLengthM": 483.974,
+    "sum_cornersWithoutSegment": 0,
+    "sum_exclusionOutlineAddedOverScvM": 10.298
+   },
+   "SCV-LINES": {
+    "frames": 7,
+    "framesWithAdditionalSolidCoverage>=0.5m": 0,
+    "mean_additionalOpeningCoverageShare": null,
+    "mean_additionalSolidCoverageShare": null,
+    "mean_angularErrorDeg": 0.0881,
+    "mean_continuityAcrossOpenings": 0.9812,
+    "mean_duplicateRate": 0.4566,
+    "mean_exteriorWallCoverage": 0.9941,
+    "mean_fragmentationSegmentsPerMetre": 1.9093,
+    "mean_longWallRecovery": 0.6235,
+    "mean_supportedLineRecall": null,
+    "mean_unsupportedLineRate": 0.0199,
+    "median_cornerEndpointErrorPx": 1.0,
+    "median_count": 834.0,
+    "sum_boundaryDistractorsLengthM": 1008.887,
+    "sum_cornersWithoutSegment": 0
+   }
+  },
+  "regions": {
+   "MSAM-AUTO": {
+    "failureTypeCounts": {
+     "BAY_DROPPED": 2,
+     "GARAGE_EXCLUDED": 4,
+     "INTERNAL_ROOM_SELECTED": 6,
+     "PORCH_INCLUDED": 1,
+     "RECESS_FILLED": 1,
+     "WING_DROPPED": 1
+    },
+    "frames": 7,
+    "framesOK": 0,
+    "mean_boundaryIoU": 0.004,
+    "mean_boundaryPrecision": 0.0914,
+    "mean_boundaryRecall": 0.0203,
+    "mean_oracleUpperBoundIoU_NOT_A_SELECTION": 0.1404,
+    "mean_regionIoU": 0.0458,
+    "median_regionIoU": 0.05,
+    "min_regionIoU": 0.0033
+   },
+   "MSAM-BOX": {
+    "failureTypeCounts": {
+     "LEAK_THROUGH_OPENING": 2,
+     "OK": 4,
+     "PERGOLA_INCLUDED": 1,
+     "PORCH_INCLUDED": 2,
+     "RECESS_FILLED": 2,
+     "TERRACE_INCLUDED": 1
+    },
+    "frames": 7,
+    "framesOK": 4,
+    "mean_boundaryIoU": 0.3714,
+    "mean_boundaryPrecision": 0.6402,
+    "mean_boundaryRecall": 0.8149,
+    "mean_regionIoU": 0.8947,
+    "mean_regionIoURangeWidth": 0.0183,
+    "median_regionIoU": 0.94,
+    "min_regionIoU": 0.6936,
+    "min_variantIoUWithBase": 0.9325
+   },
+   "MSAM-SOURCE-PROMPTS": {
+    "failureTypeCounts": {
+     "FRAGMENTED": 1,
+     "INTERNAL_ROOM_SELECTED": 1,
+     "LEAK_THROUGH_OPENING": 5,
+     "PERGOLA_INCLUDED": 3,
+     "PORCH_INCLUDED": 4,
+     "RECESS_FILLED": 2,
+     "TERRACE_INCLUDED": 3
+    },
+    "frames": 7,
+    "framesOK": 0,
+    "mean_boundaryIoU": 0.1667,
+    "mean_boundaryPrecision": 0.242,
+    "mean_boundaryRecall": 0.5996,
+    "mean_regionIoU": 0.6304,
+    "mean_regionIoURangeWidth": 0.0845,
+    "median_regionIoU": 0.69,
+    "min_regionIoU": 0.1473,
+    "min_variantIoUWithBase": 0.6155
+   },
+   "PROD-MASSES-005H": {
+    "failureTypeCounts": {
+     "BAY_DROPPED": 1,
+     "IMPRECISE": 1,
+     "INTERNAL_ROOM_SELECTED": 2,
+     "OK": 4
+    },
+    "frames": 7,
+    "framesOK": 4,
+    "mean_boundaryIoU": 0.4347,
+    "mean_boundaryPrecision": 0.7177,
+    "mean_boundaryRecall": 0.658,
+    "mean_regionIoU": 0.7433,
+    "median_regionIoU": 0.97,
+    "min_regionIoU": 0.0918
+   },
+   "SCV-BUILT": {
+    "failureTypeCounts": {
+     "BAY_DROPPED": 1,
+     "INTERNAL_ROOM_SELECTED": 1,
+     "OK": 4,
+     "RECESS_FILLED": 1
+    },
+    "frames": 7,
+    "framesOK": 4,
+    "mean_boundaryIoU": 0.3992,
+    "mean_boundaryPrecision": 0.6709,
+    "mean_boundaryRecall": 0.6852,
+    "mean_regionIoU": 0.7684,
+    "median_regionIoU": 0.96,
+    "min_regionIoU": 0.1151
+   },
+   "SCV-OUTLINE": {
+    "failureTypeCounts": {
+     "BAY_DROPPED": 1,
+     "FRAGMENTED": 1,
+     "IMPRECISE": 2,
+     "INTERNAL_ROOM_SELECTED": 3,
+     "RECESS_FILLED": 1,
+     "TERRACE_INCLUDED": 1
+    },
+    "frames": 7,
+    "framesOK": 0,
+    "mean_boundaryIoU": 0.3238,
+    "mean_boundaryPrecision": 0.5861,
+    "mean_boundaryRecall": 0.6721,
+    "mean_regionIoU": 0.6154,
+    "median_regionIoU": 0.87,
+    "min_regionIoU": 0.1385
+   },
+   "TRIVIAL-BOX": {
+    "failureTypeCounts": {
+     "IMPRECISE": 1,
+     "LEAK_THROUGH_OPENING": 6,
+     "PERGOLA_INCLUDED": 1,
+     "PORCH_INCLUDED": 3,
+     "RECESS_FILLED": 1,
+     "TERRACE_INCLUDED": 2
+    },
+    "frames": 7,
+    "framesOK": 0,
+    "mean_boundaryIoU": 0.001,
+    "mean_boundaryPrecision": 0.0041,
+    "mean_boundaryRecall": 0.0043,
+    "mean_regionIoU": 0.8041,
+    "median_regionIoU": 0.79,
+    "min_regionIoU": 0.7078
+   },
+   "TRIVIAL-EXTENT": {
+    "failureTypeCounts": {
+     "LEAK_THROUGH_OPENING": 4,
+     "OK": 2,
+     "PERGOLA_INCLUDED": 1,
+     "PORCH_INCLUDED": 2,
+     "RECESS_FILLED": 1,
+     "TERRACE_INCLUDED": 2
+    },
+    "frames": 7,
+    "framesOK": 2,
+    "mean_boundaryIoU": 0.4857,
+    "mean_boundaryPrecision": 0.763,
+    "mean_boundaryRecall": 0.7581,
+    "mean_regionIoU": 0.8901,
+    "median_regionIoU": 0.89,
+    "min_regionIoU": 0.7449
+   }
+  }
+ },
+ "aggregatesBoundaryHousesOnly": {
+  "lines": {
+   "DEEPLSD-MD": {
+    "frames": 5,
+    "framesWithAdditionalSolidCoverage>=0.5m": 0,
+    "mean_additionalOpeningCoverageShare": 0.0032,
+    "mean_additionalSolidCoverageShare": 0.0,
+    "mean_angularErrorDeg": 0.3426,
+    "mean_continuityAcrossOpenings": 0.9828,
+    "mean_duplicateRate": 0.132,
+    "mean_exteriorWallCoverage": 0.7939,
+    "mean_fragmentationSegmentsPerMetre": 2.1556,
+    "mean_longWallRecovery": 0.4482,
+    "mean_supportedLineRecall": null,
+    "mean_unsupportedLineRate": 0.0402,
+    "median_cornerEndpointErrorPx": 1.0,
+    "median_count": 647.0,
+    "sum_additionalDistractorLengthM": 23.789,
+    "sum_additionalOpeningCoverageM": 0.241,
+    "sum_additionalSolidCoverageM": 0.0,
+    "sum_boundaryDistractorsLengthM": 471.59,
+    "sum_cornersWithoutSegment": 1,
+    "sum_exclusionOutlineAddedOverScvM": 17.164
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "frames": 5,
+    "framesWithAdditionalSolidCoverage>=0.5m": 0,
+    "mean_additionalOpeningCoverageShare": 0.0042,
+    "mean_additionalSolidCoverageShare": 0.0,
+    "mean_angularErrorDeg": 0.1598,
+    "mean_continuityAcrossOpenings": 0.9821,
+    "mean_duplicateRate": 0.5808,
+    "mean_exteriorWallCoverage": 0.9961,
+    "mean_fragmentationSegmentsPerMetre": 2.1084,
+    "mean_longWallRecovery": 0.5543,
+    "mean_supportedLineRecall": null,
+    "mean_unsupportedLineRate": 0.0259,
+    "median_cornerEndpointErrorPx": 1.0,
+    "median_count": 834.0,
+    "sum_additionalDistractorLengthM": 21.101,
+    "sum_additionalOpeningCoverageM": 0.31,
+    "sum_additionalSolidCoverageM": 0.0,
+    "sum_boundaryDistractorsLengthM": 662.468,
+    "sum_cornersWithoutSegment": 0,
+    "sum_exclusionOutlineAddedOverScvM": 2.508
+   },
+   "DEEPLSD-WF": {
+    "frames": 5,
+    "framesWithAdditionalSolidCoverage>=0.5m": 0,
+    "mean_additionalOpeningCoverageShare": 0.003,
+    "mean_additionalSolidCoverageShare": 0.0,
+    "mean_angularErrorDeg": 0.2986,
+    "mean_continuityAcrossOpenings": 0.9781,
+    "mean_duplicateRate": 0.1488,
+    "mean_exteriorWallCoverage": 0.8792,
+    "mean_fragmentationSegmentsPerMetre": 1.886,
+    "mean_longWallRecovery": 0.5266,
+    "mean_supportedLineRecall": null,
+    "mean_unsupportedLineRate": 0.0373,
+    "median_cornerEndpointErrorPx": 1.0,
+    "median_count": 633.0,
+    "sum_additionalDistractorLengthM": 25.667,
+    "sum_additionalOpeningCoverageM": 0.221,
+    "sum_additionalSolidCoverageM": 0.0,
+    "sum_boundaryDistractorsLengthM": 466.881,
+    "sum_cornersWithoutSegment": 0,
+    "sum_exclusionOutlineAddedOverScvM": 11.062
+   },
+   "ELSED-DEFAULT": {
+    "frames": 5,
+    "framesWithAdditionalSolidCoverage>=0.5m": 0,
+    "mean_additionalOpeningCoverageShare": 0.0027,
+    "mean_additionalSolidCoverageShare": 0.0,
+    "mean_angularErrorDeg": 0.191,
+    "mean_continuityAcrossOpenings": 0.9519,
+    "mean_duplicateRate": 0.1192,
+    "mean_exteriorWallCoverage": 0.9914,
+    "mean_fragmentationSegmentsPerMetre": 1.449,
+    "mean_longWallRecovery": 0.5175,
+    "mean_supportedLineRecall": null,
+    "mean_unsupportedLineRate": 0.0319,
+    "median_cornerEndpointErrorPx": 0.75,
+    "median_count": 545.0,
+    "sum_additionalDistractorLengthM": 17.862,
+    "sum_additionalOpeningCoverageM": 0.199,
+    "sum_additionalSolidCoverageM": 0.0,
+    "sum_boundaryDistractorsLengthM": 385.004,
+    "sum_cornersWithoutSegment": 0,
+    "sum_exclusionOutlineAddedOverScvM": 10.298
+   },
+   "SCV-LINES": {
+    "frames": 5,
+    "framesWithAdditionalSolidCoverage>=0.5m": 0,
+    "mean_additionalOpeningCoverageShare": null,
+    "mean_additionalSolidCoverageShare": null,
+    "mean_angularErrorDeg": 0.1016,
+    "mean_continuityAcrossOpenings": 0.9737,
+    "mean_duplicateRate": 0.4864,
+    "mean_exteriorWallCoverage": 0.9961,
+    "mean_fragmentationSegmentsPerMetre": 2.0956,
+    "mean_longWallRecovery": 0.5543,
+    "mean_supportedLineRecall": null,
+    "mean_unsupportedLineRate": 0.0222,
+    "median_cornerEndpointErrorPx": 1.0,
+    "median_count": 834.0,
+    "sum_boundaryDistractorsLengthM": 668.402,
+    "sum_cornersWithoutSegment": 0
+   }
+  },
+  "regions": {
+   "MSAM-AUTO": {
+    "failureTypeCounts": {
+     "BAY_DROPPED": 1,
+     "GARAGE_EXCLUDED": 3,
+     "INTERNAL_ROOM_SELECTED": 4,
+     "PORCH_INCLUDED": 1,
+     "RECESS_FILLED": 1,
+     "WING_DROPPED": 1
+    },
+    "frames": 5,
+    "framesOK": 0,
+    "mean_boundaryIoU": 0.0056,
+    "mean_boundaryPrecision": 0.1279,
+    "mean_boundaryRecall": 0.0284,
+    "mean_oracleUpperBoundIoU_NOT_A_SELECTION": 0.0556,
+    "mean_regionIoU": 0.0483,
+    "median_regionIoU": 0.06,
+    "min_regionIoU": 0.0033
+   },
+   "MSAM-BOX": {
+    "failureTypeCounts": {
+     "LEAK_THROUGH_OPENING": 1,
+     "OK": 3,
+     "PORCH_INCLUDED": 2,
+     "RECESS_FILLED": 1
+    },
+    "frames": 5,
+    "framesOK": 3,
+    "mean_boundaryIoU": 0.4065,
+    "mean_boundaryPrecision": 0.6696,
+    "mean_boundaryRecall": 0.8567,
+    "mean_regionIoU": 0.9218,
+    "mean_regionIoURangeWidth": 0.0116,
+    "median_regionIoU": 0.94,
+    "min_regionIoU": 0.8206,
+    "min_variantIoUWithBase": 0.9487
+   },
+   "MSAM-SOURCE-PROMPTS": {
+    "failureTypeCounts": {
+     "FRAGMENTED": 1,
+     "INTERNAL_ROOM_SELECTED": 1,
+     "LEAK_THROUGH_OPENING": 3,
+     "PERGOLA_INCLUDED": 1,
+     "PORCH_INCLUDED": 4,
+     "RECESS_FILLED": 1,
+     "TERRACE_INCLUDED": 1
+    },
+    "frames": 5,
+    "framesOK": 0,
+    "mean_boundaryIoU": 0.1717,
+    "mean_boundaryPrecision": 0.2215,
+    "mean_boundaryRecall": 0.5701,
+    "mean_regionIoU": 0.6076,
+    "mean_regionIoURangeWidth": 0.1045,
+    "median_regionIoU": 0.69,
+    "min_regionIoU": 0.1473,
+    "min_variantIoUWithBase": 0.6155
+   },
+   "PROD-MASSES-005H": {
+    "failureTypeCounts": {
+     "IMPRECISE": 1,
+     "INTERNAL_ROOM_SELECTED": 1,
+     "OK": 3
+    },
+    "frames": 5,
+    "framesOK": 3,
+    "mean_boundaryIoU": 0.4425,
+    "mean_boundaryPrecision": 0.7258,
+    "mean_boundaryRecall": 0.6632,
+    "mean_regionIoU": 0.7733,
+    "median_regionIoU": 0.97,
+    "min_regionIoU": 0.0918
+   },
+   "SCV-BUILT": {
+    "failureTypeCounts": {
+     "INTERNAL_ROOM_SELECTED": 1,
+     "OK": 3,
+     "RECESS_FILLED": 1
+    },
+    "frames": 5,
+    "framesOK": 3,
+    "mean_boundaryIoU": 0.388,
+    "mean_boundaryPrecision": 0.6699,
+    "mean_boundaryRecall": 0.668,
+    "mean_regionIoU": 0.7743,
+    "median_regionIoU": 0.96,
+    "min_regionIoU": 0.1151
+   },
+   "SCV-OUTLINE": {
+    "failureTypeCounts": {
+     "IMPRECISE": 1,
+     "INTERNAL_ROOM_SELECTED": 2,
+     "RECESS_FILLED": 1,
+     "TERRACE_INCLUDED": 1
+    },
+    "frames": 5,
+    "framesOK": 0,
+    "mean_boundaryIoU": 0.3121,
+    "mean_boundaryPrecision": 0.5898,
+    "mean_boundaryRecall": 0.655,
+    "mean_regionIoU": 0.6323,
+    "median_regionIoU": 0.87,
+    "min_regionIoU": 0.1385
+   },
+   "TRIVIAL-BOX": {
+    "failureTypeCounts": {
+     "IMPRECISE": 1,
+     "LEAK_THROUGH_OPENING": 4,
+     "PORCH_INCLUDED": 3,
+     "RECESS_FILLED": 1,
+     "TERRACE_INCLUDED": 1
+    },
+    "frames": 5,
+    "framesOK": 0,
+    "mean_boundaryIoU": 0.0,
+    "mean_boundaryPrecision": 0.0,
+    "mean_boundaryRecall": 0.0,
+    "mean_regionIoU": 0.812,
+    "median_regionIoU": 0.79,
+    "min_regionIoU": 0.7337
+   },
+   "TRIVIAL-EXTENT": {
+    "failureTypeCounts": {
+     "LEAK_THROUGH_OPENING": 3,
+     "OK": 1,
+     "PORCH_INCLUDED": 2,
+     "RECESS_FILLED": 1,
+     "TERRACE_INCLUDED": 1
+    },
+    "frames": 5,
+    "framesOK": 1,
+    "mean_boundaryIoU": 0.5075,
+    "mean_boundaryPrecision": 0.7924,
+    "mean_boundaryRecall": 0.7842,
+    "mean_regionIoU": 0.9005,
+    "median_regionIoU": 0.89,
+    "min_regionIoU": 0.7974
+   }
+  }
+ },
+ "frozenBaseline": "frozen 005H production runs (/home/user/work005h/m-on, blind7), code d14304c, recogniser ON; baseline layers re-derived on a git-archive snapshot of 29ab643 and checked equal (gap tallies) on all 7 frames",
+ "perHouse": {
+  "dom-pod-jarzabem": {
+   "exteriorEdges": 16,
+   "frameId": "frame-asset-rzut-9354eb066f-397808a266",
+   "lines": {
+    "DEEPLSD-MD": {
+     "additionalDistractorLengthM": 27.802,
+     "additionalIds": [],
+     "additionalOpeningCoverageM": 0.0,
+     "additionalOpeningCoverageShare": 0.0,
+     "additionalSolidCoverageM": 0.0,
+     "additionalSolidCoverageShare": 0.0,
+     "angularErrorDeg": 0.522,
+     "boundaryDistractors": 31,
+     "boundaryDistractorsLengthM": 169.49,
+     "continuityAcrossOpenings": 0.978,
+     "cornerEndpointErrorMedianPx": 5.5,
+     "cornersWithoutSegment": 0,
+     "count": 897,
+     "duplicateRate": 0.047,
+     "exclusionOutlineAddedOverScvM": 3.297,
+     "exclusionOutlineLinesM": 83.316,
+     "exteriorWallCoverage": 0.8016,
+     "fragmentationSegmentsPerMetre": 1.571,
+     "longWallRecovery": 0.7136,
+     "unsupportedLineRate": 0.0173
+    },
+    "DEEPLSD-MD-REFINE-SCV": {
+     "additionalDistractorLengthM": 5.253,
+     "additionalIds": [],
+     "additionalOpeningCoverageM": 0.0,
+     "additionalOpeningCoverageShare": 0.0,
+     "additionalSolidCoverageM": 0.0,
+     "additionalSolidCoverageShare": 0.0,
+     "angularErrorDeg": 0.112,
+     "boundaryDistractors": 25,
+     "boundaryDistractorsLengthM": 227.627,
+     "continuityAcrossOpenings": 1.0,
+     "cornerEndpointErrorMedianPx": 5.0,
+     "cornersWithoutSegment": 0,
+     "count": 870,
+     "duplicateRate": 0.536,
+     "exclusionOutlineAddedOverScvM": 3.437,
+     "exclusionOutlineLinesM": 110.698,
+     "exteriorWallCoverage": 0.9799,
+     "fragmentationSegmentsPerMetre": 1.56,
+     "longWallRecovery": 0.8338,
+     "unsupportedLineRate": 0.0035
+    },
+    "DEEPLSD-WF": {
+     "additionalDistractorLengthM": 25.119,
+     "additionalIds": [],
+     "additionalOpeningCoverageM": 0.0,
+     "additionalOpeningCoverageShare": 0.0,
+     "additionalSolidCoverageM": 0.0,
+     "additionalSolidCoverageShare": 0.0,
+     "angularErrorDeg": 0.404,
+     "boundaryDistractors": 36,
+     "boundaryDistractorsLengthM": 177.727,
+     "continuityAcrossOpenings": 0.9699,
+     "cornerEndpointErrorMedianPx": 2.5,
+     "cornersWithoutSegment": 0,
+     "count": 948,
+     "duplicateRate": 0.067,
+     "exclusionOutlineAddedOverScvM": 3.325,
+     "exclusionOutlineLinesM": 91.364,
+     "exteriorWallCoverage": 0.8397,
+     "fragmentationSegmentsPerMetre": 1.607,
+     "longWallRecovery": 0.7411,
+     "unsupportedLineRate": 0.0184
+    },
+    "ELSED-DEFAULT": {
+     "additionalDistractorLengthM": 0.0,
+     "additionalIds": [],
+     "additionalOpeningCoverageM": 0.0,
+     "additionalOpeningCoverageShare": 0.0,
+     "additionalSolidCoverageM": 0.0,
+     "additionalSolidCoverageShare": 0.0,
+     "angularErrorDeg": 0.271,
+     "boundaryDistractors": 13,
+     "boundaryDistractorsLengthM": 77.478,
+     "continuityAcrossOpenings": 0.9618,
+     "cornerEndpointErrorMedianPx": 1.0,
+     "cornersWithoutSegment": 0,
+     "count": 767,
+     "duplicateRate": 0.138,
+     "exclusionOutlineAddedOverScvM": 0.0,
+     "exclusionOutlineLinesM": 48.811,
+     "exteriorWallCoverage": 0.9662,
+     "fragmentationSegmentsPerMetre": 1.317,
+     "longWallRecovery": 0.8215,
+     "unsupportedLineRate": 0.0104
+    },
+    "SCV-LINES": {
+     "angularErrorDeg": 0.047,
+     "boundaryDistractors": 25,
+     "boundaryDistractorsLengthM": 227.627,
+     "continuityAcrossOpenings": 1.0,
+     "cornerEndpointErrorMedianPx": 5.0,
+     "cornersWithoutSegment": 0,
+     "count": 870,
+     "duplicateRate": 0.469,
+     "exclusionOutlineLinesM": 90.861,
+     "exteriorWallCoverage": 0.9799,
+     "fragmentationSegmentsPerMetre": 1.576,
+     "longWallRecovery": 0.8338,
+     "unsupportedLineRate": 0.0057
+    }
+   },
+   "metresPerPx": 0.02794,
+   "openingLengthM": 24.112,
+   "regions": {
+    "MSAM-AUTO": {
+     "areaRatio": 0.0427,
+     "autoMasks": 42,
+     "bodyCoverage": {
+      "BAY": 0.0,
+      "GARAGE": 0.2108
+     },
+     "boundaryIoU": 0.0,
+     "boundaryPrecision": 0.0,
+     "boundaryRecall": 0.0,
+     "buildingCoverage": 0.0427,
+     "components": 1,
+     "failureTypes": [
+      "INTERNAL_ROOM_SELECTED",
+      "GARAGE_EXCLUDED",
+      "BAY_DROPPED"
+     ],
+     "openingLeakage": 0.0,
+     "openingRecall": 0.0,
+     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.0427,
+     "outsideArea": 0.0,
+     "overreach": {
+      "PAVING": 0.0,
+      "PERGOLA": 0.0,
+      "RECESS": 0.0,
+      "TERRACE": 0.0
+     },
+     "predictedIoU": 0.972,
+     "regionIoU": 0.0427,
+     "significantComponents": 1
+    },
+    "MSAM-BOX": {
+     "areaRatio": 1.4275,
+     "bodyCoverage": {
+      "BAY": 0.9567,
+      "GARAGE": 1.0
+     },
+     "boundaryIoU": 0.1361,
+     "boundaryPrecision": 0.2988,
+     "boundaryRecall": 0.4352,
+     "buildingCoverage": 0.9941,
+     "components": 6,
+     "failureTypes": [
+      "TERRACE_INCLUDED",
+      "PERGOLA_INCLUDED",
+      "RECESS_FILLED",
+      "LEAK_THROUGH_OPENING"
+     ],
+     "openingLeakage": 0.1949,
+     "openingRecall": 0.324,
+     "outsideArea": 0.3857,
+     "overreach": {
+      "PAVING": 0.9543,
+      "PERGOLA": 0.994,
+      "RECESS": 1.0,
+      "TERRACE": 0.9299
+     },
+     "predictedIoU": 0.974,
+     "promptSensitivity": {
+      "minIoUWithBase": 0.9325,
+      "regionIoURange": [
+       0.69,
+       0.739
+      ],
+      "variantIoUWithBase": {
+       "x0-in": 0.9325,
+       "x0-out": 0.9973,
+       "x1-in": 0.9791,
+       "x1-out": 0.9951,
+       "y0-in": 0.936,
+       "y0-out": 0.9929,
+       "y1-in": 0.9446,
+       "y1-out": 0.9935
+      }
+     },
+     "regionIoU": 0.6936,
+     "significantComponents": 1
+    },
+    "MSAM-SOURCE-PROMPTS": {
+     "areaRatio": 1.3953,
+     "bodyCoverage": {
+      "BAY": 0.9319,
+      "GARAGE": 1.0
+     },
+     "boundaryIoU": 0.1171,
+     "boundaryPrecision": 0.2167,
+     "boundaryRecall": 0.5825,
+     "buildingCoverage": 0.9886,
+     "components": 40,
+     "failureTypes": [
+      "TERRACE_INCLUDED",
+      "PERGOLA_INCLUDED",
+      "RECESS_FILLED",
+      "LEAK_THROUGH_OPENING"
+     ],
+     "openingLeakage": 0.1844,
+     "openingRecall": 0.5935,
+     "outsideArea": 0.3665,
+     "overreach": {
+      "PAVING": 0.9806,
+      "PERGOLA": 0.7579,
+      "RECESS": 0.9997,
+      "TERRACE": 0.7619
+     },
+     "predictedIoU": 0.919,
+     "promptSensitivity": {
+      "minIoUWithBase": 0.9125,
+      "regionIoURange": [
+       0.7027,
+       0.7527
+      ],
+      "variantIoUWithBase": {
+       "down": 0.9782,
+       "left": 0.9125,
+       "right": 0.9858,
+       "up": 0.9212
+      }
+     },
+     "regionIoU": 0.7027,
+     "significantComponents": 1
+    },
+    "PROD-MASSES-005H": {
+     "areaRatio": 0.386,
+     "bodyCoverage": {
+      "BAY": 0.0,
+      "GARAGE": 0.9876
+     },
+     "boundaryIoU": 0.1406,
+     "boundaryPrecision": 0.3945,
+     "boundaryRecall": 0.2897,
+     "buildingCoverage": 0.3615,
+     "components": 2,
+     "failureTypes": [
+      "INTERNAL_ROOM_SELECTED",
+      "BAY_DROPPED"
+     ],
+     "openingLeakage": 0.0048,
+     "openingRecall": 0.3008,
+     "outsideArea": 0.0156,
+     "overreach": {
+      "PAVING": 0.0527,
+      "PERGOLA": 0.0,
+      "RECESS": 0.0,
+      "TERRACE": 0.0
+     },
+     "regionIoU": 0.3528,
+     "significantComponents": 2
+    },
+    "SCV-BUILT": {
+     "areaRatio": 0.5615,
+     "bodyCoverage": {
+      "BAY": 0.0,
+      "GARAGE": 0.9974
+     },
+     "boundaryIoU": 0.1649,
+     "boundaryPrecision": 0.3468,
+     "boundaryRecall": 0.4561,
+     "buildingCoverage": 0.5369,
+     "components": 5,
+     "failureTypes": [
+      "BAY_DROPPED"
+     ],
+     "openingLeakage": 0.0048,
+     "openingRecall": 0.5668,
+     "outsideArea": 0.0156,
+     "overreach": {
+      "PAVING": 0.0538,
+      "PERGOLA": 0.0,
+      "RECESS": 0.0,
+      "TERRACE": 0.0
+     },
+     "regionIoU": 0.524,
+     "significantComponents": 2
+    },
+    "SCV-OUTLINE": {
+     "areaRatio": 0.2528,
+     "bodyCoverage": {
+      "BAY": 0.1628,
+      "GARAGE": 0.9731
+     },
+     "boundaryIoU": 0.2217,
+     "boundaryPrecision": 0.4183,
+     "boundaryRecall": 0.555,
+     "buildingCoverage": 0.2488,
+     "components": 7,
+     "failureTypes": [
+      "INTERNAL_ROOM_SELECTED",
+      "BAY_DROPPED",
+      "FRAGMENTED"
+     ],
+     "openingLeakage": 0.0,
+     "openingRecall": 0.4274,
+     "outsideArea": 0.0,
+     "overreach": {
+      "PAVING": 0.0538,
+      "PERGOLA": 0.0,
+      "RECESS": 0.0,
+      "TERRACE": 0.0
+     },
+     "regionIoU": 0.2478,
+     "significantComponents": 4
+    },
+    "TRIVIAL-BOX": {
+     "areaRatio": 1.3425,
+     "bodyCoverage": {
+      "BAY": 1.0,
+      "GARAGE": 1.0
+     },
+     "boundaryIoU": 0.007,
+     "boundaryPrecision": 0.0285,
+     "boundaryRecall": 0.0302,
+     "buildingCoverage": 0.9708,
+     "components": 1,
+     "failureTypes": [
+      "TERRACE_INCLUDED",
+      "PERGOLA_INCLUDED",
+      "LEAK_THROUGH_OPENING"
+     ],
+     "openingLeakage": 0.1401,
+     "openingRecall": 0.0,
+     "outsideArea": 0.3147,
+     "overreach": {
+      "PAVING": 0.1828,
+      "PERGOLA": 0.805,
+      "RECESS": 0.3125,
+      "TERRACE": 0.6918
+     },
+     "regionIoU": 0.7078,
+     "significantComponents": 1
+    },
+    "TRIVIAL-EXTENT": {
+     "areaRatio": 1.2321,
+     "bodyCoverage": {
+      "BAY": 0.9412,
+      "GARAGE": 1.0
+     },
+     "boundaryIoU": 0.1725,
+     "boundaryPrecision": 0.3793,
+     "boundaryRecall": 0.386,
+     "buildingCoverage": 0.9529,
+     "components": 1,
+     "failureTypes": [
+      "TERRACE_INCLUDED",
+      "PERGOLA_INCLUDED",
+      "LEAK_THROUGH_OPENING"
+     ],
+     "openingLeakage": 0.1165,
+     "openingRecall": 0.4379,
+     "outsideArea": 0.2457,
+     "overreach": {
+      "PAVING": 0.0538,
+      "PERGOLA": 0.6734,
+      "RECESS": 0.0,
+      "TERRACE": 0.5898
+     },
+     "regionIoU": 0.7449,
+     "significantComponents": 1
+    }
+   },
+   "scvUnion": {
+    "continuityAcrossOpenings": 1.0,
+    "exteriorWallCoverage": 0.9978
+   },
+   "solidLengthM": 38.865,
+   "tolerancesPx": {
+    "tau": 4.0,
+    "tauB": 8.0
+   },
+   "truth": {
+    "bodies": [
+     "BAY",
+     "GARAGE",
+     "MAIN"
+    ],
+    "documentedFailure": "005H blind 7 project 1: ALGORITHMIC_FAIL, class metric (label binding between parallel chains), surfacing as boundary",
+    "exclusions": [
+     "PAVING",
+     "PAVING",
+     "PERGOLA",
+     "RECESS",
+     "TERRACE"
+    ],
+    "file": "research/analyzer-005i-boundary-bakeoff/truth/real/dom-pod-jarzabem.json",
+    "openingRuns": 13,
+    "purpose": "METRIC_CONTROL (blind round 7 project 1; its documented failure is metric: label binding between parallel chains)",
+    "sha256": "108549912da06b9b9583333ea31a266bef3d68919f36fb7bfa8f57721e45bdc6",
+    "vertices": 16
+   },
+   "wallPxTruth": 16.0
+  },
+  "dom-w-arkadiach": {
+   "exteriorEdges": 4,
+   "frameId": "frame-asset-rzut-16680ee739-bb2ced8b98",
+   "lines": {
+    "DEEPLSD-MD": {
+     "additionalDistractorLengthM": 7.577,
+     "additionalIds": [],
+     "additionalOpeningCoverageM": 0.0,
+     "additionalOpeningCoverageShare": 0.0,
+     "additionalSolidCoverageM": 0.0,
+     "additionalSolidCoverageShare": 0.0,
+     "angularErrorDeg": 0.469,
+     "boundaryDistractors": 20,
+     "boundaryDistractorsLengthM": 91.476,
+     "continuityAcrossOpenings": 0.984,
+     "cornerEndpointErrorMedianPx": 1.38,
+     "cornersWithoutSegment": 0,
+     "count": 611,
+     "duplicateRate": 0.1,
+     "exclusionOutlineAddedOverScvM": 6.413,
+     "exclusionOutlineLinesM": 31.834,
+     "exteriorWallCoverage": 0.7375,
+     "fragmentationSegmentsPerMetre": 1.478,
+     "longWallRecovery": 0.3208,
+     "unsupportedLineRate": 0.0239
+    },
+    "DEEPLSD-MD-REFINE-SCV": {
+     "additionalDistractorLengthM": 1.515,
+     "additionalIds": [],
+     "additionalOpeningCoverageM": 0.0,
+     "additionalOpeningCoverageShare": 0.0,
+     "additionalSolidCoverageM": 0.0,
+     "additionalSolidCoverageShare": 0.0,
+     "angularErrorDeg": 0.088,
+     "boundaryDistractors": 22,
+     "boundaryDistractorsLengthM": 112.857,
+     "continuityAcrossOpenings": 1.0,
+     "cornerEndpointErrorMedianPx": 1.0,
+     "cornersWithoutSegment": 0,
+     "count": 674,
+     "duplicateRate": 0.364,
+     "exclusionOutlineAddedOverScvM": 1.7,
+     "exclusionOutlineLinesM": 31.853,
+     "exteriorWallCoverage": 0.9985,
+     "fragmentationSegmentsPerMetre": 1.311,
+     "longWallRecovery": 0.7593,
+     "unsupportedLineRate": 0.0223
+    },
+    "DEEPLSD-WF": {
+     "additionalDistractorLengthM": 6.154,
+     "additionalIds": [],
+     "additionalOpeningCoverageM": 0.0,
+     "additionalOpeningCoverageShare": 0.0,
+     "additionalSolidCoverageM": 0.0,
+     "additionalSolidCoverageShare": 0.0,
+     "angularErrorDeg": 0.285,
+     "boundaryDistractors": 19,
+     "boundaryDistractorsLengthM": 91.162,
+     "continuityAcrossOpenings": 0.976,
+     "cornerEndpointErrorMedianPx": 1.0,
+     "cornersWithoutSegment": 0,
+     "count": 610,
+     "duplicateRate": 0.167,
+     "exclusionOutlineAddedOverScvM": 8.852,
+     "exclusionOutlineLinesM": 34.496,
+     "exteriorWallCoverage": 0.9203,
+     "fragmentationSegmentsPerMetre": 1.336,
+     "longWallRecovery": 0.6735,
+     "unsupportedLineRate": 0.0186
+    },
+    "ELSED-DEFAULT": {
+     "additionalDistractorLengthM": 0.0,
+     "additionalIds": [],
+     "additionalOpeningCoverageM": 0.0,
+     "additionalOpeningCoverageShare": 0.0,
+     "additionalSolidCoverageM": 0.0,
+     "additionalSolidCoverageShare": 0.0,
+     "angularErrorDeg": 0.128,
+     "boundaryDistractors": 7,
+     "boundaryDistractorsLengthM": 21.492,
+     "continuityAcrossOpenings": 0.964,
+     "cornerEndpointErrorMedianPx": 2.35,
+     "cornersWithoutSegment": 0,
+     "count": 484,
+     "duplicateRate": 0.147,
+     "exclusionOutlineAddedOverScvM": 0.0,
+     "exclusionOutlineLinesM": 27.398,
+     "exteriorWallCoverage": 0.9871,
+     "fragmentationSegmentsPerMetre": 1.032,
+     "longWallRecovery": 0.6268,
+     "unsupportedLineRate": 0.0331
+    },
+    "SCV-LINES": {
+     "angularErrorDeg": 0.062,
+     "boundaryDistractors": 22,
+     "boundaryDistractorsLengthM": 112.858,
+     "continuityAcrossOpenings": 1.0,
+     "cornerEndpointErrorMedianPx": 1.0,
+     "cornersWithoutSegment": 0,
+     "count": 674,
+     "duplicateRate": 0.295,
+     "exclusionOutlineLinesM": 29.093,
+     "exteriorWallCoverage": 0.9985,
+     "fragmentationSegmentsPerMetre": 1.311,
+     "longWallRecovery": 0.7593,
+     "unsupportedLineRate": 0.0223
+    }
+   },
+   "metresPerPx": 0.01848,
+   "openingLengthM": 9.24,
+   "regions": {
+    "MSAM-AUTO": {
+     "areaRatio": 0.0367,
+     "autoMasks": 28,
+     "bodyCoverage": {},
+     "boundaryIoU": 0.0,
+     "boundaryPrecision": 0.0,
+     "boundaryRecall": 0.0,
+     "buildingCoverage": 0.0367,
+     "components": 1,
+     "failureTypes": [
+      "INTERNAL_ROOM_SELECTED"
+     ],
+     "openingLeakage": 0.0,
+     "openingRecall": 0.0,
+     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.6618,
+     "outsideArea": 0.0,
+     "overreach": {
+      "PERGOLA": 0.0,
+      "PORCH": 0.0,
+      "TERRACE": 0.0
+     },
+     "predictedIoU": 0.969,
+     "regionIoU": 0.0367,
+     "significantComponents": 1
+    },
+    "MSAM-BOX": {
+     "areaRatio": 1.0012,
+     "bodyCoverage": {},
+     "boundaryIoU": 0.4313,
+     "boundaryPrecision": 0.8344,
+     "boundaryRecall": 0.9857,
+     "buildingCoverage": 0.9803,
+     "components": 12,
+     "failureTypes": [
+      "OK"
+     ],
+     "openingLeakage": 0.0033,
+     "openingRecall": 0.948,
+     "outsideArea": 0.0047,
+     "overreach": {
+      "PERGOLA": 0.0001,
+      "PORCH": 0.09,
+      "TERRACE": 0.0003
+     },
+     "predictedIoU": 0.979,
+     "promptSensitivity": {
+      "minIoUWithBase": 0.9802,
+      "regionIoURange": [
+       0.9445,
+       0.9654
+      ],
+      "variantIoUWithBase": {
+       "x0-in": 0.9967,
+       "x0-out": 0.9969,
+       "x1-in": 0.9951,
+       "x1-out": 0.9935,
+       "y0-in": 0.9944,
+       "y0-out": 0.9944,
+       "y1-in": 0.9919,
+       "y1-out": 0.9802
+      }
+     },
+     "regionIoU": 0.9603,
+     "significantComponents": 1
+    },
+    "MSAM-SOURCE-PROMPTS": {
+     "areaRatio": 1.3961,
+     "bodyCoverage": {},
+     "boundaryIoU": 0.191,
+     "boundaryPrecision": 0.3697,
+     "boundaryRecall": 0.7646,
+     "buildingCoverage": 0.963,
+     "components": 21,
+     "failureTypes": [
+      "TERRACE_INCLUDED",
+      "PERGOLA_INCLUDED",
+      "LEAK_THROUGH_OPENING"
+     ],
+     "openingLeakage": 0.2088,
+     "openingRecall": 0.588,
+     "outsideArea": 0.3966,
+     "overreach": {
+      "PERGOLA": 1.0,
+      "PORCH": 0.1645,
+      "TERRACE": 0.992
+     },
+     "predictedIoU": 0.956,
+     "promptSensitivity": {
+      "minIoUWithBase": 0.9814,
+      "regionIoURange": [
+       0.6605,
+       0.6796
+      ],
+      "variantIoUWithBase": {
+       "down": 0.985,
+       "left": 0.9814,
+       "right": 0.9848,
+       "up": 0.9841
+      }
+     },
+     "regionIoU": 0.672,
+     "significantComponents": 2
+    },
+    "PROD-MASSES-005H": {
+     "areaRatio": 1.0036,
+     "bodyCoverage": {},
+     "boundaryIoU": 0.6894,
+     "boundaryPrecision": 1.0,
+     "boundaryRecall": 1.0,
+     "buildingCoverage": 0.9936,
+     "components": 1,
+     "failureTypes": [
+      "OK"
+     ],
+     "openingLeakage": 0.0,
+     "openingRecall": 1.0,
+     "outsideArea": 0.0,
+     "overreach": {
+      "PERGOLA": 0.0,
+      "PORCH": 0.0,
+      "TERRACE": 0.0
+     },
+     "regionIoU": 0.9838,
+     "significantComponents": 1
+    },
+    "SCV-BUILT": {
+     "areaRatio": 1.0036,
+     "bodyCoverage": {},
+     "boundaryIoU": 0.6894,
+     "boundaryPrecision": 1.0,
+     "boundaryRecall": 1.0,
+     "buildingCoverage": 0.9936,
+     "components": 1,
+     "failureTypes": [
+      "OK"
+     ],
+     "openingLeakage": 0.0,
+     "openingRecall": 1.0,
+     "outsideArea": 0.0,
+     "overreach": {
+      "PERGOLA": 0.0,
+      "PORCH": 0.0,
+      "TERRACE": 0.0
+     },
+     "regionIoU": 0.9838,
+     "significantComponents": 1
+    },
+    "SCV-OUTLINE": {
+     "areaRatio": 0.9128,
+     "bodyCoverage": {},
+     "boundaryIoU": 0.4846,
+     "boundaryPrecision": 0.7353,
+     "boundaryRecall": 0.8751,
+     "buildingCoverage": 0.905,
+     "components": 1,
+     "failureTypes": [
+      "IMPRECISE"
+     ],
+     "openingLeakage": 0.0,
+     "openingRecall": 0.606,
+     "outsideArea": 0.0,
+     "overreach": {
+      "PERGOLA": 0.0,
+      "PORCH": 0.0,
+      "TERRACE": 0.0
+     },
+     "regionIoU": 0.8981,
+     "significantComponents": 1
+    },
+    "TRIVIAL-BOX": {
+     "areaRatio": 1.161,
+     "bodyCoverage": {},
+     "boundaryIoU": 0.0,
+     "boundaryPrecision": 0.0,
+     "boundaryRecall": 0.0,
+     "buildingCoverage": 1.0,
+     "components": 1,
+     "failureTypes": [
+      "LEAK_THROUGH_OPENING"
+     ],
+     "openingLeakage": 0.0208,
+     "openingRecall": 0.0,
+     "outsideArea": 0.0704,
+     "overreach": {
+      "PERGOLA": 0.0962,
+      "PORCH": 0.1974,
+      "TERRACE": 0.0859
+     },
+     "regionIoU": 0.8613,
+     "significantComponents": 1
+    },
+    "TRIVIAL-EXTENT": {
+     "areaRatio": 1.0036,
+     "bodyCoverage": {},
+     "boundaryIoU": 0.6894,
+     "boundaryPrecision": 1.0,
+     "boundaryRecall": 1.0,
+     "buildingCoverage": 0.9936,
+     "components": 1,
+     "failureTypes": [
+      "OK"
+     ],
+     "openingLeakage": 0.0,
+     "openingRecall": 1.0,
+     "outsideArea": 0.0,
+     "overreach": {
+      "PERGOLA": 0.0,
+      "PORCH": 0.0,
+      "TERRACE": 0.0
+     },
+     "regionIoU": 0.9838,
+     "significantComponents": 1
+    }
+   },
+   "scvUnion": {
+    "continuityAcrossOpenings": 1.0,
+    "exteriorWallCoverage": 0.9985
+   },
+   "solidLengthM": 24.357,
+   "tolerancesPx": {
+    "tau": 5.25,
+    "tauB": 10.5
+   },
+   "truth": {
+    "bodies": [
+     "MAIN"
+    ],
+    "documentedFailure": "none (005H blind 7 project 2: PASS)",
+    "exclusions": [
+     "PERGOLA",
+     "PORCH",
+     "TERRACE"
+    ],
+    "file": "research/analyzer-005i-boundary-bakeoff/truth/real/dom-w-arkadiach.json",
+    "openingRuns": 5,
+    "purpose": "METRIC_CONTROL (blind round 7 project 2, PASS in 005H)",
+    "sha256": "9a42fe8a5ef8ecc5390ca0210814ea2e519fc77138ae36acf20a76360313217e",
+    "vertices": 4
+   },
+   "wallPxTruth": 21.0
+  },
+  "dom-w-azaliach": {
+   "exteriorEdges": 4,
+   "frameId": "frame-asset-rzut-86bef468f3-19006df9bc",
+   "lines": {
+    "DEEPLSD-MD": {
+     "additionalDistractorLengthM": 0.037,
+     "additionalIds": [],
+     "additionalOpeningCoverageM": 0.0,
+     "additionalOpeningCoverageShare": 0.0,
+     "additionalSolidCoverageM": 0.0,
+     "additionalSolidCoverageShare": 0.0,
+     "angularErrorDeg": 0.383,
+     "boundaryDistractors": 16,
+     "boundaryDistractorsLengthM": 55.713,
+     "continuityAcrossOpenings": 1.0,
+     "cornerEndpointErrorMedianPx": 2.0,
+     "cornersWithoutSegment": 1,
+     "count": 635,
+     "duplicateRate": 0.1,
+     "exclusionOutlineAddedOverScvM": 4.586,
+     "exclusionOutlineLinesM": 34.22,
+     "exteriorWallCoverage": 0.5052,
+     "fragmentationSegmentsPerMetre": 2.989,
+     "longWallRecovery": 0.2126,
+     "unsupportedLineRate": 0.0292
+    },
+    "DEEPLSD-MD-REFINE-SCV": {
+     "additionalDistractorLengthM": 4.661,
+     "additionalIds": [],
+     "additionalOpeningCoverageM": 0.0,
+     "additionalOpeningCoverageShare": 0.0,
+     "additionalSolidCoverageM": 0.0,
+     "additionalSolidCoverageShare": 0.0,
+     "angularErrorDeg": 0.117,
+     "boundaryDistractors": 18,
+     "boundaryDistractorsLengthM": 95.229,
+     "continuityAcrossOpenings": 1.0,
+     "cornerEndpointErrorMedianPx": 2.25,
+     "cornersWithoutSegment": 0,
+     "count": 818,
+     "duplicateRate": 0.571,
+     "exclusionOutlineAddedOverScvM": 0.711,
+     "exclusionOutlineLinesM": 33.513,
+     "exteriorWallCoverage": 1.0,
+     "fragmentationSegmentsPerMetre": 2.26,
+     "longWallRecovery": 0.4167,
+     "unsupportedLineRate": 0.0147
+    },
+    "DEEPLSD-WF": {
+     "additionalDistractorLengthM": 1.011,
+     "additionalIds": [],
+     "additionalOpeningCoverageM": 0.0,
+     "additionalOpeningCoverageShare": 0.0,
+     "additionalSolidCoverageM": 0.0,
+     "additionalSolidCoverageShare": 0.0,
+     "angularErrorDeg": 0.243,
+     "boundaryDistractors": 18,
+     "boundaryDistractorsLengthM": 58.632,
+     "continuityAcrossOpenings": 0.997,
+     "cornerEndpointErrorMedianPx": 2.5,
+     "cornersWithoutSegment": 0,
+     "count": 633,
+     "duplicateRate": 0.182,
+     "exclusionOutlineAddedOverScvM": 3.164,
+     "exclusionOutlineLinesM": 32.741,
+     "exteriorWallCoverage": 0.7843,
+     "fragmentationSegmentsPerMetre": 2.246,
+     "longWallRecovery": 0.4572,
+     "unsupportedLineRate": 0.0229
+    },
+    "ELSED-DEFAULT": {
+     "additionalDistractorLengthM": 0.0,
+     "additionalIds": [],
+     "additionalOpeningCoverageM": 0.0,
+     "additionalOpeningCoverageShare": 0.0,
+     "additionalSolidCoverageM": 0.0,
+     "additionalSolidCoverageShare": 0.0,
+     "angularErrorDeg": 0.151,
+     "boundaryDistractors": 10,
+     "boundaryDistractorsLengthM": 48.934,
+     "continuityAcrossOpenings": 0.9925,
+     "cornerEndpointErrorMedianPx": 0.75,
+     "cornersWithoutSegment": 0,
+     "count": 452,
+     "duplicateRate": 0.188,
+     "exclusionOutlineAddedOverScvM": 2.527,
+     "exclusionOutlineLinesM": 9.922,
+     "exteriorWallCoverage": 0.9991,
+     "fragmentationSegmentsPerMetre": 1.885,
+     "longWallRecovery": 0.5048,
+     "unsupportedLineRate": 0.0243
+    },
+    "SCV-LINES": {
+     "angularErrorDeg": 0.072,
+     "boundaryDistractors": 17,
+     "boundaryDistractorsLengthM": 92.645,
+     "continuityAcrossOpenings": 1.0,
+     "cornerEndpointErrorMedianPx": 2.25,
+     "cornersWithoutSegment": 0,
+     "count": 818,
+     "duplicateRate": 0.487,
+     "exclusionOutlineLinesM": 42.645,
+     "exteriorWallCoverage": 1.0,
+     "fragmentationSegmentsPerMetre": 2.289,
+     "longWallRecovery": 0.4167,
+     "unsupportedLineRate": 0.0134
+    }
+   },
+   "metresPerPx": 0.01872,
+   "openingLengthM": 12.542,
+   "regions": {
+    "MSAM-AUTO": {
+     "areaRatio": 0.058,
+     "autoMasks": 52,
+     "bodyCoverage": {},
+     "boundaryIoU": 0.0,
+     "boundaryPrecision": 0.0,
+     "boundaryRecall": 0.0,
+     "buildingCoverage": 0.058,
+     "components": 1,
+     "failureTypes": [
+      "INTERNAL_ROOM_SELECTED"
+     ],
+     "openingLeakage": 0.0,
+     "openingRecall": 0.0,
+     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.058,
+     "outsideArea": 0.0,
+     "overreach": {
+      "PERGOLA": 0.0,
+      "PLANTING": 0.0,
+      "PORCH": 0.0,
+      "TERRACE": 0.0
+     },
+     "predictedIoU": 0.924,
+     "regionIoU": 0.058,
+     "significantComponents": 1
+    },
+    "MSAM-BOX": {
+     "areaRatio": 0.977,
+     "bodyCoverage": {},
+     "boundaryIoU": 0.4305,
+     "boundaryPrecision": 0.7188,
+     "boundaryRecall": 0.8964,
+     "buildingCoverage": 0.9673,
+     "components": 12,
+     "failureTypes": [
+      "OK"
+     ],
+     "openingLeakage": 0.0004,
+     "openingRecall": 0.7184,
+     "outsideArea": 0.0014,
+     "overreach": {
+      "PERGOLA": 0.0106,
+      "PLANTING": 0.0,
+      "PORCH": 0.028,
+      "TERRACE": 0.0139
+     },
+     "predictedIoU": 0.984,
+     "promptSensitivity": {
+      "minIoUWithBase": 0.9898,
+      "regionIoURange": [
+       0.9519,
+       0.9585
+      ],
+      "variantIoUWithBase": {
+       "x0-in": 0.9978,
+       "x0-out": 0.9971,
+       "x1-in": 0.992,
+       "x1-out": 0.9929,
+       "y0-in": 0.9954,
+       "y0-out": 0.9958,
+       "y1-in": 0.9951,
+       "y1-out": 0.9898
+      }
+     },
+     "regionIoU": 0.9581,
+     "significantComponents": 1
+    },
+    "MSAM-SOURCE-PROMPTS": {
+     "areaRatio": 0.1559,
+     "bodyCoverage": {},
+     "boundaryIoU": 0.0604,
+     "boundaryPrecision": 0.1267,
+     "boundaryRecall": 0.1266,
+     "buildingCoverage": 0.1484,
+     "components": 28,
+     "failureTypes": [
+      "INTERNAL_ROOM_SELECTED"
+     ],
+     "openingLeakage": 0.0005,
+     "openingRecall": 0.0316,
+     "outsideArea": 0.0052,
+     "overreach": {
+      "PERGOLA": 0.0,
+      "PLANTING": 0.0,
+      "PORCH": 0.0798,
+      "TERRACE": 0.0
+     },
+     "predictedIoU": 0.885,
+     "promptSensitivity": {
+      "minIoUWithBase": 0.9016,
+      "regionIoURange": [
+       0.1367,
+       0.1473
+      ],
+      "variantIoUWithBase": {
+       "down": 0.9307,
+       "left": 0.9016,
+       "right": 0.9413,
+       "up": 0.9561
+      }
+     },
+     "regionIoU": 0.1473,
+     "significantComponents": 2
+    },
+    "PROD-MASSES-005H": {
+     "areaRatio": 0.0929,
+     "bodyCoverage": {},
+     "boundaryIoU": 0.0784,
+     "boundaryPrecision": 0.3657,
+     "boundaryRecall": 0.1124,
+     "buildingCoverage": 0.0919,
+     "components": 1,
+     "failureTypes": [
+      "INTERNAL_ROOM_SELECTED"
+     ],
+     "openingLeakage": 0.0,
+     "openingRecall": 0.012,
+     "outsideArea": 0.0,
+     "overreach": {
+      "PERGOLA": 0.0,
+      "PLANTING": 0.0,
+      "PORCH": 0.0048,
+      "TERRACE": 0.0
+     },
+     "regionIoU": 0.0918,
+     "significantComponents": 1
+    },
+    "SCV-BUILT": {
+     "areaRatio": 0.1162,
+     "bodyCoverage": {},
+     "boundaryIoU": 0.0737,
+     "boundaryPrecision": 0.2702,
+     "boundaryRecall": 0.1124,
+     "buildingCoverage": 0.1152,
+     "components": 2,
+     "failureTypes": [
+      "INTERNAL_ROOM_SELECTED"
+     ],
+     "openingLeakage": 0.0,
+     "openingRecall": 0.012,
+     "outsideArea": 0.0,
+     "overreach": {
+      "PERGOLA": 0.0,
+      "PLANTING": 0.0,
+      "PORCH": 0.0048,
+      "TERRACE": 0.0
+     },
+     "regionIoU": 0.1151,
+     "significantComponents": 1
+    },
+    "SCV-OUTLINE": {
+     "areaRatio": 0.1397,
+     "bodyCoverage": {},
+     "boundaryIoU": 0.2232,
+     "boundaryPrecision": 0.4058,
+     "boundaryRecall": 0.3333,
+     "buildingCoverage": 0.1387,
+     "components": 3,
+     "failureTypes": [
+      "INTERNAL_ROOM_SELECTED"
+     ],
+     "openingLeakage": 0.0,
+     "openingRecall": 0.3208,
+     "outsideArea": 0.0,
+     "overreach": {
+      "PERGOLA": 0.0,
+      "PLANTING": 0.0,
+      "PORCH": 0.0048,
+      "TERRACE": 0.0
+     },
+     "regionIoU": 0.1385,
+     "significantComponents": 2
+    },
+    "TRIVIAL-BOX": {
+     "areaRatio": 1.112,
+     "bodyCoverage": {},
+     "boundaryIoU": 0.0,
+     "boundaryPrecision": 0.0,
+     "boundaryRecall": 0.0,
+     "buildingCoverage": 1.0,
+     "components": 1,
+     "failureTypes": [
+      "IMPRECISE"
+     ],
+     "openingLeakage": 0.0068,
+     "openingRecall": 0.0,
+     "outsideArea": 0.0188,
+     "overreach": {
+      "PERGOLA": 0.0373,
+      "PLANTING": 0.1039,
+      "PORCH": 0.1176,
+      "TERRACE": 0.0582
+     },
+     "regionIoU": 0.8993,
+     "significantComponents": 1
+    },
+    "TRIVIAL-EXTENT": {
+     "areaRatio": 1.0082,
+     "bodyCoverage": {},
+     "boundaryIoU": 0.8365,
+     "boundaryPrecision": 1.0,
+     "boundaryRecall": 1.0,
+     "buildingCoverage": 1.0,
+     "components": 1,
+     "failureTypes": [
+      "OK"
+     ],
+     "openingLeakage": 0.0,
+     "openingRecall": 1.0,
+     "outsideArea": 0.0,
+     "overreach": {
+      "PERGOLA": 0.0,
+      "PLANTING": 0.0001,
+      "PORCH": 0.0098,
+      "TERRACE": 0.0046
+     },
+     "regionIoU": 0.9919,
+     "significantComponents": 1
+    }
+   },
+   "scvUnion": {
+    "continuityAcrossOpenings": 1.0,
+    "exteriorWallCoverage": 1.0
+   },
+   "solidLengthM": 21.528,
+   "tolerancesPx": {
+    "tau": 5.25,
+    "tauB": 10.5
+   },
+   "truth": {
+    "bodies": [
+     "MAIN"
+    ],
+    "documentedFailure": "005C \u00a7Z: first bad decision in the metric layer; the long-band box held the service rooms only, the outline continued across the glazed living-room side and stopped at the pergola terrace",
+    "exclusions": [
+     "PERGOLA",
+     "PLANTING",
+     "PORCH",
+     "TERRACE"
+    ],
+    "file": "research/analyzer-005i-boundary-bakeoff/truth/real/dom-w-azaliach.json",
+    "openingRuns": 7,
+    "purpose": "DEV_BOUNDARY",
+    "sha256": "5db8d11574b8a9aa27d8560858a4a6b271da942ee8f1922c47138b53ac1239b0",
+    "vertices": 4
+   },
+   "wallPxTruth": 21.0
+  },
+  "dom-w-helikoniach": {
+   "exteriorEdges": 8,
+   "frameId": "frame-asset-rzut-d5842da623-4c943a2b00",
+   "lines": {
+    "DEEPLSD-MD": {
+     "additionalDistractorLengthM": 0.184,
+     "additionalIds": [],
+     "additionalOpeningCoverageM": 0.0,
+     "additionalOpeningCoverageShare": 0.0,
+     "additionalSolidCoverageM": 0.0,
+     "additionalSolidCoverageShare": 0.0,
+     "angularErrorDeg": 0.283,
+     "boundaryDistractors": 23,
+     "boundaryDistractorsLengthM": 128.341,
+     "continuityAcrossOpenings": 0.9863,
+     "cornerEndpointErrorMedianPx": 4.85,
+     "cornersWithoutSegment": 0,
+     "count": 548,
+     "duplicateRate": 0.147,
+     "exclusionOutlineAddedOverScvM": 0.0,
+     "exclusionOutlineLinesM": 60.389,
+     "exteriorWallCoverage": 0.7928,
+     "fragmentationSegmentsPerMetre": 2.02,
+     "longWallRecovery": 0.6226,
+     "unsupportedLineRate": 0.0555
+    },
+    "DEEPLSD-MD-REFINE-SCV": {
+     "additionalDistractorLengthM": 0.0,
+     "additionalIds": [],
+     "additionalOpeningCoverageM": 0.0,
+     "additionalOpeningCoverageShare": 0.0,
+     "additionalSolidCoverageM": 0.0,
+     "additionalSolidCoverageShare": 0.0,
+     "angularErrorDeg": 0.196,
+     "boundaryDistractors": 33,
+     "boundaryDistractorsLengthM": 210.477,
+     "continuityAcrossOpenings": 1.0,
+     "cornerEndpointErrorMedianPx": 0.3,
+     "cornersWithoutSegment": 0,
+     "count": 922,
+     "duplicateRate": 0.813,
+     "exclusionOutlineAddedOverScvM": 0.0,
+     "exclusionOutlineLinesM": 94.323,
+     "exteriorWallCoverage": 1.0,
+     "fragmentationSegmentsPerMetre": 2.48,
+     "longWallRecovery": 0.4167,
+     "unsupportedLineRate": 0.0337
+    },
+    "DEEPLSD-WF": {
+     "additionalDistractorLengthM": 4.715,
+     "additionalIds": [],
+     "additionalOpeningCoverageM": 0.0,
+     "additionalOpeningCoverageShare": 0.0,
+     "additionalSolidCoverageM": 0.0,
+     "additionalSolidCoverageShare": 0.0,
+     "angularErrorDeg": 0.244,
+     "boundaryDistractors": 26,
+     "boundaryDistractorsLengthM": 135.265,
+     "continuityAcrossOpenings": 0.9786,
+     "cornerEndpointErrorMedianPx": 2.85,
+     "cornersWithoutSegment": 0,
+     "count": 534,
+     "duplicateRate": 0.155,
+     "exclusionOutlineAddedOverScvM": 0.0,
+     "exclusionOutlineLinesM": 55.536,
+     "exteriorWallCoverage": 0.9681,
+     "fragmentationSegmentsPerMetre": 1.693,
+     "longWallRecovery": 0.7561,
+     "unsupportedLineRate": 0.0494
+    },
+    "ELSED-DEFAULT": {
+     "additionalDistractorLengthM": 0.0,
+     "additionalIds": [],
+     "additionalOpeningCoverageM": 0.0,
+     "additionalOpeningCoverageShare": 0.0,
+     "additionalSolidCoverageM": 0.0,
+     "additionalSolidCoverageShare": 0.0,
+     "angularErrorDeg": 0.176,
+     "boundaryDistractors": 18,
+     "boundaryDistractorsLengthM": 100.809,
+     "continuityAcrossOpenings": 0.9771,
+     "cornerEndpointErrorMedianPx": 1.7,
+     "cornersWithoutSegment": 0,
+     "count": 395,
+     "duplicateRate": 0.083,
+     "exclusionOutlineAddedOverScvM": 0.0,
+     "exclusionOutlineLinesM": 42.573,
+     "exteriorWallCoverage": 0.9894,
+     "fragmentationSegmentsPerMetre": 1.129,
+     "longWallRecovery": 0.4108,
+     "unsupportedLineRate": 0.0557
+    },
+    "SCV-LINES": {
+     "angularErrorDeg": 0.174,
+     "boundaryDistractors": 31,
+     "boundaryDistractorsLengthM": 202.446,
+     "continuityAcrossOpenings": 1.0,
+     "cornerEndpointErrorMedianPx": 0.3,
+     "cornersWithoutSegment": 0,
+     "count": 922,
+     "duplicateRate": 0.588,
+     "exclusionOutlineLinesM": 87.193,
+     "exteriorWallCoverage": 1.0,
+     "fragmentationSegmentsPerMetre": 2.248,
+     "longWallRecovery": 0.4167,
+     "unsupportedLineRate": 0.0304
+    }
+   },
+   "metresPerPx": 0.023,
+   "openingLengthM": 15.065,
+   "regions": {
+    "MSAM-AUTO": {
+     "areaRatio": 0.0493,
+     "autoMasks": 32,
+     "bodyCoverage": {},
+     "boundaryIoU": 0.0281,
+     "boundaryPrecision": 0.6396,
+     "boundaryRecall": 0.1418,
+     "buildingCoverage": 0.0035,
+     "components": 1,
+     "failureTypes": [
+      "RECESS_FILLED",
+      "PORCH_INCLUDED"
+     ],
+     "openingLeakage": 0.0137,
+     "openingRecall": 0.0995,
+     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.0399,
+     "outsideArea": 0.032,
+     "overreach": {
+      "PERGOLA": 0.0,
+      "PORCH": 0.9889,
+      "RECESS": 0.9991,
+      "TERRACE": 0.0
+     },
+     "predictedIoU": 0.951,
+     "regionIoU": 0.0033,
+     "significantComponents": 1
+    },
+    "MSAM-BOX": {
+     "areaRatio": 1.0063,
+     "bodyCoverage": {},
+     "boundaryIoU": 0.3854,
+     "boundaryPrecision": 0.7106,
+     "boundaryRecall": 0.8033,
+     "buildingCoverage": 0.9624,
+     "components": 2,
+     "failureTypes": [
+      "RECESS_FILLED",
+      "PORCH_INCLUDED"
+     ],
+     "openingLeakage": 0.0131,
+     "openingRecall": 0.6003,
+     "outsideArea": 0.0304,
+     "overreach": {
+      "PERGOLA": 0.0,
+      "PORCH": 0.9371,
+      "RECESS": 0.9631,
+      "TERRACE": 0.0002
+     },
+     "predictedIoU": 0.981,
+     "promptSensitivity": {
+      "minIoUWithBase": 0.9967,
+      "regionIoURange": [
+       0.9192,
+       0.9223
+      ],
+      "variantIoUWithBase": {
+       "x0-in": 0.9987,
+       "x0-out": 0.9983,
+       "x1-in": 0.9973,
+       "x1-out": 0.9967,
+       "y0-in": 0.9968,
+       "y0-out": 0.9979,
+       "y1-in": 0.9976,
+       "y1-out": 0.9972
+      }
+     },
+     "regionIoU": 0.922,
+     "significantComponents": 1
+    },
+    "MSAM-SOURCE-PROMPTS": {
+     "areaRatio": 0.6294,
+     "bodyCoverage": {},
+     "boundaryIoU": 0.1752,
+     "boundaryPrecision": 0.2218,
+     "boundaryRecall": 0.6471,
+     "buildingCoverage": 0.585,
+     "components": 69,
+     "failureTypes": [
+      "RECESS_FILLED",
+      "PORCH_INCLUDED",
+      "FRAGMENTED"
+     ],
+     "openingLeakage": 0.0182,
+     "openingRecall": 0.4655,
+     "outsideArea": 0.0341,
+     "overreach": {
+      "PERGOLA": 0.023,
+      "PORCH": 0.6633,
+      "RECESS": 0.8398,
+      "TERRACE": 0.0163
+     },
+     "predictedIoU": 0.934,
+     "promptSensitivity": {
+      "minIoUWithBase": 0.6155,
+      "regionIoURange": [
+       0.4839,
+       0.8481
+      ],
+      "variantIoUWithBase": {
+       "down": 0.8879,
+       "left": 0.8575,
+       "right": 0.9454,
+       "up": 0.6155
+      }
+     },
+     "regionIoU": 0.5601,
+     "significantComponents": 4
+    },
+    "PROD-MASSES-005H": {
+     "areaRatio": 0.8295,
+     "bodyCoverage": {},
+     "boundaryIoU": 0.0749,
+     "boundaryPrecision": 0.4249,
+     "boundaryRecall": 0.3651,
+     "buildingCoverage": 0.8295,
+     "components": 1,
+     "failureTypes": [
+      "IMPRECISE"
+     ],
+     "openingLeakage": 0.0,
+     "openingRecall": 0.34,
+     "outsideArea": 0.0,
+     "overreach": {
+      "PERGOLA": 0.0,
+      "PORCH": 0.0,
+      "RECESS": 0.0,
+      "TERRACE": 0.0
+     },
+     "regionIoU": 0.8295,
+     "significantComponents": 1
+    },
+    "SCV-BUILT": {
+     "areaRatio": 0.9065,
+     "bodyCoverage": {},
+     "boundaryIoU": 0.1009,
+     "boundaryPrecision": 0.5055,
+     "boundaryRecall": 0.5011,
+     "buildingCoverage": 0.8717,
+     "components": 1,
+     "failureTypes": [
+      "RECESS_FILLED"
+     ],
+     "openingLeakage": 0.0102,
+     "openingRecall": 0.3828,
+     "outsideArea": 0.02,
+     "overreach": {
+      "PERGOLA": 0.0,
+      "PORCH": 0.0,
+      "RECESS": 0.9175,
+      "TERRACE": 0.0
+     },
+     "regionIoU": 0.8423,
+     "significantComponents": 1
+    },
+    "SCV-OUTLINE": {
+     "areaRatio": 0.9467,
+     "bodyCoverage": {},
+     "boundaryIoU": 0.1582,
+     "boundaryPrecision": 0.6749,
+     "boundaryRecall": 0.686,
+     "buildingCoverage": 0.9039,
+     "components": 1,
+     "failureTypes": [
+      "RECESS_FILLED"
+     ],
+     "openingLeakage": 0.0102,
+     "openingRecall": 0.4364,
+     "outsideArea": 0.02,
+     "overreach": {
+      "PERGOLA": 0.0,
+      "PORCH": 0.0,
+      "RECESS": 0.9762,
+      "TERRACE": 0.0
+     },
+     "regionIoU": 0.8667,
+     "significantComponents": 1
+    },
+    "TRIVIAL-BOX": {
+     "areaRatio": 1.1811,
+     "bodyCoverage": {},
+     "boundaryIoU": 0.0,
+     "boundaryPrecision": 0.0,
+     "boundaryRecall": 0.0,
+     "buildingCoverage": 1.0,
+     "components": 1,
+     "failureTypes": [
+      "RECESS_FILLED",
+      "PORCH_INCLUDED",
+      "LEAK_THROUGH_OPENING"
+     ],
+     "openingLeakage": 0.0294,
+     "openingRecall": 0.0,
+     "outsideArea": 0.0727,
+     "overreach": {
+      "PERGOLA": 0.1032,
+      "PORCH": 0.8735,
+      "RECESS": 1.0,
+      "TERRACE": 0.0972
+     },
+     "regionIoU": 0.8467,
+     "significantComponents": 1
+    },
+    "TRIVIAL-EXTENT": {
+     "areaRatio": 1.0334,
+     "bodyCoverage": {},
+     "boundaryIoU": 0.5032,
+     "boundaryPrecision": 0.9369,
+     "boundaryRecall": 0.8961,
+     "buildingCoverage": 0.9889,
+     "components": 1,
+     "failureTypes": [
+      "RECESS_FILLED"
+     ],
+     "openingLeakage": 0.0102,
+     "openingRecall": 0.9005,
+     "outsideArea": 0.02,
+     "overreach": {
+      "PERGOLA": 0.0,
+      "PORCH": 0.0,
+      "RECESS": 0.9762,
+      "TERRACE": 0.0
+     },
+     "regionIoU": 0.9468,
+     "significantComponents": 1
+    }
+   },
+   "scvUnion": {
+    "continuityAcrossOpenings": 1.0,
+    "exteriorWallCoverage": 1.0
+   },
+   "solidLengthM": 28.083,
+   "tolerancesPx": {
+    "tau": 4.88,
+    "tauB": 9.75
+   },
+   "truth": {
+    "bodies": [
+     "MAIN"
+    ],
+    "documentedFailure": "005F \u00a7AB: the outline ends at the inner face of the mostly glazed west wall and at y 710, before the lower end of the west room and the recessed entrance",
+    "exclusions": [
+     "PERGOLA",
+     "PORCH",
+     "RECESS",
+     "TERRACE",
+     "TERRACE"
+    ],
+    "file": "research/analyzer-005i-boundary-bakeoff/truth/real/dom-w-helikoniach.json",
+    "openingRuns": 7,
+    "purpose": "DEV_BOUNDARY",
+    "sha256": "3c722b10c7c0e05cd08700a64c4546560fc77e2a9c0bf492c181d748e618b5db",
+    "vertices": 8
+   },
+   "wallPxTruth": 19.5
+  },
+  "dom-w-morelach": {
+   "exteriorEdges": 12,
+   "frameId": "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+   "lines": {
+    "DEEPLSD-MD": {
+     "additionalDistractorLengthM": 0.1,
+     "additionalIds": [],
+     "additionalOpeningCoverageM": 0.02,
+     "additionalOpeningCoverageShare": 0.0011,
+     "additionalSolidCoverageM": 0.0,
+     "additionalSolidCoverageShare": 0.0,
+     "angularErrorDeg": 0.38,
+     "boundaryDistractors": 40,
+     "boundaryDistractorsLengthM": 145.057,
+     "continuityAcrossOpenings": 0.9621,
+     "cornerEndpointErrorMedianPx": 0.78,
+     "cornersWithoutSegment": 0,
+     "count": 773,
+     "duplicateRate": 0.08,
+     "exclusionOutlineAddedOverScvM": 0.1,
+     "exclusionOutlineLinesM": 28.949,
+     "exteriorWallCoverage": 0.79,
+     "fragmentationSegmentsPerMetre": 2.567,
+     "longWallRecovery": 0.2506,
+     "unsupportedLineRate": 0.0708
+    },
+    "DEEPLSD-MD-REFINE-SCV": {
+     "additionalDistractorLengthM": 0.0,
+     "additionalIds": [],
+     "additionalOpeningCoverageM": 0.0,
+     "additionalOpeningCoverageShare": 0.0,
+     "additionalSolidCoverageM": 0.0,
+     "additionalSolidCoverageShare": 0.0,
+     "angularErrorDeg": 0.207,
+     "boundaryDistractors": 41,
+     "boundaryDistractorsLengthM": 192.158,
+     "continuityAcrossOpenings": 0.9888,
+     "cornerEndpointErrorMedianPx": 1.0,
+     "cornersWithoutSegment": 0,
+     "count": 1195,
+     "duplicateRate": 0.528,
+     "exclusionOutlineAddedOverScvM": 0.0,
+     "exclusionOutlineLinesM": 36.672,
+     "exteriorWallCoverage": 0.9949,
+     "fragmentationSegmentsPerMetre": 2.728,
+     "longWallRecovery": 0.4693,
+     "unsupportedLineRate": 0.0513
+    },
+    "DEEPLSD-WF": {
+     "additionalDistractorLengthM": 0.04,
+     "additionalIds": [],
+     "additionalOpeningCoverageM": 0.0,
+     "additionalOpeningCoverageShare": 0.0,
+     "additionalSolidCoverageM": 0.0,
+     "additionalSolidCoverageShare": 0.0,
+     "angularErrorDeg": 0.43,
+     "boundaryDistractors": 39,
+     "boundaryDistractorsLengthM": 144.299,
+     "continuityAcrossOpenings": 0.9621,
+     "cornerEndpointErrorMedianPx": 0.47,
+     "cornersWithoutSegment": 0,
+     "count": 782,
+     "duplicateRate": 0.094,
+     "exclusionOutlineAddedOverScvM": 0.04,
+     "exclusionOutlineLinesM": 28.888,
+     "exteriorWallCoverage": 0.916,
+     "fragmentationSegmentsPerMetre": 2.262,
+     "longWallRecovery": 0.3366,
+     "unsupportedLineRate": 0.0719
+    },
+    "ELSED-DEFAULT": {
+     "additionalDistractorLengthM": 0.0,
+     "additionalIds": [],
+     "additionalOpeningCoverageM": 0.0,
+     "additionalOpeningCoverageShare": 0.0,
+     "additionalSolidCoverageM": 0.0,
+     "additionalSolidCoverageShare": 0.0,
+     "angularErrorDeg": 0.209,
+     "boundaryDistractors": 26,
+     "boundaryDistractorsLengthM": 109.865,
+     "continuityAcrossOpenings": 0.8839,
+     "cornerEndpointErrorMedianPx": 0.01,
+     "cornersWithoutSegment": 0,
+     "count": 651,
+     "duplicateRate": 0.117,
+     "exclusionOutlineAddedOverScvM": 0.02,
+     "exclusionOutlineLinesM": 28.788,
+     "exteriorWallCoverage": 0.9855,
+     "fragmentationSegmentsPerMetre": 1.793,
+     "longWallRecovery": 0.333,
+     "unsupportedLineRate": 0.0614
+    },
+    "SCV-LINES": {
+     "angularErrorDeg": 0.111,
+     "boundaryDistractors": 41,
+     "boundaryDistractorsLengthM": 192.158,
+     "continuityAcrossOpenings": 0.9888,
+     "cornerEndpointErrorMedianPx": 1.0,
+     "cornersWithoutSegment": 0,
+     "count": 1195,
+     "duplicateRate": 0.523,
+     "exclusionOutlineLinesM": 54.065,
+     "exteriorWallCoverage": 0.9949,
+     "fragmentationSegmentsPerMetre": 2.839,
+     "longWallRecovery": 0.4693,
+     "unsupportedLineRate": 0.0452
+    }
+   },
+   "metresPerPx": 0.01995,
+   "openingLengthM": 17.875,
+   "regions": {
+    "MSAM-AUTO": {
+     "areaRatio": 0.0595,
+     "autoMasks": 55,
+     "bodyCoverage": {
+      "BAY": 0.0,
+      "GARAGE": 0.207
+     },
+     "boundaryIoU": 0.0,
+     "boundaryPrecision": 0.0,
+     "boundaryRecall": 0.0,
+     "buildingCoverage": 0.0595,
+     "components": 1,
+     "failureTypes": [
+      "INTERNAL_ROOM_SELECTED",
+      "GARAGE_EXCLUDED",
+      "BAY_DROPPED"
+     ],
+     "openingLeakage": 0.0,
+     "openingRecall": 0.0,
+     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.0595,
+     "outsideArea": 0.0,
+     "overreach": {
+      "PAVING": 0.0,
+      "PORCH": 0.0,
+      "TERRACE": 0.0
+     },
+     "predictedIoU": 0.968,
+     "regionIoU": 0.0595,
+     "significantComponents": 1
+    },
+    "MSAM-BOX": {
+     "areaRatio": 1.0149,
+     "bodyCoverage": {
+      "BAY": 0.9947,
+      "GARAGE": 0.9633
+     },
+     "boundaryIoU": 0.3787,
+     "boundaryPrecision": 0.5551,
+     "boundaryRecall": 0.8636,
+     "buildingCoverage": 0.9762,
+     "components": 32,
+     "failureTypes": [
+      "OK"
+     ],
+     "openingLeakage": 0.0152,
+     "openingRecall": 0.6933,
+     "outsideArea": 0.0229,
+     "overreach": {
+      "PAVING": 0.9131,
+      "PORCH": 0.1686,
+      "TERRACE": 0.0394
+     },
+     "predictedIoU": 0.993,
+     "promptSensitivity": {
+      "minIoUWithBase": 0.9888,
+      "regionIoURange": [
+       0.932,
+       0.9429
+      ],
+      "variantIoUWithBase": {
+       "x0-in": 0.9953,
+       "x0-out": 0.9935,
+       "x1-in": 0.9953,
+       "x1-out": 0.9909,
+       "y0-in": 0.9899,
+       "y0-out": 0.9926,
+       "y1-in": 0.991,
+       "y1-out": 0.9888
+      }
+     },
+     "regionIoU": 0.9398,
+     "significantComponents": 1
+    },
+    "MSAM-SOURCE-PROMPTS": {
+     "areaRatio": 1.0761,
+     "bodyCoverage": {
+      "BAY": 0.9981,
+      "GARAGE": 0.9614
+     },
+     "boundaryIoU": 0.2496,
+     "boundaryPrecision": 0.3154,
+     "boundaryRecall": 0.8035,
+     "buildingCoverage": 0.9592,
+     "components": 53,
+     "failureTypes": [
+      "PORCH_INCLUDED",
+      "LEAK_THROUGH_OPENING"
+     ],
+     "openingLeakage": 0.0717,
+     "openingRecall": 0.5921,
+     "outsideArea": 0.0962,
+     "overreach": {
+      "PAVING": 0.9299,
+      "PORCH": 0.7541,
+      "TERRACE": 0.0712
+     },
+     "predictedIoU": 0.963,
+     "promptSensitivity": {
+      "minIoUWithBase": 0.9413,
+      "regionIoURange": [
+       0.8394,
+       0.8633
+      ],
+      "variantIoUWithBase": {
+       "down": 0.9593,
+       "left": 0.9838,
+       "right": 0.9413,
+       "up": 0.9848
+      }
+     },
+     "regionIoU": 0.8589,
+     "significantComponents": 2
+    },
+    "PROD-MASSES-005H": {
+     "areaRatio": 0.9715,
+     "bodyCoverage": {
+      "BAY": 1.0,
+      "GARAGE": 0.9487
+     },
+     "boundaryIoU": 0.4788,
+     "boundaryPrecision": 0.9205,
+     "boundaryRecall": 0.9206,
+     "buildingCoverage": 0.9703,
+     "components": 1,
+     "failureTypes": [
+      "OK"
+     ],
+     "openingLeakage": 0.0,
+     "openingRecall": 0.8652,
+     "outsideArea": 0.0,
+     "overreach": {
+      "PAVING": 0.0,
+      "PORCH": 0.0,
+      "TERRACE": 0.0
+     },
+     "regionIoU": 0.9691,
+     "significantComponents": 1
+    },
+    "SCV-BUILT": {
+     "areaRatio": 0.9647,
+     "bodyCoverage": {
+      "BAY": 0.7975,
+      "GARAGE": 0.9487
+     },
+     "boundaryIoU": 0.4427,
+     "boundaryPrecision": 0.8779,
+     "boundaryRecall": 0.8947,
+     "buildingCoverage": 0.9641,
+     "components": 1,
+     "failureTypes": [
+      "OK"
+     ],
+     "openingLeakage": 0.0,
+     "openingRecall": 0.8,
+     "outsideArea": 0.0,
+     "overreach": {
+      "PAVING": 0.0,
+      "PORCH": 0.0,
+      "TERRACE": 0.0
+     },
+     "regionIoU": 0.9634,
+     "significantComponents": 1
+    },
+    "SCV-OUTLINE": {
+     "areaRatio": 0.35,
+     "bodyCoverage": {
+      "BAY": 0.7975,
+      "GARAGE": 0.9487
+     },
+     "boundaryIoU": 0.2837,
+     "boundaryPrecision": 0.5617,
+     "boundaryRecall": 0.6263,
+     "buildingCoverage": 0.3493,
+     "components": 3,
+     "failureTypes": [
+      "INTERNAL_ROOM_SELECTED"
+     ],
+     "openingLeakage": 0.0,
+     "openingRecall": 0.3056,
+     "outsideArea": 0.0,
+     "overreach": {
+      "PAVING": 0.0,
+      "PORCH": 0.0,
+      "TERRACE": 0.0
+     },
+     "regionIoU": 0.3491,
+     "significantComponents": 2
+    },
+    "TRIVIAL-BOX": {
+     "areaRatio": 1.2696,
+     "bodyCoverage": {
+      "BAY": 1.0,
+      "GARAGE": 1.0
+     },
+     "boundaryIoU": 0.0,
+     "boundaryPrecision": 0.0,
+     "boundaryRecall": 0.0,
+     "buildingCoverage": 1.0,
+     "components": 1,
+     "failureTypes": [
+      "LEAK_THROUGH_OPENING"
+     ],
+     "openingLeakage": 0.0944,
+     "openingRecall": 0.0,
+     "outsideArea": 0.1812,
+     "overreach": {
+      "PAVING": 1.0,
+      "PORCH": 0.1455,
+      "TERRACE": 0.2041
+     },
+     "regionIoU": 0.7876,
+     "significantComponents": 1
+    },
+    "TRIVIAL-EXTENT": {
+     "areaRatio": 1.1302,
+     "bodyCoverage": {
+      "BAY": 1.0,
+      "GARAGE": 1.0
+     },
+     "boundaryIoU": 0.372,
+     "boundaryPrecision": 0.6247,
+     "boundaryRecall": 0.6259,
+     "buildingCoverage": 0.9962,
+     "components": 1,
+     "failureTypes": [
+      "LEAK_THROUGH_OPENING"
+     ],
+     "openingLeakage": 0.055,
+     "openingRecall": 0.6281,
+     "outsideArea": 0.0983,
+     "overreach": {
+      "PAVING": 1.0,
+      "PORCH": 0.0,
+      "TERRACE": 0.0302
+     },
+     "regionIoU": 0.8784,
+     "significantComponents": 1
+    }
+   },
+   "scvUnion": {
+    "continuityAcrossOpenings": 0.9888,
+    "exteriorWallCoverage": 1.0
+   },
+   "solidLengthM": 27.551,
+   "tolerancesPx": {
+    "tau": 5.5,
+    "tauB": 11.0
+   },
+   "truth": {
+    "bodies": [
+     "BAY",
+     "GARAGE",
+     "MAIN"
+    ],
+    "documentedFailure": "005E \u00a7AB / 005F \u00a7D: the long-band box stops short of the chain extent, so the east bay is not built and the garage end stops short",
+    "exclusions": [
+     "PAVING",
+     "PORCH",
+     "TERRACE",
+     "TERRACE"
+    ],
+    "file": "research/analyzer-005i-boundary-bakeoff/truth/real/dom-w-morelach.json",
+    "openingRuns": 11,
+    "purpose": "DEV_BOUNDARY",
+    "sha256": "4799a7ab7ca3e40d532d8a5c4df31a7f85c81f4082c14aea0d831b4075768b18",
+    "vertices": 12
+   },
+   "wallPxTruth": 22.0
+  },
+  "dom-w-zurawkach": {
+   "exteriorEdges": 6,
+   "frameId": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+   "lines": {
+    "DEEPLSD-MD": {
+     "additionalDistractorLengthM": 0.0,
+     "additionalIds": [
+      "deeplsd-deeplsd-md-35"
+     ],
+     "additionalOpeningCoverageM": 0.221,
+     "additionalOpeningCoverageShare": 0.0149,
+     "additionalSolidCoverageM": 0.0,
+     "additionalSolidCoverageShare": 0.0,
+     "angularErrorDeg": 0.324,
+     "boundaryDistractors": 8,
+     "boundaryDistractorsLengthM": 27.287,
+     "continuityAcrossOpenings": 0.9762,
+     "cornerEndpointErrorMedianPx": 1.0,
+     "cornersWithoutSegment": 0,
+     "count": 647,
+     "duplicateRate": 0.197,
+     "exclusionOutlineAddedOverScvM": 4.647,
+     "exclusionOutlineLinesM": 19.187,
+     "exteriorWallCoverage": 0.9353,
+     "fragmentationSegmentsPerMetre": 1.756,
+     "longWallRecovery": 0.5982,
+     "unsupportedLineRate": 0.0157
+    },
+    "DEEPLSD-MD-REFINE-SCV": {
+     "additionalDistractorLengthM": 5.068,
+     "additionalIds": [
+      "deeplsd-deeplsd-md-refine-scv-365"
+     ],
+     "additionalOpeningCoverageM": 0.31,
+     "additionalOpeningCoverageShare": 0.0208,
+     "additionalSolidCoverageM": 0.0,
+     "additionalSolidCoverageShare": 0.0,
+     "angularErrorDeg": 0.141,
+     "boundaryDistractors": 6,
+     "boundaryDistractorsLengthM": 28.171,
+     "continuityAcrossOpenings": 1.0,
+     "cornerEndpointErrorMedianPx": 1.0,
+     "cornersWithoutSegment": 0,
+     "count": 834,
+     "duplicateRate": 0.595,
+     "exclusionOutlineAddedOverScvM": 0.0,
+     "exclusionOutlineLinesM": 15.072,
+     "exteriorWallCoverage": 0.9984,
+     "fragmentationSegmentsPerMetre": 1.857,
+     "longWallRecovery": 0.7758,
+     "unsupportedLineRate": 0.0121
+    },
+    "DEEPLSD-WF": {
+     "additionalDistractorLengthM": 0.0,
+     "additionalIds": [
+      "deeplsd-deeplsd-wf-38"
+     ],
+     "additionalOpeningCoverageM": 0.221,
+     "additionalOpeningCoverageShare": 0.0149,
+     "additionalSolidCoverageM": 0.0,
+     "additionalSolidCoverageShare": 0.0,
+     "angularErrorDeg": 0.223,
+     "boundaryDistractors": 8,
+     "boundaryDistractorsLengthM": 27.332,
+     "continuityAcrossOpenings": 0.9717,
+     "cornerEndpointErrorMedianPx": 0.26,
+     "cornersWithoutSegment": 0,
+     "count": 615,
+     "duplicateRate": 0.125,
+     "exclusionOutlineAddedOverScvM": 0.0,
+     "exclusionOutlineLinesM": 17.571,
+     "exteriorWallCoverage": 0.738,
+     "fragmentationSegmentsPerMetre": 1.834,
+     "longWallRecovery": 0.5679,
+     "unsupportedLineRate": 0.0149
+    },
+    "ELSED-DEFAULT": {
+     "additionalDistractorLengthM": 0.0,
+     "additionalIds": [
+      "elsed-elsed-default-203"
+     ],
+     "additionalOpeningCoverageM": 0.199,
+     "additionalOpeningCoverageShare": 0.0134,
+     "additionalSolidCoverageM": 0.0,
+     "additionalSolidCoverageShare": 0.0,
+     "angularErrorDeg": 0.198,
+     "boundaryDistractors": 7,
+     "boundaryDistractorsLengthM": 28.415,
+     "continuityAcrossOpenings": 0.9211,
+     "cornerEndpointErrorMedianPx": 0.25,
+     "cornersWithoutSegment": 0,
+     "count": 545,
+     "duplicateRate": 0.143,
+     "exclusionOutlineAddedOverScvM": 0.0,
+     "exclusionOutlineLinesM": 14.628,
+     "exteriorWallCoverage": 0.9952,
+     "fragmentationSegmentsPerMetre": 1.357,
+     "longWallRecovery": 0.6888,
+     "unsupportedLineRate": 0.0092
+    },
+    "SCV-LINES": {
+     "angularErrorDeg": 0.102,
+     "boundaryDistractors": 8,
+     "boundaryDistractorsLengthM": 42.976,
+     "continuityAcrossOpenings": 0.9583,
+     "cornerEndpointErrorMedianPx": 1.0,
+     "cornersWithoutSegment": 0,
+     "count": 834,
+     "duplicateRate": 0.481,
+     "exclusionOutlineLinesM": 21.798,
+     "exteriorWallCoverage": 0.9984,
+     "fragmentationSegmentsPerMetre": 1.885,
+     "longWallRecovery": 0.7758,
+     "unsupportedLineRate": 0.012
+    }
+   },
+   "metresPerPx": 0.02213,
+   "openingLengthM": 14.871,
+   "regions": {
+    "MSAM-AUTO": {
+     "areaRatio": 0.0748,
+     "autoMasks": 33,
+     "bodyCoverage": {
+      "GARAGE": 0.1828
+     },
+     "boundaryIoU": 0.0,
+     "boundaryPrecision": 0.0,
+     "boundaryRecall": 0.0,
+     "buildingCoverage": 0.0748,
+     "components": 1,
+     "failureTypes": [
+      "INTERNAL_ROOM_SELECTED",
+      "GARAGE_EXCLUDED"
+     ],
+     "openingLeakage": 0.0,
+     "openingRecall": 0.0,
+     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.0748,
+     "outsideArea": 0.0,
+     "overreach": {
+      "PAVING": 0.0,
+      "PORCH": 0.0,
+      "TERRACE": 0.0
+     },
+     "predictedIoU": 0.994,
+     "regionIoU": 0.0748,
+     "significantComponents": 1
+    },
+    "MSAM-BOX": {
+     "areaRatio": 0.9801,
+     "bodyCoverage": {
+      "GARAGE": 0.9567
+     },
+     "boundaryIoU": 0.5849,
+     "boundaryPrecision": 0.8781,
+     "boundaryRecall": 0.9595,
+     "buildingCoverage": 0.9741,
+     "components": 7,
+     "failureTypes": [
+      "OK"
+     ],
+     "openingLeakage": 0.0028,
+     "openingRecall": 0.8851,
+     "outsideArea": 0.0028,
+     "overreach": {
+      "PAVING": 0.0006,
+      "PORCH": 0.0363,
+      "TERRACE": 0.0001
+     },
+     "predictedIoU": 0.984,
+     "promptSensitivity": {
+      "minIoUWithBase": 0.9487,
+      "regionIoURange": [
+       0.9431,
+       0.9689
+      ],
+      "variantIoUWithBase": {
+       "x0-in": 0.9988,
+       "x0-out": 0.9985,
+       "x1-in": 0.9982,
+       "x1-out": 0.9975,
+       "y0-in": 0.9986,
+       "y0-out": 0.9962,
+       "y1-in": 0.9969,
+       "y1-out": 0.9487
+      }
+     },
+     "regionIoU": 0.9684,
+     "significantComponents": 1
+    },
+    "MSAM-SOURCE-PROMPTS": {
+     "areaRatio": 1.2666,
+     "bodyCoverage": {
+      "GARAGE": 0.985
+     },
+     "boundaryIoU": 0.2541,
+     "boundaryPrecision": 0.2795,
+     "boundaryRecall": 0.7994,
+     "buildingCoverage": 0.9931,
+     "components": 111,
+     "failureTypes": [
+      "PORCH_INCLUDED",
+      "LEAK_THROUGH_OPENING"
+     ],
+     "openingLeakage": 0.0803,
+     "openingRecall": 0.7657,
+     "outsideArea": 0.2353,
+     "overreach": {
+      "PAVING": 0.5854,
+      "PORCH": 0.5626,
+      "TERRACE": 0.13
+     },
+     "predictedIoU": 0.973,
+     "promptSensitivity": {
+      "minIoUWithBase": 0.9024,
+      "regionIoURange": [
+       0.7057,
+       0.8056
+      ],
+      "variantIoUWithBase": {
+       "down": 0.9206,
+       "left": 0.9024,
+       "right": 0.9464,
+       "up": 0.9828
+      }
+     },
+     "regionIoU": 0.7798,
+     "significantComponents": 1
+    },
+    "PROD-MASSES-005H": {
+     "areaRatio": 0.9978,
+     "bodyCoverage": {
+      "GARAGE": 0.9882
+     },
+     "boundaryIoU": 0.8528,
+     "boundaryPrecision": 1.0,
+     "boundaryRecall": 1.0,
+     "buildingCoverage": 0.9952,
+     "components": 1,
+     "failureTypes": [
+      "OK"
+     ],
+     "openingLeakage": 0.0,
+     "openingRecall": 1.0,
+     "outsideArea": 0.0,
+     "overreach": {
+      "PAVING": 0.0,
+      "PORCH": 0.0,
+      "TERRACE": 0.0
+     },
+     "regionIoU": 0.9926,
+     "significantComponents": 1
+    },
+    "SCV-BUILT": {
+     "areaRatio": 0.9737,
+     "bodyCoverage": {
+      "GARAGE": 0.9297
+     },
+     "boundaryIoU": 0.6278,
+     "boundaryPrecision": 0.7983,
+     "boundaryRecall": 0.9246,
+     "buildingCoverage": 0.9712,
+     "components": 1,
+     "failureTypes": [
+      "OK"
+     ],
+     "openingLeakage": 0.0,
+     "openingRecall": 0.894,
+     "outsideArea": 0.0,
+     "overreach": {
+      "PAVING": 0.0,
+      "PORCH": 0.0,
+      "TERRACE": 0.0
+     },
+     "regionIoU": 0.9689,
+     "significantComponents": 1
+    },
+    "SCV-OUTLINE": {
+     "areaRatio": 0.8893,
+     "bodyCoverage": {
+      "GARAGE": 0.8253
+     },
+     "boundaryIoU": 0.4248,
+     "boundaryPrecision": 0.6096,
+     "boundaryRecall": 0.8617,
+     "buildingCoverage": 0.8801,
+     "components": 2,
+     "failureTypes": [
+      "IMPRECISE"
+     ],
+     "openingLeakage": 0.0,
+     "openingRecall": 0.6433,
+     "outsideArea": 0.0075,
+     "overreach": {
+      "PAVING": 0.0007,
+      "PORCH": 0.0678,
+      "TERRACE": 0.0
+     },
+     "regionIoU": 0.872,
+     "significantComponents": 2
+    },
+    "TRIVIAL-BOX": {
+     "areaRatio": 1.2618,
+     "bodyCoverage": {
+      "GARAGE": 1.0
+     },
+     "boundaryIoU": 0.0,
+     "boundaryPrecision": 0.0,
+     "boundaryRecall": 0.0,
+     "buildingCoverage": 1.0,
+     "components": 1,
+     "failureTypes": [
+      "PORCH_INCLUDED",
+      "LEAK_THROUGH_OPENING"
+     ],
+     "openingLeakage": 0.069,
+     "openingRecall": 0.0,
+     "outsideArea": 0.1672,
+     "overreach": {
+      "PAVING": 0.1023,
+      "PORCH": 1.0,
+      "TERRACE": 0.0894
+     },
+     "regionIoU": 0.7925,
+     "significantComponents": 1
+    },
+    "TRIVIAL-EXTENT": {
+     "areaRatio": 1.1264,
+     "bodyCoverage": {
+      "GARAGE": 1.0
+     },
+     "boundaryIoU": 0.4706,
+     "boundaryPrecision": 0.7993,
+     "boundaryRecall": 0.7983,
+     "buildingCoverage": 1.0,
+     "components": 1,
+     "failureTypes": [
+      "PORCH_INCLUDED",
+      "LEAK_THROUGH_OPENING"
+     ],
+     "openingLeakage": 0.0391,
+     "openingRecall": 0.7955,
+     "outsideArea": 0.093,
+     "overreach": {
+      "PAVING": 0.0034,
+      "PORCH": 1.0,
+      "TERRACE": 0.0156
+     },
+     "regionIoU": 0.8878,
+     "significantComponents": 1
+    }
+   },
+   "scvUnion": {
+    "continuityAcrossOpenings": 0.9792,
+    "exteriorWallCoverage": 0.9984
+   },
+   "solidLengthM": 27.707,
+   "tolerancesPx": {
+    "tau": 5.0,
+    "tauB": 10.0
+   },
+   "truth": {
+    "bodies": [
+     "GARAGE",
+     "MAIN"
+    ],
+    "documentedFailure": "005B \u00a7AE: the garage wing running 1.5 m forward is never proposed as a bay and floods; the outline fails on a side of openings",
+    "exclusions": [
+     "PAVING",
+     "PORCH",
+     "TERRACE"
+    ],
+    "file": "research/analyzer-005i-boundary-bakeoff/truth/real/dom-w-zurawkach.json",
+    "openingRuns": 10,
+    "purpose": "DEV_BOUNDARY",
+    "sha256": "7137d33b1f4798571a5f628e1da00f771adef75e80b24677f9ec1a85093419d4",
+    "vertices": 6
+   },
+   "wallPxTruth": 20.0
+  },
+  "willa-miranda": {
+   "exteriorEdges": 10,
+   "frameId": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+   "lines": {
+    "DEEPLSD-MD": {
+     "additionalDistractorLengthM": 23.468,
+     "additionalIds": [],
+     "additionalOpeningCoverageM": 0.0,
+     "additionalOpeningCoverageShare": 0.0,
+     "additionalSolidCoverageM": 0.0,
+     "additionalSolidCoverageShare": 0.0,
+     "angularErrorDeg": 0.343,
+     "boundaryDistractors": 24,
+     "boundaryDistractorsLengthM": 115.192,
+     "continuityAcrossOpenings": 0.9894,
+     "cornerEndpointErrorMedianPx": 0.76,
+     "cornersWithoutSegment": 0,
+     "count": 787,
+     "duplicateRate": 0.136,
+     "exclusionOutlineAddedOverScvM": 7.831,
+     "exclusionOutlineLinesM": 32.523,
+     "exteriorWallCoverage": 0.946,
+     "fragmentationSegmentsPerMetre": 1.446,
+     "longWallRecovery": 0.557,
+     "unsupportedLineRate": 0.0299
+    },
+    "DEEPLSD-MD-REFINE-SCV": {
+     "additionalDistractorLengthM": 11.372,
+     "additionalIds": [],
+     "additionalOpeningCoverageM": 0.0,
+     "additionalOpeningCoverageShare": 0.0,
+     "additionalSolidCoverageM": 0.0,
+     "additionalSolidCoverageShare": 0.0,
+     "angularErrorDeg": 0.138,
+     "boundaryDistractors": 14,
+     "boundaryDistractorsLengthM": 136.433,
+     "continuityAcrossOpenings": 0.9215,
+     "cornerEndpointErrorMedianPx": 1.5,
+     "cornersWithoutSegment": 0,
+     "count": 785,
+     "duplicateRate": 0.397,
+     "exclusionOutlineAddedOverScvM": 1.797,
+     "exclusionOutlineLinesM": 31.284,
+     "exteriorWallCoverage": 0.9871,
+     "fragmentationSegmentsPerMetre": 1.217,
+     "longWallRecovery": 0.6931,
+     "unsupportedLineRate": 0.0179
+    },
+    "DEEPLSD-WF": {
+     "additionalDistractorLengthM": 19.901,
+     "additionalIds": [],
+     "additionalOpeningCoverageM": 0.0,
+     "additionalOpeningCoverageShare": 0.0,
+     "additionalSolidCoverageM": 0.0,
+     "additionalSolidCoverageShare": 0.0,
+     "angularErrorDeg": 0.353,
+     "boundaryDistractors": 22,
+     "boundaryDistractorsLengthM": 101.353,
+     "continuityAcrossOpenings": 0.9812,
+     "cornerEndpointErrorMedianPx": 1.0,
+     "cornersWithoutSegment": 0,
+     "count": 783,
+     "duplicateRate": 0.188,
+     "exclusionOutlineAddedOverScvM": 7.858,
+     "exclusionOutlineLinesM": 34.284,
+     "exteriorWallCoverage": 0.9894,
+     "fragmentationSegmentsPerMetre": 1.395,
+     "longWallRecovery": 0.5152,
+     "unsupportedLineRate": 0.0276
+    },
+    "ELSED-DEFAULT": {
+     "additionalDistractorLengthM": 17.862,
+     "additionalIds": [],
+     "additionalOpeningCoverageM": 0.0,
+     "additionalOpeningCoverageShare": 0.0,
+     "additionalSolidCoverageM": 0.0,
+     "additionalSolidCoverageShare": 0.0,
+     "angularErrorDeg": 0.221,
+     "boundaryDistractors": 20,
+     "boundaryDistractorsLengthM": 96.981,
+     "continuityAcrossOpenings": 0.9848,
+     "cornerEndpointErrorMedianPx": 1.0,
+     "cornersWithoutSegment": 0,
+     "count": 692,
+     "duplicateRate": 0.065,
+     "exclusionOutlineAddedOverScvM": 7.751,
+     "exclusionOutlineLinesM": 34.189,
+     "exteriorWallCoverage": 0.9878,
+     "fragmentationSegmentsPerMetre": 1.081,
+     "longWallRecovery": 0.6503,
+     "unsupportedLineRate": 0.0087
+    },
+    "SCV-LINES": {
+     "angularErrorDeg": 0.049,
+     "boundaryDistractors": 15,
+     "boundaryDistractorsLengthM": 138.177,
+     "continuityAcrossOpenings": 0.9215,
+     "cornerEndpointErrorMedianPx": 1.5,
+     "cornersWithoutSegment": 0,
+     "count": 785,
+     "duplicateRate": 0.353,
+     "exclusionOutlineLinesM": 29.489,
+     "exteriorWallCoverage": 0.9871,
+     "fragmentationSegmentsPerMetre": 1.217,
+     "longWallRecovery": 0.6931,
+     "unsupportedLineRate": 0.0102
+    }
+   },
+   "metresPerPx": 0.02682,
+   "openingLengthM": 22.877,
+   "regions": {
+    "MSAM-AUTO": {
+     "areaRatio": 0.0459,
+     "autoMasks": 42,
+     "bodyCoverage": {
+      "GARAGE": 0.1578,
+      "WING": 0.0
+     },
+     "boundaryIoU": 0.0,
+     "boundaryPrecision": 0.0,
+     "boundaryRecall": 0.0,
+     "buildingCoverage": 0.0459,
+     "components": 1,
+     "failureTypes": [
+      "INTERNAL_ROOM_SELECTED",
+      "GARAGE_EXCLUDED",
+      "WING_DROPPED"
+     ],
+     "openingLeakage": 0.0,
+     "openingRecall": 0.0,
+     "oracleUpperBoundIoU_NOT_A_SELECTION": 0.0459,
+     "outsideArea": 0.0,
+     "overreach": {
+      "PAVING": 0.0,
+      "PERGOLA": 0.0,
+      "PORCH": 0.0,
+      "TERRACE": 0.0
+     },
+     "predictedIoU": 1.001,
+     "regionIoU": 0.0459,
+     "significantComponents": 1
+    },
+    "MSAM-BOX": {
+     "areaRatio": 1.1914,
+     "bodyCoverage": {
+      "GARAGE": 0.9955,
+      "WING": 0.9459
+     },
+     "boundaryIoU": 0.2532,
+     "boundaryPrecision": 0.4855,
+     "boundaryRecall": 0.7606,
+     "buildingCoverage": 0.9877,
+     "components": 10,
+     "failureTypes": [
+      "PORCH_INCLUDED",
+      "LEAK_THROUGH_OPENING"
+     ],
+     "openingLeakage": 0.0795,
+     "openingRecall": 0.6545,
+     "outsideArea": 0.177,
+     "overreach": {
+      "PAVING": 0.6126,
+      "PERGOLA": 0.0056,
+      "PORCH": 0.985,
+      "TERRACE": 0.3088
+     },
+     "predictedIoU": 0.968,
+     "promptSensitivity": {
+      "minIoUWithBase": 0.9768,
+      "regionIoURange": [
+       0.8098,
+       0.8215
+      ],
+      "variantIoUWithBase": {
+       "x0-in": 0.9949,
+       "x0-out": 0.9967,
+       "x1-in": 0.9965,
+       "x1-out": 0.9976,
+       "y0-in": 0.9955,
+       "y0-out": 0.9768,
+       "y1-in": 0.9966,
+       "y1-out": 0.9932
+      }
+     },
+     "regionIoU": 0.8206,
+     "significantComponents": 1
+    },
+    "MSAM-SOURCE-PROMPTS": {
+     "areaRatio": 1.4276,
+     "bodyCoverage": {
+      "GARAGE": 0.9869,
+      "WING": 0.999
+     },
+     "boundaryIoU": 0.1192,
+     "boundaryPrecision": 0.1639,
+     "boundaryRecall": 0.4737,
+     "buildingCoverage": 0.9929,
+     "components": 37,
+     "failureTypes": [
+      "TERRACE_INCLUDED",
+      "PERGOLA_INCLUDED",
+      "PORCH_INCLUDED",
+      "LEAK_THROUGH_OPENING"
+     ],
+     "openingLeakage": 0.1509,
+     "openingRecall": 0.3314,
+     "outsideArea": 0.3913,
+     "overreach": {
+      "PAVING": 0.5676,
+      "PERGOLA": 0.6708,
+      "PORCH": 0.9849,
+      "TERRACE": 0.914
+     },
+     "predictedIoU": 0.935,
+     "promptSensitivity": {
+      "minIoUWithBase": 0.9726,
+      "regionIoURange": [
+       0.6766,
+       0.7006
+      ],
+      "variantIoUWithBase": {
+       "down": 0.9836,
+       "left": 0.9756,
+       "right": 0.9826,
+       "up": 0.9726
+      }
+     },
+     "regionIoU": 0.692,
+     "significantComponents": 2
+    },
+    "PROD-MASSES-005H": {
+     "areaRatio": 0.9904,
+     "bodyCoverage": {
+      "GARAGE": 0.9723,
+      "WING": 0.9502
+     },
+     "boundaryIoU": 0.7277,
+     "boundaryPrecision": 0.918,
+     "boundaryRecall": 0.9179,
+     "buildingCoverage": 0.987,
+     "components": 1,
+     "failureTypes": [
+      "OK"
+     ],
+     "openingLeakage": 0.0,
+     "openingRecall": 1.0,
+     "outsideArea": 0.0,
+     "overreach": {
+      "PAVING": 0.0116,
+      "PERGOLA": 0.0032,
+      "PORCH": 0.0001,
+      "TERRACE": 0.0061
+     },
+     "regionIoU": 0.9836,
+     "significantComponents": 1
+    },
+    "SCV-BUILT": {
+     "areaRatio": 0.9884,
+     "bodyCoverage": {
+      "GARAGE": 0.9655,
+      "WING": 0.9502
+     },
+     "boundaryIoU": 0.6948,
+     "boundaryPrecision": 0.8974,
+     "boundaryRecall": 0.9073,
+     "buildingCoverage": 0.985,
+     "components": 1,
+     "failureTypes": [
+      "OK"
+     ],
+     "openingLeakage": 0.0,
+     "openingRecall": 1.0,
+     "outsideArea": 0.0,
+     "overreach": {
+      "PAVING": 0.0116,
+      "PERGOLA": 0.0032,
+      "PORCH": 0.0001,
+      "TERRACE": 0.0061
+     },
+     "regionIoU": 0.9816,
+     "significantComponents": 1
+    },
+    "SCV-OUTLINE": {
+     "areaRatio": 0.9931,
+     "bodyCoverage": {
+      "GARAGE": 0.9828,
+      "WING": 0.9803
+     },
+     "boundaryIoU": 0.4707,
+     "boundaryPrecision": 0.6971,
+     "boundaryRecall": 0.7675,
+     "buildingCoverage": 0.9633,
+     "components": 1,
+     "failureTypes": [
+      "TERRACE_INCLUDED"
+     ],
+     "openingLeakage": 0.0088,
+     "openingRecall": 0.5814,
+     "outsideArea": 0.0215,
+     "overreach": {
+      "PAVING": 0.0125,
+      "PERGOLA": 0.0032,
+      "PORCH": 0.0001,
+      "TERRACE": 0.8631
+     },
+     "regionIoU": 0.9354,
+     "significantComponents": 1
+    },
+    "TRIVIAL-BOX": {
+     "areaRatio": 1.3629,
+     "bodyCoverage": {
+      "GARAGE": 1.0,
+      "WING": 1.0
+     },
+     "boundaryIoU": 0.0,
+     "boundaryPrecision": 0.0,
+     "boundaryRecall": 0.0,
+     "buildingCoverage": 1.0,
+     "components": 1,
+     "failureTypes": [
+      "TERRACE_INCLUDED",
+      "PORCH_INCLUDED",
+      "LEAK_THROUGH_OPENING"
+     ],
+     "openingLeakage": 0.1107,
+     "openingRecall": 0.0,
+     "outsideArea": 0.2888,
+     "overreach": {
+      "PAVING": 0.1625,
+      "PERGOLA": 0.0854,
+      "PORCH": 1.0,
+      "TERRACE": 1.0
+     },
+     "regionIoU": 0.7337,
+     "significantComponents": 1
+    },
+    "TRIVIAL-EXTENT": {
+     "areaRatio": 1.25,
+     "bodyCoverage": {
+      "GARAGE": 0.9962,
+      "WING": 1.0
+     },
+     "boundaryIoU": 0.3554,
+     "boundaryPrecision": 0.6009,
+     "boundaryRecall": 0.6006,
+     "buildingCoverage": 0.9982,
+     "components": 1,
+     "failureTypes": [
+      "TERRACE_INCLUDED",
+      "PORCH_INCLUDED",
+      "LEAK_THROUGH_OPENING"
+     ],
+     "openingLeakage": 0.0878,
+     "openingRecall": 0.6592,
+     "outsideArea": 0.219,
+     "overreach": {
+      "PAVING": 0.0125,
+      "PERGOLA": 0.0062,
+      "PORCH": 0.8927,
+      "TERRACE": 1.0
+     },
+     "regionIoU": 0.7974,
+     "significantComponents": 1
+    }
+   },
+   "scvUnion": {
+    "continuityAcrossOpenings": 1.0,
+    "exteriorWallCoverage": 1.0
+   },
+   "solidLengthM": 35.268,
+   "tolerancesPx": {
+    "tau": 4.25,
+    "tauB": 8.5
+   },
+   "truth": {
+    "bodies": [
+     "GARAGE",
+     "MAIN",
+     "WING"
+    ],
+    "documentedFailure": "005A \u00a7AA / 005B: fails at the walled outline on a side of openings (a partial wall witness)",
+    "exclusions": [
+     "PAVING",
+     "PERGOLA",
+     "PORCH",
+     "TERRACE",
+     "TERRACE"
+    ],
+    "file": "research/analyzer-005i-boundary-bakeoff/truth/real/willa-miranda.json",
+    "openingRuns": 10,
+    "purpose": "DEV_BOUNDARY",
+    "sha256": "f782757b7f859be10ec1b203e2888d235e83ee0ebd6dbe22666329dfd2958d63",
+    "vertices": 10
+   },
+   "wallPxTruth": 17.0
+  }
+ },
+ "researchOnly": true,
+ "truthKind": "agent manual review of plan pixels (methodology \u00a76.2); a limitation"
+}

@@ -1,0 +1,451 @@
+{
+ "annotator": "agent manual review of zoomed crops with a labelled pixel grid (BUILDPLAN-ANALYZER-005I Track B); not derived from any BuildPlan candidate, outline, mass or published area",
+ "bodies": [
+  {
+   "kind": "MAIN",
+   "polygon": [
+    [
+     264,
+     203
+    ],
+    [
+     788,
+     203
+    ],
+    [
+     788,
+     597
+    ],
+    [
+     620,
+     597
+    ],
+    [
+     620,
+     565
+    ],
+    [
+     430,
+     565
+    ],
+    [
+     430,
+     597
+    ],
+    [
+     264,
+     597
+    ]
+   ]
+  },
+  {
+   "kind": "GARAGE",
+   "polygon": [
+    [
+     103,
+     240
+    ],
+    [
+     264,
+     240
+    ],
+    [
+     264,
+     558
+    ],
+    [
+     103,
+     558
+    ]
+   ]
+  },
+  {
+   "kind": "BAY",
+   "note": "shallow glazed bay, living room east",
+   "polygon": [
+    [
+     788,
+     332
+    ],
+    [
+     804,
+     332
+    ],
+    [
+     804,
+     464
+    ],
+    [
+     788,
+     464
+    ]
+   ]
+  }
+ ],
+ "conventions": "frame pixels, origin top-left, y down; exterior = outer faces of the ground-floor enclosed building (house + attached garage + shallow east bay); the open entrance recess is excluded",
+ "documentedFailure": "005H blind 7 project 1: ALGORITHMIC_FAIL, class metric (label binding between parallel chains), surfacing as boundary",
+ "exclusions": [
+  {
+   "kind": "TERRACE",
+   "note": "north terrace (loungers)",
+   "polygon": [
+    [
+     410,
+     65
+    ],
+    [
+     830,
+     65
+    ],
+    [
+     830,
+     203
+    ],
+    [
+     410,
+     203
+    ]
+   ]
+  },
+  {
+   "kind": "PERGOLA",
+   "note": "pergola posts over the north-east terrace",
+   "polygon": [
+    [
+     565,
+     80
+    ],
+    [
+     815,
+     80
+    ],
+    [
+     815,
+     203
+    ],
+    [
+     565,
+     203
+    ]
+   ]
+  },
+  {
+   "kind": "RECESS",
+   "note": "open entrance recess",
+   "polygon": [
+    [
+     430,
+     565
+    ],
+    [
+     620,
+     565
+    ],
+    [
+     620,
+     597
+    ],
+    [
+     430,
+     597
+    ]
+   ]
+  },
+  {
+   "kind": "PAVING",
+   "note": "south paving",
+   "polygon": [
+    [
+     420,
+     597
+    ],
+    [
+     790,
+     597
+    ],
+    [
+     790,
+     635
+    ],
+    [
+     420,
+     635
+    ]
+   ]
+  },
+  {
+   "kind": "PAVING",
+   "note": "garage apron",
+   "polygon": [
+    [
+     103,
+     558
+    ],
+    [
+     264,
+     558
+    ],
+    [
+     264,
+     650
+    ],
+    [
+     103,
+     650
+    ]
+   ]
+  }
+ ],
+ "exterior": [
+  [
+   103,
+   240
+  ],
+  [
+   264,
+   240
+  ],
+  [
+   264,
+   203
+  ],
+  [
+   788,
+   203
+  ],
+  [
+   788,
+   332
+  ],
+  [
+   804,
+   332
+  ],
+  [
+   804,
+   464
+  ],
+  [
+   788,
+   464
+  ],
+  [
+   788,
+   597
+  ],
+  [
+   620,
+   597
+  ],
+  [
+   620,
+   565
+  ],
+  [
+   430,
+   565
+  ],
+  [
+   430,
+   597
+  ],
+  [
+   262,
+   597
+  ],
+  [
+   262,
+   558
+  ],
+  [
+   103,
+   558
+  ]
+ ],
+ "exteriorWallThicknessPx": 16,
+ "frameId": "frame-asset-rzut-9354eb066f-397808a266",
+ "frameSize": [
+  853,
+  853
+ ],
+ "house": "dom-pod-jarzabem",
+ "metresPerPx": 0.02794,
+ "metresPerPxWhy": "printed overall dimensions over the traced outer-face span (agent reading of the drawing; not the BuildPlan registration): 1960 cm over 701 px (0.02796) and 1100 cm over 394 px (0.02792)",
+ "openings": [
+  {
+   "a": [
+    190,
+    240
+   ],
+   "b": [
+    228,
+    240
+   ],
+   "kind": "DOOR",
+   "note": "105/210, garage north"
+  },
+  {
+   "a": [
+    103,
+    361
+   ],
+   "b": [
+    103,
+    440
+   ],
+   "kind": "WINDOW",
+   "note": "220/120, garage west"
+  },
+  {
+   "a": [
+    129.5,
+    558
+   ],
+   "b": [
+    237,
+    558
+   ],
+   "kind": "GARAGE_DOOR",
+   "note": "300/225 vehicle door"
+  },
+  {
+   "a": [
+    308,
+    203
+   ],
+   "b": [
+    381,
+    203
+   ],
+   "kind": "WINDOW",
+   "note": "200/150"
+  },
+  {
+   "a": [
+    448,
+    203
+   ],
+   "b": [
+    501,
+    203
+   ],
+   "kind": "WINDOW",
+   "note": "150/150"
+  },
+  {
+   "a": [
+    530,
+    203
+   ],
+   "b": [
+    580,
+    203
+   ],
+   "kind": "WINDOW",
+   "note": "150/150"
+  },
+  {
+   "a": [
+    630,
+    203
+   ],
+   "b": [
+    756,
+    203
+   ],
+   "kind": "GLAZED",
+   "note": "350/230"
+  },
+  {
+   "a": [
+    804,
+    348
+   ],
+   "b": [
+    804,
+    448
+   ],
+   "kind": "GLAZED",
+   "note": "280/170 bay glazing"
+  },
+  {
+   "a": [
+    310,
+    597
+   ],
+   "b": [
+    382,
+    597
+   ],
+   "kind": "WINDOW",
+   "note": "200/140"
+  },
+  {
+   "a": [
+    668,
+    597
+   ],
+   "b": [
+    740,
+    597
+   ],
+   "kind": "WINDOW",
+   "note": "200/140"
+  },
+  {
+   "a": [
+    443,
+    565
+   ],
+   "b": [
+    467,
+    565
+   ],
+   "kind": "WINDOW",
+   "note": "70/210 in the recess"
+  },
+  {
+   "a": [
+    503,
+    565
+   ],
+   "b": [
+    541.7,
+    565
+   ],
+   "kind": "DOOR",
+   "note": "105/210 entrance in the recess"
+  },
+  {
+   "a": [
+    578,
+    565
+   ],
+   "b": [
+    607,
+    565
+   ],
+   "kind": "WINDOW",
+   "note": "70/210 in the recess"
+  }
+ ],
+ "purpose": "METRIC_CONTROL (blind round 7 project 1; its documented failure is metric: label binding between parallel chains)",
+ "vertexUncertaintyPx": [
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  3,
+  3,
+  2,
+  2,
+  2,
+  2
+ ]
+}

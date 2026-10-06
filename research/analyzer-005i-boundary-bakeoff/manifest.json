@@ -1,0 +1,49 @@
+{
+  "_comment": "BUILDPLAN-ANALYZER-005I Track B research pins. fetch.sh refuses any checkpoint whose SHA-256 differs. Nothing listed here is committed to the repository or shipped in any app.",
+  "checkpoints": [
+    {
+      "bytes": 102898193,
+      "file": "deeplsd_md.tar",
+      "officialUrl": "https://cvg-data.inf.ethz.ch/DeepLSD/deeplsd_md.tar",
+      "officialUrlStatus": "HTTP 403 Forbidden from the origin (Apache) on 2026-10-06 for the file and the directory; not a proxy denial",
+      "pickleGlobals": ["__builtin__ dict", "__builtin__ list", "__builtin__ long", "collections OrderedDict", "collections defaultdict", "omegaconf.base ContainerMetadata", "omegaconf.base Metadata", "omegaconf.dictconfig DictConfig", "omegaconf.listconfig ListConfig", "omegaconf.nodes AnyNode", "torch FloatStorage", "torch LongStorage", "torch._utils _rebuild_tensor_v2", "typing Any"],
+      "provider": "DEEPLSD",
+      "sha256": "56e9bae263977caa289ae49802987a67d4f00f376ae7e542176c8ae0a6cc2083",
+      "url": "https://huggingface.co/xboix/deeplsd/resolve/c23bba71eba84ecd5247320e008348034bc4e05d/deeplsd_md.tar",
+      "urlProvenance": "UNOFFICIAL third-party mirror (Hugging Face xboix/deeplsd at revision c23bba7, created 2026-09-03) claiming byte identity with the official file; its README states the SHA-256 above; it could not be cross-checked against the official server or the Wayback Machine from this environment"
+    },
+    {
+      "bytes": 102898321,
+      "file": "deeplsd_wireframe.tar",
+      "officialUrl": "https://cvg-data.inf.ethz.ch/DeepLSD/deeplsd_wireframe.tar",
+      "officialUrlStatus": "HTTP 403 Forbidden from the origin on 2026-10-06",
+      "pickleGlobals": "same set as deeplsd_md.tar",
+      "provider": "DEEPLSD",
+      "sha256": "6d0c1bc78f79eb9e564404e4fef797d12ab18f30ba596208cca16116c2429406",
+      "url": "https://huggingface.co/xboix/deeplsd/resolve/c23bba71eba84ecd5247320e008348034bc4e05d/deeplsd_wireframe.tar",
+      "urlProvenance": "UNOFFICIAL mirror, as above"
+    },
+    {
+      "bytes": 40728226,
+      "file": "mobile_sam.pt",
+      "pickleGlobals": ["collections OrderedDict", "torch FloatStorage", "torch LongStorage", "torch._utils _rebuild_tensor_v2"],
+      "provider": "MOBILESAM",
+      "sha256": "6dbb90523a35330fedd7f1d3dfc66f995213d81b29a5ca8108dbcdd4e37d6c2f",
+      "url": "https://raw.githubusercontent.com/ChaoningZhang/MobileSAM/f706ad9c4eb7f219c00d9050e46328518ffb65d2/weights/mobile_sam.pt",
+      "urlProvenance": "the official repository at the pinned commit (weights/mobile_sam.pt is a git blob of that commit)"
+    }
+  ],
+  "repositories": [
+    {"commit": "f7d9d6258c0cd25d4f6eea882853565403d289be", "dir": "DeepLSD", "provider": "DEEPLSD", "submodules": {"line_refinement/pybind11": "bc041de0db118a30cb5588a435e1d56cac95e60b", "third_party/progressive-x": "b6ddb94bb332e21a98903585eb85719c608c1bae", "third_party/progressive-x/graph-cut-ransac": "fb628fa5f18ef5369c07291c709fde6f1cec23ac", "third_party/pytlsd": "21381ca4c5c8da297ef44ce07dda115075c5a648", "third_party/pytlsd/pybind11": "8de7772cc72daca8e947b79b83fea46214931604"}, "url": "https://github.com/cvg/DeepLSD.git"},
+    {"commit": "1878213b2f5f06a9261d8b1838f53d48e5fd128d", "dir": "ELSED", "provider": "ELSED", "submodules": {"pybind11": "f7b499615e14d70ab098a20deb0cdb3889998a1a"}, "url": "https://github.com/iago-suarez/ELSED.git"},
+    {"commit": "f706ad9c4eb7f219c00d9050e46328518ffb65d2", "dir": "MobileSAM", "provider": "MOBILESAM", "submodules": {}, "url": "https://github.com/ChaoningZhang/MobileSAM.git"},
+    {"commit": "a2e59f0e7065404b44dfe92a28aca47ba1378dc4", "dir": "pybind11-v2.13.6", "provider": "BUILD_GLUE", "submodules": {}, "url": "https://github.com/pybind/pybind11.git", "why": "pytlsd's vendored pybind11 2.6.2 does not compile against CPython 3.11; the binding glue only is replaced, the LSD sources are pytlsd's at the pinned commit"}
+  ],
+  "runtime": {
+    "apt": {"libceres-dev": "2.2.0+dfsg-4.1ubuntu2", "libeigen3-dev": "3.4.0-4build0.1", "libgflags-dev": "2.2.2-2build1", "libgoogle-glog-dev": "0.6.0-2.1build1", "libopencv-dev": "4.6.0+dfsg-13.1ubuntu1"},
+    "os": "Ubuntu 24.04.4 LTS x86-64, 4 vCPU, no GPU",
+    "pip": {"kornia": "0.8.3", "numpy": "1.26.4", "omegaconf": "2.3.1", "opencv-python-headless": "4.10.0.84", "psutil": "7.2.2", "pybind11": "3.1.0", "scikit-image": "0.26.0", "scipy": "1.17.1", "shapely": "2.1.2", "timm": "0.9.16", "torch": "2.5.1+cpu", "torchvision": "0.20.1+cpu"},
+    "python": "3.11.15",
+    "node": "v22.22.2 (harness TypeScript via vite-node, from a git-archive snapshot of 29ab643)"
+  }
+}

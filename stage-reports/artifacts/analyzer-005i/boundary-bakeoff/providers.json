@@ -1,0 +1,199 @@
+{
+ "os": "Ubuntu 24.04.4 LTS x86-64, 4 vCPU, no GPU",
+ "providers": [
+  {
+   "checkpoint": null,
+   "commit": "29ab643a6e1b8e9e9f07bbdecd8cc12e63860c0e (snapshot); frozen runs d14304c",
+   "config": "production defaults (BOUNDARY_EVIDENCE_VERSION 1.1.0)",
+   "configHashCount": 1,
+   "configHashes": [
+    "e2d8907ec4cb68b0411c2ec891c18a2695d94916f2be5c90fbd686e7b5ac6952"
+   ],
+   "configs": [
+    "SCV-LINES",
+    "SCV-WALL",
+    "SCV-SOLID",
+    "SCV-BOUNDARY",
+    "SCV-BOUNDARY-GAP",
+    "SCV-OUTLINE",
+    "SCV-BUILT"
+   ],
+   "provider": "SOURCE_CV",
+   "repo": "this repository (packages/source-cv, packages/reconstruction boundary-*.ts, packages/source-analyzer prepare.ts)",
+   "runtime": {
+    "node": "v22.22.2 (harness TypeScript via vite-node, from a git-archive snapshot of 29ab643)"
+   }
+  },
+  {
+   "checkpoint": null,
+   "commit": "1878213b2f5f06a9261d8b1838f53d48e5fd128d",
+   "config": {
+    "gradientThreshold": 30.0,
+    "id": "ELSED-DEFAULT",
+    "lineFitErrThreshold": 0.2,
+    "minLineLen": 15,
+    "pxToSegmentDistTh": 1.5,
+    "sigma": 1.0,
+    "source": "upstream PYAPI.cpp defaults (iago-suarez/ELSED@1878213b)",
+    "treatJunctions": 1,
+    "validate": 1,
+    "validationTh": 0.15
+   },
+   "configHashCount": 1,
+   "configHashes": [
+    "1570c4a598685b427a0b0eec30652cb8a83546903c15e1cbbac0833ed7ec3871"
+   ],
+   "configs": [
+    "ELSED-DEFAULT"
+   ],
+   "provider": "ELSED",
+   "repo": "https://github.com/iago-suarez/ELSED.git",
+   "runtime": {
+    "build": "libelsed.a (upstream CMake) + research elsed_cli.cpp",
+    "opencv": "4.6.0+dfsg-13.1ubuntu1"
+   }
+  },
+  {
+   "checkpoint": {
+    "DEEPLSD-MD": {
+     "bytes": 102898193,
+     "provenance": "UNOFFICIAL third-party mirror (Hugging Face xboix/deeplsd at revision c23bba7, created 2026-09-03) claiming byte identity with the official file; its README states the SHA-256 above; it could not be cross-checked against the official server or the Wayback Machine from this environment",
+     "sha256": "56e9bae263977caa289ae49802987a67d4f00f376ae7e542176c8ae0a6cc2083",
+     "url": "https://huggingface.co/xboix/deeplsd/resolve/c23bba71eba84ecd5247320e008348034bc4e05d/deeplsd_md.tar"
+    },
+    "DEEPLSD-WF": {
+     "bytes": 102898321,
+     "provenance": "UNOFFICIAL mirror, as above",
+     "sha256": "6d0c1bc78f79eb9e564404e4fef797d12ab18f30ba596208cca16116c2429406",
+     "url": "https://huggingface.co/xboix/deeplsd/resolve/c23bba71eba84ecd5247320e008348034bc4e05d/deeplsd_wireframe.tar"
+    }
+   },
+   "commit": "f7d9d6258c0cd25d4f6eea882853565403d289be",
+   "config": {
+    "detect": {
+     "detect_lines": true,
+     "line_detection_params": {
+      "filtering": true,
+      "grad_nfa": true,
+      "grad_thresh": 3,
+      "merge": false
+     }
+    },
+    "refine": {
+     "line_detection_params": {
+      "filtering": false,
+      "lambda_df": 1.0,
+      "lambda_grad": 1.0,
+      "lambda_vp": 0.2,
+      "max_iters": 100000,
+      "maximum_model_number": -1,
+      "minimum_point_number": 2,
+      "optimize_vps": true,
+      "scoring_exponent": 1,
+      "threshold": 1.0,
+      "use_vps": true
+     }
+    }
+   },
+   "configHashCount": {
+    "DEEPLSD-MD": 1,
+    "DEEPLSD-MD-REFINE-SCV": 1,
+    "DEEPLSD-WF": 1
+   },
+   "configHashes": {
+    "DEEPLSD-MD": [
+     "49975cd99e3f3556ed768a44f2b64702311dd871daf58320afa148075ec262fd"
+    ],
+    "DEEPLSD-MD-REFINE-SCV": [
+     "f61194e023c0fd4674e140b407a23b6c00066e02bff153586d394d1fc62b7900"
+    ],
+    "DEEPLSD-WF": [
+     "2e0cf44cfc5e7ccd6f1033f0c79a2c139caac22304100d3533657f7cd3502573"
+    ]
+   },
+   "configs": [
+    "DEEPLSD-MD",
+    "DEEPLSD-WF",
+    "DEEPLSD-MD-REFINE-SCV"
+   ],
+   "provider": "DEEPLSD",
+   "repo": "https://github.com/cvg/DeepLSD.git",
+   "runtime": {
+    "kornia": "0.8.3",
+    "numpy": "1.26.4",
+    "omegaconf": "2.3.1",
+    "opencv-python-headless": "4.10.0.84",
+    "psutil": "7.2.2",
+    "pybind11": "3.1.0",
+    "scikit-image": "0.26.0",
+    "scipy": "1.17.1",
+    "shapely": "2.1.2",
+    "timm": "0.9.16",
+    "torch": "2.5.1+cpu",
+    "torchvision": "0.20.1+cpu"
+   },
+   "submodules": {
+    "line_refinement/pybind11": "bc041de0db118a30cb5588a435e1d56cac95e60b",
+    "third_party/progressive-x": "b6ddb94bb332e21a98903585eb85719c608c1bae",
+    "third_party/progressive-x/graph-cut-ransac": "fb628fa5f18ef5369c07291c709fde6f1cec23ac",
+    "third_party/pytlsd": "21381ca4c5c8da297ef44ce07dda115075c5a648",
+    "third_party/pytlsd/pybind11": "8de7772cc72daca8e947b79b83fea46214931604"
+   }
+  },
+  {
+   "checkpoint": {
+    "bytes": 40728226,
+    "provenance": "the official repository at the pinned commit (weights/mobile_sam.pt is a git blob of that commit)",
+    "sha256": "6dbb90523a35330fedd7f1d3dfc66f995213d81b29a5ca8108dbcdd4e37d6c2f",
+    "url": "https://raw.githubusercontent.com/ChaoningZhang/MobileSAM/f706ad9c4eb7f219c00d9050e46328518ffb65d2/weights/mobile_sam.pt"
+   },
+   "commit": "f706ad9c4eb7f219c00d9050e46328518ffb65d2",
+   "config": "methodology.md \u00a75 (model vit_t; multimask, highest predicted IoU; AUTO points_per_side=16)",
+   "configHashCount": {
+    "MSAM-AUTO": 1,
+    "MSAM-BOX": 207,
+    "MSAM-SOURCE-PROMPTS": 120
+   },
+   "configHashes": {
+    "MSAM-AUTO": [
+     "2441b42b99c617f5d65ce029653909a2dacd71086a3b730f7e84655f3380b1fc"
+    ],
+    "MSAM-BOX": [
+     "005add3d6df634e9f73a01290d5c26ba2e40c4cf808ab193c8b5c2a025fa6091",
+     "009aaf9743f0522c1608257b22bdd3be59a7e2f495714aef29146684889b5563",
+     "00d66a539134422d3a3b80dec8ed065da07d53ebbec44436bb79f4d7eee526d0",
+     "\u2026204 more (per-prompt hashes)"
+    ],
+    "MSAM-SOURCE-PROMPTS": [
+     "01440d1c9fc190c20d99666f41f75cdd8f231e1159139abbe4ada2ed9c16f5b1",
+     "02d1cf2ab15d879261a766ece37a50731e31a071c682d177429297b475d3a44d",
+     "0362208f4283593d5512bea79d4860b8caa7a6110afbc399e44a9e6d992fa7cc",
+     "\u2026117 more (per-prompt hashes)"
+    ]
+   },
+   "configs": [
+    "MSAM-BOX",
+    "MSAM-SOURCE-PROMPTS",
+    "MSAM-AUTO"
+   ],
+   "provider": "MOBILESAM",
+   "repo": "https://github.com/ChaoningZhang/MobileSAM.git",
+   "runtime": {
+    "kornia": "0.8.3",
+    "numpy": "1.26.4",
+    "omegaconf": "2.3.1",
+    "opencv-python-headless": "4.10.0.84",
+    "psutil": "7.2.2",
+    "pybind11": "3.1.0",
+    "scikit-image": "0.26.0",
+    "scipy": "1.17.1",
+    "shapely": "2.1.2",
+    "timm": "0.9.16",
+    "torch": "2.5.1+cpu",
+    "torchvision": "0.20.1+cpu"
+   }
+  }
+ ],
+ "python": "3.11.15",
+ "researchOnly": true
+}

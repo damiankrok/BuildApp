@@ -92,7 +92,7 @@ describe('§42 production cannot reach the boundary bake-off', () => {
     const tracked = execFileSync('git', ['ls-files'], { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(Boolean)
     expect(tracked.filter((f) => /\.(pt|pth|ckpt|safetensors|onnx|npz|npy|tflite)$/i.test(f))).toEqual([])
     const harness = tracked.filter((f) => f.startsWith('research/analyzer-005i-boundary-bakeoff/'))
-    expect(harness.filter((f) => !/\.(py|ts|mjs|js|json|md|txt|sh|cpp|h|hpp|cmake|toml|cfg|ya?ml|csv)$|(^|\/)(CMakeLists\.txt|\.gitignore)$/i.test(f))).toEqual([])
+    expect(harness.filter((f) => !/\.(py|ts|mjs|cjs|js|json|md|txt|sh|cpp|h|hpp|cmake|toml|cfg|ya?ml|csv)$|(^|\/)(CMakeLists\.txt|\.gitignore)$/i.test(f))).toEqual([])
   })
 
   it('the Android build declares no Python, PyTorch or OpenCV dependency and packages nothing from research/', () => {

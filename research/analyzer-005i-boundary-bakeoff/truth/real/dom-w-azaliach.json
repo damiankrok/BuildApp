@@ -1,0 +1,237 @@
+{
+ "annotator": "agent manual review of zoomed crops with a labelled pixel grid (BUILDPLAN-ANALYZER-005I Track B); not derived from any BuildPlan candidate, outline, mass or published area",
+ "bodies": [
+  {
+   "kind": "MAIN",
+   "polygon": [
+    [
+     79,
+     160
+    ],
+    [
+     632.5,
+     160
+    ],
+    [
+     632.5,
+     517.5
+    ],
+    [
+     79,
+     517.5
+    ]
+   ]
+  }
+ ],
+ "conventions": "frame pixels, origin top-left, y down; exterior = outer faces of the ground-floor enclosed building",
+ "documentedFailure": "005C \u00a7Z: first bad decision in the metric layer; the long-band box held the service rooms only, the outline continued across the glazed living-room side and stopped at the pergola terrace",
+ "exclusions": [
+  {
+   "kind": "PERGOLA",
+   "note": "east terrace under a dashed pergola with posts",
+   "polygon": [
+    [
+     640,
+     165
+    ],
+    [
+     800,
+     165
+    ],
+    [
+     800,
+     515
+    ],
+    [
+     640,
+     515
+    ]
+   ]
+  },
+  {
+   "kind": "TERRACE",
+   "note": "east terrace (loungers, table)",
+   "polygon": [
+    [
+     632.5,
+     150
+    ],
+    [
+     840,
+     150
+    ],
+    [
+     840,
+     525
+    ],
+    [
+     632.5,
+     525
+    ]
+   ]
+  },
+  {
+   "kind": "PORCH",
+   "note": "entrance landing south",
+   "polygon": [
+    [
+     150,
+     517.5
+    ],
+    [
+     330,
+     517.5
+    ],
+    [
+     330,
+     620
+    ],
+    [
+     150,
+     620
+    ]
+   ]
+  },
+  {
+   "kind": "PLANTING",
+   "note": "planting strip north",
+   "polygon": [
+    [
+     470,
+     110
+    ],
+    [
+     840,
+     110
+    ],
+    [
+     840,
+     160
+    ],
+    [
+     470,
+     160
+    ]
+   ]
+  }
+ ],
+ "exterior": [
+  [
+   79,
+   160
+  ],
+  [
+   632.5,
+   160
+  ],
+  [
+   632.5,
+   517.5
+  ],
+  [
+   79,
+   517.5
+  ]
+ ],
+ "exteriorWallThicknessPx": 21,
+ "frameId": "frame-asset-rzut-86bef468f3-19006df9bc",
+ "frameSize": [
+  853,
+  853
+ ],
+ "house": "dom-w-azaliach",
+ "metresPerPx": 0.01872,
+ "metresPerPxWhy": "printed overall dimensions over the traced outer-face span (agent reading of the drawing; not the BuildPlan registration): 1035 cm over 553.5 px (0.01870) and 670 cm over 357.5 px (0.01874)",
+ "openings": [
+  {
+   "a": [
+    287.5,
+    160
+   ],
+   "b": [
+    386,
+    160
+   ],
+   "kind": "WINDOW",
+   "note": "180/140, north"
+  },
+  {
+   "a": [
+    475,
+    160
+   ],
+   "b": [
+    562.5,
+    160
+   ],
+   "kind": "GLAZED",
+   "note": "160/230, north"
+  },
+  {
+   "a": [
+    632.5,
+    237.5
+   ],
+   "b": [
+    632.5,
+    442.5
+   ],
+   "kind": "GLAZED",
+   "note": "380/230 glazed living-room side, east"
+  },
+  {
+   "a": [
+    432.5,
+    517.5
+   ],
+   "b": [
+    562.5,
+    517.5
+   ],
+   "kind": "WINDOW",
+   "note": "240/140, south"
+  },
+  {
+   "a": [
+    177.5,
+    517.5
+   ],
+   "b": [
+    235,
+    517.5
+   ],
+   "kind": "DOOR",
+   "note": "105/210 entrance"
+  },
+  {
+   "a": [
+    79,
+    230
+   ],
+   "b": [
+    79,
+    275
+   ],
+   "kind": "WINDOW",
+   "note": "80/140, west"
+  },
+  {
+   "a": [
+    79,
+    317.5
+   ],
+   "b": [
+    79,
+    360
+   ],
+   "kind": "WINDOW",
+   "note": "80/140, west"
+  }
+ ],
+ "vertexUncertaintyPx": [
+  2,
+  2,
+  2,
+  2
+ ]
+}

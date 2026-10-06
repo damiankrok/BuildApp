@@ -1,0 +1,369 @@
+{
+ "annotator": "agent manual review of zoomed crops with a labelled pixel grid (BUILDPLAN-ANALYZER-005I Track B); not derived from any BuildPlan candidate, outline, mass or published area",
+ "bodies": [
+  {
+   "kind": "MAIN",
+   "polygon": [
+    [
+     252.5,
+     207
+    ],
+    [
+     619,
+     207
+    ],
+    [
+     619,
+     740
+    ],
+    [
+     252.5,
+     740
+    ]
+   ]
+  },
+  {
+   "kind": "GARAGE",
+   "note": "garage (8) with the utility room (9) in the same attached block",
+   "polygon": [
+    [
+     61,
+     252.5
+    ],
+    [
+     252.5,
+     252.5
+    ],
+    [
+     252.5,
+     679
+    ],
+    [
+     61,
+     679
+    ]
+   ]
+  },
+  {
+   "kind": "BAY",
+   "note": "kitchen bay, glazed east face",
+   "polygon": [
+    [
+     619,
+     415
+    ],
+    [
+     668,
+     415
+    ],
+    [
+     668,
+     590
+    ],
+    [
+     619,
+     590
+    ]
+   ]
+  }
+ ],
+ "conventions": "frame pixels, origin top-left, y down; exterior = outer faces of the ground-floor enclosed building (house + attached garage/utility block + bay)",
+ "documentedFailure": "005E \u00a7AB / 005F \u00a7D: the long-band box stops short of the chain extent, so the east bay is not built and the garage end stops short",
+ "exclusions": [
+  {
+   "kind": "TERRACE",
+   "note": "paved terrace north (table, planters)",
+   "polygon": [
+    [
+     250,
+     5
+    ],
+    [
+     715,
+     5
+    ],
+    [
+     715,
+     207
+    ],
+    [
+     250,
+     207
+    ]
+   ]
+  },
+  {
+   "kind": "TERRACE",
+   "note": "paved / bench area east of the living room",
+   "polygon": [
+    [
+     668,
+     207
+    ],
+    [
+     765,
+     207
+    ],
+    [
+     765,
+     350
+    ],
+    [
+     668,
+     350
+    ]
+   ]
+  },
+  {
+   "kind": "PORCH",
+   "note": "entrance paving south",
+   "polygon": [
+    [
+     300,
+     740
+    ],
+    [
+     520,
+     740
+    ],
+    [
+     520,
+     850
+    ],
+    [
+     300,
+     850
+    ]
+   ]
+  },
+  {
+   "kind": "PAVING",
+   "note": "garage apron",
+   "polygon": [
+    [
+     61,
+     679
+    ],
+    [
+     252.5,
+     679
+    ],
+    [
+     252.5,
+     705
+    ],
+    [
+     61,
+     705
+    ]
+   ]
+  }
+ ],
+ "exterior": [
+  [
+   61,
+   252.5
+  ],
+  [
+   252.5,
+   252.5
+  ],
+  [
+   252.5,
+   207
+  ],
+  [
+   619,
+   207
+  ],
+  [
+   619,
+   415
+  ],
+  [
+   668,
+   415
+  ],
+  [
+   668,
+   590
+  ],
+  [
+   619,
+   590
+  ],
+  [
+   619,
+   740
+  ],
+  [
+   252.5,
+   740
+  ],
+  [
+   252.5,
+   679
+  ],
+  [
+   61,
+   679
+  ]
+ ],
+ "exteriorWallThicknessPx": 22,
+ "frameId": "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+ "frameSize": [
+  853,
+  853
+ ],
+ "house": "dom-w-morelach",
+ "metresPerPx": 0.01995,
+ "metresPerPxWhy": "printed overall dimensions over the traced outer-face span (agent reading of the drawing; not the BuildPlan registration): 1212 cm over 607 px to the bay face (0.01997) and 1062 cm over 533 px (0.01993)",
+ "openings": [
+  {
+   "a": [
+    135,
+    252.5
+   ],
+   "b": [
+    184.6,
+    252.5
+   ],
+   "kind": "DOOR",
+   "note": "100/210, utility room north"
+  },
+  {
+   "a": [
+    61,
+    420
+   ],
+   "b": [
+    61,
+    511.7
+   ],
+   "kind": "WINDOW",
+   "note": "180/90, garage west"
+  },
+  {
+   "a": [
+    100,
+    679
+   ],
+   "b": [
+    220,
+    679
+   ],
+   "kind": "GARAGE_DOOR",
+   "note": "240/220 vehicle door"
+  },
+  {
+   "a": [
+    390,
+    207
+   ],
+   "b": [
+    481,
+    207
+   ],
+   "kind": "GLAZED",
+   "note": "180/230 terrace door"
+  },
+  {
+   "a": [
+    550,
+    207
+   ],
+   "b": [
+    619,
+    207
+   ],
+   "kind": "DOOR",
+   "note": "116/230 door running into the glazed corner"
+  },
+  {
+   "a": [
+    619,
+    207
+   ],
+   "b": [
+    619,
+    325
+   ],
+   "kind": "GLAZED",
+   "note": "216/230 corner glazing, east"
+  },
+  {
+   "a": [
+    668,
+    458
+   ],
+   "b": [
+    668,
+    548
+   ],
+   "kind": "WINDOW",
+   "note": "180/140, bay east face"
+  },
+  {
+   "a": [
+    619,
+    669
+   ],
+   "b": [
+    619,
+    740
+   ],
+   "kind": "WINDOW",
+   "note": "120/70 corner window, east leg"
+  },
+  {
+   "a": [
+    548,
+    740
+   ],
+   "b": [
+    619,
+    740
+   ],
+   "kind": "WINDOW",
+   "note": "120/70 corner window, south leg"
+  },
+  {
+   "a": [
+    410.5,
+    740
+   ],
+   "b": [
+    462,
+    740
+   ],
+   "kind": "DOOR",
+   "note": "100/210 entrance"
+  },
+  {
+   "a": [
+    300,
+    740
+   ],
+   "b": [
+    369.5,
+    740
+   ],
+   "kind": "WINDOW",
+   "note": "140/140, south"
+  }
+ ],
+ "vertexUncertaintyPx": [
+  2,
+  2,
+  2,
+  5,
+  2,
+  2,
+  2,
+  2,
+  3,
+  2,
+  2,
+  2
+ ]
+}

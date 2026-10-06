@@ -1,0 +1,192 @@
+{
+ "annotator": "agent manual review of zoomed crops with a labelled pixel grid (BUILDPLAN-ANALYZER-005I Track B); not derived from any BuildPlan candidate, outline, mass or published area",
+ "bodies": [
+  {
+   "kind": "MAIN",
+   "polygon": [
+    [
+     141.7,
+     212.6
+    ],
+    [
+     540,
+     212.6
+    ],
+    [
+     540,
+     724
+    ],
+    [
+     141.7,
+     724
+    ]
+   ]
+  }
+ ],
+ "conventions": "frame pixels, origin top-left, y down; exterior = outer faces of the ground-floor enclosed building",
+ "documentedFailure": "none (005H blind 7 project 2: PASS)",
+ "exclusions": [
+  {
+   "kind": "TERRACE",
+   "note": "north terrace",
+   "polygon": [
+    [
+     145,
+     15
+    ],
+    [
+     540,
+     15
+    ],
+    [
+     540,
+     212.6
+    ],
+    [
+     145,
+     212.6
+    ]
+   ]
+  },
+  {
+   "kind": "PERGOLA",
+   "note": "four posts, dashed beams",
+   "polygon": [
+    [
+     185,
+     55
+    ],
+    [
+     490,
+     55
+    ],
+    [
+     490,
+     210
+    ],
+    [
+     185,
+     210
+    ]
+   ]
+  },
+  {
+   "kind": "PORCH",
+   "note": "entrance landing south",
+   "polygon": [
+    [
+     215,
+     724
+    ],
+    [
+     470,
+     724
+    ],
+    [
+     470,
+     800
+    ],
+    [
+     215,
+     800
+    ]
+   ]
+  }
+ ],
+ "exterior": [
+  [
+   141.7,
+   212.6
+  ],
+  [
+   540,
+   212.6
+  ],
+  [
+   540,
+   724
+  ],
+  [
+   141.7,
+   724
+  ]
+ ],
+ "exteriorWallThicknessPx": 21,
+ "frameId": "frame-asset-rzut-16680ee739-bb2ced8b98",
+ "frameSize": [
+  853,
+  853
+ ],
+ "house": "dom-w-arkadiach",
+ "metresPerPx": 0.01848,
+ "metresPerPxWhy": "printed overall dimensions over the traced outer-face span (agent reading of the drawing; not the BuildPlan registration): 740 cm over 398.3 px (0.01858) and 940 cm over 511.4 px (0.01838)",
+ "openings": [
+  {
+   "a": [
+    237,
+    212.6
+   ],
+   "b": [
+    443,
+    212.6
+   ],
+   "kind": "GLAZED",
+   "note": "380/240, north"
+  },
+  {
+   "a": [
+    141.7,
+    407
+   ],
+   "b": [
+    141.7,
+    517.4
+   ],
+   "kind": "WINDOW",
+   "note": "200/150, west"
+  },
+  {
+   "a": [
+    141.7,
+    573
+   ],
+   "b": [
+    141.7,
+    628
+   ],
+   "kind": "WINDOW",
+   "note": "100/150, west"
+  },
+  {
+   "a": [
+    305.7,
+    724
+   ],
+   "b": [
+    365.7,
+    724
+   ],
+   "kind": "DOOR",
+   "note": "105/210 entrance"
+  },
+  {
+   "a": [
+    394,
+    724
+   ],
+   "b": [
+    463,
+    724
+   ],
+   "kind": "DOOR",
+   "note": "100/210"
+  }
+ ],
+ "purpose": "METRIC_CONTROL (blind round 7 project 2, PASS in 005H)",
+ "vertexUncertaintyPx": [
+  2,
+  2,
+  2,
+  2
+ ]
+}

@@ -1,0 +1,1943 @@
+{
+ "box": "Ubuntu 24.04 x86-64, 4 vCPU (shared with a concurrent development matrix: timings are upper bounds), no GPU",
+ "determinism": {
+  "real/dom-w-helikoniach/DEEPLSD-MD": {
+   "count": [
+    548,
+    548
+   ],
+   "identical": true,
+   "sha256": [
+    "d2256a1064f2d38459dd90204c2b189e2b0ee7940c8e2135549a47cd157985ec",
+    "d2256a1064f2d38459dd90204c2b189e2b0ee7940c8e2135549a47cd157985ec"
+   ]
+  },
+  "real/dom-w-helikoniach/ELSED-DEFAULT": {
+   "count": [
+    395,
+    395
+   ],
+   "identical": true,
+   "sha256": [
+    "f51b6aaf770858ccf5a1dcf9f3e3ca846033cc5d5aaaa6dea089203906b7bf5d",
+    "f51b6aaf770858ccf5a1dcf9f3e3ca846033cc5d5aaaa6dea089203906b7bf5d"
+   ]
+  },
+  "real/dom-w-helikoniach/MOBILESAM": {
+   "differing": [],
+   "identical": true,
+   "masksCompared": 14
+  },
+  "synthetic/l-shape/DEEPLSD-MD": {
+   "count": [
+    108,
+    108
+   ],
+   "identical": true,
+   "sha256": [
+    "15a294e2e07b648f5f38fbc04e611b47925895e9f2cb9f8a9fedffba75ef0780",
+    "15a294e2e07b648f5f38fbc04e611b47925895e9f2cb9f8a9fedffba75ef0780"
+   ]
+  },
+  "synthetic/l-shape/ELSED-DEFAULT": {
+   "count": [
+    89,
+    89
+   ],
+   "identical": true,
+   "sha256": [
+    "11770401c3a798b0a3e6d1f47ccf3bb41534aca513b15bea26ef301128079b44",
+    "11770401c3a798b0a3e6d1f47ccf3bb41534aca513b15bea26ef301128079b44"
+   ]
+  },
+  "synthetic/l-shape/MOBILESAM": {
+   "differing": [],
+   "identical": true,
+   "masksCompared": 14
+  }
+ },
+ "frames": {
+  "real/dom-pod-jarzabem": {
+   "DEEPLSD-MD": {
+    "count": 897,
+    "inferMs": 11451.087,
+    "peakRssMB": 1836.1,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 12260.042
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 870,
+    "inferMs": 15751.301,
+    "inputLines": 870,
+    "missingKeys": 0,
+    "peakRssMB": 1886.1,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 16712.189
+   },
+   "DEEPLSD-WF": {
+    "count": 948,
+    "inferMs": 11298.846,
+    "peakRssMB": 1836.1,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 12064.894
+   },
+   "ELSED-DEFAULT": {
+    "count": 767,
+    "detectMs": 19.778,
+    "peakRssMB": 63.1,
+    "wallMs": 106.082
+   },
+   "MOBILESAM": {
+    "autoMasks": 42,
+    "autoMs": 42857.571,
+    "encoderMs": 2146.051,
+    "peakRssMB": 2449.8,
+    "threads": 2,
+    "wallMs": 47825.635
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-BOUNDARY": 212,
+     "SCV-BOUNDARY-GAP": 267,
+     "SCV-BUILT": 1,
+     "SCV-LINES": 870,
+     "SCV-OUTLINE": 1,
+     "SCV-SOLID": 21,
+     "SCV-WALL": 57
+    },
+    "timingsMs": {
+     "boundaryLayer": 805.057,
+     "decode": 31.571,
+     "planSheetAndSolid": 321.789,
+     "sourceCvLines": 715.65
+    }
+   }
+  },
+  "real/dom-w-arkadiach": {
+   "DEEPLSD-MD": {
+    "count": 611,
+    "inferMs": 10065.896,
+    "peakRssMB": 1902.3,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 10792.456
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 674,
+    "inferMs": 17358.217,
+    "inputLines": 674,
+    "missingKeys": 0,
+    "peakRssMB": 1884.5,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 18191.503
+   },
+   "DEEPLSD-WF": {
+    "count": 610,
+    "inferMs": 10260.721,
+    "peakRssMB": 1836.2,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 10991.211
+   },
+   "ELSED-DEFAULT": {
+    "count": 484,
+    "detectMs": 14.307,
+    "peakRssMB": 62.7,
+    "wallMs": 86.407
+   },
+   "MOBILESAM": {
+    "autoMasks": 28,
+    "autoMs": 59964.23,
+    "encoderMs": 2091.692,
+    "peakRssMB": 2404.8,
+    "threads": 2,
+    "wallMs": 64795.38
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-BOUNDARY": 91,
+     "SCV-BOUNDARY-GAP": 111,
+     "SCV-BUILT": 1,
+     "SCV-LINES": 674,
+     "SCV-OUTLINE": 1,
+     "SCV-SOLID": 7,
+     "SCV-WALL": 27
+    },
+    "timingsMs": {
+     "boundaryLayer": 415.43,
+     "decode": 37.585,
+     "planSheetAndSolid": 333.212,
+     "sourceCvLines": 658.095
+    }
+   }
+  },
+  "real/dom-w-azaliach": {
+   "DEEPLSD-MD": {
+    "count": 635,
+    "inferMs": 12545.563,
+    "peakRssMB": 1847.0,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 13404.085
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 818,
+    "inferMs": 24276.816,
+    "inputLines": 818,
+    "missingKeys": 0,
+    "peakRssMB": 1940.6,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 25229.247
+   },
+   "DEEPLSD-WF": {
+    "count": 633,
+    "inferMs": 12657.082,
+    "peakRssMB": 1813.9,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 13506.31
+   },
+   "ELSED-DEFAULT": {
+    "count": 452,
+    "detectMs": 20.303,
+    "peakRssMB": 62.8,
+    "wallMs": 98.055
+   },
+   "MOBILESAM": {
+    "autoMasks": 52,
+    "autoMs": 53605.297,
+    "encoderMs": 2767.202,
+    "peakRssMB": 2462.7,
+    "threads": 2,
+    "wallMs": 59824.029
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-BOUNDARY": 76,
+     "SCV-BOUNDARY-GAP": 102,
+     "SCV-BUILT": 1,
+     "SCV-LINES": 818,
+     "SCV-OUTLINE": 1,
+     "SCV-SOLID": 20,
+     "SCV-WALL": 38
+    },
+    "timingsMs": {
+     "boundaryLayer": 277.034,
+     "decode": 37.075,
+     "planSheetAndSolid": 302.568,
+     "sourceCvLines": 586.238
+    }
+   }
+  },
+  "real/dom-w-helikoniach": {
+   "DEEPLSD-MD": {
+    "count": 548,
+    "inferMs": 14832.087,
+    "peakRssMB": 1891.5,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 15827.152
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 922,
+    "inferMs": 29815.339,
+    "inputLines": 922,
+    "missingKeys": 0,
+    "peakRssMB": 1952.0,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 31101.091
+   },
+   "DEEPLSD-WF": {
+    "count": 534,
+    "inferMs": 12881.516,
+    "peakRssMB": 1836.1,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 13806.019
+   },
+   "ELSED-DEFAULT": {
+    "count": 395,
+    "detectMs": 13.419,
+    "peakRssMB": 62.7,
+    "wallMs": 93.372
+   },
+   "MOBILESAM": {
+    "autoMasks": 32,
+    "autoMs": 52065.731,
+    "encoderMs": 3730.837,
+    "peakRssMB": 2440.8,
+    "threads": 2,
+    "wallMs": 60723.176
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-BOUNDARY": 72,
+     "SCV-BOUNDARY-GAP": 102,
+     "SCV-BUILT": 1,
+     "SCV-LINES": 922,
+     "SCV-OUTLINE": 1,
+     "SCV-SOLID": 13,
+     "SCV-WALL": 45
+    },
+    "timingsMs": {
+     "boundaryLayer": 506.082,
+     "decode": 35.701,
+     "planSheetAndSolid": 307.911,
+     "sourceCvLines": 678.994
+    }
+   }
+  },
+  "real/dom-w-morelach": {
+   "DEEPLSD-MD": {
+    "count": 773,
+    "inferMs": 11831.961,
+    "peakRssMB": 1847.0,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 12617.626
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 1195,
+    "inferMs": 26526.771,
+    "inputLines": 1195,
+    "missingKeys": 0,
+    "peakRssMB": 1852.9,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 27794.647
+   },
+   "DEEPLSD-WF": {
+    "count": 782,
+    "inferMs": 12471.363,
+    "peakRssMB": 1836.1,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 13270.048
+   },
+   "ELSED-DEFAULT": {
+    "count": 651,
+    "detectMs": 17.278,
+    "peakRssMB": 62.7,
+    "wallMs": 90.848
+   },
+   "MOBILESAM": {
+    "autoMasks": 55,
+    "autoMs": 50513.318,
+    "encoderMs": 2518.257,
+    "peakRssMB": 2453.3,
+    "threads": 2,
+    "wallMs": 56772.98
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-BOUNDARY": 88,
+     "SCV-BOUNDARY-GAP": 120,
+     "SCV-BUILT": 1,
+     "SCV-LINES": 1195,
+     "SCV-OUTLINE": 1,
+     "SCV-SOLID": 9,
+     "SCV-WALL": 39
+    },
+    "timingsMs": {
+     "boundaryLayer": 733.533,
+     "decode": 30.364,
+     "planSheetAndSolid": 298.588,
+     "sourceCvLines": 592.533
+    }
+   }
+  },
+  "real/dom-w-zurawkach": {
+   "DEEPLSD-MD": {
+    "count": 647,
+    "inferMs": 12366.584,
+    "peakRssMB": 1825.2,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 13162.953
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 834,
+    "inferMs": 19978.552,
+    "inputLines": 834,
+    "missingKeys": 0,
+    "peakRssMB": 1952.0,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 20853.828
+   },
+   "DEEPLSD-WF": {
+    "count": 615,
+    "inferMs": 12747.812,
+    "peakRssMB": 1836.1,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 13608.599
+   },
+   "ELSED-DEFAULT": {
+    "count": 545,
+    "detectMs": 16.409,
+    "peakRssMB": 62.7,
+    "wallMs": 94.472
+   },
+   "MOBILESAM": {
+    "autoMasks": 33,
+    "autoMs": 44302.227,
+    "encoderMs": 2682.374,
+    "peakRssMB": 2435.3,
+    "threads": 2,
+    "wallMs": 49774.909
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-BOUNDARY": 102,
+     "SCV-BOUNDARY-GAP": 155,
+     "SCV-BUILT": 1,
+     "SCV-LINES": 834,
+     "SCV-OUTLINE": 1,
+     "SCV-SOLID": 16,
+     "SCV-WALL": 31
+    },
+    "timingsMs": {
+     "boundaryLayer": 485.247,
+     "decode": 27.498,
+     "planSheetAndSolid": 318.701,
+     "sourceCvLines": 548.472
+    }
+   }
+  },
+  "real/willa-miranda": {
+   "DEEPLSD-MD": {
+    "count": 787,
+    "inferMs": 11653.327,
+    "peakRssMB": 1846.9,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 12479.68
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 785,
+    "inferMs": 18204.838,
+    "inputLines": 785,
+    "missingKeys": 0,
+    "peakRssMB": 1886.4,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 19106.105
+   },
+   "DEEPLSD-WF": {
+    "count": 783,
+    "inferMs": 10412.823,
+    "peakRssMB": 1836.1,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 11180.009
+   },
+   "ELSED-DEFAULT": {
+    "count": 692,
+    "detectMs": 15.817,
+    "peakRssMB": 62.9,
+    "wallMs": 93.328
+   },
+   "MOBILESAM": {
+    "autoMasks": 42,
+    "autoMs": 42723.503,
+    "encoderMs": 2297.066,
+    "peakRssMB": 2453.5,
+    "threads": 2,
+    "wallMs": 47790.745
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-BOUNDARY": 184,
+     "SCV-BOUNDARY-GAP": 249,
+     "SCV-BUILT": 1,
+     "SCV-LINES": 785,
+     "SCV-OUTLINE": 1,
+     "SCV-SOLID": 17,
+     "SCV-WALL": 46
+    },
+    "timingsMs": {
+     "boundaryLayer": 683.559,
+     "decode": 37.777,
+     "planSheetAndSolid": 269.026,
+     "sourceCvLines": 811.174
+    }
+   }
+  },
+  "synthetic/attached-garage": {
+   "DEEPLSD-MD": {
+    "count": 114,
+    "inferMs": 12423.038,
+    "peakRssMB": 2153.9,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 13178.253
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 460,
+    "inferMs": 15853.848,
+    "inputLines": 460,
+    "missingKeys": 0,
+    "peakRssMB": 2283.8,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 16703.914
+   },
+   "DEEPLSD-WF": {
+    "count": 121,
+    "inferMs": 11953.183,
+    "peakRssMB": 2154.0,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 12655.413
+   },
+   "ELSED-DEFAULT": {
+    "count": 80,
+    "detectMs": 11.627,
+    "peakRssMB": 64.6,
+    "wallMs": 81.368
+   },
+   "MOBILESAM": {
+    "autoMasks": 10,
+    "autoMs": 68282.763,
+    "encoderMs": 2714.223,
+    "peakRssMB": 2436.2,
+    "threads": 2,
+    "wallMs": 74876.619
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-BOUNDARY": 10,
+     "SCV-BOUNDARY-GAP": 5,
+     "SCV-BUILT": 1,
+     "SCV-LINES": 460,
+     "SCV-OUTLINE": 1,
+     "SCV-SOLID": 5,
+     "SCV-WALL": 6
+    },
+    "timingsMs": {
+     "boundaryLayer": 101.583,
+     "planSheetAndSolid": 212.545,
+     "sourceCvLines": 375.888,
+     "total": 690.73
+    }
+   }
+  },
+  "synthetic/bay-window": {
+   "DEEPLSD-MD": {
+    "count": 132,
+    "inferMs": 13968.94,
+    "peakRssMB": 1988.2,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 14758.236
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 462,
+    "inferMs": 25014.011,
+    "inputLines": 462,
+    "missingKeys": 0,
+    "peakRssMB": 2035.9,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 26067.603
+   },
+   "DEEPLSD-WF": {
+    "count": 144,
+    "inferMs": 15586.218,
+    "peakRssMB": 1988.2,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 16365.7
+   },
+   "ELSED-DEFAULT": {
+    "count": 107,
+    "detectMs": 11.271,
+    "peakRssMB": 63.4,
+    "wallMs": 79.767
+   },
+   "MOBILESAM": {
+    "autoMasks": 11,
+    "autoMs": 57122.988,
+    "encoderMs": 4097.066,
+    "peakRssMB": 2462.0,
+    "threads": 2,
+    "wallMs": 66406.826
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-BOUNDARY": 9,
+     "SCV-BOUNDARY-GAP": 5,
+     "SCV-BUILT": 1,
+     "SCV-LINES": 462,
+     "SCV-OUTLINE": 1,
+     "SCV-SOLID": 5,
+     "SCV-WALL": 6
+    },
+    "timingsMs": {
+     "boundaryLayer": 82.934,
+     "planSheetAndSolid": 161.628,
+     "sourceCvLines": 316.126,
+     "total": 561.203
+    }
+   }
+  },
+  "synthetic/dimension-lines-near-facade": {
+   "DEEPLSD-MD": {
+    "count": 76,
+    "inferMs": 11849.38,
+    "peakRssMB": 1988.2,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 12619.508
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 441,
+    "inferMs": 22994.126,
+    "inputLines": 441,
+    "missingKeys": 0,
+    "peakRssMB": 2011.1,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 23895.361
+   },
+   "DEEPLSD-WF": {
+    "count": 85,
+    "inferMs": 13296.784,
+    "peakRssMB": 2000.6,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 14080.307
+   },
+   "ELSED-DEFAULT": {
+    "count": 64,
+    "detectMs": 10.001,
+    "peakRssMB": 63.3,
+    "wallMs": 82.336
+   },
+   "MOBILESAM": {
+    "autoMasks": 5,
+    "autoMs": 63247.055,
+    "encoderMs": 3309.195,
+    "peakRssMB": 2415.8,
+    "threads": 2,
+    "wallMs": 71628.27
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-BOUNDARY": 9,
+     "SCV-BOUNDARY-GAP": 5,
+     "SCV-BUILT": 1,
+     "SCV-LINES": 441,
+     "SCV-OUTLINE": 1,
+     "SCV-SOLID": 5,
+     "SCV-WALL": 5
+    },
+    "timingsMs": {
+     "boundaryLayer": 84.969,
+     "planSheetAndSolid": 147.815,
+     "sourceCvLines": 232.282,
+     "total": 465.544
+    }
+   }
+  },
+  "synthetic/double-line-walls": {
+   "DEEPLSD-MD": {
+    "count": 247,
+    "inferMs": 13702.102,
+    "peakRssMB": 2062.3,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 14447.253
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 420,
+    "inferMs": 18768.666,
+    "inputLines": 420,
+    "missingKeys": 0,
+    "peakRssMB": 2097.5,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 19745.215
+   },
+   "DEEPLSD-WF": {
+    "count": 202,
+    "inferMs": 13748.583,
+    "peakRssMB": 2000.6,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 14559.6
+   },
+   "ELSED-DEFAULT": {
+    "count": 121,
+    "detectMs": 10.108,
+    "peakRssMB": 63.6,
+    "wallMs": 75.409
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-LINES": 420
+    },
+    "timingsMs": {
+     "boundaryLayer": 0.158,
+     "planSheetAndSolid": 226.434,
+     "sourceCvLines": 357.651,
+     "total": 584.848
+    }
+   }
+  },
+  "synthetic/garage-door-interruption": {
+   "DEEPLSD-MD": {
+    "count": 118,
+    "inferMs": 16872.82,
+    "peakRssMB": 2236.4,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 17678.364
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 459,
+    "inferMs": 23902.757,
+    "inputLines": 459,
+    "missingKeys": 0,
+    "peakRssMB": 2201.7,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 24780.445
+   },
+   "DEEPLSD-WF": {
+    "count": 125,
+    "inferMs": 14740.626,
+    "peakRssMB": 2153.9,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 15566.994
+   },
+   "ELSED-DEFAULT": {
+    "count": 79,
+    "detectMs": 11.91,
+    "peakRssMB": 64.6,
+    "wallMs": 80.077
+   },
+   "MOBILESAM": {
+    "autoMasks": 10,
+    "autoMs": 55682.711,
+    "encoderMs": 3447.738,
+    "peakRssMB": 2464.5,
+    "threads": 2,
+    "wallMs": 62670.331
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-BOUNDARY": 10,
+     "SCV-BOUNDARY-GAP": 4,
+     "SCV-BUILT": 1,
+     "SCV-LINES": 459,
+     "SCV-OUTLINE": 1,
+     "SCV-SOLID": 5,
+     "SCV-WALL": 6
+    },
+    "timingsMs": {
+     "boundaryLayer": 111.07,
+     "planSheetAndSolid": 222.019,
+     "sourceCvLines": 312.371,
+     "total": 646.216
+    }
+   }
+  },
+  "synthetic/glazed-facade": {
+   "DEEPLSD-MD": {
+    "count": 80,
+    "inferMs": 15010.188,
+    "peakRssMB": 2062.4,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 15805.597
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 454,
+    "inferMs": 16302.525,
+    "inputLines": 454,
+    "missingKeys": 0,
+    "peakRssMB": 2097.8,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 17138.608
+   },
+   "DEEPLSD-WF": {
+    "count": 83,
+    "inferMs": 11944.173,
+    "peakRssMB": 2050.0,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 12787.678
+   },
+   "ELSED-DEFAULT": {
+    "count": 64,
+    "detectMs": 13.823,
+    "peakRssMB": 63.4,
+    "wallMs": 95.743
+   },
+   "MOBILESAM": {
+    "autoMasks": 6,
+    "autoMs": 52531.416,
+    "encoderMs": 3373.949,
+    "peakRssMB": 2422.5,
+    "threads": 2,
+    "wallMs": 60930.895
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-BOUNDARY": 6,
+     "SCV-BOUNDARY-GAP": 6,
+     "SCV-BUILT": 1,
+     "SCV-LINES": 454,
+     "SCV-OUTLINE": 1,
+     "SCV-SOLID": 3,
+     "SCV-WALL": 4
+    },
+    "timingsMs": {
+     "boundaryLayer": 101.529,
+     "planSheetAndSolid": 160.1,
+     "sourceCvLines": 229.773,
+     "total": 491.926
+    }
+   }
+  },
+  "synthetic/hatch-floor-patterns": {
+   "DEEPLSD-MD": {
+    "count": 328,
+    "inferMs": 18821.288,
+    "peakRssMB": 1963.7,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 19610.298
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 457,
+    "inferMs": 23948.697,
+    "inputLines": 457,
+    "missingKeys": 0,
+    "peakRssMB": 2110.0,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 25037.041
+   },
+   "DEEPLSD-WF": {
+    "count": 335,
+    "inferMs": 18210.96,
+    "peakRssMB": 1988.2,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 19054.335
+   },
+   "ELSED-DEFAULT": {
+    "count": 121,
+    "detectMs": 11.708,
+    "peakRssMB": 63.5,
+    "wallMs": 90.455
+   },
+   "MOBILESAM": {
+    "autoMasks": 9,
+    "autoMs": 71228.976,
+    "encoderMs": 2631.958,
+    "peakRssMB": 2406.7,
+    "threads": 2,
+    "wallMs": 77879.976
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-BOUNDARY": 8,
+     "SCV-BOUNDARY-GAP": 4,
+     "SCV-BUILT": 1,
+     "SCV-LINES": 457,
+     "SCV-OUTLINE": 1,
+     "SCV-SOLID": 4,
+     "SCV-WALL": 5
+    },
+    "timingsMs": {
+     "boundaryLayer": 77.682,
+     "planSheetAndSolid": 154.372,
+     "sourceCvLines": 301.957,
+     "total": 534.702
+    }
+   }
+  },
+  "synthetic/interior-partitions-near-exterior": {
+   "DEEPLSD-MD": {
+    "count": 105,
+    "inferMs": 15774.68,
+    "peakRssMB": 1976.0,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 16574.516
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 463,
+    "inferMs": 28806.669,
+    "inputLines": 463,
+    "missingKeys": 0,
+    "peakRssMB": 2036.1,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 30850.279
+   },
+   "DEEPLSD-WF": {
+    "count": 113,
+    "inferMs": 22911.552,
+    "peakRssMB": 1988.1,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 23913.814
+   },
+   "ELSED-DEFAULT": {
+    "count": 75,
+    "detectMs": 11.805,
+    "peakRssMB": 63.4,
+    "wallMs": 81.081
+   },
+   "MOBILESAM": {
+    "autoMasks": 4,
+    "autoMs": 71667.477,
+    "encoderMs": 3567.144,
+    "peakRssMB": 2462.2,
+    "threads": 2,
+    "wallMs": 80437.058
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-BOUNDARY": 9,
+     "SCV-BOUNDARY-GAP": 5,
+     "SCV-BUILT": 1,
+     "SCV-LINES": 463,
+     "SCV-OUTLINE": 1,
+     "SCV-SOLID": 5,
+     "SCV-WALL": 4
+    },
+    "timingsMs": {
+     "boundaryLayer": 138.331,
+     "planSheetAndSolid": 170.577,
+     "sourceCvLines": 287.935,
+     "total": 597.633
+    }
+   }
+  },
+  "synthetic/jpeg-compression": {
+   "DEEPLSD-MD": {
+    "count": 144,
+    "inferMs": 21572.359,
+    "peakRssMB": 1988.1,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 22564.053
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 454,
+    "inferMs": 26324.012,
+    "inputLines": 454,
+    "missingKeys": 0,
+    "peakRssMB": 2036.1,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 27459.724
+   },
+   "DEEPLSD-WF": {
+    "count": 162,
+    "inferMs": 14571.026,
+    "peakRssMB": 2050.2,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 15382.144
+   },
+   "ELSED-DEFAULT": {
+    "count": 88,
+    "detectMs": 15.7,
+    "peakRssMB": 63.3,
+    "wallMs": 160.992
+   },
+   "MOBILESAM": {
+    "autoMasks": 16,
+    "autoMs": 71585.49,
+    "encoderMs": 4161.586,
+    "peakRssMB": 2413.6,
+    "threads": 2,
+    "wallMs": 82042.906
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-BOUNDARY": 11,
+     "SCV-BOUNDARY-GAP": 5,
+     "SCV-BUILT": 1,
+     "SCV-LINES": 454,
+     "SCV-OUTLINE": 1,
+     "SCV-SOLID": 5,
+     "SCV-WALL": 6
+    },
+    "timingsMs": {
+     "boundaryLayer": 99.085,
+     "planSheetAndSolid": 160.886,
+     "sourceCvLines": 407.861,
+     "total": 668.609
+    }
+   }
+  },
+  "synthetic/l-shape": {
+   "DEEPLSD-MD": {
+    "count": 108,
+    "inferMs": 13555.68,
+    "peakRssMB": 1975.9,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 14269.29
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 456,
+    "inferMs": 20924.014,
+    "inputLines": 456,
+    "missingKeys": 0,
+    "peakRssMB": 2035.8,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 21794.678
+   },
+   "DEEPLSD-WF": {
+    "count": 123,
+    "inferMs": 14853.829,
+    "peakRssMB": 2062.5,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 15739.677
+   },
+   "ELSED-DEFAULT": {
+    "count": 89,
+    "detectMs": 11.196,
+    "peakRssMB": 63.4,
+    "wallMs": 82.261
+   },
+   "MOBILESAM": {
+    "autoMasks": 17,
+    "autoMs": 71863.215,
+    "encoderMs": 4115.035,
+    "peakRssMB": 2407.3,
+    "threads": 2,
+    "wallMs": 82013.915
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-BOUNDARY": 11,
+     "SCV-BOUNDARY-GAP": 5,
+     "SCV-BUILT": 1,
+     "SCV-LINES": 456,
+     "SCV-OUTLINE": 1,
+     "SCV-SOLID": 5,
+     "SCV-WALL": 6
+    },
+    "timingsMs": {
+     "boundaryLayer": 128.951,
+     "planSheetAndSolid": 249.24,
+     "sourceCvLines": 446.73,
+     "total": 826.566
+    }
+   }
+  },
+  "synthetic/low-contrast": {
+   "DEEPLSD-MD": {
+    "count": 115,
+    "inferMs": 14076.737,
+    "peakRssMB": 2062.3,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 14880.39
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 464,
+    "inferMs": 18392.552,
+    "inputLines": 464,
+    "missingKeys": 0,
+    "peakRssMB": 2011.5,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 19269.58
+   },
+   "DEEPLSD-WF": {
+    "count": 119,
+    "inferMs": 14420.962,
+    "peakRssMB": 1988.1,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 15224.695
+   },
+   "ELSED-DEFAULT": {
+    "count": 90,
+    "detectMs": 18.113,
+    "peakRssMB": 63.5,
+    "wallMs": 112.545
+   },
+   "MOBILESAM": {
+    "autoMasks": 18,
+    "autoMs": 73238.788,
+    "encoderMs": 4050.436,
+    "peakRssMB": 2422.2,
+    "threads": 2,
+    "wallMs": 82758.037
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-BOUNDARY": 11,
+     "SCV-BOUNDARY-GAP": 5,
+     "SCV-BUILT": 1,
+     "SCV-LINES": 464,
+     "SCV-OUTLINE": 1,
+     "SCV-SOLID": 5,
+     "SCV-WALL": 6
+    },
+    "timingsMs": {
+     "boundaryLayer": 66.76,
+     "planSheetAndSolid": 134.971,
+     "sourceCvLines": 255.982,
+     "total": 457.993
+    }
+   }
+  },
+  "synthetic/narrow-connector": {
+   "DEEPLSD-MD": {
+    "count": 147,
+    "inferMs": 19418.03,
+    "peakRssMB": 2222.6,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 20431.469
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 468,
+    "inferMs": 27528.812,
+    "inputLines": 468,
+    "missingKeys": 0,
+    "peakRssMB": 2160.8,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 28453.315
+   },
+   "DEEPLSD-WF": {
+    "count": 155,
+    "inferMs": 16583.803,
+    "peakRssMB": 2112.9,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 17346.892
+   },
+   "ELSED-DEFAULT": {
+    "count": 97,
+    "detectMs": 13.706,
+    "peakRssMB": 64.8,
+    "wallMs": 97.206
+   },
+   "MOBILESAM": {
+    "autoMasks": 10,
+    "autoMs": 68132.303,
+    "encoderMs": 4513.228,
+    "peakRssMB": 2408.4,
+    "threads": 2,
+    "wallMs": 79154.653
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-BOUNDARY": 16,
+     "SCV-BOUNDARY-GAP": 8,
+     "SCV-BUILT": 1,
+     "SCV-LINES": 468,
+     "SCV-OUTLINE": 1,
+     "SCV-SOLID": 4,
+     "SCV-WALL": 10
+    },
+    "timingsMs": {
+     "boundaryLayer": 146.557,
+     "planSheetAndSolid": 165.73,
+     "sourceCvLines": 302.634,
+     "total": 615.611
+    }
+   }
+  },
+  "synthetic/partial-crop": {
+   "DEEPLSD-MD": {
+    "count": 81,
+    "inferMs": 6439.101,
+    "peakRssMB": 1328.4,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 7208.843
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 444,
+    "inferMs": 10003.795,
+    "inputLines": 444,
+    "missingKeys": 0,
+    "peakRssMB": 1375.9,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 10861.902
+   },
+   "DEEPLSD-WF": {
+    "count": 90,
+    "inferMs": 6485.493,
+    "peakRssMB": 1315.8,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 7211.363
+   },
+   "ELSED-DEFAULT": {
+    "count": 62,
+    "detectMs": 10.715,
+    "peakRssMB": 58.3,
+    "wallMs": 91.683
+   },
+   "MOBILESAM": {
+    "autoMasks": 15,
+    "autoMs": 51677.947,
+    "encoderMs": 2101.465,
+    "peakRssMB": 2440.0,
+    "threads": 2,
+    "wallMs": 55565.587
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-BOUNDARY": 6,
+     "SCV-BOUNDARY-GAP": 3,
+     "SCV-BUILT": 1,
+     "SCV-LINES": 444,
+     "SCV-OUTLINE": 1,
+     "SCV-SOLID": 4,
+     "SCV-WALL": 5
+    },
+    "timingsMs": {
+     "boundaryLayer": 35.665,
+     "planSheetAndSolid": 73.543,
+     "sourceCvLines": 261.186,
+     "total": 370.858
+    }
+   }
+  },
+  "synthetic/pergola-outside": {
+   "DEEPLSD-MD": {
+    "count": 122,
+    "inferMs": 13515.1,
+    "peakRssMB": 2044.8,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 14313.224
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 449,
+    "inferMs": 21219.995,
+    "inputLines": 449,
+    "missingKeys": 0,
+    "peakRssMB": 2118.6,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 22255.899
+   },
+   "DEEPLSD-WF": {
+    "count": 128,
+    "inferMs": 13322.223,
+    "peakRssMB": 2070.6,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 14140.614
+   },
+   "ELSED-DEFAULT": {
+    "count": 69,
+    "detectMs": 11.051,
+    "peakRssMB": 64.2,
+    "wallMs": 82.296
+   },
+   "MOBILESAM": {
+    "autoMasks": 9,
+    "autoMs": 63423.101,
+    "encoderMs": 3776.077,
+    "peakRssMB": 2465.9,
+    "threads": 2,
+    "wallMs": 71321.659
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-BOUNDARY": 9,
+     "SCV-BOUNDARY-GAP": 5,
+     "SCV-BUILT": 1,
+     "SCV-LINES": 449,
+     "SCV-OUTLINE": 1,
+     "SCV-SOLID": 5,
+     "SCV-WALL": 4
+    },
+    "timingsMs": {
+     "boundaryLayer": 83.944,
+     "planSheetAndSolid": 162.736,
+     "sourceCvLines": 387.595,
+     "total": 640.103
+    }
+   }
+  },
+  "synthetic/recessed-entrance": {
+   "DEEPLSD-MD": {
+    "count": 104,
+    "inferMs": 21664.78,
+    "peakRssMB": 1988.4,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 22662.041
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 458,
+    "inferMs": 15719.453,
+    "inputLines": 458,
+    "missingKeys": 0,
+    "peakRssMB": 2036.0,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 16597.366
+   },
+   "DEEPLSD-WF": {
+    "count": 124,
+    "inferMs": 11768.205,
+    "peakRssMB": 2050.2,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 12816.837
+   },
+   "ELSED-DEFAULT": {
+    "count": 86,
+    "detectMs": 11.751,
+    "peakRssMB": 63.6,
+    "wallMs": 76.998
+   },
+   "MOBILESAM": {
+    "autoMasks": 8,
+    "autoMs": 46351.576,
+    "encoderMs": 2717.31,
+    "peakRssMB": 2418.0,
+    "threads": 2,
+    "wallMs": 52082.204
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-BOUNDARY": 12,
+     "SCV-BOUNDARY-GAP": 6,
+     "SCV-BUILT": 1,
+     "SCV-LINES": 458,
+     "SCV-OUTLINE": 1,
+     "SCV-SOLID": 5,
+     "SCV-WALL": 7
+    },
+    "timingsMs": {
+     "boundaryLayer": 113.91,
+     "planSheetAndSolid": 161.347,
+     "sourceCvLines": 321.902,
+     "total": 597.715
+    }
+   }
+  },
+  "synthetic/rect": {
+   "DEEPLSD-MD": {
+    "count": 79,
+    "inferMs": 12024.978,
+    "peakRssMB": 2049.9,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 12805.269
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 441,
+    "inferMs": 15638.592,
+    "inputLines": 441,
+    "missingKeys": 0,
+    "peakRssMB": 2035.8,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 16581.285
+   },
+   "DEEPLSD-WF": {
+    "count": 93,
+    "inferMs": 11913.619,
+    "peakRssMB": 2074.7,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 12757.979
+   },
+   "ELSED-DEFAULT": {
+    "count": 68,
+    "detectMs": 11.359,
+    "peakRssMB": 63.4,
+    "wallMs": 99.831
+   },
+   "MOBILESAM": {
+    "autoMasks": 7,
+    "autoMs": 54575.174,
+    "encoderMs": 1890.739,
+    "peakRssMB": 2486.0,
+    "threads": 2,
+    "wallMs": 58857.365
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-BOUNDARY": 9,
+     "SCV-BOUNDARY-GAP": 5,
+     "SCV-BUILT": 1,
+     "SCV-LINES": 441,
+     "SCV-OUTLINE": 1,
+     "SCV-SOLID": 5,
+     "SCV-WALL": 4
+    },
+    "timingsMs": {
+     "boundaryLayer": 160.437,
+     "planSheetAndSolid": 350.453,
+     "sourceCvLines": 379.122,
+     "total": 891.825
+    }
+   }
+  },
+  "synthetic/rotated-plan": {
+   "DEEPLSD-MD": {
+    "count": 105,
+    "inferMs": 11972.454,
+    "peakRssMB": 2049.9,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 12839.941
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 421,
+    "inferMs": 15717.119,
+    "inputLines": 421,
+    "missingKeys": 0,
+    "peakRssMB": 2035.9,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 16533.684
+   },
+   "DEEPLSD-WF": {
+    "count": 110,
+    "inferMs": 11400.868,
+    "peakRssMB": 2000.5,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 12111.288
+   },
+   "ELSED-DEFAULT": {
+    "count": 93,
+    "detectMs": 15.482,
+    "peakRssMB": 63.3,
+    "wallMs": 120.394
+   },
+   "MOBILESAM": {
+    "autoMasks": 13,
+    "autoMs": 49056.049,
+    "encoderMs": 2350.932,
+    "peakRssMB": 2474.6,
+    "threads": 2,
+    "wallMs": 53971.941
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-BOUNDARY": 9,
+     "SCV-BOUNDARY-GAP": 7,
+     "SCV-BUILT": 1,
+     "SCV-LINES": 421,
+     "SCV-OUTLINE": 1,
+     "SCV-SOLID": 5,
+     "SCV-WALL": 11
+    },
+    "timingsMs": {
+     "boundaryLayer": 112.073,
+     "planSheetAndSolid": 234.138,
+     "sourceCvLines": 297.764,
+     "total": 644.5
+    }
+   }
+  },
+  "synthetic/scan-blur": {
+   "DEEPLSD-MD": {
+    "count": 116,
+    "inferMs": 13211.272,
+    "peakRssMB": 1988.3,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 13964.315
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 492,
+    "inferMs": 15694.391,
+    "inputLines": 492,
+    "missingKeys": 0,
+    "peakRssMB": 1999.2,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 16539.147
+   },
+   "DEEPLSD-WF": {
+    "count": 129,
+    "inferMs": 12002.015,
+    "peakRssMB": 2050.2,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 12787.689
+   },
+   "ELSED-DEFAULT": {
+    "count": 108,
+    "detectMs": 11.323,
+    "peakRssMB": 63.5,
+    "wallMs": 92.559
+   },
+   "MOBILESAM": {
+    "autoMasks": 12,
+    "autoMs": 46371.948,
+    "encoderMs": 2499.126,
+    "peakRssMB": 2469.2,
+    "threads": 2,
+    "wallMs": 51968.224
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-BOUNDARY": 14,
+     "SCV-BOUNDARY-GAP": 8,
+     "SCV-BUILT": 1,
+     "SCV-LINES": 492,
+     "SCV-OUTLINE": 1,
+     "SCV-SOLID": 5,
+     "SCV-WALL": 20
+    },
+    "timingsMs": {
+     "boundaryLayer": 121.793,
+     "planSheetAndSolid": 171.543,
+     "sourceCvLines": 554.928,
+     "total": 848.821
+    }
+   }
+  },
+  "synthetic/skew": {
+   "DEEPLSD-MD": {
+    "count": 126,
+    "inferMs": 11573.03,
+    "peakRssMB": 1951.1,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 12336.075
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 433,
+    "inferMs": 25808.987,
+    "inputLines": 433,
+    "missingKeys": 0,
+    "peakRssMB": 2023.8,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 26670.043
+   },
+   "DEEPLSD-WF": {
+    "count": 125,
+    "inferMs": 13880.605,
+    "peakRssMB": 1988.2,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 14783.329
+   },
+   "ELSED-DEFAULT": {
+    "count": 99,
+    "detectMs": 18.943,
+    "peakRssMB": 63.4,
+    "wallMs": 122.359
+   },
+   "MOBILESAM": {
+    "autoMasks": 16,
+    "autoMs": 45230.706,
+    "encoderMs": 2112.418,
+    "peakRssMB": 2409.2,
+    "threads": 2,
+    "wallMs": 49853.193
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-BOUNDARY": 11,
+     "SCV-BOUNDARY-GAP": 7,
+     "SCV-BUILT": 1,
+     "SCV-LINES": 433,
+     "SCV-OUTLINE": 1,
+     "SCV-SOLID": 5,
+     "SCV-WALL": 13
+    },
+    "timingsMs": {
+     "boundaryLayer": 80.252,
+     "planSheetAndSolid": 192.763,
+     "sourceCvLines": 285.771,
+     "total": 559.234
+    }
+   }
+  },
+  "synthetic/terrace-adjacent": {
+   "DEEPLSD-MD": {
+    "count": 369,
+    "inferMs": 16891.09,
+    "peakRssMB": 2070.5,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 17750.536
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 462,
+    "inferMs": 20638.589,
+    "inputLines": 462,
+    "missingKeys": 0,
+    "peakRssMB": 2079.4,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 21495.607
+   },
+   "DEEPLSD-WF": {
+    "count": 394,
+    "inferMs": 18172.542,
+    "peakRssMB": 2070.7,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 19235.164
+   },
+   "ELSED-DEFAULT": {
+    "count": 131,
+    "detectMs": 12.905,
+    "peakRssMB": 64.1,
+    "wallMs": 97.253
+   },
+   "MOBILESAM": {
+    "autoMasks": 10,
+    "autoMs": 44419.44,
+    "encoderMs": 1972.317,
+    "peakRssMB": 2486.0,
+    "threads": 2,
+    "wallMs": 48582.262
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-BOUNDARY": 9,
+     "SCV-BOUNDARY-GAP": 5,
+     "SCV-BUILT": 1,
+     "SCV-LINES": 462,
+     "SCV-OUTLINE": 1,
+     "SCV-SOLID": 5,
+     "SCV-WALL": 5
+    },
+    "timingsMs": {
+     "boundaryLayer": 91.045,
+     "planSheetAndSolid": 236.646,
+     "sourceCvLines": 360.671,
+     "total": 689.154
+    }
+   }
+  },
+  "synthetic/text-crossing-walls": {
+   "DEEPLSD-MD": {
+    "count": 101,
+    "inferMs": 14046.203,
+    "peakRssMB": 2050.3,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 14769.275
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 450,
+    "inferMs": 24578.365,
+    "inputLines": 450,
+    "missingKeys": 0,
+    "peakRssMB": 2035.9,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 25653.243
+   },
+   "DEEPLSD-WF": {
+    "count": 110,
+    "inferMs": 15001.661,
+    "peakRssMB": 2050.3,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 15809.051
+   },
+   "ELSED-DEFAULT": {
+    "count": 78,
+    "detectMs": 10.533,
+    "peakRssMB": 63.4,
+    "wallMs": 74.818
+   },
+   "MOBILESAM": {
+    "autoMasks": 6,
+    "autoMs": 45125.921,
+    "encoderMs": 1982.684,
+    "peakRssMB": 2425.3,
+    "threads": 2,
+    "wallMs": 49441.263
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-BOUNDARY": 9,
+     "SCV-BOUNDARY-GAP": 6,
+     "SCV-BUILT": 1,
+     "SCV-LINES": 450,
+     "SCV-OUTLINE": 1,
+     "SCV-SOLID": 6,
+     "SCV-WALL": 6
+    },
+    "timingsMs": {
+     "boundaryLayer": 83.254,
+     "planSheetAndSolid": 197.474,
+     "sourceCvLines": 243.293,
+     "total": 524.589
+    }
+   }
+  },
+  "synthetic/u-shape": {
+   "DEEPLSD-MD": {
+    "count": 114,
+    "inferMs": 18248.144,
+    "peakRssMB": 1988.2,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 19086.472
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 457,
+    "inferMs": 20097.365,
+    "inputLines": 457,
+    "missingKeys": 0,
+    "peakRssMB": 2035.9,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 20981.719
+   },
+   "DEEPLSD-WF": {
+    "count": 121,
+    "inferMs": 13779.293,
+    "peakRssMB": 2074.7,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 14698.54
+   },
+   "ELSED-DEFAULT": {
+    "count": 88,
+    "detectMs": 10.977,
+    "peakRssMB": 63.7,
+    "wallMs": 78.903
+   },
+   "MOBILESAM": {
+    "autoMasks": 16,
+    "autoMs": 43896.023,
+    "encoderMs": 1875.074,
+    "peakRssMB": 2460.0,
+    "threads": 2,
+    "wallMs": 48232.414
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-BOUNDARY": 13,
+     "SCV-BOUNDARY-GAP": 6,
+     "SCV-BUILT": 1,
+     "SCV-LINES": 457,
+     "SCV-OUTLINE": 1,
+     "SCV-SOLID": 5,
+     "SCV-WALL": 9
+    },
+    "timingsMs": {
+     "boundaryLayer": 101.336,
+     "planSheetAndSolid": 208.3,
+     "sourceCvLines": 272.52,
+     "total": 582.758
+    }
+   }
+  },
+  "synthetic/windows-long-facade": {
+   "DEEPLSD-MD": {
+    "count": 96,
+    "inferMs": 13328.893,
+    "peakRssMB": 2043.8,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 14076.945
+   },
+   "DEEPLSD-MD-REFINE-SCV": {
+    "count": 446,
+    "inferMs": 19839.929,
+    "inputLines": 446,
+    "missingKeys": 0,
+    "peakRssMB": 2091.4,
+    "threads": 2,
+    "unexpectedKeys": 0,
+    "wallMs": 20736.053
+   },
+   "DEEPLSD-WF": {
+    "count": 101,
+    "inferMs": 13725.559,
+    "peakRssMB": 2031.0,
+    "strictLoad": "<All keys matched successfully>",
+    "threads": 2,
+    "wallMs": 14636.95
+   },
+   "ELSED-DEFAULT": {
+    "count": 87,
+    "detectMs": 13.698,
+    "peakRssMB": 63.9,
+    "wallMs": 85.44
+   },
+   "MOBILESAM": {
+    "autoMasks": 6,
+    "autoMs": 49964.653,
+    "encoderMs": 2346.461,
+    "peakRssMB": 2439.2,
+    "threads": 2,
+    "wallMs": 55276.249
+   },
+   "sourceCv": {
+    "counts": {
+     "SCV-BOUNDARY": 12,
+     "SCV-BOUNDARY-GAP": 8,
+     "SCV-BUILT": 1,
+     "SCV-LINES": 446,
+     "SCV-OUTLINE": 1,
+     "SCV-SOLID": 8,
+     "SCV-WALL": 4
+    },
+    "timingsMs": {
+     "boundaryLayer": 113.938,
+     "planSheetAndSolid": 154.753,
+     "sourceCvLines": 351.964,
+     "total": 621.203
+    }
+   }
+  }
+ },
+ "onnxExport": {
+  "deeplsdOnnx": {
+   "bytes": 34310477,
+   "inputShape": [
+    1,
+    1,
+    853,
+    853
+   ],
+   "sha256": "bd79156c94e9253b29d142595487e569d9e0cc08b2ad3a1f5b48fba063d58f74"
+  },
+  "deeplsdTorchMs1Thread": 18290.115,
+  "msamDecoderOnnx": {
+   "bytes": 16501736,
+   "sha256": "0f0157d3e96a12ed6010b42c12858d1a8d431e45ae92ee28b703ff33c9d43053"
+  },
+  "msamEncoderOnnx": {
+   "bytes": 27969714,
+   "sha256": "8cb9a8059894e73aa869474ff0efe03889777e09cd55d84a0fe8da21a7ea8d9b"
+  },
+  "msamEncoderTorchMs1Thread": 2618.104
+ },
+ "researchOnly": true,
+ "summary": {
+  "DEEPLSD-MD": {
+   "frames": 30,
+   "max_count": 897.0,
+   "max_inferMs": 21664.8,
+   "max_peakRssMB": 2236.4,
+   "max_wallMs": 22662.0,
+   "median_count": 120.0,
+   "median_inferMs": 13535.4,
+   "median_peakRssMB": 1988.2,
+   "median_wallMs": 14291.3
+  },
+  "DEEPLSD-MD-REFINE-SCV": {
+   "frames": 30,
+   "max_count": 1195.0,
+   "max_inferMs": 29815.3,
+   "max_peakRssMB": 2283.8,
+   "max_wallMs": 31101.1,
+   "median_count": 458.5,
+   "median_inferMs": 20368.0,
+   "median_peakRssMB": 2035.9,
+   "median_wallMs": 21238.7
+  },
+  "DEEPLSD-WF": {
+   "frames": 30,
+   "max_count": 948.0,
+   "max_inferMs": 22911.6,
+   "max_peakRssMB": 2154.0,
+   "max_wallMs": 23913.8,
+   "median_count": 126.5,
+   "median_inferMs": 13309.5,
+   "median_peakRssMB": 2000.6,
+   "median_wallMs": 14110.5
+  },
+  "ELSED-DEFAULT": {
+   "frames": 30,
+   "max_count": 767.0,
+   "max_detectMs": 20.3,
+   "max_peakRssMB": 64.8,
+   "max_wallMs": 161.0,
+   "median_count": 91.5,
+   "median_detectMs": 12.4,
+   "median_peakRssMB": 63.4,
+   "median_wallMs": 91.3
+  },
+  "MOBILESAM": {
+   "frames": 29,
+   "max_autoMs": 73238.8,
+   "max_encoderMs": 4513.2,
+   "max_peakRssMB": 2486.0,
+   "max_wallMs": 82758.0,
+   "median_autoMs": 52531.4,
+   "median_encoderMs": 2682.4,
+   "median_peakRssMB": 2440.0,
+   "median_wallMs": 59824.0
+  },
+  "SOURCE_CV": {
+   "frames": 30,
+   "median_boundaryLayerMs": 111.6,
+   "median_linesMs": 354.8,
+   "median_planSheetAndSolidMs": 202.9
+  }
+ },
+ "wasmProbeNode18": {
+  "models": {
+   "deeplsd_md_fields": {
+    "bytes": 34310477,
+    "file": "deeplsd_md_fields.onnx",
+    "inferMs": 59619,
+    "loadMs": 1199,
+    "maxAbsDiffVsTorch": 0.0004115104675292969,
+    "rssAfterMiB": 1207,
+    "rssBeforeMiB": 52
+   },
+   "mobile_sam_decoder": {
+    "bytes": 16501736,
+    "file": "mobile_sam_decoder.onnx",
+    "inferMs": 872,
+    "loadMs": 2252,
+    "maxAbsDiffVsTorch": null,
+    "rssAfterMiB": 404,
+    "rssBeforeMiB": 54
+   },
+   "mobile_sam_encoder": {
+    "bytes": 27969714,
+    "file": "mobile_sam_encoder.onnx",
+    "inferMs": 7723,
+    "loadMs": 2663,
+    "maxAbsDiffVsTorch": 1.9371509552001953e-06,
+    "rssAfterMiB": 637,
+    "rssBeforeMiB": 70
+   }
+  },
+  "node": "v18.20.4",
+  "note": "one process per model (isolated RSS); box shared with a concurrent development matrix (load average 7.5-8.5 on 4 vCPU): timings are upper bounds on this x86-64 box, not phone timings",
+  "peakRssMiBPerModel": {
+   "deeplsd_md_fields": 1207,
+   "mobile_sam_decoder": 404,
+   "mobile_sam_encoder": 637
+  },
+  "runtime": "onnxruntime-web@1.30.0",
+  "threads": 1
+ }
+}

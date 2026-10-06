@@ -1,0 +1,61 @@
+{
+  "_comment": "BUILDPLAN-ANALYZER-005I Track B development set. Sealed packages + offline byte caches only. Paths starting with '/' are outside the repository (byte caches hold publisher bytes and never enter git). purpose=DEV_BOUNDARY: documented boundary failures; purpose=METRIC_CONTROL: blind round 7 houses, included only to check a boundary witness does not confuse a metric defect with a visual defect. run = the FROZEN 005H production run of that house (005H code d14304c, external numeric recogniser ON), computed before this stage; this harness reads its observation graph, metric evidence and plan digest and never re-runs the pipeline.",
+  "houses": [
+    {
+      "cache": "/home/user/work005f/blind6/cache",
+      "id": "dom-w-helikoniach",
+      "package": "stage-reports/artifacts/analyzer-005f/holdout/h2-dom-w-helikoniach/source-package.json",
+      "packageSha256": "bf34aefadc7c1fb1547d6a0481b3bac56eae81913a443d396a5f9e815ab5f09b",
+      "purpose": "DEV_BOUNDARY",
+      "run": "/home/user/work005h/m-on/dom-w-helikoniach"
+    },
+    {
+      "cache": "/home/user/work005e/blind5/cache",
+      "id": "dom-w-morelach",
+      "package": "stage-reports/artifacts/analyzer-005e/holdout/h2-dom-w-morelach/source-package.json",
+      "packageSha256": "9889f18653c05550d6d61ccd96becff2655bf0edd2f3a41e39f2ee1003450a2d",
+      "purpose": "DEV_BOUNDARY",
+      "run": "/home/user/work005h/m-on/dom-w-morelach"
+    },
+    {
+      "cache": "/home/user/work005d/cache",
+      "id": "willa-miranda",
+      "package": "stage-reports/artifacts/analyzer-005b/dev/willa-miranda/source-package.json",
+      "packageSha256": "e5785d33a5b51d7dfe1e2e8a2997f9ebb64609bab76c2d2c9ec56e988d8488e9",
+      "purpose": "DEV_BOUNDARY",
+      "run": "/home/user/work005h/m-on/willa-miranda"
+    },
+    {
+      "cache": "/home/user/work005d/cache",
+      "id": "dom-w-zurawkach",
+      "package": "stage-reports/artifacts/analyzer-005b/holdout/h1-dom-w-zurawkach/source-package.json",
+      "packageSha256": "ce8ea35ab321f68a0612a2c3435395333978f1c183a064c031c43410cd93f74c",
+      "purpose": "DEV_BOUNDARY",
+      "run": "/home/user/work005h/m-on/dom-w-zurawkach"
+    },
+    {
+      "cache": "/home/user/work005d/cache",
+      "id": "dom-w-azaliach",
+      "package": "stage-reports/artifacts/analyzer-005c/holdout/h1-dom-w-azaliach/source-package.json",
+      "packageSha256": "5fa0d07c9917f47857c6f4cc288625d30479dd630df1282c086b068cb4d619d1",
+      "purpose": "DEV_BOUNDARY",
+      "run": "/home/user/work005h/m-on/dom-w-azaliach"
+    },
+    {
+      "cache": "/home/user/work005h/blind7/cache",
+      "id": "dom-pod-jarzabem",
+      "package": "/home/user/work005h/blind7/h1-dom-pod-jarzabem/source-package.json",
+      "packageSha256": "d2a565f2e48e0b7febd6aaf9736506a0948c1e93ff7fad7a67d9dbc58e85331d",
+      "purpose": "METRIC_CONTROL",
+      "run": "/home/user/work005h/blind7/h1-dom-pod-jarzabem"
+    },
+    {
+      "cache": "/home/user/work005h/blind7/cache",
+      "id": "dom-w-arkadiach",
+      "package": "/home/user/work005h/blind7/h2-dom-w-arkadiach/source-package.json",
+      "packageSha256": "a68abe61e343ced92ff461c75136b5336e13832aced9bd3e6c4d5d09fb26841e",
+      "purpose": "METRIC_CONTROL",
+      "run": "/home/user/work005h/blind7/h2-dom-w-arkadiach"
+    }
+  ]
+}

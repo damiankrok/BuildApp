@@ -1,0 +1,7111 @@
+{
+ "noOracleFusion": "no per-house provider choice, no per-provider threshold, no published area; combinations only after the individual rows",
+ "real": {
+  "dom-pod-jarzabem": {
+   "evidenceAvailability": {
+    "byProvider": {
+     "DEEPLSD-MD": {
+      "falseBridges": 3,
+      "usefulBridges": 8
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 8,
+      "usefulBridges": 9
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 3,
+      "usefulBridges": 9
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 0,
+      "usefulBridges": 6
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 10,
+      "usefulBridges": 9
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 9,
+      "usefulBridges": 6
+     },
+     "SCV-LINES": {
+      "falseBridges": 4,
+      "usefulBridges": 9
+     }
+    },
+    "gapsOnTruthExterior": 9,
+    "gapsOutsideBuilding": 11,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 0,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 0,
+     "ELSED-DEFAULT": 0,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 0,
+     "MSAM-SOURCE-PROMPTS": 0
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 897,
+     "bridged": {
+      "pocketMouths": 12,
+      "strong": 35,
+      "unjudged": 33,
+      "weak": 4
+     },
+     "builtFailureTypes": [
+      "BAY_DROPPED"
+     ],
+     "builtRegionIoU": 0.5118,
+     "deltaBuiltIoU": -0.0122,
+     "deltaOpeningsReadAsWall": 0.0047,
+     "deltaOutlineIoU": 0.0461,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1149,
+      "OPENING_SUPPORTED": 35,
+      "TRUE_EXTERIOR_GAP": 245,
+      "UNKNOWN_GAP": 49
+     },
+     "openingsReadAsWall": 0.0545,
+     "outlineAccepted": true,
+     "outlineFailureTypes": [
+      "INTERNAL_ROOM_SELECTED",
+      "BAY_DROPPED",
+      "FRAGMENTED"
+     ],
+     "outlineRegionIoU": 0.2939
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 870,
+     "bridged": {
+      "pocketMouths": 5,
+      "strong": 29,
+      "unjudged": 60,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "GARAGE_EXCLUDED"
+     ],
+     "builtRegionIoU": 0.7867,
+     "deltaBuiltIoU": 0.2627,
+     "deltaOpeningsReadAsWall": 0.0197,
+     "deltaOutlineIoU": 0.5286,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1037,
+      "OPENING_SUPPORTED": 29,
+      "TRUE_EXTERIOR_GAP": 238,
+      "UNKNOWN_GAP": 65
+     },
+     "openingsReadAsWall": 0.0695,
+     "outlineAccepted": true,
+     "outlineFailureTypes": [
+      "GARAGE_EXCLUDED"
+     ],
+     "outlineRegionIoU": 0.7764
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 948,
+     "bridged": {
+      "pocketMouths": 13,
+      "strong": 34,
+      "unjudged": 34,
+      "weak": 4
+     },
+     "builtFailureTypes": [
+      "BAY_DROPPED"
+     ],
+     "builtRegionIoU": 0.5118,
+     "deltaBuiltIoU": -0.0122,
+     "deltaOpeningsReadAsWall": 0.0047,
+     "deltaOutlineIoU": 0.0406,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1055,
+      "OPENING_SUPPORTED": 34,
+      "TRUE_EXTERIOR_GAP": 247,
+      "UNKNOWN_GAP": 51
+     },
+     "openingsReadAsWall": 0.0545,
+     "outlineAccepted": true,
+     "outlineFailureTypes": [
+      "INTERNAL_ROOM_SELECTED",
+      "BAY_DROPPED",
+      "FRAGMENTED"
+     ],
+     "outlineRegionIoU": 0.2884
+    },
+    "+ELSED": {
+     "addedSegments": 767,
+     "bridged": {
+      "pocketMouths": 18,
+      "strong": 22,
+      "unjudged": 44,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "BAY_DROPPED"
+     ],
+     "builtRegionIoU": 0.5301,
+     "deltaBuiltIoU": 0.0061,
+     "deltaOpeningsReadAsWall": 0.0058,
+     "deltaOutlineIoU": 0.012,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 841,
+      "OPENING_SUPPORTED": 22,
+      "TRUE_EXTERIOR_GAP": 236,
+      "UNKNOWN_GAP": 63
+     },
+     "openingsReadAsWall": 0.0556,
+     "outlineAccepted": true,
+     "outlineFailureTypes": [
+      "INTERNAL_ROOM_SELECTED",
+      "BAY_DROPPED",
+      "FRAGMENTED"
+     ],
+     "outlineRegionIoU": 0.2598
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 1664,
+     "bridged": {
+      "pocketMouths": 19,
+      "strong": 28,
+      "unjudged": 44,
+      "weak": 3
+     },
+     "builtFailureTypes": [
+      "BAY_DROPPED"
+     ],
+     "builtRegionIoU": 0.5208,
+     "deltaBuiltIoU": -0.0032,
+     "deltaOpeningsReadAsWall": 0.0081,
+     "deltaOutlineIoU": 0.0102,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 937,
+      "OPENING_SUPPORTED": 28,
+      "TRUE_EXTERIOR_GAP": 268,
+      "UNKNOWN_GAP": 66
+     },
+     "openingsReadAsWall": 0.0579,
+     "outlineAccepted": true,
+     "outlineFailureTypes": [
+      "INTERNAL_ROOM_SELECTED",
+      "BAY_DROPPED",
+      "FRAGMENTED"
+     ],
+     "outlineRegionIoU": 0.258
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 870,
+     "bridged": {
+      "pocketMouths": 19,
+      "strong": 31,
+      "unjudged": 50,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "INTERNAL_ROOM_SELECTED",
+      "GARAGE_EXCLUDED",
+      "BAY_DROPPED",
+      "FRAGMENTED"
+     ],
+     "builtRegionIoU": 0.4397,
+     "deltaBuiltIoU": -0.0843,
+     "deltaOpeningsReadAsWall": 0.0128,
+     "deltaOutlineIoU": -0.1266,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1106,
+      "OPENING_SUPPORTED": 31,
+      "TRUE_EXTERIOR_GAP": 238,
+      "UNKNOWN_GAP": 70
+     },
+     "openingsReadAsWall": 0.0626,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "INTERNAL_ROOM_SELECTED",
+      "GARAGE_EXCLUDED",
+      "BAY_DROPPED",
+      "FRAGMENTED"
+     ],
+     "outlineRegionIoU": 0.1212
+    },
+    "BASELINE": {
+     "addedSegments": 0,
+     "bridged": {
+      "pocketMouths": 11,
+      "strong": 25,
+      "unjudged": 34,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "BAY_DROPPED"
+     ],
+     "builtRegionIoU": 0.524,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 700,
+      "OPENING_SUPPORTED": 25,
+      "TRUE_EXTERIOR_GAP": 196,
+      "UNKNOWN_GAP": 46
+     },
+     "openingsReadAsWall": 0.0498,
+     "outlineAccepted": true,
+     "outlineFailureTypes": [
+      "INTERNAL_ROOM_SELECTED",
+      "BAY_DROPPED",
+      "FRAGMENTED"
+     ],
+     "outlineRegionIoU": 0.2478
+    }
+   }
+  },
+  "dom-w-arkadiach": {
+   "evidenceAvailability": {
+    "byProvider": {
+     "DEEPLSD-MD": {
+      "falseBridges": 0,
+      "usefulBridges": 4
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 0,
+      "usefulBridges": 4
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 0,
+      "usefulBridges": 4
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 0,
+      "usefulBridges": 4
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 0,
+      "usefulBridges": 4
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 0,
+      "usefulBridges": 3
+     },
+     "SCV-LINES": {
+      "falseBridges": 0,
+      "usefulBridges": 4
+     }
+    },
+    "gapsOnTruthExterior": 4,
+    "gapsOutsideBuilding": 0,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 0,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 0,
+     "ELSED-DEFAULT": 0,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 0,
+     "MSAM-SOURCE-PROMPTS": 0
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 611,
+     "bridged": {
+      "pocketMouths": 8,
+      "strong": 23,
+      "unjudged": 17,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9838,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.01,
+     "deltaOutlineIoU": -0.0145,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 501,
+      "OPENING_SUPPORTED": 23,
+      "TRUE_EXTERIOR_GAP": 102,
+      "UNKNOWN_GAP": 26
+     },
+     "openingsReadAsWall": 0.098,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.8836
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 674,
+     "bridged": {
+      "pocketMouths": 5,
+      "strong": 24,
+      "unjudged": 35,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9838,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.016,
+     "deltaOutlineIoU": 0.0599,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 435,
+      "OPENING_SUPPORTED": 24,
+      "TRUE_EXTERIOR_GAP": 82,
+      "UNKNOWN_GAP": 41
+     },
+     "openingsReadAsWall": 0.104,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.958
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 610,
+     "bridged": {
+      "pocketMouths": 8,
+      "strong": 25,
+      "unjudged": 12,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9838,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.008,
+     "deltaOutlineIoU": -0.0404,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 485,
+      "OPENING_SUPPORTED": 25,
+      "TRUE_EXTERIOR_GAP": 106,
+      "UNKNOWN_GAP": 22
+     },
+     "openingsReadAsWall": 0.096,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.8577
+    },
+    "+ELSED": {
+     "addedSegments": 484,
+     "bridged": {
+      "pocketMouths": 10,
+      "strong": 15,
+      "unjudged": 22,
+      "weak": 4
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9838,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.02,
+     "deltaOutlineIoU": -0.0658,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 356,
+      "OPENING_SUPPORTED": 15,
+      "TRUE_EXTERIOR_GAP": 95,
+      "UNKNOWN_GAP": 36
+     },
+     "openingsReadAsWall": 0.108,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.8323
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 1095,
+     "bridged": {
+      "pocketMouths": 15,
+      "strong": 19,
+      "unjudged": 18,
+      "weak": 4
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9838,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.026,
+     "deltaOutlineIoU": -0.0701,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 397,
+      "OPENING_SUPPORTED": 19,
+      "TRUE_EXTERIOR_GAP": 105,
+      "UNKNOWN_GAP": 37
+     },
+     "openingsReadAsWall": 0.114,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.828
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 674,
+     "bridged": {
+      "pocketMouths": 6,
+      "strong": 20,
+      "unjudged": 29,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9838,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.018,
+     "deltaOutlineIoU": 0.0599,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 473,
+      "OPENING_SUPPORTED": 20,
+      "TRUE_EXTERIOR_GAP": 80,
+      "UNKNOWN_GAP": 36
+     },
+     "openingsReadAsWall": 0.106,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.958
+    },
+    "BASELINE": {
+     "addedSegments": 0,
+     "bridged": {
+      "pocketMouths": 5,
+      "strong": 16,
+      "unjudged": 15,
+      "weak": 3
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9838,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 268,
+      "OPENING_SUPPORTED": 16,
+      "TRUE_EXTERIOR_GAP": 72,
+      "UNKNOWN_GAP": 23
+     },
+     "openingsReadAsWall": 0.088,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.8981
+    }
+   }
+  },
+  "dom-w-azaliach": {
+   "evidenceAvailability": {
+    "byProvider": {
+     "DEEPLSD-MD": {
+      "falseBridges": 0,
+      "usefulBridges": 7
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 0,
+      "usefulBridges": 7
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 0,
+      "usefulBridges": 7
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 0,
+      "usefulBridges": 7
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "SCV-LINES": {
+      "falseBridges": 0,
+      "usefulBridges": 7
+     }
+    },
+    "gapsOnTruthExterior": 7,
+    "gapsOutsideBuilding": 0,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 0,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 0,
+     "ELSED-DEFAULT": 0,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 0,
+     "MSAM-SOURCE-PROMPTS": 0
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 635,
+     "bridged": {
+      "pocketMouths": 9,
+      "strong": 28,
+      "unjudged": 23,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "INTERNAL_ROOM_SELECTED"
+     ],
+     "builtRegionIoU": 0.0451,
+     "deltaBuiltIoU": -0.07,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": -0.1005,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 311,
+      "OPENING_SUPPORTED": 28,
+      "TRUE_EXTERIOR_GAP": 77,
+      "UNKNOWN_GAP": 32
+     },
+     "openingsReadAsWall": 0.097,
+     "outlineAccepted": true,
+     "outlineFailureTypes": [
+      "INTERNAL_ROOM_SELECTED",
+      "FRAGMENTED"
+     ],
+     "outlineRegionIoU": 0.038
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 818,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 19,
+      "unjudged": 24,
+      "weak": 7
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9936,
+     "deltaBuiltIoU": 0.8785,
+     "deltaOpeningsReadAsWall": 0.0373,
+     "deltaOutlineIoU": 0.8551,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 254,
+      "OPENING_SUPPORTED": 19,
+      "TRUE_EXTERIOR_GAP": 78,
+      "UNKNOWN_GAP": 31
+     },
+     "openingsReadAsWall": 0.1343,
+     "outlineAccepted": true,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9936
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 633,
+     "bridged": {
+      "pocketMouths": 7,
+      "strong": 24,
+      "unjudged": 24,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "INTERNAL_ROOM_SELECTED"
+     ],
+     "builtRegionIoU": 0.0451,
+     "deltaBuiltIoU": -0.07,
+     "deltaOpeningsReadAsWall": 0.0015,
+     "deltaOutlineIoU": -0.0552,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 280,
+      "OPENING_SUPPORTED": 24,
+      "TRUE_EXTERIOR_GAP": 74,
+      "UNKNOWN_GAP": 31
+     },
+     "openingsReadAsWall": 0.0985,
+     "outlineAccepted": true,
+     "outlineFailureTypes": [
+      "INTERNAL_ROOM_SELECTED",
+      "FRAGMENTED"
+     ],
+     "outlineRegionIoU": 0.0833
+    },
+    "+ELSED": {
+     "addedSegments": 452,
+     "bridged": {
+      "pocketMouths": 2,
+      "strong": 22,
+      "unjudged": 25,
+      "weak": 9
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9239,
+     "deltaBuiltIoU": 0.8088,
+     "deltaOpeningsReadAsWall": 0.006,
+     "deltaOutlineIoU": 0.8063,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 218,
+      "OPENING_SUPPORTED": 22,
+      "TRUE_EXTERIOR_GAP": 72,
+      "UNKNOWN_GAP": 36
+     },
+     "openingsReadAsWall": 0.103,
+     "outlineAccepted": true,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9448
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 1087,
+     "bridged": {
+      "pocketMouths": 2,
+      "strong": 20,
+      "unjudged": 36,
+      "weak": 10
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9239,
+     "deltaBuiltIoU": 0.8088,
+     "deltaOpeningsReadAsWall": 0.006,
+     "deltaOutlineIoU": 0.8063,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 227,
+      "OPENING_SUPPORTED": 20,
+      "TRUE_EXTERIOR_GAP": 75,
+      "UNKNOWN_GAP": 48
+     },
+     "openingsReadAsWall": 0.103,
+     "outlineAccepted": true,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9448
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 818,
+     "bridged": {
+      "pocketMouths": 2,
+      "strong": 20,
+      "unjudged": 24,
+      "weak": 7
+     },
+     "builtFailureTypes": [
+      "IMPRECISE"
+     ],
+     "builtRegionIoU": 0.8727,
+     "deltaBuiltIoU": 0.7576,
+     "deltaOpeningsReadAsWall": 0.0343,
+     "deltaOutlineIoU": 0.7552,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 242,
+      "OPENING_SUPPORTED": 20,
+      "TRUE_EXTERIOR_GAP": 77,
+      "UNKNOWN_GAP": 33
+     },
+     "openingsReadAsWall": 0.1313,
+     "outlineAccepted": true,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.8937
+    },
+    "BASELINE": {
+     "addedSegments": 0,
+     "bridged": {
+      "pocketMouths": 5,
+      "strong": 23,
+      "unjudged": 19,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "INTERNAL_ROOM_SELECTED"
+     ],
+     "builtRegionIoU": 0.1151,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 178,
+      "OPENING_SUPPORTED": 23,
+      "TRUE_EXTERIOR_GAP": 55,
+      "UNKNOWN_GAP": 24
+     },
+     "openingsReadAsWall": 0.097,
+     "outlineAccepted": true,
+     "outlineFailureTypes": [
+      "INTERNAL_ROOM_SELECTED"
+     ],
+     "outlineRegionIoU": 0.1385
+    }
+   }
+  },
+  "dom-w-helikoniach": {
+   "evidenceAvailability": {
+    "byProvider": {
+     "DEEPLSD-MD": {
+      "falseBridges": 0,
+      "usefulBridges": 5
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 0,
+      "usefulBridges": 5
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 0,
+      "usefulBridges": 5
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 0,
+      "usefulBridges": 5
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "SCV-LINES": {
+      "falseBridges": 0,
+      "usefulBridges": 5
+     }
+    },
+    "gapsOnTruthExterior": 5,
+    "gapsOutsideBuilding": 0,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 0,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 0,
+     "ELSED-DEFAULT": 0,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 0,
+     "MSAM-SOURCE-PROMPTS": 0
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 548,
+     "bridged": {
+      "pocketMouths": 2,
+      "strong": 28,
+      "unjudged": 12,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "RECESS_FILLED"
+     ],
+     "builtRegionIoU": 0.8808,
+     "deltaBuiltIoU": 0.0385,
+     "deltaOpeningsReadAsWall": 0.09,
+     "deltaOutlineIoU": 0.0464,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 525,
+      "OPENING_SUPPORTED": 28,
+      "TRUE_EXTERIOR_GAP": 97,
+      "UNKNOWN_GAP": 16
+     },
+     "openingsReadAsWall": 0.1221,
+     "outlineAccepted": true,
+     "outlineFailureTypes": [
+      "RECESS_FILLED"
+     ],
+     "outlineRegionIoU": 0.9131
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 922,
+     "bridged": {
+      "pocketMouths": 24,
+      "strong": 27,
+      "unjudged": 25,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "INTERNAL_ROOM_SELECTED"
+     ],
+     "builtRegionIoU": 0.3917,
+     "deltaBuiltIoU": -0.4506,
+     "deltaOpeningsReadAsWall": 0.1099,
+     "deltaOutlineIoU": -0.7463,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 512,
+      "OPENING_SUPPORTED": 27,
+      "TRUE_EXTERIOR_GAP": 102,
+      "UNKNOWN_GAP": 49
+     },
+     "openingsReadAsWall": 0.142,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "FRAGMENTED"
+     ],
+     "outlineRegionIoU": 0.1204
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 534,
+     "bridged": {
+      "pocketMouths": 9,
+      "strong": 29,
+      "unjudged": 10,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "INTERNAL_ROOM_SELECTED",
+      "RECESS_FILLED"
+     ],
+     "builtRegionIoU": 0.3911,
+     "deltaBuiltIoU": -0.4512,
+     "deltaOpeningsReadAsWall": 0.0549,
+     "deltaOutlineIoU": -0.7348,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 420,
+      "OPENING_SUPPORTED": 29,
+      "TRUE_EXTERIOR_GAP": 97,
+      "UNKNOWN_GAP": 19
+     },
+     "openingsReadAsWall": 0.087,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "RECESS_FILLED",
+      "FRAGMENTED"
+     ],
+     "outlineRegionIoU": 0.1319
+    },
+    "+ELSED": {
+     "addedSegments": 395,
+     "bridged": {
+      "pocketMouths": 2,
+      "strong": 21,
+      "unjudged": 19,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "RECESS_FILLED"
+     ],
+     "builtRegionIoU": 0.8811,
+     "deltaBuiltIoU": 0.0388,
+     "deltaOpeningsReadAsWall": 0.0503,
+     "deltaOutlineIoU": 0.0464,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 260,
+      "OPENING_SUPPORTED": 21,
+      "TRUE_EXTERIOR_GAP": 91,
+      "UNKNOWN_GAP": 22
+     },
+     "openingsReadAsWall": 0.0824,
+     "outlineAccepted": true,
+     "outlineFailureTypes": [
+      "RECESS_FILLED"
+     ],
+     "outlineRegionIoU": 0.9131
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 943,
+     "bridged": {
+      "pocketMouths": 11,
+      "strong": 28,
+      "unjudged": 15,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "INTERNAL_ROOM_SELECTED"
+     ],
+     "builtRegionIoU": 0.3917,
+     "deltaBuiltIoU": -0.4506,
+     "deltaOpeningsReadAsWall": 0.3114,
+     "deltaOutlineIoU": -0.7375,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 388,
+      "OPENING_SUPPORTED": 28,
+      "TRUE_EXTERIOR_GAP": 104,
+      "UNKNOWN_GAP": 26
+     },
+     "openingsReadAsWall": 0.3435,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "RECESS_FILLED",
+      "FRAGMENTED"
+     ],
+     "outlineRegionIoU": 0.1292
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 922,
+     "bridged": {
+      "pocketMouths": 24,
+      "strong": 35,
+      "unjudged": 21,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "INTERNAL_ROOM_SELECTED"
+     ],
+     "builtRegionIoU": 0.3917,
+     "deltaBuiltIoU": -0.4506,
+     "deltaOpeningsReadAsWall": 0.1053,
+     "deltaOutlineIoU": -0.723,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 539,
+      "OPENING_SUPPORTED": 35,
+      "TRUE_EXTERIOR_GAP": 107,
+      "UNKNOWN_GAP": 45
+     },
+     "openingsReadAsWall": 0.1374,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "INTERNAL_ROOM_SELECTED",
+      "FRAGMENTED"
+     ],
+     "outlineRegionIoU": 0.1437
+    },
+    "BASELINE": {
+     "addedSegments": 0,
+     "bridged": {
+      "pocketMouths": 5,
+      "strong": 26,
+      "unjudged": 5,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "RECESS_FILLED"
+     ],
+     "builtRegionIoU": 0.8423,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 228,
+      "OPENING_SUPPORTED": 26,
+      "TRUE_EXTERIOR_GAP": 66,
+      "UNKNOWN_GAP": 10
+     },
+     "openingsReadAsWall": 0.0321,
+     "outlineAccepted": true,
+     "outlineFailureTypes": [
+      "RECESS_FILLED"
+     ],
+     "outlineRegionIoU": 0.8667
+    }
+   }
+  },
+  "dom-w-morelach": {
+   "evidenceAvailability": {
+    "byProvider": {
+     "DEEPLSD-MD": {
+      "falseBridges": 0,
+      "usefulBridges": 13
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 0,
+      "usefulBridges": 11
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 0,
+      "usefulBridges": 12
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 0,
+      "usefulBridges": 7
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 0,
+      "usefulBridges": 11
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 0,
+      "usefulBridges": 10
+     },
+     "SCV-LINES": {
+      "falseBridges": 0,
+      "usefulBridges": 13
+     }
+    },
+    "gapsOnTruthExterior": 13,
+    "gapsOutsideBuilding": 0,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 0,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 0,
+     "ELSED-DEFAULT": 0,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 0,
+     "MSAM-SOURCE-PROMPTS": 0
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 773,
+     "bridged": {
+      "pocketMouths": 8,
+      "strong": 37,
+      "unjudged": 11,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "BAY_DROPPED"
+     ],
+     "builtRegionIoU": 0.9347,
+     "deltaBuiltIoU": -0.0287,
+     "deltaOpeningsReadAsWall": 0.0469,
+     "deltaOutlineIoU": 0.0087,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 650,
+      "OPENING_SUPPORTED": 37,
+      "TRUE_EXTERIOR_GAP": 116,
+      "UNKNOWN_GAP": 20
+     },
+     "openingsReadAsWall": 0.1161,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "INTERNAL_ROOM_SELECTED"
+     ],
+     "outlineRegionIoU": 0.3578
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 1195,
+     "bridged": {
+      "pocketMouths": 5,
+      "strong": 35,
+      "unjudged": 25,
+      "weak": 5
+     },
+     "builtFailureTypes": [
+      "BAY_DROPPED"
+     ],
+     "builtRegionIoU": 0.9347,
+     "deltaBuiltIoU": -0.0287,
+     "deltaOpeningsReadAsWall": 0.0804,
+     "deltaOutlineIoU": 0.5931,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 603,
+      "OPENING_SUPPORTED": 35,
+      "TRUE_EXTERIOR_GAP": 119,
+      "UNKNOWN_GAP": 35
+     },
+     "openingsReadAsWall": 0.1496,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9422
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 782,
+     "bridged": {
+      "pocketMouths": 11,
+      "strong": 39,
+      "unjudged": 14,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "BAY_DROPPED"
+     ],
+     "builtRegionIoU": 0.9347,
+     "deltaBuiltIoU": -0.0287,
+     "deltaOpeningsReadAsWall": 0.0458,
+     "deltaOutlineIoU": -0.0027,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 572,
+      "OPENING_SUPPORTED": 39,
+      "TRUE_EXTERIOR_GAP": 106,
+      "UNKNOWN_GAP": 27
+     },
+     "openingsReadAsWall": 0.115,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "INTERNAL_ROOM_SELECTED",
+      "BAY_DROPPED",
+      "FRAGMENTED"
+     ],
+     "outlineRegionIoU": 0.3464
+    },
+    "+ELSED": {
+     "addedSegments": 651,
+     "bridged": {
+      "pocketMouths": 8,
+      "strong": 40,
+      "unjudged": 14,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9634,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0368,
+     "deltaOutlineIoU": 0.0139,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 389,
+      "OPENING_SUPPORTED": 40,
+      "TRUE_EXTERIOR_GAP": 95,
+      "UNKNOWN_GAP": 23
+     },
+     "openingsReadAsWall": 0.106,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "INTERNAL_ROOM_SELECTED",
+      "FRAGMENTED"
+     ],
+     "outlineRegionIoU": 0.363
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 1424,
+     "bridged": {
+      "pocketMouths": 9,
+      "strong": 33,
+      "unjudged": 20,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "BAY_DROPPED"
+     ],
+     "builtRegionIoU": 0.9347,
+     "deltaBuiltIoU": -0.0287,
+     "deltaOpeningsReadAsWall": 0.077,
+     "deltaOutlineIoU": 0.0153,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 484,
+      "OPENING_SUPPORTED": 33,
+      "TRUE_EXTERIOR_GAP": 126,
+      "UNKNOWN_GAP": 31
+     },
+     "openingsReadAsWall": 0.1462,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "INTERNAL_ROOM_SELECTED",
+      "FRAGMENTED"
+     ],
+     "outlineRegionIoU": 0.3644
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 1195,
+     "bridged": {
+      "pocketMouths": 4,
+      "strong": 37,
+      "unjudged": 24,
+      "weak": 3
+     },
+     "builtFailureTypes": [
+      "BAY_DROPPED"
+     ],
+     "builtRegionIoU": 0.8831,
+     "deltaBuiltIoU": -0.0803,
+     "deltaOpeningsReadAsWall": 0.0837,
+     "deltaOutlineIoU": 0.3582,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 671,
+      "OPENING_SUPPORTED": 37,
+      "TRUE_EXTERIOR_GAP": 133,
+      "UNKNOWN_GAP": 31
+     },
+     "openingsReadAsWall": 0.1529,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "GARAGE_EXCLUDED"
+     ],
+     "outlineRegionIoU": 0.7073
+    },
+    "BASELINE": {
+     "addedSegments": 0,
+     "bridged": {
+      "pocketMouths": 4,
+      "strong": 23,
+      "unjudged": 10,
+      "weak": 3
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9634,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 288,
+      "OPENING_SUPPORTED": 23,
+      "TRUE_EXTERIOR_GAP": 80,
+      "UNKNOWN_GAP": 17
+     },
+     "openingsReadAsWall": 0.0692,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "INTERNAL_ROOM_SELECTED"
+     ],
+     "outlineRegionIoU": 0.3491
+    }
+   }
+  },
+  "dom-w-zurawkach": {
+   "evidenceAvailability": {
+    "byProvider": {
+     "DEEPLSD-MD": {
+      "falseBridges": 0,
+      "usefulBridges": 11
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 0,
+      "usefulBridges": 11
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 0,
+      "usefulBridges": 12
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 0,
+      "usefulBridges": 12
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 0,
+      "usefulBridges": 10
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 1,
+      "usefulBridges": 13
+     },
+     "SCV-LINES": {
+      "falseBridges": 1,
+      "usefulBridges": 11
+     }
+    },
+    "gapsOnTruthExterior": 16,
+    "gapsOutsideBuilding": 5,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 1,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 1,
+     "ELSED-DEFAULT": 1,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 2,
+     "MSAM-SOURCE-PROMPTS": 5
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 647,
+     "bridged": {
+      "pocketMouths": 13,
+      "strong": 20,
+      "unjudged": 23,
+      "weak": 4
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9577,
+     "deltaBuiltIoU": -0.0112,
+     "deltaOpeningsReadAsWall": 0.0655,
+     "deltaOutlineIoU": -0.1354,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 570,
+      "OPENING_SUPPORTED": 20,
+      "TRUE_EXTERIOR_GAP": 135,
+      "UNKNOWN_GAP": 40
+     },
+     "openingsReadAsWall": 0.1369,
+     "outlineAccepted": true,
+     "outlineFailureTypes": [
+      "FRAGMENTED"
+     ],
+     "outlineRegionIoU": 0.7366
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 834,
+     "bridged": {
+      "pocketMouths": 13,
+      "strong": 22,
+      "unjudged": 43,
+      "weak": 3
+     },
+     "builtFailureTypes": [
+      "GARAGE_EXCLUDED"
+     ],
+     "builtRegionIoU": 0.7585,
+     "deltaBuiltIoU": -0.2104,
+     "deltaOpeningsReadAsWall": 0.3066,
+     "deltaOutlineIoU": -0.2874,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 504,
+      "OPENING_SUPPORTED": 22,
+      "TRUE_EXTERIOR_GAP": 125,
+      "UNKNOWN_GAP": 59
+     },
+     "openingsReadAsWall": 0.378,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "PORCH_INCLUDED",
+      "GARAGE_EXCLUDED"
+     ],
+     "outlineRegionIoU": 0.5846
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 615,
+     "bridged": {
+      "pocketMouths": 21,
+      "strong": 22,
+      "unjudged": 15,
+      "weak": 4
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9391,
+     "deltaBuiltIoU": -0.0298,
+     "deltaOpeningsReadAsWall": 0.0655,
+     "deltaOutlineIoU": -0.221,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 516,
+      "OPENING_SUPPORTED": 22,
+      "TRUE_EXTERIOR_GAP": 124,
+      "UNKNOWN_GAP": 40
+     },
+     "openingsReadAsWall": 0.1369,
+     "outlineAccepted": true,
+     "outlineFailureTypes": [
+      "FRAGMENTED"
+     ],
+     "outlineRegionIoU": 0.651
+    },
+    "+ELSED": {
+     "addedSegments": 545,
+     "bridged": {
+      "pocketMouths": 11,
+      "strong": 19,
+      "unjudged": 35,
+      "weak": 5
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9806,
+     "deltaBuiltIoU": 0.0117,
+     "deltaOpeningsReadAsWall": 0.0581,
+     "deltaOutlineIoU": -0.1683,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 380,
+      "OPENING_SUPPORTED": 19,
+      "TRUE_EXTERIOR_GAP": 134,
+      "UNKNOWN_GAP": 51
+     },
+     "openingsReadAsWall": 0.1295,
+     "outlineAccepted": true,
+     "outlineFailureTypes": [
+      "PORCH_INCLUDED"
+     ],
+     "outlineRegionIoU": 0.7037
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 1192,
+     "bridged": {
+      "pocketMouths": 7,
+      "strong": 24,
+      "unjudged": 41,
+      "weak": 5
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9333,
+     "deltaBuiltIoU": -0.0356,
+     "deltaOpeningsReadAsWall": 0.0834,
+     "deltaOutlineIoU": -0.0585,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 467,
+      "OPENING_SUPPORTED": 24,
+      "TRUE_EXTERIOR_GAP": 154,
+      "UNKNOWN_GAP": 53
+     },
+     "openingsReadAsWall": 0.1548,
+     "outlineAccepted": true,
+     "outlineFailureTypes": [
+      "PORCH_INCLUDED"
+     ],
+     "outlineRegionIoU": 0.8135
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 834,
+     "bridged": {
+      "pocketMouths": 18,
+      "strong": 14,
+      "unjudged": 35,
+      "weak": 8
+     },
+     "builtFailureTypes": [
+      "FRAGMENTED"
+     ],
+     "builtRegionIoU": 0.8101,
+     "deltaBuiltIoU": -0.1588,
+     "deltaOpeningsReadAsWall": 0.3185,
+     "deltaOutlineIoU": -0.2998,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 561,
+      "OPENING_SUPPORTED": 14,
+      "TRUE_EXTERIOR_GAP": 146,
+      "UNKNOWN_GAP": 61
+     },
+     "openingsReadAsWall": 0.3899,
+     "outlineAccepted": true,
+     "outlineFailureTypes": [
+      "PORCH_INCLUDED",
+      "GARAGE_EXCLUDED"
+     ],
+     "outlineRegionIoU": 0.5722
+    },
+    "BASELINE": {
+     "addedSegments": 0,
+     "bridged": {
+      "pocketMouths": 11,
+      "strong": 11,
+      "unjudged": 16,
+      "weak": 8
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9689,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 301,
+      "OPENING_SUPPORTED": 11,
+      "TRUE_EXTERIOR_GAP": 109,
+      "UNKNOWN_GAP": 35
+     },
+     "openingsReadAsWall": 0.0714,
+     "outlineAccepted": true,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.872
+    }
+   }
+  },
+  "willa-miranda": {
+   "evidenceAvailability": {
+    "byProvider": {
+     "DEEPLSD-MD": {
+      "falseBridges": 3,
+      "usefulBridges": 11
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 2,
+      "usefulBridges": 10
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 3,
+      "usefulBridges": 11
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 2,
+      "usefulBridges": 11
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 5,
+      "usefulBridges": 9
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 5,
+      "usefulBridges": 10
+     },
+     "SCV-LINES": {
+      "falseBridges": 2,
+      "usefulBridges": 10
+     }
+    },
+    "gapsOnTruthExterior": 12,
+    "gapsOutsideBuilding": 7,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 2,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 2,
+     "ELSED-DEFAULT": 2,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 2,
+     "MSAM-SOURCE-PROMPTS": 2
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 787,
+     "bridged": {
+      "pocketMouths": 11,
+      "strong": 36,
+      "unjudged": 48,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9354,
+     "deltaBuiltIoU": -0.0462,
+     "deltaOpeningsReadAsWall": 0.0516,
+     "deltaOutlineIoU": -0.0451,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1075,
+      "OPENING_SUPPORTED": 36,
+      "TRUE_EXTERIOR_GAP": 195,
+      "UNKNOWN_GAP": 60
+     },
+     "openingsReadAsWall": 0.1102,
+     "outlineAccepted": true,
+     "outlineFailureTypes": [
+      "TERRACE_INCLUDED"
+     ],
+     "outlineRegionIoU": 0.8903
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 785,
+     "bridged": {
+      "pocketMouths": 12,
+      "strong": 25,
+      "unjudged": 66,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "GARAGE_EXCLUDED"
+     ],
+     "builtRegionIoU": 0.8303,
+     "deltaBuiltIoU": -0.1513,
+     "deltaOpeningsReadAsWall": 0.1079,
+     "deltaOutlineIoU": -0.2334,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 918,
+      "OPENING_SUPPORTED": 25,
+      "TRUE_EXTERIOR_GAP": 231,
+      "UNKNOWN_GAP": 79
+     },
+     "openingsReadAsWall": 0.1665,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "TERRACE_INCLUDED",
+      "GARAGE_EXCLUDED"
+     ],
+     "outlineRegionIoU": 0.702
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 783,
+     "bridged": {
+      "pocketMouths": 6,
+      "strong": 42,
+      "unjudged": 51,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9816,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0657,
+     "deltaOutlineIoU": 0.0025,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1028,
+      "OPENING_SUPPORTED": 42,
+      "TRUE_EXTERIOR_GAP": 203,
+      "UNKNOWN_GAP": 58
+     },
+     "openingsReadAsWall": 0.1243,
+     "outlineAccepted": true,
+     "outlineFailureTypes": [
+      "TERRACE_INCLUDED"
+     ],
+     "outlineRegionIoU": 0.9379
+    },
+    "+ELSED": {
+     "addedSegments": 692,
+     "bridged": {
+      "pocketMouths": 12,
+      "strong": 24,
+      "unjudged": 63,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.944,
+     "deltaBuiltIoU": -0.0376,
+     "deltaOpeningsReadAsWall": 0.0422,
+     "deltaOutlineIoU": -0.0366,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 739,
+      "OPENING_SUPPORTED": 24,
+      "TRUE_EXTERIOR_GAP": 205,
+      "UNKNOWN_GAP": 76
+     },
+     "openingsReadAsWall": 0.1008,
+     "outlineAccepted": true,
+     "outlineFailureTypes": [
+      "TERRACE_INCLUDED"
+     ],
+     "outlineRegionIoU": 0.8988
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 1479,
+     "bridged": {
+      "pocketMouths": 14,
+      "strong": 35,
+      "unjudged": 68,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9608,
+     "deltaBuiltIoU": -0.0208,
+     "deltaOpeningsReadAsWall": 0.0891,
+     "deltaOutlineIoU": -0.1156,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 844,
+      "OPENING_SUPPORTED": 35,
+      "TRUE_EXTERIOR_GAP": 210,
+      "UNKNOWN_GAP": 84
+     },
+     "openingsReadAsWall": 0.1477,
+     "outlineAccepted": true,
+     "outlineFailureTypes": [
+      "TERRACE_INCLUDED",
+      "WING_DROPPED"
+     ],
+     "outlineRegionIoU": 0.8198
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 785,
+     "bridged": {
+      "pocketMouths": 20,
+      "strong": 45,
+      "unjudged": 56,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "GARAGE_EXCLUDED"
+     ],
+     "builtRegionIoU": 0.8303,
+     "deltaBuiltIoU": -0.1513,
+     "deltaOpeningsReadAsWall": 0.1079,
+     "deltaOutlineIoU": -0.2895,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1040,
+      "OPENING_SUPPORTED": 45,
+      "TRUE_EXTERIOR_GAP": 225,
+      "UNKNOWN_GAP": 76
+     },
+     "openingsReadAsWall": 0.1665,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "TERRACE_INCLUDED",
+      "GARAGE_EXCLUDED",
+      "FRAGMENTED"
+     ],
+     "outlineRegionIoU": 0.6459
+    },
+    "BASELINE": {
+     "addedSegments": 0,
+     "bridged": {
+      "pocketMouths": 2,
+      "strong": 35,
+      "unjudged": 29,
+      "weak": 4
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9816,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 633,
+      "OPENING_SUPPORTED": 35,
+      "TRUE_EXTERIOR_GAP": 179,
+      "UNKNOWN_GAP": 35
+     },
+     "openingsReadAsWall": 0.0586,
+     "outlineAccepted": true,
+     "outlineFailureTypes": [
+      "TERRACE_INCLUDED"
+     ],
+     "outlineRegionIoU": 0.9354
+    }
+   }
+  }
+ },
+ "replay1_maskUnion": "Out-of-contract input perturbation: mask' = mask OR rasterise(provider segments, 1 px); the same production boundary layer re-run with identical bands, chains, registration, extent and options (fusion-replay.ts). A 1-px line cannot become wall-thick ink on its own, but many added lines can raise the ink density of a wall-thick window past readWallLine's 80 % \u2014 openingsReadAsWall measures exactly that side effect.",
+ "replay2_evidenceAvailability": "Per baseline TRUE_EXTERIOR_GAP / UNKNOWN_GAP: on a truth exterior edge, does the provider bridge it (lines: >= 80 % covered by parallel segments within a wall of the gap line; masks: mask = 1 on >= 80 % of the gap line) \u2014 useful; outside the truth building \u2014 false evidence.",
+ "researchOnly": true,
+ "seam": "NONE. The production boundary resolver (decomposePlan -> boundaryExtension -> solveOutline / classifyBodies / completeBoundary) takes only the ink Mask, bands, chains, registration, extent and options. No line list or region mask can be passed without changing production code.",
+ "synthetic": {
+  "attached-garage": {
+   "evidenceAvailability": {
+    "byProvider": {
+     "DEEPLSD-MD": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "MSAM-BOX": {
+      "falseBridges": 0,
+      "usefulBridges": 2
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 0,
+      "usefulBridges": 2
+     },
+     "SCV-LINES": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     }
+    },
+    "gapsOnTruthExterior": 2,
+    "gapsOutsideBuilding": 0,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 0,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 0,
+     "ELSED-DEFAULT": 0,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 1,
+     "MSAM-SOURCE-PROMPTS": 1
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 114,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 2,
+      "unjudged": 0,
+      "weak": 3
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9136,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0055,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 2,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 3
+     },
+     "openingsReadAsWall": 0.0328,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9136
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 460,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9136,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0273,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9136
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 121,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9136,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0028,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0301,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9136
+    },
+    "+ELSED": {
+     "addedSegments": 80,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9136,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0273,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9136
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 194,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9136,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0082,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0355,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9136
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 460,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9136,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0028,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 1,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0301,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9136
+    },
+    "BASELINE": {
+     "addedSegments": 0,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9136,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0273,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9136
+    }
+   }
+  },
+  "bay-window": {
+   "evidenceAvailability": {
+    "byProvider": {
+     "DEEPLSD-MD": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "SCV-LINES": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     }
+    },
+    "gapsOnTruthExterior": 1,
+    "gapsOutsideBuilding": 0,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 0,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 0,
+     "ELSED-DEFAULT": 0,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 0,
+     "MSAM-SOURCE-PROMPTS": 0
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 132,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 2,
+      "unjudged": 0,
+      "weak": 3
+     },
+     "builtFailureTypes": [
+      "BAY_DROPPED"
+     ],
+     "builtRegionIoU": 0.8817,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0057,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1,
+      "OPENING_SUPPORTED": 2,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 3
+     },
+     "openingsReadAsWall": 0.0285,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "BAY_DROPPED"
+     ],
+     "outlineRegionIoU": 0.8817
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 462,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "BAY_DROPPED"
+     ],
+     "builtRegionIoU": 0.8817,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 4,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0228,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "BAY_DROPPED"
+     ],
+     "outlineRegionIoU": 0.8817
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 144,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "BAY_DROPPED"
+     ],
+     "builtRegionIoU": 0.8817,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0028,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0256,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "BAY_DROPPED"
+     ],
+     "outlineRegionIoU": 0.8817
+    },
+    "+ELSED": {
+     "addedSegments": 107,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "BAY_DROPPED"
+     ],
+     "builtRegionIoU": 0.8817,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0057,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0285,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "BAY_DROPPED"
+     ],
+     "outlineRegionIoU": 0.8817
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 239,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "BAY_DROPPED"
+     ],
+     "builtRegionIoU": 0.8817,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0085,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0313,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "BAY_DROPPED"
+     ],
+     "outlineRegionIoU": 0.8817
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 462,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "BAY_DROPPED"
+     ],
+     "builtRegionIoU": 0.8817,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0028,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 3,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0256,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "BAY_DROPPED"
+     ],
+     "outlineRegionIoU": 0.8817
+    },
+    "BASELINE": {
+     "addedSegments": 0,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "BAY_DROPPED"
+     ],
+     "builtRegionIoU": 0.8817,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0228,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "BAY_DROPPED"
+     ],
+     "outlineRegionIoU": 0.8817
+    }
+   }
+  },
+  "dimension-lines-near-facade": {
+   "evidenceAvailability": {
+    "byProvider": {
+     "DEEPLSD-MD": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "SCV-LINES": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     }
+    },
+    "gapsOnTruthExterior": 1,
+    "gapsOutsideBuilding": 0,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 0,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 0,
+     "ELSED-DEFAULT": 0,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 0,
+     "MSAM-SOURCE-PROMPTS": 0
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 76,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0066,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.043,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 441,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0066,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.043,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 85,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0033,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0397,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+ELSED": {
+     "addedSegments": 64,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0364,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 140,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.01,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0464,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 441,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0066,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.043,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "BASELINE": {
+     "addedSegments": 0,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0364,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    }
+   }
+  },
+  "double-line-walls": {
+   "evidenceAvailability": {
+    "byProvider": {},
+    "gapsOnTruthExterior": 0,
+    "gapsOutsideBuilding": 0,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 0,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 0,
+     "ELSED-DEFAULT": 0,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 0,
+     "MSAM-SOURCE-PROMPTS": 0
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": null,
+    "+DEEPLSD-MD-REFINE-SCV": null,
+    "+DEEPLSD-WF": null,
+    "+ELSED": null,
+    "+ELSED+DEEPLSD-MD": null,
+    "+SCV-LINES-CONTROL": null,
+    "BASELINE": null
+   }
+  },
+  "garage-door-interruption": {
+   "evidenceAvailability": {
+    "byProvider": {
+     "DEEPLSD-MD": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "SCV-LINES": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     }
+    },
+    "gapsOnTruthExterior": 1,
+    "gapsOutsideBuilding": 0,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 0,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 0,
+     "ELSED-DEFAULT": 0,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 1,
+     "MSAM-SOURCE-PROMPTS": 0
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 118,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 2,
+      "unjudged": 2,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9216,
+     "deltaBuiltIoU": 0.2565,
+     "deltaOpeningsReadAsWall": 0.0049,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 2,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0271,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "GARAGE_EXCLUDED"
+     ],
+     "outlineRegionIoU": 0.0
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 459,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 1,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9216,
+     "deltaBuiltIoU": 0.2565,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0222,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "GARAGE_EXCLUDED"
+     ],
+     "outlineRegionIoU": 0.0
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 125,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 1,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9216,
+     "deltaBuiltIoU": 0.2565,
+     "deltaOpeningsReadAsWall": 0.0024,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0246,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "GARAGE_EXCLUDED"
+     ],
+     "outlineRegionIoU": 0.0
+    },
+    "+ELSED": {
+     "addedSegments": 79,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 1,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9216,
+     "deltaBuiltIoU": 0.2565,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0222,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "GARAGE_EXCLUDED"
+     ],
+     "outlineRegionIoU": 0.0
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 197,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 1,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9216,
+     "deltaBuiltIoU": 0.2565,
+     "deltaOpeningsReadAsWall": 0.0098,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.032,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "GARAGE_EXCLUDED"
+     ],
+     "outlineRegionIoU": 0.0
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 459,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 1,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9216,
+     "deltaBuiltIoU": 0.2565,
+     "deltaOpeningsReadAsWall": 0.0074,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 1,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0296,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "GARAGE_EXCLUDED"
+     ],
+     "outlineRegionIoU": 0.0
+    },
+    "BASELINE": {
+     "addedSegments": 0,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 1,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "GARAGE_EXCLUDED"
+     ],
+     "builtRegionIoU": 0.6651,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0222,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "GARAGE_EXCLUDED"
+     ],
+     "outlineRegionIoU": 0.0
+    }
+   }
+  },
+  "glazed-facade": {
+   "evidenceAvailability": {
+    "byProvider": {
+     "DEEPLSD-MD": {
+      "falseBridges": 0,
+      "usefulBridges": 2
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 0,
+      "usefulBridges": 2
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 0,
+      "usefulBridges": 2
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 0,
+      "usefulBridges": 2
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 0,
+      "usefulBridges": 3
+     },
+     "SCV-LINES": {
+      "falseBridges": 0,
+      "usefulBridges": 2
+     }
+    },
+    "gapsOnTruthExterior": 3,
+    "gapsOutsideBuilding": 0,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 0,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 0,
+     "ELSED-DEFAULT": 0,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 0,
+     "MSAM-SOURCE-PROMPTS": 1
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 80,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 1,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9157,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 2,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.011,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.0
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 454,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 1,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9157,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0022,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 2,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0132,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.0
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 83,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 1,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9157,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0022,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 2,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0132,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.0
+    },
+    "+ELSED": {
+     "addedSegments": 64,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 1,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9157,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 2,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.011,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.0
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 144,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 1,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9157,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 2,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.011,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.0
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 454,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 1,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9157,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0022,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 2,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0132,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.0
+    },
+    "BASELINE": {
+     "addedSegments": 0,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 1,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9157,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 2,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.011,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.0
+    }
+   }
+  },
+  "hatch-floor-patterns": {
+   "evidenceAvailability": {
+    "byProvider": {
+     "DEEPLSD-MD": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "SCV-LINES": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     }
+    },
+    "gapsOnTruthExterior": 1,
+    "gapsOutsideBuilding": 0,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 0,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 0,
+     "ELSED-DEFAULT": 0,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 0,
+     "MSAM-SOURCE-PROMPTS": 0
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 328,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 2,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0642,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 2,
+      "OPENING_SUPPORTED": 2,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.1368,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 457,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0726,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 335,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0043,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0769,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+ELSED": {
+     "addedSegments": 121,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0086,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 2,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0812,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 449,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0684,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 2,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.141,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 457,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0043,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0769,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "BASELINE": {
+     "addedSegments": 0,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0726,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    }
+   }
+  },
+  "interior-partitions-near-exterior": {
+   "evidenceAvailability": {
+    "byProvider": {
+     "DEEPLSD-MD": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "SCV-LINES": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     }
+    },
+    "gapsOnTruthExterior": 2,
+    "gapsOutsideBuilding": 0,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 0,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 0,
+     "ELSED-DEFAULT": 0,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 0,
+     "MSAM-SOURCE-PROMPTS": 0
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 105,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0066,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.043,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 463,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0066,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.043,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 113,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0033,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0397,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+ELSED": {
+     "addedSegments": 75,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0364,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 180,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.01,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0464,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 463,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0133,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0497,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "BASELINE": {
+     "addedSegments": 0,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0364,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    }
+   }
+  },
+  "jpeg-compression": {
+   "evidenceAvailability": {
+    "byProvider": {
+     "DEEPLSD-MD": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "SCV-LINES": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     }
+    },
+    "gapsOnTruthExterior": 1,
+    "gapsOutsideBuilding": 0,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 0,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 0,
+     "ELSED-DEFAULT": 0,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 1,
+     "MSAM-SOURCE-PROMPTS": 1
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 144,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9087,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0031,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.04,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9087
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 454,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9087,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0062,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 2,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 1,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0431,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9087
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 162,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9087,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0031,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 2,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.04,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9087
+    },
+    "+ELSED": {
+     "addedSegments": 88,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9087,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0369,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9087
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 232,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9087,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0031,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.04,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9087
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 454,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9087,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0093,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0462,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9087
+    },
+    "BASELINE": {
+     "addedSegments": 0,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9087,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0369,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9087
+    }
+   }
+  },
+  "l-shape": {
+   "evidenceAvailability": {
+    "byProvider": {
+     "DEEPLSD-MD": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "SCV-LINES": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     }
+    },
+    "gapsOnTruthExterior": 1,
+    "gapsOutsideBuilding": 0,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 0,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 0,
+     "ELSED-DEFAULT": 0,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 1,
+     "MSAM-SOURCE-PROMPTS": 1
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 108,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9087,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0369,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9087
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 456,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9087,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 1,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0369,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9087
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 123,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9087,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0369,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9087
+    },
+    "+ELSED": {
+     "addedSegments": 89,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9087,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0369,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9087
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 197,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9087,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0369,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9087
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 456,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9087,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0369,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9087
+    },
+    "BASELINE": {
+     "addedSegments": 0,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9087,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0369,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9087
+    }
+   }
+  },
+  "low-contrast": {
+   "evidenceAvailability": {
+    "byProvider": {
+     "DEEPLSD-MD": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "SCV-LINES": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     }
+    },
+    "gapsOnTruthExterior": 1,
+    "gapsOutsideBuilding": 0,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 0,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 0,
+     "ELSED-DEFAULT": 0,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 1,
+     "MSAM-SOURCE-PROMPTS": 1
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 115,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9087,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0369,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9087
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 464,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9087,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0031,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 1,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.04,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9087
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 119,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9087,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0369,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9087
+    },
+    "+ELSED": {
+     "addedSegments": 90,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9087,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0369,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9087
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 205,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9087,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0369,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9087
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 464,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9087,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0369,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9087
+    },
+    "BASELINE": {
+     "addedSegments": 0,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9087,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0369,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9087
+    }
+   }
+  },
+  "narrow-connector": {
+   "evidenceAvailability": {
+    "byProvider": {
+     "DEEPLSD-MD": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 0,
+      "usefulBridges": 3
+     },
+     "SCV-LINES": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     }
+    },
+    "gapsOnTruthExterior": 3,
+    "gapsOutsideBuilding": 0,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 0,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 0,
+     "ELSED-DEFAULT": 0,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 0,
+     "MSAM-SOURCE-PROMPTS": 3
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 147,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 2,
+      "unjudged": 2,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "IMPRECISE"
+     ],
+     "builtRegionIoU": 0.877,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0082,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1,
+      "OPENING_SUPPORTED": 2,
+      "TRUE_EXTERIOR_GAP": 2,
+      "UNKNOWN_GAP": 4
+     },
+     "openingsReadAsWall": 0.0451,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.877
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 468,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 2,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "IMPRECISE"
+     ],
+     "builtRegionIoU": 0.877,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 3,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 5,
+      "UNKNOWN_GAP": 3
+     },
+     "openingsReadAsWall": 0.0369,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.877
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 155,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 2,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "IMPRECISE"
+     ],
+     "builtRegionIoU": 0.877,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0041,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 2,
+      "UNKNOWN_GAP": 3
+     },
+     "openingsReadAsWall": 0.041,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.877
+    },
+    "+ELSED": {
+     "addedSegments": 97,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 2,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "IMPRECISE"
+     ],
+     "builtRegionIoU": 0.877,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 2,
+      "UNKNOWN_GAP": 3
+     },
+     "openingsReadAsWall": 0.0369,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.877
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 244,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 2,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "IMPRECISE"
+     ],
+     "builtRegionIoU": 0.877,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0123,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 2,
+      "UNKNOWN_GAP": 3
+     },
+     "openingsReadAsWall": 0.0492,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.877
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 468,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 2,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "IMPRECISE"
+     ],
+     "builtRegionIoU": 0.877,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0041,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 2,
+      "UNKNOWN_GAP": 3
+     },
+     "openingsReadAsWall": 0.041,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.877
+    },
+    "BASELINE": {
+     "addedSegments": 0,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 2,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "IMPRECISE"
+     ],
+     "builtRegionIoU": 0.877,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 2,
+      "UNKNOWN_GAP": 3
+     },
+     "openingsReadAsWall": 0.0369,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.877
+    }
+   }
+  },
+  "partial-crop": {
+   "evidenceAvailability": {
+    "byProvider": {
+     "DEEPLSD-MD": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "SCV-LINES": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     }
+    },
+    "gapsOnTruthExterior": 1,
+    "gapsOutsideBuilding": 0,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 0,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 0,
+     "ELSED-DEFAULT": 0,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 0,
+     "MSAM-SOURCE-PROMPTS": 0
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 81,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 2,
+      "unjudged": 1,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "WING_DROPPED"
+     ],
+     "builtRegionIoU": 0.0,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 2,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0185,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "WING_DROPPED"
+     ],
+     "outlineRegionIoU": 0.0
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 444,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 1,
+      "unjudged": 2,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "WING_DROPPED"
+     ],
+     "builtRegionIoU": 0.0,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0061,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 1,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0246,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "WING_DROPPED"
+     ],
+     "outlineRegionIoU": 0.0
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 90,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 2,
+      "unjudged": 1,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "WING_DROPPED"
+     ],
+     "builtRegionIoU": 0.0,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 2,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0185,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "WING_DROPPED"
+     ],
+     "outlineRegionIoU": 0.0
+    },
+    "+ELSED": {
+     "addedSegments": 62,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 2,
+      "unjudged": 1,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "WING_DROPPED"
+     ],
+     "builtRegionIoU": 0.0,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 2,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0185,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "WING_DROPPED"
+     ],
+     "outlineRegionIoU": 0.0
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 143,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 2,
+      "unjudged": 1,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "WING_DROPPED"
+     ],
+     "builtRegionIoU": 0.0,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 2,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0185,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "WING_DROPPED"
+     ],
+     "outlineRegionIoU": 0.0
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 444,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 2,
+      "unjudged": 1,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "WING_DROPPED"
+     ],
+     "builtRegionIoU": 0.0,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0123,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 2,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0308,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "WING_DROPPED"
+     ],
+     "outlineRegionIoU": 0.0
+    },
+    "BASELINE": {
+     "addedSegments": 0,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 2,
+      "unjudged": 1,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "WING_DROPPED"
+     ],
+     "builtRegionIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 2,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0185,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "WING_DROPPED"
+     ],
+     "outlineRegionIoU": 0.0
+    }
+   }
+  },
+  "pergola-outside": {
+   "evidenceAvailability": {
+    "byProvider": {
+     "DEEPLSD-MD": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "SCV-LINES": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     }
+    },
+    "gapsOnTruthExterior": 1,
+    "gapsOutsideBuilding": 0,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 0,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 0,
+     "ELSED-DEFAULT": 0,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 0,
+     "MSAM-SOURCE-PROMPTS": 1
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 122,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0066,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.043,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 449,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0364,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 128,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0033,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0397,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+ELSED": {
+     "addedSegments": 69,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0364,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 191,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.01,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0464,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 449,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0033,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0397,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "BASELINE": {
+     "addedSegments": 0,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0364,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    }
+   }
+  },
+  "recessed-entrance": {
+   "evidenceAvailability": {
+    "byProvider": {
+     "DEEPLSD-MD": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 0,
+      "usefulBridges": 2
+     },
+     "SCV-LINES": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     }
+    },
+    "gapsOnTruthExterior": 2,
+    "gapsOutsideBuilding": 0,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 0,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 0,
+     "ELSED-DEFAULT": 0,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 0,
+     "MSAM-SOURCE-PROMPTS": 2
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 104,
+     "bridged": {
+      "pocketMouths": 1,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "IMPRECISE"
+     ],
+     "builtRegionIoU": 0.8884,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0091,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0363,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.8884
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 458,
+     "bridged": {
+      "pocketMouths": 1,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "IMPRECISE"
+     ],
+     "builtRegionIoU": 0.8884,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0099,
+     "deltaOutlineIoU": 0.0091,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 4,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 1,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0462,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.8884
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 124,
+     "bridged": {
+      "pocketMouths": 1,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "IMPRECISE"
+     ],
+     "builtRegionIoU": 0.8884,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0091,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0363,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.8884
+    },
+    "+ELSED": {
+     "addedSegments": 86,
+     "bridged": {
+      "pocketMouths": 1,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "IMPRECISE"
+     ],
+     "builtRegionIoU": 0.8884,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0033,
+     "deltaOutlineIoU": 0.0091,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0396,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.8884
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 190,
+     "bridged": {
+      "pocketMouths": 1,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "IMPRECISE"
+     ],
+     "builtRegionIoU": 0.8884,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0033,
+     "deltaOutlineIoU": 0.0091,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0396,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.8884
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 458,
+     "bridged": {
+      "pocketMouths": 1,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "IMPRECISE"
+     ],
+     "builtRegionIoU": 0.8884,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0462,
+     "deltaOutlineIoU": 0.0091,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 2,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0825,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.8884
+    },
+    "BASELINE": {
+     "addedSegments": 0,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 1,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "IMPRECISE"
+     ],
+     "builtRegionIoU": 0.8884,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0363,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "RECESS_FILLED"
+     ],
+     "outlineRegionIoU": 0.8793
+    }
+   }
+  },
+  "rect": {
+   "evidenceAvailability": {
+    "byProvider": {
+     "DEEPLSD-MD": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "SCV-LINES": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     }
+    },
+    "gapsOnTruthExterior": 1,
+    "gapsOutsideBuilding": 0,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 0,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 0,
+     "ELSED-DEFAULT": 0,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 0,
+     "MSAM-SOURCE-PROMPTS": 0
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 79,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0066,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.043,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 441,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0033,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0397,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 93,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0033,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0397,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+ELSED": {
+     "addedSegments": 68,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0364,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 147,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.01,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0464,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 441,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0066,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.043,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "BASELINE": {
+     "addedSegments": 0,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0364,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    }
+   }
+  },
+  "rotated-plan": {
+   "evidenceAvailability": {
+    "byProvider": {},
+    "gapsOnTruthExterior": 0,
+    "gapsOutsideBuilding": 0,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 0,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 0,
+     "ELSED-DEFAULT": 0,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 0,
+     "MSAM-SOURCE-PROMPTS": 0
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 105,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 0,
+      "unjudged": 3,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "LEAK_THROUGH_OPENING"
+     ],
+     "builtRegionIoU": 0.6545,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 2,
+      "OPENING_SUPPORTED": 0,
+      "TRUE_EXTERIOR_GAP": 4,
+      "UNKNOWN_GAP": 3
+     },
+     "openingsReadAsWall": 0.0,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "WING_DROPPED"
+     ],
+     "outlineRegionIoU": 0.0
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 421,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 0,
+      "unjudged": 3,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "LEAK_THROUGH_OPENING"
+     ],
+     "builtRegionIoU": 0.6545,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 7,
+      "OPENING_SUPPORTED": 0,
+      "TRUE_EXTERIOR_GAP": 4,
+      "UNKNOWN_GAP": 3
+     },
+     "openingsReadAsWall": 0.0,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "WING_DROPPED"
+     ],
+     "outlineRegionIoU": 0.0
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 110,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 0,
+      "unjudged": 3,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "LEAK_THROUGH_OPENING"
+     ],
+     "builtRegionIoU": 0.6545,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 3,
+      "OPENING_SUPPORTED": 0,
+      "TRUE_EXTERIOR_GAP": 4,
+      "UNKNOWN_GAP": 3
+     },
+     "openingsReadAsWall": 0.0,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "WING_DROPPED"
+     ],
+     "outlineRegionIoU": 0.0
+    },
+    "+ELSED": {
+     "addedSegments": 93,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 0,
+      "unjudged": 3,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "LEAK_THROUGH_OPENING"
+     ],
+     "builtRegionIoU": 0.6545,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 3,
+      "OPENING_SUPPORTED": 0,
+      "TRUE_EXTERIOR_GAP": 4,
+      "UNKNOWN_GAP": 3
+     },
+     "openingsReadAsWall": 0.0,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "WING_DROPPED"
+     ],
+     "outlineRegionIoU": 0.0
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 198,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 0,
+      "unjudged": 3,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "LEAK_THROUGH_OPENING"
+     ],
+     "builtRegionIoU": 0.6545,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1,
+      "OPENING_SUPPORTED": 0,
+      "TRUE_EXTERIOR_GAP": 4,
+      "UNKNOWN_GAP": 3
+     },
+     "openingsReadAsWall": 0.0,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "WING_DROPPED"
+     ],
+     "outlineRegionIoU": 0.0
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 421,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 0,
+      "unjudged": 3,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "LEAK_THROUGH_OPENING"
+     ],
+     "builtRegionIoU": 0.6545,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 4,
+      "OPENING_SUPPORTED": 0,
+      "TRUE_EXTERIOR_GAP": 4,
+      "UNKNOWN_GAP": 3
+     },
+     "openingsReadAsWall": 0.0,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "WING_DROPPED"
+     ],
+     "outlineRegionIoU": 0.0
+    },
+    "BASELINE": {
+     "addedSegments": 0,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 0,
+      "unjudged": 3,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "LEAK_THROUGH_OPENING"
+     ],
+     "builtRegionIoU": 0.6545,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1,
+      "OPENING_SUPPORTED": 0,
+      "TRUE_EXTERIOR_GAP": 4,
+      "UNKNOWN_GAP": 3
+     },
+     "openingsReadAsWall": 0.0,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "WING_DROPPED"
+     ],
+     "outlineRegionIoU": 0.0
+    }
+   }
+  },
+  "scan-blur": {
+   "evidenceAvailability": {
+    "byProvider": {
+     "DEEPLSD-MD": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 0,
+      "usefulBridges": 2
+     },
+     "SCV-LINES": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     }
+    },
+    "gapsOnTruthExterior": 2,
+    "gapsOutsideBuilding": 0,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 0,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 0,
+     "ELSED-DEFAULT": 0,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 0,
+     "MSAM-SOURCE-PROMPTS": 1
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 116,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 0,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "IMPRECISE"
+     ],
+     "builtRegionIoU": 0.8964,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.5262,
+     "deltaOutlineIoU": 0.8964,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 20,
+      "OPENING_SUPPORTED": 0,
+      "TRUE_EXTERIOR_GAP": 3,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.84,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.8964
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 492,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 1,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "IMPRECISE"
+     ],
+     "builtRegionIoU": 0.8964,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.4862,
+     "deltaOutlineIoU": 0.8964,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 34,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 3,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.8,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.8964
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 129,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 3
+     },
+     "builtFailureTypes": [
+      "IMPRECISE"
+     ],
+     "builtRegionIoU": 0.8964,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.3262,
+     "deltaOutlineIoU": 0.8964,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 21,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 2,
+      "UNKNOWN_GAP": 3
+     },
+     "openingsReadAsWall": 0.64,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.8964
+    },
+    "+ELSED": {
+     "addedSegments": 108,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 7,
+      "unjudged": 0,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "IMPRECISE"
+     ],
+     "builtRegionIoU": 0.8964,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.04,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 21,
+      "OPENING_SUPPORTED": 7,
+      "TRUE_EXTERIOR_GAP": 5,
+      "UNKNOWN_GAP": 0
+     },
+     "openingsReadAsWall": 0.3538,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "WING_DROPPED"
+     ],
+     "outlineRegionIoU": 0.0
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 224,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 0,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "IMPRECISE"
+     ],
+     "builtRegionIoU": 0.8964,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.56,
+     "deltaOutlineIoU": 0.8964,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 19,
+      "OPENING_SUPPORTED": 0,
+      "TRUE_EXTERIOR_GAP": 3,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.8738,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.8964
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 492,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 5,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "IMPRECISE"
+     ],
+     "builtRegionIoU": 0.8964,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.5724,
+     "deltaOutlineIoU": 0.8964,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 37,
+      "OPENING_SUPPORTED": 5,
+      "TRUE_EXTERIOR_GAP": 7,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.8862,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.8964
+    },
+    "BASELINE": {
+     "addedSegments": 0,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 6,
+      "unjudged": 1,
+      "weak": 0
+     },
+     "builtFailureTypes": [
+      "IMPRECISE"
+     ],
+     "builtRegionIoU": 0.8964,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 20,
+      "OPENING_SUPPORTED": 6,
+      "TRUE_EXTERIOR_GAP": 1,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.3138,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "WING_DROPPED"
+     ],
+     "outlineRegionIoU": 0.0
+    }
+   }
+  },
+  "skew": {
+   "evidenceAvailability": {
+    "byProvider": {
+     "DEEPLSD-MD": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "SCV-LINES": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     }
+    },
+    "gapsOnTruthExterior": 1,
+    "gapsOutsideBuilding": 0,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 0,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 0,
+     "ELSED-DEFAULT": 0,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 1,
+     "MSAM-SOURCE-PROMPTS": 1
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 126,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9228,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0061,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 2,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.037,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9228
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 433,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9228,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0123,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 2,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0432,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9228
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 125,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9228,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0061,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 2,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.037,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9228
+    },
+    "+ELSED": {
+     "addedSegments": 99,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9228,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0031,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 2,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.034,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9228
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 225,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9228,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0061,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 2,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.037,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9228
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 433,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 2,
+      "unjudged": 0,
+      "weak": 3
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9228,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0154,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 2,
+      "TRUE_EXTERIOR_GAP": 2,
+      "UNKNOWN_GAP": 3
+     },
+     "openingsReadAsWall": 0.0463,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9228
+    },
+    "BASELINE": {
+     "addedSegments": 0,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9228,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 2,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0309,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9228
+    }
+   }
+  },
+  "terrace-adjacent": {
+   "evidenceAvailability": {
+    "byProvider": {
+     "DEEPLSD-MD": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "SCV-LINES": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     }
+    },
+    "gapsOnTruthExterior": 1,
+    "gapsOutsideBuilding": 0,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 0,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 0,
+     "ELSED-DEFAULT": 0,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 0,
+     "MSAM-SOURCE-PROMPTS": 0
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 369,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0083,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0384,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 462,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0028,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0329,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 394,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0055,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0356,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+ELSED": {
+     "addedSegments": 131,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0028,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0329,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 500,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.011,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0411,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 462,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0083,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 1,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0384,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    },
+    "BASELINE": {
+     "addedSegments": 0,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9122,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0301,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9122
+    }
+   }
+  },
+  "text-crossing-walls": {
+   "evidenceAvailability": {
+    "byProvider": {
+     "DEEPLSD-MD": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 0,
+      "usefulBridges": 2
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     },
+     "SCV-LINES": {
+      "falseBridges": 0,
+      "usefulBridges": 1
+     }
+    },
+    "gapsOnTruthExterior": 3,
+    "gapsOutsideBuilding": 0,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 0,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 0,
+     "ELSED-DEFAULT": 0,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 1,
+     "MSAM-SOURCE-PROMPTS": 1
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 101,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 3
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9042,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0066,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 2,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 3
+     },
+     "openingsReadAsWall": 0.0364,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9042
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 450,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 7,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9042,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.1225,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 15,
+      "OPENING_SUPPORTED": 7,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.1523,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9042
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 110,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 2,
+      "unjudged": 0,
+      "weak": 4
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9042,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0033,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 2,
+      "OPENING_SUPPORTED": 2,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 4
+     },
+     "openingsReadAsWall": 0.0331,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9042
+    },
+    "+ELSED": {
+     "addedSegments": 78,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 3
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9042,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 2,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 3
+     },
+     "openingsReadAsWall": 0.0298,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9042
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 179,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9042,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0099,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 2,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0397,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9042
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 450,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 6,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9042,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.1325,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 17,
+      "OPENING_SUPPORTED": 6,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.1623,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9042
+    },
+    "BASELINE": {
+     "addedSegments": 0,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 3
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9042,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 2,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 3
+     },
+     "openingsReadAsWall": 0.0298,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9042
+    }
+   }
+  },
+  "u-shape": {
+   "evidenceAvailability": {
+    "byProvider": {
+     "DEEPLSD-MD": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 0,
+      "usefulBridges": 2
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 0,
+      "usefulBridges": 2
+     },
+     "SCV-LINES": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     }
+    },
+    "gapsOnTruthExterior": 2,
+    "gapsOutsideBuilding": 0,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 0,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 0,
+     "ELSED-DEFAULT": 0,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 2,
+     "MSAM-SOURCE-PROMPTS": 2
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 114,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 3,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "IMPRECISE"
+     ],
+     "builtRegionIoU": 0.8856,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0027,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 3,
+      "TRUE_EXTERIOR_GAP": 1,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0332,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.8856
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 457,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 5,
+      "unjudged": 1,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "IMPRECISE"
+     ],
+     "builtRegionIoU": 0.8856,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0027,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 2,
+      "OPENING_SUPPORTED": 5,
+      "TRUE_EXTERIOR_GAP": 2,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0332,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.8856
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 121,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "IMPRECISE"
+     ],
+     "builtRegionIoU": 0.8856,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 1,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0305,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.8856
+    },
+    "+ELSED": {
+     "addedSegments": 88,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "IMPRECISE"
+     ],
+     "builtRegionIoU": 0.8856,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0027,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 1,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0332,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.8856
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 202,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "IMPRECISE"
+     ],
+     "builtRegionIoU": 0.8856,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0055,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 1,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.036,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.8856
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 457,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "IMPRECISE"
+     ],
+     "builtRegionIoU": 0.8856,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0027,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 2,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0332,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.8856
+    },
+    "BASELINE": {
+     "addedSegments": 0,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 4,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "IMPRECISE"
+     ],
+     "builtRegionIoU": 0.8856,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 4,
+      "TRUE_EXTERIOR_GAP": 1,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0305,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "IMPRECISE"
+     ],
+     "outlineRegionIoU": 0.8856
+    }
+   }
+  },
+  "windows-long-facade": {
+   "evidenceAvailability": {
+    "byProvider": {
+     "DEEPLSD-MD": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "DEEPLSD-MD-REFINE-SCV": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "DEEPLSD-WF": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "ELSED-DEFAULT": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-AUTO": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-BOX": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "MSAM-SOURCE-PROMPTS": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     },
+     "SCV-LINES": {
+      "falseBridges": 0,
+      "usefulBridges": 0
+     }
+    },
+    "gapsOnTruthExterior": 1,
+    "gapsOutsideBuilding": 0,
+    "usefulBridgesNotAlreadyInScvLines": {
+     "DEEPLSD-MD": 0,
+     "DEEPLSD-MD-REFINE-SCV": 0,
+     "DEEPLSD-WF": 0,
+     "ELSED-DEFAULT": 0,
+     "MSAM-AUTO": 0,
+     "MSAM-BOX": 0,
+     "MSAM-SOURCE-PROMPTS": 0
+    }
+   },
+   "maskUnion": {
+    "+DEEPLSD-MD": {
+     "addedSegments": 96,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 6,
+      "unjudged": 0,
+      "weak": 2
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9195,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.002,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 6,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 2
+     },
+     "openingsReadAsWall": 0.0463,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9195
+    },
+    "+DEEPLSD-MD-REFINE-SCV": {
+     "addedSegments": 446,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 7,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9195,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.006,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 7,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0503,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9195
+    },
+    "+DEEPLSD-WF": {
+     "addedSegments": 101,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 7,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9195,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.002,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 7,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0463,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9195
+    },
+    "+ELSED": {
+     "addedSegments": 87,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 7,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9195,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.0,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 7,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0443,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9195
+    },
+    "+ELSED+DEEPLSD-MD": {
+     "addedSegments": 183,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 7,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9195,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.002,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 7,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0463,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9195
+    },
+    "+SCV-LINES-CONTROL": {
+     "addedSegments": 446,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 7,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9195,
+     "deltaBuiltIoU": 0.0,
+     "deltaOpeningsReadAsWall": 0.006,
+     "deltaOutlineIoU": 0.0,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 7,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0503,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9195
+    },
+    "BASELINE": {
+     "addedSegments": 0,
+     "bridged": {
+      "pocketMouths": 0,
+      "strong": 7,
+      "unjudged": 0,
+      "weak": 1
+     },
+     "builtFailureTypes": [
+      "OK"
+     ],
+     "builtRegionIoU": 0.9195,
+     "gapTallies": {
+      "DRAWING_BREAK_SUPPORTED": 0,
+      "OPENING_SUPPORTED": 7,
+      "TRUE_EXTERIOR_GAP": 0,
+      "UNKNOWN_GAP": 1
+     },
+     "openingsReadAsWall": 0.0443,
+     "outlineAccepted": false,
+     "outlineFailureTypes": [
+      "OK"
+     ],
+     "outlineRegionIoU": 0.9195
+    }
+   }
+  }
+ }
+}

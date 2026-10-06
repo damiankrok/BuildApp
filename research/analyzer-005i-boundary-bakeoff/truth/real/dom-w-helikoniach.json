@@ -1,0 +1,295 @@
+{
+ "annotator": "agent manual review of zoomed crops with a labelled pixel grid (BUILDPLAN-ANALYZER-005I Track B); not derived from any BuildPlan candidate, outline, mass or published area",
+ "bodies": [
+  {
+   "kind": "MAIN",
+   "polygon": [
+    [
+     162,
+     161.5
+    ],
+    [
+     466.7,
+     161.5
+    ],
+    [
+     466.7,
+     753
+    ],
+    [
+     438,
+     753
+    ],
+    [
+     438,
+     711
+    ],
+    [
+     304,
+     711
+    ],
+    [
+     304,
+     753
+    ],
+    [
+     162,
+     753
+    ]
+   ]
+  }
+ ],
+ "conventions": "frame pixels, origin top-left, y down; exterior = outer faces of the ground-floor enclosed building; recess pockets excluded",
+ "documentedFailure": "005F \u00a7AB: the outline ends at the inner face of the mostly glazed west wall and at y 710, before the lower end of the west room and the recessed entrance",
+ "exclusions": [
+  {
+   "kind": "TERRACE",
+   "note": "paved terrace north of the glazed living-room wall",
+   "polygon": [
+    [
+     162,
+     18
+    ],
+    [
+     465,
+     18
+    ],
+    [
+     465,
+     161.5
+    ],
+    [
+     162,
+     161.5
+    ]
+   ]
+  },
+  {
+   "kind": "PERGOLA",
+   "note": "dashed beam outline with four posts over the terrace",
+   "polygon": [
+    [
+     194,
+     35
+    ],
+    [
+     432,
+     35
+    ],
+    [
+     432,
+     160
+    ],
+    [
+     194,
+     160
+    ]
+   ]
+  },
+  {
+   "kind": "TERRACE",
+   "note": "paved strip and planter east of the house",
+   "polygon": [
+    [
+     467,
+     15
+    ],
+    [
+     548,
+     15
+    ],
+    [
+     548,
+     455
+    ],
+    [
+     467,
+     455
+    ]
+   ]
+  },
+  {
+   "kind": "RECESS",
+   "note": "recessed entrance pocket (the 97 cm segment)",
+   "polygon": [
+    [
+     304,
+     711
+    ],
+    [
+     438,
+     711
+    ],
+    [
+     438,
+     753
+    ],
+    [
+     304,
+     753
+    ]
+   ]
+  },
+  {
+   "kind": "PORCH",
+   "note": "landing / step in front of the entrance",
+   "polygon": [
+    [
+     302,
+     753
+    ],
+    [
+     466,
+     753
+    ],
+    [
+     466,
+     768
+    ],
+    [
+     302,
+     768
+    ]
+   ]
+  }
+ ],
+ "exterior": [
+  [
+   162,
+   161.5
+  ],
+  [
+   466.7,
+   161.5
+  ],
+  [
+   466.7,
+   753
+  ],
+  [
+   438,
+   753
+  ],
+  [
+   438,
+   711
+  ],
+  [
+   304,
+   711
+  ],
+  [
+   304,
+   753
+  ],
+  [
+   162,
+   753
+  ]
+ ],
+ "exteriorWallThicknessPx": 19.5,
+ "frameId": "frame-asset-rzut-d5842da623-4c943a2b00",
+ "frameSize": [
+  853,
+  853
+ ],
+ "house": "dom-w-helikoniach",
+ "metresPerPx": 0.023,
+ "metresPerPxWhy": "printed overall dimensions over the traced outer-face span (agent reading of the drawing; not the BuildPlan registration): 700 cm over 304.7 px (0.02297) and 1360 cm over 591.5 px (0.02299), outer faces as traced",
+ "openings": [
+  {
+   "a": [
+    219,
+    161.5
+   ],
+   "b": [
+    410,
+    161.5
+   ],
+   "kind": "GLAZED",
+   "note": "440/230 glazing, north"
+  },
+  {
+   "a": [
+    466.7,
+    327
+   ],
+   "b": [
+    466.7,
+    449
+   ],
+   "kind": "GLAZED",
+   "note": "280/230 glazing, east"
+  },
+  {
+   "a": [
+    466.7,
+    522
+   ],
+   "b": [
+    466.7,
+    557
+   ],
+   "kind": "WINDOW",
+   "note": "80/230, east"
+  },
+  {
+   "a": [
+    162,
+    753
+   ],
+   "b": [
+    236,
+    753
+   ],
+   "kind": "WINDOW",
+   "note": "150/140 corner window, south leg"
+  },
+  {
+   "a": [
+    317,
+    711
+   ],
+   "b": [
+    382,
+    711
+   ],
+   "kind": "DOOR",
+   "note": "150/210 entrance door at the back of the recess"
+  },
+  {
+   "a": [
+    162,
+    328
+   ],
+   "b": [
+    162,
+    407
+   ],
+   "kind": "WINDOW",
+   "note": "180/140, west"
+  },
+  {
+   "a": [
+    162,
+    666
+   ],
+   "b": [
+    162,
+    753
+   ],
+   "kind": "WINDOW",
+   "note": "180/140 corner window, west leg"
+  }
+ ],
+ "vertexUncertaintyPx": [
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  3
+ ]
+}

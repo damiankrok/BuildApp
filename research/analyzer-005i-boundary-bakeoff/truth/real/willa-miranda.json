@@ -1,0 +1,401 @@
+{
+ "annotator": "agent manual review of zoomed crops with a labelled pixel grid (BUILDPLAN-ANALYZER-005I Track B); not derived from any BuildPlan candidate, outline, mass or published area",
+ "bodies": [
+  {
+   "kind": "MAIN",
+   "polygon": [
+    [
+     235.5,
+     176.7
+    ],
+    [
+     368,
+     176.7
+    ],
+    [
+     368,
+     84.6
+    ],
+    [
+     583,
+     84.6
+    ],
+    [
+     583,
+     176
+    ],
+    [
+     795,
+     176
+    ],
+    [
+     795,
+     350
+    ],
+    [
+     532.5,
+     350
+    ],
+    [
+     532.5,
+     519
+    ],
+    [
+     235.5,
+     519
+    ]
+   ]
+  },
+  {
+   "kind": "GARAGE",
+   "note": "double garage (9); its north wall is shared with rooms 7/8",
+   "polygon": [
+    [
+     532.5,
+     350
+    ],
+    [
+     795,
+     350
+    ],
+    [
+     795,
+     610
+    ],
+    [
+     532.5,
+     610
+    ]
+   ]
+  },
+  {
+   "kind": "WING",
+   "note": "the living room's north projection (part of MAIN, listed for the attached-body class)",
+   "polygon": [
+    [
+     368,
+     84.6
+    ],
+    [
+     583,
+     84.6
+    ],
+    [
+     583,
+     176.7
+    ],
+    [
+     368,
+     176.7
+    ]
+   ]
+  }
+ ],
+ "conventions": "frame pixels, origin top-left, y down; exterior = outer faces of the ground-floor enclosed building (house with its north living-room projection + the attached double garage)",
+ "documentedFailure": "005A \u00a7AA / 005B: fails at the walled outline on a side of openings (a partial wall witness)",
+ "exclusions": [
+  {
+   "kind": "TERRACE",
+   "note": "north terrace with loungers",
+   "polygon": [
+    [
+     235,
+     15
+    ],
+    [
+     583,
+     15
+    ],
+    [
+     583,
+     84.6
+    ],
+    [
+     368,
+     84.6
+    ],
+    [
+     368,
+     176.7
+    ],
+    [
+     235,
+     176.7
+    ]
+   ]
+  },
+  {
+   "kind": "PERGOLA",
+   "note": "west dining terrace under a pergola (posts), planters",
+   "polygon": [
+    [
+     105,
+     40
+    ],
+    [
+     235,
+     40
+    ],
+    [
+     235,
+     275
+    ],
+    [
+     105,
+     275
+    ]
+   ]
+  },
+  {
+   "kind": "TERRACE",
+   "note": "planter / paving in the north-east corner",
+   "polygon": [
+    [
+     583,
+     120
+    ],
+    [
+     715,
+     120
+    ],
+    [
+     715,
+     176
+    ],
+    [
+     583,
+     176
+    ]
+   ]
+  },
+  {
+   "kind": "PORCH",
+   "note": "dashed canopy outline with a post: covered entrance, not enclosed",
+   "polygon": [
+    [
+     357,
+     519
+    ],
+    [
+     532.5,
+     519
+    ],
+    [
+     532.5,
+     622
+    ],
+    [
+     357,
+     622
+    ]
+   ]
+  },
+  {
+   "kind": "PAVING",
+   "note": "driveway apron",
+   "polygon": [
+    [
+     532.5,
+     610
+    ],
+    [
+     795,
+     610
+    ],
+    [
+     795,
+     690
+    ],
+    [
+     532.5,
+     690
+    ]
+   ]
+  }
+ ],
+ "exterior": [
+  [
+   235.5,
+   176.7
+  ],
+  [
+   368,
+   176.7
+  ],
+  [
+   368,
+   84.6
+  ],
+  [
+   583,
+   84.6
+  ],
+  [
+   583,
+   176
+  ],
+  [
+   795,
+   176
+  ],
+  [
+   795,
+   610
+  ],
+  [
+   532.5,
+   610
+  ],
+  [
+   532.5,
+   519
+  ],
+  [
+   235.5,
+   519
+  ]
+ ],
+ "exteriorWallThicknessPx": 17,
+ "frameId": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+ "frameSize": [
+  853,
+  853
+ ],
+ "house": "willa-miranda",
+ "metresPerPx": 0.02682,
+ "metresPerPxWhy": "printed overall dimensions over the traced outer-face span (agent reading of the drawing; not the BuildPlan registration): 1500 cm over 559.5 px (0.02681) and 1410 cm over 525.4 px (0.02684)",
+ "openings": [
+  {
+   "a": [
+    263,
+    176.7
+   ],
+   "b": [
+    353,
+    176.7
+   ],
+   "kind": "GLAZED",
+   "note": "240/230, north of the west part"
+  },
+  {
+   "a": [
+    235.5,
+    272
+   ],
+   "b": [
+    235.5,
+    345
+   ],
+   "kind": "DOOR",
+   "note": "210/230, west"
+  },
+  {
+   "a": [
+    235.5,
+    459
+   ],
+   "b": [
+    235.5,
+    519
+   ],
+   "kind": "WINDOW",
+   "note": "140/140 corner window, west leg"
+  },
+  {
+   "a": [
+    235.5,
+    519
+   ],
+   "b": [
+    331,
+    519
+   ],
+   "kind": "WINDOW",
+   "note": "240/140 corner window, south leg"
+  },
+  {
+   "a": [
+    411,
+    84.6
+   ],
+   "b": [
+    541,
+    84.6
+   ],
+   "kind": "GLAZED",
+   "note": "350/230 glazing and the door beside it, north projection"
+  },
+  {
+   "a": [
+    616,
+    176
+   ],
+   "b": [
+    657.5,
+    176
+   ],
+   "kind": "DOOR",
+   "note": "110/230, rooms 7/8 north"
+  },
+  {
+   "a": [
+    795,
+    269
+   ],
+   "b": [
+    795,
+    320
+   ],
+   "kind": "WINDOW",
+   "note": "135/135, east"
+  },
+  {
+   "a": [
+    795,
+    430
+   ],
+   "b": [
+    795,
+    481
+   ],
+   "kind": "WINDOW",
+   "note": "135/135, garage east"
+  },
+  {
+   "a": [
+    571,
+    610
+   ],
+   "b": [
+    757.5,
+    610
+   ],
+   "kind": "GARAGE_DOOR",
+   "note": "500/238 vehicle door"
+  },
+  {
+   "a": [
+    429,
+    519
+   ],
+   "b": [
+    500,
+    519
+   ],
+   "kind": "DOOR",
+   "note": "190/210 entrance"
+  }
+ ],
+ "vertexUncertaintyPx": [
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  3,
+  3
+ ]
+}

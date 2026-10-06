@@ -1,0 +1,283 @@
+{
+ "annotator": "agent manual review of zoomed crops with a labelled pixel grid (BUILDPLAN-ANALYZER-005I Track B); not derived from any BuildPlan candidate, outline, mass or published area",
+ "bodies": [
+  {
+   "kind": "MAIN",
+   "polygon": [
+    [
+     260,
+     95.5
+    ],
+    [
+     598,
+     95.5
+    ],
+    [
+     598,
+     456
+    ],
+    [
+     260,
+     456
+    ]
+   ]
+  },
+  {
+   "kind": "GARAGE",
+   "note": "garage wing (8) with the utility room (7)",
+   "polygon": [
+    [
+     598,
+     95.5
+    ],
+    [
+     794,
+     95.5
+    ],
+    [
+     794,
+     524
+    ],
+    [
+     598,
+     524
+    ]
+   ]
+  }
+ ],
+ "conventions": "frame pixels, origin top-left, y down; exterior = outer faces of the ground-floor enclosed building (house + garage wing running further forward); the roofed porch strip in front of the house is not enclosed and is excluded",
+ "documentedFailure": "005B \u00a7AE: the garage wing running 1.5 m forward is never proposed as a bay and floods; the outline fails on a side of openings",
+ "exclusions": [
+  {
+   "kind": "PORCH",
+   "note": "the unbuilt 1.5 m porch strip with a post",
+   "polygon": [
+    [
+     260,
+     456
+    ],
+    [
+     598,
+     456
+    ],
+    [
+     598,
+     524
+    ],
+    [
+     260,
+     524
+    ]
+   ]
+  },
+  {
+   "kind": "TERRACE",
+   "note": "west terrace (loungers, table)",
+   "polygon": [
+    [
+     90,
+     30
+    ],
+    [
+     260,
+     30
+    ],
+    [
+     260,
+     490
+    ],
+    [
+     90,
+     490
+    ]
+   ]
+  },
+  {
+   "kind": "PAVING",
+   "note": "driveway / front paving",
+   "polygon": [
+    [
+     420,
+     524
+    ],
+    [
+     795,
+     524
+    ],
+    [
+     795,
+     665
+    ],
+    [
+     420,
+     665
+    ]
+   ]
+  }
+ ],
+ "exterior": [
+  [
+   260,
+   95.5
+  ],
+  [
+   794,
+   95.5
+  ],
+  [
+   794,
+   524
+  ],
+  [
+   598,
+   524
+  ],
+  [
+   598,
+   456
+  ],
+  [
+   260,
+   456
+  ]
+ ],
+ "exteriorWallThicknessPx": 20,
+ "frameId": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+ "frameSize": [
+  853,
+  853
+ ],
+ "house": "dom-w-zurawkach",
+ "metresPerPx": 0.02213,
+ "metresPerPxWhy": "printed overall dimensions over the traced outer-face span (agent reading of the drawing; not the BuildPlan registration): 1180 cm over 534 px (0.02210) and 950 cm over 428.5 px (0.02217)",
+ "openings": [
+  {
+   "a": [
+    260,
+    95.5
+   ],
+   "b": [
+    342,
+    95.5
+   ],
+   "kind": "WINDOW",
+   "note": "160/140, north, into the corner"
+  },
+  {
+   "a": [
+    620,
+    95.5
+   ],
+   "b": [
+    646,
+    95.5
+   ],
+   "kind": "WINDOW",
+   "note": "60/150"
+  },
+  {
+   "a": [
+    722,
+    95.5
+   ],
+   "b": [
+    752,
+    95.5
+   ],
+   "kind": "WINDOW",
+   "note": "60/150"
+  },
+  {
+   "a": [
+    260,
+    95.5
+   ],
+   "b": [
+    260,
+    149
+   ],
+   "kind": "WINDOW",
+   "note": "100/140, west, corner"
+  },
+  {
+   "a": [
+    260,
+    232
+   ],
+   "b": [
+    260,
+    316.5
+   ],
+   "kind": "GLAZED",
+   "note": "180/230, west"
+  },
+  {
+   "a": [
+    260,
+    401
+   ],
+   "b": [
+    260,
+    456
+   ],
+   "kind": "DOOR",
+   "note": "100/230, west, into the corner"
+  },
+  {
+   "a": [
+    260,
+    456
+   ],
+   "b": [
+    359,
+    456
+   ],
+   "kind": "GLAZED",
+   "note": "200/230, south (onto the porch)"
+  },
+  {
+   "a": [
+    532,
+    456
+   ],
+   "b": [
+    578,
+    456
+   ],
+   "kind": "DOOR",
+   "note": "100/210 entrance"
+  },
+  {
+   "a": [
+    638,
+    524
+   ],
+   "b": [
+    754,
+    524
+   ],
+   "kind": "GARAGE_DOOR",
+   "note": "260/229 vehicle door between two piers"
+  },
+  {
+   "a": [
+    794,
+    290
+   ],
+   "b": [
+    794,
+    369
+   ],
+   "kind": "WINDOW",
+   "note": "180/130, east"
+  }
+ ],
+ "vertexUncertaintyPx": [
+  3,
+  2,
+  2,
+  2,
+  2,
+  4
+ ]
+}
