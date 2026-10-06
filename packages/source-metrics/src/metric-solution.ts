@@ -43,6 +43,8 @@ import { round6, stableId } from '@buildapp/source-common'
 import type { Checkpoint, PixelRect } from '@buildapp/source-common'
 import { rectIoU } from '@buildapp/source-common'
 import { assignTokens, solveChain, spansFor } from './chains.js'
+import { assignLabels } from './axis-topology.js'
+import type { LabelAssignmentDecision } from './axis-topology.js'
 import type { ChainToken, FrameChainSolution, RawChain, ScalePlausibility, SolvedChain } from './chains.js'
 import { compareTokens, textAxisOf, tokenMerit } from './ocr.js'
 import type { TextOrientation, TextToken } from './ocr.js'
@@ -54,7 +56,8 @@ import type { EnsembledLattice as LabelLattice } from './ensemble.js'
 import type { ChainRelation, DimensionObservation, FrameMetricSolution, MetricConfidence, OrientationDecision, ScaleHypothesis } from './schema.js'
 
 export const METRIC_SOLVER_NAME = 'metrics.independent-scale' as const
-export const METRIC_SOLVER_VERSION = '1.3.0' as const
+/** 1.4.0 (005I): labels meet chains through the global assignment (`assignLabels`), on measurement chains. */
+export const METRIC_SOLVER_VERSION = '1.4.0' as const
 
 /**
  * Counts, never a clock, so a phone reaches the answer a server does. Two
@@ -124,6 +127,8 @@ export type FrameMetricOutput = {
   scaleY?: number
   /** Per chain, the orientation its labels were read in, and whether a scale chose it. */
   chainOrientation: Array<{ orientation: TextOrientation | null; dependsOnScale: boolean }>
+  /** 005I: the global assignment of the labels the chains were read from at the end (each chain in its decided orientation). */
+  assignment: LabelAssignmentDecision[]
 }
 
 // ---------------------------------------------------------------------------
@@ -1279,7 +1284,8 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
     const lattice = input.lattices?.get(token)?.lattice
     return lattice ? correctionReadings(lattice) : undefined
   }
-  const perChain = assignTokens(chains, corrected, { maxOffsetHeights: input.maxOffsetHeights, preferCentred: true, readingsOf: input.lattices ? latticeReadings : undefined })
+  const finalAssignment = assignLabels(chains, corrected, { maxOffsetHeights: input.maxOffsetHeights, preferCentred: true, readingsOf: input.lattices ? latticeReadings : undefined })
+  const perChain = finalAssignment.perChain
   const solved: SolvedChain[] = []
   const tokensPerChain: ChainToken[][] = []
   const reread: string[] = []
@@ -1474,6 +1480,7 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
     ...(scaleX !== undefined ? { scaleX } : {}),
     ...(scaleY !== undefined ? { scaleY } : {}),
     chainOrientation,
+    assignment: finalAssignment.decisions,
   }
 }
 
@@ -1556,6 +1563,12 @@ function parallelCopiesOf(chains: readonly RawChain[], labelHeight: number): Map
   }
   return out
 }
+
+/**
+ * 005I: the cap height a sheet sets its dimension labels at — the median of the label-sized tokens on its chains — the
+ * unit neighbouring lines are measured in (`dimensionAxisGroups`). 14 px when the sheet has none to measure.
+ */
+export const labelHeightOf = (chains: readonly RawChain[], tokens: readonly TextToken[], maxOffsetHeights = 2.2): number => medianLabelHeight(dimensionLabels(chains.filter((c) => c.ticks.length >= 2), tokens, maxOffsetHeights))
 
 const medianLabelHeight = (labels: readonly TextToken[]): number => {
   const h = labels.filter((t) => t.glyphs.length >= 2).map((t) => t.height).sort((a, b) => a - b)

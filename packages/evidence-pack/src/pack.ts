@@ -12,10 +12,11 @@
 import { sha256Bytes, sha256Hex, stableJson } from '@buildapp/source-common'
 import { COLOURS, FORBIDDEN_IN_SVG, Svg } from './svg.js'
 import { TIMELINE_STAGES } from './types.js'
-import type { ChainJson, DecisionEvent, LatticeJson, MarkJson, ObservationJson, PlanJson, Rect, RunRecord, SolutionJson, TimelineStage } from './types.js'
+import type { AssignmentJson, ChainJson, DecisionEvent, LatticeJson, MarkJson, ObservationJson, PlanJson, Rect, RunRecord, SolutionJson, TimelineStage, TopologyJson } from './types.js'
 
 export const EVIDENCE_PACK_SCHEMA = 'buildapp.evidence-pack' as const
-export const EVIDENCE_PACK_VERSION = '1.0.0' as const
+/** 1.1.0 (005I): `16-dimension-topology`, the DIMENSION_AXIS_GROUPS and LABEL_ASSIGNMENT stages, extent end spans and refutations. */
+export const EVIDENCE_PACK_VERSION = '1.1.0' as const
 
 /**
  * Size bounds: a pack is something a reviewer opens on GitHub. Pictures carry at most `svgElements`
@@ -55,6 +56,8 @@ export const PACK_FILES = [
   '14-selected-layout.svg',
   '14-selected-layout.json',
   '15-canonical-model-summary.json',
+  '16-dimension-topology.svg',
+  '16-dimension-topology.json',
   '17-evidence-trace.json',
   '18-decision-timeline.json',
   'evidence-summary.svg',
@@ -277,6 +280,17 @@ export function buildEvidencePack(run: RunRecord): EvidencePack {
       for (const m of marksOf(c)) event('DIMENSION_TICK_CLASSIFICATION', markIdOf(c.id, m.atPx), decisionOfMark(m), m.reasons.join(',') || 'a stroke as dark as its line, on both sides', { supportIds: [c.id], reversible: m.class !== 'TICK' })
     }
   }
+  // 005I: the parallel lines of each metric frame, grouped, with what each is to the others.
+  const topologyOf = (frameId: string): TopologyJson | undefined => (metrics.dimensionTopology ?? []).find((t) => t.frameId === frameId)
+  for (const frameId of metricFrames) {
+    const topo = topologyOf(frameId)
+    if (!topo) continue
+    for (const line of topo.labelInkLines) event('DIMENSION_AXIS_GROUPS', `label-ink-line:${frameId}:${line.axis}:${Math.round(line.baselinePx)}:${Math.round(line.fromPx)}`, 'NOT_A_CHAIN', `all ${line.marks} of its crossing marks are label ink beside the line`)
+    for (const g of topo.groups) {
+      if (g.chainIds.length < 2) continue
+      event('DIMENSION_AXIS_GROUPS', `axis-group:${g.id}`, `GROUPED:${g.chainIds.length}`, g.relations.map((r) => `${r.aChainId} ${r.kind} ${r.bChainId}${r.alignedEnds.some(Boolean) ? ` (ends ${r.alignedEnds.map((x) => (x ? 'aligned' : 'apart')).join('/')})` : ''}`).join('; ') || 'neighbouring parallel lines', { supportIds: [...g.chainIds] })
+    }
+  }
 
   // 07: OCR labels — every token's box and reading, and (005E) each label ink's numeric lattice: the 005D reading, the
   // as-read string, the image-only sequences, the glyph candidates, the class, and the value its span was given with
@@ -484,12 +498,87 @@ export function buildEvidencePack(run: RunRecord): EvidencePack {
     }
     const readings = Object.entries({ ...(run.digest?.challenge ?? {}), ...(run.digest?.resolution ?? {}) }).filter(([k]) => /^reading\d|^chosen$/.test(k)).map(([k, v]) => ({ key: k, summary: String(v) }))
     files.set('10-extent-hypotheses.svg', s.render())
-    files.set('10-extent-hypotheses.json', json({ frameId: selected?.frameId ?? null, chosen: selected ? { rect: selected.extent, weak: selected.extentWeak ?? null, provenance: selected.extentProvenance ?? null, refusedChains: selected.extentRefused ?? [] } : null, otherCopies: frames.slice(1).map((p) => ({ frameId: p.frameId, extent: p.extent, provenance: p.extentProvenance ?? null })), resolverReadings: readings }))
+    files.set('10-extent-hypotheses.json', json({ frameId: selected?.frameId ?? null, chosen: selected ? { rect: selected.extent, weak: selected.extentWeak ?? null, provenance: selected.extentProvenance ?? null, refusedChains: selected.extentRefused ?? [], ...(selected.extentEndSpans ? { endSpans: selected.extentEndSpans } : {}), ...(selected.extentRefutations ? { refutations: selected.extentRefutations } : {}) } : null, otherCopies: frames.slice(1).map((p) => ({ frameId: p.frameId, extent: p.extent, provenance: p.extentProvenance ?? null })), resolverReadings: readings }))
   }
+  // 005I: the global label assignment of each metric frame (the chains' final reading where there was one).
+  const assignmentId = (frameId: string, a: AssignmentJson): string => `assign:${frameId}:${a.orientation}:${a.text}:${Math.round(a.box.x0)},${Math.round(a.box.y0)}`
+  for (const frameId of metricFrames) {
+    const topo = topologyOf(frameId)
+    if (!topo) continue
+    for (const a of topo.assignment.final ?? topo.assignment.legacy) {
+      const decision = a.status === 'BOUND' && a.chosen ? `BOUND:${a.chosen.chainId}:${a.chosen.interval}` : a.status
+      const reason = a.candidates.map((c) => `${c.chainId}#${c.interval} ${c.side.toLowerCase()} ${round(c.offset, 2)}h${c.centred ? '' : ' uncentred'} cost ${round(c.cost, 3)}`).join('; ') + (a.margin !== undefined ? `; margin ${round(a.margin, 3)}` : '')
+      event('LABEL_ASSIGNMENT', assignmentId(frameId, a), decision, reason, { supportIds: a.chosen ? [a.chosen.chainId] : [], conflictIds: a.candidates.filter((c) => !a.chosen || c.chainId !== a.chosen.chainId).map((c) => c.chainId) })
+    }
+  }
+  // 16: the selected frame's dimension topology — axis groups, label-ink marks, and every label's assignment.
+  {
+    const s = svg('dimension topology')
+    const topo = selected ? topologyOf(selected.frameId) : undefined
+    const chainById = new Map(frameChains.map((c) => [c.id, c]))
+    const roleColour = (c: ChainJson): string => {
+      const roles = c.topology?.roles ?? []
+      return roles.includes('OVERALL') ? COLOURS.PRIMARY : roles.includes('SUBDIVISION') ? COLOURS.TICK : roles.includes('PARTIAL') ? COLOURS.QUESTIONABLE : '#999999'
+    }
+    for (const g of topo?.groups ?? []) {
+      for (const id of g.chainIds) {
+        const c = chainById.get(id)
+        if (!c) continue
+        const [lo, hi] = [c.ticksPx[0], c.ticksPx[c.ticksPx.length - 1]]
+        if (c.axis === 'HORIZONTAL') s.line(lo, c.baselinePx, hi, c.baselinePx, { stroke: roleColour(c), width: 2 }, `group-line:${id}`, { group: g.id, roles: (c.topology?.roles ?? []).join(' ') })
+        else s.line(c.baselinePx, lo, c.baselinePx, hi, { stroke: roleColour(c), width: 2 }, `group-line:${id}`, { group: g.id, roles: (c.topology?.roles ?? []).join(' ') })
+      }
+    }
+    for (const m of topo?.labelInkMarks ?? []) {
+      const c = chainById.get(m.chainId)
+      if (!c) continue
+      if (c.axis === 'HORIZONTAL') s.line(m.atPx, c.baselinePx - 6, m.atPx, c.baselinePx + 6, { stroke: COLOURS.REJECTED, width: 2.5 }, `label-ink:${m.chainId}:${m.atPx}`)
+      else s.line(c.baselinePx - 6, m.atPx, c.baselinePx + 6, m.atPx, { stroke: COLOURS.REJECTED, width: 2.5 }, `label-ink:${m.chainId}:${m.atPx}`)
+    }
+    const assignment = topo ? (topo.assignment.final ?? topo.assignment.legacy) : []
+    const statusColour = (st: string): string => (st === 'BOUND' ? COLOURS.PRIMARY : st === 'AMBIGUOUS' ? COLOURS.AMBIGUOUS : COLOURS.ALTERNATIVE)
+    for (const a of assignment) {
+      s.rect(a.box.x0, a.box.y0, a.box.x1, a.box.y1, { stroke: statusColour(a.status), width: 1 }, assignmentId(selected?.frameId ?? '', a), { status: a.status, text: a.text })
+      const c = a.chosen ? chainById.get(a.chosen.chainId) : undefined
+      if (c) {
+        const [cx, cy] = [(a.box.x0 + a.box.x1) / 2, (a.box.y0 + a.box.y1) / 2]
+        if (c.axis === 'HORIZONTAL') s.line(cx, cy, cx, c.baselinePx, { stroke: statusColour(a.status), width: 1, dash: '2 2' })
+        else s.line(cx, cy, c.baselinePx, cy, { stroke: statusColour(a.status), width: 1, dash: '2 2' })
+      }
+    }
+    const shown = topK(assignment)
+    files.set('16-dimension-topology.svg', s.render())
+    files.set(
+      '16-dimension-topology.json',
+      json({
+        frameId: selected?.frameId ?? null,
+        recorded: topo !== undefined,
+        note: topo ? undefined : 'metric evidence before schema 1.7.0: no dimension topology was recorded',
+        legend: { OVERALL: COLOURS.PRIMARY, SUBDIVISION: COLOURS.TICK, PARTIAL: COLOURS.QUESTIONABLE, BOUND: COLOURS.PRIMARY, AMBIGUOUS: COLOURS.AMBIGUOUS, UNASSIGNED: COLOURS.ALTERNATIVE, LABEL_INK_MARK: COLOURS.REJECTED },
+        labelHeightPx: topo?.labelHeightPx ?? null,
+        labelInkMarks: topo?.labelInkMarks ?? [],
+        labelInkLines: topo?.labelInkLines ?? [],
+        groups: (topo?.groups ?? []).filter((g) => g.chainIds.length > 1),
+        singleLines: (topo?.groups ?? []).filter((g) => g.chainIds.length === 1).length,
+        assignmentSource: topo ? (topo.assignment.final ? 'FINAL' : 'LEGACY') : null,
+        counts: { bound: assignment.filter((a) => a.status === 'BOUND').length, ambiguous: assignment.filter((a) => a.status === 'AMBIGUOUS').length, unassigned: assignment.filter((a) => a.status === 'UNASSIGNED').length },
+        assignment: shown.items,
+        omitted: shown.omitted,
+        endSpans: selected?.extentEndSpans ?? [],
+        refutations: selected?.extentRefutations ?? [],
+      }),
+    )
+  }
+
   // frame selection: which copy the structural pass (or the resolver) took the building from
   event('FRAME_SELECTION', 'selected-plan', selected ? `SELECTED:${selected.frameId}` : 'NONE', selected ? `${selected.storey ?? '?'} ${selected.annotation ?? '?'} ${selected.sizePx.width}×${selected.sizePx.height} px` : 'no plan was read')
   for (const p of run.digest?.skipped ?? []) event('FRAME_SELECTION', `frame:${p.frameId}`, 'SKIPPED', p.why)
   for (const f of frames) event('EXTENT', `extent:${f.frameId}`, rectText(f.extent), `${f.extentProvenance ? `${f.extentProvenance.x}/${f.extentProvenance.y}` : 'legacy frame'}${f.extentWeak ? ', weak' : ''}${f.extentRefused?.length ? `; refused ${f.extentRefused.join(', ')}` : ''}`, { conflictIds: f.extentRefused ?? [] })
+  // 005I: the end spans of the framing chains, and the sides the walls contradicted.
+  for (const f of frames) {
+    for (const e of f.extentEndSpans ?? []) event('EXTENT', `end-span:${e.chainId}:${e.end}`, e.decision, `${round(e.pixelLength, 1)} px (${round(e.fromPx, 1)}–${round(e.toPx, 1)}): ${e.why}`, { supportIds: [e.chainId] })
+    for (const r of f.extentRefutations ?? []) event('EXTENT', `refutation:${f.frameId}:${r.side}`, r.action, r.why, { ...(r.chainId ? { supportIds: [r.chainId] } : {}) })
+  }
 
   // 11: envelope candidates
   {

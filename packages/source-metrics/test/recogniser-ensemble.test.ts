@@ -22,7 +22,9 @@ import { NUMERIC_LATTICE_ENSEMBLE_VERSION, NUMERIC_LATTICE_VERSION, labelLattice
 import { readNumbers } from '../src/ocr.js'
 import { RECOGNISER_CROP, cropForToken, labelCrop } from '../src/recogniser.js'
 import type { ExternalReading, LabelCrop, LabelRecogniser } from '../src/recogniser.js'
-import { METRIC_EVIDENCE_ENSEMBLE_SCHEMA_VERSION, METRIC_EVIDENCE_SCHEMA_VERSION } from '../src/schema.js'
+// 005I: a set read now carries the dimension topology: 1.7.0 without a recogniser's reading, 1.8.0 with one (the
+// 1.5.0 / 1.6.0 split 005H drew, one minor version on).
+import { METRIC_EVIDENCE_TOPOLOGY_ENSEMBLE_SCHEMA_VERSION as METRIC_EVIDENCE_ENSEMBLE_SCHEMA_VERSION, METRIC_EVIDENCE_TOPOLOGY_SCHEMA_VERSION as METRIC_EVIDENCE_SCHEMA_VERSION } from '../src/schema.js'
 
 const reading = (text: string, p = 0.99, meanP = 0.99, stable = true, extra: Array<{ text: string; p: number }> = []): ExternalReading => ({
   key: 'k',
@@ -265,7 +267,7 @@ describe('the seam: one batch per plan, crops only, and the OFF path unchanged',
     for (const c of calls[0]) expect(Object.keys(c).sort()).toEqual(['capPx', 'gray', 'key'])
     // keyed opaquely, in order: nothing of the custom reader's text crosses (red team A5)
     expect(calls[0].map((c) => c.key)).toEqual(calls[0].map((_, i) => `c${i}`))
-    // with readings for none, nothing was read: the set is the 1.5.0 set, byte for byte (red team A6)
+    // with readings for none, nothing was read: the set is the recogniser-free set, byte for byte (red team A6)
     const off = extractMetricEvidence(options)
     expect(set.schemaVersion).toBe(METRIC_EVIDENCE_SCHEMA_VERSION)
     expect(set.recogniser).toBeUndefined()

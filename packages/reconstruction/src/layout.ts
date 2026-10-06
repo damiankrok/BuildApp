@@ -42,7 +42,7 @@ import type { Band, Mask, Raster } from '@buildapp/source-cv'
 import type { SourceCoordinateFrame, SourceObservationGraph } from '@buildapp/source-observations'
 import type { CoordinateRegistration, DimensionChain, MetricEvidence, MetricEvidenceSet } from '@buildapp/source-metrics'
 import { bandWallThickness, decomposePlan, planBodies, planExtent, recutSlivers, walledFirstRegions, wallClusterExtent } from './plan-decomposition.js'
-import type { ExtentProvenance, PlanExtent } from './plan-decomposition.js'
+import type { EndSpanDecision, ExtentProvenance, ExtentRefutation, PlanExtent } from './plan-decomposition.js'
 import { wallWitness } from './plan-extent.js'
 import type { WallWitness } from './plan-extent.js'
 import type { GridLine, PlanCallout, PlanDecomposition, PlanRegion } from './plan-decomposition.js'
@@ -99,6 +99,9 @@ export type PlanReading = {
   extentRefused?: string[]
   /** 005B: where each axis of the frame came from. */
   extentProvenance?: { x: ExtentProvenance; y: ExtentProvenance }
+  /** 005I: the framing chains' short end segments, kept or trimmed, and the sides the walls contradicted. */
+  extentEndSpans?: EndSpanDecision[]
+  extentRefutations?: ExtentRefutation[]
   decomposition: PlanDecomposition
 }
 
@@ -313,6 +316,8 @@ export function readPlans(options: StructuralLayoutOptions): { plans: PlanReadin
         extentWhy: extent.why,
         ...(extent.refused && extent.refused.length > 0 ? { extentRefused: extent.refused } : {}),
         ...(extent.provenance ? { extentProvenance: extent.provenance } : {}),
+        ...(extent.endSpans && extent.endSpans.length > 0 ? { extentEndSpans: extent.endSpans } : {}),
+        ...(extent.refutations && extent.refutations.length > 0 ? { extentRefutations: extent.refutations } : {}),
         decomposition,
       })
       read = true

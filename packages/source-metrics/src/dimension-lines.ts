@@ -22,10 +22,12 @@
 import { round6 } from '@buildapp/source-common'
 import { maskAt, runsAlongCol, runsAlongRow } from '@buildapp/source-cv'
 import type { Gray, Mask, Raster } from '@buildapp/source-cv'
+import type { PixelRect } from '@buildapp/source-common'
 
 /** 005D: the reader that measures each crossing mark against its line and classifies it. */
 export const DIMENSION_TOPOLOGY_NAME = 'metrics.dimension-topology' as const
-export const DIMENSION_TOPOLOGY_VERSION = '1.0.0' as const
+/** 1.1.0 (005I): a mark that is only label ink beside the line is `TEXT_INK` (`markLabelInk`). */
+export const DIMENSION_TOPOLOGY_VERSION = '1.1.0' as const
 
 export type DimensionLineAxis = 'HORIZONTAL' | 'VERTICAL'
 
@@ -71,6 +73,7 @@ export type DimensionMarkReason =
   | 'DUPLICATE'
   | 'STYLE_MISMATCH'
   | 'NO_LINE_REFERENCE'
+  | 'TEXT_INK'
 
 export type DimensionMark = {
   atPx: number
@@ -547,4 +550,91 @@ export function classifyMarks(line: DimensionLine, hitRuns: ReadonlyArray<[numbe
     return { ...m, class: rejected ? 'REJECTED' : questionable ? 'QUESTIONABLE' : 'TICK' }
   })
   return { marks, reference }
+}
+
+// ---------------------------------------------------------------------------
+// 005I: label ink is not a tick
+// ---------------------------------------------------------------------------
+
+/** The ink of one printed label: its box and its glyphs' boxes, in the frame's pixels. */
+export type LabelInk = { box: PixelRect; glyphs: readonly PixelRect[] }
+
+/**
+ * Where label ink makes a crossing mark (BUILDPLAN-ANALYZER-005I).
+ *
+ * The hit test finds a mark wherever ink sits on BOTH sides of a line within a few pixels of it. Two labels printed
+ * on either side of one line — a margin with an overall line and a chain of parts beside it, the overall's number on
+ * one side and a part's number on the other — pass that test with no stroke crossing the line at all: blind round 7
+ * (005H) read two "ticks" inside a label's extent and cut an overall dimension into three unread pieces there.
+ *
+ * So each mark's crossing ink is traced to where it came from. On each side of the line, the ink the hit test saw is
+ * LABEL INK when it lies inside the glyph boxes of a printed label that sits wholly on that side (a label is beside
+ * its line, never across it: a mark read as a glyph of a token that straddles the line is a mark, not a label):
+ *
+ *   - both sides label ink: nothing crosses the line. REJECTED, `TEXT_INK` — never a measurement point, never a
+ *     chain break, kept on the record;
+ *   - one side label ink: the label may hide a real tick's other half, or a witness line ends against the label.
+ *     The mark is at most QUESTIONABLE, `TEXT_INK`: the uncertainty is kept, not resolved.
+ *
+ * Real linework crossing text is not erased: a side whose ink is not (all but a tenth) inside label glyphs is
+ * evidence of a stroke, and the mark keeps its class. Image only: label boxes, never what a label reads.
+ */
+export const LABEL_INK_BOUNDS = { glyphPadPx: 1, labelShare: 0.9, spread: 2 } as const
+
+export function markLabelInk(lines: readonly DimensionLine[], labels: readonly LabelInk[], mask: Mask, options: { markReachPx?: number } = {}): DimensionLine[] {
+  const reach = options.markReachPx ?? DEFAULTS.markReachPx
+  const B = LABEL_INK_BOUNDS
+  return lines.map((line) => {
+    if (!line.marks || line.marks.length === 0) return line
+    const horizontal = line.axis === 'HORIZONTAL'
+    const b = line.baselinePx
+    const t = line.thicknessPx
+    const clear = Math.floor(t / 2) + 1
+    const rowOf = (d: number): number => (d < 0 ? Math.floor(b + d) : Math.ceil(b + d))
+    const acrossOf = (r: PixelRect): [number, number] => (horizontal ? [r.y0, r.y1] : [r.x0, r.x1])
+    const alongOf = (r: PixelRect): [number, number] => (horizontal ? [r.x0, r.x1] : [r.y0, r.y1])
+    // The side of the line a box lies wholly on, or 0 when it reaches the line.
+    const sideOfBox = (r: PixelRect): -1 | 0 | 1 => {
+      const [lo, hi] = acrossOf(r)
+      if (hi < b - t / 2) return -1
+      if (lo > b + t / 2) return 1
+      return 0
+    }
+    const glyphs: Array<{ box: PixelRect; side: -1 | 1 }> = []
+    for (const label of labels) {
+      const side = sideOfBox(label.box)
+      if (side === 0) continue
+      const [lo, hi] = acrossOf(label.box)
+      if (Math.min(Math.abs(lo - b), Math.abs(hi - b)) > reach + B.glyphPadPx) continue
+      const [a0, a1] = alongOf(label.box)
+      if (a1 < line.fromPx - reach || a0 > line.toPx + reach) continue
+      for (const g of label.glyphs) if (sideOfBox(g) === side) glyphs.push({ box: g, side })
+    }
+    if (glyphs.length === 0) return line
+    const inGlyph = (x: number, y: number, side: -1 | 1): boolean =>
+      glyphs.some((g) => g.side === side && x >= g.box.x0 - B.glyphPadPx && x <= g.box.x1 + B.glyphPadPx && y >= g.box.y0 - B.glyphPadPx && y <= g.box.y1 + B.glyphPadPx)
+    const marks = line.marks.map((m): DimensionMark => {
+      const textSide = (sign: -1 | 1): boolean => {
+        let ink = 0
+        let text = 0
+        for (let d = clear + 1; d <= reach; d += 1) {
+          const across = rowOf(sign * d)
+          for (let a = Math.round(m.hitFromPx) - B.spread; a <= Math.round(m.hitToPx) + B.spread; a += 1) {
+            const [x, y] = horizontal ? [a, across] : [across, a]
+            if (maskAt(mask, x, y) !== 1) continue
+            ink += 1
+            if (inGlyph(x, y, sign)) text += 1
+          }
+        }
+        return ink > 0 && text >= B.labelShare * ink
+      }
+      const before = textSide(-1)
+      const after = textSide(1)
+      if (!before && !after) return m
+      const reasons: DimensionMarkReason[] = m.reasons.includes('TEXT_INK') ? [...m.reasons] : [...m.reasons, 'TEXT_INK']
+      if (before && after) return { ...m, class: 'REJECTED', reasons }
+      return { ...m, class: m.class === 'TICK' ? 'QUESTIONABLE' : m.class, reasons }
+    })
+    return { ...line, marks }
+  })
 }

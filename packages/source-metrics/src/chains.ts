@@ -23,14 +23,13 @@
  * reported as a chain that does not sum.
  */
 import { round6, stableId } from '@buildapp/source-common'
-import type { PixelPoint, PixelRect } from '@buildapp/source-common'
+import type { PixelPoint } from '@buildapp/source-common'
 import type { SourceObservation } from '@buildapp/source-observations'
 import type { DimensionLine, DimensionMarkClass, DimensionMarkReason } from './dimension-lines.js'
-import { textAxisOf } from './ocr.js'
 import type { TextToken } from './ocr.js'
-import { parseNumber, readingLattice } from './parse.js'
+import { assignLabels } from './axis-topology.js'
+import type { LabelAssignmentDecision } from './axis-topology.js'
 import type { ParsedNumber } from './parse.js'
-import { toCentimetres } from './schema.js'
 
 /**
  * A witness line reduced to the one number that matters: where it crosses the chain's axis. 005D:
@@ -155,8 +154,6 @@ export function chainsFromObservations(observations: readonly SourceObservation[
 // attaching numbers to segments
 // ---------------------------------------------------------------------------
 
-const rectCentre = (r: PixelRect): PixelPoint => ({ x: (r.x0 + r.x1) / 2, y: (r.y0 + r.y1) / 2 })
-
 /** A number found on a chain, with every value it might be. */
 export type ChainToken = {
   token: TextToken
@@ -183,7 +180,7 @@ export function chainTokens(chain: RawChain, tokens: readonly TextToken[], optio
 }
 
 /**
- * Give every number to ONE chain: the nearest.
+ * Give every number to ONE chain (BUILDPLAN-ANALYZER-005I: globally, `assignLabels`).
  *
  * Plans stack their chains — an overall dimension above a run of parts above
  * the building — a couple of text heights apart, so a band wide enough to
@@ -192,84 +189,16 @@ export function chainTokens(chain: RawChain, tokens: readonly TextToken[], optio
  * two numbers on one span, concludes that no partition explains the chain, and
  * throws away the two best-measured dimensions on the sheet.
  *
- * So the assignment is made once, globally, and each number goes to the chain
- * whose line it sits closest to, measured in its own text heights because that
- * is the unit a draughtsman spaces by.
+ * Until 005I the numbers were handed out one at a time, nearest first, each
+ * claiming its interval: a label half a pixel nearer the wrong line took that
+ * line's only interval and left the line's own number with nothing. Now every
+ * number is given every line it could be on, with the side of the label the
+ * line lies on and its distance in the label's own heights, and the numbers of
+ * a neighbourhood are assigned together, exactly; a number an equally good
+ * assignment would put elsewhere is left unassigned (`axis-topology.ts`).
  */
 export function assignTokens(chains: readonly RawChain[], tokens: readonly TextToken[], options: { maxOffsetHeights?: number; preferCentred?: boolean; readingsOf?: (token: TextToken) => ChainToken['readings'] | undefined } = {}): ChainToken[][] {
-  const maxOffset = options.maxOffsetHeights ?? 2.2
-  // 005B: a number no span of the chain is centred on (within two skipped ticks) claims an interval
-  // only after every number that is centred on one has claimed its own. A logo glyph near the only
-  // interval of an overall chain was nearer the line, in its own (large) heights, and pushed an
-  // `1100` off it. The legacy assignment never asks this.
-  const centredOn = (chain: RawChain, along: number): boolean => {
-    const t = chain.ticks
-    for (let from = 0; from < t.length; from += 1) {
-      for (let to = from + 1; to < t.length && to - from - 1 <= 2; to += 1) {
-        if (t[from].atPx > along || t[to].atPx < along) continue
-        const length = t[to].atPx - t[from].atPx
-        if (Math.abs(along - (t[from].atPx + t[to].atPx) / 2) <= length * 0.3) return true
-      }
-    }
-    return false
-  }
-  type Fit = { chain: number; along: number; offset: number; interval: number; centred: boolean }
-  type Entry = { token: TextToken; readings: ChainToken['readings']; fits: Fit[] }
-
-  const entries: Entry[] = []
-  for (const token of tokens) {
-    const centre = rectCentre(token.box)
-    const height = Math.max(1, token.height)
-    const fits: Fit[] = []
-    chains.forEach((chain, index) => {
-      if (textAxisOf(token.orientation) !== chain.axis) return
-      const along = chain.axis === 'HORIZONTAL' ? centre.x : centre.y
-      const across = chain.axis === 'HORIZONTAL' ? centre.y : centre.x
-      const offset = Math.abs(across - chain.baselinePx) / height
-      if (offset > maxOffset) return
-      if (along < chain.ticks[0].atPx || along > chain.ticks[chain.ticks.length - 1].atPx) return
-      let interval = 0
-      while (interval + 2 < chain.ticks.length && chain.ticks[interval + 1].atPx < along) interval += 1
-      fits.push({ chain: index, along: round6(along), offset: round6(offset), interval, centred: options.preferCentred ? centredOn(chain, along) : true })
-    })
-    if (fits.length === 0) continue
-    // 005E: a caller may supply the token's readings (its numeric lattice); otherwise the legacy substitution list.
-    const supplied = options.readingsOf?.(token)
-    const readings: ChainToken['readings'] = supplied ? [...supplied] : []
-    if (!supplied) {
-      for (const candidate of readingLattice(token)) {
-        for (const parsed of parseNumber(candidate.text)) {
-          if (parsed.kind !== 'LINEAR_DIMENSION') continue
-          readings.push({ text: candidate.text, parsed, valueCm: round6(toCentimetres(parsed.value, parsed.unit)), confidence: round6(candidate.confidence), substitutions: candidate.substitutions })
-        }
-      }
-    }
-    if (readings.length === 0) continue
-    fits.sort((a, b) => Number(b.centred) - Number(a.centred) || a.offset - b.offset || a.chain - b.chain)
-    entries.push({ token, readings, fits })
-  }
-
-  // Closest first, and one number to an interval. Taking the nearest chain for
-  // every number independently is not enough: stacked chains sit two text
-  // heights apart, so an overall dimension and the parts beneath it are very
-  // nearly equidistant from both lines, and a tie handed to the wrong one puts
-  // three numbers on a single-segment chain — which explains nothing and
-  // discards the two best-measured dimensions on the sheet. Claiming the
-  // interval as well as the chain lets the nearest number take the span it
-  // clearly owns and pushes its neighbours down to the chain that has room.
-  entries.sort((a, b) => Number(b.fits[0].centred) - Number(a.fits[0].centred) || a.fits[0].offset - b.fits[0].offset || a.token.box.x0 - b.token.box.x0 || a.token.box.y0 - b.token.box.y0)
-  const out: ChainToken[][] = chains.map(() => [])
-  const claimed = new Set<string>()
-  for (const entry of entries) {
-    for (const fit of entry.fits) {
-      const key = `${fit.chain}:${fit.interval}`
-      if (claimed.has(key)) continue
-      claimed.add(key)
-      out[fit.chain].push({ token: entry.token, atPx: fit.along, offset: fit.offset, readings: entry.readings })
-      break
-    }
-  }
-  return out.map((list) => list.sort((a, b) => a.atPx - b.atPx))
+  return assignLabels(chains, tokens, options).perChain
 }
 
 // ---------------------------------------------------------------------------
@@ -578,6 +507,8 @@ export type FrameChainSolution = {
   tokensPerChain: ChainToken[][]
   /** Present only when the drawing's content ruled out the vote's winner. */
   scaleDecision?: ScaleDecision
+  /** 005I: how every number met the chains — each one's candidate lines, and what the global assignment made of it. */
+  assignment: LabelAssignmentDecision[]
 }
 
 /**
@@ -638,7 +569,8 @@ export function solveFrameChains(
 ): FrameChainSolution {
   const tolerance = options.tolerancePx ?? 2.2
   const minLength = options.minPixelLength ?? 6
-  const tokensPerChain = assignTokens(chains, tokens, options)
+  const assignment = assignLabels(chains, tokens, options)
+  const tokensPerChain = assignment.perChain
   const proposals = chains.map((c, i) => proposalsOf(i, c, tokensPerChain[i], minLength))
   const horizontal = chains.flatMap((c, i) => (c.axis === 'HORIZONTAL' ? proposals[i] : []))
   const vertical = chains.flatMap((c, i) => (c.axis === 'VERTICAL' ? proposals[i] : []))
@@ -661,6 +593,7 @@ export function solveFrameChains(
     solved,
     tokensPerChain,
     ...(decided.decision ? { scaleDecision: decided.decision } : {}),
+    assignment: assignment.decisions,
   }
 }
 

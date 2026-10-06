@@ -754,10 +754,18 @@ export function dimensionedExtent(chains: readonly DimensionChain[]): PixelRect 
   return { x0: round6(x.lo), y0: round6(y.lo), x1: round6(x.hi), y1: round6(y.hi) }
 }
 
+/**
+ * 005I: what was decided about a short unread segment at the end of the chain that frames an axis. KEPT_SUPPORTED: the
+ * drawing states it — its end marks are ticks, and a number is printed on it or a neighbouring line ends where it ends
+ * — so it is a span of the building, however short. TRIMMED_STUB: nothing states it; it is a witness line struck past
+ * the last segment, and the frame stops before it. Every decision is on the record; none is silent.
+ */
+export type EndSpanDecision = { chainId: string; end: 'LO' | 'HI'; fromPx: number; toPx: number; pixelLength: number; decision: 'KEPT_SUPPORTED' | 'TRIMMED_STUB'; why: string }
+
 /** The widest read chain's stretch on one axis, trimmed of unread stubs at its ends (see `dimensionedExtent`). */
-export function dimensionedAxis(chains: readonly DimensionChain[], axis: 'HORIZONTAL' | 'VERTICAL'): { lo: number; hi: number; chainId: string } | null {
-  const pick = (axis: 'HORIZONTAL' | 'VERTICAL'): { lo: number; hi: number; chainId: string } | null => {
-    let best: { lo: number; hi: number; chainId: string } | null = null
+export function dimensionedAxis(chains: readonly DimensionChain[], axis: 'HORIZONTAL' | 'VERTICAL'): { lo: number; hi: number; chainId: string; endSpans: EndSpanDecision[] } | null {
+  const pick = (axis: 'HORIZONTAL' | 'VERTICAL'): { lo: number; hi: number; chainId: string; endSpans: EndSpanDecision[] } | null => {
+    let best: { lo: number; hi: number; chainId: string; endSpans: EndSpanDecision[] } | null = null
     for (const chain of chains) {
       if (chain.axis !== axis) continue
       const read = chain.segments.filter((seg) => seg.origin === 'READ' || seg.origin === 'CHAIN_CORRECTED')
@@ -768,20 +776,47 @@ export function dimensionedAxis(chains: readonly DimensionChain[], axis: 'HORIZO
       // the chain could not read AND which is far shorter than the shortest it
       // could is not a span of the building, and letting it set the frame adds
       // a strip of nothing to whichever end it is on.
+      //
+      // 005I: unless the drawing states it (`endSpanSupport`). Blind round 7 trimmed a `100` end segment, read the
+      // same by both readers and bound to its span, because the scale kept was 3 % short and the reading missed by
+      // 2.5 px: the frame then stopped 0.9 m inside the house.
       const floor = Math.min(...read.map((seg) => seg.pixelLength)) * 0.5
       const segments = [...chain.segments].sort((a, b) => a.fromPx - b.fromPx)
+      const unread = (seg: DimensionChain['segments'][number]): boolean => seg.origin !== 'READ' && seg.origin !== 'CHAIN_CORRECTED'
+      const endSpans: EndSpanDecision[] = []
+      const decide = (k: number, end: 'LO' | 'HI', outer: boolean): boolean => {
+        const seg = segments[k]
+        const support = endSpanSupport(chain, seg, end, outer)
+        endSpans.push({ chainId: chain.id, end, fromPx: seg.fromPx, toPx: seg.toPx, pixelLength: seg.pixelLength, decision: support ? 'KEPT_SUPPORTED' : 'TRIMMED_STUB', why: support ?? `unread, ${round6(seg.pixelLength)} px against half the shortest read segment (${round6(floor)} px), and nothing in the drawing states it` })
+        return support !== null
+      }
       let first = 0
       let last = segments.length - 1
-      while (first <= last && segments[first].origin !== 'READ' && segments[first].origin !== 'CHAIN_CORRECTED' && segments[first].pixelLength < floor) first += 1
-      while (last >= first && segments[last].origin !== 'READ' && segments[last].origin !== 'CHAIN_CORRECTED' && segments[last].pixelLength < floor) last -= 1
+      while (first <= last && unread(segments[first]) && segments[first].pixelLength < floor && !decide(first, 'LO', first === 0)) first += 1
+      while (last >= first && unread(segments[last]) && segments[last].pixelLength < floor && !decide(last, 'HI', last === segments.length - 1)) last -= 1
       if (first > last) continue
       const lo = segments[first].fromPx
       const hi = segments[last].toPx
-      if (!best || hi - lo > best.hi - best.lo) best = { lo, hi, chainId: chain.id }
+      if (!best || hi - lo > best.hi - best.lo) best = { lo, hi, chainId: chain.id, endSpans }
     }
     return best
   }
   return pick(axis)
+}
+
+/**
+ * 005I: whether the drawing states a short unread end segment, and why — or null. Both of its marks must be ticks (a
+ * questionable or label-ink mark ends nothing on its own), and either a number is printed on it and bound to it, or,
+ * at the chain's own end, a neighbouring parallel line has a mark where it ends (`DimensionChain.topology`). A record
+ * made before 005D (no mark classes) counts every mark a tick, as it always did.
+ */
+function endSpanSupport(chain: DimensionChain, seg: DimensionChain['segments'][number], end: 'LO' | 'HI', outer: boolean): string | null {
+  const classAt = (px: number): string => (chain.marks?.find((m) => Math.abs(m.atPx - px) < 0.5)?.class ?? 'TICK')
+  if (classAt(seg.fromPx) !== 'TICK' || classAt(seg.toPx) !== 'TICK') return null
+  if (seg.labelled) return `a number is printed on it and bound to it, between two ticks`
+  const aligned = outer && chain.topology?.alignedEnds[end === 'LO' ? 0 : 1] === true
+  if (aligned) return `it ends at a tick where a neighbouring parallel line also has a mark (${chain.topology?.groupId ?? ''})`
+  return null
 }
 
 /**
@@ -837,9 +872,34 @@ export type PlanExtent = {
   refused?: string[]
   /** 005B: where each axis of the frame came from. */
   provenance?: { x: ExtentProvenance; y: ExtentProvenance }
+  /** 005I: the short end segments of the framing chains, kept because the drawing states them or trimmed as stubs. */
+  endSpans?: EndSpanDecision[]
+  /** 005I: sides of the frame the walls contradict (`refuteByWalls`), and what was done about each. */
+  refutations?: ExtentRefutation[]
 }
 
 export type ExtentProvenance = 'DIMENSION_CHAIN_EXTENT' | 'EXTERIOR_CHAIN_TICKS' | 'WALL_GEOMETRY_EXTENT' | 'OUTER_TOTAL_MARKS'
+
+/**
+ * 005I: a side of a dimension-stated frame that the wall witness contradicts — at least two of its walls run on past
+ * the side by more than two wall thicknesses. The walls state no dimension, so they never move the side themselves:
+ * the side is moved only to a dimension mark the drawing prints further out, within that overshoot, on a line drawn
+ * beside the building (ALTERNATE_DIMENSION_MARK); with none, the frame is kept and marked weak (DOWNGRADED), which the
+ * resolver weighs as a frame its chains do not stand behind.
+ */
+export type ExtentRefutation = {
+  side: 'W' | 'E' | 'N' | 'S'
+  atPx: number
+  wallsPast: number
+  overshootPx: number
+  action: 'ALTERNATE_DIMENSION_MARK' | 'DOWNGRADED'
+  movedToPx?: number
+  chainId?: string
+  why: string
+}
+
+/** Walls run past a side by this many wall thicknesses, and at least this many of them, to contradict it. */
+export const EXTENT_REFUTATION_BOUNDS = { pastWalls: 2, walls: 2 } as const
 
 /**
  * With a wall witness (005B), a chain drawn across the building may not frame
@@ -856,7 +916,64 @@ export type ExtentProvenance = 'DIMENSION_CHAIN_EXTENT' | 'EXTERIOR_CHAIN_TICKS'
  */
 export function planExtent(chainsIn: readonly DimensionChain[], bands: readonly Band[], wallPx: number, witness?: WallWitness | null, observations?: readonly DimensionObservation[]): PlanExtent | null {
   const extent = planExtentByWalls(chainsIn, bands, wallPx, witness)
-  return observations ? outspannedByOuterTotal(extent, chainsIn, observations, wallPx) : extent
+  const stated = observations ? outspannedByOuterTotal(extent, chainsIn, observations, wallPx) : extent
+  if (!stated) return stated
+  // 005I: the end spans the framing chains kept or trimmed, on the record whichever frame stood.
+  const endSpans = (['HORIZONTAL', 'VERTICAL'] as const).flatMap((a) => dimensionedAxis(chainsIn, a)?.endSpans ?? [])
+  const recorded = endSpans.length > 0 ? { ...stated, endSpans } : stated
+  return witness ? refuteByWalls(recorded, chainsIn, witness, wallPx) : recorded
+}
+
+/**
+ * 005I (§16): wall evidence may refute a frame's side, never state one (`ExtentRefutation`). Only a side the
+ * dimensions framed is asked: a side the walls already framed has nothing to refute.
+ */
+export function refuteByWalls(extent: PlanExtent, chains: readonly DimensionChain[], witness: WallWitness, wallPx: number): PlanExtent {
+  const B = EXTENT_REFUTATION_BOUNDS
+  const past = B.pastWalls * wallPx
+  let rect = { ...extent.rect }
+  const refutations: ExtentRefutation[] = []
+  const sides: Array<{ side: ExtentRefutation['side']; axis: 'HORIZONTAL' | 'VERTICAL'; low: boolean }> = [
+    { side: 'W', axis: 'HORIZONTAL', low: true },
+    { side: 'E', axis: 'HORIZONTAL', low: false },
+    { side: 'N', axis: 'VERTICAL', low: true },
+    { side: 'S', axis: 'VERTICAL', low: false },
+  ]
+  for (const d of sides) {
+    const provenance = d.axis === 'HORIZONTAL' ? extent.provenance?.x : extent.provenance?.y
+    if (provenance === 'WALL_GEOMETRY_EXTENT') continue
+    const at = d.axis === 'HORIZONTAL' ? (d.low ? rect.x0 : rect.x1) : d.low ? rect.y0 : rect.y1
+    // Walls across the side: bands along the other axis whose run crosses the side's line and goes on past it.
+    const across = witness.bands.filter((b) => (d.axis === 'HORIZONTAL' ? b.axis === 'HORIZONTAL' : b.axis === 'VERTICAL'))
+    const beyond = across
+      .map((b) => {
+        const [lo, hi] = d.axis === 'HORIZONTAL' ? [b.bounds.x0, b.bounds.x1] : [b.bounds.y0, b.bounds.y1]
+        return d.low ? (hi > at + wallPx && lo < at - past ? at - lo : 0) : lo < at - wallPx && hi > at + past ? hi - at : 0
+      })
+      .filter((v) => v > 0)
+    if (beyond.length < B.walls) continue
+    const overshoot = round6(Math.max(...beyond))
+    // A dimension mark further out, within the overshoot, on a line on this axis that is not drawn across the building.
+    const roles = new Map((extent.roles ?? []).map((r) => [r.chainId, r.role]))
+    const marks = chains
+      .filter((c) => c.axis === d.axis && roles.get(c.id) !== 'INTERIOR')
+      .flatMap((c) =>
+        c.ticksPx
+          .map((px, i) => ({ px, chainId: c.id, cls: c.marks?.length === c.ticksPx.length ? c.marks[i].class : 'TICK' }))
+          .filter((m) => m.cls === 'TICK' && (d.low ? m.px < at - wallPx / 2 && m.px >= at - overshoot - wallPx : m.px > at + wallPx / 2 && m.px <= at + overshoot + wallPx)),
+      )
+      .sort((a, b) => (d.low ? b.px - a.px : a.px - b.px) || (a.chainId < b.chainId ? -1 : a.chainId > b.chainId ? 1 : 0))
+    const alternate = marks[0]
+    const why = `${beyond.length} wall${beyond.length === 1 ? '' : 's'} run on past the ${d.side} side by up to ${Math.round(overshoot)} px (more than ${B.pastWalls} walls)`
+    if (alternate) {
+      const moved = round6(alternate.px)
+      if (d.axis === 'HORIZONTAL') rect = d.low ? { ...rect, x0: moved } : { ...rect, x1: moved }
+      else rect = d.low ? { ...rect, y0: moved } : { ...rect, y1: moved }
+      refutations.push({ side: d.side, atPx: round6(at), wallsPast: beyond.length, overshootPx: overshoot, action: 'ALTERNATE_DIMENSION_MARK', movedToPx: moved, chainId: alternate.chainId, why: `${why}; the side is taken to the next tick the drawing prints out there, on ${alternate.chainId}` })
+    } else refutations.push({ side: d.side, atPx: round6(at), wallsPast: beyond.length, overshootPx: overshoot, action: 'DOWNGRADED', why: `${why}; no dimension mark out there states where the side is, so the frame stands, weak` })
+  }
+  if (refutations.length === 0) return extent
+  return { ...extent, rect, weak: extent.weak || refutations.some((r) => r.action === 'DOWNGRADED'), why: `${extent.why}; the walls contradict ${refutations.map((r) => r.side).join(', ')}: ${refutations.map((r) => r.why).join('; ')}`, refutations }
 }
 
 /**

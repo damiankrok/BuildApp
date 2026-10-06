@@ -47,6 +47,8 @@ export function planDiagnosticsOf(draft: StructuralLayoutDraft, graph: SourceObs
       extentWeak: p.extentWeak,
       ...(p.extentProvenance ? { extentProvenance: p.extentProvenance } : {}),
       ...(p.extentRefused ? { extentRefused: p.extentRefused } : {}),
+      ...(p.extentEndSpans ? { extentEndSpans: p.extentEndSpans } : {}),
+      ...(p.extentRefutations ? { extentRefutations: p.extentRefutations } : {}),
       ...metricOf(metrics, p.frame.id),
       dimensionEvidence: dimensionEvidenceOf(metrics, p.frame.id),
       envelope: d.envelope ? rect(d.envelope.rect) : null,

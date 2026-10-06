@@ -54,8 +54,10 @@ export type ChainJson = {
   baselinePx: number
   ticksPx: number[]
   marks?: MarkJson[]
-  segments: Array<{ fromPx: number; toPx: number; pixelLength: number; valueCm?: number; origin?: string; evidenceId?: string; confidence?: number }>
+  segments: Array<{ fromPx: number; toPx: number; pixelLength: number; valueCm?: number; origin?: string; evidenceId?: string; confidence?: number; labelled?: boolean }>
   note?: string
+  /** 005I: the chain's group among neighbouring parallel lines and what it is to them. */
+  topology?: { groupId: string; roles: string[]; alignedEnds: [boolean, boolean] }
 }
 export type ObservationJson = {
   id: string
@@ -131,6 +133,16 @@ export type LatticeJson = {
   external?: { engine: string; modelSha256: string; runtime: string; topK: Array<{ text: string; p: number }>; greedy: { text: string; meanP: number }; stable: boolean; variants: Array<{ variant: string; top: string; p: number }> }
   ensemble?: { decision: string; external: { text: string; valueCm?: number; posterior: number; meanP: number; stable: boolean; confident: boolean }; lattice: { asRead: string; valueCm?: number; ocrClass: string }; asRead: string; asReadValueCm?: number; ocrClass: string; rival?: { text: string; valueCm: number; witness: string }; why: string }
 }
+/** 005I: one label's place in the global assignment, as the metric evidence records it. */
+export type AssignmentJson = { text: string; orientation: string; box: Rect; status: string; chosen?: { chainId: string; interval: number }; margin?: number; bounded?: boolean; candidates: Array<{ chainId: string; interval: number; offset: number; side: string; centred: boolean; cost: number }> }
+export type TopologyJson = {
+  frameId: string
+  labelHeightPx: number
+  labelInkMarks: Array<{ chainId: string; atPx: number; class: string }>
+  labelInkLines: Array<{ axis: string; baselinePx: number; fromPx: number; toPx: number; marks: number }>
+  groups: Array<{ id: string; axis: string; chainIds: string[]; separations: Array<{ fromChainId: string; toChainId: string; px: number; heights: number }>; relations: Array<{ aChainId: string; bChainId: string; kind: string; alignedEnds: [boolean, boolean] }> }>
+  assignment: { legacy: AssignmentJson[]; final?: AssignmentJson[] }
+}
 export type MetricsJson = {
   schemaVersion?: string
   contentHash?: string
@@ -143,6 +155,8 @@ export type MetricsJson = {
   numericLattices?: LatticeJson[]
   /** 005H: the external numeric recogniser the labels were also read with. */
   recogniser?: { id: string; model: { name: string; sha256: string }; runtime: string; runtimeSha256?: string }
+  /** 005I: each plan frame's dimension topology — label-ink marks, axis groups, the global label assignment. */
+  dimensionTopology?: TopologyJson[]
   coordinateRegistrations?: Array<{ frameId: string; plane: string; metresPerPixelX: number; metresPerPixelY: number; anchors?: unknown[] }>
   evidence?: Array<{ id: string; kind: string; frameId: string; value: number; unit: string; origin?: string; rawText?: string; textBox?: Rect }>
 }
@@ -158,6 +172,9 @@ export type PlanJson = {
   extentWeak?: boolean
   extentProvenance?: { x: string; y: string }
   extentRefused?: string[]
+  /** 005I: the framing chains' short end segments, kept or trimmed, and the sides the walls contradicted. */
+  extentEndSpans?: Array<{ chainId: string; end: string; fromPx: number; toPx: number; pixelLength: number; decision: string; why: string }>
+  extentRefutations?: Array<{ side: string; atPx: number; wallsPast: number; overshootPx: number; action: string; movedToPx?: number; chainId?: string; why: string }>
   metric?: Json
   envelope: Rect | null
   bands: Array<{ axis: 'H' | 'V'; bounds: Rect; thickness: number }>
@@ -209,10 +226,12 @@ export type DecisionEvent = {
 export const TIMELINE_STAGES = [
   'SOURCE',
   'DIMENSION_TICK_CLASSIFICATION',
+  'DIMENSION_AXIS_GROUPS',
   'GLYPH_COUNT_HYPOTHESES',
   'OCR_SEQUENCE_CANDIDATES',
   'EXTERNAL_OCR_CANDIDATES',
   'OCR_READING',
+  'LABEL_ASSIGNMENT',
   'LABEL_BINDING',
   'DIMENSION_HIERARCHY',
   'SCALE_HYPOTHESIS',

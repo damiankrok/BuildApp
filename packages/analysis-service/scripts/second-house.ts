@@ -54,7 +54,7 @@ import { renderSceneSheet } from '../../mobile-scene/scripts/scene-sheet.js'
 import { PNG } from 'pngjs'
 import { execFileSync } from 'node:child_process'
 import { basename } from 'node:path'
-import { METRIC_EVIDENCE_SCHEMA_VERSION, METRIC_READER_VERSION, METRIC_SOLVER_VERSION, DIMENSION_TOPOLOGY_VERSION } from '@buildapp/source-metrics'
+import { AXIS_TOPOLOGY_VERSION, METRIC_EVIDENCE_TOPOLOGY_SCHEMA_VERSION, METRIC_READER_VERSION, METRIC_SOLVER_VERSION, DIMENSION_TOPOLOGY_VERSION } from '@buildapp/source-metrics'
 import { BOUNDARY_EVIDENCE_VERSION, PLAN_RESOLVER_VERSION, SOLVER_V2_VERSION } from '@buildapp/reconstruction'
 import { GENERIC_ADAPTER_VERSION } from '@buildapp/source-package'
 import { ANALYSIS_SERVICE_VERSION } from '../src/index.js'
@@ -273,9 +273,10 @@ export function evidenceDirOf(argv: readonly string[], out: string): string | un
 export const ANALYZER_VERSIONS: Record<string, string> = {
   'analysis-service': ANALYSIS_SERVICE_VERSION,
   'solver-v2': SOLVER_V2_VERSION,
-  'metric-evidence-schema': METRIC_EVIDENCE_SCHEMA_VERSION,
+  'metric-evidence-schema': METRIC_EVIDENCE_TOPOLOGY_SCHEMA_VERSION,
   'metrics.numeric-ocr': METRIC_READER_VERSION,
   'metrics.dimension-topology': DIMENSION_TOPOLOGY_VERSION,
+  'metrics.axis-topology': AXIS_TOPOLOGY_VERSION,
   'metrics.independent-scale': METRIC_SOLVER_VERSION,
   'plan-resolver': PLAN_RESOLVER_VERSION,
   'boundary-evidence': BOUNDARY_EVIDENCE_VERSION,

@@ -30,10 +30,12 @@ import type { Raster } from '@buildapp/source-cv'
 import type { SourceCoordinateFrame, SourceObservation, SourceObservationGraph } from '@buildapp/source-observations'
 import { chainsFromLines, chainId, solveFrameChains } from './chains.js'
 import type { RawChain, ScalePlausibility, SolvedChain } from './chains.js'
-import { DIMENSION_TOPOLOGY_NAME, DIMENSION_TOPOLOGY_VERSION, findDimensionLines, findStraightRuns } from './dimension-lines.js'
-import type { DimensionLine } from './dimension-lines.js'
+import { DIMENSION_TOPOLOGY_NAME, DIMENSION_TOPOLOGY_VERSION, findDimensionLines, findStraightRuns, markLabelInk } from './dimension-lines.js'
+import type { DimensionLine, LabelInk } from './dimension-lines.js'
+import { AXIS_TOPOLOGY_NAME, AXIS_TOPOLOGY_VERSION, dimensionAxisGroups, measurementChain } from './axis-topology.js'
+import type { ChainAxisTopology, LabelAssignmentDecision } from './axis-topology.js'
 import { readNumbers } from './ocr.js'
-import { METRIC_SOLVER_NAME, METRIC_SOLVER_VERSION, solveFrameMetric, textRegions } from './metric-solution.js'
+import { METRIC_SOLVER_NAME, METRIC_SOLVER_VERSION, labelHeightOf, solveFrameMetric, textRegions } from './metric-solution.js'
 import { NUMERIC_LATTICE_ENSEMBLE_VERSION, NUMERIC_LATTICE_NAME, NUMERIC_LATTICE_VERSION, dimensionStyleOf, labelLattice, styleFor } from './numeric-lattice.js'
 import type { LatticeCache } from './numeric-lattice.js'
 import { OCR_ENSEMBLE_NAME, OCR_ENSEMBLE_VERSION, ensembleOf } from './ensemble.js'
@@ -50,10 +52,11 @@ import { readSpecifications, SPEC_READER_NAME, SPEC_READER_VERSION } from './spe
 import type { PublishedSpecificationInput } from './specifications.js'
 import { sealMetricEvidence } from './hash.js'
 import type { MetricEvidenceDraft } from './hash.js'
-import { METRIC_EVIDENCE_ENSEMBLE_SCHEMA_VERSION, METRIC_EVIDENCE_SCHEMA_VERSION } from './schema.js'
-import type { Association, ChainRelation, DimensionChain, DimensionObservation, FrameMetricSolution, MetricConflict, MetricEvidence, MetricEvidenceSet, NumericLatticeRecord, OcrToken, RegistrationPlane, UnresolvedMetric } from './schema.js'
+import { METRIC_EVIDENCE_TOPOLOGY_ENSEMBLE_SCHEMA_VERSION, METRIC_EVIDENCE_TOPOLOGY_SCHEMA_VERSION } from './schema.js'
+import type { Association, ChainRelation, DimensionChain, DimensionObservation, DimensionTopologyRecord, FrameMetricSolution, LabelAssignmentRecord, MetricConflict, MetricEvidence, MetricEvidenceSet, NumericLatticeRecord, OcrToken, RegistrationPlane, UnresolvedMetric } from './schema.js'
 
-export const METRIC_READER_VERSION = '1.3.0' as const
+/** 1.4.0 (005I): labels are assigned to chains globally, and label-ink marks are no measurement points. */
+export const METRIC_READER_VERSION = '1.4.0' as const
 
 /** The bytes of one asset variant, decoded. Returning nothing means the variant could not be read, which is recorded as a gap. */
 export type RasterSource = (frame: SourceCoordinateFrame) => Raster | undefined
@@ -341,6 +344,7 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
   const metricSolutions: FrameMetricSolution[] = []
   const chainRelations: ChainRelation[] = []
   const numericLattices: NumericLatticeRecord[] = []
+  const dimensionTopology: DimensionTopologyRecord[] = []
   // 005H: how many labels the external recogniser read; none, and the set is the 1.5.0 set it was before.
   let heard = 0
   // 005E: identical label crops are read once in a run; a hit is verified byte for byte. (Twin copies of a published
@@ -379,12 +383,11 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
     const runs = findStraightRuns(mask)
     chainStep()
     // 005D: every crossing mark measured against the line it sits on, and classified.
-    const lines = findDimensionLines(mask, { raster, grey })
+    const { allChains, rawChains, measured, labelInkLines } = dimensionChainsOf(findDimensionLines(mask, { raster, grey }), read.raw ?? read.tokens, mask, observations)
     chainStep()
-    const rawChains = chainsFromLines(lines, observations)
     const plausibility = frame.roles.document === 'FLOOR_PLAN' && plane === 'PLAN_XZ' ? planScalePlausibility(mask) : undefined
     chainStep()
-    const solution = solveFrameChains(rawChains, read.tokens, { tolerancePx, plausibility })
+    const solution = solveFrameChains(measured, read.tokens, { tolerancePx, plausibility })
     if (solution.scaleDecision) {
       const d = solution.scaleDecision
       unresolved.push({
@@ -408,12 +411,16 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
     let orientationOf: Array<{ orientation: TextToken['orientation'] | null; dependsOnScale: boolean }> | undefined
     let reread = new Set<number>()
     let scaleStands = true
+    const ids = rawChains.map((c) => chainId(frame.id, c.axis, c.baselinePx, c.ticks.map((t) => t.atPx)))
+    // 005I: neighbouring parallel lines, and each chain's place among them (from marks and label heights only).
+    const labelHeightPx = labelHeightOf(measured, read.raw ?? read.tokens)
+    const axisGroups = dimensionAxisGroups(frame.id, measured, ids, labelHeightPx)
+    let finalAssignment: LabelAssignmentDecision[] | undefined
     if (isPlan && read.raw) {
-      const ids = rawChains.map((c) => chainId(frame.id, c.axis, c.baselinePx, c.ticks.map((t) => t.atPx)))
       // 005E: the numeric lattice of every ink that lies on a dimension line — the geometric test the label assignment
       // makes, before any scale — re-read from the very ink field its pass read. Image only.
       const lattices = new Map<TextToken, { id: string; lattice: LabelLattice }>()
-      const read5e = dimensionLabelLattices(read, rawChains, { width: raster.width, height: raster.height }, {
+      const read5e = dimensionLabelLattices(read, allChains, { width: raster.width, height: raster.height }, {
         cache: latticeCache,
         onLabel: (label, labelsTotal) => checkpoint.tick({ subphase: { id: 'OCR_LATTICE', label: 'reading dimension labels' }, counters: { label, labelsTotal } }),
       })
@@ -448,8 +455,9 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
         }
       }
       for (const [token, { id, lattice }] of lattices) numericLattices.push(latticeRecord(id, frame.id, token, lattice))
-      const metric = solveFrameMetric({ frameId: frame.id, assetId: frame.assetId, chains: rawChains, chainIds: ids, raw: read.raw, legacyTokens: read.tokens, legacy: solution, tolerancePx, plausibility, checkpoint, lattices })
+      const metric = solveFrameMetric({ frameId: frame.id, assetId: frame.assetId, chains: measured, chainIds: ids, raw: read.raw, legacyTokens: read.tokens, legacy: solution, tolerancePx, plausibility, checkpoint, lattices })
       solvedChains = metric.solved
+      finalAssignment = metric.assignment
       orientationOf = metric.chainOrientation
       scaleStands = metric.solution.relation !== 'REPLACED' && metric.solution.relation !== 'ADDED'
       reread = new Set(ids.map((id, i) => (metric.solution.rereadChainIds.includes(id) || !scaleStands ? i : -1)).filter((i) => i >= 0))
@@ -469,9 +477,40 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
         scaleStands && reread.has(index)
           ? (g: SolvedChain['segments'][number]): boolean => legacySolved.segments.some((l) => l.fromPx === g.fromPx && l.toPx === g.toPx && l.origin === g.origin && l.valueCm === g.valueCm && l.confidence === g.confidence)
           : undefined
-      const record = buildChain(frame, chain, solved, tokensById, evidence, anchors, usedTokens, orientationOf?.[index], anchorable)
+      const record = buildChain(frame, chain, solved, tokensById, evidence, anchors, usedTokens, orientationOf?.[index], anchorable, axisGroups.perChain[index])
       if (record) chains.push(record)
     })
+    if (isPlan) {
+      const assignmentRecord = (list: readonly LabelAssignmentDecision[]): LabelAssignmentRecord[] =>
+        list
+          .map((d) => ({
+            text: d.text,
+            orientation: d.orientation,
+            box: d.box,
+            status: d.status,
+            ...(d.chosen ? { chosen: { chainId: ids[d.chosen.chain], interval: d.chosen.interval } } : {}),
+            ...(d.margin !== undefined ? { margin: d.margin } : {}),
+            ...(d.bounded ? { bounded: true as const } : {}),
+            candidates: d.candidates.map((c) => ({ chainId: ids[c.chain], interval: c.interval, offset: c.offset, side: c.side, centred: c.centred, cost: c.cost })),
+          }))
+          .sort((a, b) => a.box.y0 - b.box.y0 || a.box.x0 - b.box.x0 || (a.orientation < b.orientation ? -1 : a.orientation > b.orientation ? 1 : 0) || (a.text < b.text ? -1 : a.text > b.text ? 1 : 0))
+      dimensionTopology.push({
+        frameId: frame.id,
+        labelHeightPx: round6(labelHeightPx),
+        labelInkMarks: rawChains
+          .flatMap((c, i) => c.ticks.filter((t) => (t.reasons ?? []).includes('TEXT_INK')).map((t) => ({ chainId: ids[i], atPx: t.atPx, class: t.class === 'REJECTED' ? ('REJECTED' as const) : ('QUESTIONABLE' as const) })))
+          .sort((a, b) => (a.chainId < b.chainId ? -1 : a.chainId > b.chainId ? 1 : a.atPx - b.atPx)),
+        labelInkLines: labelInkLines.map((c) => ({ axis: c.axis, baselinePx: c.baselinePx, fromPx: c.ticks[0].atPx, toPx: c.ticks[c.ticks.length - 1].atPx, marks: c.ticks.length })),
+        groups: axisGroups.groups.map((g) => ({
+          id: g.id,
+          axis: g.axis,
+          chainIds: g.members.map((m) => ids[m]),
+          separations: g.separations.map((x) => ({ fromChainId: ids[x.from], toChainId: ids[x.to], px: x.px, heights: x.heights })),
+          relations: g.relations.map((r) => ({ aChainId: ids[r.a], bChainId: ids[r.b], kind: r.kind, alignedEnds: r.alignedEnds })),
+        })),
+        assignment: { legacy: assignmentRecord(solution.assignment), ...(finalAssignment ? { final: assignmentRecord(finalAssignment) } : {}) },
+      })
+    }
     // A label a re-read chain took in another orientation is the same ink as the page vote's token
     // for it: that token is used too, and must not be read again as a datum, an angle or a gap.
     if (reread.size > 0 && read.raw) {
@@ -808,7 +847,7 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
     schema: 'buildapp.metric-evidence-set',
     // 005H: a set in which the recogniser read at least one label says so in its version, its readers and its
     // `recogniser`; one it read nothing in — no recogniser, or no dimensioned plan — is a 1.5.0 set, byte for byte.
-    schemaVersion: heard > 0 ? METRIC_EVIDENCE_ENSEMBLE_SCHEMA_VERSION : METRIC_EVIDENCE_SCHEMA_VERSION,
+    schemaVersion: heard > 0 ? METRIC_EVIDENCE_TOPOLOGY_ENSEMBLE_SCHEMA_VERSION : METRIC_EVIDENCE_TOPOLOGY_SCHEMA_VERSION,
     sourcePackageId: options.sourcePackageId,
     sourcePackageHash: options.sourcePackageHash,
     observationGraphId: graph.id,
@@ -817,6 +856,7 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
       { name: 'metrics.numeric-ocr', version: METRIC_READER_VERSION },
       { name: 'metrics.dimension-lines', version: METRIC_READER_VERSION },
       { name: DIMENSION_TOPOLOGY_NAME, version: DIMENSION_TOPOLOGY_VERSION },
+      { name: AXIS_TOPOLOGY_NAME, version: AXIS_TOPOLOGY_VERSION },
       { name: 'metrics.chain-solver', version: METRIC_READER_VERSION },
       { name: 'metrics.axis-aligned-affine', version: '1' },
       { name: SPEC_READER_NAME, version: SPEC_READER_VERSION },
@@ -836,6 +876,7 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
     chainRelations,
     numericLattices: numericLattices.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)),
     ...(recogniser && heard > 0 ? { recogniser: { id: recogniser.id, model: { name: recogniser.model.name, sha256: recogniser.model.sha256 }, runtime: recogniser.runtime, ...(recogniser.runtimeSha256 ? { runtimeSha256: recogniser.runtimeSha256 } : {}) } } : {}),
+    dimensionTopology: dimensionTopology.sort((a, b) => (a.frameId < b.frameId ? -1 : a.frameId > b.frameId ? 1 : 0)),
   }
   return sealMetricEvidence(draft, options.slug)
 }
@@ -868,6 +909,7 @@ function buildChain(
   usedTokens: Set<TextToken>,
   orientation?: { orientation: TextToken['orientation'] | null; dependsOnScale: boolean },
   anchorable?: (segment: SolvedChain['segments'][number]) => boolean,
+  topology?: ChainAxisTopology,
 ): DimensionChain | undefined {
   const id = chainId(frame.id, chain.axis, chain.baselinePx, chain.ticks.map((t) => t.atPx))
   const axis = chain.axis === 'HORIZONTAL' ? 'X' : 'Y'
@@ -941,6 +983,7 @@ function buildChain(
         origin: segment.origin,
         confidence: segment.confidence,
         residualCm: segment.residualCm,
+        ...(segment.token ? { labelled: true as const } : {}),
       })
       // Only a segment whose number was actually READ anchors a registration.
       // A derived segment is the scale restated, and fitting a scale to its own
@@ -959,7 +1002,7 @@ function buildChain(
         })
       }
     } else {
-      segments.push({ index: segment.index, fromPx: segment.fromPx, toPx: segment.toPx, pixelLength: segment.pixelLength, confidence: 0 })
+      segments.push({ index: segment.index, fromPx: segment.fromPx, toPx: segment.toPx, pixelLength: segment.pixelLength, confidence: 0, ...(segment.token ? { labelled: true as const } : {}) })
     }
   }
 
@@ -985,7 +1028,31 @@ function buildChain(
         : fittedCount > 0
           ? undefined
           : 'no number on this chain could be reconciled with the sheet scale',
+    ...(topology ? { topology: { groupId: topology.groupId, roles: [...topology.roles], alignedEnds: [topology.alignedEnds[0], topology.alignedEnds[1]] as [boolean, boolean] } } : {}),
   }
+}
+
+/**
+ * 005I: a frame's dimension lines as chains — the one path `extractMetricEvidence` takes, exported so the synthetic
+ * corpus runs exactly it. A crossing mark that is only the ink of printed labels beside its line is no measurement
+ * point (`markLabelInk`): it stays on the record (`rawChains`, with its class and `TEXT_INK`), and the solvers read the
+ * chains without it (`measured`, index for index). A line whose every mark was label ink measures nothing and is no
+ * chain (`labelInkLines`). `allChains` is every line as found: what the numeric lattices are read against, so the
+ * labels read are the ones 005H read.
+ */
+export function dimensionChainsOf(lines: readonly DimensionLine[], tokens: readonly TextToken[], mask: Mask, observations: readonly SourceObservation[] = []): { allChains: RawChain[]; rawChains: RawChain[]; measured: RawChain[]; labelInkLines: RawChain[] } {
+  const allChains = chainsFromLines(markLabelInk(lines, labelInkOf(tokens), mask), observations)
+  const kept = allChains.map((c, i) => ({ c, i, m: measurementChain(c) })).filter((x) => x.m.ticks.length >= 2)
+  const keptIndex = new Set(kept.map((x) => x.i))
+  return { allChains, rawChains: kept.map((x) => x.c), measured: kept.map((x) => x.m), labelInkLines: allChains.filter((_, i) => !keptIndex.has(i)) }
+}
+
+/**
+ * 005I: the ink of every printed label on a sheet — tokens of two to six glyphs (the labels the numeric lattice would
+ * read), every way up — as boxes only. What `markLabelInk` traces a crossing mark's ink to; a reading is never used.
+ */
+function labelInkOf(tokens: readonly TextToken[]): LabelInk[] {
+  return tokens.filter((t) => t.glyphs.length >= 2 && t.glyphs.length <= LATTICE_LABEL_GLYPHS).map((t) => ({ box: t.box, glyphs: t.glyphs.map((g) => g.box) }))
 }
 
 /**

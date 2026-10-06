@@ -3,7 +3,7 @@ import { LARCHFIELD, renderElevation, renderGroundPlan, renderSection } from '@b
 import { sha256Hex } from '@buildapp/source-common'
 import type { SourceCoordinateFrame, SourceObservationGraph } from '@buildapp/source-observations'
 import type { Raster } from '@buildapp/source-cv'
-import { METRIC_EVIDENCE_SCHEMA_VERSION, MetricEvidenceSetSchema, extractMetricEvidence, findingOf, metricEvidenceContentHash, readSpecifications } from '../src/index.js'
+import { METRIC_EVIDENCE_TOPOLOGY_SCHEMA_VERSION as METRIC_EVIDENCE_SCHEMA_VERSION, MetricEvidenceSetSchema, extractMetricEvidence, findingOf, metricEvidenceContentHash, readSpecifications } from '../src/index.js'
 
 /**
  * The whole metric pass, run on a house that exists nowhere but in the fixture.

@@ -36,7 +36,17 @@ export const METRIC_EVIDENCE_SCHEMA_VERSION = '1.5.0' as const
  * byte for byte, a 1.5.0 set: it keeps that version, so its hash names the reader that produced it.
  */
 export const METRIC_EVIDENCE_ENSEMBLE_SCHEMA_VERSION = '1.6.0' as const
-export const SUPPORTED_METRIC_EVIDENCE_VERSIONS = ['1.0.0', '1.1.0', '1.2.0', '1.3.0', '1.4.0', '1.5.0', '1.6.0'] as const
+/**
+ * 005I (1.7.0 without a recogniser, 1.8.0 with one): the dimension topology between neighbouring lines — label-ink
+ * marks (`TEXT_INK`), the global label assignment, axis groups, each chain's place in its group and each segment's label.
+ * The 1.5.0 / 1.6.0 constants stay for reading older sets; a set read now is one of these two.
+ */
+export const METRIC_EVIDENCE_TOPOLOGY_SCHEMA_VERSION = '1.7.0' as const
+export const METRIC_EVIDENCE_TOPOLOGY_ENSEMBLE_SCHEMA_VERSION = '1.8.0' as const
+export const SUPPORTED_METRIC_EVIDENCE_VERSIONS = ['1.0.0', '1.1.0', '1.2.0', '1.3.0', '1.4.0', '1.5.0', '1.6.0', '1.7.0', '1.8.0'] as const
+
+/** Why a crossing mark is doubted or rejected (005D; `TEXT_INK` 005I: label ink beside the line, not a stroke across it). */
+export const DimensionMarkReasonSchema = z.enum(['LIGHTER_THAN_LINE', 'FAINT_SIDE', 'ONE_SIDED', 'WEDGE_NOT_STROKE', 'COLOUR_MISMATCH', 'DUPLICATE', 'STYLE_MISMATCH', 'NO_LINE_REFERENCE', 'TEXT_INK'])
 
 /** 005E: the four reading-quality classes the numeric lattice gives an ink, from the image alone. */
 export const OcrClassSchema = z.enum(['CLEAR', 'SUPPORTED', 'AMBIGUOUS', 'LOW_QUALITY'])
@@ -332,6 +342,8 @@ export const ChainSegmentSchema = z
     confidence: z.number().min(0).max(1),
     /** Residual against the chain's scale, in centimetres: how far the reading is from what the pixels say. */
     residualCm: z.number().optional(),
+    /** 005I (1.7.0): a number is printed on this segment and was bound to it, whether or not it could be read at the scale. */
+    labelled: z.literal(true).optional(),
   })
   .strict()
 export type ChainSegment = z.infer<typeof ChainSegmentSchema>
@@ -352,7 +364,7 @@ export const DimensionChainSchema = z
      * (a span may run across it or stop at it) or REJECTED (not a measurement point) — and why.
      */
     marks: z
-      .array(z.object({ atPx: z.number().finite(), class: z.enum(['TICK', 'QUESTIONABLE', 'REJECTED']), reasons: z.array(z.enum(['LIGHTER_THAN_LINE', 'FAINT_SIDE', 'ONE_SIDED', 'WEDGE_NOT_STROKE', 'COLOUR_MISMATCH', 'DUPLICATE', 'STYLE_MISMATCH', 'NO_LINE_REFERENCE'])) }).strict())
+      .array(z.object({ atPx: z.number().finite(), class: z.enum(['TICK', 'QUESTIONABLE', 'REJECTED']), reasons: z.array(DimensionMarkReasonSchema) }).strict())
       .optional(),
     segments: z.array(ChainSegmentSchema),
     /**
@@ -371,9 +383,71 @@ export const DimensionChainSchema = z
     observationIds: z.array(z.string().min(1)),
     ocrTokenIds: z.array(z.string().min(1)),
     note: z.string().optional(),
+    /**
+     * 005I (1.7.0): the chain's place among its neighbouring parallel lines (`dimensionAxisGroups`): its group, what it
+     * is to the others (OVERALL: another line subdivides it; SUBDIVISION: it subdivides another; PARTIAL; INDEPENDENT),
+     * and whether a neighbour has a mark at each of its two ends.
+     */
+    topology: z
+      .object({ groupId: z.string().min(1), roles: z.array(z.enum(['OVERALL', 'SUBDIVISION', 'PARTIAL', 'INDEPENDENT'])).min(1), alignedEnds: z.tuple([z.boolean(), z.boolean()]) })
+      .strict()
+      .optional(),
   })
   .strict()
 export type DimensionChain = z.infer<typeof DimensionChainSchema>
+
+/** 005I: one label's place in the global assignment (`assignLabels`), with every line it could have named. */
+export const LabelAssignmentRecordSchema = z
+  .object({
+    text: z.string().min(1),
+    orientation: TextOrientationSchema,
+    box: PixelRectSchema,
+    status: z.enum(['BOUND', 'AMBIGUOUS', 'UNASSIGNED', 'NO_CANDIDATE']),
+    chosen: z.object({ chainId: z.string().min(1), interval: z.number().int().nonnegative() }).strict().optional(),
+    margin: z.number().optional(),
+    bounded: z.literal(true).optional(),
+    candidates: z.array(
+      z
+        .object({
+          chainId: z.string().min(1),
+          interval: z.number().int().nonnegative(),
+          offset: z.number().nonnegative(),
+          side: z.enum(['BASELINE', 'THROUGH', 'TOP']),
+          centred: z.boolean(),
+          cost: z.number(),
+        })
+        .strict(),
+    ),
+  })
+  .strict()
+export type LabelAssignmentRecord = z.infer<typeof LabelAssignmentRecordSchema>
+
+/**
+ * 005I (1.7.0): a plan frame's dimension topology — the marks label ink made (and the lines nothing else made), the
+ * parallel lines grouped with how they stand to each other, and the global label assignment: the page vote's (`legacy`)
+ * and, where the solver read the chains again, its own (`final`).
+ */
+export const DimensionTopologyRecordSchema = z
+  .object({
+    frameId: z.string().min(1),
+    labelHeightPx: z.number().positive(),
+    labelInkMarks: z.array(z.object({ chainId: z.string().min(1), atPx: z.number().finite(), class: z.enum(['QUESTIONABLE', 'REJECTED']) }).strict()),
+    labelInkLines: z.array(z.object({ axis: z.enum(['HORIZONTAL', 'VERTICAL']), baselinePx: z.number().finite(), fromPx: z.number().finite(), toPx: z.number().finite(), marks: z.number().int().nonnegative() }).strict()),
+    groups: z.array(
+      z
+        .object({
+          id: z.string().min(1),
+          axis: z.enum(['HORIZONTAL', 'VERTICAL']),
+          chainIds: z.array(z.string().min(1)).min(1),
+          separations: z.array(z.object({ fromChainId: z.string().min(1), toChainId: z.string().min(1), px: z.number().nonnegative(), heights: z.number().nonnegative() }).strict()),
+          relations: z.array(z.object({ aChainId: z.string().min(1), bChainId: z.string().min(1), kind: z.enum(['SUBDIVIDES', 'CONTAINS', 'OVERLAPS']), alignedEnds: z.tuple([z.boolean(), z.boolean()]) }).strict()),
+        })
+        .strict(),
+    ),
+    assignment: z.object({ legacy: z.array(LabelAssignmentRecordSchema), final: z.array(LabelAssignmentRecordSchema).optional() }).strict(),
+  })
+  .strict()
+export type DimensionTopologyRecord = z.infer<typeof DimensionTopologyRecordSchema>
 
 // ---------------------------------------------------------------------------
 // Dimension evidence (1.2.0, BUILDPLAN-ANALYZER-005B)
@@ -977,6 +1051,8 @@ export const MetricEvidenceSetSchema = z
     numericLattices: z.array(NumericLatticeRecordSchema).optional(),
     /** 1.6.0: the external numeric recogniser the labels were also read with; absent when none was. */
     recogniser: RecogniserRecordSchema.optional(),
+    /** 1.7.0: each plan frame's dimension topology (005I). */
+    dimensionTopology: z.array(DimensionTopologyRecordSchema).optional(),
     contentHash: z.string().regex(/^[0-9a-f]{64}$/),
   })
   .strict()

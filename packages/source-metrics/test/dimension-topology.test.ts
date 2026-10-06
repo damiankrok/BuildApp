@@ -209,7 +209,7 @@ describe('§39 dimension topology on drawn chains', () => {
     expect(['WEAK', 'INCONCLUSIVE']).toContain(r.solution.confidence)
   })
 
-  it('(10) a missing child tick is never invented: the off-centre labels measure nothing, and the vote that used them is unconfirmed', () => {
+  it('(10) a missing child tick is never invented: the off-centre labels measure nothing, and no vote is made of them', () => {
     const c = new Canvas(900, 300)
     rule(c, 150, L, R, [L, 300, R])
     label(c, '500', L, 300, 150)
@@ -218,9 +218,13 @@ describe('§39 dimension topology on drawn chains', () => {
     const r = run(c)
     expect(lineAt(r, 150).ticksPx).toHaveLength(3)
     expect(r.metric.observations.filter((o) => o.rawText === '400').every((o) => o.binding?.role !== 'PRIMARY')).toBe(true)
-    // The vote reads 400 over 300–580 and rewrites the 500; nothing independent confirms it.
-    expect(r.solution.relation).toBe('LEGACY_UNCONFIRMED')
-    expect(r.solution.confidence).toBe('INCONCLUSIVE')
+    // 005D: the page vote handed the interval 300–580 to whichever of `400` and `300` its list reached first, read
+    // `400` over it, rewrote the `500`, and nothing independent confirmed that vote (LEGACY_UNCONFIRMED / INCONCLUSIVE).
+    // 005I: two labels tied for one interval are both refused (AMBIGUOUS), so neither reaches any vote; the scale is
+    // the one the `500` states, and a single witness states it WEAKLY.
+    expect(r.legacy.assignment.filter((d) => d.text === '400' || d.text === '300').map((d) => d.status)).toEqual(['AMBIGUOUS', 'AMBIGUOUS'])
+    expect(near(r.metric.pooledScale, SCALE)).toBe(true)
+    expect(['WEAK', 'INCONCLUSIVE']).toContain(r.solution.confidence)
   })
 
   it('(11) duplicate ticks a few pixels apart are one mark: the span moves by a pixel, never splits', () => {
