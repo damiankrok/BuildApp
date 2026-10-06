@@ -1,0 +1,1575 @@
+{
+ "schema": "buildapp.005i.dimension-topology-synthetic",
+ "commit": "c0ad2e8",
+ "suites": [
+  "tests/architecture/dimension-topology.test.ts",
+  "packages/reconstruction/test/end-spans.test.ts",
+  "packages/source-metrics/test/axis-topology.test.ts",
+  "packages/source-metrics/test/dimension-topology.test.ts",
+  "packages/source-metrics/test/hash-topology.test.ts"
+ ],
+ "totals": {
+  "cases": 116,
+  "passed": 116,
+  "failed": 0
+ },
+ "briefFamilies": {
+  "1": {
+   "cases": 4,
+   "passed": 4
+  },
+  "2": {
+   "cases": 1,
+   "passed": 1
+  },
+  "3": {
+   "cases": 4,
+   "passed": 4
+  },
+  "4": {
+   "cases": 2,
+   "passed": 2
+  },
+  "5": {
+   "cases": 2,
+   "passed": 2
+  },
+  "6": {
+   "cases": 7,
+   "passed": 7
+  },
+  "7": {
+   "cases": 3,
+   "passed": 3
+  },
+  "8": {
+   "cases": 2,
+   "passed": 2
+  },
+  "9": {
+   "cases": 2,
+   "passed": 2
+  },
+  "10": {
+   "cases": 1,
+   "passed": 1
+  },
+  "11": {
+   "cases": 2,
+   "passed": 2
+  },
+  "12": {
+   "cases": 2,
+   "passed": 2
+  },
+  "13": {
+   "cases": 1,
+   "passed": 1
+  },
+  "14": {
+   "cases": 2,
+   "passed": 2
+  },
+  "15": {
+   "cases": 2,
+   "passed": 2
+  },
+  "16": {
+   "cases": 8,
+   "passed": 8
+  },
+  "17": {
+   "cases": 2,
+   "passed": 2
+  }
+ },
+ "councilFamilies": {
+  "E1 / A5 side convention (17)": {
+   "cases": 1
+  },
+  "E1 / A5 side convention (18)": {
+   "cases": 1
+  },
+  "E1 / A5 side convention (19)": {
+   "cases": 1
+  },
+  "E2 lettering × separation × scale grid": {
+   "cases": 9
+  }
+ },
+ "note": "Pixel cases run the production path (dimensionChainsOf, the reader, the lattices, the page vote and the independent solver) on drawings made here; token cases hold the assignment contract. Families 16–19 and the post-review cases were added after the council (lettering 13/16/22 px, separations 1.5/2.5/3.8 label heights, scales 2.0/2.5/3.2 cm/px, values unrelated to any house; the other side convention; an ISO right-hand margin; a misread orientation; in-line labels).",
+ "cases": [
+  {
+   "file": "tests/architecture/dimension-topology.test.ts",
+   "name": "§8 the dimension topology knows the drawing, not the building > the topology module imports pixel types, the reader’s token and grammar, and the chain types only",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§8"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 4
+  },
+  {
+   "file": "tests/architecture/dimension-topology.test.ts",
+   "name": "§8 the dimension topology knows the drawing, not the building > no topology code names a published figure, an area, a reconstruction, a house or an answer",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§8"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 6
+  },
+  {
+   "file": "tests/architecture/dimension-topology.test.ts",
+   "name": "§8 the dimension topology knows the drawing, not the building > the label-ink trace sees boxes, text axes and whether glyphs are digits — never what a label reads as a value",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§8"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 3
+  },
+  {
+   "file": "tests/architecture/dimension-topology.test.ts",
+   "name": "§8 the dimension topology knows the drawing, not the building > a candidate’s cost is geometry: no reading value enters `labelCandidates` or the solver",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§8"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 3
+  },
+  {
+   "file": "tests/architecture/dimension-topology.test.ts",
+   "name": "§8 the dimension topology knows the drawing, not the building > everything that decides what binding sees — chains, solvers, marks — imports nothing that holds a published fact or a building (post-review E3)",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§8"
+   ],
+   "postReview": true,
+   "status": "passed",
+   "ms": 23
+  },
+  {
+   "file": "tests/architecture/dimension-topology.test.ts",
+   "name": "§8 the dimension topology knows the drawing, not the building > extraction reads the published specifications only after every frame was bound and solved (post-review E3)",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§8"
+   ],
+   "postReview": true,
+   "status": "passed",
+   "ms": 8
+  },
+  {
+   "file": "tests/architecture/dimension-topology.test.ts",
+   "name": "§8 the dimension topology knows the drawing, not the building > the end-span and wall-refutation rules read chain records and the wall witness, never the published facts",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§8"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 3
+  },
+  {
+   "file": "tests/architecture/dimension-topology.test.ts",
+   "name": "§8 behaviour: values do not choose lines > the drawing’s own numbers bind each label to its own line",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§8"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 43
+  },
+  {
+   "file": "tests/architecture/dimension-topology.test.ts",
+   "name": "§8 behaviour: values do not choose lines > any other numbers — an arithmetic that does not close, values that would give another area — bind the same way",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§8"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 8
+  },
+  {
+   "file": "tests/architecture/dimension-topology.test.ts",
+   "name": "§8 behaviour: extraction binds the same with any published facts, or none > the dimension topology and every chain are byte-identical whatever area, footprint or angle the page publishes",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§8"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 2662
+  },
+  {
+   "file": "packages/reconstruction/test/end-spans.test.ts",
+   "name": "§15 short end spans > an unread 40 px end segment with nothing stating it is trimmed — and the trim is on the record",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§15"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 9
+  },
+  {
+   "file": "packages/reconstruction/test/end-spans.test.ts",
+   "name": "§15 short end spans > a labelled end segment between two ticks is kept: the number printed on it says it is a span",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§15"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 5
+  },
+  {
+   "file": "packages/reconstruction/test/end-spans.test.ts",
+   "name": "§15 short end spans > an unlabelled end segment is kept where a neighbouring line ends at the same mark (the topology states it)",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§15"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 2
+  },
+  {
+   "file": "packages/reconstruction/test/end-spans.test.ts",
+   "name": "§15 short end spans > a doubted end mark ends nothing on its own: a labelled segment ending at a questionable mark is still trimmed",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§15"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 2
+  },
+  {
+   "file": "packages/reconstruction/test/end-spans.test.ts",
+   "name": "§15 short end spans > a long unread end segment was never a stub (the 005B rule stands): nothing to decide, nothing recorded",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§15"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 2
+  },
+  {
+   "file": "packages/reconstruction/test/end-spans.test.ts",
+   "name": "§16 walls refute a side, never state one > with no dimension mark out there, the frame is kept and downgraded — the walls do not move it",
+   "briefFamilies": [
+    "16"
+   ],
+   "councilFamilies": [],
+   "sections": [
+    "§16"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 2
+  },
+  {
+   "file": "packages/reconstruction/test/end-spans.test.ts",
+   "name": "§16 walls refute a side, never state one > with a tick the drawing prints where the walls end, the side is taken to that tick — a dimension, not a wall",
+   "briefFamilies": [
+    "16"
+   ],
+   "councilFamilies": [],
+   "sections": [
+    "§16"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 2
+  },
+  {
+   "file": "packages/reconstruction/test/end-spans.test.ts",
+   "name": "§16 walls refute a side, never state one > a tick inside a line out there (a window jamb) is no side: only where a line ENDS, where the walls end",
+   "briefFamilies": [
+    "16"
+   ],
+   "councilFamilies": [],
+   "sections": [
+    "§16"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 2
+  },
+  {
+   "file": "packages/reconstruction/test/end-spans.test.ts",
+   "name": "§16 walls refute a side, never state one > a line that ends short of where the walls end moves nothing: the walls would still run on past it",
+   "briefFamilies": [
+    "16"
+   ],
+   "councilFamilies": [],
+   "sections": [
+    "§16"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 2
+  },
+  {
+   "file": "packages/reconstruction/test/end-spans.test.ts",
+   "name": "§16 walls refute a side, never state one > a side the drawing frames with its own overall dimension (OUTER_TOTAL_MARKS) is never asked",
+   "briefFamilies": [
+    "16"
+   ],
+   "councilFamilies": [],
+   "sections": [
+    "§16"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 1
+  },
+  {
+   "file": "packages/reconstruction/test/end-spans.test.ts",
+   "name": "§16 walls refute a side, never state one > walls that stop at the side refute nothing; a side the walls framed is never asked",
+   "briefFamilies": [
+    "16"
+   ],
+   "councilFamilies": [],
+   "sections": [
+    "§16"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 1
+  },
+  {
+   "file": "packages/reconstruction/test/end-spans.test.ts",
+   "name": "§16 walls refute a side, never state one > one wall running on (a garden wall) is not a contradiction",
+   "briefFamilies": [
+    "16"
+   ],
+   "councilFamilies": [],
+   "sections": [
+    "§16"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 1
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§18 (1) outer overall + inner chain, (3) the label nearer the wrong line, (6) label ink as ticks > draws what the case says: two vertical lines 24 px apart, the overall line carrying label-ink marks",
+   "briefFamilies": [
+    "1",
+    "3",
+    "6"
+   ],
+   "councilFamilies": [],
+   "sections": [
+    "§18"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 4
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§18 (1) outer overall + inner chain, (3) the label nearer the wrong line, (6) label ink as ticks > the middle part, printed nearer the overall line, is bound to its own line; the overall keeps its number",
+   "briefFamilies": [
+    "1",
+    "3",
+    "6"
+   ],
+   "councilFamilies": [],
+   "sections": [
+    "§18"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 2
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§18 (1) outer overall + inner chain, (3) the label nearer the wrong line, (6) label ink as ticks > the overall is read over its whole span, the parts over theirs, at the drawing scale",
+   "briefFamilies": [
+    "1",
+    "3",
+    "6"
+   ],
+   "councilFamilies": [],
+   "sections": [
+    "§18"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 2
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§18 (1) outer overall + inner chain, (3) the label nearer the wrong line, (6) label ink as ticks > the two lines are one axis group: the part chain subdivides the overall",
+   "briefFamilies": [
+    "1",
+    "3",
+    "6"
+   ],
+   "councilFamilies": [],
+   "sections": [
+    "§18"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 2
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§18 (2) a label midway between two parallel lines > goes to the line on its baseline side, not refused, at the same distance from both",
+   "briefFamilies": [
+    "2"
+   ],
+   "councilFamilies": [],
+   "sections": [
+    "§18"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 326
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§18 (4, 5) nested spans > (4) same centre: an overall and a shorter inner span centred on the same point each keep their own number",
+   "briefFamilies": [
+    "4",
+    "5"
+   ],
+   "councilFamilies": [],
+   "sections": [
+    "§18"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 193
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§18 (4, 5) nested spans > (5) different centres: two parts under one overall, each part number on its own span",
+   "briefFamilies": [
+    "4",
+    "5"
+   ],
+   "councilFamilies": [],
+   "sections": [
+    "§18"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 333
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§18 (6, 7) label ink and real ticks > (6) one label beside a line makes no mark at all (ink on one side does not cross)",
+   "briefFamilies": [
+    "6",
+    "7"
+   ],
+   "councilFamilies": [],
+   "sections": [
+    "§18"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 73
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§18 (6, 7) label ink and real ticks > (7) a label whose glyphs touch a real tick on one side: the tick is kept, at most doubted, never rejected",
+   "briefFamilies": [
+    "6",
+    "7"
+   ],
+   "councilFamilies": [],
+   "sections": [
+    "§18"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 151
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§18 (6, 7) label ink and real ticks > a real tick with labels on both sides of the line is kept: the stroke between them is not label ink",
+   "briefFamilies": [
+    "6",
+    "7"
+   ],
+   "councilFamilies": [],
+   "sections": [
+    "§18"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 110
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§11 a real tick the labels cover on both sides (post-review A2) > a stroke reaching the line between two labels is not label ink: kept, at most doubted, and measured",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§11"
+   ],
+   "postReview": true,
+   "status": "passed",
+   "ms": 243
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§11 text read across a line is not its label ink (post-review) > a real tick under a parallel label and beside text running across the line keeps its place on the chain",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§11"
+   ],
+   "postReview": true,
+   "status": "passed",
+   "ms": 132
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§11 label ink is text along the line (post-review) > two numerals printed along the line on either side of it: label ink, rejected",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§11"
+   ],
+   "postReview": true,
+   "status": "passed",
+   "ms": 3
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§11 label ink is text along the line (post-review) > the same ink, the lower block read as text running across the line: that side is not label ink",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§11"
+   ],
+   "postReview": true,
+   "status": "passed",
+   "ms": 2
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§18 (8, 9) missing and spurious marks > (8) a missing part tick is never invented: the overall still reads its whole span, the parts do not invent one",
+   "briefFamilies": [
+    "8",
+    "9"
+   ],
+   "councilFamilies": [],
+   "sections": [
+    "§18"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 724
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§18 (8, 9) missing and spurious marks > (9) a spurious light mark on the overall line is rejected and the overall keeps its whole span",
+   "briefFamilies": [
+    "8",
+    "9"
+   ],
+   "councilFamilies": [],
+   "sections": [
+    "§18"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 808
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§15 / §18 (10) a short terminal span > `100 / long middle / 100`: both end parts are bound to their own spans and read",
+   "briefFamilies": [
+    "10"
+   ],
+   "councilFamilies": [],
+   "sections": [
+    "§15",
+    "§18"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 557
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§18 (11, 12) neighbouring and nested chains > (11) two neighbouring independent chains, overlapping a little: each label stays on its own line",
+   "briefFamilies": [
+    "11",
+    "12"
+   ],
+   "councilFamilies": [],
+   "sections": [
+    "§18"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 327
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§18 (11, 12) neighbouring and nested chains > (12) an overall over two part chains: three lines, every number on its own, the group records two subdivisions",
+   "briefFamilies": [
+    "11",
+    "12"
+   ],
+   "councilFamilies": [],
+   "sections": [
+    "§18"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 447
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§14 / §18 (13) contradictory arithmetic > the parts print 100 / 800 / 100 under 1100: binding stays geometric, nothing is rewritten, the scale is the overall’s",
+   "briefFamilies": [
+    "13"
+   ],
+   "councilFamilies": [],
+   "sections": [
+    "§14",
+    "§18"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 447
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§18 (14, 15) the same topology turned and laid flat > (14) a right-hand margin, its numbers right of their lines reading top to bottom: the same assignment",
+   "briefFamilies": [
+    "14",
+    "15"
+   ],
+   "councilFamilies": [],
+   "sections": [
+    "§18"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 626
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§18 (14, 15) the same topology turned and laid flat > (15) a top margin: an overall line above the parts line, the middle part’s number between them",
+   "briefFamilies": [
+    "14",
+    "15"
+   ],
+   "councilFamilies": [],
+   "sections": [
+    "§18"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 368
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§18 (16) the same margin at other lettering, separations, scales and values (post-review E2) > cap 13 px, lines 1.5 label heights apart, 300 / 600 / 450 at 2 cm/px: every number on its own line",
+   "briefFamilies": [],
+   "councilFamilies": [
+    "E2 lettering × separation × scale grid"
+   ],
+   "sections": [
+    "§18"
+   ],
+   "postReview": true,
+   "status": "passed",
+   "ms": 451
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§18 (16) the same margin at other lettering, separations, scales and values (post-review E2) > cap 13 px, lines 2.5 label heights apart, 250 / 850 / 250 at 2.5 cm/px: every number on its own line",
+   "briefFamilies": [],
+   "councilFamilies": [
+    "E2 lettering × separation × scale grid"
+   ],
+   "sections": [
+    "§18"
+   ],
+   "postReview": true,
+   "status": "passed",
+   "ms": 521
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§18 (16) the same margin at other lettering, separations, scales and values (post-review E2) > cap 13 px, lines 3.8 label heights apart, 120 / 1000 / 120 at 3.2 cm/px: every number on its own line",
+   "briefFamilies": [],
+   "councilFamilies": [
+    "E2 lettering × separation × scale grid"
+   ],
+   "sections": [
+    "§18"
+   ],
+   "postReview": true,
+   "status": "passed",
+   "ms": 389
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§18 (16) the same margin at other lettering, separations, scales and values (post-review E2) > cap 16 px, lines 1.5 label heights apart, 250 / 850 / 250 at 2 cm/px: every number on its own line",
+   "briefFamilies": [],
+   "councilFamilies": [
+    "E2 lettering × separation × scale grid"
+   ],
+   "sections": [
+    "§18"
+   ],
+   "postReview": true,
+   "status": "passed",
+   "ms": 523
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§18 (16) the same margin at other lettering, separations, scales and values (post-review E2) > cap 16 px, lines 2.5 label heights apart, 120 / 1000 / 120 at 2.5 cm/px: every number on its own line",
+   "briefFamilies": [],
+   "councilFamilies": [
+    "E2 lettering × separation × scale grid"
+   ],
+   "sections": [
+    "§18"
+   ],
+   "postReview": true,
+   "status": "passed",
+   "ms": 536
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§18 (16) the same margin at other lettering, separations, scales and values (post-review E2) > cap 16 px, lines 3.8 label heights apart, 300 / 600 / 450 at 3.2 cm/px: every number on its own line",
+   "briefFamilies": [],
+   "councilFamilies": [
+    "E2 lettering × separation × scale grid"
+   ],
+   "sections": [
+    "§18"
+   ],
+   "postReview": true,
+   "status": "passed",
+   "ms": 454
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§18 (16) the same margin at other lettering, separations, scales and values (post-review E2) > cap 22 px, lines 1.5 label heights apart, 120 / 1000 / 120 at 2 cm/px: every number on its own line",
+   "briefFamilies": [],
+   "councilFamilies": [
+    "E2 lettering × separation × scale grid"
+   ],
+   "sections": [
+    "§18"
+   ],
+   "postReview": true,
+   "status": "passed",
+   "ms": 532
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§18 (16) the same margin at other lettering, separations, scales and values (post-review E2) > cap 22 px, lines 2.5 label heights apart, 300 / 600 / 450 at 2.5 cm/px: every number on its own line",
+   "briefFamilies": [],
+   "councilFamilies": [
+    "E2 lettering × separation × scale grid"
+   ],
+   "sections": [
+    "§18"
+   ],
+   "postReview": true,
+   "status": "passed",
+   "ms": 673
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§18 (16) the same margin at other lettering, separations, scales and values (post-review E2) > cap 22 px, lines 3.8 label heights apart, 250 / 850 / 250 at 3.2 cm/px: every number on its own line",
+   "briefFamilies": [],
+   "councilFamilies": [
+    "E2 lettering × separation × scale grid"
+   ],
+   "sections": [
+    "§18"
+   ],
+   "postReview": true,
+   "status": "passed",
+   "ms": 445
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§18 (17–19) the side convention is the sheet’s (post-review E1 / A5) > (17) the other convention, stated by the sheet: numbers right of / below their lines — the same assignment",
+   "briefFamilies": [],
+   "councilFamilies": [
+    "E1 / A5 side convention (17)"
+   ],
+   "sections": [
+    "§18"
+   ],
+   "postReview": true,
+   "status": "passed",
+   "ms": 1743
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§18 (17–19) the side convention is the sheet’s (post-review E1 / A5) > (18) an ISO right-hand margin: the overall’s own number sits between the two lines and is still the overall’s",
+   "briefFamilies": [],
+   "councilFamilies": [
+    "E1 / A5 side convention (18)"
+   ],
+   "sections": [
+    "§18"
+   ],
+   "postReview": true,
+   "status": "passed",
+   "ms": 315
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§18 (17–19) the side convention is the sheet’s (post-review E1 / A5) > (19) the other convention on a sparse sheet, the middle part unread: the overall’s number is never handed to the part line",
+   "briefFamilies": [],
+   "councilFamilies": [
+    "E1 / A5 side convention (19)"
+   ],
+   "sections": [
+    "§18"
+   ],
+   "postReview": true,
+   "status": "passed",
+   "ms": 288
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "label side: where the ink lies on the page, whichever way up it was read > above / left of a line is BEFORE, across it ACROSS, below / right of it AFTER — in every orientation",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [],
+   "postReview": false,
+   "status": "passed",
+   "ms": 2
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "the side convention is read from the sheet (post-review E1 / A5) > which way up a label was read changes nothing: ISO labels read bottom to top or top to bottom bind alike",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [],
+   "postReview": true,
+   "status": "passed",
+   "ms": 3
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "the side convention is read from the sheet (post-review E1 / A5) > labels printed right of their lines on a sheet that says nothing else: the overall’s number is never handed to the part line",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [],
+   "postReview": true,
+   "status": "passed",
+   "ms": 2
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "the side convention is read from the sheet (post-review E1 / A5) > a sheet whose uncontested labels all sit right of their lines states that convention, and it binds as ISO does on an ISO sheet",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [],
+   "postReview": true,
+   "status": "passed",
+   "ms": 2
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "the side convention is read from the sheet (post-review E1 / A5) > an in-line label (the line runs through it) costs nothing for its side and is its line’s, beside a neighbour",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [],
+   "postReview": true,
+   "status": "passed",
+   "ms": 2
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "the side convention is read from the sheet (post-review E1 / A5) > the rule: stated by four to one, contradicted by two against, otherwise ISO stands — with or without anchors for it",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [],
+   "postReview": true,
+   "status": "passed",
+   "ms": 2
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "the record says what was decided (post-review A3 / A6 / A9 / E9) > a refused label names no line: AMBIGUOUS carries every candidate and no `chosen`",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [],
+   "postReview": true,
+   "status": "passed",
+   "ms": 2
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "the record says what was decided (post-review A3 / A6 / A9 / E9) > `centred` is recorded as found even where it costs nothing (the page vote)",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [],
+   "postReview": true,
+   "status": "passed",
+   "ms": 2
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "the record says what was decided (post-review A3 / A6 / A9 / E9) > of two tokens with one geometry and reading, the same one is kept whichever comes first",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [],
+   "postReview": true,
+   "status": "passed",
+   "ms": 2
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "axis groups: a line ends where its first and last ticks are (post-review A4 / E4) > a neighbour’s interior mark, or its doubted end, does not align an end; its own tick end does",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [],
+   "postReview": true,
+   "status": "passed",
+   "ms": 2
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "axis groups: a line ends where its first and last ticks are (post-review A4 / E4) > post-review D4: relations and roles do not depend on the order the lines come in",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [],
+   "postReview": true,
+   "status": "passed",
+   "ms": 5
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§13 global assignment > the exact assignment is the least total cost (a hand-checked 3 × 3)",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§13"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 1
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§13 global assignment > a label is not moved off its line to make room for a worse one: one label per interval, the better kept",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§13"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 2
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§13 global assignment > §17 two labels tied for one interval are both refused (AMBIGUOUS), never handed out by list order",
+   "briefFamilies": [
+    "17"
+   ],
+   "councilFamilies": [],
+   "sections": [
+    "§13",
+    "§17"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 2
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§13 global assignment > §17 a label whose convention and distance disagree by exactly the side cost is refused",
+   "briefFamilies": [
+    "17"
+   ],
+   "councilFamilies": [],
+   "sections": [
+    "§13",
+    "§17"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 2
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§13 global assignment > §16 enumeration order decides nothing: every permutation of labels and lines gives the same assignment",
+   "briefFamilies": [
+    "16"
+   ],
+   "councilFamilies": [],
+   "sections": [
+    "§13",
+    "§16"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 18
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§13 global assignment > §43 post-review D2: one neighbourhood beyond the exact bound is solved once (bounded); beyond the work bound it is a recorded gap",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§13",
+    "§43"
+   ],
+   "postReview": true,
+   "status": "passed",
+   "ms": 1139
+  },
+  {
+   "file": "packages/source-metrics/test/axis-topology.test.ts",
+   "name": "§13 global assignment > §43 bounded: a page with 40 parallel lines and 480 labels is assigned in well under a second, the same twice",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§13",
+    "§43"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 121
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§39 dimension topology on drawn chains > (1) a clean total: two end ticks, the number centred, bound to the whole span, the scale it states",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§39"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 147
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§39 dimension topology on drawn chains > (2) a total over a child chain whose ticks are real: the total frames its children and agrees as read",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§39"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 171
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§39 dimension topology on drawn chains > (3) one spurious mark — lighter than the line, on one side, widening — is rejected, and the total keeps its whole span",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§39"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 186
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§39 dimension topology on drawn chains > (4) two spurious marks are both rejected; the total is still bound to its outer ticks",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§39"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 156
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§39 dimension topology on drawn chains > (5) a dark stroke crossing the line is kept as a mark (crossing lines are not deleted), but a centred total skips it",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§39"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 123
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§39 dimension topology on drawn chains > (6) a text stroke crossing the line does not end the total printed over it",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§39"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 314
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§39 dimension topology on drawn chains > (7) light hatching across the line yields doubted marks only — none of them is a tick, none ends the total",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§39"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 165
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§39 dimension topology on drawn chains > (8) a partial label near a total belongs to its own chain: bound to its own segment, never to the total line",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§39"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 213
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§39 dimension topology on drawn chains > (9) a total centred across the whole line stays a total with real ticks beneath it",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§39"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 124
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§39 dimension topology on drawn chains > (9b) a total printed on the far side of a line that carries its children is not a second label for an interval: the children carry the scale, at lower confidence",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§39"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 235
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§39 dimension topology on drawn chains > (10) a missing child tick is never invented: the off-centre labels measure nothing, and no vote is made of them",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§39"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 255
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§39 dimension topology on drawn chains > (11) duplicate ticks a few pixels apart are one mark: the span moves by a pixel, never splits",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§39"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 403
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§39 dimension topology on drawn chains > (12) a broken end tick still ends the span; one reduced to a stub on one side is no crossing, and the chain then states nothing",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§39"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 175
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§39 dimension topology on drawn chains > (13) an extension line drawn a few pixels off the tick merges with it: one end, the scale within a pixel",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§39"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 308
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§39 dimension topology on drawn chains > (14) two hierarchy levels: the overall frames the middle line, and a middle segment frames the inner parts",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§39"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 377
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§42 negative: real internal ticks stay > a segmented chain with a label on every segment and no total remains segmented, every part read",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§42"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 167
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§42 negative: real internal ticks stay > a spurious mark on one line does not make a real internal tick on another line doubtful",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§42"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 188
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§43 negative: a total that disagrees with its children > is recorded as a conflict as read and, with nothing outside the pair to decide, leaves the scale INCONCLUSIVE — never forced consistent",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§43"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 179
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§43 negative: a total that disagrees with its children > an independent reading on another chain decides it, and the conflict stays on the record",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§43"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 350
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§41 metamorphic: one physical drawing, imaged differently > the reference imaging reads the overall and both parts at one scale, and rejects the spurious mark",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§41"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 2
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§41 metamorphic: one physical drawing, imaged differently > identity: the same physical topology, or no lines at all",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§41"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 316
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§41 metamorphic: one physical drawing, imaged differently > identity: the same scale, or no scale adopted",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§41"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 256
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§41 metamorphic: one physical drawing, imaged differently > downscale 0.9: the same physical topology, or no lines at all",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§41"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 188
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§41 metamorphic: one physical drawing, imaged differently > downscale 0.9: the same scale, or no scale adopted",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§41"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 185
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§41 metamorphic: one physical drawing, imaged differently > downscale 0.8: the same physical topology, or no lines at all",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§41"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 188
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§41 metamorphic: one physical drawing, imaged differently > downscale 0.8: the same scale, or no scale adopted",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§41"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 190
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§41 metamorphic: one physical drawing, imaged differently > anti-aliasing: the same physical topology, or no lines at all",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§41"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 269
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§41 metamorphic: one physical drawing, imaged differently > anti-aliasing: the same scale, or no scale adopted",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§41"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 284
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§41 metamorphic: one physical drawing, imaged differently > lower contrast: the same physical topology, or no lines at all",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§41"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 338
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§41 metamorphic: one physical drawing, imaged differently > lower contrast: the same scale, or no scale adopted",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§41"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 387
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§41 metamorphic: one physical drawing, imaged differently > erosion 1px: the same physical topology, or no lines at all",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§41"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 137
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§41 metamorphic: one physical drawing, imaged differently > erosion 1px: the same scale, or no scale adopted",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§41"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 147
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§41 metamorphic: one physical drawing, imaged differently > dilation 1px: the same physical topology, or no lines at all",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§41"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 259
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§41 metamorphic: one physical drawing, imaged differently > dilation 1px: the same scale, or no scale adopted",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§41"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 330
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§41 metamorphic: one physical drawing, imaged differently > padding 40px: the same physical topology, or no lines at all",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§41"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 339
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§41 metamorphic: one physical drawing, imaged differently > padding 40px: the same scale, or no scale adopted",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§41"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 249
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§41 metamorphic: one physical drawing, imaged differently > crop 30px: the same physical topology, or no lines at all",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§41"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 201
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§41 metamorphic: one physical drawing, imaged differently > crop 30px: the same scale, or no scale adopted",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§41"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 214
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§41 metamorphic: one physical drawing, imaged differently > an extra non-semantic crossing line changes nothing that was decided",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§41"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 297
+  },
+  {
+   "file": "packages/source-metrics/test/dimension-topology.test.ts",
+   "name": "§41 metamorphic: one physical drawing, imaged differently > reordered equivalent copies: the same chains in another order on the sheet decide the same scale",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [
+    "§41"
+   ],
+   "postReview": false,
+   "status": "passed",
+   "ms": 318
+  },
+  {
+   "file": "packages/source-metrics/test/hash-topology.test.ts",
+   "name": "the metric evidence hash and the dimension topology (post-review D1) > a set sealed before 1.7.0 hashes as it was sealed",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [],
+   "postReview": true,
+   "status": "passed",
+   "ms": 1457
+  },
+  {
+   "file": "packages/source-metrics/test/hash-topology.test.ts",
+   "name": "the metric evidence hash and the dimension topology (post-review D1) > from 1.7.0, a mark class, a bound number, a chain topology or a topology record each change the hash",
+   "briefFamilies": [],
+   "councilFamilies": [],
+   "sections": [],
+   "postReview": true,
+   "status": "passed",
+   "ms": 2811
+  }
+ ]
+}

@@ -55,3 +55,21 @@ is an OWNER decision (it would not remove them from history). Recorded in the st
 | D6 | P3 | schema 1.7.0 changed shape inside the stage | sets written at `c150896` (side `BASELINE / THROUGH / TOP`, no `sideConventions`) are **void**: none is committed, none is evidence for this stage, and every figure in the report is from the final code. The stale "1.5.0 set" comment in `extract.ts` is corrected | — |
 | D7 | P3 | reconstruction behaviour changed with no version naming it | `PLAN_EXTENT_VERSION` 1.0.0 (end spans, `refuteByWalls`) in `ANALYZER_VERSIONS` (run record and Evidence Pack manifest); the result contract is unchanged | — |
 | D8 | P3 | Track B: stale APK baseline, "peak RSS" | sent to Track B: percentages against 005H's 39 419 927 B APK; "RSS after inference (a lower bound on the peak)" | Track B |
+
+## Reviewer B — boundary bake-off (`reviewer-B-boundary.md`, one P1)
+
+Fixed by the Track B harness in `bfcfb1f` (research and its artifacts only). No verdict changed:
+BEST_BOUNDARY_CANDIDATE NONE; ELSED DEFER; DeepLSD-MD, DeepLSD-WF, DeepLSD-MD-REFINE-SCV, MSAM-BOX, MSAM-SOURCE-PROMPTS
+and MSAM-AUTO REJECT.
+
+| id | sev | finding | resolution |
+| --- | --- | --- | --- |
+| B1 | P1 | MobileSAM's headline compared against a "best BuildPlan region" chosen per house by IoU against truth (an unlabelled oracle) | headline, §1 and the MSAM-BOX row use the fixed `TRIVIAL-EXTENT` comparator: +0.005 mean IoU (per house −0.051 … +0.081; −0.006 … +0.015 under ±u). "Best of BuildPlan" is dropped. REJECT rests on false evidence (15 vs 7 false gap bridges; terrace / porch / leak failures on 3 of 7 houses) and deployment cost (+93 % APK) |
+| B2 | P2 | ORACLE numbers inside the recommendation | removed; kept only in the results files as `ORACLE_bestOfAllAutoMasksIoU_NOT_A_SELECTION` |
+| B3 | P2 | robustness to vertex uncertainty asserted, not computed | `score.py` re-scores every real-set number with the exterior buffered by ±u (2–5 px); `truthBufferFragility`; fragile scorecard cells marked †. FRAGILE: zurawkach MSAM-BOX vs SCV-BUILT, the sign of mean MSAM-BOX − TRIVIAL-EXTENT, 10 mask cells. Every line conclusion holds at −u / 0 / +u. "Wide margin" withdrawn |
+| B4 | P2 | the `sidesOf` side finding came from the superseded pre-E6 run | reproduced with a retained log (`repro-sidesof.ts`, production imported read-only and unchanged); relabelled in the recommendation |
+| B5 | P2 | the same-input rule was not machine-checked | providers and the fusion replay record the input PNG SHA-256 (and refine / MSAM inputs); `score.py` stops on a mismatch. Full re-run of every provider on all 30 frames: ELSED, DeepLSD-MD / WF and every MobileSAM mask identical to the first run. **New:** DeepLSD-MD-REFINE-SCV is not reproducible (GC-RANSAC seeds from `std::random_device`; 9–57 % of refined lines move > 0.1 px); stated in the matrix and the deployment estimate |
+| B6 | P2 | the fusion "no-information control" over-claimed | "no external information", "comparable magnitude, on different houses", density not matched; `controlComparison` table added |
+| B7 | P3 | ORACLE SCALE described too narrowly | reworded: it shapes the BUILT cells (so the SOURCE-PROMPTS positives), the gap classes and the SCV comparators; never the BOX / AUTO prompts or the line detectors |
+| B8 | P3 | small departures from the written rules | §9 "one wall inward" implemented (real MSAM-BOX false bridges stay 15; synthetic BOX unique useful bridges 9 → 7); window rule uses the same opening kinds in numerator and denominator; NOT_APPLICABLE first; dead code removed; SCV-UNION sensitivity rows (ink-only, no-gaps): 0.00 m solid everywhere, opening additions ≤ 0.51–0.62 m |
+| B9 | P3 | timeline and provenance | §11 timeline corrected; `truth/annotation-log.json` (49 `look.py` invocations, truth write times and SHA-256; no provider overlay before the truth was final); scoring-output hashes in the results files |
