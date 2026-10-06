@@ -32,7 +32,10 @@ REGIONS = {
         'porch mouth on the front line (open, no wall)': (313, 560, 416, 597),
         'vestibule front wall left of the entrance door (wall)': (338, 541, 376, 556),
         'entrance door 105/210 in the vestibule wall (opening)': (378, 541, 416, 556),
-        'pier between porch and garage (wall)': (418, 541, 434, 590),
+        # post-review C2: the pier is the dark run x 435-463 on the front line; the box first drawn here (418-434) held the
+        # porch floor and the end of the vestibule wall. Both are kept, so the correction is visible.
+        'pier between porch and garage (wall)': (435, 541, 452, 590),
+        'first box, x 418-434 (porch floor + vestibule wall end; misplaced, post-review C2)': (418, 541, 434, 590),
     },
 }
 

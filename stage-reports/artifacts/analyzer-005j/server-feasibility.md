@@ -6,6 +6,13 @@ in-session strong model used as `SERVER_ORACLE` in 005J is a measurement instrum
 
 ## 1. Query volume (from the analyzer's own sealed records, not guessed)
 
+> **Scope after post-review E5.** The question-per-house figures below apply only to the **rejected** option of a
+> server-side referee asked about disputed parts. A refusal-triggered, area-ranked selection is circular for an
+> observation (the refused figure would choose which gaps get a model answer). The recommended 005K witness is asked
+> **unconditionally**, for every eligible gap of every decomposed copy: **7–64 weak gaps per house, median 24**
+> (recounted by reviewer E from the 005I packs, selected copy only), as a local pre-pass over the plan frames
+> (≈ 1.2 s per 864² frame, 4–8 frames per house) — no server, no per-question cost.
+
 A referee is asked only at a decision seam where a local answer changes the model (opportunity map, P0/P1). Counted from
 the sealed Evidence Packs of the frozen 005H development runs, the round-7 runs and the round-8 runs (24 + 4 + 2 records):
 

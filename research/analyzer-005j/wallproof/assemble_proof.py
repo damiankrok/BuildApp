@@ -55,6 +55,7 @@ def main():
     ap.add_argument('--regions', required=True)
     ap.add_argument('--wasm', required=True)
     ap.add_argument('--pilot-ckpt', default=None)
+    ap.add_argument('--axis', default=None, help='unet=<axis_remeasure.json>,segformer=<...>: post-review re-measurement of REAL_DEV gap questions on the wall axis')
     ap.add_argument('--ckpts', default=None, help='unet=<pt>,segformer=<pt>: PyTorch checkpoints, recorded by SHA-256 (they stay outside the repository)')
     ap.add_argument('--verdicts', default=None, help='JSON {unet|segformer|routeCPilot|overall: text}, written after reading the numbers')
     ap.add_argument('--out', required=True)
@@ -88,6 +89,11 @@ def main():
                                 ('exteriorWallRecall', 'exteriorWallRecallSourceCv', 'ADDITIONAL_USEFUL_WALL_EVIDENCE_OVER_SOURCE_CV', 'additionalOverBandsOnly',
                                  'openingAsOpening', 'envelopeContinuityThroughOpenings', 'falseWallInExclusions', 'falseWallInExclusionsSourceCv', 'msPerFrame1Thread')}
         out[key] = e
+    for key, path in kv(a.axis).items():
+        if key in out:
+            ax = json.load(open(path))
+            out[key]['axisRemeasure'] = {'note': 'post-review A2/C1: the 005I truth segments lie on the wall OUTER FACE; the same model and rules re-run with every REAL_DEV gap segment moved inward by half a wall (0.22 m) onto the axis. NORMAL frames only. Tallies by class: n, right, wrong, unresolved, rightConfident, wrongConfident (confident = share >= 0.80).',
+                                         'halfWallM': ax['halfWallM'], 'questions': ax['questions'], 'facePlaced': ax['face'], 'axisPlaced': ax['axis']}
     for key, path in kv(a.ckpts).items():
         if key in out:
             out[key]['checkpointSha256'] = hashlib.sha256(open(path, 'rb').read()).hexdigest()

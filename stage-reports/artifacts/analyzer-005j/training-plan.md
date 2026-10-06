@@ -40,8 +40,8 @@ Measured inputs to every estimate (this container: 4 shared x86-64 cores, no GPU
 | --- | --- |
 | architecture | **UNet-lite** (1.56 M params, stride-2 stem), written in 005J from the U-Net paper and **trained from scratch**. The MiT-B0 SegFormer (3.71 M; an independent re-implementation following the Apache-2.0 PVTv2 / HF structure, not clean-room) was measured beside it at the same budget and is DEFERRED (slower, fewer real openings, misses the gozdzikowcach garage door; `wall-model-proof.json`). No NVIDIA / smp encoder code, no ImageNet weights; a MiT fallback in 005K would be built on the Apache-2.0 PVTv2 / HF code with its notice |
 | task | per-pixel BACKGROUND / WALL / OPENING. Read **only at a gap**: the analyzer's own gap rectangle (005J `wall_referee.py` strips) gives shares, and the shares become a typed observation, never a decision |
-| what 005J measured | synthetic: wall IoU 0.924, opening IoU 0.804, boundary F1 0.985, continuity through openings 0.980, false wall on terraces 0.7 % / dimension lines 3.8 % / text 0.2 %. Real (7 development sheets, never trained on): exterior-wall recall 0.91–1.00, openings read as openings 0.72–0.90, false wall inside exclusions ≤ 3.6 % (source-cv ≤ 11 %). **Additional exterior wall over source-cv ≈ 0 (0–1.7 %)** — its value is the OPENING class at gap seams, not more wall. Round-8 gaps: cyklamenach window 97 % opening, double door 74 % opening; gozdzikowcach garage door 75 % opening, porch mouth 100 % background |
-| what it is not yet | a referee: (1) on synthetic open-gap counterfactuals it answers CONTINUES (12 confident-wrong) — the generator's open gaps were too few and too clean; (2) the real gap questions are one-sided (all 126 OPENING_VS_PATTERN expect OPENING), so real discrimination rests on 18 minority questions (10 right, 2 wrong, 6 unresolved); (3) the pre-registered WALL_CONTINUATION rule left the gozdzikowcach porch mouth UNRESOLVED (the pier read 36 % wall) |
+| what 005J measured | synthetic: wall IoU 0.924, opening IoU 0.804, boundary F1 0.985, continuity through openings 0.980, false WALL on terraces 0.7 % / dimension lines 3.8 % / text 0.2 % (false OPENING is larger: dimension-line ink 18 %, open gaps 44.5 % by pixel — post-review A3). Real (7 development sheets, never trained on): exterior-wall recall 0.91–1.00; with the strip on the **wall axis**, 61 of 63 openings read OPENING (47 at ≥ 0.8, none wrong) and 50 of 65 continuations CONTINUES (44 at ≥ 0.8, none wrong) — the first run placed strips on the outer face and got 23 of 63 (post-review A2 / C1). **Additional exterior wall over source-cv ≈ 0 (0–1.7 %).** Round-8: cyklamenach window 97 % opening; gozdzikowcach porch mouth 100 % background, pier 100 % wall (the first pier box was misplaced, C2), the 0.41 m LEAF_FACE gap ≈ 94 % opening on its axis. **Replay:** upgrading that one gap completes gozdzikowcach at −3.75 % (`recommendation.md` §3) |
+| what it is not yet | a referee: (1) it over-reads open gaps (12 confident-wrong CONTINUES on synthetic open gaps; 40 open gaps in 360 training renders); (2) real evidence is small and one-sided (8 distinct minority targets, no real PATTERN question); (3) it must read on the jamb-band axis, which production does not store today (`BoundaryGap` has `linePx` only) |
 | data (005K) | BuildPlan synthetic masks (exact) at 20–50k scenes from `vrgen.py` v2: **open-gap hard negatives** (porch mouths, carports, open sides, recesses with returns, gaps with nothing across), terrace kerbs and hatch with breaks, dimension lines and text across walls, piers between openings, coloured fills and watermarks; every family as a counterfactual pair. Real development sheets for evaluation only, with a **balanced, human-verified real gap set** (≥ 50 minority questions) built before calibration. **Not** ResPlan (licence conflict), **not** CubiCasa (NC), not scraped imagery |
 | compute | CPU is enough for the proof scale (measured: 20 min for 1,500 steps); 50k tiles × 30 epochs: **4090-class ≈ 1–3 h**, datacenter ≈ 0.5–1.5 h, **< USD 20 per run** rented; a full CPU run on 4 cores is ≈ 1–2 days |
 | artifact | ≈ 6 MB fp32 ONNX (measured 6.25 MB); int8 ≈ 1.5 MB only if 005H-style parity holds |
@@ -74,6 +74,27 @@ Measured inputs to every estimate (this container: 4 shared x86-64 cores, no GPU
 
 ## Order
 
-1. **Route B in 005K** — a commercially clean wall / opening observation model as a **gap witness** (IP-01, IP-02), behind a flag, with hard-negative training data and a balanced real gap set. It is the only measured piece that transfers to real sheets, and 7 of the 12 P0 seams and both round-8 first divergences are gap seams.
-2. **Route C later** — for region / outline seams, fed with Route B's map and real-style data, distilled from a strong offline teacher with human-verified real labels.
-3. **Route A not now** — generic small VLMs are at or below chance zero-shot (`vlm-bakeoff.md`), cost 0.4–0.8 GB and ≈ 16 s per question in the shipped runtime (SmolVLM2: vision encoder 11.9 s + prefill 3.8 s, measured in WASM), and a fine-tune inherits their training-data questions. Revisit only if Route C plateaus on real questions.
+1. **Route B in 005K, split in two** (`recommendation.md` §5).
+   - **005K-a** (research):
+     - per-gap Evidence Pack records with `axisPx`;
+     - generator v2 with open-gap negatives, faint-symbol positives and on-line patterns;
+     - a balanced, human-verified real gap set;
+     - UNet-lite to the gates;
+     - a two-signal witness at **IP-01 only**, as a pre-pass;
+     - a model-in-the-loop replay gate;
+     - a stop rule.
+   - **005K-b** (integration), only if 005K-a passes.
+   - Why Route B first:
+     - it is the only measured piece that transfers to real sheets;
+     - in the 005J oracle replay, one correct gap reading completes gozdzikowcach at −3.75 % (the storey count still
+       fails), and the proof model reads that gap ≈ 94 % OPENING on its axis.
+   - Cyklamenach is not moved by any gap upgrade: its blockers (REC-17, TOO_LARGE) are deterministic work outside
+     Route B.
+2. **Route C later.** For region / outline seams, fed with Route B's map, trained on synthetic data only, real crops
+   for evaluation.
+3. **Route A not now.**
+   - Generic small VLMs are at or below chance zero-shot (`vlm-bakeoff.md`).
+   - They cost 0.4–0.8 GB and ≈ 16 s per question in the shipped runtime (SmolVLM2: vision encoder 11.9 s + prefill
+     3.8 s, measured in WASM).
+   - A fine-tune inherits their training-data questions.
+   - Revisit only if Route C plateaus on real questions.

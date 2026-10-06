@@ -28,7 +28,13 @@ def main():
     L = ['# VLM / referee bake-off — results (BUILDPLAN-ANALYZER-005J)', '',
          f"Pre-registered: confident = confidence ≥ {d['preregistered']['confident']}; UNRESOLVED / invalid = unresolved (never wrong). "
          'Red metric: CONFIDENT_WRONG_RATE = confident wrong / total. USEFUL_COVERAGE = confident correct / total. Modes never pooled.', '']
-    L += ['## 1. Headline: CANDIDATE_OVERLAY, all sets', '', '| model | read-out | n | answered | accuracy among answered | CONFIDENT_WRONG_RATE | USEFUL_COVERAGE | mirror consistency | rotation consistency | counterfactual: same answer to both | ECE |',
+    if d.get('excluded'):
+        L += ['**Excluded for every arm:** ' + '; '.join(f"`{k}` — {v}" for k, v in d['excluded']['excluded'].items()), '']
+    L += ['**Wall-model rows (`wall-*-structured`) on REAL_DEV are the first, face-placed run** (strips on the 005I truth outline, '
+          'half outside the building). The post-review re-measurement on the wall axis is in `wall-model-proof.json` → `*.axisRemeasure` '
+          '(UNet: 61/63 openings OPENING, 47 at ≥ 0.8, none wrong). Pixel shares are not calibrated probabilities; the 0.80 bar is applied '
+          'to them as fixed before the run.', '']
+    L += ['## 1. Headline: CANDIDATE_OVERLAY, all sets', '', '| model | read-out | n | answered | accuracy among answered | CONFIDENT_WRONG_RATE | USEFUL_COVERAGE | mirror consistency (pairs with an answer) | rotation consistency (pairs with an answer) | counterfactual: same answer to both | ECE |',
           '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |']
     for m in ORDER + sorted(set(M) - set(ORDER)):
         if m not in M:
@@ -39,7 +45,7 @@ def main():
                 continue
             t = b['all']
             cal = b.get('calibration') or {}
-            L.append(f"| {m} | {ro} | {t['total']} | {pct(t['coverage'])} | {pct(t['accuracyAnswered'])} | **{pct(t['confidentWrongRate'])}** | {pct(t['usefulCoverage'])} | {pct(b['mirror']['rate'])} | {pct(b['rotation']['rate'])} | {pct(b['counterfactual']['insensitiveRate'])} | {cal.get('ece', '—')} |")
+            L.append(f"| {m} | {ro} | {t['total']} | {pct(t['coverage'])} | {pct(t['accuracyAnswered'])} | **{pct(t['confidentWrongRate'])}** | {pct(t['usefulCoverage'])} | {pct(b['mirror']['rateWithAnAnswer'])} | {pct(b['rotation']['rateWithAnAnswer'])} | {pct(b['counterfactual']['insensitiveRate'])} | {cal.get('ece', '—')} |")
     L += ['', '## 2. By set and mode (ENUM_SCORE / ORACLE_JSON / STRUCTURED)', '', '| model | read-out | mode | set | n | accuracy among answered | coverage | CONFIDENT_WRONG_RATE | USEFUL_COVERAGE |', '| --- | --- | --- | --- | --- | --- | --- | --- | --- |']
     for m in ORDER + sorted(set(M) - set(ORDER)):
         if m not in M:
@@ -113,7 +119,7 @@ def main():
           'The real sets are one-sided in several classes (all 126 REAL_DEV OPENING_VS_PATTERN questions expect OPENING; 126 of 130 '
           'WALL_CONTINUATION expect CONTINUES). A constant guesser scores the majority share and gets every minority question wrong, '
           'so the minority columns are where a model shows it reads the drawing.', '',
-          '| model | set | majority-share floor (pooled) | minority n | minority right / answered | minority confident wrong |', '| --- | --- | --- | --- | --- | --- |']
+          '| model | set | majority-share floor (pooled) | minority n (imbalanced classes only) | minority right / answered | minority confident wrong |', '| --- | --- | --- | --- | --- | --- |']
     for m in hdr:
         b = M[m].get(primary_ro(m), {}).get('CANDIDATE_OVERLAY')
         if not b:

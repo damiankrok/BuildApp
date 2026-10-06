@@ -1,0 +1,761 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005J",
+ "kind": "research replay - production unchanged",
+ "rows": [
+  {
+   "house": "alt-marcowki",
+   "sealed": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "completed": false,
+    "footprint": null,
+    "failing": []
+   },
+   "dev/ALL_DRAWN": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "verdict": "PENDING_RAW_LEGIBILITY_MEASUREMENT",
+    "completed": false,
+    "footprint": null,
+    "failing": [],
+    "upgrades": 2
+   },
+   "dev/OFF": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "verdict": "PENDING_RAW_LEGIBILITY_MEASUREMENT",
+    "completed": false,
+    "footprint": null,
+    "failing": [],
+    "upgrades": 0
+   }
+  },
+  {
+   "house": "aster-viii",
+   "sealed": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "completed": false,
+    "footprint": null,
+    "failing": []
+   },
+   "dev/ALL_DRAWN": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "verdict": "PENDING_RAW_LEGIBILITY_MEASUREMENT",
+    "completed": false,
+    "footprint": null,
+    "failing": [],
+    "upgrades": 0
+   },
+   "dev/OFF": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "verdict": "PENDING_RAW_LEGIBILITY_MEASUREMENT",
+    "completed": false,
+    "footprint": null,
+    "failing": [],
+    "upgrades": 0
+   }
+  },
+  {
+   "house": "dom-pod-jarzabem",
+   "sealed": {
+    "outcome": null,
+    "modelHash": "df2aa66c8591107a1ff3608d02164ad80f4a7609c963915cb17fe7312e64553f",
+    "verdict": "ALGORITHMIC_FAIL",
+    "completed": true,
+    "footprint": -11.88,
+    "failing": [
+     "footprint"
+    ]
+   },
+   "dev/ALL_DRAWN": {
+    "outcome": "COMPLETED",
+    "modelHash": "df2aa66c8591107a1ff3608d02164ad80f4a7609c963915cb17fe7312e64553f",
+    "verdict": "ALGORITHMIC_FAIL",
+    "completed": true,
+    "footprint": -11.88,
+    "failing": [
+     "footprint"
+    ],
+    "upgrades": 73
+   },
+   "dev/OFF": {
+    "outcome": "COMPLETED",
+    "modelHash": "df2aa66c8591107a1ff3608d02164ad80f4a7609c963915cb17fe7312e64553f",
+    "verdict": "ALGORITHMIC_FAIL",
+    "completed": true,
+    "footprint": -11.88,
+    "failing": [
+     "footprint"
+    ],
+    "upgrades": 0
+   }
+  },
+  {
+   "house": "dom-pod-milorzebem",
+   "sealed": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "completed": false,
+    "footprint": null,
+    "failing": []
+   },
+   "dev/ALL_DRAWN": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "verdict": "PENDING_RAW_LEGIBILITY_MEASUREMENT",
+    "completed": false,
+    "footprint": null,
+    "failing": [],
+    "upgrades": 12
+   },
+   "dev/OFF": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "verdict": "PENDING_RAW_LEGIBILITY_MEASUREMENT",
+    "completed": false,
+    "footprint": null,
+    "failing": [],
+    "upgrades": 0
+   }
+  },
+  {
+   "house": "dom-w-arkadiach",
+   "sealed": {
+    "outcome": null,
+    "modelHash": "a1ac7a1b67b195839e7150e1da7a508b4b583d266a96d10b9c9322deae1f10b7",
+    "verdict": "PASS",
+    "completed": true,
+    "footprint": -0.49,
+    "failing": []
+   },
+   "dev/ALL_DRAWN": {
+    "outcome": "COMPLETED",
+    "modelHash": "a1ac7a1b67b195839e7150e1da7a508b4b583d266a96d10b9c9322deae1f10b7",
+    "verdict": "PASS",
+    "completed": true,
+    "footprint": -0.49,
+    "failing": [],
+    "upgrades": 7
+   },
+   "dev/OFF": {
+    "outcome": "COMPLETED",
+    "modelHash": "a1ac7a1b67b195839e7150e1da7a508b4b583d266a96d10b9c9322deae1f10b7",
+    "verdict": "PASS",
+    "completed": true,
+    "footprint": -0.49,
+    "failing": [],
+    "upgrades": 0
+   }
+  },
+  {
+   "house": "dom-w-azaliach",
+   "sealed": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "completed": false,
+    "footprint": null,
+    "failing": []
+   },
+   "dev/ALL_DRAWN": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "verdict": "PENDING_RAW_LEGIBILITY_MEASUREMENT",
+    "completed": false,
+    "footprint": null,
+    "failing": [],
+    "upgrades": 45
+   },
+   "dev/OFF": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "verdict": "PENDING_RAW_LEGIBILITY_MEASUREMENT",
+    "completed": false,
+    "footprint": null,
+    "failing": [],
+    "upgrades": 0
+   }
+  },
+  {
+   "house": "dom-w-dabecjach",
+   "sealed": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "completed": false,
+    "footprint": null,
+    "failing": []
+   },
+   "dev/ALL_DRAWN": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "verdict": "PENDING_RAW_LEGIBILITY_MEASUREMENT",
+    "completed": false,
+    "footprint": null,
+    "failing": [],
+    "upgrades": 0
+   },
+   "dev/OFF": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "verdict": "PENDING_RAW_LEGIBILITY_MEASUREMENT",
+    "completed": false,
+    "footprint": null,
+    "failing": [],
+    "upgrades": 0
+   }
+  },
+  {
+   "house": "dom-w-helikoniach",
+   "sealed": {
+    "outcome": null,
+    "modelHash": "27642deb363a860dfb9dca75d2dd143499242704666d07c937f3ef41db7d4be0",
+    "verdict": "ALGORITHMIC_FAIL",
+    "completed": true,
+    "footprint": -18.88,
+    "failing": [
+     "footprint",
+     "storeys"
+    ]
+   },
+   "dev/ALL_DRAWN": {
+    "outcome": "COMPLETED",
+    "modelHash": "27642deb363a860dfb9dca75d2dd143499242704666d07c937f3ef41db7d4be0",
+    "verdict": "ALGORITHMIC_FAIL",
+    "completed": true,
+    "footprint": -18.88,
+    "failing": [
+     "footprint",
+     "storeys"
+    ],
+    "upgrades": 3
+   },
+   "dev/OFF": {
+    "outcome": "COMPLETED",
+    "modelHash": "27642deb363a860dfb9dca75d2dd143499242704666d07c937f3ef41db7d4be0",
+    "verdict": "ALGORITHMIC_FAIL",
+    "completed": true,
+    "footprint": -18.88,
+    "failing": [
+     "footprint",
+     "storeys"
+    ],
+    "upgrades": 0
+   }
+  },
+  {
+   "house": "dom-w-jablonkach",
+   "sealed": {
+    "outcome": null,
+    "modelHash": "a81652d034b4f9de2c0f43cce1365a0d6d9414d90ed0fb83056fd6582700a4bb",
+    "verdict": "PASS",
+    "completed": true,
+    "footprint": -0.4,
+    "failing": []
+   },
+   "dev/ALL_DRAWN": {
+    "outcome": "COMPLETED",
+    "modelHash": "a81652d034b4f9de2c0f43cce1365a0d6d9414d90ed0fb83056fd6582700a4bb",
+    "verdict": "PASS",
+    "completed": true,
+    "footprint": -0.4,
+    "failing": [],
+    "upgrades": 24
+   },
+   "dev/OFF": {
+    "outcome": "COMPLETED",
+    "modelHash": "a81652d034b4f9de2c0f43cce1365a0d6d9414d90ed0fb83056fd6582700a4bb",
+    "verdict": "PASS",
+    "completed": true,
+    "footprint": -0.4,
+    "failing": [],
+    "upgrades": 0
+   }
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "sealed": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "completed": false,
+    "footprint": null,
+    "failing": []
+   },
+   "dev/ALL_DRAWN": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "verdict": "PENDING_RAW_LEGIBILITY_MEASUREMENT",
+    "completed": false,
+    "footprint": null,
+    "failing": [],
+    "upgrades": 0
+   },
+   "dev/OFF": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "verdict": "PENDING_RAW_LEGIBILITY_MEASUREMENT",
+    "completed": false,
+    "footprint": null,
+    "failing": [],
+    "upgrades": 0
+   }
+  },
+  {
+   "house": "dom-w-modrzykach",
+   "sealed": {
+    "outcome": null,
+    "modelHash": "b125b9d24f1fb1fcb0004d45f2034fb949247f917a20893ea8b857d837946615",
+    "verdict": "PASS",
+    "completed": true,
+    "footprint": 2.03,
+    "failing": []
+   },
+   "dev/ALL_DRAWN": {
+    "outcome": "COMPLETED",
+    "modelHash": "b125b9d24f1fb1fcb0004d45f2034fb949247f917a20893ea8b857d837946615",
+    "verdict": "PASS",
+    "completed": true,
+    "footprint": 2.03,
+    "failing": [],
+    "upgrades": 3
+   },
+   "dev/OFF": {
+    "outcome": "COMPLETED",
+    "modelHash": "b125b9d24f1fb1fcb0004d45f2034fb949247f917a20893ea8b857d837946615",
+    "verdict": "PASS",
+    "completed": true,
+    "footprint": 2.03,
+    "failing": [],
+    "upgrades": 0
+   }
+  },
+  {
+   "house": "dom-w-morelach",
+   "sealed": {
+    "outcome": null,
+    "modelHash": "29299ff9ca7e9b4ffdc8092b203b0ca5de7229d7ad2f58544f78774c159a05a5",
+    "verdict": "PASS",
+    "completed": true,
+    "footprint": -2.17,
+    "failing": []
+   },
+   "dev/ALL_DRAWN": {
+    "outcome": "COMPLETED",
+    "modelHash": "29299ff9ca7e9b4ffdc8092b203b0ca5de7229d7ad2f58544f78774c159a05a5",
+    "verdict": "PASS",
+    "completed": true,
+    "footprint": -2.17,
+    "failing": [],
+    "upgrades": 21
+   },
+   "dev/OFF": {
+    "outcome": "COMPLETED",
+    "modelHash": "29299ff9ca7e9b4ffdc8092b203b0ca5de7229d7ad2f58544f78774c159a05a5",
+    "verdict": "PASS",
+    "completed": true,
+    "footprint": -2.17,
+    "failing": [],
+    "upgrades": 0
+   }
+  },
+  {
+   "house": "dom-w-tunbergiach",
+   "sealed": {
+    "outcome": null,
+    "modelHash": "9fa7cb890aa6eae191119f58b5a47737b7a2274f33f8641e972eaf79b3972890",
+    "verdict": "ALGORITHMIC_FAIL",
+    "completed": true,
+    "footprint": -0.37,
+    "failing": [
+     "storeys"
+    ]
+   },
+   "dev/ALL_DRAWN": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "verdict": "PENDING_RAW_LEGIBILITY_MEASUREMENT",
+    "completed": false,
+    "footprint": null,
+    "failing": [],
+    "upgrades": 0
+   },
+   "dev/OFF": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "verdict": "PENDING_RAW_LEGIBILITY_MEASUREMENT",
+    "completed": false,
+    "footprint": null,
+    "failing": [],
+    "upgrades": 0
+   }
+  },
+  {
+   "house": "dom-w-zurawkach",
+   "sealed": {
+    "outcome": null,
+    "modelHash": "31ba5eea2aa67b69579ebd912a35c596010bdb39a3dd70cf2a64e3db16f9463f",
+    "verdict": "ALGORITHMIC_FAIL",
+    "completed": true,
+    "footprint": -0.81,
+    "failing": [
+     "storeys"
+    ]
+   },
+   "dev/ALL_DRAWN": {
+    "outcome": "COMPLETED",
+    "modelHash": "e2167366366279e3b0512313151328803b1dfe12120c34d3d470ec89de3243b1",
+    "verdict": "ALGORITHMIC_FAIL",
+    "completed": true,
+    "footprint": -1.68,
+    "failing": [
+     "storeys"
+    ],
+    "upgrades": 11
+   },
+   "dev/OFF": {
+    "outcome": "COMPLETED",
+    "modelHash": "31ba5eea2aa67b69579ebd912a35c596010bdb39a3dd70cf2a64e3db16f9463f",
+    "verdict": "ALGORITHMIC_FAIL",
+    "completed": true,
+    "footprint": -0.81,
+    "failing": [
+     "storeys"
+    ],
+    "upgrades": 0
+   }
+  },
+  {
+   "house": "eoze-legacy-area",
+   "sealed": {
+    "outcome": "COMPLETED",
+    "modelHash": "a27f3a5e808ee09feae908ba2295f9762087993401a8e111ea9291b16719fc51",
+    "verdict": "PASS",
+    "completed": true,
+    "footprint": -4.37,
+    "failing": []
+   }
+  },
+  {
+   "house": "eoze-legacy-every",
+   "sealed": {
+    "outcome": "COMPLETED",
+    "modelHash": "0a0e019df52a473a95e977cae5e88bfe08a8c417e64cb8866e47bc572a602603",
+    "verdict": "PASS",
+    "completed": true,
+    "footprint": -4.21,
+    "failing": []
+   }
+  },
+  {
+   "house": "galaktyka",
+   "sealed": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "completed": false,
+    "footprint": null,
+    "failing": []
+   },
+   "dev/ALL_DRAWN": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "verdict": "PENDING_RAW_LEGIBILITY_MEASUREMENT",
+    "completed": false,
+    "footprint": null,
+    "failing": [],
+    "upgrades": 0
+   },
+   "dev/OFF": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "verdict": "PENDING_RAW_LEGIBILITY_MEASUREMENT",
+    "completed": false,
+    "footprint": null,
+    "failing": [],
+    "upgrades": 0
+   }
+  },
+  {
+   "house": "kosacce-area-alone",
+   "sealed": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "verdict": "PENDING_RAW_LEGIBILITY_MEASUREMENT",
+    "completed": false,
+    "footprint": null,
+    "failing": []
+   }
+  },
+  {
+   "house": "kosacce-clean",
+   "sealed": {
+    "outcome": null,
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "verdict": "PASS",
+    "completed": true,
+    "footprint": -1.33,
+    "failing": []
+   },
+   "dev/ALL_DRAWN": {
+    "outcome": "COMPLETED",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "verdict": "PASS",
+    "completed": true,
+    "footprint": -1.33,
+    "failing": [],
+    "upgrades": 7
+   },
+   "dev/OFF": {
+    "outcome": "COMPLETED",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "verdict": "PASS",
+    "completed": true,
+    "footprint": -1.33,
+    "failing": [],
+    "upgrades": 0
+   }
+  },
+  {
+   "house": "kosacce-tracked",
+   "sealed": {
+    "outcome": null,
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "verdict": "PASS",
+    "completed": true,
+    "footprint": -1.33,
+    "failing": []
+   },
+   "dev/ALL_DRAWN": {
+    "outcome": "COMPLETED",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "verdict": "PASS",
+    "completed": true,
+    "footprint": -1.33,
+    "failing": [],
+    "upgrades": 7
+   },
+   "dev/OFF": {
+    "outcome": "COMPLETED",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "verdict": "PASS",
+    "completed": true,
+    "footprint": -1.33,
+    "failing": [],
+    "upgrades": 0
+   }
+  },
+  {
+   "house": "marcowki",
+   "sealed": {
+    "outcome": null,
+    "modelHash": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+    "verdict": "PASS",
+    "completed": true,
+    "footprint": -0.29,
+    "failing": []
+   },
+   "dev/ALL_DRAWN": {
+    "outcome": "COMPLETED",
+    "modelHash": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+    "verdict": "PASS",
+    "completed": true,
+    "footprint": -0.29,
+    "failing": [],
+    "upgrades": 21
+   },
+   "dev/OFF": {
+    "outcome": "COMPLETED",
+    "modelHash": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+    "verdict": "PASS",
+    "completed": true,
+    "footprint": -0.29,
+    "failing": [],
+    "upgrades": 0
+   }
+  },
+  {
+   "house": "rarytasy-eoze",
+   "sealed": {
+    "outcome": null,
+    "modelHash": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
+    "verdict": "PASS",
+    "completed": true,
+    "footprint": 1.57,
+    "failing": []
+   },
+   "dev/ALL_DRAWN": {
+    "outcome": "COMPLETED",
+    "modelHash": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
+    "verdict": "PASS",
+    "completed": true,
+    "footprint": 1.57,
+    "failing": [],
+    "upgrades": 29
+   },
+   "dev/OFF": {
+    "outcome": "COMPLETED",
+    "modelHash": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
+    "verdict": "PASS",
+    "completed": true,
+    "footprint": 1.57,
+    "failing": [],
+    "upgrades": 0
+   }
+  },
+  {
+   "house": "rarytasy-g2e",
+   "sealed": {
+    "outcome": null,
+    "modelHash": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+    "verdict": "ALGORITHMIC_FAIL",
+    "completed": true,
+    "footprint": -2.75,
+    "failing": [
+     "openingsAllBuilt"
+    ]
+   },
+   "dev/ALL_DRAWN": {
+    "outcome": "COMPLETED",
+    "modelHash": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+    "verdict": "PASS",
+    "completed": true,
+    "footprint": -2.75,
+    "failing": [],
+    "upgrades": 8
+   },
+   "dev/OFF": {
+    "outcome": "COMPLETED",
+    "modelHash": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+    "verdict": "PASS",
+    "completed": true,
+    "footprint": -2.75,
+    "failing": [],
+    "upgrades": 0
+   }
+  },
+  {
+   "house": "willa-miranda",
+   "sealed": {
+    "outcome": null,
+    "modelHash": "84af704b09664eb5997d5a12265663ba45f2aaf456098190e43f914f34c34c81",
+    "verdict": "ALGORITHMIC_FAIL",
+    "completed": true,
+    "footprint": -1.49,
+    "failing": [
+     "storeys"
+    ]
+   },
+   "dev/ALL_DRAWN": {
+    "outcome": "COMPLETED",
+    "modelHash": "84af704b09664eb5997d5a12265663ba45f2aaf456098190e43f914f34c34c81",
+    "verdict": "ALGORITHMIC_FAIL",
+    "completed": true,
+    "footprint": -1.49,
+    "failing": [
+     "storeys"
+    ],
+    "upgrades": 16
+   },
+   "dev/OFF": {
+    "outcome": "COMPLETED",
+    "modelHash": "84af704b09664eb5997d5a12265663ba45f2aaf456098190e43f914f34c34c81",
+    "verdict": "ALGORITHMIC_FAIL",
+    "completed": true,
+    "footprint": -1.49,
+    "failing": [
+     "storeys"
+    ],
+    "upgrades": 0
+   }
+  },
+  {
+   "house": "h1-dom-w-gozdzikowcach",
+   "sealed": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "completed": false,
+    "footprint": null,
+    "failing": []
+   },
+   "round8/ALL_DRAWN": {
+    "outcome": "COMPLETED",
+    "modelHash": "2d08931b9e5ef59b9462b36d65de1271d6e852d94c2685901e52fc2bc2a5b049",
+    "verdict": "ALGORITHMIC_FAIL",
+    "completed": true,
+    "footprint": -3.75,
+    "failing": [
+     "storeys"
+    ],
+    "upgrades": 10
+   },
+   "round8/OFF": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "verdict": "PENDING_RAW_LEGIBILITY_MEASUREMENT",
+    "completed": false,
+    "footprint": null,
+    "failing": [],
+    "upgrades": 0
+   },
+   "round8/ONLY-041": {
+    "outcome": "COMPLETED",
+    "modelHash": "2d08931b9e5ef59b9462b36d65de1271d6e852d94c2685901e52fc2bc2a5b049",
+    "verdict": "ALGORITHMIC_FAIL",
+    "completed": true,
+    "footprint": -3.75,
+    "failing": [
+     "storeys"
+    ],
+    "upgrades": 1
+   },
+   "round8/TRUTH": {
+    "outcome": "COMPLETED",
+    "modelHash": "2d08931b9e5ef59b9462b36d65de1271d6e852d94c2685901e52fc2bc2a5b049",
+    "verdict": "ALGORITHMIC_FAIL",
+    "completed": true,
+    "footprint": -3.75,
+    "failing": [
+     "storeys"
+    ],
+    "upgrades": 9
+   }
+  },
+  {
+   "house": "h2-dom-w-cyklamenach",
+   "sealed": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "completed": false,
+    "footprint": null,
+    "failing": []
+   },
+   "round8/ALL_DRAWN": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "verdict": "PENDING_RAW_LEGIBILITY_MEASUREMENT",
+    "completed": false,
+    "footprint": null,
+    "failing": [],
+    "upgrades": 91
+   },
+   "round8/OFF": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "verdict": "PENDING_RAW_LEGIBILITY_MEASUREMENT",
+    "completed": false,
+    "footprint": null,
+    "failing": [],
+    "upgrades": 0
+   }
+  }
+ ]
+}

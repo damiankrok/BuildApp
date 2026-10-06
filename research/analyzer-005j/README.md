@@ -33,6 +33,9 @@ Results and the stage's decision: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005J_F
 | `wallproof/trainset.py`, `wallproof/wallnet.py`, `wallproof/realmasks.py` | the commercial-clean wall-model proof: synthetic masks, UNet-lite and an independently re-implemented MiT-B0 SegFormer (structure follows the Apache-2.0 PVTv2 / HF code; not clean-room) trained from scratch, synthetic + real exterior-wall evaluation against source-cv |
 | `wallproof/blind8_regions.py` | pixel shares of a proof model inside the regions the 005I diagnosis names on the two round-8 frames |
 | `wallproof/wall_referee.py` | a proof model read as a gap referee with pre-registered strip rules, scored by `score.py` like the VLMs |
+| `wallproof/axis_remeasure.py` | post-review A2/C1: the REAL_DEV gap questions re-measured with the strip on the wall axis instead of the outer face |
+| `replay/oracle_replay.py` | post-review A1/E4: re-solves sealed runs with the frozen code and an oracle gap witness swapped in through a Vite alias (outside the repository) |
+| `exclusions.json` | questions excluded from scoring for every arm, with the reason (post-review C2) |
 | `wallproof/assemble_proof.py`, `wallproof/verdicts.json` | `wall-model-proof.json` from the measured files; the verdict strings written after reading the numbers |
 | `pilot/micro_referee.py` | Route-C feasibility pilot: a from-scratch CNN trained on synthetic questions only |
 | `wasm-probe.cjs` | onnxruntime-web (WASM, 1 thread) latency/RSS probe under Node 18.20.4 |
@@ -63,7 +66,7 @@ python3 research/analyzer-005j/subsets.py                             # items-co
 $P/vlm_bench.py --backend smolvlm2 --model-path <smol snapshot> --items $W/bench/items-smol-ordered.jsonl --img $W/bench/img --out $W/bench/smolvlm2.jsonl --threads 2 --methods GEN_JSON,ENUM_SCORE --gen-subset $W/bench/core-blind8-keys.txt
 $W/md-venv/bin/python -I -B research/analyzer-005j/vlm_bench.py --backend moondream05 --model-path <...>/moondream-0_5b-int8.mf.gz --items $W/bench/items-md-ordered.jsonl --img $W/bench/img --out $W/bench/moondream05.jsonl --threads 2 --methods ENUM_SCORE
 $P/vlm_bench.py --backend florence2 --model-path <florence snapshot> --items $W/bench/items-flo-ordered.jsonl --img $W/bench/img --out $W/bench/florence2.jsonl --threads 2 --methods ENUM_SCORE,STRUCTURED
-$P/score.py --items $W/bench/items-all.jsonl --runs $W/bench/{smolvlm2,moondream05,florence2,wall-unet,wall-segformer,micro}.jsonl (comma-separated) --oracle $W/oracle --pins research/analyzer-005j/models.json --out stage-reports/artifacts/analyzer-005j/vlm-bakeoff.json
+$P/score.py --items $W/bench/items-all.jsonl --runs $W/bench/{smolvlm2,moondream05,florence2,wall-unet,wall-segformer,micro}.jsonl (comma-separated) --oracle $W/oracle --pins research/analyzer-005j/models.json --exclude research/analyzer-005j/exclusions.json --out stage-reports/artifacts/analyzer-005j/vlm-bakeoff.json
 $P/summarize.py --bakeoff stage-reports/artifacts/analyzer-005j/vlm-bakeoff.json --out stage-reports/artifacts/analyzer-005j/vlm-bakeoff.md
 # wall proof
 $P/wallproof/trainset.py --out $W/wall/train --seed-base 70000 --seeds 10
@@ -82,8 +85,15 @@ $P/pilot/micro_referee.py train --items $W/pilot/q/items.jsonl --img $W/pilot/q/
 $P/pilot/micro_referee.py predict --ckpt $W/pilot/micro.pt --items $W/bench/items-all.jsonl --img $W/bench/img --out $W/bench/micro.jsonl
 $P/pilot/micro_referee.py export --ckpt $W/pilot/micro.pt --items none --img none --out $W/onnx/micro-referee.onnx
 # the proof artefact
-$P/wallproof/assemble_proof.py --bakeoff stage-reports/artifacts/analyzer-005j/vlm-bakeoff.json --eval unet=$W/wall/unet-eval.json,segformer=$W/wall/segformer-eval.json --regions unet=$W/wall/unet-blind8-regions.json,segformer=$W/wall/segformer-blind8-regions.json --wasm $W/onnx/wasm-unet.json,$W/onnx/wasm-segformer.json,$W/onnx/wasm-micro.json,$W/onnx/wasm-smolvlm2.json --pilot-ckpt $W/pilot/micro.pt --ckpts unet=$W/wall/unet.pt,segformer=$W/wall/segformer.pt --verdicts research/analyzer-005j/wallproof/verdicts.json --out stage-reports/artifacts/analyzer-005j/wall-model-proof.json
+$P/wallproof/assemble_proof.py --bakeoff stage-reports/artifacts/analyzer-005j/vlm-bakeoff.json --eval unet=$W/wall/unet-eval.json,segformer=$W/wall/segformer-eval.json --regions unet=$W/wall/unet-blind8-regions.json,segformer=$W/wall/segformer-blind8-regions.json --wasm $W/onnx/wasm-unet.json,$W/onnx/wasm-segformer.json,$W/onnx/wasm-micro.json,$W/onnx/wasm-smolvlm2.json --pilot-ckpt $W/pilot/micro.pt --ckpts unet=$W/wall/unet.pt,segformer=$W/wall/segformer.pt --axis unet=$W/wall/unet-axis-remeasure.json,segformer=$W/wall/segformer-axis-remeasure.json --verdicts research/analyzer-005j/wallproof/verdicts.json --out stage-reports/artifacts/analyzer-005j/wall-model-proof.json
 $P/technology_matrix.py --bakeoff stage-reports/artifacts/analyzer-005j/vlm-bakeoff.json --wall stage-reports/artifacts/analyzer-005j/wall-model-proof.json --out-md stage-reports/artifacts/analyzer-005j/technology-matrix.md --out-json stage-reports/artifacts/analyzer-005j/technology-matrix.json
+# post-review re-measurements and the oracle replay
+$P/wallproof/axis_remeasure.py --ckpt $W/wall/unet.pt --real $W/real/corpus.json --real-renders $W/real/renders --truth research/analyzer-005i-boundary-bakeoff/truth/real --out $W/wall/unet-axis-remeasure.json
+python3 research/analyzer-005j/replay/oracle_replay.py setup --repo . --work $W/replay
+python3 research/analyzer-005j/replay/oracle_replay.py run --repo . --work $W/replay --tag round8 --runs <005I round-8 run dirs> --cache <round-8 byte cache> --modes OFF,ALL_DRAWN
+python3 research/analyzer-005j/replay/oracle_replay.py run --repo . --work $W/replay --tag round8 --runs <gozdzikowcach run dir> --cache <...> --modes ONLY --ids gap-Y-538-322-338
+python3 research/analyzer-005j/replay/oracle_replay.py run --repo . --work $W/replay --tag dev --runs <005I development matrix run dirs> --cache <union of the rounds' byte caches> --modes OFF,ALL_DRAWN
+python3 research/analyzer-005j/replay/oracle_replay.py report --repo . --work $W/replay --runs <all of the above> --out stage-reports/artifacts/analyzer-005j/oracle-replay.json
 # WASM latency (Node 18.20.4, onnxruntime-web 1.30.0 from research/analyzer-005g/node_modules)
 <node18>/bin/node research/analyzer-005j/wasm-probe.cjs --ort research/analyzer-005g/node_modules/onnxruntime-web --spec <spec.json> --out <json>
 #   specs: unet-lite 1×1×864×864, segformer-b0 1×1×864×864, micro-referee 1×3×256×256, SmolVLM2 vision 1×1×3×512×512 +

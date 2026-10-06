@@ -28,7 +28,7 @@ def vlm_quality(bk, model, ro='ENUM_SCORE'):
             t = b[s]['all']
             parts.append(f"{s}: {t['correct']}/{t['correct'] + t['wrong']} answered right of {t['total']}")
     t = b['all']
-    return '; '.join(parts) + f"; mirror {pct(b['mirror']['rate'])}", f"{pct(t['confidentWrongRate'])} ({t['wrongConfident']}/{t['total']})"
+    return '; '.join(parts) + f"; mirror {pct(b['mirror']['rateWithAnAnswer'])} (answered pairs)", f"{pct(t['confidentWrongRate'])} ({t['wrongConfident']}/{t['total']})"
 
 
 def main():

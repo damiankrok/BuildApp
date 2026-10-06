@@ -156,11 +156,14 @@ sheets with 005I truth (never trained on).
 | real exterior-wall recall (7 sheets) | 0.912–0.997 | 0.928–0.994 |
 | real exterior-wall recall of **source-cv** (SCV-WALL ∪ SCV-SOLID) | 0.978–1.000 | (same) |
 | **ADDITIONAL_USEFUL_WALL_EVIDENCE_OVER_SOURCE_CV** | **0.000–0.017** | 0.000–0.018 |
-| real openings read as OPENING | **0.72–0.90** | 0.58–0.81 |
+| real openings read as OPENING (pixel share over the truth openings) | **0.72–0.90** | 0.58–0.81 |
+| REAL_DEV gap questions, strip on the **wall axis** (post-review A2 / C1; NORMAL frames): openings OPENING / continuations CONTINUES / solid stretches WALL | **61/63** (47 at ≥ 0.8, 0 wrong) / **50/65** (44, 0 wrong) / 23/24 (1 wrong) | 52/63 (39) / 47/65 (39, 2 wrong) / 24/24 |
+| the same questions with the strip on the wall's outer face (the first 005J run) | 23/63 (0 at ≥ 0.8) / 23/65 / 6/24 | 27/63 / 27/65 / 8/24 |
 | real envelope continuity through openings | **0.74–0.94** | 0.60–0.86 |
 | real false wall inside exclusions (source-cv: ≤ 11.0 %) | ≤ 3.6 % | **≤ 0.8 %** |
 | round-8 regions: cyklamenach window gap / double door / textured terrace | **96.6 % / 74.0 % opening; terrace 95.5 % background** | 96.8 % / 82.4 % opening; terrace 97.5 % background |
-| round-8 regions: gozdzikowcach garage door / porch mouth / entrance door / pier | **75.3 % opening** / 100 % background / 99.7 % opening / 36 % wall | **81.6 % background** (missed) / 99.4 % background / 99.7 % opening / 38 % wall |
+| round-8 regions: gozdzikowcach garage door / porch mouth / entrance door / pier (x 435–452) | **75.3 % opening** / 100 % background / 99.7 % opening / **100 % wall** | **81.6 % background** (missed) / 99.4 % background / 99.7 % opening / 100 % wall |
+| gozdzikowcach 0.41 m LEAF_FACE gap (`gap-Y-538-322-338`), rows 542–550 on its axis | **≈ 94 % opening** | 71–88 % opening |
 | as a gap referee (pre-registered strip rules), CANDIDATE_OVERLAY questions | ⟪UNET_REF⟫ | ⟪SEG_REF⟫ |
 | ONNX fp32 / ORT-web WASM per 864² frame (1 thread, Node 18) / RSS | 6.25 MB / **1.19 s** / ≥ 340 MiB | 14.95 MB / 4.46 s / ≥ 928 MiB |
 
@@ -201,12 +204,17 @@ classifier that is confidently wrong on real sheets. Route C needs real-style da
 
 **The open-gap shortcut of the wall proof (stated here because 005K must fix it).**
 - On synthetic WALL_CONTINUATION counterfactuals the UNet answers CONTINUES where the truth is an open gap:
-  12 confident-wrong; the MiT-B0 has none there.
+  12 confident-wrong; the MiT-B0 has none there. By pixel, open gaps read 44.5 % OPENING and dimension-line ink 12 %
+  WALL + 18 % OPENING (post-review A3, recomputed by the reviewer); training had 40 open gaps in 360 renders.
 - The real gap questions are one-sided: all 126 REAL_DEV OPENING_VS_PATTERN questions expect OPENING, and 126 of 130
-  WALL_CONTINUATION questions expect CONTINUES. Real discrimination therefore rests on **18 minority questions**: UNet
-  10 right, 2 wrong, 6 unresolved.
-- The gozdzikowcach porch-mouth question stayed UNRESOLVED: the rule requires both flanking pieces ≥ 40 % wall, and the
-  pier read 36 %.
+  WALL_CONTINUATION questions expect CONTINUES. The minority questions come from **8 distinct targets** and there is no
+  real PATTERN question (post-review C3, C5).
+- **Two question-geometry errors, found by the council and corrected:**
+  - the REAL_DEV strips sat on the wall's outer face (the 005I truth outline), half outside the building. On the axis,
+    UNet reads 61 of 63 openings OPENING (47 confident) — see §F;
+  - the gozdzikowcach porch-mouth question's "B" piece and the "pier" region box sat over the porch floor, not the
+    pier (x 435–463). The pier reads 100 % wall, and with B on it both models answer TERMINATES (0.98 / 0.97). That
+    question was malformed for every arm and is excluded from all scoring (`research/analyzer-005j/exclusions.json`).
 
 ## H. Training routes and legal training (brief Part G, Q4)
 
@@ -252,7 +260,11 @@ ground truth and is never shipped or called at runtime.
   out.
 - **Server feasibility.** One CPU core running a SmolVLM2-class model handles ≈ 1,000–2,500 questions per hour on a
   desktop; a GPU one to two orders of magnitude more; no free production server is claimed.
-- **Query volume**, counted from the sealed records of the 005H, round-7 and round-8 runs:
+- **Witness volume (005K).** The recommended witness is asked **unconditionally**, for every eligible gap of every
+  decomposed copy: 7–64 weak gaps per house, median 24 (post-review E5). It runs as a local pre-pass over the plan
+  frames, ≈ 1.2 s per 864² frame and 4–8 frames per house. A refusal-triggered selection would be circular.
+- **Referee query volume** (the rejected server option only), counted from the sealed records of the 005H, round-7 and
+  round-8 runs:
   - houses that complete undisputed: **0** questions;
   - moderately ambiguous houses: **1–3**;
   - difficult houses: **3–8**, with a cap of 8 ordered by decision impact.

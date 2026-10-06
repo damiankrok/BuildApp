@@ -126,8 +126,10 @@ def majority_baseline(rows):
     for r in rows:
         by[r['cls']].append(r['expected'])
     for c, ex in by.items():
-        top = max(set(ex), key=ex.count)
-        out[c] = {'answer': top, 'accuracy': round(ex.count(top) / len(ex), 4), 'n': len(ex)}
+        counts = sorted(((ex.count(e), e) for e in set(ex)), key=lambda t: (-t[0], t[1]))   # deterministic (post-review C9)
+        top = counts[0][1]
+        tied = len(counts) > 1 and counts[1][0] == counts[0][0]
+        out[c] = {'answer': top, 'accuracy': round(ex.count(top) / len(ex), 4), 'n': len(ex), 'tied': tied}
     return out
 
 
@@ -136,10 +138,13 @@ def main():
     ap.add_argument('--items', required=True)
     ap.add_argument('--runs', required=True)
     ap.add_argument('--oracle', default=None)
+    ap.add_argument('--exclude', default=None, help='exclusions.json: base question ids excluded for every arm, with reasons')
     ap.add_argument('--pins', default=None, help='models.json: revisions and SHA-256 of the model files that produced the runs')
     ap.add_argument('--out', required=True)
     a = ap.parse_args()
     items = {(it['qid'], it['mode']): it for it in (json.loads(l) for l in open(a.items))}
+    excluded = json.load(open(a.exclude))['excluded'] if a.exclude else {}
+    items = {k: it for k, it in items.items() if it['baseQid'] not in excluded}
     rows_by = defaultdict(list)          # (model, readout) -> rows
     lat = defaultdict(list)
     for path in a.runs.split(','):
@@ -165,7 +170,9 @@ def main():
                     continue
                 o = json.loads(l)
                 k = key[o['id']]
-                it = items[(k['qid'], k['mode'])]
+                it = items.get((k['qid'], k['mode']))
+                if it is None:
+                    continue
                 ans = str(o.get('answer', '')).upper()
                 c = o.get('confidence')
                 answered = ans in it['enum'] and ans != 'UNRESOLVED'
@@ -175,6 +182,8 @@ def main():
     result = {'preregistered': {'confident': CONF, 'sweep': SWEEP}, 'models': {}}
     if a.pins:
         result['pins'] = json.load(open(a.pins))
+    if a.exclude:
+        result['excluded'] = json.load(open(a.exclude))
     for (model, ro), rows in sorted(rows_by.items()):
         m = result['models'].setdefault(model, {})
         r = {}
@@ -188,7 +197,8 @@ def main():
                 sr = [x for x in mr if x['set'] == s]
                 if sr:
                     mb = majority_baseline(sr)
-                    minority = [x for x in sr if x['expected'] != mb[x['cls']]['answer']]
+                    # a balanced class has no majority to beat, so it contributes no 'minority' questions (post-review C9)
+                    minority = [x for x in sr if not mb[x['cls']]['tied'] and x['expected'] != mb[x['cls']]['answer']]
                     block[s] = {'all': tally(sr), 'byClass': {c: tally([x for x in sr if x['cls'] == c]) for c in sorted({x['cls'] for x in sr})},
                                 'sweepConfidentWrong': {str(t): tally(sr, t)['confidentWrongRate'] for t in SWEEP}, 'majorityBaseline': mb,
                                 # the questions whose truth is NOT the class's most frequent answer: a constant guesser gets all of them wrong,

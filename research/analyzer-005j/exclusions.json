@@ -1,0 +1,6 @@
+{
+ "note": "Questions excluded from scoring for EVERY arm (models and oracle alike), with the reason. Added after the post-implementation review; nothing else in the scoring changed.",
+ "excluded": {
+  "real-dom-w-gozdzikowcach-WALL_CONTINUATION-1": "post-review C2: the porch-mouth question's B flank (x 417-436) was drawn over the porch floor and the end of the vestibule wall, not over the pier (dark run x 435-463); the image tells every arm that 'wall piece B is in the blue box' when the box holds no wall - malformed for all arms. With B on the pier (436-455) both wall models answer TERMINATES (0.98 / 0.97)."
+ }
+}
