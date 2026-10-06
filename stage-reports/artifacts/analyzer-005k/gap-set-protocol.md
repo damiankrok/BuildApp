@@ -83,7 +83,7 @@ Nothing below may change after the draw. A deviation is recorded as a deviation,
 | `UNRESOLVED` | the drawing does not settle it |
 
 **What a reviewer sees.** Each gap is composed outside the repository as one picture:
-- the crop as the source draws it, beside the same crop with two red brackets;
+- the crop as the source draws it, beside the same crop with two red brackets (blue since deviation D1);
 - the brackets mark the gap's ends, drawn **outside** the wall band so they cover no evidence;
 - the crop gives at least 1.5 m of context on every side;
 - the file name is neutral (`q###.png`) and the key file is separate.
@@ -166,3 +166,9 @@ The rule ships only if **all** hold:
 - the observational records stay.
 
 **If any safety item fails** (5, 6 or 7), the verdict is `REJECT` and the rule stays OFF. The gate is not lowered.
+
+## Deviations (recorded after the draw)
+
+| # | when | what | why | what it can change |
+| --- | --- | --- | --- | --- |
+| D1 | after the seal (`70aa0a4`), after composing the pictures, **before any reviewer saw one** | the brackets and the 1 m bar are drawn **blue** (0, 90, 255), not red; `label-instructions.md` says "blue" accordingly | ARCHON prints its dimension lines in red: a red bracket could be read as the publisher's own line | the colour only. The crop, the bracket geometry, the population, the label definitions and the decision procedure are unchanged |

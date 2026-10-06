@@ -13,10 +13,10 @@ You are reviewing crops of architectural floor plans, one question per picture. 
 
 Each picture has two panels of the same crop:
 - **Left:** the drawing exactly as published.
-- **Right:** the same drawing with red marks.
-  - Two red lines run parallel to a wall line, just outside the wall on both sides. With their short end ticks, they
+- **Right:** the same drawing with blue marks.
+  - Two blue lines run parallel to a wall line, just outside the wall on both sides. With their short end ticks, they
     bracket one stretch of that wall line: **the stretch in question**, between the end ticks.
-  - The red bar at the bottom left is **1 metre** long.
+  - The blue bar at the bottom left is **1 metre** long.
 
 The marks never cover the wall itself; use the left panel to see what is drawn under them.
 

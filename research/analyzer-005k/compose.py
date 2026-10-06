@@ -7,7 +7,7 @@
 For each gap of the sealed manifest: the frame's bytes from the offline byte cache (checked against the package's
 byte hash), the crop the record names (at least 1.5 m of context on every side), and one picture:
 
-    [ the crop as the source draws it ] [ the same crop, two red brackets outside the wall band, a 1 m bar ]
+    [ the crop as the source draws it ] [ the same crop, two blue brackets outside the wall band, a 1 m bar ]
 
 The brackets run parallel to the wall line one wall and three pixels beyond its axis on both sides, with short end
 ticks pointing away from the wall: they mark where the gap begins and ends and cover nothing inside the wall band (the
@@ -23,7 +23,8 @@ from io import BytesIO
 from PIL import Image, ImageDraw
 
 PANEL = 480
-RED = (220, 20, 20)
+# blue, not red: ARCHON draws its dimension lines in red (005K deviation D1, before any label)
+MARK = (0, 90, 255)
 
 
 def cache_bytes(cache, url):
@@ -68,20 +69,20 @@ def main():
             return ((x - c['x0'] + 0.5) * s, (y - c['y0'] + 0.5) * s)
         for side in (-1, 1):
             o = g['axisPx'] + side * off
-            d.line([P(g['fromPx'], o), P(g['toPx'], o)], fill=RED, width=lw)
+            d.line([P(g['fromPx'], o), P(g['toPx'], o)], fill=MARK, width=lw)
             for end in (g['fromPx'], g['toPx']):
-                d.line([P(end, o), P(end, o + side * tick)], fill=RED, width=lw)
+                d.line([P(end, o), P(end, o + side * tick)], fill=MARK, width=lw)
         # a 1 m bar from the bottom-left corner, in the line's direction (mppAlong is the scale along the line)
         bar = (1.0 / g['mppAlong']) * s
         x0, y0 = 8, marked.size[1] - 8
         if g['axis'] == 'Y':
-            d.line([(x0, y0), (x0 + bar, y0)], fill=RED, width=lw)
-            d.line([(x0, y0 - 4), (x0, y0 + 3)], fill=RED, width=lw)
-            d.line([(x0 + bar, y0 - 4), (x0 + bar, y0 + 3)], fill=RED, width=lw)
+            d.line([(x0, y0), (x0 + bar, y0)], fill=MARK, width=lw)
+            d.line([(x0, y0 - 4), (x0, y0 + 3)], fill=MARK, width=lw)
+            d.line([(x0 + bar, y0 - 4), (x0 + bar, y0 + 3)], fill=MARK, width=lw)
         else:
-            d.line([(x0, y0), (x0, y0 - bar)], fill=RED, width=lw)
-            d.line([(x0 - 4, y0), (x0 + 3, y0)], fill=RED, width=lw)
-            d.line([(x0 - 4, y0 - bar), (x0 + 3, y0 - bar)], fill=RED, width=lw)
+            d.line([(x0, y0), (x0, y0 - bar)], fill=MARK, width=lw)
+            d.line([(x0 - 4, y0), (x0 + 3, y0)], fill=MARK, width=lw)
+            d.line([(x0 - 4, y0 - bar), (x0 + 3, y0 - bar)], fill=MARK, width=lw)
         sheet = Image.new('RGB', (raw.size[0] * 2 + 16, raw.size[1]), (255, 255, 255))
         sheet.paste(raw, (0, 0))
         sheet.paste(marked, (raw.size[0] + 16, 0))
