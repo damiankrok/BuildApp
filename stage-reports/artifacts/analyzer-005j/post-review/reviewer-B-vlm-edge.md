@@ -2,8 +2,15 @@
 
 **Verdict: CONDITIONAL PASS.** No P0. The rejection of ADOPT_SMALL_VLM_REFEREE and the "not now" for Route A survive
 every re-analysis I ran: prior-free metrics, matched subsets, and a re-run of SmolVLM2 at its default image resolution.
-These checks make the negative result stronger, not weaker. Four evidential statements are wrong or claim too much,
-and must be corrected before the recommendation is quoted as evidence (B1–B4, P1).
+These checks make the negative result stronger, not weaker.
+
+Three evidential statements are wrong and must be corrected before the recommendation is quoted as evidence (P1):
+- B1, "the same questions";
+- B3, Florence-2's "grounding found no window";
+- B4, the per-question latency and memory figures.
+
+None of them changes PRIMARY_NEXT. The SmolVLM2 resolution concern (B2) started as a P1. My probe at the model's
+default 1,088 image tokens closes it: no better, AUROC 0.42.
 
 **Independence.** I did not open `reviewer-A/C/D/E-*.md` or `resolution.md`. `recommendation.md` cites post-review
 finding ids (A2, C1, E5 …), and I read those citations only as they appear in that file.
@@ -77,7 +84,7 @@ Three consequences:
   output.
 - `partial.json` (16:15) held no real-set small-VLM result when the order files were written (17:26–17:31).
 
-### B2 — P1 — SmolVLM2 was judged at 1/17 of its default visual budget; scope the capability claim to the deployable configuration
+### B2 — P2 (P1 until measured; my probe settles it) — SmolVLM2 was judged at 1/17 of its default visual budget; scope the claim and cite the probe
 
 `vlm_bench.py:96-97` sets `do_image_splitting=False` and `size={'longest_edge': 512}`. The pinned snapshot's
 `preprocessor_config.json` ships `do_image_splitting: true` and `size.longest_edge: 2048`. For a 512² crop, the default
@@ -92,22 +99,38 @@ The bench also differs from the model card in two other ways:
 - an int8 decoder;
 - a forced prefix without the model's own leading space (B8).
 
-The verdict "Generic small VLMs cannot referee BuildPlan's questions" (stage report `:49`; recommendation Q3) is
-therefore a verdict on **SmolVLM2-500M in its deployable 64-token ONNX configuration**. The docs nowhere say so: the
-bake-off pages and the recommendation never mention the 64 tokens.
+As run, the verdict "Generic small VLMs cannot referee BuildPlan's questions" (stage report `:49`; recommendation Q3)
+is a verdict on **SmolVLM2-500M in its deployable 64-token ONNX configuration**. The docs nowhere say so: the bake-off
+pages and the recommendation never mention the 64 tokens. The probe below is what extends the verdict to the model's
+default resolution.
 
-**Measured here.** I re-ran ENUM_SCORE with the default splitting (1,290 prompt tokens; ≈ 16–30 s per question on 4
-desktop threads). It used the same ONNX files, prompts and scorer, on 68 matched items: the 16 blind-8
-CANDIDATE_OVERLAY NORMAL questions and all 52 synthetic CANDIDATE_OVERLAY NORMAL questions of seed s0.
+**Measured here.** I re-ran ENUM_SCORE with the default splitting: median 1,286 prompt tokens, 15.7 s per question on
+4 idle-ish desktop threads (13.8–36.6 s). It used the same ONNX files, prompts and scorer, on 68 matched items: the 16
+blind-8 CANDIDATE_OVERLAY NORMAL questions and all 52 synthetic CANDIDATE_OVERLAY NORMAL questions of seed s0. The
+64-token rows are the bench's own records; a re-run of 6 of them reproduced the recorded probabilities to ≤ 4 × 10⁻⁶.
 
-⟪PROBE_TABLE⟫
+| SmolVLM2 ENUM_SCORE, 68 matched items | 64 tokens (bench) | 1,088 tokens (default) |
+| --- | --- | --- |
+| answered | 49 | 33 (35 UNRESOLVED) |
+| right among answered | 21 (42.9 %) | 11 (33.3 %) |
+| blind-8: right / answered | 3 / 10 | 1 / 8 |
+| synthetic: right / answered | 18 / 39 | 10 / 25 |
+| confident wrong (≥ 0.80) | 4 | 0 (it abstains more and is less sure) |
+| pooled AUROC of option log-odds | 0.53 | **0.42** |
+| synthetic counterfactual pairs both right (of both answered) | 3 / 12 | 0 / 4 |
+| same argmax as 64 tokens | — | 31 / 68 |
+
+**Seventeen times the visual tokens does not uncover a reader.** On this sample it abstains more and ranks worse. The
+64-token configuration is therefore not what makes SmolVLM2 fail. The zero-shot verdict holds for the model, not only
+for the deployable configuration. The sample is small (68 items, 16 blind-8); it is enough to rule out a large hidden
+gain, not a small one.
 
 **Why the rejection still stands.** The 1,088-token configuration is not deployable. In the shipped runtime it costs
 about 17 × 11.9 s of vision encoder plus a 1,290-token prefill, which comes to **≈ 225 s per question** (a linear
 extrapolation from the measured WASM parts).
 
-**Fix.** State the configuration (64 tokens, int8 decoder, fp32 vision, forced prefix) wherever the zero-shot result is
-quoted, and cite this probe.
+**Fix (P2).** State the configuration (64 tokens, int8 decoder, fp32 vision, forced prefix) wherever the zero-shot
+result is quoted. Cite this probe as the check that more resolution does not help.
 
 ### B3 — P1 — Florence-2 STRUCTURED cannot answer OPENING on any real gap: "its grounding found no window (8 of 8 UNRESOLVED)" is a scoring artefact
 
@@ -419,16 +442,16 @@ right primary.**
 
 **ADOPT_SMALL_VLM_REFEREE is rightly rejected, and the rejection is robust.**
 - Matched subsets (B1), per-class AUROC and counterfactual pair accuracy (B7) all show it.
-- At the model's default 1,088-token resolution (B2) ⟪PROBE_ONE_LINER⟫, and that configuration costs ≈ 225 s per
-  question in the shipped runtime.
+- At the model's default 1,088-token resolution (B2), SmolVLM2 does no better on 68 matched items. It is right on 11 of
+  the 33 it answers, with AUROC 0.42. That configuration would also cost ≈ 225 s per question in the shipped runtime.
 
 **Route A "not now" is fair.** Its first stated reason should be cost and transfer, not zero-shot accuracy (B13).
 
 **Corrections owed before the recommendation is quoted as evidence:**
 - "the same questions" (B1);
 - the Florence grounding sentence (B3);
-- the 64-token scope (B2);
-- the house-level latency figure in place of "≈ 16 s per question" (B4).
+- the house-level latency figure in place of "≈ 16 s per question", and "≥ 1.9 GiB" as a process peak (B4);
+- the 64-token scope with this probe cited (B2, P2).
 
 None of them changes PRIMARY_NEXT.
 

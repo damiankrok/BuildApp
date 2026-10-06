@@ -225,7 +225,11 @@ NORMAL-first order left REAL_DEV mirror pairs nearly unmeasured).
 **Configurations as run (post-review B2, B8).** SmolVLM2-500M ran with `do_image_splitting=False`: one 512² tile, 64
 image tokens, 1/17 of the snapshot's default 1,088 (16 tiles + a global view); fp32 vision, int8 decoder, a forced JSON
 prefix. At 64 tokens one token summarises ≈ 1.25 m of drawing, while the gap classes turn on 1–3 px lines. The verdict
-is therefore on SmolVLM2 **in its deployable configuration**. ⟪B2_PROBE⟫ A space-led prefix moves individual answers
+is therefore on SmolVLM2 **in its deployable configuration**. Reviewer B re-ran ENUM_SCORE with the default splitting (1,290 prompt tokens) on 68 matched items (the 16 blind-8
+CANDIDATE_OVERLAY NORMAL questions and the 52 synthetic ones of seed s0): it answers fewer (33 vs 49 of 68), is right
+on fewer of those (11 / 33 = 33 % vs 21 / 49 = 43 %), is never confident (0 vs 4 confident-wrong), and its pooled
+AUROC drops from 0.53 to 0.42 (blind-8: 1 / 8 vs 3 / 10). More pixels do not reveal a hidden reader, and that
+configuration costs ≈ 225 s per question in the shipped runtime. A space-led prefix moves individual answers
 (same argmax on 41 of 68) but not the verdict (21 / 49 vs 19 / 46). Moondream at 512² sees one 378² global view and no
 crops. Florence-2-base has no VQA task, so its ENUM_SCORE measures its decoder's text prior.
 
@@ -578,7 +582,7 @@ lived only under `/home/user/work005j/replay/`.
 4. **The blind-8 questions were written after the 005I diagnosis.** They test whether a model can answer the questions
    the diagnosis identified, not whether a model would have found them. Their expected answers are the accepted 005I
    diagnosis. The two houses are development evidence since 005I and are not a blind measurement here.
-5. **The oracle is this session's own model**, answering 149 composed CANDIDATE_OVERLAY questions through blind
+5. **The oracle is this session's own model**, answering 149 composed CANDIDATE_OVERLAY questions (148 scored after the C2 exclusion) through blind
    sub-agents (neutral file names, a separate key). It shows the questions are answerable from the crop. It is not a
    product candidate, and its confidence numbers are self-reported.
 6. **The wall proof is a proof.**
