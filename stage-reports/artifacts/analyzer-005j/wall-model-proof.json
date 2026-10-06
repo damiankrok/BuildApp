@@ -1,0 +1,3861 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005J",
+ "kind": "RESEARCH PROOF - not a production candidate",
+ "licence": {
+  "code": "BuildPlan (UNet-lite and MiT-B0 SegFormer written from the papers; no NVIDIA / smp / timm code copied)",
+  "weights": "BuildPlan-owned (trained from random initialisation in this stage)",
+  "pretrainedBackbone": "NONE",
+  "trainingData": "BuildPlan synthetic drawings only (research/analyzer-005j/synthetic/vrgen.py); no CubiCasa, ResPlan, Structured3D or publisher pixels",
+  "evaluationData": "synthetic test renders (seeds disjoint from training) + 7 development houses and the 2 blind-8 houses read locally from the 005I cache; no publisher pixels committed"
+ },
+ "wasmEnvironment": {
+  "node": "v18.20.4",
+  "arch": "x64",
+  "runtime": "onnxruntime-web@1.30.0",
+  "threads": 1
+ },
+ "wasm": {
+  "unet-lite-864": {
+   "file": "unet-lite.onnx",
+   "bytes": 6248525,
+   "sha256": "53b976dc4aa9745516ec7fabc35ce524dd3e4f380fb5f6ce06f3aabe60b4cf9f",
+   "loadMs": 2816,
+   "runs": 3,
+   "medianMs": 1189,
+   "p95Ms": 2227,
+   "rssBeforeMiB": 45,
+   "rssAfterMiB": 340,
+   "firstOutputSha256_16": "27cd05ee2de6fb71",
+   "inputs": [
+    {
+     "name": "image",
+     "shape": [
+      1,
+      1,
+      864,
+      864
+     ]
+    }
+   ]
+  },
+  "segformer-b0-864": {
+   "file": "segformer-b0.onnx",
+   "bytes": 14954091,
+   "sha256": "636305f3f0bde4d8bc25740cd5fe8dcd4acf7225dbb6f0a8aa5362dc6d3e0f39",
+   "loadMs": 2030,
+   "runs": 3,
+   "medianMs": 4458,
+   "p95Ms": 6508,
+   "rssBeforeMiB": 46,
+   "rssAfterMiB": 928,
+   "firstOutputSha256_16": "0038e8763ebf7ce5",
+   "inputs": [
+    {
+     "name": "image",
+     "shape": [
+      1,
+      1,
+      864,
+      864
+     ]
+    }
+   ]
+  },
+  "micro-referee-256": {
+   "file": "micro-referee.onnx",
+   "bytes": 4224326,
+   "sha256": "ab4a2f491b518cc38961418f64388264c7ebaf6bbde12fe490e1982b1d84485e",
+   "loadMs": 879,
+   "runs": 20,
+   "medianMs": 70,
+   "p95Ms": 398,
+   "rssBeforeMiB": 47,
+   "rssAfterMiB": 214,
+   "firstOutputSha256_16": "e1f4cee0fc56d789",
+   "inputs": [
+    {
+     "name": "image",
+     "shape": [
+      1,
+      3,
+      256,
+      256
+     ]
+    }
+   ]
+  },
+  "smolvlm2-vision-fp32-512": {
+   "file": "vision_encoder.onnx",
+   "bytes": 393190822,
+   "sha256": "d4797cdad0ba1958e7dfcc5e074d0b02ae3c4df80cce17ecab282dde37e0ddc1",
+   "loadMs": 4672,
+   "runs": 3,
+   "medianMs": 11895,
+   "p95Ms": 13270,
+   "rssBeforeMiB": 48,
+   "rssAfterMiB": 1944,
+   "firstOutputSha256_16": "c2243d92ac0fa0b7",
+   "inputs": [
+    {
+     "name": "pixel_values",
+     "shape": [
+      1,
+      1,
+      3,
+      512,
+      512
+     ]
+    },
+    {
+     "name": "pixel_attention_mask",
+     "shape": [
+      1,
+      1,
+      512,
+      512
+     ]
+    }
+   ]
+  },
+  "smolvlm2-decoder-int8-prefill-210": {
+   "file": "decoder_model_merged_int8.onnx",
+   "bytes": 365039224,
+   "sha256": "7d0a356562c7e474012c5e383de58d44d487a517c04190d26e5891db86cb2b1f",
+   "loadMs": 1077,
+   "runs": 3,
+   "medianMs": 3841,
+   "p95Ms": 3946,
+   "rssBeforeMiB": 1944,
+   "rssAfterMiB": 1675,
+   "firstOutputSha256_16": "7c4481a3599223cc",
+   "inputs": [
+    {
+     "name": "inputs_embeds",
+     "shape": [
+      1,
+      210,
+      960
+     ]
+    },
+    {
+     "name": "attention_mask",
+     "shape": [
+      1,
+      210
+     ]
+    },
+    {
+     "name": "position_ids",
+     "shape": [
+      1,
+      210
+     ]
+    },
+    {
+     "name": "past_key_values.0.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.0.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.1.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.1.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.2.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.2.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.3.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.3.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.4.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.4.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.5.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.5.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.6.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.6.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.7.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.7.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.8.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.8.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.9.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.9.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.10.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.10.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.11.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.11.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.12.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.12.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.13.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.13.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.14.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.14.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.15.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.15.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.16.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.16.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.17.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.17.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.18.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.18.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.19.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.19.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.20.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.20.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.21.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.21.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.22.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.22.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.23.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.23.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.24.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.24.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.25.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.25.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.26.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.26.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.27.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.27.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.28.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.28.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.29.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.29.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.30.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.30.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.31.key",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.31.value",
+     "shape": [
+      1,
+      5,
+      0,
+      64
+     ]
+    }
+   ]
+  },
+  "smolvlm2-decoder-int8-step": {
+   "file": "decoder_model_merged_int8.onnx",
+   "bytes": 365039224,
+   "sha256": "7d0a356562c7e474012c5e383de58d44d487a517c04190d26e5891db86cb2b1f",
+   "loadMs": 761,
+   "runs": 5,
+   "medianMs": 151,
+   "p95Ms": 186,
+   "rssBeforeMiB": 1675,
+   "rssAfterMiB": 1607,
+   "firstOutputSha256_16": "bd499256ed136d8a",
+   "inputs": [
+    {
+     "name": "inputs_embeds",
+     "shape": [
+      1,
+      1,
+      960
+     ]
+    },
+    {
+     "name": "attention_mask",
+     "shape": [
+      1,
+      211
+     ]
+    },
+    {
+     "name": "position_ids",
+     "shape": [
+      1,
+      1
+     ]
+    },
+    {
+     "name": "past_key_values.0.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.0.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.1.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.1.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.2.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.2.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.3.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.3.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.4.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.4.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.5.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.5.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.6.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.6.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.7.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.7.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.8.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.8.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.9.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.9.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.10.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.10.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.11.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.11.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.12.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.12.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.13.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.13.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.14.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.14.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.15.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.15.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.16.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.16.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.17.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.17.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.18.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.18.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.19.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.19.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.20.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.20.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.21.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.21.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.22.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.22.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.23.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.23.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.24.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.24.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.25.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.25.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.26.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.26.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.27.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.27.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.28.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.28.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.29.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.29.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.30.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.30.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.31.key",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    },
+    {
+     "name": "past_key_values.31.value",
+     "shape": [
+      1,
+      5,
+      210,
+      64
+     ]
+    }
+   ]
+  }
+ },
+ "unet": {
+  "arch": "unet",
+  "params": 1560419,
+  "fp32MB": 5.95,
+  "int8MBEstimate": 1.49,
+  "trainSec": 1196.9,
+  "steps": 1500,
+  "batch": 8,
+  "tile": 256,
+  "trainItems": 360,
+  "pretrained": "NONE (trained from scratch)",
+  "synthetic": {
+   "renders": 108,
+   "wallIoU": 0.924,
+   "wallF1": 0.9605,
+   "wallPrecision": 0.9494,
+   "wallRecall": 0.9719,
+   "boundaryF1_2px": 0.9849,
+   "openingIoU": 0.8042,
+   "openingPrecision": 0.8338,
+   "openingRecall": 0.9578,
+   "continuityThroughOpenings": 0.9799,
+   "falseWallOnTerracesEtc": 0.0068,
+   "falseWallOnDimensionLines": 0.0381,
+   "falseWallOnText": 0.0017,
+   "msPerMegapixel1Thread": 673.4
+  },
+  "real": [
+   {
+    "house": "dom-pod-jarzabem",
+    "msPerFrame1Thread": 439.8,
+    "frame": [
+     853,
+     853
+    ],
+    "exteriorWallRecall": 0.912,
+    "exteriorWallRecallSourceCv": 0.9777,
+    "ADDITIONAL_USEFUL_WALL_EVIDENCE_OVER_SOURCE_CV": 0.0173,
+    "exteriorWallRecallSourceCvBandsOnly": 0.6936,
+    "additionalOverBandsOnly": 0.2628,
+    "truthPx": 22442,
+    "openingAsOpening": 0.8959,
+    "envelopeContinuityThroughOpenings": 0.9361,
+    "falseWallInExclusions": 0.013,
+    "falseWallInExclusionsSourceCv": 0.0239
+   },
+   {
+    "house": "dom-w-arkadiach",
+    "msPerFrame1Thread": 548.3,
+    "frame": [
+     853,
+     853
+    ],
+    "exteriorWallRecall": 0.9486,
+    "exteriorWallRecallSourceCv": 1.0,
+    "ADDITIONAL_USEFUL_WALL_EVIDENCE_OVER_SOURCE_CV": 0.0,
+    "exteriorWallRecallSourceCvBandsOnly": 0.8708,
+    "additionalOverBandsOnly": 0.1216,
+    "truthPx": 27346,
+    "openingAsOpening": 0.7827,
+    "envelopeContinuityThroughOpenings": 0.8417,
+    "falseWallInExclusions": 0.0362,
+    "falseWallInExclusionsSourceCv": 0.0435
+   },
+   {
+    "house": "dom-w-azaliach",
+    "msPerFrame1Thread": 433.2,
+    "frame": [
+     853,
+     853
+    ],
+    "exteriorWallRecall": 0.9974,
+    "exteriorWallRecallSourceCv": 1.0,
+    "ADDITIONAL_USEFUL_WALL_EVIDENCE_OVER_SOURCE_CV": 0.0,
+    "exteriorWallRecallSourceCvBandsOnly": 0.0052,
+    "additionalOverBandsOnly": 0.9923,
+    "truthPx": 23672,
+    "openingAsOpening": 0.7813,
+    "envelopeContinuityThroughOpenings": 0.829,
+    "falseWallInExclusions": 0.0274,
+    "falseWallInExclusionsSourceCv": 0.0519
+   },
+   {
+    "house": "dom-w-helikoniach",
+    "msPerFrame1Thread": 450.1,
+    "frame": [
+     853,
+     853
+    ],
+    "exteriorWallRecall": 0.9603,
+    "exteriorWallRecallSourceCv": 1.0,
+    "ADDITIONAL_USEFUL_WALL_EVIDENCE_OVER_SOURCE_CV": 0.0,
+    "exteriorWallRecallSourceCvBandsOnly": 0.8876,
+    "additionalOverBandsOnly": 0.1061,
+    "truthPx": 23150,
+    "openingAsOpening": 0.7225,
+    "envelopeContinuityThroughOpenings": 0.7499,
+    "falseWallInExclusions": 0.0017,
+    "falseWallInExclusionsSourceCv": 0.1096
+   },
+   {
+    "house": "dom-w-morelach",
+    "msPerFrame1Thread": 480.6,
+    "frame": [
+     853,
+     853
+    ],
+    "exteriorWallRecall": 0.9837,
+    "exteriorWallRecallSourceCv": 0.9993,
+    "ADDITIONAL_USEFUL_WALL_EVIDENCE_OVER_SOURCE_CV": 0.0007,
+    "exteriorWallRecallSourceCvBandsOnly": 0.8152,
+    "additionalOverBandsOnly": 0.1806,
+    "truthPx": 30716,
+    "openingAsOpening": 0.7188,
+    "envelopeContinuityThroughOpenings": 0.7352,
+    "falseWallInExclusions": 0.0089,
+    "falseWallInExclusionsSourceCv": 0.061
+   },
+   {
+    "house": "dom-w-zurawkach",
+    "msPerFrame1Thread": 419.4,
+    "frame": [
+     853,
+     853
+    ],
+    "exteriorWallRecall": 0.9513,
+    "exteriorWallRecallSourceCv": 1.0,
+    "ADDITIONAL_USEFUL_WALL_EVIDENCE_OVER_SOURCE_CV": 0.0,
+    "exteriorWallRecallSourceCvBandsOnly": 0.9115,
+    "additionalOverBandsOnly": 0.0811,
+    "truthPx": 25586,
+    "openingAsOpening": 0.8032,
+    "envelopeContinuityThroughOpenings": 0.8425,
+    "falseWallInExclusions": 0.019,
+    "falseWallInExclusionsSourceCv": 0.0291
+   },
+   {
+    "house": "willa-miranda",
+    "msPerFrame1Thread": 426.8,
+    "frame": [
+     853,
+     853
+    ],
+    "exteriorWallRecall": 0.9457,
+    "exteriorWallRecallSourceCv": 0.9992,
+    "ADDITIONAL_USEFUL_WALL_EVIDENCE_OVER_SOURCE_CV": 0.0,
+    "exteriorWallRecallSourceCvBandsOnly": 0.8263,
+    "additionalOverBandsOnly": 0.1643,
+    "truthPx": 22851,
+    "openingAsOpening": 0.7267,
+    "envelopeContinuityThroughOpenings": 0.7514,
+    "falseWallInExclusions": 0.0319,
+    "falseWallInExclusionsSourceCv": 0.0536
+   }
+  ],
+  "peakRssMB_evalProcess": 698.0,
+  "blind8Regions": {
+   "dom-w-cyklamenach": {
+    "window 180/160 gap (analyzer: DASHED, weak)": {
+     "box": [
+      165,
+      197,
+      255,
+      216
+     ],
+     "background": 0.001,
+     "wall": 0.033,
+     "opening": 0.966
+    },
+    "double door 180/230 gap (analyzer: LEAF_FACE, weak)": {
+     "box": [
+      310,
+      197,
+      397,
+      216
+     ],
+     "background": 0.251,
+     "wall": 0.009,
+     "opening": 0.74
+    },
+    "north wall pieces either side (wall)": {
+     "box": [
+      132,
+      197,
+      165,
+      216
+     ],
+     "background": 0.0,
+     "wall": 1.0,
+     "opening": 0.0
+    },
+    "textured terrace north of the house (no wall)": {
+     "box": [
+      140,
+      130,
+      560,
+      188
+     ],
+     "background": 0.955,
+     "wall": 0.0,
+     "opening": 0.045
+    }
+   },
+   "dom-w-gozdzikowcach": {
+    "garage door 325/225 gap (analyzer: part of one OPEN_SIDE)": {
+     "box": [
+      466,
+      576,
+      589,
+      592
+     ],
+     "background": 0.247,
+     "wall": 0.0,
+     "opening": 0.753
+    },
+    "porch mouth on the front line (open, no wall)": {
+     "box": [
+      313,
+      560,
+      416,
+      597
+     ],
+     "background": 1.0,
+     "wall": 0.0,
+     "opening": 0.0
+    },
+    "vestibule front wall left of the entrance door (wall)": {
+     "box": [
+      338,
+      541,
+      376,
+      556
+     ],
+     "background": 0.0,
+     "wall": 0.974,
+     "opening": 0.026
+    },
+    "entrance door 105/210 in the vestibule wall (opening)": {
+     "box": [
+      378,
+      541,
+      416,
+      556
+     ],
+     "background": 0.0,
+     "wall": 0.003,
+     "opening": 0.997
+    },
+    "pier between porch and garage (wall)": {
+     "box": [
+      418,
+      541,
+      434,
+      590
+     ],
+     "background": 0.64,
+     "wall": 0.36,
+     "opening": 0.0
+    }
+   }
+  },
+  "referee": {
+   "all": {
+    "total": 512,
+    "correct": 256,
+    "wrong": 23,
+    "unresolved": 233,
+    "correctConfident": 134,
+    "wrongConfident": 15,
+    "coverage": 0.5449,
+    "accuracyAnswered": 0.9176,
+    "confidentWrongRate": 0.0293,
+    "usefulCoverage": 0.2617,
+    "confidentPrecision": 0.8993
+   },
+   "mirror": {
+    "pairs": 204,
+    "consistent": 193,
+    "rate": 0.9461,
+    "pairsWithAnAnswer": 103,
+    "rateWithAnAnswer": 0.8932
+   },
+   "rotation": {
+    "pairs": 104,
+    "consistent": 97,
+    "rate": 0.9327,
+    "pairsWithAnAnswer": 89,
+    "rateWithAnAnswer": 0.9213
+   },
+   "counterfactual": {
+    "pairsWithDifferentTruth": 84,
+    "bothCorrect": 34,
+    "sameAnswerToBoth": 20,
+    "bothCorrectRate": 0.4048,
+    "insensitiveRate": 0.2381
+   },
+   "bySet": {
+    "SYNTHETIC": {
+     "total": 180,
+     "correct": 129,
+     "wrong": 20,
+     "unresolved": 31,
+     "correctConfident": 109,
+     "wrongConfident": 13,
+     "coverage": 0.8278,
+     "accuracyAnswered": 0.8658,
+     "confidentWrongRate": 0.0722,
+     "usefulCoverage": 0.6056,
+     "confidentPrecision": 0.8934
+    },
+    "REAL_DEV": {
+     "total": 304,
+     "correct": 104,
+     "wrong": 3,
+     "unresolved": 197,
+     "correctConfident": 10,
+     "wrongConfident": 2,
+     "coverage": 0.352,
+     "accuracyAnswered": 0.972,
+     "confidentWrongRate": 0.0066,
+     "usefulCoverage": 0.0329,
+     "confidentPrecision": 0.8333
+    },
+    "REAL_BLIND8": {
+     "total": 28,
+     "correct": 23,
+     "wrong": 0,
+     "unresolved": 5,
+     "correctConfident": 15,
+     "wrongConfident": 0,
+     "coverage": 0.8214,
+     "accuracyAnswered": 1.0,
+     "confidentWrongRate": 0.0,
+     "usefulCoverage": 0.5357,
+     "confidentPrecision": 1.0
+    }
+   },
+   "byClass": {
+    "SYNTHETIC": {
+     "CANOPY_PERGOLA_VS_WALL": {
+      "total": 48,
+      "correct": 43,
+      "wrong": 0,
+      "unresolved": 5,
+      "correctConfident": 39,
+      "wrongConfident": 0,
+      "coverage": 0.8958,
+      "accuracyAnswered": 1.0,
+      "confidentWrongRate": 0.0,
+      "usefulCoverage": 0.8125,
+      "confidentPrecision": 1.0
+     },
+     "OPENING_VS_PATTERN": {
+      "total": 36,
+      "correct": 29,
+      "wrong": 1,
+      "unresolved": 6,
+      "correctConfident": 26,
+      "wrongConfident": 1,
+      "coverage": 0.8333,
+      "accuracyAnswered": 0.9667,
+      "confidentWrongRate": 0.0278,
+      "usefulCoverage": 0.7222,
+      "confidentPrecision": 0.963
+     },
+     "OPEN_SIDE_VS_OPENINGS": {
+      "total": 24,
+      "correct": 22,
+      "wrong": 1,
+      "unresolved": 1,
+      "correctConfident": 10,
+      "wrongConfident": 0,
+      "coverage": 0.9583,
+      "accuracyAnswered": 0.9565,
+      "confidentWrongRate": 0.0,
+      "usefulCoverage": 0.4167,
+      "confidentPrecision": 1.0
+     },
+     "WALL_CONTINUATION": {
+      "total": 72,
+      "correct": 35,
+      "wrong": 18,
+      "unresolved": 19,
+      "correctConfident": 34,
+      "wrongConfident": 12,
+      "coverage": 0.7361,
+      "accuracyAnswered": 0.6604,
+      "confidentWrongRate": 0.1667,
+      "usefulCoverage": 0.4722,
+      "confidentPrecision": 0.7391
+     }
+    },
+    "REAL_DEV": {
+     "CANOPY_PERGOLA_VS_WALL": {
+      "total": 48,
+      "correct": 12,
+      "wrong": 2,
+      "unresolved": 34,
+      "correctConfident": 6,
+      "wrongConfident": 1,
+      "coverage": 0.2917,
+      "accuracyAnswered": 0.8571,
+      "confidentWrongRate": 0.0208,
+      "usefulCoverage": 0.125,
+      "confidentPrecision": 0.8571
+     },
+     "OPENING_VS_PATTERN": {
+      "total": 126,
+      "correct": 46,
+      "wrong": 0,
+      "unresolved": 80,
+      "correctConfident": 0,
+      "wrongConfident": 0,
+      "coverage": 0.3651,
+      "accuracyAnswered": 1.0,
+      "confidentWrongRate": 0.0,
+      "usefulCoverage": 0.0,
+      "confidentPrecision": null
+     },
+     "WALL_CONTINUATION": {
+      "total": 130,
+      "correct": 46,
+      "wrong": 1,
+      "unresolved": 83,
+      "correctConfident": 4,
+      "wrongConfident": 1,
+      "coverage": 0.3615,
+      "accuracyAnswered": 0.9787,
+      "confidentWrongRate": 0.0077,
+      "usefulCoverage": 0.0308,
+      "confidentPrecision": 0.8
+     }
+    },
+    "REAL_BLIND8": {
+     "OPENING_VS_PATTERN": {
+      "total": 8,
+      "correct": 8,
+      "wrong": 0,
+      "unresolved": 0,
+      "correctConfident": 7,
+      "wrongConfident": 0,
+      "coverage": 1.0,
+      "accuracyAnswered": 1.0,
+      "confidentWrongRate": 0.0,
+      "usefulCoverage": 0.875,
+      "confidentPrecision": 1.0
+     },
+     "OPEN_SIDE_VS_OPENINGS": {
+      "total": 4,
+      "correct": 3,
+      "wrong": 0,
+      "unresolved": 1,
+      "correctConfident": 0,
+      "wrongConfident": 0,
+      "coverage": 0.75,
+      "accuracyAnswered": 1.0,
+      "confidentWrongRate": 0.0,
+      "usefulCoverage": 0.0,
+      "confidentPrecision": null
+     },
+     "WALL_CONTINUATION": {
+      "total": 16,
+      "correct": 12,
+      "wrong": 0,
+      "unresolved": 4,
+      "correctConfident": 8,
+      "wrongConfident": 0,
+      "coverage": 0.75,
+      "accuracyAnswered": 1.0,
+      "confidentWrongRate": 0.0,
+      "usefulCoverage": 0.5,
+      "confidentPrecision": 1.0
+     }
+    }
+   },
+   "summary": "SYNTHETIC 129/149 answered right, 31 unresolved of 180; confident wrong 13; REAL_DEV 104/107 answered right, 197 unresolved of 304; confident wrong 2; REAL_BLIND8 23/23 answered right, 5 unresolved of 28; confident wrong 0",
+   "confidentWrong": "2.9 % (15/512)",
+   "blind8Answers": [
+    {
+     "qid": "real-dom-w-gozdzikowcach-OPEN_SIDE_VS_OPENINGS-0-NORMAL",
+     "cls": "OPEN_SIDE_VS_OPENINGS",
+     "transform": "NORMAL",
+     "expected": "SEVERAL_OPENINGS",
+     "answer": "SEVERAL_OPENINGS",
+     "conf": 0.3909
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-0-NORMAL",
+     "cls": "WALL_CONTINUATION",
+     "transform": "NORMAL",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.8338
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-1-NORMAL",
+     "cls": "WALL_CONTINUATION",
+     "transform": "NORMAL",
+     "expected": "TERMINATES",
+     "answer": "UNRESOLVED",
+     "conf": 1.0
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-OPEN_SIDE_VS_OPENINGS-0-MIRROR",
+     "cls": "OPEN_SIDE_VS_OPENINGS",
+     "transform": "MIRROR",
+     "expected": "SEVERAL_OPENINGS",
+     "answer": "SEVERAL_OPENINGS",
+     "conf": 0.3791
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-0-MIRROR",
+     "cls": "WALL_CONTINUATION",
+     "transform": "MIRROR",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.7867
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-1-MIRROR",
+     "cls": "WALL_CONTINUATION",
+     "transform": "MIRROR",
+     "expected": "TERMINATES",
+     "answer": "UNRESOLVED",
+     "conf": 1.0
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-OPEN_SIDE_VS_OPENINGS-0-ROT90",
+     "cls": "OPEN_SIDE_VS_OPENINGS",
+     "transform": "ROT90",
+     "expected": "SEVERAL_OPENINGS",
+     "answer": "SEVERAL_OPENINGS",
+     "conf": 0.3715
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-0-ROT90",
+     "cls": "WALL_CONTINUATION",
+     "transform": "ROT90",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.7197
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-1-ROT90",
+     "cls": "WALL_CONTINUATION",
+     "transform": "ROT90",
+     "expected": "TERMINATES",
+     "answer": "UNRESOLVED",
+     "conf": 1.0
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-OPEN_SIDE_VS_OPENINGS-0-ROT180",
+     "cls": "OPEN_SIDE_VS_OPENINGS",
+     "transform": "ROT180",
+     "expected": "SEVERAL_OPENINGS",
+     "answer": "UNRESOLVED",
+     "conf": 1.0
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-0-ROT180",
+     "cls": "WALL_CONTINUATION",
+     "transform": "ROT180",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.6954
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-1-ROT180",
+     "cls": "WALL_CONTINUATION",
+     "transform": "ROT180",
+     "expected": "TERMINATES",
+     "answer": "UNRESOLVED",
+     "conf": 1.0
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OPENING_VS_PATTERN-0-NORMAL",
+     "cls": "OPENING_VS_PATTERN",
+     "transform": "NORMAL",
+     "expected": "OPENING",
+     "answer": "OPENING",
+     "conf": 0.9664
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OPENING_VS_PATTERN-1-NORMAL",
+     "cls": "OPENING_VS_PATTERN",
+     "transform": "NORMAL",
+     "expected": "OPENING",
+     "answer": "OPENING",
+     "conf": 0.7835
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-WALL_CONTINUATION-0-NORMAL",
+     "cls": "WALL_CONTINUATION",
+     "transform": "NORMAL",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.9664
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-WALL_CONTINUATION-1-NORMAL",
+     "cls": "WALL_CONTINUATION",
+     "transform": "NORMAL",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.7835
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OPENING_VS_PATTERN-0-MIRROR",
+     "cls": "OPENING_VS_PATTERN",
+     "transform": "MIRROR",
+     "expected": "OPENING",
+     "answer": "OPENING",
+     "conf": 0.9597
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OPENING_VS_PATTERN-1-MIRROR",
+     "cls": "OPENING_VS_PATTERN",
+     "transform": "MIRROR",
+     "expected": "OPENING",
+     "answer": "OPENING",
+     "conf": 0.8378
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-WALL_CONTINUATION-0-MIRROR",
+     "cls": "WALL_CONTINUATION",
+     "transform": "MIRROR",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.9597
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-WALL_CONTINUATION-1-MIRROR",
+     "cls": "WALL_CONTINUATION",
+     "transform": "MIRROR",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.8378
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OPENING_VS_PATTERN-0-ROT90",
+     "cls": "OPENING_VS_PATTERN",
+     "transform": "ROT90",
+     "expected": "OPENING",
+     "answer": "OPENING",
+     "conf": 0.9609
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OPENING_VS_PATTERN-1-ROT90",
+     "cls": "OPENING_VS_PATTERN",
+     "transform": "ROT90",
+     "expected": "OPENING",
+     "answer": "OPENING",
+     "conf": 0.8384
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-WALL_CONTINUATION-0-ROT90",
+     "cls": "WALL_CONTINUATION",
+     "transform": "ROT90",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.9609
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-WALL_CONTINUATION-1-ROT90",
+     "cls": "WALL_CONTINUATION",
+     "transform": "ROT90",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.8384
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OPENING_VS_PATTERN-0-ROT180",
+     "cls": "OPENING_VS_PATTERN",
+     "transform": "ROT180",
+     "expected": "OPENING",
+     "answer": "OPENING",
+     "conf": 0.9573
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OPENING_VS_PATTERN-1-ROT180",
+     "cls": "OPENING_VS_PATTERN",
+     "transform": "ROT180",
+     "expected": "OPENING",
+     "answer": "OPENING",
+     "conf": 0.8378
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-WALL_CONTINUATION-0-ROT180",
+     "cls": "WALL_CONTINUATION",
+     "transform": "ROT180",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.9573
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-WALL_CONTINUATION-1-ROT180",
+     "cls": "WALL_CONTINUATION",
+     "transform": "ROT180",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.8378
+    }
+   ]
+  },
+  "wasmLatency": "1.19 s per 864² frame (median of 3, p95 2.23 s); load 2.8 s",
+  "wasmMemory": "≥ 340 MiB RSS (lower bound)",
+  "realSummary": {
+   "exteriorWallRecall": [
+    0.912,
+    0.9974
+   ],
+   "exteriorWallRecallSourceCv": [
+    0.9777,
+    1.0
+   ],
+   "ADDITIONAL_USEFUL_WALL_EVIDENCE_OVER_SOURCE_CV": [
+    0.0,
+    0.0173
+   ],
+   "additionalOverBandsOnly": [
+    0.0811,
+    0.9923
+   ],
+   "openingAsOpening": [
+    0.7188,
+    0.8959
+   ],
+   "envelopeContinuityThroughOpenings": [
+    0.7352,
+    0.9361
+   ],
+   "falseWallInExclusions": [
+    0.0017,
+    0.0362
+   ],
+   "falseWallInExclusionsSourceCv": [
+    0.0239,
+    0.1096
+   ],
+   "msPerFrame1Thread": [
+    419.4,
+    548.3
+   ]
+  },
+  "verdict": "TRAIN (proof passed its purpose): from-scratch, synthetic-only, 1.56 M params, transfers to real sheets (exterior-wall recall 0.91-1.00) and reads the decisive round-8 gaps (cyklamenach window 97 % opening, gozdzikowcach garage door 75 % opening, porch mouth 100 % background). Adds ~0 exterior-wall coverage over source-cv: its value is the OPENING class at gap seams, not more wall. NOT a referee yet: real gap questions are one-sided (minority 10/12 right, 2 confident wrong), WALL_CONTINUATION rule unresolved on the gozdzikowcach porch mouth (pier read 36 % wall), synthetic open-gap shortcut (12 confident wrong CONTINUES). Basis for 005K."
+ },
+ "segformer": {
+  "arch": "segformer",
+  "params": 3711779,
+  "fp32MB": 14.16,
+  "int8MBEstimate": 3.54,
+  "trainSec": 3290.6,
+  "steps": 1500,
+  "batch": 8,
+  "tile": 256,
+  "trainItems": 360,
+  "pretrained": "NONE (trained from scratch)",
+  "synthetic": {
+   "renders": 108,
+   "wallIoU": 0.9018,
+   "wallF1": 0.9484,
+   "wallPrecision": 0.9244,
+   "wallRecall": 0.9737,
+   "boundaryF1_2px": 0.9787,
+   "openingIoU": 0.743,
+   "openingPrecision": 0.8001,
+   "openingRecall": 0.9124,
+   "continuityThroughOpenings": 0.9614,
+   "falseWallOnTerracesEtc": 0.0115,
+   "falseWallOnDimensionLines": 0.0506,
+   "falseWallOnText": 0.003,
+   "msPerMegapixel1Thread": 2087.4
+  },
+  "real": [
+   {
+    "house": "dom-pod-jarzabem",
+    "msPerFrame1Thread": 2061.7,
+    "frame": [
+     853,
+     853
+    ],
+    "exteriorWallRecall": 0.9279,
+    "exteriorWallRecallSourceCv": 0.9777,
+    "ADDITIONAL_USEFUL_WALL_EVIDENCE_OVER_SOURCE_CV": 0.0179,
+    "exteriorWallRecallSourceCvBandsOnly": 0.6936,
+    "additionalOverBandsOnly": 0.2731,
+    "truthPx": 22442,
+    "openingAsOpening": 0.8056,
+    "envelopeContinuityThroughOpenings": 0.8577,
+    "falseWallInExclusions": 0.0073,
+    "falseWallInExclusionsSourceCv": 0.0239
+   },
+   {
+    "house": "dom-w-arkadiach",
+    "msPerFrame1Thread": 2064.5,
+    "frame": [
+     853,
+     853
+    ],
+    "exteriorWallRecall": 0.9563,
+    "exteriorWallRecallSourceCv": 1.0,
+    "ADDITIONAL_USEFUL_WALL_EVIDENCE_OVER_SOURCE_CV": 0.0,
+    "exteriorWallRecallSourceCvBandsOnly": 0.8708,
+    "additionalOverBandsOnly": 0.1229,
+    "truthPx": 27346,
+    "openingAsOpening": 0.6266,
+    "envelopeContinuityThroughOpenings": 0.6857,
+    "falseWallInExclusions": 0.0075,
+    "falseWallInExclusionsSourceCv": 0.0435
+   },
+   {
+    "house": "dom-w-azaliach",
+    "msPerFrame1Thread": 1985.0,
+    "frame": [
+     853,
+     853
+    ],
+    "exteriorWallRecall": 0.9943,
+    "exteriorWallRecallSourceCv": 1.0,
+    "ADDITIONAL_USEFUL_WALL_EVIDENCE_OVER_SOURCE_CV": 0.0,
+    "exteriorWallRecallSourceCvBandsOnly": 0.0052,
+    "additionalOverBandsOnly": 0.9892,
+    "truthPx": 23672,
+    "openingAsOpening": 0.6218,
+    "envelopeContinuityThroughOpenings": 0.6583,
+    "falseWallInExclusions": 0.0054,
+    "falseWallInExclusionsSourceCv": 0.0519
+   },
+   {
+    "house": "dom-w-helikoniach",
+    "msPerFrame1Thread": 1938.6,
+    "frame": [
+     853,
+     853
+    ],
+    "exteriorWallRecall": 0.9854,
+    "exteriorWallRecallSourceCv": 1.0,
+    "ADDITIONAL_USEFUL_WALL_EVIDENCE_OVER_SOURCE_CV": 0.0,
+    "exteriorWallRecallSourceCvBandsOnly": 0.8876,
+    "additionalOverBandsOnly": 0.1099,
+    "truthPx": 23150,
+    "openingAsOpening": 0.6107,
+    "envelopeContinuityThroughOpenings": 0.629,
+    "falseWallInExclusions": 0.0011,
+    "falseWallInExclusionsSourceCv": 0.1096
+   },
+   {
+    "house": "dom-w-morelach",
+    "msPerFrame1Thread": 2017.2,
+    "frame": [
+     853,
+     853
+    ],
+    "exteriorWallRecall": 0.9848,
+    "exteriorWallRecallSourceCv": 0.9993,
+    "ADDITIONAL_USEFUL_WALL_EVIDENCE_OVER_SOURCE_CV": 0.0006,
+    "exteriorWallRecallSourceCvBandsOnly": 0.8152,
+    "additionalOverBandsOnly": 0.1813,
+    "truthPx": 30716,
+    "openingAsOpening": 0.6757,
+    "envelopeContinuityThroughOpenings": 0.6977,
+    "falseWallInExclusions": 0.0071,
+    "falseWallInExclusionsSourceCv": 0.061
+   },
+   {
+    "house": "dom-w-zurawkach",
+    "msPerFrame1Thread": 1974.0,
+    "frame": [
+     853,
+     853
+    ],
+    "exteriorWallRecall": 0.9566,
+    "exteriorWallRecallSourceCv": 1.0,
+    "ADDITIONAL_USEFUL_WALL_EVIDENCE_OVER_SOURCE_CV": 0.0,
+    "exteriorWallRecallSourceCvBandsOnly": 0.9115,
+    "additionalOverBandsOnly": 0.0841,
+    "truthPx": 25586,
+    "openingAsOpening": 0.6227,
+    "envelopeContinuityThroughOpenings": 0.6635,
+    "falseWallInExclusions": 0.002,
+    "falseWallInExclusionsSourceCv": 0.0291
+   },
+   {
+    "house": "willa-miranda",
+    "msPerFrame1Thread": 1904.1,
+    "frame": [
+     853,
+     853
+    ],
+    "exteriorWallRecall": 0.9533,
+    "exteriorWallRecallSourceCv": 0.9992,
+    "ADDITIONAL_USEFUL_WALL_EVIDENCE_OVER_SOURCE_CV": 0.0,
+    "exteriorWallRecallSourceCvBandsOnly": 0.8263,
+    "additionalOverBandsOnly": 0.1659,
+    "truthPx": 22851,
+    "openingAsOpening": 0.5846,
+    "envelopeContinuityThroughOpenings": 0.6029,
+    "falseWallInExclusions": 0.0077,
+    "falseWallInExclusionsSourceCv": 0.0536
+   }
+  ],
+  "peakRssMB_evalProcess": 968.3,
+  "blind8Regions": {
+   "dom-w-cyklamenach": {
+    "window 180/160 gap (analyzer: DASHED, weak)": {
+     "box": [
+      165,
+      197,
+      255,
+      216
+     ],
+     "background": 0.0,
+     "wall": 0.032,
+     "opening": 0.968
+    },
+    "double door 180/230 gap (analyzer: LEAF_FACE, weak)": {
+     "box": [
+      310,
+      197,
+      397,
+      216
+     ],
+     "background": 0.164,
+     "wall": 0.012,
+     "opening": 0.824
+    },
+    "north wall pieces either side (wall)": {
+     "box": [
+      132,
+      197,
+      165,
+      216
+     ],
+     "background": 0.0,
+     "wall": 1.0,
+     "opening": 0.0
+    },
+    "textured terrace north of the house (no wall)": {
+     "box": [
+      140,
+      130,
+      560,
+      188
+     ],
+     "background": 0.975,
+     "wall": 0.0,
+     "opening": 0.025
+    }
+   },
+   "dom-w-gozdzikowcach": {
+    "garage door 325/225 gap (analyzer: part of one OPEN_SIDE)": {
+     "box": [
+      466,
+      576,
+      589,
+      592
+     ],
+     "background": 0.816,
+     "wall": 0.0,
+     "opening": 0.184
+    },
+    "porch mouth on the front line (open, no wall)": {
+     "box": [
+      313,
+      560,
+      416,
+      597
+     ],
+     "background": 0.994,
+     "wall": 0.0,
+     "opening": 0.006
+    },
+    "vestibule front wall left of the entrance door (wall)": {
+     "box": [
+      338,
+      541,
+      376,
+      556
+     ],
+     "background": 0.005,
+     "wall": 0.973,
+     "opening": 0.022
+    },
+    "entrance door 105/210 in the vestibule wall (opening)": {
+     "box": [
+      378,
+      541,
+      416,
+      556
+     ],
+     "background": 0.003,
+     "wall": 0.0,
+     "opening": 0.997
+    },
+    "pier between porch and garage (wall)": {
+     "box": [
+      418,
+      541,
+      434,
+      590
+     ],
+     "background": 0.621,
+     "wall": 0.379,
+     "opening": 0.0
+    }
+   }
+  },
+  "referee": {
+   "all": {
+    "total": 512,
+    "correct": 285,
+    "wrong": 32,
+    "unresolved": 195,
+    "correctConfident": 147,
+    "wrongConfident": 24,
+    "coverage": 0.6191,
+    "accuracyAnswered": 0.8991,
+    "confidentWrongRate": 0.0469,
+    "usefulCoverage": 0.2871,
+    "confidentPrecision": 0.8596
+   },
+   "mirror": {
+    "pairs": 204,
+    "consistent": 193,
+    "rate": 0.9461,
+    "pairsWithAnAnswer": 123,
+    "rateWithAnAnswer": 0.9106
+   },
+   "rotation": {
+    "pairs": 104,
+    "consistent": 96,
+    "rate": 0.9231,
+    "pairsWithAnAnswer": 89,
+    "rateWithAnAnswer": 0.9101
+   },
+   "counterfactual": {
+    "pairsWithDifferentTruth": 84,
+    "bothCorrect": 45,
+    "sameAnswerToBoth": 8,
+    "bothCorrectRate": 0.5357,
+    "insensitiveRate": 0.0952
+   },
+   "bySet": {
+    "SYNTHETIC": {
+     "total": 180,
+     "correct": 141,
+     "wrong": 8,
+     "unresolved": 31,
+     "correctConfident": 119,
+     "wrongConfident": 0,
+     "coverage": 0.8278,
+     "accuracyAnswered": 0.9463,
+     "confidentWrongRate": 0.0,
+     "usefulCoverage": 0.6611,
+     "confidentPrecision": 1.0
+    },
+    "REAL_DEV": {
+     "total": 304,
+     "correct": 128,
+     "wrong": 20,
+     "unresolved": 156,
+     "correctConfident": 14,
+     "wrongConfident": 20,
+     "coverage": 0.4868,
+     "accuracyAnswered": 0.8649,
+     "confidentWrongRate": 0.0658,
+     "usefulCoverage": 0.0461,
+     "confidentPrecision": 0.4118
+    },
+    "REAL_BLIND8": {
+     "total": 28,
+     "correct": 16,
+     "wrong": 4,
+     "unresolved": 8,
+     "correctConfident": 14,
+     "wrongConfident": 4,
+     "coverage": 0.7143,
+     "accuracyAnswered": 0.8,
+     "confidentWrongRate": 0.1429,
+     "usefulCoverage": 0.5,
+     "confidentPrecision": 0.7778
+    }
+   },
+   "byClass": {
+    "SYNTHETIC": {
+     "CANOPY_PERGOLA_VS_WALL": {
+      "total": 48,
+      "correct": 48,
+      "wrong": 0,
+      "unresolved": 0,
+      "correctConfident": 48,
+      "wrongConfident": 0,
+      "coverage": 1.0,
+      "accuracyAnswered": 1.0,
+      "confidentWrongRate": 0.0,
+      "usefulCoverage": 1.0,
+      "confidentPrecision": 1.0
+     },
+     "OPENING_VS_PATTERN": {
+      "total": 36,
+      "correct": 33,
+      "wrong": 0,
+      "unresolved": 3,
+      "correctConfident": 29,
+      "wrongConfident": 0,
+      "coverage": 0.9167,
+      "accuracyAnswered": 1.0,
+      "confidentWrongRate": 0.0,
+      "usefulCoverage": 0.8056,
+      "confidentPrecision": 1.0
+     },
+     "OPEN_SIDE_VS_OPENINGS": {
+      "total": 24,
+      "correct": 18,
+      "wrong": 0,
+      "unresolved": 6,
+      "correctConfident": 6,
+      "wrongConfident": 0,
+      "coverage": 0.75,
+      "accuracyAnswered": 1.0,
+      "confidentWrongRate": 0.0,
+      "usefulCoverage": 0.25,
+      "confidentPrecision": 1.0
+     },
+     "WALL_CONTINUATION": {
+      "total": 72,
+      "correct": 42,
+      "wrong": 8,
+      "unresolved": 22,
+      "correctConfident": 36,
+      "wrongConfident": 0,
+      "coverage": 0.6944,
+      "accuracyAnswered": 0.84,
+      "confidentWrongRate": 0.0,
+      "usefulCoverage": 0.5,
+      "confidentPrecision": 1.0
+     }
+    },
+    "REAL_DEV": {
+     "CANOPY_PERGOLA_VS_WALL": {
+      "total": 48,
+      "correct": 16,
+      "wrong": 0,
+      "unresolved": 32,
+      "correctConfident": 10,
+      "wrongConfident": 0,
+      "coverage": 0.3333,
+      "accuracyAnswered": 1.0,
+      "confidentWrongRate": 0.0,
+      "usefulCoverage": 0.2083,
+      "confidentPrecision": 1.0
+     },
+     "OPENING_VS_PATTERN": {
+      "total": 126,
+      "correct": 57,
+      "wrong": 8,
+      "unresolved": 61,
+      "correctConfident": 0,
+      "wrongConfident": 8,
+      "coverage": 0.5159,
+      "accuracyAnswered": 0.8769,
+      "confidentWrongRate": 0.0635,
+      "usefulCoverage": 0.0,
+      "confidentPrecision": 0.0
+     },
+     "WALL_CONTINUATION": {
+      "total": 130,
+      "correct": 55,
+      "wrong": 12,
+      "unresolved": 63,
+      "correctConfident": 4,
+      "wrongConfident": 12,
+      "coverage": 0.5154,
+      "accuracyAnswered": 0.8209,
+      "confidentWrongRate": 0.0923,
+      "usefulCoverage": 0.0308,
+      "confidentPrecision": 0.25
+     }
+    },
+    "REAL_BLIND8": {
+     "OPENING_VS_PATTERN": {
+      "total": 8,
+      "correct": 8,
+      "wrong": 0,
+      "unresolved": 0,
+      "correctConfident": 7,
+      "wrongConfident": 0,
+      "coverage": 1.0,
+      "accuracyAnswered": 1.0,
+      "confidentWrongRate": 0.0,
+      "usefulCoverage": 0.875,
+      "confidentPrecision": 1.0
+     },
+     "OPEN_SIDE_VS_OPENINGS": {
+      "total": 4,
+      "correct": 0,
+      "wrong": 0,
+      "unresolved": 4,
+      "correctConfident": 0,
+      "wrongConfident": 0,
+      "coverage": 0.0,
+      "accuracyAnswered": null,
+      "confidentWrongRate": 0.0,
+      "usefulCoverage": 0.0,
+      "confidentPrecision": null
+     },
+     "WALL_CONTINUATION": {
+      "total": 16,
+      "correct": 8,
+      "wrong": 4,
+      "unresolved": 4,
+      "correctConfident": 7,
+      "wrongConfident": 4,
+      "coverage": 0.75,
+      "accuracyAnswered": 0.6667,
+      "confidentWrongRate": 0.25,
+      "usefulCoverage": 0.4375,
+      "confidentPrecision": 0.6364
+     }
+    }
+   },
+   "summary": "SYNTHETIC 141/149 answered right, 31 unresolved of 180; confident wrong 0; REAL_DEV 128/148 answered right, 156 unresolved of 304; confident wrong 20; REAL_BLIND8 16/20 answered right, 8 unresolved of 28; confident wrong 4",
+   "confidentWrong": "4.7 % (24/512)",
+   "blind8Answers": [
+    {
+     "qid": "real-dom-w-gozdzikowcach-OPEN_SIDE_VS_OPENINGS-0-NORMAL",
+     "cls": "OPEN_SIDE_VS_OPENINGS",
+     "transform": "NORMAL",
+     "expected": "SEVERAL_OPENINGS",
+     "answer": "UNRESOLVED",
+     "conf": 1.0
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-0-NORMAL",
+     "cls": "WALL_CONTINUATION",
+     "transform": "NORMAL",
+     "expected": "CONTINUES",
+     "answer": "TERMINATES",
+     "conf": 0.8011
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-1-NORMAL",
+     "cls": "WALL_CONTINUATION",
+     "transform": "NORMAL",
+     "expected": "TERMINATES",
+     "answer": "UNRESOLVED",
+     "conf": 1.0
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-OPEN_SIDE_VS_OPENINGS-0-MIRROR",
+     "cls": "OPEN_SIDE_VS_OPENINGS",
+     "transform": "MIRROR",
+     "expected": "SEVERAL_OPENINGS",
+     "answer": "UNRESOLVED",
+     "conf": 1.0
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-0-MIRROR",
+     "cls": "WALL_CONTINUATION",
+     "transform": "MIRROR",
+     "expected": "CONTINUES",
+     "answer": "TERMINATES",
+     "conf": 0.8472
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-1-MIRROR",
+     "cls": "WALL_CONTINUATION",
+     "transform": "MIRROR",
+     "expected": "TERMINATES",
+     "answer": "UNRESOLVED",
+     "conf": 1.0
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-OPEN_SIDE_VS_OPENINGS-0-ROT90",
+     "cls": "OPEN_SIDE_VS_OPENINGS",
+     "transform": "ROT90",
+     "expected": "SEVERAL_OPENINGS",
+     "answer": "UNRESOLVED",
+     "conf": 1.0
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-0-ROT90",
+     "cls": "WALL_CONTINUATION",
+     "transform": "ROT90",
+     "expected": "CONTINUES",
+     "answer": "TERMINATES",
+     "conf": 0.934
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-1-ROT90",
+     "cls": "WALL_CONTINUATION",
+     "transform": "ROT90",
+     "expected": "TERMINATES",
+     "answer": "UNRESOLVED",
+     "conf": 1.0
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-OPEN_SIDE_VS_OPENINGS-0-ROT180",
+     "cls": "OPEN_SIDE_VS_OPENINGS",
+     "transform": "ROT180",
+     "expected": "SEVERAL_OPENINGS",
+     "answer": "UNRESOLVED",
+     "conf": 1.0
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-0-ROT180",
+     "cls": "WALL_CONTINUATION",
+     "transform": "ROT180",
+     "expected": "CONTINUES",
+     "answer": "TERMINATES",
+     "conf": 0.8829
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-1-ROT180",
+     "cls": "WALL_CONTINUATION",
+     "transform": "ROT180",
+     "expected": "TERMINATES",
+     "answer": "UNRESOLVED",
+     "conf": 1.0
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OPENING_VS_PATTERN-0-NORMAL",
+     "cls": "OPENING_VS_PATTERN",
+     "transform": "NORMAL",
+     "expected": "OPENING",
+     "answer": "OPENING",
+     "conf": 0.9676
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OPENING_VS_PATTERN-1-NORMAL",
+     "cls": "OPENING_VS_PATTERN",
+     "transform": "NORMAL",
+     "expected": "OPENING",
+     "answer": "OPENING",
+     "conf": 0.8737
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-WALL_CONTINUATION-0-NORMAL",
+     "cls": "WALL_CONTINUATION",
+     "transform": "NORMAL",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.9676
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-WALL_CONTINUATION-1-NORMAL",
+     "cls": "WALL_CONTINUATION",
+     "transform": "NORMAL",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.8737
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OPENING_VS_PATTERN-0-MIRROR",
+     "cls": "OPENING_VS_PATTERN",
+     "transform": "MIRROR",
+     "expected": "OPENING",
+     "answer": "OPENING",
+     "conf": 0.9658
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OPENING_VS_PATTERN-1-MIRROR",
+     "cls": "OPENING_VS_PATTERN",
+     "transform": "MIRROR",
+     "expected": "OPENING",
+     "answer": "OPENING",
+     "conf": 0.803
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-WALL_CONTINUATION-0-MIRROR",
+     "cls": "WALL_CONTINUATION",
+     "transform": "MIRROR",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.9658
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-WALL_CONTINUATION-1-MIRROR",
+     "cls": "WALL_CONTINUATION",
+     "transform": "MIRROR",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.803
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OPENING_VS_PATTERN-0-ROT90",
+     "cls": "OPENING_VS_PATTERN",
+     "transform": "ROT90",
+     "expected": "OPENING",
+     "answer": "OPENING",
+     "conf": 0.9628
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OPENING_VS_PATTERN-1-ROT90",
+     "cls": "OPENING_VS_PATTERN",
+     "transform": "ROT90",
+     "expected": "OPENING",
+     "answer": "OPENING",
+     "conf": 0.7854
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-WALL_CONTINUATION-0-ROT90",
+     "cls": "WALL_CONTINUATION",
+     "transform": "ROT90",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.9628
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-WALL_CONTINUATION-1-ROT90",
+     "cls": "WALL_CONTINUATION",
+     "transform": "ROT90",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.7854
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OPENING_VS_PATTERN-0-ROT180",
+     "cls": "OPENING_VS_PATTERN",
+     "transform": "ROT180",
+     "expected": "OPENING",
+     "answer": "OPENING",
+     "conf": 0.9676
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OPENING_VS_PATTERN-1-ROT180",
+     "cls": "OPENING_VS_PATTERN",
+     "transform": "ROT180",
+     "expected": "OPENING",
+     "answer": "OPENING",
+     "conf": 0.834
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-WALL_CONTINUATION-0-ROT180",
+     "cls": "WALL_CONTINUATION",
+     "transform": "ROT180",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.9676
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-WALL_CONTINUATION-1-ROT180",
+     "cls": "WALL_CONTINUATION",
+     "transform": "ROT180",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.834
+    }
+   ]
+  },
+  "wasmLatency": "4.46 s per 864² frame (median of 3, p95 6.51 s); load 2.0 s",
+  "wasmMemory": "≥ 928 MiB RSS (lower bound)",
+  "realSummary": {
+   "exteriorWallRecall": [
+    0.9279,
+    0.9943
+   ],
+   "exteriorWallRecallSourceCv": [
+    0.9777,
+    1.0
+   ],
+   "ADDITIONAL_USEFUL_WALL_EVIDENCE_OVER_SOURCE_CV": [
+    0.0,
+    0.0179
+   ],
+   "additionalOverBandsOnly": [
+    0.0841,
+    0.9892
+   ],
+   "openingAsOpening": [
+    0.5846,
+    0.8056
+   ],
+   "envelopeContinuityThroughOpenings": [
+    0.6029,
+    0.8577
+   ],
+   "falseWallInExclusions": [
+    0.0011,
+    0.0077
+   ],
+   "falseWallInExclusionsSourceCv": [
+    0.0239,
+    0.1096
+   ],
+   "msPerFrame1Thread": [
+    1904.1,
+    2064.5
+   ]
+  },
+  "verdict": "DEFER: clean-room MiT-B0 (3.71 M) at the same budget is slower (4.5 s vs 1.2 s per 864^2 frame in WASM, >= 928 vs >= 340 MiB), reads fewer real openings (0.58-0.81 vs 0.72-0.90) and misses the gozdzikowcach garage door (82 % background); fewer false walls inside exclusions (<= 0.8 % vs <= 3.6 %) and no synthetic confident-wrong, but 20 confident-wrong on REAL_DEV gap questions. Revisit only if 005K's UNet cannot meet the false-wall gate."
+ },
+ "routeCPilot": {
+  "params": 1065796,
+  "summary": "SYNTHETIC 574/672 answered right, 0 unresolved of 672; confident wrong 18; REAL_DEV 280/564 answered right, 0 unresolved of 564; confident wrong 192; REAL_BLIND8 48/68 answered right, 0 unresolved of 68; confident wrong 5",
+  "confidentWrong": "16.5 % (215/1304)",
+  "referee": {
+   "all": {
+    "total": 1304,
+    "correct": 902,
+    "wrong": 402,
+    "unresolved": 0,
+    "correctConfident": 675,
+    "wrongConfident": 215,
+    "coverage": 1.0,
+    "accuracyAnswered": 0.6917,
+    "confidentWrongRate": 0.1649,
+    "usefulCoverage": 0.5176,
+    "confidentPrecision": 0.7584
+   },
+   "mirror": {
+    "pairs": 467,
+    "consistent": 410,
+    "rate": 0.8779,
+    "pairsWithAnAnswer": 467,
+    "rateWithAnAnswer": 0.8779
+   },
+   "rotation": {
+    "pairs": 370,
+    "consistent": 330,
+    "rate": 0.8919,
+    "pairsWithAnAnswer": 370,
+    "rateWithAnAnswer": 0.8919
+   },
+   "counterfactual": {
+    "pairsWithDifferentTruth": 288,
+    "bothCorrect": 220,
+    "sameAnswerToBoth": 62,
+    "bothCorrectRate": 0.7639,
+    "insensitiveRate": 0.2153
+   },
+   "bySet": {
+    "SYNTHETIC": {
+     "total": 672,
+     "correct": 574,
+     "wrong": 98,
+     "unresolved": 0,
+     "correctConfident": 480,
+     "wrongConfident": 18,
+     "coverage": 1.0,
+     "accuracyAnswered": 0.8542,
+     "confidentWrongRate": 0.0268,
+     "usefulCoverage": 0.7143,
+     "confidentPrecision": 0.9639
+    },
+    "REAL_DEV": {
+     "total": 564,
+     "correct": 280,
+     "wrong": 284,
+     "unresolved": 0,
+     "correctConfident": 168,
+     "wrongConfident": 192,
+     "coverage": 1.0,
+     "accuracyAnswered": 0.4965,
+     "confidentWrongRate": 0.3404,
+     "usefulCoverage": 0.2979,
+     "confidentPrecision": 0.4667
+    },
+    "REAL_BLIND8": {
+     "total": 68,
+     "correct": 48,
+     "wrong": 20,
+     "unresolved": 0,
+     "correctConfident": 27,
+     "wrongConfident": 5,
+     "coverage": 1.0,
+     "accuracyAnswered": 0.7059,
+     "confidentWrongRate": 0.0735,
+     "usefulCoverage": 0.3971,
+     "confidentPrecision": 0.8438
+    }
+   },
+   "byClass": {
+    "SYNTHETIC": {
+     "BAY_OR_RISALIT": {
+      "total": 24,
+      "correct": 24,
+      "wrong": 0,
+      "unresolved": 0,
+      "correctConfident": 23,
+      "wrongConfident": 0,
+      "coverage": 1.0,
+      "accuracyAnswered": 1.0,
+      "confidentWrongRate": 0.0,
+      "usefulCoverage": 0.9583,
+      "confidentPrecision": 1.0
+     },
+     "BODY_REGION": {
+      "total": 120,
+      "correct": 119,
+      "wrong": 1,
+      "unresolved": 0,
+      "correctConfident": 107,
+      "wrongConfident": 0,
+      "coverage": 1.0,
+      "accuracyAnswered": 0.9917,
+      "confidentWrongRate": 0.0,
+      "usefulCoverage": 0.8917,
+      "confidentPrecision": 1.0
+     },
+     "CANOPY_PERGOLA_VS_WALL": {
+      "total": 48,
+      "correct": 46,
+      "wrong": 2,
+      "unresolved": 0,
+      "correctConfident": 46,
+      "wrongConfident": 1,
+      "coverage": 1.0,
+      "accuracyAnswered": 0.9583,
+      "confidentWrongRate": 0.0208,
+      "usefulCoverage": 0.9583,
+      "confidentPrecision": 0.9787
+     },
+     "COLUMN_VS_WALL": {
+      "total": 48,
+      "correct": 48,
+      "wrong": 0,
+      "unresolved": 0,
+      "correctConfident": 48,
+      "wrongConfident": 0,
+      "coverage": 1.0,
+      "accuracyAnswered": 1.0,
+      "confidentWrongRate": 0.0,
+      "usefulCoverage": 1.0,
+      "confidentPrecision": 1.0
+     },
+     "DIMENSION_LINE_VS_BUILDING_LINE": {
+      "total": 36,
+      "correct": 28,
+      "wrong": 8,
+      "unresolved": 0,
+      "correctConfident": 25,
+      "wrongConfident": 2,
+      "coverage": 1.0,
+      "accuracyAnswered": 0.7778,
+      "confidentWrongRate": 0.0556,
+      "usefulCoverage": 0.6944,
+      "confidentPrecision": 0.9259
+     },
+     "GARAGE_BODY": {
+      "total": 96,
+      "correct": 73,
+      "wrong": 23,
+      "unresolved": 0,
+      "correctConfident": 55,
+      "wrongConfident": 5,
+      "coverage": 1.0,
+      "accuracyAnswered": 0.7604,
+      "confidentWrongRate": 0.0521,
+      "usefulCoverage": 0.5729,
+      "confidentPrecision": 0.9167
+     },
+     "OPENING_VS_PATTERN": {
+      "total": 36,
+      "correct": 27,
+      "wrong": 9,
+      "unresolved": 0,
+      "correctConfident": 25,
+      "wrongConfident": 5,
+      "coverage": 1.0,
+      "accuracyAnswered": 0.75,
+      "confidentWrongRate": 0.1389,
+      "usefulCoverage": 0.6944,
+      "confidentPrecision": 0.8333
+     },
+     "OPEN_SIDE_VS_OPENINGS": {
+      "total": 24,
+      "correct": 24,
+      "wrong": 0,
+      "unresolved": 0,
+      "correctConfident": 20,
+      "wrongConfident": 0,
+      "coverage": 1.0,
+      "accuracyAnswered": 1.0,
+      "confidentWrongRate": 0.0,
+      "usefulCoverage": 0.8333,
+      "confidentPrecision": 1.0
+     },
+     "OUTER_BOUNDARY_A_OR_B": {
+      "total": 96,
+      "correct": 48,
+      "wrong": 48,
+      "unresolved": 0,
+      "correctConfident": 16,
+      "wrongConfident": 2,
+      "coverage": 1.0,
+      "accuracyAnswered": 0.5,
+      "confidentWrongRate": 0.0208,
+      "usefulCoverage": 0.1667,
+      "confidentPrecision": 0.8889
+     },
+     "STOREY_COVERAGE": {
+      "total": 24,
+      "correct": 24,
+      "wrong": 0,
+      "unresolved": 0,
+      "correctConfident": 19,
+      "wrongConfident": 0,
+      "coverage": 1.0,
+      "accuracyAnswered": 1.0,
+      "confidentWrongRate": 0.0,
+      "usefulCoverage": 0.7917,
+      "confidentPrecision": 1.0
+     },
+     "TERRACE_VS_BODY": {
+      "total": 24,
+      "correct": 20,
+      "wrong": 4,
+      "unresolved": 0,
+      "correctConfident": 20,
+      "wrongConfident": 3,
+      "coverage": 1.0,
+      "accuracyAnswered": 0.8333,
+      "confidentWrongRate": 0.125,
+      "usefulCoverage": 0.8333,
+      "confidentPrecision": 0.8696
+     },
+     "VOID_VS_OUTSIDE": {
+      "total": 24,
+      "correct": 24,
+      "wrong": 0,
+      "unresolved": 0,
+      "correctConfident": 24,
+      "wrongConfident": 0,
+      "coverage": 1.0,
+      "accuracyAnswered": 1.0,
+      "confidentWrongRate": 0.0,
+      "usefulCoverage": 1.0,
+      "confidentPrecision": 1.0
+     },
+     "WALL_CONTINUATION": {
+      "total": 72,
+      "correct": 69,
+      "wrong": 3,
+      "unresolved": 0,
+      "correctConfident": 52,
+      "wrongConfident": 0,
+      "coverage": 1.0,
+      "accuracyAnswered": 0.9583,
+      "confidentWrongRate": 0.0,
+      "usefulCoverage": 0.7222,
+      "confidentPrecision": 1.0
+     }
+    },
+    "REAL_DEV": {
+     "BAY_OR_RISALIT": {
+      "total": 4,
+      "correct": 3,
+      "wrong": 1,
+      "unresolved": 0,
+      "correctConfident": 2,
+      "wrongConfident": 0,
+      "coverage": 1.0,
+      "accuracyAnswered": 0.75,
+      "confidentWrongRate": 0.0,
+      "usefulCoverage": 0.5,
+      "confidentPrecision": 1.0
+     },
+     "BODY_REGION": {
+      "total": 114,
+      "correct": 61,
+      "wrong": 53,
+      "unresolved": 0,
+      "correctConfident": 52,
+      "wrongConfident": 46,
+      "coverage": 1.0,
+      "accuracyAnswered": 0.5351,
+      "confidentWrongRate": 0.4035,
+      "usefulCoverage": 0.4561,
+      "confidentPrecision": 0.5306
+     },
+     "CANOPY_PERGOLA_VS_WALL": {
+      "total": 48,
+      "correct": 10,
+      "wrong": 38,
+      "unresolved": 0,
+      "correctConfident": 9,
+      "wrongConfident": 34,
+      "coverage": 1.0,
+      "accuracyAnswered": 0.2083,
+      "confidentWrongRate": 0.7083,
+      "usefulCoverage": 0.1875,
+      "confidentPrecision": 0.2093
+     },
+     "GARAGE_BODY": {
+      "total": 8,
+      "correct": 3,
+      "wrong": 5,
+      "unresolved": 0,
+      "correctConfident": 0,
+      "wrongConfident": 3,
+      "coverage": 1.0,
+      "accuracyAnswered": 0.375,
+      "confidentWrongRate": 0.375,
+      "usefulCoverage": 0.0,
+      "confidentPrecision": 0.0
+     },
+     "OPENING_VS_PATTERN": {
+      "total": 126,
+      "correct": 45,
+      "wrong": 81,
+      "unresolved": 0,
+      "correctConfident": 21,
+      "wrongConfident": 55,
+      "coverage": 1.0,
+      "accuracyAnswered": 0.3571,
+      "confidentWrongRate": 0.4365,
+      "usefulCoverage": 0.1667,
+      "confidentPrecision": 0.2763
+     },
+     "OUTER_BOUNDARY_A_OR_B": {
+      "total": 36,
+      "correct": 15,
+      "wrong": 21,
+      "unresolved": 0,
+      "correctConfident": 7,
+      "wrongConfident": 8,
+      "coverage": 1.0,
+      "accuracyAnswered": 0.4167,
+      "confidentWrongRate": 0.2222,
+      "usefulCoverage": 0.1944,
+      "confidentPrecision": 0.4667
+     },
+     "TERRACE_VS_BODY": {
+      "total": 98,
+      "correct": 39,
+      "wrong": 59,
+      "unresolved": 0,
+      "correctConfident": 29,
+      "wrongConfident": 45,
+      "coverage": 1.0,
+      "accuracyAnswered": 0.398,
+      "confidentWrongRate": 0.4592,
+      "usefulCoverage": 0.2959,
+      "confidentPrecision": 0.3919
+     },
+     "WALL_CONTINUATION": {
+      "total": 130,
+      "correct": 104,
+      "wrong": 26,
+      "unresolved": 0,
+      "correctConfident": 48,
+      "wrongConfident": 1,
+      "coverage": 1.0,
+      "accuracyAnswered": 0.8,
+      "confidentWrongRate": 0.0077,
+      "usefulCoverage": 0.3692,
+      "confidentPrecision": 0.9796
+     }
+    },
+    "REAL_BLIND8": {
+     "BODY_REGION": {
+      "total": 8,
+      "correct": 8,
+      "wrong": 0,
+      "unresolved": 0,
+      "correctConfident": 8,
+      "wrongConfident": 0,
+      "coverage": 1.0,
+      "accuracyAnswered": 1.0,
+      "confidentWrongRate": 0.0,
+      "usefulCoverage": 1.0,
+      "confidentPrecision": 1.0
+     },
+     "GARAGE_BODY": {
+      "total": 4,
+      "correct": 4,
+      "wrong": 0,
+      "unresolved": 0,
+      "correctConfident": 2,
+      "wrongConfident": 0,
+      "coverage": 1.0,
+      "accuracyAnswered": 1.0,
+      "confidentWrongRate": 0.0,
+      "usefulCoverage": 0.5,
+      "confidentPrecision": 1.0
+     },
+     "OPENING_VS_PATTERN": {
+      "total": 8,
+      "correct": 5,
+      "wrong": 3,
+      "unresolved": 0,
+      "correctConfident": 4,
+      "wrongConfident": 1,
+      "coverage": 1.0,
+      "accuracyAnswered": 0.625,
+      "confidentWrongRate": 0.125,
+      "usefulCoverage": 0.5,
+      "confidentPrecision": 0.8
+     },
+     "OPEN_SIDE_VS_OPENINGS": {
+      "total": 4,
+      "correct": 4,
+      "wrong": 0,
+      "unresolved": 0,
+      "correctConfident": 0,
+      "wrongConfident": 0,
+      "coverage": 1.0,
+      "accuracyAnswered": 1.0,
+      "confidentWrongRate": 0.0,
+      "usefulCoverage": 0.0,
+      "confidentPrecision": null
+     },
+     "OUTER_BOUNDARY_A_OR_B": {
+      "total": 16,
+      "correct": 9,
+      "wrong": 7,
+      "unresolved": 0,
+      "correctConfident": 3,
+      "wrongConfident": 0,
+      "coverage": 1.0,
+      "accuracyAnswered": 0.5625,
+      "confidentWrongRate": 0.0,
+      "usefulCoverage": 0.1875,
+      "confidentPrecision": 1.0
+     },
+     "TERRACE_VS_BODY": {
+      "total": 12,
+      "correct": 7,
+      "wrong": 5,
+      "unresolved": 0,
+      "correctConfident": 4,
+      "wrongConfident": 4,
+      "coverage": 1.0,
+      "accuracyAnswered": 0.5833,
+      "confidentWrongRate": 0.3333,
+      "usefulCoverage": 0.3333,
+      "confidentPrecision": 0.5
+     },
+     "WALL_CONTINUATION": {
+      "total": 16,
+      "correct": 11,
+      "wrong": 5,
+      "unresolved": 0,
+      "correctConfident": 6,
+      "wrongConfident": 0,
+      "coverage": 1.0,
+      "accuracyAnswered": 0.6875,
+      "confidentWrongRate": 0.0,
+      "usefulCoverage": 0.375,
+      "confidentPrecision": 1.0
+     }
+    }
+   },
+   "summary": "SYNTHETIC 574/672 answered right, 0 unresolved of 672; confident wrong 18; REAL_DEV 280/564 answered right, 0 unresolved of 564; confident wrong 192; REAL_BLIND8 48/68 answered right, 0 unresolved of 68; confident wrong 5",
+   "confidentWrong": "16.5 % (215/1304)",
+   "blind8Answers": [
+    {
+     "qid": "real-dom-w-gozdzikowcach-BODY_REGION-0-NORMAL",
+     "cls": "BODY_REGION",
+     "transform": "NORMAL",
+     "expected": "YES",
+     "answer": "YES",
+     "conf": 0.95192
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-OPEN_SIDE_VS_OPENINGS-0-NORMAL",
+     "cls": "OPEN_SIDE_VS_OPENINGS",
+     "transform": "NORMAL",
+     "expected": "SEVERAL_OPENINGS",
+     "answer": "SEVERAL_OPENINGS",
+     "conf": 0.54511
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-0-NORMAL",
+     "cls": "WALL_CONTINUATION",
+     "transform": "NORMAL",
+     "expected": "CONTINUES",
+     "answer": "TERMINATES",
+     "conf": 0.63105
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-1-NORMAL",
+     "cls": "WALL_CONTINUATION",
+     "transform": "NORMAL",
+     "expected": "TERMINATES",
+     "answer": "TERMINATES",
+     "conf": 0.75473
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-TERRACE_VS_BODY-0-NORMAL",
+     "cls": "TERRACE_VS_BODY",
+     "transform": "NORMAL",
+     "expected": "EXTERNAL",
+     "answer": "EXTERNAL",
+     "conf": 0.83588
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-GARAGE_BODY-0-NORMAL",
+     "cls": "GARAGE_BODY",
+     "transform": "NORMAL",
+     "expected": "YES",
+     "answer": "YES",
+     "conf": 0.57957
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-OUTER_BOUNDARY_A_OR_B-0-NORMAL",
+     "cls": "OUTER_BOUNDARY_A_OR_B",
+     "transform": "NORMAL",
+     "expected": "B",
+     "answer": "A",
+     "conf": 0.70769
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-OUTER_BOUNDARY_A_OR_B-1-NORMAL",
+     "cls": "OUTER_BOUNDARY_A_OR_B",
+     "transform": "NORMAL",
+     "expected": "A",
+     "answer": "A",
+     "conf": 0.82175
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-BODY_REGION-0-MIRROR",
+     "cls": "BODY_REGION",
+     "transform": "MIRROR",
+     "expected": "YES",
+     "answer": "YES",
+     "conf": 0.98342
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-OPEN_SIDE_VS_OPENINGS-0-MIRROR",
+     "cls": "OPEN_SIDE_VS_OPENINGS",
+     "transform": "MIRROR",
+     "expected": "SEVERAL_OPENINGS",
+     "answer": "SEVERAL_OPENINGS",
+     "conf": 0.7467
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-0-MIRROR",
+     "cls": "WALL_CONTINUATION",
+     "transform": "MIRROR",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.63377
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-1-MIRROR",
+     "cls": "WALL_CONTINUATION",
+     "transform": "MIRROR",
+     "expected": "TERMINATES",
+     "answer": "CONTINUES",
+     "conf": 0.6434
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-TERRACE_VS_BODY-0-MIRROR",
+     "cls": "TERRACE_VS_BODY",
+     "transform": "MIRROR",
+     "expected": "EXTERNAL",
+     "answer": "EXTERNAL",
+     "conf": 0.96651
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-GARAGE_BODY-0-MIRROR",
+     "cls": "GARAGE_BODY",
+     "transform": "MIRROR",
+     "expected": "YES",
+     "answer": "YES",
+     "conf": 0.82461
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-OUTER_BOUNDARY_A_OR_B-0-MIRROR",
+     "cls": "OUTER_BOUNDARY_A_OR_B",
+     "transform": "MIRROR",
+     "expected": "B",
+     "answer": "A",
+     "conf": 0.76094
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-OUTER_BOUNDARY_A_OR_B-1-MIRROR",
+     "cls": "OUTER_BOUNDARY_A_OR_B",
+     "transform": "MIRROR",
+     "expected": "A",
+     "answer": "A",
+     "conf": 0.83944
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-BODY_REGION-0-ROT90",
+     "cls": "BODY_REGION",
+     "transform": "ROT90",
+     "expected": "YES",
+     "answer": "YES",
+     "conf": 0.84823
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-OPEN_SIDE_VS_OPENINGS-0-ROT90",
+     "cls": "OPEN_SIDE_VS_OPENINGS",
+     "transform": "ROT90",
+     "expected": "SEVERAL_OPENINGS",
+     "answer": "SEVERAL_OPENINGS",
+     "conf": 0.61284
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-0-ROT90",
+     "cls": "WALL_CONTINUATION",
+     "transform": "ROT90",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.74151
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-1-ROT90",
+     "cls": "WALL_CONTINUATION",
+     "transform": "ROT90",
+     "expected": "TERMINATES",
+     "answer": "CONTINUES",
+     "conf": 0.74841
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-TERRACE_VS_BODY-0-ROT90",
+     "cls": "TERRACE_VS_BODY",
+     "transform": "ROT90",
+     "expected": "EXTERNAL",
+     "answer": "EXTERNAL",
+     "conf": 0.6526
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-GARAGE_BODY-0-ROT90",
+     "cls": "GARAGE_BODY",
+     "transform": "ROT90",
+     "expected": "YES",
+     "answer": "YES",
+     "conf": 0.86203
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-OUTER_BOUNDARY_A_OR_B-0-ROT90",
+     "cls": "OUTER_BOUNDARY_A_OR_B",
+     "transform": "ROT90",
+     "expected": "B",
+     "answer": "B",
+     "conf": 0.63182
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-OUTER_BOUNDARY_A_OR_B-1-ROT90",
+     "cls": "OUTER_BOUNDARY_A_OR_B",
+     "transform": "ROT90",
+     "expected": "A",
+     "answer": "A",
+     "conf": 0.50033
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-BODY_REGION-0-ROT180",
+     "cls": "BODY_REGION",
+     "transform": "ROT180",
+     "expected": "YES",
+     "answer": "YES",
+     "conf": 0.93266
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-OPEN_SIDE_VS_OPENINGS-0-ROT180",
+     "cls": "OPEN_SIDE_VS_OPENINGS",
+     "transform": "ROT180",
+     "expected": "SEVERAL_OPENINGS",
+     "answer": "SEVERAL_OPENINGS",
+     "conf": 0.73997
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-0-ROT180",
+     "cls": "WALL_CONTINUATION",
+     "transform": "ROT180",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.65977
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-WALL_CONTINUATION-1-ROT180",
+     "cls": "WALL_CONTINUATION",
+     "transform": "ROT180",
+     "expected": "TERMINATES",
+     "answer": "CONTINUES",
+     "conf": 0.52971
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-TERRACE_VS_BODY-0-ROT180",
+     "cls": "TERRACE_VS_BODY",
+     "transform": "ROT180",
+     "expected": "EXTERNAL",
+     "answer": "EXTERNAL",
+     "conf": 0.9633
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-GARAGE_BODY-0-ROT180",
+     "cls": "GARAGE_BODY",
+     "transform": "ROT180",
+     "expected": "YES",
+     "answer": "YES",
+     "conf": 0.78874
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-OUTER_BOUNDARY_A_OR_B-0-ROT180",
+     "cls": "OUTER_BOUNDARY_A_OR_B",
+     "transform": "ROT180",
+     "expected": "B",
+     "answer": "A",
+     "conf": 0.703
+    },
+    {
+     "qid": "real-dom-w-gozdzikowcach-OUTER_BOUNDARY_A_OR_B-1-ROT180",
+     "cls": "OUTER_BOUNDARY_A_OR_B",
+     "transform": "ROT180",
+     "expected": "A",
+     "answer": "A",
+     "conf": 0.81601
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-BODY_REGION-0-NORMAL",
+     "cls": "BODY_REGION",
+     "transform": "NORMAL",
+     "expected": "YES",
+     "answer": "YES",
+     "conf": 0.95726
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OPENING_VS_PATTERN-0-NORMAL",
+     "cls": "OPENING_VS_PATTERN",
+     "transform": "NORMAL",
+     "expected": "OPENING",
+     "answer": "OPENING",
+     "conf": 0.92473
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OPENING_VS_PATTERN-1-NORMAL",
+     "cls": "OPENING_VS_PATTERN",
+     "transform": "NORMAL",
+     "expected": "OPENING",
+     "answer": "PATTERN",
+     "conf": 0.674
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-WALL_CONTINUATION-0-NORMAL",
+     "cls": "WALL_CONTINUATION",
+     "transform": "NORMAL",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.96307
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-WALL_CONTINUATION-1-NORMAL",
+     "cls": "WALL_CONTINUATION",
+     "transform": "NORMAL",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.80367
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-TERRACE_VS_BODY-0-NORMAL",
+     "cls": "TERRACE_VS_BODY",
+     "transform": "NORMAL",
+     "expected": "EXTERNAL",
+     "answer": "ENCLOSED",
+     "conf": 0.85006
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-TERRACE_VS_BODY-1-NORMAL",
+     "cls": "TERRACE_VS_BODY",
+     "transform": "NORMAL",
+     "expected": "ENCLOSED",
+     "answer": "EXTERNAL",
+     "conf": 0.87701
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OUTER_BOUNDARY_A_OR_B-0-NORMAL",
+     "cls": "OUTER_BOUNDARY_A_OR_B",
+     "transform": "NORMAL",
+     "expected": "A",
+     "answer": "A",
+     "conf": 0.69984
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OUTER_BOUNDARY_A_OR_B-1-NORMAL",
+     "cls": "OUTER_BOUNDARY_A_OR_B",
+     "transform": "NORMAL",
+     "expected": "B",
+     "answer": "A",
+     "conf": 0.62398
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-BODY_REGION-0-MIRROR",
+     "cls": "BODY_REGION",
+     "transform": "MIRROR",
+     "expected": "YES",
+     "answer": "YES",
+     "conf": 0.99198
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OPENING_VS_PATTERN-0-MIRROR",
+     "cls": "OPENING_VS_PATTERN",
+     "transform": "MIRROR",
+     "expected": "OPENING",
+     "answer": "OPENING",
+     "conf": 0.82908
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OPENING_VS_PATTERN-1-MIRROR",
+     "cls": "OPENING_VS_PATTERN",
+     "transform": "MIRROR",
+     "expected": "OPENING",
+     "answer": "PATTERN",
+     "conf": 0.73244
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-WALL_CONTINUATION-0-MIRROR",
+     "cls": "WALL_CONTINUATION",
+     "transform": "MIRROR",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.95258
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-WALL_CONTINUATION-1-MIRROR",
+     "cls": "WALL_CONTINUATION",
+     "transform": "MIRROR",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.85365
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-TERRACE_VS_BODY-0-MIRROR",
+     "cls": "TERRACE_VS_BODY",
+     "transform": "MIRROR",
+     "expected": "EXTERNAL",
+     "answer": "EXTERNAL",
+     "conf": 0.77249
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-TERRACE_VS_BODY-1-MIRROR",
+     "cls": "TERRACE_VS_BODY",
+     "transform": "MIRROR",
+     "expected": "ENCLOSED",
+     "answer": "EXTERNAL",
+     "conf": 0.94753
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OUTER_BOUNDARY_A_OR_B-0-MIRROR",
+     "cls": "OUTER_BOUNDARY_A_OR_B",
+     "transform": "MIRROR",
+     "expected": "A",
+     "answer": "B",
+     "conf": 0.50084
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OUTER_BOUNDARY_A_OR_B-1-MIRROR",
+     "cls": "OUTER_BOUNDARY_A_OR_B",
+     "transform": "MIRROR",
+     "expected": "B",
+     "answer": "B",
+     "conf": 0.60293
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-BODY_REGION-0-ROT90",
+     "cls": "BODY_REGION",
+     "transform": "ROT90",
+     "expected": "YES",
+     "answer": "YES",
+     "conf": 0.99463
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OPENING_VS_PATTERN-0-ROT90",
+     "cls": "OPENING_VS_PATTERN",
+     "transform": "ROT90",
+     "expected": "OPENING",
+     "answer": "OPENING",
+     "conf": 0.84634
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OPENING_VS_PATTERN-1-ROT90",
+     "cls": "OPENING_VS_PATTERN",
+     "transform": "ROT90",
+     "expected": "OPENING",
+     "answer": "OPENING",
+     "conf": 0.60767
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-WALL_CONTINUATION-0-ROT90",
+     "cls": "WALL_CONTINUATION",
+     "transform": "ROT90",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.78082
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-WALL_CONTINUATION-1-ROT90",
+     "cls": "WALL_CONTINUATION",
+     "transform": "ROT90",
+     "expected": "CONTINUES",
+     "answer": "TERMINATES",
+     "conf": 0.5825
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-TERRACE_VS_BODY-0-ROT90",
+     "cls": "TERRACE_VS_BODY",
+     "transform": "ROT90",
+     "expected": "EXTERNAL",
+     "answer": "EXTERNAL",
+     "conf": 0.74907
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-TERRACE_VS_BODY-1-ROT90",
+     "cls": "TERRACE_VS_BODY",
+     "transform": "ROT90",
+     "expected": "ENCLOSED",
+     "answer": "EXTERNAL",
+     "conf": 0.96765
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OUTER_BOUNDARY_A_OR_B-0-ROT90",
+     "cls": "OUTER_BOUNDARY_A_OR_B",
+     "transform": "ROT90",
+     "expected": "A",
+     "answer": "A",
+     "conf": 0.77138
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OUTER_BOUNDARY_A_OR_B-1-ROT90",
+     "cls": "OUTER_BOUNDARY_A_OR_B",
+     "transform": "ROT90",
+     "expected": "B",
+     "answer": "NEITHER",
+     "conf": 0.37633
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-BODY_REGION-0-ROT180",
+     "cls": "BODY_REGION",
+     "transform": "ROT180",
+     "expected": "YES",
+     "answer": "YES",
+     "conf": 0.96875
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OPENING_VS_PATTERN-0-ROT180",
+     "cls": "OPENING_VS_PATTERN",
+     "transform": "ROT180",
+     "expected": "OPENING",
+     "answer": "OPENING",
+     "conf": 0.86868
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OPENING_VS_PATTERN-1-ROT180",
+     "cls": "OPENING_VS_PATTERN",
+     "transform": "ROT180",
+     "expected": "OPENING",
+     "answer": "PATTERN",
+     "conf": 0.9035
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-WALL_CONTINUATION-0-ROT180",
+     "cls": "WALL_CONTINUATION",
+     "transform": "ROT180",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.97522
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-WALL_CONTINUATION-1-ROT180",
+     "cls": "WALL_CONTINUATION",
+     "transform": "ROT180",
+     "expected": "CONTINUES",
+     "answer": "CONTINUES",
+     "conf": 0.84599
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-TERRACE_VS_BODY-0-ROT180",
+     "cls": "TERRACE_VS_BODY",
+     "transform": "ROT180",
+     "expected": "EXTERNAL",
+     "answer": "EXTERNAL",
+     "conf": 0.80019
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-TERRACE_VS_BODY-1-ROT180",
+     "cls": "TERRACE_VS_BODY",
+     "transform": "ROT180",
+     "expected": "ENCLOSED",
+     "answer": "EXTERNAL",
+     "conf": 0.59364
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OUTER_BOUNDARY_A_OR_B-0-ROT180",
+     "cls": "OUTER_BOUNDARY_A_OR_B",
+     "transform": "ROT180",
+     "expected": "A",
+     "answer": "B",
+     "conf": 0.62987
+    },
+    {
+     "qid": "real-dom-w-cyklamenach-OUTER_BOUNDARY_A_OR_B-1-ROT180",
+     "cls": "OUTER_BOUNDARY_A_OR_B",
+     "transform": "ROT180",
+     "expected": "B",
+     "answer": "B",
+     "conf": 0.66086
+    }
+   ]
+  },
+  "steps": 2000,
+  "batch": 24,
+  "trainSec": 3153.6,
+  "heads": {
+   "GARAGE_BODY": 2,
+   "BODY_REGION": 2,
+   "WALL_CONTINUATION": 3,
+   "OPEN_SIDE_VS_OPENINGS": 2,
+   "TERRACE_VS_BODY": 2,
+   "OUTER_BOUNDARY_A_OR_B": 3,
+   "CANOPY_PERGOLA_VS_WALL": 2,
+   "COLUMN_VS_WALL": 2,
+   "BAY_OR_RISALIT": 2,
+   "OPENING_VS_PATTERN": 2,
+   "VOID_VS_OUTSIDE": 2,
+   "STOREY_COVERAGE": 2,
+   "DIMENSION_LINE_VS_BUILDING_LINE": 2
+  },
+  "wasmLatency": "70 ms per question (median of 20, 256² crop); load 0.9 s",
+  "wasmMemory": "≥ 214 MiB RSS (lower bound)",
+  "verdict": "PILOT RESULT: NEGATIVE ON REAL. A 1.07 M-param image-level classifier trained only on synthetic question images learns the synthetic task (85 % on held-out seeds, 2.7 % confident-wrong at 0.80, 0 at >= 0.98) but does not transfer: REAL_DEV 49.7 % (below the 76 % majority floor), 34 % confident-wrong at 0.80, still 1.2 % at 0.999. Image-level questions need real-style data and/or a pixel-level observation underneath; feasible on device (70 ms per question in WASM)."
+ },
+ "verdict": "The commercially clean, transferable piece is a pixel-level wall/opening observation model trained from scratch on BuildPlan synthetic data (UNet-lite). Whole-image referees (generic small VLMs zero-shot, and a from-scratch synthetic classifier) do not transfer to real sheets at the confident-wrong bar."
+}

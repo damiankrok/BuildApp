@@ -1,0 +1,379 @@
+[
+ {
+  "technology": "ResPlan dataset (m-agour/ResPlan, Kaggle resplan/resplan)",
+  "task": "Vector + graph residential floor-plan dataset (walls, doors, windows, 17-class room/boundary taxonomy); candidate source for synthetic plan-sheet rendering and wall/room ground truth",
+  "parameters": null,
+  "artifact_size": "ResPlan.zip 100,106,537 B (GitHub HEAD e2b78fe) -> ResPlan.pkl 258,453,658 B; Kaggle v12 ResPlan.pkl 300,290,069 B (with embedded graphs); 17,000 plans (train 13,053 / val 1,632 / test 1,632 / augmented 683)",
+  "runtime": "Python pickle of Shapely 2 geometries (only shapely.io.from_wkb + numpy scalar/dtype globals); helper code resplan_utils.py (shapely, networkx, opencv, matplotlib)",
+  "code_license": "MIT (LICENSE at e2b78fe: 'Copyright (c) 2025 The ResPlan Authors'; earlier LICENSE 844eb81: MIT 'Copyright (c) 2025 Mohamed Abouagour' over whole repo)",
+  "weight_license": "n/a (dataset); repo publishes no checkpoints despite paper v2 claim",
+  "training_data": "17,000 single-floor residential units traced from South Asian online real-estate listings (platforms withheld); ~27,000 collected, 37% rejected",
+  "training_data_license": "CONFLICT: GitHub LICENSE/README/TAKEDOWN/paper v2 = CC BY 4.0 (scope limited to authors' contributions; no licence asserted over layouts, declared 'facts'); Kaggle API licenseName (v12, 2026-07-28) and repo croissant.json = CC BY-NC-SA 4.0",
+  "pretrained_backbone_license": "n/a",
+  "runtime_license": "shapely BSD-3, numpy BSD-3, networkx BSD-3 (helper code only)",
+  "commercial_status": "CONDITIONAL",
+  "pretrained_available": "no",
+  "actual_artifact_verified": "yes - full dataset downloaded (sha256 f718de8865e51bbe93b49b584798e3c536ed6b4b8a5d32f01b56812f389aeb46, git blob 24d12b87 = HEAD tree), pickle statically scanned then loaded with restricted unpickler; 17,000 records, keys, geometry types, split membership and sample door/window/wall coordinates verified; two plans rendered to black-on-white sheets",
+  "wall_output": "wall bodies as filled (Multi)Polygon union with gaps at openings; one uniform wall_depth per plan; no centrelines, no wall types",
+  "opening_output": "door / window / front_door bodies as rectangles filling wall gaps; no hinge side, swing direction or opening height",
+  "room_output": "per-class (Multi)Polygons (living, bedroom, bathroom, kitchen, balcony, storage, stair, garden, parking, pool) + inner/land/neighbor layers; no per-room instance ids; graph built on demand (via_door/via_window/adjacency/direct)",
+  "mask_output": "none distributed (no rasters); masks obtainable by rasterising polygons (resplan_utils.geometry_to_mask)",
+  "verdict": "DATA_CANDIDATE_WITH_COUNSEL",
+  "notes": "Coordinates are ~256-unit canvas units, not metres (CONTRADICTS README/paper v2 'metric coordinates'; no scale-factor field in GitHub pickle); metric scale derivable from listed gross area. Provenance account changed between paper v1 (CAD/PDF parser) and v2 (CV+OCR on rendered listing images). Paper v2 promises checkpoints, Docker image and dedup split - none present in repo. 6.9% near-duplicates per authors.",
+  "evidence": [
+   {
+    "url": "https://github.com/m-agour/ResPlan",
+    "ref": "e2b78fe069aee1ab1e1828a612743f308e3c32a7",
+    "file": "LICENSE",
+    "sha256": "8193a93c99a3c2c576ee8d508a0098d7c90ead3bc6c23caabdbd84b1f93bf499",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://github.com/m-agour/ResPlan",
+    "ref": "844eb810c17ec33ad6ebb98ed2bdfcd391b5a45a",
+    "file": "LICENSE (initial, MIT)",
+    "sha256": "ce81a54854401433d7937257070973bd23fdfb4ec2454ac8cb72f92c4cceeebd",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://github.com/m-agour/ResPlan",
+    "ref": "e2b78fe069aee1ab1e1828a612743f308e3c32a7",
+    "file": "TAKEDOWN.md",
+    "sha256": "bbf1a963957c6a815f6e1a33e189c11d7cc3061a9ecdd949c0d896d25dc452fd",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://github.com/m-agour/ResPlan",
+    "ref": "e2b78fe069aee1ab1e1828a612743f308e3c32a7",
+    "file": "croissant.json (license CC BY-NC-SA 4.0)",
+    "sha256": "a915ed5f14902e099c361e9a7d9da1acbf012bb0036bdc979755ad6422757c84",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://github.com/m-agour/ResPlan",
+    "ref": "e2b78fe069aee1ab1e1828a612743f308e3c32a7",
+    "file": "README.md",
+    "sha256": "e81d51083e366b99493373f1ed047a4480e167467735d8ca6602e70643674007",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://github.com/m-agour/ResPlan",
+    "ref": "e2b78fe069aee1ab1e1828a612743f308e3c32a7",
+    "file": "split.json",
+    "sha256": "7761df4ad4c860d7e89d1ef9c7004737cd407615b66ed9cde676d7087108c9a7",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://raw.githubusercontent.com/m-agour/ResPlan/e2b78fe069aee1ab1e1828a612743f308e3c32a7/ResPlan.zip",
+    "sha256": "f718de8865e51bbe93b49b584798e3c536ed6b4b8a5d32f01b56812f389aeb46",
+    "local": "/home/user/work005j/data/resplan/ResPlan.zip",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://www.kaggle.com/api/v1/datasets/view/resplan/resplan",
+    "note": "licenseName CC BY-NC-SA 4.0, currentVersionNumber 12",
+    "sha256": "55bc666df429eebb9a0524d31aaa9bee7cbc147c1d2b43952569ee0f39498610",
+    "local": "/home/user/work005j/data/resplan/kaggle_view.json",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://www.kaggle.com/api/v1/datasets/list/resplan/resplan",
+    "sha256": "c30a8767b888eaf87ac085ad3e989f589b34367344ced7ea1e7baf22f06bc84a",
+    "local": "/home/user/work005j/data/resplan/kaggle_files.json",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://arxiv.org/abs/2508.14006v2",
+    "sha256": "c688d8ac156ec207c9b11c5d115d11d13011d28b7e05f5ecb9105296b880dcbd",
+    "note": "PDF v2 2026-08-04",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://arxiv.org/abs/2508.14006v1",
+    "sha256": "c62dd7dbd753799ef6c8b659c5701d2748db3f3dd57ad7bf7aa41e33a4d60f74",
+    "note": "PDF v1 2025-08-19",
+    "date": "2026-10-06"
+   }
+  ]
+ },
+ {
+  "technology": "fpvec-lab (Cyprinus12138/fpvec-lab) + paper arXiv:2608.25608 'When Should a Network Emit Geometry, and When Should It Detect It?'",
+  "task": "Floor-plan raster-to-vector: walls (centreline), openings (intervals on walls), rooms; emit (autoregressive) vs detect (heatmap graph readout); fusion; edit-cost metric; ResPlan-FP benchmark; fpgen synthetic generator",
+  "parameters": "unknown (not published); paper: Raster2Seq backbone (ResNet + deformable-attention encoder), decoder hidden 256, 3 dense heads at 128x128; separate 200K-param door/window head",
+  "artifact_size": "repository = README.md only, 3,864 B; no code, no data, no weights",
+  "runtime": "none published (paper: PyTorch, 256 px input)",
+  "code_license": "NONE - no LICENSE file; README claims MIT for fpeval/fpgen/resplan-fp code but nothing is released",
+  "weight_license": "n/a - no weights published",
+  "training_data": "paper: CubiCasa5K (skv4 corrected annotations), Structured3D pretraining, 10,000-sample procedural synthetic pool (stats fitted to 29,300 Singapore listing titles), ResPlan (finetune track)",
+  "training_data_license": "CubiCasa5K CC BY-NC(-SA) 4.0 (non-commercial); Structured3D non-commercial; ResPlan disputed CC BY 4.0 vs CC BY-NC-SA 4.0; skv4 declared CC BY-NC-SA 4.0",
+  "pretrained_backbone_license": "unknown (Raster2Seq released checkpoint lineage; not published here)",
+  "runtime_license": "n/a",
+  "commercial_status": "UNKNOWN",
+  "pretrained_available": "no",
+  "actual_artifact_verified": "yes - full-history clone: 2 commits (276066d 2026-08-26, f44a475 2026-08-28), no tags, single file README.md; README URLs checked (arxiv 200/200, CubiCasa GitHub 403 from container); HF/PyPI searches found no related artefacts; GitHub releases page not reachable (403)",
+  "wall_output": "paper only: centreline wall segments (start, end, thickness, type) via sequence decoder or untrained junction/centreline graph readout",
+  "opening_output": "paper only: door/window intervals along wall; opening heatmap readout (F1 0.246 -> 0.644 without retraining)",
+  "room_output": "paper only: rooms as cycles of wall IDs with explicit open edges, or faces of the planar wall graph",
+  "mask_output": "paper only: junction, centreline and opening heatmaps at 128x128 with sub-pixel offsets",
+  "verdict": "REIMPLEMENT_FROM_PAPER",
+  "notes": "Clean-room candidates: tolerance-swept wall F1 matcher (frame 1024, angle<15 deg, 7-point mean distance<=t, >=30% overlap, Hungarian), r_val read with double-wall count, typed edit-cost metric (MOVE/TYPE/CREATE/DELETE/CONVERT weights 1/2/5/5/10, ordering-invariant), untrained graph readout with chord-coverage test and no chaining, ink-gated deterministic output fusion with purity rule p > F1/2, room-polygon->wall reconciliation (weld/dedup/T-split), ResPlan polygon->centreline conversion, procedural generator with tracked transforms. All deterministic; none needs remote AI.",
+  "evidence": [
+   {
+    "url": "https://github.com/Cyprinus12138/fpvec-lab",
+    "ref": "f44a475a8c08333d75756fb08a1ace3a14e3b534",
+    "file": "README.md",
+    "sha256": "0e26ec3d84d373a1d4b38e4574b6176a6cde2bc2998697f7525ee745d5c97f2f",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://github.com/Cyprinus12138/fpvec-lab",
+    "ref": "276066d6cf94594bac362dda92bafe6bb6cade58",
+    "file": "README.md (first version)",
+    "sha256": "8cb6b7b48335982fdd4ca8cf7991a58092174db877da4d22791462b3c263d0f7",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://arxiv.org/abs/2608.25608",
+    "sha256": "262f6c166f33d9df56cc699669bb139012201337ef0280e45fdb82fe7f562b81",
+    "note": "PDF v1 2026-08-26, arXiv licence CC BY 4.0",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://github.com/Cyprinus12138/fpvec-lab/releases",
+    "note": "HTTP 403 from container - not reachable; remote has no tags",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://huggingface.co/api/models?search=fpvec",
+    "note": "no related artefacts for fpvec, ResPlan-FP, skv4, fpgen, Cyprinus12138",
+    "date": "2026-10-06"
+   }
+  ]
+ },
+ {
+  "technology": "MitUNet (aliasstudio/mitunet; arXiv:2512.02413; MVA 37:53 2026)",
+  "task": "Binary wall semantic segmentation of raster floor plans (MiT-B4 encoder + U-Net scSE decoder, Tversky loss)",
+  "parameters": "64,248,664 (verified from checkpoint: encoder 60,842,688 MiT-B4, decoder 3,405,831, head 145); smaller variants analytic: MiT-B0+UNet 5.60M (12.7 GMACs@512), MiT-B1+UNet 16.56M (21.5 GMACs@512), B4 ~64.6 GMACs@512",
+  "artifact_size": "4 Git LFS checkpoints, 257,383,307 / 257,391,115 B each, FP32 PyTorch state_dict (zip); no ONNX/TFLite",
+  "runtime": "PyTorch >=2.8 + segmentation-models-pytorch==0.5.0 (+timm), 512x512 input; Colab/RTX 4060 Ti; Android export not provided/not tested",
+  "code_license": "MIT (repo LICENSE, Parashchuk/Kaspshitskiy/Karyakin 2025) - BUT model code comes from smp 0.5.0 whose encoders/mix_transformer.py is under the NVIDIA Source Code License (non-commercial)",
+  "weight_license": "README: 'subject to the Creative Commons Attribution-NonCommercial 4.0 International License (CC-BY-NC 4.0). Commercial use of the pre-trained weights is restricted.'; additionally initialised from NVIDIA SCL ImageNet MiT-B4 weights",
+  "training_data": "CubiCasa5K (pre-train, ~5,000 Finnish plans) + Floor Plan CIS / regional dataset (500 RU/CIS listing images, fine-tune)",
+  "training_data_license": "CubiCasa5K: GitHub LICENSE CC BY-NC 4.0, Zenodo 2613548 cc-by-nc-sa-4.0; Floor Plan CIS: Zenodo 17871079 cc-by-4.0 (images are third-party listing drawings; upstream rights unstated)",
+  "pretrained_backbone_license": "NVIDIA Source Code License for SegFormer (non-commercial; 'research or evaluation purposes only'); loaded via smp-hub/mit_b4.imagenet (HF license: other, repackaged NVIDIA weights); ImageNet terms: non-commercial research",
+  "runtime_license": "PyTorch BSD-3, torchvision BSD-3, smp MIT except NVIDIA-SCL MiT file, timm Apache-2.0, albumentations MIT",
+  "commercial_status": "NON_COMMERCIAL",
+  "pretrained_available": "yes",
+  "actual_artifact_verified": "yes - repo cloned (HEAD ade0aa6), LFS pointers read; three checkpoints verified via HTTP HEAD (size, ETag = LFS oid) and range-read of zip directory + data.pkl (954 keys, FP32, 64.25M params, MiT-B4 + UNet-scSE); weights tensors not downloaded",
+  "wall_output": "binary wall mask (sigmoid > 0.5), walls with door/window openings subtracted; no vectors, no wall types (load-bearing vs partition not separated)",
+  "opening_output": "none (openings carved out of wall GT, not predicted)",
+  "room_output": "none",
+  "mask_output": "1-channel wall probability mask at 512x512",
+  "verdict": "ARCHITECTURE_CANDIDATE_FOR_RETRAINING",
+  "notes": "B4 (64.25M params, 257 MB FP32, ~65 GMACs per 512^2) unsuitable for interactive Android; retrain B0/B1-class or CNN-encoder U-Net on clean data with a clean-room encoder implementation. Committed notebook fine-tune cell uses Lovasz loss while best checkpoint name says tversky.",
+  "evidence": [
+   {
+    "url": "https://github.com/aliasstudio/mitunet",
+    "ref": "ade0aa6ba01c72f02a32a33a605c36b54b264a7a",
+    "file": "LICENSE",
+    "sha256": "eb22219cfe63fc15e044bfd58884cd3e76ca5f1295c1a52bd70b518771fcaa16",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://github.com/aliasstudio/mitunet",
+    "ref": "ade0aa6ba01c72f02a32a33a605c36b54b264a7a",
+    "file": "README.md",
+    "sha256": "bef3af5e59d8ab8e77fe03e0cafabd18a153b7d88a5739c6c91a1abafc3c00a1",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://media.githubusercontent.com/media/aliasstudio/mitunet/master/experiments/models/mitunet_finetune_a6_mit_b4_tversky_8864_28E.pth",
+    "sha256": "9c56c86723b0b5099ea63c82b5cac2f9c98c1816536003a78e422b7fcfadfbaf",
+    "note": "LFS oid; 257,383,307 B; structure verified by range read",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://media.githubusercontent.com/media/aliasstudio/mitunet/master/experiments/models/mitunet_mit_b4_tversky_a6_8784_30E.pth",
+    "sha256": "60f1f4c5d7e07ce7eb409d493158919e334fb626372cff266c04177f324da068",
+    "note": "LFS oid; 257,383,307 B",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://media.githubusercontent.com/media/aliasstudio/mitunet/master/experiments/models/MitUNet_cubicasa-5k_a62_mit_b4_tversky_7606_20E.pth",
+    "sha256": "69e8b2058977623b200a0b3315c4892e05a02b5db5b8116de2abcebdc05fe83b",
+    "note": "LFS oid; 257,391,115 B",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://media.githubusercontent.com/media/aliasstudio/mitunet/master/experiments/models/MitUNet_cubicasa-5k_a62_mit_b4_tversky_7666_30E.pth",
+    "sha256": "24afed0aeee2ab30eb25fa66e08a048a28ebbf5b17e45138844c160ef92cb3ee",
+    "note": "LFS oid (pointer only)",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://arxiv.org/abs/2512.02413",
+    "sha256": "5f8d88a9f7cf4f9e7d54f57c403f65ad062aa8e508cbba0e5c91dfb5d5a5a997",
+    "note": "PDF v3 2026-04-01",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://zenodo.org/api/records/17871079",
+    "note": "Floor Plan CIS, license cc-by-4.0, fpc.zip 23,207,099 B",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://zenodo.org/api/records/2613548",
+    "note": "CubiCasa5K, license cc-by-nc-sa-4.0, cubicasa5k.zip 5,469,495,706 B",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://raw.githubusercontent.com/CubiCasa/CubiCasa5k/master/LICENSE",
+    "ref": "c34440266665a11f4484eb06cd2e4b7d72ad76c1",
+    "sha256": "abb20326fa72589cde781457dbe51f7d69f376d167254e95c36f338923669303",
+    "note": "CC BY-NC 4.0",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://files.pythonhosted.org/packages/ef/62/a50e5ac6191a498ad631e54df13d7e2d7eeb1325b15ee9ea1ee3ec065aaa/segmentation_models_pytorch-0.5.0-py3-none-any.whl",
+    "sha256": "c34e09047771aa4dd8878b4f899e8125700cd1f8f7db16e58c37204154151a05",
+    "note": "encoders/mix_transformer.py header: NVIDIA Source Code License",
+    "date": "2026-10-06"
+   }
+  ]
+ },
+ {
+  "technology": "SegFormer Mix-Transformer (MiT-B0..B5) ImageNet-1k encoder weights and NVIDIA reference code (NVlabs/SegFormer, HF nvidia/mit-*, smp-hub/mit_*.imagenet)",
+  "task": "Pretrained hierarchical transformer encoder for semantic segmentation (MitUNet backbone)",
+  "parameters": "encoder only: B0 3.32M, B1 13.15M, B2 24.20M, B4 60.84M (analytic, B4 matches MitUNet checkpoint exactly)",
+  "artifact_size": "not downloaded (HF repos list pytorch_model.bin / tf_model.h5 / model.safetensors)",
+  "runtime": "PyTorch (NVlabs mmseg-based code, HF transformers SegformerModel, smp MixVisionTransformerEncoder)",
+  "code_license": "NVlabs/SegFormer: NVIDIA Source Code License (non-commercial); smp mix_transformer.py: NVIDIA Source Code License header; HF transformers modeling_segformer.py: Apache-2.0 header (re-implementation; NVIDIA-obligation question for counsel); mmsegmentation mit.py: OpenMMLab copyright in Apache-2.0 repo",
+  "weight_license": "NVIDIA Source Code License for SegFormer (HF cards nvidia/mit-b0/b1/b2/b4, nvidia/segformer-b0/b4-finetuned-ade-512-512: license other -> NVlabs LICENSE); smp-hub/mit_b0/b1/b4.imagenet: license other, repackaged from smp v0.0.2 release",
+  "training_data": "ImageNet-1k",
+  "training_data_license": "ImageNet terms of access: non-commercial research and educational purposes only",
+  "pretrained_backbone_license": "NVIDIA Source Code License: 'The Work and any derivative works thereof only may be used or intended for use non-commercially ... research or evaluation purposes only'",
+  "runtime_license": "PyTorch BSD-3",
+  "commercial_status": "NON_COMMERCIAL",
+  "pretrained_available": "yes",
+  "actual_artifact_verified": "partial - licence texts and HF model metadata/cards verified; weight files not downloaded",
+  "wall_output": "n/a (encoder)",
+  "opening_output": "n/a",
+  "room_output": "n/a",
+  "mask_output": "n/a",
+  "verdict": "REJECT",
+  "notes": "Reject the NVIDIA weights and NVIDIA-licensed code for production. The MiT architecture itself may be re-implemented clean-room from the SegFormer paper and trained from scratch (counsel to confirm no further NVIDIA obligations).",
+  "evidence": [
+   {
+    "url": "https://raw.githubusercontent.com/NVlabs/SegFormer/master/LICENSE",
+    "ref": "65fa8cfa9b52b6ee7e8897a98705abf8570f9e32",
+    "sha256": "f549820c06519e3105e5174a2fd7285224ffd2268a7f879a843b1a255fd04a61",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://huggingface.co/nvidia/mit-b0",
+    "ref": "80983a413c30d36a39c20203974ae7807835e2b4",
+    "file": "README.md",
+    "sha256": "70dd05617d227fea8bab2dba202dbccd2a250fbb8279798b9005eb231c87556e",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://huggingface.co/nvidia/mit-b1",
+    "ref": "13ddceec4e8bdf401e7cd7acf5aebc526222518c",
+    "note": "license: other",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://huggingface.co/nvidia/mit-b4",
+    "ref": "3844ddaa13d9ce98816bacb904688a5284f164af",
+    "file": "README.md",
+    "sha256": "1b86125ce267e2766ed00ea373eb9eda3c4dfbd44286ba8f8205756fbf3b2d7d",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://huggingface.co/nvidia/segformer-b0-finetuned-ade-512-512",
+    "ref": "489d5cd81a0b59fab9b7ea758d3548ebe99677da",
+    "file": "README.md",
+    "sha256": "a738172c9395b26f14e1981f6a95885085cc1239210446d752bf30ad6a9b8538",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://huggingface.co/smp-hub/mit_b4.imagenet",
+    "ref": "007839fbdd59bceff9becc35892d82683c103dac",
+    "file": "README.md",
+    "sha256": "9a6b7746c518c511c713459406e234ece302117350e5e21aed0dced0cdbb9474",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://image-net.org/download.php",
+    "sha256": "275647ff587098083f5c53ccf5aa07a4732ca08b81822964c88e5ab40ad07ad4",
+    "note": "terms of access page (HTML snapshot, local only)",
+    "date": "2026-10-06"
+   }
+  ]
+ },
+ {
+  "technology": "Alternative ImageNet-1k CNN/efficient encoders for a retrained U-Net (timm weights on Hugging Face)",
+  "task": "Encoder initialisation for a BuildPlan-trained wall-segmentation U-Net",
+  "parameters": "model-dependent (e.g. MobileNetV3-Small/Large, MobileNetV4-Conv-Small, EfficientNet-B0, ResNet-18/50, EfficientViT-B0, ConvNeXt-Atto, RegNetY-008); not measured here",
+  "artifact_size": "not downloaded",
+  "runtime": "PyTorch + timm (Apache-2.0); smp supports timm encoders via 'tu-' prefix",
+  "code_license": "timm Apache-2.0 (LICENSE sha256 71b111620fa32c17a80ccd6db2da759d31a591e497d8b5f382174f59d1b59d49); torchvision BSD-3 (sha256 6502f676851cfe25f8af75531dfb32375b7325b73c37e7b43741fa422893e71d)",
+  "weight_license": "HF cardData: apache-2.0 for timm/mobilenetv3_large_100.ra_in1k, mobilenetv3_small_100.lamb_in1k, mobilenetv4_conv_small.e2400_r224_in1k, efficientnet_b0.ra_in1k, resnet18.a1_in1k, resnet50.a1_in1k, efficientvit_b0.r224_in1k, convnext_atto.d2_in1k; mit for regnety_008.pycls_in1k; smp-hub/resnet50.imagenet, efficientnet-b0.imagenet, mobilenet_v2.imagenet: license other",
+  "training_data": "ImageNet-1k",
+  "training_data_license": "ImageNet terms: non-commercial research/educational use; torchvision docs: pre-trained models 'may have their own licenses or terms and conditions derived from the dataset used for training'",
+  "pretrained_backbone_license": "declared Apache-2.0/MIT by publisher; ImageNet-derived - residual legal question",
+  "runtime_license": "Apache-2.0 / BSD-3",
+  "commercial_status": "CONDITIONAL",
+  "pretrained_available": "yes",
+  "actual_artifact_verified": "partial - HF API licence metadata (cardData.license, sha) verified for each listed model; weights not downloaded",
+  "wall_output": "n/a (encoder)",
+  "opening_output": "n/a",
+  "room_output": "n/a",
+  "mask_output": "n/a",
+  "verdict": "ARCHITECTURE_CANDIDATE_FOR_RETRAINING",
+  "notes": "Cleaner than NVIDIA MiT (no non-commercial licence text on the weights), but not COMMERCIAL_CLEAN because of ImageNet terms; fully clean alternative is training from scratch on BuildPlan-owned/synthetic data.",
+  "evidence": [
+   {
+    "url": "https://huggingface.co/api/models/timm/mobilenetv3_large_100.ra_in1k",
+    "ref": "96f46a1c52932f27492dff66c72378eb99b443a7",
+    "note": "license apache-2.0",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://huggingface.co/api/models/timm/mobilenetv4_conv_small.e2400_r224_in1k",
+    "ref": "331fb803779522b685cf942e15f914fb6741c1eb",
+    "note": "license apache-2.0",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://huggingface.co/api/models/timm/efficientnet_b0.ra_in1k",
+    "ref": "1b5383e5f79cc0f7fc067e372f8f26a5fa73f26a",
+    "note": "license apache-2.0",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://huggingface.co/api/models/timm/resnet18.a1_in1k",
+    "ref": "491b427b45c94c7fb0e78b5474cc919aff584bbf",
+    "note": "license apache-2.0",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://huggingface.co/api/models/timm/regnety_008.pycls_in1k",
+    "ref": "ad27a8e42099466890afc4dbcc24cce1340776b9",
+    "note": "license mit",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://raw.githubusercontent.com/pytorch/vision/main/docs/source/models.rst",
+    "ref": "7a7520f83957fe6a0f934fe7035f07b5ef32e8f9",
+    "sha256": "121a38ce31d11d106555ca9c1841a58b76fd14511c6f7e9fb6ee4e2178d4139d",
+    "date": "2026-10-06"
+   },
+   {
+    "url": "https://image-net.org/download.php",
+    "sha256": "275647ff587098083f5c53ccf5aa07a4732ca08b81822964c88e5ab40ad07ad4",
+    "date": "2026-10-06"
+   }
+  ]
+ }
+]

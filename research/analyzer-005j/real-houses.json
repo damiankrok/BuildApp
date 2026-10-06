@@ -1,0 +1,22 @@
+{
+  "_comment": "BUILDPLAN-ANALYZER-005J development houses for the Visual Referee question corpus. Paths starting with '/' are outside the repository (sealed packages of the blind-8 runs, offline byte caches with publisher bytes; never committed). 'decode' = frames this stage decodes itself; 'bakeoff005i' = frames reused from the 005I bake-off (their decoded RGBA SHA-256 is re-checked).",
+  "decode": [
+    {
+      "id": "dom-w-gozdzikowcach",
+      "source": "blind round 8 #1 (005I), development evidence since 005J",
+      "package": "/home/user/work005i-a/blind8/h1-dom-w-gozdzikowcach/source-package.json",
+      "packageSha256": "154a7460e39ca3119f4e126de9595ac58891db6acc5627946340e804f18d76b2",
+      "cache": "/home/user/work005i-a/blind8/cache",
+      "run": "/home/user/work005i-a/blind8/h1-dom-w-gozdzikowcach"
+    },
+    {
+      "id": "dom-w-cyklamenach",
+      "source": "blind round 8 #2 (005I), development evidence since 005J",
+      "package": "/home/user/work005i-a/blind8/h2-dom-w-cyklamenach/source-package.json",
+      "packageSha256": "24b23f5d91eaa8daeaca1a18e613b340ef8d9178ebf63751c0d8d0d307fc32be",
+      "cache": "/home/user/work005i-a/blind8/cache",
+      "run": "/home/user/work005i-a/blind8/h2-dom-w-cyklamenach"
+    }
+  ],
+  "bakeoff005i": ["dom-pod-jarzabem", "dom-w-arkadiach", "dom-w-azaliach", "dom-w-helikoniach", "dom-w-morelach", "dom-w-zurawkach", "willa-miranda"]
+}

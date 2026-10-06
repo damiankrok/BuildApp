@@ -110,3 +110,39 @@ describe('§42 production cannot reach the boundary bake-off', () => {
     expect(assets.filter((a) => /deeplsd|elsed|mobile_?sam|\.pt$|\.pth$|\.ckpt$/i.test(a))).toEqual([])
   })
 })
+
+/**
+ * BUILDPLAN-ANALYZER-005J — the floor-plan intelligence audit is research too. It ran small VLMs (Florence-2,
+ * SmolVLM2, Moondream), two wall networks and a micro-referee pilot from `research/analyzer-005j/`, in virtual
+ * environments outside the repository, on publisher drawings read locally. What the repository may keep is code and
+ * text: no model, no rendered question image and no publisher pixel.
+ */
+describe('005J production cannot reach the floor-plan intelligence audit, and the audit commits no pixels', () => {
+  const AUDIT = /research\/analyzer-005j|florence-?2|smolvlm|moondream|micro[-_]?referee|wall[-_]?referee|vrgen/i
+
+  it('no production source imports research/analyzer-005j or names the audited models in code', () => {
+    const offenders: string[] = []
+    for (const f of productionSources()) {
+      const text = read(f)
+      for (const spec of importsOf(text)) if (/analyzer-005j/.test(spec)) offenders.push(`${f} imports ${spec}`)
+      if (AUDIT.test(codeOf(text))) offenders.push(`${f} names the 005J audit`)
+    }
+    expect(offenders).toEqual([])
+  })
+
+  it('the 005J harness and artifacts track only code and text — no image, model or archive', () => {
+    const tracked = execFileSync('git', ['ls-files'], { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(Boolean)
+    const audit = tracked.filter((f) => f.startsWith('research/analyzer-005j/') || f.startsWith('stage-reports/artifacts/analyzer-005j/'))
+    expect(audit.filter((f) => !/\.(py|ts|cjs|json|md)$/i.test(f))).toEqual([])
+    // the question corpus records crops by coordinates and hashes only; an embedded data URL would be a pixel leak
+    for (const f of audit.filter((x) => /\.(json|md)$/i.test(x))) expect(read(f), f).not.toMatch(/data:image\/|iVBORw0KGgo|\/9j\/4/)
+  })
+
+  it('the Android build packages nothing from the 005J audit', () => {
+    for (const f of [...filesUnder('apps/android', /\.gradle\.kts$/), ...filesUnder('apps/android', /^libs\.versions\.toml$/)]) {
+      expect(codeOf(read(f)), f).not.toMatch(AUDIT)
+    }
+    const assets = filesUnder('apps/android/app/src/main/assets', /.*/)
+    expect(assets.filter((a) => AUDIT.test(a) || (/\.(onnx|gguf|mf\.gz|safetensors)$/i.test(a) && !/numeric-recogniser|ppocr|paddle/i.test(a)))).toEqual([])
+  })
+})

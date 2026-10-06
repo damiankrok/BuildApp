@@ -1,0 +1,9 @@
+{
+ "note": "Model files the 005J bake-off ran, pinned by revision and SHA-256 of the exact bytes (computed locally 2026-10-06). Fetched from the official hubs, kept outside the repository.",
+ "florence2-base": {"repo": "florence-community/Florence-2-base", "revision": "00921df66db728a9ceb750f5eca43e5c203a2051", "files": {"model.safetensors": {"bytes": 463178864, "sha256": "62f3e696da74f8869a68ddb529a9b3e14eb25b21c592cb3dea6179bf944df6a0"}}, "runtime": "transformers 5.18.0 (native Florence2ForConditionalGeneration), torch CPU fp32"},
+ "smolvlm2-500m-onnx-int8dec": {"repo": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct", "revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467", "files": {
+   "onnx/vision_encoder.onnx": {"bytes": 393190822, "sha256": "d4797cdad0ba1958e7dfcc5e074d0b02ae3c4df80cce17ecab282dde37e0ddc1"},
+   "onnx/embed_tokens_int8.onnx": {"bytes": 47309344, "sha256": "0e6d275190cd1cdf3339225b98b42116871ddc4e0c3210801f02bf2a1d2e164a"},
+   "onnx/decoder_model_merged_int8.onnx": {"bytes": 365039224, "sha256": "7d0a356562c7e474012c5e383de58d44d487a517c04190d26e5891db86cb2b1f"}}, "runtime": "onnxruntime 1.23.2 CPU (Python); onnxruntime-web 1.30.0 WASM for the latency probe"},
+ "moondream-0.5b-int8": {"repo": "vikhyatk/moondream2", "revision": "9dddae84d54db4ac56fe37817aeaeb502ed083e2", "branch": "onnx", "files": {"moondream-0_5b-int8.mf.gz": {"bytes": 621619051, "sha256": "355c534d5f71fff8524dfeb41ba65f7d07948f910f754de4df242d0037d8be4a"}}, "runtime": "moondream==0.0.6 (legacy ONNX client), onnxruntime CPU"}
+}

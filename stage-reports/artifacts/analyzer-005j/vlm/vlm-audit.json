@@ -1,0 +1,3477 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005J",
+ "audit": "VLM candidate + Android runtime audit (live verification, no weights downloaded)",
+ "accessed": "2026-10-06",
+ "candidates": [
+  {
+   "id": "florence-2-base",
+   "name": "Florence-2-base (and -ft)",
+   "required": true,
+   "repos": [
+    {
+     "hf_repo": "microsoft/Florence-2-base",
+     "revision_sha": "5ca5edf5bd017b9919c05d08aebef5e4c7ac3bac",
+     "last_modified": "2025-08-04T17:36:57.000Z",
+     "card_license": "mit",
+     "card_license_name": null,
+     "gated": false,
+     "safetensors_param_count": 231567705,
+     "safetensors_dtypes": {
+      "F16": 231567705
+     },
+     "total_bytes_all_files": 930315210,
+     "files": [
+      {
+       "path": ".gitattributes",
+       "size_bytes": 1560,
+       "lfs_sha256": null
+      },
+      {
+       "path": "CODE_OF_CONDUCT.md",
+       "size_bytes": 444,
+       "lfs_sha256": null
+      },
+      {
+       "path": "LICENSE",
+       "size_bytes": 1141,
+       "lfs_sha256": null
+      },
+      {
+       "path": "README.md",
+       "size_bytes": 14805,
+       "lfs_sha256": null
+      },
+      {
+       "path": "SECURITY.md",
+       "size_bytes": 2656,
+       "lfs_sha256": null
+      },
+      {
+       "path": "SUPPORT.md",
+       "size_bytes": 1244,
+       "lfs_sha256": null
+      },
+      {
+       "path": "config.json",
+       "size_bytes": 2430,
+       "lfs_sha256": null
+      },
+      {
+       "path": "configuration_florence2.py",
+       "size_bytes": 15119,
+       "lfs_sha256": null
+      },
+      {
+       "path": "model.safetensors",
+       "size_bytes": 463221266,
+       "lfs_sha256": "03075d2d2d2bbd3e180b9ba0afae4aa8563226e2d32911656966e05b2f2ee060"
+      },
+      {
+       "path": "modeling_florence2.py",
+       "size_bytes": 127455,
+       "lfs_sha256": null
+      },
+      {
+       "path": "preprocessor_config.json",
+       "size_bytes": 806,
+       "lfs_sha256": null
+      },
+      {
+       "path": "processing_florence2.py",
+       "size_bytes": 48676,
+       "lfs_sha256": null
+      },
+      {
+       "path": "pytorch_model.bin",
+       "size_bytes": 464421827,
+       "lfs_sha256": "b480ac374593b0dcb18ffa63b23213734e04cd43eab0d620d23e39708d4a4a7e"
+      },
+      {
+       "path": "tokenizer.json",
+       "size_bytes": 1355863,
+       "lfs_sha256": null
+      },
+      {
+       "path": "tokenizer_config.json",
+       "size_bytes": 34,
+       "lfs_sha256": null
+      },
+      {
+       "path": "vocab.json",
+       "size_bytes": 1099884,
+       "lfs_sha256": null
+      }
+     ],
+     "source": "https://huggingface.co/api/models/microsoft/Florence-2-base?blobs=true",
+     "accessed": "2026-10-06",
+     "note": "Original Microsoft repo; config.json still uses auto_map -> trust_remote_code (modeling_florence2.py)."
+    },
+    {
+     "hf_repo": "microsoft/Florence-2-base-ft",
+     "revision_sha": "f6c1a25888ffc1d945ee8a1a77ac833c7303d46e",
+     "last_modified": "2025-08-04T17:12:06.000Z",
+     "card_license": "mit",
+     "card_license_name": null,
+     "gated": false,
+     "safetensors_param_count": 231567705,
+     "safetensors_dtypes": {
+      "F16": 231567705
+     },
+     "total_bytes_all_files": 930312375,
+     "files": [
+      {
+       "path": ".gitattributes",
+       "size_bytes": 1560,
+       "lfs_sha256": null
+      },
+      {
+       "path": "CODE_OF_CONDUCT.md",
+       "size_bytes": 444,
+       "lfs_sha256": null
+      },
+      {
+       "path": "LICENSE",
+       "size_bytes": 1141,
+       "lfs_sha256": null
+      },
+      {
+       "path": "README.md",
+       "size_bytes": 14820,
+       "lfs_sha256": null
+      },
+      {
+       "path": "SECURITY.md",
+       "size_bytes": 2656,
+       "lfs_sha256": null
+      },
+      {
+       "path": "SUPPORT.md",
+       "size_bytes": 1244,
+       "lfs_sha256": null
+      },
+      {
+       "path": "config.json",
+       "size_bytes": 2430,
+       "lfs_sha256": null
+      },
+      {
+       "path": "configuration_florence2.py",
+       "size_bytes": 15125,
+       "lfs_sha256": null
+      },
+      {
+       "path": "model.safetensors",
+       "size_bytes": 463221266,
+       "lfs_sha256": "58757d657ff44051314c8030b68e04cb1bb618ca9a4885418f111f6fb708185a"
+      },
+      {
+       "path": "modeling_florence2.py",
+       "size_bytes": 127415,
+       "lfs_sha256": null
+      },
+      {
+       "path": "preprocessor_config.json",
+       "size_bytes": 806,
+       "lfs_sha256": null
+      },
+      {
+       "path": "processing_florence2.py",
+       "size_bytes": 46372,
+       "lfs_sha256": null
+      },
+      {
+       "path": "pytorch_model.bin",
+       "size_bytes": 464421315,
+       "lfs_sha256": "664e363a908207ce37b8128ec3087fae0e17252b5e036882e954f69369f08002"
+      },
+      {
+       "path": "tokenizer.json",
+       "size_bytes": 1355863,
+       "lfs_sha256": null
+      },
+      {
+       "path": "tokenizer_config.json",
+       "size_bytes": 34,
+       "lfs_sha256": null
+      },
+      {
+       "path": "vocab.json",
+       "size_bytes": 1099884,
+       "lfs_sha256": null
+      }
+     ],
+     "source": "https://huggingface.co/api/models/microsoft/Florence-2-base-ft?blobs=true",
+     "accessed": "2026-10-06",
+     "note": "Fine-tuned generalist checkpoint (downstream mixture incl. VQAv2/TextVQA/VizWiz per card)."
+    },
+    {
+     "hf_repo": "florence-community/Florence-2-base",
+     "revision_sha": "00921df66db728a9ceb750f5eca43e5c203a2051",
+     "last_modified": "2025-09-11T12:42:33.000Z",
+     "card_license": "mit",
+     "card_license_name": null,
+     "gated": false,
+     "safetensors_param_count": 231546368,
+     "safetensors_dtypes": {
+      "F16": 231546368
+     },
+     "total_bytes_all_files": 468569086,
+     "files": [
+      {
+       "path": ".gitattributes",
+       "size_bytes": 1519,
+       "lfs_sha256": null
+      },
+      {
+       "path": "README.md",
+       "size_bytes": 13423,
+       "lfs_sha256": null
+      },
+      {
+       "path": "added_tokens.json",
+       "size_bytes": 22430,
+       "lfs_sha256": null
+      },
+      {
+       "path": "config.json",
+       "size_bytes": 2387,
+       "lfs_sha256": null
+      },
+      {
+       "path": "generation_config.json",
+       "size_bytes": 292,
+       "lfs_sha256": null
+      },
+      {
+       "path": "merges.txt",
+       "size_bytes": 456318,
+       "lfs_sha256": null
+      },
+      {
+       "path": "model.safetensors",
+       "size_bytes": 463178864,
+       "lfs_sha256": "62f3e696da74f8869a68ddb529a9b3e14eb25b21c592cb3dea6179bf944df6a0"
+      },
+      {
+       "path": "preprocessor_config.json",
+       "size_bytes": 603,
+       "lfs_sha256": null
+      },
+      {
+       "path": "processor_config.json",
+       "size_bytes": 2264,
+       "lfs_sha256": null
+      },
+      {
+       "path": "special_tokens_map.json",
+       "size_bytes": 146627,
+       "lfs_sha256": null
+      },
+      {
+       "path": "tokenizer.json",
+       "size_bytes": 3748144,
+       "lfs_sha256": null
+      },
+      {
+       "path": "tokenizer_config.json",
+       "size_bytes": 197922,
+       "lfs_sha256": null
+      },
+      {
+       "path": "vocab.json",
+       "size_bytes": 798293,
+       "lfs_sha256": null
+      }
+     ],
+     "source": "https://huggingface.co/api/models/florence-community/Florence-2-base?blobs=true",
+     "accessed": "2026-10-06",
+     "note": "Native-transformers-format conversion (no remote code); card license MIT (license_link points to Florence-2-large LICENSE)."
+    },
+    {
+     "hf_repo": "florence-community/Florence-2-base-ft",
+     "revision_sha": "0b03b6f15a4a211370fb204aee4e7dd48887ea37",
+     "last_modified": "2025-09-11T12:42:01.000Z",
+     "card_license": "mit",
+     "card_license_name": null,
+     "gated": false,
+     "safetensors_param_count": 231546368,
+     "safetensors_dtypes": {
+      "F16": 231546368
+     },
+     "total_bytes_all_files": 468569092,
+     "files": [
+      {
+       "path": ".gitattributes",
+       "size_bytes": 1519,
+       "lfs_sha256": null
+      },
+      {
+       "path": "README.md",
+       "size_bytes": 13429,
+       "lfs_sha256": null
+      },
+      {
+       "path": "added_tokens.json",
+       "size_bytes": 22430,
+       "lfs_sha256": null
+      },
+      {
+       "path": "config.json",
+       "size_bytes": 2387,
+       "lfs_sha256": null
+      },
+      {
+       "path": "generation_config.json",
+       "size_bytes": 292,
+       "lfs_sha256": null
+      },
+      {
+       "path": "merges.txt",
+       "size_bytes": 456318,
+       "lfs_sha256": null
+      },
+      {
+       "path": "model.safetensors",
+       "size_bytes": 463178864,
+       "lfs_sha256": "ab06dea66b16d5e54513256d64854be2194443452fd0d84353b40a278bf87d42"
+      },
+      {
+       "path": "preprocessor_config.json",
+       "size_bytes": 603,
+       "lfs_sha256": null
+      },
+      {
+       "path": "processor_config.json",
+       "size_bytes": 2264,
+       "lfs_sha256": null
+      },
+      {
+       "path": "special_tokens_map.json",
+       "size_bytes": 146627,
+       "lfs_sha256": null
+      },
+      {
+       "path": "tokenizer.json",
+       "size_bytes": 3748144,
+       "lfs_sha256": null
+      },
+      {
+       "path": "tokenizer_config.json",
+       "size_bytes": 197922,
+       "lfs_sha256": null
+      },
+      {
+       "path": "vocab.json",
+       "size_bytes": 798293,
+       "lfs_sha256": null
+      }
+     ],
+     "source": "https://huggingface.co/api/models/florence-community/Florence-2-base-ft?blobs=true",
+     "accessed": "2026-10-06",
+     "note": "Native-transformers-format conversion of -ft."
+    },
+    {
+     "hf_repo": "ducviet00/Florence-2-base-hf",
+     "revision_sha": "f5164427e6d76aad63a326baeedf8dd1ab11c0ff",
+     "last_modified": "2025-08-18T15:18:57.000Z",
+     "card_license": "apache-2.0",
+     "card_license_name": null,
+     "gated": false,
+     "safetensors_param_count": 231546368,
+     "safetensors_dtypes": {
+      "F16": 231546368
+     },
+     "total_bytes_all_files": 468555710,
+     "files": [
+      {
+       "path": ".gitattributes",
+       "size_bytes": 1519,
+       "lfs_sha256": null
+      },
+      {
+       "path": "README.md",
+       "size_bytes": 31,
+       "lfs_sha256": null
+      },
+      {
+       "path": "added_tokens.json",
+       "size_bytes": 22430,
+       "lfs_sha256": null
+      },
+      {
+       "path": "config.json",
+       "size_bytes": 2398,
+       "lfs_sha256": null
+      },
+      {
+       "path": "generation_config.json",
+       "size_bytes": 297,
+       "lfs_sha256": null
+      },
+      {
+       "path": "merges.txt",
+       "size_bytes": 456318,
+       "lfs_sha256": null
+      },
+      {
+       "path": "model.safetensors",
+       "size_bytes": 463178864,
+       "lfs_sha256": "b70016b50f5c19cfa0358093788b2934cadbd1eafaad1578ce39be62facd0993"
+      },
+      {
+       "path": "preprocessor_config.json",
+       "size_bytes": 603,
+       "lfs_sha256": null
+      },
+      {
+       "path": "processor_config.json",
+       "size_bytes": 2264,
+       "lfs_sha256": null
+      },
+      {
+       "path": "special_tokens_map.json",
+       "size_bytes": 146627,
+       "lfs_sha256": null
+      },
+      {
+       "path": "tokenizer.json",
+       "size_bytes": 3748144,
+       "lfs_sha256": null
+      },
+      {
+       "path": "tokenizer_config.json",
+       "size_bytes": 197922,
+       "lfs_sha256": null
+      },
+      {
+       "path": "vocab.json",
+       "size_bytes": 798293,
+       "lfs_sha256": null
+      }
+     ],
+     "source": "https://huggingface.co/api/models/ducviet00/Florence-2-base-hf?blobs=true",
+     "accessed": "2026-10-06",
+     "note": "Contributor conversion used in transformers docs pipeline example; card tag apache-2.0 conflicts with upstream MIT -> do not use as licence source."
+    },
+    {
+     "hf_repo": "onnx-community/Florence-2-base",
+     "revision_sha": "d59e079711c57174f29265539fb4cc9f0f335916",
+     "last_modified": "2025-05-08T19:39:44.000Z",
+     "card_license": "mit",
+     "card_license_name": null,
+     "gated": false,
+     "safetensors_param_count": null,
+     "safetensors_dtypes": null,
+     "total_bytes_all_files": 5365856438,
+     "files": [
+      {
+       "path": ".gitattributes",
+       "size_bytes": 1519,
+       "lfs_sha256": null
+      },
+      {
+       "path": "README.md",
+       "size_bytes": 2914,
+       "lfs_sha256": null
+      },
+      {
+       "path": "added_tokens.json",
+       "size_bytes": 22410,
+       "lfs_sha256": null
+      },
+      {
+       "path": "config.json",
+       "size_bytes": 5447,
+       "lfs_sha256": null
+      },
+      {
+       "path": "generation_config.json",
+       "size_bytes": 297,
+       "lfs_sha256": null
+      },
+      {
+       "path": "merges.txt",
+       "size_bytes": 456318,
+       "lfs_sha256": null
+      },
+      {
+       "path": "onnx/decoder_model.onnx",
+       "size_bytes": 388077195,
+       "lfs_sha256": "783ca1b3f3a47fe5771d1150a3a569cae00433fd78a927d662f50809d0010b72"
+      },
+      {
+       "path": "onnx/decoder_model_bnb4.onnx",
+       "size_bytes": 58041806,
+       "lfs_sha256": "1bcd2a16ecc8d92002cc36eb847489c36ebb8657980565827822d8f97dc8cd9f"
+      },
+      {
+       "path": "onnx/decoder_model_fp16.onnx",
+       "size_bytes": 194198478,
+       "lfs_sha256": "e9d20cf9de122aeefae51efed5ce13423f3178d755b09c8bbcea36439a83c6e9"
+      },
+      {
+       "path": "onnx/decoder_model_int8.onnx",
+       "size_bytes": 97760937,
+       "lfs_sha256": "6054c18012c1dd313c0428ce159379840a1e188ab2f9da0d590bf0640bbeaa1c"
+      },
+      {
+       "path": "onnx/decoder_model_merged.onnx",
+       "size_bytes": 388421910,
+       "lfs_sha256": "6d6e1266d7f94f5d4ec9cc07d9c1f7b3e47049c9b0de7bbe82a91e62dfd152af"
+      },
+      {
+       "path": "onnx/decoder_model_merged_bnb4.onnx",
+       "size_bytes": 58393696,
+       "lfs_sha256": "12b5994f49fef664736eedbab52849c5866dacbc70981c6a4d9ba316f8dc514d"
+      },
+      {
+       "path": "onnx/decoder_model_merged_fp16.onnx",
+       "size_bytes": 194546759,
+       "lfs_sha256": "57ccba205002ae8113c2d4aa0501f5ab8100bb74a793c97995ab4f6433f979be"
+      },
+      {
+       "path": "onnx/decoder_model_merged_int8.onnx",
+       "size_bytes": 98177854,
+       "lfs_sha256": "7ffecf4dd98784308878fd52a7f95ed64f5ed025b4785f6f105450be8fe2be04"
+      },
+      {
+       "path": "onnx/decoder_model_merged_q4.onnx",
+       "size_bytes": 64393631,
+       "lfs_sha256": "3ac3071aa9d8211673a1726ea33433a9525085a3f14d000c1df2d5569f3384cf"
+      },
+      {
+       "path": "onnx/decoder_model_merged_q4f16.onnx",
+       "size_bytes": 56543873,
+       "lfs_sha256": "5bf715e231004c4abe6a9c45b1b03fc0ac97685ff2fb200a1fb1c627e42b8617"
+      },
+      {
+       "path": "onnx/decoder_model_merged_quantized.onnx",
+       "size_bytes": 98177854,
+       "lfs_sha256": "7ffecf4dd98784308878fd52a7f95ed64f5ed025b4785f6f105450be8fe2be04"
+      },
+      {
+       "path": "onnx/decoder_model_merged_uint8.onnx",
+       "size_bytes": 98177836,
+       "lfs_sha256": "c8c29f0bd7af256fd52a29237fc31bbcc525d570415d3a7d601e21b09aa1e4d0"
+      },
+      {
+       "path": "onnx/decoder_model_q4.onnx",
+       "size_bytes": 64042182,
+       "lfs_sha256": "dc92db0585d28b633cd4010ec22b682bc474ebce79ddfa2f868d4d935ff8b2e7"
+      },
+      {
+       "path": "onnx/decoder_model_q4f16.onnx",
+       "size_bytes": 56188858,
+       "lfs_sha256": "51cee5be1fcbf1dd20c71fd50c0a891bd736a4f9bcdb4efdfbf3177c76070493"
+      },
+      {
+       "path": "onnx/decoder_model_quantized.onnx",
+       "size_bytes": 97760937,
+       "lfs_sha256": "6054c18012c1dd313c0428ce159379840a1e188ab2f9da0d590bf0640bbeaa1c"
+      },
+      {
+       "path": "onnx/decoder_model_uint8.onnx",
+       "size_bytes": 97760973,
+       "lfs_sha256": "4fcf6b308b1b829e3e99194012621e66a5a28d3a643a08ef4819d8390954fd2e"
+      },
+      {
+       "path": "onnx/decoder_with_past_model.onnx",
+       "size_bytes": 359664978,
+       "lfs_sha256": "9531ae0647d6f58fac8db8f13aedbe084d167ec79e3ea9e33006fd16fb02c432"
+      },
+      {
+       "path": "onnx/decoder_with_past_model_bnb4.onnx",
+       "size_bytes": 53957969,
+       "lfs_sha256": "80c848403751e4739109471cf31c8a59c33dbde7808e6fcb687615349ecaad3c"
+      },
+      {
+       "path": "onnx/decoder_with_past_model_fp16.onnx",
+       "size_bytes": 179962402,
+       "lfs_sha256": "0edd49cbb24d547392d28ecacd690625b29d38523dce5e6c48a0835d4be5f58c"
+      },
+      {
+       "path": "onnx/decoder_with_past_model_int8.onnx",
+       "size_bytes": 90568893,
+       "lfs_sha256": "23aade3a3a540d15f034ec637fbb75c9745fe0cbecac467b694000b225e3fcc0"
+      },
+      {
+       "path": "onnx/decoder_with_past_model_q4.onnx",
+       "size_bytes": 59516061,
+       "lfs_sha256": "35e85b082399d1cbddf5948a28ae41a22618c7e0f1a7c64709b2a6eb5d47e70b"
+      },
+      {
+       "path": "onnx/decoder_with_past_model_q4f16.onnx",
+       "size_bytes": 52125446,
+       "lfs_sha256": "cb1689fbc868f23562509469408b20cb4920c11ee785975630f37ffb0ac8854d"
+      },
+      {
+       "path": "onnx/decoder_with_past_model_quantized.onnx",
+       "size_bytes": 90568893,
+       "lfs_sha256": "23aade3a3a540d15f034ec637fbb75c9745fe0cbecac467b694000b225e3fcc0"
+      },
+      {
+       "path": "onnx/decoder_with_past_model_uint8.onnx",
+       "size_bytes": 90568923,
+       "lfs_sha256": "3ce91f4ba9a89b3e46ffb59e5491a1ad2b92081b87c6320eff5d145d35bd7427"
+      },
+      {
+       "path": "onnx/embed_tokens.onnx",
+       "size_bytes": 157560107,
+       "lfs_sha256": "fec0fd20276af861afb6a23a11544bf1378c05e2a41001b610cc281e244c4b20"
+      },
+      {
+       "path": "onnx/embed_tokens_bnb4.onnx",
+       "size_bytes": 157560126,
+       "lfs_sha256": "d925e911990a13d039de35e558500c77146c5e4f9d6e9ad6d23224507cbc802c"
+      },
+      {
+       "path": "onnx/embed_tokens_fp16.onnx",
+       "size_bytes": 78780353,
+       "lfs_sha256": "eed0b956736e10822e2ac5d7e6cad8856b583c7163a4b075fb9a892b69d72c16"
+      },
+      {
+       "path": "onnx/embed_tokens_int8.onnx",
+       "size_bytes": 39390496,
+       "lfs_sha256": "8818c58a214e53bf7e22c48bb4674c2fa3112b9539c3ce4075a2eac797b1ef74"
+      },
+      {
+       "path": "onnx/embed_tokens_q4.onnx",
+       "size_bytes": 157560126,
+       "lfs_sha256": "d925e911990a13d039de35e558500c77146c5e4f9d6e9ad6d23224507cbc802c"
+      },
+      {
+       "path": "onnx/embed_tokens_q4f16.onnx",
+       "size_bytes": 78780372,
+       "lfs_sha256": "2b06ca1369da52624a99df94f4d5ed230b193a6661bb18a80b57aaf1c772e7e0"
+      },
+      {
+       "path": "onnx/embed_tokens_quantized.onnx",
+       "size_bytes": 39390496,
+       "lfs_sha256": "8818c58a214e53bf7e22c48bb4674c2fa3112b9539c3ce4075a2eac797b1ef74"
+      },
+      {
+       "path": "onnx/embed_tokens_uint8.onnx",
+       "size_bytes": 39390496,
+       "lfs_sha256": "7e2c5422b6b89e46a274408a349b38f162fdd59a69097cc2f6e62be62f41ad6f"
+      },
+      {
+       "path": "onnx/encoder_model.onnx",
+       "size_bytes": 173380723,
+       "lfs_sha256": "b155b5a0e56a4244c62060751bb1b70dfe481015d0dbfa6d19b1912d9e58da0d"
+      },
+      {
+       "path": "onnx/encoder_model_bnb4.onnx",
+       "size_bytes": 27404834,
+       "lfs_sha256": "fc34331042a17b369e4698f3d2f50d1528c0fc162ffd1fa433a8b5669cfa3b22"
+      },
+      {
+       "path": "onnx/encoder_model_fp16.onnx",
+       "size_bytes": 86747414,
+       "lfs_sha256": "ef4ea18ac2a7e3c06268b57fcda9e36266032dd841b3d78171709e1de05f9e6f"
+      },
+      {
+       "path": "onnx/encoder_model_int8.onnx",
+       "size_bytes": 43651493,
+       "lfs_sha256": "a0459867dc116e8e49f53073e368e45c21169d0b0dd7dc350abed06926e0d835"
+      },
+      {
+       "path": "onnx/encoder_model_q4.onnx",
+       "size_bytes": 30058778,
+       "lfs_sha256": "59b7a082bc70d1dab610aef6c1c0e5b421fcadb218798af2081eac0c9b49c285"
+      },
+      {
+       "path": "onnx/encoder_model_q4f16.onnx",
+       "size_bytes": 25705965,
+       "lfs_sha256": "0395ff181f21a48296e54709aac35709751c19acb9fd64a8a1b0bd37820f860f"
+      },
+      {
+       "path": "onnx/encoder_model_quantized.onnx",
+       "size_bytes": 43651493,
+       "lfs_sha256": "a0459867dc116e8e49f53073e368e45c21169d0b0dd7dc350abed06926e0d835"
+      },
+      {
+       "path": "onnx/encoder_model_uint8.onnx",
+       "size_bytes": 43651513,
+       "lfs_sha256": "ebfba7f27081770cad3c94ec7b9eab1d7d829fa2ff00198eae6c4bf10b601368"
+      },
+      {
+       "path": "onnx/vision_encoder.onnx",
+       "size_bytes": 366591558,
+       "lfs_sha256": "2c7464fce495ea43b415b48afe7dbe84a9ebbe0cfe3c31fdd81c6dd66b39ff75"
+      },
+      {
+       "path": "onnx/vision_encoder_bnb4.onnx",
+       "size_bytes": 75995504,
+       "lfs_sha256": "ed213ace206c9c0a68468648ea032ca81a093074b1ec7bb9f9e2bd5877163244"
+      },
+      {
+       "path": "onnx/vision_encoder_fp16.onnx",
+       "size_bytes": 183972269,
+       "lfs_sha256": "d501af2988bc947b085a35df9dd2d623eb2d62ea1e31a8e60ec65b97a624e54e"
+      },
+      {
+       "path": "onnx/vision_encoder_int8.onnx",
+       "size_bytes": 93788211,
+       "lfs_sha256": "ec0649c0307316190b6b91ffb4582c82bb3ed19202b66395990fe340c27c07e5"
+      },
+      {
+       "path": "onnx/vision_encoder_q4.onnx",
+       "size_bytes": 81278591,
+       "lfs_sha256": "31a3e25f92f456428acccf3d5d200e366cc249c3e3d251ee992bec269e430582"
+      },
+      {
+       "path": "onnx/vision_encoder_q4f16.onnx",
+       "size_bytes": 62458377,
+       "lfs_sha256": "28c594571fdc23f33c54508a7da4c9fe02b35bee9b60bd8eda5f627ec4af985c"
+      },
+      {
+       "path": "onnx/vision_encoder_quantized.onnx",
+       "size_bytes": 93788276,
+       "lfs_sha256": "56351a93ecfb61a0384dc63c130cc5bdeea8de1a85f172e109821c7cc956be5a"
+      },
+      {
+       "path": "onnx/vision_encoder_uint8.onnx",
+       "size_bytes": 93788276,
+       "lfs_sha256": "56351a93ecfb61a0384dc63c130cc5bdeea8de1a85f172e109821c7cc956be5a"
+      },
+      {
+       "path": "preprocessor_config.json",
+       "size_bytes": 2673,
+       "lfs_sha256": null
+      },
+      {
+       "path": "processor_config.json",
+       "size_bytes": 130,
+       "lfs_sha256": null
+      },
+      {
+       "path": "special_tokens_map.json",
+       "size_bytes": 146627,
+       "lfs_sha256": null
+      },
+      {
+       "path": "tokenizer.json",
+       "size_bytes": 2297961,
+       "lfs_sha256": null
+      },
+      {
+       "path": "tokenizer_config.json",
+       "size_bytes": 197658,
+       "lfs_sha256": null
+      },
+      {
+       "path": "vocab.json",
+       "size_bytes": 798293,
+       "lfs_sha256": null
+      }
+     ],
+     "source": "https://huggingface.co/api/models/onnx-community/Florence-2-base?blobs=true",
+     "accessed": "2026-10-06",
+     "note": "Transformers.js ONNX export (vision_encoder + embed_tokens + encoder_model + decoder_model_merged)."
+    },
+    {
+     "hf_repo": "onnx-community/Florence-2-base-ft",
+     "revision_sha": "e88a44eaf3791a35eae0c5a47b3dbcd36e67eb6f",
+     "last_modified": "2025-05-08T19:33:57.000Z",
+     "card_license": "mit",
+     "card_license_name": null,
+     "gated": false,
+     "safetensors_param_count": null,
+     "safetensors_dtypes": null,
+     "total_bytes_all_files": 5365821995,
+     "files": [
+      {
+       "path": ".gitattributes",
+       "size_bytes": 1519,
+       "lfs_sha256": null
+      },
+      {
+       "path": "README.md",
+       "size_bytes": 2665,
+       "lfs_sha256": null
+      },
+      {
+       "path": "added_tokens.json",
+       "size_bytes": 22410,
+       "lfs_sha256": null
+      },
+      {
+       "path": "config.json",
+       "size_bytes": 5432,
+       "lfs_sha256": null
+      },
+      {
+       "path": "generation_config.json",
+       "size_bytes": 292,
+       "lfs_sha256": null
+      },
+      {
+       "path": "merges.txt",
+       "size_bytes": 456318,
+       "lfs_sha256": null
+      },
+      {
+       "path": "onnx/decoder_model.onnx",
+       "size_bytes": 388077195,
+       "lfs_sha256": "16b40ea746ea09802a549be74c2eedc937c76025a1ea9baa040617ba0605306d"
+      },
+      {
+       "path": "onnx/decoder_model_bnb4.onnx",
+       "size_bytes": 58041806,
+       "lfs_sha256": "e3b6e535fffe7a3ce7f9674a168e60807b70702992710e25f0b9ebab5b1da86e"
+      },
+      {
+       "path": "onnx/decoder_model_fp16.onnx",
+       "size_bytes": 194198478,
+       "lfs_sha256": "ce583853b630f230eaa1ef201e35001cdda968c84749d67c18ce3707171cfa0c"
+      },
+      {
+       "path": "onnx/decoder_model_int8.onnx",
+       "size_bytes": 97760937,
+       "lfs_sha256": "c529b26bafce2ee76f886f3a0e374bb646b07a6d8b7640fd8a50d7a48843dd67"
+      },
+      {
+       "path": "onnx/decoder_model_merged.onnx",
+       "size_bytes": 388421753,
+       "lfs_sha256": "5207affad8815294233b8679ee9ecb614906f819a1890d95a01b9ca68c392a79"
+      },
+      {
+       "path": "onnx/decoder_model_merged_bnb4.onnx",
+       "size_bytes": 58393539,
+       "lfs_sha256": "64cf32828e8222d6e362e28c7908c9480a3196673de81b2721d2fcce117ef1b7"
+      },
+      {
+       "path": "onnx/decoder_model_merged_fp16.onnx",
+       "size_bytes": 194546602,
+       "lfs_sha256": "9b9b12107729891cd6ec981b3eca0cc0639ad8c1a3245565c005952d457deb76"
+      },
+      {
+       "path": "onnx/decoder_model_merged_int8.onnx",
+       "size_bytes": 98177697,
+       "lfs_sha256": "f22f52f980c33df0efa15932c2f3db6d9d3595ce6387eca938b8cfe23dc4c641"
+      },
+      {
+       "path": "onnx/decoder_model_merged_q4.onnx",
+       "size_bytes": 64393474,
+       "lfs_sha256": "be7a2f33e65f8d65538024772fda4d1c5a7752d60a7159aadf53f9f4798b90fa"
+      },
+      {
+       "path": "onnx/decoder_model_merged_q4f16.onnx",
+       "size_bytes": 56543716,
+       "lfs_sha256": "db32b0b1fd501e1929e28b96eaacee0dfccdd9573ef0237b1efb4b7a40a016b1"
+      },
+      {
+       "path": "onnx/decoder_model_merged_quantized.onnx",
+       "size_bytes": 98177697,
+       "lfs_sha256": "f22f52f980c33df0efa15932c2f3db6d9d3595ce6387eca938b8cfe23dc4c641"
+      },
+      {
+       "path": "onnx/decoder_model_merged_uint8.onnx",
+       "size_bytes": 98177678,
+       "lfs_sha256": "c0bfddc38e75915ab899018832056a6741fa367525bf76fa760aac6c56e00bb1"
+      },
+      {
+       "path": "onnx/decoder_model_q4.onnx",
+       "size_bytes": 64042182,
+       "lfs_sha256": "8add32904ff32afbb4e6b11653886693febad3e0e700af4732611b9dd74d776b"
+      },
+      {
+       "path": "onnx/decoder_model_q4f16.onnx",
+       "size_bytes": 56188858,
+       "lfs_sha256": "ba61f607285efe9ee2c30c968ae7f4705957353479f76900a95c8d60573c54f3"
+      },
+      {
+       "path": "onnx/decoder_model_quantized.onnx",
+       "size_bytes": 97760937,
+       "lfs_sha256": "c529b26bafce2ee76f886f3a0e374bb646b07a6d8b7640fd8a50d7a48843dd67"
+      },
+      {
+       "path": "onnx/decoder_model_uint8.onnx",
+       "size_bytes": 97760972,
+       "lfs_sha256": "51d79f4ee94d8c6a9b02e5b6a392de1d450af175b3643ad93ef7da74360e1955"
+      },
+      {
+       "path": "onnx/decoder_with_past_model.onnx",
+       "size_bytes": 359664978,
+       "lfs_sha256": "fe7c4e257dee88c409616d0879967a7049d259b6f1a58e740937a279fc034b95"
+      },
+      {
+       "path": "onnx/decoder_with_past_model_bnb4.onnx",
+       "size_bytes": 53957969,
+       "lfs_sha256": "1e1935fbedb2369898ff6f9ad32566dba6adb8dcaaa83a5607fd0df0d021e9fb"
+      },
+      {
+       "path": "onnx/decoder_with_past_model_fp16.onnx",
+       "size_bytes": 179962402,
+       "lfs_sha256": "ce201a68171d94d80ce49ae23f2eef1b4b4980ebab3cdcdd489c798ec629857b"
+      },
+      {
+       "path": "onnx/decoder_with_past_model_int8.onnx",
+       "size_bytes": 90568893,
+       "lfs_sha256": "edb4ad2c8a65e48c3ddc840275c6cf2b916acabd04ec9cae536d346c6bf8fbea"
+      },
+      {
+       "path": "onnx/decoder_with_past_model_q4.onnx",
+       "size_bytes": 59516061,
+       "lfs_sha256": "835f917f23510cf936efdac41afdfe05d931e35766abfec449c93eb653b8f5a5"
+      },
+      {
+       "path": "onnx/decoder_with_past_model_q4f16.onnx",
+       "size_bytes": 52125446,
+       "lfs_sha256": "8b679108451ef92b04877cc67e58cbf00e7563762ff01d5d3f7c42d50a9d3662"
+      },
+      {
+       "path": "onnx/decoder_with_past_model_quantized.onnx",
+       "size_bytes": 90568893,
+       "lfs_sha256": "edb4ad2c8a65e48c3ddc840275c6cf2b916acabd04ec9cae536d346c6bf8fbea"
+      },
+      {
+       "path": "onnx/decoder_with_past_model_uint8.onnx",
+       "size_bytes": 90568922,
+       "lfs_sha256": "07e174a58295fd8967a2bd08616a49de982c72432e5f0c7105e5425b5aea9c7f"
+      },
+      {
+       "path": "onnx/embed_tokens.onnx",
+       "size_bytes": 157560044,
+       "lfs_sha256": "90cae3deb6406938c676a35b5246db02b478c9cc8cf93508361be80c05babf95"
+      },
+      {
+       "path": "onnx/embed_tokens_bnb4.onnx",
+       "size_bytes": 157560063,
+       "lfs_sha256": "f972f338dedea6b67e10e87aacc0dfd4e247f1e18c60d3911af9e6b9edb68f32"
+      },
+      {
+       "path": "onnx/embed_tokens_fp16.onnx",
+       "size_bytes": 78780290,
+       "lfs_sha256": "da2607930eea5e21e4a2bd5fd069de550f1acc30316a4e8f824551a95232ba39"
+      },
+      {
+       "path": "onnx/embed_tokens_int8.onnx",
+       "size_bytes": 39390433,
+       "lfs_sha256": "6b2258db1c8ee9b160576ccde3cd3814d83a2edaed0dd1c6ca9ff3c38fa62214"
+      },
+      {
+       "path": "onnx/embed_tokens_q4.onnx",
+       "size_bytes": 157560063,
+       "lfs_sha256": "f972f338dedea6b67e10e87aacc0dfd4e247f1e18c60d3911af9e6b9edb68f32"
+      },
+      {
+       "path": "onnx/embed_tokens_q4f16.onnx",
+       "size_bytes": 78780309,
+       "lfs_sha256": "2c2a1663e8db3189699762d8e29ace6235cc9179b710326c99baa822c9ec96b8"
+      },
+      {
+       "path": "onnx/embed_tokens_quantized.onnx",
+       "size_bytes": 39390433,
+       "lfs_sha256": "6b2258db1c8ee9b160576ccde3cd3814d83a2edaed0dd1c6ca9ff3c38fa62214"
+      },
+      {
+       "path": "onnx/embed_tokens_uint8.onnx",
+       "size_bytes": 39390432,
+       "lfs_sha256": "3bb20ac178b52950364abf1a6c0a2f3c3a172a27ea4fdb7c1c3299bca35f8879"
+      },
+      {
+       "path": "onnx/encoder_model.onnx",
+       "size_bytes": 173380723,
+       "lfs_sha256": "cb0bccc232c64290397f5e1235eb3e1fa6ccf8c5afed9216480ee4eed80737fc"
+      },
+      {
+       "path": "onnx/encoder_model_bnb4.onnx",
+       "size_bytes": 27404834,
+       "lfs_sha256": "ae858f7ac9e16edc978c3d17a083546c0767894fee27441c970c8821f4bb2e5e"
+      },
+      {
+       "path": "onnx/encoder_model_fp16.onnx",
+       "size_bytes": 86747414,
+       "lfs_sha256": "0d1d929f282963e983b8ac5ac4957f19a8fa48233eab41166951b769e5cf2fd2"
+      },
+      {
+       "path": "onnx/encoder_model_int8.onnx",
+       "size_bytes": 43651493,
+       "lfs_sha256": "f4ad7a68f1fb875d3bcf735ea14a7021b7ba7e83baf7cf10289881b4ed6d9b85"
+      },
+      {
+       "path": "onnx/encoder_model_q4.onnx",
+       "size_bytes": 30058778,
+       "lfs_sha256": "34b17bcf191dacb79bd482b94bad5cf1ba39bc770f6a4c9ae26f28b89c235e4b"
+      },
+      {
+       "path": "onnx/encoder_model_q4f16.onnx",
+       "size_bytes": 25705965,
+       "lfs_sha256": "1550d697836639b0fec53023dac96253342c2ec1e7fa682595fda80d157e9f64"
+      },
+      {
+       "path": "onnx/encoder_model_quantized.onnx",
+       "size_bytes": 43651493,
+       "lfs_sha256": "f4ad7a68f1fb875d3bcf735ea14a7021b7ba7e83baf7cf10289881b4ed6d9b85"
+      },
+      {
+       "path": "onnx/encoder_model_uint8.onnx",
+       "size_bytes": 43651512,
+       "lfs_sha256": "653648259f099dfb5ed74e1b8b47c41020f3a90f922390aa25fd9bc5805e2fdd"
+      },
+      {
+       "path": "onnx/vision_encoder.onnx",
+       "size_bytes": 366549825,
+       "lfs_sha256": "d67258cdfdebfa21285dad9e7bd4bd99725236d0aaef9e474a1b24a6ec471351"
+      },
+      {
+       "path": "onnx/vision_encoder_bnb4.onnx",
+       "size_bytes": 75953771,
+       "lfs_sha256": "6bc4632c09f68f45a1813b2b23fe88dfe82fb8265d38f6105c1755c08f4ca61e"
+      },
+      {
+       "path": "onnx/vision_encoder_fp16.onnx",
+       "size_bytes": 183930536,
+       "lfs_sha256": "a7abcd77199c5d0089cf985ede4dd8089acd84f30fb3fb1462d5930345c688b3"
+      },
+      {
+       "path": "onnx/vision_encoder_int8.onnx",
+       "size_bytes": 93746478,
+       "lfs_sha256": "d7876c1ab0f7ec11998942ca189e99a775c5a4a912b813c7745d0f6fa9343487"
+      },
+      {
+       "path": "onnx/vision_encoder_q4.onnx",
+       "size_bytes": 81236858,
+       "lfs_sha256": "8f211dfc176996d14e24d551f8e02530de781dd8b30d9e7d35b69b7c2d0340ce"
+      },
+      {
+       "path": "onnx/vision_encoder_q4f16.onnx",
+       "size_bytes": 62416644,
+       "lfs_sha256": "1e993fb7081302294b5c286b2cc6c2a63283959f399317dc2be49eca94f2dd18"
+      },
+      {
+       "path": "onnx/vision_encoder_quantized.onnx",
+       "size_bytes": 93746540,
+       "lfs_sha256": "3b79d54f23f666f731549db23cb070c35a979ce19cbd9720e90e67a78dc9768c"
+      },
+      {
+       "path": "onnx/vision_encoder_uint8.onnx",
+       "size_bytes": 93746540,
+       "lfs_sha256": "3b79d54f23f666f731549db23cb070c35a979ce19cbd9720e90e67a78dc9768c"
+      },
+      {
+       "path": "preprocessor_config.json",
+       "size_bytes": 2673,
+       "lfs_sha256": null
+      },
+      {
+       "path": "special_tokens_map.json",
+       "size_bytes": 146627,
+       "lfs_sha256": null
+      },
+      {
+       "path": "tokenizer.json",
+       "size_bytes": 2297961,
+       "lfs_sha256": null
+      },
+      {
+       "path": "tokenizer_config.json",
+       "size_bytes": 197658,
+       "lfs_sha256": null
+      },
+      {
+       "path": "vocab.json",
+       "size_bytes": 1099884,
+       "lfs_sha256": null
+      }
+     ],
+     "source": "https://huggingface.co/api/models/onnx-community/Florence-2-base-ft?blobs=true",
+     "accessed": "2026-10-06",
+     "note": "Transformers.js ONNX export of -ft."
+    }
+   ],
+   "parameters": {
+    "value": 231567705,
+    "unit": "params",
+    "source": "HF safetensors metadata (F16) microsoft/Florence-2-base; card: 0.23B; paper: 232M"
+   },
+   "weights_size": {
+    "safetensors_fp16_bytes": 463221266,
+    "pytorch_bin_bytes": 464421827
+   },
+   "license": {
+    "weights": "MIT (model card YAML + LICENSE file 'Copyright (c) Microsoft Corporation') for both base and base-ft",
+    "code": "MIT (same repo; remote code files)",
+    "backbones": "Image encoder initialised from UniCL (microsoft/UniCL LICENSE: MIT); encoder-decoder from BART (facebookresearch/fairseq LICENSE: MIT); DaViT reference impl dingmyu/davit LICENSE: MIT",
+    "training_data": "FLD-5B: 126M images from ImageNet-22k, Objects365, Open Images, Conceptual Captions, LAION (filtered); 5.4B annotations generated by specialist models (DINO, Grounding DINO, SAM, captioners, cloud OCR services) with filtering. Paper does not state a release or licence for FLD-5B. Source-image licences are heterogeneous -> legal review item; weights themselves MIT."
+   },
+   "architecture": "DaViT vision encoder (dim_embed [128,256,512,1024], depths [1,1,9,1]) + BART-style encoder-decoder (6 enc + 6 dec layers, d_model 768, vocab 51289 incl. 1000 <loc_*> tokens)",
+   "image_preprocessing": "CLIPImageProcessor resize to 768x768 (no aspect preservation, no center crop), ImageNet mean/std, image_seq_length 577; box/polygon coordinates quantised to 1000 bins (<loc_0>..<loc_999>)",
+   "tasks": {
+    "without_input": [
+     "<OCR>",
+     "<OCR_WITH_REGION>",
+     "<CAPTION>",
+     "<DETAILED_CAPTION>",
+     "<MORE_DETAILED_CAPTION>",
+     "<OD>",
+     "<DENSE_REGION_CAPTION>",
+     "<REGION_PROPOSAL>"
+    ],
+    "with_input": [
+     "<CAPTION_TO_PHRASE_GROUNDING>",
+     "<REFERRING_EXPRESSION_SEGMENTATION>",
+     "<REGION_TO_SEGMENTATION>",
+     "<OPEN_VOCABULARY_DETECTION>",
+     "<REGION_TO_CATEGORY>",
+     "<REGION_TO_DESCRIPTION>",
+     "<REGION_TO_OCR>"
+    ],
+    "vqa": "NO VQA task token in base or base-ft processor (processing_florence2.py at the audited revisions). Text without a task token is passed through unchanged by the processor, but no VQA prompt format is documented. base-ft card reports VQAv2 79.7 / TextVQA 63.6 / VizWiz 63.6 for the fine-tuned generalist, so VQA was in the -ft mixture, but the prompt is undocumented -> treat free-form/closed-answer VQA as UNSUPPORTED/UNVERIFIED.",
+    "source": "https://huggingface.co/microsoft/Florence-2-base/raw/main/processing_florence2.py"
+   },
+   "transformers_native": {
+    "class": "Florence2ForConditionalGeneration",
+    "first_version": "4.56.0",
+    "evidence": "raw.githubusercontent.com/huggingface/transformers/<tag>/src/transformers/models/florence2/modeling_florence2.py -> 404 at v4.53.0/v4.54.0/v4.55.0/v4.55.4, 200 at v4.56.0/v4.57.0/v5.0.0; PyPI transformers 4.56.0 uploaded 2025-08-29; docs credit contributor ducviet00",
+    "before": "trust_remote_code=True with microsoft/* repo (AutoModelForCausalLM via auto_map)"
+   },
+   "onnx": {
+    "repo": "onnx-community/Florence-2-base @ d59e079711c57174f29265539fb4cc9f0f335916",
+    "transformers_js_load_set_sizes": {
+     "fp32": {
+      "files": [
+       "onnx/vision_encoder.onnx",
+       "onnx/embed_tokens.onnx",
+       "onnx/encoder_model.onnx",
+       "onnx/decoder_model_merged.onnx"
+      ],
+      "total_bytes": 1085954298,
+      "total_MiB": 1035.6
+     },
+     "fp16": {
+      "files": [
+       "onnx/vision_encoder_fp16.onnx",
+       "onnx/embed_tokens_fp16.onnx",
+       "onnx/encoder_model_fp16.onnx",
+       "onnx/decoder_model_merged_fp16.onnx"
+      ],
+      "total_bytes": 544046795,
+      "total_MiB": 518.8
+     },
+     "int8": {
+      "files": [
+       "onnx/vision_encoder_int8.onnx",
+       "onnx/embed_tokens_int8.onnx",
+       "onnx/encoder_model_int8.onnx",
+       "onnx/decoder_model_merged_int8.onnx"
+      ],
+      "total_bytes": 275008054,
+      "total_MiB": 262.3
+     },
+     "quantized": {
+      "files": [
+       "onnx/vision_encoder_quantized.onnx",
+       "onnx/embed_tokens_quantized.onnx",
+       "onnx/encoder_model_quantized.onnx",
+       "onnx/decoder_model_merged_quantized.onnx"
+      ],
+      "total_bytes": 275008119,
+      "total_MiB": 262.3
+     },
+     "q4": {
+      "files": [
+       "onnx/vision_encoder_q4.onnx",
+       "onnx/embed_tokens_q4.onnx",
+       "onnx/encoder_model_q4.onnx",
+       "onnx/decoder_model_merged_q4.onnx"
+      ],
+      "total_bytes": 333291126,
+      "total_MiB": 317.9
+     },
+     "q4f16": {
+      "files": [
+       "onnx/vision_encoder_q4f16.onnx",
+       "onnx/embed_tokens_q4f16.onnx",
+       "onnx/encoder_model_q4f16.onnx",
+       "onnx/decoder_model_merged_q4f16.onnx"
+      ],
+      "total_bytes": 223488587,
+      "total_MiB": 213.1
+     },
+     "bnb4": {
+      "files": [
+       "onnx/vision_encoder_bnb4.onnx",
+       "onnx/embed_tokens_bnb4.onnx",
+       "onnx/encoder_model_bnb4.onnx",
+       "onnx/decoder_model_merged_bnb4.onnx"
+      ],
+      "total_bytes": 319354160,
+      "total_MiB": 304.6
+     },
+     "mixed_q4dec_int8embed_q4vision": {
+      "files": [
+       "onnx/vision_encoder_q4.onnx",
+       "onnx/embed_tokens_int8.onnx",
+       "onnx/encoder_model_q4.onnx",
+       "onnx/decoder_model_merged_q4.onnx"
+      ],
+      "total_bytes": 215121496,
+      "total_MiB": 205.2
+     }
+    },
+    "ft_load_set_sizes": {
+     "fp32": {
+      "files": [
+       "onnx/vision_encoder.onnx",
+       "onnx/embed_tokens.onnx",
+       "onnx/encoder_model.onnx",
+       "onnx/decoder_model_merged.onnx"
+      ],
+      "total_bytes": 1085912345,
+      "total_MiB": 1035.6
+     },
+     "fp16": {
+      "files": [
+       "onnx/vision_encoder_fp16.onnx",
+       "onnx/embed_tokens_fp16.onnx",
+       "onnx/encoder_model_fp16.onnx",
+       "onnx/decoder_model_merged_fp16.onnx"
+      ],
+      "total_bytes": 544004842,
+      "total_MiB": 518.8
+     },
+     "int8": {
+      "files": [
+       "onnx/vision_encoder_int8.onnx",
+       "onnx/embed_tokens_int8.onnx",
+       "onnx/encoder_model_int8.onnx",
+       "onnx/decoder_model_merged_int8.onnx"
+      ],
+      "total_bytes": 274966101,
+      "total_MiB": 262.2
+     },
+     "quantized": {
+      "files": [
+       "onnx/vision_encoder_quantized.onnx",
+       "onnx/embed_tokens_quantized.onnx",
+       "onnx/encoder_model_quantized.onnx",
+       "onnx/decoder_model_merged_quantized.onnx"
+      ],
+      "total_bytes": 274966163,
+      "total_MiB": 262.2
+     },
+     "q4": {
+      "files": [
+       "onnx/vision_encoder_q4.onnx",
+       "onnx/embed_tokens_q4.onnx",
+       "onnx/encoder_model_q4.onnx",
+       "onnx/decoder_model_merged_q4.onnx"
+      ],
+      "total_bytes": 333249173,
+      "total_MiB": 317.8
+     },
+     "q4f16": {
+      "files": [
+       "onnx/vision_encoder_q4f16.onnx",
+       "onnx/embed_tokens_q4f16.onnx",
+       "onnx/encoder_model_q4f16.onnx",
+       "onnx/decoder_model_merged_q4f16.onnx"
+      ],
+      "total_bytes": 223446634,
+      "total_MiB": 213.1
+     },
+     "bnb4": {
+      "files": [
+       "onnx/vision_encoder_bnb4.onnx",
+       "onnx/embed_tokens_bnb4.onnx",
+       "onnx/encoder_model_bnb4.onnx",
+       "onnx/decoder_model_merged_bnb4.onnx"
+      ],
+      "total_bytes": 319312207,
+      "total_MiB": 304.5
+     },
+     "mixed_q4dec_int8embed_q4vision": {
+      "files": [
+       "onnx/vision_encoder_q4.onnx",
+       "onnx/embed_tokens_int8.onnx",
+       "onnx/encoder_model_q4.onnx",
+       "onnx/decoder_model_merged_q4.onnx"
+      ],
+      "total_bytes": 215079543,
+      "total_MiB": 205.1
+     }
+    },
+    "note": "q4/bnb4 leave embed_tokens unquantised (same 157.6 MB file); DaViT vision encoder shrinks little under 4-bit (81.3 MB q4 vs 93.8 MB int8). Third-party ONNX: jeiku/*, Heliosoph/*, happyme531/Florence-2-base-ft-ONNX-RKNN2 (not audited)."
+   },
+   "transformers_js": "Florence2ForConditionalGeneration present in @huggingface/transformers 3.0.0, 3.2.0, 3.4.0, 3.5.0 and 4.3.0 (latest, 2026-09-16) - verified by string search in dist bundles",
+   "gguf_llama_cpp": "NOT supported (no Florence-2 in llama.cpp docs/multimodal.md)",
+   "litert": "No official/community LiteRT bundle found (HF search litert-community)",
+   "runtime_feasibility": "ORT-web WASM: ONNX graphs exist and use standard ops + dynamic-quant ops; not executed in this audit. ONNX Runtime Mobile/Android: same graphs. Encoder-decoder (not decoder-only) -> not loadable by LiteRT-LM, MediaPipe LLM Inference, llama.cpp or MLC-LLM.",
+   "peak_ram": "UNMEASURED",
+   "cold_load": "UNMEASURED",
+   "per_image_latency": "UNMEASURED (no official or credible Android/ARM measurement found)",
+   "cancellation": "Generation is a caller/Transformers.js token loop over decoder_model_merged -> stop between tokens (Transformers.js InterruptableStoppingCriteria exists in 4.3.0); a single vision_encoder run() is not interruptible in practice on single-thread WASM"
+  },
+  {
+   "id": "smolvlm2-500m",
+   "name": "SmolVLM2-500M-Video-Instruct (+ SmolVLM-500M-Instruct, SmolVLM-256M-Instruct, SmolVLM2-256M)",
+   "required": true,
+   "repos": [
+    {
+     "hf_repo": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+     "revision_sha": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+     "last_modified": "2025-04-08T07:25:40.000Z",
+     "card_license": "apache-2.0",
+     "card_license_name": null,
+     "gated": false,
+     "safetensors_param_count": 507482304,
+     "safetensors_dtypes": {
+      "F32": 507482304
+     },
+     "total_bytes_all_files": 7917649732,
+     "files": [
+      {
+       "path": ".gitattributes",
+       "size_bytes": 1519,
+       "lfs_sha256": null
+      },
+      {
+       "path": "README.md",
+       "size_bytes": 10865,
+       "lfs_sha256": null
+      },
+      {
+       "path": "added_tokens.json",
+       "size_bytes": 4739,
+       "lfs_sha256": null
+      },
+      {
+       "path": "chat_template.json",
+       "size_bytes": 430,
+       "lfs_sha256": null
+      },
+      {
+       "path": "config.json",
+       "size_bytes": 3767,
+       "lfs_sha256": null
+      },
+      {
+       "path": "generation_config.json",
+       "size_bytes": 136,
+       "lfs_sha256": null
+      },
+      {
+       "path": "merges.txt",
+       "size_bytes": 466391,
+       "lfs_sha256": null
+      },
+      {
+       "path": "model.safetensors",
+       "size_bytes": 2029990624,
+       "lfs_sha256": "b9bfd456c9472c0acd5719d6e514c4b859891af205ee1a736552fd3497b8b0c3"
+      },
+      {
+       "path": "onnx/decoder_model_merged.onnx",
+       "size_bytes": 1450426001,
+       "lfs_sha256": "2c8743f020606f401ffa0c0ec7a7055da6ad7518b981ecdb060b62da3a60ec45"
+      },
+      {
+       "path": "onnx/decoder_model_merged_bnb4.onnx",
+       "size_bytes": 206503532,
+       "lfs_sha256": "c20111c92ecee932e85de34e0afd9341f60bb210456bc5d8a4809c055dd5bc15"
+      },
+      {
+       "path": "onnx/decoder_model_merged_fp16.onnx",
+       "size_bytes": 725489385,
+       "lfs_sha256": "ace259f4ff3a070cfcefc41c6b4ddaf52a5c1b988348004da13043ff4a6de5ae"
+      },
+      {
+       "path": "onnx/decoder_model_merged_int8.onnx",
+       "size_bytes": 365039224,
+       "lfs_sha256": "7d0a356562c7e474012c5e383de58d44d487a517c04190d26e5891db86cb2b1f"
+      },
+      {
+       "path": "onnx/decoder_model_merged_q4.onnx",
+       "size_bytes": 229119396,
+       "lfs_sha256": "69561703c23810bf58cd4fe81b2427df95339a5b55743f62d1e767bd4a83a1e2"
+      },
+      {
+       "path": "onnx/decoder_model_merged_q4f16.onnx",
+       "size_bytes": 205328508,
+       "lfs_sha256": "6265f0aa571ad624f67b5f19b79f1562b4bfd4e6db812815c1794172985b3e5e"
+      },
+      {
+       "path": "onnx/decoder_model_merged_quantized.onnx",
+       "size_bytes": 365039344,
+       "lfs_sha256": "a5aaa12d62d43a05a4a7456864c508d0b3c17c55a654c05fb568f6da0b7d212d"
+      },
+      {
+       "path": "onnx/decoder_model_merged_uint8.onnx",
+       "size_bytes": 365039344,
+       "lfs_sha256": "a5aaa12d62d43a05a4a7456864c508d0b3c17c55a654c05fb568f6da0b7d212d"
+      },
+      {
+       "path": "onnx/embed_tokens.onnx",
+       "size_bytes": 189235499,
+       "lfs_sha256": "4696831e7181d72fd7736b0c119cd53141a46c940ca24c03ce05ba623b402dd4"
+      },
+      {
+       "path": "onnx/embed_tokens_bnb4.onnx",
+       "size_bytes": 189235518,
+       "lfs_sha256": "dc09c2b3264365dcc8de8cae7513b640a40624cd038ede20a0ffcac0f82ecb11"
+      },
+      {
+       "path": "onnx/embed_tokens_fp16.onnx",
+       "size_bytes": 94617986,
+       "lfs_sha256": "bc9e790f2e90ebf3b1efe84ec82530d6c12e27b0a103703fe865a5faf24f2336"
+      },
+      {
+       "path": "onnx/embed_tokens_int8.onnx",
+       "size_bytes": 47309344,
+       "lfs_sha256": "0e6d275190cd1cdf3339225b98b42116871ddc4e0c3210801f02bf2a1d2e164a"
+      },
+      {
+       "path": "onnx/embed_tokens_q4.onnx",
+       "size_bytes": 189235518,
+       "lfs_sha256": "dc09c2b3264365dcc8de8cae7513b640a40624cd038ede20a0ffcac0f82ecb11"
+      },
+      {
+       "path": "onnx/embed_tokens_q4f16.onnx",
+       "size_bytes": 94618005,
+       "lfs_sha256": "a330cc444671c47e6a2de559405404043b2a49b015188250eca8c0c88d263b73"
+      },
+      {
+       "path": "onnx/embed_tokens_quantized.onnx",
+       "size_bytes": 47309344,
+       "lfs_sha256": "0e6d275190cd1cdf3339225b98b42116871ddc4e0c3210801f02bf2a1d2e164a"
+      },
+      {
+       "path": "onnx/embed_tokens_uint8.onnx",
+       "size_bytes": 47309344,
+       "lfs_sha256": "0e6d275190cd1cdf3339225b98b42116871ddc4e0c3210801f02bf2a1d2e164a"
+      },
+      {
+       "path": "onnx/vision_encoder.onnx",
+       "size_bytes": 393190822,
+       "lfs_sha256": "d4797cdad0ba1958e7dfcc5e074d0b02ae3c4df80cce17ecab282dde37e0ddc1"
+      },
+      {
+       "path": "onnx/vision_encoder_bnb4.onnx",
+       "size_bytes": 60688904,
+       "lfs_sha256": "749b03c76adc0311fdc2d347ace3c9f78c792816e519c3e28a17f12f27cd496d"
+      },
+      {
+       "path": "onnx/vision_encoder_fp16.onnx",
+       "size_bytes": 196731834,
+       "lfs_sha256": "9faa8f3b4a922514a2e7773f20e99fdf7dc7b4eeeeaca1fb82cf18f7945ca23a"
+      },
+      {
+       "path": "onnx/vision_encoder_int8.onnx",
+       "size_bytes": 98966476,
+       "lfs_sha256": "d931eb204e21ab4d905d62976aeaefe20360076f52760ba55b84a5b35088284f"
+      },
+      {
+       "path": "onnx/vision_encoder_q4.onnx",
+       "size_bytes": 66734064,
+       "lfs_sha256": "2fb71423919f04851bdac96588267e6a9db95903ca94fcd7b7a0f51b5cd53d8a"
+      },
+      {
+       "path": "onnx/vision_encoder_q4f16.onnx",
+       "size_bytes": 57691749,
+       "lfs_sha256": "f7e811e4cef2c214c80ea7572eacb102ea396a881fb9170577b20c10fe4fa485"
+      },
+      {
+       "path": "onnx/vision_encoder_quantized.onnx",
+       "size_bytes": 98966521,
+       "lfs_sha256": "8e8e2950e6837a71a3d972a14eb287d8875c4c2d5e8cfd6001bf185115295cdd"
+      },
+      {
+       "path": "onnx/vision_encoder_uint8.onnx",
+       "size_bytes": 98966521,
+       "lfs_sha256": "8e8e2950e6837a71a3d972a14eb287d8875c4c2d5e8cfd6001bf185115295cdd"
+      },
+      {
+       "path": "preprocessor_config.json",
+       "size_bytes": 599,
+       "lfs_sha256": null
+      },
+      {
+       "path": "processor_config.json",
+       "size_bytes": 67,
+       "lfs_sha256": null
+      },
+      {
+       "path": "special_tokens_map.json",
+       "size_bytes": 868,
+       "lfs_sha256": null
+      },
+      {
+       "path": "tokenizer.json",
+       "size_bytes": 3548256,
+       "lfs_sha256": null
+      },
+      {
+       "path": "tokenizer_config.json",
+       "size_bytes": 28626,
+       "lfs_sha256": null
+      },
+      {
+       "path": "vocab.json",
+       "size_bytes": 800662,
+       "lfs_sha256": null
+      }
+     ],
+     "source": "https://huggingface.co/api/models/HuggingFaceTB/SmolVLM2-500M-Video-Instruct?blobs=true",
+     "accessed": "2026-10-06",
+     "note": "Primary audited checkpoint; in-repo onnx/ folder."
+    },
+    {
+     "hf_repo": "HuggingFaceTB/SmolVLM-500M-Instruct",
+     "revision_sha": "a7da5b986cb59b408707209984f360a5f4ad7e47",
+     "last_modified": "2025-04-08T07:26:28.000Z",
+     "card_license": "apache-2.0",
+     "card_license_name": null,
+     "gated": false,
+     "safetensors_param_count": 507482304,
+     "safetensors_dtypes": {
+      "BF16": 507482304
+     },
+     "total_bytes_all_files": 6902685572,
+     "files": [
+      {
+       "path": ".gitattributes",
+       "size_bytes": 1519,
+       "lfs_sha256": null
+      },
+      {
+       "path": "README.md",
+       "size_bytes": 9918,
+       "lfs_sha256": null
+      },
+      {
+       "path": "added_tokens.json",
+       "size_bytes": 4739,
+       "lfs_sha256": null
+      },
+      {
+       "path": "chat_template.json",
+       "size_bytes": 429,
+       "lfs_sha256": null
+      },
+      {
+       "path": "config.json",
+       "size_bytes": 7339,
+       "lfs_sha256": null
+      },
+      {
+       "path": "generation_config.json",
+       "size_bytes": 136,
+       "lfs_sha256": null
+      },
+      {
+       "path": "merges.txt",
+       "size_bytes": 466391,
+       "lfs_sha256": null
+      },
+      {
+       "path": "model.safetensors",
+       "size_bytes": 1015025832,
+       "lfs_sha256": "d05b567eeaf534e83d375551f068ed57b5f52d37c657197f644af5ef9db091a2"
+      },
+      {
+       "path": "onnx/decoder_model_merged.onnx",
+       "size_bytes": 1450425745,
+       "lfs_sha256": "1d4dc5a8464c92cf151be233e23da809992e111f5596ba245fe1eca28e838b7b"
+      },
+      {
+       "path": "onnx/decoder_model_merged_bnb4.onnx",
+       "size_bytes": 206503276,
+       "lfs_sha256": "c3b311d0d34a7c067485ad9d440045c892a73885c7db52f13336b428d5c302e3"
+      },
+      {
+       "path": "onnx/decoder_model_merged_fp16.onnx",
+       "size_bytes": 725489129,
+       "lfs_sha256": "5425225b824ba82d9586ea7c719cde2c86c26fa5aaa5f43a1500a4fd40a5ee41"
+      },
+      {
+       "path": "onnx/decoder_model_merged_int8.onnx",
+       "size_bytes": 365038968,
+       "lfs_sha256": "36f53411b56c21868b0cf3d1fa0c1a7395ab88bcd1f7ae677bf91c54ab09cca0"
+      },
+      {
+       "path": "onnx/decoder_model_merged_q4.onnx",
+       "size_bytes": 229119140,
+       "lfs_sha256": "6d64c0fdce1c3515c40a08ff8e398bfbc0b2e961ae46d1b84b91e6a7b269b9d1"
+      },
+      {
+       "path": "onnx/decoder_model_merged_q4f16.onnx",
+       "size_bytes": 205328252,
+       "lfs_sha256": "7f828e9c1ae0290e766703677d1df2a8657ecadf24dfd55f5ff28ac23cf1cf41"
+      },
+      {
+       "path": "onnx/decoder_model_merged_quantized.onnx",
+       "size_bytes": 365039089,
+       "lfs_sha256": "69f48213b59637eee88e2b1af3c6bb23677fce77774a7237e8c1516c6b78ce47"
+      },
+      {
+       "path": "onnx/decoder_model_merged_uint8.onnx",
+       "size_bytes": 365039089,
+       "lfs_sha256": "69f48213b59637eee88e2b1af3c6bb23677fce77774a7237e8c1516c6b78ce47"
+      },
+      {
+       "path": "onnx/embed_tokens.onnx",
+       "size_bytes": 189235499,
+       "lfs_sha256": "6fe00a73de387cbe52cdb78f1b7c8bcda6bcb9974e40dc1b143315fc9f7e79af"
+      },
+      {
+       "path": "onnx/embed_tokens_bnb4.onnx",
+       "size_bytes": 189235518,
+       "lfs_sha256": "19f4fad7cb17c6dad11b4520d2abcba173fc91f755d71907d31d11a9e5761606"
+      },
+      {
+       "path": "onnx/embed_tokens_fp16.onnx",
+       "size_bytes": 94617986,
+       "lfs_sha256": "6b5f8cb6f78f90182bb60a3df22e9c47c93dc771d8d8172cce1f653f8da8a746"
+      },
+      {
+       "path": "onnx/embed_tokens_int8.onnx",
+       "size_bytes": 47309344,
+       "lfs_sha256": "f5f14887bf9b756d9fff2e412d474f0b5403e91f33b23460c9411f0ca54d945b"
+      },
+      {
+       "path": "onnx/embed_tokens_q4.onnx",
+       "size_bytes": 189235518,
+       "lfs_sha256": "19f4fad7cb17c6dad11b4520d2abcba173fc91f755d71907d31d11a9e5761606"
+      },
+      {
+       "path": "onnx/embed_tokens_q4f16.onnx",
+       "size_bytes": 94618005,
+       "lfs_sha256": "76c3b8232c463118190d1c711f2a7bff00a72f2077b9b19998f3a2c6344eb035"
+      },
+      {
+       "path": "onnx/embed_tokens_quantized.onnx",
+       "size_bytes": 47309344,
+       "lfs_sha256": "f5f14887bf9b756d9fff2e412d474f0b5403e91f33b23460c9411f0ca54d945b"
+      },
+      {
+       "path": "onnx/embed_tokens_uint8.onnx",
+       "size_bytes": 47309344,
+       "lfs_sha256": "f5f14887bf9b756d9fff2e412d474f0b5403e91f33b23460c9411f0ca54d945b"
+      },
+      {
+       "path": "onnx/vision_encoder.onnx",
+       "size_bytes": 393190865,
+       "lfs_sha256": "7ecd87031065252c5e3419f9a75db938a92cd5d55d2c22024d8815efd980104f"
+      },
+      {
+       "path": "onnx/vision_encoder_bnb4.onnx",
+       "size_bytes": 60688947,
+       "lfs_sha256": "e4af9028ddd3357b50a4d823987bb81bf2aca83eeba425bfc02aaa339eeca9f4"
+      },
+      {
+       "path": "onnx/vision_encoder_fp16.onnx",
+       "size_bytes": 196731877,
+       "lfs_sha256": "b2fca5aecb5fe29549ce0a1cc3091f64f7f33dafb5f5f215e2b774b5cf1eeec3"
+      },
+      {
+       "path": "onnx/vision_encoder_int8.onnx",
+       "size_bytes": 98966519,
+       "lfs_sha256": "50b814aa048a996bf5d5128a16c19046371a9a1aae24b930672f550af6c43646"
+      },
+      {
+       "path": "onnx/vision_encoder_q4.onnx",
+       "size_bytes": 66734107,
+       "lfs_sha256": "179812d5b1315edbe3e7164ea3d847c52723692e83ac9c770a5234962663fcad"
+      },
+      {
+       "path": "onnx/vision_encoder_q4f16.onnx",
+       "size_bytes": 57691792,
+       "lfs_sha256": "d5f3df9fd7113e564b1e167de20750572d25fd75c822365f496ff467bc9e7457"
+      },
+      {
+       "path": "onnx/vision_encoder_quantized.onnx",
+       "size_bytes": 98966563,
+       "lfs_sha256": "0612873758c96d759910a45dddbd150ea26d40cffb1ae49f391ea39dcbf50c09"
+      },
+      {
+       "path": "onnx/vision_encoder_uint8.onnx",
+       "size_bytes": 98966563,
+       "lfs_sha256": "0612873758c96d759910a45dddbd150ea26d40cffb1ae49f391ea39dcbf50c09"
+      },
+      {
+       "path": "preprocessor_config.json",
+       "size_bytes": 486,
+       "lfs_sha256": null
+      },
+      {
+       "path": "processor_config.json",
+       "size_bytes": 68,
+       "lfs_sha256": null
+      },
+      {
+       "path": "special_tokens_map.json",
+       "size_bytes": 1069,
+       "lfs_sha256": null
+      },
+      {
+       "path": "tokenizer.json",
+       "size_bytes": 3548256,
+       "lfs_sha256": null
+      },
+      {
+       "path": "tokenizer_config.json",
+       "size_bytes": 28249,
+       "lfs_sha256": null
+      },
+      {
+       "path": "vocab.json",
+       "size_bytes": 800662,
+       "lfs_sha256": null
+      }
+     ],
+     "source": "https://huggingface.co/api/models/HuggingFaceTB/SmolVLM-500M-Instruct?blobs=true",
+     "accessed": "2026-10-06",
+     "note": "Image-only v1 500M; base_model SmolLM2-360M-Instruct + google/siglip-base-patch16-512."
+    },
+    {
+     "hf_repo": "HuggingFaceTB/SmolVLM-256M-Instruct",
+     "revision_sha": "7e3e67edbbed1bf9888184d9df282b700a323964",
+     "last_modified": "2025-04-08T21:39:50.000Z",
+     "card_license": "apache-2.0",
+     "card_license_name": null,
+     "gated": false,
+     "safetensors_param_count": 256484928,
+     "safetensors_dtypes": {
+      "BF16": 256484928
+     },
+     "total_bytes_all_files": 3542912269,
+     "files": [
+      {
+       "path": ".gitattributes",
+       "size_bytes": 1519,
+       "lfs_sha256": null
+      },
+      {
+       "path": "README.md",
+       "size_bytes": 16400,
+       "lfs_sha256": null
+      },
+      {
+       "path": "added_tokens.json",
+       "size_bytes": 4739,
+       "lfs_sha256": null
+      },
+      {
+       "path": "chat_template.json",
+       "size_bytes": 429,
+       "lfs_sha256": null
+      },
+      {
+       "path": "config.json",
+       "size_bytes": 7353,
+       "lfs_sha256": null
+      },
+      {
+       "path": "generation_config.json",
+       "size_bytes": 136,
+       "lfs_sha256": null
+      },
+      {
+       "path": "merges.txt",
+       "size_bytes": 466391,
+       "lfs_sha256": null
+      },
+      {
+       "path": "model.safetensors",
+       "size_bytes": 513028808,
+       "lfs_sha256": "74dea5904032e5ae99a2e0eef5179e6ac0f1dedc3ab0c7c2a5d4d387c843203e"
+      },
+      {
+       "path": "onnx/decoder_model_merged.onnx",
+       "size_bytes": 540640302,
+       "lfs_sha256": "5ae6a66fdf47680433aa6bcc512ae8f0b98c2db01bea055fc76ee37bb0389b78"
+      },
+      {
+       "path": "onnx/decoder_model_merged_bnb4.onnx",
+       "size_bytes": 78154897,
+       "lfs_sha256": "1016b8e6ecb95aa36da3f6ab32c8c955f83297ec9f219d08009eea33e6d1089e"
+      },
+      {
+       "path": "onnx/decoder_model_merged_fp16.onnx",
+       "size_bytes": 270414183,
+       "lfs_sha256": "925ffaf3af9336b4b4c064d77fa64128868d8cb915c257520708d3aa853bb4ae"
+      },
+      {
+       "path": "onnx/decoder_model_merged_int8.onnx",
+       "size_bytes": 137221530,
+       "lfs_sha256": "306fad6cec3b5b7613600b74abf1e410fa50000fbc81292c0d083bd8d85b5fe2"
+      },
+      {
+       "path": "onnx/decoder_model_merged_q4.onnx",
+       "size_bytes": 86562901,
+       "lfs_sha256": "e3fd81130e30715580cf148398e48e2925b6219bff75e17d2a77add35a363f65"
+      },
+      {
+       "path": "onnx/decoder_model_merged_q4f16.onnx",
+       "size_bytes": 77034560,
+       "lfs_sha256": "0a6b4e72e26025c190f37e2573ea2ce3336d95670da9c4b1fa662e47cc3d94a7"
+      },
+      {
+       "path": "onnx/decoder_model_merged_quantized.onnx",
+       "size_bytes": 137221644,
+       "lfs_sha256": "33f14f3bca52699d733d86fcc9c5a0ec6f57afffa1dc9596abde53cde9df81aa"
+      },
+      {
+       "path": "onnx/decoder_model_merged_uint8.onnx",
+       "size_bytes": 137221644,
+       "lfs_sha256": "33f14f3bca52699d733d86fcc9c5a0ec6f57afffa1dc9596abde53cde9df81aa"
+      },
+      {
+       "path": "onnx/embed_tokens.onnx",
+       "size_bytes": 113541419,
+       "lfs_sha256": "a68ea4058524059ed0e2873fdbc4f33b93e13ae3d3204938d32d0566d390ae00"
+      },
+      {
+       "path": "onnx/embed_tokens_bnb4.onnx",
+       "size_bytes": 113541438,
+       "lfs_sha256": "47ed7029703cff586fd719d70251324766a6591c8a58d315076b1781a65fc900"
+      },
+      {
+       "path": "onnx/embed_tokens_fp16.onnx",
+       "size_bytes": 56770946,
+       "lfs_sha256": "019af59078b8e4775216dd278c66574c39bfefa36cab68573db64d7ac7a11691"
+      },
+      {
+       "path": "onnx/embed_tokens_int8.onnx",
+       "size_bytes": 28385824,
+       "lfs_sha256": "4b919b829fe2bf225e42431230c56891116f0149e5170e36c99bcc0cfae0d2ef"
+      },
+      {
+       "path": "onnx/embed_tokens_q4.onnx",
+       "size_bytes": 113541438,
+       "lfs_sha256": "47ed7029703cff586fd719d70251324766a6591c8a58d315076b1781a65fc900"
+      },
+      {
+       "path": "onnx/embed_tokens_q4f16.onnx",
+       "size_bytes": 56770965,
+       "lfs_sha256": "d810e0849eda8128be2d9cf1a2be9ca0bd8e5bfbe5bf972f60ea8e2a566f6bfe"
+      },
+      {
+       "path": "onnx/embed_tokens_quantized.onnx",
+       "size_bytes": 28385824,
+       "lfs_sha256": "4b919b829fe2bf225e42431230c56891116f0149e5170e36c99bcc0cfae0d2ef"
+      },
+      {
+       "path": "onnx/embed_tokens_uint8.onnx",
+       "size_bytes": 28385824,
+       "lfs_sha256": "4b919b829fe2bf225e42431230c56891116f0149e5170e36c99bcc0cfae0d2ef"
+      },
+      {
+       "path": "onnx/vision_encoder.onnx",
+       "size_bytes": 374316497,
+       "lfs_sha256": "e27ad810eabfa7c881b409e1ca357e7a951541019add228ff73c72718fcf6218"
+      },
+      {
+       "path": "onnx/vision_encoder_bnb4.onnx",
+       "size_bytes": 58034739,
+       "lfs_sha256": "7d2b29e46fa0de326b63e92e751561cf28180d597ad0ad0859f92bf598944352"
+      },
+      {
+       "path": "onnx/vision_encoder_fp16.onnx",
+       "size_bytes": 187294693,
+       "lfs_sha256": "275c41d775508b7f7410580c4aaf67583a34acf23c31259effa8e53f67e8d9ae"
+      },
+      {
+       "path": "onnx/vision_encoder_int8.onnx",
+       "size_bytes": 94247927,
+       "lfs_sha256": "d534ab668d3563e6d1d809bbbf1ff18308ded48651178614dbcc4a1de13d16f7"
+      },
+      {
+       "path": "onnx/vision_encoder_q4.onnx",
+       "size_bytes": 63784987,
+       "lfs_sha256": "95814e6629ec465e7cf98a44edcee67abc06d41faa0d1acc410cf8a956cab488"
+      },
+      {
+       "path": "onnx/vision_encoder_q4f16.onnx",
+       "size_bytes": 55037584,
+       "lfs_sha256": "13c301dc0cbc79c8c23badc699129b47d05ba044e2274ca8a94681fcd4205fc1"
+      },
+      {
+       "path": "onnx/vision_encoder_quantized.onnx",
+       "size_bytes": 94247969,
+       "lfs_sha256": "f82adc84246fbfe8651038470166385452682cc889538f5106544e622e5f1595"
+      },
+      {
+       "path": "onnx/vision_encoder_uint8.onnx",
+       "size_bytes": 94247969,
+       "lfs_sha256": "f82adc84246fbfe8651038470166385452682cc889538f5106544e622e5f1595"
+      },
+      {
+       "path": "preprocessor_config.json",
+       "size_bytes": 486,
+       "lfs_sha256": null
+      },
+      {
+       "path": "processor_config.json",
+       "size_bytes": 68,
+       "lfs_sha256": null
+      },
+      {
+       "path": "special_tokens_map.json",
+       "size_bytes": 1069,
+       "lfs_sha256": null
+      },
+      {
+       "path": "tokenizer.json",
+       "size_bytes": 3548256,
+       "lfs_sha256": null
+      },
+      {
+       "path": "tokenizer_config.json",
+       "size_bytes": 28249,
+       "lfs_sha256": null
+      },
+      {
+       "path": "vocab.json",
+       "size_bytes": 800662,
+       "lfs_sha256": null
+      }
+     ],
+     "source": "https://huggingface.co/api/models/HuggingFaceTB/SmolVLM-256M-Instruct?blobs=true",
+     "accessed": "2026-10-06",
+     "note": "256M; base_model SmolLM2-135M-Instruct + siglip-base-patch16-512."
+    },
+    {
+     "hf_repo": "HuggingFaceTB/SmolVLM2-256M-Video-Instruct",
+     "revision_sha": "067788b187b95ebe7b2e040b3e4299e342e5b8fd",
+     "last_modified": "2025-04-08T07:25:59.000Z",
+     "card_license": "apache-2.0",
+     "card_license_name": null,
+     "gated": false,
+     "safetensors_param_count": 256484928,
+     "safetensors_dtypes": {
+      "F32": 256484928
+     },
+     "total_bytes_all_files": 4058527341,
+     "files": [
+      {
+       "path": ".gitattributes",
+       "size_bytes": 1519,
+       "lfs_sha256": null
+      },
+      {
+       "path": "README.md",
+       "size_bytes": 10856,
+       "lfs_sha256": null
+      },
+      {
+       "path": "added_tokens.json",
+       "size_bytes": 4739,
+       "lfs_sha256": null
+      },
+      {
+       "path": "chat_template.json",
+       "size_bytes": 430,
+       "lfs_sha256": null
+      },
+      {
+       "path": "config.json",
+       "size_bytes": 3812,
+       "lfs_sha256": null
+      },
+      {
+       "path": "generation_config.json",
+       "size_bytes": 136,
+       "lfs_sha256": null
+      },
+      {
+       "path": "merges.txt",
+       "size_bytes": 466391,
+       "lfs_sha256": null
+      },
+      {
+       "path": "model.safetensors",
+       "size_bytes": 1025998224,
+       "lfs_sha256": "dcc8f4c00d30d70bb3028a1bfc373e1b1972e25919f8788183cae4ae72431ce2"
+      },
+      {
+       "path": "onnx/decoder_model_merged.onnx",
+       "size_bytes": 540972236,
+       "lfs_sha256": "2ff9605f7493cd2283bad9d9c14c5145f5c8b5f6dff8a197d05b247f5871d378"
+      },
+      {
+       "path": "onnx/decoder_model_merged_bnb4.onnx",
+       "size_bytes": 78486831,
+       "lfs_sha256": "5b1fcb5aac9890f2b3fa934f656d7f8a4fe3771495d7a6f14de5b17117570d2d"
+      },
+      {
+       "path": "onnx/decoder_model_merged_fp16.onnx",
+       "size_bytes": 270746096,
+       "lfs_sha256": "6e7002e13921ec15d8032d4c3666b55583f9b6a0f5628aaa692a8543092cb4e9"
+      },
+      {
+       "path": "onnx/decoder_model_merged_int8.onnx",
+       "size_bytes": 137553254,
+       "lfs_sha256": "03304ea9501d2d72c3858d668a56f54fc42fc54132759c389e54ff706f3d37c1"
+      },
+      {
+       "path": "onnx/decoder_model_merged_q4.onnx",
+       "size_bytes": 86894835,
+       "lfs_sha256": "ce4021b8e2242cbd4caac06b259e1b15e085c6a4b900af40f1e0abec7a6c6df2"
+      },
+      {
+       "path": "onnx/decoder_model_merged_q4f16.onnx",
+       "size_bytes": 77366473,
+       "lfs_sha256": "6c9032242ea8d440e6d53f31e7a1216cf94a98b5b909b1a718d68dc2983c0398"
+      },
+      {
+       "path": "onnx/decoder_model_merged_quantized.onnx",
+       "size_bytes": 137553366,
+       "lfs_sha256": "eedf3c77e0bb3a260517dfb2f4940b900e582e64e58ab6bd29b49c4a01f84626"
+      },
+      {
+       "path": "onnx/decoder_model_merged_uint8.onnx",
+       "size_bytes": 137553366,
+       "lfs_sha256": "eedf3c77e0bb3a260517dfb2f4940b900e582e64e58ab6bd29b49c4a01f84626"
+      },
+      {
+       "path": "onnx/embed_tokens.onnx",
+       "size_bytes": 113541419,
+       "lfs_sha256": "05c2c945e08b8f87088a1e855fc363782c8e65f1f7283c30382d93b568d2bbf8"
+      },
+      {
+       "path": "onnx/embed_tokens_bnb4.onnx",
+       "size_bytes": 113541438,
+       "lfs_sha256": "64f62db97ca38a44b5ed8a225b75dbede2d069c9afc76696d63b89300d5edcd2"
+      },
+      {
+       "path": "onnx/embed_tokens_fp16.onnx",
+       "size_bytes": 56770946,
+       "lfs_sha256": "e9be80e1b680f586192d038dc8b48e0f2a6444a96ac1d069808dc0832ad20df3"
+      },
+      {
+       "path": "onnx/embed_tokens_int8.onnx",
+       "size_bytes": 28385824,
+       "lfs_sha256": "e2cdc3690af5719c7463254f96c3b665a9e24add2a1fa6f594347d67a422710a"
+      },
+      {
+       "path": "onnx/embed_tokens_q4.onnx",
+       "size_bytes": 113541438,
+       "lfs_sha256": "64f62db97ca38a44b5ed8a225b75dbede2d069c9afc76696d63b89300d5edcd2"
+      },
+      {
+       "path": "onnx/embed_tokens_q4f16.onnx",
+       "size_bytes": 56770965,
+       "lfs_sha256": "f70ed24f9f21e0d9999151282aef893861bf08f96b5ad1658fb71ffd51e26784"
+      },
+      {
+       "path": "onnx/embed_tokens_quantized.onnx",
+       "size_bytes": 28385824,
+       "lfs_sha256": "e2cdc3690af5719c7463254f96c3b665a9e24add2a1fa6f594347d67a422710a"
+      },
+      {
+       "path": "onnx/embed_tokens_uint8.onnx",
+       "size_bytes": 28385824,
+       "lfs_sha256": "e2cdc3690af5719c7463254f96c3b665a9e24add2a1fa6f594347d67a422710a"
+      },
+      {
+       "path": "onnx/vision_encoder.onnx",
+       "size_bytes": 374316454,
+       "lfs_sha256": "9f2fa81b77ed18b8372da99923ed846db8b04de8bd62bd4d32352a1f1b725f49"
+      },
+      {
+       "path": "onnx/vision_encoder_bnb4.onnx",
+       "size_bytes": 58034696,
+       "lfs_sha256": "fbc83f9a519bce54bba1a54b5ab5fafe8115086d3e955123d0eb0d3f4dc5b058"
+      },
+      {
+       "path": "onnx/vision_encoder_fp16.onnx",
+       "size_bytes": 187294650,
+       "lfs_sha256": "853691b76aa006181835c22c6195f2a036ee27d5c1edc5c30fa2f880cb83f908"
+      },
+      {
+       "path": "onnx/vision_encoder_int8.onnx",
+       "size_bytes": 94247884,
+       "lfs_sha256": "39f0efae9614b1679404961efb970bf307adb76b4d9fb4e25f1e3c564611963d"
+      },
+      {
+       "path": "onnx/vision_encoder_q4.onnx",
+       "size_bytes": 63784944,
+       "lfs_sha256": "253d225bf96b6203118d16e57bb2890c2dc542dd989d484cb9541dc4d4ae719b"
+      },
+      {
+       "path": "onnx/vision_encoder_q4f16.onnx",
+       "size_bytes": 55037541,
+       "lfs_sha256": "e0b4747edcc23de250266264ce8e5cb3e010cf80755933efca7052da53871818"
+      },
+      {
+       "path": "onnx/vision_encoder_quantized.onnx",
+       "size_bytes": 94247926,
+       "lfs_sha256": "2a70c53030657dc01be90be0e9bf24febc9c709ebf20812ad0a9976698619668"
+      },
+      {
+       "path": "onnx/vision_encoder_uint8.onnx",
+       "size_bytes": 94247926,
+       "lfs_sha256": "2a70c53030657dc01be90be0e9bf24febc9c709ebf20812ad0a9976698619668"
+      },
+      {
+       "path": "preprocessor_config.json",
+       "size_bytes": 599,
+       "lfs_sha256": null
+      },
+      {
+       "path": "processor_config.json",
+       "size_bytes": 67,
+       "lfs_sha256": null
+      },
+      {
+       "path": "special_tokens_map.json",
+       "size_bytes": 868,
+       "lfs_sha256": null
+      },
+      {
+       "path": "tokenizer.json",
+       "size_bytes": 3548256,
+       "lfs_sha256": null
+      },
+      {
+       "path": "tokenizer_config.json",
+       "size_bytes": 28626,
+       "lfs_sha256": null
+      },
+      {
+       "path": "vocab.json",
+       "size_bytes": 800662,
+       "lfs_sha256": null
+      }
+     ],
+     "source": "https://huggingface.co/api/models/HuggingFaceTB/SmolVLM2-256M-Video-Instruct?blobs=true",
+     "accessed": "2026-10-06"
+    },
+    {
+     "hf_repo": "ggml-org/SmolVLM2-500M-Video-Instruct-GGUF",
+     "revision_sha": "ccd7aae53bcb1997355c2f094959e72b3642ce17",
+     "last_modified": "2025-04-30T11:15:17.000Z",
+     "card_license": "apache-2.0",
+     "card_license_name": null,
+     "gated": false,
+     "safetensors_param_count": null,
+     "safetensors_dtypes": null,
+     "total_bytes_all_files": 1565491336,
+     "files": [
+      {
+       "path": ".gitattributes",
+       "size_bytes": 1831,
+       "lfs_sha256": null
+      },
+      {
+       "path": "README.md",
+       "size_bytes": 289,
+       "lfs_sha256": null
+      },
+      {
+       "path": "SmolVLM2-500M-Video-Instruct-Q8_0.gguf",
+       "size_bytes": 436808704,
+       "lfs_sha256": "6f67b8036b2469fcd71728702720c6b51aebd759b78137a8120733b4d66438bc"
+      },
+      {
+       "path": "SmolVLM2-500M-Video-Instruct-f16.gguf",
+       "size_bytes": 820424704,
+       "lfs_sha256": "80f7e3f04bc2d3324ac1a9f52f5776fe13a69912adf74f8e7edacf773d140d77"
+      },
+      {
+       "path": "mmproj-SmolVLM2-500M-Video-Instruct-Q8_0.gguf",
+       "size_bytes": 108785184,
+       "lfs_sha256": "921dc7e259f308e5b027111fa185efcbf33db13f6e35749ddf7f5cdb60ef520b"
+      },
+      {
+       "path": "mmproj-SmolVLM2-500M-Video-Instruct-f16.gguf",
+       "size_bytes": 199470624,
+       "lfs_sha256": "b5dc8ebe7cbeab66a5369693960a52515d7824f13d4063ceca78431f2a6b59b0"
+      }
+     ],
+     "source": "https://huggingface.co/api/models/ggml-org/SmolVLM2-500M-Video-Instruct-GGUF?blobs=true",
+     "accessed": "2026-10-06",
+     "note": "llama.cpp GGUF (no Q4 file in this repo)."
+    },
+    {
+     "hf_repo": "ggml-org/SmolVLM-500M-Instruct-GGUF",
+     "revision_sha": "72e986006ef53e37cdd3f6d4241c90b0f01df376",
+     "last_modified": "2025-04-30T11:12:14.000Z",
+     "card_license": "apache-2.0",
+     "card_license_name": null,
+     "gated": false,
+     "safetensors_param_count": null,
+     "safetensors_dtypes": null,
+     "total_bytes_all_files": 1565484055,
+     "files": [
+      {
+       "path": ".gitattributes",
+       "size_bytes": 1803,
+       "lfs_sha256": null
+      },
+      {
+       "path": "README.md",
+       "size_bytes": 268,
+       "lfs_sha256": null
+      },
+      {
+       "path": "SmolVLM-500M-Instruct-Q8_0.gguf",
+       "size_bytes": 436806912,
+       "lfs_sha256": "9d4612de6a42214499e301494a3ecc2be0abdd9de44e663bda63f1152fad1bf4"
+      },
+      {
+       "path": "SmolVLM-500M-Instruct-f16.gguf",
+       "size_bytes": 820422912,
+       "lfs_sha256": "26c2ee46ef9f8472b3d305a71703153a55f4f2c3baaa12ff5feb566fddb65343"
+      },
+      {
+       "path": "mmproj-SmolVLM-500M-Instruct-Q8_0.gguf",
+       "size_bytes": 108783360,
+       "lfs_sha256": "d1eb8b6b23979205fdf63703ed10f788131a3f812c7b1f72e0119d5d81295150"
+      },
+      {
+       "path": "mmproj-SmolVLM-500M-Instruct-f16.gguf",
+       "size_bytes": 199468800,
+       "lfs_sha256": "4b2fca922e549e9b9608f4ba56f93565dd5220e935ba5570a2a864a0fcc988a6"
+      }
+     ],
+     "source": "https://huggingface.co/api/models/ggml-org/SmolVLM-500M-Instruct-GGUF?blobs=true",
+     "accessed": "2026-10-06"
+    },
+    {
+     "hf_repo": "ggml-org/SmolVLM-256M-Instruct-GGUF",
+     "revision_sha": "b9e4379657e1450d04d02eec8e345667265b0a00",
+     "last_modified": "2025-04-30T11:11:37.000Z",
+     "card_license": "apache-2.0",
+     "card_license_name": null,
+     "gated": false,
+     "safetensors_param_count": null,
+     "safetensors_dtypes": null,
+     "total_bytes_all_files": 796667799,
+     "files": [
+      {
+       "path": ".gitattributes",
+       "size_bytes": 1803,
+       "lfs_sha256": null
+      },
+      {
+       "path": "README.md",
+       "size_bytes": 268,
+       "lfs_sha256": null
+      },
+      {
+       "path": "SmolVLM-256M-Instruct-Q8_0.gguf",
+       "size_bytes": 175054528,
+       "lfs_sha256": "2a31195d3769c0b0fd0a4906201666108834848db768af11de1d2cef7cd35e65"
+      },
+      {
+       "path": "SmolVLM-256M-Instruct-f16.gguf",
+       "size_bytes": 327809728,
+       "lfs_sha256": "2f0cf33ce293f1a17b094e13e57f7ebd660ad6c0467a5e567a753e333a0c2429"
+      },
+      {
+       "path": "mmproj-SmolVLM-256M-Instruct-Q8_0.gguf",
+       "size_bytes": 103769856,
+       "lfs_sha256": "7e943f7c53f0382a6fc41b6ee0c2def63ba4fded9ab8ed039cc9e2ab905e0edd"
+      },
+      {
+       "path": "mmproj-SmolVLM-256M-Instruct-f16.gguf",
+       "size_bytes": 190031616,
+       "lfs_sha256": "0802360aca1748f112ea510b8ff277c65b1361c8ef30ed89b83c9c7a60d08e96"
+      }
+     ],
+     "source": "https://huggingface.co/api/models/ggml-org/SmolVLM-256M-Instruct-GGUF?blobs=true",
+     "accessed": "2026-10-06"
+    },
+    {
+     "hf_repo": "ggml-org/SmolVLM2-256M-Video-Instruct-GGUF",
+     "revision_sha": "2fd73d28c10a108a723cbf6f348114977cd488c1",
+     "last_modified": "2026-08-23T14:01:51.000Z",
+     "card_license": "apache-2.0",
+     "card_license_name": null,
+     "gated": false,
+     "safetensors_param_count": null,
+     "safetensors_dtypes": null,
+     "total_bytes_all_files": 1445945502,
+     "files": [
+      {
+       "path": ".gitattributes",
+       "size_bytes": 2065,
+       "lfs_sha256": null
+      },
+      {
+       "path": ".src_sha",
+       "size_bytes": 49,
+       "lfs_sha256": null
+      },
+      {
+       "path": "README.md",
+       "size_bytes": 460,
+       "lfs_sha256": null
+      },
+      {
+       "path": "SmolVLM2-256M-Video-Instruct-BF16.gguf",
+       "size_bytes": 327811456,
+       "lfs_sha256": "f6b506aedb2dc25491fa855c19f9597f4cde8bff8b4c0fb63f057d4d0182dd14"
+      },
+      {
+       "path": "SmolVLM2-256M-Video-Instruct-Q4_K_M.gguf",
+       "size_bytes": 131234176,
+       "lfs_sha256": "1d86050bd8ef9b4404ba682dcbf0f37a3144070c32e8825402c0b99a8e89f48e"
+      },
+      {
+       "path": "SmolVLM2-256M-Video-Instruct-Q8_0.gguf",
+       "size_bytes": 175056256,
+       "lfs_sha256": "1202d1c54493bddff5b0ecbc36fcb7520ff720b9fa3d7224aeb293581f90529a"
+      },
+      {
+       "path": "SmolVLM2-256M-Video-Instruct-f16.gguf",
+       "size_bytes": 327811552,
+       "lfs_sha256": "59068440ef6ddda7e9731fb29de5d5ab475ea3fe69ba4fc54d4ec3f7bb6d02a8"
+      },
+      {
+       "path": "convert.log",
+       "size_bytes": 191056,
+       "lfs_sha256": null
+      },
+      {
+       "path": "mmproj-SmolVLM2-256M-Video-Instruct-BF16.gguf",
+       "size_bytes": 190033376,
+       "lfs_sha256": "40a563aa3759feaacf71b28f5544316a5096eabefb8510e22d52aab8b4b8138b"
+      },
+      {
+       "path": "mmproj-SmolVLM2-256M-Video-Instruct-Q8_0.gguf",
+       "size_bytes": 103771616,
+       "lfs_sha256": "05d5751132244a6ebd64cba9b34898c0d874b2cb78159d758e1d4da3aad91581"
+      },
+      {
+       "path": "mmproj-SmolVLM2-256M-Video-Instruct-f16.gguf",
+       "size_bytes": 190033440,
+       "lfs_sha256": "819d4b38743fcf57f2a26af0ebfa6e23a7a8849e3c47e63f6ab8a61acb7c245a"
+      }
+     ],
+     "source": "https://huggingface.co/api/models/ggml-org/SmolVLM2-256M-Video-Instruct-GGUF?blobs=true",
+     "accessed": "2026-10-06",
+     "note": "Has Q4_K_M."
+    },
+    {
+     "hf_repo": "litert-community/SmolVLM2-500M",
+     "revision_sha": "dad030b6e56756201d670cfb4d042736a2ce3a5c",
+     "last_modified": "2026-09-06T12:54:54.000Z",
+     "card_license": "apache-2.0",
+     "card_license_name": null,
+     "gated": false,
+     "safetensors_param_count": null,
+     "safetensors_dtypes": null,
+     "total_bytes_all_files": 360841945,
+     "files": [
+      {
+       "path": ".gitattributes",
+       "size_bytes": 1578,
+       "lfs_sha256": null
+      },
+      {
+       "path": "README.md",
+       "size_bytes": 11621,
+       "lfs_sha256": null
+      },
+      {
+       "path": "SmolVLM2-500M.litertlm",
+       "size_bytes": 360822960,
+       "lfs_sha256": "b808b328d845a600a33c5295f93d9217487317bd334dbc91b2a8d50e26e60ad0"
+      },
+      {
+       "path": "litertlm_manifest.json",
+       "size_bytes": 5786,
+       "lfs_sha256": null
+      }
+     ],
+     "source": "https://huggingface.co/api/models/litert-community/SmolVLM2-500M?blobs=true",
+     "accessed": "2026-10-06",
+     "note": "LiteRT-LM .litertlm bundle; community conversion (card measurements by a community contributor), not in Google's official LiteRT-LM supported-model table."
+    },
+    {
+     "hf_repo": "warped-community/SmolVLM2-500M-litert-lm",
+     "revision_sha": "1ddd605ad703b19aa6fc609aaea5f71dc49b4d1e",
+     "last_modified": "2026-10-03T18:46:09.000Z",
+     "card_license": "apache-2.0",
+     "card_license_name": null,
+     "gated": false,
+     "safetensors_param_count": null,
+     "safetensors_dtypes": null,
+     "total_bytes_all_files": 360824951,
+     "files": [
+      {
+       "path": ".gitattributes",
+       "size_bytes": 1578,
+       "lfs_sha256": null
+      },
+      {
+       "path": "README.md",
+       "size_bytes": 413,
+       "lfs_sha256": null
+      },
+      {
+       "path": "SmolVLM2-500M.litertlm",
+       "size_bytes": 360822960,
+       "lfs_sha256": "b808b328d845a600a33c5295f93d9217487317bd334dbc91b2a8d50e26e60ad0"
+      }
+     ],
+     "source": "https://huggingface.co/api/models/warped-community/SmolVLM2-500M-litert-lm?blobs=true",
+     "accessed": "2026-10-06",
+     "note": "Byte-identical mirror (same sha256) of the litert-community bundle."
+    },
+    {
+     "hf_repo": "litert-community/SmolVLM-256M-Instruct",
+     "revision_sha": "dc16f6046d86c646bcc5dfe249c879d028f8b2f2",
+     "last_modified": "2025-09-22T18:00:51.000Z",
+     "card_license": "apache-2.0",
+     "card_license_name": null,
+     "gated": false,
+     "safetensors_param_count": null,
+     "safetensors_dtypes": null,
+     "total_bytes_all_files": 577616586,
+     "files": [
+      {
+       "path": ".gitattributes",
+       "size_bytes": 1519,
+       "lfs_sha256": null
+      },
+      {
+       "path": "README.md",
+       "size_bytes": 2935,
+       "lfs_sha256": null
+      },
+      {
+       "path": "smalvlm-256m-instruct_q8_ekv2048.tflite",
+       "size_bytes": 288312304,
+       "lfs_sha256": "469a85dc3ddbb4458091da5dee62df625d58595132e26eb0ce2eae7248f22e60"
+      },
+      {
+       "path": "smalvlm-256m-instruct_q8_ekv2048_single_image.tflite",
+       "size_bytes": 288229208,
+       "lfs_sha256": "48991855eb6365aae8cd1d8fe3013e6059dfea44b4ae26dd76dfa2a942dba3c4"
+      },
+      {
+       "path": "smalvlm_notebook.ipynb",
+       "size_bytes": 177613,
+       "lfs_sha256": null
+      },
+      {
+       "path": "test_tflite.py",
+       "size_bytes": 11112,
+       "lfs_sha256": null
+      },
+      {
+       "path": "tokenizer.model",
+       "size_bytes": 881895,
+       "lfs_sha256": "6682f47d3b33538490b21265ba3b2a83f8d48e09dcd7f957b46b508abb427a04"
+      }
+     ],
+     "source": "https://huggingface.co/api/models/litert-community/SmolVLM-256M-Instruct?blobs=true",
+     "accessed": "2026-10-06",
+     "note": "TFLite (ai-edge-torch) q8 ekv2048; card: NOT supported by MediaPipe LLM Inference API, needs custom C++ pipeline."
+    }
+   ],
+   "upstream_base": {
+    "vision": "google/siglip-base-patch16-512 (Apache-2.0; HF total 203,791,874 params incl. text tower; SmolVLM card: '93M encoder')",
+    "language": "HuggingFaceTB/SmolLM2-360M-Instruct (Apache-2.0; 361,821,120 params)",
+    "lineage": "SmolVLM2-500M-Video-Instruct base_model = SmolVLM-500M-Instruct"
+   },
+   "parameters": {
+    "value": 507482304,
+    "source": "HF safetensors metadata (SmolVLM2-500M F32; SmolVLM-500M BF16 same count)"
+   },
+   "weights_size": {
+    "SmolVLM2-500M_safetensors_f32": 2029990624,
+    "SmolVLM-500M_safetensors_bf16": 1015025832,
+    "SmolVLM-256M_safetensors_bf16": 513028808
+   },
+   "license": {
+    "weights": "Apache-2.0 (model card YAML + 'We release the SmolVLM2 checkpoints under the Apache 2.0 license')",
+    "training_data": {
+     "SmolVLM-500M/256M (v1) tags": {
+      "HuggingFaceM4/the_cauldron": "no single licence; 'Each of the publicly available sub-datasets ... governed by specific licensing conditions'; prompts CC-BY-4.0",
+      "HuggingFaceM4/Docmatix": "mit"
+     },
+     "SmolVLM2 additional": {
+      "lmms-lab/LLaVA-OneVision-Data": "apache-2.0 (tag)",
+      "lmms-lab/M4-Instruct-Data": "cc-by-4.0",
+      "HuggingFaceFV/finevideo": "cc (gated=auto)",
+      "MAmmoTH-VL/MAmmoTH-VL-Instruct-12M": "apache-2.0",
+      "lmms-lab/LLaVA-Video-178K": "card 'Apache License 2.0' but 'We only allow the use of this dataset for academic research and education purpose'",
+      "orrzohar/Video-STaR": "apache-2.0",
+      "Mutonix/Vript": "ACADEMIC USE ONLY / NO DISTRIBUTION (card licence section)",
+      "TIGER-Lab/VISTA-400K": "mit",
+      "Enxin/MovieChat-1K_train": "no licence tag; gated=auto",
+      "ShareGPT4Video/ShareGPT4Video": "cc-by-nc-4.0"
+     },
+     "assessment": "Mixed; SmolVLM2 video mixture includes academic-only / NC datasets. Weights are Apache-2.0; whether NC training data constrains commercial use is a legal question (flag). SmolVLM-500M-Instruct (image-only v1) has the smaller data footprint (Cauldron + Docmatix)."
+    }
+   },
+   "image_preprocessing": {
+    "processor": "SmolVLMImageProcessor: do_image_splitting=true, size.longest_edge=2048, max_image_size.longest_edge=512, mean/std 0.5, image_seq_len=64 per 512x512 tile (SigLIP 512/16 -> 1024 patches, pixel-shuffle scale_factor 4 -> 64)",
+    "tokens_per_image": "64 per tile; derived worst case square 2048 input = 4x4 tiles + 1 global = 17 x 64 = 1088 image tokens (computed from config, not measured); longest_edge=512 -> 64 tokens",
+    "litert_bundle": "fixed single 512x512 image, 64 tokens, no splitting; normalisation baked into graph"
+   },
+   "onnx": {
+    "in_repo": "HuggingFaceTB/<model>/onnx/ (vision_encoder, embed_tokens, decoder_model_merged; fp32/fp16/int8/uint8/quantized/q4/q4f16/bnb4)",
+    "SmolVLM2-500M_load_set_sizes": {
+     "fp32": {
+      "files": [
+       "onnx/vision_encoder.onnx",
+       "onnx/embed_tokens.onnx",
+       "onnx/decoder_model_merged.onnx"
+      ],
+      "total_bytes": 2032852322,
+      "total_MiB": 1938.7
+     },
+     "fp16": {
+      "files": [
+       "onnx/vision_encoder_fp16.onnx",
+       "onnx/embed_tokens_fp16.onnx",
+       "onnx/decoder_model_merged_fp16.onnx"
+      ],
+      "total_bytes": 1016839205,
+      "total_MiB": 969.7
+     },
+     "int8": {
+      "files": [
+       "onnx/vision_encoder_int8.onnx",
+       "onnx/embed_tokens_int8.onnx",
+       "onnx/decoder_model_merged_int8.onnx"
+      ],
+      "total_bytes": 511315044,
+      "total_MiB": 487.6
+     },
+     "quantized": {
+      "files": [
+       "onnx/vision_encoder_quantized.onnx",
+       "onnx/embed_tokens_quantized.onnx",
+       "onnx/decoder_model_merged_quantized.onnx"
+      ],
+      "total_bytes": 511315209,
+      "total_MiB": 487.6
+     },
+     "q4": {
+      "files": [
+       "onnx/vision_encoder_q4.onnx",
+       "onnx/embed_tokens_q4.onnx",
+       "onnx/decoder_model_merged_q4.onnx"
+      ],
+      "total_bytes": 485088978,
+      "total_MiB": 462.6
+     },
+     "q4f16": {
+      "files": [
+       "onnx/vision_encoder_q4f16.onnx",
+       "onnx/embed_tokens_q4f16.onnx",
+       "onnx/decoder_model_merged_q4f16.onnx"
+      ],
+      "total_bytes": 357638262,
+      "total_MiB": 341.1
+     },
+     "bnb4": {
+      "files": [
+       "onnx/vision_encoder_bnb4.onnx",
+       "onnx/embed_tokens_bnb4.onnx",
+       "onnx/decoder_model_merged_bnb4.onnx"
+      ],
+      "total_bytes": 456427954,
+      "total_MiB": 435.3
+     },
+     "mixed_q4dec_int8embed_q4vision": {
+      "files": [
+       "onnx/vision_encoder_q4.onnx",
+       "onnx/embed_tokens_int8.onnx",
+       "onnx/decoder_model_merged_q4.onnx"
+      ],
+      "total_bytes": 343162804,
+      "total_MiB": 327.3
+     }
+    },
+    "SmolVLM-500M_load_set_sizes": {
+     "fp32": {
+      "files": [
+       "onnx/vision_encoder.onnx",
+       "onnx/embed_tokens.onnx",
+       "onnx/decoder_model_merged.onnx"
+      ],
+      "total_bytes": 2032852109,
+      "total_MiB": 1938.7
+     },
+     "fp16": {
+      "files": [
+       "onnx/vision_encoder_fp16.onnx",
+       "onnx/embed_tokens_fp16.onnx",
+       "onnx/decoder_model_merged_fp16.onnx"
+      ],
+      "total_bytes": 1016838992,
+      "total_MiB": 969.7
+     },
+     "int8": {
+      "files": [
+       "onnx/vision_encoder_int8.onnx",
+       "onnx/embed_tokens_int8.onnx",
+       "onnx/decoder_model_merged_int8.onnx"
+      ],
+      "total_bytes": 511314831,
+      "total_MiB": 487.6
+     },
+     "quantized": {
+      "files": [
+       "onnx/vision_encoder_quantized.onnx",
+       "onnx/embed_tokens_quantized.onnx",
+       "onnx/decoder_model_merged_quantized.onnx"
+      ],
+      "total_bytes": 511314996,
+      "total_MiB": 487.6
+     },
+     "q4": {
+      "files": [
+       "onnx/vision_encoder_q4.onnx",
+       "onnx/embed_tokens_q4.onnx",
+       "onnx/decoder_model_merged_q4.onnx"
+      ],
+      "total_bytes": 485088765,
+      "total_MiB": 462.6
+     },
+     "q4f16": {
+      "files": [
+       "onnx/vision_encoder_q4f16.onnx",
+       "onnx/embed_tokens_q4f16.onnx",
+       "onnx/decoder_model_merged_q4f16.onnx"
+      ],
+      "total_bytes": 357638049,
+      "total_MiB": 341.1
+     },
+     "bnb4": {
+      "files": [
+       "onnx/vision_encoder_bnb4.onnx",
+       "onnx/embed_tokens_bnb4.onnx",
+       "onnx/decoder_model_merged_bnb4.onnx"
+      ],
+      "total_bytes": 456427741,
+      "total_MiB": 435.3
+     },
+     "mixed_q4dec_int8embed_q4vision": {
+      "files": [
+       "onnx/vision_encoder_q4.onnx",
+       "onnx/embed_tokens_int8.onnx",
+       "onnx/decoder_model_merged_q4.onnx"
+      ],
+      "total_bytes": 343162591,
+      "total_MiB": 327.3
+     }
+    },
+    "SmolVLM-256M_load_set_sizes": {
+     "fp32": {
+      "files": [
+       "onnx/vision_encoder.onnx",
+       "onnx/embed_tokens.onnx",
+       "onnx/decoder_model_merged.onnx"
+      ],
+      "total_bytes": 1028498218,
+      "total_MiB": 980.9
+     },
+     "fp16": {
+      "files": [
+       "onnx/vision_encoder_fp16.onnx",
+       "onnx/embed_tokens_fp16.onnx",
+       "onnx/decoder_model_merged_fp16.onnx"
+      ],
+      "total_bytes": 514479822,
+      "total_MiB": 490.6
+     },
+     "int8": {
+      "files": [
+       "onnx/vision_encoder_int8.onnx",
+       "onnx/embed_tokens_int8.onnx",
+       "onnx/decoder_model_merged_int8.onnx"
+      ],
+      "total_bytes": 259855281,
+      "total_MiB": 247.8
+     },
+     "quantized": {
+      "files": [
+       "onnx/vision_encoder_quantized.onnx",
+       "onnx/embed_tokens_quantized.onnx",
+       "onnx/decoder_model_merged_quantized.onnx"
+      ],
+      "total_bytes": 259855437,
+      "total_MiB": 247.8
+     },
+     "q4": {
+      "files": [
+       "onnx/vision_encoder_q4.onnx",
+       "onnx/embed_tokens_q4.onnx",
+       "onnx/decoder_model_merged_q4.onnx"
+      ],
+      "total_bytes": 263889326,
+      "total_MiB": 251.7
+     },
+     "q4f16": {
+      "files": [
+       "onnx/vision_encoder_q4f16.onnx",
+       "onnx/embed_tokens_q4f16.onnx",
+       "onnx/decoder_model_merged_q4f16.onnx"
+      ],
+      "total_bytes": 188843109,
+      "total_MiB": 180.1
+     },
+     "bnb4": {
+      "files": [
+       "onnx/vision_encoder_bnb4.onnx",
+       "onnx/embed_tokens_bnb4.onnx",
+       "onnx/decoder_model_merged_bnb4.onnx"
+      ],
+      "total_bytes": 249731074,
+      "total_MiB": 238.2
+     },
+     "mixed_q4dec_int8embed_q4vision": {
+      "files": [
+       "onnx/vision_encoder_q4.onnx",
+       "onnx/embed_tokens_int8.onnx",
+       "onnx/decoder_model_merged_q4.onnx"
+      ],
+      "total_bytes": 178733712,
+      "total_MiB": 170.5
+     }
+    },
+    "onnx_community": "no separate onnx-community SmolVLM repo needed; exports live in HuggingFaceTB repos"
+   },
+   "gguf": {
+    "SmolVLM2-500M": {
+     "Q8_0": 436808704,
+     "mmproj_Q8_0": 108785184,
+     "f16": 820424704,
+     "mmproj_f16": 199470624,
+     "Q4": "not published in ggml-org repo"
+    },
+    "SmolVLM2-256M": {
+     "Q4_K_M": 131234176,
+     "Q8_0": 175056256,
+     "mmproj_Q8_0": 103771616
+    },
+    "llama_cpp_support": "listed in llama.cpp docs/multimodal.md (libmtmd) for SmolVLM 256M/500M and SmolVLM2 256M/500M"
+   },
+   "litert": {
+    "bundle": "litert-community/SmolVLM2-500M @ dad030b6e56756201d670cfb4d042736a2ce3a5c : SmolVLM2-500M.litertlm 360,822,960 B sha256 b808b328d845a600a33c5295f93d9217487317bd334dbc91b2a8d50e26e60ad0",
+    "quantization": "vision encoder + connector int8; decoder int4 (blockwise-32); tied embedding int8; KV 2048",
+    "sections_bytes": {
+     "tokenizer": 644845,
+     "embedder": 47902368,
+     "prefill_decode": 208930496,
+     "vision_encoder": 91469200,
+     "vision_adapter": 11810992
+    },
+    "community_measurements_text_path_only": {
+     "Galaxy S26 GPU (litert-lm 0.16.0)": {
+      "peak_MB": 404,
+      "load_s": 1.3,
+      "decode_tok_s": 76.34,
+      "prefill_tok_s": 1382.6,
+      "image": false
+     },
+     "Galaxy S26 CPU (XNNPACK)": {
+      "peak_MB": 584,
+      "load_s": 0.6,
+      "decode_tok_s": "62.14-76.72",
+      "image": false
+     },
+     "caveat": "Card states the gate prompt carries no image; vision path latency/memory not measured. Manifest is internally inconsistent about GPU on S26."
+    },
+    "image_latency": "UNMEASURED"
+   },
+   "mediapipe_llm_inference": "NO for SmolVLM: MediaPipe LLM Inference API is maintenance-only; documented image input only for Gemma 3n; litert-community SmolVLM-256M card states VLMs not supported on MediaPipe LLM Inference",
+   "transformers_js": "idefics3 present from 3.2.0, smolvlm model_type from 3.4.0, both in 4.3.0",
+   "executorch": "examples/models/smolvlm has 500M_config.json + text-decoder weight mapping only (vision path not in that example dir)",
+   "official_memory": {
+    "SmolVLM-500M": "1.23 GB GPU RAM for one image (model card)",
+    "SmolVLM2-500M": "1.8 GB GPU RAM for video inference (model card)",
+    "SmolVLM-256M": "<1 GB GPU memory (paper abstract)"
+   },
+   "peak_ram_android": "UNMEASURED for image path (community LiteRT text-path only: 404 MB GPU / 584 MB CPU on Galaxy S26)",
+   "cold_load": "community LiteRT text path: 0.6 s CPU / 1.3 s GPU (S26); ORT-web: UNMEASURED",
+   "per_image_latency": "UNMEASURED (paper gives A100/L4 throughput and WebGPU decode 80 tok/s for 256M on M4 Max - none are Android image numbers)",
+   "cancellation": "LiteRT-LM Conversation.cancelProcess(); llama.cpp abort_callback + caller token loop; ORT-web/Transformers.js between tokens"
+  },
+  {
+   "id": "moondream-0.5b",
+   "name": "Moondream 0.5B (int8 / int4 .mf.gz)",
+   "required": true,
+   "artifacts": [
+    {
+     "hf_repo": "vikhyatk/moondream2",
+     "branch": "onnx",
+     "revision_sha": "9dddae84d54db4ac56fe37817aeaeb502ed083e2",
+     "files": [
+      {
+       "path": ".gitattributes",
+       "size_bytes": 1519,
+       "lfs_sha256": null
+      },
+      {
+       "path": "README.md",
+       "size_bytes": 28,
+       "lfs_sha256": null
+      },
+      {
+       "path": "moondream-0_5b-int4.mf.gz",
+       "size_bytes": 442376060,
+       "lfs_sha256": "56cb6c2b5ff43ec065cad89da8007224d37b1b10d053ff6d958f97baa195c129"
+      },
+      {
+       "path": "moondream-0_5b-int8.mf.gz",
+       "size_bytes": 621619051,
+       "lfs_sha256": "355c534d5f71fff8524dfeb41ba65f7d07948f910f754de4df242d0037d8be4a"
+      },
+      {
+       "path": "moondream-2b-int4.mf.gz",
+       "size_bytes": 1223366777,
+       "lfs_sha256": "616a1fae727dae66fed1f1dec1069c0d4d08078245e6b7d97d892961b88e61a7"
+      },
+      {
+       "path": "moondream-2b-int8.mf.gz",
+       "size_bytes": 1818358311,
+       "lfs_sha256": "8dad1bd4de366b20cfadde5a400753b077a751242889eb471c7886bad0180e94"
+      }
+     ],
+     "source": "https://huggingface.co/api/models/vikhyatk/moondream2/tree/onnx?recursive=true",
+     "accessed": "2026-10-06",
+     "note": "0.5B and 2B .mf.gz files uploaded 2024-12-05 (commits c22fc41f / 0394c52e for 0.5B int4 / int8); earlier .bin.gz uploads of 2024-12-03 were deleted. Branch README: license apache-2.0."
+    }
+   ],
+   "files_0_5b": {
+    "moondream-0_5b-int8.mf.gz": {
+     "size_bytes": 621619051,
+     "MiB": 592.8,
+     "lfs_sha256": "355c534d5f71fff8524dfeb41ba65f7d07948f910f754de4df242d0037d8be4a"
+    },
+    "moondream-0_5b-int4.mf.gz": {
+     "size_bytes": 442376060,
+     "MiB": 421.9,
+     "lfs_sha256": "56cb6c2b5ff43ec065cad89da8007224d37b1b10d053ff6d958f97baa195c129"
+    },
+    "download_url_pattern": "https://huggingface.co/vikhyatk/moondream2/resolve/9dddae84d54db4ac56fe37817aeaeb502ed083e2/moondream-0_5b-int8.mf.gz"
+   },
+   "official_numbers": {
+    "source": "https://moondream.ai/blog/introducing-moondream-0-5b ; https://moondream.ai/models",
+    "download_int8_MiB": 479,
+    "download_int4_MiB": 375,
+    "ram_int8_MiB": 996,
+    "ram_int4_MiB": 816,
+    "discrepancy": "Official download sizes (479/375 MiB) do not match the current HF .mf.gz files (592.8/421.9 MiB); the RAM numbers are official but unverified on Android."
+   },
+   "format": "'MOON' v1 container (gzip) of ONNX graphs vision_encoder, vision_projection, text_encoder, text_decoder, size_encoder, size_decoder, coord_encoder, coord_decoder + tokenizer + initial_kv_cache.npy + config.json (task templates). Read by moondream pypi 0.0.x moonfile.py / OnnxVL.",
+   "license": {
+    "0.5B artifact": "Apache-2.0 (onnx-branch README YAML; repo card apache-2.0; blog 'Apache License')",
+    "moondream2 main (2B, 2025-06-21)": "Apache-2.0",
+    "moondream3-preview": "BSL 1.1 with Additional Use Grant (no competitive hosted/embedded offering); Change License Apache-2.0 two years after first release (LICENSE.md)",
+    "moondream3.1-9B-A2B": "custom 'moondream-model-license-1.0' (not reviewed)",
+    "github vikhyat/moondream code": "Apache-2.0 (LICENSE, HEAD 6eccfceaf1aaff804a67cd157193a6f744fa2bdc)",
+    "pypi moondream / kestrel": "no licence metadata on PyPI; kestrel README: local inference free, finetuned-model inference needs API key; kestrel reports usage telemetry"
+   },
+   "local_runner": {
+    "works_with_mf": "moondream==0.0.6 (2024-12-10; and earlier 0.0.x): md.vl(model='<path>.mf[.gz]') -> OnnxVL; deps onnxruntime>=1.19.2,<2, tokenizers>=0.20.1,<0.21, pillow>=10.4,<11, numpy>=2.1.2",
+    "removed_in": "0.1.0 (2025-04-09): only CloudVL (cloud or local Moondream Server endpoint); no onnx_vl.py",
+    "current": "2.6.1 (2026-09-30): md.photon()/vl(local=True) via kestrel==0.9.1 (torch); registered Moondream models: moondream2 (vikhyatk/moondream2 model.safetensors), moondream3-preview, moondream3.1-9B-A2B - NO 0.5B",
+    "verdict": "0.5B is still downloadable and runnable only through the legacy 0.0.x ONNX client (or a custom ONNX Runtime port of OnnxVL). Not executed in this audit (weights not downloaded)."
+   },
+   "capabilities": "OnnxVL exposes caption (short/normal), query (free-form VQA), detect, point; availability per model is gated by templates in the .mf config.json -> which skills the 0.5B config enables is UNVERIFIED here. No segment in 0.0.x client (segment exists only in current 2.x Photon/cloud for MD3).",
+   "image_preprocessing": "0.0.6 client: 378x378 crops, layout templates (1,2),(2,1),(2,2) chosen by aspect ratio + global crop; local-crop features re-tiled and adaptive-avg-pooled to the global grid and concatenated channel-wise with the global features (derived from preprocess.py/onnx_vl.py; 27x27=729 visual positions assuming 14-px patches - derived, not verified)",
+   "status": "moondream.ai/models: 0.5B still listed but 'Designed primarily as a distillation target for extreme edge deployments' and 'Not generally recommended out of the box for most use cases'. HF moondream2 card: latest Moondream 2 = 2025-06-21; newest family Moondream 3 (Preview).",
+   "replacements": {
+    "moondream2 2025-06-21": "vikhyatk/moondream2 main @ 5d6c926f44e26b07957b0dd315bbedcb4c17a5fe, 1,927,237,104 params, model.safetensors 3,854,538,968 B sha256 70a7d94c0c8349eb58ed2d9e636ef2d0916960f321ecabeac6354b8ba3d7403f; Apache-2.0; trust_remote_code; skills caption/query(reasoning)/detect/point",
+    "moondream2 GGUF": "ggml-org/moondream2-20250414-GGUF @ 97d0efa4: text f16 2,839,535,072 B + mmproj f16 909,777,984 B (llama.cpp supported)",
+    "moondream2 4-bit": "moondream/moondream-2b-2025-04-14-4bit @ a89c5922: model.safetensors 2,032,380,848 B",
+    "official RAM moondream2": "int4 2,002 MiB / int8 2,624 MiB (moondream.ai/models)",
+    "moondream3-preview": "9B MoE (2B active), BSL 1.1, ~18.5 GB BF16 - not mobile"
+   },
+   "peak_ram": "official 996 MiB (int8) / 816 MiB (int4), platform unspecified; Android UNMEASURED",
+   "cold_load": "UNMEASURED",
+   "per_image_latency": "UNMEASURED",
+   "cancellation": "0.0.x client generates via a Python generator calling text_decoder.run per token -> cancellable between tokens; single vision run not interruptible",
+   "android_feasibility": "ONNX graphs could in principle run on ONNX Runtime (Android) or ORT-web; opset/op coverage unverified without unpacking the file. No GGUF/LiteRT/MLC 0.5B artifact found."
+  }
+ ],
+ "deployment_matrix": [
+  {
+   "candidate": "Florence-2-base(-ft)",
+   "runtime": "onnxruntime-web WASM (in app)",
+   "raw_weights": "463.2 MB fp16 safetensors / 1,086 MB fp32 ONNX set",
+   "int8": "275.0 MB (onnx int8 set)",
+   "int4": "333.3 MB q4 (embed unquantised) / 223.5 MB q4f16 / 215.1 MB mixed q4+int8-embed",
+   "cpu": "yes",
+   "gpu": "no",
+   "npu": "no",
+   "min_android": "app minimum",
+   "package_download": "215-275 MB model download; 0 MB runtime added",
+   "peak_ram": "UNMEASURED",
+   "preprocessing": "768x768 resize, 577 visual tokens",
+   "cold_load": "UNMEASURED",
+   "image_latency": "UNMEASURED",
+   "cancellation": "between decoder steps",
+   "closed_answer_vqa": "no task token; only grounding/OD/OCR/caption prompts"
+  },
+  {
+   "candidate": "SmolVLM2-500M / SmolVLM-500M",
+   "runtime": "onnxruntime-web WASM (in app)",
+   "raw_weights": "1,015 MB bf16 / 2,033 MB fp32 ONNX set",
+   "int8": "511.3 MB",
+   "int4": "485.1 MB q4 / 357.6 MB q4f16 / 343.2 MB mixed",
+   "cpu": "yes",
+   "gpu": "no",
+   "npu": "no",
+   "min_android": "app minimum",
+   "package_download": "343-511 MB",
+   "peak_ram": "UNMEASURED",
+   "preprocessing": "512 tiles, 64 tok/tile, up to 1088 tok at 2048 (can force 512 -> 64 tok)",
+   "cold_load": "UNMEASURED",
+   "image_latency": "UNMEASURED",
+   "cancellation": "between decoder steps",
+   "closed_answer_vqa": "yes (instruction-tuned chat VQA)"
+  },
+  {
+   "candidate": "SmolVLM2-500M",
+   "runtime": "LiteRT-LM (community .litertlm)",
+   "raw_weights": "-",
+   "int8": "vision int8 (in bundle)",
+   "int4": "360.8 MB bundle (decoder int4)",
+   "cpu": "yes",
+   "gpu": "yes (community-measured on S26, text path)",
+   "npu": "no NPU bundle",
+   "min_android": "minSdk 24 (AAR)",
+   "package_download": "AAR 20.5 MB (arm64 .so 21.8 MB) + 360.8 MB model",
+   "peak_ram": "text path only: 404 MB GPU / 584 MB CPU (community, S26); image UNMEASURED",
+   "preprocessing": "fixed 512x512, 64 tokens, no tiling",
+   "cold_load": "0.6 s CPU / 1.3 s GPU (community, S26, text path)",
+   "image_latency": "UNMEASURED",
+   "cancellation": "Conversation.cancelProcess()",
+   "closed_answer_vqa": "yes"
+  },
+  {
+   "candidate": "SmolVLM2-500M / SmolVLM-500M",
+   "runtime": "llama.cpp (libmtmd)",
+   "raw_weights": "820.4 MB f16 + 199.5 MB mmproj f16",
+   "int8": "436.8 MB Q8_0 + 108.8 MB mmproj Q8_0 = 545.6 MB",
+   "int4": "not published (256M has Q4_K_M 131.2 MB)",
+   "cpu": "yes",
+   "gpu": "OpenCL (Adreno) / Vulkan - untested for this model",
+   "npu": "Hexagon backend experimental - untested",
+   "min_android": "NDK android-28 in docs example",
+   "package_download": "self-built .so (size UNMEASURED) + 545.6 MB",
+   "peak_ram": "UNMEASURED",
+   "preprocessing": "SmolVLM tiling per mmproj",
+   "cold_load": "UNMEASURED",
+   "image_latency": "UNMEASURED",
+   "cancellation": "abort_callback + token loop; image encode not abortable via mtmd API",
+   "closed_answer_vqa": "yes"
+  },
+  {
+   "candidate": "SmolVLM-256M",
+   "runtime": "onnxruntime-web WASM / llama.cpp / TFLite",
+   "raw_weights": "513.0 MB bf16",
+   "int8": "259.9 MB ONNX int8 set; GGUF Q8_0 175.1 + mmproj 103.8 MB; TFLite q8 288.3 MB",
+   "int4": "178.7 MB ONNX mixed; GGUF (SmolVLM2-256M) Q4_K_M 131.2 MB",
+   "cpu": "yes",
+   "gpu": "via llama.cpp OpenCL/Vulkan (untested)",
+   "npu": "no",
+   "min_android": "-",
+   "package_download": "179-260 MB",
+   "peak_ram": "<1 GB GPU (paper, desktop); Android UNMEASURED",
+   "preprocessing": "as SmolVLM",
+   "cold_load": "UNMEASURED",
+   "image_latency": "UNMEASURED",
+   "cancellation": "between tokens",
+   "closed_answer_vqa": "yes (weaker)"
+  },
+  {
+   "candidate": "Moondream 0.5B",
+   "runtime": "ONNX Runtime (python moondream 0.0.6) / port to ORT-web",
+   "raw_weights": "no fp16 artifact published",
+   "int8": "621.6 MB .mf.gz (official RAM 996 MiB)",
+   "int4": "442.4 MB .mf.gz (official RAM 816 MiB)",
+   "cpu": "yes (python ORT)",
+   "gpu": "CUDA EP in python client only",
+   "npu": "no",
+   "min_android": "UNVERIFIED (no Android path)",
+   "package_download": "442-622 MB",
+   "peak_ram": "official 816-996 MiB (platform unspecified)",
+   "preprocessing": "378x378 crops + global",
+   "cold_load": "UNMEASURED",
+   "image_latency": "UNMEASURED",
+   "cancellation": "between tokens (python generator)",
+   "closed_answer_vqa": "query skill (free-form); detect/point if templates present (UNVERIFIED for 0.5B)"
+  }
+ ],
+ "runtimes": [
+  {
+   "id": "onnxruntime-web-wasm",
+   "version": "1.30.0 (npm, published 2026-09-14; in app)",
+   "license": "MIT",
+   "image_models": "any ONNX export (Florence-2, SmolVLM, Moondream 0.5B graphs) - caller supplies pre/post-processing",
+   "cpu": "yes (WASM SIMD; app runs single thread)",
+   "gpu": "no in nodejs-mobile (WebGPU/JSEP builds need a browser WebGPU)",
+   "npu": "no",
+   "min_android": "inherits nodejs-mobile",
+   "package_size": "already shipped; ort-wasm-simd-threaded.wasm 14,239,897 B",
+   "quant_ops_evidence": "op-name strings MatMulNBits, GroupQueryAttention, MatMulInteger, DynamicQuantizeMatMul, GatherBlockQuantized present in ort-wasm-simd-threaded.wasm (string presence only, not executed)",
+   "memory_ceiling": "wasm32 heap <= 4 GiB; whole model bytes live in WASM heap",
+   "cancellation": "RunOptions.terminate declared (WASM backend only); single-thread run() blocks the event loop, so practical cancellation = between run() calls (per token) or terminating a worker_thread",
+   "transformers_js_note": "@huggingface/transformers 4.3.0 node build statically imports sharp (^0.35.4; engines node>=20.9.0; no Android prebuilt) and requires onnxruntime-node; its bundled ort-web is 1.31.0-dev and default wasm path is jsdelivr CDN -> not drop-in for Node 18 nodejs-mobile; port processors or use ORT-web directly"
+  },
+  {
+   "id": "onnxruntime-android",
+   "version": "1.30.0 AAR (Maven Central, 53,040,218 B)",
+   "license": "MIT",
+   "note": "005G finding: AAR merges INTERNET/ACCESS_NETWORK_STATE + telemetry provider into the manifest (not re-verified here)",
+   "cpu": "yes",
+   "gpu": "NNAPI/QNN/XNNPACK EPs (not audited)",
+   "cancellation": "RunOptions.setTerminate (native API) - not re-verified"
+  },
+  {
+   "id": "litert-lm",
+   "version": "litertlm-android 0.17.1 (Google Maven, lastUpdated 2026-09-16); repo HEAD 84d96699 (VERSION 0.18.0 dev)",
+   "license": "Apache-2.0",
+   "aar": {
+    "size_bytes": 20493837,
+    "sha256": "a8aeaa6b128e9b0f1c7fe5e620932a7030cfff1ac9c0dc133d8c79711de5cf4d",
+    "minSdk": 24,
+    "permissions_in_aar_manifest": "none",
+    "arm64_so": "liblitertlm_jni.so 21,802,960 B, LOAD align 0x4000 (16 KB), GNU_RELRO present",
+    "deps": "gson 2.14.0, kotlin-reflect 2.4.0, kotlinx-coroutines-android 1.11.0"
+   },
+   "image_support": "Content.ImageFile/ImageBytes with visionBackend; official docs name Gemma 3n as multimodal example; official supported-model table lists Gemma4-E2B/E4B, Gemma-3n, Gemma3-1B, phi-4-mini, Qwen2.5/Qwen3 (no SmolVLM/Florence/Moondream). Community fast_vlm bundles (SmolVLM2-500M, FastVLM-0.5B) run with image input.",
+   "cpu": "yes",
+   "gpu": "yes (needs uses-native-library libOpenCL.so / libvndksupport.so)",
+   "npu": "yes on supported Qualcomm/MediaTek/Google Tensor with device-specific bundles",
+   "cancellation": "Conversation.cancelProcess() / Session.cancelProcess() (Kotlin source, JNI nativeConversationCancelProcess)"
+  },
+  {
+   "id": "mediapipe-llm-inference",
+   "version": "com.google.mediapipe:tasks-genai 0.10.35 latest on Google Maven (docs show 0.10.27)",
+   "license": "Apache-2.0",
+   "status": "maintenance-only; Google recommends migrating to LiteRT-LM",
+   "image_support": "Gemma 3n E2B/E4B only (docs)",
+   "devices": "'optimized for high-end Android devices, such as Pixel 8 and Samsung S23 or later'; emulators unreliable",
+   "cancellation": "not documented (UNVERIFIED)",
+   "fit": "cannot run SmolVLM/Florence/Moondream"
+  },
+  {
+   "id": "llama.cpp",
+   "version": "tag b11445 / master a46709b683aba9274d8ab29f5b42f7e551d1dff6 (2026-10-06)",
+   "license": "MIT",
+   "multimodal": "libmtmd; supported vision GGUFs include SmolVLM 256M/500M, SmolVLM2 256M/500M, Moondream2 20250414, InternVL3-1B, Qwen2.5-VL, Gemma 3/4; NOT Florence-2, NOT Moondream 0.5B",
+   "android": "examples/llama.android (Kotlin binding, arm64 kernels incl. SME2/KleidiAI), NDK cross-compile android-28 in docs; OpenCL backend for Adreno (verified Snapdragon 8 Gen 3 / 8 Elite); Vulkan; Hexagon/Snapdragon backend doc present",
+   "cancellation": "caller-driven token loop + llama_set_abort_callback (llama.h); mtmd.h exposes no abort for image encoding"
+  },
+  {
+   "id": "executorch",
+   "version": "v1.5.1 (executorch-android 1.5.1 on Maven Central, lastUpdated 2026-10-01)",
+   "license": "BSD-style",
+   "vlm_status": "MultimodalRunner (text/image/audio); Android LlmModule.prefillImages()/prefillNormalizedImage()/stop(); in-tree examples: llava, llama3_2_vision, gemma3, gemma4 (E2B/E4B incl. vision encoder), internvl3, lfm2, smolvlm (text-decoder config only); optimum-executorch 1.1.0 lists no VLMs",
+   "cancellation": "LlmModule.stop() / runner stop()"
+  },
+  {
+   "id": "mlc-llm",
+   "version": "main 69881d12 (2026-10-03); tags up to v0.20.0 / v0.26.dev0",
+   "license": "Apache-2.0",
+   "vlm_status": "model defs llava, phi3v, qwen2_5_vl, gemma3, gemma4 exist; no Idefics3/SmolVLM, Florence-2 or Moondream; Android image-input path UNVERIFIED",
+   "cancellation": "UNVERIFIED"
+  }
+ ],
+ "optional_candidates": [
+  {
+   "model": "SmolVLM-256M-Instruct",
+   "params": 256484928,
+   "license": "Apache-2.0",
+   "smallest_artifact": "GGUF Q8_0 175.1 MB + mmproj 103.8 MB; ONNX mixed 178.7 MB",
+   "flag": "OK licence; weaker accuracy"
+  },
+  {
+   "model": "Qwen3-VL-2B-Instruct",
+   "params": 2127532032,
+   "license": "Apache-2.0",
+   "smallest_artifact": "ggml-org GGUF Q8_0 1,834.4 MB + mmproj Q8_0 445.1 MB",
+   "flag": "OK licence; ~4x size"
+  },
+  {
+   "model": "Qwen2.5-VL-3B-Instruct",
+   "params": 3754622976,
+   "license": "Qwen RESEARCH LICENSE (non-commercial)",
+   "smallest_artifact": "-",
+   "flag": "EXCLUDE (non-commercial)"
+  },
+  {
+   "model": "Qwen3.5-0.8B (natively multimodal, image-text-to-text)",
+   "params": 873438784,
+   "license": "Apache-2.0",
+   "smallest_artifact": "unsloth GGUF Q4_K_M 532.5 MB + mmproj F16 205.0 MB",
+   "flag": "OK licence; new (2026-03); evaluate"
+  },
+  {
+   "model": "InternVL3-1B",
+   "params": 938193024,
+   "license": "card apache-2.0 + license_name 'qwen' link; README: MIT project, Qwen2.5 component Apache-2.0",
+   "smallest_artifact": "ggml-org GGUF Q8_0 675.2 MB + mmproj Q8_0 332.6 MB",
+   "flag": "licence metadata inconsistent - review"
+  },
+  {
+   "model": "InternVL3_5-1B",
+   "params": 1060897792,
+   "license": "Apache-2.0",
+   "smallest_artifact": "-",
+   "flag": "OK licence"
+  },
+  {
+   "model": "Gemma 3n E2B-it",
+   "params": 5439438272,
+   "license": "Gemma Terms of Use (custom, gated)",
+   "smallest_artifact": "LiteRT-LM int4 3,655.8 MB (official Google)",
+   "flag": "custom terms + large; official MobileNet-V5 encoder 'up to 60 fps on Pixel' (Google dev guide)"
+  },
+  {
+   "model": "Gemma 4 E2B-it",
+   "params": 5123178051,
+   "license": "Apache-2.0 (card)",
+   "smallest_artifact": "litert-community .litertlm 2,588.1 MB CPU / 2,008.4 MB GPU; GGUF Q4_0 2,841.5 MB + mmproj Q8_0 557.4 MB",
+   "flag": "official LiteRT-LM/MediaPipe-successor path; large"
+  },
+  {
+   "model": "PaliGemma 2 3B",
+   "params": 3032242416,
+   "license": "Gemma Terms of Use (gated)",
+   "smallest_artifact": "-",
+   "flag": "custom terms; large"
+  },
+  {
+   "model": "LFM2-VL-450M",
+   "params": 450822656,
+   "license": "LFM Open License v1.0: commercial use only below USD 10M annual revenue",
+   "smallest_artifact": "GGUF Q4_0 219.3 MB + mmproj Q8_0 103.9 MB; ONNX q4 ~366 MB",
+   "flag": "revenue-threshold licence - review"
+  },
+  {
+   "model": "LFM2-VL-1.6B / LFM2.5-VL-1.6B",
+   "params": 1596625904,
+   "license": "LFM Open License v1.0 (same threshold)",
+   "smallest_artifact": "-",
+   "flag": "revenue-threshold licence"
+  },
+  {
+   "model": "FastVLM-0.5B",
+   "params": 758833760,
+   "license": "Apple ML Research Model License (research purposes only)",
+   "smallest_artifact": "LiteRT-LM 1,156.3 MB; NPU bundles ~0.94 GB",
+   "flag": "EXCLUDE (research-only); note: only model found with official-style Android image TTFT (0.55 s GPU / 0.12 s NPU, 1766/925 MB RSS, Xiaomi 17 Pro Max)"
+  },
+  {
+   "model": "PaddleOCR-VL",
+   "params": 958588736,
+   "license": "Apache-2.0",
+   "smallest_artifact": "litert-community/PaddleOCR-VL-1.6 exists (not sized)",
+   "flag": "OCR-specialised; not a closed-answer VQA model"
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://huggingface.co/api/models/microsoft/Florence-2-base?blobs=true",
+   "what": "Florence-2-base files/sha/params",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://huggingface.co/api/models/microsoft/Florence-2-base/commits/main",
+   "what": "Florence-2-base commit history",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://huggingface.co/microsoft/Florence-2-base/raw/main/LICENSE",
+   "what": "MIT licence text",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://huggingface.co/microsoft/Florence-2-base/raw/main/README.md",
+   "what": "model card, sizes, benchmarks",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://huggingface.co/microsoft/Florence-2-base/raw/main/processing_florence2.py",
+   "what": "task prompt table",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://huggingface.co/microsoft/Florence-2-base-ft/raw/main/README.md",
+   "what": "-ft VQA benchmark table",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://huggingface.co/microsoft/Florence-2-base/raw/main/preprocessor_config.json",
+   "what": "768x768, 577 tokens",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://raw.githubusercontent.com/huggingface/transformers/v4.56.0/docs/source/en/model_doc/florence2.md",
+   "what": "native Florence2 docs",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://raw.githubusercontent.com/huggingface/transformers/v4.55.4/src/transformers/models/florence2/modeling_florence2.py",
+   "what": "404 (absent before 4.56.0)",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://pypi.org/pypi/transformers/4.56.0/json",
+   "what": "4.56.0 upload 2025-08-29",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://arxiv.org/html/2311.06242",
+   "what": "Florence-2 paper: FLD-5B sources, UniCL/BART init",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://raw.githubusercontent.com/microsoft/UniCL/main/LICENSE",
+   "what": "MIT",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://raw.githubusercontent.com/facebookresearch/fairseq/main/LICENSE",
+   "what": "MIT",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://raw.githubusercontent.com/dingmyu/davit/main/LICENSE",
+   "what": "MIT",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://huggingface.co/api/models/onnx-community/Florence-2-base?blobs=true",
+   "what": "ONNX variants",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://huggingface.co/api/models/florence-community/Florence-2-base?blobs=true",
+   "what": "native-format conversion",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://huggingface.co/api/models/HuggingFaceTB/SmolVLM2-500M-Video-Instruct?blobs=true",
+   "what": "SmolVLM2-500M files incl. onnx/",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://huggingface.co/HuggingFaceTB/SmolVLM2-500M-Video-Instruct/raw/main/README.md",
+   "what": "licence, training data, 1.8 GB video RAM",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://huggingface.co/HuggingFaceTB/SmolVLM-500M-Instruct/raw/main/README.md",
+   "what": "1.23 GB GPU RAM, 64 tokens/512 patch, 93M encoder",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://huggingface.co/HuggingFaceTB/SmolVLM2-500M-Video-Instruct/raw/main/preprocessor_config.json",
+   "what": "image splitting config",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://arxiv.org/html/2504.05299",
+   "what": "SmolVLM paper memory/throughput",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://huggingface.co/datasets/HuggingFaceM4/the_cauldron/raw/main/README.md",
+   "what": "per-subset licensing",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://huggingface.co/datasets/Mutonix/Vript/raw/main/README.md",
+   "what": "academic use only",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://huggingface.co/api/datasets/ShareGPT4Video/ShareGPT4Video",
+   "what": "cc-by-nc-4.0",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://huggingface.co/datasets/lmms-lab/LLaVA-Video-178K/raw/main/README.md",
+   "what": "academic research/education only statement",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://huggingface.co/api/models/ggml-org/SmolVLM2-500M-Video-Instruct-GGUF?blobs=true",
+   "what": "GGUF sizes",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://huggingface.co/litert-community/SmolVLM2-500M/raw/main/README.md",
+   "what": "LiteRT-LM bundle card + community measurements",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://huggingface.co/litert-community/SmolVLM2-500M/raw/main/litertlm_manifest.json",
+   "what": "bundle sections/measurements",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://huggingface.co/litert-community/SmolVLM-256M-Instruct/raw/main/README.md",
+   "what": "TFLite; not MediaPipe-supported",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://huggingface.co/api/models/vikhyatk/moondream2/refs",
+   "what": "branches onnx/client/main + tags",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://huggingface.co/api/models/vikhyatk/moondream2/tree/onnx?recursive=true",
+   "what": "0.5B .mf.gz sizes + sha256",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://huggingface.co/api/models/vikhyatk/moondream2/commits/onnx",
+   "what": "upload dates",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://huggingface.co/vikhyatk/moondream2/raw/main/README.md",
+   "what": "moondream2 2025-06-21, points to moondream3-preview",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://huggingface.co/moondream/moondream3-preview/raw/main/LICENSE.md",
+   "what": "BSL 1.1",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://moondream.ai/blog/introducing-moondream-0-5b",
+   "what": "0.5B sizes/RAM/licence",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://moondream.ai/models",
+   "what": "0.5B status: distillation target",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://pypi.org/pypi/moondream/json",
+   "what": "release history",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://files.pythonhosted.org/packages/dc/8a/7024d97b886345190f12c15722274a38d493de3866417e5ba2d85e59d8fc/moondream-0.0.6-py3-none-any.whl",
+   "what": "OnnxVL + moonfile code (inspected)",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://pypi.org/pypi/kestrel/0.9.1/json",
+   "what": "Photon engine; model registry inspected in wheel",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://github.com/vikhyat/moondream (git clone --depth 1, HEAD 6eccfceaf1aaff804a67cd157193a6f744fa2bdc)",
+   "what": "Apache-2.0, 0.5B as distillation target",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://github.com/google-ai-edge/LiteRT-LM (git clone --depth 1, HEAD 84d96699d4b8712792c54dcface7a436dd8a4d92)",
+   "what": "Kotlin API, cancelProcess, multimodality",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://dl.google.com/android/maven2/com/google/ai/edge/litertlm/litertlm-android/0.17.1/litertlm-android-0.17.1.aar",
+   "what": "AAR manifest/minSdk/.so alignment (inspected)",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://developers.google.com/edge/litert-lm/overview",
+   "what": "official supported model table/backends",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://developers.google.com/edge/mediapipe/solutions/genai/llm_inference/android",
+   "what": "maintenance-only; Gemma 3n image input",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://dl.google.com/android/maven2/com/google/mediapipe/tasks-genai/maven-metadata.xml",
+   "what": "tasks-genai 0.10.35",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/docs/multimodal.md",
+   "what": "libmtmd supported models",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/docs/android.md",
+   "what": "Android build",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/docs/backend/OPENCL.md",
+   "what": "Adreno OpenCL",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/include/llama.h",
+   "what": "abort_callback",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://github.com/pytorch/executorch (blob-less clone HEAD 9a9f422e334a8b4e8610b4287549fe1f192c781c)",
+   "what": "examples/models list, LlmModule.kt",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://repo1.maven.org/maven2/org/pytorch/executorch-android/maven-metadata.xml",
+   "what": "1.5.1",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://github.com/mlc-ai/mlc-llm (blob-less clone HEAD 69881d121ee3f6dd00fe3745586a908c1b81c064)",
+   "what": "model architectures",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://registry.npmjs.org/onnxruntime-web",
+   "what": "1.30.0 published 2026-09-14",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://registry.npmjs.org/@huggingface/transformers",
+   "what": "4.3.0 deps (sharp, onnxruntime-node)",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://registry.npmjs.org/sharp",
+   "what": "0.35.5 engines node>=20.9.0, no android prebuilt",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://repo1.maven.org/maven2/com/microsoft/onnxruntime/onnxruntime-android/1.30.0/",
+   "what": "AAR size",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://huggingface.co/litert-community/FastVLM-0.5B/raw/main/README.md",
+   "what": "FastVLM LiteRT image TTFT/RSS; apple-amlr",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://huggingface.co/LiquidAI/LFM2-VL-450M/raw/main/LICENSE",
+   "what": "USD 10M revenue threshold",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct/raw/main/LICENSE",
+   "what": "Qwen research licence (non-commercial)",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://huggingface.co/google/gemma-4-E2B-it/raw/main/README.md",
+   "what": "Apache 2.0",
+   "accessed": "2026-10-06"
+  },
+  {
+   "url": "https://developers.googleblog.com/en/introducing-gemma-3n-developer-guide/",
+   "what": "MobileNet-V5 up to 60 fps on Pixel (via search result)",
+   "accessed": "2026-10-06"
+  }
+ ]
+}
