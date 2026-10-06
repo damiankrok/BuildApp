@@ -10,9 +10,13 @@ import androidx.compose.ui.test.SemanticsMatcher
 import androidx.test.espresso.Espresso
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.semantics.SemanticsActions
+import androidx.compose.ui.test.hasAnyAncestor
+import androidx.compose.ui.test.hasAnyDescendant
 import androidx.compose.ui.test.hasClickAction
+import androidx.compose.ui.test.hasScrollAction
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.junit4.ComposeTestRule
 import androidx.lifecycle.ViewModelProvider
@@ -124,6 +128,54 @@ class Evidence(private val compose: ComposeTestRule, folder: String, private val
     /** Wait until a node matching [matcher] is on screen: screens settle over a few frames. */
     fun awaitNode(matcher: SemanticsMatcher, unmerged: Boolean = false, timeoutMs: Long = NODE_TIMEOUT_MS) {
         compose.waitUntil(timeoutMs) { compose.onAllNodes(matcher, useUnmergedTree = unmerged).fetchSemanticsNodes().isNotEmpty() }
+    }
+
+    /**
+     * Wait until exactly one node matches [matcher], or fail saying how many there were. Counting goes through
+     * `fetchSemanticsNodes`, which reads the tree on the UI thread; Compose's own "expected one node" message is
+     * built on the test thread and, while the UI thread is still laying out, trips `SnapshotStateObserver`'s
+     * thread check and hides the real mismatch (005J run 181).
+     */
+    fun awaitExactlyOne(matcher: SemanticsMatcher, what: String, timeoutMs: Long = NODE_TIMEOUT_MS) {
+        var found = -1
+        try {
+            compose.waitUntil(timeoutMs) { compose.onAllNodes(matcher).fetchSemanticsNodes().size.also { found = it } == 1 }
+        } catch (e: androidx.compose.ui.test.ComposeTimeoutException) {
+            throw AssertionError("$what: expected exactly one node, found $found after ${timeoutMs / 1000} s", e)
+        }
+    }
+
+    /** Click the one node [matcher] finds, once there is exactly one (see [awaitExactlyOne]). */
+    fun clickExactlyOne(matcher: SemanticsMatcher, what: String) {
+        awaitExactlyOne(matcher, what)
+        compose.onNode(matcher).performClick()
+    }
+
+    /**
+     * The stage sheet's list: the scrolling node that holds stage rows, each a clickable that says its state in
+     * words. At most one stage is in progress, so a done or a not-started row is always on screen. The house
+     * behind the modal sheet stays in the semantics tree, with scrolling nodes and a timeline head that prints a
+     * stage's name and is clickable, so neither "the first scrolling node" nor a stage's name alone is the sheet.
+     */
+    fun stageList(): SemanticsMatcher =
+        hasScrollAction() and hasAnyDescendant(hasClickAction() and (hasText(string(R.string.stage_status_done)) or hasText(string(R.string.stage_status_not_started))))
+
+    /**
+     * Open the stage named [label] on the stage sheet and bring its actions into view (005K Phase 0). Every step
+     * waits for the sheet to settle and for exactly one node to act on: the previous edit's change may still be
+     * composing when the next stage is looked up.
+     */
+    fun openStage(label: String) {
+        val list = stageList()
+        compose.waitForIdle()
+        awaitExactlyOne(list, "the stage sheet's list")
+        compose.onNode(list).performScrollToNode(hasText(label))
+        val row = hasText(label) and hasClickAction() and hasAnyAncestor(list)
+        awaitExactlyOne(row, "the stage row '$label'")
+        compose.onNode(row).performClick()
+        compose.waitForIdle()
+        awaitExactlyOne(list, "the stage sheet's list")
+        compose.onNode(list).performScrollToNode(hasText(string(R.string.stage_show_in_3d)) or hasText(string(R.string.stage_show_now)))
     }
 
     /**

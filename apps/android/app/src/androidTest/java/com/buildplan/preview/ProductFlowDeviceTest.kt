@@ -311,13 +311,7 @@ class ProductFlowDeviceTest {
     private fun hasSetProgressOnly(): SemanticsMatcher =
         SemanticsMatcher("not the timeline's rule") { node -> node.config.getOrNull(androidx.compose.ui.semantics.SemanticsProperties.ContentDescription)?.contains(evidence.string(R.string.timeline_rule_description)) != true }
 
-    private fun openStage(key: ConstructionStageKey) {
-        val name = evidence.string(stageLabel(key))
-        list().performScrollToNode(hasText(name))
-        compose.onNode(hasText(name) and hasClickAction()).performClick()
-        compose.waitForIdle()
-        list().performScrollToNode(hasText(evidence.string(R.string.stage_show_in_3d)) or hasText(evidence.string(R.string.stage_show_now)))
-    }
+    private fun openStage(key: ConstructionStageKey) = evidence.openStage(evidence.string(stageLabel(key)))
 
     /** The stage sheet's drawing of the house is on screen, in ink: a blank drawing is a failed sheet. */
     private fun assertDrawingInked(preview: PreviewViewModel, progress: ProgressViewModel, shot: Bitmap, step: String) {

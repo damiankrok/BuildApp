@@ -5,13 +5,10 @@ import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasContentDescription
-import androidx.compose.ui.test.hasScrollAction
 import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.hasText
-import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import androidx.compose.ui.test.performClick
-import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTextReplacement
 import androidx.test.core.app.ActivityScenario
@@ -145,11 +142,11 @@ class VerticalSliceDeviceTest {
         evidence.awaitStageSheet()
         for (key in DONE) {
             openStage(stageName(key))
-            compose.onNode(hasText(evidence.string(R.string.stage_mark_done)) and hasClickAction()).performClick()
+            evidence.clickExactlyOne(hasText(evidence.string(R.string.stage_mark_done)) and hasClickAction(), "the open stage's mark-done action")
             compose.waitUntil(5_000) { progress.view?.stages?.firstOrNull { it.stageKey == key }?.status == StageStatus.DONE }
         }
         openStage(stageName(ConstructionStageKey.ROOF))
-        compose.onNode(hasText(evidence.string(R.string.stage_make_current)) and hasClickAction()).performClick()
+        evidence.clickExactlyOne(hasText(evidence.string(R.string.stage_make_current)) and hasClickAction(), "the open stage's make-current action")
         compose.waitUntil(5_000) { progress.view?.summary?.currentStage == ConstructionStageKey.ROOF }
         compose.onNode(androidx.compose.ui.test.SemanticsMatcher.keyIsDefined(SemanticsActions.SetProgress) and notTheRule())
             .performSemanticsAction(SemanticsActions.SetProgress) { it(0.5f) }
@@ -236,21 +233,13 @@ class VerticalSliceDeviceTest {
         return expected
     }
 
-    /** The stage sheet's list (the only scrolling node while the sheet is open). */
-    private fun list() = compose.onAllNodes(hasScrollAction()).onFirst()
-
     /** The completion slider, not the timeline's rule behind the sheet. */
     private fun notTheRule(): androidx.compose.ui.test.SemanticsMatcher =
         androidx.compose.ui.test.SemanticsMatcher("not the timeline's rule") { node ->
             node.config.getOrNull(androidx.compose.ui.semantics.SemanticsProperties.ContentDescription)?.contains(evidence.string(R.string.timeline_rule_description)) != true
         }
 
-    private fun openStage(label: String) {
-        list().performScrollToNode(hasText(label))
-        compose.onNode(hasText(label) and hasClickAction()).performClick()
-        compose.waitForIdle()
-        list().performScrollToNode(hasText(evidence.string(R.string.stage_show_in_3d)) or hasText(evidence.string(R.string.stage_show_now)))
-    }
+    private fun openStage(label: String) = evidence.openStage(label)
 
     private fun stageName(key: ConstructionStageKey): String = evidence.string(
         when (key) {
