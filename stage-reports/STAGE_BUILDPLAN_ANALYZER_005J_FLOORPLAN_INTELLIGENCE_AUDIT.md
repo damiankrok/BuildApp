@@ -16,7 +16,7 @@
 | TRAINING ROUTE (Q4) | **COMMERCIAL-CLEAN**: BuildPlan synthetic data, from scratch. A teacher on real crops is CONDITIONAL on counsel (§H) |
 | COUNCIL (Part J) | six independent reviewers (§K): A CHANGES REQUESTED (1 P0), B CONDITIONAL PASS, C CONDITIONAL PASS, D CONDITIONAL PASS, E CHANGES REQUESTED on the spec (freeze PASS), F CHANGES REQUESTED (1 P0). **F's P0 flipped the decision to NO_AI_YET.** No P0 open; every P1 fixed or stated (`post-review/resolution.md`) |
 | DECISION (Part K, Q5) | **PRIMARY_NEXT: NO_AI_YET**: 005K builds per-gap evidence records and a sealed fresh-sheet gap set, and measures a deterministic drawn-gap upgrade on it. **SECONDARY_LATER: TRAIN_BUILDPLAN_WALL_MODEL** as the challenger, adopted only if the sealed set shows false upgrades that matter and that it refuses (§L) |
-| **Stage** | ⟪FINAL_TOKEN_ROW⟫ |
+| **Stage** | **PARTIAL** — every research deliverable is complete, the council is resolved, and production is proven unchanged; CI is red on one Android device-test job outside this stage's diff, red on both attempts and not fixable here without touching frozen `apps/` (§N). `PARTIAL_BUILDPLAN_ANALYZER_005J_CI_UI_EVIDENCE_RED` |
 
 **Branch and history.**
 - Branch `analyzer/floorplan-intelligence-audit-v1`, from `analyzer/dimension-topology-boundary-bakeoff-v1` @
@@ -555,7 +555,7 @@ lived only under `/home/user/work005j/replay/`.
 | e2e / Android | no production or UI change, so nothing new to exercise; the repository's Android and emulator jobs run in CI (below) |
 | analyzer regression | production unchanged (§M): the analyzer gates in CI run on byte-identical production code. In addition, the replay with the oracle OFF reproduced the sealed model hash or failure code on 21 of 23 rows (§E) |
 | research deps | none added to any `package.json` or lockfile; Python environments live outside the repository, frozen in `research/analyzer-005j/requirements-*.lock.txt` |
-| CI | ⟪CI_RESULT⟫ |
+| CI | **red on one job, which this stage did not touch.** BuildApp CI run 37514203211 on `d287aba` (the last content commit): 38 jobs pass and 2 are skipped by design (the direct and OWNER APK uploads), including all 22 development-house analyzer jobs, generalization, evidence pack, dimension evidence, plan resolver, the external numeric recogniser, Node 18 parity, APK size + emulator, the 3D entry gate, Playwright, the analyzer API, architecture and dependency security. **1 job is red: the Android UI evidence gate.** On attempt 1, `VerticalSliceDeviceTest.openStage` failed on the Kosaćce slice, and `GenericSourceDeviceTest` timed out after 45 s waiting for the renderer on a live third-party page. On the one re-run (attempt 2), `GenericSourceDeviceTest` passed, and `openStage` failed again in the same place on a different house (Rarytasy), with Compose's `IllegalArgumentException: Detected multithreaded access to SnapshotStateObserver`. A second failure is treated as real. It is not this stage's: `apps/`, `packages/` and `.github/` are byte-identical to `64b78b4` (§M), where the same gate passed (run 37482413556). The stack shows the root: a node lookup in `openStage` (`VerticalSliceDeviceTest.kt:249–250`) found a number of matches other than one. Compose then built its failure message (`printToString`) on the instrumentation thread and tripped its own thread check, which hides the real mismatch. The step acts right after the previous stage's state change, with no wait for the sheet to settle. **Not fixed here**: the brief forbids production change, and the freeze proof covers `apps/`. Proposed patch for a later stage, in `openStage`: `compose.waitForIdle()`; scope the row matcher to the sheet (`hasText(label) and hasClickAction() and hasAnyAncestor(hasScrollAction())`); and `compose.waitUntil(10_000) { compose.onAllNodes(row).fetchSemanticsNodes().size == 1 }` before each `performScrollToNode` / `performClick`. Local gates are green (§N rows above). |
 
 ## O. Limitations and deviations, stated plainly
 
@@ -608,11 +608,12 @@ lived only under `/home/user/work005j/replay/`.
     annotated by the study agent, and blind-8 truth is the accepted 005I diagnosis, both readings by the model family
     that answers as the oracle. The real agreement is an upper bound on solvability; the synthetic 98 / 101 against
     generator semantics is the clean figure. The oracle's 0 confident-wrong holds at 0.80; at 0.75 it has 2.
-13. **Disk.** The container had about 4 GB free, which bounded the composition and model choices. Upstream clones were
+13. **CI is red on one job outside this stage's diff** (§N): the Android UI evidence gate's `VerticalSliceDeviceTest` failed on both attempts, on different houses, in a stage-sheet lookup. The code under test is byte-identical to the base commit, where it passed. The fix belongs to a stage that may change `apps/`; a patch is proposed in §N.
+14. **Disk.** The container had about 4 GB free, which bounded the composition and model choices. Upstream clones were
     deleted after their commit SHAs were recorded.
 
 ## P. Commits
 
 See `git log analyzer/floorplan-intelligence-audit-v1 ^64b78b4`.
 
-The terminal line: ⟪FINAL_TOKEN⟫.
+The terminal line: `PARTIAL_BUILDPLAN_ANALYZER_005J_CI_UI_EVIDENCE_RED`.
