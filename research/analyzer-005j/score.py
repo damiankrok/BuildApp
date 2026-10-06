@@ -133,6 +133,64 @@ def majority_baseline(rows):
     return out
 
 
+PRIMARY = {'server-oracle': 'ORACLE_JSON'}
+
+
+def primary_readout(model):
+    return PRIMARY.get(model, 'STRUCTURED' if model.startswith('wall-') else 'ENUM_SCORE')
+
+
+def matched(rows_by):
+    """Post-review B1 / B7: the arms were cut at a declared time and cover different subsets of the pool, so pooled rows
+    compare different question mixes. This scores each pair of arms on the questions BOTH were asked (primary read-out,
+    CANDIDATE_OVERLAY), each small VLM's modes on the questions it has in all three modes, the majority floor on the
+    answered subset, and counterfactual pairs that both members answered. It adds read-outs; it changes no number above."""
+    cand = {}
+    for (model, ro), rows in rows_by.items():
+        if ro == primary_readout(model):
+            cand[model] = {x['qid']: x for x in rows if x['mode'] == 'CANDIDATE_OVERLAY'}
+    out = {'pairs': [], 'modesMatched': {}, 'answeredFloor': {}, 'counterfactualAnswered': {}}
+    names = sorted(cand)
+    for i, m1 in enumerate(names):
+        for m2 in names[i + 1:]:
+            common = sorted(set(cand[m1]) & set(cand[m2]))
+            if not common:
+                continue
+            sets = defaultdict(int)
+            for q in common:
+                sets[cand[m1][q]['set']] += 1
+            out['pairs'].append({'arms': [m1, m2], 'n': len(common), 'bySet': dict(sorted(sets.items())),
+                                 m1: tally([cand[m1][q] for q in common]), m2: tally([cand[m2][q] for q in common])})
+    for (model, ro), rows in rows_by.items():
+        if ro != 'ENUM_SCORE':
+            continue
+        by = defaultdict(dict)
+        for x in rows:
+            by[x['qid']][x['mode']] = x
+        full = [d for d in by.values() if len(d) == 3]
+        if full:
+            sets = defaultdict(int)
+            for d in full:
+                sets[d['RAW']['set']] += 1
+            out['modesMatched'][model] = {'n': len(full), 'bySet': dict(sorted(sets.items())),
+                                          **{mode: tally([d[mode] for d in full]) for mode in ('RAW', 'CANDIDATE_OVERLAY', 'SEMANTIC_OVERLAY')}}
+    for model, qs in cand.items():
+        ans = [x for x in qs.values() if x['answered']]
+        if ans:
+            mb = majority_baseline(ans)
+            out['answeredFloor'][model] = {'answered': len(ans), 'floor': round(sum(v['accuracy'] * v['n'] for v in mb.values()) / len(ans), 4),
+                                           'accuracyAnswered': round(sum(1 for x in ans if x['correct']) / len(ans), 4)}
+        by = defaultdict(dict)
+        for x in qs.values():
+            if x['set'] == 'SYNTHETIC' and x.get('pair'):
+                by[(x['pair'], x['baseQid'].split('-')[-1], x['transform'])][x['variant']] = x
+        both = [(d['A'], d['B']) for d in by.values() if 'A' in d and 'B' in d and d['A']['expected'] != d['B']['expected'] and d['A']['answered'] and d['B']['answered']]
+        if both:
+            out['counterfactualAnswered'][model] = {'pairsBothAnswered': len(both), 'bothRight': sum(1 for a, b in both if a['correct'] and b['correct']),
+                                                    'sameAnswer': sum(1 for a, b in both if a['answer'] == b['answer'])}
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--items', required=True)
@@ -208,6 +266,7 @@ def main():
             block['blind8Answers'] = [{k: x[k] for k in ('qid', 'cls', 'transform', 'expected', 'answer', 'conf')} for x in mr if x['set'] == 'REAL_BLIND8']
             r[mode] = block
         m[ro] = r
+    result['matched'] = matched(rows_by)
     result['latencyMs'] = {f'{m}|{k}': {'n': len(v), 'median': round(sorted(v)[len(v) // 2], 1), 'p95': round(sorted(v)[int(len(v) * 0.95)], 1)} for (m, k), v in lat.items()}
     json.dump(result, open(a.out, 'w'), indent=1)
     # a compact console view

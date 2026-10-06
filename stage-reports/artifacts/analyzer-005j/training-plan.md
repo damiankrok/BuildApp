@@ -31,16 +31,16 @@ Measured inputs to every estimate (this container: 4 shared x86-64 cores, no GPU
 | quantisation / export | ONNX (optimum) int8 decoder + fp32 vision (005J found the official int8 vision encoder uses `ConvInteger`, which ONNX Runtime's CPU provider does not implement) or q4; ≈ 0.3–0.5 h |
 | artifact | ≈ 340–510 MB (ONNX q4/int8) or ≈ 360 MB (community LiteRT-LM bundle format) |
 | Android runtime | onnxruntime-web WASM (already shipped; CPU, one thread) or LiteRT-LM (new 21.8 MB native library, CPU/GPU) |
-| expected phone latency | **≈ 16 s per question in the shipped runtime** for the base model (measured, ORT-web WASM, one thread, Node 18, desktop core: vision encoder fp32 11.9 s + 210-token prefill 3.8 s + 0.15 s per scored token; ≥ 1.9 GiB RSS); a phone core is slower. LiteRT-LM GPU might cut this, unmeasured for images |
+| expected phone latency | **≈ 17–20 s per question in the shipped runtime** for the base model, ≈ 7 min per median house (measured parts, ORT-web WASM, one thread, Node 18, desktop core: vision encoder fp32 11.9 s + 206–307-token prefill + 8–19 scored tokens at 0.15 s; post-review B4; ≥ 1.9 GiB RSS); a phone core is slower. LiteRT-LM GPU might cut this, unmeasured for images |
 | main risk | inherits the base model's training-data question; large download; seconds per question; calibration of a generative model |
 
-## Route B — train a specialised wall / opening observation model (**PRIMARY for 005K**)
+## Route B — train a specialised wall / opening observation model (**SECONDARY: the challenger to a deterministic rule**)
 
 | item | plan |
 | --- | --- |
 | architecture | **UNet-lite** (1.56 M params, stride-2 stem), written in 005J from the U-Net paper and **trained from scratch**. The MiT-B0 SegFormer (3.71 M; an independent re-implementation following the Apache-2.0 PVTv2 / HF structure, not clean-room) was measured beside it at the same budget and is DEFERRED (slower, fewer real openings, misses the gozdzikowcach garage door; `wall-model-proof.json`). No NVIDIA / smp encoder code, no ImageNet weights; a MiT fallback in 005K would be built on the Apache-2.0 PVTv2 / HF code with its notice |
 | task | per-pixel BACKGROUND / WALL / OPENING. Read **only at a gap**: the analyzer's own gap rectangle (005J `wall_referee.py` strips) gives shares, and the shares become a typed observation, never a decision |
-| what 005J measured | synthetic: wall IoU 0.924, opening IoU 0.804, boundary F1 0.985, continuity through openings 0.980, false WALL on terraces 0.7 % / dimension lines 3.8 % / text 0.2 % (false OPENING is larger: dimension-line ink 18 %, open gaps 44.5 % by pixel — post-review A3). Real (7 development sheets, never trained on): exterior-wall recall 0.91–1.00; with the strip on the **wall axis**, 61 of 63 openings read OPENING (47 at ≥ 0.8, none wrong) and 50 of 65 continuations CONTINUES (44 at ≥ 0.8, none wrong) — the first run placed strips on the outer face and got 23 of 63 (post-review A2 / C1). **Additional exterior wall over source-cv ≈ 0 (0–1.7 %).** Round-8: cyklamenach window 97 % opening; gozdzikowcach porch mouth 100 % background, pier 100 % wall (the first pier box was misplaced, C2), the 0.41 m LEAF_FACE gap ≈ 94 % opening on its axis. **Replay:** upgrading that one gap completes gozdzikowcach at −3.75 % (`recommendation.md` §3) |
+| what 005J measured | synthetic: wall IoU 0.924, opening IoU 0.804, boundary F1 0.985, continuity through openings 0.980, false WALL on terraces 0.7 % / dimension lines 3.8 % / text 0.2 % (false OPENING is larger: dimension-line ink 18 %, open gaps 44.5 % by pixel — post-review A3). Real (7 development sheets, never trained on): exterior-wall recall 0.91–1.00; with the strip on the **wall axis**, 61 of 63 openings read OPENING (47 at ≥ 0.8, none wrong) and 50 of 65 continuations CONTINUES (44 at ≥ 0.8, none wrong) — the first run placed strips on the outer face and got 23 of 63 (post-review A2 / C1). **Additional exterior wall over source-cv ≈ 0 (0–1.7 %).** Round-8: cyklamenach window 97 % opening; gozdzikowcach porch mouth 100 % background, pier 100 % wall (the first pier box was misplaced, C2), the 0.41 m LEAF_FACE gap ≈ 94 % opening on its axis. **Replay:** upgrading that one gap completes gozdzikowcach's footprint at −3.75 % — and a deterministic rule with no model does the same on every measured row (`recommendation.md` §3). Caveats: the 61/63 takes the inward side from the truth on a one-class set (post-review F5); real "say no" evidence is 7 questions with one confident miss (F6); all real sheets are ARCHON |
 | what it is not yet | a referee: (1) it over-reads open gaps (12 confident-wrong CONTINUES on synthetic open gaps; 40 open gaps in 360 training renders); (2) real evidence is small and one-sided (8 distinct minority targets, no real PATTERN question); (3) it must read on the jamb-band axis, which production does not store today (`BoundaryGap` has `linePx` only) |
 | data (005K) | BuildPlan synthetic masks (exact) at 20–50k scenes from `vrgen.py` v2: **open-gap hard negatives** (porch mouths, carports, open sides, recesses with returns, gaps with nothing across), terrace kerbs and hatch with breaks, dimension lines and text across walls, piers between openings, coloured fills and watermarks; every family as a counterfactual pair. Real development sheets for evaluation only, with a **balanced, human-verified real gap set** (≥ 50 minority questions) built before calibration. **Not** ResPlan (licence conflict), **not** CubiCasa (NC), not scraped imagery |
 | compute | CPU is enough for the proof scale (measured: 20 min for 1,500 steps); 50k tiles × 30 epochs: **4090-class ≈ 1–3 h**, datacenter ≈ 0.5–1.5 h, **< USD 20 per run** rented; a full CPU run on 4 cores is ≈ 1–2 days |
@@ -48,12 +48,12 @@ Measured inputs to every estimate (this container: 4 shared x86-64 cores, no GPU
 | Android runtime | **onnxruntime-web WASM, one thread — the runtime the app already ships**; measured under Node 18.20.4: **1.19 s per 864² frame** (median of 3, contended), load 2.8 s, ≥ 340 MiB RSS; a 256² gap crop ≈ 0.1 s. No new native library |
 | main risk | the synthetic-to-real gap on openings in unfamiliar styles; false walls on hatch / dimension lines; a witness that is right in aggregate but wrong on the one gap that matters — hence a per-gap confident-wrong gate on a balanced real set, and a typed abstention |
 
-## Route C — distilled micro-referee (**SECONDARY, later**)
+## Route C — distilled micro-referee (**later than Route B**)
 
 | item | plan |
 | --- | --- |
 | architecture | a small CNN or tiny ViT (≈ 1–20 M params): shared trunk + one head per question class; **input channels = grey crop + binary masks for target / A / B + the Route-B wall/opening map** (no overlay colours); abstention by calibrated confidence |
-| what 005J measured (pilot) | 1.07 M params, trained from scratch only on synthetic question images (seeds disjoint from the benchmark), CANDIDATE_OVERLAY input: synthetic held-out **85.4 %**, confident-wrong 2.7 % at 0.80 and **0 at ≥ 0.98**; **REAL_DEV 49.7 %** — below the 76 % a constant guesser gets — with **34 % confident-wrong at 0.80 and 1.2 % even at 0.999**; REAL_BLIND8 70.6 %, 7.4 % confident-wrong. **An image-level classifier trained on synthetic images alone does not transfer to real sheets**; the pixel-level Route-B model trained on the same generator does. On device it is trivial: **70 ms per question** in ORT-web WASM (median of 20), ≥ 214 MiB |
+| what 005J measured (pilot) | 1.07 M params, trained from scratch only on synthetic question images (seeds disjoint from the benchmark), CANDIDATE_OVERLAY input: synthetic held-out **85.4 %**, confident-wrong 2.7 % at 0.80 and **0 at ≥ 0.98**; **REAL_DEV 49.7 %** — below the 76 % a constant guesser gets — with **34 % confident-wrong at 0.80 and 1.2 % even at 0.999**; REAL_BLIND8 70.6 %, 7.4 % confident-wrong. **This pilot — an image-level classifier trained on synthetic images alone — did not transfer to real sheets** (one run, 8 seeds, 256 px; post-review F12). It had no abstention output and read the RGB overlay image, not the planned grey crop plus mask channels plus Route-B map, so the negative applies to that design (B11). Its REAL_DEV signal is inverted, not absent: per-class AUROC 0.26 on TERRACE_VS_BODY and 0.31 on CANOPY_PERGOLA, against 0.72–1.00 on synthetic — a synthetic texture shortcut that a confidence threshold cannot fix (B11); the pixel-level Route-B model trained on the same generator does. On device it is trivial: **70 ms per question** in ORT-web WASM (median of 20), ≥ 214 MiB |
 | teacher | a strong model used **offline, at development time only**, on **synthetic** images: mine hard examples and propose counterfactual families. Sending **real publisher crops** to a hosted teacher, even to pre-label them for human verification, is **CONDITIONAL on counsel** (drawing copyright; the EU text-and-data-mining exception and any opt-out; publisher terms; the teacher provider's terms) — 005J did read 47 publisher crops through this session's own model as development material (post-review D1, D6). The teacher is never a runtime dependency |
 | truth | generator semantics for synthetic (the only training truth); human-verified answers on real development crops are **evaluation and calibration data only** |
 | data | the Route-B corpus plus real-style rendering, **synthetic only for training**. Real development crops are held out for evaluation and calibration; training on publisher crops would be a separate, counsel-cleared decision (**CONDITIONAL**), never the default; real **blind** houses never |
@@ -67,34 +67,34 @@ Measured inputs to every estimate (this container: 4 shared x86-64 cores, no GPU
 1. **CONFIDENT_WRONG_RATE ≤ 0.5 % (target ≤ 0.2 %)** on a **balanced** REAL set (development + verified crops; both answers of every class represented) **and** on the synthetic hard-negative pairs, per question class; the threshold frozen on a separate validation split.
 2. **Mirror and rotation consistency ≥ 99 %** of answered pairs; **counterfactual sensitivity**: no pair answered the same way when the truth differs, at confident level.
 3. **A/B position**: letters-swapped pairs agree in meaning on ≥ 99 % of answered pairs (Route C).
-4. **Useful coverage** reported per class, and **minority-answer accuracy** reported beside it (a constant guesser passes one-sided sets).
+4. **Useful coverage** reported per class, and **minority-answer accuracy** reported beside it (a constant guesser passes one-sided sets). Minority accuracy alone credits a constant *minority* guesser, so it is read with per-answer recall or balanced accuracy, plus per-class AUROC and accuracy on counterfactual pairs both members answered (post-review B7).
 5. **Determinism**: bit-identical outputs on Node 18 / Node 22, x86-64 / arm64 V8 (the 005G/005H bar), pinned model SHA-256.
 6. **Non-circularity**: the witness reads pixels and the analyzer's own gap geometry only — never a published figure, never the resolver's choice.
 7. A **fresh blind protocol** only in the stage that integrates it into production.
 
 ## Order
 
-1. **Route B in 005K, split in two** (`recommendation.md` §5).
-   - **005K-a** (research):
+1. **No route in 005K (NO_AI_YET; `recommendation.md` §5).**
+   - 005K builds the measurement that decides between routes:
      - per-gap Evidence Pack records with `axisPx`;
-     - generator v2 with open-gap negatives, faint-symbol positives and on-line patterns;
-     - a balanced, human-verified real gap set;
-     - UNet-lite to the gates;
-     - a two-signal witness at **IP-01 only**, as a pre-pass;
-     - a model-in-the-loop replay gate;
-     - a stop rule.
-   - **005K-b** (integration), only if 005K-a passes.
-   - Why Route B first:
-     - it is the only measured piece that transfers to real sheets;
-     - in the 005J oracle replay, one correct gap reading completes gozdzikowcach at −3.75 % (the storey count still
-       fails), and the proof model reads that gap ≈ 94 % OPENING on its axis.
-   - Cyklamenach is not moved by any gap upgrade: its blockers (REC-17, TOO_LARGE) are deterministic work outside
-     Route B.
-2. **Route C later.** For region / outline seams, fed with Route B's map, trained on synthetic data only, real crops
-   for evaluation.
-3. **Route A not now.**
-   - Generic small VLMs are at or below chance zero-shot (`vlm-bakeoff.md`).
-   - They cost 0.4–0.8 GB and ≈ 16 s per question in the shipped runtime (SmolVLM2: vision encoder 11.9 s + prefill
-     3.8 s, measured in WASM).
+     - a **sealed fresh-sheet gap set**, labelled before any rule or model runs;
+     - the deterministic drawn-gap upgrade, measured on that set against a constant control.
+   - Why no model first:
+     - In the 005J oracle replay, the deterministic upgrade and a perfect witness are outcome-identical on every
+       measured row. Both complete gozdzikowcach's footprint at −3.75 %, and neither moves a verdict.
+     - The model's only measured difference is two correct "no" readings that change no outcome.
+     - Its real "say no" evidence is 7 questions, with a confident miss at the only hard one.
+2. **Route B as the challenger.** Only if the sealed set shows deterministic false upgrades that matter.
+   - Adds: generator v2, UNet-lite from scratch, a two-signal witness whose BACKGROUND vetoes an upgrade.
+   - Gated on the sealed set beside a constant control.
+3. **Route C later.** For region / outline seams, once the deterministic blockers in front of them (storeys, REC-17 /
+   TOO_LARGE) are addressed; trained on synthetic data only.
+4. **Route A not now** (reasons re-ordered after post-review B13).
+   - **Per-house cost.** A witness is asked for every eligible gap: ≈ 17–20 s per question, ≈ 7 min per median house
+     on a desktop core in the shipped runtime, ×2–5 on a phone, at 0.4–0.8 GB.
+   - **Transfer.** Synthetic-only image-level training failed on real sheets (the Route-C pilot's REAL_DEV AUROC is
+     inverted on two classes, post-review B11). A fine-tune on the same data inherits that unless the pretrained
+     features close it. A frozen-encoder linear probe (SigLIP features, synthetic train, REAL_DEV test; ≈ 1 CPU-hour)
+     would settle it offline if Route C stalls.
+   - Zero-shot accuracy (at or below chance, as tested) says little about a fine-tune and is the weakest reason.
    - A fine-tune inherits their training-data questions.
-   - Revisit only if Route C plateaus on real questions.

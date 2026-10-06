@@ -36,6 +36,13 @@ REGIONS = {
         # porch floor and the end of the vestibule wall. Both are kept, so the correction is visible.
         'pier between porch and garage (wall)': (435, 541, 452, 590),
         'first box, x 418-434 (porch floor + vestibule wall end; misplaced, post-review C2)': (418, 541, 434, 590),
+        # post-review F4: the 0.41 m LEAF_FACE gap gap-Y-538-322-338 whose upgrade completes the house in the oracle replay;
+        # its reading depends on where the strip sits (production linePx 537.5 is a face), so every placement is recorded
+        '0.41 m gap, strip centred on the production linePx 538 (face)': (322, 534, 338, 542),
+        '0.41 m gap, face strip 531-545': (322, 531, 338, 545),
+        '0.41 m gap, rows 542-550': (322, 542, 338, 550),
+        '0.41 m gap, vestibule-wall jamb band 540-556 (one-jamb axis)': (322, 540, 338, 556),
+        'gap-X-413-239-353 (DASHED stretch through a room; post-review F3)': (405, 239, 421, 353),
     },
 }
 

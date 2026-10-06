@@ -8,14 +8,14 @@
 | FLOOR-PLAN OSS AUDIT (Q2) | **PASS**: no commercially clean model exists. ResPlan is DATA_CANDIDATE_WITH_COUNSEL, fpvec-lab is REIMPLEMENT_FROM_PAPER, MitUNet is ARCHITECTURE_CANDIDATE_FOR_RETRAINING (§C) |
 | LICENSING | **PASS**: code, weights, training data, backbone and runtime are separated for every candidate; real crops are evaluation-only in every route (§C, `licensing-matrix.md`) |
 | QUESTION CORPUS | **PASS**: 1,868 questions (synthetic counterfactual pairs × 4 transforms, 7 development houses, both round-8 houses) and no publisher pixel committed (§D) |
-| SMALL-VLM BAKE-OFF (Q3) | **PASS_RESEARCH**: Florence-2, SmolVLM2 and Moondream are at or below chance, with confident-wrong 1.8–23 % against a 0.5 % gate. The strong oracle is right on 98 %, with 0 confident-wrong. Runs were cut at a declared limit; coverage is stated (§E) |
-| WALL-MODEL PROOF (Part F) | **PASS_RESEARCH**: a from-scratch UNet-lite (1.56 M) on synthetic data transfers to real sheets (61/63 real openings on the axis) and reads the decisive gaps. It adds no wall over source-cv. MiT-B0 is DEFERRED (§F) |
+| SMALL-VLM BAKE-OFF (Q3) | **PASS_RESEARCH**: Florence-2, SmolVLM2 (64-image-token on-device configuration) and Moondream are at or below chance, with confident-wrong 1.8–23 % against a 0.5 % gate, also on matched subsets. The strong oracle is right on 98 % (144 / 147 answered). Runs were cut at a declared limit, so each arm covers a different subset; coverage and matched subsets are stated (§E) |
+| WALL-MODEL PROOF (Part F) | **PASS_RESEARCH**: a from-scratch UNet-lite (1.56 M), trained on synthetic data, finds real exterior wall (0.91–1.00) and real openings when placed on the wall axis. That is recall on a one-class set with truth-side placement, on one publisher. Its real "say no" evidence is 7 questions with one confident miss. It adds no wall over source-cv. MiT-B0 is DEFERRED (§F, §G) |
 | ROUTE-C PILOT | **NEGATIVE ON REAL**: 85 % on synthetic, 49.6 % on REAL_DEV with 34 % confident-wrong (§G) |
-| ORACLE REPLAY | **PASS_RESEARCH**: one correct gap reading completes gozdzikowcach (−3.75 %; storeys still fail). Cyklamenach does not move. The development matrix is unchanged in verdicts (§E, `oracle-replay.json`) |
-| ANDROID / DELIVERY (Part H) | **MEASURED IN THE SHIPPED WASM RUNTIME, no device**: UNet 1.19 s per frame; micro-referee 70 ms; SmolVLM2 ≈ 16 s per question and ≥ 1.9 GiB. Delivery is local and embedded (§I) |
+| ORACLE REPLAY | **PASS_RESEARCH**: one drawn-gap upgrade completes gozdzikowcach's footprint (−3.75 %); its verdict still fails on storeys. Cyklamenach does not move. The deterministic upgrade and a perfect witness are **outcome-identical** on every measured row (§E, `oracle-replay.json`) |
+| ANDROID / DELIVERY (Part H) | **MEASURED IN THE SHIPPED WASM RUNTIME, no device**: UNet 1.19 s per frame; micro-referee 70 ms; SmolVLM2 ≈ 17–20 s per question, ≈ 7 min per median house, ≥ 1.9 GiB. Delivery is local and embedded (§I) |
 | TRAINING ROUTE (Q4) | **COMMERCIAL-CLEAN**: BuildPlan synthetic data, from scratch. A teacher on real crops is CONDITIONAL on counsel (§H) |
-| COUNCIL (Part J) | ⟪COUNCIL_ROW⟫ |
-| DECISION (Part K, Q5) | **PRIMARY_NEXT: TRAIN_BUILDPLAN_WALL_MODEL** (two-signal gap witness; 005K-a research with a stop rule, then 005K-b integration). **SECONDARY_LATER: TRAIN_BUILDPLAN_VISUAL_REFEREE** (§L) |
+| COUNCIL (Part J) | six independent reviewers (§K): A CHANGES REQUESTED (1 P0), B CONDITIONAL PASS, C CONDITIONAL PASS, D CONDITIONAL PASS, E CHANGES REQUESTED on the spec (freeze PASS), F CHANGES REQUESTED (1 P0). **F's P0 flipped the decision to NO_AI_YET.** No P0 open; every P1 fixed or stated (`post-review/resolution.md`) |
+| DECISION (Part K, Q5) | **PRIMARY_NEXT: NO_AI_YET**: 005K builds per-gap evidence records and a sealed fresh-sheet gap set, and measures a deterministic drawn-gap upgrade on it. **SECONDARY_LATER: TRAIN_BUILDPLAN_WALL_MODEL** as the challenger, adopted only if the sealed set shows false upgrades that matter and that it refuses (§L) |
 | **Stage** | ⟪FINAL_TOKEN_ROW⟫ |
 
 **Branch and history.**
@@ -46,22 +46,27 @@ measurement instrument, not a dependency (residual recorded in `licensing-matrix
 not patched.** The two round-8 houses are development evidence since 005I and are used here only as such.
 
 **The headline.**
-- **Generic small VLMs cannot referee BuildPlan's questions.** On the same closed questions:
-  - SmolVLM2-500M is right on 45 % of those it answers, with 7.2 % confident-wrong and 43 % mirror consistency;
+- **Generic small VLMs cannot referee BuildPlan's questions**, as tested: three checkpoints of at most 0.5 B, zero-shot,
+  SmolVLM2 in its deployable 64-image-token configuration (one 512² tile; post-review B2).
+  - SmolVLM2-500M is right on 45 % of what it answers, with 7.2 % confident-wrong. On the questions the oracle also
+    answered it is right on 46 of 100; the oracle on 138 of 141 (post-review B1).
   - Moondream and Florence-2 are no better.
-  - In the shipped runtime, one SmolVLM2 question costs ≈ 16 s and ≥ 1.9 GiB.
-  - A strong model answers 98 % with no confident-wrong answer, so the questions are fine and small models are the
-    limit.
-- **No floor-plan model on the market is commercially clean.** ResPlan's data licence is in conflict, fpvec-lab
-  publishes nothing, and MitUNet is non-commercial on several independent grounds.
-- **A BuildPlan-trained, from-scratch, 6 MB wall / opening network transfers to real sheets.** It reads 61 of 63 real
-  openings on the wall axis, and it reads the gap that decides gozdzikowcach (≈ 94 % OPENING).
-- **A replay of the frozen code shows the effect on outcomes:**
-  - correcting that one gap completes gozdzikowcach at −3.75 %;
-  - cyklamenach needs deterministic rule changes instead;
-  - no development verdict changes.
-- **The next step is TRAIN_BUILDPLAN_WALL_MODEL, as a two-signal witness, in two parts with a stop rule.** If the
-  witness cannot reject drawn-but-open gaps, the recorded fallback is a deterministic upgrade rule (NO_AI_YET).
+  - In the shipped runtime one SmolVLM2 question costs ≈ 17–20 s and ≥ 1.9 GiB; a witness asked for every eligible
+    gap costs ≈ 7 min per median house on a desktop core (post-review B4).
+  - A strong model answers 98 % with no confident-wrong answer at 0.80, so the questions are answerable.
+- **No floor-plan model on the market is commercially clean.**
+- **A BuildPlan-trained, from-scratch, 6 MB wall / opening network is a clean and promising research proof.**
+  - It finds real walls, and real openings when it is placed on the wall.
+  - Its ability to say no on real sheets is barely measured.
+- **The replay of the frozen code is decisive for the sequencing.**
+  - Upgrading one drawn gap completes gozdzikowcach's footprint.
+  - A deterministic rule does the same, with no model, on every measured row.
+  - Nothing moves a verdict: the storey count, REC-17 / TOO_LARGE and the recessed-entrance relation block them.
+- **Next: NO_AI_YET, made concrete.**
+  - Per-gap evidence records.
+  - A sealed fresh-sheet gap set, labelled before any rule or model runs.
+  - The deterministic upgrade, measured on that set.
+  - The wall model is the challenger that set can justify.
 
 ---
 
@@ -181,6 +186,11 @@ repositories, files, datasets and papers.
 **Same input for every arm.** Every model received the same image bytes (SHA-256 asserted by the scorer) and the same
 prompt, with a closed enum that always includes UNRESOLVED.
 
+**"Blind-8" means the round-8 development questions** (data key `REAL_BLIND8`, shown as ROUND8_DEV in
+`vlm-bakeoff.md`). They were authored from the accepted 005I diagnosis of the two round-8 houses, so figures such as
+"16/16 blind-8" are development evidence on two houses and 17 base questions, not blind generalisation (post-review
+F14, B10).
+
 **Read-outs, scored apart.**
 - **ENUM_SCORE:** the model's own probability of each enum answer, forced inside the demanded JSON and normalised over the
   enum.
@@ -197,6 +207,28 @@ prompt, with a closed enum that always includes UNRESOLVED.
 remaining items were re-ordered so that the blind-8 and real CANDIDATE_OVERLAY questions came first. Every model has
 the complete blind-8 CANDIDATE_OVERLAY set; n per model, mode and set is in `vlm-bakeoff.md` §2.
 
+**Each arm therefore ran on a different, non-random subset of one pool** (post-review B1). SmolVLM2's rows are 63 %
+synthetic, Florence-2's 67 % blind-8, the oracle's 69 % stratified synthetic, so the pooled table below compares
+different question mixes. The re-ordering criterion read no model output. The conclusion holds on matched subsets
+(`vlm-bakeoff.md` §8, primary read-out, CANDIDATE_OVERLAY):
+
+| matched set | n | oracle | SmolVLM2 | Moondream | Florence-2 | micro-referee |
+| --- | --- | --- | --- | --- | --- | --- |
+| oracle ∩ SmolVLM2 | 142 | 138 / 141 right, 0 cw | 46 / 100, 7 cw | — | — | 107 / 142 |
+| oracle ∩ Moondream | 127 | 123 / 126, 0 cw | — | 23 / 49, 5 cw | — | — |
+| SmolVLM2 ∩ Moondream (incl. 187 REAL_DEV) | 499 | — | 150 / 353, 39 cw | 91 / 195, 9 cw | — | — |
+| Florence-2's set (blind-8 64, REAL_DEV 29, synthetic 2) | 95 | — | 25 / 58, 10 cw | 8 / 22, 1 cw | 15 / 37, 22 cw | 63 / 95, 16 cw |
+
+(cw = confident wrong at ≥ 0.80.) The small VLMs' mirror / rotation figures are almost entirely synthetic (the
+NORMAL-first order left REAL_DEV mirror pairs nearly unmeasured).
+
+**Configurations as run (post-review B2, B8).** SmolVLM2-500M ran with `do_image_splitting=False`: one 512² tile, 64
+image tokens, 1/17 of the snapshot's default 1,088 (16 tiles + a global view); fp32 vision, int8 decoder, a forced JSON
+prefix. At 64 tokens one token summarises ≈ 1.25 m of drawing, while the gap classes turn on 1–3 px lines. The verdict
+is therefore on SmolVLM2 **in its deployable configuration**. ⟪B2_PROBE⟫ A space-led prefix moves individual answers
+(same argmax on 41 of 68) but not the verdict (21 / 49 vs 19 / 46). Moondream at 512² sees one 378² global view and no
+crops. Florence-2-base has no VQA task, so its ENUM_SCORE measures its decoder's text prior.
+
 **Exclusion.** The malformed gozdzikowcach porch-mouth question is excluded for every arm (`exclusions.json`, post-review
 C2).
 
@@ -209,15 +241,27 @@ C2).
 | **SmolVLM2-500M**, ENUM_SCORE | 967 | 71.9 % | **45.0 %** (REAL_DEV 47.4 %, blind-8 36.6 %) | **7.2 %** | **43.0 %** |
 | SmolVLM2-500M, GEN_JSON strict | 695 | **2.0 %** | 64.3 % | 0.6 % | — |
 | Moondream 0.5B, ENUM_SCORE | 513 | 39.8 % | 46.1 % | 1.8 % | 73.0 % |
-| Florence-2-base, ENUM_SCORE (real sets only) | 95 | 39.0 % | 40.5 % | 23.2 % | — |
+| Florence-2-base, ENUM_SCORE (blind-8 64, one development house 29, synthetic 2) | 95 | 39.0 % | 40.5 % | 23.2 % | — |
 
 - **The small VLMs are at or below chance and below the majority floor.**
-  - A constant guesser would score 76.8 % on REAL_DEV and 81.3 % on blind-8.
-  - SmolVLM2 gives the same answer to 31 % of counterfactual pairs whose truth differs.
+  - A constant guesser would score 76.8 % on REAL_DEV and 81.3 % on blind-8. On the subsets each model chose to answer,
+    the floors are SmolVLM2 62.7 % (it scores 45.0 %), Moondream 54.4 % (46.1 %), Florence-2 75.7 % (40.5 %)
+    (post-review B7). They answer near-constantly per class; Moondream's 63.5 % on answered REAL_DEV comes from
+    abstaining by class, not from reading.
+  - On counterfactual pairs whose truth differs and which both members answered, SmolVLM2 gives the same answer to
+    57 % and gets both right on 19 % (uniform chance ≈ 23 %); Moondream 94 % and 0 %. The micro-referee: 21.5 % and
+    76.4 %. Per-class AUROC of the option log-odds is 0.40–0.67 for SmolVLM2 (6 of 13 below 0.5), so prior
+    calibration would not rescue it (B7).
   - On outline A/B questions SmolVLM2 answers NEITHER in 79 of 82 answered cases.
   - Its generation almost never yields valid JSON (2 %).
-  - RAW and SEMANTIC_OVERLAY are no better than CANDIDATE_OVERLAY: 54 % and 46 % right among answered.
-  - Florence's grounding found no window in the cyklamenach crop (8 of 8 UNRESOLVED).
+  - RAW and SEMANTIC_OVERLAY are no better than CANDIDATE_OVERLAY. On the 319 questions SmolVLM2 has in all three
+    modes (271 synthetic, 48 blind-8): RAW 54.0 %, CANDIDATE_OVERLAY 49.3 %, SEMANTIC_OVERLAY 51.9 % right among
+    answered (B1).
+  - Florence's STRUCTURED grounding test was **degenerate for line targets** (post-review B3): a gap target is two
+    points on the wall line, so its box has zero area and the hit test can never fire; every real OPENING question
+    could only read UNRESOLVED. With a proper target box it would have said OPENING on 3 of the 8 blind-8 crops,
+    through region boxes of 36–37 % of the crop. Nothing was localised on the window. The Florence-2 verdict does not
+    change.
 - **The questions are answerable.** The strong oracle is right on 98 % with no confident-wrong answer. Small models are
   the limit, not the question design.
 - **Round-8 questions** (NORMAL orientation, development evidence):
@@ -225,7 +269,8 @@ C2).
     answered right; Florence 1/7 (ONE_OPEN_SIDE — the analyzer's error — at 1.00); UNet gap rules 2/2.
   - **cyklamenach:** oracle 9/9; SmolVLM2 1/9 right (TERMINATES on both continuation questions); UNet gap rules 4/4
     (window OPENING 0.97).
-- **On-device cost** (§I): SmolVLM2 ≈ 16 s and ≥ 1.9 GiB per question in the shipped WASM runtime.
+- **On-device cost** (§I): SmolVLM2 ≈ 17–20 s and ≥ 1.9 GiB per question in the shipped WASM runtime; ≈ 7 min per
+  median house (24 gaps), 2–19 min per house, on a desktop core.
 - **Desktop medians, contended:** SmolVLM2 2.5 s (enum), Moondream 15 s, Florence 23 s.
 - **Verdict:** ADOPT_SMALL_VLM_REFEREE is rejected. The fine-tuning route (Route A) is "not now" (§H).
 
@@ -236,8 +281,9 @@ C2).
 - The frozen production code was re-solved from the sealed source package, observation graph and metric evidence.
 - A research copy of `boundary-evidence.ts` was swapped in only inside the replay process. It upgrades WEAK gaps
   between two WALL jambs that carry drawn evidence to STRONG.
-- **Fidelity:** with the oracle OFF, the replay reproduced the sealed model hash or failure code on 21 of 23 runs. The
-  2 that did not had no source bytes in any cache and are excluded.
+- **Fidelity:** with the oracle OFF, the replay reproduced the sealed model hash or failure code on 21 of 23 runs: 19 of
+  21 replayed development rows plus both round-8 houses. The 2 that did not (dabecjach, tunbergiach) had no source
+  bytes in any cache and are excluded.
 
 **Results.**
 - **dom-w-gozdzikowcach.** Upgrading **one** 0.41 m LEAF_FACE gap (`gap-Y-538-322-338`) turns PLAN_RESOLUTION_INCONCLUSIVE
@@ -248,9 +294,20 @@ C2).
 - **Development matrix (19 valid rows).** Upgrading *every* drawn weak gap (2–73 per house) changes one model
   (zurawkach, −0.81 % → −1.68 %) and no verdict. Every PASS row keeps its model hash.
 
-**What follows.** A deterministic single-signal rule would also complete gozdzikowcach. So the witness's value is to say
-**no** to drawn gaps that are open, such as gozdzikowcach's dashed porch front, which the UNet reads as 100 %
-background. That is what 005K-a must prove (§L).
+**Caveats (post-review F2, F3, F7, F10).**
+- The replay writes no `warningDetails` or observation graph, so its outputs support comparisons of **model hashes,
+  outcomes, footprints and the storeys condition only**, not full holdout verdicts.
+- rarytasy-g2e keeps its hash but was sealed ALGORITHMIC_FAIL on an unbuilt opening.
+- 3 of the 24 matrix rows were not replayed (graph or metric files missing).
+- azaliach's failed reading also changes under ALL_DRAWN, so 2 of 19 valid rows change a decision, not 1.
+- Upgrade counts are events, not distinct gaps (cyklamenach 91 events, 58 distinct gaps; jarzabem 73 and 49).
+- The "EXCLUDE-porch" run verified 1 of its 10 gaps. One of the others, `gap-X-413`, is a phantom stretch through a room.
+
+**What follows.**
+- A deterministic upgrade completes gozdzikowcach exactly as a perfect witness does, and nothing moves a verdict.
+- The witness has no measured outcome advantage. Its possible value — saying no to drawn-but-open gaps — needs an
+  out-of-sample instrument that does not exist yet.
+- Hence NO_AI_YET first (§L).
 
 ## F. A commercially clean wall / opening model, proved in miniature (brief Part F)
 
@@ -273,13 +330,14 @@ sheets with 005I truth (never trained on).
 | real exterior-wall recall of **source-cv** (SCV-WALL ∪ SCV-SOLID) | 0.978–1.000 | (same) |
 | **ADDITIONAL_USEFUL_WALL_EVIDENCE_OVER_SOURCE_CV** | **0.000–0.017** | 0.000–0.018 |
 | real openings read as OPENING (pixel share over the truth openings) | **0.72–0.90** | 0.58–0.81 |
-| REAL_DEV gap questions, strip on the **wall axis** (post-review A2 / C1; NORMAL frames): openings OPENING / continuations CONTINUES / solid stretches WALL | **61/63** (47 at ≥ 0.8, 0 wrong) / **50/65** (44, 0 wrong) / 23/24 (1 wrong) | 52/63 (39) / 47/65 (39, 2 wrong) / 24/24 |
+| REAL_DEV gap questions, strip on the **wall axis** — inward side taken from the truth outline; with the side flipped, 0/63 (post-review A2 / C1 / F5); NORMAL frames; the openings set is one-class, so a constant scores 63/63: openings OPENING / continuations CONTINUES / solid stretches WALL | **61/63** (47 at ≥ 0.8, 0 wrong) / **50/65** (44, 0 wrong) / 23/24 (1 wrong) | 52/63 (39) / 47/65 (39, 2 wrong) / 24/24 |
 | the same questions with the strip on the wall's outer face (the first 005J run) | 23/63 (0 at ≥ 0.8) / 23/65 / 6/24 | 27/63 / 27/65 / 8/24 |
 | real envelope continuity through openings | **0.74–0.94** | 0.60–0.86 |
 | real false wall inside exclusions (source-cv: ≤ 11.0 %) | ≤ 3.6 % | **≤ 0.8 %** |
 | round-8 regions: cyklamenach window gap / double door / textured terrace | **96.6 % / 74.0 % opening; terrace 95.5 % background** | 96.8 % / 82.4 % opening; terrace 97.5 % background |
 | round-8 regions: gozdzikowcach garage door / porch mouth / entrance door / pier (x 435–452) | **75.3 % opening** / 100 % background / 99.7 % opening / **100 % wall** | **81.6 % background** (missed) / 99.4 % background / 99.7 % opening / 100 % wall |
-| gozdzikowcach 0.41 m LEAF_FACE gap (`gap-Y-538-322-338`), rows 542–550 on its axis | **≈ 94 % opening** | 71–88 % opening |
+| gozdzikowcach 0.41 m LEAF_FACE gap (`gap-Y-538-322-338`): strip on the production face line (538) / face strip 531–545 / rows 542–550 / one-jamb wall band 540–556 (post-review F4; in `wall-model-proof.json`) | 15.7 % / 28.2 % / **94.1 %** / 82.7 % opening | 3.9 % / 16.5 % / 76.5 % / 72.3 % opening |
+| `gap-X-413-239-353`: a dashed stretch through a room, no wall ink (post-review F3) | 99.7 % background | 98.2 % background |
 | as a gap referee (pre-registered strip rules), CANDIDATE_OVERLAY questions | synthetic 129/149 right of 180, 13 confident-wrong; REAL_DEV (face-placed) 104/107 right of 304, 2 confident-wrong; blind-8 23/23 right of 24, 0 confident-wrong | synthetic 141/149 right of 180, 0 confident-wrong; REAL_DEV (face-placed) 128/148 right of 304, 20 confident-wrong; blind-8 16/20 right of 24, 4 confident-wrong |
 | ONNX fp32 / ORT-web WASM per 864² frame (1 thread, Node 18) / RSS | 6.25 MB / **1.19 s** / ≥ 340 MiB | 14.95 MB / 4.46 s / ≥ 928 MiB |
 
@@ -329,7 +387,8 @@ classifier that is confidently wrong on real sheets. Route C needs real-style da
   - the REAL_DEV strips sat on the wall's outer face (the 005I truth outline), half outside the building. On the axis,
     UNet reads 61 of 63 openings OPENING (47 confident) — see §F;
   - the gozdzikowcach porch-mouth question's "B" piece and the "pier" region box sat over the porch floor, not the
-    pier (x 435–463). The pier reads 100 % wall, and with B on it both models answer TERMINATES (0.98 / 0.97). That
+    pier (x 435–463). The pier reads 100 % wall. (With B moved onto it both wall models answer TERMINATES, 0.98 /
+    0.97 — an anecdote: a re-placement made after seeing results, on the wall arms only; post-review F13.) That
     question was malformed for every arm and is excluded from all scoring (`research/analyzer-005j/exclusions.json`).
 
 ## H. Training routes and legal training (brief Part G, Q4)
@@ -339,9 +398,9 @@ are estimates with stated assumptions (no GPU in this stage), CPU numbers are me
 
 | route | 005J measurement | estimate for a real run | verdict |
 | --- | --- | --- | --- |
-| **A — fine-tune a small VLM** (SmolVLM-500M v1 base) | zero-shot at or below chance (§E); ≈ 16 s and ≥ 1.9 GiB per question in the shipped runtime | ≈ 220k synthetic questions, one 4090-class GPU 5–12 h, USD 10–50 per run; artifact 0.34–0.8 GB | **not now** |
-| **B — wall / opening model** (UNet-lite) | from scratch on CPU in 20 min; transfers at pixel level (§F) | 20–50k scenes with open-gap hard negatives; 1–3 h on one 4090-class GPU, < USD 20 per run; ≈ 6 MB; 1.19 s per frame / ≈ 0.1 s per gap crop in WASM | **PRIMARY (005K)** |
-| **C — distilled micro-referee** | pilot: 85 % synthetic, 49.7 % real, 34 % confident-wrong (§G); 70 ms in WASM | generator v2 + real-style rendering + the Route-B map as input + human-verified real labels from an offline teacher; < USD 20 per run | **SECONDARY, later** |
+| **A — fine-tune a small VLM** (SmolVLM-500M v1 base) | per-house cost (≈ 7 min per median house in the shipped runtime, ≥ 1.9 GiB) and the measured failure of synthetic-only image-level training to transfer (§G) come first; zero-shot accuracy says little about a fine-tune (post-review B13) | ≈ 220k synthetic questions, one 4090-class GPU 5–12 h, USD 10–50 per run; artifact 0.34–0.8 GB | **not now** |
+| **B — wall / opening model** (UNet-lite) | from scratch on CPU in 20 min; transfers at pixel level on positives (§F); no outcome advantage over a deterministic rule in the replay (§E) | 20–50k scenes with open-gap hard negatives; 1–3 h on one 4090-class GPU, < USD 20 per run; ≈ 6 MB; 1.19 s per frame / ≈ 0.1 s per gap crop (estimate) in WASM | **SECONDARY: challenger, gated on the sealed fresh-sheet set** |
+| **C — distilled micro-referee** | pilot: 85 % synthetic, 49.6 % real, 34 % confident-wrong (§G); 70 ms in WASM | generator v2 + real-style rendering + the Route-B map as input; synthetic training only (real crops evaluation-only); < USD 20 per run | **later than B** |
 
 Every route's gates are the same: a balanced real set; per-class confident-wrong ≤ 0.5 % (target 0.2 %); minority-answer
 accuracy reported; mirror / rotation ≥ 99 %; determinism on Node 18 / 22 and x86-64 / arm64; non-circularity; a fresh
@@ -366,7 +425,7 @@ ground truth and is never shipped or called at runtime.
 | UNet-lite (005K route) | 6.25 MB | 2.8 s | **1.19 s / 864² frame** (≈ 0.1 s per 256² gap crop) | ≥ 340 MiB |
 | MiT-B0 SegFormer | 14.95 MB | 2.0 s | 4.46 s / frame | ≥ 928 MiB |
 | micro-referee pilot | 4.22 MB | 0.9 s | **70 ms / question** | ≥ 214 MiB |
-| SmolVLM2-500M (fp32 vision + int8 decoder) | 393 + 365 MB | 4.7 + 1.1 s | **≈ 16 s / question** (vision 11.9 s, prefill 3.8 s, 0.15 s per token) | ≥ 1.9 GiB |
+| SmolVLM2-500M (fp32 vision + int8 decoder) | 393 + 365 MB | 4.7 + 1.1 s | **≈ 17–20 s / question; ≈ 7 min per median house** (vision 11.9 s, prefill 3.8 s, 8–19 scored tokens at 0.15 s) | ≥ 1.9 GiB |
 
 - No Android device or emulator was available in 005J; phone figures for LiteRT-LM and llama.cpp are upstream card
   values or UNMEASURED, and never a text-only latency quoted as an image latency.
@@ -400,38 +459,61 @@ notice), REIMPLEMENT_FROM_PAPER, RESEARCH_ORACLE_ONLY, REJECT. GPL/AGPL code (Ra
 Ultralytics) is never copied; non-commercial or source-available code (CubiCasa5K repository, SymPoint, ArchCAD, CAGE's
 Commons Clause, NVIDIA SegFormer) is at most reimplemented from the paper without looking at the code.
 
-⟪SECTION_K⟫
+## K. Post-implementation council (brief Part J) — `post-review/`
+
+Six independent reviewers read the artifacts, the harness and the raw run outputs, recomputed what they cited, and wrote
+without seeing each other's reviews. The resolution of every finding is in `post-review/resolution.md`.
+
+| reviewer | topic | verdict | P0 | P1 | what it changed |
+| --- | --- | --- | --- | --- | --- |
+| A | floor-plan computer vision | CHANGES REQUESTED | 1 | 6 | the oracle replay was run (A1); REAL_DEV re-measured on the wall axis (A2); two-signal witness; the P0 count de-duplicated |
+| B | VLM / edge AI | CONDITIONAL PASS | 0 | 4 | matched subsets (B1); the 64-token scope (B2); the degenerate grounding test restated (B3); per-house latency (B4) |
+| C | training data and evaluation | CONDITIONAL PASS | 0 | 6 | the malformed porch-mouth question excluded for every arm (C2); the unit and n of the gate; generator v2 families |
+| D | licensing, provenance, supply chain | CONDITIONAL PASS | 0 | 2 | real crops are evaluation data only in every route (D1); "independent re-implementation, not clean-room" (D2) |
+| E | BuildPlan architecture and integration | CHANGES REQUESTED (spec); freeze PASS | 0 | 8 | no OPEN_SIDE split; pre-pass design; unconditional asking; PATH B reconciled; 005H items |
+| F | generalization red team | CHANGES REQUESTED | **1** | 8 | **the decision flipped** (F1): the witness and the deterministic rule are outcome-identical on every replayed row |
+
+**The flip.** Before the council the primary was TRAIN_BUILDPLAN_WALL_MODEL. A's and E's P0/P1 demanded a replay; the
+replay showed one drawn-gap upgrade completes gozdzikowcach, and that a deterministic upgrade does the same with no
+model. F's P0 then showed that the reason given for rejecting NO_AI_YET did not distinguish it from the primary. The
+primary is now **NO_AI_YET** made concrete (records, a sealed fresh-sheet gap set, the deterministic drawn-gap upgrade
+with tightened eligibility, a constant control); the wall model is the **SECONDARY_LATER** challenger. B's position,
+written before the flip, supports the wall model over any small VLM; it did not weigh the deterministic rule, and it
+is consistent with the challenger role.
+
+**What remains open after the council.** No P0 is open. Every P1 is fixed or stated; the P2s are fixed, stated as
+limitations (§O) or recorded in the 005K / challenger specification. Not re-run: the lenient-parser and
+pseudo-replication refinements (C9c/d, B9), and a SmolVLM2 int8 vision encoder (B12, UNTRIED).
 
 ## L. Decision (brief Part K, Q5) — `recommendation.md`
 
 | | |
 | --- | --- |
-| **PRIMARY_NEXT** | **TRAIN_BUILDPLAN_WALL_MODEL** — a commercially clean wall / opening observation model (UNet-lite, from scratch, BuildPlan synthetic data with open-gap hard negatives) integrated as a **gap witness** at IP-01 / IP-02, behind a flag |
-| **SECONDARY_LATER** | **TRAIN_BUILDPLAN_VISUAL_REFEREE** — a distilled micro-referee for region / outline seams, after the primary, with real-style data and the wall map as input |
-| rejected now | ADOPT_EXISTING_SPECIALIZED_MODEL (no commercially clean model exists); ADOPT_SMALL_VLM_REFEREE (zero-shot at or below chance; ≈ 16 s and ≥ 1.9 GiB per question on device); HYBRID_WALL_PLUS_REFEREE (the referee half failed on real sheets); NO_AI_YET (a cheap, clean, transferable observation exists and reads the round-8 gaps) |
+| **PRIMARY_NEXT** | **NO_AI_YET** — 005K builds per-gap Evidence Pack records (with `axisPx`), a **sealed fresh-sheet gap set** labelled before any rule or model runs, and the deterministic drawn-gap upgrade with tightened eligibility, measured on that set against a constant control |
+| **SECONDARY_LATER** | **TRAIN_BUILDPLAN_WALL_MODEL** — the UNet-lite challenger (generator v2, two-signal witness whose BACKGROUND vetoes an upgrade), adopted only if the sealed set shows deterministic false upgrades that matter and that the model refuses |
+| rejected | ADOPT_EXISTING_SPECIALIZED_MODEL (no clean model); ADOPT_SMALL_VLM_REFEREE (at or below chance, also on matched subsets; ≈ 7 min per median house, ≥ 1.9 GiB); HYBRID_WALL_PLUS_REFEREE and TRAIN_BUILDPLAN_VISUAL_REFEREE now (no measured advantage; the region seams are blocked by deterministic rules first) |
 
-**Why the primary.**
-- It is the only measured piece that is commercially clean **and** transfers to real sheets.
-- It speaks to the seams that dominate the P0 list (7 of 12) and to both round-8 first divergences.
-- It enters the way BuildPlan's architecture admits evidence: an observation beside the opening callout. The resolver
-  is untouched, no published figure is read, and it can be measured OFF / ON hash by hash like 005H's recogniser.
+**Why the order changed during the stage.**
+- The first draft named TRAIN_BUILDPLAN_WALL_MODEL. The council asked for a replay (A1, E4).
+- The replay showed the deterministic drawn-gap upgrade and a perfect witness are outcome-identical on every measured
+  row, and neither moves a verdict.
+- So the model's case rests on out-of-sample behaviour that BuildPlan cannot measure yet (F1, F8).
+- Building that measurement is cheaper than the model and needed by it. If the measurement shows the deterministic rule
+  bridging open gaps in ways that change outcomes, the model has a measured target.
 
 **005K in one paragraph.**
-- **Generator v2** with open-gap hard negatives, and a **balanced, human-verified real gap set** built before
-  calibration.
-- **UNet-lite** trained from scratch, ONNX pinned by SHA-256, run in a 005H-style ORT-web WASM package on **gap crops
-  only**.
-- A typed `GapWitness` observation that may **upgrade** a WEAK gap with walled jambs and **split** an OPEN_SIDE stretch.
-  It never downgrades, never creates a gap, never reads a published figure and never chooses a reading.
-- Per-gap rectangles in the Evidence Pack.
-- **Flag OFF ⇒ byte-identical**.
-- **Gates:** per-class confident-wrong ≤ 0.5 % (target 0.2 %) on synthetic hard negatives **and** on the balanced real
-  set; mirror / rotation ≥ 99 %; Node 18 / 22 and x86-64 / arm64 parity; development matrix OFF / ON with every hash
-  change explained.
-- A fresh blind round only at the end.
-- **Not in 005K:** VLM, server, Route-C referee, PDF.js.
+- Per-gap records: stable id, copy, `linePx` + `axisPx`, crop rectangle and hash, pre-override signature, strokes, ink
+  fraction.
+- A sealed fresh-sheet gap set: sheets drawn by lot from non-development, non-blind pages, at least one other
+  publisher, labelled by a person before any rule or model runs; the count stated; a constant control beside every
+  gate.
+- The deterministic upgrade: drawn evidence inside the wall band only; BLANK and phantom stretches excluded.
+  - It is measured on the development matrix OFF / ON and on the sealed set.
+  - It ships only if its false upgrades are bounded.
+- Not in 005K: any model, VLM, server, PDF.js, and the storey / REC-17 / recessed-entrance rules. Those are the actual
+  verdict blockers and are separate deterministic decisions for the coordinator.
 
-**005K is not self-started.** It is generated after coordinator review.
+**005I's PATH B** (PDF.js) reaches 2 of 26 sources; the coordinator decides the order. **005K is not self-started.**
 
 ## M. What changed in the repository, and the production-freeze proof
 
@@ -445,7 +527,12 @@ Commons Clause, NVIDIA SegFormer) is at most reimplemented from the paper withou
 **Not changed:** any file under `packages/` or `apps/`; the root `package.json` and lockfile; any model hash, resolver
 bound, Evidence Pack format or sealed record; any Gradle file or Android asset; CI workflows.
 
-⟪FREEZE_PROOF⟫
+**Freeze proof.** For each production tree, `sha256(git ls-files -s <tree>)` and its file count at the end of the stage
+are identical to the values recorded at the start (`packages/` 498 files `64051a7b…`, `apps/` 277 `2117028c…`,
+`packages/reconstruction` 96 `0ed6f167…`, `packages/source-cv` 14 `aa6247d0…`, the root `package.json` and
+`package-lock.json`, `.github/`), and `git diff 64b78b4 -- packages apps package.json package-lock.json .github` is
+empty in the committed tree and in the working tree. The replay's patched `boundary-evidence.ts` and its Vite config
+lived only under `/home/user/work005j/replay/`.
 
 **Artifacts** (`stage-reports/artifacts/analyzer-005j/`): `visual-referee-opportunity-map.{md,json}`,
 `technology-matrix.{md,json}`, `licensing-matrix.md`, `floorplan-models.md` (+ `floorplan/`), `vlm/vlm-audit.{md,json}`,
@@ -506,7 +593,17 @@ bound, Evidence Pack format or sealed record; any Gradle file or Android asset; 
    `microsoft@5ca5edf` byte for byte, apart from documented layout differences; full identity was not verified.
 9. **SmolVLM2's official int8 vision encoder does not run** on ONNX Runtime's CPU provider (`ConvInteger`). The fp32
    vision encoder was used with the int8 decoder and embeddings.
-10. **Disk.** The container had about 4 GB free, which bounded the composition and model choices. Upstream clones were
+10. **The bake-off arms cover different subsets of one pool** (post-review B1). Pooled rows compare different
+    question mixes; matched subsets are in `vlm-bakeoff.md` §8. SmolVLM2 has no REAL_DEV RAW or SEMANTIC_OVERLAY rows,
+    and Florence-2 has 2 synthetic rows and one development house (B10).
+11. **24 GARAGE_BODY CANDIDATE_OVERLAY items are malformed for every arm** (post-review B6): the red candidate outline
+    covers the dashed garage-door line that is the A/B difference. All arms saw the same bytes, so no arm is favoured;
+    the oracle's three errors are there. They are kept in scoring and named here.
+12. **The real truth and the oracle share a reader** (post-review B5): REAL_DEV truth is the 005I manual truth
+    annotated by the study agent, and blind-8 truth is the accepted 005I diagnosis, both readings by the model family
+    that answers as the oracle. The real agreement is an upper bound on solvability; the synthetic 98 / 101 against
+    generator semantics is the clean figure. The oracle's 0 confident-wrong holds at 0.80; at 0.75 it has 2.
+13. **Disk.** The container had about 4 GB free, which bounded the composition and model choices. Upstream clones were
     deleted after their commit SHAs were recorded.
 
 ## P. Commits

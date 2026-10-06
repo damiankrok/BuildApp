@@ -8,7 +8,7 @@ in-session strong model used as `SERVER_ORACLE` in 005J is a measurement instrum
 
 > **Scope after post-review E5.** The question-per-house figures below apply only to the **rejected** option of a
 > server-side referee asked about disputed parts. A refusal-triggered, area-ranked selection is circular for an
-> observation (the refused figure would choose which gaps get a model answer). The recommended 005K witness is asked
+> observation (the refused figure would choose which gaps get a model answer). A future witness (the secondary route) would be asked
 > **unconditionally**, for every eligible gap of every decomposed copy: **7–64 weak gaps per house, median 24**
 > (recounted by reviewer E from the 005I packs, selected copy only), as a local pre-pass over the plan frames
 > (≈ 1.2 s per 864² frame, 4–8 frames per house) — no server, no per-question cost.
@@ -36,7 +36,7 @@ part decide anything; asking about every gap would be the "one request per analy
 | Florence-2-base fp32 (torch) | ENUM_SCORE (3–4 options batched) ≈ 6 s | ≈ 5.4 s | (not recorded under load) |
 | UNet-lite wall / opening model (Route B, 1.56 M) | **1.19 s per 864² frame** in ORT-web WASM, one thread, Node 18 (measured); ≈ 0.1 s per 256² gap crop | 2.8 s | ≥ 340 MiB (WASM, lower bound) |
 | micro-referee pilot CNN (Route C, 1.07 M) | **70 ms per question** in ORT-web WASM (measured, median of 20) | 0.9 s | ≥ 214 MiB (WASM, lower bound) |
-| SmolVLM2-500M in the **shipped** runtime (ORT-web WASM, one thread) | **≈ 16 s per question** (vision 11.9 s + prefill 3.8 s + 0.15 s per token, measured) | 4.7 s + 1.1 s | ≥ 1.9 GiB |
+| SmolVLM2-500M in the **shipped** runtime (ORT-web WASM, one thread) | **≈ 17–20 s per question, ≈ 7 min per median house** (vision 11.9 s + prefill 3.8–5.6 s + 8–19 scored tokens at 0.15 s, measured parts; post-review B4) | 4.7 s + 1.1 s | ≥ 1.9 GiB |
 
 Exact distributions: `vlm-bakeoff.json` → `latencyMs` (median, p95 per model and read-out).
 
@@ -73,6 +73,8 @@ production server" is claimed.**
 | SERVER | smallest app, strongest models | network, privacy and licensing of crops, cost, outage modes, non-determinism across model updates | development / teacher use only |
 | HYBRID (local first, server only on UNRESOLVED) | coverage where the local model abstains | inherits every server risk for exactly the hardest crops | not recommended now; revisit only with counsel and an OWNER decision |
 
-**Recommendation (delivery):** local. The Route-B wall / opening model (≈ 6 MB) embedded in the APK and run through the
-onnxruntime-web WASM runtime the app already ships, exactly as the 005H numeric recogniser is; a later Route-C referee the
-same way. A server is not needed for the recommended path, and a strong hosted model stays a development-time teacher.
+**Recommendation (delivery):** local.
+- 005K adds no model (NO_AI_YET).
+- If the wall / opening challenger is ever adopted, it is embedded in the APK (≈ 6 MB) and runs through the
+  onnxruntime-web WASM runtime the app already ships, exactly as the 005H numeric recogniser does.
+- A server is not needed, and a strong hosted model stays a development-time instrument.

@@ -1,238 +1,207 @@
 # Recommendation (BUILDPLAN-ANALYZER-005J)
 
-This page was rewritten after the post-implementation council (`post-review/`). Two reviewers (A and E) showed that the
-first draft's integration path (a single-signal upgrade plus an OPEN_SIDE "split") would not move either round-8 house.
-They asked for an oracle replay before 005K was scoped. That replay was run in 005J (§3). Changes against the draft are
-listed in `post-review/resolution.md`.
+The first draft of this page recommended training a wall / opening witness for 005K. The six-reviewer council
+(`post-review/`) changed that in two steps:
+
+1. **Reviewers A and E** showed that the draft's integration path would not move either round-8 house, and asked for a
+   replay. The replay was run in 005J (§3).
+2. **Reviewer F** then showed, from that replay, that the deterministic alternative is outcome-identical on every
+   measured row. It costs nothing at run time.
+
+The witness's one claimed advantage is saying no to drawn-but-open gaps. It rests on development data: seven real
+questions, with a confident miss at the only hard one. The decision below follows the evidence.
+`post-review/resolution.md` lists every change.
 
 ## 1. Decision
 
 | | |
 | --- | --- |
-| **PRIMARY_NEXT** | **TRAIN_BUILDPLAN_WALL_MODEL** — a commercially clean, BuildPlan-trained wall / opening observation model, used as a **two-signal gap witness** at one injection point (IP-01). 005K is split: **005K-a** (research: model, replay, Evidence Pack records; stop rule) before **005K-b** (integration) |
-| **SECONDARY_LATER** | **TRAIN_BUILDPLAN_VISUAL_REFEREE** — a micro-referee for region / outline seams, after the primary, trained on synthetic data only |
-| rejected now | ADOPT_EXISTING_SPECIALIZED_MODEL (none is commercially clean); ADOPT_SMALL_VLM_REFEREE (zero-shot at or below chance; ≈ 16 s and ≥ 1.9 GiB per question in the shipped runtime); HYBRID_WALL_PLUS_REFEREE (the referee half failed on real sheets); NO_AI_YET (§4: a perfect gap witness moves gozdzikowcach, and the proof model reads that gap correctly) |
+| **PRIMARY_NEXT** | **NO_AI_YET** — made concrete in 005K: per-gap evidence records, a **sealed fresh-sheet gap set** labelled before any rule or model runs, and the deterministic drawn-gap upgrade with tightened eligibility, measured on it (§5) |
+| **SECONDARY_LATER** | **TRAIN_BUILDPLAN_WALL_MODEL** — the from-scratch UNet-lite wall / opening model as a **challenger**, trained and integrated only if the sealed set shows deterministic false upgrades that matter and that the model refuses (§6) |
+| rejected | **ADOPT_EXISTING_SPECIALIZED_MODEL**: no commercially clean model exists.<br>**ADOPT_SMALL_VLM_REFEREE**: zero-shot at or below chance, also on matched subsets; ≈ 17–20 s and ≥ 1.9 GiB per question in the shipped runtime, ≈ 7 min per median house when asked for every eligible gap (post-review B4).<br>**HYBRID_WALL_PLUS_REFEREE**: neither half has a measured advantage yet; the referee pilot failed on real sheets.<br>**TRAIN_BUILDPLAN_VISUAL_REFEREE now**: the region / outline seams it would serve are blocked by deterministic rules first (§3) |
 
-No PDF.js implementation, no fresh blind round and no production change in 005J.
+No PDF.js implementation, no fresh blind round and no production change in 005J. **005K is not self-started.**
 
 ## 2. The evidence the decision rests on
 
 | question | measured answer | where |
 | --- | --- | --- |
-| Where would a visual answer change the model? | 52 seams, 12 of them P0. The P0 list is dominated by gap decisions (opening vs pattern, wall continues vs ends, one open side vs several): **3–4 distinct gap decisions among 7 distinct P0 decisions** once duplicate records of the same code path are merged (post-review A6) | `visual-referee-opportunity-map.md` |
-| Is any existing floor-plan model usable? | No: every trained floor-plan model found has non-commercial weights or data or both | `floorplan-models.md`, `licensing-matrix.md` |
-| Can a generic small VLM answer the narrow questions? | **No.** On the same CANDIDATE_OVERLAY questions:<br>• **SmolVLM2-500M** answers 72 % and is right on **45 %** of those (REAL_DEV 47 %, blind-8 37 %). Confident-wrong is **7.2 %**; mirror consistency is 43 % of answered pairs.<br>• **Moondream 0.5B** is right on 46 % of the 40 % it answers.<br>• **Florence-2-base** has no VQA task token. It is right on 41 % of the 39 % it answers, with 23 % confident-wrong. Its grounding found no window in the cyklamenach crop (8 of 8 UNRESOLVED).<br>All three are at or below chance and the majority floor, and their confident-wrong rates are far above the 0.5 % gate | `vlm-bakeoff.md` |
-| Are the questions answerable from the crop at all? | **Yes.** The in-session strong model, answering blind (neutral file names), got **98.0 %** of 148 composed questions right with **0 confident-wrong**: **30/30** REAL_DEV and **16/16** blind-8. The questions are well posed; the small models are the problem | `vlm-bakeoff.md` |
-| Does a BuildPlan-trained pixel model transfer to real sheets? | **Yes.** UNet-lite, 1.56 M params, trained from scratch on BuildPlan synthetic drawings only. Real exterior-wall recall 0.91–1.00. With its strip on the **wall axis**: **61 of 63** real development openings read OPENING (**47 at ≥ 0.8**, none wrong) and 50 of 65 continuations read CONTINUES (44 at ≥ 0.8, none wrong). The 005J run first placed strips on the wall's outer face, which gave 23 of 63 and no confident answer (post-review A2 / C1) | `wall-model-proof.json` → `unet.axisRemeasure` |
-| Does it add wall coverage over source-cv? | No (0–1.7 %). Its value is the OPENING / BACKGROUND reading **at a gap** | `wall-model-proof.json` |
-| Does a correct gap reading move a failing house? | **gozdzikowcach: yes.** The research replay re-ran the frozen code on the sealed round-8 evidence. Upgrading **one** 0.41 m LEAF_FACE gap (`gap-Y-538-322-338`) to STRONG turns PLAN_RESOLUTION_INCONCLUSIVE (105.47 m², −20.4 %) into a completed reading of **127.54 m² (−3.75 %; the footprint condition holds)**. The UNet reads that gap **≈ 94 % OPENING** on its axis. The verdict stays ALGORITHMIC_FAIL on a **different** condition (1 storey modelled, 2 drawn). **cyklamenach: no.** 91 upgrades of every drawn weak gap change nothing; it is stopped by NO_CONTINUATION and TOO_LARGE before any gap matters | §3 |
-| What does over-reading cost? | **Little on the development matrix — which cuts both ways.** Upgrading *every* drawn weak gap (2–73 per house, no model) changes one completed model among 19 valid development rows (zurawkach: −0.81 % → −1.68 %, verdict unchanged) and **no verdict**; every PASS row keeps its model hash. So a deterministic single-signal rule would also complete gozdzikowcach. The witness adds value only where it says **no** to a drawn gap that is open — e.g. gozdzikowcach's dashed porch front (`gap-Y-598-312-434`, truly open), which the oracle upgraded and the UNet reads **100 % background**. 005K-a must prove that (§5, gate 7), or fall back to the deterministic rule | §3 |
-| Does a BuildPlan-trained whole-image referee transfer? | **No (pilot).** 85 % on held-out synthetic, but **49.7 % on real development questions** (below the 76 % majority floor), with 34 % confident-wrong at 0.80 | `wall-model-proof.json` → `routeCPilot` |
-| Does it fit the phone? | UNet-lite: 6.25 MB, **1.19 s per 864² frame** in the WASM runtime the app already ships, ≥ 340 MiB; no new native library | `android-deployment-matrix.md` |
-| Is the route legally clean? | Yes for training: code written here (UNet-lite is a textbook U-Net), weights trained from random initialisation, data generated by BuildPlan. Real publisher crops are evaluation data only | `licensing-matrix.md` §4 |
-
-**What the proof model is not yet.**
-1. **It over-reads open gaps.**
-   - On synthetic open-gap counterfactuals it answers CONTINUES: 12 confident-wrong.
-   - By pixel, open gaps read 44.5 % OPENING, and dimension-line ink reads 12 % WALL + 18 % OPENING (post-review A3).
-   - Training had only 40 open gaps in 360 renders.
-2. **Real evidence is small and one-sided.**
-   - The minority (negative) real gap questions come from 8 distinct targets, and there is no real PATTERN question at all
-     (C3, C5).
-   - With no error, about 600 independent questions per class are needed to show a confident-wrong rate ≤ 0.5 %. 005K
-     states its gate as an upper bound on a stated count.
-3. **Strip placement matters.**
-   - A strip placed on the wall face instead of the axis reads half outside the building.
-   - Production's `GridLine.px` is often a face line, and `BoundaryGap` stores no `axisPx`.
-   - Any witness must take its across-extent from the jamb bands (A2).
+| Where would a visual answer change the model? | 52 seams, 12 P0. The P0 list is dominated by gap decisions: **3–4 distinct gap decisions among 7 distinct P0 decisions** (post-review A6) | `visual-referee-opportunity-map.md` |
+| Is any existing floor-plan model usable? | No. Every trained floor-plan model found has non-commercial weights or data | `floorplan-models.md`, `licensing-matrix.md` |
+| Can a generic small VLM answer the narrow questions? | **No**, as tested: three checkpoints of at most 0.5 B, zero-shot, one 512 px tile, one prompt (post-review F11). SmolVLM2 ran in its deployable **64-image-token** configuration (`do_image_splitting=False`, 1/17 of its default budget; post-review B2). ⟪B2_PROBE_SHORT⟫ Each arm ran on a different subset of one pool; the matched subsets are in `vlm-bakeoff.md` §8 (post-review B1).<br>• **SmolVLM2-500M** is right on **45 %** of what it answers (REAL_DEV 47 %, blind-8 37 %), with **7.2 %** confident-wrong; its 43 % mirror consistency is almost entirely synthetic. On counterfactual pairs both members answered it gets both right on 19 % (chance ≈ 23 %).<br>• **Moondream 0.5B**: 46 %.<br>• **Florence-2-base** (no VQA task): 41 %, with 23 % confident-wrong.<br>On the oracle's own items SmolVLM2 is right on 46 of 100 answered, the oracle on 138 of 141. The rejection also stands on cost alone | `vlm-bakeoff.md` |
+| Are the questions answerable from the crop? | **Yes.** The in-session strong model, answering blind, is right on **98.0 %** of 148 with **0** confident-wrong (30/30 REAL_DEV, 16/16 blind-8) | `vlm-bakeoff.md` |
+| Does a BuildPlan-trained pixel model transfer to real sheets? | **Partly, and only on positives.**<br>• A from-scratch UNet-lite (1.56 M) trained on synthetic data finds 91–100 % of exterior wall on 7 ARCHON sheets.<br>• With the strip on the wall axis — inward side taken **from the truth outline** — it reads 61 of 63 real openings OPENING. All 63 expect OPENING, so a constant answer also scores 63/63. With the side flipped it scores 0/63.<br>• This is recall on positives with oracle placement, on one publisher at ≈ 40 px/m (post-review F5, F9) | `wall-model-proof.json` |
+| Can it say no on real sheets? | **Barely measured.** On the 7 real minority questions (NOT_WALL / TERMINATES) it gets 6 right and is **confidently wrong on the only hard case**: the azaliach canopy next to the building, read WALL at 0.83. Wilson 95 % upper bound on its error: 51 % (post-review F6). On synthetic open gaps: 12 confident-wrong CONTINUES | post-review F6 |
+| Does a correct gap reading move a failing house? | In the replay of the frozen code (§3), upgrading one 0.41 m drawn gap completes **gozdzikowcach** at −3.75 %, and the **verdict still fails** on the storey count. **cyklamenach** does not move. **No verdict moves** on any row | §3 |
+| Does the model add anything a deterministic rule does not? | **Not measured.** Upgrading every drawn weak gap with no model gives the **same** gozdzikowcach model and the same outcomes on every valid replayed row. The model differs only in *not* upgrading two drawn-but-open gaps in gozdzikowcach, and neither changes the outcome:<br>• the dashed porch front: 100 % background;<br>• `gap-X-413`, a dashed stretch through a room: 99.7 % background | §3, `wall-model-proof.json` |
+| What blocks verdicts on the development matrix? | Most often the **storey count**: tunbergiach, zurawkach and willa-miranda fail on it alone, gozdzikowcach fails on it after the replay, and helikoniach fails on it beside its footprint. Then REC-17 / TOO_LARGE (cyklamenach) and the recessed-entrance body relation (jarzabem, which 73 upgrades do not move) | §3, post-review F7 |
+| Does a whole-image referee trained on synthetic data transfer? | **Not this pilot.** 85 % on synthetic, but 49.6 % on REAL_DEV with 34 % confident-wrong. It is one weak pilot (8 seeds, 256 px, one run), not a law (F12) | `wall-model-proof.json` → `routeCPilot` |
+| Do BuildPlan-sized models fit the phone? | Yes, in the WASM runtime the app already ships:<br>• UNet-lite: 6.25 MB, 1.19 s per 864² frame;<br>• micro-referee: 70 ms.<br>A small VLM does not: ≈ 17–20 s and ≥ 1.9 GiB per question, ≈ 7 min per median house (24 gaps) on a desktop core, ×2–5 on a phone | `android-deployment-matrix.md` |
+| Is a training route legally clean? | Yes, BuildPlan synthetic data trained from scratch. Real publisher crops are evaluation data only | `licensing-matrix.md` §4 |
 
 ## 3. The oracle replay (research, 005J)
 
 **Setup.**
 - Production code at `64b78b4`, unchanged in the repository.
-- `research/analyzer-005j/replay/oracle_replay.py` writes a research copy of `boundary-evidence.ts`. The copy is swapped
-  in only inside the replay process, through a Vite alias.
-- The copy wraps `classifyGap`. Under `ORACLE_WITNESS` it upgrades to STRONG every WEAK gap between two WALL jambs that
-  carries drawn evidence (signature not BLANK). These are exactly the gaps a two-signal witness (drawn evidence + model
-  OPENING) could upgrade. BLANK gaps and wide OPEN_SIDE gaps are never touched.
-- Each house is re-solved from its sealed source package, observation graph and metric evidence
-  (`second-house.ts --package --graph --metrics --cache`), so OCR and metric are held fixed.
+- `research/analyzer-005j/replay/oracle_replay.py` writes a research copy of `boundary-evidence.ts`. The copy is
+  swapped in only inside the replay process, through a Vite alias.
+- The copy wraps `classifyGap`. Under `ORACLE_WITNESS` it upgrades to STRONG every WEAK gap between two WALL jambs
+  whose signature is not BLANK. That is also exactly the deterministic "drawn-gap upgrade".
+- Each house is re-solved from its sealed source package, observation graph and metric evidence, so OCR and metric are
+  held fixed.
 
-| house | OFF (must equal the sealed run) | ALL_DRAWN (every eligible gap) | narrower oracle |
+**Two cautions (post-review F2).**
+- The replay writes no `warningDetails` and no observation graph. So `holdout/verdict.mjs` cannot evaluate
+  `openingsAllBuilt`, `resolvedWithAWitness` or raw legibility on replay outputs. The sealed and OFF verdicts therefore
+  differ on 9 rows that have the **identical** model hash or failure code.
+- The comparisons below are made at the level of **model hashes, outcomes, footprint residuals and the storeys
+  condition**. They are not full holdout verdicts.
+
+**Results.**
+
+| house / set | OFF (fidelity) | ALL_DRAWN (every eligible gap) | narrower runs |
 | --- | --- | --- | --- |
-| dom-w-gozdzikowcach | PLAN_RESOLUTION_INCONCLUSIVE, 105.47 m² — **identical to the sealed round-8 run** | COMPLETED, 127.54 m² (−3.75 %), 10 upgrades | **ONLY `gap-Y-538-322-338` (0.41 m LEAF_FACE): the same completed model.** EXCLUDE the porch front (truly open): the same |
-| dom-w-cyklamenach | PLAN_RESOLUTION_INCONCLUSIVE, 49.20 m² — identical | unchanged, 91 upgrades | — |
-| development matrix (21 replayed; 19 valid) | reproduces the sealed model hash or failure code on **19 of 19** valid rows (dabecjach and tunbergiach excluded: their source bytes were in no cache, so the replay could not decode them) | **1 model changes** (zurawkach −0.81 % → −1.68 %, verdict unchanged: storeys); **0 verdicts change**; every PASS row (arkadiach, jablonkach, modrzykach, morelach, kosacce ×2, marcowki, rarytasy-eoze, rarytasy-g2e) keeps its model hash | — |
+| dom-w-gozdzikowcach | the sealed failure code | COMPLETED, model `2d08931b`, 127.54 m² (−3.75 %); storeys still fail; 10 upgrade events | **ONLY `gap-Y-538-322-338`** (0.41 m LEAF_FACE) gives the same model. **EXCLUDE-porch** (every eligible gap but the porch front; 1 of 10 gaps checked, not a truth oracle — F3) gives the same model |
+| dom-w-cyklamenach | the sealed failure code | unchanged (91 events, 58 distinct gaps) | — |
+| development matrix: 24 rows, 21 replayed, 19 valid | 19 of 19 valid rows reproduce the sealed model hash or failure code.<br>Not replayed: eoze-legacy-area, eoze-legacy-every, kosacce-area-alone (graph or metric file missing).<br>Not valid: dabecjach, tunbergiach (source bytes in no cache) | **2 of 19 change a decision, 0 change a verdict condition that was evaluable:**<br>• zurawkach: model changes, −0.81 % → −1.68 %, still fails storeys;<br>• azaliach: its failed reading changes, still fails (F10).<br>Every completed row that holds the footprint and storeys conditions keeps its model hash: arkadiach, jablonkach, modrzykach, morelach, kosacce ×2, marcowki, rarytasy-eoze. rarytasy-g2e keeps its hash; its sealed verdict was ALGORITHMIC_FAIL on an unbuilt opening | — |
 
 **Reading.**
-- A gap witness **can** move a house when the failing decision is a policy disagreement over a drawn gap (gozdzikowcach,
-  REC-18).
-- It **cannot** when deterministic gates stop the part first (cyklamenach: REC-17 continuation and the TOO_LARGE cap).
-- It does not fix a storey count.
-- So a perfect witness is necessary for one of the two houses and sufficient for neither on its own:
-  - gozdzikowcach also needs the storey seam (REC-20 / STOREY_COVERAGE);
-  - cyklamenach needs REC-17 / UP-H2 and the TOO_LARGE rule.
+- A drawn-gap upgrade, with or without a model, completes **one** failing house: gozdzikowcach, via REC-18. Its verdict
+  still fails on storeys.
+- It does not move cyklamenach (REC-17 / TOO_LARGE), jarzabem (recessed entrance) or helikoniach.
+- On this matrix, the model's only behavioural difference from the deterministic rule is two correct "no" readings that
+  change no outcome. So the witness has **no measured outcome advantage**; its case is a hypothesis about unseen drawing
+  styles.
 
-## 4. Why not NO_AI_YET, and the conflict with 005I's PATH B
+## 4. Why NO_AI_YET first, and how it relates to 005I's PATH B
 
-- **005I's standing route is PATH B, the PDF.js vector-document pilot.** 005K displaces it, and the coordinator decides
-  the order.
-  - Only **2 of the 26** development and round-8 source packages carry any PDF (aster-viii and galaktyka).
-  - Every ARCHON house, both round-8 houses included, is raster-only (JPG / GIF plan images).
-  - So PATH B cannot reach the failures that keep recurring.
-- **005I said the evidence is already in BuildPlan's observations.**
-  - For walls, 005J agrees: 0–1.7 % added.
-  - For gaps it does not. The stroke signatures are deterministic heuristics, patched every round since 005C (sash joints
-    read as dashed, the LEAF_FACE thresholds, `patternAcross`). Each blind round brought a new drawing style that defeated
-    them.
-  - A learned opening / background reading, trained on counterfactual synthetic drawings, is the style-robust second
-    signal those heuristics lack. The replay shows that one such reading is decisive for gozdzikowcach.
-- **A deterministic fix alone is a real alternative, and the replay says so.**
-  - "Every drawn weak gap between walls is an opening" (ALL_DRAWN, no model) completes gozdzikowcach and changes no
-    development verdict.
-  - It is a **single-signal** rule, though: it also bridges drawn gaps that are open. In gozdzikowcach it bridged the
-    dashed porch front, which is truly open. The outcome did not depend on it there, but that is the 005C
-    terrace / pergola failure mode on the next unseen style.
-  - The witness is the second signal that separates the two cases: the UNet reads the 0.41 m gap ≈ 94 % OPENING and the
-    porch front 100 % background.
-  - **005K-a must show that this separation holds on drawn-but-open gaps** (gate 7). If it does not, the witness adds
-    nothing over the deterministic rule. The stop rule then hands the coordinator NO_AI_YET with the deterministic
-    upgrade, which the 005J replay has already measured on the development matrix.
-- **The downstream rules are deterministic work in any case:** REC-17, TOO_LARGE, REC-03 and storey coverage. They are
-  not AI and are not in 005K. The coordinator may schedule them before, after or beside it.
+- **Cost and evidence.** The deterministic upgrade and the witness are indistinguishable on every measured row.
+  - The deterministic upgrade is free at run time.
+  - The witness costs ≈ 5–10 s and ≥ 340 MiB per run in WASM, plus a training programme.
+  - Neither moves a verdict.
+  - What decides between them is out-of-sample behaviour on drawn-but-open gaps. **Nothing in BuildPlan measures that
+    today.** So the first job is to build that measurement, not the model.
+- **What could flip it.** If the sealed fresh-sheet set (§5) shows the deterministic upgrade bridging gaps that are
+  open, and those false bridges change outcomes, the wall model becomes the measured challenger (§6). Its proof shows it
+  reads open gaps as background in the two real cases seen. Its synthetic shortcut and its one confident real miss show
+  that this is not yet reliable.
+- **PATH B (PDF.js).** 005I's standing route is the vector-document pilot.
+  - Only **2 of the 26** development and round-8 source packages carry any PDF (aster-viii, galaktyka).
+  - Every ARCHON house, both round-8 houses included, is raster-only.
+  - PATH B is therefore not the lever for the recurring failures. The coordinator decides the order.
+- **The verdict blockers are deterministic.** They are not in 005K and are for the coordinator to schedule:
+  - the storey count, the most frequent single blocker;
+  - REC-17 / TOO_LARGE;
+  - the recessed-entrance body relation (REC-03 / UP-06).
 
-## 5. 005K — two parts, with a stop rule between them
+## 5. 005K — BUILDPLAN-ANALYZER-005K: GAP EVIDENCE RECORDS + SEALED FRESH-SHEET GAP SET + DETERMINISTIC DRAWN-GAP UPGRADE (NO_AI_YET)
 
-### 005K-a — BUILDPLAN-ANALYZER-005K-A: WALL / OPENING WITNESS — MODEL, REPLAY AND EVIDENCE RECORDS (research + one deterministic pack change)
+1. **Per-gap Evidence Pack records.** Deterministic, behind a version bump; OFF hashes stay byte-identical (post-review
+   E10). Each record holds:
+   - a stable gap id (`BoundaryGap.id`, plus a geometric id for wide openings);
+   - the copy and decomposition id, **the scale (mpp) and the reading** — the bare id collides across copies and scales
+     (cyklamenach's `gap-Y-196-469-516` occurs at four widths; post-review F15);
+   - `linePx` **and `axisPx`**, with the jamb that supplied the axis;
+   - the crop rectangle and its hash, never pixels;
+   - the pre-override signature and the `patternAcross` / `runsPast` / 2.2 m-rule results;
+   - a strokes summary;
+   - the ink fraction across the gap.
+2. **A sealed fresh-sheet gap set** — the out-of-sample instrument (post-review F8).
+   - **Sources:** plan sheets drawn **by lot** from publisher pages that are neither development nor blind-history
+     houses. Include at least one non-ARCHON publisher and more than one scale.
+   - **Contents:** every eligible weak gap on those sheets (WALL/WALL, drawn signature), labelled by a person as
+     OPENING / OPEN / NOT A WALL LINE **before any rule or model is run on them**. Coordinates and hashes only, as in
+     005J's `question-corpus.json`.
+   - **The unit** is one gap on one sheet. The count is stated.
+   - **Gates** are stated as an upper bound on n, and always beside a **constant control** ("every eligible gap is an
+     opening").
+3. **The deterministic drawn-gap upgrade, with tightened eligibility.**
+   - It upgrades WEAK → STRONG only a WALL/WALL gap whose drawn evidence lies **inside the wall band**: a stroke
+     signature, or a pre-override signature demoted by `patternAcross`, `runsPast` or the 2.2 m rule.
+   - It excludes BLANK gaps.
+   - It excludes stretches with no wall-thick ink at either jamb along the line — the phantom stretch through a room
+     (`gap-X-413`, F3).
+   - It is measured on:
+     - the development matrix, OFF / ON: every changed hash explained, no verdict regression;
+     - the sealed set: false-upgrade rate against the constant control.
+   - It ships **only** if the sealed set bounds its false upgrades. Otherwise it is recorded and not shipped.
+4. **Non-circularity.** The upgrade reads the drawing and the analyzer's own geometry only — never a published figure,
+   never a refusal. It applies to every eligible gap of every copy, plus the decoy-footprint control and the 005I
+   order-invariance shuffle.
+5. **What the sealed set decides next.**
+   - If the deterministic upgrade's false bridges on drawn-but-open gaps change outcomes on the sealed set, the wall
+     model challenger (§6) has a measured target.
+   - If they do not, the wall model stays research.
+6. **Not in 005K:**
+   - any model;
+   - any VLM or server;
+   - PDF.js;
+   - the storey, REC-17 / TOO_LARGE and recessed-entrance rules (separate deterministic decisions).
 
-1. **Per-gap Evidence Pack records** — deterministic, and useful with or without a model.
-   - Each record holds:
-     - a stable gap id (`BoundaryGap.id`, plus a geometric id for wide openings);
-     - the copy and decomposition id;
-     - `linePx` **and `axisPx`**;
-     - the crop rectangle and its hash (never pixels);
-     - the pre-override signature and the `patternAcross` result;
-     - a strokes summary.
-   - The records appear behind a version bump, and OFF hashes stay byte-identical (post-review E10).
-2. **Generator v2.**
-   - **New content:**
+## 6. Later (SECONDARY): TRAIN_BUILDPLAN_WALL_MODEL as the challenger
+
+Only after 005K's sealed set exists. The proof is retained (`wall-model-proof.json`, `wallproof/`), and the following is
+specified for that later stage.
+
+1. **Generator v2.**
+   - **New families:**
      - open-gap hard negatives (porch mouths, carports, open sides, recesses with returns, gaps with nothing across);
-     - **faint-symbol positives**: thin garage doors and single-line leaves (C4);
-     - patterns **on the wall line**: hatch and kerb breaks aligned with the wall (C3);
+     - faint-symbol positives: thin garage doors, single-line leaves (C4);
+     - patterns **on the wall line** (C3);
      - dimension lines and text over walls;
-     - piers between openings;
-     - coloured fills.
-   - **Fonts:** OFL / Bitstream Vera / Apache only, never a publisher's typeface or logo.
-   - **Construction:**
-     - every family is a counterfactual pair, with minimal pairs (the partition does not move);
-     - transforms are applied before rasterising;
-     - BACKGROUND / WALL / OPENING masks are exact.
-   - **Pins:** font and environment are pinned in the corpus manifest.
-3. **A balanced, human-verified real gap set**, on development sheets only.
-   - The unit is one gap on one sheet; the sheets and their sources are stated.
-   - Strips sit on the jamb-band axis, and every hand-placed target gets a geometry check (C2).
-   - Both answers are represented in every class, including real PATTERN.
-   - It is stored as coordinates and hashes only, and built **before** calibration.
-4. **The model.** UNet-lite trained from scratch on generator v2, exported to ONNX and pinned by SHA-256.
+     - piers;
+     - coloured fills;
+     - more scales and publishers' conventions, generated not copied.
+   - **Pairs:** minimal, so the partition does not move.
+   - **No overlay drawn over the evidence** (post-review B6): in the GARAGE_BODY family the red candidate outline
+     covered the dashed garage-door line that is the A/B difference. Targets go in mask channels, not on the drawing.
+   - **Fonts:** OFL / Bitstream Vera / Apache only.
+   - **Pins:** font and environment pinned.
+2. **The model.**
+   - UNet-lite trained from scratch, exported to ONNX and pinned by SHA-256.
    - A training record: generator commit, seeds, data hash, steps, export script, hashed environment lock.
-   - A hosting decision and a CI fetch: a BuildPlan-owned model has no upstream (E7).
-5. **The witness rule** — callout-equivalent, two signals (E3).
-   - **Scope:** a WEAK gap between WALL jambs whose drawn evidence is either a stroke signature or a pre-override
-     signature that `patternAcross`, `runsPast` or the 2.2 m LEAF_FACE rule demoted. BLANK gaps are excluded.
-   - **OPENING** on the jamb-band axis upgrades the gap to STRONG.
-   - **WALL** is recorded as a drawing-break confirmation.
-   - A 005H-style stability bracket (BASE / PAD / TRIM / SCALE90), with a confidence bound fixed before measurement.
-   - **Never:** no OPEN_SIDE split, no new gap, no downgrade, and no resolver corroboration. `GapWitness` never counts as
-     a `Corroboration` and never satisfies `resolvedWithAWitness`; a test pins this (E13).
-6. **Execution design, chosen explicitly (E6).** The recommended design is a deterministic, tiled **pre-pass over every
-   plan frame**.
-   - It runs before the solver and is released before it (the 005H invariant).
-   - It is non-circular by construction.
-   - It costs ≈ 1.2 s per 864² frame (measured), for 4–8 frames.
-   - The witness is then a synchronous lookup under each gap's axis rectangle.
-   - It is asked for **every** eligible gap of every decomposed copy (7–64 weak gaps per house, median 24 — E5), never
-     for a subset chosen by a refusal or a published figure.
-7. **Gates before any integration.**
-   - **Synthetic hard negatives:** per-class confident-wrong ≤ 0.5 % (target 0.2 %), stated as an upper bound on n.
-   - **Balanced real gap set:** the same bound, with minority-answer accuracy reported.
-   - **Consistency:** mirror and rotation ≥ 99 %.
-   - **Non-circularity:**
-     - the decoy-footprint control: footprint × 1.25 or × 0.8 must give identical crops and answers;
-     - the 005I order-invariance shuffle.
-   - **The model-in-the-loop replay** of the development matrix and both round-8 houses:
-     - moves gozdzikowcach as the oracle did;
-     - regresses no development verdict;
-     - explains every changed hash.
-   - **The witness must be able to say no:** on drawn-but-open gaps (dashed overhead lines across porch mouths, canopy
-     and roof projections, terrace kerbs; synthetic counterfactuals and the balanced real set), it reads BACKGROUND,
-     with the confident-wrong bound above. This is the only value it adds over the deterministic upgrade.
-8. **Stop rule (E9).** If gate 7 fails, 005K ends after 005K-a and returns to the coordinator, and nothing is integrated.
-   The recorded fallback is NO_AI_YET with the deterministic drawn-gap upgrade (§4), already measured by the 005J replay.
-
-### 005K-b — integration (only after 005K-a passes)
-
-1. **Package.** Modelled on 005H's `numeric-recogniser-ort`:
-   - one ORT-web WASM session, one thread;
-   - manifest, worker, cancellation between tiles;
-   - coded failures and a failure policy: a witness failure ends the run as 005H's did, never a quiet OFF run.
-2. **Self-test and memory bound.**
-   - A self-test with its Android card.
-   - A memory bound fixed before measurement: the whole-run peak may exceed 005H's 898–1,046 MB by at most 400 MiB.
-3. **Architecture tests.** They pin:
-   - the crop field list;
-   - that only the engine imports ONNX Runtime;
-   - that reconstruction never imports the runtime;
-   - that the crop block holds no published / area / footprint / mpp field.
-
-   The single-JSON bundle test is changed consciously.
-4. **Flag.**
-   - ON on the phone, OFF on the server, as in 005H. The OWNER APK carries ON.
-   - The blind round at the end runs ON.
-   - Without the arm64 phone, the stage verdict is capped at PARTIAL.
-5. **Development matrix OFF / ON.** Every changed hash is explained; no verdict regresses.
-
-**Not in 005K.** Each of these is a separate decision for the coordinator:
-- VLM;
-- server;
-- the Route-C referee;
-- PDF.js;
-- the OPEN_SIDE split (REC-03 / UP-06);
-- the REC-17 / TOO_LARGE rules;
-- storey coverage.
-
-## 6. Later (SECONDARY): TRAIN_BUILDPLAN_VISUAL_REFEREE
-
-After 005K: a micro-referee for region / outline seams.
-- **Inputs:** grey crop, target / candidate masks and the 005K wall map.
-- **Training data:** synthetic only (generator v2 plus real-style rendering).
-- **Teacher:** a strong model may help offline on synthetic data, for hard-example mining and new counterfactual
-  families.
-- **Real crops** stay **evaluation and calibration data**. Training on them, or sending them to a hosted teacher for
-  pre-labels, is **CONDITIONAL on counsel** (post-review D1). The open questions:
-  - drawing copyright;
-  - the EU text-and-data-mining exception and opt-outs;
-  - publisher terms;
-  - the teacher provider's terms.
-- **Gate:** 005J's pilot shows that the cost is trivial on device (70 ms) and that the risk is transfer. Its first gate is
-  therefore the balanced real set, not synthetic accuracy.
+   - A hosting decision and a CI fetch.
+3. **The witness.** A two-signal rule (callout-equivalent; post-review A4 / E3): drawn evidence and the model's
+   OPENING, read on the jamb-band axis that 005K records.
+   - The model's BACKGROUND **vetoes** a deterministic upgrade. Saying no is its only measured purpose.
+   - Never an OPEN_SIDE split, a new gap, a downgrade or a resolver corroboration (E2, E13).
+4. **Execution.** A deterministic tiled pre-pass over the plan frames, released before the solver (E6).
+5. **The gate that decides adoption.** On the **sealed fresh-sheet set**, the witness must refuse the deterministic
+   rule's false upgrades. It does so with confident-wrong ≤ 0.5 % stated as an upper bound on n, beside a constant
+   control.
+   - The model-in-the-loop replay of the development matrix must move nothing the deterministic rule does not.
+   - Mirror / rotation consistency ≥ 99 %.
+   - Beside the 0.80-threshold metrics: per-class AUROC, balanced accuracy (or per-answer recall), and accuracy on
+     counterfactual pairs both members answered. A constant guesser passes minority-only and consistency metrics
+     (post-review B7).
+6. **Integration.** As 005H's recogniser, only after the gate passes:
+   - package, self-test, architecture tests, failure policy;
+   - a memory bound of 005H's peak + 400 MiB;
+   - flag ON on the phone;
+   - a blind round ON.
 
 ## 7. Answers to the brief's five questions
 
 1. **Q1 — where would intelligence help?**
-   - First at the drawn-gap decisions: REC-11 / UP-01 / UP-02 `classifyGap`, and REC-18 `policiesAgree`. The entry
-     point is IP-01 (`plan-decomposition.ts:2808`, beside `withCallout`).
-   - Second at the region and outline seams: REC-02, REC-14, REC-17, REC-21, UP-H1/H2. Several of these need
-     deterministic rule changes, not a model.
+   - **First**, at drawn-gap decisions: REC-11 / UP-01 / UP-02 `classifyGap`, and REC-18 `policiesAgree` through IP-01.
+     The replay shows a correct reading there can complete a house. It also shows the same effect is reachable
+     deterministically.
+   - **Second**, at region and outline seams, which today are blocked by deterministic rules first.
 2. **Q2 — open-source floor-plan technology?** Nothing adoptable.
-   - MitUNet is an architecture to retrain from scratch, with an own or Apache-2.0-based implementation.
+   - MitUNet is an architecture to retrain, from scratch, with an own or Apache-2.0-based implementation.
    - ResPlan is a data candidate only with counsel.
-   - fpvec-lab is a paper to reimplement: metrics, readout, fusion rule.
-3. **Q3 — can small VLMs referee?** Not zero-shot (SmolVLM2 is right on 45 % of the questions it answers, with 7.2 % confident-wrong; Moondream 46 %; Florence-2 41 %; the strong oracle 98 %, with 0 confident-wrong). Not on the phone at an acceptable cost either: ≈ 16 s
-   and ≥ 1.9 GiB in the shipped runtime.
+   - fpvec-lab is a paper to reimplement.
+3. **Q3 — can small VLMs referee?** Not as tested (three checkpoints of at most 0.5 B, zero-shot, single tile, one
+   prompt; SmolVLM2 in its deployable 64-image-token configuration), and not on the phone at an acceptable cost
+   (≈ 7 min per median house).
+   - SmolVLM2: right on 45 % of what it answers, with 7.2 % confident-wrong.
+   - Moondream: 46 %.
+   - Florence-2: 41 %.
+   - The strong oracle: 98 % (144 of 147 answered), with 0 confident-wrong at 0.80 (2 at 0.75; its confidences are
+     verbal self-reports, post-review B5).
 4. **Q4 — custom model vs generic; legal training?**
-   - A custom model, trained by BuildPlan from scratch on its own synthetic data.
-   - A strong model only as an offline helper on synthetic data.
-   - The pixel-level model transfers to real sheets; the whole-image classifier does not yet.
-5. **Q5 — what should 005K implement?** §5:
-   - 005K-a: records, generator v2, balanced real set, model, two-signal witness by pre-pass, replay gate, stop rule;
-   - then 005K-b (integration), only if 005K-a passes.
+   - If and when a model is needed, it is custom: BuildPlan-trained, from scratch, on BuildPlan's own synthetic data.
+     The UNet-lite proof shows the route is clean and transfers at the pixel level on positives.
+   - Real publisher crops stay evaluation data. A hosted teacher on them is CONDITIONAL on counsel.
+5. **Q5 — what should 005K implement?** §5: gap evidence records, a sealed fresh-sheet gap set and the deterministic
+   drawn-gap upgrade measured on it — no model.

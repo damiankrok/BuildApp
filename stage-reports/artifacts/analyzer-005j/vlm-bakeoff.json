@@ -21145,7 +21145,1014 @@
  "excluded": {
   "note": "Questions excluded from scoring for EVERY arm (models and oracle alike), with the reason. Added after the post-implementation review; nothing else in the scoring changed.",
   "excluded": {
-   "real-dom-w-gozdzikowcach-WALL_CONTINUATION-1": "post-review C2: the porch-mouth question's B flank (x 417-436) was drawn over the porch floor and the end of the vestibule wall, not over the pier (dark run x 435-463); the image tells every arm that 'wall piece B is in the blue box' when the box holds no wall - malformed for all arms. With B on the pier (436-455) both wall models answer TERMINATES (0.98 / 0.97)."
+   "real-dom-w-gozdzikowcach-WALL_CONTINUATION-1": "post-review C2: the porch-mouth question's B flank (x 417-436) was drawn over the porch floor and the end of the vestibule wall, not over the pier (dark run x 435-463); the image tells every arm that 'wall piece B is in the blue box' when the box holds no wall - malformed for all arms. (Anecdote only, post-review F13: a re-placement made after seeing results and measured on the wall arms only - with B on the pier (436-455) both wall models answer TERMINATES (0.98 / 0.97). It plays no part in any score.)"
+  }
+ },
+ "matched": {
+  "pairs": [
+   {
+    "arms": [
+     "florence2-base",
+     "micro-referee-pilot"
+    ],
+    "n": 95,
+    "bySet": {
+     "REAL_BLIND8": 64,
+     "REAL_DEV": 29,
+     "SYNTHETIC": 2
+    },
+    "florence2-base": {
+     "total": 95,
+     "correct": 15,
+     "wrong": 22,
+     "unresolved": 58,
+     "correctConfident": 15,
+     "wrongConfident": 22,
+     "coverage": 0.3895,
+     "accuracyAnswered": 0.4054,
+     "confidentWrongRate": 0.2316,
+     "usefulCoverage": 0.1579,
+     "confidentPrecision": 0.4054
+    },
+    "micro-referee-pilot": {
+     "total": 95,
+     "correct": 63,
+     "wrong": 32,
+     "unresolved": 0,
+     "correctConfident": 39,
+     "wrongConfident": 16,
+     "coverage": 1.0,
+     "accuracyAnswered": 0.6632,
+     "confidentWrongRate": 0.1684,
+     "usefulCoverage": 0.4105,
+     "confidentPrecision": 0.7091
+    }
+   },
+   {
+    "arms": [
+     "florence2-base",
+     "moondream-0.5b-int8"
+    ],
+    "n": 95,
+    "bySet": {
+     "REAL_BLIND8": 64,
+     "REAL_DEV": 29,
+     "SYNTHETIC": 2
+    },
+    "florence2-base": {
+     "total": 95,
+     "correct": 15,
+     "wrong": 22,
+     "unresolved": 58,
+     "correctConfident": 15,
+     "wrongConfident": 22,
+     "coverage": 0.3895,
+     "accuracyAnswered": 0.4054,
+     "confidentWrongRate": 0.2316,
+     "usefulCoverage": 0.1579,
+     "confidentPrecision": 0.4054
+    },
+    "moondream-0.5b-int8": {
+     "total": 95,
+     "correct": 8,
+     "wrong": 14,
+     "unresolved": 73,
+     "correctConfident": 1,
+     "wrongConfident": 1,
+     "coverage": 0.2316,
+     "accuracyAnswered": 0.3636,
+     "confidentWrongRate": 0.0105,
+     "usefulCoverage": 0.0105,
+     "confidentPrecision": 0.5
+    }
+   },
+   {
+    "arms": [
+     "florence2-base",
+     "server-oracle"
+    ],
+    "n": 21,
+    "bySet": {
+     "REAL_BLIND8": 16,
+     "REAL_DEV": 5
+    },
+    "florence2-base": {
+     "total": 21,
+     "correct": 3,
+     "wrong": 5,
+     "unresolved": 13,
+     "correctConfident": 3,
+     "wrongConfident": 5,
+     "coverage": 0.381,
+     "accuracyAnswered": 0.375,
+     "confidentWrongRate": 0.2381,
+     "usefulCoverage": 0.1429,
+     "confidentPrecision": 0.375
+    },
+    "server-oracle": {
+     "total": 21,
+     "correct": 21,
+     "wrong": 0,
+     "unresolved": 0,
+     "correctConfident": 20,
+     "wrongConfident": 0,
+     "coverage": 1.0,
+     "accuracyAnswered": 1.0,
+     "confidentWrongRate": 0.0,
+     "usefulCoverage": 0.9524,
+     "confidentPrecision": 1.0
+    }
+   },
+   {
+    "arms": [
+     "florence2-base",
+     "smolvlm2-500m-onnx-int8dec"
+    ],
+    "n": 95,
+    "bySet": {
+     "REAL_BLIND8": 64,
+     "REAL_DEV": 29,
+     "SYNTHETIC": 2
+    },
+    "florence2-base": {
+     "total": 95,
+     "correct": 15,
+     "wrong": 22,
+     "unresolved": 58,
+     "correctConfident": 15,
+     "wrongConfident": 22,
+     "coverage": 0.3895,
+     "accuracyAnswered": 0.4054,
+     "confidentWrongRate": 0.2316,
+     "usefulCoverage": 0.1579,
+     "confidentPrecision": 0.4054
+    },
+    "smolvlm2-500m-onnx-int8dec": {
+     "total": 95,
+     "correct": 25,
+     "wrong": 33,
+     "unresolved": 37,
+     "correctConfident": 2,
+     "wrongConfident": 10,
+     "coverage": 0.6105,
+     "accuracyAnswered": 0.431,
+     "confidentWrongRate": 0.1053,
+     "usefulCoverage": 0.0211,
+     "confidentPrecision": 0.1667
+    }
+   },
+   {
+    "arms": [
+     "florence2-base",
+     "wall-segformer-structured"
+    ],
+    "n": 33,
+    "bySet": {
+     "REAL_BLIND8": 24,
+     "REAL_DEV": 9
+    },
+    "florence2-base": {
+     "total": 33,
+     "correct": 15,
+     "wrong": 6,
+     "unresolved": 12,
+     "correctConfident": 15,
+     "wrongConfident": 6,
+     "coverage": 0.6364,
+     "accuracyAnswered": 0.7143,
+     "confidentWrongRate": 0.1818,
+     "usefulCoverage": 0.4545,
+     "confidentPrecision": 0.7143
+    },
+    "wall-segformer-structured": {
+     "total": 33,
+     "correct": 21,
+     "wrong": 4,
+     "unresolved": 8,
+     "correctConfident": 16,
+     "wrongConfident": 4,
+     "coverage": 0.7576,
+     "accuracyAnswered": 0.84,
+     "confidentWrongRate": 0.1212,
+     "usefulCoverage": 0.4848,
+     "confidentPrecision": 0.8
+    }
+   },
+   {
+    "arms": [
+     "florence2-base",
+     "wall-unet-structured"
+    ],
+    "n": 33,
+    "bySet": {
+     "REAL_BLIND8": 24,
+     "REAL_DEV": 9
+    },
+    "florence2-base": {
+     "total": 33,
+     "correct": 15,
+     "wrong": 6,
+     "unresolved": 12,
+     "correctConfident": 15,
+     "wrongConfident": 6,
+     "coverage": 0.6364,
+     "accuracyAnswered": 0.7143,
+     "confidentWrongRate": 0.1818,
+     "usefulCoverage": 0.4545,
+     "confidentPrecision": 0.7143
+    },
+    "wall-unet-structured": {
+     "total": 33,
+     "correct": 30,
+     "wrong": 0,
+     "unresolved": 3,
+     "correctConfident": 17,
+     "wrongConfident": 0,
+     "coverage": 0.9091,
+     "accuracyAnswered": 1.0,
+     "confidentWrongRate": 0.0,
+     "usefulCoverage": 0.5152,
+     "confidentPrecision": 1.0
+    }
+   },
+   {
+    "arms": [
+     "micro-referee-pilot",
+     "moondream-0.5b-int8"
+    ],
+    "n": 513,
+    "bySet": {
+     "REAL_BLIND8": 64,
+     "REAL_DEV": 187,
+     "SYNTHETIC": 262
+    },
+    "micro-referee-pilot": {
+     "total": 513,
+     "correct": 369,
+     "wrong": 144,
+     "unresolved": 0,
+     "correctConfident": 276,
+     "wrongConfident": 75,
+     "coverage": 1.0,
+     "accuracyAnswered": 0.7193,
+     "confidentWrongRate": 0.1462,
+     "usefulCoverage": 0.538,
+     "confidentPrecision": 0.7863
+    },
+    "moondream-0.5b-int8": {
+     "total": 513,
+     "correct": 94,
+     "wrong": 110,
+     "unresolved": 309,
+     "correctConfident": 5,
+     "wrongConfident": 9,
+     "coverage": 0.3977,
+     "accuracyAnswered": 0.4608,
+     "confidentWrongRate": 0.0175,
+     "usefulCoverage": 0.0097,
+     "confidentPrecision": 0.3571
+    }
+   },
+   {
+    "arms": [
+     "micro-referee-pilot",
+     "server-oracle"
+    ],
+    "n": 148,
+    "bySet": {
+     "REAL_BLIND8": 16,
+     "REAL_DEV": 30,
+     "SYNTHETIC": 102
+    },
+    "micro-referee-pilot": {
+     "total": 148,
+     "correct": 109,
+     "wrong": 39,
+     "unresolved": 0,
+     "correctConfident": 88,
+     "wrongConfident": 16,
+     "coverage": 1.0,
+     "accuracyAnswered": 0.7365,
+     "confidentWrongRate": 0.1081,
+     "usefulCoverage": 0.5946,
+     "confidentPrecision": 0.8462
+    },
+    "server-oracle": {
+     "total": 148,
+     "correct": 144,
+     "wrong": 3,
+     "unresolved": 1,
+     "correctConfident": 110,
+     "wrongConfident": 0,
+     "coverage": 0.9932,
+     "accuracyAnswered": 0.9796,
+     "confidentWrongRate": 0.0,
+     "usefulCoverage": 0.7432,
+     "confidentPrecision": 1.0
+    }
+   },
+   {
+    "arms": [
+     "micro-referee-pilot",
+     "smolvlm2-500m-onnx-int8dec"
+    ],
+    "n": 967,
+    "bySet": {
+     "REAL_BLIND8": 64,
+     "REAL_DEV": 289,
+     "SYNTHETIC": 614
+    },
+    "micro-referee-pilot": {
+     "total": 967,
+     "correct": 740,
+     "wrong": 227,
+     "unresolved": 0,
+     "correctConfident": 586,
+     "wrongConfident": 116,
+     "coverage": 1.0,
+     "accuracyAnswered": 0.7653,
+     "confidentWrongRate": 0.12,
+     "usefulCoverage": 0.606,
+     "confidentPrecision": 0.8348
+    },
+    "smolvlm2-500m-onnx-int8dec": {
+     "total": 967,
+     "correct": 313,
+     "wrong": 382,
+     "unresolved": 272,
+     "correctConfident": 31,
+     "wrongConfident": 70,
+     "coverage": 0.7187,
+     "accuracyAnswered": 0.4504,
+     "confidentWrongRate": 0.0724,
+     "usefulCoverage": 0.0321,
+     "confidentPrecision": 0.3069
+    }
+   },
+   {
+    "arms": [
+     "micro-referee-pilot",
+     "wall-segformer-structured"
+    ],
+    "n": 508,
+    "bySet": {
+     "REAL_BLIND8": 24,
+     "REAL_DEV": 304,
+     "SYNTHETIC": 180
+    },
+    "micro-referee-pilot": {
+     "total": 508,
+     "correct": 344,
+     "wrong": 164,
+     "unresolved": 0,
+     "correctConfident": 231,
+     "wrongConfident": 97,
+     "coverage": 1.0,
+     "accuracyAnswered": 0.6772,
+     "confidentWrongRate": 0.1909,
+     "usefulCoverage": 0.4547,
+     "confidentPrecision": 0.7043
+    },
+    "wall-segformer-structured": {
+     "total": 508,
+     "correct": 285,
+     "wrong": 32,
+     "unresolved": 191,
+     "correctConfident": 147,
+     "wrongConfident": 24,
+     "coverage": 0.624,
+     "accuracyAnswered": 0.8991,
+     "confidentWrongRate": 0.0472,
+     "usefulCoverage": 0.2894,
+     "confidentPrecision": 0.8596
+    }
+   },
+   {
+    "arms": [
+     "micro-referee-pilot",
+     "wall-unet-structured"
+    ],
+    "n": 508,
+    "bySet": {
+     "REAL_BLIND8": 24,
+     "REAL_DEV": 304,
+     "SYNTHETIC": 180
+    },
+    "micro-referee-pilot": {
+     "total": 508,
+     "correct": 344,
+     "wrong": 164,
+     "unresolved": 0,
+     "correctConfident": 231,
+     "wrongConfident": 97,
+     "coverage": 1.0,
+     "accuracyAnswered": 0.6772,
+     "confidentWrongRate": 0.1909,
+     "usefulCoverage": 0.4547,
+     "confidentPrecision": 0.7043
+    },
+    "wall-unet-structured": {
+     "total": 508,
+     "correct": 256,
+     "wrong": 23,
+     "unresolved": 229,
+     "correctConfident": 134,
+     "wrongConfident": 15,
+     "coverage": 0.5492,
+     "accuracyAnswered": 0.9176,
+     "confidentWrongRate": 0.0295,
+     "usefulCoverage": 0.2638,
+     "confidentPrecision": 0.8993
+    }
+   },
+   {
+    "arms": [
+     "moondream-0.5b-int8",
+     "server-oracle"
+    ],
+    "n": 127,
+    "bySet": {
+     "REAL_BLIND8": 16,
+     "REAL_DEV": 25,
+     "SYNTHETIC": 86
+    },
+    "moondream-0.5b-int8": {
+     "total": 127,
+     "correct": 23,
+     "wrong": 26,
+     "unresolved": 78,
+     "correctConfident": 4,
+     "wrongConfident": 5,
+     "coverage": 0.3858,
+     "accuracyAnswered": 0.4694,
+     "confidentWrongRate": 0.0394,
+     "usefulCoverage": 0.0315,
+     "confidentPrecision": 0.4444
+    },
+    "server-oracle": {
+     "total": 127,
+     "correct": 123,
+     "wrong": 3,
+     "unresolved": 1,
+     "correctConfident": 94,
+     "wrongConfident": 0,
+     "coverage": 0.9921,
+     "accuracyAnswered": 0.9762,
+     "confidentWrongRate": 0.0,
+     "usefulCoverage": 0.7402,
+     "confidentPrecision": 1.0
+    }
+   },
+   {
+    "arms": [
+     "moondream-0.5b-int8",
+     "smolvlm2-500m-onnx-int8dec"
+    ],
+    "n": 499,
+    "bySet": {
+     "REAL_BLIND8": 64,
+     "REAL_DEV": 187,
+     "SYNTHETIC": 248
+    },
+    "moondream-0.5b-int8": {
+     "total": 499,
+     "correct": 91,
+     "wrong": 104,
+     "unresolved": 304,
+     "correctConfident": 5,
+     "wrongConfident": 9,
+     "coverage": 0.3908,
+     "accuracyAnswered": 0.4667,
+     "confidentWrongRate": 0.018,
+     "usefulCoverage": 0.01,
+     "confidentPrecision": 0.3571
+    },
+    "smolvlm2-500m-onnx-int8dec": {
+     "total": 499,
+     "correct": 150,
+     "wrong": 203,
+     "unresolved": 146,
+     "correctConfident": 14,
+     "wrongConfident": 39,
+     "coverage": 0.7074,
+     "accuracyAnswered": 0.4249,
+     "confidentWrongRate": 0.0782,
+     "usefulCoverage": 0.0281,
+     "confidentPrecision": 0.2642
+    }
+   },
+   {
+    "arms": [
+     "moondream-0.5b-int8",
+     "wall-segformer-structured"
+    ],
+    "n": 193,
+    "bySet": {
+     "REAL_BLIND8": 24,
+     "REAL_DEV": 94,
+     "SYNTHETIC": 75
+    },
+    "moondream-0.5b-int8": {
+     "total": 193,
+     "correct": 9,
+     "wrong": 9,
+     "unresolved": 175,
+     "correctConfident": 0,
+     "wrongConfident": 0,
+     "coverage": 0.0933,
+     "accuracyAnswered": 0.5,
+     "confidentWrongRate": 0.0,
+     "usefulCoverage": 0.0,
+     "confidentPrecision": null
+    },
+    "wall-segformer-structured": {
+     "total": 193,
+     "correct": 117,
+     "wrong": 12,
+     "unresolved": 64,
+     "correctConfident": 72,
+     "wrongConfident": 9,
+     "coverage": 0.6684,
+     "accuracyAnswered": 0.907,
+     "confidentWrongRate": 0.0466,
+     "usefulCoverage": 0.3731,
+     "confidentPrecision": 0.8889
+    }
+   },
+   {
+    "arms": [
+     "moondream-0.5b-int8",
+     "wall-unet-structured"
+    ],
+    "n": 193,
+    "bySet": {
+     "REAL_BLIND8": 24,
+     "REAL_DEV": 94,
+     "SYNTHETIC": 75
+    },
+    "moondream-0.5b-int8": {
+     "total": 193,
+     "correct": 9,
+     "wrong": 9,
+     "unresolved": 175,
+     "correctConfident": 0,
+     "wrongConfident": 0,
+     "coverage": 0.0933,
+     "accuracyAnswered": 0.5,
+     "confidentWrongRate": 0.0,
+     "usefulCoverage": 0.0,
+     "confidentPrecision": null
+    },
+    "wall-unet-structured": {
+     "total": 193,
+     "correct": 117,
+     "wrong": 8,
+     "unresolved": 68,
+     "correctConfident": 66,
+     "wrongConfident": 5,
+     "coverage": 0.6477,
+     "accuracyAnswered": 0.936,
+     "confidentWrongRate": 0.0259,
+     "usefulCoverage": 0.342,
+     "confidentPrecision": 0.9296
+    }
+   },
+   {
+    "arms": [
+     "server-oracle",
+     "smolvlm2-500m-onnx-int8dec"
+    ],
+    "n": 142,
+    "bySet": {
+     "REAL_BLIND8": 16,
+     "REAL_DEV": 30,
+     "SYNTHETIC": 96
+    },
+    "server-oracle": {
+     "total": 142,
+     "correct": 138,
+     "wrong": 3,
+     "unresolved": 1,
+     "correctConfident": 107,
+     "wrongConfident": 0,
+     "coverage": 0.993,
+     "accuracyAnswered": 0.9787,
+     "confidentWrongRate": 0.0,
+     "usefulCoverage": 0.7535,
+     "confidentPrecision": 1.0
+    },
+    "smolvlm2-500m-onnx-int8dec": {
+     "total": 142,
+     "correct": 46,
+     "wrong": 54,
+     "unresolved": 42,
+     "correctConfident": 5,
+     "wrongConfident": 7,
+     "coverage": 0.7042,
+     "accuracyAnswered": 0.46,
+     "confidentWrongRate": 0.0493,
+     "usefulCoverage": 0.0352,
+     "confidentPrecision": 0.4167
+    }
+   },
+   {
+    "arms": [
+     "server-oracle",
+     "wall-segformer-structured"
+    ],
+    "n": 50,
+    "bySet": {
+     "REAL_BLIND8": 6,
+     "REAL_DEV": 12,
+     "SYNTHETIC": 32
+    },
+    "server-oracle": {
+     "total": 50,
+     "correct": 50,
+     "wrong": 0,
+     "unresolved": 0,
+     "correctConfident": 32,
+     "wrongConfident": 0,
+     "coverage": 1.0,
+     "accuracyAnswered": 1.0,
+     "confidentWrongRate": 0.0,
+     "usefulCoverage": 0.64,
+     "confidentPrecision": 1.0
+    },
+    "wall-segformer-structured": {
+     "total": 50,
+     "correct": 32,
+     "wrong": 5,
+     "unresolved": 13,
+     "correctConfident": 25,
+     "wrongConfident": 4,
+     "coverage": 0.74,
+     "accuracyAnswered": 0.8649,
+     "confidentWrongRate": 0.08,
+     "usefulCoverage": 0.5,
+     "confidentPrecision": 0.8621
+    }
+   },
+   {
+    "arms": [
+     "server-oracle",
+     "wall-unet-structured"
+    ],
+    "n": 50,
+    "bySet": {
+     "REAL_BLIND8": 6,
+     "REAL_DEV": 12,
+     "SYNTHETIC": 32
+    },
+    "server-oracle": {
+     "total": 50,
+     "correct": 50,
+     "wrong": 0,
+     "unresolved": 0,
+     "correctConfident": 32,
+     "wrongConfident": 0,
+     "coverage": 1.0,
+     "accuracyAnswered": 1.0,
+     "confidentWrongRate": 0.0,
+     "usefulCoverage": 0.64,
+     "confidentPrecision": 1.0
+    },
+    "wall-unet-structured": {
+     "total": 50,
+     "correct": 34,
+     "wrong": 2,
+     "unresolved": 14,
+     "correctConfident": 22,
+     "wrongConfident": 1,
+     "coverage": 0.72,
+     "accuracyAnswered": 0.9444,
+     "confidentWrongRate": 0.02,
+     "usefulCoverage": 0.44,
+     "confidentPrecision": 0.9565
+    }
+   },
+   {
+    "arms": [
+     "smolvlm2-500m-onnx-int8dec",
+     "wall-segformer-structured"
+    ],
+    "n": 356,
+    "bySet": {
+     "REAL_BLIND8": 24,
+     "REAL_DEV": 152,
+     "SYNTHETIC": 180
+    },
+    "smolvlm2-500m-onnx-int8dec": {
+     "total": 356,
+     "correct": 131,
+     "wrong": 138,
+     "unresolved": 87,
+     "correctConfident": 23,
+     "wrongConfident": 23,
+     "coverage": 0.7556,
+     "accuracyAnswered": 0.487,
+     "confidentWrongRate": 0.0646,
+     "usefulCoverage": 0.0646,
+     "confidentPrecision": 0.5
+    },
+    "wall-segformer-structured": {
+     "total": 356,
+     "correct": 219,
+     "wrong": 22,
+     "unresolved": 115,
+     "correctConfident": 140,
+     "wrongConfident": 14,
+     "coverage": 0.677,
+     "accuracyAnswered": 0.9087,
+     "confidentWrongRate": 0.0393,
+     "usefulCoverage": 0.3933,
+     "confidentPrecision": 0.9091
+    }
+   },
+   {
+    "arms": [
+     "smolvlm2-500m-onnx-int8dec",
+     "wall-unet-structured"
+    ],
+    "n": 356,
+    "bySet": {
+     "REAL_BLIND8": 24,
+     "REAL_DEV": 152,
+     "SYNTHETIC": 180
+    },
+    "smolvlm2-500m-onnx-int8dec": {
+     "total": 356,
+     "correct": 131,
+     "wrong": 138,
+     "unresolved": 87,
+     "correctConfident": 23,
+     "wrongConfident": 23,
+     "coverage": 0.7556,
+     "accuracyAnswered": 0.487,
+     "confidentWrongRate": 0.0646,
+     "usefulCoverage": 0.0646,
+     "confidentPrecision": 0.5
+    },
+    "wall-unet-structured": {
+     "total": 356,
+     "correct": 204,
+     "wrong": 22,
+     "unresolved": 130,
+     "correctConfident": 129,
+     "wrongConfident": 14,
+     "coverage": 0.6348,
+     "accuracyAnswered": 0.9027,
+     "confidentWrongRate": 0.0393,
+     "usefulCoverage": 0.3624,
+     "confidentPrecision": 0.9021
+    }
+   },
+   {
+    "arms": [
+     "wall-segformer-structured",
+     "wall-unet-structured"
+    ],
+    "n": 508,
+    "bySet": {
+     "REAL_BLIND8": 24,
+     "REAL_DEV": 304,
+     "SYNTHETIC": 180
+    },
+    "wall-segformer-structured": {
+     "total": 508,
+     "correct": 285,
+     "wrong": 32,
+     "unresolved": 191,
+     "correctConfident": 147,
+     "wrongConfident": 24,
+     "coverage": 0.624,
+     "accuracyAnswered": 0.8991,
+     "confidentWrongRate": 0.0472,
+     "usefulCoverage": 0.2894,
+     "confidentPrecision": 0.8596
+    },
+    "wall-unet-structured": {
+     "total": 508,
+     "correct": 256,
+     "wrong": 23,
+     "unresolved": 229,
+     "correctConfident": 134,
+     "wrongConfident": 15,
+     "coverage": 0.5492,
+     "accuracyAnswered": 0.9176,
+     "confidentWrongRate": 0.0295,
+     "usefulCoverage": 0.2638,
+     "confidentPrecision": 0.8993
+    }
+   }
+  ],
+  "modesMatched": {
+   "smolvlm2-500m-onnx-int8dec": {
+    "n": 319,
+    "bySet": {
+     "REAL_BLIND8": 48,
+     "SYNTHETIC": 271
+    },
+    "RAW": {
+     "total": 319,
+     "correct": 121,
+     "wrong": 103,
+     "unresolved": 95,
+     "correctConfident": 14,
+     "wrongConfident": 10,
+     "coverage": 0.7022,
+     "accuracyAnswered": 0.5402,
+     "confidentWrongRate": 0.0313,
+     "usefulCoverage": 0.0439,
+     "confidentPrecision": 0.5833
+    },
+    "CANDIDATE_OVERLAY": {
+     "total": 319,
+     "correct": 105,
+     "wrong": 108,
+     "unresolved": 106,
+     "correctConfident": 11,
+     "wrongConfident": 10,
+     "coverage": 0.6677,
+     "accuracyAnswered": 0.493,
+     "confidentWrongRate": 0.0313,
+     "usefulCoverage": 0.0345,
+     "confidentPrecision": 0.5238
+    },
+    "SEMANTIC_OVERLAY": {
+     "total": 319,
+     "correct": 123,
+     "wrong": 114,
+     "unresolved": 82,
+     "correctConfident": 11,
+     "wrongConfident": 13,
+     "coverage": 0.7429,
+     "accuracyAnswered": 0.519,
+     "confidentWrongRate": 0.0408,
+     "usefulCoverage": 0.0345,
+     "confidentPrecision": 0.4583
+    }
+   },
+   "moondream-0.5b-int8": {
+    "n": 9,
+    "bySet": {
+     "REAL_BLIND8": 3,
+     "SYNTHETIC": 6
+    },
+    "RAW": {
+     "total": 9,
+     "correct": 2,
+     "wrong": 5,
+     "unresolved": 2,
+     "correctConfident": 0,
+     "wrongConfident": 0,
+     "coverage": 0.7778,
+     "accuracyAnswered": 0.2857,
+     "confidentWrongRate": 0.0,
+     "usefulCoverage": 0.0,
+     "confidentPrecision": null
+    },
+    "CANDIDATE_OVERLAY": {
+     "total": 9,
+     "correct": 2,
+     "wrong": 4,
+     "unresolved": 3,
+     "correctConfident": 0,
+     "wrongConfident": 0,
+     "coverage": 0.6667,
+     "accuracyAnswered": 0.3333,
+     "confidentWrongRate": 0.0,
+     "usefulCoverage": 0.0,
+     "confidentPrecision": null
+    },
+    "SEMANTIC_OVERLAY": {
+     "total": 9,
+     "correct": 2,
+     "wrong": 5,
+     "unresolved": 2,
+     "correctConfident": 0,
+     "wrongConfident": 1,
+     "coverage": 0.7778,
+     "accuracyAnswered": 0.2857,
+     "confidentWrongRate": 0.1111,
+     "usefulCoverage": 0.0,
+     "confidentPrecision": 0.0
+    }
+   },
+   "florence2-base": {
+    "n": 3,
+    "bySet": {
+     "REAL_BLIND8": 3
+    },
+    "RAW": {
+     "total": 3,
+     "correct": 0,
+     "wrong": 1,
+     "unresolved": 2,
+     "correctConfident": 0,
+     "wrongConfident": 1,
+     "coverage": 0.3333,
+     "accuracyAnswered": 0.0,
+     "confidentWrongRate": 0.3333,
+     "usefulCoverage": 0.0,
+     "confidentPrecision": 0.0
+    },
+    "CANDIDATE_OVERLAY": {
+     "total": 3,
+     "correct": 1,
+     "wrong": 1,
+     "unresolved": 1,
+     "correctConfident": 1,
+     "wrongConfident": 1,
+     "coverage": 0.6667,
+     "accuracyAnswered": 0.5,
+     "confidentWrongRate": 0.3333,
+     "usefulCoverage": 0.3333,
+     "confidentPrecision": 0.5
+    },
+    "SEMANTIC_OVERLAY": {
+     "total": 3,
+     "correct": 1,
+     "wrong": 1,
+     "unresolved": 1,
+     "correctConfident": 1,
+     "wrongConfident": 1,
+     "coverage": 0.6667,
+     "accuracyAnswered": 0.5,
+     "confidentWrongRate": 0.3333,
+     "usefulCoverage": 0.3333,
+     "confidentPrecision": 0.5
+    }
+   }
+  },
+  "answeredFloor": {
+   "smolvlm2-500m-onnx-int8dec": {
+    "answered": 695,
+    "floor": 0.6273,
+    "accuracyAnswered": 0.4504
+   },
+   "moondream-0.5b-int8": {
+    "answered": 204,
+    "floor": 0.5441,
+    "accuracyAnswered": 0.4608
+   },
+   "florence2-base": {
+    "answered": 37,
+    "floor": 0.7568,
+    "accuracyAnswered": 0.4054
+   },
+   "wall-unet-structured": {
+    "answered": 279,
+    "floor": 0.724,
+    "accuracyAnswered": 0.9176
+   },
+   "wall-segformer-structured": {
+    "answered": 317,
+    "floor": 0.7634,
+    "accuracyAnswered": 0.8991
+   },
+   "micro-referee-pilot": {
+    "answered": 1300,
+    "floor": 0.6369,
+    "accuracyAnswered": 0.6931
+   },
+   "server-oracle": {
+    "answered": 147,
+    "floor": 0.6054,
+    "accuracyAnswered": 0.9796
+   }
+  },
+  "counterfactualAnswered": {
+   "smolvlm2-500m-onnx-int8dec": {
+    "pairsBothAnswered": 142,
+    "bothRight": 27,
+    "sameAnswer": 81
+   },
+   "moondream-0.5b-int8": {
+    "pairsBothAnswered": 50,
+    "bothRight": 0,
+    "sameAnswer": 47
+   },
+   "wall-unet-structured": {
+    "pairsBothAnswered": 54,
+    "bothRight": 34,
+    "sameAnswer": 20
+   },
+   "wall-segformer-structured": {
+    "pairsBothAnswered": 53,
+    "bothRight": 45,
+    "sameAnswer": 8
+   },
+   "micro-referee-pilot": {
+    "pairsBothAnswered": 288,
+    "bothRight": 220,
+    "sameAnswer": 62
+   },
+   "server-oracle": {
+    "pairsBothAnswered": 47,
+    "bothRight": 44,
+    "sameAnswer": 3
+   }
   }
  },
  "latencyMs": {

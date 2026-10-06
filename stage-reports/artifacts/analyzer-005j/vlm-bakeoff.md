@@ -2,9 +2,15 @@
 
 Pre-registered: confident = confidence ≥ 0.8; UNRESOLVED / invalid = unresolved (never wrong). Red metric: CONFIDENT_WRONG_RATE = confident wrong / total. USEFUL_COVERAGE = confident correct / total. Modes never pooled.
 
-**Excluded for every arm:** `real-dom-w-gozdzikowcach-WALL_CONTINUATION-1` — post-review C2: the porch-mouth question's B flank (x 417-436) was drawn over the porch floor and the end of the vestibule wall, not over the pier (dark run x 435-463); the image tells every arm that 'wall piece B is in the blue box' when the box holds no wall - malformed for all arms. With B on the pier (436-455) both wall models answer TERMINATES (0.98 / 0.97).
+**Excluded for every arm:** `real-dom-w-gozdzikowcach-WALL_CONTINUATION-1` — post-review C2: the porch-mouth question's B flank (x 417-436) was drawn over the porch floor and the end of the vestibule wall, not over the pier (dark run x 435-463); the image tells every arm that 'wall piece B is in the blue box' when the box holds no wall - malformed for all arms. (Anecdote only, post-review F13: a re-placement made after seeing results and measured on the wall arms only - with B on the pier (436-455) both wall models answer TERMINATES (0.98 / 0.97). It plays no part in any score.)
 
 **Wall-model rows (`wall-*-structured`) on REAL_DEV are the first, face-placed run** (strips on the 005I truth outline, half outside the building). The post-review re-measurement on the wall axis is in `wall-model-proof.json` → `*.axisRemeasure` (UNet: 61/63 openings OPENING, 47 at ≥ 0.8, none wrong). Pixel shares are not calibrated probabilities; the 0.80 bar is applied to them as fixed before the run.
+
+**ROUND8_DEV** is the data key `REAL_BLIND8`: questions authored from the accepted 005I diagnosis of the two round-8 houses. They are development evidence, not blind generalisation (post-review F14).
+
+**Each arm ran on a different, non-random subset of one pool** (the runs were cut at a declared time); pooled rows therefore mix different questions. §8 scores every pair of arms on the questions both were asked (post-review B1).
+
+**Configurations, as run (post-review B2, B8).** SmolVLM2-500M: `do_image_splitting=False`, one 512² tile = **64 image tokens** (the snapshot default is 16 tiles + a global view = 1,088 tokens), fp32 vision encoder, int8 decoder, forced JSON prefix — its deployable on-device configuration. Moondream 0.5B: at 512² the 0.0.6 client picks one 378² global view and no crops. Florence-2-base: no VQA task, so ENUM_SCORE measures its decoder's text prior.
 
 ## 1. Headline: CANDIDATE_OVERLAY, all sets
 
@@ -28,47 +34,47 @@ Pre-registered: confident = confidence ≥ 0.8; UNRESOLVED / invalid = unresolve
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | server-oracle | ORACLE_JSON | CANDIDATE_OVERLAY | SYNTHETIC | 102 | 97.0 % | 99.0 % | 0.0 % | 67.7 % |
 | server-oracle | ORACLE_JSON | CANDIDATE_OVERLAY | REAL_DEV | 30 | 100.0 % | 100.0 % | 0.0 % | 83.3 % |
-| server-oracle | ORACLE_JSON | CANDIDATE_OVERLAY | REAL_BLIND8 | 16 | 100.0 % | 100.0 % | 0.0 % | 100.0 % |
+| server-oracle | ORACLE_JSON | CANDIDATE_OVERLAY | ROUND8_DEV | 16 | 100.0 % | 100.0 % | 0.0 % | 100.0 % |
 | wall-unet-structured | STRUCTURED | CANDIDATE_OVERLAY | SYNTHETIC | 180 | 86.6 % | 82.8 % | 7.2 % | 60.6 % |
 | wall-unet-structured | STRUCTURED | CANDIDATE_OVERLAY | REAL_DEV | 304 | 97.2 % | 35.2 % | 0.7 % | 3.3 % |
-| wall-unet-structured | STRUCTURED | CANDIDATE_OVERLAY | REAL_BLIND8 | 24 | 100.0 % | 95.8 % | 0.0 % | 62.5 % |
+| wall-unet-structured | STRUCTURED | CANDIDATE_OVERLAY | ROUND8_DEV | 24 | 100.0 % | 95.8 % | 0.0 % | 62.5 % |
 | wall-segformer-structured | STRUCTURED | CANDIDATE_OVERLAY | SYNTHETIC | 180 | 94.6 % | 82.8 % | 0.0 % | 66.1 % |
 | wall-segformer-structured | STRUCTURED | CANDIDATE_OVERLAY | REAL_DEV | 304 | 86.5 % | 48.7 % | 6.6 % | 4.6 % |
-| wall-segformer-structured | STRUCTURED | CANDIDATE_OVERLAY | REAL_BLIND8 | 24 | 80.0 % | 83.3 % | 16.7 % | 58.3 % |
+| wall-segformer-structured | STRUCTURED | CANDIDATE_OVERLAY | ROUND8_DEV | 24 | 80.0 % | 83.3 % | 16.7 % | 58.3 % |
 | micro-referee-pilot | ENUM_SCORE | CANDIDATE_OVERLAY | SYNTHETIC | 672 | 85.4 % | 100.0 % | 2.7 % | 71.4 % |
 | micro-referee-pilot | ENUM_SCORE | CANDIDATE_OVERLAY | REAL_DEV | 564 | 49.6 % | 100.0 % | 34.0 % | 29.8 % |
-| micro-referee-pilot | ENUM_SCORE | CANDIDATE_OVERLAY | REAL_BLIND8 | 64 | 73.4 % | 100.0 % | 7.8 % | 42.2 % |
+| micro-referee-pilot | ENUM_SCORE | CANDIDATE_OVERLAY | ROUND8_DEV | 64 | 73.4 % | 100.0 % | 7.8 % | 42.2 % |
 | smolvlm2-500m-onnx-int8dec | ENUM_SCORE | RAW | SYNTHETIC | 272 | 53.3 % | 71.7 % | 2.9 % | 5.1 % |
-| smolvlm2-500m-onnx-int8dec | ENUM_SCORE | RAW | REAL_BLIND8 | 48 | 58.6 % | 60.4 % | 4.2 % | 0.0 % |
+| smolvlm2-500m-onnx-int8dec | ENUM_SCORE | RAW | ROUND8_DEV | 48 | 58.6 % | 60.4 % | 4.2 % | 0.0 % |
 | smolvlm2-500m-onnx-int8dec | ENUM_SCORE | CANDIDATE_OVERLAY | SYNTHETIC | 614 | 44.7 % | 72.2 % | 6.8 % | 2.6 % |
 | smolvlm2-500m-onnx-int8dec | ENUM_SCORE | CANDIDATE_OVERLAY | REAL_DEV | 289 | 47.4 % | 73.0 % | 6.6 % | 4.5 % |
-| smolvlm2-500m-onnx-int8dec | ENUM_SCORE | CANDIDATE_OVERLAY | REAL_BLIND8 | 64 | 36.6 % | 64.1 % | 14.1 % | 3.1 % |
+| smolvlm2-500m-onnx-int8dec | ENUM_SCORE | CANDIDATE_OVERLAY | ROUND8_DEV | 64 | 36.6 % | 64.1 % | 14.1 % | 3.1 % |
 | smolvlm2-500m-onnx-int8dec | ENUM_SCORE | SEMANTIC_OVERLAY | SYNTHETIC | 307 | 48.5 % | 78.5 % | 6.5 % | 2.9 % |
-| smolvlm2-500m-onnx-int8dec | ENUM_SCORE | SEMANTIC_OVERLAY | REAL_BLIND8 | 64 | 31.1 % | 70.3 % | 6.2 % | 3.1 % |
+| smolvlm2-500m-onnx-int8dec | ENUM_SCORE | SEMANTIC_OVERLAY | ROUND8_DEV | 64 | 31.1 % | 70.3 % | 6.2 % | 3.1 % |
 | smolvlm2-500m-onnx-int8dec | GEN_LENIENT | RAW | SYNTHETIC | 34 | 50.0 % | 35.3 % | 17.6 % | 17.6 % |
-| smolvlm2-500m-onnx-int8dec | GEN_LENIENT | RAW | REAL_BLIND8 | 48 | 55.6 % | 37.5 % | 16.7 % | 20.8 % |
+| smolvlm2-500m-onnx-int8dec | GEN_LENIENT | RAW | ROUND8_DEV | 48 | 55.6 % | 37.5 % | 16.7 % | 20.8 % |
 | smolvlm2-500m-onnx-int8dec | GEN_LENIENT | CANDIDATE_OVERLAY | SYNTHETIC | 342 | 47.2 % | 47.1 % | 24.6 % | 21.3 % |
 | smolvlm2-500m-onnx-int8dec | GEN_LENIENT | CANDIDATE_OVERLAY | REAL_DEV | 289 | 73.4 % | 42.9 % | 11.4 % | 31.5 % |
-| smolvlm2-500m-onnx-int8dec | GEN_LENIENT | CANDIDATE_OVERLAY | REAL_BLIND8 | 64 | 60.7 % | 43.8 % | 17.2 % | 26.6 % |
+| smolvlm2-500m-onnx-int8dec | GEN_LENIENT | CANDIDATE_OVERLAY | ROUND8_DEV | 64 | 60.7 % | 43.8 % | 17.2 % | 26.6 % |
 | smolvlm2-500m-onnx-int8dec | GEN_LENIENT | SEMANTIC_OVERLAY | SYNTHETIC | 34 | 50.0 % | 17.6 % | 8.8 % | 8.8 % |
-| smolvlm2-500m-onnx-int8dec | GEN_LENIENT | SEMANTIC_OVERLAY | REAL_BLIND8 | 64 | 51.6 % | 48.4 % | 23.4 % | 25.0 % |
+| smolvlm2-500m-onnx-int8dec | GEN_LENIENT | SEMANTIC_OVERLAY | ROUND8_DEV | 64 | 51.6 % | 48.4 % | 23.4 % | 25.0 % |
 | moondream-0.5b-int8 | ENUM_SCORE | RAW | SYNTHETIC | 7 | 42.9 % | 100.0 % | 0.0 % | 0.0 % |
-| moondream-0.5b-int8 | ENUM_SCORE | RAW | REAL_BLIND8 | 3 | 0.0 % | 33.3 % | 0.0 % | 0.0 % |
+| moondream-0.5b-int8 | ENUM_SCORE | RAW | ROUND8_DEV | 3 | 0.0 % | 33.3 % | 0.0 % | 0.0 % |
 | moondream-0.5b-int8 | ENUM_SCORE | CANDIDATE_OVERLAY | SYNTHETIC | 262 | 40.7 % | 53.4 % | 1.5 % | 1.5 % |
 | moondream-0.5b-int8 | ENUM_SCORE | CANDIDATE_OVERLAY | REAL_DEV | 187 | 63.5 % | 27.8 % | 2.1 % | 0.0 % |
-| moondream-0.5b-int8 | ENUM_SCORE | CANDIDATE_OVERLAY | REAL_BLIND8 | 64 | 33.3 % | 18.8 % | 1.6 % | 1.6 % |
+| moondream-0.5b-int8 | ENUM_SCORE | CANDIDATE_OVERLAY | ROUND8_DEV | 64 | 33.3 % | 18.8 % | 1.6 % | 1.6 % |
 | moondream-0.5b-int8 | ENUM_SCORE | SEMANTIC_OVERLAY | SYNTHETIC | 6 | 33.3 % | 100.0 % | 16.7 % | 0.0 % |
-| moondream-0.5b-int8 | ENUM_SCORE | SEMANTIC_OVERLAY | REAL_BLIND8 | 3 | 0.0 % | 33.3 % | 0.0 % | 0.0 % |
-| moondream-0.5b-int8 | GEN_LENIENT | RAW | REAL_BLIND8 | 3 | — | 0.0 % | 0.0 % | 0.0 % |
+| moondream-0.5b-int8 | ENUM_SCORE | SEMANTIC_OVERLAY | ROUND8_DEV | 3 | 0.0 % | 33.3 % | 0.0 % | 0.0 % |
+| moondream-0.5b-int8 | GEN_LENIENT | RAW | ROUND8_DEV | 3 | — | 0.0 % | 0.0 % | 0.0 % |
 | moondream-0.5b-int8 | GEN_LENIENT | CANDIDATE_OVERLAY | SYNTHETIC | 30 | 50.0 % | 13.3 % | 6.7 % | 6.7 % |
-| moondream-0.5b-int8 | GEN_LENIENT | CANDIDATE_OVERLAY | REAL_BLIND8 | 3 | — | 0.0 % | 0.0 % | 0.0 % |
-| moondream-0.5b-int8 | GEN_LENIENT | SEMANTIC_OVERLAY | REAL_BLIND8 | 3 | — | 0.0 % | 0.0 % | 0.0 % |
-| florence2-base | ENUM_SCORE | RAW | REAL_BLIND8 | 11 | 0.0 % | 9.1 % | 9.1 % | 0.0 % |
+| moondream-0.5b-int8 | GEN_LENIENT | CANDIDATE_OVERLAY | ROUND8_DEV | 3 | — | 0.0 % | 0.0 % | 0.0 % |
+| moondream-0.5b-int8 | GEN_LENIENT | SEMANTIC_OVERLAY | ROUND8_DEV | 3 | — | 0.0 % | 0.0 % | 0.0 % |
+| florence2-base | ENUM_SCORE | RAW | ROUND8_DEV | 11 | 0.0 % | 9.1 % | 9.1 % | 0.0 % |
 | florence2-base | ENUM_SCORE | CANDIDATE_OVERLAY | SYNTHETIC | 2 | — | 0.0 % | 0.0 % | 0.0 % |
 | florence2-base | ENUM_SCORE | CANDIDATE_OVERLAY | REAL_DEV | 29 | 60.0 % | 17.2 % | 6.9 % | 10.3 % |
-| florence2-base | ENUM_SCORE | CANDIDATE_OVERLAY | REAL_BLIND8 | 64 | 37.5 % | 50.0 % | 31.2 % | 18.8 % |
-| florence2-base | ENUM_SCORE | SEMANTIC_OVERLAY | REAL_BLIND8 | 3 | 50.0 % | 66.7 % | 33.3 % | 33.3 % |
-| florence2-base | STRUCTURED | RAW | REAL_BLIND8 | 8 | — | 0.0 % | 0.0 % | 0.0 % |
+| florence2-base | ENUM_SCORE | CANDIDATE_OVERLAY | ROUND8_DEV | 64 | 37.5 % | 50.0 % | 31.2 % | 18.8 % |
+| florence2-base | ENUM_SCORE | SEMANTIC_OVERLAY | ROUND8_DEV | 3 | 50.0 % | 66.7 % | 33.3 % | 33.3 % |
+| florence2-base | STRUCTURED | RAW | ROUND8_DEV | 8 | — | 0.0 % | 0.0 % | 0.0 % |
 
 ## 3. Per class, CANDIDATE_OVERLAY, all sets pooled per model (ENUM_SCORE; oracle: ORACLE_JSON)
 
@@ -88,7 +94,7 @@ Pre-registered: confident = confidence ≥ 0.8; UNRESOLVED / invalid = unresolve
 | VOID_VS_OUTSIDE | 8/8 of 8; cw 0 | — | — | 24/24 of 24; cw 0 | 10/20 of 24; cw 3 | 3/6 of 6; cw 2 | — |
 | WALL_CONTINUATION | 15/15 of 15; cw 0 | 93/112 of 214; cw 13 | 105/129 of 214; cw 16 | 183/214 of 214; cw 1 | 28/110 of 149; cw 19 | 0/5 of 82; cw 0 | 15/16 of 16; cw 1 |
 
-## 4. Blind-8 questions (development evidence), CANDIDATE_OVERLAY, NORMAL
+## 4. ROUND8_DEV questions (the two round-8 houses; development evidence), CANDIDATE_OVERLAY, NORMAL
 
 | question | class | expected | server-oracle | wall-unet-structured | wall-segformer-structured | micro-referee-pilot | smolvlm2-500m-onnx-int8dec | moondream-0.5b-int8 | florence2-base |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -129,25 +135,25 @@ The real sets are one-sided in several classes (all 126 REAL_DEV OPENING_VS_PATT
 | --- | --- | --- | --- | --- | --- |
 | server-oracle | SYNTHETIC | 52.0 % | 9 | 8/8 | 0 |
 | server-oracle | REAL_DEV | 83.3 % | 1 | 1/1 | 0 |
-| server-oracle | REAL_BLIND8 | 81.3 % | 1 | 1/1 | 0 |
+| server-oracle | ROUND8_DEV | 81.3 % | 1 | 1/1 | 0 |
 | wall-unet-structured | SYNTHETIC | 53.3 % | 12 | 5/6 | 1 |
 | wall-unet-structured | REAL_DEV | 95.4 % | 14 | 10/12 | 1 |
-| wall-unet-structured | REAL_BLIND8 | 100.0 % | 0 | 0/0 | 0 |
+| wall-unet-structured | ROUND8_DEV | 100.0 % | 0 | 0/0 | 0 |
 | wall-segformer-structured | SYNTHETIC | 53.3 % | 12 | 9/9 | 0 |
 | wall-segformer-structured | REAL_DEV | 95.4 % | 14 | 14/14 | 0 |
-| wall-segformer-structured | REAL_BLIND8 | 100.0 % | 0 | 0/0 | 0 |
+| wall-segformer-structured | ROUND8_DEV | 100.0 % | 0 | 0/0 | 0 |
 | micro-referee-pilot | SYNTHETIC | 51.8 % | 72 | 64/72 | 3 |
 | micro-referee-pilot | REAL_DEV | 76.2 % | 116 | 48/116 | 51 |
-| micro-referee-pilot | REAL_BLIND8 | 81.3 % | 4 | 0/4 | 3 |
+| micro-referee-pilot | ROUND8_DEV | 81.3 % | 4 | 0/4 | 3 |
 | smolvlm2-500m-onnx-int8dec | SYNTHETIC | 54.1 % | 114 | 25/75 | 2 |
 | smolvlm2-500m-onnx-int8dec | REAL_DEV | 76.8 % | 58 | 8/40 | 6 |
-| smolvlm2-500m-onnx-int8dec | REAL_BLIND8 | 81.3 % | 4 | 1/1 | 0 |
+| smolvlm2-500m-onnx-int8dec | ROUND8_DEV | 81.3 % | 4 | 1/1 | 0 |
 | moondream-0.5b-int8 | SYNTHETIC | 53.1 % | 48 | 35/36 | 0 |
 | moondream-0.5b-int8 | REAL_DEV | 74.9 % | 41 | 8/26 | 4 |
-| moondream-0.5b-int8 | REAL_BLIND8 | 81.3 % | 4 | 4/4 | 0 |
+| moondream-0.5b-int8 | ROUND8_DEV | 81.3 % | 4 | 4/4 | 0 |
 | florence2-base | SYNTHETIC | 100.0 % | 0 | 0/0 | 0 |
 | florence2-base | REAL_DEV | 65.5 % | 1 | 0/1 | 1 |
-| florence2-base | REAL_BLIND8 | 81.3 % | 4 | 0/0 | 0 |
+| florence2-base | ROUND8_DEV | 81.3 % | 4 | 0/0 | 0 |
 
 ## 7. Latency (desktop x86-64 CPU, image path, contended 4-core container)
 
@@ -159,3 +165,51 @@ The real sets are one-sided in several classes (all 126 REAL_DEV OPENING_VS_PATT
 | moondream-0.5b-int8|score | 532 | 15106.9 | 20959.9 |
 | smolvlm2-500m-onnx-int8dec|gen | 875 | 3587.8 | 7895.9 |
 | smolvlm2-500m-onnx-int8dec|score | 1658 | 2467.2 | 5323.4 |
+
+## 8. Matched subsets (post-review B1, B7)
+
+The arms were stopped at a declared cut-off and cover different, non-random subsets of one pool, so §1 compares different question mixes (SmolVLM2: 63 % synthetic; Florence-2: 67 % blind-8; oracle: 69 % stratified synthetic). Here each pair of arms is scored on the questions both were asked (primary read-out, CANDIDATE_OVERLAY; cw = confident wrong at ≥ 0.80). The small VLMs' mirror / rotation figures in §1 are almost entirely synthetic plus 16 blind-8 base questions.
+
+| arms | n (by set) | first arm | second arm |
+| --- | --- | --- | --- |
+| florence2-base ∩ micro-referee-pilot | 95 (ROUND8_DEV 64, REAL_DEV 29, SYNTHETIC 2) | 15/37 answered right, cw 22 | 63/95 answered right, cw 16 |
+| florence2-base ∩ moondream-0.5b-int8 | 95 (ROUND8_DEV 64, REAL_DEV 29, SYNTHETIC 2) | 15/37 answered right, cw 22 | 8/22 answered right, cw 1 |
+| florence2-base ∩ server-oracle | 21 (ROUND8_DEV 16, REAL_DEV 5) | 3/8 answered right, cw 5 | 21/21 answered right, cw 0 |
+| florence2-base ∩ smolvlm2-500m-onnx-int8dec | 95 (ROUND8_DEV 64, REAL_DEV 29, SYNTHETIC 2) | 15/37 answered right, cw 22 | 25/58 answered right, cw 10 |
+| florence2-base ∩ wall-segformer-structured | 33 (ROUND8_DEV 24, REAL_DEV 9) | 15/21 answered right, cw 6 | 21/25 answered right, cw 4 |
+| florence2-base ∩ wall-unet-structured | 33 (ROUND8_DEV 24, REAL_DEV 9) | 15/21 answered right, cw 6 | 30/30 answered right, cw 0 |
+| micro-referee-pilot ∩ moondream-0.5b-int8 | 513 (ROUND8_DEV 64, REAL_DEV 187, SYNTHETIC 262) | 369/513 answered right, cw 75 | 94/204 answered right, cw 9 |
+| micro-referee-pilot ∩ server-oracle | 148 (ROUND8_DEV 16, REAL_DEV 30, SYNTHETIC 102) | 109/148 answered right, cw 16 | 144/147 answered right, cw 0 |
+| micro-referee-pilot ∩ smolvlm2-500m-onnx-int8dec | 967 (ROUND8_DEV 64, REAL_DEV 289, SYNTHETIC 614) | 740/967 answered right, cw 116 | 313/695 answered right, cw 70 |
+| micro-referee-pilot ∩ wall-segformer-structured | 508 (ROUND8_DEV 24, REAL_DEV 304, SYNTHETIC 180) | 344/508 answered right, cw 97 | 285/317 answered right, cw 24 |
+| micro-referee-pilot ∩ wall-unet-structured | 508 (ROUND8_DEV 24, REAL_DEV 304, SYNTHETIC 180) | 344/508 answered right, cw 97 | 256/279 answered right, cw 15 |
+| moondream-0.5b-int8 ∩ server-oracle | 127 (ROUND8_DEV 16, REAL_DEV 25, SYNTHETIC 86) | 23/49 answered right, cw 5 | 123/126 answered right, cw 0 |
+| moondream-0.5b-int8 ∩ smolvlm2-500m-onnx-int8dec | 499 (ROUND8_DEV 64, REAL_DEV 187, SYNTHETIC 248) | 91/195 answered right, cw 9 | 150/353 answered right, cw 39 |
+| moondream-0.5b-int8 ∩ wall-segformer-structured | 193 (ROUND8_DEV 24, REAL_DEV 94, SYNTHETIC 75) | 9/18 answered right, cw 0 | 117/129 answered right, cw 9 |
+| moondream-0.5b-int8 ∩ wall-unet-structured | 193 (ROUND8_DEV 24, REAL_DEV 94, SYNTHETIC 75) | 9/18 answered right, cw 0 | 117/125 answered right, cw 5 |
+| server-oracle ∩ smolvlm2-500m-onnx-int8dec | 142 (ROUND8_DEV 16, REAL_DEV 30, SYNTHETIC 96) | 138/141 answered right, cw 0 | 46/100 answered right, cw 7 |
+| server-oracle ∩ wall-segformer-structured | 50 (ROUND8_DEV 6, REAL_DEV 12, SYNTHETIC 32) | 50/50 answered right, cw 0 | 32/37 answered right, cw 4 |
+| server-oracle ∩ wall-unet-structured | 50 (ROUND8_DEV 6, REAL_DEV 12, SYNTHETIC 32) | 50/50 answered right, cw 0 | 34/36 answered right, cw 1 |
+| smolvlm2-500m-onnx-int8dec ∩ wall-segformer-structured | 356 (ROUND8_DEV 24, REAL_DEV 152, SYNTHETIC 180) | 131/269 answered right, cw 23 | 219/241 answered right, cw 14 |
+| smolvlm2-500m-onnx-int8dec ∩ wall-unet-structured | 356 (ROUND8_DEV 24, REAL_DEV 152, SYNTHETIC 180) | 131/269 answered right, cw 23 | 204/226 answered right, cw 14 |
+| wall-segformer-structured ∩ wall-unet-structured | 508 (ROUND8_DEV 24, REAL_DEV 304, SYNTHETIC 180) | 285/317 answered right, cw 24 | 256/279 answered right, cw 15 |
+
+Modes on the questions a model has in all three modes (ENUM_SCORE):
+
+| model | n (by set) | RAW | CANDIDATE_OVERLAY | SEMANTIC_OVERLAY |
+| --- | --- | --- | --- | --- |
+| smolvlm2-500m-onnx-int8dec | 319 (ROUND8_DEV 48, SYNTHETIC 271) | 121/224 answered right, cw 10 | 105/213 answered right, cw 10 | 123/237 answered right, cw 13 |
+| moondream-0.5b-int8 | 9 (ROUND8_DEV 3, SYNTHETIC 6) | 2/7 answered right, cw 0 | 2/6 answered right, cw 0 | 2/7 answered right, cw 1 |
+| florence2-base | 3 (ROUND8_DEV 3) | 0/1 answered right, cw 1 | 1/2 answered right, cw 1 | 1/2 answered right, cw 1 |
+
+The majority floor on the **answered** subset (a constant per-class guesser over the questions the model chose to answer, classes pooled across sets), and counterfactual pairs whose truth differs and which **both** members answered:
+
+| model | answered | floor on answered | right among answered | cf. pairs both answered | both right | same answer to both |
+| --- | --- | --- | --- | --- | --- | --- |
+| server-oracle | 147 | 60.5 % | 98.0 % | 47 | 93.6 % | 6.4 % |
+| wall-unet-structured | 279 | 72.4 % | 91.8 % | 54 | 63.0 % | 37.0 % |
+| wall-segformer-structured | 317 | 76.3 % | 89.9 % | 53 | 84.9 % | 15.1 % |
+| micro-referee-pilot | 1300 | 63.7 % | 69.3 % | 288 | 76.4 % | 21.5 % |
+| smolvlm2-500m-onnx-int8dec | 695 | 62.7 % | 45.0 % | 142 | 19.0 % | 57.0 % |
+| moondream-0.5b-int8 | 204 | 54.4 % | 46.1 % | 50 | 0.0 % | 94.0 % |
+| florence2-base | 37 | 75.7 % | 40.5 % | — | — | — |
