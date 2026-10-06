@@ -121,4 +121,43 @@ describe('005K §19 the product never turns the rule on', () => {
     // the decomposition reads the option, defaulting to OFF
     expect(codeOf(read('packages/reconstruction/src/plan-decomposition.ts'))).toMatch(/const drawnGapRule = options\.drawnGapRule \?\? 'OFF'/)
   })
+
+  // council C3: a resolver hypothesis `{ ...shared, drawnGapRule: 'ON' }`, or `drawnGapRule: MODE` behind a constant, would
+  // pass a check that reads only the lines saying 'ON' in three files. Every production mention of the option, in every
+  // package, must be one of the fixed forms below: its type, the conditional pass-through, its default, a record copied.
+  it('every production mention of the option is a type, the conditional pass-through, the OFF default or a record copied', () => {
+    const CARRIERS = [
+      'packages/analysis-service/src/run.ts',
+      'packages/evidence-pack/src/pack.ts',
+      'packages/evidence-pack/src/types.ts',
+      'packages/reconstruction/src/boundary-evidence.ts',
+      'packages/reconstruction/src/failure.ts',
+      'packages/reconstruction/src/gap-evidence.ts',
+      'packages/reconstruction/src/layout.ts',
+      'packages/reconstruction/src/plan-decomposition.ts',
+      'packages/reconstruction/src/plan-diagnostics.ts',
+      'packages/reconstruction/src/v2/reconstruct-v2.ts',
+    ]
+    const named = walk('packages').filter((f) => /\/src\//.test(f) && codeOf(read(f)).includes('drawnGapRule'))
+    expect(named.sort()).toEqual(CARRIERS)
+    const FORMS = [
+      /drawnGapRule\?: 'OFF' \| 'ON'/g,
+      /drawnGapRule: 'OFF' \| 'ON'/g,
+      /\.\.\.\(options\.drawnGapRule === 'ON' \? \{ drawnGapRule: 'ON' as const \} : \{\}\)/g,
+      /const drawnGapRule = options\.drawnGapRule \?\? 'OFF'/g,
+      /drawnGapRule: b\?\.drawnGapRule \?\? null/g,
+      /drawnGapRule: b\.drawnGapRule\b/g,
+      /\bg\.drawnGapRule\.(check|upgraded)\b/g,
+      /drawnGapRule: \{ mode: string;/g,
+      /drawnGapRule\?: string\b/g,
+      /'drawnGapRule'/g,
+    ]
+    // the rule's own files define it (held by the other 005K tests); the decomposition passes its defaulted const on by name
+    for (const f of CARRIERS.filter((c) => c !== BOUNDARY && c !== RECORDS)) {
+      let code = codeOf(read(f))
+      for (const form of FORMS) code = code.replace(form, '')
+      if (f.endsWith('plan-decomposition.ts')) code = code.replace(/(?<=[{,(]\s*|^\s*)drawnGapRule(?=\s*[,})])/gm, '')
+      expect([...code.matchAll(/^.*drawnGapRule.*$/gm)].map((m) => m[0].trim()), f).toEqual([])
+    }
+  })
 })

@@ -121,14 +121,14 @@ class ProductFlowDeviceTest {
         //    then "Oznacz 6 wcześniejszych etapów jako zakończone" (it says the count before it acts),
         //    Dach at 40 %, a task.
         openStage(ConstructionStageKey.PLOT_PURCHASE)
-        compose.onNode(hasText(evidence.string(R.string.stage_mark_done)) and hasClickAction()).performClick()
+        evidence.clickExactlyOne(hasText(evidence.string(R.string.stage_mark_done)) and hasClickAction(), "the stage's mark-done action")
         compose.waitUntil(5_000) { progress.view?.stages?.firstOrNull { it.stageKey == ConstructionStageKey.PLOT_PURCHASE }?.status == StageStatus.DONE }
         openStage(ConstructionStageKey.ROOF)
-        compose.onNode(hasText(evidence.string(R.string.stage_make_current)) and hasClickAction()).performClick()
+        evidence.clickExactlyOne(hasText(evidence.string(R.string.stage_make_current)) and hasClickAction(), "the stage's make-current action")
         compose.waitUntil(5_000) { progress.view?.summary?.currentStage == ConstructionStageKey.ROOF }
         val earlier = evidence.plural(R.plurals.stage_mark_earlier_done, 6, 6)
         list().performScrollToNode(hasText(earlier))
-        compose.onNode(hasText(earlier) and hasClickAction()).performClick()
+        evidence.clickExactlyOne(hasText(earlier) and hasClickAction(), "the mark-earlier-done action")
         compose.waitUntil(5_000) { progress.view?.stages?.take(7)?.all { it.status == StageStatus.DONE } == true }
         assertEquals("the current stage stays current", ConstructionStageKey.ROOF, progress.view?.summary?.currentStage)
         evidence.fact("bulk action label", earlier)
@@ -136,7 +136,7 @@ class ProductFlowDeviceTest {
         compose.waitUntil(5_000) { progress.view?.summary?.currentStageCompletionPercent == 40 }
         compose.onNode(hasSetTextAction()).performTextReplacement(TASK)
         list().performScrollToNode(hasText(evidence.string(R.string.stage_task_save)))
-        compose.onNode(hasText(evidence.string(R.string.stage_task_save)) and hasClickAction()).performClick()
+        evidence.clickExactlyOne(hasText(evidence.string(R.string.stage_task_save)) and hasClickAction(), "the task's save action")
         compose.waitUntil(5_000) { progress.view?.summary?.currentTask == TASK }
         val summary = checkNotNull(progress.view).summary
         assertEquals("(7 + 0.4) / 17 stages, rounded down", 43, summary.percent)

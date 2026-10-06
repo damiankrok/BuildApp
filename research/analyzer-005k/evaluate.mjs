@@ -125,6 +125,6 @@ const result = {
   rows,
 }
 writeFileSync(resolve(arg('out-results', 'gap-set-results.json')), `${JSON.stringify(result, null, 1)}\n`)
-writeFileSync(resolve(arg('out-constant', 'constant-control.json')), `${JSON.stringify({ stage: result.stage, kind: 'CONSTANT control: every eligible drawn weak gap is an OPENING (never a candidate)', freezeSha: result.freezeSha, arm: result.arms.CONSTANT, vsRule: result.arms.DRAWN_RULE, splits: Object.fromEntries(Object.entries(result.splits).map(([k, v]) => [k, Object.fromEntries(Object.entries(v).map(([g, arms]) => [g, arms.CONSTANT]))])), projects: outcome }, null, 1)}\n`)
+writeFileSync(resolve(arg('out-constant', 'constant-control.json')), `${JSON.stringify({ stage: result.stage, kind: 'CONSTANT control: every eligible drawn weak gap is an OPENING (never a candidate)', freezeSha: result.freezeSha, labelsNote: result.labelsNote, arm: result.arms.CONSTANT, vsRule: result.arms.DRAWN_RULE, splits: Object.fromEntries(Object.entries(result.splits).map(([k, v]) => [k, Object.fromEntries(Object.entries(v).map(([g, arms]) => [g, arms.CONSTANT]))])), projects: outcome }, null, 1)}\n`)
 process.stdout.write(`${rows.length} gaps; ${JSON.stringify(result.classes)}\n`)
 for (const [n, m] of Object.entries(result.arms)) process.stdout.write(`${n}: upgraded ${m.upgraded}, OPENING recall ${m.openingRecall.k}/${m.openingRecall.n}, false upgrades ${m.falseUpgrades.k}/${m.falseUpgrades.n} [${m.falseUpgrades.lo}, ${m.falseUpgrades.hi}], outcome-critical ${m.outcomeCriticalFalseBridges}\n`)

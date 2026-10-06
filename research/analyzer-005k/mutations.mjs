@@ -61,6 +61,14 @@ const MUTATIONS = [
     from: '  all.sort((p, q) =>',
     to: '  void ((p: GapEvidenceRecord, q: GapEvidenceRecord) =>',
   },
+  {
+    id: 'M6',
+    what: 'the along-jamb test is removed: a jamb that is a crossing wall, not a stretch of this wall, qualifies (council A6)',
+    must: 'the crossing-wall fixture fails',
+    file: BOUNDARY,
+    from: 'const alongJambs = trace.jambAlong[0] && trace.jambAlong[1]',
+    to: 'const alongJambs = trace.jambAlong.length === 2',
+  },
 ]
 
 const clean = () => execFileSync('git', ['status', '--porcelain', '--', 'packages', 'tests'], { cwd: REPO, encoding: 'utf8' }).trim() === ''

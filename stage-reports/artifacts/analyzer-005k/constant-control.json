@@ -2,6 +2,7 @@
  "stage": "BUILDPLAN-ANALYZER-005K",
  "kind": "CONSTANT control: every eligible drawn weak gap is an OPENING (never a candidate)",
  "freezeSha": "892853e7de140f2a9fb45895acfea93700c4a053",
+ "labelsNote": "NOT HUMAN GROUND TRUTH. Every vote is a blind sub-agent of this session's own model (AI_SUBAGENT), shown only the neutral picture and the label definitions (research/analyzer-005k/label-instructions.md). TWO_REVIEWER_AGREEMENT: A and B agree. INDEPENDENT_SOURCE_REVIEW: A and B disagree and a third blind sub-agent sides with one of them. UNRESOLVED: no majority, or the majority says the drawing does not settle it.",
  "arm": {
   "total": 60,
   "resolved": 54,

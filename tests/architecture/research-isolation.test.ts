@@ -177,7 +177,7 @@ describe('005K production cannot reach the gap-set harness, and the gap set comm
   it('the 005K harness and artifacts track only code and text — no crop, sheet, overlay or archive', () => {
     const tracked = execFileSync('git', ['ls-files'], { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(Boolean)
     const harness = tracked.filter((f) => f.startsWith('research/analyzer-005k/') || f.startsWith('stage-reports/artifacts/analyzer-005k/'))
-    expect(harness.filter((f) => !/\.(py|ts|mjs|cjs|json|md|txt|sh)$/i.test(f))).toEqual([])
+    expect(harness.filter((f) => !/\.(py|ts|mjs|cjs|json|ndjson|md|txt|sh)$/i.test(f))).toEqual([])
     for (const f of harness) {
       const text = read(f)
       expect(text, f).not.toMatch(/(data:(image|application)\/[\w.+-]+;base64,|iVBORw0KGgo|\/9j\/4|UklGR|R0lGOD)[A-Za-z0-9+/]{40,}/)
@@ -185,5 +185,12 @@ describe('005K production cannot reach the gap-set harness, and the gap set comm
       expect(text, f).not.toMatch(/\[(\s*-?\d+(\.\d+)?\s*,){64,}/)
       expect(statSync(join(ROOT, f)).size, f).toBeLessThanOrEqual(4 * 2 ** 20)
     }
+  })
+
+  it('the Android build packages nothing from the 005K gap set', () => {
+    for (const f of [...filesUnder('apps/android', /\.gradle\.kts$/), ...filesUnder('apps/android', /^libs\.versions\.toml$/)]) {
+      expect(codeOf(read(f)), f).not.toMatch(HARNESS)
+    }
+    expect(filesUnder('apps/android/app/src/main/assets', /.*/).filter((a) => HARNESS.test(a) || /gap-set|analyzer-005k/i.test(a))).toEqual([])
   })
 })

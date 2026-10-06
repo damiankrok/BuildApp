@@ -91,6 +91,10 @@ describe('005K §19 the drawn-gap rule is OFF unless asked for', () => {
     const n = gapsOn(narrow, 106)[0]
     expect(n.boundary).toBe('WEAK')
     expect(n.trace?.drawnGapRule?.drawnVia).toBe(n.trace?.signatureRaw === 'LEAF_FACE' ? 'SIGNATURE' : 'WITHOUT_RUNS_PAST')
+    // council A1 / A6: within a lintel the rule closes this 2.0 m paving edge too. Nothing in its six conditions reads what
+    // lies behind a gap, so it pre-empts the pocket rule on a recess or porch mouth: the known closure path, one reason it
+    // stays OFF (005K recommendation). A successor that closes the path changes this expectation on purpose.
+    expect(gapsOn(narrow, 106, ON)[0].boundary).toBe('STRONG')
     // 4 m between two stretches of wall, a line running past both jambs: a paving edge in front of a porch or a carport
     const wide = facade(100, 179)
     drawLine(wide, 0, 110, 459, 110, BLACK)
@@ -102,6 +106,19 @@ describe('005K §19 the drawn-gap rule is OFF unless asked for', () => {
 })
 
 describe('005K §20 hard negatives: the rule never bridges these', () => {
+  it('one jamb a crossing wall, not a stretch of this one: a line drawn across is refused by the along-jamb test (council A6)', () => {
+    const r = sheet(460, 260)
+    wall(r, 20, 100, 149, 111)
+    wall(r, 190, 40, 201, 220)
+    drawLine(r, 150, 110, 189, 110, BLACK)
+    const { off, on } = both(r)
+    expect(off.boundary).toBe('WEAK')
+    expect(off.jambs).toEqual(['WALL', 'WALL'])
+    expect(off.trace?.jambAlong).toEqual([true, false])
+    expect(off.trace?.drawnGapRule).toMatchObject({ wallJambs: true, alongJambs: false, withinLintel: true, drawn: true, inWallBand: true, jambInk: true, eligible: false })
+    expect(on.boundary).toBe('WEAK')
+  })
+
   it('M1 safety: a blank door-sized gap — a doorway or the mouth of a recess — is never drawn evidence', () => {
     const { off, on } = both(facade(150, 169))
     expect(off).toMatchObject({ signature: 'BLANK', boundary: 'WEAK', trace: { reasons: ['NOTHING_DRAWN_WITHIN_LINTEL'] } })
