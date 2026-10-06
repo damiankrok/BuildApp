@@ -1,0 +1,51 @@
+{
+  "run": "<scratch>/h1-dom-w-gozdzikowcach",
+  "completed": false,
+  "labelledPlanStoreys": [
+    "ATTIC",
+    "GROUND"
+  ],
+  "publishedFootprintM2": 132.52,
+  "checklist": {
+    "noFloorPlan": false,
+    "legibleOverallDimension": {
+      "ocrTokensOnGroundCopies": 148,
+      "tallestPx": 77,
+      "needsRawMeasurement": false
+    },
+    "wallsUnder4pxOnEveryGroundCopy": false,
+    "groundWallPx": [
+      {
+        "frameId": "frame-asset-rzut-01d4b6474c-64bd1e0f2f",
+        "sizePx": {
+          "height": 853,
+          "width": 853
+        },
+        "wallPx": 12
+      }
+    ],
+    "floorPlanAssetsLost": []
+  },
+  "failure": {
+    "code": "RECONSTRUCTION_FAILED",
+    "reasonCode": "PLAN_RESOLUTION_INCONCLUSIVE",
+    "message": "the lowest storey covers 105.47 m² against the 132.52 m² the publisher prints — 20.4% apart: the decomposition is not of this building 23 other readings of the plan were weighed and none holds: the best, copy area_table 4450d384c0, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 131.3 m² (-0.9% of 132.52), UNKNOWN (the figure is spent), corroborated by CROSS_COPY, has only the published footprint behind it, and that figure already refused the first reading, so it cannot also choose the replacement"
+  },
+  "resolution": {
+    "compositions": 1,
+    "copies": 4,
+    "decompositions": 6,
+    "distinctOutlines": 9,
+    "firstReading": "PLAN_LAYOUT_REJECTED",
+    "outcome": "INCONCLUSIVE",
+    "publishedFigure": "SPENT",
+    "reading1": "copy area_table 4450d384c0, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 131.3 m² (-0.9% of 132.52), UNKNOWN (the figure is spent), corroborated by CROSS_COPY",
+    "reading2": "copy dimensioned 64bd1e0f2f, chain extent, registered scale, largest-first tiling, outer faces: 3 bodies, 105.5 m² (-20.4% of 132.52), WRONG, corroborated by CROSS_COPY",
+    "reading3": "copy dimensioned 64bd1e0f2f, chain extent, registered scale, walled-first tiling, sides as gridded: 2 bodies, 101.7 m² (-23.2% of 132.52), WRONG, corroborated by CROSS_COPY",
+    "reading4": "copy dimensioned 64bd1e0f2f, wall-witness extent, registered scale, largest-first tiling, sides as gridded: 1 body, 15.0 m² (-88.7% of 132.52), WRONG",
+    "readings": 23,
+    "resolverVersion": "1.4.0"
+  },
+  "challenge": null,
+  "verdict": "ALGORITHMIC_FAIL"
+}

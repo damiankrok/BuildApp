@@ -1,0 +1,76 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": 30,
+  "assetsByDocument": {
+    "ELEVATION": 4,
+    "FLOOR_PLAN": 8,
+    "PERSPECTIVE_RENDER": 15,
+    "SECTION": 1,
+    "SITE_PLAN": 1,
+    "UNKNOWN": 1
+  },
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-gozdzikowcach-3-m79923e950094d",
+  "contentHash": "37be1543b0a9ae16b522ab864efd83f09653641c58bb308713c434d42541ad12",
+  "failuresByCode": {
+    "BYTE_IDENTICAL": 5,
+    "HTTP_STATUS": 9
+  },
+  "note": "facts and hashes only; no publisher drawing, page or render is in this pack",
+  "packageId": "src-m79923e950094d-638538962a",
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "unit": "m2",
+      "value": 10.21
+    },
+    {
+      "key": "building_height",
+      "unit": "m",
+      "value": 8.68
+    },
+    {
+      "key": "floor_area",
+      "unit": "m2",
+      "value": 202.59
+    },
+    {
+      "key": "footprint_area",
+      "unit": "m2",
+      "value": 132.52
+    },
+    {
+      "key": "garage_area",
+      "unit": "m2",
+      "value": 25.38
+    },
+    {
+      "key": "house_net_area",
+      "unit": "m2",
+      "value": 146.09
+    },
+    {
+      "key": "roof_area",
+      "unit": "m2",
+      "value": 224.96
+    },
+    {
+      "key": "total_area",
+      "unit": "m2",
+      "value": 261.73
+    },
+    {
+      "key": "usable_area_without_stairs",
+      "unit": "m2",
+      "value": 177.86
+    },
+    {
+      "key": "volume",
+      "unit": "none",
+      "value": 879.71
+    }
+  ],
+  "runId": "h1-dom-w-gozdzikowcach"
+}

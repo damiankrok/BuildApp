@@ -1,0 +1,17 @@
+{
+  "bodies": null,
+  "failure": {
+    "code": "RECONSTRUCTION_FAILED",
+    "message": "the lowest storey covers 105.47 m² against the 132.52 m² the publisher prints — 20.4% apart: the decomposition is not of this building 23 other readings of the plan were weighed and none holds: the best, copy area_table 4450d384c0, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 131.3 m² (-0.9% of 132.52), UNKNOWN (the figure is spent), corroborated by CROSS_COPY, has only the published footprint behind it, and that figure already refused the first reading, so it cannot also choose the replacement",
+    "reasonCode": "PLAN_RESOLUTION_INCONCLUSIVE"
+  },
+  "footprintResidualPct": null,
+  "levels": [],
+  "lowestStoreyFootprintM2": null,
+  "modelHash": null,
+  "openings": null,
+  "publishedFootprintM2": 132.52,
+  "result": "FAILED",
+  "sceneSha256": null,
+  "walls": null
+}

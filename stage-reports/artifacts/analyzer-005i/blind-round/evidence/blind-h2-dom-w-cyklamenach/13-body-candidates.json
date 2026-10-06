@@ -1,0 +1,84 @@
+{
+  "bays": [],
+  "bodies": [],
+  "completions": [
+    {
+      "areaBeforeM2": 40.437992,
+      "areaM2": 40.437992,
+      "decision": "REJECTED",
+      "evidence": {
+        "chains": 1,
+        "glazing": 0,
+        "returns": 0,
+        "strictEncloses": false,
+        "vehicleDoors": 0
+      },
+      "id": "completion-0",
+      "junction": {
+        "doorM": 0,
+        "lengthM": 12.790726,
+        "openM": 5.11868
+      },
+      "kind": "BOX_COMPLETION",
+      "reason": "NO_CONTINUATION: 5.12 m of open edge with the built rooms of 12.79 m shared — walled off from them, not their end",
+      "rect": {
+        "x0": 131,
+        "x1": 406.5,
+        "y0": 195.5,
+        "y1": 576
+      },
+      "rectBefore": {
+        "x0": 131,
+        "x1": 406.5,
+        "y0": 195.5,
+        "y1": 576
+      },
+      "sides": {
+        "lengthM": 13.825924,
+        "postShare": 0,
+        "wallShare": 0.749273
+      },
+      "weakGaps": [
+        {
+          "jambs": [
+            "WALL",
+            "WALL"
+          ],
+          "signature": "DASHED",
+          "vehicleDoor": false,
+          "widthM": 1.783936
+        },
+        {
+          "jambs": [
+            "WALL",
+            "WALL"
+          ],
+          "signature": "LEAF_FACE",
+          "vehicleDoor": false,
+          "widthM": 1.662304
+        }
+      ]
+    }
+  ],
+  "frameId": "frame-asset-rzut-fa38f527ea-8e7eb2ad66",
+  "masses": [
+    {
+      "id": "mass-0",
+      "rect": {
+        "x0": 406.5,
+        "x1": 580,
+        "y0": 195.5,
+        "y1": 694
+      }
+    },
+    {
+      "id": "mass-1",
+      "rect": {
+        "x0": 131,
+        "x1": 406.5,
+        "y0": 576,
+        "y1": 694
+      }
+    }
+  ]
+}

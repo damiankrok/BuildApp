@@ -1,0 +1,158 @@
+{
+  "callouts": [
+    {
+      "box": {
+        "x0": 64,
+        "x1": 90,
+        "y0": 393,
+        "y1": 419
+      },
+      "id": "metric-callout-ring-2029e4fa7a",
+      "rawText": "700/40",
+      "value": 700
+    },
+    {
+      "box": {
+        "x0": 647,
+        "x1": 673,
+        "y0": 393,
+        "y1": 419
+      },
+      "id": "metric-callout-ring-417f68686e",
+      "rawText": "190/400",
+      "value": 190
+    },
+    {
+      "box": {
+        "x0": 196,
+        "x1": 220,
+        "y0": 187,
+        "y1": 211
+      },
+      "id": "metric-callout-ring-4bb6ff9145",
+      "rawText": "460/40",
+      "value": 460
+    },
+    {
+      "box": {
+        "x0": 495,
+        "x1": 513,
+        "y0": 315,
+        "y1": 333
+      },
+      "id": "metric-callout-ring-5ecf4baad8",
+      "rawText": "406/400",
+      "value": 406
+    },
+    {
+      "box": {
+        "x0": 497,
+        "x1": 517,
+        "y0": 448,
+        "y1": 468
+      },
+      "id": "metric-callout-ring-748f3ec1ae",
+      "rawText": "116/111",
+      "value": 116
+    },
+    {
+      "box": {
+        "x0": 360,
+        "x1": 384,
+        "y0": 188,
+        "y1": 212
+      },
+      "id": "metric-callout-ring-75754a750d",
+      "rawText": "416/42",
+      "value": 416
+    },
+    {
+      "box": {
+        "x0": 144,
+        "x1": 170,
+        "y0": 600,
+        "y1": 626
+      },
+      "id": "metric-callout-ring-ba1359980c",
+      "rawText": "700/40",
+      "value": 700
+    },
+    {
+      "box": {
+        "x0": 169,
+        "x1": 187,
+        "y0": 568,
+        "y1": 586
+      },
+      "id": "metric-callout-ring-c5543c6ded",
+      "rawText": "406/400",
+      "value": 406
+    },
+    {
+      "box": {
+        "x0": 64,
+        "x1": 88,
+        "y0": 550,
+        "y1": 574
+      },
+      "id": "metric-callout-ring-dbb97112bf",
+      "rawText": "416/147",
+      "value": 416
+    },
+    {
+      "box": {
+        "x0": 561,
+        "x1": 585,
+        "y0": 187,
+        "y1": 211
+      },
+      "id": "metric-callout-ring-e577723b76",
+      "rawText": "616/400",
+      "value": 616
+    },
+    {
+      "box": {
+        "x0": 515,
+        "x1": 539,
+        "y0": 601,
+        "y1": 625
+      },
+      "id": "metric-callout-ring-fcc74e2d4b",
+      "rawText": "176/140",
+      "value": 176
+    }
+  ],
+  "frameId": "frame-asset-rzut-01d4b6474c-64bd1e0f2f",
+  "gapClasses": {
+    "DRAWING_BREAK_SUPPORTED": 270,
+    "OPENING_SUPPORTED": 14,
+    "TRUE_EXTERIOR_GAP": 103,
+    "UNKNOWN_GAP": 28
+  },
+  "wideOpenings": [
+    {
+      "axis": "X",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 362,
+      "id": "opening-0",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 311,
+      "score": 0.793785,
+      "toPx": 516,
+      "why": "a 3.88 m gap between two pieces of one wall with nothing drawn across it, but behind it lies 45.2 m² that is shut on every other side — the building's interior, not a 37.6 m² pocket — so the wall carries on across it",
+      "widthM": 3.880646
+    },
+    {
+      "axis": "Y",
+      "decision": "OPEN_SIDE",
+      "fromPx": 284,
+      "id": "opening-1",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 598,
+      "score": 0.577778,
+      "toPx": 590,
+      "why": "a 7.76 m gap between two pieces of one wall, wider than a lintel conventionally spans, with only 39% of it drawn across: where the wall stops; behind it lies only a 71.1 m² pocket (a porch, a loggia, a recess), no deeper than such a mouth leads to",
+      "widthM": 7.755264
+    }
+  ]
+}

@@ -1,0 +1,219 @@
+{
+  "counts": {
+    "events": 529,
+    "files": 34
+  },
+  "evidenceModeVersion": "1.1.0",
+  "failureCode": "PLAN_RESOLUTION_INCONCLUSIVE",
+  "files": [
+    {
+      "bytes": 1549,
+      "name": "00-source-summary.json",
+      "sha256": "c42bf63835ffa1c30a533c32ea17763474401a95be62f12fa1a3a226ecc64aa1"
+    },
+    {
+      "bytes": 6978,
+      "name": "01-page-classification.json",
+      "sha256": "7599c3c18352d29bcace5b3be97adf1ba1544cd5043358b255dd4cf01533a58d"
+    },
+    {
+      "bytes": 25042,
+      "name": "02-asset-inventory.json",
+      "sha256": "2980c9794eb12c9ffdc720ab5a771646e88fb4b0810367d4cd81d9d623189859"
+    },
+    {
+      "bytes": 854,
+      "name": "03-plan-frame.json",
+      "sha256": "6fd14416aade44aec142864686e1d0b2fbdfd157fee7ba160cae63bde0aec043"
+    },
+    {
+      "bytes": 1454,
+      "name": "03-plan-frame.svg",
+      "sha256": "1e49a46fca97ebe792f7ab22ed9e6346006f6dce21e693fa46f3905c68d558db"
+    },
+    {
+      "bytes": 8169,
+      "name": "04-wall-bands.json",
+      "sha256": "360d61bed59ab81e6fcca0f8479a2e1cc280bd137fd53f5bff197f5c2af887e8"
+    },
+    {
+      "bytes": 4574,
+      "name": "04-wall-bands.svg",
+      "sha256": "5ff85fbfa62269b33012ab5434551ce1c5766ff1d8608787244bd82460f0806c"
+    },
+    {
+      "bytes": 21065,
+      "name": "05-dimension-lines.json",
+      "sha256": "00edffd673569d38276125c4e9a33eb72e7fe3393f1c52971091a91885e88e55"
+    },
+    {
+      "bytes": 13557,
+      "name": "05-dimension-lines.svg",
+      "sha256": "ca95c026109e9b8a05f6f86514ea1df0f9818c2bec4afea66c2650652993f302"
+    },
+    {
+      "bytes": 38222,
+      "name": "06-tick-candidates.json",
+      "sha256": "217a71216df66fe39ac39ad63cbc68fb54826db07629ab3940ece6546e0c868d"
+    },
+    {
+      "bytes": 24518,
+      "name": "06-tick-candidates.svg",
+      "sha256": "10569fb13ef1f7dca1393a1765905cab837e907d6801e8f614b7137b4c153ed4"
+    },
+    {
+      "bytes": 651747,
+      "name": "07-ocr-labels.json",
+      "sha256": "716cf840c008a6e3a025fcafcf7568220e4292b3c5f7c491bc06c403e4517c93"
+    },
+    {
+      "bytes": 59556,
+      "name": "07-ocr-labels.svg",
+      "sha256": "65cc407fcc403773952850c8a4a50b95977bd68a3427293eb1e1f680d2eac9bb"
+    },
+    {
+      "bytes": 18598,
+      "name": "07b-dimension-topology.json",
+      "sha256": "b3172e30b89453ac6d2c6ecb3d3b0a397307c20ad6c59b151c31bd980684121f"
+    },
+    {
+      "bytes": 13414,
+      "name": "07b-dimension-topology.svg",
+      "sha256": "b075958102bc8881aa38adf231cabf2ee77b946533805675cfbf38dea344a00f"
+    },
+    {
+      "bytes": 28236,
+      "name": "08-dimension-span-hypotheses.json",
+      "sha256": "cf5466e4178463710fb1ac520cf9689fb8dbf26f4582f97d6ddc9e95d5dc39bb"
+    },
+    {
+      "bytes": 4622,
+      "name": "08-dimension-span-hypotheses.svg",
+      "sha256": "1ae946872f2ba6dfe464c4e81ac2f948aa7c82c7ce8a80d88e195221f263f66f"
+    },
+    {
+      "bytes": 5829,
+      "name": "09-scale-hypotheses.json",
+      "sha256": "f356265d78cac3b7440128d75f0fa43ecaf97693f937cdfe8ce309971eb1c925"
+    },
+    {
+      "bytes": 2457,
+      "name": "09-scale-hypotheses.svg",
+      "sha256": "b56818eeca21186453b87c72f596f026c93bdc99405a8360b2f2734be253f918"
+    },
+    {
+      "bytes": 1218,
+      "name": "10-extent-hypotheses.json",
+      "sha256": "44f3ecbe975bcfa21b67d500ed4b1e89337d762e7c4bbfc2b7342c9fecf4848d"
+    },
+    {
+      "bytes": 397,
+      "name": "10-extent-hypotheses.svg",
+      "sha256": "f23820f5a487c7c0cce92b15d709ea41433971e19e5ccdbf0df32835733b3094"
+    },
+    {
+      "bytes": 1352,
+      "name": "11-envelope-candidates.json",
+      "sha256": "0b1ff2dfe4c8da8508f65c124449831ed165ce9e6e383e0efbb1966be3da8a16"
+    },
+    {
+      "bytes": 3116,
+      "name": "11-envelope-candidates.svg",
+      "sha256": "2dc9d41d0bd5427afb80c5041e2b9e9bb13f035eb23f914c4de9a88b49efca8d"
+    },
+    {
+      "bytes": 1057,
+      "name": "12-opening-observations.json",
+      "sha256": "2fd282bb7fdd01feacbc63fe6af6c5f387718a61d14cd056086398d4b0ae0575"
+    },
+    {
+      "bytes": 800,
+      "name": "12-opening-observations.svg",
+      "sha256": "d81db1c6c0774470d2fb362d9fbfbf0390334ad23a5dfe749bb2af55816aaa6b"
+    },
+    {
+      "bytes": 1688,
+      "name": "13-body-candidates.json",
+      "sha256": "f8569f284addf6c3371eef3e45471e921f2192e821c5ad846853070861044c5a"
+    },
+    {
+      "bytes": 782,
+      "name": "13-body-candidates.svg",
+      "sha256": "2ec68323695c68dd60cecd48e7f6ae78e03419c23843f0dbad29f7bf81dc2eaf"
+    },
+    {
+      "bytes": 808,
+      "name": "14-selected-layout.json",
+      "sha256": "bb4f90522cf45fed35bb9c22ea71e2da41cdd2de132df3941a5d0cfcacd39b17"
+    },
+    {
+      "bytes": 799,
+      "name": "14-selected-layout.svg",
+      "sha256": "daeced48602db52237fd596aaa4b65eba8252960172af3be2a8dda0d48aa4374"
+    },
+    {
+      "bytes": 873,
+      "name": "15-canonical-model-summary.json",
+      "sha256": "21ff1f4c7b0af9451df9aae778ab8fc4fc66f1f65100b761760e9a5aaa438c05"
+    },
+    {
+      "bytes": 4984,
+      "name": "17-evidence-trace.json",
+      "sha256": "1a00be3c1cbf45315b150b4ba73ba566a6bead8f49e7ffcb74b602104983a5b4"
+    },
+    {
+      "bytes": 298032,
+      "name": "18-decision-timeline.json",
+      "sha256": "8cd0da8795911a9dcda5bfb4cbee48706e22a54ebbc398f9086427c135614af9"
+    },
+    {
+      "bytes": 1418,
+      "name": "README.md",
+      "sha256": "c9a2d2f8e7c7a2c0cc24fe66320d72379e9ba883e20eda045aada7a6e150fb26"
+    },
+    {
+      "bytes": 4595,
+      "name": "evidence-summary.svg",
+      "sha256": "d8387d7eebb7093fe43189ee920f1ed9266118bf1554d92897360d9eb3e54b6d"
+    }
+  ],
+  "firstWarning": null,
+  "gitSha": "0c67728b78fcbeb136f810094d22cd3f4568b7c4",
+  "hashes": {
+    "candidate": null,
+    "metricEvidence": "ca444bccea70161ba1cb6876da327fc0853675cbcc8ac898560375043408c48f",
+    "model": null,
+    "scene": null,
+    "sceneContent": null,
+    "sourcePackage": "632595c507b45d1f30b3b0436c962311d68805de537daf2a388bdfa69ca2f8f1"
+  },
+  "result": "FAILED",
+  "runId": "h2-dom-w-cyklamenach",
+  "schema": "buildapp.evidence-pack",
+  "selectedPlanFrameId": "frame-asset-rzut-fa38f527ea-8e7eb2ad66",
+  "versions": {
+    "adapter:archon.pl": "1.0.0",
+    "analysis-service": "1.1.0",
+    "boundary-evidence": "1.1.0",
+    "evidence-pack": "1.1.0",
+    "generic-reader": "1.2.0",
+    "metric-evidence-schema": "1.7.0",
+    "metrics.axis-aligned-affine": "1",
+    "metrics.axis-topology": "1.1.0",
+    "metrics.chain-solver": "1.4.0",
+    "metrics.dimension-lines": "1.4.0",
+    "metrics.dimension-topology": "1.2.0",
+    "metrics.independent-scale": "1.4.0",
+    "metrics.numeric-lattice": "1.2.0",
+    "metrics.numeric-ocr": "1.4.0",
+    "metrics.ocr-ensemble": "1.0.0",
+    "plan-extent": "1.0.0",
+    "plan-resolver": "1.4.0",
+    "published-specification-reader": "1.0.0",
+    "recogniser": "ocr.ppocrv6-tiny-rec@9ef676d6",
+    "recogniser-model-sha256": "9ef676d6ed3c88256a2d92c640c44f25b0c40947e111b14b8be8f594091563e6",
+    "recogniser-runtime": "onnxruntime-web@1.30.0/wasm-simd/1-thread",
+    "recogniser-runtime-sha256": "3398c10d07d229bd91b364548e130e0e51a8e5704b88c7c083ebbeb78842dee2",
+    "solver-v2": "2.3.0"
+  }
+}

@@ -42,6 +42,7 @@
 | STAGE BUILDPLAN-ANALYZER-005F — ADAPTIVE GLYPH-COUNT SEGMENTATION + EXTENT-CONSISTENT ENVELOPE | `analyzer/adaptive-segmentation-envelope-v1` (from `analyzer/numeric-ocr-lattice-v1` @ `9b619ec`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | reviews `e6f76d2`; count hypotheses `5eb2a5b`; typed refusal `8906546`; extent conflict and completions `177dfca`; pack layers `489e2b5`; class bars `d910212`; post-review `4fd2f8e`, `65ebbdd`, `2e1889a`, `ac5c5fc`, `f64fda9`, `41e26be` (the matrix's finding); matrix and evidence `65ae015` = **PRE_HOLDOUT_6_SHA** (CI run 145 green); round-6 draw `951a4d0`; sealed blind runs `43c6670`; report and status `05c53c5` (CI run 149 red: the hard-code guard read the preposition in a sealed blind name; one UI-gate timeout); the guard's registry fix `6b22582` (test only) = final build (CI run 151 green at the first attempt, the `workflow_dispatch` with the OWNER APK, versionCode 1151); the APK record: the commit after it | Ten verdicts (§ "Where glyph counts and the envelope stand"): **ADAPTIVE GLYPH-COUNT SEGMENTATION: PARTIAL**; **CONDENSED NUMERIC LABEL RECALL: PARTIAL**; **NUMERIC OCR NON-CIRCULARITY: PASS**; **EXTENT-CONSISTENT ENVELOPE: PARTIAL**; **ATTACHED BODY COMPLETION: PARTIAL**; **TERRACE / FALSE-CLOSURE SAFETY: PASS**; **ANALYZER EVIDENCE PACK: PASS**; **CURRENT e-OZE: PASS**; **BLIND ROUND 6 PROJECT 1 (`dom-pod-milorzebem`): ALGORITHMIC_FAIL** (a confident misread at the right count; refused, no scale adopted); **BLIND ROUND 6 PROJECT 2 (`dom-w-helikoniach`): ALGORITHMIC_FAIL** (upper-plan scale; ground outline). Morelach is fixed generically (−11.54 % → −3.12 %, PASS); modrzewnicy is not (its count is right, its `9` still reads `4`). Not patched; next-stage input. The terminal line is PARTIAL |
 | STAGE BUILDPLAN-ANALYZER-005G — OPEN-SOURCE ANALYZER TECHNOLOGY AUDIT + CONTROLLED BAKE-OFF | `analyzer/open-source-technology-audit-v1` (from `analyzer/adaptive-segmentation-envelope-v1` @ `6b4ab1f`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | audit, research harness and report: the commits after `6b4ab1f` on the branch (`git log analyzer/open-source-technology-audit-v1 ^6b4ab1f`); CI run 153 green on `2c6b615`; the CI record: the commit after it | **PASS_BUILDPLAN_ANALYZER_005G_OPEN_SOURCE_TECH_AUDIT_READY_FOR_COORDINATOR** — audit and bake-off only, **no production change** (§ "Where the open-source technology audit stands"). On the same 775 crops (103 real, 672 synthetic) the production reader trusts 309 readings and 75 are wrong; PaddleOCR PP-OCRv6 tiny (official ONNX, Apache-2.0, 4.46 MB) is wrong in 4 of 707 (real: 103/103 exact, 0 of 99). It runs as ONNX Runtime Web (WASM) inside the existing Node-18 analyzer bundle, bit-identical across Node 18/22 and arm64 V8. **ADOPT_NEXT:** PP-OCRv6 tiny on onnxruntime-web, as an ensemble member with a stability bracket (005H). PILOT: PDF.js document evidence (after 005H). REJECT: ONNX Runtime Android (telemetry provider + permissions ≥ 1.29, second engine), Tesseract, ML Kit, OpenCV Android, every pretrained floor-plan model (weights/data) |
 | STAGE BUILDPLAN-ANALYZER-005H — EXTERNAL NUMERIC RECOGNISER ENSEMBLE + ARM64 DEVICE PARITY + FRESH BLIND ROUND | `analyzer/external-numeric-recogniser-v1` (from `analyzer/open-source-technology-audit-v1` @ `c6fe174`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | recogniser, seam, rule, packaging, self-test, tests, CI `d04ebc4` (CI 155 red: a bundle job without the model); red-team fixes `d14304c` (CI 156 red: the worker's loader copy under `/tmp` on Android); the Android loader copy and coded failures `5315ff8` = **PRE_HOLDOUT_7_SHA** (CI run 157 green); round-7 draw `6e931ee`; blind runs, parity, measurements `85ccf42`; report and status `863b525` = final build (CI run 160 green at the first attempt, the `workflow_dispatch` with the OWNER APK, versionCode 1160, APK sha256 `c9cf22da…`); the APK record: the commit after it | Eleven verdicts (§ "Where the external numeric recogniser stands"): **EXTERNAL NUMERIC RECOGNISER INTEGRATION: PASS**; **OCR ENSEMBLE NON-CIRCULARITY: PASS**; **NUMERIC TARGET LABELS: PARTIAL**; **NODE PARITY: PASS**; **X86 EMULATOR PARITY: PASS**; **ARM64 DEVICE PARITY: PENDING** (no phone reachable; QEMU arm64 MATCH is supplementary only); **OCR MEMORY / LIFECYCLE: PASS**; **EVIDENCE PACK: PASS**; **CURRENT e-OZE: PASS**; **BLIND ROUND 7 PROJECT 1 (`dom-pod-jarzabem`): ALGORITHMIC_FAIL** (label binding between parallel chains; not OCR); **BLIND ROUND 7 PROJECT 2 (`dom-w-arkadiach`): PASS** (decided by the external reader). The terminal line is PARTIAL |
+| STAGE BUILDPLAN-ANALYZER-005I — PARALLEL DIMENSION TOPOLOGY + BOUNDARY OBSERVATION BAKE-OFF + FRESH BLIND ROUND 8 | `analyzer/dimension-topology-boundary-bakeoff-v1` (from `analyzer/external-numeric-recogniser-v1` @ `29ab643`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | topology `c150896`; council fixes `bc22547`, `16bcd73`, `c0ad2e8` (the frozen production code); Track B research `c90ffd9` … `bfcfb1f`; development matrix and records `869cb01` = **PRE_HOLDOUT_8_SHA** (CI run 169 green); round-8 draw `0c67728`; blind round, report and status: the commits after it; the final CI with the OWNER APK: the `workflow_dispatch` on the report commit (recorded in the commit after it) | **DIMENSION TOPOLOGY: PARTIAL** — the blind-7 label-binding defect is fixed generically and `dom-pod-jarzabem` now completes; OCR byte-identical; no development verdict changed; but both blind-8 houses are ALGORITHMIC_FAIL on boundary interpretation downstream of a correct metric. **BOUNDARY OBSERVATION BAKE-OFF: PASS_RESEARCH**, BEST_BOUNDARY_CANDIDATE **NONE** (ELSED DEFER, DeepLSD REJECT, MobileSAM REJECT), PRODUCTION_INTEGRATION NONE_IN_005I. INHERITED ARM64 DEVICE PARITY: PENDING. Terminal line PARTIAL (§ "Where the dimension topology and the boundary bake-off stand") |
 ## Current capabilities
 
 - **CanonicalBuildingModel** (`packages/model`): versioned Zod schema
@@ -1204,7 +1205,98 @@ zgodności odczytu wymiarów").
 `.so`, preview signer `6e48fac4…`, model `9ef676d6…` and WASM `3398c10d…` inside, verified from the downloaded file
 (report §R).
 
+## Where the dimension topology and the boundary bake-off stand (STAGE BUILDPLAN-ANALYZER-005I)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005I_DIMENSION_TOPOLOGY_BOUNDARY_BAKEOFF.md`. Evidence:
+`stage-reports/artifacts/analyzer-005i/`:
+
+- architecture and baseline;
+- the synthetic corpus record, mutation results, order invariance and performance;
+- the development matrix and OCR regression;
+- the post-review folder (five reviews and the resolution);
+- the boundary bake-off (`boundary-bakeoff/`, research only);
+- blind round 8 (draw, runs, verdicts, diagnosis and the two Evidence Packs).
+
+**What exists.** Between pixels and metric evidence there is now a dimension-topology layer (`source-metrics`), and it
+emits no building dimension:
+
+- ink a crossing mark owes to printed numerals along the line is not a tick (`TEXT_INK`);
+- every label is given every line it could belong to, with the page side of its ink and the sheet's own side
+  convention, and neighbourhoods of competing labels are assigned exactly, refusing ties;
+- parallel lines form axis groups with nesting relations;
+- `planExtent` keeps an unread short end span the drawing states, and lets walls only refute a framed side, making the
+  frame weak.
+
+All of it is in the metric evidence 1.7.0 / 1.8.0 and its hash, and in the Evidence Pack 1.1.0 (`07b-dimension-topology`).
+
+- **PARALLEL DIMENSION AXES — PASS.** Axis groups with distinct members, separations, `SUBDIVIDES` / `CONTAINS` /
+  `OVERLAPS` and aligned ends, canonical in line order.
+- **TEXT / TICK SEPARATION — PASS.** Both sides label ink → REJECTED, one side → at most QUESTIONABLE; a stroke reaching
+  the line keeps its class; numerals printed along the line only.
+- **GLOBAL LABEL BINDING — PASS.** Exact per neighbourhood, canonical, AMBIGUOUS bound to nothing; work-bounded (an
+  over-bound neighbourhood is a recorded gap) with a heartbeat. On the development sheets the largest neighbourhood is
+  7 labels.
+- **SHORT END SPANS — PASS.** Kept when ticked and labelled, or when a neighbouring line ends there; every keep or trim
+  is recorded. Known limit: A7 (an unlabelled one shorter than two walls is still trimmed).
+- **EXTENT REFUTATION — PASS.** Two walls running past a framed side move it only to where a dimension line ends,
+  otherwise DOWNGRADED; either way the frame is weak; outer-total sides are never asked.
+- **OCR 005H REGRESSION — PASS.** Every OCR token and numeric lattice on 24 development rows byte-identical to 005H.
+- **DOM-POD-JARZABEM — FIXED, still ALGORITHMIC_FAIL.** The old first bad decision (label ink as ticks → greedy
+  binding → end-stub trim) is gone: it completes, 1 body, 191.0 m² (−11.88 % of 216.76). New first bad decision
+  BODY_RELATION: a recessed entrance strip left unbuilt.
+- **DOM-W-ARKADIACH — PASS, not regressed.** −0.49 %, model identical to the blind run.
+- **DEVELOPMENT MATRIX — PASS.** 24 rows, no verdict or verdict condition changed, 20 models byte-identical; four
+  movements explained:
+  - jarzabem: the target fix;
+  - e-OZE: +1.57 %, now CONFIRMED where 005H REPLACED;
+  - morelach: −2.17 %, fewer openings;
+  - helikoniach: footprint unchanged, fewer openings.
+- **BOUNDARY BAKE-OFF — PASS_RESEARCH.**
+  - Line providers add 0.00 m of ink-supported exterior wall beyond source-cv on all 7 real houses.
+  - MobileSAM's box mask adds +0.005 mean IoU over the box it is prompted with, and brings false evidence.
+  - The documented boundary failures are interpretation, not perception.
+  - BEST_BOUNDARY_CANDIDATE **NONE**.
+- **DEEPLSD — REJECT.** It adds no supported coverage and adds distractors (up to 27.8 m per house). Its LSD step is
+  AGPL-3.0+, its weights come from an unofficial mirror, its refiner carries a research-only, patent-noticed library
+  and is not reproducible, and it would cost ≥ +81 % of the APK.
+- **ELSED — DEFER.** Apache-2.0, 13 ms, adds nothing on real plans, gains only on a 45° bay. Revisit only if oblique
+  facades enter the development set, by porting the algorithm — never by packaging OpenCV.
+- **MOBILESAM — REJECT.** The box mask is the box (+0.005 IoU, sign fragile). It has 15 false gap bridges against 7 for
+  source-cv, inherits metric defects, would cost +93 % of the APK, and its training data carries a research licence.
+- **RESEARCH / PRODUCTION ISOLATION — PASS.** `tests/architecture/research-isolation.test.ts`: no production source,
+  runner, build script, manifest or Gradle file names or imports research; no checkpoint is tracked; the APK carries
+  no research asset.
+- **LICENSING — PASS (research).** Code, weights and data split per provider, with refine-path and tooling licences;
+  nothing redistributed.
+- **POST-IMPLEMENTATION COUNCIL — PASS after fixes.** Five reviewers, no P0, six P1, all fixed and held by tests.
+- **BLIND ROUND 8 PROJECT 1 (`dom-w-gozdzikowcach`) — ALGORITHMIC_FAIL.** `PLAN_RESOLUTION_INCONCLUSIVE`, 105.47 vs
+  132.52 m²; metric CONFIRMED and extent right. FIRST_BAD_DECISION **BODY_RELATION**: a recessed entrance porch
+  between two wings, merged with the garage door into one 7.76 m OPEN_SIDE, leaves the hall and stair out.
+- **BLIND ROUND 8 PROJECT 2 (`dom-w-cyklamenach`) — ALGORITHMIC_FAIL.** `PLAN_RESOLUTION_INCONCLUSIVE`, 49.20 vs
+  92.48 m²; metric CONFIRMED and extent right. FIRST_BAD_DECISION **BOUNDARY**: window glazing next to a textured
+  terrace read as a pattern, and the 40 m² living-room block's completion rejected as NO_CONTINUATION.
+- **INHERITED ARM64 DEVICE PARITY — PENDING.** No phone result was supplied; the 005H self-test is unchanged in the app.
+- **Stage: PARTIAL** (`PARTIAL_BUILDPLAN_ANALYZER_005I_BLIND_8_BOUNDARY_INTERPRETATION_FAIL`). Not patched after the
+  draw. Both round-8 families join the development set. Disclosed in the blind README: round 8's exclusion swept only
+  round 7's linked families; the next round should sweep every development page's links.
+
+**CI:** run 169 (`37464801271`) on `869cb01` (PRE_HOLDOUT_8_SHA) green. **Final CI and OWNER APK:** the `workflow_dispatch` (`owner_apk`) on the report commit; verified from the downloaded file and recorded in the report §T.
+
 ## Recommended technical next step
+
+**For the analyzer line (after 005I): return to the coordinator.** No boundary provider earned ADOPT_NEXT, so by the
+005I brief (§59) the route is **PATH B — the PDF.js vector-document evidence pilot**. ELSED stays DEFER.
+
+The analyzer's measured failures after 005I are boundary interpretation, not perception and not dimension topology.
+They are the resolver's next inputs whichever path is chosen, and all of their evidence is already in BuildPlan's own
+observations:
+
+- recessed entrances between wings (blind-7 #1, blind-8 #1);
+- glazing against textured fill, and an interior junction read as separating (blind-8 #2).
+
+OWNER: run "Test zgodności odczytu wymiarów" on the arm64 phone.
+
+The 005H recommendation below is answered by 005I (dimension topology on parallel chains).
 
 **For the analyzer line (after 005H): return to the coordinator.** `stage-reports/artifacts/analyzer-005h/recommendation.md`:
 1. keep the recogniser and the P2 rule as they are;

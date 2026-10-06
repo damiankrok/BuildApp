@@ -1,0 +1,76 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": 20,
+  "assetsByDocument": {
+    "ELEVATION": 2,
+    "FLOOR_PLAN": 8,
+    "PERSPECTIVE_RENDER": 6,
+    "SECTION": 1,
+    "SITE_PLAN": 1,
+    "UNKNOWN": 2
+  },
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-cyklamenach-3-s-ver-3-m1b323a6595d29",
+  "contentHash": "632595c507b45d1f30b3b0436c962311d68805de537daf2a388bdfa69ca2f8f1",
+  "failuresByCode": {
+    "BYTE_IDENTICAL": 3,
+    "HTTP_STATUS": 9
+  },
+  "note": "facts and hashes only; no publisher drawing, page or render is in this pack",
+  "packageId": "src-m1b323a6595d29-368a040bc0",
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "unit": "m2",
+      "value": 8.64
+    },
+    {
+      "key": "building_height",
+      "unit": "m",
+      "value": 8.72
+    },
+    {
+      "key": "floor_area",
+      "unit": "m2",
+      "value": 144.86
+    },
+    {
+      "key": "footprint_area",
+      "unit": "m2",
+      "value": 92.48
+    },
+    {
+      "key": "garage_area",
+      "unit": "m2",
+      "value": 18.48
+    },
+    {
+      "key": "house_net_area",
+      "unit": "m2",
+      "value": 109.63
+    },
+    {
+      "key": "roof_area",
+      "unit": "m2",
+      "value": 149.2
+    },
+    {
+      "key": "total_area",
+      "unit": "m2",
+      "value": 184.96
+    },
+    {
+      "key": "usable_area_without_stairs",
+      "unit": "m2",
+      "value": 133.22
+    },
+    {
+      "key": "volume",
+      "unit": "none",
+      "value": 642.24
+    }
+  ],
+  "runId": "h2-dom-w-cyklamenach"
+}

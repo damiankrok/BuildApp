@@ -1,0 +1,129 @@
+{
+  "frames": [
+    {
+      "chains": [
+        {
+          "chainId": "chain-horizontal-273-6b543c8ccb",
+          "labels": [
+            "label:chain-horizontal-273-6b543c8ccb:HORIZONTAL:463"
+          ],
+          "marks": [
+            "tick:chain-horizontal-273-6b543c8ccb:155.5",
+            "tick:chain-horizontal-273-6b543c8ccb:182",
+            "tick:chain-horizontal-273-6b543c8ccb:198",
+            "tick:chain-horizontal-273-6b543c8ccb:221",
+            "tick:chain-horizontal-273-6b543c8ccb:279"
+          ],
+          "primary": []
+        },
+        {
+          "chainId": "chain-horizontal-273-be87169146",
+          "labels": [
+            "label:chain-horizontal-273-be87169146:HORIZONTAL:362"
+          ],
+          "marks": [
+            "tick:chain-horizontal-273-be87169146:296",
+            "tick:chain-horizontal-273-be87169146:326",
+            "tick:chain-horizontal-273-be87169146:345",
+            "tick:chain-horizontal-273-be87169146:417.5"
+          ],
+          "primary": [
+            "dim-obs-162-horizontal-37d156d3e9"
+          ]
+        },
+        {
+          "chainId": "chain-horizontal-722-686523194d",
+          "labels": [
+            "label:chain-horizontal-722-686523194d:HORIZONTAL:524",
+            "label:chain-horizontal-722-686523194d:HORIZONTAL:544",
+            "label:chain-horizontal-722-686523194d:HORIZONTAL:317"
+          ],
+          "marks": [
+            "tick:chain-horizontal-722-686523194d:96",
+            "tick:chain-horizontal-722-686523194d:311",
+            "tick:chain-horizontal-722-686523194d:434",
+            "tick:chain-horizontal-722-686523194d:639"
+          ],
+          "primary": [
+            "dim-obs-114-horizontal-580e1e09f3",
+            "dim-obs-50-horizontal-8c5847e0e8",
+            "dim-obs-717-horizontal-4507e2b444"
+          ]
+        },
+        {
+          "chainId": "chain-horizontal-747-fcc98a90c7",
+          "labels": [
+            "label:chain-horizontal-747-fcc98a90c7:HORIZONTAL:1385"
+          ],
+          "marks": [
+            "tick:chain-horizontal-747-fcc98a90c7:96",
+            "tick:chain-horizontal-747-fcc98a90c7:641"
+          ],
+          "primary": [
+            "dim-obs-1385-horizontal-7515dd3321"
+          ]
+        },
+        {
+          "chainId": "chain-horizontal-77-42c16f2606",
+          "labels": [
+            "label:chain-horizontal-77-42c16f2606:HORIZONTAL:44"
+          ],
+          "marks": [
+            "tick:chain-horizontal-77-42c16f2606:115",
+            "tick:chain-horizontal-77-42c16f2606:302.5",
+            "tick:chain-horizontal-77-42c16f2606:490.5"
+          ],
+          "primary": [
+            "dim-obs-16-horizontal-537fdcfa51"
+          ]
+        },
+        {
+          "chainId": "chain-vertical-419-3641c40eae",
+          "labels": [
+            "label:chain-vertical-419-3641c40eae:ROTATED_CCW:362"
+          ],
+          "marks": [
+            "tick:chain-vertical-419-3641c40eae:259.5",
+            "tick:chain-vertical-419-3641c40eae:273",
+            "tick:chain-vertical-419-3641c40eae:295.5",
+            "tick:chain-vertical-419-3641c40eae:308"
+          ],
+          "primary": []
+        },
+        {
+          "chainId": "chain-vertical-720-369dd2c60f",
+          "labels": [
+            "label:chain-vertical-720-369dd2c60f:ROTATED_CW:950"
+          ],
+          "marks": [
+            "tick:chain-vertical-720-369dd2c60f:221",
+            "tick:chain-vertical-720-369dd2c60f:598"
+          ],
+          "primary": [
+            "dim-obs-450-rotated-cw-785fab9d67"
+          ]
+        }
+      ],
+      "envelope": "envelope:frame-asset-rzut-01d4b6474c-64bd1e0f2f",
+      "extent": "extent:frame-asset-rzut-01d4b6474c-64bd1e0f2f",
+      "frameId": "frame-asset-rzut-01d4b6474c-64bd1e0f2f",
+      "masses": [
+        "mass-0",
+        "mass-1",
+        "mass-2"
+      ],
+      "registration": "registration:frame-asset-rzut-01d4b6474c-64bd1e0f2f",
+      "relation": "CONFIRMED/SUPPORTED",
+      "selectedHypothesis": "scale-2-541746-639a5361fb",
+      "witnesses": [
+        "dim-obs-114-horizontal-580e1e09f3",
+        "dim-obs-1385-horizontal-7515dd3321",
+        "dim-obs-50-horizontal-8c5847e0e8",
+        "dim-obs-717-horizontal-4507e2b444"
+      ]
+    }
+  ],
+  "model": null,
+  "runId": "h1-dom-w-gozdzikowcach",
+  "selectedPlanFrameId": "frame-asset-rzut-01d4b6474c-64bd1e0f2f"
+}
