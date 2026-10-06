@@ -387,7 +387,7 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
     chainStep()
     const plausibility = frame.roles.document === 'FLOOR_PLAN' && plane === 'PLAN_XZ' ? planScalePlausibility(mask) : undefined
     chainStep()
-    const solution = solveFrameChains(measured, read.tokens, { tolerancePx, plausibility })
+    const solution = solveFrameChains(measured, read.tokens, { tolerancePx, plausibility, checkpoint })
     if (solution.scaleDecision) {
       const d = solution.scaleDecision
       unresolved.push({
@@ -849,7 +849,8 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
   const draft: MetricEvidenceDraft = {
     schema: 'buildapp.metric-evidence-set',
     // 005H: a set in which the recogniser read at least one label says so in its version, its readers and its
-    // `recogniser`; one it read nothing in — no recogniser, or no dimensioned plan — is a 1.5.0 set, byte for byte.
+    // `recogniser`. 005I: every set carries the dimension topology — 1.8.0 when the recogniser read a label, 1.7.0 when
+    // it read nothing (no recogniser, or no dimensioned plan). Before 005I the latter was a 1.5.0 set.
     schemaVersion: heard > 0 ? METRIC_EVIDENCE_TOPOLOGY_ENSEMBLE_SCHEMA_VERSION : METRIC_EVIDENCE_TOPOLOGY_SCHEMA_VERSION,
     sourcePackageId: options.sourcePackageId,
     sourcePackageHash: options.sourcePackageHash,

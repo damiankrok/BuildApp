@@ -19,7 +19,11 @@
  *     origin, its raw text, the geometry it is attached to and how, the
  *     alternatives it kept, and its confidence;
  *   - each chain: its axis, its ticks, every segment with its value and origin,
- *     the derived total and the scale;
+ *     the derived total and the scale; from 1.7.0 (005I) also what reconstruction
+ *     reads of it — each mark's class and reasons, whether a segment carries a
+ *     bound number, and the chain's place among its neighbours — and every
+ *     frame's dimension topology (post-review D1). A set before 1.7.0 hashes as it
+ *     always did;
  *   - each registration: the plane, both scales, the origin, the flips, every
  *     anchor with its residual, and every anchor that was rejected;
  *   - every conflict and every named gap.
@@ -68,17 +72,26 @@ const evidenceMember = (e: MetricEvidence): unknown => ({
   derivation: e.derivation ? { rawText: e.derivation.rawText, orientation: e.derivation.orientation ?? null, valueText: e.derivation.valueText, substitutions: e.derivation.substitutions, dependsOnScale: e.derivation.dependsOnScale } : null,
 })
 
-const chainMember = (c: DimensionChain): unknown => ({
+const chainMember = (c: DimensionChain, topology: boolean): unknown => ({
   frame: c.frameId,
   axis: c.axis,
   baselinePx: c.baselinePx,
   ticksPx: c.ticksPx,
-  segments: c.segments.map((s) => ({ index: s.index, fromPx: s.fromPx, toPx: s.toPx, pixelLength: s.pixelLength, valueCm: s.valueCm ?? null, origin: s.origin ?? null, confidence: s.confidence, residualCm: s.residualCm ?? null })),
+  segments: c.segments.map((s) => ({ index: s.index, fromPx: s.fromPx, toPx: s.toPx, pixelLength: s.pixelLength, valueCm: s.valueCm ?? null, origin: s.origin ?? null, confidence: s.confidence, residualCm: s.residualCm ?? null, ...(topology ? { labelled: s.labelled === true } : {}) })),
   derivedTotalCm: c.derivedTotalCm ?? null,
   printedTotal: c.printedTotal ? { valueCm: c.printedTotal.valueCm } : null,
   scale: c.scale ?? null,
   closes: c.closes,
+  ...(topology ? { marks: (c.marks ?? []).map((m) => ({ atPx: m.atPx, class: m.class, reasons: [...m.reasons].sort() })), topology: c.topology ?? null } : {}),
 })
+
+/** 1.7.0 (005I): the schema from which the dimension topology is part of a set's identity. */
+const TOPOLOGY_SCHEMA = [1, 7, 0] as const
+const atLeast = (version: string, floor: readonly number[]): boolean => {
+  const v = version.split('.').map(Number)
+  for (let i = 0; i < floor.length; i += 1) if ((v[i] ?? 0) !== floor[i]) return (v[i] ?? 0) > floor[i]
+  return true
+}
 
 const registrationMember = (r: CoordinateRegistration): unknown => ({
   frame: r.variantByteHash,
@@ -124,13 +137,15 @@ const solutionMember = (m: FrameMetricSolution): unknown => ({
 const relationMember = (r: ChainRelation): unknown => r
 
 export function metricEvidenceContentHash(draft: MetricEvidenceDraft): string {
-  return hashArtifact(METRIC_EVIDENCE_SCHEMA, draft.schemaVersion ?? METRIC_EVIDENCE_SCHEMA_VERSION, [
+  const version = draft.schemaVersion ?? METRIC_EVIDENCE_SCHEMA_VERSION
+  const topology = atLeast(version, TOPOLOGY_SCHEMA)
+  return hashArtifact(METRIC_EVIDENCE_SCHEMA, version, [
     { label: 'package', ordered: { id: draft.sourcePackageId, hash: draft.sourcePackageHash } },
     { label: 'observations', ordered: { id: draft.observationGraphId, hash: draft.observationGraphHash } },
     { label: 'extractors', unordered: draft.extractors.map((e) => ({ name: e.name, version: e.version })) },
     { label: 'tokens', unordered: draft.ocrTokens.map(tokenMember) },
     { label: 'evidence', unordered: draft.evidence.map(evidenceMember) },
-    { label: 'chains', unordered: draft.chains.map(chainMember) },
+    { label: 'chains', unordered: draft.chains.map((c) => chainMember(c, topology)) },
     { label: 'registrations', unordered: draft.coordinateRegistrations.map(registrationMember) },
     { label: 'specificationFindings', unordered: draft.specificationFindings.map((f) => ({ key: f.key, subject: f.subject, value: f.value })) },
     { label: 'conflicts', unordered: draft.conflicts.map(conflictMember) },
@@ -142,6 +157,9 @@ export function metricEvidenceContentHash(draft: MetricEvidenceDraft): string {
     { label: 'numericLattices', unordered: (draft.numericLattices ?? []).map((l) => ({ ...l, classWhy: undefined, cache: undefined, ensemble: l.ensemble ? { ...l.ensemble, why: undefined } : undefined })) },
     // 1.6.0: the external recogniser, named by id, model hash and runtime; a set read without one has no such part.
     ...(draft.recogniser ? [{ label: 'recogniser', ordered: draft.recogniser }] : []),
+    // 1.7.0 (005I, post-review D1): every frame's dimension topology — label-ink marks, axis groups, both assignments
+    // with every candidate, and the side conventions — by content.
+    ...(topology ? [{ label: 'dimensionTopology', unordered: draft.dimensionTopology ?? [] }] : []),
   ])
 }
 

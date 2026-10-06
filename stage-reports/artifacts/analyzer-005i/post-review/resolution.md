@@ -24,7 +24,7 @@ fixed or stated below with the reason they are not.
 | E7 | P2 | Track B: a post-scoring change not recorded | Track B methodology §11 | Track B |
 | E8 | P2 | the isolation gate did not cover runners | `packages/*/scripts`, `apps/*/scripts` and app bundler configs scanned | `tests/architecture/research-isolation.test.ts` |
 | E10 | P3 | DOWNGRADED feeds a challenge the figure can veto | stated in architecture.md (veto, never selector; the challenge re-decides no binding or end span) | architecture §8 test (end-span rules read no published fact) |
-| E11 | P3 | `performance.json` missing | written from the final matrix (`performance.json`) | — |
+| E11 | P3 | `performance.json` missing | written from the final matrix by the topology probe (`performance.json`; see D3) | — |
 
 ## Reviewer C — licensing (`reviewer-C-licensing.md`, CONDITIONAL PASS, no P0 / P1)
 
@@ -42,3 +42,16 @@ fixed or stated below with the reason they are not.
 Pre-existing, outside 005I: the repository has tracked `.cache/source-bytes/*.bin` (publisher bytes) since BUILDAPP-03R
 (2026-09-16). None is a frame of the bake-off (reviewer C compared hashes), none was added in 005I, and removing them
 is an OWNER decision (it would not remove them from history). Recorded in the stage report.
+
+## Reviewer D — deployment, determinism, bounds (`reviewer-D-deployment.md`, no P0)
+
+| id | sev | finding | resolution | gate |
+| --- | --- | --- | --- | --- |
+| D1 | P1 | the metric-evidence hash did not cover the 005I fields reconstruction reads | from schema 1.7.0 every chain member hashes its marks (position, class, sorted reasons), each segment's `labelled` and the chain's `topology`, and the set hashes `dimensionTopology`; a 1.5.0 set re-hashes to its stored hash | `hash-topology.test.ts` |
+| D2 | P2 | the "bounded" path was not bounded | a neighbourhood whose solve would cost more than `ASSIGNMENT_BOUNDS.solveWork` (n² · (slots + n) = 6·10⁸, about a second on a desktop core) is not solved: its labels are UNASSIGNED, `bounded`, counted `unsolved` — a gap on the record, never a guess. One checkpoint tick per neighbourhood, before its solve, from every caller that has a checkpoint (`solveFrameChains`, the 005B per-orientation bindings, the final re-read). `assignLabels` returns `stats` (neighbourhoods, largest, exact, bounded, unsolved) | `axis-topology.test.ts` §43 D2 (one 120-label neighbourhood: bounded, solved; one above the work bound: unsolved, every label a gap, one tick); §43 stress still 480 BOUND |
+| D3 | P2 | no evidence that real sheets stay under the bounds | `topology-probe.ts` reports the neighbourhoods met (count, largest, exact / bounded / unsolved) per frame and in total; run over the final development matrix → `performance.json` and `order-invariance.json` | — |
+| D4 | P3 | `dimensionAxisGroups` was not permutation-canonical | pairs are taken by canonical position (baseline, then chain id), not by input index, so which of two equal ranges CONTAINS the other does not depend on the order lines were found in | `axis-topology.test.ts` D4 (all 24 orders of four lines, two with equal ranges); the probe shuffles lines on every sealed frame |
+| D5 | P3 | the pack's version compare was lexicographic | `compareVersions` (numeric, per component) in `requiredFiles` | `evidence-pack/test/versions.test.ts` |
+| D6 | P3 | schema 1.7.0 changed shape inside the stage | sets written at `c150896` (side `BASELINE / THROUGH / TOP`, no `sideConventions`) are **void**: none is committed, none is evidence for this stage, and every figure in the report is from the final code. The stale "1.5.0 set" comment in `extract.ts` is corrected | — |
+| D7 | P3 | reconstruction behaviour changed with no version naming it | `PLAN_EXTENT_VERSION` 1.0.0 (end spans, `refuteByWalls`) in `ANALYZER_VERSIONS` (run record and Evidence Pack manifest); the result contract is unchanged | — |
+| D8 | P3 | Track B: stale APK baseline, "peak RSS" | sent to Track B: percentages against 005H's 39 419 927 B APK; "RSS after inference (a lower bound on the peak)" | Track B |

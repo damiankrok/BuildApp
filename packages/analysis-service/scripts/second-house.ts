@@ -55,7 +55,7 @@ import { PNG } from 'pngjs'
 import { execFileSync } from 'node:child_process'
 import { basename } from 'node:path'
 import { AXIS_TOPOLOGY_VERSION, METRIC_EVIDENCE_TOPOLOGY_SCHEMA_VERSION, METRIC_READER_VERSION, METRIC_SOLVER_VERSION, DIMENSION_TOPOLOGY_VERSION } from '@buildapp/source-metrics'
-import { BOUNDARY_EVIDENCE_VERSION, PLAN_RESOLVER_VERSION, SOLVER_V2_VERSION } from '@buildapp/reconstruction'
+import { BOUNDARY_EVIDENCE_VERSION, PLAN_EXTENT_VERSION, PLAN_RESOLVER_VERSION, SOLVER_V2_VERSION } from '@buildapp/reconstruction'
 import { GENERIC_ADAPTER_VERSION } from '@buildapp/source-package'
 import { ANALYSIS_SERVICE_VERSION } from '../src/index.js'
 import { EVIDENCE_PACK_VERSION } from '../../evidence-pack/src/index.js'
@@ -279,6 +279,7 @@ export const ANALYZER_VERSIONS: Record<string, string> = {
   'metrics.axis-topology': AXIS_TOPOLOGY_VERSION,
   'metrics.independent-scale': METRIC_SOLVER_VERSION,
   'plan-resolver': PLAN_RESOLVER_VERSION,
+  'plan-extent': PLAN_EXTENT_VERSION,
   'boundary-evidence': BOUNDARY_EVIDENCE_VERSION,
   'generic-reader': GENERIC_ADAPTER_VERSION,
   'evidence-pack': EVIDENCE_PACK_VERSION,

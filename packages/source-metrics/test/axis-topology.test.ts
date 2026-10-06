@@ -11,6 +11,7 @@ import {
   dimensionLabelLattices,
   findDimensionLines,
   hungarian,
+  labelCandidates,
   labelHeightOf,
   labelSide,
   markLabelInk,
@@ -690,6 +691,25 @@ describe('axis groups: a line ends where its first and last ticks are (post-revi
     const doubted: RawChain = { ...ends, ticks: ends.ticks.map((t) => (t.atPx === 560 ? { ...t, class: 'QUESTIONABLE' as const, reasons: ['TEXT_INK' as const] } : t)) }
     expect(dimensionAxisGroups('f', [{ ...doubted, ticks: [...doubted.ticks, { atPx: 600, baselinePx: 60, observationId: '' }] }, parts], ['a', 'b'], 16).perChain[1]?.alignedEnds).toEqual([true, false])
   })
+
+  it('post-review D4: relations and roles do not depend on the order the lines come in', () => {
+    // B and C have the same ends and no interior mark in common: each CONTAINS the other within tolerance. A spans
+    // both; D is a part line subdividing A.
+    const lines: Record<string, RawChain> = { A: hChain(100, [0, 400]), B: hChain(120, [0, 150, 400]), C: hChain(140, [0, 260, 400]), D: hChain(160, [0, 200, 400]) }
+    const permutations = (xs: string[]): string[][] => (xs.length <= 1 ? [xs] : xs.flatMap((x, i) => permutations([...xs.slice(0, i), ...xs.slice(i + 1)]).map((p) => [x, ...p])))
+    const key = (order: string[]): string => {
+      const r = dimensionAxisGroups('f', order.map((k) => lines[k]), order, 14)
+      return JSON.stringify({
+        relations: r.groups.flatMap((g) => g.relations.map((x) => `${order[x.a]} ${x.kind} ${order[x.b]} ${x.alignedEnds.join('/')}`)),
+        roles: Object.fromEntries(order.map((k, i) => [k, r.perChain[i]?.roles]).sort()),
+        aligned: Object.fromEntries(order.map((k, i) => [k, r.perChain[i]?.alignedEnds]).sort()),
+      })
+    }
+    const all = permutations(['A', 'B', 'C', 'D'])
+    expect(all.length).toBe(24)
+    const reference = key(all[0])
+    for (const order of all) expect(key(order)).toBe(reference)
+  })
 })
 
 describe('§13 global assignment', () => {
@@ -747,6 +767,45 @@ describe('§13 global assignment', () => {
       const order = [0, 1, 2].sort(() => rand() - 0.5)
       expect(key(assignLabels(chainsIn(order), t), order)).toEqual(reference)
     }
+  })
+
+  it('§43 post-review D2: one neighbourhood beyond the exact bound is solved once (bounded); beyond the work bound it is a recorded gap', () => {
+    // Two lines 24 px apart, marks staggered by half an interval, two numbers per interval of the upper line between
+    // them: numbers 2k and 2k+1 compete for the upper line's interval k, numbers 2k+1 and 2k+2 for the lower line's —
+    // so every number is in one neighbourhood.
+    const sheet = (n: number): { chains: RawChain[]; tokens: TextToken[] } => {
+      const half = Math.ceil(n / 2)
+      const a = Array.from({ length: half + 1 }, (_, k) => k * 20)
+      const b = Array.from({ length: half + 1 }, (_, k) => 10 + k * 20)
+      const tokens = Array.from({ length: n }, (_, i) => {
+        const along = 5 + Math.floor(i / 2) * 20 + (i % 2) * 10
+        return token('100', { x0: along - 2, x1: along + 2, y0: 104, y1: 120 })
+      })
+      return { chains: [hChain(100, a), hChain(124, b)], tokens }
+    }
+    const work = (n: number): number => {
+      const slots = new Set(sheet(n).tokens.flatMap((t) => labelCandidates(sheet(n).chains, t).map((c) => `${c.chain}:${c.interval}`))).size
+      return n * n * (slots + n)
+    }
+    const boundedN = ASSIGNMENT_BOUNDS.componentLabels + 24
+    const bounded = sheet(boundedN)
+    const t0 = performance.now()
+    const r1 = assignLabels(bounded.chains, bounded.tokens)
+    expect(performance.now() - t0).toBeLessThan(5000)
+    expect(r1.stats).toMatchObject({ neighbourhoods: 1, largest: boundedN, exact: 0, bounded: 1, unsolved: 0 })
+    expect(r1.decisions.some((d) => d.bounded)).toBe(true)
+    let cappedN = boundedN
+    while (work(cappedN) <= ASSIGNMENT_BOUNDS.solveWork) cappedN += 50
+    const capped = sheet(cappedN)
+    const ticks: number[] = []
+    const t1 = performance.now()
+    const r2 = assignLabels(capped.chains, capped.tokens, { checkpoint: { phase: () => undefined, tick: (p) => ticks.push(p?.counters?.neighbourhood ?? -1) } })
+    expect(performance.now() - t1).toBeLessThan(5000)
+    expect(r2.stats).toMatchObject({ neighbourhoods: 1, largest: cappedN, unsolved: 1, exact: 0, bounded: 0 })
+    expect(r2.decisions.every((d) => d.status === 'UNASSIGNED' && d.bounded === true && d.chosen === undefined)).toBe(true)
+    expect(r2.perChain.every((list) => list.length === 0)).toBe(true)
+    // one heartbeat per neighbourhood, before its solve
+    expect(ticks).toEqual([1])
   })
 
   it('§43 bounded: a page with 40 parallel lines and 480 labels is assigned in well under a second, the same twice', () => {

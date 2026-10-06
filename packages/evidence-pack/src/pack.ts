@@ -21,9 +21,20 @@ export const EVIDENCE_PACK_VERSION = '1.1.0' as const
 /** 005I: the files a pack of an earlier version was made without — a pack is complete for its own version (`requiredFiles`). */
 export const PACK_FILES_SINCE: Readonly<Record<string, readonly string[]>> = { '1.1.0': ['07b-dimension-topology.svg', '07b-dimension-topology.json'] }
 
+/** Semantic versions compared numerically, component by component: 1.10.0 is after 1.9.0 (post-review D5). */
+export function compareVersions(a: string, b: string): number {
+  const pa = a.split('.').map(Number)
+  const pb = b.split('.').map(Number)
+  for (let i = 0; i < Math.max(pa.length, pb.length); i += 1) {
+    const d = (pa[i] ?? 0) - (pb[i] ?? 0)
+    if (d !== 0) return Math.sign(d)
+  }
+  return 0
+}
+
 /** The files a pack of `version` must carry: every file but those a later version added. */
 export function requiredFiles(version: string): string[] {
-  const later = Object.entries(PACK_FILES_SINCE).filter(([since]) => version < since).flatMap(([, files]) => files)
+  const later = Object.entries(PACK_FILES_SINCE).filter(([since]) => compareVersions(version, since) < 0).flatMap(([, files]) => files)
   return PACK_FILES.filter((f) => !later.includes(f))
 }
 

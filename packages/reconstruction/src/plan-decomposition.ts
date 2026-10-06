@@ -48,6 +48,13 @@ import { completeBoundary } from './boundary-completion.js'
 import type { CompletionPart, ExtentConflict, ExtentSideStatement } from './boundary-completion.js'
 import type { AttachedBody } from './boundary-bodies.js'
 
+/**
+ * The plan's dimension-framed extent: which end spans of a dimension line are kept, and when the walls question a
+ * framed side. 1.0.0 (005I): unread end spans the drawing states are kept (`EndSpanDecision`) and `refuteByWalls`
+ * marks a frame the walls contradict weak. Named so a run record can tell 005H's extent from 005I's (post-review D7).
+ */
+export const PLAN_EXTENT_VERSION = '1.0.0' as const
+
 /** Where a grid line came from. The two kinds are independent, and a line with both is as certain as a plan gets. */
 export type GridLineSupport = {
   /** Chains whose segment boundaries fall on this line. */

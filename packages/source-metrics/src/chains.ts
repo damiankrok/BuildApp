@@ -23,7 +23,7 @@
  * reported as a chain that does not sum.
  */
 import { round6, stableId } from '@buildapp/source-common'
-import type { PixelPoint } from '@buildapp/source-common'
+import type { Checkpoint, PixelPoint } from '@buildapp/source-common'
 import type { SourceObservation } from '@buildapp/source-observations'
 import type { DimensionLine, DimensionMarkClass, DimensionMarkReason } from './dimension-lines.js'
 import type { TextToken } from './ocr.js'
@@ -197,7 +197,7 @@ export function chainTokens(chain: RawChain, tokens: readonly TextToken[], optio
  * a neighbourhood are assigned together, exactly; a number an equally good
  * assignment would put elsewhere is left unassigned (`axis-topology.ts`).
  */
-export function assignTokens(chains: readonly RawChain[], tokens: readonly TextToken[], options: { maxOffsetHeights?: number; preferCentred?: boolean; readingsOf?: (token: TextToken) => ChainToken['readings'] | undefined } = {}): ChainToken[][] {
+export function assignTokens(chains: readonly RawChain[], tokens: readonly TextToken[], options: { maxOffsetHeights?: number; preferCentred?: boolean; readingsOf?: (token: TextToken) => ChainToken['readings'] | undefined; checkpoint?: Checkpoint } = {}): ChainToken[][] {
   return assignLabels(chains, tokens, options).perChain
 }
 
@@ -567,7 +567,7 @@ export function decideScale(
 export function solveFrameChains(
   chains: readonly RawChain[],
   tokens: readonly TextToken[],
-  options: { tolerancePx?: number; minPixelLength?: number; maxOffsetHeights?: number; plausibility?: ScalePlausibility } = {},
+  options: { tolerancePx?: number; minPixelLength?: number; maxOffsetHeights?: number; plausibility?: ScalePlausibility; checkpoint?: Checkpoint } = {},
 ): FrameChainSolution {
   const tolerance = options.tolerancePx ?? 2.2
   const minLength = options.minPixelLength ?? 6

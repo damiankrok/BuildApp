@@ -757,7 +757,7 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
   const assigned = new Map<TextOrientation, ChainToken[][]>()
   const obsBy = new Map<TextOrientation, Obs[]>()
   for (const o of present) {
-    const perChain = assignTokens(chains, labels.filter((t) => t.orientation === o), { maxOffsetHeights: input.maxOffsetHeights, preferCentred: true })
+    const perChain = assignTokens(chains, labels.filter((t) => t.orientation === o), { maxOffsetHeights: input.maxOffsetHeights, preferCentred: true, checkpoint: input.checkpoint })
     assigned.set(o, perChain)
     obsBy.set(o, observationsOf(input, o, perChain, regionOf))
   }
@@ -1286,7 +1286,7 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
     const lattice = input.lattices?.get(token)?.lattice
     return lattice ? correctionReadings(lattice) : undefined
   }
-  const finalAssignment = assignLabels(chains, corrected, { maxOffsetHeights: input.maxOffsetHeights, preferCentred: true, readingsOf: input.lattices ? latticeReadings : undefined })
+  const finalAssignment = assignLabels(chains, corrected, { maxOffsetHeights: input.maxOffsetHeights, preferCentred: true, readingsOf: input.lattices ? latticeReadings : undefined, checkpoint: input.checkpoint })
   const perChain = finalAssignment.perChain
   const solved: SolvedChain[] = []
   const tokensPerChain: ChainToken[][] = []

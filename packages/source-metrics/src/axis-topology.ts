@@ -37,7 +37,7 @@
  * line keeps it.
  */
 import { round6, stableId } from '@buildapp/source-common'
-import type { PixelRect } from '@buildapp/source-common'
+import type { Checkpoint, PixelRect } from '@buildapp/source-common'
 import type { ChainAxis, ChainTick, ChainToken, RawChain } from './chains.js'
 import type { TextOrientation, TextToken } from './ocr.js'
 import { textAxisOf } from './ocr.js'
@@ -63,9 +63,14 @@ export const AXIS_TOPOLOGY_VERSION = '1.1.0' as const
  * - `ambiguity`: an assignment within this much of the optimum that binds a label elsewhere (or not at all) leaves it
  *   AMBIGUOUS: nothing in the drawing prefers one reading to the other by a tenth of a text height.
  * - `componentLabels`: the most labels one connected neighbourhood may hold for an exact re-solve per label; above it
- *   (no development sheet comes near) each label is checked against its own next-best candidate only, and says so.
+ *   (no development sheet comes near: `performance.json`) each label is checked against its own next-best candidate
+ *   only, and says so.
+ * - `solveWork`: the most work one neighbourhood's solve may take, n² · (slots + n) for n labels (post-review D2):
+ *   about a second on a desktop core, a few on a phone. A neighbourhood above it is not solved — its labels are left
+ *   UNASSIGNED, marked bounded: a gap on the record, never a guess. A sparse page of 480 labels is well inside it;
+ *   a dense neighbourhood of 800 is not.
  */
-export const ASSIGNMENT_BOUNDS = { againstConvention: 1, uncentred: 2.5, reward: 6, ambiguity: 0.1, componentLabels: 96 } as const
+export const ASSIGNMENT_BOUNDS = { againstConvention: 1, uncentred: 2.5, reward: 6, ambiguity: 0.1, componentLabels: 96, solveWork: 6e8 } as const
 
 /** Parallel lines within this many label heights of each other, overlapping along their axis by half the shorter, are one group. */
 export const AXIS_GROUP_BOUNDS = { separationHeights: 4, overlapShare: 0.5, alignHeights: 0.2, alignMinPx: 2 } as const
@@ -178,11 +183,14 @@ export type LabelAssignmentDecision = {
    * margin the drawing gives this decision. Absent for a label with no competitor and one candidate.
    */
   margin?: number
-  /** Set when the neighbourhood exceeded `componentLabels` and the margin was checked locally only. */
+  /** Set when the neighbourhood exceeded `componentLabels` (margin checked locally only) or `solveLabels` (not solved). */
   bounded?: boolean
 }
 
-export type LabelAssignment = { perChain: ChainToken[][]; decisions: LabelAssignmentDecision[]; conventions: SideConventions }
+/** How the work was spent: neighbourhoods, the largest, how many were solved exactly, locally (bounded) or not at all. */
+export type AssignmentStats = { labels: number; neighbourhoods: number; largest: number; exact: number; bounded: number; unsolved: number }
+
+export type LabelAssignment = { perChain: ChainToken[][]; decisions: LabelAssignmentDecision[]; conventions: SideConventions; stats: AssignmentStats }
 
 /** A canonical key for a token: its geometry and reading, never its position in an input list. */
 const tokenKey = (t: TextToken): string => `${round6(t.box.x0)}|${round6(t.box.y0)}|${round6(t.box.x1)}|${round6(t.box.y1)}|${t.orientation}|${t.text}`
@@ -328,7 +336,7 @@ function solveNeighbourhood(costs: readonly (readonly number[])[], slots: number
 export function assignLabels(
   chains: readonly RawChain[],
   tokens: readonly TextToken[],
-  options: { maxOffsetHeights?: number; preferCentred?: boolean; readingsOf?: (token: TextToken) => ChainToken['readings'] | undefined } = {},
+  options: { maxOffsetHeights?: number; preferCentred?: boolean; readingsOf?: (token: TextToken) => ChainToken['readings'] | undefined; checkpoint?: Checkpoint } = {},
 ): LabelAssignment {
   const geometry = { maxOffsetHeights: options.maxOffsetHeights, preferCentred: options.preferCentred }
   const perChain: ChainToken[][] = chains.map(() => [])
@@ -387,7 +395,21 @@ export function assignLabels(
 
   const decisionOf = new Map<number, LabelAssignmentDecision>()
   const R = ASSIGNMENT_BOUNDS.reward
-  for (const members of [...groups.values()]) {
+  const stats: AssignmentStats = { labels: entries.length, neighbourhoods: groups.size, largest: 0, exact: 0, bounded: 0, unsolved: 0 }
+  const neighbourhoods = [...groups.values()]
+  neighbourhoods.forEach((members, k) => {
+    options.checkpoint?.tick({ subphase: { id: 'LABEL_ASSIGNMENT', label: 'assigning dimension labels to lines' }, counters: { neighbourhood: k + 1, neighbourhoodsTotal: neighbourhoods.length } })
+    stats.largest = Math.max(stats.largest, members.length)
+    const slotCount = new Set(members.flatMap((i) => entries[i].candidates.map(slotKey))).size
+    if (members.length * members.length * (slotCount + members.length) > ASSIGNMENT_BOUNDS.solveWork) {
+      // Too much work to solve on a phone: every label of the neighbourhood is a recorded gap (post-review D2).
+      stats.unsolved += 1
+      for (const i of members) {
+        const e = entries[i]
+        decisionOf.set(i, { text: e.token.text, orientation: e.token.orientation, box: e.token.box, candidates: e.candidates.map((c) => ({ ...c, chain: chainOrder[c.chain].i })), status: 'UNASSIGNED', bounded: true })
+      }
+      return
+    }
     const slots = [...new Set(members.flatMap((i) => entries[i].candidates.map(slotKey)))].sort((a, b) => {
       const [ca, ia] = a.split(':').map(Number)
       const [cb, ib] = b.split(':').map(Number)
@@ -401,6 +423,8 @@ export function assignLabels(
     })
     const best = solveNeighbourhood(costs, slots.length)
     const exact = members.length <= ASSIGNMENT_BOUNDS.componentLabels
+    if (exact) stats.exact += 1
+    else stats.bounded += 1
     members.forEach((i, r) => {
       const e = entries[i]
       const s = best.slotOf[r]
@@ -439,12 +463,13 @@ export function assignLabels(
       })
       if (status === 'BOUND' && chosenCandidate) perChain[chainOrder[chosenCandidate.chain].i].push({ token: e.token, atPx: chosenCandidate.along, offset: chosenCandidate.offset, readings: e.readings })
     })
-  }
+  })
   const decisions = entries.map((_, i) => decisionOf.get(i)).filter((d): d is LabelAssignmentDecision => d !== undefined)
   return {
     perChain: perChain.map((list) => list.sort((a, b) => a.atPx - b.atPx || compareKeys(tokenKey(a.token), tokenKey(b.token)))),
     decisions,
     conventions,
+    stats,
   }
 }
 
@@ -558,16 +583,18 @@ export function dimensionAxisGroups(frameId: string, chains: readonly RawChain[]
     const relations: DimensionAxisGroup['relations'] = []
     const roles = new Map<number, Set<AxisRole>>(members.map((m) => [m, new Set<AxisRole>()]))
     const aligned = new Map<number, [boolean, boolean]>(members.map((m) => [m, [false, false]]))
-    for (const a of members) {
-      for (const b of members) {
-        if (a === b) continue
+    // Pairs by canonical position (baseline, then chain id), never by input index: which of two equal ranges CONTAINS
+    // the other, and which is PARTIAL, must not depend on the order the lines were found in (post-review D4).
+    members.forEach((a, ia) => {
+      members.forEach((b, ib) => {
+        if (a === b) return
         const [a0, a1] = range(chains[a])
         const [b0, b1] = range(chains[b])
         const ea = endsOf(chains[a])
         const ends: [boolean, boolean] = ea ? [endsNear(chains[b], ea[0]), endsNear(chains[b], ea[1])] : [false, false]
         const held = aligned.get(a) as [boolean, boolean]
         aligned.set(a, [held[0] || ends[0], held[1] || ends[1]])
-        if (a >= b) continue
+        if (ia >= ib) return
         // a subdivides b: marks at both of b's ends and at least one strictly between them (and the converse).
         const between = (c: RawChain, lo: number, hi: number): boolean => c.ticks.some((t) => t.atPx > lo + tol && t.atPx < hi - tol)
         const aOnB = hasMarkNear(chains[a], b0) && hasMarkNear(chains[a], b1) && between(chains[a], b0, b1)
@@ -594,8 +621,8 @@ export function dimensionAxisGroups(frameId: string, chains: readonly RawChain[]
           roles.get(first)?.add('SUBDIVISION')
           roles.get(second)?.add('OVERALL')
         } else if (kind === 'CONTAINS' && (Math.abs(f0 - s0) <= tol || Math.abs(f1 - s1) <= tol)) roles.get(second)?.add('PARTIAL')
-      }
-    }
+      })
+    })
     const separations: DimensionAxisGroup['separations'] = []
     for (let k = 0; k + 1 < members.length; k += 1) {
       const px = round6(chains[members[k + 1]].baselinePx - chains[members[k]].baselinePx)
