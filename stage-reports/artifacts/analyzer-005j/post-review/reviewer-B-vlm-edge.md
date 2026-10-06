@@ -372,8 +372,8 @@ The 28 outline answers of the form "… is A." are genuine. Neither defect moves
 **Why the conclusions survive.**
 - Every conclusion in the recommendation is also supported by the complete blind-8 CANDIDATE_OVERLAY set (64 rows for
   every arm) and by the matched subsets (B1).
-- A blind-8 result is **development evidence on two houses and 17 base questions**, not a sample. The 64 rows are 4
-  transforms of 16 base questions, so they are correlated.
+- A blind-8 result is **development evidence on two houses and 17 base questions** (16 after the exclusion), not a
+  sample. The 64 rows are 4 transforms of those 16 base questions, so they are correlated.
 - Intervals on n = 41 answered (SmolVLM2) are ±15 pp.
 
 ### B11 — P2 — The Route C pilot reading is fair, and the data say something sharper
@@ -438,7 +438,7 @@ right primary.**
   every eligible gap of a house from 4–8 frame passes.
 - A 500 M VLM needs ≈ 17–20 s **per gap** in the same runtime. That is ≈ 7 minutes for a median house (24 gaps) on a
   desktop core, ×2–5 on a phone. In the 64-token configuration that fits, it reads the questions no better than
-  chance.
+  chance, and it does no better at 1,088 tokens.
 
 **ADOPT_SMALL_VLM_REFEREE is rightly rejected, and the rejection is robust.**
 - Matched subsets (B1), per-class AUROC and counterfactual pair accuracy (B7) all show it.
