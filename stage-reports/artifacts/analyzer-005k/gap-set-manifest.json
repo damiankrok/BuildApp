@@ -1,0 +1,2593 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005K",
+ "kind": "fresh-sheet gap set: the frozen list, sealed before any label (gap-set-protocol.md §4)",
+ "freezeSha": "892853e7de140f2a9fb45895acfea93700c4a053",
+ "population": "every gap on a sheet whose boundary was read that the frozen analyzer classified WEAK, between two WALL jambs, with drawn evidence (DrawnGapCheck.drawn)",
+ "projects": [
+  {
+   "id": "A00",
+   "publisher": "archon",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-goldstarach-2-m3622914468605",
+   "family": "dom-w-goldstarach",
+   "drawK": 0,
+   "sourcePackageHash": "1d216533af53832268c54aa6d30a9ac28ee00ed66cae1beb957f974ff3c32b6f",
+   "pageSha256": "c42b5886b459a0f0fef64ceb053d2cf684991d9b72c84feb7f4e2d3515a36d2c",
+   "run": {
+    "outcome": "FAILED",
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE"
+   },
+   "sheets": [
+    {
+     "frameId": "frame-asset-rzut-db1e8df563-19bef9a91e",
+     "storey": "GROUND",
+     "boundaryRead": true,
+     "variantByteHash": "1d93c94a1526bc04f01a2d88dad0ace8f946a027c89664fee4a0da087ec27631",
+     "imageUrlSha256": "8d2b9aed4b85835badc5449e5917fa2723fa0dc69c525b3ec403fa066dd67baf",
+     "sizePx": {
+      "height": 853,
+      "width": 853
+     },
+     "mpp": {
+      "x": 0.02305,
+      "y": 0.023088
+     },
+     "wallPx": 11,
+     "decompositionId": "dec-4ada5d8093843fb4",
+     "weakRecords": 79,
+     "inSet": 17
+    }
+   ],
+   "inSet": 17
+  },
+  {
+   "id": "A01",
+   "publisher": "archon",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-jarzmiankach-m60124f28f071a",
+   "family": "dom-w-jarzmiankach",
+   "drawK": 1,
+   "sourcePackageHash": "019e70a1dcd30bf289f9fcd01071686fd87d519e9e98c46990e928365808ec3f",
+   "pageSha256": "80f93fae19d930e9d390598bb52a824f6ebbfda1e822793e8b6e5fdee2183a2b",
+   "run": {
+    "outcome": "FAILED",
+    "code": "RECONSTRUCTION_FAILED/MODEL_EMISSION_FAILED"
+   },
+   "sheets": [],
+   "inSet": 0
+  },
+  {
+   "id": "A02",
+   "publisher": "archon",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-czosnkach-e-ma7f290037d154",
+   "family": "dom-w-czosnkach",
+   "drawK": 2,
+   "sourcePackageHash": "c3104a64de00b55360051238052fffe014a01d295ff6448fd83f01a71a271f21",
+   "pageSha256": "f6909e25fa2132f635db885f7549c3424ccb7ffb954c07b71d4790036a4bbd08",
+   "run": {
+    "outcome": "COMPLETED",
+    "modelHash": "98229d5fa8d6ff8e682001061ff703e6e8c0be4a5412a71b77439e2b8aa92155"
+   },
+   "sheets": [
+    {
+     "frameId": "frame-asset-rzut-2c17aa3eda-b6cebfd23d",
+     "storey": "GROUND",
+     "boundaryRead": true,
+     "variantByteHash": "362c342ee1a3bf0e6924a4aac23a4941c4bbdd1c2bc7a5ec31db13f6353894a4",
+     "imageUrlSha256": "e13fe94234ec206230ebbc95eb833c1e1711d3f8d95ef297f5504290a2198755",
+     "sizePx": {
+      "height": 853,
+      "width": 853
+     },
+     "mpp": {
+      "x": 0.024932,
+      "y": 0.024906
+     },
+     "wallPx": 18.125,
+     "decompositionId": "dec-f9758600a9347dc6",
+     "weakRecords": 19,
+     "inSet": 4
+    }
+   ],
+   "inSet": 4
+  },
+  {
+   "id": "A03",
+   "publisher": "archon",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-arletach-3-e-oze-m504267f869cbe",
+   "family": "dom-w-arletach",
+   "drawK": 3,
+   "sourcePackageHash": "3d3ef1d6451e9a93f2a03b939a9f4e61c162e0c1613c0f85f0d46758b19890cd",
+   "pageSha256": "193417fd2492aa8db8845a16f1230ec326efcdbdc5a6a53e6a92dfd092d642d4",
+   "run": {
+    "outcome": "COMPLETED",
+    "modelHash": "4b0fc06a76054bf95be60b9ab84df3c8fcb2bb7c6c77d24f253bafc3ddcc03c7"
+   },
+   "sheets": [
+    {
+     "frameId": "frame-asset-rzut-1f95f4ce4d-eaa13be831",
+     "storey": "GROUND",
+     "boundaryRead": true,
+     "variantByteHash": "699db25a363aabfbd422c1da3ae9421588a984e19abcd05df68a643f78a98790",
+     "imageUrlSha256": "a5e239fb12c87b71c3be4940162fd80ce12995b7a6cc63a2626d98537e426966",
+     "sizePx": {
+      "height": 853,
+      "width": 853
+     },
+     "mpp": {
+      "x": 0.025078,
+      "y": 0.025078
+     },
+     "wallPx": 18,
+     "decompositionId": "dec-2f9938d6f2b70e36",
+     "weakRecords": 15,
+     "inSet": 5
+    },
+    {
+     "frameId": "frame-asset-rzut-4cad03bcd1-e99747c89c",
+     "storey": "ATTIC",
+     "boundaryRead": false,
+     "inSet": 0
+    }
+   ],
+   "inSet": 5
+  },
+  {
+   "id": "A04",
+   "publisher": "archon",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-ligolach-m-ma3023a3277371",
+   "family": "dom-w-ligolach",
+   "drawK": 4,
+   "sourcePackageHash": "6b5668af73239113406d94653d633165e43664f8a1e365787431c377747cf571",
+   "pageSha256": "d6d894431c1ad78a724106c3affc3aff73364e501ad83ba15638b78a2629e935",
+   "run": {
+    "outcome": "FAILED",
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE"
+   },
+   "sheets": [
+    {
+     "frameId": "frame-asset-rzut-4f91f26bdf-589c8abdb3",
+     "storey": "GROUND",
+     "boundaryRead": true,
+     "variantByteHash": "bc37be1f1ec55ebca260789d99ea79628869b665c041ef3ee70e8359eadc3713",
+     "imageUrlSha256": "048ba6596cbd165990e4f90d9ec099b740f47e4b3012a97334f16cc1c5921516",
+     "sizePx": {
+      "height": 853,
+      "width": 853
+     },
+     "mpp": {
+      "x": 0.025505,
+      "y": 0.025474
+     },
+     "wallPx": 13,
+     "decompositionId": "dec-35a0d14044b5d0d8",
+     "weakRecords": 29,
+     "inSet": 4
+    },
+    {
+     "frameId": "frame-asset-rzut-1b82f82f43-ced10ac33a",
+     "storey": "ATTIC",
+     "boundaryRead": true,
+     "variantByteHash": "5a26e21667f17e5c44bce2e71fbcd115984e00ce004a4a643be69ba5e1b7a7b7",
+     "imageUrlSha256": "7e3f37d51c790bcf7b80d52cce8a523ff69c07ac94d87e27ccbc4638fa8ef86f",
+     "sizePx": {
+      "height": 853,
+      "width": 853
+     },
+     "mpp": {
+      "x": 0.035345,
+      "y": 0.033892
+     },
+     "wallPx": 18,
+     "decompositionId": "dec-e457655e37634b05",
+     "weakRecords": 8,
+     "inSet": 4
+    }
+   ],
+   "inSet": 8
+  },
+  {
+   "id": "A05",
+   "publisher": "archon",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-we-wrzosach-ver-2-m3c91f90ec5ffe",
+   "family": "dom-we-wrzosach",
+   "drawK": 5,
+   "sourcePackageHash": "3f2947cdd87a31636987ffd9fd7354183b0ea90f096f8a4ca490451faf604e6a",
+   "pageSha256": "21ec43bff00813033490faa39bd06c4b0206610ecb0a3e93e1bd12109a98f1a3",
+   "run": {
+    "outcome": "FAILED",
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE"
+   },
+   "sheets": [
+    {
+     "frameId": "frame-asset-rzut-238dfbc50b-38cf8e09f5",
+     "storey": "GROUND",
+     "boundaryRead": true,
+     "variantByteHash": "1fba617871740f9bea474a7198e0c0f6b99bbf3f4f5e3b1c5de55de472d22561",
+     "imageUrlSha256": "3987282e8259195a7bf2f298f050b17711661de31513d403f9fa63fc2ace8e3c",
+     "sizePx": {
+      "height": 853,
+      "width": 853
+     },
+     "mpp": {
+      "x": 0.0211,
+      "y": 0.021105
+     },
+     "wallPx": 13,
+     "decompositionId": "dec-9d43b45f77fd46c0",
+     "weakRecords": 37,
+     "inSet": 7
+    }
+   ],
+   "inSet": 7
+  },
+  {
+   "id": "A06",
+   "publisher": "archon",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-bratkach-26-r2be-m953292c7d56c7",
+   "family": "dom-w-bratkach",
+   "drawK": 6,
+   "sourcePackageHash": "bc81b7a3baf11e05b5d5553419d3343fe357ed829e704242334c7c5edae272c6",
+   "pageSha256": "4016a4fb3647f26bc13ac4d46de146cf724d0f553207624d529e50cf5f6c5521",
+   "run": {
+    "outcome": "COMPLETED",
+    "modelHash": "3e4b69073dfd13873ffdfbbcc02770148c3fa1f2ec04cc4b8f1e03dc555128a6"
+   },
+   "sheets": [
+    {
+     "frameId": "frame-asset-rzut-f08001e3c4-8b24c71f3f",
+     "storey": "GROUND",
+     "boundaryRead": true,
+     "variantByteHash": "79a8fa44d886ab09cc15328bb379b3f4de830684e7b12573f9df9f0d85b1564a",
+     "imageUrlSha256": "0b4786125c4a635fe85d10ec880373bcb193ffbe12d7a4fe8cd1571ced4e6112",
+     "sizePx": {
+      "height": 853,
+      "width": 853
+     },
+     "mpp": {
+      "x": 0.020726,
+      "y": 0.020714
+     },
+     "wallPx": 13.117188,
+     "decompositionId": "dec-58be3e00acd8ae8d",
+     "weakRecords": 20,
+     "inSet": 3
+    },
+    {
+     "frameId": "frame-asset-rzut-eccabe6307-98a0db655a",
+     "storey": "ATTIC",
+     "boundaryRead": false,
+     "inSet": 0
+    }
+   ],
+   "inSet": 3
+  },
+  {
+   "id": "A07",
+   "publisher": "archon",
+   "url": "https://www.archon.pl/projekty-domow/projekt-willa-maja-r2-mcc7297f3e22da",
+   "family": "willa-maja",
+   "drawK": 7,
+   "sourcePackageHash": "20d42dfd3d51f0a6b72f52030e399e145092d5e7bad0a294d1f2a5b10f062a00",
+   "pageSha256": "5f48bcce7e36be79054e0fba934c3a04492fd7bb5b6c76b824121ce9d5cba901",
+   "run": {
+    "outcome": "COMPLETED",
+    "modelHash": "dddf99f78c650ad431431fa462fd3574b05b5cfe398b1c321ccdf5279502fa7f"
+   },
+   "sheets": [
+    {
+     "frameId": "frame-asset-rzut-dec884e019-46909f56cf",
+     "storey": "GROUND",
+     "boundaryRead": true,
+     "variantByteHash": "187dc03ee30eda6f37df26de325128c8385552ccf81870f8b70e7e3c2f22e409",
+     "imageUrlSha256": "2b2c08361dccda62a7bc4b52cb093910c2540e7326262137990bf10808eec5ff",
+     "sizePx": {
+      "height": 853,
+      "width": 853
+     },
+     "mpp": {
+      "x": 0.023161,
+      "y": 0.023145
+     },
+     "wallPx": 11,
+     "decompositionId": "dec-0b2a34a1a9ce2609",
+     "weakRecords": 40,
+     "inSet": 3
+    },
+    {
+     "frameId": "frame-asset-rzut-a46fd40284-47285d772c",
+     "storey": "UPPER",
+     "boundaryRead": false,
+     "inSet": 0
+    }
+   ],
+   "inSet": 3
+  },
+  {
+   "id": "D00",
+   "publisher": "dobredomy",
+   "url": "https://www.dobredomy.pl/projekt/mars/",
+   "family": "mars",
+   "drawK": 0,
+   "sourcePackageHash": "83afc5dbe723f5783c1664814f32dec2822be8baacbefa1150b06cf1749fe20f",
+   "pageSha256": "685a0b3a13c4e67dc67543b43b15931fb560f95cf4656dae1764967092f4d491",
+   "run": {
+    "outcome": "COMPLETED",
+    "modelHash": "0bb85a2dc698b532b601bae8a686defacac4d29bdd33b06383e2dd003052f8a7"
+   },
+   "sheets": [
+    {
+     "frameId": "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+     "storey": "GROUND",
+     "boundaryRead": true,
+     "variantByteHash": "ae2f4faed0e41cc88f1bdc399c0c586d1ab6d158cb62b6c460d8d606f34a6a00",
+     "imageUrlSha256": "b5a395bb818a9c3b2e435b600ce66f492fcb15fac7d70c95d208ef81241e47be",
+     "sizePx": {
+      "height": 1856,
+      "width": 1351
+     },
+     "mpp": {
+      "x": 0.013197,
+      "y": 0.013197
+     },
+     "wallPx": 25.5,
+     "decompositionId": "dec-a3d4b0af75dc48c7",
+     "weakRecords": 66,
+     "inSet": 13
+    },
+    {
+     "frameId": "frame-asset-mars-rzut-poddasze-f3b786cb4f-41728af9b6",
+     "storey": "ATTIC",
+     "boundaryRead": false,
+     "inSet": 0
+    }
+   ],
+   "inSet": 13
+  },
+  {
+   "id": "D01",
+   "publisher": "dobredomy",
+   "url": "https://www.dobredomy.pl/projekt/faunIII/",
+   "family": "faun",
+   "drawK": 1,
+   "sourcePackageHash": "7fe464536947367cb2d34348022eeed42e86100d0f1cc783b7f155e72b7b0133",
+   "pageSha256": "ee24ce6cd6bde0640e209d7398cfcbebe30d06f681dfbe852a44e2043af70262",
+   "run": {
+    "outcome": "FAILED",
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE"
+   },
+   "sheets": [
+    {
+     "frameId": "frame-asset-faun-iii-rzut-parter-4a4a325758-4fb0a88a30",
+     "storey": "GROUND",
+     "boundaryRead": false,
+     "inSet": 0
+    },
+    {
+     "frameId": "frame-asset-faun-iii-rzut-poddasze-70d190eea2-1ee75ed826",
+     "storey": "ATTIC",
+     "boundaryRead": false,
+     "inSet": 0
+    }
+   ],
+   "inSet": 0
+  },
+  {
+   "id": "D02",
+   "publisher": "dobredomy",
+   "url": "https://www.dobredomy.pl/projekt/alex/",
+   "family": "alex",
+   "drawK": 2,
+   "sourcePackageHash": "52f69390ed2c71690efa455da2b73ba03dcf9cbdd6c2a170e705b8e3a12893ab",
+   "pageSha256": "a1dc3b87a610cfc8eefad74e74506d8ffaa623dc13f59fd33e0266f87c3d41f2",
+   "run": {
+    "outcome": "FAILED",
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE"
+   },
+   "sheets": [
+    {
+     "frameId": "frame-asset-alex-rzut-parter-4707ebe458-81447f88e6",
+     "storey": "GROUND",
+     "boundaryRead": false,
+     "inSet": 0
+    },
+    {
+     "frameId": "frame-asset-alex-rzut-poddasze-ef26951b8e-48abf54fd2",
+     "storey": "ATTIC",
+     "boundaryRead": false,
+     "inSet": 0
+    }
+   ],
+   "inSet": 0
+  },
+  {
+   "id": "D03",
+   "publisher": "dobredomy",
+   "url": "https://www.dobredomy.pl/projekt/meganIV/",
+   "family": "megan",
+   "drawK": 3,
+   "sourcePackageHash": "cd1ba44d90ef5d24d995a30f908236249df9d074a36dabb306cb10ccf9dff7c4",
+   "pageSha256": "4e86fa58726cdc1782b4903d472f59ab73b0ebeffeea7c03f11fa4ae4dbcf5e1",
+   "run": {
+    "outcome": "FAILED",
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE"
+   },
+   "sheets": [
+    {
+     "frameId": "frame-asset-megan-iv-rzut-parter-bbb305d67a-0f9f921b7b",
+     "storey": "GROUND",
+     "boundaryRead": false,
+     "inSet": 0
+    },
+    {
+     "frameId": "frame-asset-megan-iv-rzut-poddasze-51a55ec388-e588994666",
+     "storey": "ATTIC",
+     "boundaryRead": false,
+     "inSet": 0
+    }
+   ],
+   "inSet": 0
+  },
+  {
+   "id": "D04",
+   "publisher": "dobredomy",
+   "url": "https://www.dobredomy.pl/projekt/aiko/",
+   "family": "aiko",
+   "drawK": 4,
+   "sourcePackageHash": "367ea6748a0e3387a4c5bb5e74906528c21508d3d19eafd5dca14fc6ba1c920c",
+   "pageSha256": "e6c5b9624ed0222efed3647e18874079cced2c77cbbd091d5c47cda78966a464",
+   "run": {
+    "outcome": "FAILED",
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE"
+   },
+   "sheets": [
+    {
+     "frameId": "frame-asset-aiko-rzut-parter-c5c8f02d57-f2f752629a",
+     "storey": "GROUND",
+     "boundaryRead": false,
+     "inSet": 0
+    }
+   ],
+   "inSet": 0
+  },
+  {
+   "id": "D05",
+   "publisher": "dobredomy",
+   "url": "https://www.dobredomy.pl/projekt/dobry/",
+   "family": "dobry",
+   "drawK": 5,
+   "sourcePackageHash": "743effff8ea4b858ed255f79b809c54dc18b72a6a6e311af28bde01bb8e13af9",
+   "pageSha256": "a328ee1acb78855a26592d0ff078b930f782352d3b32fd27bd03099d95957b01",
+   "run": {
+    "outcome": "FAILED",
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE"
+   },
+   "sheets": [
+    {
+     "frameId": "frame-asset-dobry-rzut-parter-0019c75b9a-70a0349ded",
+     "storey": "GROUND",
+     "boundaryRead": false,
+     "inSet": 0
+    },
+    {
+     "frameId": "frame-asset-dobry-rzut-poddasze-1f5b40aaba-a035634dfc",
+     "storey": "ATTIC",
+     "boundaryRead": false,
+     "inSet": 0
+    }
+   ],
+   "inSet": 0
+  }
+ ],
+ "counts": {
+  "projects": 14,
+  "sheetsRead": 9,
+  "sheetsWithGaps": 9,
+  "gaps": 60,
+  "byPublisher": {
+   "archon": 47,
+   "dobredomy": 13
+  }
+ },
+ "listSha256": "a37f0d726d3f8f5b3b587aa57edac0320f2a99df51ee09d50f8ea67946195c2d",
+ "gaps": [
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-X-310-230-332",
+   "project": "A00",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-db1e8df563-19bef9a91e",
+   "storey": "GROUND",
+   "variantByteHash": "1d93c94a1526bc04f01a2d88dad0ace8f946a027c89664fee4a0da087ec27631",
+   "decompositionId": "dec-4ada5d8093843fb4",
+   "gapId": "gap-X-310-230-332",
+   "axis": "X",
+   "linePx": 310,
+   "axisPx": 310.425,
+   "fromPx": 230,
+   "toPx": 332,
+   "start": {
+    "x": 310.425,
+    "y": 230
+   },
+   "end": {
+    "x": 310.425,
+    "y": 332
+   },
+   "widthPx": 102,
+   "widthM": 2.354976,
+   "mppAlong": 0.023088,
+   "wallPx": 11,
+   "crop": {
+    "x0": 244,
+    "x1": 377,
+    "y0": 165,
+    "y1": 397
+   },
+   "inkCropSha256": "0cf2189ed309d23f41aa1f4b56a4a4ef8cd765aa18d4e1da06dd527dd9b68efd",
+   "qid": "q023"
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-X-441-486-559",
+   "project": "A00",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-db1e8df563-19bef9a91e",
+   "storey": "GROUND",
+   "variantByteHash": "1d93c94a1526bc04f01a2d88dad0ace8f946a027c89664fee4a0da087ec27631",
+   "decompositionId": "dec-4ada5d8093843fb4",
+   "gapId": "gap-X-441-486-559",
+   "axis": "X",
+   "linePx": 441,
+   "axisPx": 437.26087,
+   "fromPx": 486,
+   "toPx": 559,
+   "start": {
+    "x": 437.26087,
+    "y": 486
+   },
+   "end": {
+    "x": 437.26087,
+    "y": 559
+   },
+   "widthPx": 73,
+   "widthM": 1.685424,
+   "mppAlong": 0.023088,
+   "wallPx": 11,
+   "crop": {
+    "x0": 371,
+    "x1": 504,
+    "y0": 421,
+    "y1": 624
+   },
+   "inkCropSha256": "72a010f7e3963696482f9a1f962e64fdb21bacb1387715a6fecf4dfa17147b62",
+   "qid": "q001"
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-X-450-486-559",
+   "project": "A00",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-db1e8df563-19bef9a91e",
+   "storey": "GROUND",
+   "variantByteHash": "1d93c94a1526bc04f01a2d88dad0ace8f946a027c89664fee4a0da087ec27631",
+   "decompositionId": "dec-4ada5d8093843fb4",
+   "gapId": "gap-X-450-486-559",
+   "axis": "X",
+   "linePx": 449.5,
+   "axisPx": 447.420834,
+   "fromPx": 486,
+   "toPx": 559,
+   "start": {
+    "x": 447.420834,
+    "y": 486
+   },
+   "end": {
+    "x": 447.420834,
+    "y": 559
+   },
+   "widthPx": 73,
+   "widthM": 1.685424,
+   "mppAlong": 0.023088,
+   "wallPx": 11,
+   "crop": {
+    "x0": 381,
+    "x1": 514,
+    "y0": 421,
+    "y1": 624
+   },
+   "inkCropSha256": "493a12634d7d2d5b7a36b01cde3a31d7db8aa50e166a6faf412cfd7be71ddf1c",
+   "qid": "q049"
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-X-457-486-559",
+   "project": "A00",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-db1e8df563-19bef9a91e",
+   "storey": "GROUND",
+   "variantByteHash": "1d93c94a1526bc04f01a2d88dad0ace8f946a027c89664fee4a0da087ec27631",
+   "decompositionId": "dec-4ada5d8093843fb4",
+   "gapId": "gap-X-457-486-559",
+   "axis": "X",
+   "linePx": 457,
+   "axisPx": 450.3,
+   "fromPx": 486,
+   "toPx": 559,
+   "start": {
+    "x": 450.3,
+    "y": 486
+   },
+   "end": {
+    "x": 450.3,
+    "y": 559
+   },
+   "widthPx": 73,
+   "widthM": 1.685424,
+   "mppAlong": 0.023088,
+   "wallPx": 11,
+   "crop": {
+    "x0": 384,
+    "x1": 517,
+    "y0": 421,
+    "y1": 624
+   },
+   "inkCropSha256": "8c8c033131e24accb1c408f94bdc5578bb55760b734ec8d738a6da767a9e2aa8",
+   "qid": "q058"
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-X-726-267-397",
+   "project": "A00",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-db1e8df563-19bef9a91e",
+   "storey": "GROUND",
+   "variantByteHash": "1d93c94a1526bc04f01a2d88dad0ace8f946a027c89664fee4a0da087ec27631",
+   "decompositionId": "dec-4ada5d8093843fb4",
+   "gapId": "gap-X-726-267-397",
+   "axis": "X",
+   "linePx": 726,
+   "axisPx": 732.796601,
+   "fromPx": 267,
+   "toPx": 397,
+   "start": {
+    "x": 732.796601,
+    "y": 267
+   },
+   "end": {
+    "x": 732.796601,
+    "y": 397
+   },
+   "widthPx": 130,
+   "widthM": 3.00144,
+   "mppAlong": 0.023088,
+   "wallPx": 11,
+   "crop": {
+    "x0": 666,
+    "x1": 799,
+    "y0": 202,
+    "y1": 462
+   },
+   "inkCropSha256": "a3628aa0056d55b6df78bbdc1d8b643a30a5172bb5c1f0bf54e64cd24142ba86",
+   "qid": "q027"
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-Y-229-102-132",
+   "project": "A00",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-db1e8df563-19bef9a91e",
+   "storey": "GROUND",
+   "variantByteHash": "1d93c94a1526bc04f01a2d88dad0ace8f946a027c89664fee4a0da087ec27631",
+   "decompositionId": "dec-4ada5d8093843fb4",
+   "gapId": "gap-Y-229-102-132",
+   "axis": "Y",
+   "linePx": 228.773333,
+   "axisPx": 224.492759,
+   "fromPx": 102,
+   "toPx": 132,
+   "start": {
+    "x": 102,
+    "y": 224.492759
+   },
+   "end": {
+    "x": 132,
+    "y": 224.492759
+   },
+   "widthPx": 30,
+   "widthM": 0.6915,
+   "mppAlong": 0.02305,
+   "wallPx": 11,
+   "crop": {
+    "x0": 36,
+    "x1": 198,
+    "y0": 159,
+    "y1": 290
+   },
+   "inkCropSha256": "5939b27c4b33d0fc3ad3627d53306ecf78cab3eae56269e4813387b1f0600b8f",
+   "qid": "q020"
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-Y-229-196-264",
+   "project": "A00",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-db1e8df563-19bef9a91e",
+   "storey": "GROUND",
+   "variantByteHash": "1d93c94a1526bc04f01a2d88dad0ace8f946a027c89664fee4a0da087ec27631",
+   "decompositionId": "dec-4ada5d8093843fb4",
+   "gapId": "gap-Y-229-196-264",
+   "axis": "Y",
+   "linePx": 228.773333,
+   "axisPx": 223.463947,
+   "fromPx": 196,
+   "toPx": 264,
+   "start": {
+    "x": 196,
+    "y": 223.463947
+   },
+   "end": {
+    "x": 264,
+    "y": 223.463947
+   },
+   "widthPx": 68,
+   "widthM": 1.5674,
+   "mppAlong": 0.02305,
+   "wallPx": 11,
+   "crop": {
+    "x0": 130,
+    "x1": 330,
+    "y0": 158,
+    "y1": 289
+   },
+   "inkCropSha256": "d40d38424b80886e70916c025bc97c56b6cfda5439e376fc871ad8776adee336",
+   "qid": "q018"
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-Y-229-339-406",
+   "project": "A00",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-db1e8df563-19bef9a91e",
+   "storey": "GROUND",
+   "variantByteHash": "1d93c94a1526bc04f01a2d88dad0ace8f946a027c89664fee4a0da087ec27631",
+   "decompositionId": "dec-4ada5d8093843fb4",
+   "gapId": "gap-Y-229-339-406",
+   "axis": "Y",
+   "linePx": 228.773333,
+   "axisPx": 223.244077,
+   "fromPx": 339,
+   "toPx": 406,
+   "start": {
+    "x": 339,
+    "y": 223.244077
+   },
+   "end": {
+    "x": 406,
+    "y": 223.244077
+   },
+   "widthPx": 67,
+   "widthM": 1.54435,
+   "mppAlong": 0.02305,
+   "wallPx": 11,
+   "crop": {
+    "x0": 273,
+    "x1": 472,
+    "y0": 158,
+    "y1": 289
+   },
+   "inkCropSha256": "25944746a9ba3e987d1eb143e7f529f9a839c9cace1d35f7c6f53431c5355d51",
+   "qid": "q042"
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-Y-229-482-515",
+   "project": "A00",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-db1e8df563-19bef9a91e",
+   "storey": "GROUND",
+   "variantByteHash": "1d93c94a1526bc04f01a2d88dad0ace8f946a027c89664fee4a0da087ec27631",
+   "decompositionId": "dec-4ada5d8093843fb4",
+   "gapId": "gap-Y-229-482-515",
+   "axis": "Y",
+   "linePx": 228.773333,
+   "axisPx": 222.670139,
+   "fromPx": 482,
+   "toPx": 515,
+   "start": {
+    "x": 482,
+    "y": 222.670139
+   },
+   "end": {
+    "x": 515,
+    "y": 222.670139
+   },
+   "widthPx": 33,
+   "widthM": 0.76065,
+   "mppAlong": 0.02305,
+   "wallPx": 11,
+   "crop": {
+    "x0": 416,
+    "x1": 581,
+    "y0": 157,
+    "y1": 288
+   },
+   "inkCropSha256": "763b29e0c25af70da04acbad3f9721fd3b30cb7a91a4b22d8f41976a6fb40a58",
+   "qid": "q026"
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-Y-475-431-439",
+   "project": "A00",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-db1e8df563-19bef9a91e",
+   "storey": "GROUND",
+   "variantByteHash": "1d93c94a1526bc04f01a2d88dad0ace8f946a027c89664fee4a0da087ec27631",
+   "decompositionId": "dec-4ada5d8093843fb4",
+   "gapId": "gap-Y-475-431-439",
+   "axis": "Y",
+   "linePx": 475,
+   "axisPx": 472.192308,
+   "fromPx": 431,
+   "toPx": 439,
+   "start": {
+    "x": 431,
+    "y": 472.192308
+   },
+   "end": {
+    "x": 439,
+    "y": 472.192308
+   },
+   "widthPx": 8,
+   "widthM": 0.1844,
+   "mppAlong": 0.02305,
+   "wallPx": 11,
+   "crop": {
+    "x0": 365,
+    "x1": 505,
+    "y0": 407,
+    "y1": 538
+   },
+   "inkCropSha256": "8ec784787e99801a26cbc737275b558d8fcc9b5e87d16e50fbe748509d911a14",
+   "qid": "q024"
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-Y-559-463-521",
+   "project": "A00",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-db1e8df563-19bef9a91e",
+   "storey": "GROUND",
+   "variantByteHash": "1d93c94a1526bc04f01a2d88dad0ace8f946a027c89664fee4a0da087ec27631",
+   "decompositionId": "dec-4ada5d8093843fb4",
+   "gapId": "gap-Y-559-463-521",
+   "axis": "Y",
+   "linePx": 559,
+   "axisPx": 564.597929,
+   "fromPx": 463,
+   "toPx": 521,
+   "start": {
+    "x": 463,
+    "y": 564.597929
+   },
+   "end": {
+    "x": 521,
+    "y": 564.597929
+   },
+   "widthPx": 58,
+   "widthM": 1.3369,
+   "mppAlong": 0.02305,
+   "wallPx": 11,
+   "crop": {
+    "x0": 397,
+    "x1": 587,
+    "y0": 499,
+    "y1": 630
+   },
+   "inkCropSha256": "37d48032763be57ca4b5aa55a50124e8c581b7c49b2b40a229fcc3b0a0a94c51",
+   "qid": "q031"
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-Y-597-221-259",
+   "project": "A00",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-db1e8df563-19bef9a91e",
+   "storey": "GROUND",
+   "variantByteHash": "1d93c94a1526bc04f01a2d88dad0ace8f946a027c89664fee4a0da087ec27631",
+   "decompositionId": "dec-4ada5d8093843fb4",
+   "gapId": "gap-Y-597-221-259",
+   "axis": "Y",
+   "linePx": 596.5,
+   "axisPx": 595.078863,
+   "fromPx": 221,
+   "toPx": 259,
+   "start": {
+    "x": 221,
+    "y": 595.078863
+   },
+   "end": {
+    "x": 259,
+    "y": 595.078863
+   },
+   "widthPx": 38,
+   "widthM": 0.8759,
+   "mppAlong": 0.02305,
+   "wallPx": 11,
+   "crop": {
+    "x0": 155,
+    "x1": 325,
+    "y0": 530,
+    "y1": 661
+   },
+   "inkCropSha256": "223cf21852e89aeed598c1bbe47f82de5e95cdbfcd3750681a63f56eefd3605e",
+   "qid": "q017"
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-Y-597-320-358",
+   "project": "A00",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-db1e8df563-19bef9a91e",
+   "storey": "GROUND",
+   "variantByteHash": "1d93c94a1526bc04f01a2d88dad0ace8f946a027c89664fee4a0da087ec27631",
+   "decompositionId": "dec-4ada5d8093843fb4",
+   "gapId": "gap-Y-597-320-358",
+   "axis": "Y",
+   "linePx": 596.5,
+   "axisPx": 595.151103,
+   "fromPx": 320,
+   "toPx": 358,
+   "start": {
+    "x": 320,
+    "y": 595.151103
+   },
+   "end": {
+    "x": 358,
+    "y": 595.151103
+   },
+   "widthPx": 38,
+   "widthM": 0.8759,
+   "mppAlong": 0.02305,
+   "wallPx": 11,
+   "crop": {
+    "x0": 254,
+    "x1": 424,
+    "y0": 530,
+    "y1": 661
+   },
+   "inkCropSha256": "855fe23f32837fd744fae1c3fc26331a4926f53e542372222bb0a37578545421",
+   "qid": "q037"
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-Y-597-89-188",
+   "project": "A00",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-db1e8df563-19bef9a91e",
+   "storey": "GROUND",
+   "variantByteHash": "1d93c94a1526bc04f01a2d88dad0ace8f946a027c89664fee4a0da087ec27631",
+   "decompositionId": "dec-4ada5d8093843fb4",
+   "gapId": "gap-Y-597-89-188",
+   "axis": "Y",
+   "linePx": 596.5,
+   "axisPx": 594.900379,
+   "fromPx": 89,
+   "toPx": 188,
+   "start": {
+    "x": 89,
+    "y": 594.900379
+   },
+   "end": {
+    "x": 188,
+    "y": 594.900379
+   },
+   "widthPx": 99,
+   "widthM": 2.28195,
+   "mppAlong": 0.02305,
+   "wallPx": 11,
+   "crop": {
+    "x0": 23,
+    "x1": 254,
+    "y0": 529,
+    "y1": 660
+   },
+   "inkCropSha256": "654314a2dc6c849e730914b028076d24e6fe882489a3951bed2a1932e88660ff",
+   "qid": "q035"
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-Y-605-221-259",
+   "project": "A00",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-db1e8df563-19bef9a91e",
+   "storey": "GROUND",
+   "variantByteHash": "1d93c94a1526bc04f01a2d88dad0ace8f946a027c89664fee4a0da087ec27631",
+   "decompositionId": "dec-4ada5d8093843fb4",
+   "gapId": "gap-Y-605-221-259",
+   "axis": "Y",
+   "linePx": 605,
+   "axisPx": 598.113264,
+   "fromPx": 221,
+   "toPx": 259,
+   "start": {
+    "x": 221,
+    "y": 598.113264
+   },
+   "end": {
+    "x": 259,
+    "y": 598.113264
+   },
+   "widthPx": 38,
+   "widthM": 0.8759,
+   "mppAlong": 0.02305,
+   "wallPx": 11,
+   "crop": {
+    "x0": 155,
+    "x1": 325,
+    "y0": 533,
+    "y1": 664
+   },
+   "inkCropSha256": "01a066ae3cabee6d555ae6857f656ae25b0bf2d7fae022b3daa8f656b1bc1761",
+   "qid": "q003"
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-Y-605-320-358",
+   "project": "A00",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-db1e8df563-19bef9a91e",
+   "storey": "GROUND",
+   "variantByteHash": "1d93c94a1526bc04f01a2d88dad0ace8f946a027c89664fee4a0da087ec27631",
+   "decompositionId": "dec-4ada5d8093843fb4",
+   "gapId": "gap-Y-605-320-358",
+   "axis": "Y",
+   "linePx": 605,
+   "axisPx": 598.521272,
+   "fromPx": 320,
+   "toPx": 358,
+   "start": {
+    "x": 320,
+    "y": 598.521272
+   },
+   "end": {
+    "x": 358,
+    "y": 598.521272
+   },
+   "widthPx": 38,
+   "widthM": 0.8759,
+   "mppAlong": 0.02305,
+   "wallPx": 11,
+   "crop": {
+    "x0": 254,
+    "x1": 424,
+    "y0": 533,
+    "y1": 664
+   },
+   "inkCropSha256": "5335aa0524023345302359f657cc7df07e26f6fb29929b0ced3f8454a0f1beb2",
+   "qid": "q059"
+  },
+  {
+   "key": "A00/frame-asset-rzut-db1e8df563-19bef9a91e/dec-4ada5d8093843fb4/gap-Y-605-89-188",
+   "project": "A00",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-db1e8df563-19bef9a91e",
+   "storey": "GROUND",
+   "variantByteHash": "1d93c94a1526bc04f01a2d88dad0ace8f946a027c89664fee4a0da087ec27631",
+   "decompositionId": "dec-4ada5d8093843fb4",
+   "gapId": "gap-Y-605-89-188",
+   "axis": "Y",
+   "linePx": 605,
+   "axisPx": 598.105682,
+   "fromPx": 89,
+   "toPx": 188,
+   "start": {
+    "x": 89,
+    "y": 598.105682
+   },
+   "end": {
+    "x": 188,
+    "y": 598.105682
+   },
+   "widthPx": 99,
+   "widthM": 2.28195,
+   "mppAlong": 0.02305,
+   "wallPx": 11,
+   "crop": {
+    "x0": 23,
+    "x1": 254,
+    "y0": 533,
+    "y1": 664
+   },
+   "inkCropSha256": "04ab9be9a91c463881d327bccd4484538642c5a8ec8f35c0eaf0b2a3457ad37c",
+   "qid": "q060"
+  },
+  {
+   "key": "A02/frame-asset-rzut-2c17aa3eda-b6cebfd23d/dec-f9758600a9347dc6/gap-X-109-376-414",
+   "project": "A02",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-2c17aa3eda-b6cebfd23d",
+   "storey": "GROUND",
+   "variantByteHash": "362c342ee1a3bf0e6924a4aac23a4941c4bbdd1c2bc7a5ec31db13f6353894a4",
+   "decompositionId": "dec-f9758600a9347dc6",
+   "gapId": "gap-X-109-376-414",
+   "axis": "X",
+   "linePx": 109,
+   "axisPx": 100.664998,
+   "fromPx": 376,
+   "toPx": 414,
+   "start": {
+    "x": 100.664998,
+    "y": 376
+   },
+   "end": {
+    "x": 100.664998,
+    "y": 414
+   },
+   "widthPx": 38,
+   "widthM": 0.946428,
+   "mppAlong": 0.024906,
+   "wallPx": 18.125,
+   "crop": {
+    "x0": 27,
+    "x1": 174,
+    "y0": 303,
+    "y1": 487
+   },
+   "inkCropSha256": "9a55dde253cf4803f52e2dcc4b2acfc5c7d8909edf4f4ddbfec34f66d795b742",
+   "qid": "q047"
+  },
+  {
+   "key": "A02/frame-asset-rzut-2c17aa3eda-b6cebfd23d/dec-f9758600a9347dc6/gap-X-280-177-303",
+   "project": "A02",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-2c17aa3eda-b6cebfd23d",
+   "storey": "GROUND",
+   "variantByteHash": "362c342ee1a3bf0e6924a4aac23a4941c4bbdd1c2bc7a5ec31db13f6353894a4",
+   "decompositionId": "dec-f9758600a9347dc6",
+   "gapId": "gap-X-280-177-303",
+   "axis": "X",
+   "linePx": 280,
+   "axisPx": 270.730769,
+   "fromPx": 177,
+   "toPx": 303,
+   "start": {
+    "x": 270.730769,
+    "y": 177
+   },
+   "end": {
+    "x": 270.730769,
+    "y": 303
+   },
+   "widthPx": 126,
+   "widthM": 3.138156,
+   "mppAlong": 0.024906,
+   "wallPx": 18.125,
+   "crop": {
+    "x0": 197,
+    "x1": 344,
+    "y0": 104,
+    "y1": 376
+   },
+   "inkCropSha256": "111959ad9b191cd34af6aea73d3628fc7cc14e3020836f82f698c1858550289b",
+   "qid": "q043"
+  },
+  {
+   "key": "A02/frame-asset-rzut-2c17aa3eda-b6cebfd23d/dec-f9758600a9347dc6/gap-X-90-374-414",
+   "project": "A02",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-2c17aa3eda-b6cebfd23d",
+   "storey": "GROUND",
+   "variantByteHash": "362c342ee1a3bf0e6924a4aac23a4941c4bbdd1c2bc7a5ec31db13f6353894a4",
+   "decompositionId": "dec-f9758600a9347dc6",
+   "gapId": "gap-X-90-374-414",
+   "axis": "X",
+   "linePx": 90,
+   "axisPx": 99.222899,
+   "fromPx": 374,
+   "toPx": 414,
+   "start": {
+    "x": 99.222899,
+    "y": 374
+   },
+   "end": {
+    "x": 99.222899,
+    "y": 414
+   },
+   "widthPx": 40,
+   "widthM": 0.99624,
+   "mppAlong": 0.024906,
+   "wallPx": 18.125,
+   "crop": {
+    "x0": 26,
+    "x1": 173,
+    "y0": 301,
+    "y1": 487
+   },
+   "inkCropSha256": "0c9a902679a312a43ed25f4b72593aa813c331656e2506206661d52a532dd21c",
+   "qid": "q057"
+  },
+  {
+   "key": "A02/frame-asset-rzut-2c17aa3eda-b6cebfd23d/dec-f9758600a9347dc6/gap-X-90-467-547",
+   "project": "A02",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-2c17aa3eda-b6cebfd23d",
+   "storey": "GROUND",
+   "variantByteHash": "362c342ee1a3bf0e6924a4aac23a4941c4bbdd1c2bc7a5ec31db13f6353894a4",
+   "decompositionId": "dec-f9758600a9347dc6",
+   "gapId": "gap-X-90-467-547",
+   "axis": "X",
+   "linePx": 90,
+   "axisPx": 99.102903,
+   "fromPx": 467,
+   "toPx": 547,
+   "start": {
+    "x": 99.102903,
+    "y": 467
+   },
+   "end": {
+    "x": 99.102903,
+    "y": 547
+   },
+   "widthPx": 80,
+   "widthM": 1.99248,
+   "mppAlong": 0.024906,
+   "wallPx": 18.125,
+   "crop": {
+    "x0": 26,
+    "x1": 173,
+    "y0": 394,
+    "y1": 620
+   },
+   "inkCropSha256": "c8ffd284e3146dde08fce6757c1afee962dcbaf00463576cfff5db2de71737cb",
+   "qid": "q051"
+  },
+  {
+   "key": "A03/frame-asset-rzut-1f95f4ce4d-eaa13be831/dec-2f9938d6f2b70e36/gap-X-390-561-602",
+   "project": "A03",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-1f95f4ce4d-eaa13be831",
+   "storey": "GROUND",
+   "variantByteHash": "699db25a363aabfbd422c1da3ae9421588a984e19abcd05df68a643f78a98790",
+   "decompositionId": "dec-2f9938d6f2b70e36",
+   "gapId": "gap-X-390-561-602",
+   "axis": "X",
+   "linePx": 389.5,
+   "axisPx": 392.5,
+   "fromPx": 561,
+   "toPx": 602,
+   "start": {
+    "x": 392.5,
+    "y": 561
+   },
+   "end": {
+    "x": 392.5,
+    "y": 602
+   },
+   "widthPx": 41,
+   "widthM": 1.028198,
+   "mppAlong": 0.025078,
+   "wallPx": 18,
+   "crop": {
+    "x0": 320,
+    "x1": 465,
+    "y0": 489,
+    "y1": 674
+   },
+   "inkCropSha256": "35a8f44503a6d5c83c0ceeab5a18aabc949284a19d71c85951f25fcca0e304a1",
+   "qid": "q033"
+  },
+  {
+   "key": "A03/frame-asset-rzut-1f95f4ce4d-eaa13be831/dec-2f9938d6f2b70e36/gap-X-402-561-602",
+   "project": "A03",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-1f95f4ce4d-eaa13be831",
+   "storey": "GROUND",
+   "variantByteHash": "699db25a363aabfbd422c1da3ae9421588a984e19abcd05df68a643f78a98790",
+   "decompositionId": "dec-2f9938d6f2b70e36",
+   "gapId": "gap-X-402-561-602",
+   "axis": "X",
+   "linePx": 401.5,
+   "axisPx": 400.630435,
+   "fromPx": 561,
+   "toPx": 602,
+   "start": {
+    "x": 400.630435,
+    "y": 561
+   },
+   "end": {
+    "x": 400.630435,
+    "y": 602
+   },
+   "widthPx": 41,
+   "widthM": 1.028198,
+   "mppAlong": 0.025078,
+   "wallPx": 18,
+   "crop": {
+    "x0": 328,
+    "x1": 473,
+    "y0": 489,
+    "y1": 674
+   },
+   "inkCropSha256": "6b0a3ddee4ecd65ef8853051e61b29a60e96001b959f2fee95198a503758b945",
+   "qid": "q028"
+  },
+  {
+   "key": "A03/frame-asset-rzut-1f95f4ce4d-eaa13be831/dec-2f9938d6f2b70e36/gap-X-418-561-602",
+   "project": "A03",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-1f95f4ce4d-eaa13be831",
+   "storey": "GROUND",
+   "variantByteHash": "699db25a363aabfbd422c1da3ae9421588a984e19abcd05df68a643f78a98790",
+   "decompositionId": "dec-2f9938d6f2b70e36",
+   "gapId": "gap-X-418-561-602",
+   "axis": "X",
+   "linePx": 418,
+   "axisPx": 407.23913,
+   "fromPx": 561,
+   "toPx": 602,
+   "start": {
+    "x": 407.23913,
+    "y": 561
+   },
+   "end": {
+    "x": 407.23913,
+    "y": 602
+   },
+   "widthPx": 41,
+   "widthM": 1.028198,
+   "mppAlong": 0.025078,
+   "wallPx": 18,
+   "crop": {
+    "x0": 335,
+    "x1": 480,
+    "y0": 489,
+    "y1": 674
+   },
+   "inkCropSha256": "deb306f39b32d80ea5163a8b62332945fc3d778b7f034bfe159f143569831ac4",
+   "qid": "q019"
+  },
+  {
+   "key": "A03/frame-asset-rzut-1f95f4ce4d-eaa13be831/dec-2f9938d6f2b70e36/gap-Y-604-338-363",
+   "project": "A03",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-1f95f4ce4d-eaa13be831",
+   "storey": "GROUND",
+   "variantByteHash": "699db25a363aabfbd422c1da3ae9421588a984e19abcd05df68a643f78a98790",
+   "decompositionId": "dec-2f9938d6f2b70e36",
+   "gapId": "gap-Y-604-338-363",
+   "axis": "Y",
+   "linePx": 604,
+   "axisPx": 614.91745,
+   "fromPx": 338,
+   "toPx": 363,
+   "start": {
+    "x": 338,
+    "y": 614.91745
+   },
+   "end": {
+    "x": 363,
+    "y": 614.91745
+   },
+   "widthPx": 25,
+   "widthM": 0.62695,
+   "mppAlong": 0.025078,
+   "wallPx": 18,
+   "crop": {
+    "x0": 266,
+    "x1": 435,
+    "y0": 542,
+    "y1": 687
+   },
+   "inkCropSha256": "c6c8e8048fe5dc205634fe0f8cf41252b14d3ee284e6bf89df760910a393529a",
+   "qid": "q040"
+  },
+  {
+   "key": "A03/frame-asset-rzut-1f95f4ce4d-eaa13be831/dec-2f9938d6f2b70e36/gap-Y-624-336-359",
+   "project": "A03",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-1f95f4ce4d-eaa13be831",
+   "storey": "GROUND",
+   "variantByteHash": "699db25a363aabfbd422c1da3ae9421588a984e19abcd05df68a643f78a98790",
+   "decompositionId": "dec-2f9938d6f2b70e36",
+   "gapId": "gap-Y-624-336-359",
+   "axis": "Y",
+   "linePx": 624,
+   "axisPx": 618.13384,
+   "fromPx": 336,
+   "toPx": 359,
+   "start": {
+    "x": 336,
+    "y": 618.13384
+   },
+   "end": {
+    "x": 359,
+    "y": 618.13384
+   },
+   "widthPx": 23,
+   "widthM": 0.576794,
+   "mppAlong": 0.025078,
+   "wallPx": 18,
+   "crop": {
+    "x0": 264,
+    "x1": 431,
+    "y0": 546,
+    "y1": 691
+   },
+   "inkCropSha256": "df6e9121de2ecf25ae3d1d292ca081284624c45fa9f602a4f8c0ffdde0813dfb",
+   "qid": "q012"
+  },
+  {
+   "key": "A04/frame-asset-rzut-1b82f82f43-ced10ac33a/dec-e457655e37634b05/gap-Y-196-405-418",
+   "project": "A04",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-1b82f82f43-ced10ac33a",
+   "storey": "ATTIC",
+   "variantByteHash": "5a26e21667f17e5c44bce2e71fbcd115984e00ce004a4a643be69ba5e1b7a7b7",
+   "decompositionId": "dec-e457655e37634b05",
+   "gapId": "gap-Y-196-405-418",
+   "axis": "Y",
+   "linePx": 196.25,
+   "axisPx": 197.72449,
+   "fromPx": 405,
+   "toPx": 418,
+   "start": {
+    "x": 405,
+    "y": 197.72449
+   },
+   "end": {
+    "x": 418,
+    "y": 197.72449
+   },
+   "widthPx": 13,
+   "widthM": 0.459485,
+   "mppAlong": 0.035345,
+   "wallPx": 18,
+   "crop": {
+    "x0": 333,
+    "x1": 490,
+    "y0": 125,
+    "y1": 270
+   },
+   "inkCropSha256": "8d73e399aa60e6223518850fea775f16689588724dc9d824266377b74f1063fa",
+   "qid": "q005"
+  },
+  {
+   "key": "A04/frame-asset-rzut-1b82f82f43-ced10ac33a/dec-e457655e37634b05/gap-Y-510-405-418",
+   "project": "A04",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-1b82f82f43-ced10ac33a",
+   "storey": "ATTIC",
+   "variantByteHash": "5a26e21667f17e5c44bce2e71fbcd115984e00ce004a4a643be69ba5e1b7a7b7",
+   "decompositionId": "dec-e457655e37634b05",
+   "gapId": "gap-Y-510-405-418",
+   "axis": "Y",
+   "linePx": 509.5,
+   "axisPx": 516.193878,
+   "fromPx": 405,
+   "toPx": 418,
+   "start": {
+    "x": 405,
+    "y": 516.193878
+   },
+   "end": {
+    "x": 418,
+    "y": 516.193878
+   },
+   "widthPx": 13,
+   "widthM": 0.459485,
+   "mppAlong": 0.035345,
+   "wallPx": 18,
+   "crop": {
+    "x0": 333,
+    "x1": 490,
+    "y0": 444,
+    "y1": 589
+   },
+   "inkCropSha256": "fd1a416a3dd68a8952fc813f7cee421fa08fad65b36f0cde1f47fda5f5582b11",
+   "qid": "q038"
+  },
+  {
+   "key": "A04/frame-asset-rzut-1b82f82f43-ced10ac33a/dec-e457655e37634b05/gap-Y-541-374-387",
+   "project": "A04",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-1b82f82f43-ced10ac33a",
+   "storey": "ATTIC",
+   "variantByteHash": "5a26e21667f17e5c44bce2e71fbcd115984e00ce004a4a643be69ba5e1b7a7b7",
+   "decompositionId": "dec-e457655e37634b05",
+   "gapId": "gap-Y-541-374-387",
+   "axis": "Y",
+   "linePx": 541,
+   "axisPx": 547.083333,
+   "fromPx": 374,
+   "toPx": 387,
+   "start": {
+    "x": 374,
+    "y": 547.083333
+   },
+   "end": {
+    "x": 387,
+    "y": 547.083333
+   },
+   "widthPx": 13,
+   "widthM": 0.459485,
+   "mppAlong": 0.035345,
+   "wallPx": 18,
+   "crop": {
+    "x0": 302,
+    "x1": 459,
+    "y0": 475,
+    "y1": 620
+   },
+   "inkCropSha256": "f1959693da858e5af02806794b9f59024e7d6903dcf9a014944ae32a9fd71f73",
+   "qid": "q025"
+  },
+  {
+   "key": "A04/frame-asset-rzut-1b82f82f43-ced10ac33a/dec-e457655e37634b05/gap-Y-708-374-387",
+   "project": "A04",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-1b82f82f43-ced10ac33a",
+   "storey": "ATTIC",
+   "variantByteHash": "5a26e21667f17e5c44bce2e71fbcd115984e00ce004a4a643be69ba5e1b7a7b7",
+   "decompositionId": "dec-e457655e37634b05",
+   "gapId": "gap-Y-708-374-387",
+   "axis": "Y",
+   "linePx": 707.5,
+   "axisPx": 707.261062,
+   "fromPx": 374,
+   "toPx": 387,
+   "start": {
+    "x": 374,
+    "y": 707.261062
+   },
+   "end": {
+    "x": 387,
+    "y": 707.261062
+   },
+   "widthPx": 13,
+   "widthM": 0.459485,
+   "mppAlong": 0.035345,
+   "wallPx": 18,
+   "crop": {
+    "x0": 302,
+    "x1": 459,
+    "y0": 635,
+    "y1": 780
+   },
+   "inkCropSha256": "7a481bdf6f884aceab496994858115071ec7982cd2779221f519318596e6877c",
+   "qid": "q032"
+  },
+  {
+   "key": "A04/frame-asset-rzut-4f91f26bdf-589c8abdb3/dec-35a0d14044b5d0d8/gap-X-350-530-552",
+   "project": "A04",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-4f91f26bdf-589c8abdb3",
+   "storey": "GROUND",
+   "variantByteHash": "bc37be1f1ec55ebca260789d99ea79628869b665c041ef3ee70e8359eadc3713",
+   "decompositionId": "dec-35a0d14044b5d0d8",
+   "gapId": "gap-X-350-530-552",
+   "axis": "X",
+   "linePx": 350,
+   "axisPx": 354.16556,
+   "fromPx": 530,
+   "toPx": 552,
+   "start": {
+    "x": 354.16556,
+    "y": 530
+   },
+   "end": {
+    "x": 354.16556,
+    "y": 552
+   },
+   "widthPx": 22,
+   "widthM": 0.560428,
+   "mppAlong": 0.025474,
+   "wallPx": 13,
+   "crop": {
+    "x0": 295,
+    "x1": 414,
+    "y0": 471,
+    "y1": 611
+   },
+   "inkCropSha256": "3731b84c33ced9bee8822119916ea220a20ad49ca8b15cc01837a2ea25b62514",
+   "qid": "q014"
+  },
+  {
+   "key": "A04/frame-asset-rzut-4f91f26bdf-589c8abdb3/dec-35a0d14044b5d0d8/gap-X-366-455-492",
+   "project": "A04",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-4f91f26bdf-589c8abdb3",
+   "storey": "GROUND",
+   "variantByteHash": "bc37be1f1ec55ebca260789d99ea79628869b665c041ef3ee70e8359eadc3713",
+   "decompositionId": "dec-35a0d14044b5d0d8",
+   "gapId": "gap-X-366-455-492",
+   "axis": "X",
+   "linePx": 366,
+   "axisPx": 359.734786,
+   "fromPx": 455,
+   "toPx": 492,
+   "start": {
+    "x": 359.734786,
+    "y": 455
+   },
+   "end": {
+    "x": 359.734786,
+    "y": 492
+   },
+   "widthPx": 37,
+   "widthM": 0.942538,
+   "mppAlong": 0.025474,
+   "wallPx": 13,
+   "crop": {
+    "x0": 300,
+    "x1": 419,
+    "y0": 396,
+    "y1": 551
+   },
+   "inkCropSha256": "23c34c9594dddb92a7e9fe967104a1c6cb1283b9b60ffe1cea81e2a62e784271",
+   "qid": "q050"
+  },
+  {
+   "key": "A04/frame-asset-rzut-4f91f26bdf-589c8abdb3/dec-35a0d14044b5d0d8/gap-X-366-530-552",
+   "project": "A04",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-4f91f26bdf-589c8abdb3",
+   "storey": "GROUND",
+   "variantByteHash": "bc37be1f1ec55ebca260789d99ea79628869b665c041ef3ee70e8359eadc3713",
+   "decompositionId": "dec-35a0d14044b5d0d8",
+   "gapId": "gap-X-366-530-552",
+   "axis": "X",
+   "linePx": 366,
+   "axisPx": 356.605008,
+   "fromPx": 530,
+   "toPx": 552,
+   "start": {
+    "x": 356.605008,
+    "y": 530
+   },
+   "end": {
+    "x": 356.605008,
+    "y": 552
+   },
+   "widthPx": 22,
+   "widthM": 0.560428,
+   "mppAlong": 0.025474,
+   "wallPx": 13,
+   "crop": {
+    "x0": 297,
+    "x1": 416,
+    "y0": 471,
+    "y1": 611
+   },
+   "inkCropSha256": "68f0ea700c1bd3cbe622788b4499fd6da68c4679e5ad7c71d2b6e4362ede8a8c",
+   "qid": "q016"
+  },
+  {
+   "key": "A04/frame-asset-rzut-4f91f26bdf-589c8abdb3/dec-35a0d14044b5d0d8/gap-Y-471-80-183",
+   "project": "A04",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-4f91f26bdf-589c8abdb3",
+   "storey": "GROUND",
+   "variantByteHash": "bc37be1f1ec55ebca260789d99ea79628869b665c041ef3ee70e8359eadc3713",
+   "decompositionId": "dec-35a0d14044b5d0d8",
+   "gapId": "gap-Y-471-80-183",
+   "axis": "Y",
+   "linePx": 471,
+   "axisPx": 473.669118,
+   "fromPx": 80,
+   "toPx": 183,
+   "start": {
+    "x": 80,
+    "y": 473.669118
+   },
+   "end": {
+    "x": 183,
+    "y": 473.669118
+   },
+   "widthPx": 103,
+   "widthM": 2.627015,
+   "mppAlong": 0.025505,
+   "wallPx": 13,
+   "crop": {
+    "x0": 21,
+    "x1": 242,
+    "y0": 414,
+    "y1": 533
+   },
+   "inkCropSha256": "7039f53cef3975453faa8ef600b410d12a6370403c6f46ee2d648192a2091ed4",
+   "qid": "q034"
+  },
+  {
+   "key": "A05/frame-asset-rzut-238dfbc50b-38cf8e09f5/dec-9d43b45f77fd46c0/gap-X-806-324-456",
+   "project": "A05",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-238dfbc50b-38cf8e09f5",
+   "storey": "GROUND",
+   "variantByteHash": "1fba617871740f9bea474a7198e0c0f6b99bbf3f4f5e3b1c5de55de472d22561",
+   "decompositionId": "dec-9d43b45f77fd46c0",
+   "gapId": "gap-X-806-324-456",
+   "axis": "X",
+   "linePx": 806,
+   "axisPx": 797.625,
+   "fromPx": 324,
+   "toPx": 456,
+   "start": {
+    "x": 797.625,
+    "y": 324
+   },
+   "end": {
+    "x": 797.625,
+    "y": 456
+   },
+   "widthPx": 132,
+   "widthM": 2.78586,
+   "mppAlong": 0.021105,
+   "wallPx": 13,
+   "crop": {
+    "x0": 725,
+    "x1": 852,
+    "y0": 252,
+    "y1": 528
+   },
+   "inkCropSha256": "762b633fd2d3d7756270faee2536d7ef11b9edbe952bd9246154b40307682f72",
+   "qid": "q010"
+  },
+  {
+   "key": "A05/frame-asset-rzut-238dfbc50b-38cf8e09f5/dec-9d43b45f77fd46c0/gap-Y-209-163-248",
+   "project": "A05",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-238dfbc50b-38cf8e09f5",
+   "storey": "GROUND",
+   "variantByteHash": "1fba617871740f9bea474a7198e0c0f6b99bbf3f4f5e3b1c5de55de472d22561",
+   "decompositionId": "dec-9d43b45f77fd46c0",
+   "gapId": "gap-Y-209-163-248",
+   "axis": "Y",
+   "linePx": 209,
+   "axisPx": 212.94246,
+   "fromPx": 163,
+   "toPx": 248,
+   "start": {
+    "x": 163,
+    "y": 212.94246
+   },
+   "end": {
+    "x": 248,
+    "y": 212.94246
+   },
+   "widthPx": 85,
+   "widthM": 1.7935,
+   "mppAlong": 0.0211,
+   "wallPx": 13,
+   "crop": {
+    "x0": 91,
+    "x1": 320,
+    "y0": 140,
+    "y1": 285
+   },
+   "inkCropSha256": "5dcc008d9581c753d10c72e4f4bd710799cdc2a8a2d97cdb5eaa297e1b118e62",
+   "qid": "q054"
+  },
+  {
+   "key": "A05/frame-asset-rzut-238dfbc50b-38cf8e09f5/dec-9d43b45f77fd46c0/gap-Y-209-311-396",
+   "project": "A05",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-238dfbc50b-38cf8e09f5",
+   "storey": "GROUND",
+   "variantByteHash": "1fba617871740f9bea474a7198e0c0f6b99bbf3f4f5e3b1c5de55de472d22561",
+   "decompositionId": "dec-9d43b45f77fd46c0",
+   "gapId": "gap-Y-209-311-396",
+   "axis": "Y",
+   "linePx": 209,
+   "axisPx": 212.82246,
+   "fromPx": 311,
+   "toPx": 396,
+   "start": {
+    "x": 311,
+    "y": 212.82246
+   },
+   "end": {
+    "x": 396,
+    "y": 212.82246
+   },
+   "widthPx": 85,
+   "widthM": 1.7935,
+   "mppAlong": 0.0211,
+   "wallPx": 13,
+   "crop": {
+    "x0": 239,
+    "x1": 468,
+    "y0": 140,
+    "y1": 285
+   },
+   "inkCropSha256": "854dfff9b22eb807bde9533740327de86513c44fa2624be4cea3b7b1814394dc",
+   "qid": "q045"
+  },
+  {
+   "key": "A05/frame-asset-rzut-238dfbc50b-38cf8e09f5/dec-9d43b45f77fd46c0/gap-Y-622-624-709",
+   "project": "A05",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-238dfbc50b-38cf8e09f5",
+   "storey": "GROUND",
+   "variantByteHash": "1fba617871740f9bea474a7198e0c0f6b99bbf3f4f5e3b1c5de55de472d22561",
+   "decompositionId": "dec-9d43b45f77fd46c0",
+   "gapId": "gap-Y-622-624-709",
+   "axis": "Y",
+   "linePx": 622,
+   "axisPx": 622.29138,
+   "fromPx": 624,
+   "toPx": 709,
+   "start": {
+    "x": 624,
+    "y": 622.29138
+   },
+   "end": {
+    "x": 709,
+    "y": 622.29138
+   },
+   "widthPx": 85,
+   "widthM": 1.7935,
+   "mppAlong": 0.0211,
+   "wallPx": 13,
+   "crop": {
+    "x0": 552,
+    "x1": 781,
+    "y0": 550,
+    "y1": 695
+   },
+   "inkCropSha256": "80fe0eb0a7df4deb8561d25cc83f5c6f4be2a9f0f7f958b6f70134bf1cf41a31",
+   "qid": "q030"
+  },
+  {
+   "key": "A05/frame-asset-rzut-238dfbc50b-38cf8e09f5/dec-9d43b45f77fd46c0/gap-Y-634-427-474",
+   "project": "A05",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-238dfbc50b-38cf8e09f5",
+   "storey": "GROUND",
+   "variantByteHash": "1fba617871740f9bea474a7198e0c0f6b99bbf3f4f5e3b1c5de55de472d22561",
+   "decompositionId": "dec-9d43b45f77fd46c0",
+   "gapId": "gap-Y-634-427-474",
+   "axis": "Y",
+   "linePx": 634,
+   "axisPx": 627.575,
+   "fromPx": 427,
+   "toPx": 474,
+   "start": {
+    "x": 427,
+    "y": 627.575
+   },
+   "end": {
+    "x": 474,
+    "y": 627.575
+   },
+   "widthPx": 47,
+   "widthM": 0.9917,
+   "mppAlong": 0.0211,
+   "wallPx": 13,
+   "crop": {
+    "x0": 355,
+    "x1": 546,
+    "y0": 555,
+    "y1": 700
+   },
+   "inkCropSha256": "ca990d218988032f98bbe0da39c2a33fba309698ff8f2cfb3bc581d175f72cae",
+   "qid": "q015"
+  },
+  {
+   "key": "A05/frame-asset-rzut-238dfbc50b-38cf8e09f5/dec-9d43b45f77fd46c0/gap-Y-634-624-709",
+   "project": "A05",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-238dfbc50b-38cf8e09f5",
+   "storey": "GROUND",
+   "variantByteHash": "1fba617871740f9bea474a7198e0c0f6b99bbf3f4f5e3b1c5de55de472d22561",
+   "decompositionId": "dec-9d43b45f77fd46c0",
+   "gapId": "gap-Y-634-624-709",
+   "axis": "Y",
+   "linePx": 634,
+   "axisPx": 625.417586,
+   "fromPx": 624,
+   "toPx": 709,
+   "start": {
+    "x": 624,
+    "y": 625.417586
+   },
+   "end": {
+    "x": 709,
+    "y": 625.417586
+   },
+   "widthPx": 85,
+   "widthM": 1.7935,
+   "mppAlong": 0.0211,
+   "wallPx": 13,
+   "crop": {
+    "x0": 552,
+    "x1": 781,
+    "y0": 553,
+    "y1": 698
+   },
+   "inkCropSha256": "d7d6f8fbec880742e5c559176a6ca9fdda964891a9e895e765bb93010676fbe4",
+   "qid": "q055"
+  },
+  {
+   "key": "A05/frame-asset-rzut-238dfbc50b-38cf8e09f5/dec-9d43b45f77fd46c0/gap-Y-670-273-357",
+   "project": "A05",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-238dfbc50b-38cf8e09f5",
+   "storey": "GROUND",
+   "variantByteHash": "1fba617871740f9bea474a7198e0c0f6b99bbf3f4f5e3b1c5de55de472d22561",
+   "decompositionId": "dec-9d43b45f77fd46c0",
+   "gapId": "gap-Y-670-273-357",
+   "axis": "Y",
+   "linePx": 669.5,
+   "axisPx": 669.004902,
+   "fromPx": 273,
+   "toPx": 357,
+   "start": {
+    "x": 273,
+    "y": 669.004902
+   },
+   "end": {
+    "x": 357,
+    "y": 669.004902
+   },
+   "widthPx": 84,
+   "widthM": 1.7724,
+   "mppAlong": 0.0211,
+   "wallPx": 13,
+   "crop": {
+    "x0": 201,
+    "x1": 429,
+    "y0": 597,
+    "y1": 742
+   },
+   "inkCropSha256": "80c9a5aeaed66676030d437b386b6e0e490f6644dc42c2414d939dd1123b9994",
+   "qid": "q039"
+  },
+  {
+   "key": "A06/frame-asset-rzut-f08001e3c4-8b24c71f3f/dec-58be3e00acd8ae8d/gap-X-353-587-740",
+   "project": "A06",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-f08001e3c4-8b24c71f3f",
+   "storey": "GROUND",
+   "variantByteHash": "79a8fa44d886ab09cc15328bb379b3f4de830684e7b12573f9df9f0d85b1564a",
+   "decompositionId": "dec-58be3e00acd8ae8d",
+   "gapId": "gap-X-353-587-740",
+   "axis": "X",
+   "linePx": 352.5,
+   "axisPx": 360.681818,
+   "fromPx": 587,
+   "toPx": 740,
+   "start": {
+    "x": 360.681818,
+    "y": 587
+   },
+   "end": {
+    "x": 360.681818,
+    "y": 740
+   },
+   "widthPx": 153,
+   "widthM": 3.169242,
+   "mppAlong": 0.020714,
+   "wallPx": 13.117188,
+   "crop": {
+    "x0": 287,
+    "x1": 434,
+    "y0": 514,
+    "y1": 813
+   },
+   "inkCropSha256": "8a40dd7bb4e4e90e231bcb1704153d3dd7beac9119bb941099d8935d712641dd",
+   "qid": "q004"
+  },
+  {
+   "key": "A06/frame-asset-rzut-f08001e3c4-8b24c71f3f/dec-58be3e00acd8ae8d/gap-Y-762-308-353",
+   "project": "A06",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-f08001e3c4-8b24c71f3f",
+   "storey": "GROUND",
+   "variantByteHash": "79a8fa44d886ab09cc15328bb379b3f4de830684e7b12573f9df9f0d85b1564a",
+   "decompositionId": "dec-58be3e00acd8ae8d",
+   "gapId": "gap-Y-762-308-353",
+   "axis": "Y",
+   "linePx": 761.5,
+   "axisPx": 755.840909,
+   "fromPx": 308,
+   "toPx": 353,
+   "start": {
+    "x": 308,
+    "y": 755.840909
+   },
+   "end": {
+    "x": 353,
+    "y": 755.840909
+   },
+   "widthPx": 45,
+   "widthM": 0.93267,
+   "mppAlong": 0.020726,
+   "wallPx": 13.117188,
+   "crop": {
+    "x0": 235,
+    "x1": 426,
+    "y0": 682,
+    "y1": 829
+   },
+   "inkCropSha256": "761dadcf3361ac1204f09fc3632bdbbf4cb4ab5bec68cab047a3f87da1fb3a3f",
+   "qid": "q048"
+  },
+  {
+   "key": "A06/frame-asset-rzut-f08001e3c4-8b24c71f3f/dec-58be3e00acd8ae8d/gap-Y-762-428-470",
+   "project": "A06",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-f08001e3c4-8b24c71f3f",
+   "storey": "GROUND",
+   "variantByteHash": "79a8fa44d886ab09cc15328bb379b3f4de830684e7b12573f9df9f0d85b1564a",
+   "decompositionId": "dec-58be3e00acd8ae8d",
+   "gapId": "gap-Y-762-428-470",
+   "axis": "Y",
+   "linePx": 761.5,
+   "axisPx": 753.532608,
+   "fromPx": 428,
+   "toPx": 470,
+   "start": {
+    "x": 428,
+    "y": 753.532608
+   },
+   "end": {
+    "x": 470,
+    "y": 753.532608
+   },
+   "widthPx": 42,
+   "widthM": 0.870492,
+   "mppAlong": 0.020726,
+   "wallPx": 13.117188,
+   "crop": {
+    "x0": 355,
+    "x1": 543,
+    "y0": 680,
+    "y1": 827
+   },
+   "inkCropSha256": "24cbdffac9fc7e1d275b5ec8104fb86d0718c2eda16fdf8e68604df5cbd2239f",
+   "qid": "q022"
+  },
+  {
+   "key": "A07/frame-asset-rzut-dec884e019-46909f56cf/dec-0b2a34a1a9ce2609/gap-X-790-299-376",
+   "project": "A07",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-dec884e019-46909f56cf",
+   "storey": "GROUND",
+   "variantByteHash": "187dc03ee30eda6f37df26de325128c8385552ccf81870f8b70e7e3c2f22e409",
+   "decompositionId": "dec-0b2a34a1a9ce2609",
+   "gapId": "gap-X-790-299-376",
+   "axis": "X",
+   "linePx": 789.5,
+   "axisPx": 782.824485,
+   "fromPx": 299,
+   "toPx": 376,
+   "start": {
+    "x": 782.824485,
+    "y": 299
+   },
+   "end": {
+    "x": 782.824485,
+    "y": 376
+   },
+   "widthPx": 77,
+   "widthM": 1.782165,
+   "mppAlong": 0.023145,
+   "wallPx": 11,
+   "crop": {
+    "x0": 717,
+    "x1": 848,
+    "y0": 234,
+    "y1": 441
+   },
+   "inkCropSha256": "c68fa31c934e416e4a1433bddef3932ff11369ae9bd1334bf87625344e74d310",
+   "qid": "q011"
+  },
+  {
+   "key": "A07/frame-asset-rzut-dec884e019-46909f56cf/dec-0b2a34a1a9ce2609/gap-Y-228-326-363",
+   "project": "A07",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-dec884e019-46909f56cf",
+   "storey": "GROUND",
+   "variantByteHash": "187dc03ee30eda6f37df26de325128c8385552ccf81870f8b70e7e3c2f22e409",
+   "decompositionId": "dec-0b2a34a1a9ce2609",
+   "gapId": "gap-Y-228-326-363",
+   "axis": "Y",
+   "linePx": 228,
+   "axisPx": 229.588095,
+   "fromPx": 326,
+   "toPx": 363,
+   "start": {
+    "x": 326,
+    "y": 229.588095
+   },
+   "end": {
+    "x": 363,
+    "y": 229.588095
+   },
+   "widthPx": 37,
+   "widthM": 0.856957,
+   "mppAlong": 0.023161,
+   "wallPx": 11,
+   "crop": {
+    "x0": 261,
+    "x1": 428,
+    "y0": 164,
+    "y1": 295
+   },
+   "inkCropSha256": "b5b037cb64b648b90f4b3a246063d3f5da2367c049c1aa9aa9bf9e5c9823498f",
+   "qid": "q002"
+  },
+  {
+   "key": "A07/frame-asset-rzut-dec884e019-46909f56cf/dec-0b2a34a1a9ce2609/gap-Y-228-473-511",
+   "project": "A07",
+   "publisher": "archon",
+   "frameId": "frame-asset-rzut-dec884e019-46909f56cf",
+   "storey": "GROUND",
+   "variantByteHash": "187dc03ee30eda6f37df26de325128c8385552ccf81870f8b70e7e3c2f22e409",
+   "decompositionId": "dec-0b2a34a1a9ce2609",
+   "gapId": "gap-Y-228-473-511",
+   "axis": "Y",
+   "linePx": 228,
+   "axisPx": 229.665301,
+   "fromPx": 473,
+   "toPx": 511,
+   "start": {
+    "x": 473,
+    "y": 229.665301
+   },
+   "end": {
+    "x": 511,
+    "y": 229.665301
+   },
+   "widthPx": 38,
+   "widthM": 0.880118,
+   "mppAlong": 0.023161,
+   "wallPx": 11,
+   "crop": {
+    "x0": 408,
+    "x1": 576,
+    "y0": 164,
+    "y1": 295
+   },
+   "inkCropSha256": "1cb66d1a46c4b499cbc73a16594e61f5f54ff703ff44b972b7b66d0514e4988c",
+   "qid": "q008"
+  },
+  {
+   "key": "D00/frame-asset-mars-rzut-parter-0022b323f2-20137a1a68/dec-a3d4b0af75dc48c7/gap-X-1139-322-346",
+   "project": "D00",
+   "publisher": "dobredomy",
+   "frameId": "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+   "storey": "GROUND",
+   "variantByteHash": "ae2f4faed0e41cc88f1bdc399c0c586d1ab6d158cb62b6c460d8d606f34a6a00",
+   "decompositionId": "dec-a3d4b0af75dc48c7",
+   "gapId": "gap-X-1139-322-346",
+   "axis": "X",
+   "linePx": 1139.44,
+   "axisPx": 1131.482759,
+   "fromPx": 322,
+   "toPx": 346,
+   "start": {
+    "x": 1131.482759,
+    "y": 322
+   },
+   "end": {
+    "x": 1131.482759,
+    "y": 346
+   },
+   "widthPx": 24,
+   "widthM": 0.316728,
+   "mppAlong": 0.013197,
+   "wallPx": 25.5,
+   "crop": {
+    "x0": 1017,
+    "x1": 1246,
+    "y0": 208,
+    "y1": 460
+   },
+   "inkCropSha256": "c88a8c99d2a5225f574afd5293856744d25fad661d7720dba65d800b9569e2d9",
+   "qid": "q013"
+  },
+  {
+   "key": "D00/frame-asset-mars-rzut-parter-0022b323f2-20137a1a68/dec-a3d4b0af75dc48c7/gap-X-1158-322-346",
+   "project": "D00",
+   "publisher": "dobredomy",
+   "frameId": "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+   "storey": "GROUND",
+   "variantByteHash": "ae2f4faed0e41cc88f1bdc399c0c586d1ab6d158cb62b6c460d8d606f34a6a00",
+   "decompositionId": "dec-a3d4b0af75dc48c7",
+   "gapId": "gap-X-1158-322-346",
+   "axis": "X",
+   "linePx": 1158,
+   "axisPx": 1141.172414,
+   "fromPx": 322,
+   "toPx": 346,
+   "start": {
+    "x": 1141.172414,
+    "y": 322
+   },
+   "end": {
+    "x": 1141.172414,
+    "y": 346
+   },
+   "widthPx": 24,
+   "widthM": 0.316728,
+   "mppAlong": 0.013197,
+   "wallPx": 25.5,
+   "crop": {
+    "x0": 1027,
+    "x1": 1256,
+    "y0": 208,
+    "y1": 460
+   },
+   "inkCropSha256": "6b04cc1a1633d3a2d1d327a8afaac921b510c3fab211810e0441facb12b9e202",
+   "qid": "q029"
+  },
+  {
+   "key": "D00/frame-asset-mars-rzut-parter-0022b323f2-20137a1a68/dec-a3d4b0af75dc48c7/gap-X-1179-986-1085",
+   "project": "D00",
+   "publisher": "dobredomy",
+   "frameId": "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+   "storey": "GROUND",
+   "variantByteHash": "ae2f4faed0e41cc88f1bdc399c0c586d1ab6d158cb62b6c460d8d606f34a6a00",
+   "decompositionId": "dec-a3d4b0af75dc48c7",
+   "gapId": "gap-X-1179-986-1085",
+   "axis": "X",
+   "linePx": 1178.5,
+   "axisPx": 1199.60186,
+   "fromPx": 986,
+   "toPx": 1085,
+   "start": {
+    "x": 1199.60186,
+    "y": 986
+   },
+   "end": {
+    "x": 1199.60186,
+    "y": 1085
+   },
+   "widthPx": 99,
+   "widthM": 1.306503,
+   "mppAlong": 0.013197,
+   "wallPx": 25.5,
+   "crop": {
+    "x0": 1085,
+    "x1": 1314,
+    "y0": 872,
+    "y1": 1199
+   },
+   "inkCropSha256": "e1aa49477f0f6e11aa9238a91497d5081d3cc090fc8bffeba436ef4ab7c5c003",
+   "qid": "q046"
+  },
+  {
+   "key": "D00/frame-asset-mars-rzut-parter-0022b323f2-20137a1a68/dec-a3d4b0af75dc48c7/gap-X-1195-734-830",
+   "project": "D00",
+   "publisher": "dobredomy",
+   "frameId": "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+   "storey": "GROUND",
+   "variantByteHash": "ae2f4faed0e41cc88f1bdc399c0c586d1ab6d158cb62b6c460d8d606f34a6a00",
+   "decompositionId": "dec-a3d4b0af75dc48c7",
+   "gapId": "gap-X-1195-734-830",
+   "axis": "X",
+   "linePx": 1195,
+   "axisPx": 1208.595789,
+   "fromPx": 734,
+   "toPx": 830,
+   "start": {
+    "x": 1208.595789,
+    "y": 734
+   },
+   "end": {
+    "x": 1208.595789,
+    "y": 830
+   },
+   "widthPx": 96,
+   "widthM": 1.266912,
+   "mppAlong": 0.013197,
+   "wallPx": 25.5,
+   "crop": {
+    "x0": 1094,
+    "x1": 1323,
+    "y0": 620,
+    "y1": 944
+   },
+   "inkCropSha256": "7daabc4831ca2d72d00d82de9dec2fa46873cc7306558664e43f51f2197feb40",
+   "qid": "q006"
+  },
+  {
+   "key": "D00/frame-asset-mars-rzut-parter-0022b323f2-20137a1a68/dec-a3d4b0af75dc48c7/gap-X-1195-986-1085",
+   "project": "D00",
+   "publisher": "dobredomy",
+   "frameId": "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+   "storey": "GROUND",
+   "variantByteHash": "ae2f4faed0e41cc88f1bdc399c0c586d1ab6d158cb62b6c460d8d606f34a6a00",
+   "decompositionId": "dec-a3d4b0af75dc48c7",
+   "gapId": "gap-X-1195-986-1085",
+   "axis": "X",
+   "linePx": 1195,
+   "axisPx": 1209.297799,
+   "fromPx": 986,
+   "toPx": 1085,
+   "start": {
+    "x": 1209.297799,
+    "y": 986
+   },
+   "end": {
+    "x": 1209.297799,
+    "y": 1085
+   },
+   "widthPx": 99,
+   "widthM": 1.306503,
+   "mppAlong": 0.013197,
+   "wallPx": 25.5,
+   "crop": {
+    "x0": 1095,
+    "x1": 1324,
+    "y0": 872,
+    "y1": 1199
+   },
+   "inkCropSha256": "4f93a734e807bc0450ec29645cb305296fa42bcc98c289d0a49d79b776f0b7ce",
+   "qid": "q041"
+  },
+  {
+   "key": "D00/frame-asset-mars-rzut-parter-0022b323f2-20137a1a68/dec-a3d4b0af75dc48c7/gap-X-1211-477-575",
+   "project": "D00",
+   "publisher": "dobredomy",
+   "frameId": "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+   "storey": "GROUND",
+   "variantByteHash": "ae2f4faed0e41cc88f1bdc399c0c586d1ab6d158cb62b6c460d8d606f34a6a00",
+   "decompositionId": "dec-a3d4b0af75dc48c7",
+   "gapId": "gap-X-1211-477-575",
+   "axis": "X",
+   "linePx": 1210.5,
+   "axisPx": 1209.721528,
+   "fromPx": 477,
+   "toPx": 575,
+   "start": {
+    "x": 1209.721528,
+    "y": 477
+   },
+   "end": {
+    "x": 1209.721528,
+    "y": 575
+   },
+   "widthPx": 98,
+   "widthM": 1.293306,
+   "mppAlong": 0.013197,
+   "wallPx": 25.5,
+   "crop": {
+    "x0": 1095,
+    "x1": 1324,
+    "y0": 363,
+    "y1": 689
+   },
+   "inkCropSha256": "264ed29d725f2601c8b44985043eed25b240dfd7f56af918133e90259c9494c1",
+   "qid": "q007"
+  },
+  {
+   "key": "D00/frame-asset-mars-rzut-parter-0022b323f2-20137a1a68/dec-a3d4b0af75dc48c7/gap-X-1211-734-830",
+   "project": "D00",
+   "publisher": "dobredomy",
+   "frameId": "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+   "storey": "GROUND",
+   "variantByteHash": "ae2f4faed0e41cc88f1bdc399c0c586d1ab6d158cb62b6c460d8d606f34a6a00",
+   "decompositionId": "dec-a3d4b0af75dc48c7",
+   "gapId": "gap-X-1211-734-830",
+   "axis": "X",
+   "linePx": 1210.5,
+   "axisPx": 1209.842137,
+   "fromPx": 734,
+   "toPx": 830,
+   "start": {
+    "x": 1209.842137,
+    "y": 734
+   },
+   "end": {
+    "x": 1209.842137,
+    "y": 830
+   },
+   "widthPx": 96,
+   "widthM": 1.266912,
+   "mppAlong": 0.013197,
+   "wallPx": 25.5,
+   "crop": {
+    "x0": 1095,
+    "x1": 1324,
+    "y0": 620,
+    "y1": 944
+   },
+   "inkCropSha256": "2db45f9c97546a552bd4f4c7f89790e921f589c679e0edc6902c5c1c97d36e9e",
+   "qid": "q052"
+  },
+  {
+   "key": "D00/frame-asset-mars-rzut-parter-0022b323f2-20137a1a68/dec-a3d4b0af75dc48c7/gap-X-1211-986-1085",
+   "project": "D00",
+   "publisher": "dobredomy",
+   "frameId": "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+   "storey": "GROUND",
+   "variantByteHash": "ae2f4faed0e41cc88f1bdc399c0c586d1ab6d158cb62b6c460d8d606f34a6a00",
+   "decompositionId": "dec-a3d4b0af75dc48c7",
+   "gapId": "gap-X-1211-986-1085",
+   "axis": "X",
+   "linePx": 1210.5,
+   "axisPx": 1210.314251,
+   "fromPx": 986,
+   "toPx": 1085,
+   "start": {
+    "x": 1210.314251,
+    "y": 986
+   },
+   "end": {
+    "x": 1210.314251,
+    "y": 1085
+   },
+   "widthPx": 99,
+   "widthM": 1.306503,
+   "mppAlong": 0.013197,
+   "wallPx": 25.5,
+   "crop": {
+    "x0": 1096,
+    "x1": 1325,
+    "y0": 872,
+    "y1": 1199
+   },
+   "inkCropSha256": "f0a9de17e347c250b39bbb8cda240b2c6f654a4efa44d9dd4319d77fab8386ea",
+   "qid": "q044"
+  },
+  {
+   "key": "D00/frame-asset-mars-rzut-parter-0022b323f2-20137a1a68/dec-a3d4b0af75dc48c7/gap-X-141-476-502",
+   "project": "D00",
+   "publisher": "dobredomy",
+   "frameId": "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+   "storey": "GROUND",
+   "variantByteHash": "ae2f4faed0e41cc88f1bdc399c0c586d1ab6d158cb62b6c460d8d606f34a6a00",
+   "decompositionId": "dec-a3d4b0af75dc48c7",
+   "gapId": "gap-X-141-476-502",
+   "axis": "X",
+   "linePx": 141,
+   "axisPx": 127.861494,
+   "fromPx": 476,
+   "toPx": 502,
+   "start": {
+    "x": 127.861494,
+    "y": 476
+   },
+   "end": {
+    "x": 127.861494,
+    "y": 502
+   },
+   "widthPx": 26,
+   "widthM": 0.343122,
+   "mppAlong": 0.013197,
+   "wallPx": 25.5,
+   "crop": {
+    "x0": 13,
+    "x1": 242,
+    "y0": 362,
+    "y1": 616
+   },
+   "inkCropSha256": "0ad10a568f7952103e9015cf0d69c75749246a8157a3155687239a07da79c896",
+   "qid": "q036"
+  },
+  {
+   "key": "D00/frame-asset-mars-rzut-parter-0022b323f2-20137a1a68/dec-a3d4b0af75dc48c7/gap-X-721-329-347",
+   "project": "D00",
+   "publisher": "dobredomy",
+   "frameId": "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+   "storey": "GROUND",
+   "variantByteHash": "ae2f4faed0e41cc88f1bdc399c0c586d1ab6d158cb62b6c460d8d606f34a6a00",
+   "decompositionId": "dec-a3d4b0af75dc48c7",
+   "gapId": "gap-X-721-329-347",
+   "axis": "X",
+   "linePx": 720.5,
+   "axisPx": 726.892216,
+   "fromPx": 329,
+   "toPx": 347,
+   "start": {
+    "x": 726.892216,
+    "y": 329
+   },
+   "end": {
+    "x": 726.892216,
+    "y": 347
+   },
+   "widthPx": 18,
+   "widthM": 0.237546,
+   "mppAlong": 0.013197,
+   "wallPx": 25.5,
+   "crop": {
+    "x0": 612,
+    "x1": 841,
+    "y0": 215,
+    "y1": 461
+   },
+   "inkCropSha256": "51272d087e0274b81208c1e4d00f4f90b2f44cd90cd71f1a04c493ed944c04bc",
+   "qid": "q009"
+  },
+  {
+   "key": "D00/frame-asset-mars-rzut-parter-0022b323f2-20137a1a68/dec-a3d4b0af75dc48c7/gap-Y-1176-980-1044",
+   "project": "D00",
+   "publisher": "dobredomy",
+   "frameId": "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+   "storey": "GROUND",
+   "variantByteHash": "ae2f4faed0e41cc88f1bdc399c0c586d1ab6d158cb62b6c460d8d606f34a6a00",
+   "decompositionId": "dec-a3d4b0af75dc48c7",
+   "gapId": "gap-Y-1176-980-1044",
+   "axis": "Y",
+   "linePx": 1175.5,
+   "axisPx": 1177.298884,
+   "fromPx": 980,
+   "toPx": 1044,
+   "start": {
+    "x": 980,
+    "y": 1177.298884
+   },
+   "end": {
+    "x": 1044,
+    "y": 1177.298884
+   },
+   "widthPx": 64,
+   "widthM": 0.844608,
+   "mppAlong": 0.013197,
+   "wallPx": 25.5,
+   "crop": {
+    "x0": 866,
+    "x1": 1158,
+    "y0": 1063,
+    "y1": 1292
+   },
+   "inkCropSha256": "59942dce1383f15ae5608cd30f78f1cc4f927c8740ee2c8d387b9982068e2038",
+   "qid": "q053"
+  },
+  {
+   "key": "D00/frame-asset-mars-rzut-parter-0022b323f2-20137a1a68/dec-a3d4b0af75dc48c7/gap-Y-304-1067-1091",
+   "project": "D00",
+   "publisher": "dobredomy",
+   "frameId": "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+   "storey": "GROUND",
+   "variantByteHash": "ae2f4faed0e41cc88f1bdc399c0c586d1ab6d158cb62b6c460d8d606f34a6a00",
+   "decompositionId": "dec-a3d4b0af75dc48c7",
+   "gapId": "gap-Y-304-1067-1091",
+   "axis": "Y",
+   "linePx": 303.5,
+   "axisPx": 316.633364,
+   "fromPx": 1067,
+   "toPx": 1091,
+   "start": {
+    "x": 1067,
+    "y": 316.633364
+   },
+   "end": {
+    "x": 1091,
+    "y": 316.633364
+   },
+   "widthPx": 24,
+   "widthM": 0.316728,
+   "mppAlong": 0.013197,
+   "wallPx": 25.5,
+   "crop": {
+    "x0": 953,
+    "x1": 1205,
+    "y0": 202,
+    "y1": 431
+   },
+   "inkCropSha256": "099725a4c6a5769f335c1f11a1c4dd76a1d69ea850b8b12f67e46895529470f8",
+   "qid": "q021"
+  },
+  {
+   "key": "D00/frame-asset-mars-rzut-parter-0022b323f2-20137a1a68/dec-a3d4b0af75dc48c7/gap-Y-304-785-861",
+   "project": "D00",
+   "publisher": "dobredomy",
+   "frameId": "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+   "storey": "GROUND",
+   "variantByteHash": "ae2f4faed0e41cc88f1bdc399c0c586d1ab6d158cb62b6c460d8d606f34a6a00",
+   "decompositionId": "dec-a3d4b0af75dc48c7",
+   "gapId": "gap-Y-304-785-861",
+   "axis": "Y",
+   "linePx": 303.5,
+   "axisPx": 308.288244,
+   "fromPx": 785,
+   "toPx": 861,
+   "start": {
+    "x": 785,
+    "y": 308.288244
+   },
+   "end": {
+    "x": 861,
+    "y": 308.288244
+   },
+   "widthPx": 76,
+   "widthM": 1.002972,
+   "mppAlong": 0.013197,
+   "wallPx": 25.5,
+   "crop": {
+    "x0": 671,
+    "x1": 975,
+    "y0": 194,
+    "y1": 423
+   },
+   "inkCropSha256": "982c915985bc48304ead1c16ac572d90a32e5f00dedc6e3ddca3b61e53a2ff38",
+   "qid": "q056"
+  }
+ ]
+}
