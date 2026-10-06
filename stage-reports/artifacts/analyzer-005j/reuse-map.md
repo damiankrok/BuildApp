@@ -30,7 +30,7 @@ These are BuildPlan's evidence architecture, not preferences:
 | --- | --- |
 | COPY/ADAPT | port permissive code with its notice |
 | REIMPLEMENT_FROM_PAPER | write from the published description |
-| RESEARCH_ORACLE_ONLY | run only in `research/` as a comparison |
+| RESEARCH_ORACLE_ONLY | at most a comparison inside `research/`; for NC-licensed material even that internal use is a counsel question (post-review D4) |
 | REJECT | do not use |
 
 ## The map (one row per technique)

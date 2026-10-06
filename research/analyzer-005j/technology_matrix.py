@@ -48,7 +48,7 @@ def main():
 
     rows = []
     q, cw = vlm_quality(bk, 'florence2-base')
-    rows.append(dict(technology='Florence-2-base (florence-community@00921df, native-format port of microsoft@5ca5edf; tensor identity not verified)', task='captioning / OD / grounding / OCR (15 task tokens); no VQA token', parameters='231.6 M',
+    rows.append(dict(technology='Florence-2-base (florence-community@00921df, native-format port of microsoft@5ca5edf; a post-review sample of 37 of 666 tensors matched byte for byte, full identity not verified)', task='captioning / OD / grounding / OCR (15 task tokens); no VQA token', parameters='231.6 M',
                      artifact_size='463 MB fp16; ONNX int8 275 MB, mixed q4 215 MB', runtime='transformers ≥ 4.56 / ONNX Runtime / Transformers.js', code_license='MIT', weight_license='MIT',
                      training_data='FLD-5B (unreleased; ImageNet-22k, O365, OpenImages, CC, LAION)', commercial_status='CONDITIONAL', pretrained_available='yes', actual_artifact_verified='yes (run in 005J)',
                      wall_output='no', opening_output='grounding boxes only', room_output='no', mask_output='referring segmentation', VQA='no (unsupported)', ONNX='yes', LiteRT='no', Android='WASM only (no native path)',
@@ -72,7 +72,7 @@ def main():
                      weight_license='proprietary', training_data='undisclosed', commercial_status='not a dependency', pretrained_available='—', actual_artifact_verified='149-question blind sample',
                      wall_output='no', opening_output='no', room_output='no', mask_output='no', VQA='yes', ONNX='no', LiteRT='no', Android='no (server)', CPU='—', GPU='—', memory='—', latency='seconds (API)',
                      quality_on_BuildPlan=q, confident_wrong=cw, integration_complexity='server + privacy + licensing of crops', verdict='RESEARCH_ORACLE_ONLY (teacher / solvability evidence)'))
-    for key, label in (('unet', 'UNet-lite wall/opening proof (005J, from scratch, synthetic only)'), ('segformer', 'MiT-B0 SegFormer clean-room proof (005J, from scratch, synthetic only)')):
+    for key, label in (('unet', 'UNet-lite wall/opening proof (005J, from scratch, synthetic only)'), ('segformer', 'MiT-B0 SegFormer proof (005J, independent re-implementation, from scratch, synthetic only)')):
         w = wl.get(key)
         if not w:
             continue
@@ -82,7 +82,7 @@ def main():
         ad = [r['ADDITIONAL_USEFUL_WALL_EVIDENCE_OVER_SOURCE_CV'] for r in real]
         ref = w.get('referee', {})
         rows.append(dict(technology=label, task='per-pixel BACKGROUND / WALL / OPENING', parameters=f"{w['params'] / 1e6:.2f} M", artifact_size=f"{w['fp32MB']} MB fp32 (≈ {w['int8MBEstimate']} MB int8)",
-                         runtime='PyTorch (training); ONNX → onnxruntime-web WASM', code_license='BuildPlan (written from papers)', weight_license='BuildPlan-owned', training_data='BuildPlan synthetic drawings only',
+                         runtime='PyTorch (training); ONNX → onnxruntime-web WASM', code_license='BuildPlan (UNet-lite: textbook U-Net; MiT-B0: independent re-implementation whose structure follows the Apache-2.0 PVTv2 / HF code, not clean-room)', weight_license='BuildPlan-owned', training_data='BuildPlan synthetic drawings only',
                          commercial_status='COMMERCIAL_CLEAN', pretrained_available='no (trained here, from scratch)', actual_artifact_verified='yes (trained and evaluated in 005J)', wall_output='yes', opening_output='yes',
                          room_output='no', mask_output='yes', VQA='no', ONNX='yes (exported)', LiteRT='not tried', Android='ORT-web WASM (shipped runtime)', CPU='yes', GPU='—',
                          memory=w.get('wasmMemory', '—'), latency=w.get('wasmLatency', '—'),
@@ -99,7 +99,7 @@ def main():
         dict(technology='MitUNet (aliasstudio/mitunet@ade0aa6)', task='binary wall mask', parameters='64.25 M (B4)', artifact_size='257 MB fp32', runtime='PyTorch / smp', code_license='MIT notebooks; MiT encoder code NVIDIA SCL (NC)',
              weight_license='CC BY-NC 4.0', training_data='CubiCasa5K (NC) + Floor Plan CIS', commercial_status='NON_COMMERCIAL', pretrained_available='yes', actual_artifact_verified='checkpoint structure read remotely',
              wall_output='yes', opening_output='subtracted', room_output='no', mask_output='yes', VQA='no', ONNX='no', LiteRT='no', Android='B4 unsuitable', CPU='yes', GPU='yes', memory='—', latency='≈ 65 GMACs @512²',
-             quality_on_BuildPlan='not run (licence)', confident_wrong='—', integration_complexity='—', verdict='ARCHITECTURE_CANDIDATE_FOR_RETRAINING (clean-room, from scratch)'),
+             quality_on_BuildPlan='not run (licence)', confident_wrong='—', integration_complexity='—', verdict='ARCHITECTURE_CANDIDATE_FOR_RETRAINING (own or Apache-2.0-based implementation, from scratch)'),
         dict(technology='ResPlan (m-agour/ResPlan@e2b78fe)', task='17,000 vector plans + room graph', parameters='—', artifact_size='100 MB zip', runtime='shapely', code_license='MIT', weight_license='—',
              training_data='scraped South-Asian listings; CC BY 4.0 vs CC BY-NC-SA 4.0 conflict', commercial_status='CONDITIONAL (blocked)', pretrained_available='no checkpoints', actual_artifact_verified='dataset downloaded and parsed',
              wall_output='polygons', opening_output='rectangles', room_output='per class', mask_output='renderable', VQA='—', ONNX='—', LiteRT='—', Android='—', CPU='—', GPU='—', memory='—', latency='—',

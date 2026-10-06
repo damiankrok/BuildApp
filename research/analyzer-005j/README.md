@@ -25,11 +25,12 @@ Results and the stage's decision: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005J_F
 | `select_items.py`, `subsets.py` | the fixed bake-off item selection and the per-model subsets (chosen before scoring) |
 | `vlm_bench.py` | Florence-2-base, SmolVLM2-500M (ONNX), Moondream 0.5B (legacy ONNX client): GEN_JSON, ENUM_SCORE, STRUCTURED read-outs |
 | `models.json` | revisions and SHA-256 of the model files the bake-off ran |
+| `requirements-venv.lock.txt`, `requirements-md-venv.lock.txt` | the two research environments, frozen; font hashes |
 | `score.py` | the pre-registered scorer (confident = p ≥ 0.80; CONFIDENT_WRONG_RATE; consistency; counterfactual sensitivity; majority floor and minority answers) |
 | `summarize.py` | `vlm-bakeoff.md` from `vlm-bakeoff.json` |
 | `technology_matrix.py` | `technology-matrix.{md,json}` (measured cells pulled from the bake-off and the wall proof) |
 | `question_corpus.py` | writes the committed `question-corpus.json` (text facts only) |
-| `wallproof/trainset.py`, `wallproof/wallnet.py`, `wallproof/realmasks.py` | the commercial-clean wall-model proof: synthetic masks, UNet-lite and a clean-room MiT-B0 SegFormer trained from scratch, synthetic + real exterior-wall evaluation against source-cv |
+| `wallproof/trainset.py`, `wallproof/wallnet.py`, `wallproof/realmasks.py` | the commercial-clean wall-model proof: synthetic masks, UNet-lite and an independently re-implemented MiT-B0 SegFormer (structure follows the Apache-2.0 PVTv2 / HF code; not clean-room) trained from scratch, synthetic + real exterior-wall evaluation against source-cv |
 | `wallproof/blind8_regions.py` | pixel shares of a proof model inside the regions the 005I diagnosis names on the two round-8 frames |
 | `wallproof/wall_referee.py` | a proof model read as a gap referee with pre-registered strip rules, scored by `score.py` like the VLMs |
 | `wallproof/assemble_proof.py`, `wallproof/verdicts.json` | `wall-model-proof.json` from the measured files; the verdict strings written after reading the numbers |
@@ -39,8 +40,10 @@ Results and the stage's decision: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005J_F
 ## Reproduce (from the BuildApp root; `W=/home/user/work005j`)
 
 ```bash
-# environments (outside the repo): a CPU torch venv with transformers==5.18.0, onnxruntime==1.23.2, num2words, einops;
-# a separate venv with moondream==0.0.6 (the last client that runs the 0.5B .mf locally)
+# environments (outside the repo), locked in requirements-venv.lock.txt and requirements-md-venv.lock.txt (pip freeze):
+# a CPU torch venv (torch 2.5.1+cpu, transformers 5.18.0, onnxruntime 1.23.2, Pillow 12.3.0, numpy 1.26.4, shapely 2.1.2);
+# a separate venv with moondream==0.0.6 (the last client that runs the 0.5B .mf locally).
+# fonts: Debian fonts-dejavu-core 2.37-8 — DejaVuSans.ttf (generator) and DejaVuSans-Bold.ttf (composer), SHA-256 in the lock file header
 # models (pinned in research/analyzer-005j/models.json, copied into vlm-bakeoff.json "pins")
 #   florence-community/Florence-2-base@00921df66db728a9ceb750f5eca43e5c203a2051
 #   HuggingFaceTB/SmolVLM2-500M-Video-Instruct@7b375e1b73b11138ff12fe22c8f2822d8fe03467 onnx/{vision_encoder,embed_tokens_int8,decoder_model_merged_int8}.onnx
@@ -79,7 +82,7 @@ $P/pilot/micro_referee.py train --items $W/pilot/q/items.jsonl --img $W/pilot/q/
 $P/pilot/micro_referee.py predict --ckpt $W/pilot/micro.pt --items $W/bench/items-all.jsonl --img $W/bench/img --out $W/bench/micro.jsonl
 $P/pilot/micro_referee.py export --ckpt $W/pilot/micro.pt --items none --img none --out $W/onnx/micro-referee.onnx
 # the proof artefact
-$P/wallproof/assemble_proof.py --bakeoff stage-reports/artifacts/analyzer-005j/vlm-bakeoff.json --eval unet=$W/wall/unet-eval.json,segformer=$W/wall/segformer-eval.json --regions unet=$W/wall/unet-blind8-regions.json,segformer=$W/wall/segformer-blind8-regions.json --wasm $W/onnx/wasm-unet.json,$W/onnx/wasm-segformer.json,$W/onnx/wasm-micro.json,$W/onnx/wasm-smolvlm2.json --pilot-ckpt $W/pilot/micro.pt --verdicts research/analyzer-005j/wallproof/verdicts.json --out stage-reports/artifacts/analyzer-005j/wall-model-proof.json
+$P/wallproof/assemble_proof.py --bakeoff stage-reports/artifacts/analyzer-005j/vlm-bakeoff.json --eval unet=$W/wall/unet-eval.json,segformer=$W/wall/segformer-eval.json --regions unet=$W/wall/unet-blind8-regions.json,segformer=$W/wall/segformer-blind8-regions.json --wasm $W/onnx/wasm-unet.json,$W/onnx/wasm-segformer.json,$W/onnx/wasm-micro.json,$W/onnx/wasm-smolvlm2.json --pilot-ckpt $W/pilot/micro.pt --ckpts unet=$W/wall/unet.pt,segformer=$W/wall/segformer.pt --verdicts research/analyzer-005j/wallproof/verdicts.json --out stage-reports/artifacts/analyzer-005j/wall-model-proof.json
 $P/technology_matrix.py --bakeoff stage-reports/artifacts/analyzer-005j/vlm-bakeoff.json --wall stage-reports/artifacts/analyzer-005j/wall-model-proof.json --out-md stage-reports/artifacts/analyzer-005j/technology-matrix.md --out-json stage-reports/artifacts/analyzer-005j/technology-matrix.json
 # WASM latency (Node 18.20.4, onnxruntime-web 1.30.0 from research/analyzer-005g/node_modules)
 <node18>/bin/node research/analyzer-005j/wasm-probe.cjs --ort research/analyzer-005g/node_modules/onnxruntime-web --spec <spec.json> --out <json>

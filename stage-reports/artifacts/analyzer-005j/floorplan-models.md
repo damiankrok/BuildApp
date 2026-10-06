@@ -54,12 +54,15 @@ Detailed audits (with commit SHAs, LICENSE SHA-256, file lists, verbatim licence
 - **Licences, separated:** code MIT (notebooks) **but** the MiT encoder it builds through smp 0.5.0 is
   `mix_transformer.py` under the **NVIDIA Source Code License (non-commercial)**; weights **CC BY-NC 4.0** (its README);
   data CubiCasa5K (CC BY-NC 4.0 repo / CC BY-NC-SA 4.0 Zenodo) + Floor Plan CIS (CC BY 4.0 declared over listing images);
-  backbone NVIDIA MiT ImageNet (non-commercial). Non-commercial on three independent grounds — the brief's expectation is
+  backbone NVIDIA MiT ImageNet (non-commercial). Non-commercial on independent grounds — the authors' CC BY-NC statement on the weights, CubiCasa5K training data (the
+  regional-only checkpoint aside), the NVIDIA-SCL ImageNet initialisation, and separately the NVIDIA-SCL encoder **code** —
+  the brief's expectation is
   confirmed.
 - **Smaller variants (analytic, formula reproduces the B4 checkpoint exactly):** MiT-B0 + U-Net 5.6 M (≈ 12.7 GMACs @512²),
   MiT-B1 + U-Net 16.6 M (≈ 21.5 GMACs); B0 + slim decoder 3.7–4.2 M. **B4 is unsuitable for Android.**
-- Verdict **ARCHITECTURE_CANDIDATE_FOR_RETRAINING** — and 005J did exactly that in miniature: a clean-room MiT-B0
-  SegFormer and a UNet-lite written from the papers and trained from scratch on BuildPlan synthetic data
+- Verdict **ARCHITECTURE_CANDIDATE_FOR_RETRAINING** — and 005J did exactly that in miniature: an independently re-implemented MiT-B0
+  SegFormer (not clean-room: its structure follows the Apache-2.0 PVTv2 / HF code; no NVIDIA code or weights) and a
+  textbook UNet-lite and trained from scratch on BuildPlan synthetic data
   (`wall-model-proof.json`).
 
 ## 4. Additional 2025–2026 systems (§13)

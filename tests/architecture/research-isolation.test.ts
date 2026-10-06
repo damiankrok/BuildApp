@@ -133,9 +133,17 @@ describe('005J production cannot reach the floor-plan intelligence audit, and th
   it('the 005J harness and artifacts track only code and text — no image, model or archive', () => {
     const tracked = execFileSync('git', ['ls-files'], { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(Boolean)
     const audit = tracked.filter((f) => f.startsWith('research/analyzer-005j/') || f.startsWith('stage-reports/artifacts/analyzer-005j/'))
-    expect(audit.filter((f) => !/\.(py|ts|cjs|json|md)$/i.test(f))).toEqual([])
-    // the question corpus records crops by coordinates and hashes only; an embedded data URL would be a pixel leak
-    for (const f of audit.filter((x) => /\.(json|md)$/i.test(x))) expect(read(f), f).not.toMatch(/data:image\/|iVBORw0KGgo|\/9j\/4/)
+    expect(audit.filter((f) => !/\.(py|ts|cjs|json|md|txt)$/i.test(f))).toEqual([])
+    for (const f of audit) {
+      const text = read(f)
+      // the question corpus records crops by coordinates and hashes only; pixels would arrive as an embedded data URL,
+      // a base64 image signature (PNG, JPEG, WebP, GIF), any long base64 run, or a long flat array of numbers (a mask)
+      // (a signature alone may appear in prose, e.g. a review describing this test; an image is the signature plus its payload)
+      expect(text, f).not.toMatch(/(data:(image|application)\/[\w.+-]+;base64,|iVBORw0KGgo|\/9j\/4|UklGR|R0lGOD)[A-Za-z0-9+/]{40,}/)
+      expect(text, f).not.toMatch(/[A-Za-z0-9+/]{256,}={0,2}/)
+      expect(text, f).not.toMatch(/\[(\s*-?\d+(\.\d+)?\s*,){64,}/)
+      expect(statSync(join(ROOT, f)).size, f).toBeLessThanOrEqual(4 * 2 ** 20)
+    }
   })
 
   it('the Android build packages nothing from the 005J audit', () => {
@@ -143,6 +151,6 @@ describe('005J production cannot reach the floor-plan intelligence audit, and th
       expect(codeOf(read(f)), f).not.toMatch(AUDIT)
     }
     const assets = filesUnder('apps/android/app/src/main/assets', /.*/)
-    expect(assets.filter((a) => AUDIT.test(a) || (/\.(onnx|gguf|mf\.gz|safetensors)$/i.test(a) && !/numeric-recogniser|ppocr|paddle/i.test(a)))).toEqual([])
+    expect(assets.filter((a) => AUDIT.test(a) || (/\.(onnx|ort|gguf|mf\.gz|safetensors|tflite|litertlm|bin|npz|npy|pkl|pt|pth)$/i.test(a) && !/numeric-recogniser|ppocr|paddle/i.test(a)))).toEqual([])
   })
 })

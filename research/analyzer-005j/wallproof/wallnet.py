@@ -4,9 +4,11 @@
     python -I -B wallnet.py train --arch unet|segformer --data <train dir> --out <ckpt.pt> [--steps 1500] [--threads 2]
     python -I -B wallnet.py eval  --ckpt <ckpt.pt> --data <test dir> --real <real-eval.json> --out <result.json>
 
-Commercial-clean by construction: both networks are written here from their papers (U-Net, Ronneberger et al. 2015;
-SegFormer / Mix Transformer, Xie et al. 2021) - no NVIDIA SegFormer code, no smp encoder code - and trained FROM
-SCRATCH (no ImageNet or other pretrained weights) on BuildPlan's own synthetic drawings only. Input: one grey channel,
+Both networks are written here: a textbook U-Net (Ronneberger et al. 2015) and a MiT-B0 SegFormer (Xie et al. 2021).
+The MiT-B0 is an independent re-implementation, NOT a clean-room one: its patch embedding, fused kv projection, conv+BN
+fuse layer and reversed concatenation follow the public PVTv2 / HF transformers code (Apache-2.0), details the paper
+does not specify (005J post-review D2). No NVIDIA SegFormer code, no smp encoder code. Both are trained FROM SCRATCH
+(no ImageNet or other pretrained weights) on BuildPlan's own synthetic drawings only. Input: one grey channel,
 inverted (ink = 1). Output: 3 classes - background, wall, opening.
 """
 import argparse

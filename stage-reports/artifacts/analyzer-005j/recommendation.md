@@ -39,7 +39,7 @@ No PDF.js implementation, no fresh blind round and no production change in 005J.
    outcome without the resolver asking anything new: **IP-01** (a gap-classification witness beside `withCallout`,
    `plan-decomposition.ts:2807`) and **IP-02** (a wide-opening witness in `WideOpeningDecision.evidence`,
    `plan-decomposition.ts:191–202`). Region and outline seams (REC-02, REC-14, REC-21, UP-H1/H2) are second.
-2. **Q2 — open-source floor-plan technology?** Nothing adoptable. MitUNet is an architecture to retrain clean-room; ResPlan
+2. **Q2 — open-source floor-plan technology?** Nothing adoptable. MitUNet is an architecture to retrain (own or Apache-2.0-based implementation, from scratch); ResPlan
    is a data candidate only with counsel; fpvec-lab is a paper to reimplement (metrics, readout, fusion rule).
 3. **Q3 — can small VLMs referee?** Not zero-shot (⟪Q3_SHORT⟫), and not on the phone at an acceptable cost (≈ 16 s,
    ≥ 1.9 GiB in the shipped runtime).
@@ -96,6 +96,9 @@ confident-wrong gate; it can only upgrade a weak gap that already has walled jam
 ## Later (SECONDARY): TRAIN_BUILDPLAN_VISUAL_REFEREE
 
 After 005K: a micro-referee for region / outline seams, with grey crop + target / candidate masks + the 005K wall map as
-inputs, trained on generator v2 plus real-style rendering, distilled from a strong offline teacher whose real-crop
-answers are verified by a person. 005J's pilot shows the cost is trivial on device (70 ms) and the risk is transfer, so
-its first gate is the balanced real set, not synthetic accuracy.
+inputs, trained **on synthetic data only** (generator v2 plus real-style rendering). A strong model may help offline on
+synthetic data (hard-example mining, new counterfactual families). Real development crops stay **evaluation and
+calibration data**. Training on them, or sending them to a hosted teacher for pre-labels, is **CONDITIONAL on counsel**
+(post-review D1): drawing copyright, the EU text-and-data-mining exception and opt-outs, publisher terms, and the
+teacher provider's terms. 005J's pilot shows the cost is trivial on device (70 ms) and the risk is transfer, so its first
+gate is the balanced real set, not synthetic accuracy.

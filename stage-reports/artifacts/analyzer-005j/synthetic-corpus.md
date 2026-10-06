@@ -106,7 +106,10 @@ Benchmark questions per class (NORMAL transform; ×4 transforms in the corpus) a
 | VOID_VS_OUTSIDE | 6 | VOID 3 / OUTSIDE 3 |
 | STOREY_COVERAGE | 6 | YES 3 / NO 3 |
 
-`corpus.json` SHA-256 (benchmark): `22919e38a82723dd38d7eadf223ce1fe69859b0fc8e446098e1de3381dcf12c2`. Every rendered PNG's
+`corpus.json` SHA-256 (benchmark): `22919e38a82723dd38d7eadf223ce1fe69859b0fc8e446098e1de3381dcf12c2`.
+Rasterised with Pillow 12.3.0; text in DejaVu Sans (`ae7b7855…7280`, generator) and DejaVu Sans Bold (`5c1247ac…e895`,
+composer) from Debian fonts-dejavu-core 2.37-8 (Bitstream Vera Fonts licence; DejaVu changes public domain). The full
+environment is frozen in `research/analyzer-005j/requirements-venv.lock.txt`. Every rendered PNG's
 SHA-256 is in `question-corpus.json`.
 
 ## 6. Known weaknesses of the corpus (stated, not hidden)

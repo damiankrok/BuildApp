@@ -10,6 +10,7 @@ computation is arithmetic over those files (min/max, sums of tallies) and the ve
 to the numbers they rest on.
 """
 import argparse
+import hashlib
 import json
 
 STRUCT = {'unet': 'wall-unet-structured', 'segformer': 'wall-segformer-structured'}
@@ -54,6 +55,7 @@ def main():
     ap.add_argument('--regions', required=True)
     ap.add_argument('--wasm', required=True)
     ap.add_argument('--pilot-ckpt', default=None)
+    ap.add_argument('--ckpts', default=None, help='unet=<pt>,segformer=<pt>: PyTorch checkpoints, recorded by SHA-256 (they stay outside the repository)')
     ap.add_argument('--verdicts', default=None, help='JSON {unet|segformer|routeCPilot|overall: text}, written after reading the numbers')
     ap.add_argument('--out', required=True)
     a = ap.parse_args()
@@ -65,7 +67,7 @@ def main():
         env = {k: w[k] for k in ('node', 'arch', 'runtime', 'threads')}
         wasm.update(w['models'])
     out = {'stage': 'BUILDPLAN-ANALYZER-005J', 'kind': 'RESEARCH PROOF - not a production candidate',
-           'licence': {'code': 'BuildPlan (UNet-lite and MiT-B0 SegFormer written from the papers; no NVIDIA / smp / timm code copied)',
+           'licence': {'code': 'BuildPlan: UNet-lite is a textbook U-Net; the MiT-B0 SegFormer is an independent re-implementation, not clean-room - its structure follows the Apache-2.0 PVTv2 / HF transformers code (post-review D2); no NVIDIA / smp / timm code',
                        'weights': 'BuildPlan-owned (trained from random initialisation in this stage)', 'pretrainedBackbone': 'NONE',
                        'trainingData': 'BuildPlan synthetic drawings only (research/analyzer-005j/synthetic/vrgen.py); no CubiCasa, ResPlan, Structured3D or publisher pixels',
                        'evaluationData': 'synthetic test renders (seeds disjoint from training) + 7 development houses and the 2 blind-8 houses read locally from the 005I cache; no publisher pixels committed'},
@@ -86,13 +88,17 @@ def main():
                                 ('exteriorWallRecall', 'exteriorWallRecallSourceCv', 'ADDITIONAL_USEFUL_WALL_EVIDENCE_OVER_SOURCE_CV', 'additionalOverBandsOnly',
                                  'openingAsOpening', 'envelopeContinuityThroughOpenings', 'falseWallInExclusions', 'falseWallInExclusionsSourceCv', 'msPerFrame1Thread')}
         out[key] = e
+    for key, path in kv(a.ckpts).items():
+        if key in out:
+            out[key]['checkpointSha256'] = hashlib.sha256(open(path, 'rb').read()).hexdigest()
     pr = referee(bk, PILOT, 'ENUM_SCORE')
     if pr:
         p = {'params': None, 'summary': pr['summary'], 'confidentWrong': pr['confidentWrong'], 'referee': pr}
         if a.pilot_ckpt:
             import torch
             ck = torch.load(a.pilot_ckpt, weights_only=False, map_location='cpu')
-            p.update(params=ck['params'], steps=ck['steps'], batch=ck['batch'], trainSec=ck['trainSec'], heads=ck['heads'])
+            p.update(params=ck['params'], steps=ck['steps'], batch=ck['batch'], trainSec=ck['trainSec'], heads=ck['heads'],
+                     checkpointSha256=hashlib.sha256(open(a.pilot_ckpt, 'rb').read()).hexdigest())
         name, m = wasm_of(wasm, 'micro')
         if m:
             p['wasmLatency'] = f"{m['medianMs']:.0f} ms per question (median of {m['runs']}, 256² crop); load {m['loadMs'] / 1000:.1f} s"

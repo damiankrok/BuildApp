@@ -8,7 +8,7 @@ BuildPlan, no third-party pixels) together with exact label masks from the same 
   0 background, 1 wall (union of wall solids), 2 opening (the wall-line rectangle of every drawn opening: window, door,
   sliding, garage door - not an OPEN side).
 and side masks used only by the scorer: terrace/patio/driveway regions, dimension-line strokes, text boxes.
-No ResPlan, CubiCasa or other third-party data enters this set (licence findings: stage report section B).
+No ResPlan, CubiCasa or other third-party data enters this set (licence findings: stage report section C).
 """
 import argparse
 import json

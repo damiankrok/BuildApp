@@ -150,7 +150,7 @@ Technically: yes (vectors render cleanly; 100 MB; MIT code). Licence evidence is
 3. **Upstream source undisclosed** (platform identities withheld); terms of service "reviewed" but not published; two different extraction stories (v1 CAD/PDF parser vs v2 CV on rendered images). No way to audit upstream rights.
 4. Residual questions for counsel: (a) whether traced floor plans are protected expression/technical drawings under Polish/EU law (architectural works and plans are protected subject matter in many EU jurisdictions); (b) EU sui-generis database right of the listing platforms over a substantial extraction (~27,000 plans); (c) platform ToS/contract claims against downstream users (normally only against the scraper, but a takedown could force corpus/model rebuilds); (d) whether a model trained on ResPlan-derived renders is "Adapted Material" (relevant if the NC-SA declaration is the operative one); (e) attribution mechanics under CC BY 4.0 for a shipped model/app; (f) takedown churn — removed ids must be removable from the corpus (keep per-plan provenance).
 
-**Verdict: DATA_CANDIDATE_WITH_COUNSEL** — usable for internal research/evaluation now; inclusion in a BuildPlan-owned
+**Verdict: DATA_CANDIDATE_WITH_COUNSEL** — inspected for this audit only (parsed, two plans rendered to scratch); any further internal use is itself a counsel question under the NonCommercial reading (post-review D4); inclusion in a BuildPlan-owned
 commercial training corpus only after (i) written clarification from the authors that CC BY 4.0 (not CC BY-NC-SA 4.0) applies
 to the current release, and (ii) counsel review of points 2–4. Keep plan ids and dataset version (v8 / commit e2b78fe) per
 training sample so takedowns can be honoured.

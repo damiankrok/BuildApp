@@ -19,10 +19,12 @@ checkpoint or ONNX graph. Those live outside the worktree in `/home/user/work005
 Real questions are stored as frame id + source-byte SHA-256 + URL SHA-256 + pixel coordinates + question + expected
 answer (`question-corpus.json`).
 
-**Network and data.** Model weights were fetched from their official hubs at pinned revisions and run locally. No project
-byte was sent to a third-party service. The `SERVER_ORACLE` arm was this session's own model reading the composed crops
-through blind sub-agents (neutral file names, no expected answers, a separate key file): an in-session measurement
-instrument, not a dependency and not a hosted service call from BuildPlan.
+**Network and data.** Model weights were fetched from their official hubs at pinned revisions and run locally. The
+`SERVER_ORACLE` arm was this session's own model reading the composed crops through blind sub-agents (neutral file
+names, no expected answers, a separate key file). **47 of its 149 images were composed crops of publisher drawings**,
+read by the session's model as development material — the same channel through which this whole development session
+reads files. No BuildPlan component sent anything anywhere, and no other service received project bytes. The oracle is a
+measurement instrument, not a dependency (residual recorded in `licensing-matrix.md` §4.6–4.7).
 
 **No blind project was consumed. Round 9 was not drawn. 005I's production code was not reopened and blind round 8 was
 not patched.** The two round-8 houses are development evidence since 005I and are used here only as such.
@@ -98,7 +100,7 @@ repositories, files, datasets and papers.
 | --- | --- | --- |
 | **ResPlan** (`m-agour/ResPlan@e2b78fe`) | dataset downloaded and parsed: 17,000 plans (13,053 / 1,632 / 1,632 / 683), wall polygons with real gaps, door/window rectangles, rooms by class, **canvas units, not metres** (contradicting the README); code MIT; **data licence conflicting** (CC BY 4.0 limited to the authors' contributions vs CC BY-NC-SA 4.0 on Kaggle and in its own `croissant.json`); scraped listings | **DATA_CANDIDATE_WITH_COUNSEL** — not used |
 | **fpvec-lab** (`Cyprinus12138/fpvec-lab@f44a475`) | full history: 2 commits, one README, no LICENSE, no code, no data, no weights | **REIMPLEMENT_FROM_PAPER** (arXiv 2608.25608: tolerance-swept wall F1, typed edit cost, junction readout, donor-fusion rule) |
-| **MitUNet** (`aliasstudio/mitunet@ade0aa6`) | MiT-B4 + U-Net + scSE, 64.25 M params, 257 MB; code MIT **but** the MiT encoder in smp is NVIDIA SCL (non-commercial); weights CC BY-NC 4.0; data CubiCasa5K (NC) | **ARCHITECTURE_CANDIDATE_FOR_RETRAINING** — and retrained in miniature here, clean-room, from scratch (§F) |
+| **MitUNet** (`aliasstudio/mitunet@ade0aa6`) | MiT-B4 + U-Net + scSE, 64.25 M params, 257 MB; code MIT **but** the MiT encoder in smp is NVIDIA SCL (non-commercial); weights CC BY-NC 4.0; data CubiCasa5K (NC) | **ARCHITECTURE_CANDIDATE_FOR_RETRAINING** — and retrained in miniature here from scratch, as an independent re-implementation (§F) |
 | 2025–2026 survey | no model with commercially usable code + weights + data; permissive tags contradicted by training data (6) or with no data disclosed (5); RF-DETR-Seg Apache-2.0 (COCO) is an architecture candidate; Swiss Dwellings v3 (CC BY 4.0) and Floor Plan CIS are data candidates with counsel | 005G's conclusion stands |
 
 **The only commercially clean training route found is BuildPlan's own synthetic data, trained from scratch.**
@@ -136,8 +138,10 @@ repositories, files, datasets and papers.
 
 ## F. A commercially clean wall / opening model, proved in miniature (brief Part F)
 
-`wall-model-proof.json`; code `research/analyzer-005j/wallproof/`. Two networks written from their papers (U-Net 2015;
-SegFormer / Mix Transformer 2021) — **no NVIDIA SegFormer code, no smp / timm encoder code, no ImageNet weights** — and
+`wall-model-proof.json`; code `research/analyzer-005j/wallproof/`. Two networks written for this stage: a textbook U-Net (2015), and a MiT-B0 SegFormer (2021) that is an independent
+re-implementation, **not clean-room** — it reproduces four details of the public PVTv2 / HF transformers code (Apache-2.0)
+that the paper does not specify (post-review D2). **No NVIDIA SegFormer code, no smp / timm encoder code, no ImageNet
+weights.** Both were
 **trained from random initialisation on BuildPlan synthetic drawings only** (360 training scenes; exact masks from the
 generator's semantics: BACKGROUND / WALL / OPENING, where OPENING is every non-open gap). Same budget for both: 1,500
 steps, batch 8, 256² tiles, CPU. Evaluated on 108 held-out synthetic renders (seeds disjoint) and on the 7 development
@@ -354,7 +358,8 @@ bound, Evidence Pack format or sealed record; any Gradle file or Android asset; 
 7. **The source-cv baseline for "additional wall evidence"** is SCV-WALL ∪ SCV-SOLID (conservative). With bands alone the
    learned mask would appear to add 8–99 %; both numbers are in `wall-model-proof.json`.
 8. **Florence-2** ran from the native-format port `florence-community/Florence-2-base@00921df`. The Microsoft remote-code
-   checkpoint does not load into the native class. Tensor identity with `microsoft@5ca5edf` was not verified.
+   checkpoint does not load into the native class. A post-review sample (37 of 666 tensors, range-read) matched
+   `microsoft@5ca5edf` byte for byte, apart from documented layout differences; full identity was not verified.
 9. **SmolVLM2's official int8 vision encoder does not run** on ONNX Runtime's CPU provider (`ConvInteger`). The fp32
    vision encoder was used with the int8 decoder and embeddings.
 10. **Disk.** The container had about 4 GB free, which bounded the composition and model choices. Upstream clones were
