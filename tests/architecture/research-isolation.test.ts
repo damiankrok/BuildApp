@@ -276,7 +276,8 @@ describe('005M production cannot reach the visual-referee v2 bake-off, and no we
   it('the 005M harness and artifacts track only code and text, each file small, with no embedded pixels', () => {
     const stage = tracked().filter((f) => STAGE_PATHS.some((p) => f.startsWith(p)))
     expect(stage.length).toBeGreaterThan(0)
-    expect(stage.filter((f) => !/\.(py|ts|mjs|sh|json|ndjson|md|txt)$/i.test(f))).toEqual([])
+    // structured model answers are JSON lines (`runs/*.jsonl`): text, held to the same pixel and size checks below
+    expect(stage.filter((f) => !/\.(py|ts|mjs|sh|json|jsonl|ndjson|md|txt)$/i.test(f))).toEqual([])
     for (const f of stage) {
       const text = read(f)
       expect(text, f).not.toMatch(/(data:(image|application)\/[\w.+-]+;base64,|iVBORw0KGgo|\/9j\/4|UklGR|R0lGOD)[A-Za-z0-9+/]{40,}/)
