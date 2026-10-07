@@ -1,0 +1,5177 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005L",
+ "what": "every development row with plans of more than one storey: registration, walled regions, support relations, storey spans, the layout gate, and the emitted levels of the same code (numbers and ids only)",
+ "rows": [
+  {
+   "row": "dom-w-arkadiach",
+   "plansByRole": [
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-arkadiach-6-rzut-part-6a7a5261ea",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-arkadiach-6-rzut-podd-a91d8b76fe",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-arkadiach-6-190b6d5491-b3ebe503f8",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-arkadiach-6-1b8f291acd-d42f1d7520",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-16680ee739-bb2ced8b98",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-6f316481e2-0c42c49252",
+     "storey": "GROUND",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-cc4d20932a-b363732485",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-cdf9ec1681-da5e3aefce",
+     "storey": "ATTIC",
+     "annotation": "AREA_TABLE"
+    }
+   ],
+   "plansRead": 2,
+   "base": {
+    "frameId": "frame-asset-rzut-16680ee739-bb2ced8b98",
+    "storey": "GROUND"
+   },
+   "storeys": [
+    {
+     "id": "storey-0",
+     "index": 0,
+     "frameIds": [
+      "frame-asset-rzut-16680ee739-bb2ced8b98"
+     ],
+     "footprintRegionIds": [
+      "footprint-0-region-built-0-0"
+     ]
+    },
+    {
+     "id": "storey-1",
+     "index": 1,
+     "frameIds": [
+      "frame-asset-rzut-cc4d20932a-b363732485"
+     ],
+     "footprintRegionIds": [
+      "footprint-1-mass-0"
+     ]
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "frame-asset-rzut-cc4d20932a-b363732485",
+     "storeyIndex": 1,
+     "declaredRole": "ATTIC",
+     "candidates": 33,
+     "chosen": {
+      "targetId": "walls",
+      "scale": 1,
+      "offsetX": 20.5,
+      "offsetY": 43.5,
+      "agreement": 0.553533,
+      "score": 0.793948,
+      "stated": false
+     },
+     "rival": null,
+     "margin": 0.344672,
+     "resolution": 0.006222,
+     "scaleBasis": {
+      "basis": "SAME_PIXEL_SCALE",
+      "corroborated": false,
+      "why": "placed at the plan below’s own pixel scale on the assumption that the two sheets were exported at one scale: no printed scale and no facade wall pair states it"
+     },
+     "printedScale": {
+      "k": 0.516657,
+      "sharesAgainstFit": 0.122705,
+      "bodyInsideBelow": true,
+      "outcome": "REFUTED"
+     },
+     "held": null,
+     "decision": "STACKED",
+     "regions": [
+      {
+       "regionId": "region-built-0-0",
+       "boundsM": [
+        0.221,
+        0.222,
+        6.977,
+        8.971
+       ],
+       "areaM2": 59.106,
+       "wallFraction": 0.926,
+       "storeyWallFraction": 0.898,
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      }
+     ],
+     "relations": [
+      {
+       "upperRegionId": "region-built-0-0",
+       "lowerMassId": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        6.756,
+        8.749
+       ],
+       "intersectionM2": 59.106,
+       "upperSupportedShare": 1,
+       "lowerCoveredShare": 0.85,
+       "wallAgreement": 0.554
+      }
+     ],
+     "why": "stands on mass-0"
+    }
+   ],
+   "masses": [
+    {
+     "id": "mass-0",
+     "role": "MAIN",
+     "boxM": [
+      0,
+      0,
+      7.4,
+      9.4
+     ],
+     "areaM2": 69.56,
+     "storeys": [
+      0,
+      1
+     ]
+    }
+   ],
+   "upperFootprints": [
+    {
+     "id": "footprint-1-mass-0",
+     "storeyId": "storey-1",
+     "boxM": [
+      0,
+      0,
+      7.4,
+      9.4
+     ],
+     "areaM2": 69.56
+    }
+   ],
+   "storeyUnresolved": [],
+   "storeyConflicts": [],
+   "gate": {
+    "status": "STRUCTURAL_LAYOUT_ACCEPTED",
+    "reasons": [
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:NO_SECOND_VIEW",
+     "NOTED:FOOTPRINT_AREA_AGREES"
+    ]
+   },
+   "emitted": {
+    "outcome": "COMPLETED",
+    "levels": [
+     {
+      "index": 0,
+      "rings": [
+       {
+        "box": [
+         0,
+         0,
+         7.4,
+         9.4
+        ],
+        "areaM2": 69.56
+       }
+      ],
+      "ringAreaM2": 69.56,
+      "slabAreaM2": 69.56
+     },
+     {
+      "index": 1,
+      "rings": [
+       {
+        "box": [
+         0,
+         0,
+         7.4,
+         9.4
+        ],
+        "areaM2": 69.56
+       }
+      ],
+      "ringAreaM2": 69.56,
+      "slabAreaM2": 55.453
+     }
+    ]
+   }
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "plansByRole": [
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-modrzewnicy-10-g2e-oz-1f0c5c3416",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-modrzewnicy-10-g2e-oz-d1b6e020ab",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-modrzewnicy-10-g2e-oze-5e77e-0b6db21ae2",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-modrzewnicy-10-g2e-oze-8eccb-0f790237c2",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-6f2eb0b36f-39a1396dc9",
+     "storey": "GROUND",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-9304612e3c-5bc09da99c",
+     "storey": "ATTIC",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-dcec61c952-f7856a12c2",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    }
+   ],
+   "plansRead": 2,
+   "base": {
+    "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+    "storey": "GROUND"
+   },
+   "storeys": [
+    {
+     "id": "storey-0",
+     "index": 0,
+     "frameIds": [],
+     "footprintRegionIds": []
+    }
+   ],
+   "registrations": [],
+   "masses": [],
+   "upperFootprints": [],
+   "storeyUnresolved": [],
+   "storeyConflicts": [],
+   "gate": {
+    "status": "STRUCTURAL_LAYOUT_REJECTED",
+    "reasons": [
+     "BLOCKING:STRUCTURE_NOT_PROJECTED",
+     "BLOCKING:NO_MASS"
+    ]
+   },
+   "emitted": {
+    "outcome": "REFUSED:METRIC_RESOLUTION_INCONCLUSIVE",
+    "levels": []
+   }
+  },
+  {
+   "row": "dom-w-morelach",
+   "plansByRole": [
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-morelach-n-rzut-parte-4c4bf673d0",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-morelach-n-rzut-podda-722edb9b99",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-morelach-n-43e86a4c6b-42ac1f9c49",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-morelach-n-f056da2b1c-54adf16733",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-1355c555c3-029c4d1238",
+     "storey": "GROUND",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-44aea220ce-796940fe12",
+     "storey": "ATTIC",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-7d856c8254-d73cb6d54e",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    }
+   ],
+   "plansRead": 2,
+   "base": {
+    "frameId": "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+    "storey": "GROUND"
+   },
+   "storeys": [
+    {
+     "id": "storey-0",
+     "index": 0,
+     "frameIds": [
+      "frame-asset-rzut-63ae7d4e86-027bb2e82d"
+     ],
+     "footprintRegionIds": [
+      "footprint-0-region-built-4-0",
+      "footprint-0-region-built-0-4",
+      "footprint-0-region-built-15-14",
+      "footprint-0-region-recess-3-3",
+      "footprint-0-region-recess-3-23",
+      "footprint-0-region-recess-16-19",
+      "footprint-0-region-recess-16-17",
+      "footprint-0-region-recess-15-13"
+     ]
+    },
+    {
+     "id": "storey-1",
+     "index": 1,
+     "frameIds": [
+      "frame-asset-rzut-7d856c8254-d73cb6d54e"
+     ],
+     "footprintRegionIds": [
+      "footprint-1-mass-0",
+      "footprint-1-mass-1"
+     ]
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "frame-asset-rzut-7d856c8254-d73cb6d54e",
+     "storeyIndex": 1,
+     "declaredRole": "ATTIC",
+     "candidates": 79,
+     "chosen": {
+      "targetId": "walls",
+      "scale": 1,
+      "offsetX": -75,
+      "offsetY": 33,
+      "agreement": 0.396493,
+      "score": 0.532686,
+      "stated": false
+     },
+     "rival": null,
+     "margin": 0.011779,
+     "resolution": 0.007233,
+     "scaleBasis": {
+      "basis": "SAME_PIXEL_SCALE",
+      "corroborated": true,
+      "why": "placed at the plan below’s own pixel scale, which facade walls paired on both axes or a printed scale agree with"
+     },
+     "printedScale": null,
+     "held": null,
+     "decision": "STACKED",
+     "regions": [
+      {
+       "regionId": "region-built-0-0",
+       "boundsM": [
+        0.219,
+        0.172,
+        11.53,
+        10.361
+       ],
+       "areaM2": 115.245,
+       "wallFraction": 0.582,
+       "storeyWallFraction": 0.51,
+       "body": true,
+       "overhang": "BEYOND_TOLERANCE",
+       "unsupportedM2": 11.83
+      },
+      {
+       "regionId": "region-built-2-3",
+       "boundsM": [
+        4.01,
+        10.361,
+        11.53,
+        11.573
+       ],
+       "areaM2": 9.113,
+       "wallFraction": 0.552,
+       "storeyWallFraction": 0.417,
+       "body": true,
+       "overhang": "UNSUPPORTED",
+       "unsupportedM2": 9.113
+      },
+      {
+       "regionId": "region-built-4-4",
+       "boundsM": [
+        10.101,
+        11.573,
+        11.53,
+        12.191
+       ],
+       "areaM2": 0.883,
+       "wallFraction": 0.882,
+       "storeyWallFraction": 0,
+       "body": false,
+       "overhang": "NOT_A_BODY",
+       "unsupportedM2": 0.883
+      }
+     ],
+     "relations": [
+      {
+       "upperRegionId": "region-built-0-0",
+       "lowerMassId": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        7.31,
+        10.189
+       ],
+       "intersectionM2": 74.479,
+       "upperSupportedShare": 0.646,
+       "lowerCoveredShare": 0.959,
+       "wallAgreement": 0.396
+      },
+      {
+       "upperRegionId": "region-built-0-0",
+       "lowerMassId": "mass-1",
+       "status": "SUPPORTS",
+       "overlapM": [
+        3.581,
+        8.08
+       ],
+       "intersectionM2": 28.936,
+       "upperSupportedShare": 0.251,
+       "lowerCoveredShare": 0.942,
+       "wallAgreement": 0.396
+      },
+      {
+       "upperRegionId": "region-built-0-0",
+       "lowerMassId": "mass-2",
+       "status": "INCIDENTAL",
+       "overlapM": [
+        0.42,
+        3.5
+       ],
+       "intersectionM2": 1.47,
+       "upperSupportedShare": 0.013,
+       "lowerCoveredShare": 0.396,
+       "wallAgreement": 0.396
+      },
+      {
+       "upperRegionId": "region-built-2-3",
+       "lowerMassId": "mass-0",
+       "status": "INCIDENTAL",
+       "overlapM": [
+        7.1,
+        0.259
+       ],
+       "intersectionM2": 1.84,
+       "upperSupportedShare": 0.202,
+       "lowerCoveredShare": 0.024,
+       "wallAgreement": 0.396
+      }
+     ],
+     "why": "stands on mass-0, mass-1"
+    }
+   ],
+   "masses": [
+    {
+     "id": "mass-0",
+     "role": "MAIN",
+     "boxM": [
+      3.8,
+      0,
+      11.11,
+      10.62
+     ],
+     "areaM2": 77.632,
+     "storeys": [
+      0,
+      1
+     ]
+    },
+    {
+     "id": "mass-1",
+     "role": "ATTACHED",
+     "boxM": [
+      0,
+      1.105,
+      3.8,
+      9.185
+     ],
+     "areaM2": 30.704,
+     "storeys": [
+      0,
+      1
+     ]
+    },
+    {
+     "id": "mass-2",
+     "role": "ATTACHED",
+     "boxM": [
+      11.11,
+      4.15,
+      12.17,
+      7.65
+     ],
+     "areaM2": 3.71,
+     "storeys": [
+      0,
+      0
+     ]
+    }
+   ],
+   "upperFootprints": [
+    {
+     "id": "footprint-1-mass-0",
+     "storeyId": "storey-1",
+     "boxM": [
+      3.8,
+      0,
+      11.11,
+      10.62
+     ],
+     "areaM2": 77.632
+    },
+    {
+     "id": "footprint-1-mass-1",
+     "storeyId": "storey-1",
+     "boxM": [
+      0,
+      1.105,
+      3.8,
+      9.185
+     ],
+     "areaM2": 30.704
+    }
+   ],
+   "storeyUnresolved": [],
+   "storeyConflicts": [
+    "the attic storey's walled region region-built-0-0 overhangs the bodies below by 11.8 m²",
+    "the attic storey's walled region region-built-0-0 overhangs the bodies below by 11.8 m²"
+   ],
+   "gate": {
+    "status": "STRUCTURAL_LAYOUT_PARTIAL",
+    "reasons": [
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "DEGRADING:STRUCTURE_READS_AS_ONE_BLOCK",
+     "NOTED:NO_SECOND_VIEW",
+     "NOTED:FOOTPRINT_AREA_AGREES",
+     "NOTED:ROOF_BY_CONVENTION",
+     "NOTED:ROOF_BY_CONVENTION",
+     "DEGRADING:STOREY_COVERAGE_DISAGREES",
+     "NOTED:NAMED_HOLES"
+    ]
+   },
+   "emitted": {
+    "outcome": "COMPLETED",
+    "levels": [
+     {
+      "index": 0,
+      "rings": [
+       {
+        "box": [
+         0,
+         1.435,
+         3.8,
+         9.515
+        ],
+        "areaM2": 30.704
+       },
+       {
+        "box": [
+         3.8,
+         0,
+         11.11,
+         10.62
+        ],
+        "areaM2": 77.632
+       },
+       {
+        "box": [
+         11.11,
+         2.97,
+         12.17,
+         6.47
+        ],
+        "areaM2": 3.71
+       }
+      ],
+      "ringAreaM2": 112.046,
+      "slabAreaM2": 112.047
+     },
+     {
+      "index": 1,
+      "rings": [
+       {
+        "box": [
+         0,
+         1.435,
+         3.8,
+         9.515
+        ],
+        "areaM2": 30.704
+       },
+       {
+        "box": [
+         3.8,
+         0,
+         11.11,
+         10.62
+        ],
+        "areaM2": 77.632
+       }
+      ],
+      "ringAreaM2": 108.336,
+      "slabAreaM2": 83.34
+     }
+    ]
+   }
+  },
+  {
+   "row": "marcowki",
+   "plansByRole": [
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-pa-6eb2541c24",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-po-5926d3fb6c",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-marcowkach-ge-09d7473020-20f3864e88",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-marcowkach-ge-e1f7fc10fc-2ffc3c0fba",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-117027f690-fed2722c38",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-aa1526220f-863ec969ff",
+     "storey": "GROUND",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-f028d28aba-d7b403e37e",
+     "storey": "ATTIC",
+     "annotation": "AREA_TABLE"
+    }
+   ],
+   "plansRead": 2,
+   "base": {
+    "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+    "storey": "GROUND"
+   },
+   "storeys": [
+    {
+     "id": "storey-0",
+     "index": 0,
+     "frameIds": [
+      "frame-asset-rzut-19a11bc745-33a5ff46cd"
+     ],
+     "footprintRegionIds": [
+      "footprint-0-region-built-0-1",
+      "footprint-0-region-built-6-2",
+      "zone-min_z",
+      "zone-max_z"
+     ]
+    },
+    {
+     "id": "storey-1",
+     "index": 1,
+     "frameIds": [
+      "frame-asset-rzut-117027f690-fed2722c38"
+     ],
+     "footprintRegionIds": [
+      "footprint-1-mass-0"
+     ]
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "frame-asset-rzut-117027f690-fed2722c38",
+     "storeyIndex": 1,
+     "declaredRole": "ATTIC",
+     "candidates": 82,
+     "chosen": {
+      "targetId": "region-built-0-1",
+      "scale": 1.02,
+      "offsetX": 10.337,
+      "offsetY": 55.994,
+      "agreement": 0.352988,
+      "score": 0.512301,
+      "stated": false
+     },
+     "rival": {
+      "targetId": "walls",
+      "scale": 1.106,
+      "offsetX": 128.105,
+      "offsetY": 214.632,
+      "score": 0.468342,
+      "masses": [
+       "mass-0",
+       "mass-1"
+      ]
+     },
+     "margin": 0.043959,
+     "resolution": 0.006054,
+     "scaleBasis": {
+      "basis": "FITTED",
+      "corroborated": true,
+      "why": "placed by fitted"
+     },
+     "printedScale": {
+      "k": 1.392186,
+      "sharesAgainstFit": 0.593874,
+      "bodyInsideBelow": false,
+      "outcome": "REFUTED"
+     },
+     "held": null,
+     "decision": "STACKED",
+     "regions": [
+      {
+       "regionId": "region-built-0-0",
+       "boundsM": [
+        0.089,
+        0.351,
+        7.813,
+        12.258
+       ],
+       "areaM2": 91.973,
+       "wallFraction": 0.627,
+       "storeyWallFraction": 0.579,
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      }
+     ],
+     "relations": [
+      {
+       "upperRegionId": "region-built-0-0",
+       "lowerMassId": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        7.724,
+        11.907
+       ],
+       "intersectionM2": 91.973,
+       "upperSupportedShare": 1,
+       "lowerCoveredShare": 0.923,
+       "wallAgreement": 0.353
+      }
+     ],
+     "why": "stands on mass-0"
+    }
+   ],
+   "masses": [
+    {
+     "id": "mass-0",
+     "role": "MAIN",
+     "boxM": [
+      0,
+      0,
+      7.9,
+      12.61
+     ],
+     "areaM2": 99.619,
+     "storeys": [
+      0,
+      1
+     ]
+    },
+    {
+     "id": "mass-1",
+     "role": "ATTACHED",
+     "boxM": [
+      7.9,
+      5.1,
+      12.05,
+      12.61
+     ],
+     "areaM2": 31.166,
+     "storeys": [
+      0,
+      0
+     ]
+    }
+   ],
+   "upperFootprints": [
+    {
+     "id": "footprint-1-mass-0",
+     "storeyId": "storey-1",
+     "boxM": [
+      0,
+      0,
+      7.9,
+      12.61
+     ],
+     "areaM2": 99.619
+    }
+   ],
+   "storeyUnresolved": [],
+   "storeyConflicts": [
+    "the attic storey plan fits region-built-0-1 and walls almost equally well, standing on mass-0 against mass-0, mass-1",
+    "the attic storey plan fits region-built-0-1 and walls almost equally well, standing on mass-0 against mass-0, mass-1"
+   ],
+   "gate": {
+    "status": "STRUCTURAL_LAYOUT_PARTIAL",
+    "reasons": [
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:WIDTH_CORROBORATED",
+     "NOTED:DEPTH_CORROBORATED",
+     "NOTED:FOOTPRINT_AREA_AGREES",
+     "NOTED:ROOF_BY_CONVENTION",
+     "DEGRADING:STOREY_COVERAGE_DISAGREES",
+     "NOTED:NAMED_HOLES"
+    ]
+   },
+   "emitted": {
+    "outcome": "COMPLETED",
+    "levels": [
+     {
+      "index": 0,
+      "rings": [
+       {
+        "box": [
+         0,
+         0.991,
+         7.9,
+         13.601
+        ],
+        "areaM2": 99.619
+       },
+       {
+        "box": [
+         7.9,
+         0.991,
+         12.05,
+         8.501
+        ],
+        "areaM2": 31.167
+       }
+      ],
+      "ringAreaM2": 130.786,
+      "slabAreaM2": 130.786
+     },
+     {
+      "index": 1,
+      "rings": [
+       {
+        "box": [
+         0,
+         0.991,
+         7.9,
+         13.601
+        ],
+        "areaM2": 99.619
+       }
+      ],
+      "ringAreaM2": 99.619,
+      "slabAreaM2": 80.492
+     }
+    ]
+   }
+  },
+  {
+   "row": "alt-marcowki",
+   "plansByRole": [
+    {
+     "frameId": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+     "storey": "GROUND",
+     "annotation": "UNKNOWN"
+    },
+    {
+     "frameId": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-e3e35d1f7-c68728b8e4",
+     "storey": "GROUND",
+     "annotation": "UNKNOWN"
+    },
+    {
+     "frameId": "frame-asset-dom-w-marcowkach-ge-rzut-poddasza-613dc728-2183d6fd56",
+     "storey": "ATTIC",
+     "annotation": "UNKNOWN"
+    },
+    {
+     "frameId": "frame-asset-dom-w-marcowkach-ge-rzut-poddasza-9d93d74c-caf043c45a",
+     "storey": "ATTIC",
+     "annotation": "UNKNOWN"
+    }
+   ],
+   "plansRead": 2,
+   "base": {
+    "frameId": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+    "storey": "GROUND"
+   },
+   "storeys": [
+    {
+     "id": "storey-0",
+     "index": 0,
+     "frameIds": [],
+     "footprintRegionIds": []
+    }
+   ],
+   "registrations": [],
+   "masses": [],
+   "upperFootprints": [],
+   "storeyUnresolved": [],
+   "storeyConflicts": [],
+   "gate": {
+    "status": "STRUCTURAL_LAYOUT_REJECTED",
+    "reasons": [
+     "BLOCKING:STRUCTURE_NOT_PROJECTED",
+     "BLOCKING:NO_MASS"
+    ]
+   },
+   "emitted": {
+    "outcome": "REFUSED:METRIC_RESOLUTION_INCONCLUSIVE",
+    "levels": []
+   }
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "plansByRole": [
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-jab-onkach-22-rzut-pa-1ad9e4dc60",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-jab-onkach-22-rzut-po-8b7d8287ca",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-jab-onkach-22-09655213e4-f96f526406",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-jab-onkach-22-2db71d499e-2a49940358",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-07bdad2581-a80195dc44",
+     "storey": "GROUND",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-2389a8baf9-0c491c2999",
+     "storey": "ATTIC",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-a8bdd8cd1d-d80b709d74",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-d52f958fd6-d2646b4dce",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    }
+   ],
+   "plansRead": 2,
+   "base": {
+    "frameId": "frame-asset-rzut-a8bdd8cd1d-d80b709d74",
+    "storey": "GROUND"
+   },
+   "storeys": [
+    {
+     "id": "storey-0",
+     "index": 0,
+     "frameIds": [
+      "frame-asset-rzut-a8bdd8cd1d-d80b709d74"
+     ],
+     "footprintRegionIds": [
+      "footprint-0-region-built-0-1",
+      "zone-min_z"
+     ]
+    },
+    {
+     "id": "storey-1",
+     "index": 1,
+     "frameIds": [
+      "frame-asset-rzut-d52f958fd6-d2646b4dce"
+     ],
+     "footprintRegionIds": [
+      "footprint-1-mass-0"
+     ]
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "frame-asset-rzut-d52f958fd6-d2646b4dce",
+     "storeyIndex": 1,
+     "declaredRole": "ATTIC",
+     "candidates": 56,
+     "chosen": {
+      "targetId": "walls",
+      "scale": 1,
+      "offsetX": -72,
+      "offsetY": 9.25,
+      "agreement": 0.31975,
+      "score": 0.540868,
+      "stated": false
+     },
+     "rival": null,
+     "margin": 0.222702,
+     "resolution": 0.006033,
+     "scaleBasis": {
+      "basis": "SAME_PIXEL_SCALE",
+      "corroborated": false,
+      "why": "placed at the plan below’s own pixel scale on the assumption that the two sheets were exported at one scale: no printed scale and no facade wall pair states it"
+     },
+     "printedScale": {
+      "k": 1.404108,
+      "sharesAgainstFit": 0.301638,
+      "bodyInsideBelow": false,
+      "outcome": "REFUTED"
+     },
+     "held": null,
+     "decision": "STACKED",
+     "regions": [
+      {
+       "regionId": "region-built-0-0",
+       "boundsM": [
+        0.244,
+        -0.679,
+        6.136,
+        0.226
+       ],
+       "areaM2": 5.331,
+       "wallFraction": 0.745,
+       "storeyWallFraction": 0.67,
+       "body": false,
+       "overhang": "NOT_A_BODY",
+       "unsupportedM2": 5.331
+      },
+      {
+       "regionId": "region-built-0-1",
+       "boundsM": [
+        0.244,
+        0.226,
+        10.926,
+        9.67
+       ],
+       "areaM2": 100.888,
+       "wallFraction": 0.783,
+       "storeyWallFraction": 0.736,
+       "body": true,
+       "overhang": "BEYOND_TOLERANCE",
+       "unsupportedM2": 7.162
+      }
+     ],
+     "relations": [
+      {
+       "upperRegionId": "region-built-0-1",
+       "lowerMassId": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        10.682,
+        8.774
+       ],
+       "intersectionM2": 93.727,
+       "upperSupportedShare": 0.929,
+       "lowerCoveredShare": 0.947,
+       "wallAgreement": 0.32
+      }
+     ],
+     "why": "stands on mass-0"
+    }
+   ],
+   "masses": [
+    {
+     "id": "mass-0",
+     "role": "MAIN",
+     "boxM": [
+      0,
+      0,
+      11,
+      9
+     ],
+     "areaM2": 99,
+     "storeys": [
+      0,
+      1
+     ]
+    }
+   ],
+   "upperFootprints": [
+    {
+     "id": "footprint-1-mass-0",
+     "storeyId": "storey-1",
+     "boxM": [
+      0,
+      0,
+      11,
+      9
+     ],
+     "areaM2": 99
+    }
+   ],
+   "storeyUnresolved": [],
+   "storeyConflicts": [
+    "the attic storey's walled region region-built-0-1 overhangs the bodies below by 7.2 m²",
+    "the attic storey's walled region region-built-0-1 overhangs the bodies below by 7.2 m²"
+   ],
+   "gate": {
+    "status": "STRUCTURAL_LAYOUT_PARTIAL",
+    "reasons": [
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:WIDTH_CORROBORATED",
+     "NOTED:FOOTPRINT_AREA_AGREES",
+     "DEGRADING:STOREY_COVERAGE_DISAGREES"
+    ]
+   },
+   "emitted": {
+    "outcome": "COMPLETED",
+    "levels": [
+     {
+      "index": 0,
+      "rings": [
+       {
+        "box": [
+         0,
+         0,
+         11,
+         9
+        ],
+        "areaM2": 99
+       }
+      ],
+      "ringAreaM2": 99,
+      "slabAreaM2": 99
+     },
+     {
+      "index": 1,
+      "rings": [
+       {
+        "box": [
+         0,
+         0,
+         11,
+         9
+        ],
+        "areaM2": 99
+       }
+      ],
+      "ringAreaM2": 99,
+      "slabAreaM2": 81.989
+     }
+    ]
+   }
+  },
+  {
+   "row": "willa-miranda",
+   "plansByRole": [
+    {
+     "frameId": "frame-asset-gotowy-projekt-willa-miranda-11-g2-rzut-pa-122944115c",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-willa-miranda-11-g2-rzut-pi-e4e00f65e2",
+     "storey": "UPPER",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-willa-miranda-11-g2-c5d1ceb07a-ee536bd73c",
+     "storey": "UPPER",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-willa-miranda-11-g2-c8409d3300-076f8887d9",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-07b69dcbb8-2088494fef",
+     "storey": "UPPER",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-891a78d924-c2d04897b9",
+     "storey": "GROUND",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-dac34cc718-1ac18b4545",
+     "storey": "UPPER",
+     "annotation": "AREA_TABLE"
+    }
+   ],
+   "plansRead": 2,
+   "base": {
+    "frameId": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+    "storey": "GROUND"
+   },
+   "storeys": [
+    {
+     "id": "storey-0",
+     "index": 0,
+     "frameIds": [
+      "frame-asset-rzut-73ee27c4b6-7102a805c6"
+     ],
+     "footprintRegionIds": [
+      "footprint-0-region-built-0-5",
+      "footprint-0-region-built-20-29",
+      "footprint-0-region-built-8-0",
+      "footprint-0-region-recess-22-4",
+      "footprint-0-region-recess-20-29",
+      "footprint-0-region-recess-20-31",
+      "footprint-0-region-recess-30-29"
+     ]
+    },
+    {
+     "id": "storey-1",
+     "index": 1,
+     "frameIds": [
+      "frame-asset-rzut-07b69dcbb8-2088494fef"
+     ],
+     "footprintRegionIds": []
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "frame-asset-rzut-07b69dcbb8-2088494fef",
+     "storeyIndex": 1,
+     "declaredRole": "UPPER",
+     "candidates": 103,
+     "chosen": {
+      "targetId": "walls",
+      "scale": 1,
+      "offsetX": 135,
+      "offsetY": 163.969,
+      "agreement": 0.257324,
+      "score": 0.291167,
+      "stated": false
+     },
+     "rival": null,
+     "margin": 0.00245,
+     "resolution": 0.009598,
+     "scaleBasis": {
+      "basis": "SAME_PIXEL_SCALE",
+      "corroborated": true,
+      "why": "placed at the plan below’s own pixel scale, which facade walls paired on both axes or a printed scale agree with"
+     },
+     "printedScale": {
+      "k": 1.295264,
+      "sharesAgainstFit": 0.38763,
+      "bodyInsideBelow": false,
+      "outcome": "REFUTED"
+     },
+     "held": null,
+     "decision": "NO_SUPPORT",
+     "regions": [
+      {
+       "regionId": "region-built-3-4",
+       "boundsM": [
+        9.191,
+        11.253,
+        11.788,
+        17.011
+       ],
+       "areaM2": 14.952,
+       "wallFraction": 0.464,
+       "storeyWallFraction": 0.133,
+       "body": false,
+       "overhang": "NOT_A_BODY",
+       "unsupportedM2": 14.952
+      },
+      {
+       "regionId": "region-built-4-3",
+       "boundsM": [
+        10.423,
+        10.737,
+        11.279,
+        11.253
+       ],
+       "areaM2": 0.441,
+       "wallFraction": 0.724,
+       "storeyWallFraction": 0.317,
+       "body": false,
+       "overhang": "NOT_A_BODY",
+       "unsupportedM2": 0.441
+      }
+     ],
+     "relations": [],
+     "why": "none of its walled regions stands on a body below over a room’s span"
+    }
+   ],
+   "masses": [
+    {
+     "id": "mass-0",
+     "role": "MAIN",
+     "boxM": [
+      0,
+      2.45,
+      15,
+      11.65
+     ],
+     "areaM2": 138,
+     "storeys": [
+      0,
+      0
+     ]
+    },
+    {
+     "id": "mass-1",
+     "role": "ATTACHED",
+     "boxM": [
+      8,
+      11.65,
+      14.506,
+      14.1
+     ],
+     "areaM2": 15.94,
+     "storeys": [
+      0,
+      0
+     ]
+    },
+    {
+     "id": "mass-2",
+     "role": "ATTACHED",
+     "boxM": [
+      3.552,
+      0,
+      9.031,
+      2.45
+     ],
+     "areaM2": 13.422,
+     "storeys": [
+      0,
+      0
+     ]
+    }
+   ],
+   "upperFootprints": [],
+   "storeyUnresolved": [
+    "AMBIGUOUS: which body the upper storey stands on"
+   ],
+   "storeyConflicts": [],
+   "gate": {
+    "status": "STRUCTURAL_LAYOUT_PARTIAL",
+    "reasons": [
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "DEGRADING:STRUCTURE_READS_AS_ONE_BLOCK",
+     "NOTED:WIDTH_CORROBORATED",
+     "NOTED:DEPTH_CORROBORATED",
+     "NOTED:FOOTPRINT_AREA_AGREES",
+     "DEGRADING:NO_MASS_REACHES_UP",
+     "NOTED:ROOF_BY_CONVENTION",
+     "NOTED:ROOF_BY_CONVENTION",
+     "NOTED:NAMED_HOLES"
+    ]
+   },
+   "emitted": {
+    "outcome": "COMPLETED",
+    "levels": [
+     {
+      "index": 0,
+      "rings": [
+       {
+        "box": [
+         0,
+         2.45,
+         15,
+         11.65
+        ],
+        "areaM2": 138
+       },
+       {
+        "box": [
+         3.552,
+         11.65,
+         9.031,
+         14.1
+        ],
+        "areaM2": 13.422
+       },
+       {
+        "box": [
+         8,
+         0,
+         14.506,
+         2.45
+        ],
+        "areaM2": 15.94
+       }
+      ],
+      "ringAreaM2": 167.362,
+      "slabAreaM2": 167.362
+     }
+    ]
+   }
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "plansByRole": [
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-zurawkach-3-p-rzut-pa-2d7956d088",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-zurawkach-3-p-rzut-pi-6b227d5070",
+     "storey": "BASEMENT",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-zurawkach-3-p-rzut-po-82c29b6462",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-zurawkach-3-p-02c4fd7f8a-fc6b98f2d0",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-zurawkach-3-p-7199f69925-45095f59cd",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-zurawkach-3-p-7ec46c158b-1303e6adfb",
+     "storey": "BASEMENT",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-007f8fc320-7e7086524f",
+     "storey": "GROUND",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-1c5a322c92-0ad907a579",
+     "storey": "BASEMENT",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-9b943f5354-6b4a1371b9",
+     "storey": "ATTIC",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-b33f1d0952-a82d8da7c0",
+     "storey": "BASEMENT",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-d59c6b8717-92f3653883",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    }
+   ],
+   "plansRead": 3,
+   "base": {
+    "frameId": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+    "storey": "GROUND"
+   },
+   "storeys": [
+    {
+     "id": "storey--1",
+     "index": -1,
+     "frameIds": [
+      "frame-asset-rzut-b33f1d0952-a82d8da7c0"
+     ],
+     "footprintRegionIds": [
+      "footprint--1-mass-0",
+      "footprint--1-mass-1"
+     ]
+    },
+    {
+     "id": "storey-0",
+     "index": 0,
+     "frameIds": [
+      "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445"
+     ],
+     "footprintRegionIds": [
+      "footprint-0-region-built-0-0",
+      "footprint-0-region-built-9-0",
+      "footprint-0-region-recess-9-23",
+      "footprint-0-region-recess-14-1",
+      "footprint-0-region-recess-17-13",
+      "footprint-0-region-recess-9-14",
+      "footprint-0-region-recess-9-8",
+      "footprint-0-region-recess-17-18"
+     ]
+    },
+    {
+     "id": "storey-1",
+     "index": 1,
+     "frameIds": [
+      "frame-asset-rzut-d59c6b8717-92f3653883"
+     ],
+     "footprintRegionIds": [
+      "footprint-1-mass-0",
+      "footprint-1-mass-1"
+     ]
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "frame-asset-rzut-b33f1d0952-a82d8da7c0",
+     "storeyIndex": -1,
+     "declaredRole": "BASEMENT",
+     "candidates": 45,
+     "chosen": {
+      "targetId": "walls",
+      "scale": 1.002,
+      "offsetX": 158.478,
+      "offsetY": 22.379,
+      "agreement": 0.574647,
+      "score": 0.7948,
+      "stated": false
+     },
+     "rival": null,
+     "margin": 0.037563,
+     "resolution": 0.004757,
+     "scaleBasis": {
+      "basis": "WALL_PAIRS",
+      "corroborated": true,
+      "why": "placed by wall pairs"
+     },
+     "printedScale": null,
+     "held": null,
+     "decision": "STACKED",
+     "regions": [
+      {
+       "regionId": "region-built-0-0",
+       "boundsM": [
+        0.221,
+        0.223,
+        11.803,
+        7.772
+       ],
+       "areaM2": 87.442,
+       "wallFraction": 0.857,
+       "storeyWallFraction": 0.811,
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      },
+      {
+       "regionId": "region-built-2-1",
+       "boundsM": [
+        7.758,
+        7.772,
+        11.803,
+        9.285
+       ],
+       "areaM2": 6.122,
+       "wallFraction": 0.649,
+       "storeyWallFraction": 0.512,
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      }
+     ],
+     "relations": [
+      {
+       "upperRegionId": "region-built-0-0",
+       "lowerMassId": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        7.279,
+        7.549
+       ],
+       "intersectionM2": 54.955,
+       "upperSupportedShare": 0.628,
+       "lowerCoveredShare": 0.916,
+       "wallAgreement": 0.575
+      },
+      {
+       "upperRegionId": "region-built-0-0",
+       "lowerMassId": "mass-1",
+       "status": "SUPPORTS",
+       "overlapM": [
+        4.303,
+        7.549
+       ],
+       "intersectionM2": 32.487,
+       "upperSupportedShare": 0.372,
+       "lowerCoveredShare": 0.795,
+       "wallAgreement": 0.575
+      },
+      {
+       "upperRegionId": "region-built-2-1",
+       "lowerMassId": "mass-1",
+       "status": "SUPPORTS",
+       "overlapM": [
+        4.045,
+        1.513
+       ],
+       "intersectionM2": 6.122,
+       "upperSupportedShare": 1,
+       "lowerCoveredShare": 0.15,
+       "wallAgreement": 0.575
+      }
+     ],
+     "why": "stands on mass-0, mass-1"
+    },
+    {
+     "frameId": "frame-asset-rzut-d59c6b8717-92f3653883",
+     "storeyIndex": 1,
+     "declaredRole": "ATTIC",
+     "candidates": 44,
+     "chosen": {
+      "targetId": "walls",
+      "scale": 1.002,
+      "offsetX": 142.992,
+      "offsetY": 5.954,
+      "agreement": 0.408898,
+      "score": 0.639733,
+      "stated": false
+     },
+     "rival": null,
+     "margin": 0.026388,
+     "resolution": 0.004711,
+     "scaleBasis": {
+      "basis": "WALL_PAIRS",
+      "corroborated": true,
+      "why": "placed by wall pairs"
+     },
+     "printedScale": null,
+     "held": null,
+     "decision": "STACKED",
+     "regions": [
+      {
+       "regionId": "region-built-0-0",
+       "boundsM": [
+        0.226,
+        -0.686,
+        11.283,
+        8.678
+       ],
+       "areaM2": 103.542,
+       "wallFraction": 0.834,
+       "storeyWallFraction": 0.654,
+       "body": true,
+       "overhang": "BEYOND_TOLERANCE",
+       "unsupportedM2": 12.518
+      },
+      {
+       "regionId": "region-built-1-3",
+       "boundsM": [
+        4.536,
+        8.678,
+        11.283,
+        9.483
+       ],
+       "areaM2": 5.434,
+       "wallFraction": 0.7,
+       "storeyWallFraction": 0.357,
+       "body": false,
+       "overhang": "NOT_A_BODY",
+       "unsupportedM2": 5.434
+      }
+     ],
+     "relations": [
+      {
+       "upperRegionId": "region-built-0-0",
+       "lowerMassId": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        7.274,
+        8
+       ],
+       "intersectionM2": 58.192,
+       "upperSupportedShare": 0.562,
+       "lowerCoveredShare": 0.97,
+       "wallAgreement": 0.409
+      },
+      {
+       "upperRegionId": "region-built-0-0",
+       "lowerMassId": "mass-1",
+       "status": "SUPPORTS",
+       "overlapM": [
+        3.783,
+        8.678
+       ],
+       "intersectionM2": 32.832,
+       "upperSupportedShare": 0.317,
+       "lowerCoveredShare": 0.803,
+       "wallAgreement": 0.409
+      }
+     ],
+     "why": "stands on mass-0, mass-1"
+    }
+   ],
+   "masses": [
+    {
+     "id": "mass-0",
+     "role": "MAIN",
+     "boxM": [
+      0,
+      0,
+      7.5,
+      8
+     ],
+     "areaM2": 60,
+     "storeys": [
+      -1,
+      1
+     ]
+    },
+    {
+     "id": "mass-1",
+     "role": "ATTACHED",
+     "boxM": [
+      7.5,
+      0,
+      11.803,
+      9.5
+     ],
+     "areaM2": 40.881,
+     "storeys": [
+      -1,
+      1
+     ]
+    }
+   ],
+   "upperFootprints": [
+    {
+     "id": "footprint--1-mass-0",
+     "storeyId": "storey--1",
+     "boxM": [
+      0,
+      0,
+      7.5,
+      8
+     ],
+     "areaM2": 60
+    },
+    {
+     "id": "footprint--1-mass-1",
+     "storeyId": "storey--1",
+     "boxM": [
+      7.5,
+      0,
+      11.803,
+      9.5
+     ],
+     "areaM2": 40.881
+    },
+    {
+     "id": "footprint-1-mass-0",
+     "storeyId": "storey-1",
+     "boxM": [
+      0,
+      0,
+      7.5,
+      8
+     ],
+     "areaM2": 60
+    },
+    {
+     "id": "footprint-1-mass-1",
+     "storeyId": "storey-1",
+     "boxM": [
+      7.5,
+      0,
+      11.803,
+      8.678
+     ],
+     "areaM2": 37.343
+    }
+   ],
+   "storeyUnresolved": [],
+   "storeyConflicts": [
+    "the attic storey's walled region region-built-0-0 overhangs the bodies below by 12.5 m²",
+    "the attic storey's walled region region-built-0-0 overhangs the bodies below by 12.5 m²"
+   ],
+   "gate": {
+    "status": "STRUCTURAL_LAYOUT_PARTIAL",
+    "reasons": [
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:WIDTH_CORROBORATED",
+     "NOTED:DEPTH_CORROBORATED",
+     "NOTED:FOOTPRINT_AREA_AGREES",
+     "NOTED:EVERY_MASS_FULL_HEIGHT",
+     "NOTED:ROOF_BY_CONVENTION",
+     "DEGRADING:STOREY_COVERAGE_DISAGREES",
+     "DEGRADING:ROOF_EVIDENCE_DISAGREES",
+     "NOTED:NAMED_HOLES"
+    ]
+   },
+   "emitted": {
+    "outcome": "COMPLETED",
+    "levels": [
+     {
+      "index": -1,
+      "rings": [
+       {
+        "box": [
+         0,
+         1.5,
+         7.5,
+         9.5
+        ],
+        "areaM2": 60
+       },
+       {
+        "box": [
+         7.5,
+         0,
+         11.803,
+         9.5
+        ],
+        "areaM2": 40.881
+       }
+      ],
+      "ringAreaM2": 100.881,
+      "slabAreaM2": 100.881
+     },
+     {
+      "index": 0,
+      "rings": [
+       {
+        "box": [
+         0,
+         1.5,
+         7.5,
+         9.5
+        ],
+        "areaM2": 60
+       },
+       {
+        "box": [
+         7.5,
+         0,
+         11.803,
+         9.5
+        ],
+        "areaM2": 40.881
+       }
+      ],
+      "ringAreaM2": 100.881,
+      "slabAreaM2": 75.316
+     },
+     {
+      "index": 1,
+      "rings": [
+       {
+        "box": [
+         0,
+         1.5,
+         7.5,
+         9.5
+        ],
+        "areaM2": 60
+       },
+       {
+        "box": [
+         7.5,
+         0.822,
+         11.803,
+         9.5
+        ],
+        "areaM2": 37.343
+       }
+      ],
+      "ringAreaM2": 97.343,
+      "slabAreaM2": 75.316
+     }
+    ]
+   }
+  },
+  {
+   "row": "dom-w-azaliach",
+   "plansByRole": [
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-azaliach-3-rzut-parte-38849e6936",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-azaliach-3-rzut-podda-feb8ac994e",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-azaliach-3-34c5ca8606-a0edbd164d",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-azaliach-3-73b0fd883d-c8090d6f57",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-2468eb43d4-3e18dd4bcc",
+     "storey": "ATTIC",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-2e7e66ff80-78651ec3ee",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-86bef468f3-19006df9bc",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-cbf8168d6d-79ba9b7966",
+     "storey": "GROUND",
+     "annotation": "AREA_TABLE"
+    }
+   ],
+   "plansRead": 2,
+   "base": {
+    "frameId": "frame-asset-rzut-86bef468f3-19006df9bc",
+    "storey": "GROUND"
+   },
+   "storeys": [
+    {
+     "id": "storey-0",
+     "index": 0,
+     "frameIds": [
+      "frame-asset-rzut-86bef468f3-19006df9bc"
+     ],
+     "footprintRegionIds": [
+      "footprint-0-region-built-4-4",
+      "zone-min_z",
+      "zone-min_x",
+      "zone-max_x"
+     ]
+    },
+    {
+     "id": "storey-1",
+     "index": 1,
+     "frameIds": [
+      "frame-asset-rzut-2e7e66ff80-78651ec3ee"
+     ],
+     "footprintRegionIds": []
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "frame-asset-rzut-2e7e66ff80-78651ec3ee",
+     "storeyIndex": 1,
+     "declaredRole": "ATTIC",
+     "candidates": 40,
+     "chosen": {
+      "targetId": "walls",
+      "scale": 0.557,
+      "offsetX": 275.289,
+      "offsetY": 234.482,
+      "agreement": 0.087235,
+      "score": 0.185563,
+      "stated": false
+     },
+     "rival": null,
+     "margin": 0.089224,
+     "resolution": 0.007321,
+     "scaleBasis": {
+      "basis": "WALL_PAIRS",
+      "corroborated": true,
+      "why": "placed by wall pairs"
+     },
+     "printedScale": null,
+     "held": null,
+     "decision": "NO_SUPPORT",
+     "regions": [
+      {
+       "regionId": "region-built-0-0",
+       "boundsM": [
+        2.342,
+        -1.348,
+        9.098,
+        3.075
+       ],
+       "areaM2": 29.881,
+       "wallFraction": 0.892,
+       "storeyWallFraction": 0.813,
+       "body": true,
+       "overhang": "UNSUPPORTED",
+       "unsupportedM2": 25.544
+      }
+     ],
+     "relations": [
+      {
+       "upperRegionId": "region-built-0-0",
+       "lowerMassId": "mass-0",
+       "status": "INCIDENTAL",
+       "overlapM": [
+        2.378,
+        1.824
+       ],
+       "intersectionM2": 4.337,
+       "upperSupportedShare": 0.145,
+       "lowerCoveredShare": 0.692,
+       "wallAgreement": 0.087
+      }
+     ],
+     "why": "none of its walled regions stands on a body below over a room’s span"
+    }
+   ],
+   "masses": [
+    {
+     "id": "mass-0",
+     "role": "MAIN",
+     "boxM": [
+      1.284,
+      0.829,
+      4.72,
+      2.653
+     ],
+     "areaM2": 6.266,
+     "storeys": [
+      0,
+      0
+     ]
+    }
+   ],
+   "upperFootprints": [],
+   "storeyUnresolved": [
+    "AMBIGUOUS: which body the attic storey stands on"
+   ],
+   "storeyConflicts": [],
+   "gate": {
+    "status": "STRUCTURAL_LAYOUT_REJECTED",
+    "reasons": [
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:NO_SECOND_VIEW",
+     "BLOCKING:FOOTPRINT_AREA_WRONG",
+     "DEGRADING:NO_MASS_REACHES_UP"
+    ]
+   },
+   "emitted": {
+    "outcome": "REFUSED:PLAN_RESOLUTION_INCONCLUSIVE",
+    "levels": []
+   }
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "plansByRole": [
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-dabecjach-2-g2-rzut-p-ce9a927d9b",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-dabecjach-2-g2-rzut-p-d5664432a6",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-dabecjach-2-g2-37c01c6f73-c936d50299",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-dabecjach-2-g2-8d87bfd6e1-64a19de9b4",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-03a05dd085-0fd2019dc2",
+     "storey": "GROUND",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-15a246c0c6-5322551032",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-1a56066c62-10b0ec4131",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-a07b4e4a8c-c7b096400c",
+     "storey": "ATTIC",
+     "annotation": "AREA_TABLE"
+    }
+   ],
+   "plansRead": 2,
+   "base": {
+    "frameId": "frame-asset-rzut-1a56066c62-10b0ec4131",
+    "storey": "GROUND"
+   },
+   "storeys": [
+    {
+     "id": "storey-0",
+     "index": 0,
+     "frameIds": [
+      "frame-asset-rzut-1a56066c62-10b0ec4131"
+     ],
+     "footprintRegionIds": [
+      "footprint-0-region-built-27-5",
+      "footprint-0-region-built-23-23",
+      "footprint-0-region-built-21-5",
+      "zone-min_z",
+      "zone-min_x",
+      "footprint-0-region-recess-20-32",
+      "footprint-0-region-recess-26-21",
+      "footprint-0-region-recess-25-22",
+      "footprint-0-region-recess-38-41",
+      "footprint-0-region-recess-39-40",
+      "footprint-0-region-recess-22-30",
+      "footprint-0-region-recess-39-36",
+      "footprint-0-region-recess-24-40",
+      "footprint-0-region-recess-20-16",
+      "footprint-0-region-recess-20-7",
+      "footprint-0-region-recess-39-38",
+      "footprint-0-region-recess-22-34",
+      "footprint-0-region-recess-21-27",
+      "footprint-0-region-recess-22-38"
+     ]
+    },
+    {
+     "id": "storey-1",
+     "index": 1,
+     "frameIds": [
+      "frame-asset-rzut-15a246c0c6-5322551032"
+     ],
+     "footprintRegionIds": []
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "frame-asset-rzut-15a246c0c6-5322551032",
+     "storeyIndex": 1,
+     "declaredRole": "ATTIC",
+     "candidates": 68,
+     "chosen": {
+      "targetId": "walls",
+      "scale": 1,
+      "offsetX": 240.5,
+      "offsetY": 220,
+      "agreement": 0.112387,
+      "score": 0.212755,
+      "stated": false
+     },
+     "rival": null,
+     "margin": 0,
+     "resolution": 0.0046,
+     "scaleBasis": {
+      "basis": "SAME_PIXEL_SCALE",
+      "corroborated": false,
+      "why": "placed at the plan below’s own pixel scale on the assumption that the two sheets were exported at one scale: no printed scale and no facade wall pair states it"
+     },
+     "printedScale": {
+      "k": 1.170253,
+      "sharesAgainstFit": 0.274559,
+      "bodyInsideBelow": true,
+      "outcome": "REFUTED"
+     },
+     "held": null,
+     "decision": "NO_SUPPORT",
+     "regions": [
+      {
+       "regionId": "region-built-0-5",
+       "boundsM": [
+        10.13,
+        12.217,
+        10.685,
+        13.991
+       ],
+       "areaM2": 0.985,
+       "wallFraction": 0.119,
+       "storeyWallFraction": 0.119,
+       "body": false,
+       "overhang": "NOT_A_BODY",
+       "unsupportedM2": 0.985
+      },
+      {
+       "regionId": "region-built-1-0",
+       "boundsM": [
+        10.685,
+        5.393,
+        16.814,
+        13.991
+       ],
+       "areaM2": 52.695,
+       "wallFraction": 0.3,
+       "storeyWallFraction": 0.393,
+       "body": false,
+       "overhang": "NOT_A_BODY",
+       "unsupportedM2": 52.695
+      }
+     ],
+     "relations": [],
+     "why": "none of its walled regions stands on a body below over a room’s span"
+    }
+   ],
+   "masses": [
+    {
+     "id": "mass-0",
+     "role": "MAIN",
+     "boxM": [
+      5.467,
+      0,
+      10.896,
+      13.161
+     ],
+     "areaM2": 71.45,
+     "storeys": [
+      0,
+      0
+     ]
+    },
+    {
+     "id": "mass-1",
+     "role": "ATTACHED",
+     "boxM": [
+      4.328,
+      5.365,
+      5.467,
+      12.865
+     ],
+     "areaM2": 8.545,
+     "storeys": [
+      0,
+      0
+     ]
+    },
+    {
+     "id": "mass-2",
+     "role": "ATTACHED",
+     "boxM": [
+      3.976,
+      0,
+      5.467,
+      3.983
+     ],
+     "areaM2": 5.938,
+     "storeys": [
+      0,
+      0
+     ]
+    }
+   ],
+   "upperFootprints": [],
+   "storeyUnresolved": [
+    "AMBIGUOUS: which body the attic storey stands on"
+   ],
+   "storeyConflicts": [],
+   "gate": {
+    "status": "STRUCTURAL_LAYOUT_REJECTED",
+    "reasons": [
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "DEGRADING:STRUCTURE_READS_AS_ONE_BLOCK",
+     "NOTED:DEPTH_CORROBORATED",
+     "BLOCKING:FOOTPRINT_AREA_WRONG",
+     "DEGRADING:NO_MASS_REACHES_UP",
+     "NOTED:ROOF_BY_CONVENTION",
+     "NOTED:ROOF_BY_CONVENTION",
+     "NOTED:NAMED_HOLES"
+    ]
+   },
+   "emitted": {
+    "outcome": "REFUSED:BOUNDARY_RESOLUTION_INCONCLUSIVE",
+    "levels": []
+   }
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "plansByRole": [
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-tunbergiach-7-r2-rzut-18016ee823",
+     "storey": "UPPER",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-tunbergiach-7-r2-rzut-638e5c452b",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-tunbergiach-7-r2-rzut-93af01a3d8",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-tunbergiach-7-r2-044a679235-c9d4cb4c25",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-tunbergiach-7-r2-1b6baeb067-54c089a10e",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-tunbergiach-7-r2-2b354a9533-90154fc4da",
+     "storey": "UPPER",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-0b3cd56ccf-1b5c1a1e03",
+     "storey": "GROUND",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-13c10e841e-a2d3302e3a",
+     "storey": "ATTIC",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-7394e69c3a-5c0f9a89fe",
+     "storey": "UPPER",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-83377e8ffc-c1a88b7f25",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-96d0ccd771-6997c88674",
+     "storey": "UPPER",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-b94c3eb0ba-1193124e61",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    }
+   ],
+   "plansRead": 3,
+   "base": {
+    "frameId": "frame-asset-rzut-83377e8ffc-c1a88b7f25",
+    "storey": "GROUND"
+   },
+   "storeys": [
+    {
+     "id": "storey-0",
+     "index": 0,
+     "frameIds": [
+      "frame-asset-rzut-83377e8ffc-c1a88b7f25"
+     ],
+     "footprintRegionIds": [
+      "footprint-0-region-built-0-0"
+     ]
+    },
+    {
+     "id": "storey-1",
+     "index": 1,
+     "frameIds": [
+      "frame-asset-rzut-96d0ccd771-6997c88674"
+     ],
+     "footprintRegionIds": [
+      "footprint-1-mass-0"
+     ]
+    },
+    {
+     "id": "storey-2",
+     "index": 2,
+     "frameIds": [
+      "frame-asset-rzut-b94c3eb0ba-1193124e61"
+     ],
+     "footprintRegionIds": [
+      "footprint-2-mass-0"
+     ]
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "frame-asset-rzut-96d0ccd771-6997c88674",
+     "storeyIndex": 1,
+     "declaredRole": "UPPER",
+     "candidates": 96,
+     "chosen": {
+      "targetId": "walls",
+      "scale": 1,
+      "offsetX": 8.438,
+      "offsetY": 40.5,
+      "agreement": 0.449351,
+      "score": 0.631107,
+      "stated": false
+     },
+     "rival": null,
+     "margin": 0.16235,
+     "resolution": 0.005014,
+     "scaleBasis": {
+      "basis": "SAME_PIXEL_SCALE",
+      "corroborated": false,
+      "why": "placed at the plan below’s own pixel scale on the assumption that the two sheets were exported at one scale: no printed scale and no facade wall pair states it"
+     },
+     "printedScale": null,
+     "held": null,
+     "decision": "STACKED",
+     "regions": [
+      {
+       "regionId": "region-built-0-0",
+       "boundsM": [
+        0.219,
+        0.23,
+        11.53,
+        9.781
+       ],
+       "areaM2": 108.03,
+       "wallFraction": 0.924,
+       "storeyWallFraction": 0.924,
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      }
+     ],
+     "relations": [
+      {
+       "upperRegionId": "region-built-0-0",
+       "lowerMassId": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        11.311,
+        9.551
+       ],
+       "intersectionM2": 108.03,
+       "upperSupportedShare": 1,
+       "lowerCoveredShare": 0.921,
+       "wallAgreement": 0.449
+      }
+     ],
+     "why": "stands on mass-0"
+    },
+    {
+     "frameId": "frame-asset-rzut-b94c3eb0ba-1193124e61",
+     "storeyIndex": 2,
+     "declaredRole": "ATTIC",
+     "candidates": 108,
+     "chosen": {
+      "targetId": "walls",
+      "scale": 1,
+      "offsetX": -5.75,
+      "offsetY": 270.5,
+      "agreement": 0.283716,
+      "score": 0.396589,
+      "stated": false
+     },
+     "rival": {
+      "targetId": "walls",
+      "scale": 1,
+      "offsetX": 52.484,
+      "offsetY": 106.5,
+      "score": 0.380037,
+      "masses": [
+       "mass-0"
+      ]
+     },
+     "margin": 0.016552,
+     "resolution": 0.007887,
+     "scaleBasis": {
+      "basis": "SAME_PIXEL_SCALE",
+      "corroborated": true,
+      "why": "placed at the plan below’s own pixel scale, which facade walls paired on both axes or a printed scale agree with"
+     },
+     "printedScale": null,
+     "held": null,
+     "decision": "STACKED",
+     "regions": [
+      {
+       "regionId": "region-built-0-0",
+       "boundsM": [
+        3.315,
+        6.486,
+        7.179,
+        9.833
+       ],
+       "areaM2": 12.934,
+       "wallFraction": 0.57,
+       "storeyWallFraction": 0.695,
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      }
+     ],
+     "relations": [
+      {
+       "upperRegionId": "region-built-0-0",
+       "lowerMassId": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        3.865,
+        3.347
+       ],
+       "intersectionM2": 12.934,
+       "upperSupportedShare": 1,
+       "lowerCoveredShare": 0.11,
+       "wallAgreement": 0.284
+      }
+     ],
+     "why": "stands on mass-0"
+    }
+   ],
+   "masses": [
+    {
+     "id": "mass-0",
+     "role": "MAIN",
+     "boxM": [
+      0,
+      0,
+      11.73,
+      10
+     ],
+     "areaM2": 117.3,
+     "storeys": [
+      0,
+      2
+     ]
+    }
+   ],
+   "upperFootprints": [
+    {
+     "id": "footprint-1-mass-0",
+     "storeyId": "storey-1",
+     "boxM": [
+      0,
+      0,
+      11.73,
+      10
+     ],
+     "areaM2": 117.3
+    },
+    {
+     "id": "footprint-2-mass-0",
+     "storeyId": "storey-2",
+     "boxM": [
+      3.315,
+      6.234,
+      7.179,
+      10
+     ],
+     "areaM2": 14.553
+    }
+   ],
+   "storeyUnresolved": [],
+   "storeyConflicts": [
+    "the attic storey plan fits walls and walls almost equally well, standing on mass-0 against mass-0",
+    "the attic storey plan fits walls and walls almost equally well, standing on mass-0 against mass-0"
+   ],
+   "gate": {
+    "status": "STRUCTURAL_LAYOUT_PARTIAL",
+    "reasons": [
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:WIDTH_CORROBORATED",
+     "NOTED:DEPTH_CORROBORATED",
+     "NOTED:FOOTPRINT_AREA_AGREES",
+     "DEGRADING:STOREY_COVERAGE_DISAGREES",
+     "DEGRADING:ROOF_EVIDENCE_DISAGREES"
+    ]
+   },
+   "emitted": {
+    "outcome": "COMPLETED",
+    "levels": [
+     {
+      "index": 0,
+      "rings": [
+       {
+        "box": [
+         0,
+         0,
+         11.73,
+         10
+        ],
+        "areaM2": 117.3
+       }
+      ],
+      "ringAreaM2": 117.3,
+      "slabAreaM2": 117.3
+     },
+     {
+      "index": 1,
+      "rings": [
+       {
+        "box": [
+         0,
+         0,
+         11.73,
+         10
+        ],
+        "areaM2": 117.3
+       }
+      ],
+      "ringAreaM2": 117.3,
+      "slabAreaM2": 105.331
+     },
+     {
+      "index": 2,
+      "rings": [
+       {
+        "box": [
+         3.315,
+         0,
+         7.179,
+         3.766
+        ],
+        "areaM2": 14.553
+       }
+      ],
+      "ringAreaM2": 14.553,
+      "slabAreaM2": 105.331
+     }
+    ]
+   }
+  },
+  {
+   "row": "galaktyka",
+   "plansByRole": [
+    {
+     "frameId": "frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770",
+     "storey": "GROUND",
+     "annotation": "UNKNOWN"
+    },
+    {
+     "frameId": "frame-asset-galaktyka-i-rzut-poddasze-03a9d2528c-1d3d743da5",
+     "storey": "ATTIC",
+     "annotation": "UNKNOWN"
+    }
+   ],
+   "plansRead": 2,
+   "base": {
+    "frameId": "frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770",
+    "storey": "GROUND"
+   },
+   "storeys": [
+    {
+     "id": "storey-0",
+     "index": 0,
+     "frameIds": [],
+     "footprintRegionIds": []
+    },
+    {
+     "id": "storey-1",
+     "index": 1,
+     "frameIds": [],
+     "footprintRegionIds": []
+    }
+   ],
+   "registrations": [],
+   "masses": [],
+   "upperFootprints": [],
+   "storeyUnresolved": [],
+   "storeyConflicts": [],
+   "gate": {
+    "status": "STRUCTURAL_LAYOUT_REJECTED",
+    "reasons": [
+     "BLOCKING:STRUCTURE_NOT_PROJECTED",
+     "BLOCKING:NO_MASS"
+    ]
+   },
+   "emitted": {
+    "outcome": "REFUSED:METRIC_RESOLUTION_INCONCLUSIVE",
+    "levels": []
+   }
+  },
+  {
+   "row": "dom-pod-milorzebem",
+   "plansByRole": [
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-pod-mi-orzebem-21-gb-rz-70d82b7242",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-pod-mi-orzebem-21-gb-rz-c959c394d8",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-pod-mi-orzebem-21-gb-9f4dcb88c-6f393519ca",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-pod-mi-orzebem-21-gb-f91207841-87dd091192",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-01cd92e4b4-0f7c5bafc8",
+     "storey": "GROUND",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-2d9464b3c8-72b753f17d",
+     "storey": "ATTIC",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-3f1ea58c66-7182ea0aef",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    }
+   ],
+   "plansRead": 2,
+   "base": {
+    "frameId": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+    "storey": "GROUND"
+   },
+   "storeys": [
+    {
+     "id": "storey-0",
+     "index": 0,
+     "frameIds": [],
+     "footprintRegionIds": []
+    }
+   ],
+   "registrations": [],
+   "masses": [],
+   "upperFootprints": [],
+   "storeyUnresolved": [],
+   "storeyConflicts": [],
+   "gate": {
+    "status": "STRUCTURAL_LAYOUT_REJECTED",
+    "reasons": [
+     "BLOCKING:STRUCTURE_NOT_PROJECTED",
+     "BLOCKING:NO_MASS"
+    ]
+   },
+   "emitted": {
+    "outcome": "REFUSED:METRIC_RESOLUTION_INCONCLUSIVE",
+    "levels": []
+   }
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "plansByRole": [
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-helikoniach-3-e-oze-r-0b91cfbf4f",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-helikoniach-3-e-oze-r-56cc318ca1",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-helikoniach-3-e-oze-74ede617-37e0340300",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-helikoniach-3-e-oze-8a257daf-bc02f8e306",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-6f73b6499a-b883fffd61",
+     "storey": "ATTIC",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-d209d7bdfe-0af152d058",
+     "storey": "GROUND",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-d5842da623-4c943a2b00",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-f6160738fd-6e7c8b2a23",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    }
+   ],
+   "plansRead": 2,
+   "base": {
+    "frameId": "frame-asset-rzut-d5842da623-4c943a2b00",
+    "storey": "GROUND"
+   },
+   "storeys": [
+    {
+     "id": "storey-0",
+     "index": 0,
+     "frameIds": [
+      "frame-asset-rzut-d5842da623-4c943a2b00"
+     ],
+     "footprintRegionIds": [
+      "footprint-0-region-built-2-1",
+      "zone-min_z",
+      "footprint-0-region-recess-1-8",
+      "footprint-0-region-recess-6-28",
+      "footprint-0-region-recess-11-27",
+      "footprint-0-region-recess-1-13",
+      "footprint-0-region-recess-1-11",
+      "footprint-0-region-recess-12-4",
+      "footprint-0-region-recess-12-1",
+      "footprint-0-region-recess-1-6",
+      "footprint-0-region-recess-12-13",
+      "footprint-0-region-recess-12-11",
+      "footprint-0-region-recess-12-6"
+     ]
+    },
+    {
+     "id": "storey-1",
+     "index": 1,
+     "frameIds": [
+      "frame-asset-rzut-f6160738fd-6e7c8b2a23"
+     ],
+     "footprintRegionIds": []
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "frame-asset-rzut-f6160738fd-6e7c8b2a23",
+     "storeyIndex": 1,
+     "declaredRole": "ATTIC",
+     "candidates": 66,
+     "chosen": {
+      "targetId": "walls",
+      "scale": 1,
+      "offsetX": 172,
+      "offsetY": 21.25,
+      "agreement": 0.268868,
+      "score": 0.299296,
+      "stated": false
+     },
+     "rival": null,
+     "margin": 0.046233,
+     "resolution": 0.008375,
+     "scaleBasis": {
+      "basis": "SAME_PIXEL_SCALE",
+      "corroborated": false,
+      "why": "placed at the plan below’s own pixel scale on the assumption that the two sheets were exported at one scale: no printed scale and no facade wall pair states it"
+     },
+     "printedScale": {
+      "k": 1.337082,
+      "sharesAgainstFit": 0.296514,
+      "bodyInsideBelow": false,
+      "outcome": "REFUTED"
+     },
+     "held": null,
+     "decision": "NO_SUPPORT",
+     "regions": [],
+     "relations": [],
+     "why": "none of its walled regions stands on a body below over a room’s span"
+    }
+   ],
+   "masses": [
+    {
+     "id": "mass-0",
+     "role": "MAIN",
+     "boxM": [
+      0.53,
+      0,
+      6.99,
+      12.006
+     ],
+     "areaM2": 77.556,
+     "storeys": [
+      0,
+      0
+     ]
+    }
+   ],
+   "upperFootprints": [],
+   "storeyUnresolved": [
+    "AMBIGUOUS: which body the attic storey stands on"
+   ],
+   "storeyConflicts": [],
+   "gate": {
+    "status": "STRUCTURAL_LAYOUT_PARTIAL",
+    "reasons": [
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:NO_SECOND_VIEW",
+     "DEGRADING:FOOTPRINT_AREA_NEAR",
+     "DEGRADING:NO_MASS_REACHES_UP"
+    ]
+   },
+   "emitted": {
+    "outcome": "COMPLETED",
+    "levels": [
+     {
+      "index": 0,
+      "rings": [
+       {
+        "box": [
+         0.53,
+         0.97,
+         6.99,
+         12.976
+        ],
+        "areaM2": 77.556
+       }
+      ],
+      "ringAreaM2": 77.556,
+      "slabAreaM2": 77.556
+     }
+    ]
+   }
+  },
+  {
+   "row": "dom-w-gozdzikowcach",
+   "plansByRole": [
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-gozdzikowcach-3-rzut-30a58f9df4",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-gozdzikowcach-3-rzut-a436882cf0",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-gozdzikowcach-3-11c7fa3053-4e66b72632",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-gozdzikowcach-3-876a9b4f2d-f76c4531c3",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-01d4b6474c-64bd1e0f2f",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-0f10f3a678-a9a009fec7",
+     "storey": "ATTIC",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-4a030d78f5-4450d384c0",
+     "storey": "GROUND",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-e8d096563f-6e44db362c",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    }
+   ],
+   "plansRead": 2,
+   "base": {
+    "frameId": "frame-asset-rzut-01d4b6474c-64bd1e0f2f",
+    "storey": "GROUND"
+   },
+   "storeys": [
+    {
+     "id": "storey-0",
+     "index": 0,
+     "frameIds": [
+      "frame-asset-rzut-01d4b6474c-64bd1e0f2f"
+     ],
+     "footprintRegionIds": [
+      "footprint-0-region-built-0-0",
+      "footprint-0-region-built-3-0",
+      "footprint-0-region-built-1-0",
+      "footprint-0-region-recess-1-1"
+     ]
+    },
+    {
+     "id": "storey-1",
+     "index": 1,
+     "frameIds": [
+      "frame-asset-rzut-e8d096563f-6e44db362c"
+     ],
+     "footprintRegionIds": [
+      "footprint-1-mass-0",
+      "footprint-1-mass-1"
+     ]
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "frame-asset-rzut-e8d096563f-6e44db362c",
+     "storeyIndex": 1,
+     "declaredRole": "ATTIC",
+     "candidates": 66,
+     "chosen": {
+      "targetId": "walls",
+      "scale": 1.002,
+      "offsetX": -6.5,
+      "offsetY": 54.473,
+      "agreement": 0.224936,
+      "score": 0.443344,
+      "stated": false
+     },
+     "rival": {
+      "targetId": "walls",
+      "scale": 0.922,
+      "offsetX": 2.95,
+      "offsetY": 108.55,
+      "score": 0.359908,
+      "masses": [
+       "mass-0",
+       "mass-1"
+      ]
+     },
+     "margin": 0.083436,
+     "resolution": 0.003801,
+     "scaleBasis": {
+      "basis": "WALL_PAIRS",
+      "corroborated": true,
+      "why": "placed by wall pairs"
+     },
+     "printedScale": null,
+     "held": null,
+     "decision": "STACKED",
+     "regions": [
+      {
+       "regionId": "region-built-0-0",
+       "boundsM": [
+        -0.618,
+        -0.89,
+        14.517,
+        9.962
+       ],
+       "areaM2": 164.245,
+       "wallFraction": 0.967,
+       "storeyWallFraction": 0.9,
+       "body": true,
+       "overhang": "BEYOND_TOLERANCE",
+       "unsupportedM2": 58.777
+      }
+     ],
+     "relations": [
+      {
+       "upperRegionId": "region-built-0-0",
+       "lowerMassId": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        5.57,
+        9.5
+       ],
+       "intersectionM2": 52.915,
+       "upperSupportedShare": 0.322,
+       "lowerCoveredShare": 1,
+       "wallAgreement": 0.225
+      },
+      {
+       "upperRegionId": "region-built-0-0",
+       "lowerMassId": "mass-1",
+       "status": "SUPPORTS",
+       "overlapM": [
+        5.14,
+        9.5
+       ],
+       "intersectionM2": 48.83,
+       "upperSupportedShare": 0.297,
+       "lowerCoveredShare": 1,
+       "wallAgreement": 0.225
+      },
+      {
+       "upperRegionId": "region-built-0-0",
+       "lowerMassId": "mass-2",
+       "status": "SUPPORTS",
+       "overlapM": [
+        3.11,
+        1.197
+       ],
+       "intersectionM2": 3.723,
+       "upperSupportedShare": 0.023,
+       "lowerCoveredShare": 1,
+       "wallAgreement": 0.225
+      }
+     ],
+     "why": "stands on mass-0, mass-1; not on mass-2, which the walls do not decide or the storey between does not reach"
+    }
+   ],
+   "masses": [
+    {
+     "id": "mass-0",
+     "role": "MAIN",
+     "boxM": [
+      0,
+      0,
+      5.57,
+      9.5
+     ],
+     "areaM2": 52.915,
+     "storeys": [
+      0,
+      1
+     ]
+    },
+    {
+     "id": "mass-1",
+     "role": "UNKNOWN",
+     "boxM": [
+      8.68,
+      0,
+      13.82,
+      9.5
+     ],
+     "areaM2": 48.83,
+     "storeys": [
+      0,
+      1
+     ]
+    },
+    {
+     "id": "mass-2",
+     "role": "ATTACHED",
+     "boxM": [
+      5.57,
+      0,
+      8.68,
+      1.197
+     ],
+     "areaM2": 3.723,
+     "storeys": [
+      0,
+      0
+     ]
+    }
+   ],
+   "upperFootprints": [
+    {
+     "id": "footprint-1-mass-0",
+     "storeyId": "storey-1",
+     "boxM": [
+      0,
+      0,
+      5.57,
+      9.5
+     ],
+     "areaM2": 52.915
+    },
+    {
+     "id": "footprint-1-mass-1",
+     "storeyId": "storey-1",
+     "boxM": [
+      8.68,
+      0,
+      13.82,
+      9.5
+     ],
+     "areaM2": 48.83
+    }
+   ],
+   "storeyUnresolved": [],
+   "storeyConflicts": [
+    "the attic storey plan fits walls and walls almost equally well, standing on mass-0, mass-1, mass-2 against mass-0, mass-1",
+    "the attic storey's walled region region-built-0-0 overhangs the bodies below by 58.8 m²",
+    "the attic storey's walled region region-built-0-0 overhangs the bodies below by 58.8 m²",
+    "the attic storey plan fits walls and walls almost equally well, standing on mass-0, mass-1, mass-2 against mass-0, mass-1"
+   ],
+   "gate": {
+    "status": "STRUCTURAL_LAYOUT_REJECTED",
+    "reasons": [
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "DEGRADING:STRUCTURE_READS_AS_ONE_BLOCK",
+     "NOTED:WIDTH_CORROBORATED",
+     "NOTED:DEPTH_CORROBORATED",
+     "BLOCKING:FOOTPRINT_AREA_WRONG",
+     "NOTED:ROOF_BY_CONVENTION",
+     "NOTED:ROOF_BY_CONVENTION",
+     "DEGRADING:STOREY_COVERAGE_DISAGREES",
+     "DEGRADING:STOREY_COVERAGE_DISAGREES",
+     "NOTED:NAMED_HOLES"
+    ]
+   },
+   "emitted": {
+    "outcome": "REFUSED:PLAN_RESOLUTION_INCONCLUSIVE",
+    "levels": []
+   }
+  },
+  {
+   "row": "dom-w-cyklamenach",
+   "plansByRole": [
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-cyklamenach-3-s-rzut-07d4ca005c",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-cyklamenach-3-s-rzut-12439ba594",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-cyklamenach-3-s-04fee87b47-a4ef069060",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-cyklamenach-3-s-2e9dbd842b-7325da724d",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-083dceba54-1b73e155d5",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-3b3b4af177-9800f98b2e",
+     "storey": "ATTIC",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-83b77c1911-04336fc2cf",
+     "storey": "GROUND",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-fa38f527ea-8e7eb2ad66",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    }
+   ],
+   "plansRead": 2,
+   "base": {
+    "frameId": "frame-asset-rzut-fa38f527ea-8e7eb2ad66",
+    "storey": "GROUND"
+   },
+   "storeys": [
+    {
+     "id": "storey-0",
+     "index": 0,
+     "frameIds": [
+      "frame-asset-rzut-fa38f527ea-8e7eb2ad66"
+     ],
+     "footprintRegionIds": [
+      "footprint-0-region-built-2-0",
+      "footprint-0-region-built-0-3"
+     ]
+    },
+    {
+     "id": "storey-1",
+     "index": 1,
+     "frameIds": [
+      "frame-asset-rzut-083dceba54-1b73e155d5"
+     ],
+     "footprintRegionIds": []
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "frame-asset-rzut-083dceba54-1b73e155d5",
+     "storeyIndex": 1,
+     "declaredRole": "ATTIC",
+     "candidates": 68,
+     "chosen": {
+      "targetId": "walls",
+      "scale": 1,
+      "offsetX": 4.125,
+      "offsetY": 182.063,
+      "agreement": 0.399393,
+      "score": 0.589295,
+      "stated": false
+     },
+     "rival": null,
+     "margin": 0.047367,
+     "resolution": 0.004642,
+     "scaleBasis": {
+      "basis": "SAME_PIXEL_SCALE",
+      "corroborated": true,
+      "why": "placed at the plan below’s own pixel scale, which facade walls paired on both axes or a printed scale agree with"
+     },
+     "printedScale": {
+      "k": 1.455537,
+      "sharesAgainstFit": 0.295615,
+      "bodyInsideBelow": false,
+      "outcome": "REFUTED"
+     },
+     "held": null,
+     "decision": "NO_SUPPORT",
+     "regions": [
+      {
+       "regionId": "region-built-0-0",
+       "boundsM": [
+        0.094,
+        7.61,
+        7.459,
+        8.392
+       ],
+       "areaM2": 5.762,
+       "wallFraction": 0.516,
+       "storeyWallFraction": 0.047,
+       "body": false,
+       "overhang": "NOT_A_BODY",
+       "unsupportedM2": 5.762
+      },
+      {
+       "regionId": "region-built-6-2",
+       "boundsM": [
+        4.446,
+        8.392,
+        5.572,
+        9.796
+       ],
+       "areaM2": 1.581,
+       "wallFraction": 0.225,
+       "storeyWallFraction": 0,
+       "body": false,
+       "overhang": "NOT_A_BODY",
+       "unsupportedM2": 1.581
+      }
+     ],
+     "relations": [],
+     "why": "none of its walled regions stands on a body below over a room’s span"
+    }
+   ],
+   "masses": [
+    {
+     "id": "mass-0",
+     "role": "MAIN",
+     "boxM": [
+      5.59,
+      0,
+      9.11,
+      10.12
+     ],
+     "areaM2": 35.625,
+     "storeys": [
+      0,
+      0
+     ]
+    },
+    {
+     "id": "mass-1",
+     "role": "ATTACHED",
+     "boxM": [
+      0,
+      7.691,
+      5.59,
+      10.12
+     ],
+     "areaM2": 13.579,
+     "storeys": [
+      0,
+      0
+     ]
+    }
+   ],
+   "upperFootprints": [],
+   "storeyUnresolved": [
+    "AMBIGUOUS: which body the attic storey stands on"
+   ],
+   "storeyConflicts": [],
+   "gate": {
+    "status": "STRUCTURAL_LAYOUT_REJECTED",
+    "reasons": [
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:WIDTH_CORROBORATED",
+     "NOTED:DEPTH_CORROBORATED",
+     "BLOCKING:FOOTPRINT_AREA_WRONG",
+     "DEGRADING:NO_MASS_REACHES_UP",
+     "NOTED:ROOF_BY_CONVENTION",
+     "NOTED:NAMED_HOLES"
+    ]
+   },
+   "emitted": {
+    "outcome": "REFUSED:PLAN_RESOLUTION_INCONCLUSIVE",
+    "levels": []
+   }
+  },
+  {
+   "row": "A01",
+   "plansByRole": [
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-jarzmiankach-rzut-par-da66d24e09",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-jarzmiankach-rzut-pod-297d5f0bbf",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-jarzmiankach-0f5e9a0c7e-a3856cf4a0",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-jarzmiankach-2fee9d54c8-05db1c1dc0",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-1259eb3c0f-c3ad34a742",
+     "storey": "ATTIC",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-1ec266652a-220081adc8",
+     "storey": "GROUND",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-3db285e128-e3f3f41d03",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-cdc1c4ebd8-9b8cd885e5",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    }
+   ],
+   "plansRead": 2,
+   "base": {
+    "frameId": "frame-asset-rzut-3db285e128-e3f3f41d03",
+    "storey": "GROUND"
+   },
+   "storeys": [
+    {
+     "id": "storey-0",
+     "index": 0,
+     "frameIds": [
+      "frame-asset-rzut-3db285e128-e3f3f41d03"
+     ],
+     "footprintRegionIds": [
+      "footprint-0-region-built-0-8",
+      "footprint-0-region-built-0-1",
+      "footprint-0-region-built-11-2",
+      "zone-min_z",
+      "footprint-0-region-recess-14-26",
+      "footprint-0-region-recess-10-2",
+      "footprint-0-region-recess-2-1",
+      "footprint-0-region-recess-10-4",
+      "footprint-0-region-recess-10-7"
+     ]
+    },
+    {
+     "id": "storey-1",
+     "index": 1,
+     "frameIds": [
+      "frame-asset-rzut-cdc1c4ebd8-9b8cd885e5"
+     ],
+     "footprintRegionIds": [
+      "footprint-1-mass-0"
+     ]
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "frame-asset-rzut-cdc1c4ebd8-9b8cd885e5",
+     "storeyIndex": 1,
+     "declaredRole": "ATTIC",
+     "candidates": 66,
+     "chosen": {
+      "targetId": "walls",
+      "scale": 0.923,
+      "offsetX": 60.473,
+      "offsetY": 43.769,
+      "agreement": 0.083131,
+      "score": 0.245272,
+      "stated": false
+     },
+     "rival": {
+      "targetId": "walls",
+      "scale": 0.782,
+      "offsetX": 89.953,
+      "offsetY": 139.599,
+      "score": 0.237468,
+      "masses": [
+       "mass-0"
+      ]
+     },
+     "margin": 0.007804,
+     "resolution": 0.004215,
+     "scaleBasis": {
+      "basis": "WALL_PAIRS",
+      "corroborated": true,
+      "why": "placed by wall pairs"
+     },
+     "printedScale": null,
+     "held": null,
+     "decision": "STACKED",
+     "regions": [
+      {
+       "regionId": "region-built-0-0",
+       "boundsM": [
+        -0.646,
+        -0.746,
+        10.312,
+        7.793
+       ],
+       "areaM2": 93.57,
+       "wallFraction": 0.962,
+       "storeyWallFraction": 0.888,
+       "body": true,
+       "overhang": "BEYOND_TOLERANCE",
+       "unsupportedM2": 14.183
+      }
+     ],
+     "relations": [
+      {
+       "upperRegionId": "region-built-0-0",
+       "lowerMassId": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        10.312,
+        6.19
+       ],
+       "intersectionM2": 63.835,
+       "upperSupportedShare": 0.682,
+       "lowerCoveredShare": 0.949,
+       "wallAgreement": 0.083
+      },
+      {
+       "upperRegionId": "region-built-0-0",
+       "lowerMassId": "mass-1",
+       "status": "SUPPORTS",
+       "overlapM": [
+        6.196,
+        1.602
+       ],
+       "intersectionM2": 9.927,
+       "upperSupportedShare": 0.106,
+       "lowerCoveredShare": 1,
+       "wallAgreement": 0.083
+      },
+      {
+       "upperRegionId": "region-built-0-0",
+       "lowerMassId": "mass-2",
+       "status": "SUPPORTS",
+       "overlapM": [
+        3.876,
+        1.451
+       ],
+       "intersectionM2": 5.625,
+       "upperSupportedShare": 0.06,
+       "lowerCoveredShare": 0.954,
+       "wallAgreement": 0.083
+      }
+     ],
+     "why": "stands on mass-0; not on mass-1, mass-2, which the walls do not decide or the storey between does not reach"
+    }
+   ],
+   "masses": [
+    {
+     "id": "mass-0",
+     "role": "MAIN",
+     "boxM": [
+      0,
+      1.602,
+      10.5,
+      8.008
+     ],
+     "areaM2": 67.267,
+     "storeys": [
+      0,
+      1
+     ]
+    },
+    {
+     "id": "mass-1",
+     "role": "ATTACHED",
+     "boxM": [
+      0,
+      0,
+      6.196,
+      1.602
+     ],
+     "areaM2": 9.927,
+     "storeys": [
+      0,
+      0
+     ]
+    },
+    {
+     "id": "mass-2",
+     "role": "ATTACHED",
+     "boxM": [
+      6.436,
+      0.151,
+      10.5,
+      1.602
+     ],
+     "areaM2": 5.898,
+     "storeys": [
+      0,
+      0
+     ]
+    }
+   ],
+   "upperFootprints": [
+    {
+     "id": "footprint-1-mass-0",
+     "storeyId": "storey-1",
+     "boxM": [
+      0,
+      1.602,
+      10.5,
+      8.008
+     ],
+     "areaM2": 67.267
+    }
+   ],
+   "storeyUnresolved": [],
+   "storeyConflicts": [
+    "the attic storey plan fits walls and walls almost equally well, standing on mass-0, mass-1, mass-2 against mass-0",
+    "the attic storey's walled region region-built-0-0 overhangs the bodies below by 14.2 m²",
+    "the attic storey's walled region region-built-0-0 overhangs the bodies below by 14.2 m²",
+    "the attic storey plan fits walls and walls almost equally well, standing on mass-0, mass-1, mass-2 against mass-0"
+   ],
+   "gate": {
+    "status": "STRUCTURAL_LAYOUT_PARTIAL",
+    "reasons": [
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:WIDTH_CORROBORATED",
+     "NOTED:FOOTPRINT_AREA_AGREES",
+     "NOTED:ROOF_BY_CONVENTION",
+     "NOTED:ROOF_BY_CONVENTION",
+     "DEGRADING:STOREY_COVERAGE_DISAGREES",
+     "DEGRADING:STOREY_COVERAGE_DISAGREES",
+     "NOTED:NAMED_HOLES"
+    ]
+   },
+   "emitted": {
+    "outcome": "REFUSED:MODEL_EMISSION_FAILED",
+    "levels": []
+   }
+  },
+  {
+   "row": "A03",
+   "plansByRole": [
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-arletach-3-e-oze-rzut-a5198b9420",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-arletach-3-e-oze-rzut-fda95aca46",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-arletach-3-e-oze-0e49c67d59-596d3396bb",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-arletach-3-e-oze-0f796beb0d-afbad03c35",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-04a69e0b17-7a3a7041b0",
+     "storey": "GROUND",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-1ae10ba560-dce2f1b292",
+     "storey": "ATTIC",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-1f95f4ce4d-eaa13be831",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-4cad03bcd1-e99747c89c",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    }
+   ],
+   "plansRead": 2,
+   "base": {
+    "frameId": "frame-asset-rzut-1f95f4ce4d-eaa13be831",
+    "storey": "GROUND"
+   },
+   "storeys": [
+    {
+     "id": "storey-0",
+     "index": 0,
+     "frameIds": [
+      "frame-asset-rzut-1f95f4ce4d-eaa13be831"
+     ],
+     "footprintRegionIds": [
+      "footprint-0-region-built-0-0"
+     ]
+    },
+    {
+     "id": "storey-1",
+     "index": 1,
+     "frameIds": [
+      "frame-asset-rzut-4cad03bcd1-e99747c89c"
+     ],
+     "footprintRegionIds": [
+      "footprint-1-mass-0"
+     ]
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "frame-asset-rzut-4cad03bcd1-e99747c89c",
+     "storeyIndex": 1,
+     "declaredRole": "ATTIC",
+     "candidates": 53,
+     "chosen": {
+      "targetId": "walls",
+      "scale": 1.001,
+      "offsetX": -0.788,
+      "offsetY": 31.934,
+      "agreement": 0.187794,
+      "score": 0.40862,
+      "stated": false
+     },
+     "rival": null,
+     "margin": 0.037934,
+     "resolution": 0.006151,
+     "scaleBasis": {
+      "basis": "WALL_PAIRS",
+      "corroborated": true,
+      "why": "placed by wall pairs"
+     },
+     "printedScale": null,
+     "held": null,
+     "decision": "STACKED",
+     "regions": [
+      {
+       "regionId": "region-built-0-0",
+       "boundsM": [
+        -0.643,
+        -0.701,
+        9.429,
+        12.701
+       ],
+       "areaM2": 134.99,
+       "wallFraction": 0.885,
+       "storeyWallFraction": 0.841,
+       "body": true,
+       "overhang": "WITHIN_TOLERANCE",
+       "unsupportedM2": 25.635
+      },
+      {
+       "regionId": "region-built-2-2",
+       "boundsM": [
+        8.651,
+        16.115,
+        10.86,
+        16.979
+       ],
+       "areaM2": 1.907,
+       "wallFraction": 0.832,
+       "storeyWallFraction": 0.206,
+       "body": false,
+       "overhang": "NOT_A_BODY",
+       "unsupportedM2": 1.907
+      }
+     ],
+     "relations": [
+      {
+       "upperRegionId": "region-built-0-0",
+       "lowerMassId": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        9.107,
+        12.007
+       ],
+       "intersectionM2": 109.355,
+       "upperSupportedShare": 0.81,
+       "lowerCoveredShare": 1,
+       "wallAgreement": 0.188
+      }
+     ],
+     "why": "stands on mass-0"
+    }
+   ],
+   "masses": [
+    {
+     "id": "mass-0",
+     "role": "MAIN",
+     "boxM": [
+      0,
+      0,
+      9.107,
+      12.007
+     ],
+     "areaM2": 109.355,
+     "storeys": [
+      0,
+      1
+     ]
+    }
+   ],
+   "upperFootprints": [
+    {
+     "id": "footprint-1-mass-0",
+     "storeyId": "storey-1",
+     "boxM": [
+      0,
+      0,
+      9.107,
+      12.007
+     ],
+     "areaM2": 109.355
+    }
+   ],
+   "storeyUnresolved": [],
+   "storeyConflicts": [],
+   "gate": {
+    "status": "STRUCTURAL_LAYOUT_ACCEPTED",
+    "reasons": [
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:WIDTH_CORROBORATED",
+     "NOTED:DEPTH_CORROBORATED",
+     "NOTED:FOOTPRINT_AREA_AGREES"
+    ]
+   },
+   "emitted": {
+    "outcome": "COMPLETED",
+    "levels": [
+     {
+      "index": 0,
+      "rings": [
+       {
+        "box": [
+         0,
+         0,
+         9.107,
+         12.007
+        ],
+        "areaM2": 109.355
+       }
+      ],
+      "ringAreaM2": 109.355,
+      "slabAreaM2": 109.355
+     },
+     {
+      "index": 1,
+      "rings": [
+       {
+        "box": [
+         0,
+         0,
+         9.107,
+         12.007
+        ],
+        "areaM2": 109.355
+       }
+      ],
+      "ringAreaM2": 109.355,
+      "slabAreaM2": 91.107
+     }
+    ]
+   }
+  },
+  {
+   "row": "A04",
+   "plansByRole": [
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-ligolach-m-rzut-parte-b58e005d2b",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-ligolach-m-rzut-podda-0ccc6df0d9",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-ligolach-m-cbda717679-911fb0ed1b",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-ligolach-m-fb0695d6a6-acb8f26f2e",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-1b82f82f43-ced10ac33a",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-4f91f26bdf-589c8abdb3",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-59263c2d98-72fd80a6bd",
+     "storey": "ATTIC",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-640225e35b-da7064452b",
+     "storey": "GROUND",
+     "annotation": "AREA_TABLE"
+    }
+   ],
+   "plansRead": 2,
+   "base": {
+    "frameId": "frame-asset-rzut-4f91f26bdf-589c8abdb3",
+    "storey": "GROUND"
+   },
+   "storeys": [
+    {
+     "id": "storey-0",
+     "index": 0,
+     "frameIds": [
+      "frame-asset-rzut-4f91f26bdf-589c8abdb3"
+     ],
+     "footprintRegionIds": [
+      "footprint-0-region-built-0-3",
+      "zone-min_z"
+     ]
+    },
+    {
+     "id": "storey-1",
+     "index": 1,
+     "frameIds": [
+      "frame-asset-rzut-1b82f82f43-ced10ac33a"
+     ],
+     "footprintRegionIds": [
+      "footprint-1-mass-0"
+     ]
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "frame-asset-rzut-1b82f82f43-ced10ac33a",
+     "storeyIndex": 1,
+     "declaredRole": "ATTIC",
+     "candidates": 66,
+     "chosen": {
+      "targetId": "walls",
+      "scale": 0.384,
+      "offsetX": 193.725,
+      "offsetY": 435.335,
+      "agreement": 0.330969,
+      "score": 0.309848,
+      "stated": false
+     },
+     "rival": {
+      "targetId": "walls",
+      "scale": 0.383,
+      "offsetX": 40.301,
+      "offsetY": 435.335,
+      "score": 0.273149,
+      "masses": [
+       "mass-0"
+      ]
+     },
+     "margin": 0.036699,
+     "resolution": 0.010867,
+     "scaleBasis": {
+      "basis": "WALL_PAIRS",
+      "corroborated": true,
+      "why": "placed by wall pairs"
+     },
+     "printedScale": {
+      "k": 1.358131,
+      "sharesAgainstFit": 0,
+      "bodyInsideBelow": false,
+      "outcome": "REFUTED"
+     },
+     "held": null,
+     "decision": "STACKED",
+     "regions": [
+      {
+       "regionId": "region-built-0-0",
+       "boundsM": [
+        3.825,
+        2.439,
+        7.187,
+        7.826
+       ],
+       "areaM2": 18.115,
+       "wallFraction": 0.921,
+       "storeyWallFraction": 0.862,
+       "body": true,
+       "overhang": "WITHIN_TOLERANCE",
+       "unsupportedM2": 0.471
+      },
+      {
+       "regionId": "region-built-12-0",
+       "boundsM": [
+        7.187,
+        2.439,
+        7.5,
+        5.956
+       ],
+       "areaM2": 1.101,
+       "wallFraction": 0.957,
+       "storeyWallFraction": 0.88,
+       "body": false,
+       "overhang": "NOT_A_BODY",
+       "unsupportedM2": 1.101
+      }
+     ],
+     "relations": [
+      {
+       "upperRegionId": "region-built-0-0",
+       "lowerMassId": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        3.362,
+        5.248
+       ],
+       "intersectionM2": 17.645,
+       "upperSupportedShare": 0.974,
+       "lowerCoveredShare": 0.323,
+       "wallAgreement": 0.331
+      }
+     ],
+     "why": "stands on mass-0"
+    }
+   ],
+   "masses": [
+    {
+     "id": "mass-0",
+     "role": "MAIN",
+     "boxM": [
+      0,
+      0.586,
+      7.7,
+      7.686
+     ],
+     "areaM2": 54.67,
+     "storeys": [
+      0,
+      1
+     ]
+    }
+   ],
+   "upperFootprints": [
+    {
+     "id": "footprint-1-mass-0",
+     "storeyId": "storey-1",
+     "boxM": [
+      3.707,
+      2.345,
+      7.187,
+      7.686
+     ],
+     "areaM2": 18.586
+    }
+   ],
+   "storeyUnresolved": [],
+   "storeyConflicts": [
+    "the attic storey plan fits walls and walls almost equally well, standing on mass-0 against mass-0",
+    "the attic storey plan fits walls and walls almost equally well, standing on mass-0 against mass-0"
+   ],
+   "gate": {
+    "status": "STRUCTURAL_LAYOUT_REJECTED",
+    "reasons": [
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:DEPTH_CORROBORATED",
+     "BLOCKING:FOOTPRINT_AREA_WRONG",
+     "DEGRADING:STOREY_COVERAGE_DISAGREES",
+     "DEGRADING:ROOF_EVIDENCE_DISAGREES"
+    ]
+   },
+   "emitted": {
+    "outcome": "REFUSED:PLAN_RESOLUTION_INCONCLUSIVE",
+    "levels": []
+   }
+  },
+  {
+   "row": "A06",
+   "plansByRole": [
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-bratkach-26-r2be-rzut-317155a9d8",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-bratkach-26-r2be-rzut-709c69c0d5",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-bratkach-26-r2be-5c51eb7b12-4f651f200e",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-dom-w-bratkach-26-r2be-8fa9c0c62d-2f7f1dbfb3",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-a7110ac427-bf423ddca5",
+     "storey": "ATTIC",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-eccabe6307-98a0db655a",
+     "storey": "ATTIC",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-f08001e3c4-8b24c71f3f",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-f118efcaa0-4604b8d3ed",
+     "storey": "GROUND",
+     "annotation": "AREA_TABLE"
+    }
+   ],
+   "plansRead": 2,
+   "base": {
+    "frameId": "frame-asset-rzut-f08001e3c4-8b24c71f3f",
+    "storey": "GROUND"
+   },
+   "storeys": [
+    {
+     "id": "storey-0",
+     "index": 0,
+     "frameIds": [
+      "frame-asset-rzut-f08001e3c4-8b24c71f3f"
+     ],
+     "footprintRegionIds": [
+      "footprint-0-region-built-0-1",
+      "footprint-0-region-built-3-0"
+     ]
+    },
+    {
+     "id": "storey-1",
+     "index": 1,
+     "frameIds": [
+      "frame-asset-rzut-eccabe6307-98a0db655a"
+     ],
+     "footprintRegionIds": [
+      "footprint-1-mass-0",
+      "footprint-1-mass-1"
+     ]
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "frame-asset-rzut-eccabe6307-98a0db655a",
+     "storeyIndex": 1,
+     "declaredRole": "ATTIC",
+     "candidates": 66,
+     "chosen": {
+      "targetId": "walls",
+      "scale": 1,
+      "offsetX": 18,
+      "offsetY": 37.872,
+      "agreement": 0.675757,
+      "score": 0.870015,
+      "stated": false
+     },
+     "rival": null,
+     "margin": 0.021709,
+     "resolution": 0.006353,
+     "scaleBasis": {
+      "basis": "WALL_PAIRS",
+      "corroborated": true,
+      "why": "placed by wall pairs"
+     },
+     "printedScale": null,
+     "held": null,
+     "decision": "STACKED",
+     "regions": [
+      {
+       "regionId": "region-built-0-0",
+       "boundsM": [
+        0.219,
+        0.218,
+        7.202,
+        11.225
+       ],
+       "areaM2": 76.869,
+       "wallFraction": 0.783,
+       "storeyWallFraction": 0.77,
+       "body": true,
+       "overhang": "BEYOND_TOLERANCE",
+       "unsupportedM2": 3.963
+      },
+      {
+       "regionId": "region-built-3-4",
+       "boundsM": [
+        10.329,
+        11.877,
+        11.304,
+        12.582
+       ],
+       "areaM2": 0.687,
+       "wallFraction": 0.92,
+       "storeyWallFraction": 0.778,
+       "body": false,
+       "overhang": "NOT_A_BODY",
+       "unsupportedM2": 0.687
+      }
+     ],
+     "relations": [
+      {
+       "upperRegionId": "region-built-0-0",
+       "lowerMassId": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        6.984,
+        9.785
+       ],
+       "intersectionM2": 68.334,
+       "upperSupportedShare": 0.889,
+       "lowerCoveredShare": 0.93,
+       "wallAgreement": 0.676
+      },
+      {
+       "upperRegionId": "region-built-0-0",
+       "lowerMassId": "mass-1",
+       "status": "SUPPORTS",
+       "overlapM": [
+        3.741,
+        1.222
+       ],
+       "intersectionM2": 4.572,
+       "upperSupportedShare": 0.059,
+       "lowerCoveredShare": 0.819,
+       "wallAgreement": 0.676
+      }
+     ],
+     "why": "stands on mass-0, mass-1"
+    }
+   ],
+   "masses": [
+    {
+     "id": "mass-0",
+     "role": "MAIN",
+     "boxM": [
+      0,
+      1.44,
+      7.34,
+      11.45
+     ],
+     "areaM2": 73.473,
+     "storeys": [
+      0,
+      1
+     ]
+    },
+    {
+     "id": "mass-1",
+     "role": "ATTACHED",
+     "boxM": [
+      3.461,
+      0,
+      7.34,
+      1.44
+     ],
+     "areaM2": 5.585,
+     "storeys": [
+      0,
+      1
+     ]
+    }
+   ],
+   "upperFootprints": [
+    {
+     "id": "footprint-1-mass-0",
+     "storeyId": "storey-1",
+     "boxM": [
+      0,
+      1.44,
+      7.34,
+      11.45
+     ],
+     "areaM2": 73.473
+    },
+    {
+     "id": "footprint-1-mass-1",
+     "storeyId": "storey-1",
+     "boxM": [
+      3.461,
+      0,
+      7.34,
+      1.44
+     ],
+     "areaM2": 5.585
+    }
+   ],
+   "storeyUnresolved": [],
+   "storeyConflicts": [
+    "the attic storey's walled region region-built-0-0 overhangs the bodies below by 4.0 m²",
+    "the attic storey's walled region region-built-0-0 overhangs the bodies below by 4.0 m²"
+   ],
+   "gate": {
+    "status": "STRUCTURAL_LAYOUT_PARTIAL",
+    "reasons": [
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:WIDTH_CORROBORATED",
+     "NOTED:DEPTH_CORROBORATED",
+     "NOTED:FOOTPRINT_AREA_AGREES",
+     "NOTED:EVERY_MASS_FULL_HEIGHT",
+     "NOTED:ROOF_BY_CONVENTION",
+     "DEGRADING:STOREY_COVERAGE_DISAGREES",
+     "NOTED:NAMED_HOLES"
+    ]
+   },
+   "emitted": {
+    "outcome": "COMPLETED",
+    "levels": [
+     {
+      "index": 0,
+      "rings": [
+       {
+        "box": [
+         0,
+         0,
+         7.34,
+         10.01
+        ],
+        "areaM2": 73.473
+       },
+       {
+        "box": [
+         3.461,
+         10.01,
+         7.34,
+         11.45
+        ],
+        "areaM2": 5.585
+       }
+      ],
+      "ringAreaM2": 79.058,
+      "slabAreaM2": 79.059
+     },
+     {
+      "index": 1,
+      "rings": [
+       {
+        "box": [
+         0,
+         0,
+         7.34,
+         10.01
+        ],
+        "areaM2": 73.473
+       },
+       {
+        "box": [
+         3.461,
+         10.01,
+         7.34,
+         11.45
+        ],
+        "areaM2": 5.585
+       }
+      ],
+      "ringAreaM2": 79.058,
+      "slabAreaM2": 67.328
+     }
+    ]
+   }
+  },
+  {
+   "row": "A07",
+   "plansByRole": [
+    {
+     "frameId": "frame-asset-gotowy-projekt-willa-maja-r2-rzut-parteru-59eb18ef0e",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-willa-maja-r2-rzut-pietra-4-bd2dd1958d",
+     "storey": "UPPER",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-willa-maja-r2-2590a19f9d-102ffd7aeb",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-projekt-willa-maja-r2-cf0b7b9102-ce14d96d1b",
+     "storey": "UPPER",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-0989d201b8-3b12292e10",
+     "storey": "UPPER",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-4e39cbf0a3-15bace243c",
+     "storey": "GROUND",
+     "annotation": "AREA_TABLE"
+    },
+    {
+     "frameId": "frame-asset-rzut-a46fd40284-47285d772c",
+     "storey": "UPPER",
+     "annotation": "DIMENSIONED"
+    },
+    {
+     "frameId": "frame-asset-rzut-dec884e019-46909f56cf",
+     "storey": "GROUND",
+     "annotation": "DIMENSIONED"
+    }
+   ],
+   "plansRead": 2,
+   "base": {
+    "frameId": "frame-asset-rzut-dec884e019-46909f56cf",
+    "storey": "GROUND"
+   },
+   "storeys": [
+    {
+     "id": "storey-0",
+     "index": 0,
+     "frameIds": [
+      "frame-asset-rzut-dec884e019-46909f56cf"
+     ],
+     "footprintRegionIds": [
+      "footprint-0-region-built-0-0"
+     ]
+    },
+    {
+     "id": "storey-1",
+     "index": 1,
+     "frameIds": [
+      "frame-asset-rzut-a46fd40284-47285d772c"
+     ],
+     "footprintRegionIds": [
+      "footprint-1-mass-0"
+     ]
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "frame-asset-rzut-a46fd40284-47285d772c",
+     "storeyIndex": 1,
+     "declaredRole": "UPPER",
+     "candidates": 113,
+     "chosen": {
+      "targetId": "walls",
+      "scale": 1.001,
+      "offsetX": -11.593,
+      "offsetY": 26.174,
+      "agreement": 0.495767,
+      "score": 0.701859,
+      "stated": false
+     },
+     "rival": null,
+     "margin": 0.000577,
+     "resolution": 0.005265,
+     "scaleBasis": {
+      "basis": "WALL_PAIRS",
+      "corroborated": true,
+      "why": "placed by wall pairs"
+     },
+     "printedScale": null,
+     "held": null,
+     "decision": "STACKED",
+     "regions": [
+      {
+       "regionId": "region-built-0-0",
+       "boundsM": [
+        0.22,
+        0.208,
+        16.898,
+        7.567
+       ],
+       "areaM2": 122.74,
+       "wallFraction": 0.79,
+       "storeyWallFraction": 0.786,
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      },
+      {
+       "regionId": "region-built-4-5",
+       "boundsM": [
+        11.685,
+        12.273,
+        13.256,
+        13.061
+       ],
+       "areaM2": 1.238,
+       "wallFraction": 0.507,
+       "storeyWallFraction": 0.483,
+       "body": false,
+       "overhang": "NOT_A_BODY",
+       "unsupportedM2": 1.238
+      },
+      {
+       "regionId": "region-built-6-5",
+       "boundsM": [
+        13.685,
+        12.273,
+        14.764,
+        13.061
+       ],
+       "areaM2": 0.85,
+       "wallFraction": 0.925,
+       "storeyWallFraction": 0.755,
+       "body": false,
+       "overhang": "NOT_A_BODY",
+       "unsupportedM2": 0.85
+      },
+      {
+       "regionId": "region-built-8-5",
+       "boundsM": [
+        15.749,
+        12.273,
+        16.898,
+        13.061
+       ],
+       "areaM2": 0.905,
+       "wallFraction": 0.946,
+       "storeyWallFraction": 0.769,
+       "body": false,
+       "overhang": "NOT_A_BODY",
+       "unsupportedM2": 0.905
+      }
+     ],
+     "relations": [
+      {
+       "upperRegionId": "region-built-0-0",
+       "lowerMassId": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        16.677,
+        7.36
+       ],
+       "intersectionM2": 122.74,
+       "upperSupportedShare": 1,
+       "lowerCoveredShare": 0.914,
+       "wallAgreement": 0.496
+      }
+     ],
+     "why": "stands on mass-0"
+    }
+   ],
+   "masses": [
+    {
+     "id": "mass-0",
+     "role": "MAIN",
+     "boxM": [
+      0,
+      0,
+      17.22,
+      7.8
+     ],
+     "areaM2": 134.316,
+     "storeys": [
+      0,
+      1
+     ]
+    }
+   ],
+   "upperFootprints": [
+    {
+     "id": "footprint-1-mass-0",
+     "storeyId": "storey-1",
+     "boxM": [
+      0,
+      0,
+      17.22,
+      7.8
+     ],
+     "areaM2": 134.316
+    }
+   ],
+   "storeyUnresolved": [],
+   "storeyConflicts": [],
+   "gate": {
+    "status": "STRUCTURAL_LAYOUT_PARTIAL",
+    "reasons": [
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:WIDTH_CORROBORATED",
+     "NOTED:DEPTH_CORROBORATED",
+     "NOTED:FOOTPRINT_AREA_AGREES",
+     "DEGRADING:ROOF_EVIDENCE_DISAGREES"
+    ]
+   },
+   "emitted": {
+    "outcome": "COMPLETED",
+    "levels": [
+     {
+      "index": 0,
+      "rings": [
+       {
+        "box": [
+         0,
+         0,
+         17.22,
+         7.8
+        ],
+        "areaM2": 134.316
+       }
+      ],
+      "ringAreaM2": 134.316,
+      "slabAreaM2": 134.316
+     },
+     {
+      "index": 1,
+      "rings": [
+       {
+        "box": [
+         0,
+         0,
+         17.22,
+         7.8
+        ],
+        "areaM2": 134.316
+       }
+      ],
+      "ringAreaM2": 134.316,
+      "slabAreaM2": 121.827
+     }
+    ]
+   }
+  },
+  {
+   "row": "D00",
+   "plansByRole": [
+    {
+     "frameId": "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+     "storey": "GROUND",
+     "annotation": "UNKNOWN"
+    },
+    {
+     "frameId": "frame-asset-mars-rzut-poddasze-f3b786cb4f-41728af9b6",
+     "storey": "ATTIC",
+     "annotation": "UNKNOWN"
+    }
+   ],
+   "plansRead": 2,
+   "base": {
+    "frameId": "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+    "storey": "GROUND"
+   },
+   "storeys": [
+    {
+     "id": "storey-0",
+     "index": 0,
+     "frameIds": [
+      "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68"
+     ],
+     "footprintRegionIds": [
+      "footprint-0-region-built-0-1",
+      "footprint-0-region-built-4-0",
+      "zone-min_z",
+      "zone-max_z",
+      "zone-min_x",
+      "zone-max_x",
+      "footprint-0-region-recess-4-5",
+      "footprint-0-region-recess-3-0"
+     ]
+    },
+    {
+     "id": "storey-1",
+     "index": 1,
+     "frameIds": [
+      "frame-asset-mars-rzut-poddasze-f3b786cb4f-41728af9b6"
+     ],
+     "footprintRegionIds": [
+      "footprint-1-mass-0",
+      "footprint-1-mass-1"
+     ]
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "frame-asset-mars-rzut-poddasze-f3b786cb4f-41728af9b6",
+     "storeyIndex": 1,
+     "declaredRole": "ATTIC",
+     "candidates": 148,
+     "chosen": {
+      "targetId": "walls",
+      "scale": 1.034,
+      "offsetX": -118.954,
+      "offsetY": 58.294,
+      "agreement": 0.11876,
+      "score": 0.308364,
+      "stated": false
+     },
+     "rival": {
+      "targetId": "walls",
+      "scale": 1,
+      "offsetX": -417.75,
+      "offsetY": 551.797,
+      "score": 0.298848,
+      "masses": []
+     },
+     "margin": 0.009516,
+     "resolution": 0.001971,
+     "scaleBasis": {
+      "basis": "WALL_PAIRS",
+      "corroborated": true,
+      "why": "placed by wall pairs"
+     },
+     "printedScale": null,
+     "held": null,
+     "decision": "STACKED",
+     "regions": [
+      {
+       "regionId": "region-built-0-0",
+       "boundsM": [
+        0.741,
+        -0.931,
+        6.509,
+        0
+       ],
+       "areaM2": 5.368,
+       "wallFraction": 0.461,
+       "storeyWallFraction": 0.428,
+       "body": false,
+       "overhang": "NOT_A_BODY",
+       "unsupportedM2": 5.368
+      },
+      {
+       "regionId": "region-built-0-1",
+       "boundsM": [
+        0.741,
+        0,
+        14.594,
+        9.66
+       ],
+       "areaM2": 133.821,
+       "wallFraction": 0.541,
+       "storeyWallFraction": 0.468,
+       "body": true,
+       "overhang": "BEYOND_TOLERANCE",
+       "unsupportedM2": 12.232
+      },
+      {
+       "regionId": "region-built-0-7",
+       "boundsM": [
+        0.741,
+        9.66,
+        11.077,
+        11.619
+       ],
+       "areaM2": 20.243,
+       "wallFraction": 0.436,
+       "storeyWallFraction": 0.291,
+       "body": false,
+       "overhang": "NOT_A_BODY",
+       "unsupportedM2": 20.243
+      },
+      {
+       "regionId": "region-built-7-7",
+       "boundsM": [
+        12.272,
+        9.66,
+        14.594,
+        11.619
+       ],
+       "areaM2": 4.548,
+       "wallFraction": 0.42,
+       "storeyWallFraction": 0.323,
+       "body": false,
+       "overhang": "NOT_A_BODY",
+       "unsupportedM2": 4.548
+      }
+     ],
+     "relations": [
+      {
+       "upperRegionId": "region-built-0-1",
+       "lowerMassId": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        13.842,
+        7.641
+       ],
+       "intersectionM2": 105.768,
+       "upperSupportedShare": 0.79,
+       "lowerCoveredShare": 0.764,
+       "wallAgreement": 0.119
+      },
+      {
+       "upperRegionId": "region-built-0-1",
+       "lowerMassId": "mass-1",
+       "status": "SUPPORTS",
+       "overlapM": [
+        7.836,
+        2.019
+       ],
+       "intersectionM2": 15.821,
+       "upperSupportedShare": 0.118,
+       "lowerCoveredShare": 1,
+       "wallAgreement": 0.119
+      }
+     ],
+     "why": "stands on mass-0, mass-1"
+    }
+   ],
+   "masses": [
+    {
+     "id": "mass-0",
+     "role": "MAIN",
+     "boxM": [
+      0,
+      2.019,
+      14.583,
+      11.508
+     ],
+     "areaM2": 138.377,
+     "storeys": [
+      0,
+      1
+     ]
+    },
+    {
+     "id": "mass-1",
+     "role": "ATTACHED",
+     "boxM": [
+      6.748,
+      0,
+      14.583,
+      2.019
+     ],
+     "areaM2": 15.821,
+     "storeys": [
+      0,
+      1
+     ]
+    }
+   ],
+   "upperFootprints": [
+    {
+     "id": "footprint-1-mass-0",
+     "storeyId": "storey-1",
+     "boxM": [
+      0.741,
+      2.019,
+      14.583,
+      9.66
+     ],
+     "areaM2": 105.768
+    },
+    {
+     "id": "footprint-1-mass-1",
+     "storeyId": "storey-1",
+     "boxM": [
+      6.748,
+      0,
+      14.583,
+      2.019
+     ],
+     "areaM2": 15.821
+    }
+   ],
+   "storeyUnresolved": [],
+   "storeyConflicts": [
+    "the attic storey plan fits walls and walls almost equally well, standing on mass-0, mass-1 against nothing",
+    "the attic storey's walled region region-built-0-1 overhangs the bodies below by 12.2 m²",
+    "the attic storey's walled region region-built-0-1 overhangs the bodies below by 12.2 m²",
+    "the attic storey plan fits walls and walls almost equally well, standing on mass-0, mass-1 against nothing"
+   ],
+   "gate": {
+    "status": "STRUCTURAL_LAYOUT_PARTIAL",
+    "reasons": [
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:STRUCTURE_SHAPE_NOT_CHECKED",
+     "NOTED:NO_SECOND_VIEW",
+     "DEGRADING:FOOTPRINT_AREA_NEAR",
+     "NOTED:EVERY_MASS_FULL_HEIGHT",
+     "NOTED:ROOF_BY_CONVENTION",
+     "DEGRADING:STOREY_COVERAGE_DISAGREES",
+     "DEGRADING:STOREY_COVERAGE_DISAGREES",
+     "NOTED:NAMED_HOLES"
+    ]
+   },
+   "emitted": {
+    "outcome": "COMPLETED",
+    "levels": [
+     {
+      "index": 0,
+      "rings": [
+       {
+        "box": [
+         0,
+         1.237,
+         14.583,
+         10.726
+        ],
+        "areaM2": 138.377
+       },
+       {
+        "box": [
+         6.748,
+         10.726,
+         14.583,
+         12.745
+        ],
+        "areaM2": 15.821
+       }
+      ],
+      "ringAreaM2": 154.198,
+      "slabAreaM2": 154.198
+     },
+     {
+      "index": 1,
+      "rings": [
+       {
+        "box": [
+         0.741,
+         3.085,
+         14.583,
+         10.726
+        ],
+        "areaM2": 105.768
+       },
+       {
+        "box": [
+         6.748,
+         10.726,
+         14.583,
+         12.745
+        ],
+        "areaM2": 15.821
+       }
+      ],
+      "ringAreaM2": 121.589,
+      "slabAreaM2": 126.165
+     }
+    ]
+   }
+  },
+  {
+   "row": "D01",
+   "plansByRole": [
+    {
+     "frameId": "frame-asset-faun-iii-rzut-parter-4a4a325758-4fb0a88a30",
+     "storey": "GROUND",
+     "annotation": "UNKNOWN"
+    },
+    {
+     "frameId": "frame-asset-faun-iii-rzut-poddasze-70d190eea2-1ee75ed826",
+     "storey": "ATTIC",
+     "annotation": "UNKNOWN"
+    }
+   ],
+   "plansRead": 2,
+   "base": {
+    "frameId": "frame-asset-faun-iii-rzut-parter-4a4a325758-4fb0a88a30",
+    "storey": "GROUND"
+   },
+   "storeys": [
+    {
+     "id": "storey-0",
+     "index": 0,
+     "frameIds": [],
+     "footprintRegionIds": []
+    }
+   ],
+   "registrations": [],
+   "masses": [],
+   "upperFootprints": [],
+   "storeyUnresolved": [],
+   "storeyConflicts": [],
+   "gate": {
+    "status": "STRUCTURAL_LAYOUT_REJECTED",
+    "reasons": [
+     "BLOCKING:STRUCTURE_NOT_PROJECTED",
+     "BLOCKING:NO_MASS"
+    ]
+   },
+   "emitted": {
+    "outcome": "REFUSED:METRIC_RESOLUTION_INCONCLUSIVE",
+    "levels": []
+   }
+  },
+  {
+   "row": "D02",
+   "plansByRole": [
+    {
+     "frameId": "frame-asset-alex-rzut-parter-4707ebe458-81447f88e6",
+     "storey": "GROUND",
+     "annotation": "UNKNOWN"
+    },
+    {
+     "frameId": "frame-asset-alex-rzut-poddasze-ef26951b8e-48abf54fd2",
+     "storey": "ATTIC",
+     "annotation": "UNKNOWN"
+    }
+   ],
+   "plansRead": 2,
+   "base": {
+    "frameId": "frame-asset-alex-rzut-parter-4707ebe458-81447f88e6",
+    "storey": "GROUND"
+   },
+   "storeys": [
+    {
+     "id": "storey-0",
+     "index": 0,
+     "frameIds": [],
+     "footprintRegionIds": []
+    }
+   ],
+   "registrations": [],
+   "masses": [],
+   "upperFootprints": [],
+   "storeyUnresolved": [],
+   "storeyConflicts": [],
+   "gate": {
+    "status": "STRUCTURAL_LAYOUT_REJECTED",
+    "reasons": [
+     "BLOCKING:STRUCTURE_NOT_PROJECTED",
+     "BLOCKING:NO_MASS"
+    ]
+   },
+   "emitted": {
+    "outcome": "REFUSED:METRIC_RESOLUTION_INCONCLUSIVE",
+    "levels": []
+   }
+  },
+  {
+   "row": "D03",
+   "plansByRole": [
+    {
+     "frameId": "frame-asset-megan-iv-rzut-parter-bbb305d67a-0f9f921b7b",
+     "storey": "GROUND",
+     "annotation": "UNKNOWN"
+    },
+    {
+     "frameId": "frame-asset-megan-iv-rzut-poddasze-51a55ec388-e588994666",
+     "storey": "ATTIC",
+     "annotation": "UNKNOWN"
+    }
+   ],
+   "plansRead": 2,
+   "base": {
+    "frameId": "frame-asset-megan-iv-rzut-parter-bbb305d67a-0f9f921b7b",
+    "storey": "GROUND"
+   },
+   "storeys": [
+    {
+     "id": "storey-0",
+     "index": 0,
+     "frameIds": [],
+     "footprintRegionIds": []
+    }
+   ],
+   "registrations": [],
+   "masses": [],
+   "upperFootprints": [],
+   "storeyUnresolved": [],
+   "storeyConflicts": [],
+   "gate": {
+    "status": "STRUCTURAL_LAYOUT_REJECTED",
+    "reasons": [
+     "BLOCKING:STRUCTURE_NOT_PROJECTED",
+     "BLOCKING:NO_MASS"
+    ]
+   },
+   "emitted": {
+    "outcome": "REFUSED:METRIC_RESOLUTION_INCONCLUSIVE",
+    "levels": []
+   }
+  },
+  {
+   "row": "D05",
+   "plansByRole": [
+    {
+     "frameId": "frame-asset-dobry-rzut-parter-0019c75b9a-70a0349ded",
+     "storey": "GROUND",
+     "annotation": "UNKNOWN"
+    },
+    {
+     "frameId": "frame-asset-dobry-rzut-poddasze-1f5b40aaba-a035634dfc",
+     "storey": "ATTIC",
+     "annotation": "UNKNOWN"
+    }
+   ],
+   "plansRead": 2,
+   "base": {
+    "frameId": "frame-asset-dobry-rzut-parter-0019c75b9a-70a0349ded",
+    "storey": "GROUND"
+   },
+   "storeys": [
+    {
+     "id": "storey-0",
+     "index": 0,
+     "frameIds": [],
+     "footprintRegionIds": []
+    }
+   ],
+   "registrations": [],
+   "masses": [],
+   "upperFootprints": [],
+   "storeyUnresolved": [],
+   "storeyConflicts": [],
+   "gate": {
+    "status": "STRUCTURAL_LAYOUT_REJECTED",
+    "reasons": [
+     "BLOCKING:STRUCTURE_NOT_PROJECTED",
+     "BLOCKING:NO_MASS"
+    ]
+   },
+   "emitted": {
+    "outcome": "REFUSED:METRIC_RESOLUTION_INCONCLUSIVE",
+    "levels": []
+   }
+  }
+ ]
+}

@@ -1,0 +1,174 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005L",
+ "commit": "cee78c8c9450ab3fc3b68f037e0bf73a1373c463",
+ "suites": [
+  "packages/reconstruction/test/storey-support.test.ts",
+  "packages/reconstruction/test/storey-council.test.ts",
+  "packages/reconstruction/test/storey-emission.test.ts",
+  "packages/reconstruction/test/storey-council-emission.test.ts",
+  "packages/reconstruction/test/layout.test.ts",
+  "packages/reconstruction/test/fixtures.test.ts",
+  "packages/reconstruction/test/fixtures-v2.test.ts",
+  "tests/architecture/storey-support.test.ts"
+ ],
+ "results": [
+  {
+   "id": "K1-",
+   "what": "FACADE_WALL_SHARE 0.25 → 0.1875",
+   "file": "packages/reconstruction/src/layout.ts",
+   "exit": 0,
+   "total": 105,
+   "failed": 0,
+   "failing": [],
+   "brokenFiles": [],
+   "verdict": "NOT_PINNED"
+  },
+  {
+   "id": "K1+",
+   "what": "FACADE_WALL_SHARE 0.25 → 0.3125",
+   "file": "packages/reconstruction/src/layout.ts",
+   "exit": 1,
+   "total": 105,
+   "failed": 1,
+   "failing": [
+    "packages/reconstruction/test/storey-council-emission.test.ts > 005L council B: per-storey geometry in the emitted model B5L-6 a basement under the garage only: built under the garage, the model emitted"
+   ],
+   "brokenFiles": [],
+   "verdict": "PINNED"
+  },
+  {
+   "id": "K2-",
+   "what": "WALL_PAIR_SCALE_AGREEMENT 0.02 → 0.015",
+   "file": "packages/reconstruction/src/layout.ts",
+   "exit": 0,
+   "total": 105,
+   "failed": 0,
+   "failing": [],
+   "brokenFiles": [],
+   "verdict": "NOT_PINNED"
+  },
+  {
+   "id": "K2+",
+   "what": "WALL_PAIR_SCALE_AGREEMENT 0.02 → 0.025",
+   "file": "packages/reconstruction/src/layout.ts",
+   "exit": 0,
+   "total": 105,
+   "failed": 0,
+   "failing": [],
+   "brokenFiles": [],
+   "verdict": "NOT_PINNED"
+  },
+  {
+   "id": "K3-",
+   "what": "STOREY_RIVAL_WINDOW 0.1 → 0.075",
+   "file": "packages/reconstruction/src/layout.ts",
+   "exit": 0,
+   "total": 105,
+   "failed": 0,
+   "failing": [],
+   "brokenFiles": [],
+   "verdict": "NOT_PINNED"
+  },
+  {
+   "id": "K3+",
+   "what": "STOREY_RIVAL_WINDOW 0.1 → 0.125",
+   "file": "packages/reconstruction/src/layout.ts",
+   "exit": 0,
+   "total": 105,
+   "failed": 0,
+   "failing": [],
+   "brokenFiles": [],
+   "verdict": "NOT_PINNED"
+  },
+  {
+   "id": "K4-",
+   "what": "SAME_SCALE_OFFSETS_PER_AXIS 6 → 4",
+   "file": "packages/reconstruction/src/layout.ts",
+   "exit": 0,
+   "total": 105,
+   "failed": 0,
+   "failing": [],
+   "brokenFiles": [],
+   "verdict": "NOT_PINNED"
+  },
+  {
+   "id": "K4+",
+   "what": "SAME_SCALE_OFFSETS_PER_AXIS 6 → 8",
+   "file": "packages/reconstruction/src/layout.ts",
+   "exit": 0,
+   "total": 105,
+   "failed": 0,
+   "failing": [],
+   "brokenFiles": [],
+   "verdict": "NOT_PINNED"
+  },
+  {
+   "id": "K5-",
+   "what": "STOREY_WALL_SHARE 0.75 → 0.5625",
+   "file": "packages/reconstruction/src/layout.ts",
+   "exit": 0,
+   "total": 105,
+   "failed": 0,
+   "failing": [],
+   "brokenFiles": [],
+   "verdict": "NOT_PINNED"
+  },
+  {
+   "id": "K5+",
+   "what": "STOREY_WALL_SHARE 0.75 → 0.9375",
+   "file": "packages/reconstruction/src/layout.ts",
+   "exit": 0,
+   "total": 105,
+   "failed": 0,
+   "failing": [],
+   "brokenFiles": [],
+   "verdict": "NOT_PINNED"
+  },
+  {
+   "id": "K6-",
+   "what": "STATED_HOLDS_SHARE 0.5 → 0.375",
+   "file": "packages/reconstruction/src/layout.ts",
+   "exit": 1,
+   "total": 105,
+   "failed": 1,
+   "failing": [
+    "packages/reconstruction/test/storey-council.test.ts > 005L council A: registration topology A5L-1 an inset storey sharing no wall with the house below: the printed scale the fit overrules is on the record"
+   ],
+   "brokenFiles": [],
+   "verdict": "PINNED"
+  },
+  {
+   "id": "K6+",
+   "what": "STATED_HOLDS_SHARE 0.5 → 0.625",
+   "file": "packages/reconstruction/src/layout.ts",
+   "exit": 0,
+   "total": 105,
+   "failed": 0,
+   "failing": [],
+   "brokenFiles": [],
+   "verdict": "NOT_PINNED"
+  },
+  {
+   "id": "K7-",
+   "what": "minSpanM (SUPPORTS on both axes) × 0.75",
+   "file": "packages/reconstruction/src/layout.ts",
+   "exit": 0,
+   "total": 105,
+   "failed": 0,
+   "failing": [],
+   "brokenFiles": [],
+   "verdict": "NOT_PINNED"
+  },
+  {
+   "id": "K7+",
+   "what": "minSpanM (SUPPORTS on both axes) × 1.25",
+   "file": "packages/reconstruction/src/layout.ts",
+   "exit": 0,
+   "total": 105,
+   "failed": 0,
+   "failing": [],
+   "brokenFiles": [],
+   "verdict": "NOT_PINNED"
+  }
+ ]
+}
