@@ -18,6 +18,28 @@ MODES = ['A_CROP_ONLY', 'B_FULL_PLAN', 'C_FULL_PLAN_MARKED_ROI', 'D_MARKED_ROI_P
 RUNS = {'qwen3-vl-2b': ('Qwen/Qwen3-VL-2B-Instruct', 'qwen3-vl-2b'), 'qwen3-vl-4b': ('Qwen/Qwen3-VL-4B-Instruct', 'qwen3-vl-4b'),
         'internvl3.5-2b-instruct': ('OpenGVLab/InternVL3_5-2B-Instruct', 'internvl3.5-2b'), 'smolvlm2-2.2b': ('HuggingFaceTB/SmolVLM2-2.2B-Instruct', 'smolvlm2-2.2b')}
 GB = 1e9
+# Publisher figures, read 2026-10-07; quoted, never measured here (no phone in this container).
+PHONES = [
+    '## Phones: published figures only (nothing below was measured in 005M)', '',
+    '| model / artifact | device, runtime | decode tok/s | prefill tok/s | time to first token | source |',
+    '| --- | --- | --- | --- | --- | --- |',
+    '| Qwen3-VL-2B, Q4_0 GGUF 1.39 GB, llama.cpp-based | Galaxy S25, CPU, 512-token context | 47.6 | 365 | 0.35–1.4 s | aihub.qualcomm.com/models/qwen3_vl_2b_instruct |',
+    '| same | Galaxy S25, NPU | 36.1 | 2,356 | 55–219 ms | same |',
+    '| Qwen3-VL-4B, w4a16 (QAIRT) | Galaxy S25, NPU | ≈ 15.5 | ≈ 1,300 | — ; vision encoder 149 ms (S25), 68.8 ms (S26), input size not stated | aihub.qualcomm.com/models/qwen3_vl_4b_instruct |',
+    '| Gemma 3n E2B, int4 `.litertlm` | S24 Ultra, LiteRT-LM CPU / GPU | 16.1 / 15.6 | 110.5 / 816.4 | no published figure with an image | huggingface.co/google/gemma-3n-E2B-it-litert-lm |',
+    '| SmolVLM2-2.2B / 500M | — | — | — | none published for phones; inference memory 4.9 GB (2.2B), 1.2 GB (500M) | arxiv.org/abs/2504.05299 |',
+    '| InternVL3.5-2B | — | — | — | no phone report found | — |', '',
+    'Arithmetic, not a measurement: a mode-D prompt for Qwen3-VL is a median 965 tokens (776 of them image tokens) and the '
+    'reply 17 tokens (measured here). At the published S25 CPU rates that is ≈ 2.6 s of prefill + ≈ 0.4 s of decode, plus '
+    'the vision encoder, which the figure does not include. Qualcomm quotes a 512-token context, shorter than one mode-D '
+    'prompt, so this is an optimistic floor, not a phone latency.', '',
+    '**Delivery limits** (Google Play, read 2026-10-07):',
+    '- each asset or AI pack is at most 1.5 GB;',
+    '- install-time content is at most 4 GB cumulative;',
+    '- Play for On-device AI (beta) packs are likewise "up to 1.5GB".',
+    '',
+    'Source: support.google.com/googleplay/android-developer/answer/9859372, developer.android.com/google/play/on-device-ai.',
+    'A pack above 1.5 GB has to be split across packs or downloaded outside Play.', '']
 
 
 def size_class(b):
@@ -76,6 +98,7 @@ def main():
                      f"{(cold[len(cold) // 2] / 1000) if cold else float('nan'):.1f} s (n={len(cold)}) | {tok[len(tok) // 2]} | {anon / 1e9:.2f} GB |")
     L += ['', 'Peak RAM of a deployment ≈ the pack bytes (weights are memory-mapped and resident while answering) + the peak '
           'anonymous RSS above (KV cache, compute buffers, image tensors, the prompt cache capped at 2 GiB here).', '']
+    L += PHONES
     open(a.out, 'w').write('\n'.join(L) + '\n')
     print(a.out)
 
