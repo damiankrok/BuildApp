@@ -115,8 +115,13 @@ Gemma Terms of Use (last modified 2026-04-01):
   - ship a copy of the Terms;
   - mark modified files;
   - include a `Notice` file with the required sentence.
-- **Remote control.** Google "reserves the right to restrict (remotely or otherwise) usage", and termination requires
-  deleting all copies. For a removable AI pack that is a business-continuity term, not only an attribution one.
+- **Remote control.** §3.2: "To the maximum extent permitted by law, Google reserves the right to restrict (remotely
+  or otherwise) usage of any of the Gemma Services that Google reasonably believes are in violation of this Agreement."
+  - §3.2 also incorporates the Prohibited Use Policy, which Google "reserves the right to update". The restricted-use
+    list a shipped pack passes through can therefore change after release.
+  - Termination requires deleting all copies.
+  - For a removable AI pack this is a business-continuity term, not only an attribution one (`licensing-matrix.md`;
+    post-review F-5).
 - **The later family is different.** Gemma 4 is **Apache-2.0** (its E2B is "2.3B effective (5.1B with embeddings)").
   Its card does not mention MatFormer, and it is outside this stage's candidate list.
 
