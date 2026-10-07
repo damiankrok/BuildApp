@@ -1,0 +1,1198 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005L",
+ "method": "research/analyzer-005l/perf.ts, unchanged, at the starting code (a70047f, 005K close) and at the stage code (production identical to the freeze candidate), one after the other on the same 4-core container with nothing else running; per development row with more than one floor-plan frame, the median of 3 repeats of: readPlans (plan sheets, bands, decompositions; fresh sheet cache), alignPlans for every non-base plan (candidate generation and scoring), composeStructuralLayout (the production entry; fresh sheet cache), and rest = layout \u2212 read \u2212 align (at the stage code this includes the upper-region support scoring and the storey decision, storeySupportOf not being exported). Total analyzer time: the wall time of each row in the development replay (dev-matrix.mjs run, --par 3), at both commits, run the same way.",
+ "median": {
+  "old": {
+   "readMs": 578.3,
+   "alignMs": 0.1,
+   "layoutMs": 807.3,
+   "restMs": 264.9
+  },
+  "new": {
+   "readMs": 558.3,
+   "alignMs": 1.5,
+   "layoutMs": 817.1,
+   "restMs": 309.8
+  },
+  "layoutRatioPerRow": 0.996,
+  "totalAnalyzerWallS": {
+   "old": 22.75,
+   "new": 23.0,
+   "ratioPerRow": 1.009
+  }
+ },
+ "candidates": {
+  "oldMedian": 0.0,
+  "newMedian": 65.5,
+  "newMax": 569
+ },
+ "explained": [
+  "alignment: median 0.1 \u2192 1.5 ms. The 005L hypotheses (facade wall pairs, the plan below's own pixel scale, the printed scale) add candidates; every one is a bounded enumeration (architecture.md \u00a77). In absolute terms it is 1\u20139 ms a row, under 1 % of the layout.",
+  "rest (support scoring and the storey decision): median 265 \u2192 310 ms (+17 %). This is the new work: each walled region of each other storey weighed against each body, for the chosen placement and up to 24 rivals, plus the erosion overhang test. It is offset elsewhere: the layout as a whole is +1.2 % at the median (per-row median ratio 0.996), and the analyzer +0.9 %.",
+  "no median regression over 15 % on the layout or on the analyzer.",
+  "per row: the largest layout increase is A07, +24.7 % (771 \u2192 961 ms): its upper plan now produces 113 candidates where none was generated before (it was never registered at the starting code) and its support is weighed; rows on which no 005L code runs vary between 0.769 and 1.18 between the runs, which is the noise of this measurement."
+ ],
+ "rows": [
+  {
+   "row": "dom-pod-jarzabem",
+   "plans": 4,
+   "candidates": {
+    "old": 0,
+    "new": 0
+   },
+   "readMs": {
+    "old": 424.2,
+    "new": 397.6
+   },
+   "alignMs": {
+    "old": 0,
+    "new": 0
+   },
+   "layoutMs": {
+    "old": 483.3,
+    "new": 371.5
+   },
+   "restMs": {
+    "old": 59.1,
+    "new": -26.1
+   },
+   "layoutRatio": 0.769
+  },
+  {
+   "row": "dom-w-arkadiach",
+   "plans": 8,
+   "candidates": {
+    "old": 28,
+    "new": 33
+   },
+   "readMs": {
+    "old": 718.9,
+    "new": 657.7
+   },
+   "alignMs": {
+    "old": 0.7,
+    "new": 2.2
+   },
+   "layoutMs": {
+    "old": 1052.9,
+    "new": 1060.1
+   },
+   "restMs": {
+    "old": 333.3,
+    "new": 400.2
+   },
+   "layoutRatio": 1.007
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "plans": 8,
+   "candidates": {
+    "old": 0,
+    "new": 331
+   },
+   "readMs": {
+    "old": 325.1,
+    "new": 280.9
+   },
+   "alignMs": {
+    "old": 0.1,
+    "new": 8.4
+   },
+   "layoutMs": {
+    "old": 263.8,
+    "new": 295
+   },
+   "restMs": {
+    "old": -61.4,
+    "new": 5.7
+   },
+   "layoutRatio": 1.118
+  },
+  {
+   "row": "dom-w-morelach",
+   "plans": 8,
+   "candidates": {
+    "old": 9,
+    "new": 79
+   },
+   "readMs": {
+    "old": 585.7,
+    "new": 552.8
+   },
+   "alignMs": {
+    "old": 0.3,
+    "new": 1.7
+   },
+   "layoutMs": {
+    "old": 1021.1,
+    "new": 959.4
+   },
+   "restMs": {
+    "old": 435.1,
+    "new": 404.9
+   },
+   "layoutRatio": 0.94
+  },
+  {
+   "row": "marcowki",
+   "plans": 8,
+   "candidates": {
+    "old": 45,
+    "new": 82
+   },
+   "readMs": {
+    "old": 725.9,
+    "new": 602.6
+   },
+   "alignMs": {
+    "old": 1.2,
+    "new": 2.6
+   },
+   "layoutMs": {
+    "old": 987.7,
+    "new": 927.8
+   },
+   "restMs": {
+    "old": 260.6,
+    "new": 322.6
+   },
+   "layoutRatio": 0.939
+  },
+  {
+   "row": "rarytasy-g2e",
+   "plans": 4,
+   "candidates": {
+    "old": 0,
+    "new": 0
+   },
+   "readMs": {
+    "old": 421.4,
+    "new": 357.2
+   },
+   "alignMs": {
+    "old": 0,
+    "new": 0
+   },
+   "layoutMs": {
+    "old": 592.4,
+    "new": 648.8
+   },
+   "restMs": {
+    "old": 171,
+    "new": 291.6
+   },
+   "layoutRatio": 1.095
+  },
+  {
+   "row": "kosacce-clean",
+   "plans": 4,
+   "candidates": {
+    "old": 0,
+    "new": 0
+   },
+   "readMs": {
+    "old": 643.3,
+    "new": 571.4
+   },
+   "alignMs": {
+    "old": 0,
+    "new": 0
+   },
+   "layoutMs": {
+    "old": 895.9,
+    "new": 804.8
+   },
+   "restMs": {
+    "old": 252.6,
+    "new": 233.4
+   },
+   "layoutRatio": 0.898
+  },
+  {
+   "row": "kosacce-tracked",
+   "plans": 4,
+   "candidates": {
+    "old": 0,
+    "new": 0
+   },
+   "readMs": {
+    "old": 515.9,
+    "new": 558.3
+   },
+   "alignMs": {
+    "old": 0,
+    "new": 0
+   },
+   "layoutMs": {
+    "old": 908.3,
+    "new": 848.6
+   },
+   "restMs": {
+    "old": 392.4,
+    "new": 290.3
+   },
+   "layoutRatio": 0.934
+  },
+  {
+   "row": "rarytasy-eoze",
+   "plans": 4,
+   "candidates": {
+    "old": 0,
+    "new": 0
+   },
+   "readMs": {
+    "old": 446.9,
+    "new": 467.6
+   },
+   "alignMs": {
+    "old": 0,
+    "new": 0
+   },
+   "layoutMs": {
+    "old": 711.8,
+    "new": 787.3
+   },
+   "restMs": {
+    "old": 264.9,
+    "new": 319.7
+   },
+   "layoutRatio": 1.106
+  },
+  {
+   "row": "eoze-legacy-every",
+   "plans": 4,
+   "candidates": {
+    "old": 0,
+    "new": 0
+   },
+   "readMs": {
+    "old": 384.8,
+    "new": 375.6
+   },
+   "alignMs": {
+    "old": 0,
+    "new": 0
+   },
+   "layoutMs": {
+    "old": 737.5,
+    "new": 710
+   },
+   "restMs": {
+    "old": 352.7,
+    "new": 334.4
+   },
+   "layoutRatio": 0.963
+  },
+  {
+   "row": "alt-marcowki",
+   "plans": 4,
+   "candidates": {
+    "old": 0,
+    "new": 31
+   },
+   "readMs": {
+    "old": 116.9,
+    "new": 113.1
+   },
+   "alignMs": {
+    "old": 0.1,
+    "new": 0.7
+   },
+   "layoutMs": {
+    "old": 122.9,
+    "new": 114.5
+   },
+   "restMs": {
+    "old": 5.9,
+    "new": 0.7
+   },
+   "layoutRatio": 0.932
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "plans": 8,
+   "candidates": {
+    "old": 12,
+    "new": 56
+   },
+   "readMs": {
+    "old": 783.2,
+    "new": 801
+   },
+   "alignMs": {
+    "old": 0.4,
+    "new": 1.5
+   },
+   "layoutMs": {
+    "old": 1075.1,
+    "new": 1085
+   },
+   "restMs": {
+    "old": 291.5,
+    "new": 282.5
+   },
+   "layoutRatio": 1.009
+  },
+  {
+   "row": "willa-miranda",
+   "plans": 8,
+   "candidates": {
+    "old": 48,
+    "new": 103
+   },
+   "readMs": {
+    "old": 802.3,
+    "new": 758.2
+   },
+   "alignMs": {
+    "old": 1.8,
+    "new": 2.4
+   },
+   "layoutMs": {
+    "old": 1134.9,
+    "new": 1133.2
+   },
+   "restMs": {
+    "old": 330.8,
+    "new": 372.6
+   },
+   "layoutRatio": 0.999
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "plans": 12,
+   "candidates": {
+    "old": 0,
+    "new": 89
+   },
+   "readMs": {
+    "old": 646.4,
+    "new": 643.4
+   },
+   "alignMs": {
+    "old": 0.1,
+    "new": 2.2
+   },
+   "layoutMs": {
+    "old": 1033.3,
+    "new": 1107
+   },
+   "restMs": {
+    "old": 386.8,
+    "new": 461.4
+   },
+   "layoutRatio": 1.071
+  },
+  {
+   "row": "dom-w-modrzykach",
+   "plans": 4,
+   "candidates": {
+    "old": 0,
+    "new": 0
+   },
+   "readMs": {
+    "old": 383.5,
+    "new": 426.4
+   },
+   "alignMs": {
+    "old": 0,
+    "new": 0
+   },
+   "layoutMs": {
+    "old": 646.2,
+    "new": 762.7
+   },
+   "restMs": {
+    "old": 262.7,
+    "new": 336.3
+   },
+   "layoutRatio": 1.18
+  },
+  {
+   "row": "dom-w-azaliach",
+   "plans": 8,
+   "candidates": {
+    "old": 0,
+    "new": 40
+   },
+   "readMs": {
+    "old": 437.9,
+    "new": 465.3
+   },
+   "alignMs": {
+    "old": 0.1,
+    "new": 1
+   },
+   "layoutMs": {
+    "old": 706.2,
+    "new": 818.2
+   },
+   "restMs": {
+    "old": 268.2,
+    "new": 351.9
+   },
+   "layoutRatio": 1.159
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "plans": 8,
+   "candidates": {
+    "old": 44,
+    "new": 68
+   },
+   "readMs": {
+    "old": 888.6,
+    "new": 953.5
+   },
+   "alignMs": {
+    "old": 0.7,
+    "new": 1.4
+   },
+   "layoutMs": {
+    "old": 1257.3,
+    "new": 1265.5
+   },
+   "restMs": {
+    "old": 368,
+    "new": 310.6
+   },
+   "layoutRatio": 1.007
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "plans": 12,
+   "candidates": {
+    "old": 0,
+    "new": 204
+   },
+   "readMs": {
+    "old": 601,
+    "new": 606.4
+   },
+   "alignMs": {
+    "old": 0.1,
+    "new": 5
+   },
+   "layoutMs": {
+    "old": 1019.5,
+    "new": 994.3
+   },
+   "restMs": {
+    "old": 418.4,
+    "new": 382.9
+   },
+   "layoutRatio": 0.975
+  },
+  {
+   "row": "galaktyka",
+   "plans": 2,
+   "candidates": {
+    "old": 0,
+    "new": 379
+   },
+   "readMs": {
+    "old": 1219.6,
+    "new": 1240.1
+   },
+   "alignMs": {
+    "old": 0.1,
+    "new": 9.5
+   },
+   "layoutMs": {
+    "old": 1208.2,
+    "new": 1171.5
+   },
+   "restMs": {
+    "old": -11.5,
+    "new": -78.1
+   },
+   "layoutRatio": 0.97
+  },
+  {
+   "row": "dom-pod-milorzebem",
+   "plans": 8,
+   "candidates": {
+    "old": 0,
+    "new": 30
+   },
+   "readMs": {
+    "old": 401.7,
+    "new": 357.4
+   },
+   "alignMs": {
+    "old": 0.1,
+    "new": 0.8
+   },
+   "layoutMs": {
+    "old": 383.2,
+    "new": 365.3
+   },
+   "restMs": {
+    "old": -18.6,
+    "new": 7.1
+   },
+   "layoutRatio": 0.953
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "plans": 8,
+   "candidates": {
+    "old": 30,
+    "new": 66
+   },
+   "readMs": {
+    "old": 578.3,
+    "new": 522.2
+   },
+   "alignMs": {
+    "old": 0.6,
+    "new": 1.6
+   },
+   "layoutMs": {
+    "old": 851.6,
+    "new": 993.5
+   },
+   "restMs": {
+    "old": 272.7,
+    "new": 469.7
+   },
+   "layoutRatio": 1.167
+  },
+  {
+   "row": "dom-w-gozdzikowcach",
+   "plans": 8,
+   "candidates": {
+    "old": 0,
+    "new": 66
+   },
+   "readMs": {
+    "old": 487.8,
+    "new": 486.6
+   },
+   "alignMs": {
+    "old": 0.1,
+    "new": 1.5
+   },
+   "layoutMs": {
+    "old": 777.5,
+    "new": 791.4
+   },
+   "restMs": {
+    "old": 289.6,
+    "new": 303.3
+   },
+   "layoutRatio": 1.018
+  },
+  {
+   "row": "dom-w-cyklamenach",
+   "plans": 8,
+   "candidates": {
+    "old": 36,
+    "new": 68
+   },
+   "readMs": {
+    "old": 652.1,
+    "new": 592.9
+   },
+   "alignMs": {
+    "old": 1.3,
+    "new": 2.4
+   },
+   "layoutMs": {
+    "old": 807.3,
+    "new": 778.8
+   },
+   "restMs": {
+    "old": 153.9,
+    "new": 183.5
+   },
+   "layoutRatio": 0.965
+  },
+  {
+   "row": "A00",
+   "plans": 4,
+   "candidates": {
+    "old": 0,
+    "new": 0
+   },
+   "readMs": {
+    "old": 670.9,
+    "new": 602.9
+   },
+   "alignMs": {
+    "old": 0,
+    "new": 0
+   },
+   "layoutMs": {
+    "old": 757.6,
+    "new": 647.2
+   },
+   "restMs": {
+    "old": 86.7,
+    "new": 44.3
+   },
+   "layoutRatio": 0.854
+  },
+  {
+   "row": "A01",
+   "plans": 8,
+   "candidates": {
+    "old": 0,
+    "new": 66
+   },
+   "readMs": {
+    "old": 509,
+    "new": 457
+   },
+   "alignMs": {
+    "old": 0.1,
+    "new": 1
+   },
+   "layoutMs": {
+    "old": 790.6,
+    "new": 823.1
+   },
+   "restMs": {
+    "old": 281.5,
+    "new": 365.1
+   },
+   "layoutRatio": 1.041
+  },
+  {
+   "row": "A02",
+   "plans": 4,
+   "candidates": {
+    "old": 0,
+    "new": 0
+   },
+   "readMs": {
+    "old": 366.8,
+    "new": 347
+   },
+   "alignMs": {
+    "old": 0,
+    "new": 0
+   },
+   "layoutMs": {
+    "old": 625.8,
+    "new": 656.8
+   },
+   "restMs": {
+    "old": 259,
+    "new": 309.8
+   },
+   "layoutRatio": 1.05
+  },
+  {
+   "row": "A03",
+   "plans": 8,
+   "candidates": {
+    "old": 4,
+    "new": 53
+   },
+   "readMs": {
+    "old": 492,
+    "new": 460.2
+   },
+   "alignMs": {
+    "old": 0.3,
+    "new": 1.3
+   },
+   "layoutMs": {
+    "old": 874.2,
+    "new": 815.7
+   },
+   "restMs": {
+    "old": 381.9,
+    "new": 354.2
+   },
+   "layoutRatio": 0.933
+  },
+  {
+   "row": "A04",
+   "plans": 8,
+   "candidates": {
+    "old": 35,
+    "new": 66
+   },
+   "readMs": {
+    "old": 723.5,
+    "new": 671.2
+   },
+   "alignMs": {
+    "old": 0.5,
+    "new": 1.9
+   },
+   "layoutMs": {
+    "old": 973.1,
+    "new": 1034.8
+   },
+   "restMs": {
+    "old": 249.1,
+    "new": 361.7
+   },
+   "layoutRatio": 1.063
+  },
+  {
+   "row": "A05",
+   "plans": 4,
+   "candidates": {
+    "old": 0,
+    "new": 0
+   },
+   "readMs": {
+    "old": 429.2,
+    "new": 437.7
+   },
+   "alignMs": {
+    "old": 0,
+    "new": 0
+   },
+   "layoutMs": {
+    "old": 707.4,
+    "new": 817.1
+   },
+   "restMs": {
+    "old": 278.2,
+    "new": 379.4
+   },
+   "layoutRatio": 1.155
+  },
+  {
+   "row": "A06",
+   "plans": 8,
+   "candidates": {
+    "old": 0,
+    "new": 66
+   },
+   "readMs": {
+    "old": 511.7,
+    "new": 435.8
+   },
+   "alignMs": {
+    "old": 0.1,
+    "new": 1.4
+   },
+   "layoutMs": {
+    "old": 789.2,
+    "new": 689.4
+   },
+   "restMs": {
+    "old": 277.4,
+    "new": 252.2
+   },
+   "layoutRatio": 0.874
+  },
+  {
+   "row": "A07",
+   "plans": 8,
+   "candidates": {
+    "old": 0,
+    "new": 113
+   },
+   "readMs": {
+    "old": 491.6,
+    "new": 469.9
+   },
+   "alignMs": {
+    "old": 0.1,
+    "new": 2.5
+   },
+   "layoutMs": {
+    "old": 771,
+    "new": 961.3
+   },
+   "restMs": {
+    "old": 279.3,
+    "new": 488.9
+   },
+   "layoutRatio": 1.247
+  },
+  {
+   "row": "D00",
+   "plans": 2,
+   "candidates": {
+    "old": 0,
+    "new": 148
+   },
+   "readMs": {
+    "old": 2349.5,
+    "new": 2523.2
+   },
+   "alignMs": {
+    "old": 0.2,
+    "new": 8.7
+   },
+   "layoutMs": {
+    "old": 2473.7,
+    "new": 2343.4
+   },
+   "restMs": {
+    "old": 124,
+    "new": -188.5
+   },
+   "layoutRatio": 0.947
+  },
+  {
+   "row": "D01",
+   "plans": 2,
+   "candidates": {
+    "old": 22,
+    "new": 221
+   },
+   "readMs": {
+    "old": 722.1,
+    "new": 726.4
+   },
+   "alignMs": {
+    "old": 1.2,
+    "new": 7.9
+   },
+   "layoutMs": {
+    "old": 738.3,
+    "new": 732.8
+   },
+   "restMs": {
+    "old": 15,
+    "new": -1.5
+   },
+   "layoutRatio": 0.993
+  },
+  {
+   "row": "D02",
+   "plans": 2,
+   "candidates": {
+    "old": 0,
+    "new": 65
+   },
+   "readMs": {
+    "old": 450.8,
+    "new": 662.7
+   },
+   "alignMs": {
+    "old": 0.1,
+    "new": 2.5
+   },
+   "layoutMs": {
+    "old": 543.1,
+    "new": 528.1
+   },
+   "restMs": {
+    "old": 92.2,
+    "new": -137.1
+   },
+   "layoutRatio": 0.972
+  },
+  {
+   "row": "D03",
+   "plans": 2,
+   "candidates": {
+    "old": 10,
+    "new": 60
+   },
+   "readMs": {
+    "old": 1400.1,
+    "new": 1589.4
+   },
+   "alignMs": {
+    "old": 0.6,
+    "new": 2.2
+   },
+   "layoutMs": {
+    "old": 1352.4,
+    "new": 1505
+   },
+   "restMs": {
+    "old": -48.3,
+    "new": -86.6
+   },
+   "layoutRatio": 1.113
+  },
+  {
+   "row": "D05",
+   "plans": 2,
+   "candidates": {
+    "old": 9,
+    "new": 569
+   },
+   "readMs": {
+    "old": 1029.5,
+    "new": 740.5
+   },
+   "alignMs": {
+    "old": 0.3,
+    "new": 15.9
+   },
+   "layoutMs": {
+    "old": 887.3,
+    "new": 769.3
+   },
+   "restMs": {
+    "old": -142.5,
+    "new": 12.9
+   },
+   "layoutRatio": 0.867
+  }
+ ],
+ "totalAnalyzerWall": [
+  {
+   "row": "dom-w-modrzewnicy",
+   "oldS": 15.3,
+   "newS": 16.4,
+   "ratio": 1.072
+  },
+  {
+   "row": "dom-pod-jarzabem",
+   "oldS": 23.3,
+   "newS": 24.3,
+   "ratio": 1.043
+  },
+  {
+   "row": "dom-w-arkadiach",
+   "oldS": 23.8,
+   "newS": 25.6,
+   "ratio": 1.076
+  },
+  {
+   "row": "dom-w-morelach",
+   "oldS": 20.5,
+   "newS": 22.6,
+   "ratio": 1.102
+  },
+  {
+   "row": "marcowki",
+   "oldS": 24.4,
+   "newS": 26.8,
+   "ratio": 1.098
+  },
+  {
+   "row": "rarytasy-g2e",
+   "oldS": 36.8,
+   "newS": 37.2,
+   "ratio": 1.011
+  },
+  {
+   "row": "kosacce-clean",
+   "oldS": 29.1,
+   "newS": 29.3,
+   "ratio": 1.007
+  },
+  {
+   "row": "kosacce-tracked",
+   "oldS": 29.0,
+   "newS": 30.5,
+   "ratio": 1.052
+  },
+  {
+   "row": "alt-marcowki",
+   "oldS": 11.4,
+   "newS": 13.1,
+   "ratio": 1.149
+  },
+  {
+   "row": "rarytasy-eoze",
+   "oldS": 35.4,
+   "newS": 39.7,
+   "ratio": 1.121
+  },
+  {
+   "row": "eoze-legacy-every",
+   "oldS": 34.0,
+   "newS": 39.5,
+   "ratio": 1.162
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "oldS": 26.5,
+   "newS": 26.6,
+   "ratio": 1.004
+  },
+  {
+   "row": "willa-miranda",
+   "oldS": 26.9,
+   "newS": 27.9,
+   "ratio": 1.037
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "oldS": 22.9,
+   "newS": 26.4,
+   "ratio": 1.153
+  },
+  {
+   "row": "dom-w-modrzykach",
+   "oldS": 16.1,
+   "newS": 16.5,
+   "ratio": 1.025
+  },
+  {
+   "row": "dom-w-azaliach",
+   "oldS": 20.3,
+   "newS": 19.3,
+   "ratio": 0.951
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "oldS": 22.6,
+   "newS": 21.6,
+   "ratio": 0.956
+  },
+  {
+   "row": "aster-viii",
+   "oldS": 14.5,
+   "newS": 13.0,
+   "ratio": 0.897
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "oldS": 25.4,
+   "newS": 25.7,
+   "ratio": 1.012
+  },
+  {
+   "row": "galaktyka",
+   "oldS": 17.8,
+   "newS": 15.0,
+   "ratio": 0.843
+  },
+  {
+   "row": "dom-pod-milorzebem",
+   "oldS": 16.7,
+   "newS": 15.6,
+   "ratio": 0.934
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "oldS": 17.9,
+   "newS": 17.3,
+   "ratio": 0.966
+  },
+  {
+   "row": "eoze-legacy-area",
+   "oldS": 33.9,
+   "newS": 32.5,
+   "ratio": 0.959
+  },
+  {
+   "row": "kosacce-area-alone",
+   "oldS": 24.1,
+   "newS": 23.3,
+   "ratio": 0.967
+  },
+  {
+   "row": "dom-w-gozdzikowcach",
+   "oldS": 19.0,
+   "newS": 19.3,
+   "ratio": 1.016
+  },
+  {
+   "row": "dom-w-cyklamenach",
+   "oldS": 20.7,
+   "newS": 20.2,
+   "ratio": 0.976
+  },
+  {
+   "row": "A01",
+   "oldS": 16.1,
+   "newS": 15.7,
+   "ratio": 0.975
+  },
+  {
+   "row": "A00",
+   "oldS": 25.2,
+   "newS": 23.3,
+   "ratio": 0.925
+  },
+  {
+   "row": "A02",
+   "oldS": 27.7,
+   "newS": 25.0,
+   "ratio": 0.903
+  },
+  {
+   "row": "A03",
+   "oldS": 27.1,
+   "newS": 23.2,
+   "ratio": 0.856
+  },
+  {
+   "row": "A04",
+   "oldS": 24.4,
+   "newS": 22.8,
+   "ratio": 0.934
+  },
+  {
+   "row": "A05",
+   "oldS": 20.3,
+   "newS": 20.7,
+   "ratio": 1.02
+  },
+  {
+   "row": "A06",
+   "oldS": 21.4,
+   "newS": 23.6,
+   "ratio": 1.103
+  },
+  {
+   "row": "A07",
+   "oldS": 32.3,
+   "newS": 33.3,
+   "ratio": 1.031
+  },
+  {
+   "row": "D01",
+   "oldS": 15.4,
+   "newS": 14.0,
+   "ratio": 0.909
+  },
+  {
+   "row": "D00",
+   "oldS": 26.6,
+   "newS": 29.2,
+   "ratio": 1.098
+  },
+  {
+   "row": "D02",
+   "oldS": 17.5,
+   "newS": 16.1,
+   "ratio": 0.92
+  },
+  {
+   "row": "D03",
+   "oldS": 19.8,
+   "newS": 18.9,
+   "ratio": 0.955
+  },
+  {
+   "row": "D04",
+   "oldS": 12.7,
+   "newS": 12.7,
+   "ratio": 1.0
+  },
+  {
+   "row": "D05",
+   "oldS": 11.7,
+   "newS": 12.7,
+   "ratio": 1.085
+  }
+ ],
+ "noise": {
+  "rowsWithNoOtherStoreyPlan": {
+   "n": 10,
+   "layoutRatio": {
+    "min": 0.769,
+    "median": 1.0065,
+    "max": 1.18
+   },
+   "note": "no 005L storey code runs on these rows (no plan is aligned), so their spread between the two runs is the measurement noise"
+  },
+  "rowsWithOtherStoreys": {
+   "n": 26,
+   "layoutRatio": {
+    "min": 0.867,
+    "median": 0.996,
+    "max": 1.247
+   }
+  }
+ }
+}
