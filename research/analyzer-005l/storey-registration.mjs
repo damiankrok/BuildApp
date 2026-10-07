@@ -73,8 +73,14 @@ for (const t of trace) {
       chosen: r.chosen ? { ...r.chosen, scale: r3(r.chosen.scale), offsetX: r3(r.chosen.offsetX), offsetY: r3(r.chosen.offsetY) } : null,
       rival: r.rival ? { ...r.rival, scale: r3(r.rival.scale), offsetX: r3(r.rival.offsetX), offsetY: r3(r.rival.offsetY) } : null,
       margin: r.margin ?? null,
+      // how finely the walls tell placements apart (a margin at or below it is a tie), what the scale rests on, the
+      // printed scale where it was weighed against a fit, and a reading held against a better fit (005L council)
+      resolution: r.resolution ?? null,
+      scaleBasis: r.scaleBasis ?? null,
+      printedScale: r.printedScale ?? null,
+      held: r.held ? { by: r.held.by, standsElsewhere: r.held.standsElsewhere, over: { ...r.held.over, scale: r3(r.held.over.scale), offsetX: r3(r.held.over.offsetX), offsetY: r3(r.held.over.offsetY) } } : null,
       decision: r.decision,
-      regions: r.regions.map((g) => ({ regionId: g.regionId, boundsM: box(g.bounds), areaM2: r3(g.areaM2), wallFraction: r3(g.wallFraction), body: g.body, overhang: g.overhang, unsupportedM2: r3(g.unsupportedM2) })),
+      regions: r.regions.map((g) => ({ regionId: g.regionId, boundsM: box(g.bounds), areaM2: r3(g.areaM2), wallFraction: r3(g.wallFraction), storeyWallFraction: r3(g.storeyWallFraction ?? null), body: g.body, overhang: g.overhang, unsupportedM2: r3(g.unsupportedM2) })),
       relations: r.relations.map((x) => ({ upperRegionId: x.upperRegionId, lowerMassId: x.lowerMassId, status: x.supportStatus, overlapM: [r3(x.overlapM.x), r3(x.overlapM.z)], intersectionM2: r3(x.intersectionM2), upperSupportedShare: r3(x.upperSupportedShare), lowerCoveredShare: r3(x.lowerCoveredShare), wallAgreement: r3(x.wallAgreement) })),
       why: r.why,
     })),

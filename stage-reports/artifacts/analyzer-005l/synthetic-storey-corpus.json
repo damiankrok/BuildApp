@@ -54,7 +54,7 @@
       "stated": true,
       "score": 1.008
      },
-     "margin": 0.269091,
+     "margin": 0.278466,
      "regions": [
       {
        "id": "region-built-0-0",
@@ -302,7 +302,7 @@
        "lowerCoveredShare": 0.647
       }
      ],
-     "why": "two placements stand it on different bodies (mass-0 against mass-0) and the walls do not choose between them"
+     "why": "two placements stand it on the same bodies (mass-0) over different footprints, nearer in score (0.0000) than the walls can tell apart (0.0053)"
     }
    ],
    "footprints": [
@@ -378,7 +378,7 @@
       "stated": true,
       "score": 0.106
      },
-     "margin": -0.522483,
+     "margin": -0.516791,
      "regions": [
       {
        "id": "region-built-1-1",
@@ -424,8 +424,8 @@
      "id": "footprint-1-mass-0",
      "storey": 1,
      "box": [
-      2,
-      2,
+      1.975,
+      1.975,
       10,
       15
      ]
@@ -612,7 +612,7 @@
       "stated": false,
       "score": 0.791
      },
-     "margin": 0.199317,
+     "margin": 0.207253,
      "regions": [
       {
        "id": "region-built-0-0",
@@ -638,6 +638,151 @@
        ],
        "upperSupportedShare": 1,
        "lowerCoveredShare": 1
+      }
+     ],
+     "why": "stands on mass-0"
+    }
+   ],
+   "footprints": [
+    {
+     "id": "footprint-0-region-built-0-0",
+     "storey": 0,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    },
+    {
+     "id": "footprint-0-region-built-1-1",
+     "storey": 0,
+     "box": [
+      12,
+      8,
+      20,
+      17
+     ]
+    },
+    {
+     "id": "footprint-1-mass-0",
+     "storey": 1,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    }
+   ],
+   "unresolved": [],
+   "conflicts": []
+  },
+  {
+   "fixture": "005L storey support: the corpus > 5b. an upper floor a wall wider than the house, its east wall over the garage: a sliver over the garage carries nothing (M7)",
+   "order": {},
+   "plans": [
+    {
+     "id": "g",
+     "storey": "GROUND",
+     "sizePx": [
+      560,
+      520
+     ],
+     "chains": 2,
+     "registered": true
+    },
+    {
+     "id": "u",
+     "storey": "UPPER",
+     "sizePx": [
+      560,
+      520
+     ],
+     "chains": 2,
+     "registered": true
+    }
+   ],
+   "base": "g",
+   "masses": [
+    {
+     "id": "mass-0",
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ],
+     "storeys": [
+      0,
+      1
+     ],
+     "role": "MAIN"
+    },
+    {
+     "id": "mass-1",
+     "box": [
+      12,
+      8,
+      20,
+      17
+     ],
+     "storeys": [
+      0,
+      0
+     ],
+     "role": "ATTACHED"
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "u",
+     "storeyIndex": 1,
+     "decision": "STACKED",
+     "candidates": 53,
+     "chosen": {
+      "targetId": "region-built-0-0",
+      "scale": 1,
+      "stated": false,
+      "score": 0.791
+     },
+     "margin": 0.00892,
+     "regions": [
+      {
+       "id": "region-built-0-0",
+       "bounds": [
+        -0.3,
+        0,
+        12.3,
+        17
+       ],
+       "body": true,
+       "overhang": "WITHIN_TOLERANCE",
+       "unsupportedM2": 10.2
+      }
+     ],
+     "relations": [
+      {
+       "region": "region-built-0-0",
+       "mass": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        12,
+        17
+       ],
+       "upperSupportedShare": 0.952,
+       "lowerCoveredShare": 1
+      },
+      {
+       "region": "region-built-0-0",
+       "mass": "mass-1",
+       "status": "INCIDENTAL",
+       "overlapM": [
+        0.3,
+        9
+       ],
+       "upperSupportedShare": 0.013,
+       "lowerCoveredShare": 0.037
       }
      ],
      "why": "stands on mass-0"
@@ -746,7 +891,7 @@
       "stated": true,
       "score": 1.11
      },
-     "margin": 0.145185,
+     "margin": 0.148092,
      "regions": [
       {
        "id": "region-built-0-0",
@@ -927,7 +1072,7 @@
        "lowerCoveredShare": 0.371
       }
      ],
-     "why": "two placements stand it on different bodies (mass-0 against mass-0) and the walls do not choose between them"
+     "why": "two placements stand it on the same bodies (mass-0) over different footprints, nearer in score (0.0000) than the walls can tell apart (0.0043)"
     }
    ],
    "footprints": [
@@ -1017,7 +1162,7 @@
       "stated": false,
       "score": 0.778
      },
-     "margin": 0.121007,
+     "margin": 0.136905,
      "regions": [
       {
        "id": "region-built-0-0",
@@ -1137,7 +1282,7 @@
       "stated": true,
       "score": 0.989
      },
-     "margin": 0.285459,
+     "margin": 0.291023,
      "regions": [
       {
        "id": "region-built-0-0",
@@ -1247,7 +1392,7 @@
       "stated": true,
       "score": 0.899
      },
-     "margin": 0.239496,
+     "margin": 0.243646,
      "regions": [
       {
        "id": "region-built-0-0",
@@ -1459,9 +1604,9 @@
      "id": "footprint-1-mass-0",
      "storey": 1,
      "box": [
+      13.975,
       0,
-      0,
-      6,
+      20,
       17
      ]
     },
@@ -1469,9 +1614,9 @@
      "id": "footprint-1-mass-0-1",
      "storey": 1,
      "box": [
-      14,
       0,
-      20,
+      0,
+      6,
       17
      ]
     }
@@ -1531,9 +1676,9 @@
       "targetId": "envelope",
       "scale": 1,
       "stated": true,
-      "score": 1.176
+      "score": 1.163
      },
-     "margin": 0.03,
+     "margin": 0.016842,
      "regions": [
       {
        "id": "region-built-0-0",
@@ -1641,7 +1786,7 @@
       "targetId": "walls",
       "scale": 1,
       "stated": false,
-      "score": 0.812
+      "score": 0.801
      },
      "margin": 0,
      "regions": [
@@ -1804,7 +1949,7 @@
      "storey": 1,
      "box": [
       0,
-      2,
+      1.975,
       12,
       15
      ]
@@ -1877,7 +2022,7 @@
       "stated": true,
       "score": 1.084
      },
-     "margin": 0.473417,
+     "margin": 0.483655,
      "regions": [
       {
        "id": "region-built-0-0",
@@ -1974,8 +2119,8 @@
      "id": "footprint-2-mass-0",
      "storey": 2,
      "box": [
-      2,
-      4,
+      1.975,
+      3.975,
       10,
       13
      ]
@@ -2052,7 +2197,7 @@
       "stated": false,
       "score": 0.845
      },
-     "margin": 0.375752,
+     "margin": 0.384299,
      "regions": [
       {
        "id": "region-built-0-0",
@@ -2186,7 +2331,7 @@
       "stated": false,
       "score": 0.875
      },
-     "margin": 0.390481,
+     "margin": 0.39937,
      "regions": [
       {
        "id": "region-built-0-0",
@@ -2325,7 +2470,7 @@
       "stated": false,
       "score": 0.845
      },
-     "margin": 0.375752,
+     "margin": 0.384299,
      "regions": [
       {
        "id": "region-built-0-0",
@@ -2461,7 +2606,7 @@
       "stated": false,
       "score": 0.845
      },
-     "margin": 0.375752,
+     "margin": 0.384299,
      "regions": [
       {
        "id": "region-built-0-0",
@@ -2601,7 +2746,7 @@
       "stated": false,
       "score": 0.845
      },
-     "margin": 0.375752,
+     "margin": 0.384299,
      "regions": [
       {
        "id": "region-built-0-0",
