@@ -1,0 +1,36 @@
+{
+ "researchOnly": "BUILDPLAN-ANALYZER-005M",
+ "decidedAtUtc": "2026-10-07T19:46:07Z",
+ "rule": "pre-registered (score.py): lowest CONFIDENT_WRONG_RATE over all five modes of the 32-question PHASE1 set, then the highest exact accuracy; the best three advance to the 167-question PHASE2 set",
+ "ranking": [
+  {
+   "model": "internvl3.5-2b-instruct",
+   "cwr": 0.2125,
+   "exactAccuracy": 0.5188
+  },
+  {
+   "model": "qwen3-vl-2b",
+   "cwr": 0.275,
+   "exactAccuracy": 0.725
+  },
+  {
+   "model": "qwen3-vl-4b",
+   "cwr": 0.3312,
+   "exactAccuracy": 0.6438
+  },
+  {
+   "model": "smolvlm2-2.2b",
+   "cwr": 0.5,
+   "exactAccuracy": 0.3937
+  }
+ ],
+ "advance": [
+  "internvl3.5-2b-instruct",
+  "qwen3-vl-2b",
+  "qwen3-vl-4b"
+ ],
+ "notAdvanced": [
+  "smolvlm2-2.2b"
+ ],
+ "note": "written and committed before any PHASE2-only item was answered; PHASE2 run files start as copies of the PHASE1 files and add the remaining 135 questions"
+}
