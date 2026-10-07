@@ -214,6 +214,25 @@ describe('005L storey support: the corpus', () => {
     expect(garage?.supportStatus ?? 'NONE').not.toBe('SUPPORTS')
   })
 
+  it('5b. an upper floor a wall wider than the house, its east wall over the garage: a sliver over the garage carries nothing (M7)', () => {
+    // The upper plan draws its east wall a wall's thickness further east than the house's: 0.6 m over the garage
+    // along x, the garage's whole depth along z. A room needs 1.4 m on both axes; that strip is a wall standing on
+    // the garage's roof edge, not a storey of the garage.
+    const u = sheet(560, 520)
+    walls(u, 40, 40, 291, 379, [{ side: 'S', from: 120, to: 200 }])
+    partition(u, 40, 220, 291, 225)
+    const d = layoutOf([
+      { id: 'g', storey: 'GROUND', raster: houseAndGarage(), chains: groundChains5() },
+      { id: 'u', storey: 'UPPER', raster: u, chains: [chain('ux', 'HORIZONTAL', [40, 292]), chain('uy', 'VERTICAL', [40, 380])] },
+    ])
+    expect(decisionOf(d, 'u')).toBe('STACKED')
+    expect(spans(d)).toEqual(['0,0,12,17 0..1', '12,8,20,17 0..0'])
+    const garage = d.masses.find((m) => massBox(d, m.id)[0] === 12)
+    const over = d.storeyRegistrations[0].relations.filter((r) => r.lowerMassId === garage?.id)
+    expect(over.length).toBeGreaterThan(0)
+    expect(over.every((r) => r.supportStatus === 'INCIDENTAL')).toBe(true)
+  })
+
   it('6. an upper floor over both bodies, as its own plan draws it: both reach the upper storey', () => {
     const u = sheet(560, 520)
     walls(u, 40, 40, 279, 379, [{ side: 'S', from: 120, to: 200 }])
