@@ -101,10 +101,26 @@ describe('005L storey support: the corpus', () => {
     walls(u, 40, 40, 279, 259)
     const d = layoutOf([
       { id: 'g', storey: 'GROUND', raster: g, chains: [chain('gx', 'HORIZONTAL', [40, 280]), chain('gy', 'VERTICAL', [40, 380])] },
-      { id: 'u', storey: 'UPPER', raster: u, chains: [chain('ux', 'HORIZONTAL', [40, 280]), chain('uy', 'VERTICAL', [40, 260])] },
+      // its own depth chain runs the whole building and breaks where its walls stop: it states where it stands
+      { id: 'u', storey: 'UPPER', raster: u, chains: [chain('ux', 'HORIZONTAL', [40, 280]), chain('uy', 'VERTICAL', [40, 260, 380])] },
     ])
     expect(spans(d)).toEqual(['0,0,12,17 0..1'])
     expect(upperRegions(d)).toEqual([[0, 0, 12, 11]])
+  })
+
+  it('2b. inset on one side with nothing stating which side: the ambiguity is named, never guessed', () => {
+    const g = sheet(400, 460)
+    walls(g, 40, 40, 279, 379, [{ side: 'S', from: 120, to: 200 }])
+    const u = sheet(400, 460)
+    walls(u, 40, 40, 279, 259)
+    const d = layoutOf([
+      { id: 'g', storey: 'GROUND', raster: g, chains: [chain('gx', 'HORIZONTAL', [40, 280]), chain('gy', 'VERTICAL', [40, 380])] },
+      // its chains measure only its own walls: flush at the rear or at the front fit the walls the same
+      { id: 'u', storey: 'UPPER', raster: u, chains: [chain('ux', 'HORIZONTAL', [40, 280]), chain('uy', 'VERTICAL', [40, 260])] },
+    ])
+    expect(decisionOf(d, 'u')).toBe('AMBIGUOUS')
+    expect(spans(d)).toEqual(['0,0,12,17 0..0'])
+    expect(d.unresolved.some((x) => x.what.includes('which body the upper storey stands on'))).toBe(true)
   })
 
   it('3. inset on every side: a footprint inside the body on all four', () => {
@@ -114,7 +130,7 @@ describe('005L storey support: the corpus', () => {
     walls(u, 80, 80, 239, 339)
     const d = layoutOf([
       { id: 'g', storey: 'GROUND', raster: g, chains: [chain('gx', 'HORIZONTAL', [40, 280]), chain('gy', 'VERTICAL', [40, 380])] },
-      { id: 'u', storey: 'UPPER', raster: u, chains: [chain('ux', 'HORIZONTAL', [80, 240]), chain('uy', 'VERTICAL', [80, 340])] },
+      { id: 'u', storey: 'UPPER', raster: u, chains: [chain('ux', 'HORIZONTAL', [40, 80, 240, 280]), chain('uy', 'VERTICAL', [40, 80, 340, 380])] },
     ])
     expect(spans(d)).toEqual(['0,0,12,17 0..1'])
     expect(upperRegions(d)).toEqual([[2, 2, 10, 15]])
@@ -127,7 +143,7 @@ describe('005L storey support: the corpus', () => {
     walls(u, 40, 40, 199, 219)
     const d = layoutOf([
       { id: 'g', storey: 'GROUND', raster: g, chains: [chain('gx', 'HORIZONTAL', [40, 440]), chain('gy', 'VERTICAL', [40, 380])] },
-      { id: 'u', storey: 'UPPER', raster: u, chains: [chain('ux', 'HORIZONTAL', [40, 200]), chain('uy', 'VERTICAL', [40, 220])] },
+      { id: 'u', storey: 'UPPER', raster: u, chains: [chain('ux', 'HORIZONTAL', [40, 200, 440]), chain('uy', 'VERTICAL', [40, 220, 380])] },
     ])
     expect(spans(d)).toEqual(['0,0,20,17 0..1'])
     expect(upperRegions(d)).toEqual([[0, 0, 8, 9]])
@@ -288,7 +304,7 @@ describe('005L storey support: the corpus', () => {
     walls(a, 40, 80, 279, 339)
     const d = layoutOf([
       { id: 'g', storey: 'GROUND', raster: g, chains: [chain('gx', 'HORIZONTAL', [40, 280]), chain('gy', 'VERTICAL', [40, 380])] },
-      { id: 'a', storey: 'ATTIC', raster: a, chains: [chain('ax', 'HORIZONTAL', [40, 280]), chain('ay', 'VERTICAL', [80, 340])] },
+      { id: 'a', storey: 'ATTIC', raster: a, chains: [chain('ax', 'HORIZONTAL', [40, 280]), chain('ay', 'VERTICAL', [40, 80, 340, 380])] },
     ])
     expect(d.storeys.map((s) => s.index)).toEqual([0, 1])
     expect(spans(d)).toEqual(['0,0,12,17 0..1'])
@@ -304,7 +320,7 @@ describe('005L storey support: the corpus', () => {
     const a = sheet(400, 460)
     walls(a, 80, 120, 239, 299)
     const d = layoutOf([
-      { id: 'a', storey: 'ATTIC', raster: a, chains: [chain('ax', 'HORIZONTAL', [80, 240]), chain('ay', 'VERTICAL', [120, 300])] },
+      { id: 'a', storey: 'ATTIC', raster: a, chains: [chain('ax', 'HORIZONTAL', [40, 80, 240, 280]), chain('ay', 'VERTICAL', [40, 120, 300, 380])] },
       { id: 'g', storey: 'GROUND', raster: g, chains: [chain('gx', 'HORIZONTAL', [40, 280]), chain('gy', 'VERTICAL', [40, 380])] },
       { id: 'u', storey: 'UPPER', raster: u, chains: [chain('ux', 'HORIZONTAL', [40, 280]), chain('uy', 'VERTICAL', [40, 380])] },
     ])

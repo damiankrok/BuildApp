@@ -855,8 +855,16 @@ export function alignPlans(base: PlanReading, other: PlanReading, options: { max
           const baseOrigin = axis === 'x' ? base.registration!.originPx.x : base.registration!.originPx.y
           return baseOrigin + ((v - origin) * mpp) / baseMpp
         }
-        offsetsX.push({ v: px(source.x0, 'x') - source.x0 * scale, stated: true, why: 'where its own chains put it along x' })
-        offsetsY.push({ v: px(source.y0, 'y') - source.y0 * scale, stated: true, why: 'where its own chains put it along z' })
+        // 005L: two chains' zeros are one line of the building only when both chains measure the whole building
+        // along that axis. A plan that dimensions only its own walls starts its chain at its own face, and taking
+        // that for the face below is the assumption that the storey is flush there, not a reading of where it is.
+        const whole = (axis: 'x' | 'y'): boolean => {
+          const span = (p: PlanReading): number => (axis === 'x' ? width(p.extent) * p.registration!.metresPerPixelX : height(p.extent) * p.registration!.metresPerPixelY)
+          const wallM = base.wallPx * (axis === 'x' ? base.registration!.metresPerPixelX : base.registration!.metresPerPixelY)
+          return Math.abs(span(other) - span(base)) <= Math.max(wallM, 0.01 * span(base))
+        }
+        if (whole('x')) offsetsX.push({ v: px(source.x0, 'x') - source.x0 * scale, stated: true, why: 'where its own chains put it along x' })
+        if (whole('y')) offsetsY.push({ v: px(source.y0, 'y') - source.y0 * scale, stated: true, why: 'where its own chains put it along z' })
       }
       for (const ox of offsetsX) {
         for (const oy of offsetsY) {
