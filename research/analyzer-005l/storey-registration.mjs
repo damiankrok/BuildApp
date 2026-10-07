@@ -56,7 +56,7 @@ function emitted(row) {
 }
 
 const rows = []
-for (const t of trace) {
+for (const t of Array.isArray(trace) ? trace : trace.rows) {
   const storeysDrawn = new Set(t.planFrames.map((f) => f.storey).filter((s) => s && s !== 'UNKNOWN'))
   if (storeysDrawn.size < 2) continue
   rows.push({
