@@ -73,14 +73,16 @@ if (summary && model) {
     const zs = ws.flatMap((w) => [w.start.z, w.end.z])
     return (Math.max(...xs) - Math.min(...xs)) * (Math.max(...zs) - Math.min(...zs))
   }
-  const upperLevels = new Set([...model.levels].sort((a, b) => a.index - b.index).slice(1).map((l) => l.id))
+  // the levels above the ground floor (index 0), never "every level but the lowest": with a basement that would count
+  // the ground floor as an upper storey (005L council C5L-4)
+  const upperLevels = new Set(model.levels.filter((l) => l.index > 0).map((l) => l.id))
   const upperM2 = (model.wallRings ?? []).filter((r) => upperLevels.has(r.levelId)).reduce((a, r) => a + wallRingM2(r), 0)
   const upperRoomsM2 = (pkg?.publishedRooms ?? []).filter((r) => r.storey && r.storey !== 'GROUND' && r.storey !== 'BASEMENT').reduce((a, r) => a + (r.area ?? 0), 0)
   const conditions = {
     storeys: { model: model.levels.length, plans: labelled.size, holds: model.levels.length === labelled.size },
     upperStoreysHoldTheirRooms:
       upperLevels.size === 0 || upperRoomsM2 === 0
-        ? { holds: true, note: upperLevels.size === 0 ? 'no level above the lowest' : 'no room listed above the ground floor' }
+        ? { holds: true, note: upperLevels.size === 0 ? 'no level above the ground floor' : 'no room listed above the ground floor' }
         : { upperRingM2: +upperM2.toFixed(2), publishedUpperRoomsM2: +upperRoomsM2.toFixed(2), holds: upperM2 >= 0.9 * upperRoomsM2 },
     openingsAllBuilt: { holds: !warnings.some((w) => w.code === 'OPENINGS_NOT_BUILT'), message: warnings.find((w) => w.code === 'OPENINGS_NOT_BUILT')?.message ?? null },
     footprint: published === undefined ? { holds: true, builtM2: +footprint.toFixed(2), note: 'no footprint published' } : { builtM2: +footprint.toFixed(2), publishedM2: published, residualPct: +((footprint / published - 1) * 100).toFixed(2), holds: Math.abs(footprint / published - 1) <= 0.06 },

@@ -229,7 +229,9 @@ describe('005L production cannot reach the storey-registration harness, and it c
 
   it('the harness writes its pictures outside the repository only', () => {
     for (const f of ['research/analyzer-005l/look.ts', 'research/analyzer-005l/pair.ts', 'research/analyzer-005l/storey-trace.ts']) {
-      expect(read(f), f).toMatch(/startsWith\('\/home\/user\/BuildApp'\)\) throw new Error\('pictures stay outside the repository'\)/)
+      // the output is resolved before it is checked: a relative path into the repository is refused too (council C5L-6)
+      expect(read(f), f).toMatch(/= (?:arg\('(?:out|look)', ''\) && )?resolve\(arg\('(?:out|look)'/)
+      expect(read(f), f).toMatch(/startsWith\((?:REPO|resolve\(import\.meta\.dirname, '\.\.\/\.\.'\))\)\) throw new Error\('pictures stay outside the repository'\)/)
     }
   })
 

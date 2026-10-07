@@ -278,7 +278,13 @@ if (import.meta.url === `file://${process.argv[1]}`) {
       process.exit(0)
     }
     if (round.stratified) {
-      const planStoreysOf = async (url) => archonPlanStoreys(await (await fetch(url)).text(), url)
+      // the drawn page itself, or nothing: an error page or a redirect elsewhere would read as no storeys and burn the
+      // candidate in silence, so the draw stops instead (005L council C5L-5)
+      const planStoreysOf = async (url) => {
+        const res = await fetch(url, { redirect: 'manual' })
+        if (res.status !== 200) throw new Error(`the drawn page ${url} answered ${res.status}${res.headers.get('location') ? ` → ${res.headers.get('location')}` : ''}: the draw stops, nothing is burned`)
+        return archonPlanStoreys(await res.text(), url)
+      }
       const r = await selectStratified(text, sha, round.label, new Set(exclusions.split('\n').filter(Boolean)), round.stratified, planStoreysOf)
       const line = { at: new Date().toISOString(), label: round.label, excludedFamiliesFile: round.excluded, preHoldoutSha: sha, poolSha256: declared, excludedFamiliesSha256: sha256(exclusions), stratum: round.stratified, ...r, urls: [r.stratified.url, r.unstratified.url], families: [r.stratified.family, r.unstratified.family] }
       appendFileSync(join(root, 'holdout', 'LEDGER.ndjson'), JSON.stringify(line) + '\n')   // append-only, committed after the runs

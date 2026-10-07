@@ -73,6 +73,11 @@ import { dominantTone, lumaAt } from './scan.js'
 // Accepted houses are read exactly as before.
 export const SOLVER_V2_VERSION = '2.3.0' as const
 
+/** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
+const PIECES_MEET_M = 1
+/** 005L: an outer-face plan frame refines the layout's registration only within the agreement its own two axes need. */
+const PLAN_FRAME_SCALE_AGREEMENT = 0.03
+
 export type ReconstructionV2Options = {
   label: string
   slug: string
@@ -385,17 +390,36 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     // footprint over the body is in more than one piece keeps the largest as its own and builds each other piece as a
     // body of its own on that storey.
     const storeyRects: NonNullable<MassV2['storeyRects']> = []
+    // the storey the body's own ring was measured on: its rectangle is the body (council A5L-4, B5L-6 — a storey below
+    // it, a basement, keeps a footprint of its own like any other)
+    const measuredOn = layout.footprintRegions.find((r) => r.id === m.footprintRegionIds[0])?.storeyId
     for (const s of storeys) {
       const storeyId = layout.storeys.find((x) => x.index === s)?.id
       const own = layout.footprintRegions.filter((r) => r.kind === 'BUILT' && r.storeyId === storeyId && m.footprintRegionIds.includes(r.id))
-      if (s === m.storeySpan.fromIndex || own.length === 0) continue
+      if (storeyId === measuredOn || own.length === 0) continue
       const rects = own.map((r) => v2Rect(ringBounds(r.ring)))
       const first = rects[0]
       if (Math.abs(first.x0 - b.x0) > 1e-6 || Math.abs(first.x1 - b.x1) > 1e-6 || Math.abs(first.z0 - z0) > 1e-6 || Math.abs(first.z1 - z1) > 1e-6) storeyRects.push({ storey: s, ...first })
-      rects.slice(1).forEach((r, k) => {
+      // A piece that meets another of the same storey's pieces — an L, a T — is one space with it, and this emitter
+      // builds rectangles with walls all round: two of them would put a wall the plan does not draw across the room,
+      // with a door cut through it (council B5L-5). The largest is built and a meeting piece is named, not invented.
+      const meets = (p: { x0: number; z0: number; x1: number; z1: number }, q: { x0: number; z0: number; x1: number; z1: number }): boolean => {
+        const gapX = Math.max(p.x0 - q.x1, q.x0 - p.x1)
+        const gapZ = Math.max(p.z0 - q.z1, q.z0 - p.z1)
+        return (gapX < PIECES_MEET_M && gapZ < 0) || (gapZ < PIECES_MEET_M && gapX < 0)
+      }
+      const apart: typeof rects = []
+      for (const r of rects.slice(1)) {
+        if ([first, ...apart].some((q) => meets(r, q))) {
+          gap({ what: `the part of storey ${s}'s footprint over ${id} at x ${r.x0.toFixed(2)}–${r.x1.toFixed(2)}, z ${r.z0.toFixed(2)}–${r.z1.toFixed(2)}`, reason: 'the storey stands on this body in more than one rectangle and they meet: it is one space of another shape, which is built here as its largest rectangle only', status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
+          continue
+        }
+        apart.push(r)
+      }
+      apart.forEach((r, k) => {
         const pid = `${id}-s${s}-${k + 1}`
         const pf = feature('MASS', pid, { width: { value: r.x1 - r.x0, low: r.x1 - r.x0 - 0.05, high: r.x1 - r.x0 + 0.05 }, depth: { value: r.z1 - r.z0, low: r.z1 - r.z0 - 0.05, high: r.z1 - r.z0 + 0.05 } }, [], 'SOURCE_DERIVED', `a separate piece of storey ${s}'s footprint over ${id}, from its own walled region on that storey's plan`, { uncertaintyM: 0.1 })
-        pieces.push({ id: pid, role: 'ATTACHED', ...r, storeys: [s], featureId: pf, sourceMassId: m.id })
+        pieces.push({ id: pid, role: 'ATTACHED', ...r, storeys: [s], featureId: pf, sourceMassId: m.id, pieceOf: id })
       })
     }
     return { id, role: m.role === 'MAIN' ? 'MAIN' : 'ATTACHED', x0: round6(b.x0), z0: round6(z0), x1: round6(b.x1), z1: round6(z1), storeys, featureId, sourceMassId: m.id, ...(storeyRects.length > 0 ? { storeyRects } : {}) }
@@ -407,14 +431,24 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // Levels.
   const ridgeY = levels.topDatum
   const levelsV2: BuildingV2['levels'] = []
-  const elevationAt = (i: number): number => levels.floors[i] ?? round6((levels.floors[levels.floors.length - 1] ?? 0) + CONVENTIONS.storeyHeight * (i - levels.floors.length + 1))
-  main.storeys.forEach((index, i) => {
-    const elevation = elevationAt(i)
+  // 005L (council B5L-6): a storey's datum is found by its index from the ground floor's, not by its place in the
+  // main body's list — a basement below the ground floor is not the ground floor's datum — and the levels are every
+  // body's storeys, not the main body's alone: a basement under the garage is a level too.
+  const groundAt = Math.max(0, levels.floors.findIndex((v) => Math.abs(v) < 0.05))
+  const datumOf = (s: number): number => {
+    const k = groundAt + s
+    if (k >= 0 && k < levels.floors.length) return levels.floors[k]
+    if (k < 0) return round6((levels.floors[0] ?? 0) - CONVENTIONS.storeyHeight * -k)
+    return round6((levels.floors[levels.floors.length - 1] ?? 0) + CONVENTIONS.storeyHeight * (k - levels.floors.length + 1))
+  }
+  const levelStoreys = [...new Set(masses.flatMap((m) => m.storeys))].sort((a, b) => a - b)
+  levelStoreys.forEach((index, i) => {
+    const elevation = datumOf(index)
     // A storey's walls stop at the floor of the storey above. A section that prints one floor, the eaves and the
     // ridge states the TOP storey's wall height; when the plans show a storey over that floor, the eaves are that
     // storey's, and the one below it rises only to where the storey above begins.
-    const above = i + 1 < main.storeys.length ? elevationAt(i + 1) : undefined
-    const printed = levels.heights[i] ?? CONVENTIONS.storeyHeight
+    const above = i + 1 < levelStoreys.length ? datumOf(levelStoreys[i + 1]) : undefined
+    const printed = levels.heights[groundAt + index] ?? CONVENTIONS.storeyHeight
     const stated = above !== undefined && printed > above - elevation + 1e-6 ? round6(above - elevation) : printed
     const pitched = layout.roofSupports.some((r) => r.massId === main.sourceMassId && r.kind !== 'FLAT' && r.kind !== 'UNKNOWN')
     const height = index === topStorey && pitched && ridgeY !== undefined && ridgeY > elevation + stated ? round6(ridgeY - elevation) : round6(stated)
@@ -427,7 +461,9 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // Plan frames per storey.
   const planFrames: PlanFrameV2[] = []
   const planByStorey = new Map<number, { plan: PlanReading; frame: PlanFrameV2; raster: Raster }>()
-  const storeyIndexOf = (plan: PlanReading): number => ({ BASEMENT: -1, GROUND: 0, UPPER: 1, ATTIC: 1, ROOF: 2 })[plan.storey] ?? 0
+  // 005L (council B5L-2): the storey a plan is of is the layout's, which ranks the storeys the plans show — an attic
+  // over an upper floor is storey 2, not 1.
+  const storeyIndexOf = (plan: PlanReading): number => draft.storeys.find((x) => x.frameIds.includes(plan.frame.id))?.index ?? ({ BASEMENT: -1, GROUND: 0, UPPER: 1, ATTIC: 1, ROOF: 2 })[plan.storey] ?? 0
   for (const plan of draft.plans) {
     const raster = options.raster(plan.frame)
     if (!raster) continue
@@ -439,9 +475,14 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       // The body this storey covers: the mass reaching it with the largest area.
       // 005L: what this storey's walls stand on is its own footprint, which need not be the whole of any body.
       const covers = masses.filter((m) => m.storeys.includes(index)).map((m) => rectAt(m, index)).sort((a, b) => (b.x1 - b.x0) * (b.z1 - b.z0) - (a.x1 - a.x0) * (a.z1 - a.z0))[0] ?? main
-      frame = planFrameByOuterFaces(plan, index, world, { x0: covers.x0, z0: covers.z0, x1: covers.x1, z1: covers.z1 }, raster)
-      why = frame ? frame.why : 'no outer faces found'
-      if (!frame) frame = planFrameV2(plan, index, world, draft)
+      const byFaces = planFrameByOuterFaces(plan, index, world, { x0: covers.x0, z0: covers.z0, x1: covers.x1, z1: covers.z1 }, raster)
+      const aligned = planFrameV2(plan, index, world, draft)
+      // 005L (council B5L-5): the layout's registration says where this plan sits; the outer faces refine it only where
+      // they agree with it in scale. Faces fitted to the wrong rectangle — the whole of an L outline put on one leg of
+      // it — agree with themselves on both axes and are still wrong by the L.
+      const agrees = !aligned || !byFaces || Math.abs(byFaces.mppX / aligned.mppX - 1) <= PLAN_FRAME_SCALE_AGREEMENT
+      frame = byFaces && agrees ? byFaces : aligned
+      why = byFaces && agrees ? byFaces.why : byFaces ? `its outer wall faces would put it at ${byFaces.mppX} m/px against the ${aligned?.mppX} m/px its registration onto the plan below states; the registration stands` : 'no outer faces found'
     }
     if (!frame) {
       gap({ what: `a registration for the storey ${index} plan`, reason: 'neither its chains, its outer faces nor an alignment onto the base plan fixed a scale for it', status: 'MISSING', observationIds: [], evidenceIds: [] })
@@ -821,11 +862,14 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     if (sectionReg) step({ stage: 'registration', what: 'section registered by its wall columns', method: 'DIRECT', detail: `${sectionReg.mpp.toFixed(6)} m/px, a cross-section along ${sectionReg.axis}`, inputs: 1, outputs: 1 })
   }
   const pitchedAttachedRoofs: BuildingV2['pitchedAttachedRoofs'] = []
-  for (const m of masses.filter((x) => x.role === 'ATTACHED')) {
-    const sup = layout.roofSupports.find((r) => r.massId === m.sourceMassId)
+  for (const whole of masses.filter((x) => x.role === 'ATTACHED')) {
+    const sup = layout.roofSupports.find((r) => r.massId === whole.sourceMassId)
     if (sup && sup.kind !== 'FLAT' && sup.kind !== 'UNKNOWN') continue
-    const l = levelOf(Math.max(...m.storeys))
+    const l = levelOf(Math.max(...whole.storeys))
     if (!l) continue
+    // 005L (council B5L-4): the roof is over the top storey's own footprint. Where that storey stands on part of the
+    // body only, the rest is covered by that storey's floor, the body's slab: a terrace, not a roof at the top's height.
+    const m = { ...whole, ...rectAt(whole, Math.max(...whole.storeys)) }
     // The layout took this body's roof as flat by convention: the plans cannot
     // say otherwise. The elevations can, where they see the body against the sky.
     if (views.length > 0) {

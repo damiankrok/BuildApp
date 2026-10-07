@@ -19,8 +19,8 @@ const arg = (name: string, fallback: string): string => {
   const i = process.argv.indexOf(`--${name}`)
   return i >= 0 ? process.argv[i + 1] : fallback
 }
-const out = arg('out', '')
-if (!out || out.startsWith('/home/user/BuildApp')) throw new Error('pictures stay outside the repository')
+const out = arg('out', '') && resolve(arg('out', ''))
+if (!out || out.startsWith(resolve(import.meta.dirname, '../..'))) throw new Error('pictures stay outside the repository')
 type Row = { row: string; cache: string; inputs: { package: string; graph: string; metrics: string }; dropFrames?: string[] }
 const row = (JSON.parse(readFileSync(join(REPO, 'research/analyzer-005l/rows.json'), 'utf8')) as { rows: Row[] }).rows.find((r) => r.row === arg('row', ''))
 if (!row) throw new Error('no row')

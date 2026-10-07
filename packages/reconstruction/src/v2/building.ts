@@ -32,6 +32,11 @@ export type MassV2 = {
    * — given apart. A storey not listed here stands on the whole body. The body's rectangle is its lowest storey's.
    */
   storeyRects?: Array<{ storey: number; x0: number; z0: number; x1: number; z1: number }>
+  /**
+   * 005L: a separate piece of one storey's footprint over another body (`sourceMassId`), standing on that body's floor:
+   * it has walls of its own on that storey and no slab — its floor is the body's, the ceiling of the storey below.
+   */
+  pieceOf?: string
 }
 
 /** The rectangle a body's walls enclose on one storey: its own footprint there, or the body's (005L). */

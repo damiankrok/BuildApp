@@ -7,6 +7,7 @@
  * The picture is publisher-derived and is written outside the repository only; nothing here is committed but code.
  */
 import { readFileSync, writeFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 import { decodeImage, fileByteCache } from '@buildapp/source-package'
 import type { SourcePackage } from '@buildapp/source-package'
 import type { SourceObservationGraph } from '@buildapp/source-observations'
@@ -17,8 +18,8 @@ const arg = (name: string): string => {
   if (i < 0) throw new Error(`--${name} is required`)
   return process.argv[i + 1]
 }
-const out = arg('out')
-if (out.startsWith('/home/user/BuildApp')) throw new Error('pictures stay outside the repository')
+const out = resolve(arg('out'))
+if (out.startsWith(resolve(import.meta.dirname, '../..'))) throw new Error('pictures stay outside the repository')
 const pkg = JSON.parse(readFileSync(arg('package'), 'utf8')) as SourcePackage
 const graph = JSON.parse(readFileSync(arg('graph'), 'utf8')) as SourceObservationGraph
 const frame = graph.coordinateFrames.find((f) => f.id === arg('frame'))

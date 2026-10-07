@@ -81,3 +81,73 @@ export function ringsByLevel(model: CanonicalBuildingModel): Map<number, Box[]> 
   }
   return out
 }
+
+// ---------------------------------------------------------------------------------------------------------------------
+// 005L council B: houses the emission fixtures did not cover (made up here, as above)
+// ---------------------------------------------------------------------------------------------------------------------
+
+/** The upper storey set back 2.4 m from the WEST wall, with windows of its own on that inset wall, its front and rear. */
+export const INSET_WEST: SyntheticHouse = {
+  name: 'Inset west',
+  frame: 'MODEL',
+  width: 9.6,
+  depth: 8.4,
+  wallThickness: 0.4,
+  storeys: twoStoreys,
+  roof: { pitchDeg: 35, overhang: 0, ridgeAxis: 'Z' },
+  openings: [door(1.0), window_(4.4, 1.6), window_(2.0, 1.2, 0, 'LEFT'), window_(5.0, 1.3, 1), window_(3.0, 1.2, 1, 'LEFT'), window_(6.0, 1.2, 1, 'REAR')],
+  members: [],
+  chainsX: [9.6],
+  chainsZ: [8.4],
+  upperInset: { minX: 2.4 },
+  upperChainsX: [7.2],
+  upperChainsZ: [8.4],
+  partitions: [0, 1].map((storey) => ({ storey, axis: 'Z' as const, at: 6.0, from: 0.4, to: 8.0, thickness: 0.24, doors: [{ at: 4.0, width: 0.9 }] })),
+}
+
+/** A two-storey house with a one-storey wing, the house's upper storey set back 2.4 m from the rear. */
+export const L_TWO_MASSES: SyntheticHouse = { ...HOUSE_AND_WING_UP, name: 'L upper over two bodies', upperInset: { minZ: 2.4 }, upperChainsZ: [7.6] }
+
+/** Ground, upper (the whole box) — and, apart, an attic plan (`THREE_ATTIC_PLAN`) set back 2.4 m front and rear. */
+export const THREE: SyntheticHouse = {
+  ...INSET_REAR,
+  name: 'Three storeys',
+  storeys: [...twoStoreys, { name: 'attic', height: 2.4 }],
+  upperInset: undefined,
+  upperChainsZ: [8.4],
+  openings: [door(1.0), window_(4.4, 1.6), window_(1.6, 1.3, 1), window_(5.6, 1.3, 1), window_(2.0, 1.2, 1, 'LEFT')],
+  partitions: [0, 1].map((storey) => ({ storey, axis: 'X' as const, at: 3.0, from: 0.4, to: 9.2, thickness: 0.24, doors: [{ at: 4.0, width: 0.9 }] })),
+}
+export const THREE_ATTIC_PLAN: SyntheticHouse = {
+  ...INSET_REAR,
+  name: 'attic plan',
+  upperInset: { minZ: 2.4, maxZ: 2.4 },
+  upperChainsZ: [3.6],
+  openings: [window_(4.0, 1.0, 1)],
+  partitions: [{ storey: 1, axis: 'X' as const, at: 3.0, from: 0.4, to: 9.2, thickness: 0.24, doors: [{ at: 4.0, width: 0.9 }] }],
+}
+
+/** A two-storey house with a bearing wall 2.0 m behind the front on both storeys... */
+export const WITH_BASEMENT: SyntheticHouse = { ...INSET_REAR, name: 'House over a partial basement', upperInset: undefined, upperChainsZ: [8.4], partitions: [0, 1].map((storey) => ({ storey, axis: 'X' as const, at: 2.0, from: 0.4, to: 9.2, thickness: 0.24, doors: [{ at: 4.0, width: 0.9 }] })) }
+/** ...and a basement under its front 5.4 m only, the same bearing wall drawn on it. */
+export const BASEMENT_PLAN: SyntheticHouse = { ...INSET_REAR, name: 'basement plan', depth: 5.4, chainsZ: [5.4], upperInset: undefined, upperChainsZ: [5.4], openings: [window_(2.0, 1.0, 0)], partitions: [{ storey: 0, axis: 'X' as const, at: 2.0, from: 0.4, to: 9.2, thickness: 0.24, doors: [{ at: 4.0, width: 0.9 }] }] }
+
+/** A house and a one-storey garage (4.0 × 5.2 m)... */
+export const GARAGE_HOUSE: SyntheticHouse = {
+  name: 'House and garage',
+  frame: 'MODEL',
+  width: 8.4,
+  depth: 7.6,
+  wallThickness: 0.4,
+  storeys: twoStoreys,
+  roof: { pitchDeg: 38, overhang: 0, ridgeAxis: 'Z' },
+  openings: [door(1.0), window_(4.4, 1.6), window_(1.4, 1.3, 1), window_(5.2, 1.3, 1)],
+  members: [],
+  chainsX: [8.4, 4.0],
+  chainsZ: [7.6],
+  upperChainsX: [8.4],
+  upperChainsZ: [7.6],
+  wings: [{ name: 'garage', width: 4.0, depth: 5.2, offsetZ: 0, storeys: 1, roof: 'FLAT', openings: [window_(3.2, 1.2, 0, 'RIGHT')] }],
+}
+/** ...and a basement under the garage only. */
+export const GARAGE_BASEMENT_PLAN: SyntheticHouse = { ...INSET_REAR, name: 'garage basement', width: 4.0, depth: 5.2, chainsX: [4.0], chainsZ: [5.2], upperInset: undefined, upperChainsX: [4.0], upperChainsZ: [5.2], roof: { pitchDeg: 30, overhang: 0, ridgeAxis: 'X' }, openings: [window_(1.0, 1.0, 0)], partitions: [{ storey: 0, axis: 'Z' as const, at: 2.0, from: 0.4, to: 4.8, thickness: 0.24, doors: [] }] }

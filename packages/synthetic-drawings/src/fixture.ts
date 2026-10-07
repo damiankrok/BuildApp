@@ -136,7 +136,7 @@ export type SyntheticSheet = {
   /** The role a publisher's page would have implied. */
   document: 'FLOOR_PLAN' | 'ELEVATION' | 'SECTION'
   view: 'FRONT' | 'REAR' | 'SIDE_UNSPECIFIED' | 'NOT_APPLICABLE'
-  storey: 'GROUND' | 'UPPER' | 'NOT_APPLICABLE'
+  storey: 'GROUND' | 'UPPER' | 'ATTIC' | 'BASEMENT' | 'NOT_APPLICABLE'
   /** A stable name, used as the asset's URL path so a package can be built from it. */
   slug: string
   width: number

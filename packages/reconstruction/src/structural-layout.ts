@@ -459,20 +459,23 @@ export const relationsOf = (set: StructuralLayoutHypothesisSet, id: string): Att
 
 /** The rectangle a ring sits in, which is diagnostic and — §4 — never a mass on its own. */
 /**
- * The storey the building stands at: the lowest one, unless that is a storey
- * below the ground floor with no footprint.
+ * The storey the building stands at: the ground floor, or the lowest storey
+ * above it; a storey below the ground floor only where there is none.
  *
  * A basement plan that registered onto nothing — a sheet the chains could not
  * scale — says where nothing is, so it cannot fix the world frame or carry the
  * footprint the publisher's figure is checked against; the ground floor above
- * it does. A ground or upper storey with no footprint is not skipped: the
- * building stands on it, and leaving it out would build the storeys above it
- * as the whole house.
+ * it does. 005L (council A5L-4): a basement that did register carries its own
+ * footprint, which may be part of the house only — under its rear half, under
+ * the garage — and that is not the building the world frame and the published
+ * footprint are measured on either. A ground or upper storey with no footprint
+ * is not skipped: the building stands on it, and leaving it out would build the
+ * storeys above it as the whole house.
  */
 export function groundStoreyOf<S extends { id: string; index: number }>(storeys: readonly S[], regions: readonly { storeyId: string; kind: string }[]): S | undefined {
   const withBuilt = new Set(regions.filter((r) => r.kind === 'BUILT').map((r) => r.storeyId))
   const ordered = [...storeys].sort((a, b) => a.index - b.index)
-  return ordered.find((s) => s.index >= 0 || withBuilt.has(s.id)) ?? ordered[0]
+  return ordered.find((s) => s.index >= 0) ?? ordered.find((s) => withBuilt.has(s.id)) ?? ordered[0]
 }
 
 export function ringBounds(ring: PlanRing): { x0: number; z0: number; x1: number; z1: number } {

@@ -35,8 +35,8 @@ type Row = { row: string; cache: string; inputs: { package: string; graph: strin
 const rows = (JSON.parse(readFileSync(resolve(arg('rows', join(REPO, 'research/analyzer-005l/rows.json'))), 'utf8')) as { rows: Row[] }).rows
 const only = arg('only', '')
 // --look <dir>: for a developer's eyes, the base plan with the chosen alignment drawn on it (outside the repository only)
-const lookDir = arg('look', '')
-if (lookDir.startsWith('/home/user/BuildApp')) throw new Error('pictures stay outside the repository')
+const lookDir = arg('look', '') && resolve(arg('look', ''))
+if (lookDir && lookDir.startsWith(REPO)) throw new Error('pictures stay outside the repository')
 function lookAt(name: string, raster: Raster, lines: Array<{ axis: 'VERTICAL' | 'HORIZONTAL'; at: number; from: number; to: number; rgb: [number, number, number] }>, rects: Array<{ r: PixelRect; rgb: [number, number, number] }>): void {
   if (!lookDir) return
   mkdirSync(lookDir, { recursive: true })
@@ -124,7 +124,15 @@ for (const row of rows) {
     const targets = alignmentTargets(base)
     const { best, considered } = alignPlans(base, plan)
     rec.alignmentTargets = targets.map((t) => ({ id: t.id, rect: rr(t.rect) }))
-    rec.alignmentCandidates = considered.map((c) => ({ targetId: c.targetId, scale: c.scale, offsetX: c.offsetX, offsetY: c.offsetY, agreement: c.agreement, stated: c.stated, score: c.score, coveragePrior: round6((c.score - c.agreement - (c.stated ? 0.03 : 0)) / 0.15), placedRect: c.placedRect }))
+    const sharesOf = (c: PlanAlignment): number | null => (c as { shares?: number }).shares ?? null
+    rec.alignmentCandidates = considered.map((c) => ({ targetId: c.targetId, scale: c.scale, offsetX: c.offsetX, offsetY: c.offsetY, agreement: c.agreement, shares: sharesOf(c), stated: c.stated, score: c.score, placedRect: c.placedRect, why: c.why }))
+    // the scale both plans print, where both do: what a placement at it shares, against the best fit (005L council A5L-1)
+    if (base.registration && plan.registration) {
+      const k = (plan.registration.metresPerPixelX / base.registration.metresPerPixelX + plan.registration.metresPerPixelY / base.registration.metresPerPixelY) / 2
+      const atStated = considered.filter((c) => Math.abs(c.scale / k - 1) <= 0.005)
+      const best = considered[0]
+      rec.statedScale = { k: round6(k), baseAnchors: base.registration.anchors?.length ?? null, otherAnchors: plan.registration.anchors?.length ?? null, otherRmsM: plan.registration.residual.rmsM, bestScale: best?.scale ?? null, bestShares: best ? sharesOf(best) : null, bestAtStated: atStated[0] ? { scale: atStated[0].scale, shares: sharesOf(atStated[0]), score: atStated[0].score, why: atStated[0].why } : null, candidatesAtStated: atStated.length }
+    }
     rec.alignmentCandidateCount = considered.length
     const chosen = draft.alignments.get(plan.frame.id)
     rec.chosen = chosen ? { targetId: chosen.targetId, scale: chosen.scale, offsetX: chosen.offsetX, offsetY: chosen.offsetY, agreement: chosen.agreement, stated: chosen.stated, score: chosen.score, why: chosen.why } : null

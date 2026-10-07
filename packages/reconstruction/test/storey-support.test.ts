@@ -197,7 +197,8 @@ describe('005L storey support: the corpus', () => {
     expect(upperRegions(d)).toEqual([[0, 0, 8, 9]])
     const rel = d.storeyRegistrations[0].relations.find((r) => r.supportStatus === 'SUPPORTS')
     expect(rel?.lowerCoveredShare).toBeLessThan(0.5)
-    expect(rel?.upperSupportedShare).toBeCloseTo(1, 2)
+    // carried entirely: the region is measured to its walls' outer faces, a few centimetres past the grid line
+    expect(rel?.upperSupportedShare).toBeGreaterThan(0.98)
   })
 
   it('5. a house and a one-storey garage, the upper floor over the house: the garage stays one storey', () => {

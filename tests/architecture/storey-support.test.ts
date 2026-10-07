@@ -17,7 +17,7 @@ import { readFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { decodeImage } from '@buildapp/source-package'
-import { composeStructuralLayout, levelsFrom, reconstructV2 } from '@buildapp/reconstruction'
+import { LAYOUT_OPTION_KEYS, composeStructuralLayout, inferStructuralLayout, levelsFrom, reconstructV2 } from '@buildapp/reconstruction'
 import { buildFixture } from '../../packages/reconstruction/test/pipeline.js'
 import { HOUSE_AND_GARAGE, INSET_REAR, ringsByLevel } from '../../packages/reconstruction/test/storey-houses.js'
 
@@ -36,7 +36,7 @@ const numbersIn = (code: string): string[] => [...new Set([...withoutStrings(cod
 
 const LAYOUT = 'packages/reconstruction/src/layout.ts'
 /** The functions that register a plan onto another and decide what each of its walled regions stands on. */
-const REGISTRATION = ['alignPlans', 'matchedLength', 'axisMatch', 'outerWallAxes', 'largestBuilt', 'upperBodiesOf', 'storeySupportOf', 'sameSupport', 'wallsBeyond']
+const REGISTRATION = ['alignPlans', 'matchedLength', 'axisMatch', 'outerWallAxes', 'largestBuilt', 'minBodySpanM', 'upperBodiesOf', 'storeySupportOf', 'onlySeams', 'sameSupport', 'wallsBeyond', 'layoutOptionsOnly']
 /** The support decision inside the layout pass. */
 const supportSection = (): string => {
   const code = codeOf(read(LAYOUT))
@@ -46,7 +46,7 @@ const supportSection = (): string => {
 /** What a registration or a support decision may never be read from (§14). Matched on code, comments and strings removed. */
 const FORBIDDEN = /publish|footprint_area|rooms?List|publishedRooms|storeyCount|expected|verdict|truth|oracle|holdout|blind|benchmark|archon|dobredomy|projektydomow|\bslug\b|sourcePackage|modelHash|labelled|levels\.floors|gate\.status/i
 /** Development and blind houses by name, the 005K fresh projects by id included. */
-const HOUSES = /gozdzik|cyklamen|marcowk|rarytas|kosac|jarzab|arkadi|azali|helikon|morel|zurawk|miranda|modrzew|modrzyk|jablonk|dabecj|tunbergi|milorzeb|\baster\b|galaktyk|eoze|bratk|willa|jarzmian|arlet|\b[AD]0\d\b/i
+const HOUSES = /gozdzik|cyklamen|marcowk|rarytas|kosac|jarzab|arkadi|azali|helikon|morel|zurawk|miranda|modrzew|modrzyk|jablonk|dabecj|tunbergi|milorzeb|\baster(?:[\s-]?viii)?\b|galaktyk|eoze|bratk|willa|jarzmian|arlet|goldstar|czosn|ligol|wrzos|\bmaja\b|\b[AD]0\d\b/i
 
 describe('005L §14 registration and support read the drawings only', () => {
   it('the layout pass imports pixel types, the common helpers, the metric shapes and its own reconstruction modules — nothing published', () => {
@@ -68,6 +68,18 @@ describe('005L §14 registration and support read the drawings only', () => {
     const code = read(LAYOUT)
     const options = code.slice(code.indexOf('export type StructuralLayoutOptions'), code.indexOf('/** The ink, wall bands and wall thickness of one plan copy'))
     expect(codeOf(options).match(/publish|footprint|area|room|storeyCount|expected|verdict/i)).toBeNull()
+    // and whatever a caller spreads into them, the pass keeps only its own keys before it reads anything (C5L-1)
+    expect(codeOf(bodyOf(code, 'inferStructuralLayout')).split('\n')[1]).toMatch(/const options = layoutOptionsOnly\(given\)/)
+  })
+
+  it('the structural pass reads the published figures only to hand them to the gate, and v2 builds a storey without them (C5L-1)', () => {
+    const structural = codeOf(read('packages/reconstruction/src/structural.ts'))
+    const uses = [...structural.matchAll(/^.*publish.*$/gim)].map((m) => m[0].trim())
+    expect(uses).toEqual(["import type { PublishedArea } from './layout-gate.js'", 'publishedAreas?: readonly PublishedArea[]', 'publishedAreas: options.publishedAreas,'])
+    const v2 = codeOf(read('packages/reconstruction/src/v2/reconstruct-v2.ts'))
+    const masses = v2.slice(v2.indexOf('const storeyRects:'), v2.indexOf('masses.push(...pieces)'))
+    expect(masses.length).toBeGreaterThan(0)
+    expect(withoutStrings(masses).match(FORBIDDEN)).toBeNull()
   })
 })
 
@@ -75,22 +87,26 @@ describe('005L §22 M4/M7 registration and support have no special cases', () =>
   it('their numbers are a frozen set: conventions and named constants, nothing that fits a sheet', () => {
     const code = codeOf(read(LAYOUT))
     // (1e-6 and 1e-9 read as their digits: the floor below which two scores or areas are one)
+    // (a half — of a side, of a region — and a perimeter's 2 are conventions; 1e-6 reads as 6)
     const frozen: Record<string, string[]> = {
       alignPlans: ['0', '0.01', '0.03', '0.15', '1', '1.15', '2', '2.5', '3', '9'],
       matchedLength: ['0', '0.5', '1'],
       axisMatch: ['0'],
       outerWallAxes: ['0', '1', '2'],
       largestBuilt: ['0'],
-      upperBodiesOf: ['0', '1'],
-      storeySupportOf: ['0', '1', '2', '6', '9'],
-      sameSupport: ['0'],
-      wallsBeyond: ['0', '2'],
+      minBodySpanM: ['0.2', '1', '2'],
+      upperBodiesOf: ['0', '0.5', '1', '2'],
+      storeySupportOf: ['0', '0.5', '1', '6', '9'],
+      onlySeams: ['0', '1', '2'],
+      sameSupport: [],
+      wallsBeyond: ['0', '6'],
+      layoutOptionsOnly: [],
     }
     for (const name of REGISTRATION) expect(numbersIn(bodyOf(code, name)), name).toEqual(frozen[name])
     expect(numbersIn(supportSection())).toEqual(['0', '0.3', '0.7', '0.9', '1', '2', '4'])
     // the named constants, by value: changing one is a decision the report has to argue
     const constant = (n: string): string => (code.match(new RegExp(`const ${n} = ([\\d.e-]+)`)) ?? [])[1]
-    expect(Object.fromEntries(['FACADE_WALL_SHARE', 'OUTER_WALLS_PER_END', 'MIN_WALL_PAIR_SPAN_WALLS', 'MAX_WALL_PAIR_SCALE', 'WALL_PAIR_SCALE_AGREEMENT', 'SAME_SCALE_OFFSETS_PER_AXIS', 'STATED_HOLDS_SHARE', 'STOREY_RIVAL_WINDOW', 'STOREY_RIVALS_WEIGHED', 'STOREY_TIE', 'SAME_SUPPORT_IOU', 'MIN_MASS_WALL_FRACTION'].map((n) => [n, constant(n)]))).toEqual({
+    expect(Object.fromEntries(['FACADE_WALL_SHARE', 'OUTER_WALLS_PER_END', 'MIN_WALL_PAIR_SPAN_WALLS', 'MAX_WALL_PAIR_SCALE', 'WALL_PAIR_SCALE_AGREEMENT', 'SAME_SCALE_OFFSETS_PER_AXIS', 'STATED_HOLDS_SHARE', 'STOREY_RIVAL_WINDOW', 'STOREY_RIVALS_WEIGHED', 'STOREY_TIE', 'STOREY_WALL_SHARE', 'MIN_MASS_WALL_FRACTION'].map((n) => [n, constant(n)]))).toEqual({
       FACADE_WALL_SHARE: '0.25',
       OUTER_WALLS_PER_END: '4',
       MIN_WALL_PAIR_SPAN_WALLS: '4',
@@ -101,7 +117,7 @@ describe('005L §22 M4/M7 registration and support have no special cases', () =>
       STOREY_RIVAL_WINDOW: '0.1',
       STOREY_RIVALS_WEIGHED: '24',
       STOREY_TIE: '1e-6',
-      SAME_SUPPORT_IOU: '0.7',
+      STOREY_WALL_SHARE: '0.75',
       MIN_MASS_WALL_FRACTION: '0.35',
     })
   })
@@ -131,12 +147,32 @@ describe('005L §14 a published figure or a room list cannot move a storey (exec
     expect(decided(runWith(undefined))).toBe(decided(runWith(truth)))
   }, 120_000)
 
-  it('a room list claiming a third storey, or none at all, leaves the emitted storeys and their rings as they were', async () => {
+  it('a room list claiming a third storey, more upstairs than the inset storey holds, or none at all, leaves the emitted storeys and their rings as they were', async () => {
     const fx = await buildFixture(INSET_REAR)
-    const runWith = (rooms: ReadonlyArray<{ storey: string; index: number; label: string; area: number }>) =>
-      reconstructV2({ label: 'decoy', slug: 'decoy', sourcePackageId: fx.pkg.id, sourcePackageHash: fx.pkg.contentHash, graph: fx.graph, metrics: fx.metrics, raster: raster(fx), publishedRooms: rooms })
+    const runWith = (rooms: ReadonlyArray<{ storey: string; index: number; label: string; area: number }>, areas?: Array<{ key: string; label: string; unit: 'm2'; value: number }>) =>
+      reconstructV2({ label: 'decoy', slug: 'decoy', sourcePackageId: fx.pkg.id, sourcePackageHash: fx.pkg.contentHash, graph: fx.graph, metrics: fx.metrics, raster: raster(fx), publishedRooms: rooms, ...(areas ? { publishedAreas: areas } : {}) })
     const shape = (r: ReturnType<typeof runWith>): string => JSON.stringify({ levels: r.model.levels.map((l) => l.index), rings: [...ringsByLevel(r.model)] })
     const plain = shape(runWith([]))
     expect(shape(runWith([{ storey: 'GROUND', index: 1, label: 'Pokój', area: 20 }, { storey: 'UPPER', index: 2, label: 'Pokój', area: 20 }, { storey: 'ATTIC', index: 3, label: 'Pokój', area: 20 }]))).toBe(plain)
+    // a room list the inset storey cannot hold — what a leak that copies the ground ring upstairs would read
+    expect(shape(runWith([{ storey: 'GROUND', index: 1, label: 'Salon', area: 70 }, { storey: 'ATTIC', index: 2, label: 'Sypialnia', area: 75 }]))).toBe(plain)
+    expect(shape(runWith([], [{ key: 'usable_area', label: 'usable', unit: 'm2', value: 160 }, { key: 'footprint_area', label: 'footprint', unit: 'm2', value: 80.6 }]))).toBe(plain)
+  }, 120_000)
+
+  it('the layout pass reads no option but its own: run with every other key a trap, it decides exactly as without them (C5L-1)', async () => {
+    const fx = await buildFixture(HOUSE_AND_GARAGE)
+    const section = fx.graph.coordinateFrames.find((f) => f.roles.projection === 'ORTHOGRAPHIC_SECTION')
+    const base = { slug: 'trap', sourcePackageId: fx.pkg.id, sourcePackageHash: fx.pkg.contentHash, graph: fx.graph, metrics: fx.metrics, raster: raster(fx) }
+    const read: string[] = []
+    const trapped = new Proxy({ ...base, publishedAreas: [{ key: 'footprint_area', label: 'footprint', unit: 'm2', value: 1 }], publishedRooms: [{ storey: 'ATTIC', index: 1, label: 'x', area: 999 }], levels: levelsFrom(fx.metrics, section?.id) } as Record<string, unknown>, {
+      get(target, key, receiver) {
+        if (typeof key === 'string' && !(LAYOUT_OPTION_KEYS as readonly string[]).includes(key)) read.push(key)
+        return Reflect.get(target, key, receiver)
+      },
+    })
+    const decided = (d: ReturnType<typeof inferStructuralLayout>): string => JSON.stringify({ spans: d.masses.map((m) => [m.id, m.storeySpan]), regs: d.storeyRegistrations, footprints: d.footprintRegions.map((f) => [f.id, f.ring]) })
+    const withTraps = decided(inferStructuralLayout(trapped as unknown as Parameters<typeof inferStructuralLayout>[0]))
+    expect(read).toEqual([])
+    expect(withTraps).toBe(decided(inferStructuralLayout(base)))
   }, 120_000)
 })

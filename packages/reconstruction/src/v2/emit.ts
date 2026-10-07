@@ -169,10 +169,12 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       // outline.
       const bearsOnWalls = storey !== Math.min(...m.storeys)
       const inset = bearsOnWalls ? round6(b.wallThicknessM) : 0
-      const slabPolygon = inset > 0 ? [{ x: round6(m.x0 + inset), z: round6(m.z0 + inset) }, { x: round6(m.x1 - inset), z: round6(m.z0 + inset) }, { x: round6(m.x1 - inset), z: round6(m.z1 - inset) }, { x: round6(m.x0 + inset), z: round6(m.z1 - inset) }] : body
+      // the lowest storey's floor is its own footprint (council B5L-6: a partial basement's floor is under the basement only)
+      const slabPolygon = inset > 0 ? [{ x: round6(m.x0 + inset), z: round6(m.z0 + inset) }, { x: round6(m.x1 - inset), z: round6(m.z0 + inset) }, { x: round6(m.x1 - inset), z: round6(m.z1 - inset) }, { x: round6(m.x0 + inset), z: round6(m.z1 - inset) }] : polygon
       // A stair void that reaches a wall ends at the wall's inner face: the slab is not there to be cut.
       const clippedHoles = holes?.map((h) => h.map((p) => ({ x: round6(Math.min(Math.max(p.x, m.x0 + inset), m.x1 - inset)), z: round6(Math.min(Math.max(p.z, m.z0 + inset), m.z1 - inset)) })))
-      push({ type: 'createSlab', id: `slab-${m.id}-${storey}`, levelId: l.id, polygon: slabPolygon, ...(clippedHoles ? { holes: clippedHoles } : {}), topOffset: 0, thickness: b.slabThicknessM, materialId: MATERIALS_V2.slab }, m.featureId, 'slabs')
+      // a piece stands on the floor of the body it is a piece of: no slab of its own (council B5L-5)
+      if (!m.pieceOf) push({ type: 'createSlab', id: `slab-${m.id}-${storey}`, levelId: l.id, polygon: slabPolygon, ...(clippedHoles ? { holes: clippedHoles } : {}), topOffset: 0, thickness: b.slabThicknessM, materialId: MATERIALS_V2.slab }, m.featureId, 'slabs')
       // A single-storey attached body under a flat roof: its walls rise to the parapet where the section draws one.
       // Under its own pitched roof a body's walls die into the roof's planes: the gable ends rise to the ridge.
       const height = pitched ? round6(pitched.ridgeY - l.elevation + 0.5) : attached && isTop ? round6((attached.parapetTopY ?? attached.slabTopY) - l.elevation) : round6(l.height)
@@ -184,7 +186,9 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       if (isTop && !attached && !pitched) capWallIds.push(`${ringId}-w0`, `${ringId}-w1`, `${ringId}-w2`, `${ringId}-w3`)
       if (attached && isTop) attachedCapIds.set(m.id, [`${ringId}-w0`, `${ringId}-w1`, `${ringId}-w2`, `${ringId}-w3`])
     }
-    evidence(`ring-${m.id}-${m.storeys[0]}`, 'SOURCE_EXACT', `${(m.x1 - m.x0).toFixed(2)} × ${(m.z1 - m.z0).toFixed(2)} m body from the plan's printed chains and wall bands`)
+    // the storey the body was measured on: the one with no footprint of its own (a basement below it may have one)
+    const measuredOn = m.storeys.find((s) => !(m.storeyRects ?? []).some((r) => r.storey === s)) ?? m.storeys[0]
+    evidence(`ring-${m.id}-${measuredOn}`, 'SOURCE_EXACT', `${(m.x1 - m.x0).toFixed(2)} × ${(m.z1 - m.z0).toFixed(2)} m body from the plan's printed chains and wall bands`)
     for (const own of m.storeyRects ?? []) evidence(`ring-${m.id}-${own.storey}`, 'SOURCE_DERIVED', `storey ${own.storey}'s own walls, ${(own.x1 - own.x0).toFixed(2)} × ${(own.z1 - own.z0).toFixed(2)} m: the walled region of that storey's plan, registered onto the body below, where it stands on the body`)
   }
 
