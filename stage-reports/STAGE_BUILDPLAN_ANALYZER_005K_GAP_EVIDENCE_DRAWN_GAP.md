@@ -18,7 +18,7 @@
 | INHERITED_ARM64_DEVICE_PARITY | **PENDING**: 005H's on-device check is the OWNER's to run; no device here |
 | OWNER APK | **not published**: no production decision changed (brief §40) |
 | NEXT | **FIX_STOREY_COUNT** (§I) |
-| **Stage** | see §K |
+| **Stage** | **PASS** — `PASS_BUILDPLAN_ANALYZER_005K_GAP_EVIDENCE_READY_FOR_COORDINATOR`. CI run 37546736072 on `2f57f90` (the last content commit) is green: 39 jobs pass, 2 skipped by design, and the UI evidence gate passes on attempt 1. Every brief §43 condition is met; the rule was not adopted, which the brief allows (§K) |
 
 **Branch and history.**
 - Branch `analyzer/gap-evidence-drawn-gap-v1`, from `analyzer/floorplan-intelligence-audit-v1` @
@@ -410,12 +410,31 @@ brief §41, plus the protocol, the draw ledger and `fresh-set-verdicts.json`.
 **CI:**
 - run 37533180890 (`b747440`): green, 39 + 2 skipped;
 - run 37539569712 (`892853e`, the freeze): green, 39 + 2 skipped;
-- the closing commit's run: see `PROJECT_STATUS.md` and the handoff.
+- **run 37546736072 (run 185) on `2f57f90`, the last content commit: green, first attempt.**
+  - 39 jobs pass and 2 are skipped by design (the dispatch-only APK publications).
+  - Every required job is green: core / analyzer / reconstruction, the 19 development-house jobs, Evidence Pack,
+    external numeric recogniser, Node 18 parity, APK size + emulator, Browser / Playwright and Android APK.
+  - Android UI evidence gate: job 112552423919, 23:29–00:22 UTC, success on attempt 1. That makes three greens in a row
+    on the patched harness: runs 183, 184 and 185.
+- The doc-only commit that records this result is cited with its own run in the handoff.
 
 **Push pattern.** The seal and label commits went to the stage branch alone, so that a push to
 `claude/new-session-3kzcgh` would not cancel the freeze's run (concurrency cancel-in-progress). No CI therefore ran on
 `70aa0a4`…`591197d`: council D1.
 
-**The stage verdict is decided by the closing CI run.**
-- PASS when every required job is green: the rule need not be adopted (brief §43).
-- PARTIAL if a required job is red.
+**Stage verdict: PASS** (brief §43). Each condition is met:
+- the UI evidence harness is stabilised without a product change;
+- full required CI is green;
+- the per-gap evidence is deterministic;
+- the fresh set was sealed before candidate evaluation;
+- label provenance is honest (not human, stated everywhere);
+- class balance and uncertainty are reported;
+- the three-way comparison is complete;
+- the development matrix is complete;
+- the non-circularity, order and mutation gates are green;
+- council P0 / P1 are closed;
+- the decision follows the predeclared gate.
+
+The rule was not adopted, so no blind round applies.
+
+`PASS_BUILDPLAN_ANALYZER_005K_GAP_EVIDENCE_READY_FOR_COORDINATOR`
