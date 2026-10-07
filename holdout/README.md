@@ -287,3 +287,50 @@ The protocol of round 6, steps 1–6, with these differences only. Everything he
      DIMENSION_TOPOLOGY, METRIC, BOUNDARY, BODY_RELATION, STOREY, RECONSTRUCTION, VERIFICATION, OTHER). If a research
      boundary provider would have helped, that is recorded only after the verdict is sealed, as future-stage
      evidence; production is never re-run with it.
+
+## Round 9 (BUILDPLAN-ANALYZER-005L)
+
+The protocol of round 8, steps 1–6, with these differences only. Everything here is fixed before the freeze.
+
+1. **Two ARCHON families from the committed round-1 pool** (`holdout/pool.txt`, `POOL_SHA256 = 800c2a1e…2ed41`), one
+   publisher as in rounds 4–8, drawn in two ways (brief §37):
+   - **Holdout 2, unstratified**: `i1 = seed mod n` over the drawable addresses, exactly round 1's first pick.
+   - **Holdout 1, multi-storey stratified**: from every drawable address of another family, the k-th candidate is
+     `SHA256(seed + ":stratified:" + k)` mod what is left. A candidate is kept when its own page's markup exposes
+     floor plans of at least two storeys: the publisher's floor fragments for that project
+     (`/product_fancybox_floor/<project code>/<n>`, `archonPlanStoreys`). Only the drawn page's markup is read;
+     no fragment, plan or image is fetched, and nothing about its geometry is seen before the run. A candidate
+     below the stratum is recorded in the ledger and burned (its family is not drawn again in this round), up to
+     20 candidates.
+   - **Calibrated before any draw** on the cached development pages: willa-miranda `[1,2]`, Marcówki `[1,3]`,
+     jabłonkach `[1,3]`, azaliach `[1,3]`, żurawkach `[0,1,3]`; Kosaćce, modrzykach, G2E and e-OZE `[1]`.
+2. **Excluded families** (`excluded-families-round-9.txt`, 132 families, 1476 pool addresses; 1609 drawable), built
+   by `research/analyzer-005l/exclusions.mjs` (manifest:
+   `stage-reports/artifacts/analyzer-005l/blind-round/exclusion-manifest.json`):
+   - every family of rounds 1–8's committed lists and every blind draw (`LEDGER.ndjson`);
+   - the 005K fresh-sheet gap set: its exclusion manifest (the 005J/005K benchmark and development families) and
+     its 14 drawn projects, now development material (the eight ARCHON families among them);
+   - every family with a sealed development package, committed or in a development run;
+   - every family linked from any cached development, blind, benchmark or gap-set page, addresses only.
+   - `EXCLUDED_FAMILIES_ROUND_9_SHA256 = fd13e2caf913fe286f220c73a8bdae8a911581f0e0a1f172ffcf3289f54b7d11`.
+3. **Freeze.** `PRE_HOLDOUT_9_SHA` is the pushed HEAD whose full CI is green. Nothing is committed between the
+   freeze and the draw.
+4. **Draw.** `node holdout/select.mjs select --round 9 --pool holdout/pool.txt --pool-sha256 800c2a1ed9daee9efd2654c64b061e430094dc38fc459b805af27ff9fad2ed41 --pre-holdout-sha <sha>`.
+   - `seed = SHA256(PRE_HOLDOUT_9_SHA + "BUILDPLAN-005L-STOREY-REGISTRATION-HOLDOUT")`.
+   - One ledger line records both picks, every stratified candidate (kept or burned, with the plan storeys its page
+     exposes), the seed, the indices, the pool and exclusion hashes.
+5. **Run once each** as round 8: the production analyzer only, the external numeric recogniser ON (`--recogniser`),
+   the Evidence Pack ON (`ANALYZER_EVIDENCE=1`), the 005K drawn-gap rule OFF (the product default; it is never
+   passed).
+6. **Verdict** by `holdout/verdict.mjs` as committed at the freeze. It adds one condition to round 8's, fixed before
+   the freeze and calibrated on the development matrix (`stage-reports/artifacts/analyzer-005l/development-matrix.json`):
+   `upperStoreysHoldTheirRooms` — the levels above the lowest, together, have a gross wall-ring area of at least 0.9 of
+   the net area of the rooms the publisher lists above the ground floor (basement rooms not counted). A storey count
+   is not a building: a model whose upper level is a fragment copied or clipped short of the rooms it must hold fails.
+   It judges the emitted model only; the analyzer never reads the room list for its storeys
+   (`tests/architecture/storey-support.test.ts`). No threshold or other condition changed.
+   - `PASS`, `SOURCE_LIMITED_PARTIAL` (a checklist item confirmed on the raw copies) or `ALGORITHMIC_FAIL`, sealed
+     before any diagnosis.
+   - An `ALGORITHMIC_FAIL` is not patched in 005L. Its first bad decision is named from the Evidence Pack and the
+     storey trace (SOURCE, STOREY_ROLE, PLAN_ALIGNMENT, UPPER_REGION, SUPPORT_RELATION, PER_STOREY_GEOMETRY, METRIC,
+     BOUNDARY, REC17, BODY_RELATION, EMISSION, OTHER).

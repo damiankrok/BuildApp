@@ -34,6 +34,13 @@
 // families, the two round-7 draws — now development houses — and every family their cached pages link to), with
 // seed = SHA256(PRE_HOLDOUT_8_SHA + "BUILDPLAN-005I-DIMENSION-TOPOLOGY-BOUNDARY-BAKEOFF-HOLDOUT"):
 //   node holdout/select.mjs select --round 8 --pool holdout/pool.txt --pool-sha256 <hex> --pre-holdout-sha <40hex>
+// Round 9 (BUILDPLAN-005L) draws two ARCHON families from the same pool, less holdout/excluded-families-round-9.txt
+// (every earlier list and draw, the 005K gap set's exclusions and draws, and every family any cached development,
+// blind, benchmark or gap-set page links to), with seed = SHA256(PRE_HOLDOUT_9_SHA + "BUILDPLAN-005L-STOREY-REGISTRATION-HOLDOUT"):
+// one unstratified pick, `seed mod n` as in round 1, and one multi-storey stratified pick from every other family —
+// the k-th candidate `SHA256(seed + ":stratified:" + k)` mod what is left, kept when its page's own markup exposes floor
+// plans of at least two storeys (`archonPlanStoreys`), else recorded and burned:
+//   node holdout/select.mjs select --round 9 --pool holdout/pool.txt --pool-sha256 <hex> --pre-holdout-sha <40hex>
 // `select` draws from the committed pool less the committed excluded families (holdout/excluded-families.txt:
 // families the development pages link to), and refuses unless HEAD is the declared SHA, the tree is clean, and
 // the pool is the tracked holdout/pool.txt whose hash both the operator and pool.meta.json declare.
@@ -52,6 +59,7 @@ const ROUNDS = {
   6: { label: 'BUILDPLAN-005F-ADAPTIVE-SEGMENTATION-ENVELOPE-HOLDOUT', excluded: 'excluded-families-round-6.txt' },
   7: { label: 'BUILDPLAN-005H-EXTERNAL-NUMERIC-RECOGNISER-HOLDOUT', excluded: 'excluded-families-round-7.txt' },
   8: { label: 'BUILDPLAN-005I-DIMENSION-TOPOLOGY-BOUNDARY-BAKEOFF-HOLDOUT', excluded: 'excluded-families-round-8.txt' },
+  9: { label: 'BUILDPLAN-005L-STOREY-REGISTRATION-HOLDOUT', excluded: 'excluded-families-round-9.txt', stratified: { minPlanStoreys: 2, maxDraws: 20 } },
 }
 const DOBREDOMY = {
   host: 'https://www.dobredomy.pl',
@@ -106,6 +114,44 @@ export function ddEligible(html) {
   const plans = imagesUnder(/\brzut/)
   const elevations = imagesUnder(/\belewacj/)
   return { eligible: plans && elevations, plans, elevations }
+}
+
+/**
+ * Round 9's stratum, fixed before the freeze and read from the drawn page's markup only: the storeys whose floor plan
+ * the page publishes, as the publisher's own floor fragments name them (`/product_fancybox_floor/<project code>/<n>`:
+ * 0 basement, 1 ground, 2 upper, 3 attic). Its own project's fragments only; no fragment, no plan and no image is
+ * fetched. Calibrated on the development pages before any draw (willa-miranda 1+2, Marcówki 1+3, Kosaćce 1).
+ */
+export function archonPlanStoreys(html, url) {
+  const code = URL_RE.exec(url)?.[2]
+  if (!code) throw new Error(`not a canonical ARCHON project address: ${url}`)
+  const body = html.replace(/<script\b[\s\S]*?<\/script>/gi, ' ')
+  return [...new Set([...body.matchAll(new RegExp(`/product_fancybox_floor/${code}/(\\d+)\\b`, 'gi'))].map((m) => Number(m[1])))].sort((a, b) => a - b)
+}
+
+/**
+ * Round 9's two picks: one unstratified (`seed mod n`, as round 1's first pick) and one stratified from every OTHER
+ * family — the k-th candidate is `SHA256(seed + ":stratified:" + k)` mod the drawable addresses not of the
+ * unstratified pick's family nor of a burned candidate's; `planStoreysOf(url)` reads that page's markup and a candidate
+ * publishing fewer plan storeys than the stratum asks is burned. Every candidate is returned, kept or burned.
+ */
+export async function selectStratified(poolText, preHoldoutSha, label, excludedFamilies, stratum, planStoreysOf) {
+  const familyOf = (u) => family(URL_RE.exec(u)[1])
+  const first = selectOne(poolText, preHoldoutSha, label, familyOf, excludedFamilies)
+  const burned = new Set([first.family])
+  const candidates = []
+  for (let k = 0; k < stratum.maxDraws; k += 1) {
+    const left = first.drawable.filter((u) => !burned.has(familyOf(u)))
+    if (left.length === 0) throw new Error('nothing left to draw')
+    const index = Number(BigInt(`0x${sha256(`${first.seed}:stratified:${k}`)}`) % BigInt(left.length))
+    const url = left[index]
+    const storeys = await planStoreysOf(url)
+    const eligible = storeys.length >= stratum.minPlanStoreys
+    candidates.push({ k, left: left.length, index, url, family: familyOf(url), planStoreys: storeys, eligible })
+    if (eligible) return { seed: first.seed, n: first.n, excluded: first.excluded, unstratified: { i1: first.i1, url: first.url, family: first.family }, stratified: candidates.at(-1), candidates }
+    burned.add(familyOf(url))
+  }
+  throw new Error(`no page publishing ${stratum.minPlanStoreys} plan storeys within ${stratum.maxDraws} draws`)
 }
 
 /** One draw from a pool less its excluded families: `seed mod n` over the drawable list, in pool order. */
@@ -228,6 +274,14 @@ if (import.meta.url === `file://${process.argv[1]}`) {
         dobredomy: { label: DOBREDOMY.label, excludedFamiliesFile: DOBREDOMY.excluded, poolSha256: ddDeclared, excludedFamiliesSha256: sha256(ddExclusions), seed: d.seed, n: d.n, excluded: d.excluded, i1: d.i1, eligibility: checks, url: pick.url, family: ddFamilyOf(pick.url) },
       }
       appendFileSync(join(root, 'holdout', 'LEDGER.ndjson'), JSON.stringify(line) + '\n')
+      console.log(JSON.stringify(line, null, 2))
+      process.exit(0)
+    }
+    if (round.stratified) {
+      const planStoreysOf = async (url) => archonPlanStoreys(await (await fetch(url)).text(), url)
+      const r = await selectStratified(text, sha, round.label, new Set(exclusions.split('\n').filter(Boolean)), round.stratified, planStoreysOf)
+      const line = { at: new Date().toISOString(), label: round.label, excludedFamiliesFile: round.excluded, preHoldoutSha: sha, poolSha256: declared, excludedFamiliesSha256: sha256(exclusions), stratum: round.stratified, ...r, urls: [r.stratified.url, r.unstratified.url], families: [r.stratified.family, r.unstratified.family] }
+      appendFileSync(join(root, 'holdout', 'LEDGER.ndjson'), JSON.stringify(line) + '\n')   // append-only, committed after the runs
       console.log(JSON.stringify(line, null, 2))
       process.exit(0)
     }
