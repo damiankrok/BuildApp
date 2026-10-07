@@ -194,3 +194,49 @@ describe('005K production cannot reach the gap-set harness, and the gap set comm
     expect(filesUnder('apps/android/app/src/main/assets', /.*/).filter((a) => HARNESS.test(a) || /gap-set|analyzer-005k/i.test(a))).toEqual([])
   })
 })
+
+/**
+ * BUILDPLAN-ANALYZER-005L — the storey-registration harness (`research/analyzer-005l/`) traces the layout pass on
+ * development rows, replays the development matrix, and draws plans with their registrations for a developer to look
+ * at — outside the repository. What the repository keeps is code and text: frame and region ids, rectangles, scales,
+ * scores and areas. Never a plan, an overlay or a picture of one.
+ */
+describe('005L production cannot reach the storey-registration harness, and it commits no pixels', () => {
+  const HARNESS = /research\/analyzer-005l|storey-trace|baseline-storey-registration/i
+
+  it('no production source imports research/analyzer-005l or names its traces', () => {
+    const offenders: string[] = []
+    for (const f of productionSources()) {
+      const text = read(f)
+      for (const spec of importsOf(text)) if (/analyzer-005l/.test(spec)) offenders.push(`${f} imports ${spec}`)
+      if (HARNESS.test(codeOf(text))) offenders.push(`${f} names the 005L harness`)
+    }
+    expect(offenders).toEqual([])
+  })
+
+  it('the 005L harness and artifacts track only code and text — no plan, overlay or archive', () => {
+    const tracked = execFileSync('git', ['ls-files'], { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(Boolean)
+    const harness = tracked.filter((f) => f.startsWith('research/analyzer-005l/') || f.startsWith('stage-reports/artifacts/analyzer-005l/'))
+    expect(harness.filter((f) => !/\.(ts|mjs|json|ndjson|md|txt)$/i.test(f))).toEqual([])
+    for (const f of harness) {
+      const text = read(f)
+      expect(text, f).not.toMatch(/(data:(image|application)\/[\w.+-]+;base64,|iVBORw0KGgo|\/9j\/4|UklGR|R0lGOD)[A-Za-z0-9+/]{40,}/)
+      expect(text, f).not.toMatch(/[A-Za-z0-9+/]{256,}={0,2}/)
+      expect(text, f).not.toMatch(/\[(\s*-?\d+(\.\d+)?\s*,){64,}/)
+      expect(statSync(join(ROOT, f)).size, f).toBeLessThanOrEqual(4 * 2 ** 20)
+    }
+  })
+
+  it('the harness writes its pictures outside the repository only', () => {
+    for (const f of ['research/analyzer-005l/look.ts', 'research/analyzer-005l/pair.ts', 'research/analyzer-005l/storey-trace.ts']) {
+      expect(read(f), f).toMatch(/startsWith\('\/home\/user\/BuildApp'\)\) throw new Error\('pictures stay outside the repository'\)/)
+    }
+  })
+
+  it('the Android build packages nothing from the 005L harness', () => {
+    for (const f of [...filesUnder('apps/android', /\.gradle\.kts$/), ...filesUnder('apps/android', /^libs\.versions\.toml$/)]) {
+      expect(codeOf(read(f)), f).not.toMatch(HARNESS)
+    }
+    expect(filesUnder('apps/android/app/src/main/assets', /.*/).filter((a) => HARNESS.test(a) || /analyzer-005l/i.test(a))).toEqual([])
+  })
+})

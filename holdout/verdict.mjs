@@ -62,8 +62,26 @@ if (summary && model) {
   const footprint = model.slabs.filter((s) => s.levelId === lowest?.id).reduce((a, s) => a + ringArea(s.polygon), 0)
   const warnings = summary.warningDetails ?? []
   const resolved = warnings.some((w) => w.code === 'LAYOUT_PLAN_RESOLVED_BY_HYPOTHESIS')
+  // 005L: a storey count is not a building. Every level above the lowest, together, must be able to hold the rooms the
+  // publisher lists above the ground floor: gross wall-ring area at least 0.9 of their net area. A check after the
+  // decision, never a chooser — the analyzer never reads the room list for its storeys (tests/architecture/storey-support).
+  const wallsById = new Map((model.walls ?? []).map((w) => [w.id, w]))
+  const wallRingM2 = (r) => {
+    const ws = (r.wallIds ?? []).map((id) => wallsById.get(id)).filter(Boolean)
+    if (ws.length === 0) return 0
+    const xs = ws.flatMap((w) => [w.start.x, w.end.x])
+    const zs = ws.flatMap((w) => [w.start.z, w.end.z])
+    return (Math.max(...xs) - Math.min(...xs)) * (Math.max(...zs) - Math.min(...zs))
+  }
+  const upperLevels = new Set([...model.levels].sort((a, b) => a.index - b.index).slice(1).map((l) => l.id))
+  const upperM2 = (model.wallRings ?? []).filter((r) => upperLevels.has(r.levelId)).reduce((a, r) => a + wallRingM2(r), 0)
+  const upperRoomsM2 = (pkg?.publishedRooms ?? []).filter((r) => r.storey && r.storey !== 'GROUND' && r.storey !== 'BASEMENT').reduce((a, r) => a + (r.area ?? 0), 0)
   const conditions = {
     storeys: { model: model.levels.length, plans: labelled.size, holds: model.levels.length === labelled.size },
+    upperStoreysHoldTheirRooms:
+      upperLevels.size === 0 || upperRoomsM2 === 0
+        ? { holds: true, note: upperLevels.size === 0 ? 'no level above the lowest' : 'no room listed above the ground floor' }
+        : { upperRingM2: +upperM2.toFixed(2), publishedUpperRoomsM2: +upperRoomsM2.toFixed(2), holds: upperM2 >= 0.9 * upperRoomsM2 },
     openingsAllBuilt: { holds: !warnings.some((w) => w.code === 'OPENINGS_NOT_BUILT'), message: warnings.find((w) => w.code === 'OPENINGS_NOT_BUILT')?.message ?? null },
     footprint: published === undefined ? { holds: true, builtM2: +footprint.toFixed(2), note: 'no footprint published' } : { builtM2: +footprint.toFixed(2), publishedM2: published, residualPct: +((footprint / published - 1) * 100).toFixed(2), holds: Math.abs(footprint / published - 1) <= 0.06 },
     resolvedWithAWitness: resolved ? { chosen: chosenBy?.chosen ?? null, by: resolution ? 'PLAN_RESOLUTION' : chosenBy ? 'METRIC_CHALLENGE' : null, corroborations: chosenBy?.chosenCorroborations ?? '', holds: Boolean(chosenBy?.chosenCorroborations) } : { holds: true, note: 'the first reading held' },

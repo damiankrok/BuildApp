@@ -1233,6 +1233,10 @@ function storeySupportOf(
     const d = b.z1 - b.z0
     const area = w * d
     const isBody = wallFraction >= MIN_MASS_WALL_FRACTION && Math.min(w, d) >= ctx.minSpanM
+    // A region's sides are cut on its plan's grid lines — a wall's axis, or its inner face — while a body below is
+    // measured to its outer faces: the two can disagree by up to the upper plan's own wall, placed, on top of the
+    // registration's jitter. Within that band a side is the body's side.
+    const bandM = round6(ctx.tolM + ctx.plan.wallPx * a.scale * Math.max(ctx.frame.metresPerPixelX, ctx.frame.metresPerPixelY))
     let carried = 0
     let stands = false
     if (isBody) {
@@ -1264,14 +1268,14 @@ function storeySupportOf(
             : `the ${ctx.plan.storey.toLowerCase()} storey's walled region ${region.id} overlaps this body by only ${ox.toFixed(2)} × ${oz.toFixed(2)} m, less than the ${ctx.minSpanM.toFixed(2)} m a room needs on both axes: a wall's thickness or the registration's jitter, which carries nothing`,
         })
         if (!supports) continue
-        const snap = (v: number, edge: number): number => (Math.abs(v - edge) <= ctx.tolM ? edge : v)
+        const snap = (v: number, edge: number): number => (Math.abs(v - edge) <= bandM ? edge : v)
         const piece: SupportPiece = { regionId: region.id, x0: round6(snap(Math.max(b.x0, m.x0), m.x0)), z0: round6(snap(Math.max(b.z0, m.z0), m.z0)), x1: round6(snap(Math.min(b.x1, m.x1), m.x1)), z1: round6(snap(Math.min(b.z1, m.z1), m.z1)) }
         supported.set(mass.id, [...(supported.get(mass.id) ?? []), piece])
       }
     }
     const unsupported = Math.max(0, area - carried)
-    const perimeter = 2 * (w + d)
-    const overhang: UpperRegionRecord['overhang'] = !isBody ? 'NOT_A_BODY' : !stands ? 'UNSUPPORTED' : unsupported <= 1e-6 ? 'NONE' : unsupported <= perimeter * ctx.tolM ? 'WITHIN_TOLERANCE' : 'BEYOND_TOLERANCE'
+    // what stands on nothing within the band along two of its sides is the registration's jitter, not an overhang
+    const overhang: UpperRegionRecord['overhang'] = !isBody ? 'NOT_A_BODY' : !stands ? 'UNSUPPORTED' : unsupported <= 1e-6 ? 'NONE' : unsupported <= (w + d) * bandM ? 'WITHIN_TOLERANCE' : 'BEYOND_TOLERANCE'
     regions.push({
       regionId: region.id,
       pixelRect: region.rect,
