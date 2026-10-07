@@ -62,5 +62,26 @@ identically. The only correct crop-only reply is UNRESOLVED, and any gain on the
 
 ## Token budget and model-native resizing (measured)
 
-See §"Measured per model" below. It is filled from the run records (`imageTokens` = prompt tokens minus the same
-messages without images, through the model's own template).
+`imageTokens` = the prompt tokens minus the tokens of the same messages without the images, both through the
+model's own chat template (`bench.py`: `/apply-template` + `/tokenize`). Medians are over every record. The minimum
+comes from the narrowest plan (a 449 × 404 storey frame or a 768 × 338 strip).
+
+### Measured per model
+
+| model | how the runtime sizes an image | A (crop 448²) | B / C (plan, 768² typical) | D / E (plan + crop) | per-image ceiling |
+| --- | --- | --- | --- | --- | --- |
+| Qwen3-VL-2B / 4B | dynamic resolution, 32 px per token after 2 × 2 merge, no resizing at these sizes | **198** | **578** (92–578) | **776** | ~16 k px² per token; a 768 × 768 plan is 24 × 24 |
+| InternVL3.5-2B | 448 px tiles; a 448² crop is one tile; a 768² plan is 2 × 2 tiles + a thumbnail (5 × 256) | **258** | **1,282** (258–1,282) | **1,540** | 256 tokens per tile, up to 12 tiles by default |
+| SmolVLM2-2.2B | Idefics3 tiling, **capped here** with `--image-max-tokens 336`: both crop and plan become 2 × 2 tiles + a global view | **419** | **419** (252–419) | **837** | native: 1,536 px longest side, **1,417 tokens per image** (~100 s per image on this CPU) |
+| Qwen3-VL-8B (teacher) | as Qwen3-VL-2B | 198 | 578 | 776 | |
+| SmolVLM2-500M (005J reference) | 005J ran it on its own candidate-overlay image, one 512² tile = 64 image tokens; not re-run | — | — | — | |
+
+What this means for the comparison:
+- **Qwen3-VL sees the most per plan pixel.** At 768 px a wall 3 px thick is about a tenth of a 32-px token cell.
+  InternVL spends 2.2 × as many tokens on the same plan.
+- **SmolVLM2-2.2B under the cap sees the 448 px crop at roughly the same effective resolution as the plan.** The crop is
+  resampled into the same 2 × 2 + global layout as the plan (5 × 81 tokens). Measured in phase 1, it gains nothing
+  from context: the net change A → B/C/D/E is −2 / −2 / −1 / −2 over 32 questions. Its phase-1 result
+  is a result **at the cap**, stated as such: the native setting was out of this CPU's reach for 160 matched records.
+- **Token cost is the latency driver on CPU.** D/E cost about 1.3–1.4 × B/C in tokens, and about the same wall time
+  as C, because the plan prefix is reused from the prompt cache (`runtime-size-matrix.md`).
