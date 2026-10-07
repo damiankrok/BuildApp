@@ -52,6 +52,7 @@ import type { ResolverProgress } from '../plan-resolution.js'
 import type { PlanSheet } from '../layout.js'
 import type { Checkpoint } from '@buildapp/source-common'
 import type { StructuralPassOptions } from '../structural.js'
+import { rectAt } from './building.js'
 import type { BuildingV2, EndCondition, MassToneV2, MassV2, ReturnWallV2, TerraceV2 } from './building.js'
 import { buildFacadeGraph, closeBalconies, closePortalHeads, closeRailings, closeTerraces, closeVerges, alignStackedReturns, snapReturnsToBodyFaces } from './assembly-closure.js'
 import type { BalconyEnd, ClosureNote } from './assembly-closure.js'
@@ -368,6 +369,8 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const slabT = levels.measured && levels.floors.length > 1 ? round6(Math.min(0.4, Math.max(0.2, levels.floors[1] - levels.floors[0] - 2.72))) : CONVENTIONS.slabThickness
 
   // Masses in the v2 frame.
+  const v2Rect = (r: { x0: number; z0: number; x1: number; z1: number }): { x0: number; z0: number; x1: number; z1: number } => ({ x0: round6(r.x0), z0: round6(flipZ(world, r.z1)), x1: round6(r.x1), z1: round6(flipZ(world, r.z0)) })
+  const pieces: MassV2[] = []
   const masses: MassV2[] = layout.masses.map((m) => {
     const b = ringBounds(m.ring)
     const z0 = flipZ(world, b.z1)
@@ -377,8 +380,27 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     for (let s = m.storeySpan.fromIndex; s <= m.storeySpan.toIndex; s += 1) storeys.push(s)
     const featureId = feature('MASS', id, { width: { value: b.x1 - b.x0, low: m.widthM.low, high: m.widthM.high }, depth: { value: z1 - z0, low: m.depthM.low, high: m.depthM.high } }, [], m.widthM.basis === 'MEASURED' ? 'SOURCE_EXACT' : 'SOURCE_DERIVED', m.why, { printed: m.widthM.basis === 'MEASURED', uncertaintyM: 0.02 })
     for (const e of m.evidenceIds) record({ evidenceId: e, evidenceKind: 'METRIC', what: 'a chain segment of the body', authority: 'HIGH', featureId, disposition: 'USED_IN_MODEL', reason: 'the body’s span', stage: 'TOPOLOGY' })
-    return { id, role: m.role === 'MAIN' ? 'MAIN' : 'ATTACHED', x0: round6(b.x0), z0: round6(z0), x1: round6(b.x1), z1: round6(z1), storeys, featureId, sourceMassId: m.id }
+    // 005L: each storey's own footprint over this body, from the support relation: where the storey's walled region
+    // stands on only part of the body, its walls are built there and not copied from the storey below. A storey whose
+    // footprint over the body is in more than one piece keeps the largest as its own and builds each other piece as a
+    // body of its own on that storey.
+    const storeyRects: NonNullable<MassV2['storeyRects']> = []
+    for (const s of storeys) {
+      const storeyId = layout.storeys.find((x) => x.index === s)?.id
+      const own = layout.footprintRegions.filter((r) => r.kind === 'BUILT' && r.storeyId === storeyId && m.footprintRegionIds.includes(r.id))
+      if (s === m.storeySpan.fromIndex || own.length === 0) continue
+      const rects = own.map((r) => v2Rect(ringBounds(r.ring)))
+      const first = rects[0]
+      if (Math.abs(first.x0 - b.x0) > 1e-6 || Math.abs(first.x1 - b.x1) > 1e-6 || Math.abs(first.z0 - z0) > 1e-6 || Math.abs(first.z1 - z1) > 1e-6) storeyRects.push({ storey: s, ...first })
+      rects.slice(1).forEach((r, k) => {
+        const pid = `${id}-s${s}-${k + 1}`
+        const pf = feature('MASS', pid, { width: { value: r.x1 - r.x0, low: r.x1 - r.x0 - 0.05, high: r.x1 - r.x0 + 0.05 }, depth: { value: r.z1 - r.z0, low: r.z1 - r.z0 - 0.05, high: r.z1 - r.z0 + 0.05 } }, [], 'SOURCE_DERIVED', `a separate piece of storey ${s}'s footprint over ${id}, from its own walled region on that storey's plan`, { uncertaintyM: 0.1 })
+        pieces.push({ id: pid, role: 'ATTACHED', ...r, storeys: [s], featureId: pf, sourceMassId: m.id })
+      })
+    }
+    return { id, role: m.role === 'MAIN' ? 'MAIN' : 'ATTACHED', x0: round6(b.x0), z0: round6(z0), x1: round6(b.x1), z1: round6(z1), storeys, featureId, sourceMassId: m.id, ...(storeyRects.length > 0 ? { storeyRects } : {}) }
   })
+  masses.push(...pieces)
   const main = masses.find((m) => m.role === 'MAIN') ?? masses[0]
   const topStorey = Math.max(...main.storeys)
 
@@ -415,7 +437,8 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     let why = 'chain-registered base plan'
     if (!frame) {
       // The body this storey covers: the mass reaching it with the largest area.
-      const covers = masses.filter((m) => m.storeys.includes(index)).sort((a, b) => (b.x1 - b.x0) * (b.z1 - b.z0) - (a.x1 - a.x0) * (a.z1 - a.z0))[0] ?? main
+      // 005L: what this storey's walls stand on is its own footprint, which need not be the whole of any body.
+      const covers = masses.filter((m) => m.storeys.includes(index)).map((m) => rectAt(m, index)).sort((a, b) => (b.x1 - b.x0) * (b.z1 - b.z0) - (a.x1 - a.x0) * (a.z1 - a.z0))[0] ?? main
       frame = planFrameByOuterFaces(plan, index, world, { x0: covers.x0, z0: covers.z0, x1: covers.x1, z1: covers.z1 }, raster)
       why = frame ? frame.why : 'no outer faces found'
       if (!frame) frame = planFrameV2(plan, index, world, draft)
@@ -577,7 +600,9 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const onFace = masses.filter((m) => (side === 'FRONT' ? Math.abs(m.z0 - backAt) : side === 'REAR' ? Math.abs(m.z1 - backAt) : side === 'WEST' ? Math.abs(m.x0 - backAt) : Math.abs(m.x1 - backAt)) < 0.15)
     if (onFace.length === 0) continue
     for (const [index, entry] of planByStorey) {
-      const reaching = onFace.filter((m) => m.storeys.includes(index))
+      // 005L: a storey stands on this face only where its own footprint reaches it, not wherever its body does.
+      const faceAt = (r: { x0: number; z0: number; x1: number; z1: number }): number => (side === 'FRONT' ? r.z0 : side === 'REAR' ? r.z1 : side === 'WEST' ? r.x0 : r.x1)
+      const reaching = onFace.filter((m) => m.storeys.includes(index) && Math.abs(faceAt(rectAt(m, index)) - backAt) < 0.15).map((m) => ({ ...rectAt(m, index), featureId: m.featureId }))
       if (reaching.length === 0) continue
       const from = Math.min(...reaching.map((m) => (side === 'FRONT' || side === 'REAR' ? m.x0 : m.z0)))
       const to = Math.max(...reaching.map((m) => (side === 'FRONT' || side === 'REAR' ? m.x1 : m.z1)))
@@ -586,6 +611,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       const zoneBox = { x0: Math.min(zoneV2.x0, zoneV2.x1), x1: Math.max(zoneV2.x0, zoneV2.x1), z0: Math.min(zoneV2.z0, zoneV2.z1), z1: Math.max(zoneV2.z0, zoneV2.z1) }
       const occupied = masses
         .filter((m) => !onFace.includes(m) && m.storeys.includes(index))
+        .map((m) => rectAt(m, index))
         .filter((m) => {
           const w = Math.max(0, Math.min(m.x1, zoneBox.x1) - Math.max(m.x0, zoneBox.x0))
           const d = Math.max(0, Math.min(m.z1, zoneBox.z1) - Math.max(m.z0, zoneBox.z0))
@@ -710,7 +736,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       })
     }
     for (const m of masses.filter((x) => x.storeys.includes(index))) {
-      const reading = readInterior(entry.raster, entry.frame, { x0: m.x0, z0: m.z0, x1: m.x1, z1: m.z1 }, T, index, tokens, rooms, { extraBarriers: barriers, onDebug: options.debug ? (info) => options.debug?.(`interior ${m.id} storey ${index}: ${info.axis} band at px ${info.centrePx.toFixed(1)} (${info.axis === 'Z' ? 'x' : 'z'} ${(info.axis === 'Z' ? entry.frame.toWorld(info.centrePx, 0).x : entry.frame.toWorld(0, info.centrePx).z).toFixed(2)}), ${info.thick} px thick: ${info.runsPx.map((r) => `${(info.axis === 'Z' ? entry.frame.toWorld(0, r.to).z : entry.frame.toWorld(r.from, 0).x).toFixed(2)}..${(info.axis === 'Z' ? entry.frame.toWorld(0, r.from).z : entry.frame.toWorld(r.to, 0).x).toFixed(2)}`).join(', ')}`) : undefined })
+      const reading = readInterior(entry.raster, entry.frame, rectAt(m, index), T, index, tokens, rooms, { extraBarriers: barriers, onDebug: options.debug ? (info) => options.debug?.(`interior ${m.id} storey ${index}: ${info.axis} band at px ${info.centrePx.toFixed(1)} (${info.axis === 'Z' ? 'x' : 'z'} ${(info.axis === 'Z' ? entry.frame.toWorld(info.centrePx, 0).x : entry.frame.toWorld(0, info.centrePx).z).toFixed(2)}), ${info.thick} px thick: ${info.runsPx.map((r) => `${(info.axis === 'Z' ? entry.frame.toWorld(0, r.to).z : entry.frame.toWorld(r.from, 0).x).toFixed(2)}..${(info.axis === 'Z' ? entry.frame.toWorld(0, r.from).z : entry.frame.toWorld(r.to, 0).x).toFixed(2)}`).join(', ')}`) : undefined })
       reading.walls = reading.walls.map((w) => ({ ...w, id: `${m.id}-${w.id}` }))
       reading.doors = reading.doors.map((d) => ({ ...d, id: `${m.id}-${d.id}`, betweenIds: [d.betweenIds[0].includes(':') ? d.betweenIds[0] : `${m.id}-${d.betweenIds[0]}`, d.betweenIds[1].includes(':') ? d.betweenIds[1] : `${m.id}-${d.betweenIds[1]}`] as [string, string] }))
       reading.rooms = reading.rooms.map((r) => ({ ...r, id: `${m.id}-${r.id}`, doorIds: r.doorIds.map((d) => `${m.id}-${d}`) }))
@@ -740,17 +766,23 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       const l = levelOf(index)
       if (!entry || !l) continue
       const callouts = metrics.evidence.filter((e) => e.kind === 'OPENING_CALLOUT' && e.frameId === entry.plan.frame.id)
+      // 005L: this storey's own walls, which stand on its footprint over the body
+      const r = rectAt(m, index)
       for (const facade of ['FRONT', 'EAST', 'REAR', 'WEST'] as const) {
-        const planeAt = facade === 'FRONT' ? m.z0 : facade === 'REAR' ? m.z1 : facade === 'WEST' ? m.x0 : m.x1
+        const planeAt = facade === 'FRONT' ? r.z0 : facade === 'REAR' ? r.z1 : facade === 'WEST' ? r.x0 : r.x1
         const inward = facade === 'FRONT' || facade === 'WEST' ? 1 : -1
-        const from = facade === 'FRONT' || facade === 'REAR' ? m.x0 : m.z0
-        const to = facade === 'FRONT' || facade === 'REAR' ? m.x1 : m.z1
+        const from = facade === 'FRONT' || facade === 'REAR' ? r.x0 : r.z0
+        const to = facade === 'FRONT' || facade === 'REAR' ? r.x1 : r.z1
         const gable = isGableEnd(m, facade) && index === topStorey && mainRoof ? { eaveY: mainRoof.eaveY, pitchDeg: mainRoof.pitchDeg, ridgeAlongAt: mainRoof.ridgeAt, eaveAtLow: from, eaveAtHigh: to, buildUpVerticalM: mainRoof.buildUpVerticalM } : undefined
         const host: WallHost = { massId: m.id, facade, planeAt, from, to, centreAt: round6(planeAt + (inward * T) / 2), storeyIndex: index, ...(gable ? { gable } : {}), floorY: l.elevation, storeyHeightM: gable ? round6(mainRoof!.ridgeY - l.elevation) : l.height }
         const found = readWallOpenings({ plan: entry.frame, planRaster: entry.raster, host, wallThicknessM: T, callouts, views: viewsOf(facade), attachedSingleStorey: m.role === 'ATTACHED' && m.storeys.length === 1, index: hostIndex++ })
         for (const o of found) {
           // A gap on a face another body stands against is a door between the two bodies, not a facade opening.
-          const other = masses.find((x) => x.id !== m.id && x.storeys.includes(index) && (facade === 'EAST' ? Math.abs(x.x0 - m.x1) < 0.05 && o.interval[0] >= x.z0 - 0.05 && o.interval[1] <= x.z1 + 0.05 : facade === 'WEST' ? Math.abs(x.x1 - m.x0) < 0.05 && o.interval[0] >= x.z0 - 0.05 && o.interval[1] <= x.z1 + 0.05 : facade === 'FRONT' ? Math.abs(x.z1 - m.z0) < 0.05 && o.interval[0] >= x.x0 - 0.05 && o.interval[1] <= x.x1 + 0.05 : Math.abs(x.z0 - m.z1) < 0.05 && o.interval[0] >= x.x0 - 0.05 && o.interval[1] <= x.x1 + 0.05))
+          const other = masses.find((xm) => {
+            if (xm.id === m.id || !xm.storeys.includes(index)) return false
+            const x = rectAt(xm, index)
+            return facade === 'EAST' ? Math.abs(x.x0 - r.x1) < 0.05 && o.interval[0] >= x.z0 - 0.05 && o.interval[1] <= x.z1 + 0.05 : facade === 'WEST' ? Math.abs(x.x1 - r.x0) < 0.05 && o.interval[0] >= x.z0 - 0.05 && o.interval[1] <= x.z1 + 0.05 : facade === 'FRONT' ? Math.abs(x.z1 - r.z0) < 0.05 && o.interval[0] >= x.x0 - 0.05 && o.interval[1] <= x.x1 + 0.05 : Math.abs(x.z0 - r.z1) < 0.05 && o.interval[0] >= x.x0 - 0.05 && o.interval[1] <= x.x1 + 0.05
+          })
           if (other) {
             // built once: from the main body's side, and between two other bodies from the first of them (005C:
             // an outline frame's attached bodies meet each other, and their doors used to be dropped)

@@ -27,6 +27,17 @@ export type MassV2 = {
   featureId: string
   /** The 03R mass id this came from. */
   sourceMassId: string
+  /**
+   * 005L: a storey whose own walls stand on only part of this body — the footprint its plan's walled region stands on
+   * — given apart. A storey not listed here stands on the whole body. The body's rectangle is its lowest storey's.
+   */
+  storeyRects?: Array<{ storey: number; x0: number; z0: number; x1: number; z1: number }>
+}
+
+/** The rectangle a body's walls enclose on one storey: its own footprint there, or the body's (005L). */
+export const rectAt = (m: Pick<MassV2, 'x0' | 'z0' | 'x1' | 'z1' | 'storeyRects'>, storey: number): { x0: number; z0: number; x1: number; z1: number } => {
+  const own = m.storeyRects?.find((r) => r.storey === storey)
+  return own ? { x0: own.x0, z0: own.z0, x1: own.x1, z1: own.z1 } : { x0: m.x0, z0: m.z0, x1: m.x1, z1: m.z1 }
 }
 
 export type MainRoofV2 = {

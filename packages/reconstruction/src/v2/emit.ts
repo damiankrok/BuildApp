@@ -11,6 +11,7 @@
 import { round6 } from '@buildapp/source-common'
 import type { BuildingCommand } from '@buildapp/commands'
 import type { EvidenceStatus } from '@buildapp/model'
+import { rectAt } from './building.js'
 import type { BuildingV2, MassV2 } from './building.js'
 import type { ProvenanceStatus } from './graph.js'
 import type { OpeningV2 } from './openings-v2.js'
@@ -71,7 +72,7 @@ const modelStatus = (p: ProvenanceStatus): EvidenceStatus => {
 export const ringWallId = (massId: string, storey: number, side: 'FRONT' | 'EAST' | 'REAR' | 'WEST'): string => `ring-${massId}-${storey}-w${{ FRONT: 0, EAST: 1, REAR: 2, WEST: 3 }[side]}`
 
 /** Where an opening sits along its ring wall, measured from the wall's start in the anticlockwise traversal. */
-export function wallOffset(mass: MassV2, facade: OpeningV2['facade'], interval: [number, number]): { offset: number; reversed: boolean } {
+export function wallOffset(mass: Pick<MassV2, 'x0' | 'z0' | 'x1' | 'z1'>, facade: OpeningV2['facade'], interval: [number, number]): { offset: number; reversed: boolean } {
   switch (facade) {
     case 'FRONT':
       return { offset: round6(interval[0] - mass.x0), reversed: false }
@@ -137,13 +138,22 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
   const attachedCapIds = new Map<string, string[]>()
   const emittedInteriorByStorey = new Map<number, string[]>()
   for (const m of b.masses) {
-    const polygon = [
+    const body = [
       { x: m.x0, z: m.z0 },
       { x: m.x1, z: m.z0 },
       { x: m.x1, z: m.z1 },
       { x: m.x0, z: m.z1 },
     ]
     for (const storey of m.storeys) {
+      // 005L: a storey's walls enclose its own footprint over the body; its floor is the body's, the ceiling of the
+      // storey below, whatever stands on it.
+      const r = rectAt(m, storey)
+      const polygon = [
+        { x: r.x0, z: r.z0 },
+        { x: r.x1, z: r.z0 },
+        { x: r.x1, z: r.z1 },
+        { x: r.x0, z: r.z1 },
+      ]
       const l = levelOf(storey)
       if (!l) continue
       const isTop = storey === Math.max(...m.storeys)
@@ -159,7 +169,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       // outline.
       const bearsOnWalls = storey !== Math.min(...m.storeys)
       const inset = bearsOnWalls ? round6(b.wallThicknessM) : 0
-      const slabPolygon = inset > 0 ? [{ x: round6(m.x0 + inset), z: round6(m.z0 + inset) }, { x: round6(m.x1 - inset), z: round6(m.z0 + inset) }, { x: round6(m.x1 - inset), z: round6(m.z1 - inset) }, { x: round6(m.x0 + inset), z: round6(m.z1 - inset) }] : polygon
+      const slabPolygon = inset > 0 ? [{ x: round6(m.x0 + inset), z: round6(m.z0 + inset) }, { x: round6(m.x1 - inset), z: round6(m.z0 + inset) }, { x: round6(m.x1 - inset), z: round6(m.z1 - inset) }, { x: round6(m.x0 + inset), z: round6(m.z1 - inset) }] : body
       // A stair void that reaches a wall ends at the wall's inner face: the slab is not there to be cut.
       const clippedHoles = holes?.map((h) => h.map((p) => ({ x: round6(Math.min(Math.max(p.x, m.x0 + inset), m.x1 - inset)), z: round6(Math.min(Math.max(p.z, m.z0 + inset), m.z1 - inset)) })))
       push({ type: 'createSlab', id: `slab-${m.id}-${storey}`, levelId: l.id, polygon: slabPolygon, ...(clippedHoles ? { holes: clippedHoles } : {}), topOffset: 0, thickness: b.slabThicknessM, materialId: MATERIALS_V2.slab }, m.featureId, 'slabs')
@@ -175,6 +185,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       if (attached && isTop) attachedCapIds.set(m.id, [`${ringId}-w0`, `${ringId}-w1`, `${ringId}-w2`, `${ringId}-w3`])
     }
     evidence(`ring-${m.id}-${m.storeys[0]}`, 'SOURCE_EXACT', `${(m.x1 - m.x0).toFixed(2)} × ${(m.z1 - m.z0).toFixed(2)} m body from the plan's printed chains and wall bands`)
+    for (const own of m.storeyRects ?? []) evidence(`ring-${m.id}-${own.storey}`, 'SOURCE_DERIVED', `storey ${own.storey}'s own walls, ${(own.x1 - own.x0).toFixed(2)} × ${(own.z1 - own.z0).toFixed(2)} m: the walled region of that storey's plan, registered onto the body below, where it stands on the body`)
   }
 
   // --- return walls (the recess topology) -------------------------------------
@@ -457,7 +468,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     const l = levelOf(o.storeyIndex)
     if (!mass || !l) continue
     const wallId = ringWallId(mass.id, o.storeyIndex, o.facade)
-    const { offset, reversed } = wallOffset(mass, o.facade, o.interval)
+    const { offset, reversed } = wallOffset(rectAt(mass, o.storeyIndex), o.facade, o.interval)
     const sill = round6(Math.max(0, o.sillY - l.elevation))
     const nearIsTall = o.tallEdge === undefined ? true : (o.tallEdge === 'LOW') !== reversed
     const heightNear = round6(Math.max(0.3, (nearIsTall || o.headFarY === undefined ? o.headY : o.headFarY) - o.sillY))
@@ -486,9 +497,9 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     const l = levelOf(d.storeyIndex)
     if (!mass || !other || !l) continue
     const wallId = ringWallId(mass.id, d.storeyIndex, d.facade)
-    const { offset } = wallOffset(mass, d.facade, d.interval)
+    const { offset } = wallOffset(rectAt(mass, d.storeyIndex), d.facade, d.interval)
     const otherFacade = d.facade === 'EAST' ? 'WEST' : d.facade === 'WEST' ? 'EAST' : d.facade === 'FRONT' ? 'REAR' : 'FRONT'
-    const otherOffset = wallOffset(other, otherFacade, d.interval).offset
+    const otherOffset = wallOffset(rectAt(other, d.storeyIndex), otherFacade, d.interval).offset
     push({ type: 'cutOpening', id: d.id, wallId, kind: 'DOOR', offset: Math.max(0, offset), sill: 0, width: d.widthM, height: round6(d.headY - d.sillY), leaves: [{ wallId: ringWallId(other.id, d.storeyIndex, otherFacade), offset: Math.max(0, otherOffset) }] }, d.id, 'openings')
     push({ type: 'placeDoor', id: `${d.id}-leaf`, openingId: d.id, materialId: MATERIALS_V2.timber }, d.id, 'doors')
     evidence(d.id, 'SOURCE_DERIVED', d.why, { height: d.provenance.head })
@@ -527,7 +538,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     const l = levelOf(r.wallRef.storeyIndex)
     if (!l) continue
     const wallId = ringWallId(mass.id, r.wallRef.storeyIndex, r.wallRef.side)
-    const { offset, reversed } = wallOffset(mass, r.wallRef.side, r.along)
+    const { offset, reversed } = wallOffset(rectAt(mass, r.wallRef.storeyIndex), r.wallRef.side, r.along)
     const a0 = Math.max(0, offset)
     const a1 = round6(a0 + (r.along[1] - r.along[0]))
     void reversed
