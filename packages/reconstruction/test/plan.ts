@@ -106,7 +106,7 @@ export function registration(frameId = 'frame-test'): CoordinateRegistration {
 }
 
 /** A coordinate frame for a synthetic plan, so the layout pass can find it the way it finds a real one. */
-export function planFrame(id: string, storey: 'GROUND' | 'UPPER' | 'ATTIC', size: { width: number; height: number }): SourceCoordinateFrame {
+export function planFrame(id: string, storey: 'GROUND' | 'UPPER' | 'ATTIC' | 'BASEMENT' | 'ROOF' | 'UNKNOWN', size: { width: number; height: number }): SourceCoordinateFrame {
   return {
     id,
     assetId: `asset-${id}`,

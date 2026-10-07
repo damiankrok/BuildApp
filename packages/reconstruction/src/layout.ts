@@ -819,10 +819,10 @@ export function alignPlans(base: PlanReading, other: PlanReading, options: { max
     const sx = width(target.rect) / width(source)
     const sy = height(target.rect) / height(source)
     const fitted = Math.max(sx, sy) / Math.max(1e-9, Math.min(sx, sy))
-    const scales: Array<{ k: number; why: string }> = []
-    if (stated && stated.anisotropy <= maxAnisotropy) scales.push({ k: stated.k, why: 'the scale both plans print on their own chains' })
-    if (Number.isFinite(fitted) && fitted <= maxAnisotropy) scales.push({ k: (sx + sy) / 2, why: `the scale that makes this plan the size of ${target.id}` })
-    for (const { k: scale, why: scaleWhy } of scales) {
+    const scales: Array<{ k: number; why: string; stated: boolean }> = []
+    if (stated && stated.anisotropy <= maxAnisotropy) scales.push({ k: stated.k, why: 'the scale both plans print on their own chains', stated: true })
+    if (Number.isFinite(fitted) && fitted <= maxAnisotropy) scales.push({ k: (sx + sy) / 2, why: `the scale that makes this plan the size of ${target.id}`, stated: false })
+    for (const { k: scale, why: scaleWhy, stated: scaleStated } of scales) {
       if (!Number.isFinite(scale) || scale <= 0) continue
       // An upper storey does not have to be concentric with the one below. It
       // steps back from one wall and stays flush with the other, so the
@@ -860,7 +860,8 @@ export function alignPlans(base: PlanReading, other: PlanReading, options: { max
       }
       for (const ox of offsetsX) {
         for (const oy of offsetsY) {
-          const isStated = ox.stated && oy.stated
+          // 005L: a statement is the scale AND both offsets from the plans' own chains; chain offsets at a fitted scale state nothing
+          const isStated = scaleStated && ox.stated && oy.stated
           considered.push(candidate(scale, ox.v, oy.v, target, isStated, `at ${scaleWhy} (${scale.toFixed(3)}), ${ox.why} and ${oy.why} of ${target.id}`))
         }
       }
@@ -936,7 +937,9 @@ export function alignPlans(base: PlanReading, other: PlanReading, options: { max
       }
     }
   }
-  considered.sort((a, b) => b.score - a.score || a.targetId.localeCompare(b.targetId) || a.offsetX - b.offsetX || a.offsetY - b.offsetY)
+  // A total order on what a placement IS, never on the order it was found in (005L): two placements that tie on score
+  // are ordered by their own numbers, so enumerating targets, walls or offsets differently cannot change which leads.
+  considered.sort((a, b) => b.score - a.score || a.targetId.localeCompare(b.targetId) || a.scale - b.scale || a.offsetX - b.offsetX || a.offsetY - b.offsetY || Number(b.stated) - Number(a.stated) || a.why.localeCompare(b.why))
   // Two candidates that put the plan in the same place are one candidate,
   // however differently they were arrived at: a square plan is flush with
   // both its side walls and centred between them at once, and reporting that
@@ -951,10 +954,15 @@ export function alignPlans(base: PlanReading, other: PlanReading, options: { max
   // 005L: where both drawings state the placement — each plan's own chains fix its scale, and where it starts on both
   // axes — that is a reading, and the walls do not overrule it by fitting better somewhere else: an upper storey set
   // back from the rear wall has a rear wall of its own that lands on nothing below, and the placement that slides it
-  // onto the rear wall below fits the walls better and is wrong. What the walls can do is refute a statement: a
-  // stated placement that shares less than half the wall the best fit shares is a misread scale, not a reading.
+  // onto the rear wall below fits the walls better and is wrong. What can refute a statement is a misread scale, and
+  // a misread scale shows twice: the placement shares far less wall than the best fit (under half), AND it puts the
+  // plan's walled body where the building below is not. A storey set in from every wall shares no wall at all and
+  // still stands wholly over the building, and there the statement stands.
   const stated0 = distinct.find((c) => c.stated)
-  if (stated0 && distinct[0] !== stated0 && stated0.shares >= STATED_HOLDS_SHARE * distinct[0].shares) {
+  const body = largestBuilt(other)?.rect
+  const insideBelow = (c: PlanAlignment): boolean =>
+    body !== undefined && body.x0 * c.scale + c.offsetX >= envelope.x0 - tolerance && body.x1 * c.scale + c.offsetX <= envelope.x1 + tolerance && body.y0 * c.scale + c.offsetY >= envelope.y0 - tolerance && body.y1 * c.scale + c.offsetY <= envelope.y1 + tolerance
+  if (stated0 && distinct[0] !== stated0 && (stated0.shares >= STATED_HOLDS_SHARE * distinct[0].shares || insideBelow(stated0))) {
     return { best: stated0, considered: [stated0, ...distinct.filter((c) => c !== stated0)] }
   }
   return { best: distinct[0], considered: distinct }
