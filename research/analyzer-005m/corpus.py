@@ -184,19 +184,19 @@ def storey(work005k, fdir):
     return out
 
 
-def synth_global(path):
+def synth_global(path, split='TEST'):
     c = json.load(open(path))
     scenes = {s['sceneId']: s for s in c['scenes']}
     out = []
     for q in c['questions']:
-        if q['split'] != 'TEST':
+        if q['split'] != split:
             continue
         sc = scenes[q['sceneId']]
         img = os.path.join(os.path.dirname(path), 'renders', f"{q['sceneId']}.png")
         kind, target = q['targetKind'], q['targetPx']
         if kind == 'AB_SEGMENTS':
             target, kind = gap_of(target), 'SEGMENT'
-        out.append({'qid': '005m:' + q['qid'], 'set': 'SYNTH_GLOBAL', 'cls': q['cls'], 'targetKind': kind, 'target': target,
+        out.append({'qid': '005m:' + q['qid'], 'set': 'SYNTH_GLOBAL' if split == 'TEST' else 'SYNTH_' + split, 'cls': q['cls'], 'targetKind': kind, 'target': target,
                     'expected': J_CLS.get(q['cls'], {}).get(q['expected'], q['expected']), 'orderKey': re.sub(r'-[AB]-q', '-q', q['baseQid']),
                     'baseQid': '005m:' + q['baseQid'], 'pairQid': ('005m:' + q['pairQid']) if q.get('pairQid') else None,
                     'transform': q['transform'], 'group': q['family'], 'variant': q.get('variant'),
@@ -214,6 +214,8 @@ def main():
     ap.add_argument('--k005', default='/home/user/work005k/gapset')
     ap.add_argument('--l005', default='/home/user/work005l')
     ap.add_argument('--synth-global', default=None)
+    ap.add_argument('--synth-train', default=None, help='TRAIN-split corpus.json: adds SYNTH_TRAIN questions (teacher mining only, never benchmarked)')
+    ap.add_argument('--pool-name', default='pool.json')
     a = ap.parse_args()
     fdir = os.path.join(a.work, 'frames')
     os.makedirs(fdir, exist_ok=True)
@@ -221,9 +223,11 @@ def main():
     pool = j005(a.j005, a.repo, True) + j005(a.j005, a.repo, False) + gapset(a.k005, a.repo, fdir) + murajach(a.l005, fdir) + storey(a.k005, fdir)
     if a.synth_global:
         pool += synth_global(a.synth_global)
+    if a.synth_train:
+        pool += synth_global(a.synth_train, 'TRAIN')
     ids = [q['qid'] for q in pool]
     assert len(ids) == len(set(ids))
-    json.dump({'researchOnly': 'BUILDPLAN-ANALYZER-005M', 'questions': pool}, open(os.path.join(a.work, 'corpus', 'pool.json'), 'w'))
+    json.dump({'researchOnly': 'BUILDPLAN-ANALYZER-005M', 'questions': pool}, open(os.path.join(a.work, 'corpus', a.pool_name), 'w'))
     from collections import Counter
     print(json.dumps(Counter(q['set'] for q in pool)))
 

@@ -101,6 +101,7 @@ def main():
     ap.add_argument('--phase', type=int, choices=[1, 2], required=True)
     ap.add_argument('--pid', type=int, default=None)
     ap.add_argument('--limit', type=int, default=0)
+    ap.add_argument('--modes', default=','.join(ORDER), help='comma-separated subset of the five modes (the teacher lane)')
     a = ap.parse_args()
     items = [json.loads(l) for l in open(a.items)]
     if a.phase == 1:
@@ -112,8 +113,9 @@ def main():
         done = {json.loads(l)['key'] for l in open(a.out)}
     n = 0
     with open(a.out, 'a') as fh:
+        modes = [m for m in ORDER if m in a.modes.split(',')]
         for qid in qorder:
-            for mode in ORDER:
+            for mode in modes:
                 it = by[(qid, mode)]
                 if it['key'] in done:
                     continue
