@@ -57,9 +57,9 @@ def main():
     if sg.get('version') == '2.0.0' and not a.allow_v20:
         raise SystemExit('regenerate TRAIN/VAL with vrgen2 >= 2.1.0 (post-review B-2 / D-1 / D-8), or pass --allow-v2.0')
     forbidden = set()
-    for path in (a.sg_test, a.sg_sealed):
+    for path, split in ((a.sg_test, 'TEST'), (a.sg_sealed, 'SEALED')):
         if path:
-            forbidden |= {s['pngSha256'] for s in json.load(open(path))['scenes']}
+            forbidden |= {s['pngSha256'] for s in json.load(open(path))['scenes'] if s['split'] == split}
     val = [q for q in sg['questions'] if q['split'] == 'VAL']
     teacher = {}
     if a.teacher:
