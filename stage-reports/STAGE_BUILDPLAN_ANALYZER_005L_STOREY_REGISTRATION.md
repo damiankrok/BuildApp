@@ -10,7 +10,7 @@
 | A06 / A07 | **FIXED generically**: ALGORITHMIC_FAIL → PASS. A06 is 2 / 2 storeys at +0.18 %, A07 2 / 2 at −0.37 % (§D) |
 | A01 | **storey fixed**: the attic is registered (wall pairs, k 0.923) and stacked on the main body. Still ALGORITHMIC_FAIL on the pre-existing ground-floor `FILL_TOO_LARGE` (out of scope) (§D) |
 | D00 | **storey fixed**: the attic is registered and stacked. Still ALGORITHMIC_FAIL on the ground footprint, −18.71 % (the base plan misses the garage; out of scope) (§D) |
-| DEVELOPMENT_REGRESSION | **PASS**: 40 rows. Four rows go FAIL → PASS (A06, A07, żurawkach, tunbergiach) and no PASS row moves. Marcówki and willa-miranda keep the 005K model. Two models move with their verdict kept, both explained (§E) |
+| DEVELOPMENT_REGRESSION | **PASS**: 40 rows. Four rows go FAIL → PASS (A06, A07, żurawkach, tunbergiach) and no PASS row turns FAIL. Marcówki and willa-miranda keep the 005K model. Two models move with their verdict kept, both explained (§E) |
 | DRAWN_GAP_RULE | **OFF**: it is never passed. The product default is OFF, and the 005K architecture gate forbids any app from naming it (§F) |
 | ORDER_INVARIANCE | **PASS**: family A moves nothing in 8 shuffles on any row. Family B (the 005K chain-order debt) is measured and now reaches a storey decision on two rows refused at plan resolution (§G) |
 | NON_CIRCULARITY | **PASS**: `layoutOptionsOnly` whitelist, Proxy test, pinned published uses, vocabulary gates and executed decoys. M4 and M8–M10 are killed (§C) |
@@ -19,9 +19,9 @@
 | FREEZE | `PRE_HOLDOUT_9_SHA = 8f5f3c5903bc8cfe168667f6b5dcfdb995eaf4cd`. CI run 37595482179 green on attempt 1: 39 jobs pass, 2 skipped (§J) |
 | BLIND ROUND 9 | **#1 `dom-w-murajach` (stratified, multi-storey): ALGORITHMIC_FAIL**. First bad decision BODY_RELATION on the ground plan (a recessed entrance beside the garage door), upstream of every storey decision. At the 005K code it failed too (−13.5 %). **#2 `dom-w-cieszyniankach` (unstratified): PASS**, single storey (§K) |
 | INHERITED_ARM64_DEVICE_PARITY | **PENDING** (§L) |
-| OWNER APK | see §T |
+| OWNER APK | **published**: versionCode 1193, run 193 on `99b0eea`, SHA-256 `ee9ff7e7…42b6c5`, preview signer `6e48fac4…a0da`, arm64-v8a only, the same five native libraries, OCR model and WASM byte-identical. Only the analyzer bundle changed (+50 KB). Polish checklist in §T |
 | NEXT | **FIX_RECESSED_ENTRANCE_BODY_RELATION** (`recommendation.md`) |
-| **Stage** | **PARTIAL**: `PARTIAL_BUILDPLAN_ANALYZER_005L_BLIND9_BODY_RELATION_FAIL`. Every condition of §45 holds except the last: fresh blind round 9 has one ALGORITHMIC_FAIL. It is not a storey failure and not caused by this stage |
+| **Stage** | **PARTIAL**: `PARTIAL_BUILDPLAN_ANALYZER_005L_BLIND9_BODY_RELATION_FAIL`. Full CI is green (run 193). Every condition of §45 holds except the last: fresh blind round 9 has one ALGORITHMIC_FAIL. It is not a storey failure and not caused by this stage |
 
 **Branch and history.**
 - Branch `analyzer/storey-registration-mass-stacking-v1`, from `a70047f` (the 005K close, verified).
@@ -278,7 +278,7 @@ The first fix commit caused two full-suite regressions, both fixed with a test:
 
 ## L. OWNER APK and the inherited device gate
 
-- **OWNER APK:** see §T, written after the dispatch run.
+- **OWNER APK:** published as versionCode 1193 and verified from the downloaded file (§T).
 - **INHERITED_005H_ARM64_DEVICE_PARITY: PENDING.** No physical arm64 phone result was supplied, and none is claimed
   from an emulator.
 
@@ -320,10 +320,70 @@ The first fix commit caused two full-suite regressions, both fixed with a test:
 | `npm run typecheck` | pass |
 | `npm test` | 171 files, 2256 tests pass (11 skipped by design) at the council-closed code |
 | `npm run build` | pass |
-| CI | freeze run 37595482179 green on attempt 1; final run in §T |
+| CI | freeze run 37595482179 green on attempt 1; final run 193 (37610696420) on `99b0eea` green on attempt 1 (40 pass, 1 skipped, OWNER APK published) |
 | no publisher pixel committed | the Evidence Packs carry the analyzer's own layers and its own model preview only; every picture of a source stayed in `/home/user/work005l` |
 
 ## T. Final CI and OWNER APK
 
-Pending: the `workflow_dispatch` run with `owner_apk` on the commit that carries this report. That run is also the final
-CI. Its verification from the downloaded APK and the Polish OWNER checklist follow in the next commit.
+**Final CI:** `workflow_dispatch` run 193 (`37610696420`), attempt 1, on `99b0eea`. It is green: 40 jobs pass, 1 is
+skipped, the UI evidence gate passes, and the OWNER release job publishes. The analyzer code is the frozen code
+(`PRE_HOLDOUT_9_SHA` `8f5f3c5`); only the ledger, documents and sealed evidence differ.
+
+**OWNER APK:**
+`https://github.com/damiankrok/BuildApp/releases/download/owner-preview-latest/BuildPlan-owner-preview.apk`.
+Verified from the downloaded file, not from the notes:
+
+| check | result |
+| --- | --- |
+| direct link | serves the APK itself: 39 447 295 bytes, `application/vnd.android.package-archive`. The asset was updated 11:32:30Z and downloaded after run 193 completed |
+| SHA-256 | `ee9ff7e79198beb9a0a276aa957c9cd7442c5b3062c453a949af5cafbe42b6c5`, equal to the release notes and to GitHub's asset digest |
+| version | `com.buildplan.preview`, **versionCode 1193**, versionName `0.193.0-preview`, minSdk 26, targetSdk 35 |
+| commit / run | the notes give run 193 (attempt 1) from `claude/new-session-3kzcgh` @ `99b0eea7d2728ea0e2d145ebb2920a4f5dc2cc9e` |
+| signer | `apksigner verify --print-certs`: "CN=BuildPlan Model Preview, OU=Preview builds (not a production key)", certificate SHA-256 `6e48fac4…a0da`, equal to the notes and to 005I's. It installs over build 1172 |
+| zipalign | `zipalign -c -P 16 -v 4`: verification successful |
+| ABI / native libraries | `native-code: 'arm64-v8a'` only. The same five libraries as 005I, at the same sizes: `libnode`, `libbuildapp_node_bridge`, `libfilament-jni`, `libc++_shared`, `libandroidx.graphics.path`. **No new `.so`** |
+| permissions | `INTERNET` and AndroidX's own `DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION`, unchanged |
+| OCR model / WASM | **unchanged, byte for byte**: `PP-OCRv6_tiny_rec.onnx` `9ef676d6…63e6`, its dictionary `9a8199f8…`, `ort-wasm-simd-threaded.wasm` `3398c10d…dee2`, its loader `e13f7f94…`, `ocr-worker.mjs` `9a85e0c5…`, `ocr-self-test.mjs` `d12a6f18…` |
+| what changed against 1172 | exactly four entries, by CRC: `AndroidManifest.xml` (version), `classes5.dex` (build config), `assets/local-analyzer/manifest.json` (the bundle's hash) and `analyzer.mjs`. `analyzer.mjs` grew 2 210 281 → 2 260 511 B (+50 230 B, the storey registration and support code: `storeyRegistrations`, `layoutOptionsOnly`, `STOREY_WALL_SHARE`, `storeyRects`, the `PRINTED_SCALE` / `SAME_PIXEL_SCALE` bases). Every other file is identical |
+| no research asset | no file in the APK names DeepLSD, ELSED, MobileSAM / Segment Anything, `research/analyzer`, the bake-off or a checkpoint extension. The Evidence Pack is developer tooling and is not in the app |
+| size | 39 447 295 B against 39 430 971 B: **+16 324 B** |
+
+No APK binary is committed.
+
+**INHERITED_005H_ARM64_DEVICE_PARITY: PENDING.** It is not inferred from the emulator.
+
+### OWNER phone checklist (po polsku)
+
+Zainstaluj `BuildPlan-owner-preview.apk` (versionCode 1193) na poprzednią wersję (1172). Każdy dom dodaj przez
+„Dodaj dom z linku”. Telefon pobiera stronę i liczy na nowo, więc wynik może się trochę różnić od komputera. Jeśli
+się różni, odeślij zrzut ekranu i kod wyniku.
+
+1. **Test zgodności odczytu wymiarów** (z 005H, wciąż otwarty). „Dodaj dom z linku” → „Test zgodności odczytu
+   wymiarów” → „Uruchom test”, potem „Kopiuj wynik”.
+   - **Zaliczony:** „Zgodny z komputerem”, korpus `734300d2…`, wynik `396c9f54…`, 92 z 96, model `9ef676d6…`. Model
+     OCR się nie zmienił.
+   - **Odeślij też:** czas na etykietę, model telefonu i ilość RAM.
+2. **Znany dom dwukondygnacyjny z garażem: Marcówki**
+   (`https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca`).
+   - Dom ma się zbudować jak w wersji 1172: 2 kondygnacje, około 131 m².
+   - „Warstwy” → „Tylko poddasze”: poddasze stoi nad domem.
+   - **Nad garażem nie ma żadnego piętra.** Garaż zostaje parterowy.
+3. **Dom, który wcześniej miał tylko parter: dom w bratkach 26 (R2BE)**
+   (`https://www.archon.pl/projekty-domow/projekt-dom-w-bratkach-26-r2be-m953292c7d56c7`).
+   - Teraz powinny być **2 kondygnacje** (wcześniej było tylko parter).
+   - „Tylko poddasze”: poddasze stoi nad domem i nad gankiem od frontu.
+4. **Willa Maja R2** (`https://www.archon.pl/projekty-domow/projekt-willa-maja-r2-mcc7297f3e22da`).
+   - Teraz **2 kondygnacje** (wcześniej tylko parter).
+   - „Tylko poddasze”: piętro nad całym domem, około 17,2 × 7,8 m.
+5. **Piętro nie jest kopią parteru: dom w tunbergiach 7 (R2)**
+   (`https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c`).
+   - Powinny być 3 poziomy.
+   - Najwyższy poziom to **mały pokój na poddaszu, około 3,9 × 3,3 m**, a nie obrys całego domu.
+   - Sprawdź to w „Tylko poddasze” albo wybierając ścianę najwyższego poziomu.
+6. **Cofnięte piętro: dom w żurawkach 3 (P)**
+   (`https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5`).
+   - Piwnica, parter i poddasze.
+   - Nad częścią dobudowaną ściana poddasza jest **cofnięta o około 0,8 m** względem parteru. Nie jest przeniesiona
+     z parteru.
+7. **Odmowa zamiast złego domu.** Dom, którego parter nie daje się zamknąć (np. wejście w podcieniu tuż obok bramy
+   garażowej), kończy się nazwaną odmową po polsku. Nie powstaje dom z poddaszem udającym parter.
