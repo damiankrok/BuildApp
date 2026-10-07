@@ -1,0 +1,82 @@
+{
+ "researchOnly": "BUILDPLAN-ANALYZER-005M",
+ "decided": "2026-10-07, post-review round 1, from the stimulus and the generator code only (no model answer was used to choose an item); the same list applies to every model and mode",
+ "rule": "a question is excluded from every amended table when its prompt contradicts its image, or when the drawing and the question wording do not settle its generator truth. Raw answers stay in runs/*.jsonl; the pre-registered tables (all 167 / 32 questions) are still printed beside the amended ones",
+ "items": [
+  {
+   "qid": "005m:test-inset_upper-s0-A-MIRROR-q0",
+   "finding": "B-1",
+   "reason": "STOREY_COVERAGE on a MIRROR/ROT90 render: the prompt says \"ground floor on the left, upper floor on the right\", but the transformed drawing has the upper floor on the left (MIRROR) or the panels stacked (ROT90). Fixed forward in common.prompt_for (layout text per transform)"
+  },
+  {
+   "qid": "005m:test-inset_upper-s0-B-MIRROR-q0",
+   "finding": "B-1",
+   "reason": "STOREY_COVERAGE on a MIRROR/ROT90 render: the prompt says \"ground floor on the left, upper floor on the right\", but the transformed drawing has the upper floor on the left (MIRROR) or the panels stacked (ROT90). Fixed forward in common.prompt_for (layout text per transform)"
+  },
+  {
+   "qid": "005m:test-inset_upper-s1-A-ROT90-q0",
+   "finding": "B-1",
+   "reason": "STOREY_COVERAGE on a MIRROR/ROT90 render: the prompt says \"ground floor on the left, upper floor on the right\", but the transformed drawing has the upper floor on the left (MIRROR) or the panels stacked (ROT90). Fixed forward in common.prompt_for (layout text per transform)"
+  },
+  {
+   "qid": "005m:test-wing_storey-s0-A-MIRROR-q0",
+   "finding": "B-1",
+   "reason": "STOREY_COVERAGE on a MIRROR/ROT90 render: the prompt says \"ground floor on the left, upper floor on the right\", but the transformed drawing has the upper floor on the left (MIRROR) or the panels stacked (ROT90). Fixed forward in common.prompt_for (layout text per transform)"
+  },
+  {
+   "qid": "005m:test-wing_storey-s0-B-MIRROR-q0",
+   "finding": "B-1",
+   "reason": "STOREY_COVERAGE on a MIRROR/ROT90 render: the prompt says \"ground floor on the left, upper floor on the right\", but the transformed drawing has the upper floor on the left (MIRROR) or the panels stacked (ROT90). Fixed forward in common.prompt_for (layout text per transform)"
+  },
+  {
+   "qid": "005m:test-wing_storey-s1-A-ROT90-q0",
+   "finding": "B-1",
+   "reason": "STOREY_COVERAGE on a MIRROR/ROT90 render: the prompt says \"ground floor on the left, upper floor on the right\", but the transformed drawing has the upper floor on the left (MIRROR) or the panels stacked (ROT90). Fixed forward in common.prompt_for (layout text per transform)"
+  },
+  {
+   "qid": "005m:test-garage_vs_carport-s0-A-NORMAL-q0",
+   "finding": "B-2 / D-1",
+   "reason": "GARAGE_DOOR_VS_CARPORT in garage_vs_carport: both members draw the front as an unmarked gap and only the back wall differs, yet member A is labelled GARAGE_DOOR. The preamble says garage doors are drawn with thin symbols, and 005J's garage_door_vs_open labels the same enclosed bay with an unmarked front as an open carport. Fixed forward in vrgen2 2.1 (the question asks whether the bay is closed at the back)"
+  },
+  {
+   "qid": "005m:test-garage_vs_carport-s0-B-NORMAL-q0",
+   "finding": "B-2 / D-1",
+   "reason": "GARAGE_DOOR_VS_CARPORT in garage_vs_carport: both members draw the front as an unmarked gap and only the back wall differs, yet member A is labelled GARAGE_DOOR. The preamble says garage doors are drawn with thin symbols, and 005J's garage_door_vs_open labels the same enclosed bay with an unmarked front as an open carport. Fixed forward in vrgen2 2.1 (the question asks whether the bay is closed at the back)"
+  },
+  {
+   "qid": "005m:test-garage_vs_carport-s0-A-MIRROR-q0",
+   "finding": "B-2 / D-1",
+   "reason": "GARAGE_DOOR_VS_CARPORT in garage_vs_carport: both members draw the front as an unmarked gap and only the back wall differs, yet member A is labelled GARAGE_DOOR. The preamble says garage doors are drawn with thin symbols, and 005J's garage_door_vs_open labels the same enclosed bay with an unmarked front as an open carport. Fixed forward in vrgen2 2.1 (the question asks whether the bay is closed at the back)"
+  },
+  {
+   "qid": "005m:test-garage_vs_carport-s0-B-MIRROR-q0",
+   "finding": "B-2 / D-1",
+   "reason": "GARAGE_DOOR_VS_CARPORT in garage_vs_carport: both members draw the front as an unmarked gap and only the back wall differs, yet member A is labelled GARAGE_DOOR. The preamble says garage doors are drawn with thin symbols, and 005J's garage_door_vs_open labels the same enclosed bay with an unmarked front as an open carport. Fixed forward in vrgen2 2.1 (the question asks whether the bay is closed at the back)"
+  },
+  {
+   "qid": "005m:test-garage_vs_carport-s1-A-NORMAL-q0",
+   "finding": "B-2 / D-1",
+   "reason": "GARAGE_DOOR_VS_CARPORT in garage_vs_carport: both members draw the front as an unmarked gap and only the back wall differs, yet member A is labelled GARAGE_DOOR. The preamble says garage doors are drawn with thin symbols, and 005J's garage_door_vs_open labels the same enclosed bay with an unmarked front as an open carport. Fixed forward in vrgen2 2.1 (the question asks whether the bay is closed at the back)"
+  },
+  {
+   "qid": "005m:test-garage_vs_carport-s1-B-NORMAL-q0",
+   "finding": "B-2 / D-1",
+   "reason": "GARAGE_DOOR_VS_CARPORT in garage_vs_carport: both members draw the front as an unmarked gap and only the back wall differs, yet member A is labelled GARAGE_DOOR. The preamble says garage doors are drawn with thin symbols, and 005J's garage_door_vs_open labels the same enclosed bay with an unmarked front as an open carport. Fixed forward in vrgen2 2.1 (the question asks whether the bay is closed at the back)"
+  },
+  {
+   "qid": "005m:test-garage_vs_carport-s1-A-ROT90-q0",
+   "finding": "B-2 / D-1",
+   "reason": "GARAGE_DOOR_VS_CARPORT in garage_vs_carport: both members draw the front as an unmarked gap and only the back wall differs, yet member A is labelled GARAGE_DOOR. The preamble says garage doors are drawn with thin symbols, and 005J's garage_door_vs_open labels the same enclosed bay with an unmarked front as an open carport. Fixed forward in vrgen2 2.1 (the question asks whether the bay is closed at the back)"
+  },
+  {
+   "qid": "005m:test-garage_vs_carport-s2-A-NORMAL-q0",
+   "finding": "B-2 / D-1",
+   "reason": "GARAGE_DOOR_VS_CARPORT in garage_vs_carport: both members draw the front as an unmarked gap and only the back wall differs, yet member A is labelled GARAGE_DOOR. The preamble says garage doors are drawn with thin symbols, and 005J's garage_door_vs_open labels the same enclosed bay with an unmarked front as an open carport. Fixed forward in vrgen2 2.1 (the question asks whether the bay is closed at the back)"
+  },
+  {
+   "qid": "005m:test-garage_vs_carport-s2-B-NORMAL-q0",
+   "finding": "B-2 / D-1",
+   "reason": "GARAGE_DOOR_VS_CARPORT in garage_vs_carport: both members draw the front as an unmarked gap and only the back wall differs, yet member A is labelled GARAGE_DOOR. The preamble says garage doors are drawn with thin symbols, and 005J's garage_door_vs_open labels the same enclosed bay with an unmarked front as an open carport. Fixed forward in vrgen2 2.1 (the question asks whether the bay is closed at the back)"
+  }
+ ]
+}
