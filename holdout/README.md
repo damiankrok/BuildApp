@@ -324,8 +324,9 @@ The protocol of round 8, steps 1–6, with these differences only. Everything he
    passed).
 6. **Verdict** by `holdout/verdict.mjs` as committed at the freeze. It adds one condition to round 8's, fixed before
    the freeze and calibrated on the development matrix (`stage-reports/artifacts/analyzer-005l/development-matrix.json`):
-   `upperStoreysHoldTheirRooms` — the levels above the lowest, together, have a gross wall-ring area of at least 0.9 of
-   the net area of the rooms the publisher lists above the ground floor (basement rooms not counted). A storey count
+   `upperStoreysHoldTheirRooms` — the levels above the ground floor (v2 index > 0; a basement is never "upper",
+   council C5L-4), together, have a gross wall-ring area of at least 0.9 of the net area of the rooms the publisher
+   lists above the ground floor (basement rooms not counted). A storey count
    is not a building: a model whose upper level is a fragment copied or clipped short of the rooms it must hold fails.
    It judges the emitted model only; the analyzer never reads the room list for its storeys
    (`tests/architecture/storey-support.test.ts`). No threshold or other condition changed.

@@ -1,0 +1,638 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005L",
+ "method": "composeStructuralLayout (the production entry) on every development row with more than one plan, in the sealed order and under seeded shuffles. Family A shuffles the coordinate frames (the plans: the order of alignment targets and of upper plans), the metric evidence, the registrations, the dimension observations and the published facts; every storey decision (chosen placement, rival, margin, decision), every walled region and support relation, every mass storey span and every footprint region must be equal byte for byte. Family B shuffles the dimension chains alone, an input of the decomposition grid upstream of the regions (the 005K debt; measured, not repaired).",
+ "permutations": 8,
+ "rows": [
+  {
+   "row": "dom-pod-jarzabem",
+   "plans": 4,
+   "registrations": 0,
+   "decisions": [],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 5,
+    "movedWhat": [
+     "footprints"
+    ],
+    "regionsMoved": 0
+   }
+  },
+  {
+   "row": "dom-w-arkadiach",
+   "plans": 8,
+   "registrations": 1,
+   "decisions": [
+    "frame-asset-rzut-cc4d20932a-b363732485=STACKED"
+   ],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedWhat": [],
+    "regionsMoved": 0
+   }
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "plans": 8,
+   "registrations": 0,
+   "decisions": [],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedWhat": [],
+    "regionsMoved": 0
+   }
+  },
+  {
+   "row": "dom-w-morelach",
+   "plans": 8,
+   "registrations": 1,
+   "decisions": [
+    "frame-asset-rzut-7d856c8254-d73cb6d54e=STACKED"
+   ],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedWhat": [],
+    "regionsMoved": 0
+   }
+  },
+  {
+   "row": "marcowki",
+   "plans": 8,
+   "registrations": 1,
+   "decisions": [
+    "frame-asset-rzut-117027f690-fed2722c38=STACKED"
+   ],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 3,
+    "movedWhat": [
+     "decision:frame-asset-rzut-117027f690-fed2722c38",
+     "footprints",
+     "regions:frame-asset-rzut-117027f690-fed2722c38"
+    ],
+    "regionsMoved": 3
+   }
+  },
+  {
+   "row": "rarytasy-g2e",
+   "plans": 4,
+   "registrations": 0,
+   "decisions": [],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 3,
+    "movedWhat": [
+     "footprints"
+    ],
+    "regionsMoved": 0
+   }
+  },
+  {
+   "row": "kosacce-clean",
+   "plans": 4,
+   "registrations": 0,
+   "decisions": [],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 7,
+    "movedWhat": [
+     "footprints",
+     "span:mass-2"
+    ],
+    "regionsMoved": 0
+   }
+  },
+  {
+   "row": "kosacce-tracked",
+   "plans": 4,
+   "registrations": 0,
+   "decisions": [],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 6,
+    "movedWhat": [
+     "footprints",
+     "span:mass-2"
+    ],
+    "regionsMoved": 0
+   }
+  },
+  {
+   "row": "rarytasy-eoze",
+   "plans": 4,
+   "registrations": 0,
+   "decisions": [],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedWhat": [],
+    "regionsMoved": 0
+   }
+  },
+  {
+   "row": "eoze-legacy-every",
+   "plans": 4,
+   "registrations": 0,
+   "decisions": [],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedWhat": [],
+    "regionsMoved": 0
+   }
+  },
+  {
+   "row": "alt-marcowki",
+   "plans": 4,
+   "registrations": 0,
+   "decisions": [],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedWhat": [],
+    "regionsMoved": 0
+   }
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "plans": 8,
+   "registrations": 1,
+   "decisions": [
+    "frame-asset-rzut-d52f958fd6-d2646b4dce=STACKED"
+   ],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedWhat": [],
+    "regionsMoved": 0
+   }
+  },
+  {
+   "row": "willa-miranda",
+   "plans": 8,
+   "registrations": 1,
+   "decisions": [
+    "frame-asset-rzut-07b69dcbb8-2088494fef=NO_SUPPORT"
+   ],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 7,
+    "movedWhat": [
+     "regions:frame-asset-rzut-07b69dcbb8-2088494fef"
+    ],
+    "regionsMoved": 7
+   }
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "plans": 12,
+   "registrations": 2,
+   "decisions": [
+    "frame-asset-rzut-b33f1d0952-a82d8da7c0=STACKED",
+    "frame-asset-rzut-d59c6b8717-92f3653883=STACKED"
+   ],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 4,
+    "movedWhat": [
+     "footprints",
+     "regions:frame-asset-rzut-b33f1d0952-a82d8da7c0"
+    ],
+    "regionsMoved": 4
+   }
+  },
+  {
+   "row": "dom-w-modrzykach",
+   "plans": 4,
+   "registrations": 0,
+   "decisions": [],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedWhat": [],
+    "regionsMoved": 0
+   }
+  },
+  {
+   "row": "dom-w-azaliach",
+   "plans": 8,
+   "registrations": 1,
+   "decisions": [
+    "frame-asset-rzut-2e7e66ff80-78651ec3ee=NO_SUPPORT"
+   ],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedWhat": [],
+    "regionsMoved": 0
+   }
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "plans": 8,
+   "registrations": 1,
+   "decisions": [
+    "frame-asset-rzut-15a246c0c6-5322551032=NO_SUPPORT"
+   ],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedWhat": [],
+    "regionsMoved": 0
+   }
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "plans": 12,
+   "registrations": 2,
+   "decisions": [
+    "frame-asset-rzut-96d0ccd771-6997c88674=STACKED",
+    "frame-asset-rzut-b94c3eb0ba-1193124e61=STACKED"
+   ],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedWhat": [],
+    "regionsMoved": 0
+   }
+  },
+  {
+   "row": "galaktyka",
+   "plans": 2,
+   "registrations": 0,
+   "decisions": [],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedWhat": [],
+    "regionsMoved": 0
+   }
+  },
+  {
+   "row": "dom-pod-milorzebem",
+   "plans": 8,
+   "registrations": 0,
+   "decisions": [],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedWhat": [],
+    "regionsMoved": 0
+   }
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "plans": 8,
+   "registrations": 1,
+   "decisions": [
+    "frame-asset-rzut-f6160738fd-6e7c8b2a23=NO_SUPPORT"
+   ],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 5,
+    "movedWhat": [
+     "decision:frame-asset-rzut-f6160738fd-6e7c8b2a23",
+     "footprints"
+    ],
+    "regionsMoved": 0
+   }
+  },
+  {
+   "row": "dom-w-gozdzikowcach",
+   "plans": 8,
+   "registrations": 1,
+   "decisions": [
+    "frame-asset-rzut-e8d096563f-6e44db362c=STACKED"
+   ],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 3,
+    "movedWhat": [
+     "decision:frame-asset-rzut-e8d096563f-6e44db362c",
+     "regions:frame-asset-rzut-e8d096563f-6e44db362c"
+    ],
+    "regionsMoved": 3
+   }
+  },
+  {
+   "row": "dom-w-cyklamenach",
+   "plans": 8,
+   "registrations": 1,
+   "decisions": [
+    "frame-asset-rzut-083dceba54-1b73e155d5=NO_SUPPORT"
+   ],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 7,
+    "movedWhat": [
+     "decision:frame-asset-rzut-083dceba54-1b73e155d5",
+     "footprints",
+     "regions:frame-asset-rzut-083dceba54-1b73e155d5",
+     "span:mass-0",
+     "span:mass-1"
+    ],
+    "regionsMoved": 7
+   }
+  },
+  {
+   "row": "A00",
+   "plans": 4,
+   "registrations": 0,
+   "decisions": [],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 5,
+    "movedWhat": [
+     "footprints",
+     "span:mass-1"
+    ],
+    "regionsMoved": 0
+   }
+  },
+  {
+   "row": "A01",
+   "plans": 8,
+   "registrations": 1,
+   "decisions": [
+    "frame-asset-rzut-cdc1c4ebd8-9b8cd885e5=STACKED"
+   ],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 4,
+    "movedWhat": [
+     "footprints",
+     "regions:frame-asset-rzut-cdc1c4ebd8-9b8cd885e5",
+     "span:mass-0",
+     "span:mass-1",
+     "span:mass-2"
+    ],
+    "regionsMoved": 4
+   }
+  },
+  {
+   "row": "A02",
+   "plans": 4,
+   "registrations": 0,
+   "decisions": [],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedWhat": [],
+    "regionsMoved": 0
+   }
+  },
+  {
+   "row": "A03",
+   "plans": 8,
+   "registrations": 1,
+   "decisions": [
+    "frame-asset-rzut-4cad03bcd1-e99747c89c=STACKED"
+   ],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedWhat": [],
+    "regionsMoved": 0
+   }
+  },
+  {
+   "row": "A04",
+   "plans": 8,
+   "registrations": 1,
+   "decisions": [
+    "frame-asset-rzut-1b82f82f43-ced10ac33a=STACKED"
+   ],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 6,
+    "movedWhat": [
+     "decision:frame-asset-rzut-1b82f82f43-ced10ac33a",
+     "footprints",
+     "regions:frame-asset-rzut-1b82f82f43-ced10ac33a",
+     "span:mass-0"
+    ],
+    "regionsMoved": 6
+   }
+  },
+  {
+   "row": "A05",
+   "plans": 4,
+   "registrations": 0,
+   "decisions": [],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedWhat": [],
+    "regionsMoved": 0
+   }
+  },
+  {
+   "row": "A06",
+   "plans": 8,
+   "registrations": 1,
+   "decisions": [
+    "frame-asset-rzut-eccabe6307-98a0db655a=STACKED"
+   ],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedWhat": [],
+    "regionsMoved": 0
+   }
+  },
+  {
+   "row": "A07",
+   "plans": 8,
+   "registrations": 1,
+   "decisions": [
+    "frame-asset-rzut-a46fd40284-47285d772c=STACKED"
+   ],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedWhat": [],
+    "regionsMoved": 0
+   }
+  },
+  {
+   "row": "D00",
+   "plans": 2,
+   "registrations": 1,
+   "decisions": [
+    "frame-asset-mars-rzut-poddasze-f3b786cb4f-41728af9b6=STACKED"
+   ],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedWhat": [],
+    "regionsMoved": 0
+   }
+  },
+  {
+   "row": "D01",
+   "plans": 2,
+   "registrations": 0,
+   "decisions": [],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedWhat": [],
+    "regionsMoved": 0
+   }
+  },
+  {
+   "row": "D02",
+   "plans": 2,
+   "registrations": 0,
+   "decisions": [],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedWhat": [],
+    "regionsMoved": 0
+   }
+  },
+  {
+   "row": "D03",
+   "plans": 2,
+   "registrations": 0,
+   "decisions": [],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedWhat": [],
+    "regionsMoved": 0
+   }
+  },
+  {
+   "row": "D05",
+   "plans": 2,
+   "registrations": 0,
+   "decisions": [],
+   "permutations": 8,
+   "moved": 0,
+   "movedWhat": [],
+   "chainOrder": {
+    "moved": 0,
+    "movedWhat": [],
+    "regionsMoved": 0
+   }
+  }
+ ],
+ "rowsWithAMove": 0,
+ "rowsWhereChainOrderMovesAStoreyDecision": 12,
+ "rowsWhereChainOrderMovesRegionsOnly": 1,
+ "chainOrderDebtAgainstStartingCode": {
+  "startingCode": {
+   "commit": "a70047f (005K close)",
+   "permutations": 6,
+   "rowsWhereChainOrderMovesAStoreyDecision": [
+    "A00",
+    "A01",
+    "dom-pod-jarzabem",
+    "dom-w-cyklamenach",
+    "dom-w-helikoniach",
+    "dom-w-zurawkach",
+    "kosacce-clean",
+    "kosacce-tracked",
+    "marcowki",
+    "rarytasy-g2e"
+   ]
+  },
+  "stageCode": {
+   "permutations": 8,
+   "rowsWhereChainOrderMovesAStoreyDecision": [
+    "A00",
+    "A01",
+    "A04",
+    "dom-pod-jarzabem",
+    "dom-w-cyklamenach",
+    "dom-w-gozdzikowcach",
+    "dom-w-helikoniach",
+    "dom-w-zurawkach",
+    "kosacce-clean",
+    "kosacce-tracked",
+    "marcowki",
+    "rarytasy-g2e"
+   ]
+  },
+  "newlyExposed": [
+   "A04",
+   "dom-w-gozdzikowcach"
+  ],
+  "noLongerExposed": [],
+  "reading": "Family A (frames, evidence, registrations, observations, facts) moves nothing on any row. Family B is the 005K debt: the decomposition grid depends on the order of the dimension chains. 005L does not change that grid; it now reads the upper plan's walled regions, which the grid cuts, so on two rows (A04, dom-w-gozdzikowcach) the debt now reaches a storey decision. Both are refused at plan resolution (PLAN_RESOLUTION_INCONCLUSIVE) in the development replay, before and after. Measured and reported per brief \u00a732, not repaired."
+ }
+}
