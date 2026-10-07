@@ -6,7 +6,9 @@
  * v2 pipeline, and judged on the model it emits — each level's exterior wall rings and slabs — never on the layout's
  * storey spans alone.
  */
-import { describe, expect, it } from 'vitest'
+import { mkdirSync, writeFileSync } from 'node:fs'
+import { join, resolve } from 'node:path'
+import { afterAll, describe, expect, it } from 'vitest'
 import { decodeImage } from '@buildapp/source-package'
 import type { SyntheticHouse } from '@buildapp/synthetic-drawings'
 import { SHAPE_FAMILIES } from '@buildapp/synthetic-drawings'
@@ -16,7 +18,41 @@ import { buildFixture } from './pipeline.js'
 import { HOUSE_AND_GARAGE, HOUSE_AND_WING_UP, INSET_REAR, ringsByLevel } from './storey-houses.js'
 import type { Box } from './storey-houses.js'
 
+/**
+ * What each house emitted, for the stage's record (`emitted-geometry.json`): written only when STOREY_ARTIFACTS_DIR
+ * names a directory outside the repository, and never read back by any test.
+ */
+const emitted: unknown[] = []
+const ARTIFACTS = process.env.STOREY_ARTIFACTS_DIR
+afterAll(() => {
+  if (!ARTIFACTS) return
+  if (resolve(ARTIFACTS).startsWith(resolve(import.meta.dirname, '../../..'))) throw new Error('the emitted-geometry record is written outside the repository')
+  mkdirSync(ARTIFACTS, { recursive: true })
+  writeFileSync(join(ARTIFACTS, 'emitted-geometry.json'), `${JSON.stringify({ houses: emitted }, null, 1)}\n`)
+})
+
 const solveV2 = async (house: SyntheticHouse): Promise<ReconstructionV2Result> => {
+  const r = await solveOnce(house)
+  if (ARTIFACTS) {
+    const r3 = (v: number): number => Number(v.toFixed(3))
+    const rings = ringsByLevel(r.model)
+    emitted.push({
+      fixture: expect.getState().currentTestName,
+      house: { name: house.name, width: house.width, depth: house.depth, storeys: house.storeys.length, upperInset: house.upperInset ?? null },
+      modelHash: r.candidate.modelHash,
+      levels: r.model.levels.map((l) => ({
+        index: l.index,
+        rings: (rings.get(l.index) ?? []).map((b) => ({ box: b.map(r3), areaM2: r3((b[2] - b[0]) * (b[3] - b[1])) })),
+        slabs: r.model.slabs.filter((x) => x.levelId === l.id).length,
+        rooms: r.model.rooms.filter((x) => x.levelId === l.id).length,
+        openings: r.model.openings.filter((o) => r.model.walls.find((w) => w.id === o.wallId)?.levelId === l.id).length,
+      })),
+    })
+  }
+  return r
+}
+
+const solveOnce = async (house: SyntheticHouse): Promise<ReconstructionV2Result> => {
   const fx = await buildFixture(house)
   return reconstructV2({
     label: house.name,

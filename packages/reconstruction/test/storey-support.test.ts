@@ -16,7 +16,9 @@
  *
  * Nothing here is a drawing of any real building.
  */
-import { describe, expect, it } from 'vitest'
+import { mkdirSync, writeFileSync } from 'node:fs'
+import { join, resolve } from 'node:path'
+import { afterAll, describe, expect, it } from 'vitest'
 import type { Raster } from '@buildapp/source-cv'
 import type { CoordinateRegistration, DimensionChain } from '@buildapp/source-metrics'
 import type { SourceCoordinateFrame } from '@buildapp/source-observations'
@@ -27,8 +29,54 @@ import { BLACK, fillRect } from '../../source-cv/test/draw.js'
 
 type Plan = { id: string; storey: 'GROUND' | 'UPPER' | 'ATTIC' | 'BASEMENT'; raster: Raster; chains?: DimensionChain[]; registered?: boolean }
 
+/**
+ * What each fixture decided, for the stage's corpus record (`synthetic-storey-corpus.json`): written only when
+ * STOREY_ARTIFACTS_DIR names a directory outside the repository, and never read back by any test.
+ */
+const corpus: unknown[] = []
+const ARTIFACTS = process.env.STOREY_ARTIFACTS_DIR
+afterAll(() => {
+  if (!ARTIFACTS) return
+  if (resolve(ARTIFACTS).startsWith(resolve(import.meta.dirname, '../../..'))) throw new Error('the corpus record is written outside the repository')
+  mkdirSync(ARTIFACTS, { recursive: true })
+  writeFileSync(join(ARTIFACTS, 'synthetic-storey-corpus.json'), `${JSON.stringify({ fixtures: corpus }, null, 1)}\n`)
+})
+
 /** The layout pass over a set of plans: chains and a registration only where a plan prints them. */
 export function layoutOf(plans: readonly Plan[], order: { frames?: number[]; chains?: boolean } = {}): StructuralLayoutDraft {
+  const draft = layoutPass(plans, order)
+  if (ARTIFACTS) {
+    const r6 = (v: number): number => Number(v.toFixed(3))
+    const boxOf = (ring: Parameters<typeof ringBounds>[0]): number[] => {
+      const b = ringBounds(ring)
+      return [b.x0, b.z0, b.x1, b.z1].map(r6)
+    }
+    corpus.push({
+      fixture: expect.getState().currentTestName,
+      order,
+      plans: plans.map((p) => ({ id: p.id, storey: p.storey, sizePx: [p.raster.width, p.raster.height], chains: (p.chains ?? []).length, registered: p.registered !== false && (p.chains?.length ?? 0) > 0 })),
+      base: draft.base?.frame.id ?? null,
+      masses: draft.masses.map((m) => ({ id: m.id, box: boxOf(m.ring), storeys: [m.storeySpan.fromIndex, m.storeySpan.toIndex], role: m.role })),
+      registrations: draft.storeyRegistrations.map((r) => ({
+        frameId: r.frameId,
+        storeyIndex: r.storeyIndex,
+        decision: r.decision,
+        candidates: r.candidates,
+        chosen: r.chosen ? { targetId: r.chosen.targetId, scale: r6(r.chosen.scale), stated: r.chosen.stated, score: r6(r.chosen.score) } : null,
+        margin: r.margin ?? null,
+        regions: r.regions.map((g) => ({ id: g.regionId, bounds: [g.bounds.x0, g.bounds.z0, g.bounds.x1, g.bounds.z1].map(r6), body: g.body, overhang: g.overhang, unsupportedM2: r6(g.unsupportedM2) })),
+        relations: r.relations.map((x) => ({ region: x.upperRegionId, mass: x.lowerMassId, status: x.supportStatus, overlapM: [r6(x.overlapM.x), r6(x.overlapM.z)], upperSupportedShare: r6(x.upperSupportedShare), lowerCoveredShare: r6(x.lowerCoveredShare) })),
+        why: r.why,
+      })),
+      footprints: draft.footprintRegions.filter((f) => f.kind === 'BUILT').map((f) => ({ id: f.id, storey: draft.storeys.find((s) => s.id === f.storeyId)?.index ?? null, box: boxOf(f.ring) })),
+      unresolved: draft.unresolved.map((u) => `${u.status}: ${u.what}`),
+      conflicts: draft.conflicts.map((c) => c.kind),
+    })
+  }
+  return draft
+}
+
+function layoutPass(plans: readonly Plan[], order: { frames?: number[]; chains?: boolean }): StructuralLayoutDraft {
   const frames: SourceCoordinateFrame[] = plans.map((p) => planFrame(p.id, p.storey, { width: p.raster.width, height: p.raster.height }))
   const chains = plans.flatMap((p) => (p.chains ?? []).map((c) => ({ ...c, frameId: p.id })))
   const regs: CoordinateRegistration[] = plans.filter((p) => p.registered !== false && (p.chains?.length ?? 0) > 0).map((p) => registration(p.id))

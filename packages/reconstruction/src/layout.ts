@@ -65,7 +65,8 @@ import type {
 } from './structural-layout.js'
 
 export const LAYOUT_INFERENCE_NAME = 'structural-layout'
-export const LAYOUT_INFERENCE_VERSION = '1.0.0'
+// 1.1.0 (005L): storeys are registered by wall correspondence and stacked per walled region (the storey-support relation).
+export const LAYOUT_INFERENCE_VERSION = '1.1.0'
 
 /** Where a storey sits relative to the others. Ground is the datum; the rest are counted off it. */
 export const STOREY_RANK: Record<string, number> = { BASEMENT: -1, GROUND: 0, UPPER: 1, ATTIC: 2, ROOF: 3 }

@@ -1,0 +1,221 @@
+{
+ "houses": [
+  {
+   "fixture": "005L per-storey geometry in the emitted model > a house the same on both storeys: two levels, the upper ring the ground ring",
+   "house": {
+    "name": "Family two storeys",
+    "width": 8.8,
+    "depth": 7.2,
+    "storeys": 2,
+    "upperInset": null
+   },
+   "modelHash": "48dfe0054e767cbefd31ddcc95e564c445a2a1f6707728a402dfb3b16cce92ae",
+   "levels": [
+    {
+     "index": 0,
+     "rings": [
+      {
+       "box": [
+        0,
+        0,
+        8.8,
+        7.2
+       ],
+       "areaM2": 63.36
+      }
+     ],
+     "slabs": 1,
+     "rooms": 1,
+     "openings": 2
+    },
+    {
+     "index": 1,
+     "rings": [
+      {
+       "box": [
+        0,
+        0,
+        8.8,
+        7.2
+       ],
+       "areaM2": 63.36
+      }
+     ],
+     "slabs": 1,
+     "rooms": 1,
+     "openings": 2
+    }
+   ]
+  },
+  {
+   "fixture": "005L per-storey geometry in the emitted model > an upper storey set back from the rear: its walls stop where its own plan draws them, not at the ground ring",
+   "house": {
+    "name": "Inset upper storey",
+    "width": 9.6,
+    "depth": 8.4,
+    "storeys": 2,
+    "upperInset": {
+     "minZ": 2.4
+    }
+   },
+   "modelHash": "b26d97757f7751f38f61d807f8f64b7d6c6764ef6519dc96955200926acc5b57",
+   "levels": [
+    {
+     "index": 0,
+     "rings": [
+      {
+       "box": [
+        0,
+        0,
+        9.6,
+        8.4
+       ],
+       "areaM2": 80.64
+      }
+     ],
+     "slabs": 1,
+     "rooms": 2,
+     "openings": 3
+    },
+    {
+     "index": 1,
+     "rings": [
+      {
+       "box": [
+        0,
+        0,
+        9.6,
+        5.998
+       ],
+       "areaM2": 57.582
+      }
+     ],
+     "slabs": 1,
+     "rooms": 2,
+     "openings": 3
+    }
+   ]
+  },
+  {
+   "fixture": "005L per-storey geometry in the emitted model > a one-storey garage against a two-storey house stays one storey in the model",
+   "house": {
+    "name": "House and garage",
+    "width": 8.4,
+    "depth": 7.6,
+    "storeys": 2,
+    "upperInset": null
+   },
+   "modelHash": "73baaad379bfb7a4e6c8a8c0f23d51d1973201d453f2991b424b3d1460370f76",
+   "levels": [
+    {
+     "index": 0,
+     "rings": [
+      {
+       "box": [
+        0,
+        0,
+        8.4,
+        7.6
+       ],
+       "areaM2": 63.84
+      },
+      {
+       "box": [
+        8.4,
+        2.599,
+        12.4,
+        7.6
+       ],
+       "areaM2": 20.003
+      }
+     ],
+     "slabs": 2,
+     "rooms": 2,
+     "openings": 2
+    },
+    {
+     "index": 1,
+     "rings": [
+      {
+       "box": [
+        0,
+        0,
+        8.4,
+        7.6
+       ],
+       "areaM2": 63.84
+      }
+     ],
+     "slabs": 1,
+     "rooms": 1,
+     "openings": 2
+    }
+   ]
+  },
+  {
+   "fixture": "005L per-storey geometry in the emitted model > a wing whose upper plan carries it up: both bodies on both storeys",
+   "house": {
+    "name": "House and two-storey wing",
+    "width": 8.4,
+    "depth": 7.6,
+    "storeys": 2,
+    "upperInset": null
+   },
+   "modelHash": "db81ce1db5d2ec1283a8c848359d1e0253d51b7f3737a517c042f7eed70320bd",
+   "levels": [
+    {
+     "index": 0,
+     "rings": [
+      {
+       "box": [
+        0,
+        0,
+        8.4,
+        7.6
+       ],
+       "areaM2": 63.84
+      },
+      {
+       "box": [
+        8.4,
+        2.599,
+        12.4,
+        7.6
+       ],
+       "areaM2": 20.003
+      }
+     ],
+     "slabs": 2,
+     "rooms": 2,
+     "openings": 2
+    },
+    {
+     "index": 1,
+     "rings": [
+      {
+       "box": [
+        0,
+        0,
+        8.4,
+        7.6
+       ],
+       "areaM2": 63.84
+      },
+      {
+       "box": [
+        8.4,
+        2.599,
+        12.4,
+        7.6
+       ],
+       "areaM2": 20.003
+      }
+     ],
+     "slabs": 2,
+     "rooms": 2,
+     "openings": 2
+    }
+   ]
+  }
+ ]
+}

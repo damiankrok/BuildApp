@@ -1,0 +1,2671 @@
+{
+ "fixtures": [
+  {
+   "fixture": "005L storey support: the corpus > 1. the same rectangle up and down: one body on two storeys, the upper footprint the body",
+   "order": {},
+   "plans": [
+    {
+     "id": "g",
+     "storey": "GROUND",
+     "sizePx": [
+      400,
+      460
+     ],
+     "chains": 2,
+     "registered": true
+    },
+    {
+     "id": "u",
+     "storey": "UPPER",
+     "sizePx": [
+      400,
+      460
+     ],
+     "chains": 2,
+     "registered": true
+    }
+   ],
+   "base": "g",
+   "masses": [
+    {
+     "id": "mass-0",
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ],
+     "storeys": [
+      0,
+      1
+     ],
+     "role": "MAIN"
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "u",
+     "storeyIndex": 1,
+     "decision": "STACKED",
+     "candidates": 18,
+     "chosen": {
+      "targetId": "envelope",
+      "scale": 1,
+      "stated": true,
+      "score": 1.008
+     },
+     "margin": 0.269091,
+     "regions": [
+      {
+       "id": "region-built-0-0",
+       "bounds": [
+        0,
+        0,
+        12,
+        17
+       ],
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      }
+     ],
+     "relations": [
+      {
+       "region": "region-built-0-0",
+       "mass": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        12,
+        17
+       ],
+       "upperSupportedShare": 1,
+       "lowerCoveredShare": 1
+      }
+     ],
+     "why": "stands on mass-0"
+    }
+   ],
+   "footprints": [
+    {
+     "id": "footprint-0-region-built-0-0",
+     "storey": 0,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    },
+    {
+     "id": "footprint-1-mass-0",
+     "storey": 1,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    }
+   ],
+   "unresolved": [],
+   "conflicts": []
+  },
+  {
+   "fixture": "005L storey support: the corpus > 2. inset on one side: the upper footprint stops where its own walls do",
+   "order": {},
+   "plans": [
+    {
+     "id": "g",
+     "storey": "GROUND",
+     "sizePx": [
+      400,
+      460
+     ],
+     "chains": 2,
+     "registered": true
+    },
+    {
+     "id": "u",
+     "storey": "UPPER",
+     "sizePx": [
+      400,
+      460
+     ],
+     "chains": 2,
+     "registered": true
+    }
+   ],
+   "base": "g",
+   "masses": [
+    {
+     "id": "mass-0",
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ],
+     "storeys": [
+      0,
+      1
+     ],
+     "role": "MAIN"
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "u",
+     "storeyIndex": 1,
+     "decision": "STACKED",
+     "candidates": 13,
+     "chosen": {
+      "targetId": "envelope",
+      "scale": 1,
+      "stated": true,
+      "score": 0.768
+     },
+     "margin": 0.03,
+     "regions": [
+      {
+       "id": "region-built-0-0",
+       "bounds": [
+        0,
+        0,
+        12,
+        11
+       ],
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      }
+     ],
+     "relations": [
+      {
+       "region": "region-built-0-0",
+       "mass": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        12,
+        11
+       ],
+       "upperSupportedShare": 1,
+       "lowerCoveredShare": 0.647
+      }
+     ],
+     "why": "stands on mass-0"
+    }
+   ],
+   "footprints": [
+    {
+     "id": "footprint-0-region-built-0-0",
+     "storey": 0,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    },
+    {
+     "id": "footprint-1-mass-0",
+     "storey": 1,
+     "box": [
+      0,
+      0,
+      12,
+      11
+     ]
+    }
+   ],
+   "unresolved": [],
+   "conflicts": []
+  },
+  {
+   "fixture": "005L storey support: the corpus > 2b. inset on one side with nothing stating which side: the ambiguity is named, never guessed",
+   "order": {},
+   "plans": [
+    {
+     "id": "g",
+     "storey": "GROUND",
+     "sizePx": [
+      400,
+      460
+     ],
+     "chains": 2,
+     "registered": true
+    },
+    {
+     "id": "u",
+     "storey": "UPPER",
+     "sizePx": [
+      400,
+      460
+     ],
+     "chains": 2,
+     "registered": true
+    }
+   ],
+   "base": "g",
+   "masses": [
+    {
+     "id": "mass-0",
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ],
+     "storeys": [
+      0,
+      0
+     ],
+     "role": "MAIN"
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "u",
+     "storeyIndex": 1,
+     "decision": "AMBIGUOUS",
+     "candidates": 13,
+     "chosen": {
+      "targetId": "envelope",
+      "scale": 1,
+      "stated": false,
+      "score": 0.738
+     },
+     "margin": 0,
+     "regions": [
+      {
+       "id": "region-built-0-0",
+       "bounds": [
+        0,
+        0,
+        12,
+        11
+       ],
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      }
+     ],
+     "relations": [
+      {
+       "region": "region-built-0-0",
+       "mass": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        12,
+        11
+       ],
+       "upperSupportedShare": 1,
+       "lowerCoveredShare": 0.647
+      }
+     ],
+     "why": "two placements stand it on different bodies (mass-0 against mass-0) and the walls do not choose between them"
+    }
+   ],
+   "footprints": [
+    {
+     "id": "footprint-0-region-built-0-0",
+     "storey": 0,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    }
+   ],
+   "unresolved": [
+    "AMBIGUOUS: which body the upper storey stands on"
+   ],
+   "conflicts": [
+    "STOREY_COVERAGE_DISAGREES"
+   ]
+  },
+  {
+   "fixture": "005L storey support: the corpus > 3. inset on every side: a footprint inside the body on all four",
+   "order": {},
+   "plans": [
+    {
+     "id": "g",
+     "storey": "GROUND",
+     "sizePx": [
+      400,
+      460
+     ],
+     "chains": 2,
+     "registered": true
+    },
+    {
+     "id": "u",
+     "storey": "UPPER",
+     "sizePx": [
+      400,
+      460
+     ],
+     "chains": 2,
+     "registered": true
+    }
+   ],
+   "base": "g",
+   "masses": [
+    {
+     "id": "mass-0",
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ],
+     "storeys": [
+      0,
+      1
+     ],
+     "role": "MAIN"
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "u",
+     "storeyIndex": 1,
+     "decision": "STACKED",
+     "candidates": 37,
+     "chosen": {
+      "targetId": "envelope",
+      "scale": 1,
+      "stated": true,
+      "score": 0.106
+     },
+     "margin": -0.522483,
+     "regions": [
+      {
+       "id": "region-built-1-1",
+       "bounds": [
+        2,
+        2,
+        10,
+        15
+       ],
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      }
+     ],
+     "relations": [
+      {
+       "region": "region-built-1-1",
+       "mass": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        8,
+        13
+       ],
+       "upperSupportedShare": 1,
+       "lowerCoveredShare": 0.51
+      }
+     ],
+     "why": "stands on mass-0"
+    }
+   ],
+   "footprints": [
+    {
+     "id": "footprint-0-region-built-0-0",
+     "storey": 0,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    },
+    {
+     "id": "footprint-1-mass-0",
+     "storey": 1,
+     "box": [
+      2,
+      2,
+      10,
+      15
+     ]
+    }
+   ],
+   "unresolved": [],
+   "conflicts": []
+  },
+  {
+   "fixture": "005L storey support: the corpus > 4. an upper floor covering a fifth of a large body is still carried by it",
+   "order": {},
+   "plans": [
+    {
+     "id": "g",
+     "storey": "GROUND",
+     "sizePx": [
+      520,
+      460
+     ],
+     "chains": 2,
+     "registered": true
+    },
+    {
+     "id": "u",
+     "storey": "UPPER",
+     "sizePx": [
+      520,
+      460
+     ],
+     "chains": 2,
+     "registered": true
+    }
+   ],
+   "base": "g",
+   "masses": [
+    {
+     "id": "mass-0",
+     "box": [
+      0,
+      0,
+      20,
+      17
+     ],
+     "storeys": [
+      0,
+      1
+     ],
+     "role": "MAIN"
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "u",
+     "storeyIndex": 1,
+     "decision": "STACKED",
+     "candidates": 21,
+     "chosen": {
+      "targetId": "envelope",
+      "scale": 1,
+      "stated": true,
+      "score": 0.356
+     },
+     "margin": 0.03,
+     "regions": [
+      {
+       "id": "region-built-0-0",
+       "bounds": [
+        0,
+        0,
+        8,
+        9
+       ],
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      }
+     ],
+     "relations": [
+      {
+       "region": "region-built-0-0",
+       "mass": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        8,
+        9
+       ],
+       "upperSupportedShare": 1,
+       "lowerCoveredShare": 0.212
+      }
+     ],
+     "why": "stands on mass-0"
+    }
+   ],
+   "footprints": [
+    {
+     "id": "footprint-0-region-built-0-0",
+     "storey": 0,
+     "box": [
+      0,
+      0,
+      20,
+      17
+     ]
+    },
+    {
+     "id": "footprint-1-mass-0",
+     "storey": 1,
+     "box": [
+      0,
+      0,
+      8,
+      9
+     ]
+    }
+   ],
+   "unresolved": [],
+   "conflicts": []
+  },
+  {
+   "fixture": "005L storey support: the corpus > 5. a house and a one-storey garage, the upper floor over the house: the garage stays one storey",
+   "order": {},
+   "plans": [
+    {
+     "id": "g",
+     "storey": "GROUND",
+     "sizePx": [
+      560,
+      520
+     ],
+     "chains": 2,
+     "registered": true
+    },
+    {
+     "id": "u",
+     "storey": "UPPER",
+     "sizePx": [
+      560,
+      520
+     ],
+     "chains": 2,
+     "registered": true
+    }
+   ],
+   "base": "g",
+   "masses": [
+    {
+     "id": "mass-0",
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ],
+     "storeys": [
+      0,
+      1
+     ],
+     "role": "MAIN"
+    },
+    {
+     "id": "mass-1",
+     "box": [
+      12,
+      8,
+      20,
+      17
+     ],
+     "storeys": [
+      0,
+      0
+     ],
+     "role": "ATTACHED"
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "u",
+     "storeyIndex": 1,
+     "decision": "STACKED",
+     "candidates": 39,
+     "chosen": {
+      "targetId": "envelope",
+      "scale": 1,
+      "stated": false,
+      "score": 0.791
+     },
+     "margin": 0.199317,
+     "regions": [
+      {
+       "id": "region-built-0-0",
+       "bounds": [
+        0,
+        0,
+        12,
+        17
+       ],
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      }
+     ],
+     "relations": [
+      {
+       "region": "region-built-0-0",
+       "mass": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        12,
+        17
+       ],
+       "upperSupportedShare": 1,
+       "lowerCoveredShare": 1
+      }
+     ],
+     "why": "stands on mass-0"
+    }
+   ],
+   "footprints": [
+    {
+     "id": "footprint-0-region-built-0-0",
+     "storey": 0,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    },
+    {
+     "id": "footprint-0-region-built-1-1",
+     "storey": 0,
+     "box": [
+      12,
+      8,
+      20,
+      17
+     ]
+    },
+    {
+     "id": "footprint-1-mass-0",
+     "storey": 1,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    }
+   ],
+   "unresolved": [],
+   "conflicts": []
+  },
+  {
+   "fixture": "005L storey support: the corpus > 6. an upper floor over both bodies, as its own plan draws it: both reach the upper storey",
+   "order": {},
+   "plans": [
+    {
+     "id": "g",
+     "storey": "GROUND",
+     "sizePx": [
+      560,
+      520
+     ],
+     "chains": 2,
+     "registered": true
+    },
+    {
+     "id": "u",
+     "storey": "UPPER",
+     "sizePx": [
+      560,
+      520
+     ],
+     "chains": 2,
+     "registered": true
+    }
+   ],
+   "base": "g",
+   "masses": [
+    {
+     "id": "mass-0",
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ],
+     "storeys": [
+      0,
+      1
+     ],
+     "role": "MAIN"
+    },
+    {
+     "id": "mass-1",
+     "box": [
+      12,
+      8,
+      20,
+      17
+     ],
+     "storeys": [
+      0,
+      1
+     ],
+     "role": "ATTACHED"
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "u",
+     "storeyIndex": 1,
+     "decision": "STACKED",
+     "candidates": 48,
+     "chosen": {
+      "targetId": "envelope",
+      "scale": 1,
+      "stated": true,
+      "score": 1.11
+     },
+     "margin": 0.145185,
+     "regions": [
+      {
+       "id": "region-built-0-0",
+       "bounds": [
+        0,
+        0,
+        12,
+        17
+       ],
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      },
+      {
+       "id": "region-built-1-1",
+       "bounds": [
+        12,
+        8,
+        20,
+        17
+       ],
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      }
+     ],
+     "relations": [
+      {
+       "region": "region-built-0-0",
+       "mass": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        12,
+        17
+       ],
+       "upperSupportedShare": 1,
+       "lowerCoveredShare": 1
+      },
+      {
+       "region": "region-built-1-1",
+       "mass": "mass-1",
+       "status": "SUPPORTS",
+       "overlapM": [
+        8,
+        9
+       ],
+       "upperSupportedShare": 1,
+       "lowerCoveredShare": 1
+      }
+     ],
+     "why": "stands on mass-0, mass-1"
+    }
+   ],
+   "footprints": [
+    {
+     "id": "footprint-0-region-built-0-0",
+     "storey": 0,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    },
+    {
+     "id": "footprint-0-region-built-1-1",
+     "storey": 0,
+     "box": [
+      12,
+      8,
+      20,
+      17
+     ]
+    },
+    {
+     "id": "footprint-1-mass-0",
+     "storey": 1,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    },
+    {
+     "id": "footprint-1-mass-1",
+     "storey": 1,
+     "box": [
+      12,
+      8,
+      20,
+      17
+     ]
+    }
+   ],
+   "unresolved": [],
+   "conflicts": []
+  },
+  {
+   "fixture": "005L storey support: the corpus > 7. two equal bodies and an upper plan with no scale of its own that fits either: left unresolved, never the first found",
+   "order": {},
+   "plans": [
+    {
+     "id": "g",
+     "storey": "GROUND",
+     "sizePx": [
+      480,
+      360
+     ],
+     "chains": 2,
+     "registered": true
+    },
+    {
+     "id": "u",
+     "storey": "UPPER",
+     "sizePx": [
+      480,
+      360
+     ],
+     "chains": 0,
+     "registered": false
+    }
+   ],
+   "base": "g",
+   "masses": [
+    {
+     "id": "mass-0",
+     "box": [
+      0,
+      0,
+      19,
+      13
+     ],
+     "storeys": [
+      0,
+      0
+     ],
+     "role": "MAIN"
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "u",
+     "storeyIndex": 1,
+     "decision": "AMBIGUOUS",
+     "candidates": 18,
+     "chosen": {
+      "targetId": "walls",
+      "scale": 1,
+      "stated": false,
+      "score": 0.672
+     },
+     "margin": 0,
+     "regions": [
+      {
+       "id": "region-built-0-0",
+       "bounds": [
+        0.275,
+        0.275,
+        7.675,
+        12.675
+       ],
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      }
+     ],
+     "relations": [
+      {
+       "region": "region-built-0-0",
+       "mass": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        7.4,
+        12.4
+       ],
+       "upperSupportedShare": 1,
+       "lowerCoveredShare": 0.371
+      }
+     ],
+     "why": "two placements stand it on different bodies (mass-0 against mass-0) and the walls do not choose between them"
+    }
+   ],
+   "footprints": [
+    {
+     "id": "footprint-0-region-built-0-0",
+     "storey": 0,
+     "box": [
+      0,
+      0,
+      19,
+      13
+     ]
+    }
+   ],
+   "unresolved": [
+    "AMBIGUOUS: which body the upper storey stands on"
+   ],
+   "conflicts": [
+    "STOREY_COVERAGE_DISAGREES"
+   ]
+  },
+  {
+   "fixture": "005L storey support: the corpus > 8. an upper plan that prints no scale, drawn smaller: registered by its walls alone",
+   "order": {},
+   "plans": [
+    {
+     "id": "g",
+     "storey": "GROUND",
+     "sizePx": [
+      560,
+      520
+     ],
+     "chains": 2,
+     "registered": true
+    },
+    {
+     "id": "u",
+     "storey": "UPPER",
+     "sizePx": [
+      400,
+      420
+     ],
+     "chains": 0,
+     "registered": false
+    }
+   ],
+   "base": "g",
+   "masses": [
+    {
+     "id": "mass-0",
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ],
+     "storeys": [
+      0,
+      1
+     ],
+     "role": "MAIN"
+    },
+    {
+     "id": "mass-1",
+     "box": [
+      12,
+      8,
+      20,
+      17
+     ],
+     "storeys": [
+      0,
+      0
+     ],
+     "role": "ATTACHED"
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "u",
+     "storeyIndex": 1,
+     "decision": "STACKED",
+     "candidates": 39,
+     "chosen": {
+      "targetId": "walls",
+      "scale": 1.264,
+      "stated": false,
+      "score": 0.778
+     },
+     "margin": 0.121007,
+     "regions": [
+      {
+       "id": "region-built-0-0",
+       "bounds": [
+        0.266,
+        0.284,
+        11.643,
+        16.717
+       ],
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      }
+     ],
+     "relations": [
+      {
+       "region": "region-built-0-0",
+       "mass": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        11.377,
+        16.433
+       ],
+       "upperSupportedShare": 1,
+       "lowerCoveredShare": 0.916
+      }
+     ],
+     "why": "stands on mass-0"
+    }
+   ],
+   "footprints": [
+    {
+     "id": "footprint-0-region-built-0-0",
+     "storey": 0,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    },
+    {
+     "id": "footprint-0-region-built-1-1",
+     "storey": 0,
+     "box": [
+      12,
+      8,
+      20,
+      17
+     ]
+    },
+    {
+     "id": "footprint-1-mass-0",
+     "storey": 1,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    }
+   ],
+   "unresolved": [],
+   "conflicts": []
+  },
+  {
+   "fixture": "005L storey support: the corpus > 9. an upper envelope that takes in a terrace its walls do not enclose: the terrace is no upper room",
+   "order": {},
+   "plans": [
+    {
+     "id": "g",
+     "storey": "GROUND",
+     "sizePx": [
+      400,
+      460
+     ],
+     "chains": 2,
+     "registered": true
+    },
+    {
+     "id": "u",
+     "storey": "UPPER",
+     "sizePx": [
+      400,
+      460
+     ],
+     "chains": 2,
+     "registered": true
+    }
+   ],
+   "base": "g",
+   "masses": [
+    {
+     "id": "mass-0",
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ],
+     "storeys": [
+      0,
+      1
+     ],
+     "role": "MAIN"
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "u",
+     "storeyIndex": 1,
+     "decision": "STACKED",
+     "candidates": 15,
+     "chosen": {
+      "targetId": "envelope",
+      "scale": 1,
+      "stated": true,
+      "score": 0.989
+     },
+     "margin": 0.285459,
+     "regions": [
+      {
+       "id": "region-built-0-0",
+       "bounds": [
+        0,
+        0,
+        12,
+        11
+       ],
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      }
+     ],
+     "relations": [
+      {
+       "region": "region-built-0-0",
+       "mass": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        12,
+        11
+       ],
+       "upperSupportedShare": 1,
+       "lowerCoveredShare": 0.647
+      }
+     ],
+     "why": "stands on mass-0"
+    }
+   ],
+   "footprints": [
+    {
+     "id": "footprint-0-region-built-0-0",
+     "storey": 0,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    },
+    {
+     "id": "footprint-1-mass-0",
+     "storey": 1,
+     "box": [
+      0,
+      0,
+      12,
+      11
+     ]
+    }
+   ],
+   "unresolved": [],
+   "conflicts": []
+  },
+  {
+   "fixture": "005L storey support: the corpus > 10. an L-shaped upper storey over one body: two footprints, never their bounding box",
+   "order": {},
+   "plans": [
+    {
+     "id": "g",
+     "storey": "GROUND",
+     "sizePx": [
+      520,
+      460
+     ],
+     "chains": 2,
+     "registered": true
+    },
+    {
+     "id": "u",
+     "storey": "UPPER",
+     "sizePx": [
+      520,
+      460
+     ],
+     "chains": 2,
+     "registered": true
+    }
+   ],
+   "base": "g",
+   "masses": [
+    {
+     "id": "mass-0",
+     "box": [
+      0,
+      0,
+      20,
+      17
+     ],
+     "storeys": [
+      0,
+      1
+     ],
+     "role": "MAIN"
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "u",
+     "storeyIndex": 1,
+     "decision": "STACKED",
+     "candidates": 25,
+     "chosen": {
+      "targetId": "envelope",
+      "scale": 1,
+      "stated": true,
+      "score": 0.899
+     },
+     "margin": 0.239496,
+     "regions": [
+      {
+       "id": "region-built-0-0",
+       "bounds": [
+        0,
+        0,
+        12,
+        17
+       ],
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      },
+      {
+       "id": "region-built-1-0",
+       "bounds": [
+        12,
+        0,
+        20,
+        8
+       ],
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      }
+     ],
+     "relations": [
+      {
+       "region": "region-built-0-0",
+       "mass": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        12,
+        17
+       ],
+       "upperSupportedShare": 1,
+       "lowerCoveredShare": 0.6
+      },
+      {
+       "region": "region-built-1-0",
+       "mass": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        8,
+        8
+       ],
+       "upperSupportedShare": 1,
+       "lowerCoveredShare": 0.188
+      }
+     ],
+     "why": "stands on mass-0"
+    }
+   ],
+   "footprints": [
+    {
+     "id": "footprint-0-region-built-0-0",
+     "storey": 0,
+     "box": [
+      0,
+      0,
+      20,
+      17
+     ]
+    },
+    {
+     "id": "footprint-1-mass-0",
+     "storey": 1,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    },
+    {
+     "id": "footprint-1-mass-0-1",
+     "storey": 1,
+     "box": [
+      12,
+      0,
+      20,
+      8
+     ]
+    }
+   ],
+   "unresolved": [],
+   "conflicts": []
+  },
+  {
+   "fixture": "005L storey support: the corpus > 11. two disconnected upper regions over one body: two footprints and nothing over the gap",
+   "order": {},
+   "plans": [
+    {
+     "id": "g",
+     "storey": "GROUND",
+     "sizePx": [
+      520,
+      460
+     ],
+     "chains": 2,
+     "registered": true
+    },
+    {
+     "id": "u",
+     "storey": "UPPER",
+     "sizePx": [
+      520,
+      460
+     ],
+     "chains": 2,
+     "registered": true
+    }
+   ],
+   "base": "g",
+   "masses": [
+    {
+     "id": "mass-0",
+     "box": [
+      0,
+      0,
+      20,
+      17
+     ],
+     "storeys": [
+      0,
+      1
+     ],
+     "role": "MAIN"
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "u",
+     "storeyIndex": 1,
+     "decision": "STACKED",
+     "candidates": 18,
+     "chosen": {
+      "targetId": "envelope",
+      "scale": 1,
+      "stated": true,
+      "score": 0.846
+     },
+     "margin": 0.372749,
+     "regions": [
+      {
+       "id": "region-built-0-0",
+       "bounds": [
+        0,
+        0,
+        6,
+        17
+       ],
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      },
+      {
+       "id": "region-built-2-0",
+       "bounds": [
+        14,
+        0,
+        20,
+        17
+       ],
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      }
+     ],
+     "relations": [
+      {
+       "region": "region-built-0-0",
+       "mass": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        6,
+        17
+       ],
+       "upperSupportedShare": 1,
+       "lowerCoveredShare": 0.3
+      },
+      {
+       "region": "region-built-2-0",
+       "mass": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        6,
+        17
+       ],
+       "upperSupportedShare": 1,
+       "lowerCoveredShare": 0.3
+      }
+     ],
+     "why": "stands on mass-0"
+    }
+   ],
+   "footprints": [
+    {
+     "id": "footprint-0-region-built-0-0",
+     "storey": 0,
+     "box": [
+      0,
+      0,
+      20,
+      17
+     ]
+    },
+    {
+     "id": "footprint-1-mass-0",
+     "storey": 1,
+     "box": [
+      0,
+      0,
+      6,
+      17
+     ]
+    },
+    {
+     "id": "footprint-1-mass-0-1",
+     "storey": 1,
+     "box": [
+      14,
+      0,
+      20,
+      17
+     ]
+    }
+   ],
+   "unresolved": [],
+   "conflicts": []
+  },
+  {
+   "fixture": "005L storey support: the corpus > 12. a registration a few pixels out stays within a wall: the footprint is the body, no overhang is claimed",
+   "order": {},
+   "plans": [
+    {
+     "id": "g",
+     "storey": "GROUND",
+     "sizePx": [
+      400,
+      460
+     ],
+     "chains": 2,
+     "registered": true
+    },
+    {
+     "id": "u",
+     "storey": "UPPER",
+     "sizePx": [
+      400,
+      460
+     ],
+     "chains": 2,
+     "registered": true
+    }
+   ],
+   "base": "g",
+   "masses": [
+    {
+     "id": "mass-0",
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ],
+     "storeys": [
+      0,
+      1
+     ],
+     "role": "MAIN"
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "u",
+     "storeyIndex": 1,
+     "decision": "STACKED",
+     "candidates": 10,
+     "chosen": {
+      "targetId": "envelope",
+      "scale": 1,
+      "stated": true,
+      "score": 1.176
+     },
+     "margin": 0.03,
+     "regions": [
+      {
+       "id": "region-built-0-0",
+       "bounds": [
+        0.2,
+        0.15,
+        12.2,
+        17.15
+       ],
+       "body": true,
+       "overhang": "WITHIN_TOLERANCE",
+       "unsupportedM2": 5.17
+      }
+     ],
+     "relations": [
+      {
+       "region": "region-built-0-0",
+       "mass": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        11.8,
+        16.85
+       ],
+       "upperSupportedShare": 0.975,
+       "lowerCoveredShare": 0.975
+      }
+     ],
+     "why": "stands on mass-0"
+    }
+   ],
+   "footprints": [
+    {
+     "id": "footprint-0-region-built-0-0",
+     "storey": 0,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    },
+    {
+     "id": "footprint-1-mass-0",
+     "storey": 1,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    }
+   ],
+   "unresolved": [],
+   "conflicts": []
+  },
+  {
+   "fixture": "005L storey support: the corpus > 13. an upper storey reaching 2.5 m past every body below it: built where it stands, the overhang named",
+   "order": {},
+   "plans": [
+    {
+     "id": "g",
+     "storey": "GROUND",
+     "sizePx": [
+      460,
+      460
+     ],
+     "chains": 2,
+     "registered": true
+    },
+    {
+     "id": "u",
+     "storey": "UPPER",
+     "sizePx": [
+      460,
+      460
+     ],
+     "chains": 2,
+     "registered": true
+    }
+   ],
+   "base": "g",
+   "masses": [
+    {
+     "id": "mass-0",
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ],
+     "storeys": [
+      0,
+      1
+     ],
+     "role": "MAIN"
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "u",
+     "storeyIndex": 1,
+     "decision": "STACKED",
+     "candidates": 13,
+     "chosen": {
+      "targetId": "walls",
+      "scale": 1,
+      "stated": false,
+      "score": 0.812
+     },
+     "margin": 0,
+     "regions": [
+      {
+       "id": "region-built-0-0",
+       "bounds": [
+        -2.5,
+        0,
+        12,
+        17
+       ],
+       "body": true,
+       "overhang": "BEYOND_TOLERANCE",
+       "unsupportedM2": 42.5
+      }
+     ],
+     "relations": [
+      {
+       "region": "region-built-0-0",
+       "mass": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        12,
+        17
+       ],
+       "upperSupportedShare": 0.828,
+       "lowerCoveredShare": 1
+      }
+     ],
+     "why": "stands on mass-0"
+    }
+   ],
+   "footprints": [
+    {
+     "id": "footprint-0-region-built-0-0",
+     "storey": 0,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    },
+    {
+     "id": "footprint-1-mass-0",
+     "storey": 1,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    }
+   ],
+   "unresolved": [
+    "AMBIGUOUS: what carries 42.5 m² of the upper storey's walled region region-built-0-0"
+   ],
+   "conflicts": [
+    "STOREY_COVERAGE_DISAGREES"
+   ]
+  },
+  {
+   "fixture": "005L storey support: the corpus > 14. an attic plan is a storey above the ground floor and stacks the same way",
+   "order": {},
+   "plans": [
+    {
+     "id": "g",
+     "storey": "GROUND",
+     "sizePx": [
+      400,
+      460
+     ],
+     "chains": 2,
+     "registered": true
+    },
+    {
+     "id": "a",
+     "storey": "ATTIC",
+     "sizePx": [
+      400,
+      460
+     ],
+     "chains": 2,
+     "registered": true
+    }
+   ],
+   "base": "g",
+   "masses": [
+    {
+     "id": "mass-0",
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ],
+     "storeys": [
+      0,
+      1
+     ],
+     "role": "MAIN"
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "a",
+     "storeyIndex": 1,
+     "decision": "STACKED",
+     "candidates": 13,
+     "chosen": {
+      "targetId": "envelope",
+      "scale": 1,
+      "stated": true,
+      "score": 0.622
+     },
+     "margin": -0.188496,
+     "regions": [
+      {
+       "id": "region-built-0-1",
+       "bounds": [
+        0,
+        2,
+        12,
+        15
+       ],
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      }
+     ],
+     "relations": [
+      {
+       "region": "region-built-0-1",
+       "mass": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        12,
+        13
+       ],
+       "upperSupportedShare": 1,
+       "lowerCoveredShare": 0.765
+      }
+     ],
+     "why": "stands on mass-0"
+    }
+   ],
+   "footprints": [
+    {
+     "id": "footprint-0-region-built-0-0",
+     "storey": 0,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    },
+    {
+     "id": "footprint-1-mass-0",
+     "storey": 1,
+     "box": [
+      0,
+      2,
+      12,
+      15
+     ]
+    }
+   ],
+   "unresolved": [],
+   "conflicts": []
+  },
+  {
+   "fixture": "005L storey support: the corpus > 15. ground, upper and attic: three storeys in order, each with its own footprint",
+   "order": {},
+   "plans": [
+    {
+     "id": "a",
+     "storey": "ATTIC",
+     "sizePx": [
+      400,
+      460
+     ],
+     "chains": 2,
+     "registered": true
+    },
+    {
+     "id": "g",
+     "storey": "GROUND",
+     "sizePx": [
+      400,
+      460
+     ],
+     "chains": 2,
+     "registered": true
+    },
+    {
+     "id": "u",
+     "storey": "UPPER",
+     "sizePx": [
+      400,
+      460
+     ],
+     "chains": 2,
+     "registered": true
+    }
+   ],
+   "base": "g",
+   "masses": [
+    {
+     "id": "mass-0",
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ],
+     "storeys": [
+      0,
+      2
+     ],
+     "role": "MAIN"
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "u",
+     "storeyIndex": 1,
+     "decision": "STACKED",
+     "candidates": 15,
+     "chosen": {
+      "targetId": "envelope",
+      "scale": 1,
+      "stated": true,
+      "score": 1.084
+     },
+     "margin": 0.473417,
+     "regions": [
+      {
+       "id": "region-built-0-0",
+       "bounds": [
+        0,
+        0,
+        12,
+        17
+       ],
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      }
+     ],
+     "relations": [
+      {
+       "region": "region-built-0-0",
+       "mass": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        12,
+        17
+       ],
+       "upperSupportedShare": 1,
+       "lowerCoveredShare": 1
+      }
+     ],
+     "why": "stands on mass-0"
+    },
+    {
+     "frameId": "a",
+     "storeyIndex": 2,
+     "decision": "STACKED",
+     "candidates": 21,
+     "chosen": {
+      "targetId": "envelope",
+      "scale": 1,
+      "stated": true,
+      "score": 0.083
+     },
+     "margin": -0.321942,
+     "regions": [
+      {
+       "id": "region-built-1-1",
+       "bounds": [
+        2,
+        4,
+        10,
+        13
+       ],
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      }
+     ],
+     "relations": [
+      {
+       "region": "region-built-1-1",
+       "mass": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        8,
+        9
+       ],
+       "upperSupportedShare": 1,
+       "lowerCoveredShare": 0.353
+      }
+     ],
+     "why": "stands on mass-0"
+    }
+   ],
+   "footprints": [
+    {
+     "id": "footprint-0-region-built-0-0",
+     "storey": 0,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    },
+    {
+     "id": "footprint-1-mass-0",
+     "storey": 1,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    },
+    {
+     "id": "footprint-2-mass-0",
+     "storey": 2,
+     "box": [
+      2,
+      4,
+      10,
+      13
+     ]
+    }
+   ],
+   "unresolved": [],
+   "conflicts": []
+  },
+  {
+   "fixture": "005L storey support: the corpus > 16. the same buildings mirrored, and their plans, chains and frames enumerated in other orders, decide the same",
+   "order": {},
+   "plans": [
+    {
+     "id": "g",
+     "storey": "GROUND",
+     "sizePx": [
+      560,
+      520
+     ],
+     "chains": 2,
+     "registered": true
+    },
+    {
+     "id": "u",
+     "storey": "UPPER",
+     "sizePx": [
+      560,
+      520
+     ],
+     "chains": 2,
+     "registered": true
+    }
+   ],
+   "base": "g",
+   "masses": [
+    {
+     "id": "mass-0",
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ],
+     "storeys": [
+      0,
+      1
+     ],
+     "role": "MAIN"
+    },
+    {
+     "id": "mass-1",
+     "box": [
+      12,
+      8,
+      20,
+      17
+     ],
+     "storeys": [
+      0,
+      0
+     ],
+     "role": "ATTACHED"
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "u",
+     "storeyIndex": 1,
+     "decision": "STACKED",
+     "candidates": 34,
+     "chosen": {
+      "targetId": "envelope",
+      "scale": 1,
+      "stated": false,
+      "score": 0.845
+     },
+     "margin": 0.375752,
+     "regions": [
+      {
+       "id": "region-built-0-0",
+       "bounds": [
+        0,
+        0,
+        12,
+        17
+       ],
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      }
+     ],
+     "relations": [
+      {
+       "region": "region-built-0-0",
+       "mass": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        12,
+        17
+       ],
+       "upperSupportedShare": 1,
+       "lowerCoveredShare": 1
+      }
+     ],
+     "why": "stands on mass-0"
+    }
+   ],
+   "footprints": [
+    {
+     "id": "footprint-0-region-built-0-0",
+     "storey": 0,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    },
+    {
+     "id": "footprint-0-region-built-1-1",
+     "storey": 0,
+     "box": [
+      12,
+      8,
+      20,
+      17
+     ]
+    },
+    {
+     "id": "footprint-1-mass-0",
+     "storey": 1,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    }
+   ],
+   "unresolved": [],
+   "conflicts": []
+  },
+  {
+   "fixture": "005L storey support: the corpus > 16. the same buildings mirrored, and their plans, chains and frames enumerated in other orders, decide the same",
+   "order": {},
+   "plans": [
+    {
+     "id": "g",
+     "storey": "GROUND",
+     "sizePx": [
+      560,
+      520
+     ],
+     "chains": 2,
+     "registered": true
+    },
+    {
+     "id": "u",
+     "storey": "UPPER",
+     "sizePx": [
+      560,
+      520
+     ],
+     "chains": 2,
+     "registered": true
+    }
+   ],
+   "base": "g",
+   "masses": [
+    {
+     "id": "mass-0",
+     "box": [
+      8,
+      0,
+      20,
+      17
+     ],
+     "storeys": [
+      0,
+      1
+     ],
+     "role": "MAIN"
+    },
+    {
+     "id": "mass-1",
+     "box": [
+      0,
+      8,
+      8,
+      17
+     ],
+     "storeys": [
+      0,
+      0
+     ],
+     "role": "ATTACHED"
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "u",
+     "storeyIndex": 1,
+     "decision": "STACKED",
+     "candidates": 34,
+     "chosen": {
+      "targetId": "envelope",
+      "scale": 1,
+      "stated": false,
+      "score": 0.875
+     },
+     "margin": 0.390481,
+     "regions": [
+      {
+       "id": "region-built-0-0",
+       "bounds": [
+        8,
+        0,
+        20,
+        17
+       ],
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      }
+     ],
+     "relations": [
+      {
+       "region": "region-built-0-0",
+       "mass": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        12,
+        17
+       ],
+       "upperSupportedShare": 1,
+       "lowerCoveredShare": 1
+      }
+     ],
+     "why": "stands on mass-0"
+    }
+   ],
+   "footprints": [
+    {
+     "id": "footprint-0-region-built-1-0",
+     "storey": 0,
+     "box": [
+      8,
+      0,
+      20,
+      17
+     ]
+    },
+    {
+     "id": "footprint-0-region-built-0-1",
+     "storey": 0,
+     "box": [
+      0,
+      8,
+      8,
+      17
+     ]
+    },
+    {
+     "id": "footprint-1-mass-0",
+     "storey": 1,
+     "box": [
+      8,
+      0,
+      20,
+      17
+     ]
+    }
+   ],
+   "unresolved": [],
+   "conflicts": []
+  },
+  {
+   "fixture": "005L storey support: the corpus > 16. the same buildings mirrored, and their plans, chains and frames enumerated in other orders, decide the same",
+   "order": {
+    "frames": [
+     1,
+     0
+    ]
+   },
+   "plans": [
+    {
+     "id": "g",
+     "storey": "GROUND",
+     "sizePx": [
+      560,
+      520
+     ],
+     "chains": 2,
+     "registered": true
+    },
+    {
+     "id": "u",
+     "storey": "UPPER",
+     "sizePx": [
+      560,
+      520
+     ],
+     "chains": 2,
+     "registered": true
+    }
+   ],
+   "base": "g",
+   "masses": [
+    {
+     "id": "mass-0",
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ],
+     "storeys": [
+      0,
+      1
+     ],
+     "role": "MAIN"
+    },
+    {
+     "id": "mass-1",
+     "box": [
+      12,
+      8,
+      20,
+      17
+     ],
+     "storeys": [
+      0,
+      0
+     ],
+     "role": "ATTACHED"
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "u",
+     "storeyIndex": 1,
+     "decision": "STACKED",
+     "candidates": 34,
+     "chosen": {
+      "targetId": "envelope",
+      "scale": 1,
+      "stated": false,
+      "score": 0.845
+     },
+     "margin": 0.375752,
+     "regions": [
+      {
+       "id": "region-built-0-0",
+       "bounds": [
+        0,
+        0,
+        12,
+        17
+       ],
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      }
+     ],
+     "relations": [
+      {
+       "region": "region-built-0-0",
+       "mass": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        12,
+        17
+       ],
+       "upperSupportedShare": 1,
+       "lowerCoveredShare": 1
+      }
+     ],
+     "why": "stands on mass-0"
+    }
+   ],
+   "footprints": [
+    {
+     "id": "footprint-0-region-built-0-0",
+     "storey": 0,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    },
+    {
+     "id": "footprint-0-region-built-1-1",
+     "storey": 0,
+     "box": [
+      12,
+      8,
+      20,
+      17
+     ]
+    },
+    {
+     "id": "footprint-1-mass-0",
+     "storey": 1,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    }
+   ],
+   "unresolved": [],
+   "conflicts": []
+  },
+  {
+   "fixture": "005L storey support: the corpus > 16. the same buildings mirrored, and their plans, chains and frames enumerated in other orders, decide the same",
+   "order": {
+    "chains": true
+   },
+   "plans": [
+    {
+     "id": "g",
+     "storey": "GROUND",
+     "sizePx": [
+      560,
+      520
+     ],
+     "chains": 2,
+     "registered": true
+    },
+    {
+     "id": "u",
+     "storey": "UPPER",
+     "sizePx": [
+      560,
+      520
+     ],
+     "chains": 2,
+     "registered": true
+    }
+   ],
+   "base": "g",
+   "masses": [
+    {
+     "id": "mass-0",
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ],
+     "storeys": [
+      0,
+      1
+     ],
+     "role": "MAIN"
+    },
+    {
+     "id": "mass-1",
+     "box": [
+      12,
+      8,
+      20,
+      17
+     ],
+     "storeys": [
+      0,
+      0
+     ],
+     "role": "ATTACHED"
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "u",
+     "storeyIndex": 1,
+     "decision": "STACKED",
+     "candidates": 34,
+     "chosen": {
+      "targetId": "envelope",
+      "scale": 1,
+      "stated": false,
+      "score": 0.845
+     },
+     "margin": 0.375752,
+     "regions": [
+      {
+       "id": "region-built-0-0",
+       "bounds": [
+        0,
+        0,
+        12,
+        17
+       ],
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      }
+     ],
+     "relations": [
+      {
+       "region": "region-built-0-0",
+       "mass": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        12,
+        17
+       ],
+       "upperSupportedShare": 1,
+       "lowerCoveredShare": 1
+      }
+     ],
+     "why": "stands on mass-0"
+    }
+   ],
+   "footprints": [
+    {
+     "id": "footprint-0-region-built-0-0",
+     "storey": 0,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    },
+    {
+     "id": "footprint-0-region-built-1-1",
+     "storey": 0,
+     "box": [
+      12,
+      8,
+      20,
+      17
+     ]
+    },
+    {
+     "id": "footprint-1-mass-0",
+     "storey": 1,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    }
+   ],
+   "unresolved": [],
+   "conflicts": []
+  },
+  {
+   "fixture": "005L storey support: the corpus > 16. the same buildings mirrored, and their plans, chains and frames enumerated in other orders, decide the same",
+   "order": {
+    "frames": [
+     1,
+     0
+    ],
+    "chains": true
+   },
+   "plans": [
+    {
+     "id": "g",
+     "storey": "GROUND",
+     "sizePx": [
+      560,
+      520
+     ],
+     "chains": 2,
+     "registered": true
+    },
+    {
+     "id": "u",
+     "storey": "UPPER",
+     "sizePx": [
+      560,
+      520
+     ],
+     "chains": 2,
+     "registered": true
+    }
+   ],
+   "base": "g",
+   "masses": [
+    {
+     "id": "mass-0",
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ],
+     "storeys": [
+      0,
+      1
+     ],
+     "role": "MAIN"
+    },
+    {
+     "id": "mass-1",
+     "box": [
+      12,
+      8,
+      20,
+      17
+     ],
+     "storeys": [
+      0,
+      0
+     ],
+     "role": "ATTACHED"
+    }
+   ],
+   "registrations": [
+    {
+     "frameId": "u",
+     "storeyIndex": 1,
+     "decision": "STACKED",
+     "candidates": 34,
+     "chosen": {
+      "targetId": "envelope",
+      "scale": 1,
+      "stated": false,
+      "score": 0.845
+     },
+     "margin": 0.375752,
+     "regions": [
+      {
+       "id": "region-built-0-0",
+       "bounds": [
+        0,
+        0,
+        12,
+        17
+       ],
+       "body": true,
+       "overhang": "NONE",
+       "unsupportedM2": 0
+      }
+     ],
+     "relations": [
+      {
+       "region": "region-built-0-0",
+       "mass": "mass-0",
+       "status": "SUPPORTS",
+       "overlapM": [
+        12,
+        17
+       ],
+       "upperSupportedShare": 1,
+       "lowerCoveredShare": 1
+      }
+     ],
+     "why": "stands on mass-0"
+    }
+   ],
+   "footprints": [
+    {
+     "id": "footprint-0-region-built-0-0",
+     "storey": 0,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    },
+    {
+     "id": "footprint-0-region-built-1-1",
+     "storey": 0,
+     "box": [
+      12,
+      8,
+      20,
+      17
+     ]
+    },
+    {
+     "id": "footprint-1-mass-0",
+     "storey": 1,
+     "box": [
+      0,
+      0,
+      12,
+      17
+     ]
+    }
+   ],
+   "unresolved": [],
+   "conflicts": []
+  }
+ ]
+}
