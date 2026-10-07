@@ -1,0 +1,2568 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005L",
+ "kind": "development replay: the solver alone on each row’s sealed evidence, old (005K replay at the starting code) against new; committed verdict predicates; research harness",
+ "gitSha": "4381d25260e920786c85d66dd776d62211cfe18b",
+ "rows": [
+  {
+   "row": "dom-pod-jarzabem",
+   "set": "DEV_005K",
+   "old": {
+    "outcome": "COMPLETED",
+    "modelHash": "df2aa66c8591107a1ff3608d02164ad80f4a7609c963915cb17fe7312e64553f",
+    "code": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": {
+     "model": 1,
+     "plans": 1,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 191,
+     "publishedM2": 216.76,
+     "residualPct": -11.88,
+     "holds": false
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 1,
+      "ringAreaM2": 191,
+      "ringBoxes": [
+       [
+        0,
+        1,
+        19.1,
+        11
+       ]
+      ],
+      "slabAreaM2": 191,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "new": {
+    "outcome": "COMPLETED",
+    "modelHash": "df2aa66c8591107a1ff3608d02164ad80f4a7609c963915cb17fe7312e64553f",
+    "code": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": {
+     "model": 1,
+     "plans": 1,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 191,
+     "publishedM2": 216.76,
+     "residualPct": -11.88,
+     "holds": false
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 1,
+      "ringAreaM2": 191,
+      "ringBoxes": [
+       [
+        0,
+        1,
+        19.1,
+        11
+       ]
+      ],
+      "slabAreaM2": 191,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "dom-w-arkadiach",
+   "set": "DEV_005K",
+   "old": {
+    "outcome": "COMPLETED",
+    "modelHash": "a1ac7a1b67b195839e7150e1da7a508b4b583d266a96d10b9c9322deae1f10b7",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 2,
+     "plans": 2,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 69.56,
+     "publishedM2": 69.9,
+     "residualPct": -0.49,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 1,
+      "ringAreaM2": 69.56,
+      "ringBoxes": [
+       [
+        0,
+        0,
+        7.4,
+        9.4
+       ]
+      ],
+      "slabAreaM2": 69.56,
+      "copiesLowest": false
+     },
+     {
+      "index": 1,
+      "rings": 1,
+      "ringAreaM2": 69.56,
+      "ringBoxes": [
+       [
+        0,
+        0,
+        7.4,
+        9.4
+       ]
+      ],
+      "slabAreaM2": 55.45,
+      "copiesLowest": true
+     }
+    ]
+   },
+   "new": {
+    "outcome": "COMPLETED",
+    "modelHash": "a1ac7a1b67b195839e7150e1da7a508b4b583d266a96d10b9c9322deae1f10b7",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 2,
+     "plans": 2,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 69.56,
+     "publishedM2": 69.9,
+     "residualPct": -0.49,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 1,
+      "ringAreaM2": 69.56,
+      "ringBoxes": [
+       [
+        0,
+        0,
+        7.4,
+        9.4
+       ]
+      ],
+      "slabAreaM2": 69.56,
+      "copiesLowest": false
+     },
+     {
+      "index": 1,
+      "rings": 1,
+      "ringAreaM2": 69.56,
+      "ringBoxes": [
+       [
+        0,
+        0,
+        7.4,
+        9.4
+       ]
+      ],
+      "slabAreaM2": 55.45,
+      "copiesLowest": true
+     }
+    ]
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "set": "DEV_005K",
+   "old": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "new": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "dom-w-morelach",
+   "set": "DEV_005K",
+   "old": {
+    "outcome": "COMPLETED",
+    "modelHash": "29299ff9ca7e9b4ffdc8092b203b0ca5de7229d7ad2f58544f78774c159a05a5",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 2,
+     "plans": 2,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 112.05,
+     "publishedM2": 114.53,
+     "residualPct": -2.17,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 3,
+      "ringAreaM2": 112.05,
+      "ringBoxes": [
+       [
+        0,
+        1.44,
+        3.8,
+        9.52
+       ],
+       [
+        11.11,
+        2.97,
+        12.17,
+        6.47
+       ],
+       [
+        3.8,
+        0,
+        11.11,
+        10.62
+       ]
+      ],
+      "slabAreaM2": 112.05,
+      "copiesLowest": false
+     },
+     {
+      "index": 1,
+      "rings": 2,
+      "ringAreaM2": 108.34,
+      "ringBoxes": [
+       [
+        0,
+        1.44,
+        3.8,
+        9.52
+       ],
+       [
+        3.8,
+        0,
+        11.11,
+        10.62
+       ]
+      ],
+      "slabAreaM2": 83.34,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "new": {
+    "outcome": "COMPLETED",
+    "modelHash": "58ee0e7bfea429faa04ae01f88bd9e6c2131eb8030648803ea2c4fb15c9ea703",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 2,
+     "plans": 2,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 112.05,
+     "publishedM2": 114.53,
+     "residualPct": -2.17,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 3,
+      "ringAreaM2": 112.05,
+      "ringBoxes": [
+       [
+        0,
+        1.44,
+        3.8,
+        9.52
+       ],
+       [
+        11.11,
+        2.97,
+        12.17,
+        6.47
+       ],
+       [
+        3.8,
+        0,
+        11.11,
+        10.62
+       ]
+      ],
+      "slabAreaM2": 112.05,
+      "copiesLowest": false
+     },
+     {
+      "index": 1,
+      "rings": 2,
+      "ringAreaM2": 108.34,
+      "ringBoxes": [
+       [
+        0,
+        1.44,
+        3.8,
+        9.52
+       ],
+       [
+        3.8,
+        0,
+        11.11,
+        10.62
+       ]
+      ],
+      "slabAreaM2": 83.34,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "modelChanged": true,
+   "verdictChanged": false
+  },
+  {
+   "row": "marcowki",
+   "set": "DEV_005K",
+   "old": {
+    "outcome": "COMPLETED",
+    "modelHash": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 2,
+     "plans": 2,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 130.79,
+     "publishedM2": 131.16,
+     "residualPct": -0.29,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 2,
+      "ringAreaM2": 130.79,
+      "ringBoxes": [
+       [
+        7.9,
+        0.99,
+        12.05,
+        8.5
+       ],
+       [
+        0,
+        0.99,
+        7.9,
+        13.6
+       ]
+      ],
+      "slabAreaM2": 130.79,
+      "copiesLowest": false
+     },
+     {
+      "index": 1,
+      "rings": 1,
+      "ringAreaM2": 99.62,
+      "ringBoxes": [
+       [
+        0,
+        0.99,
+        7.9,
+        13.6
+       ]
+      ],
+      "slabAreaM2": 80.49,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "new": {
+    "outcome": "COMPLETED",
+    "modelHash": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 2,
+     "plans": 2,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 130.79,
+     "publishedM2": 131.16,
+     "residualPct": -0.29,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 2,
+      "ringAreaM2": 130.79,
+      "ringBoxes": [
+       [
+        7.9,
+        0.99,
+        12.05,
+        8.5
+       ],
+       [
+        0,
+        0.99,
+        7.9,
+        13.6
+       ]
+      ],
+      "slabAreaM2": 130.79,
+      "copiesLowest": false
+     },
+     {
+      "index": 1,
+      "rings": 1,
+      "ringAreaM2": 99.62,
+      "ringBoxes": [
+       [
+        0,
+        0.99,
+        7.9,
+        13.6
+       ]
+      ],
+      "slabAreaM2": 80.49,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "rarytasy-g2e",
+   "set": "DEV_005K",
+   "old": {
+    "outcome": "COMPLETED",
+    "modelHash": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 1,
+     "plans": 1,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 184.55,
+     "publishedM2": 189.77,
+     "residualPct": -2.75,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 2,
+      "ringAreaM2": 184.54,
+      "ringBoxes": [
+       [
+        2.05,
+        0,
+        8.22,
+        6.2
+       ],
+       [
+        0,
+        6.2,
+        17.21,
+        14.7
+       ]
+      ],
+      "slabAreaM2": 184.55,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "new": {
+    "outcome": "COMPLETED",
+    "modelHash": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 1,
+     "plans": 1,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 184.55,
+     "publishedM2": 189.77,
+     "residualPct": -2.75,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 2,
+      "ringAreaM2": 184.54,
+      "ringBoxes": [
+       [
+        2.05,
+        0,
+        8.22,
+        6.2
+       ],
+       [
+        0,
+        6.2,
+        17.21,
+        14.7
+       ]
+      ],
+      "slabAreaM2": 184.55,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "kosacce-clean",
+   "set": "DEV_005K",
+   "old": {
+    "outcome": "COMPLETED",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 1,
+     "plans": 1,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 162.28,
+     "publishedM2": 164.47,
+     "residualPct": -1.33,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 3,
+      "ringAreaM2": 162.26,
+      "ringBoxes": [
+       [
+        2.85,
+        8.9,
+        9.33,
+        12.6
+       ],
+       [
+        14.54,
+        0,
+        16.58,
+        4.35
+       ],
+       [
+        0,
+        0,
+        14.54,
+        8.9
+       ]
+      ],
+      "slabAreaM2": 162.28,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "new": {
+    "outcome": "COMPLETED",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 1,
+     "plans": 1,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 162.28,
+     "publishedM2": 164.47,
+     "residualPct": -1.33,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 3,
+      "ringAreaM2": 162.26,
+      "ringBoxes": [
+       [
+        2.85,
+        8.9,
+        9.33,
+        12.6
+       ],
+       [
+        14.54,
+        0,
+        16.58,
+        4.35
+       ],
+       [
+        0,
+        0,
+        14.54,
+        8.9
+       ]
+      ],
+      "slabAreaM2": 162.28,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "kosacce-tracked",
+   "set": "DEV_005K",
+   "old": {
+    "outcome": "COMPLETED",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 1,
+     "plans": 1,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 162.28,
+     "publishedM2": 164.47,
+     "residualPct": -1.33,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 3,
+      "ringAreaM2": 162.26,
+      "ringBoxes": [
+       [
+        2.85,
+        8.9,
+        9.33,
+        12.6
+       ],
+       [
+        14.54,
+        0,
+        16.58,
+        4.35
+       ],
+       [
+        0,
+        0,
+        14.54,
+        8.9
+       ]
+      ],
+      "slabAreaM2": 162.28,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "new": {
+    "outcome": "COMPLETED",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 1,
+     "plans": 1,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 162.28,
+     "publishedM2": 164.47,
+     "residualPct": -1.33,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 3,
+      "ringAreaM2": 162.26,
+      "ringBoxes": [
+       [
+        2.85,
+        8.9,
+        9.33,
+        12.6
+       ],
+       [
+        14.54,
+        0,
+        16.58,
+        4.35
+       ],
+       [
+        0,
+        0,
+        14.54,
+        8.9
+       ]
+      ],
+      "slabAreaM2": 162.28,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "rarytasy-eoze",
+   "set": "DEV_005K",
+   "old": {
+    "outcome": "COMPLETED",
+    "modelHash": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 1,
+     "plans": 1,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 123.99,
+     "publishedM2": 122.07,
+     "residualPct": 1.57,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 1,
+      "ringAreaM2": 123.92,
+      "ringBoxes": [
+       [
+        0,
+        0,
+        16.01,
+        7.74
+       ]
+      ],
+      "slabAreaM2": 123.99,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "new": {
+    "outcome": "COMPLETED",
+    "modelHash": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 1,
+     "plans": 1,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 123.99,
+     "publishedM2": 122.07,
+     "residualPct": 1.57,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 1,
+      "ringAreaM2": 123.92,
+      "ringBoxes": [
+       [
+        0,
+        0,
+        16.01,
+        7.74
+       ]
+      ],
+      "slabAreaM2": 123.99,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "eoze-legacy-every",
+   "set": "DEV_005K",
+   "old": {
+    "outcome": "COMPLETED",
+    "modelHash": "0a0e019df52a473a95e977cae5e88bfe08a8c417e64cb8866e47bc572a602603",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 1,
+     "plans": 1,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 116.94,
+     "publishedM2": 122.07,
+     "residualPct": -4.21,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 1,
+      "ringAreaM2": 117.03,
+      "ringBoxes": [
+       [
+        0,
+        0.22,
+        16.01,
+        7.53
+       ]
+      ],
+      "slabAreaM2": 116.94,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "new": {
+    "outcome": "COMPLETED",
+    "modelHash": "0a0e019df52a473a95e977cae5e88bfe08a8c417e64cb8866e47bc572a602603",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 1,
+     "plans": 1,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 116.94,
+     "publishedM2": 122.07,
+     "residualPct": -4.21,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 1,
+      "ringAreaM2": 117.03,
+      "ringBoxes": [
+       [
+        0,
+        0.22,
+        16.01,
+        7.53
+       ]
+      ],
+      "slabAreaM2": 116.94,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "alt-marcowki",
+   "set": "DEV_005K",
+   "old": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "new": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "set": "DEV_005K",
+   "old": {
+    "outcome": "COMPLETED",
+    "modelHash": "a81652d034b4f9de2c0f43cce1365a0d6d9414d90ed0fb83056fd6582700a4bb",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 2,
+     "plans": 2,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 99,
+     "publishedM2": 99.4,
+     "residualPct": -0.4,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 1,
+      "ringAreaM2": 99,
+      "ringBoxes": [
+       [
+        0,
+        0,
+        11,
+        9
+       ]
+      ],
+      "slabAreaM2": 99,
+      "copiesLowest": false
+     },
+     {
+      "index": 1,
+      "rings": 1,
+      "ringAreaM2": 99,
+      "ringBoxes": [
+       [
+        0,
+        0,
+        11,
+        9
+       ]
+      ],
+      "slabAreaM2": 81.99,
+      "copiesLowest": true
+     }
+    ]
+   },
+   "new": {
+    "outcome": "COMPLETED",
+    "modelHash": "a81652d034b4f9de2c0f43cce1365a0d6d9414d90ed0fb83056fd6582700a4bb",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 2,
+     "plans": 2,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 99,
+     "publishedM2": 99.4,
+     "residualPct": -0.4,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 1,
+      "ringAreaM2": 99,
+      "ringBoxes": [
+       [
+        0,
+        0,
+        11,
+        9
+       ]
+      ],
+      "slabAreaM2": 99,
+      "copiesLowest": false
+     },
+     {
+      "index": 1,
+      "rings": 1,
+      "ringAreaM2": 99,
+      "ringBoxes": [
+       [
+        0,
+        0,
+        11,
+        9
+       ]
+      ],
+      "slabAreaM2": 81.99,
+      "copiesLowest": true
+     }
+    ]
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "willa-miranda",
+   "set": "DEV_005K",
+   "old": {
+    "outcome": "COMPLETED",
+    "modelHash": "84af704b09664eb5997d5a12265663ba45f2aaf456098190e43f914f34c34c81",
+    "code": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": {
+     "model": 1,
+     "plans": 2,
+     "holds": false
+    },
+    "footprint": {
+     "builtM2": 167.36,
+     "publishedM2": 169.9,
+     "residualPct": -1.49,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 3,
+      "ringAreaM2": 167.38,
+      "ringBoxes": [
+       [
+        8,
+        0,
+        14.51,
+        2.45
+       ],
+       [
+        3.55,
+        11.65,
+        9.03,
+        14.1
+       ],
+       [
+        0,
+        2.45,
+        15,
+        11.65
+       ]
+      ],
+      "slabAreaM2": 167.36,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "new": {
+    "outcome": "COMPLETED",
+    "modelHash": "84af704b09664eb5997d5a12265663ba45f2aaf456098190e43f914f34c34c81",
+    "code": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": {
+     "model": 1,
+     "plans": 2,
+     "holds": false
+    },
+    "footprint": {
+     "builtM2": 167.36,
+     "publishedM2": 169.9,
+     "residualPct": -1.49,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 3,
+      "ringAreaM2": 167.38,
+      "ringBoxes": [
+       [
+        8,
+        0,
+        14.51,
+        2.45
+       ],
+       [
+        3.55,
+        11.65,
+        9.03,
+        14.1
+       ],
+       [
+        0,
+        2.45,
+        15,
+        11.65
+       ]
+      ],
+      "slabAreaM2": 167.36,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "set": "DEV_005K",
+   "old": {
+    "outcome": "COMPLETED",
+    "modelHash": "31ba5eea2aa67b69579ebd912a35c596010bdb39a3dd70cf2a64e3db16f9463f",
+    "code": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": {
+     "model": 1,
+     "plans": 3,
+     "holds": false
+    },
+    "footprint": {
+     "builtM2": 100.88,
+     "publishedM2": 101.7,
+     "residualPct": -0.81,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 2,
+      "ringAreaM2": 100.85,
+      "ringBoxes": [
+       [
+        7.5,
+        0,
+        11.8,
+        9.5
+       ],
+       [
+        0,
+        1.5,
+        7.5,
+        9.5
+       ]
+      ],
+      "slabAreaM2": 100.88,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "new": {
+    "outcome": "COMPLETED",
+    "modelHash": "a8ef42a5613bde1f0c59f8535c642fa8bd95609a436dfdc0f1ae7258732df7d1",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 3,
+     "plans": 3,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 100.88,
+     "publishedM2": 101.7,
+     "residualPct": -0.81,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": -1,
+      "rings": 2,
+      "ringAreaM2": 100.85,
+      "ringBoxes": [
+       [
+        7.5,
+        0,
+        11.8,
+        9.5
+       ],
+       [
+        0,
+        1.5,
+        7.5,
+        9.5
+       ]
+      ],
+      "slabAreaM2": 100.88,
+      "copiesLowest": false
+     },
+     {
+      "index": 0,
+      "rings": 2,
+      "ringAreaM2": 100.85,
+      "ringBoxes": [
+       [
+        7.5,
+        0,
+        11.8,
+        9.5
+       ],
+       [
+        0,
+        1.5,
+        7.5,
+        9.5
+       ]
+      ],
+      "slabAreaM2": 75.32,
+      "copiesLowest": true
+     },
+     {
+      "index": 1,
+      "rings": 2,
+      "ringAreaM2": 97.32,
+      "ringBoxes": [
+       [
+        7.5,
+        0.82,
+        11.8,
+        9.5
+       ],
+       [
+        0,
+        1.5,
+        7.5,
+        9.5
+       ]
+      ],
+      "slabAreaM2": 75.32,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "modelChanged": true,
+   "verdictChanged": true
+  },
+  {
+   "row": "dom-w-modrzykach",
+   "set": "DEV_005K",
+   "old": {
+    "outcome": "COMPLETED",
+    "modelHash": "b125b9d24f1fb1fcb0004d45f2034fb949247f917a20893ea8b857d837946615",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 1,
+     "plans": 1,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 185.68,
+     "publishedM2": 181.98,
+     "residualPct": 2.03,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 3,
+      "ringAreaM2": 185.7,
+      "ringBoxes": [
+       [
+        0,
+        0.47,
+        4.56,
+        11.6
+       ],
+       [
+        4.56,
+        1.09,
+        11.8,
+        2.75
+       ],
+       [
+        4.56,
+        2.75,
+        18.45,
+        11.6
+       ]
+      ],
+      "slabAreaM2": 185.68,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "new": {
+    "outcome": "COMPLETED",
+    "modelHash": "b125b9d24f1fb1fcb0004d45f2034fb949247f917a20893ea8b857d837946615",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 1,
+     "plans": 1,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 185.68,
+     "publishedM2": 181.98,
+     "residualPct": 2.03,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 3,
+      "ringAreaM2": 185.7,
+      "ringBoxes": [
+       [
+        0,
+        0.47,
+        4.56,
+        11.6
+       ],
+       [
+        4.56,
+        1.09,
+        11.8,
+        2.75
+       ],
+       [
+        4.56,
+        2.75,
+        18.45,
+        11.6
+       ]
+      ],
+      "slabAreaM2": 185.68,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "dom-w-azaliach",
+   "set": "DEV_005K",
+   "old": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "new": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "set": "DEV_005K",
+   "old": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/BOUNDARY_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "new": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/BOUNDARY_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "set": "DEV_005K",
+   "old": {
+    "outcome": "COMPLETED",
+    "modelHash": "9fa7cb890aa6eae191119f58b5a47737b7a2274f33f8641e972eaf79b3972890",
+    "code": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": {
+     "model": 1,
+     "plans": 3,
+     "holds": false
+    },
+    "footprint": {
+     "builtM2": 117.3,
+     "publishedM2": 117.74,
+     "residualPct": -0.37,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 1,
+      "ringAreaM2": 117.3,
+      "ringBoxes": [
+       [
+        0,
+        0,
+        11.73,
+        10
+       ]
+      ],
+      "slabAreaM2": 117.3,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "new": {
+    "outcome": "COMPLETED",
+    "modelHash": "780ecd4e59ad2fd513bc0c9eace1c2f76a487b09de23c1943dc3ddae9843f282",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 3,
+     "plans": 3,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 117.3,
+     "publishedM2": 117.74,
+     "residualPct": -0.37,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 1,
+      "ringAreaM2": 117.3,
+      "ringBoxes": [
+       [
+        0,
+        0,
+        11.73,
+        10
+       ]
+      ],
+      "slabAreaM2": 117.3,
+      "copiesLowest": false
+     },
+     {
+      "index": 1,
+      "rings": 1,
+      "ringAreaM2": 117.3,
+      "ringBoxes": [
+       [
+        0,
+        0,
+        11.73,
+        10
+       ]
+      ],
+      "slabAreaM2": 105.33,
+      "copiesLowest": true
+     },
+     {
+      "index": 2,
+      "rings": 1,
+      "ringAreaM2": 14.59,
+      "ringBoxes": [
+       [
+        3.31,
+        0,
+        7.18,
+        3.77
+       ]
+      ],
+      "slabAreaM2": 105.33,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "modelChanged": true,
+   "verdictChanged": true
+  },
+  {
+   "row": "aster-viii",
+   "set": "DEV_005K",
+   "old": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "new": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "galaktyka",
+   "set": "DEV_005K",
+   "old": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "new": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "eoze-legacy-area",
+   "set": "DEV_005K",
+   "old": {
+    "outcome": "COMPLETED",
+    "modelHash": "a27f3a5e808ee09feae908ba2295f9762087993401a8e111ea9291b16719fc51",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 1,
+     "plans": 1,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 116.74,
+     "publishedM2": 122.07,
+     "residualPct": -4.37,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 1,
+      "ringAreaM2": 116.71,
+      "ringBoxes": [
+       [
+        0,
+        0.22,
+        16.01,
+        7.51
+       ]
+      ],
+      "slabAreaM2": 116.74,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "new": {
+    "outcome": "COMPLETED",
+    "modelHash": "a27f3a5e808ee09feae908ba2295f9762087993401a8e111ea9291b16719fc51",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 1,
+     "plans": 1,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 116.74,
+     "publishedM2": 122.07,
+     "residualPct": -4.37,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 1,
+      "ringAreaM2": 116.71,
+      "ringBoxes": [
+       [
+        0,
+        0.22,
+        16.01,
+        7.51
+       ]
+      ],
+      "slabAreaM2": 116.74,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "dom-pod-milorzebem",
+   "set": "DEV_005K",
+   "old": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "new": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "set": "DEV_005K",
+   "old": {
+    "outcome": "COMPLETED",
+    "modelHash": "27642deb363a860dfb9dca75d2dd143499242704666d07c937f3ef41db7d4be0",
+    "code": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": {
+     "model": 1,
+     "plans": 2,
+     "holds": false
+    },
+    "footprint": {
+     "builtM2": 77.56,
+     "publishedM2": 95.61,
+     "residualPct": -18.88,
+     "holds": false
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 1,
+      "ringAreaM2": 77.58,
+      "ringBoxes": [
+       [
+        0.53,
+        0.97,
+        6.99,
+        12.98
+       ]
+      ],
+      "slabAreaM2": 77.56,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "new": {
+    "outcome": "COMPLETED",
+    "modelHash": "27642deb363a860dfb9dca75d2dd143499242704666d07c937f3ef41db7d4be0",
+    "code": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": {
+     "model": 1,
+     "plans": 2,
+     "holds": false
+    },
+    "footprint": {
+     "builtM2": 77.56,
+     "publishedM2": 95.61,
+     "residualPct": -18.88,
+     "holds": false
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 1,
+      "ringAreaM2": 77.58,
+      "ringBoxes": [
+       [
+        0.53,
+        0.97,
+        6.99,
+        12.98
+       ]
+      ],
+      "slabAreaM2": 77.56,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "kosacce-area-alone",
+   "set": "DEV_005K",
+   "old": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "new": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "dom-w-gozdzikowcach",
+   "set": "DEV_005K",
+   "old": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "new": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "dom-w-cyklamenach",
+   "set": "DEV_005K",
+   "old": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "new": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "A00",
+   "set": "FRESH_005K",
+   "old": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "new": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "A01",
+   "set": "FRESH_005K",
+   "old": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/MODEL_EMISSION_FAILED",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "new": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/MODEL_EMISSION_FAILED",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "A02",
+   "set": "FRESH_005K",
+   "old": {
+    "outcome": "COMPLETED",
+    "modelHash": "98229d5fa8d6ff8e682001061ff703e6e8c0be4a5412a71b77439e2b8aa92155",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 1,
+     "plans": 1,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 133.82,
+     "publishedM2": 130.07,
+     "residualPct": 2.88,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 1,
+      "ringAreaM2": 133.86,
+      "ringBoxes": [
+       [
+        0,
+        0,
+        9.2,
+        14.55
+       ]
+      ],
+      "slabAreaM2": 133.82,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "new": {
+    "outcome": "COMPLETED",
+    "modelHash": "98229d5fa8d6ff8e682001061ff703e6e8c0be4a5412a71b77439e2b8aa92155",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 1,
+     "plans": 1,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 133.82,
+     "publishedM2": 130.07,
+     "residualPct": 2.88,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 1,
+      "ringAreaM2": 133.86,
+      "ringBoxes": [
+       [
+        0,
+        0,
+        9.2,
+        14.55
+       ]
+      ],
+      "slabAreaM2": 133.82,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "A03",
+   "set": "FRESH_005K",
+   "old": {
+    "outcome": "COMPLETED",
+    "modelHash": "4b0fc06a76054bf95be60b9ab84df3c8fcb2bb7c6c77d24f253bafc3ddcc03c7",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 2,
+     "plans": 2,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 109.35,
+     "publishedM2": 109.62,
+     "residualPct": -0.24,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 1,
+      "ringAreaM2": 109.41,
+      "ringBoxes": [
+       [
+        0,
+        0,
+        9.11,
+        12.01
+       ]
+      ],
+      "slabAreaM2": 109.35,
+      "copiesLowest": false
+     },
+     {
+      "index": 1,
+      "rings": 1,
+      "ringAreaM2": 109.41,
+      "ringBoxes": [
+       [
+        0,
+        0,
+        9.11,
+        12.01
+       ]
+      ],
+      "slabAreaM2": 91.11,
+      "copiesLowest": true
+     }
+    ]
+   },
+   "new": {
+    "outcome": "COMPLETED",
+    "modelHash": "4b0fc06a76054bf95be60b9ab84df3c8fcb2bb7c6c77d24f253bafc3ddcc03c7",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 2,
+     "plans": 2,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 109.35,
+     "publishedM2": 109.62,
+     "residualPct": -0.24,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 1,
+      "ringAreaM2": 109.41,
+      "ringBoxes": [
+       [
+        0,
+        0,
+        9.11,
+        12.01
+       ]
+      ],
+      "slabAreaM2": 109.35,
+      "copiesLowest": false
+     },
+     {
+      "index": 1,
+      "rings": 1,
+      "ringAreaM2": 109.41,
+      "ringBoxes": [
+       [
+        0,
+        0,
+        9.11,
+        12.01
+       ]
+      ],
+      "slabAreaM2": 91.11,
+      "copiesLowest": true
+     }
+    ]
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "A04",
+   "set": "FRESH_005K",
+   "old": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "new": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "A05",
+   "set": "FRESH_005K",
+   "old": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "new": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "A06",
+   "set": "FRESH_005K",
+   "old": {
+    "outcome": "COMPLETED",
+    "modelHash": "3e4b69073dfd13873ffdfbbcc02770148c3fa1f2ec04cc4b8f1e03dc555128a6",
+    "code": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": {
+     "model": 1,
+     "plans": 2,
+     "holds": false
+    },
+    "footprint": {
+     "builtM2": 79.06,
+     "publishedM2": 78.92,
+     "residualPct": 0.18,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 2,
+      "ringAreaM2": 79.06,
+      "ringBoxes": [
+       [
+        3.46,
+        10.01,
+        7.34,
+        11.45
+       ],
+       [
+        0,
+        0,
+        7.34,
+        10.01
+       ]
+      ],
+      "slabAreaM2": 79.06,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "new": {
+    "outcome": "COMPLETED",
+    "modelHash": "38baa9606a55fb149b9025464d0dc1f1db0d91dd9ef8976b9cbc190690278ee2",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 2,
+     "plans": 2,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 79.06,
+     "publishedM2": 78.92,
+     "residualPct": 0.18,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 2,
+      "ringAreaM2": 79.06,
+      "ringBoxes": [
+       [
+        3.46,
+        10.01,
+        7.34,
+        11.45
+       ],
+       [
+        0,
+        0,
+        7.34,
+        10.01
+       ]
+      ],
+      "slabAreaM2": 79.06,
+      "copiesLowest": false
+     },
+     {
+      "index": 1,
+      "rings": 2,
+      "ringAreaM2": 79.06,
+      "ringBoxes": [
+       [
+        3.46,
+        10.01,
+        7.34,
+        11.45
+       ],
+       [
+        0,
+        0,
+        7.34,
+        10.01
+       ]
+      ],
+      "slabAreaM2": 67.33,
+      "copiesLowest": true
+     }
+    ]
+   },
+   "modelChanged": true,
+   "verdictChanged": true
+  },
+  {
+   "row": "A07",
+   "set": "FRESH_005K",
+   "old": {
+    "outcome": "COMPLETED",
+    "modelHash": "dddf99f78c650ad431431fa462fd3574b05b5cfe398b1c321ccdf5279502fa7f",
+    "code": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": {
+     "model": 1,
+     "plans": 2,
+     "holds": false
+    },
+    "footprint": {
+     "builtM2": 134.32,
+     "publishedM2": 134.82,
+     "residualPct": -0.37,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 1,
+      "ringAreaM2": 134.32,
+      "ringBoxes": [
+       [
+        0,
+        0,
+        17.22,
+        7.8
+       ]
+      ],
+      "slabAreaM2": 134.32,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "new": {
+    "outcome": "COMPLETED",
+    "modelHash": "f0b04887c8d0ba8007bfd9d6d00d5c12ffc54308b4e0450569479a2e0d8c3514",
+    "code": null,
+    "verdict": "PASS",
+    "storeys": {
+     "model": 2,
+     "plans": 2,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 134.32,
+     "publishedM2": 134.82,
+     "residualPct": -0.37,
+     "holds": true
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 1,
+      "ringAreaM2": 134.32,
+      "ringBoxes": [
+       [
+        0,
+        0,
+        17.22,
+        7.8
+       ]
+      ],
+      "slabAreaM2": 134.32,
+      "copiesLowest": false
+     },
+     {
+      "index": 1,
+      "rings": 1,
+      "ringAreaM2": 134.32,
+      "ringBoxes": [
+       [
+        0,
+        0,
+        17.22,
+        7.8
+       ]
+      ],
+      "slabAreaM2": 121.83,
+      "copiesLowest": true
+     }
+    ]
+   },
+   "modelChanged": true,
+   "verdictChanged": true
+  },
+  {
+   "row": "D00",
+   "set": "FRESH_005K",
+   "old": {
+    "outcome": "COMPLETED",
+    "modelHash": "0bb85a2dc698b532b601bae8a686defacac4d29bdd33b06383e2dd003052f8a7",
+    "code": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": {
+     "model": 1,
+     "plans": 2,
+     "holds": false
+    },
+    "footprint": {
+     "builtM2": 154.2,
+     "publishedM2": 189.7,
+     "residualPct": -18.71,
+     "holds": false
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 2,
+      "ringAreaM2": 154.18,
+      "ringBoxes": [
+       [
+        6.75,
+        10.73,
+        14.58,
+        12.75
+       ],
+       [
+        0,
+        1.24,
+        14.58,
+        10.73
+       ]
+      ],
+      "slabAreaM2": 154.2,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "new": {
+    "outcome": "COMPLETED",
+    "modelHash": "e4f042fbb4d8dbbfa041764a1d1d5e4bb97d7299a1e13cf0efc1eb57f5ef0f71",
+    "code": null,
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": {
+     "model": 2,
+     "plans": 2,
+     "holds": true
+    },
+    "footprint": {
+     "builtM2": 154.2,
+     "publishedM2": 189.7,
+     "residualPct": -18.71,
+     "holds": false
+    },
+    "openings": true,
+    "emitted": [
+     {
+      "index": 0,
+      "rings": 2,
+      "ringAreaM2": 154.18,
+      "ringBoxes": [
+       [
+        6.75,
+        10.73,
+        14.58,
+        12.75
+       ],
+       [
+        0,
+        1.24,
+        14.58,
+        10.73
+       ]
+      ],
+      "slabAreaM2": 154.2,
+      "copiesLowest": false
+     },
+     {
+      "index": 1,
+      "rings": 2,
+      "ringAreaM2": 121.69,
+      "ringBoxes": [
+       [
+        6.75,
+        10.73,
+        14.58,
+        12.75
+       ],
+       [
+        0.74,
+        3.08,
+        14.58,
+        10.73
+       ]
+      ],
+      "slabAreaM2": 126.16,
+      "copiesLowest": false
+     }
+    ]
+   },
+   "modelChanged": true,
+   "verdictChanged": false
+  },
+  {
+   "row": "D01",
+   "set": "FRESH_005K",
+   "old": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "new": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "D02",
+   "set": "FRESH_005K",
+   "old": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "new": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "D03",
+   "set": "FRESH_005K",
+   "old": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "new": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "D04",
+   "set": "FRESH_005K",
+   "old": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "new": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  },
+  {
+   "row": "D05",
+   "set": "FRESH_005K",
+   "old": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "new": {
+    "outcome": "FAILED",
+    "modelHash": null,
+    "code": "RECONSTRUCTION_FAILED/METRIC_RESOLUTION_INCONCLUSIVE",
+    "verdict": "ALGORITHMIC_FAIL",
+    "storeys": null,
+    "footprint": null,
+    "openings": null,
+    "emitted": null
+   },
+   "modelChanged": false,
+   "verdictChanged": false
+  }
+ ]
+}
