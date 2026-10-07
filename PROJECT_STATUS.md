@@ -45,6 +45,7 @@
 | STAGE BUILDPLAN-ANALYZER-005I — PARALLEL DIMENSION TOPOLOGY + BOUNDARY OBSERVATION BAKE-OFF + FRESH BLIND ROUND 8 | `analyzer/dimension-topology-boundary-bakeoff-v1` (from `analyzer/external-numeric-recogniser-v1` @ `29ab643`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | topology `c150896`; council fixes `bc22547`, `16bcd73`, `c0ad2e8` (the frozen production code); Track B research `c90ffd9` … `bfcfb1f`; development matrix and records `869cb01` = **PRE_HOLDOUT_8_SHA** (CI run 169 green); round-8 draw `0c67728`; blind round, report and status `a7f009a` = final build (CI run 172 green at the first attempt, the `workflow_dispatch` with the OWNER APK, versionCode 1172, APK sha256 `70b4ff90…`); the APK record: the commit after it | **DIMENSION TOPOLOGY: PARTIAL** — the blind-7 label-binding defect is fixed generically and `dom-pod-jarzabem` now completes; OCR byte-identical; no development verdict changed; but both blind-8 houses are ALGORITHMIC_FAIL on boundary interpretation downstream of a correct metric. **BOUNDARY OBSERVATION BAKE-OFF: PASS_RESEARCH**, BEST_BOUNDARY_CANDIDATE **NONE** (ELSED DEFER, DeepLSD REJECT, MobileSAM REJECT), PRODUCTION_INTEGRATION NONE_IN_005I. INHERITED ARM64 DEVICE PARITY: PENDING. Terminal line PARTIAL (§ "Where the dimension topology and the boundary bake-off stand") |
 | STAGE BUILDPLAN-ANALYZER-005J — FLOORPLAN INTELLIGENCE TECHNOLOGY AUDIT + VISUAL REFEREE OPPORTUNITY MAP + TRAINING ROUTE | `analyzer/floorplan-intelligence-audit-v1` (from `analyzer/dimension-topology-boundary-bakeoff-v1` @ `64b78b4`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | research harness, artifacts and report: the commits after `64b78b4` on the branch (`git log analyzer/floorplan-intelligence-audit-v1 ^64b78b4`); BuildApp CI run 37514203211 on `d287aba` (the last content commit): 38 jobs pass, 2 skipped, **1 red** — the Android UI evidence gate (`VerticalSliceDeviceTest`), red on both attempts on a code path this stage did not touch | **PARTIAL** (`PARTIAL_BUILDPLAN_ANALYZER_005J_CI_UI_EVIDENCE_RED`) — research and audit only, **no production change** (§ "Where the floor-plan intelligence audit stands"). Small VLMs (Florence-2, SmolVLM2, Moondream) at or below chance on BuildPlan's closed questions; no commercially clean floor-plan model exists; a from-scratch BuildPlan-trained UNet-lite (6 MB) is a clean research proof. In an oracle replay of the frozen code, a deterministic drawn-gap upgrade completes `dom-w-gozdzikowcach`'s footprint exactly as a perfect witness does, and nothing moves a verdict. **PRIMARY_NEXT: NO_AI_YET** (005K: per-gap evidence records, a sealed fresh-sheet gap set, the deterministic upgrade measured on it). SECONDARY_LATER: TRAIN_BUILDPLAN_WALL_MODEL as the challenger. REJECT: small-VLM referee, every pretrained floor-plan model |
 | STAGE BUILDPLAN-ANALYZER-005K — GAP EVIDENCE + SEALED FRESH-SHEET GAP SET + DETERMINISTIC DRAWN-GAP RULE | `analyzer/gap-evidence-drawn-gap-v1` (from `analyzer/floorplan-intelligence-audit-v1` @ `1314df7`; pushes also to `claude/new-session-3kzcgh`, except the seal-to-evaluation commits; Legacy untouched) | Phase 0 `b747440`; production `c244ff7` (rule OFF); freeze `892853e` (FREEZE_SHA); manifest seal `70aa0a4`; label seal `6672a89`; evaluation `591197d`; council fixes `44f7128`; closing: the commit that carries this row. CI: runs 37533180890 (`b747440`), 37539569712 (`892853e`) and 37546736072 (`2f57f90`, the last content commit) green, UI evidence gate included | **PASS** (`PASS_BUILDPLAN_ANALYZER_005K_GAP_EVIDENCE_READY_FOR_COORDINATOR`) — see § "Where the gap evidence stands (STAGE BUILDPLAN-ANALYZER-005K)". UI evidence harness fixed (test code only); per-gap evidence records (boundary evidence 1.2.0, Evidence Pack 1.2.0); a sealed fresh-sheet set of 60 gaps (14 projects, ARCHON + DobreDomy) labelled by blind AI sub-agents (not human); **DRAWN_GAP_RULE: INSUFFICIENT_EVIDENCE — stays OFF** (10 resolved negatives, none an open side; a known recess-mouth closure path). No production decision changed; no OWNER APK; blind round 9 NOT_RUN_BY_DESIGN. **NEXT: FIX_STOREY_COUNT** |
+| STAGE BUILDPLAN-ANALYZER-005L — STOREY REGISTRATION + PER-STOREY FOOTPRINT STACKING + FRESH BLIND ROUND 9 | `analyzer/storey-registration-mass-stacking-v1` (from `a70047f`; pushes also to `claude/new-session-3kzcgh`, batched while a CI run was in flight; Legacy untouched) | production `e849cbc`…`cee78c8` (council-closed); freeze `8f5f3c5` (PRE_HOLDOUT_9_SHA, CI 37595482179 green); blind round `591e857`; closing: the commit that carries this row (final CI and OWNER APK in the report §T) | **PARTIAL** (`PARTIAL_BUILDPLAN_ANALYZER_005L_BLIND9_BODY_RELATION_FAIL`) — see § "Where storey registration stands (STAGE BUILDPLAN-ANALYZER-005L)". Storey registration and support are rebuilt on walled bodies and wall-on-wall correspondence, and per-storey footprints reach the emitted model. A06 and A07 FAIL → PASS (with żurawkach and tunbergiach), no PASS row moves, garage safety and non-circularity hold, M1–M10 are killed. Blind 9: #1 `dom-w-murajach` ALGORITHMIC_FAIL on a recessed-entrance / garage-door body relation upstream of the storey work (it failed at the 005K code too), #2 `dom-w-cieszyniankach` PASS. **NEXT: FIX_RECESSED_ENTRANCE_BODY_RELATION** |
 ## Current capabilities
 
 - **CanonicalBuildingModel** (`packages/model`): versioned Zod schema
@@ -1207,6 +1208,78 @@ zgodności odczytu wymiarów").
 `.so`, preview signer `6e48fac4…`, model `9ef676d6…` and WASM `3398c10d…` inside, verified from the downloaded file
 (report §R).
 
+## Where storey registration stands (STAGE BUILDPLAN-ANALYZER-005L)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005L_STOREY_REGISTRATION.md`. Evidence: `stage-reports/artifacts/analyzer-005l/`.
+It holds:
+- the baseline and the architecture;
+- the synthetic corpus and emitted-geometry records;
+- the development matrix and the storey-registration artifact;
+- mutation and knob results, order invariance and performance;
+- the post-review and the blind round;
+- the recommendation.
+
+**What changed in production.** Storey registration, the storey-support relation and per-storey footprints, in
+`packages/reconstruction`. `LAYOUT_INFERENCE_VERSION` is 1.1.0, carried in the run's versions. The Evidence Pack is
+1.3.0, adding `14b-storey-support.json` and the STOREY_SUPPORT stage.
+
+- **STOREY BASELINE — measured.** At the starting code `a70047f`, A06, A07, A01, D00, żurawkach and gozdzikowcach
+  generated no placement for the other plan: its envelope took in a publisher mark, an eave or roof planes. Support was
+  "the envelope covers ≥ 50 % of a body", and the emitter copied the ground ring upstairs. A03 and jabłonkach passed by
+  accident (`baseline-storey-registration.json`).
+- **PLAN ALIGNMENT — FIXED.** Wall-on-wall correspondence over bounded named hypotheses: stated chains, printed
+  scale, fitted rectangle, facade wall pairs and same pixel scale. Each is recorded with its basis. The score is a true
+  Dice share of long walls, and ties are decided at the walls' own pixel resolution. A printed scale or a statement is
+  held, or refuted, on the record.
+- **UPPER BUILT REGIONS — FIXED.** Every walled body of the other plan is weighed, never its envelope. The body test is
+  the base's, plus storey-wall thickness, so a parapet is no storey. Sides are reached to the facade walls.
+- **SUPPORT RELATIONS — FIXED.** Directional shares. SUPPORTS needs a room's span on both axes, otherwise INCIDENTAL.
+  The overhang is decided by erosion and named when BEYOND. A body reaches a storey only through the one between, and
+  near-tie bodies are disputed and named.
+- **PER-STOREY FOOTPRINT — PASS.** Each storey's footprint is its own plan's walled body on each mass. L-shaped storeys
+  are built as their largest rectangle; the rest is a named gap.
+- **EMITTED UPPER GEOMETRY — PASS.** Per-storey rectangles reach rings, openings, interior hosts, slabs and attached
+  roofs. The ground ring copied upstairs (M6) is killed by five end-to-end PNG→model fixtures.
+- **GARAGE/WING SAFETY — PASS.** No development garage gains a storey. M2 and M7 are killed.
+- **A06 — FIXED.** ALGORITHMIC_FAIL → PASS: 2 / 2 storeys, +0.18 %. The attic plan is placed by facade wall pairs, and
+  its walled body stands on the main body and the porch. The overhang beside the porch is named.
+- **A07 — FIXED.** ALGORITHMIC_FAIL → PASS: 2 / 2, −0.37 %. Placed by wall pairs; the three publisher-mark "regions"
+  are not bodies.
+- **A01 — storey fixed, row still FAIL.** The attic is registered and stacked on the main body. The run still stops
+  on the pre-existing ground-floor window FILL_TOO_LARGE (the same window as before 005L).
+- **D00 — storey fixed, row still FAIL.** The attic is registered and stacked. The footprint is still −18.71 %: the
+  ground plan misses the garage.
+- **DEVELOPMENT MATRIX — PASS.** 40 rows. Four go FAIL → PASS (A06, A07, żurawkach, tunbergiach) and no PASS row moves.
+  Marcówki keeps its 005K model `6152770f`, as does willa-miranda. Two other models move with their verdict kept: the
+  morelach upper interior, and D00's attic.
+- **DRAWN GAP RULE OFF — confirmed.**
+- **ORDER INVARIANCE — PASS.** Family A: no row moves in 8 shuffles. Family B, the chain-order debt, now reaches a
+  storey decision on two rows refused at plan resolution (A04, gozdzikowcach). It is measured, not repaired.
+- **NON-CIRCULARITY — PASS.**
+  - The layout reads only its own option keys; a Proxy test proves it.
+  - `structural.ts` names published areas in exactly three lines.
+  - Vocabulary and frozen-literal gates; executed decoys.
+  - M4 and M8–M10 killed.
+- **PERFORMANCE — PASS.** Layout median 807 → 817 ms; analyzer wall per row 22.75 → 23.0 s (+0.9 %). Alignment
+  (1.5 ms) and support (+45 ms) are explained.
+- **COUNCIL — closed.**
+  - Five reviewers, CHANGES_REQUIRED at `4ad69fe`: 7 P0, 20 P1, 24 P2.
+  - Every finding is fixed, recorded, documented or accepted (`post-review/resolution.md`).
+  - The fixes' own two full-suite regressions are fixed with tests.
+- **FREEZE.** `PRE_HOLDOUT_9_SHA = 8f5f3c5903bc8cfe168667f6b5dcfdb995eaf4cd`; CI run 37595482179 green.
+- **BLIND ROUND 9 PROJECT 1 — `dom-w-murajach` (stratified, plan storeys [1, 3]): ALGORITHMIC_FAIL.**
+  - Typed `METRIC_RESOLUTION_INCONCLUSIVE`.
+  - First bad decision: **BODY_RELATION** on the ground plan. A recessed entrance beside the 250 cm garage door leaves
+    the body unenclosed and the garage outside the extent, so the attic plan becomes the base. The ground storey's own
+    7 m² of closed rooms is refused at the gate.
+  - At the 005K code the same evidence emits the attic outline as the ground floor (−13.5 %, also ALGORITHMIC_FAIL).
+- **BLIND ROUND 9 PROJECT 2 — `dom-w-cieszyniankach` (unstratified): PASS.** Single storey, −5.1 %, every opening built.
+- **INHERITED ARM64 PARITY — PENDING.** 005H's on-device check is the OWNER's; no emulator evidence is substituted.
+- **OWNER APK — see the report §T.**
+
+**Stage: PARTIAL_BUILDPLAN_ANALYZER_005L_BLIND9_BODY_RELATION_FAIL.** Every §45 condition holds except a fresh blind
+ALGORITHMIC_FAIL, whose first bad decision is upstream of the storey work.
+
 ## Where the gap evidence stands (STAGE BUILDPLAN-ANALYZER-005K)
 
 Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005K_GAP_EVIDENCE_DRAWN_GAP.md`. Evidence: `stage-reports/artifacts/analyzer-005k/`.
@@ -1415,6 +1488,17 @@ All of it is in the metric evidence 1.7.0 / 1.8.0 and its hash, and in the Evide
 **CI:** run 169 (`37464801271`) on `869cb01` (PRE_HOLDOUT_8_SHA) green. **Final CI:** run 172 (`workflow_dispatch`, id 37474671669) on `a7f009a` — green at the first attempt (41 jobs, 40 green, `preview-latest` skipped by design). **OWNER APK:** `owner-preview-latest/BuildPlan-owner-preview.apk`, versionCode 1172, 39.4 MB (+11 KB: the topology code), sha256 `70b4ff90aa4f5170a334377fc17e1a1a3ea84b9d6c45cd8e92a73b685f4df0b5`, arm64-v8a only, the same five `.so`, preview signer `6e48fac4…`, model `9ef676d6…` and WASM `3398c10d…` unchanged, no research asset; verified from the downloaded file (report §T).
 
 ## Recommended technical next step
+
+**For the analyzer line (after 005L): return to the coordinator.** `stage-reports/artifacts/analyzer-005l/recommendation.md`.
+
+**NEXT: FIX_RECESSED_ENTRANCE_BODY_RELATION.**
+- The first bad decision on blind round 9 #1 (`dom-w-murajach`) and on blind round 8 #1 (`dom-w-gozdzikowcach`) is
+  the same. A recessed entrance next to a garage door on the front line is read as one wide mouth, so the house body is
+  not enclosed and the garage is left outside it.
+- On murajach this is upstream of every storey decision. 005L's storey work neither caused it nor could fix it.
+- FIX_PLAN_RESOLUTION has two roots, and this is one of them. REC-17 and PDF.js vector evidence are not what failed.
+
+005M is not self-started. The 005K recommendation below (FIX_STOREY_COUNT) is done by 005L.
 
 **For the analyzer line (after 005K): return to the coordinator.** `stage-reports/artifacts/analyzer-005k/recommendation.md`.
 
