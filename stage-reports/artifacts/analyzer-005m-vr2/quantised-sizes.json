@@ -1,0 +1,12 @@
+{
+ "researchOnly": "BUILDPLAN-ANALYZER-005M",
+ "note": "Bytes of quantisations that were NOT run in 005M, from Hugging Face listings at the revisions given (read 2026-10-07). Only the publisher's own files are 'OFFICIAL'; the rest are size references for a deployable pack, never weights that ran. Quality at these quantisations is unmeasured.",
+ "qwen3-vl-2b": {"llmQ4_K_M": 1107409952, "llmQ4_K_M_source": "OFFICIAL Qwen/Qwen3-VL-2B-Instruct-GGUF@52d6c8ffea26cc873ac5ad116f8631268d7eb503 Qwen3VL-2B-Instruct-Q4_K_M.gguf",
+                 "visionQ8_0": 445053216, "visionQ8_0_source": "OFFICIAL Qwen/Qwen3-VL-2B-Instruct-GGUF@52d6c8ffea26cc873ac5ad116f8631268d7eb503 mmproj-Qwen3VL-2B-Instruct-Q8_0.gguf"},
+ "qwen3-vl-4b": {"llmQ4_K_M": 2497281664, "llmQ4_K_M_source": "OFFICIAL Qwen/Qwen3-VL-4B-Instruct-GGUF@1cd86afb9a95c410a6038ab3b40d8b578c892266 Qwen3VL-4B-Instruct-Q4_K_M.gguf",
+                 "visionQ8_0": 453974304, "visionQ8_0_source": "OFFICIAL Qwen/Qwen3-VL-4B-Instruct-GGUF@1cd86afb9a95c410a6038ab3b40d8b578c892266 mmproj-Qwen3VL-4B-Instruct-Q8_0.gguf"},
+ "smolvlm2-2.2b": {"llmQ4_K_M": 1112602656, "llmQ4_K_M_source": "REFERENCE ggml-org/SmolVLM2-2.2B-Instruct-GGUF@1bc3c9f74ceafd4c8d4411cc9cf188bba3798f91 SmolVLM2-2.2B-Instruct-Q4_K_M.gguf",
+                   "visionQ8_0": 592523200, "visionQ8_0_source": "REFERENCE ggml-org/SmolVLM2-2.2B-Instruct-GGUF@1bc3c9f74ceafd4c8d4411cc9cf188bba3798f91 mmproj-SmolVLM2-2.2B-Instruct-Q8_0.gguf"},
+ "internvl3.5-2b-instruct": {"llmQ4_K_M": 1282436192, "llmQ4_K_M_source": "REFERENCE bartowski/OpenGVLab_InternVL3_5-2B-GGUF@09023986543a68f5caaa389f64b0e0256fe22565 OpenGVLab_InternVL3_5-2B-Q4_K_M.gguf (the RL sibling of the -Instruct checkpoint, same tensor shapes; its F16 mmproj is within 320 bytes of ours)",
+                             "visionQ8_0": 345534522, "visionQ8_0_source": "ESTIMATE: our F16 mmproj x 0.543 (the Qwen3-VL-2B Q8_0/F16 ratio); no Q8_0 listing exists"}
+}

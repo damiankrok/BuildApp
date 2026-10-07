@@ -32,5 +32,6 @@
  "notAdvanced": [
   "smolvlm2-2.2b"
  ],
- "note": "written and committed before any PHASE2-only item was answered; PHASE2 run files start as copies of the PHASE1 files and add the remaining 135 questions"
+ "note": "decided automatically at 19:45:26.21 UTC (runs/p1-ranking.txt, written by the phase-1 chain from the complete phase-1 files) before the phase-2 chain launched (19:45:26.33); this JSON was written at 19:46:07 and committed at 19:46:34, about a minute into phase 2 (corrected wording, post-review A-9). PHASE2 run files start as copies of the PHASE1 files and add the remaining questions",
+ "postReviewAmendedRanking": "with the 2 phase-1 questions excluded after review (excluded-items.json), the order is unchanged: internvl3.5-2b-instruct, qwen3-vl-2b, qwen3-vl-4b, smolvlm2-2.2b (matched-bakeoff.json phase1Ranking)"
 }

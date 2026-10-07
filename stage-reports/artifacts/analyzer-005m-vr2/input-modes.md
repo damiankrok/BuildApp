@@ -34,21 +34,34 @@ the same bytes for a given item: each item records the SHA-256 of every image it
 ## Geometry
 
 - **Plan.** The whole frame or render, longest side **768 px**, downscaled only (LANCZOS).
+  - 49 of the 167 phase-2 plans are smaller and go at native size: all 16 SYNTH_CF and 33 of 54 SYNTH_GLOBAL. The
+    smallest is 329 × 272 px.
 - **Crop.** **448 × 448 px**, centred on the target.
   - Its side is 2 × (half extent + max(3 m, 0.6 × half extent)), white padding outside the sheet. It is downscaled
     with LANCZOS or upscaled with BICUBIC.
+  - 102 of 167 crops are upscaled: up to 2.55× on synthetic renders, about 1.6× on most 005K gaps.
+  - **For the 12 candidate-outline questions the "crop" is not a close-up.** Both outlines must fit, so it is the
+    whole sheet at 0.37–0.56×. For them, A → B/C partly measures resolution rather than context (post-review B-6).
   - It is **clipped to the question's panel**: for STOREY questions the crop holds the ground plan only, so mode A
     cannot see the upper floor.
 - **ROI colour.** Cyan `rgb(0, 190, 230)`, line width 3 px. **Never red**: the publishers draw dimensions in red.
   - Areas: outline plus a 18 % fill.
   - Gaps and lines: **two brackets** parallel to the line, just outside the wall band (offset = half the wall thickness
-    + 5 px), with end ticks pointing away. They never cover the evidence (005K's convention).
+    + 5 px), with end ticks pointing away (005K's convention).
+    - Where the wall band is estimated too thin, a bracket can still touch wall ink (seen on 005K q036).
+    - On A06, the cyan sits close to a cyan pool the publisher drew (post-review B-9).
   - Candidate outlines: outline **1** solid and outline **2** dashed, labelled with digits. Digits are used so they
     cannot collide with option letters.
+    - **Known weakness (B-4).** Where the two outlines share edges, outline 2 shows only as dashed fragments.
+    - Qwen3-VL-2B chose outline 1 in 56 of 60 phase-2 records, and both phase-1 outline questions expect outline 1.
+    - Read results on this class as partly a salience effect.
 - **Analyzer overlay (E).** The production `planSheet` wall bands, read-only through 005J's `bands.ts`, on the exact
   source image, drawn as 2 px purple `rgb(150, 70, 200)` axis lines (each band's centre line).
   - **It holds no expected answer, published area, verdict, house name, or green/red cue.** It is an observation and can
-    be wrong: on 14 of 90 plan images the production pass found no band at all.
+    be wrong: on 18 of 90 plan images the production pass found no band at all.
+  - It comes from the analyzer, not from the truth, so it can differ between twins: 30 bands on
+    `inset_upper-s0` NORMAL, none on its MIRROR.
+  - On `phantom_line-s0`, whether it is present happens to line up with the answer (post-review B-8).
   - **Not included:** "two alternative boundary hypotheses" as a separate layer. Where a question is itself an A/B
     candidate question, its candidates are the question's own cyan marker in every mode. The analyzer's rejected
     outlines are not in the development records for the other questions, and a hypothesis drawn from the truth would
@@ -57,31 +70,47 @@ the same bytes for a given item: each item records the SHA-256 of every image it
 ## Context-dependent pairs
 
 For the 005M generator's context families, the A-mode crops of the two members of a counterfactual pair are
-**byte-identical** (34 of 34 benchmark items, 48 of 48 teacher-mining items). Mode A must answer such a pair
-identically. The only correct crop-only reply is UNRESOLVED, and any gain on them can come only from the whole plan.
+**byte-identical**. That holds for all 34 twin-paired benchmark items and 48 of 48 teacher-mining items.
+
+- **Uncovered items.** The benchmark has 38 context-dependent items. The 4 ROT90 singletons have no twin in the set,
+  so their identity is not checked.
+- **What mode A must do.** It must answer such a pair identically. Where the two members' truths differ, the only
+  correct crop-only reply is UNRESOLVED, and any gain can come only from the whole plan.
+- **Control pairs.** The storey families also ask about the rear of the body, which the upper floor covers in both
+  members. Both truths there are YES, so a YES in mode A is right and is no context gain.
+- **Scoring.** The scorer counts the control pairs apart and reports context pairs separately (post-review B-3, B-12).
 
 ## Token budget and model-native resizing (measured)
 
 `imageTokens` = the prompt tokens minus the tokens of the same messages without the images, both through the
 model's own chat template (`bench.py`: `/apply-template` + `/tokenize`). Medians are over every record. The minimum
-comes from the narrowest plan (a 449 × 404 storey frame or a 768 × 338 strip).
+comes from the smallest plan, a 329 × 272 px synthetic render (005J `porch_recess`).
 
 ### Measured per model
 
 | model | how the runtime sizes an image | A (crop 448²) | B / C (plan, 768² typical) | D / E (plan + crop) | per-image ceiling |
 | --- | --- | --- | --- | --- | --- |
-| Qwen3-VL-2B / 4B | dynamic resolution, 32 px per token after 2 × 2 merge, no resizing at these sizes | **198** | **578** (92–578) | **776** | ~16 k px² per token; a 768 × 768 plan is 24 × 24 |
+| Qwen3-VL-2B / 4B | dynamic resolution, 32 px per token after 2 × 2 merge, no resizing at these sizes | **198** | **578** (92–578) | **776** | 1,024 px² (32 × 32) per token; a 768 × 768 plan is 24 × 24 |
 | InternVL3.5-2B | 448 px tiles; a 448² crop is one tile; a 768² plan is 2 × 2 tiles + a thumbnail (5 × 256) | **258** | **1,282** (258–1,282) | **1,540** | 256 tokens per tile, up to 12 tiles by default |
 | SmolVLM2-2.2B | Idefics3 tiling, **capped here** with `--image-max-tokens 336`: both crop and plan become 2 × 2 tiles + a global view | **419** | **419** (252–419) | **837** | native: 1,536 px longest side, **1,417 tokens per image** (~100 s per image on this CPU) |
 | Qwen3-VL-8B (teacher) | as Qwen3-VL-2B | 198 | 578 | 776 | |
 | SmolVLM2-500M (005J reference) | 005J ran it on its own candidate-overlay image, one 512² tile = 64 image tokens; not re-run | — | — | — | |
 
 What this means for the comparison:
-- **Qwen3-VL sees the most per plan pixel.** At 768 px a wall 3 px thick is about a tenth of a 32-px token cell.
-  InternVL spends 2.2 × as many tokens on the same plan.
-- **SmolVLM2-2.2B under the cap sees the 448 px crop at roughly the same effective resolution as the plan.** The crop is
-  resampled into the same 2 × 2 + global layout as the plan (5 × 81 tokens). Measured in phase 1, it gains nothing
-  from context: the net change A → B/C/D/E is −2 / −2 / −1 / −2 over 32 questions. Its phase-1 result
-  is a result **at the cap**, stated as such: the native setting was out of this CPU's reach for 160 matched records.
-- **Token cost is the latency driver on CPU.** D/E cost about 1.3–1.4 × B/C in tokens, and about the same wall time
-  as C, because the plan prefix is reused from the prompt cache (`runtime-size-matrix.md`).
+- **Every model receives every input pixel.** No model downsamples a composed image.
+  - Qwen3-VL works at its native 32 px per token, with no resizing: a wall 3 px thick is about a tenth of a token cell.
+  - InternVL tiles at 448 px, as its own `dynamic_preprocess` would, and spends 2.2× as many tokens on the same plan.
+- **The SmolVLM2-2.2B cap preserves information.** `--image-max-tokens 336` gives 2 × 2 tiles of 384 px plus a global
+  view, which is 768 px.
+  - Every composed image is at most 768 px, so nothing is lost; the native setting would only upscale further, to
+    1,536 px.
+  - The 448 px crop is therefore resampled into the same layout as the plan (5 × 81 tokens).
+  - Measured in phase 1, it gains nothing from context: the net change A → B/C/D/E is −2 / −2 / −1 / −2 over 32
+    questions.
+  - Its answers are near coin-flips: median chosen-option probability 0.51.
+- **Token cost drives latency on CPU.** D/E cost more tokens than B/C: 1.34× for Qwen3-VL (776 / 578), 1.2× for
+  InternVL (1,540 / 1,282) and 2.0× for SmolVLM2 (837 / 419).
+  - **In the benchmark,** D reused C's plan image from the prompt cache, so its wall time is about half of C's.
+  - **Asked alone,** a mode-D question costs more than C: about 35 s against 25 s for Qwen3-VL-2B on this CPU.
+  - E was asked after D, with a different first image, so it was not cache-aided.
+  - Both figures are in `runtime-size-matrix.md` (post-review E-1).

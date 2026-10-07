@@ -8,7 +8,7 @@ entered the repository working tree.
 | | |
 | --- | --- |
 | CPU | 4 vCPU, Intel Xeon @ 2.80 GHz. AVX-512 F/BW/CD/DQ/VL and AVX-512 VNNI; no AMX, no AVX-512 BF16 |
-| RAM | 15.7 GiB (`MemTotal` 16,480,968 kB) in one memory cgroup. **tmpfs `/dev/shm` counts against it.** Weights placed in `/dev/shm` and the server's anonymous memory share the same 15.7 GiB |
+| RAM | 15.7 GiB host (`MemTotal` 16,480,968 kB). **Every process of the session runs in one memory cgroup limited to 14,345,031,680 bytes (13.36 GiB), and tmpfs `/dev/shm` counts against it.** Weights in `/dev/shm`, the server's anonymous memory and the page cache share that limit |
 | GPU | none |
 | disk | a fixed per-session allowance. About 5 GB was free at the start of the stage and under 1 GB later. See "Storage" below |
 | kernel | Linux 6.18.44 |
@@ -33,8 +33,11 @@ llama-server -m <LLM.gguf> --mmproj <vision.gguf> -t 4 -tb 4 -c 8192 -np 1 --tem
 
 - **One slot.** Questions run sequentially; no request competes with another.
 - **Greedy and seeded.** `temperature 0`, `seed 0`, `max_tokens 40`, JSON-schema constrained output (`bench.py`).
-- **Prompt cache capped at 2 GiB** (the default is 8 GiB). With weights in `/dev/shm`, the default cache drove the
-  cgroup towards OOM.
+- **Prompt cache capped at 2 GiB** (the default is 8 GiB).
+  - With weights in `/dev/shm`, the default cache drove the cgroup towards OOM.
+  - The cgroup did kill one process: a `llama-mtmd-cli` smoke check at about 14:03 UTC (anon 5.78 GB + shmem 1.79 GB),
+    before the context and the cache were capped.
+  - No benchmark server was killed: every run file is complete, and failures are counted per record.
   - The cache is what makes mode D cheap after C: they share the plan-image prefix.
   - It changes no answer by design, but llama.cpp does not promise bit-identical logits between cached and uncached
     evaluation. Latency tables therefore report cold-cache medians separately (`runtime-size-matrix.md`).
@@ -42,8 +45,8 @@ llama-server -m <LLM.gguf> --mmproj <vision.gguf> -t 4 -tb 4 -c 8192 -np 1 --tem
   - Q8_0 is the publisher's own quantisation for Qwen3-VL. It was converted here for SmolVLM2-2.2B and InternVL3.5-2B.
   - A quick check found the Q8_0 projector slower than F16 on this CPU, so F16 was kept.
   - The smaller Q4_K_M packs appear only as byte figures.
-- **The teacher (Qwen3-VL-8B) runs as Q4_K_M + F16 projector.** Its Q8_0 (8.7 GB) does not fit in the memory cgroup
-  beside the benchmark.
+- **The teacher (Qwen3-VL-8B) runs as Q4_K_M + F16 projector.** It runs alone, after the bake-off, but its Q8_0
+  (8.7 GB) plus runtime memory would not fit in the 13.36 GiB cgroup.
 - **SmolVLM2-2.2B is given `--image-max-tokens 336`.** Each image becomes 2 × 2 tiles plus a global view, 419 tokens.
   - At its native 1,536 px, 1,417 tokens per image took about 100 s per image here, which would not have finished the
     matched run.
@@ -54,7 +57,8 @@ llama-server -m <LLM.gguf> --mmproj <vision.gguf> -t 4 -tb 4 -c 8192 -np 1 --tem
 - Outbound HTTPS goes through the session's agent proxy. Public, unauthenticated huggingface.co downloads at pinned
   revisions were reachable.
 - `google/gemma-3n-E2B-it` and `-E4B-it` are gated. Their `config.json` returned **401**.
-- **No account, token, credential or paid service was created or used.** No hosted inference was called.
+- **No account, token or paid service was created or used, and no Hugging Face credential exists in the
+  environment.** The platform sets its own session tokens, which nothing here used. No hosted inference was called.
 
 ## Storage (why weights never touched the repository)
 
@@ -71,6 +75,9 @@ llama-server -m <LLM.gguf> --mmproj <vision.gguf> -t 4 -tb 4 -c 8192 -np 1 --tem
   - `tests/architecture/research-isolation.test.ts` (005M block);
   - `research/analyzer-005m/history_gate.sh` (every commit from the stage base onward).
 - **Weights in memory.** They were kept in `/dev/shm/models`, one model family at a time.
+  - The exception is InternVL3.5-2B, which ran from its converted GGUF on disk (`$W/gguf`, through the page cache).
+  - A finished model's files were removed from `/dev/shm` before the next large run, so the next run had memory
+    headroom (post-review E-3).
   - Pinned safetensors were deleted after conversion. These were files this stage downloaded.
 - **Shared caches were not deleted.** Deleting other stages' caches (npm, Gradle, older work directories) to gain disk
   space was refused by the session's safety policy as irreversible, and was not pursued. The stage worked inside the
