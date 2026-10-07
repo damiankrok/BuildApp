@@ -306,6 +306,13 @@ The first fix commit caused two full-suite regressions, both fixed with a test:
    *record*, after it turned a correct §25 fixture PARTIAL. The plan-frame rule (B5L-5) became conditional on a stated
    scale, after it removed a door from §25 v2 fixture 5. Both are explained in `post-review/resolution.md`.
 
+4. **The first closing CI run (191, `0fc4cc8`) was red on this stage's own artifact gate.** The blind-round
+   Evidence Packs had been committed with their SVG layers and the model preview PNG, and the 005L research-isolation
+   test allows only code and text under the stage's artifacts. The non-text files were removed (their hashes stay in
+   each pack's manifest), so no gate was loosened. The same run's UI evidence gate timed out once in
+   `ProductFlowDeviceTest` (default configuration, a 5 s wait), while the same flow passed at font scale 1.3 in that
+   run, and the whole gate passed on the freeze run with identical production code.
+
 ## O. Gates
 
 | gate | result |

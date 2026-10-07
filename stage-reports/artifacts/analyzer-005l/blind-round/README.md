@@ -40,6 +40,11 @@ Each address ran **once**, live, with the frozen code, one after the other, with
 | 1 `dom-w-murajach` | 09:40:46 | 410 s | 924 MB | 3.4 s | `RECONSTRUCTION_FAILED / METRIC_RESOLUTION_INCONCLUSIVE` | 36 files, 571 decisions |
 | 2 `dom-w-cieszyniankach` | 09:47:36 | 287 s | 983 MB | 4.3 s | completed: 1 body, 15 openings, model `a96afbb1…` | 37 files, 448 decisions |
 
+**What is committed of each Evidence Pack:** its JSON layers, `README.md` and `manifest.json` (numbers and ids).
+The analyzer's own SVG layers and model preview stay outside the repository, by the 005L rule that the harness and
+artifacts track only code and text (`tests/architecture/research-isolation.test.ts`). Each one's SHA-256 is in the
+pack's `manifest.json`.
+
 ## Verdicts (`holdout/verdict.mjs`, as frozen) — sealed 09:52:35Z, before any diagnosis
 
 | # | verdict | conditions | `verdict-*.json` SHA-256 (as printed, before the scratch path was redacted) |
