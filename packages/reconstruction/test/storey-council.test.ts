@@ -205,7 +205,7 @@ describe('005L council A: registration topology', () => {
     expect(spans(d).find((s) => s.startsWith('12,8,20,17'))).toBe('12,8,20,17 0..0')
   })
 
-  it('A5L-11 a placement both plans state, held against a fit that would stand the storey elsewhere, is a conflict on the record', () => {
+  it('A5L-11 a placement both plans state, held against a fit that would stand the storey elsewhere, says so on the record', () => {
     const g = ground()
     partition(g, 40, 200, 279, 205)
     const u = sheet(400, 460)
@@ -218,8 +218,15 @@ describe('005L council A: registration topology', () => {
       { id: 'g', storey: 'GROUND', raster: g, chains: gChains(), reg: { originPx: { x: 40, y: 40 } } },
       { id: 'u', storey: 'UPPER', raster: u, chains: [chain('ux', 'HORIZONTAL', [40, 280]), chain('uy', 'VERTICAL', [10, 40, 350])], reg: { originPx: { x: 40, y: 10 } } },
     ])
-    expect(registrationOf(d, 'u')?.chosen?.stated).toBe(true)
-    expect(d.conflicts.some((c) => c.id.includes('storey-held'))).toBe(true)
+    const reg = registrationOf(d, 'u')
+    expect(reg?.chosen?.stated).toBe(true)
+    // the fit it was held against, which lands the partition on the partition, is named with the place it puts the storey
+    expect(reg?.held?.by).toBe('STATEMENT')
+    expect(reg?.held?.standsElsewhere).toBe(true)
+    expect(reg?.held?.over.score).toBeGreaterThan(reg?.chosen?.score ?? 1)
+    // and it is a record, not a conflict: a correctly stated set-back is held against a better-fitting shift as well
+    // (fixtures.test.ts, REDMIRE), and the walls do not tell the two apart
+    expect(d.conflicts.some((c) => c.id.includes('storey-held'))).toBe(false)
   })
 })
 

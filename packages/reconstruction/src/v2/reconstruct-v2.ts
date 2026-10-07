@@ -477,10 +477,12 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       const covers = masses.filter((m) => m.storeys.includes(index)).map((m) => rectAt(m, index)).sort((a, b) => (b.x1 - b.x0) * (b.z1 - b.z0) - (a.x1 - a.x0) * (a.z1 - a.z0))[0] ?? main
       const byFaces = planFrameByOuterFaces(plan, index, world, { x0: covers.x0, z0: covers.z0, x1: covers.x1, z1: covers.z1 }, raster)
       const aligned = planFrameV2(plan, index, world, draft)
-      // 005L (council B5L-5): the layout's registration says where this plan sits; the outer faces refine it only where
-      // they agree with it in scale. Faces fitted to the wrong rectangle — the whole of an L outline put on one leg of
-      // it — agree with themselves on both axes and are still wrong by the L.
-      const agrees = !aligned || !byFaces || Math.abs(byFaces.mppX / aligned.mppX - 1) <= PLAN_FRAME_SCALE_AGREEMENT
+      // 005L (council B5L-5): where the layout's registration rests on a scale the drawings state (both plans' chains,
+      // or the scale both print), the outer faces refine it only where they agree with it in scale. Faces fitted to the
+      // wrong rectangle — the whole of an L outline put on one leg of it — agree with themselves on both axes and are
+      // still wrong by the L. A registration fitted from the walls alone states nothing the faces must yield to.
+      const statedBasis = ['STATED', 'PRINTED_SCALE'].includes(draft.alignments.get(plan.frame.id)?.basis ?? '')
+      const agrees = !aligned || !byFaces || !statedBasis || Math.abs(byFaces.mppX / aligned.mppX - 1) <= PLAN_FRAME_SCALE_AGREEMENT
       frame = byFaces && agrees ? byFaces : aligned
       why = byFaces && agrees ? byFaces.why : byFaces ? `its outer wall faces would put it at ${byFaces.mppX} m/px against the ${aligned?.mppX} m/px its registration onto the plan below states; the registration stands` : 'no outer faces found'
     }

@@ -15,7 +15,7 @@ import type { SourceObservationGraph } from '@buildapp/source-observations'
 import type { StructuralLayoutDraft } from './layout.js'
 import type { StructuralLayoutHypothesisSet } from './structural-layout.js'
 import { ReconstructionFailure, planCounts } from './failure.js'
-import type { PlanDiagnostics, PlanDiagnosticsReport } from './failure.js'
+import type { PlanDiagnostics, PlanDiagnosticsReport, StoreyDigest } from './failure.js'
 import type { BoundaryRecord } from './plan-decomposition.js'
 import type { OutlineSupport } from './boundary-outline.js'
 
@@ -68,7 +68,21 @@ export function planDiagnosticsOf(draft: StructuralLayoutDraft, graph: SourceObs
       masses,
     }
   })
-  return { planFrames, selectedPlanFrameId: draft.base?.frame.id ?? null, plans, skipped: draft.skippedPlans.map((s) => ({ frameId: s.frameId, why: s.why })) }
+  // 005L (council E5L-6): every other storey's registration and support, numbers and ids only
+  const storeys: StoreyDigest[] = draft.storeyRegistrations.map((r) => ({
+    frameId: r.frameId,
+    storeyIndex: r.storeyIndex,
+    decision: r.decision,
+    chosen: r.chosen ? { targetId: r.chosen.targetId, scale: round6(r.chosen.scale), offsetX: round6(r.chosen.offsetX), offsetY: round6(r.chosen.offsetY), score: round6(r.chosen.score), stated: r.chosen.stated } : null,
+    margin: r.margin ?? null,
+    resolution: r.resolution ?? null,
+    scaleBasis: r.scaleBasis ? { basis: r.scaleBasis.basis, corroborated: r.scaleBasis.corroborated } : null,
+    printedScale: r.printedScale ? { k: r.printedScale.k, outcome: r.printedScale.outcome } : null,
+    held: r.held ? { by: r.held.by, standsElsewhere: r.held.standsElsewhere, overScore: round6(r.held.over.score) } : null,
+    regions: r.regions.map((g) => ({ regionId: g.regionId, bounds: g.bounds, body: g.body, overhang: g.overhang, unsupportedM2: g.unsupportedM2, standsOn: r.relations.filter((x) => x.upperRegionId === g.regionId && x.supportStatus === 'SUPPORTS').map((x) => x.lowerMassId).sort() })),
+    why: r.why,
+  }))
+  return { planFrames, selectedPlanFrameId: draft.base?.frame.id ?? null, plans, skipped: draft.skippedPlans.map((s) => ({ frameId: s.frameId, why: s.why })), ...(storeys.length > 0 ? { storeys } : {}) }
 }
 
 /** The opening-aware boundary (005C), as the digest carries it: what was found, adopted and named. */

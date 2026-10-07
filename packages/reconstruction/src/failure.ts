@@ -215,6 +215,26 @@ export type PlanDiagnosticsReport = {
   resolution?: Record<string, number | string | boolean>
   /** 005B: when a first reading that completed on weak metric evidence was weighed against its metric alternatives. */
   challenge?: Record<string, number | string | boolean>
+  /**
+   * 005L (council E5L-6): every other storey's plan, as the storey-support relation decided it — its placement, what
+   * the placement's scale rests on, its walled regions and what each stands on. Numbers and ids only.
+   */
+  storeys?: StoreyDigest[]
+}
+
+/** 005L: one storey's registration and support, as the Evidence Pack shows it. */
+export type StoreyDigest = {
+  frameId: string
+  storeyIndex: number
+  decision: string
+  chosen: { targetId: string; scale: number; offsetX: number; offsetY: number; score: number; stated: boolean } | null
+  margin: number | null
+  resolution: number | null
+  scaleBasis: { basis: string; corroborated: boolean } | null
+  printedScale: { k: number; outcome: string } | null
+  held: { by: string; standsElsewhere: boolean; overScore: number } | null
+  regions: Array<{ regionId: string; bounds: { x0: number; z0: number; x1: number; z1: number }; body: boolean; overhang: string; unsupportedM2: number; standsOn: string[] }>
+  why: string
 }
 
 /** The counts a failure screen shows, from the digest. */

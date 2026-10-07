@@ -128,6 +128,12 @@ export type PlanAlignment = {
   shares: number
   /** True when both offsets come from the two plans' own dimension chains rather than from an assumption about how storeys stack. */
   stated: boolean
+  /**
+   * 005L (council D5L-1): what the placement's scale rests on — both plans' chains and offsets (STATED), the scale both
+   * plans print (PRINTED_SCALE), the plan's rectangle fitted to a target (FITTED), facade walls paired on both axes
+   * (WALL_PAIRS), or the assumption that the two sheets share one pixel scale (SAME_PIXEL_SCALE).
+   */
+  basis: 'STATED' | 'PRINTED_SCALE' | 'FITTED' | 'WALL_PAIRS' | 'SAME_PIXEL_SCALE'
   score: number
   why: string
 }
@@ -285,8 +291,18 @@ export type StoreyRegistration = {
   margin?: number
   /** How finely the walls tell two placements apart; a rival nearer than this is a tie (005L council A5L-7). */
   resolution?: number
+  /**
+   * What the chosen placement's scale rests on, and — where that is the assumption that the two sheets share one pixel
+   * scale — whether a placement on other evidence (a printed scale, facade wall pairs) agrees with it (council D5L-1).
+   */
+  scaleBasis?: { basis: PlanAlignment['basis']; corroborated: boolean; why: string }
   /** Where both plans print a scale and the best fit is at another: whether the printed scale stood (005L council A5L-1). */
   printedScale?: { k: number; sharesAgainstFit: number; bodyInsideBelow: boolean; outcome: 'HELD' | 'REFUTED' }
+  /**
+   * A reading the drawings state (both plans' chains, or the scale both print), kept against a placement the walls fit
+   * better: the fit it was held against and whether that fit stands the storey elsewhere (005L council A5L-11).
+   */
+  held?: { by: 'STATEMENT' | 'PRINTED_SCALE'; over: { targetId: string; scale: number; offsetX: number; offsetY: number; score: number; masses: string[] }; standsElsewhere: boolean }
   decision: 'STACKED' | 'AMBIGUOUS' | 'NOT_REGISTERED' | 'NO_SUPPORT'
   regions: UpperRegionRecord[]
   relations: StoreySupportRelation[]
@@ -648,6 +664,11 @@ const WALL_PAIR_SCALE_AGREEMENT = 0.02
  * landed on at most once, however many of this plan's walls are mapped onto it. Matching axes alone, or counting a
  * base wall again for every wall squeezed onto it, lets a plan shrunk onto the busiest strip of the plan below agree
  * with walls it never touches.
+ *
+ * The stretch counted is what lies on the base band itself, never past its ends: the tolerance decides which band a
+ * wall is on, not how long that band is. Counted out to the band's ends plus the tolerance, a plan stretched past the
+ * walls below gains up to two tolerances per wall it overruns, and a stretch can outscore the placement on which both
+ * plans' walls coincide (council follow-up, the ground plan of a house measured from its upper storey).
  */
 function matchedLength(other: readonly Band[], base: readonly Band[], scale: number, offsetAcross: number, offsetAlong: number, tolerance: number): number {
   const landed = new Map<number, Array<[number, number]>>()
@@ -662,16 +683,16 @@ function matchedLength(other: readonly Band[], base: readonly Band[], scale: num
     base.forEach((b, index) => {
       const d = Math.abs(b.axisPx - at)
       if (d > tolerance) return
-      const lo = Math.max(s0, (vertical ? b.bounds.y0 : b.bounds.x0) - tolerance)
-      const hi = Math.min(s1, (vertical ? b.bounds.y1 : b.bounds.x1) + tolerance)
-      if (hi <= lo) return
+      if (Math.min(s1, (vertical ? b.bounds.y1 : b.bounds.x1) + tolerance) <= Math.max(s0, (vertical ? b.bounds.y0 : b.bounds.x0) - tolerance)) return
+      const lo = Math.max(s0, vertical ? b.bounds.y0 : b.bounds.x0)
+      const hi = Math.min(s1, vertical ? b.bounds.y1 : b.bounds.x1)
       // collinear pieces of one wall are equally near; a parallel wall further off is not this one
       if (d < nearest - 0.5) {
         nearest = d
         on = [{ index, lo, hi }]
       } else if (d <= nearest + 0.5) on.push({ index, lo, hi })
     })
-    for (const o of on) landed.set(o.index, [...(landed.get(o.index) ?? []), [o.lo, o.hi]])
+    for (const o of on) if (o.hi > o.lo) landed.set(o.index, [...(landed.get(o.index) ?? []), [o.lo, o.hi]])
   }
   let covered = 0
   for (const pieces of landed.values()) {
@@ -792,7 +813,7 @@ export function alignPlans(base: PlanReading, other: PlanReading, options: { max
       : undefined
 
   /** One placement of this plan on the base plan, weighed: how much wall lands on wall, and how much of the building below it covers. */
-  const candidate = (scale: number, offsetX: number, offsetY: number, target: { id: string; rect: PixelRect }, isStated: boolean, how: string, claimed: PixelRect = source): PlanAlignment => {
+  const candidate = (scale: number, offsetX: number, offsetY: number, target: { id: string; rect: PixelRect }, isStated: boolean, how: string, basis: PlanAlignment['basis'], claimed: PixelRect = source): PlanAlignment => {
     const shared = matchedLength(otherAxes.VERTICAL, baseAxes.VERTICAL, scale, offsetX, offsetY, tolerance) + matchedLength(otherAxes.HORIZONTAL, baseAxes.HORIZONTAL, scale, offsetY, offsetX, tolerance)
     const agreement = round6(Math.min(1, shared / Math.max(1e-9, scale) / totalLength))
     // Wall on wall, from both sides (005L): the long wall the two plans share once this one is placed, against the long
@@ -829,6 +850,7 @@ export function alignPlans(base: PlanReading, other: PlanReading, options: { max
       agreement,
       shares,
       stated: isStated,
+      basis,
       score: round6(shares + coverageWeight * coverage + (isStated ? statedBonus : 0)),
       why: `${Math.round(agreement * 100)}% of this plan's wall lands on wall and the two plans share ${Math.round(shares * 100)}% of their long walls ${how}, covering ${Math.round(coverage * 100)}% of the building below`,
     }
@@ -889,7 +911,7 @@ export function alignPlans(base: PlanReading, other: PlanReading, options: { max
         for (const oy of offsetsY) {
           // 005L: a statement is the scale AND both offsets from the plans' own chains; chain offsets at a fitted scale state nothing
           const isStated = scaleStated && ox.stated && oy.stated
-          considered.push(candidate(scale, ox.v, oy.v, target, isStated, `at ${scaleWhy} (${scale.toFixed(3)}), ${ox.why} and ${oy.why} of ${target.id}`))
+          considered.push(candidate(scale, ox.v, oy.v, target, isStated, `at ${scaleWhy} (${scale.toFixed(3)}), ${ox.why} and ${oy.why} of ${target.id}`, isStated ? 'STATED' : scaleStated ? 'PRINTED_SCALE' : 'FITTED'))
         }
       }
     }
@@ -948,7 +970,7 @@ export function alignPlans(base: PlanReading, other: PlanReading, options: { max
       return scored.sort((p, q) => q.matched - p.matched || p.offset - q.offset).slice(0, SAME_SCALE_OFFSETS_PER_AXIS)
     }
     for (const x of sameScale('VERTICAL'))
-      for (const z of sameScale('HORIZONTAL')) considered.push(candidate(1, x.offset, z.offset, targetWalls, false, `at the plan below's own scale (1.000), with one of its outer walls on one below along x (${x.why}) and along z (${z.why})`, otherFrame))
+      for (const z of sameScale('HORIZONTAL')) considered.push(candidate(1, x.offset, z.offset, targetWalls, false, `at the plan below's own scale (1.000), with one of its outer walls on one below along x (${x.why}) and along z (${z.why})`, 'SAME_PIXEL_SCALE', otherFrame))
     const alongX = spans('VERTICAL')
     const alongZ = spans('HORIZONTAL')
     const seen = new Set<string>()
@@ -960,7 +982,7 @@ export function alignPlans(base: PlanReading, other: PlanReading, options: { max
         const key = `${scale.toFixed(3)}:${Math.round(x.offset / tolerance)}:${Math.round(z.offset / tolerance)}`
         if (seen.has(key)) continue
         seen.add(key)
-        considered.push(candidate(scale, x.offset, z.offset, targetWalls, false, `with two of its facade walls along x on two below (${x.why}) and two along z on two below (${z.why}), at the scale they agree on (${scale.toFixed(3)})`, { x0: x.from, y0: z.from, x1: x.to, y1: z.to }))
+        considered.push(candidate(scale, x.offset, z.offset, targetWalls, false, `with two of its facade walls along x on two below (${x.why}) and two along z on two below (${z.why}), at the scale they agree on (${scale.toFixed(3)})`, 'WALL_PAIRS', { x0: x.from, y0: z.from, x1: x.to, y1: z.to }))
       }
     }
   }
@@ -1923,6 +1945,19 @@ export function inferStructuralLayout(given: StructuralLayoutOptions): Structura
       ...(rival ? { rival: { targetId: rival.c.targetId, scale: rival.c.scale, offsetX: rival.c.offsetX, offsetY: rival.c.offsetY, score: rival.c.score, masses: standsOn(rival.o) } } : {}),
       margin,
       resolution: round6(tie),
+      scaleBasis: (() => {
+        const corroborated = considered.some((c) => c !== alignment && (c.basis === 'WALL_PAIRS' || c.basis === 'PRINTED_SCALE' || c.basis === 'STATED') && Math.abs(c.scale / alignment.scale - 1) <= WALL_PAIR_SCALE_AGREEMENT)
+        return {
+          basis: alignment.basis,
+          corroborated: alignment.basis !== 'SAME_PIXEL_SCALE' || corroborated,
+          why:
+            alignment.basis === 'SAME_PIXEL_SCALE'
+              ? corroborated
+                ? 'placed at the plan below’s own pixel scale, which facade walls paired on both axes or a printed scale agree with'
+                : 'placed at the plan below’s own pixel scale on the assumption that the two sheets were exported at one scale: no printed scale and no facade wall pair states it'
+              : `placed by ${alignment.basis.toLowerCase().replace(/_/g, ' ')}`,
+        }
+      })(),
       ...(reading?.printedScale ? { printedScale: { k: reading.printedScale.k, sharesAgainstFit: reading.printedScale.sharesAgainstFit, bodyInsideBelow: reading.printedScale.bodyInsideBelow, outcome: reading.printedScale.outcome } } : {}),
       decision: 'STACKED',
       regions: chosen.regions,
@@ -1930,26 +1965,15 @@ export function inferStructuralLayout(given: StructuralLayoutOptions): Structura
       why: '',
     }
     storeyRegistrations.push(record)
-    // A reading the drawings state, held against a placement the walls fit better (council A5L-1, A5L-11), is said:
-    // where the fit would stand the storey differently, the two are a disagreement on the record, not a silent choice.
+    // A reading the drawings state, held against a placement the walls fit better (council A5L-1, A5L-11), is said on
+    // the record: the fit it was held against, and whether that fit stands the storey elsewhere (a side moves by more
+    // than one band — two places, not two jittered readings of one). It is not a conflict: a storey set back from the
+    // walls below shares less wall where it is than shifted flush to them, so every correctly stated set-back is held
+    // against a better fit; the walls alone do not tell a misread statement from a true one.
     if (reading?.held) {
       const over = outcome(reading.held.over)
-      // the fit stands it elsewhere when a side moves by more than one band: the statement and the fit are not two
-      // jittered readings of one place, they are two places
-      if (!sameSupport(chosen, over, sameTol / 2)) {
-        conflicts.push({
-          id: stableId('conflict', `storey-held-${plan.storey.toLowerCase()}`, { frameId: plan.frame.id }),
-          kind: reading.held.by === 'PRINTED_SCALE' ? 'SCALE_DISAGREEMENT' : 'STOREY_COVERAGE_DISAGREES',
-          what:
-            reading.held.by === 'PRINTED_SCALE'
-              ? `the ${plan.storey.toLowerCase()} storey is placed at the scale both plans print (${alignment.scale.toFixed(3)}); its walls fit the plan below better at ${reading.held.over.scale.toFixed(3)}, standing it on ${standsOn(over).join(', ') || 'nothing'} over another footprint`
-              : `the ${plan.storey.toLowerCase()} storey is placed where both plans' chains put it; its walls fit the plan below better elsewhere, standing it on ${standsOn(over).join(', ') || 'nothing'} over another footprint`,
-          itemIds: [...new Set([...standsOn(chosen), ...standsOn(over)])].sort(),
-          evidenceIds: [],
-          magnitude: round6(reading.held.over.score - alignment.score),
-          unit: 'none',
-        })
-      }
+      const o = reading.held.over
+      record.held = { by: reading.held.by, over: { targetId: o.targetId, scale: o.scale, offsetX: o.offsetX, offsetY: o.offsetY, score: o.score, masses: standsOn(over) }, standsElsewhere: !sameSupport(chosen, over, sameTol / 2) }
     }
     // A disagreement about which bodies the storey stands on is §6's question, the one that decides whether a
     // one-storey garage gains an upper ring. Two placements nearer than the walls can tell apart are not decided by

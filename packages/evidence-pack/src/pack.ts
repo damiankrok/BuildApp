@@ -19,11 +19,13 @@ export const EVIDENCE_PACK_SCHEMA = 'buildapp.evidence-pack' as const
  * 1.1.0 (005I): `07b-dimension-topology`, the DIMENSION_AXIS_GROUPS and LABEL_ASSIGNMENT stages, extent end spans and refutations.
  * 1.2.0 (005K): `12b-gap-evidence.json` — every gap a reading left WEAK, source-addressable (frame, copy, decomposition,
  * scale, coordinates, crop hash, strokes, signatures, rules, decisions) — and the BOUNDARY_GAPS stage of the timeline.
+ * 1.3.0 (005L): `14b-storey-support.json` — every other storey's plan as the storey-support relation decided it (its
+ * placement, what its scale rests on, its walled regions and what each stands on) — and the STOREY_SUPPORT stage.
  */
-export const EVIDENCE_PACK_VERSION = '1.2.0' as const
+export const EVIDENCE_PACK_VERSION = '1.3.0' as const
 
 /** 005I: the files a pack of an earlier version was made without — a pack is complete for its own version (`requiredFiles`). */
-export const PACK_FILES_SINCE: Readonly<Record<string, readonly string[]>> = { '1.1.0': ['07b-dimension-topology.svg', '07b-dimension-topology.json'], '1.2.0': ['12b-gap-evidence.json'] }
+export const PACK_FILES_SINCE: Readonly<Record<string, readonly string[]>> = { '1.1.0': ['07b-dimension-topology.svg', '07b-dimension-topology.json'], '1.2.0': ['12b-gap-evidence.json'], '1.3.0': ['14b-storey-support.json'] }
 
 /** Semantic versions compared numerically, component by component: 1.10.0 is after 1.9.0 (post-review D5). */
 export function compareVersions(a: string, b: string): number {
@@ -82,6 +84,7 @@ export const PACK_FILES = [
   '13-body-candidates.json',
   '14-selected-layout.svg',
   '14-selected-layout.json',
+  '14b-storey-support.json',
   '15-canonical-model-summary.json',
   '17-evidence-trace.json',
   '18-decision-timeline.json',
@@ -711,6 +714,16 @@ export function buildEvidencePack(run: RunRecord): EvidencePack {
     }
     files.set('14-selected-layout.svg', s.render())
     files.set('14-selected-layout.json', json({ frameId: selected?.frameId ?? null, masses: selected?.masses ?? [], regions: selected?.regions ?? [], scale: selected?.scale ?? null }))
+  }
+
+  // 14b: every other storey's plan as the storey-support relation decided it (005L)
+  {
+    const storeys = run.digest?.storeys ?? []
+    files.set('14b-storey-support.json', json({ baseFrameId: run.digest?.selectedPlanFrameId ?? null, storeys }))
+    for (const st of storeys) {
+      event('STOREY_SUPPORT', `storey:${st.storeyIndex}:${st.frameId}`, st.decision, `${st.chosen ? `${st.chosen.targetId} at ${round(st.chosen.scale, 4)}${st.scaleBasis ? ` (${st.scaleBasis.basis.toLowerCase()}${st.scaleBasis.corroborated ? '' : ', uncorroborated'})` : ''}; ` : ''}${st.margin !== null ? `margin ${round(st.margin, 4)} against a resolution of ${round(st.resolution ?? 0, 4)}; ` : ''}${st.why}`)
+      for (const g of st.regions.filter((x) => x.body)) event('STOREY_SUPPORT', `storey-region:${st.storeyIndex}:${g.regionId}`, g.standsOn.length > 0 ? `ON:${g.standsOn.join('+')}` : 'ON:NOTHING', `${g.overhang.toLowerCase().replace(/_/g, ' ')}; ${round(g.unsupportedM2, 2)} m² on no body below`)
+    }
   }
 
   // challenge, resolution, final

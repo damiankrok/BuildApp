@@ -232,7 +232,22 @@ export type PlanJson = {
   }
   masses: Array<{ id: string; rect: Rect }>
 }
-export type DigestJson = { planFrames?: number; selectedPlanFrameId: string | null; plans: PlanJson[]; skipped?: Array<{ frameId: string; why: string }>; resolution?: Record<string, number | string | boolean>; challenge?: Record<string, number | string | boolean> }
+export type DigestJson = { planFrames?: number; selectedPlanFrameId: string | null; plans: PlanJson[]; skipped?: Array<{ frameId: string; why: string }>; resolution?: Record<string, number | string | boolean>; challenge?: Record<string, number | string | boolean>; storeys?: StoreyJson[] }
+
+/** 005L: one other storey's registration and support, as the plan-diagnostics digest records it (numbers and ids only). */
+export type StoreyJson = {
+  frameId: string
+  storeyIndex: number
+  decision: string
+  chosen: { targetId: string; scale: number; offsetX: number; offsetY: number; score: number; stated: boolean } | null
+  margin: number | null
+  resolution: number | null
+  scaleBasis: { basis: string; corroborated: boolean } | null
+  printedScale: { k: number; outcome: string } | null
+  held: { by: string; standsElsewhere: boolean; overScore: number } | null
+  regions: Array<{ regionId: string; bounds: { x0: number; z0: number; x1: number; z1: number }; body: boolean; overhang: string; unsupportedM2: number; standsOn: string[] }>
+  why: string
+}
 
 /** One decision the analyzer made, as the timeline records it. */
 export type DecisionEvent = {
@@ -274,6 +289,7 @@ export const TIMELINE_STAGES = [
   'ENVELOPE',
   'ENVELOPE_EXTENT_CONFLICT',
   'BODIES',
+  'STOREY_SUPPORT',
   'FIRST_SUCCESS_CHALLENGE',
   'PLAN_RESOLUTION',
   'FINAL',

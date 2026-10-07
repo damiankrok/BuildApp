@@ -264,9 +264,11 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     // needed for the model to accept them, and every command prefix is valid.
     const gapM = 0.015
     const hosts: HostBand[] = []
-    for (const m of b.masses.filter((x) => x.storeys.includes(storey.storeyIndex))) {
+    for (const body of b.masses.filter((x) => x.storeys.includes(storey.storeyIndex))) {
       const T = b.wallThicknessM
-      const ring = `ring-${m.id}-${storey.storeyIndex}`
+      const ring = `ring-${body.id}-${storey.storeyIndex}`
+      // 005L (council B5L-7): the exterior walls on this storey are its own footprint's, not the body's
+      const m = rectAt(body, storey.storeyIndex)
       hosts.push({ id: `${ring}-w0`, axis: 'X', at: round6(m.z0 + T / 2), thicknessM: T, from: m.x0, to: m.x1 })
       hosts.push({ id: `${ring}-w1`, axis: 'Z', at: round6(m.x1 - T / 2), thicknessM: T, from: m.z0, to: m.z1 })
       hosts.push({ id: `${ring}-w2`, axis: 'X', at: round6(m.z1 - T / 2), thicknessM: T, from: m.x0, to: m.x1 })
