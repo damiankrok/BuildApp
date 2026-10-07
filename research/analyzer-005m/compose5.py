@@ -35,7 +35,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from common import CROP_SIDE, MODES, OVERLAY, PLAN_MAX_SIDE, ROI, ROI_FILL, answer_schema, letter_of, prompt_for  # noqa: E402
 
 FONT = '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
-REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
+REPO = os.path.realpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
 
 
 def pts_of(target, kind):
@@ -136,7 +136,7 @@ def main():
     ap.add_argument('--bands', required=True)
     ap.add_argument('--out', required=True)
     a = ap.parse_args()
-    if os.path.abspath(a.out).startswith(REPO):
+    if os.path.realpath(a.out).startswith(REPO):
         raise SystemExit('pictures stay outside the repository')
     pool = {q['qid']: q for q in json.load(open(a.pool))['questions']}
     sel = json.load(open(a.selection))

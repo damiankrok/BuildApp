@@ -13,7 +13,7 @@ import argparse
 import json
 import os
 
-REPO = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+REPO = os.path.realpath(os.path.join(os.path.dirname(__file__), '..', '..'))
 
 
 def main():
@@ -26,7 +26,7 @@ def main():
     ap.add_argument('--out')
     a = ap.parse_args()
     if a.step == 'link':
-        if os.path.abspath(a.dir).startswith(REPO):
+        if os.path.realpath(a.dir).startswith(REPO):
             raise SystemExit('pictures stay outside the repository')
         os.makedirs(a.dir, exist_ok=True)
         pool = {q['qid']: q for q in json.load(open(a.pool))['questions']}

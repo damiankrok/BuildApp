@@ -16,7 +16,7 @@
  * With the harness present and not invoked, the production analyzer is the same code: nothing it imports changed for
  * Track B (`git diff` of Track B touches only `research/` and `stage-reports/`), which the matrix rows' hashes show.
  */
-import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs'
+import { closeSync, existsSync, openSync, readFileSync, readSync, readdirSync, statSync } from 'node:fs'
 import { join, relative, resolve } from 'node:path'
 import { execFileSync } from 'node:child_process'
 import { describe, expect, it } from 'vitest'
@@ -142,6 +142,7 @@ describe('005J production cannot reach the floor-plan intelligence audit, and th
       expect(text, f).not.toMatch(/(data:(image|application)\/[\w.+-]+;base64,|iVBORw0KGgo|\/9j\/4|UklGR|R0lGOD)[A-Za-z0-9+/]{40,}/)
       expect(text, f).not.toMatch(/[A-Za-z0-9+/]{256,}={0,2}/)
       expect(text, f).not.toMatch(/\[(\s*-?\d+(\.\d+)?\s*,){64,}/)
+      expect(text, f).not.toMatch(/(\[\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*(,\s*\d{1,3}\s*)?\]\s*,\s*){64,}/)
       expect(statSync(join(ROOT, f)).size, f).toBeLessThanOrEqual(4 * 2 ** 20)
     }
   })
@@ -183,6 +184,7 @@ describe('005K production cannot reach the gap-set harness, and the gap set comm
       expect(text, f).not.toMatch(/(data:(image|application)\/[\w.+-]+;base64,|iVBORw0KGgo|\/9j\/4|UklGR|R0lGOD)[A-Za-z0-9+/]{40,}/)
       expect(text, f).not.toMatch(/[A-Za-z0-9+/]{256,}={0,2}/)
       expect(text, f).not.toMatch(/\[(\s*-?\d+(\.\d+)?\s*,){64,}/)
+      expect(text, f).not.toMatch(/(\[\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*(,\s*\d{1,3}\s*)?\]\s*,\s*){64,}/)
       expect(statSync(join(ROOT, f)).size, f).toBeLessThanOrEqual(4 * 2 ** 20)
     }
   })
@@ -223,6 +225,7 @@ describe('005L production cannot reach the storey-registration harness, and it c
       expect(text, f).not.toMatch(/(data:(image|application)\/[\w.+-]+;base64,|iVBORw0KGgo|\/9j\/4|UklGR|R0lGOD)[A-Za-z0-9+/]{40,}/)
       expect(text, f).not.toMatch(/[A-Za-z0-9+/]{256,}={0,2}/)
       expect(text, f).not.toMatch(/\[(\s*-?\d+(\.\d+)?\s*,){64,}/)
+      expect(text, f).not.toMatch(/(\[\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*(,\s*\d{1,3}\s*)?\]\s*,\s*){64,}/)
       expect(statSync(join(ROOT, f)).size, f).toBeLessThanOrEqual(4 * 2 ** 20)
     }
   })
@@ -252,7 +255,30 @@ describe('005L production cannot reach the storey-registration harness, and it c
  */
 describe('005M production cannot reach the visual-referee v2 bake-off, and no weight enters the repository', () => {
   const HARNESS = /research\/analyzer-005m|analyzer-005m-vr2|qwen3[-_]?vl|internvl|smolvlm|gemma[-_]?3n|llama[-_.]?cpp|llama-server|\bgguf\b|litert[-_]?lm|matformer/i
-  const WEIGHT_EXT = /\.(safetensors|bin|pt|pth|ckpt|gguf|ggml|onnx|ort|tflite|litertlm|task|mlmodel|mlpackage|npz|npy|pkl|pickle|h5|pb|mf|mf\.gz|tar|zst)$/i
+  const WEIGHT_EXT = /\.(safetensors|bin|pt|pth|ckpt|gguf|ggml|onnx|ort|tflite|litertlm|task|mlmodel|mlpackage|npz|npy|pkl|pickle|h5|pb|mf|mf\.gz|tar|zst|pte|dlc|tiktoken|model|mnn|engine)$/i
+  // a weight renamed to a harmless extension still starts like one (post-review E-5): GGUF, a safetensors header
+  // (8-byte length + JSON), NumPy, HDF5, TFLite, a pickle, or a zip holding a PyTorch / safetensors / GGUF payload
+  const weightMagic = (b: Buffer): boolean =>
+    b.subarray(0, 4).toString('latin1') === 'GGUF' ||
+    (b.length > 10 && b.subarray(8, 10).toString('latin1') === '{"' && b.readBigUInt64LE(0) < 100_000_000n) ||
+    b.subarray(0, 6).toString('latin1') === '\x93NUMPY' ||
+    b.subarray(0, 8).equals(Buffer.from([0x89, 0x48, 0x44, 0x46, 0x0d, 0x0a, 0x1a, 0x0a])) ||
+    b.subarray(4, 8).toString('latin1') === 'TFL3' ||
+    (b[0] === 0x80 && b[1] >= 2 && b[1] <= 5) ||
+    (b.subarray(0, 4).toString('latin1') === 'PK\x03\x04' && /data\.pkl|\.safetensors|\.gguf/.test(b.toString('latin1')))
+  const head = (f: string): Buffer => {
+    const fd = openSync(join(ROOT, f), 'r')
+    const buf = Buffer.alloc(4096)
+    const n = readSync(fd, buf, 0, 4096, 0)
+    closeSync(fd)
+    return buf.subarray(0, n)
+  }
+  // the publisher bytes committed before 005J (`.cache/source-bytes/*.bin`) are drawings and pages, never a model
+  const publisherBytes = (b: Buffer): boolean =>
+    b.subarray(0, 3).equals(Buffer.from([0xff, 0xd8, 0xff])) || b.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a])) ||
+    b.subarray(0, 3).toString('latin1') === 'GIF' || b.subarray(0, 4).toString('latin1') === '%PDF' ||
+    (b.subarray(0, 4).toString('latin1') === 'RIFF' && b.subarray(8, 12).toString('latin1') === 'WEBP') ||
+    !b.subarray(0, 64).some((x) => x < 9 || (x > 13 && x < 32))
   const HUB_BUNDLE = /(^|\/)(tokenizer\.json|tokenizer\.model|tokenizer_config\.json|special_tokens_map\.json|added_tokens\.json|vocab\.json|merges\.txt|preprocessor_config\.json|processor_config\.json|chat_template\.(json|jinja)|generation_config\.json|adapter_config\.json|adapter_model\.[a-z]+|model\.safetensors\.index\.json)$/i
   const STAGE_PATHS = ['research/analyzer-005m/', 'stage-reports/artifacts/analyzer-005m-vr2/']
   const tracked = (): string[] => execFileSync('git', ['ls-files'], { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(Boolean)
@@ -269,8 +295,14 @@ describe('005M production cannot reach the visual-referee v2 bake-off, and no we
 
   it('no model weight, checkpoint, adapter or hub tokenizer bundle is tracked anywhere', () => {
     const files = tracked()
-    expect(files.filter((f) => WEIGHT_EXT.test(f) && !f.startsWith('.cache/source-bytes/'))).toEqual([])
+    const sourceBytes = (f: string): boolean => f.startsWith('.cache/source-bytes/') && /\.bin$/i.test(f)
+    expect(files.filter((f) => WEIGHT_EXT.test(f) && !sourceBytes(f))).toEqual([])
     expect(files.filter((f) => HUB_BUNDLE.test(f))).toEqual([])
+    expect(files.filter(sourceBytes).filter((f) => !publisherBytes(head(f)))).toEqual([])
+  })
+
+  it('no tracked file, whatever its name, starts like a weight file', () => {
+    expect(tracked().filter((f) => existsSync(join(ROOT, f)) && statSync(join(ROOT, f)).isFile() && weightMagic(head(f)))).toEqual([])
   })
 
   it('the 005M harness and artifacts track only code and text, each file small, with no embedded pixels', () => {
@@ -279,10 +311,14 @@ describe('005M production cannot reach the visual-referee v2 bake-off, and no we
     // structured model answers are JSON lines (`runs/*.jsonl`): text, held to the same pixel and size checks below
     expect(stage.filter((f) => !/\.(py|ts|mjs|sh|json|jsonl|ndjson|md|txt)$/i.test(f))).toEqual([])
     for (const f of stage) {
-      const text = read(f)
+      const bytes = readFileSync(join(ROOT, f))
+      expect(bytes.includes(0), `${f} holds a NUL byte`).toBe(false)
+      expect(() => new TextDecoder('utf-8', { fatal: true }).decode(bytes), f).not.toThrow()
+      const text = bytes.toString('utf8')
       expect(text, f).not.toMatch(/(data:(image|application)\/[\w.+-]+;base64,|iVBORw0KGgo|\/9j\/4|UklGR|R0lGOD)[A-Za-z0-9+/]{40,}/)
       expect(text, f).not.toMatch(/[A-Za-z0-9+/]{256,}={0,2}/)
       expect(text, f).not.toMatch(/\[(\s*-?\d+(\.\d+)?\s*,){64,}/)
+      expect(text, f).not.toMatch(/(\[\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*(,\s*\d{1,3}\s*)?\]\s*,\s*){64,}/)
       // a research artifact threshold: a weight shard, an image or a dataset dump cannot hide under it
       expect(statSync(join(ROOT, f)).size, f).toBeLessThanOrEqual(2 * 2 ** 20)
     }
@@ -296,16 +332,32 @@ describe('005M production cannot reach the visual-referee v2 bake-off, and no we
     expect(tracked().filter((f) => STAGE_PATHS.some((p) => f.startsWith(p))).filter((f) => /^version https:\/\/git-lfs/.test(read(f)))).toEqual([])
   })
 
-  it('the harness writes pictures and weights outside the repository only', () => {
-    expect(read('research/analyzer-005m/compose5.py')).toMatch(/if os\.path\.abspath\(a\.out\)\.startswith\(REPO\):\s*\n\s*raise SystemExit\('pictures stay outside the repository'\)/)
-    expect(read('research/analyzer-005m/synthetic/vrgen2.py')).toMatch(/raise SystemExit\('renders stay outside the repository'\)/)
+  it('the harness writes pictures and weights outside the repository only (symlinks resolved)', () => {
+    const guard = (f: string, msg: string): void => {
+      const src = read(f)
+      expect(src, f).toMatch(new RegExp(`os\\.path\\.realpath\\([^)]*\\)\\.startswith\\([^\\n]*\\):\\s*\\n\\s*raise SystemExit\\('${msg}'\\)`))
+      expect(src, f).not.toMatch(/os\.path\.abspath\((a\.out|out|a\.dir)\)\.startswith/)
+    }
+    guard('research/analyzer-005m/compose5.py', 'pictures stay outside the repository')
+    guard('research/analyzer-005m/synthetic/vrgen2.py', 'renders stay outside the repository')
+    guard('research/analyzer-005m/hfget.py', 'weights stay outside the repository')
+    guard('research/analyzer-005m/bands_prep.py', 'pictures stay outside the repository')
+    guard('research/analyzer-005m/student_dataset.py', 'the dataset stays outside the repository')
     expect(read('research/analyzer-005m/run_model.sh')).not.toMatch(/\$REPO\/[^"\s]*\.gguf/)
   })
 
-  it('the Android build packages nothing from the 005M bake-off and no VLM weight', () => {
+  it('the Android build packages nothing from the 005M bake-off and no VLM weight or runtime', () => {
+    const VLM_RUNTIME = /llama|ggml|\bmtmd\b|tasks-genai|litert[-_]?lm|mlc[-_]?llm|executorch|onnxruntime-genai/i
     for (const f of [...filesUnder('apps/android', /\.gradle\.kts$/), ...filesUnder('apps/android', /^libs\.versions\.toml$/)]) {
       expect(codeOf(read(f)), f).not.toMatch(HARNESS)
+      expect(codeOf(read(f)), f).not.toMatch(VLM_RUNTIME)
     }
-    expect(filesUnder('apps/android/app/src/main/assets', /.*/).filter((a) => HARNESS.test(a) || /\.(gguf|litertlm|safetensors|task)$/i.test(a))).toEqual([])
+    // native code and its build (post-review F-8)
+    for (const f of filesUnder('apps/android', /\.(c|cc|cpp|h|hpp)$|^CMakeLists\.txt$/)) {
+      expect(codeOf(read(f)), f).not.toMatch(HARNESS)
+      expect(codeOf(read(f)), f).not.toMatch(VLM_RUNTIME)
+    }
+    expect(filesUnder('apps/android', /\.so$/).filter((f) => VLM_RUNTIME.test(f))).toEqual([])
+    expect(filesUnder('apps/android/app/src/main/assets', /.*/).filter((a) => HARNESS.test(a) || WEIGHT_EXT.test(a))).toEqual([])
   })
 })

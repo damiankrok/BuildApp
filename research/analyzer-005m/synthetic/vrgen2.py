@@ -5,7 +5,16 @@ Never imported by production code. It reuses the 005J scene model and rasteriser
 vrgen.py) and adds families whose answer depends on the whole plan. Every drawing is generated from a semantic scene in
 metres; every expected answer is read from that scene - never from a model, a published figure or a picture.
 
-    python -I -B vrgen2.py --out <dir outside the repository> [--splits TRAIN,VAL,TEST] [--pairs 22,5,5]
+    python -I -B vrgen2.py --out <dir outside the repository> [--splits TRAIN,VAL,TEST] [--pairs 22,5,5] [--compat 2.0.0]
+
+Version 2.1.0 (post-review round 1) changes two families; --compat 2.0.0 reproduces the 2.0.0 corpus byte for byte (the
+sealed TEST split the bake-off used was generated with it):
+  * garage_vs_carport (B-2 / D-1): the front gap is unmarked in both members, so "garage door or carport mouth" was not
+    settled by the drawing. The question now asks what the drawing does show, whether the bay is closed at the back
+    (BAY_BACK_CLOSED_VS_DRIVE_THROUGH); the BODY_REGION question on the bay is dropped
+  * inset_upper (D-8): member A no longer draws a terrace over the strip on the upper plan; an upper-level terrace made
+    "no upper floor over the area" arguable
+  * a SEALED split (540000+) that no model, teacher or student has seen: the evaluation split for any student
 
 Families (each a counterfactual pair: A and B share seed, style and every random draw, and differ by one fact):
 
@@ -23,7 +32,8 @@ Families (each a counterfactual pair: A and B share seed, style and every random
 
 A fixed sheet frame (the same rectangle in both members) pins the pixel mapping, so a difference far away cannot shift
 the crop. Transforms (NORMAL, MIRROR, ROT90, ROT180) are applied before rasterisation. Splits use disjoint seed ranges:
-TRAIN 510000+, VAL 520000+, TEST 530000+ (sealed: never given to a teacher or a student).
+TRAIN 510000+, VAL 520000+, TEST 530000+ (shown to the bake-off models only; never to a teacher or a student),
+SEALED 540000+ (never shown to any model).
 """
 import argparse
 import hashlib
@@ -37,10 +47,11 @@ sys.path.insert(0, os.path.join(HERE, '..', '..', 'analyzer-005j', 'synthetic'))
 import vrgen  # noqa: E402  (005J scene model and rasteriser, research only)
 from vrgen import Scene, render, sample_style, TRANSFORMS  # noqa: E402
 
-GENERATOR_VERSION = '2.0.0'
-SPLIT_BASE = {'TRAIN': 510000, 'VAL': 520000, 'TEST': 530000}
+GENERATOR_VERSION = '2.1.0'
+SPLIT_BASE = {'TRAIN': 510000, 'VAL': 520000, 'TEST': 530000, 'SEALED': 540000}
+COMPAT = {'version': GENERATOR_VERSION}   # set from --compat; 2.0.0 reproduces the first corpus exactly
 
-TARGET = {'BODY_REGION': 'REGION', 'GARAGE_DOOR_VS_CARPORT': 'SEGMENT', 'STOREY_COVERAGE': 'REGION', 'LOGGIA_VS_ROOM': 'REGION',
+TARGET = {'BODY_REGION': 'REGION', 'GARAGE_DOOR_VS_CARPORT': 'SEGMENT', 'BAY_BACK_CLOSED_VS_DRIVE_THROUGH': 'SEGMENT', 'STOREY_COVERAGE': 'REGION', 'LOGGIA_VS_ROOM': 'REGION',
           'OPEN_SIDE_VS_OPENINGS': 'SEGMENT', 'WALL_CONTINUATION': 'SEGMENT', 'GAP_KIND': 'SEGMENT', 'GARAGE_BODY': 'REGION'}
 
 
@@ -91,9 +102,13 @@ def fam_garage_vs_carport(rng, st, v):
     frame(sc, -2.0, -2.5, W + gw + 2.0, D + 2.0)
     gap = [(W + s0, D), (W + s0 + gdw, D)]
     deep = rect(W + 0.4, gy0 + 0.4, W + gw - 0.4, gy0 + 2.2)
+    if COMPAT['version'] == '2.0.0':
+        return sc, [
+            {'cls': 'GARAGE_DOOR_VS_CARPORT', 'target': gap, 'answer': 'GARAGE_DOOR' if v == 'A' else 'OPEN_CARPORT', 'fact': 'closed at the back' if v == 'A' else 'open at the back (drive-through)', 'contextDependent': True},
+            {'cls': 'BODY_REGION', 'target': deep, 'answer': 'YES' if v == 'A' else 'NO', 'fact': 'inside the enclosed garage' if v == 'A' else 'under an open carport', 'contextDependent': False},
+        ]
     return sc, [
-        {'cls': 'GARAGE_DOOR_VS_CARPORT', 'target': gap, 'answer': 'GARAGE_DOOR' if v == 'A' else 'OPEN_CARPORT', 'fact': 'closed at the back' if v == 'A' else 'open at the back (drive-through)', 'contextDependent': True},
-        {'cls': 'BODY_REGION', 'target': deep, 'answer': 'YES' if v == 'A' else 'NO', 'fact': 'inside the enclosed garage' if v == 'A' else 'under an open carport', 'contextDependent': False},
+        {'cls': 'BAY_BACK_CLOSED_VS_DRIVE_THROUGH', 'target': gap, 'answer': 'CLOSED_BACK' if v == 'A' else 'DRIVE_THROUGH', 'fact': 'closed at the back' if v == 'A' else 'open at the back (drive-through)', 'contextDependent': True},
     ]
 
 
@@ -191,9 +206,10 @@ def fam_inset_upper(rng, st, v):
     upfront = sc.windows_on(W, 2)
     if v == 'A':
         sc.rect_walls(ox, 0, ox + W, D - inset, dict(up, S=upfront))
-        sc.rect_line(ox + 0.15, D - inset + 0.15, ox + W - 0.15, D - 0.1)
-        sc.texture(rect(ox + 0.15, D - inset + 0.15, ox + W - 0.15, D - 0.1))
-        sc.text((ox + W / 2, D - inset / 2), 'TARAS', size=0.35)
+        if COMPAT['version'] == '2.0.0':
+            sc.rect_line(ox + 0.15, D - inset + 0.15, ox + W - 0.15, D - 0.1)
+            sc.texture(rect(ox + 0.15, D - inset + 0.15, ox + W - 0.15, D - 0.1))
+            sc.text((ox + W / 2, D - inset / 2), 'TARAS', size=0.35)
     else:
         sc.rect_walls(ox, 0, ox + W, D, {'N': up['N'], 'W': up['W'] + [], 'E': up['E'], 'S': upfront})
     sc.text((ox + W / 2, -0.8), 'PIETRO', size=0.45)
@@ -325,8 +341,10 @@ def main():
     ap.add_argument('--splits', default='TRAIN,VAL,TEST')
     ap.add_argument('--pairs', default='22,5,5', help='pairs per family per split, in --splits order')
     ap.add_argument('--families', default='all')
+    ap.add_argument('--compat', default=GENERATOR_VERSION, choices=['2.0.0', GENERATOR_VERSION])
     a = ap.parse_args()
-    if os.path.abspath(a.out).startswith(os.path.abspath(os.path.join(HERE, '..', '..', '..'))):
+    COMPAT['version'] = a.compat
+    if os.path.realpath(a.out).startswith(os.path.realpath(os.path.join(HERE, '..', '..', '..'))):
         raise SystemExit('renders stay outside the repository')
     os.makedirs(os.path.join(a.out, 'renders'), exist_ok=True)
     fams = list(FAMILIES) if a.families == 'all' else a.families.split(',')
@@ -365,7 +383,7 @@ def main():
                                 corners = [M(p) for p in rect(x0, y0, x1, y1)]
                                 rec['cropPanel'] = [min(c[0] for c in corners), min(c[1] for c in corners), max(c[0] for c in corners), max(c[1] for c in corners)]
                             questions.append(rec)
-    meta = {'generator': 'research/analyzer-005m/synthetic/vrgen2.py', 'version': GENERATOR_VERSION, 'rasteriser': 'research/analyzer-005j/synthetic/vrgen.py ' + vrgen.GENERATOR_VERSION,
+    meta = {'generator': 'research/analyzer-005m/synthetic/vrgen2.py', 'version': a.compat, 'rasteriser': 'research/analyzer-005j/synthetic/vrgen.py ' + vrgen.GENERATOR_VERSION,
             'splitSeedBase': SPLIT_BASE, 'families': fams, 'transforms': TRANSFORMS, 'scenes': scenes, 'questions': questions}
     with open(os.path.join(a.out, 'corpus.json'), 'w') as fh:
         json.dump(meta, fh)

@@ -67,7 +67,16 @@ CLASSES = {
                                [('GARAGE_DOOR', 'a garage door of an enclosed garage'), ('OPEN_CARPORT', 'the open mouth of a carport or open parking space')]),
     'LOGGIA_VS_ROOM': ('Is the marked area an enclosed room, or an open loggia or recessed porch under the building (open to the outside on at least one side)?',
                        [('ROOM', 'an enclosed room'), ('LOGGIA', 'an open loggia or recessed porch')]),
+    # post-review B-2 / D-1: replaces GARAGE_DOOR_VS_CARPORT for the generator's garage family (vrgen2 >= 2.1.0), whose
+    # front gap is unmarked in both members; what differs, and what the drawing shows, is the back of the bay
+    'BAY_BACK_CLOSED_VS_DRIVE_THROUGH': ('Behind the marked opening is a bay for a car. Is the bay closed at the back (an enclosed bay such as a garage), or open at the back so that a car can drive straight through (a drive-through carport)?',
+                                         [('CLOSED_BACK', 'closed at the back'), ('DRIVE_THROUGH', 'open at the back: a drive-through carport')]),
 }
+
+# post-review B-1: where the two storey panels are after the scene transform (vrgen.tf_point: MIRROR x -> -x,
+# ROT90 (x, y) -> (-y, x), ROT180 both negated); real storey composites are NORMAL
+STOREY_LAYOUT = {'NORMAL': 'ground floor on the left, upper floor on the right', 'MIRROR': 'upper floor on the left, ground floor on the right',
+                 'ROT180': 'upper floor on the left, ground floor on the right', 'ROT90': 'ground floor at the top, upper floor at the bottom'}
 
 MARKER_TEXT = {
     'REGION': 'the area outlined and lightly shaded in cyan',
@@ -135,7 +144,7 @@ def prompt_for(q, mode, plan_size, target_plan_px, overlay_has_bands):
     question, shown = options_for(q['cls'], q['orderKey'])
     marker = MARKER_TEXT[kind]
     storey = q['cls'] == 'STOREY_COVERAGE'
-    plan_word = 'the two floor plans (ground floor on the left, upper floor on the right)' if storey else 'the whole floor plan'
+    plan_word = f"the two floor plans ({STOREY_LAYOUT[q.get('transform') or 'NORMAL']})" if storey else 'the whole floor plan'
     if mode == 'A_CROP_ONLY':
         where = f'The image is a close-up crop of the plan around the detail in question. The detail is {marker}.'
     elif mode == 'B_FULL_PLAN':

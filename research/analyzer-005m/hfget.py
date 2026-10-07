@@ -13,13 +13,13 @@ import sys
 
 import requests
 
-REPO = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+REPO = os.path.realpath(os.path.join(os.path.dirname(__file__), '..', '..'))
 
 
 def main():
     repo, rev, out = sys.argv[1], sys.argv[2], sys.argv[3]
     skip = sys.argv[4].split(',') if len(sys.argv) > 4 and sys.argv[4] else []
-    if os.path.abspath(out).startswith(REPO):
+    if os.path.realpath(out).startswith(REPO):
         raise SystemExit('weights stay outside the repository')
     if len(rev) != 40:
         raise SystemExit('pin a full commit revision')
