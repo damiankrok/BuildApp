@@ -1,0 +1,152 @@
+{
+  "frames": [
+    {
+      "chains": [
+        {
+          "chainId": "chain-horizontal-262-339fafd2d2",
+          "labels": [
+            "label:chain-horizontal-262-339fafd2d2:HORIZONTAL:140",
+            "label:chain-horizontal-262-339fafd2d2:HORIZONTAL:81"
+          ],
+          "marks": [
+            "tick:chain-horizontal-262-339fafd2d2:166.5",
+            "tick:chain-horizontal-262-339fafd2d2:197",
+            "tick:chain-horizontal-262-339fafd2d2:321",
+            "tick:chain-horizontal-262-339fafd2d2:332.5"
+          ],
+          "primary": [
+            "dim-obs-81-horizontal-78c6d2fd39"
+          ]
+        },
+        {
+          "chainId": "chain-horizontal-262-8e11499c69",
+          "labels": [
+            "label:chain-horizontal-262-8e11499c69:HORIZONTAL:81"
+          ],
+          "marks": [
+            "tick:chain-horizontal-262-8e11499c69:502",
+            "tick:chain-horizontal-262-8e11499c69:516.5",
+            "tick:chain-horizontal-262-8e11499c69:555",
+            "tick:chain-horizontal-262-8e11499c69:596.5",
+            "tick:chain-horizontal-262-8e11499c69:639",
+            "tick:chain-horizontal-262-8e11499c69:655",
+            "tick:chain-horizontal-262-8e11499c69:724"
+          ],
+          "primary": []
+        },
+        {
+          "chainId": "chain-horizontal-549-3bfd96cd70",
+          "labels": [
+            "label:chain-horizontal-549-3bfd96cd70:HORIZONTAL:288"
+          ],
+          "marks": [
+            "tick:chain-horizontal-549-3bfd96cd70:97",
+            "tick:chain-horizontal-549-3bfd96cd70:120",
+            "tick:chain-horizontal-549-3bfd96cd70:134",
+            "tick:chain-horizontal-549-3bfd96cd70:147",
+            "tick:chain-horizontal-549-3bfd96cd70:193",
+            "tick:chain-horizontal-549-3bfd96cd70:230",
+            "tick:chain-horizontal-549-3bfd96cd70:255",
+            "tick:chain-horizontal-549-3bfd96cd70:272",
+            "tick:chain-horizontal-549-3bfd96cd70:283",
+            "tick:chain-horizontal-549-3bfd96cd70:298",
+            "tick:chain-horizontal-549-3bfd96cd70:310.5"
+          ],
+          "primary": []
+        },
+        {
+          "chainId": "chain-horizontal-549-c8a692e72d",
+          "labels": [
+            "label:chain-horizontal-549-c8a692e72d:HORIZONTAL:100"
+          ],
+          "marks": [
+            "tick:chain-horizontal-549-c8a692e72d:321",
+            "tick:chain-horizontal-549-c8a692e72d:377",
+            "tick:chain-horizontal-549-c8a692e72d:464",
+            "tick:chain-horizontal-549-c8a692e72d:486.5",
+            "tick:chain-horizontal-549-c8a692e72d:500.5"
+          ],
+          "primary": []
+        },
+        {
+          "chainId": "chain-vertical-167-8ff6be1b4b",
+          "labels": [
+            "label:chain-vertical-167-8ff6be1b4b:ROTATED_CW:298"
+          ],
+          "marks": [
+            "tick:chain-vertical-167-8ff6be1b4b:261.5",
+            "tick:chain-vertical-167-8ff6be1b4b:360"
+          ],
+          "primary": [
+            "dim-obs-740-rotated-cw-46138459ab"
+          ]
+        },
+        {
+          "chainId": "chain-vertical-197-99b214ea78",
+          "labels": [
+            "label:chain-vertical-197-99b214ea78:ROTATED_CW:23",
+            "label:chain-vertical-197-99b214ea78:ROTATED_CW:574"
+          ],
+          "marks": [
+            "tick:chain-vertical-197-99b214ea78:197",
+            "tick:chain-vertical-197-99b214ea78:261.5",
+            "tick:chain-vertical-197-99b214ea78:360",
+            "tick:chain-vertical-197-99b214ea78:368",
+            "tick:chain-vertical-197-99b214ea78:383"
+          ],
+          "primary": []
+        },
+        {
+          "chainId": "chain-vertical-377-76da28ffe8",
+          "labels": [
+            "label:chain-vertical-377-76da28ffe8:ROTATED_CCW:005"
+          ],
+          "marks": [
+            "tick:chain-vertical-377-76da28ffe8:456",
+            "tick:chain-vertical-377-76da28ffe8:468.5",
+            "tick:chain-vertical-377-76da28ffe8:549",
+            "tick:chain-vertical-377-76da28ffe8:562.5",
+            "tick:chain-vertical-377-76da28ffe8:625"
+          ],
+          "primary": []
+        },
+        {
+          "chainId": "chain-vertical-639-90244c8440",
+          "labels": [
+            "label:chain-vertical-639-90244c8440:ROTATED_CW:352",
+            "label:chain-vertical-639-90244c8440:ROTATED_CW:298"
+          ],
+          "marks": [
+            "tick:chain-vertical-639-90244c8440:175.5",
+            "tick:chain-vertical-639-90244c8440:262",
+            "tick:chain-vertical-639-90244c8440:360",
+            "tick:chain-vertical-639-90244c8440:368",
+            "tick:chain-vertical-639-90244c8440:383",
+            "tick:chain-vertical-639-90244c8440:392.5",
+            "tick:chain-vertical-639-90244c8440:398",
+            "tick:chain-vertical-639-90244c8440:423.5",
+            "tick:chain-vertical-639-90244c8440:469",
+            "tick:chain-vertical-639-90244c8440:572",
+            "tick:chain-vertical-639-90244c8440:602.5"
+          ],
+          "primary": [
+            "dim-obs-153-rotated-cw-a784945e09"
+          ]
+        }
+      ],
+      "envelope": "envelope:frame-asset-rzut-44d6d1166d-006f85ed53",
+      "extent": "extent:frame-asset-rzut-44d6d1166d-006f85ed53",
+      "frameId": "frame-asset-rzut-44d6d1166d-006f85ed53",
+      "masses": [
+        "mass-0"
+      ],
+      "registration": "registration:frame-asset-rzut-44d6d1166d-006f85ed53",
+      "relation": "LEGACY_UNCONFIRMED/INCONCLUSIVE",
+      "selectedHypothesis": "scale-3-025381-795373de4d",
+      "witnesses": []
+    }
+  ],
+  "model": null,
+  "runId": "h1-dom-w-murajach",
+  "selectedPlanFrameId": "frame-asset-rzut-44d6d1166d-006f85ed53"
+}

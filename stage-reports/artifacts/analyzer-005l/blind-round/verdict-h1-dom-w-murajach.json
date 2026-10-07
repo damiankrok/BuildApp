@@ -1,0 +1,50 @@
+{
+  "run": "<scratch>/h1-dom-w-murajach",
+  "completed": false,
+  "labelledPlanStoreys": [
+    "ATTIC",
+    "GROUND"
+  ],
+  "publishedFootprintM2": 75.83,
+  "checklist": {
+    "noFloorPlan": false,
+    "legibleOverallDimension": {
+      "ocrTokensOnGroundCopies": 186,
+      "tallestPx": 90,
+      "needsRawMeasurement": false
+    },
+    "wallsUnder4pxOnEveryGroundCopy": false,
+    "groundWallPx": [
+      {
+        "frameId": "frame-asset-rzut-36e1e5a39d-fb4609c5e2",
+        "sizePx": {
+          "height": 853,
+          "width": 853
+        },
+        "wallPx": 25
+      }
+    ],
+    "floorPlanAssetsLost": []
+  },
+  "failure": {
+    "code": "RECONSTRUCTION_FAILED",
+    "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+    "message": "the floor plan's scale cannot be established: the page vote's 1.516396 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it; 3.025381 cm/px, stated by 1 independent reading on 1 chain(s) does not outweigh it twice over. The scales its readings state are 3.025381 cm/px (1 independent, plausible); 1.968313 cm/px (1 independent, plausible); 2.649689 cm/px (0 independent, plausible); 2 printed readings contradict the one it was read at. What is missing: a reading of the printed dimensions that settles one scale — 4 dimension labels were found on 55 dimension lines, and as read they do not: an overall dimension read unambiguously, or two readings on different chains that agree. (the lowest storey covers 7.04 m² against the 75.83 m² the publisher prints — 90.7% apart: the decomposition is not of this building; 12 other readings of the plan were weighed and none survived to a full composition)"
+  },
+  "resolution": {
+    "compositions": 0,
+    "copies": 4,
+    "decompositions": 3,
+    "distinctOutlines": 3,
+    "firstReading": "PLAN_LAYOUT_REJECTED",
+    "outcome": "INCONCLUSIVE",
+    "publishedFigure": "SPENT",
+    "reading1": "copy dimensioned fb4609c5e2, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 169.9 m² (+124.1% of 75.83), WRONG",
+    "reading2": "copy dimensioned fb4609c5e2, wall-ink extent, registered scale, largest-first tiling, outer faces: 1 body, 178.2 m² (+135.0% of 75.83), WRONG",
+    "reading3": "copy dimensioned fb4609c5e2, chain extent, registered scale, largest-first tiling, sides as gridded: 0 bodies, 0.0 m², UNKNOWN, NO_BODY+NO_WORLD_FRAME",
+    "readings": 12,
+    "resolverVersion": "1.4.0"
+  },
+  "challenge": null,
+  "verdict": "ALGORITHMIC_FAIL"
+}

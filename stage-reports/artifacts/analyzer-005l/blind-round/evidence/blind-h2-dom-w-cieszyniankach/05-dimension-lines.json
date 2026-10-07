@@ -1,0 +1,1536 @@
+{
+  "chains": [
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 123,
+      "id": "chain-horizontal-123-c6b89415a1",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 319.5,
+          "origin": "UNRESOLVED",
+          "pixelLength": 20.5,
+          "toPx": 340,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        319.5,
+        340
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 147,
+      "id": "chain-horizontal-147-ecdd722a7c",
+      "note": "2 detected ticks were not measurement points: no reading on this chain is consistent with a division there",
+      "segments": [
+        {
+          "fromPx": 321.5,
+          "origin": "CHAIN_CORRECTED",
+          "pixelLength": 88,
+          "toPx": 409.5,
+          "valueCm": 245
+        },
+        {
+          "fromPx": 409.5,
+          "origin": "DERIVED",
+          "pixelLength": 94.5,
+          "toPx": 504,
+          "valueCm": 262.091781
+        },
+        {
+          "fromPx": 504,
+          "origin": "DERIVED",
+          "pixelLength": 70.5,
+          "toPx": 574.5,
+          "valueCm": 195.528789
+        }
+      ],
+      "ticksPx": [
+        321.5,
+        340,
+        376,
+        409.5,
+        504,
+        574.5
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 175,
+      "id": "chain-horizontal-175-050506f5b8",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 497,
+          "origin": "UNRESOLVED",
+          "pixelLength": 31.5,
+          "toPx": 528.5,
+          "valueCm": null
+        },
+        {
+          "fromPx": 528.5,
+          "origin": "UNRESOLVED",
+          "pixelLength": 30,
+          "toPx": 558.5,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        497,
+        528.5,
+        558.5
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 181,
+      "id": "chain-horizontal-181-5f51fca01f",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 320,
+          "origin": "UNRESOLVED",
+          "pixelLength": 20,
+          "toPx": 340,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        320,
+        340
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 235,
+      "id": "chain-horizontal-235-c2a2db3945",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 298,
+          "origin": "UNRESOLVED",
+          "pixelLength": 42,
+          "toPx": 340,
+          "valueCm": null
+        },
+        {
+          "fromPx": 340,
+          "origin": "UNRESOLVED",
+          "pixelLength": 66.5,
+          "toPx": 406.5,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        298,
+        340,
+        406.5
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 252,
+      "id": "chain-horizontal-252-80b60f0db5",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 597,
+          "origin": "UNRESOLVED",
+          "pixelLength": 11,
+          "toPx": 608,
+          "valueCm": null
+        },
+        {
+          "fromPx": 608,
+          "origin": "UNRESOLVED",
+          "pixelLength": 8,
+          "toPx": 616,
+          "valueCm": null
+        },
+        {
+          "fromPx": 616,
+          "origin": "UNRESOLVED",
+          "pixelLength": 17,
+          "toPx": 633,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        597,
+        608,
+        616,
+        633
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 261,
+      "id": "chain-horizontal-261-ea85e0657c",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 570,
+          "origin": "UNRESOLVED",
+          "pixelLength": 18.5,
+          "toPx": 588.5,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        570,
+        588.5
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 332,
+      "id": "chain-horizontal-332-fb7f229923",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 595.5,
+          "origin": "UNRESOLVED",
+          "pixelLength": 12.5,
+          "toPx": 608,
+          "valueCm": null
+        },
+        {
+          "fromPx": 608,
+          "origin": "UNRESOLVED",
+          "pixelLength": 8,
+          "toPx": 616,
+          "valueCm": null
+        },
+        {
+          "fromPx": 616,
+          "origin": "UNRESOLVED",
+          "pixelLength": 18,
+          "toPx": 634,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        595.5,
+        608,
+        616,
+        634
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 350,
+      "id": "chain-horizontal-350-edc2a56a10",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 202,
+          "origin": "UNRESOLVED",
+          "pixelLength": 24,
+          "toPx": 226,
+          "valueCm": null
+        },
+        {
+          "fromPx": 226,
+          "origin": "UNRESOLVED",
+          "pixelLength": 17,
+          "toPx": 243,
+          "valueCm": null
+        },
+        {
+          "fromPx": 243,
+          "origin": "UNRESOLVED",
+          "pixelLength": 28,
+          "toPx": 271,
+          "valueCm": null
+        },
+        {
+          "fromPx": 271,
+          "origin": "UNRESOLVED",
+          "pixelLength": 22,
+          "toPx": 293,
+          "valueCm": null
+        },
+        {
+          "fromPx": 293,
+          "origin": "UNRESOLVED",
+          "pixelLength": 47,
+          "toPx": 340,
+          "valueCm": null
+        },
+        {
+          "fromPx": 340,
+          "origin": "UNRESOLVED",
+          "pixelLength": 22.5,
+          "toPx": 362.5,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        202,
+        226,
+        243,
+        271,
+        293,
+        340,
+        362.5
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 352,
+      "id": "chain-horizontal-352-98523e38bc",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 531,
+          "origin": "UNRESOLVED",
+          "pixelLength": 14.5,
+          "toPx": 545.5,
+          "valueCm": null
+        },
+        {
+          "fromPx": 545.5,
+          "origin": "UNRESOLVED",
+          "pixelLength": 19,
+          "toPx": 564.5,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        531,
+        545.5,
+        564.5
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 377,
+      "id": "chain-horizontal-377-f3ffa9bf02",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 226,
+          "origin": "UNRESOLVED",
+          "pixelLength": 17,
+          "toPx": 243,
+          "valueCm": null
+        },
+        {
+          "fromPx": 243,
+          "origin": "UNRESOLVED",
+          "pixelLength": 39,
+          "toPx": 282,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        226,
+        243,
+        282
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 394,
+      "id": "chain-horizontal-394-02849e053f",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 243,
+          "origin": "UNRESOLVED",
+          "pixelLength": 39,
+          "toPx": 282,
+          "valueCm": null
+        },
+        {
+          "fromPx": 282,
+          "origin": "UNRESOLVED",
+          "pixelLength": 28,
+          "toPx": 310,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        243,
+        282,
+        310
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 396,
+      "id": "chain-horizontal-396-1b6f38a3b5",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 563.5,
+          "origin": "UNRESOLVED",
+          "pixelLength": 41.5,
+          "toPx": 605,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        563.5,
+        605
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 402,
+      "id": "chain-horizontal-402-4644302a83",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 243,
+          "origin": "UNRESOLVED",
+          "pixelLength": 39,
+          "toPx": 282,
+          "valueCm": null
+        },
+        {
+          "fromPx": 282,
+          "origin": "UNRESOLVED",
+          "pixelLength": 28,
+          "toPx": 310,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        243,
+        282,
+        310
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 414,
+      "id": "chain-horizontal-414-aa69900ebe",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 598,
+          "origin": "UNRESOLVED",
+          "pixelLength": 10,
+          "toPx": 608,
+          "valueCm": null
+        },
+        {
+          "fromPx": 608,
+          "origin": "UNRESOLVED",
+          "pixelLength": 8,
+          "toPx": 616,
+          "valueCm": null
+        },
+        {
+          "fromPx": 616,
+          "origin": "UNRESOLVED",
+          "pixelLength": 17,
+          "toPx": 633,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        598,
+        608,
+        616,
+        633
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 470,
+      "id": "chain-horizontal-470-075c740f43",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 173.5,
+          "origin": "UNRESOLVED",
+          "pixelLength": 17.5,
+          "toPx": 191,
+          "valueCm": null
+        },
+        {
+          "fromPx": 191,
+          "origin": "UNRESOLVED",
+          "pixelLength": 12.5,
+          "toPx": 203.5,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        173.5,
+        191,
+        203.5
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 48,
+      "id": "chain-horizontal-48-9a09f5c585",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 245.5,
+          "origin": "UNRESOLVED",
+          "pixelLength": 9.5,
+          "toPx": 255,
+          "valueCm": null
+        },
+        {
+          "fromPx": 255,
+          "origin": "UNRESOLVED",
+          "pixelLength": 15.5,
+          "toPx": 270.5,
+          "valueCm": null
+        },
+        {
+          "fromPx": 270.5,
+          "origin": "UNRESOLVED",
+          "pixelLength": 17.5,
+          "toPx": 288,
+          "valueCm": null
+        },
+        {
+          "fromPx": 288,
+          "origin": "UNRESOLVED",
+          "pixelLength": 8,
+          "toPx": 296,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        245.5,
+        255,
+        270.5,
+        288,
+        296
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 485,
+      "id": "chain-horizontal-485-f75b88ed1e",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 204.5,
+          "origin": "UNRESOLVED",
+          "pixelLength": 61,
+          "toPx": 265.5,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        204.5,
+        265.5
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 494,
+      "id": "chain-horizontal-494-80b97da936",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 598,
+          "origin": "UNRESOLVED",
+          "pixelLength": 10,
+          "toPx": 608,
+          "valueCm": null
+        },
+        {
+          "fromPx": 608,
+          "origin": "UNRESOLVED",
+          "pixelLength": 8,
+          "toPx": 616,
+          "valueCm": null
+        },
+        {
+          "fromPx": 616,
+          "origin": "UNRESOLVED",
+          "pixelLength": 17.5,
+          "toPx": 633.5,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        598,
+        608,
+        616,
+        633.5
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 552,
+      "id": "chain-horizontal-552-681ec5508b",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 233.272727,
+          "origin": "UNRESOLVED",
+          "pixelLength": 41.227273,
+          "toPx": 274.5,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        233.272727,
+        274.5
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 564,
+      "id": "chain-horizontal-564-69ba46be5e",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 329.5,
+          "origin": "UNRESOLVED",
+          "pixelLength": 40.5,
+          "toPx": 370,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        329.5,
+        370
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 597,
+      "id": "chain-horizontal-597-a8f15a8cf5",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 512,
+          "origin": "UNRESOLVED",
+          "pixelLength": 38,
+          "toPx": 550,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        512,
+        550
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 621,
+      "id": "chain-horizontal-621-2a1700dda1",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 407,
+          "origin": "UNRESOLVED",
+          "pixelLength": 26.5,
+          "toPx": 433.5,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        407,
+        433.5
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 621,
+      "id": "chain-horizontal-621-71c7805151",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 462,
+          "origin": "UNRESOLVED",
+          "pixelLength": 17,
+          "toPx": 479,
+          "valueCm": null
+        },
+        {
+          "fromPx": 479,
+          "origin": "UNRESOLVED",
+          "pixelLength": 24.5,
+          "toPx": 503.5,
+          "valueCm": null
+        },
+        {
+          "fromPx": 503.5,
+          "origin": "UNRESOLVED",
+          "pixelLength": 10.5,
+          "toPx": 514,
+          "valueCm": null
+        },
+        {
+          "fromPx": 514,
+          "origin": "UNRESOLVED",
+          "pixelLength": 35,
+          "toPx": 549,
+          "valueCm": null
+        },
+        {
+          "fromPx": 549,
+          "origin": "UNRESOLVED",
+          "pixelLength": 10,
+          "toPx": 559,
+          "valueCm": null
+        },
+        {
+          "fromPx": 559,
+          "origin": "UNRESOLVED",
+          "pixelLength": 12,
+          "toPx": 571,
+          "valueCm": null
+        },
+        {
+          "fromPx": 571,
+          "origin": "UNRESOLVED",
+          "pixelLength": 12,
+          "toPx": 583,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        462,
+        479,
+        503.5,
+        514,
+        549,
+        559,
+        571,
+        583
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 621,
+      "id": "chain-horizontal-621-e02ff95df2",
+      "note": "2 detected ticks were not measurement points: no reading on this chain is consistent with a division there",
+      "segments": [
+        {
+          "fromPx": 231,
+          "origin": "READ",
+          "pixelLength": 86.5,
+          "toPx": 317.5,
+          "valueCm": 240
+        }
+      ],
+      "ticksPx": [
+        231,
+        279,
+        287.5,
+        317.5
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 649,
+      "id": "chain-horizontal-649-98fe462d4b",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 176.65625,
+          "origin": "UNRESOLVED",
+          "pixelLength": 22.34375,
+          "toPx": 199,
+          "valueCm": null
+        },
+        {
+          "fromPx": 199,
+          "origin": "UNRESOLVED",
+          "pixelLength": 10,
+          "toPx": 209,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        176.65625,
+        199,
+        209
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 710,
+      "id": "chain-horizontal-710-8ec4fe07f8",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 345,
+          "origin": "UNRESOLVED",
+          "pixelLength": 114.5,
+          "toPx": 459.5,
+          "valueCm": null
+        },
+        {
+          "fromPx": 459.5,
+          "origin": "UNRESOLVED",
+          "pixelLength": 154.5,
+          "toPx": 614,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        345,
+        459.5,
+        614
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 778,
+      "id": "chain-horizontal-778-aa42d37bef",
+      "note": null,
+      "segments": [
+        {
+          "fromPx": 193,
+          "origin": "READ",
+          "pixelLength": 165,
+          "toPx": 358,
+          "valueCm": 458
+        },
+        {
+          "fromPx": 358,
+          "origin": "CHAIN_CORRECTED",
+          "pixelLength": 91,
+          "toPx": 449,
+          "valueCm": 254
+        },
+        {
+          "fromPx": 449,
+          "origin": "READ",
+          "pixelLength": 165,
+          "toPx": 614,
+          "valueCm": 458
+        }
+      ],
+      "ticksPx": [
+        193,
+        358,
+        449,
+        614
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 812,
+      "id": "chain-horizontal-812-b8873f4575",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 193,
+          "origin": "UNRESOLVED",
+          "pixelLength": 324,
+          "toPx": 517,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        193,
+        517
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 86.5,
+      "id": "chain-horizontal-87-21a54dacdf",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 434,
+          "origin": "UNRESOLVED",
+          "pixelLength": 77,
+          "toPx": 511,
+          "valueCm": null
+        },
+        {
+          "fromPx": 511,
+          "origin": "UNRESOLVED",
+          "pixelLength": 73.5,
+          "toPx": 584.5,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        434,
+        511,
+        584.5
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "baselinePx": 96,
+      "id": "chain-horizontal-96-92bf16f1e9",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 412,
+          "origin": "UNRESOLVED",
+          "pixelLength": 99,
+          "toPx": 511,
+          "valueCm": null
+        },
+        {
+          "fromPx": 511,
+          "origin": "UNRESOLVED",
+          "pixelLength": 60,
+          "toPx": 571,
+          "valueCm": null
+        },
+        {
+          "fromPx": 571,
+          "origin": "UNRESOLVED",
+          "pixelLength": 34,
+          "toPx": 605,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        412,
+        511,
+        571,
+        605
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "baselinePx": 161,
+      "id": "chain-vertical-161-113194e0cb",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 49,
+          "origin": "UNRESOLVED",
+          "pixelLength": 205.5,
+          "toPx": 254.5,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        49,
+        254.5
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "baselinePx": 161,
+      "id": "chain-vertical-161-574415563d",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 347.5,
+          "origin": "UNRESOLVED",
+          "pixelLength": 231,
+          "toPx": 578.5,
+          "valueCm": null
+        },
+        {
+          "fromPx": 578.5,
+          "origin": "UNRESOLVED",
+          "pixelLength": 24,
+          "toPx": 602.5,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        347.5,
+        578.5,
+        602.5
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "baselinePx": 226,
+      "id": "chain-vertical-226-8d264e4255",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 320,
+          "origin": "UNRESOLVED",
+          "pixelLength": 29,
+          "toPx": 349,
+          "valueCm": null
+        },
+        {
+          "fromPx": 349,
+          "origin": "UNRESOLVED",
+          "pixelLength": 28,
+          "toPx": 377,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        320,
+        349,
+        377
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "baselinePx": 231,
+      "id": "chain-vertical-231-62bb8e4cf5",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 552.5,
+          "origin": "UNRESOLVED",
+          "pixelLength": 68.5,
+          "toPx": 621,
+          "valueCm": null
+        },
+        {
+          "fromPx": 621,
+          "origin": "UNRESOLVED",
+          "pixelLength": 12,
+          "toPx": 633,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        552.5,
+        621,
+        633
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "baselinePx": 243,
+      "id": "chain-vertical-243-cf755e9729",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 350,
+          "origin": "UNRESOLVED",
+          "pixelLength": 27,
+          "toPx": 377,
+          "valueCm": null
+        },
+        {
+          "fromPx": 377,
+          "origin": "UNRESOLVED",
+          "pixelLength": 17,
+          "toPx": 394,
+          "valueCm": null
+        },
+        {
+          "fromPx": 394,
+          "origin": "UNRESOLVED",
+          "pixelLength": 9.5,
+          "toPx": 403.5,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        350,
+        377,
+        394,
+        403.5
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "baselinePx": 279,
+      "id": "chain-vertical-279-8cc7716f7b",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 556.5,
+          "origin": "UNRESOLVED",
+          "pixelLength": 64.5,
+          "toPx": 621,
+          "valueCm": null
+        },
+        {
+          "fromPx": 621,
+          "origin": "UNRESOLVED",
+          "pixelLength": 19,
+          "toPx": 640,
+          "valueCm": null
+        },
+        {
+          "fromPx": 640,
+          "origin": "UNRESOLVED",
+          "pixelLength": 7,
+          "toPx": 647,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        556.5,
+        621,
+        640,
+        647
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "baselinePx": 320,
+      "id": "chain-vertical-320-1a750d38af",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 123,
+          "origin": "UNRESOLVED",
+          "pixelLength": 29,
+          "toPx": 152,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        123,
+        152
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "baselinePx": 322,
+      "id": "chain-vertical-322-a6d3bc3c50",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 124,
+          "origin": "UNRESOLVED",
+          "pixelLength": 23,
+          "toPx": 147,
+          "valueCm": null
+        },
+        {
+          "fromPx": 147,
+          "origin": "UNRESOLVED",
+          "pixelLength": 21,
+          "toPx": 168,
+          "valueCm": null
+        },
+        {
+          "fromPx": 168,
+          "origin": "UNRESOLVED",
+          "pixelLength": 10.5,
+          "toPx": 178.5,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        124,
+        147,
+        168,
+        178.5
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "baselinePx": 340,
+      "id": "chain-vertical-340-68f606c444",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 89.5,
+          "origin": "UNRESOLVED",
+          "pixelLength": 33.5,
+          "toPx": 123,
+          "valueCm": null
+        },
+        {
+          "fromPx": 123,
+          "origin": "UNRESOLVED",
+          "pixelLength": 24,
+          "toPx": 147,
+          "valueCm": null
+        },
+        {
+          "fromPx": 147,
+          "origin": "UNRESOLVED",
+          "pixelLength": 34,
+          "toPx": 181,
+          "valueCm": null
+        },
+        {
+          "fromPx": 181,
+          "origin": "UNRESOLVED",
+          "pixelLength": 54,
+          "toPx": 235,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        89.5,
+        123,
+        147,
+        181,
+        235
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "baselinePx": 340,
+      "id": "chain-vertical-340-933c93fb17",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 350,
+          "origin": "UNRESOLVED",
+          "pixelLength": 47.5,
+          "toPx": 397.5,
+          "valueCm": null
+        },
+        {
+          "fromPx": 397.5,
+          "origin": "UNRESOLVED",
+          "pixelLength": 10.5,
+          "toPx": 408,
+          "valueCm": null
+        },
+        {
+          "fromPx": 408,
+          "origin": "UNRESOLVED",
+          "pixelLength": 49.368421,
+          "toPx": 457.368421,
+          "valueCm": null
+        },
+        {
+          "fromPx": 457.368421,
+          "origin": "UNRESOLVED",
+          "pixelLength": 14.631579,
+          "toPx": 472,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        350,
+        397.5,
+        408,
+        457.368421,
+        472
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "baselinePx": 373,
+      "id": "chain-vertical-373-f3baff5c97",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 64.151515,
+          "origin": "UNRESOLVED",
+          "pixelLength": 22.348485,
+          "toPx": 86.5,
+          "valueCm": null
+        },
+        {
+          "fromPx": 86.5,
+          "origin": "UNRESOLVED",
+          "pixelLength": 9.5,
+          "toPx": 96,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        64.151515,
+        86.5,
+        96
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "baselinePx": 511,
+      "id": "chain-vertical-511-886815866e",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 64.151515,
+          "origin": "UNRESOLVED",
+          "pixelLength": 22.348485,
+          "toPx": 86.5,
+          "valueCm": null
+        },
+        {
+          "fromPx": 86.5,
+          "origin": "UNRESOLVED",
+          "pixelLength": 9.5,
+          "toPx": 96,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        64.151515,
+        86.5,
+        96
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "baselinePx": 52,
+      "id": "chain-vertical-52-040ccdb201",
+      "note": null,
+      "segments": [
+        {
+          "fromPx": 81,
+          "origin": "READ",
+          "pixelLength": 597,
+          "toPx": 678,
+          "valueCm": 1660
+        }
+      ],
+      "ticksPx": [
+        81,
+        678
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "baselinePx": 532,
+      "id": "chain-vertical-532-19d81b68cc",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 647,
+          "origin": "UNRESOLVED",
+          "pixelLength": 15,
+          "toPx": 662,
+          "valueCm": null
+        },
+        {
+          "fromPx": 662,
+          "origin": "UNRESOLVED",
+          "pixelLength": 17,
+          "toPx": 679,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        647,
+        662,
+        679
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "baselinePx": 560,
+      "id": "chain-vertical-560-891af3a6ae",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 524.5,
+          "origin": "UNRESOLVED",
+          "pixelLength": 38.5,
+          "toPx": 563,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        524.5,
+        563
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "baselinePx": 571,
+      "id": "chain-vertical-571-085ab21a9b",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 475,
+          "origin": "UNRESOLVED",
+          "pixelLength": 88,
+          "toPx": 563,
+          "valueCm": null
+        },
+        {
+          "fromPx": 563,
+          "origin": "UNRESOLVED",
+          "pixelLength": 58,
+          "toPx": 621,
+          "valueCm": null
+        },
+        {
+          "fromPx": 621,
+          "origin": "UNRESOLVED",
+          "pixelLength": 40,
+          "toPx": 661,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        475,
+        563,
+        621,
+        661
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "baselinePx": 571,
+      "id": "chain-vertical-571-8479dadc49",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 219.5,
+          "origin": "UNRESOLVED",
+          "pixelLength": 24,
+          "toPx": 243.5,
+          "valueCm": null
+        },
+        {
+          "fromPx": 243.5,
+          "origin": "UNRESOLVED",
+          "pixelLength": 24,
+          "toPx": 267.5,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        219.5,
+        243.5,
+        267.5
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "baselinePx": 571,
+      "id": "chain-vertical-571-a4a425bca9",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 382.766667,
+          "origin": "UNRESOLVED",
+          "pixelLength": 48.233333,
+          "toPx": 431,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        382.766667,
+        431
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "baselinePx": 571,
+      "id": "chain-vertical-571-fe3a0d0ad9",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 147,
+          "origin": "UNRESOLVED",
+          "pixelLength": 16.5,
+          "toPx": 163.5,
+          "valueCm": null
+        },
+        {
+          "fromPx": 163.5,
+          "origin": "UNRESOLVED",
+          "pixelLength": 32,
+          "toPx": 195.5,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        147,
+        163.5,
+        195.5
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "baselinePx": 574,
+      "id": "chain-vertical-574-2664ef03fe",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 309,
+          "origin": "UNRESOLVED",
+          "pixelLength": 19.5,
+          "toPx": 328.5,
+          "valueCm": null
+        },
+        {
+          "fromPx": 328.5,
+          "origin": "UNRESOLVED",
+          "pixelLength": 20,
+          "toPx": 348.5,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        309,
+        328.5,
+        348.5
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "baselinePx": 576,
+      "id": "chain-vertical-576-5af14936ec",
+      "note": "no number on this chain could be reconciled with the sheet scale",
+      "segments": [
+        {
+          "fromPx": 143.5,
+          "origin": "UNRESOLVED",
+          "pixelLength": 50.5,
+          "toPx": 194,
+          "valueCm": null
+        },
+        {
+          "fromPx": 194,
+          "origin": "UNRESOLVED",
+          "pixelLength": 24,
+          "toPx": 218,
+          "valueCm": null
+        }
+      ],
+      "ticksPx": [
+        143.5,
+        194,
+        218
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "baselinePx": 92,
+      "id": "chain-vertical-92-b455b6f7a1",
+      "note": "1 detected tick were not measurement points: no reading on this chain is consistent with a division there",
+      "segments": [
+        {
+          "fromPx": 81,
+          "origin": "READ",
+          "pixelLength": 169,
+          "toPx": 250,
+          "valueCm": 470
+        },
+        {
+          "fromPx": 250,
+          "origin": "READ",
+          "pixelLength": 399,
+          "toPx": 649,
+          "valueCm": 1110
+        },
+        {
+          "fromPx": 649,
+          "origin": "READ",
+          "pixelLength": 29,
+          "toPx": 678,
+          "valueCm": 80
+        }
+      ],
+      "ticksPx": [
+        81,
+        250,
+        649,
+        654,
+        678
+      ]
+    }
+  ],
+  "frameId": "frame-asset-rzut-ebb40feeba-0459d5961d",
+  "legend": {
+    "CHAIN_CORRECTED": "#e08a00",
+    "DERIVED": "#9a9a9a",
+    "READ": "#1f5fd1"
+  },
+  "omitted": 0,
+  "unsolvedLines": 0
+}

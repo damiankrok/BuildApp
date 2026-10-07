@@ -1,0 +1,71 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": 32,
+  "assetsByDocument": {
+    "ELEVATION": 4,
+    "FLOOR_PLAN": 8,
+    "PERSPECTIVE_RENDER": 16,
+    "SECTION": 1,
+    "SITE_PLAN": 1,
+    "UNKNOWN": 2
+  },
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-murajach-mfc224c195bead",
+  "contentHash": "7507703249676e45ab5b96a85b6688e5030f2d5c3cb87443330afce5772c2c47",
+  "failuresByCode": {
+    "BYTE_IDENTICAL": 5,
+    "HTTP_STATUS": 9
+  },
+  "note": "facts and hashes only; no publisher drawing, page or render is in this pack",
+  "packageId": "src-mfc224c195bead-470cf21cde",
+  "publishedFacts": [
+    {
+      "key": "building_height",
+      "unit": "m",
+      "value": 7.97
+    },
+    {
+      "key": "floor_area",
+      "unit": "m2",
+      "value": 110.66
+    },
+    {
+      "key": "footprint_area",
+      "unit": "m2",
+      "value": 75.83
+    },
+    {
+      "key": "garage_area",
+      "unit": "m2",
+      "value": 18.46
+    },
+    {
+      "key": "house_net_area",
+      "unit": "m2",
+      "value": 90.02
+    },
+    {
+      "key": "roof_area",
+      "unit": "m2",
+      "value": 88.1
+    },
+    {
+      "key": "total_area",
+      "unit": "m2",
+      "value": 147.19
+    },
+    {
+      "key": "usable_area_without_stairs",
+      "unit": "m2",
+      "value": 104.43
+    },
+    {
+      "key": "volume",
+      "unit": "none",
+      "value": 521.45
+    }
+  ],
+  "runId": "h1-dom-w-murajach"
+}

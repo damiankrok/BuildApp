@@ -1,0 +1,476 @@
+{
+  "copies": [
+    {
+      "assetId": "asset-rzut-44d6d1166d",
+      "decompositionId": "dec-e604d3466fb071fc",
+      "drawnGapRule": "OFF",
+      "frameId": "frame-asset-rzut-44d6d1166d-006f85ed53",
+      "gaps": [
+        {
+          "axis": "X",
+          "axisFrom": "LEFT",
+          "axisPx": 319.214286,
+          "bandInk": 0.065882,
+          "callout": null,
+          "classified": {
+            "boundary": "WEAK",
+            "cls": "UNKNOWN_GAP"
+          },
+          "crop": {
+            "x0": 219,
+            "x1": 420,
+            "y0": 463,
+            "y1": 714
+          },
+          "decompositionId": "dec-e604d3466fb071fc",
+          "drawnGapRule": {
+            "check": {
+              "alongJambs": false,
+              "drawn": true,
+              "drawnVia": "SIGNATURE",
+              "eligible": false,
+              "inWallBand": true,
+              "jambInk": false,
+              "wallJambs": false,
+              "withinLintel": true
+            },
+            "mode": "OFF",
+            "upgraded": false
+          },
+          "end": {
+            "x": 319.214286,
+            "y": 614
+          },
+          "final": {
+            "boundary": "WEAK",
+            "cls": "UNKNOWN_GAP",
+            "occupancy": "OPENING"
+          },
+          "fromPx": 563,
+          "gapId": "gap-X-321-563-614",
+          "inkCropSha256": "dffa7ceb6c97a8429201d9bd1bafa5d6736176b251728222edbb28f2894a72af",
+          "jambAlong": [
+            true,
+            false
+          ],
+          "jambInk": [
+            0,
+            1
+          ],
+          "jambs": [
+            "POST",
+            "WALL"
+          ],
+          "key": "frame-asset-rzut-44d6d1166d-006f85ed53/dec-e604d3466fb071fc/gap-X-321-563-614",
+          "linePx": 321,
+          "mppAlong": 0.015061,
+          "outline": "NOT_REACHED",
+          "patternAcross": false,
+          "reasons": [
+            "ONE_LINE_BESIDE_PIER"
+          ],
+          "runsPast": true,
+          "signature": "LEAF_FACE",
+          "signatureLoose": "LEAF_FACE",
+          "signatureRaw": "LEAF_FACE",
+          "start": {
+            "x": 319.214286,
+            "y": 563
+          },
+          "strokes": {
+            "continuous": 2,
+            "count": 2,
+            "inWall": 1,
+            "maxCoverage": 1,
+            "offsetsPx": [
+              -18,
+              -8
+            ],
+            "runsPast": 1
+          },
+          "toPx": 614,
+          "wallPx": 25,
+          "widthM": 0.768111,
+          "widthPx": 51,
+          "widthRule": "LINTEL"
+        },
+        {
+          "axis": "X",
+          "axisFrom": "RIGHT",
+          "axisPx": 369.685185,
+          "bandInk": 0.171707,
+          "callout": {
+            "confidence": 0.466218,
+            "widthCm": 306
+          },
+          "classified": {
+            "boundary": "WEAK",
+            "cls": "UNKNOWN_GAP"
+          },
+          "crop": {
+            "x0": 269,
+            "x1": 470,
+            "y0": 302,
+            "y1": 707
+          },
+          "decompositionId": "dec-e604d3466fb071fc",
+          "drawnGapRule": {
+            "check": {
+              "alongJambs": false,
+              "drawn": true,
+              "drawnVia": "SIGNATURE",
+              "eligible": false,
+              "inWallBand": true,
+              "jambInk": false,
+              "wallJambs": false,
+              "withinLintel": true
+            },
+            "mode": "OFF",
+            "upgraded": false
+          },
+          "end": {
+            "x": 369.685185,
+            "y": 607
+          },
+          "final": {
+            "boundary": "WEAK",
+            "cls": "UNKNOWN_GAP",
+            "occupancy": "OPENING"
+          },
+          "fromPx": 402,
+          "gapId": "gap-X-377-402-607",
+          "inkCropSha256": "0ff6cc38b3dadd9fffc9e19a3244b32ddc66860b15fd227715b10b4034f760d4",
+          "jambAlong": [
+            false,
+            true
+          ],
+          "jambInk": [
+            0,
+            0.72
+          ],
+          "jambs": [
+            "POST",
+            "WALL"
+          ],
+          "key": "frame-asset-rzut-44d6d1166d-006f85ed53/dec-e604d3466fb071fc/gap-X-377-402-607",
+          "linePx": 377,
+          "mppAlong": 0.015061,
+          "outline": "POCKET_MOUTH",
+          "patternAcross": false,
+          "reasons": [
+            "ONE_LINE_BESIDE_PIER"
+          ],
+          "runsPast": false,
+          "signature": "LEAF_FACE",
+          "signatureLoose": "LEAF_FACE",
+          "signatureRaw": "LEAF_FACE",
+          "start": {
+            "x": 369.685185,
+            "y": 402
+          },
+          "strokes": {
+            "continuous": 1,
+            "count": 1,
+            "inWall": 1,
+            "maxCoverage": 0.77561,
+            "offsetsPx": [
+              7
+            ],
+            "runsPast": 0
+          },
+          "toPx": 607,
+          "wallPx": 25,
+          "widthM": 3.087505,
+          "widthPx": 205,
+          "widthRule": "LINTEL"
+        },
+        {
+          "axis": "Y",
+          "axisFrom": "LEFT",
+          "axisPx": 474.464286,
+          "bandInk": 0.11038,
+          "callout": null,
+          "classified": {
+            "boundary": "WEAK",
+            "cls": "UNKNOWN_GAP"
+          },
+          "crop": {
+            "x0": 236,
+            "x1": 594,
+            "y0": 374,
+            "y1": 575
+          },
+          "decompositionId": "dec-e604d3466fb071fc",
+          "drawnGapRule": {
+            "check": {
+              "alongJambs": false,
+              "drawn": true,
+              "drawnVia": "SIGNATURE",
+              "eligible": false,
+              "inWallBand": true,
+              "jambInk": false,
+              "wallJambs": false,
+              "withinLintel": true
+            },
+            "mode": "OFF",
+            "upgraded": false
+          },
+          "end": {
+            "x": 494,
+            "y": 474.464286
+          },
+          "final": {
+            "boundary": "WEAK",
+            "cls": "UNKNOWN_GAP",
+            "occupancy": "OPENING"
+          },
+          "fromPx": 336,
+          "gapId": "gap-Y-469-336-494",
+          "inkCropSha256": "ca93c7cc970e96156e8944d506c2294aa2470d842b582b06320bc5e075585453",
+          "jambAlong": [
+            true,
+            false
+          ],
+          "jambInk": [
+            1,
+            0
+          ],
+          "jambs": [
+            "POST",
+            "POST"
+          ],
+          "key": "frame-asset-rzut-44d6d1166d-006f85ed53/dec-e604d3466fb071fc/gap-Y-469-336-494",
+          "linePx": 469,
+          "mppAlong": 0.015373,
+          "outline": "NOT_REACHED",
+          "patternAcross": false,
+          "reasons": [
+            "ONE_LINE_BESIDE_PIER"
+          ],
+          "runsPast": false,
+          "signature": "LEAF_FACE",
+          "signatureLoose": "LEAF_FACE",
+          "signatureRaw": "LEAF_FACE",
+          "start": {
+            "x": 336,
+            "y": 474.464286
+          },
+          "strokes": {
+            "continuous": 1,
+            "count": 1,
+            "inWall": 1,
+            "maxCoverage": 0.71519,
+            "offsetsPx": [
+              -22
+            ],
+            "runsPast": 0
+          },
+          "toPx": 494,
+          "wallPx": 25,
+          "widthM": 2.428934,
+          "widthPx": 158,
+          "widthRule": "LINTEL"
+        },
+        {
+          "axis": "Y",
+          "axisFrom": "BOTH",
+          "axisPx": 623.711039,
+          "bandInk": 0.184375,
+          "callout": null,
+          "classified": {
+            "boundary": "WEAK",
+            "cls": "UNKNOWN_GAP"
+          },
+          "crop": {
+            "x0": 289,
+            "x1": 553,
+            "y0": 523,
+            "y1": 724
+          },
+          "decompositionId": "dec-e604d3466fb071fc",
+          "drawnGapRule": {
+            "check": {
+              "alongJambs": true,
+              "drawn": true,
+              "drawnVia": "BEFORE_PATTERN",
+              "eligible": true,
+              "inWallBand": true,
+              "jambInk": true,
+              "wallJambs": true,
+              "withinLintel": true
+            },
+            "mode": "OFF",
+            "upgraded": false
+          },
+          "end": {
+            "x": 453,
+            "y": 623.711039
+          },
+          "final": {
+            "boundary": "WEAK",
+            "cls": "UNKNOWN_GAP",
+            "occupancy": "OPENING"
+          },
+          "fromPx": 389,
+          "gapId": "gap-Y-606-389-453",
+          "inkCropSha256": "e2b59746a8a2efb243ea1cba32ab2b315cd0a49033c6e0bc3182d89d5c0c11da",
+          "jambAlong": [
+            true,
+            true
+          ],
+          "jambInk": [
+            0.92,
+            0.92
+          ],
+          "jambs": [
+            "WALL",
+            "WALL"
+          ],
+          "key": "frame-asset-rzut-44d6d1166d-006f85ed53/dec-e604d3466fb071fc/gap-Y-606-389-453",
+          "linePx": 605.5,
+          "mppAlong": 0.015373,
+          "outline": "BRIDGED_WEAK",
+          "patternAcross": true,
+          "reasons": [
+            "FACE_OR_DASHED_LINE_WITHIN_LINTEL"
+          ],
+          "runsPast": true,
+          "signature": "DASHED",
+          "signatureLoose": "GLAZING",
+          "signatureRaw": "GLAZING",
+          "start": {
+            "x": 389,
+            "y": 623.711039
+          },
+          "strokes": {
+            "continuous": 4,
+            "count": 5,
+            "inWall": 3,
+            "maxCoverage": 1,
+            "offsetsPx": [
+              -17,
+              -11,
+              2,
+              6,
+              19
+            ],
+            "runsPast": 1
+          },
+          "toPx": 453,
+          "wallPx": 25,
+          "widthM": 0.983872,
+          "widthPx": 64,
+          "widthRule": "LINTEL"
+        },
+        {
+          "axis": "Y",
+          "axisFrom": "BOTH",
+          "axisPx": 625.189002,
+          "bandInk": 0.184375,
+          "callout": null,
+          "classified": {
+            "boundary": "WEAK",
+            "cls": "UNKNOWN_GAP"
+          },
+          "crop": {
+            "x0": 289,
+            "x1": 553,
+            "y0": 525,
+            "y1": 726
+          },
+          "decompositionId": "dec-e604d3466fb071fc",
+          "drawnGapRule": {
+            "check": {
+              "alongJambs": true,
+              "drawn": true,
+              "drawnVia": "BEFORE_PATTERN",
+              "eligible": true,
+              "inWallBand": true,
+              "jambInk": true,
+              "wallJambs": true,
+              "withinLintel": true
+            },
+            "mode": "OFF",
+            "upgraded": false
+          },
+          "end": {
+            "x": 453,
+            "y": 625.189002
+          },
+          "final": {
+            "boundary": "WEAK",
+            "cls": "UNKNOWN_GAP",
+            "occupancy": "OPENING"
+          },
+          "fromPx": 389,
+          "gapId": "gap-Y-626-389-453",
+          "inkCropSha256": "bff3ef384fdf0ae06d4d113f4dcfb76b495c8434fc1d47e33449be5977a00eca",
+          "jambAlong": [
+            true,
+            true
+          ],
+          "jambInk": [
+            0.96,
+            0.96
+          ],
+          "jambs": [
+            "WALL",
+            "WALL"
+          ],
+          "key": "frame-asset-rzut-44d6d1166d-006f85ed53/dec-e604d3466fb071fc/gap-Y-626-389-453",
+          "linePx": 626.375,
+          "mppAlong": 0.015373,
+          "outline": "POCKET_MOUTH",
+          "patternAcross": true,
+          "reasons": [
+            "FACE_OR_DASHED_LINE_WITHIN_LINTEL"
+          ],
+          "runsPast": true,
+          "signature": "DASHED",
+          "signatureLoose": "GLAZING",
+          "signatureRaw": "GLAZING",
+          "start": {
+            "x": 389,
+            "y": 625.189002
+          },
+          "strokes": {
+            "continuous": 4,
+            "count": 5,
+            "inWall": 3,
+            "maxCoverage": 1,
+            "offsetsPx": [
+              -18,
+              -12,
+              1,
+              5,
+              18
+            ],
+            "runsPast": 1
+          },
+          "toPx": 453,
+          "wallPx": 25,
+          "widthM": 0.983872,
+          "widthPx": 64,
+          "widthRule": "LINTEL"
+        }
+      ],
+      "omitted": 0,
+      "recorded": true,
+      "scale": {
+        "anchors": 6,
+        "mppX": 0.015373,
+        "mppY": 0.015061,
+        "rmsM": 0.009848
+      },
+      "scaleHypothesisId": "scale-3-025381-795373de4d",
+      "sizePx": {
+        "height": 853,
+        "width": 853
+      },
+      "storey": "ATTIC",
+      "variantByteHash": "7ae52c24424b17889ea2d8757dcd95ce93a4462adf8e27041d1e8ec9a298c70c",
+      "wideOpenings": []
+    }
+  ],
+  "selectedPlanFrameId": "frame-asset-rzut-44d6d1166d-006f85ed53"
+}

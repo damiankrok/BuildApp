@@ -1,0 +1,42 @@
+{
+  "frames": [
+    {
+      "annotation": "DIMENSIONED",
+      "envelope": {
+        "x0": 96,
+        "x1": 725,
+        "y0": 175.5,
+        "y1": 758.625
+      },
+      "extent": {
+        "x0": 83.5,
+        "x1": 737.5,
+        "y0": 162,
+        "y1": 758.5
+      },
+      "extentProvenance": {
+        "x": "WALL_GEOMETRY_EXTENT",
+        "y": "WALL_GEOMETRY_EXTENT"
+      },
+      "extentWeak": true,
+      "frameId": "frame-asset-rzut-44d6d1166d-006f85ed53",
+      "gridLines": {
+        "x": 9,
+        "y": 8
+      },
+      "scale": {
+        "anchors": 6,
+        "mppX": 0.015373,
+        "mppY": 0.015061,
+        "rmsM": 0.009848
+      },
+      "sizePx": {
+        "height": 853,
+        "width": 853
+      },
+      "storey": "ATTIC",
+      "wallPx": 25
+    }
+  ],
+  "selectedPlanFrameId": "frame-asset-rzut-44d6d1166d-006f85ed53"
+}

@@ -1,0 +1,66 @@
+{
+  "run": "<scratch>/h2-dom-w-cieszyniankach",
+  "completed": true,
+  "labelledPlanStoreys": [
+    "GROUND"
+  ],
+  "publishedFootprintM2": 194.79,
+  "checklist": {
+    "noFloorPlan": false,
+    "legibleOverallDimension": {
+      "ocrTokensOnGroundCopies": 130,
+      "tallestPx": 378,
+      "needsRawMeasurement": false
+    },
+    "wallsUnder4pxOnEveryGroundCopy": false,
+    "groundWallPx": [
+      {
+        "frameId": "frame-asset-rzut-ebb40feeba-0459d5961d",
+        "sizePx": {
+          "height": 853,
+          "width": 853
+        },
+        "wallPx": 16
+      }
+    ],
+    "floorPlanAssetsLost": []
+  },
+  "conditions": {
+    "storeys": {
+      "model": 1,
+      "plans": 1,
+      "holds": true
+    },
+    "upperStoreysHoldTheirRooms": {
+      "holds": true,
+      "note": "no level above the ground floor"
+    },
+    "openingsAllBuilt": {
+      "holds": true,
+      "message": null
+    },
+    "footprint": {
+      "builtM2": 184.86,
+      "publishedM2": 194.79,
+      "residualPct": -5.1,
+      "holds": true
+    },
+    "resolvedWithAWitness": {
+      "holds": true,
+      "note": "the first reading held"
+    },
+    "replacedByTheDrawing": {
+      "holds": true,
+      "note": "no challenge"
+    }
+  },
+  "bodies": 1,
+  "unresolved": 16,
+  "warnings": [
+    "INFO:DETERMINISTIC_ONLY",
+    "INFO:SOURCE_BYTE_IDENTICAL",
+    "INFO:GUESSED_ADDRESS_HTTP_STATUS",
+    "LIMITING:LAYOUT_ROOF_EVIDENCE_DISAGREES"
+  ],
+  "verdict": "PASS"
+}

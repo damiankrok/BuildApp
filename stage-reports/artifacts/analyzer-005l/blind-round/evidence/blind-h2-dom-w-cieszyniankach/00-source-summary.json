@@ -1,0 +1,76 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": 30,
+  "assetsByDocument": {
+    "ELEVATION": 4,
+    "FLOOR_PLAN": 4,
+    "PERSPECTIVE_RENDER": 18,
+    "SECTION": 1,
+    "SITE_PLAN": 1,
+    "UNKNOWN": 2
+  },
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-cieszyniankach-12-ge-m43d25c0636969",
+  "contentHash": "63034b633b353f90f9a7f6dad38f47f993ffba78500f4b803c267a26e22c2324",
+  "failuresByCode": {
+    "BYTE_IDENTICAL": 5,
+    "HTTP_STATUS": 7
+  },
+  "note": "facts and hashes only; no publisher drawing, page or render is in this pack",
+  "packageId": "src-m43d25c0636969-ec91dba4dc",
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "unit": "m2",
+      "value": 6.64
+    },
+    {
+      "key": "building_height",
+      "unit": "m",
+      "value": 7.52
+    },
+    {
+      "key": "floor_area",
+      "unit": "m2",
+      "value": 143.54
+    },
+    {
+      "key": "footprint_area",
+      "unit": "m2",
+      "value": 194.79
+    },
+    {
+      "key": "garage_area",
+      "unit": "m2",
+      "value": 21.15
+    },
+    {
+      "key": "house_net_area",
+      "unit": "m2",
+      "value": 115.75
+    },
+    {
+      "key": "roof_area",
+      "unit": "m2",
+      "value": 286.8
+    },
+    {
+      "key": "total_area",
+      "unit": "m2",
+      "value": 180.36
+    },
+    {
+      "key": "usable_area",
+      "unit": "m2",
+      "value": 143.54
+    },
+    {
+      "key": "volume",
+      "unit": "none",
+      "value": 1056.41
+    }
+  ],
+  "runId": "h2-dom-w-cieszyniankach"
+}

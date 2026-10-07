@@ -1,0 +1,58 @@
+{
+  "callouts": [
+    {
+      "box": {
+        "x0": 560,
+        "x1": 610,
+        "y0": 196,
+        "y1": 246
+      },
+      "id": "metric-callout-ring-2cd7757b14",
+      "rawText": "106/69",
+      "value": 106
+    },
+    {
+      "box": {
+        "x0": 515,
+        "x1": 557,
+        "y0": 605,
+        "y1": 647
+      },
+      "id": "metric-callout-ring-9ad2cc3456",
+      "rawText": "111/101",
+      "value": 111
+    },
+    {
+      "box": {
+        "x0": 548,
+        "x1": 574,
+        "y0": 294,
+        "y1": 320
+      },
+      "id": "metric-callout-ring-ec09d55db0",
+      "rawText": "400/50",
+      "value": 400
+    }
+  ],
+  "frameId": "frame-asset-rzut-ebb40feeba-0459d5961d",
+  "gapClasses": {
+    "DRAWING_BREAK_SUPPORTED": 330,
+    "OPENING_SUPPORTED": 10,
+    "TRUE_EXTERIOR_GAP": 112,
+    "UNKNOWN_GAP": 11
+  },
+  "wideOpenings": [
+    {
+      "axis": "X",
+      "decision": "OPEN_SIDE",
+      "fromPx": 293,
+      "id": "wide-X-449-293-453",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 449,
+      "score": 0.536607,
+      "toPx": 453,
+      "why": "a 4.45 m gap between two pieces of one wall, wider than a lintel conventionally spans, with only 33% of it drawn across: where the wall stops",
+      "widthM": 4.4496
+    }
+  ]
+}
