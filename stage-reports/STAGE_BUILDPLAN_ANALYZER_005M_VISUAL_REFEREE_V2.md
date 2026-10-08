@@ -343,3 +343,34 @@ The analyzer failure that motivated the Visual Referee is a body-relation decisi
 gozdzikowcach). No small VLM meets, or can be shown on the real data that exist to meet, the 0.5 % gate for it. That
 decision goes back to the deterministic path. `recommendation.md` lists what 005M leaves ready, and the
 conditions for reopening the AI route.
+
+## Handoff
+
+- **Final gates on `776295c`:**
+  - `freeze_check.sh`: IDENTICAL;
+  - `history_gate.sh`: PASS over 32 commits since `47811e0`;
+  - `research-isolation.test.ts`: 25 / 25;
+  - production diff since `47811e0`: empty.
+- **CI on `776295c`:** BuildApp CI run
+  [37798078813](https://github.com/damiankrok/BuildApp/actions/runs/37798078813), **success, 30 / 30 jobs**,
+  including the Android APK, 3D entry and UI evidence gates.
+- **The commit that carries this section** changes only this report and `PROJECT_STATUS.md`.
+
+```
+STAGE: BUILDPLAN-ANALYZER-005M
+VERDICT: PASS
+BRANCH: analyzer/visual-referee-v2-distillation-audit-v1
+HEAD: 776295c (research HEAD verified by CI; the handoff commit on top is docs-only)
+CI: BuildApp CI run 37798078813, success (30/30)
+FULL_REPORT: stage-reports/STAGE_BUILDPLAN_ANALYZER_005M_VISUAL_REFEREE_V2.md
+BEST_SMALL_MODEL: Qwen/Qwen3-VL-2B-Instruct@89644892 (point estimate; not separated from Qwen3-VL-4B)
+BEST_INPUT_MODE: D
+CONFIDENT_WRONG_RATE: 30.9 % (47/152, mode D, phase 2; = its error rate; real 22.7 %)
+CONTEXT_GAIN: A→D net +6/152 (cluster 95 % −0.7 … +9.0 pp, not distinguishable from zero); context pairs both right 2/10 (chance level)
+TEACHER_EXECUTION: RUN
+STUDENT_TRAINING: DEFERRED_ENV
+BEST_DEPLOYABLE_SIZE: 1.55 GB (Qwen3-VL-2B Q4_K_M + Q8_0 vision, official GGUF; quality unmeasured)
+PRODUCTION_CHANGED: NO
+NEXT_RECOMMENDATION: RETURN_TO_DETERMINISTIC_BODY_RELATION
+FINAL_TOKEN: PASS_BUILDPLAN_ANALYZER_005M_VISUAL_REFEREE_V2_READY_FOR_COORDINATOR
+```
