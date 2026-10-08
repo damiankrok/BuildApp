@@ -1,0 +1,11151 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005N",
+ "part": "A",
+ "startingHead": "5957e3af3e33615efba75b14fd3da004dc814954",
+ "method": "decomposition traces at the starting code (research/analyzer-005n/trace-decompositions.mjs, fixture-trace.ts); development rows replayed solver-alone on their sealed package, graph and metric evidence",
+ "facades": [
+  {
+   "id": "murajach/ground/incumbent/front",
+   "role": "PRIMARY",
+   "row": "dom-w-murajach",
+   "frameId": "frame-asset-rzut-36e1e5a39d-fb4609c5e2",
+   "decompositionId": "dec-3b0fbe15369c47f9",
+   "decompositionKey": "frame-asset-rzut-36e1e5a39d-fb4609c5e2|108.5|208.5|543|685.25|0.024514|0.024724|",
+   "storey": "GROUND",
+   "facade": {
+    "side": "S (set-back front: vestibule + pier; the garage lies beyond the extent)",
+    "axis": "Y",
+    "linePx": 621.5,
+    "spanPx": [
+     380,
+     543
+    ],
+    "inward": "toward smaller coordinates"
+   },
+   "wallThickness": {
+    "px": 25,
+    "m": 0.618
+   },
+   "mpp": {
+    "x": 0.024514,
+    "y": 0.024724
+   },
+   "extentBeforeBoundaryWork": {
+    "x0": 108.5,
+    "y0": 208.5,
+    "x1": 543,
+    "y1": 685.25
+   },
+   "envelope": null,
+   "collinearWallPieces": {
+    "bands": [
+     {
+      "from": 476,
+      "to": 556,
+      "thickness": 25
+     }
+    ],
+    "ink": [
+     {
+      "from": 380,
+      "to": 413,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 0.809
+     },
+     {
+      "from": 476,
+      "to": 538,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 1.52
+     }
+    ]
+   },
+   "facadeGaps": [
+    {
+     "id": "gap-Y-622-413-476",
+     "from": 413,
+     "to": 476,
+     "widthM": 1.544,
+     "jambs": [
+      "WALL",
+      "WALL"
+     ],
+     "signature": "DASHED",
+     "cls": "UNKNOWN_GAP",
+     "boundary": "WEAK",
+     "callout": null
+    }
+   ],
+   "perpendicularCandidates": {
+    "bands": [
+     {
+      "axis": "V",
+      "position": 386,
+      "thickness": 13,
+      "from": 506,
+      "to": 615,
+      "meetsFacade": true,
+      "inwardM": 2.856,
+      "wallThick": false
+     },
+     {
+      "axis": "V",
+      "position": 394.5,
+      "thickness": 25,
+      "from": 617,
+      "to": 660,
+      "meetsFacade": true,
+      "inwardM": 0.111,
+      "wallThick": true
+     }
+    ],
+    "ink": [
+     {
+      "linePx": 386,
+      "meetsFacade": true,
+      "runFrom": 609,
+      "runTo": 686,
+      "kind": "WALL",
+      "inwardM": 1.904
+     },
+     {
+      "linePx": 399,
+      "meetsFacade": true,
+      "runFrom": 609,
+      "runTo": 686,
+      "kind": "WALL",
+      "inwardM": 1.904
+     },
+     {
+      "linePx": 415,
+      "meetsFacade": true,
+      "runFrom": 609,
+      "runTo": 686,
+      "kind": "WALL",
+      "inwardM": 1.904
+     },
+     {
+      "linePx": 442.5,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 456.5,
+      "meetsFacade": true,
+      "runFrom": 600,
+      "runTo": 634,
+      "kind": "WALL",
+      "inwardM": 0.841
+     },
+     {
+      "linePx": 476.5,
+      "meetsFacade": true,
+      "runFrom": 600,
+      "runTo": 634,
+      "kind": "WALL",
+      "inwardM": 0.841
+     },
+     {
+      "linePx": 497.5,
+      "meetsFacade": true,
+      "runFrom": 600,
+      "runTo": 634,
+      "kind": "WALL",
+      "inwardM": 0.841
+     },
+     {
+      "linePx": 520.5,
+      "meetsFacade": true,
+      "runFrom": 600,
+      "runTo": 635,
+      "kind": "WALL",
+      "inwardM": 0.865
+     },
+     {
+      "linePx": 536.5,
+      "meetsFacade": true,
+      "runFrom": 600,
+      "runTo": 635,
+      "kind": "WALL",
+      "inwardM": 0.865
+     }
+    ]
+   },
+   "shortPiers": [],
+   "setbackBackWallCandidates": [],
+   "existingWideGaps": [],
+   "existingBays": [],
+   "cellsNearFacade": [
+    {
+     "ix": 2,
+     "iy": 1,
+     "cls": "B",
+     "rect": [
+      352,
+      330,
+      386,
+      487
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 1,
+     "cls": "B",
+     "rect": [
+      386,
+      330,
+      520.5,
+      487
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 2,
+     "cls": "B",
+     "rect": [
+      352,
+      487,
+      386,
+      509
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 2,
+     "cls": "B",
+     "rect": [
+      386,
+      487,
+      520.5,
+      509
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 3,
+     "cls": "B",
+     "rect": [
+      352,
+      509,
+      386,
+      558
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 3,
+     "cls": "B",
+     "rect": [
+      386,
+      509,
+      520.5,
+      558
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 4,
+     "cls": "B",
+     "rect": [
+      352,
+      558,
+      386,
+      621.5
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 4,
+     "cls": "O",
+     "rect": [
+      386,
+      558,
+      520.5,
+      621.5
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 5,
+     "cls": "B",
+     "rect": [
+      352,
+      621.5,
+      386,
+      659
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 5,
+     "cls": "O",
+     "rect": [
+      386,
+      621.5,
+      520.5,
+      659
+     ]
+    }
+   ],
+   "recessCells": 0,
+   "builtCells": 8,
+   "regions": [
+    [
+     "BUILT",
+     108.5,
+     330,
+     520.5,
+     558
+    ],
+    [
+     "BUILT",
+     108.5,
+     558,
+     386,
+     659
+    ]
+   ],
+   "gridLines": {
+    "x": [
+     108.5,
+     303.5,
+     352,
+     386,
+     520.5
+    ],
+    "y": [
+     245,
+     330,
+     487,
+     509,
+     558,
+     621.5,
+     659
+    ]
+   },
+   "bodies": [
+    {
+     "id": "body-0",
+     "relation": "SEPARATE_BODY",
+     "enclosed": true,
+     "built": false,
+     "areaM2": 20.804,
+     "rect": {
+      "x0": 108.5,
+      "y0": 209,
+      "x1": 415,
+      "y1": 685
+     },
+     "mouth": {
+      "widthM": 1.544382,
+      "signature": "DASHED",
+      "jambs": [
+       "WALL",
+       "WALL"
+      ],
+      "gapId": "gap-Y-622-413-476"
+     }
+    },
+    {
+     "id": "body-1",
+     "relation": "SEPARATE_BODY",
+     "enclosed": false,
+     "built": false,
+     "areaM2": 1.568,
+     "rect": {
+      "x0": 172,
+      "y0": 209,
+      "x1": 371,
+      "y1": 222
+     },
+     "mouth": {
+      "widthM": 4.093838,
+      "signature": "LEAF_AXIS",
+      "jambs": [
+       "WALL",
+       "WALL"
+      ],
+      "gapId": "gap-Y-209-192-359"
+     }
+    },
+    {
+     "id": "body-2",
+     "relation": "SEPARATE_BODY",
+     "enclosed": true,
+     "built": false,
+     "areaM2": 1.304,
+     "rect": {
+      "x0": 371,
+      "y0": 209,
+      "x1": 536.5,
+      "y1": 222
+     },
+     "mouth": null
+    },
+    {
+     "id": "body-3",
+     "relation": "SEPARATE_BODY",
+     "enclosed": false,
+     "built": false,
+     "areaM2": 94.006,
+     "rect": {
+      "x0": 144.5,
+      "y0": 222,
+      "x1": 536.5,
+      "y1": 644.5
+     },
+     "mouth": {
+      "widthM": 6.452964,
+      "signature": "BLANK",
+      "jambs": [
+       "POST",
+       "WALL"
+      ],
+      "gapId": "gap-X-386-348-609"
+     }
+    },
+    {
+     "id": "body-4",
+     "relation": "SEPARATE_BODY",
+     "enclosed": true,
+     "built": false,
+     "areaM2": 0.154,
+     "rect": {
+      "x0": 386,
+      "y0": 330,
+      "x1": 399,
+      "y1": 349.5
+     },
+     "mouth": {
+      "widthM": 6.452964,
+      "signature": "BLANK",
+      "jambs": [
+       "POST",
+       "WALL"
+      ],
+      "gapId": "gap-X-386-348-609"
+     }
+    },
+    {
+     "id": "body-5",
+     "relation": "SEPARATE_BODY",
+     "enclosed": true,
+     "built": false,
+     "areaM2": 0.219,
+     "rect": {
+      "x0": 352,
+      "y0": 509,
+      "x1": 371,
+      "y1": 528
+     },
+     "mouth": null
+    },
+    {
+     "id": "body-6",
+     "relation": "SEPARATE_BODY",
+     "enclosed": true,
+     "built": false,
+     "areaM2": 0.745,
+     "rect": {
+      "x0": 476.5,
+      "y0": 601,
+      "x1": 536.5,
+      "y1": 621.5
+     },
+     "mouth": null
+    }
+   ],
+   "boundaryAccepted": false,
+   "basePlanConsequence": {
+    "outcome": "FAILED",
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE",
+    "firstFailure": "PLAN_LAYOUT_REJECTED",
+    "gateBlocking": "FOOTPRINT_AREA_WRONG",
+    "selectedPlanFrameId": "frame-asset-rzut-44d6d1166d-006f85ed53"
+   }
+  },
+  {
+   "id": "murajach/ground/incumbent/house-front",
+   "role": "PRIMARY",
+   "row": "dom-w-murajach",
+   "frameId": "frame-asset-rzut-36e1e5a39d-fb4609c5e2",
+   "decompositionId": "dec-3b0fbe15369c47f9",
+   "decompositionKey": "frame-asset-rzut-36e1e5a39d-fb4609c5e2|108.5|208.5|543|685.25|0.024514|0.024724|",
+   "storey": "GROUND",
+   "facade": {
+    "side": "S (the house front, the left part)",
+    "axis": "Y",
+    "linePx": 659,
+    "spanPx": [
+     109,
+     543
+    ],
+    "inward": "toward smaller coordinates"
+   },
+   "wallThickness": {
+    "px": 25,
+    "m": 0.618
+   },
+   "mpp": {
+    "x": 0.024514,
+    "y": 0.024724
+   },
+   "extentBeforeBoundaryWork": {
+    "x0": 108.5,
+    "y0": 208.5,
+    "x1": 543,
+    "y1": 685.25
+   },
+   "envelope": null,
+   "collinearWallPieces": {
+    "bands": [
+     {
+      "from": 134,
+      "to": 380,
+      "thickness": 25
+     }
+    ],
+    "ink": [
+     {
+      "from": 109,
+      "to": 194,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 2.084
+     },
+     {
+      "from": 244,
+      "to": 413,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 4.143
+     }
+    ]
+   },
+   "facadeGaps": [
+    {
+     "id": "gap-Y-659-194-244",
+     "from": 194,
+     "to": 244,
+     "widthM": 1.226,
+     "jambs": [
+      "WALL",
+      "WALL"
+     ],
+     "signature": "GLAZING",
+     "cls": "OPENING_SUPPORTED",
+     "boundary": "STRONG",
+     "callout": null
+    }
+   ],
+   "perpendicularCandidates": {
+    "bands": [
+     {
+      "axis": "V",
+      "position": 121,
+      "thickness": 25,
+      "from": 554,
+      "to": 660,
+      "meetsFacade": true,
+      "inwardM": 2.596,
+      "wallThick": true
+     },
+     {
+      "axis": "V",
+      "position": 386,
+      "thickness": 13,
+      "from": 506,
+      "to": 615,
+      "meetsFacade": false,
+      "inwardM": 3.783,
+      "wallThick": false
+     },
+     {
+      "axis": "V",
+      "position": 392,
+      "thickness": 28,
+      "from": 696,
+      "to": 741,
+      "meetsFacade": false,
+      "inwardM": 0.915,
+      "wallThick": true
+     },
+     {
+      "axis": "V",
+      "position": 394.5,
+      "thickness": 25,
+      "from": 617,
+      "to": 660,
+      "meetsFacade": true,
+      "inwardM": 1.038,
+      "wallThick": true
+     }
+    ],
+    "ink": [
+     {
+      "linePx": 122,
+      "meetsFacade": true,
+      "runFrom": 446,
+      "runTo": 686,
+      "kind": "WALL",
+      "inwardM": 5.934
+     },
+     {
+      "linePx": 144.5,
+      "meetsFacade": true,
+      "runFrom": 446,
+      "runTo": 686,
+      "kind": "WALL",
+      "inwardM": 5.934
+     },
+     {
+      "linePx": 172,
+      "meetsFacade": true,
+      "runFrom": 660,
+      "runTo": 686,
+      "kind": "WALL",
+      "inwardM": 0.643
+     },
+     {
+      "linePx": 244,
+      "meetsFacade": true,
+      "runFrom": 660,
+      "runTo": 686,
+      "kind": "WALL",
+      "inwardM": 0.643
+     },
+     {
+      "linePx": 261,
+      "meetsFacade": true,
+      "runFrom": 660,
+      "runTo": 686,
+      "kind": "WALL",
+      "inwardM": 0.643
+     },
+     {
+      "linePx": 303.5,
+      "meetsFacade": true,
+      "runFrom": 661,
+      "runTo": 686,
+      "kind": "WALL",
+      "inwardM": 0.618
+     },
+     {
+      "linePx": 328.5,
+      "meetsFacade": true,
+      "runFrom": 661,
+      "runTo": 686,
+      "kind": "WALL",
+      "inwardM": 0.618
+     },
+     {
+      "linePx": 352,
+      "meetsFacade": true,
+      "runFrom": 661,
+      "runTo": 686,
+      "kind": "WALL",
+      "inwardM": 0.618
+     },
+     {
+      "linePx": 371,
+      "meetsFacade": true,
+      "runFrom": 609,
+      "runTo": 686,
+      "kind": "WALL",
+      "inwardM": 1.904
+     },
+     {
+      "linePx": 386,
+      "meetsFacade": true,
+      "runFrom": 609,
+      "runTo": 686,
+      "kind": "WALL",
+      "inwardM": 1.904
+     },
+     {
+      "linePx": 399,
+      "meetsFacade": true,
+      "runFrom": 609,
+      "runTo": 686,
+      "kind": "WALL",
+      "inwardM": 1.904
+     },
+     {
+      "linePx": 415,
+      "meetsFacade": true,
+      "runFrom": 609,
+      "runTo": 686,
+      "kind": "WALL",
+      "inwardM": 1.904
+     },
+     {
+      "linePx": 442.5,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 456.5,
+      "meetsFacade": true,
+      "runFrom": 600,
+      "runTo": 634,
+      "kind": "WALL",
+      "inwardM": 0.841
+     },
+     {
+      "linePx": 476.5,
+      "meetsFacade": true,
+      "runFrom": 600,
+      "runTo": 634,
+      "kind": "WALL",
+      "inwardM": 0.841
+     },
+     {
+      "linePx": 497.5,
+      "meetsFacade": true,
+      "runFrom": 600,
+      "runTo": 634,
+      "kind": "WALL",
+      "inwardM": 0.841
+     },
+     {
+      "linePx": 520.5,
+      "meetsFacade": true,
+      "runFrom": 600,
+      "runTo": 635,
+      "kind": "WALL",
+      "inwardM": 0.865
+     },
+     {
+      "linePx": 536.5,
+      "meetsFacade": true,
+      "runFrom": 600,
+      "runTo": 635,
+      "kind": "WALL",
+      "inwardM": 0.865
+     }
+    ]
+   },
+   "shortPiers": [],
+   "setbackBackWallCandidates": [
+    {
+     "linePx": 487,
+     "depthM": 4.253,
+     "wallPieces": [
+      [
+       109,
+       134
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-487-134-341",
+       "from": 134,
+       "to": 341,
+       "widthM": 5.074,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      }
+     ]
+    },
+    {
+     "linePx": 509,
+     "depthM": 3.709,
+     "wallPieces": [
+      [
+       109,
+       134
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-509-134-341",
+       "from": 134,
+       "to": 341,
+       "widthM": 5.074,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      }
+     ]
+    },
+    {
+     "linePx": 528,
+     "depthM": 3.239,
+     "wallPieces": [
+      [
+       109,
+       134
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-528-134-341",
+       "from": 134,
+       "to": 341,
+       "widthM": 5.074,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 544,
+     "depthM": 2.843,
+     "wallPieces": [
+      [
+       109,
+       134
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-544-134-380",
+       "from": 134,
+       "to": 380,
+       "widthM": 6.03,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      }
+     ]
+    },
+    {
+     "linePx": 558,
+     "depthM": 2.497,
+     "wallPieces": [
+      [
+       109,
+       134
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-558-134-380",
+       "from": 134,
+       "to": 380,
+       "widthM": 6.03,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      }
+     ]
+    },
+    {
+     "linePx": 601,
+     "depthM": 1.434,
+     "wallPieces": [
+      [
+       109,
+       134
+      ],
+      [
+       380,
+       413
+      ],
+      [
+       476,
+       538
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-601-134-380",
+       "from": 134,
+       "to": 380,
+       "widthM": 6.03,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "LEAF_FACE"
+      },
+      {
+       "id": "gap-Y-601-413-476",
+       "from": 413,
+       "to": 476,
+       "widthM": 1.544,
+       "cls": "UNKNOWN_GAP",
+       "signature": "DASHED"
+      }
+     ]
+    },
+    {
+     "linePx": 621.5,
+     "depthM": 0.927,
+     "wallPieces": [
+      [
+       109,
+       134
+      ],
+      [
+       380,
+       413
+      ],
+      [
+       476,
+       538
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-622-134-244",
+       "from": 134,
+       "to": 244,
+       "widthM": 2.697,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-622-261-380",
+       "from": 261,
+       "to": 380,
+       "widthM": 2.917,
+       "cls": "UNKNOWN_GAP",
+       "signature": "LEAF_AXIS"
+      },
+      {
+       "id": "gap-Y-622-413-476",
+       "from": 413,
+       "to": 476,
+       "widthM": 1.544,
+       "cls": "UNKNOWN_GAP",
+       "signature": "DASHED"
+      }
+     ]
+    }
+   ],
+   "existingWideGaps": [],
+   "existingBays": [],
+   "cellsNearFacade": [
+    {
+     "ix": 0,
+     "iy": 1,
+     "cls": "B",
+     "rect": [
+      108.5,
+      330,
+      303.5,
+      487
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 1,
+     "cls": "B",
+     "rect": [
+      303.5,
+      330,
+      352,
+      487
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 1,
+     "cls": "B",
+     "rect": [
+      352,
+      330,
+      386,
+      487
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 1,
+     "cls": "B",
+     "rect": [
+      386,
+      330,
+      520.5,
+      487
+     ]
+    },
+    {
+     "ix": 0,
+     "iy": 2,
+     "cls": "B",
+     "rect": [
+      108.5,
+      487,
+      303.5,
+      509
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 2,
+     "cls": "B",
+     "rect": [
+      303.5,
+      487,
+      352,
+      509
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 2,
+     "cls": "B",
+     "rect": [
+      352,
+      487,
+      386,
+      509
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 2,
+     "cls": "B",
+     "rect": [
+      386,
+      487,
+      520.5,
+      509
+     ]
+    },
+    {
+     "ix": 0,
+     "iy": 3,
+     "cls": "B",
+     "rect": [
+      108.5,
+      509,
+      303.5,
+      558
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 3,
+     "cls": "B",
+     "rect": [
+      303.5,
+      509,
+      352,
+      558
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 3,
+     "cls": "B",
+     "rect": [
+      352,
+      509,
+      386,
+      558
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 3,
+     "cls": "B",
+     "rect": [
+      386,
+      509,
+      520.5,
+      558
+     ]
+    },
+    {
+     "ix": 0,
+     "iy": 4,
+     "cls": "B",
+     "rect": [
+      108.5,
+      558,
+      303.5,
+      621.5
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 4,
+     "cls": "B",
+     "rect": [
+      303.5,
+      558,
+      352,
+      621.5
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 4,
+     "cls": "B",
+     "rect": [
+      352,
+      558,
+      386,
+      621.5
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 4,
+     "cls": "O",
+     "rect": [
+      386,
+      558,
+      520.5,
+      621.5
+     ]
+    },
+    {
+     "ix": 0,
+     "iy": 5,
+     "cls": "B",
+     "rect": [
+      108.5,
+      621.5,
+      303.5,
+      659
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 5,
+     "cls": "B",
+     "rect": [
+      303.5,
+      621.5,
+      352,
+      659
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 5,
+     "cls": "B",
+     "rect": [
+      352,
+      621.5,
+      386,
+      659
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 5,
+     "cls": "O",
+     "rect": [
+      386,
+      621.5,
+      520.5,
+      659
+     ]
+    }
+   ],
+   "recessCells": 0,
+   "builtCells": 18,
+   "regions": [
+    [
+     "BUILT",
+     108.5,
+     330,
+     520.5,
+     558
+    ],
+    [
+     "BUILT",
+     108.5,
+     558,
+     386,
+     659
+    ]
+   ],
+   "gridLines": {
+    "x": [
+     108.5,
+     303.5,
+     352,
+     386,
+     520.5
+    ],
+    "y": [
+     245,
+     330,
+     487,
+     509,
+     558,
+     621.5,
+     659
+    ]
+   },
+   "bodies": [
+    {
+     "id": "body-0",
+     "relation": "SEPARATE_BODY",
+     "enclosed": true,
+     "built": false,
+     "areaM2": 20.804,
+     "rect": {
+      "x0": 108.5,
+      "y0": 209,
+      "x1": 415,
+      "y1": 685
+     },
+     "mouth": {
+      "widthM": 1.544382,
+      "signature": "DASHED",
+      "jambs": [
+       "WALL",
+       "WALL"
+      ],
+      "gapId": "gap-Y-622-413-476"
+     }
+    },
+    {
+     "id": "body-1",
+     "relation": "SEPARATE_BODY",
+     "enclosed": false,
+     "built": false,
+     "areaM2": 1.568,
+     "rect": {
+      "x0": 172,
+      "y0": 209,
+      "x1": 371,
+      "y1": 222
+     },
+     "mouth": {
+      "widthM": 4.093838,
+      "signature": "LEAF_AXIS",
+      "jambs": [
+       "WALL",
+       "WALL"
+      ],
+      "gapId": "gap-Y-209-192-359"
+     }
+    },
+    {
+     "id": "body-2",
+     "relation": "SEPARATE_BODY",
+     "enclosed": true,
+     "built": false,
+     "areaM2": 1.304,
+     "rect": {
+      "x0": 371,
+      "y0": 209,
+      "x1": 536.5,
+      "y1": 222
+     },
+     "mouth": null
+    },
+    {
+     "id": "body-3",
+     "relation": "SEPARATE_BODY",
+     "enclosed": false,
+     "built": false,
+     "areaM2": 94.006,
+     "rect": {
+      "x0": 144.5,
+      "y0": 222,
+      "x1": 536.5,
+      "y1": 644.5
+     },
+     "mouth": {
+      "widthM": 6.452964,
+      "signature": "BLANK",
+      "jambs": [
+       "POST",
+       "WALL"
+      ],
+      "gapId": "gap-X-386-348-609"
+     }
+    },
+    {
+     "id": "body-4",
+     "relation": "SEPARATE_BODY",
+     "enclosed": true,
+     "built": false,
+     "areaM2": 0.154,
+     "rect": {
+      "x0": 386,
+      "y0": 330,
+      "x1": 399,
+      "y1": 349.5
+     },
+     "mouth": {
+      "widthM": 6.452964,
+      "signature": "BLANK",
+      "jambs": [
+       "POST",
+       "WALL"
+      ],
+      "gapId": "gap-X-386-348-609"
+     }
+    },
+    {
+     "id": "body-5",
+     "relation": "SEPARATE_BODY",
+     "enclosed": true,
+     "built": false,
+     "areaM2": 0.219,
+     "rect": {
+      "x0": 352,
+      "y0": 509,
+      "x1": 371,
+      "y1": 528
+     },
+     "mouth": null
+    },
+    {
+     "id": "body-6",
+     "relation": "SEPARATE_BODY",
+     "enclosed": true,
+     "built": false,
+     "areaM2": 0.745,
+     "rect": {
+      "x0": 476.5,
+      "y0": 601,
+      "x1": 536.5,
+      "y1": 621.5
+     },
+     "mouth": null
+    }
+   ],
+   "boundaryAccepted": false,
+   "basePlanConsequence": {
+    "outcome": "FAILED",
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE",
+    "firstFailure": "PLAN_LAYOUT_REJECTED",
+    "gateBlocking": "FOOTPRINT_AREA_WRONG",
+    "selectedPlanFrameId": "frame-asset-rzut-44d6d1166d-006f85ed53"
+   }
+  },
+  {
+   "id": "murajach/ground/incumbent/party-side",
+   "role": "PRIMARY",
+   "row": "dom-w-murajach",
+   "frameId": "frame-asset-rzut-36e1e5a39d-fb4609c5e2",
+   "decompositionId": "dec-3b0fbe15369c47f9",
+   "decompositionKey": "frame-asset-rzut-36e1e5a39d-fb4609c5e2|108.5|208.5|543|685.25|0.024514|0.024724|",
+   "storey": "GROUND",
+   "facade": {
+    "side": "E (the extent stops on the house/garage party wall)",
+    "axis": "X",
+    "linePx": 536.5,
+    "spanPx": [
+     209,
+     685
+    ],
+    "inward": "toward smaller coordinates"
+   },
+   "wallThickness": {
+    "px": 25,
+    "m": 0.618
+   },
+   "mpp": {
+    "x": 0.024514,
+    "y": 0.024724
+   },
+   "extentBeforeBoundaryWork": {
+    "x0": 108.5,
+    "y0": 208.5,
+    "x1": 543,
+    "y1": 685.25
+   },
+   "envelope": null,
+   "collinearWallPieces": {
+    "bands": [
+     {
+      "from": 304,
+      "to": 543,
+      "thickness": 16.125
+     }
+    ],
+    "ink": [
+     {
+      "from": 209,
+      "to": 234,
+      "kind": "WALL",
+      "along": false,
+      "lengthM": 0.618
+     },
+     {
+      "from": 292,
+      "to": 340,
+      "kind": "POST",
+      "along": true,
+      "lengthM": 1.187
+     },
+     {
+      "from": 367,
+      "to": 410,
+      "kind": "POST",
+      "along": true,
+      "lengthM": 1.063
+     },
+     {
+      "from": 600,
+      "to": 635,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 0.865
+     }
+    ]
+   },
+   "facadeGaps": [
+    {
+     "id": "gap-X-537-234-292",
+     "from": 234,
+     "to": 292,
+     "widthM": 1.434,
+     "jambs": [
+      "WALL",
+      "POST"
+     ],
+     "signature": "DASHED",
+     "cls": "TRUE_EXTERIOR_GAP",
+     "boundary": "NONE",
+     "callout": null
+    },
+    {
+     "id": "gap-X-537-340-367",
+     "from": 340,
+     "to": 367,
+     "widthM": 0.668,
+     "jambs": [
+      "POST",
+      "POST"
+     ],
+     "signature": "LEAF_AXIS",
+     "cls": "UNKNOWN_GAP",
+     "boundary": "WEAK",
+     "callout": null
+    },
+    {
+     "id": "gap-X-537-410-600",
+     "from": 410,
+     "to": 600,
+     "widthM": 4.698,
+     "jambs": [
+      "POST",
+      "WALL"
+     ],
+     "signature": "LEAF_AXIS",
+     "cls": "TRUE_EXTERIOR_GAP",
+     "boundary": "NONE",
+     "callout": {
+      "id": "metric-callout-ring-a094ca4bee",
+      "cm": 480
+     }
+    }
+   ],
+   "perpendicularCandidates": {
+    "bands": [
+     {
+      "axis": "H",
+      "position": 297.5,
+      "thickness": 12,
+      "from": 462,
+      "to": 522,
+      "meetsFacade": true,
+      "inwardM": 1.826,
+      "wallThick": false
+     },
+     {
+      "axis": "H",
+      "position": 620,
+      "thickness": 25,
+      "from": 476,
+      "to": 556,
+      "meetsFacade": true,
+      "inwardM": 1.483,
+      "wallThick": true
+     }
+    ],
+    "ink": [
+     {
+      "linePx": 209,
+      "meetsFacade": true,
+      "runFrom": 359,
+      "runTo": 538,
+      "kind": "WALL",
+      "inwardM": 4.388
+     },
+     {
+      "linePx": 222,
+      "meetsFacade": true,
+      "runFrom": 359,
+      "runTo": 538,
+      "kind": "WALL",
+      "inwardM": 4.388
+     },
+     {
+      "linePx": 245,
+      "meetsFacade": true,
+      "runFrom": 359,
+      "runTo": 538,
+      "kind": "WALL",
+      "inwardM": 4.388
+     },
+     {
+      "linePx": 258,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 288.5,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 330,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 349.5,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 364.5,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 380.5,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 394.5,
+      "meetsFacade": true,
+      "runFrom": 506,
+      "runTo": 538,
+      "kind": "POST",
+      "inwardM": 0.784
+     },
+     {
+      "linePx": 423,
+      "meetsFacade": true,
+      "runFrom": 514,
+      "runTo": 538,
+      "kind": "POST",
+      "inwardM": 0.588
+     },
+     {
+      "linePx": 436,
+      "meetsFacade": true,
+      "runFrom": 514,
+      "runTo": 538,
+      "kind": "POST",
+      "inwardM": 0.588
+     },
+     {
+      "linePx": 464,
+      "meetsFacade": true,
+      "runFrom": 514,
+      "runTo": 538,
+      "kind": "POST",
+      "inwardM": 0.588
+     },
+     {
+      "linePx": 487,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 509,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 528,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 544,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 558,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 601,
+      "meetsFacade": true,
+      "runFrom": 476,
+      "runTo": 538,
+      "kind": "WALL",
+      "inwardM": 1.52
+     },
+     {
+      "linePx": 621.5,
+      "meetsFacade": true,
+      "runFrom": 476,
+      "runTo": 538,
+      "kind": "WALL",
+      "inwardM": 1.52
+     },
+     {
+      "linePx": 644.5,
+      "meetsFacade": true,
+      "runFrom": 476,
+      "runTo": 538,
+      "kind": "WALL",
+      "inwardM": 1.52
+     },
+     {
+      "linePx": 659,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 672,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 685,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     }
+    ]
+   },
+   "shortPiers": [
+    {
+     "from": 292,
+     "to": 340,
+     "kind": "POST",
+     "along": true,
+     "lengthM": 1.187,
+     "wallVsPost": "POST"
+    },
+    {
+     "from": 367,
+     "to": 410,
+     "kind": "POST",
+     "along": true,
+     "lengthM": 1.063,
+     "wallVsPost": "POST"
+    },
+    {
+     "from": 600,
+     "to": 635,
+     "kind": "WALL",
+     "along": true,
+     "lengthM": 0.865,
+     "wallVsPost": "WALL"
+    }
+   ],
+   "setbackBackWallCandidates": [
+    {
+     "linePx": 371,
+     "depthM": 4.057,
+     "wallPieces": [
+      [
+       209,
+       259
+      ],
+      [
+       609,
+       686
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-X-371-259-498",
+       "from": 259,
+       "to": 498,
+       "widthM": 5.909,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-X-371-529-609",
+       "from": 529,
+       "to": 609,
+       "widthM": 1.978,
+       "cls": "UNKNOWN_GAP",
+       "signature": "LEAF_AXIS"
+      }
+     ]
+    },
+    {
+     "linePx": 386,
+     "depthM": 3.689,
+     "wallPieces": [
+      [
+       209,
+       238
+      ],
+      [
+       609,
+       686
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-X-386-238-330",
+       "from": 238,
+       "to": 330,
+       "widthM": 2.275,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "LEAF_FACE"
+      },
+      {
+       "id": "gap-X-386-348-609",
+       "from": 348,
+       "to": 609,
+       "widthM": 6.453,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 399,
+     "depthM": 3.371,
+     "wallPieces": [
+      [
+       209,
+       234
+      ],
+      [
+       609,
+       686
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-X-399-234-330",
+       "from": 234,
+       "to": 330,
+       "widthM": 2.374,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "LEAF_AXIS"
+      },
+      {
+       "id": "gap-X-399-348-609",
+       "from": 348,
+       "to": 609,
+       "widthM": 6.453,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 415,
+     "depthM": 2.978,
+     "wallPieces": [
+      [
+       209,
+       234
+      ],
+      [
+       609,
+       686
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-X-415-234-330",
+       "from": 234,
+       "to": 330,
+       "widthM": 2.374,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "LEAF_FACE"
+      },
+      {
+       "id": "gap-X-415-348-532",
+       "from": 348,
+       "to": 532,
+       "widthM": 4.549,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-X-415-558-609",
+       "from": 558,
+       "to": 609,
+       "widthM": 1.261,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      }
+     ]
+    },
+    {
+     "linePx": 442.5,
+     "depthM": 2.304,
+     "wallPieces": [
+      [
+       209,
+       234
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-X-443-234-283",
+       "from": 234,
+       "to": 283,
+       "widthM": 1.211,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-X-443-303-532",
+       "from": 303,
+       "to": 532,
+       "widthM": 5.662,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      }
+     ]
+    },
+    {
+     "linePx": 456.5,
+     "depthM": 1.961,
+     "wallPieces": [
+      [
+       209,
+       234
+      ],
+      [
+       600,
+       634
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-X-457-234-283",
+       "from": 234,
+       "to": 283,
+       "widthM": 1.211,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-X-457-303-600",
+       "from": 303,
+       "to": 600,
+       "widthM": 7.343,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 476.5,
+     "depthM": 1.471,
+     "wallPieces": [
+      [
+       209,
+       234
+      ],
+      [
+       600,
+       634
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-X-477-234-283",
+       "from": 234,
+       "to": 283,
+       "widthM": 1.211,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-X-477-316-600",
+       "from": 316,
+       "to": 600,
+       "widthM": 7.022,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 497.5,
+     "depthM": 0.956,
+     "wallPieces": [
+      [
+       209,
+       234
+      ],
+      [
+       600,
+       634
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-X-498-234-292",
+       "from": 234,
+       "to": 292,
+       "widthM": 1.434,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      },
+      {
+       "id": "gap-X-498-332-600",
+       "from": 332,
+       "to": 600,
+       "widthM": 6.626,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "LEAF_FACE"
+      }
+     ]
+    }
+   ],
+   "existingWideGaps": [],
+   "existingBays": [],
+   "cellsNearFacade": [
+    {
+     "ix": 0,
+     "iy": 0,
+     "cls": "O",
+     "rect": [
+      108.5,
+      245,
+      303.5,
+      330
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 0,
+     "cls": "O",
+     "rect": [
+      303.5,
+      245,
+      352,
+      330
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 0,
+     "cls": "O",
+     "rect": [
+      352,
+      245,
+      386,
+      330
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 0,
+     "cls": "O",
+     "rect": [
+      386,
+      245,
+      520.5,
+      330
+     ]
+    },
+    {
+     "ix": 0,
+     "iy": 1,
+     "cls": "B",
+     "rect": [
+      108.5,
+      330,
+      303.5,
+      487
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 1,
+     "cls": "B",
+     "rect": [
+      303.5,
+      330,
+      352,
+      487
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 1,
+     "cls": "B",
+     "rect": [
+      352,
+      330,
+      386,
+      487
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 1,
+     "cls": "B",
+     "rect": [
+      386,
+      330,
+      520.5,
+      487
+     ]
+    },
+    {
+     "ix": 0,
+     "iy": 2,
+     "cls": "B",
+     "rect": [
+      108.5,
+      487,
+      303.5,
+      509
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 2,
+     "cls": "B",
+     "rect": [
+      303.5,
+      487,
+      352,
+      509
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 2,
+     "cls": "B",
+     "rect": [
+      352,
+      487,
+      386,
+      509
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 2,
+     "cls": "B",
+     "rect": [
+      386,
+      487,
+      520.5,
+      509
+     ]
+    },
+    {
+     "ix": 0,
+     "iy": 3,
+     "cls": "B",
+     "rect": [
+      108.5,
+      509,
+      303.5,
+      558
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 3,
+     "cls": "B",
+     "rect": [
+      303.5,
+      509,
+      352,
+      558
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 3,
+     "cls": "B",
+     "rect": [
+      352,
+      509,
+      386,
+      558
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 3,
+     "cls": "B",
+     "rect": [
+      386,
+      509,
+      520.5,
+      558
+     ]
+    },
+    {
+     "ix": 0,
+     "iy": 4,
+     "cls": "B",
+     "rect": [
+      108.5,
+      558,
+      303.5,
+      621.5
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 4,
+     "cls": "B",
+     "rect": [
+      303.5,
+      558,
+      352,
+      621.5
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 4,
+     "cls": "B",
+     "rect": [
+      352,
+      558,
+      386,
+      621.5
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 4,
+     "cls": "O",
+     "rect": [
+      386,
+      558,
+      520.5,
+      621.5
+     ]
+    },
+    {
+     "ix": 0,
+     "iy": 5,
+     "cls": "B",
+     "rect": [
+      108.5,
+      621.5,
+      303.5,
+      659
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 5,
+     "cls": "B",
+     "rect": [
+      303.5,
+      621.5,
+      352,
+      659
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 5,
+     "cls": "B",
+     "rect": [
+      352,
+      621.5,
+      386,
+      659
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 5,
+     "cls": "O",
+     "rect": [
+      386,
+      621.5,
+      520.5,
+      659
+     ]
+    }
+   ],
+   "recessCells": 0,
+   "builtCells": 18,
+   "regions": [
+    [
+     "BUILT",
+     108.5,
+     330,
+     520.5,
+     558
+    ],
+    [
+     "BUILT",
+     108.5,
+     558,
+     386,
+     659
+    ]
+   ],
+   "gridLines": {
+    "x": [
+     108.5,
+     303.5,
+     352,
+     386,
+     520.5
+    ],
+    "y": [
+     245,
+     330,
+     487,
+     509,
+     558,
+     621.5,
+     659
+    ]
+   },
+   "bodies": [
+    {
+     "id": "body-0",
+     "relation": "SEPARATE_BODY",
+     "enclosed": true,
+     "built": false,
+     "areaM2": 20.804,
+     "rect": {
+      "x0": 108.5,
+      "y0": 209,
+      "x1": 415,
+      "y1": 685
+     },
+     "mouth": {
+      "widthM": 1.544382,
+      "signature": "DASHED",
+      "jambs": [
+       "WALL",
+       "WALL"
+      ],
+      "gapId": "gap-Y-622-413-476"
+     }
+    },
+    {
+     "id": "body-1",
+     "relation": "SEPARATE_BODY",
+     "enclosed": false,
+     "built": false,
+     "areaM2": 1.568,
+     "rect": {
+      "x0": 172,
+      "y0": 209,
+      "x1": 371,
+      "y1": 222
+     },
+     "mouth": {
+      "widthM": 4.093838,
+      "signature": "LEAF_AXIS",
+      "jambs": [
+       "WALL",
+       "WALL"
+      ],
+      "gapId": "gap-Y-209-192-359"
+     }
+    },
+    {
+     "id": "body-2",
+     "relation": "SEPARATE_BODY",
+     "enclosed": true,
+     "built": false,
+     "areaM2": 1.304,
+     "rect": {
+      "x0": 371,
+      "y0": 209,
+      "x1": 536.5,
+      "y1": 222
+     },
+     "mouth": null
+    },
+    {
+     "id": "body-3",
+     "relation": "SEPARATE_BODY",
+     "enclosed": false,
+     "built": false,
+     "areaM2": 94.006,
+     "rect": {
+      "x0": 144.5,
+      "y0": 222,
+      "x1": 536.5,
+      "y1": 644.5
+     },
+     "mouth": {
+      "widthM": 6.452964,
+      "signature": "BLANK",
+      "jambs": [
+       "POST",
+       "WALL"
+      ],
+      "gapId": "gap-X-386-348-609"
+     }
+    },
+    {
+     "id": "body-4",
+     "relation": "SEPARATE_BODY",
+     "enclosed": true,
+     "built": false,
+     "areaM2": 0.154,
+     "rect": {
+      "x0": 386,
+      "y0": 330,
+      "x1": 399,
+      "y1": 349.5
+     },
+     "mouth": {
+      "widthM": 6.452964,
+      "signature": "BLANK",
+      "jambs": [
+       "POST",
+       "WALL"
+      ],
+      "gapId": "gap-X-386-348-609"
+     }
+    },
+    {
+     "id": "body-5",
+     "relation": "SEPARATE_BODY",
+     "enclosed": true,
+     "built": false,
+     "areaM2": 0.219,
+     "rect": {
+      "x0": 352,
+      "y0": 509,
+      "x1": 371,
+      "y1": 528
+     },
+     "mouth": null
+    },
+    {
+     "id": "body-6",
+     "relation": "SEPARATE_BODY",
+     "enclosed": true,
+     "built": false,
+     "areaM2": 0.745,
+     "rect": {
+      "x0": 476.5,
+      "y0": 601,
+      "x1": 536.5,
+      "y1": 621.5
+     },
+     "mouth": null
+    }
+   ],
+   "boundaryAccepted": false,
+   "basePlanConsequence": {
+    "outcome": "FAILED",
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE",
+    "firstFailure": "PLAN_LAYOUT_REJECTED",
+    "gateBlocking": "FOOTPRINT_AREA_WRONG",
+    "selectedPlanFrameId": "frame-asset-rzut-44d6d1166d-006f85ed53"
+   }
+  },
+  {
+   "id": "murajach/ground/cluster-extent/front",
+   "role": "PRIMARY",
+   "row": "dom-w-murajach",
+   "frameId": "frame-asset-rzut-36e1e5a39d-fb4609c5e2",
+   "decompositionId": "dec-188b6f505e7bcefd",
+   "decompositionKey": "frame-asset-rzut-36e1e5a39d-fb4609c5e2|109|209|765|685|0.024514|0.024724|",
+   "storey": "GROUND",
+   "facade": {
+    "side": "S (set-back front in the wall-mass-cluster reading: vestibule door, pier, garage door)",
+    "axis": "Y",
+    "linePx": 621.5,
+    "spanPx": [
+     380,
+     754
+    ],
+    "inward": "toward smaller coordinates"
+   },
+   "wallThickness": {
+    "px": 25,
+    "m": 0.618
+   },
+   "mpp": {
+    "x": 0.024514,
+    "y": 0.024724
+   },
+   "extentBeforeBoundaryWork": {
+    "x0": 109,
+    "y0": 209,
+    "x1": 765,
+    "y1": 685
+   },
+   "envelope": {
+    "rect": {
+     "x0": 108.5,
+     "x1": 753,
+     "y0": 221,
+     "y1": 685.25
+    },
+    "outline": 0
+   },
+   "collinearWallPieces": {
+    "bands": [
+     {
+      "from": 476,
+      "to": 556,
+      "thickness": 25
+     }
+    ],
+    "ink": [
+     {
+      "from": 380,
+      "to": 413,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 0.809
+     },
+     {
+      "from": 476,
+      "to": 558,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 2.01
+     },
+     {
+      "from": 718,
+      "to": 754,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 0.883
+     }
+    ]
+   },
+   "facadeGaps": [
+    {
+     "id": "gap-Y-622-413-476",
+     "from": 413,
+     "to": 476,
+     "widthM": 1.544,
+     "jambs": [
+      "WALL",
+      "WALL"
+     ],
+     "signature": "LEAF_FACE",
+     "cls": "UNKNOWN_GAP",
+     "boundary": "WEAK",
+     "callout": null
+    },
+    {
+     "id": "gap-Y-622-558-718",
+     "from": 558,
+     "to": 718,
+     "widthM": 3.922,
+     "jambs": [
+      "WALL",
+      "WALL"
+     ],
+     "signature": "GLAZING",
+     "cls": "OPENING_SUPPORTED",
+     "boundary": "STRONG",
+     "callout": null
+    }
+   ],
+   "perpendicularCandidates": {
+    "bands": [
+     {
+      "axis": "V",
+      "position": 386,
+      "thickness": 13,
+      "from": 506,
+      "to": 615,
+      "meetsFacade": true,
+      "inwardM": 2.856,
+      "wallThick": false
+     },
+     {
+      "axis": "V",
+      "position": 394.5,
+      "thickness": 25,
+      "from": 617,
+      "to": 660,
+      "meetsFacade": true,
+      "inwardM": 0.111,
+      "wallThick": true
+     },
+     {
+      "axis": "V",
+      "position": 737.25,
+      "thickness": 24.5,
+      "from": 662,
+      "to": 711,
+      "meetsFacade": false,
+      "inwardM": 1.001,
+      "wallThick": true
+     },
+     {
+      "axis": "V",
+      "position": 753,
+      "thickness": 25,
+      "from": 234,
+      "to": 608,
+      "meetsFacade": true,
+      "inwardM": 9.581,
+      "wallThick": true
+     }
+    ],
+    "ink": [
+     {
+      "linePx": 386,
+      "meetsFacade": true,
+      "runFrom": 609,
+      "runTo": 660,
+      "kind": "WALL",
+      "inwardM": 1.261
+     },
+     {
+      "linePx": 520.5,
+      "meetsFacade": true,
+      "runFrom": 600,
+      "runTo": 635,
+      "kind": "WALL",
+      "inwardM": 0.865
+     },
+     {
+      "linePx": 753,
+      "meetsFacade": true,
+      "runFrom": 221,
+      "runTo": 634,
+      "kind": "WALL",
+      "inwardM": 10.211
+     }
+    ]
+   },
+   "shortPiers": [],
+   "setbackBackWallCandidates": [],
+   "existingWideGaps": [],
+   "existingBays": [],
+   "cellsNearFacade": [
+    {
+     "ix": 2,
+     "iy": 2,
+     "cls": "B",
+     "rect": [
+      352,
+      330,
+      386,
+      487
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 2,
+     "cls": "B",
+     "rect": [
+      386,
+      330,
+      520.5,
+      487
+     ]
+    },
+    {
+     "ix": 4,
+     "iy": 2,
+     "cls": "B",
+     "rect": [
+      520.5,
+      330,
+      753,
+      487
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 3,
+     "cls": "B",
+     "rect": [
+      352,
+      487,
+      386,
+      509
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 3,
+     "cls": "B",
+     "rect": [
+      386,
+      487,
+      520.5,
+      509
+     ]
+    },
+    {
+     "ix": 4,
+     "iy": 3,
+     "cls": "B",
+     "rect": [
+      520.5,
+      487,
+      753,
+      509
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 4,
+     "cls": "B",
+     "rect": [
+      352,
+      509,
+      386,
+      558
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 4,
+     "cls": "B",
+     "rect": [
+      386,
+      509,
+      520.5,
+      558
+     ]
+    },
+    {
+     "ix": 4,
+     "iy": 4,
+     "cls": "B",
+     "rect": [
+      520.5,
+      509,
+      753,
+      558
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 5,
+     "cls": "B",
+     "rect": [
+      352,
+      558,
+      386,
+      621.5
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 5,
+     "cls": "B",
+     "rect": [
+      386,
+      558,
+      520.5,
+      621.5
+     ]
+    },
+    {
+     "ix": 4,
+     "iy": 5,
+     "cls": "B",
+     "rect": [
+      520.5,
+      558,
+      753,
+      621.5
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 6,
+     "cls": "B",
+     "rect": [
+      352,
+      621.5,
+      386,
+      659
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 6,
+     "cls": "B",
+     "rect": [
+      386,
+      621.5,
+      520.5,
+      659
+     ]
+    },
+    {
+     "ix": 4,
+     "iy": 6,
+     "cls": "B",
+     "rect": [
+      520.5,
+      621.5,
+      753,
+      659
+     ]
+    }
+   ],
+   "recessCells": 0,
+   "builtCells": 15,
+   "regions": [
+    [
+     "BUILT",
+     108.5,
+     221,
+     753,
+     659
+    ]
+   ],
+   "gridLines": {
+    "x": [
+     108.5,
+     303.5,
+     352,
+     386,
+     520.5,
+     753
+    ],
+    "y": [
+     221,
+     245,
+     330,
+     487,
+     509,
+     558,
+     621.5,
+     659
+    ]
+   },
+   "bodies": [],
+   "boundaryAccepted": false,
+   "basePlanConsequence": {
+    "outcome": "FAILED",
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE",
+    "firstFailure": "PLAN_LAYOUT_REJECTED",
+    "gateBlocking": "FOOTPRINT_AREA_WRONG",
+    "selectedPlanFrameId": "frame-asset-rzut-44d6d1166d-006f85ed53"
+   }
+  },
+  {
+   "id": "gozdzikowcach/ground/incumbent/front",
+   "role": "PRIMARY",
+   "row": "dom-w-gozdzikowcach",
+   "frameId": "frame-asset-rzut-01d4b6474c-64bd1e0f2f",
+   "decompositionId": "dec-842fc600add31e2a",
+   "decompositionKey": "frame-asset-rzut-01d4b6474c-64bd1e0f2f|96|221|641|598|0.025344|0.025199|",
+   "storey": "GROUND",
+   "facade": {
+    "side": "S (recess mouth, pier, garage door)",
+    "axis": "Y",
+    "linePx": 598,
+    "spanPx": [
+     208,
+     641
+    ],
+    "inward": "toward smaller coordinates"
+   },
+   "wallThickness": {
+    "px": 12,
+    "m": 0.304
+   },
+   "mpp": {
+    "x": 0.025344,
+    "y": 0.025199
+   },
+   "extentBeforeBoundaryWork": {
+    "x0": 96,
+    "y0": 221,
+    "x1": 641,
+    "y1": 598
+   },
+   "envelope": {
+    "rect": {
+     "x0": 96,
+     "x1": 639,
+     "y0": 221,
+     "y1": 598
+    },
+    "outline": 0
+   },
+   "collinearWallPieces": {
+    "bands": [
+     {
+      "from": 590,
+      "to": 620,
+      "thickness": 17
+     },
+     {
+      "from": 209,
+      "to": 284,
+      "thickness": 17
+     }
+    ],
+    "ink": [
+     {
+      "from": 208,
+      "to": 312,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 2.636
+     },
+     {
+      "from": 434,
+      "to": 465,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 0.786
+     },
+     {
+      "from": 591,
+      "to": 640,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 1.242
+     }
+    ]
+   },
+   "facadeGaps": [
+    {
+     "id": "gap-Y-598-312-434",
+     "from": 312,
+     "to": 434,
+     "widthM": 3.092,
+     "jambs": [
+      "WALL",
+      "WALL"
+     ],
+     "signature": "DASHED",
+     "cls": "UNKNOWN_GAP",
+     "boundary": "WEAK",
+     "callout": null
+    },
+    {
+     "id": "gap-Y-598-465-591",
+     "from": 465,
+     "to": 591,
+     "widthM": 3.193,
+     "jambs": [
+      "WALL",
+      "WALL"
+     ],
+     "signature": "BLANK",
+     "cls": "UNKNOWN_GAP",
+     "boundary": "WEAK",
+     "callout": null
+    }
+   ],
+   "perpendicularCandidates": {
+    "bands": [
+     {
+      "axis": "V",
+      "position": 302,
+      "thickness": 17,
+      "from": 537,
+      "to": 574,
+      "meetsFacade": false,
+      "inwardM": 1.537,
+      "wallThick": true
+     }
+    ],
+    "ink": [
+     {
+      "linePx": 296,
+      "meetsFacade": true,
+      "runFrom": 536,
+      "runTo": 599,
+      "kind": "WALL",
+      "inwardM": 1.588
+     },
+     {
+      "linePx": 302.706,
+      "meetsFacade": true,
+      "runFrom": 536,
+      "runTo": 599,
+      "kind": "WALL",
+      "inwardM": 1.588
+     },
+     {
+      "linePx": 311,
+      "meetsFacade": true,
+      "runFrom": 536,
+      "runTo": 599,
+      "kind": "WALL",
+      "inwardM": 1.588
+     },
+     {
+      "linePx": 326,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 345,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 361,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 371,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 385.5,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 412.5,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 434,
+      "meetsFacade": true,
+      "runFrom": 445,
+      "runTo": 592,
+      "kind": "WALL",
+      "inwardM": 3.704
+     },
+     {
+      "linePx": 452,
+      "meetsFacade": true,
+      "runFrom": 445,
+      "runTo": 592,
+      "kind": "WALL",
+      "inwardM": 3.704
+     },
+     {
+      "linePx": 474.5,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 490.667,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 518.5,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 532.5,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 561,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 628,
+      "meetsFacade": true,
+      "runFrom": 463,
+      "runTo": 599,
+      "kind": "WALL",
+      "inwardM": 3.427
+     },
+     {
+      "linePx": 639,
+      "meetsFacade": true,
+      "runFrom": 463,
+      "runTo": 599,
+      "kind": "WALL",
+      "inwardM": 3.427
+     }
+    ]
+   },
+   "shortPiers": [
+    {
+     "from": 434,
+     "to": 465,
+     "kind": "WALL",
+     "along": true,
+     "lengthM": 0.786,
+     "wallVsPost": "WALL"
+    }
+   ],
+   "setbackBackWallCandidates": [
+    {
+     "linePx": 450.5,
+     "depthM": 3.717,
+     "wallPieces": [
+      [
+       233,
+       314
+      ],
+      [
+       357,
+       368
+      ],
+      [
+       442,
+       454
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-451-116-233",
+       "from": 116,
+       "to": 233,
+       "widthM": 2.965,
+       "cls": "UNKNOWN_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-451-314-357",
+       "from": 314,
+       "to": 357,
+       "widthM": 1.09,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-451-368-442",
+       "from": 368,
+       "to": 442,
+       "widthM": 1.875,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 458.5,
+     "depthM": 3.515,
+     "wallPieces": [
+      [
+       233,
+       302
+      ],
+      [
+       357,
+       368
+      ],
+      [
+       442,
+       454
+      ],
+      [
+       621,
+       639
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-459-199-233",
+       "from": 199,
+       "to": 233,
+       "widthM": 0.862,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-459-302-357",
+       "from": 302,
+       "to": 357,
+       "widthM": 1.394,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-459-368-442",
+       "from": 368,
+       "to": 442,
+       "widthM": 1.875,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-459-454-562",
+       "from": 454,
+       "to": 562,
+       "widthM": 2.737,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-459-576-621",
+       "from": 576,
+       "to": 621,
+       "widthM": 1.14,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 467,
+     "depthM": 3.301,
+     "wallPieces": [
+      [
+       233,
+       302
+      ],
+      [
+       357,
+       368
+      ],
+      [
+       442,
+       454
+      ],
+      [
+       621,
+       639
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-467-199-233",
+       "from": 199,
+       "to": 233,
+       "widthM": 0.862,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-467-302-357",
+       "from": 302,
+       "to": 357,
+       "widthM": 1.394,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-467-368-442",
+       "from": 368,
+       "to": 442,
+       "widthM": 1.875,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-467-454-561",
+       "from": 454,
+       "to": 561,
+       "widthM": 2.712,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-467-576-621",
+       "from": 576,
+       "to": 621,
+       "widthM": 1.14,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 493,
+     "depthM": 2.646,
+     "wallPieces": [
+      [
+       357,
+       368
+      ],
+      [
+       442,
+       454
+      ],
+      [
+       622,
+       639
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-493-116-357",
+       "from": 116,
+       "to": 357,
+       "widthM": 6.108,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-493-368-442",
+       "from": 368,
+       "to": 442,
+       "widthM": 1.875,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-493-454-505",
+       "from": 454,
+       "to": 505,
+       "widthM": 1.293,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-493-520-561",
+       "from": 520,
+       "to": 561,
+       "widthM": 1.039,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-493-576-622",
+       "from": 576,
+       "to": 622,
+       "widthM": 1.166,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 513,
+     "depthM": 2.142,
+     "wallPieces": [
+      [
+       357,
+       367
+      ],
+      [
+       442,
+       454
+      ],
+      [
+       622,
+       639
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-513-172-254",
+       "from": 172,
+       "to": 254,
+       "widthM": 2.078,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-513-268-357",
+       "from": 268,
+       "to": 357,
+       "widthM": 2.256,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-513-367-442",
+       "from": 367,
+       "to": 442,
+       "widthM": 1.901,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-513-454-505",
+       "from": 454,
+       "to": 505,
+       "widthM": 1.293,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-513-520-561",
+       "from": 520,
+       "to": 561,
+       "widthM": 1.039,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-513-576-622",
+       "from": 576,
+       "to": 622,
+       "widthM": 1.166,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 520,
+     "depthM": 1.966,
+     "wallPieces": [
+      [
+       357,
+       367
+      ],
+      [
+       442,
+       454
+      ],
+      [
+       622,
+       639
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-520-172-253",
+       "from": 172,
+       "to": 253,
+       "widthM": 2.053,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-520-268-357",
+       "from": 268,
+       "to": 357,
+       "widthM": 2.256,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-520-367-442",
+       "from": 367,
+       "to": 442,
+       "widthM": 1.901,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-520-454-505",
+       "from": 454,
+       "to": 505,
+       "widthM": 1.293,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-520-520-561",
+       "from": 520,
+       "to": 561,
+       "widthM": 1.039,
+       "cls": "UNKNOWN_GAP",
+       "signature": "LEAF_FACE"
+      },
+      {
+       "id": "gap-Y-520-576-622",
+       "from": 576,
+       "to": 622,
+       "widthM": 1.166,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 537.5,
+     "depthM": 1.525,
+     "wallPieces": [
+      [
+       294,
+       322
+      ],
+      [
+       338,
+       376
+      ],
+      [
+       412,
+       454
+      ],
+      [
+       622,
+       639
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-538-172-262",
+       "from": 172,
+       "to": 262,
+       "widthM": 2.281,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      },
+      {
+       "id": "gap-Y-538-271-294",
+       "from": 271,
+       "to": 294,
+       "widthM": 0.583,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-538-322-338",
+       "from": 322,
+       "to": 338,
+       "widthM": 0.406,
+       "cls": "UNKNOWN_GAP",
+       "signature": "LEAF_FACE"
+      },
+      {
+       "id": "gap-Y-538-376-412",
+       "from": 376,
+       "to": 412,
+       "widthM": 0.912,
+       "cls": "UNKNOWN_GAP",
+       "signature": "LEAF_FACE"
+      },
+      {
+       "id": "gap-Y-538-454-510",
+       "from": 454,
+       "to": 510,
+       "widthM": 1.419,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-538-520-561",
+       "from": 520,
+       "to": 561,
+       "widthM": 1.039,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      },
+      {
+       "id": "gap-Y-538-571-622",
+       "from": 571,
+       "to": 622,
+       "widthM": 1.293,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 550,
+     "depthM": 1.21,
+     "wallPieces": [
+      [
+       294,
+       311
+      ],
+      [
+       338,
+       376
+      ],
+      [
+       412,
+       454
+      ],
+      [
+       622,
+       640
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-550-199-294",
+       "from": 199,
+       "to": 294,
+       "widthM": 2.408,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      },
+      {
+       "id": "gap-Y-550-311-338",
+       "from": 311,
+       "to": 338,
+       "widthM": 0.684,
+       "cls": "UNKNOWN_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-550-376-412",
+       "from": 376,
+       "to": 412,
+       "widthM": 0.912,
+       "cls": "OPENING_SUPPORTED",
+       "signature": "LEAF_AXIS"
+      },
+      {
+       "id": "gap-Y-550-454-622",
+       "from": 454,
+       "to": 622,
+       "widthM": 4.258,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 562,
+     "depthM": 0.907,
+     "wallPieces": [
+      [
+       294,
+       311
+      ],
+      [
+       338,
+       376
+      ],
+      [
+       417,
+       454
+      ],
+      [
+       622,
+       640
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-562-199-294",
+       "from": 199,
+       "to": 294,
+       "widthM": 2.408,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      },
+      {
+       "id": "gap-Y-562-311-338",
+       "from": 311,
+       "to": 338,
+       "widthM": 0.684,
+       "cls": "UNKNOWN_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-562-376-417",
+       "from": 376,
+       "to": 417,
+       "widthM": 1.039,
+       "cls": "UNKNOWN_GAP",
+       "signature": "LEAF_FACE"
+      },
+      {
+       "id": "gap-Y-562-454-590",
+       "from": 454,
+       "to": 590,
+       "widthM": 3.447,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-562-599-622",
+       "from": 599,
+       "to": 622,
+       "widthM": 0.583,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      }
+     ]
+    },
+    {
+     "linePx": 584.5,
+     "depthM": 0.34,
+     "wallPieces": [
+      [
+       208,
+       311
+      ],
+      [
+       434,
+       465
+      ],
+      [
+       590,
+       640
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-585-311-434",
+       "from": 311,
+       "to": 434,
+       "widthM": 3.117,
+       "cls": "UNKNOWN_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-585-465-590",
+       "from": 465,
+       "to": 590,
+       "widthM": 3.168,
+       "cls": "OPENING_SUPPORTED",
+       "signature": "LEAF_FACE"
+      }
+     ]
+    }
+   ],
+   "existingWideGaps": [
+    {
+     "kind": "COLLINEAR_GAP",
+     "linePx": 598,
+     "fromPx": 284,
+     "toPx": 590,
+     "widthM": 7.755264,
+     "infill": 0.388889,
+     "callout": null,
+     "pocketM2": 71.12636,
+     "decision": "OPEN_SIDE"
+    }
+   ],
+   "existingBays": [],
+   "cellsNearFacade": [
+    {
+     "ix": 0,
+     "iy": 4,
+     "cls": "B",
+     "rect": [
+      96,
+      357.5,
+      311,
+      513
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 4,
+     "cls": "O",
+     "rect": [
+      311,
+      357.5,
+      345,
+      513
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 4,
+     "cls": "O",
+     "rect": [
+      345,
+      357.5,
+      434,
+      513
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 4,
+     "cls": "B",
+     "rect": [
+      434,
+      357.5,
+      639,
+      513
+     ]
+    },
+    {
+     "ix": 0,
+     "iy": 5,
+     "cls": "B",
+     "rect": [
+      96,
+      513,
+      311,
+      598
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 5,
+     "cls": "O",
+     "rect": [
+      311,
+      513,
+      345,
+      598
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 5,
+     "cls": "O",
+     "rect": [
+      345,
+      513,
+      434,
+      598
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 5,
+     "cls": "B",
+     "rect": [
+      434,
+      513,
+      639,
+      598
+     ]
+    }
+   ],
+   "recessCells": 0,
+   "builtCells": 4,
+   "regions": [
+    [
+     "BUILT",
+     96,
+     221,
+     311,
+     598
+    ],
+    [
+     "BUILT",
+     434,
+     221,
+     639,
+     598
+    ],
+    [
+     "BUILT",
+     311,
+     221,
+     434,
+     268.5
+    ],
+    [
+     "RECESS",
+     311,
+     268.5,
+     434,
+     289
+    ]
+   ],
+   "gridLines": {
+    "x": [
+     96,
+     311,
+     345,
+     434,
+     639
+    ],
+    "y": [
+     221,
+     268.5,
+     289,
+     335.5,
+     357.5,
+     513,
+     598
+    ]
+   },
+   "bodies": [],
+   "boundaryAccepted": false,
+   "basePlanConsequence": {
+    "outcome": "FAILED",
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE",
+    "firstFailure": null,
+    "gateBlocking": null,
+    "selectedPlanFrameId": "frame-asset-rzut-01d4b6474c-64bd1e0f2f"
+   }
+  },
+  {
+   "id": "jarzabem/ground/incumbent/front",
+   "role": "SECONDARY",
+   "row": "dom-pod-jarzabem",
+   "frameId": "frame-asset-rzut-9354eb066f-397808a266",
+   "decompositionId": "dec-5c5cf173ffe35efa",
+   "decompositionKey": "frame-asset-rzut-9354eb066f-397808a266|103|116|802.5|596.5|0.02788|0.027817|",
+   "storey": "GROUND",
+   "facade": {
+    "side": "S (recessed entrance, no garage on this line)",
+    "axis": "Y",
+    "linePx": 596.5,
+    "spanPx": [
+     263,
+     785
+    ],
+    "inward": "toward smaller coordinates"
+   },
+   "wallThickness": {
+    "px": 11.054688,
+    "m": 0.308
+   },
+   "mpp": {
+    "x": 0.02788,
+    "y": 0.027817
+   },
+   "extentBeforeBoundaryWork": {
+    "x0": 103,
+    "y0": 116,
+    "x1": 802.5,
+    "y1": 596.5
+   },
+   "envelope": {
+    "rect": {
+     "x0": 103,
+     "x1": 777,
+     "y0": 205.875,
+     "y1": 596.5
+    },
+    "outline": 0
+   },
+   "collinearWallPieces": {
+    "bands": [
+     {
+      "from": 382,
+      "to": 413,
+      "thickness": 17
+     },
+     {
+      "from": 740,
+      "to": 768,
+      "thickness": 18
+     },
+     {
+      "from": 635,
+      "to": 655,
+      "thickness": 16
+     }
+    ],
+    "ink": [
+     {
+      "from": 263,
+      "to": 311,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 1.338
+     },
+     {
+      "from": 382,
+      "to": 430,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 1.338
+     },
+     {
+      "from": 519,
+      "to": 528,
+      "kind": "POST",
+      "along": false,
+      "lengthM": 0.251
+     },
+     {
+      "from": 618,
+      "to": 669,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 1.422
+     },
+     {
+      "from": 740,
+      "to": 786,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 1.282
+     }
+    ]
+   },
+   "facadeGaps": [
+    {
+     "id": "gap-Y-597-311-382",
+     "from": 311,
+     "to": 382,
+     "widthM": 1.979,
+     "jambs": [
+      "WALL",
+      "WALL"
+     ],
+     "signature": "DASHED",
+     "cls": "UNKNOWN_GAP",
+     "boundary": "WEAK",
+     "callout": null
+    },
+    {
+     "id": "gap-Y-597-430-519",
+     "from": 430,
+     "to": 519,
+     "widthM": 2.481,
+     "jambs": [
+      "WALL",
+      "POST"
+     ],
+     "signature": "BLANK",
+     "cls": "TRUE_EXTERIOR_GAP",
+     "boundary": "NONE",
+     "callout": null
+    },
+    {
+     "id": "gap-Y-597-528-618",
+     "from": 528,
+     "to": 618,
+     "widthM": 2.509,
+     "jambs": [
+      "POST",
+      "WALL"
+     ],
+     "signature": "BLANK",
+     "cls": "TRUE_EXTERIOR_GAP",
+     "boundary": "NONE",
+     "callout": null
+    },
+    {
+     "id": "gap-Y-597-669-740",
+     "from": 669,
+     "to": 740,
+     "widthM": 1.979,
+     "jambs": [
+      "WALL",
+      "WALL"
+     ],
+     "signature": "DASHED",
+     "cls": "UNKNOWN_GAP",
+     "boundary": "WEAK",
+     "callout": null
+    }
+   ],
+   "perpendicularCandidates": {
+    "bands": [
+     {
+      "axis": "V",
+      "position": 271.5,
+      "thickness": 16,
+      "from": 561,
+      "to": 580,
+      "meetsFacade": false,
+      "inwardM": 0.988,
+      "wallThick": true
+     },
+     {
+      "axis": "V",
+      "position": 777,
+      "thickness": 17,
+      "from": 472,
+      "to": 580,
+      "meetsFacade": false,
+      "inwardM": 3.463,
+      "wallThick": true
+     }
+    ],
+    "ink": [
+     {
+      "linePx": 263,
+      "meetsFacade": true,
+      "runFrom": 446,
+      "runTo": 598,
+      "kind": "WALL",
+      "inwardM": 4.228
+     },
+     {
+      "linePx": 275,
+      "meetsFacade": true,
+      "runFrom": 446,
+      "runTo": 597,
+      "kind": "WALL",
+      "inwardM": 4.2
+     },
+     {
+      "linePx": 295,
+      "meetsFacade": true,
+      "runFrom": 580,
+      "runTo": 597,
+      "kind": "WALL",
+      "inwardM": 0.473
+     },
+     {
+      "linePx": 301.5,
+      "meetsFacade": true,
+      "runFrom": 580,
+      "runTo": 597,
+      "kind": "WALL",
+      "inwardM": 0.473
+     },
+     {
+      "linePx": 316,
+      "meetsFacade": true,
+      "runFrom": 580,
+      "runTo": 597,
+      "kind": "WALL",
+      "inwardM": 0.473
+     },
+     {
+      "linePx": 334,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 342,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 370,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 401,
+      "meetsFacade": true,
+      "runFrom": 580,
+      "runTo": 597,
+      "kind": "WALL",
+      "inwardM": 0.473
+     },
+     {
+      "linePx": 421,
+      "meetsFacade": true,
+      "runFrom": 548,
+      "runTo": 597,
+      "kind": "WALL",
+      "inwardM": 1.363
+     },
+     {
+      "linePx": 430,
+      "meetsFacade": true,
+      "runFrom": 548,
+      "runTo": 597,
+      "kind": "WALL",
+      "inwardM": 1.363
+     },
+     {
+      "linePx": 451,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 476.273,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 483.5,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 512,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 579,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 606.5,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 777,
+      "meetsFacade": true,
+      "runFrom": 456,
+      "runTo": 597,
+      "kind": "WALL",
+      "inwardM": 3.922
+     },
+     {
+      "linePx": 785,
+      "meetsFacade": true,
+      "runFrom": 447,
+      "runTo": 597,
+      "kind": "WALL",
+      "inwardM": 4.173
+     }
+    ]
+   },
+   "shortPiers": [
+    {
+     "from": 382,
+     "to": 430,
+     "kind": "WALL",
+     "along": true,
+     "lengthM": 1.338,
+     "wallVsPost": "WALL"
+    },
+    {
+     "from": 519,
+     "to": 528,
+     "kind": "POST",
+     "along": false,
+     "lengthM": 0.251,
+     "wallVsPost": "POST"
+    },
+    {
+     "from": 618,
+     "to": 669,
+     "kind": "WALL",
+     "along": true,
+     "lengthM": 1.422,
+     "wallVsPost": "WALL"
+    }
+   ],
+   "setbackBackWallCandidates": [
+    {
+     "linePx": 437.5,
+     "depthM": 4.423,
+     "wallPieces": [
+      [
+       269,
+       280
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-438-216-269",
+       "from": 216,
+       "to": 269,
+       "widthM": 1.478,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-438-280-328",
+       "from": 280,
+       "to": 328,
+       "widthM": 1.338,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-438-342-367",
+       "from": 342,
+       "to": 367,
+       "widthM": 0.697,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "LEAF_FACE"
+      },
+      {
+       "id": "gap-Y-438-378-396",
+       "from": 378,
+       "to": 396,
+       "widthM": 0.502,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-438-405-625",
+       "from": 405,
+       "to": 625,
+       "widthM": 6.134,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 451,
+     "depthM": 4.047,
+     "wallPieces": [
+      [
+       269,
+       280
+      ],
+      [
+       769,
+       802
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-451-120-269",
+       "from": 120,
+       "to": 269,
+       "widthM": 4.154,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-451-280-328",
+       "from": 280,
+       "to": 328,
+       "widthM": 1.338,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "LEAF_AXIS"
+      },
+      {
+       "id": "gap-Y-451-339-418",
+       "from": 339,
+       "to": 418,
+       "widthM": 2.203,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-451-429-507",
+       "from": 429,
+       "to": 507,
+       "widthM": 2.175,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-451-520-622",
+       "from": 520,
+       "to": 622,
+       "widthM": 2.844,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-451-636-769",
+       "from": 636,
+       "to": 769,
+       "widthM": 3.708,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 468.5,
+     "depthM": 3.561,
+     "wallPieces": [
+      [
+       269,
+       280
+      ],
+      [
+       408,
+       429
+      ],
+      [
+       769,
+       802
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-469-216-269",
+       "from": 216,
+       "to": 269,
+       "widthM": 1.478,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-469-280-312",
+       "from": 280,
+       "to": 312,
+       "widthM": 0.892,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      },
+      {
+       "id": "gap-Y-469-321-408",
+       "from": 321,
+       "to": 408,
+       "widthM": 2.426,
+       "cls": "UNKNOWN_GAP",
+       "signature": "LEAF_FACE"
+      },
+      {
+       "id": "gap-Y-469-429-507",
+       "from": 429,
+       "to": 507,
+       "widthM": 2.175,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-469-520-597",
+       "from": 520,
+       "to": 597,
+       "widthM": 2.147,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-469-613-621",
+       "from": 613,
+       "to": 621,
+       "widthM": 0.223,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      },
+      {
+       "id": "gap-Y-469-641-769",
+       "from": 641,
+       "to": 769,
+       "widthM": 3.569,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 479.5,
+     "depthM": 3.255,
+     "wallPieces": [
+      [
+       265,
+       280
+      ],
+      [
+       408,
+       429
+      ],
+      [
+       769,
+       786
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-480-216-265",
+       "from": 216,
+       "to": 265,
+       "widthM": 1.366,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-480-280-312",
+       "from": 280,
+       "to": 312,
+       "widthM": 0.892,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      },
+      {
+       "id": "gap-Y-480-321-408",
+       "from": 321,
+       "to": 408,
+       "widthM": 2.426,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      },
+      {
+       "id": "gap-Y-480-429-501",
+       "from": 429,
+       "to": 501,
+       "widthM": 2.007,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-480-520-592",
+       "from": 520,
+       "to": 592,
+       "widthM": 2.007,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-480-613-621",
+       "from": 613,
+       "to": 621,
+       "widthM": 0.223,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      },
+      {
+       "id": "gap-Y-480-641-769",
+       "from": 641,
+       "to": 769,
+       "widthM": 3.569,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 492,
+     "depthM": 2.907,
+     "wallPieces": [
+      [
+       261,
+       280
+      ],
+      [
+       408,
+       429
+      ],
+      [
+       769,
+       786
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-492-280-312",
+       "from": 280,
+       "to": 312,
+       "widthM": 0.892,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-492-321-408",
+       "from": 321,
+       "to": 408,
+       "widthM": 2.426,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-492-429-631",
+       "from": 429,
+       "to": 631,
+       "widthM": 5.632,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-492-641-769",
+       "from": 641,
+       "to": 769,
+       "widthM": 3.569,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 516.5,
+     "depthM": 2.225,
+     "wallPieces": [
+      [
+       261,
+       280
+      ],
+      [
+       413,
+       432
+      ],
+      [
+       769,
+       786
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-517-280-413",
+       "from": 280,
+       "to": 413,
+       "widthM": 3.708,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-517-432-468",
+       "from": 432,
+       "to": 468,
+       "widthM": 1.004,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-517-481-497",
+       "from": 481,
+       "to": 497,
+       "widthM": 0.446,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-517-518-538",
+       "from": 518,
+       "to": 538,
+       "widthM": 0.558,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-517-557-769",
+       "from": 557,
+       "to": 769,
+       "widthM": 5.911,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 535.5,
+     "depthM": 1.697,
+     "wallPieces": [
+      [
+       263,
+       280
+      ],
+      [
+       413,
+       432
+      ],
+      [
+       769,
+       786
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-536-280-413",
+       "from": 280,
+       "to": 413,
+       "widthM": 3.708,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "LEAF_AXIS"
+      },
+      {
+       "id": "gap-Y-536-432-468",
+       "from": 432,
+       "to": 468,
+       "widthM": 1.004,
+       "cls": "UNKNOWN_GAP",
+       "signature": "LEAF_AXIS"
+      },
+      {
+       "id": "gap-Y-536-480-497",
+       "from": 480,
+       "to": 497,
+       "widthM": 0.474,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-536-511-541",
+       "from": 511,
+       "to": 541,
+       "widthM": 0.836,
+       "cls": "UNKNOWN_GAP",
+       "signature": "LEAF_FACE"
+      },
+      {
+       "id": "gap-Y-536-557-694",
+       "from": 557,
+       "to": 694,
+       "widthM": 3.82,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      },
+      {
+       "id": "gap-Y-536-710-769",
+       "from": 710,
+       "to": 769,
+       "widthM": 1.645,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      }
+     ]
+    },
+    {
+     "linePx": 562.875,
+     "depthM": 0.935,
+     "wallPieces": [
+      [
+       237,
+       280
+      ],
+      [
+       413,
+       443
+      ],
+      [
+       467,
+       511
+      ],
+      [
+       543,
+       582
+      ],
+      [
+       606,
+       636
+      ],
+      [
+       769,
+       786
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-563-280-413",
+       "from": 280,
+       "to": 413,
+       "widthM": 3.708,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-563-443-467",
+       "from": 443,
+       "to": 467,
+       "widthM": 0.669,
+       "cls": "OPENING_SUPPORTED",
+       "signature": "GLAZING"
+      },
+      {
+       "id": "gap-Y-563-511-543",
+       "from": 511,
+       "to": 543,
+       "widthM": 0.892,
+       "cls": "OPENING_SUPPORTED",
+       "signature": "LEAF_AXIS"
+      },
+      {
+       "id": "gap-Y-563-582-606",
+       "from": 582,
+       "to": 606,
+       "widthM": 0.669,
+       "cls": "OPENING_SUPPORTED",
+       "signature": "GLAZING"
+      },
+      {
+       "id": "gap-Y-563-636-769",
+       "from": 636,
+       "to": 769,
+       "widthM": 3.708,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      }
+     ]
+    },
+    {
+     "linePx": 579,
+     "depthM": 0.487,
+     "wallPieces": [
+      [
+       263,
+       317
+      ],
+      [
+       382,
+       430
+      ],
+      [
+       619,
+       669
+      ],
+      [
+       733,
+       786
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-579-317-382",
+       "from": 317,
+       "to": 382,
+       "widthM": 1.812,
+       "cls": "OPENING_SUPPORTED",
+       "signature": "GLAZING"
+      },
+      {
+       "id": "gap-Y-579-430-519",
+       "from": 430,
+       "to": 519,
+       "widthM": 2.481,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-579-530-589",
+       "from": 530,
+       "to": 589,
+       "widthM": 1.645,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-579-598-619",
+       "from": 598,
+       "to": 619,
+       "widthM": 0.585,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-579-669-704",
+       "from": 669,
+       "to": 704,
+       "widthM": 0.976,
+       "cls": "OPENING_SUPPORTED",
+       "signature": "GLAZING"
+      },
+      {
+       "id": "gap-Y-579-713-733",
+       "from": 713,
+       "to": 733,
+       "widthM": 0.558,
+       "cls": "UNKNOWN_GAP",
+       "signature": "LEAF_FACE"
+      }
+     ]
+    }
+   ],
+   "existingWideGaps": [
+    {
+     "kind": "COLLINEAR_GAP",
+     "linePx": 596.5,
+     "fromPx": 413,
+     "toPx": 635,
+     "widthM": 6.18936,
+     "infill": 0.774775,
+     "callout": null,
+     "pocketM2": null,
+     "decision": "OPENING_IN_WALL"
+    }
+   ],
+   "existingBays": [],
+   "cellsNearFacade": [
+    {
+     "ix": 1,
+     "iy": 5,
+     "cls": "B",
+     "rect": [
+      263,
+      372,
+      316,
+      422
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 5,
+     "cls": "B",
+     "rect": [
+      316,
+      372,
+      421,
+      422
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 5,
+     "cls": "B",
+     "rect": [
+      421,
+      372,
+      451,
+      422
+     ]
+    },
+    {
+     "ix": 4,
+     "iy": 5,
+     "cls": "B",
+     "rect": [
+      451,
+      372,
+      476.272727,
+      422
+     ]
+    },
+    {
+     "ix": 5,
+     "iy": 5,
+     "cls": "B",
+     "rect": [
+      476.272727,
+      372,
+      512,
+      422
+     ]
+    },
+    {
+     "ix": 6,
+     "iy": 5,
+     "cls": "B",
+     "rect": [
+      512,
+      372,
+      579,
+      422
+     ]
+    },
+    {
+     "ix": 7,
+     "iy": 5,
+     "cls": "B",
+     "rect": [
+      579,
+      372,
+      606.5,
+      422
+     ]
+    },
+    {
+     "ix": 8,
+     "iy": 5,
+     "cls": "B",
+     "rect": [
+      606.5,
+      372,
+      777,
+      422
+     ]
+    },
+    {
+     "ix": 9,
+     "iy": 5,
+     "cls": "O",
+     "rect": [
+      777,
+      372,
+      801,
+      422
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 6,
+     "cls": "B",
+     "rect": [
+      263,
+      422,
+      316,
+      468.5
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 6,
+     "cls": "B",
+     "rect": [
+      316,
+      422,
+      421,
+      468.5
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 6,
+     "cls": "B",
+     "rect": [
+      421,
+      422,
+      451,
+      468.5
+     ]
+    },
+    {
+     "ix": 4,
+     "iy": 6,
+     "cls": "B",
+     "rect": [
+      451,
+      422,
+      476.272727,
+      468.5
+     ]
+    },
+    {
+     "ix": 5,
+     "iy": 6,
+     "cls": "B",
+     "rect": [
+      476.272727,
+      422,
+      512,
+      468.5
+     ]
+    },
+    {
+     "ix": 6,
+     "iy": 6,
+     "cls": "B",
+     "rect": [
+      512,
+      422,
+      579,
+      468.5
+     ]
+    },
+    {
+     "ix": 7,
+     "iy": 6,
+     "cls": "B",
+     "rect": [
+      579,
+      422,
+      606.5,
+      468.5
+     ]
+    },
+    {
+     "ix": 8,
+     "iy": 6,
+     "cls": "B",
+     "rect": [
+      606.5,
+      422,
+      777,
+      468.5
+     ]
+    },
+    {
+     "ix": 9,
+     "iy": 6,
+     "cls": "O",
+     "rect": [
+      777,
+      422,
+      801,
+      468.5
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 7,
+     "cls": "B",
+     "rect": [
+      263,
+      468.5,
+      316,
+      492
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 7,
+     "cls": "B",
+     "rect": [
+      316,
+      468.5,
+      421,
+      492
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 7,
+     "cls": "B",
+     "rect": [
+      421,
+      468.5,
+      451,
+      492
+     ]
+    },
+    {
+     "ix": 4,
+     "iy": 7,
+     "cls": "B",
+     "rect": [
+      451,
+      468.5,
+      476.272727,
+      492
+     ]
+    },
+    {
+     "ix": 5,
+     "iy": 7,
+     "cls": "B",
+     "rect": [
+      476.272727,
+      468.5,
+      512,
+      492
+     ]
+    },
+    {
+     "ix": 6,
+     "iy": 7,
+     "cls": "B",
+     "rect": [
+      512,
+      468.5,
+      579,
+      492
+     ]
+    },
+    {
+     "ix": 7,
+     "iy": 7,
+     "cls": "B",
+     "rect": [
+      579,
+      468.5,
+      606.5,
+      492
+     ]
+    },
+    {
+     "ix": 8,
+     "iy": 7,
+     "cls": "B",
+     "rect": [
+      606.5,
+      468.5,
+      777,
+      492
+     ]
+    },
+    {
+     "ix": 9,
+     "iy": 7,
+     "cls": "O",
+     "rect": [
+      777,
+      468.5,
+      801,
+      492
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 8,
+     "cls": "B",
+     "rect": [
+      263,
+      492,
+      316,
+      516.5
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 8,
+     "cls": "B",
+     "rect": [
+      316,
+      492,
+      421,
+      516.5
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 8,
+     "cls": "B",
+     "rect": [
+      421,
+      492,
+      451,
+      516.5
+     ]
+    },
+    {
+     "ix": 4,
+     "iy": 8,
+     "cls": "B",
+     "rect": [
+      451,
+      492,
+      476.272727,
+      516.5
+     ]
+    },
+    {
+     "ix": 5,
+     "iy": 8,
+     "cls": "B",
+     "rect": [
+      476.272727,
+      492,
+      512,
+      516.5
+     ]
+    },
+    {
+     "ix": 6,
+     "iy": 8,
+     "cls": "B",
+     "rect": [
+      512,
+      492,
+      579,
+      516.5
+     ]
+    },
+    {
+     "ix": 7,
+     "iy": 8,
+     "cls": "B",
+     "rect": [
+      579,
+      492,
+      606.5,
+      516.5
+     ]
+    },
+    {
+     "ix": 8,
+     "iy": 8,
+     "cls": "B",
+     "rect": [
+      606.5,
+      492,
+      777,
+      516.5
+     ]
+    },
+    {
+     "ix": 9,
+     "iy": 8,
+     "cls": "O",
+     "rect": [
+      777,
+      492,
+      801,
+      516.5
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 9,
+     "cls": "B",
+     "rect": [
+      263,
+      516.5,
+      316,
+      535.5
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 9,
+     "cls": "B",
+     "rect": [
+      316,
+      516.5,
+      421,
+      535.5
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 9,
+     "cls": "B",
+     "rect": [
+      421,
+      516.5,
+      451,
+      535.5
+     ]
+    },
+    {
+     "ix": 4,
+     "iy": 9,
+     "cls": "B",
+     "rect": [
+      451,
+      516.5,
+      476.272727,
+      535.5
+     ]
+    },
+    {
+     "ix": 5,
+     "iy": 9,
+     "cls": "B",
+     "rect": [
+      476.272727,
+      516.5,
+      512,
+      535.5
+     ]
+    },
+    {
+     "ix": 6,
+     "iy": 9,
+     "cls": "B",
+     "rect": [
+      512,
+      516.5,
+      579,
+      535.5
+     ]
+    },
+    {
+     "ix": 7,
+     "iy": 9,
+     "cls": "B",
+     "rect": [
+      579,
+      516.5,
+      606.5,
+      535.5
+     ]
+    },
+    {
+     "ix": 8,
+     "iy": 9,
+     "cls": "B",
+     "rect": [
+      606.5,
+      516.5,
+      777,
+      535.5
+     ]
+    },
+    {
+     "ix": 9,
+     "iy": 9,
+     "cls": "O",
+     "rect": [
+      777,
+      516.5,
+      801,
+      535.5
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 10,
+     "cls": "B",
+     "rect": [
+      263,
+      535.5,
+      316,
+      562.875
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 10,
+     "cls": "B",
+     "rect": [
+      316,
+      535.5,
+      421,
+      562.875
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 10,
+     "cls": "B",
+     "rect": [
+      421,
+      535.5,
+      451,
+      562.875
+     ]
+    },
+    {
+     "ix": 4,
+     "iy": 10,
+     "cls": "B",
+     "rect": [
+      451,
+      535.5,
+      476.272727,
+      562.875
+     ]
+    },
+    {
+     "ix": 5,
+     "iy": 10,
+     "cls": "B",
+     "rect": [
+      476.272727,
+      535.5,
+      512,
+      562.875
+     ]
+    },
+    {
+     "ix": 6,
+     "iy": 10,
+     "cls": "B",
+     "rect": [
+      512,
+      535.5,
+      579,
+      562.875
+     ]
+    },
+    {
+     "ix": 7,
+     "iy": 10,
+     "cls": "B",
+     "rect": [
+      579,
+      535.5,
+      606.5,
+      562.875
+     ]
+    },
+    {
+     "ix": 8,
+     "iy": 10,
+     "cls": "B",
+     "rect": [
+      606.5,
+      535.5,
+      777,
+      562.875
+     ]
+    },
+    {
+     "ix": 9,
+     "iy": 10,
+     "cls": "O",
+     "rect": [
+      777,
+      535.5,
+      801,
+      562.875
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 11,
+     "cls": "B",
+     "rect": [
+      263,
+      562.875,
+      316,
+      596.5
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 11,
+     "cls": "B",
+     "rect": [
+      316,
+      562.875,
+      421,
+      596.5
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 11,
+     "cls": "B",
+     "rect": [
+      421,
+      562.875,
+      451,
+      596.5
+     ]
+    },
+    {
+     "ix": 4,
+     "iy": 11,
+     "cls": "B",
+     "rect": [
+      451,
+      562.875,
+      476.272727,
+      596.5
+     ]
+    },
+    {
+     "ix": 5,
+     "iy": 11,
+     "cls": "B",
+     "rect": [
+      476.272727,
+      562.875,
+      512,
+      596.5
+     ]
+    },
+    {
+     "ix": 6,
+     "iy": 11,
+     "cls": "B",
+     "rect": [
+      512,
+      562.875,
+      579,
+      596.5
+     ]
+    },
+    {
+     "ix": 7,
+     "iy": 11,
+     "cls": "B",
+     "rect": [
+      579,
+      562.875,
+      606.5,
+      596.5
+     ]
+    },
+    {
+     "ix": 8,
+     "iy": 11,
+     "cls": "B",
+     "rect": [
+      606.5,
+      562.875,
+      777,
+      596.5
+     ]
+    },
+    {
+     "ix": 9,
+     "iy": 11,
+     "cls": "O",
+     "rect": [
+      777,
+      562.875,
+      801,
+      596.5
+     ]
+    }
+   ],
+   "recessCells": 0,
+   "builtCells": 56,
+   "regions": [
+    [
+     "BUILT",
+     103,
+     205.875,
+     777,
+     596.5
+    ]
+   ],
+   "gridLines": {
+    "x": [
+     103,
+     263,
+     316,
+     421,
+     451,
+     476.273,
+     512,
+     579,
+     606.5,
+     777,
+     801
+    ],
+    "y": [
+     116,
+     205.875,
+     239,
+     258.5,
+     292,
+     372,
+     422,
+     468.5,
+     492,
+     516.5,
+     535.5,
+     562.875,
+     596.5
+    ]
+   },
+   "bodies": [
+    {
+     "id": "body-0",
+     "relation": "COVERED_TERRACE",
+     "enclosed": false,
+     "built": false,
+     "areaM2": 12.442,
+     "rect": {
+      "x0": 606.5,
+      "y0": 116,
+      "x1": 785,
+      "y1": 205.875
+     },
+     "mouth": {
+      "widthM": 1.975007,
+      "signature": "DASHED",
+      "jambs": [
+       "POST",
+       "WALL"
+      ],
+      "gapId": "gap-X-607-133-204"
+     }
+    },
+    {
+     "id": "body-1",
+     "relation": "FLUSH_ATTACHED",
+     "enclosed": true,
+     "built": false,
+     "areaM2": 0.848,
+     "rect": {
+      "x0": 777,
+      "y0": 205.875,
+      "x1": 785,
+      "y1": 342.5
+     },
+     "mouth": null
+    },
+    {
+     "id": "body-2",
+     "relation": "UNKNOWN",
+     "enclosed": false,
+     "built": false,
+     "areaM2": 2.023,
+     "rect": {
+      "x0": 777,
+      "y0": 342.5,
+      "x1": 801,
+      "y1": 468.5
+     },
+     "mouth": null
+    },
+    {
+     "id": "body-3",
+     "relation": "SEPARATE_BODY",
+     "enclosed": true,
+     "built": false,
+     "areaM2": 0.105,
+     "rect": {
+      "x0": 785,
+      "y0": 342.5,
+      "x1": 801,
+      "y1": 351
+     },
+     "mouth": null
+    },
+    {
+     "id": "body-4",
+     "relation": "SEPARATE_BODY",
+     "enclosed": true,
+     "built": false,
+     "areaM2": 0.217,
+     "rect": {
+      "x0": 785,
+      "y0": 451,
+      "x1": 801,
+      "y1": 468.5
+     },
+     "mouth": null
+    },
+    {
+     "id": "body-5",
+     "relation": "FLUSH_ATTACHED",
+     "enclosed": true,
+     "built": false,
+     "areaM2": 0.794,
+     "rect": {
+      "x0": 777,
+      "y0": 468.5,
+      "x1": 785,
+      "y1": 596.5
+     },
+     "mouth": null
+    }
+   ],
+   "boundaryAccepted": false,
+   "basePlanConsequence": {
+    "outcome": "COMPLETED",
+    "modelHash": "df2aa66c8591107a1ff3608d02164ad80f4a7609c963915cb17fe7312e64553f"
+   }
+  },
+  {
+   "id": "jarzabem/ground/incumbent/setback",
+   "role": "SECONDARY",
+   "row": "dom-pod-jarzabem",
+   "frameId": "frame-asset-rzut-9354eb066f-397808a266",
+   "decompositionId": "dec-5c5cf173ffe35efa",
+   "decompositionKey": "frame-asset-rzut-9354eb066f-397808a266|103|116|802.5|596.5|0.02788|0.027817|",
+   "storey": "GROUND",
+   "facade": {
+    "side": "S (the vestibule’s back-wall line)",
+    "axis": "Y",
+    "linePx": 562.875,
+    "spanPx": [
+     263,
+     785
+    ],
+    "inward": "toward smaller coordinates"
+   },
+   "wallThickness": {
+    "px": 11.054688,
+    "m": 0.308
+   },
+   "mpp": {
+    "x": 0.02788,
+    "y": 0.027817
+   },
+   "extentBeforeBoundaryWork": {
+    "x0": 103,
+    "y0": 116,
+    "x1": 802.5,
+    "y1": 596.5
+   },
+   "envelope": {
+    "rect": {
+     "x0": 103,
+     "x1": 777,
+     "y0": 205.875,
+     "y1": 596.5
+    },
+    "outline": 0
+   },
+   "collinearWallPieces": {
+    "bands": [
+     {
+      "from": 477,
+      "to": 500,
+      "thickness": 16
+     },
+     {
+      "from": 554,
+      "to": 576,
+      "thickness": 16
+     }
+    ],
+    "ink": [
+     {
+      "from": 237,
+      "to": 280,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 1.199
+     },
+     {
+      "from": 413,
+      "to": 443,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 0.836
+     },
+     {
+      "from": 467,
+      "to": 511,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 1.227
+     },
+     {
+      "from": 543,
+      "to": 582,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 1.087
+     },
+     {
+      "from": 606,
+      "to": 636,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 0.836
+     },
+     {
+      "from": 769,
+      "to": 786,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 0.474
+     }
+    ]
+   },
+   "facadeGaps": [
+    {
+     "id": "gap-Y-563-280-413",
+     "from": 280,
+     "to": 413,
+     "widthM": 3.708,
+     "jambs": [
+      "WALL",
+      "WALL"
+     ],
+     "signature": "BLANK",
+     "cls": "TRUE_EXTERIOR_GAP",
+     "boundary": "NONE",
+     "callout": null
+    },
+    {
+     "id": "gap-Y-563-443-467",
+     "from": 443,
+     "to": 467,
+     "widthM": 0.669,
+     "jambs": [
+      "WALL",
+      "WALL"
+     ],
+     "signature": "GLAZING",
+     "cls": "OPENING_SUPPORTED",
+     "boundary": "STRONG",
+     "callout": null
+    },
+    {
+     "id": "gap-Y-563-511-543",
+     "from": 511,
+     "to": 543,
+     "widthM": 0.892,
+     "jambs": [
+      "WALL",
+      "WALL"
+     ],
+     "signature": "LEAF_AXIS",
+     "cls": "OPENING_SUPPORTED",
+     "boundary": "STRONG",
+     "callout": null
+    },
+    {
+     "id": "gap-Y-563-582-606",
+     "from": 582,
+     "to": 606,
+     "widthM": 0.669,
+     "jambs": [
+      "WALL",
+      "WALL"
+     ],
+     "signature": "GLAZING",
+     "cls": "OPENING_SUPPORTED",
+     "boundary": "STRONG",
+     "callout": null
+    },
+    {
+     "id": "gap-Y-563-636-769",
+     "from": 636,
+     "to": 769,
+     "widthM": 3.708,
+     "jambs": [
+      "WALL",
+      "WALL"
+     ],
+     "signature": "DASHED",
+     "cls": "TRUE_EXTERIOR_GAP",
+     "boundary": "NONE",
+     "callout": null
+    }
+   ],
+   "perpendicularCandidates": {
+    "bands": [
+     {
+      "axis": "V",
+      "position": 271.5,
+      "thickness": 16,
+      "from": 561,
+      "to": 580,
+      "meetsFacade": true,
+      "inwardM": 0.052,
+      "wallThick": true
+     },
+     {
+      "axis": "V",
+      "position": 579,
+      "thickness": 5,
+      "from": 495,
+      "to": 548,
+      "meetsFacade": false,
+      "inwardM": 1.888,
+      "wallThick": false
+     },
+     {
+      "axis": "V",
+      "position": 777,
+      "thickness": 17,
+      "from": 472,
+      "to": 580,
+      "meetsFacade": false,
+      "inwardM": 2.528,
+      "wallThick": true
+     }
+    ],
+    "ink": [
+     {
+      "linePx": 263,
+      "meetsFacade": true,
+      "runFrom": 446,
+      "runTo": 598,
+      "kind": "WALL",
+      "inwardM": 4.228
+     },
+     {
+      "linePx": 275,
+      "meetsFacade": true,
+      "runFrom": 446,
+      "runTo": 597,
+      "kind": "WALL",
+      "inwardM": 4.2
+     },
+     {
+      "linePx": 295,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 301.5,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 316,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 334,
+      "meetsFacade": true,
+      "runFrom": 548,
+      "runTo": 560,
+      "kind": "POST",
+      "inwardM": 0.334
+     },
+     {
+      "linePx": 342,
+      "meetsFacade": true,
+      "runFrom": 548,
+      "runTo": 560,
+      "kind": "POST",
+      "inwardM": 0.334
+     },
+     {
+      "linePx": 370,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 401,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 421,
+      "meetsFacade": true,
+      "runFrom": 548,
+      "runTo": 597,
+      "kind": "WALL",
+      "inwardM": 1.363
+     },
+     {
+      "linePx": 430,
+      "meetsFacade": true,
+      "runFrom": 548,
+      "runTo": 597,
+      "kind": "WALL",
+      "inwardM": 1.363
+     },
+     {
+      "linePx": 451,
+      "meetsFacade": true,
+      "runFrom": 550,
+      "runTo": 568,
+      "kind": "WALL",
+      "inwardM": 0.501
+     },
+     {
+      "linePx": 476.273,
+      "meetsFacade": true,
+      "runFrom": 548,
+      "runTo": 568,
+      "kind": "WALL",
+      "inwardM": 0.556
+     },
+     {
+      "linePx": 483.5,
+      "meetsFacade": true,
+      "runFrom": 548,
+      "runTo": 565,
+      "kind": "WALL",
+      "inwardM": 0.473
+     },
+     {
+      "linePx": 512,
+      "meetsFacade": true,
+      "runFrom": 548,
+      "runTo": 565,
+      "kind": "WALL",
+      "inwardM": 0.473
+     },
+     {
+      "linePx": 579,
+      "meetsFacade": true,
+      "runFrom": 548,
+      "runTo": 568,
+      "kind": "WALL",
+      "inwardM": 0.556
+     },
+     {
+      "linePx": 606.5,
+      "meetsFacade": true,
+      "runFrom": 548,
+      "runTo": 568,
+      "kind": "WALL",
+      "inwardM": 0.556
+     },
+     {
+      "linePx": 777,
+      "meetsFacade": true,
+      "runFrom": 456,
+      "runTo": 597,
+      "kind": "WALL",
+      "inwardM": 3.922
+     },
+     {
+      "linePx": 785,
+      "meetsFacade": true,
+      "runFrom": 447,
+      "runTo": 597,
+      "kind": "WALL",
+      "inwardM": 4.173
+     }
+    ]
+   },
+   "shortPiers": [
+    {
+     "from": 413,
+     "to": 443,
+     "kind": "WALL",
+     "along": true,
+     "lengthM": 0.836,
+     "wallVsPost": "WALL"
+    },
+    {
+     "from": 467,
+     "to": 511,
+     "kind": "WALL",
+     "along": true,
+     "lengthM": 1.227,
+     "wallVsPost": "WALL"
+    },
+    {
+     "from": 543,
+     "to": 582,
+     "kind": "WALL",
+     "along": true,
+     "lengthM": 1.087,
+     "wallVsPost": "WALL"
+    },
+    {
+     "from": 606,
+     "to": 636,
+     "kind": "WALL",
+     "along": true,
+     "lengthM": 0.836,
+     "wallVsPost": "WALL"
+    }
+   ],
+   "setbackBackWallCandidates": [
+    {
+     "linePx": 411,
+     "depthM": 4.225,
+     "wallPieces": [
+      [
+       269,
+       280
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-411-216-269",
+       "from": 216,
+       "to": 269,
+       "widthM": 1.478,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-411-280-294",
+       "from": 280,
+       "to": 294,
+       "widthM": 0.39,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-411-305-312",
+       "from": 305,
+       "to": 312,
+       "widthM": 0.195,
+       "cls": "UNKNOWN_GAP",
+       "signature": "LEAF_FACE"
+      },
+      {
+       "id": "gap-Y-411-353-368",
+       "from": 353,
+       "to": 368,
+       "widthM": 0.418,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-411-378-403",
+       "from": 378,
+       "to": 403,
+       "widthM": 0.697,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 422,
+     "depthM": 3.919,
+     "wallPieces": [
+      [
+       269,
+       280
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-422-216-269",
+       "from": 216,
+       "to": 269,
+       "widthM": 1.478,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-422-280-367",
+       "from": 280,
+       "to": 367,
+       "widthM": 2.426,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-422-378-399",
+       "from": 378,
+       "to": 399,
+       "widthM": 0.585,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 437.5,
+     "depthM": 3.488,
+     "wallPieces": [
+      [
+       269,
+       280
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-438-216-269",
+       "from": 216,
+       "to": 269,
+       "widthM": 1.478,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-438-280-328",
+       "from": 280,
+       "to": 328,
+       "widthM": 1.338,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-438-342-367",
+       "from": 342,
+       "to": 367,
+       "widthM": 0.697,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "LEAF_FACE"
+      },
+      {
+       "id": "gap-Y-438-378-396",
+       "from": 378,
+       "to": 396,
+       "widthM": 0.502,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-438-405-625",
+       "from": 405,
+       "to": 625,
+       "widthM": 6.134,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 451,
+     "depthM": 3.112,
+     "wallPieces": [
+      [
+       269,
+       280
+      ],
+      [
+       769,
+       802
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-451-120-269",
+       "from": 120,
+       "to": 269,
+       "widthM": 4.154,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-451-280-328",
+       "from": 280,
+       "to": 328,
+       "widthM": 1.338,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "LEAF_AXIS"
+      },
+      {
+       "id": "gap-Y-451-339-418",
+       "from": 339,
+       "to": 418,
+       "widthM": 2.203,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-451-429-507",
+       "from": 429,
+       "to": 507,
+       "widthM": 2.175,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-451-520-622",
+       "from": 520,
+       "to": 622,
+       "widthM": 2.844,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-451-636-769",
+       "from": 636,
+       "to": 769,
+       "widthM": 3.708,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 468.5,
+     "depthM": 2.625,
+     "wallPieces": [
+      [
+       269,
+       280
+      ],
+      [
+       408,
+       429
+      ],
+      [
+       769,
+       802
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-469-216-269",
+       "from": 216,
+       "to": 269,
+       "widthM": 1.478,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-469-280-312",
+       "from": 280,
+       "to": 312,
+       "widthM": 0.892,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      },
+      {
+       "id": "gap-Y-469-321-408",
+       "from": 321,
+       "to": 408,
+       "widthM": 2.426,
+       "cls": "UNKNOWN_GAP",
+       "signature": "LEAF_FACE"
+      },
+      {
+       "id": "gap-Y-469-429-507",
+       "from": 429,
+       "to": 507,
+       "widthM": 2.175,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-469-520-597",
+       "from": 520,
+       "to": 597,
+       "widthM": 2.147,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-469-613-621",
+       "from": 613,
+       "to": 621,
+       "widthM": 0.223,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      },
+      {
+       "id": "gap-Y-469-641-769",
+       "from": 641,
+       "to": 769,
+       "widthM": 3.569,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 479.5,
+     "depthM": 2.319,
+     "wallPieces": [
+      [
+       265,
+       280
+      ],
+      [
+       408,
+       429
+      ],
+      [
+       769,
+       786
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-480-216-265",
+       "from": 216,
+       "to": 265,
+       "widthM": 1.366,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-480-280-312",
+       "from": 280,
+       "to": 312,
+       "widthM": 0.892,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      },
+      {
+       "id": "gap-Y-480-321-408",
+       "from": 321,
+       "to": 408,
+       "widthM": 2.426,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      },
+      {
+       "id": "gap-Y-480-429-501",
+       "from": 429,
+       "to": 501,
+       "widthM": 2.007,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-480-520-592",
+       "from": 520,
+       "to": 592,
+       "widthM": 2.007,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-480-613-621",
+       "from": 613,
+       "to": 621,
+       "widthM": 0.223,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      },
+      {
+       "id": "gap-Y-480-641-769",
+       "from": 641,
+       "to": 769,
+       "widthM": 3.569,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 492,
+     "depthM": 1.972,
+     "wallPieces": [
+      [
+       261,
+       280
+      ],
+      [
+       408,
+       429
+      ],
+      [
+       769,
+       786
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-492-280-312",
+       "from": 280,
+       "to": 312,
+       "widthM": 0.892,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-492-321-408",
+       "from": 321,
+       "to": 408,
+       "widthM": 2.426,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-492-429-631",
+       "from": 429,
+       "to": 631,
+       "widthM": 5.632,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-492-641-769",
+       "from": 641,
+       "to": 769,
+       "widthM": 3.569,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 516.5,
+     "depthM": 1.29,
+     "wallPieces": [
+      [
+       261,
+       280
+      ],
+      [
+       413,
+       432
+      ],
+      [
+       769,
+       786
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-517-280-413",
+       "from": 280,
+       "to": 413,
+       "widthM": 3.708,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-517-432-468",
+       "from": 432,
+       "to": 468,
+       "widthM": 1.004,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-517-481-497",
+       "from": 481,
+       "to": 497,
+       "widthM": 0.446,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-517-518-538",
+       "from": 518,
+       "to": 538,
+       "widthM": 0.558,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-517-557-769",
+       "from": 557,
+       "to": 769,
+       "widthM": 5.911,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 535.5,
+     "depthM": 0.761,
+     "wallPieces": [
+      [
+       263,
+       280
+      ],
+      [
+       413,
+       432
+      ],
+      [
+       769,
+       786
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-536-280-413",
+       "from": 280,
+       "to": 413,
+       "widthM": 3.708,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "LEAF_AXIS"
+      },
+      {
+       "id": "gap-Y-536-432-468",
+       "from": 432,
+       "to": 468,
+       "widthM": 1.004,
+       "cls": "UNKNOWN_GAP",
+       "signature": "LEAF_AXIS"
+      },
+      {
+       "id": "gap-Y-536-480-497",
+       "from": 480,
+       "to": 497,
+       "widthM": 0.474,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-536-511-541",
+       "from": 511,
+       "to": 541,
+       "widthM": 0.836,
+       "cls": "UNKNOWN_GAP",
+       "signature": "LEAF_FACE"
+      },
+      {
+       "id": "gap-Y-536-557-694",
+       "from": 557,
+       "to": 694,
+       "widthM": 3.82,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      },
+      {
+       "id": "gap-Y-536-710-769",
+       "from": 710,
+       "to": 769,
+       "widthM": 1.645,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      }
+     ]
+    }
+   ],
+   "existingWideGaps": [
+    {
+     "kind": "COLLINEAR_GAP",
+     "linePx": 562.875,
+     "fromPx": 263,
+     "toPx": 477,
+     "widthM": 5.96632,
+     "infill": 0.341121,
+     "callout": null,
+     "pocketM2": 42.888307,
+     "decision": "OPEN_SIDE"
+    }
+   ],
+   "existingBays": [],
+   "cellsNearFacade": [
+    {
+     "ix": 1,
+     "iy": 4,
+     "cls": "B",
+     "rect": [
+      263,
+      292,
+      316,
+      372
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 4,
+     "cls": "B",
+     "rect": [
+      316,
+      292,
+      421,
+      372
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 4,
+     "cls": "B",
+     "rect": [
+      421,
+      292,
+      451,
+      372
+     ]
+    },
+    {
+     "ix": 4,
+     "iy": 4,
+     "cls": "B",
+     "rect": [
+      451,
+      292,
+      476.272727,
+      372
+     ]
+    },
+    {
+     "ix": 5,
+     "iy": 4,
+     "cls": "B",
+     "rect": [
+      476.272727,
+      292,
+      512,
+      372
+     ]
+    },
+    {
+     "ix": 6,
+     "iy": 4,
+     "cls": "B",
+     "rect": [
+      512,
+      292,
+      579,
+      372
+     ]
+    },
+    {
+     "ix": 7,
+     "iy": 4,
+     "cls": "B",
+     "rect": [
+      579,
+      292,
+      606.5,
+      372
+     ]
+    },
+    {
+     "ix": 8,
+     "iy": 4,
+     "cls": "B",
+     "rect": [
+      606.5,
+      292,
+      777,
+      372
+     ]
+    },
+    {
+     "ix": 9,
+     "iy": 4,
+     "cls": "O",
+     "rect": [
+      777,
+      292,
+      801,
+      372
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 5,
+     "cls": "B",
+     "rect": [
+      263,
+      372,
+      316,
+      422
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 5,
+     "cls": "B",
+     "rect": [
+      316,
+      372,
+      421,
+      422
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 5,
+     "cls": "B",
+     "rect": [
+      421,
+      372,
+      451,
+      422
+     ]
+    },
+    {
+     "ix": 4,
+     "iy": 5,
+     "cls": "B",
+     "rect": [
+      451,
+      372,
+      476.272727,
+      422
+     ]
+    },
+    {
+     "ix": 5,
+     "iy": 5,
+     "cls": "B",
+     "rect": [
+      476.272727,
+      372,
+      512,
+      422
+     ]
+    },
+    {
+     "ix": 6,
+     "iy": 5,
+     "cls": "B",
+     "rect": [
+      512,
+      372,
+      579,
+      422
+     ]
+    },
+    {
+     "ix": 7,
+     "iy": 5,
+     "cls": "B",
+     "rect": [
+      579,
+      372,
+      606.5,
+      422
+     ]
+    },
+    {
+     "ix": 8,
+     "iy": 5,
+     "cls": "B",
+     "rect": [
+      606.5,
+      372,
+      777,
+      422
+     ]
+    },
+    {
+     "ix": 9,
+     "iy": 5,
+     "cls": "O",
+     "rect": [
+      777,
+      372,
+      801,
+      422
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 6,
+     "cls": "B",
+     "rect": [
+      263,
+      422,
+      316,
+      468.5
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 6,
+     "cls": "B",
+     "rect": [
+      316,
+      422,
+      421,
+      468.5
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 6,
+     "cls": "B",
+     "rect": [
+      421,
+      422,
+      451,
+      468.5
+     ]
+    },
+    {
+     "ix": 4,
+     "iy": 6,
+     "cls": "B",
+     "rect": [
+      451,
+      422,
+      476.272727,
+      468.5
+     ]
+    },
+    {
+     "ix": 5,
+     "iy": 6,
+     "cls": "B",
+     "rect": [
+      476.272727,
+      422,
+      512,
+      468.5
+     ]
+    },
+    {
+     "ix": 6,
+     "iy": 6,
+     "cls": "B",
+     "rect": [
+      512,
+      422,
+      579,
+      468.5
+     ]
+    },
+    {
+     "ix": 7,
+     "iy": 6,
+     "cls": "B",
+     "rect": [
+      579,
+      422,
+      606.5,
+      468.5
+     ]
+    },
+    {
+     "ix": 8,
+     "iy": 6,
+     "cls": "B",
+     "rect": [
+      606.5,
+      422,
+      777,
+      468.5
+     ]
+    },
+    {
+     "ix": 9,
+     "iy": 6,
+     "cls": "O",
+     "rect": [
+      777,
+      422,
+      801,
+      468.5
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 7,
+     "cls": "B",
+     "rect": [
+      263,
+      468.5,
+      316,
+      492
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 7,
+     "cls": "B",
+     "rect": [
+      316,
+      468.5,
+      421,
+      492
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 7,
+     "cls": "B",
+     "rect": [
+      421,
+      468.5,
+      451,
+      492
+     ]
+    },
+    {
+     "ix": 4,
+     "iy": 7,
+     "cls": "B",
+     "rect": [
+      451,
+      468.5,
+      476.272727,
+      492
+     ]
+    },
+    {
+     "ix": 5,
+     "iy": 7,
+     "cls": "B",
+     "rect": [
+      476.272727,
+      468.5,
+      512,
+      492
+     ]
+    },
+    {
+     "ix": 6,
+     "iy": 7,
+     "cls": "B",
+     "rect": [
+      512,
+      468.5,
+      579,
+      492
+     ]
+    },
+    {
+     "ix": 7,
+     "iy": 7,
+     "cls": "B",
+     "rect": [
+      579,
+      468.5,
+      606.5,
+      492
+     ]
+    },
+    {
+     "ix": 8,
+     "iy": 7,
+     "cls": "B",
+     "rect": [
+      606.5,
+      468.5,
+      777,
+      492
+     ]
+    },
+    {
+     "ix": 9,
+     "iy": 7,
+     "cls": "O",
+     "rect": [
+      777,
+      468.5,
+      801,
+      492
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 8,
+     "cls": "B",
+     "rect": [
+      263,
+      492,
+      316,
+      516.5
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 8,
+     "cls": "B",
+     "rect": [
+      316,
+      492,
+      421,
+      516.5
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 8,
+     "cls": "B",
+     "rect": [
+      421,
+      492,
+      451,
+      516.5
+     ]
+    },
+    {
+     "ix": 4,
+     "iy": 8,
+     "cls": "B",
+     "rect": [
+      451,
+      492,
+      476.272727,
+      516.5
+     ]
+    },
+    {
+     "ix": 5,
+     "iy": 8,
+     "cls": "B",
+     "rect": [
+      476.272727,
+      492,
+      512,
+      516.5
+     ]
+    },
+    {
+     "ix": 6,
+     "iy": 8,
+     "cls": "B",
+     "rect": [
+      512,
+      492,
+      579,
+      516.5
+     ]
+    },
+    {
+     "ix": 7,
+     "iy": 8,
+     "cls": "B",
+     "rect": [
+      579,
+      492,
+      606.5,
+      516.5
+     ]
+    },
+    {
+     "ix": 8,
+     "iy": 8,
+     "cls": "B",
+     "rect": [
+      606.5,
+      492,
+      777,
+      516.5
+     ]
+    },
+    {
+     "ix": 9,
+     "iy": 8,
+     "cls": "O",
+     "rect": [
+      777,
+      492,
+      801,
+      516.5
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 9,
+     "cls": "B",
+     "rect": [
+      263,
+      516.5,
+      316,
+      535.5
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 9,
+     "cls": "B",
+     "rect": [
+      316,
+      516.5,
+      421,
+      535.5
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 9,
+     "cls": "B",
+     "rect": [
+      421,
+      516.5,
+      451,
+      535.5
+     ]
+    },
+    {
+     "ix": 4,
+     "iy": 9,
+     "cls": "B",
+     "rect": [
+      451,
+      516.5,
+      476.272727,
+      535.5
+     ]
+    },
+    {
+     "ix": 5,
+     "iy": 9,
+     "cls": "B",
+     "rect": [
+      476.272727,
+      516.5,
+      512,
+      535.5
+     ]
+    },
+    {
+     "ix": 6,
+     "iy": 9,
+     "cls": "B",
+     "rect": [
+      512,
+      516.5,
+      579,
+      535.5
+     ]
+    },
+    {
+     "ix": 7,
+     "iy": 9,
+     "cls": "B",
+     "rect": [
+      579,
+      516.5,
+      606.5,
+      535.5
+     ]
+    },
+    {
+     "ix": 8,
+     "iy": 9,
+     "cls": "B",
+     "rect": [
+      606.5,
+      516.5,
+      777,
+      535.5
+     ]
+    },
+    {
+     "ix": 9,
+     "iy": 9,
+     "cls": "O",
+     "rect": [
+      777,
+      516.5,
+      801,
+      535.5
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 10,
+     "cls": "B",
+     "rect": [
+      263,
+      535.5,
+      316,
+      562.875
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 10,
+     "cls": "B",
+     "rect": [
+      316,
+      535.5,
+      421,
+      562.875
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 10,
+     "cls": "B",
+     "rect": [
+      421,
+      535.5,
+      451,
+      562.875
+     ]
+    },
+    {
+     "ix": 4,
+     "iy": 10,
+     "cls": "B",
+     "rect": [
+      451,
+      535.5,
+      476.272727,
+      562.875
+     ]
+    },
+    {
+     "ix": 5,
+     "iy": 10,
+     "cls": "B",
+     "rect": [
+      476.272727,
+      535.5,
+      512,
+      562.875
+     ]
+    },
+    {
+     "ix": 6,
+     "iy": 10,
+     "cls": "B",
+     "rect": [
+      512,
+      535.5,
+      579,
+      562.875
+     ]
+    },
+    {
+     "ix": 7,
+     "iy": 10,
+     "cls": "B",
+     "rect": [
+      579,
+      535.5,
+      606.5,
+      562.875
+     ]
+    },
+    {
+     "ix": 8,
+     "iy": 10,
+     "cls": "B",
+     "rect": [
+      606.5,
+      535.5,
+      777,
+      562.875
+     ]
+    },
+    {
+     "ix": 9,
+     "iy": 10,
+     "cls": "O",
+     "rect": [
+      777,
+      535.5,
+      801,
+      562.875
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 11,
+     "cls": "B",
+     "rect": [
+      263,
+      562.875,
+      316,
+      596.5
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 11,
+     "cls": "B",
+     "rect": [
+      316,
+      562.875,
+      421,
+      596.5
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 11,
+     "cls": "B",
+     "rect": [
+      421,
+      562.875,
+      451,
+      596.5
+     ]
+    },
+    {
+     "ix": 4,
+     "iy": 11,
+     "cls": "B",
+     "rect": [
+      451,
+      562.875,
+      476.272727,
+      596.5
+     ]
+    },
+    {
+     "ix": 5,
+     "iy": 11,
+     "cls": "B",
+     "rect": [
+      476.272727,
+      562.875,
+      512,
+      596.5
+     ]
+    },
+    {
+     "ix": 6,
+     "iy": 11,
+     "cls": "B",
+     "rect": [
+      512,
+      562.875,
+      579,
+      596.5
+     ]
+    },
+    {
+     "ix": 7,
+     "iy": 11,
+     "cls": "B",
+     "rect": [
+      579,
+      562.875,
+      606.5,
+      596.5
+     ]
+    },
+    {
+     "ix": 8,
+     "iy": 11,
+     "cls": "B",
+     "rect": [
+      606.5,
+      562.875,
+      777,
+      596.5
+     ]
+    },
+    {
+     "ix": 9,
+     "iy": 11,
+     "cls": "O",
+     "rect": [
+      777,
+      562.875,
+      801,
+      596.5
+     ]
+    }
+   ],
+   "recessCells": 0,
+   "builtCells": 64,
+   "regions": [
+    [
+     "BUILT",
+     103,
+     205.875,
+     777,
+     596.5
+    ]
+   ],
+   "gridLines": {
+    "x": [
+     103,
+     263,
+     316,
+     421,
+     451,
+     476.273,
+     512,
+     579,
+     606.5,
+     777,
+     801
+    ],
+    "y": [
+     116,
+     205.875,
+     239,
+     258.5,
+     292,
+     372,
+     422,
+     468.5,
+     492,
+     516.5,
+     535.5,
+     562.875,
+     596.5
+    ]
+   },
+   "bodies": [
+    {
+     "id": "body-0",
+     "relation": "COVERED_TERRACE",
+     "enclosed": false,
+     "built": false,
+     "areaM2": 12.442,
+     "rect": {
+      "x0": 606.5,
+      "y0": 116,
+      "x1": 785,
+      "y1": 205.875
+     },
+     "mouth": {
+      "widthM": 1.975007,
+      "signature": "DASHED",
+      "jambs": [
+       "POST",
+       "WALL"
+      ],
+      "gapId": "gap-X-607-133-204"
+     }
+    },
+    {
+     "id": "body-1",
+     "relation": "FLUSH_ATTACHED",
+     "enclosed": true,
+     "built": false,
+     "areaM2": 0.848,
+     "rect": {
+      "x0": 777,
+      "y0": 205.875,
+      "x1": 785,
+      "y1": 342.5
+     },
+     "mouth": null
+    },
+    {
+     "id": "body-2",
+     "relation": "UNKNOWN",
+     "enclosed": false,
+     "built": false,
+     "areaM2": 2.023,
+     "rect": {
+      "x0": 777,
+      "y0": 342.5,
+      "x1": 801,
+      "y1": 468.5
+     },
+     "mouth": null
+    },
+    {
+     "id": "body-3",
+     "relation": "SEPARATE_BODY",
+     "enclosed": true,
+     "built": false,
+     "areaM2": 0.105,
+     "rect": {
+      "x0": 785,
+      "y0": 342.5,
+      "x1": 801,
+      "y1": 351
+     },
+     "mouth": null
+    },
+    {
+     "id": "body-4",
+     "relation": "SEPARATE_BODY",
+     "enclosed": true,
+     "built": false,
+     "areaM2": 0.217,
+     "rect": {
+      "x0": 785,
+      "y0": 451,
+      "x1": 801,
+      "y1": 468.5
+     },
+     "mouth": null
+    },
+    {
+     "id": "body-5",
+     "relation": "FLUSH_ATTACHED",
+     "enclosed": true,
+     "built": false,
+     "areaM2": 0.794,
+     "rect": {
+      "x0": 777,
+      "y0": 468.5,
+      "x1": 785,
+      "y1": 596.5
+     },
+     "mouth": null
+    }
+   ],
+   "boundaryAccepted": false,
+   "basePlanConsequence": {
+    "outcome": "COMPLETED",
+    "modelHash": "df2aa66c8591107a1ff3608d02164ad80f4a7609c963915cb17fe7312e64553f"
+   }
+  },
+  {
+   "id": "cyklamenach/ground/incumbent/rear",
+   "role": "NEGATIVE_CONTROL",
+   "row": "dom-w-cyklamenach",
+   "frameId": "frame-asset-rzut-fa38f527ea-8e7eb2ad66",
+   "decompositionId": "dec-ab38220413a10aab",
+   "decompositionKey": "frame-asset-rzut-fa38f527ea-8e7eb2ad66|131|195.5|580|694|0.020272|0.020298|",
+   "storey": "GROUND",
+   "facade": {
+    "side": "N (glazing + terrace door, REC-17 control)",
+    "axis": "Y",
+    "linePx": 195.5,
+    "spanPx": [
+     131,
+     580
+    ],
+    "inward": "toward larger coordinates"
+   },
+   "wallThickness": {
+    "px": 13.5,
+    "m": 0.274
+   },
+   "mpp": {
+    "x": 0.020272,
+    "y": 0.020298
+   },
+   "extentBeforeBoundaryWork": {
+    "x0": 131,
+    "y0": 195.5,
+    "x1": 580,
+    "y1": 694
+   },
+   "envelope": {
+    "rect": {
+     "x0": 131,
+     "x1": 580,
+     "y0": 195.5,
+     "y1": 694
+    },
+    "outline": 0
+   },
+   "collinearWallPieces": {
+    "bands": [
+     {
+      "from": 254,
+      "to": 309,
+      "thickness": 22
+     },
+     {
+      "from": 424,
+      "to": 566,
+      "thickness": 22
+     }
+    ],
+    "ink": [
+     {
+      "from": 131,
+      "to": 166,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 0.71
+     },
+     {
+      "from": 254,
+      "to": 310,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 1.135
+     },
+     {
+      "from": 397,
+      "to": 469,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 1.46
+     },
+     {
+      "from": 516,
+      "to": 581,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 1.318
+     }
+    ]
+   },
+   "facadeGaps": [
+    {
+     "id": "gap-Y-196-166-254",
+     "from": 166,
+     "to": 254,
+     "widthM": 1.784,
+     "jambs": [
+      "WALL",
+      "WALL"
+     ],
+     "signature": "DASHED",
+     "cls": "UNKNOWN_GAP",
+     "boundary": "WEAK",
+     "callout": null
+    },
+    {
+     "id": "gap-Y-196-310-397",
+     "from": 310,
+     "to": 397,
+     "widthM": 1.764,
+     "jambs": [
+      "WALL",
+      "WALL"
+     ],
+     "signature": "LEAF_AXIS",
+     "cls": "OPENING_SUPPORTED",
+     "boundary": "STRONG",
+     "callout": {
+      "id": "metric-callout-ring-bba8d44600",
+      "cm": 180
+     }
+    },
+    {
+     "id": "gap-Y-196-469-516",
+     "from": 469,
+     "to": 516,
+     "widthM": 0.953,
+     "jambs": [
+      "WALL",
+      "WALL"
+     ],
+     "signature": "LEAF_FACE",
+     "cls": "UNKNOWN_GAP",
+     "boundary": "WEAK",
+     "callout": {
+      "id": "metric-callout-ring-88a1bec3ff",
+      "cm": 105
+     }
+    }
+   ],
+   "perpendicularCandidates": {
+    "bands": [
+     {
+      "axis": "V",
+      "position": 138,
+      "thickness": 13.422,
+      "from": 218,
+      "to": 671,
+      "meetsFacade": false,
+      "inwardM": 9.652,
+      "wallThick": true
+     },
+     {
+      "axis": "V",
+      "position": 406.5,
+      "thickness": 16,
+      "from": 218,
+      "to": 328,
+      "meetsFacade": false,
+      "inwardM": 2.689,
+      "wallThick": true
+     },
+     {
+      "axis": "V",
+      "position": 573,
+      "thickness": 13.5,
+      "from": 218,
+      "to": 671,
+      "meetsFacade": false,
+      "inwardM": 9.652,
+      "wallThick": true
+     }
+    ],
+    "ink": [
+     {
+      "linePx": 131,
+      "meetsFacade": true,
+      "runFrom": 196,
+      "runTo": 695,
+      "kind": "WALL",
+      "inwardM": 10.129
+     },
+     {
+      "linePx": 142.5,
+      "meetsFacade": true,
+      "runFrom": 196,
+      "runTo": 695,
+      "kind": "WALL",
+      "inwardM": 10.129
+     },
+     {
+      "linePx": 149.5,
+      "meetsFacade": true,
+      "runFrom": 196,
+      "runTo": 695,
+      "kind": "WALL",
+      "inwardM": 10.129
+     },
+     {
+      "linePx": 210,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 269,
+      "meetsFacade": true,
+      "runFrom": 196,
+      "runTo": 218,
+      "kind": "WALL",
+      "inwardM": 0.447
+     },
+     {
+      "linePx": 280.5,
+      "meetsFacade": true,
+      "runFrom": 196,
+      "runTo": 218,
+      "kind": "WALL",
+      "inwardM": 0.447
+     },
+     {
+      "linePx": 306.5,
+      "meetsFacade": true,
+      "runFrom": 196,
+      "runTo": 218,
+      "kind": "WALL",
+      "inwardM": 0.447
+     },
+     {
+      "linePx": 337.5,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 350,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 360.5,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 376,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 406.5,
+      "meetsFacade": true,
+      "runFrom": 196,
+      "runTo": 585,
+      "kind": "WALL",
+      "inwardM": 7.896
+     },
+     {
+      "linePx": 431.5,
+      "meetsFacade": true,
+      "runFrom": 196,
+      "runTo": 218,
+      "kind": "WALL",
+      "inwardM": 0.447
+     },
+     {
+      "linePx": 441,
+      "meetsFacade": true,
+      "runFrom": 196,
+      "runTo": 218,
+      "kind": "WALL",
+      "inwardM": 0.447
+     },
+     {
+      "linePx": 580,
+      "meetsFacade": true,
+      "runFrom": 196,
+      "runTo": 695,
+      "kind": "WALL",
+      "inwardM": 10.129
+     }
+    ]
+   },
+   "shortPiers": [
+    {
+     "from": 254,
+     "to": 310,
+     "kind": "WALL",
+     "along": true,
+     "lengthM": 1.135,
+     "wallVsPost": "WALL"
+    },
+    {
+     "from": 397,
+     "to": 469,
+     "kind": "WALL",
+     "along": true,
+     "lengthM": 1.46,
+     "wallVsPost": "WALL"
+    }
+   ],
+   "setbackBackWallCandidates": [
+    {
+     "linePx": 221,
+     "depthM": 0.518,
+     "wallPieces": [
+      [
+       132,
+       166
+      ],
+      [
+       254,
+       315
+      ],
+      [
+       397,
+       469
+      ],
+      [
+       520,
+       580
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-221-166-254",
+       "from": 166,
+       "to": 254,
+       "widthM": 1.784,
+       "cls": "UNKNOWN_GAP",
+       "signature": "DASHED"
+      },
+      {
+       "id": "gap-Y-221-315-397",
+       "from": 315,
+       "to": 397,
+       "widthM": 1.662,
+       "cls": "UNKNOWN_GAP",
+       "signature": "LEAF_FACE"
+      },
+      {
+       "id": "gap-Y-221-469-520",
+       "from": 469,
+       "to": 520,
+       "widthM": 1.034,
+       "cls": "UNKNOWN_GAP",
+       "signature": "LEAF_FACE"
+      }
+     ]
+    },
+    {
+     "linePx": 256,
+     "depthM": 1.228,
+     "wallPieces": [
+      [
+       132,
+       145
+      ],
+      [
+       399,
+       415
+      ],
+      [
+       567,
+       580
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-256-145-399",
+       "from": 145,
+       "to": 399,
+       "widthM": 5.149,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "LEAF_AXIS"
+      },
+      {
+       "id": "gap-Y-256-415-480",
+       "from": 415,
+       "to": 480,
+       "widthM": 1.318,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-256-497-507",
+       "from": 497,
+       "to": 507,
+       "widthM": 0.203,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      },
+      {
+       "id": "gap-Y-256-526-567",
+       "from": 526,
+       "to": 567,
+       "widthM": 0.831,
+       "cls": "UNKNOWN_GAP",
+       "signature": "LEAF_FACE"
+      }
+     ]
+    },
+    {
+     "linePx": 265.5,
+     "depthM": 1.421,
+     "wallPieces": [
+      [
+       132,
+       145
+      ],
+      [
+       399,
+       415
+      ],
+      [
+       567,
+       580
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-266-145-399",
+       "from": 145,
+       "to": 399,
+       "widthM": 5.149,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      },
+      {
+       "id": "gap-Y-266-415-516",
+       "from": 415,
+       "to": 516,
+       "widthM": 2.047,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      },
+      {
+       "id": "gap-Y-266-527-567",
+       "from": 527,
+       "to": 567,
+       "widthM": 0.811,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      }
+     ]
+    },
+    {
+     "linePx": 285,
+     "depthM": 1.817,
+     "wallPieces": [
+      [
+       132,
+       145
+      ],
+      [
+       399,
+       415
+      ],
+      [
+       567,
+       580
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-285-145-399",
+       "from": 145,
+       "to": 399,
+       "widthM": 5.149,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-285-415-450",
+       "from": 415,
+       "to": 450,
+       "widthM": 0.71,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-285-469-536",
+       "from": 469,
+       "to": 536,
+       "widthM": 1.358,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-285-554-567",
+       "from": 554,
+       "to": 567,
+       "widthM": 0.264,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 303.5,
+     "depthM": 2.192,
+     "wallPieces": [
+      [
+       132,
+       145
+      ],
+      [
+       399,
+       415
+      ],
+      [
+       567,
+       580
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-304-145-292",
+       "from": 145,
+       "to": 292,
+       "widthM": 2.98,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-304-301-399",
+       "from": 301,
+       "to": 399,
+       "widthM": 1.987,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-304-415-450",
+       "from": 415,
+       "to": 450,
+       "widthM": 0.71,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-304-460-510",
+       "from": 460,
+       "to": 510,
+       "widthM": 1.014,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-304-525-546",
+       "from": 525,
+       "to": 546,
+       "widthM": 0.426,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-304-559-567",
+       "from": 559,
+       "to": 567,
+       "widthM": 0.162,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 325,
+     "depthM": 2.629,
+     "wallPieces": [
+      [
+       132,
+       145
+      ],
+      [
+       377,
+       415
+      ],
+      [
+       567,
+       580
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-325-145-377",
+       "from": 145,
+       "to": 377,
+       "widthM": 4.703,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-325-415-435",
+       "from": 415,
+       "to": 435,
+       "widthM": 0.405,
+       "cls": "UNKNOWN_GAP",
+       "signature": "LEAF_FACE"
+      },
+      {
+       "id": "gap-Y-325-464-516",
+       "from": 464,
+       "to": 516,
+       "widthM": 1.054,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-325-525-567",
+       "from": 525,
+       "to": 567,
+       "widthM": 0.851,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 339.5,
+     "depthM": 2.923,
+     "wallPieces": [
+      [
+       132,
+       145
+      ],
+      [
+       377,
+       448
+      ],
+      [
+       567,
+       580
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-340-145-377",
+       "from": 145,
+       "to": 377,
+       "widthM": 4.703,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-340-448-567",
+       "from": 448,
+       "to": 567,
+       "widthM": 2.412,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 364,
+     "depthM": 3.42,
+     "wallPieces": [
+      [
+       132,
+       147
+      ],
+      [
+       377,
+       515
+      ],
+      [
+       551,
+       580
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-364-147-216",
+       "from": 147,
+       "to": 216,
+       "widthM": 1.399,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-364-229-377",
+       "from": 229,
+       "to": 377,
+       "widthM": 3,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-364-515-551",
+       "from": 515,
+       "to": 551,
+       "widthM": 0.73,
+       "cls": "UNKNOWN_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 372,
+     "depthM": 3.583,
+     "wallPieces": [
+      [
+       132,
+       147
+      ],
+      [
+       377,
+       515
+      ],
+      [
+       551,
+       580
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-372-147-210",
+       "from": 147,
+       "to": 210,
+       "widthM": 1.277,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-372-229-377",
+       "from": 229,
+       "to": 377,
+       "widthM": 3,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-372-515-551",
+       "from": 515,
+       "to": 551,
+       "widthM": 0.73,
+       "cls": "UNKNOWN_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    }
+   ],
+   "existingWideGaps": [],
+   "existingBays": [],
+   "cellsNearFacade": [
+    {
+     "ix": 0,
+     "iy": 0,
+     "cls": "O",
+     "rect": [
+      131,
+      195.5,
+      269,
+      372
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 0,
+     "cls": "O",
+     "rect": [
+      269,
+      195.5,
+      406.5,
+      372
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 0,
+     "cls": "B",
+     "rect": [
+      406.5,
+      195.5,
+      580,
+      372
+     ]
+    },
+    {
+     "ix": 0,
+     "iy": 1,
+     "cls": "O",
+     "rect": [
+      131,
+      372,
+      269,
+      545
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 1,
+     "cls": "O",
+     "rect": [
+      269,
+      372,
+      406.5,
+      545
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 1,
+     "cls": "B",
+     "rect": [
+      406.5,
+      372,
+      580,
+      545
+     ]
+    }
+   ],
+   "recessCells": 0,
+   "builtCells": 2,
+   "regions": [
+    [
+     "BUILT",
+     406.5,
+     195.5,
+     580,
+     694
+    ],
+    [
+     "BUILT",
+     131,
+     576,
+     406.5,
+     694
+    ]
+   ],
+   "gridLines": {
+    "x": [
+     131,
+     269,
+     406.5,
+     580
+    ],
+    "y": [
+     195.5,
+     372,
+     545,
+     576,
+     630,
+     694
+    ]
+   },
+   "bodies": [],
+   "boundaryAccepted": false,
+   "basePlanConsequence": {
+    "outcome": "FAILED",
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE",
+    "firstFailure": null,
+    "gateBlocking": null,
+    "selectedPlanFrameId": "frame-asset-rzut-fa38f527ea-8e7eb2ad66"
+   }
+  },
+  {
+   "id": "marcowki/ground/incumbent/front",
+   "role": "KNOWN_GOOD_GARAGE",
+   "row": "marcowki",
+   "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+   "decompositionId": "dec-131bb6e6573347ea",
+   "decompositionKey": "frame-asset-rzut-19a11bc745-33a5ff46cd|58|221|514|773|0.026426|0.026468|",
+   "storey": "GROUND",
+   "facade": {
+    "side": "S (known-good garage house)",
+    "axis": "Y",
+    "linePx": 735.5,
+    "spanPx": [
+     58,
+     514
+    ],
+    "inward": "toward smaller coordinates"
+   },
+   "wallThickness": {
+    "px": 18.5,
+    "m": 0.49
+   },
+   "mpp": {
+    "x": 0.026426,
+    "y": 0.026468
+   },
+   "extentBeforeBoundaryWork": {
+    "x0": 58,
+    "y0": 221,
+    "x1": 514,
+    "y1": 773
+   },
+   "envelope": {
+    "rect": {
+     "x0": 58,
+     "x1": 514,
+     "y0": 259,
+     "y1": 735.5
+    },
+    "outline": 0
+   },
+   "collinearWallPieces": {
+    "bands": [
+     {
+      "from": 83,
+      "to": 111,
+      "thickness": 18
+     },
+     {
+      "from": 163,
+      "to": 339,
+      "thickness": 17
+     },
+     {
+      "from": 143,
+      "to": 184,
+      "thickness": 23.5
+     }
+    ],
+    "ink": [
+     {
+      "from": 58,
+      "to": 120,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 1.638
+     },
+     {
+      "from": 144,
+      "to": 217,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 1.929
+     },
+     {
+      "from": 256,
+      "to": 382,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 3.33
+     },
+     {
+      "from": 485,
+      "to": 514,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 0.766
+     }
+    ]
+   },
+   "facadeGaps": [
+    {
+     "id": "gap-Y-736-120-144",
+     "from": 120,
+     "to": 144,
+     "widthM": 0.634,
+     "jambs": [
+      "WALL",
+      "WALL"
+     ],
+     "signature": "GLAZING",
+     "cls": "OPENING_SUPPORTED",
+     "boundary": "STRONG",
+     "callout": null
+    },
+    {
+     "id": "gap-Y-736-217-256",
+     "from": 217,
+     "to": 256,
+     "widthM": 1.031,
+     "jambs": [
+      "WALL",
+      "WALL"
+     ],
+     "signature": "LEAF_AXIS",
+     "cls": "OPENING_SUPPORTED",
+     "boundary": "STRONG",
+     "callout": null
+    },
+    {
+     "id": "gap-Y-736-382-485",
+     "from": 382,
+     "to": 485,
+     "widthM": 2.722,
+     "jambs": [
+      "WALL",
+      "WALL"
+     ],
+     "signature": "LEAF_FACE",
+     "cls": "OPENING_SUPPORTED",
+     "boundary": "STRONG",
+     "callout": null
+    }
+   ],
+   "perpendicularCandidates": {
+    "bands": [
+     {
+      "axis": "V",
+      "position": 66.75,
+      "thickness": 18.5,
+      "from": 276,
+      "to": 717,
+      "meetsFacade": true,
+      "inwardM": 12.162,
+      "wallThick": true
+     },
+     {
+      "axis": "V",
+      "position": 70,
+      "thickness": 25,
+      "from": 736,
+      "to": 772,
+      "meetsFacade": true,
+      "inwardM": 0.013,
+      "wallThick": true
+     },
+     {
+      "axis": "V",
+      "position": 347.5,
+      "thickness": 17.125,
+      "from": 475,
+      "to": 712,
+      "meetsFacade": false,
+      "inwardM": 6.895,
+      "wallThick": true
+     }
+    ],
+    "ink": [
+     {
+      "linePx": 58,
+      "meetsFacade": true,
+      "runFrom": 516,
+      "runTo": 774,
+      "kind": "WALL",
+      "inwardM": 6.829
+     },
+     {
+      "linePx": 94,
+      "meetsFacade": true,
+      "runFrom": 711,
+      "runTo": 774,
+      "kind": "WALL",
+      "inwardM": 1.667
+     },
+     {
+      "linePx": 128.5,
+      "meetsFacade": true,
+      "runFrom": 728,
+      "runTo": 774,
+      "kind": "POST",
+      "inwardM": 1.218
+     },
+     {
+      "linePx": 177.5,
+      "meetsFacade": true,
+      "runFrom": 719,
+      "runTo": 774,
+      "kind": "POST",
+      "inwardM": 1.456
+     },
+     {
+      "linePx": 213.5,
+      "meetsFacade": true,
+      "runFrom": 719,
+      "runTo": 736,
+      "kind": "WALL",
+      "inwardM": 0.45
+     },
+     {
+      "linePx": 327,
+      "meetsFacade": true,
+      "runFrom": 719,
+      "runTo": 736,
+      "kind": "WALL",
+      "inwardM": 0.45
+     },
+     {
+      "linePx": 357,
+      "meetsFacade": true,
+      "runFrom": 684,
+      "runTo": 736,
+      "kind": "WALL",
+      "inwardM": 1.376
+     },
+     {
+      "linePx": 408.5,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 465.5,
+      "meetsFacade": false,
+      "runFrom": null,
+      "runTo": null,
+      "kind": null,
+      "inwardM": 0
+     },
+     {
+      "linePx": 514,
+      "meetsFacade": true,
+      "runFrom": 452,
+      "runTo": 774,
+      "kind": "WALL",
+      "inwardM": 8.523
+     }
+    ]
+   },
+   "shortPiers": [],
+   "setbackBackWallCandidates": [
+    {
+     "linePx": 572,
+     "depthM": 4.328,
+     "wallPieces": [
+      [
+       58,
+       76
+      ],
+      [
+       340,
+       356
+      ],
+      [
+       497,
+       515
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-572-76-261",
+       "from": 76,
+       "to": 261,
+       "widthM": 4.889,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-572-303-340",
+       "from": 303,
+       "to": 340,
+       "widthM": 0.978,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-572-356-497",
+       "from": 356,
+       "to": 497,
+       "widthM": 3.726,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 594.5,
+     "depthM": 3.732,
+     "wallPieces": [
+      [
+       58,
+       76
+      ],
+      [
+       292,
+       356
+      ],
+      [
+       497,
+       515
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-595-76-261",
+       "from": 76,
+       "to": 261,
+       "widthM": 4.889,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-595-282-292",
+       "from": 282,
+       "to": 292,
+       "widthM": 0.264,
+       "cls": "UNKNOWN_GAP",
+       "signature": "LEAF_AXIS"
+      },
+      {
+       "id": "gap-Y-595-356-395",
+       "from": 356,
+       "to": 395,
+       "widthM": 1.031,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-595-409-455",
+       "from": 409,
+       "to": 455,
+       "widthM": 1.216,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      },
+      {
+       "id": "gap-Y-595-469-497",
+       "from": 469,
+       "to": 497,
+       "widthM": 0.74,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 639.5,
+     "depthM": 2.541,
+     "wallPieces": [
+      [
+       58,
+       84
+      ],
+      [
+       330,
+       356
+      ],
+      [
+       497,
+       515
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-640-84-330",
+       "from": 84,
+       "to": 330,
+       "widthM": 6.501,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-640-356-395",
+       "from": 356,
+       "to": 395,
+       "widthM": 1.031,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-640-410-454",
+       "from": 410,
+       "to": 454,
+       "widthM": 1.163,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-640-469-497",
+       "from": 469,
+       "to": 497,
+       "widthM": 0.74,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 650,
+     "depthM": 2.263,
+     "wallPieces": [
+      [
+       58,
+       84
+      ],
+      [
+       330,
+       356
+      ],
+      [
+       497,
+       515
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-650-84-330",
+       "from": 84,
+       "to": 330,
+       "widthM": 6.501,
+       "cls": "OPENING_SUPPORTED",
+       "signature": "LEAF_FACE"
+      },
+      {
+       "id": "gap-Y-650-356-395",
+       "from": 356,
+       "to": 395,
+       "widthM": 1.031,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-650-411-453",
+       "from": 411,
+       "to": 453,
+       "widthM": 1.11,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-650-469-497",
+       "from": 469,
+       "to": 497,
+       "widthM": 0.74,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    },
+    {
+     "linePx": 666,
+     "depthM": 1.84,
+     "wallPieces": [
+      [
+       58,
+       84
+      ],
+      [
+       330,
+       356
+      ],
+      [
+       497,
+       515
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-666-84-330",
+       "from": 84,
+       "to": 330,
+       "widthM": 6.501,
+       "cls": "OPENING_SUPPORTED",
+       "signature": "LEAF_FACE"
+      },
+      {
+       "id": "gap-Y-666-356-395",
+       "from": 356,
+       "to": 395,
+       "widthM": 1.031,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-666-411-453",
+       "from": 411,
+       "to": 453,
+       "widthM": 1.11,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "LEAF_AXIS"
+      },
+      {
+       "id": "gap-Y-666-469-497",
+       "from": 469,
+       "to": 497,
+       "widthM": 0.74,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "LEAF_AXIS"
+      }
+     ]
+    },
+    {
+     "linePx": 678.321,
+     "depthM": 1.513,
+     "wallPieces": [
+      [
+       58,
+       84
+      ],
+      [
+       330,
+       356
+      ],
+      [
+       497,
+       515
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-678-84-251",
+       "from": 84,
+       "to": 251,
+       "widthM": 4.413,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      },
+      {
+       "id": "gap-Y-678-266-330",
+       "from": 266,
+       "to": 330,
+       "widthM": 1.691,
+       "cls": "UNKNOWN_GAP",
+       "signature": "LEAF_FACE"
+      },
+      {
+       "id": "gap-Y-678-356-395",
+       "from": 356,
+       "to": 395,
+       "widthM": 1.031,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-678-411-453",
+       "from": 411,
+       "to": 453,
+       "widthM": 1.11,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "LEAF_AXIS"
+      },
+      {
+       "id": "gap-Y-678-469-497",
+       "from": 469,
+       "to": 497,
+       "widthM": 0.74,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      }
+     ]
+    },
+    {
+     "linePx": 696,
+     "depthM": 1.045,
+     "wallPieces": [
+      [
+       58,
+       84
+      ],
+      [
+       330,
+       356
+      ],
+      [
+       497,
+       515
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-696-84-251",
+       "from": 84,
+       "to": 251,
+       "widthM": 4.413,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-696-266-330",
+       "from": 266,
+       "to": 330,
+       "widthM": 1.691,
+       "cls": "UNKNOWN_GAP",
+       "signature": "LEAF_FACE"
+      },
+      {
+       "id": "gap-Y-696-356-497",
+       "from": 356,
+       "to": 497,
+       "widthM": 3.726,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "DASHED"
+      }
+     ]
+    }
+   ],
+   "existingWideGaps": [],
+   "existingBays": [],
+   "cellsNearFacade": [
+    {
+     "ix": 0,
+     "iy": 2,
+     "cls": "B",
+     "rect": [
+      58,
+      452,
+      94,
+      523.5
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 2,
+     "cls": "B",
+     "rect": [
+      94,
+      452,
+      128.5,
+      523.5
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 2,
+     "cls": "B",
+     "rect": [
+      128.5,
+      452,
+      177.5,
+      523.5
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 2,
+     "cls": "B",
+     "rect": [
+      177.5,
+      452,
+      213.5,
+      523.5
+     ]
+    },
+    {
+     "ix": 4,
+     "iy": 2,
+     "cls": "B",
+     "rect": [
+      213.5,
+      452,
+      327,
+      523.5
+     ]
+    },
+    {
+     "ix": 5,
+     "iy": 2,
+     "cls": "B",
+     "rect": [
+      327,
+      452,
+      357,
+      523.5
+     ]
+    },
+    {
+     "ix": 6,
+     "iy": 2,
+     "cls": "B",
+     "rect": [
+      357,
+      452,
+      408.5,
+      523.5
+     ]
+    },
+    {
+     "ix": 7,
+     "iy": 2,
+     "cls": "B",
+     "rect": [
+      408.5,
+      452,
+      465.5,
+      523.5
+     ]
+    },
+    {
+     "ix": 8,
+     "iy": 2,
+     "cls": "B",
+     "rect": [
+      465.5,
+      452,
+      514,
+      523.5
+     ]
+    },
+    {
+     "ix": 0,
+     "iy": 3,
+     "cls": "B",
+     "rect": [
+      58,
+      523.5,
+      94,
+      735.5
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 3,
+     "cls": "B",
+     "rect": [
+      94,
+      523.5,
+      128.5,
+      735.5
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 3,
+     "cls": "B",
+     "rect": [
+      128.5,
+      523.5,
+      177.5,
+      735.5
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 3,
+     "cls": "B",
+     "rect": [
+      177.5,
+      523.5,
+      213.5,
+      735.5
+     ]
+    },
+    {
+     "ix": 4,
+     "iy": 3,
+     "cls": "B",
+     "rect": [
+      213.5,
+      523.5,
+      327,
+      735.5
+     ]
+    },
+    {
+     "ix": 5,
+     "iy": 3,
+     "cls": "B",
+     "rect": [
+      327,
+      523.5,
+      357,
+      735.5
+     ]
+    },
+    {
+     "ix": 6,
+     "iy": 3,
+     "cls": "B",
+     "rect": [
+      357,
+      523.5,
+      408.5,
+      735.5
+     ]
+    },
+    {
+     "ix": 7,
+     "iy": 3,
+     "cls": "B",
+     "rect": [
+      408.5,
+      523.5,
+      465.5,
+      735.5
+     ]
+    },
+    {
+     "ix": 8,
+     "iy": 3,
+     "cls": "B",
+     "rect": [
+      465.5,
+      523.5,
+      514,
+      735.5
+     ]
+    },
+    {
+     "ix": 0,
+     "iy": 4,
+     "cls": "O",
+     "rect": [
+      58,
+      735.5,
+      94,
+      773
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 4,
+     "cls": "O",
+     "rect": [
+      94,
+      735.5,
+      128.5,
+      773
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 4,
+     "cls": "O",
+     "rect": [
+      128.5,
+      735.5,
+      177.5,
+      773
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 4,
+     "cls": "O",
+     "rect": [
+      177.5,
+      735.5,
+      213.5,
+      773
+     ]
+    },
+    {
+     "ix": 4,
+     "iy": 4,
+     "cls": "O",
+     "rect": [
+      213.5,
+      735.5,
+      327,
+      773
+     ]
+    },
+    {
+     "ix": 5,
+     "iy": 4,
+     "cls": "O",
+     "rect": [
+      327,
+      735.5,
+      357,
+      773
+     ]
+    },
+    {
+     "ix": 6,
+     "iy": 4,
+     "cls": "O",
+     "rect": [
+      357,
+      735.5,
+      408.5,
+      773
+     ]
+    },
+    {
+     "ix": 7,
+     "iy": 4,
+     "cls": "O",
+     "rect": [
+      408.5,
+      735.5,
+      465.5,
+      773
+     ]
+    },
+    {
+     "ix": 8,
+     "iy": 4,
+     "cls": "O",
+     "rect": [
+      465.5,
+      735.5,
+      514,
+      773
+     ]
+    }
+   ],
+   "recessCells": 0,
+   "builtCells": 18,
+   "regions": [
+    [
+     "BUILT",
+     58,
+     259,
+     357,
+     735.5
+    ],
+    [
+     "BUILT",
+     357,
+     452,
+     514,
+     735.5
+    ]
+   ],
+   "gridLines": {
+    "x": [
+     58,
+     94,
+     128.5,
+     177.5,
+     213.5,
+     327,
+     357,
+     408.5,
+     465.5,
+     514
+    ],
+    "y": [
+     221,
+     259,
+     452,
+     523.5,
+     735.5,
+     773
+    ]
+   },
+   "bodies": [
+    {
+     "id": "body-0",
+     "relation": "FLUSH_ATTACHED",
+     "enclosed": true,
+     "built": false,
+     "areaM2": 0.957,
+     "rect": {
+      "x0": 58,
+      "y0": 221,
+      "x1": 94,
+      "y1": 259
+     },
+     "mouth": null
+    },
+    {
+     "id": "body-1",
+     "relation": "COVERED_TERRACE",
+     "enclosed": false,
+     "built": false,
+     "areaM2": 6.99,
+     "rect": {
+      "x0": 94,
+      "y0": 221,
+      "x1": 357,
+      "y1": 259
+     },
+     "mouth": {
+      "widthM": 1.955524,
+      "signature": "DASHED",
+      "jambs": [
+       "POST",
+       "POST"
+      ],
+      "gapId": "gap-Y-221-176-250"
+     }
+    },
+    {
+     "id": "body-2",
+     "relation": "FLUSH_ATTACHED",
+     "enclosed": true,
+     "built": false,
+     "areaM2": 0.944,
+     "rect": {
+      "x0": 58,
+      "y0": 735.5,
+      "x1": 94,
+      "y1": 773
+     },
+     "mouth": null
+    },
+    {
+     "id": "body-3",
+     "relation": "COVERED_TERRACE",
+     "enclosed": false,
+     "built": false,
+     "areaM2": 11.016,
+     "rect": {
+      "x0": 94,
+      "y0": 735.5,
+      "x1": 514,
+      "y1": 773
+     },
+     "mouth": {
+      "widthM": 3.118268,
+      "signature": "LEAF_AXIS",
+      "jambs": [
+       "POST",
+       "WALL"
+      ],
+      "gapId": "gap-Y-773-371-489"
+     }
+    }
+   ],
+   "boundaryAccepted": false,
+   "basePlanConsequence": {
+    "outcome": "COMPLETED",
+    "modelHash": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f"
+   }
+  },
+  {
+   "id": "fixture/open-carport-bay",
+   "role": "TRUE_OPEN_CARPORT",
+   "row": "fixtures",
+   "frameId": "frame-test",
+   "decompositionId": "dec-7e138c2e771f5285",
+   "decompositionKey": "frame-test|39.5|39.5|360|400|0.05|0.05|",
+   "storey": "SYNTHETIC",
+   "facade": {
+    "side": "S",
+    "axis": "Y",
+    "linePx": 280,
+    "spanPx": [
+     40,
+     360
+    ],
+    "inward": "toward smaller coordinates"
+   },
+   "wallThickness": {
+    "px": 12,
+    "m": 0.6
+   },
+   "mpp": {
+    "x": 0.05,
+    "y": 0.05
+   },
+   "extentBeforeBoundaryWork": {
+    "x0": 39.5,
+    "y0": 39.5,
+    "x1": 360,
+    "y1": 400
+   },
+   "envelope": {
+    "rect": {
+     "x0": 40,
+     "x1": 360,
+     "y0": 40,
+     "y1": 280
+    },
+    "outline": 0
+   },
+   "collinearWallPieces": {
+    "bands": [
+     {
+      "from": 52,
+      "to": 99,
+      "thickness": 12
+     },
+     {
+      "from": 232,
+      "to": 347,
+      "thickness": 12
+     }
+    ],
+    "ink": [
+     {
+      "from": 40,
+      "to": 112,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 3.6
+     },
+     {
+      "from": 220,
+      "to": 360,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 7
+     }
+    ]
+   },
+   "facadeGaps": [
+    {
+     "id": "gap-Y-280-112-220",
+     "from": 112,
+     "to": 220,
+     "widthM": 5.4,
+     "jambs": [
+      "WALL",
+      "WALL"
+     ],
+     "signature": "BLANK",
+     "cls": "TRUE_EXTERIOR_GAP",
+     "boundary": "NONE",
+     "callout": null
+    }
+   ],
+   "perpendicularCandidates": {
+    "bands": [
+     {
+      "axis": "V",
+      "position": 45.5,
+      "thickness": 12,
+      "from": 52,
+      "to": 267,
+      "meetsFacade": false,
+      "inwardM": 11.4,
+      "wallThick": true
+     },
+     {
+      "axis": "V",
+      "position": 105.5,
+      "thickness": 12,
+      "from": 280,
+      "to": 388,
+      "meetsFacade": true,
+      "inwardM": 0,
+      "wallThick": true
+     },
+     {
+      "axis": "V",
+      "position": 225.5,
+      "thickness": 12,
+      "from": 280,
+      "to": 388,
+      "meetsFacade": true,
+      "inwardM": 0,
+      "wallThick": true
+     },
+     {
+      "axis": "V",
+      "position": 353.5,
+      "thickness": 12,
+      "from": 52,
+      "to": 267,
+      "meetsFacade": false,
+      "inwardM": 11.4,
+      "wallThick": true
+     }
+    ],
+    "ink": [
+     {
+      "linePx": 40,
+      "meetsFacade": true,
+      "runFrom": 40,
+      "runTo": 280,
+      "kind": "WALL",
+      "inwardM": 12
+     },
+     {
+      "linePx": 100,
+      "meetsFacade": true,
+      "runFrom": 268,
+      "runTo": 389,
+      "kind": "WALL",
+      "inwardM": 6.05
+     },
+     {
+      "linePx": 232,
+      "meetsFacade": true,
+      "runFrom": 268,
+      "runTo": 389,
+      "kind": "WALL",
+      "inwardM": 6.05
+     },
+     {
+      "linePx": 360,
+      "meetsFacade": true,
+      "runFrom": 40,
+      "runTo": 280,
+      "kind": "WALL",
+      "inwardM": 12
+     }
+    ]
+   },
+   "shortPiers": [],
+   "setbackBackWallCandidates": [],
+   "existingWideGaps": [
+    {
+     "kind": "COLLINEAR_GAP",
+     "linePx": 280,
+     "fromPx": 99,
+     "toPx": 232,
+     "widthM": 6.65,
+     "infill": 0.097744,
+     "callout": null,
+     "pocketM2": 192,
+     "decision": "OPENING_IN_WALL"
+    }
+   ],
+   "existingBays": [
+    {
+     "side": "MAX_Z",
+     "rect": {
+      "x0": 100,
+      "x1": 231,
+      "y0": 280,
+      "y1": 400
+     },
+     "wallAxesPx": [
+      105.5,
+      225.5
+     ],
+     "mouth": {
+      "kind": "BAY_MOUTH",
+      "axis": "Y",
+      "linePx": 400,
+      "fromPx": 111,
+      "toPx": 221,
+      "widthM": 5.5,
+      "evidence": {
+       "jambs": true,
+       "corners": true,
+       "infill": 0.018182
+      },
+      "decision": "OPEN_SIDE",
+      "score": 0.304545,
+      "why": "the mouth of a bay two walls reach out to, 5.50 m wide: both side walls reach it, only 2% of the gap is drawn across, no callout states its width — an open side"
+     }
+    }
+   ],
+   "cellsNearFacade": [
+    {
+     "ix": 0,
+     "iy": 0,
+     "cls": "B",
+     "rect": [
+      40,
+      40,
+      100,
+      280
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 0,
+     "cls": "B",
+     "rect": [
+      100,
+      40,
+      232,
+      280
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 0,
+     "cls": "B",
+     "rect": [
+      232,
+      40,
+      360,
+      280
+     ]
+    },
+    {
+     "ix": 0,
+     "iy": 1,
+     "cls": "O",
+     "rect": [
+      40,
+      280,
+      100,
+      400
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 1,
+     "cls": "O",
+     "rect": [
+      100,
+      280,
+      232,
+      400
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 1,
+     "cls": "O",
+     "rect": [
+      232,
+      280,
+      360,
+      400
+     ]
+    }
+   ],
+   "recessCells": 0,
+   "builtCells": 3,
+   "regions": [
+    [
+     "BUILT",
+     40,
+     40,
+     360,
+     280
+    ]
+   ],
+   "gridLines": {
+    "x": [
+     40,
+     100,
+     232,
+     360
+    ],
+    "y": [
+     40,
+     280,
+     400
+    ]
+   },
+   "bodies": [],
+   "boundaryAccepted": false,
+   "basePlanConsequence": null
+  },
+  {
+   "id": "fixture/loggia-recess",
+   "role": "RECESS_WITHOUT_GARAGE",
+   "row": "fixtures",
+   "frameId": "frame-test",
+   "decompositionId": "dec-5f090e4599fd36f5",
+   "decompositionKey": "frame-test|39.5|39.5|360|280|0.05|0.05|",
+   "storey": "SYNTHETIC",
+   "facade": {
+    "side": "S",
+    "axis": "Y",
+    "linePx": 280,
+    "spanPx": [
+     40,
+     360
+    ],
+    "inward": "toward smaller coordinates"
+   },
+   "wallThickness": {
+    "px": 12,
+    "m": 0.6
+   },
+   "mpp": {
+    "x": 0.05,
+    "y": 0.05
+   },
+   "extentBeforeBoundaryWork": {
+    "x0": 39.5,
+    "y0": 39.5,
+    "x1": 360,
+    "y1": 280
+   },
+   "envelope": {
+    "rect": {
+     "x0": 40,
+     "x1": 360,
+     "y0": 40,
+     "y1": 280
+    },
+    "outline": 0
+   },
+   "collinearWallPieces": {
+    "bands": [
+     {
+      "from": 52,
+      "to": 137,
+      "thickness": 12
+     },
+     {
+      "from": 262,
+      "to": 347,
+      "thickness": 12
+     }
+    ],
+    "ink": [
+     {
+      "from": 40,
+      "to": 150,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 5.5
+     },
+     {
+      "from": 250,
+      "to": 360,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 5.5
+     }
+    ]
+   },
+   "facadeGaps": [
+    {
+     "id": "gap-Y-280-150-250",
+     "from": 150,
+     "to": 250,
+     "widthM": 5,
+     "jambs": [
+      "WALL",
+      "WALL"
+     ],
+     "signature": "BLANK",
+     "cls": "TRUE_EXTERIOR_GAP",
+     "boundary": "NONE",
+     "callout": null
+    }
+   ],
+   "perpendicularCandidates": {
+    "bands": [
+     {
+      "axis": "V",
+      "position": 45.5,
+      "thickness": 12,
+      "from": 52,
+      "to": 267,
+      "meetsFacade": false,
+      "inwardM": 11.4,
+      "wallThick": true
+     },
+     {
+      "axis": "V",
+      "position": 143.5,
+      "thickness": 12,
+      "from": 220,
+      "to": 267,
+      "meetsFacade": false,
+      "inwardM": 3,
+      "wallThick": true
+     },
+     {
+      "axis": "V",
+      "position": 255.5,
+      "thickness": 12,
+      "from": 220,
+      "to": 267,
+      "meetsFacade": false,
+      "inwardM": 3,
+      "wallThick": true
+     },
+     {
+      "axis": "V",
+      "position": 353.5,
+      "thickness": 12,
+      "from": 52,
+      "to": 267,
+      "meetsFacade": false,
+      "inwardM": 11.4,
+      "wallThick": true
+     }
+    ],
+    "ink": [
+     {
+      "linePx": 40,
+      "meetsFacade": true,
+      "runFrom": 40,
+      "runTo": 280,
+      "kind": "WALL",
+      "inwardM": 12
+     },
+     {
+      "linePx": 150,
+      "meetsFacade": true,
+      "runFrom": 208,
+      "runTo": 280,
+      "kind": "WALL",
+      "inwardM": 3.6
+     },
+     {
+      "linePx": 250,
+      "meetsFacade": true,
+      "runFrom": 208,
+      "runTo": 280,
+      "kind": "WALL",
+      "inwardM": 3.6
+     },
+     {
+      "linePx": 360,
+      "meetsFacade": true,
+      "runFrom": 40,
+      "runTo": 280,
+      "kind": "WALL",
+      "inwardM": 12
+     }
+    ]
+   },
+   "shortPiers": [],
+   "setbackBackWallCandidates": [
+    {
+     "linePx": 220,
+     "depthM": 3,
+     "wallPieces": [
+      [
+       40,
+       52
+      ],
+      [
+       138,
+       262
+      ],
+      [
+       348,
+       360
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-220-52-138",
+       "from": 52,
+       "to": 138,
+       "widthM": 4.3,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-220-262-348",
+       "from": 262,
+       "to": 348,
+       "widthM": 4.3,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    }
+   ],
+   "existingWideGaps": [
+    {
+     "kind": "COLLINEAR_GAP",
+     "linePx": 280,
+     "fromPx": 137,
+     "toPx": 262,
+     "widthM": 6.25,
+     "infill": 0.104,
+     "callout": null,
+     "pocketM2": 15,
+     "decision": "OPEN_SIDE"
+    }
+   ],
+   "existingBays": [],
+   "cellsNearFacade": [
+    {
+     "ix": 0,
+     "iy": 0,
+     "cls": "B",
+     "rect": [
+      40,
+      40,
+      150,
+      220
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 0,
+     "cls": "B",
+     "rect": [
+      150,
+      40,
+      250,
+      220
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 0,
+     "cls": "B",
+     "rect": [
+      250,
+      40,
+      360,
+      220
+     ]
+    },
+    {
+     "ix": 0,
+     "iy": 1,
+     "cls": "B",
+     "rect": [
+      40,
+      220,
+      150,
+      280
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 1,
+     "cls": "R",
+     "rect": [
+      150,
+      220,
+      250,
+      280
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 1,
+     "cls": "B",
+     "rect": [
+      250,
+      220,
+      360,
+      280
+     ]
+    }
+   ],
+   "recessCells": 1,
+   "builtCells": 5,
+   "regions": [
+    [
+     "BUILT",
+     40,
+     40,
+     360,
+     220
+    ],
+    [
+     "BUILT",
+     40,
+     220,
+     150,
+     280
+    ],
+    [
+     "BUILT",
+     250,
+     220,
+     360,
+     280
+    ],
+    [
+     "RECESS",
+     150,
+     220,
+     250,
+     280
+    ]
+   ],
+   "gridLines": {
+    "x": [
+     40,
+     150,
+     250,
+     360
+    ],
+    "y": [
+     40,
+     220,
+     280
+    ]
+   },
+   "bodies": [],
+   "boundaryAccepted": false,
+   "basePlanConsequence": null
+  },
+  {
+   "id": "fixture/double-garage-bay",
+   "role": "DOUBLE_GARAGE",
+   "row": "fixtures",
+   "frameId": "frame-test",
+   "decompositionId": "dec-7e138c2e771f5285",
+   "decompositionKey": "frame-test|39.5|39.5|360|400|0.05|0.05|",
+   "storey": "SYNTHETIC",
+   "facade": {
+    "side": "S (the bay’s far line)",
+    "axis": "Y",
+    "linePx": 400,
+    "spanPx": [
+     100,
+     232
+    ],
+    "inward": "toward smaller coordinates"
+   },
+   "wallThickness": {
+    "px": 12,
+    "m": 0.6
+   },
+   "mpp": {
+    "x": 0.05,
+    "y": 0.05
+   },
+   "extentBeforeBoundaryWork": {
+    "x0": 39.5,
+    "y0": 39.5,
+    "x1": 360,
+    "y1": 400
+   },
+   "envelope": {
+    "rect": {
+     "x0": 40,
+     "x1": 360,
+     "y0": 40,
+     "y1": 280
+    },
+    "outline": 0
+   },
+   "collinearWallPieces": {
+    "bands": [],
+    "ink": [
+     {
+      "from": 100,
+      "to": 132,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 1.6
+     },
+     {
+      "from": 200,
+      "to": 232,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 1.6
+     }
+    ]
+   },
+   "facadeGaps": [
+    {
+     "id": "gap-Y-400-132-200",
+     "from": 132,
+     "to": 200,
+     "widthM": 3.4,
+     "jambs": [
+      "WALL",
+      "WALL"
+     ],
+     "signature": "LEAF_AXIS",
+     "cls": "TRUE_EXTERIOR_GAP",
+     "boundary": "NONE",
+     "callout": null
+    }
+   ],
+   "perpendicularCandidates": {
+    "bands": [
+     {
+      "axis": "V",
+      "position": 105.5,
+      "thickness": 12,
+      "from": 280,
+      "to": 388,
+      "meetsFacade": true,
+      "inwardM": 6,
+      "wallThick": true
+     },
+     {
+      "axis": "V",
+      "position": 225.5,
+      "thickness": 12,
+      "from": 280,
+      "to": 388,
+      "meetsFacade": true,
+      "inwardM": 6,
+      "wallThick": true
+     }
+    ],
+    "ink": [
+     {
+      "linePx": 100,
+      "meetsFacade": true,
+      "runFrom": 268,
+      "runTo": 401,
+      "kind": "WALL",
+      "inwardM": 6.65
+     },
+     {
+      "linePx": 232,
+      "meetsFacade": true,
+      "runFrom": 268,
+      "runTo": 401,
+      "kind": "WALL",
+      "inwardM": 6.65
+     }
+    ]
+   },
+   "shortPiers": [],
+   "setbackBackWallCandidates": [],
+   "existingWideGaps": [
+    {
+     "kind": "BAY_MOUTH",
+     "linePx": 400,
+     "fromPx": 132,
+     "toPx": 200,
+     "widthM": 3.4,
+     "infill": 1,
+     "callout": null,
+     "pocketM2": null,
+     "decision": "OPENING_IN_WALL"
+    }
+   ],
+   "existingBays": [
+    {
+     "side": "MAX_Z",
+     "rect": {
+      "x0": 100,
+      "x1": 231,
+      "y0": 280,
+      "y1": 400
+     },
+     "wallAxesPx": [
+      105.5,
+      225.5
+     ],
+     "mouth": {
+      "kind": "BAY_MOUTH",
+      "axis": "Y",
+      "linePx": 400,
+      "fromPx": 132,
+      "toPx": 200,
+      "widthM": 3.4,
+      "evidence": {
+       "jambs": true,
+       "corners": true,
+       "infill": 1
+      },
+      "decision": "OPENING_IN_WALL",
+      "score": 0.65,
+      "why": "the mouth of a bay two walls enclose, 3.40 m wide: both side walls reach it, 100% of the gap is one drawn line, no callout states its width — an opening in the bay's front wall"
+     }
+    }
+   ],
+   "cellsNearFacade": [
+    {
+     "ix": 1,
+     "iy": 0,
+     "cls": "B",
+     "rect": [
+      100,
+      40,
+      232,
+      280
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 1,
+     "cls": "B",
+     "rect": [
+      100,
+      280,
+      232,
+      400
+     ]
+    }
+   ],
+   "recessCells": 0,
+   "builtCells": 2,
+   "regions": [
+    [
+     "BUILT",
+     40,
+     40,
+     360,
+     280
+    ],
+    [
+     "BUILT",
+     100,
+     280,
+     232,
+     400
+    ]
+   ],
+   "gridLines": {
+    "x": [
+     40,
+     100,
+     232,
+     360
+    ],
+    "y": [
+     40,
+     280,
+     400
+    ]
+   },
+   "bodies": [],
+   "boundaryAccepted": false,
+   "basePlanConsequence": null
+  },
+  {
+   "id": "fixture/compound-recess-garage-blank",
+   "role": "TARGET_SYNTHETIC",
+   "row": "fixtures",
+   "frameId": "frame-test",
+   "decompositionId": "dec-95f7e8906f5d2749",
+   "decompositionKey": "frame-test|39.5|39.5|360|280|0.05|0.05|",
+   "storey": "SYNTHETIC",
+   "facade": {
+    "side": "S",
+    "axis": "Y",
+    "linePx": 280,
+    "spanPx": [
+     40,
+     360
+    ],
+    "inward": "toward smaller coordinates"
+   },
+   "wallThickness": {
+    "px": 12,
+    "m": 0.6
+   },
+   "mpp": {
+    "x": 0.05,
+    "y": 0.05
+   },
+   "extentBeforeBoundaryWork": {
+    "x0": 39.5,
+    "y0": 39.5,
+    "x1": 360,
+    "y1": 280
+   },
+   "envelope": {
+    "rect": {
+     "x0": 40,
+     "x1": 360,
+     "y0": 40,
+     "y1": 280
+    },
+    "outline": 0
+   },
+   "collinearWallPieces": {
+    "bands": [
+     {
+      "from": 52,
+      "to": 107,
+      "thickness": 12
+     },
+     {
+      "from": 264,
+      "to": 347,
+      "thickness": 12
+     }
+    ],
+    "ink": [
+     {
+      "from": 40,
+      "to": 120,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 4
+     },
+     {
+      "from": 180,
+      "to": 192,
+      "kind": "WALL",
+      "along": false,
+      "lengthM": 0.6
+     },
+     {
+      "from": 252,
+      "to": 360,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 5.4
+     }
+    ]
+   },
+   "facadeGaps": [
+    {
+     "id": "gap-Y-280-120-180",
+     "from": 120,
+     "to": 180,
+     "widthM": 3,
+     "jambs": [
+      "WALL",
+      "WALL"
+     ],
+     "signature": "BLANK",
+     "cls": "TRUE_EXTERIOR_GAP",
+     "boundary": "NONE",
+     "callout": null
+    },
+    {
+     "id": "gap-Y-280-192-252",
+     "from": 192,
+     "to": 252,
+     "widthM": 3,
+     "jambs": [
+      "WALL",
+      "WALL"
+     ],
+     "signature": "BLANK",
+     "cls": "TRUE_EXTERIOR_GAP",
+     "boundary": "NONE",
+     "callout": null
+    }
+   ],
+   "perpendicularCandidates": {
+    "bands": [
+     {
+      "axis": "V",
+      "position": 45.5,
+      "thickness": 12,
+      "from": 52,
+      "to": 267,
+      "meetsFacade": false,
+      "inwardM": 11.4,
+      "wallThick": true
+     },
+     {
+      "axis": "V",
+      "position": 113.5,
+      "thickness": 12,
+      "from": 162,
+      "to": 267,
+      "meetsFacade": false,
+      "inwardM": 5.9,
+      "wallThick": true
+     },
+     {
+      "axis": "V",
+      "position": 185.5,
+      "thickness": 12,
+      "from": 162,
+      "to": 279,
+      "meetsFacade": true,
+      "inwardM": 5.9,
+      "wallThick": true
+     },
+     {
+      "axis": "V",
+      "position": 257.5,
+      "thickness": 12,
+      "from": 162,
+      "to": 267,
+      "meetsFacade": false,
+      "inwardM": 5.9,
+      "wallThick": true
+     },
+     {
+      "axis": "V",
+      "position": 353.5,
+      "thickness": 12,
+      "from": 52,
+      "to": 267,
+      "meetsFacade": false,
+      "inwardM": 11.4,
+      "wallThick": true
+     }
+    ],
+    "ink": [
+     {
+      "linePx": 40,
+      "meetsFacade": true,
+      "runFrom": 40,
+      "runTo": 280,
+      "kind": "WALL",
+      "inwardM": 12
+     },
+     {
+      "linePx": 113.5,
+      "meetsFacade": true,
+      "runFrom": 150,
+      "runTo": 280,
+      "kind": "WALL",
+      "inwardM": 6.5
+     },
+     {
+      "linePx": 185.5,
+      "meetsFacade": true,
+      "runFrom": 150,
+      "runTo": 280,
+      "kind": "WALL",
+      "inwardM": 6.5
+     },
+     {
+      "linePx": 257.5,
+      "meetsFacade": true,
+      "runFrom": 150,
+      "runTo": 280,
+      "kind": "WALL",
+      "inwardM": 6.5
+     },
+     {
+      "linePx": 360,
+      "meetsFacade": true,
+      "runFrom": 40,
+      "runTo": 280,
+      "kind": "WALL",
+      "inwardM": 12
+     }
+    ]
+   },
+   "shortPiers": [
+    {
+     "from": 180,
+     "to": 192,
+     "kind": "WALL",
+     "along": false,
+     "lengthM": 0.6,
+     "wallVsPost": "WALL"
+    }
+   ],
+   "setbackBackWallCandidates": [
+    {
+     "linePx": 233.5,
+     "depthM": 2.325,
+     "wallPieces": [
+      [
+       40,
+       52
+      ],
+      [
+       108,
+       135
+      ],
+      [
+       156,
+       192
+      ],
+      [
+       252,
+       264
+      ],
+      [
+       348,
+       360
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-234-52-108",
+       "from": 52,
+       "to": 108,
+       "widthM": 2.8,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-234-135-156",
+       "from": 135,
+       "to": 156,
+       "widthM": 1.05,
+       "cls": "OPENING_SUPPORTED",
+       "signature": "LEAF_AXIS"
+      },
+      {
+       "id": "gap-Y-234-192-252",
+       "from": 192,
+       "to": 252,
+       "widthM": 3,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-234-264-348",
+       "from": 264,
+       "to": 348,
+       "widthM": 4.2,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    }
+   ],
+   "existingWideGaps": [
+    {
+     "kind": "COLLINEAR_GAP",
+     "linePx": 280,
+     "fromPx": 107,
+     "toPx": 264,
+     "widthM": 7.85,
+     "infill": 0.082803,
+     "callout": null,
+     "pocketM2": 30.78,
+     "decision": "OPEN_SIDE"
+    }
+   ],
+   "existingBays": [],
+   "cellsNearFacade": [
+    {
+     "ix": 0,
+     "iy": 1,
+     "cls": "B",
+     "rect": [
+      40,
+      155.5,
+      113.5,
+      233.5
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 1,
+     "cls": "B",
+     "rect": [
+      113.5,
+      155.5,
+      185.5,
+      233.5
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 1,
+     "cls": "R",
+     "rect": [
+      185.5,
+      155.5,
+      257.5,
+      233.5
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 1,
+     "cls": "B",
+     "rect": [
+      257.5,
+      155.5,
+      360,
+      233.5
+     ]
+    },
+    {
+     "ix": 0,
+     "iy": 2,
+     "cls": "B",
+     "rect": [
+      40,
+      233.5,
+      113.5,
+      280
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 2,
+     "cls": "R",
+     "rect": [
+      113.5,
+      233.5,
+      185.5,
+      280
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 2,
+     "cls": "O",
+     "rect": [
+      185.5,
+      233.5,
+      257.5,
+      280
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 2,
+     "cls": "B",
+     "rect": [
+      257.5,
+      233.5,
+      360,
+      280
+     ]
+    }
+   ],
+   "recessCells": 2,
+   "builtCells": 5,
+   "regions": [
+    [
+     "BUILT",
+     40,
+     40,
+     360,
+     155.5
+    ],
+    [
+     "BUILT",
+     257.5,
+     155.5,
+     360,
+     280
+    ],
+    [
+     "BUILT",
+     40,
+     155.5,
+     185.5,
+     233.5
+    ],
+    [
+     "RECESS",
+     185.5,
+     155.5,
+     257.5,
+     233.5
+    ],
+    [
+     "BUILT",
+     40,
+     233.5,
+     113.5,
+     280
+    ],
+    [
+     "RECESS",
+     113.5,
+     233.5,
+     185.5,
+     280
+    ]
+   ],
+   "gridLines": {
+    "x": [
+     40,
+     113.5,
+     185.5,
+     257.5,
+     360
+    ],
+    "y": [
+     40,
+     155.5,
+     233.5,
+     280
+    ]
+   },
+   "bodies": [],
+   "boundaryAccepted": false,
+   "basePlanConsequence": null
+  },
+  {
+   "id": "fixture/compound-recess-garage-door",
+   "role": "TARGET_SYNTHETIC",
+   "row": "fixtures",
+   "frameId": "frame-test",
+   "decompositionId": "dec-95f7e8906f5d2749",
+   "decompositionKey": "frame-test|39.5|39.5|360|280|0.05|0.05|",
+   "storey": "SYNTHETIC",
+   "facade": {
+    "side": "S",
+    "axis": "Y",
+    "linePx": 280,
+    "spanPx": [
+     40,
+     360
+    ],
+    "inward": "toward smaller coordinates"
+   },
+   "wallThickness": {
+    "px": 12,
+    "m": 0.6
+   },
+   "mpp": {
+    "x": 0.05,
+    "y": 0.05
+   },
+   "extentBeforeBoundaryWork": {
+    "x0": 39.5,
+    "y0": 39.5,
+    "x1": 360,
+    "y1": 280
+   },
+   "envelope": {
+    "rect": {
+     "x0": 40,
+     "x1": 360,
+     "y0": 40,
+     "y1": 280
+    },
+    "outline": 0
+   },
+   "collinearWallPieces": {
+    "bands": [
+     {
+      "from": 52,
+      "to": 107,
+      "thickness": 12
+     },
+     {
+      "from": 264,
+      "to": 347,
+      "thickness": 12
+     }
+    ],
+    "ink": [
+     {
+      "from": 40,
+      "to": 120,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 4
+     },
+     {
+      "from": 180,
+      "to": 192,
+      "kind": "WALL",
+      "along": false,
+      "lengthM": 0.6
+     },
+     {
+      "from": 252,
+      "to": 360,
+      "kind": "WALL",
+      "along": true,
+      "lengthM": 5.4
+     }
+    ]
+   },
+   "facadeGaps": [
+    {
+     "id": "gap-Y-280-120-180",
+     "from": 120,
+     "to": 180,
+     "widthM": 3,
+     "jambs": [
+      "WALL",
+      "WALL"
+     ],
+     "signature": "BLANK",
+     "cls": "TRUE_EXTERIOR_GAP",
+     "boundary": "NONE",
+     "callout": null
+    },
+    {
+     "id": "gap-Y-280-192-252",
+     "from": 192,
+     "to": 252,
+     "widthM": 3,
+     "jambs": [
+      "WALL",
+      "WALL"
+     ],
+     "signature": "LEAF_AXIS",
+     "cls": "OPENING_SUPPORTED",
+     "boundary": "STRONG",
+     "callout": null
+    }
+   ],
+   "perpendicularCandidates": {
+    "bands": [
+     {
+      "axis": "V",
+      "position": 45.5,
+      "thickness": 12,
+      "from": 52,
+      "to": 267,
+      "meetsFacade": false,
+      "inwardM": 11.4,
+      "wallThick": true
+     },
+     {
+      "axis": "V",
+      "position": 113.5,
+      "thickness": 12,
+      "from": 162,
+      "to": 267,
+      "meetsFacade": false,
+      "inwardM": 5.9,
+      "wallThick": true
+     },
+     {
+      "axis": "V",
+      "position": 185.5,
+      "thickness": 12,
+      "from": 162,
+      "to": 275,
+      "meetsFacade": true,
+      "inwardM": 5.9,
+      "wallThick": true
+     },
+     {
+      "axis": "V",
+      "position": 257.5,
+      "thickness": 12,
+      "from": 162,
+      "to": 267,
+      "meetsFacade": false,
+      "inwardM": 5.9,
+      "wallThick": true
+     },
+     {
+      "axis": "V",
+      "position": 353.5,
+      "thickness": 12,
+      "from": 52,
+      "to": 267,
+      "meetsFacade": false,
+      "inwardM": 11.4,
+      "wallThick": true
+     }
+    ],
+    "ink": [
+     {
+      "linePx": 40,
+      "meetsFacade": true,
+      "runFrom": 40,
+      "runTo": 280,
+      "kind": "WALL",
+      "inwardM": 12
+     },
+     {
+      "linePx": 113.5,
+      "meetsFacade": true,
+      "runFrom": 150,
+      "runTo": 280,
+      "kind": "WALL",
+      "inwardM": 6.5
+     },
+     {
+      "linePx": 185.5,
+      "meetsFacade": true,
+      "runFrom": 150,
+      "runTo": 280,
+      "kind": "WALL",
+      "inwardM": 6.5
+     },
+     {
+      "linePx": 257.5,
+      "meetsFacade": true,
+      "runFrom": 150,
+      "runTo": 280,
+      "kind": "WALL",
+      "inwardM": 6.5
+     },
+     {
+      "linePx": 360,
+      "meetsFacade": true,
+      "runFrom": 40,
+      "runTo": 280,
+      "kind": "WALL",
+      "inwardM": 12
+     }
+    ]
+   },
+   "shortPiers": [
+    {
+     "from": 180,
+     "to": 192,
+     "kind": "WALL",
+     "along": false,
+     "lengthM": 0.6,
+     "wallVsPost": "WALL"
+    }
+   ],
+   "setbackBackWallCandidates": [
+    {
+     "linePx": 233.5,
+     "depthM": 2.325,
+     "wallPieces": [
+      [
+       40,
+       52
+      ],
+      [
+       108,
+       135
+      ],
+      [
+       156,
+       192
+      ],
+      [
+       252,
+       264
+      ],
+      [
+       348,
+       360
+      ]
+     ],
+     "gaps": [
+      {
+       "id": "gap-Y-234-52-108",
+       "from": 52,
+       "to": 108,
+       "widthM": 2.8,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-234-135-156",
+       "from": 135,
+       "to": 156,
+       "widthM": 1.05,
+       "cls": "OPENING_SUPPORTED",
+       "signature": "LEAF_AXIS"
+      },
+      {
+       "id": "gap-Y-234-192-252",
+       "from": 192,
+       "to": 252,
+       "widthM": 3,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      },
+      {
+       "id": "gap-Y-234-264-348",
+       "from": 264,
+       "to": 348,
+       "widthM": 4.2,
+       "cls": "TRUE_EXTERIOR_GAP",
+       "signature": "BLANK"
+      }
+     ]
+    }
+   ],
+   "existingWideGaps": [
+    {
+     "kind": "COLLINEAR_GAP",
+     "linePx": 280,
+     "fromPx": 107,
+     "toPx": 264,
+     "widthM": 7.85,
+     "infill": 0.541401,
+     "callout": null,
+     "pocketM2": 8.37,
+     "decision": "OPEN_SIDE"
+    }
+   ],
+   "existingBays": [],
+   "cellsNearFacade": [
+    {
+     "ix": 0,
+     "iy": 1,
+     "cls": "B",
+     "rect": [
+      40,
+      155.5,
+      113.5,
+      233.5
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 1,
+     "cls": "B",
+     "rect": [
+      113.5,
+      155.5,
+      185.5,
+      233.5
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 1,
+     "cls": "B",
+     "rect": [
+      185.5,
+      155.5,
+      257.5,
+      233.5
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 1,
+     "cls": "B",
+     "rect": [
+      257.5,
+      155.5,
+      360,
+      233.5
+     ]
+    },
+    {
+     "ix": 0,
+     "iy": 2,
+     "cls": "B",
+     "rect": [
+      40,
+      233.5,
+      113.5,
+      280
+     ]
+    },
+    {
+     "ix": 1,
+     "iy": 2,
+     "cls": "R",
+     "rect": [
+      113.5,
+      233.5,
+      185.5,
+      280
+     ]
+    },
+    {
+     "ix": 2,
+     "iy": 2,
+     "cls": "B",
+     "rect": [
+      185.5,
+      233.5,
+      257.5,
+      280
+     ]
+    },
+    {
+     "ix": 3,
+     "iy": 2,
+     "cls": "B",
+     "rect": [
+      257.5,
+      233.5,
+      360,
+      280
+     ]
+    }
+   ],
+   "recessCells": 1,
+   "builtCells": 7,
+   "regions": [
+    [
+     "BUILT",
+     40,
+     40,
+     360,
+     233.5
+    ],
+    [
+     "BUILT",
+     185.5,
+     233.5,
+     360,
+     280
+    ],
+    [
+     "BUILT",
+     40,
+     233.5,
+     113.5,
+     280
+    ],
+    [
+     "RECESS",
+     113.5,
+     233.5,
+     185.5,
+     280
+    ]
+   ],
+   "gridLines": {
+    "x": [
+     40,
+     113.5,
+     185.5,
+     257.5,
+     360
+    ],
+    "y": [
+     40,
+     155.5,
+     233.5,
+     280
+    ]
+   },
+   "bodies": [],
+   "boundaryAccepted": false,
+   "basePlanConsequence": null
+  }
+ ]
+}
