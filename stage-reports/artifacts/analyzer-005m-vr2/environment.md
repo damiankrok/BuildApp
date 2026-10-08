@@ -52,6 +52,17 @@ llama-server -m <LLM.gguf> --mmproj <vision.gguf> -t 4 -tb 4 -c 8192 -np 1 --tem
     matched run.
   - The cap is recorded with every result (`input-modes.md`).
 
+## Container restart (2026-10-08, 00:38 UTC)
+
+The session's container was restarted once, during Qwen3-VL-4B phase 2, after 322 of its 835 records.
+- **Lost.** tmpfs (`/dev/shm`) was wiped; the work directory and every run file survived.
+- **Weights re-fetched.** The pinned Qwen3-VL-4B GGUFs were downloaded again from the same revision, and both files
+  matched the SHA-256 values recorded before the restart (`manifests/qwen3vl-4b.gguf.sha256`).
+- **Run resumed.** The run continued from record 323 (`bench.py` skips answered keys), under the same server
+  settings and the same 13.36 GiB cgroup limit.
+- **Caveats for the 4B run.** It therefore spans two server processes. The first request after the restart ran with
+  an empty prompt cache. Its peak-RSS figure is the larger of the two processes.
+
 ## Network and accounts
 
 - Outbound HTTPS goes through the session's agent proxy. Public, unauthenticated huggingface.co downloads at pinned
