@@ -192,11 +192,14 @@ describe('005N §21 — separators: structural ink only', () => {
   it('20. a block of furniture standing on the facade line is a post, not a separator', () => {
     const p = house()
     p.clear(120, FRONT, 219, 279)
-    p.wall(164, 266, 175, 277) // a bin, a bollard: a free-standing block on the line
-    const r = runScene(scene(p), 'id')
-    const refused = spansOf(r.d).flatMap((s) => s.separators)
-    expect(refused.filter((x) => x.accepted)).toHaveLength(0)
-    expect(spansOf(r.d)).toHaveLength(0)
+    // a bin, a bollard: a free-standing block against the facade, off the wall's own axis (so no wall band takes it in)
+    // but within the line reader's reach — wall-thick ink the reader sees, and a post that establishes no wall relation
+    p.wall(164, 281, 175, 292)
+    for (const t of TRANSFORMS) {
+      const r = runScene(scene(p), t)
+      expect(r.d.wideOpenings.some((w) => w.widthM > 4.5), `${t}: the 5 m gap is weighed`).toBe(true)
+      expect(spansOf(r.d), t).toHaveLength(0)
+    }
   })
 
   it('21. a narrow wall-thick return (0.6 m) still separates two mouths', () => {
