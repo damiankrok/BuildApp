@@ -184,7 +184,8 @@ def main():
                 models.append(r['model'])
     res = {}
     for (m, q, mode), r in raw.items():
-        res[(m, q, mode)] = outcome(it_by[(q, mode)], r)
+        if (q, mode) in it_by:   # a run may cover more questions than the item list scored here (the teacher's subset)
+            res[(m, q, mode)] = outcome(it_by[(q, mode)], r)
     phase1_pre = sorted({it['qid'] for it in items if it['phase1']})
     phase2_pre = sorted({it['qid'] for it in items})
     phase1 = [q for q in phase1_pre if q not in excluded]
