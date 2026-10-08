@@ -29,11 +29,12 @@ CANDIDATES = [
      'status': 'NOT_RUN_ACCESS_GATED: gated "manual" on the hub; an unauthenticated request for config.json at the pinned revision returned 401; no credential exists in this environment and none was created (brief section 3: absence is not a blocker)'},
     {'role': 'CONDITIONAL_REFERENCE', 'id': 'google/gemma-3n-E4B-it', 'gguf': None, 'files': [], 'derivative': None, 'local': None, 'status': 'NOT_RUN_ACCESS_GATED (MatFormer audit only)'},
     {'role': 'TEACHER_PRIMARY', 'id': 'Qwen/Qwen3-VL-8B-Instruct', 'gguf': 'Qwen/Qwen3-VL-8B-Instruct-GGUF', 'files': ['Qwen3VL-8B-Instruct-Q4_K_M.gguf', 'mmproj-Qwen3VL-8B-Instruct-F16.gguf'],
-     'derivative': 'OFFICIAL_QUANTISATION by the same publisher (Qwen); LLM Q4_K_M (the 8.7 GB Q8_0 does not fit this container next to the benchmark), vision F16', 'local': 'qwen3vl-8b.gguf.sha256'},
+     'derivative': 'OFFICIAL_QUANTISATION by the same publisher (Qwen); LLM Q4_K_M (its Q8_0, 8.7 GB, plus runtime memory does not fit the 13.36 GiB cgroup), vision F16', 'local': 'qwen3vl-8b.gguf.sha256',
+     'status': 'RUN_CPU_SUBSET: 24 phase-1 questions without the TEST split x 5 modes (120 records) and 42 TRAIN questions in mode D, plus 12 free-text rationales; the first 27 records ran with an 8k context and the 2 GiB prompt cache, the rest with -c 4096 --cache-ram 0 after an OOM kill; downloaded files matched the hub LFS SHA-256'},
     {'role': 'TEACHER_UPPER_ORACLE', 'id': 'Qwen/Qwen3-VL-32B-Instruct', 'gguf': None, 'files': [], 'derivative': None, 'local': None,
-     'status': 'NOT_RUN_DEFERRED_ENV: 66.7 GB of BF16 weights; no GPU, 16 GB RAM, ~5 GB disk; no hosted inference is authorised for this stage'},
-    {'role': 'REFERENCE_005J', 'id': 'HuggingFaceTB/SmolVLM2-500M-Video-Instruct', 'gguf': None, 'files': [], 'derivative': None, 'local': None,
-     'status': 'NOT_RE_RUN: its 005J results are joined on the exact question intersection (onnx int8 decoder, 64 image tokens)'},
+     'status': 'NOT_RUN_DEFERRED_ENV: 66.7 GB of BF16 weights; no GPU, a 13.36 GiB memory cgroup, under 1 GB of free disk; no hosted inference is authorised for this stage'},
+    {'role': 'REFERENCE_005J', 'id': 'HuggingFaceTB/SmolVLM2-500M-Video-Instruct', 'gguf': None, 'files': [], 'derivative': None, 'local': None, 'download': 'smolvlm2-500m.download.json',
+     'status': 'NOT_RE_RUN as a referee (its 005J results are joined on the exact question intersection). Its safetensors were downloaded at the pinned revision for the CPU student probe only (8 LoRA steps, no adapter saved)'},
 ]
 
 

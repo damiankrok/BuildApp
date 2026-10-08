@@ -5,7 +5,7 @@
 #
 # Weights are read from outside the repository (/dev/shm/models or $W/gguf). The server is started and stopped by PID;
 # its log goes next to the run file. CPU only: 4 threads, 8k context, one slot, greedy; the host-RAM prompt cache is
-# capped at 2 GiB (default 8 GiB) because the weights sit in /dev/shm inside the same 16 GB memory cgroup.
+# capped at 2 GiB (default 8 GiB) because the weights sit in /dev/shm inside the same memory cgroup (13.36 GiB).
 set -euo pipefail
 LABEL=$1; MODEL=$2; MMPROJ=$3; PHASE=$4; OUT=$5; shift 5
 W=${W:-/home/user/work005m}

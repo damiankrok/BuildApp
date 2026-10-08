@@ -388,8 +388,8 @@
      "lfsSha256": null
     }
    },
-   "derivative": "OFFICIAL_QUANTISATION by the same publisher (Qwen); LLM Q4_K_M (the 8.7 GB Q8_0 does not fit this container next to the benchmark), vision F16",
-   "status": "RUN",
+   "derivative": "OFFICIAL_QUANTISATION by the same publisher (Qwen); LLM Q4_K_M (its Q8_0, 8.7 GB, plus runtime memory does not fit the 13.36 GiB cgroup), vision F16",
+   "status": "RUN_CPU_SUBSET: 24 phase-1 questions without the TEST split x 5 modes (120 records) and 42 TRAIN questions in mode D, plus 12 free-text rationales; the first 27 records ran with an 8k context and the 2 GiB prompt cache, the rest with -c 4096 --cache-ram 0 after an OOM kill; downloaded files matched the hub LFS SHA-256",
    "ggufRepo": {
     "id": "Qwen/Qwen3-VL-8B-Instruct-GGUF",
     "revision": "f982a07559d4a2f6c8744d840bf6fccab30eea96",
@@ -412,6 +412,16 @@
      "Qwen3VL-8B-Instruct-Q8_0.gguf": 8709519456,
      "mmproj-Qwen3VL-8B-Instruct-F16.gguf": 1159029824,
      "mmproj-Qwen3VL-8B-Instruct-Q8_0.gguf": 752289728
+    }
+   },
+   "ranGguf": {
+    "Qwen3VL-8B-Instruct-Q4_K_M.gguf": {
+     "sha256": "67d1659bfe71b89d50b45a4ad1a9e5b997e5bb16ce5da66a6a6167abd569e9e2",
+     "bytes": 5027784800
+    },
+    "mmproj-Qwen3VL-8B-Instruct-F16.gguf": {
+     "sha256": "ca524100ebf825c9a870db1c580d03879e0da0ab2541697e2458e64891cf9d38",
+     "bytes": 1159029824
     }
    }
   },
@@ -497,7 +507,7 @@
     }
    },
    "derivative": null,
-   "status": "NOT_RUN_DEFERRED_ENV: 66.7 GB of BF16 weights; no GPU, 16 GB RAM, ~5 GB disk; no hosted inference is authorised for this stage"
+   "status": "NOT_RUN_DEFERRED_ENV: 66.7 GB of BF16 weights; no GPU, a 13.36 GiB memory cgroup, under 1 GB of free disk; no hosted inference is authorised for this stage"
   },
   {
    "role": "REFERENCE_005J",
@@ -619,7 +629,20 @@
     }
    },
    "derivative": null,
-   "status": "NOT_RE_RUN: its 005J results are joined on the exact question intersection (onnx int8 decoder, 64 image tokens)"
+   "status": "NOT_RE_RUN as a referee (its 005J results are joined on the exact question intersection). Its safetensors were downloaded at the pinned revision for the CPU student probe only (8 LoRA steps, no adapter saved)",
+   "downloadedAtRevision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+   "downloadedFiles": {
+    "model.safetensors": {
+     "bytes": 2029990624,
+     "sha256": "b9bfd456c9472c0acd5719d6e514c4b859891af205ee1a736552fd3497b8b0c3",
+     "lfsSha256": "b9bfd456c9472c0acd5719d6e514c4b859891af205ee1a736552fd3497b8b0c3"
+    },
+    "tokenizer.json": {
+     "bytes": 3548256,
+     "sha256": "5ece781dc8d2b2f3e2f289ca0ae50b17cfc27dd27bfe7971bb8241e0b964331a",
+     "lfsSha256": null
+    }
+   }
   }
  ]
 }

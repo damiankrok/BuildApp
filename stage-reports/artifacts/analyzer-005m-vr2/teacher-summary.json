@@ -1,0 +1,66 @@
+{
+ "researchOnly": "BUILDPLAN-ANALYZER-005M",
+ "teacher": "Qwen/Qwen3-VL-8B-Instruct (official Q4_K_M GGUF + F16 projector, CPU)",
+ "trainItems": {
+  "questions": 42,
+  "mode": "D_MARKED_ROI_PLUS_CROP",
+  "split": "TRAIN (vrgen2 2.0.0, garage family removed)",
+  "agreeWithGenerator": 20,
+  "unresolved": 0,
+  "byFamily": {
+   "compound_front": {
+    "n": 6,
+    "agree": 3,
+    "unresolved": 0
+   },
+   "corridor_vs_passage": {
+    "n": 6,
+    "agree": 3,
+    "unresolved": 0
+   },
+   "glazed_front": {
+    "n": 6,
+    "agree": 3,
+    "unresolved": 0
+   },
+   "inset_upper": {
+    "n": 6,
+    "agree": 3,
+    "unresolved": 0
+   },
+   "loggia_vs_room": {
+    "n": 6,
+    "agree": 3,
+    "unresolved": 0
+   },
+   "phantom_line": {
+    "n": 6,
+    "agree": 2,
+    "unresolved": 0
+   },
+   "wing_storey": {
+    "n": 6,
+    "agree": 3,
+    "unresolved": 0
+   }
+  },
+  "counterfactualPairs": {
+   "pairs": 21,
+   "truthDiffers": 21,
+   "sameAnswerToBoth": 20,
+   "bothRight": 0
+  },
+  "optionProbability": {
+   "meanWhenAgreeing": 0.8937,
+   "meanWhenDisagreeing": 0.8474,
+   "aurocAgreeVsDisagree": 0.5773
+  },
+  "medianWallSeconds": 52.307
+ },
+ "rationales": {
+  "n": 12,
+  "freeAnswerEqualsConstrained": 8,
+  "freeAnswerAgreesWithGenerator": 6,
+  "note": "free text is inspection material only; it never becomes a target"
+ }
+}

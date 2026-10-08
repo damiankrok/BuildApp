@@ -1,0 +1,74 @@
+{
+ "model": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct@7b375e1b73b11138ff12fe22c8f2822d8fe03467 (outside the repository, /dev/shm)",
+ "mode": "D_MARKED_ROI_PLUS_CROP",
+ "dtype": "float32 (CPU)",
+ "threads": 4,
+ "longestEdge": 1024,
+ "attention": "sdpa",
+ "loadSeconds": 0.4,
+ "trainableParams": 9568256,
+ "totalParams": 517050560,
+ "steps": [
+  {
+   "qid": "005m:train-compound_front-s0-A-NORMAL-q0",
+   "tokens": 905,
+   "targetTokens": 15,
+   "loss": 1.2662,
+   "seconds": 50.28
+  },
+  {
+   "qid": "005m:train-compound_front-s0-B-NORMAL-q0",
+   "tokens": 905,
+   "targetTokens": 15,
+   "loss": 0.3783,
+   "seconds": 48.16
+  },
+  {
+   "qid": "005m:train-compound_front-s1-A-NORMAL-q0",
+   "tokens": 905,
+   "targetTokens": 15,
+   "loss": 0.1438,
+   "seconds": 35.0
+  },
+  {
+   "qid": "005m:train-compound_front-s1-B-NORMAL-q0",
+   "tokens": 905,
+   "targetTokens": 15,
+   "loss": 0.1417,
+   "seconds": 31.07
+  },
+  {
+   "qid": "005m:train-compound_front-s2-A-NORMAL-q0",
+   "tokens": 905,
+   "targetTokens": 15,
+   "loss": 0.0905,
+   "seconds": 30.33
+  },
+  {
+   "qid": "005m:train-compound_front-s2-B-NORMAL-q0",
+   "tokens": 905,
+   "targetTokens": 15,
+   "loss": 0.0993,
+   "seconds": 28.47
+  },
+  {
+   "qid": "005m:train-corridor_vs_passage-s0-A-NORMAL-q0",
+   "tokens": 907,
+   "targetTokens": 15,
+   "loss": 0.0296,
+   "seconds": 29.04
+  },
+  {
+   "qid": "005m:train-corridor_vs_passage-s0-B-NORMAL-q0",
+   "tokens": 907,
+   "targetTokens": 15,
+   "loss": 0.1473,
+   "seconds": 29.01
+  }
+ ],
+ "medianStepSeconds": 31.07,
+ "peakRssBytes": 13085859840,
+ "adapterSaved": false,
+ "items": "42-question TRAIN mining slice, mode D, first 8 items (generator targets)",
+ "note": "8 optimisation steps on 8 different items: a timing and memory probe, not training; the falling loss mostly reflects the fixed JSON reply format. No adapter was written. Peak RSS includes the fp32 base model (~2.1 GB) and autograd buffers."
+}

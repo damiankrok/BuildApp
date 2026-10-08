@@ -78,7 +78,31 @@ That is why a student is evaluated on **SEALED**, which no model has seen (post-
 
 ## 3. CPU probe (measured)
 
-(Filled from `student_probe.py`; see §3a below once run.)
+`student_probe.py` on SmolVLM2-500M-Video-Instruct (`7b375e1b`; weights in `/dev/shm`, never in the repository).
+Record: `student-probe.json`.
+
+| quantity | measured |
+| --- | --- |
+| setup | LoRA r = 16 / α = 32 on `q,k,v,o,gate,up,down` of the LM, vision frozen; fp32, 4 CPU threads, AdamW lr 2e-4 |
+| trainable / total parameters | **9.57 M / 517.1 M** (1.85 %) |
+| items | 8 TRAIN items in mode D (two images each), with the generator targets; the processor set to route A's 1,024 px longest edge, with SDPA attention |
+| tokens per item | 905–907, of which 15 are reply tokens carrying the loss |
+| seconds per optimisation step | **median 31.1 s** (the first two steps 48–50 s, then 28–35 s) |
+| peak RSS | **13.1 GB**: just inside the 13.36 GiB cgroup |
+| loss | 1.27 → 0.03–0.15 over 8 steps on 8 different items. This mostly shows the fixed JSON reply format being learnt; it is not evidence of reading |
+| adapter written | **no** |
+
+**Two failed attempts, recorded because they size the plan.**
+1. `torchvision` was missing from the venv: SmolVLM's processor imports it. It is now in the lock.
+2. With the processor's default 2,048 px, each item became ≈ 2,400 tokens, and the probe was killed by the memory
+   cgroup. That is the reason route A sets 1,024 px (§4).
+
+**What it implies.**
+- **On this CPU.** One epoch over the 55,000 lines would take 55,000 × 31 s ≈ **474 hours**, three epochs ≈ 1,420 hours.
+  One epoch over mode D alone (11,000 lines) would still take ≈ 95 hours, at a peak memory that leaves no room for
+  anything else. **STUDENT_TRAINING = DEFERRED_ENV** is a measured conclusion, not a default.
+- **On a GPU.** §4's estimate assumes 0.08–0.15 s per sample: about 200–400× this CPU. That is plausible for a 0.5 B
+  model in bf16 on a 4090-class GPU, but it was not measured here.
 
 ## 4. Command and container for a real run (a GPU environment the OWNER authorises)
 
