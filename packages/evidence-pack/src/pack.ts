@@ -21,11 +21,14 @@ export const EVIDENCE_PACK_SCHEMA = 'buildapp.evidence-pack' as const
  * scale, coordinates, crop hash, strokes, signatures, rules, decisions) — and the BOUNDARY_GAPS stage of the timeline.
  * 1.3.0 (005L): `14b-storey-support.json` — every other storey's plan as the storey-support relation decided it (its
  * placement, what its scale rests on, its walled regions and what each stands on) — and the STOREY_SUPPORT stage.
+ * 1.4.0 (005N): `12c-compound-facades.json` — every facade gap a separator cut into atomic intervals, per analysed copy
+ * (the parent span, each separator accepted or refused and why, each interval's evidence, role and final decision, and
+ * the cells behind its mouth) — and the COMPOUND_FACADES stage.
  */
-export const EVIDENCE_PACK_VERSION = '1.3.0' as const
+export const EVIDENCE_PACK_VERSION = '1.4.0' as const
 
 /** 005I: the files a pack of an earlier version was made without — a pack is complete for its own version (`requiredFiles`). */
-export const PACK_FILES_SINCE: Readonly<Record<string, readonly string[]>> = { '1.1.0': ['07b-dimension-topology.svg', '07b-dimension-topology.json'], '1.2.0': ['12b-gap-evidence.json'], '1.3.0': ['14b-storey-support.json'] }
+export const PACK_FILES_SINCE: Readonly<Record<string, readonly string[]>> = { '1.1.0': ['07b-dimension-topology.svg', '07b-dimension-topology.json'], '1.2.0': ['12b-gap-evidence.json'], '1.3.0': ['14b-storey-support.json'], '1.4.0': ['12c-compound-facades.json'] }
 
 /** Semantic versions compared numerically, component by component: 1.10.0 is after 1.9.0 (post-review D5). */
 export function compareVersions(a: string, b: string): number {
@@ -80,6 +83,7 @@ export const PACK_FILES = [
   '12-opening-observations.svg',
   '12-opening-observations.json',
   '12b-gap-evidence.json',
+  '12c-compound-facades.json',
   '13-body-candidates.svg',
   '13-body-candidates.json',
   '14-selected-layout.svg',
@@ -678,6 +682,18 @@ export function buildEvidencePack(run: RunRecord): EvidencePack {
     files.set('12b-gap-evidence.json', json({ selectedPlanFrameId: selected?.frameId ?? null, ...(unrecorded > 0 ? { note: `${unrecorded} cop${unrecorded === 1 ? 'y has' : 'ies have'} no per-gap records: boundary evidence before 1.2.0, or no boundary read on that copy` } : {}), copies }))
     for (const c of copies) {
       for (const g of c.gaps) event('BOUNDARY_GAPS', `gap:${g.key}`, `${g.final.boundary}:${g.outline}`, `${round(g.widthM, 3)} m ${g.signature} (${g.reasons.join(' > ')})${g.drawnGapRule.check ? `; drawn-gap rule ${g.drawnGapRule.check.eligible ? 'eligible' : 'not eligible'}${g.drawnGapRule.upgraded ? ', upgraded' : ''}` : ''}`)
+    }
+  }
+
+  // 12c (005N): every facade gap a separator cut into atomic intervals, per analysed copy. Coordinates and ids only.
+  {
+    const copies = frames.map((f) => ({ frameId: f.frameId, decompositionId: f.boundary?.decompositionId ?? null, storey: f.storey ?? null, scale: f.scale, spans: f.compoundFacades ?? [] }))
+    files.set('12c-compound-facades.json', json({ selectedPlanFrameId: selected?.frameId ?? null, copies }))
+    for (const c of copies) {
+      for (const s of c.spans) {
+        for (const x of s.separators) event('COMPOUND_FACADES', `separator:${c.frameId}/${x.id}`, x.accepted ? x.kind : 'NOT_A_SEPARATOR', x.why)
+        for (const i of s.intervals) event('COMPOUND_FACADES', `interval:${c.frameId}/${i.id}`, `${i.role}:${i.decision}`, `${round(i.widthM, 3)} m ${i.signature}; behind it ${i.behind.map((b) => b.cls).join('') || 'nothing'}; ${i.why}`)
+      }
     }
   }
 

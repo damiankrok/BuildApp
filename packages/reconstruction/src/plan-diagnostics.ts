@@ -15,8 +15,9 @@ import type { SourceObservationGraph } from '@buildapp/source-observations'
 import type { StructuralLayoutDraft } from './layout.js'
 import type { StructuralLayoutHypothesisSet } from './structural-layout.js'
 import { ReconstructionFailure, planCounts } from './failure.js'
-import type { PlanDiagnostics, PlanDiagnosticsReport, StoreyDigest } from './failure.js'
-import type { BoundaryRecord } from './plan-decomposition.js'
+import type { CompoundFacadeDigest, PlanDiagnostics, PlanDiagnosticsReport, StoreyDigest } from './failure.js'
+import type { BoundaryRecord, PlanDecomposition } from './plan-decomposition.js'
+import type { CompoundFacadeSpan } from './compound-facade.js'
 import type { OutlineSupport } from './boundary-outline.js'
 
 const rect = (r: { x0: number; y0: number; x1: number; y1: number }): { x0: number; y0: number; x1: number; y1: number } => ({ x0: round6(r.x0), y0: round6(r.y0), x1: round6(r.x1), y1: round6(r.y1) })
@@ -61,7 +62,9 @@ export function planDiagnosticsOf(draft: StructuralLayoutDraft, graph: SourceObs
       cells: d.cells.map((c) => ({ ix: c.ix, iy: c.iy, rect: rect(c.rect), cls: c.classification === 'BUILT' ? ('B' as const) : c.classification === 'RECESS' ? ('R' as const) : ('O' as const), enclosed: c.enclosed })),
       regions: d.regions.filter((r) => r.classification !== 'OUTSIDE').map((r) => ({ id: r.id, cls: r.classification as 'BUILT' | 'RECESS', rect: rect(r.rect) })),
       // 005K: a wide opening's geometric identity in its frame (its line and ends), beside its decision
-      wideOpenings: d.wideOpenings.map((w) => ({ id: `wide-${w.axis}-${Math.round(w.linePx)}-${Math.round(w.fromPx)}-${Math.round(w.toPx)}`, kind: w.kind, axis: w.axis, linePx: round6(w.linePx), fromPx: round6(w.fromPx), toPx: round6(w.toPx), widthM: w.widthM, decision: w.decision, score: w.score, why: w.why })),
+      wideOpenings: d.wideOpenings.map((w) => ({ id: `wide-${w.axis}-${Math.round(w.linePx)}-${Math.round(w.fromPx)}-${Math.round(w.toPx)}`, kind: w.kind, axis: w.axis, linePx: round6(w.linePx), fromPx: round6(w.fromPx), toPx: round6(w.toPx), widthM: w.widthM, decision: w.decision, score: w.score, why: w.why, ...(w.compound ? { compound: w.compound } : {}) })),
+      // 005N: recorded only where a facade gap holds a separator, so every other plan digests as it did
+      ...(d.compoundFacades && d.compoundFacades.length > 0 ? { compoundFacades: d.compoundFacades.map((s) => compoundOf(s, d)) } : {}),
       bays: d.bays.map((b) => ({ side: b.side, rect: rect(b.rect), mouth: b.mouth.decision })),
       hypotheses: d.hypotheses.map((h) => ({ id: h.id, builtCells: h.builtCells, closedOpenings: h.closedOpenings, score: h.score, chosen: d.chosenHypothesis === h.id, why: h.why })),
       ...(d.boundary ? { boundary: boundaryOf(d.boundary) } : {}),
@@ -83,6 +86,53 @@ export function planDiagnosticsOf(draft: StructuralLayoutDraft, graph: SourceObs
     why: r.why,
   }))
   return { planFrames, selectedPlanFrameId: draft.base?.frame.id ?? null, plans, skipped: draft.skippedPlans.map((s) => ({ frameId: s.frameId, why: s.why })), ...(storeys.length > 0 ? { storeys } : {}) }
+}
+
+/** 005N: one compound facade span, with each interval's final decision and the cells behind its mouth. */
+function compoundOf(s: CompoundFacadeSpan, d: PlanDecomposition): CompoundFacadeDigest {
+  const final = new Map(d.wideOpenings.filter((w) => w.compound).map((w) => [w.compound?.intervalId, w]))
+  const behind = (from: number, to: number): CompoundFacadeDigest['intervals'][number]['behind'] =>
+    d.cells
+      .filter((c) => {
+        const [a, b] = s.axis === 'Y' ? [c.rect.x0, c.rect.x1] : [c.rect.y0, c.rect.y1]
+        const edge = s.axis === 'Y' ? (s.inward < 0 ? c.rect.y1 : c.rect.y0) : s.inward < 0 ? c.rect.x1 : c.rect.x0
+        return Math.abs(edge - s.linePx) <= 1 && Math.min(b, to) - Math.max(a, from) > 0
+      })
+      .map((c) => ({ ix: c.ix, iy: c.iy, cls: c.classification === 'BUILT' ? ('B' as const) : c.classification === 'RECESS' ? ('R' as const) : ('O' as const) }))
+  return {
+    id: s.id,
+    axis: s.axis,
+    linePx: s.linePx,
+    fromPx: s.fromPx,
+    toPx: s.toPx,
+    inkFromPx: s.inkFromPx,
+    inkToPx: s.inkToPx,
+    widthM: s.widthM,
+    inward: s.inward,
+    separators: s.separators.map((x) => ({ id: x.id, fromPx: x.fromPx, toPx: x.toPx, axisPx: x.axisPx, inkKind: x.inkKind, returnM: x.returnM, accepted: x.accepted, kind: x.kind, why: x.why })),
+    intervals: s.intervals.map((i) => {
+      const w = final.get(i.id)
+      return {
+        id: i.id,
+        fromPx: i.fromPx,
+        toPx: i.toPx,
+        widthM: i.widthM,
+        bounds: [...i.bounds],
+        role: i.role,
+        signature: i.signature,
+        infill: i.evidence.infill,
+        infillRunsPast: i.infillRunsPast,
+        jambInk: i.jambInk,
+        ...(i.evidence.callout ? { callout: { id: i.evidence.callout.id, widthCm: i.evidence.callout.widthCm } } : {}),
+        ...(w?.evidence.pocketM2 !== undefined ? { pocketM2: w.evidence.pocketM2 } : {}),
+        ...(i.recess ? { recess: i.recess } : {}),
+        decision: w?.decision ?? 'UNRESOLVED',
+        behind: behind(i.fromPx, i.toPx),
+        why: w?.why ?? i.why,
+      }
+    }),
+    why: s.why,
+  }
 }
 
 /** The opening-aware boundary (005C), as the digest carries it: what was found, adopted and named. */

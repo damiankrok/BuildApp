@@ -47,6 +47,8 @@ import { outlineSupport, solveOutline } from './boundary-outline.js'
 import type { OutlineEdge, OutlineGrid, OutlineResult, OutlineSupport } from './boundary-outline.js'
 import { classifyBodies } from './boundary-bodies.js'
 import { completeBoundary } from './boundary-completion.js'
+import { COMPOUND_BOUNDS, compoundSpanOf } from './compound-facade.js'
+import type { CompoundContext, CompoundFacadeSpan, FacadeInterval, IntervalRole, ParentGap } from './compound-facade.js'
 import type { CompletionPart, ExtentConflict, ExtentSideStatement } from './boundary-completion.js'
 import type { AttachedBody } from './boundary-bodies.js'
 
@@ -54,8 +56,11 @@ import type { AttachedBody } from './boundary-bodies.js'
  * The plan's dimension-framed extent: which end spans of a dimension line are kept, and when the walls question a
  * framed side. 1.0.0 (005I): unread end spans the drawing states are kept (`EndSpanDecision`) and `refuteByWalls`
  * marks a frame the walls contradict weak. Named so a run record can tell 005H's extent from 005I's (post-review D7).
+ * 1.1.0 (005N): a frame the walls draw (the chains describing a detail) keeps a long wall beyond the chains' margin
+ * when a wall-thick long wall of the frame runs into its corner (`cornerJoined`): an attached garage or wing is the
+ * same building, not sheet furniture.
  */
-export const PLAN_EXTENT_VERSION = '1.0.0' as const
+export const PLAN_EXTENT_VERSION = '1.1.0' as const
 
 /** Where a grid line came from. The two kinds are independent, and a line with both is as certain as a plan gets. */
 export type GridLineSupport = {
@@ -221,6 +226,8 @@ export type WideOpeningDecision = {
   /** 0..1: how much independent evidence the decision rests on. */
   score: number
   why: string
+  /** 005N: an atomic interval of a compound facade span (`compound-facade.ts`), decided on its own evidence. */
+  compound?: { spanId: string; intervalId: string; role: IntervalRole }
 }
 
 /**
@@ -274,6 +281,11 @@ export type PlanDecomposition = {
   chosenHypothesis: EnclosureHypothesis['id'] | null
   /** 005C: what the opening-aware boundary found, whether or not it was accepted. */
   boundary?: BoundaryRecord
+  /**
+   * 005N: the wide gaps on a facade that the drawing's own separators cut into atomic intervals: the parent span, its
+   * separators accepted and refused, each interval's evidence and role. Absent when no facade gap holds a separator.
+   */
+  compoundFacades?: CompoundFacadeSpan[]
 }
 
 export type PlanDecompositionOptions = {
@@ -1141,22 +1153,55 @@ function planExtentOf(chains: readonly DimensionChain[], bands: readonly Band[],
     y0: chainRect.y0 - (chainRect.y1 - chainRect.y0) * margin,
     y1: chainRect.y1 + (chainRect.y1 - chainRect.y0) * margin,
   }
-  const candidates = long.filter((b) => within(b, near))
-  const inside = candidates.filter((b) => within(b, chainRect))
+  const nearBands = long.filter((b) => within(b, near))
+  const inside = nearBands.filter((b) => within(b, chainRect))
   const lengthOf = (list: readonly Band[]): number => list.reduce((a, b) => a + b.length, 0)
   const held = lengthOf(inside)
-  const loose = lengthOf(candidates) - held
+  const loose = lengthOf(nearBands) - held
   const widen = (rect: PixelRect, other: PixelRect | null): PixelRect =>
     other ? { x0: Math.min(rect.x0, other.x0), y0: Math.min(rect.y0, other.y0), x1: Math.max(rect.x1, other.x1), y1: Math.max(rect.y1, other.y1) } : rect
   if (held >= loose) {
     return { rect: widen(chainRect, axisBox(inside, wallPx)), weak: false, why: `the dimension chains' own span, with ${Math.round(held)} px of the ${Math.round(held + loose)} px of wall found lying inside it` }
   }
-  const nearBands = axisBox(candidates, wallPx) ?? fromBands
+  // 005N: the walls frame the plan here, and a wall beyond the margin that a wall of the frame runs into is the same
+  // building's — a garage or a wing whose far wall happens to lie further from the chains than a third of their span.
+  const joined = cornerJoined(nearBands, long, wallPx, chainRect)
+  const wallBox = axisBox([...nearBands, ...joined], wallPx) ?? fromBands
   return {
-    rect: widen(chainRect, nearBands),
+    rect: widen(chainRect, wallBox),
     weak: true,
-    why: `${Math.round(loose)} px of the ${Math.round(held + loose)} px of wall found lies outside the dimension chains' span, so the chains describe a detail of this plan and not its extent`,
+    why: `${Math.round(loose)} px of the ${Math.round(held + loose)} px of wall found lies outside the dimension chains' span, so the chains describe a detail of this plan and not its extent${joined.length > 0 ? `; ${joined.length} long wall${joined.length === 1 ? '' : 's'} beyond their margin ${joined.length === 1 ? 'is' : 'are'} kept, a wall of the frame running into ${joined.length === 1 ? 'its corner' : 'their corners'}` : ''}`,
   }
+}
+
+/**
+ * Long walls beyond the frame's margin that a wall of the frame runs into at a corner (005N).
+ *
+ * The margin keeps a title block, a logo and a second small drawing out of the frame: none of them is structurally
+ * joined to the building. A garage's far wall is: the building's own long wall runs across to it and stops on it.
+ * A wall is joined when a wall-thick long band already in the frame — one whose own run reaches into the chains'
+ * rect, so a band the margin let in only by its axis cannot carry a detached drawing in — has an END within a wall
+ * and a half of its axis, and its run passes that band's axis: a corner or a T, never two walls merely near each
+ * other. One step only: a wall joined to a joined wall is not taken, so a run of garden walls does not walk the frame
+ * across the sheet.
+ */
+function cornerJoined(frame: readonly Band[], long: readonly Band[], wallPx: number, anchor: PixelRect): Band[] {
+  const thick = (b: Band): boolean => b.thickness >= wallPx * 0.7
+  const run = (b: Band): [number, number] => (b.axis === 'VERTICAL' ? [b.bounds.y0, b.bounds.y1] : [b.bounds.x0, b.bounds.x1])
+  const reach = wallPx * 1.5
+  return long
+    .filter((b) => !frame.includes(b) && thick(b))
+    .filter((b) =>
+      frame.some((c) => {
+        if (c.axis === b.axis || !thick(c)) return false
+        const [c0, c1] = run(c)
+        const [a0, a1] = c.axis === 'VERTICAL' ? [anchor.y0, anchor.y1] : [anchor.x0, anchor.x1]
+        if (c1 < a0 || c0 > a1) return false
+        const [b0, b1] = run(b)
+        const endsOnIt = Math.abs(c0 - b.axisPx) <= reach || Math.abs(c1 - b.axisPx) <= reach
+        return endsOnIt && c.axisPx >= b0 - reach && c.axisPx <= b1 + reach
+      }),
+    )
 }
 
 /**
@@ -1416,9 +1461,15 @@ type WideOpeningContext = {
  * A wide gap is an opening only when a door or glazing is drawn across it:
  * a callout near it is recorded but does not decide, because the callout by
  * a recess's mouth very often belongs to the glazing at its back.
+ *
+ * 005N: a gap on a facade is first read for its own topology (`compound-facade.ts`). Where the drawing puts a
+ * structural separator inside it — a return, a pier — the gap is not one opening but several, and each atomic
+ * interval is weighed on its own here instead of the whole. A gap with no separator is weighed exactly as before.
  */
-function collinearWideGaps(ctx: WideOpeningContext): Array<{ axis: 'X' | 'Y'; line: GridLine; decision: WideOpeningDecision }> {
-  const out: Array<{ axis: 'X' | 'Y'; line: GridLine; decision: WideOpeningDecision }> = []
+type CollinearGap = { axis: 'X' | 'Y'; line: GridLine; decision: WideOpeningDecision }
+function collinearWideGaps(ctx: WideOpeningContext, compoundOf?: (parent: Omit<ParentGap, 'inward'>) => CompoundFacadeSpan | null): { gaps: CollinearGap[]; spans: CompoundFacadeSpan[] } {
+  const out: CollinearGap[] = []
+  const spans: CompoundFacadeSpan[] = []
   for (const axis of ['X', 'Y'] as const) {
     const lines = axis === 'X' ? ctx.linesX : ctx.linesY
     const mpp = axis === 'X' ? ctx.mppY : ctx.mppX
@@ -1428,11 +1479,18 @@ function collinearWideGaps(ctx: WideOpeningContext): Array<{ axis: 'X' | 'Y'; li
         const left = pieces[i]
         const right = pieces[i + 1]
         const gap = right.from - left.to
-        if (gap <= ctx.maxOpeningPx || gap > ctx.maxWidePx) continue
+        if (gap <= ctx.maxOpeningPx) continue
         const jambs = left.to - left.from >= ctx.minJambPx && right.to - right.from >= ctx.minJambPx
         if (!jambs) continue
         const lo = Math.min(left.lo, right.lo) - 1
         const hi = Math.max(left.hi, right.hi) + 1
+        const span = compoundOf && spans.length < COMPOUND_BOUNDS.spans ? compoundOf({ axis, linePx: line.px, fromPx: left.to, toPx: right.from, bandLo: lo, bandHi: hi }) : null
+        if (span) {
+          spans.push(span)
+          for (const interval of span.intervals) out.push({ axis, line, decision: intervalDecision(span, interval, ctx.minInfill) })
+          continue
+        }
+        if (gap > ctx.maxWidePx) continue
         // `along` is the direction the wall runs: a vertical grid line (X) is a wall running along y.
         const infill = infillAcross(ctx.mask, axis === 'X' ? 'Y' : 'X', left.to, right.from, lo, hi)
         const widthM = round6(gap * mpp)
@@ -1457,6 +1515,107 @@ function collinearWideGaps(ctx: WideOpeningContext): Array<{ axis: 'X' | 'Y'; li
           },
         })
       }
+    }
+  }
+  return { gaps: out, spans }
+}
+
+/** One atomic interval of a compound span as a wide-opening decision: its own extent, evidence and role (005N). */
+function intervalDecision(span: CompoundFacadeSpan, interval: FacadeInterval, minInfill: number): WideOpeningDecision {
+  const { infill, callout } = interval.evidence
+  return {
+    kind: 'COLLINEAR_GAP',
+    axis: span.axis,
+    linePx: span.linePx,
+    fromPx: interval.fromPx,
+    toPx: interval.toPx,
+    widthM: interval.widthM,
+    evidence: interval.evidence,
+    decision: interval.role === 'OPENING_IN_WALL' ? 'OPENING_IN_WALL' : 'OPEN_SIDE',
+    score: round6(Math.min(1, 0.3 + 0.5 * Math.min(1, infill / minInfill) + (callout ? 0.2 : 0))),
+    why: interval.why,
+    compound: { spanId: span.id, intervalId: interval.id, role: interval.role },
+  }
+}
+
+/**
+ * The compound-span reader for one plan's facades (005N): a gap is read for separators only when it lies on a side
+ * of the walled envelope, the building's own front, and the reader works on the sheet's wall-solid layer, made once
+ * and only when a facade gap asks for it.
+ */
+function facadeCompoundReader(mask: Mask, envelope: WalledEnvelope | null, sheetWallPx: number, mppX: number, mppY: number, opt: CoreOptions, setBack: ReadonlySet<string>): ((parent: Omit<ParentGap, 'inward'>) => CompoundFacadeSpan | null) | undefined {
+  if (!envelope) return undefined
+  let context: CompoundContext | null = null
+  const contextOf = (): CompoundContext =>
+    (context ??= {
+      mask,
+      solid: solidOf(mask, sheetWallPx),
+      wallPx: sheetWallPx,
+      mppAlong: (a) => (a === 'X' ? mppY : mppX),
+      mppAcross: (a) => (a === 'X' ? mppX : mppY),
+      maxOpeningM: opt.maxOpeningM,
+      maxWideOpeningM: opt.maxWideOpeningM,
+      minInfill: opt.minInfill,
+      callouts: opt.callouts,
+      infill: (axis, from, to, lo, hi) => infillAcross(mask, axis === 'X' ? 'Y' : 'X', from, to, lo, hi),
+    })
+  const r = envelope.rect
+  return (parent) => {
+    // a set-back wall's own line (`backWallLines`) is inside the building, never its front
+    if (setBack.has(`${parent.axis}:${parent.linePx}`)) return null
+    const reach = sheetWallPx * 1.5
+    const [lo, hi, a0, a1] = parent.axis === 'Y' ? [r.y0, r.y1, r.x0, r.x1] : [r.x0, r.x1, r.y0, r.y1]
+    const inward: 1 | -1 | 0 = Math.abs(parent.linePx - lo) <= reach ? 1 : Math.abs(parent.linePx - hi) <= reach ? -1 : 0
+    if (inward === 0 || parent.toPx <= a0 || parent.fromPx >= a1) return null
+    return compoundSpanOf(contextOf(), { ...parent, inward })
+  }
+}
+
+/** The grid line a recess interval's set-back wall is read on: an existing line close to it, never one nearer the mouth. */
+function backWallLineOf(lines: readonly GridLine[], span: CompoundFacadeSpan, backWallPx: number, minCellPx: number): GridLine | undefined {
+  const reach = Math.min(minCellPx, Math.abs(backWallPx - span.linePx) / 2)
+  return lines.filter((l) => Math.abs(l.px - backWallPx) <= reach).sort((a, b) => Math.abs(a.px - backWallPx) - Math.abs(b.px - backWallPx) || a.px - b.px)[0]
+}
+
+/** Grid lines for the set-back walls of recess intervals that no line of the grid lies on (005N). */
+function backWallLines(spans: readonly CompoundFacadeSpan[], linesX: readonly GridLine[], linesY: readonly GridLine[], minCellPx: number): { x: GridLine[]; y: GridLine[] } {
+  const added = { x: [] as GridLine[], y: [] as GridLine[] }
+  for (const span of spans) {
+    for (const interval of span.intervals) {
+      if (interval.role !== 'RECESS_MOUTH' || !interval.recess) continue
+      const px = interval.recess.backWallPx
+      const existing = span.axis === 'X' ? [...linesX, ...added.x] : [...linesY, ...added.y]
+      if (backWallLineOf(existing, span, px, minCellPx)) continue
+      const line: GridLine = {
+        axis: span.axis,
+        px,
+        probesPx: [px],
+        support: { chainIds: [], chainSpanPx: 0, printedChainIds: [], bandLength: 0, bandCoverage: 0, bandSpans: false },
+        confidence: round6(Math.min(0.9, 0.5 * interval.recess.cover)),
+        why: `the set-back wall of a recess on the facade (${interval.id}), ${interval.recess.depthM.toFixed(2)} m behind its mouth: the line the building closes on there`,
+      }
+      if (span.axis === 'X') added.x.push(line)
+      else added.y.push(line)
+    }
+  }
+  return added
+}
+
+/**
+ * What a compound span's topology shuts whatever its mouths are (005N): each accepted separator, which is wall ink,
+ * on the span's own line; and each recess interval's set-back wall, on the grid line at that wall, across the
+ * interval — wall and door-sized holes between wall jambs, the same convention every wall is read by.
+ */
+function structuralEvidence(spans: readonly CompoundFacadeSpan[], linesX: readonly GridLine[], linesY: readonly GridLine[], minCellPx: number): Array<{ key: string; fromPx: number; toPx: number; score: number }> {
+  const out: Array<{ key: string; fromPx: number; toPx: number; score: number }> = []
+  for (const span of spans) {
+    const lines = span.axis === 'X' ? linesX : linesY
+    const own = [...lines].sort((a, b) => Math.abs(a.px - span.linePx) - Math.abs(b.px - span.linePx) || a.px - b.px)[0]
+    if (own) for (const s of span.separators) if (s.accepted) out.push({ key: `${span.axis}:${own.px}`, fromPx: s.fromPx, toPx: s.toPx, score: 1 })
+    for (const interval of span.intervals) {
+      if (interval.role !== 'RECESS_MOUTH' || !interval.recess) continue
+      const back = backWallLineOf(lines, span, interval.recess.backWallPx, minCellPx)
+      if (back) out.push({ key: `${span.axis}:${back.px}`, fromPx: interval.fromPx, toPx: interval.toPx, score: interval.recess.cover })
     }
   }
   return out
@@ -1691,8 +1850,8 @@ function decomposeCore(
 
   const minCellPx = opt.minCellM / Math.max(mppX, mppY)
   const all = override ? undefined : gridLines(chains, inside, extent, options)
-  const linesX = override ? override.linesX : thinLines(all?.linesX ?? [], minCellPx, wallPx)
-  const linesY = override ? override.linesY : thinLines(all?.linesY ?? [], minCellPx, wallPx)
+  let linesX = override ? override.linesX : thinLines(all?.linesX ?? [], minCellPx, wallPx)
+  let linesY = override ? override.linesY : thinLines(all?.linesY ?? [], minCellPx, wallPx)
   const envelope = override ? outlineEnvelope(override, inside, wallPx, registration) : walledEnvelope(inside, linesX, linesY, wallPx, registration)
   if (envelope === null) {
     unresolved.push({
@@ -1708,20 +1867,50 @@ function decomposeCore(
     return { frameId: registration.frameId, wallThickness: { px: round6(wallPx), m: wallM }, envelope, linesX, linesY, cells: [], regions: [], extent, unresolved, wideOpenings: [], bays: [], hypotheses: [], chosenHypothesis: null }
   }
 
-  const nx = linesX.length - 1
-  const ny = linesY.length - 1
   const tolerance = Math.max(4, wallPx * 0.6)
   const lineTolerance = Math.max(3, wallPx * 0.35)
   const maxOpeningPx = opt.maxOpeningM / Math.max(mppX, mppY)
   const minJambPx = Math.max(2, wallPx * 0.5)
 
   const maxWidePx = opt.maxWideOpeningM / Math.max(mppX, mppY)
-  const ctx: WideOpeningContext = { mask, bands: inside, linesX, linesY, envelope, wallPx, mppX, mppY, callouts: opt.callouts, maxOpeningPx, maxWidePx, shutMouths: opt.shutPocketMouths, minJambPx, minInfill: opt.minInfill, tolerance }
+  const ctxOf = (): WideOpeningContext => ({ mask, bands: inside, linesX, linesY, envelope, wallPx, mppX, mppY, callouts: opt.callouts, maxOpeningPx, maxWidePx, shutMouths: opt.shutPocketMouths, minJambPx, minInfill: opt.minInfill, tolerance })
+  // 005N: a wide gap on a facade is read for its own topology first (`compound-facade.ts`).
+  const setBack = new Set<string>()
+  const compoundOf = facadeCompoundReader(mask, envelope, options.sheetWallPx ?? wallPx, mppX, mppY, opt, setBack)
+  let wide = collinearWideGaps(ctxOf(), compoundOf)
+  // A recess interval's set-back wall closes the building behind it, so the grid must have a line on it: a cell that
+  // holds the recess and the room behind it together cannot tell the open mouth from the open interior. Added once,
+  // from the drawing's own back wall, never on a reading of the outline (whose grid is the outline's).
+  if (!override) {
+    const added = backWallLines(wide.spans, linesX, linesY, minCellPx)
+    if (added.x.length + added.y.length > 0) {
+      for (const l of [...added.x, ...added.y]) setBack.add(`${l.axis}:${l.px}`)
+      linesX = [...linesX, ...added.x].sort((a, b) => a.px - b.px)
+      linesY = [...linesY, ...added.y].sort((a, b) => a.px - b.px)
+      wide = collinearWideGaps(ctxOf(), compoundOf)
+    }
+  }
+  const nx = linesX.length - 1
+  const ny = linesY.length - 1
+  const ctx = ctxOf()
+  // each recess on the record with the grid line its back wall is read on, and whether the grid gained it
+  for (const span of wide.spans) {
+    for (const interval of span.intervals) {
+      if (!interval.recess) continue
+      const line = backWallLineOf(span.axis === 'X' ? linesX : linesY, span, interval.recess.backWallPx, minCellPx)
+      if (line) interval.recess = { ...interval.recess, gridLinePx: line.px, lineAdded: setBack.has(`${span.axis}:${line.px}`) }
+    }
+  }
   // Wide gaps the drawing says are openings (H1's extra closures), per line.
-  const collinear = collinearWideGaps(ctx)
+  const collinear = wide.gaps
+  const spans = wide.spans
   const bays = baysOf(ctx)
+  // 005N: what a compound span's topology shuts whatever its mouths are: its separators (wall ink) and the set-back
+  // wall of each recess interval (wall, and door-sized holes between wall jambs), on the grid line at that wall.
+  const structural = structuralEvidence(spans, linesX, linesY, minCellPx)
   const evidenceMap = (gaps: ReadonlyArray<{ axis: 'X' | 'Y'; line: GridLine; decision: WideOpeningDecision }>): Map<string, Array<[number, number]>> => {
     const map = new Map<string, Array<[number, number]>>()
+    for (const e of structural) map.set(e.key, [...(map.get(e.key) ?? []), [e.fromPx, e.toPx]])
     for (const g of gaps) {
       const key = `${g.axis}:${g.line.px}`
       map.set(key, [...(map.get(key) ?? []), [g.decision.fromPx, g.decision.toPx]])
@@ -1856,7 +2045,9 @@ function decomposeCore(
   // is an opening in the wall, however wide, as long as the wall carries on
   // either side of it.
   {
-    const undecided = collinear.filter((g) => g.decision.decision === 'OPEN_SIDE')
+    // 005N: an interval wider than any opening stays where the wall stops, as a gap that wide always has; a recess
+    // mouth stays open whatever lies behind it — its set-back wall, not its mouth, closes the building.
+    const undecided = collinear.filter((g) => g.decision.decision === 'OPEN_SIDE' && g.decision.widthM <= opt.maxWideOpeningM)
     if (undecided.length > 0) {
       const base = edgesFor(true)
       const reachedOpen = flood(base.vEdge, base.hEdge, true)
@@ -1876,7 +2067,9 @@ function decomposeCore(
         }
         const pocketM2 = round6(pocketPx * mppArea)
         const limitM2 = round6(Math.max(6, 2.5 * g.decision.widthM * g.decision.widthM))
-        if (pocketCells > 0 && pocketM2 > limitM2) {
+        if (g.decision.compound?.role === 'RECESS_MOUTH') {
+          g.decision = { ...g.decision, evidence: { ...g.decision.evidence, pocketM2 }, why: `${g.decision.why}; ${pocketM2.toFixed(1)} m² lies behind its mouth, and it stays open: its back wall closes the building` }
+        } else if (pocketCells > 0 && pocketM2 > limitM2) {
           g.decision = {
             ...g.decision,
             evidence: { ...g.decision.evidence, pocketM2 },
@@ -1923,7 +2116,7 @@ function decomposeCore(
   }
   const h0 = areaOf(reachedH0)
   const h1 = areaOf(reachedH1)
-  const evidenceScores = [...collinear.filter((g) => g.decision.decision === 'OPENING_IN_WALL').map((g) => g.decision.score), ...shutBays.map((b) => b.mouth.score)]
+  const evidenceScores = [...collinear.filter((g) => g.decision.decision === 'OPENING_IN_WALL').map((g) => g.decision.score), ...shutBays.map((b) => b.mouth.score), ...structural.map((e) => e.score)]
   const differs = evidencedCount > 0 && (h0.cells !== h1.cells || h0.areaPx !== h1.areaPx)
   const hypotheses: EnclosureHypothesis[] = [
     {
@@ -2015,13 +2208,31 @@ function decomposeCore(
     }
   }
 
+  // 005N: a recess the facade's own topology establishes — two returns and a set-back wall behind a mouth — is a
+  // recess whichever cells the grid happens to cut it into: a cell of it the outside reaches is RECESS, not ground,
+  // even when the grid splits the pocket so that no one cell is shut on three sides. Never a built cell.
+  for (const span of spans) {
+    for (const interval of span.intervals) {
+      if (interval.role !== 'RECESS_MOUTH' || !interval.recess) continue
+      const back = interval.recess.gridLinePx ?? interval.recess.backWallPx
+      const [a0, a1] = [Math.min(back, span.linePx), Math.max(back, span.linePx)]
+      for (const cell of cells) {
+        if (cell.classification !== 'OUTSIDE') continue
+        const [u0, u1, v0, v1] = span.axis === 'Y' ? [cell.rect.x0, cell.rect.x1, cell.rect.y0, cell.rect.y1] : [cell.rect.y0, cell.rect.y1, cell.rect.x0, cell.rect.x1]
+        const within = (u0 + u1) / 2 > interval.fromPx && (u0 + u1) / 2 < interval.toPx && (v0 + v1) / 2 > a0 && (v0 + v1) / 2 < a1
+        if (!within) continue
+        cell.classification = 'RECESS'
+        cell.why = `inside the recess behind ${interval.id}: returns at both ends and a set-back wall ${interval.recess.depthM.toFixed(2)} m behind its mouth`
+      }
+    }
+  }
   const merged = mergeRegions(cells, linesX, linesY, registration, nx, ny)
   // 005F: with completions, the bodies the reading had stand as they were and the completions are laid against them.
   const regions = override?.completions && override.completions.length > 0 ? stableRegions(merged, cells, linesX, linesY, registration, nx, ny, override) : merged
   if (regions.filter((r) => r.classification === 'BUILT').length === 0) {
     unresolved.push({ what: 'any built mass on this plan', reason: 'the flood fill reached every cell of the structural grid: no part of the plan is enclosed' })
   }
-  return { frameId: registration.frameId, wallThickness: { px: round6(wallPx), m: wallM }, envelope, linesX, linesY, cells, regions, extent, unresolved, wideOpenings, bays, hypotheses, chosenHypothesis }
+  return { frameId: registration.frameId, wallThickness: { px: round6(wallPx), m: wallM }, envelope, linesX, linesY, cells, regions, extent, unresolved, wideOpenings, bays, hypotheses, chosenHypothesis, ...(spans.length > 0 ? { compoundFacades: spans } : {}) }
 }
 
 /**

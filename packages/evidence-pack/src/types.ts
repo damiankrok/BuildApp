@@ -208,7 +208,9 @@ export type PlanJson = {
   linesY?: number[]
   cells?: Array<{ ix: number; iy: number; rect: Rect; cls: string; enclosed: boolean }>
   regions?: Array<{ id: string; cls: string; rect: Rect }>
-  wideOpenings?: Array<{ id?: string; kind: string; axis: 'X' | 'Y'; linePx: number; fromPx: number; toPx: number; widthM: number; decision: string; score: number; why: string }>
+  wideOpenings?: Array<{ id?: string; kind: string; axis: 'X' | 'Y'; linePx: number; fromPx: number; toPx: number; widthM: number; decision: string; score: number; why: string; compound?: { spanId: string; intervalId: string; role: string } }>
+  /** 005N (pack 1.4.0): facade gaps cut at their separators into atomic intervals, each with its evidence and decision. */
+  compoundFacades?: CompoundFacadeJson[]
   bays?: Array<{ side: string; rect: Rect; mouth: string }>
   boundary?: {
     accepted: boolean
@@ -233,6 +235,22 @@ export type PlanJson = {
   masses: Array<{ id: string; rect: Rect }>
 }
 export type DigestJson = { planFrames?: number; selectedPlanFrameId: string | null; plans: PlanJson[]; skipped?: Array<{ frameId: string; why: string }>; resolution?: Record<string, number | string | boolean>; challenge?: Record<string, number | string | boolean>; storeys?: StoreyJson[] }
+
+/** 005N: one compound facade span, as the plan-diagnostics digest records it (coordinates and ids only). */
+export type CompoundFacadeJson = {
+  id: string
+  axis: 'X' | 'Y'
+  linePx: number
+  fromPx: number
+  toPx: number
+  inkFromPx: number
+  inkToPx: number
+  widthM: number
+  inward: number
+  separators: Array<{ id: string; fromPx: number; toPx: number; axisPx: number; inkKind: string; returnM: number; accepted: boolean; kind: string; why: string }>
+  intervals: Array<{ id: string; fromPx: number; toPx: number; widthM: number; bounds: string[]; role: string; signature: string; infill: number; infillRunsPast: boolean; jambInk: boolean[]; callout?: { id: string; widthCm: number }; pocketM2?: number; recess?: Json; decision: string; behind: Array<{ ix: number; iy: number; cls: string }>; why: string }>
+  why: string
+}
 
 /** 005L: one other storey's registration and support, as the plan-diagnostics digest records it (numbers and ids only). */
 export type StoreyJson = {
@@ -285,6 +303,7 @@ export const TIMELINE_STAGES = [
   'REGISTRATION',
   'FRAME_SELECTION',
   'EXTENT',
+  'COMPOUND_FACADES',
   'BOUNDARY_GAPS',
   'ENVELOPE',
   'ENVELOPE_EXTENT_CONFLICT',

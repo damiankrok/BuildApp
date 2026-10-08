@@ -4,7 +4,7 @@
  * re-read with the real `boundaryExtension`, every wall line's ink pieces and gaps. Shared by the replay wrapper
  * (`trace-decompositions.mjs`) and the fixture tracer (`fixture-trace.ts`). No pixel leaves the process.
  */
-import { boundaryExtension } from '../../packages/reconstruction/src/plan-decomposition.js'
+import { boundaryExtension, decomposePlan } from '../../packages/reconstruction/src/plan-decomposition.js'
 import type { PlanDecomposition, PlanDecompositionOptions } from '../../packages/reconstruction/src/plan-decomposition.js'
 
 const r = (x: number): number => Math.round(x * 1000) / 1000
@@ -35,7 +35,16 @@ export function traceRecord(mask: Any, chains: Any, bands: Any, registration: An
     walls = { error: String(e) }
   }
   const b = d.boundary
+  // the incumbent reading (the box, before the opening-aware boundary), whose cells the boundary is weighed against
+  let incumbent: Any = null
+  try {
+    const i = decomposePlan(mask, chains, bands, registration, extent, { ...options, openingAware: false })
+    incumbent = { regions: i.regions.map((g) => [g.classification, g.rect.x0, g.rect.y0, g.rect.x1, g.rect.y1]), wide: i.wideOpenings.map((w) => [w.axis, w.linePx, w.fromPx, w.toPx, w.widthM, w.decision, w.evidence.pocketM2 ?? null, w.compound?.role ?? null]), compound: i.compoundFacades ?? null, linesY: i.linesY.map((l) => r(l.px)), linesX: i.linesX.map((l) => r(l.px)) }
+  } catch (e) {
+    incumbent = { error: String(e) }
+  }
   return {
+    incumbent,
     label,
     key: [registration.frameId, extent.x0, extent.y0, extent.x1, extent.y1, registration.metresPerPixelX, registration.metresPerPixelY, options.shutPocketMouths ? 'S' : ''].join('|'),
     frameId: registration.frameId,

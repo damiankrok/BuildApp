@@ -9,7 +9,7 @@ import type { Raster } from '@buildapp/source-cv'
 import type { DimensionChain } from '@buildapp/source-metrics'
 import { WHITE, builtAt, run } from './boundary-plan.js'
 import { chain } from './plan.js'
-import type { PlanDecomposition } from '../src/index.js'
+import type { PlanCallout, PlanDecomposition } from '../src/index.js'
 
 type Op = { k: 'fill' | 'clear' | 'line'; x0: number; y0: number; x1: number; y1: number }
 
@@ -84,10 +84,12 @@ export type Scene = {
   unread?: { x?: number[]; y?: number[] }
   /** A further chain, vertical in the plan's own frame: its baseline x and its ticks along y. */
   verticalChain?: { baselineX: number; ticksY: number[] }
+  /** 005N: printed opening callouts, in the plan's own coordinates; each transform carries them with the drawing. */
+  callouts?: PlanCallout[]
 }
 
 /** The scene drawn under `t`, decomposed; `builtAt` answers in the plan's own coordinates. */
-export function runScene(s: Scene, t: Transform): { d: PlanDecomposition; builtM2: number; builtAt: (x: number, y: number) => boolean } {
+export function runScene(s: Scene, t: Transform): { d: PlanDecomposition; builtM2: number; builtAt: (x: number, y: number) => boolean; classAt: (x: number, y: number) => string } {
   const { point, ticks } = transformOf(t, s.p.W, s.p.H)
   const tk = ticks(s.xs, s.ys)
   const unreadTicks = s.unread ? { x: [...ticks(s.unread.x ?? [], []).xs, ...ticks([], s.unread.y ?? []).xs], y: [...ticks(s.unread.x ?? [], []).ys, ...ticks([], s.unread.y ?? []).ys] } : undefined
@@ -97,13 +99,21 @@ export function runScene(s: Scene, t: Transform): { d: PlanDecomposition; builtM
     const vertical = t === 'id' || t === 'mirrorX' || t === 'mirrorY'
     extraChains.push(vertical ? chain('extra', 'VERTICAL', [...c.ys].sort((a, b) => a - b), { baselinePx: c.xs[0] }) : chain('extra', 'HORIZONTAL', [...c.xs].sort((a, b) => a - b), { baselinePx: c.ys[0] }))
   }
-  const { d, builtM2 } = run(render(s.p, t), tk.xs, tk.ys, [], { ...(unreadTicks ? { unreadTicks } : {}), extraChains })
+  const callouts = (s.callouts ?? []).map((c) => {
+    const [x, y] = point(c.at.x, c.at.y)
+    return { ...c, at: { x, y } }
+  })
+  const { d, builtM2 } = run(render(s.p, t), tk.xs, tk.ys, callouts, { ...(unreadTicks ? { unreadTicks } : {}), extraChains })
   return {
     d,
     builtM2,
     builtAt: (x, y) => {
       const [u, v] = point(x, y)
       return builtAt(d, u, v)
+    },
+    classAt: (x, y) => {
+      const [u, v] = point(x, y)
+      return d.cells.find((c) => u >= c.rect.x0 && u < c.rect.x1 && v >= c.rect.y0 && v < c.rect.y1)?.classification ?? 'NONE'
     },
   }
 }

@@ -148,6 +148,45 @@ export const isReconstructionFailure = (e: unknown): e is ReconstructionFailure 
 
 type Rect = { x0: number; y0: number; x1: number; y1: number }
 
+/**
+ * 005N: one compound facade span as the digest carries it — the parent gap, every piece of wall-thick ink weighed as a
+ * separator and why it was or was not one, each atomic interval with its own evidence, its role, its final decision
+ * and the cells behind its mouth. Coordinates and ids only.
+ */
+export type CompoundFacadeDigest = {
+  id: string
+  axis: 'X' | 'Y'
+  linePx: number
+  fromPx: number
+  toPx: number
+  inkFromPx: number
+  inkToPx: number
+  widthM: number
+  inward: 1 | -1
+  separators: Array<{ id: string; fromPx: number; toPx: number; axisPx: number; inkKind: string; returnM: number; accepted: boolean; kind: string; why: string }>
+  intervals: Array<{
+    id: string
+    fromPx: number
+    toPx: number
+    widthM: number
+    bounds: string[]
+    role: string
+    signature: string
+    infill: number
+    infillRunsPast: boolean
+    jambInk: [boolean, boolean]
+    callout?: { id: string; widthCm: number }
+    pocketM2?: number
+    recess?: { backWallPx: number; depthM: number; cover: number; returns: [number, number]; gridLinePx?: number; lineAdded?: boolean }
+    /** The decision the plan's wide openings carry for it, after the pocket test. */
+    decision: string
+    /** The cells directly behind its mouth, class by class (B built, R recess, O outside), with their grid indices. */
+    behind: Array<{ ix: number; iy: number; cls: 'B' | 'R' | 'O' }>
+    why: string
+  }>
+  why: string
+}
+
 /** One plan as the structural pass read it, in the frame's own pixels: enough to draw every overlay and to count. */
 export type PlanDiagnostics = {
   frameId: string
@@ -175,7 +214,9 @@ export type PlanDiagnostics = {
   linesY: number[]
   cells: Array<{ ix: number; iy: number; rect: Rect; cls: 'B' | 'R' | 'O'; enclosed: boolean }>
   regions: Array<{ id: string; cls: 'BUILT' | 'RECESS'; rect: Rect }>
-  wideOpenings: Array<{ id?: string; kind: string; axis: 'X' | 'Y'; linePx: number; fromPx: number; toPx: number; widthM: number; decision: string; score: number; why: string }>
+  wideOpenings: Array<{ id?: string; kind: string; axis: 'X' | 'Y'; linePx: number; fromPx: number; toPx: number; widthM: number; decision: string; score: number; why: string; compound?: { spanId: string; intervalId: string; role: string } }>
+  /** 005N: the facade gaps a separator cut into atomic intervals (`compound-facade.ts`), only when there are any. */
+  compoundFacades?: CompoundFacadeDigest[]
   bays: Array<{ side: string; rect: Rect; mouth: string }>
   hypotheses: Array<{ id: string; builtCells: number; closedOpenings: number; score: number; chosen: boolean; why: string }>
   /** 005C: the opening-aware boundary: gap classes, the candidates' support, the policies and every part's relation. */
