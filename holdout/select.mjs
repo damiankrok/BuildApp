@@ -41,6 +41,14 @@
 // the k-th candidate `SHA256(seed + ":stratified:" + k)` mod what is left, kept when its page's own markup exposes floor
 // plans of at least two storeys (`archonPlanStoreys`), else recorded and burned:
 //   node holdout/select.mjs select --round 9 --pool holdout/pool.txt --pool-sha256 <hex> --pre-holdout-sha <40hex>
+// Round 10 (BUILDPLAN-005N) draws two ARCHON families from the same pool, less holdout/excluded-families-round-10.txt
+// (every earlier list and draw — round 9's two houses now development material — the 005K gap set, every sealed
+// development package, every family a cached development page links to, and every family the 005M Visual Referee
+// research names), with seed = SHA256(PRE_HOLDOUT_10_SHA + "BUILDPLAN-005N-COMPOUND-FACADE-HOLDOUT"): one unstratified
+// pick, `seed mod n`, and one garage-stratified pick from every other family — the k-th candidate
+// `SHA256(seed + ":stratified:" + k)` mod what is left, kept when its page's own published figures state a garage
+// (`archonGarage`: a `powierzchnia-garazu` figure above zero), else recorded and burned:
+//   node holdout/select.mjs select --round 10 --pool holdout/pool.txt --pool-sha256 <hex> --pre-holdout-sha <40hex>
 // `select` draws from the committed pool less the committed excluded families (holdout/excluded-families.txt:
 // families the development pages link to), and refuses unless HEAD is the declared SHA, the tree is clean, and
 // the pool is the tracked holdout/pool.txt whose hash both the operator and pool.meta.json declare.
@@ -60,6 +68,7 @@ const ROUNDS = {
   7: { label: 'BUILDPLAN-005H-EXTERNAL-NUMERIC-RECOGNISER-HOLDOUT', excluded: 'excluded-families-round-7.txt' },
   8: { label: 'BUILDPLAN-005I-DIMENSION-TOPOLOGY-BOUNDARY-BAKEOFF-HOLDOUT', excluded: 'excluded-families-round-8.txt' },
   9: { label: 'BUILDPLAN-005L-STOREY-REGISTRATION-HOLDOUT', excluded: 'excluded-families-round-9.txt', stratified: { minPlanStoreys: 2, maxDraws: 20 } },
+  10: { label: 'BUILDPLAN-005N-COMPOUND-FACADE-HOLDOUT', excluded: 'excluded-families-round-10.txt', stratified: { garage: true, maxDraws: 20 } },
 }
 const DOBREDOMY = {
   host: 'https://www.dobredomy.pl',
@@ -130,12 +139,33 @@ export function archonPlanStoreys(html, url) {
 }
 
 /**
+ * Round 10's stratum, fixed before the freeze and read from the drawn page's markup only: whether the page's own
+ * published figures state a garage — the publisher's product-data item whose resource is `powierzchnia-garazu…`
+ * (garage area) carrying a value above zero, the figure `archonPublished` maps to `garage_area`. No plan, fragment or
+ * image is read, so nothing about the entrance, the garage's place or the plan's outline is known at the draw.
+ * Calibrated on the cached development pages before any draw (`garage-calibration.json`).
+ */
+export function archonGarage(html) {
+  const body = html.replace(/<script\b[\s\S]*?<\/script>/gi, ' ')
+  for (const m of body.matchAll(/<div[^>]*class="[^"]*product-data__item[^"]*"[^>]*data-resource="([^"]+)"[^>]*>([\s\S]{0,4000}?<\/div>)\s*<\/div>/gi)) {
+    const slug = m[1].normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+    if (!/^powierzchnia-garazu/.test(slug)) continue
+    const value = /class="product-data__value"[^>]*>([\s\S]*?)<\/div>/i.exec(m[2])
+    const n = value ? /-?\d[\d\s\u00a0]*(?:[.,]\d+)?/.exec(value[1].replace(/<[^>]*>/g, ' ')) : null
+    const garageAreaM2 = n ? Number(n[0].replace(/[\s\u00a0]/g, '').replace(',', '.')) : null
+    return { garage: garageAreaM2 !== null && garageAreaM2 > 0, garageAreaM2 }
+  }
+  return { garage: false, garageAreaM2: null }
+}
+
+/**
  * Round 9's two picks: one unstratified (`seed mod n`, as round 1's first pick) and one stratified from every OTHER
  * family — the k-th candidate is `SHA256(seed + ":stratified:" + k)` mod the drawable addresses not of the
- * unstratified pick's family nor of a burned candidate's; `planStoreysOf(url)` reads that page's markup and a candidate
- * publishing fewer plan storeys than the stratum asks is burned. Every candidate is returned, kept or burned.
+ * unstratified pick's family nor of a burned candidate's; `factsOf(url)` reads that page's markup and a candidate the
+ * stratum does not admit is burned: round 9 (`minPlanStoreys`) publishing fewer plan storeys, round 10 (`garage`)
+ * stating no garage. Every candidate is returned, kept or burned.
  */
-export async function selectStratified(poolText, preHoldoutSha, label, excludedFamilies, stratum, planStoreysOf) {
+export async function selectStratified(poolText, preHoldoutSha, label, excludedFamilies, stratum, factsOf) {
   const familyOf = (u) => family(URL_RE.exec(u)[1])
   const first = selectOne(poolText, preHoldoutSha, label, familyOf, excludedFamilies)
   const burned = new Set([first.family])
@@ -145,13 +175,13 @@ export async function selectStratified(poolText, preHoldoutSha, label, excludedF
     if (left.length === 0) throw new Error('nothing left to draw')
     const index = Number(BigInt(`0x${sha256(`${first.seed}:stratified:${k}`)}`) % BigInt(left.length))
     const url = left[index]
-    const storeys = await planStoreysOf(url)
-    const eligible = storeys.length >= stratum.minPlanStoreys
-    candidates.push({ k, left: left.length, index, url, family: familyOf(url), planStoreys: storeys, eligible })
+    const facts = await factsOf(url)
+    const eligible = stratum.minPlanStoreys !== undefined ? facts.planStoreys.length >= stratum.minPlanStoreys : facts.garage === true
+    candidates.push({ k, left: left.length, index, url, family: familyOf(url), ...facts, eligible })
     if (eligible) return { seed: first.seed, n: first.n, excluded: first.excluded, unstratified: { i1: first.i1, url: first.url, family: first.family }, stratified: candidates.at(-1), candidates }
     burned.add(familyOf(url))
   }
-  throw new Error(`no page publishing ${stratum.minPlanStoreys} plan storeys within ${stratum.maxDraws} draws`)
+  throw new Error(`no page the stratum admits (${JSON.stringify(stratum)}) within ${stratum.maxDraws} draws`)
 }
 
 /** One draw from a pool less its excluded families: `seed mod n` over the drawable list, in pool order. */
@@ -280,12 +310,13 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     if (round.stratified) {
       // the drawn page itself, or nothing: an error page or a redirect elsewhere would read as no storeys and burn the
       // candidate in silence, so the draw stops instead (005L council C5L-5)
-      const planStoreysOf = async (url) => {
+      const factsOf = async (url) => {
         const res = await fetch(url, { redirect: 'manual' })
         if (res.status !== 200) throw new Error(`the drawn page ${url} answered ${res.status}${res.headers.get('location') ? ` → ${res.headers.get('location')}` : ''}: the draw stops, nothing is burned`)
-        return archonPlanStoreys(await res.text(), url)
+        const html = await res.text()
+        return round.stratified.minPlanStoreys !== undefined ? { planStoreys: archonPlanStoreys(html, url) } : archonGarage(html)
       }
-      const r = await selectStratified(text, sha, round.label, new Set(exclusions.split('\n').filter(Boolean)), round.stratified, planStoreysOf)
+      const r = await selectStratified(text, sha, round.label, new Set(exclusions.split('\n').filter(Boolean)), round.stratified, factsOf)
       const line = { at: new Date().toISOString(), label: round.label, excludedFamiliesFile: round.excluded, preHoldoutSha: sha, poolSha256: declared, excludedFamiliesSha256: sha256(exclusions), stratum: round.stratified, ...r, urls: [r.stratified.url, r.unstratified.url], families: [r.stratified.family, r.unstratified.family] }
       appendFileSync(join(root, 'holdout', 'LEDGER.ndjson'), JSON.stringify(line) + '\n')   // append-only, committed after the runs
       console.log(JSON.stringify(line, null, 2))

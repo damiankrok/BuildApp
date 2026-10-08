@@ -7,7 +7,7 @@
  */
 import { describe, expect, it } from 'vitest'
 // @ts-expect-error — a plain ES module with no declarations; only its exports are exercised here
-import { family, select } from '../../holdout/select.mjs'
+import { archonGarage, family, select, selectStratified } from '../../holdout/select.mjs'
 
 const url = (slug: string, i: number): string => `https://www.archon.pl/projekty-domow/projekt-${slug}-m${i.toString(16).padStart(13, '0')}`
 const POOL = Array.from({ length: 40 }, (_, f) => Array.from({ length: 5 }, (_, k) => url(`dom-w-rodzinie${String.fromCharCode(97 + (f % 26))}${f >= 26 ? 'x' : ''}-${k + 1}`, f * 10 + k)))
@@ -48,3 +48,37 @@ describe('holdout draw', () => {
     expect(() => select(TEXT, 'HEAD')).toThrow('40 lowercase hex')
   })
 })
+
+describe('round 10 (005N): the garage stratum, from the page’s own published figures only', () => {
+  const item = (resource: string, value: string): string => `<div class="product-data__item" data-resource="${resource}"><div class="product-data__title">t</div><div class="product-data__value">${value}</div></div></div>`
+  it('reads a garage-area figure above zero as a garage, and nothing else', () => {
+    expect(archonGarage(`<main>${item('powierzchnia-garazu', '18,46 m<sup>2</sup>')}</main>`)).toEqual({ garage: true, garageAreaM2: 18.46 })
+    expect(archonGarage(`<main>${item('powierzchnia-garazu', '0 m2')}</main>`)).toEqual({ garage: false, garageAreaM2: 0 })
+    expect(archonGarage(`<main>${item('powierzchnia-uzytkowa', '118,36 m2')}</main>`)).toEqual({ garage: false, garageAreaM2: null })
+    // a figure inside a script is not the page's
+    expect(archonGarage(`<script>var x = '${item('powierzchnia-garazu', '20 m2')}'</script>`)).toEqual({ garage: false, garageAreaM2: null })
+  })
+
+  it('keeps the first candidate whose page states a garage, burns the others, and never draws the unstratified pick’s family', async () => {
+    const garaged = new Set(POOL.filter((_, i) => i % 3 === 0).map(familyOf))
+    const factsOf = async (u: string) => ({ garage: garaged.has(familyOf(u)), garageAreaM2: garaged.has(familyOf(u)) ? 20 : null })
+    for (let i = 0; i < 20; i += 1) {
+      const r = await selectStratified(TEXT, sha(i), 'BUILDPLAN-005N-COMPOUND-FACADE-HOLDOUT', new Set(), { garage: true, maxDraws: 20 }, factsOf)
+      expect(r.stratified.eligible).toBe(true)
+      expect(garaged.has(r.stratified.family)).toBe(true)
+      expect(r.stratified.family).not.toBe(r.unstratified.family)
+      for (const c of r.candidates.slice(0, -1)) expect(c.eligible).toBe(false)
+    }
+  })
+
+  it('round 9’s plan-storey stratum is read exactly as before', async () => {
+    const multi = (u: string): boolean => /[bcd]x?$/.test(familyOf(u))
+    const factsOf = async (u: string) => ({ planStoreys: multi(u) ? [1, 3] : [1] })
+    for (let i = 0; i < 10; i += 1) {
+      const r = await selectStratified(TEXT, sha(i), 'BUILDPLAN-005L-STOREY-REGISTRATION-HOLDOUT', new Set(), { minPlanStoreys: 2, maxDraws: 40 }, factsOf)
+      expect(r.stratified.planStoreys).toEqual([1, 3])
+      expect(Object.keys(r.stratified).sort()).toEqual(['eligible', 'family', 'index', 'k', 'left', 'planStoreys', 'url'])
+    }
+  })
+})
+

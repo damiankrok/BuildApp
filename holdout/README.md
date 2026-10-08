@@ -335,3 +335,41 @@ The protocol of round 8, steps 1–6, with these differences only. Everything he
    - An `ALGORITHMIC_FAIL` is not patched in 005L. Its first bad decision is named from the Evidence Pack and the
      storey trace (SOURCE, STOREY_ROLE, PLAN_ALIGNMENT, UPPER_REGION, SUPPORT_RELATION, PER_STOREY_GEOMETRY, METRIC,
      BOUNDARY, REC17, BODY_RELATION, EMISSION, OTHER).
+
+## Round 10 (BUILDPLAN-ANALYZER-005N)
+
+The protocol of round 9, steps 1–6, with these differences only. Everything here is fixed before the freeze.
+
+1. **Two ARCHON families from the committed round-1 pool** (`holdout/pool.txt`, `POOL_SHA256 = 800c2a1e…2ed41`),
+   drawn in two ways (brief §36):
+   - **Holdout 2, unstratified**: `i1 = seed mod n` over the drawable addresses, exactly round 1's first pick.
+   - **Holdout 1, garage stratified**: from every drawable address of another family, the k-th candidate is
+     `SHA256(seed + ":stratified:" + k)` mod what is left. A candidate is kept when its own page's published figures
+     state a garage: the publisher's product-data item `powierzchnia-garazu…` (garage area) above zero
+     (`archonGarage`). Only that figure in the drawn page's markup is read; no plan, fragment or image is fetched, and
+     nothing about the entrance, the garage's place relative to it or the outline is known before the run. A
+     candidate below the stratum is recorded in the ledger and burned (its family is not drawn again in this round),
+     up to 20 candidates.
+   - **Calibrated before any draw** on the 27 cached development pages: the figure agrees with the page's own
+     labelled garage area on all 27 (16 with a garage)
+     (`stage-reports/artifacts/analyzer-005n/blind-round/garage-calibration.json`).
+2. **Excluded families** (`excluded-families-round-10.txt`, 134 families; 1580 drawable), built by
+   `research/analyzer-005n/exclusions.mjs` (manifest:
+   `stage-reports/artifacts/analyzer-005n/blind-round/exclusion-manifest.json`): round 9's list and sources, round 9's
+   two draws (murajach, cieszyniankach — now development material), and every family a text file of the 005M Visual
+   Referee research names.
+   - `EXCLUDED_FAMILIES_ROUND_10_SHA256 = 83d2aa045d127eb05b28da6289b346d908b9e87a1a5b556c6e9f2f822474c446`.
+3. **Freeze.** `PRE_HOLDOUT_10_SHA` is the pushed HEAD whose full CI is green. Nothing is committed between the
+   freeze and the draw.
+4. **Draw.** `node holdout/select.mjs select --round 10 --pool holdout/pool.txt --pool-sha256 800c2a1ed9daee9efd2654c64b061e430094dc38fc459b805af27ff9fad2ed41 --pre-holdout-sha <sha>`.
+   - `seed = SHA256(PRE_HOLDOUT_10_SHA + "BUILDPLAN-005N-COMPOUND-FACADE-HOLDOUT")`.
+5. **Run once each** as round 9: production analyzer only, `--recogniser`, `ANALYZER_EVIDENCE=1` (Evidence Pack
+   1.4.0 with `12c-compound-facades.json`), the 005K drawn-gap rule OFF (never passed).
+6. **Verdict** by `holdout/verdict.mjs` as committed at the freeze, unchanged from round 9 — no condition or threshold
+   added or moved. `PASS`, `SOURCE_LIMITED_PARTIAL` or `ALGORITHMIC_FAIL`, sealed before any diagnosis. After sealing:
+   - `TARGET_CLASS_EXERCISED = YES | NO` — whether either house actually has a compound facade relation (a recess
+     beside another mouth on one facade line), read from its Evidence Pack and drawings after the seal.
+   - An `ALGORITHMIC_FAIL` is not patched in 005N. Its first bad decision is named (SOURCE, METRIC,
+     FACADE_SEGMENTATION, OPENING_RELATION, RECESS_RELATION, GARAGE_RELATION, EXTENT, BODY_RELATION, STOREY, REC17,
+     PLAN_RESOLUTION, EMISSION, OTHER); a later PLAN_RESOLUTION refusal is never named first when an earlier body
+     relation already broke the plan.

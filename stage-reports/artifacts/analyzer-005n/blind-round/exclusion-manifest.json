@@ -1,0 +1,1646 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005N",
+ "kind": "blind round 10: exclusion manifest, recorded before the freeze and the draw",
+ "rule": "an ARCHON family is excluded when a committed exclusion list names it (rounds 1-9), a blind round drew it (murajach and cieszyniankach included), the 005K gap set excluded or drew it, a sealed development package is of it, any page a development cache holds links to it, or a text file of the 005M Visual Referee research names it (holdout/select.mjs `family`)",
+ "sources": [
+  {
+   "kind": "COMMITTED_EXCLUSION_LIST",
+   "path": "holdout/excluded-families-round-2.txt",
+   "sha256": "7b36740a85f41b2c766d306eacfb377c471592f7a945f09345efbe45c798ce13"
+  },
+  {
+   "kind": "COMMITTED_EXCLUSION_LIST",
+   "path": "holdout/excluded-families-round-3.txt",
+   "sha256": "330e7832a37056a8590cad5783202a25736c22de8b2b069a10683291358140cf"
+  },
+  {
+   "kind": "COMMITTED_EXCLUSION_LIST",
+   "path": "holdout/excluded-families-round-4.txt",
+   "sha256": "8c5a4a971fa5a9d9531ff0a93f793f7054a3e33fcd67e221381747c9f3ad2919"
+  },
+  {
+   "kind": "COMMITTED_EXCLUSION_LIST",
+   "path": "holdout/excluded-families-round-5.txt",
+   "sha256": "d33caf40eeb8fb08af88978ab4838ec45b23824981cd81efc7be12e37bb94340"
+  },
+  {
+   "kind": "COMMITTED_EXCLUSION_LIST",
+   "path": "holdout/excluded-families-round-6.txt",
+   "sha256": "0f9bb150919df03c789df55366124985c76f09433dc6bcc2f099ae2f4a28ae9d"
+  },
+  {
+   "kind": "COMMITTED_EXCLUSION_LIST",
+   "path": "holdout/excluded-families-round-7.txt",
+   "sha256": "644243a6dab1a6ecd70e1cbbaef97e1c3b84a904513422d8cfef8bdade36e41d"
+  },
+  {
+   "kind": "COMMITTED_EXCLUSION_LIST",
+   "path": "holdout/excluded-families-round-8.txt",
+   "sha256": "4202abe005e651ba902097b0431e282be4baa89af016d268da4ac8d3c26c43d2"
+  },
+  {
+   "kind": "COMMITTED_EXCLUSION_LIST",
+   "path": "holdout/excluded-families-round-9.txt",
+   "sha256": "fd13e2caf913fe286f220c73a8bdae8a911581f0e0a1f172ffcf3289f54b7d11"
+  },
+  {
+   "kind": "COMMITTED_EXCLUSION_LIST",
+   "path": "holdout/excluded-families.txt",
+   "sha256": "c186e89fdf26585fcd95400f5ae021c5769db6c1809b5c750d768a5ca3f3c8b4"
+  },
+  {
+   "kind": "BLIND_LEDGER",
+   "path": "holdout/LEDGER.ndjson",
+   "sha256": "bb280cad5585407bdea32e2f34991da43e7720954c7a4933c94172af5e7236aa"
+  },
+  {
+   "kind": "GAP_SET_EXCLUSION_MANIFEST",
+   "path": "stage-reports/artifacts/analyzer-005k/gap-set-exclusion-manifest.json",
+   "sha256": "9cdedda9fa1ffbee7175d5b96fa1935ac5c3c9d8b74a089f3171d4741da166b8"
+  },
+  {
+   "kind": "GAP_SET_DRAW_LEDGER",
+   "path": "stage-reports/artifacts/analyzer-005k/gap-set-draw-ledger.ndjson",
+   "sha256": "b739100011aa1978a507100e8fa5da0aa502d4520e66dcddebe0a1b3f6334b8c"
+  },
+  {
+   "kind": "DEVELOPMENT_RUNS",
+   "path": "/home/user/work005d",
+   "packages": 108
+  },
+  {
+   "kind": "DEVELOPMENT_RUNS",
+   "path": "/home/user/work005e",
+   "packages": 74
+  },
+  {
+   "kind": "DEVELOPMENT_RUNS",
+   "path": "/home/user/work005f",
+   "packages": 138
+  },
+  {
+   "kind": "DEVELOPMENT_RUNS",
+   "path": "/home/user/work005g",
+   "packages": 0
+  },
+  {
+   "kind": "DEVELOPMENT_RUNS",
+   "path": "/home/user/work005h",
+   "packages": 79
+  },
+  {
+   "kind": "DEVELOPMENT_RUNS",
+   "path": "/home/user/work005i",
+   "packages": 0
+  },
+  {
+   "kind": "DEVELOPMENT_RUNS",
+   "path": "/home/user/work005i-a",
+   "packages": 34
+  },
+  {
+   "kind": "DEVELOPMENT_RUNS",
+   "path": "/home/user/work005j",
+   "packages": 48
+  },
+  {
+   "kind": "DEVELOPMENT_RUNS",
+   "path": "/home/user/work005k",
+   "packages": 15
+  },
+  {
+   "kind": "DEVELOPMENT_RUNS",
+   "path": "/home/user/work005l",
+   "packages": 124
+  },
+  {
+   "kind": "DEVELOPMENT_RUNS",
+   "path": "/home/user/work005m",
+   "packages": 0
+  },
+  {
+   "kind": "DEVELOPMENT_CACHE",
+   "path": "/home/user/work005d/cache",
+   "htmlPages": 66
+  },
+  {
+   "kind": "DEVELOPMENT_CACHE",
+   "path": "/home/user/work005e/blind5/cache",
+   "htmlPages": 13
+  },
+  {
+   "kind": "DEVELOPMENT_CACHE",
+   "path": "/home/user/work005f/blind6/cache",
+   "htmlPages": 13
+  },
+  {
+   "kind": "DEVELOPMENT_CACHE",
+   "path": "/home/user/work005h/blind7/cache",
+   "htmlPages": 15
+  },
+  {
+   "kind": "DEVELOPMENT_CACHE",
+   "path": "/home/user/work005i-a/blind8/cache",
+   "htmlPages": 14
+  },
+  {
+   "kind": "DEVELOPMENT_CACHE",
+   "path": "/home/user/work005k/gapset/cache",
+   "htmlPages": 58
+  },
+  {
+   "kind": "DEVELOPMENT_CACHE",
+   "path": "/home/user/work005l/blind/cache",
+   "htmlPages": 13
+  },
+  {
+   "kind": "VISUAL_REFEREE_RESEARCH",
+   "path": "/home/user/BuildApp/research/analyzer-005m",
+   "files": 20,
+   "mentions": 5
+  },
+  {
+   "kind": "VISUAL_REFEREE_RESEARCH",
+   "path": "/home/user/BuildApp/stage-reports/artifacts/analyzer-005m-vr2",
+   "files": 36,
+   "mentions": 79
+  },
+  {
+   "kind": "VISUAL_REFEREE_RESEARCH",
+   "path": "/home/user/work005m/corpus",
+   "files": 5,
+   "mentions": 3600
+  },
+  {
+   "kind": "VISUAL_REFEREE_RESEARCH",
+   "path": "/home/user/work005m/manifests",
+   "files": 22,
+   "mentions": 0
+  }
+ ],
+ "archon": {
+  "families": 134,
+  "poolAddresses": 3085,
+  "excludedAddresses": 1505,
+  "drawable": 1580,
+  "sha256": "83d2aa045d127eb05b28da6289b346d908b9e87a1a5b556c6e9f2f822474c446",
+  "list": [
+   {
+    "family": "dom-na-wrzosowisku",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "holdout/excluded-families.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-pod-brzoskwinia",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest"
+    ]
+   },
+   {
+    "family": "dom-pod-jarzabem",
+    "why": [
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "blind draw (LEDGER)",
+     "005K gap-set exclusion manifest",
+     "sealed package committed under stage-reports/ or holdout/",
+     "sealed development package",
+     "linked from a cached development page",
+     "005M research text names it"
+    ]
+   },
+   {
+    "family": "dom-pod-milorzebem",
+    "why": [
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "blind draw (LEDGER)",
+     "005K gap-set exclusion manifest",
+     "sealed package committed under stage-reports/ or holdout/",
+     "sealed development package",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-pod-zlotokapem",
+    "why": [
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-przy-trakcie",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-afaskach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest"
+    ]
+   },
+   {
+    "family": "dom-w-aminkach",
+    "why": [
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-amsoniach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-ananasach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-anyzku",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "holdout/excluded-families.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-arbuzach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "holdout/excluded-families.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-arganiach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest"
+    ]
+   },
+   {
+    "family": "dom-w-arkadiach",
+    "why": [
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "blind draw (LEDGER)",
+     "005K gap-set exclusion manifest",
+     "sealed package committed under stage-reports/ or holdout/",
+     "sealed development package",
+     "linked from a cached development page",
+     "005M research text names it"
+    ]
+   },
+   {
+    "family": "dom-w-arletach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set draw (now development material)",
+     "sealed development package",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-asarinach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "holdout/excluded-families.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-aurorach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-azaliach",
+    "why": [
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "blind draw (LEDGER)",
+     "005K gap-set exclusion manifest",
+     "sealed package committed under stage-reports/ or holdout/",
+     "sealed development package",
+     "linked from a cached development page",
+     "005M research text names it"
+    ]
+   },
+   {
+    "family": "dom-w-azollach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-bakopach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "holdout/excluded-families.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-balsamowcach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-barbulach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-brabantach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "holdout/excluded-families.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-bratkach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set draw (now development material)",
+     "sealed development package",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-bukietnicach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-cienistkach",
+    "why": [
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-cieszyniankach",
+    "why": [
+     "blind draw (LEDGER)",
+     "sealed development package",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-cyklamenach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "blind draw (LEDGER)",
+     "005K gap-set exclusion manifest",
+     "sealed development package",
+     "linked from a cached development page",
+     "005M research text names it"
+    ]
+   },
+   {
+    "family": "dom-w-czernicach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-czosnkach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set draw (now development material)",
+     "sealed development package",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-dabecjach",
+    "why": [
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "blind draw (LEDGER)",
+     "005K gap-set exclusion manifest",
+     "sealed package committed under stage-reports/ or holdout/",
+     "sealed development package"
+    ]
+   },
+   {
+    "family": "dom-w-euforbiach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-everniach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-fantazjach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "holdout/excluded-families.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-gaurach",
+    "why": [
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-geranium",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "holdout/excluded-families.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-ginko",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-gliksjach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "holdout/excluded-families.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-gloriosach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "holdout/excluded-families.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-goldstarach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set draw (now development material)",
+     "sealed development package",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-gozdzikowcach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "blind draw (LEDGER)",
+     "005K gap-set exclusion manifest",
+     "sealed development package",
+     "linked from a cached development page",
+     "005M research text names it"
+    ]
+   },
+   {
+    "family": "dom-w-gruszach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-halezjach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-helikoniach",
+    "why": [
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "blind draw (LEDGER)",
+     "005K gap-set exclusion manifest",
+     "sealed package committed under stage-reports/ or holdout/",
+     "sealed development package",
+     "linked from a cached development page",
+     "005M research text names it"
+    ]
+   },
+   {
+    "family": "dom-w-jablonkach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "blind draw (LEDGER)",
+     "005K gap-set exclusion manifest",
+     "sealed package committed under stage-reports/ or holdout/",
+     "sealed development package",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-jarmuzu",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-jarzmiankach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set draw (now development material)",
+     "sealed development package",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-jastrunach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "holdout/excluded-families.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-kalwilach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest"
+    ]
+   },
+   {
+    "family": "dom-w-kanzanach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-klematisach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-kokornaku",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-kosaccach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "sealed package committed under stage-reports/ or holdout/",
+     "sealed development package",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-kostrzewach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "holdout/excluded-families.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-kotewkach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-krokoszach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-kronselkach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-kroplikach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-kruszczykach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "holdout/excluded-families.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-kurkumie",
+    "why": [
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-lanuszkach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-leszczynowcach",
+    "why": [
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-ligolach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set draw (now development material)",
+     "sealed development package",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-lilakach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-litodorach",
+    "why": [
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-lubinie",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-lucernie",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-lunariach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-malinowkach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "holdout/excluded-families.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-manuce",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-marakujach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-marcowkach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "sealed package committed under stage-reports/ or holdout/",
+     "sealed development package",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-marszaliach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "holdout/excluded-families.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-mietach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "holdout/excluded-families.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-miletiach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "holdout/excluded-families.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-modrakach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-modrzewnicy",
+    "why": [
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "blind draw (LEDGER)",
+     "005K gap-set exclusion manifest",
+     "sealed package committed under stage-reports/ or holdout/",
+     "sealed development package",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-modrzykach",
+    "why": [
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "blind draw (LEDGER)",
+     "005K gap-set exclusion manifest",
+     "sealed package committed under stage-reports/ or holdout/",
+     "sealed development package",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-morelach",
+    "why": [
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "blind draw (LEDGER)",
+     "005K gap-set exclusion manifest",
+     "sealed package committed under stage-reports/ or holdout/",
+     "sealed development package",
+     "linked from a cached development page",
+     "005M research text names it"
+    ]
+   },
+   {
+    "family": "dom-w-moringach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-murajach",
+    "why": [
+     "blind draw (LEDGER)",
+     "sealed development package",
+     "linked from a cached development page",
+     "005M research text names it"
+    ]
+   },
+   {
+    "family": "dom-w-muszkatach",
+    "why": [
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-narcyzach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-nefrisach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest"
+    ]
+   },
+   {
+    "family": "dom-w-oliwnikach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-ostojach",
+    "why": [
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-ozankach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "holdout/excluded-families.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-papawerach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "holdout/excluded-families.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-perseach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest"
+    ]
+   },
+   {
+    "family": "dom-w-pierzastkach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest"
+    ]
+   },
+   {
+    "family": "dom-w-piwoniach",
+    "why": [
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-proteach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "holdout/excluded-families.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-przegorzanach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-rarytasach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "sealed package committed under stage-reports/ or holdout/",
+     "sealed development package",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-rawanach",
+    "why": [
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-renetach",
+    "why": [
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-renklodach",
+    "why": [
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-riveach",
+    "why": [
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-rododendronach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-roselinach",
+    "why": [
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-rozchodnikach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-russeliach",
+    "why": [
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-sadzcach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "holdout/excluded-families.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-sadzie",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-saguaro",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-santolinach",
+    "why": [
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-sasankach",
+    "why": [
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-siodmaczkach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest"
+    ]
+   },
+   {
+    "family": "dom-w-sniezyczkach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-stewiach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-strelicjach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-szantach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest"
+    ]
+   },
+   {
+    "family": "dom-w-szkarlatkach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "holdout/excluded-families.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-szyszkowcach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "holdout/excluded-families.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-tamarillo",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-telimach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-tiarellach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "holdout/excluded-families.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-trzcinnikach",
+    "why": [
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-tunbergiach",
+    "why": [
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "blind draw (LEDGER)",
+     "005K gap-set exclusion manifest",
+     "sealed package committed under stage-reports/ or holdout/",
+     "sealed development package"
+    ]
+   },
+   {
+    "family": "dom-w-welniankach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-wiesiolkach",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "holdout/excluded-families.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-wisteriach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-zatrwianach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-zdrojowkach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-zielistkach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-zimokwiatach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-zlociszkach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-w-zurawkach",
+    "why": [
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "blind draw (LEDGER)",
+     "005K gap-set exclusion manifest",
+     "sealed package committed under stage-reports/ or holdout/",
+     "sealed development package",
+     "linked from a cached development page",
+     "005M research text names it"
+    ]
+   },
+   {
+    "family": "dom-we-frezjach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "dom-we-wrzosach",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set draw (now development material)",
+     "sealed development package",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "willa-eliza",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "willa-maja",
+    "why": [
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set draw (now development material)",
+     "sealed development package",
+     "linked from a cached development page"
+    ]
+   },
+   {
+    "family": "willa-miranda",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "blind draw (LEDGER)",
+     "005K gap-set exclusion manifest",
+     "sealed package committed under stage-reports/ or holdout/",
+     "sealed development package",
+     "linked from a cached development page",
+     "005M research text names it"
+    ]
+   },
+   {
+    "family": "willa-oliwia",
+    "why": [
+     "holdout/excluded-families-round-2.txt",
+     "holdout/excluded-families-round-3.txt",
+     "holdout/excluded-families-round-4.txt",
+     "holdout/excluded-families-round-5.txt",
+     "holdout/excluded-families-round-6.txt",
+     "holdout/excluded-families-round-7.txt",
+     "holdout/excluded-families-round-8.txt",
+     "holdout/excluded-families-round-9.txt",
+     "005K gap-set exclusion manifest",
+     "linked from a cached development page"
+    ]
+   }
+  ]
+ }
+}
