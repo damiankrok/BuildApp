@@ -26,13 +26,14 @@ const read = (p: string): string => readFileSync(join(ROOT, p), 'utf8')
 const codeOf = (source: string): string => source.replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/(^|[^:])\/\/.*$/gm, '$1 ')
 const importsOf = (source: string): string[] => [...source.matchAll(/(?:^\s*(?:import|export)[^'"]*?from\s+|import\(\s*|require\(\s*)['"]([^'"]+)['"]/gm)].map((m) => m[1])
 
-function filesUnder(dir: string, ext: RegExp): string[] {
+function filesUnder(dir: string, ext: RegExp, includeVendored = false): string[] {
   const abs = join(ROOT, dir)
   if (!existsSync(abs)) return []
   const out: string[] = []
   const walk = (d: string): void => {
     for (const name of readdirSync(d)) {
-      if (['node_modules', 'dist', 'build', '.gradle', '.cxx', 'third_party'].includes(name)) continue
+      if (['node_modules', 'dist', 'build', '.gradle', '.cxx'].includes(name)) continue
+      if (name === 'third_party' && !includeVendored) continue
       const p = join(d, name)
       if (statSync(p).isDirectory()) walk(p)
       else if (ext.test(name)) out.push(relative(ROOT, p))
@@ -255,7 +256,7 @@ describe('005L production cannot reach the storey-registration harness, and it c
  */
 describe('005M production cannot reach the visual-referee v2 bake-off, and no weight enters the repository', () => {
   const HARNESS = /research\/analyzer-005m|analyzer-005m-vr2|qwen3[-_]?vl|internvl|smolvlm|gemma[-_]?3n|llama[-_.]?cpp|llama-server|\bgguf\b|litert[-_]?lm|matformer/i
-  const WEIGHT_EXT = /\.(safetensors|bin|pt|pth|ckpt|gguf|ggml|onnx|ort|tflite|litertlm|task|mlmodel|mlpackage|npz|npy|pkl|pickle|h5|pb|mf|mf\.gz|tar|zst|pte|dlc|tiktoken|model|mnn|engine)$/i
+  const WEIGHT_EXT = /\.(safetensors|bin|pt|pth|ptl|ckpt|gguf|ggml|onnx|ort|tflite|litertlm|task|mlmodel|mlpackage|npz|npy|pkl|pickle|h5|pb|mf|mf\.gz|tar|zst|7z|msgpack|pte|dlc|tiktoken|model|mnn|engine)$/i
   // a weight renamed to a harmless extension still starts like one (post-review E-5): GGUF, a safetensors header
   // (8-byte length + JSON), NumPy, HDF5, TFLite, a pickle, or a zip holding a PyTorch / safetensors / GGUF payload
   const weightMagic = (b: Buffer): boolean =>
@@ -273,12 +274,24 @@ describe('005M production cannot reach the visual-referee v2 bake-off, and no we
     closeSync(fd)
     return buf.subarray(0, n)
   }
-  // the publisher bytes committed before 005J (`.cache/source-bytes/*.bin`) are drawings and pages, never a model
-  const publisherBytes = (b: Buffer): boolean =>
-    b.subarray(0, 3).equals(Buffer.from([0xff, 0xd8, 0xff])) || b.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a])) ||
-    b.subarray(0, 3).toString('latin1') === 'GIF' || b.subarray(0, 4).toString('latin1') === '%PDF' ||
-    (b.subarray(0, 4).toString('latin1') === 'RIFF' && b.subarray(8, 12).toString('latin1') === 'WEBP') ||
-    !b.subarray(0, 64).some((x) => x < 9 || (x > 13 && x < 32))
+  // the publisher bytes committed before 005J (`.cache/source-bytes/*.bin`) are drawings and pages, never a model. A
+  // file must be a whole medium, not only start like one (post-review E2-5): a JPEG ends with its EOI marker, a PNG
+  // with IEND, a GIF with its trailer, a PDF with %%EOF, and anything else is UTF-8 text with no NUL byte
+  const publisherBytes = (b: Buffer): boolean => {
+    const tail = b.subarray(Math.max(0, b.length - 2048)).toString('latin1').trimEnd()
+    if (b.subarray(0, 3).equals(Buffer.from([0xff, 0xd8, 0xff]))) return b.subarray(Math.max(0, b.length - 64)).includes(Buffer.from([0xff, 0xd9]))
+    if (b.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]))) return tail.slice(-16).includes('IEND')
+    if (b.subarray(0, 3).toString('latin1') === 'GIF') return tail.endsWith(';')
+    if (b.subarray(0, 4).toString('latin1') === '%PDF') return tail.includes('%%EOF')
+    if (b.subarray(0, 4).toString('latin1') === 'RIFF' && b.subarray(8, 12).toString('latin1') === 'WEBP') return b.readUInt32LE(4) + 8 === b.length
+    if (b.includes(0)) return false
+    try {
+      new TextDecoder('utf-8', { fatal: true }).decode(b)
+      return true
+    } catch {
+      return false
+    }
+  }
   const HUB_BUNDLE = /(^|\/)(tokenizer\.json|tokenizer\.model|tokenizer_config\.json|special_tokens_map\.json|added_tokens\.json|vocab\.json|merges\.txt|preprocessor_config\.json|processor_config\.json|chat_template\.(json|jinja)|generation_config\.json|adapter_config\.json|adapter_model\.[a-z]+|model\.safetensors\.index\.json)$/i
   const STAGE_PATHS = ['research/analyzer-005m/', 'stage-reports/artifacts/analyzer-005m-vr2/']
   const tracked = (): string[] => execFileSync('git', ['ls-files'], { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(Boolean)
@@ -298,7 +311,30 @@ describe('005M production cannot reach the visual-referee v2 bake-off, and no we
     const sourceBytes = (f: string): boolean => f.startsWith('.cache/source-bytes/') && /\.bin$/i.test(f)
     expect(files.filter((f) => WEIGHT_EXT.test(f) && !sourceBytes(f))).toEqual([])
     expect(files.filter((f) => HUB_BUNDLE.test(f))).toEqual([])
-    expect(files.filter(sourceBytes).filter((f) => !publisherBytes(head(f)))).toEqual([])
+    expect(files.filter(sourceBytes).filter((f) => !publisherBytes(readFileSync(join(ROOT, f))))).toEqual([])
+  })
+
+  it('no tracked file anywhere is the size of a model (post-review E2-5: a raw binary with no magic number)', () => {
+    // the largest tracked file at the stage base is 16 MB (a design-tool binary); the smallest VLM pack measured is 1.5 GB
+    expect(tracked().filter((f) => existsSync(join(ROOT, f)) && statSync(join(ROOT, f)).size > 32 * 2 ** 20)).toEqual([])
+  })
+
+  it('the detectors catch a disguised weight and reject a disguised publisher file (negative test, synthetic bytes)', () => {
+    const st = Buffer.alloc(64)
+    st.writeBigUInt64LE(40n, 0)
+    st.write('{"__metadata__":{"format":"pt"}}', 8, 'latin1')
+    const gguf = Buffer.concat([Buffer.from('GGUF', 'latin1'), Buffer.alloc(60)])
+    const npy = Buffer.concat([Buffer.from('\x93NUMPY', 'latin1'), Buffer.alloc(58)])
+    const pickle = Buffer.from([0x80, 0x04, 0x95, 0x00])
+    const torchZip = Buffer.concat([Buffer.from('PK\x03\x04', 'latin1'), Buffer.from('archive/data.pkl', 'latin1')])
+    for (const b of [st, gguf, npy, pickle, torchZip]) expect(weightMagic(b)).toBe(true)
+    expect(weightMagic(Buffer.from('{"answer": "A", "confidence": "HIGH"}\n', 'utf8'))).toBe(false)
+    // a weight behind a publisher prefix: no trailer, or a NUL byte in "text"
+    expect(publisherBytes(Buffer.concat([Buffer.from('%PDF-1.7\n', 'latin1'), st]))).toBe(false)
+    expect(publisherBytes(Buffer.concat([Buffer.from([0xff, 0xd8, 0xff, 0xe0]), gguf]))).toBe(false)
+    expect(publisherBytes(Buffer.concat([Buffer.from('text/html\n', 'latin1'), st]))).toBe(false)
+    expect(publisherBytes(Buffer.from('%PDF-1.7\n1 0 obj\n<<>>\nendobj\n%%EOF\n', 'latin1'))).toBe(true)
+    expect(publisherBytes(Buffer.from('image/jpeg', 'latin1'))).toBe(true)
   })
 
   it('no tracked file, whatever its name, starts like a weight file', () => {
@@ -346,18 +382,36 @@ describe('005M production cannot reach the visual-referee v2 bake-off, and no we
     expect(read('research/analyzer-005m/run_model.sh')).not.toMatch(/\$REPO\/[^"\s]*\.gguf/)
   })
 
+  it('no npm manifest depends on a VLM runtime or the 005M harness (post-review F2-6)', () => {
+    const NPM_VLM = /llama|ggml|web-?llm|mlc-ai|transformers|onnxruntime-genai|ollama|litert|mediapipe\/tasks-genai|executorch/i
+    const manifests = ['package.json', ...readdirSync(join(ROOT, 'packages')).map((p) => `packages/${p}/package.json`), ...readdirSync(join(ROOT, 'apps')).map((a) => `apps/${a}/package.json`)]
+    for (const f of manifests.filter((m) => existsSync(join(ROOT, m)))) {
+      const pkg = JSON.parse(read(f)) as Record<string, Record<string, string> | undefined>
+      const deps = ['dependencies', 'devDependencies', 'optionalDependencies', 'peerDependencies'].flatMap((k) => Object.keys(pkg[k] ?? {}))
+      expect(deps.filter((d) => NPM_VLM.test(d) || HARNESS.test(d)), f).toEqual([])
+    }
+  })
+
   it('the Android build packages nothing from the 005M bake-off and no VLM weight or runtime', () => {
     const VLM_RUNTIME = /llama|ggml|\bmtmd\b|tasks-genai|litert[-_]?lm|mlc[-_]?llm|executorch|onnxruntime-genai/i
     for (const f of [...filesUnder('apps/android', /\.gradle\.kts$/), ...filesUnder('apps/android', /^libs\.versions\.toml$/)]) {
       expect(codeOf(read(f)), f).not.toMatch(HARNESS)
       expect(codeOf(read(f)), f).not.toMatch(VLM_RUNTIME)
     }
-    // native code and its build (post-review F-8)
-    for (const f of filesUnder('apps/android', /\.(c|cc|cpp|h|hpp)$|^CMakeLists\.txt$/)) {
+    // native code and its build (post-review F-8), vendored trees included (post-review F2-6)
+    for (const f of filesUnder('apps/android', /\.(c|cc|cpp|h|hpp)$|^CMakeLists\.txt$/, true)) {
       expect(codeOf(read(f)), f).not.toMatch(HARNESS)
       expect(codeOf(read(f)), f).not.toMatch(VLM_RUNTIME)
     }
-    expect(filesUnder('apps/android', /\.so$/).filter((f) => VLM_RUNTIME.test(f))).toEqual([])
+    expect(filesUnder('apps/android', /\.so$/, true).filter((f) => VLM_RUNTIME.test(f))).toEqual([])
+    expect(filesUnder('apps/android', /\.(gguf|safetensors|litertlm)$/, true)).toEqual([])
+    // the apps' tools decide what is fetched into a build (post-review F2-6)
+    for (const a of readdirSync(join(ROOT, 'apps'))) {
+      for (const f of filesUnder(`apps/${a}/tools`, /\.(mjs|js|cjs|ts|sh|py)$/)) {
+        expect(codeOf(read(f)), f).not.toMatch(HARNESS)
+        expect(codeOf(read(f)), f).not.toMatch(VLM_RUNTIME)
+      }
+    }
     expect(filesUnder('apps/android/app/src/main/assets', /.*/).filter((a) => HARNESS.test(a) || WEIGHT_EXT.test(a))).toEqual([])
   })
 })

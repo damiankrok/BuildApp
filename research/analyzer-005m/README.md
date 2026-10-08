@@ -71,8 +71,11 @@ research/analyzer-005m/run_model.sh qwen3-vl-2b <Q8_0.gguf> <mmproj F16.gguf> 2 
 #    ... the same for qwen3-vl-4b and internvl3.5-2b-instruct
 
 # 6. scoring and tables
-$PY research/analyzer-005m/score.py --items $W/items/items.jsonl --runs $W/runs/p1-smolvlm2-2.2b.jsonl,$W/runs/p2-qwen3-vl-2b.jsonl,... \
-    --out-dir stage-reports/artifacts/analyzer-005m-vr2 --old-smol <W005J>/bench/smolvlm2.jsonl --old-items <W005J>/bench/items-all.jsonl
+#    the run order fixes the table order; --exclude gives the amended tables that are committed (post-review A2-7)
+$PY research/analyzer-005m/score.py --items $W/items/items.jsonl \
+    --runs $W/runs/p1-smolvlm2-2.2b.jsonl,$W/runs/p2-internvl3.5-2b.jsonl,$W/runs/p2-qwen3-vl-4b.jsonl,$W/runs/p2-qwen3-vl-2b.jsonl \
+    --out-dir stage-reports/artifacts/analyzer-005m-vr2 --old-smol <W005J>/bench/smolvlm2.jsonl --old-items <W005J>/bench/items-all.jsonl \
+    --exclude stage-reports/artifacts/analyzer-005m-vr2/excluded-items.json
 $PY research/analyzer-005m/summarize.py --dir stage-reports/artifacts/analyzer-005m-vr2 --out stage-reports/artifacts/analyzer-005m-vr2/bakeoff-tables.md
 $PY research/analyzer-005m/runtime_matrix.py --manifest stage-reports/artifacts/analyzer-005m-vr2/model-manifest.json --runs $W/runs \
     --libs $W/llama.cpp/build/bin --quant $W/manifests/quantised-sizes.json --out stage-reports/artifacts/analyzer-005m-vr2/runtime-size-matrix.md
@@ -84,7 +87,12 @@ $PY research/analyzer-005m/teacher_select.py --pool $W/corpus/pool-with-train.js
 $PY research/analyzer-005m/compose5.py --pool $W/corpus/pool-with-train.json --selection $W/corpus/selection-train.json --bands $W/bands/bands-train.json --out $W/items-train
 research/analyzer-005m/run_model.sh qwen3-vl-8b-teacher <Q4_K_M.gguf> <mmproj F16.gguf> 1 $W/runs/teacher-p1-qwen3-vl-8b.jsonl
 ITEMS=<balanced TRAIN slice>.jsonl MODES=D_MARKED_ROI_PLUS_CROP research/analyzer-005m/run_model.sh qwen3-vl-8b-teacher <...> <...> 2 $W/runs/teacher-train-qwen3-vl-8b.jsonl
-$PY research/analyzer-005m/student_dataset.py --pool $W/corpus/pool-with-train.json --sg-trainval $W/sg-trainval/corpus.json --out $W/student --teacher $W/runs/teacher-train-qwen3-vl-8b.jsonl
+#    on vrgen2 2.1 this stops by design: the crop-only abstention target is a function of the class for three classes
+#    (post-review D-13); --allow-class-shortcut writes the set for inspection only. Teacher outputs are joined on the
+#    render hash, so 2.0 outputs on redrawn 2.1 scenes are dropped (D-15)
+$PY research/analyzer-005m/student_dataset.py --pool $W/corpus/pool-v21.json --sg-trainval $W/sg-v21/corpus.json \
+    --sg-test $W/sg-test/corpus.json --sg-sealed $W/sg-v21/corpus.json --out $W/student \
+    [--teacher $W/runs/teacher-train-qwen3-vl-8b.jsonl --teacher-pool $W/corpus/pool-with-train.json] [--allow-class-shortcut]
 $PY research/analyzer-005m/student_probe.py --model <SmolVLM2-500M snapshot> --items <TRAIN items.jsonl> --img $W/items-train/img --steps 8 --out $W/student/probe.json
 
 # 8. gates

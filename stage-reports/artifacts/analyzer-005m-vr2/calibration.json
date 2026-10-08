@@ -5104,6 +5104,40 @@
       }
      }
     },
+    "heldOutZeroErrorThreshold": {
+     "ALL_MODES": {
+      "thresholdFromPhase1": 0.876247925352815,
+      "phase2OnlyQuestions": 122,
+      "unit": "answers (question x mode)",
+      "covered": 30,
+      "wrong": 9,
+      "selectiveRisk": {
+       "k": 9,
+       "n": 30,
+       "rate": 0.3,
+       "wilson95": [
+        0.1666,
+        0.4788
+       ]
+      }
+     },
+     "D_MARKED_ROI_PLUS_CROP": {
+      "thresholdFromPhase1": 0.8290625356231827,
+      "phase2OnlyQuestions": 122,
+      "unit": "answers (question x mode)",
+      "covered": 18,
+      "wrong": 6,
+      "selectiveRisk": {
+       "k": 6,
+       "n": 18,
+       "rate": 0.3333,
+       "wilson95": [
+        0.1628,
+        0.5625
+       ]
+      }
+     }
+    },
     "unconstrainedEnumMass": {
      "median": 0.9982,
      "shareBelow0.5": 0.0
@@ -6167,6 +6201,40 @@
       }
      }
     },
+    "heldOutZeroErrorThreshold": {
+     "ALL_MODES": {
+      "thresholdFromPhase1": 0.9986402210568477,
+      "phase2OnlyQuestions": 122,
+      "unit": "answers (question x mode)",
+      "covered": 127,
+      "wrong": 12,
+      "selectiveRisk": {
+       "k": 12,
+       "n": 127,
+       "rate": 0.0945,
+       "wilson95": [
+        0.0549,
+        0.1579
+       ]
+      }
+     },
+     "D_MARKED_ROI_PLUS_CROP": {
+      "thresholdFromPhase1": 0.9986402210568477,
+      "phase2OnlyQuestions": 122,
+      "unit": "answers (question x mode)",
+      "covered": 35,
+      "wrong": 5,
+      "selectiveRisk": {
+       "k": 5,
+       "n": 35,
+       "rate": 0.1429,
+       "wilson95": [
+        0.0626,
+        0.2938
+       ]
+      }
+     }
+    },
     "unconstrainedEnumMass": {
      "median": 1.0,
      "shareBelow0.5": 0.0
@@ -7221,6 +7289,40 @@
        "wilson95": [
         0.2081,
         0.3785
+       ]
+      }
+     }
+    },
+    "heldOutZeroErrorThreshold": {
+     "ALL_MODES": {
+      "thresholdFromPhase1": 0.9995918142161662,
+      "phase2OnlyQuestions": 122,
+      "unit": "answers (question x mode)",
+      "covered": 17,
+      "wrong": 0,
+      "selectiveRisk": {
+       "k": 0,
+       "n": 17,
+       "rate": 0.0,
+       "wilson95": [
+        0.0,
+        0.1843
+       ]
+      }
+     },
+     "D_MARKED_ROI_PLUS_CROP": {
+      "thresholdFromPhase1": 0.9881412932655906,
+      "phase2OnlyQuestions": 122,
+      "unit": "answers (question x mode)",
+      "covered": 18,
+      "wrong": 4,
+      "selectiveRisk": {
+       "k": 4,
+       "n": 18,
+       "rate": 0.2222,
+       "wilson95": [
+        0.09,
+        0.4522
        ]
       }
      }

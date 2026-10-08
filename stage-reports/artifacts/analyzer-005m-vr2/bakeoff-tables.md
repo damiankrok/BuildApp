@@ -9,10 +9,13 @@
 - **P80** is a wrong answer whose own option probability is ≥ 0.80 (005J's rule).
 - UNRESOLVED is never wrong.
 - **15 questions are excluded** from every amended table (`excluded-items.json`, post-review B-1, B-2/D-1). The pre-registered rows over every question follow each table.
+- **Few clusters.** A percentile cluster bootstrap under-covers when there are few clusters. Treat any interval from fewer than about 20 clusters (PHASE1: 13; REAL human truth: 8) as approximate (post-review A2-9).
+- **Modes are correlated.** "all" pools five answers to each question, so it is not five independent samples.
+- **Median wall** is measured in the run order A → E with the server's prompt cache: D and E reuse the plan prefix computed for C. Standalone latencies are in `runtime-size-matrix.md` (post-review E-1).
 
-## PHASE1 — 30 matched questions × 5 modes (13 independent clusters)
+## PHASE1 — 30 matched questions × 5 modes (30 distinct; the rest are mirrored or rotated renderings of them; 13 independent clusters)
 
-| model | mode | exact accuracy | cluster 95 % | resolved acc. | coverage | UNRESOLVED | fail | **CONFIDENT_WRONG_RATE** | cluster 95 % | HIGH share | p ≥ 0.8 share | P80 rate | median wall | image tokens |
+| model | mode | exact accuracy | cluster 95 % | resolved acc. | coverage | UNRESOLVED | fail | **CONFIDENT_WRONG_RATE** | cluster 95 % | HIGH share | p ≥ 0.8 share | P80 rate | median wall (run order, cache-aided) | image tokens |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | smolvlm2-2.2b | A | 46.7 % (14/30; 30–64) | 33–63 | 48 % (14/29) | 97 % (29/30) | 1 | 0 | **50.0 % (15/30; 33–67)** | 37–60 | 100 % (29/29) | 0 % (0/29) | 0 % (0/30) | 33.6 s | 419 |
 | smolvlm2-2.2b | B | 40.0 % (12/30; 25–58) | 29–49 | 43 % (12/28) | 93 % (28/30) | 2 | 0 | **53.3 % (16/30; 36–70)** | 44–70 | 100 % (28/28) | 0 % (0/28) | 0 % (0/30) | 21.9 s | 419 |
@@ -73,6 +76,58 @@ Pre-registered set (all 32 questions, nothing excluded), all modes pooled:
 | internvl3.5-2b-instruct | -26.9 … +8.3 (P>0 8 %) | -37.0 … -3.6 (P>0 0 %) | -20.0 … +16.7 (P>0 28 %) | -20.0 … +16.7 (P>0 28 %) | -20.8 … +11.8 (P>0 25 %) | -23.9 … +8.2 (P>0 14 %) |
 | qwen3-vl-4b | -13.6 … +16.7 (P>0 59 %) | -28.0 … +11.1 (P>0 15 %) | +0.0 … +22.6 (P>0 97 %) | -5.9 … +20.0 (P>0 78 %) | -5.9 … +20.0 (P>0 78 %) | -8.6 … +17.3 (P>0 65 %) |
 | qwen3-vl-2b | +0.0 … +17.4 (P>0 90 %) | -11.6 … +14.8 (P>0 40 %) | +4.2 … +23.1 (P>0 100 %) | +7.1 … +28.0 (P>0 100 %) | +4.2 … +23.1 (P>0 100 %) | +2.1 … +20.0 (P>0 100 %) |
+
+### PHASE1 — model minus prior, per subset, with a family-wise check (cluster bootstrap; percentage points)
+
+The fitted per-class majority is fitted on the subset it is scored on, so it is an optimistic ceiling for a class-aware rule that never looks at the image. "Family-wise" is the 95th percentile of the centred maximum over every model × mode arm; an arm whose point gain exceeds it survives the choice of the best arm after the fact.
+
+| subset | questions | clusters | arm | − first-option rule: point, 95 % | − fitted class majority: point, 95 % |
+| --- | --- | --- | --- | --- | --- |
+| ALL | 30 | 13 | smolvlm2-2.2b A | -16.7 (-40.5 … +8.7) | -23.3 (-38.1 … -4.2) |
+| ALL | 30 | 13 | smolvlm2-2.2b C | -23.3 (-40.0 … -4.0) | -30.0 (-48.0 … -12.5) |
+| ALL | 30 | 13 | smolvlm2-2.2b D | -20.0 (-42.5 … +4.5) | -26.7 (-43.8 … -4.5) |
+| ALL | 30 | 13 | internvl3.5-2b-instruct A | -10.0 (-26.9 … +8.3) | -16.7 (-35.0 … -4.5) |
+| ALL | 30 | 13 | internvl3.5-2b-instruct C | -3.3 (-20.0 … +16.7) | -10.0 (-27.6 … +3.7) |
+| ALL | 30 | 13 | internvl3.5-2b-instruct D | -3.3 (-20.0 … +16.7) | -10.0 (-27.6 … +3.7) |
+| ALL | 30 | 13 | qwen3-vl-4b A | +3.3 (-13.6 … +16.7) | -3.3 (-20.0 … +5.3) |
+| ALL | 30 | 13 | qwen3-vl-4b C | +10.0 (+0.0 … +22.6) | +3.3 (+0.0 … +7.5) |
+| ALL | 30 | 13 | qwen3-vl-4b D | +6.7 (-5.9 … +20.0) | +0.0 (-13.0 … +6.7) |
+| ALL | 30 | 13 | qwen3-vl-2b A | +6.7 (+0.0 … +17.4) | +0.0 (-12.0 … +7.1) |
+| ALL | 30 | 13 | qwen3-vl-2b C | +13.3 (+4.2 … +23.1) | +6.7 (+0.0 … +15.0) |
+| ALL | 30 | 13 | qwen3-vl-2b D | +16.7 (+7.1 … +28.0) | +10.0 (+0.0 … +19.1) |
+| REAL_ALL | 20 | 8 | smolvlm2-2.2b A | -25.0 (-52.0 … +14.3) | -35.0 (-50.0 … -10.0) |
+| REAL_ALL | 20 | 8 | smolvlm2-2.2b C | -35.0 (-54.5 … -7.7) | -45.0 (-72.2 … -28.6) |
+| REAL_ALL | 20 | 8 | smolvlm2-2.2b D | -30.0 (-54.8 … +12.5) | -40.0 (-60.9 … -13.3) |
+| REAL_ALL | 20 | 8 | internvl3.5-2b-instruct A | +0.0 (-18.8 … +25.0) | -10.0 (-33.3 … +0.0) |
+| REAL_ALL | 20 | 8 | internvl3.5-2b-instruct C | +5.0 (-15.8 … +35.7) | -5.0 (-28.6 … +13.3) |
+| REAL_ALL | 20 | 8 | internvl3.5-2b-instruct D | +5.0 (-15.8 … +35.7) | -5.0 (-28.6 … +13.3) |
+| REAL_ALL | 20 | 8 | qwen3-vl-4b A | +5.0 (-23.5 … +29.4) | -5.0 (-36.4 … +7.7) |
+| REAL_ALL | 20 | 8 | qwen3-vl-4b C | +15.0 (+3.1 … +35.7) | +5.0 (+0.0 … +9.5) |
+| REAL_ALL | 20 | 8 | qwen3-vl-4b D | +10.0 (-11.1 … +33.3) | +0.0 (-22.2 … +8.8) |
+| REAL_ALL | 20 | 8 | qwen3-vl-2b A | +10.0 (+0.0 … +28.6) | +0.0 (-20.0 … +9.1) |
+| REAL_ALL | 20 | 8 | qwen3-vl-2b C | +20.0 (+9.1 … +35.7) | +10.0 (+0.0 … +19.1) |
+| REAL_ALL | 20 | 8 | qwen3-vl-2b D | +20.0 (+9.1 … +35.7) | +10.0 (+0.0 … +19.1) |
+| SYNTH_ALL | 10 | 5 | smolvlm2-2.2b A | +0.0 (+0.0 … +0.0) | +0.0 (+0.0 … +0.0) |
+| SYNTH_ALL | 10 | 5 | smolvlm2-2.2b C | +0.0 (+0.0 … +0.0) | +0.0 (+0.0 … +0.0) |
+| SYNTH_ALL | 10 | 5 | smolvlm2-2.2b D | +0.0 (+0.0 … +0.0) | +0.0 (+0.0 … +0.0) |
+| SYNTH_ALL | 10 | 5 | internvl3.5-2b-instruct A | -30.0 (-50.0 … -10.0) | -30.0 (-50.0 … -10.0) |
+| SYNTH_ALL | 10 | 5 | internvl3.5-2b-instruct C | -20.0 (-40.0 … +0.0) | -20.0 (-40.0 … +0.0) |
+| SYNTH_ALL | 10 | 5 | internvl3.5-2b-instruct D | -20.0 (-40.0 … +0.0) | -20.0 (-40.0 … +0.0) |
+| SYNTH_ALL | 10 | 5 | qwen3-vl-4b A | +0.0 (+0.0 … +0.0) | +0.0 (+0.0 … +0.0) |
+| SYNTH_ALL | 10 | 5 | qwen3-vl-4b C | +0.0 (+0.0 … +0.0) | +0.0 (+0.0 … +0.0) |
+| SYNTH_ALL | 10 | 5 | qwen3-vl-4b D | +0.0 (+0.0 … +0.0) | +0.0 (+0.0 … +0.0) |
+| SYNTH_ALL | 10 | 5 | qwen3-vl-2b A | +0.0 (+0.0 … +0.0) | +0.0 (+0.0 … +0.0) |
+| SYNTH_ALL | 10 | 5 | qwen3-vl-2b C | +0.0 (+0.0 … +0.0) | +0.0 (+0.0 … +0.0) |
+| SYNTH_ALL | 10 | 5 | qwen3-vl-2b D | +10.0 (+0.0 … +30.0) | +10.0 (+0.0 … +30.0) |
+
+| subset | prior | arms | family-wise critical gain | arms above it |
+| --- | --- | --- | --- | --- |
+| ALL | firstOptionRule | 20 | +24.7 | none |
+| ALL | fittedClassMajorityUpperBound | 20 | +19.5 | none |
+| REAL_ALL | firstOptionRule | 20 | +38.5 | none |
+| REAL_ALL | fittedClassMajorityUpperBound | 20 | +24.6 | none |
+| SYNTH_ALL | firstOptionRule | 20 | +20.0 | none |
+| SYNTH_ALL | fittedClassMajorityUpperBound | 20 | +20.0 | none |
 
 ### PHASE1 — model against model (cluster bootstrap, paired; percentage points)
 
@@ -164,9 +219,9 @@ Pairs: 0 mirror, 0 rotation, 3 counterfactual pairs that need the whole plan (by
 | TERRACE_VS_BODY | 0 % (0/2) | 50 % (1/2) | 100 % (2/2) | 100 % (2/2) |
 | WALL_CONTINUATION | 50 % (2/4) | 75 % (3/4) | 75 % (3/4) | 75 % (3/4) |
 
-## PHASE2 — 152 matched questions × 5 modes (42 independent clusters)
+## PHASE2 — 152 matched questions × 5 modes (137 distinct; the rest are mirrored or rotated renderings of them; 42 independent clusters)
 
-| model | mode | exact accuracy | cluster 95 % | resolved acc. | coverage | UNRESOLVED | fail | **CONFIDENT_WRONG_RATE** | cluster 95 % | HIGH share | p ≥ 0.8 share | P80 rate | median wall | image tokens |
+| model | mode | exact accuracy | cluster 95 % | resolved acc. | coverage | UNRESOLVED | fail | **CONFIDENT_WRONG_RATE** | cluster 95 % | HIGH share | p ≥ 0.8 share | P80 rate | median wall (run order, cache-aided) | image tokens |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | internvl3.5-2b-instruct | A | 49.3 % (75/152; 42–57) | 39–58 | 59 % (75/127) | 84 % (127/152) | 25 | 0 | **34.2 % (52/152; 27–42)** | 27–42 | 100 % (127/127) | 13 % (17/127) | 3 % (5/152) | 14.2 s | 258 |
 | internvl3.5-2b-instruct | B | 41.4 % (63/152; 34–49) | 31–50 | 54 % (63/116) | 76 % (116/152) | 36 | 0 | **34.9 % (53/152; 28–43)** | 28–43 | 100 % (116/116) | 3 % (4/116) | 1 % (1/152) | 32.7 s | 1282 |
@@ -219,6 +274,49 @@ Pre-registered set (all 167 questions, nothing excluded), all modes pooled:
 | internvl3.5-2b-instruct | -17.4 … -1.6 (P>0 1 %) | -24.5 … -10.8 (P>0 0 %) | -13.1 … +3.4 (P>0 11 %) | -12.8 … +2.8 (P>0 10 %) | -12.2 … +1.4 (P>0 6 %) | -15.4 … -2.0 (P>0 0 %) |
 | qwen3-vl-4b | -6.2 … +11.3 (P>0 73 %) | -13.8 … +6.4 (P>0 23 %) | +0.9 … +16.6 (P>0 98 %) | -0.8 … +14.6 (P>0 95 %) | -2.9 … +12.8 (P>0 88 %) | -3.5 … +11.3 (P>0 86 %) |
 | qwen3-vl-2b | -2.0 … +14.9 (P>0 92 %) | -6.4 … +11.1 (P>0 70 %) | -2.2 … +14.5 (P>0 92 %) | +2.0 … +18.5 (P>0 99 %) | -1.5 … +13.0 (P>0 94 %) | -1.4 … +13.9 (P>0 95 %) |
+
+### PHASE2 — model minus prior, per subset, with a family-wise check (cluster bootstrap; percentage points)
+
+The fitted per-class majority is fitted on the subset it is scored on, so it is an optimistic ceiling for a class-aware rule that never looks at the image. "Family-wise" is the 95th percentile of the centred maximum over every model × mode arm; an arm whose point gain exceeds it survives the choice of the best arm after the fact.
+
+| subset | questions | clusters | arm | − first-option rule: point, 95 % | − fitted class majority: point, 95 % |
+| --- | --- | --- | --- | --- | --- |
+| ALL | 152 | 42 | internvl3.5-2b-instruct A | -9.2 (-17.4 … -1.6) | -13.2 (-22.1 … -5.3) |
+| ALL | 152 | 42 | internvl3.5-2b-instruct C | -4.6 (-13.1 … +3.4) | -8.6 (-17.8 … -0.7) |
+| ALL | 152 | 42 | internvl3.5-2b-instruct D | -4.6 (-12.8 … +2.8) | -8.6 (-17.1 … -1.5) |
+| ALL | 152 | 42 | qwen3-vl-4b A | +3.3 (-6.2 … +11.3) | -0.7 (-9.4 … +6.3) |
+| ALL | 152 | 42 | qwen3-vl-4b C | +9.2 (+0.9 … +16.6) | +5.3 (-3.2 … +12.1) |
+| ALL | 152 | 42 | qwen3-vl-4b D | +7.2 (-0.8 … +14.6) | +3.3 (-4.6 … +10.1) |
+| ALL | 152 | 42 | qwen3-vl-2b A | +6.6 (-2.0 … +14.9) | +2.6 (-5.9 … +9.8) |
+| ALL | 152 | 42 | qwen3-vl-2b C | +6.6 (-2.2 … +14.5) | +2.6 (-5.0 … +8.6) |
+| ALL | 152 | 42 | qwen3-vl-2b D | +10.5 (+2.0 … +18.5) | +6.6 (+0.7 … +12.0) |
+| REAL_ALL | 97 | 17 | internvl3.5-2b-instruct A | -4.1 (-14.4 … +6.7) | -10.3 (-21.4 … -1.2) |
+| REAL_ALL | 97 | 17 | internvl3.5-2b-instruct C | -1.0 (-12.2 … +9.3) | -7.2 (-19.6 … +2.7) |
+| REAL_ALL | 97 | 17 | internvl3.5-2b-instruct D | -1.0 (-11.8 … +9.1) | -7.2 (-19.3 … +1.5) |
+| REAL_ALL | 97 | 17 | qwen3-vl-4b A | +8.2 (-5.9 … +19.1) | +2.1 (-10.4 … +10.1) |
+| REAL_ALL | 97 | 17 | qwen3-vl-4b C | +14.4 (+3.3 … +24.5) | +8.2 (-3.6 … +17.5) |
+| REAL_ALL | 97 | 17 | qwen3-vl-4b D | +12.4 (+1.6 … +22.2) | +6.2 (-4.8 … +14.7) |
+| REAL_ALL | 97 | 17 | qwen3-vl-2b A | +11.3 (+0.0 … +22.6) | +5.1 (-6.3 … +14.4) |
+| REAL_ALL | 97 | 17 | qwen3-vl-2b C | +12.4 (-0.9 … +23.0) | +6.2 (-4.3 … +13.9) |
+| REAL_ALL | 97 | 17 | qwen3-vl-2b D | +15.5 (+2.1 … +26.7) | +9.3 (+1.1 … +16.0) |
+| SYNTH_ALL | 55 | 25 | internvl3.5-2b-instruct A | -18.2 (-30.4 … -7.4) | -18.2 (-30.4 … -7.4) |
+| SYNTH_ALL | 55 | 25 | internvl3.5-2b-instruct C | -10.9 (-24.1 … +0.0) | -10.9 (-24.1 … +0.0) |
+| SYNTH_ALL | 55 | 25 | internvl3.5-2b-instruct D | -10.9 (-23.2 … -1.8) | -10.9 (-23.2 … -1.8) |
+| SYNTH_ALL | 55 | 25 | qwen3-vl-4b A | -5.5 (-15.2 … +3.9) | -5.5 (-15.2 … +3.9) |
+| SYNTH_ALL | 55 | 25 | qwen3-vl-4b C | +0.0 (-8.8 … +7.7) | +0.0 (-8.8 … +7.7) |
+| SYNTH_ALL | 55 | 25 | qwen3-vl-4b D | -1.8 (-11.5 … +7.1) | -1.8 (-11.5 … +7.1) |
+| SYNTH_ALL | 55 | 25 | qwen3-vl-2b A | -1.8 (-11.7 … +6.0) | -1.8 (-11.7 … +6.0) |
+| SYNTH_ALL | 55 | 25 | qwen3-vl-2b C | -3.6 (-10.7 … +0.0) | -3.6 (-10.7 … +0.0) |
+| SYNTH_ALL | 55 | 25 | qwen3-vl-2b D | +1.8 (-3.6 … +9.1) | +1.8 (-3.6 … +9.1) |
+
+| subset | prior | arms | family-wise critical gain | arms above it |
+| --- | --- | --- | --- | --- |
+| ALL | firstOptionRule | 15 | +10.2 | qwen3-vl-2b D |
+| ALL | fittedClassMajorityUpperBound | 15 | +9.8 | none |
+| REAL_ALL | firstOptionRule | 15 | +13.8 | qwen3-vl-2b D, qwen3-vl-4b C |
+| REAL_ALL | fittedClassMajorityUpperBound | 15 | +12.4 | none |
+| SYNTH_ALL | firstOptionRule | 15 | +12.8 | none |
+| SYNTH_ALL | fittedClassMajorityUpperBound | 15 | +12.8 | none |
 
 ### PHASE2 — model against model (cluster bootstrap, paired; percentage points)
 
@@ -315,41 +413,45 @@ Pairs: 14 mirror, 1 rotation, 10 counterfactual pairs that need the whole plan (
 
 ## Context gain — PHASE1: A_CROP_ONLY against the modes with the whole plan
 
-| model | A → | WRONG→RIGHT | UNRESOLVED→RIGHT | WRONG→UNRESOLVED | RIGHT→WRONG | OTHER (breakdown) | SAME | net change in right answers | context-dependent: right in A → right in mode (n) |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| smolvlm2-2.2b | B | 3 | 0 | 1 | 5 | 0 | 21 | -2 | 3 → 3 (6) |
-| smolvlm2-2.2b | C | 2 | 0 | 0 | 3 | 2 (RIGHT->UNRESOLVED 1, WRONG->WRONG (other option) 1) | 23 | -2 | 3 → 3 (6) |
-| smolvlm2-2.2b | D | 1 | 0 | 0 | 2 | 0 | 27 | -1 | 3 → 3 (6) |
-| smolvlm2-2.2b | E | 1 | 0 | 0 | 3 | 0 | 26 | -2 | 3 → 3 (6) |
-| internvl3.5-2b-instruct | B | 0 | 0 | 1 | 2 | 2 (WRONG->WRONG (other option) 1, RIGHT->UNRESOLVED 1) | 25 | -3 | 0 → 0 (6) |
-| internvl3.5-2b-instruct | C | 1 | 1 | 0 | 0 | 1 (UNRESOLVED->WRONG 1) | 27 | +2 | 0 → 1 (6) |
-| internvl3.5-2b-instruct | D | 1 | 1 | 0 | 0 | 1 (UNRESOLVED->WRONG 1) | 27 | +2 | 0 → 1 (6) |
-| internvl3.5-2b-instruct | E | 0 | 2 | 0 | 0 | 1 (UNRESOLVED->WRONG 1) | 27 | +2 | 0 → 1 (6) |
-| qwen3-vl-4b | B | 2 | 0 | 2 | 6 | 1 (WRONG->WRONG (other option) 1) | 19 | -4 | 3 → 3 (6) |
-| qwen3-vl-4b | C | 3 | 0 | 0 | 1 | 0 | 26 | +2 | 3 → 3 (6) |
-| qwen3-vl-4b | D | 2 | 0 | 0 | 1 | 1 (WRONG->WRONG (other option) 1) | 26 | +1 | 3 → 3 (6) |
-| qwen3-vl-4b | E | 2 | 0 | 0 | 1 | 1 (WRONG->WRONG (other option) 1) | 26 | +1 | 3 → 3 (6) |
-| qwen3-vl-2b | B | 3 | 0 | 0 | 5 | 1 (WRONG->WRONG (other option) 1) | 21 | -2 | 3 → 3 (6) |
-| qwen3-vl-2b | C | 4 | 0 | 0 | 2 | 0 | 24 | +2 | 3 → 3 (6) |
-| qwen3-vl-2b | D | 4 | 0 | 0 | 1 | 0 | 25 | +3 | 3 → 4 (6) |
-| qwen3-vl-2b | E | 4 | 0 | 0 | 2 | 0 | 24 | +2 | 3 → 3 (6) |
+The interval is a paired cluster bootstrap of (accuracy in the mode − accuracy in A), in percentage points.
+
+| model | A → | WRONG→RIGHT | UNRESOLVED→RIGHT | WRONG→UNRESOLVED | UNRESOLVED→WRONG | RIGHT→WRONG | OTHER (breakdown) | SAME | net change in right answers | cluster 95 % (pp) | P(gain > 0) | context-dependent: right in A → right in mode (n) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| smolvlm2-2.2b | B | 3 | 0 | 1 | 0 | 5 | 0 | 21 | -2 | -25.0 … +4.5 | 10 % | 3 → 3 (6) |
+| smolvlm2-2.2b | C | 2 | 0 | 0 | 0 | 3 | 2 (RIGHT->UNRESOLVED 1, WRONG->WRONG (other option) 1) | 23 | -2 | -25.0 … +4.5 | 10 % | 3 → 3 (6) |
+| smolvlm2-2.2b | D | 1 | 0 | 0 | 0 | 2 | 0 | 27 | -1 | -12.9 … +0.0 | 0 % | 3 → 3 (6) |
+| smolvlm2-2.2b | E | 1 | 0 | 0 | 0 | 3 | 0 | 26 | -2 | -19.1 … +0.0 | 0 % | 3 → 3 (6) |
+| internvl3.5-2b-instruct | B | 0 | 0 | 1 | 0 | 2 | 2 (WRONG->WRONG (other option) 1, RIGHT->UNRESOLVED 1) | 25 | -3 | -26.9 … +0.0 | 0 % | 0 → 0 (6) |
+| internvl3.5-2b-instruct | C | 1 | 1 | 0 | 1 | 0 | 1 (UNRESOLVED->WRONG 1) | 27 | +2 | +0.0 … +18.2 | 89 % | 0 → 1 (6) |
+| internvl3.5-2b-instruct | D | 1 | 1 | 0 | 1 | 0 | 1 (UNRESOLVED->WRONG 1) | 27 | +2 | +0.0 … +18.2 | 89 % | 0 → 1 (6) |
+| internvl3.5-2b-instruct | E | 0 | 2 | 0 | 1 | 0 | 1 (UNRESOLVED->WRONG 1) | 27 | +2 | +0.0 … +13.8 | 88 % | 0 → 1 (6) |
+| qwen3-vl-4b | B | 2 | 0 | 2 | 0 | 6 | 1 (WRONG->WRONG (other option) 1) | 19 | -4 | -25.6 … +0.0 | 0 % | 3 → 3 (6) |
+| qwen3-vl-4b | C | 3 | 0 | 0 | 0 | 1 | 0 | 26 | +2 | +0.0 … +20.0 | 89 % | 3 → 3 (6) |
+| qwen3-vl-4b | D | 2 | 0 | 0 | 0 | 1 | 1 (WRONG->WRONG (other option) 1) | 26 | +1 | +0.0 … +13.6 | 64 % | 3 → 3 (6) |
+| qwen3-vl-4b | E | 2 | 0 | 0 | 0 | 1 | 1 (WRONG->WRONG (other option) 1) | 26 | +1 | +0.0 … +13.6 | 64 % | 3 → 3 (6) |
+| qwen3-vl-2b | B | 3 | 0 | 0 | 0 | 5 | 1 (WRONG->WRONG (other option) 1) | 21 | -2 | -14.3 … +0.0 | 0 % | 3 → 3 (6) |
+| qwen3-vl-2b | C | 4 | 0 | 0 | 0 | 2 | 0 | 24 | +2 | +0.0 … +14.3 | 90 % | 3 → 3 (6) |
+| qwen3-vl-2b | D | 4 | 0 | 0 | 0 | 1 | 0 | 25 | +3 | +0.0 … +20.0 | 97 % | 3 → 4 (6) |
+| qwen3-vl-2b | E | 4 | 0 | 0 | 0 | 2 | 0 | 24 | +2 | +0.0 … +14.3 | 90 % | 3 → 3 (6) |
 
 ## Context gain — PHASE2: A_CROP_ONLY against the modes with the whole plan
 
-| model | A → | WRONG→RIGHT | UNRESOLVED→RIGHT | WRONG→UNRESOLVED | RIGHT→WRONG | OTHER (breakdown) | SAME | net change in right answers | context-dependent: right in A → right in mode (n) |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| internvl3.5-2b-instruct | B | 2 | 1 | 7 | 9 | 12 (RIGHT->UNRESOLVED 6, WRONG->WRONG (other option) 5, UNRESOLVED->WRONG 1) | 121 | -12 | 5 → 3 (23) |
-| internvl3.5-2b-instruct | C | 7 | 3 | 2 | 3 | 4 (UNRESOLVED->WRONG 4) | 133 | +7 | 5 → 7 (23) |
-| internvl3.5-2b-instruct | D | 6 | 4 | 0 | 3 | 6 (UNRESOLVED->WRONG 6) | 133 | +7 | 5 → 8 (23) |
-| internvl3.5-2b-instruct | E | 2 | 10 | 0 | 4 | 8 (UNRESOLVED->WRONG 7, RIGHT->UNRESOLVED 1) | 128 | +7 | 5 → 7 (23) |
-| qwen3-vl-4b | B | 13 | 1 | 7 | 23 | 6 (WRONG->WRONG (other option) 3, RIGHT->UNRESOLVED 2, UNRESOLVED->WRONG 1) | 102 | -11 | 10 → 11 (23) |
-| qwen3-vl-4b | C | 14 | 1 | 0 | 6 | 2 (WRONG->WRONG (other option) 1, UNRESOLVED->WRONG 1) | 129 | +9 | 10 → 11 (23) |
-| qwen3-vl-4b | D | 10 | 1 | 0 | 5 | 4 (WRONG->WRONG (other option) 2, UNRESOLVED->WRONG 2) | 132 | +6 | 10 → 11 (23) |
-| qwen3-vl-4b | E | 11 | 1 | 0 | 9 | 4 (WRONG->WRONG (other option) 2, UNRESOLVED->WRONG 2) | 127 | +3 | 10 → 11 (23) |
-| qwen3-vl-2b | B | 12 | 0 | 0 | 18 | 5 (WRONG->WRONG (other option) 5) | 117 | -6 | 10 → 12 (23) |
-| qwen3-vl-2b | C | 9 | 0 | 0 | 9 | 1 (WRONG->WRONG (other option) 1) | 133 | +0 | 10 → 11 (23) |
-| qwen3-vl-2b | D | 11 | 0 | 0 | 5 | 0 | 136 | +6 | 10 → 13 (23) |
-| qwen3-vl-2b | E | 8 | 0 | 0 | 8 | 0 | 136 | +0 | 10 → 11 (23) |
+The interval is a paired cluster bootstrap of (accuracy in the mode − accuracy in A), in percentage points.
+
+| model | A → | WRONG→RIGHT | UNRESOLVED→RIGHT | WRONG→UNRESOLVED | UNRESOLVED→WRONG | RIGHT→WRONG | OTHER (breakdown) | SAME | net change in right answers | cluster 95 % (pp) | P(gain > 0) | context-dependent: right in A → right in mode (n) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| internvl3.5-2b-instruct | B | 2 | 1 | 7 | 1 | 9 | 12 (RIGHT->UNRESOLVED 6, WRONG->WRONG (other option) 5, UNRESOLVED->WRONG 1) | 121 | -12 | -14.6 … -2.8 | 0 % | 5 → 3 (23) |
+| internvl3.5-2b-instruct | C | 7 | 3 | 2 | 4 | 3 | 4 (UNRESOLVED->WRONG 4) | 133 | +7 | -0.6 … +10.3 | 95 % | 5 → 7 (23) |
+| internvl3.5-2b-instruct | D | 6 | 4 | 0 | 6 | 3 | 6 (UNRESOLVED->WRONG 6) | 133 | +7 | +0.0 … +9.7 | 96 % | 5 → 8 (23) |
+| internvl3.5-2b-instruct | E | 2 | 10 | 0 | 7 | 4 | 8 (UNRESOLVED->WRONG 7, RIGHT->UNRESOLVED 1) | 128 | +7 | -1.7 … +10.4 | 90 % | 5 → 7 (23) |
+| qwen3-vl-4b | B | 13 | 1 | 7 | 1 | 23 | 6 (WRONG->WRONG (other option) 3, RIGHT->UNRESOLVED 2, UNRESOLVED->WRONG 1) | 102 | -11 | -15.5 … +3.2 | 8 % | 10 → 11 (23) |
+| qwen3-vl-4b | C | 14 | 1 | 0 | 1 | 6 | 2 (WRONG->WRONG (other option) 1, UNRESOLVED->WRONG 1) | 129 | +9 | +0.0 … +13.0 | 97 % | 10 → 11 (23) |
+| qwen3-vl-4b | D | 10 | 1 | 0 | 2 | 5 | 4 (WRONG->WRONG (other option) 2, UNRESOLVED->WRONG 2) | 132 | +6 | -1.3 … +9.2 | 92 % | 10 → 11 (23) |
+| qwen3-vl-4b | E | 11 | 1 | 0 | 2 | 9 | 4 (WRONG->WRONG (other option) 2, UNRESOLVED->WRONG 2) | 127 | +3 | -4.1 … +7.2 | 73 % | 10 → 11 (23) |
+| qwen3-vl-2b | B | 12 | 0 | 0 | 0 | 18 | 5 (WRONG->WRONG (other option) 5) | 117 | -6 | -10.2 … +3.3 | 13 % | 10 → 12 (23) |
+| qwen3-vl-2b | C | 9 | 0 | 0 | 0 | 9 | 1 (WRONG->WRONG (other option) 1) | 133 | +0 | -4.3 … +4.3 | 42 % | 10 → 11 (23) |
+| qwen3-vl-2b | D | 11 | 0 | 0 | 0 | 5 | 0 | 136 | +6 | -0.7 … +9.0 | 94 % | 10 → 13 (23) |
+| qwen3-vl-2b | E | 8 | 0 | 0 | 0 | 8 | 0 | 136 | +0 | -4.9 … +4.5 | 44 % | 10 → 11 (23) |
 
 ## Calibration — PHASE1 (answered items)
 
@@ -382,22 +484,22 @@ Pairs: 14 mirror, 1 rotation, 10 counterfactual pairs that need the whole plan (
 
 ### Risk–coverage of the option probability — PHASE1
 
-This is **in-sample**. Thresholds were fixed in advance, but any operating point read off these rows was chosen on the answers it is scored on. The "zero-error region" is the coverage above the highest probability that any wrong answer received.
+This is **in-sample**. Thresholds were fixed in advance, but any operating point read off these rows was chosen on the answers it is scored on. The "zero-error region" is the coverage above the highest probability that any wrong answer received. Coverage is a share of the **answered** items (UNRESOLVED left out), and the "all" slice pools five correlated answers per question.
 
 | model | slice | p ≥ 0 | 0.8 | 0.9 | 0.95 | 0.99 | 0.999 | in-sample zero-error region | C+D+E agree: kept, wrong | all five agree: kept, wrong |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| smolvlm2-2.2b | ALL_MODES | cov 100 %, risk 56 % (≤ 64) | — | — | — | — | — | p > 0.7060: 2 (1.4 %) | 24/30, 58 % (14/24) | 18/30, 56 % (10/18) |
-| smolvlm2-2.2b | D | cov 100 %, risk 55 % (≤ 72) | — | — | — | — | — | p > 0.6532: 1 (3.5 %) |  |  |
-| smolvlm2-2.2b | REAL_ALL|D | cov 100 %, risk 58 % (≤ 77) | — | — | — | — | — | p > 0.6532: 1 (5.3 %) |  |  |
-| internvl3.5-2b-instruct | ALL_MODES | cov 100 %, risk 28 % (≤ 37) | cov 10 %, risk 25 % (≤ 53) | cov 2 %, risk 0 % (≤ 66) | — | — | — | p > 0.8762: 5 (4.3 %) | 23/30, 26 % (6/23) | 16/30, 19 % (3/16) |
-| internvl3.5-2b-instruct | D | cov 100 %, risk 25 % (≤ 45) | cov 17 %, risk 25 % (≤ 70) | cov 4 %, risk 0 % (≤ 79) | — | — | — | p > 0.8291: 2 (8.3 %) |  |  |
-| internvl3.5-2b-instruct | REAL_ALL|D | cov 100 %, risk 17 % (≤ 39) | cov 22 %, risk 25 % (≤ 70) | cov 6 %, risk 0 % (≤ 79) | — | — | — | p > 0.8291: 2 (11.1 %) |  |  |
-| qwen3-vl-4b | ALL_MODES | cov 100 %, risk 32 % (≤ 40) | cov 72 %, risk 26 % (≤ 35) | cov 57 %, risk 24 % (≤ 34) | cov 49 %, risk 14 % (≤ 24) | cov 34 %, risk 8 % (≤ 18) | cov 13 %, risk 0 % (≤ 17) | p > 0.9986: 26 (17.6 %) | 28/30, 25 % (7/28) | 16/30, 19 % (3/16) |
-| qwen3-vl-4b | D | cov 100 %, risk 30 % (≤ 48) | cov 83 %, risk 28 % (≤ 48) | cov 70 %, risk 24 % (≤ 45) | cov 57 %, risk 18 % (≤ 41) | cov 43 %, risk 15 % (≤ 42) | cov 17 %, risk 0 % (≤ 43) | p > 0.9986: 8 (26.7 %) |  |  |
-| qwen3-vl-4b | REAL_ALL|D | cov 100 %, risk 20 % (≤ 42) | cov 75 %, risk 13 % (≤ 38) | cov 65 %, risk 8 % (≤ 33) | cov 55 %, risk 0 % (≤ 26) | cov 40 %, risk 0 % (≤ 32) | cov 25 %, risk 0 % (≤ 43) | p > 0.9048: 12 (60.0 %) |  |  |
-| qwen3-vl-2b | ALL_MODES | cov 100 %, risk 27 % (≤ 34) | cov 65 %, risk 19 % (≤ 28) | cov 45 %, risk 16 % (≤ 27) | cov 35 %, risk 19 % (≤ 31) | cov 17 %, risk 19 % (≤ 38) | cov 3 %, risk 20 % (≤ 62) | p > 0.9996: 1 (0.7 %) | 29/30, 21 % (6/29) | 20/30, 20 % (4/20) |
-| qwen3-vl-2b | D | cov 100 %, risk 20 % (≤ 37) | cov 63 %, risk 16 % (≤ 38) | cov 53 %, risk 12 % (≤ 36) | cov 37 %, risk 18 % (≤ 48) | cov 10 %, risk 0 % (≤ 56) | — | p > 0.9881: 3 (10.0 %) |  |  |
-| qwen3-vl-2b | REAL_ALL|D | cov 100 %, risk 10 % (≤ 30) | cov 75 %, risk 7 % (≤ 30) | cov 60 %, risk 0 % (≤ 24) | cov 35 %, risk 0 % (≤ 35) | cov 10 %, risk 0 % (≤ 66) | — | p > 0.8871: 12 (60.0 %) |  |  |
+| smolvlm2-2.2b | ALL_MODES | cov 100 %, risk 56 % (≤ 64) | — | — | — | — | — | p > 0.705951: 2 (1.4 %) | 24/30, 58 % (14/24) | 18/30, 56 % (10/18) |
+| smolvlm2-2.2b | D | cov 100 %, risk 55 % (≤ 72) | — | — | — | — | — | p > 0.653166: 1 (3.5 %) |  |  |
+| smolvlm2-2.2b | REAL_ALL|D | cov 100 %, risk 58 % (≤ 77) | — | — | — | — | — | p > 0.653166: 1 (5.3 %) |  |  |
+| internvl3.5-2b-instruct | ALL_MODES | cov 100 %, risk 28 % (≤ 37) | cov 10 %, risk 25 % (≤ 53) | cov 2 %, risk 0 % (≤ 66) | — | — | — | p > 0.876248: 5 (4.3 %) | 23/30, 26 % (6/23) | 16/30, 19 % (3/16) |
+| internvl3.5-2b-instruct | D | cov 100 %, risk 25 % (≤ 45) | cov 17 %, risk 25 % (≤ 70) | cov 4 %, risk 0 % (≤ 79) | — | — | — | p > 0.829063: 2 (8.3 %) |  |  |
+| internvl3.5-2b-instruct | REAL_ALL|D | cov 100 %, risk 17 % (≤ 39) | cov 22 %, risk 25 % (≤ 70) | cov 6 %, risk 0 % (≤ 79) | — | — | — | p > 0.829063: 2 (11.1 %) |  |  |
+| qwen3-vl-4b | ALL_MODES | cov 100 %, risk 32 % (≤ 40) | cov 72 %, risk 26 % (≤ 35) | cov 57 %, risk 24 % (≤ 34) | cov 49 %, risk 14 % (≤ 24) | cov 34 %, risk 8 % (≤ 18) | cov 13 %, risk 0 % (≤ 17) | p > 0.998640: 26 (17.6 %) | 28/30, 25 % (7/28) | 16/30, 19 % (3/16) |
+| qwen3-vl-4b | D | cov 100 %, risk 30 % (≤ 48) | cov 83 %, risk 28 % (≤ 48) | cov 70 %, risk 24 % (≤ 45) | cov 57 %, risk 18 % (≤ 41) | cov 43 %, risk 15 % (≤ 42) | cov 17 %, risk 0 % (≤ 43) | p > 0.998640: 8 (26.7 %) |  |  |
+| qwen3-vl-4b | REAL_ALL|D | cov 100 %, risk 20 % (≤ 42) | cov 75 %, risk 13 % (≤ 38) | cov 65 %, risk 8 % (≤ 33) | cov 55 %, risk 0 % (≤ 26) | cov 40 %, risk 0 % (≤ 32) | cov 25 %, risk 0 % (≤ 43) | p > 0.904786: 12 (60.0 %) |  |  |
+| qwen3-vl-2b | ALL_MODES | cov 100 %, risk 27 % (≤ 34) | cov 65 %, risk 19 % (≤ 28) | cov 45 %, risk 16 % (≤ 27) | cov 35 %, risk 19 % (≤ 31) | cov 17 %, risk 19 % (≤ 38) | cov 3 %, risk 20 % (≤ 62) | p > 0.999592: 1 (0.7 %) | 29/30, 21 % (6/29) | 20/30, 20 % (4/20) |
+| qwen3-vl-2b | D | cov 100 %, risk 20 % (≤ 37) | cov 63 %, risk 16 % (≤ 38) | cov 53 %, risk 12 % (≤ 36) | cov 37 %, risk 18 % (≤ 48) | cov 10 %, risk 0 % (≤ 56) | — | p > 0.988141: 3 (10.0 %) |  |  |
+| qwen3-vl-2b | REAL_ALL|D | cov 100 %, risk 10 % (≤ 30) | cov 75 %, risk 7 % (≤ 30) | cov 60 %, risk 0 % (≤ 24) | cov 35 %, risk 0 % (≤ 35) | cov 10 %, risk 0 % (≤ 66) | — | p > 0.887082: 12 (60.0 %) |  |  |
 
 ## Calibration — PHASE2 (answered items)
 
@@ -424,19 +526,32 @@ This is **in-sample**. Thresholds were fixed in advance, but any operating point
 
 ### Risk–coverage of the option probability — PHASE2
 
-This is **in-sample**. Thresholds were fixed in advance, but any operating point read off these rows was chosen on the answers it is scored on. The "zero-error region" is the coverage above the highest probability that any wrong answer received.
+This is **in-sample**. Thresholds were fixed in advance, but any operating point read off these rows was chosen on the answers it is scored on. The "zero-error region" is the coverage above the highest probability that any wrong answer received. Coverage is a share of the **answered** items (UNRESOLVED left out), and the "all" slice pools five correlated answers per question.
 
 | model | slice | p ≥ 0 | 0.8 | 0.9 | 0.95 | 0.99 | 0.999 | in-sample zero-error region | C+D+E agree: kept, wrong | all five agree: kept, wrong |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| internvl3.5-2b-instruct | ALL_MODES | cov 100 %, risk 41 % (≤ 45) | cov 14 %, risk 29 % (≤ 39) | cov 4 %, risk 25 % (≤ 45) | cov 2 %, risk 25 % (≤ 50) | cov 1 %, risk 0 % (≤ 49) | — | p > 0.9865: 5 (0.8 %) | 118/152, 39 % (46/118) | 91/152, 34 % (31/91) |
-| internvl3.5-2b-instruct | D | cov 100 %, risk 40 % (≤ 49) | cov 20 %, risk 33 % (≤ 52) | cov 4 %, risk 33 % (≤ 70) | cov 3 %, risk 25 % (≤ 70) | cov 1 %, risk 0 % (≤ 79) | — | p > 0.9808: 3 (2.2 %) |  |  |
-| internvl3.5-2b-instruct | REAL_ALL|D | cov 100 %, risk 34 % (≤ 45) | cov 20 %, risk 28 % (≤ 51) | cov 4 %, risk 25 % (≤ 70) | cov 2 %, risk 0 % (≤ 66) | cov 1 %, risk 0 % (≤ 79) | — | p > 0.9272: 2 (2.2 %) |  |  |
-| qwen3-vl-4b | ALL_MODES | cov 100 %, risk 36 % (≤ 40) | cov 77 %, risk 30 % (≤ 34) | cov 66 %, risk 28 % (≤ 32) | cov 56 %, risk 24 % (≤ 28) | cov 36 %, risk 16 % (≤ 21) | cov 18 %, risk 9 % (≤ 15) | p > 1.0000: 35 (4.7 %) | 133/152, 31 % (41/133) | 86/152, 28 % (24/86) |
-| qwen3-vl-4b | D | cov 100 %, risk 34 % (≤ 42) | cov 80 %, risk 30 % (≤ 38) | cov 72 %, risk 27 % (≤ 36) | cov 63 %, risk 27 % (≤ 37) | cov 45 %, risk 19 % (≤ 30) | cov 25 %, risk 13 % (≤ 27) | p > 1.0000: 14 (9.2 %) |  |  |
-| qwen3-vl-4b | REAL_ALL|D | cov 100 %, risk 26 % (≤ 35) | cov 77 %, risk 19 % (≤ 29) | cov 70 %, risk 16 % (≤ 27) | cov 61 %, risk 15 % (≤ 27) | cov 43 %, risk 2 % (≤ 12) | cov 29 %, risk 4 % (≤ 18) | p > 0.9991: 27 (27.8 %) |  |  |
-| qwen3-vl-2b | ALL_MODES | cov 100 %, risk 35 % (≤ 38) | cov 68 %, risk 29 % (≤ 33) | cov 52 %, risk 28 % (≤ 33) | cov 39 %, risk 27 % (≤ 32) | cov 19 %, risk 23 % (≤ 31) | cov 4 %, risk 10 % (≤ 26) | p > 0.9996: 18 (2.4 %) | 141/152, 32 % (45/141) | 105/152, 29 % (30/105) |
-| qwen3-vl-2b | D | cov 100 %, risk 31 % (≤ 39) | cov 73 %, risk 29 % (≤ 38) | cov 57 %, risk 31 % (≤ 41) | cov 43 %, risk 31 % (≤ 43) | cov 12 %, risk 16 % (≤ 38) | cov 3 %, risk 0 % (≤ 49) | p > 0.9971: 9 (5.9 %) |  |  |
-| qwen3-vl-2b | REAL_ALL|D | cov 100 %, risk 23 % (≤ 32) | cov 78 %, risk 20 % (≤ 30) | cov 59 %, risk 21 % (≤ 33) | cov 45 %, risk 25 % (≤ 39) | cov 13 %, risk 8 % (≤ 33) | cov 3 %, risk 0 % (≤ 56) | p > 0.9936: 9 (9.3 %) |  |  |
+| internvl3.5-2b-instruct | ALL_MODES | cov 100 %, risk 41 % (≤ 45) | cov 14 %, risk 29 % (≤ 39) | cov 4 %, risk 25 % (≤ 45) | cov 2 %, risk 25 % (≤ 50) | cov 1 %, risk 0 % (≤ 49) | — | p > 0.986480: 5 (0.8 %) | 118/152, 39 % (46/118) | 91/152, 34 % (31/91) |
+| internvl3.5-2b-instruct | D | cov 100 %, risk 40 % (≤ 49) | cov 20 %, risk 33 % (≤ 52) | cov 4 %, risk 33 % (≤ 70) | cov 3 %, risk 25 % (≤ 70) | cov 1 %, risk 0 % (≤ 79) | — | p > 0.980802: 3 (2.2 %) |  |  |
+| internvl3.5-2b-instruct | REAL_ALL|D | cov 100 %, risk 34 % (≤ 45) | cov 20 %, risk 28 % (≤ 51) | cov 4 %, risk 25 % (≤ 70) | cov 2 %, risk 0 % (≤ 66) | cov 1 %, risk 0 % (≤ 79) | — | p > 0.927189: 2 (2.2 %) |  |  |
+| qwen3-vl-4b | ALL_MODES | cov 100 %, risk 36 % (≤ 40) | cov 77 %, risk 30 % (≤ 34) | cov 66 %, risk 28 % (≤ 32) | cov 56 %, risk 24 % (≤ 28) | cov 36 %, risk 16 % (≤ 21) | cov 18 %, risk 9 % (≤ 15) | p > 0.999956: 35 (4.7 %) | 133/152, 31 % (41/133) | 86/152, 28 % (24/86) |
+| qwen3-vl-4b | D | cov 100 %, risk 34 % (≤ 42) | cov 80 %, risk 30 % (≤ 38) | cov 72 %, risk 27 % (≤ 36) | cov 63 %, risk 27 % (≤ 37) | cov 45 %, risk 19 % (≤ 30) | cov 25 %, risk 13 % (≤ 27) | p > 0.999956: 14 (9.2 %) |  |  |
+| qwen3-vl-4b | REAL_ALL|D | cov 100 %, risk 26 % (≤ 35) | cov 77 %, risk 19 % (≤ 29) | cov 70 %, risk 16 % (≤ 27) | cov 61 %, risk 15 % (≤ 27) | cov 43 %, risk 2 % (≤ 12) | cov 29 %, risk 4 % (≤ 18) | p > 0.999093: 27 (27.8 %) |  |  |
+| qwen3-vl-2b | ALL_MODES | cov 100 %, risk 35 % (≤ 38) | cov 68 %, risk 29 % (≤ 33) | cov 52 %, risk 28 % (≤ 33) | cov 39 %, risk 27 % (≤ 32) | cov 19 %, risk 23 % (≤ 31) | cov 4 %, risk 10 % (≤ 26) | p > 0.999592: 18 (2.4 %) | 141/152, 32 % (45/141) | 105/152, 29 % (30/105) |
+| qwen3-vl-2b | D | cov 100 %, risk 31 % (≤ 39) | cov 73 %, risk 29 % (≤ 38) | cov 57 %, risk 31 % (≤ 41) | cov 43 %, risk 31 % (≤ 43) | cov 12 %, risk 16 % (≤ 38) | cov 3 %, risk 0 % (≤ 49) | p > 0.997107: 9 (5.9 %) |  |  |
+| qwen3-vl-2b | REAL_ALL|D | cov 100 %, risk 23 % (≤ 32) | cov 78 %, risk 20 % (≤ 30) | cov 59 %, risk 21 % (≤ 33) | cov 45 %, risk 25 % (≤ 39) | cov 13 %, risk 8 % (≤ 33) | cov 3 %, risk 0 % (≤ 56) | p > 0.993588: 9 (9.3 %) |  |  |
+
+### Held-out check of the zero-error threshold — PHASE2
+
+The threshold is the phase-1 in-sample zero-error point (the highest probability any wrong phase-1 answer got); it is applied to the phase-2 questions that phase 1 did not contain. Units are answers (question × mode).
+
+| model | slice | threshold from phase 1 | phase-2-only questions | answers above it | wrong among them |
+| --- | --- | --- | --- | --- | --- |
+| internvl3.5-2b-instruct | all | 0.876248 | 122 | 30 | 30.0 % (9/30; 17–48) |
+| internvl3.5-2b-instruct | D | 0.829063 | 122 | 18 | 33.3 % (6/18; 16–56) |
+| qwen3-vl-4b | all | 0.998640 | 122 | 127 | 9.4 % (12/127; 5–16) |
+| qwen3-vl-4b | D | 0.998640 | 122 | 35 | 14.3 % (5/35; 6–29) |
+| qwen3-vl-2b | all | 0.999592 | 122 | 17 | 0.0 % (0/17; 0–18) |
+| qwen3-vl-2b | D | 0.988141 | 122 | 18 | 22.2 % (4/18; 9–45) |
 
 ## The old SmolVLM2-500M (005J) on the exact intersection
 

@@ -350,6 +350,10 @@ def main():
     fams = list(FAMILIES) if a.families == 'all' else a.families.split(',')
     scenes, questions = [], []
     for split, npairs in zip(a.splits.split(','), [int(x) for x in a.pairs.split(',')]):
+        # seeds are SPLIT_BASE + 1000 * family + k: more than 1000 pairs, or more than 10 families, would run into the
+        # next family's or split's seeds and break split disjointness (post-review D-11 residual)
+        if npairs > 1000 or len(FAMILIES) > 10:
+            raise SystemExit(f'{split}: at most 1000 pairs per family and 10 families keep the seed ranges disjoint')
         for fam in fams:
             for k in range(npairs):
                 seed = SPLIT_BASE[split] + 1000 * list(FAMILIES).index(fam) + k

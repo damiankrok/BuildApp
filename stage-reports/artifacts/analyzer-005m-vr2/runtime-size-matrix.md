@@ -11,7 +11,7 @@
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | qwen3-vl-2b | 4.26 GB | 1.83 GB | 0.82 GB | **2.65 GB** | 1.11 GB (OFFICIAL) | 0.45 GB (OFFICIAL) | **1.552 GB** | 2.0–4.0 GB / 1.0–2.0 GB |
 | qwen3-vl-4b | 8.88 GB | 4.28 GB | 0.84 GB | **5.12 GB** | 2.50 GB (OFFICIAL) | 0.45 GB (OFFICIAL) | **2.951 GB** | > 4.0 GB / 2.0–4.0 GB |
-| internvl3.5-2b-instruct | 4.70 GB | 2.17 GB | 0.64 GB | **2.80 GB** | 1.28 GB (REFERENCE) | 0.35 GB (ESTIMATE) | **1.628 GB** | 2.0–4.0 GB / 1.0–2.0 GB |
+| internvl3.5-2b-instruct | 4.70 GB | 2.17 GB | 0.64 GB | **2.80 GB** | 1.28 GB (REFERENCE) | 0.34 GB (REFERENCE) | **1.625 GB** | 2.0–4.0 GB / 1.0–2.0 GB |
 | smolvlm2-2.2b | 4.49 GB (FP32 on the hub, halved) | 1.93 GB | 0.87 GB | **2.80 GB** | 1.11 GB (REFERENCE) | 0.59 GB (REFERENCE) | **1.705 GB** | 2.0–4.0 GB / 1.0–2.0 GB |
 
 OFFICIAL = the publisher's own GGUF; REFERENCE = a third-party listing used for its size only (never run); ESTIMATE = no listing exists. Each figure's repository and revision is in `quantised-sizes.json`. Every accuracy number in 005M is for the files **as run** (LLM Q8_0, vision F16). A smaller pack must be re-run on the same items before it carries any result.
@@ -21,29 +21,29 @@ OFFICIAL = the publisher's own GGUF; REFERENCE = a third-party listing used for 
 - **"with A→E cache reuse"** is what the benchmark measured. Each question ran A, B, C, D, E in a row with the prompt cache on, so D reused C's plan image and B sometimes reused an earlier question's plan. This is a benchmark artefact.
 - **"standalone"** is what one isolated question costs.
   - For A, B, C and E it is the median over cold records: only the chat-template prefix cached.
-  - D was never cold. Its standalone figure is estimated from the fit below: the fitted time for its image and text tokens, plus its measured decode time.
+  - D was never cold. E sends the same two images plus about 30 more text tokens, so the cold median of E is an upper bound on a standalone D. The estimate from the fit below (fitted time for D's image and text tokens plus its measured decode time) is printed beside it; it runs above the bound for every model, because the fit pools server processes whose speed per token differed (post-review E2-1).
 
 | model | records | load | mode | median, with A→E cache reuse | p90 | **standalone median** (n cold) | median image tokens |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | qwen3-vl-2b | 835 | 3.9 s | A | 11.7 s | 13.0 s | **11.9 s** (146) | 198 |
 | qwen3-vl-2b | 835 |  | B | 12.0 s | 27.0 s | **14.6 s** (103) | 578 |
 | qwen3-vl-2b | 835 |  | C | 25.1 s | 29.4 s | **25.1 s** (163) | 578 |
-| qwen3-vl-2b | 835 |  | D | 12.7 s | 14.0 s | **34.8 s** (estimate, fit) | 776 |
+| qwen3-vl-2b | 835 |  | D | 12.7 s | 14.0 s | **≤ 33.3 s** (bound: cold E; fit 34.8 s) | 776 |
 | qwen3-vl-2b | 835 |  | E | 32.8 s | 37.7 s | **33.3 s** (145) | 776 |
 | qwen3-vl-4b | 835 | 16.4 s | A | 21.6 s | 26.0 s | **21.9 s** (146) | 198 |
 | qwen3-vl-4b | 835 |  | B | 24.1 s | 49.9 s | **29.2 s** (104) | 578 |
 | qwen3-vl-4b | 835 |  | C | 34.7 s | 51.6 s | **34.9 s** (163) | 578 |
-| qwen3-vl-4b | 835 |  | D | 23.9 s | 29.2 s | **57.4 s** (estimate, fit) | 776 |
+| qwen3-vl-4b | 835 |  | D | 23.9 s | 29.2 s | **≤ 49.1 s** (bound: cold E; fit 57.4 s) | 776 |
 | qwen3-vl-4b | 835 |  | E | 45.4 s | 68.5 s | **49.1 s** (145) | 776 |
 | internvl3.5-2b-instruct | 835 | 297.1 s | A | 14.1 s | 16.1 s | **14.4 s** (146) | 258 |
 | internvl3.5-2b-instruct | 835 |  | B | 33.9 s | 54.3 s | **44.8 s** (117) | 1282 |
 | internvl3.5-2b-instruct | 835 |  | C | 47.4 s | 55.1 s | **47.5 s** (163) | 1282 |
-| internvl3.5-2b-instruct | 835 |  | D | 15.8 s | 18.2 s | **59.2 s** (estimate, fit) | 1540 |
+| internvl3.5-2b-instruct | 835 |  | D | 15.8 s | 18.2 s | **≤ 57.0 s** (bound: cold E; fit 59.2 s) | 1540 |
 | internvl3.5-2b-instruct | 835 |  | E | 55.8 s | 65.2 s | **57.0 s** (145) | 1540 |
 | smolvlm2-2.2b | 160 | 4.1 s | A | 33.6 s | 36.5 s | **33.9 s** (27) | 419 |
 | smolvlm2-2.2b | 160 |  | B | 23.0 s | 34.7 s | **24.1 s** (21) | 419 |
 | smolvlm2-2.2b | 160 |  | C | 32.8 s | 35.9 s | **32.8 s** (31) | 419 |
-| smolvlm2-2.2b | 160 |  | D | 35.2 s | 40.9 s | **63.1 s** (estimate, fit) | 837 |
+| smolvlm2-2.2b | 160 |  | D | 35.2 s | 40.9 s | **≤ 61.4 s** (bound: cold E; fit 63.1 s) | 837 |
 | smolvlm2-2.2b | 160 |  | E | 60.3 s | 69.6 s | **61.4 s** (29) | 837 |
 
 "load" is the time to the server's "model loaded" line in the last server log of the run. It measures the storage here, not the model. Two runs were resumed after a container restart: Qwen3-VL-4B from freshly downloaded tmpfs files, and InternVL3.5-2B from its GGUF on disk with an empty page cache (2.8 GB read cold). Warm loads from tmpfs were 3.9–4.7 s for every model.
@@ -73,7 +73,7 @@ Measured (server process, 8192 context, 2 GiB prompt-cache cap):
 
 Anonymous RSS holds the vision weights (llama.cpp loads them into its own buffers, so they are not in the mapped-file RSS), the KV cache at 8k, compute buffers and the prompt cache. A one-shot question needs none of the prompt cache and far less context.
 
-**Deployment RAM, estimated from parts (not measured)**: LLM file (memory-mapped) + vision file + KV cache at 2048 tokens (f16 K and V, the layer shapes of each config.json) + ≈ 0.3 GB compute buffers + no prompt cache:
+**Deployment RAM, estimated from parts (not measured)**: LLM file + vision file + KV cache at 2048 tokens (f16 K and V, the layer shapes of each config.json) + ≈ 0.3 GB compute buffers + no prompt cache:
 
 | model | KV per token | KV at 2,048 | as run (Q8_0 + F16 vision) | smallest files (Q4_K_M + Q8_0 vision) |
 | --- | --- | --- | --- | --- |
@@ -81,6 +81,8 @@ Anonymous RSS holds the vision weights (llama.cpp loads them into its own buffer
 | qwen3-vl-4b | 144 KiB | 0.30 GB | ≈ 5.7 GB | ≈ 3.6 GB |
 | internvl3.5-2b-instruct | 112 KiB | 0.23 GB | ≈ 3.3 GB | ≈ 2.2 GB |
 | smolvlm2-2.2b | 192 KiB | 0.40 GB | ≈ 3.5 GB | ≈ 2.4 GB |
+
+The LLM file counts in full and stays resident. On arm64, llama.cpp at the pinned commit repacks Q4_0 / Q4_K / IQ4_NL / Q8_0 weights into its own anonymous buffers by default, so memory-mapping saves nothing for these quantisations; the teacher's 5.6 GB anonymous RSS at Q4_K_M shows the same on this x86 build. While loading, the page cache may briefly hold the file as well, up to one more LLM file (post-review E2-2).
 
 For one Qwen3-VL-2B mode-D question, ~1,000 tokens would do. 2,048 leaves room for InternVL3.5's ~1,750-token prompts. To confirm the estimate, measure once with `-c 2048 --cache-ram 0`.
 

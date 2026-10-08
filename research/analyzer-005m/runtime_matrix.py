@@ -14,8 +14,9 @@ From the publishers: BF16 checkpoint bytes, quantisation bytes (quantised-sizes.
 Post-review E-1 / E-2:
   * the benchmark asked A, B, C, D, E of one question in a row with the prompt cache on, so D always reused C's plan
     image. That wall time is printed as a benchmark artefact; the STANDALONE figure, what one isolated question costs,
-    is the median over cold records (nothing cached) and, for D, an estimate from a least-squares fit of cold prompt
-    time on image and text tokens;
+    is the median over cold records (nothing cached). D was never cold: its standalone figure is bounded by the cold
+    median of E, which sends the same two images plus ~30 more text tokens (post-review E2-1: the least-squares fit,
+    printed beside it, overestimates, because it pools server processes whose per-token speed differed);
   * deployment RAM is estimated from parts (model files, KV cache at a stated context, compute buffers), not as
     "pack + peak anon RSS", which counted the vision weights twice and the benchmark's 2 GiB prompt cache.
 Phones were not available: no phone latency is measured; published figures are quoted with their provenance.
@@ -144,8 +145,10 @@ def main():
           'benchmark artefact.',
           '- **"standalone"** is what one isolated question costs.',
           '  - For A, B, C and E it is the median over cold records: only the chat-template prefix cached.',
-          '  - D was never cold. Its standalone figure is estimated from the fit below: the fitted time for its image and '
-          'text tokens, plus its measured decode time.', '',
+          '  - D was never cold. E sends the same two images plus about 30 more text tokens, so the cold median of E is an '
+          'upper bound on a standalone D. The estimate from the fit below (fitted time for D\'s image and text tokens plus its '
+          'measured decode time) is printed beside it; it runs above the bound for every model, because the fit pools '
+          'server processes whose speed per token differed (post-review E2-1).', '',
           '| model | records | load | mode | median, with A→E cache reuse | p90 | **standalone median** (n cold) | median image tokens |',
           '| --- | --- | --- | --- | --- | --- | --- | --- |']
     fits, mem = {}, {}
@@ -159,16 +162,18 @@ def main():
         load = f'{int(mt.group(1)) * 60 + int(mt.group(2)) + int(mt.group(3)) / 1000:.1f} s' if mt else '—'
         f = fit(recs)
         fits[label] = (f, os.path.basename(path), len(recs))
+        cold_e = [r['wallMs'] for r in recs if r['mode'] == MODES[4] and 'wallMs' in r and (r.get('cachedTokens') or 0) <= COLD]
         for mode in MODES:
             rs = [r for r in recs if r['mode'] == mode and 'wallMs' in r]
             w = sorted(r['wallMs'] for r in rs)
             if mode == 'D_MARKED_ROI_PLUS_CROP':
                 est = [f[0] * r['imageTokens'] + f[1] * (r['promptTokens'] - r['imageTokens']) + (r.get('predictedMs') or 0) for r in rs if f and r.get('imageTokens')]
-                sa = f"**{med(est) / 1000:.1f} s** (estimate, fit)" if est else '—, all cache-aided'
+                sa = (f"**≤ {med(cold_e) / 1000:.1f} s** (bound: cold E; fit {med(est) / 1000:.1f} s)" if cold_e and est else '—, all cache-aided')
             else:
                 cold = [r['wallMs'] for r in rs if (r.get('cachedTokens') or 0) <= COLD]
                 sa = f"**{med(cold) / 1000:.1f} s** ({len(cold)})" if cold else '—, all cache-aided'
-            tok = med([r.get('imageTokens') or 0 for r in rs])
+            # a missing image-token count is left out, not counted as 0 (post-review A-10)
+            tok = med([r['imageTokens'] for r in rs if r.get('imageTokens')])
             L.append(f"| {label} | {len(recs)} | {load if mode == MODES[0] else ''} | {mode[0]} | {w[len(w) // 2] / 1000:.1f} s | {w[int(len(w) * 0.9)] / 1000:.1f} s | {sa} | {tok} |")
         anon = [((r.get('rss') or {}).get('RssAnon') or 0) for r in recs]
         mem[label] = (anon[0] if anon else 0, max(anon) if anon else 0, path)
@@ -193,7 +198,7 @@ def main():
     L += ['', 'Anonymous RSS holds the vision weights (llama.cpp loads them into its own buffers, so they are not in the '
           'mapped-file RSS), the KV cache at 8k, compute buffers and the prompt cache. A one-shot question needs none of '
           'the prompt cache and far less context.', '',
-          f'**Deployment RAM, estimated from parts (not measured)**: LLM file (memory-mapped) + vision file + KV cache at '
+          f'**Deployment RAM, estimated from parts (not measured)**: LLM file + vision file + KV cache at '
           f'{DEPLOY_CTX} tokens (f16 K and V, the layer shapes of each config.json) + ≈ {COMPUTE_GB} GB compute buffers + no '
           'prompt cache:', '',
           '| model | KV per token | KV at 2,048 | as run (Q8_0 + F16 vision) | smallest files (Q4_K_M + Q8_0 vision) |', '| --- | --- | --- | --- | --- |']
@@ -206,7 +211,11 @@ def main():
         q = quant[label]
         small = q['llmQ4_K_M'] + q['visionQ8_0']
         L.append(f"| {label} | {per / 1024:.0f} KiB | {kv / GB:.2f} GB | ≈ {(files + kv) / GB + COMPUTE_GB:.1f} GB | ≈ {(small + kv) / GB + COMPUTE_GB:.1f} GB |")
-    L += ['', 'For one Qwen3-VL-2B mode-D question, ~1,000 tokens would do. 2,048 leaves room for InternVL3.5\'s ~1,750-token '
+    L += ['', 'The LLM file counts in full and stays resident. On arm64, llama.cpp at the pinned commit repacks Q4_0 / Q4_K / '
+          'IQ4_NL / Q8_0 weights into its own anonymous buffers by default, so memory-mapping saves nothing for these '
+          'quantisations; the teacher\'s 5.6 GB anonymous RSS at Q4_K_M shows the same on this x86 build. While loading, the '
+          'page cache may briefly hold the file as well, up to one more LLM file (post-review E2-2).', '',
+          'For one Qwen3-VL-2B mode-D question, ~1,000 tokens would do. 2,048 leaves room for InternVL3.5\'s ~1,750-token '
           'prompts. To confirm the estimate, measure once with `-c 2048 --cache-ram 0`.', '']
     L += PHONES
     open(a.out, 'w').write('\n'.join(L) + '\n')

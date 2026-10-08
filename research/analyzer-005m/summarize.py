@@ -58,14 +58,20 @@ def main():
         '- UNRESOLVED is never wrong.',
         f"- **{len(b.get('excluded', {}))} questions are excluded** from every amended table (`excluded-items.json`, post-review B-1, "
         'B-2/D-1). The pre-registered rows over every question follow each table.',
+        '- **Few clusters.** A percentile cluster bootstrap under-covers when there are few clusters. Treat any interval '
+        'from fewer than about 20 clusters (PHASE1: 13; REAL human truth: 8) as approximate (post-review A2-9).',
+        '- **Modes are correlated.** "all" pools five answers to each question, so it is not five independent samples.',
+        '- **Median wall** is measured in the run order A → E with the server\'s prompt cache: D and E reuse the plan prefix '
+        "computed for C. Standalone latencies are in `runtime-size-matrix.md` (post-review E-1).",
     ]
     for tname in ('PHASE1', 'PHASE2'):
         t = b['tables'].get(tname)
         if not t:
             continue
         cb = t['clusterBootstrap']
-        L += ['', f'## {tname} — {t["questions"]} matched questions × 5 modes ({t["clusters"]["n"]} independent clusters)', '',
-              '| model | mode | exact accuracy | cluster 95 % | resolved acc. | coverage | UNRESOLVED | fail | **CONFIDENT_WRONG_RATE** | cluster 95 % | HIGH share | p ≥ 0.8 share | P80 rate | median wall | image tokens |',
+        L += ['', f'## {tname} — {t["questions"]} matched questions × 5 modes ({t["distinctQuestions"]} distinct; the rest are mirrored or '
+              f'rotated renderings of them; {t["clusters"]["n"]} independent clusters)', '',
+              '| model | mode | exact accuracy | cluster 95 % | resolved acc. | coverage | UNRESOLVED | fail | **CONFIDENT_WRONG_RATE** | cluster 95 % | HIGH share | p ≥ 0.8 share | P80 rate | median wall (run order, cache-aided) | image tokens |',
               '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |']
         for m in t['models']:
             for mode in MODES + ['ALL_MODES']:
@@ -98,6 +104,23 @@ def main():
                 x = cb['modelMinusFirstOptionPrior'][f'{m}|{mode}']
                 cells.append(f"{sgn(x['ci95'])} (P>0 {100 * x['shareAboveZero']:.0f} %)")
             L.append(f'| {m} | ' + ' | '.join(cells) + ' |')
+        sub = cb.get('bySubsetMinusPrior', {})
+        if sub:
+            L += ['', f'### {tname} — model minus prior, per subset, with a family-wise check (cluster bootstrap; percentage points)', '',
+                  'The fitted per-class majority is fitted on the subset it is scored on, so it is an optimistic ceiling for a '
+                  'class-aware rule that never looks at the image. "Family-wise" is the 95th percentile of the centred maximum '
+                  'over every model × mode arm; an arm whose point gain exceeds it survives the choice of the best arm after the fact.', '',
+                  '| subset | questions | clusters | arm | − first-option rule: point, 95 % | − fitted class majority: point, 95 % |', '| --- | --- | --- | --- | --- | --- |']
+            for sname, e in sub.items():
+                for k, v in e['byArm'].items():
+                    m, mode = k.split('|')
+                    if mode in ('A_CROP_ONLY', 'C_FULL_PLAN_MARKED_ROI', 'D_MARKED_ROI_PLUS_CROP'):
+                        f1, f2 = v['minusFirstOption'], v['minusFittedClassMajority']
+                        L.append(f"| {sname} | {e['questions']} | {e['clusters']} | {m} {SHORT[mode]} | {100 * f1['point']:+.1f} ({sgn(f1['ci95'])}) | {100 * f2['point']:+.1f} ({sgn(f2['ci95'])}) |")
+            L += ['', '| subset | prior | arms | family-wise critical gain | arms above it |', '| --- | --- | --- | --- | --- |']
+            for sname, e in sub.items():
+                for prior, fw in e['familyWise'].items():
+                    L.append(f"| {sname} | {prior} | {fw['arms']} | {100 * fw['critical95']:+.1f} | {', '.join(k.split('|')[0] + ' ' + SHORT[k.split('|')[1]] for k in fw['armsAboveCritical']) or 'none'} |")
         if cb['pairwise']:
             L += ['', f'### {tname} — model against model (cluster bootstrap, paired; percentage points)', '',
                   '| pair | mode | Δ CONFIDENT_WRONG_RATE 95 % | Δ exact accuracy 95 % |', '| --- | --- | --- | --- |']
@@ -141,16 +164,21 @@ def main():
                 L.append(f"| {i} | {r['model']} | {100 * r['cwr']:.1f} % | {100 * r['exactAccuracy']:.1f} % |")
     for tname, gt in g['tables'].items():
         L += ['', f'## Context gain — {tname}: A_CROP_ONLY against the modes with the whole plan', '',
-              '| model | A → | WRONG→RIGHT | UNRESOLVED→RIGHT | WRONG→UNRESOLVED | RIGHT→WRONG | OTHER (breakdown) | SAME | net change in right answers | context-dependent: right in A → right in mode (n) |',
-              '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |']
+              'The interval is a paired cluster bootstrap of (accuracy in the mode − accuracy in A), in percentage points.', '',
+              '| model | A → | WRONG→RIGHT | UNRESOLVED→RIGHT | WRONG→UNRESOLVED | UNRESOLVED→WRONG | RIGHT→WRONG | OTHER (breakdown) | SAME | net change in right answers | cluster 95 % (pp) | P(gain > 0) | context-dependent: right in A → right in mode (n) |',
+              '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |']
         for m, gm in gt.items():
             for mode in MODES[1:]:
                 x = gm[f'A->{mode}']
                 tr = x['transitions']
                 cd = x['contextDependentOnly']
                 ob = ', '.join(f'{k} {v}' for k, v in x['otherBreakdown'].items())
-                L.append(f"| {m} | {SHORT[mode]} | {tr.get('WRONG->RIGHT', 0)} | {tr.get('UNRESOLVED->RIGHT', 0)} | {tr.get('WRONG->UNRESOLVED', 0)} | {tr.get('RIGHT->WRONG', 0)} | "
-                         f"{tr.get('OTHER', 0)}{' (' + ob + ')' if ob else ''} | {tr.get('SAME', 0)} | {x['netRightChange']:+d} | {cd['rightInA']} → {cd['rightInMode']} ({cd['n']}) |")
+                uw = x['otherBreakdown'].get('UNRESOLVED->WRONG', 0)
+                gci = x.get('accuracyGainClusterCi95')
+                share = '' if gci is None else f"{100 * x['accuracyGainShareAboveZero']:.0f} %"
+                L.append(f"| {m} | {SHORT[mode]} | {tr.get('WRONG->RIGHT', 0)} | {tr.get('UNRESOLVED->RIGHT', 0)} | {tr.get('WRONG->UNRESOLVED', 0)} | {uw} | {tr.get('RIGHT->WRONG', 0)} | "
+                         f"{tr.get('OTHER', 0)}{' (' + ob + ')' if ob else ''} | {tr.get('SAME', 0)} | {x['netRightChange']:+d} | {sgn(gci)} | "
+                         f"{share} | {cd['rightInA']} → {cd['rightInMode']} ({cd['n']}) |")
     for tname, ct in c['tables'].items():
         L += ['', f'## Calibration — {tname} (answered items)', '',
               '| model | subset | mode | answered | HIGH share | accuracy when HIGH | ECE | AUROC |', '| --- | --- | --- | --- | --- | --- | --- | --- |']
@@ -164,7 +192,8 @@ def main():
         L += ['', f'### Risk–coverage of the option probability — {tname}', '',
               'This is **in-sample**. Thresholds were fixed in advance, but any operating point read off these rows was chosen on '
               'the answers it is scored on. The "zero-error region" is the coverage above the highest probability that any wrong '
-              'answer received.', '',
+              'answer received. Coverage is a share of the **answered** items (UNRESOLVED left out), and the "all" slice pools five '
+              'correlated answers per question.', '',
               '| model | slice | p ≥ 0 | 0.8 | 0.9 | 0.95 | 0.99 | 0.999 | in-sample zero-error region | C+D+E agree: kept, wrong | all five agree: kept, wrong |',
               '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |']
         for m, cm in ct.items():
@@ -176,7 +205,16 @@ def main():
                 ag = cm['agreementFilter']
                 agc = lambda n: f"{ag[n]['questionsKept']}/{ag[n]['of']}, {short(ag[n]['wrongAmongKept'])}"
                 L.append(f"| {m} | {sl.replace('D_MARKED_ROI_PLUS_CROP', 'D')} | {cell(0.0)} | {cell(0.8)} | {cell(0.9)} | {cell(0.95)} | {cell(0.99)} | {cell(0.999)} | "
-                         f"p > {z['aboveP']:.4f}: {z['covered']} ({100 * (z['coverage'] or 0):.1f} %) | {agc('C+D+E agree') if sl == 'ALL_MODES' else ''} | {agc('all five agree') if sl == 'ALL_MODES' else ''} |")
+                         f"p > {z['aboveP']:.6f}: {z['covered']} ({100 * (z['coverage'] or 0):.1f} %) | {agc('C+D+E agree') if sl == 'ALL_MODES' else ''} | {agc('all five agree') if sl == 'ALL_MODES' else ''} |")
+        ho = {m: cm['heldOutZeroErrorThreshold'] for m, cm in ct.items() if cm.get('heldOutZeroErrorThreshold')}
+        if ho:
+            L += ['', f'### Held-out check of the zero-error threshold — {tname}', '',
+                  'The threshold is the phase-1 in-sample zero-error point (the highest probability any wrong phase-1 answer got); '
+                  'it is applied to the phase-2 questions that phase 1 did not contain. Units are answers (question × mode).', '',
+                  '| model | slice | threshold from phase 1 | phase-2-only questions | answers above it | wrong among them |', '| --- | --- | --- | --- | --- | --- |']
+            for m, h in ho.items():
+                for sl, v in h.items():
+                    L.append(f"| {m} | {'all' if sl == 'ALL_MODES' else 'D'} | {v['thresholdFromPhase1']:.6f} | {v['phase2OnlyQuestions']} | {v['covered']} | {pct(v['selectiveRisk'])} |")
     if b.get('oldSmolVLM2_500M'):
         o = b['oldSmolVLM2_500M']
         L += ['', '## The old SmolVLM2-500M (005J) on the exact intersection', '', o['note'], '',

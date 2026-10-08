@@ -6,8 +6,10 @@
         [--exclude stage-reports/artifacts/analyzer-005m-vr2/excluded-items.json]
 
 Fixed before any result was read (brief sections 8-10):
-  * a reply's semantic answer is the option its letter names; UNRESOLVED is never wrong; a parse failure, an HTTP
-    error or a missing reply is a FAILURE (counted, never right, never confident-wrong)
+  * a reply's semantic answer is the option its letter names; UNRESOLVED is never wrong; a parse failure or an HTTP
+    error is a FAILURE (counted, never right, never confident-wrong); a model with no record at all for some
+    (question, mode) of a matched set is left out of that table rather than scored with FAILUREs (complete(); no model
+    in 005M lacks a record, so no number depends on it - post-review A-6)
   * CONFIDENT_WRONG (primary): a wrong semantic answer with stated confidence HIGH
     CONFIDENT_WRONG_P80 (secondary, 005J's rule): a wrong answer whose own option probability is >= 0.80
   * CONFIDENT_WRONG_RATE = confident-wrong / questions asked (every item in the matched set), Wilson 95 %
@@ -18,6 +20,17 @@ Fixed before any result was read (brief sections 8-10):
     exact accuracy; the best three advance
   * context gain: for every question, A_CROP_ONLY against C, D and E: WRONG->RIGHT, RIGHT->WRONG, WRONG->UNRESOLVED,
     UNRESOLVED->RIGHT, OTHER (any other change), SAME (no change)
+
+Post-review amendments (added after results were read; the pre-registered rows stay beside every amended table):
+  * --exclude drops the questions whose drawing and wording do not settle their generator truth (excluded-items.json);
+  * a paired cluster bootstrap (real houses; synthetic scene pairs with their transforms) for every rate and difference;
+  * image-free priors per set and subset, and model minus prior per subset (ALL, REAL_ALL, SYNTH_ALL), with a
+    family-wise check: the 95th percentile of the centred maximum over all model x mode arms, against the first-option
+    rule and against the per-class majority fitted on the evaluated subset (an optimistic ceiling);
+  * context gain per model and mode with a paired cluster interval on (accuracy in the mode - accuracy in A);
+  * calibration split REAL / SYNTH, in-sample risk-coverage, agreement filters, and a held-out check: the phase-1
+    in-sample zero-error threshold applied to the phase-2 questions phase 1 did not contain;
+  * a missing image-token count is left out of the token medians, not counted as 0 (post-review A-10).
 """
 import argparse
 import json
@@ -215,7 +228,7 @@ def main():
     SUBSETS = ['REAL_ALL', 'SYNTH_ALL', 'REAL_HUMAN_TRUTH', 'REAL_AI_AUTHORED_TRUTH']
 
     def table(name, qs, ms):
-        t = {'questions': len(qs), 'models': ms, 'byModelMode': {}, 'bySet': {}, 'byClass': {}, 'consistency': {}, 'latency': {}, 'tokens': {}}
+        t = {'questions': len(qs), 'distinctQuestions': len({re.sub(r'-(MIRROR|ROT90)(?=$|-q\d+$)', '-NORMAL', q) for q in qs}), 'models': ms, 'byModelMode': {}, 'bySet': {}, 'byClass': {}, 'consistency': {}, 'latency': {}, 'tokens': {}}
         mirror = [(q, q.replace('-NORMAL', '-MIRROR')) for q in qs if '-NORMAL' in q and q.replace('-NORMAL', '-MIRROR') in qs]
         rot = [(q, q.replace('-NORMAL', '-ROT90')) for q in qs if '-NORMAL' in q and q.replace('-NORMAL', '-ROT90') in qs]
         cf = [(q, q_meta[q]['pairItemQid']) for q in qs if q_meta[q].get('pairItemQid') in qs and q_meta[q].get('variant') == 'A']
@@ -250,7 +263,7 @@ def main():
                                          'counterfactualContextPairs': pairstat(m, mode, cf_ctx), 'counterfactualLocalPairs': pairstat(m, mode, cf_local),
                                          'pooledPreRegistered': pairstat(m, mode, cf)}
                 walls = sorted(raw[(m, q, mode)]['wallMs'] for q in qs if 'wallMs' in raw[(m, q, mode)])
-                toks = sorted(raw[(m, q, mode)].get('imageTokens') or 0 for q in qs)
+                toks = sorted(raw[(m, q, mode)]['imageTokens'] for q in qs if raw[(m, q, mode)].get('imageTokens'))
                 anon = [((raw[(m, q, mode)].get('rss') or {}).get('RssAnon') or 0) for q in qs]
                 t['latency'][key] = {'medianWallMs': walls[len(walls) // 2] if walls else None, 'p90WallMs': walls[int(len(walls) * 0.9)] if walls else None,
                                      'maxRssAnonBytes': max(anon) if anon else None}
@@ -306,6 +319,50 @@ def main():
                     dc = [x - y for x, y in zip(draws[f'{m1}|{mode}|cwr'], draws[f'{m2}|{mode}|cwr'])]
                     da = [x - y for x, y in zip(draws[f'{m1}|{mode}|acc'], draws[f'{m2}|{mode}|acc'])]
                     cb['pairwise'][f'{m1} - {m2}|{mode}'] = {'cwrDiff95': ci(dc), 'accDiff95': ci(da)}
+        cb['contextGainVsA'] = {}
+        for m in ms:
+            for mode in MODES[1:]:
+                d = [x - y for x, y in zip(draws[f'{m}|{mode}|acc'], draws[f'{m}|A_CROP_ONLY|acc'])]
+                cb['contextGainVsA'][f'{m}|{mode}'] = {'ci95': ci(d), 'shareAboveZero': round(sum(x > 0 for x in d) / len(d), 4)}
+        cb['bySubsetMinusPrior'] = {}
+        for sname in ('ALL', 'REAL_ALL', 'SYNTH_ALL'):
+            sq = subset(qs, sname)
+            if not sq:
+                continue
+            maj = {}
+            by_cls = defaultdict(Counter)
+            for q in sq:
+                by_cls[q_meta[q]['cls']][q_meta[q]['expected']] += 1
+            maj = {c: cnt.most_common(1)[0][0] for c, cnt in by_cls.items()}
+            scl = sorted({cluster_of(q_meta[q]) for q in sq})
+
+            def pc(fn, modes):
+                st = {c: [0, 0] for c in scl}
+                for q in sq:
+                    for mo in modes:
+                        st[cluster_of(q_meta[q])][0] += 1
+                        st[cluster_of(q_meta[q])][1] += fn(q, mo)
+                return {c: tuple(v) for c, v in st.items()}
+            sst = {'FIRST': pc(lambda q, _m: q_meta[q]['expected'] == first_option(q_meta[q]['cls']), ['x']),
+                   'MAJ': pc(lambda q, _m: q_meta[q]['expected'] == maj[q_meta[q]['cls']], ['x'])}
+            for m in ms:
+                for mode in MODES:
+                    sst[f'{m}|{mode}'] = pc(lambda q, mo, m=m: res[(m, q, mo)]['o'] == 'RIGHT', [mode])
+            sd = boot(scl, sst)
+            arms = [k for k in sst if '|' in k]
+            point = {k: sum(v[1] for v in sst[k].values()) / sum(v[0] for v in sst[k].values()) for k in sst}
+            entry = {'questions': len(sq), 'clusters': len(scl), 'byArm': {}, 'familyWise': {}}
+            for prior in ('FIRST', 'MAJ'):
+                diffs = {k: [x - y for x, y in zip(sd[k], sd[prior])] for k in arms}
+                for k in arms:
+                    entry['byArm'].setdefault(k, {})['minusFirstOption' if prior == 'FIRST' else 'minusFittedClassMajority'] = {
+                        'point': round(point[k] - point[prior], 4), 'ci95': ci(diffs[k]), 'shareAboveZero': round(sum(x > 0 for x in diffs[k]) / len(diffs[k]), 4)}
+                centred = sorted(max(diffs[k][i] - (point[k] - point[prior]) for k in arms) for i in range(BOOT))
+                crit = centred[int(0.95 * (BOOT - 1))]
+                entry['familyWise']['firstOptionRule' if prior == 'FIRST' else 'fittedClassMajorityUpperBound'] = {
+                    'arms': len(arms), 'critical95': round(crit, 4),
+                    'armsAboveCritical': sorted((k for k in arms if point[k] - point[prior] > crit), key=lambda k: -(point[k] - point[prior]))}
+            cb['bySubsetMinusPrior'][sname] = entry
         t['clusterBootstrap'] = cb
         return t
 
@@ -342,6 +399,7 @@ def main():
         gt = {}
         for m in ms:
             g = {'questions': len(qs)}
+            cg = out['tables'][tname]['clusterBootstrap']['contextGainVsA']
             for mode in MODES[1:]:
                 tr, other = Counter(), Counter()
                 per = []
@@ -362,6 +420,7 @@ def main():
                 ctx = [q for q in qs if q_meta[q].get('contextDependent')]
                 g[f'A->{mode}'] = {'transitions': dict(tr), 'otherBreakdown': dict(other),
                                    'netRightChange': sum(res[(m, q, mode)]['o'] == 'RIGHT' for q in qs) - sum(res[(m, q, 'A_CROP_ONLY')]['o'] == 'RIGHT' for q in qs),
+                                   'accuracyGainClusterCi95': cg[f'{m}|{mode}']['ci95'], 'accuracyGainShareAboveZero': cg[f'{m}|{mode}']['shareAboveZero'],
                                    'changes': per,
                                    'contextDependentOnly': {'n': len(ctx), 'rightInA': sum(res[(m, q, 'A_CROP_ONLY')]['o'] == 'RIGHT' for q in ctx),
                                                             'rightInMode': sum(res[(m, q, mode)]['o'] == 'RIGHT' for q in ctx),
@@ -408,6 +467,17 @@ def main():
                 k = sum(res[(m, q, 'D_MARKED_ROI_PLUS_CROP')]['o'] == 'WRONG' for q in kept)
                 agree[name] = {'questionsKept': len(kept), 'of': len(qs), 'wrongAmongKept': rate(k, len(kept))}
             cm['agreementFilter'] = agree
+            if tname == 'PHASE2' and m in p1_models:
+                only2 = [q for q in qs if q not in set(phase1)]
+                ho = {}
+                for mode in ('ALL_MODES', 'D_MARKED_ROI_PLUS_CROP'):
+                    mds = MODES if mode == 'ALL_MODES' else [mode]
+                    thr = risk_coverage([res[(m, q, md)] for q in phase1 for md in mds if res[(m, q, md)]['o'] in ('RIGHT', 'WRONG')])['inSampleZeroErrorRegion']['aboveP']
+                    test = [r for r in ans(only2, mds) if r['p'] is not None and thr is not None and r['p'] > thr]
+                    k = sum(r['o'] == 'WRONG' for r in test)
+                    ho[mode] = {'thresholdFromPhase1': thr, 'phase2OnlyQuestions': len(only2), 'unit': 'answers (question x mode)', 'covered': len(test), 'wrong': k,
+                                'selectiveRisk': rate(k, len(test))}
+                cm['heldOutZeroErrorThreshold'] = ho
             enum_mass = [raw[(m, q, md)].get('enumMass') for q in qs for md in MODES if raw.get((m, q, md), {}).get('enumMass') is not None]
             cm['unconstrainedEnumMass'] = {'median': sorted(enum_mass)[len(enum_mass) // 2] if enum_mass else None,
                                            'shareBelow0.5': round(sum(x < 0.5 for x in enum_mass) / len(enum_mass), 4) if enum_mass else None}
