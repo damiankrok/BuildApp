@@ -29,6 +29,7 @@ def main():
     ap.add_argument('--steps', type=int, default=6)
     ap.add_argument('--mode', default='D_MARKED_ROI_PLUS_CROP')
     ap.add_argument('--threads', type=int, default=4)
+    ap.add_argument('--longest-edge', type=int, default=1024, help="route A's processor setting (student-training.md D-10); the default 2,048 makes ~1,088 tokens per image")
     ap.add_argument('--out', required=True)
     a = ap.parse_args()
     torch.manual_seed(0)
@@ -36,8 +37,9 @@ def main():
     items = [json.loads(l) for l in open(a.items)]
     items = [it for it in items if it['mode'] == a.mode][: a.steps]
     proc = AutoProcessor.from_pretrained(a.model)
+    proc.image_processor.size = {'longest_edge': a.longest_edge}
     t0 = time.time()
-    model = AutoModelForImageTextToText.from_pretrained(a.model, torch_dtype=torch.float32)
+    model = AutoModelForImageTextToText.from_pretrained(a.model, dtype=torch.float32, attn_implementation='sdpa')
     load_s = time.time() - t0
     cfg = LoraConfig(r=16, lora_alpha=32, lora_dropout=0.0, target_modules=['q_proj', 'k_proj', 'v_proj', 'o_proj', 'gate_proj', 'up_proj', 'down_proj'])
     model = get_peft_model(model, cfg)
@@ -65,7 +67,7 @@ def main():
         opt.zero_grad()
         steps.append({'qid': it['qid'], 'tokens': int(batch['input_ids'].shape[1]), 'targetTokens': int((labels != -100).sum()), 'loss': round(float(out.loss), 4), 'seconds': round(time.time() - t, 2)})
         print(steps[-1], flush=True)
-    rec = {'model': a.model, 'mode': a.mode, 'dtype': 'float32 (CPU)', 'threads': a.threads, 'loadSeconds': round(load_s, 1), 'trainableParams': trainable, 'totalParams': total,
+    rec = {'model': a.model, 'mode': a.mode, 'dtype': 'float32 (CPU)', 'threads': a.threads, 'longestEdge': a.longest_edge, 'attention': 'sdpa', 'loadSeconds': round(load_s, 1), 'trainableParams': trainable, 'totalParams': total,
            'steps': steps, 'medianStepSeconds': sorted(s['seconds'] for s in steps)[len(steps) // 2] if steps else None,
            'peakRssBytes': resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1024, 'adapterSaved': False}
     json.dump(rec, open(a.out, 'w'), indent=1)
