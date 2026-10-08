@@ -179,9 +179,9 @@ The fitted per-class majority is fitted on the subset it is scored on, so it is 
 
 Pairs: 0 mirror, 0 rotation, 3 counterfactual pairs that need the whole plan (byte-identical crops), 2 local counterfactual pairs, 0 same-truth control pairs (left out of the rates).
 
-"Same answer" on a counterfactual pair means the model did not see the difference. On context pairs in mode A that is forced: the crops are identical.
+"Same answer" on a counterfactual pair means the model did not see the difference. On context pairs in mode A that is forced, up to prompt-cache nondeterminism: the crops are identical (`environment.md`).
 
-| model | mode | mirror (both answered) | mirror (005J denominator) | rotation 90° | context pairs: both right / all pairs | context pairs: same answer | local pairs: both right | local pairs: same answer |
+| model | mode | mirror (both answered) | mirror (005J denominator) | rotation 90° | context pairs: both right / all pairs | context pairs: same answer (of pairs both answered) | local pairs: both right / all pairs | local pairs: same answer (of pairs both answered) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | smolvlm2-2.2b | A | — | — | — | 0 % (0/3) | 100 % (3/3) | 0 % (0/2) | 100 % (2/2) |
 | smolvlm2-2.2b | B | — | — | — | 0 % (0/3) | 100 % (3/3) | 0 % (0/2) | 100 % (2/2) |
@@ -356,18 +356,18 @@ The fitted per-class majority is fitted on the subset it is scored on, so it is 
 
 Pairs: 14 mirror, 1 rotation, 10 counterfactual pairs that need the whole plan (byte-identical crops), 16 local counterfactual pairs, 1 same-truth control pairs (left out of the rates).
 
-"Same answer" on a counterfactual pair means the model did not see the difference. On context pairs in mode A that is forced: the crops are identical.
+"Same answer" on a counterfactual pair means the model did not see the difference. On context pairs in mode A that is forced, up to prompt-cache nondeterminism: the crops are identical (`environment.md`).
 
-| model | mode | mirror (both answered) | mirror (005J denominator) | rotation 90° | context pairs: both right / all pairs | context pairs: same answer | local pairs: both right | local pairs: same answer |
+| model | mode | mirror (both answered) | mirror (005J denominator) | rotation 90° | context pairs: both right / all pairs | context pairs: same answer (of pairs both answered) | local pairs: both right / all pairs | local pairs: same answer (of pairs both answered) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| internvl3.5-2b-instruct | A | 100 % (11/11) | 100 % (14/14) | 100 % (1/1) | 0 % (0/10) | 100 % (2/2) | 0 % (0/14) | 100 % (14/14) |
-| internvl3.5-2b-instruct | B | 90 % (9/10) | 86 % (12/14) | 100 % (1/1) | 0 % (0/10) | 100 % (2/2) | 0 % (0/14) | 100 % (14/14) |
-| internvl3.5-2b-instruct | C | 100 % (13/13) | 100 % (14/14) | 100 % (1/1) | 0 % (0/10) | 100 % (5/5) | 7 % (1/15) | 93 % (14/15) |
-| internvl3.5-2b-instruct | D | 100 % (13/13) | 100 % (14/14) | 100 % (1/1) | 0 % (0/10) | 100 % (7/7) | 0 % (0/15) | 100 % (15/15) |
+| internvl3.5-2b-instruct | A | 100 % (11/11) | 100 % (14/14) | 100 % (1/1) | 0 % (0/10) | 100 % (2/2) | 0 % (0/16) | 100 % (14/14) |
+| internvl3.5-2b-instruct | B | 90 % (9/10) | 86 % (12/14) | 100 % (1/1) | 0 % (0/10) | 100 % (2/2) | 0 % (0/16) | 100 % (14/14) |
+| internvl3.5-2b-instruct | C | 100 % (13/13) | 100 % (14/14) | 100 % (1/1) | 0 % (0/10) | 100 % (5/5) | 6 % (1/16) | 93 % (14/15) |
+| internvl3.5-2b-instruct | D | 100 % (13/13) | 100 % (14/14) | 100 % (1/1) | 0 % (0/10) | 100 % (7/7) | 0 % (0/16) | 100 % (15/15) |
 | internvl3.5-2b-instruct | E | 100 % (14/14) | 100 % (14/14) | 100 % (1/1) | 0 % (0/10) | 100 % (6/6) | 6 % (1/16) | 88 % (14/16) |
-| qwen3-vl-4b | A | 93 % (13/14) | 93 % (13/14) | 100 % (1/1) | 0 % (0/10) | 100 % (9/9) | 13 % (2/15) | 87 % (13/15) |
-| qwen3-vl-4b | B | 93 % (13/14) | 93 % (13/14) | 100 % (1/1) | 0 % (0/10) | 100 % (9/9) | 29 % (4/14) | 71 % (10/14) |
-| qwen3-vl-4b | C | 100 % (14/14) | 100 % (14/14) | 100 % (1/1) | 0 % (0/10) | 100 % (10/10) | 13 % (2/15) | 87 % (13/15) |
+| qwen3-vl-4b | A | 93 % (13/14) | 93 % (13/14) | 100 % (1/1) | 0 % (0/10) | 100 % (9/9) | 12 % (2/16) | 87 % (13/15) |
+| qwen3-vl-4b | B | 93 % (13/14) | 93 % (13/14) | 100 % (1/1) | 0 % (0/10) | 100 % (9/9) | 25 % (4/16) | 71 % (10/14) |
+| qwen3-vl-4b | C | 100 % (14/14) | 100 % (14/14) | 100 % (1/1) | 0 % (0/10) | 100 % (10/10) | 12 % (2/16) | 87 % (13/15) |
 | qwen3-vl-4b | D | 100 % (14/14) | 100 % (14/14) | 100 % (1/1) | 0 % (0/10) | 100 % (10/10) | 12 % (2/16) | 88 % (14/16) |
 | qwen3-vl-4b | E | 100 % (14/14) | 100 % (14/14) | 100 % (1/1) | 0 % (0/10) | 100 % (10/10) | 12 % (2/16) | 81 % (13/16) |
 | qwen3-vl-2b | A | 93 % (13/14) | 93 % (13/14) | 0 % (0/1) | 0 % (0/10) | 100 % (10/10) | 12 % (2/16) | 88 % (14/16) |
@@ -415,43 +415,43 @@ Pairs: 14 mirror, 1 rotation, 10 counterfactual pairs that need the whole plan (
 
 The interval is a paired cluster bootstrap of (accuracy in the mode − accuracy in A), in percentage points.
 
-| model | A → | WRONG→RIGHT | UNRESOLVED→RIGHT | WRONG→UNRESOLVED | UNRESOLVED→WRONG | RIGHT→WRONG | OTHER (breakdown) | SAME | net change in right answers | cluster 95 % (pp) | P(gain > 0) | context-dependent: right in A → right in mode (n) |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| smolvlm2-2.2b | B | 3 | 0 | 1 | 0 | 5 | 0 | 21 | -2 | -25.0 … +4.5 | 10 % | 3 → 3 (6) |
-| smolvlm2-2.2b | C | 2 | 0 | 0 | 0 | 3 | 2 (RIGHT->UNRESOLVED 1, WRONG->WRONG (other option) 1) | 23 | -2 | -25.0 … +4.5 | 10 % | 3 → 3 (6) |
-| smolvlm2-2.2b | D | 1 | 0 | 0 | 0 | 2 | 0 | 27 | -1 | -12.9 … +0.0 | 0 % | 3 → 3 (6) |
-| smolvlm2-2.2b | E | 1 | 0 | 0 | 0 | 3 | 0 | 26 | -2 | -19.1 … +0.0 | 0 % | 3 → 3 (6) |
-| internvl3.5-2b-instruct | B | 0 | 0 | 1 | 0 | 2 | 2 (WRONG->WRONG (other option) 1, RIGHT->UNRESOLVED 1) | 25 | -3 | -26.9 … +0.0 | 0 % | 0 → 0 (6) |
-| internvl3.5-2b-instruct | C | 1 | 1 | 0 | 1 | 0 | 1 (UNRESOLVED->WRONG 1) | 27 | +2 | +0.0 … +18.2 | 89 % | 0 → 1 (6) |
-| internvl3.5-2b-instruct | D | 1 | 1 | 0 | 1 | 0 | 1 (UNRESOLVED->WRONG 1) | 27 | +2 | +0.0 … +18.2 | 89 % | 0 → 1 (6) |
-| internvl3.5-2b-instruct | E | 0 | 2 | 0 | 1 | 0 | 1 (UNRESOLVED->WRONG 1) | 27 | +2 | +0.0 … +13.8 | 88 % | 0 → 1 (6) |
-| qwen3-vl-4b | B | 2 | 0 | 2 | 0 | 6 | 1 (WRONG->WRONG (other option) 1) | 19 | -4 | -25.6 … +0.0 | 0 % | 3 → 3 (6) |
-| qwen3-vl-4b | C | 3 | 0 | 0 | 0 | 1 | 0 | 26 | +2 | +0.0 … +20.0 | 89 % | 3 → 3 (6) |
-| qwen3-vl-4b | D | 2 | 0 | 0 | 0 | 1 | 1 (WRONG->WRONG (other option) 1) | 26 | +1 | +0.0 … +13.6 | 64 % | 3 → 3 (6) |
-| qwen3-vl-4b | E | 2 | 0 | 0 | 0 | 1 | 1 (WRONG->WRONG (other option) 1) | 26 | +1 | +0.0 … +13.6 | 64 % | 3 → 3 (6) |
-| qwen3-vl-2b | B | 3 | 0 | 0 | 0 | 5 | 1 (WRONG->WRONG (other option) 1) | 21 | -2 | -14.3 … +0.0 | 0 % | 3 → 3 (6) |
-| qwen3-vl-2b | C | 4 | 0 | 0 | 0 | 2 | 0 | 24 | +2 | +0.0 … +14.3 | 90 % | 3 → 3 (6) |
-| qwen3-vl-2b | D | 4 | 0 | 0 | 0 | 1 | 0 | 25 | +3 | +0.0 … +20.0 | 97 % | 3 → 4 (6) |
-| qwen3-vl-2b | E | 4 | 0 | 0 | 0 | 2 | 0 | 24 | +2 | +0.0 … +14.3 | 90 % | 3 → 3 (6) |
+| model | A → | WRONG→RIGHT | UNRESOLVED→RIGHT | WRONG→UNRESOLVED | UNRESOLVED→WRONG | RIGHT→WRONG | OTHER (breakdown) | SAME | net change in right answers | cluster 95 % (pp) | P(gain > 0) | CONFIDENT_WRONG: A → mode | context-pair members: right in A → right in mode (n) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| smolvlm2-2.2b | B | 3 | 0 | 1 | 0 | 5 | 0 | 21 | -2 | -25.0 … +4.5 | 10 % | 15 → 16 | 3 → 3 (6) |
+| smolvlm2-2.2b | C | 2 | 0 | 0 | 0 | 3 | 2 (RIGHT->UNRESOLVED 1, WRONG->WRONG (other option) 1) | 23 | -2 | -25.0 … +4.5 | 10 % | 15 → 16 | 3 → 3 (6) |
+| smolvlm2-2.2b | D | 1 | 0 | 0 | 0 | 2 | 0 | 27 | -1 | -12.9 … +0.0 | 0 % | 15 → 16 | 3 → 3 (6) |
+| smolvlm2-2.2b | E | 1 | 0 | 0 | 0 | 3 | 0 | 26 | -2 | -19.1 … +0.0 | 0 % | 15 → 17 | 3 → 3 (6) |
+| internvl3.5-2b-instruct | B | 0 | 0 | 1 | 0 | 2 | 2 (WRONG->WRONG (other option) 1, RIGHT->UNRESOLVED 1) | 25 | -3 | -26.9 … +0.0 | 0 % | 6 → 7 | 0 → 0 (6) |
+| internvl3.5-2b-instruct | C | 1 | 1 | 0 | 1 | 0 | 1 (UNRESOLVED->WRONG 1) | 27 | +2 | +0.0 … +18.2 | 89 % | 6 → 6 | 0 → 1 (6) |
+| internvl3.5-2b-instruct | D | 1 | 1 | 0 | 1 | 0 | 1 (UNRESOLVED->WRONG 1) | 27 | +2 | +0.0 … +18.2 | 89 % | 6 → 6 | 0 → 1 (6) |
+| internvl3.5-2b-instruct | E | 0 | 2 | 0 | 1 | 0 | 1 (UNRESOLVED->WRONG 1) | 27 | +2 | +0.0 … +13.8 | 88 % | 6 → 7 | 0 → 1 (6) |
+| qwen3-vl-4b | B | 2 | 0 | 2 | 0 | 6 | 1 (WRONG->WRONG (other option) 1) | 19 | -4 | -25.6 … +0.0 | 0 % | 10 → 12 | 3 → 3 (6) |
+| qwen3-vl-4b | C | 3 | 0 | 0 | 0 | 1 | 0 | 26 | +2 | +0.0 … +20.0 | 89 % | 10 → 8 | 3 → 3 (6) |
+| qwen3-vl-4b | D | 2 | 0 | 0 | 0 | 1 | 1 (WRONG->WRONG (other option) 1) | 26 | +1 | +0.0 … +13.6 | 64 % | 10 → 9 | 3 → 3 (6) |
+| qwen3-vl-4b | E | 2 | 0 | 0 | 0 | 1 | 1 (WRONG->WRONG (other option) 1) | 26 | +1 | +0.0 … +13.6 | 64 % | 10 → 9 | 3 → 3 (6) |
+| qwen3-vl-2b | B | 3 | 0 | 0 | 0 | 5 | 1 (WRONG->WRONG (other option) 1) | 21 | -2 | -14.3 … +0.0 | 0 % | 9 → 11 | 3 → 3 (6) |
+| qwen3-vl-2b | C | 4 | 0 | 0 | 0 | 2 | 0 | 24 | +2 | +0.0 … +14.3 | 90 % | 9 → 7 | 3 → 3 (6) |
+| qwen3-vl-2b | D | 4 | 0 | 0 | 0 | 1 | 0 | 25 | +3 | +0.0 … +20.0 | 97 % | 9 → 6 | 3 → 4 (6) |
+| qwen3-vl-2b | E | 4 | 0 | 0 | 0 | 2 | 0 | 24 | +2 | +0.0 … +14.3 | 90 % | 9 → 7 | 3 → 3 (6) |
 
 ## Context gain — PHASE2: A_CROP_ONLY against the modes with the whole plan
 
 The interval is a paired cluster bootstrap of (accuracy in the mode − accuracy in A), in percentage points.
 
-| model | A → | WRONG→RIGHT | UNRESOLVED→RIGHT | WRONG→UNRESOLVED | UNRESOLVED→WRONG | RIGHT→WRONG | OTHER (breakdown) | SAME | net change in right answers | cluster 95 % (pp) | P(gain > 0) | context-dependent: right in A → right in mode (n) |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| internvl3.5-2b-instruct | B | 2 | 1 | 7 | 1 | 9 | 12 (RIGHT->UNRESOLVED 6, WRONG->WRONG (other option) 5, UNRESOLVED->WRONG 1) | 121 | -12 | -14.6 … -2.8 | 0 % | 5 → 3 (23) |
-| internvl3.5-2b-instruct | C | 7 | 3 | 2 | 4 | 3 | 4 (UNRESOLVED->WRONG 4) | 133 | +7 | -0.6 … +10.3 | 95 % | 5 → 7 (23) |
-| internvl3.5-2b-instruct | D | 6 | 4 | 0 | 6 | 3 | 6 (UNRESOLVED->WRONG 6) | 133 | +7 | +0.0 … +9.7 | 96 % | 5 → 8 (23) |
-| internvl3.5-2b-instruct | E | 2 | 10 | 0 | 7 | 4 | 8 (UNRESOLVED->WRONG 7, RIGHT->UNRESOLVED 1) | 128 | +7 | -1.7 … +10.4 | 90 % | 5 → 7 (23) |
-| qwen3-vl-4b | B | 13 | 1 | 7 | 1 | 23 | 6 (WRONG->WRONG (other option) 3, RIGHT->UNRESOLVED 2, UNRESOLVED->WRONG 1) | 102 | -11 | -15.5 … +3.2 | 8 % | 10 → 11 (23) |
-| qwen3-vl-4b | C | 14 | 1 | 0 | 1 | 6 | 2 (WRONG->WRONG (other option) 1, UNRESOLVED->WRONG 1) | 129 | +9 | +0.0 … +13.0 | 97 % | 10 → 11 (23) |
-| qwen3-vl-4b | D | 10 | 1 | 0 | 2 | 5 | 4 (WRONG->WRONG (other option) 2, UNRESOLVED->WRONG 2) | 132 | +6 | -1.3 … +9.2 | 92 % | 10 → 11 (23) |
-| qwen3-vl-4b | E | 11 | 1 | 0 | 2 | 9 | 4 (WRONG->WRONG (other option) 2, UNRESOLVED->WRONG 2) | 127 | +3 | -4.1 … +7.2 | 73 % | 10 → 11 (23) |
-| qwen3-vl-2b | B | 12 | 0 | 0 | 0 | 18 | 5 (WRONG->WRONG (other option) 5) | 117 | -6 | -10.2 … +3.3 | 13 % | 10 → 12 (23) |
-| qwen3-vl-2b | C | 9 | 0 | 0 | 0 | 9 | 1 (WRONG->WRONG (other option) 1) | 133 | +0 | -4.3 … +4.3 | 42 % | 10 → 11 (23) |
-| qwen3-vl-2b | D | 11 | 0 | 0 | 0 | 5 | 0 | 136 | +6 | -0.7 … +9.0 | 94 % | 10 → 13 (23) |
-| qwen3-vl-2b | E | 8 | 0 | 0 | 0 | 8 | 0 | 136 | +0 | -4.9 … +4.5 | 44 % | 10 → 11 (23) |
+| model | A → | WRONG→RIGHT | UNRESOLVED→RIGHT | WRONG→UNRESOLVED | UNRESOLVED→WRONG | RIGHT→WRONG | OTHER (breakdown) | SAME | net change in right answers | cluster 95 % (pp) | P(gain > 0) | CONFIDENT_WRONG: A → mode | context-pair members: right in A → right in mode (n) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| internvl3.5-2b-instruct | B | 2 | 1 | 7 | 1 | 9 | 12 (RIGHT->UNRESOLVED 6, WRONG->WRONG (other option) 5, UNRESOLVED->WRONG 1) | 121 | -12 | -14.6 … -2.8 | 0 % | 52 → 53 | 4 → 2 (20) |
+| internvl3.5-2b-instruct | C | 7 | 3 | 2 | 4 | 3 | 4 (UNRESOLVED->WRONG 4) | 133 | +7 | -0.6 … +10.3 | 95 % | 52 → 50 | 4 → 6 (20) |
+| internvl3.5-2b-instruct | D | 6 | 4 | 0 | 6 | 3 | 6 (UNRESOLVED->WRONG 6) | 133 | +7 | +0.0 … +9.7 | 96 % | 52 → 55 | 4 → 7 (20) |
+| internvl3.5-2b-instruct | E | 2 | 10 | 0 | 7 | 4 | 8 (UNRESOLVED->WRONG 7, RIGHT->UNRESOLVED 1) | 128 | +7 | -1.7 … +10.4 | 90 % | 52 → 61 | 4 → 6 (20) |
+| qwen3-vl-4b | B | 13 | 1 | 7 | 1 | 23 | 6 (WRONG->WRONG (other option) 3, RIGHT->UNRESOLVED 2, UNRESOLVED->WRONG 1) | 102 | -11 | -15.5 … +3.2 | 8 % | 53 → 58 | 9 → 10 (20) |
+| qwen3-vl-4b | C | 14 | 1 | 0 | 1 | 6 | 2 (WRONG->WRONG (other option) 1, UNRESOLVED->WRONG 1) | 129 | +9 | +0.0 … +13.0 | 97 % | 53 → 48 | 9 → 10 (20) |
+| qwen3-vl-4b | D | 10 | 1 | 0 | 2 | 5 | 4 (WRONG->WRONG (other option) 2, UNRESOLVED->WRONG 2) | 132 | +6 | -1.3 … +9.2 | 92 % | 53 → 52 | 9 → 10 (20) |
+| qwen3-vl-4b | E | 11 | 1 | 0 | 2 | 9 | 4 (WRONG->WRONG (other option) 2, UNRESOLVED->WRONG 2) | 127 | +3 | -4.1 … +7.2 | 73 % | 53 → 55 | 9 → 10 (20) |
+| qwen3-vl-2b | B | 12 | 0 | 0 | 0 | 18 | 5 (WRONG->WRONG (other option) 5) | 117 | -6 | -10.2 … +3.3 | 13 % | 53 → 58 | 10 → 11 (20) |
+| qwen3-vl-2b | C | 9 | 0 | 0 | 0 | 9 | 1 (WRONG->WRONG (other option) 1) | 133 | +0 | -4.3 … +4.3 | 42 % | 53 → 53 | 10 → 10 (20) |
+| qwen3-vl-2b | D | 11 | 0 | 0 | 0 | 5 | 0 | 136 | +6 | -0.7 … +9.0 | 94 % | 53 → 47 | 10 → 12 (20) |
+| qwen3-vl-2b | E | 8 | 0 | 0 | 0 | 8 | 0 | 136 | +0 | -4.9 … +4.5 | 44 % | 53 → 53 | 10 → 10 (20) |
 
 ## Calibration — PHASE1 (answered items)
 

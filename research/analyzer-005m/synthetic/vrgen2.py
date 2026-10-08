@@ -7,8 +7,8 @@ metres; every expected answer is read from that scene - never from a model, a pu
 
     python -I -B vrgen2.py --out <dir outside the repository> [--splits TRAIN,VAL,TEST] [--pairs 22,5,5] [--compat 2.0.0]
 
-Version 2.1.0 (post-review round 1) changes two families; --compat 2.0.0 reproduces the 2.0.0 corpus byte for byte (the
-sealed TEST split the bake-off used was generated with it):
+Version 2.1.0 (post-review round 1) changes two families; --compat 2.0.0 reproduces the 2.0.0 renders and questions byte
+for byte (corpus.json's splitSeedBase now also lists SEALED; the TEST split the bake-off used was generated with it):
   * garage_vs_carport (B-2 / D-1): the front gap is unmarked in both members, so "garage door or carport mouth" was not
     settled by the drawing. The question now asks what the drawing does show, whether the bay is closed at the back
     (BAY_BACK_CLOSED_VS_DRIVE_THROUGH); the BODY_REGION question on the bay is dropped

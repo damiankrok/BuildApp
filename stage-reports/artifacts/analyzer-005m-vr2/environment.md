@@ -35,33 +35,51 @@ llama-server -m <LLM.gguf> --mmproj <vision.gguf> -t 4 -tb 4 -c 8192 -np 1 --tem
 - **Greedy and seeded.** `temperature 0`, `seed 0`, `max_tokens 40`, JSON-schema constrained output (`bench.py`).
 - **Prompt cache capped at 2 GiB** (the default is 8 GiB).
   - With weights in `/dev/shm`, the default cache drove the cgroup towards OOM.
-  - The cgroup did kill one process: a `llama-mtmd-cli` smoke check at about 14:03 UTC (anon 5.78 GB + shmem 1.79 GB),
-    before the context and the cache were capped.
-  - No benchmark server was killed: every run file is complete, and failures are counted per record.
+  - The cgroup killed three processes in the stage (post-review E2-3):
+    - a `llama-mtmd-cli` smoke check at about 14:03 UTC on Oct 7 (anon 5.78 GB + shmem 1.79 GB), before the context and
+      the cache were capped;
+    - the teacher's server at 10:46 UTC on Oct 8, after 27 comparison records (anon 7.9 GB + shmem 4.9 GB); it was rerun
+      with `-c 4096 --cache-ram 0` (`teacher-feasibility.md`);
+    - the student CPU probe at 10:48 (exit 137, at the default 2,048 px); it was rerun at 1,024 px (`student-training.md`).
+  - Apart from the SmolVLM2-2.2B server crash below, no bake-off server died, every run file is complete, and failures
+    are counted per record.
+  - **The first 16 SmolVLM2-2.2B phase-1 records ran under the server's default 8 GiB prompt cache**, before the 2 GiB
+    cap was set. That server crashed after 16 records and was restarted with `--cache-ram 2048`, and the run resumed by
+    key (`runs/p1-smolvlm2-2.2b.out`). Record 15 has a token-split error: its answer is valid, its image-token count is
+    missing; the scorer and the runtime matrix leave it out rather than counting 0 (post-review A-10).
   - The cache is what makes mode D cheap after C: they share the plan-image prefix.
-  - It changes no answer by design, but llama.cpp does not promise bit-identical logits between cached and uncached
-    evaluation. Latency tables therefore report cold-cache medians separately (`runtime-size-matrix.md`).
+  - **The cache can change an answer** (post-review A2-4). llama.cpp does not promise bit-identical logits between cached
+    and uncached evaluation. On the 17 mode-A item pairs whose images and prompt are byte-identical, Qwen3-VL-2B,
+    Qwen3-VL-4B and SmolVLM2-2.2B gave identical answers (largest probability shift 0.025, 0.030, 0.036). InternVL3.5-2B
+    answered **3 of 17** differently between the cold record (4 cached tokens) and the warm one (453–460 cached), each
+    time between UNRESOLVED and A at a near tie (largest shift 0.037); two of the three are in the amended set. So
+    "the same answer is forced on byte-identical crops" holds only up to this cache nondeterminism. Latency tables
+    report cold-cache medians separately (`runtime-size-matrix.md`).
 - **LLM Q8_0, vision projector F16** for the four bake-off models.
   - Q8_0 is the publisher's own quantisation for Qwen3-VL. It was converted here for SmolVLM2-2.2B and InternVL3.5-2B.
   - A quick check found the Q8_0 projector slower than F16 on this CPU, so F16 was kept.
   - The smaller Q4_K_M packs appear only as byte figures.
-- **The teacher (Qwen3-VL-8B) runs as Q4_K_M + F16 projector.** It runs alone, after the bake-off, but its Q8_0
-  (8.7 GB) plus runtime memory would not fit in the 13.36 GiB cgroup.
+- **The teacher (Qwen3-VL-8B) runs as Q4_K_M + F16 projector.** It runs alone, after the bake-off. Q8_0 (8.7 GB) was
+  not attempted, for memory headroom; reviewer E estimates it would have needed ≈ 12.1 GB at the final settings, so it
+  might have fit (post-review E2-8).
 - **SmolVLM2-2.2B is given `--image-max-tokens 336`.** Each image becomes 2 × 2 tiles plus a global view, 419 tokens.
   - At its native 1,536 px, 1,417 tokens per image took about 100 s per image here, which would not have finished the
     matched run.
   - The cap is recorded with every result (`input-modes.md`).
 
-## Container restart (2026-10-08, 00:38 UTC)
+## Container restarts (2026-10-08, 00:38 and ≈ 01:29 UTC)
 
-The session's container was restarted once, during Qwen3-VL-4B phase 2, after 322 of its 835 records.
+The session's container was restarted twice, both times during Qwen3-VL-4B phase 2: at 00:38 after 322 of its 835
+records, and at about 01:29 (the current boot) after 431. There was no later restart; the stage report's earlier
+"three" was wrong (post-review E2-3).
 - **Lost.** tmpfs (`/dev/shm`) was wiped; the work directory and every run file survived.
 - **Weights re-fetched.** The pinned Qwen3-VL-4B GGUFs were downloaded again from the same revision, and both files
   matched the SHA-256 values recorded before the restart (`manifests/qwen3vl-4b.gguf.sha256`).
-- **Run resumed.** The run continued from record 323 (`bench.py` skips answered keys), under the same server
-  settings and the same 13.36 GiB cgroup limit.
-- **Caveats for the 4B run.** It therefore spans two server processes. The first request after the restart ran with
-  an empty prompt cache. Its peak-RSS figure is the larger of the two processes.
+- **Run resumed.** The run continued from record 323 and then from record 432 (`bench.py` skips answered keys;
+  `runs/resume.log`), under the same server settings and the same 13.36 GiB cgroup limit.
+- **Caveats for the 4B run.** It spans server processes on two boots. The first request after each restart ran with
+  an empty prompt cache, and per-token speed differed between processes (by about 30 %, reviewer E), which is why the
+  latency fit over-estimates a standalone mode D. Its peak-RSS figure is the largest of the processes.
 
 ## Network and accounts
 

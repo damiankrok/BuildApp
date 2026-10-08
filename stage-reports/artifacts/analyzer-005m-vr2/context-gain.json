@@ -13,6 +13,8 @@
      },
      "otherBreakdown": {},
      "netRightChange": -2,
+     "confidentWrongInA": 15,
+     "confidentWrongInMode": 16,
      "accuracyGainClusterCi95": [
       -0.25,
       0.0455
@@ -120,6 +122,8 @@
       "WRONG->WRONG (other option)": 1
      },
      "netRightChange": -2,
+     "confidentWrongInA": 15,
+     "confidentWrongInMode": 16,
      "accuracyGainClusterCi95": [
       -0.25,
       0.0455
@@ -205,6 +209,8 @@
      },
      "otherBreakdown": {},
      "netRightChange": -1,
+     "confidentWrongInA": 15,
+     "confidentWrongInMode": 16,
      "accuracyGainClusterCi95": [
       -0.129,
       0.0
@@ -254,6 +260,8 @@
      },
      "otherBreakdown": {},
      "netRightChange": -2,
+     "confidentWrongInA": 15,
+     "confidentWrongInMode": 17,
      "accuracyGainClusterCi95": [
       -0.1905,
       0.0
@@ -319,6 +327,8 @@
       "RIGHT->UNRESOLVED": 1
      },
      "netRightChange": -3,
+     "confidentWrongInA": 6,
+     "confidentWrongInMode": 7,
      "accuracyGainClusterCi95": [
       -0.2692,
       0.0
@@ -389,6 +399,8 @@
       "UNRESOLVED->WRONG": 1
      },
      "netRightChange": 2,
+     "confidentWrongInA": 6,
+     "confidentWrongInMode": 6,
      "accuracyGainClusterCi95": [
       0.0,
       0.1818
@@ -441,6 +453,8 @@
       "UNRESOLVED->WRONG": 1
      },
      "netRightChange": 2,
+     "confidentWrongInA": 6,
+     "confidentWrongInMode": 6,
      "accuracyGainClusterCi95": [
       0.0,
       0.1818
@@ -492,6 +506,8 @@
       "UNRESOLVED->WRONG": 1
      },
      "netRightChange": 2,
+     "confidentWrongInA": 6,
+     "confidentWrongInMode": 7,
      "accuracyGainClusterCi95": [
       0.0,
       0.1379
@@ -548,6 +564,8 @@
       "WRONG->WRONG (other option)": 1
      },
      "netRightChange": -4,
+     "confidentWrongInA": 10,
+     "confidentWrongInMode": 12,
      "accuracyGainClusterCi95": [
       -0.2564,
       0.0
@@ -669,6 +687,8 @@
      },
      "otherBreakdown": {},
      "netRightChange": 2,
+     "confidentWrongInA": 10,
+     "confidentWrongInMode": 8,
      "accuracyGainClusterCi95": [
       0.0,
       0.2
@@ -730,6 +750,8 @@
       "WRONG->WRONG (other option)": 1
      },
      "netRightChange": 1,
+     "confidentWrongInA": 10,
+     "confidentWrongInMode": 9,
      "accuracyGainClusterCi95": [
       0.0,
       0.1364
@@ -791,6 +813,8 @@
       "WRONG->WRONG (other option)": 1
      },
      "netRightChange": 1,
+     "confidentWrongInA": 10,
+     "confidentWrongInMode": 9,
      "accuracyGainClusterCi95": [
       0.0,
       0.1364
@@ -855,6 +879,8 @@
       "WRONG->WRONG (other option)": 1
      },
      "netRightChange": -2,
+     "confidentWrongInA": 9,
+     "confidentWrongInMode": 11,
      "accuracyGainClusterCi95": [
       -0.1429,
       0.0
@@ -958,6 +984,8 @@
      },
      "otherBreakdown": {},
      "netRightChange": 2,
+     "confidentWrongInA": 9,
+     "confidentWrongInMode": 7,
      "accuracyGainClusterCi95": [
       0.0,
       0.1429
@@ -1034,6 +1062,8 @@
      },
      "otherBreakdown": {},
      "netRightChange": 3,
+     "confidentWrongInA": 9,
+     "confidentWrongInMode": 6,
      "accuracyGainClusterCi95": [
       0.0,
       0.2
@@ -1101,6 +1131,8 @@
      },
      "otherBreakdown": {},
      "netRightChange": 2,
+     "confidentWrongInA": 9,
+     "confidentWrongInMode": 7,
      "accuracyGainClusterCi95": [
       0.0,
       0.1429
@@ -1189,6 +1221,8 @@
       "UNRESOLVED->WRONG": 1
      },
      "netRightChange": -12,
+     "confidentWrongInA": 52,
+     "confidentWrongInMode": 53,
      "accuracyGainClusterCi95": [
       -0.1463,
       -0.0281
@@ -1476,9 +1510,9 @@
       }
      ],
      "contextDependentOnly": {
-      "n": 23,
-      "rightInA": 5,
-      "rightInMode": 3,
+      "n": 20,
+      "rightInA": 4,
+      "rightInMode": 2,
       "unresolvedInA": 14
      }
     },
@@ -1495,6 +1529,8 @@
       "UNRESOLVED->WRONG": 4
      },
      "netRightChange": 7,
+     "confidentWrongInA": 52,
+     "confidentWrongInMode": 50,
      "accuracyGainClusterCi95": [
       -0.0056,
       0.1026
@@ -1674,9 +1710,9 @@
       }
      ],
      "contextDependentOnly": {
-      "n": 23,
-      "rightInA": 5,
-      "rightInMode": 7,
+      "n": 20,
+      "rightInA": 4,
+      "rightInMode": 6,
       "unresolvedInA": 14
      }
     },
@@ -1692,6 +1728,8 @@
       "UNRESOLVED->WRONG": 6
      },
      "netRightChange": 7,
+     "confidentWrongInA": 52,
+     "confidentWrongInMode": 55,
      "accuracyGainClusterCi95": [
       0.0,
       0.0972
@@ -1871,9 +1909,9 @@
       }
      ],
      "contextDependentOnly": {
-      "n": 23,
-      "rightInA": 5,
-      "rightInMode": 8,
+      "n": 20,
+      "rightInA": 4,
+      "rightInMode": 7,
       "unresolvedInA": 14
      }
     },
@@ -1890,6 +1928,8 @@
       "RIGHT->UNRESOLVED": 1
      },
      "netRightChange": 7,
+     "confidentWrongInA": 52,
+     "confidentWrongInMode": 61,
      "accuracyGainClusterCi95": [
       -0.0169,
       0.1043
@@ -2114,9 +2154,9 @@
       }
      ],
      "contextDependentOnly": {
-      "n": 23,
-      "rightInA": 5,
-      "rightInMode": 7,
+      "n": 20,
+      "rightInA": 4,
+      "rightInMode": 6,
       "unresolvedInA": 14
      }
     }
@@ -2138,6 +2178,8 @@
       "UNRESOLVED->WRONG": 1
      },
      "netRightChange": -11,
+     "confidentWrongInA": 53,
+     "confidentWrongInMode": 58,
      "accuracyGainClusterCi95": [
       -0.155,
       0.0317
@@ -2596,9 +2638,9 @@
       }
      ],
      "contextDependentOnly": {
-      "n": 23,
-      "rightInA": 10,
-      "rightInMode": 11,
+      "n": 20,
+      "rightInA": 9,
+      "rightInMode": 10,
       "unresolvedInA": 2
      }
     },
@@ -2615,6 +2657,8 @@
       "UNRESOLVED->WRONG": 1
      },
      "netRightChange": 9,
+     "confidentWrongInA": 53,
+     "confidentWrongInMode": 48,
      "accuracyGainClusterCi95": [
       0.0,
       0.1299
@@ -2830,9 +2874,9 @@
       }
      ],
      "contextDependentOnly": {
-      "n": 23,
-      "rightInA": 10,
-      "rightInMode": 11,
+      "n": 20,
+      "rightInA": 9,
+      "rightInMode": 10,
       "unresolvedInA": 2
      }
     },
@@ -2849,6 +2893,8 @@
       "UNRESOLVED->WRONG": 2
      },
      "netRightChange": 6,
+     "confidentWrongInA": 53,
+     "confidentWrongInMode": 52,
      "accuracyGainClusterCi95": [
       -0.0127,
       0.0922
@@ -3037,9 +3083,9 @@
       }
      ],
      "contextDependentOnly": {
-      "n": 23,
-      "rightInA": 10,
-      "rightInMode": 11,
+      "n": 20,
+      "rightInA": 9,
+      "rightInMode": 10,
       "unresolvedInA": 2
      }
     },
@@ -3056,6 +3102,8 @@
       "UNRESOLVED->WRONG": 2
      },
      "netRightChange": 3,
+     "confidentWrongInA": 53,
+     "confidentWrongInMode": 55,
      "accuracyGainClusterCi95": [
       -0.0414,
       0.0723
@@ -3289,9 +3337,9 @@
       }
      ],
      "contextDependentOnly": {
-      "n": 23,
-      "rightInA": 10,
-      "rightInMode": 11,
+      "n": 20,
+      "rightInA": 9,
+      "rightInMode": 10,
       "unresolvedInA": 2
      }
     }
@@ -3309,6 +3357,8 @@
       "WRONG->WRONG (other option)": 5
      },
      "netRightChange": -6,
+     "confidentWrongInA": 53,
+     "confidentWrongInMode": 58,
      "accuracyGainClusterCi95": [
       -0.1016,
       0.0333
@@ -3632,9 +3682,9 @@
       }
      ],
      "contextDependentOnly": {
-      "n": 23,
+      "n": 20,
       "rightInA": 10,
-      "rightInMode": 12,
+      "rightInMode": 11,
       "unresolvedInA": 0
      }
     },
@@ -3649,6 +3699,8 @@
       "WRONG->WRONG (other option)": 1
      },
      "netRightChange": 0,
+     "confidentWrongInA": 53,
+     "confidentWrongInMode": 53,
      "accuracyGainClusterCi95": [
       -0.0429,
       0.0429
@@ -3828,9 +3880,9 @@
       }
      ],
      "contextDependentOnly": {
-      "n": 23,
+      "n": 20,
       "rightInA": 10,
-      "rightInMode": 11,
+      "rightInMode": 10,
       "unresolvedInA": 0
      }
     },
@@ -3842,6 +3894,8 @@
      },
      "otherBreakdown": {},
      "netRightChange": 6,
+     "confidentWrongInA": 53,
+     "confidentWrongInMode": 47,
      "accuracyGainClusterCi95": [
       -0.0072,
       0.0896
@@ -3994,9 +4048,9 @@
       }
      ],
      "contextDependentOnly": {
-      "n": 23,
+      "n": 20,
       "rightInA": 10,
-      "rightInMode": 13,
+      "rightInMode": 12,
       "unresolvedInA": 0
      }
     },
@@ -4008,6 +4062,8 @@
      },
      "otherBreakdown": {},
      "netRightChange": 0,
+     "confidentWrongInA": 53,
+     "confidentWrongInMode": 53,
      "accuracyGainClusterCi95": [
       -0.0488,
       0.0455
@@ -4160,9 +4216,9 @@
       }
      ],
      "contextDependentOnly": {
-      "n": 23,
+      "n": 20,
       "rightInA": 10,
-      "rightInMode": 11,
+      "rightInMode": 10,
       "unresolvedInA": 0
      }
     }

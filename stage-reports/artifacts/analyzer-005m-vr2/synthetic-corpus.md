@@ -17,8 +17,10 @@ Generator: `research/analyzer-005m/synthetic/vrgen2.py`.
   All of it is in `question-corpus.json` → `synthetic005M` (2.0.0) and `synthetic005M_v2_1` (2.1.0).
 
 There are two versions. **2.0.0** produced the bake-off's synthetic questions. **2.1.0**, written after review,
-corrects two families and adds a split that no model has seen. `--compat 2.0.0` reproduces 2.0.0 byte for byte
-(checked on 16 renders and 32 questions).
+corrects two families and adds a split that no model has seen. `--compat 2.0.0` reproduces 2.0.0's renders and
+questions byte for byte (checked on 16 renders and 32 questions); its `corpus.json` differs only in `splitSeedBase`, which
+now lists SEALED (post-review B-18). Storey renders follow the scene transform, and the prompt states the layout per
+transform (`common.STOREY_LAYOUT`).
 
 ## Splits — counted at every level
 
@@ -69,8 +71,13 @@ of a counterfactual pair, and a seed draws one pair. These counts were computed 
 For a context-dependent pair, the composer checks that the two CROP_ONLY images are **byte-identical**
 (`compose5.py` → `cropIdenticalToPair`).
 
-- **Coverage.** All 34 twin-paired bake-off items pass. The bake-off has 38 context-dependent items; the 4 ROT90
-  singletons have no twin in the set, so they are not checked.
+- **Coverage.** On the pre-registered set, all 34 twin-paired bake-off items pass, and 4 ROT90 singletons have no
+  twin. On the amended phase-2 set there are 23 context-dependent items: 20 members of 10 context pairs (all pass), 2
+  members of the same-truth control pair and 1 unpaired ROT90 item (post-review B-18).
+- **The class decides abstention in 2.1.** BAY_BACK_CLOSED_VS_DRIVE_THROUGH, BODY_REGION and STOREY_COVERAGE are
+  context-dependent on every question, so their crop-only target is always UNRESOLVED. `student_dataset.py` refuses to
+  write a training set from such a corpus; a revision with crop-decidable members in these classes comes first
+  (`student-training.md` §1, post-review D-13).
 - **What it means.** Where the two members' truths differ, a model that answers them differently in mode A is not
   reading the crop, and UNRESOLVED is the best it can do there.
 - **Control pairs.** The storey rear is YES in both members, so it is a control, scored apart.

@@ -297,7 +297,7 @@
     }
    },
    "derivative": null,
-   "status": "NOT_RUN_ACCESS_GATED: gated \"manual\" on the hub; an unauthenticated request for config.json at the pinned revision returned 401; no credential exists in this environment and none was created (brief section 3: absence is not a blocker)"
+   "status": "NOT_RUN_ACCESS_GATED: gated \"manual\" on the hub; an unauthenticated request for config.json at the pinned revision returned 401; no Hugging Face credential exists in this environment and none was created (the platform's own session tokens were not used) (brief section 3: absence is not a blocker)"
   },
   {
    "role": "CONDITIONAL_REFERENCE",

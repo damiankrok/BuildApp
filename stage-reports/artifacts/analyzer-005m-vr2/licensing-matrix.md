@@ -166,7 +166,14 @@ BSD-2-Clause entries need their notice. The public-domain entries need none, but
      - It is SmolVLM2-500M's own `base_model`, so A′ is route A's lineage without the SmolVLM2 video and instruction
        layer. The architecture and size are the same (005J found identical ONNX load-set sizes).
      - It is cleaner, not clean. The Cauldron's sub-dataset licences are unaudited (ChartQA GPL-3.0 and Hateful Memes
-       behind an agreement are known), and the data of its SmolLM2-360M-Instruct language backbone was not audited.
+       behind an agreement are known).
+     - Its language backbone carries a disclosed Llama 3.1 output clause (post-review F2-4). `SmolVLM-500M-Instruct`
+       names `base_model: HuggingFaceTB/SmolLM2-360M-Instruct`. That model's card gives its SFT data as
+       `HuggingFaceTB/smol-smoltalk`, a subset of SmolTalk, whose core is "Smol-Magpie-Ultra … generated using the Magpie
+       pipeline with Llama-3.1-405B-Instruct". The Llama 3.1 Community License §1.b.i asks a distributed model trained
+       on Llama outputs to put "Llama" at the beginning of its name and to display "Built with Llama". The same backbone
+       sits under route A. Whether the clause reaches a model two steps downstream is the same counsel question as the
+       Qwen §5(b) chain for InternVL3.5 (§4).
      - 005M neither ran nor trained it.
    - **Route B** (Qwen3-VL-2B) inherits only "undisclosed" (item 1).
    - **Route C** (Gemma 3n) is a Gemma Model Derivative (item 4).
@@ -183,7 +190,8 @@ BSD-2-Clause entries need their notice. The public-domain entries need none, but
   and Tongyi Qianwen §5(b) (through the Magpie text in SmolVLM2's mix). They are recorded as facts, not conclusions.
 - What `other-video/combined` (5.7 % of SmolVLM2's mix) contains; the card does not say. The mapping of the card's
   `magpie_pro_*` names to LLaVA-OneVision-Data configs is inferred.
-- The training data of SmolLM2-360M-Instruct, the language backbone of both route A and route A′.
+- Whether the Llama 3.1 §1.b.i clause disclosed for SmolLM2-360M-Instruct's SFT data (§3.5) binds a vision model built
+  on that backbone, and then a student fine-tuned from it. The data of SmolLM2's pre-training was not audited.
 - The licence of KleidiAI, which llama.cpp downloads only when `GGML_CPU_KLEIDIAI` is enabled (§1c).
 - The meaning of `gated: "manual"` for Gemma 3n against the page's "requests are processed immediately". Here, the
   request was simply refused without a credential.

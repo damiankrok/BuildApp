@@ -28,8 +28,10 @@ the same bytes for a given item: each item records the SHA-256 of every image it
 - **Native multi-image, no composite fallback.** All four mandatory models take several images natively in the
   runtime: Qwen3-VL `<|vision_start|>…`, SmolVLM2 / Idefics3 tiled `<fake_token_around_image>` blocks, InternVL
   `<img>…</img>`. D and E pass two images.
-  - The **storey** questions show the two published plans side by side: ground left, upper right, a 20 px white gap.
-    That is the only composite, and it is there because the source has two separate sheets.
+  - The real **storey** questions (A06 / A07) show the two published plans side by side: ground left, upper right, a
+    20 px white gap. That is the only composite, and it is there because the source has two separate sheets.
+  - Synthetic storey renders follow the scene transform, so the two panels can be swapped (MIRROR, ROT180) or stacked
+    (ROT90). The prompt states the layout for each transform (`common.STOREY_LAYOUT`, post-review B-1 / B-18).
 
 ## Geometry
 
@@ -67,13 +69,22 @@ the same bytes for a given item: each item records the SHA-256 of every image it
     outlines are not in the development records for the other questions, and a hypothesis drawn from the truth would
     leak it.
 
+**A note on mode B (post-review A-11).** The 0–1000 coordinate frame is Qwen-VL's native grounding convention, so mode
+B is, if anything, tilted towards the Qwen models. llama.cpp warns that Qwen-VL grounding wants at least 1,024 image
+tokens; here the plan gets 578. The point is moot for the conclusions: mode B loses against mode A for every model,
+the Qwens included.
+
 ## Context-dependent pairs
 
 For the 005M generator's context families, the A-mode crops of the two members of a counterfactual pair are
-**byte-identical**. That holds for all 34 twin-paired benchmark items and 48 of 48 teacher-mining items.
+**byte-identical**. On the pre-registered sets that held for all 34 twin-paired benchmark items and 48 of 48
+teacher-mining items. On the amended phase-2 set (post-review B-18) there are 23 context-dependent items: the 20 members
+of the 10 context pairs, all crop-identical; the 2 members of the same-truth control pair; and 1 unpaired ROT90 item. The
+teacher's 42 TRAIN questions hold 18 context items, all crop-identical.
 
-- **Uncovered items.** The benchmark has 38 context-dependent items. The 4 ROT90 singletons have no twin in the set,
-  so their identity is not checked.
+- **Uncovered items.** The unpaired ROT90 item has no twin in the set, so its identity is not checked.
+- **Up to cache nondeterminism.** Identical crops force the same answer only up to the prompt cache: InternVL3.5-2B
+  answered 3 of 17 byte-identical mode-A pairs differently (`environment.md`, post-review A2-4).
 - **What mode A must do.** It must answer such a pair identically. Where the two members' truths differ, the only
   correct crop-only reply is UNRESOLVED, and any gain can come only from the whole plan.
 - **Control pairs.** The storey families also ask about the rear of the body, which the upper floor covers in both

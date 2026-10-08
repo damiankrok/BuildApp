@@ -143,15 +143,15 @@ def main():
               f"(byte-identical crops), {p['counterfactualLocal']} local counterfactual pairs, {p['counterfactualSameTruthControls']} same-truth control pairs "
               '(left out of the rates).', '',
               '"Same answer" on a counterfactual pair means the model did not see the difference. On context pairs in mode A that '
-              'is forced: the crops are identical.', '',
-              '| model | mode | mirror (both answered) | mirror (005J denominator) | rotation 90° | context pairs: both right / all pairs | context pairs: same answer | local pairs: both right | local pairs: same answer |',
+              'is forced, up to prompt-cache nondeterminism: the crops are identical (`environment.md`).', '',
+              '| model | mode | mirror (both answered) | mirror (005J denominator) | rotation 90° | context pairs: both right / all pairs | context pairs: same answer (of pairs both answered) | local pairs: both right / all pairs | local pairs: same answer (of pairs both answered) |',
               '| --- | --- | --- | --- | --- | --- | --- | --- | --- |']
         for m in t['models']:
             for mode in MODES:
                 k = t['consistency'][f'{m}|{mode}']
                 cx, lc = k['counterfactualContextPairs'], k['counterfactualLocalPairs']
                 L.append(f"| {m} | {SHORT[mode]} | {short(k['mirror'])} | {short(k['mirror005jDenominator'])} | {short(k['rotation90'])} | {short(cx['bothRightOfAllPairs'])} | "
-                         f"{short(cx['sameAnswer'])} | {short(lc['bothRight'])} | {short(lc['sameAnswer'])} |")
+                         f"{short(cx['sameAnswer'])} | {short(lc['bothRightOfAllPairs'])} | {short(lc['sameAnswer'])} |")
         L += ['', f'### {tname} — per class, exact accuracy in mode D', '']
         classes = sorted({cl for m in t['models'] for cl in t['byClass'][f'{m}|D_MARKED_ROI_PLUS_CROP']})
         L += ['| class | ' + ' | '.join(t['models']) + ' |', '| --- | ' + ' | '.join('---' for _ in t['models']) + ' |']
@@ -165,8 +165,8 @@ def main():
     for tname, gt in g['tables'].items():
         L += ['', f'## Context gain — {tname}: A_CROP_ONLY against the modes with the whole plan', '',
               'The interval is a paired cluster bootstrap of (accuracy in the mode − accuracy in A), in percentage points.', '',
-              '| model | A → | WRONG→RIGHT | UNRESOLVED→RIGHT | WRONG→UNRESOLVED | UNRESOLVED→WRONG | RIGHT→WRONG | OTHER (breakdown) | SAME | net change in right answers | cluster 95 % (pp) | P(gain > 0) | context-dependent: right in A → right in mode (n) |',
-              '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |']
+              '| model | A → | WRONG→RIGHT | UNRESOLVED→RIGHT | WRONG→UNRESOLVED | UNRESOLVED→WRONG | RIGHT→WRONG | OTHER (breakdown) | SAME | net change in right answers | cluster 95 % (pp) | P(gain > 0) | CONFIDENT_WRONG: A → mode | context-pair members: right in A → right in mode (n) |',
+              '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |']
         for m, gm in gt.items():
             for mode in MODES[1:]:
                 x = gm[f'A->{mode}']
@@ -178,7 +178,7 @@ def main():
                 share = '' if gci is None else f"{100 * x['accuracyGainShareAboveZero']:.0f} %"
                 L.append(f"| {m} | {SHORT[mode]} | {tr.get('WRONG->RIGHT', 0)} | {tr.get('UNRESOLVED->RIGHT', 0)} | {tr.get('WRONG->UNRESOLVED', 0)} | {uw} | {tr.get('RIGHT->WRONG', 0)} | "
                          f"{tr.get('OTHER', 0)}{' (' + ob + ')' if ob else ''} | {tr.get('SAME', 0)} | {x['netRightChange']:+d} | {sgn(gci)} | "
-                         f"{share} | {cd['rightInA']} → {cd['rightInMode']} ({cd['n']}) |")
+                         f"{share} | {x['confidentWrongInA']} → {x['confidentWrongInMode']} | {cd['rightInA']} → {cd['rightInMode']} ({cd['n']}) |")
     for tname, ct in c['tables'].items():
         L += ['', f'## Calibration — {tname} (answered items)', '',
               '| model | subset | mode | answered | HIGH share | accuracy when HIGH | ECE | AUROC |', '| --- | --- | --- | --- | --- | --- | --- | --- |']

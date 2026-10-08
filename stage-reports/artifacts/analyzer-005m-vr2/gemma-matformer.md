@@ -2,7 +2,8 @@
 
 **Status: AUDITED FROM PRIMARY SOURCES, NOT RUN.** `google/gemma-3n-E2B-it` and `-E4B-it` are gated (`gated: "manual"`).
 At the pinned revision (`5e092ebc…` for E2B) an unauthenticated request for `config.json` returned **401** in this
-container, and no credential exists or was created. Brief §3: absence is not a stage blocker. Nothing below was
+container. No Hugging Face credential exists in this environment and none was created; the platform's own session
+tokens were not used. Brief §3: absence is not a stage blocker. Nothing below was
 measured on Gemma weights; every number is a publisher figure with its source. A research sub-agent read the sources
 on 2026-10-07.
 

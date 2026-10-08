@@ -47498,6 +47498,14 @@
      "maxImageTokens": 776
     }
    },
+   "contextPairMembers": [
+    "005m:test-corridor_vs_passage-s0-A-NORMAL-q0",
+    "005m:test-corridor_vs_passage-s0-B-NORMAL-q0",
+    "005m:test-inset_upper-s0-A-NORMAL-q0",
+    "005m:test-inset_upper-s0-B-NORMAL-q0",
+    "005m:test-wing_storey-s0-A-NORMAL-q0",
+    "005m:test-wing_storey-s0-B-NORMAL-q0"
+   ],
    "pairs": {
     "mirror": 0,
     "rotation90": 0,
@@ -88656,6 +88664,28 @@
      "maxImageTokens": 776
     }
    },
+   "contextPairMembers": [
+    "005m:test-corridor_vs_passage-s0-A-MIRROR-q0",
+    "005m:test-corridor_vs_passage-s0-A-NORMAL-q0",
+    "005m:test-corridor_vs_passage-s0-B-MIRROR-q0",
+    "005m:test-corridor_vs_passage-s0-B-NORMAL-q0",
+    "005m:test-corridor_vs_passage-s1-A-NORMAL-q0",
+    "005m:test-corridor_vs_passage-s1-B-NORMAL-q0",
+    "005m:test-corridor_vs_passage-s2-A-NORMAL-q0",
+    "005m:test-corridor_vs_passage-s2-B-NORMAL-q0",
+    "005m:test-inset_upper-s0-A-NORMAL-q0",
+    "005m:test-inset_upper-s0-B-NORMAL-q0",
+    "005m:test-inset_upper-s1-A-NORMAL-q0",
+    "005m:test-inset_upper-s1-B-NORMAL-q0",
+    "005m:test-inset_upper-s2-A-NORMAL-q0",
+    "005m:test-inset_upper-s2-B-NORMAL-q0",
+    "005m:test-wing_storey-s0-A-NORMAL-q0",
+    "005m:test-wing_storey-s0-B-NORMAL-q0",
+    "005m:test-wing_storey-s1-A-NORMAL-q0",
+    "005m:test-wing_storey-s1-B-NORMAL-q0",
+    "005m:test-wing_storey-s2-A-NORMAL-q0",
+    "005m:test-wing_storey-s2-B-NORMAL-q0"
+   ],
    "pairs": {
     "mirror": 14,
     "rotation90": 1,

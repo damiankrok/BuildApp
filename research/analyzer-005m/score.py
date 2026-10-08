@@ -235,6 +235,7 @@ def main():
         cf_control = [(qa, qb) for qa, qb in cf if q_meta[qa]['expected'] == q_meta[qb]['expected']]
         cf_ctx = [(qa, qb) for qa, qb in cf if (qa, qb) not in cf_control and it_by[(qa, 'A_CROP_ONLY')].get('cropIdenticalToPair')]
         cf_local = [(qa, qb) for qa, qb in cf if (qa, qb) not in cf_control and (qa, qb) not in cf_ctx]
+        t['contextPairMembers'] = sorted({q for pr in cf_ctx for q in pr})
         t['pairs'] = {'mirror': len(mirror), 'rotation90': len(rot), 'counterfactualContext': len(cf_ctx), 'counterfactualLocal': len(cf_local),
                       'counterfactualSameTruthControls': len(cf_control)}
 
@@ -417,9 +418,11 @@ def main():
                     if kind != 'SAME':
                         per.append({'qid': q, 'set': q_meta[q]['set'], 'cls': q_meta[q]['cls'], 'from': oa, 'to': ox, 'kind': kind,
                                     'contextDependent': q_meta[q].get('contextDependent', False)})
-                ctx = [q for q in qs if q_meta[q].get('contextDependent')]
+                # the members of the context pairs only: no same-truth control, no unpaired item (post-review B-16)
+                ctx = out['tables'][tname]['contextPairMembers']
                 g[f'A->{mode}'] = {'transitions': dict(tr), 'otherBreakdown': dict(other),
                                    'netRightChange': sum(res[(m, q, mode)]['o'] == 'RIGHT' for q in qs) - sum(res[(m, q, 'A_CROP_ONLY')]['o'] == 'RIGHT' for q in qs),
+                                   'confidentWrongInA': sum(res[(m, q, 'A_CROP_ONLY')]['cw'] for q in qs), 'confidentWrongInMode': sum(res[(m, q, mode)]['cw'] for q in qs),
                                    'accuracyGainClusterCi95': cg[f'{m}|{mode}']['ci95'], 'accuracyGainShareAboveZero': cg[f'{m}|{mode}']['shareAboveZero'],
                                    'changes': per,
                                    'contextDependentOnly': {'n': len(ctx), 'rightInA': sum(res[(m, q, 'A_CROP_ONLY')]['o'] == 'RIGHT' for q in ctx),

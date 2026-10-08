@@ -26,7 +26,7 @@ CANDIDATES = [
      'derivative': 'CONVERTED_HERE from the pinned safetensors with llama.cpp convert_hf_to_gguf.py; LLM Q8_0, vision F16. The repository ships no preprocessor_config.json; the conversion was given the model card\'s own ImageNet mean/std and 448 input size (README lines 440-441), written outside the repository',
      'local': 'internvl35-2b-instruct.gguf.sha256', 'download': 'internvl35-2b-instruct.download.json'},
     {'role': 'CONDITIONAL', 'id': 'google/gemma-3n-E2B-it', 'gguf': None, 'files': [], 'derivative': None, 'local': None,
-     'status': 'NOT_RUN_ACCESS_GATED: gated "manual" on the hub; an unauthenticated request for config.json at the pinned revision returned 401; no credential exists in this environment and none was created (brief section 3: absence is not a blocker)'},
+     'status': 'NOT_RUN_ACCESS_GATED: gated "manual" on the hub; an unauthenticated request for config.json at the pinned revision returned 401; no Hugging Face credential exists in this environment and none was created (the platform's own session tokens were not used) (brief section 3: absence is not a blocker)'},
     {'role': 'CONDITIONAL_REFERENCE', 'id': 'google/gemma-3n-E4B-it', 'gguf': None, 'files': [], 'derivative': None, 'local': None, 'status': 'NOT_RUN_ACCESS_GATED (MatFormer audit only)'},
     {'role': 'TEACHER_PRIMARY', 'id': 'Qwen/Qwen3-VL-8B-Instruct', 'gguf': 'Qwen/Qwen3-VL-8B-Instruct-GGUF', 'files': ['Qwen3VL-8B-Instruct-Q4_K_M.gguf', 'mmproj-Qwen3VL-8B-Instruct-F16.gguf'],
      'derivative': 'OFFICIAL_QUANTISATION by the same publisher (Qwen); LLM Q4_K_M (its Q8_0, 8.7 GB, plus runtime memory does not fit the 13.36 GiB cgroup), vision F16', 'local': 'qwen3vl-8b.gguf.sha256',
