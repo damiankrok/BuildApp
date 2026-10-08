@@ -199,6 +199,52 @@ describe('005K production cannot reach the gap-set harness, and the gap set comm
 })
 
 /**
+ * BUILDPLAN-ANALYZER-005N — the compound-facade harness (`research/analyzer-005n/`) traces every decomposition of the
+ * development rows through a Vite alias, replays the development matrix and the mutations, and probes extents —
+ * writing its traces outside the repository. What the repository keeps is code and text: frame, gap, span and
+ * interval ids, rectangles, widths, scales and decisions. Never a plan, an overlay or a picture of one.
+ */
+describe('005N production cannot reach the compound-facade harness, and it commits no pixels', () => {
+  const HARNESS = /research\/analyzer-005n|trace-decompositions|fixture-trace|facade-baseline|baseline-compound-facades/i
+
+  it('no production source imports research/analyzer-005n or names its traces', () => {
+    const offenders: string[] = []
+    for (const f of productionSources()) {
+      const text = read(f)
+      for (const spec of importsOf(text)) if (/analyzer-005n/.test(spec)) offenders.push(`${f} imports ${spec}`)
+      if (HARNESS.test(codeOf(text))) offenders.push(`${f} names the 005N harness`)
+    }
+    expect(offenders).toEqual([])
+  })
+
+  it('the 005N harness and artifacts track only code and text — no plan, overlay or archive', () => {
+    const tracked = execFileSync('git', ['ls-files'], { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(Boolean)
+    const harness = tracked.filter((f) => f.startsWith('research/analyzer-005n/') || f.startsWith('stage-reports/artifacts/analyzer-005n/'))
+    expect(harness.filter((f) => !/\.(ts|mjs|json|ndjson|md|txt)$/i.test(f))).toEqual([])
+    for (const f of harness) {
+      const text = read(f)
+      expect(text, f).not.toMatch(/(data:(image|application)\/[\w.+-]+;base64,|iVBORw0KGgo|\/9j\/4|UklGR|R0lGOD)[A-Za-z0-9+/]{40,}/)
+      expect(text, f).not.toMatch(/[A-Za-z0-9+/]{256,}={0,2}/)
+      expect(text, f).not.toMatch(/\[(\s*-?\d+(\.\d+)?\s*,){64,}/)
+      expect(text, f).not.toMatch(/(\[\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*(,\s*\d{1,3}\s*)?\]\s*,\s*){64,}/)
+      expect(statSync(join(ROOT, f)).size, f).toBeLessThanOrEqual(4 * 2 ** 20)
+    }
+  })
+
+  it('the harness writes its traces outside the repository only', () => {
+    expect(read('research/analyzer-005n/trace-decompositions.mjs')).toMatch(/if \(work\.startsWith\(REPO\)\) throw new Error\('the trace harness lives outside the repository'\)/)
+    expect(read('research/analyzer-005n/fixture-trace.ts')).toMatch(/if \(out\.startsWith\(resolve\(import\.meta\.dirname, '\.\.\/\.\.'\)\)\) throw new Error\('trace output stays outside the repository'\)/)
+  })
+
+  it('the Android build packages nothing from the 005N harness', () => {
+    for (const f of [...filesUnder('apps/android', /\.gradle\.kts$/), ...filesUnder('apps/android', /^libs\.versions\.toml$/)]) {
+      expect(codeOf(read(f)), f).not.toMatch(HARNESS)
+    }
+    expect(filesUnder('apps/android/app/src/main/assets', /.*/).filter((a) => HARNESS.test(a) || /analyzer-005n/i.test(a))).toEqual([])
+  })
+})
+
+/**
  * BUILDPLAN-ANALYZER-005L — the storey-registration harness (`research/analyzer-005l/`) traces the layout pass on
  * development rows, replays the development matrix, and draws plans with their registrations for a developer to look
  * at — outside the repository. What the repository keeps is code and text: frame and region ids, rectangles, scales,

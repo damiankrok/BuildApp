@@ -63,7 +63,8 @@ function transformOf(t: Transform, W: number, H: number) {
   return { point, size, ticks }
 }
 
-function render(p: PlanDrawing, t: Transform): Raster {
+/** The plan drawn under `t`, as a raster (005N: also the end-to-end fixtures' sheet). */
+export function render(p: PlanDrawing, t: Transform = 'id'): Raster {
   const { point, size } = transformOf(t, p.W, p.H)
   const r = whiteRaster(size[0], size[1])
   for (const o of p.ops) {

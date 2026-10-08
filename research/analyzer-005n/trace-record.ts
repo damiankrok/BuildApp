@@ -60,7 +60,7 @@ export function traceRecord(mask: Any, chains: Any, bands: Any, registration: An
     wideOpenings: d.wideOpenings,
     compound: (d as Any).compoundFacades ?? null,
     bays: d.bays.map((x) => ({ side: x.side, rect: x.rect, wallAxesPx: x.wallAxesPx, mouth: x.mouth })),
-    cells: d.cells.map((c) => [c.ix, c.iy, c.classification[0], c.rect.x0, c.rect.y0, c.rect.x1, c.rect.y1]),
+    cells: d.cells.map((c) => [c.ix, c.iy, c.classification[0], c.rect.x0, c.rect.y0, c.rect.x1, c.rect.y1, c.edges.map((e) => [r(e.wall), r(e.line), r(e.opening), r(e.closure)]), c.enclosed ? 1 : 0]),
     regions: d.regions.map((g) => [g.classification, g.rect.x0, g.rect.y0, g.rect.x1, g.rect.y1]),
     chosenHypothesis: d.chosenHypothesis,
     unresolved: d.unresolved,

@@ -122,6 +122,33 @@ describe('005N §21 — recessed entrance beside a garage: two mouths of one bod
   })
 })
 
+describe('005N §16 — each interval is weighed against its own pocket', () => {
+  it('an undrawn mouth into the house beside the recess: the hall behind it is the interior, so its own width shuts it — the merged span would not', () => {
+    // the recess, then past its return a 3 m mouth with nothing drawn across it into a hall 9 m deep that runs on
+    // into the rooms: 27 m² behind 3 m is more than a pocket (limit 22.5 m²), but less than the merged 6.6 m span's
+    // limit (109 m²), which would have left the house open through it
+    const p = house()
+    p.clear(120, FRONT, 251, 279)
+    returnAt(p, 108, 100)
+    returnAt(p, 180, 100)
+    wallH(p, 108, 191, 228)
+    doorH(p, 135, 155, 228)
+    returnAt(p, 252, 100)
+    wallH(p, 180, 263, 100)
+    doorH(p, 200, 240, 100)
+    for (const t of TRANSFORMS) {
+      const r = runScene(scene(p), t)
+      const mouth = spansOf(r.d)[0].intervals.find((i) => i.role !== 'RECESS_MOUTH')
+      expect(mouth?.role, t).toBe('OPEN_SIDE')
+      const decided = r.d.wideOpenings.find((w) => w.compound?.intervalId === mouth?.id)
+      expect(decided?.decision, `${t}: shut by what lies behind it`).toBe('OPENING_IN_WALL')
+      expect(r.builtAt(222, 160), `${t}: the hall`).toBe(true)
+      expect(r.builtAt(300, 150), `${t}: the living room`).toBe(true)
+      expect(r.classAt(150, 255), t).toBe('RECESS')
+    }
+  })
+})
+
 describe('005N §21 — separators: structural ink only', () => {
   it('5. two openings separated by a real pier (1 m, shorter than a wall band, tied to a partition): two openings in one wall', () => {
     const p = house()

@@ -183,6 +183,7 @@ describe('6. every artefact is sealed against the exact inputs it was made from'
  */
 const STRUCTURAL_FILES = [
   'packages/reconstruction/src/plan-decomposition.ts',
+  'packages/reconstruction/src/compound-facade.ts',
   'packages/reconstruction/src/layout.ts',
   'packages/reconstruction/src/layout-gate.ts',
   'packages/reconstruction/src/structural-layout.ts',
