@@ -46,6 +46,7 @@
 | STAGE BUILDPLAN-ANALYZER-005J — FLOORPLAN INTELLIGENCE TECHNOLOGY AUDIT + VISUAL REFEREE OPPORTUNITY MAP + TRAINING ROUTE | `analyzer/floorplan-intelligence-audit-v1` (from `analyzer/dimension-topology-boundary-bakeoff-v1` @ `64b78b4`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | research harness, artifacts and report: the commits after `64b78b4` on the branch (`git log analyzer/floorplan-intelligence-audit-v1 ^64b78b4`); BuildApp CI run 37514203211 on `d287aba` (the last content commit): 38 jobs pass, 2 skipped, **1 red** — the Android UI evidence gate (`VerticalSliceDeviceTest`), red on both attempts on a code path this stage did not touch | **PARTIAL** (`PARTIAL_BUILDPLAN_ANALYZER_005J_CI_UI_EVIDENCE_RED`) — research and audit only, **no production change** (§ "Where the floor-plan intelligence audit stands"). Small VLMs (Florence-2, SmolVLM2, Moondream) at or below chance on BuildPlan's closed questions; no commercially clean floor-plan model exists; a from-scratch BuildPlan-trained UNet-lite (6 MB) is a clean research proof. In an oracle replay of the frozen code, a deterministic drawn-gap upgrade completes `dom-w-gozdzikowcach`'s footprint exactly as a perfect witness does, and nothing moves a verdict. **PRIMARY_NEXT: NO_AI_YET** (005K: per-gap evidence records, a sealed fresh-sheet gap set, the deterministic upgrade measured on it). SECONDARY_LATER: TRAIN_BUILDPLAN_WALL_MODEL as the challenger. REJECT: small-VLM referee, every pretrained floor-plan model |
 | STAGE BUILDPLAN-ANALYZER-005K — GAP EVIDENCE + SEALED FRESH-SHEET GAP SET + DETERMINISTIC DRAWN-GAP RULE | `analyzer/gap-evidence-drawn-gap-v1` (from `analyzer/floorplan-intelligence-audit-v1` @ `1314df7`; pushes also to `claude/new-session-3kzcgh`, except the seal-to-evaluation commits; Legacy untouched) | Phase 0 `b747440`; production `c244ff7` (rule OFF); freeze `892853e` (FREEZE_SHA); manifest seal `70aa0a4`; label seal `6672a89`; evaluation `591197d`; council fixes `44f7128`; closing: the commit that carries this row. CI: runs 37533180890 (`b747440`), 37539569712 (`892853e`) and 37546736072 (`2f57f90`, the last content commit) green, UI evidence gate included | **PASS** (`PASS_BUILDPLAN_ANALYZER_005K_GAP_EVIDENCE_READY_FOR_COORDINATOR`) — see § "Where the gap evidence stands (STAGE BUILDPLAN-ANALYZER-005K)". UI evidence harness fixed (test code only); per-gap evidence records (boundary evidence 1.2.0, Evidence Pack 1.2.0); a sealed fresh-sheet set of 60 gaps (14 projects, ARCHON + DobreDomy) labelled by blind AI sub-agents (not human); **DRAWN_GAP_RULE: INSUFFICIENT_EVIDENCE — stays OFF** (10 resolved negatives, none an open side; a known recess-mouth closure path). No production decision changed; no OWNER APK; blind round 9 NOT_RUN_BY_DESIGN. **NEXT: FIX_STOREY_COUNT** |
 | STAGE BUILDPLAN-ANALYZER-005L — STOREY REGISTRATION + PER-STOREY FOOTPRINT STACKING + FRESH BLIND ROUND 9 | `analyzer/storey-registration-mass-stacking-v1` (from `a70047f`; pushes also to `claude/new-session-3kzcgh`, batched while a CI run was in flight; Legacy untouched) | production `e849cbc`…`cee78c8` (council-closed); freeze `8f5f3c5` (PRE_HOLDOUT_9_SHA, CI 37595482179 green); blind round `591e857`; closing: the commit that carries this row (final CI and OWNER APK: run 193 on `99b0eea`, green; OWNER APK versionCode 1193) | **PARTIAL** (`PARTIAL_BUILDPLAN_ANALYZER_005L_BLIND9_BODY_RELATION_FAIL`) — see § "Where storey registration stands (STAGE BUILDPLAN-ANALYZER-005L)". Storey registration and support are rebuilt on walled bodies and wall-on-wall correspondence, and per-storey footprints reach the emitted model. A06 and A07 FAIL → PASS (with żurawkach and tunbergiach), no PASS row turns FAIL, garage safety and non-circularity hold, M1–M10 are killed. Blind 9: #1 `dom-w-murajach` ALGORITHMIC_FAIL on a recessed-entrance / garage-door body relation upstream of the storey work (it failed at the 005K code too), #2 `dom-w-cieszyniankach` PASS. **NEXT: FIX_RECESSED_ENTRANCE_BODY_RELATION** |
+| STAGE BUILDPLAN-ANALYZER-005M — VISUAL REFEREE V2: MULTISCALE SMALL-VLM BAKE-OFF + TEACHER/STUDENT DISTILLATION FEASIBILITY | `analyzer/visual-referee-v2-distillation-audit-v1` (from `analyzer/storey-registration-mass-stacking-v1` @ `47811e0`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | research harness `research/analyzer-005m/`, artifacts `stage-reports/artifacts/analyzer-005m-vr2/` and the report: the commits after `47811e0` on the branch; final CI: see the stage report's handoff | Research only, **no production change** (freeze IDENTICAL; no weight in Git history). Four small VLMs (Qwen3-VL-2B/4B, InternVL3.5-2B, SmolVLM2-2.2B) through llama.cpp on CPU in five input modes; phase 1 30 questions, phase 2 152 (best three). Best: **Qwen3-VL-2B, mode D: CONFIDENT_WRONG_RATE 30.9 %** (real 23 %), never abstains, 2/10 global-context pairs; beats an image-free prior on real questions only. Teacher Qwen3-VL-8B RUN (CPU): one answer for both members of 20/21 counterfactual pairs. Student DEFERRED_ENV (CPU probe 31 s/step). Gemma 3n gated. **NEXT: RETURN_TO_DETERMINISTIC_BODY_RELATION** |
 ## Current capabilities
 
 - **CanonicalBuildingModel** (`packages/model`): versioned Zod schema
@@ -1207,6 +1208,41 @@ zgodności odczytu wymiarów").
 1160, 39.4 MB, sha256 `c9cf22daf59cd7f38422d4d59eef89c1d06c15af2e1ba03c2a78694db0f24e90`, arm64-v8a only, the same five
 `.so`, preview signer `6e48fac4…`, model `9ef676d6…` and WASM `3398c10d…` inside, verified from the downloaded file
 (report §R).
+
+## Where the visual referee v2 stands (STAGE BUILDPLAN-ANALYZER-005M)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005M_VISUAL_REFEREE_V2.md`. Evidence: `stage-reports/artifacts/analyzer-005m-vr2/`.
+
+**Scope.** Research only. Production, Android, the resolver and every model decision are unchanged; no OWNER APK; no
+fresh blind. No weight, checkpoint or publisher pixel entered Git history (`history_gate.sh`, isolation test).
+
+**Bake-off.** Four mandatory small VLMs, llama.cpp on CPU, five information contracts per question (A crop, B plan, C
+marked plan, D marked plan + crop, E + analyzer overlay), closed JSON with UNRESOLVED.
+- **Phase 1** (30 questions; pre-registered on CONFIDENT_WRONG_RATE): InternVL3.5-2B, Qwen3-VL-2B and Qwen3-VL-4B
+  advance; SmolVLM2-2.2B does not.
+- **Phase 2** (152 questions × 5 modes). The best is Qwen3-VL-2B in D:
+  - 69.1 % exact, **30.9 % confidently wrong**;
+  - on real development questions 77 % / 23 %, above the 62 % image-free prior;
+  - on the synthetic global-context families, at chance;
+  - both members right in 2 of 10 pairs that need the whole plan;
+  - 0 UNRESOLVED.
+- **The confidence signal.** Every model says HIGH on nearly every answer, so CONFIDENT_WRONG ≈ wrong. No probability
+  threshold approaches the 0.5 % gate.
+
+**Teacher and student.**
+- **Teacher.** Qwen3-VL-8B (RUN, CPU subset) scores 57.5 % on 24 shared questions and gives one answer to both
+  members of 20 of 21 TRAIN counterfactual pairs. It is not a usable soft-label source.
+- **Student.** DEFERRED_ENV. The dataset format is implemented on vrgen2 2.1 (2,000 / 400 / 400 independent drawings,
+  a SEALED split). A CPU probe measured 31 s per LoRA step (≈ 1,400 h for three epochs).
+- **Licence of the smallest base.** SmolVLM2-500M is not commercially clean; SmolVLM-500M-Instruct v1 is the cleaner
+  base.
+
+**Deployability.** Qwen3-VL-2B's smallest pack is 1.55 GB (quality unmeasured), ≈ 2.1 GB of RAM estimated, with a
+standalone mode-D question taking ≈ 35 s on this CPU. Gemma 3n is gated; a fine-tune → nested-slice → LiteRT path is
+undocumented.
+
+**Review and next.** Six reviewers, round 1: 0 P0, 19 P1, all resolved. **NEXT: RETURN_TO_DETERMINISTIC_BODY_RELATION**:
+fix murajach's recessed-entrance / garage-door body relation deterministically.
 
 ## Where storey registration stands (STAGE BUILDPLAN-ANALYZER-005L)
 
