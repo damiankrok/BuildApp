@@ -1,0 +1,4032 @@
+{
+ "rules": "per question, the outcome in A_CROP_ONLY against the same question in B, C, D and E; on the amended matched sets (PHASE1: every phase-1 model; PHASE2: every phase-2 model). netRightChange = right in the mode - right in A",
+ "tables": {
+  "PHASE1": {
+   "smolvlm2-2.2b": {
+    "questions": 30,
+    "A->B_FULL_PLAN": {
+     "transitions": {
+      "SAME": 21,
+      "RIGHT->WRONG": 5,
+      "WRONG->RIGHT": 3,
+      "WRONG->UNRESOLVED": 1
+     },
+     "otherBreakdown": {},
+     "netRightChange": -2,
+     "changes": [
+      {
+       "qid": "005j:real-dom-w-cyklamenach-BODY_REGION-0-NORMAL",
+       "set": "ROUND8_DEV",
+       "cls": "BODY_REGION",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-gozdzikowcach-OUTER_BOUNDARY_A_OR_B-1-NORMAL",
+       "set": "ROUND8_DEV",
+       "cls": "OUTER_BOUNDARY_A_OR_B",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-BODY_REGION-5-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "BODY_REGION",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-GARAGE_BODY-0-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "GARAGE_BODY",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-TERRACE_VS_BODY-0-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "WRONG",
+       "to": "UNRESOLVED",
+       "kind": "WRONG->UNRESOLVED",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-WALL_CONTINUATION-7-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "WALL_CONTINUATION",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q011",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q027",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q049",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      }
+     ],
+     "contextDependentOnly": {
+      "n": 6,
+      "rightInA": 3,
+      "rightInMode": 3,
+      "unresolvedInA": 0
+     }
+    },
+    "A->C_FULL_PLAN_MARKED_ROI": {
+     "transitions": {
+      "SAME": 23,
+      "RIGHT->WRONG": 3,
+      "OTHER": 2,
+      "WRONG->RIGHT": 2
+     },
+     "otherBreakdown": {
+      "RIGHT->UNRESOLVED": 1,
+      "WRONG->WRONG (other option)": 1
+     },
+     "netRightChange": -2,
+     "changes": [
+      {
+       "qid": "005j:real-dom-w-cyklamenach-BODY_REGION-0-NORMAL",
+       "set": "ROUND8_DEV",
+       "cls": "BODY_REGION",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-gozdzikowcach-OUTER_BOUNDARY_A_OR_B-1-NORMAL",
+       "set": "ROUND8_DEV",
+       "cls": "OUTER_BOUNDARY_A_OR_B",
+       "from": "RIGHT",
+       "to": "UNRESOLVED",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-BODY_REGION-5-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "BODY_REGION",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-GARAGE_BODY-0-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "GARAGE_BODY",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-WALL_CONTINUATION-7-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "WALL_CONTINUATION",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q011",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q036",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      }
+     ],
+     "contextDependentOnly": {
+      "n": 6,
+      "rightInA": 3,
+      "rightInMode": 3,
+      "unresolvedInA": 0
+     }
+    },
+    "A->D_MARKED_ROI_PLUS_CROP": {
+     "transitions": {
+      "SAME": 27,
+      "RIGHT->WRONG": 2,
+      "WRONG->RIGHT": 1
+     },
+     "otherBreakdown": {},
+     "netRightChange": -1,
+     "changes": [
+      {
+       "qid": "005j:real-dom-w-cyklamenach-BODY_REGION-0-NORMAL",
+       "set": "ROUND8_DEV",
+       "cls": "BODY_REGION",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-BODY_REGION-5-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "BODY_REGION",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-GARAGE_BODY-0-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "GARAGE_BODY",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      }
+     ],
+     "contextDependentOnly": {
+      "n": 6,
+      "rightInA": 3,
+      "rightInMode": 3,
+      "unresolvedInA": 0
+     }
+    },
+    "A->E_MARKED_ROI_PLUS_CROP_PLUS_OVERLAY": {
+     "transitions": {
+      "RIGHT->WRONG": 3,
+      "SAME": 26,
+      "WRONG->RIGHT": 1
+     },
+     "otherBreakdown": {},
+     "netRightChange": -2,
+     "changes": [
+      {
+       "qid": "005j:garage_door_vs_open-s0-A-NORMAL-q0",
+       "set": "SYNTH_CF",
+       "cls": "WALL_CONTINUATION",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-cyklamenach-BODY_REGION-0-NORMAL",
+       "set": "ROUND8_DEV",
+       "cls": "BODY_REGION",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-BODY_REGION-5-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "BODY_REGION",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-GARAGE_BODY-0-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "GARAGE_BODY",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      }
+     ],
+     "contextDependentOnly": {
+      "n": 6,
+      "rightInA": 3,
+      "rightInMode": 3,
+      "unresolvedInA": 0
+     }
+    }
+   },
+   "internvl3.5-2b-instruct": {
+    "questions": 30,
+    "A->B_FULL_PLAN": {
+     "transitions": {
+      "SAME": 25,
+      "WRONG->UNRESOLVED": 1,
+      "RIGHT->WRONG": 2,
+      "OTHER": 2
+     },
+     "otherBreakdown": {
+      "WRONG->WRONG (other option)": 1,
+      "RIGHT->UNRESOLVED": 1
+     },
+     "netRightChange": -3,
+     "changes": [
+      {
+       "qid": "005j:real-dom-w-cyklamenach-TERRACE_VS_BODY-0-NORMAL",
+       "set": "ROUND8_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "WRONG",
+       "to": "UNRESOLVED",
+       "kind": "WRONG->UNRESOLVED",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q027",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q049",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:murajach-M1",
+       "set": "MURAJACH_DEV",
+       "cls": "WALL_CONTINUATION",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:murajach-M4",
+       "set": "MURAJACH_DEV",
+       "cls": "BODY_REGION",
+       "from": "RIGHT",
+       "to": "UNRESOLVED",
+       "kind": "OTHER",
+       "contextDependent": false
+      }
+     ],
+     "contextDependentOnly": {
+      "n": 6,
+      "rightInA": 0,
+      "rightInMode": 0,
+      "unresolvedInA": 6
+     }
+    },
+    "A->C_FULL_PLAN_MARKED_ROI": {
+     "transitions": {
+      "SAME": 27,
+      "WRONG->RIGHT": 1,
+      "UNRESOLVED->RIGHT": 1,
+      "OTHER": 1
+     },
+     "otherBreakdown": {
+      "UNRESOLVED->WRONG": 1
+     },
+     "netRightChange": 2,
+     "changes": [
+      {
+       "qid": "005k:q036",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "UNRESOLVED",
+       "to": "RIGHT",
+       "kind": "UNRESOLVED->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "UNRESOLVED",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": true
+      }
+     ],
+     "contextDependentOnly": {
+      "n": 6,
+      "rightInA": 0,
+      "rightInMode": 1,
+      "unresolvedInA": 6
+     }
+    },
+    "A->D_MARKED_ROI_PLUS_CROP": {
+     "transitions": {
+      "SAME": 27,
+      "WRONG->RIGHT": 1,
+      "UNRESOLVED->RIGHT": 1,
+      "OTHER": 1
+     },
+     "otherBreakdown": {
+      "UNRESOLVED->WRONG": 1
+     },
+     "netRightChange": 2,
+     "changes": [
+      {
+       "qid": "005k:q036",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "UNRESOLVED",
+       "to": "RIGHT",
+       "kind": "UNRESOLVED->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "UNRESOLVED",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": true
+      }
+     ],
+     "contextDependentOnly": {
+      "n": 6,
+      "rightInA": 0,
+      "rightInMode": 1,
+      "unresolvedInA": 6
+     }
+    },
+    "A->E_MARKED_ROI_PLUS_CROP_PLUS_OVERLAY": {
+     "transitions": {
+      "SAME": 27,
+      "UNRESOLVED->RIGHT": 2,
+      "OTHER": 1
+     },
+     "otherBreakdown": {
+      "UNRESOLVED->WRONG": 1
+     },
+     "netRightChange": 2,
+     "changes": [
+      {
+       "qid": "005j:real-dom-w-morelach-CANOPY_PERGOLA_VS_WALL-1-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "UNRESOLVED",
+       "to": "RIGHT",
+       "kind": "UNRESOLVED->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "UNRESOLVED",
+       "to": "RIGHT",
+       "kind": "UNRESOLVED->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "UNRESOLVED",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": true
+      }
+     ],
+     "contextDependentOnly": {
+      "n": 6,
+      "rightInA": 0,
+      "rightInMode": 1,
+      "unresolvedInA": 6
+     }
+    }
+   },
+   "qwen3-vl-4b": {
+    "questions": 30,
+    "A->B_FULL_PLAN": {
+     "transitions": {
+      "RIGHT->WRONG": 6,
+      "WRONG->RIGHT": 2,
+      "SAME": 19,
+      "OTHER": 1,
+      "WRONG->UNRESOLVED": 2
+     },
+     "otherBreakdown": {
+      "WRONG->WRONG (other option)": 1
+     },
+     "netRightChange": -4,
+     "changes": [
+      {
+       "qid": "005j:garage_door_vs_open-s0-A-NORMAL-q0",
+       "set": "SYNTH_CF",
+       "cls": "WALL_CONTINUATION",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:garage_door_vs_open-s0-B-NORMAL-q0",
+       "set": "SYNTH_CF",
+       "cls": "WALL_CONTINUATION",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-cyklamenach-TERRACE_VS_BODY-0-NORMAL",
+       "set": "ROUND8_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-BODY_REGION-5-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "BODY_REGION",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-OPENING_VS_PATTERN-8-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "OPENING_VS_PATTERN",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-OUTER_BOUNDARY_A_OR_B-0-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "OUTER_BOUNDARY_A_OR_B",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q011",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q036",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "UNRESOLVED",
+       "kind": "WRONG->UNRESOLVED",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-inset_upper-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "WRONG",
+       "to": "UNRESOLVED",
+       "kind": "WRONG->UNRESOLVED",
+       "contextDependent": true
+      }
+     ],
+     "contextDependentOnly": {
+      "n": 6,
+      "rightInA": 3,
+      "rightInMode": 3,
+      "unresolvedInA": 0
+     }
+    },
+    "A->C_FULL_PLAN_MARKED_ROI": {
+     "transitions": {
+      "SAME": 26,
+      "WRONG->RIGHT": 3,
+      "RIGHT->WRONG": 1
+     },
+     "otherBreakdown": {},
+     "netRightChange": 2,
+     "changes": [
+      {
+       "qid": "005k:q011",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q027",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q049",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:storey-A06-S1",
+       "set": "STOREY_DEV",
+       "cls": "STOREY_COVERAGE",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      }
+     ],
+     "contextDependentOnly": {
+      "n": 6,
+      "rightInA": 3,
+      "rightInMode": 3,
+      "unresolvedInA": 0
+     }
+    },
+    "A->D_MARKED_ROI_PLUS_CROP": {
+     "transitions": {
+      "SAME": 26,
+      "WRONG->RIGHT": 2,
+      "OTHER": 1,
+      "RIGHT->WRONG": 1
+     },
+     "otherBreakdown": {
+      "WRONG->WRONG (other option)": 1
+     },
+     "netRightChange": 1,
+     "changes": [
+      {
+       "qid": "005k:q011",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q027",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q036",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q049",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      }
+     ],
+     "contextDependentOnly": {
+      "n": 6,
+      "rightInA": 3,
+      "rightInMode": 3,
+      "unresolvedInA": 0
+     }
+    },
+    "A->E_MARKED_ROI_PLUS_CROP_PLUS_OVERLAY": {
+     "transitions": {
+      "SAME": 26,
+      "WRONG->RIGHT": 2,
+      "OTHER": 1,
+      "RIGHT->WRONG": 1
+     },
+     "otherBreakdown": {
+      "WRONG->WRONG (other option)": 1
+     },
+     "netRightChange": 1,
+     "changes": [
+      {
+       "qid": "005k:q011",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q027",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q036",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q049",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      }
+     ],
+     "contextDependentOnly": {
+      "n": 6,
+      "rightInA": 3,
+      "rightInMode": 3,
+      "unresolvedInA": 0
+     }
+    }
+   },
+   "qwen3-vl-2b": {
+    "questions": 30,
+    "A->B_FULL_PLAN": {
+     "transitions": {
+      "SAME": 21,
+      "RIGHT->WRONG": 5,
+      "WRONG->RIGHT": 3,
+      "OTHER": 1
+     },
+     "otherBreakdown": {
+      "WRONG->WRONG (other option)": 1
+     },
+     "netRightChange": -2,
+     "changes": [
+      {
+       "qid": "005j:real-dom-w-morelach-BODY_REGION-5-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "BODY_REGION",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-CANOPY_PERGOLA_VS_WALL-1-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-OUTER_BOUNDARY_A_OR_B-0-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "OUTER_BOUNDARY_A_OR_B",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q027",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q049",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-inset_upper-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-inset_upper-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-wing_storey-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-wing_storey-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": true
+      }
+     ],
+     "contextDependentOnly": {
+      "n": 6,
+      "rightInA": 3,
+      "rightInMode": 3,
+      "unresolvedInA": 0
+     }
+    },
+    "A->C_FULL_PLAN_MARKED_ROI": {
+     "transitions": {
+      "SAME": 24,
+      "WRONG->RIGHT": 4,
+      "RIGHT->WRONG": 2
+     },
+     "otherBreakdown": {},
+     "netRightChange": 2,
+     "changes": [
+      {
+       "qid": "005j:real-dom-w-cyklamenach-TERRACE_VS_BODY-0-NORMAL",
+       "set": "ROUND8_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-CANOPY_PERGOLA_VS_WALL-1-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-inset_upper-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-inset_upper-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-wing_storey-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-wing_storey-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": true
+      }
+     ],
+     "contextDependentOnly": {
+      "n": 6,
+      "rightInA": 3,
+      "rightInMode": 3,
+      "unresolvedInA": 0
+     }
+    },
+    "A->D_MARKED_ROI_PLUS_CROP": {
+     "transitions": {
+      "SAME": 25,
+      "WRONG->RIGHT": 4,
+      "RIGHT->WRONG": 1
+     },
+     "otherBreakdown": {},
+     "netRightChange": 3,
+     "changes": [
+      {
+       "qid": "005j:real-dom-w-cyklamenach-TERRACE_VS_BODY-0-NORMAL",
+       "set": "ROUND8_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-CANOPY_PERGOLA_VS_WALL-1-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-inset_upper-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-inset_upper-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-wing_storey-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": true
+      }
+     ],
+     "contextDependentOnly": {
+      "n": 6,
+      "rightInA": 3,
+      "rightInMode": 4,
+      "unresolvedInA": 0
+     }
+    },
+    "A->E_MARKED_ROI_PLUS_CROP_PLUS_OVERLAY": {
+     "transitions": {
+      "SAME": 24,
+      "WRONG->RIGHT": 4,
+      "RIGHT->WRONG": 2
+     },
+     "otherBreakdown": {},
+     "netRightChange": 2,
+     "changes": [
+      {
+       "qid": "005j:real-dom-w-cyklamenach-TERRACE_VS_BODY-0-NORMAL",
+       "set": "ROUND8_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-CANOPY_PERGOLA_VS_WALL-1-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-inset_upper-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-inset_upper-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-wing_storey-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-wing_storey-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": true
+      }
+     ],
+     "contextDependentOnly": {
+      "n": 6,
+      "rightInA": 3,
+      "rightInMode": 3,
+      "unresolvedInA": 0
+     }
+    }
+   }
+  },
+  "PHASE2": {
+   "internvl3.5-2b-instruct": {
+    "questions": 152,
+    "A->B_FULL_PLAN": {
+     "transitions": {
+      "SAME": 121,
+      "OTHER": 12,
+      "RIGHT->WRONG": 9,
+      "WRONG->UNRESOLVED": 7,
+      "WRONG->RIGHT": 2,
+      "UNRESOLVED->RIGHT": 1
+     },
+     "otherBreakdown": {
+      "RIGHT->UNRESOLVED": 6,
+      "WRONG->WRONG (other option)": 5,
+      "UNRESOLVED->WRONG": 1
+     },
+     "netRightChange": -12,
+     "changes": [
+      {
+       "qid": "005j:real-dom-w-arkadiach-BODY_REGION-3-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "BODY_REGION",
+       "from": "RIGHT",
+       "to": "UNRESOLVED",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-arkadiach-BODY_REGION-6-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "BODY_REGION",
+       "from": "RIGHT",
+       "to": "UNRESOLVED",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-arkadiach-TERRACE_VS_BODY-6-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-azaliach-BODY_REGION-7-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "BODY_REGION",
+       "from": "WRONG",
+       "to": "UNRESOLVED",
+       "kind": "WRONG->UNRESOLVED",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-azaliach-OUTER_BOUNDARY_A_OR_B-1-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "OUTER_BOUNDARY_A_OR_B",
+       "from": "WRONG",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-cyklamenach-TERRACE_VS_BODY-0-NORMAL",
+       "set": "ROUND8_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "WRONG",
+       "to": "UNRESOLVED",
+       "kind": "WRONG->UNRESOLVED",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-gozdzikowcach-OUTER_BOUNDARY_A_OR_B-1-MIRROR",
+       "set": "ROUND8_DEV",
+       "cls": "OUTER_BOUNDARY_A_OR_B",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-willa-miranda-CANOPY_PERGOLA_VS_WALL-0-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:terrace_vs_room-s0-A-NORMAL-q0",
+       "set": "SYNTH_CF",
+       "cls": "TERRACE_VS_BODY",
+       "from": "RIGHT",
+       "to": "UNRESOLVED",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:terrace_vs_room-s0-B-NORMAL-q0",
+       "set": "SYNTH_CF",
+       "cls": "TERRACE_VS_BODY",
+       "from": "WRONG",
+       "to": "UNRESOLVED",
+       "kind": "WRONG->UNRESOLVED",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q001",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q004",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q023",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q027",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q049",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q050",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q054",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:murajach-M1",
+       "set": "MURAJACH_DEV",
+       "cls": "WALL_CONTINUATION",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:murajach-M4",
+       "set": "MURAJACH_DEV",
+       "cls": "BODY_REGION",
+       "from": "RIGHT",
+       "to": "UNRESOLVED",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:murajach-M5",
+       "set": "MURAJACH_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "WRONG",
+       "to": "UNRESOLVED",
+       "kind": "WRONG->UNRESOLVED",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:storey-A07-S3",
+       "set": "STOREY_DEV",
+       "cls": "STOREY_COVERAGE",
+       "from": "WRONG",
+       "to": "UNRESOLVED",
+       "kind": "WRONG->UNRESOLVED",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-inset_upper-s1-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "RIGHT",
+       "to": "UNRESOLVED",
+       "kind": "OTHER",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-inset_upper-s2-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "RIGHT",
+       "to": "UNRESOLVED",
+       "kind": "OTHER",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-loggia_vs_room-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "LOGGIA_VS_ROOM",
+       "from": "UNRESOLVED",
+       "to": "RIGHT",
+       "kind": "UNRESOLVED->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-loggia_vs_room-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "LOGGIA_VS_ROOM",
+       "from": "UNRESOLVED",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-loggia_vs_room-s1-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "LOGGIA_VS_ROOM",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-loggia_vs_room-s1-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "LOGGIA_VS_ROOM",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-phantom_line-s1-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "GAP_KIND",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-phantom_line-s1-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-wing_storey-s0-A-NORMAL-q1",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "WRONG",
+       "to": "UNRESOLVED",
+       "kind": "WRONG->UNRESOLVED",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-wing_storey-s0-B-NORMAL-q1",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "WRONG",
+       "to": "UNRESOLVED",
+       "kind": "WRONG->UNRESOLVED",
+       "contextDependent": true
+      }
+     ],
+     "contextDependentOnly": {
+      "n": 23,
+      "rightInA": 5,
+      "rightInMode": 3,
+      "unresolvedInA": 14
+     }
+    },
+    "A->C_FULL_PLAN_MARKED_ROI": {
+     "transitions": {
+      "SAME": 133,
+      "WRONG->UNRESOLVED": 2,
+      "WRONG->RIGHT": 7,
+      "RIGHT->WRONG": 3,
+      "UNRESOLVED->RIGHT": 3,
+      "OTHER": 4
+     },
+     "otherBreakdown": {
+      "UNRESOLVED->WRONG": 4
+     },
+     "netRightChange": 7,
+     "changes": [
+      {
+       "qid": "005j:real-dom-w-arkadiach-CANOPY_PERGOLA_VS_WALL-0-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "WRONG",
+       "to": "UNRESOLVED",
+       "kind": "WRONG->UNRESOLVED",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-azaliach-BODY_REGION-7-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "BODY_REGION",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-azaliach-CANOPY_PERGOLA_VS_WALL-0-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-azaliach-TERRACE_VS_BODY-5-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-cyklamenach-OPENING_VS_PATTERN-0-NORMAL",
+       "set": "ROUND8_DEV",
+       "cls": "OPENING_VS_PATTERN",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-willa-miranda-CANOPY_PERGOLA_VS_WALL-0-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:terrace_vs_room-s0-B-NORMAL-q0",
+       "set": "SYNTH_CF",
+       "cls": "TERRACE_VS_BODY",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q036",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q050",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s0-A-MIRROR-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "UNRESOLVED",
+       "to": "RIGHT",
+       "kind": "UNRESOLVED->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "UNRESOLVED",
+       "to": "RIGHT",
+       "kind": "UNRESOLVED->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s0-B-MIRROR-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "UNRESOLVED",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "UNRESOLVED",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-inset_upper-s2-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "UNRESOLVED",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-loggia_vs_room-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "LOGGIA_VS_ROOM",
+       "from": "UNRESOLVED",
+       "to": "RIGHT",
+       "kind": "UNRESOLVED->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-loggia_vs_room-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "LOGGIA_VS_ROOM",
+       "from": "UNRESOLVED",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-loggia_vs_room-s1-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "LOGGIA_VS_ROOM",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-loggia_vs_room-s1-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "LOGGIA_VS_ROOM",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-wing_storey-s0-B-NORMAL-q1",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "WRONG",
+       "to": "UNRESOLVED",
+       "kind": "WRONG->UNRESOLVED",
+       "contextDependent": true
+      }
+     ],
+     "contextDependentOnly": {
+      "n": 23,
+      "rightInA": 5,
+      "rightInMode": 7,
+      "unresolvedInA": 14
+     }
+    },
+    "A->D_MARKED_ROI_PLUS_CROP": {
+     "transitions": {
+      "SAME": 133,
+      "WRONG->RIGHT": 6,
+      "RIGHT->WRONG": 3,
+      "UNRESOLVED->RIGHT": 4,
+      "OTHER": 6
+     },
+     "otherBreakdown": {
+      "UNRESOLVED->WRONG": 6
+     },
+     "netRightChange": 7,
+     "changes": [
+      {
+       "qid": "005j:real-dom-w-azaliach-BODY_REGION-7-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "BODY_REGION",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-azaliach-CANOPY_PERGOLA_VS_WALL-0-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-cyklamenach-OPENING_VS_PATTERN-0-NORMAL",
+       "set": "ROUND8_DEV",
+       "cls": "OPENING_VS_PATTERN",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-cyklamenach-OPENING_VS_PATTERN-1-NORMAL",
+       "set": "ROUND8_DEV",
+       "cls": "OPENING_VS_PATTERN",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-willa-miranda-CANOPY_PERGOLA_VS_WALL-0-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q036",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q050",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s0-A-MIRROR-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "UNRESOLVED",
+       "to": "RIGHT",
+       "kind": "UNRESOLVED->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "UNRESOLVED",
+       "to": "RIGHT",
+       "kind": "UNRESOLVED->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s0-B-MIRROR-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "UNRESOLVED",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "UNRESOLVED",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-inset_upper-s1-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "UNRESOLVED",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-inset_upper-s2-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "UNRESOLVED",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-loggia_vs_room-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "LOGGIA_VS_ROOM",
+       "from": "UNRESOLVED",
+       "to": "RIGHT",
+       "kind": "UNRESOLVED->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-loggia_vs_room-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "LOGGIA_VS_ROOM",
+       "from": "UNRESOLVED",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-loggia_vs_room-s1-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "LOGGIA_VS_ROOM",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-loggia_vs_room-s1-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "LOGGIA_VS_ROOM",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-wing_storey-s1-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "UNRESOLVED",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-wing_storey-s1-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "UNRESOLVED",
+       "to": "RIGHT",
+       "kind": "UNRESOLVED->RIGHT",
+       "contextDependent": true
+      }
+     ],
+     "contextDependentOnly": {
+      "n": 23,
+      "rightInA": 5,
+      "rightInMode": 8,
+      "unresolvedInA": 14
+     }
+    },
+    "A->E_MARKED_ROI_PLUS_CROP_PLUS_OVERLAY": {
+     "transitions": {
+      "OTHER": 8,
+      "UNRESOLVED->RIGHT": 10,
+      "SAME": 128,
+      "RIGHT->WRONG": 4,
+      "WRONG->RIGHT": 2
+     },
+     "otherBreakdown": {
+      "UNRESOLVED->WRONG": 7,
+      "RIGHT->UNRESOLVED": 1
+     },
+     "netRightChange": 7,
+     "changes": [
+      {
+       "qid": "005j:canopy_roofline-s0-A-NORMAL-q0",
+       "set": "SYNTH_CF",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "UNRESOLVED",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:canopy_roofline-s0-B-NORMAL-q0",
+       "set": "SYNTH_CF",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "UNRESOLVED",
+       "to": "RIGHT",
+       "kind": "UNRESOLVED->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-arkadiach-BODY_REGION-6-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "BODY_REGION",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-arkadiach-TERRACE_VS_BODY-6-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-azaliach-CANOPY_PERGOLA_VS_WALL-1-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "UNRESOLVED",
+       "to": "RIGHT",
+       "kind": "UNRESOLVED->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-azaliach-OPENING_VS_PATTERN-4-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "OPENING_VS_PATTERN",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-cyklamenach-OPENING_VS_PATTERN-1-NORMAL",
+       "set": "ROUND8_DEV",
+       "cls": "OPENING_VS_PATTERN",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-CANOPY_PERGOLA_VS_WALL-1-MIRROR",
+       "set": "REAL_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "UNRESOLVED",
+       "to": "RIGHT",
+       "kind": "UNRESOLVED->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-CANOPY_PERGOLA_VS_WALL-1-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "UNRESOLVED",
+       "to": "RIGHT",
+       "kind": "UNRESOLVED->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-willa-miranda-CANOPY_PERGOLA_VS_WALL-0-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-willa-miranda-CANOPY_PERGOLA_VS_WALL-2-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "UNRESOLVED",
+       "to": "RIGHT",
+       "kind": "UNRESOLVED->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:murajach-M8",
+       "set": "MURAJACH_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "UNRESOLVED",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:storey-A06-S2",
+       "set": "STOREY_DEV",
+       "cls": "STOREY_COVERAGE",
+       "from": "UNRESOLVED",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s0-A-MIRROR-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "UNRESOLVED",
+       "to": "RIGHT",
+       "kind": "UNRESOLVED->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "UNRESOLVED",
+       "to": "RIGHT",
+       "kind": "UNRESOLVED->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s0-B-MIRROR-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "UNRESOLVED",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "UNRESOLVED",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-inset_upper-s1-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "RIGHT",
+       "to": "UNRESOLVED",
+       "kind": "OTHER",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-inset_upper-s2-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "UNRESOLVED",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-loggia_vs_room-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "LOGGIA_VS_ROOM",
+       "from": "UNRESOLVED",
+       "to": "RIGHT",
+       "kind": "UNRESOLVED->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-loggia_vs_room-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "LOGGIA_VS_ROOM",
+       "from": "UNRESOLVED",
+       "to": "RIGHT",
+       "kind": "UNRESOLVED->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-loggia_vs_room-s1-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "LOGGIA_VS_ROOM",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-wing_storey-s1-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "UNRESOLVED",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-wing_storey-s1-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "UNRESOLVED",
+       "to": "RIGHT",
+       "kind": "UNRESOLVED->RIGHT",
+       "contextDependent": true
+      }
+     ],
+     "contextDependentOnly": {
+      "n": 23,
+      "rightInA": 5,
+      "rightInMode": 7,
+      "unresolvedInA": 14
+     }
+    }
+   },
+   "qwen3-vl-4b": {
+    "questions": 152,
+    "A->B_FULL_PLAN": {
+     "transitions": {
+      "SAME": 102,
+      "RIGHT->WRONG": 23,
+      "WRONG->RIGHT": 13,
+      "WRONG->UNRESOLVED": 7,
+      "OTHER": 6,
+      "UNRESOLVED->RIGHT": 1
+     },
+     "otherBreakdown": {
+      "WRONG->WRONG (other option)": 3,
+      "RIGHT->UNRESOLVED": 2,
+      "UNRESOLVED->WRONG": 1
+     },
+     "netRightChange": -11,
+     "changes": [
+      {
+       "qid": "005j:garage_door_vs_open-s0-A-NORMAL-q0",
+       "set": "SYNTH_CF",
+       "cls": "WALL_CONTINUATION",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:garage_door_vs_open-s0-B-NORMAL-q0",
+       "set": "SYNTH_CF",
+       "cls": "WALL_CONTINUATION",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:podcien-s0-A-NORMAL-q0",
+       "set": "SYNTH_CF",
+       "cls": "BODY_REGION",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:porch_recess-s0-A-NORMAL-q0",
+       "set": "SYNTH_CF",
+       "cls": "WALL_CONTINUATION",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:porch_recess-s0-B-NORMAL-q0",
+       "set": "SYNTH_CF",
+       "cls": "WALL_CONTINUATION",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-arkadiach-OPENING_VS_PATTERN-0-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "OPENING_VS_PATTERN",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-arkadiach-TERRACE_VS_BODY-6-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-azaliach-OUTER_BOUNDARY_A_OR_B-1-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "OUTER_BOUNDARY_A_OR_B",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-cyklamenach-OPENING_VS_PATTERN-0-NORMAL",
+       "set": "ROUND8_DEV",
+       "cls": "OPENING_VS_PATTERN",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-cyklamenach-OPENING_VS_PATTERN-1-NORMAL",
+       "set": "ROUND8_DEV",
+       "cls": "OPENING_VS_PATTERN",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-cyklamenach-OUTER_BOUNDARY_A_OR_B-1-NORMAL",
+       "set": "ROUND8_DEV",
+       "cls": "OUTER_BOUNDARY_A_OR_B",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-cyklamenach-TERRACE_VS_BODY-0-MIRROR",
+       "set": "ROUND8_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-cyklamenach-TERRACE_VS_BODY-0-NORMAL",
+       "set": "ROUND8_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-gozdzikowcach-OUTER_BOUNDARY_A_OR_B-0-NORMAL",
+       "set": "ROUND8_DEV",
+       "cls": "OUTER_BOUNDARY_A_OR_B",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-gozdzikowcach-OUTER_BOUNDARY_A_OR_B-1-MIRROR",
+       "set": "ROUND8_DEV",
+       "cls": "OUTER_BOUNDARY_A_OR_B",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-BODY_REGION-5-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "BODY_REGION",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-OPENING_VS_PATTERN-8-MIRROR",
+       "set": "REAL_DEV",
+       "cls": "OPENING_VS_PATTERN",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-OPENING_VS_PATTERN-8-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "OPENING_VS_PATTERN",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-OUTER_BOUNDARY_A_OR_B-0-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "OUTER_BOUNDARY_A_OR_B",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-OUTER_BOUNDARY_A_OR_B-1-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "OUTER_BOUNDARY_A_OR_B",
+       "from": "WRONG",
+       "to": "UNRESOLVED",
+       "kind": "WRONG->UNRESOLVED",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-TERRACE_VS_BODY-4-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-willa-miranda-BODY_REGION-6-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "BODY_REGION",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-willa-miranda-OPENING_VS_PATTERN-9-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "OPENING_VS_PATTERN",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-willa-miranda-OUTER_BOUNDARY_A_OR_B-0-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "OUTER_BOUNDARY_A_OR_B",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-willa-miranda-TERRACE_VS_BODY-3-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q001",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q004",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q009",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q011",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q023",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "UNRESOLVED",
+       "kind": "WRONG->UNRESOLVED",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q028",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "UNRESOLVED",
+       "kind": "WRONG->UNRESOLVED",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q029",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q036",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "UNRESOLVED",
+       "kind": "WRONG->UNRESOLVED",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q050",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "RIGHT",
+       "to": "UNRESOLVED",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q051",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q054",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "RIGHT",
+       "to": "UNRESOLVED",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q056",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:murajach-M2",
+       "set": "MURAJACH_DEV",
+       "cls": "GAP_KIND",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:murajach-M5",
+       "set": "MURAJACH_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s0-A-MIRROR-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s0-B-MIRROR-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-inset_upper-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "WRONG",
+       "to": "UNRESOLVED",
+       "kind": "WRONG->UNRESOLVED",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-loggia_vs_room-s1-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "LOGGIA_VS_ROOM",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-phantom_line-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "UNRESOLVED",
+       "kind": "WRONG->UNRESOLVED",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-phantom_line-s1-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-phantom_line-s1-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "UNRESOLVED",
+       "kind": "WRONG->UNRESOLVED",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-wing_storey-s2-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "UNRESOLVED",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-wing_storey-s2-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "UNRESOLVED",
+       "to": "RIGHT",
+       "kind": "UNRESOLVED->RIGHT",
+       "contextDependent": true
+      }
+     ],
+     "contextDependentOnly": {
+      "n": 23,
+      "rightInA": 10,
+      "rightInMode": 11,
+      "unresolvedInA": 2
+     }
+    },
+    "A->C_FULL_PLAN_MARKED_ROI": {
+     "transitions": {
+      "SAME": 129,
+      "WRONG->RIGHT": 14,
+      "RIGHT->WRONG": 6,
+      "OTHER": 2,
+      "UNRESOLVED->RIGHT": 1
+     },
+     "otherBreakdown": {
+      "WRONG->WRONG (other option)": 1,
+      "UNRESOLVED->WRONG": 1
+     },
+     "netRightChange": 9,
+     "changes": [
+      {
+       "qid": "005j:real-dom-w-azaliach-OPENING_VS_PATTERN-4-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "OPENING_VS_PATTERN",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-azaliach-OUTER_BOUNDARY_A_OR_B-1-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "OUTER_BOUNDARY_A_OR_B",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-OUTER_BOUNDARY_A_OR_B-0-MIRROR",
+       "set": "REAL_DEV",
+       "cls": "OUTER_BOUNDARY_A_OR_B",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-willa-miranda-OUTER_BOUNDARY_A_OR_B-0-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "OUTER_BOUNDARY_A_OR_B",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:terrace_vs_room-s0-A-NORMAL-q0",
+       "set": "SYNTH_CF",
+       "cls": "TERRACE_VS_BODY",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q004",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q009",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q011",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q022",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q027",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q049",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q051",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q056",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:murajach-M5",
+       "set": "MURAJACH_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:murajach-M7",
+       "set": "MURAJACH_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:storey-A06-S1",
+       "set": "STOREY_DEV",
+       "cls": "STOREY_COVERAGE",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-loggia_vs_room-s1-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "LOGGIA_VS_ROOM",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-loggia_vs_room-s1-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "LOGGIA_VS_ROOM",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-phantom_line-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-phantom_line-s1-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-phantom_line-s1-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-wing_storey-s2-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "UNRESOLVED",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-wing_storey-s2-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "UNRESOLVED",
+       "to": "RIGHT",
+       "kind": "UNRESOLVED->RIGHT",
+       "contextDependent": true
+      }
+     ],
+     "contextDependentOnly": {
+      "n": 23,
+      "rightInA": 10,
+      "rightInMode": 11,
+      "unresolvedInA": 2
+     }
+    },
+    "A->D_MARKED_ROI_PLUS_CROP": {
+     "transitions": {
+      "SAME": 132,
+      "WRONG->RIGHT": 10,
+      "RIGHT->WRONG": 5,
+      "OTHER": 4,
+      "UNRESOLVED->RIGHT": 1
+     },
+     "otherBreakdown": {
+      "WRONG->WRONG (other option)": 2,
+      "UNRESOLVED->WRONG": 2
+     },
+     "netRightChange": 6,
+     "changes": [
+      {
+       "qid": "005j:real-dom-w-azaliach-OPENING_VS_PATTERN-4-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "OPENING_VS_PATTERN",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-azaliach-OUTER_BOUNDARY_A_OR_B-1-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "OUTER_BOUNDARY_A_OR_B",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-OUTER_BOUNDARY_A_OR_B-0-MIRROR",
+       "set": "REAL_DEV",
+       "cls": "OUTER_BOUNDARY_A_OR_B",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-willa-miranda-CANOPY_PERGOLA_VS_WALL-0-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-willa-miranda-OUTER_BOUNDARY_A_OR_B-0-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "OUTER_BOUNDARY_A_OR_B",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:terrace_vs_room-s0-A-NORMAL-q0",
+       "set": "SYNTH_CF",
+       "cls": "TERRACE_VS_BODY",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q009",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q011",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q022",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q027",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q036",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q049",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q056",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:murajach-M5",
+       "set": "MURAJACH_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:murajach-M7",
+       "set": "MURAJACH_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-loggia_vs_room-s1-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "LOGGIA_VS_ROOM",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-phantom_line-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-phantom_line-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "GAP_KIND",
+       "from": "UNRESOLVED",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-wing_storey-s2-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "UNRESOLVED",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-wing_storey-s2-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "UNRESOLVED",
+       "to": "RIGHT",
+       "kind": "UNRESOLVED->RIGHT",
+       "contextDependent": true
+      }
+     ],
+     "contextDependentOnly": {
+      "n": 23,
+      "rightInA": 10,
+      "rightInMode": 11,
+      "unresolvedInA": 2
+     }
+    },
+    "A->E_MARKED_ROI_PLUS_CROP_PLUS_OVERLAY": {
+     "transitions": {
+      "RIGHT->WRONG": 9,
+      "WRONG->RIGHT": 11,
+      "SAME": 127,
+      "OTHER": 4,
+      "UNRESOLVED->RIGHT": 1
+     },
+     "otherBreakdown": {
+      "WRONG->WRONG (other option)": 2,
+      "UNRESOLVED->WRONG": 2
+     },
+     "netRightChange": 3,
+     "changes": [
+      {
+       "qid": "005j:canopy_roofline-s0-A-NORMAL-q0",
+       "set": "SYNTH_CF",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:canopy_roofline-s0-B-NORMAL-q0",
+       "set": "SYNTH_CF",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:glazing_terrace-s0-A-NORMAL-q0",
+       "set": "SYNTH_CF",
+       "cls": "OPENING_VS_PATTERN",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:glazing_terrace-s0-B-NORMAL-q0",
+       "set": "SYNTH_CF",
+       "cls": "OPENING_VS_PATTERN",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-azaliach-OPENING_VS_PATTERN-4-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "OPENING_VS_PATTERN",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-OUTER_BOUNDARY_A_OR_B-0-MIRROR",
+       "set": "REAL_DEV",
+       "cls": "OUTER_BOUNDARY_A_OR_B",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-willa-miranda-BODY_REGION-6-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "BODY_REGION",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-willa-miranda-CANOPY_PERGOLA_VS_WALL-0-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-willa-miranda-TERRACE_VS_BODY-3-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q009",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q011",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q022",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q027",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q036",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q049",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q051",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q056",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:murajach-M5",
+       "set": "MURAJACH_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:murajach-M7",
+       "set": "MURAJACH_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-loggia_vs_room-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "LOGGIA_VS_ROOM",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-loggia_vs_room-s1-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "LOGGIA_VS_ROOM",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-phantom_line-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-phantom_line-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "GAP_KIND",
+       "from": "UNRESOLVED",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-wing_storey-s2-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "UNRESOLVED",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-wing_storey-s2-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "UNRESOLVED",
+       "to": "RIGHT",
+       "kind": "UNRESOLVED->RIGHT",
+       "contextDependent": true
+      }
+     ],
+     "contextDependentOnly": {
+      "n": 23,
+      "rightInA": 10,
+      "rightInMode": 11,
+      "unresolvedInA": 2
+     }
+    }
+   },
+   "qwen3-vl-2b": {
+    "questions": 152,
+    "A->B_FULL_PLAN": {
+     "transitions": {
+      "SAME": 117,
+      "WRONG->RIGHT": 12,
+      "RIGHT->WRONG": 18,
+      "OTHER": 5
+     },
+     "otherBreakdown": {
+      "WRONG->WRONG (other option)": 5
+     },
+     "netRightChange": -6,
+     "changes": [
+      {
+       "qid": "005j:podcien-s0-A-NORMAL-q0",
+       "set": "SYNTH_CF",
+       "cls": "BODY_REGION",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-arkadiach-BODY_REGION-3-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "BODY_REGION",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-arkadiach-TERRACE_VS_BODY-1-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-azaliach-TERRACE_VS_BODY-0-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-cyklamenach-OUTER_BOUNDARY_A_OR_B-1-NORMAL",
+       "set": "ROUND8_DEV",
+       "cls": "OUTER_BOUNDARY_A_OR_B",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-gozdzikowcach-OUTER_BOUNDARY_A_OR_B-0-NORMAL",
+       "set": "ROUND8_DEV",
+       "cls": "OUTER_BOUNDARY_A_OR_B",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-BODY_REGION-5-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "BODY_REGION",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-CANOPY_PERGOLA_VS_WALL-1-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-OUTER_BOUNDARY_A_OR_B-0-MIRROR",
+       "set": "REAL_DEV",
+       "cls": "OUTER_BOUNDARY_A_OR_B",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-OUTER_BOUNDARY_A_OR_B-0-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "OUTER_BOUNDARY_A_OR_B",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-TERRACE_VS_BODY-4-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-willa-miranda-BODY_REGION-2-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "BODY_REGION",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q001",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q004",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q027",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q029",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q049",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:murajach-M5",
+       "set": "MURAJACH_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:murajach-M8",
+       "set": "MURAJACH_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:storey-A06-S2",
+       "set": "STOREY_DEV",
+       "cls": "STOREY_COVERAGE",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:storey-A07-S3",
+       "set": "STOREY_DEV",
+       "cls": "STOREY_COVERAGE",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s0-B-MIRROR-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s1-A-ROT90-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s2-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-inset_upper-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-inset_upper-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-loggia_vs_room-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "LOGGIA_VS_ROOM",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-loggia_vs_room-s1-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "LOGGIA_VS_ROOM",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-phantom_line-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "GAP_KIND",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-phantom_line-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-phantom_line-s1-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "GAP_KIND",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-phantom_line-s1-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-wing_storey-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-wing_storey-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-wing_storey-s2-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": true
+      }
+     ],
+     "contextDependentOnly": {
+      "n": 23,
+      "rightInA": 10,
+      "rightInMode": 12,
+      "unresolvedInA": 0
+     }
+    },
+    "A->C_FULL_PLAN_MARKED_ROI": {
+     "transitions": {
+      "SAME": 133,
+      "WRONG->RIGHT": 9,
+      "RIGHT->WRONG": 9,
+      "OTHER": 1
+     },
+     "otherBreakdown": {
+      "WRONG->WRONG (other option)": 1
+     },
+     "netRightChange": 0,
+     "changes": [
+      {
+       "qid": "005j:podcien-s0-A-NORMAL-q0",
+       "set": "SYNTH_CF",
+       "cls": "BODY_REGION",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:podcien-s0-B-NORMAL-q0",
+       "set": "SYNTH_CF",
+       "cls": "BODY_REGION",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-cyklamenach-TERRACE_VS_BODY-0-MIRROR",
+       "set": "ROUND8_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-cyklamenach-TERRACE_VS_BODY-0-NORMAL",
+       "set": "ROUND8_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-gozdzikowcach-TERRACE_VS_BODY-0-NORMAL",
+       "set": "ROUND8_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-CANOPY_PERGOLA_VS_WALL-1-MIRROR",
+       "set": "REAL_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-CANOPY_PERGOLA_VS_WALL-1-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-willa-miranda-CANOPY_PERGOLA_VS_WALL-0-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:terrace_vs_room-s0-A-NORMAL-q0",
+       "set": "SYNTH_CF",
+       "cls": "TERRACE_VS_BODY",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q029",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "WRONG",
+       "kind": "OTHER",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:murajach-M7",
+       "set": "MURAJACH_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:murajach-M8",
+       "set": "MURAJACH_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:storey-A06-S2",
+       "set": "STOREY_DEV",
+       "cls": "STOREY_COVERAGE",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s1-A-ROT90-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-inset_upper-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-inset_upper-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-loggia_vs_room-s1-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "LOGGIA_VS_ROOM",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-wing_storey-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-wing_storey-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": true
+      }
+     ],
+     "contextDependentOnly": {
+      "n": 23,
+      "rightInA": 10,
+      "rightInMode": 11,
+      "unresolvedInA": 0
+     }
+    },
+    "A->D_MARKED_ROI_PLUS_CROP": {
+     "transitions": {
+      "SAME": 136,
+      "WRONG->RIGHT": 11,
+      "RIGHT->WRONG": 5
+     },
+     "otherBreakdown": {},
+     "netRightChange": 6,
+     "changes": [
+      {
+       "qid": "005j:podcien-s0-A-NORMAL-q0",
+       "set": "SYNTH_CF",
+       "cls": "BODY_REGION",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-cyklamenach-TERRACE_VS_BODY-0-MIRROR",
+       "set": "ROUND8_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-cyklamenach-TERRACE_VS_BODY-0-NORMAL",
+       "set": "ROUND8_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-gozdzikowcach-TERRACE_VS_BODY-0-NORMAL",
+       "set": "ROUND8_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-CANOPY_PERGOLA_VS_WALL-1-MIRROR",
+       "set": "REAL_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-CANOPY_PERGOLA_VS_WALL-1-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:terrace_vs_room-s0-A-NORMAL-q0",
+       "set": "SYNTH_CF",
+       "cls": "TERRACE_VS_BODY",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005k:q051",
+       "set": "GAPSET_DEV",
+       "cls": "GAP_KIND",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:murajach-M7",
+       "set": "MURAJACH_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:storey-A06-S2",
+       "set": "STOREY_DEV",
+       "cls": "STOREY_COVERAGE",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s1-A-ROT90-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-inset_upper-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-inset_upper-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-loggia_vs_room-s1-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "LOGGIA_VS_ROOM",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-wing_storey-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-wing_storey-s2-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": true
+      }
+     ],
+     "contextDependentOnly": {
+      "n": 23,
+      "rightInA": 10,
+      "rightInMode": 13,
+      "unresolvedInA": 0
+     }
+    },
+    "A->E_MARKED_ROI_PLUS_CROP_PLUS_OVERLAY": {
+     "transitions": {
+      "SAME": 136,
+      "RIGHT->WRONG": 8,
+      "WRONG->RIGHT": 8
+     },
+     "otherBreakdown": {},
+     "netRightChange": 0,
+     "changes": [
+      {
+       "qid": "005j:real-dom-w-arkadiach-TERRACE_VS_BODY-1-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-azaliach-CANOPY_PERGOLA_VS_WALL-0-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-cyklamenach-TERRACE_VS_BODY-0-MIRROR",
+       "set": "ROUND8_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-cyklamenach-TERRACE_VS_BODY-0-NORMAL",
+       "set": "ROUND8_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-gozdzikowcach-TERRACE_VS_BODY-0-NORMAL",
+       "set": "ROUND8_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:real-dom-w-morelach-CANOPY_PERGOLA_VS_WALL-1-NORMAL",
+       "set": "REAL_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005j:terrace_vs_room-s0-A-NORMAL-q0",
+       "set": "SYNTH_CF",
+       "cls": "TERRACE_VS_BODY",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:murajach-M7",
+       "set": "MURAJACH_DEV",
+       "cls": "TERRACE_VS_BODY",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:murajach-M8",
+       "set": "MURAJACH_DEV",
+       "cls": "CANOPY_PERGOLA_VS_WALL",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:storey-A06-S2",
+       "set": "STOREY_DEV",
+       "cls": "STOREY_COVERAGE",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-corridor_vs_passage-s1-A-ROT90-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "BODY_REGION",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-inset_upper-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-inset_upper-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-loggia_vs_room-s1-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "LOGGIA_VS_ROOM",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": false
+      },
+      {
+       "qid": "005m:test-wing_storey-s0-A-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "WRONG",
+       "to": "RIGHT",
+       "kind": "WRONG->RIGHT",
+       "contextDependent": true
+      },
+      {
+       "qid": "005m:test-wing_storey-s0-B-NORMAL-q0",
+       "set": "SYNTH_GLOBAL",
+       "cls": "STOREY_COVERAGE",
+       "from": "RIGHT",
+       "to": "WRONG",
+       "kind": "RIGHT->WRONG",
+       "contextDependent": true
+      }
+     ],
+     "contextDependentOnly": {
+      "n": 23,
+      "rightInA": 10,
+      "rightInMode": 11,
+      "unresolvedInA": 0
+     }
+    }
+   }
+  }
+ }
+}

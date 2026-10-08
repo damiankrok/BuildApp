@@ -172,6 +172,10 @@ def main():
             L.append(f"| {label} | {len(recs)} | {load if mode == MODES[0] else ''} | {mode[0]} | {w[len(w) // 2] / 1000:.1f} s | {w[int(len(w) * 0.9)] / 1000:.1f} s | {sa} | {tok} |")
         anon = [((r.get('rss') or {}).get('RssAnon') or 0) for r in recs]
         mem[label] = (anon[0] if anon else 0, max(anon) if anon else 0, path)
+    L += ['', '"load" is the time to the server\'s "model loaded" line in the last server log of the run. It measures the storage '
+          'here, not the model. Two runs were resumed after a container restart: Qwen3-VL-4B from freshly downloaded tmpfs files, '
+          'and InternVL3.5-2B from its GGUF on disk with an empty page cache (2.8 GB read cold). Warm loads from tmpfs were '
+          '3.9–4.7 s for every model.', '']
     L += ['', '**Cost per token on this CPU** (least squares over cold records: prompt ms = a × image tokens + b × text tokens)', '',
           '| model | run file | cold records | a: ms per image token | b: ms per text token | R² | image share of a 776 + 190-token mode-D prompt |',
           '| --- | --- | --- | --- | --- | --- | --- |']
