@@ -1,0 +1,66 @@
+{
+ "acceptedBands": 35,
+ "cmPerPx": 2.9061,
+ "doorClosesOnlyBySemanticGapDecision": true,
+ "frame": "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
+ "gapsM": {
+  "door_hole_rearW_to_rearE": 4.01,
+  "rearE_eastEnd_to_coreE": 1.215,
+  "rearE_to_pergolaE": 1.59,
+  "rearW_to_pergolaW": 1.592,
+  "rearW_westEnd_to_coreW": 1.21,
+  "wingE_westEnd_to_coreE": 0.411,
+  "wingW_eastEnd_to_coreW": 0.634
+ },
+ "gapsPx": {
+  "door_hole_rearW_to_rearE": 138,
+  "rearE_eastEnd_to_coreE": 41.8,
+  "rearE_to_pergolaE": 54.73,
+  "rearW_to_pergolaW": 54.78,
+  "rearW_westEnd_to_coreW": 41.65,
+  "wingE_westEnd_to_coreE": 14.15,
+  "wingW_eastEnd_to_coreW": 21.83
+ },
+ "piers": {
+  "pier-E": {
+   "box": [
+    589,
+    194,
+    605,
+    243
+   ],
+   "darkShare": 1.0,
+   "inAcceptedBands": false
+  },
+  "pier-W": {
+   "box": [
+    370,
+    194,
+    386,
+    243
+   ],
+   "darkShare": 1.0,
+   "inAcceptedBands": false
+  }
+ },
+ "rasterSha256": "4180d9fb64c0e173a5dbd1d99ebb13f8bdda3430d53aa1bf7b8f70e24348f3f9",
+ "schema": "buildapp.005o.akebiach-topology",
+ "snapAtWhichPergolaJoinsPx": 54.73,
+ "snapToCloseProjectionPx": 41.8,
+ "snapWindowPx": [
+  41.8,
+  54.73
+ ],
+ "snapWindowWalls": [
+  2.61,
+  3.42
+ ],
+ "toleranciesInUsePx": {
+  "cornerJoinedReach": 24,
+  "decomposition_0.6wall": 9.6,
+  "outline": 4
+ },
+ "verdict": "NO_KERNEL_BOTTLENECK",
+ "wallPx": 16,
+ "why": "every junction touches in the ink (piers dark in the source) but the piers are missing from the accepted band set (a band-extraction miss upstream of any graph); a noder closes the projection only with a snap above every tolerance in use and inside a window one house wide below the pergola false closure, and even then only if the 4.01 m door - a 138 px hole in the rear wall - is first classified as a closing segment, which is a semantic gap decision no kernel makes"
+}

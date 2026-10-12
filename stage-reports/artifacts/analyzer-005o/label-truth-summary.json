@@ -1,0 +1,22 @@
+{
+ "agreedIntegerCm": 782,
+ "controlBothWrongSameValue": 0,
+ "controls": {
+  "A_correct": 102,
+  "A_wrong": 2,
+  "B_correct": 101,
+  "B_wrong": 3
+ },
+ "crops": 932,
+ "method": "blind double transcription of statement crops (two independent transcribers per sheet, no reader output shown, houses shuffled across sheets); truth = exact agreement",
+ "schema": "buildapp.005o.label-truth-summary",
+ "status": {
+  "AGREED": 785,
+  "NOT_A_LABEL": 129,
+  "UNCERTAIN": 18
+ },
+ "transcriberControlAccuracy": {
+  "A": 0.9808,
+  "B": 0.9712
+ }
+}

@@ -461,3 +461,51 @@ describe('005M production cannot reach the visual-referee v2 bake-off, and no we
     expect(filesUnder('apps/android/app/src/main/assets', /.*/).filter((a) => HARNESS.test(a) || WEIGHT_EXT.test(a))).toEqual([])
   })
 })
+
+/**
+ * BUILDPLAN-ANALYZER-005O — the metric-evidence bake-off is research. Its harness (`research/analyzer-005o/`) swaps a
+ * copy of `plan-resolution.ts` in for one replay process (a Vite alias written OUTSIDE the repository), re-reads label
+ * crops with the deployed recogniser, and scores challengers against blind transcriptions — all on publisher drawings
+ * read locally. Production cannot reach it, it adds no dependency, and it commits no pixel; its challenger generator is
+ * held by its own adversarial corpus and mutation controls (`test_views.py`), run here.
+ */
+describe('005O production cannot reach the metric bake-off, and the bake-off commits no pixels', () => {
+  const HARNESS = /research\/analyzer-005o|as-printed-harness|AS_PRINTED_VIEW_005O|as_printed_views/i
+
+  it('no production source imports research/analyzer-005o or names its harness', () => {
+    const offenders: string[] = []
+    for (const f of productionSources()) {
+      const text = read(f)
+      for (const spec of importsOf(text)) if (/analyzer-005o/.test(spec)) offenders.push(`${f} imports ${spec}`)
+      if (HARNESS.test(codeOf(text))) offenders.push(`${f} names the 005O harness`)
+    }
+    expect(offenders).toEqual([])
+  })
+
+  it('the 005O harness and artifacts track only code and text — no crop, sheet, page, model or archive', () => {
+    const tracked = execFileSync('git', ['ls-files'], { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(Boolean)
+    const harness = tracked.filter((f) => f.startsWith('research/analyzer-005o/') || f.startsWith('stage-reports/artifacts/analyzer-005o/'))
+    expect(harness.length).toBeGreaterThan(0)
+    expect(harness.filter((f) => !/\.(py|ts|mjs|json|md)$/i.test(f))).toEqual([])
+    for (const f of harness) {
+      const text = read(f)
+      expect(text, f).not.toMatch(/(data:(image|application)\/[\w.+-]+;base64,|iVBORw0KGgo|\/9j\/4|UklGR|R0lGOD)[A-Za-z0-9+/]{40,}/)
+      expect(text, f).not.toMatch(/[A-Za-z0-9+/]{256,}={0,2}/)
+      expect(text, f).not.toMatch(/\[(\s*-?\d+(\.\d+)?\s*,){64,}/)
+      expect(statSync(join(ROOT, f)).size, f).toBeLessThanOrEqual(4 * 2 ** 20)
+    }
+  })
+
+  it('the harness writes its module swap and every publisher-derived file outside the repository', () => {
+    const harness = read('research/analyzer-005o/as-printed-harness.mjs')
+    expect(codeOf(harness)).toMatch(/work\.startsWith\(REPO\)\) throw/)
+    for (const f of ['statement_crops.py', 'label_sheets.py', 'reread.ts', 'glyph_corpus.py']) expect(read(`research/analyzer-005o/${f}`), f).toMatch(/outside\s+the\s+repository|no\s+pixel\s+is\s+written/i)
+  })
+
+  it('the challenger generator passes its adversarial corpus and every deliberately broken generator is caught', () => {
+    const out = execFileSync('python3', ['-I', join(ROOT, 'research/analyzer-005o/test_views.py')], { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] })
+    expect(out).toMatch(/corpus: \d+ cases, PASS/)
+    expect(out).not.toMatch(/SURVIVED/)
+    expect((out.match(/KILLED/g) ?? []).length).toBe(4)
+  })
+})

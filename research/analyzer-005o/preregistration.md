@@ -165,3 +165,20 @@ CPU. M1b re-read ≤ 300 crops. Transcription: 26 sheets × 2 transcribers. The 
 experiment if, and only if, the first-bad trace demonstrates a low-level noding/polygonization/boolean operation on the
 accepted line set (JSTS / Clipper2 / polygon-clipping pinned in a scratch directory outside the repository, never in a
 `package.json`); otherwise `NO_KERNEL_BOTTLENECK` with the measured reason.
+
+## Addendum A (committed before it was computed) — M4-diag, orientation by the reader's own posterior
+
+Motivation (Phase A, measured before this addendum): on `dom-w-murajach` the metric layer refuses
+(`METRIC_RESOLUTION_INCONCLUSIVE`); the as-printed seam of M1–M3 is downstream of that refusal and cannot move it. The
+read-only trace found its first bad operation in the metric solver's vertical-chain orientation decision: chain `v49`
+(the 740 overall, PRIMARY over 476 px) was decided `ROTATED_CCW` by the `UNDECIDED` legacy fallback although the deployed
+reader read the CW crop as 740 at p 0.99991 (stable, LEADS) and the CCW crop as junk at p ≤ 0.46.
+
+**M4-diag is a decision-level diagnostic, not an end-to-end challenger** (no metric re-solve is run in 005O). For every
+recorded orientation decision on a chain whose two candidate orientations are the quarter turns, it counts the
+dimension observations on that chain whose ensemble reading is corroborating (`AGREES`, `LEADS`, or `CONTESTS` with an
+EXTERNAL rival) in each orientation. Rule: corroborating readings in exactly one orientation → that orientation;
+otherwise no decision (the incumbent's stands). Scored against the transcription truth's own orientation (a statement
+crop cut in the token's orientation that both transcribers read upside down means the token's orientation was wrong).
+Reported: decisions changed, changed-and-right, changed-and-wrong (false confident orientation), per family. No
+adoption claim is possible from it; at most it names the next stage's question.

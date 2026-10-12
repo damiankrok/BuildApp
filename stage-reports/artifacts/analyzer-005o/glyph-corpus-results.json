@@ -1,0 +1,906 @@
+{
+ "byFamily": {
+  "F1-dejavu-sans": {
+   "ensembleConfidentWrong": [
+    0,
+    57
+   ],
+   "exact_ensemble": [
+    57,
+    0.95,
+    [
+     0.863,
+     0.9829
+    ]
+   ],
+   "exact_externalTop": [
+    60,
+    1.0,
+    [
+     0.9398,
+     1.0
+    ]
+   ],
+   "exact_lattice": [
+    34,
+    0.5667,
+    [
+     0.441,
+     0.6843
+    ]
+   ],
+   "exact_token": [
+    21,
+    0.35,
+    [
+     0.2417,
+     0.4764
+    ]
+   ],
+   "externalCorroboratingWrong": [
+    0,
+    60
+   ],
+   "frozenTokenAsPrinted": {
+    "ABSTAIN": 6,
+    "CORRECT": 21,
+    "WRONG": 33,
+    "wrongCI": [
+     0.4249,
+     0.6691
+    ],
+    "wrongWhenStated": 0.6111
+   },
+   "latticeConfidentWrong": [
+    3,
+    17
+   ],
+   "m1": {
+    "ABSTAIN": 33,
+    "CORRECT": 27,
+    "WRONG": 0,
+    "wrongCI": [
+     -0.0,
+     0.0602
+    ],
+    "wrongWhenStated": 0.0
+   },
+   "n": 60,
+   "topKRecall": [
+    60,
+    60
+   ]
+  },
+  "F2-liberation-sans": {
+   "ensembleConfidentWrong": [
+    0,
+    55
+   ],
+   "exact_ensemble": [
+    55,
+    0.9167,
+    [
+     0.8193,
+     0.9639
+    ]
+   ],
+   "exact_externalTop": [
+    60,
+    1.0,
+    [
+     0.9398,
+     1.0
+    ]
+   ],
+   "exact_lattice": [
+    28,
+    0.4667,
+    [
+     0.3463,
+     0.5911
+    ]
+   ],
+   "exact_token": [
+    22,
+    0.3667,
+    [
+     0.2562,
+     0.4932
+    ]
+   ],
+   "externalCorroboratingWrong": [
+    0,
+    60
+   ],
+   "frozenTokenAsPrinted": {
+    "ABSTAIN": 9,
+    "CORRECT": 22,
+    "WRONG": 29,
+    "wrongCI": [
+     0.3617,
+     0.6069
+    ],
+    "wrongWhenStated": 0.5686
+   },
+   "latticeConfidentWrong": [
+    5,
+    25
+   ],
+   "m1": {
+    "ABSTAIN": 29,
+    "CORRECT": 31,
+    "WRONG": 0,
+    "wrongCI": [
+     -0.0,
+     0.0602
+    ],
+    "wrongWhenStated": 0.0
+   },
+   "n": 60,
+   "topKRecall": [
+    60,
+    60
+   ]
+  },
+  "F3-freesans-oblique": {
+   "ensembleConfidentWrong": [
+    0,
+    58
+   ],
+   "exact_ensemble": [
+    58,
+    0.9667,
+    [
+     0.8864,
+     0.9908
+    ]
+   ],
+   "exact_externalTop": [
+    60,
+    1.0,
+    [
+     0.9398,
+     1.0
+    ]
+   ],
+   "exact_lattice": [
+    35,
+    0.5833,
+    [
+     0.4573,
+     0.6994
+    ]
+   ],
+   "exact_token": [
+    29,
+    0.4833,
+    [
+     0.3617,
+     0.6069
+    ]
+   ],
+   "externalCorroboratingWrong": [
+    0,
+    58
+   ],
+   "frozenTokenAsPrinted": {
+    "ABSTAIN": 7,
+    "CORRECT": 29,
+    "WRONG": 24,
+    "wrongCI": [
+     0.2857,
+     0.5263
+    ],
+    "wrongWhenStated": 0.4528
+   },
+   "latticeConfidentWrong": [
+    0,
+    24
+   ],
+   "m1": {
+    "ABSTAIN": 22,
+    "CORRECT": 36,
+    "WRONG": 2,
+    "wrongCI": [
+     0.0092,
+     0.1136
+    ],
+    "wrongWhenStated": 0.0526
+   },
+   "n": 60,
+   "topKRecall": [
+    60,
+    60
+   ]
+  },
+  "F4-liberation-italic-condensed": {
+   "ensembleConfidentWrong": [
+    0,
+    55
+   ],
+   "exact_ensemble": [
+    55,
+    0.9167,
+    [
+     0.8193,
+     0.9639
+    ]
+   ],
+   "exact_externalTop": [
+    60,
+    1.0,
+    [
+     0.9398,
+     1.0
+    ]
+   ],
+   "exact_lattice": [
+    27,
+    0.45,
+    [
+     0.3309,
+     0.5751
+    ]
+   ],
+   "exact_token": [
+    17,
+    0.2833,
+    [
+     0.1851,
+     0.4077
+    ]
+   ],
+   "externalCorroboratingWrong": [
+    0,
+    59
+   ],
+   "frozenTokenAsPrinted": {
+    "ABSTAIN": 13,
+    "CORRECT": 17,
+    "WRONG": 30,
+    "wrongCI": [
+     0.3773,
+     0.6227
+    ],
+    "wrongWhenStated": 0.6383
+   },
+   "latticeConfidentWrong": [
+    5,
+    19
+   ],
+   "m1": {
+    "ABSTAIN": 31,
+    "CORRECT": 29,
+    "WRONG": 0,
+    "wrongCI": [
+     -0.0,
+     0.0602
+    ],
+    "wrongWhenStated": 0.0
+   },
+   "n": 60,
+   "topKRecall": [
+    60,
+    60
+   ]
+  },
+  "F5-dejavu-mono": {
+   "ensembleConfidentWrong": [
+    0,
+    53
+   ],
+   "exact_ensemble": [
+    53,
+    0.8833,
+    [
+     0.7782,
+     0.9423
+    ]
+   ],
+   "exact_externalTop": [
+    60,
+    1.0,
+    [
+     0.9398,
+     1.0
+    ]
+   ],
+   "exact_lattice": [
+    24,
+    0.4,
+    [
+     0.2857,
+     0.5263
+    ]
+   ],
+   "exact_token": [
+    15,
+    0.25,
+    [
+     0.1578,
+     0.3723
+    ]
+   ],
+   "externalCorroboratingWrong": [
+    0,
+    59
+   ],
+   "frozenTokenAsPrinted": {
+    "ABSTAIN": 5,
+    "CORRECT": 15,
+    "WRONG": 40,
+    "wrongCI": [
+     0.5406,
+     0.7727
+    ],
+    "wrongWhenStated": 0.7273
+   },
+   "latticeConfidentWrong": [
+    6,
+    17
+   ],
+   "m1": {
+    "ABSTAIN": 41,
+    "CORRECT": 19,
+    "WRONG": 0,
+    "wrongCI": [
+     -0.0,
+     0.0602
+    ],
+    "wrongWhenStated": 0.0
+   },
+   "n": 60,
+   "topKRecall": [
+    60,
+    60
+   ]
+  },
+  "F6-courier10": {
+   "ensembleConfidentWrong": [
+    0,
+    54
+   ],
+   "exact_ensemble": [
+    54,
+    0.9,
+    [
+     0.7985,
+     0.9534
+    ]
+   ],
+   "exact_externalTop": [
+    60,
+    1.0,
+    [
+     0.9398,
+     1.0
+    ]
+   ],
+   "exact_lattice": [
+    32,
+    0.5333,
+    [
+     0.4089,
+     0.6537
+    ]
+   ],
+   "exact_token": [
+    19,
+    0.3167,
+    [
+     0.2131,
+     0.4423
+    ]
+   ],
+   "externalCorroboratingWrong": [
+    0,
+    60
+   ],
+   "frozenTokenAsPrinted": {
+    "ABSTAIN": 5,
+    "CORRECT": 19,
+    "WRONG": 36,
+    "wrongCI": [
+     0.4737,
+     0.7143
+    ],
+    "wrongWhenStated": 0.6545
+   },
+   "latticeConfidentWrong": [
+    6,
+    24
+   ],
+   "m1": {
+    "ABSTAIN": 37,
+    "CORRECT": 23,
+    "WRONG": 0,
+    "wrongCI": [
+     -0.0,
+     0.0602
+    ],
+    "wrongWhenStated": 0.0
+   },
+   "n": 60,
+   "topKRecall": [
+    60,
+    60
+   ]
+  },
+  "F7-charter": {
+   "ensembleConfidentWrong": [
+    0,
+    59
+   ],
+   "exact_ensemble": [
+    59,
+    0.9833,
+    [
+     0.9114,
+     0.9971
+    ]
+   ],
+   "exact_externalTop": [
+    60,
+    1.0,
+    [
+     0.9398,
+     1.0
+    ]
+   ],
+   "exact_lattice": [
+    51,
+    0.85,
+    [
+     0.7389,
+     0.919
+    ]
+   ],
+   "exact_token": [
+    35,
+    0.5833,
+    [
+     0.4573,
+     0.6994
+    ]
+   ],
+   "externalCorroboratingWrong": [
+    0,
+    59
+   ],
+   "frozenTokenAsPrinted": {
+    "ABSTAIN": 5,
+    "CORRECT": 35,
+    "WRONG": 20,
+    "wrongCI": [
+     0.2273,
+     0.4594
+    ],
+    "wrongWhenStated": 0.3636
+   },
+   "latticeConfidentWrong": [
+    0,
+    31
+   ],
+   "m1": {
+    "ABSTAIN": 21,
+    "CORRECT": 39,
+    "WRONG": 0,
+    "wrongCI": [
+     -0.0,
+     0.0602
+    ],
+    "wrongWhenStated": 0.0
+   },
+   "n": 60,
+   "topKRecall": [
+    60,
+    60
+   ]
+  }
+ },
+ "byTurn": {
+  "CCW": {
+   "ensembleConfidentWrong": [
+    0,
+    113
+   ],
+   "exact_ensemble": [
+    113,
+    0.9187,
+    [
+     0.8568,
+     0.9552
+    ]
+   ],
+   "exact_externalTop": [
+    123,
+    1.0,
+    [
+     0.9697,
+     1.0
+    ]
+   ],
+   "exact_lattice": [
+    62,
+    0.5041,
+    [
+     0.4169,
+     0.591
+    ]
+   ],
+   "exact_token": [
+    43,
+    0.3496,
+    [
+     0.271,
+     0.4373
+    ]
+   ],
+   "externalCorroboratingWrong": [
+    0,
+    121
+   ],
+   "frozenTokenAsPrinted": {
+    "ABSTAIN": 15,
+    "CORRECT": 43,
+    "WRONG": 65,
+    "wrongCI": [
+     0.4407,
+     0.6145
+    ],
+    "wrongWhenStated": 0.6019
+   },
+   "latticeConfidentWrong": [
+    9,
+    40
+   ],
+   "m1": {
+    "ABSTAIN": 67,
+    "CORRECT": 56,
+    "WRONG": 0,
+    "wrongCI": [
+     0.0,
+     0.0303
+    ],
+    "wrongWhenStated": 0.0
+   },
+   "n": 123,
+   "topKRecall": [
+    123,
+    123
+   ]
+  },
+  "CW": {
+   "ensembleConfidentWrong": [
+    0,
+    92
+   ],
+   "exact_ensemble": [
+    92,
+    0.902,
+    [
+     0.8289,
+     0.9459
+    ]
+   ],
+   "exact_externalTop": [
+    102,
+    1.0,
+    [
+     0.9637,
+     1.0
+    ]
+   ],
+   "exact_lattice": [
+    59,
+    0.5784,
+    [
+     0.4815,
+     0.6697
+    ]
+   ],
+   "exact_token": [
+    41,
+    0.402,
+    [
+     0.312,
+     0.499
+    ]
+   ],
+   "externalCorroboratingWrong": [
+    0,
+    100
+   ],
+   "frozenTokenAsPrinted": {
+    "ABSTAIN": 16,
+    "CORRECT": 41,
+    "WRONG": 45,
+    "wrongCI": [
+     0.3487,
+     0.5379
+    ],
+    "wrongWhenStated": 0.5233
+   },
+   "latticeConfidentWrong": [
+    8,
+    38
+   ],
+   "m1": {
+    "ABSTAIN": 46,
+    "CORRECT": 55,
+    "WRONG": 1,
+    "wrongCI": [
+     0.0017,
+     0.0535
+    ],
+    "wrongWhenStated": 0.0179
+   },
+   "n": 102,
+   "topKRecall": [
+    102,
+    102
+   ]
+  },
+  "UPRIGHT": {
+   "ensembleConfidentWrong": [
+    0,
+    186
+   ],
+   "exact_ensemble": [
+    186,
+    0.9538,
+    [
+     0.9146,
+     0.9755
+    ]
+   ],
+   "exact_externalTop": [
+    195,
+    1.0,
+    [
+     0.9807,
+     1.0
+    ]
+   ],
+   "exact_lattice": [
+    110,
+    0.5641,
+    [
+     0.4939,
+     0.6318
+    ]
+   ],
+   "exact_token": [
+    74,
+    0.3795,
+    [
+     0.3143,
+     0.4493
+    ]
+   ],
+   "externalCorroboratingWrong": [
+    0,
+    194
+   ],
+   "frozenTokenAsPrinted": {
+    "ABSTAIN": 19,
+    "CORRECT": 74,
+    "WRONG": 102,
+    "wrongCI": [
+     0.4532,
+     0.5921
+    ],
+    "wrongWhenStated": 0.5795
+   },
+   "latticeConfidentWrong": [
+    8,
+    79
+   ],
+   "m1": {
+    "ABSTAIN": 101,
+    "CORRECT": 93,
+    "WRONG": 1,
+    "wrongCI": [
+     0.0009,
+     0.0285
+    ],
+    "wrongWhenStated": 0.0106
+   },
+   "n": 195,
+   "topKRecall": [
+    195,
+    195
+   ]
+  }
+ },
+ "families": 7,
+ "labels": 420,
+ "lookalikeSubset": {
+  "ensembleConfidentWrong": [
+   0,
+   190
+  ],
+  "exact_ensemble": [
+   190,
+   0.9048,
+   [
+    0.8575,
+    0.9375
+   ]
+  ],
+  "exact_externalTop": [
+   210,
+   1.0,
+   [
+    0.982,
+    1.0
+   ]
+  ],
+  "exact_lattice": [
+   112,
+   0.5333,
+   [
+    0.4659,
+    0.5996
+   ]
+  ],
+  "exact_token": [
+   72,
+   0.3429,
+   [
+    0.282,
+    0.4094
+   ]
+  ],
+  "externalCorroboratingWrong": [
+   0,
+   207
+  ],
+  "frozenTokenAsPrinted": {
+   "ABSTAIN": 30,
+   "CORRECT": 72,
+   "WRONG": 108,
+   "wrongCI": [
+    0.447,
+    0.581
+   ],
+   "wrongWhenStated": 0.6
+  },
+  "latticeConfidentWrong": [
+   18,
+   80
+  ],
+  "m1": {
+   "ABSTAIN": 110,
+   "CORRECT": 99,
+   "WRONG": 1,
+   "wrongCI": [
+    0.0008,
+    0.0265
+   ],
+   "wrongWhenStated": 0.01
+  },
+  "n": 210,
+  "topKRecall": [
+   210,
+   210
+  ]
+ },
+ "m1Wrong": [
+  {
+   "cap": 10,
+   "decision": "NOT_CORROBORATING",
+   "ensemble": 5812,
+   "ensembleConfident": false,
+   "externalCorroborating": null,
+   "externalTop": 582,
+   "family": "F3-freesans-oblique",
+   "frozenTokenAsPrinted": "WRONG",
+   "id": "F3-freesans-oblique-025",
+   "lattice": 5812,
+   "latticeConfident": null,
+   "lookalike": true,
+   "m1": "WRONG",
+   "recall": true,
+   "token": 5112,
+   "truth": 582,
+   "turn": "UPRIGHT"
+  },
+  {
+   "cap": 11,
+   "decision": "NOT_CORROBORATING",
+   "ensemble": 5101,
+   "ensembleConfident": false,
+   "externalCorroborating": null,
+   "externalTop": 330,
+   "family": "F3-freesans-oblique",
+   "frozenTokenAsPrinted": "WRONG",
+   "id": "F3-freesans-oblique-030",
+   "lattice": 5101,
+   "latticeConfident": null,
+   "lookalike": false,
+   "m1": "WRONG",
+   "recall": true,
+   "token": 5101,
+   "truth": 330,
+   "turn": "CW"
+  }
+ ],
+ "m1WrongFamilyClusterCI": [
+  0.0,
+  0.0143
+ ],
+ "missingCandidate": [],
+ "pooled": {
+  "ensembleConfidentWrong": [
+   0,
+   391
+  ],
+  "exact_ensemble": [
+   391,
+   0.931,
+   [
+    0.9026,
+    0.9515
+   ]
+  ],
+  "exact_externalTop": [
+   420,
+   1.0,
+   [
+    0.9909,
+    1.0
+   ]
+  ],
+  "exact_lattice": [
+   231,
+   0.55,
+   [
+    0.5022,
+    0.5969
+   ]
+  ],
+  "exact_token": [
+   158,
+   0.3762,
+   [
+    0.3312,
+    0.4234
+   ]
+  ],
+  "externalCorroboratingWrong": [
+   0,
+   415
+  ],
+  "frozenTokenAsPrinted": {
+   "ABSTAIN": 50,
+   "CORRECT": 158,
+   "WRONG": 212,
+   "wrongCI": [
+    0.4571,
+    0.5523
+   ],
+   "wrongWhenStated": 0.573
+  },
+  "latticeConfidentWrong": [
+   25,
+   157
+  ],
+  "m1": {
+   "ABSTAIN": 214,
+   "CORRECT": 204,
+   "WRONG": 2,
+   "wrongCI": [
+    0.0013,
+    0.0172
+   ],
+   "wrongWhenStated": 0.0097
+  },
+  "n": 420,
+  "topKRecall": [
+   420,
+   420
+  ]
+ },
+ "schema": "buildapp.005o.glyph-corpus-results"
+}
