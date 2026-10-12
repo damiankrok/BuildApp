@@ -1,0 +1,4646 @@
+{
+ "asPrinted": {
+  "M0X": {
+   "ABSTAIN": 112,
+   "ABSTAIN->ABSTAIN": 112,
+   "CORRECT": 298,
+   "CORRECT->CORRECT": 298,
+   "WRONG": 372,
+   "WRONG->WRONG": 372,
+   "byRule": {
+    "FROZEN:ABSTAIN": 112,
+    "FROZEN:CORRECT": 298,
+    "FROZEN:WRONG": 372
+   },
+   "correctRate": 0.3811,
+   "n": 782,
+   "wrongAndBoundConsistent": 118,
+   "wrongAndBoundInconsistent": 72,
+   "wrongCI": [
+    0.4409,
+    0.5107
+   ],
+   "wrongFamilyCI": [
+    0.4223,
+    0.5233
+   ],
+   "wrongRate": 0.4757
+  },
+  "M1": {
+   "ABSTAIN": 363,
+   "ABSTAIN->ABSTAIN": 112,
+   "CORRECT": 297,
+   "CORRECT->ABSTAIN": 1,
+   "CORRECT->CORRECT": 297,
+   "WRONG": 122,
+   "WRONG->ABSTAIN": 250,
+   "WRONG->WRONG": 122,
+   "byRule": {
+    "ABSTAIN:ABSTAIN": 263,
+    "FROZEN:ABSTAIN": 100,
+    "FROZEN:CORRECT": 297,
+    "FROZEN:WRONG": 122
+   },
+   "correctRate": 0.3798,
+   "n": 782,
+   "wrongAndBoundConsistent": 36,
+   "wrongAndBoundInconsistent": 16,
+   "wrongCI": [
+    0.1323,
+    0.1831
+   ],
+   "wrongFamilyCI": [
+    0.1126,
+    0.2006
+   ],
+   "wrongRate": 0.156
+  },
+  "M1P": {
+   "ABSTAIN": 196,
+   "ABSTAIN->ABSTAIN": 110,
+   "ABSTAIN->CORRECT": 2,
+   "CORRECT": 464,
+   "CORRECT->ABSTAIN": 1,
+   "CORRECT->CORRECT": 297,
+   "WRONG": 122,
+   "WRONG->ABSTAIN": 85,
+   "WRONG->CORRECT": 165,
+   "WRONG->WRONG": 122,
+   "byRule": {
+    "ABSTAIN:ABSTAIN": 92,
+    "FROZEN:ABSTAIN": 100,
+    "FROZEN:CORRECT": 297,
+    "FROZEN:WRONG": 122,
+    "PROMOTED:ABSTAIN": 4,
+    "PROMOTED:CORRECT": 167
+   },
+   "correctRate": 0.5934,
+   "n": 782,
+   "wrongAndBoundConsistent": 36,
+   "wrongAndBoundInconsistent": 16,
+   "wrongCI": [
+    0.1323,
+    0.1831
+   ],
+   "wrongFamilyCI": [
+    0.1126,
+    0.2006
+   ],
+   "wrongRate": 0.156
+  },
+  "M1b": {
+   "ABSTAIN": 363,
+   "ABSTAIN->ABSTAIN": 112,
+   "CORRECT": 297,
+   "CORRECT->ABSTAIN": 1,
+   "CORRECT->CORRECT": 297,
+   "WRONG": 122,
+   "WRONG->ABSTAIN": 250,
+   "WRONG->WRONG": 122,
+   "byRule": {
+    "ABSTAIN:ABSTAIN": 263,
+    "FROZEN:ABSTAIN": 100,
+    "FROZEN:CORRECT": 297,
+    "FROZEN:WRONG": 122
+   },
+   "correctRate": 0.3798,
+   "n": 782,
+   "wrongAndBoundConsistent": 36,
+   "wrongAndBoundInconsistent": 16,
+   "wrongCI": [
+    0.1323,
+    0.1831
+   ],
+   "wrongFamilyCI": [
+    0.1126,
+    0.2006
+   ],
+   "wrongRate": 0.156
+  },
+  "M2": {
+   "ABSTAIN": 172,
+   "ABSTAIN->ABSTAIN": 112,
+   "CORRECT": 278,
+   "CORRECT->ABSTAIN": 25,
+   "CORRECT->CORRECT": 273,
+   "WRONG": 332,
+   "WRONG->ABSTAIN": 35,
+   "WRONG->CORRECT": 5,
+   "WRONG->WRONG": 332,
+   "byRule": {
+    "ABSTAIN:ABSTAIN": 63,
+    "FROZEN:ABSTAIN": 107,
+    "FROZEN:CORRECT": 273,
+    "FROZEN:WRONG": 332,
+    "RESOLVED:ABSTAIN": 2,
+    "RESOLVED:CORRECT": 5
+   },
+   "correctRate": 0.3555,
+   "n": 782,
+   "wrongAndBoundConsistent": 81,
+   "wrongAndBoundInconsistent": 71,
+   "wrongCI": [
+    0.3904,
+    0.4595
+   ],
+   "wrongFamilyCI": [
+    0.3757,
+    0.4699
+   ],
+   "wrongRate": 0.4246
+  },
+  "M3": {
+   "ABSTAIN": 381,
+   "ABSTAIN->ABSTAIN": 106,
+   "ABSTAIN->CORRECT": 6,
+   "CORRECT": 293,
+   "CORRECT->ABSTAIN": 22,
+   "CORRECT->CORRECT": 276,
+   "WRONG": 108,
+   "WRONG->ABSTAIN": 253,
+   "WRONG->CORRECT": 11,
+   "WRONG->WRONG": 108,
+   "byRule": {
+    "ABSTAIN:ABSTAIN": 299,
+    "FROZEN:ABSTAIN": 82,
+    "FROZEN:CORRECT": 276,
+    "FROZEN:WRONG": 108,
+    "RESOLVED:CORRECT": 17
+   },
+   "correctRate": 0.3747,
+   "n": 782,
+   "wrongAndBoundConsistent": 25,
+   "wrongAndBoundInconsistent": 16,
+   "wrongCI": [
+    0.1157,
+    0.1641
+   ],
+   "wrongFamilyCI": [
+    0.0983,
+    0.1788
+   ],
+   "wrongRate": 0.1381
+  },
+  "M3b": {
+   "ABSTAIN": 381,
+   "ABSTAIN->ABSTAIN": 106,
+   "ABSTAIN->CORRECT": 6,
+   "CORRECT": 293,
+   "CORRECT->ABSTAIN": 22,
+   "CORRECT->CORRECT": 276,
+   "WRONG": 108,
+   "WRONG->ABSTAIN": 253,
+   "WRONG->CORRECT": 11,
+   "WRONG->WRONG": 108,
+   "byRule": {
+    "ABSTAIN:ABSTAIN": 299,
+    "FROZEN:ABSTAIN": 82,
+    "FROZEN:CORRECT": 276,
+    "FROZEN:WRONG": 108,
+    "RESOLVED:CORRECT": 17
+   },
+   "correctRate": 0.3747,
+   "n": 782,
+   "wrongAndBoundConsistent": 25,
+   "wrongAndBoundInconsistent": 16,
+   "wrongCI": [
+    0.1157,
+    0.1641
+   ],
+   "wrongFamilyCI": [
+    0.0983,
+    0.1788
+   ],
+   "wrongRate": 0.1381
+  }
+ },
+ "houseSummary": {
+  "M0": {
+   "changedVsM0": 0,
+   "completed": 22,
+   "falseConfidentByFamily": {},
+   "knownGoodChanged": 0,
+   "newFalseConfident": 0,
+   "pass": 18,
+   "refused": 22,
+   "scaleClass": {
+    "CORRECT_SCALE": 16,
+    "UNKNOWN_TRUTH": 6
+   }
+  },
+  "M0X": {
+   "changedVsM0": 0,
+   "completed": 22,
+   "falseConfidentByFamily": {},
+   "knownGoodChanged": 0,
+   "newFalseConfident": 0,
+   "pass": 18,
+   "refused": 22,
+   "scaleClass": {
+    "CORRECT_SCALE": 16,
+    "UNKNOWN_TRUTH": 6
+   }
+  },
+  "M1": {
+   "changedVsM0": 2,
+   "completed": 23,
+   "falseConfidentByFamily": {},
+   "knownGoodChanged": 0,
+   "newFalseConfident": 0,
+   "pass": 18,
+   "refused": 21,
+   "scaleClass": {
+    "CORRECT_SCALE": 16,
+    "UNKNOWN_TRUTH": 7
+   }
+  },
+  "M1P": {
+   "changedVsM0": 2,
+   "completed": 23,
+   "falseConfidentByFamily": {},
+   "knownGoodChanged": 0,
+   "newFalseConfident": 0,
+   "pass": 18,
+   "refused": 21,
+   "scaleClass": {
+    "CORRECT_SCALE": 16,
+    "UNKNOWN_TRUTH": 7
+   }
+  },
+  "M1b": {
+   "changedVsM0": 2,
+   "completed": 23,
+   "falseConfidentByFamily": {},
+   "knownGoodChanged": 0,
+   "newFalseConfident": 0,
+   "pass": 18,
+   "refused": 21,
+   "scaleClass": {
+    "CORRECT_SCALE": 16,
+    "UNKNOWN_TRUTH": 7
+   }
+  },
+  "M2": {
+   "changedVsM0": 0,
+   "completed": 22,
+   "falseConfidentByFamily": {},
+   "knownGoodChanged": 0,
+   "newFalseConfident": 0,
+   "pass": 18,
+   "refused": 22,
+   "scaleClass": {
+    "CORRECT_SCALE": 16,
+    "UNKNOWN_TRUTH": 6
+   }
+  },
+  "M3": {
+   "changedVsM0": 2,
+   "completed": 23,
+   "falseConfidentByFamily": {},
+   "knownGoodChanged": 0,
+   "newFalseConfident": 0,
+   "pass": 18,
+   "refused": 21,
+   "scaleClass": {
+    "CORRECT_SCALE": 16,
+    "UNKNOWN_TRUTH": 7
+   }
+  },
+  "M3b": {
+   "changedVsM0": 2,
+   "completed": 23,
+   "falseConfidentByFamily": {},
+   "knownGoodChanged": 0,
+   "newFalseConfident": 0,
+   "pass": 18,
+   "refused": 21,
+   "scaleClass": {
+    "CORRECT_SCALE": 16,
+    "UNKNOWN_TRUTH": 7
+   }
+  }
+ },
+ "houses": [
+  {
+   "M0": {
+    "code": null,
+    "frame": "frame-asset-rzut-cafd34a77a-4813950087",
+    "modelHash": "df2aa66c8591107a1ff3608d02164ad80f4a7609c963915cb17fe7312e64553f",
+    "outcome": "COMPLETED",
+    "scale": 2.8022,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-cafd34a77a-4813950087",
+    "modelHash": "df2aa66c8591107a1ff3608d02164ad80f4a7609c963915cb17fe7312e64553f",
+    "outcome": "COMPLETED",
+    "scale": 2.8022,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1": {
+    "changedVsM0": true,
+    "code": null,
+    "frame": "frame-asset-gotowy-projekt-dom-pod-jarzabem-15-g-rzut-19f8c2fa6e",
+    "modelHash": "e980b0bac094241786b3d1fec4cb57f81b0f93b989bf75ed15e4d25085520090",
+    "outcome": "COMPLETED",
+    "scale": 4.34745,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1P": {
+    "changedVsM0": true,
+    "code": null,
+    "frame": "frame-asset-gotowy-projekt-dom-pod-jarzabem-15-g-rzut-19f8c2fa6e",
+    "modelHash": "e980b0bac094241786b3d1fec4cb57f81b0f93b989bf75ed15e4d25085520090",
+    "outcome": "COMPLETED",
+    "scale": 4.34745,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1b": {
+    "changedVsM0": true,
+    "code": null,
+    "frame": "frame-asset-gotowy-projekt-dom-pod-jarzabem-15-g-rzut-19f8c2fa6e",
+    "modelHash": "e980b0bac094241786b3d1fec4cb57f81b0f93b989bf75ed15e4d25085520090",
+    "outcome": "COMPLETED",
+    "scale": 4.34745,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-cafd34a77a-4813950087",
+    "modelHash": "df2aa66c8591107a1ff3608d02164ad80f4a7609c963915cb17fe7312e64553f",
+    "outcome": "COMPLETED",
+    "scale": 2.8022,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3": {
+    "changedVsM0": true,
+    "code": null,
+    "frame": "frame-asset-gotowy-projekt-dom-pod-jarzabem-15-g-rzut-19f8c2fa6e",
+    "modelHash": "e980b0bac094241786b3d1fec4cb57f81b0f93b989bf75ed15e4d25085520090",
+    "outcome": "COMPLETED",
+    "scale": 4.34745,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3b": {
+    "changedVsM0": true,
+    "code": null,
+    "frame": "frame-asset-gotowy-projekt-dom-pod-jarzabem-15-g-rzut-19f8c2fa6e",
+    "modelHash": "e980b0bac094241786b3d1fec4cb57f81b0f93b989bf75ed15e4d25085520090",
+    "outcome": "COMPLETED",
+    "scale": 4.34745,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "case": "dom-pod-jarzabem",
+   "family": "dom-pod-jarzabem",
+   "selectedFrame": "frame-asset-rzut-cafd34a77a-4813950087",
+   "set": "DEV_005K",
+   "trueScale": 2.804005722460658,
+   "trueScaleSupport": 7
+  },
+  {
+   "M0": {
+    "code": null,
+    "frame": "frame-asset-rzut-16680ee739-bb2ced8b98",
+    "modelHash": "a1ac7a1b67b195839e7150e1da7a508b4b583d266a96d10b9c9322deae1f10b7",
+    "outcome": "COMPLETED",
+    "scale": 1.8461,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-16680ee739-bb2ced8b98",
+    "modelHash": "a1ac7a1b67b195839e7150e1da7a508b4b583d266a96d10b9c9322deae1f10b7",
+    "outcome": "COMPLETED",
+    "scale": 1.8461,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-16680ee739-bb2ced8b98",
+    "modelHash": "a1ac7a1b67b195839e7150e1da7a508b4b583d266a96d10b9c9322deae1f10b7",
+    "outcome": "COMPLETED",
+    "scale": 1.8461,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-16680ee739-bb2ced8b98",
+    "modelHash": "a1ac7a1b67b195839e7150e1da7a508b4b583d266a96d10b9c9322deae1f10b7",
+    "outcome": "COMPLETED",
+    "scale": 1.8461,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-16680ee739-bb2ced8b98",
+    "modelHash": "a1ac7a1b67b195839e7150e1da7a508b4b583d266a96d10b9c9322deae1f10b7",
+    "outcome": "COMPLETED",
+    "scale": 1.8461,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-16680ee739-bb2ced8b98",
+    "modelHash": "a1ac7a1b67b195839e7150e1da7a508b4b583d266a96d10b9c9322deae1f10b7",
+    "outcome": "COMPLETED",
+    "scale": 1.8461,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-16680ee739-bb2ced8b98",
+    "modelHash": "a1ac7a1b67b195839e7150e1da7a508b4b583d266a96d10b9c9322deae1f10b7",
+    "outcome": "COMPLETED",
+    "scale": 1.8461,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-16680ee739-bb2ced8b98",
+    "modelHash": "a1ac7a1b67b195839e7150e1da7a508b4b583d266a96d10b9c9322deae1f10b7",
+    "outcome": "COMPLETED",
+    "scale": 1.8461,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "case": "dom-w-arkadiach",
+   "family": "dom-w-arkadiach",
+   "selectedFrame": "frame-asset-rzut-16680ee739-bb2ced8b98",
+   "set": "DEV_005K",
+   "trueScale": 1.8453865336658355,
+   "trueScaleSupport": 3
+  },
+  {
+   "M0": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale; a total and the children it frames disagree as read, each stating one of the two scales, and no reading outside them decides. The scales its readings state are 1.761978 cm/px (1 independent, plausible); 2.895277 cm/px (1 independent, plausible); 3.996759 cm/px (2 independent, plausible); 0",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale; a total and the children it frames disagree as read, each stating one of the two scales, and no reading outside them decides. The scales its readings state are 1.761978 cm/px (1 independent, plausible); 2.895277 cm/px (1 independent, plausible); 3.996759 cm/px (2 independent, plausible); 0",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale; a total and the children it frames disagree as read, each stating one of the two scales, and no reading outside them decides. The scales its readings state are 1.761978 cm/px (1 independent, plausible); 2.895277 cm/px (1 independent, plausible); 3.996759 cm/px (2 independent, plausible); 0",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale; a total and the children it frames disagree as read, each stating one of the two scales, and no reading outside them decides. The scales its readings state are 1.761978 cm/px (1 independent, plausible); 2.895277 cm/px (1 independent, plausible); 3.996759 cm/px (2 independent, plausible); 0",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale; a total and the children it frames disagree as read, each stating one of the two scales, and no reading outside them decides. The scales its readings state are 1.761978 cm/px (1 independent, plausible); 2.895277 cm/px (1 independent, plausible); 3.996759 cm/px (2 independent, plausible); 0",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale; a total and the children it frames disagree as read, each stating one of the two scales, and no reading outside them decides. The scales its readings state are 1.761978 cm/px (1 independent, plausible); 2.895277 cm/px (1 independent, plausible); 3.996759 cm/px (2 independent, plausible); 0",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale; a total and the children it frames disagree as read, each stating one of the two scales, and no reading outside them decides. The scales its readings state are 1.761978 cm/px (1 independent, plausible); 2.895277 cm/px (1 independent, plausible); 3.996759 cm/px (2 independent, plausible); 0",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale; a total and the children it frames disagree as read, each stating one of the two scales, and no reading outside them decides. The scales its readings state are 1.761978 cm/px (1 independent, plausible); 2.895277 cm/px (1 independent, plausible); 3.996759 cm/px (2 independent, plausible); 0",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "case": "dom-w-modrzewnicy",
+   "family": "dom-w-modrzewnicy",
+   "selectedFrame": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "set": "DEV_005K",
+   "trueScale": null,
+   "trueScaleSupport": 0
+  },
+  {
+   "M0": {
+    "code": null,
+    "frame": "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+    "modelHash": "58ee0e7bfea429faa04ae01f88bd9e6c2131eb8030648803ea2c4fb15c9ea703",
+    "outcome": "COMPLETED",
+    "scale": 2.0115,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+    "modelHash": "58ee0e7bfea429faa04ae01f88bd9e6c2131eb8030648803ea2c4fb15c9ea703",
+    "outcome": "COMPLETED",
+    "scale": 2.0115,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+    "modelHash": "58ee0e7bfea429faa04ae01f88bd9e6c2131eb8030648803ea2c4fb15c9ea703",
+    "outcome": "COMPLETED",
+    "scale": 2.0115,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+    "modelHash": "58ee0e7bfea429faa04ae01f88bd9e6c2131eb8030648803ea2c4fb15c9ea703",
+    "outcome": "COMPLETED",
+    "scale": 2.0115,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+    "modelHash": "58ee0e7bfea429faa04ae01f88bd9e6c2131eb8030648803ea2c4fb15c9ea703",
+    "outcome": "COMPLETED",
+    "scale": 2.0115,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+    "modelHash": "58ee0e7bfea429faa04ae01f88bd9e6c2131eb8030648803ea2c4fb15c9ea703",
+    "outcome": "COMPLETED",
+    "scale": 2.0115,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+    "modelHash": "58ee0e7bfea429faa04ae01f88bd9e6c2131eb8030648803ea2c4fb15c9ea703",
+    "outcome": "COMPLETED",
+    "scale": 2.0115,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+    "modelHash": "58ee0e7bfea429faa04ae01f88bd9e6c2131eb8030648803ea2c4fb15c9ea703",
+    "outcome": "COMPLETED",
+    "scale": 2.0115,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "case": "dom-w-morelach",
+   "family": "dom-w-morelach",
+   "selectedFrame": "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+   "set": "DEV_005K",
+   "trueScale": 2.0,
+   "trueScaleSupport": 5
+  },
+  {
+   "M0": {
+    "code": null,
+    "frame": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+    "modelHash": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+    "outcome": "COMPLETED",
+    "scale": 2.6447,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+    "modelHash": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+    "outcome": "COMPLETED",
+    "scale": 2.6447,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+    "modelHash": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+    "outcome": "COMPLETED",
+    "scale": 2.6447,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+    "modelHash": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+    "outcome": "COMPLETED",
+    "scale": 2.6447,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+    "modelHash": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+    "outcome": "COMPLETED",
+    "scale": 2.6447,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+    "modelHash": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+    "outcome": "COMPLETED",
+    "scale": 2.6447,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+    "modelHash": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+    "outcome": "COMPLETED",
+    "scale": 2.6447,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+    "modelHash": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+    "outcome": "COMPLETED",
+    "scale": 2.6447,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "case": "marcowki",
+   "family": "marcowki",
+   "selectedFrame": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+   "set": "DEV_005K",
+   "trueScale": 2.642543859649123,
+   "trueScaleSupport": 7
+  },
+  {
+   "M0": {
+    "code": null,
+    "frame": "frame-asset-rzut-e8520c3ad3-59a406b738",
+    "modelHash": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+    "outcome": "COMPLETED",
+    "scale": 2.75495,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-e8520c3ad3-59a406b738",
+    "modelHash": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+    "outcome": "COMPLETED",
+    "scale": 2.75495,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-e8520c3ad3-59a406b738",
+    "modelHash": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+    "outcome": "COMPLETED",
+    "scale": 2.75495,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-e8520c3ad3-59a406b738",
+    "modelHash": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+    "outcome": "COMPLETED",
+    "scale": 2.75495,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-e8520c3ad3-59a406b738",
+    "modelHash": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+    "outcome": "COMPLETED",
+    "scale": 2.75495,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-e8520c3ad3-59a406b738",
+    "modelHash": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+    "outcome": "COMPLETED",
+    "scale": 2.75495,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-e8520c3ad3-59a406b738",
+    "modelHash": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+    "outcome": "COMPLETED",
+    "scale": 2.75495,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-e8520c3ad3-59a406b738",
+    "modelHash": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+    "outcome": "COMPLETED",
+    "scale": 2.75495,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "case": "rarytasy-g2e",
+   "family": "rarytasy",
+   "selectedFrame": "frame-asset-rzut-e8520c3ad3-59a406b738",
+   "set": "DEV_005K",
+   "trueScale": 2.7564102564102564,
+   "trueScaleSupport": 3
+  },
+  {
+   "M0": {
+    "code": null,
+    "frame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "outcome": "COMPLETED",
+    "scale": 2.40625,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "outcome": "COMPLETED",
+    "scale": 2.40625,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "outcome": "COMPLETED",
+    "scale": 2.40625,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "outcome": "COMPLETED",
+    "scale": 2.40625,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "outcome": "COMPLETED",
+    "scale": 2.40625,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "outcome": "COMPLETED",
+    "scale": 2.40625,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "outcome": "COMPLETED",
+    "scale": 2.40625,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "outcome": "COMPLETED",
+    "scale": 2.40625,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "case": "kosacce-clean",
+   "family": "kosacce",
+   "selectedFrame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+   "set": "DEV_005K",
+   "trueScale": 2.4064665127020786,
+   "trueScaleSupport": 9
+  },
+  {
+   "M0": {
+    "code": null,
+    "frame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "outcome": "COMPLETED",
+    "scale": 2.40625,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "outcome": "COMPLETED",
+    "scale": 2.40625,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "outcome": "COMPLETED",
+    "scale": 2.40625,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "outcome": "COMPLETED",
+    "scale": 2.40625,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "outcome": "COMPLETED",
+    "scale": 2.40625,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "outcome": "COMPLETED",
+    "scale": 2.40625,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "outcome": "COMPLETED",
+    "scale": 2.40625,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+    "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+    "outcome": "COMPLETED",
+    "scale": 2.40625,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "case": "kosacce-tracked",
+   "family": "kosacce",
+   "selectedFrame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+   "set": "DEV_005K",
+   "trueScale": null,
+   "trueScaleSupport": 0
+  },
+  {
+   "M0": {
+    "code": null,
+    "frame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+    "modelHash": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
+    "outcome": "COMPLETED",
+    "scale": 2.2222,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+    "modelHash": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
+    "outcome": "COMPLETED",
+    "scale": 2.2222,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+    "modelHash": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
+    "outcome": "COMPLETED",
+    "scale": 2.2222,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+    "modelHash": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
+    "outcome": "COMPLETED",
+    "scale": 2.2222,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+    "modelHash": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
+    "outcome": "COMPLETED",
+    "scale": 2.2222,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+    "modelHash": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
+    "outcome": "COMPLETED",
+    "scale": 2.2222,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+    "modelHash": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
+    "outcome": "COMPLETED",
+    "scale": 2.2222,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+    "modelHash": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
+    "outcome": "COMPLETED",
+    "scale": 2.2222,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "case": "rarytasy-eoze",
+   "family": "rarytasy",
+   "selectedFrame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+   "set": "DEV_005K",
+   "trueScale": 2.2222222222222223,
+   "trueScaleSupport": 3
+  },
+  {
+   "M0": {
+    "code": null,
+    "frame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+    "modelHash": "0a0e019df52a473a95e977cae5e88bfe08a8c417e64cb8866e47bc572a602603",
+    "outcome": "COMPLETED",
+    "scale": 2.2236,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+    "modelHash": "0a0e019df52a473a95e977cae5e88bfe08a8c417e64cb8866e47bc572a602603",
+    "outcome": "COMPLETED",
+    "scale": 2.2236,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+    "modelHash": "0a0e019df52a473a95e977cae5e88bfe08a8c417e64cb8866e47bc572a602603",
+    "outcome": "COMPLETED",
+    "scale": 2.2236,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+    "modelHash": "0a0e019df52a473a95e977cae5e88bfe08a8c417e64cb8866e47bc572a602603",
+    "outcome": "COMPLETED",
+    "scale": 2.2236,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+    "modelHash": "0a0e019df52a473a95e977cae5e88bfe08a8c417e64cb8866e47bc572a602603",
+    "outcome": "COMPLETED",
+    "scale": 2.2236,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+    "modelHash": "0a0e019df52a473a95e977cae5e88bfe08a8c417e64cb8866e47bc572a602603",
+    "outcome": "COMPLETED",
+    "scale": 2.2236,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+    "modelHash": "0a0e019df52a473a95e977cae5e88bfe08a8c417e64cb8866e47bc572a602603",
+    "outcome": "COMPLETED",
+    "scale": 2.2236,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+    "modelHash": "0a0e019df52a473a95e977cae5e88bfe08a8c417e64cb8866e47bc572a602603",
+    "outcome": "COMPLETED",
+    "scale": 2.2236,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "case": "eoze-legacy-every",
+   "family": "rarytasy",
+   "selectedFrame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+   "set": "DEV_005K",
+   "trueScale": null,
+   "trueScaleSupport": 3
+  },
+  {
+   "M0": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 1.710048 cm/px (0 independent, plausible); 1.339869 cm/px (0 independent, plausible); 0.52356 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 1.710048 cm/px (0 independent, plausible); 1.339869 cm/px (0 independent, plausible); 0.52356 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 1.710048 cm/px (0 independent, plausible); 1.339869 cm/px (0 independent, plausible); 0.52356 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 1.710048 cm/px (0 independent, plausible); 1.339869 cm/px (0 independent, plausible); 0.52356 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 1.710048 cm/px (0 independent, plausible); 1.339869 cm/px (0 independent, plausible); 0.52356 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 1.710048 cm/px (0 independent, plausible); 1.339869 cm/px (0 independent, plausible); 0.52356 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 1.710048 cm/px (0 independent, plausible); 1.339869 cm/px (0 independent, plausible); 0.52356 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 1.710048 cm/px (0 independent, plausible); 1.339869 cm/px (0 independent, plausible); 0.52356 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "case": "alt-marcowki",
+   "family": "marcowki",
+   "selectedFrame": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+   "set": "DEV_005K",
+   "trueScale": null,
+   "trueScaleSupport": 0
+  },
+  {
+   "M0": {
+    "code": null,
+    "frame": "frame-asset-rzut-a8bdd8cd1d-d80b709d74",
+    "modelHash": "a81652d034b4f9de2c0f43cce1365a0d6d9414d90ed0fb83056fd6582700a4bb",
+    "outcome": "COMPLETED",
+    "scale": 2.11555,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-a8bdd8cd1d-d80b709d74",
+    "modelHash": "a81652d034b4f9de2c0f43cce1365a0d6d9414d90ed0fb83056fd6582700a4bb",
+    "outcome": "COMPLETED",
+    "scale": 2.11555,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-a8bdd8cd1d-d80b709d74",
+    "modelHash": "a81652d034b4f9de2c0f43cce1365a0d6d9414d90ed0fb83056fd6582700a4bb",
+    "outcome": "COMPLETED",
+    "scale": 2.11555,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-a8bdd8cd1d-d80b709d74",
+    "modelHash": "a81652d034b4f9de2c0f43cce1365a0d6d9414d90ed0fb83056fd6582700a4bb",
+    "outcome": "COMPLETED",
+    "scale": 2.11555,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-a8bdd8cd1d-d80b709d74",
+    "modelHash": "a81652d034b4f9de2c0f43cce1365a0d6d9414d90ed0fb83056fd6582700a4bb",
+    "outcome": "COMPLETED",
+    "scale": 2.11555,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-a8bdd8cd1d-d80b709d74",
+    "modelHash": "a81652d034b4f9de2c0f43cce1365a0d6d9414d90ed0fb83056fd6582700a4bb",
+    "outcome": "COMPLETED",
+    "scale": 2.11555,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-a8bdd8cd1d-d80b709d74",
+    "modelHash": "a81652d034b4f9de2c0f43cce1365a0d6d9414d90ed0fb83056fd6582700a4bb",
+    "outcome": "COMPLETED",
+    "scale": 2.11555,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-a8bdd8cd1d-d80b709d74",
+    "modelHash": "a81652d034b4f9de2c0f43cce1365a0d6d9414d90ed0fb83056fd6582700a4bb",
+    "outcome": "COMPLETED",
+    "scale": 2.11555,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "case": "dom-w-jablonkach",
+   "family": "dom-w-jablonkach",
+   "selectedFrame": "frame-asset-rzut-a8bdd8cd1d-d80b709d74",
+   "set": "DEV_005K",
+   "trueScale": 2.1194605009633913,
+   "trueScaleSupport": 4
+  },
+  {
+   "M0": {
+    "code": null,
+    "frame": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+    "modelHash": "84af704b09664eb5997d5a12265663ba45f2aaf456098190e43f914f34c34c81",
+    "outcome": "COMPLETED",
+    "scale": 2.6699,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+    "modelHash": "84af704b09664eb5997d5a12265663ba45f2aaf456098190e43f914f34c34c81",
+    "outcome": "COMPLETED",
+    "scale": 2.6699,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+    "modelHash": "84af704b09664eb5997d5a12265663ba45f2aaf456098190e43f914f34c34c81",
+    "outcome": "COMPLETED",
+    "scale": 2.6699,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+    "modelHash": "84af704b09664eb5997d5a12265663ba45f2aaf456098190e43f914f34c34c81",
+    "outcome": "COMPLETED",
+    "scale": 2.6699,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+    "modelHash": "84af704b09664eb5997d5a12265663ba45f2aaf456098190e43f914f34c34c81",
+    "outcome": "COMPLETED",
+    "scale": 2.6699,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+    "modelHash": "84af704b09664eb5997d5a12265663ba45f2aaf456098190e43f914f34c34c81",
+    "outcome": "COMPLETED",
+    "scale": 2.6699,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+    "modelHash": "84af704b09664eb5997d5a12265663ba45f2aaf456098190e43f914f34c34c81",
+    "outcome": "COMPLETED",
+    "scale": 2.6699,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+    "modelHash": "84af704b09664eb5997d5a12265663ba45f2aaf456098190e43f914f34c34c81",
+    "outcome": "COMPLETED",
+    "scale": 2.6699,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "case": "willa-miranda",
+   "family": "willa-miranda",
+   "selectedFrame": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+   "set": "DEV_005K",
+   "trueScale": 2.6806083650190113,
+   "trueScaleSupport": 7
+  },
+  {
+   "M0": {
+    "code": null,
+    "frame": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+    "modelHash": "a8ef42a5613bde1f0c59f8535c642fa8bd95609a436dfdc0f1ae7258732df7d1",
+    "outcome": "COMPLETED",
+    "scale": 2.2174,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+    "modelHash": "a8ef42a5613bde1f0c59f8535c642fa8bd95609a436dfdc0f1ae7258732df7d1",
+    "outcome": "COMPLETED",
+    "scale": 2.2174,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+    "modelHash": "a8ef42a5613bde1f0c59f8535c642fa8bd95609a436dfdc0f1ae7258732df7d1",
+    "outcome": "COMPLETED",
+    "scale": 2.2174,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+    "modelHash": "a8ef42a5613bde1f0c59f8535c642fa8bd95609a436dfdc0f1ae7258732df7d1",
+    "outcome": "COMPLETED",
+    "scale": 2.2174,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+    "modelHash": "a8ef42a5613bde1f0c59f8535c642fa8bd95609a436dfdc0f1ae7258732df7d1",
+    "outcome": "COMPLETED",
+    "scale": 2.2174,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+    "modelHash": "a8ef42a5613bde1f0c59f8535c642fa8bd95609a436dfdc0f1ae7258732df7d1",
+    "outcome": "COMPLETED",
+    "scale": 2.2174,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+    "modelHash": "a8ef42a5613bde1f0c59f8535c642fa8bd95609a436dfdc0f1ae7258732df7d1",
+    "outcome": "COMPLETED",
+    "scale": 2.2174,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+    "modelHash": "a8ef42a5613bde1f0c59f8535c642fa8bd95609a436dfdc0f1ae7258732df7d1",
+    "outcome": "COMPLETED",
+    "scale": 2.2174,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "case": "dom-w-zurawkach",
+   "family": "dom-w-zurawkach",
+   "selectedFrame": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+   "set": "DEV_005K",
+   "trueScale": 2.2189349112426036,
+   "trueScaleSupport": 7
+  },
+  {
+   "M0": {
+    "code": null,
+    "frame": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+    "modelHash": "b125b9d24f1fb1fcb0004d45f2034fb949247f917a20893ea8b857d837946615",
+    "outcome": "COMPLETED",
+    "scale": 2.74845,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+    "modelHash": "b125b9d24f1fb1fcb0004d45f2034fb949247f917a20893ea8b857d837946615",
+    "outcome": "COMPLETED",
+    "scale": 2.74845,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+    "modelHash": "b125b9d24f1fb1fcb0004d45f2034fb949247f917a20893ea8b857d837946615",
+    "outcome": "COMPLETED",
+    "scale": 2.74845,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+    "modelHash": "b125b9d24f1fb1fcb0004d45f2034fb949247f917a20893ea8b857d837946615",
+    "outcome": "COMPLETED",
+    "scale": 2.74845,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+    "modelHash": "b125b9d24f1fb1fcb0004d45f2034fb949247f917a20893ea8b857d837946615",
+    "outcome": "COMPLETED",
+    "scale": 2.74845,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+    "modelHash": "b125b9d24f1fb1fcb0004d45f2034fb949247f917a20893ea8b857d837946615",
+    "outcome": "COMPLETED",
+    "scale": 2.74845,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+    "modelHash": "b125b9d24f1fb1fcb0004d45f2034fb949247f917a20893ea8b857d837946615",
+    "outcome": "COMPLETED",
+    "scale": 2.74845,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+    "modelHash": "b125b9d24f1fb1fcb0004d45f2034fb949247f917a20893ea8b857d837946615",
+    "outcome": "COMPLETED",
+    "scale": 2.74845,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "case": "dom-w-modrzykach",
+   "family": "dom-w-modrzykach",
+   "selectedFrame": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+   "set": "DEV_005K",
+   "trueScale": 2.748815165876777,
+   "trueScaleSupport": 11
+  },
+  {
+   "M0": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-86bef468f3-19006df9bc",
+    "message": "the lowest storey covers 6.27 m\u00b2 against the 69.69 m\u00b2 the publisher prints \u2014 91.0% apart: the decomposition is not of this building 47 other readings of the plan were weighed and none holds: the best, copy area_table 79ba9b7966, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 69.3 m\u00b2 (-0.5% of 69.69), UNKNOWN (the figure is spent), has only the published footprin",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 1.86275,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-86bef468f3-19006df9bc",
+    "message": "the lowest storey covers 6.27 m\u00b2 against the 69.69 m\u00b2 the publisher prints \u2014 91.0% apart: the decomposition is not of this building 47 other readings of the plan were weighed and none holds: the best, copy area_table 79ba9b7966, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 69.3 m\u00b2 (-0.5% of 69.69), UNKNOWN (the figure is spent), has only the published footprin",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 1.86275,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-86bef468f3-19006df9bc",
+    "message": "the lowest storey covers 6.27 m\u00b2 against the 69.69 m\u00b2 the publisher prints \u2014 91.0% apart: the decomposition is not of this building 47 other readings of the plan were weighed and none holds: the best, copy area_table 79ba9b7966, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 69.3 m\u00b2 (-0.5% of 69.69), UNKNOWN (the figure is spent), has only the published footprin",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 1.86275,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-86bef468f3-19006df9bc",
+    "message": "the lowest storey covers 6.27 m\u00b2 against the 69.69 m\u00b2 the publisher prints \u2014 91.0% apart: the decomposition is not of this building 47 other readings of the plan were weighed and none holds: the best, copy area_table 79ba9b7966, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 69.3 m\u00b2 (-0.5% of 69.69), UNKNOWN (the figure is spent), has only the published footprin",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 1.86275,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-86bef468f3-19006df9bc",
+    "message": "the lowest storey covers 6.27 m\u00b2 against the 69.69 m\u00b2 the publisher prints \u2014 91.0% apart: the decomposition is not of this building 47 other readings of the plan were weighed and none holds: the best, copy area_table 79ba9b7966, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 69.3 m\u00b2 (-0.5% of 69.69), UNKNOWN (the figure is spent), has only the published footprin",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 1.86275,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-86bef468f3-19006df9bc",
+    "message": "the lowest storey covers 6.27 m\u00b2 against the 69.69 m\u00b2 the publisher prints \u2014 91.0% apart: the decomposition is not of this building 47 other readings of the plan were weighed and none holds: the best, copy area_table 79ba9b7966, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 69.3 m\u00b2 (-0.5% of 69.69), UNKNOWN (the figure is spent), has only the published footprin",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 1.86275,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-86bef468f3-19006df9bc",
+    "message": "the lowest storey covers 6.27 m\u00b2 against the 69.69 m\u00b2 the publisher prints \u2014 91.0% apart: the decomposition is not of this building 47 other readings of the plan were weighed and none holds: the best, copy area_table 79ba9b7966, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 69.3 m\u00b2 (-0.5% of 69.69), UNKNOWN (the figure is spent), has only the published footprin",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 1.86275,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-86bef468f3-19006df9bc",
+    "message": "the lowest storey covers 6.27 m\u00b2 against the 69.69 m\u00b2 the publisher prints \u2014 91.0% apart: the decomposition is not of this building 47 other readings of the plan were weighed and none holds: the best, copy area_table 79ba9b7966, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 69.3 m\u00b2 (-0.5% of 69.69), UNKNOWN (the figure is spent), has only the published footprin",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 1.86275,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "case": "dom-w-azaliach",
+   "family": "dom-w-azaliach",
+   "selectedFrame": "frame-asset-rzut-86bef468f3-19006df9bc",
+   "set": "DEV_005K",
+   "trueScale": null,
+   "trueScaleSupport": 2
+  },
+  {
+   "M0": {
+    "code": "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
+    "frame": "frame-asset-rzut-1a56066c62-10b0ec4131",
+    "message": "the building's outline cannot be established: read with drawn openings only it is B_STRICT 41.3 m\u00b2 (perimeter 131.8 m: 64% wall, 45.4 m drawn openings, 0.0 m blank gaps bridged, 1.6 m unsupported); bridging blank door-sized gaps by what lies behind them it is B_EXCLUSION 90.3 m\u00b2 (perimeter 96.0 m: 58% wall, 38.5 m drawn openings, 0.9 m blank gaps bridged, 1.0 m unsupported). The two differ by more",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.81315,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
+    "frame": "frame-asset-rzut-1a56066c62-10b0ec4131",
+    "message": "the building's outline cannot be established: read with drawn openings only it is B_STRICT 41.3 m\u00b2 (perimeter 131.8 m: 64% wall, 45.4 m drawn openings, 0.0 m blank gaps bridged, 1.6 m unsupported); bridging blank door-sized gaps by what lies behind them it is B_EXCLUSION 90.3 m\u00b2 (perimeter 96.0 m: 58% wall, 38.5 m drawn openings, 0.9 m blank gaps bridged, 1.0 m unsupported). The two differ by more",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.81315,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
+    "frame": "frame-asset-rzut-1a56066c62-10b0ec4131",
+    "message": "the building's outline cannot be established: read with drawn openings only it is B_STRICT 41.3 m\u00b2 (perimeter 131.8 m: 64% wall, 45.4 m drawn openings, 0.0 m blank gaps bridged, 1.6 m unsupported); bridging blank door-sized gaps by what lies behind them it is B_EXCLUSION 90.3 m\u00b2 (perimeter 96.0 m: 58% wall, 38.5 m drawn openings, 0.9 m blank gaps bridged, 1.0 m unsupported). The two differ by more",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.81315,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
+    "frame": "frame-asset-rzut-1a56066c62-10b0ec4131",
+    "message": "the building's outline cannot be established: read with drawn openings only it is B_STRICT 41.3 m\u00b2 (perimeter 131.8 m: 64% wall, 45.4 m drawn openings, 0.0 m blank gaps bridged, 1.6 m unsupported); bridging blank door-sized gaps by what lies behind them it is B_EXCLUSION 90.3 m\u00b2 (perimeter 96.0 m: 58% wall, 38.5 m drawn openings, 0.9 m blank gaps bridged, 1.0 m unsupported). The two differ by more",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.81315,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
+    "frame": "frame-asset-rzut-1a56066c62-10b0ec4131",
+    "message": "the building's outline cannot be established: read with drawn openings only it is B_STRICT 41.3 m\u00b2 (perimeter 131.8 m: 64% wall, 45.4 m drawn openings, 0.0 m blank gaps bridged, 1.6 m unsupported); bridging blank door-sized gaps by what lies behind them it is B_EXCLUSION 90.3 m\u00b2 (perimeter 96.0 m: 58% wall, 38.5 m drawn openings, 0.9 m blank gaps bridged, 1.0 m unsupported). The two differ by more",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.81315,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
+    "frame": "frame-asset-rzut-1a56066c62-10b0ec4131",
+    "message": "the building's outline cannot be established: read with drawn openings only it is B_STRICT 41.3 m\u00b2 (perimeter 131.8 m: 64% wall, 45.4 m drawn openings, 0.0 m blank gaps bridged, 1.6 m unsupported); bridging blank door-sized gaps by what lies behind them it is B_EXCLUSION 90.3 m\u00b2 (perimeter 96.0 m: 58% wall, 38.5 m drawn openings, 0.9 m blank gaps bridged, 1.0 m unsupported). The two differ by more",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.81315,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
+    "frame": "frame-asset-rzut-1a56066c62-10b0ec4131",
+    "message": "the building's outline cannot be established: read with drawn openings only it is B_STRICT 41.3 m\u00b2 (perimeter 131.8 m: 64% wall, 45.4 m drawn openings, 0.0 m blank gaps bridged, 1.6 m unsupported); bridging blank door-sized gaps by what lies behind them it is B_EXCLUSION 90.3 m\u00b2 (perimeter 96.0 m: 58% wall, 38.5 m drawn openings, 0.9 m blank gaps bridged, 1.0 m unsupported). The two differ by more",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.81315,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
+    "frame": "frame-asset-rzut-1a56066c62-10b0ec4131",
+    "message": "the building's outline cannot be established: read with drawn openings only it is B_STRICT 41.3 m\u00b2 (perimeter 131.8 m: 64% wall, 45.4 m drawn openings, 0.0 m blank gaps bridged, 1.6 m unsupported); bridging blank door-sized gaps by what lies behind them it is B_EXCLUSION 90.3 m\u00b2 (perimeter 96.0 m: 58% wall, 38.5 m drawn openings, 0.9 m blank gaps bridged, 1.0 m unsupported). The two differ by more",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.81315,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "case": "dom-w-dabecjach",
+   "family": "dom-w-dabecjach",
+   "selectedFrame": "frame-asset-rzut-1a56066c62-10b0ec4131",
+   "set": "DEV_005K",
+   "trueScale": 2.813008130081301,
+   "trueScaleSupport": 7
+  },
+  {
+   "M0": {
+    "code": null,
+    "frame": "frame-asset-rzut-83377e8ffc-c1a88b7f25",
+    "modelHash": "780ecd4e59ad2fd513bc0c9eace1c2f76a487b09de23c1943dc3ddae9843f282",
+    "outcome": "COMPLETED",
+    "scale": 2.09325,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-83377e8ffc-c1a88b7f25",
+    "modelHash": "780ecd4e59ad2fd513bc0c9eace1c2f76a487b09de23c1943dc3ddae9843f282",
+    "outcome": "COMPLETED",
+    "scale": 2.09325,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-83377e8ffc-c1a88b7f25",
+    "modelHash": "780ecd4e59ad2fd513bc0c9eace1c2f76a487b09de23c1943dc3ddae9843f282",
+    "outcome": "COMPLETED",
+    "scale": 2.09325,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-83377e8ffc-c1a88b7f25",
+    "modelHash": "780ecd4e59ad2fd513bc0c9eace1c2f76a487b09de23c1943dc3ddae9843f282",
+    "outcome": "COMPLETED",
+    "scale": 2.09325,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-83377e8ffc-c1a88b7f25",
+    "modelHash": "780ecd4e59ad2fd513bc0c9eace1c2f76a487b09de23c1943dc3ddae9843f282",
+    "outcome": "COMPLETED",
+    "scale": 2.09325,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-83377e8ffc-c1a88b7f25",
+    "modelHash": "780ecd4e59ad2fd513bc0c9eace1c2f76a487b09de23c1943dc3ddae9843f282",
+    "outcome": "COMPLETED",
+    "scale": 2.09325,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-83377e8ffc-c1a88b7f25",
+    "modelHash": "780ecd4e59ad2fd513bc0c9eace1c2f76a487b09de23c1943dc3ddae9843f282",
+    "outcome": "COMPLETED",
+    "scale": 2.09325,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-83377e8ffc-c1a88b7f25",
+    "modelHash": "780ecd4e59ad2fd513bc0c9eace1c2f76a487b09de23c1943dc3ddae9843f282",
+    "outcome": "COMPLETED",
+    "scale": 2.09325,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "case": "dom-w-tunbergiach",
+   "family": "dom-w-tunbergiach",
+   "selectedFrame": "frame-asset-rzut-83377e8ffc-c1a88b7f25",
+   "set": "DEV_005K",
+   "trueScale": null,
+   "trueScaleSupport": 2
+  },
+  {
+   "M0": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-aster-viii-rzut-parter-7e90859c03-b39fd620c2",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 2.087379 cm/px (0 independent, plausible); 9.078014 cm/px (0 independent, ruled out by the walls); 21.333333 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the fl",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-aster-viii-rzut-parter-7e90859c03-b39fd620c2",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 2.087379 cm/px (0 independent, plausible); 9.078014 cm/px (0 independent, ruled out by the walls); 21.333333 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the fl",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-aster-viii-rzut-parter-7e90859c03-b39fd620c2",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 2.087379 cm/px (0 independent, plausible); 9.078014 cm/px (0 independent, ruled out by the walls); 21.333333 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the fl",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-aster-viii-rzut-parter-7e90859c03-b39fd620c2",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 2.087379 cm/px (0 independent, plausible); 9.078014 cm/px (0 independent, ruled out by the walls); 21.333333 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the fl",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-aster-viii-rzut-parter-7e90859c03-b39fd620c2",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 2.087379 cm/px (0 independent, plausible); 9.078014 cm/px (0 independent, ruled out by the walls); 21.333333 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the fl",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-aster-viii-rzut-parter-7e90859c03-b39fd620c2",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 2.087379 cm/px (0 independent, plausible); 9.078014 cm/px (0 independent, ruled out by the walls); 21.333333 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the fl",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-aster-viii-rzut-parter-7e90859c03-b39fd620c2",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 2.087379 cm/px (0 independent, plausible); 9.078014 cm/px (0 independent, ruled out by the walls); 21.333333 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the fl",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-aster-viii-rzut-parter-7e90859c03-b39fd620c2",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 2.087379 cm/px (0 independent, plausible); 9.078014 cm/px (0 independent, ruled out by the walls); 21.333333 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the fl",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "case": "aster-viii",
+   "family": "aster-viii",
+   "selectedFrame": "frame-asset-aster-viii-rzut-parter-7e90859c03-b39fd620c2",
+   "set": "DEV_005K",
+   "trueScale": null,
+   "trueScaleSupport": 0
+  },
+  {
+   "M0": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.005102 cm/px (0 independent, ruled out by the walls); 0.87747 cm/px (0 independent, plausible); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself \u2014 it prints none. (the 1625\u00d71700 px floor ",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.005102 cm/px (0 independent, ruled out by the walls); 0.87747 cm/px (0 independent, plausible); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself \u2014 it prints none. (the 1625\u00d71700 px floor ",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.005102 cm/px (0 independent, ruled out by the walls); 0.87747 cm/px (0 independent, plausible); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself \u2014 it prints none. (the 1625\u00d71700 px floor ",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.005102 cm/px (0 independent, ruled out by the walls); 0.87747 cm/px (0 independent, plausible); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself \u2014 it prints none. (the 1625\u00d71700 px floor ",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.005102 cm/px (0 independent, ruled out by the walls); 0.87747 cm/px (0 independent, plausible); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself \u2014 it prints none. (the 1625\u00d71700 px floor ",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.005102 cm/px (0 independent, ruled out by the walls); 0.87747 cm/px (0 independent, plausible); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself \u2014 it prints none. (the 1625\u00d71700 px floor ",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.005102 cm/px (0 independent, ruled out by the walls); 0.87747 cm/px (0 independent, plausible); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself \u2014 it prints none. (the 1625\u00d71700 px floor ",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.005102 cm/px (0 independent, ruled out by the walls); 0.87747 cm/px (0 independent, plausible); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself \u2014 it prints none. (the 1625\u00d71700 px floor ",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "case": "galaktyka",
+   "family": "galaktyka",
+   "selectedFrame": "frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770",
+   "set": "DEV_005K",
+   "trueScale": null,
+   "trueScaleSupport": 0
+  },
+  {
+   "M0": {
+    "code": null,
+    "frame": "frame-asset-rzut-2abfc5825d-e842a14c7f",
+    "modelHash": "a27f3a5e808ee09feae908ba2295f9762087993401a8e111ea9291b16719fc51",
+    "outcome": "COMPLETED",
+    "scale": 2.2236,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-2abfc5825d-e842a14c7f",
+    "modelHash": "a27f3a5e808ee09feae908ba2295f9762087993401a8e111ea9291b16719fc51",
+    "outcome": "COMPLETED",
+    "scale": 2.2236,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-2abfc5825d-e842a14c7f",
+    "modelHash": "a27f3a5e808ee09feae908ba2295f9762087993401a8e111ea9291b16719fc51",
+    "outcome": "COMPLETED",
+    "scale": 2.2236,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-2abfc5825d-e842a14c7f",
+    "modelHash": "a27f3a5e808ee09feae908ba2295f9762087993401a8e111ea9291b16719fc51",
+    "outcome": "COMPLETED",
+    "scale": 2.2236,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-2abfc5825d-e842a14c7f",
+    "modelHash": "a27f3a5e808ee09feae908ba2295f9762087993401a8e111ea9291b16719fc51",
+    "outcome": "COMPLETED",
+    "scale": 2.2236,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-2abfc5825d-e842a14c7f",
+    "modelHash": "a27f3a5e808ee09feae908ba2295f9762087993401a8e111ea9291b16719fc51",
+    "outcome": "COMPLETED",
+    "scale": 2.2236,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-2abfc5825d-e842a14c7f",
+    "modelHash": "a27f3a5e808ee09feae908ba2295f9762087993401a8e111ea9291b16719fc51",
+    "outcome": "COMPLETED",
+    "scale": 2.2236,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-2abfc5825d-e842a14c7f",
+    "modelHash": "a27f3a5e808ee09feae908ba2295f9762087993401a8e111ea9291b16719fc51",
+    "outcome": "COMPLETED",
+    "scale": 2.2236,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "case": "eoze-legacy-area",
+   "family": "rarytasy",
+   "selectedFrame": "frame-asset-rzut-2abfc5825d-e842a14c7f",
+   "set": "DEV_005K",
+   "trueScale": null,
+   "trueScaleSupport": 0
+  },
+  {
+   "M0": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 2.444658 cm/px (1 independent, plausible); 2.290019 cm/px (1 independent, plausible); 4.48062 cm/px (1 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimensions that set",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 2.444658 cm/px (1 independent, plausible); 2.290019 cm/px (1 independent, plausible); 4.48062 cm/px (1 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimensions that set",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 2.444658 cm/px (1 independent, plausible); 2.290019 cm/px (1 independent, plausible); 4.48062 cm/px (1 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimensions that set",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 2.444658 cm/px (1 independent, plausible); 2.290019 cm/px (1 independent, plausible); 4.48062 cm/px (1 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimensions that set",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 2.444658 cm/px (1 independent, plausible); 2.290019 cm/px (1 independent, plausible); 4.48062 cm/px (1 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimensions that set",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 2.444658 cm/px (1 independent, plausible); 2.290019 cm/px (1 independent, plausible); 4.48062 cm/px (1 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimensions that set",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 2.444658 cm/px (1 independent, plausible); 2.290019 cm/px (1 independent, plausible); 4.48062 cm/px (1 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimensions that set",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 2.444658 cm/px (1 independent, plausible); 2.290019 cm/px (1 independent, plausible); 4.48062 cm/px (1 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimensions that set",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "case": "dom-pod-milorzebem",
+   "family": "dom-pod-milorzebem",
+   "selectedFrame": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+   "set": "DEV_005K",
+   "trueScale": null,
+   "trueScaleSupport": 0
+  },
+  {
+   "M0": {
+    "code": null,
+    "frame": "frame-asset-rzut-d5842da623-4c943a2b00",
+    "modelHash": "27642deb363a860dfb9dca75d2dd143499242704666d07c937f3ef41db7d4be0",
+    "outcome": "COMPLETED",
+    "scale": 2.30615,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-d5842da623-4c943a2b00",
+    "modelHash": "27642deb363a860dfb9dca75d2dd143499242704666d07c937f3ef41db7d4be0",
+    "outcome": "COMPLETED",
+    "scale": 2.30615,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-d5842da623-4c943a2b00",
+    "modelHash": "27642deb363a860dfb9dca75d2dd143499242704666d07c937f3ef41db7d4be0",
+    "outcome": "COMPLETED",
+    "scale": 2.30615,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-d5842da623-4c943a2b00",
+    "modelHash": "27642deb363a860dfb9dca75d2dd143499242704666d07c937f3ef41db7d4be0",
+    "outcome": "COMPLETED",
+    "scale": 2.30615,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-d5842da623-4c943a2b00",
+    "modelHash": "27642deb363a860dfb9dca75d2dd143499242704666d07c937f3ef41db7d4be0",
+    "outcome": "COMPLETED",
+    "scale": 2.30615,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-d5842da623-4c943a2b00",
+    "modelHash": "27642deb363a860dfb9dca75d2dd143499242704666d07c937f3ef41db7d4be0",
+    "outcome": "COMPLETED",
+    "scale": 2.30615,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-d5842da623-4c943a2b00",
+    "modelHash": "27642deb363a860dfb9dca75d2dd143499242704666d07c937f3ef41db7d4be0",
+    "outcome": "COMPLETED",
+    "scale": 2.30615,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-d5842da623-4c943a2b00",
+    "modelHash": "27642deb363a860dfb9dca75d2dd143499242704666d07c937f3ef41db7d4be0",
+    "outcome": "COMPLETED",
+    "scale": 2.30615,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "case": "dom-w-helikoniach",
+   "family": "dom-w-helikoniach",
+   "selectedFrame": "frame-asset-rzut-d5842da623-4c943a2b00",
+   "set": "DEV_005K",
+   "trueScale": 2.308641975308642,
+   "trueScaleSupport": 4
+  },
+  {
+   "M0": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-94f54ada01-bdf7aa09e8",
+    "message": "the lowest storey covers 33.15 m\u00b2 against the 164.47 m\u00b2 the publisher prints \u2014 79.8% apart: the decomposition is not of this building 35 other readings of the plan were weighed and none holds: the best, copy area_table bdf7aa09e8, chain extent, registered scale, walled-first tiling, sides as gridded: 3 bodies, 171.0 m\u00b2 (+4.0% of 164.47), UNKNOWN (the figure is spent), has only the published footpr",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.4062,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-94f54ada01-bdf7aa09e8",
+    "message": "the lowest storey covers 33.15 m\u00b2 against the 164.47 m\u00b2 the publisher prints \u2014 79.8% apart: the decomposition is not of this building 35 other readings of the plan were weighed and none holds: the best, copy area_table bdf7aa09e8, chain extent, registered scale, walled-first tiling, sides as gridded: 3 bodies, 171.0 m\u00b2 (+4.0% of 164.47), UNKNOWN (the figure is spent), has only the published footpr",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.4062,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-94f54ada01-bdf7aa09e8",
+    "message": "the lowest storey covers 33.15 m\u00b2 against the 164.47 m\u00b2 the publisher prints \u2014 79.8% apart: the decomposition is not of this building 35 other readings of the plan were weighed and none holds: the best, copy area_table bdf7aa09e8, chain extent, registered scale, walled-first tiling, sides as gridded: 3 bodies, 171.0 m\u00b2 (+4.0% of 164.47), UNKNOWN (the figure is spent), has only the published footpr",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.4062,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-94f54ada01-bdf7aa09e8",
+    "message": "the lowest storey covers 33.15 m\u00b2 against the 164.47 m\u00b2 the publisher prints \u2014 79.8% apart: the decomposition is not of this building 35 other readings of the plan were weighed and none holds: the best, copy area_table bdf7aa09e8, chain extent, registered scale, walled-first tiling, sides as gridded: 3 bodies, 171.0 m\u00b2 (+4.0% of 164.47), UNKNOWN (the figure is spent), has only the published footpr",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.4062,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-94f54ada01-bdf7aa09e8",
+    "message": "the lowest storey covers 33.15 m\u00b2 against the 164.47 m\u00b2 the publisher prints \u2014 79.8% apart: the decomposition is not of this building 35 other readings of the plan were weighed and none holds: the best, copy area_table bdf7aa09e8, chain extent, registered scale, walled-first tiling, sides as gridded: 3 bodies, 171.0 m\u00b2 (+4.0% of 164.47), UNKNOWN (the figure is spent), has only the published footpr",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.4062,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-94f54ada01-bdf7aa09e8",
+    "message": "SOURCE_CONFLICT: the drawing contradicts the scale the plan was registered at (the registration (2.4057 cm/px) contradicts 91% of the chain length as read, 1.449275 cm/px only 30%). Read at copy area_table bdf7aa09e8, chain extent, scale 1.449275 cm/px, largest-first tiling, sides as gridded the plan is better supported by the drawing itself (30% of the stated chain length contradicted, against 91",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.4062,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-94f54ada01-bdf7aa09e8",
+    "message": "SOURCE_CONFLICT: the drawing contradicts the scale the plan was registered at (the registration (2.4057 cm/px) contradicts 91% of the chain length as read, 1.449275 cm/px only 30%). Read at copy area_table bdf7aa09e8, chain extent, scale 1.449275 cm/px, largest-first tiling, sides as gridded the plan is better supported by the drawing itself (30% of the stated chain length contradicted, against 91",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.4062,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-94f54ada01-bdf7aa09e8",
+    "message": "SOURCE_CONFLICT: the drawing contradicts the scale the plan was registered at (the registration (2.4057 cm/px) contradicts 91% of the chain length as read, 1.449275 cm/px only 30%). Read at copy area_table bdf7aa09e8, chain extent, scale 1.449275 cm/px, largest-first tiling, sides as gridded the plan is better supported by the drawing itself (30% of the stated chain length contradicted, against 91",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.4062,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "case": "kosacce-area-alone",
+   "family": "kosacce",
+   "selectedFrame": "frame-asset-rzut-94f54ada01-bdf7aa09e8",
+   "set": "DEV_005K",
+   "trueScale": 2.4057971014492754,
+   "trueScaleSupport": 7
+  },
+  {
+   "M0": {
+    "code": "MODEL_EMISSION_FAILED/None",
+    "frame": null,
+    "message": "the model refused command 135 (placeChimney): INVALID_COMMAND",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": "MODEL_EMISSION_FAILED/None",
+    "frame": null,
+    "message": "the model refused command 135 (placeChimney): INVALID_COMMAND",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": "MODEL_EMISSION_FAILED/None",
+    "frame": null,
+    "message": "the model refused command 135 (placeChimney): INVALID_COMMAND",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": "MODEL_EMISSION_FAILED/None",
+    "frame": null,
+    "message": "the model refused command 135 (placeChimney): INVALID_COMMAND",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": "MODEL_EMISSION_FAILED/None",
+    "frame": null,
+    "message": "the model refused command 135 (placeChimney): INVALID_COMMAND",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": "MODEL_EMISSION_FAILED/None",
+    "frame": null,
+    "message": "the model refused command 135 (placeChimney): INVALID_COMMAND",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": "MODEL_EMISSION_FAILED/None",
+    "frame": null,
+    "message": "the model refused command 135 (placeChimney): INVALID_COMMAND",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": "MODEL_EMISSION_FAILED/None",
+    "frame": null,
+    "message": "the model refused command 135 (placeChimney): INVALID_COMMAND",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "case": "dom-w-gozdzikowcach",
+   "family": "dom-w-gozdzikowcach",
+   "selectedFrame": null,
+   "set": "DEV_005K",
+   "trueScale": null,
+   "trueScaleSupport": 0
+  },
+  {
+   "M0": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-fa38f527ea-8e7eb2ad66",
+    "message": "the lowest storey covers 49.20 m\u00b2 against the 92.48 m\u00b2 the publisher prints \u2014 46.8% apart: the decomposition is not of this building 71 other readings of the plan were weighed and none holds: the best, copy dimensioned 07d4ca005c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 92.3 m\u00b2 (-0.2% of 92.48), UNKNOWN (the figure is spent), has only the published footprint",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.0285,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-fa38f527ea-8e7eb2ad66",
+    "message": "the lowest storey covers 49.20 m\u00b2 against the 92.48 m\u00b2 the publisher prints \u2014 46.8% apart: the decomposition is not of this building 71 other readings of the plan were weighed and none holds: the best, copy dimensioned 07d4ca005c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 92.3 m\u00b2 (-0.2% of 92.48), UNKNOWN (the figure is spent), has only the published footprint",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.0285,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-fa38f527ea-8e7eb2ad66",
+    "message": "the lowest storey covers 49.20 m\u00b2 against the 92.48 m\u00b2 the publisher prints \u2014 46.8% apart: the decomposition is not of this building 71 other readings of the plan were weighed and none holds: the best, copy dimensioned 07d4ca005c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 92.3 m\u00b2 (-0.2% of 92.48), UNKNOWN (the figure is spent), has only the published footprint",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.0285,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-fa38f527ea-8e7eb2ad66",
+    "message": "the lowest storey covers 49.20 m\u00b2 against the 92.48 m\u00b2 the publisher prints \u2014 46.8% apart: the decomposition is not of this building 71 other readings of the plan were weighed and none holds: the best, copy dimensioned 07d4ca005c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 92.3 m\u00b2 (-0.2% of 92.48), UNKNOWN (the figure is spent), has only the published footprint",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.0285,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-fa38f527ea-8e7eb2ad66",
+    "message": "the lowest storey covers 49.20 m\u00b2 against the 92.48 m\u00b2 the publisher prints \u2014 46.8% apart: the decomposition is not of this building 71 other readings of the plan were weighed and none holds: the best, copy dimensioned 07d4ca005c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 92.3 m\u00b2 (-0.2% of 92.48), UNKNOWN (the figure is spent), has only the published footprint",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.0285,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-fa38f527ea-8e7eb2ad66",
+    "message": "the lowest storey covers 49.20 m\u00b2 against the 92.48 m\u00b2 the publisher prints \u2014 46.8% apart: the decomposition is not of this building 71 other readings of the plan were weighed and none holds: the best, copy dimensioned 07d4ca005c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 92.3 m\u00b2 (-0.2% of 92.48), UNKNOWN (the figure is spent), has only the published footprint",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.0285,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-fa38f527ea-8e7eb2ad66",
+    "message": "the lowest storey covers 49.20 m\u00b2 against the 92.48 m\u00b2 the publisher prints \u2014 46.8% apart: the decomposition is not of this building 71 other readings of the plan were weighed and none holds: the best, copy dimensioned 07d4ca005c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 92.3 m\u00b2 (-0.2% of 92.48), UNKNOWN (the figure is spent), has only the published footprint",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.0285,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-fa38f527ea-8e7eb2ad66",
+    "message": "the lowest storey covers 49.20 m\u00b2 against the 92.48 m\u00b2 the publisher prints \u2014 46.8% apart: the decomposition is not of this building 71 other readings of the plan were weighed and none holds: the best, copy dimensioned 07d4ca005c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 92.3 m\u00b2 (-0.2% of 92.48), UNKNOWN (the figure is spent), has only the published footprint",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.0285,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "case": "dom-w-cyklamenach",
+   "family": "dom-w-cyklamenach",
+   "selectedFrame": "frame-asset-rzut-fa38f527ea-8e7eb2ad66",
+   "set": "DEV_005K",
+   "trueScale": 2.0300902708124373,
+   "trueScaleSupport": 5
+  },
+  {
+   "M0": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-db1e8df563-19bef9a91e",
+    "message": "the lowest storey covers 30.34 m\u00b2 against the 147.01 m\u00b2 the publisher prints \u2014 79.4% apart: the decomposition is not of this building 95 other readings of the plan were weighed and none holds: the best, copy dimensioned c1ed5b382c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 145.7 m\u00b2 (-0.9% of 147.01), UNKNOWN (the figure is spent), corroborated by ISOTROPY, has",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.3069,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-db1e8df563-19bef9a91e",
+    "message": "the lowest storey covers 30.34 m\u00b2 against the 147.01 m\u00b2 the publisher prints \u2014 79.4% apart: the decomposition is not of this building 95 other readings of the plan were weighed and none holds: the best, copy dimensioned c1ed5b382c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 145.7 m\u00b2 (-0.9% of 147.01), UNKNOWN (the figure is spent), corroborated by ISOTROPY, has",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.3069,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-db1e8df563-19bef9a91e",
+    "message": "the lowest storey covers 30.34 m\u00b2 against the 147.01 m\u00b2 the publisher prints \u2014 79.4% apart: the decomposition is not of this building 95 other readings of the plan were weighed and none holds: the best, copy dimensioned c1ed5b382c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 145.7 m\u00b2 (-0.9% of 147.01), UNKNOWN (the figure is spent), corroborated by ISOTROPY, has",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.3069,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-db1e8df563-19bef9a91e",
+    "message": "the lowest storey covers 30.34 m\u00b2 against the 147.01 m\u00b2 the publisher prints \u2014 79.4% apart: the decomposition is not of this building 95 other readings of the plan were weighed and none holds: the best, copy dimensioned c1ed5b382c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 145.7 m\u00b2 (-0.9% of 147.01), UNKNOWN (the figure is spent), corroborated by ISOTROPY, has",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.3069,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-db1e8df563-19bef9a91e",
+    "message": "the lowest storey covers 30.34 m\u00b2 against the 147.01 m\u00b2 the publisher prints \u2014 79.4% apart: the decomposition is not of this building 95 other readings of the plan were weighed and none holds: the best, copy dimensioned c1ed5b382c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 145.7 m\u00b2 (-0.9% of 147.01), UNKNOWN (the figure is spent), corroborated by ISOTROPY, has",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.3069,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-db1e8df563-19bef9a91e",
+    "message": "the lowest storey covers 30.34 m\u00b2 against the 147.01 m\u00b2 the publisher prints \u2014 79.4% apart: the decomposition is not of this building 95 other readings of the plan were weighed and none holds: the best, copy dimensioned c1ed5b382c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 145.7 m\u00b2 (-0.9% of 147.01), UNKNOWN (the figure is spent), corroborated by ISOTROPY, has",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.3069,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-db1e8df563-19bef9a91e",
+    "message": "the lowest storey covers 30.34 m\u00b2 against the 147.01 m\u00b2 the publisher prints \u2014 79.4% apart: the decomposition is not of this building 95 other readings of the plan were weighed and none holds: the best, copy dimensioned c1ed5b382c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 145.7 m\u00b2 (-0.9% of 147.01), UNKNOWN (the figure is spent), corroborated by ISOTROPY, has",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.3069,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-db1e8df563-19bef9a91e",
+    "message": "the lowest storey covers 30.34 m\u00b2 against the 147.01 m\u00b2 the publisher prints \u2014 79.4% apart: the decomposition is not of this building 95 other readings of the plan were weighed and none holds: the best, copy dimensioned c1ed5b382c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 145.7 m\u00b2 (-0.9% of 147.01), UNKNOWN (the figure is spent), corroborated by ISOTROPY, has",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.3069,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "case": "A00",
+   "family": "A00",
+   "selectedFrame": "frame-asset-rzut-db1e8df563-19bef9a91e",
+   "set": "FRESH_005K",
+   "trueScale": 2.305732484076433,
+   "trueScaleSupport": 4
+  },
+  {
+   "M0": {
+    "code": "MODEL_EMISSION_FAILED/None",
+    "frame": null,
+    "message": "the model refused command 89 (placeWindow): FILL_TOO_LARGE",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": "MODEL_EMISSION_FAILED/None",
+    "frame": null,
+    "message": "the model refused command 89 (placeWindow): FILL_TOO_LARGE",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": "MODEL_EMISSION_FAILED/None",
+    "frame": null,
+    "message": "the model refused command 89 (placeWindow): FILL_TOO_LARGE",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": "MODEL_EMISSION_FAILED/None",
+    "frame": null,
+    "message": "the model refused command 89 (placeWindow): FILL_TOO_LARGE",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": "MODEL_EMISSION_FAILED/None",
+    "frame": null,
+    "message": "the model refused command 89 (placeWindow): FILL_TOO_LARGE",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": "MODEL_EMISSION_FAILED/None",
+    "frame": null,
+    "message": "the model refused command 89 (placeWindow): FILL_TOO_LARGE",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": "MODEL_EMISSION_FAILED/None",
+    "frame": null,
+    "message": "the model refused command 89 (placeWindow): FILL_TOO_LARGE",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": "MODEL_EMISSION_FAILED/None",
+    "frame": null,
+    "message": "the model refused command 89 (placeWindow): FILL_TOO_LARGE",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "case": "A01",
+   "family": "A01",
+   "selectedFrame": null,
+   "set": "FRESH_005K",
+   "trueScale": null,
+   "trueScaleSupport": 0
+  },
+  {
+   "M0": {
+    "code": null,
+    "frame": "frame-asset-rzut-2c17aa3eda-b6cebfd23d",
+    "modelHash": "98229d5fa8d6ff8e682001061ff703e6e8c0be4a5412a71b77439e2b8aa92155",
+    "outcome": "COMPLETED",
+    "scale": 2.4919,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-2c17aa3eda-b6cebfd23d",
+    "modelHash": "98229d5fa8d6ff8e682001061ff703e6e8c0be4a5412a71b77439e2b8aa92155",
+    "outcome": "COMPLETED",
+    "scale": 2.4919,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-2c17aa3eda-b6cebfd23d",
+    "modelHash": "98229d5fa8d6ff8e682001061ff703e6e8c0be4a5412a71b77439e2b8aa92155",
+    "outcome": "COMPLETED",
+    "scale": 2.4919,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-2c17aa3eda-b6cebfd23d",
+    "modelHash": "98229d5fa8d6ff8e682001061ff703e6e8c0be4a5412a71b77439e2b8aa92155",
+    "outcome": "COMPLETED",
+    "scale": 2.4919,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-2c17aa3eda-b6cebfd23d",
+    "modelHash": "98229d5fa8d6ff8e682001061ff703e6e8c0be4a5412a71b77439e2b8aa92155",
+    "outcome": "COMPLETED",
+    "scale": 2.4919,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-2c17aa3eda-b6cebfd23d",
+    "modelHash": "98229d5fa8d6ff8e682001061ff703e6e8c0be4a5412a71b77439e2b8aa92155",
+    "outcome": "COMPLETED",
+    "scale": 2.4919,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-2c17aa3eda-b6cebfd23d",
+    "modelHash": "98229d5fa8d6ff8e682001061ff703e6e8c0be4a5412a71b77439e2b8aa92155",
+    "outcome": "COMPLETED",
+    "scale": 2.4919,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-2c17aa3eda-b6cebfd23d",
+    "modelHash": "98229d5fa8d6ff8e682001061ff703e6e8c0be4a5412a71b77439e2b8aa92155",
+    "outcome": "COMPLETED",
+    "scale": 2.4919,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "case": "A02",
+   "family": "A02",
+   "selectedFrame": "frame-asset-rzut-2c17aa3eda-b6cebfd23d",
+   "set": "FRESH_005K",
+   "trueScale": 2.4932249322493223,
+   "trueScaleSupport": 7
+  },
+  {
+   "M0": {
+    "code": null,
+    "frame": "frame-asset-rzut-1f95f4ce4d-eaa13be831",
+    "modelHash": "4b0fc06a76054bf95be60b9ab84df3c8fcb2bb7c6c77d24f253bafc3ddcc03c7",
+    "outcome": "COMPLETED",
+    "scale": 2.5078,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-1f95f4ce4d-eaa13be831",
+    "modelHash": "4b0fc06a76054bf95be60b9ab84df3c8fcb2bb7c6c77d24f253bafc3ddcc03c7",
+    "outcome": "COMPLETED",
+    "scale": 2.5078,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-1f95f4ce4d-eaa13be831",
+    "modelHash": "4b0fc06a76054bf95be60b9ab84df3c8fcb2bb7c6c77d24f253bafc3ddcc03c7",
+    "outcome": "COMPLETED",
+    "scale": 2.5078,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-1f95f4ce4d-eaa13be831",
+    "modelHash": "4b0fc06a76054bf95be60b9ab84df3c8fcb2bb7c6c77d24f253bafc3ddcc03c7",
+    "outcome": "COMPLETED",
+    "scale": 2.5078,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-1f95f4ce4d-eaa13be831",
+    "modelHash": "4b0fc06a76054bf95be60b9ab84df3c8fcb2bb7c6c77d24f253bafc3ddcc03c7",
+    "outcome": "COMPLETED",
+    "scale": 2.5078,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-1f95f4ce4d-eaa13be831",
+    "modelHash": "4b0fc06a76054bf95be60b9ab84df3c8fcb2bb7c6c77d24f253bafc3ddcc03c7",
+    "outcome": "COMPLETED",
+    "scale": 2.5078,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-1f95f4ce4d-eaa13be831",
+    "modelHash": "4b0fc06a76054bf95be60b9ab84df3c8fcb2bb7c6c77d24f253bafc3ddcc03c7",
+    "outcome": "COMPLETED",
+    "scale": 2.5078,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-1f95f4ce4d-eaa13be831",
+    "modelHash": "4b0fc06a76054bf95be60b9ab84df3c8fcb2bb7c6c77d24f253bafc3ddcc03c7",
+    "outcome": "COMPLETED",
+    "scale": 2.5078,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "case": "A03",
+   "family": "A03",
+   "selectedFrame": "frame-asset-rzut-1f95f4ce4d-eaa13be831",
+   "set": "FRESH_005K",
+   "trueScale": 2.5068870523415976,
+   "trueScaleSupport": 4
+  },
+  {
+   "M0": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-4f91f26bdf-589c8abdb3",
+    "message": "the lowest storey covers 54.67 m\u00b2 against the 111.79 m\u00b2 the publisher prints \u2014 51.1% apart: the decomposition is not of this building 67 other readings of the plan were weighed and none holds: the best, copy area_table da7064452b, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 104.1 m\u00b2 (-6.9% of 111.79), UNKNOWN (the figure is spent), corroborated by ISOTROPY, h",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.54895,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-4f91f26bdf-589c8abdb3",
+    "message": "the lowest storey covers 54.67 m\u00b2 against the 111.79 m\u00b2 the publisher prints \u2014 51.1% apart: the decomposition is not of this building 67 other readings of the plan were weighed and none holds: the best, copy area_table da7064452b, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 104.1 m\u00b2 (-6.9% of 111.79), UNKNOWN (the figure is spent), corroborated by ISOTROPY, h",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.54895,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-4f91f26bdf-589c8abdb3",
+    "message": "the lowest storey covers 54.67 m\u00b2 against the 111.79 m\u00b2 the publisher prints \u2014 51.1% apart: the decomposition is not of this building 67 other readings of the plan were weighed and none holds: the best, copy area_table da7064452b, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 104.1 m\u00b2 (-6.9% of 111.79), UNKNOWN (the figure is spent), corroborated by ISOTROPY, h",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.54895,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-4f91f26bdf-589c8abdb3",
+    "message": "the lowest storey covers 54.67 m\u00b2 against the 111.79 m\u00b2 the publisher prints \u2014 51.1% apart: the decomposition is not of this building 67 other readings of the plan were weighed and none holds: the best, copy area_table da7064452b, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 104.1 m\u00b2 (-6.9% of 111.79), UNKNOWN (the figure is spent), corroborated by ISOTROPY, h",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.54895,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-4f91f26bdf-589c8abdb3",
+    "message": "the lowest storey covers 54.67 m\u00b2 against the 111.79 m\u00b2 the publisher prints \u2014 51.1% apart: the decomposition is not of this building 67 other readings of the plan were weighed and none holds: the best, copy area_table da7064452b, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 104.1 m\u00b2 (-6.9% of 111.79), UNKNOWN (the figure is spent), corroborated by ISOTROPY, h",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.54895,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-4f91f26bdf-589c8abdb3",
+    "message": "the lowest storey covers 54.67 m\u00b2 against the 111.79 m\u00b2 the publisher prints \u2014 51.1% apart: the decomposition is not of this building 67 other readings of the plan were weighed and none holds: the best, copy area_table da7064452b, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 104.1 m\u00b2 (-6.9% of 111.79), UNKNOWN (the figure is spent), corroborated by ISOTROPY, h",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.54895,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-4f91f26bdf-589c8abdb3",
+    "message": "the lowest storey covers 54.67 m\u00b2 against the 111.79 m\u00b2 the publisher prints \u2014 51.1% apart: the decomposition is not of this building 67 other readings of the plan were weighed and none holds: the best, copy area_table da7064452b, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 104.1 m\u00b2 (-6.9% of 111.79), UNKNOWN (the figure is spent), corroborated by ISOTROPY, h",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.54895,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-4f91f26bdf-589c8abdb3",
+    "message": "the lowest storey covers 54.67 m\u00b2 against the 111.79 m\u00b2 the publisher prints \u2014 51.1% apart: the decomposition is not of this building 67 other readings of the plan were weighed and none holds: the best, copy area_table da7064452b, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 104.1 m\u00b2 (-6.9% of 111.79), UNKNOWN (the figure is spent), corroborated by ISOTROPY, h",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.54895,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "case": "A04",
+   "family": "A04",
+   "selectedFrame": "frame-asset-rzut-4f91f26bdf-589c8abdb3",
+   "set": "FRESH_005K",
+   "trueScale": 2.5496688741721854,
+   "trueScaleSupport": 4
+  },
+  {
+   "M0": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-238dfbc50b-38cf8e09f5",
+    "message": "the lowest storey covers 33.34 m\u00b2 against the 126.23 m\u00b2 the publisher prints \u2014 73.6% apart: the decomposition is not of this building 87 other readings of the plan were weighed and none holds: the best, copy area_table 2a1e4f9cc1, chain extent, registered scale, largest-first tiling, sides as gridded, pocket mouths shut: 1 body, 124.2 m\u00b2 (-1.6% of 126.23), UNKNOWN (the figure is spent), has only t",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.11025,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-238dfbc50b-38cf8e09f5",
+    "message": "the lowest storey covers 33.34 m\u00b2 against the 126.23 m\u00b2 the publisher prints \u2014 73.6% apart: the decomposition is not of this building 87 other readings of the plan were weighed and none holds: the best, copy area_table 2a1e4f9cc1, chain extent, registered scale, largest-first tiling, sides as gridded, pocket mouths shut: 1 body, 124.2 m\u00b2 (-1.6% of 126.23), UNKNOWN (the figure is spent), has only t",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.11025,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-238dfbc50b-38cf8e09f5",
+    "message": "the lowest storey covers 33.34 m\u00b2 against the 126.23 m\u00b2 the publisher prints \u2014 73.6% apart: the decomposition is not of this building 87 other readings of the plan were weighed and none holds: the best, copy area_table 2a1e4f9cc1, chain extent, registered scale, largest-first tiling, sides as gridded, pocket mouths shut: 1 body, 124.2 m\u00b2 (-1.6% of 126.23), UNKNOWN (the figure is spent), has only t",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.11025,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-238dfbc50b-38cf8e09f5",
+    "message": "the lowest storey covers 33.34 m\u00b2 against the 126.23 m\u00b2 the publisher prints \u2014 73.6% apart: the decomposition is not of this building 87 other readings of the plan were weighed and none holds: the best, copy area_table 2a1e4f9cc1, chain extent, registered scale, largest-first tiling, sides as gridded, pocket mouths shut: 1 body, 124.2 m\u00b2 (-1.6% of 126.23), UNKNOWN (the figure is spent), has only t",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.11025,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-238dfbc50b-38cf8e09f5",
+    "message": "the lowest storey covers 33.34 m\u00b2 against the 126.23 m\u00b2 the publisher prints \u2014 73.6% apart: the decomposition is not of this building 87 other readings of the plan were weighed and none holds: the best, copy area_table 2a1e4f9cc1, chain extent, registered scale, largest-first tiling, sides as gridded, pocket mouths shut: 1 body, 124.2 m\u00b2 (-1.6% of 126.23), UNKNOWN (the figure is spent), has only t",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.11025,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-238dfbc50b-38cf8e09f5",
+    "message": "the lowest storey covers 33.34 m\u00b2 against the 126.23 m\u00b2 the publisher prints \u2014 73.6% apart: the decomposition is not of this building 87 other readings of the plan were weighed and none holds: the best, copy area_table 2a1e4f9cc1, chain extent, registered scale, largest-first tiling, sides as gridded, pocket mouths shut: 1 body, 124.2 m\u00b2 (-1.6% of 126.23), UNKNOWN (the figure is spent), has only t",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.11025,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-238dfbc50b-38cf8e09f5",
+    "message": "the lowest storey covers 33.34 m\u00b2 against the 126.23 m\u00b2 the publisher prints \u2014 73.6% apart: the decomposition is not of this building 87 other readings of the plan were weighed and none holds: the best, copy area_table 2a1e4f9cc1, chain extent, registered scale, largest-first tiling, sides as gridded, pocket mouths shut: 1 body, 124.2 m\u00b2 (-1.6% of 126.23), UNKNOWN (the figure is spent), has only t",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.11025,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-238dfbc50b-38cf8e09f5",
+    "message": "the lowest storey covers 33.34 m\u00b2 against the 126.23 m\u00b2 the publisher prints \u2014 73.6% apart: the decomposition is not of this building 87 other readings of the plan were weighed and none holds: the best, copy area_table 2a1e4f9cc1, chain extent, registered scale, largest-first tiling, sides as gridded, pocket mouths shut: 1 body, 124.2 m\u00b2 (-1.6% of 126.23), UNKNOWN (the figure is spent), has only t",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.11025,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "case": "A05",
+   "family": "A05",
+   "selectedFrame": "frame-asset-rzut-238dfbc50b-38cf8e09f5",
+   "set": "FRESH_005K",
+   "trueScale": 2.110531803962461,
+   "trueScaleSupport": 7
+  },
+  {
+   "M0": {
+    "code": null,
+    "frame": "frame-asset-rzut-f08001e3c4-8b24c71f3f",
+    "modelHash": "38baa9606a55fb149b9025464d0dc1f1db0d91dd9ef8976b9cbc190690278ee2",
+    "outcome": "COMPLETED",
+    "scale": 2.072,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-f08001e3c4-8b24c71f3f",
+    "modelHash": "38baa9606a55fb149b9025464d0dc1f1db0d91dd9ef8976b9cbc190690278ee2",
+    "outcome": "COMPLETED",
+    "scale": 2.072,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-f08001e3c4-8b24c71f3f",
+    "modelHash": "38baa9606a55fb149b9025464d0dc1f1db0d91dd9ef8976b9cbc190690278ee2",
+    "outcome": "COMPLETED",
+    "scale": 2.072,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-f08001e3c4-8b24c71f3f",
+    "modelHash": "38baa9606a55fb149b9025464d0dc1f1db0d91dd9ef8976b9cbc190690278ee2",
+    "outcome": "COMPLETED",
+    "scale": 2.072,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-f08001e3c4-8b24c71f3f",
+    "modelHash": "38baa9606a55fb149b9025464d0dc1f1db0d91dd9ef8976b9cbc190690278ee2",
+    "outcome": "COMPLETED",
+    "scale": 2.072,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-f08001e3c4-8b24c71f3f",
+    "modelHash": "38baa9606a55fb149b9025464d0dc1f1db0d91dd9ef8976b9cbc190690278ee2",
+    "outcome": "COMPLETED",
+    "scale": 2.072,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-f08001e3c4-8b24c71f3f",
+    "modelHash": "38baa9606a55fb149b9025464d0dc1f1db0d91dd9ef8976b9cbc190690278ee2",
+    "outcome": "COMPLETED",
+    "scale": 2.072,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-f08001e3c4-8b24c71f3f",
+    "modelHash": "38baa9606a55fb149b9025464d0dc1f1db0d91dd9ef8976b9cbc190690278ee2",
+    "outcome": "COMPLETED",
+    "scale": 2.072,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "case": "A06",
+   "family": "A06",
+   "selectedFrame": "frame-asset-rzut-f08001e3c4-8b24c71f3f",
+   "set": "FRESH_005K",
+   "trueScale": 2.072398190045249,
+   "trueScaleSupport": 5
+  },
+  {
+   "M0": {
+    "code": null,
+    "frame": "frame-asset-rzut-dec884e019-46909f56cf",
+    "modelHash": "f0b04887c8d0ba8007bfd9d6d00d5c12ffc54308b4e0450569479a2e0d8c3514",
+    "outcome": "COMPLETED",
+    "scale": 2.3153,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-dec884e019-46909f56cf",
+    "modelHash": "f0b04887c8d0ba8007bfd9d6d00d5c12ffc54308b4e0450569479a2e0d8c3514",
+    "outcome": "COMPLETED",
+    "scale": 2.3153,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-dec884e019-46909f56cf",
+    "modelHash": "f0b04887c8d0ba8007bfd9d6d00d5c12ffc54308b4e0450569479a2e0d8c3514",
+    "outcome": "COMPLETED",
+    "scale": 2.3153,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-dec884e019-46909f56cf",
+    "modelHash": "f0b04887c8d0ba8007bfd9d6d00d5c12ffc54308b4e0450569479a2e0d8c3514",
+    "outcome": "COMPLETED",
+    "scale": 2.3153,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-dec884e019-46909f56cf",
+    "modelHash": "f0b04887c8d0ba8007bfd9d6d00d5c12ffc54308b4e0450569479a2e0d8c3514",
+    "outcome": "COMPLETED",
+    "scale": 2.3153,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-dec884e019-46909f56cf",
+    "modelHash": "f0b04887c8d0ba8007bfd9d6d00d5c12ffc54308b4e0450569479a2e0d8c3514",
+    "outcome": "COMPLETED",
+    "scale": 2.3153,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-dec884e019-46909f56cf",
+    "modelHash": "f0b04887c8d0ba8007bfd9d6d00d5c12ffc54308b4e0450569479a2e0d8c3514",
+    "outcome": "COMPLETED",
+    "scale": 2.3153,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-dec884e019-46909f56cf",
+    "modelHash": "f0b04887c8d0ba8007bfd9d6d00d5c12ffc54308b4e0450569479a2e0d8c3514",
+    "outcome": "COMPLETED",
+    "scale": 2.3153,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "PASS"
+   },
+   "case": "A07",
+   "family": "A07",
+   "selectedFrame": "frame-asset-rzut-dec884e019-46909f56cf",
+   "set": "FRESH_005K",
+   "trueScale": null,
+   "trueScaleSupport": 2
+  },
+  {
+   "M0": {
+    "code": null,
+    "frame": "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+    "modelHash": "e4f042fbb4d8dbbfa041764a1d1d5e4bb97d7299a1e13cf0efc1eb57f5ef0f71",
+    "outcome": "COMPLETED",
+    "scale": 1.3197,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+    "modelHash": "e4f042fbb4d8dbbfa041764a1d1d5e4bb97d7299a1e13cf0efc1eb57f5ef0f71",
+    "outcome": "COMPLETED",
+    "scale": 1.3197,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+    "modelHash": "e4f042fbb4d8dbbfa041764a1d1d5e4bb97d7299a1e13cf0efc1eb57f5ef0f71",
+    "outcome": "COMPLETED",
+    "scale": 1.3197,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+    "modelHash": "e4f042fbb4d8dbbfa041764a1d1d5e4bb97d7299a1e13cf0efc1eb57f5ef0f71",
+    "outcome": "COMPLETED",
+    "scale": 1.3197,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+    "modelHash": "e4f042fbb4d8dbbfa041764a1d1d5e4bb97d7299a1e13cf0efc1eb57f5ef0f71",
+    "outcome": "COMPLETED",
+    "scale": 1.3197,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+    "modelHash": "e4f042fbb4d8dbbfa041764a1d1d5e4bb97d7299a1e13cf0efc1eb57f5ef0f71",
+    "outcome": "COMPLETED",
+    "scale": 1.3197,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+    "modelHash": "e4f042fbb4d8dbbfa041764a1d1d5e4bb97d7299a1e13cf0efc1eb57f5ef0f71",
+    "outcome": "COMPLETED",
+    "scale": 1.3197,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+    "modelHash": "e4f042fbb4d8dbbfa041764a1d1d5e4bb97d7299a1e13cf0efc1eb57f5ef0f71",
+    "outcome": "COMPLETED",
+    "scale": 1.3197,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "case": "D00",
+   "family": "D00",
+   "selectedFrame": "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+   "set": "FRESH_005K",
+   "trueScale": null,
+   "trueScaleSupport": 0
+  },
+  {
+   "M0": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-faun-iii-rzut-parter-4a4a325758-4fb0a88a30",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.082803 cm/px (1 independent, ruled out by the walls); 1.349693 cm/px (1 independent, plausible); 0.103853 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimen",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-faun-iii-rzut-parter-4a4a325758-4fb0a88a30",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.082803 cm/px (1 independent, ruled out by the walls); 1.349693 cm/px (1 independent, plausible); 0.103853 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimen",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-faun-iii-rzut-parter-4a4a325758-4fb0a88a30",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.082803 cm/px (1 independent, ruled out by the walls); 1.349693 cm/px (1 independent, plausible); 0.103853 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimen",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-faun-iii-rzut-parter-4a4a325758-4fb0a88a30",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.082803 cm/px (1 independent, ruled out by the walls); 1.349693 cm/px (1 independent, plausible); 0.103853 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimen",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-faun-iii-rzut-parter-4a4a325758-4fb0a88a30",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.082803 cm/px (1 independent, ruled out by the walls); 1.349693 cm/px (1 independent, plausible); 0.103853 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimen",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-faun-iii-rzut-parter-4a4a325758-4fb0a88a30",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.082803 cm/px (1 independent, ruled out by the walls); 1.349693 cm/px (1 independent, plausible); 0.103853 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimen",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-faun-iii-rzut-parter-4a4a325758-4fb0a88a30",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.082803 cm/px (1 independent, ruled out by the walls); 1.349693 cm/px (1 independent, plausible); 0.103853 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimen",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-faun-iii-rzut-parter-4a4a325758-4fb0a88a30",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.082803 cm/px (1 independent, ruled out by the walls); 1.349693 cm/px (1 independent, plausible); 0.103853 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimen",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "case": "D01",
+   "family": "D01",
+   "selectedFrame": "frame-asset-faun-iii-rzut-parter-4a4a325758-4fb0a88a30",
+   "set": "FRESH_005K",
+   "trueScale": null,
+   "trueScaleSupport": 0
+  },
+  {
+   "M0": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-alex-rzut-parter-4707ebe458-81447f88e6",
+    "message": "the floor plan's scale cannot be established: the page vote's 1.909091 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it. The scales its readings state are 0.646154 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimensions that settles on",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-alex-rzut-parter-4707ebe458-81447f88e6",
+    "message": "the floor plan's scale cannot be established: the page vote's 1.909091 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it. The scales its readings state are 0.646154 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimensions that settles on",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-alex-rzut-parter-4707ebe458-81447f88e6",
+    "message": "the floor plan's scale cannot be established: the page vote's 1.909091 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it. The scales its readings state are 0.646154 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimensions that settles on",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-alex-rzut-parter-4707ebe458-81447f88e6",
+    "message": "the floor plan's scale cannot be established: the page vote's 1.909091 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it. The scales its readings state are 0.646154 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimensions that settles on",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-alex-rzut-parter-4707ebe458-81447f88e6",
+    "message": "the floor plan's scale cannot be established: the page vote's 1.909091 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it. The scales its readings state are 0.646154 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimensions that settles on",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-alex-rzut-parter-4707ebe458-81447f88e6",
+    "message": "the floor plan's scale cannot be established: the page vote's 1.909091 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it. The scales its readings state are 0.646154 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimensions that settles on",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-alex-rzut-parter-4707ebe458-81447f88e6",
+    "message": "the floor plan's scale cannot be established: the page vote's 1.909091 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it. The scales its readings state are 0.646154 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimensions that settles on",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-alex-rzut-parter-4707ebe458-81447f88e6",
+    "message": "the floor plan's scale cannot be established: the page vote's 1.909091 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it. The scales its readings state are 0.646154 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimensions that settles on",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "case": "D02",
+   "family": "D02",
+   "selectedFrame": "frame-asset-alex-rzut-parter-4707ebe458-81447f88e6",
+   "set": "FRESH_005K",
+   "trueScale": null,
+   "trueScaleSupport": 0
+  },
+  {
+   "M0": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-megan-iv-rzut-parter-bbb305d67a-0f9f921b7b",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.058559 cm/px (1 independent, ruled out by the walls); 5.163934 cm/px (0 independent, ruled out by the walls); 0.423077 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension print",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-megan-iv-rzut-parter-bbb305d67a-0f9f921b7b",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.058559 cm/px (1 independent, ruled out by the walls); 5.163934 cm/px (0 independent, ruled out by the walls); 0.423077 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension print",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-megan-iv-rzut-parter-bbb305d67a-0f9f921b7b",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.058559 cm/px (1 independent, ruled out by the walls); 5.163934 cm/px (0 independent, ruled out by the walls); 0.423077 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension print",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-megan-iv-rzut-parter-bbb305d67a-0f9f921b7b",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.058559 cm/px (1 independent, ruled out by the walls); 5.163934 cm/px (0 independent, ruled out by the walls); 0.423077 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension print",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-megan-iv-rzut-parter-bbb305d67a-0f9f921b7b",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.058559 cm/px (1 independent, ruled out by the walls); 5.163934 cm/px (0 independent, ruled out by the walls); 0.423077 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension print",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-megan-iv-rzut-parter-bbb305d67a-0f9f921b7b",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.058559 cm/px (1 independent, ruled out by the walls); 5.163934 cm/px (0 independent, ruled out by the walls); 0.423077 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension print",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-megan-iv-rzut-parter-bbb305d67a-0f9f921b7b",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.058559 cm/px (1 independent, ruled out by the walls); 5.163934 cm/px (0 independent, ruled out by the walls); 0.423077 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension print",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-megan-iv-rzut-parter-bbb305d67a-0f9f921b7b",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.058559 cm/px (1 independent, ruled out by the walls); 5.163934 cm/px (0 independent, ruled out by the walls); 0.423077 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension print",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "case": "D03",
+   "family": "D03",
+   "selectedFrame": "frame-asset-megan-iv-rzut-parter-bbb305d67a-0f9f921b7b",
+   "set": "FRESH_005K",
+   "trueScale": null,
+   "trueScaleSupport": 0
+  },
+  {
+   "M0": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-aiko-rzut-parter-c5c8f02d57-f2f752629a",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 66.879121 cm/px (0 independent, ruled out by the walls); 0.238095 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself \u2014 it prints none. (the 1114",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-aiko-rzut-parter-c5c8f02d57-f2f752629a",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 66.879121 cm/px (0 independent, ruled out by the walls); 0.238095 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself \u2014 it prints none. (the 1114",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-aiko-rzut-parter-c5c8f02d57-f2f752629a",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 66.879121 cm/px (0 independent, ruled out by the walls); 0.238095 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself \u2014 it prints none. (the 1114",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-aiko-rzut-parter-c5c8f02d57-f2f752629a",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 66.879121 cm/px (0 independent, ruled out by the walls); 0.238095 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself \u2014 it prints none. (the 1114",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-aiko-rzut-parter-c5c8f02d57-f2f752629a",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 66.879121 cm/px (0 independent, ruled out by the walls); 0.238095 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself \u2014 it prints none. (the 1114",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-aiko-rzut-parter-c5c8f02d57-f2f752629a",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 66.879121 cm/px (0 independent, ruled out by the walls); 0.238095 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself \u2014 it prints none. (the 1114",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-aiko-rzut-parter-c5c8f02d57-f2f752629a",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 66.879121 cm/px (0 independent, ruled out by the walls); 0.238095 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself \u2014 it prints none. (the 1114",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-aiko-rzut-parter-c5c8f02d57-f2f752629a",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 66.879121 cm/px (0 independent, ruled out by the walls); 0.238095 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself \u2014 it prints none. (the 1114",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "case": "D04",
+   "family": "D04",
+   "selectedFrame": "frame-asset-aiko-rzut-parter-c5c8f02d57-f2f752629a",
+   "set": "FRESH_005K",
+   "trueScale": null,
+   "trueScaleSupport": 0
+  },
+  {
+   "M0": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-dobry-rzut-parter-0019c75b9a-70a0349ded",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.947368 cm/px (0 independent, plausible); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself \u2014 it prints none. (the 1165\u00d71529 px floor plan prints no dimension chain, so nothing on it states",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-dobry-rzut-parter-0019c75b9a-70a0349ded",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.947368 cm/px (0 independent, plausible); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself \u2014 it prints none. (the 1165\u00d71529 px floor plan prints no dimension chain, so nothing on it states",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-dobry-rzut-parter-0019c75b9a-70a0349ded",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.947368 cm/px (0 independent, plausible); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself \u2014 it prints none. (the 1165\u00d71529 px floor plan prints no dimension chain, so nothing on it states",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-dobry-rzut-parter-0019c75b9a-70a0349ded",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.947368 cm/px (0 independent, plausible); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself \u2014 it prints none. (the 1165\u00d71529 px floor plan prints no dimension chain, so nothing on it states",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-dobry-rzut-parter-0019c75b9a-70a0349ded",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.947368 cm/px (0 independent, plausible); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself \u2014 it prints none. (the 1165\u00d71529 px floor plan prints no dimension chain, so nothing on it states",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-dobry-rzut-parter-0019c75b9a-70a0349ded",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.947368 cm/px (0 independent, plausible); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself \u2014 it prints none. (the 1165\u00d71529 px floor plan prints no dimension chain, so nothing on it states",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-dobry-rzut-parter-0019c75b9a-70a0349ded",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.947368 cm/px (0 independent, plausible); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself \u2014 it prints none. (the 1165\u00d71529 px floor plan prints no dimension chain, so nothing on it states",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-dobry-rzut-parter-0019c75b9a-70a0349ded",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.947368 cm/px (0 independent, plausible); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself \u2014 it prints none. (the 1165\u00d71529 px floor plan prints no dimension chain, so nothing on it states",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": null,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "case": "D05",
+   "family": "D05",
+   "selectedFrame": "frame-asset-dobry-rzut-parter-0019c75b9a-70a0349ded",
+   "set": "FRESH_005K",
+   "trueScale": null,
+   "trueScaleSupport": 0
+  },
+  {
+   "M0": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-rzut-36e1e5a39d-fb4609c5e2",
+    "message": "the floor plan's scale cannot be established: the page vote's 2.451224 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it. The scales its readings state are 2.475398 cm/px (0 independent, plausible); 0.086134 cm/px (0 independent, ruled out by the walls); 1.758308 cm/px (0 independent, plausible); 0 printed readings contradict the on",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.4619,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-rzut-36e1e5a39d-fb4609c5e2",
+    "message": "the floor plan's scale cannot be established: the page vote's 2.451224 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it. The scales its readings state are 2.475398 cm/px (0 independent, plausible); 0.086134 cm/px (0 independent, ruled out by the walls); 1.758308 cm/px (0 independent, plausible); 0 printed readings contradict the on",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.4619,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-rzut-36e1e5a39d-fb4609c5e2",
+    "message": "the floor plan's scale cannot be established: the page vote's 2.451224 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it. The scales its readings state are 2.475398 cm/px (0 independent, plausible); 0.086134 cm/px (0 independent, ruled out by the walls); 1.758308 cm/px (0 independent, plausible); 0 printed readings contradict the on",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.4619,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-rzut-36e1e5a39d-fb4609c5e2",
+    "message": "the floor plan's scale cannot be established: the page vote's 2.451224 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it. The scales its readings state are 2.475398 cm/px (0 independent, plausible); 0.086134 cm/px (0 independent, ruled out by the walls); 1.758308 cm/px (0 independent, plausible); 0 printed readings contradict the on",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.4619,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-rzut-36e1e5a39d-fb4609c5e2",
+    "message": "the floor plan's scale cannot be established: the page vote's 2.451224 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it. The scales its readings state are 2.475398 cm/px (0 independent, plausible); 0.086134 cm/px (0 independent, ruled out by the walls); 1.758308 cm/px (0 independent, plausible); 0 printed readings contradict the on",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.4619,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-rzut-36e1e5a39d-fb4609c5e2",
+    "message": "the floor plan's scale cannot be established: the page vote's 2.451224 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it. The scales its readings state are 2.475398 cm/px (0 independent, plausible); 0.086134 cm/px (0 independent, ruled out by the walls); 1.758308 cm/px (0 independent, plausible); 0 printed readings contradict the on",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.4619,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-rzut-36e1e5a39d-fb4609c5e2",
+    "message": "the floor plan's scale cannot be established: the page vote's 2.451224 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it. The scales its readings state are 2.475398 cm/px (0 independent, plausible); 0.086134 cm/px (0 independent, ruled out by the walls); 1.758308 cm/px (0 independent, plausible); 0 printed readings contradict the on",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.4619,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "frame": "frame-asset-rzut-36e1e5a39d-fb4609c5e2",
+    "message": "the floor plan's scale cannot be established: the page vote's 2.451224 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it. The scales its readings state are 2.475398 cm/px (0 independent, plausible); 0.086134 cm/px (0 independent, ruled out by the walls); 1.758308 cm/px (0 independent, plausible); 0 printed readings contradict the on",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.4619,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "case": "dom-w-murajach",
+   "family": "dom-w-murajach",
+   "selectedFrame": "frame-asset-rzut-36e1e5a39d-fb4609c5e2",
+   "set": "BLIND_9",
+   "trueScale": null,
+   "trueScaleSupport": 1
+  },
+  {
+   "M0": {
+    "code": null,
+    "frame": "frame-asset-rzut-ebb40feeba-0459d5961d",
+    "modelHash": "a96afbb19139b304a126b87dd0949ac1604aaad006973ce0dcddb4472cbb1ad3",
+    "outcome": "COMPLETED",
+    "scale": 2.77895,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-ebb40feeba-0459d5961d",
+    "modelHash": "a96afbb19139b304a126b87dd0949ac1604aaad006973ce0dcddb4472cbb1ad3",
+    "outcome": "COMPLETED",
+    "scale": 2.77895,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-ebb40feeba-0459d5961d",
+    "modelHash": "a96afbb19139b304a126b87dd0949ac1604aaad006973ce0dcddb4472cbb1ad3",
+    "outcome": "COMPLETED",
+    "scale": 2.77895,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-ebb40feeba-0459d5961d",
+    "modelHash": "a96afbb19139b304a126b87dd0949ac1604aaad006973ce0dcddb4472cbb1ad3",
+    "outcome": "COMPLETED",
+    "scale": 2.77895,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-ebb40feeba-0459d5961d",
+    "modelHash": "a96afbb19139b304a126b87dd0949ac1604aaad006973ce0dcddb4472cbb1ad3",
+    "outcome": "COMPLETED",
+    "scale": 2.77895,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-ebb40feeba-0459d5961d",
+    "modelHash": "a96afbb19139b304a126b87dd0949ac1604aaad006973ce0dcddb4472cbb1ad3",
+    "outcome": "COMPLETED",
+    "scale": 2.77895,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-ebb40feeba-0459d5961d",
+    "modelHash": "a96afbb19139b304a126b87dd0949ac1604aaad006973ce0dcddb4472cbb1ad3",
+    "outcome": "COMPLETED",
+    "scale": 2.77895,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": null,
+    "frame": "frame-asset-rzut-ebb40feeba-0459d5961d",
+    "modelHash": "a96afbb19139b304a126b87dd0949ac1604aaad006973ce0dcddb4472cbb1ad3",
+    "outcome": "COMPLETED",
+    "scale": 2.77895,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "PASS"
+   },
+   "case": "dom-w-cieszyniankach",
+   "family": "dom-w-cieszyniankach",
+   "selectedFrame": "frame-asset-rzut-ebb40feeba-0459d5961d",
+   "set": "BLIND_9",
+   "trueScale": 2.780569514237856,
+   "trueScaleSupport": 8
+  },
+  {
+   "M0": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+    "message": "SOURCE_CONFLICT: the drawing contradicts the scale the plan was registered at (2 long readings as printed on both axes agree on 2.432039 cm/px (501/206 px, 810/333 px)). Read at copy dimensioned 0cb0a5c1d9, chain extent, scale 2.432039 cm/px, largest-first tiling, sides as gridded the plan is better supported by the drawing itself (56% of the stated chain length contradicted, against 79%), but the",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.6234,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+    "message": "SOURCE_CONFLICT: the drawing contradicts the scale the plan was registered at (2 long readings as printed on both axes agree on 2.432039 cm/px (501/206 px, 810/333 px)). Read at copy dimensioned 0cb0a5c1d9, chain extent, scale 2.432039 cm/px, largest-first tiling, sides as gridded the plan is better supported by the drawing itself (56% of the stated chain length contradicted, against 79%), but the",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.6234,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1": {
+    "changedVsM0": true,
+    "code": null,
+    "frame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+    "modelHash": "b7c86aac3af74dac994456f545ba0b8073300445ca1675588e46b0e0ccb93ed6",
+    "outcome": "COMPLETED",
+    "scale": 2.6234,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1P": {
+    "changedVsM0": true,
+    "code": null,
+    "frame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+    "modelHash": "b7c86aac3af74dac994456f545ba0b8073300445ca1675588e46b0e0ccb93ed6",
+    "outcome": "COMPLETED",
+    "scale": 2.6234,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1b": {
+    "changedVsM0": true,
+    "code": null,
+    "frame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+    "modelHash": "b7c86aac3af74dac994456f545ba0b8073300445ca1675588e46b0e0ccb93ed6",
+    "outcome": "COMPLETED",
+    "scale": 2.6234,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+    "message": "SOURCE_CONFLICT: the drawing contradicts the scale the plan was registered at (2 long readings as printed on both axes agree on 2.432039 cm/px (501/206 px, 810/333 px)). Read at copy dimensioned 0cb0a5c1d9, chain extent, scale 2.432039 cm/px, largest-first tiling, sides as gridded the plan is better supported by the drawing itself (56% of the stated chain length contradicted, against 79%), but the",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.6234,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3": {
+    "changedVsM0": true,
+    "code": null,
+    "frame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+    "modelHash": "b7c86aac3af74dac994456f545ba0b8073300445ca1675588e46b0e0ccb93ed6",
+    "outcome": "COMPLETED",
+    "scale": 2.6234,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3b": {
+    "changedVsM0": true,
+    "code": null,
+    "frame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+    "modelHash": "b7c86aac3af74dac994456f545ba0b8073300445ca1675588e46b0e0ccb93ed6",
+    "outcome": "COMPLETED",
+    "scale": 2.6234,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "case": "dom-w-glogownikach",
+   "family": "dom-w-glogownikach",
+   "selectedFrame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+   "set": "BLIND_10_REVEALED",
+   "trueScale": 2.6285714285714286,
+   "trueScaleSupport": 4
+  },
+  {
+   "M0": {
+    "code": "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+    "frame": "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
+    "message": "the lowest storey covers 96.93 m\u00b2 against the 249.42 m\u00b2 the publisher prints \u2014 61.1% apart: the decomposition is not of this building; 63 other readings of the plan were weighed and none survived to a full composition",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.9061,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M0X": {
+    "changedVsM0": false,
+    "code": "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+    "frame": "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
+    "message": "the lowest storey covers 96.93 m\u00b2 against the 249.42 m\u00b2 the publisher prints \u2014 61.1% apart: the decomposition is not of this building; 63 other readings of the plan were weighed and none survived to a full composition",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.9061,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1": {
+    "changedVsM0": false,
+    "code": "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+    "frame": "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
+    "message": "the lowest storey covers 96.93 m\u00b2 against the 249.42 m\u00b2 the publisher prints \u2014 61.1% apart: the decomposition is not of this building; 63 other readings of the plan were weighed and none survived to a full composition",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.9061,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1P": {
+    "changedVsM0": false,
+    "code": "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+    "frame": "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
+    "message": "the lowest storey covers 96.93 m\u00b2 against the 249.42 m\u00b2 the publisher prints \u2014 61.1% apart: the decomposition is not of this building; 63 other readings of the plan were weighed and none survived to a full composition",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.9061,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1b": {
+    "changedVsM0": false,
+    "code": "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+    "frame": "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
+    "message": "the lowest storey covers 96.93 m\u00b2 against the 249.42 m\u00b2 the publisher prints \u2014 61.1% apart: the decomposition is not of this building; 63 other readings of the plan were weighed and none survived to a full composition",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.9061,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M2": {
+    "changedVsM0": false,
+    "code": "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+    "frame": "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
+    "message": "the lowest storey covers 96.93 m\u00b2 against the 249.42 m\u00b2 the publisher prints \u2014 61.1% apart: the decomposition is not of this building; 63 other readings of the plan were weighed and none survived to a full composition",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.9061,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3": {
+    "changedVsM0": false,
+    "code": "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+    "frame": "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
+    "message": "the lowest storey covers 96.93 m\u00b2 against the 249.42 m\u00b2 the publisher prints \u2014 61.1% apart: the decomposition is not of this building; 63 other readings of the plan were weighed and none survived to a full composition",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.9061,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3b": {
+    "changedVsM0": false,
+    "code": "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+    "frame": "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
+    "message": "the lowest storey covers 96.93 m\u00b2 against the 249.42 m\u00b2 the publisher prints \u2014 61.1% apart: the decomposition is not of this building; 63 other readings of the plan were weighed and none survived to a full composition",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.9061,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "case": "dom-w-akebiach",
+   "family": "dom-w-akebiach",
+   "selectedFrame": "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
+   "set": "BLIND_10_REVEALED",
+   "trueScale": 2.909356725146199,
+   "trueScaleSupport": 7
+  }
+ ],
+ "labels": {
+  "binding": {
+   "CONSISTENT": 348,
+   "INCONSISTENT": 102,
+   "UNKNOWN_SCALE": 332
+  },
+  "excluded": {
+   "truth_AGREED_NOT_INTEGER": 3,
+   "truth_NOT_A_LABEL": 129,
+   "truth_UNCERTAIN": 18
+  },
+  "families": 38,
+  "framesWithStatements": 186,
+  "framesWithTrueScale": 67,
+  "readers": {
+   "ensembleReading": {
+    "abstain": 201,
+    "correct": 476,
+    "exact": 0.6087,
+    "exactCI": [
+     0.574,
+     0.6423
+    ],
+    "familyClusterCI_exact": [
+     0.5399,
+     0.6757
+    ],
+    "n": 782,
+    "stated": 581,
+    "wrong": 105,
+    "wrongWhenStated": 0.1807,
+    "wrongWhenStatedCI": [
+     0.1516,
+     0.2141
+    ]
+   },
+   "externalCorroborating": {
+    "abstain": 275,
+    "correct": 507,
+    "exact": 0.6483,
+    "exactCI": [
+     0.6142,
+     0.681
+    ],
+    "familyClusterCI_exact": [
+     0.5786,
+     0.7173
+    ],
+    "n": 782,
+    "stated": 507,
+    "wrong": 0,
+    "wrongWhenStated": 0.0,
+    "wrongWhenStatedCI": [
+     0.0,
+     0.0075
+    ]
+   },
+   "externalTop": {
+    "abstain": 211,
+    "correct": 543,
+    "exact": 0.6944,
+    "exactCI": [
+     0.6612,
+     0.7256
+    ],
+    "familyClusterCI_exact": [
+     0.618,
+     0.7665
+    ],
+    "n": 782,
+    "stated": 571,
+    "wrong": 28,
+    "wrongWhenStated": 0.049,
+    "wrongWhenStatedCI": [
+     0.0341,
+     0.07
+    ]
+   },
+   "latticeAsRead": {
+    "abstain": 212,
+    "correct": 224,
+    "exact": 0.2864,
+    "exactCI": [
+     0.2559,
+     0.3191
+    ],
+    "familyClusterCI_exact": [
+     0.2371,
+     0.343
+    ],
+    "n": 782,
+    "stated": 570,
+    "wrong": 346,
+    "wrongWhenStated": 0.607,
+    "wrongWhenStatedCI": [
+     0.5663,
+     0.6463
+    ]
+   },
+   "latticeConfident": {
+    "abstain": 602,
+    "correct": 133,
+    "exact": 0.1701,
+    "exactCI": [
+     0.1454,
+     0.198
+    ],
+    "familyClusterCI_exact": [
+     0.1325,
+     0.2144
+    ],
+    "n": 782,
+    "stated": 180,
+    "wrong": 47,
+    "wrongWhenStated": 0.2611,
+    "wrongWhenStatedCI": [
+     0.2024,
+     0.3298
+    ]
+   },
+   "token": {
+    "abstain": 76,
+    "correct": 321,
+    "exact": 0.4105,
+    "exactCI": [
+     0.3765,
+     0.4453
+    ],
+    "familyClusterCI_exact": [
+     0.3592,
+     0.4675
+    ],
+    "n": 782,
+    "stated": 706,
+    "wrong": 385,
+    "wrongWhenStated": 0.5453,
+    "wrongWhenStatedCI": [
+     0.5084,
+     0.5817
+    ]
+   },
+   "value": {
+    "abstain": 0,
+    "correct": 355,
+    "exact": 0.454,
+    "exactCI": [
+     0.4194,
+     0.489
+    ],
+    "familyClusterCI_exact": [
+     0.3998,
+     0.5128
+    ],
+    "n": 782,
+    "stated": 782,
+    "wrong": 427,
+    "wrongWhenStated": 0.546,
+    "wrongWhenStatedCI": [
+     0.511,
+     0.5806
+    ]
+   }
+  },
+  "readersOnStatementsWithLattice": {
+   "ensembleReading": {
+    "abstain": 3,
+    "correct": 476,
+    "exact": 0.8151,
+    "exactCI": [
+     0.7816,
+     0.8445
+    ],
+    "familyClusterCI_exact": [
+     0.7785,
+     0.8508
+    ],
+    "n": 584,
+    "stated": 581,
+    "wrong": 105,
+    "wrongWhenStated": 0.1807,
+    "wrongWhenStatedCI": [
+     0.1516,
+     0.2141
+    ]
+   },
+   "externalCorroborating": {
+    "abstain": 77,
+    "correct": 507,
+    "exact": 0.8682,
+    "exactCI": [
+     0.8383,
+     0.8932
+    ],
+    "familyClusterCI_exact": [
+     0.8314,
+     0.9049
+    ],
+    "n": 584,
+    "stated": 507,
+    "wrong": 0,
+    "wrongWhenStated": 0.0,
+    "wrongWhenStatedCI": [
+     0.0,
+     0.0075
+    ]
+   },
+   "externalTop": {
+    "abstain": 13,
+    "correct": 543,
+    "exact": 0.9298,
+    "exactCI": [
+     0.9061,
+     0.9478
+    ],
+    "familyClusterCI_exact": [
+     0.9073,
+     0.9525
+    ],
+    "n": 584,
+    "stated": 571,
+    "wrong": 28,
+    "wrongWhenStated": 0.049,
+    "wrongWhenStatedCI": [
+     0.0341,
+     0.07
+    ]
+   },
+   "latticeAsRead": {
+    "abstain": 14,
+    "correct": 224,
+    "exact": 0.3836,
+    "exactCI": [
+     0.345,
+     0.4236
+    ],
+    "familyClusterCI_exact": [
+     0.3281,
+     0.4407
+    ],
+    "n": 584,
+    "stated": 570,
+    "wrong": 346,
+    "wrongWhenStated": 0.607,
+    "wrongWhenStatedCI": [
+     0.5663,
+     0.6463
+    ]
+   },
+   "latticeConfident": {
+    "abstain": 404,
+    "correct": 133,
+    "exact": 0.2277,
+    "exactCI": [
+     0.1956,
+     0.2635
+    ],
+    "familyClusterCI_exact": [
+     0.1785,
+     0.2792
+    ],
+    "n": 584,
+    "stated": 180,
+    "wrong": 47,
+    "wrongWhenStated": 0.2611,
+    "wrongWhenStatedCI": [
+     0.2024,
+     0.3298
+    ]
+   },
+   "token": {
+    "abstain": 33,
+    "correct": 241,
+    "exact": 0.4127,
+    "exactCI": [
+     0.3734,
+     0.453
+    ],
+    "familyClusterCI_exact": [
+     0.3539,
+     0.4735
+    ],
+    "n": 584,
+    "stated": 551,
+    "wrong": 310,
+    "wrongWhenStated": 0.5626,
+    "wrongWhenStatedCI": [
+     0.5209,
+     0.6035
+    ]
+   },
+   "value": {
+    "abstain": 0,
+    "correct": 273,
+    "exact": 0.4675,
+    "exactCI": [
+     0.4273,
+     0.508
+    ],
+    "familyClusterCI_exact": [
+     0.4028,
+     0.5355
+    ],
+    "n": 584,
+    "stated": 584,
+    "wrong": 311,
+    "wrongWhenStated": 0.5325,
+    "wrongWhenStatedCI": [
+     0.492,
+     0.5727
+    ]
+   }
+  },
+  "statementsWithIntegerTruth": 782,
+  "topKRecallAtFirstLattice": {
+   "n": 782,
+   "rate": 0.8363,
+   "topKRecall": 654
+  }
+ },
+ "preregistration": "research/analyzer-005o/preregistration.md",
+ "schema": "buildapp.005o.metric-bakeoff",
+ "tolerance": 0.03
+}

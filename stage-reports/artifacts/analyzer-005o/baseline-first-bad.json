@@ -1,0 +1,113 @@
+{
+ "schema": "buildapp.005o.baseline-first-bad",
+ "incumbent": "b680cd440f7e202ad6813f0a3bffdb563abfa772 (M0, solver-only replay of the sealed evidence; byte-identical failure.json to the sealed run)",
+ "classes": {
+  "a": "OCR candidate never existed",
+  "b": "existed but dropped by the lattice/ensemble",
+  "c": "read but bound to the wrong dimension line/tick",
+  "d": "preserved but mis-ranked by metric/registration (or the as-printed view)",
+  "e": "evidence truly insufficient; refusal appropriate"
+ },
+ "cases": {
+  "dom-w-glogownikach": {
+   "outcome": "PLAN_RESOLUTION_INCONCLUSIVE / SOURCE_CONFLICT (OUTER_TOTALS: \"501/206 px, 810/333 px agree on 2.432039\")",
+   "selectedFrame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+   "metricSolution": "STRONG / CONFIRMED / MEASURED, 2.626058 x 2.620832 cm/px (dimension-observation path, ensemble-aware)",
+   "trueScaleCmPerPx": "2.626 (transcription truth: 541/206 = 2.626, 920/350 = 2.629, 870/333 = 2.613, 190/71 = 2.676)",
+   "FIRST_BAD_OPERATION": "d \u2014 AS_PRINTED_VIEW_IGNORES_ENSEMBLE: plan-resolution statementsOn/asRead takes the classic template token text as \"printed\" for CHAIN_CORRECTED statements; the deployed PP-OCRv6 had read 541 (p 0.99981) and 870 (p 0.99952), both stable, on the same boxes; the ensemble kept them (CONTESTS 501/541; LEADS 870, 810 a candidate) and the metric solution used 870 as a witness",
+   "labels": [
+    {
+     "ink": "541",
+     "token": "501",
+     "lattice": "501 CLEAR",
+     "pp_ocr": "541 p .99981 stable",
+     "ensemble": "CONTESTS (rival 541)",
+     "statementValue": "541 CHAIN_CORRECTED (dependsOnScale)",
+     "px": 206,
+     "whereLost": "plan-resolution as-printed view (token text)"
+    },
+    {
+     "ink": "870",
+     "token": "810",
+     "lattice": "810 AMBIGUOUS (STRICT path 870)",
+     "pp_ocr": "870 p .99952 stable",
+     "ensemble": "LEADS 870",
+     "statementValue": "870 CHAIN_CORRECTED",
+     "px": 333,
+     "whereLost": "plan-resolution as-printed view (token text)"
+    }
+   ],
+   "correlation": "the two misreads are NOT independent witnesses: same page, same typeface, same reader family (classic template reader; the lattice shares the template bitmaps and agrees on 501 and 810); both a middle-digit substitution (4->0, 7->1); they agree on 2.432 by coincidence (501/541 = 0.926, 810/870 = 0.931). The independent model (PP-OCRv6) read both correctly",
+   "statementStats": {
+    "statementsWithTruth": 10,
+    "tokenCorrect": 0,
+    "tokenWrong": 10,
+    "latticeCorrect": 1,
+    "latticeWrong": 9,
+    "externalCorroboratingCorrect": 9,
+    "externalCorroboratingWrong": 0,
+    "topKRecall": 9,
+    "boundConsistent": 4,
+    "boundInconsistent": 6
+   },
+   "otherObservations": "10 of 10 legacy statements on the selected frame carry a wrong token text; 4 chain corrections are right (541, 920, 190, 870) and 6 are scale-fitted fabrications on mis-bound spans (346->132, 302->505, 224->120, 472->171 READ, 350->250, 280->160): binding (class c) is a second, independent defect of the legacy chain path"
+  },
+  "dom-w-murajach": {
+   "outcome": "METRIC_RESOLUTION_INCONCLUSIVE (LEGACY_UNCONFIRMED 2.451224, 0 independent witnesses)",
+   "selectedFrame": "frame-asset-rzut-36e1e5a39d-fb4609c5e2",
+   "trueScaleCmPerPx": "~1.554 (read-only trace: 740/476, 1020/656.5, 410+252 over inner faces; the page vote 2.451 is wrong by ~58%; the refusal is CORRECT)",
+   "FIRST_BAD_OPERATION": "mixed \u2014 earliest (c) dimension-line extraction (the ARCHON logo splits the 1020 line; wall-crossing/arrowhead ticks on v244, v726, v364, h330; the y~552 row and the WC line never extracted); smallest sufficient (d) the v49 orientation decision (UNDECIDED legacy fallback ROTATED_CCW although PP-OCR read the CW crop 740 at p 0.99991; TYPOGRAPHY counts leading zeros of the template token text only)",
+   "inventory": {
+    "chainsOnSelectedFrame": 79,
+    "meaningfulDimensionLines": 11,
+    "printedDimensions": 15,
+    "spurious": 68,
+    "tinyChains": 20,
+    "parallelCopyRelations": 5,
+    "labelsCountedByDimensionEvidenceOf": 5,
+    "byFirstBadClass": {
+     "a": 5,
+     "b": 1,
+     "c": 8,
+     "d": 1,
+     "e": 0
+    },
+    "correctValueAfterEnsemble": 7,
+    "boundToAFittingSpan": 2,
+    "independentDecisiveWitnesses": 0,
+    "pdfSource": false
+   },
+   "statementStats": {
+    "statementsWithTruth": 3,
+    "tokenCorrect": 1,
+    "tokenWrong": 2,
+    "latticeCorrect": 3,
+    "latticeWrong": 0,
+    "externalCorroboratingCorrect": 3,
+    "externalCorroboratingWrong": 0,
+    "topKRecall": 3,
+    "boundConsistent": 0,
+    "boundInconsistent": 0
+   },
+   "note": "\"5 labels on 79 lines\" is plan-diagnostics dimensionEvidenceOf (text regions with a PRIMARY non-LOW observation); 79 is a raw chain count of which 11 are meaningful dimension lines (15 printed dimensions); the remaining 68 are furniture, stairs, walls, callout leaders, the logo and the car"
+  },
+  "dom-w-akebiach": {
+   "outcome": "EXTENT (blind-10 #2); METRIC is not its first bad decision (selected frame scale 2.9061 cm/px, metric STRONG)",
+   "FIRST_BAD_OPERATION": "EXTENT, separately tracked: piers missing from the accepted band set (band extraction), the long-band envelope excludes the 0.96 m projection, the 4.01 m door classified NONE (its 400/220 callout unread) so the 005C outline floods; completion only judges enclosed parts",
+   "kernel": "NO_KERNEL_BOTTLENECK (akebiach-topology.json)",
+   "statementStats": {
+    "statementsWithTruth": 24,
+    "tokenCorrect": 10,
+    "tokenWrong": 12,
+    "latticeCorrect": 8,
+    "latticeWrong": 12,
+    "externalCorroboratingCorrect": 16,
+    "externalCorroboratingWrong": 0,
+    "topKRecall": 20,
+    "boundConsistent": 16,
+    "boundInconsistent": 1
+   }
+  },
+  "negative_and_known_good": "see metric-bakeoff.json houses[] (every development row, M0 vs each challenger: outcome, model hash, scale class, verdict); marcowki, kosacce-*, dom-w-cieszyniankach, dom-w-gozdzikowcach and the 005L storey rows (A06, A07, zurawkach, tunbergiach; A01, D00, willa-miranda, helikoniach fail at M0) are all present with offline evidence; kosacce-area-alone, eoze-legacy-every/area carry schema-1.1.0 evidence without lattices or external readings (M1-M3 cannot act on them: recorded, not a gap in the corpus)"
+ }
+}

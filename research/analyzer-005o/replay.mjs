@@ -30,8 +30,11 @@ const todo = cases.filter((c) => !only || only.split(',').includes(c.case))
 const par = Number(arg('par', '2'))
 mkdirSync(join(work, 'runs', label), { recursive: true })
 
+// overlays (publisher-derived pictures) go, and so do the run's copies of its sealed inputs (up to 6 MB each, byte-identical
+// to the case's own files, which the scorer reads instead)
 const prune = (out) => {
   for (const d of [out, join(out, 'plan-diagnostics')]) if (existsSync(d)) for (const f of readdirSync(d)) if (f.endsWith('.png')) rmSync(join(d, f), { force: true })
+  for (const f of ['metric-evidence.json', 'source-package.json', 'observation-graph.json']) rmSync(join(out, f), { force: true })
 }
 const rssOfTree = (pid) => {
   // peak sampled RSS (kB) of the process and its descendants, from /proc

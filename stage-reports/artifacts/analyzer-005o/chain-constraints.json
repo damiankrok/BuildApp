@@ -1,0 +1,1673 @@
+{
+"frames": {
+"M2": [
+{
+"case": "dom-w-zurawkach",
+"equations": [
+{
+"overall": "metric-dimension-65b34b03e4",
+"segments": [
+"metric-dimension-033f5d513c",
+"metric-dimension-539f8f44ef"
+],
+"status": "SKIPPED_UNSTATED"
+}
+],
+"frame": "frame-asset-gotowy-projekt-dom-w-zurawkach-3-p-rzut-pa-2d7956d088"
+},
+{
+"case": "dom-w-zurawkach",
+"equations": [
+{
+"fix": [
+"metric-dimension-7dd81bb8d5",
+950
+],
+"overall": "metric-dimension-7dd81bb8d5",
+"segments": [
+"metric-dimension-a0673ae388",
+"metric-dimension-89ee28edf8"
+],
+"status": "ONE_SUBSTITUTION",
+"values": [
+450,
+800,
+150
+]
+}
+],
+"frame": "frame-asset-rzut-007f8fc320-7e7086524f"
+},
+{
+"case": "dom-w-zurawkach",
+"equations": [
+{
+"fix": [
+"metric-dimension-dcc8e758f3",
+950
+],
+"overall": "metric-dimension-dcc8e758f3",
+"segments": [
+"metric-dimension-bbf7d95771",
+"metric-dimension-9f8fab1aea"
+],
+"status": "ONE_SUBSTITUTION",
+"values": [
+450,
+800,
+150
+]
+}
+],
+"frame": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445"
+},
+{
+"case": "rarytasy-g2e",
+"equations": [
+{
+"overall": "metric-dimension-030bbbaee4",
+"segments": [
+"metric-dimension-47e5a4ae4f",
+"metric-dimension-d9db2338aa",
+"metric-dimension-d2c16fa3fa"
+],
+"status": "SKIPPED_UNSTATED"
+}
+],
+"frame": "frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-sytu-24f14b434d"
+},
+{
+"case": "rarytasy-g2e",
+"equations": [
+{
+"overall": "metric-dimension-c14bd16e4b",
+"segments": [
+"metric-dimension-0ae76f0904",
+"metric-dimension-51fa36ca43"
+],
+"status": "SKIPPED_UNSTATED"
+}
+],
+"frame": "frame-asset-rzut-e85d3de75a-666b0a8861"
+},
+{
+"case": "kosacce-tracked",
+"equations": [
+{
+"fix": [
+"metric-dimension-e4d8b08fc8",
+890
+],
+"overall": "metric-dimension-5ac7673dae",
+"segments": [
+"metric-dimension-01895b21da",
+"metric-dimension-e4d8b08fc8"
+],
+"status": "ONE_SUBSTITUTION",
+"values": [
+1260,
+370,
+840
+]
+}
+],
+"frame": "frame-asset-rzut-94f54ada01-bdf7aa09e8"
+},
+{
+"case": "kosacce-tracked",
+"equations": [
+{
+"fix": [
+"metric-dimension-911f988d1e",
+890
+],
+"overall": "metric-dimension-83b1f8163f",
+"segments": [
+"metric-dimension-111d08fcc3",
+"metric-dimension-911f988d1e"
+],
+"status": "ONE_SUBSTITUTION",
+"values": [
+1260,
+370,
+840
+]
+}
+],
+"frame": "frame-asset-rzut-f530d6ebf2-668d857ed9"
+},
+{
+"case": "A02",
+"equations": [
+{
+"overall": "metric-dimension-8abed5079c",
+"segments": [
+"metric-dimension-2b121f5d48",
+"metric-dimension-0a47c7ab97",
+"metric-dimension-de53ea1df2"
+],
+"status": "SKIPPED_UNSTATED"
+}
+],
+"frame": "frame-asset-gotowy-projekt-dom-w-czosnkach-e-sytuacja-3da810a401"
+},
+{
+"case": "A02",
+"equations": [
+{
+"overall": "metric-dimension-28fc2bd5d9",
+"segments": [
+"metric-dimension-891d4f21b7",
+"metric-dimension-1fdd25237f"
+],
+"status": "SKIPPED_UNSTATED"
+}
+],
+"frame": "frame-asset-rzut-2c17aa3eda-b6cebfd23d"
+},
+{
+"case": "A02",
+"equations": [
+{
+"overall": "metric-dimension-f4e7f8de6a",
+"segments": [
+"metric-dimension-1c72e87a60",
+"metric-dimension-2341efbef0"
+],
+"status": "SKIPPED_UNSTATED"
+}
+],
+"frame": "frame-asset-rzut-708e904e2c-672b2dc25e"
+},
+{
+"case": "dom-pod-jarzabem",
+"equations": [
+{
+"overall": "metric-dimension-b1430424a9",
+"segments": [
+"metric-dimension-67e8dd7231",
+"metric-dimension-354172e3ea"
+],
+"status": "SKIPPED_UNSTATED"
+}
+],
+"frame": "frame-asset-rzut-9354eb066f-397808a266"
+},
+{
+"case": "dom-pod-jarzabem",
+"equations": [
+{
+"fixes": 0,
+"overall": "metric-dimension-f71a88e0ac",
+"segments": [
+"metric-dimension-74a827255e",
+"metric-dimension-77ef90396b",
+"metric-dimension-3245aba290"
+],
+"status": "VIOLATED_UNRESOLVED",
+"values": [
+1100,
+100,
+401,
+100
+]
+}
+],
+"frame": "frame-asset-rzut-cafd34a77a-4813950087"
+},
+{
+"case": "dom-w-akebiach",
+"equations": [
+{
+"overall": "metric-dimension-c59ce28f7e",
+"segments": [
+"metric-dimension-4bdb6ca5ac",
+"metric-dimension-f55f2ce2e4"
+],
+"status": "SKIPPED_UNSTATED"
+}
+],
+"frame": "frame-asset-rzut-7e927b686a-920547f86d"
+},
+{
+"case": "dom-w-akebiach",
+"equations": [
+{
+"fixes": 0,
+"overall": "metric-dimension-bffc895671",
+"segments": [
+"metric-dimension-aeab1dad43",
+"metric-dimension-b33033b15f"
+],
+"status": "VIOLATED_UNRESOLVED",
+"values": [
+1441,
+458,
+1532
+]
+}
+],
+"frame": "frame-asset-rzut-8984f3a30b-4d37f1b2ba"
+},
+{
+"case": "A00",
+"equations": [
+{
+"fixes": 0,
+"overall": "metric-dimension-ad91d9fe51",
+"segments": [
+"metric-dimension-fb4a7ce555",
+"metric-dimension-aba5721758",
+"metric-dimension-a49c22df61"
+],
+"status": "VIOLATED_UNRESOLVED",
+"values": [
+2010,
+400,
+1610,
+400
+]
+}
+],
+"frame": "frame-asset-gotowy-projekt-dom-w-goldstarach-2-sytuacj-2cf1effbc5"
+},
+{
+"case": "A00",
+"equations": [
+{
+"overall": "metric-dimension-39f301ca93",
+"segments": [
+"metric-dimension-33d6a8deae",
+"metric-dimension-479de4a620"
+],
+"status": "HOLDS",
+"values": [
+910,
+850,
+60
+]
+}
+],
+"frame": "frame-asset-rzut-251e1ab219-b7c86c9abf"
+},
+{
+"case": "dom-w-modrzykach",
+"equations": [
+{
+"fixes": 0,
+"overall": "metric-dimension-b14cae07d8",
+"segments": [
+"metric-dimension-e0b80a8e9e",
+"metric-dimension-1d51e6521c",
+"metric-dimension-98d30bc967",
+"metric-dimension-f58e1870b0"
+],
+"status": "VIOLATED_UNRESOLVED",
+"values": [
+1160,
+146,
+689,
+145,
+80
+]
+}
+],
+"frame": "frame-asset-rzut-fb7476d8f1-6827e718fe"
+},
+{
+"case": "willa-miranda",
+"equations": [
+{
+"overall": "metric-dimension-710a75aed1",
+"segments": [
+"metric-dimension-42ca4236c2",
+"metric-dimension-5e22e0e0fe"
+],
+"status": "HOLDS",
+"values": [
+1500,
+800,
+700
+]
+},
+{
+"fixes": 0,
+"overall": "metric-dimension-124b3b136b",
+"segments": [
+"metric-dimension-4e6659965b",
+"metric-dimension-9786f0aaaf",
+"metric-dimension-68a8ea06d5"
+],
+"status": "VIOLATED_UNRESOLVED",
+"values": [
+1410,
+205,
+920,
+245
+]
+}
+],
+"frame": "frame-asset-rzut-73ee27c4b6-7102a805c6"
+},
+{
+"case": "willa-miranda",
+"equations": [
+{
+"overall": "metric-dimension-c5e9e9d58f",
+"segments": [
+"metric-dimension-282cf24a78",
+"metric-dimension-21e60cea62"
+],
+"status": "HOLDS",
+"values": [
+1500,
+800,
+700
+]
+},
+{
+"fixes": 0,
+"overall": "metric-dimension-b4988d437c",
+"segments": [
+"metric-dimension-de8cb6d28e",
+"metric-dimension-e1a01ca354",
+"metric-dimension-f829950af9"
+],
+"status": "VIOLATED_UNRESOLVED",
+"values": [
+1410,
+205,
+920,
+245
+]
+}
+],
+"frame": "frame-asset-rzut-891a78d924-c2d04897b9"
+},
+{
+"case": "kosacce-clean",
+"equations": [
+{
+"fix": [
+"metric-dimension-e4d8b08fc8",
+890
+],
+"overall": "metric-dimension-5ac7673dae",
+"segments": [
+"metric-dimension-01895b21da",
+"metric-dimension-e4d8b08fc8"
+],
+"status": "ONE_SUBSTITUTION",
+"values": [
+1260,
+370,
+840
+]
+}
+],
+"frame": "frame-asset-rzut-94f54ada01-bdf7aa09e8"
+},
+{
+"case": "kosacce-clean",
+"equations": [
+{
+"fix": [
+"metric-dimension-911f988d1e",
+890
+],
+"overall": "metric-dimension-83b1f8163f",
+"segments": [
+"metric-dimension-111d08fcc3",
+"metric-dimension-911f988d1e"
+],
+"status": "ONE_SUBSTITUTION",
+"values": [
+1260,
+370,
+840
+]
+}
+],
+"frame": "frame-asset-rzut-f530d6ebf2-668d857ed9"
+},
+{
+"case": "A06",
+"equations": [
+{
+"overall": "metric-dimension-3e8d881c0c",
+"segments": [
+"metric-dimension-165c12161a",
+"metric-dimension-b2b8f47bea"
+],
+"status": "SKIPPED_UNSTATED"
+}
+],
+"frame": "frame-asset-gotowy-projekt-dom-w-bratkach-26-r2be-sytu-b67bf25b8b"
+},
+{
+"case": "A06",
+"equations": [
+{
+"fix": [
+"metric-dimension-06b9bae7f7",
+1101
+],
+"overall": "metric-dimension-06b9bae7f7",
+"segments": [
+"metric-dimension-857729e717",
+"metric-dimension-a8ddd178cd"
+],
+"status": "ONE_SUBSTITUTION",
+"values": [
+1145,
+101,
+1001
+]
+}
+],
+"frame": "frame-asset-rzut-f08001e3c4-8b24c71f3f"
+},
+{
+"case": "A06",
+"equations": [
+{
+"fix": [
+"metric-dimension-582b43d822",
+1101
+],
+"overall": "metric-dimension-582b43d822",
+"segments": [
+"metric-dimension-0a3e9ea377",
+"metric-dimension-f41a756055"
+],
+"status": "ONE_SUBSTITUTION",
+"values": [
+1145,
+101,
+1001
+]
+}
+],
+"frame": "frame-asset-rzut-f118efcaa0-4604b8d3ed"
+},
+{
+"case": "dom-w-helikoniach",
+"equations": [
+{
+"fixes": 0,
+"overall": "metric-dimension-38793193f0",
+"segments": [
+"metric-dimension-c14a511a38",
+"metric-dimension-7fc3017f70"
+],
+"status": "VIOLATED_UNRESOLVED",
+"values": [
+701,
+126,
+977
+]
+}
+],
+"frame": "frame-asset-rzut-d209d7bdfe-0af152d058"
+},
+{
+"case": "dom-w-helikoniach",
+"equations": [
+{
+"fixes": 0,
+"overall": "metric-dimension-c7ece21a70",
+"segments": [
+"metric-dimension-1381b1dfff",
+"metric-dimension-54d7210fdf"
+],
+"status": "VIOLATED_UNRESOLVED",
+"values": [
+701,
+126,
+977
+]
+}
+],
+"frame": "frame-asset-rzut-d5842da623-4c943a2b00"
+},
+{
+"case": "D01",
+"equations": [
+{
+"overall": "metric-dimension-c3a56b17b1",
+"segments": [
+"metric-dimension-2fae50765b",
+"metric-dimension-059b7324c3",
+"metric-dimension-87dc89f20c"
+],
+"status": "SKIPPED_UNSTATED"
+}
+],
+"frame": "frame-asset-faun-iii-rzut-dzia-ki-7a7a31530a-a2863d2ae3"
+},
+{
+"case": "A05",
+"equations": [
+{
+"fixes": 0,
+"overall": "metric-dimension-473b103a69",
+"segments": [
+"metric-dimension-0549e3789e",
+"metric-dimension-ef0e78eaa2"
+],
+"status": "VIOLATED_UNRESOLVED",
+"values": [
+1012,
+412,
+101
+]
+}
+],
+"frame": "frame-asset-gotowy-projekt-dom-we-wrzosach-rzut-parter-646c151798"
+},
+{
+"case": "A05",
+"equations": [
+{
+"overall": "metric-dimension-70a1918a5c",
+"segments": [
+"metric-dimension-09814b30ad",
+"metric-dimension-274b979920",
+"metric-dimension-3d474cd421"
+],
+"status": "HOLDS",
+"values": [
+1462,
+702,
+660,
+100
+]
+},
+{
+"fixes": 0,
+"overall": "metric-dimension-e8e5c9dbd9",
+"segments": [
+"metric-dimension-dd0b08c5db",
+"metric-dimension-a44cf07918"
+],
+"status": "VIOLATED_UNRESOLVED",
+"values": [
+1012,
+412,
+100
+]
+}
+],
+"frame": "frame-asset-rzut-238dfbc50b-38cf8e09f5"
+},
+{
+"case": "A05",
+"equations": [
+{
+"overall": "metric-dimension-7cb358bdfd",
+"segments": [
+"metric-dimension-8c25fdd3a2",
+"metric-dimension-5d8d9cd364",
+"metric-dimension-e7f0c9d422"
+],
+"status": "HOLDS",
+"values": [
+1462,
+702,
+660,
+100
+]
+},
+{
+"fixes": 0,
+"overall": "metric-dimension-7b5c431b5f",
+"segments": [
+"metric-dimension-00e9c82206",
+"metric-dimension-9b19849652"
+],
+"status": "VIOLATED_UNRESOLVED",
+"values": [
+1012,
+412,
+100
+]
+}
+],
+"frame": "frame-asset-rzut-684886a2a0-2a1e4f9cc1"
+},
+{
+"case": "dom-w-dabecjach",
+"equations": [
+{
+"overall": "metric-dimension-e21787f960",
+"segments": [
+"metric-dimension-641b874dd3",
+"metric-dimension-83b1da92df"
+],
+"status": "HOLDS",
+"values": [
+1580,
+888,
+692
+]
+},
+{
+"overall": "metric-dimension-6d80220c6c",
+"segments": [
+"metric-dimension-c094e7b88e",
+"metric-dimension-b4602924d7"
+],
+"status": "HOLDS",
+"values": [
+1340,
+850,
+490
+]
+}
+],
+"frame": "frame-asset-rzut-03a05dd085-0fd2019dc2"
+},
+{
+"case": "dom-w-dabecjach",
+"equations": [
+{
+"overall": "metric-dimension-807c1b72e4",
+"segments": [
+"metric-dimension-a8ab64f979",
+"metric-dimension-36cafddec9"
+],
+"status": "HOLDS",
+"values": [
+1580,
+888,
+692
+]
+},
+{
+"overall": "metric-dimension-67b2cd8f64",
+"segments": [
+"metric-dimension-e4c15da0a9",
+"metric-dimension-5799b5f308"
+],
+"status": "HOLDS",
+"values": [
+1340,
+850,
+490
+]
+}
+],
+"frame": "frame-asset-rzut-1a56066c62-10b0ec4131"
+},
+{
+"case": "dom-w-cieszyniankach",
+"equations": [
+{
+"overall": "metric-dimension-f9a5c9ba08",
+"segments": [
+"metric-dimension-88e61f3503",
+"metric-dimension-249af01c20",
+"metric-dimension-5aa4893b8c"
+],
+"status": "HOLDS",
+"values": [
+1660,
+470,
+1110,
+80
+]
+}
+],
+"frame": "frame-asset-rzut-c5942656f1-c550f0d779"
+},
+{
+"case": "dom-w-cieszyniankach",
+"equations": [
+{
+"overall": "metric-dimension-250810c316",
+"segments": [
+"metric-dimension-a6ebab37e2",
+"metric-dimension-87cc919b73",
+"metric-dimension-8398c5a6c4"
+],
+"status": "HOLDS",
+"values": [
+1660,
+470,
+1110,
+80
+]
+}
+],
+"frame": "frame-asset-rzut-ebb40feeba-0459d5961d"
+},
+{
+"case": "marcowki",
+"equations": [
+{
+"fixes": 0,
+"overall": "metric-dimension-98bf0f74d5",
+"segments": [
+"metric-dimension-4af572f280",
+"metric-dimension-07b24ca33a"
+],
+"status": "VIOLATED_UNRESOLVED",
+"values": [
+1205,
+740,
+115
+]
+},
+{
+"fix": [
+"metric-dimension-c7e4ed94b9",
+750
+],
+"overall": "metric-dimension-b2e52a12fc",
+"segments": [
+"metric-dimension-d1422a5b67",
+"metric-dimension-c7e4ed94b9"
+],
+"status": "ONE_SUBSTITUTION",
+"values": [
+1260,
+510,
+151
+]
+}
+],
+"frame": "frame-asset-rzut-19a11bc745-33a5ff46cd"
+},
+{
+"case": "marcowki",
+"equations": [
+{
+"fixes": 0,
+"overall": "metric-dimension-69fc847c0f",
+"segments": [
+"metric-dimension-ae02be35ab",
+"metric-dimension-f26f94e528"
+],
+"status": "VIOLATED_UNRESOLVED",
+"values": [
+1205,
+740,
+115
+]
+}
+],
+"frame": "frame-asset-rzut-aa1526220f-863ec969ff"
+},
+{
+"case": "A07",
+"equations": [
+{
+"overall": "metric-dimension-5468374690",
+"segments": [
+"metric-dimension-6c5d63435b",
+"metric-dimension-cd40be8f8a",
+"metric-dimension-121c71ae4e"
+],
+"status": "SKIPPED_UNSTATED"
+}
+],
+"frame": "frame-asset-gotowy-projekt-willa-maja-r2-sytuacja-3ef9-3bb9db372a"
+},
+{
+"case": "kosacce-area-alone",
+"equations": [
+{
+"fixes": 0,
+"overall": "metric-dimension-5ac7673dae",
+"segments": [
+"metric-dimension-01895b21da",
+"metric-dimension-e4d8b08fc8"
+],
+"status": "VIOLATED_UNRESOLVED",
+"values": [
+1260,
+370,
+840
+]
+}
+],
+"frame": "frame-asset-rzut-94f54ada01-bdf7aa09e8"
+},
+{
+"case": "kosacce-area-alone",
+"equations": [
+{
+"fixes": 0,
+"overall": "metric-dimension-83b1f8163f",
+"segments": [
+"metric-dimension-111d08fcc3",
+"metric-dimension-911f988d1e"
+],
+"status": "VIOLATED_UNRESOLVED",
+"values": [
+1260,
+370,
+840
+]
+}
+],
+"frame": "frame-asset-rzut-f530d6ebf2-668d857ed9"
+},
+{
+"case": "D00",
+"equations": [
+{
+"overall": "metric-dimension-0042684802",
+"segments": [
+"metric-dimension-3f8ea58eac",
+"metric-dimension-ae6471f52e",
+"metric-dimension-907c954aa5"
+],
+"status": "SKIPPED_UNSTATED"
+}
+],
+"frame": "frame-asset-mars-rzut-dzia-ki-135d616dff-ad20d4f0ba"
+}
+],
+"M3": [
+{
+"case": "dom-w-zurawkach",
+"equations": [
+{
+"assignment": [
+1180,
+750,
+430
+],
+"overall": "metric-dimension-65b34b03e4",
+"segments": [
+"metric-dimension-033f5d513c",
+"metric-dimension-539f8f44ef"
+],
+"status": "UNIQUE_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-gotowy-projekt-dom-w-zurawkach-3-p-rzut-pa-2d7956d088"
+},
+{
+"case": "dom-w-zurawkach",
+"equations": [
+{
+"assignment": [
+950,
+800,
+150
+],
+"overall": "metric-dimension-7dd81bb8d5",
+"segments": [
+"metric-dimension-a0673ae388",
+"metric-dimension-89ee28edf8"
+],
+"status": "UNIQUE_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-rzut-007f8fc320-7e7086524f"
+},
+{
+"case": "dom-w-zurawkach",
+"equations": [
+{
+"assignment": [
+950,
+800,
+150
+],
+"overall": "metric-dimension-dcc8e758f3",
+"segments": [
+"metric-dimension-bbf7d95771",
+"metric-dimension-9f8fab1aea"
+],
+"status": "UNIQUE_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445"
+},
+{
+"case": "rarytasy-g2e",
+"equations": [
+{
+"overall": "metric-dimension-030bbbaee4",
+"segments": [
+"metric-dimension-47e5a4ae4f",
+"metric-dimension-d9db2338aa",
+"metric-dimension-d2c16fa3fa"
+],
+"status": "NO_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-sytu-24f14b434d"
+},
+{
+"case": "rarytasy-g2e",
+"equations": [
+{
+"assignment": [
+1474,
+850,
+624
+],
+"overall": "metric-dimension-c14bd16e4b",
+"segments": [
+"metric-dimension-0ae76f0904",
+"metric-dimension-51fa36ca43"
+],
+"status": "UNIQUE_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-rzut-e85d3de75a-666b0a8861"
+},
+{
+"case": "kosacce-tracked",
+"equations": [
+{
+"assignment": [
+1260,
+370,
+890
+],
+"overall": "metric-dimension-5ac7673dae",
+"segments": [
+"metric-dimension-01895b21da",
+"metric-dimension-e4d8b08fc8"
+],
+"status": "UNIQUE_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-rzut-94f54ada01-bdf7aa09e8"
+},
+{
+"case": "kosacce-tracked",
+"equations": [
+{
+"assignment": [
+1260,
+370,
+890
+],
+"overall": "metric-dimension-83b1f8163f",
+"segments": [
+"metric-dimension-111d08fcc3",
+"metric-dimension-911f988d1e"
+],
+"status": "UNIQUE_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-rzut-f530d6ebf2-668d857ed9"
+},
+{
+"case": "A02",
+"equations": [
+{
+"overall": "metric-dimension-8abed5079c",
+"segments": [
+"metric-dimension-2b121f5d48",
+"metric-dimension-0a47c7ab97",
+"metric-dimension-de53ea1df2"
+],
+"status": "NO_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-gotowy-projekt-dom-w-czosnkach-e-sytuacja-3da810a401"
+},
+{
+"case": "A02",
+"equations": [
+{
+"assignment": [
+920,
+473,
+447
+],
+"overall": "metric-dimension-28fc2bd5d9",
+"segments": [
+"metric-dimension-891d4f21b7",
+"metric-dimension-1fdd25237f"
+],
+"status": "UNIQUE_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-rzut-2c17aa3eda-b6cebfd23d"
+},
+{
+"case": "A02",
+"equations": [
+{
+"assignment": [
+920,
+473,
+447
+],
+"overall": "metric-dimension-f4e7f8de6a",
+"segments": [
+"metric-dimension-1c72e87a60",
+"metric-dimension-2341efbef0"
+],
+"status": "UNIQUE_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-rzut-708e904e2c-672b2dc25e"
+},
+{
+"case": "dom-pod-jarzabem",
+"equations": [
+{
+"overall": "metric-dimension-b1430424a9",
+"segments": [
+"metric-dimension-67e8dd7231",
+"metric-dimension-354172e3ea"
+],
+"status": "NO_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-rzut-9354eb066f-397808a266"
+},
+{
+"case": "dom-pod-jarzabem",
+"equations": [
+{
+"assignment": [
+1100,
+100,
+900,
+100
+],
+"overall": "metric-dimension-f71a88e0ac",
+"segments": [
+"metric-dimension-74a827255e",
+"metric-dimension-77ef90396b",
+"metric-dimension-3245aba290"
+],
+"status": "UNIQUE_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-rzut-cafd34a77a-4813950087"
+},
+{
+"case": "dom-w-akebiach",
+"equations": [
+{
+"count": 5,
+"overall": "metric-dimension-c59ce28f7e",
+"segments": [
+"metric-dimension-4bdb6ca5ac",
+"metric-dimension-f55f2ce2e4"
+],
+"status": "SEVERAL_ASSIGNMENTS"
+}
+],
+"frame": "frame-asset-rzut-7e927b686a-920547f86d"
+},
+{
+"case": "dom-w-akebiach",
+"equations": [
+{
+"assignment": [
+1990,
+458,
+1532
+],
+"overall": "metric-dimension-bffc895671",
+"segments": [
+"metric-dimension-aeab1dad43",
+"metric-dimension-b33033b15f"
+],
+"status": "UNIQUE_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-rzut-8984f3a30b-4d37f1b2ba"
+},
+{
+"case": "A00",
+"equations": [
+{
+"overall": "metric-dimension-ad91d9fe51",
+"segments": [
+"metric-dimension-fb4a7ce555",
+"metric-dimension-aba5721758",
+"metric-dimension-a49c22df61"
+],
+"status": "NO_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-gotowy-projekt-dom-w-goldstarach-2-sytuacj-2cf1effbc5"
+},
+{
+"case": "A00",
+"equations": [
+{
+"assignment": [
+910,
+850,
+60
+],
+"overall": "metric-dimension-39f301ca93",
+"segments": [
+"metric-dimension-33d6a8deae",
+"metric-dimension-479de4a620"
+],
+"status": "UNIQUE_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-rzut-251e1ab219-b7c86c9abf"
+},
+{
+"case": "dom-w-modrzykach",
+"equations": [
+{
+"overall": "metric-dimension-b14cae07d8",
+"segments": [
+"metric-dimension-e0b80a8e9e",
+"metric-dimension-1d51e6521c",
+"metric-dimension-98d30bc967",
+"metric-dimension-f58e1870b0"
+],
+"status": "NO_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-rzut-fb7476d8f1-6827e718fe"
+},
+{
+"case": "willa-miranda",
+"equations": [
+{
+"assignment": [
+1500,
+800,
+700
+],
+"overall": "metric-dimension-710a75aed1",
+"segments": [
+"metric-dimension-42ca4236c2",
+"metric-dimension-5e22e0e0fe"
+],
+"status": "UNIQUE_ASSIGNMENT"
+},
+{
+"assignment": [
+1410,
+245,
+920,
+245
+],
+"overall": "metric-dimension-124b3b136b",
+"segments": [
+"metric-dimension-4e6659965b",
+"metric-dimension-9786f0aaaf",
+"metric-dimension-68a8ea06d5"
+],
+"status": "UNIQUE_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-rzut-73ee27c4b6-7102a805c6"
+},
+{
+"case": "willa-miranda",
+"equations": [
+{
+"assignment": [
+1500,
+800,
+700
+],
+"overall": "metric-dimension-c5e9e9d58f",
+"segments": [
+"metric-dimension-282cf24a78",
+"metric-dimension-21e60cea62"
+],
+"status": "UNIQUE_ASSIGNMENT"
+},
+{
+"assignment": [
+1410,
+245,
+920,
+245
+],
+"overall": "metric-dimension-b4988d437c",
+"segments": [
+"metric-dimension-de8cb6d28e",
+"metric-dimension-e1a01ca354",
+"metric-dimension-f829950af9"
+],
+"status": "UNIQUE_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-rzut-891a78d924-c2d04897b9"
+},
+{
+"case": "kosacce-clean",
+"equations": [
+{
+"assignment": [
+1260,
+370,
+890
+],
+"overall": "metric-dimension-5ac7673dae",
+"segments": [
+"metric-dimension-01895b21da",
+"metric-dimension-e4d8b08fc8"
+],
+"status": "UNIQUE_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-rzut-94f54ada01-bdf7aa09e8"
+},
+{
+"case": "kosacce-clean",
+"equations": [
+{
+"assignment": [
+1260,
+370,
+890
+],
+"overall": "metric-dimension-83b1f8163f",
+"segments": [
+"metric-dimension-111d08fcc3",
+"metric-dimension-911f988d1e"
+],
+"status": "UNIQUE_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-rzut-f530d6ebf2-668d857ed9"
+},
+{
+"case": "A06",
+"equations": [
+{
+"overall": "metric-dimension-3e8d881c0c",
+"segments": [
+"metric-dimension-165c12161a",
+"metric-dimension-b2b8f47bea"
+],
+"status": "NO_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-gotowy-projekt-dom-w-bratkach-26-r2be-sytu-b67bf25b8b"
+},
+{
+"case": "A06",
+"equations": [
+{
+"overall": "metric-dimension-06b9bae7f7",
+"segments": [
+"metric-dimension-857729e717",
+"metric-dimension-a8ddd178cd"
+],
+"status": "NO_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-rzut-f08001e3c4-8b24c71f3f"
+},
+{
+"case": "A06",
+"equations": [
+{
+"overall": "metric-dimension-582b43d822",
+"segments": [
+"metric-dimension-0a3e9ea377",
+"metric-dimension-f41a756055"
+],
+"status": "NO_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-rzut-f118efcaa0-4604b8d3ed"
+},
+{
+"case": "dom-w-helikoniach",
+"equations": [
+{
+"count": 2,
+"overall": "metric-dimension-38793193f0",
+"segments": [
+"metric-dimension-c14a511a38",
+"metric-dimension-7fc3017f70"
+],
+"status": "SEVERAL_ASSIGNMENTS"
+}
+],
+"frame": "frame-asset-rzut-d209d7bdfe-0af152d058"
+},
+{
+"case": "dom-w-helikoniach",
+"equations": [
+{
+"count": 2,
+"overall": "metric-dimension-c7ece21a70",
+"segments": [
+"metric-dimension-1381b1dfff",
+"metric-dimension-54d7210fdf"
+],
+"status": "SEVERAL_ASSIGNMENTS"
+}
+],
+"frame": "frame-asset-rzut-d5842da623-4c943a2b00"
+},
+{
+"case": "D01",
+"equations": [
+{
+"overall": "metric-dimension-c3a56b17b1",
+"segments": [
+"metric-dimension-2fae50765b",
+"metric-dimension-059b7324c3",
+"metric-dimension-87dc89f20c"
+],
+"status": "NO_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-faun-iii-rzut-dzia-ki-7a7a31530a-a2863d2ae3"
+},
+{
+"case": "A05",
+"equations": [
+{
+"count": 2,
+"overall": "metric-dimension-473b103a69",
+"segments": [
+"metric-dimension-0549e3789e",
+"metric-dimension-ef0e78eaa2"
+],
+"status": "SEVERAL_ASSIGNMENTS"
+}
+],
+"frame": "frame-asset-gotowy-projekt-dom-we-wrzosach-rzut-parter-646c151798"
+},
+{
+"case": "A05",
+"equations": [
+{
+"assignment": [
+1462,
+702,
+660,
+100
+],
+"overall": "metric-dimension-70a1918a5c",
+"segments": [
+"metric-dimension-09814b30ad",
+"metric-dimension-274b979920",
+"metric-dimension-3d474cd421"
+],
+"status": "UNIQUE_ASSIGNMENT"
+},
+{
+"assignment": [
+1012,
+912,
+100
+],
+"overall": "metric-dimension-e8e5c9dbd9",
+"segments": [
+"metric-dimension-dd0b08c5db",
+"metric-dimension-a44cf07918"
+],
+"status": "UNIQUE_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-rzut-238dfbc50b-38cf8e09f5"
+},
+{
+"case": "A05",
+"equations": [
+{
+"assignment": [
+1462,
+702,
+660,
+100
+],
+"overall": "metric-dimension-7cb358bdfd",
+"segments": [
+"metric-dimension-8c25fdd3a2",
+"metric-dimension-5d8d9cd364",
+"metric-dimension-e7f0c9d422"
+],
+"status": "UNIQUE_ASSIGNMENT"
+},
+{
+"assignment": [
+1012,
+912,
+100
+],
+"overall": "metric-dimension-7b5c431b5f",
+"segments": [
+"metric-dimension-00e9c82206",
+"metric-dimension-9b19849652"
+],
+"status": "UNIQUE_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-rzut-684886a2a0-2a1e4f9cc1"
+},
+{
+"case": "dom-w-dabecjach",
+"equations": [
+{
+"assignment": [
+1580,
+888,
+692
+],
+"overall": "metric-dimension-e21787f960",
+"segments": [
+"metric-dimension-641b874dd3",
+"metric-dimension-83b1da92df"
+],
+"status": "UNIQUE_ASSIGNMENT"
+},
+{
+"assignment": [
+1340,
+850,
+490
+],
+"overall": "metric-dimension-6d80220c6c",
+"segments": [
+"metric-dimension-c094e7b88e",
+"metric-dimension-b4602924d7"
+],
+"status": "UNIQUE_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-rzut-03a05dd085-0fd2019dc2"
+},
+{
+"case": "dom-w-dabecjach",
+"equations": [
+{
+"assignment": [
+1580,
+888,
+692
+],
+"overall": "metric-dimension-807c1b72e4",
+"segments": [
+"metric-dimension-a8ab64f979",
+"metric-dimension-36cafddec9"
+],
+"status": "UNIQUE_ASSIGNMENT"
+},
+{
+"assignment": [
+1340,
+850,
+490
+],
+"overall": "metric-dimension-67b2cd8f64",
+"segments": [
+"metric-dimension-e4c15da0a9",
+"metric-dimension-5799b5f308"
+],
+"status": "UNIQUE_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-rzut-1a56066c62-10b0ec4131"
+},
+{
+"case": "dom-w-cieszyniankach",
+"equations": [
+{
+"assignment": [
+1660,
+470,
+1110,
+80
+],
+"overall": "metric-dimension-f9a5c9ba08",
+"segments": [
+"metric-dimension-88e61f3503",
+"metric-dimension-249af01c20",
+"metric-dimension-5aa4893b8c"
+],
+"status": "UNIQUE_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-rzut-c5942656f1-c550f0d779"
+},
+{
+"case": "dom-w-cieszyniankach",
+"equations": [
+{
+"assignment": [
+1660,
+470,
+1110,
+80
+],
+"overall": "metric-dimension-250810c316",
+"segments": [
+"metric-dimension-a6ebab37e2",
+"metric-dimension-87cc919b73",
+"metric-dimension-8398c5a6c4"
+],
+"status": "UNIQUE_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-rzut-ebb40feeba-0459d5961d"
+},
+{
+"case": "marcowki",
+"equations": [
+{
+"count": 2,
+"overall": "metric-dimension-98bf0f74d5",
+"segments": [
+"metric-dimension-4af572f280",
+"metric-dimension-07b24ca33a"
+],
+"status": "SEVERAL_ASSIGNMENTS"
+},
+{
+"assignment": [
+1260,
+510,
+750
+],
+"overall": "metric-dimension-b2e52a12fc",
+"segments": [
+"metric-dimension-d1422a5b67",
+"metric-dimension-c7e4ed94b9"
+],
+"status": "UNIQUE_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-rzut-19a11bc745-33a5ff46cd"
+},
+{
+"case": "marcowki",
+"equations": [
+{
+"count": 2,
+"overall": "metric-dimension-69fc847c0f",
+"segments": [
+"metric-dimension-ae02be35ab",
+"metric-dimension-f26f94e528"
+],
+"status": "SEVERAL_ASSIGNMENTS"
+}
+],
+"frame": "frame-asset-rzut-aa1526220f-863ec969ff"
+},
+{
+"case": "A07",
+"equations": [
+{
+"overall": "metric-dimension-5468374690",
+"segments": [
+"metric-dimension-6c5d63435b",
+"metric-dimension-cd40be8f8a",
+"metric-dimension-121c71ae4e"
+],
+"status": "NO_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-gotowy-projekt-willa-maja-r2-sytuacja-3ef9-3bb9db372a"
+},
+{
+"case": "kosacce-area-alone",
+"equations": [
+{
+"overall": "metric-dimension-5ac7673dae",
+"segments": [
+"metric-dimension-01895b21da",
+"metric-dimension-e4d8b08fc8"
+],
+"status": "NO_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-rzut-94f54ada01-bdf7aa09e8"
+},
+{
+"case": "kosacce-area-alone",
+"equations": [
+{
+"overall": "metric-dimension-83b1f8163f",
+"segments": [
+"metric-dimension-111d08fcc3",
+"metric-dimension-911f988d1e"
+],
+"status": "NO_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-rzut-f530d6ebf2-668d857ed9"
+},
+{
+"case": "D00",
+"equations": [
+{
+"overall": "metric-dimension-0042684802",
+"segments": [
+"metric-dimension-3f8ea58eac",
+"metric-dimension-ae6471f52e",
+"metric-dimension-907c954aa5"
+],
+"status": "NO_ASSIGNMENT"
+}
+],
+"frame": "frame-asset-mars-rzut-dzia-ki-135d616dff-ad20d4f0ba"
+}
+]
+},
+"schema": "buildapp.005o.chain-constraints",
+"statusCounts": {
+"M2": {
+"HOLDS": 11,
+"ONE_SUBSTITUTION": 9,
+"SKIPPED_UNSTATED": 12,
+"VIOLATED_UNRESOLVED": 15
+},
+"M3": {
+"NO_ASSIGNMENT": 13,
+"SEVERAL_ASSIGNMENTS": 6,
+"UNIQUE_ASSIGNMENT": 28
+}
+}
+}

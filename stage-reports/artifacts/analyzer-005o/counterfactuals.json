@@ -1,0 +1,173 @@
+{
+ "controls": {
+  "M0-frozen vs M0H (harness without a view)": "44/44 outcome files byte-identical",
+  "M0-frozen vs M0X (explicit frozen view)": "44/44 identical outcome, code and model hash",
+  "missing-candidate (glogownikach, every external reading stripped)": {
+   "M1-noext": "PLAN_RESOLUTION_INCONCLUSIVE",
+   "M3-noext": "PLAN_RESOLUTION_INCONCLUSIVE"
+  },
+  "view generator determinism": "M1 and M3 views byte-identical on regeneration"
+ },
+ "houses": [
+  {
+   "M0": {
+    "code": null,
+    "frame": "frame-asset-rzut-cafd34a77a-4813950087",
+    "modelHash": "df2aa66c8591107a1ff3608d02164ad80f4a7609c963915cb17fe7312e64553f",
+    "outcome": "COMPLETED",
+    "scale": 2.8022,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1": {
+    "code": null,
+    "frame": "frame-asset-gotowy-projekt-dom-pod-jarzabem-15-g-rzut-19f8c2fa6e",
+    "modelHash": "e980b0bac094241786b3d1fec4cb57f81b0f93b989bf75ed15e4d25085520090",
+    "outcome": "COMPLETED",
+    "scale": 4.34745,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1P": {
+    "code": null,
+    "frame": "frame-asset-gotowy-projekt-dom-pod-jarzabem-15-g-rzut-19f8c2fa6e",
+    "modelHash": "e980b0bac094241786b3d1fec4cb57f81b0f93b989bf75ed15e4d25085520090",
+    "outcome": "COMPLETED",
+    "scale": 4.34745,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1b": {
+    "code": null,
+    "frame": "frame-asset-gotowy-projekt-dom-pod-jarzabem-15-g-rzut-19f8c2fa6e",
+    "modelHash": "e980b0bac094241786b3d1fec4cb57f81b0f93b989bf75ed15e4d25085520090",
+    "outcome": "COMPLETED",
+    "scale": 4.34745,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M2": {
+    "code": null,
+    "frame": "frame-asset-rzut-cafd34a77a-4813950087",
+    "modelHash": "df2aa66c8591107a1ff3608d02164ad80f4a7609c963915cb17fe7312e64553f",
+    "outcome": "COMPLETED",
+    "scale": 2.8022,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3": {
+    "code": null,
+    "frame": "frame-asset-gotowy-projekt-dom-pod-jarzabem-15-g-rzut-19f8c2fa6e",
+    "modelHash": "e980b0bac094241786b3d1fec4cb57f81b0f93b989bf75ed15e4d25085520090",
+    "outcome": "COMPLETED",
+    "scale": 4.34745,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3b": {
+    "code": null,
+    "frame": "frame-asset-gotowy-projekt-dom-pod-jarzabem-15-g-rzut-19f8c2fa6e",
+    "modelHash": "e980b0bac094241786b3d1fec4cb57f81b0f93b989bf75ed15e4d25085520090",
+    "outcome": "COMPLETED",
+    "scale": 4.34745,
+    "scaleClass": "UNKNOWN_TRUTH",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "case": "dom-pod-jarzabem",
+   "family": "dom-pod-jarzabem",
+   "trueScale": 2.804005722460658
+  },
+  {
+   "M0": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.6234,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1": {
+    "code": null,
+    "frame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+    "modelHash": "b7c86aac3af74dac994456f545ba0b8073300445ca1675588e46b0e0ccb93ed6",
+    "outcome": "COMPLETED",
+    "scale": 2.6234,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1P": {
+    "code": null,
+    "frame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+    "modelHash": "b7c86aac3af74dac994456f545ba0b8073300445ca1675588e46b0e0ccb93ed6",
+    "outcome": "COMPLETED",
+    "scale": 2.6234,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M1b": {
+    "code": null,
+    "frame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+    "modelHash": "b7c86aac3af74dac994456f545ba0b8073300445ca1675588e46b0e0ccb93ed6",
+    "outcome": "COMPLETED",
+    "scale": 2.6234,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M2": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "frame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+    "modelHash": null,
+    "outcome": "FAILED",
+    "scale": 2.6234,
+    "scaleClass": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3": {
+    "code": null,
+    "frame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+    "modelHash": "b7c86aac3af74dac994456f545ba0b8073300445ca1675588e46b0e0ccb93ed6",
+    "outcome": "COMPLETED",
+    "scale": 2.6234,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "M3b": {
+    "code": null,
+    "frame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+    "modelHash": "b7c86aac3af74dac994456f545ba0b8073300445ca1675588e46b0e0ccb93ed6",
+    "outcome": "COMPLETED",
+    "scale": 2.6234,
+    "scaleClass": "CORRECT_SCALE",
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "case": "dom-w-glogownikach",
+   "family": "dom-w-glogownikach",
+   "trueScale": 2.6285714285714286
+  }
+ ],
+ "m4OrientationDiag": {
+  "changed": 67,
+  "changedByDecidedBy": {
+   "OTHER_AXIS_SCALE": 14,
+   "TYPOGRAPHY": 19,
+   "UNDECIDED": 34
+  },
+  "changedVsTruth": {
+   "RIGHT": 16,
+   "UNKNOWN": 51
+  },
+  "decisions": 857,
+  "incumbentVsTruth": {
+   "RIGHT": 190,
+   "UNKNOWN": 641,
+   "WRONG": 26
+  },
+  "m4Decides": 357,
+  "m4VsTruthWhereDecides": {
+   "RIGHT": 171,
+   "UNKNOWN": 186
+  }
+ },
+ "schema": "buildapp.005o.counterfactuals"
+}
