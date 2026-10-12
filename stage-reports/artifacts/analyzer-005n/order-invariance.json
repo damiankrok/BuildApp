@@ -1,0 +1,106 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005N",
+ "gitSha": "4e12ce5",
+ "kind": "order invariance and determinism (brief §31)",
+ "unit": {
+  "file": "packages/reconstruction/test/compound-facade-order.test.ts",
+  "method": "the target topology with a blank garage, a callout at each mouth (two at the garage, read with different confidence), a dashed overhead line; the wall bands, the dimension chains and the callouts each shuffled eight seeded ways, and all three together eight more; every separator, interval, role, recess, wide-opening decision and cell class must be byte-identical",
+  "tests": [
+   {
+    "file": "packages/reconstruction/test/compound-facade-order.test.ts",
+    "suite": "005N §31 — order invariance of the compound reading",
+    "test": "the reference reading has a compound span with a separator, a recess and a callout bound to each mouth",
+    "status": "passed",
+    "durationMs": 22
+   },
+   {
+    "file": "packages/reconstruction/test/compound-facade-order.test.ts",
+    "suite": "005N §31 — order invariance of the compound reading",
+    "test": "eight shuffles of the bands change nothing",
+    "status": "passed",
+    "durationMs": 679
+   },
+   {
+    "file": "packages/reconstruction/test/compound-facade-order.test.ts",
+    "suite": "005N §31 — order invariance of the compound reading",
+    "test": "eight shuffles of the chains change nothing",
+    "status": "passed",
+    "durationMs": 266
+   },
+   {
+    "file": "packages/reconstruction/test/compound-facade-order.test.ts",
+    "suite": "005N §31 — order invariance of the compound reading",
+    "test": "eight shuffles of the callouts change nothing",
+    "status": "passed",
+    "durationMs": 333
+   },
+   {
+    "file": "packages/reconstruction/test/compound-facade-order.test.ts",
+    "suite": "005N §31 — order invariance of the compound reading",
+    "test": "all three shuffled together change nothing",
+    "status": "passed",
+    "durationMs": 236
+   }
+  ]
+ },
+ "orientation": "every major §21 family and every council fixture asserts the same reading in five orientations (synthetic-compound-facades.json)",
+ "pocketOrder": "the pocket test reads every own pocket and the decided openings before any decision is applied (council A2, round 2 R3); M11 reverts that and is killed by the two-mouths fixture",
+ "derivedOrder": "grid lines, separator candidates and intervals are derived in coordinate order from the shuffled inputs, never enumerated in an input order; the separator bound never reads part of a gap (council D3)",
+ "replay": {
+  "rows": [
+   {
+    "row": "A05",
+    "sameModel": true,
+    "sameDigest": true
+   },
+   {
+    "row": "D01",
+    "sameModel": true,
+    "sameDigest": true
+   },
+   {
+    "row": "dom-w-arkadiach",
+    "sameModel": true,
+    "sameDigest": true
+   },
+   {
+    "row": "dom-w-dabecjach",
+    "sameModel": true,
+    "sameDigest": true
+   },
+   {
+    "row": "dom-w-gozdzikowcach",
+    "sameModel": true,
+    "sameDigest": true
+   },
+   {
+    "row": "dom-w-murajach",
+    "sameModel": true,
+    "sameDigest": true
+   },
+   {
+    "row": "galaktyka",
+    "sameModel": true,
+    "sameDigest": true
+   },
+   {
+    "row": "kosacce-area-alone",
+    "sameModel": true,
+    "sameDigest": true
+   },
+   {
+    "row": "kosacce-clean",
+    "sameModel": true,
+    "sameDigest": true
+   },
+   {
+    "row": "kosacce-tracked",
+    "sameModel": true,
+    "sameDigest": true
+   }
+  ],
+  "method": "the 10 development rows with compound spans replayed a second time at the same commit: model hash (or failure code) and the full plan digest compared",
+  "allSame": true
+ },
+ "allPassed": true
+}

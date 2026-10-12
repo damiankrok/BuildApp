@@ -1,0 +1,1154 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005N",
+ "gitSha": "4e12ce5",
+ "oldSha": "5957e3a",
+ "method": "research/analyzer-005n/perf.ts at both commits on the 42 development rows' sealed evidence, in-process, each row timed 3\u00d7 and the median kept: read = readPlans (every plan's sheet, bands, decomposition and boundary), layout = composeStructuralLayout. Run interleaved old, new, old, new with nothing else on the 4-CPU machine; a row's ratio is the sum of its two new runs over its two old runs. Facade = time inside compoundSpanOf under a timing alias (perf-config.mjs), a separate run.",
+ "summary": {
+  "readMedianRatio": 0.973,
+  "layoutMedianRatio": 1.013,
+  "readMaxRatio": 1.237,
+  "layoutMaxRatio": 1.261,
+  "oldVsOldReadNoise": 1.002,
+  "facadeMsMedian": 0,
+  "facadeMsMax": 6.9,
+  "regressionOver15pct": false
+ },
+ "history": "A first, sequential (old then new) measurement at 0e996b6 showed median read +18 % and D00\u2013D05 ~1.9\u00d7. Profiling D03 traced it to the compound reader building the full-sheet solid layer on unscaled (unit-placeholder) plans, where the boundary reader \u2014 and so the old code \u2014 never builds it (morph 5.0 s of CPU in the profile). 41d6395 stops reading compound spans on unscaled plans (council E1, also a correctness defect: a placeholder scale states no width or depth); the slow rows returned to old-code time. The council fixes add floods to the pocket test (about N + \u03a3(group+2) per plan, linear) \u2014 measured here.",
+ "wallTime": "The development replay's wall time (all of the analyzer but OCR, which is held fixed) was compared at 0e996b6 under the same conditions: median new/old 0.998 over 42 rows (873 s vs 877 s).",
+ "rows": [
+  {
+   "row": "dom-pod-jarzabem",
+   "old": {
+    "readMs": [
+     321.3,
+     240.6
+    ],
+    "layoutMs": [
+     247.3,
+     285.3
+    ]
+   },
+   "new": {
+    "readMs": [
+     262.5,
+     237.9
+    ],
+    "layoutMs": [
+     261.8,
+     226.6
+    ]
+   },
+   "readRatio": 0.891,
+   "layoutRatio": 0.917,
+   "facadeMs": 2.1,
+   "facadeSpans": 3
+  },
+  {
+   "row": "dom-w-arkadiach",
+   "old": {
+    "readMs": [
+     388.1,
+     370.5
+    ],
+    "layoutMs": [
+     697.8,
+     595.1
+    ]
+   },
+   "new": {
+    "readMs": [
+     415.7,
+     450.8
+    ],
+    "layoutMs": [
+     569.6,
+     718.1
+    ]
+   },
+   "readRatio": 1.142,
+   "layoutRatio": 0.996,
+   "facadeMs": 6.9,
+   "facadeSpans": 3
+  },
+  {
+   "row": "dom-w-modrzewnicy",
+   "old": {
+    "readMs": [
+     162.4,
+     161.9
+    ],
+    "layoutMs": [
+     160.1,
+     163.4
+    ]
+   },
+   "new": {
+    "readMs": [
+     158.5,
+     195.4
+    ],
+    "layoutMs": [
+     166.3,
+     186.1
+    ]
+   },
+   "readRatio": 1.091,
+   "layoutRatio": 1.089,
+   "facadeMs": 0,
+   "facadeSpans": 0
+  },
+  {
+   "row": "dom-w-morelach",
+   "old": {
+    "readMs": [
+     369.8,
+     372.3
+    ],
+    "layoutMs": [
+     605.2,
+     609.8
+    ]
+   },
+   "new": {
+    "readMs": [
+     368.1,
+     315.6
+    ],
+    "layoutMs": [
+     569.6,
+     636.1
+    ]
+   },
+   "readRatio": 0.921,
+   "layoutRatio": 0.992,
+   "facadeMs": 0.5,
+   "facadeSpans": 1
+  },
+  {
+   "row": "marcowki",
+   "old": {
+    "readMs": [
+     415.5,
+     430.6
+    ],
+    "layoutMs": [
+     635.6,
+     594.9
+    ]
+   },
+   "new": {
+    "readMs": [
+     418.5,
+     401.7
+    ],
+    "layoutMs": [
+     632,
+     628.3
+    ]
+   },
+   "readRatio": 0.969,
+   "layoutRatio": 1.024,
+   "facadeMs": 0,
+   "facadeSpans": 0
+  },
+  {
+   "row": "rarytasy-g2e",
+   "old": {
+    "readMs": [
+     258.1,
+     247.8
+    ],
+    "layoutMs": [
+     446.8,
+     380.5
+    ]
+   },
+   "new": {
+    "readMs": [
+     256.2,
+     218.2
+    ],
+    "layoutMs": [
+     420.9,
+     368.2
+    ]
+   },
+   "readRatio": 0.938,
+   "layoutRatio": 0.954,
+   "facadeMs": 0.3,
+   "facadeSpans": 1
+  },
+  {
+   "row": "kosacce-clean",
+   "old": {
+    "readMs": [
+     403.3,
+     446.2
+    ],
+    "layoutMs": [
+     573.5,
+     588.3
+    ]
+   },
+   "new": {
+    "readMs": [
+     351.7,
+     405.3
+    ],
+    "layoutMs": [
+     551.8,
+     656.2
+    ]
+   },
+   "readRatio": 0.891,
+   "layoutRatio": 1.04,
+   "facadeMs": 1.4,
+   "facadeSpans": 3
+  },
+  {
+   "row": "kosacce-tracked",
+   "old": {
+    "readMs": [
+     396.6,
+     355.2
+    ],
+    "layoutMs": [
+     539.1,
+     549.8
+    ]
+   },
+   "new": {
+    "readMs": [
+     376.3,
+     327.1
+    ],
+    "layoutMs": [
+     566.2,
+     509.5
+    ]
+   },
+   "readRatio": 0.936,
+   "layoutRatio": 0.988,
+   "facadeMs": 1.5,
+   "facadeSpans": 3
+  },
+  {
+   "row": "rarytasy-eoze",
+   "old": {
+    "readMs": [
+     303,
+     297
+    ],
+    "layoutMs": [
+     512.7,
+     466.3
+    ]
+   },
+   "new": {
+    "readMs": [
+     283.1,
+     300
+    ],
+    "layoutMs": [
+     491,
+     514.8
+    ]
+   },
+   "readRatio": 0.972,
+   "layoutRatio": 1.027,
+   "facadeMs": 0.4,
+   "facadeSpans": 1
+  },
+  {
+   "row": "eoze-legacy-every",
+   "old": {
+    "readMs": [
+     250.5,
+     241
+    ],
+    "layoutMs": [
+     470.7,
+     415.4
+    ]
+   },
+   "new": {
+    "readMs": [
+     246.7,
+     271.2
+    ],
+    "layoutMs": [
+     451.8,
+     445.7
+    ]
+   },
+   "readRatio": 1.054,
+   "layoutRatio": 1.013,
+   "facadeMs": 0.5,
+   "facadeSpans": 1
+  },
+  {
+   "row": "alt-marcowki",
+   "old": {
+    "readMs": [
+     68.8,
+     75
+    ],
+    "layoutMs": [
+     68.4,
+     78.7
+    ]
+   },
+   "new": {
+    "readMs": [
+     70.1,
+     69.8
+    ],
+    "layoutMs": [
+     69.6,
+     67.9
+    ]
+   },
+   "readRatio": 0.973,
+   "layoutRatio": 0.935,
+   "facadeMs": 0,
+   "facadeSpans": 0
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "old": {
+    "readMs": [
+     508.7,
+     452.3
+    ],
+    "layoutMs": [
+     680.1,
+     641.6
+    ]
+   },
+   "new": {
+    "readMs": [
+     446.7,
+     457.7
+    ],
+    "layoutMs": [
+     630.3,
+     621.4
+    ]
+   },
+   "readRatio": 0.941,
+   "layoutRatio": 0.947,
+   "facadeMs": 0.7,
+   "facadeSpans": 2
+  },
+  {
+   "row": "willa-miranda",
+   "old": {
+    "readMs": [
+     497.6,
+     475.9
+    ],
+    "layoutMs": [
+     698.4,
+     677
+    ]
+   },
+   "new": {
+    "readMs": [
+     594.8,
+     508.2
+    ],
+    "layoutMs": [
+     1029.6,
+     704.8
+    ]
+   },
+   "readRatio": 1.133,
+   "layoutRatio": 1.261,
+   "facadeMs": 0,
+   "facadeSpans": 0
+  },
+  {
+   "row": "dom-w-zurawkach",
+   "old": {
+    "readMs": [
+     384.6,
+     402.4
+    ],
+    "layoutMs": [
+     678.3,
+     650.9
+    ]
+   },
+   "new": {
+    "readMs": [
+     504,
+     360.2
+    ],
+    "layoutMs": [
+     719.2,
+     585.2
+    ]
+   },
+   "readRatio": 1.098,
+   "layoutRatio": 0.981,
+   "facadeMs": 0,
+   "facadeSpans": 0
+  },
+  {
+   "row": "dom-w-modrzykach",
+   "old": {
+    "readMs": [
+     252.1,
+     257.1
+    ],
+    "layoutMs": [
+     439.1,
+     450.1
+    ]
+   },
+   "new": {
+    "readMs": [
+     213.1,
+     262.3
+    ],
+    "layoutMs": [
+     402.7,
+     468.8
+    ]
+   },
+   "readRatio": 0.934,
+   "layoutRatio": 0.98,
+   "facadeMs": 0.8,
+   "facadeSpans": 1
+  },
+  {
+   "row": "dom-w-azaliach",
+   "old": {
+    "readMs": [
+     258.7,
+     281.6
+    ],
+    "layoutMs": [
+     521.7,
+     505.2
+    ]
+   },
+   "new": {
+    "readMs": [
+     255.8,
+     258.9
+    ],
+    "layoutMs": [
+     471.5,
+     553.2
+    ]
+   },
+   "readRatio": 0.953,
+   "layoutRatio": 0.998,
+   "facadeMs": 0,
+   "facadeSpans": 0
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "old": {
+    "readMs": [
+     587.4,
+     641.8
+    ],
+    "layoutMs": [
+     785.5,
+     798.7
+    ]
+   },
+   "new": {
+    "readMs": [
+     612.7,
+     587.8
+    ],
+    "layoutMs": [
+     865.1,
+     872.4
+    ]
+   },
+   "readRatio": 0.977,
+   "layoutRatio": 1.097,
+   "facadeMs": 2.2,
+   "facadeSpans": 1
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "old": {
+    "readMs": [
+     335.4,
+     341.1
+    ],
+    "layoutMs": [
+     591.2,
+     641.5
+    ]
+   },
+   "new": {
+    "readMs": [
+     355.7,
+     388.4
+    ],
+    "layoutMs": [
+     575,
+     605.4
+    ]
+   },
+   "readRatio": 1.1,
+   "layoutRatio": 0.958,
+   "facadeMs": 0.4,
+   "facadeSpans": 1
+  },
+  {
+   "row": "aster-viii",
+   "old": {
+    "readMs": [
+     133.2,
+     148.9
+    ],
+    "layoutMs": [
+     140.8,
+     138.9
+    ]
+   },
+   "new": {
+    "readMs": [
+     166.8,
+     131.3
+    ],
+    "layoutMs": [
+     148.8,
+     133.4
+    ]
+   },
+   "readRatio": 1.057,
+   "layoutRatio": 1.009,
+   "facadeMs": 0,
+   "facadeSpans": 0
+  },
+  {
+   "row": "galaktyka",
+   "old": {
+    "readMs": [
+     709.6,
+     764.6
+    ],
+    "layoutMs": [
+     786,
+     750.4
+    ]
+   },
+   "new": {
+    "readMs": [
+     742.5,
+     708
+    ],
+    "layoutMs": [
+     728.1,
+     797.1
+    ]
+   },
+   "readRatio": 0.984,
+   "layoutRatio": 0.993,
+   "facadeMs": 0,
+   "facadeSpans": 0
+  },
+  {
+   "row": "eoze-legacy-area",
+   "old": {
+    "readMs": [
+     235.9,
+     208.8
+    ],
+    "layoutMs": [
+     385.4,
+     424.3
+    ]
+   },
+   "new": {
+    "readMs": [
+     191.4,
+     219.2
+    ],
+    "layoutMs": [
+     387.4,
+     454.9
+    ]
+   },
+   "readRatio": 0.923,
+   "layoutRatio": 1.04,
+   "facadeMs": 0.4,
+   "facadeSpans": 1
+  },
+  {
+   "row": "dom-pod-milorzebem",
+   "old": {
+    "readMs": [
+     232.7,
+     206.2
+    ],
+    "layoutMs": [
+     228.8,
+     215.9
+    ]
+   },
+   "new": {
+    "readMs": [
+     250.9,
+     254
+    ],
+    "layoutMs": [
+     212.2,
+     223
+    ]
+   },
+   "readRatio": 1.15,
+   "layoutRatio": 0.979,
+   "facadeMs": 0,
+   "facadeSpans": 0
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "old": {
+    "readMs": [
+     316.8,
+     372.9
+    ],
+    "layoutMs": [
+     527,
+     563.5
+    ]
+   },
+   "new": {
+    "readMs": [
+     348.2,
+     299.4
+    ],
+    "layoutMs": [
+     519.1,
+     503.9
+    ]
+   },
+   "readRatio": 0.939,
+   "layoutRatio": 0.938,
+   "facadeMs": 0.3,
+   "facadeSpans": 1
+  },
+  {
+   "row": "kosacce-area-alone",
+   "old": {
+    "readMs": [
+     272.6,
+     239.2
+    ],
+    "layoutMs": [
+     432.8,
+     402.4
+    ]
+   },
+   "new": {
+    "readMs": [
+     230.2,
+     206.3
+    ],
+    "layoutMs": [
+     451.8,
+     406.1
+    ]
+   },
+   "readRatio": 0.853,
+   "layoutRatio": 1.027,
+   "facadeMs": 1.5,
+   "facadeSpans": 3
+  },
+  {
+   "row": "dom-w-gozdzikowcach",
+   "old": {
+    "readMs": [
+     282.5,
+     269.3
+    ],
+    "layoutMs": [
+     546.5,
+     452.7
+    ]
+   },
+   "new": {
+    "readMs": [
+     299,
+     318
+    ],
+    "layoutMs": [
+     524,
+     487.2
+    ]
+   },
+   "readRatio": 1.118,
+   "layoutRatio": 1.012,
+   "facadeMs": 2.5,
+   "facadeSpans": 2
+  },
+  {
+   "row": "dom-w-cyklamenach",
+   "old": {
+    "readMs": [
+     322.3,
+     378.4
+    ],
+    "layoutMs": [
+     454.4,
+     442.6
+    ]
+   },
+   "new": {
+    "readMs": [
+     318.8,
+     363
+    ],
+    "layoutMs": [
+     455.1,
+     437.1
+    ]
+   },
+   "readRatio": 0.973,
+   "layoutRatio": 0.995,
+   "facadeMs": 0,
+   "facadeSpans": 0
+  },
+  {
+   "row": "A00",
+   "old": {
+    "readMs": [
+     247.5,
+     399.6
+    ],
+    "layoutMs": [
+     410.4,
+     461.3
+    ]
+   },
+   "new": {
+    "readMs": [
+     265,
+     246.5
+    ],
+    "layoutMs": [
+     435.6,
+     447.4
+    ]
+   },
+   "readRatio": 0.79,
+   "layoutRatio": 1.013,
+   "facadeMs": 0.5,
+   "facadeSpans": 1
+  },
+  {
+   "row": "A01",
+   "old": {
+    "readMs": [
+     341,
+     325.9
+    ],
+    "layoutMs": [
+     527.9,
+     490.2
+    ]
+   },
+   "new": {
+    "readMs": [
+     285.9,
+     316.8
+    ],
+    "layoutMs": [
+     533.3,
+     584.2
+    ]
+   },
+   "readRatio": 0.904,
+   "layoutRatio": 1.098,
+   "facadeMs": 0,
+   "facadeSpans": 0
+  },
+  {
+   "row": "A02",
+   "old": {
+    "readMs": [
+     269.6,
+     219.2
+    ],
+    "layoutMs": [
+     405.2,
+     420.4
+    ]
+   },
+   "new": {
+    "readMs": [
+     209.3,
+     229.8
+    ],
+    "layoutMs": [
+     377,
+     409.9
+    ]
+   },
+   "readRatio": 0.898,
+   "layoutRatio": 0.953,
+   "facadeMs": 0,
+   "facadeSpans": 0
+  },
+  {
+   "row": "A03",
+   "old": {
+    "readMs": [
+     272,
+     290.9
+    ],
+    "layoutMs": [
+     484.5,
+     526.5
+    ]
+   },
+   "new": {
+    "readMs": [
+     270.9,
+     256.1
+    ],
+    "layoutMs": [
+     514.4,
+     511
+    ]
+   },
+   "readRatio": 0.936,
+   "layoutRatio": 1.014,
+   "facadeMs": 0,
+   "facadeSpans": 0
+  },
+  {
+   "row": "A04",
+   "old": {
+    "readMs": [
+     383.3,
+     410.7
+    ],
+    "layoutMs": [
+     646.6,
+     606.6
+    ]
+   },
+   "new": {
+    "readMs": [
+     389.6,
+     376.5
+    ],
+    "layoutMs": [
+     598.4,
+     575.1
+    ]
+   },
+   "readRatio": 0.965,
+   "layoutRatio": 0.936,
+   "facadeMs": 0.5,
+   "facadeSpans": 1
+  },
+  {
+   "row": "A05",
+   "old": {
+    "readMs": [
+     208.7,
+     230.3
+    ],
+    "layoutMs": [
+     393.6,
+     391.9
+    ]
+   },
+   "new": {
+    "readMs": [
+     266.3,
+     276.8
+    ],
+    "layoutMs": [
+     463.4,
+     407.9
+    ]
+   },
+   "readRatio": 1.237,
+   "layoutRatio": 1.109,
+   "facadeMs": 1.5,
+   "facadeSpans": 2
+  },
+  {
+   "row": "A06",
+   "old": {
+    "readMs": [
+     240.8,
+     264.7
+    ],
+    "layoutMs": [
+     435,
+     420.9
+    ]
+   },
+   "new": {
+    "readMs": [
+     264.7,
+     240.6
+    ],
+    "layoutMs": [
+     432.8,
+     437.5
+    ]
+   },
+   "readRatio": 1.0,
+   "layoutRatio": 1.017,
+   "facadeMs": 0,
+   "facadeSpans": 0
+  },
+  {
+   "row": "A07",
+   "old": {
+    "readMs": [
+     301.5,
+     326
+    ],
+    "layoutMs": [
+     475.3,
+     501.7
+    ]
+   },
+   "new": {
+    "readMs": [
+     293.7,
+     298.8
+    ],
+    "layoutMs": [
+     469,
+     526.4
+    ]
+   },
+   "readRatio": 0.944,
+   "layoutRatio": 1.019,
+   "facadeMs": 0.6,
+   "facadeSpans": 2
+  },
+  {
+   "row": "D00",
+   "old": {
+    "readMs": [
+     1283.5,
+     1234
+    ],
+    "layoutMs": [
+     1242.3,
+     1220.2
+    ]
+   },
+   "new": {
+    "readMs": [
+     1299.5,
+     1294.6
+    ],
+    "layoutMs": [
+     1192.8,
+     1356.2
+    ]
+   },
+   "readRatio": 1.03,
+   "layoutRatio": 1.035,
+   "facadeMs": 0,
+   "facadeSpans": 0
+  },
+  {
+   "row": "D01",
+   "old": {
+    "readMs": [
+     395.9,
+     369.9
+    ],
+    "layoutMs": [
+     396.5,
+     362
+    ]
+   },
+   "new": {
+    "readMs": [
+     406,
+     409.7
+    ],
+    "layoutMs": [
+     425.2,
+     414.4
+    ]
+   },
+   "readRatio": 1.065,
+   "layoutRatio": 1.107,
+   "facadeMs": 0,
+   "facadeSpans": 0
+  },
+  {
+   "row": "D02",
+   "old": {
+    "readMs": [
+     259.1,
+     251.2
+    ],
+    "layoutMs": [
+     250.4,
+     251
+    ]
+   },
+   "new": {
+    "readMs": [
+     257.8,
+     257.7
+    ],
+    "layoutMs": [
+     265.9,
+     243.9
+    ]
+   },
+   "readRatio": 1.01,
+   "layoutRatio": 1.017,
+   "facadeMs": 0,
+   "facadeSpans": 0
+  },
+  {
+   "row": "D03",
+   "old": {
+    "readMs": [
+     914.9,
+     877.6
+    ],
+    "layoutMs": [
+     855.9,
+     875.5
+    ]
+   },
+   "new": {
+    "readMs": [
+     848.9,
+     821.6
+    ],
+    "layoutMs": [
+     876.5,
+     1007.9
+    ]
+   },
+   "readRatio": 0.932,
+   "layoutRatio": 1.088,
+   "facadeMs": 0,
+   "facadeSpans": 0
+  },
+  {
+   "row": "D04",
+   "old": {
+    "readMs": [
+     124.4,
+     138.5
+    ],
+    "layoutMs": [
+     123.9,
+     126.1
+    ]
+   },
+   "new": {
+    "readMs": [
+     131.4,
+     152.7
+    ],
+    "layoutMs": [
+     132.5,
+     136.4
+    ]
+   },
+   "readRatio": 1.081,
+   "layoutRatio": 1.076,
+   "facadeMs": 0,
+   "facadeSpans": 0
+  },
+  {
+   "row": "D05",
+   "old": {
+    "readMs": [
+     442.1,
+     408.8
+    ],
+    "layoutMs": [
+     461.6,
+     386.2
+    ]
+   },
+   "new": {
+    "readMs": [
+     433.1,
+     487.5
+    ],
+    "layoutMs": [
+     436.7,
+     472.1
+    ]
+   },
+   "readRatio": 1.082,
+   "layoutRatio": 1.072,
+   "facadeMs": 0,
+   "facadeSpans": 0
+  },
+  {
+   "row": "dom-w-murajach",
+   "old": {
+    "readMs": [
+     464.5,
+     400.8
+    ],
+    "layoutMs": [
+     617.2,
+     646.8
+    ]
+   },
+   "new": {
+    "readMs": [
+     445.6,
+     524.4
+    ],
+    "layoutMs": [
+     659.6,
+     724.1
+    ]
+   },
+   "readRatio": 1.121,
+   "layoutRatio": 1.095,
+   "facadeMs": 0,
+   "facadeSpans": 0
+  },
+  {
+   "row": "dom-w-cieszyniankach",
+   "old": {
+    "readMs": [
+     199.8,
+     203.6
+    ],
+    "layoutMs": [
+     408.3,
+     376.3
+    ]
+   },
+   "new": {
+    "readMs": [
+     188.1,
+     228.1
+    ],
+    "layoutMs": [
+     353,
+     402.1
+    ]
+   },
+   "readRatio": 1.032,
+   "layoutRatio": 0.962,
+   "facadeMs": 0,
+   "facadeSpans": 0
+  }
+ ]
+}

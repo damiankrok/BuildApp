@@ -1,0 +1,346 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005N",
+ "gitSha": "4e12ce5",
+ "kind": "the synthetic / adversarial corpus (brief §21–§23) as run at the freeze candidate",
+ "orientation": "the major families run in five orientations each (TRANSFORMS: as drawn, mirrored in x, mirrored in y, turned 90° and 270°) and must answer the same",
+ "numberedFamilies": [
+  "1–2",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "11",
+  "13",
+  "14",
+  "15",
+  "16",
+  "18",
+  "19",
+  "20",
+  "21",
+  "22"
+ ],
+ "familiesNote": "§21 families 1–22 are numbered in the test titles (1–2 target, 3+17 double garage over 8 m, 4 window, 5 pier, 6 mullion, 7 carport, 8 porch on posts, 9 loggia, 10/12 bays, 11 garage callout, 13, 14 missing return, 15 passage, 16 corner recess, 18 callout safety, 19 line work, 20 furniture, 21 narrow return, 22 extent), with the §16 per-interval pocket, a post in a mouth, a covered terrace beside a window, the adopted-outline record, the unscaled plan, the council fixtures (A1/B2 steps, drain and treads; B1/C1 and R2 callouts; B3 paving; A2 two mouths; D1 shared space) and the end-to-end scenes (§23: recess + garage door, blank garage, carport, executed non-circularity decoy, two-storey house with a compound ground front)",
+ "passed": 45,
+ "total": 45,
+ "tests": [
+  {
+   "file": "tests/architecture/compound-facade.test.ts",
+   "suite": "005N §20 the compound-facade reading reads the drawing only",
+   "test": "compound-facade.ts imports the line reader, the pixel and common types, and a type from the decomposition — nothing else",
+   "status": "passed",
+   "durationMs": 5
+  },
+  {
+   "file": "tests/architecture/compound-facade.test.ts",
+   "suite": "005N §20 the compound-facade reading reads the drawing only",
+   "test": "no compound-facade code names a published figure, an area, a refusal, an outcome, a verdict or a house (M4)",
+   "status": "passed",
+   "durationMs": 6
+  },
+  {
+   "file": "tests/architecture/compound-facade.test.ts",
+   "suite": "005N §20 the compound-facade reading reads the drawing only",
+   "test": "no development or blind house is named in the reader, its wiring or the extent join (M10)",
+   "status": "passed",
+   "durationMs": 5
+  },
+  {
+   "file": "tests/architecture/compound-facade.test.ts",
+   "suite": "005N §20 the compound-facade reading reads the drawing only",
+   "test": "the drawn-gap rule is not named by any of it: it stays OFF (M8)",
+   "status": "passed",
+   "durationMs": 4
+  },
+  {
+   "file": "tests/architecture/compound-facade.test.ts",
+   "suite": "005N §30 M10 the reading has no special cases",
+   "test": "its constants are the stated conventions, frozen by value",
+   "status": "passed",
+   "durationMs": 2
+  },
+  {
+   "file": "tests/architecture/compound-facade.test.ts",
+   "suite": "005N §30 M10 the reading has no special cases",
+   "test": "its numbers are a frozen set: a wall, a half, a step, nothing that fits a sheet",
+   "status": "passed",
+   "durationMs": 6
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade-emission.test.ts",
+   "suite": "005N §23 — compound facades through the production solver",
+   "test": "recess + garage door drawn: one enclosed body with the hall and the garage, the garage door on the garage wall, the recess a recess",
+   "status": "passed",
+   "durationMs": 902
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade-emission.test.ts",
+   "suite": "005N §23 — compound facades through the production solver",
+   "test": "garage door blank: no garage body is fabricated (the first reading leaves it open), the house and its hall stand",
+   "status": "passed",
+   "durationMs": 485
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade-emission.test.ts",
+   "suite": "005N §23 — compound facades through the production solver",
+   "test": "a carport beside the recessed entrance stays outside every mass",
+   "status": "passed",
+   "durationMs": 667
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade-emission.test.ts",
+   "suite": "005N §23 — compound facades through the production solver",
+   "test": "§20 non-circularity, executed: a published footprint as the house has it, as a 1.25× decoy, or absent — the same separators, intervals, roles and recess",
+   "status": "passed",
+   "durationMs": 927
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade-emission.test.ts",
+   "suite": "005N council E2 — a compound front on the ground storey of a two-storey house",
+   "test": "the ground storey reads its recess and garage, the upper storey (set back 3 m over them) keeps its own ring: two levels, not a copy",
+   "status": "passed",
+   "durationMs": 525
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N §21 — recessed entrance beside a garage: two mouths of one body",
+   "test": "1–2. recess + separator + garage door drawn: the recess stays a recess, the garage and the hall behind the entrance are built (every orientation)",
+   "status": "passed",
+   "durationMs": 700
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N §21 — recessed entrance beside a garage: two mouths of one body",
+   "test": "the recess is linked to its set-back wall: a grid line on it, its span shut, its depth and returns on the record",
+   "status": "passed",
+   "durationMs": 46
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N §21 — recessed entrance beside a garage: two mouths of one body",
+   "test": "the garage door blank: the garage is not fabricated — open in the first reading — while the recess and the hall stand",
+   "status": "passed",
+   "durationMs": 174
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N §21 — recessed entrance beside a garage: two mouths of one body",
+   "test": "3 + 17. recess + double garage (5 m door): a 8.6 m parent, wider than any opening, cut into mouths each within reach",
+   "status": "passed",
+   "durationMs": 206
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N §21 — recessed entrance beside a garage: two mouths of one body",
+   "test": "4. recess + a glazed window: the window is an opening in its own wall, the recess open",
+   "status": "passed",
+   "durationMs": 223
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N §16 — each interval is weighed against its own pocket",
+   "test": "an undrawn mouth into the house beside the recess: the hall behind it is the interior, so its own width shuts it — the merged span would not",
+   "status": "passed",
+   "durationMs": 196
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N §21 — separators: structural ink only",
+   "test": "5. two openings separated by a real pier (1 m, shorter than a wall band, tied to a partition): two openings in one wall",
+   "status": "passed",
+   "durationMs": 151
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N §21 — separators: structural ink only",
+   "test": "6. two openings with only a mullion between them: no separator — a thin line is not wall-thick",
+   "status": "passed",
+   "durationMs": 30
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N §21 — separators: structural ink only",
+   "test": "19. a dimension line, a leader and hatching across the span make no separator",
+   "status": "passed",
+   "durationMs": 170
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N §21 — separators: structural ink only",
+   "test": "20. a block of furniture standing on the facade line is a post, not a separator",
+   "status": "passed",
+   "durationMs": 143
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N §21 — separators: structural ink only",
+   "test": "21. a narrow wall-thick return (0.6 m) still separates two mouths",
+   "status": "passed",
+   "durationMs": 163
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N §21 — open sides stay open",
+   "test": "7. a genuine carport beside a recessed entrance stays outside",
+   "status": "passed",
+   "durationMs": 194
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N §21 — open sides stay open",
+   "test": "8. an open porch beside a garage — its roof on posts standing in front of the facade: the porch stays open, the garage built",
+   "status": "passed",
+   "durationMs": 211
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N §21 — open sides stay open",
+   "test": "a post standing IN a mouth is no separator (the per-edge width convention around it is pre-existing and unchanged)",
+   "status": "passed",
+   "durationMs": 42
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N §21 — open sides stay open",
+   "test": "9. a loggia beside a large glazed opening: the loggia open, the glazing an opening",
+   "status": "passed",
+   "durationMs": 125
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N §21 — open sides stay open",
+   "test": "a covered terrace beside a window: its far end only a thin beam, an overhead line across it — the window an opening, the terrace open",
+   "status": "passed",
+   "durationMs": 177
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N §21 — open sides stay open",
+   "test": "15. a recess with no back wall is a passage through: open, whatever is beside it",
+   "status": "passed",
+   "durationMs": 125
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N §21 — open sides stay open",
+   "test": "16. a corner recess (open on its side) stays outside",
+   "status": "passed",
+   "durationMs": 21
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N §21 — recesses need the drawing to make them one",
+   "test": "13. a recess with both returns and a back wall: RECESS_MOUTH, never shut by its own mouth",
+   "status": "passed",
+   "durationMs": 28
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N §21 — recesses need the drawing to make them one",
+   "test": "14. one return missing: no recess — the mouth leads into the house, which stays enclosed",
+   "status": "passed",
+   "durationMs": 118
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N §21 — recesses need the drawing to make them one",
+   "test": "18. a set-back door callout near the recess mouth does not shut the recess, and does not cross the separator to the garage",
+   "status": "passed",
+   "durationMs": 171
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N §21 — recesses need the drawing to make them one",
+   "test": "11. a blank garage mouth with its own callout, walled on both sides: an opening in its own wall",
+   "status": "passed",
+   "durationMs": 138
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N §21 — bays (10–12) keep their own reading",
+   "test": "10. a garage bay with its door drawn is built; 12. an open carport bay stays outside",
+   "status": "passed",
+   "durationMs": 54
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N §21.22 — the extent: an attached wing is joined by its walls, a detached garage is not",
+   "test": "22. a detached garage nearby is not joined; the same garage with the house wall running into its corner is",
+   "status": "passed",
+   "durationMs": 27
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N — a plan with no scale of its own is read as before",
+   "test": "a unit-placeholder registration states no return, depth or interval width: no span is read, the gaps decide as the incumbent did",
+   "status": "passed",
+   "durationMs": 30
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N §19 — an adopted outline keeps the box reading's compound spans on the record",
+   "test": "the outline is adopted, its own grid reads no span, and the box reading's span is carried with its roles",
+   "status": "passed",
+   "durationMs": 98
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N §19 — an adopted outline keeps the box reading's compound spans on the record",
+   "test": "the plan digest carries it as the BOX reading, each interval with its decision and the cells behind its mouth",
+   "status": "passed",
+   "durationMs": 465
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N council — what a back wall, a callout, a pattern and a sibling may not do",
+   "test": "A1/B2. a step line, or a flight of them, in front of the set-back wall is not the set-back wall: the recess keeps its depth, nothing is built in it",
+   "status": "passed",
+   "durationMs": 680
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N council — what a back wall, a callout, a pattern and a sibling may not do",
+   "test": "B1/C1. a callout at a shallow bay whose back wall was not read does not shut it: only walls running deeper than a recess let a callout close a mouth",
+   "status": "passed",
+   "durationMs": 130
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N council — what a back wall, a callout, a pattern and a sibling may not do",
+   "test": "B3. a paving pattern across a blank garage mouth is no door and no set-back wall: the interval is not shut by it",
+   "status": "passed",
+   "durationMs": 165
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N council — what a back wall, a callout, a pattern and a sibling may not do",
+   "test": "A2. two undrawn mouths side by side: the hall behind one is shut by its own pocket, the shallow bay beside it is not shut by the hall's",
+   "status": "passed",
+   "durationMs": 153
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N council D1 — mouths side by side into one space are weighed together",
+   "test": "an open-plan house behind them is the interior: both mouths are shut, the house stands",
+   "status": "passed",
+   "durationMs": 129
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N council D1 — mouths side by side into one space are weighed together",
+   "test": "a shared space behind them no bigger than their joint 8 m allows a pocket stays open",
+   "status": "passed",
+   "durationMs": 141
+  },
+  {
+   "file": "packages/reconstruction/test/compound-facade.test.ts",
+   "suite": "005N council round 2 — R2: a callout at a recess whose glazed back the reader does not take as a wall",
+   "test": "the returns run on past the glazing as the hall's walls: the glazing is no set-back wall here, but it is still drawn across the bay, so the callout does not shut the mouth",
+   "status": "passed",
+   "durationMs": 135
+  }
+ ]
+}

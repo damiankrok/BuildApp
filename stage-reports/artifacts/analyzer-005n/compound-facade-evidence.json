@@ -1,0 +1,1826 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005N",
+ "gitSha": "4e12ce5",
+ "kind": "the compound-facade record of every development row whose plans hold a facade gap the reader read: each span (parent gap, separators accepted and refused with why, atomic intervals with evidence, role, final decision, recess back wall and the cells behind each mouth), cut or left whole; tagged with the reading it was made in. Coordinates and ids only, no publisher pixels.",
+ "method": "research/analyzer-005n/compound-record.ts: the production structural pass on each row's sealed evidence and its plan digest (the same content as Evidence Pack 1.4.0 12c-compound-facades.json for the analysed copies). A run that fails at model emission (gozdzikowcach) carries no plan digest into its failure record or its Evidence Pack (12c then lists no copy) — a pre-existing property of the pack, recorded in the stage report; this record reads the digest before emission.",
+ "summary": [
+  {
+   "row": "dom-pod-jarzabem",
+   "cut": 0,
+   "whole": 3
+  },
+  {
+   "row": "dom-w-arkadiach",
+   "cut": 2,
+   "whole": 1
+  },
+  {
+   "row": "dom-w-morelach",
+   "cut": 0,
+   "whole": 1
+  },
+  {
+   "row": "rarytasy-g2e",
+   "cut": 0,
+   "whole": 1
+  },
+  {
+   "row": "kosacce-clean",
+   "cut": 1,
+   "whole": 2
+  },
+  {
+   "row": "kosacce-tracked",
+   "cut": 1,
+   "whole": 2
+  },
+  {
+   "row": "rarytasy-eoze",
+   "cut": 0,
+   "whole": 1
+  },
+  {
+   "row": "eoze-legacy-every",
+   "cut": 0,
+   "whole": 1
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "cut": 0,
+   "whole": 2
+  },
+  {
+   "row": "dom-w-modrzykach",
+   "cut": 0,
+   "whole": 1
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "cut": 1,
+   "whole": 0
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "cut": 0,
+   "whole": 1
+  },
+  {
+   "row": "eoze-legacy-area",
+   "cut": 0,
+   "whole": 1
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "cut": 0,
+   "whole": 1
+  },
+  {
+   "row": "kosacce-area-alone",
+   "cut": 1,
+   "whole": 2
+  },
+  {
+   "row": "dom-w-gozdzikowcach",
+   "cut": 1,
+   "whole": 0
+  },
+  {
+   "row": "A00",
+   "cut": 0,
+   "whole": 1
+  },
+  {
+   "row": "A04",
+   "cut": 0,
+   "whole": 1
+  },
+  {
+   "row": "A05",
+   "cut": 1,
+   "whole": 1
+  },
+  {
+   "row": "A07",
+   "cut": 0,
+   "whole": 2
+  }
+ ],
+ "rows": [
+  {
+   "row": "dom-pod-jarzabem",
+   "set": "DEV_005K",
+   "selectedPlanFrameId": "frame-asset-rzut-9354eb066f-397808a266",
+   "plans": [
+    {
+     "frameId": "frame-asset-rzut-9354eb066f-397808a266",
+     "storey": "GROUND",
+     "selected": true,
+     "boundaryAccepted": false,
+     "spans": [
+      {
+       "id": "compound-X-777-328-472",
+       "reading": "BOX",
+       "axis": "X",
+       "linePx": 777,
+       "fromPx": 328,
+       "toPx": 472,
+       "inkFromPx": 346,
+       "inkToPx": 456,
+       "widthM": 4.005648,
+       "inward": -1,
+       "separators": [
+        {
+         "id": "sep-X-777-371-381",
+         "fromPx": 371,
+         "toPx": 381,
+         "axisPx": 768.166667,
+         "inkKind": "POST",
+         "returnM": 0,
+         "accepted": false,
+         "kind": "NOT_A_SEPARATOR",
+         "why": "a free-standing block 10 px long with 0.00 m of wall behind it: a post, which establishes no wall relation"
+        },
+        {
+         "id": "sep-X-777-414-424",
+         "fromPx": 414,
+         "toPx": 424,
+         "axisPx": 768.166667,
+         "inkKind": "POST",
+         "returnM": 0,
+         "accepted": false,
+         "kind": "NOT_A_SEPARATOR",
+         "why": "a free-standing block 10 px long with 0.00 m of wall behind it: a post, which establishes no wall relation"
+        }
+       ],
+       "intervals": [],
+       "why": "2 pieces of wall-thick ink inside the gap, none a return or a pier: one gap"
+      },
+      {
+       "id": "compound-Y-206-443-582",
+       "reading": "BOX",
+       "axis": "Y",
+       "linePx": 205.875,
+       "fromPx": 443,
+       "toPx": 582,
+       "inkFromPx": 446,
+       "inkToPx": 579,
+       "widthM": 3.87532,
+       "inward": 1,
+       "separators": [
+        {
+         "id": "sep-Y-206-499-527",
+         "fromPx": 499,
+         "toPx": 527,
+         "axisPx": 212,
+         "inkKind": "POST",
+         "returnM": 0.420732,
+         "accepted": false,
+         "kind": "NOT_A_SEPARATOR",
+         "why": "a free-standing block 28 px long with 0.42 m of wall behind it: a post, which establishes no wall relation"
+        }
+       ],
+       "intervals": [],
+       "why": "1 piece of wall-thick ink inside the gap, none a return or a pier: one gap"
+      },
+      {
+       "id": "compound-Y-597-413-635",
+       "reading": "BOX",
+       "axis": "Y",
+       "linePx": 596.5,
+       "fromPx": 413,
+       "toPx": 635,
+       "inkFromPx": 430,
+       "inkToPx": 618,
+       "widthM": 6.18936,
+       "inward": -1,
+       "separators": [
+        {
+         "id": "sep-Y-597-519-528",
+         "fromPx": 519,
+         "toPx": 528,
+         "axisPx": 586.666667,
+         "inkKind": "POST",
+         "returnM": 0,
+         "accepted": false,
+         "kind": "NOT_A_SEPARATOR",
+         "why": "a free-standing block 9 px long with 0.00 m of wall behind it: a post, which establishes no wall relation"
+        }
+       ],
+       "intervals": [],
+       "why": "1 piece of wall-thick ink inside the gap, none a return or a pier: one gap"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "row": "dom-w-arkadiach",
+   "set": "DEV_005K",
+   "selectedPlanFrameId": "frame-asset-rzut-16680ee739-bb2ced8b98",
+   "plans": [
+    {
+     "frameId": "frame-asset-rzut-16680ee739-bb2ced8b98",
+     "storey": "GROUND",
+     "selected": true,
+     "boundaryAccepted": false,
+     "spans": [
+      {
+       "id": "compound-X-138-407-627",
+       "reading": "BOX",
+       "axis": "X",
+       "linePx": 138,
+       "fromPx": 407,
+       "toPx": 627,
+       "inkFromPx": 407,
+       "inkToPx": 627,
+       "widthM": 4.06296,
+       "inward": 1,
+       "separators": [
+        {
+         "id": "sep-X-138-516-574",
+         "fromPx": 516,
+         "toPx": 574,
+         "axisPx": 149.137931,
+         "inkKind": "WALL",
+         "returnM": 0.46135,
+         "accepted": true,
+         "kind": "FACADE_PIER",
+         "why": "a 1.07 m stretch of wall along the facade, part of a wall body, between two mouths: a pier"
+        }
+       ],
+       "intervals": [
+        {
+         "id": "compound-X-138-407-627/i0",
+         "fromPx": 407,
+         "toPx": 516,
+         "widthM": 2.013012,
+         "bounds": [
+          "JAMB",
+          "SEPARATOR"
+         ],
+         "role": "OPEN_SIDE",
+         "signature": "DASHED",
+         "infill": 1,
+         "infillRunsPast": false,
+         "jambInk": [
+          true,
+          true
+         ],
+         "decision": "OPEN_SIDE",
+         "behind": [
+          {
+           "ix": 0,
+           "iy": 0,
+           "cls": "B"
+          },
+          {
+           "ix": 0,
+           "iy": 1,
+           "cls": "B"
+          },
+          {
+           "ix": 0,
+           "iy": 2,
+           "cls": "B"
+          }
+         ],
+         "why": "a 2.01 m mouth with only 100% of it drawn across and no set-back wall closing it within 4.5 m"
+        },
+        {
+         "id": "compound-X-138-407-627/i1",
+         "fromPx": 574,
+         "toPx": 627,
+         "widthM": 0.978804,
+         "bounds": [
+          "SEPARATOR",
+          "JAMB"
+         ],
+         "role": "OPENING_IN_WALL",
+         "signature": "GLAZING",
+         "infill": 1,
+         "infillRunsPast": false,
+         "jambInk": [
+          true,
+          true
+         ],
+         "decision": "OPENING_IN_WALL",
+         "behind": [
+          {
+           "ix": 0,
+           "iy": 3,
+           "cls": "B"
+          }
+         ],
+         "why": "a 0.98 m mouth with 100% of it spanned by one drawn line inside the wall's band, stopping at its jambs: an opening in a wall that carries on"
+        }
+       ],
+       "why": "1 separator (facade pier) cut one 4.06 m gap into 2 mouths, each decided on its own evidence"
+      },
+      {
+       "id": "compound-X-163-407-627",
+       "reading": "BOX",
+       "axis": "X",
+       "linePx": 163,
+       "fromPx": 407,
+       "toPx": 627,
+       "inkFromPx": 407,
+       "inkToPx": 627,
+       "widthM": 4.06296,
+       "inward": 1,
+       "separators": [
+        {
+         "id": "sep-X-163-462-480",
+         "fromPx": 462,
+         "toPx": 480,
+         "axisPx": 170.666667,
+         "inkKind": "POST",
+         "returnM": 0,
+         "accepted": false,
+         "kind": "NOT_A_SEPARATOR",
+         "why": "a free-standing block 18 px long with 0.00 m of wall behind it: a post, which establishes no wall relation"
+        },
+        {
+         "id": "sep-X-163-506-574",
+         "fromPx": 506,
+         "toPx": 574,
+         "axisPx": 154.442623,
+         "inkKind": "WALL",
+         "returnM": 0.147632,
+         "accepted": true,
+         "kind": "FACADE_PIER",
+         "why": "a 1.26 m stretch of wall along the facade, part of a wall body, between two mouths: a pier"
+        },
+        {
+         "id": "sep-X-163-590-610",
+         "fromPx": 590,
+         "toPx": 610,
+         "axisPx": 170.666667,
+         "inkKind": "POST",
+         "returnM": 0.221448,
+         "accepted": false,
+         "kind": "NOT_A_SEPARATOR",
+         "why": "wall-thick ink 590–610 px leaves no mouth of 0.6 m beside it: part of the gap's jamb"
+        }
+       ],
+       "intervals": [
+        {
+         "id": "compound-X-163-407-627/i0",
+         "fromPx": 407,
+         "toPx": 506,
+         "widthM": 1.828332,
+         "bounds": [
+          "JAMB",
+          "SEPARATOR"
+         ],
+         "role": "OPENING_IN_WALL",
+         "signature": "GLAZING",
+         "infill": 1,
+         "infillRunsPast": false,
+         "jambInk": [
+          true,
+          true
+         ],
+         "decision": "OPENING_IN_WALL",
+         "behind": [
+          {
+           "ix": 1,
+           "iy": 0,
+           "cls": "B"
+          },
+          {
+           "ix": 1,
+           "iy": 1,
+           "cls": "B"
+          },
+          {
+           "ix": 1,
+           "iy": 2,
+           "cls": "B"
+          }
+         ],
+         "why": "a 1.83 m mouth with 100% of it spanned by one drawn line inside the wall's band, stopping at its jambs: an opening in a wall that carries on"
+        },
+        {
+         "id": "compound-X-163-407-627/i1",
+         "fromPx": 574,
+         "toPx": 627,
+         "widthM": 0.978804,
+         "bounds": [
+          "SEPARATOR",
+          "JAMB"
+         ],
+         "role": "OPENING_IN_WALL",
+         "signature": "GLAZING",
+         "infill": 1,
+         "infillRunsPast": false,
+         "jambInk": [
+          true,
+          true
+         ],
+         "decision": "OPENING_IN_WALL",
+         "behind": [
+          {
+           "ix": 1,
+           "iy": 3,
+           "cls": "B"
+          }
+         ],
+         "why": "a 0.98 m mouth with 100% of it spanned by one drawn line inside the wall's band, stopping at its jambs: an opening in a wall that carries on"
+        }
+       ],
+       "why": "1 separator (facade pier) cut one 4.06 m gap into 2 mouths, each decided on its own evidence"
+      },
+      {
+       "id": "compound-Y-213-236-442",
+       "reading": "BOX",
+       "axis": "Y",
+       "linePx": 213,
+       "fromPx": 236,
+       "toPx": 442,
+       "inkFromPx": 236,
+       "inkToPx": 442,
+       "widthM": 3.801524,
+       "inward": 1,
+       "separators": [],
+       "intervals": [],
+       "why": "no wall-thick ink inside the gap: one gap"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "row": "dom-w-morelach",
+   "set": "DEV_005K",
+   "selectedPlanFrameId": "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+   "plans": [
+    {
+     "frameId": "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+     "storey": "GROUND",
+     "selected": true,
+     "boundaryAccepted": false,
+     "spans": [
+      {
+       "id": "compound-X-618-414-591",
+       "reading": "BOX",
+       "axis": "X",
+       "linePx": 618,
+       "fromPx": 414,
+       "toPx": 591,
+       "inkFromPx": 438,
+       "inkToPx": 568,
+       "widthM": 3.58779,
+       "inward": -1,
+       "separators": [],
+       "intervals": [],
+       "why": "no wall-thick ink inside the gap: one gap"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "row": "rarytasy-g2e",
+   "set": "DEV_005K",
+   "selectedPlanFrameId": "frame-asset-rzut-e8520c3ad3-59a406b738",
+   "plans": [
+    {
+     "frameId": "frame-asset-rzut-e8520c3ad3-59a406b738",
+     "storey": "GROUND",
+     "selected": true,
+     "boundaryAccepted": false,
+     "spans": [
+      {
+       "id": "compound-Y-168-532-677",
+       "reading": "BOX",
+       "axis": "Y",
+       "linePx": 167.5,
+       "fromPx": 532,
+       "toPx": 677,
+       "inkFromPx": 532,
+       "inkToPx": 677,
+       "widthM": 3.998955,
+       "inward": 1,
+       "separators": [],
+       "intervals": [],
+       "why": "no wall-thick ink inside the gap: one gap"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "row": "kosacce-clean",
+   "set": "DEV_005K",
+   "selectedPlanFrameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+   "plans": [
+    {
+     "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+     "storey": "GROUND",
+     "selected": true,
+     "boundaryAccepted": false,
+     "spans": [
+      {
+       "id": "compound-X-736-316-531",
+       "reading": "BOX",
+       "axis": "X",
+       "linePx": 736,
+       "fromPx": 316,
+       "toPx": 531,
+       "inkFromPx": 357,
+       "inkToPx": 505,
+       "widthM": 5.174405,
+       "inward": -1,
+       "separators": [],
+       "intervals": [],
+       "why": "no wall-thick ink inside the gap: one gap"
+      },
+      {
+       "id": "compound-Y-180-304-527",
+       "reading": "BOX",
+       "axis": "Y",
+       "linePx": 179.5,
+       "fromPx": 304,
+       "toPx": 527,
+       "inkFromPx": 308,
+       "inkToPx": 527,
+       "widthM": 5.364934,
+       "inward": 1,
+       "separators": [
+        {
+         "id": "sep-Y-180-411-435",
+         "fromPx": 411,
+         "toPx": 435,
+         "axisPx": 189,
+         "inkKind": "WALL",
+         "returnM": 4.247826,
+         "accepted": true,
+         "kind": "WALL_RETURN",
+         "why": "wall-thick ink on the facade with a wall running 4.25 m inward from it: a return between two mouths"
+        }
+       ],
+       "intervals": [
+        {
+         "id": "compound-Y-180-304-527/i0",
+         "fromPx": 308,
+         "toPx": 411,
+         "widthM": 2.477974,
+         "bounds": [
+          "JAMB",
+          "SEPARATOR"
+         ],
+         "role": "OPENING_IN_WALL",
+         "signature": "GLAZING",
+         "infill": 1,
+         "infillRunsPast": false,
+         "jambInk": [
+          true,
+          true
+         ],
+         "callout": {
+          "id": "metric-callout-ring-acbda5f03b",
+          "widthCm": 250
+         },
+         "decision": "OPENING_IN_WALL",
+         "behind": [
+          {
+           "ix": 6,
+           "iy": 0,
+           "cls": "B"
+          },
+          {
+           "ix": 7,
+           "iy": 0,
+           "cls": "B"
+          },
+          {
+           "ix": 8,
+           "iy": 0,
+           "cls": "B"
+          },
+          {
+           "ix": 9,
+           "iy": 0,
+           "cls": "B"
+          }
+         ],
+         "why": "a 2.48 m mouth with 100% of it spanned by one drawn line inside the wall's band, stopping at its jambs: an opening in a wall that carries on"
+        },
+        {
+         "id": "compound-Y-180-304-527/i1",
+         "fromPx": 435,
+         "toPx": 527,
+         "widthM": 2.213336,
+         "bounds": [
+          "SEPARATOR",
+          "JAMB"
+         ],
+         "role": "OPEN_SIDE",
+         "signature": "BLANK",
+         "infill": 0.793478,
+         "infillRunsPast": false,
+         "jambInk": [
+          true,
+          false
+         ],
+         "callout": {
+          "id": "metric-callout-ring-9ce022c3a9",
+          "widthCm": 251
+         },
+         "pocketM2": 7.64343,
+         "decision": "OPEN_SIDE",
+         "behind": [
+          {
+           "ix": 10,
+           "iy": 0,
+           "cls": "O"
+          },
+          {
+           "ix": 11,
+           "iy": 0,
+           "cls": "R"
+          },
+          {
+           "ix": 12,
+           "iy": 0,
+           "cls": "B"
+          }
+         ],
+         "why": "a 2.21 m mouth drawn across (79%), but with no wall-thick ink at its far end on the facade line: not a hole between two pieces of wall; behind it lies only a 7.6 m² pocket (a porch, a loggia, a recess), no deeper than such a mouth leads to"
+        }
+       ],
+       "why": "1 separator (wall return) cut one 5.36 m gap into 2 mouths, each decided on its own evidence"
+      },
+      {
+       "id": "compound-Y-180-558-722",
+       "reading": "BOX",
+       "axis": "Y",
+       "linePx": 179.5,
+       "fromPx": 558,
+       "toPx": 722,
+       "inkFromPx": 558,
+       "inkToPx": 707,
+       "widthM": 3.945512,
+       "inward": 1,
+       "separators": [],
+       "intervals": [],
+       "why": "no wall-thick ink inside the gap: one gap"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "row": "kosacce-tracked",
+   "set": "DEV_005K",
+   "selectedPlanFrameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+   "plans": [
+    {
+     "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+     "storey": "GROUND",
+     "selected": true,
+     "boundaryAccepted": false,
+     "spans": [
+      {
+       "id": "compound-X-736-316-531",
+       "reading": "BOX",
+       "axis": "X",
+       "linePx": 736,
+       "fromPx": 316,
+       "toPx": 531,
+       "inkFromPx": 357,
+       "inkToPx": 505,
+       "widthM": 5.174405,
+       "inward": -1,
+       "separators": [],
+       "intervals": [],
+       "why": "no wall-thick ink inside the gap: one gap"
+      },
+      {
+       "id": "compound-Y-180-304-527",
+       "reading": "BOX",
+       "axis": "Y",
+       "linePx": 179.5,
+       "fromPx": 304,
+       "toPx": 527,
+       "inkFromPx": 308,
+       "inkToPx": 527,
+       "widthM": 5.364934,
+       "inward": 1,
+       "separators": [
+        {
+         "id": "sep-Y-180-411-435",
+         "fromPx": 411,
+         "toPx": 435,
+         "axisPx": 189,
+         "inkKind": "WALL",
+         "returnM": 4.247826,
+         "accepted": true,
+         "kind": "WALL_RETURN",
+         "why": "wall-thick ink on the facade with a wall running 4.25 m inward from it: a return between two mouths"
+        }
+       ],
+       "intervals": [
+        {
+         "id": "compound-Y-180-304-527/i0",
+         "fromPx": 308,
+         "toPx": 411,
+         "widthM": 2.477974,
+         "bounds": [
+          "JAMB",
+          "SEPARATOR"
+         ],
+         "role": "OPENING_IN_WALL",
+         "signature": "GLAZING",
+         "infill": 1,
+         "infillRunsPast": false,
+         "jambInk": [
+          true,
+          true
+         ],
+         "callout": {
+          "id": "metric-callout-ring-acbda5f03b",
+          "widthCm": 250
+         },
+         "decision": "OPENING_IN_WALL",
+         "behind": [
+          {
+           "ix": 6,
+           "iy": 0,
+           "cls": "B"
+          },
+          {
+           "ix": 7,
+           "iy": 0,
+           "cls": "B"
+          },
+          {
+           "ix": 8,
+           "iy": 0,
+           "cls": "B"
+          },
+          {
+           "ix": 9,
+           "iy": 0,
+           "cls": "B"
+          }
+         ],
+         "why": "a 2.48 m mouth with 100% of it spanned by one drawn line inside the wall's band, stopping at its jambs: an opening in a wall that carries on"
+        },
+        {
+         "id": "compound-Y-180-304-527/i1",
+         "fromPx": 435,
+         "toPx": 527,
+         "widthM": 2.213336,
+         "bounds": [
+          "SEPARATOR",
+          "JAMB"
+         ],
+         "role": "OPEN_SIDE",
+         "signature": "BLANK",
+         "infill": 0.793478,
+         "infillRunsPast": false,
+         "jambInk": [
+          true,
+          false
+         ],
+         "callout": {
+          "id": "metric-callout-ring-9ce022c3a9",
+          "widthCm": 251
+         },
+         "pocketM2": 7.64343,
+         "decision": "OPEN_SIDE",
+         "behind": [
+          {
+           "ix": 10,
+           "iy": 0,
+           "cls": "O"
+          },
+          {
+           "ix": 11,
+           "iy": 0,
+           "cls": "R"
+          },
+          {
+           "ix": 12,
+           "iy": 0,
+           "cls": "B"
+          }
+         ],
+         "why": "a 2.21 m mouth drawn across (79%), but with no wall-thick ink at its far end on the facade line: not a hole between two pieces of wall; behind it lies only a 7.6 m² pocket (a porch, a loggia, a recess), no deeper than such a mouth leads to"
+        }
+       ],
+       "why": "1 separator (wall return) cut one 5.36 m gap into 2 mouths, each decided on its own evidence"
+      },
+      {
+       "id": "compound-Y-180-558-722",
+       "reading": "BOX",
+       "axis": "Y",
+       "linePx": 179.5,
+       "fromPx": 558,
+       "toPx": 722,
+       "inkFromPx": 558,
+       "inkToPx": 707,
+       "widthM": 3.945512,
+       "inward": 1,
+       "separators": [],
+       "intervals": [],
+       "why": "no wall-thick ink inside the gap: one gap"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "row": "rarytasy-eoze",
+   "set": "DEV_005K",
+   "selectedPlanFrameId": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+   "plans": [
+    {
+     "frameId": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+     "storey": "GROUND",
+     "selected": true,
+     "boundaryAccepted": false,
+     "spans": [
+      {
+       "id": "compound-Y-237-549-749",
+       "reading": "BOX",
+       "axis": "Y",
+       "linePx": 236.5,
+       "fromPx": 549,
+       "toPx": 749,
+       "inkFromPx": 560,
+       "inkToPx": 739,
+       "widthM": 4.4474,
+       "inward": 1,
+       "separators": [],
+       "intervals": [],
+       "why": "no wall-thick ink inside the gap: one gap"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "row": "eoze-legacy-every",
+   "set": "DEV_005K",
+   "selectedPlanFrameId": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+   "plans": [
+    {
+     "frameId": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+     "storey": "GROUND",
+     "selected": true,
+     "boundaryAccepted": false,
+     "spans": [
+      {
+       "id": "compound-Y-247-549-749",
+       "reading": "BOX",
+       "axis": "Y",
+       "linePx": 246.5,
+       "fromPx": 549,
+       "toPx": 749,
+       "inkFromPx": 560,
+       "inkToPx": 739,
+       "widthM": 5.0032,
+       "inward": 1,
+       "separators": [],
+       "intervals": [],
+       "why": "no wall-thick ink inside the gap: one gap"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "row": "dom-w-jablonkach",
+   "set": "DEV_005K",
+   "selectedPlanFrameId": "frame-asset-rzut-a8bdd8cd1d-d80b709d74",
+   "plans": [
+    {
+     "frameId": "frame-asset-rzut-d52f958fd6-d2646b4dce",
+     "storey": "ATTIC",
+     "selected": false,
+     "boundaryAccepted": false,
+     "spans": [
+      {
+       "id": "compound-X-167-354-513",
+       "reading": "BOX",
+       "axis": "X",
+       "linePx": 167,
+       "fromPx": 354,
+       "toPx": 513,
+       "inkFromPx": 407,
+       "inkToPx": 475,
+       "widthM": 4.723254,
+       "inward": 1,
+       "separators": [],
+       "intervals": [],
+       "why": "no wall-thick ink inside the gap: one gap"
+      },
+      {
+       "id": "compound-Y-686-331-502",
+       "reading": "BOX",
+       "axis": "Y",
+       "linePx": 685.5,
+       "fromPx": 331,
+       "toPx": 502,
+       "inkFromPx": 331,
+       "inkToPx": 502,
+       "widthM": 5.079213,
+       "inward": -1,
+       "separators": [],
+       "intervals": [],
+       "why": "no wall-thick ink inside the gap: one gap"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "row": "dom-w-modrzykach",
+   "set": "DEV_005K",
+   "selectedPlanFrameId": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+   "plans": [
+    {
+     "frameId": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+     "storey": "GROUND",
+     "selected": true,
+     "boundaryAccepted": true,
+     "spans": [
+      {
+       "id": "compound-Y-185-222-495",
+       "reading": "BOX",
+       "axis": "Y",
+       "linePx": 184.5,
+       "fromPx": 222,
+       "toPx": 495,
+       "inkFromPx": 241,
+       "inkToPx": 476,
+       "widthM": 7.502313,
+       "inward": -1,
+       "separators": [
+        {
+         "id": "sep-Y-185-430-451",
+         "fromPx": 430,
+         "toPx": 451,
+         "axisPx": 183,
+         "inkKind": "POST",
+         "returnM": 0,
+         "accepted": false,
+         "kind": "NOT_A_SEPARATOR",
+         "why": "a free-standing block 21 px long with 0.00 m of wall behind it: a post, which establishes no wall relation"
+        }
+       ],
+       "intervals": [],
+       "why": "1 piece of wall-thick ink inside the gap, none a return or a pier: one gap"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "row": "dom-w-dabecjach",
+   "set": "DEV_005K",
+   "selectedPlanFrameId": "frame-asset-rzut-1a56066c62-10b0ec4131",
+   "plans": [
+    {
+     "frameId": "frame-asset-rzut-1a56066c62-10b0ec4131",
+     "storey": "GROUND",
+     "selected": true,
+     "boundaryAccepted": true,
+     "spans": [
+      {
+       "id": "compound-X-317-185-514",
+       "reading": "OUTLINE",
+       "axis": "X",
+       "linePx": 316.5,
+       "fromPx": 185,
+       "toPx": 514,
+       "inkFromPx": 185,
+       "inkToPx": 514,
+       "widthM": 9.26135,
+       "inward": 1,
+       "separators": [
+        {
+         "id": "sep-X-317-208-218",
+         "fromPx": 208,
+         "toPx": 218,
+         "axisPx": 321.75,
+         "inkKind": "POST",
+         "returnM": 0,
+         "accepted": false,
+         "kind": "NOT_A_SEPARATOR",
+         "why": "a free-standing block 10 px long with 0.00 m of wall behind it: a post, which establishes no wall relation"
+        },
+        {
+         "id": "sep-X-317-244-252",
+         "fromPx": 244,
+         "toPx": 252,
+         "axisPx": 321.666667,
+         "inkKind": "POST",
+         "returnM": 0,
+         "accepted": false,
+         "kind": "NOT_A_SEPARATOR",
+         "why": "a free-standing block 8 px long with 0.00 m of wall behind it: a post, which establishes no wall relation"
+        },
+        {
+         "id": "sep-X-317-424-433",
+         "fromPx": 424,
+         "toPx": 433,
+         "axisPx": 314.333333,
+         "inkKind": "POST",
+         "returnM": 0,
+         "accepted": false,
+         "kind": "NOT_A_SEPARATOR",
+         "why": "a free-standing block 9 px long with 0.00 m of wall behind it: a post, which establishes no wall relation"
+        },
+        {
+         "id": "sep-X-317-445-462",
+         "fromPx": 445,
+         "toPx": 462,
+         "axisPx": 312.029412,
+         "inkKind": "WALL",
+         "returnM": 0.098396,
+         "accepted": true,
+         "kind": "FACADE_PIER",
+         "why": "a 0.48 m stretch of wall along the facade, part of a wall body, between two mouths: a pier"
+        }
+       ],
+       "intervals": [
+        {
+         "id": "compound-X-317-185-514/i0",
+         "fromPx": 185,
+         "toPx": 445,
+         "widthM": 7.319,
+         "bounds": [
+          "JAMB",
+          "SEPARATOR"
+         ],
+         "role": "OPEN_SIDE",
+         "signature": "BLANK",
+         "infill": 0.380769,
+         "infillRunsPast": false,
+         "jambInk": [
+          false,
+          true
+         ],
+         "decision": "OPEN_SIDE",
+         "behind": [
+          {
+           "ix": 13,
+           "iy": 8,
+           "cls": "O"
+          },
+          {
+           "ix": 13,
+           "iy": 9,
+           "cls": "O"
+          },
+          {
+           "ix": 13,
+           "iy": 10,
+           "cls": "O"
+          },
+          {
+           "ix": 13,
+           "iy": 11,
+           "cls": "O"
+          },
+          {
+           "ix": 13,
+           "iy": 12,
+           "cls": "O"
+          },
+          {
+           "ix": 13,
+           "iy": 13,
+           "cls": "O"
+          },
+          {
+           "ix": 13,
+           "iy": 14,
+           "cls": "O"
+          },
+          {
+           "ix": 13,
+           "iy": 15,
+           "cls": "O"
+          },
+          {
+           "ix": 13,
+           "iy": 16,
+           "cls": "O"
+          },
+          {
+           "ix": 13,
+           "iy": 17,
+           "cls": "O"
+          },
+          {
+           "ix": 13,
+           "iy": 18,
+           "cls": "O"
+          },
+          {
+           "ix": 13,
+           "iy": 19,
+           "cls": "O"
+          },
+          {
+           "ix": 13,
+           "iy": 20,
+           "cls": "O"
+          },
+          {
+           "ix": 13,
+           "iy": 21,
+           "cls": "O"
+          },
+          {
+           "ix": 13,
+           "iy": 22,
+           "cls": "O"
+          },
+          {
+           "ix": 13,
+           "iy": 23,
+           "cls": "O"
+          },
+          {
+           "ix": 13,
+           "iy": 24,
+           "cls": "O"
+          },
+          {
+           "ix": 13,
+           "iy": 25,
+           "cls": "O"
+          },
+          {
+           "ix": 13,
+           "iy": 26,
+           "cls": "O"
+          },
+          {
+           "ix": 13,
+           "iy": 27,
+           "cls": "O"
+          },
+          {
+           "ix": 13,
+           "iy": 28,
+           "cls": "O"
+          },
+          {
+           "ix": 13,
+           "iy": 29,
+           "cls": "O"
+          },
+          {
+           "ix": 13,
+           "iy": 30,
+           "cls": "O"
+          }
+         ],
+         "why": "a 7.32 m mouth with only 38% of it drawn across and no set-back wall closing it within 4.5 m"
+        },
+        {
+         "id": "compound-X-317-185-514/i1",
+         "fromPx": 462,
+         "toPx": 514,
+         "widthM": 1.4638,
+         "bounds": [
+          "SEPARATOR",
+          "JAMB"
+         ],
+         "role": "OPEN_SIDE",
+         "signature": "BLANK",
+         "infill": 0.134615,
+         "infillRunsPast": false,
+         "jambInk": [
+          true,
+          false
+         ],
+         "decision": "OPEN_SIDE",
+         "behind": [
+          {
+           "ix": 13,
+           "iy": 32,
+           "cls": "O"
+          },
+          {
+           "ix": 13,
+           "iy": 33,
+           "cls": "O"
+          }
+         ],
+         "why": "a 1.46 m mouth with only 13% of it drawn across and no set-back wall closing it within 4.5 m"
+        }
+       ],
+       "why": "1 separator (facade pier) cut one 9.26 m gap into 2 mouths, each decided on its own evidence"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "row": "dom-w-tunbergiach",
+   "set": "DEV_005K",
+   "selectedPlanFrameId": "frame-asset-rzut-83377e8ffc-c1a88b7f25",
+   "plans": [
+    {
+     "frameId": "frame-asset-rzut-83377e8ffc-c1a88b7f25",
+     "storey": "GROUND",
+     "selected": true,
+     "boundaryAccepted": false,
+     "spans": [
+      {
+       "id": "compound-Y-175-466-625",
+       "reading": "BOX",
+       "axis": "Y",
+       "linePx": 175,
+       "fromPx": 466,
+       "toPx": 625,
+       "inkFromPx": 482,
+       "inkToPx": 625,
+       "widthM": 3.330414,
+       "inward": 1,
+       "separators": [],
+       "intervals": [],
+       "why": "no wall-thick ink inside the gap: one gap"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "row": "eoze-legacy-area",
+   "set": "DEV_005K",
+   "selectedPlanFrameId": "frame-asset-rzut-2abfc5825d-e842a14c7f",
+   "plans": [
+    {
+     "frameId": "frame-asset-rzut-2abfc5825d-e842a14c7f",
+     "storey": "GROUND",
+     "selected": true,
+     "boundaryAccepted": false,
+     "spans": [
+      {
+       "id": "compound-Y-247-549-749",
+       "reading": "BOX",
+       "axis": "Y",
+       "linePx": 246.5,
+       "fromPx": 549,
+       "toPx": 749,
+       "inkFromPx": 560,
+       "inkToPx": 739,
+       "widthM": 5.0028,
+       "inward": 1,
+       "separators": [],
+       "intervals": [],
+       "why": "no wall-thick ink inside the gap: one gap"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "row": "dom-w-helikoniach",
+   "set": "DEV_005K",
+   "selectedPlanFrameId": "frame-asset-rzut-d5842da623-4c943a2b00",
+   "plans": [
+    {
+     "frameId": "frame-asset-rzut-d5842da623-4c943a2b00",
+     "storey": "GROUND",
+     "selected": true,
+     "boundaryAccepted": true,
+     "spans": [
+      {
+       "id": "compound-Y-189-218-420",
+       "reading": "OUTLINE",
+       "axis": "Y",
+       "linePx": 189.125,
+       "fromPx": 218,
+       "toPx": 420,
+       "inkFromPx": 226,
+       "inkToPx": 410,
+       "widthM": 4.656504,
+       "inward": 1,
+       "separators": [],
+       "intervals": [],
+       "why": "no wall-thick ink inside the gap: one gap"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "row": "kosacce-area-alone",
+   "set": "DEV_005K",
+   "selectedPlanFrameId": "frame-asset-rzut-94f54ada01-bdf7aa09e8",
+   "plans": [
+    {
+     "frameId": "frame-asset-rzut-94f54ada01-bdf7aa09e8",
+     "storey": "GROUND",
+     "selected": true,
+     "boundaryAccepted": false,
+     "spans": [
+      {
+       "id": "compound-X-736-316-531",
+       "reading": "BOX",
+       "axis": "X",
+       "linePx": 736,
+       "fromPx": 316,
+       "toPx": 531,
+       "inkFromPx": 357,
+       "inkToPx": 505,
+       "widthM": 5.174405,
+       "inward": -1,
+       "separators": [],
+       "intervals": [],
+       "why": "no wall-thick ink inside the gap: one gap"
+      },
+      {
+       "id": "compound-Y-180-304-527",
+       "reading": "BOX",
+       "axis": "Y",
+       "linePx": 179.5,
+       "fromPx": 304,
+       "toPx": 527,
+       "inkFromPx": 308,
+       "inkToPx": 527,
+       "widthM": 5.364711,
+       "inward": 1,
+       "separators": [
+        {
+         "id": "sep-Y-180-411-435",
+         "fromPx": 411,
+         "toPx": 435,
+         "axisPx": 189,
+         "inkKind": "WALL",
+         "returnM": 4.247826,
+         "accepted": true,
+         "kind": "WALL_RETURN",
+         "why": "wall-thick ink on the facade with a wall running 4.25 m inward from it: a return between two mouths"
+        }
+       ],
+       "intervals": [
+        {
+         "id": "compound-Y-180-304-527/i0",
+         "fromPx": 308,
+         "toPx": 411,
+         "widthM": 2.477871,
+         "bounds": [
+          "JAMB",
+          "SEPARATOR"
+         ],
+         "role": "OPENING_IN_WALL",
+         "signature": "GLAZING",
+         "infill": 1,
+         "infillRunsPast": false,
+         "jambInk": [
+          true,
+          true
+         ],
+         "callout": {
+          "id": "metric-callout-ring-ad1cbaa2af",
+          "widthCm": 250
+         },
+         "decision": "OPENING_IN_WALL",
+         "behind": [
+          {
+           "ix": 2,
+           "iy": 0,
+           "cls": "B"
+          },
+          {
+           "ix": 3,
+           "iy": 0,
+           "cls": "B"
+          }
+         ],
+         "why": "a 2.48 m mouth with 100% of it spanned by one drawn line inside the wall's band, stopping at its jambs: an opening in a wall that carries on"
+        },
+        {
+         "id": "compound-Y-180-304-527/i1",
+         "fromPx": 435,
+         "toPx": 527,
+         "widthM": 2.213244,
+         "bounds": [
+          "SEPARATOR",
+          "JAMB"
+         ],
+         "role": "OPEN_SIDE",
+         "signature": "BLANK",
+         "infill": 0.836957,
+         "infillRunsPast": false,
+         "jambInk": [
+          true,
+          false
+         ],
+         "decision": "OPEN_SIDE",
+         "behind": [
+          {
+           "ix": 4,
+           "iy": 0,
+           "cls": "B"
+          },
+          {
+           "ix": 5,
+           "iy": 0,
+           "cls": "B"
+          }
+         ],
+         "why": "a 2.21 m mouth drawn across (84%), but with no wall-thick ink at its far end on the facade line: not a hole between two pieces of wall"
+        }
+       ],
+       "why": "1 separator (wall return) cut one 5.36 m gap into 2 mouths, each decided on its own evidence"
+      },
+      {
+       "id": "compound-Y-180-558-722",
+       "reading": "BOX",
+       "axis": "Y",
+       "linePx": 179.5,
+       "fromPx": 558,
+       "toPx": 722,
+       "inkFromPx": 558,
+       "inkToPx": 707,
+       "widthM": 3.945348,
+       "inward": 1,
+       "separators": [],
+       "intervals": [],
+       "why": "no wall-thick ink inside the gap: one gap"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "row": "dom-w-gozdzikowcach",
+   "set": "DEV_005K",
+   "selectedPlanFrameId": "frame-asset-rzut-01d4b6474c-64bd1e0f2f",
+   "plans": [
+    {
+     "frameId": "frame-asset-rzut-01d4b6474c-64bd1e0f2f",
+     "storey": "GROUND",
+     "selected": true,
+     "boundaryAccepted": false,
+     "spans": [
+      {
+       "id": "compound-Y-598-284-590",
+       "reading": "BOX",
+       "axis": "Y",
+       "linePx": 598,
+       "fromPx": 284,
+       "toPx": 590,
+       "inkFromPx": 312,
+       "inkToPx": 590,
+       "widthM": 7.755264,
+       "inward": -1,
+       "separators": [
+        {
+         "id": "sep-Y-598-434-465",
+         "fromPx": 434,
+         "toPx": 465,
+         "axisPx": 586.870968,
+         "inkKind": "WALL",
+         "returnM": 3.855447,
+         "accepted": true,
+         "kind": "WALL_RETURN",
+         "why": "wall-thick ink on the facade with a wall running 3.86 m inward from it: a return between two mouths"
+        }
+       ],
+       "intervals": [
+        {
+         "id": "compound-Y-598-284-590/i0",
+         "fromPx": 312,
+         "toPx": 434,
+         "widthM": 3.091968,
+         "bounds": [
+          "JAMB",
+          "SEPARATOR"
+         ],
+         "role": "RECESS_MOUTH",
+         "signature": "DASHED",
+         "infill": 0.934426,
+         "infillRunsPast": false,
+         "jambInk": [
+          true,
+          true
+         ],
+         "pocketM2": 3.816972,
+         "recess": {
+          "backWallPx": 549.40905,
+          "depthM": 1.224443,
+          "cover": 1,
+          "returns": [
+           1.562338,
+           3.855447
+          ],
+          "gridLinePx": 549.40905,
+          "lineAdded": true
+         },
+         "decision": "OPEN_SIDE",
+         "behind": [
+          {
+           "ix": 1,
+           "iy": 6,
+           "cls": "R"
+          },
+          {
+           "ix": 2,
+           "iy": 6,
+           "cls": "R"
+          }
+         ],
+         "why": "a 3.09 m mouth between two returns (1.56 m, 3.86 m) with a set-back wall 1.22 m behind it covering 100% of it, dashed across: a recess, open at its mouth, closed at its back; 3.8 m² lies behind its mouth, and it stays open: its back wall closes the building"
+        },
+        {
+         "id": "compound-Y-598-284-590/i1",
+         "fromPx": 465,
+         "toPx": 590,
+         "widthM": 3.168,
+         "bounds": [
+          "SEPARATOR",
+          "JAMB"
+         ],
+         "role": "OPEN_SIDE",
+         "signature": "DASHED",
+         "infill": 0.952,
+         "infillRunsPast": false,
+         "jambInk": [
+          true,
+          true
+         ],
+         "decision": "OPEN_SIDE",
+         "behind": [
+          {
+           "ix": 3,
+           "iy": 6,
+           "cls": "B"
+          }
+         ],
+         "why": "a 3.17 m mouth with only 95% of it drawn across and no set-back wall closing it within 4.5 m"
+        }
+       ],
+       "why": "1 separator (wall return) cut one 7.76 m gap into 2 mouths, each decided on its own evidence"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "row": "A00",
+   "set": "FRESH_005K",
+   "selectedPlanFrameId": "frame-asset-rzut-db1e8df563-19bef9a91e",
+   "plans": [
+    {
+     "frameId": "frame-asset-rzut-db1e8df563-19bef9a91e",
+     "storey": "GROUND",
+     "selected": true,
+     "boundaryAccepted": false,
+     "spans": [
+      {
+       "id": "compound-Y-605-414-614",
+       "reading": "BOX",
+       "axis": "Y",
+       "linePx": 605,
+       "fromPx": 414,
+       "toPx": 614,
+       "inkFromPx": 442,
+       "inkToPx": 562,
+       "widthM": 4.61,
+       "inward": -1,
+       "separators": [
+        {
+         "id": "sep-Y-605-484-497",
+         "fromPx": 484,
+         "toPx": 497,
+         "axisPx": 601,
+         "inkKind": "POST",
+         "returnM": 0.392496,
+         "accepted": false,
+         "kind": "NOT_A_SEPARATOR",
+         "why": "a free-standing block 13 px long with 0.39 m of wall behind it: a post, which establishes no wall relation"
+        }
+       ],
+       "intervals": [],
+       "why": "1 piece of wall-thick ink inside the gap, none a return or a pier: one gap"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "row": "A04",
+   "set": "FRESH_005K",
+   "selectedPlanFrameId": "frame-asset-rzut-4f91f26bdf-589c8abdb3",
+   "plans": [
+    {
+     "frameId": "frame-asset-rzut-1b82f82f43-ced10ac33a",
+     "storey": "ATTIC",
+     "selected": false,
+     "boundaryAccepted": false,
+     "spans": [
+      {
+       "id": "compound-Y-708-169-261",
+       "reading": "BOX",
+       "axis": "Y",
+       "linePx": 707.5,
+       "fromPx": 169,
+       "toPx": 261,
+       "inkFromPx": 184,
+       "inkToPx": 261,
+       "widthM": 3.25174,
+       "inward": -1,
+       "separators": [],
+       "intervals": [],
+       "why": "no wall-thick ink inside the gap: one gap"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "row": "A05",
+   "set": "FRESH_005K",
+   "selectedPlanFrameId": "frame-asset-rzut-238dfbc50b-38cf8e09f5",
+   "plans": [
+    {
+     "frameId": "frame-asset-rzut-238dfbc50b-38cf8e09f5",
+     "storey": "GROUND",
+     "selected": true,
+     "boundaryAccepted": false,
+     "spans": [
+      {
+       "id": "compound-X-758-301-478",
+       "reading": "BOX",
+       "axis": "X",
+       "linePx": 758,
+       "fromPx": 301,
+       "toPx": 478,
+       "inkFromPx": 324,
+       "inkToPx": 456,
+       "widthM": 3.735585,
+       "inward": -1,
+       "separators": [],
+       "intervals": [],
+       "why": "no wall-thick ink inside the gap: one gap"
+      },
+      {
+       "id": "compound-Y-634-221-491",
+       "reading": "BOX",
+       "axis": "Y",
+       "linePx": 634,
+       "fromPx": 221,
+       "toPx": 491,
+       "inkFromPx": 244,
+       "inkToPx": 474,
+       "widthM": 5.697,
+       "inward": -1,
+       "separators": [
+        {
+         "id": "sep-Y-634-387-427",
+         "fromPx": 387,
+         "toPx": 427,
+         "axisPx": 629.8375,
+         "inkKind": "WALL",
+         "returnM": 3.50343,
+         "accepted": true,
+         "kind": "WALL_RETURN",
+         "why": "wall-thick ink on the facade with a wall running 3.50 m inward from it: a return between two mouths"
+        }
+       ],
+       "intervals": [
+        {
+         "id": "compound-Y-634-221-491/i0",
+         "fromPx": 244,
+         "toPx": 387,
+         "widthM": 3.0173,
+         "bounds": [
+          "JAMB",
+          "SEPARATOR"
+         ],
+         "role": "OPEN_SIDE",
+         "signature": "BLANK",
+         "infill": 0.643357,
+         "infillRunsPast": false,
+         "jambInk": [
+          true,
+          true
+         ],
+         "pocketM2": 10.869706,
+         "decision": "OPEN_SIDE",
+         "behind": [
+          {
+           "ix": 3,
+           "iy": 5,
+           "cls": "O"
+          },
+          {
+           "ix": 4,
+           "iy": 5,
+           "cls": "O"
+          },
+          {
+           "ix": 5,
+           "iy": 5,
+           "cls": "O"
+          },
+          {
+           "ix": 6,
+           "iy": 5,
+           "cls": "O"
+          }
+         ],
+         "why": "a 3.02 m mouth with only 64% of it drawn across and no set-back wall closing it within 4.5 m; behind it lies only a 10.9 m² pocket (a porch, a loggia, a recess), no deeper than such a mouth leads to"
+        },
+        {
+         "id": "compound-Y-634-221-491/i1",
+         "fromPx": 427,
+         "toPx": 474,
+         "widthM": 0.9917,
+         "bounds": [
+          "SEPARATOR",
+          "JAMB"
+         ],
+         "role": "OPEN_SIDE",
+         "signature": "LEAF_FACE",
+         "infill": 1,
+         "infillRunsPast": true,
+         "jambInk": [
+          true,
+          true
+         ],
+         "callout": {
+          "id": "metric-callout-ring-bf2eef182e",
+          "widthCm": 100
+         },
+         "decision": "OPEN_SIDE",
+         "behind": [
+          {
+           "ix": 7,
+           "iy": 5,
+           "cls": "B"
+          },
+          {
+           "ix": 8,
+           "iy": 5,
+           "cls": "B"
+          }
+         ],
+         "why": "a 0.99 m mouth whose one line across (100%) runs on past its jambs — a slab edge, a kerb, a terrace outline, not a door — and no set-back wall closing it within 4.5 m"
+        }
+       ],
+       "why": "1 separator (wall return) cut one 5.70 m gap into 2 mouths, each decided on its own evidence"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "row": "A07",
+   "set": "FRESH_005K",
+   "selectedPlanFrameId": "frame-asset-rzut-dec884e019-46909f56cf",
+   "plans": [
+    {
+     "frameId": "frame-asset-rzut-dec884e019-46909f56cf",
+     "storey": "GROUND",
+     "selected": true,
+     "boundaryAccepted": false,
+     "spans": [
+      {
+       "id": "compound-Y-220-100-260",
+       "reading": "BOX",
+       "axis": "Y",
+       "linePx": 220,
+       "fromPx": 100,
+       "toPx": 260,
+       "inkFromPx": 100,
+       "inkToPx": 256,
+       "widthM": 3.70576,
+       "inward": 1,
+       "separators": [],
+       "intervals": [],
+       "why": "no wall-thick ink inside the gap: one gap"
+      },
+      {
+       "id": "compound-Y-220-580-735",
+       "reading": "BOX",
+       "axis": "Y",
+       "linePx": 220,
+       "fromPx": 580,
+       "toPx": 735,
+       "inkFromPx": 580,
+       "inkToPx": 735,
+       "widthM": 3.589955,
+       "inward": 1,
+       "separators": [],
+       "intervals": [],
+       "why": "no wall-thick ink inside the gap: one gap"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
