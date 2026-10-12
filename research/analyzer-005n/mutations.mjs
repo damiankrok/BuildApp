@@ -118,6 +118,7 @@ const MUTATIONS = [
     file: DECOMPOSITION,
     from: '        const shut = edgesFor(true, evidenceMap([...decided, ...gs]))',
     to: "        const shut = edgesFor(true, evidenceMap([...collinear.filter((c) => c.decision.decision === 'OPENING_IN_WALL'), ...gs]))",
+    also: [{ from: '        const { cells: pocketCells, m2: pocketM2 } = ownPocket.get(g) ?? pocketOf([g])', to: '        const { cells: pocketCells, m2: pocketM2 } = pocketOf([g])' }],
   },
   {
     id: 'M12',
@@ -148,7 +149,7 @@ const MUTATIONS = [
 const git = (...a) => execFileSync('git', a, { cwd: REPO, encoding: 'utf8' })
 if (git('status', '--porcelain', '--', 'packages')) throw new Error('packages/ must be clean before mutating')
 const results = []
-for (const m of MUTATIONS) {
+for (const m of MUTATIONS.filter((x) => !process.env.ONLY || process.env.ONLY.split(',').includes(x.id))) {
   const path = join(REPO, m.file)
   const source = readFileSync(path, 'utf8')
   const patches = [{ from: m.from, to: m.to }, ...(m.also ?? [])]
