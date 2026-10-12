@@ -47,6 +47,7 @@
 | STAGE BUILDPLAN-ANALYZER-005K — GAP EVIDENCE + SEALED FRESH-SHEET GAP SET + DETERMINISTIC DRAWN-GAP RULE | `analyzer/gap-evidence-drawn-gap-v1` (from `analyzer/floorplan-intelligence-audit-v1` @ `1314df7`; pushes also to `claude/new-session-3kzcgh`, except the seal-to-evaluation commits; Legacy untouched) | Phase 0 `b747440`; production `c244ff7` (rule OFF); freeze `892853e` (FREEZE_SHA); manifest seal `70aa0a4`; label seal `6672a89`; evaluation `591197d`; council fixes `44f7128`; closing: the commit that carries this row. CI: runs 37533180890 (`b747440`), 37539569712 (`892853e`) and 37546736072 (`2f57f90`, the last content commit) green, UI evidence gate included | **PASS** (`PASS_BUILDPLAN_ANALYZER_005K_GAP_EVIDENCE_READY_FOR_COORDINATOR`) — see § "Where the gap evidence stands (STAGE BUILDPLAN-ANALYZER-005K)". UI evidence harness fixed (test code only); per-gap evidence records (boundary evidence 1.2.0, Evidence Pack 1.2.0); a sealed fresh-sheet set of 60 gaps (14 projects, ARCHON + DobreDomy) labelled by blind AI sub-agents (not human); **DRAWN_GAP_RULE: INSUFFICIENT_EVIDENCE — stays OFF** (10 resolved negatives, none an open side; a known recess-mouth closure path). No production decision changed; no OWNER APK; blind round 9 NOT_RUN_BY_DESIGN. **NEXT: FIX_STOREY_COUNT** |
 | STAGE BUILDPLAN-ANALYZER-005L — STOREY REGISTRATION + PER-STOREY FOOTPRINT STACKING + FRESH BLIND ROUND 9 | `analyzer/storey-registration-mass-stacking-v1` (from `a70047f`; pushes also to `claude/new-session-3kzcgh`, batched while a CI run was in flight; Legacy untouched) | production `e849cbc`…`cee78c8` (council-closed); freeze `8f5f3c5` (PRE_HOLDOUT_9_SHA, CI 37595482179 green); blind round `591e857`; closing: the commit that carries this row (final CI and OWNER APK: run 193 on `99b0eea`, green; OWNER APK versionCode 1193) | **PARTIAL** (`PARTIAL_BUILDPLAN_ANALYZER_005L_BLIND9_BODY_RELATION_FAIL`) — see § "Where storey registration stands (STAGE BUILDPLAN-ANALYZER-005L)". Storey registration and support are rebuilt on walled bodies and wall-on-wall correspondence, and per-storey footprints reach the emitted model. A06 and A07 FAIL → PASS (with żurawkach and tunbergiach), no PASS row turns FAIL, garage safety and non-circularity hold, M1–M10 are killed. Blind 9: #1 `dom-w-murajach` ALGORITHMIC_FAIL on a recessed-entrance / garage-door body relation upstream of the storey work (it failed at the 005K code too), #2 `dom-w-cieszyniankach` PASS. **NEXT: FIX_RECESSED_ENTRANCE_BODY_RELATION** |
 | STAGE BUILDPLAN-ANALYZER-005M — VISUAL REFEREE V2: MULTISCALE SMALL-VLM BAKE-OFF + TEACHER/STUDENT DISTILLATION FEASIBILITY | `analyzer/visual-referee-v2-distillation-audit-v1` (from `analyzer/storey-registration-mass-stacking-v1` @ `47811e0`; mirrored to `claude/new-session-3kzcgh` at checkpoints, final HEAD on both; Legacy untouched) | research harness `research/analyzer-005m/`, artifacts `stage-reports/artifacts/analyzer-005m-vr2/` and the report: the commits after `47811e0` on the branch; final CI: run 37798078813 on `776295c`, success 30/30 | Research only, **no production change** (freeze IDENTICAL; no weight in Git history). Four small VLMs (Qwen3-VL-2B/4B, InternVL3.5-2B, SmolVLM2-2.2B) through llama.cpp on CPU in five input modes; phase 1 30 questions, phase 2 152 (best three). Best (point estimate): **Qwen3-VL-2B, mode D: CONFIDENT_WRONG_RATE 30.9 %** (= its error rate; real 23 %), never abstains; fails the counterfactual pairs, global and local alike (2/10 both right is chance level); beats a truth-blind prior on real questions, not a fitted class-aware one. Right on 29/30 real body-relation questions, a post-hoc lead only. Teacher Qwen3-VL-8B RUN (CPU, Q4_K_M): under constrained decoding one answer for both members of 20/21 counterfactual pairs. Student DEFERRED_ENV (CPU probe 31 s/step; vrgen2 2.1's abstention target is class-determined, so the dataset builder refuses it). Gemma 3n gated. **NEXT: RETURN_TO_DETERMINISTIC_BODY_RELATION** |
+| STAGE BUILDPLAN-ANALYZER-005N — COMPOUND FACADE MOUTHS + RECESSED ENTRANCE / GARAGE BODY RELATION + FRESH BLIND ROUND 10 | `analyzer/compound-facade-atomic-intervals-v1` (from `analyzer/visual-referee-v2-distillation-audit-v1` @ `5957e3a`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | production `02af9cb`…`4e12ce5` (council rounds 1 and 2 closed); freeze `d787397` (PRE_HOLDOUT_10_SHA, CI 38297543325 green); blind round `f70700a`, `bfb9499`; closing: the commit that carries this row (final CI and OWNER APK: report §T) | **PARTIAL** (`PARTIAL_BUILDPLAN_ANALYZER_005N_BLIND10_METRIC_EXTENT_FAIL`) — see § "Where compound facades stand (STAGE BUILDPLAN-ANALYZER-005N)". Wide facade gaps are cut at source-supported separators (wall returns, facade piers) into atomic intervals, each decided on its own evidence; a recess keeps its mouth open and its back wall closes the building; a wall-joint extent keeps an attached garage. Gozdzikowcach's merged 7.76 m OPEN_SIDE is gone (first bad now MODEL_EMISSION); murajach was not this root (extent, then METRIC). No development verdict changes, M1–M14 killed, performance 0.97×/1.01×. Blind 10: #1 `dom-w-glogownikach` METRIC, #2 `dom-w-akebiach` EXTENT, both ALGORITHMIC_FAIL; TARGET_CLASS_EXERCISED NO. **NEXT: OTHER_MEASURED_RESIDUAL (scale from printed dimensions)** |
 ## Current capabilities
 
 - **CanonicalBuildingModel** (`packages/model`): versioned Zod schema
@@ -1209,6 +1210,39 @@ zgodności odczytu wymiarów").
 `.so`, preview signer `6e48fac4…`, model `9ef676d6…` and WASM `3398c10d…` inside, verified from the downloaded file
 (report §R).
 
+## Where compound facades stand (STAGE BUILDPLAN-ANALYZER-005N)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005N_COMPOUND_FACADE_BODY_RELATION.md`. Evidence: `stage-reports/artifacts/analyzer-005n/`.
+
+| field | state |
+| --- | --- |
+| BASELINE FACADE TOPOLOGY | measured before any edit (`baseline-compound-facades.json`, `root-classification.md`): gozdzikowcach `COMPOUND_GAP_NOT_SEGMENTED` (recess mouth + return + garage door read as one 7.76 m gap); murajach `EXTENT_EXCLUDES_ATTACHED_BODY` (its "6.45 m mouth" is an interior line) |
+| COMPOUND SPANS | a wide gap on an envelope side is read from the boundary's wall-solid layer (`compound-facade.ts` 1.0.0); every gap read is recorded, cut or left whole; none on unscaled plans |
+| SEPARATORS | WALL_RETURN (≥ max(0.9 m, 3 walls) of wall inward) or FACADE_PIER (a stretch of a wall body); posts, short marks and thin lines never; more than 8 candidates → left whole |
+| ATOMIC INTERVALS | each decided on its own infill (not dashed, not a pattern, stopping at ink jambs), callout (never across a separator; closes only walled deeper than a recess with nothing drawn across), signature and pocket (own width; siblings sharing a space weighed jointly; order-invariant) |
+| RECESS SEMANTICS | mouth open, back wall (≤ 4.5 m; between bare returns only glazing where both returns end) added as a grid line and shut; cells RECESS, never BUILT |
+| GARAGE RELATION | closed by its own drawn door or its own callout; a blank garage is not fabricated; the wall-joint extent keeps an attached garage (one hop, a detached one never) |
+| OPEN-SIDE SAFETY | carport, loggia, porch on posts, covered terrace, passage, corner recess, missing return: open in five orientations |
+| MURAJACH | not this root. The extent fix puts its garage in the plan; the row still fails, now on METRIC (2.451 cm/px registration, 5 labels on 79 dimension lines), same refusal code |
+| GOZDZIKOWCACH | merged OPEN_SIDE gone: return separator, recess (1.22 m back wall, line added), garage built; first bad moves to MODEL_EMISSION (chimney 0 m, no main roof), independent |
+| JARZABEM | different topology (single mouth, step-line infill), unchanged, not tuned |
+| CYKLAMENACH CONTROL | unchanged |
+| 005L STOREY REGRESSION | none (every storey row's model identical); two-storey end-to-end fixture with a compound ground front |
+| DRAWN GAP RULE OFF | yes (gate + M8) |
+| NON-CIRCULARITY | gates (imports, vocabulary, house names, frozen numbers) and the executed decoy; M4, M10 killed |
+| ORDER INVARIANCE | shuffles + five orientations green; span rows replayed twice byte-identical |
+| PERFORMANCE | median read 0.97×, layout 1.01× (interleaved, 42 rows); reader ≤ 6.9 ms per row |
+| COUNCIL | 5 reviewers + verification (9 P0/P1 confirmed and fixed) and a second round on the fixes (1 P0 + 3 P1 confirmed and fixed); `post-review/` |
+| PRE_HOLDOUT_10_SHA | `d7873977aac89d6283e41f94ec1942b570adceaf` (CI 38297543325 green) |
+| BLIND ROUND 10 PROJECT 1 | `dom-w-glogownikach` (garage stratum): ALGORITHMIC_FAIL; first bad METRIC (541 → 501, 870 → 810 misreads state a second scale; plan resolution refuses) |
+| BLIND ROUND 10 PROJECT 2 | `dom-w-akebiach` (unstratified): ALGORITHMIC_FAIL; first bad EXTENT (envelope short of a 0.96 m rear and a 4.30 m garage projection; completions refused; core floods through the 6.86 m projection mouth) |
+| TARGET_CLASS_EXERCISED | NO — neither house has a recessed entrance beside another mouth on one facade line |
+| OWNER APK | report §T |
+| INHERITED ARM64 PARITY | PENDING (005H physical-phone gate; not inferred from the emulator) |
+
+**Stage: PARTIAL_BUILDPLAN_ANALYZER_005N_BLIND10_METRIC_EXTENT_FAIL.** Every §45 condition holds except a fresh blind
+round without ALGORITHMIC_FAIL; both failures are upstream of the compound reading, which neither house exercised.
+
 ## Where the visual referee v2 stands (STAGE BUILDPLAN-ANALYZER-005M)
 
 Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005M_VISUAL_REFEREE_V2.md`. Evidence: `stage-reports/artifacts/analyzer-005m-vr2/`.
@@ -1542,6 +1576,17 @@ All of it is in the metric evidence 1.7.0 / 1.8.0 and its hash, and in the Evide
 **CI:** run 169 (`37464801271`) on `869cb01` (PRE_HOLDOUT_8_SHA) green. **Final CI:** run 172 (`workflow_dispatch`, id 37474671669) on `a7f009a` — green at the first attempt (41 jobs, 40 green, `preview-latest` skipped by design). **OWNER APK:** `owner-preview-latest/BuildPlan-owner-preview.apk`, versionCode 1172, 39.4 MB (+11 KB: the topology code), sha256 `70b4ff90aa4f5170a334377fc17e1a1a3ea84b9d6c45cd8e92a73b685f4df0b5`, arm64-v8a only, the same five `.so`, preview signer `6e48fac4…`, model `9ef676d6…` and WASM `3398c10d…` unchanged, no research asset; verified from the downloaded file (report §T).
 
 ## Recommended technical next step
+
+**For the analyzer line (after 005N): return to the coordinator.** `stage-reports/artifacts/analyzer-005n/recommendation.md`.
+
+**NEXT: OTHER_MEASURED_RESIDUAL — the plan's scale from its printed dimensions (METRIC).**
+- Blind round 10 #1 (`dom-w-glogownikach`): two label misreads (541 → 501, 870 → 810) state a second scale against
+  the corroborated one, and plan resolution refuses. Blind round 9 #1 (`dom-w-murajach`), with its garage now in the
+  plan: 5 labels read on 79 dimension lines, no independent scale.
+- Not FIX_PLAN_RESOLUTION (the resolver refuses correctly between two stated scales), not REC-17, not PDF.js (raster
+  plans with legible labels), not a wall model (walls are read). EXTENT (blind 10 #2) is the second residual.
+
+005O is not self-started. The 005L recommendation (FIX_RECESSED_ENTRANCE_BODY_RELATION) is done by 005N.
 
 **For the analyzer line (after 005L): return to the coordinator.** `stage-reports/artifacts/analyzer-005l/recommendation.md`.
 
