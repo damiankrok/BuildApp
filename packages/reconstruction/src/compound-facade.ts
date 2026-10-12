@@ -117,6 +117,7 @@ export type CompoundFacadeSpan = {
   /** Which way the building lies from the line: +1 toward larger pixel coordinates, −1 toward smaller. */
   inward: 1 | -1
   separators: FacadeSeparator[]
+  /** Empty when no separator was accepted: the gap was read and left whole, and is decided as the incumbent decides it. */
   intervals: FacadeInterval[]
   why: string
 }
@@ -256,7 +257,8 @@ function backWallOf(ctx: CompoundContext, parent: ParentGap, from: number, to: n
   // along-wall ink inside the mouth, clear of the returns' own thickness at its ends
   const inside = (p: LinePiece): boolean => p.along && Math.min(p.to, to - t) - Math.max(p.from, from + t) >= t
   let reads = 0
-  for (let d = Math.round(t * 1.5); d <= deepest && reads < COMPOUND_BOUNDS.backWallReads; d += step) {
+  // no shallower than a return must run to make a recess: nearer the facade lies its own wall, a sill or a step
+  for (let d = Math.round(Math.max(RETURN_MIN_M / ctx.mppAcross(parent.axis), 3 * t)); d <= deepest && reads < COMPOUND_BOUNDS.backWallReads; d += step) {
     reads += 1
     const at = parent.linePx + parent.inward * d
     const line = readWallLine(ctx.mask, ctx.solid, parent.axis, at, from - t, to + t, lineOptions(ctx, mpp))
@@ -267,8 +269,13 @@ function backWallOf(ctx: CompoundContext, parent: ParentGap, from: number, to: n
     for (let i = 0; i + 1 < pieces.length; i += 1) {
       const [l, r] = [pieces[i], pieces[i + 1]]
       if (r.from - l.to > maxHolePx) continue
-      const drawn = gapSignature(gapStrokes(ctx.mask, parent.axis, (l.axisPx + r.axisPx) / 2, l.to, r.from, t, { left: l, right: r }), t).signature
-      if (drawn === 'GLAZING' || drawn === 'LEAF_AXIS' || drawn === 'LEAF_FACE' || inside(l) || inside(r)) covered.push([l.to, r.from])
+      const mid = (l.axisPx + r.axisPx) / 2
+      const drawn = gapSignature(gapStrokes(ctx.mask, parent.axis, mid, l.to, r.from, t, { left: l, right: r }), t).signature
+      // a hole is a hole in a WALL beside a stretch of that wall. Between two returns' cross-sections only glazing is a
+      // wall — one line there is a step, a landing or a threshold, and lines repeated across it a flight of steps or a
+      // floor pattern, never the set-back wall (council A1/B2)
+      const walled = l.along || r.along ? drawn === 'GLAZING' || drawn === 'LEAF_AXIS' || drawn === 'LEAF_FACE' || inside(l) || inside(r) : drawn === 'GLAZING' && glazingAlone(ctx, parent, d, l.to, r.from)
+      if (walled) covered.push([l.to, r.from])
     }
     const cover = coverOf(covered, from, to) / Math.max(1, to - from)
     if (cover >= BACK_WALL_COVER) {
@@ -280,6 +287,31 @@ function backWallOf(ctx: CompoundContext, parent: ParentGap, from: number, to: n
     }
   }
   return null
+}
+
+/**
+ * Whether glazing read `depth` in from the facade stands alone across the mouth [a, b]: the floor between it and the
+ * facade's wall is clear of lines drawn across, and so is a wall's breadth behind it. A loggia's glazed back is that;
+ * treads, paving or a hatch put line after line on one side of their last, whose edge would otherwise read as glazing
+ * (council A1/B2/B3).
+ */
+function glazingAlone(ctx: CompoundContext, parent: ParentGap, depth: number, a: number, b: number): boolean {
+  const t = ctx.wallPx
+  const g0 = Math.round(a)
+  const g1 = Math.round(b)
+  const drawnAcross = (k: number): boolean => {
+    const c = Math.round(parent.linePx + parent.inward * k)
+    let inked = 0
+    for (let s = g0; s < g1; s += 1) {
+      const x = parent.axis === 'Y' ? s : c
+      const y = parent.axis === 'Y' ? c : s
+      if (x >= 0 && y >= 0 && x < ctx.mask.width && y < ctx.mask.height) inked += ctx.mask.data[y * ctx.mask.width + x]
+    }
+    return inked >= ctx.minInfill * Math.max(1, g1 - g0)
+  }
+  for (let k = Math.round(t); k <= Math.round(depth - t); k += 1) if (drawnAcross(k)) return false
+  for (let k = Math.round(depth + t / 2) + 2; k <= Math.round(depth + t * 1.5); k += 1) if (drawnAcross(k)) return false
+  return true
 }
 
 function coverOf(intervals: ReadonlyArray<readonly [number, number]>, a: number, b: number): number {
@@ -322,10 +354,10 @@ function calloutsOf(ctx: CompoundContext, parent: ParentGap, from: number, to: n
 }
 
 /**
- * Read one wide gap's facade-local topology. Returns null when the drawing puts no separator inside it: the gap is
- * then exactly what the incumbent reader says it is.
+ * Read one wide gap's facade-local topology. Where the drawing puts no separator inside it, the span comes back whole —
+ * no intervals, with what was found and refused — and the gap is then exactly what the incumbent reader says it is.
  */
-export function compoundSpanOf(ctx: CompoundContext, parent: ParentGap): CompoundFacadeSpan | null {
+export function compoundSpanOf(ctx: CompoundContext, parent: ParentGap): CompoundFacadeSpan {
   const t = ctx.wallPx
   const mpp = ctx.mppAlong(parent.axis)
   const mppIn = ctx.mppAcross(parent.axis)
@@ -339,14 +371,23 @@ export function compoundSpanOf(ctx: CompoundContext, parent: ParentGap): Compoun
   const rightJamb = facade.pieces.find((p) => p.to >= parent.toPx - 1 && p.from < parent.toPx - 1)
   const from = leftJamb ? Math.max(parent.fromPx, leftJamb.to) : parent.fromPx
   const to = rightJamb ? Math.min(parent.toPx, rightJamb.from) : parent.toPx
-  if (to - from < 2 * Math.max(MIN_INTERVAL_M / mpp, t)) return null
+  const spanId = `compound-${parent.axis}-${Math.round(parent.linePx)}-${Math.round(parent.fromPx)}-${Math.round(parent.toPx)}`
+  const spanWidthM = round6((parent.toPx - parent.fromPx) * mpp)
+  // a gap read and left whole: on the record with what was found in it, and decided exactly as before (council C2)
+  const whole = (separators: FacadeSeparator[], why: string): CompoundFacadeSpan => ({ id: spanId, axis: parent.axis, linePx: round6(parent.linePx), fromPx: round6(parent.fromPx), toPx: round6(parent.toPx), inkFromPx: round6(from), inkToPx: round6(to), widthM: spanWidthM, inward: parent.inward, separators, intervals: [], why })
+  // the facade wall's axis, from its own stretches along the line around the gap
+  const alongPieces = facade.pieces.filter((p) => p.along)
+  const facadeAxis = alongPieces.length > 0 ? alongPieces.reduce((a, p) => a + p.axisPx * (p.to - p.from), 0) / alongPieces.reduce((a, p) => a + (p.to - p.from), 0) : parent.linePx
+  if (to - from < 2 * Math.max(MIN_INTERVAL_M / mpp, t)) return whole([], `the jambs' ink leaves ${round6((to - from) * mpp).toFixed(2)} m between them, no room for two mouths: one gap`)
   // wall-thick ink strictly inside the gap
   const inside = facade.pieces.filter((p) => p.from > from + 1 && p.to < to - 1).sort((p, q) => p.from - q.from || p.to - q.to)
-  if (inside.length === 0) return null
-  const separators = inside.slice(0, COMPOUND_BOUNDS.separators).map((p) => separatorOf(ctx, { ...parent, fromPx: from, toPx: to }, p))
+  if (inside.length === 0) return whole([], 'no wall-thick ink inside the gap: one gap')
+  // more candidates than the bound: the gap is not read at all, never read in part — which part would follow the order
+  // the line is drawn in (council D3)
+  if (inside.length > COMPOUND_BOUNDS.separators) return whole([], `${inside.length} pieces of wall-thick ink inside the gap, more than ${COMPOUND_BOUNDS.separators} are read: one gap, as the incumbent reads it`)
+  const separators = inside.map((p) => separatorOf(ctx, { ...parent, fromPx: from, toPx: to }, p))
   const accepted = separators.filter((s) => s.accepted)
-  if (accepted.length === 0) return null
-  const spanId = `compound-${parent.axis}-${Math.round(parent.linePx)}-${Math.round(parent.fromPx)}-${Math.round(parent.toPx)}`
+  if (accepted.length === 0) return whole(separators, `${separators.length} piece${separators.length === 1 ? '' : 's'} of wall-thick ink inside the gap, none a return or a pier: one gap`)
   // the intervals between the span's jambs and its separators
   const cuts: Array<{ from: number; to: number; bounds: FacadeInterval['bounds'] }> = []
   let start = from
@@ -359,6 +400,13 @@ export function compoundSpanOf(ctx: CompoundContext, parent: ParentGap): Compoun
   cuts.push({ from: start, to, bounds: [startBound, 'JAMB'] })
   // the ink pieces standing at each cut's ends, for reading what is drawn across it
   const pieceAt = (px: number, side: 'LEFT' | 'RIGHT'): LinePiece | undefined => facade.pieces.find((p) => (side === 'LEFT' ? Math.abs(p.to - px) <= 1 : Math.abs(p.from - px) <= 1))
+  // whether the gap beyond a jamb piece, on its far side, is a window of its own, glazed between its jambs
+  const neighbourGlazed = (jamb: LinePiece, side: 'LEFT' | 'RIGHT'): boolean => {
+    const next = side === 'LEFT' ? facade.pieces.filter((p) => p.to <= jamb.from).sort((p, q) => q.to - p.to)[0] : facade.pieces.filter((p) => p.from >= jamb.to).sort((p, q) => p.from - q.from)[0]
+    if (!next) return false
+    const [l, r] = side === 'LEFT' ? [next, jamb] : [jamb, next]
+    return gapSignature(gapStrokes(ctx.mask, parent.axis, facadeAxis, l.to, r.from, t, { left: l, right: r }), t).signature === 'GLAZING'
+  }
   // the returns at each cut's ends: a separator's own, or the jamb's wall turning inward at the gap's end
   const jambReturn = (at: number): number => inwardOf(parent, returnRun(ctx, parent, at))
   const sepReturn = (px: number): number => {
@@ -382,15 +430,20 @@ export function compoundSpanOf(ctx: CompoundContext, parent: ParentGap): Compoun
     // what is drawn across the mouth, read exactly as the boundary reads a gap between two jambs
     const lp = pieceAt(c.from, 'LEFT')
     const rp = pieceAt(c.to, 'RIGHT')
-    const axisPx = lp && rp ? (lp.axisPx + rp.axisPx) / 2 : (lp ?? rp)?.axisPx ?? parent.linePx
+    // on the facade wall's own axis: a separator's ink is a return's cross-section, whose centre lies wherever the read
+    // was, so only stretches of the facade wall along the line say where its axis runs (council A6)
+    const alongEnds = [lp, rp].filter((p): p is LinePiece => p !== undefined && p.along)
+    const axisPx = alongEnds.length > 0 ? alongEnds.reduce((a, p) => a + p.axisPx, 0) / alongEnds.length : facadeAxis
     const read = gapSignature(gapStrokes(ctx.mask, parent.axis, axisPx, c.from, c.to, t, { left: lp, right: rp }), t)
     const signature = read.signature === 'GLAZING' && patternAcross(ctx.mask, parent.axis, axisPx, c.from, c.to, t) ? 'DASHED' : read.signature
     // both ends wall-thick ink on the facade line: a separator, or a jamb the ink reader confirms (a band can be a beam)
     const jambInk: [boolean, boolean] = [lp !== undefined, rp !== undefined]
     // how far the jambs' own ink reaches on either side of the mouth: past it, a line carrying on is line work
     // past a separator lies the next mouth, decided on its own: a line carrying on there is that mouth's
-    const jambLo = c.bounds[0] === 'SEPARATOR' ? null : lp ? (lp.from <= readFrom + 1 ? null : lp.from) : c.from - t
-    const jambHi = c.bounds[1] === 'SEPARATOR' ? null : rp ? (rp.to >= readTo - 1 ? null : rp.to) : c.to + t
+    // and glazing past a short pier is the next window's: glazing carrying on there is that window's own (council D2)
+    const glazed = signature === 'GLAZING'
+    const jambLo = c.bounds[0] === 'SEPARATOR' ? null : lp ? (lp.from <= readFrom + 1 || (glazed && neighbourGlazed(lp, 'LEFT')) ? null : lp.from) : c.from - t
+    const jambHi = c.bounds[1] === 'SEPARATOR' ? null : rp ? (rp.to >= readTo - 1 || (glazed && neighbourGlazed(rp, 'RIGHT')) ? null : rp.to) : c.to + t
     const infillRunsPast = infill >= ctx.minInfill && runsPast(ctx, parent, c.from, c.to, jambLo, jambHi)
     const common = { id, fromPx: round6(c.from), toPx: round6(c.to), widthM, bounds: c.bounds, evidence, signature, infillRunsPast, jambInk }
     if (widthM > ctx.maxWideOpeningM) {
@@ -399,14 +452,17 @@ export function compoundSpanOf(ctx: CompoundContext, parent: ParentGap): Compoun
     if (recess) {
       // A recess is shut only by what shuts a wall: glazing across its mouth, or a door leaf on its axis. One line at a
       // face is a step, a slab edge or a sill as often as a door, and a recess with its back wall drawn is open.
-      const shut = signature === 'GLAZING' || (signature === 'LEAF_AXIS' && widthM <= ctx.maxOpeningM)
+      const shut = !infillRunsPast && (signature === 'GLAZING' || (signature === 'LEAF_AXIS' && widthM <= ctx.maxOpeningM))
       if (shut) return { ...common, recess, role: 'OPENING_IN_WALL', why: `a ${widthM.toFixed(2)} m mouth between two returns, ${signature === 'GLAZING' ? 'glazed' : 'with a door leaf on its axis'}: an enclosed porch, not a recess` }
       return { ...common, recess, role: 'RECESS_MOUTH', why: `a ${widthM.toFixed(2)} m mouth between two returns (${recess.returns[0].toFixed(2)} m, ${recess.returns[1].toFixed(2)} m) with a set-back wall ${recess.depthM.toFixed(2)} m behind it covering ${Math.round(recess.cover * 100)}% of it, ${signature.toLowerCase()} across: a recess, open at its mouth, closed at its back` }
     }
-    if (infill >= ctx.minInfill && !infillRunsPast && jambInk[0] && jambInk[1]) {
+    if (infill >= ctx.minInfill && !infillRunsPast && signature !== 'DASHED' && jambInk[0] && jambInk[1]) {
       return { ...common, role: 'OPENING_IN_WALL', why: `a ${widthM.toFixed(2)} m mouth with ${Math.round(infill * 100)}% of it spanned by one drawn line inside the wall's band, stopping at its jambs: an opening in a wall that carries on` }
     }
-    if (callout && jambInk[0] && jambInk[1] && c.bounds.includes('SEPARATOR') && left >= Math.max(RETURN_MIN_M / mppIn, 3 * t) && right >= Math.max(RETURN_MIN_M / mppIn, 3 * t)) {
+    // walled deeper than any recess on both sides: no set-back wall was missed, the walls run on past where one could be
+    // (council B1/C1: a loggia or a recess whose back wall was not read is never shut by a callout)
+    const deeper = RECESS_MAX_DEPTH_M / mppIn
+    if (callout && jambInk[0] && jambInk[1] && c.bounds.includes('SEPARATOR') && left >= deeper && right >= deeper) {
       return { ...common, role: 'OPENING_IN_WALL', why: `a ${widthM.toFixed(2)} m mouth walled on both sides, deeper than a recess, with a callout of ${callout.widthCm} cm printed at it and nowhere else: an opening in its own wall` }
     }
     if (infill >= ctx.minInfill && !(jambInk[0] && jambInk[1])) {
@@ -422,10 +478,10 @@ export function compoundSpanOf(ctx: CompoundContext, parent: ParentGap): Compoun
     toPx: round6(parent.toPx),
     inkFromPx: round6(from),
     inkToPx: round6(to),
-    widthM: round6((parent.toPx - parent.fromPx) * mpp),
+    widthM: spanWidthM,
     inward: parent.inward,
     separators,
     intervals,
-    why: `${accepted.length} separator${accepted.length === 1 ? '' : 's'} (${accepted.map((s) => s.kind.toLowerCase().replace('_', ' ')).join(', ')}) cut one ${round6((parent.toPx - parent.fromPx) * mpp).toFixed(2)} m gap into ${intervals.length} mouths, each decided on its own evidence`,
+    why: `${accepted.length} separator${accepted.length === 1 ? '' : 's'} (${accepted.map((s) => s.kind.toLowerCase().replace('_', ' ')).join(', ')}) cut one ${spanWidthM.toFixed(2)} m gap into ${intervals.length} mouths, each decided on its own evidence`,
   }
 }

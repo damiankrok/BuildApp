@@ -14,6 +14,7 @@ import { describe, expect, it } from 'vitest'
 import { reconstructV2 } from '../src/index.js'
 import { PlanDrawing, render } from './transforms.js'
 import { WALL, chain, graphOf, metricsOf, planFrame, registration } from './plan.js'
+import { ringsByLevel } from './storey-houses.js'
 
 const FRAME = 'frame-plan'
 const W = 460
@@ -116,5 +117,35 @@ describe('005N §23 — compound facades through the production solver', () => {
     expect(JSON.parse(records[0]).flat().filter(Boolean)).not.toHaveLength(0)
     expect(records[1]).toBe(records[0])
     expect(records[2]).toBe(records[0])
+  })
+})
+
+describe('005N council E2 — a compound front on the ground storey of a two-storey house', () => {
+  it('the ground storey reads its recess and garage, the upper storey (set back 3 m over them) keeps its own ring: two levels, not a copy', () => {
+    const g = planFrame('frame-ground', 'GROUND', { width: W, height: H })
+    const u = planFrame('frame-upper', 'UPPER', { width: W, height: H })
+    const at = <T extends { frameId: string }>(x: T, id: string): T => ({ ...x, frameId: id })
+    const chainsOf = (id: string, depth: number) => [at(chain(`cx-${id}`, 'HORIZONTAL', [40, 360], { baselinePx: 20 }), id), at(chain(`cy-${id}`, 'VERTICAL', [40, depth], { baselinePx: 20 }), id)]
+    const upper = new PlanDrawing(W, H).ring(40, 40, 359, 219)
+    const r = reconstructV2({
+      label: 'fixture',
+      slug: 'fixture',
+      sourcePackageId: 'src-test',
+      sourcePackageHash: 'd'.repeat(64),
+      graph: graphOf([g, u]),
+      metrics: metricsOf([...chainsOf(g.id, 280), ...chainsOf(u.id, 220)], [registration(g.id), registration(u.id)]),
+      raster: (f) => render(f.id === g.id ? entranceAndGarage(true) : upper),
+    })
+    const groundPlan = r.planDiagnostics?.plans.find((p) => p.frameId === g.id)
+    expect(groundPlan?.compoundFacades?.filter((s) => s.intervals.length > 0).map((s) => s.intervals.map((i) => i.role))).toEqual([['RECESS_MOUTH', 'OPENING_IN_WALL']])
+    expect(r.planDiagnostics?.plans.find((p) => p.frameId === u.id)?.compoundFacades ?? []).toEqual([])
+    const rings = ringsByLevel(r.model)
+    expect(r.model.levels).toHaveLength(2)
+    const [g0] = rings.get(0) ?? []
+    const [u0] = rings.get(1) ?? []
+    expect(g0[3] - g0[1]).toBeCloseTo(12, 0)
+    // the upper ring is the upper plan's own (9 m deep), standing on the house's rear, not the ground ring copied
+    expect(u0[3] - u0[1]).toBeCloseTo(9, 0)
+    expect(u0[2] - u0[0]).toBeCloseTo(g0[2] - g0[0], 1)
   })
 })

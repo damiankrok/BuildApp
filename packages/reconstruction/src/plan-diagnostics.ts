@@ -63,7 +63,7 @@ export function planDiagnosticsOf(draft: StructuralLayoutDraft, graph: SourceObs
       regions: d.regions.filter((r) => r.classification !== 'OUTSIDE').map((r) => ({ id: r.id, cls: r.classification as 'BUILT' | 'RECESS', rect: rect(r.rect) })),
       // 005K: a wide opening's geometric identity in its frame (its line and ends), beside its decision
       wideOpenings: d.wideOpenings.map((w) => ({ id: `wide-${w.axis}-${Math.round(w.linePx)}-${Math.round(w.fromPx)}-${Math.round(w.toPx)}`, kind: w.kind, axis: w.axis, linePx: round6(w.linePx), fromPx: round6(w.fromPx), toPx: round6(w.toPx), widthM: w.widthM, decision: w.decision, score: w.score, why: w.why, ...(w.compound ? { compound: w.compound } : {}) })),
-      // 005N: recorded only where a facade gap holds a separator, so every other plan digests as it did
+      // 005N: every facade gap the compound reader read, cut or left whole (council C2)
       ...compoundFacadesOf(d),
       bays: d.bays.map((b) => ({ side: b.side, rect: rect(b.rect), mouth: b.mouth.decision })),
       hypotheses: d.hypotheses.map((h) => ({ id: h.id, builtCells: h.builtCells, closedOpenings: h.closedOpenings, score: h.score, chosen: d.chosenHypothesis === h.id, why: h.why })),

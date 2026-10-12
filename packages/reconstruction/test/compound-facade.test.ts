@@ -56,7 +56,9 @@ function entranceAndGarage(opts: { garage?: 'DOOR' | 'BLANK'; garageRight?: numb
   return p
 }
 
-const spansOf = (d: PlanDecomposition): CompoundFacadeSpan[] => d.compoundFacades ?? []
+/** The spans the drawing's separators cut; a gap read and left whole is on the record too (`wholeOf`), with no intervals. */
+const spansOf = (d: PlanDecomposition): CompoundFacadeSpan[] => (d.compoundFacades ?? []).filter((s) => s.intervals.length > 0)
+const wholeOf = (d: PlanDecomposition): CompoundFacadeSpan[] => (d.compoundFacades ?? []).filter((s) => s.intervals.length === 0)
 const rolesOf = (d: PlanDecomposition): string[] => spansOf(d).flatMap((s) => s.intervals.map((i) => i.role)).sort()
 const acceptedOf = (d: PlanDecomposition): string[] => spansOf(d).flatMap((s) => s.separators.filter((x) => x.accepted).map((x) => x.kind)).sort()
 
@@ -143,6 +145,8 @@ describe('005N §16 — each interval is weighed against its own pocket', () => 
       expect(mouth?.role, t).toBe('OPEN_SIDE')
       const decided = r.d.wideOpenings.find((w) => w.compound?.intervalId === mouth?.id)
       expect(decided?.decision, `${t}: shut by what lies behind it`).toBe('OPENING_IN_WALL')
+      console.log('A2S', t, JSON.stringify((r.d.compoundFacades ?? []).map((s) => [s.fromPx, s.toPx, s.widthM, s.why, s.separators.map((x) => [x.kind, x.why.slice(0, 60)])])))
+      console.log('A2X', t, JSON.stringify(r.d.wideOpenings.filter((w) => w.compound).map((w) => [w.widthM, w.decision, w.evidence.pocketM2 ?? null, w.compound?.role])))
       expect(r.builtAt(222, 160), `${t}: the hall`).toBe(true)
       expect(r.builtAt(300, 150), `${t}: the living room`).toBe(true)
       expect(r.classAt(150, 255), t).toBe('RECESS')
@@ -200,6 +204,10 @@ describe('005N §21 — separators: structural ink only', () => {
       const r = runScene(scene(p), t)
       expect(r.d.wideOpenings.some((w) => w.widthM > 4.5), `${t}: the 5 m gap is weighed`).toBe(true)
       expect(spansOf(r.d), t).toHaveLength(0)
+      // council C2: the gap was read, and what was found in it and refused is on the record
+      const whole = wholeOf(r.d)
+      expect(whole.flatMap((x) => x.separators.map((y) => [y.accepted, y.kind])), t).toEqual([[false, 'NOT_A_SEPARATOR']])
+      expect(whole[0].why, t).toMatch(/none a return or a pier/)
     }
   })
 
@@ -491,5 +499,140 @@ describe('005N §19 — an adopted outline keeps the box reading\'s compound spa
     expect(spans.map((s) => s.reading)).toEqual(['BOX'])
     expect(spans[0].intervals.map((i) => [i.role, i.decision])).toEqual([['RECESS_MOUTH', 'OPEN_SIDE'], ['OPENING_IN_WALL', 'OPENING_IN_WALL']])
     expect(spans[0].intervals.every((i) => i.behind.length > 0)).toBe(true)
+  })
+})
+
+describe('005N council — what a back wall, a callout, a pattern and a sibling may not do', () => {
+  /** Fixture 15's passage through the house beside a garage. */
+  function passage(): PlanDrawing {
+    const p = house()
+    p.clear(120, FRONT, 263, 279)
+    p.clear(120, 40, 191, 51)
+    returnAt(p, 108, 40)
+    returnAt(p, 192, 40)
+    wallH(p, 204, 275, 150)
+    returnAt(p, 264, 150)
+    vehicleDoor(p, 204, 263)
+    return p
+  }
+
+  it('A1/B2. a step line, or a flight of them, in front of the set-back wall is not the set-back wall: the recess keeps its depth, nothing is built in it', () => {
+    // the entrance recess 4 m deep (its door in a back wall at rows 200..211); steps drawn across its floor
+    const deep = (): PlanDrawing => {
+      const p = house()
+      p.clear(120, FRONT, 251, 279)
+      returnAt(p, 108, 150)
+      returnAt(p, 180, 150)
+      wallH(p, 108, 191, 200)
+      doorH(p, 135, 155, 200)
+      wallH(p, 108, 263, 150)
+      returnAt(p, 252, 150)
+      doorH(p, 210, 225, 150)
+      vehicleDoor(p, 192, 251)
+      return p
+    }
+    const one = deep().line(120, 240, 179, 240)
+    const flight = deep().line(120, 226, 179, 226).line(120, 232, 179, 232).line(120, 238, 179, 238).line(120, 244, 179, 244)
+    for (const [name, p] of [['one step', one], ['a flight', flight]] as const) {
+      for (const t of TRANSFORMS) {
+        const r = runScene(scene(p), t)
+        const recess = spansOf(r.d)[0].intervals.find((i) => i.role === 'RECESS_MOUTH')
+        expect(recess?.recess?.depthM, `${name} ${t}`).toBeGreaterThan(3)
+        expect(r.builtAt(150, 222), `${name} ${t}: inside the recess, behind the steps`).toBe(false)
+        expect(r.builtAt(150, 180), `${name} ${t}: the hall`).toBe(true)
+      }
+    }
+  })
+
+  it('B1/C1. a callout at a shallow bay whose back wall was not read does not shut it: only walls running deeper than a recess let a callout close a mouth', () => {
+    // the left return stops 2.55 m in and nothing closes the bay behind it (no set-back wall to read); a callout states
+    // the mouth. However the pocket test then weighs it, the callout alone does not make it an opening in a wall.
+    const p = house()
+    p.clear(120, FRONT, 251, 279)
+    returnAt(p, 108, 228)
+    returnAt(p, 180, 150)
+    wallH(p, 180, 263, 150)
+    returnAt(p, 252, 150)
+    vehicleDoor(p, 192, 251)
+    const callouts: PlanCallout[] = [{ id: 'c-bay', at: { x: 150, y: 292 }, widthsCm: [{ value: 300, confidence: 0.9 }] }]
+    for (const t of TRANSFORMS) {
+      const r = runScene(scene(p, callouts), t)
+      const bay = spansOf(r.d)[0].intervals.find((i) => i.evidence.callout?.id === 'c-bay')
+      expect(bay, t).toBeDefined()
+      expect(bay?.role, t).not.toBe('OPENING_IN_WALL')
+    }
+  })
+
+  it('B3. a paving pattern across a blank garage mouth is no door and no set-back wall: the interval is not shut by it', () => {
+    // Lines repeated across the mouth, up to the facade: their sum is "infill", their last edge looks like glazing. The
+    // compound reading neither shuts the interval on them nor reads a phantom back wall at their edge. (The incumbent's
+    // per-edge rule still takes a line inside the wall's band as drawn across the cell edge and builds the bay; that is
+    // the starting code's behaviour too, unchanged here — recorded as a residual in the stage report.)
+    const p = entranceAndGarage({ garage: 'BLANK' })
+    for (let y = 262; y <= 300; y += 4) p.line(192, y, 251, y)
+    for (const t of TRANSFORMS) {
+      const r = runScene(scene(p), t)
+      const garage = spansOf(r.d)[0].intervals.find((i) => i.role !== 'RECESS_MOUTH' || (i.recess?.depthM ?? 0) < 1.5)
+      expect(garage?.role, t).toBe('OPEN_SIDE')
+      expect(garage?.recess, t).toBeUndefined()
+      expect(r.classAt(150, 255), t).toBe('RECESS')
+    }
+  })
+
+  it('A2. two undrawn mouths side by side: the hall behind one is shut by its own pocket, the shallow bay beside it is not shut by the hall\'s', () => {
+    // left: a 3 m mouth into a hall 9.75 m deep (29 m², more than a pocket); right, past a return: a walled bay 5.4 m
+    // deep with nothing across its mouth (16 m², a pocket). In every orientation the bay stays open.
+    const p = house()
+    p.clear(120, FRONT, 251, 279)
+    returnAt(p, 108, 60)
+    returnAt(p, 180, 60)
+    wallH(p, 108, 191, 60)
+    doorH(p, 135, 155, 60)
+    wallH(p, 180, 263, 160)
+    returnAt(p, 252, 160)
+    for (const t of TRANSFORMS) {
+      const r = runScene(scene(p), t)
+      expect(r.builtAt(150, 150), `${t}: the hall`).toBe(true)
+      expect(r.builtAt(222, 220), `${t}: the bay`).toBe(false)
+    }
+  })
+})
+
+describe('005N council D1 — mouths side by side into one space are weighed together', () => {
+  /**
+   * Two 4 m mouths with nothing drawn across them, either side of a pier (1 m on the facade, tied to a 1.6 m stub: one
+   * wall body, no return), and a dimension tick at the pier, so the grid gives each mouth its own edge. Each mouth alone
+   * lets the outside into nothing the other does not; together they open onto whatever lies behind both.
+   */
+  const pierFront = (): PlanDrawing => {
+    const p = house()
+    p.clear(100, FRONT, 279, 279)
+    p.wall(180, FRONT, 199, 279)
+    p.wall(184, 248, 195, 279)
+    return p
+  }
+  const atPier = (p: PlanDrawing): Scene => ({ p, xs: [40, 190, 360], ys: [40, 280] })
+
+  it('an open-plan house behind them is the interior: both mouths are shut, the house stands', () => {
+    for (const t of TRANSFORMS) {
+      const r = runScene(atPier(pierFront()), t)
+      expect(acceptedOf(r.d), t).toEqual(['FACADE_PIER'])
+      expect(r.d.wideOpenings.filter((w) => w.compound).map((w) => w.decision), t).toEqual(['OPENING_IN_WALL', 'OPENING_IN_WALL'])
+      expect(r.builtAt(140, 200), `${t}: behind the left mouth`).toBe(true)
+      expect(r.builtAt(300, 100), `${t}: the house`).toBe(true)
+    }
+  })
+
+  it('a shared space behind them no bigger than their joint 8 m allows a pocket stays open', () => {
+    const p = pierFront()
+    returnAt(p, 88, 160)
+    returnAt(p, 280, 160)
+    wallH(p, 88, 291, 160) // 9 m × 5.4 m behind the two mouths: 49 m², under the 160 m² their joint width allows
+    for (const t of TRANSFORMS) {
+      const r = runScene(atPier(p), t)
+      expect(r.d.wideOpenings.filter((w) => w.compound).map((w) => w.decision), t).toEqual(['OPEN_SIDE', 'OPEN_SIDE'])
+      expect(r.builtAt(140, 220), `${t}: the shared space`).toBe(false)
+      expect(r.builtAt(300, 100), `${t}: the house`).toBe(true)
+    }
   })
 })

@@ -282,8 +282,9 @@ export type PlanDecomposition = {
   /** 005C: what the opening-aware boundary found, whether or not it was accepted. */
   boundary?: BoundaryRecord
   /**
-   * 005N: the wide gaps on a facade that the drawing's own separators cut into atomic intervals: the parent span, its
-   * separators accepted and refused, each interval's evidence and role. Absent when no facade gap holds a separator.
+   * 005N: the wide gaps on a facade the compound reader read: the parent span, its separators accepted and refused, and
+   * each atomic interval's evidence and role — no intervals where no separator was accepted and the gap stayed whole.
+   * Absent when no wide gap lies on a facade.
    */
   compoundFacades?: CompoundFacadeSpan[]
   /**
@@ -1491,8 +1492,8 @@ function collinearWideGaps(ctx: WideOpeningContext, compoundOf?: (parent: Omit<P
         const lo = Math.min(left.lo, right.lo) - 1
         const hi = Math.max(left.hi, right.hi) + 1
         const span = compoundOf && spans.length < COMPOUND_BOUNDS.spans ? compoundOf({ axis, linePx: line.px, fromPx: left.to, toPx: right.from, bandLo: lo, bandHi: hi }) : null
-        if (span) {
-          spans.push(span)
+        if (span) spans.push(span)
+        if (span && span.intervals.length > 0) {
           for (const interval of span.intervals) out.push({ axis, line, decision: intervalDecision(span, interval, ctx.minInfill) })
           continue
         }
@@ -2061,20 +2062,56 @@ function decomposeCore(
       const base = edgesFor(true)
       const reachedOpen = flood(base.vEdge, base.hEdge, true)
       const mppArea = mppX * mppY
-      for (const g of undecided) {
-        const shut = edgesFor(true, evidenceMap([...collinear.filter((c) => c.decision.decision === 'OPENING_IN_WALL'), g]))
+      // 005N (council A2): every undecided gap is weighed against the openings decided before this test, never against
+      // a sibling this loop has just shut — that sibling's pocket would be counted again behind the next mouth, and
+      // which of two mouths on one facade closed would follow the order the lines are enumerated in
+      const decided = collinear.filter((c) => c.decision.decision === 'OPENING_IN_WALL')
+      const pocketOf = (gs: readonly CollinearGap[]): { cells: number; m2: number } => {
+        const shut = edgesFor(true, evidenceMap([...decided, ...gs]))
         const reachedShut = flood(shut.vEdge, shut.hEdge, true)
-        let pocketPx = 0
-        let pocketCells = 0
+        let px = 0
+        let cells = 0
         for (let iy = 0; iy < ny; iy += 1) {
           for (let ix = 0; ix < nx; ix += 1) {
             if (reachedOpen[index(ix, iy)] === 1 && reachedShut[index(ix, iy)] === 0) {
-              pocketCells += 1
-              pocketPx += (linesX[ix + 1].px - linesX[ix].px) * (linesY[iy + 1].px - linesY[iy].px)
+              cells += 1
+              px += (linesX[ix + 1].px - linesX[ix].px) * (linesY[iy + 1].px - linesY[iy].px)
             }
           }
         }
-        const pocketM2 = round6(pocketPx * mppArea)
+        return { cells, m2: round6(px * mppArea) }
+      }
+      // 005N (council D1): sibling mouths of one compound span that open onto one space behind them each count only the
+      // strip that is theirs alone — the rest is reached through the other. The space they share is weighed once, for
+      // the mouths that lead into it, against the pocket their joint width allows (what the merged span was weighed
+      // against): a sibling that leads only into its own pocket is never shut by its neighbour's interior.
+      const ownPocket = new Map(undecided.map((g) => [g, pocketOf([g])] as const))
+      const siblings = new Map<string, CollinearGap[]>()
+      for (const g of undecided) if (g.decision.compound && g.decision.compound.role !== 'RECESS_MOUTH') siblings.set(g.decision.compound.spanId, [...(siblings.get(g.decision.compound.spanId) ?? []), g])
+      for (const group of siblings.values()) {
+        if (group.length < 2) continue
+        const all = pocketOf(group)
+        const own = (g: CollinearGap): number => ownPocket.get(g)?.m2 ?? 0
+        // a mouth leads into the shared space when shutting it too takes away more than its own pocket
+        const sharers = group.filter((g) => all.m2 - pocketOf(group.filter((x) => x !== g)).m2 > own(g))
+        if (sharers.length < 2) continue
+        const sharedM2 = round6(pocketOf(sharers).m2 - sharers.reduce((a, g) => a + own(g), 0))
+        const widthM = sharers.reduce((a, g) => a + g.decision.widthM, 0)
+        const limitM2 = round6(Math.max(6, 2.5 * widthM * widthM))
+        if (sharedM2 <= limitM2) continue
+        for (const g of sharers) {
+          g.decision = {
+            ...g.decision,
+            evidence: { ...g.decision.evidence, pocketM2: sharedM2 },
+            decision: 'OPENING_IN_WALL',
+            score: round6(Math.min(1, g.decision.score + 0.35)),
+            why: `one of ${sharers.length} mouths side by side on one facade opening onto the same ${sharedM2.toFixed(1)} m² behind them — shut on every other side, more than their joint ${widthM.toFixed(2)} m allows a pocket (${limitM2.toFixed(1)} m²): the building's interior, so the wall carries on across them`,
+          }
+        }
+      }
+      for (const g of undecided) {
+        if (g.decision.decision === 'OPENING_IN_WALL') continue
+        const { cells: pocketCells, m2: pocketM2 } = ownPocket.get(g) ?? pocketOf([g])
         const limitM2 = round6(Math.max(6, 2.5 * g.decision.widthM * g.decision.widthM))
         if (g.decision.compound?.role === 'RECESS_MOUTH') {
           g.decision = { ...g.decision, evidence: { ...g.decision.evidence, pocketM2 }, why: `${g.decision.why}; ${pocketM2.toFixed(1)} m² lies behind its mouth, and it stays open: its back wall closes the building` }
