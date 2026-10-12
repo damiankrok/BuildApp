@@ -93,7 +93,7 @@ export function planDiagnosticsOf(draft: StructuralLayoutDraft, graph: SourceObs
  * box reading's spans it was read from beside the outline's own (`OUTLINE`), each decided on its own reading's cells.
  */
 function compoundFacadesOf(d: PlanDecomposition): { compoundFacades?: CompoundFacadeDigest[] } {
-  const own = d.boundary?.accepted ? 'OUTLINE' : 'BOX'
+  const own = d.outlineReading ? 'OUTLINE' : 'BOX'
   const box = d.compoundFacadesBoxReading ? d.compoundFacadesBoxReading.spans.map((s) => compoundOf(s, d.compoundFacadesBoxReading as Pick<PlanDecomposition, 'wideOpenings' | 'cells'>, 'BOX')) : []
   const all = [...box, ...(d.compoundFacades ?? []).map((s) => compoundOf(s, d, own))]
   return all.length > 0 ? { compoundFacades: all } : {}

@@ -145,8 +145,6 @@ describe('005N §16 — each interval is weighed against its own pocket', () => 
       expect(mouth?.role, t).toBe('OPEN_SIDE')
       const decided = r.d.wideOpenings.find((w) => w.compound?.intervalId === mouth?.id)
       expect(decided?.decision, `${t}: shut by what lies behind it`).toBe('OPENING_IN_WALL')
-      console.log('A2S', t, JSON.stringify((r.d.compoundFacades ?? []).map((s) => [s.fromPx, s.toPx, s.widthM, s.why, s.separators.map((x) => [x.kind, x.why.slice(0, 60)])])))
-      console.log('A2X', t, JSON.stringify(r.d.wideOpenings.filter((w) => w.compound).map((w) => [w.widthM, w.decision, w.evidence.pocketM2 ?? null, w.compound?.role])))
       expect(r.builtAt(222, 160), `${t}: the hall`).toBe(true)
       expect(r.builtAt(300, 150), `${t}: the living room`).toBe(true)
       expect(r.classAt(150, 255), t).toBe('RECESS')
@@ -533,7 +531,10 @@ describe('005N council — what a back wall, a callout, a pattern and a sibling 
     }
     const one = deep().line(120, 240, 179, 240)
     const flight = deep().line(120, 226, 179, 226).line(120, 232, 179, 232).line(120, 238, 179, 238).line(120, 244, 179, 244)
-    for (const [name, p] of [['one step', one], ['a flight', flight]] as const) {
+    // council round 2 (S1): two lines a pane apart (a drain, a two-riser step) and three treads read as glazing
+    const drain = deep().line(120, 238, 179, 238).line(120, 243, 179, 243)
+    const three = deep().line(120, 232, 179, 232).line(120, 238, 179, 238).line(120, 244, 179, 244)
+    for (const [name, p] of [['one step', one], ['a flight', flight], ['a drain', drain], ['three treads', three]] as const) {
       for (const t of TRANSFORMS) {
         const r = runScene(scene(p), t)
         const recess = spansOf(r.d)[0].intervals.find((i) => i.role === 'RECESS_MOUTH')
@@ -633,6 +634,28 @@ describe('005N council D1 — mouths side by side into one space are weighed tog
       expect(r.d.wideOpenings.filter((w) => w.compound).map((w) => w.decision), t).toEqual(['OPEN_SIDE', 'OPEN_SIDE'])
       expect(r.builtAt(140, 220), `${t}: the shared space`).toBe(false)
       expect(r.builtAt(300, 100), `${t}: the house`).toBe(true)
+    }
+  })
+})
+
+describe('005N council round 2 — R2: a callout at a recess whose glazed back the reader does not take as a wall', () => {
+  it('the returns run on past the glazing as the hall\'s walls: the glazing is no set-back wall here, but it is still drawn across the bay, so the callout does not shut the mouth', () => {
+    const p = house()
+    p.clear(120, FRONT, 251, 279)
+    returnAt(p, 108, 150)
+    returnAt(p, 180, 150)
+    p.line(120, 231, 179, 231).line(120, 236, 179, 236) // the glazed back between the returns' bare sides
+    for (let x = 120; x < 180; x += 8) p.line(x, 250, x + 5, 250) // a dashed overhead outline across the recess
+    wallH(p, 108, 263, 150)
+    returnAt(p, 252, 150)
+    doorH(p, 210, 225, 150)
+    vehicleDoor(p, 192, 251)
+    const callouts: PlanCallout[] = [{ id: 'c-back', at: { x: 150, y: 292 }, widthsCm: [{ value: 300, confidence: 0.9 }] }]
+    for (const t of TRANSFORMS) {
+      const r = runScene(scene(p, callouts), t)
+      const bay = spansOf(r.d)[0].intervals.find((i) => i.evidence.callout?.id === 'c-back')
+      expect(bay, t).toBeDefined()
+      expect(bay?.role, t).not.toBe('OPENING_IN_WALL')
     }
   })
 })

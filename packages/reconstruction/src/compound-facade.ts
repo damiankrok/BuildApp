@@ -248,7 +248,7 @@ function separatorOf(ctx: CompoundContext, parent: ParentGap, piece: LinePiece):
  * across (glazing, a leaf) or door-sized beside a stretch of wall that runs along the line inside the mouth. Two
  * returns' cross-sections with the mouth's width of nothing between them are the returns, not a wall behind them.
  */
-function backWallOf(ctx: CompoundContext, parent: ParentGap, from: number, to: number, reach: number): { px: number; cover: number } | null {
+function backWallOf(ctx: CompoundContext, parent: ParentGap, from: number, to: number, reach: number, ends: readonly [number, number]): { px: number; cover: number } | null {
   const t = ctx.wallPx
   const mpp = ctx.mppAlong(parent.axis)
   const maxHolePx = ctx.maxOpeningM / mpp
@@ -271,10 +271,11 @@ function backWallOf(ctx: CompoundContext, parent: ParentGap, from: number, to: n
       if (r.from - l.to > maxHolePx) continue
       const mid = (l.axisPx + r.axisPx) / 2
       const drawn = gapSignature(gapStrokes(ctx.mask, parent.axis, mid, l.to, r.from, t, { left: l, right: r }), t).signature
-      // a hole is a hole in a WALL beside a stretch of that wall. Between two returns' cross-sections only glazing is a
-      // wall — one line there is a step, a landing or a threshold, and lines repeated across it a flight of steps or a
-      // floor pattern, never the set-back wall (council A1/B2)
-      const walled = l.along || r.along ? drawn === 'GLAZING' || drawn === 'LEAF_AXIS' || drawn === 'LEAF_FACE' || inside(l) || inside(r) : drawn === 'GLAZING' && glazingAlone(ctx, parent, d, l.to, r.from)
+      // a hole is a hole in a WALL beside a stretch of that wall. Between two returns' bare cross-sections only glazing
+      // where both returns end — turn into the wall they meet — is the set-back wall: lines drawn across a recess whose
+      // returns run on past them are steps, a drain, a threshold, a floor pattern, however they read (council A1/B2, S1)
+      const returnsEnd = ends.every((e) => e >= d - t && e <= d + t * 1.5)
+      const walled = l.along || r.along ? drawn === 'GLAZING' || drawn === 'LEAF_AXIS' || drawn === 'LEAF_FACE' || inside(l) || inside(r) : drawn === 'GLAZING' && returnsEnd
       if (walled) covered.push([l.to, r.from])
     }
     const cover = coverOf(covered, from, to) / Math.max(1, to - from)
@@ -290,28 +291,29 @@ function backWallOf(ctx: CompoundContext, parent: ParentGap, from: number, to: n
 }
 
 /**
- * Whether glazing read `depth` in from the facade stands alone across the mouth [a, b]: the floor between it and the
- * facade's wall is clear of lines drawn across, and so is a wall's breadth behind it. A loggia's glazed back is that;
- * treads, paving or a hatch put line after line on one side of their last, whose edge would otherwise read as glazing
- * (council A1/B2/B3).
+ * Whether a continuous line is drawn across [a, b] anywhere from a wall's breadth inside the facade to `depth`: glazing,
+ * a door, a set-back wall the reader did not take whole. A dashed or dotted line (an overhead outline) is not one.
  */
-function glazingAlone(ctx: CompoundContext, parent: ParentGap, depth: number, a: number, b: number): boolean {
+function drawnAcross(ctx: CompoundContext, parent: ParentGap, a: number, b: number, depth: number): boolean {
   const t = ctx.wallPx
   const g0 = Math.round(a)
   const g1 = Math.round(b)
-  const drawnAcross = (k: number): boolean => {
+  for (let k = Math.round(t); k <= Math.round(depth); k += 1) {
     const c = Math.round(parent.linePx + parent.inward * k)
     let inked = 0
+    let runs = 0
+    let inRun = false
     for (let s = g0; s < g1; s += 1) {
       const x = parent.axis === 'Y' ? s : c
       const y = parent.axis === 'Y' ? c : s
-      if (x >= 0 && y >= 0 && x < ctx.mask.width && y < ctx.mask.height) inked += ctx.mask.data[y * ctx.mask.width + x]
+      const v = x >= 0 && y >= 0 && x < ctx.mask.width && y < ctx.mask.height ? ctx.mask.data[y * ctx.mask.width + x] : 0
+      inked += v
+      if (v === 1 && !inRun) runs += 1
+      inRun = v === 1
     }
-    return inked >= ctx.minInfill * Math.max(1, g1 - g0)
+    if (runs <= 2 && inked >= ctx.minInfill * Math.max(1, g1 - g0)) return true
   }
-  for (let k = Math.round(t); k <= Math.round(depth - t); k += 1) if (drawnAcross(k)) return false
-  for (let k = Math.round(depth + t / 2) + 2; k <= Math.round(depth + t * 1.5); k += 1) if (drawnAcross(k)) return false
-  return true
+  return false
 }
 
 function coverOf(intervals: ReadonlyArray<readonly [number, number]>, a: number, b: number): number {
@@ -423,7 +425,7 @@ export function compoundSpanOf(ctx: CompoundContext, parent: ParentGap): Compoun
     const left = c.bounds[0] === 'SEPARATOR' ? sepReturn(c.from) : jambReturn(c.from - t / 2)
     const right = c.bounds[1] === 'SEPARATOR' ? sepReturn(c.to) : jambReturn(c.to + t / 2)
     const reach = Math.min(left, right, RECESS_MAX_DEPTH_M / mppIn)
-    const back = reach >= Math.max(RETURN_MIN_M / mppIn, 3 * t) ? backWallOf(ctx, parent, c.from, c.to, reach + t) : null
+    const back = reach >= Math.max(RETURN_MIN_M / mppIn, 3 * t) ? backWallOf(ctx, parent, c.from, c.to, reach + t, [left, right]) : null
     // a recess is no deeper than a car's length: a set-back wall further in is the back of a garage, a carport or a room
     const depthM = back ? round6(Math.abs(back.px - parent.linePx) * mppIn) : Infinity
     const recess = back && depthM <= RECESS_MAX_DEPTH_M ? { backWallPx: back.px, depthM, cover: back.cover, returns: [round6(left * mppIn), round6(right * mppIn)] as [number, number] } : undefined
@@ -461,8 +463,10 @@ export function compoundSpanOf(ctx: CompoundContext, parent: ParentGap): Compoun
     }
     // walled deeper than any recess on both sides: no set-back wall was missed, the walls run on past where one could be
     // (council B1/C1: a loggia or a recess whose back wall was not read is never shut by a callout)
+    // and nothing drawn across between them within that depth: a glazed or doored back the reader did not take as a wall
+    // is still a back, and the callout may be its (council R2)
     const deeper = RECESS_MAX_DEPTH_M / mppIn
-    if (callout && jambInk[0] && jambInk[1] && c.bounds.includes('SEPARATOR') && left >= deeper && right >= deeper) {
+    if (callout && jambInk[0] && jambInk[1] && c.bounds.includes('SEPARATOR') && left >= deeper && right >= deeper && !drawnAcross(ctx, parent, c.from + t, c.to - t, deeper)) {
       return { ...common, role: 'OPENING_IN_WALL', why: `a ${widthM.toFixed(2)} m mouth walled on both sides, deeper than a recess, with a callout of ${callout.widthCm} cm printed at it and nowhere else: an opening in its own wall` }
     }
     if (infill >= ctx.minInfill && !(jambInk[0] && jambInk[1])) {

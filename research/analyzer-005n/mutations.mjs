@@ -125,7 +125,7 @@ const MUTATIONS = [
     what: 'any line between two returns is a back wall: a hole between two cross-sections counts whenever anything is drawn across it (council A1/B2)',
     must: 'the step-line fixtures (A1/B2) fail',
     file: COMPOUND,
-    from: "      const walled = l.along || r.along ? drawn === 'GLAZING' || drawn === 'LEAF_AXIS' || drawn === 'LEAF_FACE' || inside(l) || inside(r) : drawn === 'GLAZING' && glazingAlone(ctx, parent, d, l.to, r.from)",
+    from: "      const walled = l.along || r.along ? drawn === 'GLAZING' || drawn === 'LEAF_AXIS' || drawn === 'LEAF_FACE' || inside(l) || inside(r) : drawn === 'GLAZING' && returnsEnd",
     to: "      const walled = drawn === 'GLAZING' || drawn === 'LEAF_AXIS' || drawn === 'LEAF_FACE' || inside(l) || inside(r)",
   },
   {

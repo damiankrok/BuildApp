@@ -24,7 +24,7 @@ Every P0/P1 they raised went to a separate agent instructed to refute it. That a
 | B1 | P0 | the callout rule closed a recess or loggia whose back wall was not read ("deeper than a recess" never checked) | a callout closes a walled mouth only when both its walls run on deeper than a recess can be (`RECESS_MAX_DEPTH_M`) | B1/C1 fixture; M13 |
 | C1 | P1 | the same seen from evidence: a loggia's back-glazing callout shut the loggia | as B1 | as B1 |
 | A2 | P1 | the pocket test counted a sibling just shut in the next sibling's pocket: which of two mouths closed followed line order, so orientation | every undecided gap is weighed against the openings decided before the test; all own pockets are read before any decision is applied | A2 fixture (all five orientations); M11 |
-| D1 | P1 | sibling mouths opening onto one space were each blind to it (it is reached through the other): an open-plan house behind two undrawn mouths stayed outside | the mouths that lead into a shared space (shutting one also takes away more than its own pocket) are weighed together, against the pocket their joint width allows — the merged span's own limit, so it never shuts more than the incumbent did | D1 fixtures (open plan built; a pocket-sized shared space stays open); M14 |
+| D1 | P1 | sibling mouths opening onto one space were each blind to it (it is reached through the other): an open-plan house behind two undrawn mouths stayed outside | the mouths that lead into a shared space (shutting one also takes away more than its own pocket) are weighed together, against the pocket their joint opening width allows (the pocket rule on the openings' total width; see round 2, R7) | D1 fixtures (open plan built; a pocket-sized shared space stays open); M14 |
 | D2 | P1 | `infillRunsPast` looked past a short pier into the next window's glazing and called it a slab edge | glazing carrying on past a short pier into a window glazed between its own jambs is that window's, not a line running past — only when this mouth is itself glazing (a single line or a dashed one is never excused: the Kosaćce terrace stays open) | the 005N corpus (window–pier–window, fixture 5) and the Kosaćce rows unchanged |
 
 ## Downgraded to P2 by verification — fixed anyway
@@ -87,3 +87,31 @@ A05 returns to its starting verdict.
 - The compound reading itself (one WALL_RETURN, two intervals) is unchanged.
 
 The stage gives up that development gain rather than keep a pass made by an order-dependent rule. Final matrix: `development-matrix.json`.
+
+## Round 2 — the fixes reviewed again
+
+Two more read-only reviewers looked at the fixes themselves (`0e996b6..c26799c`): R1 for false closures and openings, R2 for order, determinism, records and cost. As before, every P0/P1 was adversarially verified. Raw records: `council-round2-findings.json`.
+
+| id | verified | defect in the fix | resolution |
+| --- | --- | --- | --- |
+| S1 | P0 | "glazing standing alone" still accepted two lines a pane apart (a drain, a two-riser step) and some three-tread flights between two returns as the set-back wall | the floor-clearance heuristic is gone. Between two returns' bare cross-sections, glazing is the set-back wall only where both returns **end** at it (their runs stop within −1 to +1.5 walls of the read). Lines across a recess whose returns run on past them are never its back, however they read. Fixture: A1/B2 with a drain and three treads, all orientations; M12 |
+| R1 | P1 | the same heuristic refused a real glazed back when a dashed overhead outline crossed the recess floor | the heuristic is gone, so a dashed line vetoes nothing. **Trade-off, recorded:** a glazed back between returns that run on past it as interior walls (a T-junction) is no longer taken as a back wall. That mouth falls to the pocket test, the starting code's outcome, rather than risk S1's phantom room |
+| R2 | P1 | the callout depth rule still shut a recess whose returns run on past an unread glazed back | a callout closes a mouth only when, besides walls deeper than a recess, no continuous line (glazing, a door, a wall not taken whole) is drawn across the bay within that depth. A dashed overhead line does not count. Fixture: R2 (glazed back, dashed outline, callout), all orientations |
+| R3 | P1 | sharer membership was decided on round6'd area differences, so noise could sweep a mouth into its neighbour's shared space | decided on integer cell counts |
+| S4 | P2 | as R3 | as R3 |
+| S6 | P2 | a completions-only override tagged the outline grid's spans `BOX` | a decomposition cut on an override is tagged `OUTLINE` (`outlineReading`) |
+| R9 | P3 | debug output left in a test | removed |
+
+Refuted:
+
+- **S2** — the A2 snapshot is the intended fix and is documented. Its effect on gaps with no separator is in the safe direction: a double-count false closure is removed.
+- **S3** — whole-span records do consume the 24-span bound, but no realistic plan comes near it.
+
+Left open (P2/P3):
+
+- **R4** — same as S2.
+- **R5** — the glazing excuse has no width check against a continuous double line along the facade. It needs this mouth to be glazing too, so Kosaćce's single or dashed line is unaffected.
+- **R6, S7** — the callout rule refuses a garage whose side wall has a door or window within 4.5 m. The garage falls to the pocket test and its drawn door.
+- **R7, S5** — the joint limit uses the sum of the openings' widths, not the merged span including its piers. The claim that it "never shuts more than the incumbent" is withdrawn. What holds: the joint limit is the pocket rule applied to the openings' total width.
+- **R8** — same as S3.
+- **S8** — floods per plan rise from N to about N + Σ(group + 2), linearly; measured in `performance.json`.

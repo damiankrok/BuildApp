@@ -293,6 +293,8 @@ export type PlanDecomposition = {
    * record although the outline's own grid reads no compound span.
    */
   compoundFacadesBoxReading?: { spans: CompoundFacadeSpan[]; wideOpenings: WideOpeningDecision[]; cells: PlanCell[] }
+  /** 005N: true when this decomposition was cut on the boundary's outline grid (an override), not the box reading. */
+  outlineReading?: true
 }
 
 export type PlanDecompositionOptions = {
@@ -1806,7 +1808,7 @@ export function decomposePlan(
   if (!extension.override) return { ...incumbent, boundary: extension.record }
   const outlined = decomposeCore(mask, chains, bands, registration, extent, options, extension.override)
   const box = incumbent.compoundFacades ? { compoundFacadesBoxReading: { spans: incumbent.compoundFacades, wideOpenings: incumbent.wideOpenings, cells: incumbent.cells } } : {}
-  return { ...outlined, boundary: extension.record, ...box }
+  return { ...outlined, boundary: extension.record, outlineReading: true, ...box }
 }
 
 /** The grid, the outline and its border edges a decomposition is re-cut on when the boundary is accepted. */
@@ -2091,11 +2093,12 @@ function decomposeCore(
       for (const group of siblings.values()) {
         if (group.length < 2) continue
         const all = pocketOf(group)
-        const own = (g: CollinearGap): number => ownPocket.get(g)?.m2 ?? 0
-        // a mouth leads into the shared space when shutting it too takes away more than its own pocket
-        const sharers = group.filter((g) => all.m2 - pocketOf(group.filter((x) => x !== g)).m2 > own(g))
+        const own = (g: CollinearGap): { cells: number; m2: number } => ownPocket.get(g) ?? { cells: 0, m2: 0 }
+        // a mouth leads into the shared space when shutting it too takes away more cells than its own pocket holds —
+        // counted in cells, never on summed areas, whose rounding would sweep a mouth into its neighbour's (council R3)
+        const sharers = group.filter((g) => all.cells - pocketOf(group.filter((x) => x !== g)).cells > own(g).cells)
         if (sharers.length < 2) continue
-        const sharedM2 = round6(pocketOf(sharers).m2 - sharers.reduce((a, g) => a + own(g), 0))
+        const sharedM2 = round6(pocketOf(sharers).m2 - sharers.reduce((a, g) => a + own(g).m2, 0))
         const widthM = sharers.reduce((a, g) => a + g.decision.widthM, 0)
         const limitM2 = round6(Math.max(6, 2.5 * widthM * widthM))
         if (sharedM2 <= limitM2) continue
