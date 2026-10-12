@@ -34,7 +34,7 @@ Every §45 condition holds except the last: blind round 10 has two fresh ALGORIT
 | PRE_HOLDOUT_10_SHA | `d7873977aac89d6283e41f94ec1942b570adceaf` (CI 38297543325 green, 39 pass, 2 skipped by design) |
 | blind round 10 | #1 `dom-w-glogownikach` (garage stratum): **ALGORITHMIC_FAIL**, first bad **METRIC**. #2 `dom-w-akebiach` (unstratified): **ALGORITHMIC_FAIL**, first bad **EXTENT** |
 | TARGET_CLASS_EXERCISED | **NO** |
-| OWNER APK | §T |
+| OWNER APK | **published and verified**: versionCode 1212, run 212 on `f091d15`, SHA-256 `1d009f91…afa51`, preview signer `6e48fac4…a0da`, arm64-v8a only, the same five native libraries, OCR model / dictionary / WASM byte-identical; only the analyzer bundle changed (+30 KB). Polish checklist in §T |
 | inherited 005H ARM64 device parity | **PENDING** (not inferred from the emulator) |
 | NEXT | **`OTHER_MEASURED_RESIDUAL`** — the plan's scale from its printed dimensions (METRIC) (`recommendation.md`) |
 
@@ -204,9 +204,62 @@ The round is valid whole-house evidence: two fresh failures, both upstream of an
 | `npm run typecheck` | pass |
 | `npm test` | 176 files: 2324 tests pass, 11 skipped by design (at `4e12ce5`) |
 | architecture | 22 files, 263 tests |
-| CI | freeze run 38297543325 green; final run: §T |
+| CI | freeze run 38297543325 green (39 pass, 2 skipped); final run 212 (`38302648949`) on `f091d15` green on attempt 1 (40 pass, 1 skipped by design, OWNER APK published) |
 | no publisher pixel committed | Evidence Packs: JSON layers, README and manifest only; overlays and plans stayed in `/home/user/work005n` |
 
 ## T. Final CI and OWNER APK
 
-To be completed after the final CI run publishes the OWNER APK.
+**Final CI:** `workflow_dispatch` run 212 (`38302648949`), attempt 1, on `f091d15`. It is green: 40 jobs pass, and 1 is
+skipped by design (`preview-latest`). The OWNER release job published. The analyzer code is the frozen code
+(`PRE_HOLDOUT_10_SHA` `d787397`); only the ledger, sealed evidence and documents differ.
+
+**OWNER APK:**
+`https://github.com/damiankrok/BuildApp/releases/download/owner-preview-latest/BuildPlan-owner-preview.apk`.
+Verified from the downloaded file, not from the notes:
+
+| check | result |
+| --- | --- |
+| direct link | serves the APK: 39 457 127 bytes; asset updated 20:55:17Z, downloaded after run 212 completed |
+| SHA-256 | `1d009f91c38d79a7a0fe48ecff550f47e0258891a1d751f0cbdf11b1ba0afa51`, equal to the release notes and to GitHub's asset digest |
+| version | `com.buildplan.preview`, **versionCode 1212**, versionName `0.212.0-preview`, minSdk 26, targetSdk 35 |
+| commit / run | the notes give run 212 (attempt 1) from `claude/new-session-3kzcgh` @ `f091d1505d27266704daf394fcc356145a36f6a0` |
+| signer | `apksigner verify --print-certs`: "CN=BuildPlan Model Preview, OU=Preview builds (not a production key)", certificate SHA-256 `6e48fac4…a0da`, the same preview key as 1193. It installs over build 1193 |
+| zipalign | `zipalign -c -P 16 -v 4`: verification successful |
+| ABI / native libraries | `native-code: 'arm64-v8a'` only. The same five libraries at the same sizes as 1193: `libnode`, `libbuildapp_node_bridge`, `libfilament-jni`, `libc++_shared`, `libandroidx.graphics.path`. **No new `.so`** |
+| permissions | `INTERNET` and AndroidX's own `DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION`, unchanged |
+| OCR model / dictionary / WASM | **unchanged, byte for byte**: `PP-OCRv6_tiny_rec.onnx` `9ef676d6…`, `PP-OCRv6_tiny_rec.dict.json` `9a8199f8…`, `ort-wasm-simd-threaded.wasm` `3398c10d…`, `ocr-worker.mjs` `9a85e0c5…`, `ocr-self-test.mjs` `d12a6f18…` |
+| what changed against 1193 | the same file set; exactly four entries differ by SHA-256. `AndroidManifest.xml` (version) and `classes5.dex` (build config) carry the new build number; `assets/local-analyzer/manifest.json` carries the bundle's hash. `analyzer.mjs` grew 2 260 511 → 2 290 926 B (+30 415 B), the compound reader and its wiring (`compoundSpanOf`, `COMPOUND_FACADE_VERSION`). Every other file is identical |
+| no research asset / no weights | no file names DeepLSD, ELSED, MobileSAM / Segment Anything, `research/analyzer`, a VLM (Qwen, SmolVLM, InternVL, llama) or a weight format (`.gguf`, `.safetensors`, `.pt`, `.pth`, `.ckpt`); the Evidence Pack is developer tooling, not in the app |
+| size | 39 457 127 B against 39 447 295 B: **+9 832 B** |
+
+No APK binary is committed.
+
+**INHERITED_005H_ARM64_DEVICE_PARITY: PENDING.** It is not inferred from the emulator.
+
+### OWNER phone checklist (po polsku)
+
+Zainstaluj `BuildPlan-owner-preview.apk` (versionCode 1212) na poprzednią wersję (1193). Każdy dom dodaj przez
+„Dodaj dom z linku”. Telefon pobiera stronę i liczy na nowo, więc wynik może się trochę różnić od komputera. Jeśli
+się różni, odeślij zrzut ekranu i kod wyniku.
+
+1. **Znany dom z cofniętym wejściem i garażem: dom w goździkowcach 3**
+   (`https://www.archon.pl/projekty-domow/projekt-dom-w-gozdzikowcach-3-m79923e950094d`).
+   - Na komputerze rzut parteru jest teraz czytany poprawnie: wnęka wejścia zostaje wnęką, za nią hol, a obok garaż
+     z bramą należy do domu.
+   - **Uwaga:** model 3D nadal się nie zbuduje. Analiza kończy się później, na kominie (brak dachu głównego), a nie
+     na rzucie. To osobny błąd, którego ten etap nie naprawia.
+   - **Odeślij** kod wyniku. Oczekiwany: błąd budowy modelu (`MODEL_EMISSION_FAILED`), a nie „niejednoznaczny rzut”.
+   - Jeśli kiedyś zobaczysz ten dom w 3D, sprawdź:
+     - wejście jest wnęką;
+     - garaż jest częścią domu i ma bramę;
+     - we wnęce wejścia nie ma sztucznego pokoju.
+2. **Prawdziwa strona otwarta: Kosaćce** (link jak w poprzednich testach).
+   - Dom ma się zbudować jak w wersji 1193.
+   - Zadaszony taras obok okna zostaje **otwarty**, nie staje się pokojem.
+3. **Znany dom dwukondygnacyjny z 005L: Marcówki**
+   (`https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca`).
+   - Jak w 1193: 2 kondygnacje, około 131 m²; nad garażem nie ma piętra.
+4. **Test zgodności odczytu wymiarów** (z 005H, wciąż otwarty). „Dodaj dom z linku” → „Test zgodności odczytu
+   wymiarów” → „Uruchom test”, potem „Kopiuj wynik”.
+   - **Zaliczony:** „Zgodny z komputerem”, model `9ef676d6…`. Model OCR się nie zmienił.
+   - **Odeślij też:** czas na etykietę, model telefonu i ilość RAM.
