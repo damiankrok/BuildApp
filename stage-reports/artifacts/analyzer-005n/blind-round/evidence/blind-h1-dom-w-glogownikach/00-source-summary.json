@@ -1,0 +1,76 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": 20,
+  "assetsByDocument": {
+    "ELEVATION": 4,
+    "FLOOR_PLAN": 4,
+    "PERSPECTIVE_RENDER": 8,
+    "SECTION": 1,
+    "SITE_PLAN": 1,
+    "UNKNOWN": 2
+  },
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-glogownikach-g-ma772868ccf62c",
+  "contentHash": "8fa81c4776316e5f1fba590decec663fb668de3762b1ba12bfc1285c9b3749d2",
+  "failuresByCode": {
+    "BYTE_IDENTICAL": 5,
+    "HTTP_STATUS": 7
+  },
+  "note": "facts and hashes only; no publisher drawing, page or render is in this pack",
+  "packageId": "src-ma772868ccf62c-0d679d57ba",
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "unit": "m2",
+      "value": 5.27
+    },
+    {
+      "key": "building_height",
+      "unit": "m",
+      "value": 6.1
+    },
+    {
+      "key": "floor_area",
+      "unit": "m2",
+      "value": 138.47
+    },
+    {
+      "key": "footprint_area",
+      "unit": "m2",
+      "value": 178.13
+    },
+    {
+      "key": "garage_area",
+      "unit": "m2",
+      "value": 28.58
+    },
+    {
+      "key": "house_net_area",
+      "unit": "m2",
+      "value": 104.62
+    },
+    {
+      "key": "roof_area",
+      "unit": "m2",
+      "value": 205.03
+    },
+    {
+      "key": "total_area",
+      "unit": "m2",
+      "value": 175.44
+    },
+    {
+      "key": "usable_area",
+      "unit": "m2",
+      "value": 138.47
+    },
+    {
+      "key": "volume",
+      "unit": "none",
+      "value": 848.55
+    }
+  ],
+  "runId": "out-1"
+}

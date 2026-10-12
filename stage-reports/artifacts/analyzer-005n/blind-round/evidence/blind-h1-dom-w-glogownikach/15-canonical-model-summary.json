@@ -1,0 +1,17 @@
+{
+  "bodies": null,
+  "failure": {
+    "code": "RECONSTRUCTION_FAILED",
+    "message": "SOURCE_CONFLICT: the drawing contradicts the scale the plan was registered at (2 long readings as printed on both axes agree on 2.432039 cm/px (501/206 px, 810/333 px)). Read at copy dimensioned 0cb0a5c1d9, chain extent, scale 2.432039 cm/px, largest-first tiling, sides as gridded the plan is better supported by the drawing itself (56% of the stated chain length contradicted, against 79%), but the published footprint does not verify it (141.2 m², WRONG (-20.7%); the first reading: 163.8 m², NEAR (-8.0%)). Neither is built: the figure may refuse a reading, never choose one the drawing refutes. What is missing: a second printed dimension, read as printed, that states one of the two scales",
+    "reasonCode": "PLAN_RESOLUTION_INCONCLUSIVE"
+  },
+  "footprintResidualPct": null,
+  "levels": [],
+  "lowestStoreyFootprintM2": null,
+  "modelHash": null,
+  "openings": null,
+  "publishedFootprintM2": 178.13,
+  "result": "FAILED",
+  "sceneSha256": null,
+  "walls": null
+}

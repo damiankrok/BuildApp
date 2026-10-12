@@ -1,0 +1,238 @@
+{
+  "confidence": "STRONG",
+  "conflictingObservationIds": [
+    "dim-obs-101-horizontal-8b09e8292b",
+    "dim-obs-312-horizontal-b5b8be0073"
+  ],
+  "final": {
+    "isotropy": "MEASURED",
+    "x": 2.907284,
+    "y": 2.903973
+  },
+  "frameId": "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
+  "hypotheses": [
+    {
+      "axesMeasured": true,
+      "chains": 2,
+      "cmPerPixel": 2.906265,
+      "corroborated": true,
+      "decision": "SELECTED",
+      "groups": 6,
+      "id": "scale-2-906265-21fa9d13f5",
+      "independentAxes": [
+        "X",
+        "Y"
+      ],
+      "independentGroups": 4,
+      "independentWeight": 12.798685,
+      "longestShare": 0.770468,
+      "majorWitnesses": 2,
+      "plausible": true,
+      "residualPx": 0.790346,
+      "substantialWitnesses": 2,
+      "weight": 13.758496,
+      "why": "4 independent readings on 2 chain(s), and 2 not counted (short, or their way up not independent of a scale): 140/49.833333 px, 1115/384 px, 132/45 px, 1532/527 px, 301/103 px, 458/157 px",
+      "witnessIds": [
+        "dim-obs-110-rotated-cw-238c34b6a0",
+        "dim-obs-1115-rotated-cw-47523edd5b",
+        "dim-obs-132-rotated-cw-c19fa61075",
+        "dim-obs-1573-horizontal-90c8ea2276",
+        "dim-obs-301-rotated-cw-8de7de2469",
+        "dim-obs-58-horizontal-5adedcf89d"
+      ]
+    },
+    {
+      "axesMeasured": false,
+      "chains": 1,
+      "cmPerPixel": 6.20155,
+      "corroborated": false,
+      "decision": "RULED_OUT_BY_WALLS",
+      "groups": 1,
+      "id": "scale-6-20155-7a47ef1d18",
+      "independentAxes": [
+        "X"
+      ],
+      "independentGroups": 1,
+      "independentWeight": 0.771917,
+      "longestShare": 0.094298,
+      "majorWitnesses": 0,
+      "plausible": false,
+      "residualPx": 0.000004,
+      "substantialWitnesses": 0,
+      "weight": 0.771917,
+      "why": "1 independent reading on 1 chain(s): 400/64.5 px",
+      "witnessIds": [
+        "dim-obs-101-horizontal-8b09e8292b"
+      ]
+    },
+    {
+      "axesMeasured": false,
+      "chains": 1,
+      "cmPerPixel": 10.84264,
+      "corroborated": false,
+      "decision": "RULED_OUT_BY_WALLS",
+      "groups": 1,
+      "id": "scale-10-84264-9ddf1f5020",
+      "independentAxes": [
+        "X"
+      ],
+      "independentGroups": 1,
+      "independentWeight": 0.66064,
+      "longestShare": 0.096004,
+      "majorWitnesses": 0,
+      "plausible": false,
+      "residualPx": 0.000003,
+      "substantialWitnesses": 0,
+      "weight": 0.66064,
+      "why": "1 independent reading on 1 chain(s): 712/65.666667 px",
+      "witnessIds": [
+        "dim-obs-312-horizontal-b5b8be0073"
+      ]
+    },
+    {
+      "axesMeasured": false,
+      "chains": 0,
+      "cmPerPixel": 2.105263,
+      "corroborated": false,
+      "decision": "NOT_SELECTED",
+      "groups": 1,
+      "id": "scale-2-105263-d84e946881",
+      "independentAxes": [],
+      "independentGroups": 0,
+      "independentWeight": 0,
+      "longestShare": 0,
+      "majorWitnesses": 0,
+      "plausible": true,
+      "residualPx": 0.000051,
+      "substantialWitnesses": 0,
+      "weight": 7.991309,
+      "why": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 1440/684 px",
+      "witnessIds": [
+        "dim-obs-1441-horizontal-c0125b337c"
+      ]
+    },
+    {
+      "axesMeasured": false,
+      "chains": 0,
+      "cmPerPixel": 9.630088,
+      "corroborated": false,
+      "decision": "RULED_OUT_BY_WALLS",
+      "groups": 1,
+      "id": "scale-9-630088-1095af4897",
+      "independentAxes": [],
+      "independentGroups": 0,
+      "independentWeight": 0,
+      "longestShare": 0,
+      "majorWitnesses": 0,
+      "plausible": false,
+      "residualPx": 0.000029,
+      "substantialWitnesses": 0,
+      "weight": 5.881198,
+      "why": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 5441/565 px",
+      "witnessIds": [
+        "dim-obs-3141-rotated-ccw-dde83471e6"
+      ]
+    },
+    {
+      "axesMeasured": false,
+      "chains": 0,
+      "cmPerPixel": 4.043029,
+      "corroborated": false,
+      "decision": "NOT_SELECTED",
+      "groups": 3,
+      "id": "scale-4-043029-a8890cfe6b",
+      "independentAxes": [],
+      "independentGroups": 0,
+      "independentWeight": 0,
+      "longestShare": 0,
+      "majorWitnesses": 0,
+      "plausible": true,
+      "residualPx": 0.701375,
+      "substantialWitnesses": 0,
+      "weight": 2.302656,
+      "why": "0 independent readings on 0 chain(s), and 3 not counted (short, or their way up not independent of a scale): 400/99.5 px, 385/94.444444 px, 278/69.5 px",
+      "witnessIds": [
+        "dim-obs-101-horizontal-716b1504b1",
+        "dim-obs-385-rotated-cw-b7de712915",
+        "dim-obs-710-horizontal-27cb0e6ca5"
+      ]
+    }
+  ],
+  "legacy": {
+    "cmPerPixel": 2.107037,
+    "correctedAnchors": 4,
+    "independentGroups": 0,
+    "independentWeight": 0,
+    "readAnchors": 1
+  },
+  "relation": "REPLACED",
+  "selectedHypothesisId": "scale-2-906265-21fa9d13f5",
+  "supportingObservationIds": [
+    "dim-obs-110-rotated-cw-238c34b6a0",
+    "dim-obs-1115-rotated-cw-47523edd5b",
+    "dim-obs-132-rotated-cw-c19fa61075",
+    "dim-obs-1573-horizontal-90c8ea2276",
+    "dim-obs-301-rotated-cw-8de7de2469",
+    "dim-obs-58-horizontal-5adedcf89d"
+  ],
+  "topology": {
+    "bindings": {
+      "alternative": 32,
+      "ambiguous": 0,
+      "primary": 35,
+      "uncentred": 23
+    },
+    "hierarchy": {
+      "afterCorrection": 0,
+      "agreesAsRead": 0,
+      "conflictsAsRead": 2,
+      "incomplete": 4,
+      "parallelCopies": 7,
+      "totals": 6
+    },
+    "marks": {
+      "questionable": 77,
+      "rejected": 2,
+      "tick": 173
+    },
+    "neutralObservationIds": [],
+    "ocr": {
+      "contestedObservationIds": [],
+      "counted": {
+        "ambiguous": 0,
+        "clear": 2,
+        "supported": 2,
+        "unrated": 0
+      },
+      "demotedObservationIds": [],
+      "lowQuality": 1
+    },
+    "structural": [
+      {
+        "assignment": [
+          {
+            "asReadCm": 1440,
+            "chosenCm": 1990,
+            "observationId": "dim-obs-1441-horizontal-c0125b337c"
+          },
+          {
+            "asReadCm": 458,
+            "chosenCm": 458,
+            "observationId": "dim-obs-58-horizontal-5adedcf89d"
+          },
+          {
+            "asReadCm": 1532,
+            "chosenCm": 1532,
+            "observationId": "dim-obs-1573-horizontal-90c8ea2276"
+          }
+        ],
+        "partChainId": "chain-horizontal-53-1afc6d8bc0",
+        "refutedObservationIds": [
+          "dim-obs-1441-horizontal-c0125b337c"
+        ],
+        "totalChainId": "chain-horizontal-23-d2e722a221"
+      }
+    ]
+  },
+  "why": "the page vote's 2.107037 cm/px rested on 0 independent readings; 2.906265 cm/px, stated by 4 independent readings on 2 chain(s) outweigh it (STRONG)"
+}

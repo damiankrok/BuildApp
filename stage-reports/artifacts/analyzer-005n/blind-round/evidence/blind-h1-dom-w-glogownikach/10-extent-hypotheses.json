@@ -1,0 +1,43 @@
+{
+  "chosen": {
+    "endSpans": [
+      {
+        "chainId": "chain-horizontal-622-cc70acd1a7",
+        "decision": "KEPT_SUPPORTED",
+        "end": "HI",
+        "fromPx": 795,
+        "pixelLength": 17,
+        "toPx": 812,
+        "why": "it ends at the chain's end tick, where a neighbouring parallel line ends too (axis-group-horizontal-622-e76ba4305a)"
+      }
+    ],
+    "provenance": {
+      "x": "DIMENSION_CHAIN_EXTENT",
+      "y": "DIMENSION_CHAIN_EXTENT"
+    },
+    "rect": {
+      "x0": 78,
+      "x1": 812,
+      "y0": 203,
+      "y1": 553
+    },
+    "refusedChains": [],
+    "weak": false
+  },
+  "frameId": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+  "otherCopies": [],
+  "resolverReadings": [
+    {
+      "key": "reading1",
+      "summary": "copy dimensioned 0cb0a5c1d9, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 163.8 m² (-8.0% of 178.13), NEAR, corroborated by ISOTROPY"
+    },
+    {
+      "key": "reading2",
+      "summary": "copy dimensioned 0cb0a5c1d9, chain extent, scale 2.432039 cm/px, largest-first tiling, sides as gridded: 1 body, 141.2 m² (-20.7% of 178.13), WRONG, FOOTPRINT_AREA_WRONG"
+    },
+    {
+      "key": "reading3",
+      "summary": "copy dimensioned 0cb0a5c1d9, chain extent, scale 2.943633 cm/px, largest-first tiling, sides as gridded: 2 bodies, 212.5 m² (+19.3% of 178.13), NEAR, DEGENERATE_GEOMETRY"
+    }
+  ]
+}

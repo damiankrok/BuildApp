@@ -1,0 +1,45 @@
+{
+  "copies": [
+    {
+      "decompositionId": "dec-4c2ebb937c1f7716",
+      "frameId": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+      "scale": {
+        "anchors": 10,
+        "mppX": 0.026261,
+        "mppY": 0.026207,
+        "rmsM": 0.025474
+      },
+      "spans": [
+        {
+          "axis": "Y",
+          "fromPx": 421,
+          "id": "compound-Y-203-421-638",
+          "inkFromPx": 423,
+          "inkToPx": 638,
+          "intervals": [],
+          "inward": 1,
+          "linePx": 203,
+          "reading": "BOX",
+          "separators": [
+            {
+              "accepted": false,
+              "axisPx": 209.590909,
+              "fromPx": 525,
+              "id": "sep-Y-203-525-536",
+              "inkKind": "POST",
+              "kind": "NOT_A_SEPARATOR",
+              "returnM": 0.314484,
+              "toPx": 536,
+              "why": "a free-standing block 11 px long with 0.31 m of wall behind it: a post, which establishes no wall relation"
+            }
+          ],
+          "toPx": 638,
+          "why": "1 piece of wall-thick ink inside the gap, none a return or a pier: one gap",
+          "widthM": 5.698637
+        }
+      ],
+      "storey": "GROUND"
+    }
+  ],
+  "selectedPlanFrameId": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9"
+}

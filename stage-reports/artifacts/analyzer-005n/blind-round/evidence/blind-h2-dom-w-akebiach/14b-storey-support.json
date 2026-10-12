@@ -1,0 +1,68 @@
+{
+  "baseFrameId": "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
+  "storeys": [
+    {
+      "chosen": {
+        "offsetX": -89.104167,
+        "offsetY": -62.114063,
+        "scale": 1.154167,
+        "score": 0.339205,
+        "stated": false,
+        "targetId": "walls"
+      },
+      "decision": "NO_SUPPORT",
+      "frameId": "frame-asset-rzut-74c95ea7b1-d4ef68330f",
+      "held": null,
+      "margin": 0.021277,
+      "printedScale": null,
+      "regions": [
+        {
+          "body": true,
+          "bounds": {
+            "x0": 0.189012,
+            "x1": 4.111489,
+            "z0": 5.337275,
+            "z1": 14.251121
+          },
+          "overhang": "UNSUPPORTED",
+          "regionId": "region-built-0-3",
+          "standsOn": [],
+          "unsupportedM2": 22.549512
+        },
+        {
+          "body": true,
+          "bounds": {
+            "x0": 4.111489,
+            "x1": 19.53021,
+            "z0": -0.82102,
+            "z1": 11.022886
+          },
+          "overhang": "UNSUPPORTED",
+          "regionId": "region-built-1-0",
+          "standsOn": [],
+          "unsupportedM2": 104.40669
+        },
+        {
+          "body": false,
+          "bounds": {
+            "x0": 4.111489,
+            "x1": 6.47853,
+            "z0": 11.022886,
+            "z1": 14.251121
+          },
+          "overhang": "NOT_A_BODY",
+          "regionId": "region-built-1-6",
+          "standsOn": [],
+          "unsupportedM2": 7.641365
+        }
+      ],
+      "resolution": 0.007582,
+      "scaleBasis": {
+        "basis": "WALL_PAIRS",
+        "corroborated": true
+      },
+      "storeyIndex": 1,
+      "why": "none of its walled regions stands on a body below over a room’s span"
+    }
+  ]
+}

@@ -1,0 +1,441 @@
+{
+  "bays": [],
+  "bodies": [
+    {
+      "areaM2": 0.543462,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": true,
+      "id": "body-0",
+      "junctionWallShare": 0.820513,
+      "rect": {
+        "x0": 370,
+        "x1": 389.5,
+        "y0": 194,
+        "y1": 227
+      },
+      "relation": "FLUSH_ATTACHED",
+      "sideWallShare": 1
+    },
+    {
+      "areaM2": 5.643646,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": false,
+      "id": "body-1",
+      "junctionWallShare": 0,
+      "mouthM": 5.904458,
+      "rect": {
+        "x0": 389.5,
+        "x1": 592,
+        "y0": 194,
+        "y1": 227
+      },
+      "relation": "SEPARATE_BODY",
+      "sideWallShare": 0.28539
+    },
+    {
+      "areaM2": 22.430308,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": false,
+      "id": "body-2",
+      "junctionWallShare": 0.996937,
+      "rect": {
+        "x0": 66,
+        "x1": 223,
+        "y0": 227,
+        "y1": 396.166667
+      },
+      "relation": "RECESSED_ATTACHED",
+      "sideWallShare": 0.067905
+    },
+    {
+      "areaM2": 67.504486,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": false,
+      "id": "body-3",
+      "junctionWallShare": 0.176379,
+      "mouthM": 5.904458,
+      "rect": {
+        "x0": 316.75,
+        "x1": 592,
+        "y0": 227,
+        "y1": 611
+      },
+      "relation": "RECESSED_ATTACHED",
+      "sideWallShare": 0.206173
+    },
+    {
+      "areaM2": 11.374279,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": false,
+      "id": "body-4",
+      "junctionWallShare": 0.266497,
+      "mouthM": 2.385052,
+      "rect": {
+        "x0": 75,
+        "x1": 223,
+        "y0": 520,
+        "y1": 611
+      },
+      "relation": "RECESSED_ATTACHED",
+      "sideWallShare": 0
+    },
+    {
+      "areaM2": 1.476258,
+      "built": true,
+      "decision": "BUILT",
+      "enclosed": true,
+      "id": "body-5",
+      "junctionWallShare": 0,
+      "mouthM": 10.278744,
+      "rect": {
+        "x0": 66,
+        "x1": 101,
+        "y0": 611,
+        "y1": 759
+      },
+      "relation": "PROJECTING_WING",
+      "sideWallShare": 0.767575
+    },
+    {
+      "areaM2": 33.127758,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": false,
+      "id": "body-6",
+      "junctionWallShare": 0.262645,
+      "mouthM": 14.518,
+      "rect": {
+        "x0": 75,
+        "x1": 370,
+        "y0": 611,
+        "y1": 759
+      },
+      "relation": "UNKNOWN",
+      "sideWallShare": 0.635833
+    },
+    {
+      "areaM2": 0.828917,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": true,
+      "id": "body-7",
+      "junctionWallShare": 1,
+      "rect": {
+        "x0": 289.5,
+        "x1": 302.5,
+        "y0": 611,
+        "y1": 686.5
+      },
+      "relation": "FLUSH_ATTACHED",
+      "sideWallShare": 1
+    },
+    {
+      "areaM2": 0.741085,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": true,
+      "id": "body-8",
+      "junctionWallShare": 1,
+      "mouthM": 2.850428,
+      "rect": {
+        "x0": 370,
+        "x1": 389.5,
+        "y0": 611,
+        "y1": 656
+      },
+      "relation": "FLUSH_ATTACHED",
+      "sideWallShare": 0.995427
+    },
+    {
+      "areaM2": 7.695881,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": false,
+      "id": "body-9",
+      "junctionWallShare": 0,
+      "mouthM": 2.850428,
+      "rect": {
+        "x0": 389.5,
+        "x1": 592,
+        "y0": 611,
+        "y1": 656
+      },
+      "relation": "SEPARATE_BODY",
+      "sideWallShare": 0.41901
+    },
+    {
+      "areaM2": 2.56466,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": true,
+      "id": "body-10",
+      "junctionWallShare": 0,
+      "mouthM": 14.518,
+      "rect": {
+        "x0": 269.5,
+        "x1": 370,
+        "y0": 656,
+        "y1": 759
+      },
+      "relation": "SEPARATE_BODY",
+      "sideWallShare": 0.961617
+    }
+  ],
+  "completions": [
+    {
+      "areaBeforeM2": 2.56466,
+      "areaM2": 0,
+      "decision": "REJECTED",
+      "evidence": {
+        "chains": 0,
+        "glazing": 0,
+        "returns": 1,
+        "strictEncloses": false,
+        "vehicleDoors": 0
+      },
+      "id": "completion-0",
+      "junction": {
+        "doorM": 0,
+        "lengthM": 0,
+        "openM": 0
+      },
+      "kind": "ATTACHED_ROOM",
+      "reason": "WALLED_OFF: no open edge or door reaches it from the house — a room or a yard behind a wall",
+      "rect": {
+        "x0": 269.5,
+        "x1": 370,
+        "y0": 656,
+        "y1": 759
+      },
+      "rectBefore": {
+        "x0": 269.5,
+        "x1": 370,
+        "y0": 656,
+        "y1": 759
+      },
+      "side": "S",
+      "sides": {
+        "lengthM": 0,
+        "postShare": 0,
+        "wallShare": 0
+      },
+      "weakGaps": []
+    },
+    {
+      "areaBeforeM2": 1.134219,
+      "areaM2": 0,
+      "decision": "REJECTED",
+      "evidence": {
+        "chains": 0,
+        "glazing": 0,
+        "returns": 1,
+        "strictEncloses": false,
+        "vehicleDoors": 0
+      },
+      "id": "completion-1",
+      "junction": {
+        "doorM": 0,
+        "lengthM": 0,
+        "openM": 0
+      },
+      "kind": "ATTACHED_ROOM",
+      "reason": "WALL_SLIVER: no free floor three quarters of a wall across — the thickness of a wall, not a room",
+      "rect": {
+        "x0": 66,
+        "x1": 101,
+        "y0": 656,
+        "y1": 759
+      },
+      "rectBefore": {
+        "x0": 66,
+        "x1": 101,
+        "y0": 656,
+        "y1": 759
+      },
+      "side": "S",
+      "sides": {
+        "lengthM": 0,
+        "postShare": 0,
+        "wallShare": 0
+      },
+      "weakGaps": []
+    },
+    {
+      "areaBeforeM2": 0.828917,
+      "areaM2": 0,
+      "decision": "REJECTED",
+      "evidence": {
+        "chains": 0,
+        "glazing": 0,
+        "returns": 0,
+        "strictEncloses": false,
+        "vehicleDoors": 0
+      },
+      "id": "completion-2",
+      "junction": {
+        "doorM": 0,
+        "lengthM": 0,
+        "openM": 0
+      },
+      "kind": "ATTACHED_ROOM",
+      "reason": "WALL_SLIVER: no free floor three quarters of a wall across — the thickness of a wall, not a room",
+      "rect": {
+        "x0": 289.5,
+        "x1": 302.5,
+        "y0": 611,
+        "y1": 686.5
+      },
+      "rectBefore": {
+        "x0": 289.5,
+        "x1": 302.5,
+        "y0": 611,
+        "y1": 686.5
+      },
+      "sides": {
+        "lengthM": 0,
+        "postShare": 0,
+        "wallShare": 0
+      },
+      "weakGaps": []
+    },
+    {
+      "areaBeforeM2": 0.741085,
+      "areaM2": 0,
+      "decision": "REJECTED",
+      "evidence": {
+        "chains": 0,
+        "glazing": 0,
+        "returns": 0,
+        "strictEncloses": false,
+        "vehicleDoors": 0
+      },
+      "id": "completion-3",
+      "junction": {
+        "doorM": 0,
+        "lengthM": 0,
+        "openM": 0
+      },
+      "kind": "ATTACHED_ROOM",
+      "reason": "WALL_SLIVER: no free floor three quarters of a wall across — the thickness of a wall, not a room",
+      "rect": {
+        "x0": 370,
+        "x1": 389.5,
+        "y0": 611,
+        "y1": 656
+      },
+      "rectBefore": {
+        "x0": 370,
+        "x1": 389.5,
+        "y0": 611,
+        "y1": 656
+      },
+      "sides": {
+        "lengthM": 0,
+        "postShare": 0,
+        "wallShare": 0
+      },
+      "weakGaps": []
+    },
+    {
+      "areaBeforeM2": 0.543462,
+      "areaM2": 0,
+      "decision": "REJECTED",
+      "evidence": {
+        "chains": 0,
+        "glazing": 0,
+        "returns": 1,
+        "strictEncloses": false,
+        "vehicleDoors": 0
+      },
+      "id": "completion-4",
+      "junction": {
+        "doorM": 0,
+        "lengthM": 0,
+        "openM": 0
+      },
+      "kind": "ATTACHED_ROOM",
+      "reason": "WALL_SLIVER: no free floor three quarters of a wall across — the thickness of a wall, not a room",
+      "rect": {
+        "x0": 370,
+        "x1": 389.5,
+        "y0": 194,
+        "y1": 227
+      },
+      "rectBefore": {
+        "x0": 370,
+        "x1": 389.5,
+        "y0": 194,
+        "y1": 227
+      },
+      "side": "N",
+      "sides": {
+        "lengthM": 0,
+        "postShare": 0,
+        "wallShare": 0
+      },
+      "weakGaps": []
+    }
+  ],
+  "frameId": "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
+  "masses": [
+    {
+      "id": "mass-0",
+      "rect": {
+        "x0": 592,
+        "x1": 750,
+        "y0": 227,
+        "y1": 611
+      }
+    },
+    {
+      "id": "mass-1",
+      "rect": {
+        "x0": 66,
+        "x1": 289.5,
+        "y0": 396.166667,
+        "y1": 520
+      }
+    },
+    {
+      "id": "mass-2",
+      "rect": {
+        "x0": 223,
+        "x1": 389.5,
+        "y0": 227,
+        "y1": 298.5
+      }
+    },
+    {
+      "id": "mass-3",
+      "rect": {
+        "x0": 223,
+        "x1": 302.5,
+        "y0": 298.5,
+        "y1": 396.166667
+      }
+    },
+    {
+      "id": "mass-4",
+      "rect": {
+        "x0": 289.5,
+        "x1": 345,
+        "y0": 444,
+        "y1": 529
+      }
+    },
+    {
+      "id": "mass-5",
+      "rect": {
+        "x0": 289.5,
+        "x1": 345,
+        "y0": 551,
+        "y1": 611
+      }
+    }
+  ]
+}

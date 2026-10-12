@@ -1,0 +1,236 @@
+{
+  "counts": {
+    "events": 567,
+    "files": 37
+  },
+  "evidenceModeVersion": "1.4.0",
+  "failureCode": "PLAN_LAYOUT_REJECTED",
+  "files": [
+    {
+      "bytes": 1525,
+      "name": "00-source-summary.json",
+      "sha256": "8ec8289f8055ba8bffc6f134ae3e227b3ed4faacdff1d6d4a8fe36426dff7230"
+    },
+    {
+      "bytes": 6968,
+      "name": "01-page-classification.json",
+      "sha256": "fa094a6786eacb1d153d46f90ad758456434a7449bfb1bf2b821cbc3d9a5a2a6"
+    },
+    {
+      "bytes": 25880,
+      "name": "02-asset-inventory.json",
+      "sha256": "18aa4a2c91f1df7cedc4e1d3da7cd074a154b7e3cfb7cad9b80ca77c43f075ac"
+    },
+    {
+      "bytes": 848,
+      "name": "03-plan-frame.json",
+      "sha256": "8091c17f703cabca3e80fa47f1c3de321e66023c1a73af6ccd1687ec1e23af94"
+    },
+    {
+      "bytes": 5913,
+      "name": "03-plan-frame.svg",
+      "sha256": "1b9cd296c2258d2c2d1c3f1ac2fd9346d74ed35d2e4fd1269c385b4624743c1f"
+    },
+    {
+      "bytes": 8911,
+      "name": "04-wall-bands.json",
+      "sha256": "3ac6973d60ceb0ed4f1f03795096e61fbf39b196241a9881705fc7f0537676d8"
+    },
+    {
+      "bytes": 4975,
+      "name": "04-wall-bands.svg",
+      "sha256": "6afd4044672ff0a600cebebe7f33306c678f38a7e27a7c2a4ad21fbeb049588c"
+    },
+    {
+      "bytes": 49867,
+      "name": "05-dimension-lines.json",
+      "sha256": "c9ba06a2c8731e214a37e4074e42ac840249271bffde19d1bbb3784f11556263"
+    },
+    {
+      "bytes": 31948,
+      "name": "05-dimension-lines.svg",
+      "sha256": "3ab77bafa33b852a73954dcb352e78ad8e73d817269efd84135a53a3dc51baa5"
+    },
+    {
+      "bytes": 88670,
+      "name": "06-tick-candidates.json",
+      "sha256": "41f079462f608a7d140ad48ba9c72d8a0c063ca672bebd8c3226d8a124ab201c"
+    },
+    {
+      "bytes": 56306,
+      "name": "06-tick-candidates.svg",
+      "sha256": "bc32cd5cdb6bafadf49017f2b97f6fc78afc6bd769f73171e3ceea36bc1f06cb"
+    },
+    {
+      "bytes": 1180753,
+      "name": "07-ocr-labels.json",
+      "sha256": "ad9d08257822f3d755d61d682a92082301711f4f5e48f6e24ef8ff5b1c2decd9"
+    },
+    {
+      "bytes": 59808,
+      "name": "07-ocr-labels.svg",
+      "sha256": "380d5b0573f65a1c4a02ac3b0896f217169bebbd20c2d975d029fff1ba97468b"
+    },
+    {
+      "bytes": 52212,
+      "name": "07b-dimension-topology.json",
+      "sha256": "87c3065d96b368032064deb6a51d40e4d8f647aacb34a6d0058ef558f2dc73ac"
+    },
+    {
+      "bytes": 26997,
+      "name": "07b-dimension-topology.svg",
+      "sha256": "ed3703b63e8574b69978c4e05d23b1460d93544877a94ab855f104c55962e5d0"
+    },
+    {
+      "bytes": 32608,
+      "name": "08-dimension-span-hypotheses.json",
+      "sha256": "f707ccf936cfb11fadfc37de8967d852d55593aefb89137659ba7540e8230e5b"
+    },
+    {
+      "bytes": 5285,
+      "name": "08-dimension-span-hypotheses.svg",
+      "sha256": "7ef67d85d4bdfa7e5d2f1826f4c1930e3e52e8388d818b19fd0f3111e39c5163"
+    },
+    {
+      "bytes": 6860,
+      "name": "09-scale-hypotheses.json",
+      "sha256": "92dc94cda69539f87eed910ff6d581636349b7ab761fd4f9a87694af5035c499"
+    },
+    {
+      "bytes": 2433,
+      "name": "09-scale-hypotheses.svg",
+      "sha256": "f5fa864356cfca78f27c2f4f358972b5c6d600bbbdd68567bd2925ddccdf08d4"
+    },
+    {
+      "bytes": 1320,
+      "name": "10-extent-hypotheses.json",
+      "sha256": "3b1e251812d83455316b6e19e57bc5487fd8d0677c49889bb5c3ff1baa601582"
+    },
+    {
+      "bytes": 379,
+      "name": "10-extent-hypotheses.svg",
+      "sha256": "17bcaa194d6626bad29ad1a6eba3b0dade20b928b42faa904137beee74ff221e"
+    },
+    {
+      "bytes": 3453,
+      "name": "11-envelope-candidates.json",
+      "sha256": "7a9a1639d5ce9b731177f6616d887acb3fdeb88f34af9e77e23521c0612d0851"
+    },
+    {
+      "bytes": 131413,
+      "name": "11-envelope-candidates.svg",
+      "sha256": "89419d1d0f6c7ffa9a290e0851cab15f629be4a0782d175ab98edca2ea679770"
+    },
+    {
+      "bytes": 5376,
+      "name": "12-opening-observations.json",
+      "sha256": "6a01b39797fefe75381b16d6ebbe9a2b9158f6f9899dd0b7b66327dcfc5f9cd0"
+    },
+    {
+      "bytes": 3096,
+      "name": "12-opening-observations.svg",
+      "sha256": "e8b13e1e5b0632dd01bf13c7958b60a1d14ed859a395e0c2a9a4bac28eccb96c"
+    },
+    {
+      "bytes": 48923,
+      "name": "12b-gap-evidence.json",
+      "sha256": "faf7cd17428fc9bca2c81a764154153280bb61acb8c6bcf77c4b25ce2995699b"
+    },
+    {
+      "bytes": 2515,
+      "name": "12c-compound-facades.json",
+      "sha256": "ea7d0cdaa450f8688ecfaa823ed395f15743591ccd013e46f22b20ba1f7245a1"
+    },
+    {
+      "bytes": 9155,
+      "name": "13-body-candidates.json",
+      "sha256": "f9e859fad43478b37bb2c1a6983941022a4f9de8241eca5b20a3f57f61b620d0"
+    },
+    {
+      "bytes": 5857,
+      "name": "13-body-candidates.svg",
+      "sha256": "4f9388a9df8755509a298c5fd6fcfa4928c0081daaec0b05dc0fe0d52e2169ed"
+    },
+    {
+      "bytes": 4634,
+      "name": "14-selected-layout.json",
+      "sha256": "5f21150ac183b72ec1e62f6fb04cf1ccba88361d98548e9b2100895c749ad2a5"
+    },
+    {
+      "bytes": 3449,
+      "name": "14-selected-layout.svg",
+      "sha256": "87973ce81694967c73f38f6d04d5b7ade5d8c8f731cf127fcfc649f1d6444e0f"
+    },
+    {
+      "bytes": 1714,
+      "name": "14b-storey-support.json",
+      "sha256": "eef0f4e0e591a050a865c06dff9344e031837b6acd6f1912bab0dda9cca48506"
+    },
+    {
+      "bytes": 579,
+      "name": "15-canonical-model-summary.json",
+      "sha256": "12bf1c9c83f10e8aaceb72faee07c53fce6436600b1532a7ac14ae85bc438f56"
+    },
+    {
+      "bytes": 7391,
+      "name": "17-evidence-trace.json",
+      "sha256": "99ff9db85e04d77ce9029fb9b9b2e3372ebc56ee36ca0d9109145c1e32bd71ce"
+    },
+    {
+      "bytes": 315324,
+      "name": "18-decision-timeline.json",
+      "sha256": "248a2a8a9a498ed45e23bbb05a4884e21fc9ad045065f3e99dee111071045318"
+    },
+    {
+      "bytes": 1380,
+      "name": "README.md",
+      "sha256": "c51d8ea5be5f9efd19e1ce5157bf9ce5bc1a9b899af8e05834f916e42a6da69e"
+    },
+    {
+      "bytes": 4728,
+      "name": "evidence-summary.svg",
+      "sha256": "812d817d8b9fec00f01ebd97d6dbaa6e22879d6f9ea4b0422f37a2c041b9bd3e"
+    }
+  ],
+  "firstWarning": null,
+  "gitSha": "f70700a3b516ff163fc6949f0345c9a08ad2b37d",
+  "hashes": {
+    "candidate": null,
+    "metricEvidence": "5a5d84acd3fb718546afc80426f5427e2721b8fe46303c83991c2a5939aba137",
+    "model": null,
+    "scene": null,
+    "sceneContent": null,
+    "sourcePackage": "984194c59a4324b5f831ae71238ec04a5ec67840994ac91892c8f5695072e7d1"
+  },
+  "result": "FAILED",
+  "runId": "out-2",
+  "schema": "buildapp.evidence-pack",
+  "selectedPlanFrameId": "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
+  "versions": {
+    "adapter:archon.pl": "1.0.0",
+    "analysis-service": "1.1.0",
+    "boundary-evidence": "1.2.0",
+    "compound-facade": "1.0.0",
+    "evidence-pack": "1.4.0",
+    "generic-reader": "1.2.0",
+    "metric-evidence-schema": "1.7.0",
+    "metrics.axis-aligned-affine": "1",
+    "metrics.axis-topology": "1.1.0",
+    "metrics.chain-solver": "1.4.0",
+    "metrics.dimension-lines": "1.4.0",
+    "metrics.dimension-topology": "1.2.0",
+    "metrics.independent-scale": "1.4.0",
+    "metrics.numeric-lattice": "1.2.0",
+    "metrics.numeric-ocr": "1.4.0",
+    "metrics.ocr-ensemble": "1.0.0",
+    "plan-extent": "1.1.0",
+    "plan-resolver": "1.4.0",
+    "published-specification-reader": "1.0.0",
+    "recogniser": "ocr.ppocrv6-tiny-rec@9ef676d6",
+    "recogniser-model-sha256": "9ef676d6ed3c88256a2d92c640c44f25b0c40947e111b14b8be8f594091563e6",
+    "recogniser-runtime": "onnxruntime-web@1.30.0/wasm-simd/1-thread",
+    "recogniser-runtime-sha256": "3398c10d07d229bd91b364548e130e0e51a8e5704b88c7c083ebbeb78842dee2",
+    "solver-v2": "2.3.0",
+    "structural-layout": "1.1.0"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "boundary": {
+    "accepted": false,
+    "candidates": [
+      {
+        "areaM2": 164.936989,
+        "cells": 570,
+        "gapsBridged": 31,
+        "id": "A_LONG_BAND_BOX",
+        "maxBridgedGapM": 2.967493,
+        "perimeterM": 55.253402,
+        "strongOpeningM": 4.306859,
+        "unsupportedM": 7.326818,
+        "wallM": 35.640646,
+        "weakOpeningM": 7.979078
+      },
+      {
+        "areaM2": 165.794425,
+        "cells": 600,
+        "gapsBridged": 31,
+        "id": "B_OPENING_AWARE_OUTLINE",
+        "maxBridgedGapM": 2.967493,
+        "perimeterM": 66.12561,
+        "strongOpeningM": 12.517817,
+        "unsupportedM": 0.270211,
+        "wallM": 45.358504,
+        "weakOpeningM": 7.979078
+      }
+    ],
+    "extensions": [
+      {
+        "accepted": false,
+        "areaM2": 3.630609,
+        "cells": 34,
+        "continuesAcrossM": 0
+      },
+      {
+        "accepted": false,
+        "areaM2": 0.462141,
+        "cells": 2,
+        "continuesAcrossM": 0
+      },
+      {
+        "accepted": false,
+        "areaM2": 0.450441,
+        "cells": 4,
+        "continuesAcrossM": 0
+      },
+      {
+        "accepted": false,
+        "areaM2": 1.790065,
+        "cells": 8,
+        "continuesAcrossM": 0
+      },
+      {
+        "accepted": false,
+        "areaM2": 0.257395,
+        "cells": 2,
+        "continuesAcrossM": 0
+      }
+    ],
+    "gaps": {
+      "DRAWING_BREAK_SUPPORTED": 594,
+      "OPENING_SUPPORTED": 25,
+      "TRUE_EXTERIOR_GAP": 212,
+      "UNKNOWN_GAP": 37
+    },
+    "policies": {
+      "disagree": false,
+      "exclusionAccepted": false,
+      "exclusionAreaM2": 164.936989,
+      "strictAccepted": false,
+      "strictAreaM2": 164.936989
+    },
+    "why": "the outline adds nothing the box leaves open: the box stands"
+  },
+  "cells": {
+    "enclosed": 128,
+    "total": 128
+  },
+  "frameId": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+  "longBandBox": {
+    "x0": 78,
+    "x1": 797.689655,
+    "y0": 203,
+    "y1": 536
+  }
+}

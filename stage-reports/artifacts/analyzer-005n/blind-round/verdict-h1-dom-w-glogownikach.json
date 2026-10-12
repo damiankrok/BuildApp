@@ -1,0 +1,56 @@
+{
+  "run": "<run dir>",
+  "completed": false,
+  "labelledPlanStoreys": [
+    "GROUND"
+  ],
+  "publishedFootprintM2": 178.13,
+  "checklist": {
+    "noFloorPlan": false,
+    "legibleOverallDimension": {
+      "ocrTokensOnGroundCopies": 162,
+      "tallestPx": 242,
+      "needsRawMeasurement": false
+    },
+    "wallsUnder4pxOnEveryGroundCopy": false,
+    "groundWallPx": [
+      {
+        "frameId": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+        "sizePx": {
+          "height": 853,
+          "width": 853
+        },
+        "wallPx": 14.5
+      }
+    ],
+    "floorPlanAssetsLost": []
+  },
+  "failure": {
+    "code": "RECONSTRUCTION_FAILED",
+    "reasonCode": "PLAN_RESOLUTION_INCONCLUSIVE",
+    "message": "SOURCE_CONFLICT: the drawing contradicts the scale the plan was registered at (2 long readings as printed on both axes agree on 2.432039 cm/px (501/206 px, 810/333 px)). Read at copy dimensioned 0cb0a5c1d9, chain extent, scale 2.432039 cm/px, largest-first tiling, sides as gridded the plan is better supported by the drawing itself (56% of the stated chain length contradicted, against 79%), but the published footprint does not verify it (141.2 m², WRONG (-20.7%); the first reading: 163.8 m², NEAR (-8.0%)). Neither is built: the figure may refuse a reading, never choose one the drawing refutes. What is missing: a second printed dimension, read as printed, that states one of the two scales"
+  },
+  "resolution": null,
+  "challenge": {
+    "compositions": 1,
+    "conflictEvidence": "metric-dimension-1fce7f3126,metric-dimension-f810c24db9",
+    "copies": 1,
+    "decompositions": 2,
+    "distinctOutlines": 3,
+    "firstReading": "copy dimensioned 0cb0a5c1d9, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 163.8 m² (-8.0% of 178.13), NEAR, corroborated by ISOTROPY",
+    "firstRefuted": 0.793554,
+    "outcome": "REFUSED",
+    "preferred": "copy dimensioned 0cb0a5c1d9, chain extent, scale 2.432039 cm/px, largest-first tiling, sides as gridded: 1 body, 141.2 m² (-20.7% of 178.13), WRONG, FOOTPRINT_AREA_WRONG",
+    "preferredRefuted": 0.558224,
+    "publishedFigure": "VERIFIED",
+    "reading1": "copy dimensioned 0cb0a5c1d9, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 163.8 m² (-8.0% of 178.13), NEAR, corroborated by ISOTROPY",
+    "reading2": "copy dimensioned 0cb0a5c1d9, chain extent, scale 2.432039 cm/px, largest-first tiling, sides as gridded: 1 body, 141.2 m² (-20.7% of 178.13), WRONG, FOOTPRINT_AREA_WRONG",
+    "reading3": "copy dimensioned 0cb0a5c1d9, chain extent, scale 2.943633 cm/px, largest-first tiling, sides as gridded: 2 bodies, 212.5 m² (+19.3% of 178.13), NEAR, DEGENERATE_GEOMETRY",
+    "readings": 2,
+    "registrationRefuted": 0.793554,
+    "resolverVersion": "1.4.0",
+    "sourceConflict": "OUTER_TOTALS",
+    "trigger": "the drawing contradicts its scale: 2 long readings as printed on both axes agree on 2.432039 cm/px (501/206 px, 810/333 px)"
+  },
+  "verdict": "ALGORITHMIC_FAIL"
+}

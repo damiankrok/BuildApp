@@ -1,0 +1,17 @@
+{
+  "bodies": null,
+  "failure": {
+    "code": "RECONSTRUCTION_FAILED",
+    "message": "the lowest storey covers 96.93 m² against the 249.42 m² the publisher prints — 61.1% apart: the decomposition is not of this building; 63 other readings of the plan were weighed and none survived to a full composition",
+    "reasonCode": "PLAN_LAYOUT_REJECTED"
+  },
+  "footprintResidualPct": null,
+  "levels": [],
+  "lowestStoreyFootprintM2": null,
+  "modelHash": null,
+  "openings": null,
+  "publishedFootprintM2": 249.42,
+  "result": "FAILED",
+  "sceneSha256": null,
+  "walls": null
+}

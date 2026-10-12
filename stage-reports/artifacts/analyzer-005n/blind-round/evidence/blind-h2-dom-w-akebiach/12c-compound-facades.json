@@ -1,0 +1,90 @@
+{
+  "copies": [
+    {
+      "decompositionId": "dec-0d670ecd6dd2b445",
+      "frameId": "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
+      "scale": {
+        "anchors": 8,
+        "mppX": 0.029086,
+        "mppY": 0.029036,
+        "rmsM": 0.019914
+      },
+      "spans": [
+        {
+          "axis": "Y",
+          "fromPx": 369,
+          "id": "compound-Y-227-369-605",
+          "inkFromPx": 386,
+          "inkToPx": 589,
+          "intervals": [],
+          "inward": 1,
+          "linePx": 227,
+          "reading": "BOX",
+          "separators": [],
+          "toPx": 605,
+          "why": "no wall-thick ink inside the gap: one gap",
+          "widthM": 6.864296
+        },
+        {
+          "axis": "Y",
+          "fromPx": 369,
+          "id": "compound-Y-227-369-605",
+          "inkFromPx": 386,
+          "inkToPx": 589,
+          "intervals": [],
+          "inward": 1,
+          "linePx": 227,
+          "reading": "OUTLINE",
+          "separators": [],
+          "toPx": 605,
+          "why": "no wall-thick ink inside the gap: one gap",
+          "widthM": 6.864296
+        },
+        {
+          "axis": "Y",
+          "fromPx": 369,
+          "id": "compound-Y-236-369-605",
+          "inkFromPx": 391,
+          "inkToPx": 582,
+          "intervals": [],
+          "inward": 1,
+          "linePx": 235.5,
+          "reading": "OUTLINE",
+          "separators": [],
+          "toPx": 605,
+          "why": "no wall-thick ink inside the gap: one gap",
+          "widthM": 6.864296
+        },
+        {
+          "axis": "Y",
+          "fromPx": 369,
+          "id": "compound-Y-244-369-605",
+          "inkFromPx": 391,
+          "inkToPx": 582,
+          "intervals": [],
+          "inward": 1,
+          "linePx": 244,
+          "reading": "OUTLINE",
+          "separators": [
+            {
+              "accepted": false,
+              "axisPx": 242.428571,
+              "fromPx": 501,
+              "id": "sep-Y-244-501-512",
+              "inkKind": "POST",
+              "kind": "NOT_A_SEPARATOR",
+              "returnM": 0.174216,
+              "toPx": 512,
+              "why": "a free-standing block 11 px long with 0.17 m of wall behind it: a post, which establishes no wall relation"
+            }
+          ],
+          "toPx": 605,
+          "why": "1 piece of wall-thick ink inside the gap, none a return or a pier: one gap",
+          "widthM": 6.864296
+        }
+      ],
+      "storey": "GROUND"
+    }
+  ],
+  "selectedPlanFrameId": "frame-asset-rzut-8984f3a30b-4d37f1b2ba"
+}

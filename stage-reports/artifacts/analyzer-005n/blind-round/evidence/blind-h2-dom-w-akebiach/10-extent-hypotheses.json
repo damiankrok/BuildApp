@@ -1,0 +1,36 @@
+{
+  "chosen": {
+    "provenance": {
+      "x": "DIMENSION_CHAIN_EXTENT",
+      "y": "DIMENSION_CHAIN_EXTENT"
+    },
+    "rect": {
+      "x0": 65.5,
+      "x1": 750.5,
+      "y0": 194,
+      "y1": 759
+    },
+    "refusedChains": [],
+    "weak": false
+  },
+  "frameId": "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
+  "otherCopies": [],
+  "resolverReadings": [
+    {
+      "key": "reading1",
+      "summary": "copy dimensioned 4d37f1b2ba, chain extent, registered scale, largest-first tiling, outer faces: 7 bodies, 103.6 m² (-58.5% of 249.42), WRONG, corroborated by ISOTROPY"
+    },
+    {
+      "key": "reading2",
+      "summary": "copy dimensioned 4d37f1b2ba, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 4 bodies, 108.4 m² (-56.5% of 249.42), WRONG, corroborated by ISOTROPY"
+    },
+    {
+      "key": "reading3",
+      "summary": "copy dimensioned 4d37f1b2ba, chain extent, registered scale, walled-first tiling, sides as gridded, pocket mouths shut: 6 bodies, 121.0 m² (-51.5% of 249.42), WRONG, corroborated by ISOTROPY"
+    },
+    {
+      "key": "reading4",
+      "summary": "copy dimensioned 4d37f1b2ba, wall-ink extent, registered scale, largest-first tiling, sides as gridded, pocket mouths shut: 3 bodies, 130.1 m² (-47.8% of 249.42), WRONG, corroborated by ISOTROPY"
+    }
+  ]
+}
