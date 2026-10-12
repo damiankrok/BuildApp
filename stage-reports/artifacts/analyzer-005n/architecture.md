@@ -28,10 +28,12 @@ planExtent ─▶ decomposeCore ────────────────
 | SEPARATORS | every wall-thick ink piece strictly inside the gap, judged: **WALL_RETURN** — a wall runs inward from it ≥ max(0.9 m, 3 walls), read on the perpendicular line at its centre and ends; **FACADE_PIER** — a stretch of wall along the line (≥ 1.25 walls) that is part of a wall body; **NOT_A_SEPARATOR** — a free-standing block (POST), a short mark, or ink leaving no 0.6 m mouth beside it. Thin lines are never pieces | solid layer |
 | ATOMIC INTERVALS | the gap cut at the accepted separators | — |
 | INTERVAL EVIDENCE | infill (the longest stroke in the jambs' band window across the interval only) and whether it **runs past** a jamb (a slab edge, a kerb, a terrace outline does; a door leaf or glazing stops); whether both ends are **wall-thick ink** on the line (a separator or a jamb the ink reader confirms — a band can be a beam); the callout printed **at this interval** (never across a separator; one interval per callout, best confidence, id order); the drawn signature (`gapSignature`, as the boundary reads a gap) | mask, callouts |
-| RECESS | both ends carry a return, and a set-back wall lies within the shorter return's reach and at most `RECESS_MAX_DEPTH_M` (4.5 m, a car's length): a parallel line where wall ink and the holes in it cover ≥ 90 % of the mouth — a hole counts only when drawn across (glazing, a leaf) or door-sized beside along-wall ink inside the mouth, so two returns' cross-sections are never a back wall | solid layer |
-| ROLE | wider than 8 m → OPEN_SIDE; recess → RECESS_MOUTH unless its mouth is glazed or carries a leaf on its axis (an enclosed porch); infill that stops at two ink jambs → OPENING_IN_WALL; its own callout, walled on both sides deeper than a recess → OPENING_IN_WALL; else OPEN_SIDE | — |
+| RECESS | both ends carry a return, and a set-back wall lies no shallower than a return must run (max(0.9 m, 3 walls)), within the shorter return's reach and at most `RECESS_MAX_DEPTH_M` (4.5 m, a car's length): a parallel line where wall ink and the holes in it cover ≥ 90 % of the mouth. Beside a stretch of that wall a hole counts when drawn across (glazing, a leaf) or door-sized beside along-wall ink inside the mouth; between two returns' bare cross-sections only glazing standing alone counts — the floor in front of it clear, nothing drawn across a wall's breadth behind it — so a step, a flight of treads, paving or a threshold is never the back wall (council A1/B2) | solid layer, mask |
+| ROLE | wider than 8 m → OPEN_SIDE; recess → RECESS_MOUTH unless its mouth is glazed or carries a leaf on its axis, stopping at its jambs (an enclosed porch); infill that stops at two ink jambs and is not a dashed line or a pattern → OPENING_IN_WALL; its own callout, with both walls running on deeper than a recess can be (4.5 m: no set-back wall could have been missed) → OPENING_IN_WALL; else OPEN_SIDE. Glazing carrying on past a short pier into a window glazed between its own jambs is that window's, not a line running past (council D2) | — |
 
-Bounds: at most 24 spans a plan, 8 separator candidates a span, 64 back-wall reads an interval.
+Bounds: at most 24 spans a plan, 8 separator candidates a span (more: the gap is left whole and recorded, never read in part — council D3), 64 back-wall reads an interval.
+
+A gap read and left whole (no candidate, or none accepted) comes back as a span with no intervals and the reason, and is decided exactly as the incumbent decides it (council C2). A plan with no scale of its own (a unit-placeholder registration) is not read at all: it states no return, depth or width, as it states no opening width to the boundary (council E1).
 
 ## 3. What the decomposition does with it (`plan-decomposition.ts`)
 
@@ -39,7 +41,10 @@ Bounds: at most 24 spans a plan, 8 separator candidates a span, 64 back-wall rea
   interval). A gap with no accepted separator keeps the incumbent's decision exactly.
 - **The pocket test** runs per interval with the interval's own width (`max(6, 2.5 w²)`); a RECESS_MOUTH records its
   pocket and stays open — its back wall closes the building, its mouth does not; an interval wider than 8 m is not
-  weighed.
+  weighed. Every gap is weighed against the openings decided before the test and every own pocket is read before any
+  decision is applied, so the result never follows the order lines are enumerated in (council A2). Sibling mouths of
+  one span that open onto one space (shutting one also takes away more than its own pocket) are weighed together for
+  the space they share, against their joint width's pocket — the merged span's own limit (council D1).
 - **Back-wall lines** (`backWallLines`): where no grid line lies within min(0.45 m, half the depth) of a recess's
   set-back wall, one is added (support: none from chains or bands; `why` names the interval) and the wide gaps are read
   again on the new grid. Never on an outline override (the outline has its own grid). The facade reader skips these
@@ -60,8 +65,9 @@ the margin's axis test let in, is never joined (`compound-facade.test.ts` §21.2
 
 ## 5. Evidence
 
-- Plan-diagnostics digest: `plans[].compoundFacades` (only where a span exists: every other plan digests as before),
-  `wideOpenings[].compound`.
+- Plan-diagnostics digest: `plans[].compoundFacades` (every facade gap the reader read, cut or left whole; each tagged
+  `reading: BOX | OUTLINE`; when the boundary's outline is adopted the box reading's spans are kept beside it, decided
+  on their own reading's cells), `wideOpenings[].compound`.
 - Evidence Pack **1.4.0**: `12c-compound-facades.json` per analysed copy, and COMPOUND_FACADES timeline events (one
   per separator, one per interval with its role, final decision, signature and the cells behind its mouth).
   `requiredFiles('1.3.0')` is unchanged.
