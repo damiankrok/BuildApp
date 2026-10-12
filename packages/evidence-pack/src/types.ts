@@ -239,6 +239,7 @@ export type DigestJson = { planFrames?: number; selectedPlanFrameId: string | nu
 /** 005N: one compound facade span, as the plan-diagnostics digest records it (coordinates and ids only). */
 export type CompoundFacadeJson = {
   id: string
+  reading?: string
   axis: 'X' | 'Y'
   linePx: number
   fromPx: number

@@ -64,7 +64,7 @@ export function planDiagnosticsOf(draft: StructuralLayoutDraft, graph: SourceObs
       // 005K: a wide opening's geometric identity in its frame (its line and ends), beside its decision
       wideOpenings: d.wideOpenings.map((w) => ({ id: `wide-${w.axis}-${Math.round(w.linePx)}-${Math.round(w.fromPx)}-${Math.round(w.toPx)}`, kind: w.kind, axis: w.axis, linePx: round6(w.linePx), fromPx: round6(w.fromPx), toPx: round6(w.toPx), widthM: w.widthM, decision: w.decision, score: w.score, why: w.why, ...(w.compound ? { compound: w.compound } : {}) })),
       // 005N: recorded only where a facade gap holds a separator, so every other plan digests as it did
-      ...(d.compoundFacades && d.compoundFacades.length > 0 ? { compoundFacades: d.compoundFacades.map((s) => compoundOf(s, d)) } : {}),
+      ...compoundFacadesOf(d),
       bays: d.bays.map((b) => ({ side: b.side, rect: rect(b.rect), mouth: b.mouth.decision })),
       hypotheses: d.hypotheses.map((h) => ({ id: h.id, builtCells: h.builtCells, closedOpenings: h.closedOpenings, score: h.score, chosen: d.chosenHypothesis === h.id, why: h.why })),
       ...(d.boundary ? { boundary: boundaryOf(d.boundary) } : {}),
@@ -88,8 +88,19 @@ export function planDiagnosticsOf(draft: StructuralLayoutDraft, graph: SourceObs
   return { planFrames, selectedPlanFrameId: draft.base?.frame.id ?? null, plans, skipped: draft.skippedPlans.map((s) => ({ frameId: s.frameId, why: s.why })), ...(storeys.length > 0 ? { storeys } : {}) }
 }
 
+/**
+ * 005N: the plan's compound facade spans — the box reading's (`BOX`), and when the boundary's outline was adopted, the
+ * box reading's spans it was read from beside the outline's own (`OUTLINE`), each decided on its own reading's cells.
+ */
+function compoundFacadesOf(d: PlanDecomposition): { compoundFacades?: CompoundFacadeDigest[] } {
+  const own = d.boundary?.accepted ? 'OUTLINE' : 'BOX'
+  const box = d.compoundFacadesBoxReading ? d.compoundFacadesBoxReading.spans.map((s) => compoundOf(s, d.compoundFacadesBoxReading as Pick<PlanDecomposition, 'wideOpenings' | 'cells'>, 'BOX')) : []
+  const all = [...box, ...(d.compoundFacades ?? []).map((s) => compoundOf(s, d, own))]
+  return all.length > 0 ? { compoundFacades: all } : {}
+}
+
 /** 005N: one compound facade span, with each interval's final decision and the cells behind its mouth. */
-function compoundOf(s: CompoundFacadeSpan, d: PlanDecomposition): CompoundFacadeDigest {
+function compoundOf(s: CompoundFacadeSpan, d: Pick<PlanDecomposition, 'wideOpenings' | 'cells'>, reading: 'BOX' | 'OUTLINE'): CompoundFacadeDigest {
   const final = new Map(d.wideOpenings.filter((w) => w.compound).map((w) => [w.compound?.intervalId, w]))
   const behind = (from: number, to: number): CompoundFacadeDigest['intervals'][number]['behind'] =>
     d.cells
@@ -101,6 +112,7 @@ function compoundOf(s: CompoundFacadeSpan, d: PlanDecomposition): CompoundFacade
       .map((c) => ({ ix: c.ix, iy: c.iy, cls: c.classification === 'BUILT' ? ('B' as const) : c.classification === 'RECESS' ? ('R' as const) : ('O' as const) }))
   return {
     id: s.id,
+    reading,
     axis: s.axis,
     linePx: s.linePx,
     fromPx: s.fromPx,

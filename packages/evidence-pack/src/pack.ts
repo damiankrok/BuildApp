@@ -691,8 +691,10 @@ export function buildEvidencePack(run: RunRecord): EvidencePack {
     files.set('12c-compound-facades.json', json({ selectedPlanFrameId: selected?.frameId ?? null, copies }))
     for (const c of copies) {
       for (const s of c.spans) {
-        for (const x of s.separators) event('COMPOUND_FACADES', `separator:${c.frameId}/${x.id}`, x.accepted ? x.kind : 'NOT_A_SEPARATOR', x.why)
-        for (const i of s.intervals) event('COMPOUND_FACADES', `interval:${c.frameId}/${i.id}`, `${i.role}:${i.decision}`, `${round(i.widthM, 3)} m ${i.signature}; behind it ${i.behind.map((b) => b.cls).join('') || 'nothing'}; ${i.why}`)
+        // the box reading and an adopted outline's are two readings of one copy: an id is unique only within its reading
+        const at = `${c.frameId}/${s.reading ?? 'BOX'}`
+        for (const x of s.separators) event('COMPOUND_FACADES', `separator:${at}/${x.id}`, x.accepted ? x.kind : 'NOT_A_SEPARATOR', x.why)
+        for (const i of s.intervals) event('COMPOUND_FACADES', `interval:${at}/${i.id}`, `${i.role}:${i.decision}`, `${round(i.widthM, 3)} m ${i.signature}; behind it ${i.behind.map((b) => b.cls).join('') || 'nothing'}; ${i.why}`)
       }
     }
   }

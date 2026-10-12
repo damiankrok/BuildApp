@@ -155,6 +155,8 @@ type Rect = { x0: number; y0: number; x1: number; y1: number }
  */
 export type CompoundFacadeDigest = {
   id: string
+  /** The reading the span was cut in: the box reading, or the adopted outline's (whose source the box reading is). */
+  reading: 'BOX' | 'OUTLINE'
   axis: 'X' | 'Y'
   linePx: number
   fromPx: number

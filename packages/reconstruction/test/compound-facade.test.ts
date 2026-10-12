@@ -10,11 +10,12 @@
  */
 import { describe, expect, it } from 'vitest'
 import { runLengthBands } from '@buildapp/source-cv'
-import { BANDS, wall } from './boundary-plan.js'
-import { PlanDrawing, TRANSFORMS, runScene } from './transforms.js'
+import { BANDS, clear, glazeH, ring, run, wall } from './boundary-plan.js'
+import { BLACK, drawLine } from '../../source-cv/test/draw.js'
+import { PlanDrawing, TRANSFORMS, render, runScene } from './transforms.js'
 import type { Scene } from './transforms.js'
-import { WALL, chain, mask, sheet, walls } from './plan.js'
-import { bandWallThickness, planExtent } from '../src/index.js'
+import { WALL, chain, graphOf, mask, metricsOf, planFrame, registration, sheet, walls } from './plan.js'
+import { bandWallThickness, decomposePlan, exteriorTicksOf, extentSidesOf, planExtent, reconstructV2, wallWitness } from '../src/index.js'
 import type { CompoundFacadeSpan, PlanCallout, PlanDecomposition } from '../src/index.js'
 
 const W = 460
@@ -411,5 +412,84 @@ describe('005N §21.22 — the extent: an attached wing is joined by its walls, 
     const attached = extentOf(true)
     expect(attached.x1).toBeGreaterThan(600)
     expect(attached.why).toMatch(/running into/)
+  })
+})
+
+describe('005N — a plan with no scale of its own is read as before', () => {
+  it('a unit-placeholder registration states no return, depth or interval width: no span is read, the gaps decide as the incumbent did', () => {
+    const m = mask(render(entranceAndGarage()))
+    const bands = runLengthBands(m, BANDS)
+    const wallPx = bandWallThickness(bands, WALL)
+    const chains = [chain('cx', 'HORIZONTAL', [40, 360], { baselinePx: 12 }), chain('cy', 'VERTICAL', [40, 280], { baselinePx: 12 })]
+    const extent = planExtent(chains, bands, wallPx, wallWitness(bands, wallPx, m))
+    if (!extent) throw new Error('no frame')
+    const read = (confidence: number): PlanDecomposition => decomposePlan(m, chains, bands, { ...registration(), confidence }, extent.rect, { sheetWallPx: WALL, exteriorTicks: exteriorTicksOf(chains, extent.roles), extentSides: extentSidesOf(chains, extent, wallPx) })
+    expect(spansOf(read(0.9))).not.toHaveLength(0)
+    const unscaled = read(0)
+    expect(unscaled.compoundFacades).toBeUndefined()
+    expect(unscaled.wideOpenings.some((w) => w.compound)).toBe(false)
+  })
+})
+
+/**
+ * A house whose outline the boundary adopts (a wing on short glazed piers beyond the chains' depth, at the south-east)
+ * and, on the same front, the target compound: the recessed entrance and, past its return, a garage. The outline is
+ * read from the box reading, so the box reading's compound span must stay on the record even though the outline's own
+ * grid reads none.
+ */
+function adoptedOutlineWithCompound(garageDoor: boolean): ReturnType<typeof sheet> {
+  const r = sheet(520, 460)
+  ring(r, 40, 40, 459, 279)
+  clear(r, 300, 268, 447, 279)
+  wall(r, 288, 268, 299, 399)
+  wall(r, 448, 268, 459, 399)
+  wall(r, 288, 388, 315, 399)
+  wall(r, 432, 388, 459, 399)
+  glazeH(r, 388, 316, 431)
+  clear(r, 120, 268, 251, 279)
+  wall(r, 108, 150, 108 + WALL - 1, 279)
+  wall(r, 180, 150, 180 + WALL - 1, 279)
+  wall(r, 108, 228, 191, 228 + WALL - 1)
+  clear(r, 135, 228, 155, 239)
+  drawLine(r, 135, 233, 155, 233, BLACK)
+  wall(r, 108, 150, 263, 161)
+  wall(r, 252, 150, 263, 279)
+  clear(r, 210, 150, 225, 161)
+  drawLine(r, 210, 155, 225, 155, BLACK)
+  if (garageDoor) drawLine(r, 192, 276, 251, 276, BLACK)
+  return r
+}
+
+describe('005N §19 — an adopted outline keeps the box reading\'s compound spans on the record', () => {
+  it('the outline is adopted, its own grid reads no span, and the box reading\'s span is carried with its roles', () => {
+    for (const door of [true, false]) {
+      const { d } = run(adoptedOutlineWithCompound(door), [40, 288, 460], [40, 280, 400])
+      expect(d.boundary?.accepted, `door ${door}`).toBe(true)
+      expect(d.compoundFacades, `door ${door}`).toBeUndefined()
+      const box = d.compoundFacadesBoxReading
+      expect(box?.spans.map((s) => s.intervals.map((i) => i.role)), `door ${door}`).toEqual([['RECESS_MOUTH', door ? 'OPENING_IN_WALL' : 'OPEN_SIDE']])
+      // decided on its own reading: each interval's wide opening is among the box reading's
+      for (const i of box?.spans[0].intervals ?? []) expect(box?.wideOpenings.some((w) => w.compound?.intervalId === i.id)).toBe(true)
+    }
+  })
+
+  it('the plan digest carries it as the BOX reading, each interval with its decision and the cells behind its mouth', () => {
+    const frame = planFrame('frame-plan', 'GROUND', { width: 520, height: 460 })
+    const on = <T extends { frameId: string }>(x: T): T => ({ ...x, frameId: frame.id })
+    const r = reconstructV2({
+      label: 'fixture',
+      slug: 'fixture',
+      sourcePackageId: 'src-test',
+      sourcePackageHash: 'd'.repeat(64),
+      graph: graphOf([frame]),
+      metrics: metricsOf([on(chain('cx', 'HORIZONTAL', [40, 288, 460], { baselinePx: 12 })), on(chain('cy', 'VERTICAL', [40, 280, 400], { baselinePx: 12 }))], [on(registration())]),
+      raster: () => adoptedOutlineWithCompound(true),
+    })
+    const plan = r.planDiagnostics?.plans.find((p) => p.frameId === frame.id)
+    expect(plan?.boundary?.accepted).toBe(true)
+    const spans = plan?.compoundFacades ?? []
+    expect(spans.map((s) => s.reading)).toEqual(['BOX'])
+    expect(spans[0].intervals.map((i) => [i.role, i.decision])).toEqual([['RECESS_MOUTH', 'OPEN_SIDE'], ['OPENING_IN_WALL', 'OPENING_IN_WALL']])
+    expect(spans[0].intervals.every((i) => i.behind.length > 0)).toBe(true)
   })
 })

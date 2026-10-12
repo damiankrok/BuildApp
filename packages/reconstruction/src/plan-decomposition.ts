@@ -286,6 +286,12 @@ export type PlanDecomposition = {
    * separators accepted and refused, each interval's evidence and role. Absent when no facade gap holds a separator.
    */
   compoundFacades?: CompoundFacadeSpan[]
+  /**
+   * 005N: when the boundary's outline was adopted, the box reading's compound spans, with the wide openings and cells
+   * they were decided on: the outline is read from that reading, so what its facade gaps were cut into stays on the
+   * record although the outline's own grid reads no compound span.
+   */
+  compoundFacadesBoxReading?: { spans: CompoundFacadeSpan[]; wideOpenings: WideOpeningDecision[]; cells: PlanCell[] }
 }
 
 export type PlanDecompositionOptions = {
@@ -1798,7 +1804,8 @@ export function decomposePlan(
   const extension = boundaryExtension(mask, bands, registration, extent, incumbent, options, chains)
   if (!extension.override) return { ...incumbent, boundary: extension.record }
   const outlined = decomposeCore(mask, chains, bands, registration, extent, options, extension.override)
-  return { ...outlined, boundary: extension.record }
+  const box = incumbent.compoundFacades ? { compoundFacadesBoxReading: { spans: incumbent.compoundFacades, wideOpenings: incumbent.wideOpenings, cells: incumbent.cells } } : {}
+  return { ...outlined, boundary: extension.record, ...box }
 }
 
 /** The grid, the outline and its border edges a decomposition is re-cut on when the boundary is accepted. */
@@ -1874,9 +1881,11 @@ function decomposeCore(
 
   const maxWidePx = opt.maxWideOpeningM / Math.max(mppX, mppY)
   const ctxOf = (): WideOpeningContext => ({ mask, bands: inside, linesX, linesY, envelope, wallPx, mppX, mppY, callouts: opt.callouts, maxOpeningPx, maxWidePx, shutMouths: opt.shutPocketMouths, minJambPx, minInfill: opt.minInfill, tolerance })
-  // 005N: a wide gap on a facade is read for its own topology first (`compound-facade.ts`).
+  // 005N: a wide gap on a facade is read for its own topology first (`compound-facade.ts`). A plan with no scale of its
+  // own (a unit placeholder) states no return length, recess depth or interval width, as it states no opening width to
+  // the boundary (`decomposePlan`): its gaps are read as before.
   const setBack = new Set<string>()
-  const compoundOf = facadeCompoundReader(mask, envelope, options.sheetWallPx ?? wallPx, mppX, mppY, opt, setBack)
+  const compoundOf = registration.confidence > 0 ? facadeCompoundReader(mask, envelope, options.sheetWallPx ?? wallPx, mppX, mppY, opt, setBack) : undefined
   let wide = collinearWideGaps(ctxOf(), compoundOf)
   // A recess interval's set-back wall closes the building behind it, so the grid must have a line on it: a cell that
   // holds the recess and the room behind it together cannot tell the open mouth from the open interior. Added once,
