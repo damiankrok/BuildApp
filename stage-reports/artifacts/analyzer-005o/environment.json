@@ -1,0 +1,80 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005O",
+ "recordedAt": "2026-10-12",
+ "startSha": "b680cd440f7e202ad6813f0a3bffdb563abfa772",
+ "branch": "analyzer/metric-evidence-oss-bakeoff-v1",
+ "mirror": "claude/new-session-3kzcgh",
+ "upstreamAtStart": {
+  "analyzer/compound-facade-atomic-intervals-v1": "b680cd440f7e202ad6813f0a3bffdb563abfa772",
+  "claude/new-session-3kzcgh": "b680cd440f7e202ad6813f0a3bffdb563abfa772"
+ },
+ "gitStatusAtStart": "clean (0 porcelain lines)",
+ "node": "v22.22.2",
+ "npm": "10.9.7",
+ "node18": {
+  "path": "/home/user/work005g/node18/bin/node",
+  "version": "v18.20.4"
+ },
+ "python": "Python 3.11.15",
+ "pillow": "12.3.0",
+ "cpu": {
+  "model": "Intel(R) Xeon(R) Processor @ 2.80GHz",
+  "cores": 4
+ },
+ "ramGiB": 15.7,
+ "disk": "session allowance; ~2.3 GB free after pruning this session's own scratch (df shows 94% used)",
+ "platform": "Linux-6.18.44-fc-v114-x86_64-with-glibc2.39",
+ "inherited005N": {
+  "freezeSha": "d7873977aac89d6283e41f94ec1942b570adceaf",
+  "freezeCi": "38297543325",
+  "finalCi": {
+   "run": "212",
+   "id": "38302648949",
+   "sha": "f091d1505d27266704daf394fcc356145a36f6a0"
+  },
+  "lastCi213": {
+   "id": "38307579742",
+   "sha": "b680cd440f7e202ad6813f0a3bffdb563abfa772",
+   "status": "SUCCESS (per brief)"
+  },
+  "ownerApk": {
+   "versionCode": 1212,
+   "sha256": "1d009f91c38d79a7a0fe48ecff550f47e0258891a1d751f0cbdf11b1ba0afa51",
+   "note": "not an output of 005O; untouched"
+  }
+ },
+ "ocrAssets": {
+  "model": {
+   "file": "packages/numeric-recogniser-ort/models/PP-OCRv6_tiny_rec.onnx",
+   "sha256": "9ef676d6ed3c88256a2d92c640c44f25b0c40947e111b14b8be8f594091563e6"
+  },
+  "dictionary": {
+   "file": "packages/numeric-recogniser-ort/models/PP-OCRv6_tiny_rec.dict.json",
+   "sha256": "9a8199f82393355db5423a9ac7ed6f821350c17237a7c9d8fc40566bc3eafd6b"
+  },
+  "wasm": {
+   "file": "node_modules/onnxruntime-web/dist/ort-wasm-simd-threaded.wasm",
+   "sha256": "3398c10d07d229bd91b364548e130e0e51a8e5704b88c7c083ebbeb78842dee2"
+  },
+  "identicalToApk1212Pins": true
+ },
+ "criticalSources": {
+  "packages/source-metrics/src/numeric-lattice.ts": "f3fb974ab5d30e5f866909da7cb2fab596994d33973bbf90778f9db5c5997a7c",
+  "packages/source-metrics/src/ensemble.ts": "30b17d3ec339234cfd57500e5b1ae817a4e72d8af4ae77db2f6f9207f5cb344f",
+  "packages/source-metrics/src/recogniser.ts": "4e0ff7d6d3819ab23499e8fe50a99f54377f2062977a0730103824c35e409440",
+  "packages/source-metrics/src/extract.ts": "23dc54cfb4ce0da39da65de7c1c66eb16230d7945a4330eee28eee7b56ebd43b",
+  "packages/source-metrics/src/ocr.ts": "e70302e3fa550b62dba403b2e8710215900f76932c755a065b72b660eed025ae",
+  "packages/source-metrics/src/chains.ts": "fb7357cb8b6065f11a50ec6dc07f1ffc6fcfd8eb7ceb00d6fa6a06c3ba003e10",
+  "packages/source-metrics/src/axis-topology.ts": "b784f58f6e2bbd6c6d63f7506f3c06ebbf3d5c68616fc179841d4971442f6f43",
+  "packages/source-metrics/src/metric-solution.ts": "4194c3d003c6470a155530ae2eebadd472596f9df877b495dd680fadb7846671",
+  "packages/source-metrics/src/registration.ts": "e860f010f0bc2f8396c50462a57bebca1856b097afab5df6a580e53c92230d6c",
+  "packages/source-metrics/src/dimension-lines.ts": "d28ad2925141db377628f4369699374091193518b8f7665e9327ef02ebb511e3",
+  "packages/reconstruction/src/plan-resolution.ts": "38d3cdd197437f81e3e055ce61101d09f15ab84195b480858a902c9f96dbddae",
+  "packages/reconstruction/src/plan-decomposition.ts": "6291a8e3407fd327bdc7eeb8419df179bb78cb8c7988dab94e3c593ee77b93ce",
+  "packages/reconstruction/src/compound-facade.ts": "70da0584c09d9ab0a226a7a618437c3bafbe0e3ec6135f71cf5f89875c1b9978"
+ },
+ "auditDocument": "BUILDPLAN_OPEN_SOURCE_ANALYZER_TECHNOLOGY_AUDIT.md NOT PRESENT locally (searched / and uploads); brief §6 candidate descriptions used instead; not claimed as read",
+ "productionFreezeManifest": "stage-reports/artifacts/analyzer-005o/production-freeze-start.json (research/analyzer-005o/freeze-manifest.mjs)",
+ "workDirOutsideRepo": "/home/user/work005o (publisher-derived bytes, crops, replays; never committed)",
+ "deviceEnvironment": "no physical ARM64 phone; no Android measurement is made or claimed in 005O; 005H ARM64 parity stays PENDING"
+}
