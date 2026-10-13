@@ -1,0 +1,295 @@
+{
+ "lenses": [
+  {
+   "findings": [
+    {
+     "claim": "On G\u0142ogowniki (one of the 44 rows), the withdrawn OUTER_TOTALS rested on tokens 501/206 px and 810/333 px. One external LEADS reading is enough to withdraw it: 870 on metric-dimension-f810c24db9, where the lattice is AMBIGUOUS 810 and the token is 810. The registered scale's metric solution already cites that same ink's 870/333 px (dim-obs-810-rotated-cw-6419e0889a, ensemble LEADS, latticeAsRead 810) as a witness of its selected hypothesis scale-2-628695. So the reader that partly set the scale is also the reader that silences the classic tokens' accusation. This is the circular defence that H2 calls 'a constructed case', and it is the actual mechanism of the one newly completed house. Only the unknown truth (here, the external is right) separates the real case from its mirror, and in the mirror 1.5.0 ships a wrong scale. The gap text also says 'the scale stands without these statements confirming it' (reconstruct-v2.ts:288), but the statement does confirm the scale through its external reading. Plausibility on real data, using the truth labels for evaluation only: corroborating EXTERNAL readings were wrong 0 times in 459 labelled, weighed statements (the same truth population as 005O, so this is not independent evidence; rule-of-three upper bound about 0.65% per statement). 26 of 39 base-frame selected scales cite at least one external-led witness, so the circular structure is the common case.",
+     "id": "G2-1",
+     "reproduction": "From /home/user/BuildApp. NEW: OFFLINE=1 npx vite-node packages/analysis-service/scripts/second-house.ts -- --package /home/user/work005n/blind10/out-1/source-package.json --graph /home/user/work005n/blind10/out-1/observation-graph.json --metrics /home/user/work005n/blind10/out-1/metric-evidence.json --cache /home/user/work005n/blind10/cache --out <dir> --decoy-footprint F. OLD (true 5906afa): the same command with --config /home/user/work005p/old-5906afa/vite.config.mjs. Results are in /home/user/work005p/review2/G/out-*. F=0.7927 (published 141.2 m\u00b2, the mirror where 501/810 are true): OLD completes model da496631, METRIC_CHALLENGE REPLACED at 2.432039 cm/px, publishedFigure VERIFIED, AGREES +0.0%. NEW completes model b7c86aac at 2.6261 cm/px with SOURCE_CONFLICT_REVIEW PASSED and gate DEGRADING:FOOTPRINT_AREA_NEAR, an area of 163.8 m\u00b2, +16% against the figure. F=0.8577 (the faithful mirror: the real 8.7% figure/plan ratio carried over): OLD refuses by name (SOURCE_CONFLICT, both readings NEAR). NEW completes b7c86aac at 2.6261. Single-reader variant: a copy of the evidence with ensemble/external removed only from lattice ocr-lattice-501-fb62c33a1f, so only the 870 external remains, gives the same NEW outcome under both figures (out-870only, out-mirror2-870only). The strip-external evidence /home/user/work005p/stripped/dom-w-glogownikach.json reproduces the OLD outcomes (out-mirror-old, out-mirror2-old).",
+     "severity": "P1",
+     "suggestedFix": "This is not a code defect against the preregistered rule, but the recorded limitation (B1) is understated and should not be shipped as 'constructed only'. Options: (a) the round-1 next-stage candidate: deny the registration-side benefit (clauses 1 and 4) to a contested reading whose value the registered frame's metric solution cites as a witness; or (b) keep an accusation whose as-printed rival the published figure AGREES with while the incumbent's footprint is not AGREES. Either keeps the real G\u0142ogowniki completion, where the rival is WRONG at -20.7%, and restores the 1.4.0 outcome in both mirrors. At minimum, correct hypotheses.md:99-101 ('none of this occurs on the 44 rows') and the gap text at reconstruct-v2.ts:288, and give the owner the mirror replay as the stated residual risk.",
+     "title": "One PP-OCRv6 reading that the registered scale already adopted withdraws a correct-if-tokens-right accusation; on real evidence, 1.5.0 swaps 1.4.0's figure-VERIFIED house for one 8% off in scale",
+     "where": "packages/reconstruction/src/plan-resolution.ts:976 (clause 4 defence), :980 (clause 3), :943 (clause 1); packages/reconstruction/src/v2/reconstruct-v2.ts:348-350 (a withdrawal skips challengeFirstReading) and :288 (gap text); research/analyzer-005p/hypotheses.md:99-101"
+    },
+    {
+     "claim": "On the 44 cases' labelled, weighed statements (AGREED truth), LATTICE readings admitted as confident are wrong 41 of 164 times. AS_PRINTED is wrong 375 of 673 times. EXTERNAL is wrong 0 of 459 times. Each confident reading counts equally under ANY_FITS, so a reader with a 25% error rate can make a statement fit, and so defend, the registration. On the dev data the lattice is wrong while the printed reading is right only once: kosacce-clean metric-dimension-4005884a2d, truth 387, AS_PRINTED 387, LATTICE 187, EXTERNAL 387. PROD-noext = P0 shows no decision effect. The risk is real for blind houses but small, because lattice errors mostly coincide with an identical printed error, which leaves the statement uncontested.",
+     "id": "G2-2",
+     "reproduction": "cd /home/user/BuildApp && npx vite-node /home/user/work005p/review2/G/quant.ts. It uses the real statementContests over every weighed chain-segment statement of the 44 sealed evidence files in research/analyzer-005o/cases.json, scored against /home/user/work005o/labels/truth.json. Output: weighed 861, labelled 673, contested 272 (251 labelled), BENEFIT (printed wrong, another reader right) 249, DANGER (printed right, another reader wrong) 1 (LATTICE).",
+     "severity": "P3",
+     "suggestedFix": "Record the per-reader error rates in the report next to the 0/459 external figure. If clause 1/4 is revisited (G2-1), consider admitting the LATTICE to the registration's defence only when its own reading agrees with another reader.",
+     "title": "The confident LATTICE reader (own class CLEAR/SUPPORTED) is wrong 25% of the time and can still defend a registration",
+     "where": "packages/reconstruction/src/statement-contest.ts:49-52"
+    },
+    {
+     "claim": "`doubted` lists every contested statement whose verdict against the registration changed, plus every statement whose fit against a withdrawn charge's scale changed. In the 870-only replay the withdrawal turned on f810c24db9 alone, but the trace and gap name 5 statements (2bbe2a8971, 4c039a536b, 923db76dc8, c6635f1b73, f810c24db9). Four of them changed only their registration-side verdict and were not needed for the T3 withdrawal. A reader of the gap cannot see that one PP-OCRv6 reading carried the whole decision, which is the fact that matters for G2-1.",
+     "id": "G2-3",
+     "reproduction": "/home/user/work005p/review2/G/out-870only/analysis-trace.json, SOURCE_CONFLICT_REVIEW counts.doubted (5 statements) against the withdrawn trigger OUTER_TOTALS, whose agreeing set of 2 collapses when f810c24db9 alone is read under ALL_FIT (agreeing.length >= 2 fails).",
+     "severity": "P3",
+     "suggestedFix": "Per withdrawn charge, also record the statements whose doubt was necessary, e.g. the accusers removed from `agreeing` and the defenders added to supportedLength. Flag the case where one reader on one statement is sufficient.",
+     "title": "The withdrawal record does not show that a single reading was decisive",
+     "where": "packages/reconstruction/src/plan-resolution.ts:888-893"
+    },
+    {
+     "claim": "The AS_READ_REFUTATION `why`, which ends up in refusal messages and in the KEPT gap, prints `contradicts N% of the chain length as read`. N is now registrationRefuted under ANY_FITS, and the rivals' percentages are under ALL_FIT. B7 documented this for the challenge record, but this string reaches the owner.",
+     "id": "G2-4",
+     "reproduction": "Code reading: chargesUnder(withDoubt=true) passes `accused`/`accuser` into refutedShareAsRead (lines 943, 945) and interpolates the result into the T1 `why` at line 950 unchanged.",
+     "severity": "P3",
+     "suggestedFix": "Say 'as read, a contested statement counting as fitting if any of its readers fits' or similar, or print both shares.",
+     "title": "The user-facing T1 reason says 'as read' for a share computed under doubt",
+     "where": "packages/reconstruction/src/plan-resolution.ts:950"
+    },
+    {
+     "claim": "The gap goes to ctx.unresolved, which reaches candidate.unresolved and run.ts:541. second-house writes only model.json, program.json, analysis-trace.json and result-summary.json, and none of these contain `unresolved`. The PROD2/glogownikach outputs contain no 'accusation withdrawn' gap (grep finds 0), and model.json has 0 AMBIGUOUS. So the claim that the newly completed house carries the gap rests only on the unit emission test, and the PROD2 = harness / PROD2 = PROD2-rep byte comparisons cannot catch a regression in it.",
+     "id": "G2-5",
+     "reproduction": "grep -r 'accusation withdrawn' /home/user/work005p/runs/PROD2/dom-w-glogownikach/ finds only the trace detail ('withdrawn because ...'). There is no gap entry in any file.",
+     "severity": "P3",
+     "suggestedFix": "Have the replay write the candidate's unresolved list (what, status, evidenceIds) into result-summary.json or a separate file, and include it in the prod-vs-harness comparator.",
+     "title": "The AMBIGUOUS withdrawal gap is invisible in every replay artifact, so the replay comparisons cannot check it",
+     "where": "packages/analysis-service/scripts/second-house.ts:99-147; packages/reconstruction/src/v2/reconstruct-v2.ts:285-291"
+    }
+   ],
+   "fixChecks": [
+    {
+     "evidence": "Argued from the code. asRead returns at most one value per statement (plan-resolution.ts:218-229), so the 1.4.0 longRead list has one entry per statement. T1: registrationRefuted under ANY_FITS <= AS_PRINTED (a superset of readings is checked with some()), the rivals' refuted share under ALL_FIT >= AS_PRINTED, and the condition is monotone. T3: the seeds are unchanged (asRead); agreeing under ALL_FIT is a subset of AS_PRINTED; supportedLength under ANY_FITS >= AS_PRINTED; T2 is unchanged. So triggers are a subset of 1.4.0's, per seed and per trigger. The challenge reads conflict.registrationRefuted only for diagnostics (plan-resolution.ts:1222,1260), not for any decision.",
+     "id": "G-subset",
+     "status": "HOLDS"
+    },
+    {
+     "evidence": "readingsUnder adds contest values only when asRead is non-empty (plan-resolution.ts:247-250). Statements read as nothing (READ with dependsOnScale, a leading-zero rawText, CHAIN_CORRECTED with firstRead == value) stay out of every numerator and denominator. externalValue takes only AGREES/LEADS/CONTESTS-with-EXTERNAL-rival (statement-contest.ts:55-62). On real data the shapes are ('LEADS','LATTICE') 30, ('CONTESTS','EXTERNAL') 5, ('CONTESTS',None) 1 (correctly excluded), AGREES 4.",
+     "id": "G-noconjure",
+     "status": "HOLDS"
+    },
+    {
+     "evidence": "See G2-1. A withdrawal skips challengeFirstReading, the only place where the published figure verifies the drawing's alternative. On real evidence where only the figure is varied, this flips 1.4.0's figure-VERIFIED replacement (da496631) into the registered scale (b7c86aac, footprint +16%, gate DEGRADING:FOOTPRINT_AREA_NEAR).",
+     "id": "G-decides-nothing",
+     "status": "FAILS IN SUBSTANCE"
+    },
+    {
+     "evidence": "The gap and trace text (reconstruct-v2.ts:283-291, withdrawnRecord plan-resolution.ts:1008-1023) contain only evidence ids (hash ids), numeric readings, cm/px values, resolver versions and the T2 rawText of a dimension token (already present in the 1.4.0 KEPT gap). Checked in the PROD2/glogownikach trace and in my 5 replays: no local paths, no publisher prose, no URL.",
+     "id": "G-leak",
+     "status": "PASS"
+    },
+    {
+     "evidence": "The diff uses no post-Node 18 APIs (grep for toSorted/findLast/.at(/groupBy/logical assignment/replaceAll in the added lines found nothing). An esbuild bundle of apps/local-analyzer/src/analyzer.ts with target node18 into scratch (b18.mjs, the same options as build.mjs bundleOne) succeeded. The bundle includes statement-contest.ts and plan-resolution.ts with PLAN_RESOLVER_VERSION \"1.5.0\" and passes node --check. The bundle was deleted afterwards. Nothing was written into the repo. Note: the gitignored apps/local-analyzer/dist and apps/android/app/build bundles are stale 1.4.0 local build output, not tracked.",
+     "id": "G-node18",
+     "status": "PASS"
+    },
+    {
+     "evidence": "noteWithdrawn can run at most once. earlyReview runs only when footprintOnly is true (the layout was refused), and a refused layout takes the first branch, which never computes lateReview. When earlyConflict is non-null, lateReview is null (reconstruct-v2.ts:294-350).",
+     "id": "G-noduplicate-gap",
+     "status": "HOLDS"
+    }
+   ],
+   "lens": "G \u2014 fresh adversary (blind-house false-confident scale, leaks, Node 18/bundle, guarantee soundness)",
+   "summary": "The formal guarantees hold when checked against the code. 1.5.0 raises no trigger that 1.4.0 does not, the registration's refuted share never increases, and no reading is made up. I found no leaks and no Node 18 or bundle problems. But \"decides nothing beyond withdrawing\" does not hold in practice when the reader that withdraws is the same reader that set the scale. Setup: the real sealed evidence for G\u0142ogowniki, with the published footprint scaled by the existing --decoy-footprint flag to a \"mirror world\" where the classic tokens are right and PP-OCRv6 is wrong. One PP-OCRv6 LEADS reading is enough to withdraw OUTER_TOTALS: 870 on metric-dimension-f810c24db9. The registered scale's own metric solution already cites that same 870 as a witness. With the withdrawal, 1.5.0 builds the house at a scale 8% off (area +16%). On the same input, the actual 5906afa incumbent either refuses by name (figure x0.8577) or replaces it with the figure-VERIFIED 2.432 cm/px reading (figure x0.7927, AGREES +0.0%). How likely this is on real data: on the 44 cases, corroborating EXTERNAL readings were wrong 0 times in 459 labelled, weighed statements (same truth population as 005O's 0/507, so not independent evidence; rule-of-three upper bound about 0.65% per statement). The circular structure itself is common: 26 of 39 base-frame selected scales cite at least one external-led witness. G\u0142ogowniki's adopted completion is this exact circular defence, and the code cannot tell it from its mirror. The confident LATTICE reader is wrong 41 of 164 times, but only once while the printed reading was right. Smaller points: the withdrawal record names more statements than the withdrawal needed; the T1 text says \"as read\" for a share computed under doubt; the replay artifacts do not contain the AMBIGUOUS gap. Scratch is in /home/user/work005p/review2/G/ (2.8 MB)."
+  },
+  {
+   "findings": [
+    {
+     "claim": "`turned` keeps every contested statement whose fit against the registration changed between ANY_FITS and AS_PRINTED, whichever trigger was withdrawn. It also keeps any statement whose fit at a withdrawn charge's scale changed, even a short one. OUTER_TOTALS reads only long statements (\u2265 0.25 \u00d7 judge extent). So when only T3 is withdrawn, short statements whose registration verdict flipped are named as 'statements the accusation turned on', though they cannot have affected it. This holds on glogownikach, the only real withdrawal: the withdrawn trigger is OUTER_TOTALS only, and the record and the owner-facing AMBIGUOUS gap name six statements. Three of them are short: 4c039a536b (X 47 px), c6635f1b73 (X 71 px) and 923db76dc8 (Y 63.5 px), against a judge of about 734 \u00d7 350 px. The real cause is 1fce7f3126 and f810c24db9 (accusers) and 2bbe2a8971 (Y 350 px defender). Completeness is fine: nothing relevant is missing.",
+     "id": "F2-1",
+     "reproduction": "Real row: `cd /home/user/BuildApp && npx vite-node /home/user/work005p/review2/F/glog2.ts`. With wallPx 14.5 (from the digest) and judge = plan extent (or 12 px inside it), it reproduces exactly the PROD2 trace's 6 doubted ids, and prints long=false for 4c039a536b, 923db76dc8 and c6635f1b73. The withdrawn trigger is OUTER_TOTALS only, and T1 did not fire as printed. Fuzz (`N=30000 SEED=1..3 npx vite-node /home/user/work005p/review2/F/fuzz.ts`): withdrawals listing at least one such statement are 16/3458, 13/3452 and 19/3541. Missing-statement check: stripping the lattices of the listed statements restores every withdrawn trigger in all cases (notRestoredByTurned 0).",
+     "severity": "P2",
+     "suggestedFix": "Limit `turned` to the gone charges. A registration-side flip counts only if T1 is gone (any statement with an as-read value) or T3 is gone and the statement is long. A scale flip counts only for statements that charge reads (all statements for T1, long ones for T3). Pin this with a T3-only fixture that has a short contested statement.",
+     "title": "A withdrawal's `doubted` list names contested statements that could not bear on the withdrawn charge; on the only real withdrawal, 3 of the 6 named are irrelevant",
+     "where": "packages/reconstruction/src/plan-resolution.ts:888-893 (`turned`); shown to the owner via packages/reconstruction/src/v2/reconstruct-v2.ts:286-291 (gap reason and evidenceIds)"
+    },
+    {
+     "claim": "Withdrawal is still decided by trigger name. When 1.4.0's OUTER_TOTALS on one scale is withdrawn by doubt but another seed fires under doubt, the 1.4.0 charge (its scale, statements and why) disappears without a record. The same happens when T1 stands with a smaller `better` set. No decision is hidden: the conflict still stands and the challenge runs. But the resolution's 'names what was withdrawn' claim does not hold for these cases.",
+     "id": "F2-2",
+     "reproduction": "`cd /home/user/BuildApp && npx vite-node /home/user/work005p/review2/F/a3.ts` (seed 9, 30,000 generated plans): t3moved 10, t1narrowed 1330. Example: as printed, OUTER_TOTALS at 4.504132 cm/px (ev-0, ev-2); under doubt, OUTER_TOTALS at 4 cm/px (ev-1, ev-3); review.withdrawn = null.",
+     "severity": "P3",
+     "suggestedFix": "Compare charges by (trigger, scales, evidenceIds), not by trigger name, and record a moved charge as withdrawn-and-replaced. Or state the name-only rule in the record's doc comment.",
+     "title": "A3 not fully fixed: a trigger that stands with a different accusation records nothing as withdrawn",
+     "where": "packages/reconstruction/src/plan-resolution.ts:881-883 (gone = as-printed charges whose trigger name is not standing)"
+    },
+    {
+     "claim": "Round 1 (A1, B7) noted that on rarytasy-eoze the recorded registrationRefuted falls from 0.370799 to 0.334843 because of 660de2eb26 (read 155 as printed, 100 by EXTERNAL). That statement is not among the accusers. The fix covers withdrawals only. For a conflict that stands, conflictDoubted still names only the accusers, so the record shows a doubt-adjusted number with no link to the statement that adjusted it. B7 was only DOCUMENTED, and the report it points to does not exist yet.",
+     "id": "F2-3",
+     "reproduction": "/home/user/work005p/runs/PROD2/rarytasy-eoze/analysis-trace.json, METRIC_CHALLENGE counts: registrationRefuted 0.334843, conflictDoubted 'metric-dimension-55ef3f8509=AS_PRINTED 1601|LATTICE 1600|EXTERNAL 1600'. 660de2eb26 is absent. P0-frozen has 0.370799.",
+     "severity": "P3",
+     "suggestedFix": "In conflictOf, add to `doubted` the contested statements whose registration-side verdict changed (the same rule as the T1 part of `turned`). Or record registrationRefutedAsPrinted beside the under-doubt share.",
+     "title": "A1's standing-conflict half is not addressed: a doubt-moved registrationRefuted is recorded without naming the statement that moved it",
+     "where": "packages/reconstruction/src/plan-resolution.ts:1260-1263 (challengeRecord: registrationRefuted under doubt; conflictDoubted = contested statements among the conflict's own evidenceIds)"
+    },
+    {
+     "claim": "When footprintOnly holds and the doubt withdraws the accusation, noteWithdrawn emits the AMBIGUOUS gap, which says '\u2026so the scale stands without these statements confirming it'. The layout is still refused, though, so control goes to resolvePlan, which can RESOLVE to another reading at another scale. The result then carries a gap about a scale it no longer uses. Under 1.4.0 this input would have gone to a VERIFIED challenge. The path does not occur on the 44 cases, where glogownikach takes the late path. No test covers it: deleting the `noteWithdrawn(earlyReview)` call leaves all 4 behavioural suites green, and the architecture test only checks noteWithdrawn's body and that reviews are read for `.conflict`.",
+     "id": "F2-4",
+     "reproduction": "Mutant V2_NO_EARLY_NOTE (`  noteWithdrawn(earlyReview)\\n` \u2192 `\\n` in a copy of reconstruct-v2.ts swapped in by resolveId): `node /home/user/work005p/review2/F/mutate.mjs V2_NO_EARLY_NOTE` prints SURVIVED, 65 tests. For the wording problem: on the early path with withdrawn \u2260 null and conflict = null, line 316's `layoutRefused(layout)` is still true, so resolvePlan runs and the RESOLVED branch (:318-323) replaces draft, layout and metrics. The gap pushed at :286 stays in ctx.unresolved.",
+     "severity": "P3",
+     "suggestedFix": "Word the early-path gap conditionally, or emit it only once the first reading's scale is actually kept. Add a footprint-refused fixture that exercises the early review.",
+     "title": "The early-path withdrawal gap says 'the scale stands' before resolvePlan may replace the reading, and the early path is untested",
+     "where": "packages/reconstruction/src/v2/reconstruct-v2.ts:286-295 (noteWithdrawn(earlyReview)), followed by :316-323 (resolvePlan RESOLVED replaces draft/layout/metrics)"
+    },
+    {
+     "claim": "The frozen 1.4.0 oracle records only the trigger set and registrationRefuted, and the test compares sets. So the refactor's 1.4.0 identity of why, evidenceIds, alternatives and trigger order is not under test. The partial-withdrawal test is titled '\u2026reasons and statements\u2026' but asserts no statements. Clause 3 asserts no `doubted`. The emission test's gap evidenceIds are all accusers, so dropping the doubted ids changes nothing. No current defect: my independent full-object fuzz against 5906afa found 0 mismatches in 96,000 plans. But a later regression in these fields would pass the suites.",
+     "id": "F2-5",
+     "reproduction": "`node /home/user/work005p/review2/F/mutate.mjs F1_WITHDRAWN_IDS_ALL F3_TURNED_SCALE_T1_ONLY F5_CONFLICT_IDS_UNSORTED F7_T1_IDS_BETTER_ONLY_EMPTY F8_DOUBTEDCOUNT V1_GAP_IDS_ACCUSERS_ONLY`: all SURVIVED (65 tests, 4 suites). Mutations: withdrawn.evidenceIds from every as-printed charge; T3-scale flips dropped from `turned`; conflict ids unsorted; T1 lattice anchors dropped from evidenceIds; doubtedCount = evidenceIds.length; gap evidenceIds = accusers only. Controls killed: F2, F4, F6, F9, V3.",
+     "severity": "P3",
+     "suggestedFix": "Freeze the oracle's full 1.4.0 objects (why, evidenceIds, alternatives, ordered triggers) and compare with deep equality. In the partial test, assert withdrawn.evidenceIds \u2286 the gone charges' ids. Give clause 3 a doubted assertion, and give the emission fixture a defender not among the accusers.",
+     "title": "Several new assertions are weaker than their titles: as-printed identity, partial-withdrawal ids, clause-3 doubted and gap ids are not pinned",
+     "where": "packages/reconstruction/test/statement-contest.test.ts:353 (trigger-set oracle), :256-266 (partial withdrawal), :159-172 (clause 3); packages/reconstruction/test/statement-contest-emission.test.ts:106-111"
+    },
+    {
+     "claim": "Round 1's C4 called the old mirror (array reversal) vacuous. The fix sets `fromPx` to lay spans from the far edge, but the source-conflict code never reads fromPx, toPx or ticks. The mirrored case therefore runs the same arithmetic as misreadTotals, and its half of the test can only fail if the unmirrored test fails too.",
+     "id": "F2-6",
+     "reproduction": "Code argument: statementsOn builds Statement{axis, pixelLength, firstReadCm, contest} from segment.pixelLength only. latticeScales, refutedShareAsRead and the T3 loop use s.pixelLength and judge extents only. Nothing in chargesUnder references fromPx, toPx, ticksPx or baselinePx.",
+     "severity": "P3",
+     "suggestedFix": "Drop the mirror claim, or mirror something the conflict reads (for example, flip axis-dependent registration anisotropy together with the axes).",
+     "title": "The 'mirrored' adversarial fixture is still vacuous: the conflict path never reads segment positions",
+     "where": "packages/reconstruction/test/statement-contest.test.ts:225-232; plan-resolution.ts:192-215 (statementsOn reads only pixelLength), :283-311 (latticeScales reads only pixelLength)"
+    },
+    {
+     "claim": "Records now print AS_PRINTED, and `doubted` is the statements the withdrawal turned on (defenders included), not the ones the accusation rested on. Two comments still describe the 1.5.0-pre-fix behaviour.",
+     "id": "F2-7",
+     "reproduction": "`grep -n 'TOKEN 501\\|statements it rested on' packages/reconstruction/src/plan-resolution.ts`",
+     "severity": "P3",
+     "suggestedFix": "Update both comments.",
+     "title": "Doc comments left stale by the reader rename and the `turned` change",
+     "where": "packages/reconstruction/src/plan-resolution.ts:1025 (`id=TOKEN 501|LATTICE 501|EXTERNAL 541`), :862-866 (SourceConflictReview: 'with the contested statements it rested on')"
+    },
+    {
+     "claim": "A2's outcome-level caveat, B4's strip-external caveat, B7's documentation, D2's perf note, E1's terrace/ring statement and owner handoff, E2's selection argument and E4's FAILED-prediction table are all promised 'in the report'. There is no 005P stage report in stage-reports/ at f37e410 (task 5 is pending). Until it exists, these fixes are only partial.",
+     "id": "F2-8",
+     "reproduction": "`ls /home/user/BuildApp/stage-reports | grep -i 005p` finds nothing. `grep -rln benign stage-reports research/analyzer-005p` finds only the round-1 files.",
+     "severity": "P3",
+     "suggestedFix": "Before acceptance, check each promised report statement against round-1-resolution.md.",
+     "title": "Several FIXED or FIXED-in-part dispositions depend on a stage report that does not exist at HEAD",
+     "where": "stage-reports/artifacts/analyzer-005p/post-review/round-1-resolution.md (A2, B4, B7, D2, E1, E2, E4); research/analyzer-005p/soundness.json N1:rarytasy-eoze ('report: predictions table')"
+    }
+   ],
+   "fixChecks": [
+    {
+     "evidence": "Withdrawal part RESOLVED. Rerunning /home/user/work005p/review/lensA/repro-nodoubt.ts at HEAD now gives doubted ev-2=AS_PRINTED 910|LATTICE 650 and ev-3=AS_PRINTED 975|LATTICE 650 (was empty). The fuzz found 0 withdrawals with empty doubted out of 14,124. Not addressed: the standing-conflict case A1 cited. In the PROD2 rarytasy-eoze METRIC_CHALLENGE record, registrationRefuted is 0.334843 (the under-doubt share), while conflictDoubted still names only 55ef3f8509. 660de2eb26, which moved the share from 0.370799, is still unnamed (plan-resolution.ts:1260-1263). See F2-3.",
+     "id": "A1",
+     "status": "PARTIAL"
+    },
+    {
+     "evidence": "The gap exists and decides nothing. Running reconstructV2 directly on glogownikach's sealed inputs (review2/F/glog-gap.ts) yields the 'the scale of the base plan (an accusation withdrawn)' AMBIGUOUS gap with 6 evidenceIds, and the model sha b7c86aac\u2026 equals PROD2 and N1. The gap is not in any replay output, because second-house's offline path writes no `unresolved`. In the early path, the gap says 'the scale stands' before resolvePlan may replace the reading (F2-4). The promised report statement does not exist yet (F2-8).",
+     "id": "A2",
+     "status": "PARTIAL"
+    },
+    {
+     "evidence": "Per-trigger part RESOLVED: whyLeak 0 and idsLeak 0 over 14,124 withdrawals. The second half of A3 is NOT changed: a trigger standing on a different scale or set of statements, or T1 standing with fewer rivals, records nothing (review2/F/a3.ts: 10 of 30,000 T3 moved, 1,330 of 30,000 T1 narrowed). See F2-2. Also, no test pins withdrawn.evidenceIds on a partial withdrawal: mutant F1 survives.",
+     "id": "A3",
+     "status": "PARTIAL"
+    },
+    {
+     "evidence": "(a) Rerunning review/B/t1scan.ts: kosacce-clean x0.9 now records doubted 4005884a2d|82140d6d5f|85e88b9dbc and withdrawnEvidenceCount 0 (was doubted ''). (b) review/B/repro.ts now names ev-2 and ev-3. The trace detail now says 'statements it turned on'. Over-inclusion is a new issue (F2-1).",
+     "id": "B3",
+     "status": "RESOLVED"
+    },
+    {
+     "evidence": "Reader renamed to AS_PRINTED and documented in statement-contest.ts:11-18. No consumer parses the old 'TOKEN' label (grepped packages, apps, research). The stale doc comment at plan-resolution.ts:1025 still says TOKEN (F2-7). The report statement is pending (F2-8).",
+     "id": "B4",
+     "status": "RESOLVED"
+    },
+    {
+     "evidence": "Verified by running reconstructV2 on glogownikach's sealed inputs: the gap is in result.unresolved, which run.ts:541 maps into LinkAnalysisResult.unresolved. Not in the digest or the pack, as the disposition states.",
+     "id": "B5",
+     "status": "RESOLVED"
+    },
+    {
+     "evidence": "Reasons are per trigger (fuzz whyLeak 0). withdrawnEvidenceCount and doubtedCount are present (PROD2 glogownikach: 2 and 6).",
+     "id": "B6",
+     "status": "RESOLVED"
+    },
+    {
+     "evidence": "Clause fixtures exist. mutation-results.json shows X9\u2013X12 killed by the matching clause tests. My F4 (drop the registration-side term of `turned`) is killed by the clause-4 test, and F9 by the exact-share test.",
+     "id": "C1",
+     "status": "RESOLVED"
+    },
+    {
+     "evidence": "The oracle is the real 5906afa code (verified identical to `git show 5906afa`), but it stores only the trigger set and registrationRefuted. The test checks set equality (statement-contest.test.ts:353) and that the under-doubt share is \u2264 the old one. Order, why, evidenceIds and alternatives in the as-printed mode are unpinned. Mutants F5 (unsorted conflict ids) and F7 (T1 lattice anchors dropped from evidenceIds) survive all 4 suites. My independent check found no actual divergence: 0 full-object mismatches against 5906afa in 96,000 plans.",
+     "id": "C2",
+     "status": "PARTIAL"
+    },
+    {
+     "evidence": "contest-fixtures.ts builds ensembles with the decision class (decisionClass). X13 is killed. The LEADS-over-AMBIGUOUS test asserts no LATTICE reader.",
+     "id": "C3",
+     "status": "RESOLVED"
+    },
+    {
+     "evidence": "Duplicated crop, copied id, NO_VALUE/NOT_COMPARABLE and the orientation join are added and non-vacuous (X14\u2013X16 killed). The 'mirrored' fixture (statement-contest.test.ts:225) only changes fromPx, which the conflict path never reads: statementsOn and latticeScales use pixelLength only, so that half cannot fail on its own. The unscaled frame and the early path remain unfixtured (F2-4, F2-6).",
+     "id": "C4",
+     "status": "PARTIAL"
+    },
+    {
+     "evidence": "statement-contest-emission.test.ts drives reconstructV2 on the late path and kills X17 and V3. The early-path call `noteWithdrawn(earlyReview)` (reconstruct-v2.ts:295) can be deleted with all 4 behavioural suites still passing (mutant V2_NO_EARLY_NOTE). The architecture test checks only noteWithdrawn's body and that reviews are read for `.conflict`.",
+     "id": "C5",
+     "status": "PARTIAL"
+    },
+    {
+     "evidence": "X18 (open side) is killed by compound-facade. X7 is counted as a record-level kill. The MN equivalence argument is consistent with my fuzz (as-printed seeds unchanged).",
+     "id": "C6",
+     "status": "RESOLVED"
+    },
+    {
+     "evidence": "The gap is in the result and the versions are in the record (resolverVersion 1.5.0, statementContest 1.0.0 in the PROD2 glogownikach trace). The candidate solver stamp is still plain 2.3.0 on glogownikach (A4 was NOT CHANGED, by stated choice).",
+     "id": "D1",
+     "status": "PARTIAL"
+    },
+    {
+     "evidence": "STATEMENT_CONTEST_VERSION is recorded in withdrawnRecord (plan-resolution.ts:1014) and in challengeRecord when conflictDoubted is present (:1264), as seen in the PROD2 eoze and glogownikach records.",
+     "id": "D3",
+     "status": "RESOLVED"
+    },
+    {
+     "evidence": "'Later wins' is documented at statement-contest.ts:20-21, and the test 'a duplicated crop \u2026 the later record' kills X16.",
+     "id": "D4",
+     "status": "RESOLVED"
+    },
+    {
+     "evidence": "gates.py G6 now lists glogownikach's 3 PAVED SOURCE_DERIVED terraces and the SOURCE_EXACT 18.83 \u00d7 8.70 ring (gates.json N1.G6), and checks levels against plan storey frames (1 = ['GROUND']). The report statement and owner handoff do not exist at HEAD (F2-8).",
+     "id": "E1",
+     "status": "PARTIAL"
+    },
+    {
+     "evidence": "The soundness.json P1/P2/P3 verdicts are rewritten: the refutation is on Y and true, and NOT_SOUND rests on single-statement support and the mixed definition. The report part is pending (F2-8).",
+     "id": "E2",
+     "status": "RESOLVED"
+    },
+    {
+     "evidence": "gates.py: G5 parses scales from changed refusal messages against trueScale; G7 compares sha256 of 6 files per case; admissible requires no None. gates.json: N1 admissible; P1\u2013P3 list G7 as unevaluated and inadmissible.",
+     "id": "E3",
+     "status": "RESOLVED"
+    },
+    {
+     "evidence": "soundness.json N1:eoze now says 'The prediction \u2026 failed on this field (report: predictions table)'. No 005P stage report or predictions table exists in stage-reports/ at f37e410.",
+     "id": "E4",
+     "status": "PARTIAL"
+    },
+    {
+     "evidence": "PROD-noext against P0-frozen: model.json, failure.json and result-summary.json are byte-identical on all 44. Traces differ only by resolverVersion and the additive conflictDoubted/statementContest keys (checked glogownikach and eoze). There is no SOURCE_CONFLICT_REVIEW in PROD-noext.",
+     "id": "E5",
+     "status": "RESOLVED"
+    },
+    {
+     "evidence": "Every soundness.json 'why' is free of transcription references. Transcriptions moved to corroboratingNote.",
+     "id": "E6",
+     "status": "RESOLVED"
+    }
+   ],
+   "lens": "F \u2014 did the round-1 fixes fix it, and did they break anything (HEAD f37e410 vs round-1 f34087d and start 5906afa)",
+   "summary": "I found no regressions from the fixes in decisions or models.\n\n**Charges refactor.** I compared HEAD's `conflictUnder(m,false)` (the as-printed mode, exported from a scratch copy) with the verbatim 5906afa `sourceConflictOf`, as full objects: triggers in order, why, evidenceIds, registrationRefuted and alternatives. 0 mismatches on 96,000 random plans (seeds 1, 2, 3 at 30,000 each, seed 77 at 6,000). The plans included:\n- lattices and ensembles, copied statement ids, duplicated crops and dependsOnScale;\n- anisotropic registrations and varied judges and wallPx;\n- metric solutions (CONFIRMED, REPLACED, LEGACY), and the T2 PARTIAL_BINDING path, which fired 4,100\u20134,200 times per seed.\n\nOn every plan, `sourceConflictReview().conflict` equals `conflictUnder(true)`, and the repo module gives the same output as my copy. Per trigger, withdrawn.why never contains the reason of a trigger still standing (whyLeak 0), and withdrawn.evidenceIds never contain its ids (idsLeak 0).\n\n**`doubted` completeness.** Nothing is missing. Stripping the lattices of the listed statements alone brings back every withdrawn trigger: 0 failures over 14,124 withdrawals. It does over-include, though (F2-1). On the only real withdrawal (glogownikach), 3 of the 6 named statements cannot bear on the withdrawn OUTER_TOTALS.\n\n**AMBIGUOUS gap.** PROD2 equals N1 byte for byte on all 44 cases for model.json, program.json, result-summary.json and failure.json, glogownikach included. Only analysis-trace.json and digest.json differ, by version keys plus the SOURCE_CONFLICT_REVIEW entry. PROD2 equals PROD2-rep on every file. PROD-noext equals P0 on every model, failure and summary; its traces differ only by the resolver version and the additive conflictDoubted/statementContest keys.\n\nThe gap is in no replay file, because second-house's offline path writes no `unresolved`. I ran reconstructV2 directly on glogownikach's sealed inputs: the gap is present (AMBIGUOUS, 6 evidence ids), and the model hash is b7c86aac\u2026, the same as PROD2/N1.\n\nThe reader rename leaves only stale doc comments. withdrawnRecord's keys are the 9 the tests expect.\n\n**Mutation check of the new code** (4 suites: statement-contest, statement-contest-emission, source-conflict, plan-resolution):\n- Killed: why leak, dropping the registration-side term of `turned`, reversed trigger order, an inflated registrationRefuted, and gating the gap on a partial withdrawal.\n- Survived:\n  - withdrawn.evidenceIds taken from every as-printed charge;\n  - T3-scale flips dropped from `turned`;\n  - unsorted conflict ids;\n  - T1 lattice anchors dropped;\n  - doubtedCount;\n  - gap evidenceIds limited to the accusers;\n  - the early-path `noteWithdrawn` call removed.\n\n**Fix verdicts.** Round 1's reproductions now pass for A1 (withdrawal part), B3 (a and b), C1, C3, E3, E5 and E6. Partial or open:\n- A1: the standing-conflict half is not addressed.\n- A3: a standing trigger whose accusation moved is not recorded.\n- A2/D1: the gap is fine; the stamp is unchanged and the early-path gap text is wrong.\n- C2: the oracle compares only the trigger set.\n- C4: the mirror fixture is still vacuous and the unscaled/early path is not fixtured.\n- C5: the early path is untested.\n- E1, E2, E4: the parts promised \"in the report\" have no report at HEAD.\n\nScratch is in /home/user/work005p/review2/F/ (fuzz.ts, a3.ts, glog2.ts, glog-gap.ts, mutate.mjs, head-pr.ts, head-v2.ts)."
+  }
+ ],
+ "reviewedCommit": "f37e410",
+ "round": 2,
+ "verifications": [
+  {
+   "evidence": "G2-1 reproduces exactly, and the circularity behind it is stronger than the finding says. P1 stands.\n\n**Setup.** /home/user/work005p/old-5906afa matches `git show 5906afa` byte for byte on all 54 reconstruction src files. I re-ran the finding's commands myself. Scratch is /home/user/work005p/review2/verify-G2-1-0/, cut down to the logs and traces.\n\n**Runs.** Each run was NEW at HEAD f37e410 and OLD at 5906afa, on the evidence in /home/user/work005n/blind10/out-1.\n\nF=0.7927:\n- OLD completes da496631. The trace has METRIC_CHALLENGE REPLACED at 2.432039 cm/px, 141.2 m\u00b2 (+0.0%, AGREES) and publishedFigure VERIFIED. The gate is DEGRADING:PLAN_RESOLVED_BY_HYPOTHESIS and SCALE_DISAGREEMENT.\n- NEW completes b7c86aac at 2.6261 cm/px. The trace has SOURCE_CONFLICT_REVIEW PASSED, with withdrawnTriggers=OUTER_TOTALS and withdrawnEvidence=1fce7f3126 and f810c24db9. The gate is DEGRADING:FOOTPRINT_AREA_NEAR, at 163.8 m\u00b2, which is +16%.\n- NEW still completes because layout-gate.ts:150 counts up to 20% as NEAR. So the house is not refused. The late review (reconstruct-v2.ts:348-350) sees no conflict, and since metricConfidence is STRONG and relation CONFIRMED, no challenge runs.\n\nF=0.8577:\n- OLD refuses by name with SOURCE_CONFLICT; both readings are NEAR (-7.5% and +7.2%).\n- NEW completes b7c86aac.\n\nNEW gives the same model hash under the real figure and both decoy figures, so in 1.5.0 the figure never reaches this decision.\n\n**Single-reader variant.** I made my own copy of the evidence with `ensemble` deleted only from numericLattice ocr-lattice-501-fb62c33a1f. The doubted list then drops 1fce. Under both figures NEW still completes b7c86aac with OUTER_TOTALS withdrawn. One external reading, 870 on metric-dimension-f810c24db9, is enough.\n\n**Circularity, checked in metric-evidence.json.**\n- The selected hypothesis is scale-2-628695-3f9408dbd6. Its witnessIds and supportingObservationIds include dim-obs-810-rotated-cw-6419e0889a. That observation has ensemble decision LEADS, externalText 870, latticeAsRead 810, latticeClass AMBIGUOUS, and valueCm 870.\n- The hypothesis's `why` puts 870/333 px among the readings \"not counted\" for independence. So it is a cited witness, but not one of the two independent ones.\n- Stronger: the PLAN_XZ registration registration-plan-xz-260da02192 is fitted on anchors metric-dimension-1fce7f3126 at metricSpan 5.41 over 206 px, and metric-dimension-f810c24db9 at 8.7 over 333 px. Those are exactly the external values, 541 and 870.\n- Both evidence records carry `derivation.dependsOnScale: true`, with the text \"a substitution chosen because it fits the scale the frame was solved at: a value downstream of that scale, never a witness for it\".\n- In 1.5.0 those same readings defend the registration (plan-resolution.ts:976, clause 4) and refuse to join the accuser (:980, clause 3). Check: 541/206 = 2.626 and 870/333 = 2.613 fit the 2.6261 registration, and neither fits 2.432.\n\nSo the G\u0142ogowniki withdrawal is the circular defence that B1 describes. Two written claims are false:\n- hypotheses.md:101: \"None of this occurs on the 44 development rows\".\n- round-1-resolution.md:22: \"0 occurrences on the 44 rows\".\n\nThe gap text at reconstruct-v2.ts:288, \"the scale stands without these statements confirming it\", is also wrong: the registration is anchored on those statements' substituted values.\n\n**Severity.**\n- *Why not P0.* On the real evidence the outcome is correct: CORRECT_SCALE, 2.6234 against a true 2.6286. The external readers are highly confident (posteriors 0.9998 and 0.9995). In the mirror the house ships DEGRADED, with an AMBIGUOUS gap, not silently.\n- *Why P1.* The mirror is real evidence with only the figure changed. Under the project's own scorer (score_005p.py:66) the mirror outcome would be FALSE_CONFIDENT_SCALE, about 8% off in scale. That fails G1, where 1.4.0 passed with a figure-verified house or a named refusal.\n- *Why P1 (continued).* The stated scope of the limitation, \"constructed only\" with 0 on the 44 rows, is a false stated guarantee, and the stage's one newly completed house rests on exactly that mechanism.\n- *What it does not change.* No gate verdict on the 44 truth-labelled rows changes. I did not re-check the finding's quantitative side claims (0 wrong out of 459, and 26 of 39).",
+   "finding": "G2-1",
+   "reproduced": true,
+   "severity": "P1",
+   "verifier": 1
+  },
+  {
+   "evidence": "The mechanism reproduces exactly. The severity and part of the framing do not hold, so I downgrade from P1 to P2.\n\nWhat I re-ran (scratch: /home/user/work005p/review2/verify-G2-1-1/). The old tree /home/user/work005p/old-5906afa/packages/reconstruction/src is byte-identical to 5906afa, and only packages/reconstruction changed between 5906afa and HEAD.\n\n- Decoy figure F=0.7927. OLD: METRIC_CHALLENGE REPLACED at 2.432039, publishedFigure VERIFIED, 141.2 m\u00b2, AGREES +0.0%, gate DEGRADING:PLAN_RESOLVED_BY_HYPOTHESIS,SCALE_DISAGREEMENT. NEW: SOURCE_CONFLICT_REVIEW PASSED (withdrawnTriggers OUTER_TOTALS; withdrawnEvidence 1fce7f3126 and f810c24db9), scale 2.6261, model b7c86aac, gate DEGRADING:FOOTPRINT_AREA_NEAR.\n- F=0.8577. OLD refuses: SOURCE_CONFLICT, both readings NEAR. NEW completes b7c86aac.\n- Single-reader variant, which I rebuilt myself by removing ensemble/external from lattice ocr-lattice-501-fb62c33a1f. NEW still withdraws OUTER_TOTALS and completes b7c86aac under both figures. One external 870 on f810c24db9 is enough: clause 3 at plan-resolution.ts:980 requires ALL_FIT, so 810/333 drops out and fewer than 2 agreeing readings remain.\n\nWhy the severity comes down:\n\n1. The finding itself says this is not a code defect. The behaviour is the preregistered clause 1/3/4 rule.\n2. The title says \"on real evidence\" 1.5.0 swaps 1.4.0's figure-VERIFIED house. That is wrong.\n   - With the real figure (178.13 m\u00b2), OLD refuses: old-real.log shows 141.2 m\u00b2 WRONG -20.7%.\n   - NEW builds at 2.6261 cm/px. The truth label in dev-matrix.json is trueScale 2.62857, so the real completion has the correct scale.\n   - The figure-VERIFIED-to-NEAR swap exists only under a decoy figure, which makes it a constructed case.\n3. In the mirror, NEW's output is not false-confident. It ships STRUCTURAL_LAYOUT_PARTIAL with DEGRADING:FOOTPRINT_AREA_NEAR (+16% against 141.2) plus the AMBIGUOUS withdrawal gap. That does not meet P0.\n4. A wrong scale would be shipped only if a stable PP-OCRv6 reader (posterior about 0.9995) were wrong in a correlated way on 870, 920 and 949. The external-reader error rate measured on the labelled set is 0 of 459.\n\nCorrections to the finding's details:\n\n- \"The reader that partly set the scale\" is imprecise, but it understates the problem.\n  - dim-obs-810-rotated-cw-6419e0889a (rawText 870, ensemble LEADS) is in the witnessIds of scale-2-628695, but the solution lists it among the readings \"not counted\".\n  - The evidence metric-dimension-f810c24db9 has derivation.dependsOnScale=true (\"a value downstream of that scale, never a witness for it\").\n  - However, the two counted independent PRIMARY witnesses, 920/350 (lattice 430) and 949/361 (lattice 904), are themselves ensemble-LEADS external readings.\n  - So PP-OCRv6 sets the registered scale and the same reader disarms the cross-check. The circularity is real at the level of the reader, not of the specific ink.\n- Documentation, the part of the finding that holds:\n  - hypotheses.md:99-101 says \"None of this occurs on the 44 development rows\". Read literally, that includes \"an external reading \u2026 can be the reason an accusation is withdrawn\".\n  - That does occur on G\u0142ogowniki, the one newly completed row: PROD-noext and N1-noext revert it to the P0 refusal, which proves external readings caused the withdrawal.\n  - Only the harmful subcase (a correct accusation withdrawn) has 0 occurrences by the truth labels. Round-1 B1 scopes it that way: \"0 occurrences on the 44 rows\".\n- The gap text at reconstruct-v2.ts:288 (\"the scale stands without these statements confirming it\") is literally defensible for the withdrawn statements. It is misleading because the same external reader carries the registration.\n\nRecommended action: correct hypotheses.md and the B1 disposition to say that the circular structure (a reader-level defence) occurs on the real completed row and is told apart from the harmful mirror only by the unknown truth, and give the owner the mirror replay as the residual risk. The code change (a) remains a next-stage candidate. This changes no gate verdict.",
+   "finding": "G2-1",
+   "reproduced": true,
+   "severity": "P2",
+   "verifier": 2
+  }
+ ]
+}
