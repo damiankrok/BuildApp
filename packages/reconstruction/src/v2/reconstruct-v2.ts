@@ -276,9 +276,20 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // replaced, refused by name (SOURCE_CONFLICT), or — when none is better supported by the drawing — left
   // to the path below, where the figure that refused it is spent.
   const footprintOnly = !!worldFrameFrom(draft) && layout.masses.length > 0 && layoutRefused(layout) && layout.gate.reasons.filter((g) => g.severity === 'BLOCKING' && LAYOUT_REFUSAL_CODES.has(g.code)).every((g) => g.code.startsWith('FOOTPRINT_AREA'))
-  // 1.5.0: an accusation the doubt policy withdrew (its statements' own readers disagree) is recorded, never acted on.
+  // 1.5.0: an accusation the doubt policy withdrew (statements it turned on are contested by their own readers) is
+  // recorded — in the trace, and as an AMBIGUOUS gap the result carries — and decides nothing.
   const noteWithdrawn = (review: SourceConflictReview | null): void => {
-    if (review?.withdrawn) trace({ phase: 'REGISTRATION', substage: 'SOURCE_CONFLICT_REVIEW', status: 'PASSED', counts: withdrawnRecord(review), detail: `an accusation of the registered scale was withdrawn: the statements it rested on are contested by their own readers (${review.withdrawn.why})` })
+    const w = review?.withdrawn
+    if (!review || !w) return
+    const record = withdrawnRecord(review)
+    trace({ phase: 'REGISTRATION', substage: 'SOURCE_CONFLICT_REVIEW', status: 'PASSED', counts: record, detail: `an accusation of the registered scale was withdrawn because statements it turned on are contested by their own readers (${w.why})` })
+    gap({
+      what: 'the scale of the base plan (an accusation withdrawn)',
+      reason: `the drawing's readings as printed would accuse the registered scale (${w.why}); the statements that accusation turned on are contested by their own readers (${String(record.doubted) || 'none named'}), and plan resolver ${PLAN_RESOLVER_VERSION} does not let a reading in doubt accuse, so the scale stands without these statements confirming it`,
+      status: 'AMBIGUOUS',
+      observationIds: [],
+      evidenceIds: [...new Set([...w.evidenceIds, ...w.doubted.map((d) => d.evidenceId)])].sort(),
+    })
   }
   const earlyReview = footprintOnly ? sourceConflictReviewFor(structuralOptions, incumbent) : null
   noteWithdrawn(earlyReview)

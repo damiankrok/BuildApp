@@ -20,16 +20,25 @@ if (out.startsWith(REPO)) throw new Error('mutation logs stay outside the reposi
 mkdirSync(out, { recursive: true })
 const RESOLUTION = 'packages/reconstruction/src/plan-resolution.ts'
 const CONTEST = 'packages/reconstruction/src/statement-contest.ts'
-const SUITES = ['packages/reconstruction/test/statement-contest.test.ts', 'packages/reconstruction/test/source-conflict.test.ts', 'packages/reconstruction/test/plan-resolution.test.ts', 'tests/architecture/statement-contest.test.ts']
+const DECOMPOSITION = 'packages/reconstruction/src/plan-decomposition.ts'
+const V2 = 'packages/reconstruction/src/v2/reconstruct-v2.ts'
+const SUITES = [
+  'packages/reconstruction/test/statement-contest.test.ts',
+  'packages/reconstruction/test/statement-contest-emission.test.ts',
+  'packages/reconstruction/test/source-conflict.test.ts',
+  'packages/reconstruction/test/plan-resolution.test.ts',
+  'tests/architecture/statement-contest.test.ts',
+]
+const OPEN_SIDE_SUITES = ['packages/reconstruction/test/wide-openings.test.ts', 'packages/reconstruction/test/compound-facade.test.ts']
 
 const MUTATIONS = [
   {
     id: 'X1',
-    what: 'undo the innovation: the source conflict reads every statement as printed (the 1.4.0 test)',
+    what: 'undo the innovation: the source conflict reads every statement as printed (the 1.4.0 test), in the review production uses',
     must: /accuse nothing \(failed under 1\.4\.0\)/,
     file: RESOLUTION,
-    from: '  return conflictUnder(metrics, frameId, registration, judge, wallPx, true)\n}\n\n/** The source conflict (1.5.0)',
-    to: '  return conflictUnder(metrics, frameId, registration, judge, wallPx, false)\n}\n\n/** The source conflict (1.5.0)',
+    from: "  const accused: Doubt = withDoubt ? 'ANY_FITS' : 'AS_PRINTED'\n  const accuser: Doubt = withDoubt ? 'ALL_FIT' : 'AS_PRINTED'",
+    to: "  const accused: Doubt = 'AS_PRINTED'\n  const accuser: Doubt = 'AS_PRINTED'",
   },
   {
     id: 'X2',
@@ -41,7 +50,7 @@ const MUTATIONS = [
   },
   {
     id: 'X3',
-    what: 'promote a contested external number: a statement the incumbent reads as nothing states its readers\' values',
+    what: "promote a contested external number: a statement the incumbent reads as nothing states its readers' values",
     must: /states nothing/,
     file: RESOLUTION,
     from: "  if (doubt === 'AS_PRINTED' || !s.contest.contested || read.length === 0) return read",
@@ -57,8 +66,8 @@ const MUTATIONS = [
   },
   {
     id: 'X5',
-    what: 'promote, not withhold: the accuser\'s side reads a contested statement as ANY of its readings (doubt helps the accuser)',
-    must: /monotone|accuse nothing/,
+    what: "promote, not withhold: the accuser's side reads a contested statement as ANY of its readings (doubt helps the accuser)",
+    must: /monotone|accuse nothing|clause/,
     file: RESOLUTION,
     from: "  const accuser: Doubt = withDoubt ? 'ALL_FIT' : 'AS_PRINTED'",
     to: "  const accuser: Doubt = withDoubt ? 'ANY_FITS' : 'AS_PRINTED'",
@@ -66,7 +75,7 @@ const MUTATIONS = [
   {
     id: 'X6',
     what: 'the published footprint decides whether the drawing is accused (a figure present silences the conflict)',
-    must: /published figure|never chooses|does not read the published/,
+    must: /published figure|never chooses/,
     file: RESOLUTION,
     from: "  const base = incumbent.draft.base\n  if (!base) return { conflict: null, withdrawn: null }",
     to: "  const base = incumbent.draft.base\n  if (!base || (options.publishedAreas ?? []).length > 0) return { conflict: null, withdrawn: null }",
@@ -74,7 +83,7 @@ const MUTATIONS = [
   {
     id: 'X7',
     what: 'trust missing data: a statement with no lattice (a missing reader) counts as contested',
-    must: /no value is conjured|1\.4\.0s|another copy/,
+    must: /no value is conjured|1\.4\.0’s|another copy|named once|withdrawn accusation is named/,
     file: CONTEST,
     from: '    return { readings, values, contested: values.length >= 2 }',
     to: '    return { readings, values, contested: values.length >= 2 || lattice === undefined }',
@@ -86,6 +95,87 @@ const MUTATIONS = [
     file: CONTEST,
     from: "  if (e.decision === 'CONTESTS' && e.rival?.witness === 'EXTERNAL') return value",
     to: "  if (e.decision === 'CONTESTS' || e.decision === 'CONTESTS_COUNT' || e.decision === 'NOT_CORROBORATING') return value",
+  },
+  {
+    id: 'X9',
+    what: 'clause 1 off: the registration is refuted by a contested statement as printed',
+    must: /clause 1/,
+    file: RESOLUTION,
+    from: '  const registrationRefuted = refutedShareAsRead(statements, regAxis, tolerancePx, accused)',
+    to: "  const registrationRefuted = refutedShareAsRead(statements, regAxis, tolerancePx, 'AS_PRINTED')",
+  },
+  {
+    id: 'X10',
+    what: 'clause 2 off: an offered rival is spared by a contested statement as printed',
+    must: /clause 2/,
+    file: RESOLUTION,
+    from: 'refuted: refutedShareAsRead(statements, () => o.cmPerPx, tolerancePx, accuser) }))',
+    to: "refuted: refutedShareAsRead(statements, () => o.cmPerPx, tolerancePx, 'AS_PRINTED') }))",
+  },
+  {
+    id: 'X11',
+    what: 'clause 3 off: a contested statement joins an OUTER_TOTALS accusation as printed',
+    must: /clause 3/,
+    file: RESOLUTION,
+    from: '    const agreeing = long.filter((s) => fitsUnder(s, cmPerPx, tolerancePx, accuser))',
+    to: "    const agreeing = long.filter((s) => fitsUnder(s, cmPerPx, tolerancePx, 'AS_PRINTED'))",
+  },
+  {
+    id: 'X12',
+    what: 'clause 4 off: a contested statement defends the registration as printed',
+    must: /clause 4/,
+    file: RESOLUTION,
+    from: '  const supportedLength = long.filter((s) => fitsUnder(s, regAxis(s.axis), tolerancePx, accused))',
+    to: "  const supportedLength = long.filter((s) => fitsUnder(s, regAxis(s.axis), tolerancePx, 'AS_PRINTED'))",
+  },
+  {
+    id: 'X13',
+    what: "count the same source twice: the lattice's confidence taken from the ensemble's decision class (a LEADS record's SUPPORTED makes the unconfident lattice a reader)",
+    must: /LEADS record over an unconfident lattice/,
+    file: CONTEST,
+    from: '  const own = lattice.ensemble?.lattice.ocrClass ?? lattice.ocrClass',
+    to: '  const own = lattice.ensemble?.ocrClass ?? lattice.ocrClass',
+  },
+  {
+    id: 'X14',
+    what: 'a statement carried by two segments is named twice in a withdrawal',
+    must: /named once/,
+    file: RESOLUTION,
+    from: '    if (!ids.has(s.evidence.id) || !s.contest.contested || seen.has(s.evidence.id)) continue',
+    to: '    if (!ids.has(s.evidence.id) || !s.contest.contested) continue',
+  },
+  {
+    id: 'X15',
+    what: 'a NOT_COMPARABLE external reading counts as corroborating',
+    must: /corroborating/,
+    file: CONTEST,
+    from: "  if (e.decision === 'AGREES' || e.decision === 'LEADS') return value",
+    to: "  if (e.decision === 'AGREES' || e.decision === 'LEADS' || e.decision === 'NOT_COMPARABLE') return value",
+  },
+  {
+    id: 'X16',
+    what: 'a duplicated crop joins the first lattice record instead of the sealed later one',
+    must: /duplicated crop/,
+    file: CONTEST,
+    from: '  for (const l of metrics.numericLattices ?? []) lattices.set(keyOf(l.frameId, l.box, l.orientation), l)',
+    to: '  for (const l of metrics.numericLattices ?? []) if (!lattices.has(keyOf(l.frameId, l.box, l.orientation))) lattices.set(keyOf(l.frameId, l.box, l.orientation), l)',
+  },
+  {
+    id: 'X17',
+    what: 'a full withdrawal is not recorded (only a partial one is): the doubt becomes silent',
+    must: /SOURCE_CONFLICT_REVIEW|AMBIGUOUS gap|accusation is withdrawn/,
+    file: V2,
+    from: '    if (!review || !w) return',
+    to: '    if (!review || !w || !review.conflict) return',
+  },
+  {
+    id: 'X18',
+    what: 'change a protected open side: every wide-gap interval is decided an opening in its wall (open sides, carports, loggias closed)',
+    must: /./,
+    file: DECOMPOSITION,
+    from: "    decision: interval.role === 'OPENING_IN_WALL' ? 'OPENING_IN_WALL' : 'OPEN_SIDE',",
+    to: "    decision: 'OPENING_IN_WALL',",
+    suites: OPEN_SIDE_SUITES,
   },
 ]
 
@@ -101,7 +191,7 @@ for (const m of MUTATIONS) {
     continue
   }
   writeFileSync(path, text.replace(m.from, m.to))
-  const run = spawnSync('npx', ['vitest', 'run', '--reporter=json', ...SUITES], { cwd: REPO, encoding: 'utf8', maxBuffer: 1 << 28 })
+  const run = spawnSync('npx', ['vitest', 'run', '--reporter=json', ...(m.suites ?? SUITES)], { cwd: REPO, encoding: 'utf8', maxBuffer: 1 << 28 })
   git('checkout', '--', m.file)
   if (git('status', '--porcelain').trim() !== '') throw new Error(`the tree is not clean after ${m.id}`)
   let failed = []

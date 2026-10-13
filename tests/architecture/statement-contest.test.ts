@@ -10,7 +10,8 @@
  *  - the doubt policies (ANY_FITS / ALL_FIT) are used only inside the conflict test; every other reading of a statement
  *    (the ranking's refuted shares, the lattice scales, the isotropy support, the re-read options) reads as printed;
  *  - the conflict test is given no published figure;
- *  - a withdrawn accusation reaches the trace only: it never touches the draft, the layout or the metrics;
+ *  - a withdrawn accusation is recorded (the trace, an AMBIGUOUS gap in the result) and never touches the draft, the
+ *    layout or the metrics (its behaviour is held by `statement-contest-emission.test.ts`);
  *  - no development or blind house is named in any of it.
  */
 import { readFileSync } from 'node:fs'
@@ -61,7 +62,8 @@ describe('005P the doubt policy is used by the source-conflict test only', () =>
 
   it('ANY_FITS and ALL_FIT appear only in the policy itself and in the conflict test', () => {
     const outside = code
-      .replace(bodyOf(code, 'conflictUnder'), ' ')
+      .replace(bodyOf(code, 'chargesUnder'), ' ')
+      .replace(bodyOf(code, 'sourceConflictReview'), ' ')
       .replace(bodyOf(code, 'readingsUnder'), ' ')
       .replace(bodyOf(code, 'fitsUnder'), ' ')
       .replace(/type Doubt = 'AS_PRINTED' \| 'ANY_FITS' \| 'ALL_FIT'/, ' ')
@@ -69,7 +71,7 @@ describe('005P the doubt policy is used by the source-conflict test only', () =>
   })
 
   it('every refuted share outside the conflict test reads as printed: no doubt argument is passed', () => {
-    const outside = code.replace(bodyOf(code, 'conflictUnder'), ' ')
+    const outside = code.replace(bodyOf(code, 'chargesUnder'), ' ')
     const calls = [...outside.matchAll(/refutedShareAsRead\(([^()]|\([^()]*\))*\)/g)].map((m) => m[0])
     expect(calls.length).toBeGreaterThanOrEqual(3) // the definition's own signature, metricsAtScale, refutedShareAtRegistration
     for (const call of calls) expect(call, call).not.toMatch(/accused|accuser|ANY_FITS|ALL_FIT/)
@@ -81,7 +83,7 @@ describe('005P the doubt policy is used by the source-conflict test only', () =>
   })
 
   it('the conflict test is given no published figure', () => {
-    for (const name of ['conflictUnder', 'sourceConflictOf', 'sourceConflictReview', 'doubtedAmong']) expect(withoutStrings(bodyOf(code, name)), name).not.toMatch(/publish|footprint|areaM2/i)
+    for (const name of ['conflictUnder', 'chargesUnder', 'conflictOf', 'sourceConflictOf', 'sourceConflictReview', 'doubtedAmong']) expect(withoutStrings(bodyOf(code, name)), name).not.toMatch(/publish|footprint|areaM2/i)
   })
 
   it('no house is named in plan resolution', () => {
@@ -90,11 +92,14 @@ describe('005P the doubt policy is used by the source-conflict test only', () =>
 })
 
 describe('005P a withdrawn accusation is recorded, never acted on', () => {
-  it('reconstruct-v2 hands the review to the trace and takes only the conflict from it', () => {
+  it('reconstruct-v2 records the review and takes only the conflict from it', () => {
     const code = codeOf(read(V2))
     const note = innerBodyOf(code, 'noteWithdrawn')
     expect(note).toMatch(/trace\(\{ phase: 'REGISTRATION', substage: 'SOURCE_CONFLICT_REVIEW'/)
-    expect(note).not.toMatch(/draft|layout|metrics\s*=|planDiagnostics|gap\(/)
+    expect(note).not.toMatch(/draft|layout|metrics\s*=|planDiagnostics/)
+    // it is recorded twice — in the trace, and as an AMBIGUOUS gap the result carries — and that is all it does
+    expect(note).toMatch(/gap\(\{\s*what: 'the scale of the base plan \(an accusation withdrawn\)'/)
+    expect(note).toMatch(/status: 'AMBIGUOUS'/)
     // the only thing read from a review besides the trace is its conflict
     const uses = [...code.matchAll(/(earlyReview|lateReview)\??\.(\w+)/g)].map((m) => m[2])
     expect([...new Set(uses)]).toEqual(['conflict'])

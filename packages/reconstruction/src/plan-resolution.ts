@@ -83,7 +83,7 @@ import { composeStructuralLayout } from './structural.js'
 import type { StructuralPassOptions, StructuralPassResult } from './structural.js'
 import { groundStoreyOf, ringArea, ringBounds } from './structural-layout.js'
 import type { AlternativeGroup, LayoutConflict, LayoutGateReason } from './structural-layout.js'
-import { statementContests } from './statement-contest.js'
+import { STATEMENT_CONTEST_VERSION, statementContests } from './statement-contest.js'
 import type { StatementContest } from './statement-contest.js'
 import { worldFrameFrom } from './v2/frame.js'
 
@@ -875,11 +875,26 @@ export function sourceConflictOf(metrics: MetricEvidenceSet, frameId: string, re
 
 /** The source conflict (1.5.0) and the accusation the 1.4.0 test would have made that the doubt policy withdrew. */
 export function sourceConflictReview(metrics: MetricEvidenceSet, frameId: string, registration: CoordinateRegistration, judge: PixelRect, wallPx: number): SourceConflictReview {
-  const conflict = conflictUnder(metrics, frameId, registration, judge, wallPx, true)
-  const asPrinted = conflictUnder(metrics, frameId, registration, judge, wallPx, false)
-  const gone = (asPrinted?.triggers ?? []).filter((t) => !(conflict?.triggers ?? []).includes(t))
-  if (!asPrinted || gone.length === 0) return { conflict, withdrawn: null }
-  return { conflict, withdrawn: { triggers: gone, why: asPrinted.why, evidenceIds: asPrinted.evidenceIds, doubted: doubtedAmong(statementsOn(metrics, frameId), asPrinted.evidenceIds) } }
+  const underDoubt = chargesUnder(metrics, frameId, registration, judge, wallPx, true)
+  const asPrinted = chargesUnder(metrics, frameId, registration, judge, wallPx, false)
+  const conflict = conflictOf(underDoubt)
+  const standing = new Set(underDoubt.charges.map((c) => c.trigger))
+  const gone = asPrinted.charges.filter((c) => !standing.has(c.trigger))
+  if (gone.length === 0) return { conflict, withdrawn: null }
+  // The statements the withdrawal turned on: the contested ones whose verdict the doubt changed — against the registration
+  // (they refuted it as printed and fit it read as any of their readings) or against a withdrawn charge's scale (they
+  // supported it as printed and do not, read as all of their readings). Accusers, spared rivals and defenders alike.
+  const { statements, regAxis, tolerancePx } = asPrinted
+  const turned = statements.filter(
+    (s) =>
+      s.contest.contested &&
+      (fitsUnder(s, regAxis(s.axis), tolerancePx, 'ANY_FITS') !== fitsUnder(s, regAxis(s.axis), tolerancePx, 'AS_PRINTED') ||
+        gone.some((c) => c.scales.some((k) => fitsUnder(s, k, tolerancePx, 'ALL_FIT') !== fitsUnder(s, k, tolerancePx, 'AS_PRINTED')))),
+  )
+  return {
+    conflict,
+    withdrawn: { triggers: gone.map((c) => c.trigger), why: gone.map((c) => c.why).join('; '), evidenceIds: [...new Set(gone.flatMap((c) => c.evidenceIds))].sort(), doubted: doubtedAmong(turned, turned.map((s) => s.evidence.id)) },
+  }
 }
 
 /** The contested statements among some evidence ids, with their readings. */
@@ -895,20 +910,33 @@ function doubtedAmong(statements: readonly Statement[], evidenceIds: readonly st
   return out
 }
 
+/** One trigger's accusation: why, the statements it names, and the scales it holds against the registration. */
+type Charge = { trigger: SourceConflictTrigger; why: string; evidenceIds: string[]; scales: number[] }
+type Charges = { charges: Charge[]; registrationRefuted: number; alternatives: Array<{ cmPerPx: number; refuted: number }>; statements: Statement[]; regAxis: (axis: 'X' | 'Y') => number; tolerancePx: number }
+
+/** The charges, as a source conflict: the triggers in order, their reasons joined, their statements named once. */
+function conflictOf(c: Charges): SourceConflict | null {
+  if (c.charges.length === 0) return null
+  const ids = [...new Set(c.charges.flatMap((x) => x.evidenceIds))].sort()
+  return { triggers: c.charges.map((x) => x.trigger), why: c.charges.map((x) => x.why).join('; '), evidenceIds: ids, registrationRefuted: c.registrationRefuted, alternatives: c.alternatives, doubted: doubtedAmong(c.statements, ids) }
+}
+
 /**
  * The three triggers. `withDoubt` (1.5.0, the production test) reads a contested statement by the doubt policy;
  * without it every statement is read as printed — the 1.4.0 test, kept only so a review can name what was withdrawn.
  */
 function conflictUnder(metrics: MetricEvidenceSet, frameId: string, registration: CoordinateRegistration, judge: PixelRect, wallPx: number, withDoubt: boolean): SourceConflict | null {
+  return conflictOf(chargesUnder(metrics, frameId, registration, judge, wallPx, withDoubt))
+}
+
+function chargesUnder(metrics: MetricEvidenceSet, frameId: string, registration: CoordinateRegistration, judge: PixelRect, wallPx: number, withDoubt: boolean): Charges {
   const accused: Doubt = withDoubt ? 'ANY_FITS' : 'AS_PRINTED'
   const accuser: Doubt = withDoubt ? 'ALL_FIT' : 'AS_PRINTED'
   const tolerancePx = Math.max(2, wallPx / 2)
   const statements = statementsOn(metrics, frameId)
   const solution = metricSolutionFor(metrics, frameId)
   const regAxis = (axis: 'X' | 'Y'): number => (axis === 'X' ? registration.metresPerPixelX : registration.metresPerPixelY) * 100
-  const triggers: SourceConflictTrigger[] = []
-  const reasons: string[] = []
-  const evidenceIds = new Set<string>()
+  const charges: Charge[] = []
 
   // T1: as-read refutation, against the scales the readings themselves state. 1.5.0: a contested statement refutes the
   // registration only if none of its readings fits it, and spares a rival only if all of them fit the rival.
@@ -917,9 +945,12 @@ function conflictUnder(metrics: MetricEvidenceSet, frameId: string, registration
   const alternatives = offered.map((o) => ({ cmPerPx: o.cmPerPx, refuted: refutedShareAsRead(statements, () => o.cmPerPx, tolerancePx, accuser) }))
   const better = alternatives.filter((a) => a.refuted <= registrationRefuted - SUBSTANTIAL_SHARE)
   if (registrationRefuted >= MAJOR_SHARE && better.length > 0) {
-    triggers.push('AS_READ_REFUTATION')
-    reasons.push(`the registration (${round6(regAxis('X'))} cm/px) contradicts ${Math.round(registrationRefuted * 100)}% of the chain length as read, ${better.map((b) => `${b.cmPerPx} cm/px only ${Math.round(b.refuted * 100)}%`).join(', ')}`)
-    for (const o of offered) if (o.kind === 'LATTICE') for (const a of o.anchors) evidenceIds.add(a.evidenceId)
+    charges.push({
+      trigger: 'AS_READ_REFUTATION',
+      why: `the registration (${round6(regAxis('X'))} cm/px) contradicts ${Math.round(registrationRefuted * 100)}% of the chain length as read, ${better.map((b) => `${b.cmPerPx} cm/px only ${Math.round(b.refuted * 100)}%`).join(', ')}`,
+      evidenceIds: offered.flatMap((o) => (o.kind === 'LATTICE' ? o.anchors.map((a) => a.evidenceId) : [])),
+      scales: better.map((b) => b.cmPerPx),
+    })
   }
 
   // T2: a partial segment drives the scale while the label's own primary span is wider.
@@ -931,9 +962,7 @@ function conflictUnder(metrics: MetricEvidenceSet, frameId: string, registration
       if (s.evidence.origin !== 'READ' || !s.evidence.chainId || s.pixelLength < SUBSTANTIAL_SHARE * axisLength(s.axis)) continue
       const wider = observations.find((o) => o.chainId === s.evidence.chainId && o.rawText === s.evidence.rawText && o.spanPx > s.pixelLength + wallPx)
       if (!wider) continue
-      triggers.push('PARTIAL_BINDING')
-      reasons.push(`the registration rests on "${s.evidence.rawText}" over ${s.pixelLength} px, while the label is centred on the ${wider.spanPx} px span it measures`)
-      evidenceIds.add(s.evidence.id)
+      charges.push({ trigger: 'PARTIAL_BINDING', why: `the registration rests on "${s.evidence.rawText}" over ${s.pixelLength} px, while the label is centred on the ${wider.spanPx} px span it measures`, evidenceIds: [s.evidence.id], scales: [] })
       break
     }
   }
@@ -953,15 +982,11 @@ function conflictUnder(metrics: MetricEvidenceSet, frameId: string, registration
     const axes = new Set(agreeing.map((r) => r.s.axis))
     const length = agreeing.reduce((a, r) => a + r.s.pixelLength, 0)
     if (agreeing.length >= 2 && chains.size >= 2 && axes.size === 2 && length > supportedLength) {
-      triggers.push('OUTER_TOTALS')
-      reasons.push(`${agreeing.length} long readings as printed on both axes agree on ${round6(cmPerPx)} cm/px (${agreeing.map((r) => `${r.cm}/${r.s.pixelLength} px`).join(', ')})`)
-      for (const r of agreeing) evidenceIds.add(r.s.evidence.id)
+      charges.push({ trigger: 'OUTER_TOTALS', why: `${agreeing.length} long readings as printed on both axes agree on ${round6(cmPerPx)} cm/px (${agreeing.map((r) => `${r.cm}/${r.s.pixelLength} px`).join(', ')})`, evidenceIds: agreeing.map((r) => r.s.evidence.id), scales: [cmPerPx] })
       break
     }
   }
-  if (triggers.length === 0) return null
-  const ids = [...evidenceIds].sort()
-  return { triggers, why: reasons.join('; '), evidenceIds: ids, registrationRefuted, alternatives, doubted: doubtedAmong(statements, ids) }
+  return { charges, registrationRefuted, alternatives, statements, regAxis, tolerancePx }
 }
 
 /** The source conflict of a first reading's base plan, judged on its wall ink's box (else its frame). */
@@ -986,10 +1011,13 @@ export function withdrawnRecord(review: SourceConflictReview): Record<string, nu
   if (!w) return {}
   return {
     resolverVersion: PLAN_RESOLVER_VERSION,
+    statementContest: STATEMENT_CONTEST_VERSION,
     withdrawnTriggers: w.triggers.join(','),
     withdrawnWhy: w.why,
     withdrawnEvidence: w.evidenceIds.slice(0, 8).join(','),
+    withdrawnEvidenceCount: w.evidenceIds.length,
     doubted: doubtedText(w.doubted),
+    doubtedCount: w.doubted.length,
     stillStanding: review.conflict ? review.conflict.triggers.join(',') : '',
   }
 }
@@ -1231,7 +1259,10 @@ export function challengeRecord(outcome: ChallengeOutcome, why: string): Record<
     out.sourceConflict = outcome.conflict.triggers.join(',')
     out.registrationRefuted = round6(outcome.conflict.registrationRefuted)
     if (outcome.conflict.evidenceIds.length > 0) out.conflictEvidence = outcome.conflict.evidenceIds.slice(0, 8).join(',')
-    if (outcome.conflict.doubted.length > 0) out.conflictDoubted = doubtedText(outcome.conflict.doubted)
+    if (outcome.conflict.doubted.length > 0) {
+      out.conflictDoubted = doubtedText(outcome.conflict.doubted)
+      out.statementContest = STATEMENT_CONTEST_VERSION
+    }
   }
   if (outcome.kind === 'REPLACED') {
     // 1.4.0: the same facts as a resolution records, so a judge holds a challenge to the same rules.

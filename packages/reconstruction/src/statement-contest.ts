@@ -8,12 +8,17 @@
  *
  * What this module states, for one statement, is only which values its CONFIDENT readers read:
  *
- *   TOKEN     the statement's printed value as plan resolution reads it (READ: the evidence value; otherwise the
- *             token's text when it is a dimension, /^[1-9]\d{1,4}$/)
- *   LATTICE   the lattice on the same frame, box and orientation: its own reading, only when its own class is CLEAR or
- *             SUPPORTED
- *   EXTERNAL  that lattice's external reading, only when the frozen ensemble rule found it corroborating: AGREES,
- *             LEADS, or CONTESTS with the external reading as the named rival
+ *   AS_PRINTED  the value plan resolution reads as printed: for a CHAIN_CORRECTED statement the classic token's text
+ *             when it is a dimension (/^[1-9]\d{1,4}$/); for a READ statement the evidence value. Upstream, the metric
+ *             layer may already have taken that value from the lattice or the ensemble (a re-solved chain reads
+ *             `readingOf`), so for READ it is "what the incumbent states", not necessarily the classic token
+ *   LATTICE     the lattice on the same frame, box and orientation: its own reading, only when its OWN class (before
+ *               the ensemble) is CLEAR or SUPPORTED
+ *   EXTERNAL    that lattice's external reading, only when the frozen ensemble rule found it corroborating: AGREES,
+ *               LEADS, or CONTESTS with the external reading as the named rival
+ *
+ * Two lattice records for the same frame, box and orientation (none exist in the development evidence) are joined as the
+ * metric layer sealed them: the later record in the set's order wins, as in the research join it was validated against.
  *
  * A statement is CONTESTED when those values are not all the same. The contest is an observation about the reading;
  * it decides nothing. Plan resolution's consumers decide what a contest is allowed to do (`plan-resolution.ts`).
@@ -23,7 +28,7 @@ import type { MetricEvidence, MetricEvidenceSet, NumericLatticeRecord } from '@b
 
 export const STATEMENT_CONTEST_VERSION = '1.0.0' as const
 
-export type ConfidentReader = 'TOKEN' | 'LATTICE' | 'EXTERNAL'
+export type ConfidentReader = 'AS_PRINTED' | 'LATTICE' | 'EXTERNAL'
 
 export type StatementContest = {
   /** Each confident reader's value, in reader order; a reader that is absent or not confident is not listed. */
@@ -40,7 +45,7 @@ const DIMENSION = /^[1-9]\d{1,4}$/
 const dimensionOf = (text: string | undefined): number | undefined => (text !== undefined && DIMENSION.test(text) ? Number(text) : undefined)
 const keyOf = (frameId: string, box: { x0: number; y0: number; x1: number; y1: number }, orientation: string | undefined): string => `${frameId}|${box.x0}|${box.x1}|${box.y0}|${box.y1}|${orientation ?? ''}`
 
-/** The lattice's own reading, when its own class says it is confident. */
+/** The lattice's own reading, when its own class (not the ensemble's decision class) says it is confident. */
 function latticeValue(lattice: NumericLatticeRecord): number | undefined {
   const own = lattice.ensemble?.lattice.ocrClass ?? lattice.ocrClass
   return own === 'CLEAR' || own === 'SUPPORTED' ? lattice.asReadValueCm : undefined
@@ -63,7 +68,7 @@ export function statementContests(metrics: MetricEvidenceSet): (evidence: Metric
   return (evidence, token) => {
     const readings: StatementContest['readings'] = []
     const printed = evidence.origin === 'READ' ? evidence.value : dimensionOf(token?.text)
-    if (printed !== undefined) readings.push({ reader: 'TOKEN', valueCm: printed })
+    if (printed !== undefined) readings.push({ reader: 'AS_PRINTED', valueCm: printed })
     const lattice = token ? lattices.get(keyOf(token.frameId, token.box, token.orientation)) : undefined
     const l = lattice ? latticeValue(lattice) : undefined
     if (l !== undefined) readings.push({ reader: 'LATTICE', valueCm: l })
