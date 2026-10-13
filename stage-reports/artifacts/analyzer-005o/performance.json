@@ -239,8 +239,8 @@
    "A04": 13.15,
    "A05": 11.21,
    "A06": 12.78,
-   "A07": 19.41,
-   "D00": 15.21,
+   "A07": 19.9,
+   "D00": 16.78,
    "D01": 8.89,
    "D02": 10.33,
    "D03": 10.83,
@@ -440,7 +440,7 @@
    "peakRssMaxMb": 748.7,
    "peakRssMedianMb": 593.7,
    "wallMedianS": 13.78,
-   "wallP95S": 20.27,
+   "wallP95S": 20.86,
    "wallTotalS": 602.0
   },
   "M0H": {
@@ -448,7 +448,7 @@
    "peakRssMaxMb": 736.0,
    "peakRssMedianMb": 594.2,
    "wallMedianS": 12.79,
-   "wallP95S": 19.88,
+   "wallP95S": 20.47,
    "wallTotalS": 571.6
   },
   "M0X": {
@@ -457,7 +457,7 @@
    "peakRssMaxMb": 756.1,
    "peakRssMedianMb": 594.8,
    "wallMedianS": 12.16,
-   "wallP95S": 19.39,
+   "wallP95S": 19.54,
    "wallTotalS": 556.7
   },
   "M1": {
@@ -466,7 +466,7 @@
    "peakRssMaxMb": 732.0,
    "peakRssMedianMb": 599.9,
    "wallMedianS": 12.84,
-   "wallP95S": 19.64,
+   "wallP95S": 19.88,
    "wallTotalS": 582.4
   },
   "M1P": {
@@ -475,17 +475,17 @@
    "peakRssMaxMb": 752.6,
    "peakRssMedianMb": 597.3,
    "wallMedianS": 12.14,
-   "wallP95S": 19.75,
+   "wallP95S": 19.99,
    "wallTotalS": 556.5
   },
   "M1b": {
-   "medianRatioVsM0H": 0.994,
+   "medianRatioVsM0H": 0.996,
    "n": 44,
    "peakRssMaxMb": 776.2,
    "peakRssMedianMb": 602.4,
    "wallMedianS": 12.21,
-   "wallP95S": 19.41,
-   "wallTotalS": 558.0
+   "wallP95S": 19.9,
+   "wallTotalS": 560.1
   },
   "M2": {
    "medianRatioVsM0H": 0.999,
@@ -502,7 +502,7 @@
    "peakRssMaxMb": 748.3,
    "peakRssMedianMb": 599.9,
    "wallMedianS": 11.46,
-   "wallP95S": 18.97,
+   "wallP95S": 19.27,
    "wallTotalS": 538.5
   },
   "M3b": {
@@ -511,7 +511,7 @@
    "peakRssMaxMb": 722.0,
    "peakRssMedianMb": 594.4,
    "wallMedianS": 11.35,
-   "wallP95S": 19.45,
+   "wallP95S": 19.49,
    "wallTotalS": 536.6
   },
   "ctl-M1-noext": {
@@ -520,7 +520,7 @@
    "peakRssMaxMb": 575.2,
    "peakRssMedianMb": 575.2,
    "wallMedianS": 10.82,
-   "wallP95S": 10.82,
+   "wallP95S": null,
    "wallTotalS": 10.8
   },
   "ctl-M3-noext": {
@@ -529,7 +529,7 @@
    "peakRssMaxMb": 600.3,
    "peakRssMedianMb": 600.3,
    "wallMedianS": 10.5,
-   "wallP95S": 10.5,
+   "wallP95S": null,
    "wallTotalS": 10.5
   },
   "peek-M1": {
@@ -538,7 +538,7 @@
    "peakRssMaxMb": 643.4,
    "peakRssMedianMb": 601.7,
    "wallMedianS": 16.25,
-   "wallP95S": 15.63,
+   "wallP95S": null,
    "wallTotalS": 32.5
   },
   "peek-M1P": {
@@ -547,7 +547,7 @@
    "peakRssMaxMb": 660.1,
    "peakRssMedianMb": 611.9,
    "wallMedianS": 15.61,
-   "wallP95S": 15.21,
+   "wallP95S": null,
    "wallTotalS": 31.2
   },
   "peek-M3": {
@@ -556,7 +556,7 @@
    "peakRssMaxMb": 614.4,
    "peakRssMedianMb": 593.1,
    "wallMedianS": 15.51,
-   "wallP95S": 15.26,
+   "wallP95S": null,
    "wallTotalS": 31.0
   }
  },

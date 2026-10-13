@@ -8,7 +8,7 @@ Blind transcription sheets for the OFFLINE SCORER's truth (never an input to any
 case name. Each sheet also carries `controls` synthetic labels (rendered here from a free font with a known value) so
 the transcribers' own error rate is measured. Sheets and the key are written OUTSIDE the repository.
 """
-import argparse, json, os, random
+import argparse, sys, json, os, random
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 FONTS = ['/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', '/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf', '/usr/share/fonts/truetype/freefont/FreeSans.ttf']
@@ -26,6 +26,14 @@ def control(rng):
     return v, im
 
 
+def refuse_inside_repo(path):
+    """Publisher pixels and rendered pages never land in the repository (post-review LMP-4): refuse an output there."""
+    repo = os.path.realpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
+    real = os.path.realpath(path)
+    if real == repo or real.startswith(repo + os.sep):
+        sys.exit(f'refusing to write pixels inside the repository: {real}')
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--work', required=True)
@@ -33,6 +41,7 @@ def main():
     ap.add_argument('--controls', type=int, default=4)
     ap.add_argument('--seed', type=int, default=5050)
     a = ap.parse_args()
+    refuse_inside_repo(a.work)
     rng = random.Random(a.seed)
     man = json.load(open(os.path.join(a.work, 'labels', 'manifest.json')))['crops']
     items = [r for r in man if r.get('crop') and r['crop'] != 'RASTER_MISSING']

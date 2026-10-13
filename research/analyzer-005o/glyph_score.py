@@ -83,21 +83,33 @@ def main():
     fams = defaultdict(list)
     for r in rows:
         fams[r['family']].append(r)
-    rng = random.Random(5050)
-    names = sorted(fams)
-    boot = []
-    for _ in range(10000):
-        s = [x for f in (rng.choice(names) for _ in names) for x in fams[f]]
-        boot.append(sum(1 for r in s if r['m1'] == 'WRONG') / len(s))
-    boot.sort()
+    # post-review LMP-10: 7 font files are about 5 typeface designs (Liberation Sans regular and italic are one design,
+    # DejaVu Sans and Sans Mono one superfamily); the bootstrap is reported clustered both ways
+    DESIGN = {'F1-dejavu-sans': 'dejavu', 'F5-dejavu-mono': 'dejavu', 'F2-liberation-sans': 'liberation', 'F4-liberation-italic-condensed': 'liberation',
+              'F3-freesans-oblique': 'freesans', 'F6-courier10': 'courier', 'F7-charter': 'charter'}
+
+    def cluster_ci(key):
+        groups = defaultdict(list)
+        for r in rows:
+            groups[key(r)].append(r)
+        rng = random.Random(5050)
+        names = sorted(groups)
+        b = []
+        for _ in range(10000):
+            s = [x for f in (rng.choice(names) for _ in names) for x in groups[f]]
+            b.append(sum(1 for r in s if r['m1'] == 'WRONG') / len(s))
+        b.sort()
+        return [round(b[250], 4), round(b[9750], 4)], len(names)
+    boot_ci, _ = cluster_ci(lambda r: r['family'])
+    design_ci, n_designs = cluster_ci(lambda r: DESIGN[r['family']])
     doc = {'schema': 'buildapp.005o.glyph-corpus-results', 'families': len(fams), 'labels': len(rows), 'pooled': tally(rows), 'lookalikeSubset': tally([r for r in rows if r['lookalike']]),
-           'byFamily': {f: tally(fams[f]) for f in names}, 'byTurn': {t: tally([r for r in rows if r['turn'] == t]) for t in ('UPRIGHT', 'CW', 'CCW')},
-           'm1WrongFamilyClusterCI': [round(boot[250], 4), round(boot[9750], 4)],
+           'byFamily': {f: tally(fams[f]) for f in sorted(fams)}, 'byTurn': {t: tally([r for r in rows if r['turn'] == t]) for t in ('UPRIGHT', 'CW', 'CCW')},
+           'm1WrongFamilyClusterCI': boot_ci, 'm1WrongDesignClusterCI': design_ci, 'typefaceDesigns': n_designs,
            'm1Wrong': [r for r in rows if r['m1'] == 'WRONG'], 'missingCandidate': [r['id'] for r in rows if not r['recall']]}
     json.dump(doc, open(a.out, 'w'), indent=1, sort_keys=True)
     p = doc['pooled']
     print(json.dumps({k: p[k] for k in p}, indent=0))
-    print('m1 wrong family-cluster CI', doc['m1WrongFamilyClusterCI'])
+    print('m1 wrong family-cluster CI', doc['m1WrongFamilyClusterCI'], 'design-cluster CI', doc['m1WrongDesignClusterCI'], n_designs, 'designs')
 
 
 if __name__ == '__main__':

@@ -9,7 +9,7 @@ view records (views/<variant>/<case>.json), the replays (runs/<label>/<case>), t
 reader-level measures). Definitions are preregistration.md section 4-6, unchanged.
 """
 import argparse, json, os, random, re, shutil, subprocess, sys, tempfile
-from collections import Counter, defaultdict
+from collections import Counter, defaultdict  # noqa: F401
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import as_printed_views as V  # noqa: E402  (the generator's own statement / join definitions, so both see the same statements)
@@ -74,18 +74,38 @@ def outcome(run_dir):
     fs = os.path.join(run_dir, 'failure.json')
     dg = os.path.join(run_dir, 'plan-diagnostics', 'digest.json')
     o = {'outcome': 'NO_RUN', 'code': None, 'modelHash': None, 'frame': None, 'scale': None}
-    if os.path.exists(rs):
+    tr = os.path.join(run_dir, 'analysis-trace.json')
+    trace = json.load(open(tr)) if os.path.exists(tr) else {}
+    # post-review C/S3: a failure record (or a FAILED trace) wins over a result summary written earlier in the same run
+    if os.path.exists(fs) or trace.get('outcome') == 'FAILED':
+        f = json.load(open(fs)) if os.path.exists(fs) else {}
+        o.update(outcome='FAILED', code=f"{f.get('reasonCode')}/{f.get('substage')}", message=f.get('message', '')[:400])
+    elif os.path.exists(rs):
         s = json.load(open(rs))
         o.update(outcome='COMPLETED', modelHash=s.get('modelHash'))
-    elif os.path.exists(fs):
-        f = json.load(open(fs))
-        o.update(outcome='FAILED', code=f"{f.get('reasonCode')}/{f.get('substage')}", message=f.get('message', '')[:400])
+    # post-review S2/S4: the decision path (what plan resolution chose or refused, and why) and the plan's semantics
+    path = {}
+    for e in trace.get('entries', []):
+        if e.get('substage') in ('PLAN_RESOLUTION', 'METRIC_CHALLENGE'):
+            c = e.get('counts', {})
+            path[e['substage']] = {k: c.get(k) for k in ('outcome', 'chosen', 'reading1', 'sourceConflict', 'registrationRefuted', 'chosenRefuted', 'preferred', 'why') if k in c}
+    o['decisionPath'] = path
+    o['failureMessage'] = o.get('message')
     if os.path.exists(dg):
         d = json.load(open(dg))
         o['frame'] = d.get('selectedPlanFrameId')
         for p in d.get('plans', []):
             if p['frameId'] == o['frame'] and p.get('scale'):
                 o['scale'] = round(100 * (p['scale']['mppX'] + p['scale']['mppY']) / 2, 6)
+            if p['frameId'] == o['frame']:
+                o['semantics'] = {'wideOpenings': sorted(f"{w.get('decision')}:{round(w.get('widthM', 0), 1)}" for w in p.get('wideOpenings', [])),
+                                  'bodies': sorted(f"{b.get('relation')}:{round(b.get('areaM2', 0))}" for b in (p.get('boundary') or {}).get('bodies', []))}
+    md = os.path.join(run_dir, 'model.json')
+    if os.path.exists(md):
+        m = json.load(open(md))
+        o.setdefault('semantics', {})['walls'] = dict(Counter(w.get('kind') for w in m.get('walls', [])))
+        o['semantics']['openings'] = len(m.get('openings', []))
+        o['semantics']['levels'] = len(m.get('levels', []))
     return o
 
 
@@ -153,7 +173,10 @@ def main():
             ext_top = V.val((ext.get('topK') or [{}])[0].get('text')) if ext else None
             ens = lat.get('ensemble') or {}
             topk = {cand['TOKEN']} | set(cand['ALT']) | set(cand['LATTICE_PATHS']) | {lat.get('asReadValueCm')} | {V.val(x.get('text')) for x in (ext.get('topK') or [])}
-            row = {'case': c['case'], 'family': c['family'], 'evidenceId': e['id'], 'frame': st['frame'], 'axis': st['axis'], 'chain': st['chain'], 'px': st['px'], 'truth': T,
+            t = st['token']
+            literal = V.val(t['text']) if t else None
+            frozen_ar = V.frozen_lists(e, t['text'] if t else '')[1]
+            row = {'tokenText': literal, 'frozenAsPrinted': (frozen_ar[0] if len(frozen_ar) == 1 else None), 'case': c['case'], 'family': c['family'], 'evidenceId': e['id'], 'frame': st['frame'], 'axis': st['axis'], 'chain': st['chain'], 'px': st['px'], 'truth': T,
                    'token': cand['TOKEN'], 'latticeAsRead': lat.get('asReadValueCm'), 'latticeConfident': cand['LATTICE'], 'externalTop': ext_top, 'externalCorroborating': cand['EXTERNAL'],
                    'ensembleReading': ens.get('asReadValueCm') if ens else lat.get('asReadValueCm'), 'ensembleDecision': ens.get('decision'), 'hasLattice': bool(lat), 'topKRecall': T in topk, 'origin': e['origin'], 'value': e['value']}
             label_rows.append(row)
@@ -161,6 +184,16 @@ def main():
     true_scale = {}
     for k, s in frame_stmts.items():
         true_scale[k] = frame_true_scale(s)
+    # post-review L10: a case whose sealed evidence is byte-identical to another's (kosacce-tracked = kosacce-clean) has
+    # the same frames and the same truth; its crops were cut once, under the first case
+    import hashlib
+    digest = {c['case']: hashlib.sha256(open(c['metrics'], 'rb').read()).hexdigest() for c in cases}
+    for c in cases:
+        twin = next((o['case'] for o in cases if o['case'] != c['case'] and digest[o['case']] == digest[c['case']] and any(k[0] == o['case'] for k in true_scale)), None)
+        if twin and not any(k[0] == c['case'] for k in true_scale):
+            for (case, frame), v in list(true_scale.items()):
+                if case == twin:
+                    true_scale[(c['case'], frame)] = v
     for r in label_rows:
         ts = true_scale.get((r['case'], r['frame']), (None, 0))[0]
         r['trueScale'] = ts
@@ -176,9 +209,20 @@ def main():
                 'wrongWhenStated': round(w / len(have), 4) if have else None, 'wrongWhenStatedCI': wilson(w, len(have)),
                 'familyClusterCI_exact': cluster_boot(rows, lambda r: r['family'], lambda s: (sum(1 for r in s if r[field] == r['truth']) / len(s)) if s else None)}
 
-    readers = {f: acc(f) for f in ('token', 'latticeAsRead', 'latticeConfident', 'externalTop', 'externalCorroborating', 'ensembleReading', 'value')}
+    READERS = ('frozenAsPrinted', 'tokenText', 'token', 'latticeAsRead', 'latticeConfident', 'externalTop', 'externalCorroborating', 'ensembleReading', 'value')
+    readers = {f: acc(f) for f in READERS}
+    # post-review L3: sensitivity without same-drawing repeats (same case, axis, truth and span within 1 px on another
+    # frame) and without the two second-pipeline legacy rows whose drawings are counted through another row
+    seen_ink, dedup = set(), []
+    for r in sorted(label_rows, key=lambda r: (r['case'], r['frame'], r['evidenceId'])):
+        k = (r['case'], r['axis'], r['truth'], round(r['px']))
+        if k in seen_ink or r['case'] in ('kosacce-area-alone', 'eoze-legacy-every', 'eoze-legacy-area'):
+            continue
+        seen_ink.add(k)
+        dedup.append(r)
+    readers_dedup = {f: acc(f, dedup) for f in READERS}
     with_lat = [r for r in label_rows if r['hasLattice']]
-    readers_on_lattice_subset = {f: acc(f, with_lat) for f in ('token', 'latticeAsRead', 'latticeConfident', 'externalTop', 'externalCorroborating', 'ensembleReading', 'value')}
+    readers_on_lattice_subset = {f: acc(f, with_lat) for f in READERS}
     recall = {'n': len(label_rows), 'topKRecall': sum(r['topKRecall'] for r in label_rows), 'rate': round(sum(r['topKRecall'] for r in label_rows) / max(1, len(label_rows)), 4)}
     bound = Counter('UNKNOWN_SCALE' if r['boundConsistent'] is None else 'CONSISTENT' if r['boundConsistent'] else 'INCONSISTENT' for r in label_rows)
 
@@ -203,8 +247,10 @@ def main():
                 ar = rec['asRead']
                 o = 'ABSTAIN' if not ar else 'CORRECT' if r['truth'] in ar and len(ar) == 1 else 'WRONG'
                 fo = 'ABSTAIN' if not rec['frozen']['asRead'] else 'CORRECT' if r['truth'] in rec['frozen']['asRead'] else 'WRONG'
+                zl = rec.get('zero') or []
                 cnt[o] += 1
                 cnt[f'{fo}->{o}'] += 1
+                cnt['zero_' + ('ABSTAIN' if not zl else 'CORRECT' if zl == [r['truth']] else 'WRONG')] += 1
                 rows.append({'family': r['family'], 'o': o, 'fo': fo, 'rule': rec['rule'], 'bound': r['boundConsistent']})
         n = len(rows)
         printed[v] = {'n': n, **dict(cnt), 'wrongRate': round(cnt['WRONG'] / n, 4) if n else None, 'wrongCI': wilson(cnt['WRONG'], n),
@@ -227,6 +273,8 @@ def main():
             tsv = true_scale.get((c['case'], o['frame']), (None, 0))[0] if o['frame'] else None
             o['scaleClass'] = None if o['outcome'] != 'COMPLETED' else ('UNKNOWN_TRUTH' if tsv is None or o['scale'] is None else 'CORRECT_SCALE' if abs(o['scale'] / tsv - 1) <= TOL else 'FALSE_CONFIDENT_SCALE')
             o['changedVsM0'] = (o['outcome'], o['code'], o['modelHash']) != (b['outcome'], b['code'], b['modelHash'])
+            o['decisionPathChangedVsM0'] = o.get('decisionPath') != b.get('decisionPath') or o.get('failureMessage') != b.get('failureMessage')
+            o['semanticsChangedVsM0'] = o.get('semantics') != b.get('semantics')
             if not a.no_verdict and o['changedVsM0']:
                 o['verdict'] = verdict(c, os.path.join(a.work, 'runs', runlabel[v], c['case']))
             else:
@@ -240,12 +288,13 @@ def main():
         hs = [h[v] for h in houses]
         summary[v] = {'completed': sum(1 for o in hs if o['outcome'] == 'COMPLETED'), 'refused': sum(1 for o in hs if o['outcome'] == 'FAILED'),
                       'pass': sum(1 for o in hs if o.get('verdict') == 'PASS'), 'scaleClass': dict(Counter(o.get('scaleClass') for o in hs if o['outcome'] == 'COMPLETED')),
-                      'changedVsM0': sum(1 for o in hs if o.get('changedVsM0')), 'knownGoodChanged': sum(1 for h in houses if h['M0'].get('verdict') == 'PASS' and h[v].get('changedVsM0')) if v != 'M0' else 0,
+                      'changedVsM0': sum(1 for o in hs if o.get('changedVsM0')), 'decisionPathChangedVsM0': sum(1 for o in hs if o.get('decisionPathChangedVsM0')),
+                      'semanticsChangedVsM0': sum(1 for o in hs if o.get('semanticsChangedVsM0')), 'refusalReasonChanged': sum(1 for o in hs if o['outcome'] == 'FAILED' and o.get('failureMessage') and v != 'M0' and o.get('decisionPathChangedVsM0') and not o.get('changedVsM0')), 'knownGoodChanged': sum(1 for h in houses if h['M0'].get('verdict') == 'PASS' and h[v].get('changedVsM0')) if v != 'M0' else 0,
                       'newFalseConfident': sum(1 for h in houses if h[v].get('scaleClass') == 'FALSE_CONFIDENT_SCALE' and h['M0'].get('scaleClass') != 'FALSE_CONFIDENT_SCALE') if v != 'M0' else 0,
                       'falseConfidentByFamily': dict(Counter(h['family'] for h in houses if h[v].get('scaleClass') == 'FALSE_CONFIDENT_SCALE'))}
     doc = {'schema': 'buildapp.005o.metric-bakeoff', 'preregistration': 'research/analyzer-005o/preregistration.md', 'tolerance': TOL,
            'labels': {'statementsWithIntegerTruth': len(label_rows), 'families': len({r['family'] for r in label_rows}), 'excluded': {k: v for k, v in reader.items()},
-                      'readers': readers, 'readersOnStatementsWithLattice': readers_on_lattice_subset, 'topKRecallAtFirstLattice': recall, 'binding': dict(bound),
+                      'readers': readers, 'readersOnStatementsWithLattice': readers_on_lattice_subset, 'readersDeduplicated': {'n': len(dedup), 'readers': readers_dedup}, 'topKRecallAtFirstLattice': recall, 'binding': dict(bound),
                       'framesWithTrueScale': sum(1 for v in true_scale.values() if v[0] is not None), 'framesWithStatements': len(true_scale)},
            'asPrinted': printed, 'houses': houses, 'houseSummary': summary}
     os.makedirs(os.path.dirname(a.out), exist_ok=True)

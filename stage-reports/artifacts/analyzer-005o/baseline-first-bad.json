@@ -13,7 +13,7 @@
    "outcome": "PLAN_RESOLUTION_INCONCLUSIVE / SOURCE_CONFLICT (OUTER_TOTALS: \"501/206 px, 810/333 px agree on 2.432039\")",
    "selectedFrame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
    "metricSolution": "STRONG / CONFIRMED / MEASURED, 2.626058 x 2.620832 cm/px (dimension-observation path, ensemble-aware)",
-   "trueScaleCmPerPx": "2.626 (transcription truth: 541/206 = 2.626, 920/350 = 2.629, 870/333 = 2.613, 190/71 = 2.676)",
+   "trueScaleCmPerPx": "2.6286 (the scorer's frame TRUE_SCALE, label-rows trueScale 2.62857; post-review N1: one figure throughout; individual transcription ratios 541/206 = 2.626, 920/350 = 2.629, 870/333 = 2.613, 190/71 = 2.676)",
    "FIRST_BAD_OPERATION": "d \u2014 AS_PRINTED_VIEW_IGNORES_ENSEMBLE: plan-resolution statementsOn/asRead takes the classic template token text as \"printed\" for CHAIN_CORRECTED statements; the deployed PP-OCRv6 had read 541 (p 0.99981) and 870 (p 0.99952), both stable, on the same boxes; the ensemble kept them (CONTESTS 501/541; LEADS 870, 810 a candidate) and the metric solution used 870 as a witness",
    "labels": [
     {
@@ -89,7 +89,146 @@
     "boundConsistent": 0,
     "boundInconsistent": 0
    },
-   "note": "\"5 labels on 79 lines\" is plan-diagnostics dimensionEvidenceOf (text regions with a PRIMARY non-LOW observation); 79 is a raw chain count of which 11 are meaningful dimension lines (15 printed dimensions); the remaining 68 are furniture, stairs, walls, callout leaders, the logo and the car"
+   "note": "\"5 labels on 79 lines\" is plan-diagnostics dimensionEvidenceOf (text regions with a PRIMARY non-LOW observation); 79 is a raw chain count of which 11 are meaningful dimension lines (15 printed dimensions); the remaining 68 are furniture, stairs, walls, callout leaders, the logo and the car",
+   "perPrintedDimension": [
+    {
+     "printed": 1020,
+     "chain": "h809-8ba",
+     "lattice": "1020 SUPPORTED",
+     "ppocr": "1020 p .9993 AGREES",
+     "spanPx": 412,
+     "status": "REJECTED UNCENTRED (logo-split fragment)",
+     "class": "c"
+    },
+    {
+     "printed": 740,
+     "chain": "v49",
+     "lattice": "100 AMBIGUOUS (CW)",
+     "ppocr": "740 p .99991 LEADS",
+     "spanPx": 476,
+     "status": "RAW, chain decided CCW by UNDECIDED fallback",
+     "class": "d"
+    },
+    {
+     "printed": 402,
+     "chain": "h330-3b61",
+     "lattice": "001 AMBIGUOUS",
+     "ppocr": "402 p .99965 but meanP .875 -> NOT_CORROBORATING",
+     "spanPx": null,
+     "status": "REJECTED",
+     "class": "b"
+    },
+    {
+     "printed": 410,
+     "chain": "v244",
+     "lattice": "010 AMBIGUOUS",
+     "ppocr": "410 p .9991 LEADS",
+     "spanPx": 264,
+     "status": "RAW, wall-crossing tick; chain CCW by OTHER_AXIS_SCALE",
+     "class": "c"
+    },
+    {
+     "printed": 252,
+     "chain": "v244",
+     "lattice": "252 CLEAR",
+     "ppocr": "252 AGREES",
+     "spanPx": null,
+     "status": "UNCENTRED, missing shared tick",
+     "class": "c"
+    },
+    {
+     "printed": 240,
+     "chain": "v364",
+     "lattice": "100 AMBIGUOUS",
+     "ppocr": "240 p .99979 LEADS",
+     "spanPx": 98,
+     "status": "REJECTED (end ticks)",
+     "class": "c"
+    },
+    {
+     "printed": 582,
+     "chain": "v726",
+     "lattice": "582 AMBIGUOUS",
+     "ppocr": "582 AGREES",
+     "spanPx": 398.5,
+     "status": "REJECTED (arrowhead/crossing ticks)",
+     "class": "c"
+    },
+    {
+     "printed": 115,
+     "chain": "h524 (wrong line)",
+     "lattice": "115 CLEAR",
+     "ppocr": "115 AGREES",
+     "spanPx": 48.5,
+     "status": "RAW, true line at y~552 not extracted",
+     "class": "c"
+    },
+    {
+     "printed": 153,
+     "chain": null,
+     "lattice": "151 CLEAR",
+     "ppocr": "153 p .936 CONTESTS (meanP .833)",
+     "spanPx": null,
+     "status": "no chain at x~506",
+     "class": "c"
+    },
+    {
+     "printed": 202,
+     "chain": null,
+     "lattice": null,
+     "ppocr": null,
+     "spanPx": null,
+     "status": "legacy token 202 unattached; line not extracted",
+     "class": "c"
+    },
+    {
+     "printed": 160,
+     "chain": "v506",
+     "lattice": "fragment LOW_QUALITY",
+     "ppocr": "1 (fragment)",
+     "spanPx": null,
+     "status": "text region never formed",
+     "class": "a"
+    },
+    {
+     "printed": 256,
+     "chain": null,
+     "lattice": null,
+     "ppocr": null,
+     "spanPx": null,
+     "status": "no text detected",
+     "class": "a"
+    },
+    {
+     "printed": 314,
+     "chain": "h553",
+     "lattice": null,
+     "ppocr": null,
+     "spanPx": null,
+     "status": "label inside the car drawing, no token",
+     "class": "a"
+    },
+    {
+     "printed": 209,
+     "chain": "h283",
+     "lattice": null,
+     "ppocr": null,
+     "spanPx": null,
+     "status": "watermark overlap, no token",
+     "class": "a"
+    },
+    {
+     "printed": 95,
+     "chain": "h330-3bd2?",
+     "lattice": null,
+     "ppocr": null,
+     "spanPx": null,
+     "status": "no token (uncertain line)",
+     "class": "a"
+    }
+   ],
+   "perPrintedDimensionProvenance": "read-only Phase A trace (005O map agent) from the sealed 005N FINAL replay and the source raster; values transcribed by eye from local crops (never committed); not produced by a committed script",
+   "frameSelectionNote": "post-review F1: the blind-9 run (005L code, same sealed metric evidence c1a3b890\u2026) selected the attic frame rzut-44d6d1166d at a 1.516 cm/px page vote (4 labels on 55 lines, a 7.04 m\u00b2 layout); under 005N code the selected frame moved to the ground copy rzut-36e1e5a39d at 2.451. The 005O trace is of the current (b680cd4) selection. The earlier selection of an attic copy is a candidate earlier first-bad decision for the blind-9 run; it is not the current one"
   },
   "dom-w-akebiach": {
    "outcome": "EXTENT (blind-10 #2); METRIC is not its first bad decision (selected frame scale 2.9061 cm/px, metric STRONG)",

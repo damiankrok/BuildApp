@@ -14,7 +14,7 @@ Fonts and licences (files under /usr/share/fonts): DejaVu Sans (Bitstream Vera /
 and Liberation Sans Italic (SIL OFL 1.1), FreeSans Oblique (GPLv3 with font exception), DejaVu Sans Mono (DejaVu
 licence), Courier 10 Pitch and Bitstream Charter (Bitstream donated X11 Type 1, free redistribution).
 """
-import argparse, hashlib, io, json, os, random
+import argparse, sys, hashlib, io, json, os, random
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 FAMILIES = {
@@ -62,13 +62,22 @@ def render(text, font_path, condense, cap, blur, jpeg, gray, line, turn, rng):
     return page.convert('RGB')
 
 
+def refuse_inside_repo(path):
+    """Publisher pixels and rendered pages never land in the repository (post-review LMP-4): refuse an output there."""
+    repo = os.path.realpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
+    real = os.path.realpath(path)
+    if real == repo or real.startswith(repo + os.sep):
+        sys.exit(f'refusing to write pixels inside the repository: {real}')
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--out', required=True)
     ap.add_argument('--seed', type=int, default=5050)
     ap.add_argument('--per-family', type=int, default=60)
-    ap.add_argument('--manifest', default='stage-reports/artifacts/analyzer-005o/glyph-corpus-manifest.json')
+    ap.add_argument('--manifest', default=os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'stage-reports/artifacts/analyzer-005o/glyph-corpus-manifest.json'))
     a = ap.parse_args()
+    refuse_inside_repo(a.out)
     os.makedirs(a.out, exist_ok=True)
     rng = random.Random(a.seed)
     rows = []

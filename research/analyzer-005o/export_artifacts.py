@@ -36,7 +36,10 @@ def main():
         inv.append({'case': c['case'], 'set': c.get('set'), 'family': c['family'], 'canonicalUrl': pkg.get('canonicalUrl'),
                     'metricEvidenceSha256': sha(c['metrics']), 'sourcePackageSha256': sha(c['package']), 'observationGraphSha256': sha(c['graph']),
                     'metricSchemaVersion': json.load(open(c['metrics'])).get('schemaVersion'), 'cacheDir': c['cache'], 'rasterVariants': len(variants),
-                    'rasterVariantsInCache': sum(1 for h in variants if h in idx), 'pdfAssets': sum(1 for asst in pkg['assets'] for v in asst['variants'] if 'pdf' in (v.get('mediaType') or '')),
+                    'rasterVariantsInCache': sum(1 for h in variants if h in idx),
+                    # post-review T1: PDFs are recorded in the package-level `documents` (schema 1.3.0), never as asset variants
+                    'documents': [{'kind': d.get('kind'), 'format': d.get('format'), 'status': d.get('status'), 'statedScale': d.get('statedScale'), 'hasBytes': bool(d.get('byteHash'))} for d in pkg.get('documents', [])],
+                    'adapter': (pkg.get('adapter') or {}).get('id'),
                     'dropFrames': c.get('dropFrames', [])})
     json.dump({'schema': 'buildapp.005o.source-inventory', 'note': 'paths are outside the repository (sealed runs and byte caches with publisher bytes; never committed)', 'cases': inv},
               open(os.path.join(a.out, 'source-inventory.json'), 'w'), indent=1, sort_keys=True)
@@ -78,7 +81,8 @@ def main():
                 rss[os.path.basename(lg)[:-4]] = int(m.group(2))
         if walls:
             w = sorted(walls.values())
-            perf[label] = {'n': len(w), 'wallMedianS': round(statistics.median(w), 2), 'wallP95S': round(w[int(0.95 * (len(w) - 1))], 2), 'wallTotalS': round(sum(w), 1),
+            # nearest-rank p95 (post-review LMP-9), not reported below 20 runs
+            perf[label] = {'n': len(w), 'wallMedianS': round(statistics.median(w), 2), 'wallP95S': round(w[max(0, -(-95 * len(w) // 100) - 1)], 2) if len(w) >= 20 else None, 'wallTotalS': round(sum(w), 1),
                            'peakRssMedianMb': round(statistics.median(rss.values()) / 1024, 1), 'peakRssMaxMb': round(max(rss.values()) / 1024, 1), 'perCase': walls}
     base = perf.get('M0H', {}).get('perCase', {})
     for label, p in perf.items():

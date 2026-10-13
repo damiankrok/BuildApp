@@ -826,6 +826,10 @@
    "turn": "CW"
   }
  ],
+ "m1WrongDesignClusterCI": [
+  0.0,
+  0.0167
+ ],
  "m1WrongFamilyClusterCI": [
   0.0,
   0.0143
@@ -902,5 +906,6 @@
    420
   ]
  },
- "schema": "buildapp.005o.glyph-corpus-results"
+ "schema": "buildapp.005o.glyph-corpus-results",
+ "typefaceDesigns": 5
 }

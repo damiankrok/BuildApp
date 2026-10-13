@@ -1,7 +1,8 @@
 {
  "acceptedBands": 35,
  "cmPerPx": 2.9061,
- "doorClosesOnlyBySemanticGapDecision": true,
+ "doorClassifiers": "wide-opening reader: OPENING_IN_WALL (score 0.8, sealed); boundary evidence: true exterior gap by width (inferred from code, not serialized)",
+ "doorHoleWiderThanThreeWalls": true,
  "frame": "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
  "gapsM": {
   "door_hole_rearW_to_rearE": 4.01,
@@ -20,6 +21,12 @@
   "rearW_westEnd_to_coreW": 41.65,
   "wingE_westEnd_to_coreE": 14.15,
   "wingW_eastEnd_to_coreW": 21.83
+ },
+ "gapsPxBetweenBandRectangles": {
+  "note": "post-review T3: the gaps above are between band axes; between the band rectangles they are smaller; the wing joints are inside the 9.6 px tolerance",
+  "pergola_to_rear": 47,
+  "rear_to_core": 34,
+  "wing_to_core": 8
  },
  "piers": {
   "pier-E": {

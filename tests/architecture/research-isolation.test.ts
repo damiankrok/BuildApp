@@ -499,7 +499,20 @@ describe('005O production cannot reach the metric bake-off, and the bake-off com
   it('the harness writes its module swap and every publisher-derived file outside the repository', () => {
     const harness = read('research/analyzer-005o/as-printed-harness.mjs')
     expect(codeOf(harness)).toMatch(/work\.startsWith\(REPO\)\) throw/)
-    for (const f of ['statement_crops.py', 'label_sheets.py', 'reread.ts', 'glyph_corpus.py']) expect(read(`research/analyzer-005o/${f}`), f).toMatch(/outside\s+the\s+repository|no\s+pixel\s+is\s+written/i)
+    // post-review LMP-4: every pixel writer refuses an output inside the repository at run time, before it writes
+    for (const f of ['statement_crops.py', 'label_sheets.py', 'glyph_corpus.py']) {
+      const py = read(`research/analyzer-005o/${f}`)
+      expect(py, f).toMatch(/def refuse_inside_repo\(path\):[\s\S]*sys\.exit\(/)
+      expect(py, f).toMatch(/a = ap\.parse_args\(\)\n\s+refuse_inside_repo\(a\.(work|out)\)/)
+    }
+    expect(read('research/analyzer-005o/reread.ts')).toMatch(/no\s+pixel\s+is\s+written/i)
+  })
+
+  it('the challenger generator reads no truth: no transcription, truth file or label sheet is named in its code', () => {
+    // post-review L12: the generator's inputs are the sealed evidence (and, for the b-variants, the re-read file) only
+    const code = read('research/analyzer-005o/as_printed_views.py').replace(/"""[\s\S]*?"""/g, ' ').replace(/#.*$/gm, ' ')
+    expect(code).not.toMatch(/truth|transcri|labels[\/'"]|sheet/i)
+    for (const f of ['as-printed-harness.mjs', 'replay.mjs', 'reread.ts']) expect(codeOf(read(`research/analyzer-005o/${f}`)), f).not.toMatch(/truth\.json|transcriptions\.json|sheet-key/i)
   })
 
   it('the challenger generator passes its adversarial corpus and every deliberately broken generator is caught', () => {

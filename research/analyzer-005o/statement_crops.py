@@ -50,11 +50,20 @@ def statements(metrics):
     return out
 
 
+def refuse_inside_repo(path):
+    """Publisher pixels and rendered pages never land in the repository (post-review LMP-4): refuse an output there."""
+    repo = os.path.realpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
+    real = os.path.realpath(path)
+    if real == repo or real.startswith(repo + os.sep):
+        sys.exit(f'refusing to write pixels inside the repository: {real}')
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--cases', required=True)
     ap.add_argument('--work', required=True)
     a = ap.parse_args()
+    refuse_inside_repo(a.work)
     cases = json.load(open(a.cases))['cases']
     os.makedirs(os.path.join(a.work, 'labels', 'crops'), exist_ok=True)
     idx = byte_index([c['cache'] for c in cases], os.path.join(a.work, 'byte-index.json'))

@@ -2,9 +2,25 @@
  "controls": {
   "M0-frozen vs M0H (harness without a view)": "44/44 outcome files byte-identical",
   "M0-frozen vs M0X (explicit frozen view)": "44/44 identical outcome, code and model hash",
-  "missing-candidate (glogownikach, every external reading stripped)": {
-   "M1-noext": "PLAN_RESOLUTION_INCONCLUSIVE",
-   "M3-noext": "PLAN_RESOLUTION_INCONCLUSIVE"
+  "empty-view replay (vacuous; post-review L1: the generator stripped its own copy only, the solver read the full evidence, so this is the M0 run)": {
+   "M1-noext": {
+    "failureByteIdenticalToM0": true,
+    "reasonCode": "PLAN_RESOLUTION_INCONCLUSIVE"
+   },
+   "M3-noext": {
+    "failureByteIdenticalToM0": true,
+    "reasonCode": "PLAN_RESOLUTION_INCONCLUSIVE"
+   }
+  },
+  "missing-candidate (glogownikach, every external reading stripped from the evidence the solver uses)": {
+   "stripped-M1noext": {
+    "failureByteIdenticalToM0": true,
+    "reasonCode": "PLAN_RESOLUTION_INCONCLUSIVE"
+   },
+   "stripped-frozen": {
+    "failureByteIdenticalToM0": true,
+    "reasonCode": "PLAN_RESOLUTION_INCONCLUSIVE"
+   }
   },
   "view generator determinism": "M1 and M3 views byte-identical on regeneration"
  },

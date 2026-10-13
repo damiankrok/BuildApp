@@ -1,0 +1,11 @@
+{
+ "schema": "buildapp.005o.truth-crosscheck",
+ "method": "005O blind double transcription vs the labels accepted in 005E (development-labels.json) and 005G (blind-labels-005g.json), matched by frame and box IoU > 0.5",
+ "counts": {
+  "005E_no_match": 18,
+  "005E_agree": 62,
+  "005E_UNCERTAIN": 1,
+  "005G_no_match": 22
+ },
+ "disagreements": []
+}
