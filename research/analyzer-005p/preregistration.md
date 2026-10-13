@@ -126,3 +126,33 @@ a public later quantity, burned candidates logged. Old (P0, `PRE_HOLDOUT_11_SHA`
 single run each, in a fixed order; verdicts and first-bad records sealed before diagnosis. A fresh ALGORITHMIC_FAIL,
 false-confident scale, wrong floor or fabricated closure forces PARTIAL. If nothing is adopted:
 `NOT_DRAWN_NO_SAFE_ADOPTION`.
+
+## Addendum A — N1a, a safety amendment after review round 2 (committed BEFORE any N1a run)
+
+**Why.** Review round 2 (finding G2-1, P1 by one verifier, P2 by the other) showed on Głogowniki's real evidence that the
+reading which withdraws the accusation (PP-OCRv6 870 on `f810c24db9`) is also a witness the registered scale's own metric
+solution cites (`supportingObservationIds` → the observation whose `ocr.latticeId` is that ink's lattice). The registration
+defends itself with its own witness. In a mirror world where the classic tokens are right and that external reading is
+wrong, N1 completes the house at a scale 8 % off where 1.4.0 refused or replaced it. N1 is preregistered and stays the
+selected policy unless N1a passes the same gates.
+
+**N1a (exact).** As N1, except that, for the source-conflict test only, a contested statement's reading is excluded from
+the doubt when the frame's metric solution cites it: a reader value `v` of a statement whose ink's lattice is `L` is
+excluded when an observation in the solution's `supportingObservationIds` has `ocr.latticeId = L` and `valueCm = v`
+(LATTICE and EXTERNAL readings only; the as-printed value is never excluded). The statement is then read by its remaining
+readings; with one distinct value left it is uncontested for the conflict test and read as printed (1.4.0). A frame
+without a metric solution, or a solution citing nothing, is N1 exactly. Everything else (clauses 1–4, the records, the
+gap, every other consumer) is N1's.
+
+**Property.** N1a's withdrawals are a subset of N1's, and N1's are a subset of 1.4.0's triggers: N1a can withdraw fewer
+accusations than N1, never more, and still raises none 1.4.0 does not.
+
+**Predictions (written now).** On the 44 rows: glogownikach still completes at 2.6234 cm/px (541 on `1fce7f3126` is not
+cited, so that accuser stays contested and the accusation has one accuser left); rarytasy-eoze's recorded share is either
+N1's 0.334843 or P0's 0.370799, depending on whether `660de2eb26`'s external 100 is cited; nothing else moves. In the
+mirror world of G2-1 (the classic tokens right, the cited external wrong) N1a keeps the 1.4.0 accusation.
+
+**Gates and selection.** G1–G9 unchanged, on production replays of all 44 rows (the consumer harness cannot express a
+citation, so N1a is measured on the production implementation directly, and the determinism repeat and the
+strip-external control are rerun). N1a replaces N1 only if it passes every gate; if it does not, N1 ships with G2-1
+recorded as an accepted limitation.
