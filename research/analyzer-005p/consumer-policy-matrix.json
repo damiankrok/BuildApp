@@ -1,0 +1,156 @@
+{
+ "consumers": {
+  "CONFLICT_LATTICE": {
+   "callSites": [
+    "plan-resolution.ts:841 latticeScales from sourceConflictOf"
+   ],
+   "decision": "which rival scales T1 compares (pre-1.2.0 evidence only)",
+   "list": "zeroSubstitution",
+   "role": "PROPOSAL"
+  },
+  "ISOTROPY": {
+   "callSites": [
+    "plan-resolution.ts:590 resolvePlan bothAxes",
+    "plan-resolution.ts:997 challengeFirstReading bothAxes"
+   ],
+   "decision": "ISOTROPY corroboration of a LATTICE reading",
+   "list": "zeroSubstitution",
+   "role": "SUPPORT"
+  },
+  "LATTICE": {
+   "callSites": [
+    "plan-resolution.ts:253 latticeScales (from resolvePlan :586, challengeFirstReading :998)"
+   ],
+   "decision": "which LATTICE scales are tried (pre-1.2.0 evidence only)",
+   "list": "zeroSubstitution",
+   "role": "PROPOSAL"
+  },
+  "RANKING": {
+   "callSites": [
+    "plan-resolution.ts:345 metricsAtScale.refutedShare",
+    "plan-resolution.ts:350 refutedShareAtRegistration (from :594, :1003)"
+   ],
+   "decision": "compareReadings / evidenceTuple / drawingTuple key, challenge drawingChoice, REFUSED vs KEPT",
+   "list": "asRead",
+   "role": "RANKING"
+  },
+  "T1_ALT": {
+   "callSites": [
+    "plan-resolution.ts:842"
+   ],
+   "decision": "AS_READ_REFUTATION: rival refuted share (<= registration - 0.25)",
+   "list": "asRead",
+   "role": "ACCUSATION (accuser)"
+  },
+  "T1_REG": {
+   "callSites": [
+    "plan-resolution.ts:840"
+   ],
+   "decision": "AS_READ_REFUTATION: registration refuted share (>= 0.5)",
+   "list": "asRead",
+   "role": "ACCUSATION (defendant)"
+  },
+  "T3_ACCUSE": {
+   "callSites": [
+    "plan-resolution.ts:868 seeds",
+    "plan-resolution.ts:873 agreeing"
+   ],
+   "decision": "OUTER_TOTALS: long readings agreeing on another scale",
+   "list": "asRead",
+   "role": "ACCUSATION (accuser)"
+  },
+  "T3_DEFEND": {
+   "callSites": [
+    "plan-resolution.ts:869 supportedLength"
+   ],
+   "decision": "OUTER_TOTALS: long length agreeing with the registration",
+   "list": "asRead",
+   "role": "ACCUSATION (defendant)"
+  }
+ },
+ "contested": "|K| >= 2, K = {TOKEN, LATTICE CLEAR/SUPPORTED, EXTERNAL corroborating}; uncontested statements are FROZEN under every mode",
+ "dag": [
+  "statementsOn -> zeroSubstitution -> {LATTICE, CONFLICT_LATTICE, ISOTROPY}",
+  "statementsOn -> asRead -> refutedShareAsRead -> {RANKING, T1_REG, T1_ALT}",
+  "statementsOn -> asRead -> {T3_ACCUSE, T3_DEFEND}",
+  "T1_REG,T1_ALT,T3_* -> sourceConflictOf -> sourceConflictFor -> reconstruct-v2 :278 (early, footprint-only) / :330 (late) -> challengeFirstReading({conflict})",
+  "RANKING -> scoreReading.refutedShare -> compareReadings / evidenceTuple (resolvePlan) and drawingTuple / drawingChoice (challengeFirstReading) -> RESOLVED/REPLACED/REFUSED/KEPT -> selected copy, scale, layout",
+  "LATTICE -> resolvePlan/challenge decompositions (scale alternatives); ISOTROPY -> corroborations -> acceptable()",
+  "statementsOn.firstReadCm -> metricsAtScale re-read options (C6, frozen) -> layout values at another scale"
+ ],
+ "frozenNonViewConsumers": {
+  "C6_REREAD_OPTIONS": {
+   "callSites": [
+    "plan-resolution.ts:330 metricsAtScale options = firstReadCm then alternatives"
+   ],
+   "note": "not an as-printed view consumer; frozen in every variant"
+  },
+  "C7_PARTIAL_BINDING": {
+   "callSites": [
+    "plan-resolution.ts:851-864 T2 joins evidence.rawText (READ only)"
+   ],
+   "note": "reads rawText, not the view; frozen in every variant"
+  }
+ },
+ "modes": {
+  "DROP": "contested statement states nothing (005O M1)",
+  "FROZEN": "the frozen list",
+  "KSET_ALL": "the set; refutes a rival unless EVERY reading fits it; joins an accusation only if EVERY reading fits the accused scale",
+  "KSET_ANY": "the set of confident readings; refutes / fails to defend only if NO reading fits"
+ },
+ "noUnscopedCall": "consumer-harness.mjs throws at setup if any zeroSubstitution(s)/zeroSubstitution(st)/asRead(s) call is left without a consumer, and every refutedShareAsRead call takes a required consumer argument; the generated copy is the frozen file plus exactly these edits (diff recorded in the report)",
+ "schema": "buildapp.005p.consumer-policy-matrix",
+ "source": "5906afa plan-resolution.ts line numbers",
+ "variants": {
+  "N1": {
+   "CONFLICT_LATTICE": "FROZEN",
+   "ISOTROPY": "FROZEN",
+   "LATTICE": "FROZEN",
+   "RANKING": "FROZEN",
+   "T1_ALT": "KSET_ALL",
+   "T1_REG": "KSET_ANY",
+   "T3_ACCUSE": "KSET_ALL",
+   "T3_DEFEND": "KSET_ANY"
+  },
+  "P0H": {
+   "CONFLICT_LATTICE": "FROZEN",
+   "ISOTROPY": "FROZEN",
+   "LATTICE": "FROZEN",
+   "RANKING": "FROZEN",
+   "T1_ALT": "FROZEN",
+   "T1_REG": "FROZEN",
+   "T3_ACCUSE": "FROZEN",
+   "T3_DEFEND": "FROZEN"
+  },
+  "P1": {
+   "CONFLICT_LATTICE": "DROP",
+   "ISOTROPY": "FROZEN",
+   "LATTICE": "FROZEN",
+   "RANKING": "FROZEN",
+   "T1_ALT": "DROP",
+   "T1_REG": "DROP",
+   "T3_ACCUSE": "DROP",
+   "T3_DEFEND": "DROP"
+  },
+  "P2": {
+   "CONFLICT_LATTICE": "DROP",
+   "ISOTROPY": "FROZEN",
+   "LATTICE": "FROZEN",
+   "RANKING": "DROP",
+   "T1_ALT": "DROP",
+   "T1_REG": "DROP",
+   "T3_ACCUSE": "DROP",
+   "T3_DEFEND": "DROP"
+  },
+  "P3": {
+   "CONFLICT_LATTICE": "DROP",
+   "ISOTROPY": "DROP",
+   "LATTICE": "DROP",
+   "RANKING": "DROP",
+   "T1_ALT": "DROP",
+   "T1_REG": "DROP",
+   "T3_ACCUSE": "DROP",
+   "T3_DEFEND": "DROP"
+  }
+ }
+}
