@@ -119,4 +119,23 @@ adopted rule), or OLD and NEW differ. A fresh ALGORITHMIC_FAIL makes the stage a
 
 ## Addenda
 
-(none yet)
+### Addendum A (after N1's first run; committed before N1a runs)
+
+**Observed (N1, run as preregistered).** N1 changed exactly one row, `dom-w-glogownikach`, as predicted: terraces 3 → 0,
+two typed gaps (east and front outer faces), MASS and ring SOURCE_DERIVED, footprint unchanged −8.04 %, all mechanical
+gates held (G1, G2, G4, G5). Not predicted: removing the strip's ZONE region also removed it from the v2 world frame,
+whose front plane is the max-z of every base-storey region including zones (`v2/frame.ts:55-80`). The whole model moved
+0.4455 m and two readings anchored to that frame drifted: one interior partition and its door were lost (rooms 8 → 7)
+and the west opening flipped from a window read as "110/230" to a door read as "110/290" — with no new evidence. A guard
+that changes an opening's kind as a side effect is not fail-closed; N1 as run is therefore **not admissible** (G3/G4:
+an unsupported semantic change).
+
+**N1a** (`N1a.patch` sha256 `ef5c7686ce41b61aee272c5ea0a1814e10ddf33b3c48a2f3c4a7f8dbc9c3a5c3`): N1 with one change — the wall strip **stays a ZONE region** in the
+layout (so the world frame, the front plane and every reading anchored to them are unchanged), and the v2 recess /
+return / terrace reading skips a zone whose side the layout names in an unresolved outer face (`gap-outer-face-zone-<side>`).
+The gap, the MASS/ring provenance and the trigger are N1's.
+
+**Prediction (N1a).** Only `dom-w-glogownikach` changes: terraces 3 → 0, recesses/returns 2 → 0 (their two return
+walls removed), two typed gaps, MASS and ring SOURCE_DERIVED; rooms, interior doors and every opening (kind, offset,
+width, sill, height) identical to the baseline; footprint −8.04 %. Combinations re-run with N1a as **C1N1a** and
+**C1C2N1a** (C1N1 and C1C2N1 with N1 are run as preregistered and reported, but inherit N1's inadmissibility).
