@@ -5,7 +5,7 @@
 
 Per case: every decision field 005O's scorer reads (outcome, failure code, frame, scale, decision path, semantics), the
 model and program after removing exactly the resolver version string ('1.4.0' -> '1.5.0' in the solver version), the
-failure message, and the trace after removing what 1.5.0 adds and nothing else: `resolverVersion`, `statementContest`, `registrationShareMovedBy`, the new
+failure message, and the trace after removing what 1.5.0 adds and nothing else: `resolverVersion`, `statementContest`, `registrationShareMovedBy`, `conflictCited`, the new
 `conflictDoubted` key, and SOURCE_CONFLICT_REVIEW entries (listed separately). Exit 1 if anything else differs.
 """
 import argparse, json, os, sys
@@ -27,7 +27,7 @@ def norm_trace(p):
     for e in t['entries']:
         if e.get('substage') == 'SOURCE_CONFLICT_REVIEW':
             continue
-        c = {k: v for k, v in e.get('counts', {}).items() if k not in ('resolverVersion', 'conflictDoubted', 'statementContest', 'registrationShareMovedBy')}
+        c = {k: v for k, v in e.get('counts', {}).items() if k not in ('resolverVersion', 'conflictDoubted', 'statementContest', 'registrationShareMovedBy', 'conflictCited')}
         entries.append({**e, 'counts': c})
     return json.dumps({**t, 'entries': entries}, sort_keys=True), reviews
 
@@ -37,7 +37,7 @@ def norm_digest(p):
     d = json.load(open(p))
     for k in ('challenge', 'resolution'):
         if isinstance(d.get(k), dict):
-            d[k] = {kk: vv for kk, vv in d[k].items() if kk not in ('resolverVersion', 'conflictDoubted', 'statementContest', 'registrationShareMovedBy')}
+            d[k] = {kk: vv for kk, vv in d[k].items() if kk not in ('resolverVersion', 'conflictDoubted', 'statementContest', 'registrationShareMovedBy', 'conflictCited')}
     return json.dumps(d, sort_keys=True)
 
 ap = argparse.ArgumentParser()

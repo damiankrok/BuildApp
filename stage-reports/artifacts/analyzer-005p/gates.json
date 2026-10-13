@@ -1,6 +1,6 @@
 {
  "matrix": "stage-reports/artifacts/analyzer-005p/dev-matrix.json",
- "revision": "review round 1 (E3): G5 judged, G6 as preregistered, G7 bytes, unevaluated is not a pass",
+ "revision": "review round 1 (E3): G5 judged, G6 as preregistered, G7 bytes, unevaluated is not a pass; review round 3 (J-8): the decision path is every plan-resolution/challenge/review record key but versions and named readers, G8 requires no trigger and ALGORITHMIC_FAIL",
  "schema": "buildapp.005p.gates",
  "variants": {
   "N1": {
@@ -203,7 +203,7 @@
   },
   "P2": {
    "admissible": false,
-   "decisionPathChanges": 5,
+   "decisionPathChanges": 7,
    "failed": [
     "G3_known_good_path_change_sound",
     "G4_no_semantic_change"
@@ -301,7 +301,7 @@
   },
   "P3": {
    "admissible": false,
-   "decisionPathChanges": 5,
+   "decisionPathChanges": 7,
    "failed": [
     "G3_known_good_path_change_sound",
     "G4_no_semantic_change"
@@ -417,6 +417,100 @@
        "corroboratingNote": "The 005O transcription of 660de2eb26 reads 100 (two model transcribers, crop level).",
        "verdict": "SOUND",
        "why": "Code and evidence: the trigger (OUTER_TOTALS), its accusers (55ef3f8509 1601/720 px, a822fd5d2d 760/342 px), the outcome (REPLACED), the chosen reading (2.222222 cm/px), chosenRefuted (0.114611) and the model (2f342a941e) are P0's. Only the recorded T1 share registrationRefuted falls 0.370799 -> 0.334843. The 0.035956 difference is exactly one statement's share of the 1334.954545 px stated: metric-dimension-660de2eb26, 48 px, read 155 as printed and 100 by the corroborating external reader (LEADS). Clause 1 of the policy (a contested statement refutes the registration only if none of its readings fits it) is monotone by construction: the share can only fall, and it falls here by one contested statement, recorded. Under N1a the same: 660de2eb26's external 100 is not a reading the frame's solution cites, so it is not set aside; the record now names it (registrationShareMovedBy). 55ef3f8509's 1600 IS cited, so for the conflict test that statement is uncontested (conflictDoubted no longer lists it); trigger, accusers, outcome and model unchanged. The prediction 'eoze exactly as P0' failed on this field (report: predictions table)."
+      }
+     },
+     "pass": true
+    },
+    "G4_no_semantic_change": {
+     "copySwitchOnCompletedRow": [],
+     "pass": true,
+     "semanticChange": []
+    },
+    "G5_no_new_adverse_refusal": {
+     "adverse": [],
+     "changedRefusalsJudged": [],
+     "pass": true
+    },
+    "G6_no_false_closure_or_floor": {
+     "newlyCompletedReported": {
+      "dom-w-glogownikach": {
+       "levels": 1,
+       "planStoreys": [
+        "GROUND"
+       ],
+       "terraces": [
+        {
+         "id": "terrace-east-45",
+         "interpretation": "the floor of the east recess",
+         "status": "SOURCE_DERIVED",
+         "surface": "PAVED"
+        },
+        {
+         "id": "terrace-front-0",
+         "interpretation": "the floor of the front recess",
+         "status": "SOURCE_DERIVED",
+         "surface": "PAVED"
+        },
+        {
+         "id": "terrace-front-1560",
+         "interpretation": "the floor of the front recess",
+         "status": "SOURCE_DERIVED",
+         "surface": "PAVED"
+        }
+       ],
+       "wallRings": [
+        {
+         "id": "ring-main-0",
+         "interpretation": "18.83 \u00d7 8.70 m body from the plan's printed chains and wall bands",
+         "status": "SOURCE_EXACT"
+        }
+       ]
+      }
+     },
+     "note": "terraces and rings are REPORTED, as preregistered; whether a reported terrace is real is judged in the report (first-bad ledger), not here",
+     "pass": true,
+     "wrongLevels": []
+    },
+    "G7_determinism": {
+     "compared": 44,
+     "differs": [],
+     "pass": true
+    },
+    "G8_glogownikach": {
+     "conflictTriggers": [],
+     "outcome": "COMPLETED",
+     "pass": true,
+     "scale": 2.6234,
+     "verdict": "ALGORITHMIC_FAIL"
+    },
+    "G9_monotone_triggers": {
+     "newTriggers": {},
+     "pass": true
+    }
+   },
+   "knownGoodPathChanges": 1,
+   "unevaluated": []
+  },
+  "PROD4": {
+   "admissible": true,
+   "decisionPathChanges": 2,
+   "failed": [],
+   "gates": {
+    "G1_no_new_false_confident_scale": {
+     "newFalseConfident": [],
+     "newlyCompletedNotKnownCorrect": [],
+     "pass": true
+    },
+    "G2_no_known_good_model_change": {
+     "cases": [],
+     "pass": true
+    },
+    "G3_known_good_path_change_sound": {
+     "cases": {
+      "rarytasy-eoze": {
+       "corroboratingNote": "The 005O transcription of 660de2eb26 reads 100 (two model transcribers, crop level).",
+       "verdict": "SOUND",
+       "why": "Code and evidence: the trigger (OUTER_TOTALS), its accusers (55ef3f8509 1601/720 px, a822fd5d2d 760/342 px), the outcome (REPLACED), the chosen reading (2.222222 cm/px), chosenRefuted (0.114611) and the model (2f342a941e) are P0's. Only the recorded T1 share registrationRefuted falls 0.370799 -> 0.334843. The 0.035956 difference is exactly one statement's share of the 1334.954545 px stated: metric-dimension-660de2eb26, 48 px, read 155 as printed and 100 by the corroborating external reader (LEADS). Clause 1 of the policy (a contested statement refutes the registration only if none of its readings fits it) is monotone by construction: the share can only fall, and it falls here by one contested statement, recorded. Under N1a the same: 660de2eb26's external 100 is not a reading the frame's solution cites, so it is not set aside; the record now names it (registrationShareMovedBy). 55ef3f8509's 1600 IS cited, so for the conflict test that statement is uncontested (conflictDoubted no longer lists it; since review round 3 it is named under conflictCited); trigger, accusers, outcome and model unchanged. The prediction 'eoze exactly as P0' failed on this field (report: predictions table)."
       }
      },
      "pass": true
