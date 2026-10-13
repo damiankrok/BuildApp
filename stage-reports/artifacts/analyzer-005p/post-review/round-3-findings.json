@@ -1,0 +1,250 @@
+{
+ "lenses": {
+  "H": {
+   "confirmations": [
+    "Proof of the required property: readingsUnder (plan-resolution.ts:246-250) always includes asRead(s), which has at most one value. So for every statement, whatever its contest, fit under AS_PRINTED implies fit under ANY_FITS, and fit under ALL_FIT implies fit under AS_PRINTED. setAsideCited only removes values and never makes an uncontested statement contested (line 948 returns early). The AS_PRINTED reading is never cited and always equals asRead[0] when asRead is non-empty, so a statement left with one value is read exactly as 1.4.0 reads it. Hence, for HEAD against 5906afa: T1 registrationRefuted(1.5.0) <= 1.4.0, every alternative's refuted share >= 1.4.0's, so better(1.5.0) is a subset of better(1.4.0). T2 never reads the contest. In T3 the seeds are identical; per seed, agreeing(1.5.0) is a subset of agreeing(1.4.0) and supportedLength(1.5.0) >= 1.4.0's. So any seed that fires in 1.5.0 fires in 1.4.0 at or before it. The same argument gives N1a's triggers as a superset of N1's.",
+    "Run (monotone.test.ts, HEAD vs <scratch>/old-5906afa), 20,000 synthetic plans with random citations at lattice, external, token or random values, 15% joined to another ink's lattice, all five relations, plus T2 observations: 0 new triggers, 0 higher registrationRefuted, 0 alternatives with a lower refuted share, 0 mismatches between sourceConflictAsPrinted (without doubted) and 5906afa's sourceConflictOf, 0 withdrawn-set mismatches, 0 cases where N1a withdraws what N1 keeps. N1a restores 274 of N1's 1469 withdrawals.",
+    "Run on the 44 real evidence sets (11,781 checks: sealed, every lattice observation cited, every confident non-printed reading cited, registration x0.85 to x1.2, walls 6/10/16 px, judge = the chain-tick box): 0 violations of any property above. With every reading cited, N1a equals 1.4.0 exactly (2245 vs 2245 conflicts, 0 withdrawals).",
+    "Q1, production join (probe-join.test.ts, 238 solutions, 331 supporting observations): observation.ocr.latticeId is held.id, the stableId of the raw token's frame, box and orientation (extract.ts:429, metric-solution.ts:549). The statement's ocrToken is that same raw token (every raw token is in tokensById, extract.ts:372-375), so the contest's frame/box/orientation join reaches the same lattice. 287 of 287 supporting observations that sit on a statement's ink join by id; 0 join to the same ink under another lattice id; 0 supporting observations lack a latticeId; the other 44 lie on inks with no statement.",
+    "Q1, rounding: observation valueCm is round6(cm), and lattice asReadValueCm and ensemble valueCm come from dimensionValueOf, which also applies round6 (numeric-lattice.ts:879-882). No rounding escape. Of the 287 joined, 282 match a confident reader's value; the other 5 match no confident reader, so there is nothing to set aside.",
+    "Q1, AS_PRINTED equal to the cited value: by design it is never set aside. This defence is 1.4.0's own and N1/N1a add nothing to it. A related residual is inherited from 1.4.0: for 91 of 453 READ statements on the 44 rows, evidence.value (taken as AS_PRINTED) differs from the classic token text because the metric layer re-solved it, and that classic token is not a reader in the contest. N1a cannot and does not reach this.",
+    "Q1, choice of solution: metricSolutionFor gives the frame's only solution. supportingObservationIds are the selected cluster's witnesses for CONFIRMED/REPLACED/ADDED and the legacy vote's regions for LEGACY_UNCONFIRMED/NO_SCALE (metric-solution.ts:1393): witnesses of the registered scale. The largest gap between the selected scale and the registration on the 44 rows is 3.14% (rarytasy-eoze, CONFIRMED). The conflict review always runs on the sealed structuralOptions.metrics (reconstruct-v2.ts:231,294,348).",
+    "Q1, span: the join ignores binding and span. 5 of the 72 set-asides that take effect on the real rows cite the ink at another span or binding. Same ink and same value is the same witness, so this fits the rationale and only moves toward 1.4.0. A span-aware variant (<scratch>/r3-H/varspan) differs from HEAD in 0 sealed checks and 3 perturbed ones.",
+    "Q3: the set-aside also applies on the rival side (ALL_FIT on alternatives) and the T3 accuser side. This matches addendum A ('for the source-conflict test only'). On the rival side a cited reading would otherwise help the registration by making the statement refute the rival, so removing it fits the rationale. A variant that sets aside only on the registration side (<scratch>/r3-H/varreg) differs from HEAD in 0 of 3927 real checks. Either way 1.5.0 stays within 1.4.0's bound.",
+    "Q4: cited marks are never placed on AS_PRINTED (0 in all runs). Every statement named in doubted, shareMovedBy or withdrawn.doubted has at least 2 uncited values (0 violations). The withdrawn triggers equal 1.4.0's triggers minus those still standing (0 mismatches).",
+    "challengeFirstReading uses the conflict only for its truthiness, why and diagnostics, never registrationRefuted, so a smaller registrationRefuted cannot change a decision (plan-resolution.ts around 1140-1300).",
+    "The repository's tests pass: statement-contest.test.ts, statement-contest-emission.test.ts and tests/architecture/statement-contest.test.ts (47/47). The repository working tree is clean; all scratch files are under <scratch>/r3-H."
+   ],
+   "findings": [
+    {
+     "evidence": "The comment at plan-resolution.ts:937 says 'A cited reading stays in the record, marked'. But doubtedAmong (917-927) skips any statement with !s.contest.contested, and setAsideCited (950-951) sets contested=false when only one uncited value remains. Run (<scratch>/r3-H/record.test.ts, single-reader mirror: AS_PRINTED 1350, cited LEADS external 1500) gives conflict.doubted = [], withdrawn = null, withdrawnRecord = {}. The 1.5.0 conflict is byte-identical to 5906afa's: nothing shows that a confident reader disagreed and was set aside as cited. The test at statement-contest.test.ts:254-260 asserts exactly this, so the gap is untested-by-design. Effect: in the case N1a was written for (the G2-1 single-reader mirror), the trace cannot tell 'no reader disagreed' apart from 'a reader disagreed but the solution cites it'. The same holds for ev-1 in the glogownikach-pattern test (262-269): the cited accuser drops out of withdrawn.doubted.",
+     "file": "packages/reconstruction/src/plan-resolution.ts",
+     "id": "H3-1",
+     "line": 922,
+     "reproduction": "cd <scratch>/r3-H && TMPDIR=<scratch>/tmp npx vitest run --config vitest.config.mts record.test.ts  (first test prints conflict.doubted=[] and an empty withdrawnRecord)",
+     "severity": "P3",
+     "suggestedFix": "Record the statements that setAsideCited made uncontested (for example a `citedSetAside: DoubtedStatement[]` built before the contested filter, keeping the `cited` marks) on SourceConflict and in challengeRecord. Or change the comment to say a set-aside that ends the contest leaves no trace.",
+     "title": "A cited reading that leaves its statement uncontested appears in no record (doubted, shareMovedBy, withdrawn.doubted, trace, gap), contrary to the setAsideCited comment"
+    },
+    {
+     "evidence": "statementContests joins lattices by frameId|box|orientation, and the later record wins (statement-contest.ts:73). setAsideCited matches on `${c.latticeId}|${valueCm}` (plan-resolution.ts:944,948). Production lattice ids are stableId('ocr-lattice', token.text, {frameId, box, orientation}) (source-metrics/src/extract.ts:429). So two raw tokens with the same box and orientation but different text get different ids. If the observation was read from one and the contest joined the other, the key misses. Run (record.test.ts, test 2, using the repo fixture's own duplicateLattice): the solution cites lat-1|1500 but the contest joins lat-1-dup (LATTICE 1500). The reading is not set aside, so OUTER_TOTALS is withdrawn exactly as under N1: the circular defence N1a removes comes back. 1.4.0 accuses here. This stays within the required bound and is not observed: 0 of 8874 lattices on the 44 rows share a key, and 0 ocrTokens share box+orientation with different text.",
+     "file": "packages/reconstruction/src/plan-resolution.ts",
+     "id": "H3-2",
+     "line": 948,
+     "reproduction": "cd <scratch>/r3-H && TMPDIR=<scratch>/tmp npx vitest run --config vitest.config.mts record.test.ts  (second test prints: dup: conflict null, withdrawn [\"OUTER_TOTALS\"], old [\"OUTER_TOTALS\"])",
+     "severity": "P3",
+     "suggestedFix": "Key the citation on the ink, not on the record id: resolve each cited observation's latticeId to its lattice record's frameId|box|orientation key (the key statementContests joins on) and match on that key plus valueCm. Add a duplicated-crop case to the N1a tests.",
+     "title": "Duplicated crop: the citation keys on the observation's lattice id while the contest keeps the later record for the same frame/box/orientation, so the circular defence can survive"
+    },
+    {
+     "evidence": "The comment reads '`id=TOKEN 501|LATTICE 501|EXTERNAL 541; \u2026`'. The emitted reader name is AS_PRINTED (ConfidentReader in statement-contest.ts:31), and cited readings carry a ' (cited)' suffix that the comment does not mention.",
+     "file": "packages/reconstruction/src/plan-resolution.ts",
+     "id": "H3-3",
+     "line": 1067,
+     "reproduction": "Read plan-resolution.ts:1067-1072 next to statement-contest.ts:31.",
+     "severity": "P3",
+     "suggestedFix": "Change the comment to `id=AS_PRINTED 501|LATTICE 501 (cited)|EXTERNAL 541; \u2026`.",
+     "title": "Stale doubtedText format comment names a reader TOKEN that does not exist"
+    }
+   ],
+   "summary": "Reviewer H (round 3), on N1a's setAsideCited. Nothing above P3 was found.\n\nThe required property holds by construction, and runs against the verbatim 5906afa module agree. readingsUnder (plan-resolution.ts:246-250) always keeps asRead(s), and asRead has at most one value. So for any contest, whatever setAsideCited does to it: ANY_FITS fits wherever AS_PRINTED fits; ALL_FIT fits only where AS_PRINTED fits; T2 never reads the contest; and the T3 seeds are the same as-read values in the same order. setAsideCited can only shrink a contest's values. It never adds a value and never turns an uncontested statement into a contested one. So 1.5.0's triggers are a subset of 1.4.0's, registrationRefuted is never higher, and each rival's refuted share is never lower. N1a's triggers are also a superset of N1's.\n\nRuns: 20,000 seeded synthetic plans with random citations, 15% of them deliberately joined to the wrong ink, across all five solution relations. On the 44 real evidence sets: 11,781 checks covering the sealed sets, every observation cited, every confident non-printed reading cited, and registrations scaled by 0.85 to 1.2 with walls of 6, 10 and 16 px. Result: 0 new triggers, 0 cases of a higher registrationRefuted, 0 mismatches between the as-printed path and 1.4.0, and 0 cases where N1a withdraws what N1 keeps. With every reading cited, N1a equals 1.4.0 exactly (2245/2245, 0 withdrawals).\n\nThe join is how production cites a reading. On the 44 rows, 287 of 287 supporting observations that sit on a statement's ink join by latticeId, with no same-ink different-lattice cases and no supporting observation lacking a latticeId. The remaining 44 supporting observations lie on inks that carry no statement.\n\nThree P3 findings, each reproduced by a run:\n- **Lost trace:** a set-aside that leaves a statement uncontested is recorded nowhere. This contradicts the setAsideCited comment that says such a reading \"stays in the record, marked\".\n- **Duplicated crop:** when two lattice records cover the same ink under different ids, the citation can miss the record the contest joined, and the circular defence survives. 0 of 8874 lattices on the 44 rows are like this.\n- **Stale comment:** the doubtedText format comment says TOKEN where the reader is AS_PRINTED.\n\nApplying the set-aside to the rival side and the T3 accuser side is in the preregistered definition, fits the stated rationale, and changed nothing on the real rows. Scratch files: <scratch>/r3-H (probe-join, monotone, variants, record tests, the varspan/ and varreg/ variant copies, and *.out.json results). No changes were made in /home/user/BuildApp; its working tree is clean."
+  },
+  "I": {
+   "confirmations": [
+    "Full packages/reconstruction suite at HEAD 1329a4b: 40 files, 576 tests, all passing.",
+    "Full tests/architecture suite at HEAD 1329a4b: 23 files, 282 tests, all passing. Combined run: 63 files, 858 tests, exit 0, 334 s (<scratch>/r3-I/full-head.log).",
+    "The statement-contest suites pass 47/47: statement-contest.test.ts 34, statement-contest-emission.test.ts 5, tests/architecture/statement-contest.test.ts 8.",
+    "The committed N1a tests catch removing setAsideCited (I1, 2 failures), ignoring valueCm (I2, 1 failure; I2b, guard only, 3 failures), setting aside AS_PRINTED in both guard and map (I3), the T1 registration share reading raw statements (I5a), the T3 accusers reading raw statements (I5e), and N1a applied only on the doubt path (I5f) or only on the as-printed path (I5g).",
+    "The repo's X19 gate (N1a off) is killed by its intended assertion when re-run in the worktree.",
+    "I5h (the review's turned-statement filter also counting statements with a cited reading) and I6 (contest.values not sorted) are equivalent mutants. For an uncontested statement regFlip and scaleFlip are always false, and contest.values is read only in readingsUnder, which sorts again.",
+    "Scratch property test against the real 1.4.0 source on 4000 seeded plans with citations (2808 cited, 161 changed by citation): no trigger 1.4.0 lacks, registrationRefuted never larger, sourceConflictAsPrinted equal to 1.4.0 on all 5 fields, the union of conflict and withdrawn triggers equal to 1.4.0's, and identical output on a repeat run and with observation and supporting orders reversed.",
+    "All 9 scratch kill fixtures (K0\u2013K8) pass at unmutated HEAD and kill all 11 non-equivalent survivors.",
+    "Read-only was respected: no edits, commits or pushes in /home/user/BuildApp. The worktree <scratch>/r3-I/wt was removed with git worktree remove, and git status is clean. HEAD advanced to 560e186 during the review, but that commit only adds research/analyzer-005p/perf.mjs, so no source or test file changed."
+   ],
+   "findings": [
+    {
+     "evidence": "citing() replaces metricSolutions with a single FRAME solution and makes every observation supporting. Surviving mutants (all 5 suites pass):\nI4: in setAsideCited, `const supporting = new Set(solution?.supportingObservationIds ?? [])` becomes `new Set([...(solution?.supportingObservationIds ?? []), ...(metrics.metricSolutions ?? []).flatMap((x) => x.supportingObservationIds ?? [])])`.\nI4b: in chargesUnder, `setAsideCited(statementsOn(metrics, frameId), metrics, solution)` becomes `setAsideCited(statementsOn(metrics, frameId), metrics, (metrics.metricSolutions ?? []).find((x) => x.frameId !== frameId) ?? solution)`.\nI4c: `if (supporting.has(o.id) && o.ocr?.latticeId)` becomes `if (o.ocr?.latticeId)`.",
+     "file": "packages/reconstruction/test/contest-fixtures.ts",
+     "id": "I-1",
+     "line": 153,
+     "reproduction": "Worktree at 1329a4b. Apply the edit to packages/reconstruction/src/plan-resolution.ts (~line 941-944), then run: TMPDIR=<scratch>/tmp npx vitest run packages/reconstruction/test/statement-contest.test.ts packages/reconstruction/test/statement-contest-emission.test.ts packages/reconstruction/test/source-conflict.test.ts packages/reconstruction/test/plan-resolution.test.ts tests/architecture/statement-contest.test.ts. Result: 0 failures. Driver: <scratch>/r3-I/mut.mjs.",
+     "severity": "P2",
+     "suggestedFix": "Add two fixtures, already written as K3 and K4 in <scratch>/r3-I/held/r3i-n1a-kill.test.ts. They kill I4, I4b and I4c.\nK3: mirror() with an empty FRAME solution plus a 'frame-other' solution whose supporting observation is lat-1@1500; expect the OUTER_TOTALS withdrawal to remain.\nK4: the FRAME solution supports lat-0@1800, and lat-1@1500 is present in dimensionObservations but not supporting; expect the withdrawal.\nThe test helper should let a fixture keep other solutions and add non-supporting observations.",
+     "title": "N1a 'different frame' and 'not supporting' mutants survive: no test has a second frame's solution or a non-supporting observation"
+    },
+    {
+     "evidence": "citing() builds its solution with solutionOffering([]), so metricScales offers no rival and T1 can never fire in any N1a fixture. No N1a fixture has a cited reading acting as a defender either. Surviving mutants, where raw = statementsOn(metrics, frameId) without the set-aside:\nI5b: `refuted: refutedShareAsRead(statements, () => o.cmPerPx` becomes `refuted: refutedShareAsRead(raw, () => o.cmPerPx`. This is the T1 accuser side: alternatives may be refuted by a cited reading.\nI5d: `const supportedLength = long.filter(` becomes `const supportedLength = raw.filter((s) => s.pixelLength >= SUBSTANTIAL_SHARE * extentOn(s.axis)).filter(`. This is the T3 defence: a cited reading may defend the registration, which is exactly the circular defence N1a exists to stop.\nKilled one-sided mutants: I5a (registrationRefuted raw), I5e (T3 agreeing raw), I5f (set-aside only when withDoubt), I5g (set-aside only when !withDoubt).",
+     "file": "packages/reconstruction/src/plan-resolution.ts",
+     "id": "I-2",
+     "line": 977,
+     "reproduction": "Same worktree and suites as I-1. Apply I5b or I5d to chargesUnder (adding `const raw = statementsOn(metrics, frameId)` after line 977). Result: 0 failures.",
+     "severity": "P2",
+     "suggestedFix": "Add K5 and K6 from <scratch>/r3-I/held/r3i-n1a-kill.test.ts.\nK5 (T1): X 100px 400; Y 450px 1800 with lattice 1800 and CONTESTS external 2250. The solution offers [4] and cites lat-1@2250. Uncited, T1 is withdrawn. Cited, T1 stands and equals sourceConflictAsPrinted. Kills I5b and I7.\nK6 (T3 defence): the clause-4 fixture with lat-2@2250 and lat-3@2250 cited. Uncited it withdraws OUTER_TOTALS; cited, OUTER_TOTALS stands and nothing is withdrawn. Kills I5d.",
+     "title": "Mutants that apply N1a on one side only survive: the T1 rival side and the T3 defence can read cited readings"
+    },
+    {
+     "evidence": "generatePlans and metricsOfPlan give solutionOffering(...) with supportingObservationIds: [] and no dimensionObservations, so setAsideCited returns early on every plan. Removing N1a entirely (I1) leaves the oracle test green; only the 4 hand fixtures pin N1a.\nScratch property test against <scratch>/old-5906afa (1.4.0): 4000 plans (seed 9191), random citations of confident readings (seed 777), 2808 plans cited, 161 reviews changed by the citations. Result: {newTrig:0, larger:0, apMismatch:0, nondet:0}. Covered: as-printed equals 1.4.0 on triggers/why/evidenceIds/registrationRefuted/alternatives; the union of conflict and withdrawn triggers equals 1.4.0's; repeat runs and reversed dimensionObservations and supportingObservationIds orders give identical output.\nNone of I1, I2c, I3, I3b, I4, I4b, I4c, I5b, I5d, I5h, I6, I7, I8, I10 breaks this property. N1a only narrows N1 toward as-printed, so monotonicity cannot detect them.",
+     "file": "packages/reconstruction/test/contest-fixtures.ts",
+     "id": "I-3",
+     "line": 174,
+     "reproduction": "<scratch>/r3-I/held/r3i-n1a-property.test.ts, run from a worktree's packages/reconstruction/test. It imports the 1.4.0 plan-resolution.ts from old-5906afa.",
+     "severity": "P2",
+     "suggestedFix": "Add a seeded citation step to the generator, or a second frozen oracle over cited plans built with research/analyzer-005p/conflict-oracle.ts. That would pin 'no trigger 1.4.0 lacks, refuted never larger, as-printed = 1.4.0' with N1a actually running. Also add an order-invariance assertion: reversed dimensionObservations and supportingObservationIds give the same review.",
+     "title": "The 2000-plan monotonicity test against 1.4.0 never runs N1a, and a scratch check with citations finds no violation"
+    },
+    {
+     "evidence": "I3 (drop `r.reader !== 'AS_PRINTED' && ` in both the guard and the map) is killed by 'a citation of another value of the same ink does not set the reading aside'.\nI3b (drop it in the map at line 949 only) survives. In that mutant a cited LATTICE twin of the printed value also marks the AS_PRINTED reading cited. The statement then loses its contest: values [1350,1500] become [1500], and the statement is read as printed.",
+     "file": "packages/reconstruction/src/plan-resolution.ts",
+     "id": "I-4",
+     "line": 949,
+     "reproduction": "Same worktree and suites. In setAsideCited's readings.map, replace `(r.reader !== 'AS_PRINTED' && cited.has(...)` with `(cited.has(...)`. Result: 0 failures.",
+     "severity": "P3",
+     "suggestedFix": "Add K2: mirror with ev-1 lattice 1350 CLEAR and CONTESTS external 1500 (readings AS_PRINTED 1350, LATTICE 1350, EXTERNAL 1500). Cite lat-1@1350 and expect OUTER_TOTALS still withdrawn, because the printed value stays and the statement stays contested.",
+     "title": "The rule that AS_PRINTED is never set aside is only half-pinned: the map-only mutant survives"
+    },
+    {
+     "evidence": "I2c survives. It changes `cited.add(`${o.ocr.latticeId}|${o.valueCm}`)` to `cited.add(`${o.valueCm}`)` and drops `${c.latticeId}|` in the guard and the map. Under it, a value the solution cites on one ink sets aside an equal reading on every other ink. No N1a fixture has a cited value equal to a reading of another statement.",
+     "file": "packages/reconstruction/src/plan-resolution.ts",
+     "id": "I-5",
+     "line": 944,
+     "reproduction": "Same worktree and suites. Result: 0 failures.",
+     "severity": "P3",
+     "suggestedFix": "Add K1: misreadTotals() with lat-1@2000 cited. ev-1 never reads 2000; ev-0's EXTERNAL reads 2000. Expect the review to equal the uncited review.",
+     "title": "A mutant that keys citations by value only (ignoring latticeId) survives"
+    },
+    {
+     "evidence": "Surviving mutants:\nI7: `contested: values.length >= 2` becomes `contested: c.contested`. The statement stays listed in conflict.doubted, but both sides of the 'exactly the 1.4.0 accusation' toEqual share the mutation.\nI8: the readings are not marked (`readings: c.readings`).\nI9: doubtedText drops `${r.cited ? ' (cited)' : ''}`.\nI10: the cited reading is removed from the record instead of marked.\nThe glogownikach test only checks that doubted ids equal ['ev-0'], and ev-0 has no cited reading. No test calls withdrawnRecord on a cited case.",
+     "file": "packages/reconstruction/src/plan-resolution.ts",
+     "id": "I-6",
+     "line": 1071,
+     "reproduction": "Same worktree and suites. Result: 0 failures for each of the 4 mutants.",
+     "severity": "P3",
+     "suggestedFix": "Add K7 and K8.\nK7: for mirror() with lat-1@1500 cited, expect reviewOf(m).conflict.doubted to equal [].\nK8: ev-0 reads AS_PRINTED 1800, LATTICE 1900, EXTERNAL 2000, with lat-0@1900 cited. Expect the withdrawn doubted readings to contain {reader:'LATTICE', valueCm:1900, cited:true}, and withdrawnRecord(r).doubted to contain 'LATTICE 1900 (cited)'.",
+     "title": "Nothing tests that a cited reading is marked or traced: mutants affecting the cited mark, the '(cited)' text and the doubted list survive"
+    },
+    {
+     "evidence": "X19 replaces the supporting set with an empty Set. I re-ran it in the worktree with `--only X19`: KILLED, by the intended /cited by the registration/ assertion. No gate exists for valueCm, latticeId, AS_PRINTED, frame scoping, supporting membership, or applying N1a on only one side, so the reported '20/20' says nothing about those properties.",
+     "file": "research/analyzer-005p/mutations.mjs",
+     "id": "I-7",
+     "line": 171,
+     "reproduction": "node research/analyzer-005p/mutations.mjs --only X19 --out <scratch>/r3-I/mutx19, run in a worktree at 1329a4b.",
+     "severity": "P3",
+     "suggestedFix": "Once K1\u2013K8 or equivalents are committed, add gates named after the I-series mutants (I2, I2c, I3, I3b, I4, I4b, I4c, I5a, I5b, I5d, I5e, I5f, I7, I9), each with a `must` regex for its fixture's title. Anchors and edits are in <scratch>/r3-I/mut.mjs.",
+     "title": "mutations.mjs has a single N1a gate (X19, N1a off) and no gates for the other properties"
+    },
+    {
+     "evidence": "chargesUnder runs setAsideCited on the as-printed path too. That leaves the 5 fields 1.4.0 has unchanged (confirmed by the scratch property test), but it changes the as-printed record's `doubted`, a field 1.4.0 does not have. I5f (set-aside only when withDoubt) was killed only through that `doubted` difference. The assertion is therefore partly self-referential: it compares 1.5.0 with 1.5.0's own as-printed mode on doubted and shareMovedBy, not with the incumbent.",
+     "file": "packages/reconstruction/test/statement-contest.test.ts",
+     "id": "I-8",
+     "line": 259,
+     "reproduction": "Apply I5f (`const statements = withDoubt ? setAsideCited(...) : statementsOn(metrics, frameId)`). Only this test fails, on `doubted`.",
+     "severity": "P3",
+     "suggestedFix": "Compare the five 1.4.0 fields explicitly, as the oracle test at line 409 already does, and assert `doubted` separately against the documented N1a expectation.",
+     "title": "The 'exactly the 1.4.0 accusation' assertion compares against sourceConflictAsPrinted, which itself runs N1a"
+    }
+   ],
+   "summary": "Reviewer I (tests, mutation adequacy and determinism for N1a) at 1329a4b. HEAD moved to 560e186 during the review, but that commit only adds research/analyzer-005p/perf.mjs, so no source or test file changed. At HEAD the full packages/reconstruction suite passes (40 files, 576 tests), tests/architecture passes (23 files, 282 tests), 858/858 in all, exit 0, 334 s. The three statement-contest suites pass 47/47.\n\nI applied 22 mutations, one at a time, to setAsideCited and the code that uses it. They went into a git worktree at <scratch>/r3-I/wt, which I have since removed. Each mutant ran against the 5 suites that research/analyzer-005p/mutations.mjs uses.\n\nKilled:\n- I1: N1a removed.\n- I2 and I2b: valueCm ignored.\n- I3: AS_PRINTED readings also set aside, in both the guard and the map.\n- I5a: the T1 registration side reads the statements without setting cited readings aside.\n- I5e: the T3 accuser side does the same.\n- I5f and I5g: N1a applied only on the doubt path, or only on the as-printed path.\n- The repo's own X19 gate, killed by the intended assertion.\n\nSurvived: 11 non-equivalent mutants.\n- I2c: the cited key ignores latticeId.\n- I3b: AS_PRINTED set aside in the map only.\n- I4, I4b, I4c: a different frame's solution, or observations the solution does not rest on.\n- I5b: the T1 rival side reads the statements without setting cited readings aside.\n- I5d: the T3 defence does the same.\n- I7: the contested flag is kept after the set-aside.\n- I8, I9, I10: the cited mark and the \"(cited)\" trace text.\n\nI5h and I6 are equivalent mutants. For an uncontested statement regFlip and scaleFlip are always false, and readingsUnder sorts contest.values again before using it, which is the only place values is read.\n\nI wrote 9 scratch fixtures (K0\u2013K8). All pass at HEAD, and they kill every one of the 11 survivors.\n\nThe frozen 2000-plan monotonicity test against 1.4.0 never runs N1a: generatePlans has no citations. I ran a scratch property test against the real 1.4.0 source: 4000 seeded plans, 2808 with random citations, 161 whose review the citations changed. It found no new trigger, no larger registrationRefuted, sourceConflictAsPrinted equal to 1.4.0 on all 5 fields, and no difference on a repeat run or with dimensionObservations and supportingObservationIds reversed. So the required property and determinism hold in practice, but no committed test or gate enforces them for N1a.\n\nresearch/analyzer-005p/mutations.mjs covers N1a with X19 only, which turns N1a off.\n\nScratch, outside the repo: <scratch>/r3-I/{mut.mjs, mut-results.json, mut-kill.mjs, mut-kill-results.json, mut-prop.mjs, mut-prop-results.json, full-head.log, mutx19/, held/r3i-n1a-kill.test.ts, held/r3i-n1a-property.test.ts}. The worktree is removed, the repository has no edits, and git status is clean."
+  },
+  "J": {
+   "confirmations": [
+    "PROD3 decisions = N1 on 44/44. model.json, program.json, result-summary.json and failure.json are byte-identical on all 44 rows. Traces and digests differ only by resolverVersion, statementContest, registrationShareMovedBy (eoze) and glogownikach's extra SOURCE_CONFLICT_REVIEW entry. prod_vs_harness.py regenerated into <scratch>/r3-J/pvh.json matches stage-reports/artifacts/analyzer-005p/production-vs-harness.json exactly.",
+    "PROD3 = PROD3-rep: every .json under all 44 case directories is byte-identical (diff -rq -x '*.log' is empty). The .log files differ only on the 'wall ... peakRssKb ...' line.",
+    "PROD3-noext = P0-frozen in decisions on 44/44. Output files are identical. Trace and digest differ only by resolverVersion 1.5.0 vs 1.4.0 on 28 rows. No SOURCE_CONFLICT_REVIEW appears. glogownikach refuses with OUTER_TOTALS as in P0. production-noext-vs-p0.json regenerated identically.",
+    "Only PROD3/dom-w-glogownikach has SOURCE_CONFLICT_REVIEW or withdrawn* keys. doubted = 'metric-dimension-1fce7f3126=AS_PRINTED 501|LATTICE 501|EXTERNAL 541', doubtedCount 1 (6 in PROD2). withdrawnTriggers = OUTER_TOTALS. Model b7c86aac equals N1 and PROD2.",
+    "I replicated statementContests and setAsideCited in Python on the sealed evidence. glogownikach's solution cites 870 on ocr-lattice-810-75d8affd98 (f810c24db9 becomes uncontested), 920 (2bbe2a8971) and 224 (4c039a536b). 541 on ocr-lattice-501-fb62c33a1f (ensemble CONTESTS, rival EXTERNAL) is not cited, so the addendum's glogownikach prediction holds as defined. rarytasy-eoze: 55ef3f8509's LATTICE/EXTERNAL 1600 are cited, so it becomes uncontested; 660de2eb26's EXTERNAL 100 (ensemble LEADS) is not cited, so the share stays 0.334843 as predicted.",
+    "The PROD3:rarytasy-eoze soundness verdict is true. Trigger OUTER_TOTALS, accusers 55ef3f8509 and a822fd5d2d, outcome REPLACED, chosen 2.222222, chosenRefuted 0.114611 and model 2f342a941e all equal P0. The only decision-path field that changed is registrationRefuted, 0.370799 -> 0.334843. I recomputed the T1 denominator as 1334.954545 px, and 48/1334.954545 = 0.035956. conflictDoubted is absent in PROD3 and registrationShareMovedBy names 660de2eb26 (155|100). The 005O truth labels are 100 (660de2eb26) and 1600 (55ef3f8509).",
+    "score_005p.py, rerun into scratch (TMPDIR in scratch, --work a symlinked scratch directory), reproduces dev-matrix.json byte for byte. gates.py reproduces gates.json (variants) and semantic-delta.json exactly. PROD3 is ADMISSIBLE: failed [], unevaluated []. G7 compared 44 rows. G1: glogownikach completes at 2.6234 against a true 2.62857 (CORRECT_SCALE). G9 newTriggers is {}. P1-P3 are correctly not counted admissible, with G7 unevaluated.",
+    "Required property on the 44 rows: no PROD3 trigger is missing from P0. registrationRefuted differs from P0 only on eoze, where it is lower. From the code: asRead is always included in ANY_FITS and ALL_FIT, denominators are unchanged, seeds and offered rivals are the incumbent's, and N1a only removes values from contest.values. So N1a's fits lie between N1's and the as-printed fits.",
+    "N1a mirror reruns (<scratch>/n1a-mirror): the single-reader 870-only mirror gives da496631 (REPLACED 2.432039, VERIFIED) at F=0.7927 and a SOURCE_CONFLICT refusal at F=0.8577, as the round-2 resolution states. The two-reader real-evidence mirrors still give b7c86aac.",
+    "Addendum A (bc4f6c3, 12:47) was committed before the N1a implementation (27d9801, 12:51), the mirror reruns (12:57) and PROD3 (13:03), and has not been edited since.",
+    "vitest on packages/reconstruction/test/statement-contest.test.ts, statement-contest-emission.test.ts and tests/architecture/statement-contest.test.ts: 47/47 passed. git status is clean. Nothing was written inside /home/user/BuildApp."
+   ],
+   "findings": [
+    {
+     "evidence": "The G2-1 row says the two-reader case 'is not a circular defence but the policy's generic risk (an independent, corroborating external reading wrong)'. The evidence says otherwise. coordinateRegistrations registration-plan-xz-260da02192 is the registration that chargesUnder accuses (regAxis uses registration.metresPerPixelX/Y). Its anchors include anchor-chain-segment-1fce7f3126 (metricSpan 5.41, pixelSpan 206) and anchor-chain-segment-f810c24db9 (8.7 over 333). Both evidence records are CHAIN_CORRECTED with derivation.dependsOnScale=true: 'a value downstream of that scale, never a witness for it'. Under N1a the only defence keeping 1fce7f3126 out of the OUTER_TOTALS accusers is its EXTERNAL 541, and 541/206 = 2.626 equals the scale the registration was fitted on that value. setAsideCited (plan-resolution.ts:940-952) checks only metricSolutions[].supportingObservationIds. That list cites 870, 920, 224, 949, 126 and 91, but never the registration's anchors. Round-2 verifier 1 recorded these anchors as 'Stronger' evidence of circularity. Verifier 2 added that the two counted independent witnesses (920/350, 949/361) are themselves PP-OCRv6-led. The resolution answers neither point. It bounds the residual risk with a per-statement rule of three (0/459), which assumes the reader's errors are independent of the scale it helped set.",
+     "file": "stage-reports/artifacts/analyzer-005p/post-review/round-2-resolution.md",
+     "id": "J-1",
+     "line": 15,
+     "reproduction": "python3 -c \"import json;m=json.load(open('/home/user/work005n/blind10/out-1/metric-evidence.json'));r=[x for x in m['coordinateRegistrations'] if x['frameId']=='frame-asset-rzut-70b6aa153a-0cb0a5c1d9'][0];print([(a['evidenceIds'],a['metricSpan'],a['pixelSpan']) for a in r['anchors']])\". Compare with <scratch>/n1a-mirror/out-real-0.7927 (N1a still builds b7c86aac).",
+     "severity": "P2",
+     "suggestedFix": "Correct the G2-1 disposition: N1a removes the solution-level circular defence but not the registration-anchor one, so the remaining glogownikach withdrawal rests on a reading equal to a registration anchor. State the reader-level correlation and drop the claim that the remaining case is independent. Alternatively, preregister a next-stage variant that also treats registration anchors as citations.",
+     "title": "The remaining glogownikach withdrawal is called non-circular, but the accused registration is anchored on that same statement at 541"
+    },
+    {
+     "evidence": "Lines 97-101 (B1 correction) say an external reading can keep a statement from contradicting the registration and can be the reason an accusation is withdrawn, then add 'None of this occurs on the 44 development rows'. Both round-2 verifiers called this false and asked for a correction. The file was last changed in 8fd884f, before round 2. Both effects occur in the N1a production replays. (a) In PROD3 rarytasy-eoze, 660de2eb26's EXTERNAL 100 keeps it from refuting the registration (registrationShareMovedBy, share 0.370799 -> 0.334843). (b) In PROD3 glogownikach, the withdrawal is caused by the external 541: PROD3-noext reverts to the P0 SOURCE_CONFLICT refusal. round-1-resolution.md (B1: '0 occurrences on the 44 rows') has the same problem. The round-2 resolution's G2-1 row records no correction to either file.",
+     "file": "research/analyzer-005p/hypotheses.md",
+     "id": "J-2",
+     "line": 101,
+     "reproduction": "grep -n 'None of this occurs' research/analyzer-005p/hypotheses.md; git log -- research/analyzer-005p/hypotheses.md; compare <scratch>/runs/PROD3/dom-w-glogownikach (COMPLETED) with PROD3-noext/dom-w-glogownikach (FAILED, OUTER_TOTALS)",
+     "severity": "P2",
+     "suggestedFix": "Rewrite H2/B1 to say that on the 44 rows an external reading defends the registration on rarytasy-eoze (share only) and causes glogownikach's withdrawal. The harmful subcase (a correct accusation withdrawn) is 0 only by the truth labels. Amend round-1 B1 accordingly.",
+     "title": "hypotheses.md still says 'None of this occurs on the 44 development rows'; this is false under N1a and was not corrected after round 2"
+    },
+    {
+     "evidence": "The addendum predicts: 'In the mirror world of G2-1 (the classic tokens right, the cited external wrong) N1a keeps the 1.4.0 accusation.' In the real-evidence mirror, 'classic tokens right' (501 and 810) means both 870 and 541 are wrong. That mirror was G2-1's main reproduction (decoy F=0.7927 and F=0.8577). There N1a still completes b7c86aac at 2.6261 cm/px: <scratch>/n1a-mirror/out-real-0.7927 and out-real-0.8577 both say 'completed, model b7c86aac'. 1.4.0 instead REPLACED (da496631, VERIFIED) or refused. Only the reviewer's single-reader variant restores 1.4.0: out-870only-0.7927 gives da496631, and out-870only-0.8577 gives a SOURCE_CONFLICT refusal. The round-2 resolution reports both results. However, commit c3ca1c6 says 'N1a restores 1.4.0's outcome on the reviewer's own circular-defence reproduction', and the prediction is not marked as partly failed. The rarytasy-eoze prediction ('either 0.334843 or 0.370799') covers both possible outcomes, so it could not fail. Its stated mechanism (660de2eb26's 100 is not cited) is correct, though, and could have been computed from the evidence before the run.",
+     "file": "research/analyzer-005p/preregistration.md",
+     "id": "J-3",
+     "line": 152,
+     "reproduction": "cat <scratch>/n1a-mirror/out-*.log",
+     "severity": "P2",
+     "suggestedFix": "In the predictions table, record the mirror prediction as HELD for the single-reader mirror and FAILED for G2-1's two-reader real-evidence mirror, with a cross-reference to J-1. Reword the c3ca1c6-era claims to 'restores 1.4.0 on the single-reader variant'.",
+     "title": "Addendum A's mirror-world prediction holds only for the single-reader construction; the main G2-1 reproduction still gives N1's house, which is not recorded as a partial failure"
+    },
+    {
+     "evidence": "The PROD3:rarytasy-eoze and N1 verdicts end with '(report: predictions table)'. round-2-resolution F2-8 says 'FIXED by the stage report'. round-1-resolution A2/B4/B7 say 'Stated in the report'. At 560e186, stage-reports/ has no 005P report: ls stage-reports | grep -i 005p finds nothing, and no .md outside the two resolution files mentions N1a.",
+     "file": "research/analyzer-005p/soundness.json",
+     "id": "J-4",
+     "reproduction": "ls stage-reports | grep -i 005p",
+     "severity": "P3",
+     "suggestedFix": "Either write the report before claiming these items are FIXED or STATED, or change the dispositions to 'pending the stage report'.",
+     "title": "Dispositions and the G3 verdict cite a 005P stage report that does not exist at HEAD"
+    },
+    {
+     "evidence": "PROD3/dom-w-glogownikach/analysis-trace.json SOURCE_CONFLICT_REVIEW: doubted='metric-dimension-1fce7f3126=AS_PRINTED 501|LATTICE 501|EXTERNAL 541', doubtedCount 1, but withdrawnEvidence='metric-dimension-1fce7f3126,metric-dimension-f810c24db9' (count 2). The gap's evidenceIds are the union of the two, so they include f810c24db9. f810c24db9 does not appear as '(cited)' anywhere: once its 870 is set aside it is uncontested and is dropped from doubtedAmong. So the cited mark that G2-3's disposition relies on never appears on the real row.",
+     "file": "packages/reconstruction/src/v2/reconstruct-v2.ts",
+     "id": "J-5",
+     "line": 291,
+     "reproduction": "python3 -c \"import json;print([e['counts'] for e in json.load(open('<scratch>/runs/PROD3/dom-w-glogownikach/analysis-trace.json'))['entries'] if e['substage']=='SOURCE_CONFLICT_REVIEW'])\"",
+     "severity": "P3",
+     "suggestedFix": "Word the commit/report claim as 'the doubted list names exactly 1fce7f3126; the withdrawn charge's evidence is 1fce7f3126 and f810c24db9 (f810's 870 set aside as cited)'.",
+     "title": "'glogownikach's withdrawal names exactly 1fce7f3126' is true only of the doubted list; withdrawnEvidence and the gap still name f810c24db9"
+    },
+    {
+     "evidence": "solutionOffering() always sets supportingObservationIds: [], and the generator never calls citing(). setAsideCited therefore returns early on all 2000 oracle plans. N1a's citation path is tested only by three hand fixtures (statement-contest.test.ts:241-275). Reviewer F's 96 000-plan check ran at f37e410, before N1a. The addendum's property (N1a withdrawals are a subset of N1's, which are a subset of 1.4.0's triggers) rests on argument plus fixtures, not on the generated-plan test. My code reading supports the property: cited readings leave contest.values only, and readingsUnder always includes asRead.",
+     "file": "packages/reconstruction/test/contest-fixtures.ts",
+     "id": "J-6",
+     "line": 140,
+     "reproduction": "grep -n 'supportingObservationIds\\|citing(' packages/reconstruction/test/contest-fixtures.ts packages/reconstruction/test/statement-contest.test.ts",
+     "severity": "P3",
+     "suggestedFix": "Make the generator cite a random subset of LATTICE/EXTERNAL readings. Assert that the triggers are a subset of 1.4.0's, that the share is never larger, and that withdrawn(N1a) is a subset of withdrawn(N1) on the same plans.",
+     "title": "The 2000-plan monotone property test never exercises N1a's set-aside path"
+    },
+    {
+     "evidence": "Section 2 says that with --strip-external, 'G\u0142ogowniki must then equal P0 byte for byte'. PROD3-noext/dom-w-glogownikach differs from P0-frozen in analysis-trace.json and plan-diagnostics/digest.json, because resolverVersion is 1.5.0 instead of 1.4.0. The same holds on 28 rows; failure.json, model.json and program.json are identical. production-noext-vs-p0.json strips resolverVersion, conflictDoubted, statementContest and registrationShareMovedBy before comparing. The commit says 'decisions', which is accurate, but the preregistered criterion as written is not met and this is not noted.",
+     "file": "research/analyzer-005p/preregistration.md",
+     "id": "J-7",
+     "line": 72,
+     "reproduction": "diff -rq -x '*.log' <scratch>/runs/PROD3-noext <scratch>/runs/P0-frozen",
+     "severity": "P3",
+     "suggestedFix": "Record the deviation: byte-identical except the resolver version stamp in the trace and digest.",
+     "title": "The strip-external control was preregistered as byte-for-byte but is reported as normalised decision equality"
+    },
+    {
+     "evidence": "decisionPath captures only outcome, chosen, reading1, sourceConflict, registrationRefuted, chosenRefuted, preferred and why. It does not capture conflictEvidence (the accusers), the 'trigger' text, preferredRefuted, firstRefuted or reading2/3. Preregistered G3 covers 'trigger, outcome, refuted shares, chosen reading', and the eoze verdict asserts the accusers are unchanged, which the gate never checks. G8 tests only that 'OUTER_TOTALS' is absent and verdict != 'PASS'; it does not test for no trigger and == ALGORITHMIC_FAIL. I diffed every trace and digest field of PROD3 against P0-frozen. Beyond resolverVersion, the only changes are eoze (registrationRefuted and new record keys) and glogownikach's path. G8 actually has triggers [] and ALGORITHMIC_FAIL. So the PROD3 gate results stand.",
+     "file": "research/analyzer-005o/score.py",
+     "id": "J-8",
+     "line": 91,
+     "reproduction": "python3 -I <scratch>/r3-J/tdiff.py <scratch>/runs/PROD3 <scratch>/runs/P0-frozen",
+     "severity": "P3",
+     "suggestedFix": "Add conflictEvidence, trigger, preferredRefuted and firstRefuted to the decision path, or compare the full METRIC_CHALLENGE/PLAN_RESOLUTION counts minus version keys. Make G8 require conflictTriggers == [] and verdict == 'ALGORITHMIC_FAIL'.",
+     "title": "gates.py's G3 and G8 checks are narrower than the preregistration (no hidden change on PROD3)"
+    }
+   ],
+   "summary": "Reviewer J checked what the docs claim against the evidence for N1a. The headline replay claims hold. I regenerated dev-matrix.json, gates.json, semantic-delta.json, production-vs-harness.json and production-noext-vs-p0.json into <scratch>/r3-J, and each one matches the committed file exactly. Before regenerating I set TMPDIR inside my scratch directory and pointed --work at a symlinked scratch directory, so nothing shared was overwritten. The checks that hold: PROD3 makes the same decisions as N1 on all 44 rows. PROD3 and PROD3-rep are byte-identical; only the wall-time and RSS lines in the .log files differ. PROD3-noext makes the same decisions as P0. Only glogownikach records a withdrawal, and its doubted list names only 1fce7f3126 (501|501|541). The rarytasy-eoze soundness verdict is true; I recomputed it from the evidence. G1-G9 for PROD3 are computed reproducibly and nothing unevaluated counts as a pass. Statement-contest tests: 47/47 green. Worktree clean. HEAD is 560e186, one commit after 1329a4b, which touches only perf.mjs.\n\nWhat does not hold is the framing around N1a. (1) The round-2 resolution calls the remaining glogownikach withdrawal \"not a circular defence\". But the registration being accused is fitted on 1fce7f3126 at 5.41 m over 206 px, which is the 541 value. N1a's test for \"cited\" looks only at the metric solution's supportingObservationIds, not at the registration's own anchors, and the resolution never answers the verifier who showed this. (2) hypotheses.md:101 still says \"None of this occurs on the 44 development rows\". That is false even under N1a, and both round-2 verifiers asked for it to be corrected. (3) Addendum A's mirror prediction holds only for the single-reader construction; on the main G2-1 reproduction N1a still gives N1's house. (4) Several dispositions point to a 005P stage report that does not exist at HEAD. The rest are smaller precision gaps: the gate and test code is narrower than the preregistration or the claim it backs, though on these runs I found no change it hid."
+  }
+ },
+ "note": "no P0 or P1 was filed, so no adversarial verification ran (the workflow verifies P0/P1 only)",
+ "reviewedCommit": "1329a4b",
+ "round": 3,
+ "verifications": []
+}

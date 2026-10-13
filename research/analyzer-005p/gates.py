@@ -14,7 +14,7 @@ a change without a written verdict counts as NOT_SOUND.
 """
 import argparse, hashlib, json, os, re
 
-VARIANTS = ('P1', 'P2', 'P3', 'N1', 'PROD3')  # PROD3 = N1a, the production implementation after review round 2 (addendum A)
+VARIANTS = ('P1', 'P2', 'P3', 'N1', 'PROD3', 'PROD4')  # PROD3 = N1a after review round 2 (addendum A); PROD4 = N1a after review round 3's fixes
 FILES = ('model.json', 'program.json', 'result-summary.json', 'failure.json', 'analysis-trace.json', 'plan-diagnostics/digest.json')
 REPO = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 SCALE = re.compile(r'(\d+\.\d+) cm/px')
@@ -114,8 +114,9 @@ def main():
             g['G7_determinism'] = {'pass': None, 'note': 'not repeated (preregistration: only the chosen variant is)'}
         # G8
         glog = H['dom-w-glogownikach'][v]
-        g['G8_glogownikach'] = {'pass': 'OUTER_TOTALS' not in glog['conflictTriggers'] and glog.get('verdict') != 'PASS', 'conflictTriggers': glog['conflictTriggers'], 'outcome': glog['outcome'], 'verdict': glog.get('verdict'), 'scale': glog.get('scale')}
-        if v in ('N1', 'PROD3'):
+        # review round 3 (J-8): no trigger at all, and the honest verdict (the house is still wrong), not merely "not PASS"
+        g['G8_glogownikach'] = {'pass': glog['conflictTriggers'] == [] and glog.get('verdict') == 'ALGORITHMIC_FAIL', 'conflictTriggers': glog['conflictTriggers'], 'outcome': glog['outcome'], 'verdict': glog.get('verdict'), 'scale': glog.get('scale')}
+        if v in ('N1', 'PROD3', 'PROD4'):
             g['G9_monotone_triggers'] = {'pass': not s['newTriggers'], 'newTriggers': s['newTriggers']}
         if v == 'P1':
             nt = s['newTriggers']
@@ -125,7 +126,7 @@ def main():
         unevaluated = [k for k, x in g.items() if x['pass'] is None]
         gates[v] = {'admissible': not failed and not unevaluated, 'failed': failed, 'unevaluated': unevaluated, 'gates': g,
                     'decisionPathChanges': len(s['decisionPathChanged']), 'knownGoodPathChanges': len(kg)}
-    json.dump({'schema': 'buildapp.005p.gates', 'revision': 'review round 1 (E3): G5 judged, G6 as preregistered, G7 bytes, unevaluated is not a pass', 'matrix': a.matrix, 'variants': gates}, open(a.out_gates, 'w'), indent=1, sort_keys=True)
+    json.dump({'schema': 'buildapp.005p.gates', 'revision': 'review round 1 (E3): G5 judged, G6 as preregistered, G7 bytes, unevaluated is not a pass; review round 3 (J-8): the decision path is every plan-resolution/challenge/review record key but versions and named readers, G8 requires no trigger and ALGORITHMIC_FAIL', 'matrix': a.matrix, 'variants': gates}, open(a.out_gates, 'w'), indent=1, sort_keys=True)
     json.dump({'schema': 'buildapp.005p.semantic-delta', 'baseline': base, 'variants': delta}, open(a.out_delta, 'w'), indent=1, sort_keys=True)
     for v in VARIANTS:
         print(v, 'ADMISSIBLE' if gates[v]['admissible'] else 'INADMISSIBLE', 'failed', gates[v]['failed'], 'unevaluated', gates[v]['unevaluated'])

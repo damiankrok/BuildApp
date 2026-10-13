@@ -84,7 +84,23 @@ def house(run_dir, case, ts):
                 evid.update(c['conflictEvidence'].split(','))
     o['conflictTriggers'] = sorted(triggers)
     o['conflictEvidence'] = sorted(evid)
+    o['decisionRecord'] = decision_record(tr)
     return o
+
+
+# keys a 1.5.0 trace record adds for the record only (versions, the readers named); everything else a plan-resolution,
+# challenge or review record carries is part of the decision (review round 3, J-8: accusers, trigger, every share)
+RECORD_ONLY = {'resolverVersion', 'statementContest', 'conflictDoubted', 'registrationShareMovedBy', 'conflictCited'}
+
+
+def decision_record(trace_path):
+    if not os.path.exists(trace_path):
+        return {}
+    out = {}
+    for e in json.load(open(trace_path)).get('entries', []):
+        if e.get('substage') in ('PLAN_RESOLUTION', 'METRIC_CHALLENGE', 'SOURCE_CONFLICT_REVIEW'):
+            out.setdefault(e['substage'], []).append({k: v for k, v in sorted(e.get('counts', {}).items()) if k not in RECORD_ONLY})
+    return out
 
 
 def main():
@@ -155,7 +171,7 @@ def main():
             o['contestedConflictEvidence'] = {i: contested[i] for i in o['conflictEvidence'] if i in contested}
             o['modelChanged'] = (o['outcome'], o['code'], o['modelHash']) != (b['outcome'], b['code'], b['modelHash'])
             o['bytesChanged'] = any(o[k] != b[k] for k in ('programHash', 'modelFileHash', 'failureHash', 'digestHash', 'traceHash'))
-            o['decisionPathChanged'] = o.get('decisionPath') != b.get('decisionPath') or o.get('failureMessage') != b.get('failureMessage')
+            o['decisionPathChanged'] = o.get('decisionPath') != b.get('decisionPath') or o.get('failureMessage') != b.get('failureMessage') or o.get('decisionRecord') != b.get('decisionRecord')
             o['semanticsChanged'] = o.get('semantics') != b.get('semantics')
             o['frameChanged'] = o.get('frame') != b.get('frame')
             o['newTriggers'] = sorted(set(o['conflictTriggers']) - set(b['conflictTriggers']))

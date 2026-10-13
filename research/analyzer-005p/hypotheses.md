@@ -98,7 +98,17 @@ topology, emission and every published-figure rule are out of scope for a produc
     keep a statement from contradicting the registration, and can be the reason an accusation is withdrawn — including,
     in a constructed case, a correct accusation of a wrong registration whose own metric solution adopted that external
     reading (a circular defence). It still never states a scale, seeds no accusation, adds no corroboration, proposes no
-    rival and no re-read option. None of this occurs on the 44 development rows; it is a recorded limitation.
+    rival and no re-read option. ~~None of this occurs on the 44 development rows~~ — **corrected after review round 3
+    (J-2): it does occur.** On rarytasy-eoze an external reading (660de2eb26: as printed 155, external 100) keeps one
+    statement from refuting the registration (share 0.3708 → 0.3348; the outcome, the trigger and the model are
+    unchanged), and on glogownikach an external reading (1fce7f3126: as printed 501, external 541) is what withdraws the
+    OUTER_TOTALS accusation (with every external reading stripped the run is P0's refusal again). The constructed
+    circular case (the solution adopting the reading that defends it) is closed by N1a (addendum A). What remains is a
+    correlated-reader risk, not a circular one: on glogownikach the defending 541 is the same recogniser that leads the
+    solution's other witnesses, and the registration's own anchor on that statement is a CHAIN_CORRECTED 5.41 m derived
+    from the scale (dependsOnScale; a pre-existing self-anchoring, first-bad ledger, NOT FIXED in 005P). Whether the
+    withdrawn accusation was correct is known only from the truth labels (it was not: the scale is correct); it is a
+    recorded limitation.
   - **Rival side (review B2).** Clause 2 can withdraw T1 even when every reading of every statement refutes the
     registration, when doubt is about which rival fits. In a synthetic stress (registrations scaled ×0.6–×1.6 on the
     44 cases' frames) 59 of 1212 accusations were withdrawn entirely; none on the real rows. Recorded limitation.

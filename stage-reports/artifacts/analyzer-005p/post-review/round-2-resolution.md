@@ -29,3 +29,18 @@ publisher text in the gap or trace.
 
 The adopted change after round 2 is **N1a**. It is measured on production replays of all 44 rows (with repeat and
 strip-external control) against the same gates before Phase D.
+
+**Amended after review round 3 (J-1, J-3, J-5).** (1) "Not a circular defence" overstated it. On glogownikach the
+remaining defence of the registration is PP-OCRv6's 541 on 1fce7f3126: it is not cited by the frame's metric solution
+(N1a's test), but it is the same recogniser that leads the solution's counted witnesses, and the accused registration's
+own anchor on that statement is a CHAIN_CORRECTED 5.41 m derived from the scale (`dependsOnScale`, the pre-existing
+self-anchoring of the first-bad ledger). So the reading is correlated with the registration's evidence, and the
+remaining case is a correlated-reader risk, not an independent witness. N1a removes the solution-level circular defence
+only; it does not treat registration anchors as citations — a CHAIN_CORRECTED anchor's value is derived from the scale,
+not read from the ink, so matching readings against it would be a different rule (not preregistered; recorded as the
+next stage's candidate together with "CHAIN_CORRECTED never anchors"). (2) Addendum A's mirror prediction HELD for the
+single-reader mirror and FAILED for G2-1's main two-reader real-evidence mirror (decoys 0.7927 / 0.8577: N1a still
+completes `b7c86aac` where 1.4.0 replaced or refused); commit `c3ca1c6`'s "restores 1.4.0's outcome on the reviewer's
+own circular-defence reproduction" holds for the single-reader variant only. (3) "The withdrawal names exactly
+1fce7f3126" holds for the doubted list; the withdrawn charge's evidence is 1fce7f3126 and f810c24db9, whose 870 is set
+aside as cited (named under `cited` since round 3's fix H3-1).

@@ -410,7 +410,8 @@ round is drawn only if a production behaviour change passed every 005P gate (`re
    added or moved — for NEW and for OLD. `PASS`, `SOURCE_LIMITED_PARTIAL` or `ALGORITHMIC_FAIL`, sealed with the
    first-bad record of each before any diagnosis. After sealing:
    - `TARGET_CLASS_EXERCISED = YES | NO` — YES when the NEW run's trace records a withdrawn accusation
-     (`SOURCE_CONFLICT_REVIEW`) or a source conflict with doubted statements (`conflictDoubted`), or the OLD and NEW
+     (`SOURCE_CONFLICT_REVIEW`) or a source conflict with doubted or cited statements (`conflictDoubted`,
+     `conflictCited`, `registrationShareMovedBy`), or the OLD and NEW
      decisions differ; NO otherwise. A round with NO is whole-house evidence and does not show that the policy
      generalizes.
    - A fresh `ALGORITHMIC_FAIL`, a false-confident scale, a wrong floor or a fabricated closure in the NEW run forces
