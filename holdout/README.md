@@ -373,3 +373,48 @@ The protocol of round 9, steps 1–6, with these differences only. Everything he
      FACADE_SEGMENTATION, OPENING_RELATION, RECESS_RELATION, GARAGE_RELATION, EXTENT, BODY_RELATION, STOREY, REC17,
      PLAN_RESOLUTION, EMISSION, OTHER); a later PLAN_RESOLUTION refusal is never named first when an earlier body
      relation already broke the plan.
+
+## Round 11 (BUILDPLAN-ANALYZER-005P)
+
+The protocol of round 10, steps 1–6, with these differences only. Everything here is fixed before the freeze, and the
+round is drawn only if a production behaviour change passed every 005P gate (`research/analyzer-005p/preregistration.md`
+§4–§7); otherwise the round is recorded as `NOT_DRAWN_NO_SAFE_ADOPTION` and no address is drawn.
+
+1. **Two ARCHON families from the committed round-1 pool** (`holdout/pool.txt`, `POOL_SHA256 = 800c2a1e…2ed41`), **both
+   unstratified**, drawn as rounds 2 and 4–8 draw: `i1 = seed mod n` over the drawable addresses, and
+   `i2 = SHA256(seed + ":second") mod m` over the addresses of every other family. No stratum: the brief's preferred
+   dimension-evidence stratum (a page whose drawings print a contested long dimension) cannot be read from a page's
+   markup without reading its drawings, and a stratum that needs the drawings is not blind. So
+   `TARGET_CLASS_EXERCISED` is unknown at the draw and is read after the seal (step 6).
+2. **Excluded families** (`excluded-families-round-11.txt`, 141 families, 1518 drawable), built by
+   `research/analyzer-005p/exclusions.mjs` (manifest: `stage-reports/artifacts/analyzer-005p/blind-round/exclusion-manifest.json`):
+   round 10's list and sources; round 10's two draws (glogownikach and akebiach, now development material) and every
+   family their cached pages link to; every family a text file of the 005O or 005P research names (corpora,
+   transcription labels, harnesses, committed artifacts). `EXCLUDED_FAMILIES_ROUND_11_SHA256 =
+   c7b611dbd52924e74bc3a55d4789383e1b054316f0baec0a1af84474b127869d`.
+3. **Freeze.** `PRE_HOLDOUT_11_SHA` is the pushed HEAD whose full CI is green. Nothing is committed between the freeze
+   and the draw.
+4. **Draw.** `node holdout/select.mjs select --round 11 --pool holdout/pool.txt --pool-sha256 800c2a1ed9daee9efd2654c64b061e430094dc38fc459b805af27ff9fad2ed41 --pre-holdout-sha <sha>`.
+   - `seed = SHA256(PRE_HOLDOUT_11_SHA + "BUILDPLAN-005P-METRIC-GUARD-HOLDOUT")`.
+5. **Run once each, NEW then OLD, pick 1 then pick 2.**
+   - **NEW** (the frozen code, plan resolver 1.5.0), live, as round 10: production analyzer only, `--recogniser`,
+     `ANALYZER_EVIDENCE=1`, the 005K drawn-gap rule OFF (never passed):
+     `ANALYZER_EVIDENCE=1 TELEMETRY=1 npx vite-node packages/analysis-service/scripts/second-house.ts -- --url <address> --cache <scratch> --out <scratch>/new --recogniser`.
+   - **OLD** (the incumbent plan resolver 1.4.0 of `5906afa`), solver only, on the NEW run's sealed package, graph and
+     metric evidence (OCR, ensemble and metric solution do not change between the two codes): the 5906afa
+     `packages/reconstruction/src` exported with `git archive` outside the repository and aliased for that process
+     (`@buildapp/reconstruction`), exactly as validated byte-for-byte against the incumbent on development cases;
+     `OFFLINE=1 npx vite-node --config <old>/vite.config.mjs packages/analysis-service/scripts/second-house.ts -- --package <new>/source-package.json --graph <new>/observation-graph.json --metrics <new>/metric-evidence.json --cache <scratch> --out <scratch>/old`.
+   - Neither run is repeated, and no page, area or published figure is read between the two runs.
+6. **Verdict** by `holdout/verdict.mjs` as committed at the freeze, unchanged from round 10 — no condition or threshold
+   added or moved — for NEW and for OLD. `PASS`, `SOURCE_LIMITED_PARTIAL` or `ALGORITHMIC_FAIL`, sealed with the
+   first-bad record of each before any diagnosis. After sealing:
+   - `TARGET_CLASS_EXERCISED = YES | NO` — YES when the NEW run's trace records a withdrawn accusation
+     (`SOURCE_CONFLICT_REVIEW`) or a source conflict with doubted statements (`conflictDoubted`), or the OLD and NEW
+     decisions differ; NO otherwise. A round with NO is whole-house evidence and does not show that the policy
+     generalizes.
+   - A fresh `ALGORITHMIC_FAIL`, a false-confident scale, a wrong floor or a fabricated closure in the NEW run forces
+     the stage to PARTIAL, whatever the metric policy did. Nothing is patched after the draw, and the draw is never
+     repeated.
+   - First bad decisions are named from the Evidence Pack and the trace (SOURCE, METRIC, AS_PRINTED_VIEW,
+     PLAN_RESOLUTION, BINDING, ORIENTATION, EXTENT, TOPOLOGY_BOUNDARY, STOREY, EMISSION, OTHER).

@@ -5,6 +5,7 @@
  * pool and the SHA, never picks an excluded family, never picks the same family twice, and the
  * second pick can land on any address of another family — not only on the first one of each.
  */
+import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 // @ts-expect-error — a plain ES module with no declarations; only its exports are exercised here
 import { archonGarage, family, select, selectStratified } from '../../holdout/select.mjs'
@@ -82,3 +83,27 @@ describe('round 10 (005N): the garage stratum, from the page’s own published f
   })
 })
 
+
+describe('round 11 (005P): unstratified, from a list that only grows', () => {
+  const ROOT = new URL('../../', import.meta.url)
+  const lines = (f: string): string[] =>
+    readFileSync(new URL(`holdout/${f}`, ROOT), 'utf8')
+      .split('\n')
+      .map((l) => l.trim())
+      .filter((l) => l && !l.startsWith('#'))
+
+  it('excludes every family round 10 excluded, and both round-10 draws, now development houses', () => {
+    const r10 = new Set(lines('excluded-families-round-10.txt'))
+    const r11 = new Set(lines('excluded-families-round-11.txt'))
+    for (const f of r10) expect(r11.has(f), f).toBe(true)
+    const ledger = readFileSync(new URL('holdout/LEDGER.ndjson', ROOT), 'utf8').trim().split('\n').map((l) => JSON.parse(l) as { label?: string; families?: string[] })
+    const round10 = ledger.filter((l) => l.label === 'BUILDPLAN-005N-COMPOUND-FACADE-HOLDOUT').flatMap((l) => l.families ?? [])
+    expect(round10.length).toBe(2)
+    for (const f of round10) expect(r11.has(f), f).toBe(true)
+  })
+
+  it('is registered with its own label and list, and no stratum', () => {
+    const text = readFileSync(new URL('holdout/select.mjs', ROOT), 'utf8')
+    expect(text).toMatch(/^ {2}11: \{ label: 'BUILDPLAN-005P-METRIC-GUARD-HOLDOUT', excluded: 'excluded-families-round-11\.txt' \},$/m)
+  })
+})

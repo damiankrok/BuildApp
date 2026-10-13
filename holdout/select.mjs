@@ -49,6 +49,13 @@
 // `SHA256(seed + ":stratified:" + k)` mod what is left, kept when its page's own published figures state a garage
 // (`archonGarage`: a `powierzchnia-garazu` figure above zero), else recorded and burned:
 //   node holdout/select.mjs select --round 10 --pool holdout/pool.txt --pool-sha256 <hex> --pre-holdout-sha <40hex>
+// Round 11 (BUILDPLAN-005P) draws two ARCHON families, both UNSTRATIFIED, exactly as rounds 2 and 4–8 draw (`i1 = seed
+// mod n`, `i2 = SHA256(seed + ":second") mod m` over every other family), from the same pool less
+// holdout/excluded-families-round-11.txt (round 10's list and sources, round 10's two houses now development material,
+// the families their cached pages link to, and every family a text file of the 005O or 005P research names), with
+// seed = SHA256(PRE_HOLDOUT_11_SHA + "BUILDPLAN-005P-METRIC-GUARD-HOLDOUT"). No stratum: none of the brief's
+// dimension-evidence strata can be read from a page's markup without reading its drawings.
+//   node holdout/select.mjs select --round 11 --pool holdout/pool.txt --pool-sha256 <hex> --pre-holdout-sha <40hex>
 // `select` draws from the committed pool less the committed excluded families (holdout/excluded-families.txt:
 // families the development pages link to), and refuses unless HEAD is the declared SHA, the tree is clean, and
 // the pool is the tracked holdout/pool.txt whose hash both the operator and pool.meta.json declare.
@@ -69,6 +76,7 @@ const ROUNDS = {
   8: { label: 'BUILDPLAN-005I-DIMENSION-TOPOLOGY-BOUNDARY-BAKEOFF-HOLDOUT', excluded: 'excluded-families-round-8.txt' },
   9: { label: 'BUILDPLAN-005L-STOREY-REGISTRATION-HOLDOUT', excluded: 'excluded-families-round-9.txt', stratified: { minPlanStoreys: 2, maxDraws: 20 } },
   10: { label: 'BUILDPLAN-005N-COMPOUND-FACADE-HOLDOUT', excluded: 'excluded-families-round-10.txt', stratified: { garage: true, maxDraws: 20 } },
+  11: { label: 'BUILDPLAN-005P-METRIC-GUARD-HOLDOUT', excluded: 'excluded-families-round-11.txt' },
 }
 const DOBREDOMY = {
   host: 'https://www.dobredomy.pl',
