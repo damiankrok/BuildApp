@@ -7,22 +7,28 @@
   "failed": [
    "packages/reconstruction/test/statement-contest-emission.test.ts :: a withdrawn accusation through the production solver with the external readings, the accusation is withdrawn: no challenge, a SOURCE_CONFLICT_REVIEW naming the readers",
    "packages/reconstruction/test/statement-contest-emission.test.ts :: a withdrawn accusation through the production solver the withdrawal is carried in the result as an AMBIGUOUS gap, not only in the trace",
-   "packages/reconstruction/test/statement-contest-emission.test.ts :: a withdrawn accusation through the production solver on the early path (the published footprint refused the first reading) the withdrawal is recorded, and the run ends as the incumbent\u2019s does",
+   "packages/reconstruction/test/statement-contest-emission.test.ts :: a withdrawn accusation through the production solver on the early path (the published footprint refused the first reading) the withdrawal is recorded, and the run ends as the incumbent’s does",
    "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser two long totals the classic reader misread, read correctly by the external reader, accuse nothing (failed under 1.4.0)",
    "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser clause 1 alone: the registration is refuted by a contested statement only if none of its readings fits it",
-   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser clause 1, exactly: one contested statement whose external reading fits lowers the registration\u2019s refuted share by its own length",
+   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser clause 1, exactly: one contested statement whose external reading fits lowers the registration’s refuted share by its own length",
    "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser clause 2 alone: a rival is spared by a contested statement only if every reading fits it",
    "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser clause 3 alone: a contested statement joins an OUTER_TOTALS accusation only if every reading fits the accused scale",
    "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser clause 4 alone: a contested statement defends the registration if one reading fits it",
    "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser the plan turned a quarter (axes swapped) gives the same answer (a mirror changes no span length, which is all the test reads)",
-   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration\u2019s own solution cites cannot vouch for it uncited, the doubt withdraws the accusation (N1)",
-   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration\u2019s own solution cites cannot vouch for it the glogownikach pattern: one accuser\u2019s external reading cited (870), the other\u2019s not (541) \u2014 still only one accuser, still withdrawn",
-   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration\u2019s own solution cites cannot vouch for it a citation of another value of the same ink does not set the reading aside",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it uncited, the doubt withdraws the accusation (N1)",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it the glogownikach pattern: one accuser’s external reading cited (870), the other’s not (541) — still only one accuser, still withdrawn",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it a citation of another value of the same ink does not set the reading aside",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it the as-printed value is never set aside, even when a lattice reading of the same value is cited",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it a citation by another frame’s solution, or by an observation the solution does not rest on, sets nothing aside",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it a duplicated crop: a citation of the ink under the other record’s id is the same ink, and is set aside",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it on T1 a cited reading cannot spare the registration against an offered rival, nor refute the rival",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it on T3 cited readings cannot defend the registration",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it a cited reading of a statement still contested is traced as cited, in the review and in the trace record",
    "packages/reconstruction/test/statement-contest.test.ts :: a withdrawn accusation is named, with the readers it turned on an OUTER_TOTALS withdrawal does not name a short contested statement, which that trigger never reads",
    "packages/reconstruction/test/statement-contest.test.ts :: a withdrawn accusation is named, with the readers it turned on the record names the withdrawn triggers, their reasons only, and every contested statement whose verdict the doubt changed",
-   "packages/reconstruction/test/statement-contest.test.ts :: a withdrawn accusation is named, with the readers it turned on a partial withdrawal names only the withdrawn triggers\u2019 reasons and statements, and what still stands",
+   "packages/reconstruction/test/statement-contest.test.ts :: a withdrawn accusation is named, with the readers it turned on a partial withdrawal names only the withdrawn triggers’ reasons and statements, and what still stands",
    "packages/reconstruction/test/statement-contest.test.ts :: a withdrawn accusation is named, with the readers it turned on one statement carried by two segments is named once",
-   "packages/reconstruction/test/statement-contest.test.ts :: a contest never states what the incumbent did not state the offered rivals are the incumbent\u2019s: a metric solution\u2019s hypotheses, whatever the contest",
+   "packages/reconstruction/test/statement-contest.test.ts :: a contest never states what the incumbent did not state the offered rivals are the incumbent’s: a metric solution’s hypotheses, whatever the contest",
    "packages/reconstruction/test/statement-contest.test.ts :: the doubt policy is monotone against plan resolver 1.4.0 itself on 2000 generated plans: as printed is 1.4.0; under doubt no trigger 1.4.0 lacks and no larger refuted share; the withdrawal is reached"
   ]
  },
@@ -54,9 +60,9 @@
   "failed": [
    "packages/reconstruction/test/statement-contest.test.ts :: statementContests: the confident readers of one ink three readers reading the same value are one reading, not a contest and not three witnesses",
    "packages/reconstruction/test/statement-contest.test.ts :: statementContests: the confident readers of one ink the external reading counts only when the ensemble found it corroborating: AGREES, LEADS, CONTESTS with the external as rival",
-   "packages/reconstruction/test/statement-contest.test.ts :: statementContests: the confident readers of one ink a LEADS record over an unconfident lattice gives the external reading only: the lattice\u2019s own class decides, not the ensemble\u2019s",
+   "packages/reconstruction/test/statement-contest.test.ts :: statementContests: the confident readers of one ink a LEADS record over an unconfident lattice gives the external reading only: the lattice’s own class decides, not the ensemble’s",
    "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser without the external reading the same misreads accuse exactly as 1.4.0 did: no value is conjured",
-   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser two disagreeing dimension lines whose readers agree are not doubted: the conflict is 1.4.0\u2019s"
+   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser two disagreeing dimension lines whose readers agree are not doubted: the conflict is 1.4.0’s"
   ]
  },
  {
@@ -67,11 +73,15 @@
   "failed": [
    "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser clause 2 alone: a rival is spared by a contested statement only if every reading fits it",
    "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser clause 3 alone: a contested statement joins an OUTER_TOTALS accusation only if every reading fits the accused scale",
-   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration\u2019s own solution cites cannot vouch for it uncited, the doubt withdraws the accusation (N1)",
-   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration\u2019s own solution cites cannot vouch for it the glogownikach pattern: one accuser\u2019s external reading cited (870), the other\u2019s not (541) \u2014 still only one accuser, still withdrawn",
-   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration\u2019s own solution cites cannot vouch for it a citation of another value of the same ink does not set the reading aside",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it uncited, the doubt withdraws the accusation (N1)",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it the glogownikach pattern: one accuser’s external reading cited (870), the other’s not (541) — still only one accuser, still withdrawn",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it a citation of another value of the same ink does not set the reading aside",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it the as-printed value is never set aside, even when a lattice reading of the same value is cited",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it a citation by another frame’s solution, or by an observation the solution does not rest on, sets nothing aside",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it a duplicated crop: a citation of the ink under the other record’s id is the same ink, and is set aside",
    "packages/reconstruction/test/statement-contest.test.ts :: a withdrawn accusation is named, with the readers it turned on an OUTER_TOTALS withdrawal does not name a short contested statement, which that trigger never reads",
-   "packages/reconstruction/test/statement-contest.test.ts :: the doubt policy is monotone against plan resolver 1.4.0 itself on 2000 generated plans: as printed is 1.4.0; under doubt no trigger 1.4.0 lacks and no larger refuted share; the withdrawal is reached"
+   "packages/reconstruction/test/statement-contest.test.ts :: the doubt policy is monotone against plan resolver 1.4.0 itself on 2000 generated plans: as printed is 1.4.0; under doubt no trigger 1.4.0 lacks and no larger refuted share; the withdrawal is reached",
+   "packages/reconstruction/test/statement-contest.test.ts :: the doubt policy is monotone against plan resolver 1.4.0 itself with the plans’ own solutions citing readings at random (N1a running): still 1.4.0 as printed, no trigger 1.4.0 lacks, no larger share, a withdrawal only where N1 withdraws, the same answer whatever the order"
   ]
  },
  {
@@ -81,17 +91,18 @@
   "status": "KILLED",
   "failed": [
    "packages/reconstruction/test/source-conflict.test.ts :: the published figure never chooses among the scales the drawing states sweeping the figure across every reading the drawing states builds one scale or none",
-   "packages/reconstruction/test/statement-contest-emission.test.ts :: a withdrawn accusation through the production solver on the early path (the published footprint refused the first reading) the withdrawal is recorded, and the run ends as the incumbent\u2019s does"
+   "packages/reconstruction/test/statement-contest-emission.test.ts :: a withdrawn accusation through the production solver on the early path (the published footprint refused the first reading) the withdrawal is recorded, and the run ends as the incumbent’s does"
   ]
  },
  {
   "id": "X7",
   "what": "trust missing data: a statement with no lattice (a missing reader) counts as contested",
-  "must": "/no value is conjured|1\\.4\\.0\u2019s|another copy|named once|withdrawn accusation is named/",
+  "must": "/no value is conjured|1\\.4\\.0’s|another copy|named once|withdrawn accusation is named/",
   "status": "KILLED",
   "failed": [
    "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser a contest between readings that fit the same scale changes nothing: a correct accusation stands (the 1600/1601 pattern)",
-   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser two disagreeing dimension lines whose readers agree are not doubted: the conflict is 1.4.0\u2019s"
+   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser two disagreeing dimension lines whose readers agree are not doubted: the conflict is 1.4.0’s",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it cited by the registration’s solution, the reading is set aside: the accusation stands, nothing is withdrawn"
   ]
  },
  {
@@ -110,7 +121,7 @@
   "status": "KILLED",
   "failed": [
    "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser clause 1 alone: the registration is refuted by a contested statement only if none of its readings fits it",
-   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser clause 1, exactly: one contested statement whose external reading fits lowers the registration\u2019s refuted share by its own length"
+   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser clause 1, exactly: one contested statement whose external reading fits lowers the registration’s refuted share by its own length"
   ]
  },
  {
@@ -129,9 +140,12 @@
   "status": "KILLED",
   "failed": [
    "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser clause 3 alone: a contested statement joins an OUTER_TOTALS accusation only if every reading fits the accused scale",
-   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration\u2019s own solution cites cannot vouch for it uncited, the doubt withdraws the accusation (N1)",
-   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration\u2019s own solution cites cannot vouch for it the glogownikach pattern: one accuser\u2019s external reading cited (870), the other\u2019s not (541) \u2014 still only one accuser, still withdrawn",
-   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration\u2019s own solution cites cannot vouch for it a citation of another value of the same ink does not set the reading aside",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it uncited, the doubt withdraws the accusation (N1)",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it the glogownikach pattern: one accuser’s external reading cited (870), the other’s not (541) — still only one accuser, still withdrawn",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it a citation of another value of the same ink does not set the reading aside",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it the as-printed value is never set aside, even when a lattice reading of the same value is cited",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it a citation by another frame’s solution, or by an observation the solution does not rest on, sets nothing aside",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it a duplicated crop: a citation of the ink under the other record’s id is the same ink, and is set aside",
    "packages/reconstruction/test/statement-contest.test.ts :: a withdrawn accusation is named, with the readers it turned on an OUTER_TOTALS withdrawal does not name a short contested statement, which that trigger never reads"
   ]
  },
@@ -141,7 +155,8 @@
   "must": "/clause 4/",
   "status": "KILLED",
   "failed": [
-   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser clause 4 alone: a contested statement defends the registration if one reading fits it"
+   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser clause 4 alone: a contested statement defends the registration if one reading fits it",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it on T3 cited readings cannot defend the registration"
   ]
  },
  {
@@ -152,7 +167,10 @@
   "failed": [
    "packages/reconstruction/test/statement-contest-emission.test.ts :: a withdrawn accusation through the production solver with the external readings, the accusation is withdrawn: no challenge, a SOURCE_CONFLICT_REVIEW naming the readers",
    "packages/reconstruction/test/statement-contest.test.ts :: statementContests: the confident readers of one ink the external reading counts only when the ensemble found it corroborating: AGREES, LEADS, CONTESTS with the external as rival",
-   "packages/reconstruction/test/statement-contest.test.ts :: statementContests: the confident readers of one ink a LEADS record over an unconfident lattice gives the external reading only: the lattice\u2019s own class decides, not the ensemble\u2019s",
+   "packages/reconstruction/test/statement-contest.test.ts :: statementContests: the confident readers of one ink a LEADS record over an unconfident lattice gives the external reading only: the lattice’s own class decides, not the ensemble’s",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it cited by the registration’s solution, the reading is set aside: the accusation stands, nothing is withdrawn",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it the as-printed value is never set aside, even when a lattice reading of the same value is cited",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it a cited reading of a statement still contested is traced as cited, in the review and in the trace record",
    "packages/reconstruction/test/statement-contest.test.ts :: a withdrawn accusation is named, with the readers it turned on the record names the withdrawn triggers, their reasons only, and every contested statement whose verdict the doubt changed"
   ]
  },
@@ -177,10 +195,11 @@
  {
   "id": "X16",
   "what": "a duplicated crop joins the first lattice record instead of the sealed later one",
-  "must": "/duplicated crop/",
+  "must": "/duplicated crop \\(two lattice records/",
   "status": "KILLED",
   "failed": [
-   "packages/reconstruction/test/statement-contest.test.ts :: statementContests: the confident readers of one ink a duplicated crop (two lattice records for one ink) is joined as sealed: the later record"
+   "packages/reconstruction/test/statement-contest.test.ts :: statementContests: the confident readers of one ink a duplicated crop (two lattice records for one ink) is joined as sealed: the later record",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it a duplicated crop: a citation of the ink under the other record’s id is the same ink, and is set aside"
   ]
  },
  {
@@ -191,7 +210,7 @@
   "failed": [
    "packages/reconstruction/test/statement-contest-emission.test.ts :: a withdrawn accusation through the production solver with the external readings, the accusation is withdrawn: no challenge, a SOURCE_CONFLICT_REVIEW naming the readers",
    "packages/reconstruction/test/statement-contest-emission.test.ts :: a withdrawn accusation through the production solver the withdrawal is carried in the result as an AMBIGUOUS gap, not only in the trace",
-   "packages/reconstruction/test/statement-contest-emission.test.ts :: a withdrawn accusation through the production solver on the early path (the published footprint refused the first reading) the withdrawal is recorded, and the run ends as the incumbent\u2019s does"
+   "packages/reconstruction/test/statement-contest-emission.test.ts :: a withdrawn accusation through the production solver on the early path (the published footprint refused the first reading) the withdrawal is recorded, and the run ends as the incumbent’s does"
   ]
  },
  {
@@ -200,8 +219,14 @@
   "must": "/cited by the registration/",
   "status": "KILLED",
   "failed": [
-   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration\u2019s own solution cites cannot vouch for it cited by the registration\u2019s solution, the reading is set aside: the accusation stands, nothing is withdrawn",
-   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration\u2019s own solution cites cannot vouch for it the glogownikach pattern: one accuser\u2019s external reading cited (870), the other\u2019s not (541) \u2014 still only one accuser, still withdrawn"
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it cited by the registration’s solution, the reading is set aside: the accusation stands, nothing is withdrawn",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it the glogownikach pattern: one accuser’s external reading cited (870), the other’s not (541) — still only one accuser, still withdrawn",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it the as-printed value is never set aside, even when a lattice reading of the same value is cited",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it a duplicated crop: a citation of the ink under the other record’s id is the same ink, and is set aside",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it on T1 a cited reading cannot spare the registration against an offered rival, nor refute the rival",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it on T3 cited readings cannot defend the registration",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it a cited reading of a statement still contested is traced as cited, in the review and in the trace record",
+   "packages/reconstruction/test/statement-contest.test.ts :: the doubt policy is monotone against plan resolver 1.4.0 itself with the plans’ own solutions citing readings at random (N1a running): still 1.4.0 as printed, no trigger 1.4.0 lacks, no larger share, a withdrawal only where N1 withdraws, the same answer whatever the order"
   ]
  },
  {
@@ -214,26 +239,120 @@
   ]
  },
  {
+  "id": "X21",
+  "what": "N1a cites a value on every ink, not on the ink it was read from (the citation key ignores the ink)",
+  "must": "/another ink/",
+  "status": "KILLED",
+  "failed": [
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it a value cited on another ink does not set aside an equal reading of this one"
+  ]
+ },
+ {
+  "id": "X22",
+  "what": "N1a sets aside every reading of a cited ink, whatever value was cited (the key ignores the value)",
+  "must": "/another value of the same ink/",
+  "status": "KILLED",
+  "failed": [
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it a citation of another value of the same ink does not set the reading aside",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it a value cited on another ink does not set aside an equal reading of this one",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it the as-printed value is never set aside, even when a lattice reading of the same value is cited",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it a cited reading of a statement still contested is traced as cited, in the review and in the trace record"
+  ]
+ },
+ {
+  "id": "X23",
+  "what": "N1a sets aside the as-printed value too when a reading of the same value is cited",
+  "must": "/as-printed value is never set aside/",
+  "status": "KILLED",
+  "failed": [
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it a citation of another value of the same ink does not set the reading aside",
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it the as-printed value is never set aside, even when a lattice reading of the same value is cited"
+  ]
+ },
+ {
+  "id": "X24",
+  "what": "N1a takes citations from every frame's solution, not the registered frame's",
+  "must": "/another frame/",
+  "status": "KILLED",
+  "failed": [
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it a citation by another frame’s solution, or by an observation the solution does not rest on, sets nothing aside"
+  ]
+ },
+ {
+  "id": "X25",
+  "what": "N1a counts every observation as a citation, not only those the solution rests on",
+  "must": "/does not rest on/",
+  "status": "KILLED",
+  "failed": [
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it a citation by another frame’s solution, or by an observation the solution does not rest on, sets nothing aside"
+  ]
+ },
+ {
+  "id": "X26",
+  "what": "N1a keys a citation on the lattice record's id, so a duplicated crop under another id escapes it (review H3-2)",
+  "must": "/duplicated crop: a citation/",
+  "status": "KILLED",
+  "failed": [
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it a duplicated crop: a citation of the ink under the other record’s id is the same ink, and is set aside"
+  ]
+ },
+ {
+  "id": "X27",
+  "what": "N1a on one side only: T1's offered rivals are refuted by readings the solution cites",
+  "must": "/on T1 a cited reading/",
+  "status": "KILLED",
+  "failed": [
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it on T1 a cited reading cannot spare the registration against an offered rival, nor refute the rival"
+  ]
+ },
+ {
+  "id": "X28",
+  "what": "N1a on one side only: T3's defence of the registration counts readings the solution cites",
+  "must": "/on T3 cited readings cannot defend/",
+  "status": "KILLED",
+  "failed": [
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it on T3 cited readings cannot defend the registration"
+  ]
+ },
+ {
+  "id": "X29",
+  "what": "a statement whose only rival reading is cited stays contested (and doubted)",
+  "must": "/set aside: the accusation stands/",
+  "status": "KILLED",
+  "failed": [
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it cited by the registration’s solution, the reading is set aside: the accusation stands, nothing is withdrawn"
+  ]
+ },
+ {
+  "id": "X30",
+  "what": "a set-aside reading is not traced: the trace record drops the cited statements (review H3-1)",
+  "must": "/traced as cited/",
+  "status": "KILLED",
+  "failed": [
+   "packages/reconstruction/test/statement-contest.test.ts :: N1a: a reading the registration’s own solution cites cannot vouch for it a cited reading of a statement still contested is traced as cited, in the review and in the trace record"
+  ]
+ },
+ {
   "id": "X18",
   "what": "change a protected open side: every wide-gap interval is decided an opening in its wall (open sides, carports, loggias closed)",
   "must": "/./",
   "status": "KILLED",
   "failed": [
-   "packages/reconstruction/test/compound-facade.test.ts :: 005N \u00a721 \u2014 recessed entrance beside a garage: two mouths of one body 1\u20132. recess + separator + garage door drawn: the recess stays a recess, the garage and the hall behind the entrance are built (every orientation)",
-   "packages/reconstruction/test/compound-facade.test.ts :: 005N \u00a721 \u2014 recessed entrance beside a garage: two mouths of one body the garage door blank: the garage is not fabricated \u2014 open in the first reading \u2014 while the recess and the hall stand",
-   "packages/reconstruction/test/compound-facade.test.ts :: 005N \u00a721 \u2014 recessed entrance beside a garage: two mouths of one body 3 + 17. recess + double garage (5 m door): a 8.6 m parent, wider than any opening, cut into mouths each within reach",
-   "packages/reconstruction/test/compound-facade.test.ts :: 005N \u00a721 \u2014 recessed entrance beside a garage: two mouths of one body 4. recess + a glazed window: the window is an opening in its own wall, the recess open",
-   "packages/reconstruction/test/compound-facade.test.ts :: 005N \u00a716 \u2014 each interval is weighed against its own pocket an undrawn mouth into the house beside the recess: the hall behind it is the interior, so its own width shuts it \u2014 the merged span would not",
-   "packages/reconstruction/test/compound-facade.test.ts :: 005N \u00a721 \u2014 separators: structural ink only 19. a dimension line, a leader and hatching across the span make no separator",
-   "packages/reconstruction/test/compound-facade.test.ts :: 005N \u00a721 \u2014 open sides stay open 7. a genuine carport beside a recessed entrance stays outside",
-   "packages/reconstruction/test/compound-facade.test.ts :: 005N \u00a721 \u2014 open sides stay open 8. an open porch beside a garage \u2014 its roof on posts standing in front of the facade: the porch stays open, the garage built",
-   "packages/reconstruction/test/compound-facade.test.ts :: 005N \u00a721 \u2014 open sides stay open 9. a loggia beside a large glazed opening: the loggia open, the glazing an opening",
-   "packages/reconstruction/test/compound-facade.test.ts :: 005N \u00a721 \u2014 recesses need the drawing to make them one 18. a set-back door callout near the recess mouth does not shut the recess, and does not cross the separator to the garage",
-   "packages/reconstruction/test/compound-facade.test.ts :: 005N \u00a719 \u2014 an adopted outline keeps the box reading's compound spans on the record the plan digest carries it as the BOX reading, each interval with its decision and the cells behind its mouth",
-   "packages/reconstruction/test/compound-facade.test.ts :: 005N council \u2014 what a back wall, a callout, a pattern and a sibling may not do A1/B2. a step line, or a flight of them, in front of the set-back wall is not the set-back wall: the recess keeps its depth, nothing is built in it",
-   "packages/reconstruction/test/compound-facade.test.ts :: 005N council \u2014 what a back wall, a callout, a pattern and a sibling may not do B3. a paving pattern across a blank garage mouth is no door and no set-back wall: the interval is not shut by it",
-   "packages/reconstruction/test/compound-facade.test.ts :: 005N council \u2014 what a back wall, a callout, a pattern and a sibling may not do A2. two undrawn mouths side by side: the hall behind one is shut by its own pocket, the shallow bay beside it is not shut by the hall's",
-   "packages/reconstruction/test/compound-facade.test.ts :: 005N council D1 \u2014 mouths side by side into one space are weighed together a shared space behind them no bigger than their joint 8 m allows a pocket stays open"
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N §21 — recessed entrance beside a garage: two mouths of one body 1–2. recess + separator + garage door drawn: the recess stays a recess, the garage and the hall behind the entrance are built (every orientation)",
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N §21 — recessed entrance beside a garage: two mouths of one body the garage door blank: the garage is not fabricated — open in the first reading — while the recess and the hall stand",
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N §21 — recessed entrance beside a garage: two mouths of one body 3 + 17. recess + double garage (5 m door): a 8.6 m parent, wider than any opening, cut into mouths each within reach",
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N §21 — recessed entrance beside a garage: two mouths of one body 4. recess + a glazed window: the window is an opening in its own wall, the recess open",
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N §16 — each interval is weighed against its own pocket an undrawn mouth into the house beside the recess: the hall behind it is the interior, so its own width shuts it — the merged span would not",
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N §21 — separators: structural ink only 19. a dimension line, a leader and hatching across the span make no separator",
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N §21 — open sides stay open 7. a genuine carport beside a recessed entrance stays outside",
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N §21 — open sides stay open 8. an open porch beside a garage — its roof on posts standing in front of the facade: the porch stays open, the garage built",
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N §21 — open sides stay open 9. a loggia beside a large glazed opening: the loggia open, the glazing an opening",
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N §21 — recesses need the drawing to make them one 18. a set-back door callout near the recess mouth does not shut the recess, and does not cross the separator to the garage",
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N §19 — an adopted outline keeps the box reading's compound spans on the record the plan digest carries it as the BOX reading, each interval with its decision and the cells behind its mouth",
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N council — what a back wall, a callout, a pattern and a sibling may not do A1/B2. a step line, or a flight of them, in front of the set-back wall is not the set-back wall: the recess keeps its depth, nothing is built in it",
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N council — what a back wall, a callout, a pattern and a sibling may not do B3. a paving pattern across a blank garage mouth is no door and no set-back wall: the interval is not shut by it",
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N council — what a back wall, a callout, a pattern and a sibling may not do A2. two undrawn mouths side by side: the hall behind one is shut by its own pocket, the shallow bay beside it is not shut by the hall's",
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N council D1 — mouths side by side into one space are weighed together a shared space behind them no bigger than their joint 8 m allows a pocket stays open"
   ]
  }
 ]
