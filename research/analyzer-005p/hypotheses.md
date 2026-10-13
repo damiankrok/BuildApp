@@ -92,6 +92,16 @@ topology, emission and every published-figure rule are out of scope for a produc
 - **Why it is not a promotion:** EXTERNAL's value never states a scale, seeds no accusation, adds no support, no
   corroboration and no re-read option. It can only prevent a statement from accusing. With every external reading
   removed, a statement whose only confident reader is the token is uncontested and read exactly as frozen.
+  - **Correction after review round 1 (B1).** "Adds no support" is too strong. On the registration side the benefit of
+    the doubt goes to the accused: a contested statement whose external (or lattice) reading fits the registration does
+    not refute it (clause 1) and counts toward its defence against OUTER_TOTALS (clause 4). So an external reading CAN
+    keep a statement from contradicting the registration, and can be the reason an accusation is withdrawn — including,
+    in a constructed case, a correct accusation of a wrong registration whose own metric solution adopted that external
+    reading (a circular defence). It still never states a scale, seeds no accusation, adds no corroboration, proposes no
+    rival and no re-read option. None of this occurs on the 44 development rows; it is a recorded limitation.
+  - **Rival side (review B2).** Clause 2 can withdraw T1 even when every reading of every statement refutes the
+    registration, when doubt is about which rival fits. In a synthetic stress (registrations scaled ×0.6–×1.6 on the
+    44 cases' frames) 59 of 1212 accusations were withdrawn entirely; none on the real rows. Recorded limitation.
 - **Why it might fail:** (i) it leaves the ranking's own refuted shares frozen, so a house that loses its conflict goes
   down the incumbent's no-conflict path — which may itself be wrong (it is the 005D path); (ii) a correct accusation
   carried by a statement whose readers genuinely disagree about the scale is withdrawn (a house with a wrong

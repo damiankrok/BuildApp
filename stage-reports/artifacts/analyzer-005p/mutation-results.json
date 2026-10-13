@@ -1,12 +1,24 @@
 [
  {
   "id": "X1",
-  "what": "undo the innovation: the source conflict reads every statement as printed (the 1.4.0 test)",
+  "what": "undo the innovation: the source conflict reads every statement as printed (the 1.4.0 test), in the review production uses",
   "must": "/accuse nothing \\(failed under 1\\.4\\.0\\)/",
   "status": "KILLED",
   "failed": [
+   "packages/reconstruction/test/statement-contest-emission.test.ts :: a withdrawn accusation through the production solver with the external readings, the accusation is withdrawn: no challenge, a SOURCE_CONFLICT_REVIEW naming the readers",
+   "packages/reconstruction/test/statement-contest-emission.test.ts :: a withdrawn accusation through the production solver the withdrawal is carried in the result as an AMBIGUOUS gap, not only in the trace",
    "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser two long totals the classic reader misread, read correctly by the external reader, accuse nothing (failed under 1.4.0)",
-   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser the plan turned a quarter (axes swapped) or mirrored (statements in reverse order) gives the same answer"
+   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser clause 1 alone: the registration is refuted by a contested statement only if none of its readings fits it",
+   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser clause 1, exactly: one contested statement whose external reading fits lowers the registration’s refuted share by its own length",
+   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser clause 2 alone: a rival is spared by a contested statement only if every reading fits it",
+   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser clause 3 alone: a contested statement joins an OUTER_TOTALS accusation only if every reading fits the accused scale",
+   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser clause 4 alone: a contested statement defends the registration if one reading fits it",
+   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser the plan turned a quarter (axes swapped) or mirrored (spans laid from the far edge) gives the same answer",
+   "packages/reconstruction/test/statement-contest.test.ts :: a withdrawn accusation is named, with the readers it turned on the record names the withdrawn triggers, their reasons only, and every contested statement whose verdict the doubt changed",
+   "packages/reconstruction/test/statement-contest.test.ts :: a withdrawn accusation is named, with the readers it turned on a partial withdrawal names only the withdrawn triggers’ reasons and statements, and what still stands",
+   "packages/reconstruction/test/statement-contest.test.ts :: a withdrawn accusation is named, with the readers it turned on one statement carried by two segments is named once",
+   "packages/reconstruction/test/statement-contest.test.ts :: a contest never states what the incumbent did not state the offered rivals are the incumbent’s: a metric solution’s hypotheses, whatever the contest",
+   "packages/reconstruction/test/statement-contest.test.ts :: the doubt policy is monotone against plan resolver 1.4.0 itself on 2000 generated plans: as printed is 1.4.0; under doubt no trigger 1.4.0 lacks and no larger refuted share; the withdrawal is reached"
   ]
  },
  {
@@ -36,24 +48,27 @@
   "status": "KILLED",
   "failed": [
    "packages/reconstruction/test/statement-contest.test.ts :: statementContests: the confident readers of one ink three readers reading the same value are one reading, not a contest and not three witnesses",
-   "packages/reconstruction/test/statement-contest.test.ts :: statementContests: the confident readers of one ink the external reading counts only when the ensemble found it corroborating: CONTESTS with the external as rival, LEADS, AGREES",
+   "packages/reconstruction/test/statement-contest.test.ts :: statementContests: the confident readers of one ink the external reading counts only when the ensemble found it corroborating: AGREES, LEADS, CONTESTS with the external as rival",
+   "packages/reconstruction/test/statement-contest.test.ts :: statementContests: the confident readers of one ink a LEADS record over an unconfident lattice gives the external reading only: the lattice’s own class decides, not the ensemble’s",
    "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser without the external reading the same misreads accuse exactly as 1.4.0 did: no value is conjured",
-   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser two disagreeing dimension lines whose readers agree are not doubted: the conflict is 1.4.0s"
+   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser two disagreeing dimension lines whose readers agree are not doubted: the conflict is 1.4.0’s"
   ]
  },
  {
   "id": "X5",
   "what": "promote, not withhold: the accuser's side reads a contested statement as ANY of its readings (doubt helps the accuser)",
-  "must": "/monotone|accuse nothing/",
+  "must": "/monotone|accuse nothing|clause/",
   "status": "KILLED",
   "failed": [
-   "packages/reconstruction/test/statement-contest.test.ts :: the doubt policy is monotone on 2000 generated plans, every trigger raised under doubt is raised as printed, and the registration is never refuted more"
+   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser clause 2 alone: a rival is spared by a contested statement only if every reading fits it",
+   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser clause 3 alone: a contested statement joins an OUTER_TOTALS accusation only if every reading fits the accused scale",
+   "packages/reconstruction/test/statement-contest.test.ts :: the doubt policy is monotone against plan resolver 1.4.0 itself on 2000 generated plans: as printed is 1.4.0; under doubt no trigger 1.4.0 lacks and no larger refuted share; the withdrawal is reached"
   ]
  },
  {
   "id": "X6",
   "what": "the published footprint decides whether the drawing is accused (a figure present silences the conflict)",
-  "must": "/published figure|never chooses|does not read the published/",
+  "must": "/published figure|never chooses/",
   "status": "KILLED",
   "failed": [
    "packages/reconstruction/test/source-conflict.test.ts :: the published figure never chooses among the scales the drawing states sweeping the figure across every reading the drawing states builds one scale or none"
@@ -62,11 +77,11 @@
  {
   "id": "X7",
   "what": "trust missing data: a statement with no lattice (a missing reader) counts as contested",
-  "must": "/no value is conjured|1\\.4\\.0s|another copy/",
+  "must": "/no value is conjured|1\\.4\\.0’s|another copy|named once|withdrawn accusation is named/",
   "status": "KILLED",
   "failed": [
    "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser a contest between readings that fit the same scale changes nothing: a correct accusation stands (the 1600/1601 pattern)",
-   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser two disagreeing dimension lines whose readers agree are not doubted: the conflict is 1.4.0s"
+   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser two disagreeing dimension lines whose readers agree are not doubted: the conflict is 1.4.0’s"
   ]
  },
  {
@@ -75,7 +90,116 @@
   "must": "/corroborating/",
   "status": "KILLED",
   "failed": [
-   "packages/reconstruction/test/statement-contest.test.ts :: statementContests: the confident readers of one ink the external reading counts only when the ensemble found it corroborating: CONTESTS with the external as rival, LEADS, AGREES"
+   "packages/reconstruction/test/statement-contest.test.ts :: statementContests: the confident readers of one ink the external reading counts only when the ensemble found it corroborating: AGREES, LEADS, CONTESTS with the external as rival"
+  ]
+ },
+ {
+  "id": "X9",
+  "what": "clause 1 off: the registration is refuted by a contested statement as printed",
+  "must": "/clause 1/",
+  "status": "KILLED",
+  "failed": [
+   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser clause 1 alone: the registration is refuted by a contested statement only if none of its readings fits it",
+   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser clause 1, exactly: one contested statement whose external reading fits lowers the registration’s refuted share by its own length"
+  ]
+ },
+ {
+  "id": "X10",
+  "what": "clause 2 off: an offered rival is spared by a contested statement as printed",
+  "must": "/clause 2/",
+  "status": "KILLED",
+  "failed": [
+   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser clause 2 alone: a rival is spared by a contested statement only if every reading fits it"
+  ]
+ },
+ {
+  "id": "X11",
+  "what": "clause 3 off: a contested statement joins an OUTER_TOTALS accusation as printed",
+  "must": "/clause 3/",
+  "status": "KILLED",
+  "failed": [
+   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser clause 3 alone: a contested statement joins an OUTER_TOTALS accusation only if every reading fits the accused scale"
+  ]
+ },
+ {
+  "id": "X12",
+  "what": "clause 4 off: a contested statement defends the registration as printed",
+  "must": "/clause 4/",
+  "status": "KILLED",
+  "failed": [
+   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser clause 4 alone: a contested statement defends the registration if one reading fits it"
+  ]
+ },
+ {
+  "id": "X13",
+  "what": "count the same source twice: the lattice's confidence taken from the ensemble's decision class (a LEADS record's SUPPORTED makes the unconfident lattice a reader)",
+  "must": "/LEADS record over an unconfident lattice/",
+  "status": "KILLED",
+  "failed": [
+   "packages/reconstruction/test/statement-contest-emission.test.ts :: a withdrawn accusation through the production solver with the external readings, the accusation is withdrawn: no challenge, a SOURCE_CONFLICT_REVIEW naming the readers",
+   "packages/reconstruction/test/statement-contest.test.ts :: statementContests: the confident readers of one ink the external reading counts only when the ensemble found it corroborating: AGREES, LEADS, CONTESTS with the external as rival",
+   "packages/reconstruction/test/statement-contest.test.ts :: statementContests: the confident readers of one ink a LEADS record over an unconfident lattice gives the external reading only: the lattice’s own class decides, not the ensemble’s",
+   "packages/reconstruction/test/statement-contest.test.ts :: a withdrawn accusation is named, with the readers it turned on the record names the withdrawn triggers, their reasons only, and every contested statement whose verdict the doubt changed"
+  ]
+ },
+ {
+  "id": "X14",
+  "what": "a statement carried by two segments is named twice in a withdrawal",
+  "must": "/named once/",
+  "status": "KILLED",
+  "failed": [
+   "packages/reconstruction/test/statement-contest.test.ts :: a withdrawn accusation is named, with the readers it turned on one statement carried by two segments is named once"
+  ]
+ },
+ {
+  "id": "X15",
+  "what": "a NOT_COMPARABLE external reading counts as corroborating",
+  "must": "/corroborating/",
+  "status": "KILLED",
+  "failed": [
+   "packages/reconstruction/test/statement-contest.test.ts :: statementContests: the confident readers of one ink the external reading counts only when the ensemble found it corroborating: AGREES, LEADS, CONTESTS with the external as rival"
+  ]
+ },
+ {
+  "id": "X16",
+  "what": "a duplicated crop joins the first lattice record instead of the sealed later one",
+  "must": "/duplicated crop/",
+  "status": "KILLED",
+  "failed": [
+   "packages/reconstruction/test/statement-contest.test.ts :: statementContests: the confident readers of one ink a duplicated crop (two lattice records for one ink) is joined as sealed: the later record"
+  ]
+ },
+ {
+  "id": "X17",
+  "what": "a full withdrawal is not recorded (only a partial one is): the doubt becomes silent",
+  "must": "/SOURCE_CONFLICT_REVIEW|AMBIGUOUS gap|accusation is withdrawn/",
+  "status": "KILLED",
+  "failed": [
+   "packages/reconstruction/test/statement-contest-emission.test.ts :: a withdrawn accusation through the production solver with the external readings, the accusation is withdrawn: no challenge, a SOURCE_CONFLICT_REVIEW naming the readers",
+   "packages/reconstruction/test/statement-contest-emission.test.ts :: a withdrawn accusation through the production solver the withdrawal is carried in the result as an AMBIGUOUS gap, not only in the trace"
+  ]
+ },
+ {
+  "id": "X18",
+  "what": "change a protected open side: every wide-gap interval is decided an opening in its wall (open sides, carports, loggias closed)",
+  "must": "/./",
+  "status": "KILLED",
+  "failed": [
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N §21 — recessed entrance beside a garage: two mouths of one body 1–2. recess + separator + garage door drawn: the recess stays a recess, the garage and the hall behind the entrance are built (every orientation)",
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N §21 — recessed entrance beside a garage: two mouths of one body the garage door blank: the garage is not fabricated — open in the first reading — while the recess and the hall stand",
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N §21 — recessed entrance beside a garage: two mouths of one body 3 + 17. recess + double garage (5 m door): a 8.6 m parent, wider than any opening, cut into mouths each within reach",
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N §21 — recessed entrance beside a garage: two mouths of one body 4. recess + a glazed window: the window is an opening in its own wall, the recess open",
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N §16 — each interval is weighed against its own pocket an undrawn mouth into the house beside the recess: the hall behind it is the interior, so its own width shuts it — the merged span would not",
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N §21 — separators: structural ink only 19. a dimension line, a leader and hatching across the span make no separator",
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N §21 — open sides stay open 7. a genuine carport beside a recessed entrance stays outside",
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N §21 — open sides stay open 8. an open porch beside a garage — its roof on posts standing in front of the facade: the porch stays open, the garage built",
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N §21 — open sides stay open 9. a loggia beside a large glazed opening: the loggia open, the glazing an opening",
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N §21 — recesses need the drawing to make them one 18. a set-back door callout near the recess mouth does not shut the recess, and does not cross the separator to the garage",
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N §19 — an adopted outline keeps the box reading's compound spans on the record the plan digest carries it as the BOX reading, each interval with its decision and the cells behind its mouth",
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N council — what a back wall, a callout, a pattern and a sibling may not do A1/B2. a step line, or a flight of them, in front of the set-back wall is not the set-back wall: the recess keeps its depth, nothing is built in it",
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N council — what a back wall, a callout, a pattern and a sibling may not do B3. a paving pattern across a blank garage mouth is no door and no set-back wall: the interval is not shut by it",
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N council — what a back wall, a callout, a pattern and a sibling may not do A2. two undrawn mouths side by side: the hall behind one is shut by its own pocket, the shallow bay beside it is not shut by the hall's",
+   "packages/reconstruction/test/compound-facade.test.ts :: 005N council D1 — mouths side by side into one space are weighed together a shared space behind them no bigger than their joint 8 m allows a pocket stays open"
   ]
  }
 ]

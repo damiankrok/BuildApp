@@ -24,6 +24,8 @@ const work = resolve(arg('work', '/home/user/work005p'))
 const label = arg('label', 'M0')
 const views = arg('policies', '')
 const frozen = process.argv.includes('--frozen')
+// --metrics-dir <dir>: the case's metric evidence is <dir>/<case>.json instead of the sealed file (strip-external control)
+const metricsDir = arg('metrics-dir', '')
 const cases = JSON.parse(readFileSync(join(REPO, 'research/analyzer-005o/cases.json'), 'utf8')).cases
 const only = arg('cases', '')
 const todo = cases.filter((c) => !only || only.split(',').includes(c.case))
@@ -59,7 +61,7 @@ const runOne = (c) =>
     const out = join(work, 'runs', label, c.case)
     rmSync(out, { recursive: true, force: true })
     mkdirSync(out, { recursive: true })
-    const a = ['vite-node', ...(frozen ? [] : ['--config', join(work, 'harness/vite.config.mjs')]), 'packages/analysis-service/scripts/second-house.ts', '--', '--package', c.package, '--graph', c.graph, '--metrics', c.metrics, '--cache', c.cache, '--out', out]
+    const a = ['vite-node', ...(frozen ? [] : ['--config', join(work, 'harness/vite.config.mjs')]), 'packages/analysis-service/scripts/second-house.ts', '--', '--package', c.package, '--graph', c.graph, '--metrics', metricsDir ? join(metricsDir, `${c.case}.json`) : c.metrics, '--cache', c.cache, '--out', out]
     if (c.dropFrames?.length) a.push('--drop-frames', c.dropFrames.join(','))
     const view = views ? join(views, `${c.case}.json`) : ''
     const env = { ...process.env, OFFLINE: '1', ...(view && existsSync(view) ? { AS_PRINTED_POLICY_005P: view } : {}) }

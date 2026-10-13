@@ -1,0 +1,44 @@
+# 005P review round 1 — dispositions
+
+Reviewed commit `f34087d`. Five independent read-only reviewers (A correctness, B safety/authority, C tests/mutations,
+D runtime/packaging, E claims vs evidence), and two adversarial verifiers per P0/P1 finding. Raw findings:
+`round-1-findings.json`. **0 P0. 1 P1 as filed (E1), downgraded to P2 by both verifiers. 15 P2, 11 P3.** Fixes landed
+in `02286f4` (code and tests) and in the research/report commits after it.
+
+Independent confirmations from round 1 (not findings):
+- A and C each ran the **actual 5906afa** `sourceConflictOf` against 1.5.0. A: 9 000 random plans (seeds 7, 12345); C: the
+  2000-plan generator. **0 triggers 1.5.0 raises that 1.4.0 does not; registrationRefuted never larger.**
+- E recomputed from the replays (not from the matrix): N1/PROD change decisions on exactly glogownikach and
+  rarytasy-eoze; N1-noext = P0 on 44/44 bytes; P3 = 005O M1 on 44/44 bytes; N1 = N1-rep and PROD = PROD-rep (diff -r).
+- D: ~0.25 ms per `statementsOn` call on the largest cases; byte-identical results under Node 18.20.4 and Node 22; bundles
+  into apps/local-analyzer; no test or app pins resolver 1.4.0.
+
+| id | sev | finding (short) | disposition |
+| --- | --- | --- | --- |
+| A1 | P2 | a withdrawal's record can name no contested statement (defenders, T1 on metric offers) | **FIXED** `02286f4`: `doubted` = every contested statement whose verdict the doubt changed (against the registration, or against a withdrawn charge's scale); test "clause 4 alone" asserts the defenders are named |
+| A2 | P2 | subset of triggers ≠ no-less-cautious outcome: a withdrawal drops the 1.4.0 AMBIGUOUS gap / VERIFIED mode | **FIXED in part** `02286f4`: a withdrawal now carries an AMBIGUOUS gap in the result (`the scale of the base plan (an accusation withdrawn)`), asserted end to end. **Stated in the report:** with the accusation withdrawn, a later challenge (if the first reading needs one anyway) scores the figure as in a no-conflict run (SCORED, not VERIFIED); the claim is "no new accusation", not "no less cautious path" |
+| A3 | P3 | withdrawn record mixes reasons/ids of triggers that still stand | **FIXED**: per-trigger charges; test "a partial withdrawal names only the withdrawn triggers' reasons" over every partial case of the seeded plans |
+| A4 | P3 | solver version stamp does not record the 1.5.0 rule | **NOT CHANGED**, reason: the stamp is added only when a resolution exists (pre-existing rule); widening it changes every known-good challenge row's model bytes. The resolver version is recorded in the withdrawal's trace record and in its gap reason |
+| B1 | P2 | an external reading can be the only defence of a wrong registration and withdraw a correct accusation (constructed) | **RECORDED LIMITATION**: a property of the preregistered design (clauses 1 and 4), not a code defect; changing the rule after the results would be a new, unregistered variant. `hypotheses.md` H2 corrected ("adds no support" was too strong). 0 occurrences on the 44 rows. Next-stage candidate: no registration-side benefit when the fitting reader is the value the registration's own solution adopted |
+| B2 | P2 | clause 2 can withdraw T1 when every reading refutes the registration | **RECORDED LIMITATION** (design); synthetic stress 59/1212 withdrawals, 0 on real rows; fixture "clause 2 alone" now documents the behaviour exactly |
+| B3 | P2 | withdrawals untraceable (T1 metric offers have no ids; defenders unnamed; detail text overclaims) | **FIXED** with A1; detail text now says "statements it turned on" |
+| B4 | P2 | 'TOKEN' for READ is the evidence value, often the ensemble's reading | **FIXED (naming)**: reader `AS_PRINTED`, documented; behaviour unchanged (the contest definition is the preregistered one). **Stated in the report:** the strip-external control leaves external-derived READ values in place (pre-existing upstream promotion) |
+| B5 | P3 | withdrawal only in the trace | **FIXED**: also an AMBIGUOUS gap in the result's `unresolved` (what the owner sees); not added to the plan digest |
+| B6 | P3 | withdrawnWhy mixes standing reasons; truncation without counts | **FIXED**: per-trigger; `withdrawnEvidenceCount`, `doubtedCount` |
+| B7 | P3 | challenge record mixes the doubt-policy T1 share with as-printed ranking shares | **DOCUMENTED** in the report (the conflict's `registrationRefuted` is under doubt; ranking shares are as printed); not renamed, to keep known-good records stable |
+| C1 | P2 | no clause is pinned on its own | **FIXED**: one fixture per clause + an exact refuted-share assertion; mutants X9–X12 (each clause off) are killed |
+| C2 | P2 | the property test's oracle was 1.5.0's own as-printed mode | **FIXED**: frozen oracle from the start revision's own `sourceConflictOf` (`conflict-oracle.ts`, 2000 plans incl. metric-solution plans, hash-locked) |
+| C3 | P2 | fixture ensembles unrealistic; ensemble-class leakage mutant survives | **FIXED**: fixtures shaped as `ensembleOf` seals them; mutant X13 killed |
+| C4 | P2 | missing/vacuous adversarial fixtures | **FIXED**: duplicated crop, copied statement id, NO_VALUE/NOT_COMPARABLE, orientation join (positive and negative), a coordinate mirror, metric-solution rivals; figure independence covered by the existing figure sweep (and mutant X6). **Not fixtured:** an unscaled frame (`sourceConflictReviewFor` returns `{ conflict: null, withdrawn: null }` without a PLAN_XZ registration — by code reading only), and a registration anchored on the contested reading (B1, documented as a limitation) |
+| C5 | P2 | no behavioural test of the withdrawal | **FIXED**: `statement-contest-emission.test.ts` drives `reconstructV2`: 1.4.0 behaviour without externals (KEPT + gap), 1.5.0 withdrawal (no challenge, review trace, AMBIGUOUS gap), same model; mutant X17 (gate the record on a standing conflict) killed |
+| C6 | P3 | mutation list misses open side / weak kills | **FIXED**: X18 protected open side (killed by the open-side suites; its expectation is "any failure in those suites", stated as such); X7 counted as a record-level kill; MN (widened T3 seeds) argued EQUIVALENT: a new seed scale can only arise within tolerance of an as-printed seed, since every contested accuser must fit the scale with all its readings including the as-printed one |
+| D1 | P2 | completion by withdrawal recorded only in the trace; stamp looks 1.4.0 | **FIXED in part** (gap in the result, versions in the record); stamp: see A4 |
+| D2 | P3 | replay wall times are no perf comparison | **ACCEPTED**: Phase D measures interleaved P0/1.5.0 on an idle machine; the micro-benchmark is cited |
+| D3 | P3 | STATEMENT_CONTEST_VERSION never recorded | **FIXED**: in the withdrawal record and with `conflictDoubted` |
+| D4 | P3 | duplicate lattice key: later wins silently | **FIXED (documented + tested)**: the later record, as sealed and as the validated research join; 0 duplicates in the 44 cases |
+| E1 | P1→P2 | G6 passed without reporting Głogowniki's artifact terraces and SOURCE_EXACT inner-face ring | **FIXED**: `gates.py` G6 now lists terraces and rings of every newly completed row; the report states that the completed Głogowniki model ships three PAVED "recess" terraces that are the lost exterior wall strips and a ring labelled SOURCE_EXACT whose 8.70 m is the inner-face 870 (first-bad ledger), and that the row remains ALGORITHMIC_FAIL. The completion also carries the new AMBIGUOUS scale gap. The owner is told in the handoff |
+| E2 | P2 | the P1/eoze NOT_SOUND text attributed the 82 % to X; it is Y, a true accusation | **FIXED**: verdict rewritten (true accusation on Y; judged not sound only for resting on one statement after deleting an irrelevant contest, and for P1's mixed definitions); the report states the selection does not depend on it (rules 2 and 3) |
+| E3 | P2 | gates.py written after the runs; G5 asserted, G6 weak, G7 not bytes, None counted as pass | **FIXED**: G5 judged from refusal messages, G6 as preregistered, G7 bytes, unevaluated ≠ pass; the report says gates.py was written after the replays and lists which verdicts rest on the written soundness judgement |
+| E4 | P2 | the "glogownikach only" prediction failed and was not recorded as failed | **FIXED**: predictions table in the report marks it FAILED (benign) with the mechanism (a clause-1 refutation by a non-accuser statement) |
+| E5 | P3 | strip-external control not run on production | **FIXED**: `PROD-noext` replay of all 44 cases on stripped evidence (`strip_external.py`) |
+| E6 | P3 | truth used inside G3 verdicts | **FIXED**: verdicts argued from code and evidence; transcriptions moved to a labelled corroborating note |

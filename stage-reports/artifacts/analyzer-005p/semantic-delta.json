@@ -28,6 +28,7 @@
        "sourceConflict": "OUTER_TOTALS"
       }
      },
+     "failureMessage": null,
      "frame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
      "modelHash": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
      "outcome": "COMPLETED",
@@ -62,6 +63,7 @@
        "sourceConflict": "OUTER_TOTALS"
       }
      },
+     "failureMessage": null,
      "frame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
      "modelHash": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
      "outcome": "COMPLETED",
@@ -106,6 +108,7 @@
        "sourceConflict": "OUTER_TOTALS"
       }
      },
+     "failureMessage": "SOURCE_CONFLICT: the drawing contradicts the scale the plan was registered at (2 long readings as printed on both axes agree on 2.432039 cm/px (501/206 px, 810/333 px)). Read at copy dimensioned 0cb0a5c1d9, chain extent, scale 2.432039 cm/px, largest-first tiling, sides as gridded the plan is better supported by the drawing itself (56% of the stated chain length contradicted, against 79%), but the",
      "frame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
      "modelHash": null,
      "outcome": "FAILED",
@@ -133,6 +136,7 @@
      "code": null,
      "conflictTriggers": [],
      "decisionPath": {},
+     "failureMessage": null,
      "frame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
      "modelHash": "b7c86aac3af74dac994456f545ba0b8073300445ca1675588e46b0e0ccb93ed6",
      "outcome": "COMPLETED",
@@ -192,6 +196,7 @@
        "sourceConflict": "OUTER_TOTALS"
       }
      },
+     "failureMessage": null,
      "frame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
      "modelHash": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
      "outcome": "COMPLETED",
@@ -226,6 +231,7 @@
        "sourceConflict": "AS_READ_REFUTATION"
       }
      },
+     "failureMessage": null,
      "frame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
      "modelHash": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
      "outcome": "COMPLETED",
@@ -270,6 +276,7 @@
        "sourceConflict": "OUTER_TOTALS"
       }
      },
+     "failureMessage": "SOURCE_CONFLICT: the drawing contradicts the scale the plan was registered at (2 long readings as printed on both axes agree on 2.432039 cm/px (501/206 px, 810/333 px)). Read at copy dimensioned 0cb0a5c1d9, chain extent, scale 2.432039 cm/px, largest-first tiling, sides as gridded the plan is better supported by the drawing itself (56% of the stated chain length contradicted, against 79%), but the",
      "frame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
      "modelHash": null,
      "outcome": "FAILED",
@@ -297,6 +304,7 @@
      "code": null,
      "conflictTriggers": [],
      "decisionPath": {},
+     "failureMessage": null,
      "frame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
      "modelHash": "b7c86aac3af74dac994456f545ba0b8073300445ca1675588e46b0e0ccb93ed6",
      "outcome": "COMPLETED",
@@ -349,6 +357,7 @@
        "reading1": "copy area_table 4813950087, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 191.0 m\u00b2 (-11.9% of 216.76), NEAR, corroborated by ISOTROPY"
       }
      },
+     "failureMessage": null,
      "frame": "frame-asset-rzut-cafd34a77a-4813950087",
      "modelHash": "df2aa66c8591107a1ff3608d02164ad80f4a7609c963915cb17fe7312e64553f",
      "outcome": "COMPLETED",
@@ -388,6 +397,7 @@
        "reading1": "copy dimensioned 19f8c2fa6e, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 186.9 m\u00b2 (-13.8% of 216.76), NEAR, corroborated by ISOTROPY"
       }
      },
+     "failureMessage": null,
      "frame": "frame-asset-gotowy-projekt-dom-pod-jarzabem-15-g-rzut-19f8c2fa6e",
      "modelHash": "e980b0bac094241786b3d1fec4cb57f81b0f93b989bf75ed15e4d25085520090",
      "outcome": "COMPLETED",
@@ -441,6 +451,7 @@
        "sourceConflict": "OUTER_TOTALS"
       }
      },
+     "failureMessage": null,
      "frame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
      "modelHash": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
      "outcome": "COMPLETED",
@@ -475,6 +486,7 @@
        "sourceConflict": "AS_READ_REFUTATION"
       }
      },
+     "failureMessage": null,
      "frame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
      "modelHash": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
      "outcome": "COMPLETED",
@@ -514,6 +526,7 @@
        "reading1": "copy area_table 0f7c5bafc8, chain extent, scale 2.285714 cm/px, largest-first tiling, outer faces: 3 bodies, 36.6 m\u00b2 (-55.8% of 82.81), WRONG"
       }
      },
+     "failureMessage": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 2.444658 cm/px (1 independent, plausible); 2.290019 cm/px (1 independent, plausible); 4.48062 cm/px (1 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimensions that set",
      "frame": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
      "modelHash": null,
      "outcome": "FAILED",
@@ -538,6 +551,7 @@
        "reading1": "copy area_table 0f7c5bafc8, chain extent, registered scale, largest-first tiling, sides as gridded: 3 bodies, 59.4 m\u00b2 (-28.3% of 82.81), WRONG"
       }
      },
+     "failureMessage": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 2.444658 cm/px (1 independent, plausible); 2.290019 cm/px (1 independent, plausible); 4.48062 cm/px (1 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimensions that set",
      "frame": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
      "modelHash": null,
      "outcome": "FAILED",
@@ -573,6 +587,7 @@
        "reading1": "copy dimensioned 07d4ca005c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 92.3 m\u00b2 (-0.2% of 92.48), UNKNOWN (the figure is spent)"
       }
      },
+     "failureMessage": "the lowest storey covers 49.20 m\u00b2 against the 92.48 m\u00b2 the publisher prints \u2014 46.8% apart: the decomposition is not of this building 71 other readings of the plan were weighed and none holds: the best, copy dimensioned 07d4ca005c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 92.3 m\u00b2 (-0.2% of 92.48), UNKNOWN (the figure is spent), has only the published footprint",
      "frame": "frame-asset-rzut-fa38f527ea-8e7eb2ad66",
      "modelHash": null,
      "outcome": "FAILED",
@@ -593,6 +608,7 @@
        "reading1": "copy dimensioned 07d4ca005c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 92.3 m\u00b2 (-0.2% of 92.48), UNKNOWN (the figure is spent)"
       }
      },
+     "failureMessage": "the lowest storey covers 49.20 m\u00b2 against the 92.48 m\u00b2 the publisher prints \u2014 46.8% apart: the decomposition is not of this building 71 other readings of the plan were weighed and none holds: the best, copy dimensioned 07d4ca005c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 92.3 m\u00b2 (-0.2% of 92.48), UNKNOWN (the figure is spent), has only the published footprint",
      "frame": "frame-asset-rzut-fa38f527ea-8e7eb2ad66",
      "modelHash": null,
      "outcome": "FAILED",
@@ -624,6 +640,7 @@
        "reading1": "copy area_table da7064452b, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 104.1 m\u00b2 (-6.9% of 111.79), UNKNOWN (the figure is spent), corroborated by ISOTROPY"
       }
      },
+     "failureMessage": "the lowest storey covers 54.67 m\u00b2 against the 111.79 m\u00b2 the publisher prints \u2014 51.1% apart: the decomposition is not of this building 67 other readings of the plan were weighed and none holds: the best, copy area_table da7064452b, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 104.1 m\u00b2 (-6.9% of 111.79), UNKNOWN (the figure is spent), corroborated by ISOTROPY, h",
      "frame": "frame-asset-rzut-4f91f26bdf-589c8abdb3",
      "modelHash": null,
      "outcome": "FAILED",
@@ -650,6 +667,7 @@
        "reading1": "copy area_table da7064452b, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 104.1 m\u00b2 (-6.9% of 111.79), UNKNOWN (the figure is spent), corroborated by ISOTROPY"
       }
      },
+     "failureMessage": "the lowest storey covers 54.67 m\u00b2 against the 111.79 m\u00b2 the publisher prints \u2014 51.1% apart: the decomposition is not of this building 67 other readings of the plan were weighed and none holds: the best, copy area_table da7064452b, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 104.1 m\u00b2 (-6.9% of 111.79), UNKNOWN (the figure is spent), corroborated by ISOTROPY, h",
      "frame": "frame-asset-rzut-4f91f26bdf-589c8abdb3",
      "modelHash": null,
      "outcome": "FAILED",
@@ -692,6 +710,7 @@
        "sourceConflict": "OUTER_TOTALS"
       }
      },
+     "failureMessage": "SOURCE_CONFLICT: the drawing contradicts the scale the plan was registered at (2 long readings as printed on both axes agree on 2.432039 cm/px (501/206 px, 810/333 px)). Read at copy dimensioned 0cb0a5c1d9, chain extent, scale 2.432039 cm/px, largest-first tiling, sides as gridded the plan is better supported by the drawing itself (56% of the stated chain length contradicted, against 79%), but the",
      "frame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
      "modelHash": null,
      "outcome": "FAILED",
@@ -719,6 +738,7 @@
      "code": null,
      "conflictTriggers": [],
      "decisionPath": {},
+     "failureMessage": null,
      "frame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
      "modelHash": "b7c86aac3af74dac994456f545ba0b8073300445ca1675588e46b0e0ccb93ed6",
      "outcome": "COMPLETED",
@@ -768,6 +788,7 @@
        "reading1": "copy dimensioned 4d37f1b2ba, chain extent, registered scale, largest-first tiling, outer faces: 7 bodies, 103.6 m\u00b2 (-58.5% of 249.42), WRONG, corroborated by ISOTROPY"
       }
      },
+     "failureMessage": "the lowest storey covers 96.93 m\u00b2 against the 249.42 m\u00b2 the publisher prints \u2014 61.1% apart: the decomposition is not of this building; 63 other readings of the plan were weighed and none survived to a full composition",
      "frame": "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
      "modelHash": null,
      "outcome": "FAILED",
@@ -806,6 +827,7 @@
        "reading1": "copy area_table 920547f86d, chain extent, registered scale, largest-first tiling, sides as gridded: 3 bodies, 101.5 m\u00b2 (-59.3% of 249.42), WRONG, corroborated by ISOTROPY"
       }
      },
+     "failureMessage": "the lowest storey covers 96.93 m\u00b2 against the 249.42 m\u00b2 the publisher prints \u2014 61.1% apart: the decomposition is not of this building; 63 other readings of the plan were weighed and none survived to a full composition",
      "frame": "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
      "modelHash": null,
      "outcome": "FAILED",
@@ -858,6 +880,7 @@
        "reading1": "copy area_table 4813950087, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 191.0 m\u00b2 (-11.9% of 216.76), NEAR, corroborated by ISOTROPY"
       }
      },
+     "failureMessage": null,
      "frame": "frame-asset-rzut-cafd34a77a-4813950087",
      "modelHash": "df2aa66c8591107a1ff3608d02164ad80f4a7609c963915cb17fe7312e64553f",
      "outcome": "COMPLETED",
@@ -897,6 +920,7 @@
        "reading1": "copy dimensioned 19f8c2fa6e, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 186.9 m\u00b2 (-13.8% of 216.76), NEAR, corroborated by ISOTROPY"
       }
      },
+     "failureMessage": null,
      "frame": "frame-asset-gotowy-projekt-dom-pod-jarzabem-15-g-rzut-19f8c2fa6e",
      "modelHash": "e980b0bac094241786b3d1fec4cb57f81b0f93b989bf75ed15e4d25085520090",
      "outcome": "COMPLETED",
@@ -950,6 +974,7 @@
        "sourceConflict": "OUTER_TOTALS"
       }
      },
+     "failureMessage": null,
      "frame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
      "modelHash": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
      "outcome": "COMPLETED",
@@ -984,6 +1009,7 @@
        "sourceConflict": "AS_READ_REFUTATION"
       }
      },
+     "failureMessage": null,
      "frame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
      "modelHash": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
      "outcome": "COMPLETED",
@@ -1023,6 +1049,7 @@
        "reading1": "copy area_table 0f7c5bafc8, chain extent, scale 2.285714 cm/px, largest-first tiling, outer faces: 3 bodies, 36.6 m\u00b2 (-55.8% of 82.81), WRONG"
       }
      },
+     "failureMessage": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 2.444658 cm/px (1 independent, plausible); 2.290019 cm/px (1 independent, plausible); 4.48062 cm/px (1 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimensions that set",
      "frame": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
      "modelHash": null,
      "outcome": "FAILED",
@@ -1047,6 +1074,7 @@
        "reading1": "copy area_table 0f7c5bafc8, chain extent, registered scale, largest-first tiling, sides as gridded: 3 bodies, 59.4 m\u00b2 (-28.3% of 82.81), WRONG"
       }
      },
+     "failureMessage": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 2.444658 cm/px (1 independent, plausible); 2.290019 cm/px (1 independent, plausible); 4.48062 cm/px (1 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimensions that set",
      "frame": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
      "modelHash": null,
      "outcome": "FAILED",
@@ -1082,6 +1110,7 @@
        "reading1": "copy dimensioned 07d4ca005c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 92.3 m\u00b2 (-0.2% of 92.48), UNKNOWN (the figure is spent)"
       }
      },
+     "failureMessage": "the lowest storey covers 49.20 m\u00b2 against the 92.48 m\u00b2 the publisher prints \u2014 46.8% apart: the decomposition is not of this building 71 other readings of the plan were weighed and none holds: the best, copy dimensioned 07d4ca005c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 92.3 m\u00b2 (-0.2% of 92.48), UNKNOWN (the figure is spent), has only the published footprint",
      "frame": "frame-asset-rzut-fa38f527ea-8e7eb2ad66",
      "modelHash": null,
      "outcome": "FAILED",
@@ -1102,6 +1131,7 @@
        "reading1": "copy dimensioned 07d4ca005c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 92.3 m\u00b2 (-0.2% of 92.48), UNKNOWN (the figure is spent)"
       }
      },
+     "failureMessage": "the lowest storey covers 49.20 m\u00b2 against the 92.48 m\u00b2 the publisher prints \u2014 46.8% apart: the decomposition is not of this building 71 other readings of the plan were weighed and none holds: the best, copy dimensioned 07d4ca005c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 92.3 m\u00b2 (-0.2% of 92.48), UNKNOWN (the figure is spent), has only the published footprint",
      "frame": "frame-asset-rzut-fa38f527ea-8e7eb2ad66",
      "modelHash": null,
      "outcome": "FAILED",
@@ -1133,6 +1163,7 @@
        "reading1": "copy area_table da7064452b, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 104.1 m\u00b2 (-6.9% of 111.79), UNKNOWN (the figure is spent), corroborated by ISOTROPY"
       }
      },
+     "failureMessage": "the lowest storey covers 54.67 m\u00b2 against the 111.79 m\u00b2 the publisher prints \u2014 51.1% apart: the decomposition is not of this building 67 other readings of the plan were weighed and none holds: the best, copy area_table da7064452b, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 104.1 m\u00b2 (-6.9% of 111.79), UNKNOWN (the figure is spent), corroborated by ISOTROPY, h",
      "frame": "frame-asset-rzut-4f91f26bdf-589c8abdb3",
      "modelHash": null,
      "outcome": "FAILED",
@@ -1159,6 +1190,7 @@
        "reading1": "copy area_table da7064452b, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 104.1 m\u00b2 (-6.9% of 111.79), UNKNOWN (the figure is spent), corroborated by ISOTROPY"
       }
      },
+     "failureMessage": "the lowest storey covers 54.67 m\u00b2 against the 111.79 m\u00b2 the publisher prints \u2014 51.1% apart: the decomposition is not of this building 67 other readings of the plan were weighed and none holds: the best, copy area_table da7064452b, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 104.1 m\u00b2 (-6.9% of 111.79), UNKNOWN (the figure is spent), corroborated by ISOTROPY, h",
      "frame": "frame-asset-rzut-4f91f26bdf-589c8abdb3",
      "modelHash": null,
      "outcome": "FAILED",
@@ -1201,6 +1233,7 @@
        "sourceConflict": "OUTER_TOTALS"
       }
      },
+     "failureMessage": "SOURCE_CONFLICT: the drawing contradicts the scale the plan was registered at (2 long readings as printed on both axes agree on 2.432039 cm/px (501/206 px, 810/333 px)). Read at copy dimensioned 0cb0a5c1d9, chain extent, scale 2.432039 cm/px, largest-first tiling, sides as gridded the plan is better supported by the drawing itself (56% of the stated chain length contradicted, against 79%), but the",
      "frame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
      "modelHash": null,
      "outcome": "FAILED",
@@ -1228,6 +1261,7 @@
      "code": null,
      "conflictTriggers": [],
      "decisionPath": {},
+     "failureMessage": null,
      "frame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
      "modelHash": "b7c86aac3af74dac994456f545ba0b8073300445ca1675588e46b0e0ccb93ed6",
      "outcome": "COMPLETED",
@@ -1277,6 +1311,7 @@
        "reading1": "copy dimensioned 4d37f1b2ba, chain extent, registered scale, largest-first tiling, outer faces: 7 bodies, 103.6 m\u00b2 (-58.5% of 249.42), WRONG, corroborated by ISOTROPY"
       }
      },
+     "failureMessage": "the lowest storey covers 96.93 m\u00b2 against the 249.42 m\u00b2 the publisher prints \u2014 61.1% apart: the decomposition is not of this building; 63 other readings of the plan were weighed and none survived to a full composition",
      "frame": "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
      "modelHash": null,
      "outcome": "FAILED",
@@ -1315,6 +1350,7 @@
        "reading1": "copy area_table 920547f86d, chain extent, registered scale, largest-first tiling, sides as gridded: 3 bodies, 101.5 m\u00b2 (-59.3% of 249.42), WRONG, corroborated by ISOTROPY"
       }
      },
+     "failureMessage": "the lowest storey covers 96.93 m\u00b2 against the 249.42 m\u00b2 the publisher prints \u2014 61.1% apart: the decomposition is not of this building; 63 other readings of the plan were weighed and none survived to a full composition",
      "frame": "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
      "modelHash": null,
      "outcome": "FAILED",
