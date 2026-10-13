@@ -146,6 +146,16 @@ export function solutionOffering(scales: readonly number[]): FrameMetricSolution
   } as unknown as FrameMetricSolution
 }
 
+/**
+ * A solution whose selected scale rests on observations read from the given inks' lattices at the given values (the
+ * shape `solveFrameMetric` seals: `supportingObservationIds` → observations carrying `ocr.latticeId`).
+ */
+export function citing(m: MetricEvidenceSet, cites: ReadonlyArray<{ statement: number; valueCm: number }>): MetricEvidenceSet {
+  const observations = cites.map((c, i) => ({ id: `obs-cited-${i}`, frameId: FRAME, chainId: `chain-${c.statement}`, textRegionId: `region-${c.statement}`, orientation: 'HORIZONTAL', rawText: String(c.valueCm), valueCm: c.valueCm, axis: 'X', fromPx: 0, toPx: 100, spanPx: 100, impliedCmPerPx: c.valueCm / 100, ocrScore: 0.9, ocrConfidence: 0.9, leadingZero: false, independence: 'INDEPENDENT', status: 'ACCEPTED', ocr: { latticeId: `lat-${c.statement}`, rawTopText: String(c.valueCm), ocrClass: 'SUPPORTED', asReadP: 0.9, probabilityMargin: 0.5, asReadVariant: 'DEFAULT' } }))
+  const solution = { ...solutionOffering([]), relation: 'CONFIRMED', confidence: 'STRONG', supportingObservationIds: observations.map((o) => o.id) } as unknown as FrameMetricSolution
+  return { ...m, metricSolutions: [solution], dimensionObservations: observations as unknown as MetricEvidenceSet['dimensionObservations'] }
+}
+
 /** A small seeded generator (mulberry32): the same plans on every run and device. */
 export function rng(seed: number): () => number {
   let a = seed >>> 0

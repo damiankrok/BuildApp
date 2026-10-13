@@ -18,8 +18,8 @@ import { readFileSync } from 'node:fs'
 import { createHash } from 'node:crypto'
 import { describe, expect, it } from 'vitest'
 import type { MetricEvidenceSet } from '@buildapp/source-metrics'
-import { metricsAtScale, sourceConflictOf, sourceConflictReview, statementContests, withdrawnRecord } from '../src/index.js'
-import { FRAME, JUDGE, REG, generatePlans, metricsOfPlan, metricsWith, solutionOffering } from './contest-fixtures.js'
+import { metricsAtScale, sourceConflictAsPrinted, sourceConflictOf, sourceConflictReview, statementContests, withdrawnRecord } from '../src/index.js'
+import { FRAME, JUDGE, REG, citing, generatePlans, metricsOfPlan, metricsWith, solutionOffering } from './contest-fixtures.js'
 import type { Reading } from './contest-fixtures.js'
 import { WALL } from './plan.js'
 
@@ -138,7 +138,8 @@ describe('doubt never helps the accuser', () => {
     ]
     const m = metricsWith(readings)
     expect(conflictOf(metricsWith(readings, { stripExternal: true }))?.registrationRefuted).toBe(1)
-    expect(conflictOf(m)?.registrationRefuted).toBe(0.933333) // 700/750: the 50 px statement no longer refutes
+    expect(conflictOf(m)?.registrationRefuted).toBe(0.933333)
+    expect(conflictOf(m)?.shareMovedBy?.map((d) => d.evidenceId)).toEqual(['ev-2']) // the statement that moved it is named // 700/750: the 50 px statement no longer refutes
     expect(reviewOf(m).withdrawn).toBeNull() // the triggers stand; only the share moved
   })
 
@@ -168,6 +169,7 @@ describe('doubt never helps the accuser', () => {
     const r = reviewOf(m)
     expect(r.conflict).toBeNull()
     expect(r.withdrawn?.triggers).toEqual(['OUTER_TOTALS'])
+    expect(r.withdrawn?.doubted.map((d) => d.evidenceId)).toEqual(['ev-0', 'ev-1'])
   })
 
   it('clause 4 alone: a contested statement defends the registration if one reading fits it', () => {
@@ -222,10 +224,9 @@ describe('doubt never helps the accuser', () => {
     expect(conflictOf(metricsWith(plain))?.triggers).toContain('OUTER_TOTALS')
   })
 
-  it('the plan turned a quarter (axes swapped) or mirrored (spans laid from the far edge) gives the same answer', () => {
+  it('the plan turned a quarter (axes swapped) gives the same answer (a mirror changes no span length, which is all the test reads)', () => {
     const turned = misreadTotals().map((s) => ({ ...s, axis: s.axis === 'X' ? ('Y' as const) : ('X' as const) }))
-    const mirrored = misreadTotals().map((s) => ({ ...s, fromPx: (s.axis === 'X' ? JUDGE.x1 : JUDGE.y1) - 10 - s.px }))
-    for (const readings of [turned, mirrored]) {
+    for (const readings of [turned]) {
       expect(conflictOf(metricsWith(readings))).toBeNull()
       expect(reviewOf(metricsWith(readings)).withdrawn?.triggers).toEqual(['AS_READ_REFUTATION', 'OUTER_TOTALS'])
       expect(conflictOf(metricsWith(readings, { stripExternal: true }))?.triggers).toEqual(['AS_READ_REFUTATION', 'OUTER_TOTALS'])
@@ -237,7 +238,59 @@ describe('doubt never helps the accuser', () => {
   })
 })
 
+describe('N1a: a reading the registration’s own solution cites cannot vouch for it', () => {
+  // The mirror of glogownikach (review round 2, G2-1): the classic token is right (1350/300 px, 4.5 cm/px, like the
+  // uncontested X 1800/400 px), and the external reading 1500 — which the registered scale's own solution cites as a
+  // witness — is wrong. The registration may not clear itself with its own witness: the accusation stands, as in 1.4.0.
+  const mirror = (): Reading[] => [
+    { chain: 'cx', axis: 'X', px: 400, cm: 1800 },
+    { chain: 'cy', axis: 'Y', px: 300, cm: 1350, lattice: { cm: 1350, cls: 'AMBIGUOUS' }, ensemble: { decision: 'LEADS', external: 1500, rival: 'LATTICE' } },
+  ]
+
+  it('uncited, the doubt withdraws the accusation (N1)', () => {
+    expect(reviewOf(metricsWith(mirror())).withdrawn?.triggers).toContain('OUTER_TOTALS')
+  })
+
+  it('cited by the registration’s solution, the reading is set aside: the accusation stands, nothing is withdrawn', () => {
+    const m = citing(metricsWith(mirror()), [{ statement: 1, valueCm: 1500 }])
+    const r = reviewOf(m)
+    expect(r.conflict?.triggers).toContain('OUTER_TOTALS')
+    expect(r.withdrawn).toBeNull()
+    expect(r.conflict).toEqual(sourceConflictAsPrinted(m, FRAME, REG, JUDGE, WALL)) // exactly the 1.4.0 accusation
+  })
+
+  it('the glogownikach pattern: one accuser’s external reading cited (870), the other’s not (541) — still only one accuser, still withdrawn', () => {
+    const m = citing(metricsWith(misreadTotals()), [{ statement: 1, valueCm: 1500 }])
+    const r = reviewOf(m)
+    expect(r.conflict?.triggers ?? []).not.toContain('OUTER_TOTALS')
+    expect(r.withdrawn?.triggers).toContain('OUTER_TOTALS')
+    // ev-1's only rival reading is cited, so for the test it is uncontested and accuses: the withdrawal turned on ev-0 alone
+    expect(r.withdrawn?.doubted.map((d) => d.evidenceId)).toEqual(['ev-0'])
+  })
+
+  it('a citation of another value of the same ink does not set the reading aside', () => {
+    const m = citing(metricsWith(mirror()), [{ statement: 1, valueCm: 1350 }])
+    expect(reviewOf(m).withdrawn?.triggers).toContain('OUTER_TOTALS')
+  })
+})
+
 describe('a withdrawn accusation is named, with the readers it turned on', () => {
+  it('an OUTER_TOTALS withdrawal does not name a short contested statement, which that trigger never reads', () => {
+    // clause 3 withdraws T3; a short (60 px < 0.25 × 460) contested X statement flips its verdict against the registration,
+    // and T1 does not fire as printed (a metric solution offers no rival): it is not one of the statements T3 turned on
+    const m = metricsWith(
+      [
+        { chain: 'cx', axis: 'X', px: 400, cm: 1800, lattice: { cm: 1800 }, ensemble: { decision: 'CONTESTS', external: 1700, rival: 'EXTERNAL' } },
+        { chain: 'cy', axis: 'Y', px: 300, cm: 1350, lattice: { cm: 1350 }, ensemble: { decision: 'CONTESTS', external: 1275, rival: 'EXTERNAL' } },
+        { chain: 'cs', axis: 'X', px: 60, cm: 360, lattice: { cm: 360 }, ensemble: { decision: 'CONTESTS', external: 300, rival: 'EXTERNAL' } },
+      ],
+      { solution: solutionOffering([]) },
+    )
+    const r = reviewOf(m)
+    expect(r.withdrawn?.triggers).toEqual(['OUTER_TOTALS'])
+    expect(r.withdrawn?.doubted.map((d) => d.evidenceId)).toEqual(['ev-0', 'ev-1'])
+  })
+
   it('the record names the withdrawn triggers, their reasons only, and every contested statement whose verdict the doubt changed', () => {
     const r = reviewOf(metricsWith(misreadTotals()))
     expect(r.conflict).toBeNull()
@@ -351,6 +404,9 @@ describe('the doubt policy is monotone against plan resolver 1.4.0 itself', () =
       const old = oracle.results[n]
       const asPrinted = [...(r.conflict?.triggers ?? []), ...(r.withdrawn?.triggers ?? [])]
       expect(new Set(asPrinted), `${n}`).toEqual(new Set(old?.triggers ?? []))
+      // the as-printed test is 1.4.0's, object for object (triggers in order, reasons, ids, shares, rivals)
+      const printed = sourceConflictAsPrinted(metricsOfPlan(p), FRAME, REG, JUDGE, WALL)
+      expect(printed === null ? null : { triggers: printed.triggers, why: printed.why, evidenceIds: printed.evidenceIds, registrationRefuted: printed.registrationRefuted, alternatives: printed.alternatives }, `${n}`).toEqual(old)
       for (const t of r.conflict?.triggers ?? []) expect(old?.triggers ?? [], `${n}`).toContain(t)
       if (r.conflict && old) expect(r.conflict.registrationRefuted, `${n}`).toBeLessThanOrEqual(old.registrationRefuted)
       if (r.withdrawn) withdrawn += 1

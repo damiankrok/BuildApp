@@ -31,12 +31,18 @@ export const STATEMENT_CONTEST_VERSION = '1.0.0' as const
 export type ConfidentReader = 'AS_PRINTED' | 'LATTICE' | 'EXTERNAL'
 
 export type StatementContest = {
-  /** Each confident reader's value, in reader order; a reader that is absent or not confident is not listed. */
-  readings: Array<{ reader: ConfidentReader; valueCm: number }>
+  /**
+   * Each confident reader's value, in reader order; a reader that is absent or not confident is not listed. `cited`
+   * (set by the source-conflict test only, plan resolver 1.5.0 N1a) marks a reading the frame's metric solution cites as
+   * a witness of the registered scale: it may not vouch for that scale, so the conflict test sets it aside.
+   */
+  readings: Array<{ reader: ConfidentReader; valueCm: number; cited?: true }>
   /** The distinct confident values, ascending. */
   values: number[]
   /** Two or more distinct confident values. */
   contested: boolean
+  /** The id of the lattice record joined to the ink, if any: the key a metric observation of the same ink carries. */
+  latticeId?: string
 }
 
 type Token = MetricEvidenceSet['ocrTokens'][number]
@@ -75,6 +81,6 @@ export function statementContests(metrics: MetricEvidenceSet): (evidence: Metric
     const x = lattice ? externalValue(lattice) : undefined
     if (x !== undefined) readings.push({ reader: 'EXTERNAL', valueCm: x })
     const values = [...new Set(readings.map((r) => r.valueCm))].sort((a, b) => a - b)
-    return { readings, values, contested: values.length >= 2 }
+    return { readings, values, contested: values.length >= 2, ...(lattice ? { latticeId: lattice.id } : {}) }
   }
 }

@@ -285,7 +285,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     trace({ phase: 'REGISTRATION', substage: 'SOURCE_CONFLICT_REVIEW', status: 'PASSED', counts: record, detail: `an accusation of the registered scale was withdrawn because statements it turned on are contested by their own readers (${w.why})` })
     gap({
       what: 'the scale of the base plan (an accusation withdrawn)',
-      reason: `the drawing's readings as printed would accuse the registered scale (${w.why}); the statements that accusation turned on are contested by their own readers (${String(record.doubted) || 'none named'}), and plan resolver ${PLAN_RESOLVER_VERSION} does not let a reading in doubt accuse, so the scale stands without these statements confirming it`,
+      reason: `the drawing's readings as printed would accuse the registered scale (${w.why}); the statements that accusation turned on are contested by their own readers (${String(record.doubted) || 'none named'}), and plan resolver ${PLAN_RESOLVER_VERSION} does not let a reading in doubt accuse: these statements neither accuse the registered scale nor confirm it`,
       status: 'AMBIGUOUS',
       observationIds: [],
       evidenceIds: [...new Set([...w.evidenceIds, ...w.doubted.map((d) => d.evidenceId)])].sort(),

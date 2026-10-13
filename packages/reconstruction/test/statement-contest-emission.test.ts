@@ -10,7 +10,7 @@
  */
 import { describe, expect, it } from 'vitest'
 import type { DimensionChain, FrameMetricSolution, MetricEvidence, MetricEvidenceSet, NumericLatticeRecord, OcrToken } from '@buildapp/source-metrics'
-import { reconstructV2 } from '../src/index.js'
+import { ReconstructionFailure, reconstructV2 } from '../src/index.js'
 import type { SolverTraceEvent } from '../src/index.js'
 import { chain, graphOf, metricsOf, planFrame, registration, sheet, walls } from './plan.js'
 
@@ -85,6 +85,18 @@ function run(external: boolean) {
   return { result, trace }
 }
 
+/** The early path: a published footprint the first reading misses by more than 20 % refuses it, and the review runs there. */
+function runRefused(external: boolean) {
+  const trace: SolverTraceEvent[] = []
+  try {
+    const result = reconstructV2({ label: 'fixture', slug: 'fixture', sourcePackageId: 'src-test', sourcePackageHash: 'd'.repeat(64), graph: graphOf([frame]), metrics: metrics({ external }), raster: () => house(), publishedAreas: [{ key: 'footprint_area', label: 'footprint', unit: 'm2', value: 250 }], trace: (e) => trace.push(e) })
+    return { outcome: 'COMPLETED', code: '', modelOk: !!result.model, trace }
+  } catch (error) {
+    if (!(error instanceof ReconstructionFailure)) throw error
+    return { outcome: 'FAILED', code: error.code, modelOk: false, trace }
+  }
+}
+
 describe('a withdrawn accusation through the production solver', () => {
   const incumbent = run(false) // no external reading: every statement read as printed, as 1.4.0 read it
   const doubted = run(true)
@@ -113,5 +125,14 @@ describe('a withdrawn accusation through the production solver', () => {
   it('it decides nothing: the building is the same as the incumbent’s', () => {
     expect(doubted.result.model).toEqual(incumbent.result.model)
     expect(doubted.result.building).toEqual(incumbent.result.building)
+  })
+
+  it('on the early path (the published footprint refused the first reading) the withdrawal is recorded, and the run ends as the incumbent’s does', () => {
+    const old = runRefused(false)
+    const now = runRefused(true)
+    expect(old.trace.find((e) => e.substage === 'METRIC_CHALLENGE')?.counts).toMatchObject({ sourceConflict: 'OUTER_TOTALS' })
+    expect(now.trace.some((e) => e.substage === 'METRIC_CHALLENGE')).toBe(false)
+    expect(now.trace.find((e) => e.substage === 'SOURCE_CONFLICT_REVIEW')?.counts).toMatchObject({ withdrawnTriggers: 'OUTER_TOTALS', doubtedCount: 2 })
+    expect({ outcome: now.outcome, code: now.code }).toEqual({ outcome: old.outcome, code: old.code })
   })
 })

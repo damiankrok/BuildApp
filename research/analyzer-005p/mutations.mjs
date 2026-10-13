@@ -169,6 +169,22 @@ const MUTATIONS = [
     to: '    if (!review || !w || !review.conflict) return',
   },
   {
+    id: 'X19',
+    what: 'N1a off: a reading the registration\'s own solution cites may vouch for it again (the circular defence of review G2-1)',
+    must: /cited by the registration/,
+    file: RESOLUTION,
+    from: '  const supporting = new Set(solution?.supportingObservationIds ?? [])\n  if (supporting.size === 0) return statements',
+    to: '  const supporting = new Set<string>()\n  if (supporting.size === 0) return statements',
+  },
+  {
+    id: 'X20',
+    what: 'a withdrawal names every contested statement whose registration verdict flipped, whichever trigger was withdrawn (review F2-1)',
+    must: /never reads/,
+    file: RESOLUTION,
+    from: '(t3.length > 0 && long.has(s) && (regFlip(s) || scaleFlip(s, t3)))',
+    to: '(t3.length > 0 && (regFlip(s) || scaleFlip(s, t3)))',
+  },
+  {
     id: 'X18',
     what: 'change a protected open side: every wide-gap interval is decided an opening in its wall (open sides, carports, loggias closed)',
     must: /./,

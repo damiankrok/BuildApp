@@ -26,14 +26,14 @@ const COUNT = 2000
 
 const mod = (await import(pathToFileURL(join(old, 'packages/reconstruction/src/plan-resolution.ts')).href)) as {
   PLAN_RESOLVER_VERSION: string
-  sourceConflictOf: (...a: unknown[]) => { triggers: string[]; registrationRefuted: number } | null
+  sourceConflictOf: (...a: unknown[]) => { triggers: string[]; why: string; evidenceIds: string[]; registrationRefuted: number; alternatives: unknown[] } | null
 }
 if (mod.PLAN_RESOLVER_VERSION !== '1.4.0') throw new Error(`the oracle must be the incumbent 1.4.0, not ${mod.PLAN_RESOLVER_VERSION}`)
 const plans = generatePlans(SEED, COUNT)
 const plansSha256 = createHash('sha256').update(JSON.stringify(plans)).digest('hex')
 const results = plans.map((p) => {
   const c = mod.sourceConflictOf(metricsOfPlan(p), FRAME, REG, JUDGE, WALL)
-  return c ? { triggers: c.triggers, registrationRefuted: c.registrationRefuted } : null
+  return c ? { triggers: c.triggers, why: c.why, evidenceIds: c.evidenceIds, registrationRefuted: c.registrationRefuted, alternatives: c.alternatives } : null
 })
 mkdirSync(dirname(out), { recursive: true })
 writeFileSync(out, `${JSON.stringify({ oracle: 'plan resolver 1.4.0 sourceConflictOf (5906afa)', seed: SEED, count: COUNT, plansSha256, withConflict: results.filter(Boolean).length, results })}\n`)
