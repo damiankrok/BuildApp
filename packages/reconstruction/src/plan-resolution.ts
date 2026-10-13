@@ -83,7 +83,7 @@ import { composeStructuralLayout } from './structural.js'
 import type { StructuralPassOptions, StructuralPassResult } from './structural.js'
 import { groundStoreyOf, ringArea, ringBounds } from './structural-layout.js'
 import type { AlternativeGroup, LayoutConflict, LayoutGateReason } from './structural-layout.js'
-import { STATEMENT_CONTEST_VERSION, statementContests } from './statement-contest.js'
+import { STATEMENT_CONTEST_VERSION, latticeKey, statementContests } from './statement-contest.js'
 import type { StatementContest } from './statement-contest.js'
 import { worldFrameFrom } from './v2/frame.js'
 
@@ -869,13 +869,15 @@ export type SourceConflict = {
   doubted: DoubtedStatement[]
   /** The contested statements that refute the registration as printed but not under doubt: what moved `registrationRefuted`. */
   shareMovedBy?: DoubtedStatement[]
+  /** N1a: the conflict's statements carrying a reading set aside because the frame's metric solution cites it. */
+  cited?: DoubtedStatement[]
 }
 /**
  * 1.5.0: the source conflict, and what the doubt policy withdrew. `withdrawn` is the 1.4.0 test's accusation (every
  * statement read as printed) less what still stands, with the contested statements it rested on: recorded so that a run
  * that completes because an accusation was withdrawn can be traced to the readers that disagreed. It decides nothing.
  */
-export type SourceConflictReview = { conflict: SourceConflict | null; withdrawn: { triggers: SourceConflictTrigger[]; why: string; evidenceIds: string[]; doubted: DoubtedStatement[] } | null }
+export type SourceConflictReview = { conflict: SourceConflict | null; withdrawn: { triggers: SourceConflictTrigger[]; why: string; evidenceIds: string[]; doubted: DoubtedStatement[]; cited: DoubtedStatement[] } | null }
 
 const MAJOR_SHARE = 0.5
 const SUBSTANTIAL_SHARE = 0.25
@@ -906,10 +908,11 @@ export function sourceConflictReview(metrics: MetricEvidenceSet, frameId: string
   const t3 = gone.filter((c) => c.trigger === 'OUTER_TOTALS')
   const regFlip = (s: Statement): boolean => fitsUnder(s, regAxis(s.axis), tolerancePx, 'ANY_FITS') !== fitsUnder(s, regAxis(s.axis), tolerancePx, 'AS_PRINTED')
   const scaleFlip = (s: Statement, charges: Charge[]): boolean => charges.some((c) => c.scales.some((k) => fitsUnder(s, k, tolerancePx, 'ALL_FIT') !== fitsUnder(s, k, tolerancePx, 'AS_PRINTED')))
+  const goneIds = [...new Set(gone.flatMap((c) => c.evidenceIds))].sort()
   const turned = statements.filter((s) => s.contest.contested && ((t1.length > 0 && (regFlip(s) || scaleFlip(s, t1))) || (t3.length > 0 && long.has(s) && (regFlip(s) || scaleFlip(s, t3)))))
   return {
     conflict,
-    withdrawn: { triggers: gone.map((c) => c.trigger), why: gone.map((c) => c.why).join('; '), evidenceIds: [...new Set(gone.flatMap((c) => c.evidenceIds))].sort(), doubted: doubtedAmong(turned, turned.map((s) => s.evidence.id)) },
+    withdrawn: { triggers: gone.map((c) => c.trigger), why: gone.map((c) => c.why).join('; '), evidenceIds: goneIds, doubted: doubtedAmong(turned, turned.map((s) => s.evidence.id)), cited: citedAmong(statements, goneIds) },
   }
 }
 
@@ -926,6 +929,19 @@ function doubtedAmong(statements: readonly Statement[], evidenceIds: readonly st
   return out
 }
 
+/** The statements among some evidence ids that carry a reading N1a set aside as cited, contested or not, with their readings. */
+function citedAmong(statements: readonly Statement[], evidenceIds: readonly string[]): DoubtedStatement[] {
+  const ids = new Set(evidenceIds)
+  const seen = new Set<string>()
+  const out: DoubtedStatement[] = []
+  for (const s of statements) {
+    if (!ids.has(s.evidence.id) || !s.contest.readings.some((r) => r.cited) || seen.has(s.evidence.id)) continue
+    seen.add(s.evidence.id)
+    out.push({ evidenceId: s.evidence.id, readings: s.contest.readings })
+  }
+  return out
+}
+
 /** One trigger's accusation: why, the statements it names, and the scales it holds against the registration. */
 type Charge = { trigger: SourceConflictTrigger; why: string; evidenceIds: string[]; scales: number[] }
 type Charges = { charges: Charge[]; registrationRefuted: number; alternatives: Array<{ cmPerPx: number; refuted: number }>; statements: Statement[]; regAxis: (axis: 'X' | 'Y') => number; tolerancePx: number; long: Set<Statement>; shareMovedBy: Statement[] }
@@ -933,20 +949,26 @@ type Charges = { charges: Charge[]; registrationRefuted: number; alternatives: A
 /**
  * N1a (1.5.0): the readings the frame's metric solution cites as witnesses of its scale, set aside for the conflict test.
  * A LATTICE or EXTERNAL reading of an ink is cited when an observation the solution's selected scale rests on
- * (`supportingObservationIds`) was read from that ink's lattice (`ocr.latticeId`) at that value. A cited reading stays in
- * the record, marked, and no longer counts as one of the statement's readings: the statement is contested only by the
- * readings left, and with one value left it is read as printed. The as-printed value is never set aside.
+ * (`supportingObservationIds`) was read from that ink (`ocr.latticeId`, resolved to the lattice record's frame, box and
+ * orientation, so a duplicated crop under another id is the same ink) at that value. A cited reading stays in the
+ * statement's readings, marked, and no longer counts as one of its values: the statement is contested only by the values
+ * left, and with one value left it is read as printed. The as-printed value is never set aside. The statements of a
+ * conflict that carry a cited reading are named (`cited`), contested or not.
  */
 function setAsideCited(statements: Statement[], metrics: MetricEvidenceSet, solution: FrameMetricSolution | undefined): Statement[] {
   const supporting = new Set(solution?.supportingObservationIds ?? [])
   if (supporting.size === 0) return statements
+  const inkOf = new Map<string, string>()
+  for (const l of metrics.numericLattices ?? []) inkOf.set(l.id, latticeKey(l))
+  const ink = (latticeId: string): string => inkOf.get(latticeId) ?? `id:${latticeId}`
   const cited = new Set<string>()
-  for (const o of metrics.dimensionObservations ?? []) if (supporting.has(o.id) && o.ocr?.latticeId) cited.add(`${o.ocr.latticeId}|${o.valueCm}`)
+  for (const o of metrics.dimensionObservations ?? []) if (supporting.has(o.id) && o.ocr?.latticeId) cited.add(`${ink(o.ocr.latticeId)}|${o.valueCm}`)
   if (cited.size === 0) return statements
   return statements.map((s) => {
     const c = s.contest
-    if (!c.contested || c.latticeId === undefined || !c.readings.some((r) => r.reader !== 'AS_PRINTED' && cited.has(`${c.latticeId}|${r.valueCm}`))) return s
-    const readings = c.readings.map((r) => (r.reader !== 'AS_PRINTED' && cited.has(`${c.latticeId}|${r.valueCm}`) ? { ...r, cited: true as const } : r))
+    const isCited = (r: StatementContest['readings'][number]): boolean => r.reader !== 'AS_PRINTED' && c.latticeId !== undefined && cited.has(`${ink(c.latticeId)}|${r.valueCm}`)
+    if (!c.contested || !c.readings.some(isCited)) return s
+    const readings = c.readings.map((r) => (isCited(r) ? { ...r, cited: true as const } : r))
     const values = [...new Set(readings.filter((r) => !r.cited).map((r) => r.valueCm))].sort((a, b) => a - b)
     return { ...s, contest: { ...c, readings, values, contested: values.length >= 2 } }
   })
@@ -957,7 +979,8 @@ function conflictOf(c: Charges): SourceConflict | null {
   if (c.charges.length === 0) return null
   const ids = [...new Set(c.charges.flatMap((x) => x.evidenceIds))].sort()
   const moved = doubtedAmong(c.shareMovedBy, c.shareMovedBy.map((s) => s.evidence.id))
-  return { triggers: c.charges.map((x) => x.trigger), why: c.charges.map((x) => x.why).join('; '), evidenceIds: ids, registrationRefuted: c.registrationRefuted, alternatives: c.alternatives, doubted: doubtedAmong(c.statements, ids), ...(moved.length > 0 ? { shareMovedBy: moved } : {}) }
+  const cited = citedAmong(c.statements, ids)
+  return { triggers: c.charges.map((x) => x.trigger), why: c.charges.map((x) => x.why).join('; '), evidenceIds: ids, registrationRefuted: c.registrationRefuted, alternatives: c.alternatives, doubted: doubtedAmong(c.statements, ids), ...(moved.length > 0 ? { shareMovedBy: moved } : {}), ...(cited.length > 0 ? { cited } : {}) }
 }
 
 /**
@@ -1060,11 +1083,13 @@ export function withdrawnRecord(review: SourceConflictReview): Record<string, nu
     withdrawnEvidenceCount: w.evidenceIds.length,
     doubted: doubtedText(w.doubted),
     doubtedCount: w.doubted.length,
+    cited: doubtedText(w.cited),
+    citedCount: w.cited.length,
     stillStanding: review.conflict ? review.conflict.triggers.join(',') : '',
   }
 }
 
-/** `id=TOKEN 501|LATTICE 501|EXTERNAL 541; …`, at most eight statements. */
+/** `id=AS_PRINTED 501|LATTICE 501|EXTERNAL 541; id=AS_PRINTED 810|EXTERNAL 870 (cited); …`, at most eight statements. */
 const doubtedText = (doubted: readonly DoubtedStatement[]): string =>
   doubted
     .slice(0, 8)
@@ -1304,6 +1329,7 @@ export function challengeRecord(outcome: ChallengeOutcome, why: string): Record<
     if (outcome.conflict.doubted.length > 0 || outcome.conflict.shareMovedBy) {
       if (outcome.conflict.doubted.length > 0) out.conflictDoubted = doubtedText(outcome.conflict.doubted)
       if (outcome.conflict.shareMovedBy) out.registrationShareMovedBy = doubtedText(outcome.conflict.shareMovedBy)
+      if (outcome.conflict.cited) out.conflictCited = doubtedText(outcome.conflict.cited)
       out.statementContest = STATEMENT_CONTEST_VERSION
     }
   }

@@ -147,14 +147,35 @@ export function solutionOffering(scales: readonly number[]): FrameMetricSolution
 }
 
 /**
- * A solution whose selected scale rests on observations read from the given inks' lattices at the given values (the
- * shape `solveFrameMetric` seals: `supportingObservationIds` → observations carrying `ocr.latticeId`).
+ * The registration's metric solution cites readings (N1a): each cite is an observation read from statement `statement`'s
+ * lattice at `valueCm`. By default the frame's solution (CONFIRMED, STRONG, offering `offering`) rests on it; `supporting:
+ * false` leaves it in the evidence without the solution resting on it; `frame` puts it on another frame's solution.
  */
-export function citing(m: MetricEvidenceSet, cites: ReadonlyArray<{ statement: number; valueCm: number }>): MetricEvidenceSet {
-  const observations = cites.map((c, i) => ({ id: `obs-cited-${i}`, frameId: FRAME, chainId: `chain-${c.statement}`, textRegionId: `region-${c.statement}`, orientation: 'HORIZONTAL', rawText: String(c.valueCm), valueCm: c.valueCm, axis: 'X', fromPx: 0, toPx: 100, spanPx: 100, impliedCmPerPx: c.valueCm / 100, ocrScore: 0.9, ocrConfidence: 0.9, leadingZero: false, independence: 'INDEPENDENT', status: 'ACCEPTED', ocr: { latticeId: `lat-${c.statement}`, rawTopText: String(c.valueCm), ocrClass: 'SUPPORTED', asReadP: 0.9, probabilityMargin: 0.5, asReadVariant: 'DEFAULT' } }))
-  const solution = { ...solutionOffering([]), relation: 'CONFIRMED', confidence: 'STRONG', supportingObservationIds: observations.map((o) => o.id) } as unknown as FrameMetricSolution
-  return { ...m, metricSolutions: [solution], dimensionObservations: observations as unknown as MetricEvidenceSet['dimensionObservations'] }
+export type Cite = { statement: number; valueCm: number; supporting?: false; frame?: string; latticeId?: string }
+export function citing(m: MetricEvidenceSet, cites: readonly Cite[], offering: readonly number[] = []): MetricEvidenceSet {
+  const observations = cites.map((c, i) => observationOf(`obs-cited-${i}`, c.frame ?? FRAME, c.statement, c.latticeId ?? `lat-${c.statement}`, c.valueCm))
+  const on = (frame: string) => observations.filter((o, i) => (cites[i].frame ?? FRAME) === frame && cites[i].supporting !== false).map((o) => o.id)
+  const solutions = [{ ...solutionOffering(offering), relation: 'CONFIRMED', confidence: 'STRONG', supportingObservationIds: on(FRAME) }]
+  for (const frame of [...new Set(cites.map((c) => c.frame).filter((f): f is string => f !== undefined && f !== FRAME))]) solutions.push({ ...solutionOffering([]), frameId: frame, relation: 'CONFIRMED', confidence: 'STRONG', supportingObservationIds: on(frame) })
+  return { ...m, metricSolutions: solutions as unknown as FrameMetricSolution[], dimensionObservations: observations as unknown as MetricEvidenceSet['dimensionObservations'] }
 }
+
+/**
+ * A plan's own solution comes to cite some of its confident non-printed readings, each with probability `share`: the
+ * solution's offered rivals and relation stay as they were, so plan resolver 1.4.0 (which reads no citation) answers as
+ * for the plan uncited. Plans without a solution are returned as they are.
+ */
+export function citeAtRandom(m: MetricEvidenceSet, next: () => number, share = 0.35): { metrics: MetricEvidenceSet; cites: number } {
+  const solution = m.metricSolutions?.[0]
+  if (!solution) return { metrics: m, cites: 0 }
+  const observations: ReturnType<typeof observationOf>[] = []
+  m.numericLattices?.forEach((l) => {
+    for (const valueCm of [l.ensemble?.lattice.valueCm ?? l.asReadValueCm, l.ensemble?.external.valueCm]) if (valueCm !== undefined && next() < share) observations.push(observationOf(`obs-r-${observations.length}`, FRAME, observations.length, l.id, valueCm))
+  })
+  return { metrics: { ...m, metricSolutions: [{ ...solution, supportingObservationIds: observations.map((o) => o.id) }], dimensionObservations: observations as unknown as MetricEvidenceSet['dimensionObservations'] }, cites: observations.length }
+}
+
+const observationOf = (id: string, frameId: string, n: number, latticeId: string, valueCm: number) => ({ id, frameId, chainId: `chain-${n}`, textRegionId: `region-${n}`, orientation: 'HORIZONTAL', rawText: String(valueCm), valueCm, axis: 'X', fromPx: 0, toPx: 100, spanPx: 100, impliedCmPerPx: valueCm / 100, ocrScore: 0.9, ocrConfidence: 0.9, leadingZero: false, independence: 'INDEPENDENT', status: 'ACCEPTED', ocr: { latticeId, rawTopText: String(valueCm), ocrClass: 'SUPPORTED', asReadP: 0.9, probabilityMargin: 0.5, asReadVariant: 'DEFAULT' } })
 
 /** A small seeded generator (mulberry32): the same plans on every run and device. */
 export function rng(seed: number): () => number {

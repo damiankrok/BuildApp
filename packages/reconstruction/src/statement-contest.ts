@@ -51,6 +51,12 @@ const DIMENSION = /^[1-9]\d{1,4}$/
 const dimensionOf = (text: string | undefined): number | undefined => (text !== undefined && DIMENSION.test(text) ? Number(text) : undefined)
 const keyOf = (frameId: string, box: { x0: number; y0: number; x1: number; y1: number }, orientation: string | undefined): string => `${frameId}|${box.x0}|${box.x1}|${box.y0}|${box.y1}|${orientation ?? ''}`
 
+/**
+ * The ink a lattice record reads: its frame, box and orientation — the key a statement's token is joined on. Two records
+ * of one ink (a duplicated crop) share it whatever their ids.
+ */
+export const latticeKey = (lattice: Pick<NumericLatticeRecord, 'frameId' | 'box' | 'orientation'>): string => keyOf(lattice.frameId, lattice.box, lattice.orientation)
+
 /** The lattice's own reading, when its own class (not the ensemble's decision class) says it is confident. */
 function latticeValue(lattice: NumericLatticeRecord): number | undefined {
   const own = lattice.ensemble?.lattice.ocrClass ?? lattice.ocrClass
@@ -70,7 +76,7 @@ function externalValue(lattice: NumericLatticeRecord): number | undefined {
 /** A lookup from a statement's evidence (and its single token) to its contest record. */
 export function statementContests(metrics: MetricEvidenceSet): (evidence: MetricEvidence, token: Token | undefined) => StatementContest {
   const lattices = new Map<string, NumericLatticeRecord>()
-  for (const l of metrics.numericLattices ?? []) lattices.set(keyOf(l.frameId, l.box, l.orientation), l)
+  for (const l of metrics.numericLattices ?? []) lattices.set(latticeKey(l), l)
   return (evidence, token) => {
     const readings: StatementContest['readings'] = []
     const printed = evidence.origin === 'READ' ? evidence.value : dimensionOf(token?.text)

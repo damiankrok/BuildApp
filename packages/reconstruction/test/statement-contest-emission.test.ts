@@ -46,7 +46,7 @@ const strong: FrameMetricSolution = {
 }
 
 /** The two long spans' statements: corrected to the drawing's own scale, first read with a middle digit misread. */
-function metrics(options: { external: boolean }): MetricEvidenceSet {
+function metrics(options: { external: boolean; unscaled?: boolean }): MetricEvidenceSet {
   const cx = onPlan(chain('cx', 'HORIZONTAL', [40, 120, 200, 400], { baselinePx: 20 }))
   const cy = onPlan(chain('cy', 'VERTICAL', [40, 160, 280], { baselinePx: 20 }))
   const stated = [
@@ -76,13 +76,25 @@ function metrics(options: { external: boolean }): MetricEvidenceSet {
     } as unknown as NumericLatticeRecord)
   })
   const chains: DimensionChain[] = [cx, cy]
-  return { ...metricsOf(chains, [onPlan(registration())]), evidence, ocrTokens: tokens, numericLattices: lattices, metricSolutions: [strong] }
+  return { ...metricsOf(chains, options.unscaled ? [] : [onPlan(registration())]), evidence, ocrTokens: tokens, numericLattices: lattices, metricSolutions: [strong] }
 }
 
 function run(external: boolean) {
   const trace: SolverTraceEvent[] = []
   const result = reconstructV2({ label: 'fixture', slug: 'fixture', sourcePackageId: 'src-test', sourcePackageHash: 'd'.repeat(64), graph: graphOf([frame]), metrics: metrics({ external }), raster: () => house(), trace: (e) => trace.push(e) })
   return { result, trace }
+}
+
+/** An unscaled frame: no PLAN_XZ registration, so there is no registered scale to accuse or to withdraw an accusation of. */
+function runUnscaled(external: boolean) {
+  const trace: SolverTraceEvent[] = []
+  try {
+    const result = reconstructV2({ label: 'fixture', slug: 'fixture', sourcePackageId: 'src-test', sourcePackageHash: 'd'.repeat(64), graph: graphOf([frame]), metrics: metrics({ external, unscaled: true }), raster: () => house(), trace: (e) => trace.push(e) })
+    return { outcome: 'COMPLETED', code: '', model: result.model, unresolved: result.unresolved.map((u) => u.what), trace }
+  } catch (error) {
+    if (!(error instanceof ReconstructionFailure)) throw error
+    return { outcome: 'FAILED', code: error.code, model: undefined, unresolved: [], trace }
+  }
 }
 
 /** The early path: a published footprint the first reading misses by more than 20 % refuses it, and the review runs there. */
@@ -134,5 +146,13 @@ describe('a withdrawn accusation through the production solver', () => {
     expect(now.trace.some((e) => e.substage === 'METRIC_CHALLENGE')).toBe(false)
     expect(now.trace.find((e) => e.substage === 'SOURCE_CONFLICT_REVIEW')?.counts).toMatchObject({ withdrawnTriggers: 'OUTER_TOTALS', doubtedCount: 2 })
     expect({ outcome: now.outcome, code: now.code }).toEqual({ outcome: old.outcome, code: old.code })
+  })
+
+  it('an unscaled frame (no registration): nothing is accused or withdrawn, the external readings change nothing, and the run ends as the incumbent’s (here: no dimension frame)', () => {
+    const old = runUnscaled(false)
+    const now = runUnscaled(true)
+    for (const r of [old, now]) expect(r.trace.some((e) => e.substage === 'SOURCE_CONFLICT_REVIEW' || e.counts?.sourceConflict !== undefined)).toBe(false)
+    expect({ outcome: now.outcome, code: now.code, model: now.model, unresolved: now.unresolved }).toEqual({ outcome: old.outcome, code: old.code, model: old.model, unresolved: old.unresolved })
+    expect(now.unresolved).not.toContain('the scale of the base plan (an accusation withdrawn)')
   })
 })

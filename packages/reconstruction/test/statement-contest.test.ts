@@ -19,13 +19,15 @@ import { createHash } from 'node:crypto'
 import { describe, expect, it } from 'vitest'
 import type { MetricEvidenceSet } from '@buildapp/source-metrics'
 import { metricsAtScale, sourceConflictAsPrinted, sourceConflictOf, sourceConflictReview, statementContests, withdrawnRecord } from '../src/index.js'
-import { FRAME, JUDGE, REG, citing, generatePlans, metricsOfPlan, metricsWith, solutionOffering } from './contest-fixtures.js'
+import { FRAME, JUDGE, REG, citeAtRandom, citing, generatePlans, metricsOfPlan, metricsWith, rng, solutionOffering } from './contest-fixtures.js'
 import type { Reading } from './contest-fixtures.js'
 import { WALL } from './plan.js'
 
 const conflictOf = (m: MetricEvidenceSet) => sourceConflictOf(m, FRAME, REG, JUDGE, WALL)
 const reviewOf = (m: MetricEvidenceSet) => sourceConflictReview(m, FRAME, REG, JUDGE, WALL)
 const contestOf = (m: MetricEvidenceSet, i: number) => statementContests(m)(m.evidence[i], m.ocrTokens[i])
+/** The five fields plan resolver 1.4.0's conflict carries. */
+const incumbentFields = (c: ReturnType<typeof sourceConflictOf>) => (c === null ? null : { triggers: c.triggers, why: c.why, evidenceIds: c.evidenceIds, registrationRefuted: c.registrationRefuted, alternatives: c.alternatives })
 const readersOf = (m: MetricEvidenceSet, i: number) => contestOf(m, i).readings.map((r) => r.reader)
 
 // ---------------------------------------------------------------------------
@@ -256,7 +258,11 @@ describe('N1a: a reading the registration’s own solution cites cannot vouch fo
     const r = reviewOf(m)
     expect(r.conflict?.triggers).toContain('OUTER_TOTALS')
     expect(r.withdrawn).toBeNull()
-    expect(r.conflict).toEqual(sourceConflictAsPrinted(m, FRAME, REG, JUDGE, WALL)) // exactly the 1.4.0 accusation
+    // exactly the 1.4.0 accusation: the as-printed test without any citation is 1.4.0's (the oracle suite below)
+    expect(incumbentFields(r.conflict)).toEqual(incumbentFields(sourceConflictAsPrinted(citing(metricsWith(mirror()), []), FRAME, REG, JUDGE, WALL)))
+    // with its only rival reading set aside the statement is not doubted, but it is named as carrying a cited reading
+    expect(r.conflict?.doubted).toEqual([])
+    expect(r.conflict?.cited).toEqual([{ evidenceId: 'ev-1', readings: [{ reader: 'AS_PRINTED', valueCm: 1350 }, { reader: 'EXTERNAL', valueCm: 1500, cited: true }] }])
   })
 
   it('the glogownikach pattern: one accuser’s external reading cited (870), the other’s not (541) — still only one accuser, still withdrawn', () => {
@@ -271,6 +277,71 @@ describe('N1a: a reading the registration’s own solution cites cannot vouch fo
   it('a citation of another value of the same ink does not set the reading aside', () => {
     const m = citing(metricsWith(mirror()), [{ statement: 1, valueCm: 1350 }])
     expect(reviewOf(m).withdrawn?.triggers).toContain('OUTER_TOTALS')
+  })
+
+  it('a value cited on another ink does not set aside an equal reading of this one', () => {
+    // ev-0's external reading is 2000; the solution cites 2000 read from ev-1's ink, which never reads 2000
+    expect(reviewOf(citing(metricsWith(misreadTotals()), [{ statement: 1, valueCm: 2000 }]))).toEqual(reviewOf(citing(metricsWith(misreadTotals()), [])))
+  })
+
+  it('the as-printed value is never set aside, even when a lattice reading of the same value is cited', () => {
+    const r = mirror()
+    r[1] = { chain: 'cy', axis: 'Y', px: 300, cm: 1350, lattice: { cm: 1350 }, ensemble: { decision: 'CONTESTS', external: 1500, rival: 'EXTERNAL' } }
+    const rv = reviewOf(citing(metricsWith(r), [{ statement: 1, valueCm: 1350 }]))
+    expect(rv.withdrawn?.triggers).toContain('OUTER_TOTALS') // 1350 (printed) and 1500 (external) still contest
+    expect(rv.withdrawn?.doubted.find((d) => d.evidenceId === 'ev-1')?.readings).toEqual([{ reader: 'AS_PRINTED', valueCm: 1350 }, { reader: 'LATTICE', valueCm: 1350, cited: true }, { reader: 'EXTERNAL', valueCm: 1500 }])
+  })
+
+  it('a citation by another frame’s solution, or by an observation the solution does not rest on, sets nothing aside', () => {
+    expect(reviewOf(citing(metricsWith(mirror()), [{ statement: 1, valueCm: 1500, frame: 'frame-other' }])).withdrawn?.triggers).toContain('OUTER_TOTALS')
+    expect(reviewOf(citing(metricsWith(mirror()), [{ statement: 0, valueCm: 1800 }, { statement: 1, valueCm: 1500, supporting: false }])).withdrawn?.triggers).toContain('OUTER_TOTALS')
+  })
+
+  it('a duplicated crop: a citation of the ink under the other record’s id is the same ink, and is set aside', () => {
+    const r = mirror()
+    r[1] = { chain: 'cy', axis: 'Y', px: 300, cm: 1350, lattice: { cm: 1350 }, duplicateLattice: { cm: 1500 } } // the contest joins the later record, lat-1-dup (1500)
+    expect(reviewOf(citing(metricsWith(r), [])).withdrawn?.triggers).toContain('OUTER_TOTALS')
+    const rv = reviewOf(citing(metricsWith(r), [{ statement: 1, valueCm: 1500, latticeId: 'lat-1' }]))
+    expect(rv.conflict?.triggers).toContain('OUTER_TOTALS')
+    expect(rv.withdrawn).toBeNull()
+  })
+
+  it('on T1 a cited reading cannot spare the registration against an offered rival, nor refute the rival', () => {
+    // X 100 px reads 400 (4 cm/px); Y 450 px reads 1800 (4 cm/px) printed, 2250 (5 cm/px) externally; the solution offers 4
+    const rd: Reading[] = [
+      { chain: 'cx', axis: 'X', px: 100, cm: 400 },
+      { chain: 'cy', axis: 'Y', px: 450, cm: 1800, lattice: { cm: 1800 }, ensemble: { decision: 'CONTESTS', external: 2250, rival: 'EXTERNAL' } },
+    ]
+    expect(reviewOf(citing(metricsWith(rd), [], [4])).withdrawn?.triggers).toContain('AS_READ_REFUTATION')
+    const m = citing(metricsWith(rd), [{ statement: 1, valueCm: 2250 }], [4])
+    const r = reviewOf(m)
+    expect(r.conflict?.triggers).toContain('AS_READ_REFUTATION')
+    expect(r.withdrawn).toBeNull()
+    expect(r.conflict?.alternatives).toEqual(sourceConflictAsPrinted(m, FRAME, REG, JUDGE, WALL)?.alternatives)
+  })
+
+  it('on T3 cited readings cannot defend the registration', () => {
+    const rd: Reading[] = [
+      { chain: 'cx', axis: 'X', px: 400, cm: 1600 },
+      { chain: 'cy', axis: 'Y', px: 300, cm: 1200 },
+      { chain: 'dx', axis: 'X', px: 450, cm: 1500, lattice: { cm: 1500 }, ensemble: { decision: 'CONTESTS', external: 2250, rival: 'EXTERNAL' } },
+      { chain: 'dy', axis: 'Y', px: 450, cm: 1500, lattice: { cm: 1500 }, ensemble: { decision: 'CONTESTS', external: 2250, rival: 'EXTERNAL' } },
+    ]
+    expect(reviewOf(citing(metricsWith(rd), [])).withdrawn?.triggers).toEqual(['OUTER_TOTALS'])
+    const r = reviewOf(citing(metricsWith(rd), [{ statement: 2, valueCm: 2250 }, { statement: 3, valueCm: 2250 }]))
+    expect(r.conflict?.triggers).toContain('OUTER_TOTALS')
+    expect(r.withdrawn).toBeNull()
+  })
+
+  it('a cited reading of a statement still contested is traced as cited, in the review and in the trace record', () => {
+    const rd = misreadTotals()
+    rd[0] = { chain: 'cx', axis: 'X', px: 400, cm: 2000, origin: 'CHAIN_CORRECTED', token: '1800', lattice: { cm: 1900 }, ensemble: { decision: 'CONTESTS', external: 2000, rival: 'EXTERNAL' } }
+    const r = reviewOf(citing(metricsWith(rd), [{ statement: 0, valueCm: 1900 }]))
+    expect(r.withdrawn?.doubted.find((d) => d.evidenceId === 'ev-0')?.readings).toContainEqual({ reader: 'LATTICE', valueCm: 1900, cited: true })
+    expect(r.withdrawn?.cited.map((d) => d.evidenceId)).toEqual(['ev-0'])
+    const record = withdrawnRecord(r)
+    expect(String(record.doubted)).toContain('LATTICE 1900 (cited)')
+    expect(record).toMatchObject({ citedCount: 1 })
   })
 })
 
@@ -414,5 +485,31 @@ describe('the doubt policy is monotone against plan resolver 1.4.0 itself', () =
     })
     expect(withdrawn).toBeGreaterThan(100) // the generator reaches the case the policy exists for
     expect(metricPath).toBeGreaterThan(10) // and the metric-solution path of the offered rivals
+  })
+
+  it('with the plans’ own solutions citing readings at random (N1a running): still 1.4.0 as printed, no trigger 1.4.0 lacks, no larger share, a withdrawal only where N1 withdraws, the same answer whatever the order', () => {
+    const next = rng(777)
+    let cited = 0
+    let changed = 0
+    plans.forEach((p, n) => {
+      if (!p.solutionScales) return
+      const plain = metricsOfPlan(p)
+      const { metrics: m, cites } = citeAtRandom(plain, next)
+      if (cites === 0) return
+      cited += 1
+      const old = oracle.results[n]
+      const r = reviewOf(m)
+      const n1 = reviewOf(plain) // the same plan uncited: N1
+      if (JSON.stringify(r) !== JSON.stringify(n1)) changed += 1
+      expect(incumbentFields(sourceConflictAsPrinted(m, FRAME, REG, JUDGE, WALL)), `${n}`).toEqual(old)
+      expect(new Set([...(r.conflict?.triggers ?? []), ...(r.withdrawn?.triggers ?? [])]), `${n}`).toEqual(new Set(old?.triggers ?? []))
+      for (const t of r.conflict?.triggers ?? []) expect(old?.triggers ?? [], `${n}`).toContain(t)
+      if (r.conflict && old) expect(r.conflict.registrationRefuted, `${n}`).toBeLessThanOrEqual(old.registrationRefuted)
+      for (const t of r.withdrawn?.triggers ?? []) expect(n1.withdrawn?.triggers ?? [], `${n}`).toContain(t)
+      const reversed = { ...m, dimensionObservations: [...(m.dimensionObservations ?? [])].reverse(), metricSolutions: (m.metricSolutions ?? []).map((s) => ({ ...s, supportingObservationIds: [...s.supportingObservationIds].reverse() })) }
+      expect(reviewOf(reversed), `${n}`).toEqual(r)
+    })
+    expect(cited).toBeGreaterThan(300)
+    expect(changed).toBeGreaterThan(20) // the citations reach the set-aside
   })
 })
