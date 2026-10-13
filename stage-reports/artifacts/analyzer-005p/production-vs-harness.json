@@ -149,10 +149,13 @@
   "identicalDecisions": true,
   "withdrawnReviews": [
    {
-    "doubted": "metric-dimension-1fce7f3126=TOKEN 501|LATTICE 501|EXTERNAL 541; metric-dimension-f810c24db9=TOKEN 810|EXTERNAL 870",
+    "doubted": "metric-dimension-1fce7f3126=AS_PRINTED 501|LATTICE 501|EXTERNAL 541; metric-dimension-2bbe2a8971=AS_PRINTED 420|EXTERNAL 920; metric-dimension-4c039a536b=AS_PRINTED 110|EXTERNAL 224; metric-dimension-923db76dc8=AS_PRINTED 171|EXTERNAL 472; metric-dimension-c6635f1b73=AS_PRINTED 140|EXTERNAL 190; metric-dimension-f810c24db9=AS_PRINTED 810|EXTERNAL 870",
+    "doubtedCount": 6,
     "resolverVersion": "1.5.0",
+    "statementContest": "1.0.0",
     "stillStanding": "",
     "withdrawnEvidence": "metric-dimension-1fce7f3126,metric-dimension-f810c24db9",
+    "withdrawnEvidenceCount": 2,
     "withdrawnTriggers": "OUTER_TOTALS",
     "withdrawnWhy": "2 long readings as printed on both axes agree on 2.432039 cm/px (501/206 px, 810/333 px)"
    }
