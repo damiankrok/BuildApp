@@ -1,0 +1,76 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": 19,
+  "assetsByDocument": {
+    "ELEVATION": 4,
+    "FLOOR_PLAN": 8,
+    "PERSPECTIVE_RENDER": 4,
+    "SECTION": 1,
+    "SITE_PLAN": 1,
+    "UNKNOWN": 1
+  },
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-miniaturka-2-ver-3-m4c723a6c22f61",
+  "contentHash": "657962ffa4acfdbc71f5f3517f218b2c4ea4e8f35bb6042732f7c25b9c8ac37a",
+  "failuresByCode": {
+    "BYTE_IDENTICAL": 5,
+    "HTTP_STATUS": 9
+  },
+  "note": "facts and hashes only; no publisher drawing, page or render is in this pack",
+  "packageId": "src-m4c723a6c22f61-f131f18aab",
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "unit": "m2",
+      "value": 4.34
+    },
+    {
+      "key": "building_height",
+      "unit": "m",
+      "value": 7.65
+    },
+    {
+      "key": "floor_area",
+      "unit": "m2",
+      "value": 157.64
+    },
+    {
+      "key": "footprint_area",
+      "unit": "m2",
+      "value": 106.76
+    },
+    {
+      "key": "garage_area",
+      "unit": "m2",
+      "value": 24.12
+    },
+    {
+      "key": "house_net_area",
+      "unit": "m2",
+      "value": 98.97
+    },
+    {
+      "key": "roof_area",
+      "unit": "m2",
+      "value": 175.8
+    },
+    {
+      "key": "total_area",
+      "unit": "m2",
+      "value": 209.28
+    },
+    {
+      "key": "usable_area_without_stairs",
+      "unit": "m2",
+      "value": 124.31
+    },
+    {
+      "key": "volume",
+      "unit": "none",
+      "value": 616.23
+    }
+  ],
+  "runId": "new"
+}

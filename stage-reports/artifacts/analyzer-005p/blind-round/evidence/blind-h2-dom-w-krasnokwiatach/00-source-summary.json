@@ -1,0 +1,76 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": 19,
+  "assetsByDocument": {
+    "ELEVATION": 4,
+    "FLOOR_PLAN": 8,
+    "PERSPECTIVE_RENDER": 4,
+    "SECTION": 1,
+    "SITE_PLAN": 1,
+    "UNKNOWN": 1
+  },
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-krasnokwiatach-md4721b13efcd5",
+  "contentHash": "0f64fda6fc5a1351a1d83c8ab76d9e0d95097f8049f0761bc98f20caf4a9266d",
+  "failuresByCode": {
+    "BYTE_IDENTICAL": 5,
+    "HTTP_STATUS": 9
+  },
+  "note": "facts and hashes only; no publisher drawing, page or render is in this pack",
+  "packageId": "src-md4721b13efcd5-b79e5eda8c",
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "unit": "m2",
+      "value": 4.5
+    },
+    {
+      "key": "building_height",
+      "unit": "m",
+      "value": 8.26
+    },
+    {
+      "key": "floor_area",
+      "unit": "m2",
+      "value": 201.71
+    },
+    {
+      "key": "footprint_area",
+      "unit": "m2",
+      "value": 143.18
+    },
+    {
+      "key": "garage_area",
+      "unit": "m2",
+      "value": 19.39
+    },
+    {
+      "key": "house_net_area",
+      "unit": "m2",
+      "value": 129.13
+    },
+    {
+      "key": "roof_area",
+      "unit": "m2",
+      "value": 250.9
+    },
+    {
+      "key": "total_area",
+      "unit": "m2",
+      "value": 264.76
+    },
+    {
+      "key": "usable_area",
+      "unit": "m2",
+      "value": 163.86
+    },
+    {
+      "key": "volume",
+      "unit": "none",
+      "value": 855.27
+    }
+  ],
+  "runId": "new"
+}

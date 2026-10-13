@@ -1,0 +1,36 @@
+{
+  "chosen": {
+    "provenance": {
+      "x": "DIMENSION_CHAIN_EXTENT",
+      "y": "DIMENSION_CHAIN_EXTENT"
+    },
+    "rect": {
+      "x0": 154.5,
+      "x1": 535,
+      "y0": 77,
+      "y1": 718
+    },
+    "refusedChains": [],
+    "weak": false
+  },
+  "frameId": "frame-asset-rzut-071d5075ee-723651b1ff",
+  "otherCopies": [],
+  "resolverReadings": [
+    {
+      "key": "reading1",
+      "summary": "copy area_table 1811c28eab, chain extent, registered scale, walled-first tiling, sides as gridded: 2 bodies, 46.6 m² (-67.5% of 143.18), WRONG, corroborated by ISOTROPY"
+    },
+    {
+      "key": "reading2",
+      "summary": "copy area_table 1811c28eab, chain extent, registered scale, walled-first tiling, outer faces: 2 bodies, 47.2 m² (-67.0% of 143.18), WRONG, corroborated by ISOTROPY"
+    },
+    {
+      "key": "reading3",
+      "summary": "copy area_table 1811c28eab, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 33.0 m² (-77.0% of 143.18), WRONG, corroborated by ISOTROPY"
+    },
+    {
+      "key": "reading4",
+      "summary": "copy area_table 1811c28eab, wall-witness extent, registered scale, largest-first tiling, sides as gridded: 1 body, 7.1 m² (-95.1% of 143.18), WRONG, corroborated by ISOTROPY"
+    }
+  ]
+}

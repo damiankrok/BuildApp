@@ -1,0 +1,1519 @@
+{
+  "assignment": [
+    {
+      "box": {
+        "x0": 310,
+        "x1": 332,
+        "y0": 134,
+        "y1": 148
+      },
+      "candidates": [
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-horizontal-151-da5f3d918d",
+          "cost": 0.666667,
+          "interval": 1,
+          "offset": 0.666667,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-horizontal-151-da5f3d918d",
+        "interval": 1
+      },
+      "orientation": "HORIZONTAL",
+      "status": "BOUND",
+      "text": "544"
+    },
+    {
+      "box": {
+        "x0": 46,
+        "x1": 60,
+        "y0": 154,
+        "y1": 176
+      },
+      "candidates": [
+        {
+          "againstConvention": true,
+          "centred": false,
+          "chainId": "chain-vertical-37-483c6d29ad",
+          "cost": 4.566667,
+          "interval": 0,
+          "offset": 1.066667,
+          "side": "AFTER"
+        },
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-vertical-64-c440a67a1a",
+          "cost": 0.733333,
+          "interval": 0,
+          "offset": 0.733333,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-vertical-64-c440a67a1a",
+        "interval": 0
+      },
+      "margin": 5.266667,
+      "orientation": "ROTATED_CW",
+      "status": "BOUND",
+      "text": "030"
+    },
+    {
+      "box": {
+        "x0": 19,
+        "x1": 33,
+        "y0": 387,
+        "y1": 415
+      },
+      "candidates": [
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-vertical-37-483c6d29ad",
+          "cost": 0.733333,
+          "interval": 0,
+          "offset": 0.733333,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-vertical-37-483c6d29ad",
+        "interval": 0
+      },
+      "margin": 5.266667,
+      "orientation": "ROTATED_CW",
+      "status": "BOUND",
+      "text": "1610"
+    },
+    {
+      "box": {
+        "x0": 46,
+        "x1": 60,
+        "y0": 395,
+        "y1": 416
+      },
+      "candidates": [
+        {
+          "againstConvention": true,
+          "centred": true,
+          "chainId": "chain-vertical-37-483c6d29ad",
+          "cost": 2.066667,
+          "interval": 0,
+          "offset": 1.066667,
+          "side": "AFTER"
+        },
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-vertical-64-c440a67a1a",
+          "cost": 0.733333,
+          "interval": 1,
+          "offset": 0.733333,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-vertical-64-c440a67a1a",
+        "interval": 1
+      },
+      "margin": 5.266667,
+      "orientation": "ROTATED_CW",
+      "status": "BOUND",
+      "text": "781"
+    },
+    {
+      "box": {
+        "x0": 182,
+        "x1": 187,
+        "y0": 422,
+        "y1": 429
+      },
+      "candidates": [
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-vertical-196-d68c17baff",
+          "cost": 1.916667,
+          "interval": 1,
+          "offset": 1.916667,
+          "side": "BEFORE"
+        }
+      ],
+      "margin": 0.479167,
+      "orientation": "ROTATED_CCW",
+      "status": "UNASSIGNED",
+      "text": "1/±"
+    },
+    {
+      "box": {
+        "x0": 181,
+        "x1": 188,
+        "y0": 447,
+        "y1": 453
+      },
+      "candidates": [
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-vertical-196-d68c17baff",
+          "cost": 1.4375,
+          "interval": 1,
+          "offset": 1.4375,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-vertical-196-d68c17baff",
+        "interval": 1
+      },
+      "margin": 0.479167,
+      "orientation": "ROTATED_CW",
+      "status": "BOUND",
+      "text": "13"
+    },
+    {
+      "box": {
+        "x0": 210,
+        "x1": 220,
+        "y0": 454,
+        "y1": 471
+      },
+      "candidates": [
+        {
+          "againstConvention": true,
+          "centred": true,
+          "chainId": "chain-vertical-196-d68c17baff",
+          "cost": 2.727273,
+          "interval": 1,
+          "offset": 1.727273,
+          "side": "AFTER"
+        }
+      ],
+      "margin": 1.289773,
+      "orientation": "ROTATED_CW",
+      "status": "UNASSIGNED",
+      "text": "517"
+    },
+    {
+      "box": {
+        "x0": 206,
+        "x1": 228,
+        "y0": 483,
+        "y1": 497
+      },
+      "candidates": [
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-horizontal-499-679812fef4",
+          "cost": 0.6,
+          "interval": 2,
+          "offset": 0.6,
+          "side": "BEFORE"
+        },
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-horizontal-518-2189306f9e",
+          "cost": 1.833333,
+          "interval": 0,
+          "offset": 1.833333,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-horizontal-499-679812fef4",
+        "interval": 2
+      },
+      "margin": 1.233333,
+      "orientation": "HORIZONTAL",
+      "status": "BOUND",
+      "text": "210"
+    },
+    {
+      "box": {
+        "x0": 416,
+        "x1": 438,
+        "y0": 483,
+        "y1": 497
+      },
+      "candidates": [
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-horizontal-499-679812fef4",
+          "cost": 0.6,
+          "interval": 7,
+          "offset": 0.6,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-horizontal-499-679812fef4",
+        "interval": 7
+      },
+      "orientation": "HORIZONTAL",
+      "status": "BOUND",
+      "text": "335"
+    },
+    {
+      "box": {
+        "x0": 181,
+        "x1": 187,
+        "y0": 502,
+        "y1": 512
+      },
+      "candidates": [
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-vertical-196-d68c17baff",
+          "cost": 1.714286,
+          "interval": 2,
+          "offset": 1.714286,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-vertical-196-d68c17baff",
+        "interval": 2
+      },
+      "orientation": "ROTATED_CW",
+      "status": "BOUND",
+      "text": "±11"
+    },
+    {
+      "box": {
+        "x0": 549,
+        "x1": 557,
+        "y0": 502,
+        "y1": 509
+      },
+      "candidates": [
+        {
+          "againstConvention": false,
+          "centred": false,
+          "chainId": "chain-horizontal-511-691d003a06",
+          "cost": 3.1875,
+          "interval": 2,
+          "offset": 0.6875,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-horizontal-511-691d003a06",
+        "interval": 2
+      },
+      "margin": 1,
+      "orientation": "HORIZONTAL",
+      "status": "BOUND",
+      "text": "41"
+    },
+    {
+      "box": {
+        "x0": 547,
+        "x1": 559,
+        "y0": 513,
+        "y1": 520
+      },
+      "candidates": [
+        {
+          "againstConvention": true,
+          "centred": false,
+          "chainId": "chain-horizontal-511-691d003a06",
+          "cost": 4.1875,
+          "interval": 2,
+          "offset": 0.6875,
+          "side": "AFTER"
+        }
+      ],
+      "margin": 1,
+      "orientation": "HORIZONTAL",
+      "status": "UNASSIGNED",
+      "text": "170"
+    },
+    {
+      "box": {
+        "x0": 487,
+        "x1": 501,
+        "y0": 556,
+        "y1": 578
+      },
+      "candidates": [
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-vertical-504-82421d5b3d",
+          "cost": 0.666667,
+          "interval": 0,
+          "offset": 0.666667,
+          "side": "BEFORE"
+        },
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-vertical-527-4a3f896072",
+          "cost": 2.2,
+          "interval": 1,
+          "offset": 2.2,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-vertical-504-82421d5b3d",
+        "interval": 0
+      },
+      "margin": 1.533333,
+      "orientation": "ROTATED_CW",
+      "status": "BOUND",
+      "text": "600"
+    },
+    {
+      "box": {
+        "x0": 339,
+        "x1": 350,
+        "y0": 620,
+        "y1": 638
+      },
+      "candidates": [
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-vertical-370-43b9b34552",
+          "cost": 2.125,
+          "interval": 1,
+          "offset": 2.125,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-vertical-370-43b9b34552",
+        "interval": 1
+      },
+      "orientation": "ROTATED_CW",
+      "status": "BOUND",
+      "text": "±15"
+    },
+    {
+      "box": {
+        "x0": 46,
+        "x1": 60,
+        "y0": 630,
+        "y1": 652
+      },
+      "candidates": [
+        {
+          "againstConvention": true,
+          "centred": false,
+          "chainId": "chain-vertical-37-483c6d29ad",
+          "cost": 4.566667,
+          "interval": 0,
+          "offset": 1.066667,
+          "side": "AFTER"
+        },
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-vertical-64-c440a67a1a",
+          "cost": 0.733333,
+          "interval": 2,
+          "offset": 0.733333,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-vertical-64-c440a67a1a",
+        "interval": 2
+      },
+      "margin": 5.266667,
+      "orientation": "ROTATED_CW",
+      "status": "BOUND",
+      "text": "001"
+    },
+    {
+      "box": {
+        "x0": 195,
+        "x1": 218,
+        "y0": 773,
+        "y1": 787
+      },
+      "candidates": [
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-horizontal-790-b8a8f25058",
+          "cost": 0.666667,
+          "interval": 0,
+          "offset": 0.666667,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-horizontal-790-b8a8f25058",
+        "interval": 0
+      },
+      "orientation": "HORIZONTAL",
+      "status": "BOUND",
+      "text": "210"
+    },
+    {
+      "box": {
+        "x0": 300,
+        "x1": 323,
+        "y0": 773,
+        "y1": 787
+      },
+      "candidates": [
+        {
+          "againstConvention": true,
+          "centred": true,
+          "chainId": "chain-horizontal-754-d7893ddbc9",
+          "cost": 2.733333,
+          "interval": 0,
+          "offset": 1.733333,
+          "side": "AFTER"
+        },
+        {
+          "againstConvention": true,
+          "centred": true,
+          "chainId": "chain-horizontal-768-f47585e4c6",
+          "cost": 1.8,
+          "interval": 0,
+          "offset": 0.8,
+          "side": "AFTER"
+        },
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-horizontal-790-b8a8f25058",
+          "cost": 0.666667,
+          "interval": 1,
+          "offset": 0.666667,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-horizontal-790-b8a8f25058",
+        "interval": 1
+      },
+      "margin": 1.133333,
+      "orientation": "HORIZONTAL",
+      "status": "BOUND",
+      "text": "157"
+    },
+    {
+      "box": {
+        "x0": 436,
+        "x1": 458,
+        "y0": 773,
+        "y1": 787
+      },
+      "candidates": [
+        {
+          "againstConvention": true,
+          "centred": true,
+          "chainId": "chain-horizontal-754-d7893ddbc9",
+          "cost": 2.733333,
+          "interval": 0,
+          "offset": 1.733333,
+          "side": "AFTER"
+        },
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-horizontal-790-b8a8f25058",
+          "cost": 0.666667,
+          "interval": 2,
+          "offset": 0.666667,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-horizontal-790-b8a8f25058",
+        "interval": 2
+      },
+      "margin": 2.066666,
+      "orientation": "HORIZONTAL",
+      "status": "BOUND",
+      "text": "033"
+    },
+    {
+      "box": {
+        "x0": 331,
+        "x1": 352,
+        "y0": 800,
+        "y1": 814
+      },
+      "candidates": [
+        {
+          "againstConvention": true,
+          "centred": true,
+          "chainId": "chain-horizontal-790-b8a8f25058",
+          "cost": 2.133333,
+          "interval": 1,
+          "offset": 1.133333,
+          "side": "AFTER"
+        },
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-horizontal-817-5736a8acde",
+          "cost": 0.633333,
+          "interval": 0,
+          "offset": 0.633333,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-horizontal-817-5736a8acde",
+        "interval": 0
+      },
+      "margin": 2.633333,
+      "orientation": "HORIZONTAL",
+      "status": "BOUND",
+      "text": "450"
+    }
+  ],
+  "assignmentSource": "FINAL",
+  "counts": {
+    "ambiguous": 0,
+    "bound": 16,
+    "unassigned": 3
+  },
+  "endSpans": [],
+  "frameId": "frame-asset-rzut-071d5075ee-723651b1ff",
+  "groups": [
+    {
+      "axis": "HORIZONTAL",
+      "chainIds": [
+        "chain-horizontal-139-d4a7ccb036",
+        "chain-horizontal-151-da5f3d918d",
+        "chain-horizontal-168-80823e1c6f"
+      ],
+      "id": "axis-group-horizontal-139-2b886f764d",
+      "relations": [
+        {
+          "aChainId": "chain-horizontal-151-da5f3d918d",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-139-d4a7ccb036",
+          "kind": "SUBDIVIDES"
+        },
+        {
+          "aChainId": "chain-horizontal-139-d4a7ccb036",
+          "alignedEnds": [
+            true,
+            false
+          ],
+          "bChainId": "chain-horizontal-168-80823e1c6f",
+          "kind": "SUBDIVIDES"
+        },
+        {
+          "aChainId": "chain-horizontal-151-da5f3d918d",
+          "alignedEnds": [
+            false,
+            true
+          ],
+          "bChainId": "chain-horizontal-168-80823e1c6f",
+          "kind": "SUBDIVIDES"
+        }
+      ],
+      "separations": [
+        {
+          "fromChainId": "chain-horizontal-139-d4a7ccb036",
+          "heights": 1.136364,
+          "px": 12.5,
+          "toChainId": "chain-horizontal-151-da5f3d918d"
+        },
+        {
+          "fromChainId": "chain-horizontal-151-da5f3d918d",
+          "heights": 1.545455,
+          "px": 17,
+          "toChainId": "chain-horizontal-168-80823e1c6f"
+        }
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "chainIds": [
+        "chain-horizontal-213-6cfc8c548d",
+        "chain-horizontal-253-ab8d38f6af",
+        "chain-horizontal-256-fcce8b5d30",
+        "chain-horizontal-286-3b35fc01b6"
+      ],
+      "id": "axis-group-horizontal-213-e55813f42b",
+      "relations": [
+        {
+          "aChainId": "chain-horizontal-213-6cfc8c548d",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-253-ab8d38f6af",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-213-6cfc8c548d",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-256-fcce8b5d30",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-213-6cfc8c548d",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-286-3b35fc01b6",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-256-fcce8b5d30",
+          "alignedEnds": [
+            true,
+            true
+          ],
+          "bChainId": "chain-horizontal-253-ab8d38f6af",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-253-ab8d38f6af",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-286-3b35fc01b6",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-256-fcce8b5d30",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-286-3b35fc01b6",
+          "kind": "OVERLAPS"
+        }
+      ],
+      "separations": [
+        {
+          "fromChainId": "chain-horizontal-213-6cfc8c548d",
+          "heights": 3.681818,
+          "px": 40.5,
+          "toChainId": "chain-horizontal-253-ab8d38f6af"
+        },
+        {
+          "fromChainId": "chain-horizontal-253-ab8d38f6af",
+          "heights": 0.272727,
+          "px": 3,
+          "toChainId": "chain-horizontal-256-fcce8b5d30"
+        },
+        {
+          "fromChainId": "chain-horizontal-256-fcce8b5d30",
+          "heights": 2.727273,
+          "px": 30,
+          "toChainId": "chain-horizontal-286-3b35fc01b6"
+        }
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "chainIds": [
+        "chain-horizontal-314-a58cbd17f3",
+        "chain-horizontal-331-6820819b40"
+      ],
+      "id": "axis-group-horizontal-314-ad1d923ad6",
+      "relations": [
+        {
+          "aChainId": "chain-horizontal-314-a58cbd17f3",
+          "alignedEnds": [
+            true,
+            false
+          ],
+          "bChainId": "chain-horizontal-331-6820819b40",
+          "kind": "SUBDIVIDES"
+        }
+      ],
+      "separations": [
+        {
+          "fromChainId": "chain-horizontal-314-a58cbd17f3",
+          "heights": 1.545455,
+          "px": 17,
+          "toChainId": "chain-horizontal-331-6820819b40"
+        }
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "chainIds": [
+        "chain-horizontal-350-987458d805",
+        "chain-horizontal-385-1bcf53a180",
+        "chain-horizontal-413-ce6d99aeff",
+        "chain-horizontal-437-26e6c2fc7d",
+        "chain-horizontal-461-c4df55999d",
+        "chain-horizontal-499-679812fef4",
+        "chain-horizontal-501-962795b3a9",
+        "chain-horizontal-518-2189306f9e"
+      ],
+      "id": "axis-group-horizontal-350-d1cd1d2568",
+      "relations": [
+        {
+          "aChainId": "chain-horizontal-350-987458d805",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-385-1bcf53a180",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-350-987458d805",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-413-ce6d99aeff",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-350-987458d805",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-437-26e6c2fc7d",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-350-987458d805",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-461-c4df55999d",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-499-679812fef4",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-350-987458d805",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-350-987458d805",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-501-962795b3a9",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-350-987458d805",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-518-2189306f9e",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-385-1bcf53a180",
+          "alignedEnds": [
+            false,
+            true
+          ],
+          "bChainId": "chain-horizontal-413-ce6d99aeff",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-385-1bcf53a180",
+          "alignedEnds": [
+            true,
+            false
+          ],
+          "bChainId": "chain-horizontal-437-26e6c2fc7d",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-385-1bcf53a180",
+          "alignedEnds": [
+            true,
+            false
+          ],
+          "bChainId": "chain-horizontal-461-c4df55999d",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-385-1bcf53a180",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-499-679812fef4",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-385-1bcf53a180",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-501-962795b3a9",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-385-1bcf53a180",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-518-2189306f9e",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-413-ce6d99aeff",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-437-26e6c2fc7d",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-413-ce6d99aeff",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-461-c4df55999d",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-499-679812fef4",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-413-ce6d99aeff",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-413-ce6d99aeff",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-501-962795b3a9",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-518-2189306f9e",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-413-ce6d99aeff",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-461-c4df55999d",
+          "alignedEnds": [
+            true,
+            true
+          ],
+          "bChainId": "chain-horizontal-437-26e6c2fc7d",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-437-26e6c2fc7d",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-499-679812fef4",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-437-26e6c2fc7d",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-501-962795b3a9",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-437-26e6c2fc7d",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-518-2189306f9e",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-461-c4df55999d",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-499-679812fef4",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-461-c4df55999d",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-501-962795b3a9",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-461-c4df55999d",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-518-2189306f9e",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-499-679812fef4",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-501-962795b3a9",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-499-679812fef4",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-518-2189306f9e",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-501-962795b3a9",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-518-2189306f9e",
+          "kind": "OVERLAPS"
+        }
+      ],
+      "separations": [
+        {
+          "fromChainId": "chain-horizontal-350-987458d805",
+          "heights": 3.181818,
+          "px": 35,
+          "toChainId": "chain-horizontal-385-1bcf53a180"
+        },
+        {
+          "fromChainId": "chain-horizontal-385-1bcf53a180",
+          "heights": 2.545455,
+          "px": 28,
+          "toChainId": "chain-horizontal-413-ce6d99aeff"
+        },
+        {
+          "fromChainId": "chain-horizontal-413-ce6d99aeff",
+          "heights": 2.181818,
+          "px": 24,
+          "toChainId": "chain-horizontal-437-26e6c2fc7d"
+        },
+        {
+          "fromChainId": "chain-horizontal-437-26e6c2fc7d",
+          "heights": 2.181818,
+          "px": 24,
+          "toChainId": "chain-horizontal-461-c4df55999d"
+        },
+        {
+          "fromChainId": "chain-horizontal-461-c4df55999d",
+          "heights": 3.454545,
+          "px": 38,
+          "toChainId": "chain-horizontal-499-679812fef4"
+        },
+        {
+          "fromChainId": "chain-horizontal-499-679812fef4",
+          "heights": 0.181818,
+          "px": 2,
+          "toChainId": "chain-horizontal-501-962795b3a9"
+        },
+        {
+          "fromChainId": "chain-horizontal-501-962795b3a9",
+          "heights": 1.5,
+          "px": 16.5,
+          "toChainId": "chain-horizontal-518-2189306f9e"
+        }
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "chainIds": [
+        "chain-horizontal-397-0ad128df97",
+        "chain-horizontal-399-2b11f6e60c"
+      ],
+      "id": "axis-group-horizontal-397-54db360265",
+      "relations": [
+        {
+          "aChainId": "chain-horizontal-397-0ad128df97",
+          "alignedEnds": [
+            true,
+            false
+          ],
+          "bChainId": "chain-horizontal-399-2b11f6e60c",
+          "kind": "CONTAINS"
+        }
+      ],
+      "separations": [
+        {
+          "fromChainId": "chain-horizontal-397-0ad128df97",
+          "heights": 0.181818,
+          "px": 2,
+          "toChainId": "chain-horizontal-399-2b11f6e60c"
+        }
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "chainIds": [
+        "chain-horizontal-41-40d1a4ef4e",
+        "chain-horizontal-77-100f72942d"
+      ],
+      "id": "axis-group-horizontal-41-f64f0c987f",
+      "relations": [
+        {
+          "aChainId": "chain-horizontal-41-40d1a4ef4e",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-77-100f72942d",
+          "kind": "OVERLAPS"
+        }
+      ],
+      "separations": [
+        {
+          "fromChainId": "chain-horizontal-41-40d1a4ef4e",
+          "heights": 3.272727,
+          "px": 36,
+          "toChainId": "chain-horizontal-77-100f72942d"
+        }
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "chainIds": [
+        "chain-horizontal-754-d7893ddbc9",
+        "chain-horizontal-768-f47585e4c6",
+        "chain-horizontal-790-b8a8f25058",
+        "chain-horizontal-817-5736a8acde"
+      ],
+      "id": "axis-group-horizontal-754-f81b7f423f",
+      "relations": [
+        {
+          "aChainId": "chain-horizontal-754-d7893ddbc9",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-768-f47585e4c6",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-790-b8a8f25058",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-754-d7893ddbc9",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-817-5736a8acde",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-754-d7893ddbc9",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-790-b8a8f25058",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-768-f47585e4c6",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-817-5736a8acde",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-768-f47585e4c6",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-790-b8a8f25058",
+          "alignedEnds": [
+            true,
+            true
+          ],
+          "bChainId": "chain-horizontal-817-5736a8acde",
+          "kind": "SUBDIVIDES"
+        }
+      ],
+      "separations": [
+        {
+          "fromChainId": "chain-horizontal-754-d7893ddbc9",
+          "heights": 1.272727,
+          "px": 14,
+          "toChainId": "chain-horizontal-768-f47585e4c6"
+        },
+        {
+          "fromChainId": "chain-horizontal-768-f47585e4c6",
+          "heights": 2,
+          "px": 22,
+          "toChainId": "chain-horizontal-790-b8a8f25058"
+        },
+        {
+          "fromChainId": "chain-horizontal-790-b8a8f25058",
+          "heights": 2.409091,
+          "px": 26.5,
+          "toChainId": "chain-horizontal-817-5736a8acde"
+        }
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "chainIds": [
+        "chain-vertical-37-483c6d29ad",
+        "chain-vertical-64-c440a67a1a",
+        "chain-vertical-83-c1ea6a93d4"
+      ],
+      "id": "axis-group-vertical-37-4156599196",
+      "relations": [
+        {
+          "aChainId": "chain-vertical-64-c440a67a1a",
+          "alignedEnds": [
+            true,
+            true
+          ],
+          "bChainId": "chain-vertical-37-483c6d29ad",
+          "kind": "SUBDIVIDES"
+        },
+        {
+          "aChainId": "chain-vertical-37-483c6d29ad",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-vertical-83-c1ea6a93d4",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-vertical-64-c440a67a1a",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-vertical-83-c1ea6a93d4",
+          "kind": "OVERLAPS"
+        }
+      ],
+      "separations": [
+        {
+          "fromChainId": "chain-vertical-37-483c6d29ad",
+          "heights": 2.454545,
+          "px": 27,
+          "toChainId": "chain-vertical-64-c440a67a1a"
+        },
+        {
+          "fromChainId": "chain-vertical-64-c440a67a1a",
+          "heights": 1.727273,
+          "px": 19,
+          "toChainId": "chain-vertical-83-c1ea6a93d4"
+        }
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "chainIds": [
+        "chain-vertical-370-43b9b34552",
+        "chain-vertical-372-de839093bb",
+        "chain-vertical-382-d11239c996",
+        "chain-vertical-413-bffa09d1b3"
+      ],
+      "id": "axis-group-vertical-370-dcce036cf0",
+      "relations": [
+        {
+          "aChainId": "chain-vertical-372-de839093bb",
+          "alignedEnds": [
+            false,
+            true
+          ],
+          "bChainId": "chain-vertical-370-43b9b34552",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-vertical-370-43b9b34552",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-vertical-382-d11239c996",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-vertical-370-43b9b34552",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-vertical-413-bffa09d1b3",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-vertical-372-de839093bb",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-vertical-382-d11239c996",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-vertical-372-de839093bb",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-vertical-413-bffa09d1b3",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-vertical-382-d11239c996",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-vertical-413-bffa09d1b3",
+          "kind": "CONTAINS"
+        }
+      ],
+      "separations": [
+        {
+          "fromChainId": "chain-vertical-370-43b9b34552",
+          "heights": 0.181818,
+          "px": 2,
+          "toChainId": "chain-vertical-372-de839093bb"
+        },
+        {
+          "fromChainId": "chain-vertical-372-de839093bb",
+          "heights": 0.909091,
+          "px": 10,
+          "toChainId": "chain-vertical-382-d11239c996"
+        },
+        {
+          "fromChainId": "chain-vertical-382-d11239c996",
+          "heights": 2.818182,
+          "px": 31,
+          "toChainId": "chain-vertical-413-bffa09d1b3"
+        }
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "chainIds": [
+        "chain-vertical-391-02d760cd58",
+        "chain-vertical-401-35f6cc4c39"
+      ],
+      "id": "axis-group-vertical-391-aa6a88de04",
+      "relations": [
+        {
+          "aChainId": "chain-vertical-401-35f6cc4c39",
+          "alignedEnds": [
+            true,
+            true
+          ],
+          "bChainId": "chain-vertical-391-02d760cd58",
+          "kind": "CONTAINS"
+        }
+      ],
+      "separations": [
+        {
+          "fromChainId": "chain-vertical-391-02d760cd58",
+          "heights": 0.909091,
+          "px": 10,
+          "toChainId": "chain-vertical-401-35f6cc4c39"
+        }
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "chainIds": [
+        "chain-vertical-443-53d2d5388f",
+        "chain-vertical-472-9562e1d4eb",
+        "chain-vertical-504-b41f418430"
+      ],
+      "id": "axis-group-vertical-443-ba7d763a40",
+      "relations": [
+        {
+          "aChainId": "chain-vertical-472-9562e1d4eb",
+          "alignedEnds": [
+            true,
+            false
+          ],
+          "bChainId": "chain-vertical-443-53d2d5388f",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-vertical-443-53d2d5388f",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-vertical-504-b41f418430",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-vertical-472-9562e1d4eb",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-vertical-504-b41f418430",
+          "kind": "OVERLAPS"
+        }
+      ],
+      "separations": [
+        {
+          "fromChainId": "chain-vertical-443-53d2d5388f",
+          "heights": 2.636364,
+          "px": 29,
+          "toChainId": "chain-vertical-472-9562e1d4eb"
+        },
+        {
+          "fromChainId": "chain-vertical-472-9562e1d4eb",
+          "heights": 2.909091,
+          "px": 32,
+          "toChainId": "chain-vertical-504-b41f418430"
+        }
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "chainIds": [
+        "chain-vertical-480-f5b71137c0",
+        "chain-vertical-504-82421d5b3d",
+        "chain-vertical-527-4a3f896072"
+      ],
+      "id": "axis-group-vertical-480-8d067c6c5a",
+      "relations": [
+        {
+          "aChainId": "chain-vertical-504-82421d5b3d",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-vertical-480-f5b71137c0",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-vertical-527-4a3f896072",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-vertical-480-f5b71137c0",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-vertical-504-82421d5b3d",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-vertical-527-4a3f896072",
+          "kind": "CONTAINS"
+        }
+      ],
+      "separations": [
+        {
+          "fromChainId": "chain-vertical-480-f5b71137c0",
+          "heights": 2.181818,
+          "px": 24,
+          "toChainId": "chain-vertical-504-82421d5b3d"
+        },
+        {
+          "fromChainId": "chain-vertical-504-82421d5b3d",
+          "heights": 2.090909,
+          "px": 23,
+          "toChainId": "chain-vertical-527-4a3f896072"
+        }
+      ]
+    }
+  ],
+  "labelHeightPx": 11,
+  "labelInkLines": [],
+  "labelInkMarks": [
+    {
+      "atPx": 568.5,
+      "chainId": "chain-vertical-480-f5b71137c0",
+      "class": "QUESTIONABLE"
+    }
+  ],
+  "legend": {
+    "AMBIGUOUS": "#8a2fd1",
+    "BOUND": "#1f5fd1",
+    "LABEL_INK_MARK": "#d11f1f",
+    "OVERALL": "#1f5fd1",
+    "PARTIAL": "#e08a00",
+    "SUBDIVISION": "#1b8a3a",
+    "UNASSIGNED": "#9a9a9a"
+  },
+  "omitted": 0,
+  "recorded": true,
+  "refutations": [],
+  "sideConventions": {
+    "HORIZONTAL": {
+      "anchors": {
+        "across": 0,
+        "after": 0,
+        "before": 3
+      },
+      "basis": "CONSISTENT",
+      "side": "BEFORE"
+    },
+    "VERTICAL": {
+      "anchors": {
+        "across": 0,
+        "after": 0,
+        "before": 2
+      },
+      "basis": "CONSISTENT",
+      "side": "BEFORE"
+    }
+  },
+  "singleLines": 21
+}

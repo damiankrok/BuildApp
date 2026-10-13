@@ -1,0 +1,54 @@
+{
+  "run": "<scratch>/h1/old",
+  "completed": true,
+  "labelledPlanStoreys": [
+    "ATTIC",
+    "GROUND"
+  ],
+  "publishedFootprintM2": 106.76,
+  "checklist": {
+    "noFloorPlan": false,
+    "legibleOverallDimension": {
+      "ocrTokensOnGroundCopies": 0,
+      "tallestPx": 0,
+      "needsRawMeasurement": true
+    },
+    "wallsUnder4pxOnEveryGroundCopy": false,
+    "groundWallPx": [],
+    "floorPlanAssetsLost": []
+  },
+  "conditions": {
+    "storeys": {
+      "model": 2,
+      "plans": 2,
+      "holds": true
+    },
+    "upperStoreysHoldTheirRooms": {
+      "upperRingM2": 102.11,
+      "publishedUpperRoomsM2": 49.58,
+      "holds": true
+    },
+    "openingsAllBuilt": {
+      "holds": true,
+      "message": null
+    },
+    "footprint": {
+      "builtM2": 108.34,
+      "publishedM2": 106.76,
+      "residualPct": 1.48,
+      "holds": true
+    },
+    "resolvedWithAWitness": {
+      "holds": true,
+      "note": "the first reading held"
+    },
+    "replacedByTheDrawing": {
+      "holds": true,
+      "note": "no challenge"
+    }
+  },
+  "bodies": null,
+  "unresolved": null,
+  "warnings": [],
+  "verdict": "PASS"
+}
