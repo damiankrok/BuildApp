@@ -61,8 +61,8 @@ const MUTATIONS = [
     what: 'count readers of one ink as separate readings: three readers agreeing are a contest (reader count, not distinct values)',
     must: /three readers reading the same value are one reading/,
     file: CONTEST,
-    from: '    return { readings, values, contested: values.length >= 2 }',
-    to: '    return { readings, values, contested: readings.length >= 2 }',
+    from: '    return { readings, values, contested: values.length >= 2, ...(lattice ? { latticeId: lattice.id } : {}) }',
+    to: '    return { readings, values, contested: readings.length >= 2, ...(lattice ? { latticeId: lattice.id } : {}) }',
   },
   {
     id: 'X5',
@@ -85,8 +85,8 @@ const MUTATIONS = [
     what: 'trust missing data: a statement with no lattice (a missing reader) counts as contested',
     must: /no value is conjured|1\.4\.0’s|another copy|named once|withdrawn accusation is named/,
     file: CONTEST,
-    from: '    return { readings, values, contested: values.length >= 2 }',
-    to: '    return { readings, values, contested: values.length >= 2 || lattice === undefined }',
+    from: '    return { readings, values, contested: values.length >= 2, ...(lattice ? { latticeId: lattice.id } : {}) }',
+    to: '    return { readings, values, contested: values.length >= 2 || lattice === undefined, ...(lattice ? { latticeId: lattice.id } : {}) }',
   },
   {
     id: 'X8',
@@ -197,8 +197,9 @@ const MUTATIONS = [
 
 const git = (...a) => execFileSync('git', a, { cwd: REPO, encoding: 'utf8' })
 if (git('status', '--porcelain').trim() !== '') throw new Error('the tree must be clean before the mutation gates')
+const only = (process.argv.indexOf('--only') >= 0 ? process.argv[process.argv.indexOf('--only') + 1] : '').split(',').filter(Boolean)
 const results = []
-for (const m of MUTATIONS) {
+for (const m of MUTATIONS.filter((x) => only.length === 0 || only.includes(x.id))) {
   const path = join(REPO, m.file)
   const text = readFileSync(path, 'utf8')
   const n = text.split(m.from).length - 1
