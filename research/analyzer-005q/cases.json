@@ -1,0 +1,473 @@
+{
+ "_comment": "005Q development rows: the 44 rows of research/analyzer-005o/cases.json (unchanged, in order) plus blind round 11 (dom-miniaturka, dom-w-krasnokwiatach), revealed and now DEVELOPMENT (never eligible as a fresh blind 12). Paths outside the repository hold sealed evidence and publisher bytes; never committed.",
+ "cases": [
+  {
+   "case": "dom-pod-jarzabem",
+   "set": "DEV_005K",
+   "family": "dom-pod-jarzabem",
+   "metrics": "/home/user/work005i-a/m-on/dom-pod-jarzabem/metric-evidence.json",
+   "package": "/home/user/work005i-a/m-on/dom-pod-jarzabem/source-package.json",
+   "graph": "/home/user/work005i-a/m-on/dom-pod-jarzabem/observation-graph.json",
+   "cache": "/home/user/work005h/blind7/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "dom-w-arkadiach",
+   "set": "DEV_005K",
+   "family": "dom-w-arkadiach",
+   "metrics": "/home/user/work005i-a/m-on/dom-w-arkadiach/metric-evidence.json",
+   "package": "/home/user/work005i-a/m-on/dom-w-arkadiach/source-package.json",
+   "graph": "/home/user/work005i-a/m-on/dom-w-arkadiach/observation-graph.json",
+   "cache": "/home/user/work005h/blind7/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "dom-w-modrzewnicy",
+   "set": "DEV_005K",
+   "family": "dom-w-modrzewnicy",
+   "metrics": "/home/user/work005i-a/m-on/dom-w-modrzewnicy/metric-evidence.json",
+   "package": "/home/user/work005i-a/m-on/dom-w-modrzewnicy/source-package.json",
+   "graph": "/home/user/work005i-a/m-on/dom-w-modrzewnicy/observation-graph.json",
+   "cache": "/home/user/work005e/blind5/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "dom-w-morelach",
+   "set": "DEV_005K",
+   "family": "dom-w-morelach",
+   "metrics": "/home/user/work005i-a/m-on/dom-w-morelach/metric-evidence.json",
+   "package": "/home/user/work005i-a/m-on/dom-w-morelach/source-package.json",
+   "graph": "/home/user/work005i-a/m-on/dom-w-morelach/observation-graph.json",
+   "cache": "/home/user/work005e/blind5/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "marcowki",
+   "set": "DEV_005K",
+   "family": "marcowki",
+   "metrics": "/home/user/work005i-a/m-on/marcowki/metric-evidence.json",
+   "package": "/home/user/work005i-a/m-on/marcowki/source-package.json",
+   "graph": "/home/user/work005i-a/m-on/marcowki/observation-graph.json",
+   "cache": "/home/user/work005d/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "rarytasy-g2e",
+   "set": "DEV_005K",
+   "family": "rarytasy",
+   "metrics": "/home/user/work005i-a/m-on/rarytasy-g2e/metric-evidence.json",
+   "package": "/home/user/work005i-a/m-on/rarytasy-g2e/source-package.json",
+   "graph": "/home/user/work005i-a/m-on/rarytasy-g2e/observation-graph.json",
+   "cache": "/home/user/work005d/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "kosacce-clean",
+   "set": "DEV_005K",
+   "family": "kosacce",
+   "metrics": "/home/user/work005i-a/m-on/kosacce-clean/metric-evidence.json",
+   "package": "/home/user/work005i-a/m-on/kosacce-clean/source-package.json",
+   "graph": "/home/user/work005i-a/m-on/kosacce-clean/observation-graph.json",
+   "cache": "/home/user/work005d/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "kosacce-tracked",
+   "set": "DEV_005K",
+   "family": "kosacce",
+   "metrics": "/home/user/work005i-a/m-on/kosacce-tracked/metric-evidence.json",
+   "package": "/home/user/work005i-a/m-on/kosacce-tracked/source-package.json",
+   "graph": "/home/user/work005i-a/m-on/kosacce-tracked/observation-graph.json",
+   "cache": "/home/user/work005d/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "rarytasy-eoze",
+   "set": "DEV_005K",
+   "family": "rarytasy",
+   "metrics": "/home/user/work005i-a/m-on/rarytasy-eoze/metric-evidence.json",
+   "package": "/home/user/work005i-a/m-on/rarytasy-eoze/source-package.json",
+   "graph": "/home/user/work005i-a/m-on/rarytasy-eoze/observation-graph.json",
+   "cache": "/home/user/work005d/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "eoze-legacy-every",
+   "set": "DEV_005K",
+   "family": "rarytasy",
+   "metrics": "/home/user/BuildApp/stage-reports/artifacts/analyzer-005a/before/rarytasy-eoze/metric-evidence.json",
+   "package": "/home/user/BuildApp/stage-reports/artifacts/analyzer-005a/before/rarytasy-eoze/source-package.json",
+   "graph": "/home/user/BuildApp/stage-reports/artifacts/analyzer-005a/before/rarytasy-eoze/observation-graph.json",
+   "cache": "/home/user/work005d/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "alt-marcowki",
+   "set": "DEV_005K",
+   "family": "marcowki",
+   "metrics": "/home/user/work005i-a/m-on/alt-marcowki/metric-evidence.json",
+   "package": "/home/user/work005i-a/m-on/alt-marcowki/source-package.json",
+   "graph": "/home/user/work005i-a/m-on/alt-marcowki/observation-graph.json",
+   "cache": "/home/user/work005d/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "dom-w-jablonkach",
+   "set": "DEV_005K",
+   "family": "dom-w-jablonkach",
+   "metrics": "/home/user/work005i-a/m-on/dom-w-jablonkach/metric-evidence.json",
+   "package": "/home/user/work005i-a/m-on/dom-w-jablonkach/source-package.json",
+   "graph": "/home/user/work005i-a/m-on/dom-w-jablonkach/observation-graph.json",
+   "cache": "/home/user/work005d/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "willa-miranda",
+   "set": "DEV_005K",
+   "family": "willa-miranda",
+   "metrics": "/home/user/work005i-a/m-on/willa-miranda/metric-evidence.json",
+   "package": "/home/user/work005i-a/m-on/willa-miranda/source-package.json",
+   "graph": "/home/user/work005i-a/m-on/willa-miranda/observation-graph.json",
+   "cache": "/home/user/work005d/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "dom-w-zurawkach",
+   "set": "DEV_005K",
+   "family": "dom-w-zurawkach",
+   "metrics": "/home/user/work005i-a/m-on/dom-w-zurawkach/metric-evidence.json",
+   "package": "/home/user/work005i-a/m-on/dom-w-zurawkach/source-package.json",
+   "graph": "/home/user/work005i-a/m-on/dom-w-zurawkach/observation-graph.json",
+   "cache": "/home/user/work005d/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "dom-w-modrzykach",
+   "set": "DEV_005K",
+   "family": "dom-w-modrzykach",
+   "metrics": "/home/user/work005i-a/m-on/dom-w-modrzykach/metric-evidence.json",
+   "package": "/home/user/work005i-a/m-on/dom-w-modrzykach/source-package.json",
+   "graph": "/home/user/work005i-a/m-on/dom-w-modrzykach/observation-graph.json",
+   "cache": "/home/user/work005d/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "dom-w-azaliach",
+   "set": "DEV_005K",
+   "family": "dom-w-azaliach",
+   "metrics": "/home/user/work005i-a/m-on/dom-w-azaliach/metric-evidence.json",
+   "package": "/home/user/work005i-a/m-on/dom-w-azaliach/source-package.json",
+   "graph": "/home/user/work005i-a/m-on/dom-w-azaliach/observation-graph.json",
+   "cache": "/home/user/work005d/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "dom-w-dabecjach",
+   "set": "DEV_005K",
+   "family": "dom-w-dabecjach",
+   "metrics": "/home/user/work005i-a/m-on/dom-w-dabecjach/metric-evidence.json",
+   "package": "/home/user/work005i-a/m-on/dom-w-dabecjach/source-package.json",
+   "graph": "/home/user/work005i-a/m-on/dom-w-dabecjach/observation-graph.json",
+   "cache": "/home/user/work005d/blind-cache",
+   "dropFrames": []
+  },
+  {
+   "case": "dom-w-tunbergiach",
+   "set": "DEV_005K",
+   "family": "dom-w-tunbergiach",
+   "metrics": "/home/user/work005i-a/m-on/dom-w-tunbergiach/metric-evidence.json",
+   "package": "/home/user/work005i-a/m-on/dom-w-tunbergiach/source-package.json",
+   "graph": "/home/user/work005i-a/m-on/dom-w-tunbergiach/observation-graph.json",
+   "cache": "/home/user/work005d/blind-cache",
+   "dropFrames": []
+  },
+  {
+   "case": "aster-viii",
+   "set": "DEV_005K",
+   "family": "aster-viii",
+   "metrics": "/home/user/work005i-a/m-on/aster-viii/metric-evidence.json",
+   "package": "/home/user/work005i-a/m-on/aster-viii/source-package.json",
+   "graph": "/home/user/work005i-a/m-on/aster-viii/observation-graph.json",
+   "cache": "/home/user/work005d/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "galaktyka",
+   "set": "DEV_005K",
+   "family": "galaktyka",
+   "metrics": "/home/user/work005i-a/m-on/galaktyka/metric-evidence.json",
+   "package": "/home/user/work005i-a/m-on/galaktyka/source-package.json",
+   "graph": "/home/user/work005i-a/m-on/galaktyka/observation-graph.json",
+   "cache": "/home/user/work005d/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "eoze-legacy-area",
+   "set": "DEV_005K",
+   "family": "rarytasy",
+   "metrics": "/home/user/BuildApp/stage-reports/artifacts/analyzer-005a/before/rarytasy-eoze/metric-evidence.json",
+   "package": "/home/user/BuildApp/stage-reports/artifacts/analyzer-005a/before/rarytasy-eoze/source-package.json",
+   "graph": "/home/user/BuildApp/stage-reports/artifacts/analyzer-005a/before/rarytasy-eoze/observation-graph.json",
+   "cache": "/home/user/work005d/cache",
+   "dropFrames": [
+    "frame-asset-gotowy-projekt-dom-w-rarytasach-e-oze-rzut-1dede27c71",
+    "frame-asset-projekt-dom-w-rarytasach-e-oze-be1be080d9-4d5002ec06",
+    "frame-asset-rzut-b747b42ad2-e3a3d0015d"
+   ]
+  },
+  {
+   "case": "dom-pod-milorzebem",
+   "set": "DEV_005K",
+   "family": "dom-pod-milorzebem",
+   "metrics": "/home/user/work005i-a/m-on/dom-pod-milorzebem/metric-evidence.json",
+   "package": "/home/user/work005i-a/m-on/dom-pod-milorzebem/source-package.json",
+   "graph": "/home/user/work005i-a/m-on/dom-pod-milorzebem/observation-graph.json",
+   "cache": "/home/user/work005f/blind6/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "dom-w-helikoniach",
+   "set": "DEV_005K",
+   "family": "dom-w-helikoniach",
+   "metrics": "/home/user/work005i-a/m-on/dom-w-helikoniach/metric-evidence.json",
+   "package": "/home/user/work005i-a/m-on/dom-w-helikoniach/source-package.json",
+   "graph": "/home/user/work005i-a/m-on/dom-w-helikoniach/observation-graph.json",
+   "cache": "/home/user/work005f/blind6/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "kosacce-area-alone",
+   "set": "DEV_005K",
+   "family": "kosacce",
+   "metrics": "/home/user/BuildApp/stage-reports/artifacts/analyzer-005a/before/kosacce-clean/metric-evidence.json",
+   "package": "/home/user/BuildApp/stage-reports/artifacts/analyzer-005a/before/kosacce-clean/source-package.json",
+   "graph": "/home/user/BuildApp/stage-reports/artifacts/analyzer-005a/before/kosacce-clean/observation-graph.json",
+   "cache": "/home/user/work005d/cache",
+   "dropFrames": [
+    "frame-asset-gotowy-projekt-dom-w-kosaccach-46-rzut-par-803d3d68d8",
+    "frame-asset-projekt-dom-w-kosaccach-46-bdb822242d-a00d047246",
+    "frame-asset-rzut-f530d6ebf2-668d857ed9"
+   ]
+  },
+  {
+   "case": "dom-w-gozdzikowcach",
+   "set": "DEV_005K",
+   "family": "dom-w-gozdzikowcach",
+   "metrics": "/home/user/work005i-a/blind8/h1-dom-w-gozdzikowcach/metric-evidence.json",
+   "package": "/home/user/work005i-a/blind8/h1-dom-w-gozdzikowcach/source-package.json",
+   "graph": "/home/user/work005i-a/blind8/h1-dom-w-gozdzikowcach/observation-graph.json",
+   "cache": "/home/user/work005i-a/blind8/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "dom-w-cyklamenach",
+   "set": "DEV_005K",
+   "family": "dom-w-cyklamenach",
+   "metrics": "/home/user/work005i-a/blind8/h2-dom-w-cyklamenach/metric-evidence.json",
+   "package": "/home/user/work005i-a/blind8/h2-dom-w-cyklamenach/source-package.json",
+   "graph": "/home/user/work005i-a/blind8/h2-dom-w-cyklamenach/observation-graph.json",
+   "cache": "/home/user/work005i-a/blind8/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "A00",
+   "set": "FRESH_005K",
+   "family": "A00",
+   "metrics": "/home/user/work005k/gapset/runs/A00/metric-evidence.json",
+   "package": "/home/user/work005k/gapset/runs/A00/source-package.json",
+   "graph": "/home/user/work005k/gapset/runs/A00/observation-graph.json",
+   "cache": "/home/user/work005k/gapset/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "A01",
+   "set": "FRESH_005K",
+   "family": "A01",
+   "metrics": "/home/user/work005k/gapset/runs/A01/metric-evidence.json",
+   "package": "/home/user/work005k/gapset/runs/A01/source-package.json",
+   "graph": "/home/user/work005k/gapset/runs/A01/observation-graph.json",
+   "cache": "/home/user/work005k/gapset/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "A02",
+   "set": "FRESH_005K",
+   "family": "A02",
+   "metrics": "/home/user/work005k/gapset/runs/A02/metric-evidence.json",
+   "package": "/home/user/work005k/gapset/runs/A02/source-package.json",
+   "graph": "/home/user/work005k/gapset/runs/A02/observation-graph.json",
+   "cache": "/home/user/work005k/gapset/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "A03",
+   "set": "FRESH_005K",
+   "family": "A03",
+   "metrics": "/home/user/work005k/gapset/runs/A03/metric-evidence.json",
+   "package": "/home/user/work005k/gapset/runs/A03/source-package.json",
+   "graph": "/home/user/work005k/gapset/runs/A03/observation-graph.json",
+   "cache": "/home/user/work005k/gapset/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "A04",
+   "set": "FRESH_005K",
+   "family": "A04",
+   "metrics": "/home/user/work005k/gapset/runs/A04/metric-evidence.json",
+   "package": "/home/user/work005k/gapset/runs/A04/source-package.json",
+   "graph": "/home/user/work005k/gapset/runs/A04/observation-graph.json",
+   "cache": "/home/user/work005k/gapset/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "A05",
+   "set": "FRESH_005K",
+   "family": "A05",
+   "metrics": "/home/user/work005k/gapset/runs/A05/metric-evidence.json",
+   "package": "/home/user/work005k/gapset/runs/A05/source-package.json",
+   "graph": "/home/user/work005k/gapset/runs/A05/observation-graph.json",
+   "cache": "/home/user/work005k/gapset/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "A06",
+   "set": "FRESH_005K",
+   "family": "A06",
+   "metrics": "/home/user/work005k/gapset/runs/A06/metric-evidence.json",
+   "package": "/home/user/work005k/gapset/runs/A06/source-package.json",
+   "graph": "/home/user/work005k/gapset/runs/A06/observation-graph.json",
+   "cache": "/home/user/work005k/gapset/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "A07",
+   "set": "FRESH_005K",
+   "family": "A07",
+   "metrics": "/home/user/work005k/gapset/runs/A07/metric-evidence.json",
+   "package": "/home/user/work005k/gapset/runs/A07/source-package.json",
+   "graph": "/home/user/work005k/gapset/runs/A07/observation-graph.json",
+   "cache": "/home/user/work005k/gapset/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "D00",
+   "set": "FRESH_005K",
+   "family": "D00",
+   "metrics": "/home/user/work005k/gapset/runs/D00/metric-evidence.json",
+   "package": "/home/user/work005k/gapset/runs/D00/source-package.json",
+   "graph": "/home/user/work005k/gapset/runs/D00/observation-graph.json",
+   "cache": "/home/user/work005k/gapset/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "D01",
+   "set": "FRESH_005K",
+   "family": "D01",
+   "metrics": "/home/user/work005k/gapset/runs/D01/metric-evidence.json",
+   "package": "/home/user/work005k/gapset/runs/D01/source-package.json",
+   "graph": "/home/user/work005k/gapset/runs/D01/observation-graph.json",
+   "cache": "/home/user/work005k/gapset/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "D02",
+   "set": "FRESH_005K",
+   "family": "D02",
+   "metrics": "/home/user/work005k/gapset/runs/D02/metric-evidence.json",
+   "package": "/home/user/work005k/gapset/runs/D02/source-package.json",
+   "graph": "/home/user/work005k/gapset/runs/D02/observation-graph.json",
+   "cache": "/home/user/work005k/gapset/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "D03",
+   "set": "FRESH_005K",
+   "family": "D03",
+   "metrics": "/home/user/work005k/gapset/runs/D03/metric-evidence.json",
+   "package": "/home/user/work005k/gapset/runs/D03/source-package.json",
+   "graph": "/home/user/work005k/gapset/runs/D03/observation-graph.json",
+   "cache": "/home/user/work005k/gapset/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "D04",
+   "set": "FRESH_005K",
+   "family": "D04",
+   "metrics": "/home/user/work005k/gapset/runs/D04/metric-evidence.json",
+   "package": "/home/user/work005k/gapset/runs/D04/source-package.json",
+   "graph": "/home/user/work005k/gapset/runs/D04/observation-graph.json",
+   "cache": "/home/user/work005k/gapset/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "D05",
+   "set": "FRESH_005K",
+   "family": "D05",
+   "metrics": "/home/user/work005k/gapset/runs/D05/metric-evidence.json",
+   "package": "/home/user/work005k/gapset/runs/D05/source-package.json",
+   "graph": "/home/user/work005k/gapset/runs/D05/observation-graph.json",
+   "cache": "/home/user/work005k/gapset/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "dom-w-murajach",
+   "set": "BLIND_9",
+   "family": "dom-w-murajach",
+   "metrics": "/home/user/work005l/blind/h1-dom-w-murajach/metric-evidence.json",
+   "package": "/home/user/work005l/blind/h1-dom-w-murajach/source-package.json",
+   "graph": "/home/user/work005l/blind/h1-dom-w-murajach/observation-graph.json",
+   "cache": "/home/user/work005l/blind/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "dom-w-cieszyniankach",
+   "set": "BLIND_9",
+   "family": "dom-w-cieszyniankach",
+   "metrics": "/home/user/work005l/blind/h2-dom-w-cieszyniankach/metric-evidence.json",
+   "package": "/home/user/work005l/blind/h2-dom-w-cieszyniankach/source-package.json",
+   "graph": "/home/user/work005l/blind/h2-dom-w-cieszyniankach/observation-graph.json",
+   "cache": "/home/user/work005l/blind/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "dom-w-glogownikach",
+   "set": "BLIND_10_REVEALED",
+   "family": "dom-w-glogownikach",
+   "metrics": "/home/user/work005n/blind10/out-1/metric-evidence.json",
+   "package": "/home/user/work005n/blind10/out-1/source-package.json",
+   "graph": "/home/user/work005n/blind10/out-1/observation-graph.json",
+   "cache": "/home/user/work005n/blind10/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "dom-w-akebiach",
+   "set": "BLIND_10_REVEALED",
+   "family": "dom-w-akebiach",
+   "metrics": "/home/user/work005n/blind10/out-2/metric-evidence.json",
+   "package": "/home/user/work005n/blind10/out-2/source-package.json",
+   "graph": "/home/user/work005n/blind10/out-2/observation-graph.json",
+   "cache": "/home/user/work005n/blind10/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "dom-miniaturka",
+   "set": "BLIND_11_REVEALED",
+   "family": "dom-miniaturka",
+   "metrics": "/home/user/work005p/blind11/h1/new/metric-evidence.json",
+   "package": "/home/user/work005p/blind11/h1/new/source-package.json",
+   "graph": "/home/user/work005p/blind11/h1/new/observation-graph.json",
+   "cache": "/home/user/work005p/blind11/h1/cache",
+   "dropFrames": []
+  },
+  {
+   "case": "dom-w-krasnokwiatach",
+   "set": "BLIND_11_REVEALED",
+   "family": "dom-w-krasnokwiatach",
+   "metrics": "/home/user/work005p/blind11/h2/new/metric-evidence.json",
+   "package": "/home/user/work005p/blind11/h2/new/source-package.json",
+   "graph": "/home/user/work005p/blind11/h2/new/observation-graph.json",
+   "cache": "/home/user/work005p/blind11/h2/cache",
+   "dropFrames": []
+  }
+ ]
+}

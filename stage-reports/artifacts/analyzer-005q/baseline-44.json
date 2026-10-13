@@ -1,0 +1,3260 @@
+{
+ "code": {
+  "base": "04d5568a4a36d2b850998f2848d06e2179218872",
+  "planResolver": "1.5.0",
+  "reconstruction": "packages/reconstruction/src at the base, unpatched"
+ },
+ "corpus": {
+  "dev44": 44,
+  "file": "research/analyzer-005q/cases.json",
+  "revealedBlind11": [
+   "dom-miniaturka",
+   "dom-w-krasnokwiatach"
+  ],
+  "rows": 46,
+  "sha256": "d8f1b242ac8de1b40c9ce609731448608022200f048c66c146a1f20b76fed319"
+ },
+ "frozenAt": "before any 005Q challenger ran (Phase A)",
+ "reproducibility": "B0 (second-house.ts) = 005P PROD4 byte for byte on model.json for 44/44; S0 (solve.ts) = B0 on model/program/failure/trace/digest for 46/46",
+ "rows": [
+  {
+   "case": "dom-pod-jarzabem",
+   "code": null,
+   "decisionPath": {
+    "PLAN_RESOLUTION": {
+     "chosen": "copy area_table 4813950087, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 191.0 m\u00b2 (-11.9% of 216.76), NEAR, corroborated by ISOTROPY",
+     "outcome": "RESOLVED",
+     "reading1": "copy area_table 4813950087, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 191.0 m\u00b2 (-11.9% of 216.76), NEAR, corroborated by ISOTROPY"
+    }
+   },
+   "dev44": true,
+   "failedConditions": [
+    "footprint"
+   ],
+   "failureSha256": null,
+   "footprintResidualPct": -11.88,
+   "frame": "frame-asset-rzut-cafd34a77a-4813950087",
+   "modelHash": "df2aa66c8591107a1ff3608d02164ad80f4a7609c963915cb17fe7312e64553f",
+   "modelSha256": "df2aa66c8591107a1ff3608d02164ad80f4a7609c963915cb17fe7312e64553f",
+   "outcome": "COMPLETED",
+   "programSha256": "ae4ce2d6f150a211e7592adcd02d73a6ed388b2430b5cbcc689ca786d44957dd",
+   "refusal": null,
+   "scaleCmPerPx": 2.8022,
+   "semantics": {
+    "bodies": [
+     "COVERED_TERRACE:-:12.6",
+     "FLUSH_ATTACHED:-:0.2",
+     "FLUSH_ATTACHED:-:0.3",
+     "UNKNOWN:-:1.1",
+     "UNKNOWN:-:14.3"
+    ],
+    "completions": [
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0"
+    ],
+    "counts": {
+     "doors": 12,
+     "levels": 1,
+     "materials": 11,
+     "openings": 19,
+     "roofs": 1,
+     "rooms": 6,
+     "slabs": 1,
+     "terraces": 8,
+     "wallJunctions": 4,
+     "wallRings": 1,
+     "walls": 32,
+     "windows": 7
+    },
+    "extentConflicts": [
+     "N:SUPPORTED:RECORDED:2.47",
+     "S:STRONG:ZONE:0.98"
+    ],
+    "footprintM2": 191.0,
+    "levels": 1,
+    "massProvenance": [
+     "feat-main:SOURCE_EXACT"
+    ],
+    "terraces": [
+     {
+      "areaM2": 1.18,
+      "surface": "UNKNOWN",
+      "why": "the floor of the east recess"
+     },
+     {
+      "areaM2": 1.24,
+      "surface": "PAVED",
+      "why": "the floor of the east recess"
+     },
+     {
+      "areaM2": 1.67,
+      "surface": "UNKNOWN",
+      "why": "the floor of the east recess"
+     },
+     {
+      "areaM2": 4.51,
+      "surface": "PAVED",
+      "why": "the floor of the front recess"
+     },
+     {
+      "areaM2": 1.99,
+      "surface": "UNKNOWN",
+      "why": "the floor of the front recess"
+     },
+     {
+      "areaM2": 1.99,
+      "surface": "UNKNOWN",
+      "why": "the floor of the front recess"
+     },
+     {
+      "areaM2": 5.29,
+      "surface": "PAVED",
+      "why": "the floor of the front recess"
+     },
+     {
+      "areaM2": 47.75,
+      "surface": "UNKNOWN",
+      "why": "the floor of the rear recess"
+     }
+    ],
+    "unresolved": [
+     "AMBIGUOUS:a v2 registration for the front elevation",
+     "AMBIGUOUS:a v2 registration for the left elevation",
+     "AMBIGUOUS:a v2 registration for the rear elevation",
+     "AMBIGUOUS:the joint between main-iwall-0-x-2 and main-iwall-0-z-13",
+     "AMBIGUOUS:the number of room-0-1",
+     "AMBIGUOUS:the opening opening-0-west-3-0 as the drawings print it"
+    ],
+    "wallRings": [
+     {
+      "id": "ring-main-0",
+      "status": "SOURCE_EXACT",
+      "why": "19.10 \u00d7 10.00 m body from the plan's printed chains and wall bands"
+     }
+    ],
+    "wideOpenings": [
+     "OPENING_IN_WALL:3.84",
+     "OPENING_IN_WALL:6.22",
+     "OPEN_SIDE:4.04",
+     "OPEN_SIDE:4.4",
+     "OPEN_SIDE:4.68"
+    ]
+   },
+   "set": "DEV_005K",
+   "storeys": {
+    "holds": true,
+    "model": 1,
+    "plans": 1
+   },
+   "verdict": "ALGORITHMIC_FAIL"
+  },
+  {
+   "case": "dom-w-arkadiach",
+   "code": null,
+   "decisionPath": {},
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": null,
+   "footprintResidualPct": -0.49,
+   "frame": "frame-asset-rzut-16680ee739-bb2ced8b98",
+   "modelHash": "a1ac7a1b67b195839e7150e1da7a508b4b583d266a96d10b9c9322deae1f10b7",
+   "modelSha256": "a1ac7a1b67b195839e7150e1da7a508b4b583d266a96d10b9c9322deae1f10b7",
+   "outcome": "COMPLETED",
+   "programSha256": "78f9c7669d4f06866f0bc6855abaaf5c5fa87db6a4351a752d732106db899bd9",
+   "refusal": null,
+   "scaleCmPerPx": 1.8461,
+   "semantics": {
+    "bodies": [],
+    "completions": [],
+    "counts": {
+     "chimneys": 2,
+     "doors": 9,
+     "levels": 2,
+     "materials": 11,
+     "openings": 13,
+     "roofOpenings": 2,
+     "roofs": 1,
+     "rooms": 7,
+     "slabs": 2,
+     "stairs": 1,
+     "wallJunctions": 8,
+     "wallRings": 2,
+     "walls": 19,
+     "windows": 4
+    },
+    "extentConflicts": [],
+    "footprintM2": 69.56,
+    "levels": 2,
+    "massProvenance": [
+     "feat-main:SOURCE_EXACT"
+    ],
+    "terraces": [],
+    "unresolved": [
+     "AMBIGUOUS:a 0.87 m thin band at z 4.25",
+     "AMBIGUOUS:a v2 registration for the front elevation",
+     "AMBIGUOUS:a v2 registration for the left elevation",
+     "AMBIGUOUS:a v2 registration for the rear elevation",
+     "AMBIGUOUS:the exact steps of the stair",
+     "AMBIGUOUS:the joint between main-iwall-0-x-5 and main-iwall-0-z-4",
+     "AMBIGUOUS:the label of room-0-0 (read as 1)",
+     "AMBIGUOUS:the label of room-1-0 (read as 1)",
+     "AMBIGUOUS:the label of room-1-2 (read as 1)",
+     "AMBIGUOUS:the label of room-1-3 (read as 1)",
+     "AMBIGUOUS:the label of room-1-3 (read as 1)",
+     "AMBIGUOUS:the label of room-1-3 (read as 1)",
+     "AMBIGUOUS:the number of room-0-0",
+     "AMBIGUOUS:the number of room-0-2",
+     "AMBIGUOUS:the number of room-0-2",
+     "AMBIGUOUS:the number of room-1-0",
+     "AMBIGUOUS:the number of room-1-1"
+    ],
+    "wallRings": [
+     {
+      "id": "ring-main-0",
+      "status": "SOURCE_EXACT",
+      "why": "7.40 \u00d7 9.40 m body from the plan's printed chains and wall bands"
+     },
+     {
+      "id": "ring-main-1",
+      "status": null,
+      "why": ""
+     }
+    ],
+    "wideOpenings": [
+     "OPENING_IN_WALL:0.98",
+     "OPENING_IN_WALL:0.98",
+     "OPENING_IN_WALL:1.83",
+     "OPENING_IN_WALL:3.8",
+     "OPEN_SIDE:2.01"
+    ]
+   },
+   "set": "DEV_005K",
+   "storeys": {
+    "holds": true,
+    "model": 2,
+    "plans": 2
+   },
+   "verdict": "PASS"
+  },
+  {
+   "case": "dom-w-modrzewnicy",
+   "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+   "decisionPath": {
+    "PLAN_RESOLUTION": {
+     "outcome": "NO_ALTERNATIVE"
+    }
+   },
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": "b7897ee743b52f4e795825a1106d8b44ceb2c473c31b81f23f5b6728f024cbc2",
+   "footprintResidualPct": null,
+   "frame": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "modelHash": null,
+   "modelSha256": null,
+   "outcome": "FAILED",
+   "programSha256": null,
+   "refusal": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale; a total and the children it frames disagree as read, each stating one of the two scales, and no reading outside them decides. The scales its readings state are 1.761978 cm/px (1 independent,",
+   "scaleCmPerPx": null,
+   "semantics": {
+    "bodies": [],
+    "completions": [],
+    "extentConflicts": [],
+    "unresolved": [],
+    "wideOpenings": [
+     "OPENING_IN_WALL:4",
+     "OPENING_IN_WALL:4",
+     "OPENING_IN_WALL:5",
+     "OPENING_IN_WALL:7"
+    ]
+   },
+   "set": "DEV_005K",
+   "storeys": null,
+   "verdict": "ALGORITHMIC_FAIL"
+  },
+  {
+   "case": "dom-w-morelach",
+   "code": null,
+   "decisionPath": {
+    "METRIC_CHALLENGE": {
+     "outcome": "KEPT",
+     "reading1": "copy dimensioned 027bb2e82d, chain extent, registered scale, largest-first tiling, sides as gridded: 3 bodies, 112.0 m\u00b2 (-2.2% of 114.53), AGREES"
+    }
+   },
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": null,
+   "footprintResidualPct": -2.17,
+   "frame": "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+   "modelHash": "58ee0e7bfea429faa04ae01f88bd9e6c2131eb8030648803ea2c4fb15c9ea703",
+   "modelSha256": "58ee0e7bfea429faa04ae01f88bd9e6c2131eb8030648803ea2c4fb15c9ea703",
+   "outcome": "COMPLETED",
+   "programSha256": "319e798fb11623d47054c9ac39d97ed9d4f6513ab73c48a04babd1e5dafc30b8",
+   "refusal": null,
+   "scaleCmPerPx": 2.0115,
+   "semantics": {
+    "bodies": [
+     "SEPARATE_BODY:-:0.8",
+     "UNKNOWN:B:2.9"
+    ],
+    "completions": [
+     "ATTACHED_ROOM:ACCEPTED:2.9",
+     "BOX_COMPLETION:ACCEPTED:6.0"
+    ],
+    "counts": {
+     "doors": 18,
+     "levels": 2,
+     "materials": 11,
+     "openings": 26,
+     "roofs": 2,
+     "rooms": 7,
+     "slabs": 5,
+     "stairs": 1,
+     "wallJunctions": 20,
+     "wallRings": 5,
+     "walls": 42,
+     "windows": 8
+    },
+    "extentConflicts": [
+     "E:STRONG:ACCEPTED:1.06"
+    ],
+    "footprintM2": 112.05,
+    "levels": 2,
+    "massProvenance": [
+     "feat-attached-0:SOURCE_EXACT",
+     "feat-attached-1:SOURCE_EXACT",
+     "feat-main:SOURCE_EXACT"
+    ],
+    "terraces": [],
+    "unresolved": [
+     "AMBIGUOUS:a 0.49 m thin band at x 4.30",
+     "AMBIGUOUS:a 0.94 m thin band at z 7.32",
+     "AMBIGUOUS:a 1.82 m thin band at x 8.73",
+     "AMBIGUOUS:the exact steps of the stair",
+     "AMBIGUOUS:the interior of the body",
+     "AMBIGUOUS:the label of room-1-0 (read as 1)",
+     "AMBIGUOUS:the label of room-1-1 (read as 7)",
+     "AMBIGUOUS:the number of room-0-0",
+     "AMBIGUOUS:the number of room-0-0",
+     "AMBIGUOUS:the number of room-0-0",
+     "AMBIGUOUS:the number of room-0-0",
+     "AMBIGUOUS:the number of room-1-0",
+     "AMBIGUOUS:the number of room-1-0",
+     "AMBIGUOUS:the number of room-1-2",
+     "AMBIGUOUS:the number of room-1-2",
+     "AMBIGUOUS:the number of room-1-2",
+     "AMBIGUOUS:the opening opening-0-east-1-0 as the drawings print it",
+     "AMBIGUOUS:the opening opening-0-east-1-2 as the drawings print it",
+     "AMBIGUOUS:the opening shared-opening-0-east-1-1 as the drawings print it",
+     "AMBIGUOUS:what carries 11.8 m\u00b2 of the attic storey's walled region region-built-0-0",
+     "AMBIGUOUS:what carries 9.1 m\u00b2 of the attic storey's walled region region-built-2-3",
+     "AMBIGUOUS:which way the ridge runs over mass-0",
+     "MISSING:a registration for the elevations",
+     "MISSING:the kind of roof over mass-1",
+     "MISSING:the kind of roof over mass-2",
+     "MISSING:the main roof"
+    ],
+    "wallRings": [
+     {
+      "id": "ring-attached-0-0",
+      "status": "SOURCE_EXACT",
+      "why": "3.80 \u00d7 8.08 m body from the plan's printed chains and wall bands"
+     },
+     {
+      "id": "ring-attached-0-1",
+      "status": null,
+      "why": ""
+     },
+     {
+      "id": "ring-attached-1-0",
+      "status": "SOURCE_EXACT",
+      "why": "1.06 \u00d7 3.50 m body from the plan's printed chains and wall bands"
+     },
+     {
+      "id": "ring-main-0",
+      "status": "SOURCE_EXACT",
+      "why": "7.31 \u00d7 10.62 m body from the plan's printed chains and wall bands"
+     },
+     {
+      "id": "ring-main-1",
+      "status": null,
+      "why": ""
+     }
+    ],
+    "wideOpenings": [
+     "OPEN_SIDE:3.59"
+    ]
+   },
+   "set": "DEV_005K",
+   "storeys": {
+    "holds": true,
+    "model": 2,
+    "plans": 2
+   },
+   "verdict": "PASS"
+  },
+  {
+   "case": "marcowki",
+   "code": null,
+   "decisionPath": {},
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": null,
+   "footprintResidualPct": -0.29,
+   "frame": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+   "modelHash": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+   "modelSha256": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+   "outcome": "COMPLETED",
+   "programSha256": "34ac9f48d1d89f4ca375d223e2bdf6b2d8419317ce8f7a366f947d9894199147",
+   "refusal": null,
+   "scaleCmPerPx": 2.6447,
+   "semantics": {
+    "bodies": [
+     "COVERED_TERRACE:-:11.0",
+     "COVERED_TERRACE:-:7.0",
+     "FLUSH_ATTACHED:-:0.9",
+     "FLUSH_ATTACHED:-:1.0"
+    ],
+    "completions": [
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0"
+    ],
+    "counts": {
+     "balconies": 2,
+     "chimneys": 2,
+     "doors": 12,
+     "levels": 2,
+     "materials": 11,
+     "openings": 21,
+     "railings": 2,
+     "roofOpenings": 5,
+     "rooflights": 3,
+     "roofs": 2,
+     "rooms": 12,
+     "slabs": 3,
+     "stairs": 1,
+     "surfaceRegions": 3,
+     "terraces": 2,
+     "wallJunctions": 12,
+     "wallRings": 3,
+     "walls": 40,
+     "windows": 9
+    },
+    "extentConflicts": [],
+    "footprintM2": 130.79,
+    "levels": 2,
+    "massProvenance": [
+     "feat-attached-0:SOURCE_EXACT",
+     "feat-main:SOURCE_EXACT"
+    ],
+    "terraces": [
+     {
+      "areaM2": 10.68,
+      "surface": "PAVED",
+      "why": "the floor of the front recess"
+     },
+     {
+      "areaM2": 23.26,
+      "surface": "PAVED",
+      "why": "the floor of the rear recess and the platform the plan outlines beyond it"
+     }
+    ],
+    "unresolved": [
+     "AMBIGUOUS:the label of room-0-2 (read as 9)",
+     "MISSING:the kind of roof over mass-1"
+    ],
+    "wallRings": [
+     {
+      "id": "ring-attached-0-0",
+      "status": "SOURCE_EXACT",
+      "why": "4.15 \u00d7 7.51 m body from the plan's printed chains and wall bands"
+     },
+     {
+      "id": "ring-main-0",
+      "status": "SOURCE_EXACT",
+      "why": "7.90 \u00d7 12.61 m body from the plan's printed chains and wall bands"
+     },
+     {
+      "id": "ring-main-1",
+      "status": null,
+      "why": ""
+     }
+    ],
+    "wideOpenings": []
+   },
+   "set": "DEV_005K",
+   "storeys": {
+    "holds": true,
+    "model": 2,
+    "plans": 2
+   },
+   "verdict": "PASS"
+  },
+  {
+   "case": "rarytasy-g2e",
+   "code": null,
+   "decisionPath": {},
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": null,
+   "footprintResidualPct": -2.75,
+   "frame": "frame-asset-rzut-e8520c3ad3-59a406b738",
+   "modelHash": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+   "modelSha256": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+   "outcome": "COMPLETED",
+   "programSha256": "28cded26d38bb34e3944d1da513f2528748d460ed724fdf53b37b6cb58412207",
+   "refusal": null,
+   "scaleCmPerPx": 2.75495,
+   "semantics": {
+    "bodies": [
+     "FLUSH_ATTACHED:-:0.3",
+     "UNKNOWN:-:0.2",
+     "UNKNOWN:-:1.2"
+    ],
+    "completions": [
+     "ATTACHED_ROOM:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0"
+    ],
+    "counts": {
+     "chimneys": 1,
+     "doors": 11,
+     "levels": 1,
+     "materials": 11,
+     "openings": 20,
+     "relationships": 4,
+     "roofEdges": 5,
+     "roofPlanes": 2,
+     "roofs": 1,
+     "rooms": 9,
+     "slabs": 2,
+     "surfaceRegions": 4,
+     "terraces": 2,
+     "wallJunctions": 8,
+     "wallRings": 2,
+     "walls": 20,
+     "windows": 9
+    },
+    "extentConflicts": [
+     "S:STRONG:ZONE:6.12"
+    ],
+    "footprintM2": 184.55,
+    "levels": 1,
+    "massProvenance": [
+     "feat-attached-0:SOURCE_EXACT",
+     "feat-main:SOURCE_EXACT"
+    ],
+    "terraces": [
+     {
+      "areaM2": 12.72,
+      "surface": "UNKNOWN",
+      "why": "the floor of the front recess"
+     },
+     {
+      "areaM2": 55.71,
+      "surface": "UNKNOWN",
+      "why": "the floor of the front recess"
+     }
+    ],
+    "unresolved": [
+     "AMBIGUOUS:the joint between main-iwall-0-x-4 and main-iwall-0-z-0",
+     "AMBIGUOUS:the label of room-0-0 (read as 1)",
+     "AMBIGUOUS:the label of room-0-0 (read as 1)",
+     "AMBIGUOUS:the label of room-0-6 (read as 13)",
+     "AMBIGUOUS:the label of room-0-7 (read as 13)",
+     "AMBIGUOUS:the number of room-0-0",
+     "AMBIGUOUS:the number of room-0-0",
+     "AMBIGUOUS:the number of room-0-6",
+     "AMBIGUOUS:the opening opening-0-east-5-0 as the drawings print it",
+     "MISSING:the kind of roof over mass-1",
+     "REFUSED:the opening opening-0-east-5-1 as the drawings print it"
+    ],
+    "wallRings": [
+     {
+      "id": "ring-attached-0-0",
+      "status": "SOURCE_EXACT",
+      "why": "6.17 \u00d7 6.20 m body from the plan's printed chains and wall bands"
+     },
+     {
+      "id": "ring-main-0",
+      "status": "SOURCE_EXACT",
+      "why": "17.21 \u00d7 8.50 m body from the plan's printed chains and wall bands"
+     }
+    ],
+    "wideOpenings": [
+     "OPENING_IN_WALL:4.0",
+     "OPENING_IN_WALL:4.96"
+    ]
+   },
+   "set": "DEV_005K",
+   "storeys": {
+    "holds": true,
+    "model": 1,
+    "plans": 1
+   },
+   "verdict": "PASS"
+  },
+  {
+   "case": "kosacce-clean",
+   "code": null,
+   "decisionPath": {},
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": null,
+   "footprintResidualPct": -1.33,
+   "frame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+   "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+   "modelSha256": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+   "outcome": "COMPLETED",
+   "programSha256": "63030609248a1318ca61ad8b2236b0f62fc4923a249f77ca4c638719049cae8f",
+   "refusal": null,
+   "scaleCmPerPx": 2.40625,
+   "semantics": {
+    "bodies": [],
+    "completions": [
+     "BOX_COMPLETION:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0"
+    ],
+    "counts": {
+     "chimneys": 2,
+     "doors": 12,
+     "levels": 1,
+     "materials": 11,
+     "openings": 20,
+     "roofOpenings": 2,
+     "roofs": 3,
+     "rooms": 10,
+     "slabs": 3,
+     "wallJunctions": 12,
+     "wallRings": 3,
+     "walls": 39,
+     "windows": 8
+    },
+    "extentConflicts": [],
+    "footprintM2": 162.28,
+    "levels": 1,
+    "massProvenance": [
+     "feat-attached-0:SOURCE_EXACT",
+     "feat-attached-1:SOURCE_EXACT",
+     "feat-main:SOURCE_EXACT"
+    ],
+    "terraces": [],
+    "unresolved": [
+     "AMBIGUOUS:a 0.46 m thin band at x 14.17",
+     "AMBIGUOUS:a 1.47 m thin band at z 0.37",
+     "AMBIGUOUS:a 1.95 m thin band at z 8.51",
+     "AMBIGUOUS:a 2.09 m thin band at z 0.37",
+     "AMBIGUOUS:a 2.29 m thin band at z 8.53",
+     "AMBIGUOUS:a v2 registration for the front elevation",
+     "AMBIGUOUS:a v2 registration for the rear elevation",
+     "AMBIGUOUS:the label of room-0-2 (read as 8)",
+     "AMBIGUOUS:the opening shared-opening-0-east-1-1 as the drawings print it",
+     "AMBIGUOUS:whether the 3.2 m\u00b2 region at 11.52, 0.00 is part of the building",
+     "AMBIGUOUS:which way the ridge runs over mass-0",
+     "MISSING:the kind of roof over mass-1",
+     "MISSING:the kind of roof over mass-2"
+    ],
+    "wallRings": [
+     {
+      "id": "ring-attached-0-0",
+      "status": "SOURCE_EXACT",
+      "why": "6.48 \u00d7 3.70 m body from the plan's printed chains and wall bands"
+     },
+     {
+      "id": "ring-attached-1-0",
+      "status": "SOURCE_EXACT",
+      "why": "2.04 \u00d7 4.35 m body from the plan's printed chains and wall bands"
+     },
+     {
+      "id": "ring-main-0",
+      "status": "SOURCE_EXACT",
+      "why": "14.54 \u00d7 8.90 m body from the plan's printed chains and wall bands"
+     }
+    ],
+    "wideOpenings": [
+     "OPENING_IN_WALL:2.48",
+     "OPEN_SIDE:2.21",
+     "OPEN_SIDE:3.71",
+     "OPEN_SIDE:3.95",
+     "OPEN_SIDE:5.17",
+     "OPEN_SIDE:5.78",
+     "OPEN_SIDE:6.84"
+    ]
+   },
+   "set": "DEV_005K",
+   "storeys": {
+    "holds": true,
+    "model": 1,
+    "plans": 1
+   },
+   "verdict": "PASS"
+  },
+  {
+   "case": "kosacce-tracked",
+   "code": null,
+   "decisionPath": {},
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": null,
+   "footprintResidualPct": -1.33,
+   "frame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+   "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+   "modelSha256": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+   "outcome": "COMPLETED",
+   "programSha256": "63030609248a1318ca61ad8b2236b0f62fc4923a249f77ca4c638719049cae8f",
+   "refusal": null,
+   "scaleCmPerPx": 2.40625,
+   "semantics": {
+    "bodies": [],
+    "completions": [
+     "BOX_COMPLETION:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0"
+    ],
+    "counts": {
+     "chimneys": 2,
+     "doors": 12,
+     "levels": 1,
+     "materials": 11,
+     "openings": 20,
+     "roofOpenings": 2,
+     "roofs": 3,
+     "rooms": 10,
+     "slabs": 3,
+     "wallJunctions": 12,
+     "wallRings": 3,
+     "walls": 39,
+     "windows": 8
+    },
+    "extentConflicts": [],
+    "footprintM2": 162.28,
+    "levels": 1,
+    "massProvenance": [
+     "feat-attached-0:SOURCE_EXACT",
+     "feat-attached-1:SOURCE_EXACT",
+     "feat-main:SOURCE_EXACT"
+    ],
+    "terraces": [],
+    "unresolved": [
+     "AMBIGUOUS:a 0.46 m thin band at x 14.17",
+     "AMBIGUOUS:a 1.47 m thin band at z 0.37",
+     "AMBIGUOUS:a 1.95 m thin band at z 8.51",
+     "AMBIGUOUS:a 2.09 m thin band at z 0.37",
+     "AMBIGUOUS:a 2.29 m thin band at z 8.53",
+     "AMBIGUOUS:a v2 registration for the front elevation",
+     "AMBIGUOUS:a v2 registration for the rear elevation",
+     "AMBIGUOUS:the label of room-0-2 (read as 8)",
+     "AMBIGUOUS:the opening shared-opening-0-east-1-1 as the drawings print it",
+     "AMBIGUOUS:whether the 3.2 m\u00b2 region at 11.52, 0.00 is part of the building",
+     "AMBIGUOUS:which way the ridge runs over mass-0",
+     "MISSING:the kind of roof over mass-1",
+     "MISSING:the kind of roof over mass-2"
+    ],
+    "wallRings": [
+     {
+      "id": "ring-attached-0-0",
+      "status": "SOURCE_EXACT",
+      "why": "6.48 \u00d7 3.70 m body from the plan's printed chains and wall bands"
+     },
+     {
+      "id": "ring-attached-1-0",
+      "status": "SOURCE_EXACT",
+      "why": "2.04 \u00d7 4.35 m body from the plan's printed chains and wall bands"
+     },
+     {
+      "id": "ring-main-0",
+      "status": "SOURCE_EXACT",
+      "why": "14.54 \u00d7 8.90 m body from the plan's printed chains and wall bands"
+     }
+    ],
+    "wideOpenings": [
+     "OPENING_IN_WALL:2.48",
+     "OPEN_SIDE:2.21",
+     "OPEN_SIDE:3.71",
+     "OPEN_SIDE:3.95",
+     "OPEN_SIDE:5.17",
+     "OPEN_SIDE:5.78",
+     "OPEN_SIDE:6.84"
+    ]
+   },
+   "set": "DEV_005K",
+   "storeys": {
+    "holds": true,
+    "model": 1,
+    "plans": 1
+   },
+   "verdict": "PASS"
+  },
+  {
+   "case": "rarytasy-eoze",
+   "code": null,
+   "decisionPath": {
+    "METRIC_CHALLENGE": {
+     "chosen": "copy dimensioned e3a3d0015d, chain extent, scale 2.222222 cm/px, largest-first tiling, sides as gridded: 1 body, 124.0 m\u00b2 (+1.6% of 122.07), AGREES, corroborated by ISOTROPY+CROSS_COPY",
+     "chosenRefuted": 0.114611,
+     "outcome": "REPLACED",
+     "reading1": "copy dimensioned e3a3d0015d, chain extent, scale 2.222222 cm/px, largest-first tiling, sides as gridded: 1 body, 124.0 m\u00b2 (+1.6% of 122.07), AGREES, corroborated by ISOTROPY+CROSS_COPY",
+     "registrationRefuted": 0.334843,
+     "sourceConflict": "OUTER_TOTALS"
+    }
+   },
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": null,
+   "footprintResidualPct": 1.57,
+   "frame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+   "modelHash": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
+   "modelSha256": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
+   "outcome": "COMPLETED",
+   "programSha256": "8943ebfeb165e73bc7c0bd799e46ab26ac794776938144cfa3c52fb07ba1b607",
+   "refusal": null,
+   "scaleCmPerPx": 2.2222,
+   "semantics": {
+    "bodies": [],
+    "completions": [],
+    "counts": {
+     "doors": 12,
+     "levels": 1,
+     "materials": 11,
+     "openings": 21,
+     "roofs": 1,
+     "rooms": 8,
+     "slabs": 1,
+     "wallJunctions": 4,
+     "wallRings": 1,
+     "walls": 19,
+     "windows": 9
+    },
+    "extentConflicts": [],
+    "footprintM2": 123.99,
+    "levels": 1,
+    "massProvenance": [
+     "feat-main:SOURCE_EXACT"
+    ],
+    "terraces": [],
+    "unresolved": [
+     "AMBIGUOUS:a v2 registration for the left elevation",
+     "AMBIGUOUS:the number of room-0-1",
+     "AMBIGUOUS:the number of room-0-1",
+     "AMBIGUOUS:the number of room-0-1",
+     "AMBIGUOUS:the number of room-0-1",
+     "AMBIGUOUS:the number of room-0-1"
+    ],
+    "wallRings": [
+     {
+      "id": "ring-main-0",
+      "status": "SOURCE_EXACT",
+      "why": "16.01 \u00d7 7.74 m body from the plan's printed chains and wall bands"
+     }
+    ],
+    "wideOpenings": [
+     "OPENING_IN_WALL:4.44"
+    ]
+   },
+   "set": "DEV_005K",
+   "storeys": {
+    "holds": true,
+    "model": 1,
+    "plans": 1
+   },
+   "verdict": "PASS"
+  },
+  {
+   "case": "eoze-legacy-every",
+   "code": null,
+   "decisionPath": {
+    "METRIC_CHALLENGE": {
+     "chosen": "copy dimensioned e3a3d0015d, chain extent, scale 2.223611 cm/px, largest-first tiling, sides as gridded: 1 body, 116.9 m\u00b2 (-4.2% of 122.07), AGREES",
+     "chosenRefuted": 0.242339,
+     "outcome": "REPLACED",
+     "reading1": "copy dimensioned e3a3d0015d, chain extent, scale 2.223611 cm/px, largest-first tiling, sides as gridded: 1 body, 116.9 m\u00b2 (-4.2% of 122.07), AGREES",
+     "registrationRefuted": 0.921264,
+     "sourceConflict": "AS_READ_REFUTATION"
+    }
+   },
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": null,
+   "footprintResidualPct": -4.21,
+   "frame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+   "modelHash": "0a0e019df52a473a95e977cae5e88bfe08a8c417e64cb8866e47bc572a602603",
+   "modelSha256": "0a0e019df52a473a95e977cae5e88bfe08a8c417e64cb8866e47bc572a602603",
+   "outcome": "COMPLETED",
+   "programSha256": "05c788f9f6004a55b6fc0a341fac69adba08e874137fefbe7bff49f8b05e0674",
+   "refusal": null,
+   "scaleCmPerPx": 2.2236,
+   "semantics": {
+    "bodies": [
+     "COVERED_TERRACE:-:0.5",
+     "FLUSH_ATTACHED:-:0.3",
+     "FLUSH_ATTACHED:-:0.5",
+     "FLUSH_ATTACHED:-:2.1",
+     "UNKNOWN:-:0.2",
+     "UNKNOWN:-:5.9"
+    ],
+    "completions": [
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0"
+    ],
+    "counts": {
+     "doors": 7,
+     "levels": 1,
+     "materials": 11,
+     "openings": 18,
+     "roofs": 1,
+     "rooms": 8,
+     "slabs": 1,
+     "surfaceRegions": 4,
+     "terraces": 4,
+     "wallJunctions": 4,
+     "wallRings": 1,
+     "walls": 19,
+     "windows": 11
+    },
+    "extentConflicts": [],
+    "footprintM2": 116.94,
+    "levels": 1,
+    "massProvenance": [
+     "feat-main:SOURCE_DERIVED"
+    ],
+    "terraces": [
+     {
+      "areaM2": 1.26,
+      "surface": "PAVED",
+      "why": "the floor of the front recess"
+     },
+     {
+      "areaM2": 0.22,
+      "surface": "UNKNOWN",
+      "why": "the floor of the front recess"
+     },
+     {
+      "areaM2": 1.69,
+      "surface": "UNKNOWN",
+      "why": "the floor of the front recess"
+     },
+     {
+      "areaM2": 5.54,
+      "surface": "PAVED",
+      "why": "the floor of the rear recess"
+     }
+    ],
+    "unresolved": [
+     "AMBIGUOUS:a v2 registration for the left elevation",
+     "AMBIGUOUS:the number of room-0-5",
+     "AMBIGUOUS:the number of room-0-5",
+     "AMBIGUOUS:the number of room-0-5",
+     "AMBIGUOUS:the number of room-0-5",
+     "AMBIGUOUS:the number of room-0-5"
+    ],
+    "wallRings": [
+     {
+      "id": "ring-main-0",
+      "status": "SOURCE_EXACT",
+      "why": "16.01 \u00d7 7.30 m body from the plan's printed chains and wall bands"
+     }
+    ],
+    "wideOpenings": [
+     "OPENING_IN_WALL:4.45"
+    ]
+   },
+   "set": "DEV_005K",
+   "storeys": {
+    "holds": true,
+    "model": 1,
+    "plans": 1
+   },
+   "verdict": "PASS"
+  },
+  {
+   "case": "alt-marcowki",
+   "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+   "decisionPath": {
+    "PLAN_RESOLUTION": {
+     "outcome": "INCONCLUSIVE",
+     "reading1": "copy unknown c68728b8e4, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 35.2 m\u00b2 (-73.2% of 131.16), WRONG"
+    }
+   },
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": "79522e31d3f113b45874340b268e28cac50acb940f189792d4b2eaed288139f7",
+   "footprintResidualPct": null,
+   "frame": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+   "modelHash": null,
+   "modelSha256": null,
+   "outcome": "FAILED",
+   "programSha256": null,
+   "refusal": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 1.710048 cm/px (0 independent, plausible); 1.339869 cm/px (0 independent, plausible); 0.52356 cm/px (0 independent, ruled out by the walls); 0 printed readi",
+   "scaleCmPerPx": null,
+   "semantics": {
+    "bodies": [],
+    "completions": [],
+    "extentConflicts": [],
+    "unresolved": [],
+    "wideOpenings": [
+     "OPENING_IN_WALL:4",
+     "OPENING_IN_WALL:4",
+     "OPENING_IN_WALL:5",
+     "OPENING_IN_WALL:8"
+    ]
+   },
+   "set": "DEV_005K",
+   "storeys": null,
+   "verdict": "ALGORITHMIC_FAIL"
+  },
+  {
+   "case": "dom-w-jablonkach",
+   "code": null,
+   "decisionPath": {},
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": null,
+   "footprintResidualPct": -0.4,
+   "frame": "frame-asset-rzut-a8bdd8cd1d-d80b709d74",
+   "modelHash": "a81652d034b4f9de2c0f43cce1365a0d6d9414d90ed0fb83056fd6582700a4bb",
+   "modelSha256": "a81652d034b4f9de2c0f43cce1365a0d6d9414d90ed0fb83056fd6582700a4bb",
+   "outcome": "COMPLETED",
+   "programSha256": "704b826d35ab4feaf4432d89d5e67a2217ceebd5581a9c7ab6d78f5eb890f0a7",
+   "refusal": null,
+   "scaleCmPerPx": 2.11555,
+   "semantics": {
+    "bodies": [
+     "COVERED_TERRACE:-:3.0"
+    ],
+    "completions": [],
+    "counts": {
+     "chimneys": 1,
+     "doors": 10,
+     "levels": 2,
+     "materials": 11,
+     "openings": 19,
+     "roofOpenings": 1,
+     "roofs": 1,
+     "rooms": 8,
+     "slabs": 2,
+     "stairs": 1,
+     "terraces": 1,
+     "wallJunctions": 8,
+     "wallRings": 2,
+     "walls": 26,
+     "windows": 9
+    },
+    "extentConflicts": [
+     "N:SUPPORTED:RECORDED:3.81"
+    ],
+    "footprintM2": 99.0,
+    "levels": 2,
+    "massProvenance": [
+     "feat-main:SOURCE_EXACT"
+    ],
+    "terraces": [
+     {
+      "areaM2": 41.8,
+      "surface": "PAVED",
+      "why": "the floor of the rear recess"
+     }
+    ],
+    "unresolved": [
+     "AMBIGUOUS:a 0.44 m thin band at x 4.96",
+     "AMBIGUOUS:a 1.60 m thin band at z 1.99",
+     "AMBIGUOUS:a v2 registration for the front elevation",
+     "AMBIGUOUS:a v2 registration for the rear elevation",
+     "AMBIGUOUS:the exact steps of the stair",
+     "AMBIGUOUS:the label of room-1-0 (read as 5)",
+     "AMBIGUOUS:the number of room-0-2",
+     "AMBIGUOUS:the number of room-1-0",
+     "AMBIGUOUS:the number of room-1-2",
+     "AMBIGUOUS:the number of room-1-3",
+     "AMBIGUOUS:what carries 7.2 m\u00b2 of the attic storey's walled region region-built-0-1",
+     "AMBIGUOUS:which way the ridge runs over mass-0"
+    ],
+    "wallRings": [
+     {
+      "id": "ring-main-0",
+      "status": "SOURCE_EXACT",
+      "why": "11.00 \u00d7 9.00 m body from the plan's printed chains and wall bands"
+     },
+     {
+      "id": "ring-main-1",
+      "status": null,
+      "why": ""
+     }
+    ],
+    "wideOpenings": []
+   },
+   "set": "DEV_005K",
+   "storeys": {
+    "holds": true,
+    "model": 2,
+    "plans": 2
+   },
+   "verdict": "PASS"
+  },
+  {
+   "case": "willa-miranda",
+   "code": null,
+   "decisionPath": {},
+   "dev44": true,
+   "failedConditions": [
+    "storeys"
+   ],
+   "failureSha256": null,
+   "footprintResidualPct": -1.49,
+   "frame": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+   "modelHash": "84af704b09664eb5997d5a12265663ba45f2aaf456098190e43f914f34c34c81",
+   "modelSha256": "84af704b09664eb5997d5a12265663ba45f2aaf456098190e43f914f34c34c81",
+   "outcome": "COMPLETED",
+   "programSha256": "74e4902e0661443445daa7f4553b94caea8d4326ab3c91a268ef3985cb3bf6b4",
+   "refusal": null,
+   "scaleCmPerPx": 2.6699,
+   "semantics": {
+    "bodies": [
+     "COVERED_TERRACE:-:0.7",
+     "COVERED_TERRACE:-:10.1",
+     "PROJECTING_WING:B:17.0",
+     "UNKNOWN:-:5.0"
+    ],
+    "completions": [
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:5.0"
+    ],
+    "counts": {
+     "doors": 10,
+     "levels": 1,
+     "materials": 11,
+     "openings": 16,
+     "roofs": 3,
+     "rooms": 5,
+     "slabs": 3,
+     "wallJunctions": 12,
+     "wallRings": 3,
+     "walls": 25,
+     "windows": 6
+    },
+    "extentConflicts": [
+     "N:STRONG:ZONE:2.43",
+     "S:STRONG:ZONE:2.43"
+    ],
+    "footprintM2": 167.36,
+    "levels": 1,
+    "massProvenance": [
+     "feat-attached-0:SOURCE_DERIVED",
+     "feat-attached-1:SOURCE_DERIVED",
+     "feat-main:SOURCE_EXACT"
+    ],
+    "terraces": [],
+    "unresolved": [
+     "AMBIGUOUS:a 0.27 m thin band at x 12.22",
+     "AMBIGUOUS:a 1.39 m thin band at z 2.95",
+     "AMBIGUOUS:a v2 registration for the rear elevation",
+     "AMBIGUOUS:the opening opening-0-east-5-0 as the drawings print it",
+     "AMBIGUOUS:the opening opening-0-east-9-0 as the drawings print it",
+     "AMBIGUOUS:the opening opening-0-west-3-1 as the drawings print it",
+     "AMBIGUOUS:which body the upper storey stands on",
+     "MISSING:the kind of roof over mass-1",
+     "MISSING:the kind of roof over mass-2"
+    ],
+    "wallRings": [
+     {
+      "id": "ring-attached-0-0",
+      "status": "SOURCE_EXACT",
+      "why": "6.51 \u00d7 2.45 m body from the plan's printed chains and wall bands"
+     },
+     {
+      "id": "ring-attached-1-0",
+      "status": "SOURCE_EXACT",
+      "why": "5.48 \u00d7 2.45 m body from the plan's printed chains and wall bands"
+     },
+     {
+      "id": "ring-main-0",
+      "status": "SOURCE_EXACT",
+      "why": "15.00 \u00d7 9.20 m body from the plan's printed chains and wall bands"
+     }
+    ],
+    "wideOpenings": [
+     "OPENING_IN_WALL:4.87",
+     "OPEN_SIDE:3.54"
+    ]
+   },
+   "set": "DEV_005K",
+   "storeys": {
+    "holds": false,
+    "model": 1,
+    "plans": 2
+   },
+   "verdict": "ALGORITHMIC_FAIL"
+  },
+  {
+   "case": "dom-w-zurawkach",
+   "code": null,
+   "decisionPath": {},
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": null,
+   "footprintResidualPct": -0.81,
+   "frame": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+   "modelHash": "a8ef42a5613bde1f0c59f8535c642fa8bd95609a436dfdc0f1ae7258732df7d1",
+   "modelSha256": "a8ef42a5613bde1f0c59f8535c642fa8bd95609a436dfdc0f1ae7258732df7d1",
+   "outcome": "COMPLETED",
+   "programSha256": "04d5cb7e94e506a9f240824777426eb203b70cb0d6b7485a1f6ab43617043728",
+   "refusal": null,
+   "scaleCmPerPx": 2.2174,
+   "semantics": {
+    "bodies": [
+     "PROJECTING_WING:B:6.4",
+     "RECESSED_ATTACHED:-:0.3",
+     "RECESSED_ATTACHED:-:0.5",
+     "RECESSED_ATTACHED:-:1.0",
+     "SEPARATE_BODY:-:0.7",
+     "UNKNOWN:-:6.7"
+    ],
+    "completions": [
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0"
+    ],
+    "counts": {
+     "chimneys": 1,
+     "doors": 23,
+     "levels": 3,
+     "materials": 11,
+     "openings": 29,
+     "roofOpenings": 1,
+     "roofs": 2,
+     "rooms": 14,
+     "slabs": 6,
+     "stairs": 1,
+     "wallJunctions": 24,
+     "wallRings": 6,
+     "walls": 39,
+     "windows": 6
+    },
+    "extentConflicts": [
+     "S:STRONG:INCONCLUSIVE:1.5"
+    ],
+    "footprintM2": 100.88,
+    "levels": 3,
+    "massProvenance": [
+     "feat-attached-0:SOURCE_EXACT",
+     "feat-main:SOURCE_EXACT"
+    ],
+    "terraces": [],
+    "unresolved": [
+     "AMBIGUOUS:a 1.42 m thin band at x 3.53",
+     "AMBIGUOUS:a 1.62 m thin band at x 6.64",
+     "AMBIGUOUS:a 1.86 m thin band at x 8.52",
+     "AMBIGUOUS:a v2 registration for the front elevation",
+     "AMBIGUOUS:a v2 registration for the rear elevation",
+     "AMBIGUOUS:the exact steps of the stair",
+     "AMBIGUOUS:the number of room-1-0",
+     "AMBIGUOUS:the number of room-1-0",
+     "AMBIGUOUS:the opening opening-0-west-7-0 as the drawings print it",
+     "AMBIGUOUS:the opening opening-0-west-7-2 as the drawings print it",
+     "AMBIGUOUS:the opening shared-opening--1-east-1-1 as the drawings print it",
+     "AMBIGUOUS:the opening shared-opening-0-east-5-0 as the drawings print it",
+     "AMBIGUOUS:the opening shared-opening-0-east-5-1 as the drawings print it",
+     "AMBIGUOUS:the opening shared-opening-1-east-9-0 as the drawings print it",
+     "AMBIGUOUS:what carries 12.5 m\u00b2 of the attic storey's walled region region-built-0-0",
+     "AMBIGUOUS:which way the ridge runs over mass-0",
+     "MISSING:the kind of roof over mass-1"
+    ],
+    "wallRings": [
+     {
+      "id": "ring-attached-0--1",
+      "status": "SOURCE_EXACT",
+      "why": "4.30 \u00d7 9.50 m body from the plan's printed chains and wall bands"
+     },
+     {
+      "id": "ring-attached-0-0",
+      "status": null,
+      "why": ""
+     },
+     {
+      "id": "ring-attached-0-1",
+      "status": "SOURCE_DERIVED",
+      "why": "storey 1's own walls, 4.30 \u00d7 8.68 m: the walled region of that storey's plan, registered onto the body below, where it s"
+     },
+     {
+      "id": "ring-main--1",
+      "status": "SOURCE_EXACT",
+      "why": "7.50 \u00d7 8.00 m body from the plan's printed chains and wall bands"
+     },
+     {
+      "id": "ring-main-0",
+      "status": null,
+      "why": ""
+     },
+     {
+      "id": "ring-main-1",
+      "status": null,
+      "why": ""
+     }
+    ],
+    "wideOpenings": []
+   },
+   "set": "DEV_005K",
+   "storeys": {
+    "holds": true,
+    "model": 3,
+    "plans": 3
+   },
+   "verdict": "PASS"
+  },
+  {
+   "case": "dom-w-modrzykach",
+   "code": null,
+   "decisionPath": {},
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": null,
+   "footprintResidualPct": 2.03,
+   "frame": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+   "modelHash": "b125b9d24f1fb1fcb0004d45f2034fb949247f917a20893ea8b857d837946615",
+   "modelSha256": "b125b9d24f1fb1fcb0004d45f2034fb949247f917a20893ea8b857d837946615",
+   "outcome": "COMPLETED",
+   "programSha256": "c9915cc4957c7298162eb973d02362eabf74959f6eff2cb915e1d0ee19dd6795",
+   "refusal": null,
+   "scaleCmPerPx": 2.74845,
+   "semantics": {
+    "bodies": [
+     "PROJECTING_WING:B:153.3",
+     "UNKNOWN:-:3.9"
+    ],
+    "completions": [
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0"
+    ],
+    "counts": {
+     "doors": 23,
+     "levels": 1,
+     "materials": 11,
+     "openings": 26,
+     "roofs": 3,
+     "rooms": 7,
+     "slabs": 3,
+     "wallJunctions": 12,
+     "wallRings": 3,
+     "walls": 26,
+     "windows": 3
+    },
+    "extentConflicts": [
+     "S:STRONG:INCONCLUSIVE:9.63"
+    ],
+    "footprintM2": 185.68,
+    "levels": 1,
+    "massProvenance": [
+     "feat-attached-0:SOURCE_DERIVED",
+     "feat-attached-1:SOURCE_DERIVED",
+     "feat-main:SOURCE_DERIVED"
+    ],
+    "terraces": [],
+    "unresolved": [
+     "AMBIGUOUS:a 0.44 m thin band at x 4.01",
+     "AMBIGUOUS:a v2 registration for the front elevation",
+     "AMBIGUOUS:a v2 registration for the rear elevation",
+     "AMBIGUOUS:the opening opening-0-east-1-0 as the drawings print it",
+     "AMBIGUOUS:the opening opening-0-east-9-0 as the drawings print it",
+     "AMBIGUOUS:the opening opening-0-front-8-0 as the drawings print it",
+     "AMBIGUOUS:the opening shared-opening-0-front-0-3 as the drawings print it",
+     "AMBIGUOUS:the opening shared-opening-0-west-3-0 as the drawings print it",
+     "AMBIGUOUS:whether the 0.22 m\u00b2 strip at 4.56, 10.51 is part of the building",
+     "AMBIGUOUS:whether the 1.13 m\u00b2 strip at 7.95, 10.51 is part of the building",
+     "AMBIGUOUS:whether the 1.5 m\u00b2 region at 1.26, 11.13 is part of the building",
+     "MISSING:the kind of roof over mass-1",
+     "MISSING:the kind of roof over mass-2"
+    ],
+    "wallRings": [
+     {
+      "id": "ring-attached-0-0",
+      "status": "SOURCE_EXACT",
+      "why": "4.56 \u00d7 11.13 m body from the plan's printed chains and wall bands"
+     },
+     {
+      "id": "ring-attached-1-0",
+      "status": "SOURCE_EXACT",
+      "why": "7.24 \u00d7 1.66 m body from the plan's printed chains and wall bands"
+     },
+     {
+      "id": "ring-main-0",
+      "status": "SOURCE_EXACT",
+      "why": "13.89 \u00d7 8.85 m body from the plan's printed chains and wall bands"
+     }
+    ],
+    "wideOpenings": [
+     "OPEN_SIDE:7.5"
+    ]
+   },
+   "set": "DEV_005K",
+   "storeys": {
+    "holds": true,
+    "model": 1,
+    "plans": 1
+   },
+   "verdict": "PASS"
+  },
+  {
+   "case": "dom-w-azaliach",
+   "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+   "decisionPath": {
+    "PLAN_RESOLUTION": {
+     "outcome": "INCONCLUSIVE",
+     "reading1": "copy area_table 79ba9b7966, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 69.3 m\u00b2 (-0.5% of 69.69), UNKNOWN (the figure is spent)"
+    }
+   },
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": "7cacf9c6b5596f5784393208e175777c82f0e95874a00417d7ebcac4165691e9",
+   "footprintResidualPct": null,
+   "frame": "frame-asset-rzut-86bef468f3-19006df9bc",
+   "modelHash": null,
+   "modelSha256": null,
+   "outcome": "FAILED",
+   "programSha256": null,
+   "refusal": "the lowest storey covers 6.27 m\u00b2 against the 69.69 m\u00b2 the publisher prints \u2014 91.0% apart: the decomposition is not of this building 47 other readings of the plan were weighed and none holds: the best, copy area_table 79ba9b7966, wall-ink extent, registered scale, largest-first tiling, sides as gridd",
+   "scaleCmPerPx": 1.86275,
+   "semantics": {
+    "bodies": [
+     "PROJECTING_WING:B:6.3",
+     "RECESSED_ATTACHED:-:15.3",
+     "SEPARATE_BODY:-:1.5",
+     "UNKNOWN:-:44.7"
+    ],
+    "completions": [
+     "ATTACHED_ROOM:REJECTED:0"
+    ],
+    "extentConflicts": [],
+    "unresolved": [],
+    "wideOpenings": []
+   },
+   "set": "DEV_005K",
+   "storeys": null,
+   "verdict": "ALGORITHMIC_FAIL"
+  },
+  {
+   "case": "dom-w-dabecjach",
+   "code": "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
+   "decisionPath": {
+    "PLAN_RESOLUTION": {
+     "outcome": "INCONCLUSIVE",
+     "reading1": "copy dimensioned c936d50299, chain extent, registered scale, largest-first tiling, outer faces: 1 body, 137.2 m\u00b2 (-18.7% of 168.76), UNKNOWN (the figure is spent)"
+    }
+   },
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": "1bb27b9693f1f22745a54e7b378b3ea772ce055d2ce38a5081eff04106394148",
+   "footprintResidualPct": null,
+   "frame": "frame-asset-rzut-1a56066c62-10b0ec4131",
+   "modelHash": null,
+   "modelSha256": null,
+   "outcome": "FAILED",
+   "programSha256": null,
+   "refusal": "the building's outline cannot be established: read with drawn openings only it is B_STRICT 41.3 m\u00b2 (perimeter 131.8 m: 64% wall, 45.4 m drawn openings, 0.0 m blank gaps bridged, 1.6 m unsupported); bridging blank door-sized gaps by what lies behind them it is B_EXCLUSION 90.3 m\u00b2 (perimeter 96.0 m: 5",
+   "scaleCmPerPx": 2.81315,
+   "semantics": {
+    "bodies": [
+     "COVERED_TERRACE:-:41.1",
+     "COVERED_TERRACE:-:74.9",
+     "FLUSH_ATTACHED:-:2.7",
+     "PROJECTING_WING:B:35.2",
+     "RECESSED_ATTACHED:-:34.6",
+     "SEPARATE_BODY:-:0.0",
+     "SEPARATE_BODY:-:0.1",
+     "SEPARATE_BODY:-:0.1",
+     "SEPARATE_BODY:-:0.1",
+     "SEPARATE_BODY:-:0.1",
+     "SEPARATE_BODY:-:0.2",
+     "SEPARATE_BODY:-:0.2",
+     "SEPARATE_BODY:-:0.3",
+     "UNKNOWN:-:0.4"
+    ],
+    "completions": [
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0"
+    ],
+    "extentConflicts": [
+     "N:STRONG:ZONE:3.05",
+     "S:STRONG:INCONCLUSIVE:4.9",
+     "W:STRONG:INCONCLUSIVE:4.95"
+    ],
+    "unresolved": [],
+    "wideOpenings": [
+     "OPENING_IN_WALL:3.49",
+     "OPENING_IN_WALL:3.49",
+     "OPENING_IN_WALL:3.49",
+     "OPEN_SIDE:1.46",
+     "OPEN_SIDE:3.94",
+     "OPEN_SIDE:5.14",
+     "OPEN_SIDE:5.8",
+     "OPEN_SIDE:7.32"
+    ]
+   },
+   "set": "DEV_005K",
+   "storeys": null,
+   "verdict": "ALGORITHMIC_FAIL"
+  },
+  {
+   "case": "dom-w-tunbergiach",
+   "code": null,
+   "decisionPath": {
+    "METRIC_CHALLENGE": {
+     "outcome": "KEPT",
+     "reading1": "copy dimensioned c1a88b7f25, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 117.3 m\u00b2 (-0.4% of 117.74), AGREES, corroborated by ISOTROPY+CROSS_COPY"
+    }
+   },
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": null,
+   "footprintResidualPct": -0.37,
+   "frame": "frame-asset-rzut-83377e8ffc-c1a88b7f25",
+   "modelHash": "780ecd4e59ad2fd513bc0c9eace1c2f76a487b09de23c1943dc3ddae9843f282",
+   "modelSha256": "780ecd4e59ad2fd513bc0c9eace1c2f76a487b09de23c1943dc3ddae9843f282",
+   "outcome": "COMPLETED",
+   "programSha256": "87139d887084fae57add6bfdae7006c7be0a53f94003f90c494a32b8269cfb8b",
+   "refusal": null,
+   "scaleCmPerPx": 2.09325,
+   "semantics": {
+    "bodies": [],
+    "completions": [],
+    "counts": {
+     "doors": 35,
+     "levels": 3,
+     "materials": 11,
+     "openings": 49,
+     "roofs": 1,
+     "rooms": 12,
+     "slabs": 3,
+     "stairs": 1,
+     "wallJunctions": 12,
+     "wallRings": 3,
+     "walls": 49,
+     "windows": 14
+    },
+    "extentConflicts": [],
+    "footprintM2": 117.3,
+    "levels": 3,
+    "massProvenance": [
+     "feat-main:SOURCE_EXACT"
+    ],
+    "terraces": [],
+    "unresolved": [
+     "AMBIGUOUS:a 0.25 m thin band at z 6.09",
+     "AMBIGUOUS:a 0.27 m thin band at z 2.20",
+     "AMBIGUOUS:a 0.27 m thin band at z 3.52",
+     "AMBIGUOUS:a 0.27 m thin band at z 7.25",
+     "AMBIGUOUS:a 0.60 m thin band at z 8.18",
+     "AMBIGUOUS:a 0.65 m thin band at z 8.17",
+     "AMBIGUOUS:a 1.17 m thin band at z 4.28",
+     "AMBIGUOUS:a 2.45 m thin band at x 7.05",
+     "AMBIGUOUS:a 2.47 m thin band at x 4.68",
+     "AMBIGUOUS:a 2.91 m thin band at z 9.63",
+     "AMBIGUOUS:a v2 registration for the front elevation",
+     "AMBIGUOUS:the exact steps of the stair",
+     "AMBIGUOUS:the joint between main-iwall-1-z-10 and main-iwall-1-x-12",
+     "AMBIGUOUS:the joint between main-iwall-1-z-6 and main-iwall-1-x-12",
+     "AMBIGUOUS:the label of room-1-3 (read as 1)",
+     "AMBIGUOUS:the number of room-0-4",
+     "AMBIGUOUS:the number of room-0-4",
+     "AMBIGUOUS:the number of room-1-3",
+     "AMBIGUOUS:the number of room-2-0",
+     "AMBIGUOUS:the opening opening-2-west-11-1 as the drawings print it"
+    ],
+    "wallRings": [
+     {
+      "id": "ring-main-0",
+      "status": "SOURCE_EXACT",
+      "why": "11.73 \u00d7 10.00 m body from the plan's printed chains and wall bands"
+     },
+     {
+      "id": "ring-main-1",
+      "status": null,
+      "why": ""
+     },
+     {
+      "id": "ring-main-2",
+      "status": "SOURCE_DERIVED",
+      "why": "storey 2's own walls, 3.86 \u00d7 3.77 m: the walled region of that storey's plan, registered onto the body below, where it s"
+     }
+    ],
+    "wideOpenings": [
+     "OPENING_IN_WALL:3.33"
+    ]
+   },
+   "set": "DEV_005K",
+   "storeys": {
+    "holds": true,
+    "model": 3,
+    "plans": 3
+   },
+   "verdict": "PASS"
+  },
+  {
+   "case": "aster-viii",
+   "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+   "decisionPath": {
+    "PLAN_RESOLUTION": {
+     "outcome": "NO_ALTERNATIVE"
+    }
+   },
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": "6f456b92fbbecd77a2f207de0434e3e00d4ac1ecfb76006d3a2589f3b73c5323",
+   "footprintResidualPct": null,
+   "frame": "frame-asset-aster-viii-rzut-parter-7e90859c03-b39fd620c2",
+   "modelHash": null,
+   "modelSha256": null,
+   "outcome": "FAILED",
+   "programSha256": null,
+   "refusal": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 2.087379 cm/px (0 independent, plausible); 9.078014 cm/px (0 independent, ruled out by the walls); 21.333333 cm/px (0 independent, ruled out by the walls); ",
+   "scaleCmPerPx": null,
+   "semantics": {
+    "bodies": [],
+    "completions": [],
+    "extentConflicts": [],
+    "unresolved": [],
+    "wideOpenings": [
+     "OPENING_IN_WALL:4",
+     "OPENING_IN_WALL:5",
+     "OPENING_IN_WALL:5",
+     "OPENING_IN_WALL:6",
+     "OPENING_IN_WALL:6",
+     "OPENING_IN_WALL:7",
+     "OPENING_IN_WALL:8",
+     "OPENING_IN_WALL:8",
+     "OPENING_IN_WALL:8",
+     "OPENING_IN_WALL:8",
+     "OPENING_IN_WALL:8",
+     "OPENING_IN_WALL:8",
+     "OPENING_IN_WALL:8",
+     "OPENING_IN_WALL:8",
+     "OPENING_IN_WALL:8",
+     "OPENING_IN_WALL:8",
+     "OPENING_IN_WALL:8"
+    ]
+   },
+   "set": "DEV_005K",
+   "storeys": null,
+   "verdict": "ALGORITHMIC_FAIL"
+  },
+  {
+   "case": "galaktyka",
+   "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+   "decisionPath": {
+    "PLAN_RESOLUTION": {
+     "outcome": "NO_ALTERNATIVE"
+    }
+   },
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": "3369d091ac6c492df17c24db6e0efd066f9e3aa5d16bb6fe6920720982af000a",
+   "footprintResidualPct": null,
+   "frame": "frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770",
+   "modelHash": null,
+   "modelSha256": null,
+   "outcome": "FAILED",
+   "programSha256": null,
+   "refusal": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.005102 cm/px (0 independent, ruled out by the walls); 0.87747 cm/px (0 independent, plausible); 0 printed readings contradict the one it was read at. What",
+   "scaleCmPerPx": null,
+   "semantics": {
+    "bodies": [],
+    "completions": [],
+    "extentConflicts": [],
+    "unresolved": [],
+    "wideOpenings": []
+   },
+   "set": "DEV_005K",
+   "storeys": null,
+   "verdict": "ALGORITHMIC_FAIL"
+  },
+  {
+   "case": "eoze-legacy-area",
+   "code": null,
+   "decisionPath": {
+    "METRIC_CHALLENGE": {
+     "chosen": "copy area_table e842a14c7f, chain extent, scale 2.223611 cm/px, largest-first tiling, sides as gridded: 1 body, 116.7 m\u00b2 (-4.4% of 122.07), AGREES",
+     "chosenRefuted": 0,
+     "outcome": "REPLACED",
+     "reading1": "copy area_table e842a14c7f, chain extent, scale 2.223611 cm/px, largest-first tiling, sides as gridded: 1 body, 116.7 m\u00b2 (-4.4% of 122.07), AGREES",
+     "registrationRefuted": 0.91024,
+     "sourceConflict": "AS_READ_REFUTATION"
+    }
+   },
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": null,
+   "footprintResidualPct": -4.37,
+   "frame": "frame-asset-rzut-2abfc5825d-e842a14c7f",
+   "modelHash": "a27f3a5e808ee09feae908ba2295f9762087993401a8e111ea9291b16719fc51",
+   "modelSha256": "a27f3a5e808ee09feae908ba2295f9762087993401a8e111ea9291b16719fc51",
+   "outcome": "COMPLETED",
+   "programSha256": "f280d05ef773db66fc75e0da3c500e9c9b71eed8e3c1877e652d0085b8245b21",
+   "refusal": null,
+   "scaleCmPerPx": 2.2236,
+   "semantics": {
+    "bodies": [
+     "FLUSH_ATTACHED:-:0.2",
+     "FLUSH_ATTACHED:-:0.4",
+     "FLUSH_ATTACHED:-:1.9",
+     "UNKNOWN:-:0.4",
+     "UNKNOWN:-:0.5",
+     "UNKNOWN:-:5.9"
+    ],
+    "completions": [
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0"
+    ],
+    "counts": {
+     "doors": 7,
+     "levels": 1,
+     "materials": 11,
+     "openings": 18,
+     "roofs": 1,
+     "rooms": 8,
+     "slabs": 1,
+     "surfaceRegions": 3,
+     "terraces": 4,
+     "wallJunctions": 4,
+     "wallRings": 1,
+     "walls": 19,
+     "windows": 11
+    },
+    "extentConflicts": [],
+    "footprintM2": 116.74,
+    "levels": 1,
+    "massProvenance": [
+     "feat-main:SOURCE_DERIVED"
+    ],
+    "terraces": [
+     {
+      "areaM2": 1.26,
+      "surface": "PAVED",
+      "why": "the floor of the front recess"
+     },
+     {
+      "areaM2": 0.22,
+      "surface": "PAVED",
+      "why": "the floor of the front recess"
+     },
+     {
+      "areaM2": 1.69,
+      "surface": "PAVED",
+      "why": "the floor of the front recess"
+     },
+     {
+      "areaM2": 51.45,
+      "surface": "PAVED",
+      "why": "the floor of the rear recess and the platform the plan outlines beyond it"
+     }
+    ],
+    "unresolved": [
+     "AMBIGUOUS:a v2 registration for the left elevation",
+     "AMBIGUOUS:the label of room-0-6 (read as 11)",
+     "AMBIGUOUS:the label of room-0-7 (read as 11)",
+     "AMBIGUOUS:the number of room-0-5",
+     "AMBIGUOUS:the number of room-0-5",
+     "AMBIGUOUS:the number of room-0-5",
+     "AMBIGUOUS:the number of room-0-5",
+     "AMBIGUOUS:the number of room-0-5",
+     "AMBIGUOUS:the number of room-0-7"
+    ],
+    "wallRings": [
+     {
+      "id": "ring-main-0",
+      "status": "SOURCE_EXACT",
+      "why": "16.01 \u00d7 7.29 m body from the plan's printed chains and wall bands"
+     }
+    ],
+    "wideOpenings": [
+     "OPENING_IN_WALL:4.45"
+    ]
+   },
+   "set": "DEV_005K",
+   "storeys": {
+    "holds": true,
+    "model": 1,
+    "plans": 1
+   },
+   "verdict": "PASS"
+  },
+  {
+   "case": "dom-pod-milorzebem",
+   "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+   "decisionPath": {
+    "PLAN_RESOLUTION": {
+     "outcome": "INCONCLUSIVE",
+     "reading1": "copy area_table 0f7c5bafc8, chain extent, scale 2.285714 cm/px, largest-first tiling, outer faces: 3 bodies, 36.6 m\u00b2 (-55.8% of 82.81), WRONG"
+    }
+   },
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": "585521c4427c4e0881cf39661f782e3a29694cd9ecc86719552f59f25987210d",
+   "footprintResidualPct": null,
+   "frame": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+   "modelHash": null,
+   "modelSha256": null,
+   "outcome": "FAILED",
+   "programSha256": null,
+   "refusal": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 2.444658 cm/px (1 independent, plausible); 2.290019 cm/px (1 independent, plausible); 4.48062 cm/px (1 independent, ruled out by the walls); 0 printed readi",
+   "scaleCmPerPx": null,
+   "semantics": {
+    "bodies": [],
+    "completions": [],
+    "extentConflicts": [],
+    "unresolved": [],
+    "wideOpenings": [
+     "OPENING_IN_WALL:6",
+     "OPENING_IN_WALL:8",
+     "OPENING_IN_WALL:8"
+    ]
+   },
+   "set": "DEV_005K",
+   "storeys": null,
+   "verdict": "ALGORITHMIC_FAIL"
+  },
+  {
+   "case": "dom-w-helikoniach",
+   "code": null,
+   "decisionPath": {},
+   "dev44": true,
+   "failedConditions": [
+    "footprint",
+    "storeys"
+   ],
+   "failureSha256": null,
+   "footprintResidualPct": -18.88,
+   "frame": "frame-asset-rzut-d5842da623-4c943a2b00",
+   "modelHash": "27642deb363a860dfb9dca75d2dd143499242704666d07c937f3ef41db7d4be0",
+   "modelSha256": "27642deb363a860dfb9dca75d2dd143499242704666d07c937f3ef41db7d4be0",
+   "outcome": "COMPLETED",
+   "programSha256": "ab92f513d0b6a736cf2656216b9757c598f65dbef48133f62da62280066ce151",
+   "refusal": null,
+   "scaleCmPerPx": 2.30615,
+   "semantics": {
+    "bodies": [
+     "PROJECTING_WING:B:4.9",
+     "PROJECTING_WING:B:45.9",
+     "UNKNOWN:-:0.9",
+     "UNKNOWN:-:1.8",
+     "UNKNOWN:-:3.9"
+    ],
+    "completions": [
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0"
+    ],
+    "counts": {
+     "doors": 4,
+     "levels": 1,
+     "materials": 11,
+     "openings": 10,
+     "roofs": 1,
+     "rooms": 3,
+     "slabs": 1,
+     "terraces": 1,
+     "wallJunctions": 4,
+     "wallRings": 1,
+     "walls": 12,
+     "windows": 6
+    },
+    "extentConflicts": [
+     "N:STRONG:INCONCLUSIVE:7.3",
+     "S:STRONG:INCONCLUSIVE:0.97"
+    ],
+    "footprintM2": 77.56,
+    "levels": 1,
+    "massProvenance": [
+     "feat-main:SOURCE_DERIVED"
+    ],
+    "terraces": [
+     {
+      "areaM2": 34.72,
+      "surface": "PAVED",
+      "why": "the floor of the rear recess and the platform the plan outlines beyond it"
+     }
+    ],
+    "unresolved": [
+     "AMBIGUOUS:a 1.20 m thin band at z 5.18",
+     "AMBIGUOUS:a v2 registration for the front elevation",
+     "AMBIGUOUS:a v2 registration for the left elevation",
+     "AMBIGUOUS:a v2 registration for the rear elevation",
+     "AMBIGUOUS:a v2 registration for the right elevation",
+     "AMBIGUOUS:the label of room-0-0 (read as 7)",
+     "AMBIGUOUS:the opening opening-0-west-3-0 as the drawings print it",
+     "AMBIGUOUS:the opening opening-0-west-3-2 as the drawings print it",
+     "AMBIGUOUS:whether the 0.23 m\u00b2 strip at 0.18, 2.58 is part of the building",
+     "AMBIGUOUS:whether the 0.31 m\u00b2 strip at 0.18, 4.96 is part of the building",
+     "AMBIGUOUS:whether the 1.04 m\u00b2 strip at 0.53, 12.01 is part of the building",
+     "AMBIGUOUS:whether the 2.92 m\u00b2 strip at 3.26, 12.01 is part of the building",
+     "AMBIGUOUS:whether the 3.03 m\u00b2 strip at 0.00, 6.68 is part of the building",
+     "AMBIGUOUS:which body the attic storey stands on",
+     "AMBIGUOUS:which way the ridge runs over mass-0"
+    ],
+    "wallRings": [
+     {
+      "id": "ring-main-0",
+      "status": "SOURCE_EXACT",
+      "why": "6.46 \u00d7 12.01 m body from the plan's printed chains and wall bands"
+     }
+    ],
+    "wideOpenings": [
+     "OPENING_IN_WALL:4.66",
+     "OPENING_IN_WALL:4.66"
+    ]
+   },
+   "set": "DEV_005K",
+   "storeys": {
+    "holds": false,
+    "model": 1,
+    "plans": 2
+   },
+   "verdict": "ALGORITHMIC_FAIL"
+  },
+  {
+   "case": "kosacce-area-alone",
+   "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+   "decisionPath": {
+    "PLAN_RESOLUTION": {
+     "outcome": "INCONCLUSIVE",
+     "reading1": "copy area_table bdf7aa09e8, chain extent, registered scale, walled-first tiling, sides as gridded: 3 bodies, 171.0 m\u00b2 (+4.0% of 164.47), UNKNOWN (the figure is spent)"
+    }
+   },
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": "893cdbca78d164fe13eb50f75514fd5d7e9185327cba730030f18fe2974d5648",
+   "footprintResidualPct": null,
+   "frame": "frame-asset-rzut-94f54ada01-bdf7aa09e8",
+   "modelHash": null,
+   "modelSha256": null,
+   "outcome": "FAILED",
+   "programSha256": null,
+   "refusal": "the lowest storey covers 33.15 m\u00b2 against the 164.47 m\u00b2 the publisher prints \u2014 79.8% apart: the decomposition is not of this building 35 other readings of the plan were weighed and none holds: the best, copy area_table bdf7aa09e8, chain extent, registered scale, walled-first tiling, sides as gridded",
+   "scaleCmPerPx": 2.4062,
+   "semantics": {
+    "bodies": [],
+    "completions": [],
+    "extentConflicts": [],
+    "unresolved": [],
+    "wideOpenings": [
+     "OPENING_IN_WALL:2.48",
+     "OPEN_SIDE:2.21",
+     "OPEN_SIDE:3.71",
+     "OPEN_SIDE:3.95",
+     "OPEN_SIDE:5.17",
+     "OPEN_SIDE:5.78",
+     "OPEN_SIDE:6.84",
+     "OPEN_SIDE:7.8"
+    ]
+   },
+   "set": "DEV_005K",
+   "storeys": null,
+   "verdict": "ALGORITHMIC_FAIL"
+  },
+  {
+   "case": "dom-w-gozdzikowcach",
+   "code": "MODEL_EMISSION_FAILED/None",
+   "decisionPath": {},
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": "85c479b27a430243a873a911786216133aa21b4c607aef8b1cc6f312170b2f0d",
+   "footprintResidualPct": null,
+   "frame": null,
+   "modelHash": null,
+   "modelSha256": null,
+   "outcome": "FAILED",
+   "programSha256": null,
+   "refusal": "the model refused command 135 (placeChimney): INVALID_COMMAND",
+   "scaleCmPerPx": null,
+   "semantics": {
+    "unresolved": []
+   },
+   "set": "DEV_005K",
+   "storeys": null,
+   "verdict": "ALGORITHMIC_FAIL"
+  },
+  {
+   "case": "dom-w-cyklamenach",
+   "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+   "decisionPath": {
+    "PLAN_RESOLUTION": {
+     "outcome": "INCONCLUSIVE",
+     "reading1": "copy dimensioned 07d4ca005c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 92.3 m\u00b2 (-0.2% of 92.48), UNKNOWN (the figure is spent)"
+    }
+   },
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": "1d865246b68bd5049e07f42a9d9f4fd2286d1bc5896105dda087178054974328",
+   "footprintResidualPct": null,
+   "frame": "frame-asset-rzut-fa38f527ea-8e7eb2ad66",
+   "modelHash": null,
+   "modelSha256": null,
+   "outcome": "FAILED",
+   "programSha256": null,
+   "refusal": "the lowest storey covers 49.20 m\u00b2 against the 92.48 m\u00b2 the publisher prints \u2014 46.8% apart: the decomposition is not of this building 71 other readings of the plan were weighed and none holds: the best, copy dimensioned 07d4ca005c, chain extent, registered scale, largest-first tiling, sides as gridde",
+   "scaleCmPerPx": 2.0285,
+   "semantics": {
+    "bodies": [],
+    "completions": [
+     "BOX_COMPLETION:REJECTED:40.4"
+    ],
+    "extentConflicts": [],
+    "unresolved": [],
+    "wideOpenings": []
+   },
+   "set": "DEV_005K",
+   "storeys": null,
+   "verdict": "ALGORITHMIC_FAIL"
+  },
+  {
+   "case": "A00",
+   "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+   "decisionPath": {
+    "PLAN_RESOLUTION": {
+     "outcome": "INCONCLUSIVE",
+     "reading1": "copy dimensioned c1ed5b382c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 145.7 m\u00b2 (-0.9% of 147.01), UNKNOWN (the figure is spent), corroborated by ISOTROPY"
+    }
+   },
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": "882a6779187a1e1c8dc253406b909524c1cc1cef161612aac92260f9a3f9fba2",
+   "footprintResidualPct": null,
+   "frame": "frame-asset-rzut-db1e8df563-19bef9a91e",
+   "modelHash": null,
+   "modelSha256": null,
+   "outcome": "FAILED",
+   "programSha256": null,
+   "refusal": "the lowest storey covers 30.34 m\u00b2 against the 147.01 m\u00b2 the publisher prints \u2014 79.4% apart: the decomposition is not of this building 95 other readings of the plan were weighed and none holds: the best, copy dimensioned c1ed5b382c, chain extent, registered scale, largest-first tiling, sides as gridd",
+   "scaleCmPerPx": 2.3069,
+   "semantics": {
+    "bodies": [
+     "FLUSH_ATTACHED:-:2.3"
+    ],
+    "completions": [
+     "ATTACHED_ROOM:REJECTED:0",
+     "BOX_COMPLETION:QUESTION:49.6",
+     "BOX_COMPLETION:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0.5",
+     "BOX_COMPLETION:REJECTED:1.2",
+     "BOX_COMPLETION:REJECTED:35.5"
+    ],
+    "extentConflicts": [],
+    "unresolved": [],
+    "wideOpenings": [
+     "OPEN_SIDE:3.62",
+     "OPEN_SIDE:4.61"
+    ]
+   },
+   "set": "FRESH_005K",
+   "storeys": null,
+   "verdict": "ALGORITHMIC_FAIL"
+  },
+  {
+   "case": "A01",
+   "code": "MODEL_EMISSION_FAILED/None",
+   "decisionPath": {},
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": "2b283dccbcf31aaf8f25b30f21b25483f9475d0791c159e225787b2d3b703c82",
+   "footprintResidualPct": null,
+   "frame": null,
+   "modelHash": null,
+   "modelSha256": null,
+   "outcome": "FAILED",
+   "programSha256": null,
+   "refusal": "the model refused command 89 (placeWindow): FILL_TOO_LARGE",
+   "scaleCmPerPx": null,
+   "semantics": {
+    "unresolved": []
+   },
+   "set": "FRESH_005K",
+   "storeys": null,
+   "verdict": "ALGORITHMIC_FAIL"
+  },
+  {
+   "case": "A02",
+   "code": null,
+   "decisionPath": {},
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": null,
+   "footprintResidualPct": 2.88,
+   "frame": "frame-asset-rzut-2c17aa3eda-b6cebfd23d",
+   "modelHash": "98229d5fa8d6ff8e682001061ff703e6e8c0be4a5412a71b77439e2b8aa92155",
+   "modelSha256": "98229d5fa8d6ff8e682001061ff703e6e8c0be4a5412a71b77439e2b8aa92155",
+   "outcome": "COMPLETED",
+   "programSha256": "addd302c8ef616d25003a1c3ce53d75079a384404b1de7bcbe80865f92838d47",
+   "refusal": null,
+   "scaleCmPerPx": 2.4919,
+   "semantics": {
+    "bodies": [],
+    "completions": [
+     "BOX_COMPLETION:REJECTED:0"
+    ],
+    "counts": {
+     "doors": 7,
+     "levels": 1,
+     "materials": 11,
+     "openings": 13,
+     "roofs": 1,
+     "rooms": 4,
+     "slabs": 1,
+     "wallJunctions": 4,
+     "wallRings": 1,
+     "walls": 18,
+     "windows": 6
+    },
+    "extentConflicts": [],
+    "footprintM2": 133.82,
+    "levels": 1,
+    "massProvenance": [
+     "feat-main:SOURCE_EXACT"
+    ],
+    "terraces": [],
+    "unresolved": [
+     "AMBIGUOUS:a 0.45 m thin band at x 4.79",
+     "AMBIGUOUS:a v2 registration for the left elevation",
+     "AMBIGUOUS:a v2 registration for the rear elevation",
+     "AMBIGUOUS:a v2 registration for the right elevation",
+     "AMBIGUOUS:the number of room-0-0",
+     "AMBIGUOUS:the number of room-0-0",
+     "AMBIGUOUS:the number of room-0-0",
+     "AMBIGUOUS:the number of room-0-0",
+     "AMBIGUOUS:the number of room-0-2",
+     "AMBIGUOUS:the opening opening-0-west-3-2 as the drawings print it",
+     "AMBIGUOUS:which way the ridge runs over mass-0"
+    ],
+    "wallRings": [
+     {
+      "id": "ring-main-0",
+      "status": "SOURCE_EXACT",
+      "why": "9.20 \u00d7 14.55 m body from the plan's printed chains and wall bands"
+     }
+    ],
+    "wideOpenings": []
+   },
+   "set": "FRESH_005K",
+   "storeys": {
+    "holds": true,
+    "model": 1,
+    "plans": 1
+   },
+   "verdict": "PASS"
+  },
+  {
+   "case": "A03",
+   "code": null,
+   "decisionPath": {},
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": null,
+   "footprintResidualPct": -0.24,
+   "frame": "frame-asset-rzut-1f95f4ce4d-eaa13be831",
+   "modelHash": "4b0fc06a76054bf95be60b9ab84df3c8fcb2bb7c6c77d24f253bafc3ddcc03c7",
+   "modelSha256": "4b0fc06a76054bf95be60b9ab84df3c8fcb2bb7c6c77d24f253bafc3ddcc03c7",
+   "outcome": "COMPLETED",
+   "programSha256": "431ff2d7fddd19a2b6689577a167ed68f8719144df48cb4628d491c1e3a0510f",
+   "refusal": null,
+   "scaleCmPerPx": 2.5078,
+   "semantics": {
+    "bodies": [],
+    "completions": [],
+    "counts": {
+     "doors": 14,
+     "levels": 2,
+     "materials": 11,
+     "openings": 21,
+     "roofs": 1,
+     "rooms": 10,
+     "slabs": 2,
+     "stairs": 1,
+     "wallJunctions": 8,
+     "wallRings": 2,
+     "walls": 25,
+     "windows": 7
+    },
+    "extentConflicts": [],
+    "footprintM2": 109.35,
+    "levels": 2,
+    "massProvenance": [
+     "feat-main:SOURCE_EXACT"
+    ],
+    "terraces": [],
+    "unresolved": [
+     "AMBIGUOUS:a 0.45 m thin band at z 0.51",
+     "AMBIGUOUS:a v2 registration for the front elevation",
+     "AMBIGUOUS:a v2 registration for the rear elevation",
+     "AMBIGUOUS:the exact steps of the stair",
+     "AMBIGUOUS:the label of room-1-0 (read as 1)",
+     "AMBIGUOUS:the opening opening-0-east-1-2 as the drawings print it",
+     "AMBIGUOUS:which way the ridge runs over mass-0"
+    ],
+    "wallRings": [
+     {
+      "id": "ring-main-0",
+      "status": "SOURCE_EXACT",
+      "why": "9.11 \u00d7 12.01 m body from the plan's printed chains and wall bands"
+     },
+     {
+      "id": "ring-main-1",
+      "status": null,
+      "why": ""
+     }
+    ],
+    "wideOpenings": []
+   },
+   "set": "FRESH_005K",
+   "storeys": {
+    "holds": true,
+    "model": 2,
+    "plans": 2
+   },
+   "verdict": "PASS"
+  },
+  {
+   "case": "A04",
+   "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+   "decisionPath": {
+    "PLAN_RESOLUTION": {
+     "outcome": "INCONCLUSIVE",
+     "reading1": "copy area_table da7064452b, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 104.1 m\u00b2 (-6.9% of 111.79), UNKNOWN (the figure is spent), corroborated by ISOTROPY"
+    }
+   },
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": "d42742700b7c412fdf075dbf4e51759fcb7788027df2bc8029228f7f1b6fa02c",
+   "footprintResidualPct": null,
+   "frame": "frame-asset-rzut-4f91f26bdf-589c8abdb3",
+   "modelHash": null,
+   "modelSha256": null,
+   "outcome": "FAILED",
+   "programSha256": null,
+   "refusal": "the lowest storey covers 54.67 m\u00b2 against the 111.79 m\u00b2 the publisher prints \u2014 51.1% apart: the decomposition is not of this building 67 other readings of the plan were weighed and none holds: the best, copy area_table da7064452b, wall-ink extent, registered scale, largest-first tiling, sides as gri",
+   "scaleCmPerPx": 2.54895,
+   "semantics": {
+    "bodies": [
+     "FLUSH_ATTACHED:-:3.3",
+     "UNKNOWN:-:25.7"
+    ],
+    "completions": [
+     "ATTACHED_ROOM:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0"
+    ],
+    "extentConflicts": [],
+    "unresolved": [],
+    "wideOpenings": [
+     "OPEN_SIDE:3.41",
+     "OPEN_SIDE:3.41"
+    ]
+   },
+   "set": "FRESH_005K",
+   "storeys": null,
+   "verdict": "ALGORITHMIC_FAIL"
+  },
+  {
+   "case": "A05",
+   "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+   "decisionPath": {
+    "PLAN_RESOLUTION": {
+     "outcome": "INCONCLUSIVE",
+     "reading1": "copy area_table 2a1e4f9cc1, chain extent, registered scale, largest-first tiling, sides as gridded, pocket mouths shut: 1 body, 124.2 m\u00b2 (-1.6% of 126.23), UNKNOWN (the figure is spent)"
+    }
+   },
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": "73906ad92caba645023d4b93ed6c4415ccd04df160bbc3ccb6c0038a9ad974ca",
+   "footprintResidualPct": null,
+   "frame": "frame-asset-rzut-238dfbc50b-38cf8e09f5",
+   "modelHash": null,
+   "modelSha256": null,
+   "outcome": "FAILED",
+   "programSha256": null,
+   "refusal": "the lowest storey covers 33.34 m\u00b2 against the 126.23 m\u00b2 the publisher prints \u2014 73.6% apart: the decomposition is not of this building 87 other readings of the plan were weighed and none holds: the best, copy area_table 2a1e4f9cc1, chain extent, registered scale, largest-first tiling, sides as gridde",
+   "scaleCmPerPx": 2.11025,
+   "semantics": {
+    "bodies": [
+     "FLUSH_ATTACHED:-:0.5",
+     "FLUSH_ATTACHED:-:0.5",
+     "UNKNOWN:-:2.8",
+     "UNKNOWN:-:3.6"
+    ],
+    "completions": [
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:10.9"
+    ],
+    "extentConflicts": [
+     "E:STRONG:INCONCLUSIVE:1.01",
+     "S:STRONG:INCONCLUSIVE:0.99"
+    ],
+    "unresolved": [],
+    "wideOpenings": [
+     "OPENING_IN_WALL:3.74",
+     "OPENING_IN_WALL:3.76",
+     "OPEN_SIDE:0.99",
+     "OPEN_SIDE:3.02",
+     "OPEN_SIDE:4.11"
+    ]
+   },
+   "set": "FRESH_005K",
+   "storeys": null,
+   "verdict": "ALGORITHMIC_FAIL"
+  },
+  {
+   "case": "A06",
+   "code": null,
+   "decisionPath": {
+    "METRIC_CHALLENGE": {
+     "outcome": "KEPT",
+     "reading1": "copy dimensioned 8b24c71f3f, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 79.1 m\u00b2 (+0.2% of 78.92), AGREES, corroborated by ISOTROPY"
+    }
+   },
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": null,
+   "footprintResidualPct": 0.18,
+   "frame": "frame-asset-rzut-f08001e3c4-8b24c71f3f",
+   "modelHash": "38baa9606a55fb149b9025464d0dc1f1db0d91dd9ef8976b9cbc190690278ee2",
+   "modelSha256": "38baa9606a55fb149b9025464d0dc1f1db0d91dd9ef8976b9cbc190690278ee2",
+   "outcome": "COMPLETED",
+   "programSha256": "c96d8ee2fa3e324787be1e04f310f4e1c9f1b446a4b1ba38f746f7ac45ff93c7",
+   "refusal": null,
+   "scaleCmPerPx": 2.072,
+   "semantics": {
+    "bodies": [],
+    "completions": [],
+    "counts": {
+     "chimneys": 3,
+     "doors": 27,
+     "levels": 2,
+     "materials": 11,
+     "openings": 31,
+     "roofOpenings": 3,
+     "roofs": 2,
+     "rooms": 12,
+     "slabs": 4,
+     "stairs": 1,
+     "wallJunctions": 16,
+     "wallRings": 4,
+     "walls": 45,
+     "windows": 4
+    },
+    "extentConflicts": [],
+    "footprintM2": 79.06,
+    "levels": 2,
+    "massProvenance": [
+     "feat-attached-0:SOURCE_DERIVED",
+     "feat-main:SOURCE_EXACT"
+    ],
+    "terraces": [],
+    "unresolved": [
+     "AMBIGUOUS:a v2 registration for the front elevation",
+     "AMBIGUOUS:a v2 registration for the left elevation",
+     "AMBIGUOUS:a v2 registration for the rear elevation",
+     "AMBIGUOUS:a v2 registration for the right elevation",
+     "AMBIGUOUS:the exact steps of the stair",
+     "AMBIGUOUS:the opening opening-0-west-11-0 as the drawings print it",
+     "AMBIGUOUS:the opening opening-1-west-15-0 as the drawings print it",
+     "AMBIGUOUS:what carries 4.0 m\u00b2 of the attic storey's walled region region-built-0-0",
+     "MISSING:the kind of roof over mass-1"
+    ],
+    "wallRings": [
+     {
+      "id": "ring-attached-0-0",
+      "status": "SOURCE_EXACT",
+      "why": "3.88 \u00d7 1.44 m body from the plan's printed chains and wall bands"
+     },
+     {
+      "id": "ring-attached-0-1",
+      "status": null,
+      "why": ""
+     },
+     {
+      "id": "ring-main-0",
+      "status": "SOURCE_EXACT",
+      "why": "7.34 \u00d7 10.01 m body from the plan's printed chains and wall bands"
+     },
+     {
+      "id": "ring-main-1",
+      "status": null,
+      "why": ""
+     }
+    ],
+    "wideOpenings": []
+   },
+   "set": "FRESH_005K",
+   "storeys": {
+    "holds": true,
+    "model": 2,
+    "plans": 2
+   },
+   "verdict": "PASS"
+  },
+  {
+   "case": "A07",
+   "code": null,
+   "decisionPath": {},
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": null,
+   "footprintResidualPct": -0.37,
+   "frame": "frame-asset-rzut-dec884e019-46909f56cf",
+   "modelHash": "f0b04887c8d0ba8007bfd9d6d00d5c12ffc54308b4e0450569479a2e0d8c3514",
+   "modelSha256": "f0b04887c8d0ba8007bfd9d6d00d5c12ffc54308b4e0450569479a2e0d8c3514",
+   "outcome": "COMPLETED",
+   "programSha256": "911b538190c059ca9931f593fe47964eb159e854b6c9fea57e5f88295fbb96d8",
+   "refusal": null,
+   "scaleCmPerPx": 2.3153,
+   "semantics": {
+    "bodies": [],
+    "completions": [],
+    "counts": {
+     "chimneys": 2,
+     "doors": 31,
+     "levels": 2,
+     "materials": 11,
+     "openings": 48,
+     "roofOpenings": 2,
+     "roofs": 1,
+     "rooms": 13,
+     "slabs": 2,
+     "stairs": 1,
+     "wallJunctions": 8,
+     "wallRings": 2,
+     "walls": 55,
+     "windows": 17
+    },
+    "extentConflicts": [],
+    "footprintM2": 134.32,
+    "levels": 2,
+    "massProvenance": [
+     "feat-main:SOURCE_EXACT"
+    ],
+    "terraces": [],
+    "unresolved": [
+     "AMBIGUOUS:a 0.21 m thin band at z 2.17",
+     "AMBIGUOUS:a 0.21 m thin band at z 2.17",
+     "AMBIGUOUS:a 0.25 m thin band at z 2.20",
+     "AMBIGUOUS:a 0.25 m thin band at z 3.92",
+     "AMBIGUOUS:a 0.25 m thin band at z 4.32",
+     "AMBIGUOUS:a 0.25 m thin band at z 4.50",
+     "AMBIGUOUS:a 2.78 m thin band at x 16.87",
+     "AMBIGUOUS:a 5.06 m thin band at z 3.35",
+     "AMBIGUOUS:a v2 registration for the left elevation",
+     "AMBIGUOUS:a v2 registration for the right elevation",
+     "AMBIGUOUS:the exact steps of the stair",
+     "AMBIGUOUS:the label of room-0-6 (read as 13)",
+     "AMBIGUOUS:the label of room-0-7 (read as 12)",
+     "AMBIGUOUS:the number of room-0-1",
+     "AMBIGUOUS:the number of room-0-6",
+     "AMBIGUOUS:the number of room-1-1",
+     "AMBIGUOUS:the number of room-1-1",
+     "AMBIGUOUS:the number of room-1-4",
+     "AMBIGUOUS:the opening opening-0-east-1-1 as the drawings print it",
+     "AMBIGUOUS:the opening opening-0-west-3-1 as the drawings print it",
+     "AMBIGUOUS:the opening opening-1-east-5-0 as the drawings print it",
+     "AMBIGUOUS:the opening opening-1-west-7-0 as the drawings print it"
+    ],
+    "wallRings": [
+     {
+      "id": "ring-main-0",
+      "status": "SOURCE_EXACT",
+      "why": "17.22 \u00d7 7.80 m body from the plan's printed chains and wall bands"
+     },
+     {
+      "id": "ring-main-1",
+      "status": null,
+      "why": ""
+     }
+    ],
+    "wideOpenings": [
+     "OPENING_IN_WALL:3.59",
+     "OPENING_IN_WALL:3.71",
+     "OPEN_SIDE:6.53"
+    ]
+   },
+   "set": "FRESH_005K",
+   "storeys": {
+    "holds": true,
+    "model": 2,
+    "plans": 2
+   },
+   "verdict": "PASS"
+  },
+  {
+   "case": "D00",
+   "code": null,
+   "decisionPath": {
+    "METRIC_CHALLENGE": {
+     "outcome": "KEPT",
+     "reading1": "copy unknown 20137a1a68, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 154.2 m\u00b2 (-18.7% of 189.7), NEAR"
+    }
+   },
+   "dev44": true,
+   "failedConditions": [
+    "footprint"
+   ],
+   "failureSha256": null,
+   "footprintResidualPct": -18.71,
+   "frame": "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+   "modelHash": "e4f042fbb4d8dbbfa041764a1d1d5e4bb97d7299a1e13cf0efc1eb57f5ef0f71",
+   "modelSha256": "e4f042fbb4d8dbbfa041764a1d1d5e4bb97d7299a1e13cf0efc1eb57f5ef0f71",
+   "outcome": "COMPLETED",
+   "programSha256": "9da3b16d92f1b75c2388ba930e23f3c83797e2089adf3b557092ecaae15fcfca",
+   "refusal": null,
+   "scaleCmPerPx": 1.3197,
+   "semantics": {
+    "bodies": [],
+    "completions": [
+     "BOX_COMPLETION:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0"
+    ],
+    "counts": {
+     "doors": 31,
+     "levels": 2,
+     "materials": 11,
+     "openings": 48,
+     "roofs": 2,
+     "rooms": 4,
+     "slabs": 4,
+     "terraces": 3,
+     "wallJunctions": 16,
+     "wallRings": 4,
+     "walls": 16,
+     "windows": 17
+    },
+    "extentConflicts": [],
+    "footprintM2": 154.2,
+    "levels": 2,
+    "massProvenance": [
+     "feat-attached-0:SOURCE_DERIVED",
+     "feat-main:SOURCE_DERIVED"
+    ],
+    "terraces": [
+     {
+      "areaM2": 2.09,
+      "surface": "PAVED",
+      "why": "the floor of the east recess"
+     },
+     {
+      "areaM2": 1.32,
+      "surface": "PAVED",
+      "why": "the floor of the rear recess"
+     },
+     {
+      "areaM2": 1.6,
+      "surface": "PAVED",
+      "why": "the floor of the west recess"
+     }
+    ],
+    "unresolved": [
+     "AMBIGUOUS:a 0.42 m thin band at x 2.16",
+     "AMBIGUOUS:a 0.42 m thin band at x 8.54",
+     "AMBIGUOUS:a 0.42 m thin band at x 8.83",
+     "AMBIGUOUS:a v2 registration for the front elevation",
+     "AMBIGUOUS:a v2 registration for the rear elevation",
+     "AMBIGUOUS:the number of room-0-0",
+     "AMBIGUOUS:the number of room-0-0",
+     "AMBIGUOUS:the number of room-0-0",
+     "AMBIGUOUS:the number of room-0-0",
+     "AMBIGUOUS:the number of room-1-0",
+     "AMBIGUOUS:the number of room-1-0",
+     "AMBIGUOUS:the opening opening-0-east-1-4 as the drawings print it",
+     "AMBIGUOUS:the opening opening-0-east-9-0 as the drawings print it",
+     "AMBIGUOUS:the opening opening-0-west-11-0 as the drawings print it",
+     "AMBIGUOUS:the opening opening-1-east-13-0 as the drawings print it",
+     "AMBIGUOUS:the opening shared-opening-1-rear-6-4 as the drawings print it",
+     "AMBIGUOUS:the opening shared-opening-1-rear-6-5 as the drawings print it",
+     "AMBIGUOUS:the pitch of the roof over mass-0",
+     "AMBIGUOUS:what carries 12.2 m\u00b2 of the attic storey's walled region region-built-0-1",
+     "AMBIGUOUS:whether the 7.2 m\u00b2 region at 0.00, 11.51 is part of the building",
+     "AMBIGUOUS:which way the ridge runs over mass-0",
+     "MISSING:the kind of roof over mass-1",
+     "MISSING:the stair between the storeys"
+    ],
+    "wallRings": [
+     {
+      "id": "ring-attached-0-0",
+      "status": "SOURCE_EXACT",
+      "why": "7.84 \u00d7 2.02 m body from the plan's printed chains and wall bands"
+     },
+     {
+      "id": "ring-attached-0-1",
+      "status": null,
+      "why": ""
+     },
+     {
+      "id": "ring-main-0",
+      "status": "SOURCE_EXACT",
+      "why": "14.58 \u00d7 9.49 m body from the plan's printed chains and wall bands"
+     },
+     {
+      "id": "ring-main-1",
+      "status": "SOURCE_DERIVED",
+      "why": "storey 1's own walls, 13.84 \u00d7 7.64 m: the walled region of that storey's plan, registered onto the body below, where it "
+     }
+    ],
+    "wideOpenings": [
+     "OPEN_SIDE:3.54",
+     "OPEN_SIDE:5.0",
+     "OPEN_SIDE:5.65"
+    ]
+   },
+   "set": "FRESH_005K",
+   "storeys": {
+    "holds": true,
+    "model": 2,
+    "plans": 2
+   },
+   "verdict": "ALGORITHMIC_FAIL"
+  },
+  {
+   "case": "D01",
+   "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+   "decisionPath": {
+    "PLAN_RESOLUTION": {
+     "outcome": "NO_ALTERNATIVE"
+    }
+   },
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": "471c1f75febb9e1eca240ababf2b0696da626452b5359d6378240f0797b6f9fa",
+   "footprintResidualPct": null,
+   "frame": "frame-asset-faun-iii-rzut-parter-4a4a325758-4fb0a88a30",
+   "modelHash": null,
+   "modelSha256": null,
+   "outcome": "FAILED",
+   "programSha256": null,
+   "refusal": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.082803 cm/px (1 independent, ruled out by the walls); 1.349693 cm/px (1 independent, plausible); 0.103853 cm/px (0 independent, ruled out by the walls); 0",
+   "scaleCmPerPx": null,
+   "semantics": {
+    "bodies": [],
+    "completions": [],
+    "extentConflicts": [],
+    "unresolved": [],
+    "wideOpenings": [
+     "OPENING_IN_WALL:6"
+    ]
+   },
+   "set": "FRESH_005K",
+   "storeys": null,
+   "verdict": "ALGORITHMIC_FAIL"
+  },
+  {
+   "case": "D02",
+   "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+   "decisionPath": {
+    "PLAN_RESOLUTION": {
+     "outcome": "NO_ALTERNATIVE"
+    }
+   },
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": "0f0275bc3a52554b1dc99b0ef1464c516009d172db4e49a6c455f3684d88eb2d",
+   "footprintResidualPct": null,
+   "frame": "frame-asset-alex-rzut-parter-4707ebe458-81447f88e6",
+   "modelHash": null,
+   "modelSha256": null,
+   "outcome": "FAILED",
+   "programSha256": null,
+   "refusal": "the floor plan's scale cannot be established: the page vote's 1.909091 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it. The scales its readings state are 0.646154 cm/px (0 independent, ruled out by the walls); 0 printed readings con",
+   "scaleCmPerPx": null,
+   "semantics": {
+    "bodies": [],
+    "completions": [],
+    "extentConflicts": [],
+    "unresolved": [],
+    "wideOpenings": [
+     "OPENING_IN_WALL:8",
+     "OPENING_IN_WALL:8"
+    ]
+   },
+   "set": "FRESH_005K",
+   "storeys": null,
+   "verdict": "ALGORITHMIC_FAIL"
+  },
+  {
+   "case": "D03",
+   "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+   "decisionPath": {
+    "PLAN_RESOLUTION": {
+     "outcome": "NO_ALTERNATIVE"
+    }
+   },
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": "777ab21e43a7a4ce4c3e5d5e4a0a5b315f358ddbae6a4107f968a59fc6b80d8d",
+   "footprintResidualPct": null,
+   "frame": "frame-asset-megan-iv-rzut-parter-bbb305d67a-0f9f921b7b",
+   "modelHash": null,
+   "modelSha256": null,
+   "outcome": "FAILED",
+   "programSha256": null,
+   "refusal": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.058559 cm/px (1 independent, ruled out by the walls); 5.163934 cm/px (0 independent, ruled out by the walls); 0.423077 cm/px (0 independent, ruled out by ",
+   "scaleCmPerPx": null,
+   "semantics": {
+    "bodies": [],
+    "completions": [],
+    "extentConflicts": [],
+    "unresolved": [],
+    "wideOpenings": []
+   },
+   "set": "FRESH_005K",
+   "storeys": null,
+   "verdict": "ALGORITHMIC_FAIL"
+  },
+  {
+   "case": "D04",
+   "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+   "decisionPath": {
+    "PLAN_RESOLUTION": {
+     "outcome": "NO_ALTERNATIVE"
+    }
+   },
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": "657138c64496daa8e27ef35e561890aee7f5eef245a6d886747288a63affb122",
+   "footprintResidualPct": null,
+   "frame": "frame-asset-aiko-rzut-parter-c5c8f02d57-f2f752629a",
+   "modelHash": null,
+   "modelSha256": null,
+   "outcome": "FAILED",
+   "programSha256": null,
+   "refusal": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 66.879121 cm/px (0 independent, ruled out by the walls); 0.238095 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it wa",
+   "scaleCmPerPx": null,
+   "semantics": {
+    "bodies": [],
+    "completions": [],
+    "extentConflicts": [],
+    "unresolved": [],
+    "wideOpenings": [
+     "OPENING_IN_WALL:5",
+     "OPENING_IN_WALL:5",
+     "OPENING_IN_WALL:8",
+     "OPENING_IN_WALL:8",
+     "OPENING_IN_WALL:8",
+     "OPENING_IN_WALL:8",
+     "OPENING_IN_WALL:8",
+     "OPENING_IN_WALL:8"
+    ]
+   },
+   "set": "FRESH_005K",
+   "storeys": null,
+   "verdict": "ALGORITHMIC_FAIL"
+  },
+  {
+   "case": "D05",
+   "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+   "decisionPath": {
+    "PLAN_RESOLUTION": {
+     "outcome": "NO_ALTERNATIVE"
+    }
+   },
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": "7e9aa200a40881532dfea6c25edef9b503391d1cf3752f0828534474dc1d5217",
+   "footprintResidualPct": null,
+   "frame": "frame-asset-dobry-rzut-parter-0019c75b9a-70a0349ded",
+   "modelHash": null,
+   "modelSha256": null,
+   "outcome": "FAILED",
+   "programSha256": null,
+   "refusal": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.947368 cm/px (0 independent, plausible); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itse",
+   "scaleCmPerPx": null,
+   "semantics": {
+    "bodies": [],
+    "completions": [],
+    "extentConflicts": [],
+    "unresolved": [],
+    "wideOpenings": [
+     "OPENING_IN_WALL:4",
+     "OPENING_IN_WALL:4",
+     "OPENING_IN_WALL:5",
+     "OPENING_IN_WALL:5"
+    ]
+   },
+   "set": "FRESH_005K",
+   "storeys": null,
+   "verdict": "ALGORITHMIC_FAIL"
+  },
+  {
+   "case": "dom-w-murajach",
+   "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+   "decisionPath": {
+    "PLAN_RESOLUTION": {
+     "outcome": "INCONCLUSIVE",
+     "reading1": "copy dimensioned fb4609c5e2, chain extent, registered scale, largest-first tiling, outer faces: 1 body, 178.2 m\u00b2 (+135.0% of 75.83), WRONG"
+    }
+   },
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": "c1f906daca72f0cb7b594e6ca62e3ced30509bd7536150d5593560ede5e435e0",
+   "footprintResidualPct": null,
+   "frame": "frame-asset-rzut-36e1e5a39d-fb4609c5e2",
+   "modelHash": null,
+   "modelSha256": null,
+   "outcome": "FAILED",
+   "programSha256": null,
+   "refusal": "the floor plan's scale cannot be established: the page vote's 2.451224 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it. The scales its readings state are 2.475398 cm/px (0 independent, plausible); 0.086134 cm/px (0 independent, rule",
+   "scaleCmPerPx": 2.4619,
+   "semantics": {
+    "bodies": [
+     "FLUSH_ATTACHED:-:3.8",
+     "UNKNOWN:-:0.2",
+     "UNKNOWN:-:0.4"
+    ],
+    "completions": [
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0"
+    ],
+    "extentConflicts": [],
+    "unresolved": [],
+    "wideOpenings": []
+   },
+   "set": "BLIND_9",
+   "storeys": null,
+   "verdict": "ALGORITHMIC_FAIL"
+  },
+  {
+   "case": "dom-w-cieszyniankach",
+   "code": null,
+   "decisionPath": {},
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": null,
+   "footprintResidualPct": -5.1,
+   "frame": "frame-asset-rzut-ebb40feeba-0459d5961d",
+   "modelHash": "a96afbb19139b304a126b87dd0949ac1604aaad006973ce0dcddb4472cbb1ad3",
+   "modelSha256": "a96afbb19139b304a126b87dd0949ac1604aaad006973ce0dcddb4472cbb1ad3",
+   "outcome": "COMPLETED",
+   "programSha256": "5cceba54f4a4bac3fbacfeb107d383bc07139eb63cab2cc5333baec758197e9d",
+   "refusal": null,
+   "scaleCmPerPx": 2.77895,
+   "semantics": {
+    "bodies": [],
+    "completions": [],
+    "counts": {
+     "doors": 10,
+     "levels": 1,
+     "materials": 11,
+     "openings": 19,
+     "roofs": 1,
+     "rooms": 4,
+     "slabs": 1,
+     "terraces": 1,
+     "wallJunctions": 4,
+     "wallRings": 1,
+     "walls": 23,
+     "windows": 9
+    },
+    "extentConflicts": [],
+    "footprintM2": 184.86,
+    "levels": 1,
+    "massProvenance": [
+     "feat-main:SOURCE_EXACT"
+    ],
+    "terraces": [
+     {
+      "areaM2": 3.51,
+      "surface": "UNKNOWN",
+      "why": "the floor of the west recess"
+     }
+    ],
+    "unresolved": [
+     "AMBIGUOUS:a 0.42 m thin band at z 13.42",
+     "AMBIGUOUS:a v2 registration for the front elevation",
+     "AMBIGUOUS:a v2 registration for the left elevation",
+     "AMBIGUOUS:a v2 registration for the rear elevation",
+     "AMBIGUOUS:a v2 registration for the right elevation",
+     "AMBIGUOUS:the label of room-0-2 (read as 1)",
+     "AMBIGUOUS:the number of room-0-0",
+     "AMBIGUOUS:the number of room-0-0",
+     "AMBIGUOUS:the number of room-0-0",
+     "AMBIGUOUS:the number of room-0-0",
+     "AMBIGUOUS:the number of room-0-0",
+     "AMBIGUOUS:the number of room-0-0",
+     "AMBIGUOUS:the number of room-0-2",
+     "AMBIGUOUS:the opening opening-0-west-3-4 as the drawings print it",
+     "AMBIGUOUS:whether the 3.7 m\u00b2 region at 0.00, 15.80 is part of the building",
+     "AMBIGUOUS:whether the 3.7 m\u00b2 region at 7.12, 15.80 is part of the building"
+    ],
+    "wallRings": [
+     {
+      "id": "ring-main-0",
+      "status": "SOURCE_EXACT",
+      "why": "11.70 \u00d7 15.80 m body from the plan's printed chains and wall bands"
+     }
+    ],
+    "wideOpenings": [
+     "OPEN_SIDE:4.45"
+    ]
+   },
+   "set": "BLIND_9",
+   "storeys": {
+    "holds": true,
+    "model": 1,
+    "plans": 1
+   },
+   "verdict": "PASS"
+  },
+  {
+   "case": "dom-w-glogownikach",
+   "code": null,
+   "decisionPath": {},
+   "dev44": true,
+   "failedConditions": [
+    "footprint"
+   ],
+   "failureSha256": null,
+   "footprintResidualPct": -8.04,
+   "frame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+   "modelHash": "b7c86aac3af74dac994456f545ba0b8073300445ca1675588e46b0e0ccb93ed6",
+   "modelSha256": "b7c86aac3af74dac994456f545ba0b8073300445ca1675588e46b0e0ccb93ed6",
+   "outcome": "COMPLETED",
+   "programSha256": "16f455c1f50bdd9cece96265901a018890c65ec1535d8c2f0869ded3a4296a6d",
+   "refusal": null,
+   "scaleCmPerPx": 2.6234,
+   "semantics": {
+    "bodies": [
+     "COVERED_TERRACE:-:1.3",
+     "COVERED_TERRACE:-:2.4",
+     "FLUSH_ATTACHED:-:0.3",
+     "FLUSH_ATTACHED:-:0.5",
+     "FLUSH_ATTACHED:-:0.5",
+     "FLUSH_ATTACHED:-:1.8",
+     "FLUSH_ATTACHED:-:3.6",
+     "UNKNOWN:-:0.7",
+     "UNKNOWN:-:0.8"
+    ],
+    "completions": [
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0.9"
+    ],
+    "counts": {
+     "doors": 12,
+     "levels": 1,
+     "materials": 11,
+     "openings": 20,
+     "roofs": 1,
+     "rooms": 8,
+     "slabs": 1,
+     "surfaceRegions": 1,
+     "terraces": 3,
+     "wallJunctions": 4,
+     "wallRings": 1,
+     "walls": 19,
+     "windows": 8
+    },
+    "extentConflicts": [],
+    "footprintM2": 163.81,
+    "levels": 1,
+    "massProvenance": [
+     "feat-main:SOURCE_EXACT"
+    ],
+    "terraces": [
+     {
+      "areaM2": 3.27,
+      "surface": "PAVED",
+      "why": "the floor of the east recess"
+     },
+     {
+      "areaM2": 6.63,
+      "surface": "PAVED",
+      "why": "the floor of the front recess"
+     },
+     {
+      "areaM2": 1.31,
+      "surface": "PAVED",
+      "why": "the floor of the front recess"
+     }
+    ],
+    "unresolved": [
+     "AMBIGUOUS:a v2 registration for the front elevation",
+     "AMBIGUOUS:a v2 registration for the rear elevation",
+     "AMBIGUOUS:the number of room-0-2",
+     "AMBIGUOUS:the scale of the base plan (an accusation withdrawn)",
+     "AMBIGUOUS:which way the ridge runs over mass-0"
+    ],
+    "wallRings": [
+     {
+      "id": "ring-main-0",
+      "status": "SOURCE_EXACT",
+      "why": "18.83 \u00d7 8.70 m body from the plan's printed chains and wall bands"
+     }
+    ],
+    "wideOpenings": [
+     "OPENING_IN_WALL:5.7"
+    ]
+   },
+   "set": "BLIND_10_REVEALED",
+   "storeys": {
+    "holds": true,
+    "model": 1,
+    "plans": 1
+   },
+   "verdict": "ALGORITHMIC_FAIL"
+  },
+  {
+   "case": "dom-w-akebiach",
+   "code": "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+   "decisionPath": {
+    "PLAN_RESOLUTION": {
+     "outcome": "INCONCLUSIVE",
+     "reading1": "copy dimensioned 4d37f1b2ba, chain extent, registered scale, largest-first tiling, outer faces: 7 bodies, 103.6 m\u00b2 (-58.5% of 249.42), WRONG, corroborated by ISOTROPY"
+    }
+   },
+   "dev44": true,
+   "failedConditions": [],
+   "failureSha256": "de53b8183fef8ca1d24be6a0972925050aa7a077b2331894d0a08e6fe8e3d8d6",
+   "footprintResidualPct": null,
+   "frame": "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
+   "modelHash": null,
+   "modelSha256": null,
+   "outcome": "FAILED",
+   "programSha256": null,
+   "refusal": "the lowest storey covers 96.93 m\u00b2 against the 249.42 m\u00b2 the publisher prints \u2014 61.1% apart: the decomposition is not of this building; 63 other readings of the plan were weighed and none survived to a full composition",
+   "scaleCmPerPx": 2.9061,
+   "semantics": {
+    "bodies": [
+     "FLUSH_ATTACHED:-:0.5",
+     "FLUSH_ATTACHED:-:0.7",
+     "FLUSH_ATTACHED:-:0.8",
+     "PROJECTING_WING:B:1.5",
+     "RECESSED_ATTACHED:-:11.4",
+     "RECESSED_ATTACHED:-:22.4",
+     "RECESSED_ATTACHED:-:67.5",
+     "SEPARATE_BODY:-:2.6",
+     "SEPARATE_BODY:-:5.6",
+     "SEPARATE_BODY:-:7.7",
+     "UNKNOWN:-:33.1"
+    ],
+    "completions": [
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0"
+    ],
+    "extentConflicts": [
+     "N:STRONG:INCONCLUSIVE:0.96",
+     "S:STRONG:INCONCLUSIVE:4.3"
+    ],
+    "unresolved": [],
+    "wideOpenings": [
+     "OPENING_IN_WALL:4.01",
+     "OPEN_SIDE:6.71",
+     "OPEN_SIDE:6.86",
+     "OPEN_SIDE:6.86",
+     "OPEN_SIDE:6.86"
+    ]
+   },
+   "set": "BLIND_10_REVEALED",
+   "storeys": null,
+   "verdict": "ALGORITHMIC_FAIL"
+  },
+  {
+   "case": "dom-miniaturka",
+   "code": null,
+   "decisionPath": {},
+   "dev44": false,
+   "failedConditions": [],
+   "failureSha256": null,
+   "footprintResidualPct": 1.48,
+   "frame": "frame-asset-rzut-3da149ce7e-6d4f61a890",
+   "modelHash": "cbe3a5fca94b15427d9db34968060678d4b821a92fde62fbfb49431dbf68d8e0",
+   "modelSha256": "cbe3a5fca94b15427d9db34968060678d4b821a92fde62fbfb49431dbf68d8e0",
+   "outcome": "COMPLETED",
+   "programSha256": "de8a2941f11b7217592f8c76301ad7ae9c3aa748a8e580ecfb23cb264c9b5f5c",
+   "refusal": null,
+   "scaleCmPerPx": 2.0888,
+   "semantics": {
+    "bodies": [],
+    "completions": [],
+    "counts": {
+     "chimneys": 2,
+     "doors": 11,
+     "levels": 2,
+     "materials": 11,
+     "openings": 20,
+     "roofOpenings": 2,
+     "roofs": 2,
+     "rooms": 7,
+     "slabs": 3,
+     "stairs": 1,
+     "wallJunctions": 12,
+     "wallRings": 3,
+     "walls": 35,
+     "windows": 9
+    },
+    "extentConflicts": [],
+    "footprintM2": 108.34,
+    "levels": 2,
+    "massProvenance": [
+     "feat-attached-0:SOURCE_EXACT",
+     "feat-main:SOURCE_EXACT"
+    ],
+    "terraces": [],
+    "unresolved": [
+     "AMBIGUOUS:a v2 registration for the front elevation",
+     "AMBIGUOUS:a v2 registration for the rear elevation",
+     "AMBIGUOUS:the exact steps of the stair",
+     "AMBIGUOUS:the interior of the body",
+     "AMBIGUOUS:the label of room-0-0 (read as 1)",
+     "AMBIGUOUS:the label of room-1-1 (read as 1)",
+     "AMBIGUOUS:the label of room-1-3 (read as 3)",
+     "AMBIGUOUS:the number of room-0-0",
+     "AMBIGUOUS:the number of room-1-0",
+     "AMBIGUOUS:the number of room-1-1",
+     "AMBIGUOUS:the number of room-1-1",
+     "AMBIGUOUS:the opening opening-0-east-9-1 as the drawings print it",
+     "AMBIGUOUS:which way the ridge runs over mass-0",
+     "MISSING:the kind of roof over mass-1"
+    ],
+    "wallRings": [
+     {
+      "id": "ring-attached-0-0",
+      "status": "SOURCE_EXACT",
+      "why": "1.00 \u00d7 6.23 m body from the plan's printed chains and wall bands"
+     },
+     {
+      "id": "ring-main-0",
+      "status": "SOURCE_EXACT",
+      "why": "11.71 \u00d7 8.72 m body from the plan's printed chains and wall bands"
+     },
+     {
+      "id": "ring-main-1",
+      "status": null,
+      "why": ""
+     }
+    ],
+    "wideOpenings": [
+     "OPEN_SIDE:3.86"
+    ]
+   },
+   "set": "BLIND_11_REVEALED",
+   "storeys": {
+    "holds": true,
+    "model": 2,
+    "plans": 2
+   },
+   "verdict": "PASS"
+  },
+  {
+   "case": "dom-w-krasnokwiatach",
+   "code": "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+   "decisionPath": {
+    "PLAN_RESOLUTION": {
+     "outcome": "INCONCLUSIVE",
+     "reading1": "copy area_table 1811c28eab, chain extent, registered scale, walled-first tiling, sides as gridded: 2 bodies, 46.6 m\u00b2 (-67.5% of 143.18), WRONG, corroborated by ISOTROPY"
+    }
+   },
+   "dev44": false,
+   "failedConditions": [],
+   "failureSha256": "268eda838b8b0eae01c15c576bdaa54964c391aede0342075c113e214cbf60a9",
+   "footprintResidualPct": null,
+   "frame": "frame-asset-rzut-071d5075ee-723651b1ff",
+   "modelHash": null,
+   "modelSha256": null,
+   "outcome": "FAILED",
+   "programSha256": null,
+   "refusal": "the lowest storey covers 11.67 m\u00b2 against the 143.18 m\u00b2 the publisher prints \u2014 91.8% apart: the decomposition is not of this building; 47 other readings of the plan were weighed and none survived to a full composition",
+   "scaleCmPerPx": 2.5112,
+   "semantics": {
+    "bodies": [
+     "COVERED_TERRACE:-:11.3",
+     "FLUSH_ATTACHED:-:0.4",
+     "FLUSH_ATTACHED:-:2.3",
+     "FLUSH_ATTACHED:-:5.5",
+     "SEPARATE_BODY:-:0.6",
+     "SEPARATE_BODY:-:1.6",
+     "UNKNOWN:-:11.2",
+     "UNKNOWN:-:38.1"
+    ],
+    "completions": [
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0"
+    ],
+    "extentConflicts": [
+     "N:STRONG:INCONCLUSIVE:4.29",
+     "S:STRONG:INCONCLUSIVE:3.99"
+    ],
+    "unresolved": [],
+    "wideOpenings": []
+   },
+   "set": "BLIND_11_REVEALED",
+   "storeys": null,
+   "verdict": "ALGORITHMIC_FAIL"
+  }
+ ],
+ "runner": "research/analyzer-005q/replay.mjs --solve (research/analyzer-005q/solve.ts: the solver-only path of second-house.ts, byte-identical on model/program/failure/trace/digest for 46/46 rows against second-house.ts, plus unresolved.json and provenance.json)",
+ "schema": "buildplan.analyzer-005q.baseline",
+ "summary": {
+  "completed": 24,
+  "dev44": {
+   "completed": 23,
+   "pass": 18,
+   "verdicts": {
+    "ALGORITHMIC_FAIL": 26,
+    "PASS": 18
+   }
+  },
+  "pass": 19,
+  "passRows": [
+   "A02",
+   "A03",
+   "A06",
+   "A07",
+   "dom-miniaturka",
+   "dom-w-arkadiach",
+   "dom-w-cieszyniankach",
+   "dom-w-jablonkach",
+   "dom-w-modrzykach",
+   "dom-w-morelach",
+   "dom-w-tunbergiach",
+   "dom-w-zurawkach",
+   "eoze-legacy-area",
+   "eoze-legacy-every",
+   "kosacce-clean",
+   "kosacce-tracked",
+   "marcowki",
+   "rarytasy-eoze",
+   "rarytasy-g2e"
+  ],
+  "rows": 46
+ },
+ "verdict": "holdout/verdict.mjs as committed at the base (footprint within 6 % of the published figure, storeys = labelled plan storeys, ...); published figures meet the rows only there",
+ "version": "1.0.0"
+}
