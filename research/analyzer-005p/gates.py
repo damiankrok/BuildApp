@@ -14,7 +14,7 @@ a change without a written verdict counts as NOT_SOUND.
 """
 import argparse, hashlib, json, os, re
 
-VARIANTS = ('P1', 'P2', 'P3', 'N1')
+VARIANTS = ('P1', 'P2', 'P3', 'N1', 'PROD3')  # PROD3 = N1a, the production implementation after review round 2 (addendum A)
 FILES = ('model.json', 'program.json', 'result-summary.json', 'failure.json', 'analysis-trace.json', 'plan-diagnostics/digest.json')
 REPO = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 SCALE = re.compile(r'(\d+\.\d+) cm/px')
@@ -115,7 +115,7 @@ def main():
         # G8
         glog = H['dom-w-glogownikach'][v]
         g['G8_glogownikach'] = {'pass': 'OUTER_TOTALS' not in glog['conflictTriggers'] and glog.get('verdict') != 'PASS', 'conflictTriggers': glog['conflictTriggers'], 'outcome': glog['outcome'], 'verdict': glog.get('verdict'), 'scale': glog.get('scale')}
-        if v == 'N1':
+        if v in ('N1', 'PROD3'):
             g['G9_monotone_triggers'] = {'pass': not s['newTriggers'], 'newTriggers': s['newTriggers']}
         if v == 'P1':
             nt = s['newTriggers']
