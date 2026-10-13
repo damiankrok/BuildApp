@@ -1,0 +1,471 @@
+{
+ "schema": "buildapp.005p.performance",
+ "machine": "x64 container, 4 cores (Intel(R) Xeon(R) Processor @ 2.80GHz), 16 GiB; NOT a phone - no Android or ARM64 figure is measured or implied",
+ "node": "v22.22.2",
+ "method": "solver-only replay of every development case (second-house.ts --package --graph --metrics), incumbent 5906afa plan resolution vs HEAD, both through a Vite alias, one process at a time, ABBA order over 2 repetitions; wall time of the whole process (Vite start-up included) and peak sampled RSS of the process tree",
+ "reps": 2,
+ "summary": {
+  "OLD": {
+   "runs": 88,
+   "wallP50": 19.1,
+   "wallP95": 30.3,
+   "wallTotal": 1715.24,
+   "peakRssMbP50": 605,
+   "peakRssMbMax": 770
+  },
+  "NEW": {
+   "runs": 88,
+   "wallP50": 18.59,
+   "wallP95": 30.82,
+   "wallTotal": 1685.06,
+   "peakRssMbP50": 610,
+   "peakRssMbMax": 773
+  },
+  "perCaseRatioP50": 0.98,
+  "perCaseRatioP95": 1.07,
+  "perCaseRatioMax": 1.09,
+  "casesOver15Percent": []
+ },
+ "perCase": {
+  "dom-pod-jarzabem": {
+   "oldWallMedian": 20.71,
+   "newWallMedian": 20.67,
+   "ratio": 1,
+   "oldPeakRssMb": 537,
+   "newPeakRssMb": 529,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-arkadiach": {
+   "oldWallMedian": 21.21,
+   "newWallMedian": 21.48,
+   "ratio": 1.01,
+   "oldPeakRssMb": 621,
+   "newPeakRssMb": 648,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-modrzewnicy": {
+   "oldWallMedian": 13.86,
+   "newWallMedian": 12.08,
+   "ratio": 0.87,
+   "oldPeakRssMb": 569,
+   "newPeakRssMb": 565,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-morelach": {
+   "oldWallMedian": 17.07,
+   "newWallMedian": 15.72,
+   "ratio": 0.92,
+   "oldPeakRssMb": 626,
+   "newPeakRssMb": 611,
+   "exits": [
+    0
+   ]
+  },
+  "marcowki": {
+   "oldWallMedian": 21.32,
+   "newWallMedian": 21.61,
+   "ratio": 1.01,
+   "oldPeakRssMb": 747,
+   "newPeakRssMb": 673,
+   "exits": [
+    0
+   ]
+  },
+  "rarytasy-g2e": {
+   "oldWallMedian": 30.62,
+   "newWallMedian": 30.82,
+   "ratio": 1.01,
+   "oldPeakRssMb": 748,
+   "newPeakRssMb": 729,
+   "exits": [
+    0
+   ]
+  },
+  "kosacce-clean": {
+   "oldWallMedian": 26.61,
+   "newWallMedian": 25.89,
+   "ratio": 0.97,
+   "oldPeakRssMb": 702,
+   "newPeakRssMb": 699,
+   "exits": [
+    0
+   ]
+  },
+  "kosacce-tracked": {
+   "oldWallMedian": 26.12,
+   "newWallMedian": 25.08,
+   "ratio": 0.96,
+   "oldPeakRssMb": 714,
+   "newPeakRssMb": 722,
+   "exits": [
+    0
+   ]
+  },
+  "rarytasy-eoze": {
+   "oldWallMedian": 30.86,
+   "newWallMedian": 33.56,
+   "ratio": 1.09,
+   "oldPeakRssMb": 770,
+   "newPeakRssMb": 773,
+   "exits": [
+    0
+   ]
+  },
+  "eoze-legacy-every": {
+   "oldWallMedian": 31.28,
+   "newWallMedian": 32.05,
+   "ratio": 1.02,
+   "oldPeakRssMb": 739,
+   "newPeakRssMb": 739,
+   "exits": [
+    0
+   ]
+  },
+  "alt-marcowki": {
+   "oldWallMedian": 10.51,
+   "newWallMedian": 10.07,
+   "ratio": 0.96,
+   "oldPeakRssMb": 473,
+   "newPeakRssMb": 456,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-jablonkach": {
+   "oldWallMedian": 24.23,
+   "newWallMedian": 22.87,
+   "ratio": 0.94,
+   "oldPeakRssMb": 671,
+   "newPeakRssMb": 691,
+   "exits": [
+    0
+   ]
+  },
+  "willa-miranda": {
+   "oldWallMedian": 24.67,
+   "newWallMedian": 25.42,
+   "ratio": 1.03,
+   "oldPeakRssMb": 652,
+   "newPeakRssMb": 655,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-zurawkach": {
+   "oldWallMedian": 22.2,
+   "newWallMedian": 20.61,
+   "ratio": 0.93,
+   "oldPeakRssMb": 634,
+   "newPeakRssMb": 654,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-modrzykach": {
+   "oldWallMedian": 14.67,
+   "newWallMedian": 12.69,
+   "ratio": 0.87,
+   "oldPeakRssMb": 527,
+   "newPeakRssMb": 526,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-azaliach": {
+   "oldWallMedian": 17.74,
+   "newWallMedian": 18.29,
+   "ratio": 1.03,
+   "oldPeakRssMb": 622,
+   "newPeakRssMb": 606,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-dabecjach": {
+   "oldWallMedian": 18.92,
+   "newWallMedian": 18.83,
+   "ratio": 1,
+   "oldPeakRssMb": 563,
+   "newPeakRssMb": 585,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-tunbergiach": {
+   "oldWallMedian": 24.4,
+   "newWallMedian": 21.79,
+   "ratio": 0.89,
+   "oldPeakRssMb": 596,
+   "newPeakRssMb": 612,
+   "exits": [
+    0
+   ]
+  },
+  "aster-viii": {
+   "oldWallMedian": 12.11,
+   "newWallMedian": 11.69,
+   "ratio": 0.97,
+   "oldPeakRssMb": 555,
+   "newPeakRssMb": 522,
+   "exits": [
+    0
+   ]
+  },
+  "galaktyka": {
+   "oldWallMedian": 14.43,
+   "newWallMedian": 14.37,
+   "ratio": 1,
+   "oldPeakRssMb": 629,
+   "newPeakRssMb": 617,
+   "exits": [
+    0
+   ]
+  },
+  "eoze-legacy-area": {
+   "oldWallMedian": 30.3,
+   "newWallMedian": 31.13,
+   "ratio": 1.03,
+   "oldPeakRssMb": 720,
+   "newPeakRssMb": 726,
+   "exits": [
+    0
+   ]
+  },
+  "dom-pod-milorzebem": {
+   "oldWallMedian": 14.7,
+   "newWallMedian": 13.72,
+   "ratio": 0.93,
+   "oldPeakRssMb": 589,
+   "newPeakRssMb": 559,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-helikoniach": {
+   "oldWallMedian": 15.88,
+   "newWallMedian": 16.22,
+   "ratio": 1.02,
+   "oldPeakRssMb": 544,
+   "newPeakRssMb": 539,
+   "exits": [
+    0
+   ]
+  },
+  "kosacce-area-alone": {
+   "oldWallMedian": 19.62,
+   "newWallMedian": 19.39,
+   "ratio": 0.99,
+   "oldPeakRssMb": 626,
+   "newPeakRssMb": 634,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-gozdzikowcach": {
+   "oldWallMedian": 15.63,
+   "newWallMedian": 15.6,
+   "ratio": 1,
+   "oldPeakRssMb": 658,
+   "newPeakRssMb": 645,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-cyklamenach": {
+   "oldWallMedian": 17.39,
+   "newWallMedian": 16.5,
+   "ratio": 0.95,
+   "oldPeakRssMb": 602,
+   "newPeakRssMb": 597,
+   "exits": [
+    0
+   ]
+  },
+  "A00": {
+   "oldWallMedian": 20.42,
+   "newWallMedian": 20.9,
+   "ratio": 1.02,
+   "oldPeakRssMb": 602,
+   "newPeakRssMb": 630,
+   "exits": [
+    0
+   ]
+  },
+  "A01": {
+   "oldWallMedian": 14.62,
+   "newWallMedian": 14.07,
+   "ratio": 0.96,
+   "oldPeakRssMb": 578,
+   "newPeakRssMb": 560,
+   "exits": [
+    0
+   ]
+  },
+  "A02": {
+   "oldWallMedian": 23.64,
+   "newWallMedian": 22.4,
+   "ratio": 0.95,
+   "oldPeakRssMb": 615,
+   "newPeakRssMb": 639,
+   "exits": [
+    0
+   ]
+  },
+  "A03": {
+   "oldWallMedian": 25.28,
+   "newWallMedian": 24.04,
+   "ratio": 0.95,
+   "oldPeakRssMb": 631,
+   "newPeakRssMb": 630,
+   "exits": [
+    0
+   ]
+  },
+  "A04": {
+   "oldWallMedian": 22.18,
+   "newWallMedian": 21.55,
+   "ratio": 0.97,
+   "oldPeakRssMb": 670,
+   "newPeakRssMb": 653,
+   "exits": [
+    0
+   ]
+  },
+  "A05": {
+   "oldWallMedian": 19.14,
+   "newWallMedian": 18.71,
+   "ratio": 0.98,
+   "oldPeakRssMb": 520,
+   "newPeakRssMb": 507,
+   "exits": [
+    0
+   ]
+  },
+  "A06": {
+   "oldWallMedian": 20.02,
+   "newWallMedian": 21.45,
+   "ratio": 1.07,
+   "oldPeakRssMb": 585,
+   "newPeakRssMb": 599,
+   "exits": [
+    0
+   ]
+  },
+  "A07": {
+   "oldWallMedian": 30.47,
+   "newWallMedian": 29.67,
+   "ratio": 0.97,
+   "oldPeakRssMb": 742,
+   "newPeakRssMb": 740,
+   "exits": [
+    0
+   ]
+  },
+  "D00": {
+   "oldWallMedian": 26.05,
+   "newWallMedian": 26.8,
+   "ratio": 1.03,
+   "oldPeakRssMb": 655,
+   "newPeakRssMb": 643,
+   "exits": [
+    0
+   ]
+  },
+  "D01": {
+   "oldWallMedian": 14,
+   "newWallMedian": 13.25,
+   "ratio": 0.95,
+   "oldPeakRssMb": 585,
+   "newPeakRssMb": 545,
+   "exits": [
+    0
+   ]
+  },
+  "D02": {
+   "oldWallMedian": 14.61,
+   "newWallMedian": 14.43,
+   "ratio": 0.99,
+   "oldPeakRssMb": 605,
+   "newPeakRssMb": 604,
+   "exits": [
+    0
+   ]
+  },
+  "D03": {
+   "oldWallMedian": 16.6,
+   "newWallMedian": 17.7,
+   "ratio": 1.07,
+   "oldPeakRssMb": 726,
+   "newPeakRssMb": 749,
+   "exits": [
+    0
+   ]
+  },
+  "D04": {
+   "oldWallMedian": 13.01,
+   "newWallMedian": 10.96,
+   "ratio": 0.84,
+   "oldPeakRssMb": 487,
+   "newPeakRssMb": 460,
+   "exits": [
+    0
+   ]
+  },
+  "D05": {
+   "oldWallMedian": 12.83,
+   "newWallMedian": 11.56,
+   "ratio": 0.9,
+   "oldPeakRssMb": 557,
+   "newPeakRssMb": 564,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-murajach": {
+   "oldWallMedian": 17.68,
+   "newWallMedian": 17.08,
+   "ratio": 0.97,
+   "oldPeakRssMb": 692,
+   "newPeakRssMb": 671,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-cieszyniankach": {
+   "oldWallMedian": 20.21,
+   "newWallMedian": 20.71,
+   "ratio": 1.02,
+   "oldPeakRssMb": 623,
+   "newPeakRssMb": 611,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-glogownikach": {
+   "oldWallMedian": 17.41,
+   "newWallMedian": 17.53,
+   "ratio": 1.01,
+   "oldPeakRssMb": 578,
+   "newPeakRssMb": 587,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-akebiach": {
+   "oldWallMedian": 18.51,
+   "newWallMedian": 17.61,
+   "ratio": 0.95,
+   "oldPeakRssMb": 562,
+   "newPeakRssMb": 567,
+   "exits": [
+    0
+   ]
+  }
+ }
+}
