@@ -1,0 +1,102 @@
+{
+ "candidates": {
+  "C1": {
+   "featuresChecked": 52,
+   "selectedFrameChanged": [],
+   "violations": []
+  },
+  "C1C2N1": {
+   "featuresChecked": 52,
+   "selectedFrameChanged": [
+    "dom-pod-jarzabem"
+   ],
+   "violations": [
+    {
+     "builtAfterM2": 8.37,
+     "builtBeforeM2": 0.0,
+     "case": "dom-w-akebiach",
+     "feature": "S courtyard between garage and porch (trees)",
+     "growthM2": 8.37,
+     "id": "N41",
+     "knownGood": false,
+     "selectedFrameChanged": false,
+     "violation": true
+    }
+   ]
+  },
+  "C1C2N1a": {
+   "featuresChecked": 52,
+   "selectedFrameChanged": [
+    "dom-pod-jarzabem"
+   ],
+   "violations": [
+    {
+     "builtAfterM2": 8.37,
+     "builtBeforeM2": 0.0,
+     "case": "dom-w-akebiach",
+     "feature": "S courtyard between garage and porch (trees)",
+     "growthM2": 8.37,
+     "id": "N41",
+     "knownGood": false,
+     "selectedFrameChanged": false,
+     "violation": true
+    }
+   ]
+  },
+  "C1N1": {
+   "featuresChecked": 52,
+   "selectedFrameChanged": [],
+   "violations": []
+  },
+  "C1N1a": {
+   "featuresChecked": 52,
+   "selectedFrameChanged": [],
+   "violations": []
+  },
+  "C2": {
+   "featuresChecked": 52,
+   "selectedFrameChanged": [
+    "dom-pod-jarzabem"
+   ],
+   "violations": [
+    {
+     "builtAfterM2": 8.37,
+     "builtBeforeM2": 0.0,
+     "case": "dom-w-akebiach",
+     "feature": "S courtyard between garage and porch (trees)",
+     "growthM2": 8.37,
+     "id": "N41",
+     "knownGood": false,
+     "selectedFrameChanged": false,
+     "violation": true
+    }
+   ]
+  },
+  "N1": {
+   "featuresChecked": 52,
+   "selectedFrameChanged": [],
+   "violations": []
+  },
+  "N1a": {
+   "featuresChecked": 52,
+   "selectedFrameChanged": [],
+   "violations": []
+  },
+  "N2": {
+   "featuresChecked": 52,
+   "selectedFrameChanged": [
+    "marcowki"
+   ],
+   "violations": []
+  },
+  "PROD1": {
+   "featuresChecked": 52,
+   "selectedFrameChanged": [],
+   "violations": []
+  }
+ },
+ "inventory": "architecture/negative-features.json (52 open features on 27 rows, Phase A, frozen baseline only)",
+ "rule": "research/analyzer-005q/negative_gate.py: a feature whose built cover (selected plan masses) grows by more than min(1 m2, a quarter of its smaller side squared) is a violation; a changed selected frame is reported separately",
+ "schema": "buildplan.analyzer-005q.negative-controls",
+ "version": "1.0.0"
+}

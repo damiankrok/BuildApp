@@ -1,0 +1,1146 @@
+[
+ {
+  "id": "N01",
+  "case": "rarytasy-g2e",
+  "frame": "frame-asset-rzut-e8520c3ad3-59a406b738",
+  "knownGoodPass": true,
+  "feature": "S open ground W of garage",
+  "truth": "open ground (no wall ink, no posts)",
+  "truthBasis": "KNOWN raster (scratch overlay)",
+  "b0": "unbuilt; model terrace-front-0 UNKNOWN 12.72 m2 \"front recess\"",
+  "rectPx": {
+   "x0": 106.5,
+   "x1": 175.5,
+   "y0": 479.5,
+   "y1": 702
+  },
+  "sizeM": "1.90 x 6.12 m = 11.7 m2",
+  "mppXY": [
+   0.027579,
+   0.02752
+  ],
+  "wrongFix": "built as part of a chain-stated S strip: +12.7 m2"
+ },
+ {
+  "id": "N02",
+  "case": "rarytasy-g2e",
+  "frame": "frame-asset-rzut-e8520c3ad3-59a406b738",
+  "knownGoodPass": true,
+  "feature": "S open ground E of garage (incl. entrance path, canopy line, planter)",
+  "truth": "open ground + paved entrance path under a dashed overhead line + planter",
+  "truthBasis": "KNOWN raster",
+  "b0": "unbuilt; bodies UNKNOWN 1.21/FLUSH 0.25/UNKNOWN 0.23; model terrace-front-822 UNKNOWN 55.71 m2",
+  "rectPx": {
+   "x0": 402,
+   "x1": 730.5,
+   "y0": 479.5,
+   "y1": 702
+  },
+  "sizeM": "9.06 x 6.12 m = 55.5 m2",
+  "mppXY": [
+   0.027579,
+   0.02752
+  ],
+  "wrongFix": "per-side STRONG S fill builds 55.7 m2: +30 % footprint, PASS -> FAIL"
+ },
+ {
+  "id": "N03",
+  "case": "rarytasy-g2e",
+  "frame": "frame-asset-rzut-e8520c3ad3-59a406b738",
+  "knownGoodPass": true,
+  "feature": "garage door 500/238 on the S face",
+  "truth": "vehicle door (callout 500)",
+  "truthBasis": "KNOWN digest wide-Y-702-213-393",
+  "b0": "OPENING_IN_WALL 4.96 m; garage built (ring 6.17 x 6.20 SOURCE_EXACT)",
+  "rectPx": {
+   "x0": 213,
+   "x1": 393,
+   "y0": 702,
+   "y1": 702
+  },
+  "sizeM": "4.96 m (line)",
+  "mppXY": [
+   0.027579,
+   0.02752
+  ],
+  "wrongFix": "reclassified OPEN_SIDE -> garage loses its door / becomes a carport"
+ },
+ {
+  "id": "N04",
+  "case": "dom-w-zurawkach",
+  "frame": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+  "knownGoodPass": true,
+  "feature": "S entrance porch with a post",
+  "truth": "open porch: door 100/210 in the box face, one post, planting",
+  "truthBasis": "KNOWN raster",
+  "b0": "UNKNOWN body unbuilt 6.74 m2, mouth 3.22 m; S STRONG INCONCLUSIVE 4.82 walls",
+  "rectPx": {
+   "x0": 327,
+   "x1": 599.5,
+   "y0": 456,
+   "y1": 523.5
+  },
+  "sizeM": "6.04 x 1.50 m = 9.0 m2",
+  "mppXY": [
+   0.022182,
+   0.022166
+  ],
+  "wrongFix": "built as an attached room: +6.7 m2 (+5.8 %), still a \"PASS\" with a fabricated room"
+ },
+ {
+  "id": "N05",
+  "case": "dom-w-zurawkach",
+  "frame": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+  "knownGoodPass": true,
+  "feature": "post + planter block in the porch",
+  "truth": "post and planter, not a room",
+  "truthBasis": "KNOWN raster",
+  "b0": "SEPARATE_BODY 0.72 m2 unbuilt, WALLED_OFF",
+  "rectPx": {
+   "x0": 414,
+   "x1": 453.5,
+   "y0": 486.5,
+   "y1": 523.5
+  },
+  "sizeM": "0.88 x 0.82 m = 0.7 m2",
+  "mppXY": [
+   0.022182,
+   0.022166
+  ],
+  "wrongFix": "a sealed \"room\" 0.7 m2"
+ },
+ {
+  "id": "N06",
+  "case": "dom-w-zurawkach",
+  "frame": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+  "knownGoodPass": true,
+  "feature": "garage wing (S projection)",
+  "truth": "walled garage with door 260/229",
+  "truthBasis": "KNOWN raster",
+  "b0": "PROJECTING_WING built 6.39 m2 (beyond box), 3 storeys stack on main+attached",
+  "rectPx": {
+   "x0": 599.5,
+   "x1": 792,
+   "y0": 456,
+   "y1": 523.5
+  },
+  "sizeM": "4.27 x 1.50 m = 6.4 m2",
+  "mppXY": [
+   0.022182,
+   0.022166
+  ],
+  "wrongFix": "must stay built; must not gain a second storey"
+ },
+ {
+  "id": "N07",
+  "case": "dom-w-modrzykach",
+  "frame": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+  "knownGoodPass": true,
+  "feature": "S entrance niche (door 105/210 between piers)",
+  "truth": "recessed entrance, 0.99 m mouth",
+  "truthBasis": "KNOWN raster",
+  "b0": "UNKNOWN body unbuilt 3.86 m2; S STRONG INCONCLUSIVE 21.91 walls vs long-band box",
+  "rectPx": {
+   "x0": 226,
+   "x1": 337,
+   "y0": 489,
+   "y1": 535
+  },
+  "sizeM": "3.05 x 1.26 m = 3.9 m2",
+  "mppXY": [
+   0.027481,
+   0.027488
+  ],
+  "wrongFix": "niche built: +3.9 m2"
+ },
+ {
+  "id": "N08",
+  "case": "dom-w-modrzykach",
+  "frame": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+  "knownGoodPass": true,
+  "feature": "NW corner covered terrace / loggia (table, door 300/230, corner pier)",
+  "truth": "covered terrace inside the corner",
+  "truthBasis": "INFERRED raster (roof not visible on plan)",
+  "b0": "BUILT inside attached ring 4.56 x 11.13 (existing defect, PASS +2.03 %)",
+  "rectPx": {
+   "x0": 46,
+   "x1": 213,
+   "y0": 113,
+   "y1": 184.5
+  },
+  "sizeM": "4.59 x 1.97 m = 9.0 m2",
+  "mppXY": [
+   0.027481,
+   0.027488
+  ],
+  "wrongFix": "a correct un-building moves it to about -2.2 % (still PASS) but changes the model: G1 byte-identity cannot hold for that fix"
+ },
+ {
+  "id": "N09",
+  "case": "dom-w-morelach",
+  "frame": "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+  "knownGoodPass": true,
+  "feature": "E bay with window 180/140 (1.06 m projection)",
+  "truth": "walled bay",
+  "truthBasis": "KNOWN raster + digest",
+  "b0": "ATTACHED_ROOM ACCEPTED 2.92 m2 (E STRONG 3.16 walls); ring 1.06 x 3.50 SOURCE_EXACT; no upper storey",
+  "rectPx": {
+   "x0": 618,
+   "x1": 671,
+   "y0": 415,
+   "y1": 590
+  },
+  "sizeM": "1.06 x 3.55 m = 3.8 m2",
+  "mppXY": [
+   0.01996,
+   0.02027
+  ],
+  "wrongFix": "the one chain-constrained acceptance in B0: a new rule must keep it, not double it"
+ },
+ {
+  "id": "N10",
+  "case": "dom-w-morelach",
+  "frame": "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+  "knownGoodPass": true,
+  "feature": "NE corner beside the bay (door 216/230)",
+  "truth": "open ground / terrace outside the house",
+  "truthBasis": "INFERRED raster",
+  "b0": "unbuilt, no body",
+  "rectPx": {
+   "x0": 618,
+   "x1": 671,
+   "y0": 208,
+   "y1": 415
+  },
+  "sizeM": "1.06 x 4.20 m = 4.4 m2",
+  "mppXY": [
+   0.01996,
+   0.02027
+  ],
+  "wrongFix": "built if the E conflict were filled per side"
+ },
+ {
+  "id": "N11",
+  "case": "marcowki",
+  "frame": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+  "knownGoodPass": true,
+  "feature": "rear (N) covered terrace between side walls, upper storey above",
+  "truth": "covered terrace/loggia, terrace door 470/230",
+  "truthBasis": "KNOWN raster; 005L/005N controls",
+  "b0": "COVERED_TERRACE 6.99 m2 unbuilt; model terrace-rear-66 PAVED 23.26 m2 + balcony-rear-1",
+  "rectPx": {
+   "x0": 94,
+   "x1": 357,
+   "y0": 221,
+   "y1": 259
+  },
+  "sizeM": "6.95 x 1.01 m = 7.0 m2",
+  "mppXY": [
+   0.026426,
+   0.026468
+  ],
+  "wrongFix": "built -> +7..23 m2; storey alignment (005L k 1.020) and ring 7.90 x 12.61 move"
+ },
+ {
+  "id": "N12",
+  "case": "marcowki",
+  "frame": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+  "knownGoodPass": true,
+  "feature": "front (S) porch with piers and planters",
+  "truth": "covered porch (entrance 105/210, garage 275/225 beside)",
+  "truthBasis": "KNOWN raster",
+  "b0": "COVERED_TERRACE 11.02 m2 unbuilt; model terrace-front-66 PAVED 10.68 m2 + balcony-front-1",
+  "rectPx": {
+   "x0": 94,
+   "x1": 514,
+   "y0": 735.5,
+   "y1": 773
+  },
+  "sizeM": "11.10 x 0.99 m = 11.0 m2",
+  "mppXY": [
+   0.026426,
+   0.026468
+  ],
+  "wrongFix": "built -> +11 m2 (+8 %): PASS -> FAIL"
+ },
+ {
+  "id": "N13",
+  "case": "marcowki",
+  "frame": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+  "knownGoodPass": true,
+  "feature": "garage (E attached body), no storey above",
+  "truth": "garage 375 wide, door 275/225",
+  "truthBasis": "KNOWN digest/model",
+  "b0": "built ring 4.15 x 7.51 SOURCE_EXACT; lvl-1 has no slab over it",
+  "rectPx": {
+   "x0": 357,
+   "x1": 514,
+   "y0": 452,
+   "y1": 735.5
+  },
+  "sizeM": "4.15 x 7.50 m = 31.1 m2",
+  "mppXY": [
+   0.026426,
+   0.026468
+  ],
+  "wrongFix": "garage gains a storey (005L M2)"
+ },
+ {
+  "id": "N14",
+  "case": "dom-w-jablonkach",
+  "frame": "frame-asset-rzut-a8bdd8cd1d-d80b709d74",
+  "knownGoodPass": true,
+  "feature": "N pergola/covered terrace with posts, planter strip, spiral stair",
+  "truth": "open terrace with posts (pergola) and planting",
+  "truthBasis": "KNOWN raster",
+  "b0": "COVERED_TERRACE 3.03 m2 (planter strip) unbuilt; N SUPPORTED RECORDED 9.03 walls; model terrace-rear-0 PAVED 41.8 m2",
+  "rectPx": {
+   "x0": 83.5,
+   "x1": 602.5,
+   "y0": 56.5,
+   "y1": 237
+  },
+  "sizeM": "11.00 x 3.81 m = 41.9 m2",
+  "mppXY": [
+   0.021195,
+   0.021116
+  ],
+  "wrongFix": "if N were promoted to STRONG and filled: +41.8 m2 (+42 %)"
+ },
+ {
+  "id": "N15",
+  "case": "kosacce-clean",
+  "frame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+  "knownGoodPass": true,
+  "feature": "N covered terrace (dashed roof edge, piers)",
+  "truth": "covered terrace",
+  "truthBasis": "KNOWN raster; 005N OWNER checklist item 2",
+  "b0": "RECESS regions 464..520 and 555.5..628.5; OPEN_SIDE 5.78/6.84; not built",
+  "rectPx": {
+   "x0": 434,
+   "x1": 736,
+   "y0": 179.5,
+   "y1": 333
+  },
+  "sizeM": "7.27 x 3.69 m = 26.8 m2",
+  "mppXY": [
+   0.024058,
+   0.024067
+  ],
+  "wrongFix": "closed into a room (005N false closure) -> footprint +27 m2"
+ },
+ {
+  "id": "N16",
+  "case": "kosacce-clean",
+  "frame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+  "knownGoodPass": true,
+  "feature": "E covered terrace (330/500 glazing into it)",
+  "truth": "covered terrace",
+  "truthBasis": "KNOWN raster",
+  "b0": "OPEN_SIDE 5.17 at x=736 (316..531); not built",
+  "rectPx": {
+   "x0": 650.5,
+   "x1": 736,
+   "y0": 333,
+   "y1": 522.5
+  },
+  "sizeM": "2.06 x 4.56 m = 9.4 m2",
+  "mppXY": [
+   0.024058,
+   0.024067
+  ],
+  "wrongFix": "built -> +9.3 m2"
+ },
+ {
+  "id": "N17",
+  "case": "kosacce-clean",
+  "frame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+  "knownGoodPass": true,
+  "feature": "NW ground W of bedroom 10",
+  "truth": "open ground",
+  "truthBasis": "KNOWN raster",
+  "b0": "not built (inside the box, outside every mass)",
+  "rectPx": {
+   "x0": 46,
+   "x1": 157.5,
+   "y0": 179.5,
+   "y1": 333
+  },
+  "sizeM": "2.68 x 3.69 m = 9.9 m2",
+  "mppXY": [
+   0.024058,
+   0.024067
+  ],
+  "wrongFix": "built by a box rule"
+ },
+ {
+  "id": "N18",
+  "case": "kosacce-clean",
+  "frame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+  "knownGoodPass": true,
+  "feature": "N facade compound: WALL_RETURN separator 411..435 (return 4.25 m); 2.48 m opening + 2.21 m OPEN_SIDE mouth",
+  "truth": "door/glazing then open terrace mouth",
+  "truthBasis": "KNOWN digest (005N)",
+  "b0": "OPENING_IN_WALL 2.48 / OPEN_SIDE 2.21",
+  "rectPx": {
+   "x0": 304,
+   "x1": 527,
+   "y0": 179.5,
+   "y1": 179.5
+  },
+  "sizeM": "5.36 m (line)",
+  "mppXY": [
+   0.024058,
+   0.024067
+  ],
+  "wrongFix": "merged into one gap -> terrace closed (pre-005N)"
+ },
+ {
+  "id": "N19",
+  "case": "eoze-legacy-every",
+  "frame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+  "knownGoodPass": true,
+  "feature": "N and S strips between the box (mid-wall) and the extent",
+  "truth": "wall poche (band 237..256 / 559..578) + 6.5 px outside",
+  "truthBasis": "KNOWN digest bands",
+  "b0": "4 terraces on the strips: rear 5.54 PAVED, front 1.26 PAVED / 0.22 / 1.69 UNKNOWN; ring 16.01 x 7.30 (outer is 7.74)",
+  "rectPx": {
+   "x0": 75,
+   "x1": 795,
+   "y0": 230,
+   "y1": 246.5
+  },
+  "sizeM": "16.01 x 0.37 m = 5.9 m2",
+  "mppXY": [
+   0.022236,
+   0.022236
+  ],
+  "wrongFix": "existing glogownikach-class defect in a PASS row: an outer-face fix moves it toward +1.6 % (still PASS) but changes the model (G1)"
+ },
+ {
+  "id": "N20",
+  "case": "eoze-legacy-area",
+  "frame": "frame-asset-rzut-2abfc5825d-e842a14c7f",
+  "knownGoodPass": true,
+  "feature": "same strips; rear terrace extends to the platform",
+  "truth": "wall poche + N platform",
+  "truthBasis": "KNOWN digest",
+  "b0": "rear terrace PAVED 51.45 m2, 3 front PAVED; ring 16.01 x 7.29",
+  "rectPx": {
+   "x0": 75,
+   "x1": 795,
+   "y0": 230,
+   "y1": 246.5
+  },
+  "sizeM": "16.01 x 0.37 m = 5.9 m2",
+  "mppXY": [
+   0.022236,
+   0.022236
+  ],
+  "wrongFix": "as N19"
+ },
+ {
+  "id": "N21",
+  "case": "dom-w-cieszyniankach",
+  "frame": "frame-asset-rzut-ebb40feeba-0459d5961d",
+  "knownGoodPass": true,
+  "feature": "NW covered terrace with corner post (doors 100/240, 220/240)",
+  "truth": "covered terrace",
+  "truthBasis": "INFERRED raster (post, furniture, doors)",
+  "b0": "BUILT inside the single mass 193..614 x 81..649 (PASS -5.1 %)",
+  "rectPx": {
+   "x0": 193,
+   "x1": 290,
+   "y0": 81,
+   "y1": 255
+  },
+  "sizeM": "2.69 x 4.84 m = 13.0 m2",
+  "mppXY": [
+   0.027769,
+   0.02781
+  ],
+  "wrongFix": "un-building it drops to about -12 % (FAIL); keeping it is a compensating error"
+ },
+ {
+  "id": "N22",
+  "case": "dom-w-cieszyniankach",
+  "frame": "frame-asset-rzut-ebb40feeba-0459d5961d",
+  "knownGoodPass": true,
+  "feature": "W strip 185..193",
+  "truth": "8 px kerb/edge outside the W wall",
+  "truthBasis": "KNOWN digest",
+  "b0": "model terrace-west-80 UNKNOWN 3.51 m2 (0.22 m wide)",
+  "rectPx": {
+   "x0": 185,
+   "x1": 193,
+   "y0": 81,
+   "y1": 649
+  },
+  "sizeM": "0.22 x 15.80 m = 3.5 m2",
+  "mppXY": [
+   0.027769,
+   0.02781
+  ],
+  "wrongFix": "\u2014"
+ },
+ {
+  "id": "N23",
+  "case": "dom-w-arkadiach",
+  "frame": "frame-asset-rzut-16680ee739-bb2ced8b98",
+  "knownGoodPass": true,
+  "feature": "W facade compound: FACADE_PIER separator; 2.01 m OPEN_SIDE mouth that is a window 200/150",
+  "truth": "window between piers",
+  "truthBasis": "KNOWN digest; INFERRED raster",
+  "b0": "OPEN_SIDE 2.01 (x=138, 407..516); box stands, house is one rectangle",
+  "rectPx": {
+   "x0": 138,
+   "x1": 138,
+   "y0": 407,
+   "y1": 516
+  },
+  "sizeM": "2.01 m (line)",
+  "mppXY": [
+   0.018454,
+   0.018468
+  ],
+  "wrongFix": "an OPEN_SIDE consumer carving the facade at a window"
+ },
+ {
+  "id": "N24",
+  "case": "dom-miniaturka",
+  "frame": "frame-asset-rzut-3da149ce7e-6d4f61a890",
+  "knownGoodPass": true,
+  "feature": "E bay (windows 55/140,150/140,55/140)",
+  "truth": "walled bay 1.00 m",
+  "truthBasis": "KNOWN raster",
+  "b0": "built attached ring 1.00 x 6.23; RECESS 628..676 x 452..486; OPEN_SIDE 3.86 at x=628 (bay mouth)",
+  "rectPx": {
+   "x0": 628,
+   "x1": 676,
+   "y0": 154.5,
+   "y1": 452.25
+  },
+  "sizeM": "1.00 x 6.22 m = 6.2 m2",
+  "mppXY": [
+   0.02089,
+   0.020886
+  ],
+  "wrongFix": "trigger-census C1 fires on its N side (cover 0.848): a face rule could move a known-good ring"
+ },
+ {
+  "id": "N25",
+  "case": "A02",
+  "frame": "frame-asset-rzut-2c17aa3eda-b6cebfd23d",
+  "knownGoodPass": true,
+  "feature": "S entrance recess (doors 105/210, 80/210)",
+  "truth": "recessed entrance, ~0.85 m deep",
+  "truthBasis": "KNOWN digest + raster",
+  "b0": "RECESS region 280..459 x 707..741 inside the slab (emitter does not carve recesses)",
+  "rectPx": {
+   "x0": 280,
+   "x1": 459,
+   "y0": 707,
+   "y1": 741
+  },
+  "sizeM": "4.46 x 0.85 m = 3.8 m2",
+  "mppXY": [
+   0.024932,
+   0.024906
+  ],
+  "wrongFix": "\u2014"
+ },
+ {
+  "id": "N26",
+  "case": "A06",
+  "frame": "frame-asset-rzut-f08001e3c4-8b24c71f3f",
+  "knownGoodPass": true,
+  "feature": "porch body under the attic (005L)",
+  "truth": "porch 3.88 x 1.44",
+  "truthBasis": "KNOWN 005L report + model",
+  "b0": "built attached ring SOURCE_EXACT; lvl-1 slab 2.99 m2 over it; 3.96 m2 BEYOND overhang named",
+  "rectPx": {
+   "x0": 308,
+   "x1": 495,
+   "y0": 209,
+   "y1": 278
+  },
+  "sizeM": "3.88 x 1.43 m = 5.5 m2",
+  "mppXY": [
+   0.020726,
+   0.020714
+  ],
+  "wrongFix": "storey stacking changes"
+ },
+ {
+  "id": "N27",
+  "case": "A07",
+  "frame": "frame-asset-rzut-dec884e019-46909f56cf",
+  "knownGoodPass": true,
+  "feature": "N facade glazing 3.71 / 3.59; interior OPEN_SIDE 6.53 at y=429",
+  "truth": "terrace doors; open-plan interior line",
+  "truthBasis": "KNOWN digest",
+  "b0": "OPENING_IN_WALL x2; OPEN_SIDE interior",
+  "rectPx": {
+   "x0": 46,
+   "x1": 789.5,
+   "y0": 220,
+   "y1": 220
+  },
+  "sizeM": "17.22 m (line)",
+  "mppXY": [
+   0.023161,
+   0.023145
+  ],
+  "wrongFix": "\u2014"
+ },
+ {
+  "id": "N28",
+  "case": "dom-pod-jarzabem",
+  "frame": "frame-asset-rzut-cafd34a77a-4813950087",
+  "knownGoodPass": false,
+  "feature": "N covered terrace on corner posts",
+  "truth": "covered terrace/pergola",
+  "truthBasis": "KNOWN raster",
+  "b0": "COVERED_TERRACE 12.65 m2 unbuilt; N SUPPORTED RECORDED 2.47 m",
+  "rectPx": {
+   "x0": 602,
+   "x1": 785,
+   "y0": 116,
+   "y1": 204
+  },
+  "sizeM": "5.13 x 2.47 m = 12.6 m2",
+  "mppXY": [
+   0.028009,
+   0.028035
+  ],
+  "wrongFix": "built -> +12.6 m2"
+ },
+ {
+  "id": "N29",
+  "case": "dom-pod-jarzabem",
+  "frame": "frame-asset-rzut-cafd34a77a-4813950087",
+  "knownGoodPass": false,
+  "feature": "S recessed entrance porch between Gabinet and Kuchnia (doors 70/210,105/210,70/210 on the inner facade)",
+  "truth": "open recessed porch",
+  "truthBasis": "KNOWN raster",
+  "b0": "inside UNKNOWN body 14.35 m2 (263..785 x 561..596) unbuilt; its mouth on y=596 is OPENING_IN_WALL 6.22 (\"77 % spanned by one drawn line\" = paving edge)",
+  "rectPx": {
+   "x0": 413,
+   "x1": 635,
+   "y0": 561,
+   "y1": 596
+  },
+  "sizeM": "6.22 x 0.98 m = 6.1 m2",
+  "mppXY": [
+   0.028009,
+   0.028035
+  ],
+  "wrongFix": "TRAP: a rule that treats OPENING_IN_WALL on the far face as host wall closes the porch (+7.8 m2 porch built as a room)"
+ },
+ {
+  "id": "N30",
+  "case": "dom-pod-jarzabem",
+  "frame": "frame-asset-rzut-cafd34a77a-4813950087",
+  "knownGoodPass": false,
+  "feature": "garage door 300/225 + paved apron",
+  "truth": "vehicle door; apron is ground",
+  "truthBasis": "KNOWN raster",
+  "b0": "garage built in the box; apron = model terrace-front-0 PAVED 4.51 m2",
+  "rectPx": {
+   "x0": 103,
+   "x1": 263,
+   "y0": 561,
+   "y1": 596
+  },
+  "sizeM": "4.48 x 0.98 m = 4.4 m2",
+  "mppXY": [
+   0.028009,
+   0.028035
+  ],
+  "wrongFix": "apron built as garage depth"
+ },
+ {
+  "id": "N31",
+  "case": "dom-pod-jarzabem",
+  "frame": "frame-asset-rzut-cafd34a77a-4813950087",
+  "knownGoodPass": false,
+  "feature": "E bay window 260/170 (0.42 m) and ground beside it",
+  "truth": "shallow bay + ground",
+  "truthBasis": "KNOWN raster",
+  "b0": "FLUSH 0.18 / UNKNOWN 1.13 / FLUSH 0.29 unbuilt; model 3 \"east recess\" terraces 1.18/1.24/1.67 on ground",
+  "rectPx": {
+   "x0": 785,
+   "x1": 800.5,
+   "y0": 338.5,
+   "y1": 470
+  },
+  "sizeM": "0.43 x 3.69 m = 1.6 m2",
+  "mppXY": [
+   0.028009,
+   0.028035
+  ],
+  "wrongFix": "\u2014"
+ },
+ {
+  "id": "N32",
+  "case": "willa-miranda",
+  "frame": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+  "knownGoodPass": false,
+  "feature": "S entrance porch with a post",
+  "truth": "covered porch",
+  "truthBasis": "KNOWN raster",
+  "b0": "COVERED_TERRACE 10.11 m2 unbuilt; S STRONG ZONE 7.63 walls",
+  "rectPx": {
+   "x0": 378,
+   "x1": 533,
+   "y0": 519,
+   "y1": 610.5
+  },
+  "sizeM": "4.16 x 2.43 m = 10.1 m2",
+  "mppXY": [
+   0.026808,
+   0.02659
+  ],
+  "wrongFix": "built -> +10.1 m2"
+ },
+ {
+  "id": "N33",
+  "case": "willa-miranda",
+  "frame": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+  "knownGoodPass": false,
+  "feature": "N terrace (door 110/230) E of the living-room projection",
+  "truth": "raised/open terrace",
+  "truthBasis": "INFERRED raster",
+  "b0": "UNKNOWN 5.0 m2 enclosed, REJECTED NO_STRONG_EXTENT; N STRONG ZONE 7.63 walls",
+  "rectPx": {
+   "x0": 571.5,
+   "x1": 699,
+   "y0": 121,
+   "y1": 176
+  },
+  "sizeM": "3.42 x 1.46 m = 5.0 m2",
+  "mppXY": [
+   0.026808,
+   0.02659
+  ],
+  "wrongFix": "built -> +5 m2"
+ },
+ {
+  "id": "N34",
+  "case": "willa-miranda",
+  "frame": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+  "knownGoodPass": false,
+  "feature": "NW terrace strip (door 240/230)",
+  "truth": "terrace",
+  "truthBasis": "INFERRED raster",
+  "b0": "COVERED_TERRACE 0.70 m2 unbuilt",
+  "rectPx": {
+   "x0": 252,
+   "x1": 367,
+   "y0": 167.5,
+   "y1": 176
+  },
+  "sizeM": "3.08 x 0.23 m = 0.7 m2",
+  "mppXY": [
+   0.026808,
+   0.02659
+  ],
+  "wrongFix": "\u2014"
+ },
+ {
+  "id": "N35",
+  "case": "dom-w-dabecjach",
+  "frame": "frame-asset-rzut-1a56066c62-10b0ec4131",
+  "knownGoodPass": false,
+  "feature": "NW covered terrace on posts (furniture)",
+  "truth": "covered terrace",
+  "truthBasis": "KNOWN raster",
+  "b0": "part of COVERED_TERRACE 74.86 m2 body (153..703 x 50.5..452) unbuilt; N STRONG ZONE 9.86 walls",
+  "rectPx": {
+   "x0": 153,
+   "x1": 340,
+   "y0": 50.5,
+   "y1": 260
+  },
+  "sizeM": "5.26 x 5.90 m = 31.0 m2",
+  "mppXY": [
+   0.028113,
+   0.02815
+  ],
+  "wrongFix": "built -> +~35 m2"
+ },
+ {
+  "id": "N36",
+  "case": "dom-w-dabecjach",
+  "frame": "frame-asset-rzut-1a56066c62-10b0ec4131",
+  "knownGoodPass": false,
+  "feature": "SW entrance path / garden",
+  "truth": "ground",
+  "truthBasis": "KNOWN raster",
+  "b0": "COVERED_TERRACE 41.09 m2 (153..469 x 461..635) unbuilt (mislabelled); S STRONG INCONCLUSIVE 15.82 walls",
+  "rectPx": {
+   "x0": 153,
+   "x1": 381,
+   "y0": 461,
+   "y1": 635
+  },
+  "sizeM": "6.41 x 4.90 m = 31.4 m2",
+  "mppXY": [
+   0.028113,
+   0.02815
+  ],
+  "wrongFix": "built -> +~22 m2"
+ },
+ {
+  "id": "N37",
+  "case": "dom-w-dabecjach",
+  "frame": "frame-asset-rzut-1a56066c62-10b0ec4131",
+  "knownGoodPass": false,
+  "feature": "N ground with shrubs E of the terrace",
+  "truth": "ground",
+  "truthBasis": "KNOWN raster",
+  "b0": "in the 74.86 m2 body",
+  "rectPx": {
+   "x0": 340,
+   "x1": 703,
+   "y0": 50.5,
+   "y1": 159
+  },
+  "sizeM": "10.21 x 3.05 m = 31.2 m2",
+  "mppXY": [
+   0.028113,
+   0.02815
+  ],
+  "wrongFix": "built"
+ },
+ {
+  "id": "N38",
+  "case": "dom-w-krasnokwiatach",
+  "frame": "frame-asset-rzut-071d5075ee-723651b1ff",
+  "knownGoodPass": false,
+  "feature": "NW covered terrace (post 155..177)",
+  "truth": "covered terrace (roof INFERRED)",
+  "truthBasis": "krasno.md (raster)",
+  "b0": "merged in UNKNOWN 38.14 m2 body; N STRONG INCONCLUSIVE 9.5 walls",
+  "rectPx": {
+   "x0": 155,
+   "x1": 262,
+   "y0": 77,
+   "y1": 248
+  },
+  "sizeM": "2.69 x 4.29 m = 11.5 m2",
+  "mppXY": [
+   0.02511,
+   0.025114
+  ],
+  "wrongFix": "built -> +11.5 m2"
+ },
+ {
+  "id": "N39",
+  "case": "dom-w-krasnokwiatach",
+  "frame": "frame-asset-rzut-071d5075ee-723651b1ff",
+  "knownGoodPass": false,
+  "feature": "S entrance porch (post 263..284)",
+  "truth": "covered porch (roof INFERRED)",
+  "truthBasis": "krasno.md (raster)",
+  "b0": "COVERED_TERRACE 11.32 m2 unbuilt; S STRONG INCONCLUSIVE 8.83 walls",
+  "rectPx": {
+   "x0": 262,
+   "x1": 365,
+   "y0": 559,
+   "y1": 718
+  },
+  "sizeM": "2.59 x 3.99 m = 10.3 m2",
+  "mppXY": [
+   0.02511,
+   0.025114
+  ],
+  "wrongFix": "built -> +10.3 m2"
+ },
+ {
+  "id": "N40",
+  "case": "dom-w-krasnokwiatach",
+  "frame": "frame-asset-rzut-071d5075ee-723651b1ff",
+  "knownGoodPass": false,
+  "feature": "S planting strip (shrubs read as wall-thick bands)",
+  "truth": "planting",
+  "truthBasis": "krasno.md (KNOWN bands)",
+  "b0": "SEPARATE_BODY 1.62 m2 unbuilt",
+  "rectPx": {
+   "x0": 226,
+   "x1": 262,
+   "y0": 559,
+   "y1": 760
+  },
+  "sizeM": "0.90 x 5.05 m = 4.6 m2",
+  "mppXY": [
+   0.02511,
+   0.025114
+  ],
+  "wrongFix": "shrubs become wall/returns -> porch closed"
+ },
+ {
+  "id": "N41",
+  "case": "dom-w-akebiach",
+  "frame": "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
+  "knownGoodPass": false,
+  "feature": "S courtyard between garage and porch (trees)",
+  "truth": "planted courtyard",
+  "truthBasis": "akeb.md (raster)",
+  "b0": "in UNKNOWN 33.13 m2 body; S STRONG INCONCLUSIVE 9.25 walls",
+  "rectPx": {
+   "x0": 303,
+   "x1": 370,
+   "y0": 611,
+   "y1": 759
+  },
+  "sizeM": "1.95 x 4.30 m = 8.4 m2",
+  "mppXY": [
+   0.029086,
+   0.029036
+  ],
+  "wrongFix": "built -> +8.4 m2"
+ },
+ {
+  "id": "N42",
+  "case": "dom-w-akebiach",
+  "frame": "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
+  "knownGoodPass": false,
+  "feature": "S entrance porch below the door wall (~627)",
+  "truth": "open porch",
+  "truthBasis": "akeb.md (raster)",
+  "b0": "SEPARATE_BODY 7.7 m2 (389.5..592 x 611..656) unbuilt",
+  "rectPx": {
+   "x0": 370,
+   "x1": 487,
+   "y0": 627,
+   "y1": 656
+  },
+  "sizeM": "3.40 x 0.84 m = 2.9 m2",
+  "mppXY": [
+   0.029086,
+   0.029036
+  ],
+  "wrongFix": "built"
+ },
+ {
+  "id": "N43",
+  "case": "dom-w-akebiach",
+  "frame": "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
+  "knownGoodPass": false,
+  "feature": "SE yard",
+  "truth": "ground",
+  "truthBasis": "akeb.md (raster)",
+  "b0": "unbuilt (no body)",
+  "rectPx": {
+   "x0": 605,
+   "x1": 750,
+   "y0": 611,
+   "y1": 759
+  },
+  "sizeM": "4.22 x 4.30 m = 18.1 m2",
+  "mppXY": [
+   0.029086,
+   0.029036
+  ],
+  "wrongFix": "built -> +19.7 m2"
+ },
+ {
+  "id": "N44",
+  "case": "dom-w-helikoniach",
+  "frame": "frame-asset-rzut-d5842da623-4c943a2b00",
+  "knownGoodPass": false,
+  "feature": "S entrance porch (door 150/210)",
+  "truth": "open porch",
+  "truthBasis": "KNOWN raster",
+  "b0": "BUILT region 300..428.5 x 710..752 in the digest (PROJECTING_WING 4.91 m2 built) but outside the model slab",
+  "rectPx": {
+   "x0": 300,
+   "x1": 428.5,
+   "y0": 710,
+   "y1": 752
+  },
+  "sizeM": "2.96 x 0.97 m = 2.9 m2",
+  "mppXY": [
+   0.023052,
+   0.023071
+  ],
+  "wrongFix": "emitted as built"
+ },
+ {
+  "id": "N45",
+  "case": "dom-w-helikoniach",
+  "frame": "frame-asset-rzut-d5842da623-4c943a2b00",
+  "knownGoodPass": false,
+  "feature": "N terrace platform beyond the terrace door 340/230",
+  "truth": "terrace platform",
+  "truthBasis": "KNOWN model",
+  "b0": "model terrace-rear-141 PAVED 34.72 m2; N door OPENING_IN_WALL 4.66 (callout 446)",
+  "rectPx": {
+   "x0": 181,
+   "x1": 451,
+   "y0": 162,
+   "y1": 189
+  },
+  "sizeM": "6.22 x 0.62 m = 3.9 m2",
+  "mppXY": [
+   0.023052,
+   0.023071
+  ],
+  "wrongFix": "\u2014"
+ },
+ {
+  "id": "N46",
+  "case": "dom-w-glogownikach",
+  "frame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+  "knownGoodPass": false,
+  "feature": "S entrance niche 0.47 m deep",
+  "truth": "genuine open recess",
+  "truthBasis": "glog.md (raster)",
+  "b0": "in strips 536..553; model terrace-front-0 PAVED (on wall poche)",
+  "rectPx": {
+   "x0": 438,
+   "x1": 645,
+   "y0": 535,
+   "y1": 553
+  },
+  "sizeM": "5.44 x 0.47 m = 2.6 m2",
+  "mppXY": [
+   0.026261,
+   0.026207
+  ],
+  "wrongFix": "niche filled by an outer-face rule that does not read the step"
+ },
+ {
+  "id": "N47",
+  "case": "dom-w-glogownikach",
+  "frame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+  "knownGoodPass": false,
+  "feature": "N terrace doors 5.70 m with a mullion block",
+  "truth": "opening in wall",
+  "truthBasis": "KNOWN digest (005N)",
+  "b0": "OPENING_IN_WALL 5.70 (callout 542); block NOT_A_SEPARATOR",
+  "rectPx": {
+   "x0": 421,
+   "x1": 638,
+   "y0": 203,
+   "y1": 203
+  },
+  "sizeM": "5.70 m (line)",
+  "mppXY": [
+   0.026261,
+   0.026207
+  ],
+  "wrongFix": "block read as a separator"
+ },
+ {
+  "id": "N48",
+  "case": "A05",
+  "frame": "frame-asset-rzut-238dfbc50b-38cf8e09f5",
+  "knownGoodPass": false,
+  "feature": "NE recessed covered terrace (door 360/230)",
+  "truth": "covered terrace corner",
+  "truthBasis": "KNOWN raster",
+  "b0": "RECESS 434..758 x 201.5..259.5; OPENING_IN_WALL 3.76 at y=260",
+  "rectPx": {
+   "x0": 434,
+   "x1": 758,
+   "y0": 201.5,
+   "y1": 259.5
+  },
+  "sizeM": "6.84 x 1.22 m = 8.4 m2",
+  "mppXY": [
+   0.0211,
+   0.021105
+  ],
+  "wrongFix": "built"
+ },
+ {
+  "id": "N49",
+  "case": "A05",
+  "frame": "frame-asset-rzut-238dfbc50b-38cf8e09f5",
+  "knownGoodPass": false,
+  "feature": "S entrance canopy with post / 0.99 m \"slab edge\" mouth",
+  "truth": "open entrance",
+  "truthBasis": "INFERRED raster",
+  "b0": "OPEN_SIDE 0.99 compound interval (427..474); S STRONG INCONCLUSIVE 3.62 walls",
+  "rectPx": {
+   "x0": 392,
+   "x1": 474,
+   "y0": 634,
+   "y1": 681
+  },
+  "sizeM": "1.73 x 0.99 m = 1.7 m2",
+  "mppXY": [
+   0.0211,
+   0.021105
+  ],
+  "wrongFix": "built"
+ },
+ {
+  "id": "N50",
+  "case": "A00",
+  "frame": "frame-asset-rzut-db1e8df563-19bef9a91e",
+  "knownGoodPass": false,
+  "feature": "S recessed entrance porch (door 150/210, plants)",
+  "truth": "open recess",
+  "truthBasis": "KNOWN raster",
+  "b0": "OPEN_SIDE 4.61 at y=605 (414..614)",
+  "rectPx": {
+   "x0": 414,
+   "x1": 614,
+   "y0": 575,
+   "y1": 605
+  },
+  "sizeM": "4.61 x 0.69 m = 3.2 m2",
+  "mppXY": [
+   0.02305,
+   0.023088
+  ],
+  "wrongFix": "closed"
+ },
+ {
+  "id": "N51",
+  "case": "dom-w-gozdzikowcach",
+  "frame": "frame-asset-rzut-01d4b6474c-64bd1e0f2f",
+  "knownGoodPass": false,
+  "feature": "entrance RECESS (005N): mouth 3.09 m, back wall 1.22 m, WALL_RETURN 434..465 (3.86 m)",
+  "truth": "recess, open at its mouth",
+  "truthBasis": "KNOWN PROBE REGIONS + 005N record",
+  "b0": "RECESS region 311..434 x 549.4..598, mouth OPEN_SIDE",
+  "rectPx": {
+   "x0": 311,
+   "x1": 434,
+   "y0": 549.41,
+   "y1": 598
+  },
+  "sizeM": "3.12 x 1.22 m = 3.8 m2",
+  "mppXY": [
+   0.025344,
+   0.025199
+  ],
+  "wrongFix": "recess filled / merged into one 7.76 m OPEN_SIDE (pre-005N)"
+ },
+ {
+  "id": "N52",
+  "case": "dom-w-gozdzikowcach",
+  "frame": "frame-asset-rzut-01d4b6474c-64bd1e0f2f",
+  "knownGoodPass": false,
+  "feature": "garage S part with door 325 (005N)",
+  "truth": "garage",
+  "truthBasis": "KNOWN PROBE REGIONS",
+  "b0": "BUILT 434..639 x 549.4..598; mouth 465..590 OPEN_SIDE 3.17 but cells built",
+  "rectPx": {
+   "x0": 434,
+   "x1": 639,
+   "y0": 549.41,
+   "y1": 598
+  },
+  "sizeM": "5.20 x 1.22 m = 6.4 m2",
+  "mppXY": [
+   0.025344,
+   0.025199
+  ],
+  "wrongFix": "garage unbuilt / opened"
+ }
+]

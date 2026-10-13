@@ -65,11 +65,14 @@ def main():
         new_terraces = {}
         new_exact = {}
         for c in base:
-            tb = sorted(json.dumps(t, sort_keys=True) for t in (base[c].get('semantics') or {}).get('terraces', []) or [])
-            tn = sorted(json.dumps(t, sort_keys=True) for t in (cand[c].get('semantics') or {}).get('terraces', []) or [])
-            added = [t for t in tn if t not in tb]
-            if added:
-                new_terraces[c] = added
+            # a new terrace: more terraces than before, or one whose (surface, interpretation) the row did not have
+            # (a terrace whose area moved with a changed body face is the same terrace, not a new one)
+            tb = (base[c].get('semantics') or {}).get('terraces', []) or []
+            tn = (cand[c].get('semantics') or {}).get('terraces', []) or []
+            kinds = {(t.get('surface'), t.get('why')) for t in tb}
+            added = [t for t in tn if (t.get('surface'), t.get('why')) not in kinds]
+            if len(tn) > len(tb) or added:
+                new_terraces[c] = {'old': tb, 'new': tn}
             rb = [w['status'] for w in (base[c].get('semantics') or {}).get('wallRings', []) or []]
             rn = [w['status'] for w in (cand[c].get('semantics') or {}).get('wallRings', []) or []]
             if rn.count('SOURCE_EXACT') > rb.count('SOURCE_EXACT'):
@@ -83,7 +86,10 @@ def main():
             rings = [w['status'] for w in sem.get('wallRings', []) or []]
             gaps = [u for u in sem.get('unresolved', []) or [] if 'outer face' in u]
             g['G5_glogownikach'] = {'outcome': gl['outcome'], 'verdict': gl.get('verdict'), 'footprintResidualPct': gl.get('footprintResidualPct'), 'terraces': terr, 'rings': rings, 'outerFaceGaps': gaps,
-                                    'holds': gl['outcome'] != 'COMPLETED' or (not any('recess' in t.get('why', '') for t in terr) and 'SOURCE_EXACT' not in rings) or (gl.get('verdict') == 'PASS')}
+                                    # preregistration G5, no exemption for a PASS verdict (a footprint inside 6 % with a wall short is
+                                    # the threshold artefact the gate exists for): a completed model carries no recess-floor terrace
+                                    # on the strips and no SOURCE_EXACT ring while an outer face is unresolved, and names the faces
+                                    'holds': gl['outcome'] != 'COMPLETED' or (not any('recess' in t.get('why', '') for t in terr) and 'SOURCE_EXACT' not in rings and len(gaps) > 0)}
         g['G8_storeys'] = {'holds': all((cand[c].get('semantics') or {}).get('levels') == (base[c].get('semantics') or {}).get('levels') for c in base if c not in changed),
                            'changedLevels': [c for c in changed if (cand[c].get('semantics') or {}).get('levels') != (base[c].get('semantics') or {}).get('levels')]}
         if label in repeats:

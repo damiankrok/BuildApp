@@ -1,0 +1,5799 @@
+{
+ "baseline": "baseline-44.json (S0)",
+ "candidates": {
+  "C1": {
+   "admissible": false,
+   "changedRows": [
+    "dom-w-glogownikach",
+    "dom-w-helikoniach"
+   ],
+   "changes": {
+    "dom-w-glogownikach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": true,
+      "program": true,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -8.04,
+      -5.86
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "bodies": {
+       "new": [
+        "COVERED_TERRACE:-:1.3",
+        "COVERED_TERRACE:-:2.4",
+        "FLUSH_ATTACHED:-:0.3",
+        "FLUSH_ATTACHED:-:0.4",
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:1.8",
+        "UNKNOWN:-:0.7",
+        "UNKNOWN:-:0.8"
+       ],
+       "old": [
+        "COVERED_TERRACE:-:1.3",
+        "COVERED_TERRACE:-:2.4",
+        "FLUSH_ATTACHED:-:0.3",
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:1.8",
+        "FLUSH_ATTACHED:-:3.6",
+        "UNKNOWN:-:0.7",
+        "UNKNOWN:-:0.8"
+       ]
+      },
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0.9"
+       ]
+      },
+      "counts": {
+       "new": {
+        "doors": 12,
+        "levels": 1,
+        "materials": 11,
+        "openings": 21,
+        "roofs": 1,
+        "rooms": 8,
+        "slabs": 1,
+        "terraces": 2,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 19,
+        "windows": 9
+       },
+       "old": {
+        "doors": 12,
+        "levels": 1,
+        "materials": 11,
+        "openings": 20,
+        "roofs": 1,
+        "rooms": 8,
+        "slabs": 1,
+        "surfaceRegions": 1,
+        "terraces": 3,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 19,
+        "windows": 8
+       }
+      },
+      "footprintM2": {
+       "new": 167.7,
+       "old": 163.81
+      },
+      "terraces": {
+       "new": [
+        {
+         "areaM2": 6.63,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 1.32,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        }
+       ],
+       "old": [
+        {
+         "areaM2": 3.27,
+         "surface": "PAVED",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 6.63,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 1.31,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        }
+       ]
+      },
+      "wallRings": {
+       "new": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "19.28 \u00d7 8.70 m body from the plan's printed chains and wall bands"
+        }
+       ],
+       "old": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "18.83 \u00d7 8.70 m body from the plan's printed chains and wall bands"
+        }
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "PASS"
+     ]
+    },
+    "dom-w-helikoniach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": true,
+      "program": true,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -18.88,
+      -12.23
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "bodies": {
+       "new": [
+        "PROJECTING_WING:B:4.9",
+        "PROJECTING_WING:B:46.2",
+        "UNKNOWN:-:0.3",
+        "UNKNOWN:-:1.8",
+        "UNKNOWN:-:4.1"
+       ],
+       "old": [
+        "PROJECTING_WING:B:4.9",
+        "PROJECTING_WING:B:45.9",
+        "UNKNOWN:-:0.9",
+        "UNKNOWN:-:1.8",
+        "UNKNOWN:-:3.9"
+       ]
+      },
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ]
+      },
+      "counts": {
+       "new": {
+        "doors": 5,
+        "levels": 1,
+        "materials": 11,
+        "openings": 9,
+        "roofs": 1,
+        "rooms": 3,
+        "slabs": 1,
+        "terraces": 1,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 11,
+        "windows": 4
+       },
+       "old": {
+        "doors": 4,
+        "levels": 1,
+        "materials": 11,
+        "openings": 10,
+        "roofs": 1,
+        "rooms": 3,
+        "slabs": 1,
+        "terraces": 1,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 12,
+        "windows": 6
+       }
+      },
+      "footprintM2": {
+       "new": 83.92,
+       "old": 77.56
+      },
+      "massProvenance": {
+       "new": [
+        "feat-main:SOURCE_EXACT"
+       ],
+       "old": [
+        "feat-main:SOURCE_DERIVED"
+       ]
+      },
+      "terraces": {
+       "new": [
+        {
+         "areaM2": 36.05,
+         "surface": "PAVED",
+         "why": "the floor of the rear recess and the platform the plan outlines beyond it"
+        }
+       ],
+       "old": [
+        {
+         "areaM2": 34.72,
+         "surface": "PAVED",
+         "why": "the floor of the rear recess and the platform the plan outlines beyond it"
+        }
+       ]
+      },
+      "unresolved": {
+       "new": [
+        "AMBIGUOUS:a 1.20 m thin band at z 5.18",
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the left elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:a v2 registration for the right elevation",
+        "AMBIGUOUS:the opening opening-0-west-3-1 as the drawings print it",
+        "AMBIGUOUS:whether the 1.24 m\u00b2 strip at 0.00, 12.01 is part of the building",
+        "AMBIGUOUS:whether the 2.92 m\u00b2 strip at 3.26, 12.01 is part of the building",
+        "AMBIGUOUS:which body the attic storey stands on",
+        "AMBIGUOUS:which way the ridge runs over mass-0"
+       ],
+       "old": [
+        "AMBIGUOUS:a 1.20 m thin band at z 5.18",
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the left elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:a v2 registration for the right elevation",
+        "AMBIGUOUS:the label of room-0-0 (read as 7)",
+        "AMBIGUOUS:the opening opening-0-west-3-0 as the drawings print it",
+        "AMBIGUOUS:the opening opening-0-west-3-2 as the drawings print it",
+        "AMBIGUOUS:whether the 0.23 m\u00b2 strip at 0.18, 2.58 is part of the building",
+        "AMBIGUOUS:whether the 0.31 m\u00b2 strip at 0.18, 4.96 is part of the building",
+        "AMBIGUOUS:whether the 1.04 m\u00b2 strip at 0.53, 12.01 is part of the building",
+        "AMBIGUOUS:whether the 2.92 m\u00b2 strip at 3.26, 12.01 is part of the building",
+        "AMBIGUOUS:whether the 3.03 m\u00b2 strip at 0.00, 6.68 is part of the building",
+        "AMBIGUOUS:which body the attic storey stands on",
+        "AMBIGUOUS:which way the ridge runs over mass-0"
+       ]
+      },
+      "wallRings": {
+       "new": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "6.99 \u00d7 12.01 m body from the plan's printed chains and wall bands"
+        }
+       ],
+       "old": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "6.46 \u00d7 12.01 m body from the plan's printed chains and wall bands"
+        }
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "ALGORITHMIC_FAIL"
+     ]
+    }
+   },
+   "completed": 24,
+   "gates": {
+    "G1_knownGood": {
+     "holds": true,
+     "rows": []
+    },
+    "G2_scale": {
+     "holds": true,
+     "rows": []
+    },
+    "G3_negativeControls": {
+     "holds": true,
+     "selectedFrameChanged": [],
+     "violations": []
+    },
+    "G4_noNewExactRing": {
+     "holds": true,
+     "rows": []
+    },
+    "G4_noNewTerrace": {
+     "holds": true,
+     "rows": []
+    },
+    "G5_glogownikach": {
+     "holds": false,
+     "rows": null
+    },
+    "G8_storeys": {
+     "holds": true,
+     "rows": null
+    }
+   },
+   "note": "Changed glogownikach (E side to its outer face, 19.28 m, -5.86 %, frozen verdict PASS) and helikoniach (W wall restored, -18.88 -> -12.23 %). Safe on G1-G4 but fails G5 alone: glogownikach keeps two wall-poche \"front recess\" terraces and a SOURCE_EXACT ring on the south wall inner face while the frozen footprint verdict calls it PASS - the threshold artefact G5 exists for. Not admissible alone; therefore no combination containing it is eligible (preregistration section 5).",
+   "pass": 20,
+   "verdictTransitions": {
+    "dom-w-glogownikach": [
+     "ALGORITHMIC_FAIL",
+     "PASS"
+    ]
+   }
+  },
+  "C1C2N1": {
+   "admissible": false,
+   "changedRows": [
+    "A05",
+    "dom-pod-jarzabem",
+    "dom-w-akebiach",
+    "dom-w-dabecjach",
+    "dom-w-glogownikach",
+    "dom-w-helikoniach",
+    "dom-w-krasnokwiatach",
+    "dom-w-modrzykach",
+    "dom-w-morelach",
+    "dom-w-zurawkach",
+    "rarytasy-g2e",
+    "willa-miranda"
+   ],
+   "changes": {
+    "A05": {
+     "flags": {
+      "decisionPath": true,
+      "failure": true,
+      "model": true,
+      "program": true,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      null,
+      -13.94
+     ],
+     "outcome": [
+      "FAILED",
+      "COMPLETED"
+     ],
+     "refusal": [
+      "the lowest storey covers 33.34 m\u00b2 against the 126.23 m\u00b2 the publisher prints \u2014 73.6% apart: the decomposition is not of this building 87 other readings of the plan were weighed and none holds: the best, copy area_table 2a1e4f9cc1, chain extent, registered scale, largest-first tiling, sides as gridde",
+      null
+     ],
+     "semantics": {
+      "bodies": {
+       "new": [
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:0.5",
+        "UNKNOWN:-:2.8",
+        "UNKNOWN:B:3.6"
+       ],
+       "old": [
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:0.5",
+        "UNKNOWN:-:2.8",
+        "UNKNOWN:-:3.6"
+       ]
+      },
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:ACCEPTED:3.6",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:10.9"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:10.9"
+       ]
+      },
+      "counts": {
+       "new": {
+        "doors": 18,
+        "levels": 1,
+        "materials": 11,
+        "openings": 22,
+        "roofs": 4,
+        "rooms": 10,
+        "slabs": 5,
+        "terraces": 3,
+        "wallJunctions": 20,
+        "wallRings": 5,
+        "walls": 42,
+        "windows": 4
+       },
+       "old": null
+      },
+      "extentConflicts": {
+       "new": [
+        "E:STRONG:INCONCLUSIVE:1.01",
+        "S:STRONG:ACCEPTED:0.99"
+       ],
+       "old": [
+        "E:STRONG:INCONCLUSIVE:1.01",
+        "S:STRONG:INCONCLUSIVE:0.99"
+       ]
+      },
+      "footprintM2": {
+       "new": 108.63,
+       "old": null
+      },
+      "levels": {
+       "new": 1,
+       "old": null
+      },
+      "massProvenance": {
+       "new": [
+        "feat-attached-0:SOURCE_DERIVED",
+        "feat-attached-1:SOURCE_DERIVED",
+        "feat-attached-2:SOURCE_DERIVED",
+        "feat-attached-3:SOURCE_DERIVED",
+        "feat-main:SOURCE_EXACT"
+       ],
+       "old": null
+      },
+      "terraces": {
+       "new": [
+        {
+         "areaM2": 3.24,
+         "surface": "UNKNOWN",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 2.83,
+         "surface": "PAVED",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 0.9,
+         "surface": "UNKNOWN",
+         "why": "the floor of the east recess"
+        }
+       ],
+       "old": null
+      },
+      "unresolved": {
+       "new": [
+        "AMBIGUOUS:a 1.22 m thin band at z 1.36",
+        "AMBIGUOUS:a 1.33 m thin band at z 9.75",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the opening opening-0-east-13-0 as the drawings print it",
+        "MISSING:a registration for the elevations",
+        "MISSING:the kind of roof over mass-1",
+        "MISSING:the kind of roof over mass-2",
+        "MISSING:the kind of roof over mass-3",
+        "MISSING:the kind of roof over mass-4",
+        "MISSING:the main roof"
+       ],
+       "old": []
+      },
+      "wallRings": {
+       "new": [
+        {
+         "id": "ring-attached-0-0",
+         "status": "SOURCE_EXACT",
+         "why": "7.74 \u00d7 3.24 m body from the plan's printed chains and wall bands"
+        },
+        {
+         "id": "ring-attached-1-0",
+         "status": "SOURCE_EXACT",
+         "why": "6.76 \u00d7 1.22 m body from the plan's printed chains and wall bands"
+        },
+        {
+         "id": "ring-attached-2-0",
+         "status": "SOURCE_EXACT",
+         "why": "2.54 \u00d7 3.24 m body from the plan's printed chains and wall bands"
+        },
+        {
+         "id": "ring-attached-3-0",
+         "status": "SOURCE_EXACT",
+         "why": "3.63 \u00d7 1.00 m body from the plan's printed chains and wall bands"
+        },
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "13.62 \u00d7 4.65 m body from the plan's printed chains and wall bands"
+        }
+       ],
+       "old": null
+      },
+      "wideOpenings": {
+       "new": [
+        "OPENING_IN_WALL:3.76",
+        "OPENING_IN_WALL:3.76",
+        "OPEN_SIDE:3.44",
+        "OPEN_SIDE:3.44",
+        "OPEN_SIDE:3.74",
+        "OPEN_SIDE:4.11",
+        "OPEN_SIDE:4.11",
+        "OPEN_SIDE:4.11",
+        "OPEN_SIDE:5.7",
+        "OPEN_SIDE:5.7",
+        "OPEN_SIDE:5.7"
+       ],
+       "old": [
+        "OPENING_IN_WALL:3.74",
+        "OPENING_IN_WALL:3.76",
+        "OPEN_SIDE:0.99",
+        "OPEN_SIDE:3.02",
+        "OPEN_SIDE:4.11"
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "ALGORITHMIC_FAIL"
+     ]
+    },
+    "dom-pod-jarzabem": {
+     "flags": {
+      "decisionPath": true,
+      "failure": false,
+      "model": true,
+      "program": true,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -11.88,
+      -5.61
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "bodies": {
+       "new": [
+        "COVERED_TERRACE:-:12.4",
+        "FLUSH_ATTACHED:-:0.8",
+        "FLUSH_ATTACHED:-:0.8",
+        "SEPARATE_BODY:-:0.1",
+        "SEPARATE_BODY:-:0.2",
+        "UNKNOWN:B:2.0"
+       ],
+       "old": [
+        "COVERED_TERRACE:-:12.6",
+        "FLUSH_ATTACHED:-:0.2",
+        "FLUSH_ATTACHED:-:0.3",
+        "UNKNOWN:-:1.1",
+        "UNKNOWN:-:14.3"
+       ]
+      },
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:ACCEPTED:2.3",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ]
+      },
+      "counts": {
+       "new": {
+        "doors": 18,
+        "levels": 1,
+        "materials": 11,
+        "openings": 23,
+        "roofs": 1,
+        "rooms": 5,
+        "slabs": 1,
+        "terraces": 1,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 27,
+        "windows": 5
+       },
+       "old": {
+        "doors": 12,
+        "levels": 1,
+        "materials": 11,
+        "openings": 19,
+        "roofs": 1,
+        "rooms": 6,
+        "slabs": 1,
+        "terraces": 8,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 32,
+        "windows": 7
+       }
+      },
+      "extentConflicts": {
+       "new": [
+        "E:STRONG:ACCEPTED:0.71",
+        "N:SUPPORTED:RECORDED:2.5"
+       ],
+       "old": [
+        "N:SUPPORTED:RECORDED:2.47",
+        "S:STRONG:ZONE:0.98"
+       ]
+      },
+      "footprintM2": {
+       "new": 204.61,
+       "old": 191.0
+      },
+      "massProvenance": {
+       "new": [
+        "feat-main:SOURCE_DERIVED"
+       ],
+       "old": [
+        "feat-main:SOURCE_EXACT"
+       ]
+      },
+      "terraces": {
+       "new": [
+        {
+         "areaM2": 47.07,
+         "surface": "UNKNOWN",
+         "why": "the floor of the rear recess"
+        }
+       ],
+       "old": [
+        {
+         "areaM2": 1.18,
+         "surface": "UNKNOWN",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 1.24,
+         "surface": "PAVED",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 1.67,
+         "surface": "UNKNOWN",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 4.51,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 1.99,
+         "surface": "UNKNOWN",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 1.99,
+         "surface": "UNKNOWN",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 5.29,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 47.75,
+         "surface": "UNKNOWN",
+         "why": "the floor of the rear recess"
+        }
+       ]
+      },
+      "unresolved": {
+       "new": [
+        "AMBIGUOUS:a 0.25 m thin band at z 7.43",
+        "AMBIGUOUS:a 0.31 m thin band at z 2.91",
+        "AMBIGUOUS:a 0.31 m thin band at z 3.23",
+        "AMBIGUOUS:a 0.31 m thin band at z 5.77",
+        "AMBIGUOUS:a 0.31 m thin band at z 6.37",
+        "AMBIGUOUS:a 0.31 m thin band at z 6.37",
+        "AMBIGUOUS:a 0.45 m thin band at x 12.81",
+        "AMBIGUOUS:a 0.75 m thin band at z 10.53",
+        "AMBIGUOUS:a 1.28 m thin band at z 10.53",
+        "AMBIGUOUS:a 1.31 m thin band at z 0.38",
+        "AMBIGUOUS:a 1.34 m thin band at z 0.38",
+        "AMBIGUOUS:a 1.39 m thin band at z 0.38",
+        "AMBIGUOUS:a 1.39 m thin band at z 10.53",
+        "AMBIGUOUS:a 1.81 m thin band at z 10.53",
+        "AMBIGUOUS:a 3.37 m thin band at x 0.38",
+        "AMBIGUOUS:a 3.37 m thin band at x 0.38",
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the left elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:the joint between main-iwall-0-x-23 and main-iwall-0-z-6",
+        "AMBIGUOUS:the joint between main-iwall-0-x-27 and main-iwall-0-z-6",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the opening opening-0-west-3-0 as the drawings print it",
+        "AMBIGUOUS:the opening opening-0-west-3-2 as the drawings print it",
+        "AMBIGUOUS:whether the 2.47 m\u00b2 strip at 18.83, 3.63 is part of the building"
+       ],
+       "old": [
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the left elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:the joint between main-iwall-0-x-2 and main-iwall-0-z-13",
+        "AMBIGUOUS:the number of room-0-1",
+        "AMBIGUOUS:the opening opening-0-west-3-0 as the drawings print it"
+       ]
+      },
+      "wallRings": {
+       "new": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "18.83 \u00d7 10.87 m body from the plan's printed chains and wall bands"
+        }
+       ],
+       "old": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "19.10 \u00d7 10.00 m body from the plan's printed chains and wall bands"
+        }
+       ]
+      },
+      "wideOpenings": {
+       "new": [
+        "OPENING_IN_WALL:3.88",
+        "OPENING_IN_WALL:3.88",
+        "OPENING_IN_WALL:3.88",
+        "OPENING_IN_WALL:6.19",
+        "OPENING_IN_WALL:6.19",
+        "OPEN_SIDE:4.01",
+        "OPEN_SIDE:4.01",
+        "OPEN_SIDE:5.97"
+       ],
+       "old": [
+        "OPENING_IN_WALL:3.84",
+        "OPENING_IN_WALL:6.22",
+        "OPEN_SIDE:4.04",
+        "OPEN_SIDE:4.4",
+        "OPEN_SIDE:4.68"
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "PASS"
+     ]
+    },
+    "dom-w-akebiach": {
+     "flags": {
+      "decisionPath": true,
+      "failure": true,
+      "model": false,
+      "program": false,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      null,
+      null
+     ],
+     "outcome": [
+      "FAILED",
+      "FAILED"
+     ],
+     "refusal": [
+      "the lowest storey covers 96.93 m\u00b2 against the 249.42 m\u00b2 the publisher prints \u2014 61.1% apart: the decomposition is not of this building; 63 other readings of the plan were weighed and none survived to a full composition",
+      "the lowest storey covers 118.02 m\u00b2 against the 249.42 m\u00b2 the publisher prints \u2014 52.7% apart: the decomposition is not of this building; 59 other readings of the plan were weighed and none survived to a full composition"
+     ],
+     "semantics": {
+      "bodies": {
+       "new": [
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:0.7",
+        "FLUSH_ATTACHED:-:0.8",
+        "PROJECTING_WING:B:1.5",
+        "RECESSED_ATTACHED:-:11.4",
+        "RECESSED_ATTACHED:-:22.4",
+        "RECESSED_ATTACHED:-:67.5",
+        "SEPARATE_BODY:-:2.6",
+        "SEPARATE_BODY:-:5.6",
+        "SEPARATE_BODY:-:7.7",
+        "UNKNOWN:B:33.1"
+       ],
+       "old": [
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:0.7",
+        "FLUSH_ATTACHED:-:0.8",
+        "PROJECTING_WING:B:1.5",
+        "RECESSED_ATTACHED:-:11.4",
+        "RECESSED_ATTACHED:-:22.4",
+        "RECESSED_ATTACHED:-:67.5",
+        "SEPARATE_BODY:-:2.6",
+        "SEPARATE_BODY:-:5.6",
+        "SEPARATE_BODY:-:7.7",
+        "UNKNOWN:-:33.1"
+       ]
+      },
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:ACCEPTED:10.1",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ]
+      },
+      "extentConflicts": {
+       "new": [
+        "N:STRONG:INCONCLUSIVE:0.96",
+        "S:STRONG:ACCEPTED:4.3"
+       ],
+       "old": [
+        "N:STRONG:INCONCLUSIVE:0.96",
+        "S:STRONG:INCONCLUSIVE:4.3"
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "ALGORITHMIC_FAIL"
+     ]
+    },
+    "dom-w-dabecjach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": true,
+      "model": false,
+      "program": false,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      null,
+      null
+     ],
+     "outcome": [
+      "FAILED",
+      "FAILED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "ALGORITHMIC_FAIL"
+     ]
+    },
+    "dom-w-glogownikach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": true,
+      "program": true,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -8.04,
+      -5.86
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "bodies": {
+       "new": [
+        "COVERED_TERRACE:-:1.3",
+        "COVERED_TERRACE:-:2.4",
+        "FLUSH_ATTACHED:-:0.3",
+        "FLUSH_ATTACHED:-:0.4",
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:1.8",
+        "UNKNOWN:-:0.7",
+        "UNKNOWN:-:0.8"
+       ],
+       "old": [
+        "COVERED_TERRACE:-:1.3",
+        "COVERED_TERRACE:-:2.4",
+        "FLUSH_ATTACHED:-:0.3",
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:1.8",
+        "FLUSH_ATTACHED:-:3.6",
+        "UNKNOWN:-:0.7",
+        "UNKNOWN:-:0.8"
+       ]
+      },
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0.9"
+       ]
+      },
+      "counts": {
+       "new": {
+        "doors": 13,
+        "levels": 1,
+        "materials": 11,
+        "openings": 20,
+        "roofs": 1,
+        "rooms": 7,
+        "slabs": 1,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 18,
+        "windows": 7
+       },
+       "old": {
+        "doors": 12,
+        "levels": 1,
+        "materials": 11,
+        "openings": 20,
+        "roofs": 1,
+        "rooms": 8,
+        "slabs": 1,
+        "surfaceRegions": 1,
+        "terraces": 3,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 19,
+        "windows": 8
+       }
+      },
+      "footprintM2": {
+       "new": 167.7,
+       "old": 163.81
+      },
+      "massProvenance": {
+       "new": [
+        "feat-main:SOURCE_DERIVED"
+       ],
+       "old": [
+        "feat-main:SOURCE_EXACT"
+       ]
+      },
+      "terraces": {
+       "new": [],
+       "old": [
+        {
+         "areaM2": 3.27,
+         "surface": "PAVED",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 6.63,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 1.31,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        }
+       ]
+      },
+      "unresolved": {
+       "new": [
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:the number of room-0-2",
+        "AMBIGUOUS:the outer face of the building\u2019s front wall",
+        "AMBIGUOUS:the scale of the base plan (an accusation withdrawn)",
+        "AMBIGUOUS:which way the ridge runs over mass-0"
+       ],
+       "old": [
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:the number of room-0-2",
+        "AMBIGUOUS:the scale of the base plan (an accusation withdrawn)",
+        "AMBIGUOUS:which way the ridge runs over mass-0"
+       ]
+      },
+      "wallRings": {
+       "new": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_DERIVED",
+         "why": "19.28 \u00d7 8.70 m body cut on a wall's inner face; unresolved: the outer face of the building\u2019s front wall"
+        }
+       ],
+       "old": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "18.83 \u00d7 8.70 m body from the plan's printed chains and wall bands"
+        }
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "PASS"
+     ]
+    },
+    "dom-w-helikoniach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": true,
+      "program": true,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -18.88,
+      -12.23
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "bodies": {
+       "new": [
+        "PROJECTING_WING:B:4.9",
+        "PROJECTING_WING:B:46.2",
+        "UNKNOWN:-:0.3",
+        "UNKNOWN:-:1.8",
+        "UNKNOWN:-:4.1"
+       ],
+       "old": [
+        "PROJECTING_WING:B:4.9",
+        "PROJECTING_WING:B:45.9",
+        "UNKNOWN:-:0.9",
+        "UNKNOWN:-:1.8",
+        "UNKNOWN:-:3.9"
+       ]
+      },
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ]
+      },
+      "counts": {
+       "new": {
+        "doors": 5,
+        "levels": 1,
+        "materials": 11,
+        "openings": 9,
+        "roofs": 1,
+        "rooms": 3,
+        "slabs": 1,
+        "terraces": 1,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 11,
+        "windows": 4
+       },
+       "old": {
+        "doors": 4,
+        "levels": 1,
+        "materials": 11,
+        "openings": 10,
+        "roofs": 1,
+        "rooms": 3,
+        "slabs": 1,
+        "terraces": 1,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 12,
+        "windows": 6
+       }
+      },
+      "footprintM2": {
+       "new": 83.92,
+       "old": 77.56
+      },
+      "massProvenance": {
+       "new": [
+        "feat-main:SOURCE_EXACT"
+       ],
+       "old": [
+        "feat-main:SOURCE_DERIVED"
+       ]
+      },
+      "terraces": {
+       "new": [
+        {
+         "areaM2": 36.05,
+         "surface": "PAVED",
+         "why": "the floor of the rear recess and the platform the plan outlines beyond it"
+        }
+       ],
+       "old": [
+        {
+         "areaM2": 34.72,
+         "surface": "PAVED",
+         "why": "the floor of the rear recess and the platform the plan outlines beyond it"
+        }
+       ]
+      },
+      "unresolved": {
+       "new": [
+        "AMBIGUOUS:a 1.20 m thin band at z 5.18",
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the left elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:a v2 registration for the right elevation",
+        "AMBIGUOUS:the opening opening-0-west-3-1 as the drawings print it",
+        "AMBIGUOUS:whether the 1.24 m\u00b2 strip at 0.00, 12.01 is part of the building",
+        "AMBIGUOUS:whether the 2.92 m\u00b2 strip at 3.26, 12.01 is part of the building",
+        "AMBIGUOUS:which body the attic storey stands on",
+        "AMBIGUOUS:which way the ridge runs over mass-0"
+       ],
+       "old": [
+        "AMBIGUOUS:a 1.20 m thin band at z 5.18",
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the left elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:a v2 registration for the right elevation",
+        "AMBIGUOUS:the label of room-0-0 (read as 7)",
+        "AMBIGUOUS:the opening opening-0-west-3-0 as the drawings print it",
+        "AMBIGUOUS:the opening opening-0-west-3-2 as the drawings print it",
+        "AMBIGUOUS:whether the 0.23 m\u00b2 strip at 0.18, 2.58 is part of the building",
+        "AMBIGUOUS:whether the 0.31 m\u00b2 strip at 0.18, 4.96 is part of the building",
+        "AMBIGUOUS:whether the 1.04 m\u00b2 strip at 0.53, 12.01 is part of the building",
+        "AMBIGUOUS:whether the 2.92 m\u00b2 strip at 3.26, 12.01 is part of the building",
+        "AMBIGUOUS:whether the 3.03 m\u00b2 strip at 0.00, 6.68 is part of the building",
+        "AMBIGUOUS:which body the attic storey stands on",
+        "AMBIGUOUS:which way the ridge runs over mass-0"
+       ]
+      },
+      "wallRings": {
+       "new": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "6.99 \u00d7 12.01 m body from the plan's printed chains and wall bands"
+        }
+       ],
+       "old": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "6.46 \u00d7 12.01 m body from the plan's printed chains and wall bands"
+        }
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "ALGORITHMIC_FAIL"
+     ]
+    },
+    "dom-w-krasnokwiatach": {
+     "flags": {
+      "decisionPath": true,
+      "failure": true,
+      "model": false,
+      "program": false,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      null,
+      null
+     ],
+     "outcome": [
+      "FAILED",
+      "FAILED"
+     ],
+     "refusal": [
+      "the lowest storey covers 11.67 m\u00b2 against the 143.18 m\u00b2 the publisher prints \u2014 91.8% apart: the decomposition is not of this building; 47 other readings of the plan were weighed and none survived to a full composition",
+      "the lowest storey covers 78.89 m\u00b2 against the 143.18 m\u00b2 the publisher prints \u2014 44.9% apart: the decomposition is not of this building; 47 other readings of the plan were weighed and none survived to a full composition"
+     ],
+     "semantics": {
+      "bodies": {
+       "new": [
+        "COVERED_TERRACE:-:11.3",
+        "FLUSH_ATTACHED:-:0.4",
+        "FLUSH_ATTACHED:-:2.3",
+        "FLUSH_ATTACHED:B:5.5",
+        "SEPARATE_BODY:-:0.6",
+        "SEPARATE_BODY:-:1.6",
+        "UNKNOWN:-:11.2",
+        "UNKNOWN:-:38.1"
+       ],
+       "old": [
+        "COVERED_TERRACE:-:11.3",
+        "FLUSH_ATTACHED:-:0.4",
+        "FLUSH_ATTACHED:-:2.3",
+        "FLUSH_ATTACHED:-:5.5",
+        "SEPARATE_BODY:-:0.6",
+        "SEPARATE_BODY:-:1.6",
+        "UNKNOWN:-:11.2",
+        "UNKNOWN:-:38.1"
+       ]
+      },
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:ACCEPTED:17.1",
+        "ATTACHED_ROOM:ACCEPTED:29.4",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:0"
+       ]
+      },
+      "extentConflicts": {
+       "new": [
+        "N:STRONG:ACCEPTED:4.29",
+        "S:STRONG:ACCEPTED:3.99"
+       ],
+       "old": [
+        "N:STRONG:INCONCLUSIVE:4.29",
+        "S:STRONG:INCONCLUSIVE:3.99"
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "ALGORITHMIC_FAIL"
+     ]
+    },
+    "dom-w-modrzykach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": false,
+      "program": false,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      2.03,
+      2.03
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ]
+      }
+     },
+     "verdict": [
+      "PASS",
+      "PASS"
+     ]
+    },
+    "dom-w-morelach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": false,
+      "program": false,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -2.17,
+      -2.17
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:ACCEPTED:2.9",
+        "ATTACHED_ROOM:REJECTED:0",
+        "BOX_COMPLETION:ACCEPTED:6.0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:ACCEPTED:2.9",
+        "BOX_COMPLETION:ACCEPTED:6.0"
+       ]
+      }
+     },
+     "verdict": [
+      "PASS",
+      "PASS"
+     ]
+    },
+    "dom-w-zurawkach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": false,
+      "program": false,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -0.81,
+      -0.81
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ]
+      }
+     },
+     "verdict": [
+      "PASS",
+      "PASS"
+     ]
+    },
+    "rarytasy-g2e": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": false,
+      "program": false,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -2.75,
+      -2.75
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:0"
+       ]
+      }
+     },
+     "verdict": [
+      "PASS",
+      "PASS"
+     ]
+    },
+    "willa-miranda": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": false,
+      "program": false,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -1.49,
+      -1.49
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:5.0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:5.0"
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "ALGORITHMIC_FAIL"
+     ]
+    }
+   },
+   "completed": 25,
+   "gates": {
+    "G1_knownGood": {
+     "holds": true,
+     "rows": []
+    },
+    "G2_scale": {
+     "holds": false,
+     "rows": [
+      "dom-pod-jarzabem"
+     ]
+    },
+    "G3_negativeControls": {
+     "holds": false,
+     "selectedFrameChanged": [
+      "dom-pod-jarzabem"
+     ],
+     "violations": [
+      [
+       "N41",
+       "dom-w-akebiach",
+       "S courtyard between garage and porch (trees)",
+       8.37
+      ]
+     ]
+    },
+    "G4_noNewExactRing": {
+     "holds": false,
+     "rows": [
+      "A05"
+     ]
+    },
+    "G4_noNewTerrace": {
+     "holds": false,
+     "rows": [
+      "A05"
+     ]
+    },
+    "G5_glogownikach": {
+     "holds": true,
+     "rows": null
+    },
+    "G8_storeys": {
+     "holds": true,
+     "rows": null
+    }
+   },
+   "note": "Ablation; inherits C2's violations. Not eligible.",
+   "pass": 21,
+   "verdictTransitions": {
+    "dom-pod-jarzabem": [
+     "ALGORITHMIC_FAIL",
+     "PASS"
+    ],
+    "dom-w-glogownikach": [
+     "ALGORITHMIC_FAIL",
+     "PASS"
+    ]
+   }
+  },
+  "C1C2N1a": {
+   "admissible": false,
+   "changedRows": [
+    "A05",
+    "dom-pod-jarzabem",
+    "dom-w-akebiach",
+    "dom-w-dabecjach",
+    "dom-w-glogownikach",
+    "dom-w-helikoniach",
+    "dom-w-krasnokwiatach",
+    "dom-w-modrzykach",
+    "dom-w-morelach",
+    "dom-w-zurawkach",
+    "rarytasy-g2e",
+    "willa-miranda"
+   ],
+   "changes": {
+    "A05": {
+     "flags": {
+      "decisionPath": true,
+      "failure": true,
+      "model": true,
+      "program": true,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      null,
+      -13.94
+     ],
+     "outcome": [
+      "FAILED",
+      "COMPLETED"
+     ],
+     "refusal": [
+      "the lowest storey covers 33.34 m\u00b2 against the 126.23 m\u00b2 the publisher prints \u2014 73.6% apart: the decomposition is not of this building 87 other readings of the plan were weighed and none holds: the best, copy area_table 2a1e4f9cc1, chain extent, registered scale, largest-first tiling, sides as gridde",
+      null
+     ],
+     "semantics": {
+      "bodies": {
+       "new": [
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:0.5",
+        "UNKNOWN:-:2.8",
+        "UNKNOWN:B:3.6"
+       ],
+       "old": [
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:0.5",
+        "UNKNOWN:-:2.8",
+        "UNKNOWN:-:3.6"
+       ]
+      },
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:ACCEPTED:3.6",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:10.9"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:10.9"
+       ]
+      },
+      "counts": {
+       "new": {
+        "doors": 18,
+        "levels": 1,
+        "materials": 11,
+        "openings": 22,
+        "roofs": 4,
+        "rooms": 10,
+        "slabs": 5,
+        "terraces": 3,
+        "wallJunctions": 20,
+        "wallRings": 5,
+        "walls": 42,
+        "windows": 4
+       },
+       "old": null
+      },
+      "extentConflicts": {
+       "new": [
+        "E:STRONG:INCONCLUSIVE:1.01",
+        "S:STRONG:ACCEPTED:0.99"
+       ],
+       "old": [
+        "E:STRONG:INCONCLUSIVE:1.01",
+        "S:STRONG:INCONCLUSIVE:0.99"
+       ]
+      },
+      "footprintM2": {
+       "new": 108.63,
+       "old": null
+      },
+      "levels": {
+       "new": 1,
+       "old": null
+      },
+      "massProvenance": {
+       "new": [
+        "feat-attached-0:SOURCE_DERIVED",
+        "feat-attached-1:SOURCE_DERIVED",
+        "feat-attached-2:SOURCE_DERIVED",
+        "feat-attached-3:SOURCE_DERIVED",
+        "feat-main:SOURCE_EXACT"
+       ],
+       "old": null
+      },
+      "terraces": {
+       "new": [
+        {
+         "areaM2": 3.24,
+         "surface": "UNKNOWN",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 2.83,
+         "surface": "PAVED",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 0.9,
+         "surface": "UNKNOWN",
+         "why": "the floor of the east recess"
+        }
+       ],
+       "old": null
+      },
+      "unresolved": {
+       "new": [
+        "AMBIGUOUS:a 1.22 m thin band at z 1.36",
+        "AMBIGUOUS:a 1.33 m thin band at z 9.75",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the opening opening-0-east-13-0 as the drawings print it",
+        "MISSING:a registration for the elevations",
+        "MISSING:the kind of roof over mass-1",
+        "MISSING:the kind of roof over mass-2",
+        "MISSING:the kind of roof over mass-3",
+        "MISSING:the kind of roof over mass-4",
+        "MISSING:the main roof"
+       ],
+       "old": []
+      },
+      "wallRings": {
+       "new": [
+        {
+         "id": "ring-attached-0-0",
+         "status": "SOURCE_EXACT",
+         "why": "7.74 \u00d7 3.24 m body from the plan's printed chains and wall bands"
+        },
+        {
+         "id": "ring-attached-1-0",
+         "status": "SOURCE_EXACT",
+         "why": "6.76 \u00d7 1.22 m body from the plan's printed chains and wall bands"
+        },
+        {
+         "id": "ring-attached-2-0",
+         "status": "SOURCE_EXACT",
+         "why": "2.54 \u00d7 3.24 m body from the plan's printed chains and wall bands"
+        },
+        {
+         "id": "ring-attached-3-0",
+         "status": "SOURCE_EXACT",
+         "why": "3.63 \u00d7 1.00 m body from the plan's printed chains and wall bands"
+        },
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "13.62 \u00d7 4.65 m body from the plan's printed chains and wall bands"
+        }
+       ],
+       "old": null
+      },
+      "wideOpenings": {
+       "new": [
+        "OPENING_IN_WALL:3.76",
+        "OPENING_IN_WALL:3.76",
+        "OPEN_SIDE:3.44",
+        "OPEN_SIDE:3.44",
+        "OPEN_SIDE:3.74",
+        "OPEN_SIDE:4.11",
+        "OPEN_SIDE:4.11",
+        "OPEN_SIDE:4.11",
+        "OPEN_SIDE:5.7",
+        "OPEN_SIDE:5.7",
+        "OPEN_SIDE:5.7"
+       ],
+       "old": [
+        "OPENING_IN_WALL:3.74",
+        "OPENING_IN_WALL:3.76",
+        "OPEN_SIDE:0.99",
+        "OPEN_SIDE:3.02",
+        "OPEN_SIDE:4.11"
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "ALGORITHMIC_FAIL"
+     ]
+    },
+    "dom-pod-jarzabem": {
+     "flags": {
+      "decisionPath": true,
+      "failure": false,
+      "model": true,
+      "program": true,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -11.88,
+      -5.61
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "bodies": {
+       "new": [
+        "COVERED_TERRACE:-:12.4",
+        "FLUSH_ATTACHED:-:0.8",
+        "FLUSH_ATTACHED:-:0.8",
+        "SEPARATE_BODY:-:0.1",
+        "SEPARATE_BODY:-:0.2",
+        "UNKNOWN:B:2.0"
+       ],
+       "old": [
+        "COVERED_TERRACE:-:12.6",
+        "FLUSH_ATTACHED:-:0.2",
+        "FLUSH_ATTACHED:-:0.3",
+        "UNKNOWN:-:1.1",
+        "UNKNOWN:-:14.3"
+       ]
+      },
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:ACCEPTED:2.3",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ]
+      },
+      "counts": {
+       "new": {
+        "doors": 18,
+        "levels": 1,
+        "materials": 11,
+        "openings": 23,
+        "roofs": 1,
+        "rooms": 5,
+        "slabs": 1,
+        "terraces": 1,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 27,
+        "windows": 5
+       },
+       "old": {
+        "doors": 12,
+        "levels": 1,
+        "materials": 11,
+        "openings": 19,
+        "roofs": 1,
+        "rooms": 6,
+        "slabs": 1,
+        "terraces": 8,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 32,
+        "windows": 7
+       }
+      },
+      "extentConflicts": {
+       "new": [
+        "E:STRONG:ACCEPTED:0.71",
+        "N:SUPPORTED:RECORDED:2.5"
+       ],
+       "old": [
+        "N:SUPPORTED:RECORDED:2.47",
+        "S:STRONG:ZONE:0.98"
+       ]
+      },
+      "footprintM2": {
+       "new": 204.61,
+       "old": 191.0
+      },
+      "massProvenance": {
+       "new": [
+        "feat-main:SOURCE_DERIVED"
+       ],
+       "old": [
+        "feat-main:SOURCE_EXACT"
+       ]
+      },
+      "terraces": {
+       "new": [
+        {
+         "areaM2": 47.07,
+         "surface": "UNKNOWN",
+         "why": "the floor of the rear recess"
+        }
+       ],
+       "old": [
+        {
+         "areaM2": 1.18,
+         "surface": "UNKNOWN",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 1.24,
+         "surface": "PAVED",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 1.67,
+         "surface": "UNKNOWN",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 4.51,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 1.99,
+         "surface": "UNKNOWN",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 1.99,
+         "surface": "UNKNOWN",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 5.29,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 47.75,
+         "surface": "UNKNOWN",
+         "why": "the floor of the rear recess"
+        }
+       ]
+      },
+      "unresolved": {
+       "new": [
+        "AMBIGUOUS:a 0.25 m thin band at z 7.43",
+        "AMBIGUOUS:a 0.31 m thin band at z 2.91",
+        "AMBIGUOUS:a 0.31 m thin band at z 3.23",
+        "AMBIGUOUS:a 0.31 m thin band at z 5.77",
+        "AMBIGUOUS:a 0.31 m thin band at z 6.37",
+        "AMBIGUOUS:a 0.31 m thin band at z 6.37",
+        "AMBIGUOUS:a 0.45 m thin band at x 12.81",
+        "AMBIGUOUS:a 0.75 m thin band at z 10.53",
+        "AMBIGUOUS:a 1.28 m thin band at z 10.53",
+        "AMBIGUOUS:a 1.31 m thin band at z 0.38",
+        "AMBIGUOUS:a 1.34 m thin band at z 0.38",
+        "AMBIGUOUS:a 1.39 m thin band at z 0.38",
+        "AMBIGUOUS:a 1.39 m thin band at z 10.53",
+        "AMBIGUOUS:a 1.81 m thin band at z 10.53",
+        "AMBIGUOUS:a 3.37 m thin band at x 0.38",
+        "AMBIGUOUS:a 3.37 m thin band at x 0.38",
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the left elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:the joint between main-iwall-0-x-23 and main-iwall-0-z-6",
+        "AMBIGUOUS:the joint between main-iwall-0-x-27 and main-iwall-0-z-6",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the opening opening-0-west-3-0 as the drawings print it",
+        "AMBIGUOUS:the opening opening-0-west-3-2 as the drawings print it",
+        "AMBIGUOUS:whether the 2.47 m\u00b2 strip at 18.83, 3.63 is part of the building"
+       ],
+       "old": [
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the left elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:the joint between main-iwall-0-x-2 and main-iwall-0-z-13",
+        "AMBIGUOUS:the number of room-0-1",
+        "AMBIGUOUS:the opening opening-0-west-3-0 as the drawings print it"
+       ]
+      },
+      "wallRings": {
+       "new": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "18.83 \u00d7 10.87 m body from the plan's printed chains and wall bands"
+        }
+       ],
+       "old": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "19.10 \u00d7 10.00 m body from the plan's printed chains and wall bands"
+        }
+       ]
+      },
+      "wideOpenings": {
+       "new": [
+        "OPENING_IN_WALL:3.88",
+        "OPENING_IN_WALL:3.88",
+        "OPENING_IN_WALL:3.88",
+        "OPENING_IN_WALL:6.19",
+        "OPENING_IN_WALL:6.19",
+        "OPEN_SIDE:4.01",
+        "OPEN_SIDE:4.01",
+        "OPEN_SIDE:5.97"
+       ],
+       "old": [
+        "OPENING_IN_WALL:3.84",
+        "OPENING_IN_WALL:6.22",
+        "OPEN_SIDE:4.04",
+        "OPEN_SIDE:4.4",
+        "OPEN_SIDE:4.68"
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "PASS"
+     ]
+    },
+    "dom-w-akebiach": {
+     "flags": {
+      "decisionPath": true,
+      "failure": true,
+      "model": false,
+      "program": false,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      null,
+      null
+     ],
+     "outcome": [
+      "FAILED",
+      "FAILED"
+     ],
+     "refusal": [
+      "the lowest storey covers 96.93 m\u00b2 against the 249.42 m\u00b2 the publisher prints \u2014 61.1% apart: the decomposition is not of this building; 63 other readings of the plan were weighed and none survived to a full composition",
+      "the lowest storey covers 118.02 m\u00b2 against the 249.42 m\u00b2 the publisher prints \u2014 52.7% apart: the decomposition is not of this building; 59 other readings of the plan were weighed and none survived to a full composition"
+     ],
+     "semantics": {
+      "bodies": {
+       "new": [
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:0.7",
+        "FLUSH_ATTACHED:-:0.8",
+        "PROJECTING_WING:B:1.5",
+        "RECESSED_ATTACHED:-:11.4",
+        "RECESSED_ATTACHED:-:22.4",
+        "RECESSED_ATTACHED:-:67.5",
+        "SEPARATE_BODY:-:2.6",
+        "SEPARATE_BODY:-:5.6",
+        "SEPARATE_BODY:-:7.7",
+        "UNKNOWN:B:33.1"
+       ],
+       "old": [
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:0.7",
+        "FLUSH_ATTACHED:-:0.8",
+        "PROJECTING_WING:B:1.5",
+        "RECESSED_ATTACHED:-:11.4",
+        "RECESSED_ATTACHED:-:22.4",
+        "RECESSED_ATTACHED:-:67.5",
+        "SEPARATE_BODY:-:2.6",
+        "SEPARATE_BODY:-:5.6",
+        "SEPARATE_BODY:-:7.7",
+        "UNKNOWN:-:33.1"
+       ]
+      },
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:ACCEPTED:10.1",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ]
+      },
+      "extentConflicts": {
+       "new": [
+        "N:STRONG:INCONCLUSIVE:0.96",
+        "S:STRONG:ACCEPTED:4.3"
+       ],
+       "old": [
+        "N:STRONG:INCONCLUSIVE:0.96",
+        "S:STRONG:INCONCLUSIVE:4.3"
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "ALGORITHMIC_FAIL"
+     ]
+    },
+    "dom-w-dabecjach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": true,
+      "model": false,
+      "program": false,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      null,
+      null
+     ],
+     "outcome": [
+      "FAILED",
+      "FAILED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "ALGORITHMIC_FAIL"
+     ]
+    },
+    "dom-w-glogownikach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": true,
+      "program": true,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -8.04,
+      -5.86
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "bodies": {
+       "new": [
+        "COVERED_TERRACE:-:1.3",
+        "COVERED_TERRACE:-:2.4",
+        "FLUSH_ATTACHED:-:0.3",
+        "FLUSH_ATTACHED:-:0.4",
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:1.8",
+        "UNKNOWN:-:0.7",
+        "UNKNOWN:-:0.8"
+       ],
+       "old": [
+        "COVERED_TERRACE:-:1.3",
+        "COVERED_TERRACE:-:2.4",
+        "FLUSH_ATTACHED:-:0.3",
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:1.8",
+        "FLUSH_ATTACHED:-:3.6",
+        "UNKNOWN:-:0.7",
+        "UNKNOWN:-:0.8"
+       ]
+      },
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0.9"
+       ]
+      },
+      "counts": {
+       "new": {
+        "doors": 12,
+        "levels": 1,
+        "materials": 11,
+        "openings": 21,
+        "roofs": 1,
+        "rooms": 8,
+        "slabs": 1,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 17,
+        "windows": 9
+       },
+       "old": {
+        "doors": 12,
+        "levels": 1,
+        "materials": 11,
+        "openings": 20,
+        "roofs": 1,
+        "rooms": 8,
+        "slabs": 1,
+        "surfaceRegions": 1,
+        "terraces": 3,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 19,
+        "windows": 8
+       }
+      },
+      "footprintM2": {
+       "new": 167.7,
+       "old": 163.81
+      },
+      "massProvenance": {
+       "new": [
+        "feat-main:SOURCE_DERIVED"
+       ],
+       "old": [
+        "feat-main:SOURCE_EXACT"
+       ]
+      },
+      "terraces": {
+       "new": [],
+       "old": [
+        {
+         "areaM2": 3.27,
+         "surface": "PAVED",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 6.63,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 1.31,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        }
+       ]
+      },
+      "unresolved": {
+       "new": [
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:the number of room-0-2",
+        "AMBIGUOUS:the outer face of the building\u2019s front wall",
+        "AMBIGUOUS:the scale of the base plan (an accusation withdrawn)",
+        "AMBIGUOUS:which way the ridge runs over mass-0"
+       ],
+       "old": [
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:the number of room-0-2",
+        "AMBIGUOUS:the scale of the base plan (an accusation withdrawn)",
+        "AMBIGUOUS:which way the ridge runs over mass-0"
+       ]
+      },
+      "wallRings": {
+       "new": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_DERIVED",
+         "why": "19.28 \u00d7 8.70 m body cut on a wall's inner face; unresolved: the outer face of the building\u2019s front wall"
+        }
+       ],
+       "old": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "18.83 \u00d7 8.70 m body from the plan's printed chains and wall bands"
+        }
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "PASS"
+     ]
+    },
+    "dom-w-helikoniach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": true,
+      "program": true,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -18.88,
+      -12.23
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "bodies": {
+       "new": [
+        "PROJECTING_WING:B:4.9",
+        "PROJECTING_WING:B:46.2",
+        "UNKNOWN:-:0.3",
+        "UNKNOWN:-:1.8",
+        "UNKNOWN:-:4.1"
+       ],
+       "old": [
+        "PROJECTING_WING:B:4.9",
+        "PROJECTING_WING:B:45.9",
+        "UNKNOWN:-:0.9",
+        "UNKNOWN:-:1.8",
+        "UNKNOWN:-:3.9"
+       ]
+      },
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ]
+      },
+      "counts": {
+       "new": {
+        "doors": 5,
+        "levels": 1,
+        "materials": 11,
+        "openings": 9,
+        "roofs": 1,
+        "rooms": 3,
+        "slabs": 1,
+        "terraces": 1,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 11,
+        "windows": 4
+       },
+       "old": {
+        "doors": 4,
+        "levels": 1,
+        "materials": 11,
+        "openings": 10,
+        "roofs": 1,
+        "rooms": 3,
+        "slabs": 1,
+        "terraces": 1,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 12,
+        "windows": 6
+       }
+      },
+      "footprintM2": {
+       "new": 83.92,
+       "old": 77.56
+      },
+      "massProvenance": {
+       "new": [
+        "feat-main:SOURCE_EXACT"
+       ],
+       "old": [
+        "feat-main:SOURCE_DERIVED"
+       ]
+      },
+      "terraces": {
+       "new": [
+        {
+         "areaM2": 36.05,
+         "surface": "PAVED",
+         "why": "the floor of the rear recess and the platform the plan outlines beyond it"
+        }
+       ],
+       "old": [
+        {
+         "areaM2": 34.72,
+         "surface": "PAVED",
+         "why": "the floor of the rear recess and the platform the plan outlines beyond it"
+        }
+       ]
+      },
+      "unresolved": {
+       "new": [
+        "AMBIGUOUS:a 1.20 m thin band at z 5.18",
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the left elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:a v2 registration for the right elevation",
+        "AMBIGUOUS:the opening opening-0-west-3-1 as the drawings print it",
+        "AMBIGUOUS:whether the 1.24 m\u00b2 strip at 0.00, 12.01 is part of the building",
+        "AMBIGUOUS:whether the 2.92 m\u00b2 strip at 3.26, 12.01 is part of the building",
+        "AMBIGUOUS:which body the attic storey stands on",
+        "AMBIGUOUS:which way the ridge runs over mass-0"
+       ],
+       "old": [
+        "AMBIGUOUS:a 1.20 m thin band at z 5.18",
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the left elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:a v2 registration for the right elevation",
+        "AMBIGUOUS:the label of room-0-0 (read as 7)",
+        "AMBIGUOUS:the opening opening-0-west-3-0 as the drawings print it",
+        "AMBIGUOUS:the opening opening-0-west-3-2 as the drawings print it",
+        "AMBIGUOUS:whether the 0.23 m\u00b2 strip at 0.18, 2.58 is part of the building",
+        "AMBIGUOUS:whether the 0.31 m\u00b2 strip at 0.18, 4.96 is part of the building",
+        "AMBIGUOUS:whether the 1.04 m\u00b2 strip at 0.53, 12.01 is part of the building",
+        "AMBIGUOUS:whether the 2.92 m\u00b2 strip at 3.26, 12.01 is part of the building",
+        "AMBIGUOUS:whether the 3.03 m\u00b2 strip at 0.00, 6.68 is part of the building",
+        "AMBIGUOUS:which body the attic storey stands on",
+        "AMBIGUOUS:which way the ridge runs over mass-0"
+       ]
+      },
+      "wallRings": {
+       "new": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "6.99 \u00d7 12.01 m body from the plan's printed chains and wall bands"
+        }
+       ],
+       "old": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "6.46 \u00d7 12.01 m body from the plan's printed chains and wall bands"
+        }
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "ALGORITHMIC_FAIL"
+     ]
+    },
+    "dom-w-krasnokwiatach": {
+     "flags": {
+      "decisionPath": true,
+      "failure": true,
+      "model": false,
+      "program": false,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      null,
+      null
+     ],
+     "outcome": [
+      "FAILED",
+      "FAILED"
+     ],
+     "refusal": [
+      "the lowest storey covers 11.67 m\u00b2 against the 143.18 m\u00b2 the publisher prints \u2014 91.8% apart: the decomposition is not of this building; 47 other readings of the plan were weighed and none survived to a full composition",
+      "the lowest storey covers 78.89 m\u00b2 against the 143.18 m\u00b2 the publisher prints \u2014 44.9% apart: the decomposition is not of this building; 47 other readings of the plan were weighed and none survived to a full composition"
+     ],
+     "semantics": {
+      "bodies": {
+       "new": [
+        "COVERED_TERRACE:-:11.3",
+        "FLUSH_ATTACHED:-:0.4",
+        "FLUSH_ATTACHED:-:2.3",
+        "FLUSH_ATTACHED:B:5.5",
+        "SEPARATE_BODY:-:0.6",
+        "SEPARATE_BODY:-:1.6",
+        "UNKNOWN:-:11.2",
+        "UNKNOWN:-:38.1"
+       ],
+       "old": [
+        "COVERED_TERRACE:-:11.3",
+        "FLUSH_ATTACHED:-:0.4",
+        "FLUSH_ATTACHED:-:2.3",
+        "FLUSH_ATTACHED:-:5.5",
+        "SEPARATE_BODY:-:0.6",
+        "SEPARATE_BODY:-:1.6",
+        "UNKNOWN:-:11.2",
+        "UNKNOWN:-:38.1"
+       ]
+      },
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:ACCEPTED:17.1",
+        "ATTACHED_ROOM:ACCEPTED:29.4",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:0"
+       ]
+      },
+      "extentConflicts": {
+       "new": [
+        "N:STRONG:ACCEPTED:4.29",
+        "S:STRONG:ACCEPTED:3.99"
+       ],
+       "old": [
+        "N:STRONG:INCONCLUSIVE:4.29",
+        "S:STRONG:INCONCLUSIVE:3.99"
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "ALGORITHMIC_FAIL"
+     ]
+    },
+    "dom-w-modrzykach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": false,
+      "program": false,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      2.03,
+      2.03
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ]
+      }
+     },
+     "verdict": [
+      "PASS",
+      "PASS"
+     ]
+    },
+    "dom-w-morelach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": false,
+      "program": false,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -2.17,
+      -2.17
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:ACCEPTED:2.9",
+        "ATTACHED_ROOM:REJECTED:0",
+        "BOX_COMPLETION:ACCEPTED:6.0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:ACCEPTED:2.9",
+        "BOX_COMPLETION:ACCEPTED:6.0"
+       ]
+      }
+     },
+     "verdict": [
+      "PASS",
+      "PASS"
+     ]
+    },
+    "dom-w-zurawkach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": false,
+      "program": false,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -0.81,
+      -0.81
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ]
+      }
+     },
+     "verdict": [
+      "PASS",
+      "PASS"
+     ]
+    },
+    "rarytasy-g2e": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": false,
+      "program": false,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -2.75,
+      -2.75
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:0"
+       ]
+      }
+     },
+     "verdict": [
+      "PASS",
+      "PASS"
+     ]
+    },
+    "willa-miranda": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": false,
+      "program": false,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -1.49,
+      -1.49
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:5.0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:5.0"
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "ALGORITHMIC_FAIL"
+     ]
+    }
+   },
+   "completed": 25,
+   "gates": {
+    "G1_knownGood": {
+     "holds": true,
+     "rows": []
+    },
+    "G2_scale": {
+     "holds": false,
+     "rows": [
+      "dom-pod-jarzabem"
+     ]
+    },
+    "G3_negativeControls": {
+     "holds": false,
+     "selectedFrameChanged": [
+      "dom-pod-jarzabem"
+     ],
+     "violations": [
+      [
+       "N41",
+       "dom-w-akebiach",
+       "S courtyard between garage and porch (trees)",
+       8.37
+      ]
+     ]
+    },
+    "G4_noNewExactRing": {
+     "holds": false,
+     "rows": [
+      "A05"
+     ]
+    },
+    "G4_noNewTerrace": {
+     "holds": false,
+     "rows": [
+      "A05"
+     ]
+    },
+    "G5_glogownikach": {
+     "holds": true,
+     "rows": null
+    },
+    "G8_storeys": {
+     "holds": true,
+     "rows": null
+    }
+   },
+   "note": "Ablation; inherits C2's violations. Not eligible.",
+   "pass": 21,
+   "verdictTransitions": {
+    "dom-pod-jarzabem": [
+     "ALGORITHMIC_FAIL",
+     "PASS"
+    ],
+    "dom-w-glogownikach": [
+     "ALGORITHMIC_FAIL",
+     "PASS"
+    ]
+   }
+  },
+  "C1N1": {
+   "admissible": false,
+   "changedRows": [
+    "dom-w-glogownikach",
+    "dom-w-helikoniach"
+   ],
+   "changes": {
+    "dom-w-glogownikach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": true,
+      "program": true,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -8.04,
+      -5.86
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "bodies": {
+       "new": [
+        "COVERED_TERRACE:-:1.3",
+        "COVERED_TERRACE:-:2.4",
+        "FLUSH_ATTACHED:-:0.3",
+        "FLUSH_ATTACHED:-:0.4",
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:1.8",
+        "UNKNOWN:-:0.7",
+        "UNKNOWN:-:0.8"
+       ],
+       "old": [
+        "COVERED_TERRACE:-:1.3",
+        "COVERED_TERRACE:-:2.4",
+        "FLUSH_ATTACHED:-:0.3",
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:1.8",
+        "FLUSH_ATTACHED:-:3.6",
+        "UNKNOWN:-:0.7",
+        "UNKNOWN:-:0.8"
+       ]
+      },
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0.9"
+       ]
+      },
+      "counts": {
+       "new": {
+        "doors": 13,
+        "levels": 1,
+        "materials": 11,
+        "openings": 20,
+        "roofs": 1,
+        "rooms": 7,
+        "slabs": 1,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 18,
+        "windows": 7
+       },
+       "old": {
+        "doors": 12,
+        "levels": 1,
+        "materials": 11,
+        "openings": 20,
+        "roofs": 1,
+        "rooms": 8,
+        "slabs": 1,
+        "surfaceRegions": 1,
+        "terraces": 3,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 19,
+        "windows": 8
+       }
+      },
+      "footprintM2": {
+       "new": 167.7,
+       "old": 163.81
+      },
+      "massProvenance": {
+       "new": [
+        "feat-main:SOURCE_DERIVED"
+       ],
+       "old": [
+        "feat-main:SOURCE_EXACT"
+       ]
+      },
+      "terraces": {
+       "new": [],
+       "old": [
+        {
+         "areaM2": 3.27,
+         "surface": "PAVED",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 6.63,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 1.31,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        }
+       ]
+      },
+      "unresolved": {
+       "new": [
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:the number of room-0-2",
+        "AMBIGUOUS:the outer face of the building\u2019s front wall",
+        "AMBIGUOUS:the scale of the base plan (an accusation withdrawn)",
+        "AMBIGUOUS:which way the ridge runs over mass-0"
+       ],
+       "old": [
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:the number of room-0-2",
+        "AMBIGUOUS:the scale of the base plan (an accusation withdrawn)",
+        "AMBIGUOUS:which way the ridge runs over mass-0"
+       ]
+      },
+      "wallRings": {
+       "new": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_DERIVED",
+         "why": "19.28 \u00d7 8.70 m body cut on a wall's inner face; unresolved: the outer face of the building\u2019s front wall"
+        }
+       ],
+       "old": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "18.83 \u00d7 8.70 m body from the plan's printed chains and wall bands"
+        }
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "PASS"
+     ]
+    },
+    "dom-w-helikoniach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": true,
+      "program": true,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -18.88,
+      -12.23
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "bodies": {
+       "new": [
+        "PROJECTING_WING:B:4.9",
+        "PROJECTING_WING:B:46.2",
+        "UNKNOWN:-:0.3",
+        "UNKNOWN:-:1.8",
+        "UNKNOWN:-:4.1"
+       ],
+       "old": [
+        "PROJECTING_WING:B:4.9",
+        "PROJECTING_WING:B:45.9",
+        "UNKNOWN:-:0.9",
+        "UNKNOWN:-:1.8",
+        "UNKNOWN:-:3.9"
+       ]
+      },
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ]
+      },
+      "counts": {
+       "new": {
+        "doors": 5,
+        "levels": 1,
+        "materials": 11,
+        "openings": 9,
+        "roofs": 1,
+        "rooms": 3,
+        "slabs": 1,
+        "terraces": 1,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 11,
+        "windows": 4
+       },
+       "old": {
+        "doors": 4,
+        "levels": 1,
+        "materials": 11,
+        "openings": 10,
+        "roofs": 1,
+        "rooms": 3,
+        "slabs": 1,
+        "terraces": 1,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 12,
+        "windows": 6
+       }
+      },
+      "footprintM2": {
+       "new": 83.92,
+       "old": 77.56
+      },
+      "massProvenance": {
+       "new": [
+        "feat-main:SOURCE_EXACT"
+       ],
+       "old": [
+        "feat-main:SOURCE_DERIVED"
+       ]
+      },
+      "terraces": {
+       "new": [
+        {
+         "areaM2": 36.05,
+         "surface": "PAVED",
+         "why": "the floor of the rear recess and the platform the plan outlines beyond it"
+        }
+       ],
+       "old": [
+        {
+         "areaM2": 34.72,
+         "surface": "PAVED",
+         "why": "the floor of the rear recess and the platform the plan outlines beyond it"
+        }
+       ]
+      },
+      "unresolved": {
+       "new": [
+        "AMBIGUOUS:a 1.20 m thin band at z 5.18",
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the left elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:a v2 registration for the right elevation",
+        "AMBIGUOUS:the opening opening-0-west-3-1 as the drawings print it",
+        "AMBIGUOUS:whether the 1.24 m\u00b2 strip at 0.00, 12.01 is part of the building",
+        "AMBIGUOUS:whether the 2.92 m\u00b2 strip at 3.26, 12.01 is part of the building",
+        "AMBIGUOUS:which body the attic storey stands on",
+        "AMBIGUOUS:which way the ridge runs over mass-0"
+       ],
+       "old": [
+        "AMBIGUOUS:a 1.20 m thin band at z 5.18",
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the left elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:a v2 registration for the right elevation",
+        "AMBIGUOUS:the label of room-0-0 (read as 7)",
+        "AMBIGUOUS:the opening opening-0-west-3-0 as the drawings print it",
+        "AMBIGUOUS:the opening opening-0-west-3-2 as the drawings print it",
+        "AMBIGUOUS:whether the 0.23 m\u00b2 strip at 0.18, 2.58 is part of the building",
+        "AMBIGUOUS:whether the 0.31 m\u00b2 strip at 0.18, 4.96 is part of the building",
+        "AMBIGUOUS:whether the 1.04 m\u00b2 strip at 0.53, 12.01 is part of the building",
+        "AMBIGUOUS:whether the 2.92 m\u00b2 strip at 3.26, 12.01 is part of the building",
+        "AMBIGUOUS:whether the 3.03 m\u00b2 strip at 0.00, 6.68 is part of the building",
+        "AMBIGUOUS:which body the attic storey stands on",
+        "AMBIGUOUS:which way the ridge runs over mass-0"
+       ]
+      },
+      "wallRings": {
+       "new": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "6.99 \u00d7 12.01 m body from the plan's printed chains and wall bands"
+        }
+       ],
+       "old": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "6.46 \u00d7 12.01 m body from the plan's printed chains and wall bands"
+        }
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "ALGORITHMIC_FAIL"
+     ]
+    }
+   },
+   "completed": 24,
+   "gates": {
+    "G1_knownGood": {
+     "holds": true,
+     "rows": []
+    },
+    "G2_scale": {
+     "holds": true,
+     "rows": []
+    },
+    "G3_negativeControls": {
+     "holds": true,
+     "selectedFrameChanged": [],
+     "violations": []
+    },
+    "G4_noNewExactRing": {
+     "holds": true,
+     "rows": []
+    },
+    "G4_noNewTerrace": {
+     "holds": true,
+     "rows": []
+    },
+    "G5_glogownikach": {
+     "holds": true,
+     "rows": null
+    },
+    "G8_storeys": {
+     "holds": true,
+     "rows": null
+    }
+   },
+   "note": "Ablation with N1 (inherits N1's world-frame drift). Not eligible.",
+   "pass": 20,
+   "verdictTransitions": {
+    "dom-w-glogownikach": [
+     "ALGORITHMIC_FAIL",
+     "PASS"
+    ]
+   }
+  },
+  "C1N1a": {
+   "admissible": false,
+   "changedRows": [
+    "dom-w-glogownikach",
+    "dom-w-helikoniach"
+   ],
+   "changes": {
+    "dom-w-glogownikach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": true,
+      "program": true,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -8.04,
+      -5.86
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "bodies": {
+       "new": [
+        "COVERED_TERRACE:-:1.3",
+        "COVERED_TERRACE:-:2.4",
+        "FLUSH_ATTACHED:-:0.3",
+        "FLUSH_ATTACHED:-:0.4",
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:1.8",
+        "UNKNOWN:-:0.7",
+        "UNKNOWN:-:0.8"
+       ],
+       "old": [
+        "COVERED_TERRACE:-:1.3",
+        "COVERED_TERRACE:-:2.4",
+        "FLUSH_ATTACHED:-:0.3",
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:1.8",
+        "FLUSH_ATTACHED:-:3.6",
+        "UNKNOWN:-:0.7",
+        "UNKNOWN:-:0.8"
+       ]
+      },
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0.9"
+       ]
+      },
+      "counts": {
+       "new": {
+        "doors": 12,
+        "levels": 1,
+        "materials": 11,
+        "openings": 21,
+        "roofs": 1,
+        "rooms": 8,
+        "slabs": 1,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 17,
+        "windows": 9
+       },
+       "old": {
+        "doors": 12,
+        "levels": 1,
+        "materials": 11,
+        "openings": 20,
+        "roofs": 1,
+        "rooms": 8,
+        "slabs": 1,
+        "surfaceRegions": 1,
+        "terraces": 3,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 19,
+        "windows": 8
+       }
+      },
+      "footprintM2": {
+       "new": 167.7,
+       "old": 163.81
+      },
+      "massProvenance": {
+       "new": [
+        "feat-main:SOURCE_DERIVED"
+       ],
+       "old": [
+        "feat-main:SOURCE_EXACT"
+       ]
+      },
+      "terraces": {
+       "new": [],
+       "old": [
+        {
+         "areaM2": 3.27,
+         "surface": "PAVED",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 6.63,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 1.31,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        }
+       ]
+      },
+      "unresolved": {
+       "new": [
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:the number of room-0-2",
+        "AMBIGUOUS:the outer face of the building\u2019s front wall",
+        "AMBIGUOUS:the scale of the base plan (an accusation withdrawn)",
+        "AMBIGUOUS:which way the ridge runs over mass-0"
+       ],
+       "old": [
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:the number of room-0-2",
+        "AMBIGUOUS:the scale of the base plan (an accusation withdrawn)",
+        "AMBIGUOUS:which way the ridge runs over mass-0"
+       ]
+      },
+      "wallRings": {
+       "new": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_DERIVED",
+         "why": "19.28 \u00d7 8.70 m body cut on a wall's inner face; unresolved: the outer face of the building\u2019s front wall"
+        }
+       ],
+       "old": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "18.83 \u00d7 8.70 m body from the plan's printed chains and wall bands"
+        }
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "PASS"
+     ]
+    },
+    "dom-w-helikoniach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": true,
+      "program": true,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -18.88,
+      -12.23
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "bodies": {
+       "new": [
+        "PROJECTING_WING:B:4.9",
+        "PROJECTING_WING:B:46.2",
+        "UNKNOWN:-:0.3",
+        "UNKNOWN:-:1.8",
+        "UNKNOWN:-:4.1"
+       ],
+       "old": [
+        "PROJECTING_WING:B:4.9",
+        "PROJECTING_WING:B:45.9",
+        "UNKNOWN:-:0.9",
+        "UNKNOWN:-:1.8",
+        "UNKNOWN:-:3.9"
+       ]
+      },
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ]
+      },
+      "counts": {
+       "new": {
+        "doors": 5,
+        "levels": 1,
+        "materials": 11,
+        "openings": 9,
+        "roofs": 1,
+        "rooms": 3,
+        "slabs": 1,
+        "terraces": 1,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 11,
+        "windows": 4
+       },
+       "old": {
+        "doors": 4,
+        "levels": 1,
+        "materials": 11,
+        "openings": 10,
+        "roofs": 1,
+        "rooms": 3,
+        "slabs": 1,
+        "terraces": 1,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 12,
+        "windows": 6
+       }
+      },
+      "footprintM2": {
+       "new": 83.92,
+       "old": 77.56
+      },
+      "massProvenance": {
+       "new": [
+        "feat-main:SOURCE_EXACT"
+       ],
+       "old": [
+        "feat-main:SOURCE_DERIVED"
+       ]
+      },
+      "terraces": {
+       "new": [
+        {
+         "areaM2": 36.05,
+         "surface": "PAVED",
+         "why": "the floor of the rear recess and the platform the plan outlines beyond it"
+        }
+       ],
+       "old": [
+        {
+         "areaM2": 34.72,
+         "surface": "PAVED",
+         "why": "the floor of the rear recess and the platform the plan outlines beyond it"
+        }
+       ]
+      },
+      "unresolved": {
+       "new": [
+        "AMBIGUOUS:a 1.20 m thin band at z 5.18",
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the left elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:a v2 registration for the right elevation",
+        "AMBIGUOUS:the opening opening-0-west-3-1 as the drawings print it",
+        "AMBIGUOUS:whether the 1.24 m\u00b2 strip at 0.00, 12.01 is part of the building",
+        "AMBIGUOUS:whether the 2.92 m\u00b2 strip at 3.26, 12.01 is part of the building",
+        "AMBIGUOUS:which body the attic storey stands on",
+        "AMBIGUOUS:which way the ridge runs over mass-0"
+       ],
+       "old": [
+        "AMBIGUOUS:a 1.20 m thin band at z 5.18",
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the left elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:a v2 registration for the right elevation",
+        "AMBIGUOUS:the label of room-0-0 (read as 7)",
+        "AMBIGUOUS:the opening opening-0-west-3-0 as the drawings print it",
+        "AMBIGUOUS:the opening opening-0-west-3-2 as the drawings print it",
+        "AMBIGUOUS:whether the 0.23 m\u00b2 strip at 0.18, 2.58 is part of the building",
+        "AMBIGUOUS:whether the 0.31 m\u00b2 strip at 0.18, 4.96 is part of the building",
+        "AMBIGUOUS:whether the 1.04 m\u00b2 strip at 0.53, 12.01 is part of the building",
+        "AMBIGUOUS:whether the 2.92 m\u00b2 strip at 3.26, 12.01 is part of the building",
+        "AMBIGUOUS:whether the 3.03 m\u00b2 strip at 0.00, 6.68 is part of the building",
+        "AMBIGUOUS:which body the attic storey stands on",
+        "AMBIGUOUS:which way the ridge runs over mass-0"
+       ]
+      },
+      "wallRings": {
+       "new": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "6.99 \u00d7 12.01 m body from the plan's printed chains and wall bands"
+        }
+       ],
+       "old": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "6.46 \u00d7 12.01 m body from the plan's printed chains and wall bands"
+        }
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "ALGORITHMIC_FAIL"
+     ]
+    }
+   },
+   "completed": 24,
+   "gates": {
+    "G1_knownGood": {
+     "holds": true,
+     "rows": []
+    },
+    "G2_scale": {
+     "holds": true,
+     "rows": []
+    },
+    "G3_negativeControls": {
+     "holds": true,
+     "selectedFrameChanged": [],
+     "violations": []
+    },
+    "G4_noNewExactRing": {
+     "holds": true,
+     "rows": []
+    },
+    "G4_noNewTerrace": {
+     "holds": true,
+     "rows": []
+    },
+    "G5_glogownikach": {
+     "holds": true,
+     "rows": null
+    },
+    "G8_storeys": {
+     "holds": true,
+     "rows": null
+    }
+   },
+   "note": "Ablation: glogownikach 19.28 m, front face unresolved, 0 terraces, ring SOURCE_DERIVED, -5.86 % (frozen verdict PASS); helikoniach -12.23 %. All mechanical gates hold, but C1 is not admissible alone, so the combination is not eligible under the preregistered selection rule. Reported as the measured basis of the next-step recommendation.",
+   "pass": 20,
+   "verdictTransitions": {
+    "dom-w-glogownikach": [
+     "ALGORITHMIC_FAIL",
+     "PASS"
+    ]
+   }
+  },
+  "C2": {
+   "admissible": false,
+   "changedRows": [
+    "A05",
+    "dom-pod-jarzabem",
+    "dom-w-akebiach",
+    "dom-w-dabecjach",
+    "dom-w-helikoniach",
+    "dom-w-krasnokwiatach",
+    "dom-w-modrzykach",
+    "dom-w-morelach",
+    "dom-w-zurawkach",
+    "rarytasy-g2e",
+    "willa-miranda"
+   ],
+   "changes": {
+    "A05": {
+     "flags": {
+      "decisionPath": true,
+      "failure": true,
+      "model": true,
+      "program": true,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      null,
+      -13.94
+     ],
+     "outcome": [
+      "FAILED",
+      "COMPLETED"
+     ],
+     "refusal": [
+      "the lowest storey covers 33.34 m\u00b2 against the 126.23 m\u00b2 the publisher prints \u2014 73.6% apart: the decomposition is not of this building 87 other readings of the plan were weighed and none holds: the best, copy area_table 2a1e4f9cc1, chain extent, registered scale, largest-first tiling, sides as gridde",
+      null
+     ],
+     "semantics": {
+      "bodies": {
+       "new": [
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:0.5",
+        "UNKNOWN:-:2.8",
+        "UNKNOWN:B:3.6"
+       ],
+       "old": [
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:0.5",
+        "UNKNOWN:-:2.8",
+        "UNKNOWN:-:3.6"
+       ]
+      },
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:ACCEPTED:3.6",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:10.9"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:10.9"
+       ]
+      },
+      "counts": {
+       "new": {
+        "doors": 18,
+        "levels": 1,
+        "materials": 11,
+        "openings": 22,
+        "roofs": 4,
+        "rooms": 10,
+        "slabs": 5,
+        "terraces": 3,
+        "wallJunctions": 20,
+        "wallRings": 5,
+        "walls": 42,
+        "windows": 4
+       },
+       "old": null
+      },
+      "extentConflicts": {
+       "new": [
+        "E:STRONG:INCONCLUSIVE:1.01",
+        "S:STRONG:ACCEPTED:0.99"
+       ],
+       "old": [
+        "E:STRONG:INCONCLUSIVE:1.01",
+        "S:STRONG:INCONCLUSIVE:0.99"
+       ]
+      },
+      "footprintM2": {
+       "new": 108.63,
+       "old": null
+      },
+      "levels": {
+       "new": 1,
+       "old": null
+      },
+      "massProvenance": {
+       "new": [
+        "feat-attached-0:SOURCE_DERIVED",
+        "feat-attached-1:SOURCE_DERIVED",
+        "feat-attached-2:SOURCE_DERIVED",
+        "feat-attached-3:SOURCE_DERIVED",
+        "feat-main:SOURCE_EXACT"
+       ],
+       "old": null
+      },
+      "terraces": {
+       "new": [
+        {
+         "areaM2": 3.24,
+         "surface": "UNKNOWN",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 2.83,
+         "surface": "PAVED",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 0.9,
+         "surface": "UNKNOWN",
+         "why": "the floor of the east recess"
+        }
+       ],
+       "old": null
+      },
+      "unresolved": {
+       "new": [
+        "AMBIGUOUS:a 1.22 m thin band at z 1.36",
+        "AMBIGUOUS:a 1.33 m thin band at z 9.75",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the opening opening-0-east-13-0 as the drawings print it",
+        "MISSING:a registration for the elevations",
+        "MISSING:the kind of roof over mass-1",
+        "MISSING:the kind of roof over mass-2",
+        "MISSING:the kind of roof over mass-3",
+        "MISSING:the kind of roof over mass-4",
+        "MISSING:the main roof"
+       ],
+       "old": []
+      },
+      "wallRings": {
+       "new": [
+        {
+         "id": "ring-attached-0-0",
+         "status": "SOURCE_EXACT",
+         "why": "7.74 \u00d7 3.24 m body from the plan's printed chains and wall bands"
+        },
+        {
+         "id": "ring-attached-1-0",
+         "status": "SOURCE_EXACT",
+         "why": "6.76 \u00d7 1.22 m body from the plan's printed chains and wall bands"
+        },
+        {
+         "id": "ring-attached-2-0",
+         "status": "SOURCE_EXACT",
+         "why": "2.54 \u00d7 3.24 m body from the plan's printed chains and wall bands"
+        },
+        {
+         "id": "ring-attached-3-0",
+         "status": "SOURCE_EXACT",
+         "why": "3.63 \u00d7 1.00 m body from the plan's printed chains and wall bands"
+        },
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "13.62 \u00d7 4.65 m body from the plan's printed chains and wall bands"
+        }
+       ],
+       "old": null
+      },
+      "wideOpenings": {
+       "new": [
+        "OPENING_IN_WALL:3.76",
+        "OPENING_IN_WALL:3.76",
+        "OPEN_SIDE:3.44",
+        "OPEN_SIDE:3.44",
+        "OPEN_SIDE:3.74",
+        "OPEN_SIDE:4.11",
+        "OPEN_SIDE:4.11",
+        "OPEN_SIDE:4.11",
+        "OPEN_SIDE:5.7",
+        "OPEN_SIDE:5.7",
+        "OPEN_SIDE:5.7"
+       ],
+       "old": [
+        "OPENING_IN_WALL:3.74",
+        "OPENING_IN_WALL:3.76",
+        "OPEN_SIDE:0.99",
+        "OPEN_SIDE:3.02",
+        "OPEN_SIDE:4.11"
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "ALGORITHMIC_FAIL"
+     ]
+    },
+    "dom-pod-jarzabem": {
+     "flags": {
+      "decisionPath": true,
+      "failure": false,
+      "model": true,
+      "program": true,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -11.88,
+      -5.61
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "bodies": {
+       "new": [
+        "COVERED_TERRACE:-:12.4",
+        "FLUSH_ATTACHED:-:0.8",
+        "FLUSH_ATTACHED:-:0.8",
+        "SEPARATE_BODY:-:0.1",
+        "SEPARATE_BODY:-:0.2",
+        "UNKNOWN:B:2.0"
+       ],
+       "old": [
+        "COVERED_TERRACE:-:12.6",
+        "FLUSH_ATTACHED:-:0.2",
+        "FLUSH_ATTACHED:-:0.3",
+        "UNKNOWN:-:1.1",
+        "UNKNOWN:-:14.3"
+       ]
+      },
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:ACCEPTED:2.3",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ]
+      },
+      "counts": {
+       "new": {
+        "doors": 18,
+        "levels": 1,
+        "materials": 11,
+        "openings": 23,
+        "roofs": 1,
+        "rooms": 5,
+        "slabs": 1,
+        "terraces": 1,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 27,
+        "windows": 5
+       },
+       "old": {
+        "doors": 12,
+        "levels": 1,
+        "materials": 11,
+        "openings": 19,
+        "roofs": 1,
+        "rooms": 6,
+        "slabs": 1,
+        "terraces": 8,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 32,
+        "windows": 7
+       }
+      },
+      "extentConflicts": {
+       "new": [
+        "E:STRONG:ACCEPTED:0.71",
+        "N:SUPPORTED:RECORDED:2.5"
+       ],
+       "old": [
+        "N:SUPPORTED:RECORDED:2.47",
+        "S:STRONG:ZONE:0.98"
+       ]
+      },
+      "footprintM2": {
+       "new": 204.61,
+       "old": 191.0
+      },
+      "massProvenance": {
+       "new": [
+        "feat-main:SOURCE_DERIVED"
+       ],
+       "old": [
+        "feat-main:SOURCE_EXACT"
+       ]
+      },
+      "terraces": {
+       "new": [
+        {
+         "areaM2": 47.07,
+         "surface": "UNKNOWN",
+         "why": "the floor of the rear recess"
+        }
+       ],
+       "old": [
+        {
+         "areaM2": 1.18,
+         "surface": "UNKNOWN",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 1.24,
+         "surface": "PAVED",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 1.67,
+         "surface": "UNKNOWN",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 4.51,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 1.99,
+         "surface": "UNKNOWN",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 1.99,
+         "surface": "UNKNOWN",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 5.29,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 47.75,
+         "surface": "UNKNOWN",
+         "why": "the floor of the rear recess"
+        }
+       ]
+      },
+      "unresolved": {
+       "new": [
+        "AMBIGUOUS:a 0.25 m thin band at z 7.43",
+        "AMBIGUOUS:a 0.31 m thin band at z 2.91",
+        "AMBIGUOUS:a 0.31 m thin band at z 3.23",
+        "AMBIGUOUS:a 0.31 m thin band at z 5.77",
+        "AMBIGUOUS:a 0.31 m thin band at z 6.37",
+        "AMBIGUOUS:a 0.31 m thin band at z 6.37",
+        "AMBIGUOUS:a 0.45 m thin band at x 12.81",
+        "AMBIGUOUS:a 0.75 m thin band at z 10.53",
+        "AMBIGUOUS:a 1.28 m thin band at z 10.53",
+        "AMBIGUOUS:a 1.31 m thin band at z 0.38",
+        "AMBIGUOUS:a 1.34 m thin band at z 0.38",
+        "AMBIGUOUS:a 1.39 m thin band at z 0.38",
+        "AMBIGUOUS:a 1.39 m thin band at z 10.53",
+        "AMBIGUOUS:a 1.81 m thin band at z 10.53",
+        "AMBIGUOUS:a 3.37 m thin band at x 0.38",
+        "AMBIGUOUS:a 3.37 m thin band at x 0.38",
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the left elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:the joint between main-iwall-0-x-23 and main-iwall-0-z-6",
+        "AMBIGUOUS:the joint between main-iwall-0-x-27 and main-iwall-0-z-6",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the opening opening-0-west-3-0 as the drawings print it",
+        "AMBIGUOUS:the opening opening-0-west-3-2 as the drawings print it",
+        "AMBIGUOUS:whether the 2.47 m\u00b2 strip at 18.83, 3.63 is part of the building"
+       ],
+       "old": [
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the left elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:the joint between main-iwall-0-x-2 and main-iwall-0-z-13",
+        "AMBIGUOUS:the number of room-0-1",
+        "AMBIGUOUS:the opening opening-0-west-3-0 as the drawings print it"
+       ]
+      },
+      "wallRings": {
+       "new": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "18.83 \u00d7 10.87 m body from the plan's printed chains and wall bands"
+        }
+       ],
+       "old": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "19.10 \u00d7 10.00 m body from the plan's printed chains and wall bands"
+        }
+       ]
+      },
+      "wideOpenings": {
+       "new": [
+        "OPENING_IN_WALL:3.88",
+        "OPENING_IN_WALL:3.88",
+        "OPENING_IN_WALL:3.88",
+        "OPENING_IN_WALL:6.19",
+        "OPENING_IN_WALL:6.19",
+        "OPEN_SIDE:4.01",
+        "OPEN_SIDE:4.01",
+        "OPEN_SIDE:5.97"
+       ],
+       "old": [
+        "OPENING_IN_WALL:3.84",
+        "OPENING_IN_WALL:6.22",
+        "OPEN_SIDE:4.04",
+        "OPEN_SIDE:4.4",
+        "OPEN_SIDE:4.68"
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "PASS"
+     ]
+    },
+    "dom-w-akebiach": {
+     "flags": {
+      "decisionPath": true,
+      "failure": true,
+      "model": false,
+      "program": false,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      null,
+      null
+     ],
+     "outcome": [
+      "FAILED",
+      "FAILED"
+     ],
+     "refusal": [
+      "the lowest storey covers 96.93 m\u00b2 against the 249.42 m\u00b2 the publisher prints \u2014 61.1% apart: the decomposition is not of this building; 63 other readings of the plan were weighed and none survived to a full composition",
+      "the lowest storey covers 118.02 m\u00b2 against the 249.42 m\u00b2 the publisher prints \u2014 52.7% apart: the decomposition is not of this building; 59 other readings of the plan were weighed and none survived to a full composition"
+     ],
+     "semantics": {
+      "bodies": {
+       "new": [
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:0.7",
+        "FLUSH_ATTACHED:-:0.8",
+        "PROJECTING_WING:B:1.5",
+        "RECESSED_ATTACHED:-:11.4",
+        "RECESSED_ATTACHED:-:22.4",
+        "RECESSED_ATTACHED:-:67.5",
+        "SEPARATE_BODY:-:2.6",
+        "SEPARATE_BODY:-:5.6",
+        "SEPARATE_BODY:-:7.7",
+        "UNKNOWN:B:33.1"
+       ],
+       "old": [
+        "FLUSH_ATTACHED:-:0.5",
+        "FLUSH_ATTACHED:-:0.7",
+        "FLUSH_ATTACHED:-:0.8",
+        "PROJECTING_WING:B:1.5",
+        "RECESSED_ATTACHED:-:11.4",
+        "RECESSED_ATTACHED:-:22.4",
+        "RECESSED_ATTACHED:-:67.5",
+        "SEPARATE_BODY:-:2.6",
+        "SEPARATE_BODY:-:5.6",
+        "SEPARATE_BODY:-:7.7",
+        "UNKNOWN:-:33.1"
+       ]
+      },
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:ACCEPTED:10.1",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ]
+      },
+      "extentConflicts": {
+       "new": [
+        "N:STRONG:INCONCLUSIVE:0.96",
+        "S:STRONG:ACCEPTED:4.3"
+       ],
+       "old": [
+        "N:STRONG:INCONCLUSIVE:0.96",
+        "S:STRONG:INCONCLUSIVE:4.3"
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "ALGORITHMIC_FAIL"
+     ]
+    },
+    "dom-w-dabecjach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": true,
+      "model": false,
+      "program": false,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      null,
+      null
+     ],
+     "outcome": [
+      "FAILED",
+      "FAILED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "ALGORITHMIC_FAIL"
+     ]
+    },
+    "dom-w-helikoniach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": false,
+      "program": false,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -18.88,
+      -18.88
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "ALGORITHMIC_FAIL"
+     ]
+    },
+    "dom-w-krasnokwiatach": {
+     "flags": {
+      "decisionPath": true,
+      "failure": true,
+      "model": false,
+      "program": false,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      null,
+      null
+     ],
+     "outcome": [
+      "FAILED",
+      "FAILED"
+     ],
+     "refusal": [
+      "the lowest storey covers 11.67 m\u00b2 against the 143.18 m\u00b2 the publisher prints \u2014 91.8% apart: the decomposition is not of this building; 47 other readings of the plan were weighed and none survived to a full composition",
+      "the lowest storey covers 78.89 m\u00b2 against the 143.18 m\u00b2 the publisher prints \u2014 44.9% apart: the decomposition is not of this building; 47 other readings of the plan were weighed and none survived to a full composition"
+     ],
+     "semantics": {
+      "bodies": {
+       "new": [
+        "COVERED_TERRACE:-:11.3",
+        "FLUSH_ATTACHED:-:0.4",
+        "FLUSH_ATTACHED:-:2.3",
+        "FLUSH_ATTACHED:B:5.5",
+        "SEPARATE_BODY:-:0.6",
+        "SEPARATE_BODY:-:1.6",
+        "UNKNOWN:-:11.2",
+        "UNKNOWN:-:38.1"
+       ],
+       "old": [
+        "COVERED_TERRACE:-:11.3",
+        "FLUSH_ATTACHED:-:0.4",
+        "FLUSH_ATTACHED:-:2.3",
+        "FLUSH_ATTACHED:-:5.5",
+        "SEPARATE_BODY:-:0.6",
+        "SEPARATE_BODY:-:1.6",
+        "UNKNOWN:-:11.2",
+        "UNKNOWN:-:38.1"
+       ]
+      },
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:ACCEPTED:17.1",
+        "ATTACHED_ROOM:ACCEPTED:29.4",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:0"
+       ]
+      },
+      "extentConflicts": {
+       "new": [
+        "N:STRONG:ACCEPTED:4.29",
+        "S:STRONG:ACCEPTED:3.99"
+       ],
+       "old": [
+        "N:STRONG:INCONCLUSIVE:4.29",
+        "S:STRONG:INCONCLUSIVE:3.99"
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "ALGORITHMIC_FAIL"
+     ]
+    },
+    "dom-w-modrzykach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": false,
+      "program": false,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      2.03,
+      2.03
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ]
+      }
+     },
+     "verdict": [
+      "PASS",
+      "PASS"
+     ]
+    },
+    "dom-w-morelach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": false,
+      "program": false,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -2.17,
+      -2.17
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:ACCEPTED:2.9",
+        "ATTACHED_ROOM:REJECTED:0",
+        "BOX_COMPLETION:ACCEPTED:6.0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:ACCEPTED:2.9",
+        "BOX_COMPLETION:ACCEPTED:6.0"
+       ]
+      }
+     },
+     "verdict": [
+      "PASS",
+      "PASS"
+     ]
+    },
+    "dom-w-zurawkach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": false,
+      "program": false,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -0.81,
+      -0.81
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ]
+      }
+     },
+     "verdict": [
+      "PASS",
+      "PASS"
+     ]
+    },
+    "rarytasy-g2e": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": false,
+      "program": false,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -2.75,
+      -2.75
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "BOX_COMPLETION:REJECTED:0"
+       ]
+      }
+     },
+     "verdict": [
+      "PASS",
+      "PASS"
+     ]
+    },
+    "willa-miranda": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": false,
+      "program": false,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -1.49,
+      -1.49
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "completions": {
+       "new": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:5.0"
+       ],
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:5.0"
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "ALGORITHMIC_FAIL"
+     ]
+    }
+   },
+   "completed": 25,
+   "gates": {
+    "G1_knownGood": {
+     "holds": true,
+     "rows": []
+    },
+    "G2_scale": {
+     "holds": false,
+     "rows": [
+      "dom-pod-jarzabem"
+     ]
+    },
+    "G3_negativeControls": {
+     "holds": false,
+     "selectedFrameChanged": [
+      "dom-pod-jarzabem"
+     ],
+     "violations": [
+      [
+       "N41",
+       "dom-w-akebiach",
+       "S courtyard between garage and porch (trees)",
+       8.37
+      ]
+     ]
+    },
+    "G4_noNewExactRing": {
+     "holds": false,
+     "rows": [
+      "A05"
+     ]
+    },
+    "G4_noNewTerrace": {
+     "holds": false,
+     "rows": [
+      "A05"
+     ]
+    },
+    "G5_glogownikach": {
+     "holds": false,
+     "rows": null
+    },
+    "G8_storeys": {
+     "holds": true,
+     "rows": null
+    }
+   },
+   "note": "Accepted the right strips on krasnokwiatach (garage S 17.1 m2, living room N 29.4 m2; terrace, porch, planting rejected) but the house still refuses downstream; elsewhere it built akebiach's planted courtyard (G3), turned A05's refusal into a completed wrong model (-13.94 %, five new SOURCE_EXACT rings, new terraces: G4), and switched jarzabem's selected copy into a compensated PASS (G2). Inadmissible.",
+   "pass": 20,
+   "verdictTransitions": {
+    "dom-pod-jarzabem": [
+     "ALGORITHMIC_FAIL",
+     "PASS"
+    ]
+   }
+  },
+  "N1": {
+   "admissible": false,
+   "changedRows": [
+    "dom-w-glogownikach"
+   ],
+   "changes": {
+    "dom-w-glogownikach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": true,
+      "program": true,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -8.04,
+      -8.04
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "counts": {
+       "new": {
+        "doors": 12,
+        "levels": 1,
+        "materials": 11,
+        "openings": 19,
+        "roofs": 1,
+        "rooms": 7,
+        "slabs": 1,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 18,
+        "windows": 7
+       },
+       "old": {
+        "doors": 12,
+        "levels": 1,
+        "materials": 11,
+        "openings": 20,
+        "roofs": 1,
+        "rooms": 8,
+        "slabs": 1,
+        "surfaceRegions": 1,
+        "terraces": 3,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 19,
+        "windows": 8
+       }
+      },
+      "massProvenance": {
+       "new": [
+        "feat-main:SOURCE_DERIVED"
+       ],
+       "old": [
+        "feat-main:SOURCE_EXACT"
+       ]
+      },
+      "terraces": {
+       "new": [],
+       "old": [
+        {
+         "areaM2": 3.27,
+         "surface": "PAVED",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 6.63,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 1.31,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        }
+       ]
+      },
+      "unresolved": {
+       "new": [
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:the number of room-0-2",
+        "AMBIGUOUS:the outer face of the building\u2019s east wall",
+        "AMBIGUOUS:the outer face of the building\u2019s front wall",
+        "AMBIGUOUS:the scale of the base plan (an accusation withdrawn)",
+        "AMBIGUOUS:which way the ridge runs over mass-0"
+       ],
+       "old": [
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:the number of room-0-2",
+        "AMBIGUOUS:the scale of the base plan (an accusation withdrawn)",
+        "AMBIGUOUS:which way the ridge runs over mass-0"
+       ]
+      },
+      "wallRings": {
+       "new": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_DERIVED",
+         "why": "18.83 \u00d7 8.70 m body cut on a wall's inner face; unresolved: the outer face of the building\u2019s east wall; the outer face o"
+        }
+       ],
+       "old": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "18.83 \u00d7 8.70 m body from the plan's printed chains and wall bands"
+        }
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "ALGORITHMIC_FAIL"
+     ]
+    }
+   },
+   "completed": 24,
+   "gates": {
+    "G1_knownGood": {
+     "holds": true,
+     "rows": []
+    },
+    "G2_scale": {
+     "holds": true,
+     "rows": []
+    },
+    "G3_negativeControls": {
+     "holds": true,
+     "selectedFrameChanged": [],
+     "violations": []
+    },
+    "G4_noNewExactRing": {
+     "holds": true,
+     "rows": []
+    },
+    "G4_noNewTerrace": {
+     "holds": true,
+     "rows": []
+    },
+    "G5_glogownikach": {
+     "holds": true,
+     "rows": null
+    },
+    "G8_storeys": {
+     "holds": true,
+     "rows": null
+    }
+   },
+   "note": "Ran as preregistered; changed only glogownikach as predicted, but removing the strip from the layout moved the v2 world frame by 0.4455 m: one interior partition and door lost (rooms 8 -> 7) and the west opening flipped from window \"110/230\" to door \"110/290\" with no new evidence. Inadmissible (G3/G4: unsupported semantic change). Superseded by N1a (addendum A).",
+   "pass": 19,
+   "verdictTransitions": {}
+  },
+  "N1a": {
+   "admissible": true,
+   "changedRows": [
+    "dom-w-glogownikach"
+   ],
+   "changes": {
+    "dom-w-glogownikach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": true,
+      "program": true,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -8.04,
+      -8.04
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "counts": {
+       "new": {
+        "doors": 12,
+        "levels": 1,
+        "materials": 11,
+        "openings": 20,
+        "roofs": 1,
+        "rooms": 8,
+        "slabs": 1,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 17,
+        "windows": 8
+       },
+       "old": {
+        "doors": 12,
+        "levels": 1,
+        "materials": 11,
+        "openings": 20,
+        "roofs": 1,
+        "rooms": 8,
+        "slabs": 1,
+        "surfaceRegions": 1,
+        "terraces": 3,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 19,
+        "windows": 8
+       }
+      },
+      "massProvenance": {
+       "new": [
+        "feat-main:SOURCE_DERIVED"
+       ],
+       "old": [
+        "feat-main:SOURCE_EXACT"
+       ]
+      },
+      "terraces": {
+       "new": [],
+       "old": [
+        {
+         "areaM2": 3.27,
+         "surface": "PAVED",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 6.63,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 1.31,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        }
+       ]
+      },
+      "unresolved": {
+       "new": [
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:the number of room-0-2",
+        "AMBIGUOUS:the outer face of the building\u2019s east wall",
+        "AMBIGUOUS:the outer face of the building\u2019s front wall",
+        "AMBIGUOUS:the scale of the base plan (an accusation withdrawn)",
+        "AMBIGUOUS:which way the ridge runs over mass-0"
+       ],
+       "old": [
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:the number of room-0-2",
+        "AMBIGUOUS:the scale of the base plan (an accusation withdrawn)",
+        "AMBIGUOUS:which way the ridge runs over mass-0"
+       ]
+      },
+      "wallRings": {
+       "new": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_DERIVED",
+         "why": "18.83 \u00d7 8.70 m body cut on a wall's inner face; unresolved: the outer face of the building\u2019s east wall; the outer face o"
+        }
+       ],
+       "old": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "18.83 \u00d7 8.70 m body from the plan's printed chains and wall bands"
+        }
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "ALGORITHMIC_FAIL"
+     ]
+    }
+   },
+   "completed": 24,
+   "gates": {
+    "G1_knownGood": {
+     "holds": true,
+     "rows": []
+    },
+    "G2_scale": {
+     "holds": true,
+     "rows": []
+    },
+    "G3_negativeControls": {
+     "holds": true,
+     "selectedFrameChanged": [],
+     "violations": []
+    },
+    "G4_noNewExactRing": {
+     "holds": true,
+     "rows": []
+    },
+    "G4_noNewTerrace": {
+     "holds": true,
+     "rows": []
+    },
+    "G5_glogownikach": {
+     "holds": true,
+     "rows": null
+    },
+    "G8_storeys": {
+     "holds": true,
+     "rows": null
+    }
+   },
+   "note": "Addendum A. Changed only glogownikach: 3 PAVED terraces -> 0, the 2 false return walls removed, the recessed-wall finish region read on the false east recess removed (it exists only for recessed walls), 2 typed gaps (east and front outer faces), MASS and ring SOURCE_DERIVED; rooms, doors and every opening identical; footprint unchanged (-8.04 %). Admissible on every mechanical gate; G9-G11 on the production twin (PROD1).",
+   "pass": 19,
+   "verdictTransitions": {}
+  },
+  "N2": {
+   "admissible": false,
+   "changedRows": [
+    "D00",
+    "dom-pod-jarzabem",
+    "dom-w-cieszyniankach",
+    "dom-w-glogownikach",
+    "eoze-legacy-area",
+    "eoze-legacy-every",
+    "marcowki"
+   ],
+   "changes": {
+    "D00": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": true,
+      "program": true,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -18.71,
+      -18.71
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "counts": {
+       "new": {
+        "doors": 31,
+        "levels": 2,
+        "materials": 11,
+        "openings": 48,
+        "roofs": 2,
+        "rooms": 4,
+        "slabs": 4,
+        "wallJunctions": 16,
+        "wallRings": 4,
+        "walls": 16,
+        "windows": 17
+       },
+       "old": {
+        "doors": 31,
+        "levels": 2,
+        "materials": 11,
+        "openings": 48,
+        "roofs": 2,
+        "rooms": 4,
+        "slabs": 4,
+        "terraces": 3,
+        "wallJunctions": 16,
+        "wallRings": 4,
+        "walls": 16,
+        "windows": 17
+       }
+      },
+      "terraces": {
+       "new": [],
+       "old": [
+        {
+         "areaM2": 2.09,
+         "surface": "PAVED",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 1.32,
+         "surface": "PAVED",
+         "why": "the floor of the rear recess"
+        },
+        {
+         "areaM2": 1.6,
+         "surface": "PAVED",
+         "why": "the floor of the west recess"
+        }
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "ALGORITHMIC_FAIL"
+     ]
+    },
+    "dom-pod-jarzabem": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": true,
+      "program": true,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -11.88,
+      -11.88
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "counts": {
+       "new": {
+        "doors": 12,
+        "levels": 1,
+        "materials": 11,
+        "openings": 19,
+        "roofs": 1,
+        "rooms": 6,
+        "slabs": 1,
+        "terraces": 5,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 30,
+        "windows": 7
+       },
+       "old": {
+        "doors": 12,
+        "levels": 1,
+        "materials": 11,
+        "openings": 19,
+        "roofs": 1,
+        "rooms": 6,
+        "slabs": 1,
+        "terraces": 8,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 32,
+        "windows": 7
+       }
+      },
+      "terraces": {
+       "new": [
+        {
+         "areaM2": 4.51,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 1.99,
+         "surface": "UNKNOWN",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 1.99,
+         "surface": "UNKNOWN",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 5.29,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 47.75,
+         "surface": "UNKNOWN",
+         "why": "the floor of the rear recess"
+        }
+       ],
+       "old": [
+        {
+         "areaM2": 1.18,
+         "surface": "UNKNOWN",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 1.24,
+         "surface": "PAVED",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 1.67,
+         "surface": "UNKNOWN",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 4.51,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 1.99,
+         "surface": "UNKNOWN",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 1.99,
+         "surface": "UNKNOWN",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 5.29,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 47.75,
+         "surface": "UNKNOWN",
+         "why": "the floor of the rear recess"
+        }
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "ALGORITHMIC_FAIL"
+     ]
+    },
+    "dom-w-cieszyniankach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": true,
+      "program": true,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -5.1,
+      -5.1
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "counts": {
+       "new": {
+        "doors": 10,
+        "levels": 1,
+        "materials": 11,
+        "openings": 19,
+        "roofs": 1,
+        "rooms": 4,
+        "slabs": 1,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 23,
+        "windows": 9
+       },
+       "old": {
+        "doors": 10,
+        "levels": 1,
+        "materials": 11,
+        "openings": 19,
+        "roofs": 1,
+        "rooms": 4,
+        "slabs": 1,
+        "terraces": 1,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 23,
+        "windows": 9
+       }
+      },
+      "terraces": {
+       "new": [],
+       "old": [
+        {
+         "areaM2": 3.51,
+         "surface": "UNKNOWN",
+         "why": "the floor of the west recess"
+        }
+       ]
+      },
+      "unresolved": {
+       "new": [
+        "AMBIGUOUS:a 0.42 m thin band at z 12.62",
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the left elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:a v2 registration for the right elevation",
+        "AMBIGUOUS:the label of room-0-2 (read as 1)",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the number of room-0-2",
+        "AMBIGUOUS:the opening opening-0-west-3-4 as the drawings print it",
+        "AMBIGUOUS:whether the 3.7 m\u00b2 region at 0.00, 15.80 is part of the building",
+        "AMBIGUOUS:whether the 3.7 m\u00b2 region at 7.12, 15.80 is part of the building"
+       ],
+       "old": [
+        "AMBIGUOUS:a 0.42 m thin band at z 13.42",
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the left elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:a v2 registration for the right elevation",
+        "AMBIGUOUS:the label of room-0-2 (read as 1)",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the number of room-0-0",
+        "AMBIGUOUS:the number of room-0-2",
+        "AMBIGUOUS:the opening opening-0-west-3-4 as the drawings print it",
+        "AMBIGUOUS:whether the 3.7 m\u00b2 region at 0.00, 15.80 is part of the building",
+        "AMBIGUOUS:whether the 3.7 m\u00b2 region at 7.12, 15.80 is part of the building"
+       ]
+      }
+     },
+     "verdict": [
+      "PASS",
+      "PASS"
+     ]
+    },
+    "dom-w-glogownikach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": true,
+      "program": true,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -8.04,
+      -8.04
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "counts": {
+       "new": {
+        "doors": 12,
+        "levels": 1,
+        "materials": 11,
+        "openings": 19,
+        "roofs": 1,
+        "rooms": 7,
+        "slabs": 1,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 18,
+        "windows": 7
+       },
+       "old": {
+        "doors": 12,
+        "levels": 1,
+        "materials": 11,
+        "openings": 20,
+        "roofs": 1,
+        "rooms": 8,
+        "slabs": 1,
+        "surfaceRegions": 1,
+        "terraces": 3,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 19,
+        "windows": 8
+       }
+      },
+      "terraces": {
+       "new": [],
+       "old": [
+        {
+         "areaM2": 3.27,
+         "surface": "PAVED",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 6.63,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 1.31,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        }
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "ALGORITHMIC_FAIL"
+     ]
+    },
+    "eoze-legacy-area": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": true,
+      "program": true,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -4.37,
+      -4.37
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "counts": {
+       "new": {
+        "doors": 7,
+        "levels": 1,
+        "materials": 11,
+        "openings": 18,
+        "roofs": 1,
+        "rooms": 8,
+        "slabs": 1,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 16,
+        "windows": 11
+       },
+       "old": {
+        "doors": 7,
+        "levels": 1,
+        "materials": 11,
+        "openings": 18,
+        "roofs": 1,
+        "rooms": 8,
+        "slabs": 1,
+        "surfaceRegions": 3,
+        "terraces": 4,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 19,
+        "windows": 11
+       }
+      },
+      "terraces": {
+       "new": [],
+       "old": [
+        {
+         "areaM2": 1.26,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 0.22,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 1.69,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 51.45,
+         "surface": "PAVED",
+         "why": "the floor of the rear recess and the platform the plan outlines beyond it"
+        }
+       ]
+      }
+     },
+     "verdict": [
+      "PASS",
+      "PASS"
+     ]
+    },
+    "eoze-legacy-every": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": true,
+      "program": true,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -4.21,
+      -4.21
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "counts": {
+       "new": {
+        "doors": 7,
+        "levels": 1,
+        "materials": 11,
+        "openings": 18,
+        "roofs": 1,
+        "rooms": 8,
+        "slabs": 1,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 16,
+        "windows": 11
+       },
+       "old": {
+        "doors": 7,
+        "levels": 1,
+        "materials": 11,
+        "openings": 18,
+        "roofs": 1,
+        "rooms": 8,
+        "slabs": 1,
+        "surfaceRegions": 4,
+        "terraces": 4,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 19,
+        "windows": 11
+       }
+      },
+      "terraces": {
+       "new": [],
+       "old": [
+        {
+         "areaM2": 1.26,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 0.22,
+         "surface": "UNKNOWN",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 1.69,
+         "surface": "UNKNOWN",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 5.54,
+         "surface": "PAVED",
+         "why": "the floor of the rear recess"
+        }
+       ]
+      }
+     },
+     "verdict": [
+      "PASS",
+      "PASS"
+     ]
+    },
+    "marcowki": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": true,
+      "program": true,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -0.29,
+      null
+     ],
+     "outcome": [
+      "COMPLETED",
+      "NO_RUN"
+     ],
+     "refusal": null,
+     "semantics": {
+      "bodies": {
+       "new": null,
+       "old": [
+        "COVERED_TERRACE:-:11.0",
+        "COVERED_TERRACE:-:7.0",
+        "FLUSH_ATTACHED:-:0.9",
+        "FLUSH_ATTACHED:-:1.0"
+       ]
+      },
+      "completions": {
+       "new": null,
+       "old": [
+        "ATTACHED_ROOM:REJECTED:0",
+        "ATTACHED_ROOM:REJECTED:0"
+       ]
+      },
+      "counts": {
+       "new": null,
+       "old": {
+        "balconies": 2,
+        "chimneys": 2,
+        "doors": 12,
+        "levels": 2,
+        "materials": 11,
+        "openings": 21,
+        "railings": 2,
+        "roofOpenings": 5,
+        "rooflights": 3,
+        "roofs": 2,
+        "rooms": 12,
+        "slabs": 3,
+        "stairs": 1,
+        "surfaceRegions": 3,
+        "terraces": 2,
+        "wallJunctions": 12,
+        "wallRings": 3,
+        "walls": 40,
+        "windows": 9
+       }
+      },
+      "extentConflicts": {
+       "new": null,
+       "old": []
+      },
+      "footprintM2": {
+       "new": null,
+       "old": 130.79
+      },
+      "levels": {
+       "new": null,
+       "old": 2
+      },
+      "massProvenance": {
+       "new": null,
+       "old": [
+        "feat-attached-0:SOURCE_EXACT",
+        "feat-main:SOURCE_EXACT"
+       ]
+      },
+      "terraces": {
+       "new": null,
+       "old": [
+        {
+         "areaM2": 10.68,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 23.26,
+         "surface": "PAVED",
+         "why": "the floor of the rear recess and the platform the plan outlines beyond it"
+        }
+       ]
+      },
+      "unresolved": {
+       "new": null,
+       "old": [
+        "AMBIGUOUS:the label of room-0-2 (read as 9)",
+        "MISSING:the kind of roof over mass-1"
+       ]
+      },
+      "wallRings": {
+       "new": null,
+       "old": [
+        {
+         "id": "ring-attached-0-0",
+         "status": "SOURCE_EXACT",
+         "why": "4.15 \u00d7 7.51 m body from the plan's printed chains and wall bands"
+        },
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "7.90 \u00d7 12.61 m body from the plan's printed chains and wall bands"
+        },
+        {
+         "id": "ring-main-1",
+         "status": null,
+         "why": ""
+        }
+       ]
+      },
+      "wideOpenings": {
+       "new": null,
+       "old": []
+      }
+     },
+     "verdict": [
+      "PASS",
+      "ALGORITHMIC_FAIL"
+     ]
+    }
+   },
+   "completed": 23,
+   "gates": {
+    "G1_knownGood": {
+     "holds": false,
+     "rows": [
+      "dom-w-cieszyniankach",
+      "eoze-legacy-area",
+      "eoze-legacy-every",
+      "marcowki"
+     ]
+    },
+    "G2_scale": {
+     "holds": false,
+     "rows": [
+      "marcowki"
+     ]
+    },
+    "G3_negativeControls": {
+     "holds": false,
+     "selectedFrameChanged": [
+      "marcowki"
+     ],
+     "violations": []
+    },
+    "G4_noNewExactRing": {
+     "holds": true,
+     "rows": []
+    },
+    "G4_noNewTerrace": {
+     "holds": true,
+     "rows": []
+    },
+    "G5_glogownikach": {
+     "holds": false,
+     "rows": null
+    },
+    "G8_storeys": {
+     "holds": true,
+     "rows": null
+    }
+   },
+   "note": "Informational only (never adoptable): no zone from a strip <= 1.25 walls. Changes 7 rows including 4 known-good (cieszyniankach, eoze-legacy-area, eoze-legacy-every, marcowki) and marcowki's selected copy (G2): the sliver-terrace class cannot be removed under the default G1 without an OWNER decision.",
+   "pass": 18,
+   "verdictTransitions": {
+    "marcowki": [
+     "PASS",
+     "ALGORITHMIC_FAIL"
+    ]
+   }
+  },
+  "PROD1": {
+   "admissible": true,
+   "changedRows": [
+    "dom-w-glogownikach"
+   ],
+   "changes": {
+    "dom-w-glogownikach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": true,
+      "program": true,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -8.04,
+      -8.04
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "counts": {
+       "new": {
+        "doors": 12,
+        "levels": 1,
+        "materials": 11,
+        "openings": 20,
+        "roofs": 1,
+        "rooms": 8,
+        "slabs": 1,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 17,
+        "windows": 8
+       },
+       "old": {
+        "doors": 12,
+        "levels": 1,
+        "materials": 11,
+        "openings": 20,
+        "roofs": 1,
+        "rooms": 8,
+        "slabs": 1,
+        "surfaceRegions": 1,
+        "terraces": 3,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 19,
+        "windows": 8
+       }
+      },
+      "massProvenance": {
+       "new": [
+        "feat-main:SOURCE_DERIVED"
+       ],
+       "old": [
+        "feat-main:SOURCE_EXACT"
+       ]
+      },
+      "terraces": {
+       "new": [],
+       "old": [
+        {
+         "areaM2": 3.27,
+         "surface": "PAVED",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 6.63,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 1.31,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        }
+       ]
+      },
+      "unresolved": {
+       "new": [
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:the number of room-0-2",
+        "AMBIGUOUS:the outer face of the building\u2019s east wall",
+        "AMBIGUOUS:the outer face of the building\u2019s front wall",
+        "AMBIGUOUS:the scale of the base plan (an accusation withdrawn)",
+        "AMBIGUOUS:which way the ridge runs over mass-0"
+       ],
+       "old": [
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:the number of room-0-2",
+        "AMBIGUOUS:the scale of the base plan (an accusation withdrawn)",
+        "AMBIGUOUS:which way the ridge runs over mass-0"
+       ]
+      },
+      "wallRings": {
+       "new": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_DERIVED",
+         "why": "18.83 \u00d7 8.70 m body cut on a wall's inner face; unresolved: the outer face of the building\u2019s east wall; the outer face o"
+        }
+       ],
+       "old": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "18.83 \u00d7 8.70 m body from the plan's printed chains and wall bands"
+        }
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "ALGORITHMIC_FAIL"
+     ]
+    }
+   },
+   "completed": 24,
+   "gates": {
+    "G1_knownGood": {
+     "holds": true,
+     "rows": []
+    },
+    "G2_scale": {
+     "holds": true,
+     "rows": []
+    },
+    "G3_negativeControls": {
+     "holds": true,
+     "selectedFrameChanged": [],
+     "violations": []
+    },
+    "G4_noNewExactRing": {
+     "holds": true,
+     "rows": []
+    },
+    "G4_noNewTerrace": {
+     "holds": true,
+     "rows": []
+    },
+    "G5_glogownikach": {
+     "holds": true,
+     "rows": null
+    },
+    "G8_storeys": {
+     "holds": true,
+     "rows": null
+    }
+   },
+   "note": "The production implementation of N1a: byte-identical to the N1a research replay on 46/46 rows (model, program, failure, trace, digest, unresolved, provenance).",
+   "pass": 19,
+   "verdictTransitions": {}
+  }
+ },
+ "knownGood": [
+  "A02",
+  "A03",
+  "A06",
+  "A07",
+  "dom-miniaturka",
+  "dom-w-arkadiach",
+  "dom-w-cieszyniankach",
+  "dom-w-jablonkach",
+  "dom-w-modrzykach",
+  "dom-w-morelach",
+  "dom-w-tunbergiach",
+  "dom-w-zurawkach",
+  "eoze-legacy-area",
+  "eoze-legacy-every",
+  "kosacce-clean",
+  "kosacce-tracked",
+  "marcowki",
+  "rarytasy-eoze",
+  "rarytasy-g2e"
+ ],
+ "schema": "buildplan.analyzer-005q.candidate-comparison",
+ "selection": {
+  "chosen": "N1a",
+  "why": "the only admissible candidate (preregistration section 5); it removes every fabricated feature and false exact label the stage found on glogownikach and changes nothing else"
+ },
+ "version": "1.0.0"
+}
