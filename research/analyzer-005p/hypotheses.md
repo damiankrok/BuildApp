@@ -40,6 +40,12 @@ topology, emission and every published-figure rule are out of scope for a produc
    scale's refuted share.**
 6. On `dom-w-glogownikach` the contest IS about the scale: 501/541 and 810/870 (TOKEN vs EXTERNAL) imply 2.432 vs 2.626
    cm/px over the same spans.
+7. (first-bad ledger) Under 005O's M1, `dom-pod-jarzabem`'s dimensioned copy loses all three of its contested statements
+   — one metrically irrelevant (1101 vs 1100), one a binding error both readings refute — so its refutation denominator
+   falls from 681.7 px to 55 px and its refuted share to 0.000, which ranks as perfect agreement (`:234`) and flips the
+   copy. The same ranking-label effect (no outcome change) is what 005O saw on akebiach and milorzebem.
+8. (first-bad ledger) Only one development row's refusal rests on the as-printed view (glogownikach), and its first bad
+   decision is not that refusal but a grid/envelope decision at the correct scale (`first-bad-summary.md` Q2).
 
 ## 1. Hypotheses
 
@@ -95,21 +101,27 @@ topology, emission and every published-figure rule are out of scope for a produc
   path or model change, any new completion at a wrong scale; the unit property test over generated cases.
 - **Data:** sealed evidence (lattices, ensemble decisions). **CPU/memory:** as M1. **Fits 005P:** yes (one seam).
 
-### H3 — orientation safeguard by the reader's posterior (M4, 005O addendum A)
+### H3 — murajach's root upstream (binding / self-anchored registration; orientation)
 
-- **Bug:** murajach's v49 orientation decided by the UNDECIDED legacy fallback against a 740 read at p 0.99991.
-- **Mechanism:** corroborating readings in exactly one quarter-turn decide the orientation.
-- **Functions:** `source-metrics` orientation / chain binding — **upstream of plan resolution**.
-- **Fits 005P:** **no** — it changes source-metrics' binding and the metric solution, outside the authorised seam.
-  Recorded as a bounded next-stage candidate, not run.
+- **Bug (first-bad ledger, KNOWN):** the legacy chain solver binds the read 1020 to a logo-cut 412 px fragment; its vote
+  converges on substitutions (1010, 117, 157) and `extract.ts:997` admits those CHAIN_CORRECTED segments as the only
+  registration anchors (2.451 cm/px, true ≈ 1.554). The two correct witnesses are lost to orientation decisions (v49 by
+  the UNDECIDED legacy fallback against a 740 read at p 0.99991; v244 by OTHER_AXIS_SCALE made at the fragment scale).
+- **Mechanisms considered:** (a) CHAIN_CORRECTED never anchors a registration; (b) orientation decided by corroborating
+  readings in exactly one quarter-turn (005O M4-diag: 171 right / 0 wrong where truth is known).
+- **Functions:** `source-metrics` `extract.ts` anchors, `metric-solution.ts` orientation — **upstream of plan resolution**.
+- **Fits 005P:** **no** — it changes source-metrics' registration and binding, outside the authorised seam. Recorded as a
+  bounded next-stage candidate, not run.
 
 ### H4 — provenance-corrected scale votes (dependency-aware witness grouping)
 
-- **Bug:** a scale "supported" by several statements read by one reader family.
-- **Mechanism:** count support per independent source group, not per statement.
-- **Fits 005P:** **no** as a production change: the metric solution already groups witnesses (`independentGroups`),
-  and plan resolution's own T3 already requires two chains on two axes. On the 44 rows no failure is traced to a
-  double-counted witness in plan resolution (the first-bad ledger finds none). Not run; a diagnostic only.
+- **Bug:** a scale "supported" by several statements that share a reader family, a drawing, or a substitution.
+- **Mechanism:** count support per independent correlation group, not per statement.
+- **What the ledger shows:** no first-bad decision on the 44 rows is a double-counted witness *inside plan resolution's
+  decisions*. Correlated support does decide outcomes upstream — CHAIN_CORRECTED self-anchoring (murajach), a copy's
+  identical substitution cited as WIDTH_CORROBORATED (gozdzikowcach) — and appears in T3's "different chains" test
+  (glogownikach's two same-family misreads), which the contest policy (H1/H2) already addresses at the seam.
+- **Fits 005P:** **no** as a production change (the decisive cases are in source-metrics and the layout gate). Not run.
 
 ### H5 — diagnostic-only contest ledger (D1)
 

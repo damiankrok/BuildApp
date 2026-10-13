@@ -14,7 +14,12 @@ only if it passes every gate below. Start: `5906afa8aad2286e80a733e83ca2c45fb274
   consumer FROZEN) is compared byte for byte with `P0-frozen` (no alias) on 44/44 before any challenger runs.
 - The contested set (|K| ≥ 2) equals 005O's M1 abstention set: 284 statements, 0 mismatching cases.
 - Audit facts used to design the variants: `hypotheses.md` §0 (seven consumers; TOKEN/LATTICE correlated; the
-  eoze 1600/1601 contest; denominators).
+  eoze 1600/1601 contest; denominators) and the first-bad ledger (`stage-reports/artifacts/analyzer-005p/architecture/
+  first-bad-ledger.json`, `first-bad-summary.md`), committed in the same audit-before-code commit as this file.
+- Predictions written now, to be checked by the replays: N1 changes the decision path only where P0 raised a source
+  conflict whose accusers are contested about the scale (expected: glogownikach only); N1 leaves rarytasy-eoze's
+  OUTER_TOTALS path and jarzabem's copy exactly as P0; P1 re-routes rarytasy-eoze (as 005O M1 did); P2 and P3 move
+  jarzabem's copy (P3 = 005O M1 reproduced).
 - Already known from 005O (and therefore NOT evidence for any 005P variant): 005O M1 = all-consumer DROP produced
   glogownikach 2.6234 (FAIL −8.04 %), jarzabem copy switch with semantics change, eoze trigger path change,
   milorzebem / akebiach best-reading text changes. `P3` re-runs it only as a harness validation and safety reference.
