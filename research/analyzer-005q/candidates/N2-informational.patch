@@ -1,0 +1,12 @@
+--- a/packages/reconstruction/src/layout.ts
++++ b/packages/reconstruction/src/layout.ts
+@@ -2181,7 +2181,8 @@
+  */
+ function zonesOutsideEnvelope(base: PlanReading, envelope: PixelRect, frame: WorldFrame): FootprintRegionHypothesis[] {
+   const out: FootprintRegionHypothesis[] = []
+-  const minCell = Math.max(2, base.wallPx / 2)
++  // 005Q (N2, research only): a strip no deeper than a wall and a quarter holds no floor that is not the wall itself
++  const minCell = Math.max(2, base.wallPx / 2, base.decomposition.wallThickness.px * 1.25)
+   const strips: Array<{ side: PlanSide; rect: PixelRect }> = [
+     { side: 'MIN_Z', rect: { x0: envelope.x0, y0: base.extent.y0, x1: envelope.x1, y1: envelope.y0 } },
+     { side: 'MAX_Z', rect: { x0: envelope.x0, y0: envelope.y1, x1: envelope.x1, y1: base.extent.y1 } },

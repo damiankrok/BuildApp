@@ -1,0 +1,188 @@
+--- a/packages/reconstruction/src/layout.ts
++++ b/packages/reconstruction/src/layout.ts
+@@ -1843,10 +1843,15 @@
+   }
+ 
+   // --- the zones the chains measure beyond the walls ------------------------
++  // 005Q (N1): a strip that is the building's own exterior wall, left outside by the face the body was cut on, is no
++  // zone — no recess, no return, no terrace floor is read in it — and the face it leaves open is named.
++  const wallStrips = wallStripsOf(base, envelope.rect)
+   for (const zone of zonesOutsideEnvelope(base, envelope.rect, frame)) {
++    if (wallStrips.some((w) => zone.id === `zone-${w.side.toLowerCase()}`)) continue
+     footprintRegions.push({ ...zone, storeyId: baseStorey.id })
+     baseStorey.footprintRegionIds.push(zone.id)
+   }
++  for (const w of wallStrips) unresolved.push(w.gap)
+ 
+   // --- masses ---------------------------------------------------------------
+   for (const region of footprintRegions.filter((r) => r.storeyId === baseStorey.id && r.kind === 'BUILT')) {
+@@ -1857,6 +1862,14 @@
+     // A span stated by a chain the resolver re-read at another scale was not printed as used: DERIVED, not MEASURED.
+     const reread = (sp: AxisSpan): boolean => sp.evidenceIds.some((e) => options.plan?.rereadEvidenceIds.has(e) === true)
+     const basisOf = (sp: AxisSpan): LayoutQuantity['basis'] => (sp.stated ? (reread(sp) ? 'DERIVED' : 'MEASURED') : 'SCALED')
++    // 005Q (N1): a side of this body on the inner face of a wall the chains state the outer face of: the span across it
++    // measures the wrong pair of faces, so it is not MEASURED, and the body says which face it leaves open
++    const open = wallStrips.filter((w) => w.backOn(region.pixelRect))
++    const openX = open.some((w) => w.side === 'MIN_X' || w.side === 'MAX_X')
++    const openZ = open.some((w) => w.side === 'MIN_Z' || w.side === 'MAX_Z')
++    const facesWhy = open.length > 0 ? `; its ${open.map((w) => w.sideName).join(' and ')} side${open.length === 1 ? '' : 's'} stand${open.length === 1 ? 's' : ''} on a wall's inner face (${open.map((w) => w.gap.id).join(', ')})` : ''
++    const basisX = openX && basisOf(spanX) === 'MEASURED' ? 'DERIVED' : basisOf(spanX)
++    const basisZ = openZ && basisOf(spanZ) === 'MEASURED' ? 'DERIVED' : basisOf(spanZ)
+     masses.push({
+       id: `mass-${masses.length}`,
+       role: 'UNKNOWN',
+@@ -1864,12 +1877,12 @@
+       footprintRegionIds: [region.id],
+       storeySpan: { fromIndex: baseStorey.index, toIndex: baseStorey.index, storeyIds: [baseStorey.id] },
+       facadePlaneIds: [],
+-      widthM: quantity(bounds.x1 - bounds.x0, bounds.x1 - bounds.x0 - spread(spanX), bounds.x1 - bounds.x0 + spread(spanX), 'm', basisOf(spanX), spanX.evidenceIds.length > 0 ? spanX.evidenceIds : region.evidenceIds, `the distance between the outer faces of this body’s own walls: ${spanX.why}`),
+-      depthM: quantity(bounds.z1 - bounds.z0, bounds.z1 - bounds.z0 - spread(spanZ), bounds.z1 - bounds.z0 + spread(spanZ), 'm', basisOf(spanZ), spanZ.evidenceIds.length > 0 ? spanZ.evidenceIds : region.evidenceIds, `the distance between the outer faces of this body’s own walls: ${spanZ.why}`),
++      widthM: quantity(bounds.x1 - bounds.x0, bounds.x1 - bounds.x0 - spread(spanX), bounds.x1 - bounds.x0 + spread(spanX), 'm', basisX, spanX.evidenceIds.length > 0 ? spanX.evidenceIds : region.evidenceIds, `the distance between the outer faces of this body’s own walls: ${spanX.why}${openX ? '; one of them is a wall’s inner face' : ''}`),
++      depthM: quantity(bounds.z1 - bounds.z0, bounds.z1 - bounds.z0 - spread(spanZ), bounds.z1 - bounds.z0 + spread(spanZ), 'm', basisZ, spanZ.evidenceIds.length > 0 ? spanZ.evidenceIds : region.evidenceIds, `the distance between the outer faces of this body’s own walls: ${spanZ.why}${openZ ? '; one of them is a wall’s inner face' : ''}`),
+       observationIds: [],
+       evidenceIds: region.evidenceIds,
+       confidence: region.confidence,
+-      why: `a region of the base plan enclosed by its own walls: ${region.why}`,
++      why: `a region of the base plan enclosed by its own walls: ${region.why}${facesWhy}`,
+     })
+   }
+ 
+@@ -2171,6 +2184,81 @@
+ }
+ 
+ /**
++ * 005Q (N1): the strips between the walled envelope and the stated extent that are the building's own exterior wall.
++ *
++ * A body cut on the INNER face of an exterior wall leaves the wall itself between it and the extent, and the strip
++ * beyond the body is then read as a zone: a recess with returns in it and a paved terrace floor that are the wall's own
++ * poché. A strip is that wall when a long, wall-thick band lies in it with its two faces on the strip's two edges over
++ * at least `WALL_STRIP_BOUNDS.cover` of its length. Such a strip is no zone; its face is named as unresolved (the body
++ * stops a wall short of the side the chains state); and a body standing on its back edge loses MEASURED across it.
++ * Nothing moves: the face the body was cut on stays, and the model says it is the wrong one.
++ */
++export const WALL_STRIP_BOUNDS = { cover: 0.25 } as const
++type WallStrip = { side: PlanSide; sideName: string; strip: PixelRect; cover: number; gap: LayoutGap; backOn: (rect: PixelRect) => boolean }
++function wallStripsOf(base: PlanReading, envelope: PixelRect): WallStrip[] {
++  const wallPx = base.decomposition.wallThickness.px
++  const minCell = Math.max(2, base.wallPx / 2)
++  const mpp = base.registration ? Math.max(base.registration.metresPerPixelX, base.registration.metresPerPixelY) : 0
++  const names: Record<PlanSide, string> = { MIN_X: 'west', MAX_X: 'east', MIN_Z: 'rear', MAX_Z: 'front' }
++  const strips: Array<{ side: PlanSide; rect: PixelRect }> = [
++    { side: 'MIN_Z', rect: { x0: envelope.x0, y0: base.extent.y0, x1: envelope.x1, y1: envelope.y0 } },
++    { side: 'MAX_Z', rect: { x0: envelope.x0, y0: envelope.y1, x1: envelope.x1, y1: base.extent.y1 } },
++    { side: 'MIN_X', rect: { x0: base.extent.x0, y0: envelope.y0, x1: envelope.x0, y1: envelope.y1 } },
++    { side: 'MAX_X', rect: { x0: envelope.x1, y0: envelope.y0, x1: base.extent.x1, y1: envelope.y1 } },
++  ]
++  const out: WallStrip[] = []
++  for (const { side, rect } of strips) {
++    if (rect.x1 - rect.x0 < minCell || rect.y1 - rect.y0 < minCell) continue
++    const across = side === 'MIN_X' || side === 'MAX_X'
++    const [e0, e1] = across ? [rect.x0, rect.x1] : [rect.y0, rect.y1]
++    const [s0, s1] = across ? [rect.y0, rect.y1] : [rect.x0, rect.x1]
++    const runs: Array<[number, number]> = []
++    for (const b of base.bands) {
++      if ((b.axis === 'VERTICAL') !== across || b.thickness < wallPx * 0.7 || b.length < wallPx * 2.5) continue
++      const [f0, f1] = across ? [b.bounds.x0, b.bounds.x1] : [b.bounds.y0, b.bounds.y1]
++      const window = Math.max(5, b.thickness * 0.35)
++      if (Math.abs(f0 - e0) > window || Math.abs(f1 - e1) > window) continue
++      const [a0, a1] = across ? [b.bounds.y0, b.bounds.y1] : [b.bounds.x0, b.bounds.x1]
++      if (Math.min(a1, s1) > Math.max(a0, s0)) runs.push([Math.max(a0, s0), Math.min(a1, s1)])
++    }
++    runs.sort((p, q) => p[0] - q[0])
++    let covered = 0
++    let reach = -Infinity
++    for (const [a, b] of runs) {
++      const st = Math.max(a, reach)
++      if (b > st) covered += b - st
++      reach = Math.max(reach, b)
++    }
++    const cover = covered / Math.max(1, s1 - s0)
++    if (cover < WALL_STRIP_BOUNDS.cover) continue
++    const sideName = names[side]
++    const depthM = round6((e1 - e0) * mpp)
++    // the inner edge of the strip is the envelope's side: a body stands on it when its own side lies within a wall of it
++    const back = side === 'MIN_X' ? rect.x1 : side === 'MAX_X' ? rect.x0 : side === 'MIN_Z' ? rect.y1 : rect.y0
++    const backOn = (r: PixelRect): boolean => {
++      const face = side === 'MIN_X' ? r.x0 : side === 'MAX_X' ? r.x1 : side === 'MIN_Z' ? r.y0 : r.y1
++      const [r0, r1] = across ? [r.y0, r.y1] : [r.x0, r.x1]
++      return Math.abs(face - back) <= wallPx && Math.min(r1, s1) - Math.max(r0, s0) > 0
++    }
++    out.push({
++      side,
++      sideName,
++      strip: rect,
++      cover: round6(cover),
++      backOn,
++      gap: {
++        id: stableId('gap', `outer-face-${side}`, { frameId: base.frame.id, strip: rect }),
++        what: `the outer face of the building’s ${sideName} wall`,
++        reason: `the body stops on the inner face of its ${sideName} wall: wall-thick ink ${depthM.toFixed(2)} m deep lies between it and the side the dimension chains state, along ${Math.round(cover * 100)}% of that side; the wall's own thickness is not built there, and the strip is read as no recess, no return and no terrace`,
++        status: 'AMBIGUOUS',
++        frameIds: [base.frame.id],
++      },
++    })
++  }
++  return out
++}
++
++/**
+  * The strips a dimension chain measures beyond the last wall.
+  *
+  * These are the reason an overall depth exceeds a walled depth, and they are
+--- a/packages/reconstruction/src/v2/building.ts
++++ b/packages/reconstruction/src/v2/building.ts
+@@ -27,6 +27,8 @@
+   featureId: string
+   /** The 03R mass id this came from. */
+   sourceMassId: string
++  /** 005Q (N1): the outer faces this body leaves unresolved — it was cut on those walls' inner faces. */
++  outerFacesOpen?: string[]
+   /**
+    * 005L: a storey whose own walls stand on only part of this body — the footprint its plan's walled region stands on
+    * — given apart. A storey not listed here stands on the whole body. The body's rectangle is its lowest storey's.
+--- a/packages/reconstruction/src/v2/emit.ts
++++ b/packages/reconstruction/src/v2/emit.ts
+@@ -188,7 +188,9 @@
+     }
+     // the storey the body was measured on: the one with no footprint of its own (a basement below it may have one)
+     const measuredOn = m.storeys.find((s) => !(m.storeyRects ?? []).some((r) => r.storey === s)) ?? m.storeys[0]
+-    evidence(`ring-${m.id}-${measuredOn}`, 'SOURCE_EXACT', `${(m.x1 - m.x0).toFixed(2)} × ${(m.z1 - m.z0).toFixed(2)} m body from the plan's printed chains and wall bands`)
++    // 005Q (N1): a body cut on a wall's inner face is not the printed chains' body: its ring says which face is open
++    if (m.outerFacesOpen && m.outerFacesOpen.length > 0) evidence(`ring-${m.id}-${measuredOn}`, 'SOURCE_DERIVED', `${(m.x1 - m.x0).toFixed(2)} × ${(m.z1 - m.z0).toFixed(2)} m body cut on a wall's inner face; unresolved: ${m.outerFacesOpen.join('; ')}`)
++    else evidence(`ring-${m.id}-${measuredOn}`, 'SOURCE_EXACT', `${(m.x1 - m.x0).toFixed(2)} × ${(m.z1 - m.z0).toFixed(2)} m body from the plan's printed chains and wall bands`)
+     for (const own of m.storeyRects ?? []) evidence(`ring-${m.id}-${own.storey}`, 'SOURCE_DERIVED', `storey ${own.storey}'s own walls, ${(own.x1 - own.x0).toFixed(2)} × ${(own.z1 - own.z0).toFixed(2)} m: the walled region of that storey's plan, registered onto the body below, where it stands on the body`)
+   }
+ 
+--- a/packages/reconstruction/src/v2/reconstruct-v2.ts
++++ b/packages/reconstruction/src/v2/reconstruct-v2.ts
+@@ -165,6 +165,9 @@
+   consumed: Map<string, EvidenceConsumptionRecord>
+ }
+ 
++/** 005Q (N1): the id prefix of the layout's unresolved outer face (`wallStripsOf` in layout.ts). */
++const OUTER_FACE_GAP = 'gap-outer-face-'
++
+ const viewFamilyOf = (frame: SourceCoordinateFrame): ViewFamily => (frame.roles.projection === 'ORTHOGRAPHIC_PLAN' ? (frame.roles.document === 'SITE_PLAN' ? 'SITE' : 'PLAN') : frame.roles.projection === 'ORTHOGRAPHIC_ELEVATION' ? 'ELEVATION' : frame.roles.projection === 'ORTHOGRAPHIC_SECTION' ? 'SECTION' : frame.roles.projection === 'PERSPECTIVE' ? 'PERSPECTIVE' : 'PAGE')
+ 
+ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV2Result {
+@@ -403,7 +406,10 @@
+     const id = m.role === 'MAIN' ? 'main' : `attached-${layout.masses.filter((x) => x.role !== 'MAIN').indexOf(m)}`
+     const storeys: number[] = []
+     for (let s = m.storeySpan.fromIndex; s <= m.storeySpan.toIndex; s += 1) storeys.push(s)
+-    const featureId = feature('MASS', id, { width: { value: b.x1 - b.x0, low: m.widthM.low, high: m.widthM.high }, depth: { value: z1 - z0, low: m.depthM.low, high: m.depthM.high } }, [], m.widthM.basis === 'MEASURED' ? 'SOURCE_EXACT' : 'SOURCE_DERIVED', m.why, { printed: m.widthM.basis === 'MEASURED', uncertaintyM: 0.02 })
++    // 005Q (N1): a body cut on a wall's inner face (the layout names the face it leaves open) is not SOURCE_EXACT
++    const facesOpen = layout.unresolved.filter((g) => g.id.startsWith(OUTER_FACE_GAP) && m.why.includes(g.id)).map((g) => g.what)
++    const exact = m.widthM.basis === 'MEASURED' && facesOpen.length === 0
++    const featureId = feature('MASS', id, { width: { value: b.x1 - b.x0, low: m.widthM.low, high: m.widthM.high }, depth: { value: z1 - z0, low: m.depthM.low, high: m.depthM.high } }, [], exact ? 'SOURCE_EXACT' : 'SOURCE_DERIVED', m.why, { printed: exact, uncertaintyM: 0.02 })
+     for (const e of m.evidenceIds) record({ evidenceId: e, evidenceKind: 'METRIC', what: 'a chain segment of the body', authority: 'HIGH', featureId, disposition: 'USED_IN_MODEL', reason: 'the body’s span', stage: 'TOPOLOGY' })
+     // 005L: each storey's own footprint over this body, from the support relation: where the storey's walled region
+     // stands on only part of the body, its walls are built there and not copied from the storey below. A storey whose
+@@ -442,7 +448,7 @@
+         pieces.push({ id: pid, role: 'ATTACHED', ...r, storeys: [s], featureId: pf, sourceMassId: m.id, pieceOf: id })
+       })
+     }
+-    return { id, role: m.role === 'MAIN' ? 'MAIN' : 'ATTACHED', x0: round6(b.x0), z0: round6(z0), x1: round6(b.x1), z1: round6(z1), storeys, featureId, sourceMassId: m.id, ...(storeyRects.length > 0 ? { storeyRects } : {}) }
++    return { id, role: m.role === 'MAIN' ? 'MAIN' : 'ATTACHED', x0: round6(b.x0), z0: round6(z0), x1: round6(b.x1), z1: round6(z1), storeys, featureId, sourceMassId: m.id, ...(storeyRects.length > 0 ? { storeyRects } : {}), ...(facesOpen.length > 0 ? { outerFacesOpen: facesOpen } : {}) }
+   })
+   masses.push(...pieces)
+   const main = masses.find((m) => m.role === 'MAIN') ?? masses[0]

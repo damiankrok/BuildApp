@@ -1,0 +1,101 @@
+--- a/packages/reconstruction/src/plan-decomposition.ts
++++ b/packages/reconstruction/src/plan-decomposition.ts
+@@ -561,8 +561,11 @@
+  * first along the axis. The losers hand over their probe positions, so the ink
+  * they were drawn from is still looked at when edges are measured.
+  */
++/** The order thinning keeps lines in: confidence, then the longest chain breaking there, then band length. */
++const lineRank = (l: GridLine): number => l.confidence * 1e9 + Math.min(9999, l.support.chainSpanPx) * 1e3 + Math.min(999, l.support.bandLength)
++
+ function thinLines(lines: readonly GridLine[], minGapPx: number, probeGapPx: number): GridLine[] {
+-  const rank = (l: GridLine): number => l.confidence * 1e9 + Math.min(9999, l.support.chainSpanPx) * 1e3 + Math.min(999, l.support.bandLength)
++  const rank = lineRank
+   const order = [...lines].sort((a, b) => rank(b) - rank(a) || a.px - b.px)
+   const kept: GridLine[] = []
+   for (const line of order) {
+@@ -580,6 +583,74 @@
+   return kept.sort((a, b) => a.px - b.px)
+ }
+ 
++/**
++ * 005Q (C1): one exterior wall is one body edge, on its outer face.
++ *
++ * A dimension chain that ticks on both faces of an exterior wall, and a band reader that splits a wall in two, put two
++ * grid lines a wall's thickness apart on one wall. What happens next depends on how far apart they happen to be: closer
++ * than a cell, thinning keeps the better-supported one — the INNER face whenever the band's axis claim fell to it — and
++ * the envelope snaps onto it; farther, both stay, the wall becomes a cell row of its own and is dropped as a sliver.
++ * Either way the wall's thickness is lost from the building on that side. So, before thinning, the two are made one
++ * line on the outer face, carrying both lines' probes and support, when the drawing evidences all of it:
++ *  - the outer line is the outermost line on its axis, on that side, and a dimension chain ticks on it;
++ *  - one long, wall-thick band lies between the two lines with its two faces on them (a wall, not a partition or a mark);
++ *  - that side of the building is one continuous wall: wall-thick bands with their outer face on that line cover at
++ *    least `OUTER_FACE_BOUNDS.sideCover` of the extent's span across it. A stepped facade — a set-back niche, a porch,
++ *    a garage door between piers — keeps its lines as they are: one line per side cannot say where each piece stands.
++ * The result does not depend on the cell size: the same wall ends as one line on its outer face at any spacing of its
++ * faces. Where thinning would already keep the outer face and hand it the inner one's probes, nothing is done.
++ */
++export const OUTER_FACE_BOUNDS = { sideCover: 0.75 } as const
++function outerFacePairs(lines: readonly GridLine[], bands: readonly Band[], axis: 'X' | 'Y', wallPx: number, snapPx: number, extent: PixelRect, minCellPx: number): GridLine[] {
++  if (lines.length < 2) return [...lines]
++  const vertical = axis === 'X'
++  const walls = bands.filter((b) => (b.axis === 'VERTICAL') === vertical && b.thickness >= wallPx * 0.7)
++  const across = (b: Band): [number, number] => (vertical ? [b.bounds.x0, b.bounds.x1] : [b.bounds.y0, b.bounds.y1])
++  const along = (b: Band): [number, number] => (vertical ? [b.bounds.y0, b.bounds.y1] : [b.bounds.x0, b.bounds.x1])
++  const window = (b: Band): number => Math.max(snapPx, b.thickness * 0.35)
++  const [s0, s1] = vertical ? [extent.y0, extent.y1] : [extent.x0, extent.x1]
++  let out = [...lines].sort((a, b) => a.px - b.px)
++  for (const low of [true, false]) {
++    const outer = low ? out[0] : out[out.length - 1]
++    if (!outer || outer.support.chainIds.length === 0) continue
++    const pair = walls
++      .filter((b) => b.length >= wallPx * 2.5)
++      .map((b) => {
++        const [f0, f1] = across(b)
++        const [o, i] = low ? [f0, f1] : [f1, f0]
++        if (Math.abs(o - outer.px) > window(b)) return undefined
++        const inner = out.find((l) => l !== outer && Math.abs(l.px - i) <= window(b) && (low ? l.px > outer.px : l.px < outer.px))
++        return inner
++      })
++      .find((l) => l !== undefined)
++    if (!pair) continue
++    // where thinning already keeps the outer face and hands it the inner one's probes, there is nothing to do
++    const outerFirst = lineRank(outer) > lineRank(pair) || (lineRank(outer) === lineRank(pair) && outer.px < pair.px)
++    if (Math.abs(pair.px - outer.px) < minCellPx && outerFirst) continue
++    const runs: Array<[number, number]> = walls
++      .filter((b) => Math.abs((low ? across(b)[0] : across(b)[1]) - outer.px) <= window(b))
++      .map((b) => [Math.max(s0, along(b)[0]), Math.min(s1, along(b)[1])] as [number, number])
++      .filter(([a, b]) => b > a)
++    if (unionLength(runs) < OUTER_FACE_BOUNDS.sideCover * Math.max(1, s1 - s0)) continue
++    const merged: GridLine = {
++      ...outer,
++      probesPx: [...new Set([...outer.probesPx, ...pair.probesPx].map((p) => round6(p)))].sort((a, b) => a - b),
++      support: {
++        chainIds: [...new Set([...outer.support.chainIds, ...pair.support.chainIds])].sort(),
++        printedChainIds: [...new Set([...outer.support.printedChainIds, ...pair.support.printedChainIds])].sort(),
++        chainSpanPx: Math.max(outer.support.chainSpanPx, pair.support.chainSpanPx),
++        bandLength: round6(outer.support.bandLength + pair.support.bandLength),
++        bandCoverage: round6(Math.min(1, outer.support.bandCoverage + pair.support.bandCoverage)),
++        bandSpans: outer.support.bandSpans || pair.support.bandSpans,
++      },
++      confidence: Math.max(outer.confidence, pair.confidence),
++      why: `${outer.why}; the same wall's inner face ${round6(Math.abs(pair.px - outer.px))} px in is this line too: one exterior wall, one edge on its outer face (005Q)`,
++    }
++    out = out.filter((l) => l !== outer && l !== pair).concat(merged).sort((a, b) => a.px - b.px)
++  }
++  return out
++}
++
+ /** The stretches of a grid line that wall bands lying on it cover. */
+ function wallIntervals(bands: readonly Band[], axis: 'X' | 'Y', line: GridLine, from: number, to: number, tolerance: number): Array<[number, number]> {
+   const covered: Array<[number, number]> = []
+@@ -1860,8 +1931,8 @@
+ 
+   const minCellPx = opt.minCellM / Math.max(mppX, mppY)
+   const all = override ? undefined : gridLines(chains, inside, extent, options)
+-  let linesX = override ? override.linesX : thinLines(all?.linesX ?? [], minCellPx, wallPx)
+-  let linesY = override ? override.linesY : thinLines(all?.linesY ?? [], minCellPx, wallPx)
++  let linesX = override ? override.linesX : thinLines(outerFacePairs(all?.linesX ?? [], inside, 'X', wallPx, opt.snapPx, extent, minCellPx), minCellPx, wallPx)
++  let linesY = override ? override.linesY : thinLines(outerFacePairs(all?.linesY ?? [], inside, 'Y', wallPx, opt.snapPx, extent, minCellPx), minCellPx, wallPx)
+   const envelope = override ? outlineEnvelope(override, inside, wallPx, registration) : walledEnvelope(inside, linesX, linesY, wallPx, registration)
+   if (envelope === null) {
+     unresolved.push({

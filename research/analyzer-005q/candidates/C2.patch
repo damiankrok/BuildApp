@@ -1,0 +1,165 @@
+--- a/packages/reconstruction/src/boundary-completion.ts
++++ b/packages/reconstruction/src/boundary-completion.ts
+@@ -73,6 +73,9 @@
+   partShare: 0.5,
+   /** At most this many parts judged per plan. */
+   maxParts: 16,
++  /** 005Q (C2) chain strips: a host opening on the far face no wider than this; a run of host wall at least this many walls long. */
++  stripOpeningMaxM: 8,
++  stripRunWalls: 4,
+ } as const
+ 
+ export type CompletionKind = 'ATTACHED_ROOM' | 'BOX_COMPLETION'
+@@ -142,7 +145,7 @@
+   solid: SolidLayer
+   sides: readonly ExtentSideStatement[]
+   /** The frame's dimension chains: room evidence when one measures a part. */
+-  chains: ReadonlyArray<{ axis: 'HORIZONTAL' | 'VERTICAL'; baselinePx: number; ticksPx: readonly number[] }>
++  chains: ReadonlyArray<{ id?: string; axis: 'HORIZONTAL' | 'VERTICAL'; baselinePx: number; ticksPx: readonly number[] }>
+ }
+ 
+ type Interval = [number, number]
+@@ -631,6 +634,135 @@
+       })
+     }
+   }
++  /**
++   * 005Q (C2): the strips a STRONG printed chain states beyond the box, judged against the walls the drawing draws there.
++   *
++   * A stated side the box stops short of, where a chain stating it ticks at the box's edge (the chain itself divides the
++   * building there: 430 | 780 | 400), proposes the strip between the two. The proposal is never a room by itself: the
++   * strip is split along the far face into RUNS of host wall — from a wall piece to a wall piece across nothing but
++   * openings the drawing evidences (glazing, a leaf, a callout, a STRONG bridge, between wall jambs) — and a run is built
++   * only when wall lines at both of its ends return across the strip's depth (wall, and door-sized openings beside a
++   * wall). A post, a blank or dashed mouth, an overhead line, ground with nothing on it ends a run: a terrace, a porch,
++   * a carport, a pergola stays open. Every candidate is recorded, accepted or not, with what decided it.
++   */
++  function chainStrips(): void {
++    const strengthOk = (c: ExtentConflict): boolean => c.strength === 'STRONG'
++    for (const c of conflicts) {
++      if (!strengthOk(c)) continue
++      const horizontal = c.side === 'W' || c.side === 'E'
++      const stating = input.chains.filter((ch) => ch.id !== undefined && c.chainIds.includes(ch.id))
++      const ticked = stating.some((ch) => ch.ticksPx.some((t) => Math.abs(t - c.boxPx) <= W))
++      // the far face: the grid line on the stated side, and the lines across it
++      const faceLines = horizontal ? LX : LY
++      const faceWalls = horizontal ? wallsX : wallsY
++      const fi = faceLines.reduce((best, p, i) => (Math.abs(p - c.extentPx) < Math.abs(faceLines[best] - c.extentPx) ? i : best), 0)
++      const record = (decision: CompletionDecision, reason: string, from: number, to: number, cells: number[] = []): void => {
++        if (parts.length >= B.maxParts) return
++        const [d0, d1] = [Math.min(c.boxPx, c.extentPx), Math.max(c.boxPx, c.extentPx)]
++        const r: PixelRect = horizontal ? { x0: round6(d0), x1: round6(d1), y0: round6(from), y1: round6(to) } : { x0: round6(from), x1: round6(to), y0: round6(d0), y1: round6(d1) }
++        const areaM2 = cells.reduce((a, k) => a + areaOf(k), 0)
++        parts.push({
++          kind: 'ATTACHED_ROOM',
++          decision,
++          reason,
++          cellsBefore: cells.length,
++          rectBefore: r,
++          areaBeforeM2: round6(areaM2),
++          cells: cells.map((k) => ({ ix: k % nx, iy: Math.floor(k / nx) })),
++          rect: cells.length > 0 ? rectOf(cells) : r,
++          areaM2: round6(areaM2),
++          junction: { lengthM: 0, openM: 0, doorM: 0 },
++          sides: { lengthM: 0, wallShare: 0, postShare: 0 },
++          evidence: { glazing: 0, chains: stating.length, vehicleDoors: 0, returns: decision === 'ACCEPTED' ? 2 : 0, strictEncloses: false },
++          weakGaps: [],
++          side: c.side,
++        })
++      }
++      if (!ticked) {
++        for (const st of c.stretches) record('REJECTED', 'CHAIN_STRIP_NO_TICK: no chain stating this side ticks at the box edge — the chain does not divide the building there', st.fromPx, st.toPx)
++        continue
++      }
++      if (Math.abs(faceLines[fi] - c.extentPx) > W / 2) {
++        for (const st of c.stretches) record('REJECTED', 'CHAIN_STRIP_NO_FACE_LINE: no grid line on the stated side to read its face on', st.fromPx, st.toPx)
++        continue
++      }
++      const face = faceWalls[fi]
++      // a host opening: between wall jambs; up to a lintel's width (the vehicle-door convention) on its drawn infill or
++      // its bridge; wider only with a printed callout of its width — a single line across a wide mouth is as often a
++      // paving edge or a slab edge as a door, and it never makes a facade by itself
++      const hostOpening = (g: BoundaryGap): boolean =>
++        g.jambs[0] !== 'POST' &&
++        g.jambs[1] !== 'POST' &&
++        g.widthM <= B.stripOpeningMaxM &&
++        (g.callout !== undefined || (g.widthM <= B.vehicleMaxM && (g.cls === 'OPENING_SUPPORTED' || g.boundary === 'STRONG' || g.signature === 'GLAZING' || g.signature === 'LEAF_AXIS' || g.signature === 'LEAF_FACE')))
++      // a door in a return: a door wide at most, a wall at one jamb at least, something drawn across or a bridge
++      const returnOpening = (g: BoundaryGap): boolean => g.widthM <= B.vehicleMaxM && (g.jambs[0] === 'WALL' || g.jambs[1] === 'WALL') && (g.signature !== 'BLANK' || g.boundary !== 'NONE')
++      const [d0, d1] = [Math.min(c.boxPx, c.extentPx), Math.max(c.boxPx, c.extentPx)]
++      const across = horizontal ? LY : LX
++      const acrossWalls = horizontal ? wallsY : wallsX
++      const returnAt = (end: number): number | undefined => {
++        let best: { p: number; d: number } | undefined
++        across.forEach((p, i) => {
++          if (Math.abs(p - end) > 1.5 * W) return
++          const line = acrossWalls[i]
++          const wall = line.pieces.filter((q) => q.kind === 'WALL').map((q) => [q.from, q.to] as Interval)
++          const doors = line.gaps.filter(returnOpening).map((g) => [g.fromPx, g.toPx] as Interval)
++          const cover = coverOf([...wall, ...doors], d0, d1) / Math.max(1, d1 - d0)
++          if (cover >= B.returnCover && (!best || Math.abs(p - end) < best.d)) best = { p, d: Math.abs(p - end) }
++        })
++        return best?.p
++      }
++      for (const st of c.stretches) {
++        // runs of host wall along the far face, within the stretch
++        type Ev = { from: number; to: number; wall?: boolean; post?: boolean; gap?: BoundaryGap }
++        const evs: Ev[] = [
++          ...face.pieces.filter((q) => Math.min(q.to, st.toPx) > Math.max(q.from, st.fromPx)).map((q) => ({ from: q.from, to: q.to, wall: q.kind === 'WALL', post: q.kind === 'POST' })),
++          ...face.gaps.filter((g) => Math.min(g.toPx, st.toPx) > Math.max(g.fromPx, st.fromPx)).map((g) => ({ from: g.fromPx, to: g.toPx, gap: g })),
++        ].sort((p, q) => p.from - q.from || p.to - q.to)
++        const runs: Array<[number, number]> = []
++        let start: number | undefined
++        let lastWall: number | undefined
++        for (const e of evs) {
++          if (e.wall) {
++            if (start === undefined) start = e.from
++            lastWall = e.to
++          } else if (e.gap && start !== undefined && hostOpening(e.gap)) {
++            continue
++          } else {
++            if (start !== undefined && lastWall !== undefined && lastWall - start >= B.stripRunWalls * W) runs.push([start, lastWall])
++            start = undefined
++            lastWall = undefined
++          }
++        }
++        if (start !== undefined && lastWall !== undefined && lastWall - start >= B.stripRunWalls * W) runs.push([start, lastWall])
++        if (runs.length === 0) {
++          record('REJECTED', 'CHAIN_STRIP_NO_HOST: the far face carries no run of wall from jamb to jamb across evidenced openings — open, posts or ground: a terrace, a porch, a carport or a yard stays open', st.fromPx, st.toPx)
++          continue
++        }
++        for (const [a, b] of runs) {
++          const ra = returnAt(a)
++          const rb = returnAt(b)
++          if (ra === undefined || rb === undefined || rb - ra < B.stripRunWalls * W) {
++            record('REJECTED', `CHAIN_STRIP_NO_RETURNS: ${ra === undefined ? 'no' : 'a'} wall line returns across the strip at ${Math.round(a)} and ${rb === undefined ? 'no' : 'a'} at ${Math.round(b)} — a facade piece without its sides`, a, b)
++            continue
++          }
++          const cells: number[] = []
++          for (let k = 0; k < nx * ny; k += 1) {
++            const r = rectOfCell(k)
++            const [u0, u1, v0, v1] = horizontal ? [r.y0, r.y1, r.x0, r.x1] : [r.x0, r.x1, r.y0, r.y1]
++            const inRun = u0 >= ra - 1e-6 && u1 <= rb + 1e-6
++            const inDepth = (v0 + v1) / 2 > d0 && (v0 + v1) / 2 < d1
++            if (inRun && inDepth && builtA[k] === 0 && accepted[k] === 0 && acceptedOut[k] === 0) cells.push(k)
++          }
++          if (cells.length === 0) continue
++          record('ACCEPTED', `CHAIN_STRIP: the ${c.side} side the chains state ${c.gapM.toFixed(2)} m past the box, between returns at ${Math.round(ra)} and ${Math.round(rb)}: a run of wall with evidenced openings on its far face`, ra, rb, cells)
++          addedM2 += cells.reduce((t, k) => t + areaOf(k), 0)
++          for (const k of cells) acceptedOut[k] = 1
++          c.decision = 'ACCEPTED'
++        }
++      }
++    }
++  }
+   // Largest first (B5F-1): the cap bounds the work, and wall slivers in scan order must not use it up before a room.
+   const largestFirst = (groups: number[][]): number[][] =>
+     groups.map((g) => ({ g, a: g.reduce((t, k) => t + areaOf(k), 0) })).sort((u, v) => v.a - u.a || u.g[0] - v.g[0]).map((x) => x.g)
+@@ -647,6 +779,7 @@
+       else judge('BOX_COMPLETION', members, (k) => builtA[k] === 1)
+     }
+   }
++  chainStrips()
+   // a side no judged part reached cannot claim that nothing enclosed reaches it while parts went unjudged
+   if (unjudged > 0) for (const c of conflicts) if (c.decision === 'ZONE') c.decision = 'INCONCLUSIVE'
+   for (const c of conflicts) {
