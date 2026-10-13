@@ -1,0 +1,293 @@
+{
+ "matrix": "stage-reports/artifacts/analyzer-005p/dev-matrix.json",
+ "schema": "buildapp.005p.gates",
+ "variants": {
+  "N1": {
+   "admissible": true,
+   "decisionPathChanges": 2,
+   "gates": {
+    "G1_no_new_false_confident_scale": {
+     "cases": [],
+     "newlyCompletedUnknownTruth": [],
+     "pass": true
+    },
+    "G2_no_known_good_model_change": {
+     "cases": [],
+     "pass": true
+    },
+    "G3_known_good_path_change_sound": {
+     "cases": {
+      "rarytasy-eoze": {
+       "verdict": "SOUND",
+       "why": "Trigger (OUTER_TOTALS), accusers (55ef3f8509 1601/720 px, a822fd5d2d 760/342 px), outcome (REPLACED), chosen reading (2.222222 cm/px), chosenRefuted (0.114611) and the model (2f342a941e) are P0's. Only the recorded registrationRefuted falls 0.370799 -> 0.334843. The 0.035956 difference is exactly one statement's share of the 1334.95 px stated: metric-dimension-660de2eb26, 48 px, TOKEN 155 vs EXTERNAL 100 (LEADS), transcription 100. P0 let the classic misread 155 refute the registration; under N1 a contested statement refutes the registration only if no confident reading fits, and 100 fits. The share can only fall (monotone), and here it falls by a misread the transcription confirms. Recorded, not hidden."
+      }
+     },
+     "pass": true
+    },
+    "G4_no_semantic_change": {
+     "copySwitchOnCompletedRow": [],
+     "pass": true,
+     "semanticChange": []
+    },
+    "G5_no_new_adverse_refusal": {
+     "note": "no refusal reason changed to assert another scale: rows whose failure.json changed are listed with their messages in semantic-delta.json and judged there",
+     "pass": true,
+     "refusalChanged": []
+    },
+    "G6_no_false_closure_or_floor": {
+     "newlyCompleted": {
+      "dom-w-glogownikach": {
+       "bodies": [
+        "COVERED_TERRACE:1",
+        "COVERED_TERRACE:2",
+        "FLUSH_ATTACHED:0",
+        "FLUSH_ATTACHED:0",
+        "FLUSH_ATTACHED:0",
+        "FLUSH_ATTACHED:2",
+        "FLUSH_ATTACHED:4",
+        "UNKNOWN:1",
+        "UNKNOWN:1"
+       ],
+       "levels": 1
+      }
+     },
+     "pass": true
+    },
+    "G7_determinism": {
+     "note": "byte comparison of the repeat run in compare_runs.py; recorded in the report",
+     "pass": true
+    },
+    "G8_glogownikach": {
+     "conflictTriggers": [],
+     "outcome": "COMPLETED",
+     "pass": true,
+     "scale": 2.6234,
+     "verdict": "ALGORITHMIC_FAIL"
+    },
+    "G9_monotone_triggers": {
+     "newTriggers": {},
+     "pass": true
+    }
+   },
+   "knownGoodPathChanges": 1
+  },
+  "P1": {
+   "admissible": false,
+   "decisionPathChanges": 2,
+   "gates": {
+    "G1_no_new_false_confident_scale": {
+     "cases": [],
+     "newlyCompletedUnknownTruth": [],
+     "pass": true
+    },
+    "G2_no_known_good_model_change": {
+     "cases": [],
+     "pass": true
+    },
+    "G3_known_good_path_change_sound": {
+     "cases": {
+      "rarytasy-eoze": {
+       "verdict": "NOT_SOUND",
+       "why": "The new AS_READ_REFUTATION states that the registration (2.2237 cm/px on X) contradicts 82% of the chain length as read. It does so because the DROP view removed five contested X statements (918 px), among them metric-dimension-55ef3f8509 (720 px: TOKEN 1601, LATTICE and EXTERNAL 1600, transcription 1600), whose readers disagree by 1 cm and all fit the same scale. On the full evidence the registration contradicts 37.1% (P0). The accusation's conclusion (2.222222) is the right scale, but the stated reason misreports the evidence: the share is a denominator artifact, the accusation now rests on one statement on one chain (760/342 px) instead of two long readings on two axes and two chains, and the X axis it no longer measures is the axis the registration was right on. Same model hash; a refusal or replacement whose recorded reason misstates the evidence is what G3 and P1's coherence rule exclude."
+      }
+     },
+     "pass": false
+    },
+    "G4_no_semantic_change": {
+     "copySwitchOnCompletedRow": [],
+     "pass": true,
+     "semanticChange": []
+    },
+    "G5_no_new_adverse_refusal": {
+     "note": "no refusal reason changed to assert another scale: rows whose failure.json changed are listed with their messages in semantic-delta.json and judged there",
+     "pass": true,
+     "refusalChanged": []
+    },
+    "G6_no_false_closure_or_floor": {
+     "newlyCompleted": {
+      "dom-w-glogownikach": {
+       "bodies": [
+        "COVERED_TERRACE:1",
+        "COVERED_TERRACE:2",
+        "FLUSH_ATTACHED:0",
+        "FLUSH_ATTACHED:0",
+        "FLUSH_ATTACHED:0",
+        "FLUSH_ATTACHED:2",
+        "FLUSH_ATTACHED:4",
+        "UNKNOWN:1",
+        "UNKNOWN:1"
+       ],
+       "levels": 1
+      }
+     },
+     "pass": true
+    },
+    "G7_determinism": {
+     "note": "not repeated (only the chosen variant is)",
+     "pass": null
+    },
+    "G8_glogownikach": {
+     "conflictTriggers": [],
+     "outcome": "COMPLETED",
+     "pass": true,
+     "scale": 2.6234,
+     "verdict": "ALGORITHMIC_FAIL"
+    },
+    "P1_coherence_new_triggers_sound": {
+     "cases": {
+      "rarytasy-eoze": {
+       "verdict": "NOT_SOUND",
+       "why": "The new AS_READ_REFUTATION states that the registration (2.2237 cm/px on X) contradicts 82% of the chain length as read. It does so because the DROP view removed five contested X statements (918 px), among them metric-dimension-55ef3f8509 (720 px: TOKEN 1601, LATTICE and EXTERNAL 1600, transcription 1600), whose readers disagree by 1 cm and all fit the same scale. On the full evidence the registration contradicts 37.1% (P0). The accusation's conclusion (2.222222) is the right scale, but the stated reason misreports the evidence: the share is a denominator artifact, the accusation now rests on one statement on one chain (760/342 px) instead of two long readings on two axes and two chains, and the X axis it no longer measures is the axis the registration was right on. Same model hash; a refusal or replacement whose recorded reason misstates the evidence is what G3 and P1's coherence rule exclude."
+      }
+     },
+     "pass": false
+    }
+   },
+   "knownGoodPathChanges": 1
+  },
+  "P2": {
+   "admissible": false,
+   "decisionPathChanges": 5,
+   "gates": {
+    "G1_no_new_false_confident_scale": {
+     "cases": [],
+     "newlyCompletedUnknownTruth": [],
+     "pass": true
+    },
+    "G2_no_known_good_model_change": {
+     "cases": [],
+     "pass": true
+    },
+    "G3_known_good_path_change_sound": {
+     "cases": {
+      "rarytasy-eoze": {
+       "verdict": "NOT_SOUND",
+       "why": "The new AS_READ_REFUTATION states that the registration (2.2237 cm/px on X) contradicts 82% of the chain length as read. It does so because the DROP view removed five contested X statements (918 px), among them metric-dimension-55ef3f8509 (720 px: TOKEN 1601, LATTICE and EXTERNAL 1600, transcription 1600), whose readers disagree by 1 cm and all fit the same scale. On the full evidence the registration contradicts 37.1% (P0). The accusation's conclusion (2.222222) is the right scale, but the stated reason misreports the evidence: the share is a denominator artifact, the accusation now rests on one statement on one chain (760/342 px) instead of two long readings on two axes and two chains, and the X axis it no longer measures is the axis the registration was right on. Same model hash; a refusal or replacement whose recorded reason misstates the evidence is what G3 and P1's coherence rule exclude."
+      }
+     },
+     "pass": false
+    },
+    "G4_no_semantic_change": {
+     "copySwitchOnCompletedRow": [
+      "dom-pod-jarzabem"
+     ],
+     "pass": false,
+     "semanticChange": [
+      "dom-pod-jarzabem"
+     ]
+    },
+    "G5_no_new_adverse_refusal": {
+     "note": "no refusal reason changed to assert another scale: rows whose failure.json changed are listed with their messages in semantic-delta.json and judged there",
+     "pass": true,
+     "refusalChanged": [
+      "dom-pod-milorzebem",
+      "dom-w-akebiach"
+     ]
+    },
+    "G6_no_false_closure_or_floor": {
+     "newlyCompleted": {
+      "dom-w-glogownikach": {
+       "bodies": [
+        "COVERED_TERRACE:1",
+        "COVERED_TERRACE:2",
+        "FLUSH_ATTACHED:0",
+        "FLUSH_ATTACHED:0",
+        "FLUSH_ATTACHED:0",
+        "FLUSH_ATTACHED:2",
+        "FLUSH_ATTACHED:4",
+        "UNKNOWN:1",
+        "UNKNOWN:1"
+       ],
+       "levels": 1
+      }
+     },
+     "pass": true
+    },
+    "G7_determinism": {
+     "note": "not repeated (only the chosen variant is)",
+     "pass": null
+    },
+    "G8_glogownikach": {
+     "conflictTriggers": [],
+     "outcome": "COMPLETED",
+     "pass": true,
+     "scale": 2.6234,
+     "verdict": "ALGORITHMIC_FAIL"
+    }
+   },
+   "knownGoodPathChanges": 1
+  },
+  "P3": {
+   "admissible": false,
+   "decisionPathChanges": 5,
+   "gates": {
+    "G1_no_new_false_confident_scale": {
+     "cases": [],
+     "newlyCompletedUnknownTruth": [],
+     "pass": true
+    },
+    "G2_no_known_good_model_change": {
+     "cases": [],
+     "pass": true
+    },
+    "G3_known_good_path_change_sound": {
+     "cases": {
+      "rarytasy-eoze": {
+       "verdict": "NOT_SOUND",
+       "why": "The new AS_READ_REFUTATION states that the registration (2.2237 cm/px on X) contradicts 82% of the chain length as read. It does so because the DROP view removed five contested X statements (918 px), among them metric-dimension-55ef3f8509 (720 px: TOKEN 1601, LATTICE and EXTERNAL 1600, transcription 1600), whose readers disagree by 1 cm and all fit the same scale. On the full evidence the registration contradicts 37.1% (P0). The accusation's conclusion (2.222222) is the right scale, but the stated reason misreports the evidence: the share is a denominator artifact, the accusation now rests on one statement on one chain (760/342 px) instead of two long readings on two axes and two chains, and the X axis it no longer measures is the axis the registration was right on. Same model hash; a refusal or replacement whose recorded reason misstates the evidence is what G3 and P1's coherence rule exclude."
+      }
+     },
+     "pass": false
+    },
+    "G4_no_semantic_change": {
+     "copySwitchOnCompletedRow": [
+      "dom-pod-jarzabem"
+     ],
+     "pass": false,
+     "semanticChange": [
+      "dom-pod-jarzabem"
+     ]
+    },
+    "G5_no_new_adverse_refusal": {
+     "note": "no refusal reason changed to assert another scale: rows whose failure.json changed are listed with their messages in semantic-delta.json and judged there",
+     "pass": true,
+     "refusalChanged": [
+      "dom-pod-milorzebem",
+      "dom-w-akebiach"
+     ]
+    },
+    "G6_no_false_closure_or_floor": {
+     "newlyCompleted": {
+      "dom-w-glogownikach": {
+       "bodies": [
+        "COVERED_TERRACE:1",
+        "COVERED_TERRACE:2",
+        "FLUSH_ATTACHED:0",
+        "FLUSH_ATTACHED:0",
+        "FLUSH_ATTACHED:0",
+        "FLUSH_ATTACHED:2",
+        "FLUSH_ATTACHED:4",
+        "UNKNOWN:1",
+        "UNKNOWN:1"
+       ],
+       "levels": 1
+      }
+     },
+     "pass": true
+    },
+    "G7_determinism": {
+     "note": "not repeated (only the chosen variant is)",
+     "pass": null
+    },
+    "G8_glogownikach": {
+     "conflictTriggers": [],
+     "outcome": "COMPLETED",
+     "pass": true,
+     "scale": 2.6234,
+     "verdict": "ALGORITHMIC_FAIL"
+    }
+   },
+   "knownGoodPathChanges": 1
+  }
+ }
+}

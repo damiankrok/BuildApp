@@ -1,0 +1,26 @@
+{
+ "note": "written per case before the gate script was run on the matrix; the only human input to gates.py",
+ "schema": "buildapp.005p.soundness",
+ "verdicts": {
+  "N1:rarytasy-eoze": {
+   "verdict": "SOUND",
+   "why": "Trigger (OUTER_TOTALS), accusers (55ef3f8509 1601/720 px, a822fd5d2d 760/342 px), outcome (REPLACED), chosen reading (2.222222 cm/px), chosenRefuted (0.114611) and the model (2f342a941e) are P0's. Only the recorded registrationRefuted falls 0.370799 -> 0.334843. The 0.035956 difference is exactly one statement's share of the 1334.95 px stated: metric-dimension-660de2eb26, 48 px, TOKEN 155 vs EXTERNAL 100 (LEADS), transcription 100. P0 let the classic misread 155 refute the registration; under N1 a contested statement refutes the registration only if no confident reading fits, and 100 fits. The share can only fall (monotone), and here it falls by a misread the transcription confirms. Recorded, not hidden."
+  },
+  "P1-trigger:rarytasy-eoze": {
+   "verdict": "NOT_SOUND",
+   "why": "The new AS_READ_REFUTATION states that the registration (2.2237 cm/px on X) contradicts 82% of the chain length as read. It does so because the DROP view removed five contested X statements (918 px), among them metric-dimension-55ef3f8509 (720 px: TOKEN 1601, LATTICE and EXTERNAL 1600, transcription 1600), whose readers disagree by 1 cm and all fit the same scale. On the full evidence the registration contradicts 37.1% (P0). The accusation's conclusion (2.222222) is the right scale, but the stated reason misreports the evidence: the share is a denominator artifact, the accusation now rests on one statement on one chain (760/342 px) instead of two long readings on two axes and two chains, and the X axis it no longer measures is the axis the registration was right on. Same model hash; a refusal or replacement whose recorded reason misstates the evidence is what G3 and P1's coherence rule exclude."
+  },
+  "P1:rarytasy-eoze": {
+   "verdict": "NOT_SOUND",
+   "why": "The new AS_READ_REFUTATION states that the registration (2.2237 cm/px on X) contradicts 82% of the chain length as read. It does so because the DROP view removed five contested X statements (918 px), among them metric-dimension-55ef3f8509 (720 px: TOKEN 1601, LATTICE and EXTERNAL 1600, transcription 1600), whose readers disagree by 1 cm and all fit the same scale. On the full evidence the registration contradicts 37.1% (P0). The accusation's conclusion (2.222222) is the right scale, but the stated reason misreports the evidence: the share is a denominator artifact, the accusation now rests on one statement on one chain (760/342 px) instead of two long readings on two axes and two chains, and the X axis it no longer measures is the axis the registration was right on. Same model hash; a refusal or replacement whose recorded reason misstates the evidence is what G3 and P1's coherence rule exclude."
+  },
+  "P2:rarytasy-eoze": {
+   "verdict": "NOT_SOUND",
+   "why": "The new AS_READ_REFUTATION states that the registration (2.2237 cm/px on X) contradicts 82% of the chain length as read. It does so because the DROP view removed five contested X statements (918 px), among them metric-dimension-55ef3f8509 (720 px: TOKEN 1601, LATTICE and EXTERNAL 1600, transcription 1600), whose readers disagree by 1 cm and all fit the same scale. On the full evidence the registration contradicts 37.1% (P0). The accusation's conclusion (2.222222) is the right scale, but the stated reason misreports the evidence: the share is a denominator artifact, the accusation now rests on one statement on one chain (760/342 px) instead of two long readings on two axes and two chains, and the X axis it no longer measures is the axis the registration was right on. Same model hash; a refusal or replacement whose recorded reason misstates the evidence is what G3 and P1's coherence rule exclude."
+  },
+  "P3:rarytasy-eoze": {
+   "verdict": "NOT_SOUND",
+   "why": "The new AS_READ_REFUTATION states that the registration (2.2237 cm/px on X) contradicts 82% of the chain length as read. It does so because the DROP view removed five contested X statements (918 px), among them metric-dimension-55ef3f8509 (720 px: TOKEN 1601, LATTICE and EXTERNAL 1600, transcription 1600), whose readers disagree by 1 cm and all fit the same scale. On the full evidence the registration contradicts 37.1% (P0). The accusation's conclusion (2.222222) is the right scale, but the stated reason misreports the evidence: the share is a denominator artifact, the accusation now rests on one statement on one chain (760/342 px) instead of two long readings on two axes and two chains, and the X axis it no longer measures is the axis the registration was right on. Same model hash; a refusal or replacement whose recorded reason misstates the evidence is what G3 and P1's coherence rule exclude."
+  }
+ }
+}
