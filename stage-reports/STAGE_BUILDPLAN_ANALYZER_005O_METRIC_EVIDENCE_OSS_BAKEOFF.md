@@ -412,7 +412,7 @@ The corpus is easier for PP-OCRv6 than real drawings (100 % vs 69 % exact). It m
 
 | gate | result |
 | --- | --- |
-| production freeze | `node research/analyzer-005o/freeze-manifest.mjs check stage-reports/artifacts/analyzer-005o/production-freeze-start.json` → **FREEZE: IDENTICAL** at the final HEAD (`production-freeze-end.txt`) |
+| production freeze | `node research/analyzer-005o/freeze-manifest.mjs check stage-reports/artifacts/analyzer-005o/production-freeze-start.json` → **FREEZE: IDENTICAL** at the final HEAD (`production-freeze-end.md`) |
 | research isolation | `tests/architecture/research-isolation.test.ts`, 005O block: no production import of the harness; the harness tracks only `.py .ts .mjs .json .md`, with no image payload; every pixel writer refuses an output inside the repository (runtime guard, asserted); the generator names no truth, label or sheet path; the logic corpus runs and every mutation is killed |
 | commands | `npm run typecheck`, `npm test`, `npm run build`, `npm run e2e`: §P |
 | determinism | **true reruns of the same view**: M1/peek-M1, M1P/peek-M1P and M3/peek-M3 give identical glogownikach models (`b7c86aac…`), and the review's independent replay into scratch reproduced `model.json` `b7c86aac` and `program.json` `16f455c1`. M1 and M3 views are byte-identical on regeneration. M0 controls are identical on 44/44. Equal outputs across different variants show only that the variants agree |
@@ -560,9 +560,14 @@ git checkout -- stage-reports/artifacts   # e2e rewrites tracked evidence PNGs o
 | `npm test` | 175 files passed, 1 skipped; 2 329 tests passed, 11 skipped (incl. the 005O research-isolation block, 34/34) |
 | `npm run build` | pass |
 | `npm run e2e` | 47/47 passed |
-| production freeze | **FREEZE: IDENTICAL** (`production-freeze-end.txt`) |
+| production freeze | **FREEZE: IDENTICAL** (`production-freeze-end.md`) |
 
-**CI.** The closing commit's run is named in the handoff; a report cannot carry the run of its own commit.
+**CI.** The first closing push, `1a0f8ab`, failed one job: run 38325831296, "Core / Analyzer / Reconstruction", in its unit-test
+step. The cause was the 005O isolation test. It allows only `.py .ts .mjs .json .md` under the 005O harness and artifacts,
+and the end-of-stage freeze record had been committed as `production-freeze-end.txt`. The local run had not caught it
+because the file was still untracked then. The record is now `production-freeze-end.md`; the test is unchanged, and it
+passes on the staged tree. Every other job of that run was green. The closing commit's own run is named in the handoff,
+since a report cannot carry the run of its own commit.
 
 ## Q. Verdict
 
