@@ -522,3 +522,47 @@ describe('005O production cannot reach the metric bake-off, and the bake-off com
     expect((out.match(/KILLED/g) ?? []).length).toBe(4)
   })
 })
+
+/**
+ * BUILDPLAN-ANALYZER-005P — the consumer-scoped bake-off is research. Its harness (`research/analyzer-005p/`) swaps a
+ * copy of `plan-resolution.ts` in for one replay process (a Vite alias written OUTSIDE the repository), with a policy
+ * file naming, per consumer of the as-printed reading, how a contested statement is read. Production cannot reach it,
+ * it commits no pixel, and its policy generator reads no truth: the transcriptions meet the variants only in the scorer.
+ */
+describe('005P production cannot reach the consumer-scoped bake-off, and the bake-off reads no truth before scoring', () => {
+  const HARNESS = /research\/analyzer-005p|consumer-harness|AS_PRINTED_POLICY_005P|policy_views/i
+
+  it('no production source imports research/analyzer-005p or names its harness', () => {
+    const offenders: string[] = []
+    for (const f of productionSources()) {
+      const text = read(f)
+      for (const spec of importsOf(text)) if (/analyzer-005p/.test(spec)) offenders.push(`${f} imports ${spec}`)
+      if (HARNESS.test(codeOf(text))) offenders.push(`${f} names the 005P harness`)
+    }
+    expect(offenders).toEqual([])
+  })
+
+  it('the 005P harness and artifacts track only code and text — no crop, sheet, page, model or archive', () => {
+    const tracked = execFileSync('git', ['ls-files'], { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(Boolean)
+    const harness = tracked.filter((f) => f.startsWith('research/analyzer-005p/') || f.startsWith('stage-reports/artifacts/analyzer-005p/'))
+    expect(harness.length).toBeGreaterThan(0)
+    expect(harness.filter((f) => !/\.(py|ts|mjs|json|md)$/i.test(f))).toEqual([])
+    for (const f of harness) {
+      const text = read(f)
+      expect(text, f).not.toMatch(/(data:(image|application)\/[\w.+-]+;base64,|iVBORw0KGgo|\/9j\/4|UklGR|R0lGOD)[A-Za-z0-9+/]{40,}/)
+      expect(text, f).not.toMatch(/[A-Za-z0-9+/]{256,}={0,2}/)
+      expect(statSync(join(ROOT, f)).size, f).toBeLessThanOrEqual(4 * 2 ** 20)
+    }
+  })
+
+  it('the harness and the policy files are written outside the repository', () => {
+    expect(codeOf(read('research/analyzer-005p/consumer-harness.mjs'))).toMatch(/work\.startsWith\(REPO\)\) throw/)
+    expect(read('research/analyzer-005p/policy_views.py')).toMatch(/startswith\(os\.path\.abspath\(os\.path\.join\(HERE, '\.\.', '\.\.'\)\)\):\n\s+sys\.exit\(/)
+  })
+
+  it('the policy generator and the harness read no truth: no transcription, truth file or label sheet is named in their code', () => {
+    const code = read('research/analyzer-005p/policy_views.py').replace(/"""[\s\S]*?"""/g, ' ').replace(/#.*$/gm, ' ')
+    expect(code).not.toMatch(/truth|transcri|labels[/'"]|sheet/i)
+    for (const f of ['consumer-harness.mjs', 'replay.mjs']) expect(codeOf(read(`research/analyzer-005p/${f}`)), f).not.toMatch(/truth|transcriptions\.json|sheet-key/i)
+  })
+})

@@ -83,9 +83,11 @@ import { composeStructuralLayout } from './structural.js'
 import type { StructuralPassOptions, StructuralPassResult } from './structural.js'
 import { groundStoreyOf, ringArea, ringBounds } from './structural-layout.js'
 import type { AlternativeGroup, LayoutConflict, LayoutGateReason } from './structural-layout.js'
+import { statementContests } from './statement-contest.js'
+import type { StatementContest } from './statement-contest.js'
 import { worldFrameFrom } from './v2/frame.js'
 
-export const PLAN_RESOLVER_VERSION = '1.4.0' as const
+export const PLAN_RESOLVER_VERSION = '1.5.0' as const
 
 /** Counts, never time: a slower device must reach the same answer. */
 export const RESOLVER_BUDGET = { copies: 4, decompositions: 24, compositions: 4 } as const
@@ -181,12 +183,16 @@ export type ResolverProgress = (event: { stage: 1 | 2; index: number; total: num
 // scale readings
 // ---------------------------------------------------------------------------
 
-/** A stated span on one frame: a chain segment carrying a printed number. */
-type Statement = { evidence: MetricEvidence; axis: 'X' | 'Y'; pixelLength: number; firstReadCm?: number }
+/**
+ * A stated span on one frame: a chain segment carrying a printed number. `contest` says what the statement's confident
+ * readers of the same ink read (1.5.0, `statement-contest.ts`): an observation, which only the source-conflict test uses.
+ */
+type Statement = { evidence: MetricEvidence; axis: 'X' | 'Y'; pixelLength: number; firstReadCm?: number; contest: StatementContest }
 
 function statementsOn(metrics: MetricEvidenceSet, frameId: string): Statement[] {
   const byId = new Map(metrics.evidence.map((e) => [e.id, e]))
   const tokens = new Map(metrics.ocrTokens.map((t) => [t.id, t]))
+  const contestOf = statementContests(metrics)
   const out: Statement[] = []
   for (const chain of metrics.chains) {
     if (chain.frameId !== frameId) continue
@@ -198,7 +204,7 @@ function statementsOn(metrics: MetricEvidenceSet, frameId: string): Statement[] 
       const token = evidence.ocrTokenIds.length === 1 ? tokens.get(evidence.ocrTokenIds[0]) : undefined
       // A leading zero is a trailing zero read upside down (005B): no dimension is printed with one.
       const firstReadCm = token && /^[1-9]\d{1,4}$/.test(token.text) ? Number(token.text) : undefined
-      out.push({ evidence, axis: chain.axis === 'HORIZONTAL' ? 'X' : 'Y', pixelLength: segment.pixelLength, firstReadCm })
+      out.push({ evidence, axis: chain.axis === 'HORIZONTAL' ? 'X' : 'Y', pixelLength: segment.pixelLength, firstReadCm, contest: contestOf(evidence, token) })
     }
   }
   return out.sort((a, b) => (a.evidence.id < b.evidence.id ? -1 : a.evidence.id > b.evidence.id ? 1 : 0))
@@ -221,15 +227,43 @@ const zeroSubstitution = (s: Statement): number[] => (s.evidence.origin === 'REA
  */
 const asRead = (s: Statement): number[] => (s.evidence.origin === 'READ' && s.evidence.derivation?.dependsOnScale ? [] : zeroSubstitution(s))
 
+/**
+ * How a decision may read a CONTESTED statement — one whose confident readers of the same ink read different values
+ * (1.5.0, BUILDPLAN-ANALYZER-005P). Only the source-conflict test asks; every other consumer reads AS_PRINTED.
+ *
+ *   AS_PRINTED  the value as printed and read (`asRead`), whatever the contest
+ *   ANY_FITS    the statement may have been printed as any of its confident readings: it fits a scale when ONE does
+ *   ALL_FIT     it fits a scale only when EVERY confident reading does
+ *
+ * Doubt never helps the accuser: the registration is refuted by a contested statement only if no reading fits it
+ * (ANY_FITS) and defended by it if one does; a rival scale is spared by it, and an accusation joined by it, only if every
+ * reading fits that scale (ALL_FIT). A statement the incumbent reads as nothing (`asRead` empty) stays nothing: a contest
+ * never adds a reading, and no reader's value becomes a statement of its own.
+ */
+type Doubt = 'AS_PRINTED' | 'ANY_FITS' | 'ALL_FIT'
+
+/** The readings a decision weighs for a statement under a doubt policy: as read, or (contested) every confident reading too. */
+const readingsUnder = (s: Statement, doubt: Doubt): number[] => {
+  const read = asRead(s)
+  if (doubt === 'AS_PRINTED' || !s.contest.contested || read.length === 0) return read
+  return [...new Set([...read, ...s.contest.values])].sort((a, b) => a - b)
+}
+
+/** Does a statement fit a scale under a doubt policy? A statement with no as-read value fits nothing. */
+const fitsUnder = (s: Statement, cmPerPx: number, tolerancePx: number, doubt: Doubt): boolean => {
+  const read = readingsUnder(s, doubt)
+  const fits = (cm: number): boolean => agrees(cm, s.pixelLength, cmPerPx, tolerancePx)
+  return read.length > 0 && (doubt === 'ALL_FIT' && s.contest.contested ? read.every(fits) : read.some(fits))
+}
+
 /** Share of the as-read chain length a scale contradicts (per axis), over the statements that carry an as-read value. */
-function refutedShareAsRead(statements: readonly Statement[], cmPerPxOn: (axis: 'X' | 'Y') => number, tolerancePx: number): number {
+function refutedShareAsRead(statements: readonly Statement[], cmPerPxOn: (axis: 'X' | 'Y') => number, tolerancePx: number, doubt: Doubt = 'AS_PRINTED'): number {
   let stated = 0
   let refuted = 0
   for (const s of statements) {
-    const read = asRead(s)
-    if (read.length === 0) continue
+    if (asRead(s).length === 0) continue
     stated += s.pixelLength
-    if (!read.some((cm) => agrees(cm, s.pixelLength, cmPerPxOn(s.axis), tolerancePx))) refuted += s.pixelLength
+    if (!fitsUnder(s, cmPerPxOn(s.axis), tolerancePx, doubt)) refuted += s.pixelLength
   }
   return stated === 0 ? 0 : round6(refuted / stated)
 }
@@ -822,12 +856,52 @@ export function resolutionRecord(resolution: PlanResolution): Record<string, num
  * which the printed readings prefer another scale is.
  */
 export type SourceConflictTrigger = 'AS_READ_REFUTATION' | 'PARTIAL_BINDING' | 'OUTER_TOTALS'
-export type SourceConflict = { triggers: SourceConflictTrigger[]; why: string; evidenceIds: string[]; registrationRefuted: number; alternatives: Array<{ cmPerPx: number; refuted: number }> }
+/** A statement among a conflict's evidence whose confident readers disagree, with what each read (1.5.0). */
+export type DoubtedStatement = { evidenceId: string; readings: StatementContest['readings'] }
+export type SourceConflict = { triggers: SourceConflictTrigger[]; why: string; evidenceIds: string[]; registrationRefuted: number; alternatives: Array<{ cmPerPx: number; refuted: number }>; doubted: DoubtedStatement[] }
+/**
+ * 1.5.0: the source conflict, and what the doubt policy withdrew. `withdrawn` is the 1.4.0 test's accusation (every
+ * statement read as printed) less what still stands, with the contested statements it rested on: recorded so that a run
+ * that completes because an accusation was withdrawn can be traced to the readers that disagreed. It decides nothing.
+ */
+export type SourceConflictReview = { conflict: SourceConflict | null; withdrawn: { triggers: SourceConflictTrigger[]; why: string; evidenceIds: string[]; doubted: DoubtedStatement[] } | null }
 
 const MAJOR_SHARE = 0.5
 const SUBSTANTIAL_SHARE = 0.25
 
 export function sourceConflictOf(metrics: MetricEvidenceSet, frameId: string, registration: CoordinateRegistration, judge: PixelRect, wallPx: number): SourceConflict | null {
+  return conflictUnder(metrics, frameId, registration, judge, wallPx, true)
+}
+
+/** The source conflict (1.5.0) and the accusation the 1.4.0 test would have made that the doubt policy withdrew. */
+export function sourceConflictReview(metrics: MetricEvidenceSet, frameId: string, registration: CoordinateRegistration, judge: PixelRect, wallPx: number): SourceConflictReview {
+  const conflict = conflictUnder(metrics, frameId, registration, judge, wallPx, true)
+  const asPrinted = conflictUnder(metrics, frameId, registration, judge, wallPx, false)
+  const gone = (asPrinted?.triggers ?? []).filter((t) => !(conflict?.triggers ?? []).includes(t))
+  if (!asPrinted || gone.length === 0) return { conflict, withdrawn: null }
+  return { conflict, withdrawn: { triggers: gone, why: asPrinted.why, evidenceIds: asPrinted.evidenceIds, doubted: doubtedAmong(statementsOn(metrics, frameId), asPrinted.evidenceIds) } }
+}
+
+/** The contested statements among some evidence ids, with their readings. */
+function doubtedAmong(statements: readonly Statement[], evidenceIds: readonly string[]): DoubtedStatement[] {
+  const ids = new Set(evidenceIds)
+  const seen = new Set<string>()
+  const out: DoubtedStatement[] = []
+  for (const s of statements) {
+    if (!ids.has(s.evidence.id) || !s.contest.contested || seen.has(s.evidence.id)) continue
+    seen.add(s.evidence.id)
+    out.push({ evidenceId: s.evidence.id, readings: s.contest.readings })
+  }
+  return out
+}
+
+/**
+ * The three triggers. `withDoubt` (1.5.0, the production test) reads a contested statement by the doubt policy;
+ * without it every statement is read as printed — the 1.4.0 test, kept only so a review can name what was withdrawn.
+ */
+function conflictUnder(metrics: MetricEvidenceSet, frameId: string, registration: CoordinateRegistration, judge: PixelRect, wallPx: number, withDoubt: boolean): SourceConflict | null {
+  const accused: Doubt = withDoubt ? 'ANY_FITS' : 'AS_PRINTED'
+  const accuser: Doubt = withDoubt ? 'ALL_FIT' : 'AS_PRINTED'
   const tolerancePx = Math.max(2, wallPx / 2)
   const statements = statementsOn(metrics, frameId)
   const solution = metricSolutionFor(metrics, frameId)
@@ -836,10 +910,11 @@ export function sourceConflictOf(metrics: MetricEvidenceSet, frameId: string, re
   const reasons: string[] = []
   const evidenceIds = new Set<string>()
 
-  // T1: as-read refutation, against the scales the readings themselves state.
-  const registrationRefuted = refutedShareAsRead(statements, regAxis, tolerancePx)
+  // T1: as-read refutation, against the scales the readings themselves state. 1.5.0: a contested statement refutes the
+  // registration only if none of its readings fits it, and spares a rival only if all of them fit the rival.
+  const registrationRefuted = refutedShareAsRead(statements, regAxis, tolerancePx, accused)
   const offered = solution ? metricScales(solution, registration) : latticeScales(metrics, frameId, registration, judge, tolerancePx)
-  const alternatives = offered.map((o) => ({ cmPerPx: o.cmPerPx, refuted: refutedShareAsRead(statements, () => o.cmPerPx, tolerancePx) }))
+  const alternatives = offered.map((o) => ({ cmPerPx: o.cmPerPx, refuted: refutedShareAsRead(statements, () => o.cmPerPx, tolerancePx, accuser) }))
   const better = alternatives.filter((a) => a.refuted <= registrationRefuted - SUBSTANTIAL_SHARE)
   if (registrationRefuted >= MAJOR_SHARE && better.length > 0) {
     triggers.push('AS_READ_REFUTATION')
@@ -863,14 +938,17 @@ export function sourceConflictOf(metrics: MetricEvidenceSet, frameId: string, re
     }
   }
 
-  // T3: two long readings as read, on both axes and different chains, agree on another scale.
+  // T3: two long readings as read, on both axes and different chains, agree on another scale. 1.5.0: the scales tried are
+  // still the readings as read; a contested statement joins an accusation only if every reading fits the accused scale,
+  // and defends the registration if one does.
   const extentOn = (axis: 'X' | 'Y'): number => (axis === 'X' ? judge.x1 - judge.x0 : judge.y1 - judge.y0)
-  const longRead = statements.flatMap((s) => (s.pixelLength >= SUBSTANTIAL_SHARE * extentOn(s.axis) ? asRead(s).map((cm) => ({ s, cm })) : []))
-  const supportedLength = longRead.filter((r) => agrees(r.cm, r.s.pixelLength, regAxis(r.s.axis), tolerancePx)).reduce((a, r) => a + r.s.pixelLength, 0)
+  const long = statements.filter((s) => s.pixelLength >= SUBSTANTIAL_SHARE * extentOn(s.axis))
+  const longRead = long.flatMap((s) => asRead(s).map((cm) => ({ s, cm })))
+  const supportedLength = long.filter((s) => fitsUnder(s, regAxis(s.axis), tolerancePx, accused)).reduce((a, s) => a + s.pixelLength, 0)
   for (const seed of longRead) {
     const cmPerPx = seed.cm / seed.s.pixelLength
     if (Math.abs(cmPerPx / regAxis(seed.s.axis) - 1) <= 0.05) continue
-    const agreeing = longRead.filter((r) => agrees(r.cm, r.s.pixelLength, cmPerPx, tolerancePx))
+    const agreeing = long.filter((s) => fitsUnder(s, cmPerPx, tolerancePx, accuser)).map((s) => ({ s, cm: asRead(s)[0] }))
     const chains = new Set(agreeing.map((r) => r.s.evidence.chainId ?? r.s.evidence.id))
     const axes = new Set(agreeing.map((r) => r.s.axis))
     const length = agreeing.reduce((a, r) => a + r.s.pixelLength, 0)
@@ -882,19 +960,46 @@ export function sourceConflictOf(metrics: MetricEvidenceSet, frameId: string, re
     }
   }
   if (triggers.length === 0) return null
-  return { triggers, why: reasons.join('; '), evidenceIds: [...evidenceIds].sort(), registrationRefuted, alternatives }
+  const ids = [...evidenceIds].sort()
+  return { triggers, why: reasons.join('; '), evidenceIds: ids, registrationRefuted, alternatives, doubted: doubtedAmong(statements, ids) }
 }
 
 /** The source conflict of a first reading's base plan, judged on its wall ink's box (else its frame). */
 export function sourceConflictFor(options: StructuralPassOptions, incumbent: StructuralPassResult): SourceConflict | null {
+  return sourceConflictReviewFor(options, incumbent).conflict
+}
+
+/** 1.5.0: the review of a first reading's base plan — its source conflict and any accusation the doubt policy withdrew. */
+export function sourceConflictReviewFor(options: StructuralPassOptions, incumbent: StructuralPassResult): SourceConflictReview {
   const base = incumbent.draft.base
-  if (!base) return null
+  if (!base) return { conflict: null, withdrawn: null }
   const registration = options.metrics.coordinateRegistrations.find((r) => r.frameId === base.frame.id && r.plane === 'PLAN_XZ')
   const sheet = planSheet(base.frame, { ...options, sheetCache: options.sheetCache ?? new Map<string, PlanSheet>() })
-  if (!registration || !sheet) return null
+  if (!registration || !sheet) return { conflict: null, withdrawn: null }
   const judge = wallClusterExtent(sheet.mask, sheet.wallPx)?.rect ?? base.extent
-  return sourceConflictOf(options.metrics, base.frame.id, registration, judge, sheet.wallPx)
+  return sourceConflictReview(options.metrics, base.frame.id, registration, judge, sheet.wallPx)
 }
+
+/** What a trace records about a withdrawn accusation: the triggers, the 1.4.0 reason, the readers that disagreed. */
+export function withdrawnRecord(review: SourceConflictReview): Record<string, number | string | boolean> {
+  const w = review.withdrawn
+  if (!w) return {}
+  return {
+    resolverVersion: PLAN_RESOLVER_VERSION,
+    withdrawnTriggers: w.triggers.join(','),
+    withdrawnWhy: w.why,
+    withdrawnEvidence: w.evidenceIds.slice(0, 8).join(','),
+    doubted: doubtedText(w.doubted),
+    stillStanding: review.conflict ? review.conflict.triggers.join(',') : '',
+  }
+}
+
+/** `id=TOKEN 501|LATTICE 501|EXTERNAL 541; …`, at most eight statements. */
+const doubtedText = (doubted: readonly DoubtedStatement[]): string =>
+  doubted
+    .slice(0, 8)
+    .map((d) => `${d.evidenceId}=${d.readings.map((r) => `${r.reader} ${r.valueCm}`).join('|')}`)
+    .join('; ')
 
 // ---------------------------------------------------------------------------
 // the confidence-aware first success (1.3.0, BUILDPLAN-ANALYZER-005B)
@@ -1126,6 +1231,7 @@ export function challengeRecord(outcome: ChallengeOutcome, why: string): Record<
     out.sourceConflict = outcome.conflict.triggers.join(',')
     out.registrationRefuted = round6(outcome.conflict.registrationRefuted)
     if (outcome.conflict.evidenceIds.length > 0) out.conflictEvidence = outcome.conflict.evidenceIds.slice(0, 8).join(',')
+    if (outcome.conflict.doubted.length > 0) out.conflictDoubted = doubtedText(outcome.conflict.doubted)
   }
   if (outcome.kind === 'REPLACED') {
     // 1.4.0: the same facts as a resolution records, so a judge holds a challenge to the same rules.

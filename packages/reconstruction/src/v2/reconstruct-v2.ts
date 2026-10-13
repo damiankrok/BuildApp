@@ -46,7 +46,8 @@ import { emitBuilding } from './emit.js'
 import { ReconstructionFailure, planCounts } from '../failure.js'
 import type { PlanDiagnosticsReport } from '../failure.js'
 import { LAYOUT_REFUSAL_CODES, dimensionEvidenceOf, layoutRefused, layoutRejectionOf, planDiagnosticsOf, planFailureOf } from '../plan-diagnostics.js'
-import { PLAN_RESOLVER_VERSION, challengeFirstReading, challengeRecord, firstReadingNeedsChallenge, resolutionRecord, resolvePlan, sourceConflictFor } from '../plan-resolution.js'
+import { PLAN_RESOLVER_VERSION, challengeFirstReading, challengeRecord, firstReadingNeedsChallenge, resolutionRecord, resolvePlan, sourceConflictReviewFor, withdrawnRecord } from '../plan-resolution.js'
+import type { SourceConflictReview } from '../plan-resolution.js'
 import { metricSolutionFor } from '@buildapp/source-metrics'
 import type { ResolverProgress } from '../plan-resolution.js'
 import type { PlanSheet } from '../layout.js'
@@ -275,7 +276,13 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // replaced, refused by name (SOURCE_CONFLICT), or — when none is better supported by the drawing — left
   // to the path below, where the figure that refused it is spent.
   const footprintOnly = !!worldFrameFrom(draft) && layout.masses.length > 0 && layoutRefused(layout) && layout.gate.reasons.filter((g) => g.severity === 'BLOCKING' && LAYOUT_REFUSAL_CODES.has(g.code)).every((g) => g.code.startsWith('FOOTPRINT_AREA'))
-  const earlyConflict = footprintOnly ? sourceConflictFor(structuralOptions, incumbent) : null
+  // 1.5.0: an accusation the doubt policy withdrew (its statements' own readers disagree) is recorded, never acted on.
+  const noteWithdrawn = (review: SourceConflictReview | null): void => {
+    if (review?.withdrawn) trace({ phase: 'REGISTRATION', substage: 'SOURCE_CONFLICT_REVIEW', status: 'PASSED', counts: withdrawnRecord(review), detail: `an accusation of the registered scale was withdrawn: the statements it rested on are contested by their own readers (${review.withdrawn.why})` })
+  }
+  const earlyReview = footprintOnly ? sourceConflictReviewFor(structuralOptions, incumbent) : null
+  noteWithdrawn(earlyReview)
+  const earlyConflict = earlyReview?.conflict ?? null
   if (earlyConflict) {
     const outcome = challengeFirstReading(structuralOptions, incumbent, options.resolverProgress, { conflict: earlyConflict, footprintRefused: true })
     const record = challengeRecord(outcome, `the published footprint refused the first reading, and the drawing contradicts its scale: ${earlyConflict.why}`)
@@ -327,7 +334,9 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     // 005D: so is one whose scale the drawing itself contradicts (a source conflict), whatever its confidence.
     // A reading that already answered the drawing's own challenge above is not challenged a second time.
     const need = earlyConflict ? { challenge: false, why: '' } : firstReadingNeedsChallenge(metrics, incumbent)
-    const conflict = earlyConflict ? null : sourceConflictFor(structuralOptions, incumbent)
+    const lateReview = earlyConflict ? null : sourceConflictReviewFor(structuralOptions, incumbent)
+    noteWithdrawn(lateReview)
+    const conflict = lateReview?.conflict ?? null
     if (need.challenge || conflict) {
       const why = [need.challenge ? need.why : '', conflict ? `the drawing contradicts its scale: ${conflict.why}` : ''].filter(Boolean).join('; and ')
       const outcome = challengeFirstReading(structuralOptions, incumbent, options.resolverProgress, { conflict })
