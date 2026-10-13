@@ -1,0 +1,81 @@
+[
+ {
+  "id": "X1",
+  "what": "undo the innovation: the source conflict reads every statement as printed (the 1.4.0 test)",
+  "must": "/accuse nothing \\(failed under 1\\.4\\.0\\)/",
+  "status": "KILLED",
+  "failed": [
+   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser two long totals the classic reader misread, read correctly by the external reader, accuse nothing (failed under 1.4.0)",
+   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser the plan turned a quarter (axes swapped) or mirrored (statements in reverse order) gives the same answer"
+  ]
+ },
+ {
+  "id": "X2",
+  "what": "widen the scope: the ranking reads a contested statement by the doubt policy too (refutedShareAsRead defaults to ANY_FITS)",
+  "must": "/the ranking still reads every statement as printed/",
+  "status": "KILLED",
+  "failed": [
+   "tests/architecture/statement-contest.test.ts :: 005P the doubt policy is used by the source-conflict test only ANY_FITS and ALL_FIT appear only in the policy itself and in the conflict test",
+   "tests/architecture/statement-contest.test.ts :: 005P the doubt policy is used by the source-conflict test only every refuted share outside the conflict test reads as printed: no doubt argument is passed",
+   "packages/reconstruction/test/statement-contest.test.ts :: a contest never states what the incumbent did not state the ranking still reads every statement as printed: a reading at another scale is refuted as before"
+  ]
+ },
+ {
+  "id": "X3",
+  "what": "promote a contested external number: a statement the incumbent reads as nothing states its readers' values",
+  "must": "/states nothing/",
+  "status": "KILLED",
+  "failed": [
+   "packages/reconstruction/test/statement-contest.test.ts :: a contest never states what the incumbent did not state a statement that states nothing does not defend the registration either: an uncontested accusation stands beside it"
+  ]
+ },
+ {
+  "id": "X4",
+  "what": "count readers of one ink as separate readings: three readers agreeing are a contest (reader count, not distinct values)",
+  "must": "/three readers reading the same value are one reading/",
+  "status": "KILLED",
+  "failed": [
+   "packages/reconstruction/test/statement-contest.test.ts :: statementContests: the confident readers of one ink three readers reading the same value are one reading, not a contest and not three witnesses",
+   "packages/reconstruction/test/statement-contest.test.ts :: statementContests: the confident readers of one ink the external reading counts only when the ensemble found it corroborating: CONTESTS with the external as rival, LEADS, AGREES",
+   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser without the external reading the same misreads accuse exactly as 1.4.0 did: no value is conjured",
+   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser two disagreeing dimension lines whose readers agree are not doubted: the conflict is 1.4.0s"
+  ]
+ },
+ {
+  "id": "X5",
+  "what": "promote, not withhold: the accuser's side reads a contested statement as ANY of its readings (doubt helps the accuser)",
+  "must": "/monotone|accuse nothing/",
+  "status": "KILLED",
+  "failed": [
+   "packages/reconstruction/test/statement-contest.test.ts :: the doubt policy is monotone on 2000 generated plans, every trigger raised under doubt is raised as printed, and the registration is never refuted more"
+  ]
+ },
+ {
+  "id": "X6",
+  "what": "the published footprint decides whether the drawing is accused (a figure present silences the conflict)",
+  "must": "/published figure|never chooses|does not read the published/",
+  "status": "KILLED",
+  "failed": [
+   "packages/reconstruction/test/source-conflict.test.ts :: the published figure never chooses among the scales the drawing states sweeping the figure across every reading the drawing states builds one scale or none"
+  ]
+ },
+ {
+  "id": "X7",
+  "what": "trust missing data: a statement with no lattice (a missing reader) counts as contested",
+  "must": "/no value is conjured|1\\.4\\.0s|another copy/",
+  "status": "KILLED",
+  "failed": [
+   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser a contest between readings that fit the same scale changes nothing: a correct accusation stands (the 1600/1601 pattern)",
+   "packages/reconstruction/test/statement-contest.test.ts :: doubt never helps the accuser two disagreeing dimension lines whose readers agree are not doubted: the conflict is 1.4.0s"
+  ]
+ },
+ {
+  "id": "X8",
+  "what": "an external reading that does not corroborate counts (any CONTESTS external is a confident reading)",
+  "must": "/corroborating/",
+  "status": "KILLED",
+  "failed": [
+   "packages/reconstruction/test/statement-contest.test.ts :: statementContests: the confident readers of one ink the external reading counts only when the ensemble found it corroborating: CONTESTS with the external as rival, LEADS, AGREES"
+  ]
+ }
+]
