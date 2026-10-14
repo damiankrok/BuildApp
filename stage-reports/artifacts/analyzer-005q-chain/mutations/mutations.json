@@ -1,0 +1,89 @@
+{
+ "controls": {
+  "c1.spec on unmutated C1": "exit 0 (5 passed)",
+  "c2.spec on unmutated C2": "exit 0 (9 passed)",
+  "gates on unmutated variants": "G2a 0 on C1/C4/C1N1, G2b 0 on all, G2a' 0 on C3/C4 (safety-gates/*.json)"
+ },
+ "replayRows": {
+  "M1": [
+   "dom-w-gozdzikowcach",
+   "dom-w-glogownikach"
+  ],
+  "M2": [
+   "dom-w-gozdzikowcach",
+   "dom-w-glogownikach"
+  ],
+  "M4": [
+   "dom-pod-jarzabem"
+  ]
+ },
+ "results": [
+  {
+   "detail": {
+    "scaleDependentAnchors": 19
+   },
+   "id": "M1",
+   "killedBy": "G2a",
+   "outcome": "KILLED"
+  },
+  {
+   "detail": {
+    "inkFirstMismatch": 18
+   },
+   "id": "M2",
+   "killedBy": "G2b",
+   "outcome": "KILLED"
+  },
+  {
+   "detail": {
+    "specExit": 1
+   },
+   "id": "M3",
+   "killedBy": "c1.spec",
+   "outcome": "KILLED"
+  },
+  {
+   "detail": {
+    "scaleOrientedAnchors": 3
+   },
+   "id": "M4",
+   "killedBy": "G2a'",
+   "outcome": "KILLED"
+  },
+  {
+   "detail": {
+    "specExit": 1
+   },
+   "id": "M5",
+   "killedBy": "c1.spec",
+   "outcome": "KILLED"
+  },
+  {
+   "detail": {
+    "specExit": 1
+   },
+   "id": "M6",
+   "killedBy": "c2.spec",
+   "outcome": "KILLED"
+  },
+  {
+   "detail": {
+    "g1Failures": 1,
+    "row": "dom-w-arkadiach"
+   },
+   "id": "M7",
+   "killedBy": "G1",
+   "outcome": "KILLED"
+  },
+  {
+   "detail": {
+    "testExit": 1
+   },
+   "id": "M8",
+   "killedBy": "research-isolation.test.ts",
+   "outcome": "KILLED"
+  }
+ ],
+ "schema": "buildapp.005q-chain.mutations",
+ "version": 1
+}
