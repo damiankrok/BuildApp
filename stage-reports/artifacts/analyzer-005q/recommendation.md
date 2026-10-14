@@ -47,7 +47,9 @@ that facade (observed: N1's first run moved the frame and flipped an opening, Ad
   every ring SOURCE_EXACT; only 7 of 40 masses on the 24 completed rows rest on READ statements on both axes; DERIVED
   segment sums and CHAIN_CORRECTED substitutions count as MEASURED in the layout ladder. A fix changes five known-good
   models' labels (geometry untouched): an OWNER decision on G1 for labels, then a stage.
-- **The pier family** (krasnokwiatach N/S, akebiach S, jarzabem S, helikoniach N): facades of piers and openings leave
+- **The pier family** (krasnokwiatach N/S, akebiach S, jarzabem S, helikoniach N; and blind round 12's daliach, where
+  a garage projecting 0.64 m with a door between piers leaves a strip read as a recess with two PAVED terraces over the
+  garage floor and a planting strip — identical under the base, a PASS on footprint): facades of piers and openings leave
   no long band, so the box stops short. Source-backed only with a junction-aware solid reader, per sub-stretch, with
   vegetation excluded — C2 showed the chain-strip route recovers krasnokwiatach's right strips (garage 17.1 m², living
   room 29.4 m², terrace/porch/planting rejected) but also builds akebiach's planted courtyard, completes A05 wrongly

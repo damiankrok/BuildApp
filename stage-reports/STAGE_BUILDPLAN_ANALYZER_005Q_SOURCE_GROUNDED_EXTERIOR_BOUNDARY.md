@@ -4,7 +4,9 @@
 **N1a** amended by review round 1): when a body is cut on an exterior wall's *inner* face, the wall left outside it is
 **named** as an unresolved outer face and is **never read** as a recess, a return or a paved terrace; the body's ring and
 MASS feature say SOURCE_DERIVED instead of SOURCE_EXACT. Nothing moves and no footprint changes. The two candidates that
-would have moved faces (C1, C2) were measured and not adopted. <<VERDICT_LINE>>
+would have moved faces (C1, C2) were measured and not adopted. Blind round 12 was drawn after a green frozen CI: both houses PASS, NEW = OLD byte-for-byte, the rule did not fire
+(target class not exercised), and one blind model carries pre-existing PAVED terraces over a garage floor and planting
+(the PIER family) — so the stage is **PARTIAL** (§O).
 
 ## Summary
 
@@ -22,8 +24,8 @@ would have moved faces (C1, C2) were measured and not adopted. <<VERDICT_LINE>>
 | mutations | **38 of 40 mutants killed by a behavioural assertion** (0 only by an architecture test); M33 equivalent (an empty span is under the probe's 1 m minimum), M34 unreachable from a single-plan input (recorded as a survivor, not as proven equivalent) |
 | reviews | round 1: 5 lenses, **0 P0, 0 P1**, 7 P2, 14 P3 — four fixed in production (F1–F4), the rest fixed in tests/records or documented (`post-review/round-1.md`); round 2: 3 fresh lenses + 2 adversarial verifiers per P0/P1: **0 P0, 2 P1** (both confirmed; both about claims and gate evaluation, not shipped output: C1's opening side effects missing from the recommendation; G10 tested only end to end), 8 P2, 11 P3 — dispositioned in `post-review/round-2.md`; Addendum C (committed before PROD3, the replay of record) |
 | performance | interleaved ABBA, 2 repetitions × 46 rows per side, solver-only: wall p50 13.47 → 13.08 s, p95 24.22 → 23.45 s; per-case ratio p50 0.96, p95 1.01, **max 1.04, none > 15 %**; peak RSS p50 577 → 564 MB (x64 container — not a phone) |
-| freeze / CI | <<CI>> |
-| BLIND_12 | <<BLIND>> |
+| freeze / CI | `PRE_HOLDOUT_12_SHA = 7eddd7b`: run [38514679088](https://github.com/damiankrok/BuildApp/actions/runs/38514679088) — attempt 1: 38 pass, 2 skipped by design, the Android UI evidence gate failed (Compose `SnapshotStateObserver` race; Android untouched; the same gate failed on the text-only commit before); one re-run of that job: **attempt 2 green, 39 pass, 2 skipped by design**. Local: `npm install`, `typecheck`, `test` (2567 pass, 11 skipped), `build`, `e2e` (47/47) all green |
+| BLIND_12 | drawn: `dom-w-tymianku` **PASS** (−5.48 %), `dom-w-daliach` **PASS** (+0.39 %); OLD = NEW, models byte-identical; **TARGET_CLASS_EXERCISED = NO**; daliach carries two PAVED terraces over a garage floor and a planting strip (PIER family, identical in OLD) — caps the stage at PARTIAL |
 | ANDROID / APK | 005H ARM64 device parity **PENDING**; `owner-preview-latest` **not overwritten**; no APK built or published |
 
 ## A. Audit (Phase A, before any production edit)
@@ -177,11 +179,36 @@ byte-identical to `04d5568`.
 
 ## I. Freeze and CI
 
-<<FREEZE>>
+- `production-diff-manifest.json` (written on the working tree immediately before the freeze commit, so its `head`
+  is the freeze's parent): only `packages/reconstruction/src` changed among production code (4 files, +158/−22);
+  every protected path — apps, .github, root manifests, lockfile, tsconfig, vitest config, packages/model, commands,
+  architecture, source-metrics, source-cv, source-common, numeric-recogniser-ort, analysis-service, `holdout/pool.txt`,
+  `holdout/verdict.mjs` — byte-identical to `04d5568`. No OCR asset, weight or dependency changed.
+- The production replay of record (PROD3) ran on the exact source of the freeze (sha-256 bound, `prod-vs-harness.json`).
+- `PRE_HOLDOUT_12_SHA = 7eddd7bff5738924a07cc91daef68a560479f2c7`, CI as in the summary. The UI evidence gate's failure
+  on attempt 1 was a Compose UI-test race on a stage that touches no Android file; it was re-run once, as the 005P record
+  of the same race allows, and passed. Nothing was committed between the freeze and the draw.
 
 ## J. Blind round 12 (`artifacts/analyzer-005q/blind-round/`)
 
-<<BLINDSECTION>>
+See `blind-round/README.md` for the full record.
+
+- **Draw** 2026-10-14T06:38:12Z: seed `e0df87fe…e0ad` (recomputed independently), pool `800c2a1e…`, 1468 drawable,
+  exclusions `4a82986e…` (147 families, `dom-w-rarytasach` included). Unstratified: i1 = 1269 → `dom-w-tymianku`;
+  i2 = 344 → `dom-w-daliach`.
+- **Runs** once each, NEW (live, layout 1.2.0) then OLD (`04d5568`, solver-only on NEW's sealed inputs).
+
+| # | NEW | OLD | OLD vs NEW |
+| --- | --- | --- | --- |
+| 1 `dom-w-tymianku` | **PASS** (2 storeys; 131.28 vs 138.89 m², −5.48 %) | PASS | model byte-identical (`681a3825…`) |
+| 2 `dom-w-daliach` | **PASS** (2 storeys; 127.46 vs 126.96 m², +0.39 %) | PASS | model byte-identical (`bd67c813…`) |
+
+- Sealed 06:56:10Z before any diagnosis. **No fresh ALGORITHMIC_FAIL. TARGET_CLASS_EXERCISED = NO** (no outer-face
+  gap named; OLD = NEW).
+- **After the seal (daliach):** the envelope stops at the house's front wall while the chains state the garage front
+  0.64 m further; the garage front is a door between piers (PIER family). The strip is read as a recess: the garage
+  piers become returns and two PAVED terraces are laid over the garage floor and a planting strip. Identical in OLD; the
+  wall-strip rule correctly does not fire. A fabricated terrace in the NEW run caps the stage at PARTIAL (protocol).
 
 ## K. Limitations and unresolved roots (recorded, not repaired)
 
@@ -229,7 +256,11 @@ node research/analyzer-005q/perf.mjs --work $W --old $W/v-base --reps 2 --out st
 node research/analyzer-005q/freeze-manifest.mjs --out stage-reports/artifacts/analyzer-005q/production-diff-manifest.json
 # gates
 npm install ; npm run typecheck ; npm test ; npm run build ; npm run e2e
-<<BLINDCOMMANDS>>
+# blind round 12 (after the green CI at the frozen SHA; nothing committed in between)
+node holdout/select.mjs select --round 12 --pool holdout/pool.txt --pool-sha256 800c2a1ed9daee9efd2654c64b061e430094dc38fc459b805af27ff9fad2ed41 --pre-holdout-sha 7eddd7bff5738924a07cc91daef68a560479f2c7
+ANALYZER_EVIDENCE=1 TELEMETRY=1 npx vite-node packages/analysis-service/scripts/second-house.ts -- --url <address> --cache $W/blind12/<h>/cache --out $W/blind12/<h>/new --recogniser
+OFFLINE=1 npx vite-node --config $W/v-base/vite.config.mjs packages/analysis-service/scripts/second-house.ts -- --package $W/blind12/<h>/new/source-package.json --graph $W/blind12/<h>/new/observation-graph.json --metrics $W/blind12/<h>/new/metric-evidence.json --cache $W/blind12/<h>/cache --out $W/blind12/<h>/old
+node holdout/verdict.mjs $W/blind12/<h>/new ; node holdout/verdict.mjs $W/blind12/<h>/old
 ```
 
 ## N. NEXT_RECOMMENDATION (one; `artifacts/analyzer-005q/recommendation.md`)
@@ -244,4 +275,18 @@ window and a window lost; glogownikach's garage door re-bound 300 → 360). It i
 
 ## O. Verdict and handoff
 
-<<HANDOFF>>
+| field | value |
+| --- | --- |
+| STAGE | BUILDPLAN-ANALYZER-005Q |
+| VERDICT | **PARTIAL**: one fail-closed rule shipped through every gate (it makes glogownikach's model honest, it does not correct its faces); no face correction was safe to adopt (C1 changes openings without evidence, C2 fabricates); blind round 12 passed with no fresh ALGORITHMIC_FAIL but did not exercise the target class, and one blind model carries pre-existing PIER-family terraces |
+| BRANCH | `analyzer/source-grounded-exterior-boundary-v1` (mirror `claude/new-session-3kzcgh`) |
+| HEAD | the commit carrying this report (see the handoff message) |
+| CI | frozen SHA `7eddd7b`: run 38514679088, attempt 2 green (39 pass, 2 skipped by design) |
+| FULL_REPORT | `stage-reports/STAGE_BUILDPLAN_ANALYZER_005Q_SOURCE_GROUNDED_EXTERIOR_BOUNDARY.md` |
+| BASE | `04d5568a4a36d2b850998f2848d06e2179218872` |
+| CHOSEN_IMPLEMENTATION | N1a, layout inference 1.2.0 (`layout.ts`, `v2/reconstruct-v2.ts`, `v2/emit.ts`, `v2/building.ts`) |
+| BLIND_12 | tymianku PASS, daliach PASS (= OLD); TARGET_CLASS_EXERCISED = NO |
+| ARM64_005H_DEVICE_PARITY | PENDING |
+| OWNER_APK | unchanged; `owner-preview-latest` not overwritten |
+| NEXT_RECOMMENDATION | §N |
+| token | `PARTIAL_BUILDPLAN_ANALYZER_005Q_FAIL_CLOSED_ONLY_TARGET_NOT_EXERCISED` |
