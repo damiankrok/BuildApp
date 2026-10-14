@@ -1,0 +1,6715 @@
+{
+ "rows": {
+  "A00": {
+   "C0": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": null,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.3069,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 7,
+      "READ": 1
+     },
+     "confidence": 0.849935,
+     "mppX": 0.02305,
+     "mppY": 0.023088
+    },
+    "semanticVsC0": null,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.3044,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 5
+     },
+     "confidence": 0.860322,
+     "mppX": 0.02305,
+     "mppY": 0.023038
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.3044,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 6
+     },
+     "confidence": 0.863468,
+     "mppX": 0.02305,
+     "mppY": 0.023038
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.3394,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 4,
+      "READ": 1
+     },
+     "confidence": 0.85914,
+     "mppX": 0.02305,
+     "mppY": 0.023738
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.305,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 4,
+      "READ": 1
+     },
+     "confidence": 0.705675,
+     "mppX": 0.02305,
+     "mppY": 0.02305
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C4": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.3044,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 5
+     },
+     "confidence": 0.860322,
+     "mppX": 0.02305,
+     "mppY": 0.023038
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.30685,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 5,
+      "READ": 1
+     },
+     "confidence": 0.842301,
+     "mppX": 0.023049,
+     "mppY": 0.023088
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   }
+  },
+  "A01": {
+   "C0": {
+    "code": "MODEL_EMISSION_FAILED/None",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": null,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": null,
+    "semanticVsC0": null,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1": {
+    "code": "MODEL_EMISSION_FAILED/None",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": null,
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": "MODEL_EMISSION_FAILED/None",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": null,
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": "MODEL_EMISSION_FAILED/None",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": null,
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": "MODEL_EMISSION_FAILED/None",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": null,
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C4": {
+    "code": "MODEL_EMISSION_FAILED/None",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": null,
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": "MODEL_EMISSION_FAILED/None",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": null,
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   }
+  },
+  "A02": {
+   "C0": {
+    "code": null,
+    "footprintM2": 133.82,
+    "footprintResidualPct": 2.88,
+    "modelChangedVsC0": null,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.4919,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 10
+     },
+     "confidence": 0.850291,
+     "mppX": 0.024932,
+     "mppY": 0.024906
+    },
+    "semanticVsC0": null,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C1": {
+    "code": null,
+    "footprintM2": 133.82,
+    "footprintResidualPct": 2.88,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.4919,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 10
+     },
+     "confidence": 0.857929,
+     "mppX": 0.024932,
+     "mppY": 0.024906
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C1N1": {
+    "code": null,
+    "footprintM2": 133.82,
+    "footprintResidualPct": 2.88,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.4919,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 10
+     },
+     "confidence": 0.857929,
+     "mppX": 0.024932,
+     "mppY": 0.024906
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C2": {
+    "code": null,
+    "footprintM2": 131.55,
+    "footprintResidualPct": 1.14,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.47145,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 6
+     },
+     "confidence": 0.869773,
+     "mppX": 0.024932,
+     "mppY": 0.024497
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C3": {
+    "code": null,
+    "footprintM2": 133.82,
+    "footprintResidualPct": 2.88,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.4919,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 9
+     },
+     "confidence": 0.853835,
+     "mppX": 0.024932,
+     "mppY": 0.024906
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C4": {
+    "code": null,
+    "footprintM2": 131.72,
+    "footprintResidualPct": 1.27,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.47315,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 5
+     },
+     "confidence": 0.882184,
+     "mppX": 0.024932,
+     "mppY": 0.024531
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "N1": {
+    "code": null,
+    "footprintM2": 133.82,
+    "footprintResidualPct": 2.88,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.4919,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 10
+     },
+     "confidence": 0.850291,
+     "mppX": 0.024932,
+     "mppY": 0.024906
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   }
+  },
+  "A03": {
+   "C0": {
+    "code": null,
+    "footprintM2": 109.35,
+    "footprintResidualPct": -0.24,
+    "modelChangedVsC0": null,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.5078,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 1
+     },
+     "confidence": 0.502447,
+     "mppX": 0.025078,
+     "mppY": 0.025078
+    },
+    "semanticVsC0": null,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C1": {
+    "code": null,
+    "footprintM2": 109.35,
+    "footprintResidualPct": -0.24,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.5073,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 3
+     },
+     "confidence": 0.736152,
+     "mppX": 0.025094,
+     "mppY": 0.025052
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C1N1": {
+    "code": null,
+    "footprintM2": 109.27,
+    "footprintResidualPct": -0.32,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.5071,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 4
+     },
+     "confidence": 0.810697,
+     "mppX": 0.02509,
+     "mppY": 0.025052
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C2": {
+    "code": null,
+    "footprintM2": 109.27,
+    "footprintResidualPct": -0.32,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.5078,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 1
+     },
+     "confidence": 0.502447,
+     "mppX": 0.025078,
+     "mppY": 0.025078
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C3": {
+    "code": null,
+    "footprintM2": 109.35,
+    "footprintResidualPct": -0.24,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.5078,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 1
+     },
+     "confidence": 0.502447,
+     "mppX": 0.025078,
+     "mppY": 0.025078
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C4": {
+    "code": null,
+    "footprintM2": 109.27,
+    "footprintResidualPct": -0.32,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.5047,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 2
+     },
+     "confidence": 0.66,
+     "mppX": 0.025094,
+     "mppY": 0.025
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "N1": {
+    "code": null,
+    "footprintM2": 109.27,
+    "footprintResidualPct": -0.32,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.5078,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 1
+     },
+     "confidence": 0.502447,
+     "mppX": 0.025078,
+     "mppY": 0.025078
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   }
+  },
+  "A04": {
+   "C0": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": null,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.54895,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 7,
+      "READ": 3
+     },
+     "confidence": 0.851121,
+     "mppX": 0.025505,
+     "mppY": 0.025474
+    },
+    "semanticVsC0": null,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.5494,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 5
+     },
+     "confidence": 0.887623,
+     "mppX": 0.025513,
+     "mppY": 0.025475
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.5493,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 5
+     },
+     "confidence": 0.887565,
+     "mppX": 0.025511,
+     "mppY": 0.025475
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": null,
+    "footprintM2": 104.06,
+    "footprintResidualPct": -6.92,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.5502,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 3,
+      "READ": 2
+     },
+     "confidence": 0.843513,
+     "mppX": 0.02551,
+     "mppY": 0.025494
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.54895,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 7,
+      "READ": 3
+     },
+     "confidence": 0.851121,
+     "mppX": 0.025505,
+     "mppY": 0.025474
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C4": {
+    "code": null,
+    "footprintM2": 104.06,
+    "footprintResidualPct": -6.92,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.55025,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 3
+     },
+     "confidence": 0.734453,
+     "mppX": 0.025511,
+     "mppY": 0.025494
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.54945,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 5,
+      "READ": 3
+     },
+     "confidence": 0.851842,
+     "mppX": 0.025515,
+     "mppY": 0.025474
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   }
+  },
+  "A05": {
+   "C0": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": null,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.11025,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 2,
+      "READ": 4,
+      "READ_DEPENDS_ON_SCALE": 1
+     },
+     "confidence": 0.872094,
+     "mppX": 0.0211,
+     "mppY": 0.021105
+    },
+    "semanticVsC0": null,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.11885,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 5
+     },
+     "confidence": 0.886536,
+     "mppX": 0.0211,
+     "mppY": 0.021277
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.11885,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 5
+     },
+     "confidence": 0.886536,
+     "mppX": 0.0211,
+     "mppY": 0.021277
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.11025,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 4,
+      "READ_DEPENDS_ON_SCALE": 1
+     },
+     "confidence": 0.871846,
+     "mppX": 0.0211,
+     "mppY": 0.021105
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.09005,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 2,
+      "READ": 4
+     },
+     "confidence": 0.883663,
+     "mppX": 0.0211,
+     "mppY": 0.020701
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C4": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.11885,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 5
+     },
+     "confidence": 0.886536,
+     "mppX": 0.0211,
+     "mppY": 0.021277
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.11025,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 2,
+      "READ": 4,
+      "READ_DEPENDS_ON_SCALE": 1
+     },
+     "confidence": 0.872094,
+     "mppX": 0.0211,
+     "mppY": 0.021105
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   }
+  },
+  "A06": {
+   "C0": {
+    "code": null,
+    "footprintM2": 79.06,
+    "footprintResidualPct": 0.18,
+    "modelChangedVsC0": null,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.072,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 2,
+      "READ": 3,
+      "READ_DEPENDS_ON_SCALE": 1
+     },
+     "confidence": 0.862909,
+     "mppX": 0.020726,
+     "mppY": 0.020714
+    },
+    "semanticVsC0": null,
+    "sourceExact": 3,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C1": {
+    "code": null,
+    "footprintM2": 79.06,
+    "footprintResidualPct": 0.18,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.0714,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 3
+     },
+     "confidence": 0.690245,
+     "mppX": 0.020725,
+     "mppY": 0.020703
+    },
+    "semanticVsC0": false,
+    "sourceExact": 3,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C1N1": {
+    "code": null,
+    "footprintM2": 79.06,
+    "footprintResidualPct": 0.18,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.0714,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 3
+     },
+     "confidence": 0.690245,
+     "mppX": 0.020725,
+     "mppY": 0.020703
+    },
+    "semanticVsC0": false,
+    "sourceExact": 3,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C2": {
+    "code": null,
+    "footprintM2": 78.28,
+    "footprintResidualPct": -0.81,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.0724,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 2,
+      "READ_DEPENDS_ON_SCALE": 1
+     },
+     "confidence": 0.80688,
+     "mppX": 0.020734,
+     "mppY": 0.020714
+    },
+    "semanticVsC0": true,
+    "sourceExact": 3,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C3": {
+    "code": null,
+    "footprintM2": 79.06,
+    "footprintResidualPct": 0.18,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.07145,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 2,
+      "READ": 3
+     },
+     "confidence": 0.859772,
+     "mppX": 0.020726,
+     "mppY": 0.020703
+    },
+    "semanticVsC0": false,
+    "sourceExact": 3,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C4": {
+    "code": null,
+    "footprintM2": 78.28,
+    "footprintResidualPct": -0.81,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.07185,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 2
+     },
+     "confidence": 0.66,
+     "mppX": 0.020734,
+     "mppY": 0.020703
+    },
+    "semanticVsC0": true,
+    "sourceExact": 3,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "N1": {
+    "code": null,
+    "footprintM2": 79.06,
+    "footprintResidualPct": 0.18,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.072,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 2,
+      "READ": 3,
+      "READ_DEPENDS_ON_SCALE": 1
+     },
+     "confidence": 0.862909,
+     "mppX": 0.020726,
+     "mppY": 0.020714
+    },
+    "semanticVsC0": false,
+    "sourceExact": 3,
+    "storeys": 2,
+    "verdict": "PASS"
+   }
+  },
+  "A07": {
+   "C0": {
+    "code": null,
+    "footprintM2": 134.32,
+    "footprintResidualPct": -0.37,
+    "modelChangedVsC0": null,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.3153,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 2
+     },
+     "confidence": 0.66,
+     "mppX": 0.023161,
+     "mppY": 0.023145
+    },
+    "semanticVsC0": null,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C1": {
+    "code": null,
+    "footprintM2": 134.32,
+    "footprintResidualPct": -0.37,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.3153,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 2
+     },
+     "confidence": 0.66,
+     "mppX": 0.023161,
+     "mppY": 0.023145
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C1N1": {
+    "code": null,
+    "footprintM2": 134.32,
+    "footprintResidualPct": -0.37,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.3153,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 2
+     },
+     "confidence": 0.66,
+     "mppX": 0.023161,
+     "mppY": 0.023145
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C2": {
+    "code": null,
+    "footprintM2": 134.32,
+    "footprintResidualPct": -0.37,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.3153,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 2
+     },
+     "confidence": 0.66,
+     "mppX": 0.023161,
+     "mppY": 0.023145
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C3": {
+    "code": null,
+    "footprintM2": 134.32,
+    "footprintResidualPct": -0.37,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.3153,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 2
+     },
+     "confidence": 0.66,
+     "mppX": 0.023161,
+     "mppY": 0.023145
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C4": {
+    "code": null,
+    "footprintM2": 134.32,
+    "footprintResidualPct": -0.37,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.3153,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 2
+     },
+     "confidence": 0.66,
+     "mppX": 0.023161,
+     "mppY": 0.023145
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "N1": {
+    "code": null,
+    "footprintM2": 134.32,
+    "footprintResidualPct": -0.37,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.3153,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 2
+     },
+     "confidence": 0.66,
+     "mppX": 0.023161,
+     "mppY": 0.023145
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   }
+  },
+  "D00": {
+   "C0": {
+    "code": null,
+    "footprintM2": 154.2,
+    "footprintResidualPct": -18.71,
+    "modelChangedVsC0": null,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 1.3197,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 2
+     },
+     "confidence": 0.50336,
+     "mppX": 0.013197,
+     "mppY": 0.013197
+    },
+    "semanticVsC0": null,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1": {
+    "code": null,
+    "footprintM2": 154.2,
+    "footprintResidualPct": -18.71,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 1.3197,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 2
+     },
+     "confidence": 0.50336,
+     "mppX": 0.013197,
+     "mppY": 0.013197
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": true,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 1.34735,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 3
+     },
+     "confidence": 0.734579,
+     "mppX": 0.013197,
+     "mppY": 0.01375
+    },
+    "semanticVsC0": true,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": true,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": true,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": null,
+    "footprintM2": 154.2,
+    "footprintResidualPct": -18.71,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 1.3197,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 2
+     },
+     "confidence": 0.50336,
+     "mppX": 0.013197,
+     "mppY": 0.013197
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C4": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": true,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": true,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": true,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 1.3197,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 2
+     },
+     "confidence": 0.50336,
+     "mppX": 0.013197,
+     "mppY": 0.013197
+    },
+    "semanticVsC0": true,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   }
+  },
+  "D01": {
+   "C0": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": null,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": null,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C4": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   }
+  },
+  "D02": {
+   "C0": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": null,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": null,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C4": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   }
+  },
+  "D03": {
+   "C0": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": null,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": null,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C4": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   }
+  },
+  "D04": {
+   "C0": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": null,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": null,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C4": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   }
+  },
+  "D05": {
+   "C0": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": null,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": null,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C4": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   }
+  },
+  "alt-marcowki": {
+   "C0": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": null,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": null,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C4": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   }
+  },
+  "aster-viii": {
+   "C0": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": null,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": null,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C4": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   }
+  },
+  "dom-miniaturka": {
+   "C0": {
+    "code": null,
+    "footprintM2": 108.34,
+    "footprintResidualPct": 1.48,
+    "modelChangedVsC0": null,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.0888,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 3,
+      "READ": 6
+     },
+     "confidence": 0.871783,
+     "mppX": 0.02089,
+     "mppY": 0.020886
+    },
+    "semanticVsC0": null,
+    "sourceExact": 3,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C1": {
+    "code": null,
+    "footprintM2": 108.34,
+    "footprintResidualPct": 1.48,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.08885,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 9
+     },
+     "confidence": 0.873443,
+     "mppX": 0.02089,
+     "mppY": 0.020887
+    },
+    "semanticVsC0": false,
+    "sourceExact": 3,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C1N1": {
+    "code": null,
+    "footprintM2": 108.34,
+    "footprintResidualPct": 1.48,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.08885,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 10
+     },
+     "confidence": 0.873206,
+     "mppX": 0.02089,
+     "mppY": 0.020887
+    },
+    "semanticVsC0": false,
+    "sourceExact": 3,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C2": {
+    "code": null,
+    "footprintM2": 108.33,
+    "footprintResidualPct": 1.47,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.0888,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 5
+     },
+     "confidence": 0.877494,
+     "mppX": 0.02089,
+     "mppY": 0.020886
+    },
+    "semanticVsC0": true,
+    "sourceExact": 3,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C3": {
+    "code": null,
+    "footprintM2": 108.33,
+    "footprintResidualPct": 1.47,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.08615,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 2,
+      "READ": 6
+     },
+     "confidence": 0.870102,
+     "mppX": 0.02089,
+     "mppY": 0.020833
+    },
+    "semanticVsC0": true,
+    "sourceExact": 3,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C4": {
+    "code": null,
+    "footprintM2": 108.33,
+    "footprintResidualPct": 1.47,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.08905,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 7
+     },
+     "confidence": 0.879154,
+     "mppX": 0.02089,
+     "mppY": 0.020891
+    },
+    "semanticVsC0": true,
+    "sourceExact": 3,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "N1": {
+    "code": null,
+    "footprintM2": 108.33,
+    "footprintResidualPct": 1.47,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.08615,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 6
+     },
+     "confidence": 0.867527,
+     "mppX": 0.02089,
+     "mppY": 0.020833
+    },
+    "semanticVsC0": true,
+    "sourceExact": 3,
+    "storeys": 2,
+    "verdict": "PASS"
+   }
+  },
+  "dom-pod-jarzabem": {
+   "C0": {
+    "code": null,
+    "footprintM2": 191.0,
+    "footprintResidualPct": -11.88,
+    "modelChangedVsC0": null,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.8022,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 2,
+      "READ": 7
+     },
+     "confidence": 0.845393,
+     "mppX": 0.028009,
+     "mppY": 0.028035
+    },
+    "semanticVsC0": null,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1": {
+    "code": null,
+    "footprintM2": 181.78,
+    "footprintResidualPct": -16.14,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 4.28825,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 4
+     },
+     "confidence": 0.777774,
+     "mppX": 0.042197,
+     "mppY": 0.043568
+    },
+    "semanticVsC0": true,
+    "sourceExact": 1,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": null,
+    "footprintM2": 205.18,
+    "footprintResidualPct": -5.34,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.79095,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 4
+     },
+     "confidence": 0.791131,
+     "mppX": 0.028003,
+     "mppY": 0.027816
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C2": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": true,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.785,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 5
+     },
+     "confidence": 0.864628,
+     "mppX": 0.027881,
+     "mppY": 0.027819
+    },
+    "semanticVsC0": true,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": null,
+    "footprintM2": 191.0,
+    "footprintResidualPct": -11.88,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.8022,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 2,
+      "READ": 6
+     },
+     "confidence": 0.84776,
+     "mppX": 0.028009,
+     "mppY": 0.028035
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C4": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": true,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.7919,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 3
+     },
+     "confidence": 0.720844,
+     "mppX": 0.028022,
+     "mppY": 0.027816
+    },
+    "semanticVsC0": true,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": null,
+    "footprintM2": 191.8,
+    "footprintResidualPct": -11.52,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 4.3567,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 2
+     },
+     "confidence": 0.475686,
+     "mppX": 0.043567,
+     "mppY": 0.043567
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   }
+  },
+  "dom-pod-milorzebem": {
+   "C0": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": null,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": null,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C4": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   }
+  },
+  "dom-w-akebiach": {
+   "C0": {
+    "code": "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": null,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.9061,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 7
+     },
+     "confidence": 0.860172,
+     "mppX": 0.029086,
+     "mppY": 0.029036
+    },
+    "semanticVsC0": null,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1": {
+    "code": "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.90545,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 7
+     },
+     "confidence": 0.857642,
+     "mppX": 0.029073,
+     "mppY": 0.029036
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.90545,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 7
+     },
+     "confidence": 0.857642,
+     "mppX": 0.029073,
+     "mppY": 0.029036
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.90625,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 6
+     },
+     "confidence": 0.858364,
+     "mppX": 0.029086,
+     "mppY": 0.029039
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.90625,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 6
+     },
+     "confidence": 0.858364,
+     "mppX": 0.029086,
+     "mppY": 0.029039
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C4": {
+    "code": "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.9056,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 6
+     },
+     "confidence": 0.85527,
+     "mppX": 0.029073,
+     "mppY": 0.029039
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.9061,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 7
+     },
+     "confidence": 0.860172,
+     "mppX": 0.029086,
+     "mppY": 0.029036
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   }
+  },
+  "dom-w-arkadiach": {
+   "C0": {
+    "code": null,
+    "footprintM2": 69.56,
+    "footprintResidualPct": -0.49,
+    "modelChangedVsC0": null,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 1.8461,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 6,
+      "READ": 2
+     },
+     "confidence": 0.867495,
+     "mppX": 0.018454,
+     "mppY": 0.018468
+    },
+    "semanticVsC0": null,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C1": {
+    "code": null,
+    "footprintM2": 69.56,
+    "footprintResidualPct": -0.49,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 1.84605,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 4
+     },
+     "confidence": 0.799343,
+     "mppX": 0.018453,
+     "mppY": 0.018468
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C1N1": {
+    "code": null,
+    "footprintM2": 69.56,
+    "footprintResidualPct": -0.49,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 1.84605,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 4
+     },
+     "confidence": 0.799328,
+     "mppX": 0.018453,
+     "mppY": 0.018468
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C2": {
+    "code": null,
+    "footprintM2": 69.56,
+    "footprintResidualPct": -0.49,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 1.84605,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 5
+     },
+     "confidence": 0.870216,
+     "mppX": 0.018454,
+     "mppY": 0.018467
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C3": {
+    "code": null,
+    "footprintM2": 69.56,
+    "footprintResidualPct": -0.49,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 1.8461,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 5,
+      "READ": 1
+     },
+     "confidence": 0.873259,
+     "mppX": 0.018454,
+     "mppY": 0.018468
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C4": {
+    "code": null,
+    "footprintM2": 69.56,
+    "footprintResidualPct": -0.49,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 1.8461,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 2
+     },
+     "confidence": 0.66,
+     "mppX": 0.018454,
+     "mppY": 0.018468
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "N1": {
+    "code": null,
+    "footprintM2": 69.56,
+    "footprintResidualPct": -0.49,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 1.8484,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 4,
+      "READ": 2
+     },
+     "confidence": 0.862749,
+     "mppX": 0.018487,
+     "mppY": 0.018481
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   }
+  },
+  "dom-w-azaliach": {
+   "C0": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": null,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 1.86275,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 2,
+      "READ_DEPENDS_ON_SCALE": 1
+     },
+     "confidence": 0.787139,
+     "mppX": 0.018615,
+     "mppY": 0.01864
+    },
+    "semanticVsC0": null,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1": {
+    "code": "PLAN_NO_BUILT_REGIONS/PLAN_DECOMPOSITION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 1.8615,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 2
+     },
+     "confidence": 0.493128,
+     "mppX": 0.018615,
+     "mppY": 0.018615
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": "PLAN_NO_BUILT_REGIONS/PLAN_DECOMPOSITION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 1.8615,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 2
+     },
+     "confidence": 0.493128,
+     "mppX": 0.018615,
+     "mppY": 0.018615
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 1.86275,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 2,
+      "READ_DEPENDS_ON_SCALE": 1
+     },
+     "confidence": 0.787139,
+     "mppX": 0.018615,
+     "mppY": 0.01864
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 1.8615,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 2
+     },
+     "confidence": 0.493128,
+     "mppX": 0.018615,
+     "mppY": 0.018615
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C4": {
+    "code": "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 1.8615,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 2
+     },
+     "confidence": 0.493128,
+     "mppX": 0.018615,
+     "mppY": 0.018615
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 1.86275,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 2,
+      "READ_DEPENDS_ON_SCALE": 1
+     },
+     "confidence": 0.787139,
+     "mppX": 0.018615,
+     "mppY": 0.01864
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   }
+  },
+  "dom-w-cieszyniankach": {
+   "C0": {
+    "code": null,
+    "footprintM2": 184.86,
+    "footprintResidualPct": -5.1,
+    "modelChangedVsC0": null,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.77895,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 2,
+      "READ": 7
+     },
+     "confidence": 0.888783,
+     "mppX": 0.027769,
+     "mppY": 0.02781
+    },
+    "semanticVsC0": null,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C1": {
+    "code": null,
+    "footprintM2": 184.86,
+    "footprintResidualPct": -5.1,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.77835,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 7
+     },
+     "confidence": 0.893946,
+     "mppX": 0.027757,
+     "mppY": 0.02781
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C1N1": {
+    "code": null,
+    "footprintM2": 184.86,
+    "footprintResidualPct": -5.1,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.77835,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 7
+     },
+     "confidence": 0.893946,
+     "mppX": 0.027757,
+     "mppY": 0.02781
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C2": {
+    "code": null,
+    "footprintM2": 194.22,
+    "footprintResidualPct": -0.29,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.77885,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 5
+     },
+     "confidence": 0.888452,
+     "mppX": 0.027767,
+     "mppY": 0.02781
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C3": {
+    "code": null,
+    "footprintM2": 184.86,
+    "footprintResidualPct": -5.1,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.77895,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 2,
+      "READ": 7
+     },
+     "confidence": 0.888783,
+     "mppX": 0.027769,
+     "mppY": 0.02781
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C4": {
+    "code": null,
+    "footprintM2": 194.22,
+    "footprintResidualPct": -0.29,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.7784,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 5
+     },
+     "confidence": 0.89588,
+     "mppX": 0.027758,
+     "mppY": 0.02781
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "N1": {
+    "code": null,
+    "footprintM2": 184.86,
+    "footprintResidualPct": -5.1,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.77895,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 2,
+      "READ": 7
+     },
+     "confidence": 0.888783,
+     "mppX": 0.027769,
+     "mppY": 0.02781
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   }
+  },
+  "dom-w-cyklamenach": {
+   "C0": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": null,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.0285,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 6,
+      "READ": 1,
+      "READ_DEPENDS_ON_SCALE": 1
+     },
+     "confidence": 0.855574,
+     "mppX": 0.020272,
+     "mppY": 0.020298
+    },
+    "semanticVsC0": null,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1": {
+    "code": null,
+    "footprintM2": 92.29,
+    "footprintResidualPct": -0.2,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.73955,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 4
+     },
+     "confidence": 0.793207,
+     "mppX": 0.020282,
+     "mppY": 0.034509
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": null,
+    "footprintM2": 92.29,
+    "footprintResidualPct": -0.2,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.73945,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 4
+     },
+     "confidence": 0.793365,
+     "mppX": 0.02028,
+     "mppY": 0.034509
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": null,
+    "footprintM2": 85.37,
+    "footprintResidualPct": -7.69,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.0289,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 4,
+      "READ_DEPENDS_ON_SCALE": 1
+     },
+     "confidence": 0.871492,
+     "mppX": 0.020277,
+     "mppY": 0.020301
+    },
+    "semanticVsC0": true,
+    "sourceExact": 3,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.0272,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 4,
+      "READ": 1
+     },
+     "confidence": 0.708481,
+     "mppX": 0.020272,
+     "mppY": 0.020272
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C4": {
+    "code": null,
+    "footprintM2": 85.47,
+    "footprintResidualPct": -7.58,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.029,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 2
+     },
+     "confidence": 0.490286,
+     "mppX": 0.02029,
+     "mppY": 0.02029
+    },
+    "semanticVsC0": true,
+    "sourceExact": 3,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.02865,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 5,
+      "READ": 1,
+      "READ_DEPENDS_ON_SCALE": 1
+     },
+     "confidence": 0.852452,
+     "mppX": 0.020275,
+     "mppY": 0.020298
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   }
+  },
+  "dom-w-dabecjach": {
+   "C0": {
+    "code": "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": null,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.81315,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 7
+     },
+     "confidence": 0.886246,
+     "mppX": 0.028113,
+     "mppY": 0.02815
+    },
+    "semanticVsC0": null,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1": {
+    "code": "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.8131,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 7
+     },
+     "confidence": 0.888299,
+     "mppX": 0.028113,
+     "mppY": 0.028149
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.8131,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 7
+     },
+     "confidence": 0.888299,
+     "mppX": 0.028113,
+     "mppY": 0.028149
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.8131,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 7
+     },
+     "confidence": 0.888299,
+     "mppX": 0.028113,
+     "mppY": 0.028149
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.8131,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 7
+     },
+     "confidence": 0.888296,
+     "mppX": 0.028113,
+     "mppY": 0.028149
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C4": {
+    "code": "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.8131,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 7
+     },
+     "confidence": 0.888296,
+     "mppX": 0.028113,
+     "mppY": 0.028149
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.81315,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 7
+     },
+     "confidence": 0.886246,
+     "mppX": 0.028113,
+     "mppY": 0.02815
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   }
+  },
+  "dom-w-daliach": {
+   "C0": {
+    "code": null,
+    "footprintM2": 127.46,
+    "footprintResidualPct": 0.39,
+    "modelChangedVsC0": null,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.1882,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 4
+     },
+     "confidence": 0.86131,
+     "mppX": 0.021881,
+     "mppY": 0.021883
+    },
+    "semanticVsC0": null,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C1": {
+    "code": null,
+    "footprintM2": 127.46,
+    "footprintResidualPct": 0.39,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.18815,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 4
+     },
+     "confidence": 0.81376,
+     "mppX": 0.02188,
+     "mppY": 0.021883
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": null,
+    "footprintM2": 127.46,
+    "footprintResidualPct": 0.39,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.18815,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 4
+     },
+     "confidence": 0.81376,
+     "mppX": 0.02188,
+     "mppY": 0.021883
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": null,
+    "footprintM2": 127.46,
+    "footprintResidualPct": 0.39,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.1882,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 4
+     },
+     "confidence": 0.86131,
+     "mppX": 0.021881,
+     "mppY": 0.021883
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C3": {
+    "code": null,
+    "footprintM2": 127.46,
+    "footprintResidualPct": 0.39,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.1882,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 4
+     },
+     "confidence": 0.86131,
+     "mppX": 0.021881,
+     "mppY": 0.021883
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C4": {
+    "code": null,
+    "footprintM2": 127.46,
+    "footprintResidualPct": 0.39,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.18815,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 4
+     },
+     "confidence": 0.81376,
+     "mppX": 0.02188,
+     "mppY": 0.021883
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": null,
+    "footprintM2": 127.46,
+    "footprintResidualPct": 0.39,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.1882,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 4
+     },
+     "confidence": 0.86131,
+     "mppX": 0.021881,
+     "mppY": 0.021883
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   }
+  },
+  "dom-w-glogownikach": {
+   "C0": {
+    "code": null,
+    "footprintM2": 163.81,
+    "footprintResidualPct": -8.04,
+    "modelChangedVsC0": null,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.6234,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 9,
+      "READ": 1
+     },
+     "confidence": 0.849053,
+     "mppX": 0.026261,
+     "mppY": 0.026207
+    },
+    "semanticVsC0": null,
+    "sourceExact": 1,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1": {
+    "code": "MODEL_EMISSION_FAILED/None",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": true,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": null,
+    "semanticVsC0": true,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": null,
+    "footprintM2": 163.9,
+    "footprintResidualPct": -7.99,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.625,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 7
+     },
+     "confidence": 0.831907,
+     "mppX": 0.026287,
+     "mppY": 0.026213
+    },
+    "semanticVsC0": true,
+    "sourceExact": 1,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": null,
+    "footprintM2": 165.67,
+    "footprintResidualPct": -6.99,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.62345,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 5
+     },
+     "confidence": 0.862943,
+     "mppX": 0.026261,
+     "mppY": 0.026208
+    },
+    "semanticVsC0": true,
+    "sourceExact": 1,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": null,
+    "footprintM2": 163.81,
+    "footprintResidualPct": -8.04,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.6234,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 9,
+      "READ": 1
+     },
+     "confidence": 0.849053,
+     "mppX": 0.026261,
+     "mppY": 0.026207
+    },
+    "semanticVsC0": false,
+    "sourceExact": 1,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C4": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": true,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 3.39835,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 3
+     },
+     "confidence": 0.695536,
+     "mppX": 0.041758,
+     "mppY": 0.026209
+    },
+    "semanticVsC0": true,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": null,
+    "footprintM2": 163.9,
+    "footprintResidualPct": -7.99,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.6189,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 2,
+      "READ": 1
+     },
+     "confidence": 0.535402,
+     "mppX": 0.026189,
+     "mppY": 0.026189
+    },
+    "semanticVsC0": true,
+    "sourceExact": 1,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   }
+  },
+  "dom-w-gozdzikowcach": {
+   "C0": {
+    "code": "MODEL_EMISSION_FAILED/None",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": null,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": null,
+    "semanticVsC0": null,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1": {
+    "code": "MODEL_EMISSION_FAILED/None",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": null,
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": "MODEL_EMISSION_FAILED/None",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": null,
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": "MODEL_EMISSION_FAILED/None",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": null,
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": "MODEL_EMISSION_FAILED/None",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": null,
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C4": {
+    "code": "MODEL_EMISSION_FAILED/None",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": null,
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": "MODEL_EMISSION_FAILED/None",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": null,
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   }
+  },
+  "dom-w-helikoniach": {
+   "C0": {
+    "code": null,
+    "footprintM2": 77.56,
+    "footprintResidualPct": -18.88,
+    "modelChangedVsC0": null,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.30615,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 4,
+      "READ": 3
+     },
+     "confidence": 0.869311,
+     "mppX": 0.023052,
+     "mppY": 0.023071
+    },
+    "semanticVsC0": null,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1": {
+    "code": null,
+    "footprintM2": 77.68,
+    "footprintResidualPct": -18.76,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.30585,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 5
+     },
+     "confidence": 0.886754,
+     "mppX": 0.023056,
+     "mppY": 0.023061
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": null,
+    "footprintM2": 77.67,
+    "footprintResidualPct": -18.77,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.30535,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 6
+     },
+     "confidence": 0.887897,
+     "mppX": 0.023056,
+     "mppY": 0.023051
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": null,
+    "footprintM2": 77.73,
+    "footprintResidualPct": -18.7,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.3074,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 3,
+      "READ": 2
+     },
+     "confidence": 0.887176,
+     "mppX": 0.023053,
+     "mppY": 0.023095
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": null,
+    "footprintM2": 77.56,
+    "footprintResidualPct": -18.88,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.3052,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 3,
+      "READ": 2
+     },
+     "confidence": 0.713703,
+     "mppX": 0.023052,
+     "mppY": 0.023052
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C4": {
+    "code": null,
+    "footprintM2": 77.72,
+    "footprintResidualPct": -18.71,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.3056,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 4
+     },
+     "confidence": 0.65519,
+     "mppX": 0.023056,
+     "mppY": 0.023056
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": null,
+    "footprintM2": 77.66,
+    "footprintResidualPct": -18.77,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.30595,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 3
+     },
+     "confidence": 0.781672,
+     "mppX": 0.023058,
+     "mppY": 0.023061
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   }
+  },
+  "dom-w-jablonkach": {
+   "C0": {
+    "code": null,
+    "footprintM2": 99.0,
+    "footprintResidualPct": -0.4,
+    "modelChangedVsC0": null,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.11555,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 2,
+      "READ": 2
+     },
+     "confidence": 0.80297,
+     "mppX": 0.021195,
+     "mppY": 0.021116
+    },
+    "semanticVsC0": null,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C1": {
+    "code": null,
+    "footprintM2": 99.0,
+    "footprintResidualPct": -0.4,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.1124,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 2
+     },
+     "confidence": 0.66,
+     "mppX": 0.021195,
+     "mppY": 0.021053
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C1N1": {
+    "code": null,
+    "footprintM2": 99.0,
+    "footprintResidualPct": -0.4,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.1124,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 2
+     },
+     "confidence": 0.66,
+     "mppX": 0.021195,
+     "mppY": 0.021053
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C2": {
+    "code": null,
+    "footprintM2": 99.0,
+    "footprintResidualPct": -0.4,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.11565,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 2
+     },
+     "confidence": 0.725687,
+     "mppX": 0.021195,
+     "mppY": 0.021118
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C3": {
+    "code": null,
+    "footprintM2": 99.0,
+    "footprintResidualPct": -0.4,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.11565,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 2
+     },
+     "confidence": 0.725687,
+     "mppX": 0.021195,
+     "mppY": 0.021118
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C4": {
+    "code": null,
+    "footprintM2": 99.0,
+    "footprintResidualPct": -0.4,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.1124,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 2
+     },
+     "confidence": 0.66,
+     "mppX": 0.021195,
+     "mppY": 0.021053
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "N1": {
+    "code": null,
+    "footprintM2": 99.0,
+    "footprintResidualPct": -0.4,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.11555,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 2,
+      "READ": 2
+     },
+     "confidence": 0.80297,
+     "mppX": 0.021195,
+     "mppY": 0.021116
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "PASS"
+   }
+  },
+  "dom-w-krasnokwiatach": {
+   "C0": {
+    "code": "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": null,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.5112,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 2,
+      "READ": 9
+     },
+     "confidence": 0.853697,
+     "mppX": 0.02511,
+     "mppY": 0.025114
+    },
+    "semanticVsC0": null,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1": {
+    "code": "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.5113,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 9
+     },
+     "confidence": 0.849389,
+     "mppX": 0.025112,
+     "mppY": 0.025114
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.5113,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 9
+     },
+     "confidence": 0.849389,
+     "mppX": 0.025112,
+     "mppY": 0.025114
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.51205,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 2,
+      "READ": 8
+     },
+     "confidence": 0.8622,
+     "mppX": 0.025127,
+     "mppY": 0.025114
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.51125,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 2,
+      "READ": 9
+     },
+     "confidence": 0.853697,
+     "mppX": 0.02511,
+     "mppY": 0.025115
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C4": {
+    "code": "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.5116,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 8
+     },
+     "confidence": 0.860273,
+     "mppX": 0.025117,
+     "mppY": 0.025115
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.5112,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 2,
+      "READ": 9
+     },
+     "confidence": 0.853697,
+     "mppX": 0.02511,
+     "mppY": 0.025114
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   }
+  },
+  "dom-w-modrzewnicy": {
+   "C0": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": null,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": null,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C4": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   }
+  },
+  "dom-w-modrzykach": {
+   "C0": {
+    "code": null,
+    "footprintM2": 185.68,
+    "footprintResidualPct": 2.03,
+    "modelChangedVsC0": null,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.74845,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 3,
+      "READ": 9
+     },
+     "confidence": 0.851813,
+     "mppX": 0.027481,
+     "mppY": 0.027488
+    },
+    "semanticVsC0": null,
+    "sourceExact": 4,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C1": {
+    "code": null,
+    "footprintM2": 186.11,
+    "footprintResidualPct": 2.27,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.74845,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 9
+     },
+     "confidence": 0.852824,
+     "mppX": 0.027481,
+     "mppY": 0.027488
+    },
+    "semanticVsC0": true,
+    "sourceExact": 4,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C1N1": {
+    "code": null,
+    "footprintM2": 186.11,
+    "footprintResidualPct": 2.27,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.74845,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 9
+     },
+     "confidence": 0.852824,
+     "mppX": 0.027481,
+     "mppY": 0.027488
+    },
+    "semanticVsC0": true,
+    "sourceExact": 4,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C2": {
+    "code": null,
+    "footprintM2": 180.48,
+    "footprintResidualPct": -0.82,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.7486,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 2,
+      "READ": 7
+     },
+     "confidence": 0.867801,
+     "mppX": 0.027481,
+     "mppY": 0.027491
+    },
+    "semanticVsC0": true,
+    "sourceExact": 4,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C3": {
+    "code": null,
+    "footprintM2": 181.79,
+    "footprintResidualPct": -0.1,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.7486,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 3,
+      "READ": 7
+     },
+     "confidence": 0.858715,
+     "mppX": 0.027481,
+     "mppY": 0.027491
+    },
+    "semanticVsC0": true,
+    "sourceExact": 4,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C4": {
+    "code": null,
+    "footprintM2": 180.48,
+    "footprintResidualPct": -0.82,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.7486,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 7
+     },
+     "confidence": 0.863764,
+     "mppX": 0.027481,
+     "mppY": 0.027491
+    },
+    "semanticVsC0": true,
+    "sourceExact": 4,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "N1": {
+    "code": null,
+    "footprintM2": 185.68,
+    "footprintResidualPct": 2.03,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.74845,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 3,
+      "READ": 9
+     },
+     "confidence": 0.851813,
+     "mppX": 0.027481,
+     "mppY": 0.027488
+    },
+    "semanticVsC0": false,
+    "sourceExact": 4,
+    "storeys": 1,
+    "verdict": "PASS"
+   }
+  },
+  "dom-w-morelach": {
+   "C0": {
+    "code": null,
+    "footprintM2": 112.05,
+    "footprintResidualPct": -2.17,
+    "modelChangedVsC0": null,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.0115,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 4,
+      "READ": 2
+     },
+     "confidence": 0.878802,
+     "mppX": 0.01996,
+     "mppY": 0.02027
+    },
+    "semanticVsC0": null,
+    "sourceExact": 3,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C1": {
+    "code": null,
+    "footprintM2": 111.89,
+    "footprintResidualPct": -2.31,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 1.99925,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 6
+     },
+     "confidence": 0.848789,
+     "mppX": 0.019957,
+     "mppY": 0.020028
+    },
+    "semanticVsC0": true,
+    "sourceExact": 3,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C1N1": {
+    "code": null,
+    "footprintM2": 111.89,
+    "footprintResidualPct": -2.31,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 1.99925,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 6
+     },
+     "confidence": 0.848789,
+     "mppX": 0.019957,
+     "mppY": 0.020028
+    },
+    "semanticVsC0": true,
+    "sourceExact": 3,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C2": {
+    "code": null,
+    "footprintM2": 106.75,
+    "footprintResidualPct": -6.8,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 1.9896,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 1
+     },
+     "confidence": 0.502211,
+     "mppX": 0.019896,
+     "mppY": 0.019896
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": null,
+    "footprintM2": 112.05,
+    "footprintResidualPct": -2.17,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.0115,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 4,
+      "READ": 2
+     },
+     "confidence": 0.878802,
+     "mppX": 0.01996,
+     "mppY": 0.02027
+    },
+    "semanticVsC0": false,
+    "sourceExact": 3,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C4": {
+    "code": null,
+    "footprintM2": 106.77,
+    "footprintResidualPct": -6.77,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 1.99305,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 4
+     },
+     "confidence": 0.765433,
+     "mppX": 0.019887,
+     "mppY": 0.019974
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": null,
+    "footprintM2": 112.05,
+    "footprintResidualPct": -2.17,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.0115,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 4,
+      "READ": 2
+     },
+     "confidence": 0.878802,
+     "mppX": 0.01996,
+     "mppY": 0.02027
+    },
+    "semanticVsC0": false,
+    "sourceExact": 3,
+    "storeys": 2,
+    "verdict": "PASS"
+   }
+  },
+  "dom-w-murajach": {
+   "C0": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": null,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.4619,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 3
+     },
+     "confidence": 0.718133,
+     "mppX": 0.024514,
+     "mppY": 0.024724
+    },
+    "semanticVsC0": null,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.4756,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 2
+     },
+     "confidence": 0.438331,
+     "mppX": 0.024756,
+     "mppY": 0.024756
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.4623,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 3
+     },
+     "confidence": 0.68151,
+     "mppX": 0.024756,
+     "mppY": 0.02449
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.40595,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 2
+     },
+     "confidence": 0.66,
+     "mppX": 0.024515,
+     "mppY": 0.023604
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.4514,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 2
+     },
+     "confidence": 0.483218,
+     "mppX": 0.024514,
+     "mppY": 0.024514
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C4": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 3.0343,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 2
+     },
+     "confidence": 0.494626,
+     "mppX": 0.030343,
+     "mppY": 0.030343
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.46195,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 2
+     },
+     "confidence": 0.66,
+     "mppX": 0.024515,
+     "mppY": 0.024724
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   }
+  },
+  "dom-w-tunbergiach": {
+   "C0": {
+    "code": null,
+    "footprintM2": 117.3,
+    "footprintResidualPct": -0.37,
+    "modelChangedVsC0": null,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.09325,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 2,
+      "READ": 3
+     },
+     "confidence": 0.857822,
+     "mppX": 0.020946,
+     "mppY": 0.020919
+    },
+    "semanticVsC0": null,
+    "sourceExact": 2,
+    "storeys": 3,
+    "verdict": "PASS"
+   },
+   "C1": {
+    "code": null,
+    "footprintM2": 117.3,
+    "footprintResidualPct": -0.37,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.0933,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 3
+     },
+     "confidence": 0.707187,
+     "mppX": 0.020946,
+     "mppY": 0.02092
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 3,
+    "verdict": "PASS"
+   },
+   "C1N1": {
+    "code": null,
+    "footprintM2": 117.3,
+    "footprintResidualPct": -0.37,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.0933,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 3
+     },
+     "confidence": 0.707187,
+     "mppX": 0.020946,
+     "mppY": 0.02092
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 3,
+    "verdict": "PASS"
+   },
+   "C2": {
+    "code": null,
+    "footprintM2": 117.3,
+    "footprintResidualPct": -0.37,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.0933,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 3
+     },
+     "confidence": 0.707187,
+     "mppX": 0.020946,
+     "mppY": 0.02092
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 3,
+    "verdict": "PASS"
+   },
+   "C3": {
+    "code": null,
+    "footprintM2": 117.3,
+    "footprintResidualPct": -0.37,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.09325,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 2,
+      "READ": 3
+     },
+     "confidence": 0.857822,
+     "mppX": 0.020946,
+     "mppY": 0.020919
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 3,
+    "verdict": "PASS"
+   },
+   "C4": {
+    "code": null,
+    "footprintM2": 117.3,
+    "footprintResidualPct": -0.37,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.0933,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 3
+     },
+     "confidence": 0.707187,
+     "mppX": 0.020946,
+     "mppY": 0.02092
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 3,
+    "verdict": "PASS"
+   },
+   "N1": {
+    "code": null,
+    "footprintM2": 117.3,
+    "footprintResidualPct": -0.37,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.09325,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 2,
+      "READ": 3
+     },
+     "confidence": 0.857822,
+     "mppX": 0.020946,
+     "mppY": 0.020919
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 3,
+    "verdict": "PASS"
+   }
+  },
+  "dom-w-tymianku": {
+   "C0": {
+    "code": null,
+    "footprintM2": 131.28,
+    "footprintResidualPct": -5.48,
+    "modelChangedVsC0": null,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.3758,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 2,
+      "READ": 8
+     },
+     "confidence": 0.880696,
+     "mppX": 0.023772,
+     "mppY": 0.023744
+    },
+    "semanticVsC0": null,
+    "sourceExact": 3,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C1": {
+    "code": null,
+    "footprintM2": 128.11,
+    "footprintResidualPct": -7.76,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.3783,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 8
+     },
+     "confidence": 0.884028,
+     "mppX": 0.023822,
+     "mppY": 0.023744
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": null,
+    "footprintM2": 128.11,
+    "footprintResidualPct": -7.76,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.3783,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 8
+     },
+     "confidence": 0.884028,
+     "mppX": 0.023822,
+     "mppY": 0.023744
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 2,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": true,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.37495,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 6
+     },
+     "confidence": 0.895253,
+     "mppX": 0.023755,
+     "mppY": 0.023744
+    },
+    "semanticVsC0": true,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": null,
+    "footprintM2": 131.25,
+    "footprintResidualPct": -5.5,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.3758,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 2,
+      "READ": 8
+     },
+     "confidence": 0.880696,
+     "mppX": 0.023772,
+     "mppY": 0.023744
+    },
+    "semanticVsC0": true,
+    "sourceExact": 3,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C4": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": true,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.3758,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 6
+     },
+     "confidence": 0.895768,
+     "mppX": 0.023772,
+     "mppY": 0.023744
+    },
+    "semanticVsC0": true,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": null,
+    "footprintM2": 131.28,
+    "footprintResidualPct": -5.48,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.3758,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 2,
+      "READ": 8
+     },
+     "confidence": 0.880696,
+     "mppX": 0.023772,
+     "mppY": 0.023744
+    },
+    "semanticVsC0": false,
+    "sourceExact": 3,
+    "storeys": 2,
+    "verdict": "PASS"
+   }
+  },
+  "dom-w-zurawkach": {
+   "C0": {
+    "code": null,
+    "footprintM2": 100.88,
+    "footprintResidualPct": -0.81,
+    "modelChangedVsC0": null,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.2174,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 3,
+      "READ": 6
+     },
+     "confidence": 0.878656,
+     "mppX": 0.022182,
+     "mppY": 0.022166
+    },
+    "semanticVsC0": null,
+    "sourceExact": 3,
+    "storeys": 3,
+    "verdict": "PASS"
+   },
+   "C1": {
+    "code": null,
+    "footprintM2": 100.88,
+    "footprintResidualPct": -0.81,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.2175,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 8
+     },
+     "confidence": 0.871301,
+     "mppX": 0.022184,
+     "mppY": 0.022166
+    },
+    "semanticVsC0": false,
+    "sourceExact": 3,
+    "storeys": 3,
+    "verdict": "PASS"
+   },
+   "C1N1": {
+    "code": null,
+    "footprintM2": 100.85,
+    "footprintResidualPct": -0.84,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.2176,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 9
+     },
+     "confidence": 0.872892,
+     "mppX": 0.022185,
+     "mppY": 0.022167
+    },
+    "semanticVsC0": true,
+    "sourceExact": 3,
+    "storeys": 3,
+    "verdict": "PASS"
+   },
+   "C2": {
+    "code": null,
+    "footprintM2": 96.02,
+    "footprintResidualPct": -5.59,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.2174,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 4,
+      "READ": 4
+     },
+     "confidence": 0.869808,
+     "mppX": 0.022182,
+     "mppY": 0.022166
+    },
+    "semanticVsC0": true,
+    "sourceExact": 3,
+    "storeys": 3,
+    "verdict": "PASS"
+   },
+   "C3": {
+    "code": null,
+    "footprintM2": 100.88,
+    "footprintResidualPct": -0.81,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.2174,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 3,
+      "READ": 6
+     },
+     "confidence": 0.878656,
+     "mppX": 0.022182,
+     "mppY": 0.022166
+    },
+    "semanticVsC0": false,
+    "sourceExact": 3,
+    "storeys": 3,
+    "verdict": "PASS"
+   },
+   "C4": {
+    "code": null,
+    "footprintM2": 96.02,
+    "footprintResidualPct": -5.59,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.2174,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 5
+     },
+     "confidence": 0.895224,
+     "mppX": 0.022182,
+     "mppY": 0.022166
+    },
+    "semanticVsC0": true,
+    "sourceExact": 3,
+    "storeys": 3,
+    "verdict": "PASS"
+   },
+   "N1": {
+    "code": null,
+    "footprintM2": 100.85,
+    "footprintResidualPct": -0.84,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.21715,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 6
+     },
+     "confidence": 0.877574,
+     "mppX": 0.022182,
+     "mppY": 0.022161
+    },
+    "semanticVsC0": true,
+    "sourceExact": 3,
+    "storeys": 3,
+    "verdict": "PASS"
+   }
+  },
+  "eoze-legacy-area": {
+   "C0": {
+    "code": null,
+    "footprintM2": 116.74,
+    "footprintResidualPct": -4.37,
+    "modelChangedVsC0": null,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.2236,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 2
+     },
+     "confidence": 0.710086,
+     "mppX": 0.025014,
+     "mppY": 0.025362
+    },
+    "semanticVsC0": null,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C1": {
+    "code": null,
+    "footprintM2": 116.74,
+    "footprintResidualPct": -4.37,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.2236,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 2
+     },
+     "confidence": 0.710086,
+     "mppX": 0.025014,
+     "mppY": 0.025362
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C1N1": {
+    "code": null,
+    "footprintM2": 116.74,
+    "footprintResidualPct": -4.37,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.2236,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 2
+     },
+     "confidence": 0.710086,
+     "mppX": 0.025014,
+     "mppY": 0.025362
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C2": {
+    "code": null,
+    "footprintM2": 116.74,
+    "footprintResidualPct": -4.37,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.2236,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 2
+     },
+     "confidence": 0.710086,
+     "mppX": 0.025014,
+     "mppY": 0.025362
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C3": {
+    "code": null,
+    "footprintM2": 116.74,
+    "footprintResidualPct": -4.37,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.2236,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 2
+     },
+     "confidence": 0.710086,
+     "mppX": 0.025014,
+     "mppY": 0.025362
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C4": {
+    "code": null,
+    "footprintM2": 116.74,
+    "footprintResidualPct": -4.37,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.2236,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 2
+     },
+     "confidence": 0.710086,
+     "mppX": 0.025014,
+     "mppY": 0.025362
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "N1": {
+    "code": null,
+    "footprintM2": 116.74,
+    "footprintResidualPct": -4.37,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.2236,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 2
+     },
+     "confidence": 0.710086,
+     "mppX": 0.025014,
+     "mppY": 0.025362
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   }
+  },
+  "eoze-legacy-every": {
+   "C0": {
+    "code": null,
+    "footprintM2": 116.94,
+    "footprintResidualPct": -4.21,
+    "modelChangedVsC0": null,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.2236,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 7,
+      "READ": 2
+     },
+     "confidence": 0.83154,
+     "mppX": 0.025016,
+     "mppY": 0.025974
+    },
+    "semanticVsC0": null,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C1": {
+    "code": null,
+    "footprintM2": 116.94,
+    "footprintResidualPct": -4.21,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.2236,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 7,
+      "READ": 2
+     },
+     "confidence": 0.83154,
+     "mppX": 0.025016,
+     "mppY": 0.025974
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C1N1": {
+    "code": null,
+    "footprintM2": 116.94,
+    "footprintResidualPct": -4.21,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.2236,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 7,
+      "READ": 2
+     },
+     "confidence": 0.83154,
+     "mppX": 0.025016,
+     "mppY": 0.025974
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C2": {
+    "code": null,
+    "footprintM2": 116.94,
+    "footprintResidualPct": -4.21,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.2236,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 7,
+      "READ": 2
+     },
+     "confidence": 0.83154,
+     "mppX": 0.025016,
+     "mppY": 0.025974
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C3": {
+    "code": null,
+    "footprintM2": 116.94,
+    "footprintResidualPct": -4.21,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.2236,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 7,
+      "READ": 2
+     },
+     "confidence": 0.83154,
+     "mppX": 0.025016,
+     "mppY": 0.025974
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C4": {
+    "code": null,
+    "footprintM2": 116.94,
+    "footprintResidualPct": -4.21,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.2236,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 7,
+      "READ": 2
+     },
+     "confidence": 0.83154,
+     "mppX": 0.025016,
+     "mppY": 0.025974
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "N1": {
+    "code": null,
+    "footprintM2": 116.94,
+    "footprintResidualPct": -4.21,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.2236,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 7,
+      "READ": 2
+     },
+     "confidence": 0.83154,
+     "mppX": 0.025016,
+     "mppY": 0.025974
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   }
+  },
+  "galaktyka": {
+   "C0": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": null,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": null,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C4": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": null,
+    "selectedRegistration": {
+     "anchors": null,
+     "confidence": null,
+     "mppX": null,
+     "mppY": null
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   }
+  },
+  "kosacce-area-alone": {
+   "C0": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": null,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.4062,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 4,
+      "READ": 3
+     },
+     "confidence": 0.885904,
+     "mppX": 0.024057,
+     "mppY": 0.024067
+    },
+    "semanticVsC0": null,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.4062,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 4,
+      "READ": 3
+     },
+     "confidence": 0.885904,
+     "mppX": 0.024057,
+     "mppY": 0.024067
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.4062,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 4,
+      "READ": 3
+     },
+     "confidence": 0.885904,
+     "mppX": 0.024057,
+     "mppY": 0.024067
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.4062,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 4,
+      "READ": 3
+     },
+     "confidence": 0.885904,
+     "mppX": 0.024057,
+     "mppY": 0.024067
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.4062,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 4,
+      "READ": 3
+     },
+     "confidence": 0.885904,
+     "mppX": 0.024057,
+     "mppY": 0.024067
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C4": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.4062,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 4,
+      "READ": 3
+     },
+     "confidence": 0.885904,
+     "mppX": 0.024057,
+     "mppY": 0.024067
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": false,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.4062,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 4,
+      "READ": 3
+     },
+     "confidence": 0.885904,
+     "mppX": 0.024057,
+     "mppY": 0.024067
+    },
+    "semanticVsC0": false,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   }
+  },
+  "kosacce-clean": {
+   "C0": {
+    "code": null,
+    "footprintM2": 162.28,
+    "footprintResidualPct": -1.33,
+    "modelChangedVsC0": null,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.40625,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 14,
+      "READ": 4
+     },
+     "confidence": 0.860271,
+     "mppX": 0.024058,
+     "mppY": 0.024067
+    },
+    "semanticVsC0": null,
+    "sourceExact": 4,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C1": {
+    "code": null,
+    "footprintM2": 182.85,
+    "footprintResidualPct": 11.18,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.4062,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 8
+     },
+     "confidence": 0.886155,
+     "mppX": 0.024057,
+     "mppY": 0.024067
+    },
+    "semanticVsC0": true,
+    "sourceExact": 4,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": null,
+    "footprintM2": 182.92,
+    "footprintResidualPct": 11.22,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.4062,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 9
+     },
+     "confidence": 0.890504,
+     "mppX": 0.024058,
+     "mppY": 0.024066
+    },
+    "semanticVsC0": true,
+    "sourceExact": 4,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": null,
+    "footprintM2": 163.05,
+    "footprintResidualPct": -0.86,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.4062,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 7,
+      "READ": 4
+     },
+     "confidence": 0.858104,
+     "mppX": 0.024058,
+     "mppY": 0.024066
+    },
+    "semanticVsC0": true,
+    "sourceExact": 4,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C3": {
+    "code": null,
+    "footprintM2": 162.28,
+    "footprintResidualPct": -1.33,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.40625,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 14,
+      "READ": 4
+     },
+     "confidence": 0.860271,
+     "mppX": 0.024058,
+     "mppY": 0.024067
+    },
+    "semanticVsC0": false,
+    "sourceExact": 4,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C4": {
+    "code": null,
+    "footprintM2": 163.05,
+    "footprintResidualPct": -0.86,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.4062,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 8
+     },
+     "confidence": 0.886155,
+     "mppX": 0.024057,
+     "mppY": 0.024067
+    },
+    "semanticVsC0": true,
+    "sourceExact": 4,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "N1": {
+    "code": null,
+    "footprintM2": 162.35,
+    "footprintResidualPct": -1.29,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.4156,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 10,
+      "READ": 3
+     },
+     "confidence": 0.855146,
+     "mppX": 0.024242,
+     "mppY": 0.02407
+    },
+    "semanticVsC0": true,
+    "sourceExact": 4,
+    "storeys": 1,
+    "verdict": "PASS"
+   }
+  },
+  "kosacce-tracked": {
+   "C0": {
+    "code": null,
+    "footprintM2": 162.28,
+    "footprintResidualPct": -1.33,
+    "modelChangedVsC0": null,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.40625,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 14,
+      "READ": 4
+     },
+     "confidence": 0.860271,
+     "mppX": 0.024058,
+     "mppY": 0.024067
+    },
+    "semanticVsC0": null,
+    "sourceExact": 4,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C1": {
+    "code": null,
+    "footprintM2": 182.85,
+    "footprintResidualPct": 11.18,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.4062,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 8
+     },
+     "confidence": 0.886155,
+     "mppX": 0.024057,
+     "mppY": 0.024067
+    },
+    "semanticVsC0": true,
+    "sourceExact": 4,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": null,
+    "footprintM2": 182.92,
+    "footprintResidualPct": 11.22,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.4062,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 9
+     },
+     "confidence": 0.890504,
+     "mppX": 0.024058,
+     "mppY": 0.024066
+    },
+    "semanticVsC0": true,
+    "sourceExact": 4,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": null,
+    "footprintM2": 163.05,
+    "footprintResidualPct": -0.86,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.4062,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 7,
+      "READ": 4
+     },
+     "confidence": 0.858104,
+     "mppX": 0.024058,
+     "mppY": 0.024066
+    },
+    "semanticVsC0": true,
+    "sourceExact": 4,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C3": {
+    "code": null,
+    "footprintM2": 162.28,
+    "footprintResidualPct": -1.33,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.40625,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 14,
+      "READ": 4
+     },
+     "confidence": 0.860271,
+     "mppX": 0.024058,
+     "mppY": 0.024067
+    },
+    "semanticVsC0": false,
+    "sourceExact": 4,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C4": {
+    "code": null,
+    "footprintM2": 163.05,
+    "footprintResidualPct": -0.86,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.4062,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 8
+     },
+     "confidence": 0.886155,
+     "mppX": 0.024057,
+     "mppY": 0.024067
+    },
+    "semanticVsC0": true,
+    "sourceExact": 4,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "N1": {
+    "code": null,
+    "footprintM2": 162.35,
+    "footprintResidualPct": -1.29,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.4156,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 10,
+      "READ": 3
+     },
+     "confidence": 0.855146,
+     "mppX": 0.024242,
+     "mppY": 0.02407
+    },
+    "semanticVsC0": true,
+    "sourceExact": 4,
+    "storeys": 1,
+    "verdict": "PASS"
+   }
+  },
+  "marcowki": {
+   "C0": {
+    "code": null,
+    "footprintM2": 130.79,
+    "footprintResidualPct": -0.29,
+    "modelChangedVsC0": null,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.6447,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 6,
+      "READ": 3
+     },
+     "confidence": 0.861215,
+     "mppX": 0.026426,
+     "mppY": 0.026468
+    },
+    "semanticVsC0": null,
+    "sourceExact": 4,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C1": {
+    "code": null,
+    "footprintM2": 130.67,
+    "footprintResidualPct": -0.38,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.6434,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 7
+     },
+     "confidence": 0.894652,
+     "mppX": 0.026425,
+     "mppY": 0.026443
+    },
+    "semanticVsC0": true,
+    "sourceExact": 3,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C1N1": {
+    "code": null,
+    "footprintM2": 130.67,
+    "footprintResidualPct": -0.38,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.64345,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 7
+     },
+     "confidence": 0.894647,
+     "mppX": 0.026425,
+     "mppY": 0.026444
+    },
+    "semanticVsC0": true,
+    "sourceExact": 3,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C2": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": true,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.64575,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 3,
+      "READ": 1
+     },
+     "confidence": 0.818321,
+     "mppX": 0.026425,
+     "mppY": 0.02649
+    },
+    "semanticVsC0": true,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": null,
+    "footprintM2": 130.79,
+    "footprintResidualPct": -0.29,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.6447,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 6,
+      "READ": 3
+     },
+     "confidence": 0.861215,
+     "mppX": 0.026426,
+     "mppY": 0.026468
+    },
+    "semanticVsC0": false,
+    "sourceExact": 4,
+    "storeys": 2,
+    "verdict": "PASS"
+   },
+   "C4": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": true,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 2.644,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 4
+     },
+     "confidence": 0.818321,
+     "mppX": 0.026425,
+     "mppY": 0.026455
+    },
+    "semanticVsC0": true,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": null,
+    "footprintM2": 130.67,
+    "footprintResidualPct": -0.38,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.64275,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 3,
+      "READ": 3
+     },
+     "confidence": 0.852248,
+     "mppX": 0.026427,
+     "mppY": 0.026428
+    },
+    "semanticVsC0": true,
+    "sourceExact": 4,
+    "storeys": 2,
+    "verdict": "PASS"
+   }
+  },
+  "rarytasy-eoze": {
+   "C0": {
+    "code": null,
+    "footprintM2": 123.99,
+    "footprintResidualPct": 1.57,
+    "modelChangedVsC0": null,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.2222,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 5,
+      "READ": 2
+     },
+     "confidence": 0.875562,
+     "mppX": 0.022237,
+     "mppY": 0.020855
+    },
+    "semanticVsC0": null,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C1": {
+    "code": null,
+    "footprintM2": 123.99,
+    "footprintResidualPct": 1.57,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.2229,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 4
+     },
+     "confidence": 0.786505,
+     "mppX": 0.022236,
+     "mppY": 0.022222
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C1N1": {
+    "code": null,
+    "footprintM2": 123.99,
+    "footprintResidualPct": 1.57,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.2229,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 5
+     },
+     "confidence": 0.849094,
+     "mppX": 0.022236,
+     "mppY": 0.022222
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C2": {
+    "code": null,
+    "footprintM2": 123.99,
+    "footprintResidualPct": 1.57,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.2222,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 2
+     },
+     "confidence": 0.719988,
+     "mppX": 0.022236,
+     "mppY": 0.020855
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C3": {
+    "code": null,
+    "footprintM2": 123.99,
+    "footprintResidualPct": 1.57,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.2222,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 5,
+      "READ": 2
+     },
+     "confidence": 0.875562,
+     "mppX": 0.022237,
+     "mppY": 0.020855
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C4": {
+    "code": null,
+    "footprintM2": 123.99,
+    "footprintResidualPct": 1.57,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.2229,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 4
+     },
+     "confidence": 0.786505,
+     "mppX": 0.022236,
+     "mppY": 0.022222
+    },
+    "semanticVsC0": true,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "N1": {
+    "code": null,
+    "footprintM2": 123.99,
+    "footprintResidualPct": 1.57,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.2222,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 4,
+      "READ": 2
+     },
+     "confidence": 0.873609,
+     "mppX": 0.022237,
+     "mppY": 0.020855
+    },
+    "semanticVsC0": false,
+    "sourceExact": 2,
+    "storeys": 1,
+    "verdict": "PASS"
+   }
+  },
+  "rarytasy-g2e": {
+   "C0": {
+    "code": null,
+    "footprintM2": 184.55,
+    "footprintResidualPct": -2.75,
+    "modelChangedVsC0": null,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.75495,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 9,
+      "READ": 1
+     },
+     "confidence": 0.861106,
+     "mppX": 0.027579,
+     "mppY": 0.02752
+    },
+    "semanticVsC0": null,
+    "sourceExact": 3,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C1": {
+    "code": null,
+    "footprintM2": 184.58,
+    "footprintResidualPct": -2.73,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.7558,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 4
+     },
+     "confidence": 0.797835,
+     "mppX": 0.040127,
+     "mppY": 0.027516
+    },
+    "semanticVsC0": true,
+    "sourceExact": 3,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C1N1": {
+    "code": null,
+    "footprintM2": 190.67,
+    "footprintResidualPct": 0.47,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.754,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 4
+     },
+     "confidence": 0.797835,
+     "mppX": 0.027564,
+     "mppY": 0.027516
+    },
+    "semanticVsC0": true,
+    "sourceExact": 3,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C2": {
+    "code": null,
+    "footprintM2": 193.59,
+    "footprintResidualPct": 2.01,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.7517,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 4
+     },
+     "confidence": 0.810591,
+     "mppX": 0.027534,
+     "mppY": 0.0275
+    },
+    "semanticVsC0": true,
+    "sourceExact": 3,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C3": {
+    "code": null,
+    "footprintM2": 184.55,
+    "footprintResidualPct": -2.75,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.75495,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 9,
+      "READ": 1
+     },
+     "confidence": 0.861106,
+     "mppX": 0.027579,
+     "mppY": 0.02752
+    },
+    "semanticVsC0": false,
+    "sourceExact": 3,
+    "storeys": 1,
+    "verdict": "PASS"
+   },
+   "C4": {
+    "code": "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+    "footprintM2": null,
+    "footprintResidualPct": null,
+    "modelChangedVsC0": true,
+    "outcome": "FAILED",
+    "scaleCmPerPx": 5.2647,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 3
+     },
+     "confidence": 0.714854,
+     "mppX": 0.077778,
+     "mppY": 0.027516
+    },
+    "semanticVsC0": true,
+    "sourceExact": 0,
+    "storeys": null,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": null,
+    "footprintM2": 184.47,
+    "footprintResidualPct": -2.79,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.73905,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 8,
+      "READ": 1
+     },
+     "confidence": 0.869128,
+     "mppX": 0.027261,
+     "mppY": 0.02752
+    },
+    "semanticVsC0": true,
+    "sourceExact": 3,
+    "storeys": 1,
+    "verdict": "PASS"
+   }
+  },
+  "willa-miranda": {
+   "C0": {
+    "code": null,
+    "footprintM2": 167.36,
+    "footprintResidualPct": -1.49,
+    "modelChangedVsC0": null,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.6699,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 3,
+      "READ": 3
+     },
+     "confidence": 0.861143,
+     "mppX": 0.026808,
+     "mppY": 0.02659
+    },
+    "semanticVsC0": null,
+    "sourceExact": 6,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1": {
+    "code": null,
+    "footprintM2": 166.21,
+    "footprintResidualPct": -2.17,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.6809,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 6
+     },
+     "confidence": 0.894471,
+     "mppX": 0.026809,
+     "mppY": 0.026809
+    },
+    "semanticVsC0": true,
+    "sourceExact": 6,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C1N1": {
+    "code": null,
+    "footprintM2": 166.21,
+    "footprintResidualPct": -2.17,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.6809,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 6
+     },
+     "confidence": 0.894471,
+     "mppX": 0.026809,
+     "mppY": 0.026809
+    },
+    "semanticVsC0": true,
+    "sourceExact": 6,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C2": {
+    "code": null,
+    "footprintM2": 167.4,
+    "footprintResidualPct": -1.47,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.68165,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 1,
+      "READ": 3
+     },
+     "confidence": 0.816211,
+     "mppX": 0.026809,
+     "mppY": 0.026824
+    },
+    "semanticVsC0": true,
+    "sourceExact": 4,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C3": {
+    "code": null,
+    "footprintM2": 167.36,
+    "footprintResidualPct": -1.49,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.6699,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 3,
+      "READ": 3
+     },
+     "confidence": 0.861143,
+     "mppX": 0.026808,
+     "mppY": 0.02659
+    },
+    "semanticVsC0": false,
+    "sourceExact": 6,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "C4": {
+    "code": null,
+    "footprintM2": 167.4,
+    "footprintResidualPct": -1.47,
+    "modelChangedVsC0": true,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.6809,
+    "selectedRegistration": {
+     "anchors": {
+      "READ": 6
+     },
+     "confidence": 0.894471,
+     "mppX": 0.026809,
+     "mppY": 0.026809
+    },
+    "semanticVsC0": true,
+    "sourceExact": 4,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   },
+   "N1": {
+    "code": null,
+    "footprintM2": 167.36,
+    "footprintResidualPct": -1.49,
+    "modelChangedVsC0": false,
+    "outcome": "COMPLETED",
+    "scaleCmPerPx": 2.6699,
+    "selectedRegistration": {
+     "anchors": {
+      "CHAIN_CORRECTED": 3,
+      "READ": 3
+     },
+     "confidence": 0.861143,
+     "mppX": 0.026808,
+     "mppY": 0.02659
+    },
+    "semanticVsC0": false,
+    "sourceExact": 6,
+    "storeys": 1,
+    "verdict": "ALGORITHMIC_FAIL"
+   }
+  }
+ },
+ "schema": "buildapp.005q-chain.rows",
+ "version": 1
+}

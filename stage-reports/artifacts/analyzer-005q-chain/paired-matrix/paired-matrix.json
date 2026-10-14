@@ -1,0 +1,2379 @@
+{
+ "schema": "buildapp.005q-chain.paired-matrix",
+ "variants": {
+  "C0": {
+   "gates": null,
+   "house": {
+    "completed": 26,
+    "inkFirstMismatch": 0,
+    "inkFirstStatements": 0,
+    "pass": 21,
+    "passRows": [
+     "A02",
+     "A03",
+     "A06",
+     "A07",
+     "dom-miniaturka",
+     "dom-w-arkadiach",
+     "dom-w-cieszyniankach",
+     "dom-w-daliach",
+     "dom-w-jablonkach",
+     "dom-w-modrzykach",
+     "dom-w-morelach",
+     "dom-w-tunbergiach",
+     "dom-w-tymianku",
+     "dom-w-zurawkach",
+     "eoze-legacy-area",
+     "eoze-legacy-every",
+     "kosacce-clean",
+     "kosacce-tracked",
+     "marcowki",
+     "rarytasy-eoze",
+     "rarytasy-g2e"
+    ],
+    "rows": 48,
+    "scaleDependentAnchors": 627,
+    "verdicts": {
+     "ALGORITHMIC_FAIL": 27,
+     "PASS": 21
+    }
+   },
+   "label": {
+    "primary:MAIN": {
+     "binding:CORRECT": 13,
+     "binding:WRONG": 2,
+     "correctPrintedBound": 10,
+     "firstBad": {
+      "NEVER_PROPOSED": 3,
+      "NONE": 10,
+      "NOT_ON_A_CHAIN": 3,
+      "PRINTED_VALUE_WRONG": 3,
+      "READ_NOT_CORROBORATED": 20,
+      "READ_RIGHT_BOUND_WRONG": 2,
+      "READ_RIGHT_NOT_BOUND:AMBIGUOUS": 4,
+      "READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 25,
+      "READ_RIGHT_NOT_BOUND:NO_DECISION": 2,
+      "READ_RIGHT_NOT_BOUND:UNASSIGNED": 2,
+      "ROTATIONAL_TWIN_AMBIGUOUS": 2,
+      "SCALE_DEPENDENT_VALUE": 34
+     },
+     "labels": 110,
+     "scaleDependentAnchor": 42,
+     "scaleDependentValueEqualsInk": 12,
+     "spuriousCertainty": 4,
+     "wrongWhenAsserted": 3
+    },
+    "primary:SMOKE": {
+     "binding:CORRECT": 5,
+     "binding:WRONG": 0,
+     "correctPrintedBound": 4,
+     "firstBad": {
+      "NEVER_PROPOSED": 1,
+      "NONE": 4,
+      "NOT_ON_A_CHAIN": 1,
+      "READ_NOT_CORROBORATED": 3,
+      "READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 2,
+      "SCALE_DEPENDENT_VALUE": 6
+     },
+     "labels": 17,
+     "scaleDependentAnchor": 6,
+     "scaleDependentValueEqualsInk": 2,
+     "spuriousCertainty": 0,
+     "wrongWhenAsserted": 0
+    },
+    "primary:perSheet": {
+     "S1": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": false,
+      "labels": 22,
+      "registrationErrVsTrueScale": -0.0009,
+      "scaleDependentAnchor": 9,
+      "spuriousCertainty": 1
+     },
+     "S2": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": null,
+      "labels": 13,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 3,
+      "spuriousCertainty": 0
+     },
+     "S3": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": null,
+      "labels": 9,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 5,
+      "spuriousCertainty": 0
+     },
+     "S4": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": false,
+      "labels": 13,
+      "registrationErrVsTrueScale": -0.0085,
+      "scaleDependentAnchor": 6,
+      "spuriousCertainty": 0
+     },
+     "S5": {
+      "correctPrintedBound": 4,
+      "falseConfidentScale": false,
+      "labels": 17,
+      "registrationErrVsTrueScale": 0.0,
+      "scaleDependentAnchor": 6,
+      "spuriousCertainty": 0
+     },
+     "S6": {
+      "correctPrintedBound": 3,
+      "falseConfidentScale": false,
+      "labels": 25,
+      "registrationErrVsTrueScale": -0.0003,
+      "scaleDependentAnchor": 13,
+      "spuriousCertainty": 1
+     },
+     "S7": {
+      "correctPrintedBound": 4,
+      "falseConfidentScale": false,
+      "labels": 14,
+      "registrationErrVsTrueScale": -0.0003,
+      "scaleDependentAnchor": 3,
+      "spuriousCertainty": 2
+     },
+     "S8": {
+      "correctPrintedBound": 3,
+      "falseConfidentScale": false,
+      "labels": 14,
+      "registrationErrVsTrueScale": 0.0001,
+      "scaleDependentAnchor": 3,
+      "spuriousCertainty": 0
+     },
+     "S9": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": null,
+      "labels": 0,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     }
+    },
+    "sensitivity:MAIN": {
+     "binding:CORRECT": 13,
+     "binding:WRONG": 3,
+     "correctPrintedBound": 10,
+     "firstBad": {
+      "NEVER_PROPOSED": 23,
+      "NONE": 10,
+      "NOT_ON_A_CHAIN": 16,
+      "PRINTED_VALUE_WRONG": 3,
+      "READ_NOT_CORROBORATED": 24,
+      "READ_RIGHT_BOUND_WRONG": 3,
+      "READ_RIGHT_NOT_BOUND:AMBIGUOUS": 4,
+      "READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 28,
+      "READ_RIGHT_NOT_BOUND:NO_DECISION": 3,
+      "READ_RIGHT_NOT_BOUND:UNASSIGNED": 2,
+      "ROTATIONAL_TWIN_AMBIGUOUS": 3,
+      "SCALE_DEPENDENT_VALUE": 33
+     },
+     "labels": 152,
+     "scaleDependentAnchor": 42,
+     "scaleDependentValueEqualsInk": 12,
+     "spuriousCertainty": 4,
+     "wrongWhenAsserted": 3
+    },
+    "sensitivity:SMOKE": {
+     "binding:CORRECT": 5,
+     "binding:WRONG": 0,
+     "correctPrintedBound": 4,
+     "firstBad": {
+      "NEVER_PROPOSED": 3,
+      "NONE": 4,
+      "NOT_ON_A_CHAIN": 2,
+      "READ_NOT_CORROBORATED": 3,
+      "READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 2,
+      "SCALE_DEPENDENT_VALUE": 6
+     },
+     "labels": 20,
+     "scaleDependentAnchor": 6,
+     "scaleDependentValueEqualsInk": 2,
+     "spuriousCertainty": 0,
+     "wrongWhenAsserted": 0
+    },
+    "sensitivity:perSheet": {
+     "S1": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": false,
+      "labels": 29,
+      "registrationErrVsTrueScale": -0.0009,
+      "scaleDependentAnchor": 9,
+      "spuriousCertainty": 1
+     },
+     "S2": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": null,
+      "labels": 15,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 3,
+      "spuriousCertainty": 0
+     },
+     "S3": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": null,
+      "labels": 10,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 5,
+      "spuriousCertainty": 0
+     },
+     "S4": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": false,
+      "labels": 17,
+      "registrationErrVsTrueScale": -0.0085,
+      "scaleDependentAnchor": 6,
+      "spuriousCertainty": 0
+     },
+     "S5": {
+      "correctPrintedBound": 4,
+      "falseConfidentScale": false,
+      "labels": 20,
+      "registrationErrVsTrueScale": 0.0,
+      "scaleDependentAnchor": 6,
+      "spuriousCertainty": 0
+     },
+     "S6": {
+      "correctPrintedBound": 3,
+      "falseConfidentScale": false,
+      "labels": 35,
+      "registrationErrVsTrueScale": -0.0003,
+      "scaleDependentAnchor": 13,
+      "spuriousCertainty": 1
+     },
+     "S7": {
+      "correctPrintedBound": 4,
+      "falseConfidentScale": false,
+      "labels": 21,
+      "registrationErrVsTrueScale": -0.0003,
+      "scaleDependentAnchor": 3,
+      "spuriousCertainty": 2
+     },
+     "S8": {
+      "correctPrintedBound": 3,
+      "falseConfidentScale": false,
+      "labels": 24,
+      "registrationErrVsTrueScale": 0.0001,
+      "scaleDependentAnchor": 3,
+      "spuriousCertainty": 0
+     },
+     "S9": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": null,
+      "labels": 1,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     }
+    }
+   }
+  },
+  "C1": {
+   "gates": {
+    "G1": false,
+    "G1failures": [
+     "A03",
+     "dom-pod-jarzabem",
+     "dom-w-cieszyniankach",
+     "dom-w-daliach",
+     "dom-w-jablonkach",
+     "dom-w-modrzykach",
+     "dom-w-morelach",
+     "dom-w-tunbergiach",
+     "dom-w-tymianku",
+     "kosacce-clean",
+     "kosacce-tracked",
+     "marcowki",
+     "rarytasy-eoze",
+     "rarytasy-g2e"
+    ],
+    "G2": false,
+    "G2a": 0,
+    "G2a'": 43,
+    "G2b": 0,
+    "G2c": [
+     {
+      "baseline": [
+       "COMPLETED",
+       -1.33
+      ],
+      "case": "kosacce-clean",
+      "residualPct": 11.18
+     },
+     {
+      "baseline": [
+       "COMPLETED",
+       -1.33
+      ],
+      "case": "kosacce-tracked",
+      "residualPct": 11.18
+     },
+     {
+      "baseline": [
+       "COMPLETED",
+       -5.48
+      ],
+      "case": "dom-w-tymianku",
+      "residualPct": -7.76
+     },
+     {
+      "registrationErrVsTrueScale": 0.7765,
+      "sheet": "S1"
+     }
+    ],
+    "G2d": [],
+    "G3": false,
+    "G3changes": 36,
+    "G5changed": [
+     "dom-pod-jarzabem",
+     "dom-w-morelach",
+     "rarytasy-g2e",
+     "rarytasy-eoze",
+     "alt-marcowki",
+     "dom-w-azaliach",
+     "dom-w-dabecjach",
+     "dom-pod-milorzebem",
+     "dom-w-cyklamenach",
+     "A05",
+     "dom-w-murajach",
+     "dom-w-glogownikach",
+     "dom-w-akebiach"
+    ],
+    "admissible": false
+   },
+   "house": {
+    "completed": 26,
+    "inkFirstMismatch": 0,
+    "inkFirstStatements": 262,
+    "pass": 17,
+    "passRows": [
+     "A02",
+     "A03",
+     "A06",
+     "A07",
+     "dom-miniaturka",
+     "dom-w-arkadiach",
+     "dom-w-cieszyniankach",
+     "dom-w-jablonkach",
+     "dom-w-modrzykach",
+     "dom-w-morelach",
+     "dom-w-tunbergiach",
+     "dom-w-zurawkach",
+     "eoze-legacy-area",
+     "eoze-legacy-every",
+     "marcowki",
+     "rarytasy-eoze",
+     "rarytasy-g2e"
+    ],
+    "rows": 48,
+    "scaleDependentAnchors": 57,
+    "verdicts": {
+     "ALGORITHMIC_FAIL": 31,
+     "PASS": 17
+    }
+   },
+   "houseVsC0": {
+    "decisionPathChanged": 12,
+    "failureChanged": 12,
+    "knownGoodModelChanged": 17,
+    "knownGoodSemanticChanged": 13,
+    "metricChanged": 45,
+    "metricContentChanged": 45,
+    "modelChanged": 22,
+    "outcomeChanged": 3,
+    "semanticsChanged": 20,
+    "unresolvedChanged": 15,
+    "verdictChanged": {
+     "dom-w-daliach": [
+      "PASS",
+      "ALGORITHMIC_FAIL"
+     ],
+     "dom-w-tymianku": [
+      "PASS",
+      "ALGORITHMIC_FAIL"
+     ],
+     "kosacce-clean": [
+      "PASS",
+      "ALGORITHMIC_FAIL"
+     ],
+     "kosacce-tracked": [
+      "PASS",
+      "ALGORITHMIC_FAIL"
+     ]
+    }
+   },
+   "label": {
+    "primary:MAIN": {
+     "binding:CORRECT": 13,
+     "binding:WRONG": 2,
+     "correctPrintedBound": 41,
+     "firstBad": {
+      "NEVER_PROPOSED": 3,
+      "NONE": 41,
+      "NOT_ON_A_CHAIN": 3,
+      "PRINTED_VALUE_WRONG": 3,
+      "READ_NOT_CORROBORATED": 20,
+      "READ_RIGHT_BOUND_WRONG": 2,
+      "READ_RIGHT_NOT_BOUND:AMBIGUOUS": 4,
+      "READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 25,
+      "READ_RIGHT_NOT_BOUND:NO_DECISION": 2,
+      "READ_RIGHT_NOT_BOUND:UNASSIGNED": 2,
+      "ROTATIONAL_TWIN_AMBIGUOUS": 1,
+      "SCALE_DEPENDENT_VALUE": 4
+     },
+     "labels": 110,
+     "scaleDependentAnchor": 0,
+     "scaleDependentValueEqualsInk": 4,
+     "spuriousCertainty": 4,
+     "wrongWhenAsserted": 3
+    },
+    "primary:SMOKE": {
+     "binding:CORRECT": 5,
+     "binding:WRONG": 0,
+     "correctPrintedBound": 9,
+     "firstBad": {
+      "NEVER_PROPOSED": 1,
+      "NONE": 9,
+      "NOT_ON_A_CHAIN": 1,
+      "READ_NOT_CORROBORATED": 3,
+      "READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 2,
+      "SCALE_DEPENDENT_VALUE": 1
+     },
+     "labels": 17,
+     "scaleDependentAnchor": 0,
+     "scaleDependentValueEqualsInk": 0,
+     "spuriousCertainty": 0,
+     "wrongWhenAsserted": 0
+    },
+    "primary:perSheet": {
+     "S1": {
+      "correctPrintedBound": 6,
+      "falseConfidentScale": true,
+      "labels": 22,
+      "registrationErrVsTrueScale": 0.7765,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 1
+     },
+     "S2": {
+      "correctPrintedBound": 2,
+      "falseConfidentScale": null,
+      "labels": 13,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S3": {
+      "correctPrintedBound": 4,
+      "falseConfidentScale": null,
+      "labels": 9,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S4": {
+      "correctPrintedBound": 5,
+      "falseConfidentScale": false,
+      "labels": 13,
+      "registrationErrVsTrueScale": -0.0054,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S5": {
+      "correctPrintedBound": 9,
+      "falseConfidentScale": false,
+      "labels": 17,
+      "registrationErrVsTrueScale": -0.0,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S6": {
+      "correctPrintedBound": 13,
+      "falseConfidentScale": false,
+      "labels": 25,
+      "registrationErrVsTrueScale": -0.0003,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 1
+     },
+     "S7": {
+      "correctPrintedBound": 7,
+      "falseConfidentScale": false,
+      "labels": 14,
+      "registrationErrVsTrueScale": -0.0002,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 2
+     },
+     "S8": {
+      "correctPrintedBound": 4,
+      "falseConfidentScale": false,
+      "labels": 14,
+      "registrationErrVsTrueScale": 0.0,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S9": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": null,
+      "labels": 0,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     }
+    },
+    "sensitivity:MAIN": {
+     "binding:CORRECT": 13,
+     "binding:WRONG": 3,
+     "correctPrintedBound": 40,
+     "firstBad": {
+      "NEVER_PROPOSED": 23,
+      "NONE": 40,
+      "NOT_ON_A_CHAIN": 16,
+      "PRINTED_VALUE_WRONG": 3,
+      "READ_NOT_CORROBORATED": 24,
+      "READ_RIGHT_BOUND_WRONG": 3,
+      "READ_RIGHT_NOT_BOUND:AMBIGUOUS": 4,
+      "READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 28,
+      "READ_RIGHT_NOT_BOUND:NO_DECISION": 3,
+      "READ_RIGHT_NOT_BOUND:UNASSIGNED": 2,
+      "ROTATIONAL_TWIN_AMBIGUOUS": 2,
+      "SCALE_DEPENDENT_VALUE": 4
+     },
+     "labels": 152,
+     "scaleDependentAnchor": 0,
+     "scaleDependentValueEqualsInk": 4,
+     "spuriousCertainty": 5,
+     "wrongWhenAsserted": 3
+    },
+    "sensitivity:SMOKE": {
+     "binding:CORRECT": 5,
+     "binding:WRONG": 0,
+     "correctPrintedBound": 9,
+     "firstBad": {
+      "NEVER_PROPOSED": 3,
+      "NONE": 9,
+      "NOT_ON_A_CHAIN": 2,
+      "READ_NOT_CORROBORATED": 3,
+      "READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 2,
+      "SCALE_DEPENDENT_VALUE": 1
+     },
+     "labels": 20,
+     "scaleDependentAnchor": 0,
+     "scaleDependentValueEqualsInk": 0,
+     "spuriousCertainty": 0,
+     "wrongWhenAsserted": 0
+    },
+    "sensitivity:perSheet": {
+     "S1": {
+      "correctPrintedBound": 6,
+      "falseConfidentScale": true,
+      "labels": 29,
+      "registrationErrVsTrueScale": 0.7765,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 1
+     },
+     "S2": {
+      "correctPrintedBound": 2,
+      "falseConfidentScale": null,
+      "labels": 15,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S3": {
+      "correctPrintedBound": 4,
+      "falseConfidentScale": null,
+      "labels": 10,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S4": {
+      "correctPrintedBound": 5,
+      "falseConfidentScale": false,
+      "labels": 17,
+      "registrationErrVsTrueScale": -0.0054,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S5": {
+      "correctPrintedBound": 9,
+      "falseConfidentScale": false,
+      "labels": 20,
+      "registrationErrVsTrueScale": -0.0,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S6": {
+      "correctPrintedBound": 12,
+      "falseConfidentScale": false,
+      "labels": 35,
+      "registrationErrVsTrueScale": -0.0003,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 2
+     },
+     "S7": {
+      "correctPrintedBound": 7,
+      "falseConfidentScale": false,
+      "labels": 21,
+      "registrationErrVsTrueScale": -0.0002,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 2
+     },
+     "S8": {
+      "correctPrintedBound": 4,
+      "falseConfidentScale": false,
+      "labels": 24,
+      "registrationErrVsTrueScale": 0.0,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S9": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": null,
+      "labels": 1,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     }
+    }
+   }
+  },
+  "C1N1": {
+   "gates": {
+    "G1": false,
+    "G1failures": [
+     "A03",
+     "dom-pod-jarzabem",
+     "dom-w-cieszyniankach",
+     "dom-w-daliach",
+     "dom-w-jablonkach",
+     "dom-w-modrzykach",
+     "dom-w-morelach",
+     "dom-w-tunbergiach",
+     "dom-w-tymianku",
+     "dom-w-zurawkach",
+     "kosacce-clean",
+     "kosacce-tracked",
+     "marcowki",
+     "rarytasy-eoze",
+     "rarytasy-g2e"
+    ],
+    "G2": false,
+    "G2a": 0,
+    "G2a'": 51,
+    "G2b": 0,
+    "G2c": [
+     {
+      "baseline": [
+       "COMPLETED",
+       -1.33
+      ],
+      "case": "kosacce-clean",
+      "residualPct": 11.22
+     },
+     {
+      "baseline": [
+       "COMPLETED",
+       -1.33
+      ],
+      "case": "kosacce-tracked",
+      "residualPct": 11.22
+     },
+     {
+      "baseline": [
+       "COMPLETED",
+       -5.48
+      ],
+      "case": "dom-w-tymianku",
+      "residualPct": -7.76
+     }
+    ],
+    "G2d": [],
+    "G3": false,
+    "G3changes": 43,
+    "G5changed": [
+     "dom-pod-jarzabem",
+     "dom-w-morelach",
+     "rarytasy-eoze",
+     "dom-w-azaliach",
+     "dom-w-dabecjach",
+     "dom-pod-milorzebem",
+     "dom-w-cyklamenach",
+     "A05",
+     "D00",
+     "dom-w-murajach",
+     "dom-w-akebiach"
+    ],
+    "admissible": false
+   },
+   "house": {
+    "completed": 26,
+    "inkFirstMismatch": 0,
+    "inkFirstStatements": 182,
+    "pass": 18,
+    "passRows": [
+     "A02",
+     "A03",
+     "A06",
+     "A07",
+     "dom-miniaturka",
+     "dom-pod-jarzabem",
+     "dom-w-arkadiach",
+     "dom-w-cieszyniankach",
+     "dom-w-jablonkach",
+     "dom-w-modrzykach",
+     "dom-w-morelach",
+     "dom-w-tunbergiach",
+     "dom-w-zurawkach",
+     "eoze-legacy-area",
+     "eoze-legacy-every",
+     "marcowki",
+     "rarytasy-eoze",
+     "rarytasy-g2e"
+    ],
+    "rows": 48,
+    "scaleDependentAnchors": 57,
+    "verdicts": {
+     "ALGORITHMIC_FAIL": 30,
+     "PASS": 18
+    }
+   },
+   "houseVsC0": {
+    "decisionPathChanged": 11,
+    "failureChanged": 12,
+    "knownGoodModelChanged": 17,
+    "knownGoodSemanticChanged": 14,
+    "metricChanged": 45,
+    "metricContentChanged": 45,
+    "modelChanged": 23,
+    "outcomeChanged": 3,
+    "semanticsChanged": 23,
+    "unresolvedChanged": 16,
+    "verdictChanged": {
+     "dom-pod-jarzabem": [
+      "ALGORITHMIC_FAIL",
+      "PASS"
+     ],
+     "dom-w-daliach": [
+      "PASS",
+      "ALGORITHMIC_FAIL"
+     ],
+     "dom-w-tymianku": [
+      "PASS",
+      "ALGORITHMIC_FAIL"
+     ],
+     "kosacce-clean": [
+      "PASS",
+      "ALGORITHMIC_FAIL"
+     ],
+     "kosacce-tracked": [
+      "PASS",
+      "ALGORITHMIC_FAIL"
+     ]
+    }
+   },
+   "label": {
+    "primary:MAIN": {
+     "binding:CORRECT": 17,
+     "binding:WRONG": 2,
+     "correctPrintedBound": 47,
+     "firstBad": {
+      "NEVER_PROPOSED": 3,
+      "NONE": 46,
+      "NOT_ON_A_CHAIN": 3,
+      "PRINTED_VALUE_WRONG": 2,
+      "READ_NOT_CORROBORATED": 20,
+      "READ_RIGHT_BOUND_WRONG": 2,
+      "READ_RIGHT_NOT_BOUND:AMBIGUOUS": 4,
+      "READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 22,
+      "READ_RIGHT_NOT_BOUND:NO_DECISION": 2,
+      "READ_RIGHT_NOT_BOUND:UNASSIGNED": 2,
+      "SCALE_DEPENDENT_VALUE": 4
+     },
+     "labels": 110,
+     "scaleDependentAnchor": 0,
+     "scaleDependentValueEqualsInk": 4,
+     "spuriousCertainty": 3,
+     "wrongWhenAsserted": 2
+    },
+    "primary:SMOKE": {
+     "binding:CORRECT": 5,
+     "binding:WRONG": 0,
+     "correctPrintedBound": 9,
+     "firstBad": {
+      "NEVER_PROPOSED": 1,
+      "NONE": 9,
+      "NOT_ON_A_CHAIN": 1,
+      "READ_NOT_CORROBORATED": 3,
+      "READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 2,
+      "SCALE_DEPENDENT_VALUE": 1
+     },
+     "labels": 17,
+     "scaleDependentAnchor": 0,
+     "scaleDependentValueEqualsInk": 0,
+     "spuriousCertainty": 0,
+     "wrongWhenAsserted": 0
+    },
+    "primary:perSheet": {
+     "S1": {
+      "correctPrintedBound": 7,
+      "falseConfidentScale": false,
+      "labels": 22,
+      "registrationErrVsTrueScale": 0.0,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 1
+     },
+     "S2": {
+      "correctPrintedBound": 3,
+      "falseConfidentScale": null,
+      "labels": 13,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S3": {
+      "correctPrintedBound": 4,
+      "falseConfidentScale": null,
+      "labels": 9,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S4": {
+      "correctPrintedBound": 6,
+      "falseConfidentScale": false,
+      "labels": 13,
+      "registrationErrVsTrueScale": -0.0058,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S5": {
+      "correctPrintedBound": 9,
+      "falseConfidentScale": false,
+      "labels": 17,
+      "registrationErrVsTrueScale": -0.0,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S6": {
+      "correctPrintedBound": 15,
+      "falseConfidentScale": false,
+      "labels": 25,
+      "registrationErrVsTrueScale": -0.0003,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S7": {
+      "correctPrintedBound": 8,
+      "falseConfidentScale": false,
+      "labels": 14,
+      "registrationErrVsTrueScale": -0.0002,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 2
+     },
+     "S8": {
+      "correctPrintedBound": 4,
+      "falseConfidentScale": false,
+      "labels": 14,
+      "registrationErrVsTrueScale": 0.0,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S9": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": null,
+      "labels": 0,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     }
+    },
+    "sensitivity:MAIN": {
+     "binding:CORRECT": 17,
+     "binding:WRONG": 3,
+     "correctPrintedBound": 46,
+     "firstBad": {
+      "NEVER_PROPOSED": 23,
+      "NONE": 45,
+      "NOT_ON_A_CHAIN": 16,
+      "PRINTED_VALUE_WRONG": 2,
+      "READ_NOT_CORROBORATED": 24,
+      "READ_RIGHT_BOUND_WRONG": 3,
+      "READ_RIGHT_NOT_BOUND:AMBIGUOUS": 4,
+      "READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 25,
+      "READ_RIGHT_NOT_BOUND:NO_DECISION": 3,
+      "READ_RIGHT_NOT_BOUND:UNASSIGNED": 2,
+      "ROTATIONAL_TWIN_AMBIGUOUS": 1,
+      "SCALE_DEPENDENT_VALUE": 4
+     },
+     "labels": 152,
+     "scaleDependentAnchor": 0,
+     "scaleDependentValueEqualsInk": 4,
+     "spuriousCertainty": 4,
+     "wrongWhenAsserted": 2
+    },
+    "sensitivity:SMOKE": {
+     "binding:CORRECT": 5,
+     "binding:WRONG": 0,
+     "correctPrintedBound": 9,
+     "firstBad": {
+      "NEVER_PROPOSED": 3,
+      "NONE": 9,
+      "NOT_ON_A_CHAIN": 2,
+      "READ_NOT_CORROBORATED": 3,
+      "READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 2,
+      "SCALE_DEPENDENT_VALUE": 1
+     },
+     "labels": 20,
+     "scaleDependentAnchor": 0,
+     "scaleDependentValueEqualsInk": 0,
+     "spuriousCertainty": 0,
+     "wrongWhenAsserted": 0
+    },
+    "sensitivity:perSheet": {
+     "S1": {
+      "correctPrintedBound": 7,
+      "falseConfidentScale": false,
+      "labels": 29,
+      "registrationErrVsTrueScale": 0.0,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 1
+     },
+     "S2": {
+      "correctPrintedBound": 3,
+      "falseConfidentScale": null,
+      "labels": 15,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S3": {
+      "correctPrintedBound": 4,
+      "falseConfidentScale": null,
+      "labels": 10,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S4": {
+      "correctPrintedBound": 6,
+      "falseConfidentScale": false,
+      "labels": 17,
+      "registrationErrVsTrueScale": -0.0058,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S5": {
+      "correctPrintedBound": 9,
+      "falseConfidentScale": false,
+      "labels": 20,
+      "registrationErrVsTrueScale": -0.0,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S6": {
+      "correctPrintedBound": 14,
+      "falseConfidentScale": false,
+      "labels": 35,
+      "registrationErrVsTrueScale": -0.0003,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 1
+     },
+     "S7": {
+      "correctPrintedBound": 8,
+      "falseConfidentScale": false,
+      "labels": 21,
+      "registrationErrVsTrueScale": -0.0002,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 2
+     },
+     "S8": {
+      "correctPrintedBound": 4,
+      "falseConfidentScale": false,
+      "labels": 24,
+      "registrationErrVsTrueScale": 0.0,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S9": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": null,
+      "labels": 1,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     }
+    }
+   }
+  },
+  "C2": {
+   "gates": {
+    "G1": false,
+    "G1failures": [
+     "A02",
+     "A03",
+     "A06",
+     "dom-miniaturka",
+     "dom-pod-jarzabem",
+     "dom-w-cieszyniankach",
+     "dom-w-modrzykach",
+     "dom-w-morelach",
+     "dom-w-tymianku",
+     "dom-w-zurawkach",
+     "kosacce-clean",
+     "kosacce-tracked",
+     "marcowki",
+     "rarytasy-g2e"
+    ],
+    "G2": false,
+    "G2a": 420,
+    "G2a'": 91,
+    "G2b": 0,
+    "G2c": [
+     {
+      "baseline": [
+       "COMPLETED",
+       -2.17
+      ],
+      "case": "dom-w-morelach",
+      "residualPct": -6.8
+     },
+     {
+      "baseline": [
+       "FAILED",
+       null
+      ],
+      "case": "dom-w-cyklamenach",
+      "residualPct": -7.69
+     },
+     {
+      "baseline": [
+       "FAILED",
+       null
+      ],
+      "case": "A04",
+      "residualPct": -6.92
+     }
+    ],
+    "G2d": [],
+    "G3": false,
+    "G3changes": 63,
+    "G5changed": [
+     "dom-pod-jarzabem",
+     "dom-w-morelach",
+     "marcowki",
+     "rarytasy-g2e",
+     "rarytasy-eoze",
+     "alt-marcowki",
+     "dom-w-cyklamenach",
+     "A00",
+     "A04",
+     "A06",
+     "D00",
+     "dom-w-murajach",
+     "dom-w-akebiach",
+     "dom-w-tymianku"
+    ],
+    "admissible": false
+   },
+   "house": {
+    "completed": 24,
+    "inkFirstMismatch": 0,
+    "inkFirstStatements": 0,
+    "pass": 18,
+    "passRows": [
+     "A02",
+     "A03",
+     "A06",
+     "A07",
+     "dom-miniaturka",
+     "dom-w-arkadiach",
+     "dom-w-cieszyniankach",
+     "dom-w-daliach",
+     "dom-w-jablonkach",
+     "dom-w-modrzykach",
+     "dom-w-tunbergiach",
+     "dom-w-zurawkach",
+     "eoze-legacy-area",
+     "eoze-legacy-every",
+     "kosacce-clean",
+     "kosacce-tracked",
+     "rarytasy-eoze",
+     "rarytasy-g2e"
+    ],
+    "rows": 48,
+    "scaleDependentAnchors": 477,
+    "verdicts": {
+     "ALGORITHMIC_FAIL": 30,
+     "PASS": 18
+    }
+   },
+   "houseVsC0": {
+    "decisionPathChanged": 14,
+    "failureChanged": 14,
+    "knownGoodModelChanged": 16,
+    "knownGoodSemanticChanged": 13,
+    "metricChanged": 38,
+    "metricContentChanged": 45,
+    "modelChanged": 23,
+    "outcomeChanged": 6,
+    "semanticsChanged": 28,
+    "unresolvedChanged": 21,
+    "verdictChanged": {
+     "dom-w-morelach": [
+      "PASS",
+      "ALGORITHMIC_FAIL"
+     ],
+     "dom-w-tymianku": [
+      "PASS",
+      "ALGORITHMIC_FAIL"
+     ],
+     "marcowki": [
+      "PASS",
+      "ALGORITHMIC_FAIL"
+     ]
+    }
+   },
+   "label": {
+    "primary:MAIN": {
+     "binding:CORRECT": 13,
+     "binding:WRONG": 2,
+     "correctPrintedBound": 9,
+     "firstBad": {
+      "NEVER_PROPOSED": 3,
+      "NONE": 9,
+      "NOT_ON_A_CHAIN": 3,
+      "PRINTED_VALUE_WRONG": 1,
+      "READ_NOT_CORROBORATED": 20,
+      "READ_RIGHT_BOUND_WRONG": 2,
+      "READ_RIGHT_NOT_BOUND:AMBIGUOUS": 4,
+      "READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 39,
+      "READ_RIGHT_NOT_BOUND:NO_DECISION": 2,
+      "READ_RIGHT_NOT_BOUND:UNASSIGNED": 2,
+      "ROTATIONAL_TWIN_AMBIGUOUS": 2,
+      "SCALE_DEPENDENT_VALUE": 23
+     },
+     "labels": 110,
+     "scaleDependentAnchor": 29,
+     "scaleDependentValueEqualsInk": 11,
+     "spuriousCertainty": 1,
+     "wrongWhenAsserted": 1
+    },
+    "primary:SMOKE": {
+     "binding:CORRECT": 3,
+     "binding:WRONG": 0,
+     "correctPrintedBound": 1,
+     "firstBad": {
+      "NEVER_PROPOSED": 1,
+      "NONE": 1,
+      "NOT_ON_A_CHAIN": 1,
+      "READ_NOT_CORROBORATED": 3,
+      "READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 8,
+      "SCALE_DEPENDENT_VALUE": 3
+     },
+     "labels": 17,
+     "scaleDependentAnchor": 3,
+     "scaleDependentValueEqualsInk": 2,
+     "spuriousCertainty": 0,
+     "wrongWhenAsserted": 0
+    },
+    "primary:perSheet": {
+     "S1": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": false,
+      "labels": 22,
+      "registrationErrVsTrueScale": -0.0009,
+      "scaleDependentAnchor": 5,
+      "spuriousCertainty": 0
+     },
+     "S2": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": null,
+      "labels": 13,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 2,
+      "spuriousCertainty": 0
+     },
+     "S3": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": null,
+      "labels": 9,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 4,
+      "spuriousCertainty": 0
+     },
+     "S4": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": false,
+      "labels": 13,
+      "registrationErrVsTrueScale": -0.0085,
+      "scaleDependentAnchor": 5,
+      "spuriousCertainty": 0
+     },
+     "S5": {
+      "correctPrintedBound": 1,
+      "falseConfidentScale": false,
+      "labels": 17,
+      "registrationErrVsTrueScale": -0.0,
+      "scaleDependentAnchor": 3,
+      "spuriousCertainty": 0
+     },
+     "S6": {
+      "correctPrintedBound": 3,
+      "falseConfidentScale": false,
+      "labels": 25,
+      "registrationErrVsTrueScale": -0.0003,
+      "scaleDependentAnchor": 7,
+      "spuriousCertainty": 1
+     },
+     "S7": {
+      "correctPrintedBound": 4,
+      "falseConfidentScale": false,
+      "labels": 14,
+      "registrationErrVsTrueScale": -0.0003,
+      "scaleDependentAnchor": 4,
+      "spuriousCertainty": 0
+     },
+     "S8": {
+      "correctPrintedBound": 2,
+      "falseConfidentScale": false,
+      "labels": 14,
+      "registrationErrVsTrueScale": 0.0005,
+      "scaleDependentAnchor": 2,
+      "spuriousCertainty": 0
+     },
+     "S9": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": null,
+      "labels": 0,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     }
+    },
+    "sensitivity:MAIN": {
+     "binding:CORRECT": 13,
+     "binding:WRONG": 2,
+     "correctPrintedBound": 9,
+     "firstBad": {
+      "NEVER_PROPOSED": 23,
+      "NONE": 9,
+      "NOT_ON_A_CHAIN": 16,
+      "PRINTED_VALUE_WRONG": 1,
+      "READ_NOT_CORROBORATED": 24,
+      "READ_RIGHT_BOUND_WRONG": 2,
+      "READ_RIGHT_NOT_BOUND:AMBIGUOUS": 4,
+      "READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 42,
+      "READ_RIGHT_NOT_BOUND:NO_DECISION": 3,
+      "READ_RIGHT_NOT_BOUND:UNASSIGNED": 2,
+      "ROTATIONAL_TWIN_AMBIGUOUS": 3,
+      "SCALE_DEPENDENT_VALUE": 23
+     },
+     "labels": 152,
+     "scaleDependentAnchor": 29,
+     "scaleDependentValueEqualsInk": 11,
+     "spuriousCertainty": 1,
+     "wrongWhenAsserted": 1
+    },
+    "sensitivity:SMOKE": {
+     "binding:CORRECT": 3,
+     "binding:WRONG": 0,
+     "correctPrintedBound": 1,
+     "firstBad": {
+      "NEVER_PROPOSED": 3,
+      "NONE": 1,
+      "NOT_ON_A_CHAIN": 2,
+      "READ_NOT_CORROBORATED": 3,
+      "READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 8,
+      "SCALE_DEPENDENT_VALUE": 3
+     },
+     "labels": 20,
+     "scaleDependentAnchor": 3,
+     "scaleDependentValueEqualsInk": 2,
+     "spuriousCertainty": 0,
+     "wrongWhenAsserted": 0
+    },
+    "sensitivity:perSheet": {
+     "S1": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": false,
+      "labels": 29,
+      "registrationErrVsTrueScale": -0.0009,
+      "scaleDependentAnchor": 5,
+      "spuriousCertainty": 0
+     },
+     "S2": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": null,
+      "labels": 15,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 2,
+      "spuriousCertainty": 0
+     },
+     "S3": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": null,
+      "labels": 10,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 4,
+      "spuriousCertainty": 0
+     },
+     "S4": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": false,
+      "labels": 17,
+      "registrationErrVsTrueScale": -0.0085,
+      "scaleDependentAnchor": 5,
+      "spuriousCertainty": 0
+     },
+     "S5": {
+      "correctPrintedBound": 1,
+      "falseConfidentScale": false,
+      "labels": 20,
+      "registrationErrVsTrueScale": -0.0,
+      "scaleDependentAnchor": 3,
+      "spuriousCertainty": 0
+     },
+     "S6": {
+      "correctPrintedBound": 3,
+      "falseConfidentScale": false,
+      "labels": 35,
+      "registrationErrVsTrueScale": -0.0003,
+      "scaleDependentAnchor": 7,
+      "spuriousCertainty": 1
+     },
+     "S7": {
+      "correctPrintedBound": 4,
+      "falseConfidentScale": false,
+      "labels": 21,
+      "registrationErrVsTrueScale": -0.0003,
+      "scaleDependentAnchor": 4,
+      "spuriousCertainty": 0
+     },
+     "S8": {
+      "correctPrintedBound": 2,
+      "falseConfidentScale": false,
+      "labels": 24,
+      "registrationErrVsTrueScale": 0.0005,
+      "scaleDependentAnchor": 2,
+      "spuriousCertainty": 0
+     },
+     "S9": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": null,
+      "labels": 1,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     }
+    }
+   }
+  },
+  "C3": {
+   "gates": {
+    "G1": false,
+    "G1failures": [
+     "dom-miniaturka",
+     "dom-w-modrzykach",
+     "dom-w-tymianku"
+    ],
+    "G2": false,
+    "G2a": 448,
+    "G2a'": 0,
+    "G2b": 0,
+    "G2c": [],
+    "G2d": [],
+    "G3": false,
+    "G3changes": 11,
+    "G5changed": [
+     "dom-w-morelach",
+     "dom-w-azaliach",
+     "dom-w-dabecjach",
+     "dom-w-murajach"
+    ],
+    "admissible": false
+   },
+   "house": {
+    "completed": 26,
+    "inkFirstMismatch": 0,
+    "inkFirstStatements": 0,
+    "pass": 21,
+    "passRows": [
+     "A02",
+     "A03",
+     "A06",
+     "A07",
+     "dom-miniaturka",
+     "dom-w-arkadiach",
+     "dom-w-cieszyniankach",
+     "dom-w-daliach",
+     "dom-w-jablonkach",
+     "dom-w-modrzykach",
+     "dom-w-morelach",
+     "dom-w-tunbergiach",
+     "dom-w-tymianku",
+     "dom-w-zurawkach",
+     "eoze-legacy-area",
+     "eoze-legacy-every",
+     "kosacce-clean",
+     "kosacce-tracked",
+     "marcowki",
+     "rarytasy-eoze",
+     "rarytasy-g2e"
+    ],
+    "rows": 48,
+    "scaleDependentAnchors": 505,
+    "verdicts": {
+     "ALGORITHMIC_FAIL": 27,
+     "PASS": 21
+    }
+   },
+   "houseVsC0": {
+    "decisionPathChanged": 4,
+    "failureChanged": 9,
+    "knownGoodModelChanged": 5,
+    "knownGoodSemanticChanged": 3,
+    "metricChanged": 35,
+    "metricContentChanged": 37,
+    "modelChanged": 6,
+    "outcomeChanged": 1,
+    "semanticsChanged": 8,
+    "unresolvedChanged": 4,
+    "verdictChanged": {}
+   },
+   "label": {
+    "primary:MAIN": {
+     "binding:CORRECT": 13,
+     "binding:WRONG": 2,
+     "correctPrintedBound": 10,
+     "firstBad": {
+      "NEVER_PROPOSED": 3,
+      "NONE": 10,
+      "NOT_ON_A_CHAIN": 3,
+      "PRINTED_VALUE_WRONG": 3,
+      "READ_NOT_CORROBORATED": 20,
+      "READ_RIGHT_BOUND_WRONG": 2,
+      "READ_RIGHT_NOT_BOUND:AMBIGUOUS": 4,
+      "READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 26,
+      "READ_RIGHT_NOT_BOUND:NO_DECISION": 2,
+      "READ_RIGHT_NOT_BOUND:UNASSIGNED": 2,
+      "ROTATIONAL_TWIN_AMBIGUOUS": 2,
+      "SCALE_DEPENDENT_VALUE": 33
+     },
+     "labels": 110,
+     "scaleDependentAnchor": 39,
+     "scaleDependentValueEqualsInk": 11,
+     "spuriousCertainty": 4,
+     "wrongWhenAsserted": 3
+    },
+    "primary:SMOKE": {
+     "binding:CORRECT": 5,
+     "binding:WRONG": 0,
+     "correctPrintedBound": 4,
+     "firstBad": {
+      "NEVER_PROPOSED": 1,
+      "NONE": 4,
+      "NOT_ON_A_CHAIN": 1,
+      "READ_NOT_CORROBORATED": 3,
+      "READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 2,
+      "SCALE_DEPENDENT_VALUE": 6
+     },
+     "labels": 17,
+     "scaleDependentAnchor": 6,
+     "scaleDependentValueEqualsInk": 2,
+     "spuriousCertainty": 0,
+     "wrongWhenAsserted": 0
+    },
+    "primary:perSheet": {
+     "S1": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": false,
+      "labels": 22,
+      "registrationErrVsTrueScale": -0.0009,
+      "scaleDependentAnchor": 9,
+      "spuriousCertainty": 1
+     },
+     "S2": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": null,
+      "labels": 13,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 2,
+      "spuriousCertainty": 0
+     },
+     "S3": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": null,
+      "labels": 9,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 5,
+      "spuriousCertainty": 0
+     },
+     "S4": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": false,
+      "labels": 13,
+      "registrationErrVsTrueScale": -0.0085,
+      "scaleDependentAnchor": 5,
+      "spuriousCertainty": 0
+     },
+     "S5": {
+      "correctPrintedBound": 4,
+      "falseConfidentScale": false,
+      "labels": 17,
+      "registrationErrVsTrueScale": 0.0,
+      "scaleDependentAnchor": 6,
+      "spuriousCertainty": 0
+     },
+     "S6": {
+      "correctPrintedBound": 3,
+      "falseConfidentScale": false,
+      "labels": 25,
+      "registrationErrVsTrueScale": -0.0003,
+      "scaleDependentAnchor": 13,
+      "spuriousCertainty": 1
+     },
+     "S7": {
+      "correctPrintedBound": 4,
+      "falseConfidentScale": false,
+      "labels": 14,
+      "registrationErrVsTrueScale": -0.0003,
+      "scaleDependentAnchor": 3,
+      "spuriousCertainty": 2
+     },
+     "S8": {
+      "correctPrintedBound": 3,
+      "falseConfidentScale": false,
+      "labels": 14,
+      "registrationErrVsTrueScale": 0.0001,
+      "scaleDependentAnchor": 2,
+      "spuriousCertainty": 0
+     },
+     "S9": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": null,
+      "labels": 0,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     }
+    },
+    "sensitivity:MAIN": {
+     "binding:CORRECT": 13,
+     "binding:WRONG": 3,
+     "correctPrintedBound": 10,
+     "firstBad": {
+      "NEVER_PROPOSED": 23,
+      "NONE": 10,
+      "NOT_ON_A_CHAIN": 16,
+      "PRINTED_VALUE_WRONG": 3,
+      "READ_NOT_CORROBORATED": 24,
+      "READ_RIGHT_BOUND_WRONG": 3,
+      "READ_RIGHT_NOT_BOUND:AMBIGUOUS": 4,
+      "READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 29,
+      "READ_RIGHT_NOT_BOUND:NO_DECISION": 3,
+      "READ_RIGHT_NOT_BOUND:UNASSIGNED": 2,
+      "ROTATIONAL_TWIN_AMBIGUOUS": 3,
+      "SCALE_DEPENDENT_VALUE": 32
+     },
+     "labels": 152,
+     "scaleDependentAnchor": 39,
+     "scaleDependentValueEqualsInk": 11,
+     "spuriousCertainty": 4,
+     "wrongWhenAsserted": 3
+    },
+    "sensitivity:SMOKE": {
+     "binding:CORRECT": 5,
+     "binding:WRONG": 0,
+     "correctPrintedBound": 4,
+     "firstBad": {
+      "NEVER_PROPOSED": 3,
+      "NONE": 4,
+      "NOT_ON_A_CHAIN": 2,
+      "READ_NOT_CORROBORATED": 3,
+      "READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 2,
+      "SCALE_DEPENDENT_VALUE": 6
+     },
+     "labels": 20,
+     "scaleDependentAnchor": 6,
+     "scaleDependentValueEqualsInk": 2,
+     "spuriousCertainty": 0,
+     "wrongWhenAsserted": 0
+    },
+    "sensitivity:perSheet": {
+     "S1": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": false,
+      "labels": 29,
+      "registrationErrVsTrueScale": -0.0009,
+      "scaleDependentAnchor": 9,
+      "spuriousCertainty": 1
+     },
+     "S2": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": null,
+      "labels": 15,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 2,
+      "spuriousCertainty": 0
+     },
+     "S3": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": null,
+      "labels": 10,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 5,
+      "spuriousCertainty": 0
+     },
+     "S4": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": false,
+      "labels": 17,
+      "registrationErrVsTrueScale": -0.0085,
+      "scaleDependentAnchor": 5,
+      "spuriousCertainty": 0
+     },
+     "S5": {
+      "correctPrintedBound": 4,
+      "falseConfidentScale": false,
+      "labels": 20,
+      "registrationErrVsTrueScale": 0.0,
+      "scaleDependentAnchor": 6,
+      "spuriousCertainty": 0
+     },
+     "S6": {
+      "correctPrintedBound": 3,
+      "falseConfidentScale": false,
+      "labels": 35,
+      "registrationErrVsTrueScale": -0.0003,
+      "scaleDependentAnchor": 13,
+      "spuriousCertainty": 1
+     },
+     "S7": {
+      "correctPrintedBound": 4,
+      "falseConfidentScale": false,
+      "labels": 21,
+      "registrationErrVsTrueScale": -0.0003,
+      "scaleDependentAnchor": 3,
+      "spuriousCertainty": 2
+     },
+     "S8": {
+      "correctPrintedBound": 3,
+      "falseConfidentScale": false,
+      "labels": 24,
+      "registrationErrVsTrueScale": 0.0001,
+      "scaleDependentAnchor": 2,
+      "spuriousCertainty": 0
+     },
+     "S9": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": null,
+      "labels": 1,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     }
+    }
+   }
+  },
+  "C4": {
+   "gates": {
+    "G1": false,
+    "G1failures": [
+     "A02",
+     "A03",
+     "A06",
+     "dom-miniaturka",
+     "dom-pod-jarzabem",
+     "dom-w-cieszyniankach",
+     "dom-w-daliach",
+     "dom-w-jablonkach",
+     "dom-w-modrzykach",
+     "dom-w-morelach",
+     "dom-w-tymianku",
+     "dom-w-zurawkach",
+     "kosacce-clean",
+     "kosacce-tracked",
+     "marcowki",
+     "rarytasy-eoze",
+     "rarytasy-g2e"
+    ],
+    "G2": false,
+    "G2a": 0,
+    "G2a'": 0,
+    "G2b": 0,
+    "G2c": [
+     {
+      "baseline": [
+       "COMPLETED",
+       -2.17
+      ],
+      "case": "dom-w-morelach",
+      "residualPct": -6.77
+     },
+     {
+      "baseline": [
+       "FAILED",
+       null
+      ],
+      "case": "dom-w-cyklamenach",
+      "residualPct": -7.58
+     },
+     {
+      "baseline": [
+       "FAILED",
+       null
+      ],
+      "case": "A04",
+      "residualPct": -6.92
+     },
+     {
+      "registrationErrVsTrueScale": 0.5886,
+      "sheet": "S1"
+     }
+    ],
+    "G2d": [],
+    "G3": false,
+    "G3changes": 69,
+    "G5changed": [
+     "dom-pod-jarzabem",
+     "dom-w-morelach",
+     "marcowki",
+     "rarytasy-g2e",
+     "rarytasy-eoze",
+     "alt-marcowki",
+     "dom-w-azaliach",
+     "dom-w-dabecjach",
+     "dom-pod-milorzebem",
+     "dom-w-cyklamenach",
+     "A00",
+     "A04",
+     "A05",
+     "A06",
+     "D00",
+     "dom-w-murajach",
+     "dom-w-glogownikach",
+     "dom-w-akebiach",
+     "dom-w-tymianku"
+    ],
+    "admissible": false
+   },
+   "house": {
+    "completed": 22,
+    "inkFirstMismatch": 0,
+    "inkFirstStatements": 173,
+    "pass": 16,
+    "passRows": [
+     "A02",
+     "A03",
+     "A06",
+     "A07",
+     "dom-miniaturka",
+     "dom-w-arkadiach",
+     "dom-w-cieszyniankach",
+     "dom-w-jablonkach",
+     "dom-w-modrzykach",
+     "dom-w-tunbergiach",
+     "dom-w-zurawkach",
+     "eoze-legacy-area",
+     "eoze-legacy-every",
+     "kosacce-clean",
+     "kosacce-tracked",
+     "rarytasy-eoze"
+    ],
+    "rows": 48,
+    "scaleDependentAnchors": 57,
+    "verdicts": {
+     "ALGORITHMIC_FAIL": 32,
+     "PASS": 16
+    }
+   },
+   "houseVsC0": {
+    "decisionPathChanged": 19,
+    "failureChanged": 17,
+    "knownGoodModelChanged": 17,
+    "knownGoodSemanticChanged": 16,
+    "metricChanged": 45,
+    "metricContentChanged": 45,
+    "modelChanged": 24,
+    "outcomeChanged": 9,
+    "semanticsChanged": 31,
+    "unresolvedChanged": 23,
+    "verdictChanged": {
+     "dom-w-daliach": [
+      "PASS",
+      "ALGORITHMIC_FAIL"
+     ],
+     "dom-w-morelach": [
+      "PASS",
+      "ALGORITHMIC_FAIL"
+     ],
+     "dom-w-tymianku": [
+      "PASS",
+      "ALGORITHMIC_FAIL"
+     ],
+     "marcowki": [
+      "PASS",
+      "ALGORITHMIC_FAIL"
+     ],
+     "rarytasy-g2e": [
+      "PASS",
+      "ALGORITHMIC_FAIL"
+     ]
+    }
+   },
+   "label": {
+    "primary:MAIN": {
+     "binding:CORRECT": 13,
+     "binding:WRONG": 2,
+     "correctPrintedBound": 30,
+     "firstBad": {
+      "NEVER_PROPOSED": 3,
+      "NONE": 30,
+      "NOT_ON_A_CHAIN": 3,
+      "PRINTED_VALUE_WRONG": 1,
+      "READ_NOT_CORROBORATED": 20,
+      "READ_RIGHT_BOUND_WRONG": 2,
+      "READ_RIGHT_NOT_BOUND:AMBIGUOUS": 4,
+      "READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 40,
+      "READ_RIGHT_NOT_BOUND:NO_DECISION": 2,
+      "READ_RIGHT_NOT_BOUND:UNASSIGNED": 2,
+      "ROTATIONAL_TWIN_AMBIGUOUS": 1,
+      "SCALE_DEPENDENT_VALUE": 2
+     },
+     "labels": 110,
+     "scaleDependentAnchor": 0,
+     "scaleDependentValueEqualsInk": 3,
+     "spuriousCertainty": 2,
+     "wrongWhenAsserted": 1
+    },
+    "primary:SMOKE": {
+     "binding:CORRECT": 3,
+     "binding:WRONG": 0,
+     "correctPrintedBound": 4,
+     "firstBad": {
+      "NEVER_PROPOSED": 1,
+      "NONE": 4,
+      "NOT_ON_A_CHAIN": 1,
+      "READ_NOT_CORROBORATED": 3,
+      "READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 8
+     },
+     "labels": 17,
+     "scaleDependentAnchor": 0,
+     "scaleDependentValueEqualsInk": 0,
+     "spuriousCertainty": 0,
+     "wrongWhenAsserted": 0
+    },
+    "primary:perSheet": {
+     "S1": {
+      "correctPrintedBound": 3,
+      "falseConfidentScale": true,
+      "labels": 22,
+      "registrationErrVsTrueScale": 0.5886,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S2": {
+      "correctPrintedBound": 1,
+      "falseConfidentScale": null,
+      "labels": 13,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S3": {
+      "correctPrintedBound": 3,
+      "falseConfidentScale": null,
+      "labels": 9,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S4": {
+      "correctPrintedBound": 5,
+      "falseConfidentScale": false,
+      "labels": 13,
+      "registrationErrVsTrueScale": -0.0054,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S5": {
+      "correctPrintedBound": 4,
+      "falseConfidentScale": false,
+      "labels": 17,
+      "registrationErrVsTrueScale": -0.0,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S6": {
+      "correctPrintedBound": 9,
+      "falseConfidentScale": false,
+      "labels": 25,
+      "registrationErrVsTrueScale": -0.0003,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 1
+     },
+     "S7": {
+      "correctPrintedBound": 7,
+      "falseConfidentScale": false,
+      "labels": 14,
+      "registrationErrVsTrueScale": -0.0003,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 1
+     },
+     "S8": {
+      "correctPrintedBound": 2,
+      "falseConfidentScale": false,
+      "labels": 14,
+      "registrationErrVsTrueScale": 0.0005,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S9": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": null,
+      "labels": 0,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     }
+    },
+    "sensitivity:MAIN": {
+     "binding:CORRECT": 13,
+     "binding:WRONG": 2,
+     "correctPrintedBound": 30,
+     "firstBad": {
+      "NEVER_PROPOSED": 23,
+      "NONE": 30,
+      "NOT_ON_A_CHAIN": 16,
+      "PRINTED_VALUE_WRONG": 1,
+      "READ_NOT_CORROBORATED": 24,
+      "READ_RIGHT_BOUND_WRONG": 2,
+      "READ_RIGHT_NOT_BOUND:AMBIGUOUS": 4,
+      "READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 43,
+      "READ_RIGHT_NOT_BOUND:NO_DECISION": 3,
+      "READ_RIGHT_NOT_BOUND:UNASSIGNED": 2,
+      "ROTATIONAL_TWIN_AMBIGUOUS": 2,
+      "SCALE_DEPENDENT_VALUE": 2
+     },
+     "labels": 152,
+     "scaleDependentAnchor": 0,
+     "scaleDependentValueEqualsInk": 3,
+     "spuriousCertainty": 2,
+     "wrongWhenAsserted": 1
+    },
+    "sensitivity:SMOKE": {
+     "binding:CORRECT": 3,
+     "binding:WRONG": 0,
+     "correctPrintedBound": 4,
+     "firstBad": {
+      "NEVER_PROPOSED": 3,
+      "NONE": 4,
+      "NOT_ON_A_CHAIN": 2,
+      "READ_NOT_CORROBORATED": 3,
+      "READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 8
+     },
+     "labels": 20,
+     "scaleDependentAnchor": 0,
+     "scaleDependentValueEqualsInk": 0,
+     "spuriousCertainty": 0,
+     "wrongWhenAsserted": 0
+    },
+    "sensitivity:perSheet": {
+     "S1": {
+      "correctPrintedBound": 3,
+      "falseConfidentScale": true,
+      "labels": 29,
+      "registrationErrVsTrueScale": 0.5886,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S2": {
+      "correctPrintedBound": 1,
+      "falseConfidentScale": null,
+      "labels": 15,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S3": {
+      "correctPrintedBound": 3,
+      "falseConfidentScale": null,
+      "labels": 10,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S4": {
+      "correctPrintedBound": 5,
+      "falseConfidentScale": false,
+      "labels": 17,
+      "registrationErrVsTrueScale": -0.0054,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S5": {
+      "correctPrintedBound": 4,
+      "falseConfidentScale": false,
+      "labels": 20,
+      "registrationErrVsTrueScale": -0.0,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S6": {
+      "correctPrintedBound": 9,
+      "falseConfidentScale": false,
+      "labels": 35,
+      "registrationErrVsTrueScale": -0.0003,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 1
+     },
+     "S7": {
+      "correctPrintedBound": 7,
+      "falseConfidentScale": false,
+      "labels": 21,
+      "registrationErrVsTrueScale": -0.0003,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 1
+     },
+     "S8": {
+      "correctPrintedBound": 2,
+      "falseConfidentScale": false,
+      "labels": 24,
+      "registrationErrVsTrueScale": 0.0005,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     },
+     "S9": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": null,
+      "labels": 1,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     }
+    }
+   }
+  },
+  "N1": {
+   "gates": {
+    "G1": false,
+    "G1failures": [
+     "A03",
+     "dom-miniaturka",
+     "dom-pod-jarzabem",
+     "dom-w-arkadiach",
+     "dom-w-zurawkach",
+     "kosacce-clean",
+     "kosacce-tracked",
+     "marcowki",
+     "rarytasy-g2e"
+    ],
+    "G2": false,
+    "G2a": 468,
+    "G2a'": 119,
+    "G2b": 0,
+    "G2c": [],
+    "G2d": [],
+    "G3": false,
+    "G3changes": 26,
+    "G5changed": [
+     "dom-pod-jarzabem",
+     "rarytasy-eoze",
+     "alt-marcowki",
+     "dom-w-gozdzikowcach",
+     "D00",
+     "dom-w-murajach"
+    ],
+    "admissible": false
+   },
+   "house": {
+    "completed": 25,
+    "inkFirstMismatch": 0,
+    "inkFirstStatements": 0,
+    "pass": 21,
+    "passRows": [
+     "A02",
+     "A03",
+     "A06",
+     "A07",
+     "dom-miniaturka",
+     "dom-w-arkadiach",
+     "dom-w-cieszyniankach",
+     "dom-w-daliach",
+     "dom-w-jablonkach",
+     "dom-w-modrzykach",
+     "dom-w-morelach",
+     "dom-w-tunbergiach",
+     "dom-w-tymianku",
+     "dom-w-zurawkach",
+     "eoze-legacy-area",
+     "eoze-legacy-every",
+     "kosacce-clean",
+     "kosacce-tracked",
+     "marcowki",
+     "rarytasy-eoze",
+     "rarytasy-g2e"
+    ],
+    "rows": 48,
+    "scaleDependentAnchors": 525,
+    "verdicts": {
+     "ALGORITHMIC_FAIL": 27,
+     "PASS": 21
+    }
+   },
+   "houseVsC0": {
+    "decisionPathChanged": 6,
+    "failureChanged": 9,
+    "knownGoodModelChanged": 8,
+    "knownGoodSemanticChanged": 8,
+    "metricChanged": 26,
+    "metricContentChanged": 32,
+    "modelChanged": 12,
+    "outcomeChanged": 1,
+    "semanticsChanged": 13,
+    "unresolvedChanged": 10,
+    "verdictChanged": {}
+   },
+   "label": {
+    "primary:MAIN": {
+     "binding:CORRECT": 17,
+     "binding:WRONG": 2,
+     "correctPrintedBound": 32,
+     "firstBad": {
+      "NEVER_PROPOSED": 3,
+      "NONE": 31,
+      "NOT_ON_A_CHAIN": 3,
+      "PRINTED_VALUE_WRONG": 2,
+      "READ_NOT_CORROBORATED": 20,
+      "READ_RIGHT_BOUND_WRONG": 2,
+      "READ_RIGHT_NOT_BOUND:AMBIGUOUS": 4,
+      "READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 22,
+      "READ_RIGHT_NOT_BOUND:NO_DECISION": 2,
+      "READ_RIGHT_NOT_BOUND:UNASSIGNED": 2,
+      "ROTATIONAL_TWIN_AMBIGUOUS": 1,
+      "SCALE_DEPENDENT_VALUE": 18
+     },
+     "labels": 110,
+     "scaleDependentAnchor": 24,
+     "scaleDependentValueEqualsInk": 3,
+     "spuriousCertainty": 3,
+     "wrongWhenAsserted": 2
+    },
+    "primary:SMOKE": {
+     "binding:CORRECT": 5,
+     "binding:WRONG": 0,
+     "correctPrintedBound": 7,
+     "firstBad": {
+      "NEVER_PROPOSED": 1,
+      "NONE": 7,
+      "NOT_ON_A_CHAIN": 1,
+      "READ_NOT_CORROBORATED": 3,
+      "READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 2,
+      "SCALE_DEPENDENT_VALUE": 3
+     },
+     "labels": 17,
+     "scaleDependentAnchor": 3,
+     "scaleDependentValueEqualsInk": 0,
+     "spuriousCertainty": 0,
+     "wrongWhenAsserted": 0
+    },
+    "primary:perSheet": {
+     "S1": {
+      "correctPrintedBound": 6,
+      "falseConfidentScale": false,
+      "labels": 22,
+      "registrationErrVsTrueScale": -0.0037,
+      "scaleDependentAnchor": 2,
+      "spuriousCertainty": 1
+     },
+     "S2": {
+      "correctPrintedBound": 2,
+      "falseConfidentScale": null,
+      "labels": 13,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 2,
+      "spuriousCertainty": 0
+     },
+     "S3": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": null,
+      "labels": 9,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 5,
+      "spuriousCertainty": 0
+     },
+     "S4": {
+      "correctPrintedBound": 5,
+      "falseConfidentScale": false,
+      "labels": 13,
+      "registrationErrVsTrueScale": -0.0125,
+      "scaleDependentAnchor": 2,
+      "spuriousCertainty": 0
+     },
+     "S5": {
+      "correctPrintedBound": 7,
+      "falseConfidentScale": false,
+      "labels": 17,
+      "registrationErrVsTrueScale": 0.0001,
+      "scaleDependentAnchor": 3,
+      "spuriousCertainty": 0
+     },
+     "S6": {
+      "correctPrintedBound": 9,
+      "falseConfidentScale": false,
+      "labels": 25,
+      "registrationErrVsTrueScale": 0.0074,
+      "scaleDependentAnchor": 9,
+      "spuriousCertainty": 0
+     },
+     "S7": {
+      "correctPrintedBound": 7,
+      "falseConfidentScale": false,
+      "labels": 14,
+      "registrationErrVsTrueScale": -0.0003,
+      "scaleDependentAnchor": 1,
+      "spuriousCertainty": 2
+     },
+     "S8": {
+      "correctPrintedBound": 3,
+      "falseConfidentScale": false,
+      "labels": 14,
+      "registrationErrVsTrueScale": 0.0001,
+      "scaleDependentAnchor": 3,
+      "spuriousCertainty": 0
+     },
+     "S9": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": null,
+      "labels": 0,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     }
+    },
+    "sensitivity:MAIN": {
+     "binding:CORRECT": 17,
+     "binding:WRONG": 3,
+     "correctPrintedBound": 32,
+     "firstBad": {
+      "NEVER_PROPOSED": 23,
+      "NONE": 31,
+      "NOT_ON_A_CHAIN": 16,
+      "PRINTED_VALUE_WRONG": 2,
+      "READ_NOT_CORROBORATED": 24,
+      "READ_RIGHT_BOUND_WRONG": 3,
+      "READ_RIGHT_NOT_BOUND:AMBIGUOUS": 4,
+      "READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 25,
+      "READ_RIGHT_NOT_BOUND:NO_DECISION": 3,
+      "READ_RIGHT_NOT_BOUND:UNASSIGNED": 2,
+      "ROTATIONAL_TWIN_AMBIGUOUS": 2,
+      "SCALE_DEPENDENT_VALUE": 17
+     },
+     "labels": 152,
+     "scaleDependentAnchor": 24,
+     "scaleDependentValueEqualsInk": 3,
+     "spuriousCertainty": 3,
+     "wrongWhenAsserted": 2
+    },
+    "sensitivity:SMOKE": {
+     "binding:CORRECT": 5,
+     "binding:WRONG": 0,
+     "correctPrintedBound": 7,
+     "firstBad": {
+      "NEVER_PROPOSED": 3,
+      "NONE": 7,
+      "NOT_ON_A_CHAIN": 2,
+      "READ_NOT_CORROBORATED": 3,
+      "READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 2,
+      "SCALE_DEPENDENT_VALUE": 3
+     },
+     "labels": 20,
+     "scaleDependentAnchor": 3,
+     "scaleDependentValueEqualsInk": 0,
+     "spuriousCertainty": 0,
+     "wrongWhenAsserted": 0
+    },
+    "sensitivity:perSheet": {
+     "S1": {
+      "correctPrintedBound": 6,
+      "falseConfidentScale": false,
+      "labels": 29,
+      "registrationErrVsTrueScale": -0.0037,
+      "scaleDependentAnchor": 2,
+      "spuriousCertainty": 1
+     },
+     "S2": {
+      "correctPrintedBound": 2,
+      "falseConfidentScale": null,
+      "labels": 15,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 2,
+      "spuriousCertainty": 0
+     },
+     "S3": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": null,
+      "labels": 10,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 5,
+      "spuriousCertainty": 0
+     },
+     "S4": {
+      "correctPrintedBound": 5,
+      "falseConfidentScale": false,
+      "labels": 17,
+      "registrationErrVsTrueScale": -0.0125,
+      "scaleDependentAnchor": 2,
+      "spuriousCertainty": 0
+     },
+     "S5": {
+      "correctPrintedBound": 7,
+      "falseConfidentScale": false,
+      "labels": 20,
+      "registrationErrVsTrueScale": 0.0001,
+      "scaleDependentAnchor": 3,
+      "spuriousCertainty": 0
+     },
+     "S6": {
+      "correctPrintedBound": 9,
+      "falseConfidentScale": false,
+      "labels": 35,
+      "registrationErrVsTrueScale": 0.0074,
+      "scaleDependentAnchor": 9,
+      "spuriousCertainty": 0
+     },
+     "S7": {
+      "correctPrintedBound": 7,
+      "falseConfidentScale": false,
+      "labels": 21,
+      "registrationErrVsTrueScale": -0.0003,
+      "scaleDependentAnchor": 1,
+      "spuriousCertainty": 2
+     },
+     "S8": {
+      "correctPrintedBound": 3,
+      "falseConfidentScale": false,
+      "labels": 24,
+      "registrationErrVsTrueScale": 0.0001,
+      "scaleDependentAnchor": 3,
+      "spuriousCertainty": 0
+     },
+     "S9": {
+      "correctPrintedBound": 0,
+      "falseConfidentScale": null,
+      "labels": 1,
+      "registrationErrVsTrueScale": null,
+      "scaleDependentAnchor": 0,
+      "spuriousCertainty": 0
+     }
+    }
+   }
+  }
+ },
+ "version": 1
+}

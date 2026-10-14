@@ -1,0 +1,108 @@
+{
+ "rowsCovered": "the 45 EXTRACT rows",
+ "schema": "buildapp.005q-chain.provenance",
+ "variants": {
+  "C0": {
+   "linearDimensionEvidence": {
+    "CHAIN_CORRECTED+dependsOnScale": 536,
+    "DERIVED": 1108,
+    "READ": 504,
+    "READ+dependsOnScale": 26
+   },
+   "registrationAnchors": {
+    "CHAIN_SEGMENT:CHAIN_CORRECTED+dependsOnScale": 528,
+    "CHAIN_SEGMENT:READ": 381,
+    "CHAIN_SEGMENT:READ+dependsOnScale": 23,
+    "LEVEL_DATUM_PAIR:CHAIN_CORRECTED": 19,
+    "LEVEL_DATUM_PAIR:READ": 32
+   }
+  },
+  "C1": {
+   "linearDimensionEvidence": {
+    "CHAIN_CORRECTED+dependsOnScale": 274,
+    "DERIVED": 1108,
+    "INK_FIRST": 262,
+    "READ": 504,
+    "READ+dependsOnScale": 26
+   },
+   "registrationAnchors": {
+    "CHAIN_SEGMENT:INK_FIRST": 127,
+    "CHAIN_SEGMENT:READ": 377,
+    "LEVEL_DATUM_PAIR:READ": 25
+   }
+  },
+  "C1N1": {
+   "linearDimensionEvidence": {
+    "CHAIN_CORRECTED+dependsOnScale": 261,
+    "DERIVED": 1087,
+    "INK_FIRST": 182,
+    "READ": 631,
+    "READ+dependsOnScale": 31
+   },
+   "registrationAnchors": {
+    "CHAIN_SEGMENT:INK_FIRST": 51,
+    "CHAIN_SEGMENT:READ": 506,
+    "LEVEL_DATUM_PAIR:READ": 25
+   }
+  },
+  "C2": {
+   "linearDimensionEvidence": {
+    "CHAIN_CORRECTED+dependsOnScale": 393,
+    "DERIVED": 702,
+    "READ": 437,
+    "READ+dependsOnScale": 20
+   },
+   "registrationAnchors": {
+    "CHAIN_SEGMENT:CHAIN_CORRECTED+dependsOnScale": 384,
+    "CHAIN_SEGMENT:READ": 310,
+    "CHAIN_SEGMENT:READ+dependsOnScale": 17,
+    "LEVEL_DATUM_PAIR:CHAIN_CORRECTED": 19,
+    "LEVEL_DATUM_PAIR:READ": 32
+   }
+  },
+  "C3": {
+   "linearDimensionEvidence": {
+    "CHAIN_CORRECTED+dependsOnScale": 539,
+    "DERIVED": 1110,
+    "READ": 464,
+    "READ+dependsOnScale": 58
+   },
+   "registrationAnchors": {
+    "CHAIN_SEGMENT:CHAIN_CORRECTED+dependsOnScale": 429,
+    "CHAIN_SEGMENT:READ": 339,
+    "LEVEL_DATUM_PAIR:CHAIN_CORRECTED": 19,
+    "LEVEL_DATUM_PAIR:READ": 32
+   }
+  },
+  "C4": {
+   "linearDimensionEvidence": {
+    "CHAIN_CORRECTED+dependsOnScale": 222,
+    "DERIVED": 702,
+    "INK_FIRST": 173,
+    "READ": 411,
+    "READ+dependsOnScale": 41
+   },
+   "registrationAnchors": {
+    "CHAIN_SEGMENT:INK_FIRST": 93,
+    "CHAIN_SEGMENT:READ": 287,
+    "LEVEL_DATUM_PAIR:READ": 25
+   }
+  },
+  "N1": {
+   "linearDimensionEvidence": {
+    "CHAIN_CORRECTED+dependsOnScale": 443,
+    "DERIVED": 1087,
+    "READ": 631,
+    "READ+dependsOnScale": 31
+   },
+   "registrationAnchors": {
+    "CHAIN_SEGMENT:CHAIN_CORRECTED+dependsOnScale": 427,
+    "CHAIN_SEGMENT:READ": 370,
+    "CHAIN_SEGMENT:READ+dependsOnScale": 22,
+    "LEVEL_DATUM_PAIR:CHAIN_CORRECTED": 19,
+    "LEVEL_DATUM_PAIR:READ": 32
+   }
+  }
+ },
+ "version": 1
+}

@@ -1,0 +1,64 @@
+{
+ "machine": "x86_64, 4 vCPU, Node 22.22.2, recogniser WASM 1 thread; replays contended (3 workers + 1); challengers with the ring-callout memo (ACCEL), C0 without",
+ "note": "contended replay timings only; no challenger survived G1-G5, so the preregistered uncontended A/B/B/A comparison (G6) was not run; Node 18 and the ARM64 phone are UNMEASURED",
+ "schema": "buildapp.005q-chain.performance",
+ "variants": {
+  "C0": {
+   "extractPeakRssMBMax": 1176,
+   "extractWallSMedian": 452.6,
+   "rows": 48,
+   "solvePeakRssMBMax": 719,
+   "solveWallSMedian": 22.1
+  },
+  "C0dup": {
+   "extractPeakRssMBMax": 1204,
+   "extractWallSMedian": 122.7,
+   "rows": 48,
+   "solvePeakRssMBMax": 742,
+   "solveWallSMedian": 18.7
+  },
+  "C1": {
+   "extractPeakRssMBMax": 1132,
+   "extractWallSMedian": 181.5,
+   "rows": 48,
+   "solvePeakRssMBMax": 701,
+   "solveWallSMedian": 22.1
+  },
+  "C1N1": {
+   "extractPeakRssMBMax": 960,
+   "extractWallSMedian": 99.6,
+   "rows": 48,
+   "solvePeakRssMBMax": 711,
+   "solveWallSMedian": 17.2
+  },
+  "C2": {
+   "extractPeakRssMBMax": 938,
+   "extractWallSMedian": 120.0,
+   "rows": 48,
+   "solvePeakRssMBMax": 731,
+   "solveWallSMedian": 21.3
+  },
+  "C3": {
+   "extractPeakRssMBMax": 928,
+   "extractWallSMedian": 100.2,
+   "rows": 48,
+   "solvePeakRssMBMax": 726,
+   "solveWallSMedian": 17.0
+  },
+  "C4": {
+   "extractPeakRssMBMax": 929,
+   "extractWallSMedian": 102.4,
+   "rows": 48,
+   "solvePeakRssMBMax": 755,
+   "solveWallSMedian": 16.7
+  },
+  "N1": {
+   "extractPeakRssMBMax": 959,
+   "extractWallSMedian": 104.6,
+   "rows": 48,
+   "solvePeakRssMBMax": 709,
+   "solveWallSMedian": 17.6
+  }
+ },
+ "version": 1
+}
