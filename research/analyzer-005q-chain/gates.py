@@ -45,8 +45,11 @@ def evaluate(base, var, labels=None):
     byte_only = sorted(c for c in known_good if g(brows, c) and g(vrows, c) and g(brows, c).get('modelSha256') != g(vrows, c).get('modelSha256') and semantic(g(brows, c)) == semantic(g(vrows, c)))
     out['G1'] = {'pass': not g1, 'failures': g1, 'byteOnlyModelChanges': byte_only}
     # G2
-    sda = {r['case']: (r.get('evidenceGates') or {}).get('scaleDependentAnchors', 0) for r in vrows if r.get('evidenceGates')}
-    soa = {r['case']: (r.get('evidenceGates') or {}).get('scaleOrientedAnchors', 0) for r in vrows if r.get('evidenceGates')}
+    # addendum B: G2a/G2a' are evaluated on the EXTRACT rows (a source-metrics challenger cannot reach the sealed legacy
+    # evidence of the SOLVE_ONLY_LEGACY rows); those rows are reported apart, unchanged from C0.
+    sda = {r['case']: (r.get('evidenceGates') or {}).get('scaleDependentAnchors', 0) for r in vrows if r.get('evidenceGates') and r.get('mode') == 'EXTRACT'}
+    soa = {r['case']: (r.get('evidenceGates') or {}).get('scaleOrientedAnchors', 0) for r in vrows if r.get('evidenceGates') and r.get('mode') == 'EXTRACT'}
+    legacy = {r['case']: (r.get('evidenceGates') or {}).get('scaleDependentAnchors', 0) for r in vrows if r.get('evidenceGates') and r.get('mode') != 'EXTRACT'}
     mis = {r['case']: (r.get('evidenceGates') or {}).get('inkFirstMismatch', 0) for r in vrows if r.get('evidenceGates')}
     false_conf = []
     for v in vrows:
@@ -72,7 +75,7 @@ def evaluate(base, var, labels=None):
     out['G2'] = {
         'pass': sum(sda.values()) == 0 and sum(mis.values()) == 0 and not false_conf and not exact_up,
         'a_scaleDependentAnchors': {k: v for k, v in sda.items() if v}, 'a_total': sum(sda.values()),
-        'a2_scaleOrientedAnchors': {k: v for k, v in soa.items() if v}, 'a2_total': sum(soa.values()),
+        'a2_scaleOrientedAnchors': {k: v for k, v in soa.items() if v}, 'a2_total': sum(soa.values()), 'a_legacyRowsUnreachable': legacy,
         'b_inkFirstMismatch': {k: v for k, v in mis.items() if v}, 'c_newFalseConfident': false_conf, 'd_sourceExactIncrease': exact_up,
         'e_note': 'changed refusals are classified by hand from their decision paths (G5 list)',
     }

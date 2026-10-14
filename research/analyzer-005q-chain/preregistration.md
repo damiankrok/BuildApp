@@ -171,3 +171,11 @@ Filled by the commit that adds this file (`candidates/*.patch`, `ACCEL.patch`); 
   be 0 on every row. It is reported for every variant; it is not part of C1's G2 (C1 does not change orientation).
 - **Gate evaluator** `gates.py`: G1 known-good = every C0 `PASS` row ∪ the controls named in §6; G3 also lists any change in
   room count or walls by kind; G5 lists every changed outcome, refusal code or decision path. Definitions unchanged.
+
+### Addendum B (after C1's first scoring; disclosed — a scope correction of the evaluator, no threshold changed)
+
+The first evaluation of C1 counted 57 scale-dependent anchors; all 57 belong to the three `SOLVE_ONLY_LEGACY` rows, whose
+input is a sealed legacy evidence set that no source-metrics challenger can reach (§1). G2a and G2a′ are therefore
+evaluated on the 45 `EXTRACT` rows; the legacy rows' counts are reported apart (`a_legacyRowsUnreachable`; identical in
+every variant). Nothing else in the gates changed; C1's other results were read before this addendum and are reported as
+first scored.
