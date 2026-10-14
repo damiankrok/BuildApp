@@ -612,3 +612,56 @@ describe('005Q production cannot reach the exterior-boundary bake-off, and the b
     expect(codeOf(read('research/analyzer-005q/replay.mjs'))).toMatch(/if \(work\.startsWith\(REPO\)\) throw new Error\('replays live outside the repository'\)/)
   })
 })
+
+/**
+ * BUILDPLAN-ANALYZER-005Q-OCR — the full-plan text-detection and binding bake-off is research. Its harness
+ * (`research/analyzer-005q-ocr/`) runs a pinned PP-OCRv6 tiny DETECTOR, the deployed recogniser, and two local truth
+ * readers (PP-OCRv6 medium, Tesseract) on publisher sheets held OUTSIDE the repository. Production cannot reach it, it
+ * commits no pixel and no weight, and the truth readers never see a contender's reading.
+ */
+describe('005Q-OCR production cannot reach the full-plan OCR bake-off, and the bake-off commits no pixels or weights', () => {
+  const HARNESS = /analyzer-005q-ocr|fullplan\.ts|r1_server|PP-OCRv6_(tiny_det|small_det|medium_rec)|\btesseract\b/i
+  const stageFiles = (): string[] =>
+    [
+      ...execFileSync('git', ['ls-files'], { cwd: ROOT, encoding: 'utf8' }).split('\n'),
+      ...execFileSync('git', ['ls-files', '--others', '--exclude-standard'], { cwd: ROOT, encoding: 'utf8' }).split('\n'),
+    ].filter((f) => f.startsWith('research/analyzer-005q-ocr/') || f.startsWith('stage-reports/artifacts/analyzer-005q-ocr/'))
+
+  it('no production source imports research/analyzer-005q-ocr or names its detector, truth readers or harness', () => {
+    const offenders: string[] = []
+    for (const f of productionSources()) {
+      const text = read(f)
+      for (const spec of importsOf(text)) if (/analyzer-005q-ocr|research\//.test(spec)) offenders.push(`${f} imports ${spec}`)
+      if (HARNESS.test(codeOf(text))) offenders.push(`${f} names the 005Q-OCR harness`)
+    }
+    expect(offenders).toEqual([])
+  })
+
+  it('the harness and artifacts track only code and text — no crop, sheet, page, model weight or archive', () => {
+    const files = stageFiles()
+    expect(files.length).toBeGreaterThan(0)
+    expect(files.filter((f) => !/\.(py|ts|mjs|json|md)$/i.test(f))).toEqual([])
+    for (const f of files) {
+      const text = read(f)
+      expect(text, f).not.toMatch(/(data:(image|application)\/[\w.+-]+;base64,|iVBORw0KGgo|\/9j\/4|UklGR|R0lGOD)[A-Za-z0-9+/]{40,}/)
+      expect(text, f).not.toMatch(/[A-Za-z0-9+/]{256,}={0,2}/)
+      expect(statSync(join(ROOT, f)).size, f).toBeLessThanOrEqual(4 * 2 ** 20)
+    }
+  })
+
+  it('every writer refuses an output inside the repository, and the detector and truth reader are pinned by hash', () => {
+    for (const f of ['fullplan.ts', 'truth.ts']) {
+      const code = codeOf(read(`research/analyzer-005q-ocr/${f}`))
+      expect(code, f).toMatch(/if \(W === REPO \|\| W\.startsWith\(REPO \+ '\/'\)\) throw new Error/)
+      expect(code, f).toMatch(/sha256: '[0-9a-f]{64}'/)
+    }
+    expect(codeOf(read('research/analyzer-005q-ocr/r1_server.py'))).toMatch(/hexdigest\(\) != a\.sha256/)
+  })
+
+  it('the truth readers never read a contender reading, and the contenders never read truth', () => {
+    const truth = codeOf(read('research/analyzer-005q-ocr/truth.ts'))
+    expect(truth).not.toMatch(/con\.b0|\.reads\b|\.external\b|latticeAsRead|ensemble|\.text\)\s*\}\s*of\s+con/)
+    const contenders = codeOf(read('research/analyzer-005q-ocr/fullplan.ts'))
+    expect(contenders).not.toMatch(/truth|transcri|labels\/|sheet-key|label-rows|trueScale/i)
+  })
+})

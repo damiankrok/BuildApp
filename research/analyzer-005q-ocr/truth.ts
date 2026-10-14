@@ -101,7 +101,7 @@ function tesseract(g: Gray): string {
   const px = new Uint8Array(W2 * H2).fill(255)
   for (let y = 0; y < h; y += 1) for (let x = 0; x < w; x += 1) px[(y + b) * W2 + x + b] = Math.max(0, Math.min(255, Math.round(up[y * w + x])))
   mkdirSync(TMP, { recursive: true })
-  const file = join(TMP, 'c.pgm')
+  const file = join(TMP, `c-${process.pid}.pgm`)
   writeFileSync(file, Buffer.concat([Buffer.from(`P5\n${W2} ${H2}\n255\n`), Buffer.from(px)]))
   const r = spawnSync('tesseract', [file, 'stdout', '--psm', '7', '-l', 'eng', '-c', 'tessedit_char_whitelist=0123456789.,'], { encoding: 'utf8' })
   return (r.stdout ?? '').trim()
@@ -188,7 +188,7 @@ async function main(): Promise<void> {
     const st = items.reduce<Record<string, number>>((a, i) => ((a[`${i.origin}:${i.status}`] = (a[`${i.origin}:${i.status}`] ?? 0) + 1), a), {})
     process.stdout.write(`${id} locations ${items.length} ${JSON.stringify(st)}\n`)
   }
-  rmSync(TMP, { recursive: true, force: true })
+  rmSync(join(TMP, `c-${process.pid}.pgm`), { force: true })
   reader.close()
 }
 await main()

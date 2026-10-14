@@ -50,16 +50,38 @@ def classify(value):
     return 'TEXT'
 
 
-def build_items(con, tru, prior):
+def strip_sep(t):
+    return re.sub(r'^[\s.,]+|[\s.,]+$', '', t or '')
+
+
+def local_status(r1, p1, r2):
+    """Addendum A: separators stripped at both ends; LOCAL_DOUBLE_READ on agreement; R1_CONFIDENT when R1 reads an
+    integer at mean p >= 0.98 and R2 gives no DIFFERENT digit string of the same length."""
+    a, b = strip_sep(r1), strip_sep(r2)
+    if a == '' and b == '':
+        return 'UNREADABLE', None
+    if a != '' and a == b:
+        return 'LOCAL_DOUBLE_READ', a
+    if INT.match(a) and p1 >= 0.98 and not (len(b) == len(a) and b != a):
+        return 'R1_CONFIDENT', a
+    return 'AMBIGUOUS_READ', None
+
+
+def build_items(con, tru, prior, sensitivity):
     """Truth items: tier-A prior transcriptions first, then local double reads, smallest box first; a location that
     covers the centres of two accepted items is a MERGED box (never an item)."""
     locs = []
     for p in prior:
         locs.append({'tier': 'A', 'box': p['box'], 'axis': axis_of(p['orientation']), 'value': p['value'], 'status': 'PRIOR_TRANSCRIPTION', 'origin': 'PRIOR'})
     for it in tru['items']:
-        if it['origin'] == 'LINE_WINDOW' and it['status'] != 'LOCAL_DOUBLE_READ':
+        status, value = local_status(it['r1']['text'], it['r1']['meanP'], it['r2'])
+        if it['origin'] == 'LINE_WINDOW' and status not in ('LOCAL_DOUBLE_READ', 'R1_CONFIDENT'):
             continue  # an empty band is not a location
-        locs.append({'tier': 'B', 'box': it['box'], 'axis': it['axis'], 'value': it.get('value'), 'status': it['status'], 'origin': it['origin'], 'orientation': it['orientation'], 'r1': it['r1']['text'], 'r2': it['r2']})
+        locs.append({'tier': 'B' if status != 'R1_CONFIDENT' else 'C', 'box': it['box'], 'axis': it['axis'], 'value': value, 'status': status, 'origin': it['origin'], 'orientation': it['orientation'], 'r1': it['r1']['text'], 'r2': it['r2']})
+    if not sensitivity:
+        for l in locs:
+            if l['tier'] == 'C':
+                l['tier'], l['status'], l['value'] = 'B', 'AMBIGUOUS_READ', None
     area = lambda b: max(0, b['x1'] - b['x0']) * max(0, b['y1'] - b['y0'])
     locs.sort(key=lambda l: (l['tier'], area(l['box'])))
     items = []
@@ -77,12 +99,18 @@ def build_items(con, tru, prior):
     for i in items:
         a = [r for r in i['reads'] if r['tier'] == 'A']
         b = {r['value'] for r in i['reads'] if r['tier'] == 'B' and r['status'] == 'LOCAL_DOUBLE_READ'}
+        cc = {r['value'] for r in i['reads'] if r['tier'] == 'C'}
+        i['r1Confident'] = sorted(cc)
         if a:
             i['value'], i['truth'] = a[0]['value'], 'PRIOR_TRANSCRIPTION'
             i['localAgreement'] = 'AGREES' if b == {a[0]['value']} else 'NO_LOCAL' if not b else 'CONFLICTS'
         elif len(b) == 1:
             i['value'], i['truth'] = b.pop(), 'LOCAL_DOUBLE_READ'
         elif len(b) > 1:
+            i['value'], i['truth'] = None, 'AMBIGUOUS_READ'
+        elif len(cc) == 1:
+            i['value'], i['truth'] = next(iter(cc)), 'R1_CONFIDENT'
+        elif len(cc) > 1:
             i['value'], i['truth'] = None, 'AMBIGUOUS_READ'
         else:
             st = {r['status'] for r in i['reads']}
@@ -96,6 +124,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--work', required=True)
     ap.add_argument('--out', required=True)
+    ap.add_argument('--mode', choices=['primary', 'sensitivity'], default='primary')
     a = ap.parse_args()
     corpus = load(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'corpus.json'))['sheets']
     inventory = load('stage-reports/artifacts/analyzer-005o/baseline-first-bad.json')['cases']['dom-w-murajach']
@@ -109,7 +138,7 @@ def main():
         man = load(f"{a.work}/manifest/{sid}.json")
         metrics = load(man['metrics'])
         prior = prior_truth(s['frameId'])
-        items, merged = build_items(con, tru, prior)
+        items, merged = build_items(con, tru, prior, a.mode == 'sensitivity')
         h_page = tru['labelHeightPx']
         chains = con['chains']
         lines = chains + [dict(r, id=r['id']) for r in con['runs']]
@@ -289,6 +318,7 @@ def main():
             scale['B0MetricSolution']['errVsTrueScale'] = round(sol['cmPerPixelX'] / ts - 1, 4)
         # --- truth quality
         tq = Counter(i.get('localAgreement') for i in items if i['truth'] == 'PRIOR_TRANSCRIPTION')
+        r1cal = Counter(('AGREES' if i['r1Confident'] == [i['value']] else 'CONFLICTS' if i['r1Confident'] else 'NONE') for i in items if i['truth'] == 'PRIOR_TRANSCRIPTION')
         summ = {
             'sheet': sid, 'case': s['case'], 'role': s['role'], 'family': s['family'], 'lineage': s['lineage'], 'smoke': bool(s.get('smoke')),
             'items': len(items), 'mergedLocations': merged, 'itemClasses': dict(Counter(i['class'] for i in items)),
@@ -305,7 +335,7 @@ def main():
             'b0Loss': dict(Counter(r['b0Loss'] for r in rows)),
             'b0Binding': dict(Counter(r['b0Binding'] for r in rows)), 'b2': dict(Counter(r.get('b2') for r in rows)),
             'b2FalseBindings': len(false_b2), 'b2FalseBindingClasses': dict(Counter(f['truthClass'] for f in false_b2)),
-            'b1FalseDetections': dict(false_b1), 'scale': scale, 'truthQualityTierAvsLocal': dict(tq),
+            'b1FalseDetections': dict(false_b1), 'scale': scale, 'truthQualityTierAvsLocal': dict(tq), 'r1ConfidentVsTierA': dict(r1cal),
         }
         if s['frameId'] == inventory['selectedFrame']:
             inv = []
@@ -319,7 +349,7 @@ def main():
             records.append({'sheet': sid, 'case': s['case'], 'variantByteHash': man['variantByteHash'], 'frameId': s['frameId'], **r})
         for k in ('dimensionLabels', 'b0Detected', 'b1Detected', 'b1OnlyDetected', 'b0OnlyDetected', 'b0ValueCorrect', 'b0ValueWrong', 'b1ValueCorrect', 'b1ValueWrong', 'b1NewCorrectValues', 'b2FalseBindings'):
             agg[(('SMOKE' if s.get('smoke') else 'MAIN'), k)] += summ[k]
-        for k in ('b0Loss', 'b0Binding', 'b2', 'b1FalseDetections', 'bindingTruth', 'truthTier', 'truthQualityTierAvsLocal', 'itemClasses'):
+        for k in ('b0Loss', 'b0Binding', 'b2', 'b1FalseDetections', 'bindingTruth', 'truthTier', 'truthQualityTierAvsLocal', 'r1ConfidentVsTierA', 'itemClasses'):
             for kk, vv in summ[k].items():
                 conf[(('SMOKE' if s.get('smoke') else 'MAIN'), k)][str(kk)] += vv
     os.makedirs(a.out, exist_ok=True)
@@ -328,8 +358,8 @@ def main():
         totals.setdefault(grp, {})[k] = v
     for (grp, k), v in conf.items():
         totals.setdefault(grp, {})[k] = dict(v)
-    json.dump({'schema': 'buildapp.005q-ocr.score', 'version': 1, 'totals': totals, 'sheets': sheets_out}, open(os.path.join(a.out, 'label-chain-score.json'), 'w'), indent=1, sort_keys=True)
-    json.dump({'schema': 'buildapp.005q-ocr.label-records', 'version': 1, 'records': records}, open(os.path.join(a.work, 'label-records.json'), 'w'), indent=1, sort_keys=True)
+    json.dump({'schema': 'buildapp.005q-ocr.score', 'version': 1, 'mode': a.mode, 'totals': totals, 'sheets': sheets_out}, open(os.path.join(a.out, f'label-chain-score-{a.mode}.json'), 'w'), indent=1, sort_keys=True)
+    json.dump({'schema': 'buildapp.005q-ocr.label-records', 'version': 1, 'records': records}, open(os.path.join(a.work, f'label-records-{a.mode}.json'), 'w'), indent=1, sort_keys=True)
     print(json.dumps(totals, indent=1, sort_keys=True))
 
 

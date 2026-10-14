@@ -75,3 +75,19 @@ branding) — counted by class. Resource cost: cold/warm time, peak RSS, model b
 - No solver replay unless B1 or B2 shows added label/chain evidence on a failure sheet; at most 2–4 houses, read-only.
 - No threshold of B1/B2 or of the truth rule is changed after the first score. One run per contender.
 - Budget ≈ 2–3 h active before CI.
+
+## Addendum A (before the first score; after the smoke sheet's truth readers ran, no contender scored)
+
+Seen on S5 (the smoke sheet) in the truth readers' TEXT only: Tesseract 5 drops a leading `1` (`190` → `90`, `110` →
+`10`) and appends separators (`700.`, `142,`), while R1 (medium) reads the same labels at mean p ≈ 1. Agreement-only
+truth would keep 20 of 189 classic-token locations and bias the label set toward the few Tesseract reads well.
+Changes, fixed now:
+
+1. Before comparing R1 and R2, leading and trailing `.`/`,` and spaces are stripped from both (inner separators stay).
+2. A second, weaker local tier `R1_CONFIDENT`: R1 reads an integer of 2–5 digits at mean p ≥ 0.98 and R2 does not give a
+   DIFFERENT digit string of the same length (R2 empty or shorter is not a contradiction; a same-length disagreement is
+   `AMBIGUOUS_READ`). R1 is PaddleOCR family like the contender, so this tier is CORRELATED with B0/B1 readings.
+3. Scores are reported twice: PRIMARY on `PRIOR_TRANSCRIPTION` + `LOCAL_DOUBLE_READ`; SENSITIVITY adding
+   `R1_CONFIDENT`. R1_CONFIDENT is calibrated on the tier-A items (prior transcription) of the same sheets and the
+   calibration is reported; value-accuracy claims for B1 rest on PRIMARY only.
+4. Truth-reader temp files are per process (two batches ran in parallel; a shared temp file would race).
