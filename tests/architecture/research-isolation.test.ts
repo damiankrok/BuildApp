@@ -18,7 +18,7 @@
  */
 import { closeSync, existsSync, openSync, readFileSync, readSync, readdirSync, statSync } from 'node:fs'
 import { join, relative, resolve } from 'node:path'
-import { execFileSync } from 'node:child_process'
+import { execFileSync, spawnSync } from 'node:child_process'
 import { describe, expect, it } from 'vitest'
 
 const ROOT = resolve(import.meta.dirname, '../..')
@@ -736,5 +736,13 @@ describe('005Q-CHAIN production cannot reach the integration study, and its chal
     expect(codeOf(read('research/analyzer-005q-chain/replay.mjs'))).toMatch(/if \(work === REPO \|\| work\.startsWith\(REPO \+ '\/'\)\) throw new Error/)
     expect(codeOf(read('research/analyzer-005q-chain/variant.mjs'))).toMatch(/work === REPO \|\| work\.startsWith\(REPO \+ '\/'\)\) throw new Error/)
     expect(codeOf(read('research/analyzer-005q-chain/spec/run-spec.mjs'))).toMatch(/variant\.startsWith\(REPO \+ '\/'\)\) throw new Error/)
+  })
+
+  it('the post-review scorer and gate corrections (addendum C) catch each defect the reviews found', () => {
+    // one synthetic negative test per fixed P0/P1 (G2c both axes, unverified binding, questionable truth, abstention,
+    // one ink on two spans, G2d per element, G2a' for C3/C4, published-area refusal); each failed on the first-scored code
+    const run = spawnSync('python3', ['-I', join(ROOT, 'research/analyzer-005q-chain/test_review_fixes.py')], { cwd: ROOT, encoding: 'utf8' })
+    expect(run.stderr, run.stderr).toMatch(/Ran 11 tests[\s\S]*\nOK\s*$/)
+    expect(run.status).toBe(0)
   })
 })
