@@ -1,0 +1,1246 @@
+{
+ "G1": {
+  "byteOnlyModelChanges": [],
+  "failures": [
+   {
+    "case": "A03",
+    "diff": {
+     "footprintM2": [
+      109.35,
+      109.27
+     ],
+     "openings": [
+      [
+       "DOOR:0.82:main-iwall-1-x-4",
+       "DOOR:0.87:main-iwall-1-x-0",
+       "DOOR:0.87:main-iwall-1-x-4",
+       "DOOR:0.87:main-iwall-1-z-2",
+       "DOOR:0.88:main-iwall-0-z-0",
+       "DOOR:0.88:main-iwall-0-z-3",
+       "DOOR:0.8:main-iwall-0-x-3",
+       "DOOR:0.9:main-iwall-0-x-5",
+       "DOOR:1.19:main-iwall-1-x-4",
+       "DOOR:1.4:ring-main-1-w0",
+       "DOOR:1.4:ring-main-1-w0",
+       "DOOR:1.6:ring-main-0-w2",
+       "DOOR:1.6:ring-main-1-w2",
+       "DOOR:1.6:ring-main-1-w2",
+       "WINDOW:0.75:ring-main-0-w0",
+       "WINDOW:0.9:ring-main-0-w1",
+       "WINDOW:1.01:ring-main-0-w1",
+       "WINDOW:1:ring-main-0-w1",
+       "WINDOW:2.01:ring-main-0-w0",
+       "WINDOW:2.5:ring-main-0-w0",
+       "WINDOW:3.56:ring-main-0-w2"
+      ],
+      [
+       "DOOR:0.82:main-iwall-1-x-4",
+       "DOOR:0.87:main-iwall-1-x-0",
+       "DOOR:0.87:main-iwall-1-x-4",
+       "DOOR:0.87:main-iwall-1-z-2",
+       "DOOR:0.88:main-iwall-0-z-0",
+       "DOOR:0.88:main-iwall-0-z-3",
+       "DOOR:0.8:main-iwall-0-x-3",
+       "DOOR:0.9:main-iwall-0-x-5",
+       "DOOR:1.19:main-iwall-1-x-4",
+       "DOOR:1.4:ring-main-1-w0",
+       "DOOR:1.4:ring-main-1-w0",
+       "DOOR:1.6:ring-main-0-w2",
+       "DOOR:1.6:ring-main-1-w2",
+       "DOOR:1.6:ring-main-1-w2",
+       "WINDOW:0.75:ring-main-0-w0",
+       "WINDOW:0.9:ring-main-0-w1",
+       "WINDOW:1.01:ring-main-0-w1",
+       "WINDOW:1:ring-main-0-w1",
+       "WINDOW:2.0:ring-main-0-w0",
+       "WINDOW:2.5:ring-main-0-w0",
+       "WINDOW:3.56:ring-main-0-w2"
+      ]
+     ]
+    },
+    "why": "SEMANTIC_MODEL"
+   },
+   {
+    "case": "dom-miniaturka",
+    "diff": {
+     "footprintM2": [
+      108.34,
+      108.33
+     ],
+     "openings": [
+      [
+       "DOOR:0.79:main-iwall-1-x-0",
+       "DOOR:0.79:main-iwall-1-x-5-b",
+       "DOOR:0.88:main-iwall-0-z-0",
+       "DOOR:0.88:main-iwall-0-z-3-a",
+       "DOOR:0.9:main-iwall-1-x-3-a",
+       "DOOR:1.04:ring-main-0-w0",
+       "DOOR:1.5:ring-attached-0-0-w1",
+       "DOOR:1.5:ring-main-0-w2",
+       "DOOR:1.5:ring-main-1-w1",
+       "DOOR:1.8:ring-main-0-w2",
+       "DOOR:3.3:ring-main-0-w1",
+       "WINDOW:0.76:ring-attached-0-0-w1",
+       "WINDOW:0.9:ring-main-0-w0",
+       "WINDOW:0.9:ring-main-0-w1",
+       "WINDOW:1.06:ring-main-1-w3",
+       "WINDOW:1.06:ring-main-1-w3",
+       "WINDOW:1.0:ring-main-0-w2",
+       "WINDOW:1.0:ring-main-0-w3",
+       "WINDOW:1.19:ring-main-0-w0",
+       "WINDOW:2.49:ring-main-0-w0"
+      ],
+      [
+       "DOOR:0.79:main-iwall-1-x-0",
+       "DOOR:0.79:main-iwall-1-x-5-b",
+       "DOOR:0.87:main-iwall-0-z-0",
+       "DOOR:0.87:main-iwall-0-z-3-a",
+       "DOOR:0.9:main-iwall-1-x-3-a",
+       "DOOR:1.04:ring-main-0-w0",
+       "DOOR:1.5:ring-attached-0-0-w1",
+       "DOOR:1.5:ring-main-0-w2",
+       "DOOR:1.5:ring-main-1-w1",
+       "DOOR:1.8:ring-main-0-w2",
+       "DOOR:3.29:ring-main-0-w1",
+       "WINDOW:0.76:ring-attached-0-0-w1",
+       "WINDOW:0.9:ring-main-0-w0",
+       "WINDOW:0.9:ring-main-0-w1",
+       "WINDOW:1.06:ring-main-1-w3",
+       "WINDOW:1.06:ring-main-1-w3",
+       "WINDOW:1.0:ring-main-0-w2",
+       "WINDOW:1.0:ring-main-0-w3",
+       "WINDOW:1.19:ring-main-0-w0",
+       "WINDOW:2.49:ring-main-0-w0"
+      ]
+     ]
+    },
+    "why": "SEMANTIC_MODEL"
+   },
+   {
+    "case": "dom-pod-jarzabem",
+    "diff": {
+     "footprintM2": [
+      191.0,
+      191.8
+     ],
+     "openings": [
+      [
+       "DOOR:0.51:ring-main-0-w3",
+       "DOOR:0.7:ring-main-0-w0",
+       "DOOR:0.7:ring-main-0-w0",
+       "DOOR:0.87:main-iwall-0-x-15",
+       "DOOR:0.9:main-iwall-0-x-6",
+       "DOOR:0.9:main-iwall-0-x-8",
+       "DOOR:0.9:main-iwall-0-z-0",
+       "DOOR:0.9:main-iwall-0-z-2",
+       "DOOR:1.04:ring-main-0-w0",
+       "DOOR:1.48:ring-main-0-w2",
+       "DOOR:1.51:ring-main-0-w2",
+       "DOOR:1.99:ring-main-0-w2",
+       "WINDOW:2.21:ring-main-0-w3",
+       "WINDOW:3.02:ring-main-0-w0",
+       "WINDOW:3.11:ring-main-0-w1",
+       "WINDOW:3.5:ring-main-0-w2",
+       "WINDOW:3.75:ring-main-0-w0",
+       "WINDOW:4.06:ring-main-0-w0",
+       "WINDOW:4.11:ring-main-0-w2"
+      ],
+      [
+       "DOOR:0.52:ring-main-0-w3",
+       "DOOR:0.7:ring-main-0-w0",
+       "DOOR:0.7:ring-main-0-w0",
+       "DOOR:0.87:main-iwall-0-z-0",
+       "DOOR:0.87:main-iwall-0-z-3",
+       "DOOR:0.91:main-iwall-0-x-12",
+       "DOOR:0.91:main-iwall-0-x-19",
+       "DOOR:0.96:main-iwall-0-x-0",
+       "DOOR:1.05:ring-main-0-w0",
+       "DOOR:1.0:main-iwall-0-x-0",
+       "DOOR:1.48:ring-main-0-w2",
+       "DOOR:1.48:ring-main-0-w2",
+       "WINDOW:2.0:ring-main-0-w2",
+       "WINDOW:2.22:ring-main-0-w3",
+       "WINDOW:3.01:ring-main-0-w0",
+       "WINDOW:3.09:ring-main-0-w1",
+       "WINDOW:3.53:ring-main-0-w2",
+       "WINDOW:3.73:ring-main-0-w0",
+       "WINDOW:3.75:ring-main-0-w0",
+       "WINDOW:4.1:ring-main-0-w2"
+      ]
+     ],
+     "rooms": [
+      6,
+      7
+     ],
+     "terraces": [
+      [
+       "PAVED:1.24",
+       "PAVED:4.51",
+       "PAVED:5.29",
+       "UNKNOWN:1.18",
+       "UNKNOWN:1.67",
+       "UNKNOWN:1.99",
+       "UNKNOWN:1.99",
+       "UNKNOWN:47.75"
+      ],
+      [
+       "PAVED:1.23",
+       "PAVED:18.96",
+       "UNKNOWN:1.18",
+       "UNKNOWN:1.69",
+       "UNKNOWN:47.75"
+      ]
+     ],
+     "walls": [
+      {
+       "EXTERIOR": 10,
+       "INTERIOR": 22
+      },
+      {
+       "EXTERIOR": 7,
+       "INTERIOR": 25
+      }
+     ]
+    },
+    "why": "SEMANTIC_MODEL"
+   },
+   {
+    "case": "dom-w-arkadiach",
+    "diff": {
+     "openings": [
+      [
+       "DOOR:0.88:main-iwall-1-z-0",
+       "DOOR:0.9:main-iwall-0-z-4",
+       "DOOR:0.9:main-iwall-1-x-2",
+       "DOOR:0.9:main-iwall-1-z-0",
+       "DOOR:1.08:ring-main-1-w2",
+       "DOOR:1.14:main-iwall-0-x-2",
+       "DOOR:1.1:ring-main-1-w2",
+       "DOOR:1.98:ring-main-1-w0",
+       "DOOR:1.99:ring-main-0-w3",
+       "WINDOW:0.91:ring-main-0-w0",
+       "WINDOW:1.0:ring-main-0-w3",
+       "WINDOW:1.11:ring-main-0-w0",
+       "WINDOW:3.8:ring-main-0-w2"
+      ],
+      [
+       "DOOR:0.88:main-iwall-1-z-0",
+       "DOOR:0.91:main-iwall-0-z-4",
+       "DOOR:0.9:main-iwall-1-x-2",
+       "DOOR:0.9:main-iwall-1-z-0",
+       "DOOR:1.08:ring-main-1-w2",
+       "DOOR:1.15:main-iwall-0-x-2",
+       "DOOR:1.1:ring-main-1-w2",
+       "DOOR:1.98:ring-main-1-w0",
+       "DOOR:2.0:ring-main-0-w3",
+       "WINDOW:0.91:ring-main-0-w0",
+       "WINDOW:1.0:ring-main-0-w3",
+       "WINDOW:1.11:ring-main-0-w0",
+       "WINDOW:3.81:ring-main-0-w2"
+      ]
+     ]
+    },
+    "why": "SEMANTIC_MODEL"
+   },
+   {
+    "case": "dom-w-zurawkach",
+    "diff": {
+     "footprintM2": [
+      100.88,
+      100.85
+     ]
+    },
+    "why": "SEMANTIC_MODEL"
+   },
+   {
+    "case": "kosacce-clean",
+    "diff": {
+     "footprintM2": [
+      162.28,
+      162.35
+     ],
+     "openings": [
+      [
+       "DOOR:0.79:main-iwall-0-z-11",
+       "DOOR:0.82:main-iwall-0-x-9",
+       "DOOR:0.89:main-iwall-0-x-7",
+       "DOOR:0.89:main-iwall-0-x-9",
+       "DOOR:0.89:main-iwall-0-z-1",
+       "DOOR:0.89:main-iwall-0-z-3",
+       "DOOR:0.91:main-iwall-0-x-9",
+       "DOOR:1.33:ring-attached-1-0-w2",
+       "DOOR:1.33:ring-main-0-w0",
+       "DOOR:1.49:ring-main-0-w0",
+       "DOOR:3.65:ring-main-0-w1",
+       "DOOR:5.75:ring-main-0-w2",
+       "WINDOW:0.76:ring-attached-1-0-w0",
+       "WINDOW:0.9:ring-main-0-w3",
+       "WINDOW:2.2:ring-main-0-w0",
+       "WINDOW:2.2:ring-main-0-w0",
+       "WINDOW:2.2:ring-main-0-w3",
+       "WINDOW:2.5:ring-attached-0-0-w2",
+       "WINDOW:2.98:ring-main-0-w2",
+       "WINDOW:3.3:ring-main-0-w1"
+      ],
+      [
+       "DOOR:0.79:main-iwall-0-z-11",
+       "DOOR:0.82:main-iwall-0-x-9",
+       "DOOR:0.89:main-iwall-0-z-1",
+       "DOOR:0.89:main-iwall-0-z-3",
+       "DOOR:0.92:main-iwall-0-x-0",
+       "DOOR:0.92:main-iwall-0-x-9",
+       "DOOR:0.9:main-iwall-0-x-0",
+       "DOOR:0.9:main-iwall-0-x-7",
+       "DOOR:0.9:main-iwall-0-x-9",
+       "DOOR:1.45:ring-attached-1-0-w2",
+       "DOOR:1.5:ring-main-0-w0",
+       "DOOR:3.65:ring-main-0-w1",
+       "DOOR:5.79:ring-main-0-w2",
+       "WINDOW:0.86:ring-attached-1-0-w0",
+       "WINDOW:0.9:ring-main-0-w3",
+       "WINDOW:1.24:ring-main-0-w0",
+       "WINDOW:2.2:ring-main-0-w0",
+       "WINDOW:2.2:ring-main-0-w0",
+       "WINDOW:2.2:ring-main-0-w3",
+       "WINDOW:2.5:ring-attached-0-0-w2",
+       "WINDOW:3.01:ring-main-0-w2",
+       "WINDOW:3.3:ring-main-0-w1"
+      ]
+     ],
+     "walls": [
+      {
+       "EXTERIOR": 12,
+       "INTERIOR": 27
+      },
+      {
+       "EXTERIOR": 12,
+       "INTERIOR": 26
+      }
+     ]
+    },
+    "why": "SEMANTIC_MODEL"
+   },
+   {
+    "case": "kosacce-tracked",
+    "diff": {
+     "footprintM2": [
+      162.28,
+      162.35
+     ],
+     "openings": [
+      [
+       "DOOR:0.79:main-iwall-0-z-11",
+       "DOOR:0.82:main-iwall-0-x-9",
+       "DOOR:0.89:main-iwall-0-x-7",
+       "DOOR:0.89:main-iwall-0-x-9",
+       "DOOR:0.89:main-iwall-0-z-1",
+       "DOOR:0.89:main-iwall-0-z-3",
+       "DOOR:0.91:main-iwall-0-x-9",
+       "DOOR:1.33:ring-attached-1-0-w2",
+       "DOOR:1.33:ring-main-0-w0",
+       "DOOR:1.49:ring-main-0-w0",
+       "DOOR:3.65:ring-main-0-w1",
+       "DOOR:5.75:ring-main-0-w2",
+       "WINDOW:0.76:ring-attached-1-0-w0",
+       "WINDOW:0.9:ring-main-0-w3",
+       "WINDOW:2.2:ring-main-0-w0",
+       "WINDOW:2.2:ring-main-0-w0",
+       "WINDOW:2.2:ring-main-0-w3",
+       "WINDOW:2.5:ring-attached-0-0-w2",
+       "WINDOW:2.98:ring-main-0-w2",
+       "WINDOW:3.3:ring-main-0-w1"
+      ],
+      [
+       "DOOR:0.79:main-iwall-0-z-11",
+       "DOOR:0.82:main-iwall-0-x-9",
+       "DOOR:0.89:main-iwall-0-z-1",
+       "DOOR:0.89:main-iwall-0-z-3",
+       "DOOR:0.92:main-iwall-0-x-0",
+       "DOOR:0.92:main-iwall-0-x-9",
+       "DOOR:0.9:main-iwall-0-x-0",
+       "DOOR:0.9:main-iwall-0-x-7",
+       "DOOR:0.9:main-iwall-0-x-9",
+       "DOOR:1.45:ring-attached-1-0-w2",
+       "DOOR:1.5:ring-main-0-w0",
+       "DOOR:3.65:ring-main-0-w1",
+       "DOOR:5.79:ring-main-0-w2",
+       "WINDOW:0.86:ring-attached-1-0-w0",
+       "WINDOW:0.9:ring-main-0-w3",
+       "WINDOW:1.24:ring-main-0-w0",
+       "WINDOW:2.2:ring-main-0-w0",
+       "WINDOW:2.2:ring-main-0-w0",
+       "WINDOW:2.2:ring-main-0-w3",
+       "WINDOW:2.5:ring-attached-0-0-w2",
+       "WINDOW:3.01:ring-main-0-w2",
+       "WINDOW:3.3:ring-main-0-w1"
+      ]
+     ],
+     "walls": [
+      {
+       "EXTERIOR": 12,
+       "INTERIOR": 27
+      },
+      {
+       "EXTERIOR": 12,
+       "INTERIOR": 26
+      }
+     ]
+    },
+    "why": "SEMANTIC_MODEL"
+   },
+   {
+    "case": "marcowki",
+    "diff": {
+     "balconies": [
+      2,
+      1
+     ],
+     "footprintM2": [
+      130.79,
+      130.67
+     ],
+     "openings": [
+      [
+       "DOOR:0.66:main-iwall-0-z-3",
+       "DOOR:0.85:main-iwall-0-z-0",
+       "DOOR:0.87:main-iwall-0-z-0",
+       "DOOR:0.89:main-iwall-1-x-3",
+       "DOOR:0.9:main-iwall-0-x-6",
+       "DOOR:0.9:main-iwall-0-z-5",
+       "DOOR:0.9:main-iwall-1-z-2",
+       "DOOR:0.9:main-iwall-1-z-2",
+       "DOOR:0.9:main-iwall-1-z-2",
+       "DOOR:0.9:ring-main-0-w1",
+       "DOOR:0.9:ring-main-0-w3",
+       "DOOR:2.75:ring-attached-0-0-w0",
+       "WINDOW:1.05:ring-main-0-w0",
+       "WINDOW:1.1:ring-main-0-w0",
+       "WINDOW:1.4:ring-main-0-w3",
+       "WINDOW:1:ring-attached-0-0-w2",
+       "WINDOW:2.34:ring-main-1-w2",
+       "WINDOW:2.34:ring-main-1-w2",
+       "WINDOW:2.7:ring-main-1-w0",
+       "WINDOW:3:ring-main-0-w1",
+       "WINDOW:4.7:ring-main-0-w2"
+      ],
+      [
+       "DOOR:0.66:main-iwall-0-z-3",
+       "DOOR:0.85:main-iwall-0-z-0",
+       "DOOR:0.87:main-iwall-0-z-0",
+       "DOOR:0.89:main-iwall-1-x-3",
+       "DOOR:0.89:main-iwall-1-z-1",
+       "DOOR:0.89:main-iwall-1-z-1",
+       "DOOR:0.89:main-iwall-1-z-1",
+       "DOOR:0.9:main-iwall-0-z-5",
+       "DOOR:0.9:ring-main-0-w1",
+       "DOOR:0.9:ring-main-0-w3",
+       "DOOR:2.75:ring-attached-0-0-w0",
+       "WINDOW:1.05:ring-main-0-w0",
+       "WINDOW:1.1:ring-main-0-w0",
+       "WINDOW:1.4:ring-main-0-w3",
+       "WINDOW:1:ring-attached-0-0-w2",
+       "WINDOW:2.34:ring-main-1-w2",
+       "WINDOW:2.34:ring-main-1-w2",
+       "WINDOW:3:ring-main-0-w1",
+       "WINDOW:4.7:ring-main-0-w2"
+      ]
+     ],
+     "rooms": [
+      12,
+      11
+     ],
+     "terraces": [
+      [
+       "PAVED:10.68",
+       "PAVED:23.26"
+      ],
+      [
+       "PAVED:10.66",
+       "PAVED:23.04"
+      ]
+     ],
+     "walls": [
+      {
+       "EXTERIOR": 20,
+       "INTERIOR": 20
+      },
+      {
+       "EXTERIOR": 18,
+       "INTERIOR": 21
+      }
+     ]
+    },
+    "why": "SEMANTIC_MODEL"
+   },
+   {
+    "case": "rarytasy-g2e",
+    "diff": {
+     "footprintM2": [
+      184.55,
+      184.47
+     ],
+     "openings": [
+      [
+       "DOOR:0.72:main-iwall-0-z-9",
+       "DOOR:0.83:main-iwall-0-x-0",
+       "DOOR:0.83:main-iwall-0-x-0",
+       "DOOR:0.85:main-iwall-0-x-5",
+       "DOOR:0.88:main-iwall-0-x-0",
+       "DOOR:0.88:main-iwall-0-z-5",
+       "DOOR:0.91:main-iwall-0-x-5",
+       "DOOR:1.5:ring-main-0-w2",
+       "DOOR:1.5:ring-main-0-w2",
+       "DOOR:1:ring-main-0-w0",
+       "DOOR:5:ring-attached-0-0-w0",
+       "WINDOW:1.2:ring-main-0-w1",
+       "WINDOW:1.2:ring-main-0-w1",
+       "WINDOW:1:ring-attached-0-0-w3",
+       "WINDOW:1:ring-main-0-w0",
+       "WINDOW:1:ring-main-0-w3",
+       "WINDOW:2.3:ring-main-0-w2",
+       "WINDOW:2.5:ring-main-0-w0",
+       "WINDOW:3.86:ring-attached-0-0-w1",
+       "WINDOW:4:ring-main-0-w2"
+      ],
+      [
+       "DOOR:0.72:main-iwall-0-z-9",
+       "DOOR:0.82:main-iwall-0-x-0",
+       "DOOR:0.82:main-iwall-0-x-0",
+       "DOOR:0.85:main-iwall-0-x-5",
+       "DOOR:0.87:main-iwall-0-x-0",
+       "DOOR:0.88:main-iwall-0-z-5",
+       "DOOR:0.9:main-iwall-0-x-5",
+       "DOOR:1.5:ring-main-0-w2",
+       "DOOR:1.5:ring-main-0-w2",
+       "DOOR:1:ring-main-0-w0",
+       "DOOR:5:ring-attached-0-0-w0",
+       "WINDOW:1.2:ring-main-0-w1",
+       "WINDOW:1.2:ring-main-0-w1",
+       "WINDOW:1:ring-attached-0-0-w3",
+       "WINDOW:1:ring-main-0-w0",
+       "WINDOW:1:ring-main-0-w3",
+       "WINDOW:2.3:ring-main-0-w2",
+       "WINDOW:2.5:ring-main-0-w0",
+       "WINDOW:3.85:ring-attached-0-0-w1",
+       "WINDOW:4:ring-main-0-w2"
+      ]
+     ],
+     "terraces": [
+      [
+       "UNKNOWN:12.72",
+       "UNKNOWN:55.71"
+      ],
+      [
+       "UNKNOWN:12.64",
+       "UNKNOWN:55.73"
+      ]
+     ],
+     "walls": [
+      {
+       "EXTERIOR": 8,
+       "INTERIOR": 12
+      },
+      {
+       "EXTERIOR": 8,
+       "INTERIOR": 14
+      }
+     ]
+    },
+    "why": "SEMANTIC_MODEL"
+   }
+  ],
+  "pass": false
+ },
+ "G2": {
+  "a2_scaleOrientedAnchors": {
+   "A00": 4,
+   "A01": 3,
+   "A02": 3,
+   "A04": 4,
+   "A05": 3,
+   "A06": 7,
+   "A07": 1,
+   "dom-miniaturka": 6,
+   "dom-pod-jarzabem": 3,
+   "dom-pod-milorzebem": 1,
+   "dom-w-akebiach": 4,
+   "dom-w-arkadiach": 2,
+   "dom-w-azaliach": 4,
+   "dom-w-cieszyniankach": 1,
+   "dom-w-cyklamenach": 5,
+   "dom-w-dabecjach": 6,
+   "dom-w-daliach": 3,
+   "dom-w-glogownikach": 3,
+   "dom-w-gozdzikowcach": 1,
+   "dom-w-helikoniach": 2,
+   "dom-w-jablonkach": 10,
+   "dom-w-krasnokwiatach": 3,
+   "dom-w-modrzykach": 2,
+   "dom-w-morelach": 1,
+   "dom-w-murajach": 3,
+   "dom-w-tymianku": 4,
+   "dom-w-zurawkach": 3,
+   "kosacce-clean": 6,
+   "kosacce-tracked": 6,
+   "marcowki": 6,
+   "rarytasy-eoze": 3,
+   "rarytasy-g2e": 4,
+   "willa-miranda": 2
+  },
+  "a2_total": 119,
+  "a_legacyRowsUnreachable": {
+   "eoze-legacy-area": 16,
+   "eoze-legacy-every": 16,
+   "kosacce-area-alone": 25
+  },
+  "a_scaleDependentAnchors": {
+   "A00": 10,
+   "A01": 16,
+   "A02": 9,
+   "A03": 15,
+   "A04": 20,
+   "A05": 10,
+   "A06": 18,
+   "A07": 8,
+   "D00": 7,
+   "D01": 2,
+   "D02": 3,
+   "D03": 3,
+   "D04": 2,
+   "D05": 3,
+   "alt-marcowki": 3,
+   "aster-viii": 1,
+   "dom-miniaturka": 12,
+   "dom-pod-jarzabem": 11,
+   "dom-pod-milorzebem": 8,
+   "dom-w-akebiach": 13,
+   "dom-w-arkadiach": 11,
+   "dom-w-azaliach": 6,
+   "dom-w-cieszyniankach": 5,
+   "dom-w-cyklamenach": 18,
+   "dom-w-dabecjach": 20,
+   "dom-w-daliach": 10,
+   "dom-w-glogownikach": 14,
+   "dom-w-gozdzikowcach": 9,
+   "dom-w-helikoniach": 6,
+   "dom-w-jablonkach": 21,
+   "dom-w-krasnokwiatach": 11,
+   "dom-w-modrzewnicy": 1,
+   "dom-w-modrzykach": 9,
+   "dom-w-morelach": 14,
+   "dom-w-murajach": 12,
+   "dom-w-tunbergiach": 10,
+   "dom-w-tymianku": 7,
+   "dom-w-zurawkach": 6,
+   "galaktyka": 4,
+   "kosacce-clean": 20,
+   "kosacce-tracked": 20,
+   "marcowki": 15,
+   "rarytasy-eoze": 11,
+   "rarytasy-g2e": 17,
+   "willa-miranda": 17
+  },
+  "a_total": 468,
+  "b_inkFirstMismatch": {},
+  "c_newFalseConfident": [],
+  "d_sourceExactIncrease": [],
+  "e_note": "changed refusals are classified by hand from their decision paths (G5 list)",
+  "pass": false
+ },
+ "G3": {
+  "changes": [
+   {
+    "case": "dom-pod-jarzabem",
+    "now": [
+     {
+      "areaM2": 1.18,
+      "surface": "UNKNOWN",
+      "why": "the floor of the east recess"
+     },
+     {
+      "areaM2": 1.23,
+      "surface": "PAVED",
+      "why": "the floor of the east recess"
+     },
+     {
+      "areaM2": 1.69,
+      "surface": "UNKNOWN",
+      "why": "the floor of the east recess"
+     },
+     {
+      "areaM2": 18.96,
+      "surface": "PAVED",
+      "why": "the floor of the front recess"
+     },
+     {
+      "areaM2": 47.75,
+      "surface": "UNKNOWN",
+      "why": "the floor of the rear recess"
+     }
+    ],
+    "was": [
+     {
+      "areaM2": 1.18,
+      "surface": "UNKNOWN",
+      "why": "the floor of the east recess"
+     },
+     {
+      "areaM2": 1.24,
+      "surface": "PAVED",
+      "why": "the floor of the east recess"
+     },
+     {
+      "areaM2": 1.67,
+      "surface": "UNKNOWN",
+      "why": "the floor of the east recess"
+     },
+     {
+      "areaM2": 4.51,
+      "surface": "PAVED",
+      "why": "the floor of the front recess"
+     },
+     {
+      "areaM2": 1.99,
+      "surface": "UNKNOWN",
+      "why": "the floor of the front recess"
+     },
+     {
+      "areaM2": 1.99,
+      "surface": "UNKNOWN",
+      "why": "the floor of the front recess"
+     },
+     {
+      "areaM2": 5.29,
+      "surface": "PAVED",
+      "why": "the floor of the front recess"
+     },
+     {
+      "areaM2": 47.75,
+      "surface": "UNKNOWN",
+      "why": "the floor of the rear recess"
+     }
+    ],
+    "what": "terraces"
+   },
+   {
+    "case": "dom-pod-jarzabem",
+    "now": [
+     "FLUSH_ATTACHED:-:0.2",
+     "FLUSH_ATTACHED:-:0.2",
+     "UNKNOWN:-:1.2",
+     "UNKNOWN:-:13.2"
+    ],
+    "was": [
+     "COVERED_TERRACE:-:12.6",
+     "FLUSH_ATTACHED:-:0.2",
+     "FLUSH_ATTACHED:-:0.3",
+     "UNKNOWN:-:1.1",
+     "UNKNOWN:-:14.3"
+    ],
+    "what": "bodies"
+   },
+   {
+    "case": "dom-pod-jarzabem",
+    "now": [
+     "OPENING_IN_WALL:6.27",
+     "OPEN_SIDE:0.65",
+     "OPEN_SIDE:3.75",
+     "OPEN_SIDE:3.79",
+     "OPEN_SIDE:4.1"
+    ],
+    "was": [
+     "OPENING_IN_WALL:3.84",
+     "OPENING_IN_WALL:6.22",
+     "OPEN_SIDE:4.04",
+     "OPEN_SIDE:4.4",
+     "OPEN_SIDE:4.68"
+    ],
+    "what": "wideOpenings"
+   },
+   {
+    "case": "dom-pod-jarzabem",
+    "now": 7,
+    "was": 6,
+    "what": "rooms"
+   },
+   {
+    "case": "dom-pod-jarzabem",
+    "now": {
+     "EXTERIOR": 7,
+     "INTERIOR": 25
+    },
+    "was": {
+     "EXTERIOR": 10,
+     "INTERIOR": 22
+    },
+    "what": "walls"
+   },
+   {
+    "case": "dom-w-arkadiach",
+    "now": [
+     "OPENING_IN_WALL:0.98",
+     "OPENING_IN_WALL:0.98",
+     "OPENING_IN_WALL:1.83",
+     "OPENING_IN_WALL:3.81",
+     "OPEN_SIDE:2.01"
+    ],
+    "was": [
+     "OPENING_IN_WALL:0.98",
+     "OPENING_IN_WALL:0.98",
+     "OPENING_IN_WALL:1.83",
+     "OPENING_IN_WALL:3.8",
+     "OPEN_SIDE:2.01"
+    ],
+    "what": "wideOpenings"
+   },
+   {
+    "case": "marcowki",
+    "now": [
+     {
+      "areaM2": 10.66,
+      "surface": "PAVED",
+      "why": "the floor of the front recess"
+     },
+     {
+      "areaM2": 23.04,
+      "surface": "PAVED",
+      "why": "the floor of the rear recess and the platform the plan outlines beyond it"
+     }
+    ],
+    "was": [
+     {
+      "areaM2": 10.68,
+      "surface": "PAVED",
+      "why": "the floor of the front recess"
+     },
+     {
+      "areaM2": 23.26,
+      "surface": "PAVED",
+      "why": "the floor of the rear recess and the platform the plan outlines beyond it"
+     }
+    ],
+    "what": "terraces"
+   },
+   {
+    "case": "marcowki",
+    "now": 11,
+    "was": 12,
+    "what": "rooms"
+   },
+   {
+    "case": "marcowki",
+    "now": {
+     "EXTERIOR": 18,
+     "INTERIOR": 21
+    },
+    "was": {
+     "EXTERIOR": 20,
+     "INTERIOR": 20
+    },
+    "what": "walls"
+   },
+   {
+    "case": "rarytasy-g2e",
+    "now": [
+     {
+      "areaM2": 12.64,
+      "surface": "UNKNOWN",
+      "why": "the floor of the front recess"
+     },
+     {
+      "areaM2": 55.73,
+      "surface": "UNKNOWN",
+      "why": "the floor of the front recess"
+     }
+    ],
+    "was": [
+     {
+      "areaM2": 12.72,
+      "surface": "UNKNOWN",
+      "why": "the floor of the front recess"
+     },
+     {
+      "areaM2": 55.71,
+      "surface": "UNKNOWN",
+      "why": "the floor of the front recess"
+     }
+    ],
+    "what": "terraces"
+   },
+   {
+    "case": "rarytasy-g2e",
+    "now": [
+     "FLUSH_ATTACHED:-:0.2",
+     "UNKNOWN:-:0.2",
+     "UNKNOWN:-:1.2"
+    ],
+    "was": [
+     "FLUSH_ATTACHED:-:0.3",
+     "UNKNOWN:-:0.2",
+     "UNKNOWN:-:1.2"
+    ],
+    "what": "bodies"
+   },
+   {
+    "case": "rarytasy-g2e",
+    "now": [
+     "OPENING_IN_WALL:3.95",
+     "OPENING_IN_WALL:4.91"
+    ],
+    "was": [
+     "OPENING_IN_WALL:4.0",
+     "OPENING_IN_WALL:4.96"
+    ],
+    "what": "wideOpenings"
+   },
+   {
+    "case": "rarytasy-g2e",
+    "now": {
+     "EXTERIOR": 8,
+     "INTERIOR": 14
+    },
+    "was": {
+     "EXTERIOR": 8,
+     "INTERIOR": 12
+    },
+    "what": "walls"
+   },
+   {
+    "case": "kosacce-clean",
+    "now": [
+     "OPENING_IN_WALL:2.5",
+     "OPEN_SIDE:2.23",
+     "OPEN_SIDE:3.71",
+     "OPEN_SIDE:3.98",
+     "OPEN_SIDE:5.18",
+     "OPEN_SIDE:5.78",
+     "OPEN_SIDE:6.84"
+    ],
+    "was": [
+     "OPENING_IN_WALL:2.48",
+     "OPEN_SIDE:2.21",
+     "OPEN_SIDE:3.71",
+     "OPEN_SIDE:3.95",
+     "OPEN_SIDE:5.17",
+     "OPEN_SIDE:5.78",
+     "OPEN_SIDE:6.84"
+    ],
+    "what": "wideOpenings"
+   },
+   {
+    "case": "kosacce-clean",
+    "now": {
+     "EXTERIOR": 12,
+     "INTERIOR": 26
+    },
+    "was": {
+     "EXTERIOR": 12,
+     "INTERIOR": 27
+    },
+    "what": "walls"
+   },
+   {
+    "case": "kosacce-tracked",
+    "now": [
+     "OPENING_IN_WALL:2.5",
+     "OPEN_SIDE:2.23",
+     "OPEN_SIDE:3.71",
+     "OPEN_SIDE:3.98",
+     "OPEN_SIDE:5.18",
+     "OPEN_SIDE:5.78",
+     "OPEN_SIDE:6.84"
+    ],
+    "was": [
+     "OPENING_IN_WALL:2.48",
+     "OPEN_SIDE:2.21",
+     "OPEN_SIDE:3.71",
+     "OPEN_SIDE:3.95",
+     "OPEN_SIDE:5.17",
+     "OPEN_SIDE:5.78",
+     "OPEN_SIDE:6.84"
+    ],
+    "what": "wideOpenings"
+   },
+   {
+    "case": "kosacce-tracked",
+    "now": {
+     "EXTERIOR": 12,
+     "INTERIOR": 26
+    },
+    "was": {
+     "EXTERIOR": 12,
+     "INTERIOR": 27
+    },
+    "what": "walls"
+   },
+   {
+    "case": "D00",
+    "now": null,
+    "was": [
+     {
+      "areaM2": 2.09,
+      "surface": "PAVED",
+      "why": "the floor of the east recess"
+     },
+     {
+      "areaM2": 1.32,
+      "surface": "PAVED",
+      "why": "the floor of the rear recess"
+     },
+     {
+      "areaM2": 1.6,
+      "surface": "PAVED",
+      "why": "the floor of the west recess"
+     }
+    ],
+    "what": "terraces"
+   },
+   {
+    "case": "D00",
+    "now": [
+     "COVERED_TERRACE:-:1.0",
+     "SEPARATE_BODY:-:0.1",
+     "SEPARATE_BODY:-:0.1",
+     "UNKNOWN:-:15.3",
+     "UNKNOWN:-:6.9"
+    ],
+    "was": [],
+    "what": "bodies"
+   },
+   {
+    "case": "D00",
+    "now": [
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0"
+    ],
+    "was": [
+     "BOX_COMPLETION:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0"
+    ],
+    "what": "completions"
+   },
+   {
+    "case": "dom-w-murajach",
+    "now": [
+     "COVERED_TERRACE:-:0.5",
+     "COVERED_TERRACE:-:2.4",
+     "FLUSH_ATTACHED:-:2.4",
+     "FLUSH_ATTACHED:-:3.8",
+     "UNKNOWN:-:0.4"
+    ],
+    "was": [
+     "FLUSH_ATTACHED:-:3.8",
+     "UNKNOWN:-:0.2",
+     "UNKNOWN:-:0.4"
+    ],
+    "what": "bodies"
+   },
+   {
+    "case": "dom-w-murajach",
+    "now": [
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0"
+    ],
+    "was": [
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0"
+    ],
+    "what": "completions"
+   },
+   {
+    "case": "dom-w-glogownikach",
+    "now": [
+     "COVERED_TERRACE:-:1.3",
+     "COVERED_TERRACE:-:2.4",
+     "FLUSH_ATTACHED:-:0.3",
+     "FLUSH_ATTACHED:-:0.6",
+     "FLUSH_ATTACHED:-:1.4",
+     "FLUSH_ATTACHED:-:3.6",
+     "UNKNOWN:-:1.0",
+     "UNKNOWN:-:1.2"
+    ],
+    "was": [
+     "COVERED_TERRACE:-:1.3",
+     "COVERED_TERRACE:-:2.4",
+     "FLUSH_ATTACHED:-:0.3",
+     "FLUSH_ATTACHED:-:0.5",
+     "FLUSH_ATTACHED:-:0.5",
+     "FLUSH_ATTACHED:-:1.8",
+     "FLUSH_ATTACHED:-:3.6",
+     "UNKNOWN:-:0.7",
+     "UNKNOWN:-:0.8"
+    ],
+    "what": "bodies"
+   },
+   {
+    "case": "dom-w-glogownikach",
+    "now": [
+     "OPENING_IN_WALL:5.68"
+    ],
+    "was": [
+     "OPENING_IN_WALL:5.7"
+    ],
+    "what": "wideOpenings"
+   },
+   {
+    "case": "dom-w-glogownikach",
+    "now": [
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0.9"
+    ],
+    "was": [
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0.9"
+    ],
+    "what": "completions"
+   },
+   {
+    "case": "dom-miniaturka",
+    "now": [
+     "OPEN_SIDE:3.85"
+    ],
+    "was": [
+     "OPEN_SIDE:3.86"
+    ],
+    "what": "wideOpenings"
+   }
+  ],
+  "pass": false
+ },
+ "G5": {
+  "changedRefusalsOrDecisions": [
+   {
+    "case": "dom-pod-jarzabem",
+    "decisionPathChanged": true,
+    "now": [
+     "COMPLETED",
+     null,
+     "ALGORITHMIC_FAIL"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "rarytasy-eoze",
+    "decisionPathChanged": true,
+    "now": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ]
+   },
+   {
+    "case": "alt-marcowki",
+    "decisionPathChanged": true,
+    "now": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "was": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-gozdzikowcach",
+    "decisionPathChanged": true,
+    "now": [
+     "FAILED",
+     "MODEL_EMISSION_FAILED/None",
+     "ALGORITHMIC_FAIL"
+    ],
+    "was": [
+     "FAILED",
+     "MODEL_EMISSION_FAILED/None",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "D00",
+    "decisionPathChanged": true,
+    "now": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-murajach",
+    "decisionPathChanged": true,
+    "now": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "was": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   }
+  ],
+  "note": "every entry needs a hand explanation in the report; no reconstruction code differs between variants (G5 by construction)"
+ },
+ "admissible": false,
+ "baseline": "C0",
+ "knownGood": [
+  "A02",
+  "A03",
+  "A06",
+  "A07",
+  "dom-miniaturka",
+  "dom-pod-jarzabem",
+  "dom-w-arkadiach",
+  "dom-w-cieszyniankach",
+  "dom-w-daliach",
+  "dom-w-jablonkach",
+  "dom-w-modrzykach",
+  "dom-w-morelach",
+  "dom-w-tunbergiach",
+  "dom-w-tymianku",
+  "dom-w-zurawkach",
+  "eoze-legacy-area",
+  "eoze-legacy-every",
+  "kosacce-area-alone",
+  "kosacce-clean",
+  "kosacce-tracked",
+  "marcowki",
+  "rarytasy-eoze",
+  "rarytasy-g2e"
+ ],
+ "variant": "N1"
+}
