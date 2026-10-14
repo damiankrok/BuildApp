@@ -139,3 +139,24 @@ The gap, the MASS/ring provenance and the trigger are N1's.
 walls removed), two typed gaps, MASS and ring SOURCE_DERIVED; rooms, interior doors and every opening (kind, offset,
 width, sill, height) identical to the baseline; footprint −8.04 %. Combinations re-run with N1a as **C1N1a** and
 **C1C2N1a** (C1N1 and C1C2N1 with N1 are run as preregistered and reported, but inherit N1's inadmissibility).
+
+### Addendum B (review round 1 of the production change; written before PROD2's outputs are read)
+
+Review round 1 (five static lenses, `post-review/round-1.md`) found 0 P0 and 0 P1. The production change was amended for
+four P2/P3 findings, each narrowing N1a or only naming what it would otherwise drop silently:
+
+- **F1 (METRIC-1, TOPOLOGY-3, PERFORMANCE-1).** A body is "cut on the wall's inner face" only where its side overlaps the
+  stretches the wall ink covers by more than one wall, not anywhere along the strip.
+- **F2 (TOPOLOGY-4, METRIC-4).** A band counts only if the strip is no deeper than the band by more than its face window
+  (a band floating clear of both edges is not the wall). One-sided: a band thicker than the strip still counts.
+- **F3 (METRIC-3, PERFORMANCE-2).** The gap reason's depth uses the axis's own scale, and says "the plan's extent".
+- **F4 (TOPOLOGY-1).** A platform the plan outlines beyond a wall strip is named as an AMBIGUOUS gap ("the platform the
+  plan outlines beyond the … wall"); nothing is built.
+- Text only: `openFacesOf` matches through `outerFaceSlug`; an open body's ledger reason names the open face.
+
+**Prediction (PROD2 = production after F1–F4, solver-only on the 46 rows).** 45 rows byte-identical to N1a/PROD1 in
+every output file. `dom-w-glogownikach`: geometry, statuses, terraces (0), returns (0), rooms, doors, openings, MASS and
+ring provenance identical to N1a; both outer-face gaps still named (the main body overlaps the covered stretches on
+both sides; both strips are as deep as their bands); only text may differ (the gap reason's wording and depth, the
+ledger reason). No platform gap on glogownikach (the base's terraces there carried no extension). If any geometry,
+status or count differs from N1a, PROD2 is not adopted without a further addendum.
