@@ -27,6 +27,8 @@ export type MassV2 = {
   featureId: string
   /** The 03R mass id this came from. */
   sourceMassId: string
+  /** 005Q (N1): the outer faces this body leaves unresolved — it was cut on those walls' inner faces. */
+  outerFacesOpen?: string[]
   /**
    * 005L: a storey whose own walls stand on only part of this body — the footprint its plan's walled region stands on
    * — given apart. A storey not listed here stands on the whole body. The body's rectangle is its lowest storey's.

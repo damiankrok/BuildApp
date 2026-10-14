@@ -20,6 +20,7 @@ import { composeStructuralLayout } from '../structural.js'
 import type { PublishedArea } from '../layout-gate.js'
 import { ringBounds } from '../structural-layout.js'
 import type { StructuralLayoutHypothesisSet } from '../structural-layout.js'
+import { isWallStripZone, openFacesOf } from '../layout.js'
 import type { PlanReading } from '../layout.js'
 import { fitOpeningsToHosts, sealCandidate } from '../candidate.js'
 import type { OpeningFit, ReconstructionCandidate, UnresolvedCandidate, SolverStep, PrimitiveTrace } from '../candidate.js'
@@ -403,8 +404,11 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const id = m.role === 'MAIN' ? 'main' : `attached-${layout.masses.filter((x) => x.role !== 'MAIN').indexOf(m)}`
     const storeys: number[] = []
     for (let s = m.storeySpan.fromIndex; s <= m.storeySpan.toIndex; s += 1) storeys.push(s)
-    const featureId = feature('MASS', id, { width: { value: b.x1 - b.x0, low: m.widthM.low, high: m.widthM.high }, depth: { value: z1 - z0, low: m.depthM.low, high: m.depthM.high } }, [], m.widthM.basis === 'MEASURED' ? 'SOURCE_EXACT' : 'SOURCE_DERIVED', m.why, { printed: m.widthM.basis === 'MEASURED', uncertaintyM: 0.02 })
-    for (const e of m.evidenceIds) record({ evidenceId: e, evidenceKind: 'METRIC', what: 'a chain segment of the body', authority: 'HIGH', featureId, disposition: 'USED_IN_MODEL', reason: 'the body’s span', stage: 'TOPOLOGY' })
+    // 005Q (N1): a body cut on a wall's inner face (the layout names the face it leaves open) is not SOURCE_EXACT
+    const facesOpen = openFacesOf(m, layout.unresolved).map((g) => g.what)
+    const exact = m.widthM.basis === 'MEASURED' && facesOpen.length === 0
+    const featureId = feature('MASS', id, { width: { value: b.x1 - b.x0, low: m.widthM.low, high: m.widthM.high }, depth: { value: z1 - z0, low: m.depthM.low, high: m.depthM.high } }, [], exact ? 'SOURCE_EXACT' : 'SOURCE_DERIVED', m.why, { printed: exact, uncertaintyM: 0.02 })
+    for (const e of m.evidenceIds) record({ evidenceId: e, evidenceKind: 'METRIC', what: 'a chain segment of the body', authority: 'HIGH', featureId, disposition: 'USED_IN_MODEL', reason: facesOpen.length > 0 ? `the body’s span, which ends on a wall’s inner face (unresolved: ${facesOpen.join('; ')})` : 'the body’s span', stage: 'TOPOLOGY' })
     // 005L: each storey's own footprint over this body, from the support relation: where the storey's walled region
     // stands on only part of the body, its walls are built there and not copied from the storey below. A storey whose
     // footprint over the body is in more than one piece keeps the largest as its own and builds each other piece as a
@@ -442,7 +446,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         pieces.push({ id: pid, role: 'ATTACHED', ...r, storeys: [s], featureId: pf, sourceMassId: m.id, pieceOf: id })
       })
     }
-    return { id, role: m.role === 'MAIN' ? 'MAIN' : 'ATTACHED', x0: round6(b.x0), z0: round6(z0), x1: round6(b.x1), z1: round6(z1), storeys, featureId, sourceMassId: m.id, ...(storeyRects.length > 0 ? { storeyRects } : {}) }
+    return { id, role: m.role === 'MAIN' ? 'MAIN' : 'ATTACHED', x0: round6(b.x0), z0: round6(z0), x1: round6(b.x1), z1: round6(z1), storeys, featureId, sourceMassId: m.id, ...(storeyRects.length > 0 ? { storeyRects } : {}), ...(facesOpen.length > 0 ? { outerFacesOpen: facesOpen } : {}) }
   })
   masses.push(...pieces)
   const main = masses.find((m) => m.role === 'MAIN') ?? masses[0]
@@ -648,7 +652,8 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // ---------------------------------------------------------------------------
   // G2. recesses and returns from the zones, per storey
   // ---------------------------------------------------------------------------
-  const zoneRegions = layout.footprintRegions.filter((r) => r.kind === 'ZONE')
+  // 005Q (N1): a zone the layout names as the building's own wall (an unresolved outer face) is no recess and no terrace
+  const zoneRegions = layout.footprintRegions.filter((r) => r.kind === 'ZONE' && !isWallStripZone(r.id, layout.unresolved))
   const recesses: RecessTopology[] = []
   const returns: ReturnWallV2[] = []
   const sideOfZone = (id: string): ZoneSide | undefined => (id.endsWith('min_z') ? 'REAR' : id.endsWith('max_z') ? 'FRONT' : id.endsWith('min_x') ? 'WEST' : id.endsWith('max_x') ? 'EAST' : undefined)
@@ -1117,6 +1122,25 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       const featureId = feature('TERRACE', id, { topY: { value: l.elevation, low: l.elevation - 0.02, high: l.elevation + 0.02 }, thickness: { value: plinth, low: plinth - 0.05, high: plinth + 0.05 }, ...(extension ? { reach: { value: extension.reach, low: extension.reach - 0.05, high: extension.reach + 0.05 } } : {}) }, sids, provenance, extension ? `the recess floor, continuing ${extension.reach.toFixed(2)} m past the mouth to the outline the plan draws (${extension.why})` : 'the recess floor at the threshold', { storeyIndex: 0, unresolvedProperties: terrain === undefined ? ['thickness (the terrain datum was not read)'] : [], parameterProvenance: { thickness: terrain === undefined ? 'ASSUMED_FOR_RENDERING' : 'SOURCE_DERIVED' } })
       terraces.push({ id, storeyIndex: 0, side: recess.side, polygon, topY: l.elevation, thicknessM: plinth, surface: extension || drawn >= 0.3 ? 'PAVED' : 'UNKNOWN', edge: plinth > 0.05 ? 'PLINTH' : 'FLUSH', massIds, ...(extension && groundPlan ? { extension: { from: extension.from, to: extension.to, reach: extension.reach, frameId: groundPlan.plan.frame.id, why: extension.why } } : {}), featureId, provenance, why: extension ? `the floor of the ${recess.side.toLowerCase()} recess and the platform the plan outlines beyond it` : `the floor of the ${recess.side.toLowerCase()} recess` })
       for (const m of massIds) relate('MEETS_HOST', featureId, masses.find((x) => x.id === m)?.featureId ?? m, 'the terrace lies against this body at its threshold')
+    }
+  }
+  // 005Q (N1, review round 1): a platform the plan outlines beyond a wall strip would start from the wall's outer face,
+  // which is unresolved; it is named, never built (no recess is read in the strip to carry it)
+  if (groundPlan && levelOf(0)) {
+    for (const zone of layout.footprintRegions.filter((r) => r.kind === 'ZONE' && isWallStripZone(r.id, layout.unresolved))) {
+      const side = sideOfZone(zone.id)
+      if (!side) continue
+      const zb = ringBounds(zone.ring)
+      const zoneV2 = { x0: zb.x0, x1: zb.x1, z0: flipZ(world, zb.z1), z1: flipZ(world, zb.z0) }
+      const mouthAt = side === 'FRONT' ? zoneV2.z0 : side === 'REAR' ? zoneV2.z1 : side === 'WEST' ? zoneV2.x0 : zoneV2.x1
+      const backAt = side === 'FRONT' ? zoneV2.z1 : side === 'REAR' ? zoneV2.z0 : side === 'WEST' ? zoneV2.x1 : zoneV2.x0
+      // across the ground-storey bodies whose face stands on the strip's back, as the recess reading probes (review round 2)
+      const standing = masses.filter((m) => m.storeys.includes(0) && (side === 'FRONT' ? Math.abs(m.z0 - backAt) : side === 'REAR' ? Math.abs(m.z1 - backAt) : side === 'WEST' ? Math.abs(m.x0 - backAt) : Math.abs(m.x1 - backAt)) < 0.15)
+      if (standing.length === 0) continue
+      const along = side === 'FRONT' || side === 'REAR'
+      const span: [number, number] = [Math.min(...standing.map((m) => (along ? m.x0 : m.z0))), Math.max(...standing.map((m) => (along ? m.x1 : m.z1)))]
+      const ext = readTerraceExtension(groundPlan.raster, groundPlan.frame, side, mouthAt, span)
+      if (ext) gap({ what: `the platform the plan outlines beyond the ${side.toLowerCase()} wall`, reason: `an outline ${ext.reach.toFixed(2)} m out from the plan's extent (${ext.why}) lies beyond a wall the body was cut short of; it is not built: the wall's outer face it would start from is unresolved`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
     }
   }
   step({ stage: 'facade', what: 'verge members, balconies, railings, portal heads', method: 'DISCRETE_SELECTION', detail: `${verges.length} verge members, ${balconies.filter((b) => b.kind === 'BALCONY').length} balconies, ${railings.length} railings, ${portalHeads.length} portal heads, ${assemblies.length} assemblies`, inputs: views.length, outputs: verges.length + balconies.length + railings.length + portalHeads.length })

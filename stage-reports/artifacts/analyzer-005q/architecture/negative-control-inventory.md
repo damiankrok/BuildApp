@@ -217,7 +217,10 @@ BEYOND overhang named (005L §D). **A07**: N glazing OPENING_IN_WALL 3.71 / 3.59
   and model `terrace-rear-141` PAVED 34.72 m² (platform N of the house).
 - **dom-w-glogownikach** (FAIL −8.04 %): real S entrance niche 438..645 × 535..553 (≈0.47 m deep) and garage door
   strip 672..784 (glog.md §6); N terrace doors OPENING_IN_WALL 5.70 (callout 542; the mullion block 525..536 is
-  NOT_A_SEPARATOR, 005N). B0's three PAVED terraces (3.27 / 6.63 / 1.31 m²) and the strip bodies are wall poché.
+  NOT_A_SEPARATOR, 005N). B0's three PAVED terraces (3.27 / 6.63 / 1.31 m²) and the strip bodies are mostly wall
+  poché — but about 2.4 m² of `terrace-front-0` (x 438..645) is the floor of the genuine niche above, and one of B0's
+  two returns (`return-front-0-0`, x 14.89–15.60 m) is the real garage pier 645..672 read as a recess return
+  (correction after review round 1, TOPOLOGY-2: N1a removes both readings; neither code models the niche or the pier).
 - **A05** (FAILED): NE recessed covered terrace RECESS 434..758 × 201.5..259.5 (door 360/230), S entrance canopy with a
   post at the 0.99 m "slab edge" mouth (427..474); E STRONG 3.69 / S STRONG 3.62 walls. Room 8 (233.5..392 × 480..634)
   and the E bay (758..806 × 302..480) are walled (positive targets, unbuilt in B0).

@@ -56,6 +56,13 @@
 // seed = SHA256(PRE_HOLDOUT_11_SHA + "BUILDPLAN-005P-METRIC-GUARD-HOLDOUT"). No stratum: none of the brief's
 // dimension-evidence strata can be read from a page's markup without reading its drawings.
 //   node holdout/select.mjs select --round 11 --pool holdout/pool.txt --pool-sha256 <hex> --pre-holdout-sha <40hex>
+// Round 12 (BUILDPLAN-005Q) draws two ARCHON families, both UNSTRATIFIED, exactly as round 11 draws, from the same pool
+// less holdout/excluded-families-round-12.txt (round 11's list and sources, round 11's two houses now development
+// material, the families their cached pages link to, and every family a text file of the 005Q research or artifacts
+// names), with seed = SHA256(PRE_HOLDOUT_12_SHA + "BUILDPLAN-005Q-EXTERIOR-BOUNDARY-HOLDOUT"). No stratum: the target
+// class (a face pair on an exterior wall, a band-faced strip, a stated strip beyond the box) cannot be read from a page's
+// markup without reading its drawings.
+//   node holdout/select.mjs select --round 12 --pool holdout/pool.txt --pool-sha256 <hex> --pre-holdout-sha <40hex>
 // `select` draws from the committed pool less the committed excluded families (holdout/excluded-families.txt:
 // families the development pages link to), and refuses unless HEAD is the declared SHA, the tree is clean, and
 // the pool is the tracked holdout/pool.txt whose hash both the operator and pool.meta.json declare.
@@ -77,6 +84,7 @@ const ROUNDS = {
   9: { label: 'BUILDPLAN-005L-STOREY-REGISTRATION-HOLDOUT', excluded: 'excluded-families-round-9.txt', stratified: { minPlanStoreys: 2, maxDraws: 20 } },
   10: { label: 'BUILDPLAN-005N-COMPOUND-FACADE-HOLDOUT', excluded: 'excluded-families-round-10.txt', stratified: { garage: true, maxDraws: 20 } },
   11: { label: 'BUILDPLAN-005P-METRIC-GUARD-HOLDOUT', excluded: 'excluded-families-round-11.txt' },
+  12: { label: 'BUILDPLAN-005Q-EXTERIOR-BOUNDARY-HOLDOUT', excluded: 'excluded-families-round-12.txt' },
 }
 const DOBREDOMY = {
   host: 'https://www.dobredomy.pl',

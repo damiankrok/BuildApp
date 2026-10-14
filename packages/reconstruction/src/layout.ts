@@ -34,7 +34,7 @@
  * Nothing here knows the name of any project and nothing here carries a
  * dimension of any real building.
  */
-import { round6, stableId } from '@buildapp/source-common'
+import { round6, slugify, stableId } from '@buildapp/source-common'
 import type { Checkpoint } from '@buildapp/source-common'
 import type { PixelRect } from '@buildapp/source-common'
 import { adaptiveInkMask, inkChannel, runLengthBands } from '@buildapp/source-cv'
@@ -66,7 +66,10 @@ import type {
 
 export const LAYOUT_INFERENCE_NAME = 'structural-layout'
 // 1.1.0 (005L): storeys are registered by wall correspondence and stacked per walled region (the storey-support relation).
-export const LAYOUT_INFERENCE_VERSION = '1.1.0'
+// 1.2.0 (005Q): a strip between the walled envelope and the extent that is the building's own exterior wall is named as
+// an unresolved outer face (`wallStripsOf`): no recess, return or terrace is read in it, and the body cut on the wall's
+// inner face is not MEASURED across it.
+export const LAYOUT_INFERENCE_VERSION = '1.2.0'
 
 /** Where a storey sits relative to the others. Ground is the datum; the rest are counted off it. */
 export const STOREY_RANK: Record<string, number> = { BASEMENT: -1, GROUND: 0, UPPER: 1, ATTIC: 2, ROOF: 3 }
@@ -1843,10 +1846,15 @@ export function inferStructuralLayout(given: StructuralLayoutOptions): Structura
   }
 
   // --- the zones the chains measure beyond the walls ------------------------
+  // 005Q (N1): a strip that is the building's own exterior wall, left outside by the face the body was cut on, stays on
+  // the record as the dimensioned strip it is (the frame and the front plane are measured to it), and the face it leaves
+  // open is named: no recess, no return and no terrace floor is read in it (`v2/reconstruct-v2.ts`, by this gap).
+  const wallStrips = wallStripsOf(base, envelope.rect)
   for (const zone of zonesOutsideEnvelope(base, envelope.rect, frame)) {
     footprintRegions.push({ ...zone, storeyId: baseStorey.id })
     baseStorey.footprintRegionIds.push(zone.id)
   }
+  for (const w of wallStrips) unresolved.push(w.gap)
 
   // --- masses ---------------------------------------------------------------
   for (const region of footprintRegions.filter((r) => r.storeyId === baseStorey.id && r.kind === 'BUILT')) {
@@ -1857,6 +1865,14 @@ export function inferStructuralLayout(given: StructuralLayoutOptions): Structura
     // A span stated by a chain the resolver re-read at another scale was not printed as used: DERIVED, not MEASURED.
     const reread = (sp: AxisSpan): boolean => sp.evidenceIds.some((e) => options.plan?.rereadEvidenceIds.has(e) === true)
     const basisOf = (sp: AxisSpan): LayoutQuantity['basis'] => (sp.stated ? (reread(sp) ? 'DERIVED' : 'MEASURED') : 'SCALED')
+    // 005Q (N1): a side of this body on the inner face of a wall the chains state the outer face of: the span across it
+    // measures the wrong pair of faces, so it is not MEASURED, and the body says which face it leaves open
+    const open = wallStrips.filter((w) => w.backOn(region.pixelRect))
+    const openX = open.some((w) => w.side === 'MIN_X' || w.side === 'MAX_X')
+    const openZ = open.some((w) => w.side === 'MIN_Z' || w.side === 'MAX_Z')
+    const facesWhy = open.length > 0 ? `; its ${open.map((w) => w.sideName).join(' and ')} side${open.length === 1 ? '' : 's'} stand${open.length === 1 ? 's' : ''} on a wall's inner face (${open.map((w) => w.gap.id).join(', ')})` : ''
+    const basisX = openX && basisOf(spanX) === 'MEASURED' ? 'DERIVED' : basisOf(spanX)
+    const basisZ = openZ && basisOf(spanZ) === 'MEASURED' ? 'DERIVED' : basisOf(spanZ)
     masses.push({
       id: `mass-${masses.length}`,
       role: 'UNKNOWN',
@@ -1864,12 +1880,12 @@ export function inferStructuralLayout(given: StructuralLayoutOptions): Structura
       footprintRegionIds: [region.id],
       storeySpan: { fromIndex: baseStorey.index, toIndex: baseStorey.index, storeyIds: [baseStorey.id] },
       facadePlaneIds: [],
-      widthM: quantity(bounds.x1 - bounds.x0, bounds.x1 - bounds.x0 - spread(spanX), bounds.x1 - bounds.x0 + spread(spanX), 'm', basisOf(spanX), spanX.evidenceIds.length > 0 ? spanX.evidenceIds : region.evidenceIds, `the distance between the outer faces of this body’s own walls: ${spanX.why}`),
-      depthM: quantity(bounds.z1 - bounds.z0, bounds.z1 - bounds.z0 - spread(spanZ), bounds.z1 - bounds.z0 + spread(spanZ), 'm', basisOf(spanZ), spanZ.evidenceIds.length > 0 ? spanZ.evidenceIds : region.evidenceIds, `the distance between the outer faces of this body’s own walls: ${spanZ.why}`),
+      widthM: quantity(bounds.x1 - bounds.x0, bounds.x1 - bounds.x0 - spread(spanX), bounds.x1 - bounds.x0 + spread(spanX), 'm', basisX, spanX.evidenceIds.length > 0 ? spanX.evidenceIds : region.evidenceIds, `the distance between the outer faces of this body’s own walls: ${spanX.why}${openX ? '; one of them is a wall’s inner face' : ''}`),
+      depthM: quantity(bounds.z1 - bounds.z0, bounds.z1 - bounds.z0 - spread(spanZ), bounds.z1 - bounds.z0 + spread(spanZ), 'm', basisZ, spanZ.evidenceIds.length > 0 ? spanZ.evidenceIds : region.evidenceIds, `the distance between the outer faces of this body’s own walls: ${spanZ.why}${openZ ? '; one of them is a wall’s inner face' : ''}`),
       observationIds: [],
       evidenceIds: region.evidenceIds,
       confidence: region.confidence,
-      why: `a region of the base plan enclosed by its own walls: ${region.why}`,
+      why: `a region of the base plan enclosed by its own walls: ${region.why}${facesWhy}`,
     })
   }
 
@@ -2170,6 +2186,108 @@ function chainEvidenceFor(plan: PlanReading, rect: PixelRect, metrics: MetricEvi
   return [...ids].sort()
 }
 
+/** The strips between the walled envelope and the plan's extent, one per side, each at least half a wall deep. */
+function envelopeStrips(base: PlanReading, envelope: PixelRect): Array<{ side: PlanSide; rect: PixelRect }> {
+  const minCell = Math.max(2, base.wallPx / 2)
+  const strips: Array<{ side: PlanSide; rect: PixelRect }> = [
+    { side: 'MIN_Z', rect: { x0: envelope.x0, y0: base.extent.y0, x1: envelope.x1, y1: envelope.y0 } },
+    { side: 'MAX_Z', rect: { x0: envelope.x0, y0: envelope.y1, x1: envelope.x1, y1: base.extent.y1 } },
+    { side: 'MIN_X', rect: { x0: base.extent.x0, y0: envelope.y0, x1: envelope.x0, y1: envelope.y1 } },
+    { side: 'MAX_X', rect: { x0: envelope.x1, y0: envelope.y0, x1: base.extent.x1, y1: envelope.y1 } },
+  ]
+  return strips.filter((s) => s.rect.x1 - s.rect.x0 >= minCell && s.rect.y1 - s.rect.y0 >= minCell)
+}
+
+const zoneIdOf = (side: PlanSide): string => `zone-${side.toLowerCase()}`
+const outerFaceSlug = (zoneId: string): string => `outer-face-${zoneId}`
+
+/**
+ * 005Q (N1): the strips between the walled envelope and the stated extent that are the building's own exterior wall.
+ *
+ * A body cut on the INNER face of an exterior wall leaves the wall itself between it and the extent, and the strip
+ * beyond the body is then read as a zone: a recess with returns in it and a paved terrace floor that are the wall's own
+ * poché. A strip is that wall when a long (≥ 2.5 walls), wall-thick (≥ 0.7 of a wall) band lies in it with its two
+ * faces on the strip's two edges — each within the band's face window, max(5 px, 0.35 of its thickness), the one
+ * `gridLines` claims faces with — over at least `WALL_STRIP_BOUNDS.cover` of the strip's length. Such a strip is read as
+ * no recess, no return and no terrace (`isWallStripZone`); its face is named as an unresolved gap (the body stops a
+ * wall short of the plan's extent); and a body standing on its back edge, along the stretch the wall ink covers, loses
+ * MEASURED across it and names the face (`openFacesOf`). The band must fill the strip: the strip is no deeper than the
+ * band by more than the same window, so a band clear of the strip's edges by more than one face window in all is not
+ * the wall. The rule sees ink, not ownership: the band may be the body's own wall or another wall layer (a neighbour's
+ * party-wall leaf, an insulation layer drawn solid), and the reason says so. Faces, the frame and the footprint never
+ * move — the strip stays on the record as a zone, so every reading anchored to it stays where it was: the face the body
+ * was cut on stays, and the model says it is the wrong one. Members read off a recess in the strip (a verge's depth, an
+ * attached roof's projection, recessed-wall tones) fall back to their no-recess conventions.
+ */
+export const WALL_STRIP_BOUNDS = { cover: 0.25 } as const
+export type WallStrip = { side: PlanSide; sideName: string; gap: LayoutGap; backOn: (rect: PixelRect) => boolean }
+export function wallStripsOf(base: PlanReading, envelope: PixelRect): WallStrip[] {
+  const wallPx = base.decomposition.wallThickness.px
+  const names: Record<PlanSide, string> = { MIN_X: 'west', MAX_X: 'east', MIN_Z: 'rear', MAX_Z: 'front' }
+  const out: WallStrip[] = []
+  for (const { side, rect } of envelopeStrips(base, envelope)) {
+    const across = side === 'MIN_X' || side === 'MAX_X'
+    const [e0, e1] = across ? [rect.x0, rect.x1] : [rect.y0, rect.y1]
+    const [s0, s1] = across ? [rect.y0, rect.y1] : [rect.x0, rect.x1]
+    const runs: Array<[number, number]> = []
+    for (const b of base.bands) {
+      if ((b.axis === 'VERTICAL') !== across || b.thickness < wallPx * 0.7 || b.length < wallPx * 2.5) continue
+      const [f0, f1] = across ? [b.bounds.x0, b.bounds.x1] : [b.bounds.y0, b.bounds.y1]
+      const window = Math.max(5, b.thickness * 0.35)
+      if (Math.abs(f0 - e0) > window || Math.abs(f1 - e1) > window || e1 - e0 - b.thickness > window) continue
+      const [a0, a1] = across ? [b.bounds.y0, b.bounds.y1] : [b.bounds.x0, b.bounds.x1]
+      if (Math.min(a1, s1) > Math.max(a0, s0)) runs.push([Math.max(a0, s0), Math.min(a1, s1)])
+    }
+    runs.sort((p, q) => p[0] - q[0])
+    // the stretches the wall ink covers, merged
+    const covered: Array<[number, number]> = []
+    for (const [a, b] of runs) {
+      const last = covered[covered.length - 1]
+      if (last && a <= last[1]) last[1] = Math.max(last[1], b)
+      else covered.push([a, b])
+    }
+    const cover = covered.reduce((sum, [a, b]) => sum + (b - a), 0) / Math.max(1, s1 - s0)
+    if (cover < WALL_STRIP_BOUNDS.cover) continue
+    const sideName = names[side]
+    const mpp = base.registration ? (across ? base.registration.metresPerPixelX : base.registration.metresPerPixelY) : 0
+    const depthM = round6((e1 - e0) * mpp)
+    // the inner edge of the strip is the envelope's side: a body stands on it when its own side lies within a wall of it,
+    // along more than a wall of the stretches the wall ink covers (a body beside them, set back on its own outer face,
+    // is not cut on this wall)
+    const back = side === 'MIN_X' ? rect.x1 : side === 'MAX_X' ? rect.x0 : side === 'MIN_Z' ? rect.y1 : rect.y0
+    const backOn = (r: PixelRect): boolean => {
+      const face = side === 'MIN_X' ? r.x0 : side === 'MAX_X' ? r.x1 : side === 'MIN_Z' ? r.y0 : r.y1
+      const [r0, r1] = across ? [r.y0, r.y1] : [r.x0, r.x1]
+      const along = covered.reduce((sum, [a, b]) => sum + Math.max(0, Math.min(r1, b) - Math.max(r0, a)), 0)
+      return Math.abs(face - back) <= wallPx && along > wallPx
+    }
+    out.push({
+      side,
+      sideName,
+      backOn,
+      gap: {
+        id: stableId('gap', outerFaceSlug(zoneIdOf(side)), { frameId: base.frame.id, strip: rect }),
+        what: `the outer face of the building’s ${sideName} wall`,
+        reason: `wall-thick ink ${depthM.toFixed(2)} m deep fills the strip between the body and the plan's extent on its ${sideName} side, along ${Math.round(cover * 100)}% of that side: the body stops on that wall's inner face (the body's own wall, or another wall layer); the wall's outer face is not resolved, its thickness is not built there, and the strip is read as no recess, no return and no terrace`,
+        status: 'AMBIGUOUS',
+        frameIds: [base.frame.id],
+      },
+    })
+  }
+  return out
+}
+
+/** 005Q (N1): is this zone a strip the layout names as the building's own wall (`wallStripsOf`)? */
+export function isWallStripZone(zoneId: string, gaps: readonly LayoutGap[]): boolean {
+  const prefix = `gap-${slugify(outerFaceSlug(zoneId))}-`
+  return gaps.some((g) => g.id.startsWith(prefix))
+}
+
+/** 005Q (N1): the outer faces a mass leaves unresolved — the gaps `inferStructuralLayout` names in the mass's `why`. */
+export function openFacesOf(mass: Pick<MassHypothesis, 'why'>, gaps: readonly LayoutGap[]): LayoutGap[] {
+  return gaps.filter((g) => g.id.startsWith(`gap-${slugify(outerFaceSlug('zone-'))}`) && mass.why.includes(g.id))
+}
+
 /**
  * The strips a dimension chain measures beyond the last wall.
  *
@@ -2181,19 +2299,9 @@ function chainEvidenceFor(plan: PlanReading, rect: PixelRect, metrics: MetricEvi
  */
 function zonesOutsideEnvelope(base: PlanReading, envelope: PixelRect, frame: WorldFrame): FootprintRegionHypothesis[] {
   const out: FootprintRegionHypothesis[] = []
-  const minCell = Math.max(2, base.wallPx / 2)
-  const strips: Array<{ side: PlanSide; rect: PixelRect }> = [
-    { side: 'MIN_Z', rect: { x0: envelope.x0, y0: base.extent.y0, x1: envelope.x1, y1: envelope.y0 } },
-    { side: 'MAX_Z', rect: { x0: envelope.x0, y0: envelope.y1, x1: envelope.x1, y1: base.extent.y1 } },
-    { side: 'MIN_X', rect: { x0: base.extent.x0, y0: envelope.y0, x1: envelope.x0, y1: envelope.y1 } },
-    { side: 'MAX_X', rect: { x0: envelope.x1, y0: envelope.y0, x1: base.extent.x1, y1: envelope.y1 } },
-  ]
-  for (const strip of strips) {
-    const w = strip.rect.x1 - strip.rect.x0
-    const h = strip.rect.y1 - strip.rect.y0
-    if (w < minCell || h < minCell) continue
+  for (const strip of envelopeStrips(base, envelope)) {
     const ring = ringOfRect(strip.rect, frame)
-    const id = `zone-${strip.side.toLowerCase()}`
+    const id = zoneIdOf(strip.side)
     out.push({
       id,
       storeyId: '',

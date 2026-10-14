@@ -1,0 +1,491 @@
+{
+ "schema": "buildapp.005q.performance",
+ "machine": "x64 container, 4 cores (Intel(R) Xeon(R) Processor @ 2.80GHz), 16 GiB; NOT a phone - no Android or ARM64 figure is measured or implied",
+ "node": "v22.22.2",
+ "method": "solver-only replay of every development case (research/analyzer-005q/solve.ts --package --graph --metrics, the solver path of second-house.ts), incumbent 04d5568 reconstruction vs HEAD, both through a Vite alias, one process at a time, ABBA order over 2 repetitions; wall time of the whole process (Vite start-up included) and peak sampled RSS of the process tree",
+ "reps": 2,
+ "summary": {
+  "OLD": {
+   "runs": 92,
+   "wallP50": 13.47,
+   "wallP95": 24.22,
+   "wallTotal": 1299.65,
+   "peakRssMbP50": 577,
+   "peakRssMbMax": 764
+  },
+  "NEW": {
+   "runs": 92,
+   "wallP50": 13.08,
+   "wallP95": 23.45,
+   "wallTotal": 1251.21,
+   "peakRssMbP50": 564,
+   "peakRssMbMax": 732
+  },
+  "perCaseRatioP50": 0.96,
+  "perCaseRatioP95": 1.01,
+  "perCaseRatioMax": 1.04,
+  "casesOver15Percent": []
+ },
+ "perCase": {
+  "dom-pod-jarzabem": {
+   "oldWallMedian": 18.58,
+   "newWallMedian": 14.77,
+   "ratio": 0.8,
+   "oldPeakRssMb": 519,
+   "newPeakRssMb": 501,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-arkadiach": {
+   "oldWallMedian": 16.33,
+   "newWallMedian": 14.52,
+   "ratio": 0.89,
+   "oldPeakRssMb": 597,
+   "newPeakRssMb": 582,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-modrzewnicy": {
+   "oldWallMedian": 8.48,
+   "newWallMedian": 7.7,
+   "ratio": 0.91,
+   "oldPeakRssMb": 539,
+   "newPeakRssMb": 518,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-morelach": {
+   "oldWallMedian": 11.41,
+   "newWallMedian": 11.19,
+   "ratio": 0.98,
+   "oldPeakRssMb": 548,
+   "newPeakRssMb": 521,
+   "exits": [
+    0
+   ]
+  },
+  "marcowki": {
+   "oldWallMedian": 14.95,
+   "newWallMedian": 13.88,
+   "ratio": 0.93,
+   "oldPeakRssMb": 659,
+   "newPeakRssMb": 637,
+   "exits": [
+    0
+   ]
+  },
+  "rarytasy-g2e": {
+   "oldWallMedian": 24.8,
+   "newWallMedian": 23.54,
+   "ratio": 0.95,
+   "oldPeakRssMb": 679,
+   "newPeakRssMb": 692,
+   "exits": [
+    0
+   ]
+  },
+  "kosacce-clean": {
+   "oldWallMedian": 19.48,
+   "newWallMedian": 18.99,
+   "ratio": 0.97,
+   "oldPeakRssMb": 689,
+   "newPeakRssMb": 642,
+   "exits": [
+    0
+   ]
+  },
+  "kosacce-tracked": {
+   "oldWallMedian": 20.16,
+   "newWallMedian": 19.58,
+   "ratio": 0.97,
+   "oldPeakRssMb": 653,
+   "newPeakRssMb": 627,
+   "exits": [
+    0
+   ]
+  },
+  "rarytasy-eoze": {
+   "oldWallMedian": 24.5,
+   "newWallMedian": 23.93,
+   "ratio": 0.98,
+   "oldPeakRssMb": 728,
+   "newPeakRssMb": 732,
+   "exits": [
+    0
+   ]
+  },
+  "eoze-legacy-every": {
+   "oldWallMedian": 24.78,
+   "newWallMedian": 24.72,
+   "ratio": 1,
+   "oldPeakRssMb": 764,
+   "newPeakRssMb": 704,
+   "exits": [
+    0
+   ]
+  },
+  "alt-marcowki": {
+   "oldWallMedian": 7.1,
+   "newWallMedian": 7.2,
+   "ratio": 1.01,
+   "oldPeakRssMb": 434,
+   "newPeakRssMb": 435,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-jablonkach": {
+   "oldWallMedian": 16.49,
+   "newWallMedian": 15.66,
+   "ratio": 0.95,
+   "oldPeakRssMb": 639,
+   "newPeakRssMb": 621,
+   "exits": [
+    0
+   ]
+  },
+  "willa-miranda": {
+   "oldWallMedian": 17.47,
+   "newWallMedian": 17.14,
+   "ratio": 0.98,
+   "oldPeakRssMb": 606,
+   "newPeakRssMb": 610,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-zurawkach": {
+   "oldWallMedian": 13.44,
+   "newWallMedian": 13.08,
+   "ratio": 0.97,
+   "oldPeakRssMb": 582,
+   "newPeakRssMb": 576,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-modrzykach": {
+   "oldWallMedian": 10.01,
+   "newWallMedian": 8.85,
+   "ratio": 0.88,
+   "oldPeakRssMb": 468,
+   "newPeakRssMb": 469,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-azaliach": {
+   "oldWallMedian": 11.67,
+   "newWallMedian": 10.92,
+   "ratio": 0.94,
+   "oldPeakRssMb": 536,
+   "newPeakRssMb": 526,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-dabecjach": {
+   "oldWallMedian": 13.17,
+   "newWallMedian": 13.25,
+   "ratio": 1.01,
+   "oldPeakRssMb": 542,
+   "newPeakRssMb": 540,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-tunbergiach": {
+   "oldWallMedian": 15.26,
+   "newWallMedian": 15.2,
+   "ratio": 1,
+   "oldPeakRssMb": 557,
+   "newPeakRssMb": 557,
+   "exits": [
+    0
+   ]
+  },
+  "aster-viii": {
+   "oldWallMedian": 8.12,
+   "newWallMedian": 7.28,
+   "ratio": 0.9,
+   "oldPeakRssMb": 497,
+   "newPeakRssMb": 469,
+   "exits": [
+    0
+   ]
+  },
+  "galaktyka": {
+   "oldWallMedian": 9.65,
+   "newWallMedian": 9.53,
+   "ratio": 0.99,
+   "oldPeakRssMb": 611,
+   "newPeakRssMb": 600,
+   "exits": [
+    0
+   ]
+  },
+  "eoze-legacy-area": {
+   "oldWallMedian": 24.57,
+   "newWallMedian": 23.04,
+   "ratio": 0.94,
+   "oldPeakRssMb": 690,
+   "newPeakRssMb": 682,
+   "exits": [
+    0
+   ]
+  },
+  "dom-pod-milorzebem": {
+   "oldWallMedian": 9.42,
+   "newWallMedian": 8.94,
+   "ratio": 0.95,
+   "oldPeakRssMb": 549,
+   "newPeakRssMb": 531,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-helikoniach": {
+   "oldWallMedian": 10.56,
+   "newWallMedian": 10.01,
+   "ratio": 0.95,
+   "oldPeakRssMb": 519,
+   "newPeakRssMb": 506,
+   "exits": [
+    0
+   ]
+  },
+  "kosacce-area-alone": {
+   "oldWallMedian": 16.35,
+   "newWallMedian": 15.66,
+   "ratio": 0.96,
+   "oldPeakRssMb": 619,
+   "newPeakRssMb": 608,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-gozdzikowcach": {
+   "oldWallMedian": 12.19,
+   "newWallMedian": 12.14,
+   "ratio": 1,
+   "oldPeakRssMb": 590,
+   "newPeakRssMb": 584,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-cyklamenach": {
+   "oldWallMedian": 12.41,
+   "newWallMedian": 11.42,
+   "ratio": 0.92,
+   "oldPeakRssMb": 515,
+   "newPeakRssMb": 523,
+   "exits": [
+    0
+   ]
+  },
+  "A00": {
+   "oldWallMedian": 16.26,
+   "newWallMedian": 15.74,
+   "ratio": 0.97,
+   "oldPeakRssMb": 599,
+   "newPeakRssMb": 577,
+   "exits": [
+    0
+   ]
+  },
+  "A01": {
+   "oldWallMedian": 11.39,
+   "newWallMedian": 10.54,
+   "ratio": 0.93,
+   "oldPeakRssMb": 503,
+   "newPeakRssMb": 501,
+   "exits": [
+    0
+   ]
+  },
+  "A02": {
+   "oldWallMedian": 18.19,
+   "newWallMedian": 17.74,
+   "ratio": 0.97,
+   "oldPeakRssMb": 605,
+   "newPeakRssMb": 591,
+   "exits": [
+    0
+   ]
+  },
+  "A03": {
+   "oldWallMedian": 16.93,
+   "newWallMedian": 16.45,
+   "ratio": 0.97,
+   "oldPeakRssMb": 590,
+   "newPeakRssMb": 586,
+   "exits": [
+    0
+   ]
+  },
+  "A04": {
+   "oldWallMedian": 15.98,
+   "newWallMedian": 14.8,
+   "ratio": 0.93,
+   "oldPeakRssMb": 596,
+   "newPeakRssMb": 576,
+   "exits": [
+    0
+   ]
+  },
+  "A05": {
+   "oldWallMedian": 14.33,
+   "newWallMedian": 13.27,
+   "ratio": 0.93,
+   "oldPeakRssMb": 498,
+   "newPeakRssMb": 497,
+   "exits": [
+    0
+   ]
+  },
+  "A06": {
+   "oldWallMedian": 14.54,
+   "newWallMedian": 14.01,
+   "ratio": 0.96,
+   "oldPeakRssMb": 566,
+   "newPeakRssMb": 552,
+   "exits": [
+    0
+   ]
+  },
+  "A07": {
+   "oldWallMedian": 22.91,
+   "newWallMedian": 21.91,
+   "ratio": 0.96,
+   "oldPeakRssMb": 679,
+   "newPeakRssMb": 678,
+   "exits": [
+    0
+   ]
+  },
+  "D00": {
+   "oldWallMedian": 19.29,
+   "newWallMedian": 19.29,
+   "ratio": 1,
+   "oldPeakRssMb": 653,
+   "newPeakRssMb": 627,
+   "exits": [
+    0
+   ]
+  },
+  "D01": {
+   "oldWallMedian": 8.1,
+   "newWallMedian": 8.1,
+   "ratio": 1,
+   "oldPeakRssMb": 548,
+   "newPeakRssMb": 527,
+   "exits": [
+    0
+   ]
+  },
+  "D02": {
+   "oldWallMedian": 8.94,
+   "newWallMedian": 8.62,
+   "ratio": 0.96,
+   "oldPeakRssMb": 568,
+   "newPeakRssMb": 530,
+   "exits": [
+    0
+   ]
+  },
+  "D03": {
+   "oldWallMedian": 12.08,
+   "newWallMedian": 11.17,
+   "ratio": 0.92,
+   "oldPeakRssMb": 753,
+   "newPeakRssMb": 645,
+   "exits": [
+    0
+   ]
+  },
+  "D04": {
+   "oldWallMedian": 7.33,
+   "newWallMedian": 6.74,
+   "ratio": 0.92,
+   "oldPeakRssMb": 491,
+   "newPeakRssMb": 441,
+   "exits": [
+    0
+   ]
+  },
+  "D05": {
+   "oldWallMedian": 9.09,
+   "newWallMedian": 8.6,
+   "ratio": 0.95,
+   "oldPeakRssMb": 580,
+   "newPeakRssMb": 578,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-murajach": {
+   "oldWallMedian": 11.32,
+   "newWallMedian": 11.82,
+   "ratio": 1.04,
+   "oldPeakRssMb": 609,
+   "newPeakRssMb": 604,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-cieszyniankach": {
+   "oldWallMedian": 15.62,
+   "newWallMedian": 14.65,
+   "ratio": 0.94,
+   "oldPeakRssMb": 589,
+   "newPeakRssMb": 595,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-glogownikach": {
+   "oldWallMedian": 13.89,
+   "newWallMedian": 13.36,
+   "ratio": 0.96,
+   "oldPeakRssMb": 583,
+   "newPeakRssMb": 567,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-akebiach": {
+   "oldWallMedian": 13.04,
+   "newWallMedian": 12.81,
+   "ratio": 0.98,
+   "oldPeakRssMb": 521,
+   "newPeakRssMb": 521,
+   "exits": [
+    0
+   ]
+  },
+  "dom-miniaturka": {
+   "oldWallMedian": 10.74,
+   "newWallMedian": 10.3,
+   "ratio": 0.96,
+   "oldPeakRssMb": 528,
+   "newPeakRssMb": 505,
+   "exits": [
+    0
+   ]
+  },
+  "dom-w-krasnokwiatach": {
+   "oldWallMedian": 11.24,
+   "newWallMedian": 10.99,
+   "ratio": 0.98,
+   "oldPeakRssMb": 521,
+   "newPeakRssMb": 509,
+   "exits": [
+    0
+   ]
+  }
+ }
+}

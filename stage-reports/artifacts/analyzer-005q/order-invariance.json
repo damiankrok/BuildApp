@@ -1,0 +1,494 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005Q",
+ "gate": "G10 (preregistration, Addendum C): band order, chain order, mirrored and rotated plans and ±0.2 px perturbations at the face-pair tolerances give the same decision — evaluated at unit level, as written",
+ "files": {
+  "unit": "packages/reconstruction/test/wall-strip-unit.test.ts",
+  "endToEnd": "packages/reconstruction/test/wall-strip-invariance.test.ts"
+ },
+ "commands": [
+  "npx vitest run packages/reconstruction/test/wall-strip.test.ts packages/reconstruction/test/wall-strip-unit.test.ts packages/reconstruction/test/wall-strip-invariance.test.ts --reporter=json --outputFile=<out>/production.json",
+  "node research/analyzer-005q/synth/results.mjs --production <out>/production.json --frozen <out>/frozen.json"
+ ],
+ "unitLevel": {
+  "function": "wallStripsOf(base, envelope) from packages/reconstruction/src/layout.ts, called directly on a PlanReading reduced to the fields it and envelopeStrips read (bands, decomposition.wallThickness.px, wallPx, extent, frame.id, registration metresPerPixelX/Y)",
+  "decision": "the set of sides named; per side the gap what, status, frame, reason (so the depth text at the scale across the strip and the cover as a whole percent) and the gap id side prefix; backOn on every body; and, by bisection on backOn, the strip back edge and the covered stretches at nine points along it (to 1e-9 px after the transform: the cover itself is exposed only as the whole percent)",
+  "cases": [
+   {
+    "case": "A",
+    "what": "two bodies on one front strip (a house open on it, a garage beside the covered stretch and a body behind the house not); the front wall in two overlapping pieces; walls 18 px, 0.012 × 0.01 m/px",
+    "decides": "front strip, 0.17 m, 56 %; house on it, garage and the body behind not"
+   },
+   {
+    "case": "B",
+    "what": "two strips, front and east, a 58 px door in the front wall; a main body on both strips and a set-back body on the front strip only",
+    "decides": "east 0.21 m 100 %, front 0.17 m 90 %; main on both, set-back body on the front only"
+   },
+   {
+    "case": "C",
+    "what": "a front strip deeper than the modal wall (24 px front wall over 18 px walls), reachable only at unit level",
+    "decides": "front 0.24 m 100 %; the house on it (the back edge is the inner edge, 24 px from the outer one)"
+   },
+   {
+    "case": "D",
+    "what": "the cover bound: one 150 px piece on the 600 px front strip, a cover of exactly 0.25",
+    "decides": "named at 0.25 and at +0.2 px, not at −0.2 px: the one place the decision may flip, and still the same under every symmetry"
+   }
+  ],
+  "transforms": [
+   "id",
+   "mirrorX",
+   "mirrorY",
+   "turn90",
+   "turn180",
+   "turn270",
+   "transpose",
+   "antitranspose (the eight symmetries of the sheet; a quarter turn swaps the band axes and the two scales)"
+  ],
+  "bandOrders": [
+   "reversed",
+   "rotated by one",
+   "shuffled with seeds 7, 1009 and 65537"
+  ],
+  "perturbations": [
+   "every coordinate alone (each band face and end, the extent, the envelope, each body) by +0.2 and −0.2 px",
+   "every coordinate at once, jittered within ±0.2 px (twelve seeds), as drawn and under the eight symmetries"
+  ],
+  "margins": "each reading’s distance to every bound of the rule is computed in the test and must exceed what ±0.2 px can move it (the margin tests’ titles give the tightest bound per case)",
+  "chainOrder": "not an input of wallStripsOf (it reads no chain); held end to end in wall-strip-invariance.test.ts",
+  "summary": {
+   "tests": 59,
+   "passed": 59,
+   "failed": 0
+  },
+  "results": [
+   {
+    "group": "the readings as drawn",
+    "test": "case A: the strips, their words and the bodies on them, as written out",
+    "status": "passed"
+   },
+   {
+    "group": "the readings as drawn",
+    "test": "case A: backOn’s back edge is the envelope’s side (to 1e-9 px), and a body is on the strip exactly within a wall of it",
+    "status": "passed"
+   },
+   {
+    "group": "the readings as drawn",
+    "test": "case B: the strips, their words and the bodies on them, as written out",
+    "status": "passed"
+   },
+   {
+    "group": "the readings as drawn",
+    "test": "case B: backOn’s back edge is the envelope’s side (to 1e-9 px), and a body is on the strip exactly within a wall of it",
+    "status": "passed"
+   },
+   {
+    "group": "the readings as drawn",
+    "test": "case C: the strips, their words and the bodies on them, as written out",
+    "status": "passed"
+   },
+   {
+    "group": "the readings as drawn",
+    "test": "case C: backOn’s back edge is the envelope’s side (to 1e-9 px), and a body is on the strip exactly within a wall of it",
+    "status": "passed"
+   },
+   {
+    "group": "the readings as drawn",
+    "test": "case A: the reason, whole",
+    "status": "passed"
+   },
+   {
+    "group": "every reading sits away from every bound by more than ±0.2 px can move it",
+    "test": "case A: 25 bounds, the tightest 0.50 px from its bound where ±0.2 px moves it at most 0.40 px (front: depth text vs its rounding (px))",
+    "status": "passed"
+   },
+   {
+    "group": "every reading sits away from every bound by more than ±0.2 px can move it",
+    "test": "case B: 38 bounds, the tightest 0.42 px from its bound where ±0.2 px moves it at most 0.40 px (east: depth text vs its rounding (px))",
+    "status": "passed"
+   },
+   {
+    "group": "every reading sits away from every bound by more than ±0.2 px can move it",
+    "test": "case C: 16 bounds, the tightest 0.50 px from its bound where ±0.2 px moves it at most 0.40 px (front: depth text vs its rounding (px))",
+    "status": "passed"
+   },
+   {
+    "group": "mirrored, turned and transposed: the same decision, transformed",
+    "test": "case A, id: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+    "status": "passed"
+   },
+   {
+    "group": "mirrored, turned and transposed: the same decision, transformed",
+    "test": "case A, mirrorX: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+    "status": "passed"
+   },
+   {
+    "group": "mirrored, turned and transposed: the same decision, transformed",
+    "test": "case A, mirrorY: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+    "status": "passed"
+   },
+   {
+    "group": "mirrored, turned and transposed: the same decision, transformed",
+    "test": "case A, turn90: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+    "status": "passed"
+   },
+   {
+    "group": "mirrored, turned and transposed: the same decision, transformed",
+    "test": "case A, turn180: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+    "status": "passed"
+   },
+   {
+    "group": "mirrored, turned and transposed: the same decision, transformed",
+    "test": "case A, turn270: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+    "status": "passed"
+   },
+   {
+    "group": "mirrored, turned and transposed: the same decision, transformed",
+    "test": "case A, transpose: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+    "status": "passed"
+   },
+   {
+    "group": "mirrored, turned and transposed: the same decision, transformed",
+    "test": "case A, antitranspose: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+    "status": "passed"
+   },
+   {
+    "group": "mirrored, turned and transposed: the same decision, transformed",
+    "test": "case B, id: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+    "status": "passed"
+   },
+   {
+    "group": "mirrored, turned and transposed: the same decision, transformed",
+    "test": "case B, mirrorX: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+    "status": "passed"
+   },
+   {
+    "group": "mirrored, turned and transposed: the same decision, transformed",
+    "test": "case B, mirrorY: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+    "status": "passed"
+   },
+   {
+    "group": "mirrored, turned and transposed: the same decision, transformed",
+    "test": "case B, turn90: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+    "status": "passed"
+   },
+   {
+    "group": "mirrored, turned and transposed: the same decision, transformed",
+    "test": "case B, turn180: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+    "status": "passed"
+   },
+   {
+    "group": "mirrored, turned and transposed: the same decision, transformed",
+    "test": "case B, turn270: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+    "status": "passed"
+   },
+   {
+    "group": "mirrored, turned and transposed: the same decision, transformed",
+    "test": "case B, transpose: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+    "status": "passed"
+   },
+   {
+    "group": "mirrored, turned and transposed: the same decision, transformed",
+    "test": "case B, antitranspose: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+    "status": "passed"
+   },
+   {
+    "group": "mirrored, turned and transposed: the same decision, transformed",
+    "test": "case C, id: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+    "status": "passed"
+   },
+   {
+    "group": "mirrored, turned and transposed: the same decision, transformed",
+    "test": "case C, mirrorX: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+    "status": "passed"
+   },
+   {
+    "group": "mirrored, turned and transposed: the same decision, transformed",
+    "test": "case C, mirrorY: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+    "status": "passed"
+   },
+   {
+    "group": "mirrored, turned and transposed: the same decision, transformed",
+    "test": "case C, turn90: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+    "status": "passed"
+   },
+   {
+    "group": "mirrored, turned and transposed: the same decision, transformed",
+    "test": "case C, turn180: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+    "status": "passed"
+   },
+   {
+    "group": "mirrored, turned and transposed: the same decision, transformed",
+    "test": "case C, turn270: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+    "status": "passed"
+   },
+   {
+    "group": "mirrored, turned and transposed: the same decision, transformed",
+    "test": "case C, transpose: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+    "status": "passed"
+   },
+   {
+    "group": "mirrored, turned and transposed: the same decision, transformed",
+    "test": "case C, antitranspose: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+    "status": "passed"
+   },
+   {
+    "group": "mirrored, turned and transposed: the same decision, transformed",
+    "test": "the eight symmetries map the four sides as the sheet does (front ↔ rear under a top–bottom mirror, front → west under a quarter turn clockwise on screen, …)",
+    "status": "passed"
+   },
+   {
+    "group": "the bands in any order",
+    "test": "case A, bands reversed: the same decision, the same gap ids, the same covered stretches to the bit",
+    "status": "passed"
+   },
+   {
+    "group": "the bands in any order",
+    "test": "case A, bands rotated by one: the same decision, the same gap ids, the same covered stretches to the bit",
+    "status": "passed"
+   },
+   {
+    "group": "the bands in any order",
+    "test": "case A, bands shuffled (seed 7): the same decision, the same gap ids, the same covered stretches to the bit",
+    "status": "passed"
+   },
+   {
+    "group": "the bands in any order",
+    "test": "case A, bands shuffled (seed 1009): the same decision, the same gap ids, the same covered stretches to the bit",
+    "status": "passed"
+   },
+   {
+    "group": "the bands in any order",
+    "test": "case A, bands shuffled (seed 65537): the same decision, the same gap ids, the same covered stretches to the bit",
+    "status": "passed"
+   },
+   {
+    "group": "the bands in any order",
+    "test": "case B, bands reversed: the same decision, the same gap ids, the same covered stretches to the bit",
+    "status": "passed"
+   },
+   {
+    "group": "the bands in any order",
+    "test": "case B, bands rotated by one: the same decision, the same gap ids, the same covered stretches to the bit",
+    "status": "passed"
+   },
+   {
+    "group": "the bands in any order",
+    "test": "case B, bands shuffled (seed 7): the same decision, the same gap ids, the same covered stretches to the bit",
+    "status": "passed"
+   },
+   {
+    "group": "the bands in any order",
+    "test": "case B, bands shuffled (seed 1009): the same decision, the same gap ids, the same covered stretches to the bit",
+    "status": "passed"
+   },
+   {
+    "group": "the bands in any order",
+    "test": "case B, bands shuffled (seed 65537): the same decision, the same gap ids, the same covered stretches to the bit",
+    "status": "passed"
+   },
+   {
+    "group": "the bands in any order",
+    "test": "case C, bands reversed: the same decision, the same gap ids, the same covered stretches to the bit",
+    "status": "passed"
+   },
+   {
+    "group": "the bands in any order",
+    "test": "case C, bands rotated by one: the same decision, the same gap ids, the same covered stretches to the bit",
+    "status": "passed"
+   },
+   {
+    "group": "the bands in any order",
+    "test": "case C, bands shuffled (seed 7): the same decision, the same gap ids, the same covered stretches to the bit",
+    "status": "passed"
+   },
+   {
+    "group": "the bands in any order",
+    "test": "case C, bands shuffled (seed 1009): the same decision, the same gap ids, the same covered stretches to the bit",
+    "status": "passed"
+   },
+   {
+    "group": "the bands in any order",
+    "test": "case C, bands shuffled (seed 65537): the same decision, the same gap ids, the same covered stretches to the bit",
+    "status": "passed"
+   },
+   {
+    "group": "±0.2 px at the face-pair tolerances, away from the bounds",
+    "test": "case A: each of its 48 coordinates (every band face and end, the extent, the envelope, every body) moved by +0.2 and by −0.2 px alone: the same decision",
+    "status": "passed"
+   },
+   {
+    "group": "±0.2 px at the face-pair tolerances, away from the bounds",
+    "test": "case A: every coordinate jittered at once within ±0.2 px (twelve seeds), as drawn and under the eight symmetries: the same (transformed) decision, and the transformed covered stretches of the jittered reading to 1e-9 px",
+    "status": "passed"
+   },
+   {
+    "group": "±0.2 px at the face-pair tolerances, away from the bounds",
+    "test": "case B: each of its 40 coordinates (every band face and end, the extent, the envelope, every body) moved by +0.2 and by −0.2 px alone: the same decision",
+    "status": "passed"
+   },
+   {
+    "group": "±0.2 px at the face-pair tolerances, away from the bounds",
+    "test": "case B: every coordinate jittered at once within ±0.2 px (twelve seeds), as drawn and under the eight symmetries: the same (transformed) decision, and the transformed covered stretches of the jittered reading to 1e-9 px",
+    "status": "passed"
+   },
+   {
+    "group": "±0.2 px at the face-pair tolerances, away from the bounds",
+    "test": "case C: each of its 28 coordinates (every band face and end, the extent, the envelope, every body) moved by +0.2 and by −0.2 px alone: the same decision",
+    "status": "passed"
+   },
+   {
+    "group": "±0.2 px at the face-pair tolerances, away from the bounds",
+    "test": "case C: every coordinate jittered at once within ±0.2 px (twelve seeds), as drawn and under the eight symmetries: the same (transformed) decision, and the transformed covered stretches of the jittered reading to 1e-9 px",
+    "status": "passed"
+   },
+   {
+    "group": "at a bound, and only there, ±0.2 px may flip the decision",
+    "test": "case D: a cover of exactly 0.25 names the strip (25%); the piece 0.2 px longer still does, 0.2 px shorter does not",
+    "status": "passed"
+   },
+   {
+    "group": "at a bound, and only there, ±0.2 px may flip the decision",
+    "test": "case D: at the bound, the eight symmetries still agree (the rule is symmetric even where it is on the edge)",
+    "status": "passed"
+   },
+   {
+    "group": "at a bound, and only there, ±0.2 px may flip the decision",
+    "test": "case A: a body whose stretch overlaps the covered one by exactly a wall (18 px) is not on the strip; 0.2 px more and it is",
+    "status": "passed"
+   }
+  ]
+ },
+ "endToEnd": {
+  "fixture": "a made-up 600 × 360 px ring of 18 px walls at 0.026 m/px with chains cx, cy and cy2 [60, 403, 420]: the face-pair mechanism, no publisher drawing",
+  "perturbations": [
+   "band order through sheetCache: reversed, rotated, shuffled (seeds 7, 1009)",
+   "chain order: reversed, inner chain first, depth chains first",
+   "translation (1, 0), (0, 1), (1, 1), (37, 23) px: the same decision and words (ids hash the pixel rectangle and are not compared)",
+   "mirrored and turned: the wall is either cut on its outer face (no strip) or named on the side it is drawn on"
+  ],
+  "summary": {
+   "tests": 23,
+   "passed": 23,
+   "failed": 0
+  },
+  "results": [
+   {
+    "group": "the wall strip, as drawn",
+    "test": "names the front wall as an unresolved outer face, keeps its strip as a zone and takes MEASURED off the depth only",
+    "status": "passed"
+   },
+   {
+    "group": "the wall strip does not depend on the order of the bands",
+    "test": "the sheet has bands to reorder",
+    "status": "passed"
+   },
+   {
+    "group": "the wall strip does not depend on the order of the bands",
+    "test": "handed back in their own order through the cache, the decision is the pass’s own",
+    "status": "passed"
+   },
+   {
+    "group": "the wall strip does not depend on the order of the bands",
+    "test": "bands reversed: the same strips, the same gap, the same bases",
+    "status": "passed"
+   },
+   {
+    "group": "the wall strip does not depend on the order of the bands",
+    "test": "bands rotated by one: the same strips, the same gap, the same bases",
+    "status": "passed"
+   },
+   {
+    "group": "the wall strip does not depend on the order of the bands",
+    "test": "bands shuffled (seed 7): the same strips, the same gap, the same bases",
+    "status": "passed"
+   },
+   {
+    "group": "the wall strip does not depend on the order of the bands",
+    "test": "bands shuffled (seed 1009): the same strips, the same gap, the same bases",
+    "status": "passed"
+   },
+   {
+    "group": "the wall strip does not depend on the order of the chains",
+    "test": "chains reversed: the same strips, the same gap, the same bases",
+    "status": "passed"
+   },
+   {
+    "group": "the wall strip does not depend on the order of the chains",
+    "test": "chains the inner chain first: the same strips, the same gap, the same bases",
+    "status": "passed"
+   },
+   {
+    "group": "the wall strip does not depend on the order of the chains",
+    "test": "chains the depth chains first: the same strips, the same gap, the same bases",
+    "status": "passed"
+   },
+   {
+    "group": "the wall strip does not depend on where the plan sits on the sheet",
+    "test": "moved by (1, 0) px: the same decision in the same words",
+    "status": "passed"
+   },
+   {
+    "group": "the wall strip does not depend on where the plan sits on the sheet",
+    "test": "moved by (0, 1) px: the same decision in the same words",
+    "status": "passed"
+   },
+   {
+    "group": "the wall strip does not depend on where the plan sits on the sheet",
+    "test": "moved by (1, 1) px: the same decision in the same words",
+    "status": "passed"
+   },
+   {
+    "group": "the wall strip does not depend on where the plan sits on the sheet",
+    "test": "moved by (37, 23) px: the same decision in the same words",
+    "status": "passed"
+   },
+   {
+    "group": "the wall strip follows the wall when the plan is mirrored or turned",
+    "test": "id: the front wall is cut on its outer face, or named",
+    "status": "passed"
+   },
+   {
+    "group": "the wall strip follows the wall when the plan is mirrored or turned",
+    "test": "mirrorX: the front wall is cut on its outer face, or named",
+    "status": "passed"
+   },
+   {
+    "group": "the wall strip follows the wall when the plan is mirrored or turned",
+    "test": "mirrorY: the rear wall is cut on its outer face, or named",
+    "status": "passed"
+   },
+   {
+    "group": "the wall strip follows the wall when the plan is mirrored or turned",
+    "test": "turn90: the west wall is cut on its outer face, or named",
+    "status": "passed"
+   },
+   {
+    "group": "the wall strip follows the wall when the plan is mirrored or turned",
+    "test": "turn270: the east wall is cut on its outer face, or named",
+    "status": "passed"
+   },
+   {
+    "group": "the wall strip follows the wall when the plan is mirrored or turned",
+    "test": "the five orientations exercise both outcomes, so neither branch above is vacuous",
+    "status": "passed"
+   },
+   {
+    "group": "end to end, the emitted decision does not depend on chain order or placement",
+    "test": "as drawn: the gap, no terrace, a SOURCE_DERIVED ring that names the open face, a SOURCE_DERIVED mass",
+    "status": "passed"
+   },
+   {
+    "group": "end to end, the emitted decision does not depend on chain order or placement",
+    "test": "chains reversed: the same",
+    "status": "passed"
+   },
+   {
+    "group": "end to end, the emitted decision does not depend on chain order or placement",
+    "test": "moved by (37, 23) px: the same",
+    "status": "passed"
+   }
+  ]
+ },
+ "endToEndOrientation": "End to end, a mirror or a quarter turn can change whether the base cuts the body on the wall’s inner face at all: the band claim upstream (plan-decomposition.ts:509, unchanged and identical in the 005Q base) breaks a tie between the wall’s two faces toward the lower pixel, so in some orientations the body is cut on the outer face and there is no strip (wall-strip.test.ts family 13: family 1 mirrored top–bottom or turned 90°; family 16: the L and the platform fixture likewise). The rule names the strip exactly where the base reads one, on the side the wall is drawn on (family 13 and 16 redraws; wall-strip-invariance.test.ts, both outcomes exercised). That dependence is a property of the base, not of the rule; G10 is evaluated on the rule, at unit level.",
+ "corpus": "PROD3 and PROD3-rep (see prod-vs-harness.json)"
+}

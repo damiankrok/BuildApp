@@ -566,3 +566,49 @@ describe('005P production cannot reach the consumer-scoped bake-off, and the bak
     for (const f of ['consumer-harness.mjs', 'replay.mjs']) expect(codeOf(read(`research/analyzer-005p/${f}`)), f).not.toMatch(/truth|transcriptions\.json|sheet-key/i)
   })
 })
+
+/**
+ * BUILDPLAN-ANALYZER-005Q — the exterior-boundary bake-off is research. Its harness (`research/analyzer-005q/`) applies
+ * a candidate patch to a copy of the base revision's `packages/reconstruction/src` (a Vite alias written OUTSIDE the
+ * repository) and replays the corpus through it. Production cannot reach it, and it commits no pixel: the candidates
+ * are patches, the census and the scores are text.
+ */
+describe('005Q production cannot reach the exterior-boundary bake-off, and the bake-off commits no pixels', () => {
+  const HARNESS = /research\/analyzer-005q|analyzer-005q|score_005q|negative_gate|trigger_census|variant\.mjs/i
+  // tracked and about to be: the stage's files are checked before the lead commits them, too
+  const stageFiles = (): string[] =>
+    [
+      ...execFileSync('git', ['ls-files'], { cwd: ROOT, encoding: 'utf8' }).split('\n'),
+      ...execFileSync('git', ['ls-files', '--others', '--exclude-standard'], { cwd: ROOT, encoding: 'utf8' }).split('\n'),
+    ].filter((f) => f.startsWith('research/analyzer-005q/') || f.startsWith('stage-reports/artifacts/analyzer-005q/'))
+
+  it('no production source imports research/analyzer-005q or names its harness', () => {
+    const offenders: string[] = []
+    for (const f of productionSources()) {
+      const text = read(f)
+      for (const spec of importsOf(text)) if (/analyzer-005q|research\//.test(spec)) offenders.push(`${f} imports ${spec}`)
+      if (HARNESS.test(codeOf(text))) offenders.push(`${f} names the 005Q harness`)
+    }
+    expect(offenders).toEqual([])
+  })
+
+  it('the 005Q harness and artifacts track only code, patches and text — no crop, sheet, page, model or archive', () => {
+    const harness = stageFiles()
+    expect(harness.length).toBeGreaterThan(0)
+    expect(harness.filter((f) => !/\.(py|ts|mjs|json|md|patch)$/i.test(f))).toEqual([])
+    for (const f of harness) {
+      const text = read(f)
+      expect(text, f).not.toMatch(/(data:(image|application)\/[\w.+-]+;base64,|iVBORw0KGgo|\/9j\/4|UklGR|R0lGOD)[A-Za-z0-9+/]{40,}/)
+      expect(text, f).not.toMatch(/[A-Za-z0-9+/]{256,}={0,2}/)
+      // a candidate patch touches the reconstruction module's source and nothing else
+      if (f.endsWith('.patch')) for (const m of text.matchAll(/^\+\+\+ (?:b\/)?(\S+)/gm)) expect(m[1], f).toMatch(/^packages\/reconstruction\/src\//)
+      if (f.endsWith('.patch')) expect(text, f).not.toMatch(/^GIT binary patch|^Binary files/m)
+      expect(statSync(join(ROOT, f)).size, f).toBeLessThanOrEqual(4 * 2 ** 20)
+    }
+  })
+
+  it('the variant copy and the replays are written outside the repository', () => {
+    expect(codeOf(read('research/analyzer-005q/variant.mjs'))).toMatch(/work\.startsWith\(REPO\)\) throw new Error\('a variant copy lives outside the repository'\)/)
+    expect(codeOf(read('research/analyzer-005q/replay.mjs'))).toMatch(/if \(work\.startsWith\(REPO\)\) throw new Error\('replays live outside the repository'\)/)
+  })
+})

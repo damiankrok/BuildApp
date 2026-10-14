@@ -351,6 +351,14 @@
     "G8_storeys": {
      "holds": true,
      "rows": null
+    },
+    "disqualification_prediction": {
+     "holds": false,
+     "rows": [
+      "dom-w-helikoniach",
+      "dom-w-glogownikach"
+     ],
+     "why": "preregistration section 4 disqualification clause, recorded after review round 2 (R2B-01): helikoniach opening-0-front-0-0 DOOR 1.98 m -> WINDOW 2.52 m and opening-0-west-3-1 WINDOW 2.01 m -> DOOR 0.50 m (both \"no callout read\"), one west window lost, MASS feat-main SOURCE_DERIVED -> SOURCE_EXACT; glogownikach garage opening re-bound from \"300/225\" to \"360/225\" - opening changes with no new evidence"
     }
    },
    "note": "Changed glogownikach (E side to its outer face, 19.28 m, -5.86 %, frozen verdict PASS) and helikoniach (W wall restored, -18.88 -> -12.23 %). Safe on G1-G4 but fails G5 alone: glogownikach keeps two wall-poche \"front recess\" terraces and a SOURCE_EXACT ring on the south wall inner face while the frozen footprint verdict calls it PASS - the threshold artefact G5 exists for. Not admissible alone; therefore no combination containing it is eligible (preregistration section 5).",
@@ -3595,6 +3603,14 @@
     "G8_storeys": {
      "holds": true,
      "rows": null
+    },
+    "disqualification_prediction": {
+     "holds": false,
+     "rows": [
+      "dom-w-helikoniach",
+      "dom-w-glogownikach"
+     ],
+     "why": "preregistration section 4 disqualification clause, recorded after review round 2 (R2B-01): helikoniach opening-0-front-0-0 DOOR 1.98 m -> WINDOW 2.52 m and opening-0-west-3-1 WINDOW 2.01 m -> DOOR 0.50 m (both \"no callout read\"), one west window lost, MASS feat-main SOURCE_DERIVED -> SOURCE_EXACT; glogownikach garage opening re-bound from \"300/225\" to \"360/225\" - opening changes with no new evidence"
     }
    },
    "note": "Ablation: glogownikach 19.28 m, front face unresolved, 0 terraces, ring SOURCE_DERIVED, -5.86 % (frozen verdict PASS); helikoniach -12.23 %. All mechanical gates hold, but C1 is not admissible alone, so the combination is not eligible under the preregistered selection rule. Reported as the measured basis of the next-step recommendation.",
@@ -4721,9 +4737,16 @@
     "G8_storeys": {
      "holds": true,
      "rows": null
+    },
+    "disqualification_prediction": {
+     "holds": false,
+     "rows": [
+      "dom-w-glogownikach"
+     ],
+     "why": "preregistration section 4, disqualification clause (\"a prediction failing in the direction of a fabricated feature\"): removing the strip from the layout moved the v2 world frame by 0.4455 m; the west opening read as a window \"110/230\" became a door \"110/290\" and one interior partition and door were lost (rooms 8 -> 7), with no new evidence. The mechanical G-gates above hold; this clause is what disqualifies N1 (review round 1, LEAKAGE-05)."
     }
    },
-   "note": "Ran as preregistered; changed only glogownikach as predicted, but removing the strip from the layout moved the v2 world frame by 0.4455 m: one interior partition and door lost (rooms 8 -> 7) and the west opening flipped from window \"110/230\" to door \"110/290\" with no new evidence. Inadmissible (G3/G4: unsupported semantic change). Superseded by N1a (addendum A).",
+   "note": "Ran as preregistered; changed only glogownikach as predicted, but removing the strip from the layout moved the v2 world frame by 0.4455 m: one interior partition and door lost (rooms 8 -> 7) and the west opening flipped from window \"110/230\" to door \"110/290\" with no new evidence. Every mechanical gate holds; inadmissible under the preregistration section 4 disqualification clause (a prediction failing in the direction of a fabricated feature: a door read with no new evidence), recorded as gates.disqualification_prediction. Superseded by N1a (addendum A), whose 46-row evidence is therefore post hoc: only blind round 12 is independent of it.",
    "pass": 19,
    "verdictTransitions": {}
   },
@@ -4882,20 +4905,18 @@
      "rows": null
     }
    },
-   "note": "Addendum A. Changed only glogownikach: 3 PAVED terraces -> 0, the 2 false return walls removed, the recessed-wall finish region read on the false east recess removed (it exists only for recessed walls), 2 typed gaps (east and front outer faces), MASS and ring SOURCE_DERIVED; rooms, doors and every opening identical; footprint unchanged (-8.04 %). Admissible on every mechanical gate; G9-G11 on the production twin (PROD1).",
+   "note": "Addendum A. Changed only glogownikach: 3 PAVED terraces -> 0 (most of their area is wall poche; about 2.4 m2 of terrace-front-0, the stretch x 438..645, is the floor of the genuine 0.47 m entrance niche N46, which neither the base nor N1a models as a niche), the 2 return walls removed (return-front-0-0 is the real garage pier 645..672 read as a return of a false recess; the pier is outside the body in both codes and now unmodelled and not named separately), the recessed-wall finish region read on the false east recess removed (it exists only for recessed walls), 2 typed gaps (east and front outer faces), MASS and ring SOURCE_DERIVED; rooms, doors and every opening identical; footprint unchanged (-8.04 %). Admissible on every mechanical gate; G9-G11 on the production twin. G3 measures built-cover growth only, so it carries no information about what N1a suppresses (review round 1, TOPOLOGY-2).",
    "pass": 19,
    "verdictTransitions": {}
   },
   "N2": {
-   "admissible": false,
    "changedRows": [
     "D00",
     "dom-pod-jarzabem",
     "dom-w-cieszyniankach",
     "dom-w-glogownikach",
     "eoze-legacy-area",
-    "eoze-legacy-every",
-    "marcowki"
+    "eoze-legacy-every"
    ],
    "changes": {
     "D00": {
@@ -5428,186 +5449,56 @@
       "PASS",
       "PASS"
      ]
-    },
-    "marcowki": {
-     "flags": {
-      "decisionPath": false,
-      "failure": false,
-      "model": true,
-      "program": true,
-      "semantics": true
-     },
-     "footprintResidualPct": [
-      -0.29,
-      null
-     ],
-     "outcome": [
-      "COMPLETED",
-      "NO_RUN"
-     ],
-     "refusal": null,
-     "semantics": {
-      "bodies": {
-       "new": null,
-       "old": [
-        "COVERED_TERRACE:-:11.0",
-        "COVERED_TERRACE:-:7.0",
-        "FLUSH_ATTACHED:-:0.9",
-        "FLUSH_ATTACHED:-:1.0"
-       ]
-      },
-      "completions": {
-       "new": null,
-       "old": [
-        "ATTACHED_ROOM:REJECTED:0",
-        "ATTACHED_ROOM:REJECTED:0"
-       ]
-      },
-      "counts": {
-       "new": null,
-       "old": {
-        "balconies": 2,
-        "chimneys": 2,
-        "doors": 12,
-        "levels": 2,
-        "materials": 11,
-        "openings": 21,
-        "railings": 2,
-        "roofOpenings": 5,
-        "rooflights": 3,
-        "roofs": 2,
-        "rooms": 12,
-        "slabs": 3,
-        "stairs": 1,
-        "surfaceRegions": 3,
-        "terraces": 2,
-        "wallJunctions": 12,
-        "wallRings": 3,
-        "walls": 40,
-        "windows": 9
-       }
-      },
-      "extentConflicts": {
-       "new": null,
-       "old": []
-      },
-      "footprintM2": {
-       "new": null,
-       "old": 130.79
-      },
-      "levels": {
-       "new": null,
-       "old": 2
-      },
-      "massProvenance": {
-       "new": null,
-       "old": [
-        "feat-attached-0:SOURCE_EXACT",
-        "feat-main:SOURCE_EXACT"
-       ]
-      },
-      "terraces": {
-       "new": null,
-       "old": [
-        {
-         "areaM2": 10.68,
-         "surface": "PAVED",
-         "why": "the floor of the front recess"
-        },
-        {
-         "areaM2": 23.26,
-         "surface": "PAVED",
-         "why": "the floor of the rear recess and the platform the plan outlines beyond it"
-        }
-       ]
-      },
-      "unresolved": {
-       "new": null,
-       "old": [
-        "AMBIGUOUS:the label of room-0-2 (read as 9)",
-        "MISSING:the kind of roof over mass-1"
-       ]
-      },
-      "wallRings": {
-       "new": null,
-       "old": [
-        {
-         "id": "ring-attached-0-0",
-         "status": "SOURCE_EXACT",
-         "why": "4.15 \u00d7 7.51 m body from the plan's printed chains and wall bands"
-        },
-        {
-         "id": "ring-main-0",
-         "status": "SOURCE_EXACT",
-         "why": "7.90 \u00d7 12.61 m body from the plan's printed chains and wall bands"
-        },
-        {
-         "id": "ring-main-1",
-         "status": null,
-         "why": ""
-        }
-       ]
-      },
-      "wideOpenings": {
-       "new": null,
-       "old": []
-      }
-     },
-     "verdict": [
-      "PASS",
-      "ALGORITHMIC_FAIL"
-     ]
     }
    },
-   "completed": 23,
+   "completed": 24,
    "gates": {
     "G1_knownGood": {
-     "holds": false,
-     "rows": [
+     "changed": [
       "dom-w-cieszyniankach",
       "eoze-legacy-area",
-      "eoze-legacy-every",
-      "marcowki"
-     ]
+      "eoze-legacy-every"
+     ],
+     "holds": false
     },
     "G2_scale": {
-     "holds": false,
-     "rows": [
-      "marcowki"
-     ]
-    },
-    "G3_negativeControls": {
-     "holds": false,
-     "selectedFrameChanged": [
-      "marcowki"
-     ],
-     "violations": []
+     "changed": [],
+     "holds": true
     },
     "G4_noNewExactRing": {
      "holds": true,
-     "rows": []
+     "rows": {}
     },
     "G4_noNewTerrace": {
      "holds": true,
-     "rows": []
+     "rows": {}
     },
     "G5_glogownikach": {
+     "footprintResidualPct": -8.04,
      "holds": false,
-     "rows": null
+     "outcome": "COMPLETED",
+     "outerFaceGaps": [],
+     "rings": [
+      "SOURCE_EXACT"
+     ],
+     "terraces": [],
+     "verdict": "ALGORITHMIC_FAIL"
     },
     "G8_storeys": {
+     "changedLevels": [],
+     "holds": true
+    },
+    "G3_negativeControls": {
      "holds": true,
-     "rows": null
+     "violations": [],
+     "selectedFrameChanged": []
     }
    },
-   "note": "Informational only (never adoptable): no zone from a strip <= 1.25 walls. Changes 7 rows including 4 known-good (cieszyniankach, eoze-legacy-area, eoze-legacy-every, marcowki) and marcowki's selected copy (G2): the sliver-terrace class cannot be removed under the default G1 without an OWNER decision.",
-   "pass": 18,
-   "verdictTransitions": {
-    "marcowki": [
-     "PASS",
-     "ALGORITHMIC_FAIL"
-    ]
-   }
+   "pass": 19,
+   "verdictTransitions": {},
+   "admissible": false,
+   "informational": true,
+   "note": "Informational (every strip one wall deep or less read as no recess). Corrected after review round 2 (R2B-03): the first N2 run of marcowki was killed (exit 137; the process was terminated, no output - not a measured change); re-run alone it is byte-identical to the baseline. N2 changes 6 rows, 3 of them known-good (dom-w-cieszyniankach, eoze-legacy-area, eoze-legacy-every): G1 fails by construction, which needs an OWNER decision."
   },
   "PROD1": {
    "admissible": true,
@@ -5764,9 +5655,355 @@
      "rows": null
     }
    },
-   "note": "The production implementation of N1a: byte-identical to the N1a research replay on 46/46 rows (model, program, failure, trace, digest, unresolved, provenance).",
+   "note": "The production implementation of N1a before review round 1: byte-identical to the N1a research replay on 46/46 rows (model, program, failure, trace, digest, unresolved, provenance, summary) and to its repeat PROD1-rep. Superseded by PROD2 (Addendum B).",
    "pass": 19,
    "verdictTransitions": {}
+  },
+  "PROD2": {
+   "changedRows": [
+    "dom-w-glogownikach"
+   ],
+   "changes": {
+    "dom-w-glogownikach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": true,
+      "program": true,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -8.04,
+      -8.04
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "counts": {
+       "new": {
+        "doors": 12,
+        "levels": 1,
+        "materials": 11,
+        "openings": 20,
+        "roofs": 1,
+        "rooms": 8,
+        "slabs": 1,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 17,
+        "windows": 8
+       },
+       "old": {
+        "doors": 12,
+        "levels": 1,
+        "materials": 11,
+        "openings": 20,
+        "roofs": 1,
+        "rooms": 8,
+        "slabs": 1,
+        "surfaceRegions": 1,
+        "terraces": 3,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 19,
+        "windows": 8
+       }
+      },
+      "massProvenance": {
+       "new": [
+        "feat-main:SOURCE_DERIVED"
+       ],
+       "old": [
+        "feat-main:SOURCE_EXACT"
+       ]
+      },
+      "terraces": {
+       "new": [],
+       "old": [
+        {
+         "areaM2": 3.27,
+         "surface": "PAVED",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 6.63,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 1.31,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        }
+       ]
+      },
+      "unresolved": {
+       "new": [
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:the number of room-0-2",
+        "AMBIGUOUS:the outer face of the building\u2019s east wall",
+        "AMBIGUOUS:the outer face of the building\u2019s front wall",
+        "AMBIGUOUS:the scale of the base plan (an accusation withdrawn)",
+        "AMBIGUOUS:which way the ridge runs over mass-0"
+       ],
+       "old": [
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:the number of room-0-2",
+        "AMBIGUOUS:the scale of the base plan (an accusation withdrawn)",
+        "AMBIGUOUS:which way the ridge runs over mass-0"
+       ]
+      },
+      "wallRings": {
+       "new": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_DERIVED",
+         "why": "18.83 \u00d7 8.70 m body cut on a wall's inner face; unresolved: the outer face of the building\u2019s east wall; the outer face o"
+        }
+       ],
+       "old": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "18.83 \u00d7 8.70 m body from the plan's printed chains and wall bands"
+        }
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "ALGORITHMIC_FAIL"
+     ]
+    }
+   },
+   "completed": 24,
+   "gates": {
+    "G1_knownGood": {
+     "changed": [],
+     "holds": true
+    },
+    "G2_scale": {
+     "changed": [],
+     "holds": true
+    },
+    "G4_noNewExactRing": {
+     "holds": true,
+     "rows": {}
+    },
+    "G4_noNewTerrace": {
+     "holds": true,
+     "rows": {}
+    },
+    "G5_glogownikach": {
+     "footprintResidualPct": -8.04,
+     "holds": true,
+     "outcome": "COMPLETED",
+     "outerFaceGaps": [
+      "AMBIGUOUS:the outer face of the building\u2019s east wall",
+      "AMBIGUOUS:the outer face of the building\u2019s front wall"
+     ],
+     "rings": [
+      "SOURCE_DERIVED"
+     ],
+     "terraces": [],
+     "verdict": "ALGORITHMIC_FAIL"
+    },
+    "G8_storeys": {
+     "changedLevels": [],
+     "holds": true
+    },
+    "G9_determinism": {
+     "holds": true,
+     "rows": []
+    },
+    "G3_negativeControls": {
+     "holds": true,
+     "violations": [],
+     "selectedFrameChanged": []
+    }
+   },
+   "pass": 19,
+   "verdictTransitions": {},
+   "admissible": true,
+   "note": "The production change after review round 1 (Addendum B: F1-F4). Byte-identical to N1a and PROD1 on 45 rows; on dom-w-glogownikach only unresolved.json differs (the two outer-face gap reasons say \"the plan's extent on that side\"); geometry, statuses, terraces, returns, rooms, doors and openings identical to N1a, as predicted. Repeat PROD2-rep byte-identical on 46/46 (G9). Per-row hashes: prod-vs-harness.json. Superseded by PROD3 (Addendum C). PROD2 started before Addendum B was committed (disclosed in Addendum C)."
+  },
+  "PROD3": {
+   "changedRows": [
+    "dom-w-glogownikach"
+   ],
+   "changes": {
+    "dom-w-glogownikach": {
+     "flags": {
+      "decisionPath": false,
+      "failure": false,
+      "model": true,
+      "program": true,
+      "semantics": true
+     },
+     "footprintResidualPct": [
+      -8.04,
+      -8.04
+     ],
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "refusal": null,
+     "semantics": {
+      "counts": {
+       "new": {
+        "doors": 12,
+        "levels": 1,
+        "materials": 11,
+        "openings": 20,
+        "roofs": 1,
+        "rooms": 8,
+        "slabs": 1,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 17,
+        "windows": 8
+       },
+       "old": {
+        "doors": 12,
+        "levels": 1,
+        "materials": 11,
+        "openings": 20,
+        "roofs": 1,
+        "rooms": 8,
+        "slabs": 1,
+        "surfaceRegions": 1,
+        "terraces": 3,
+        "wallJunctions": 4,
+        "wallRings": 1,
+        "walls": 19,
+        "windows": 8
+       }
+      },
+      "massProvenance": {
+       "new": [
+        "feat-main:SOURCE_DERIVED"
+       ],
+       "old": [
+        "feat-main:SOURCE_EXACT"
+       ]
+      },
+      "terraces": {
+       "new": [],
+       "old": [
+        {
+         "areaM2": 3.27,
+         "surface": "PAVED",
+         "why": "the floor of the east recess"
+        },
+        {
+         "areaM2": 6.63,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        },
+        {
+         "areaM2": 1.31,
+         "surface": "PAVED",
+         "why": "the floor of the front recess"
+        }
+       ]
+      },
+      "unresolved": {
+       "new": [
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:the number of room-0-2",
+        "AMBIGUOUS:the outer face of the building\u2019s east wall",
+        "AMBIGUOUS:the outer face of the building\u2019s front wall",
+        "AMBIGUOUS:the scale of the base plan (an accusation withdrawn)",
+        "AMBIGUOUS:which way the ridge runs over mass-0"
+       ],
+       "old": [
+        "AMBIGUOUS:a v2 registration for the front elevation",
+        "AMBIGUOUS:a v2 registration for the rear elevation",
+        "AMBIGUOUS:the number of room-0-2",
+        "AMBIGUOUS:the scale of the base plan (an accusation withdrawn)",
+        "AMBIGUOUS:which way the ridge runs over mass-0"
+       ]
+      },
+      "wallRings": {
+       "new": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_DERIVED",
+         "why": "18.83 \u00d7 8.70 m body cut on a wall's inner face; unresolved: the outer face of the building\u2019s east wall; the outer face o"
+        }
+       ],
+       "old": [
+        {
+         "id": "ring-main-0",
+         "status": "SOURCE_EXACT",
+         "why": "18.83 \u00d7 8.70 m body from the plan's printed chains and wall bands"
+        }
+       ]
+      }
+     },
+     "verdict": [
+      "ALGORITHMIC_FAIL",
+      "ALGORITHMIC_FAIL"
+     ]
+    }
+   },
+   "completed": 24,
+   "gates": {
+    "G1_knownGood": {
+     "changed": [],
+     "holds": true
+    },
+    "G2_scale": {
+     "changed": [],
+     "holds": true
+    },
+    "G4_noNewExactRing": {
+     "holds": true,
+     "rows": {}
+    },
+    "G4_noNewTerrace": {
+     "holds": true,
+     "rows": {}
+    },
+    "G5_glogownikach": {
+     "footprintResidualPct": -8.04,
+     "holds": true,
+     "outcome": "COMPLETED",
+     "outerFaceGaps": [
+      "AMBIGUOUS:the outer face of the building\u2019s east wall",
+      "AMBIGUOUS:the outer face of the building\u2019s front wall"
+     ],
+     "rings": [
+      "SOURCE_DERIVED"
+     ],
+     "terraces": [],
+     "verdict": "ALGORITHMIC_FAIL"
+    },
+    "G8_storeys": {
+     "changedLevels": [],
+     "holds": true
+    },
+    "G9_determinism": {
+     "holds": true,
+     "rows": []
+    },
+    "G3_negativeControls": {
+     "holds": true,
+     "violations": [],
+     "selectedFrameChanged": []
+    }
+   },
+   "pass": 19,
+   "verdictTransitions": {},
+   "admissible": true,
+   "note": "The production replay of record (after review rounds 1 and 2: Addenda B and C), started after Addendum C was committed, on the source whose sha-256 prod-vs-harness.json records. Byte-identical to N1a, PROD1 and PROD2 on 45 rows; on dom-w-glogownikach only unresolved.json differs (the two outer-face gap reasons), geometry, statuses, terraces, returns, rooms, doors and openings identical to N1a. PROD3-rep identical on 46/46 (G9). G3 measures built-cover growth only; it carries no information about the readings N1a suppresses (the niche floor and the garage pier on glogownikach)."
   }
  },
  "knownGood": [
@@ -5793,7 +6030,8 @@
  "schema": "buildplan.analyzer-005q.candidate-comparison",
  "selection": {
   "chosen": "N1a",
-  "why": "the only admissible candidate (preregistration section 5); it removes every fabricated feature and false exact label the stage found on glogownikach and changes nothing else"
+  "why": "the only admissible candidate (preregistration section 5); it removes every fabricated feature and false exact label the stage found on glogownikach and changes nothing else",
+  "shipped": "PROD3"
  },
  "version": "1.0.0"
 }

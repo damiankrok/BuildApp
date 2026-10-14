@@ -107,3 +107,31 @@ describe('round 11 (005P): unstratified, from a list that only grows', () => {
     expect(text).toMatch(/^ {2}11: \{ label: 'BUILDPLAN-005P-METRIC-GUARD-HOLDOUT', excluded: 'excluded-families-round-11\.txt' \},$/m)
   })
 })
+
+describe('round 12 (005Q): unstratified, from a list that only grows', () => {
+  const ROOT = new URL('../../', import.meta.url)
+  const lines = (f: string): string[] =>
+    readFileSync(new URL(`holdout/${f}`, ROOT), 'utf8')
+      .split('\n')
+      .map((l) => l.trim())
+      .filter((l) => l && !l.startsWith('#'))
+
+  it('excludes every family round 11 excluded, and both round-11 draws, now development houses', () => {
+    const r11 = new Set(lines('excluded-families-round-11.txt'))
+    const r12 = new Set(lines('excluded-families-round-12.txt'))
+    for (const f of r11) expect(r12.has(f), f).toBe(true)
+    const ledger = readFileSync(new URL('holdout/LEDGER.ndjson', ROOT), 'utf8').trim().split('\n').map((l) => JSON.parse(l) as { label?: string; families?: string[] })
+    const round11 = ledger.filter((l) => l.label === 'BUILDPLAN-005P-METRIC-GUARD-HOLDOUT').flatMap((l) => l.families ?? [])
+    expect(round11.length).toBe(2)
+    for (const f of round11) expect(r12.has(f), f).toBe(true)
+  })
+
+  it('excludes the OWNER development anchor family (never a blind draw)', () => {
+    expect(new Set(lines('excluded-families-round-12.txt')).has('dom-w-rarytasach')).toBe(true)
+  })
+
+  it('is registered with its own label and list, and no stratum', () => {
+    const text = readFileSync(new URL('holdout/select.mjs', ROOT), 'utf8')
+    expect(text).toMatch(/^ {2}12: \{ label: 'BUILDPLAN-005Q-EXTERIOR-BOUNDARY-HOLDOUT', excluded: 'excluded-families-round-12\.txt' \},$/m)
+  })
+})

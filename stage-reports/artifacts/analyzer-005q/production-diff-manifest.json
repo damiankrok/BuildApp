@@ -1,0 +1,653 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005Q",
+ "base": "04d5568a4a36d2b850998f2848d06e2179218872",
+ "head": "542b0f5757bc78a975cc35e115677b98db9c27aa",
+ "workingTreeClean": false,
+ "production": {
+  "packages": [
+   "packages/reconstruction"
+  ],
+  "files": 4,
+  "added": 158,
+  "deleted": 22
+ },
+ "changed": [
+  {
+   "path": "holdout/excluded-families-round-12.txt",
+   "status": "A (untracked)",
+   "area": "HOLDOUT_PROTOCOL",
+   "added": 147,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "4a82986e8995a262e9c12be864301d8653c06170be24f6600cb6b0d326f74907"
+  },
+  {
+   "path": "holdout/README.md",
+   "status": "M",
+   "area": "HOLDOUT_PROTOCOL",
+   "added": 35,
+   "deleted": 0,
+   "sha256Base": "01b44a597fa7662677408dfc9d33dfe170281f00c4ccd2a98e8c2ef6711a6953",
+   "sha256Now": "7627f886081752513f099af77d9528b8cc13333d0af9c957db4fe85fda5b3c1f"
+  },
+  {
+   "path": "holdout/select.mjs",
+   "status": "M",
+   "area": "HOLDOUT_PROTOCOL",
+   "added": 8,
+   "deleted": 0,
+   "sha256Base": "12fa7c87f0eeb221fe7eacfcb0fe767b7fe71769b2c7c0423bdff75a78ca3194",
+   "sha256Now": "7ca5d20df932ff5086160a62df2f700694c48eab1b8a7e63839b2f37ee38ed6d"
+  },
+  {
+   "path": "packages/reconstruction/src/layout.ts",
+   "status": "M",
+   "area": "PRODUCTION",
+   "added": 125,
+   "deleted": 17,
+   "sha256Base": "e292f5a65a470709029dfed21234bb69ed98fb631f72704532427d541e51473a",
+   "sha256Now": "9302c422e8a33990676ab902a2eb7e47cc29bff6a1ef45a781d09ef23cd61a2d"
+  },
+  {
+   "path": "packages/reconstruction/src/v2/building.ts",
+   "status": "M",
+   "area": "PRODUCTION",
+   "added": 2,
+   "deleted": 0,
+   "sha256Base": "5ed77c0d70b96b074b4e5b888f6e6d0aed60b750c56ada0bf64b9288b96ca723",
+   "sha256Now": "e7102086bf9efb6367cdda4a3c5d49d26405ee48d3216ce2656e93bdf1dc6577"
+  },
+  {
+   "path": "packages/reconstruction/src/v2/emit.ts",
+   "status": "M",
+   "area": "PRODUCTION",
+   "added": 3,
+   "deleted": 1,
+   "sha256Base": "ed036a49412c07216849fc664a77c79e9db1d4c1ff18382e19212414cdaaa0e9",
+   "sha256Now": "29afa6ffdede461a3afb781841757cdebce8272ce674f5cb08f1cbbf8b2f3925"
+  },
+  {
+   "path": "packages/reconstruction/src/v2/reconstruct-v2.ts",
+   "status": "M",
+   "area": "PRODUCTION",
+   "added": 28,
+   "deleted": 4,
+   "sha256Base": "a8ba9a498c9f868d47dc6ba6c8942d6e580f9c2bdc5b1a47bdf3411339f9f559",
+   "sha256Now": "d72b03053c2517174e9cd63de0a22ec1d1e5b84742b694cda7c6c9b14042e8df"
+  },
+  {
+   "path": "packages/reconstruction/test/wall-strip-invariance.test.ts",
+   "status": "A (untracked)",
+   "area": "TEST",
+   "added": 248,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "97da5dd86dd1ff4c525229691596ec3b5c73ca05b0e728e86f910627fef60e48"
+  },
+  {
+   "path": "packages/reconstruction/test/wall-strip-plans.ts",
+   "status": "A (untracked)",
+   "area": "TEST",
+   "added": 280,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "a9ff99b00633428b9ccae0dd6c0cc74a61a10d91d57236621bcb7cfedc9bca7e"
+  },
+  {
+   "path": "packages/reconstruction/test/wall-strip-unit.test.ts",
+   "status": "A (untracked)",
+   "area": "TEST",
+   "added": 566,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "c884559f2939f12277381ff54a7158b01f6a8a56bc90c4950cab10993a2811f1"
+  },
+  {
+   "path": "packages/reconstruction/test/wall-strip.test.ts",
+   "status": "A (untracked)",
+   "area": "TEST",
+   "added": 821,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "ed53296af06d0090e98f415d5ccc2d5b1a23f596642662ba49cfdd721825d1a0"
+  },
+  {
+   "path": "research/analyzer-005q/candidates/C1.patch",
+   "status": "A",
+   "area": "RESEARCH",
+   "added": 101,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "c9a5968390d5235ae50067f9031720cc0555f6a16b99b89aad22557f6a7311c6"
+  },
+  {
+   "path": "research/analyzer-005q/candidates/C2.patch",
+   "status": "A",
+   "area": "RESEARCH",
+   "added": 165,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "1b074abd364770ed51e882a503e0b45082e569cd68dc6f7c5d9d147a7419a0cd"
+  },
+  {
+   "path": "research/analyzer-005q/candidates/N1.patch",
+   "status": "A",
+   "area": "RESEARCH",
+   "added": 188,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "bc501f38bbd557e8b6c36e23d9e5aca7a6ecb218e181efacf99b5b170f4a07b7"
+  },
+  {
+   "path": "research/analyzer-005q/candidates/N1a.patch",
+   "status": "A",
+   "area": "RESEARCH",
+   "added": 200,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "ef5c7686ce41b61aee272c5ea0a1814e10ddf33b3c48a2f3c4a7f8dbc9c3a5c3"
+  },
+  {
+   "path": "research/analyzer-005q/candidates/N2-informational.patch",
+   "status": "A",
+   "area": "RESEARCH",
+   "added": 12,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "99c3936525448358e9d2ea35943228819956bb079366dcc53bd7dcec8f30c5b7"
+  },
+  {
+   "path": "research/analyzer-005q/cases.json",
+   "status": "A",
+   "area": "RESEARCH",
+   "added": 473,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "d8f1b242ac8de1b40c9ce609731448608022200f048c66c146a1f20b76fed319"
+  },
+  {
+   "path": "research/analyzer-005q/census.py",
+   "status": "A",
+   "area": "RESEARCH",
+   "added": 77,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "f3bca10c11364806aa499e78761c73d2e9d61cc56e398977fdafce1f6918cdff"
+  },
+  {
+   "path": "research/analyzer-005q/compare.py",
+   "status": "A",
+   "area": "RESEARCH",
+   "added": 112,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "dea4b49cb20f7c8f8c3709e9c6815d42478572ac27d67d3ba09a6bfcb77211f2"
+  },
+  {
+   "path": "research/analyzer-005q/exclusions.mjs",
+   "status": "A (untracked)",
+   "area": "RESEARCH",
+   "added": 137,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "609e46a9436d467490798a98455d9eadd964f92348fdbde6ba3409a3373a31e9"
+  },
+  {
+   "path": "research/analyzer-005q/freeze-manifest.mjs",
+   "status": "A (untracked)",
+   "area": "RESEARCH",
+   "added": 106,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "01c4f05a7e90933154e2c899c6004c673da9975175f8520118d5565ef79cbadf"
+  },
+  {
+   "path": "research/analyzer-005q/mutations.mjs",
+   "status": "A (untracked)",
+   "area": "RESEARCH",
+   "added": 419,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "51a9d5572f43deff4d7c01b3d6a90807a6a72fd87ec814dbfef6be95451ea177"
+  },
+  {
+   "path": "research/analyzer-005q/negative_gate.py",
+   "status": "A",
+   "area": "RESEARCH",
+   "added": 76,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "ec2d5471069b8b991d4fbd17436456ccb3bd78b654378e6d0b0c371160c20aca"
+  },
+  {
+   "path": "research/analyzer-005q/perf.mjs",
+   "status": "A (untracked)",
+   "area": "RESEARCH",
+   "added": 109,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "8bd2d30fcb0e5c8665945fe930c39e0669d7a45d25509c73fa4b1292c1cef54b"
+  },
+  {
+   "path": "research/analyzer-005q/preregistration.md",
+   "status": "A",
+   "area": "RESEARCH",
+   "added": 192,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "a91d5483895a860b6a01a207d75996bed9b0ed0efeecaa67b51ec2df3f8a5158"
+  },
+  {
+   "path": "research/analyzer-005q/prod_vs_harness.py",
+   "status": "A (untracked)",
+   "area": "RESEARCH",
+   "added": 68,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "d39363730d74fe778aa5fd0604d228c6aae380605e4dcb79845695a367a6e075"
+  },
+  {
+   "path": "research/analyzer-005q/replay.mjs",
+   "status": "A",
+   "area": "RESEARCH",
+   "added": 85,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "3f97fe23d737890cbe132642ecc6cc3b8ed6495fd42874af037b27e09c79b8ec"
+  },
+  {
+   "path": "research/analyzer-005q/score_005q.py",
+   "status": "A",
+   "area": "RESEARCH",
+   "added": 141,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "318d6f080bd5a1041e990fba1649cbd7630e755272563fb2e500c6e9527267e2"
+  },
+  {
+   "path": "research/analyzer-005q/solve.ts",
+   "status": "A",
+   "area": "RESEARCH",
+   "added": 87,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "a7297882e750a78470c2cfd1bd05c71bb66d3b8afdf876b14e8067534e5e5d35"
+  },
+  {
+   "path": "research/analyzer-005q/synth/oracle-config.mjs",
+   "status": "A (untracked)",
+   "area": "RESEARCH",
+   "added": 73,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "b2c2dacc8e983e9f278c91d7c663c94902dd560ef8cc9f6757ac64d8a9e19dce"
+  },
+  {
+   "path": "research/analyzer-005q/synth/record.ts",
+   "status": "A (untracked)",
+   "area": "RESEARCH",
+   "added": 66,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "8805831e927a8fe62f213df51257250a3b08cee846476c6ff56f254268863bbf"
+  },
+  {
+   "path": "research/analyzer-005q/synth/results.mjs",
+   "status": "A (untracked)",
+   "area": "RESEARCH",
+   "added": 147,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "596d455ef01a08e35f8aeb4cda9bc20105ba5ded69cbe07613dc807663d19f88"
+  },
+  {
+   "path": "research/analyzer-005q/trigger_census.py",
+   "status": "A",
+   "area": "RESEARCH",
+   "added": 138,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "174a35075e1fe5c7fb4fdd5dec1f225a2797f27510963b226f5166661789939f"
+  },
+  {
+   "path": "research/analyzer-005q/variant.mjs",
+   "status": "A",
+   "area": "RESEARCH",
+   "added": 38,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "f55bef9c3b567b441b14d515733249a1d2f0f498f419afcc9fb0d921cf1b55a2"
+  },
+  {
+   "path": "stage-reports/artifacts/analyzer-005q/architecture/boundary-call-path.md",
+   "status": "A",
+   "area": "REPORT",
+   "added": 207,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "2a96e0815a6fffc0924362cbe99663cb512ce791632a2efac7cdb0065c6c14fe"
+  },
+  {
+   "path": "stage-reports/artifacts/analyzer-005q/architecture/exterior-feature-interface.md",
+   "status": "A",
+   "area": "REPORT",
+   "added": 383,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "4c2e424b97759d00ed1aa1171baadbe62d0c0e2f45c625b001839fc28f4ecf1e"
+  },
+  {
+   "path": "stage-reports/artifacts/analyzer-005q/architecture/first-bad-boundary.md",
+   "status": "A",
+   "area": "REPORT",
+   "added": 133,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "5f1c6d6ad903a07aa830e1783278d107b1854e53ad8526e76d26d5b5c20379c4"
+  },
+  {
+   "path": "stage-reports/artifacts/analyzer-005q/architecture/forensics/adversary.md",
+   "status": "A",
+   "area": "REPORT",
+   "added": 163,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "cf2ffd3239096a120e797555b786c31167fb007daeea4d89968bddbb727520b9"
+  },
+  {
+   "path": "stage-reports/artifacts/analyzer-005q/architecture/forensics/akeb.md",
+   "status": "A",
+   "area": "REPORT",
+   "added": 240,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "52ffdd1329dbdc27ae70551cf1f2af16a35ef9b4f67dae94632e55bbb06c52e1"
+  },
+  {
+   "path": "stage-reports/artifacts/analyzer-005q/architecture/forensics/glog.md",
+   "status": "A",
+   "area": "REPORT",
+   "added": 185,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "004aed22a7a9a075dfdaa08d03cb48f969e7e1d709bfffc06df7d08a152ebb81"
+  },
+  {
+   "path": "stage-reports/artifacts/analyzer-005q/architecture/forensics/krasno.md",
+   "status": "A",
+   "area": "REPORT",
+   "added": 225,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "bde36f394669a36a891c9eb438abd155e6468cc3a26a3fa7e35a42d0b21a2382"
+  },
+  {
+   "path": "stage-reports/artifacts/analyzer-005q/architecture/negative-control-inventory.md",
+   "status": "A",
+   "area": "REPORT",
+   "added": 424,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "17adf36062f414513380c58251344087c0441605b35024a5e2ef2a8c5b064e4f"
+  },
+  {
+   "path": "stage-reports/artifacts/analyzer-005q/architecture/negative-features.json",
+   "status": "A",
+   "area": "REPORT",
+   "added": 1146,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "fc60389bd51654b21b764e5a60635a3402e5ebda6b9a4d1d5b0cc28a2e254125"
+  },
+  {
+   "path": "stage-reports/artifacts/analyzer-005q/architecture/trigger-census.json",
+   "status": "A",
+   "area": "REPORT",
+   "added": 1269,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "6b19f9806bd9d4546e6c78ab3f53c6cd90b24e0b5185130fa1f79eb0462c1816"
+  },
+  {
+   "path": "stage-reports/artifacts/analyzer-005q/architecture/wall-face-and-evidence-contract.md",
+   "status": "A",
+   "area": "REPORT",
+   "added": 386,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "8e0611f2db56d870a306bd83992838e7775dd5be985392769f84ecd08757b20e"
+  },
+  {
+   "path": "stage-reports/artifacts/analyzer-005q/baseline-44.json",
+   "status": "A",
+   "area": "REPORT",
+   "added": 3260,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "a3f4a1e87c674583c0af158e294ab2e88ee6e5ab6a2320d2652738edd9f747c3"
+  },
+  {
+   "path": "stage-reports/artifacts/analyzer-005q/blind-round/exclusion-manifest.json",
+   "status": "A (untracked)",
+   "area": "REPORT",
+   "added": 2242,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "9634d6a49f93b88b409e256ad8cf1ab277efb33c76a53b563bc1a862e270249c"
+  },
+  {
+   "path": "stage-reports/artifacts/analyzer-005q/candidate-comparison.json",
+   "status": "A",
+   "area": "REPORT",
+   "added": 6037,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "50b9f3d94a3be174cce4692abdc91e25d77c8da15ff2eaf847b101bb6949d980"
+  },
+  {
+   "path": "stage-reports/artifacts/analyzer-005q/mutation-results.json",
+   "status": "A (untracked)",
+   "area": "REPORT",
+   "added": 1180,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "5aa62101e58edaf4f8794df1079d794b59fe02a6d2c6d9c6ec42a7eb0f8ed3e3"
+  },
+  {
+   "path": "stage-reports/artifacts/analyzer-005q/negative-controls.json",
+   "status": "A",
+   "area": "REPORT",
+   "added": 680,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "e7c61c8576bca33ae236cf92f988b3e56d63e4f5b61841c1616431b32e6bede3"
+  },
+  {
+   "path": "stage-reports/artifacts/analyzer-005q/order-invariance.json",
+   "status": "A (untracked)",
+   "area": "REPORT",
+   "added": 494,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "51a2cb4bfddadf7efd442b1714e7231b857b10e2a5a15a851166f8eb99b90e3d"
+  },
+  {
+   "path": "stage-reports/artifacts/analyzer-005q/performance.json",
+   "status": "A (untracked)",
+   "area": "REPORT",
+   "added": 491,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "43bb0e783620bf22fd2b26629a9a96a02531abdca678f6851225a34eede25a8e"
+  },
+  {
+   "path": "stage-reports/artifacts/analyzer-005q/post-review/round-1.md",
+   "status": "A (untracked)",
+   "area": "REPORT",
+   "added": 255,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "475827fc78cb3899def8aaa83b482fd083d2297fff2ac1acf30d1c4fbecbbc1c"
+  },
+  {
+   "path": "stage-reports/artifacts/analyzer-005q/post-review/round-2.md",
+   "status": "A (untracked)",
+   "area": "REPORT",
+   "added": 194,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "cd5c6fe8a936fe420d0b3c7bcee601d588b79cf57ed87cc984daef8bede39f23"
+  },
+  {
+   "path": "stage-reports/artifacts/analyzer-005q/prod-vs-harness.json",
+   "status": "A (untracked)",
+   "area": "REPORT",
+   "added": 3139,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "9b456af7492a0e4a4b800daf8f6296d6aaee95f40233fc65878d5f9391c50847"
+  },
+  {
+   "path": "stage-reports/artifacts/analyzer-005q/recommendation.md",
+   "status": "A (untracked)",
+   "area": "REPORT",
+   "added": 93,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "05011e66aa8f58b43faa1024819892f3fae21a14a7e1ddfc91898cee04152498"
+  },
+  {
+   "path": "stage-reports/artifacts/analyzer-005q/synthetic-results.json",
+   "status": "A (untracked)",
+   "area": "REPORT",
+   "added": 1285,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "d618857ca4a1506834b17282c66dd74421decbc351b37b8c5462f35e0f573d73"
+  },
+  {
+   "path": "stage-reports/STAGE_BUILDPLAN_ANALYZER_005Q_SOURCE_GROUNDED_EXTERIOR_BOUNDARY.md",
+   "status": "A (untracked)",
+   "area": "REPORT",
+   "added": 247,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "2193d1b9d9f37146dd8a94651fdb99ec36f038cf0a965c7280c36a98d4c73638"
+  },
+  {
+   "path": "tests/architecture/holdout-select.test.ts",
+   "status": "M",
+   "area": "TEST",
+   "added": 28,
+   "deleted": 0,
+   "sha256Base": "c4221365b88276fd84e81d574438dba58ea357456652ccb76f10d6bf45de2bce",
+   "sha256Now": "d887b60b6cd2ec876c88abcdae2c28cb8f73813ddfcd2728acd2a85004654272"
+  },
+  {
+   "path": "tests/architecture/research-isolation.test.ts",
+   "status": "M",
+   "area": "TEST",
+   "added": 46,
+   "deleted": 0,
+   "sha256Base": "cb394eb8f8325c5228ce81af38cd1e1241aa778afa497706c27ded1f8f98bc77",
+   "sha256Now": "3a271b460dcb0bd7262aaf18086afdecf8d42a7b8ee744e7c78b4a7f5ababd74"
+  },
+  {
+   "path": "tests/architecture/wall-strip.test.ts",
+   "status": "A (untracked)",
+   "area": "TEST",
+   "added": 347,
+   "deleted": 0,
+   "sha256Base": null,
+   "sha256Now": "857dc71ecf70060b9df8f93a4a3a3a7a519be59e1a2bbf0a36ce26b42383f6f1"
+  }
+ ],
+ "protectedPaths": [
+  {
+   "path": "apps",
+   "identicalToBase": true,
+   "changed": []
+  },
+  {
+   "path": ".github",
+   "identicalToBase": true,
+   "changed": []
+  },
+  {
+   "path": "package.json",
+   "identicalToBase": true,
+   "changed": []
+  },
+  {
+   "path": "package-lock.json",
+   "identicalToBase": true,
+   "changed": []
+  },
+  {
+   "path": "tsconfig.json",
+   "identicalToBase": true,
+   "changed": []
+  },
+  {
+   "path": "tsconfig.base.json",
+   "identicalToBase": true,
+   "changed": []
+  },
+  {
+   "path": "vitest.config.ts",
+   "identicalToBase": true,
+   "changed": []
+  },
+  {
+   "path": "packages/model",
+   "identicalToBase": true,
+   "changed": []
+  },
+  {
+   "path": "packages/commands",
+   "identicalToBase": true,
+   "changed": []
+  },
+  {
+   "path": "packages/architecture",
+   "identicalToBase": true,
+   "changed": []
+  },
+  {
+   "path": "packages/source-metrics",
+   "identicalToBase": true,
+   "changed": []
+  },
+  {
+   "path": "packages/source-cv",
+   "identicalToBase": true,
+   "changed": []
+  },
+  {
+   "path": "packages/source-common",
+   "identicalToBase": true,
+   "changed": []
+  },
+  {
+   "path": "packages/numeric-recogniser-ort",
+   "identicalToBase": true,
+   "changed": []
+  },
+  {
+   "path": "packages/analysis-service",
+   "identicalToBase": true,
+   "changed": []
+  },
+  {
+   "path": "holdout/pool.txt",
+   "identicalToBase": true,
+   "changed": []
+  },
+  {
+   "path": "holdout/verdict.mjs",
+   "identicalToBase": true,
+   "changed": []
+  }
+ ],
+ "allProtectedIdentical": true
+}

@@ -188,7 +188,9 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     }
     // the storey the body was measured on: the one with no footprint of its own (a basement below it may have one)
     const measuredOn = m.storeys.find((s) => !(m.storeyRects ?? []).some((r) => r.storey === s)) ?? m.storeys[0]
-    evidence(`ring-${m.id}-${measuredOn}`, 'SOURCE_EXACT', `${(m.x1 - m.x0).toFixed(2)} × ${(m.z1 - m.z0).toFixed(2)} m body from the plan's printed chains and wall bands`)
+    // 005Q (N1): a body cut on a wall's inner face is not the printed chains' body: its ring says which face is open
+    if (m.outerFacesOpen && m.outerFacesOpen.length > 0) evidence(`ring-${m.id}-${measuredOn}`, 'SOURCE_DERIVED', `${(m.x1 - m.x0).toFixed(2)} × ${(m.z1 - m.z0).toFixed(2)} m body cut on a wall's inner face; unresolved: ${m.outerFacesOpen.join('; ')}`)
+    else evidence(`ring-${m.id}-${measuredOn}`, 'SOURCE_EXACT', `${(m.x1 - m.x0).toFixed(2)} × ${(m.z1 - m.z0).toFixed(2)} m body from the plan's printed chains and wall bands`)
     for (const own of m.storeyRects ?? []) evidence(`ring-${m.id}-${own.storey}`, 'SOURCE_DERIVED', `storey ${own.storey}'s own walls, ${(own.x1 - own.x0).toFixed(2)} × ${(own.z1 - own.z0).toFixed(2)} m: the walled region of that storey's plan, registered onto the body below, where it stands on the body`)
   }
 

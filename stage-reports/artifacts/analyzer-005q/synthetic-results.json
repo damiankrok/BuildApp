@@ -1,0 +1,1285 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005Q",
+ "rule": "N1a wall strip (layout 1.2.0), after review rounds 1 and 2 (PROD3)",
+ "files": [
+  "packages/reconstruction/test/wall-strip.test.ts",
+  "packages/reconstruction/test/wall-strip-unit.test.ts"
+ ],
+ "fixtures": "packages/reconstruction/test/wall-strip-plans.ts and the readings in wall-strip-unit.test.ts: made-up plans and readings, every dimension invented; no publisher drawing, no house",
+ "solver": "production: reconstructV2 end to end (wall-strip.test.ts) and wallStripsOf directly (wall-strip-unit.test.ts); frozen: wall-strip.test.ts through the 005Q base 04d5568 via a Vite alias outside the repository (the unit test has no frozen counterpart: the base has no wallStripsOf, so it is \"absent\")",
+ "meaning": "a test that fails on the frozen code is one where N1a fires and the frozen solver reads a terrace in the wall strip with a SOURCE_EXACT ring (or, family 16, carries it out to an outlined platform; four redraws there do not finish in the frozen solver, whose emitter refuses that terrace polygon, and are recorded in FROZEN_REFUSED); a test that passes on both is a hard negative asserted whole (the frozen outcome), not an endorsement of it",
+ "commands": [
+  "npx vitest run packages/reconstruction/test/wall-strip.test.ts packages/reconstruction/test/wall-strip-unit.test.ts packages/reconstruction/test/wall-strip-invariance.test.ts --reporter=json --outputFile=<out>/production.json",
+  "npx vitest run --config <work>/oracle.config.mjs --reporter=json --outputFile=<out>/frozen.json   (<work>: node research/analyzer-005q/variant.mjs setup --work <work>; node research/analyzer-005q/synth/oracle-config.mjs --work <work> — the frozen 005Q base 04d5568, outside the repository; it runs wall-strip.test.ts only)",
+  "node research/analyzer-005q/synth/results.mjs --production <out>/production.json --frozen <out>/frozen.json"
+ ],
+ "summary": {
+  "families": 17,
+  "tests": 122,
+  "passOnProduction": 122,
+  "failOnFrozen": 41,
+  "passOnFrozen": 22,
+  "absentOnFrozen": 59,
+  "endToEnd": {
+   "tests": 63,
+   "passOnProduction": 63,
+   "failOnFrozen": 41,
+   "passOnFrozen": 22
+  }
+ },
+ "families": [
+  {
+   "family": 1,
+   "name": "a face pair on the front wall",
+   "tests": 2,
+   "passOnProduction": 2,
+   "failOnFrozen": 2,
+   "passOnFrozen": 0,
+   "absentOnFrozen": 0
+  },
+  {
+   "family": 2,
+   "name": "the chains tick on the outer face only",
+   "tests": 1,
+   "passOnProduction": 1,
+   "failOnFrozen": 0,
+   "passOnFrozen": 1,
+   "absentOnFrozen": 0
+  },
+  {
+   "family": 3,
+   "name": "wall thickness",
+   "tests": 2,
+   "passOnProduction": 2,
+   "failOnFrozen": 1,
+   "passOnFrozen": 1,
+   "absentOnFrozen": 0
+  },
+  {
+   "family": 4,
+   "name": "a pier in the strip",
+   "tests": 2,
+   "passOnProduction": 2,
+   "failOnFrozen": 0,
+   "passOnFrozen": 2,
+   "absentOnFrozen": 0
+  },
+  {
+   "family": 5,
+   "name": "the face window",
+   "tests": 4,
+   "passOnProduction": 4,
+   "failOnFrozen": 2,
+   "passOnFrozen": 2,
+   "absentOnFrozen": 0
+  },
+  {
+   "family": 6,
+   "name": "a garage door in the wall",
+   "tests": 2,
+   "passOnProduction": 2,
+   "failOnFrozen": 1,
+   "passOnFrozen": 1,
+   "absentOnFrozen": 0
+  },
+  {
+   "family": 7,
+   "name": "a stepped front",
+   "tests": 2,
+   "passOnProduction": 2,
+   "failOnFrozen": 1,
+   "passOnFrozen": 1,
+   "absentOnFrozen": 0
+  },
+  {
+   "family": 8,
+   "name": "an open terrace beyond the front wall",
+   "tests": 1,
+   "passOnProduction": 1,
+   "failOnFrozen": 0,
+   "passOnFrozen": 1,
+   "absentOnFrozen": 0
+  },
+  {
+   "family": 9,
+   "name": "porch posts",
+   "tests": 2,
+   "passOnProduction": 2,
+   "failOnFrozen": 0,
+   "passOnFrozen": 2,
+   "absentOnFrozen": 0
+  },
+  {
+   "family": 10,
+   "name": "a pergola",
+   "tests": 1,
+   "passOnProduction": 1,
+   "failOnFrozen": 0,
+   "passOnFrozen": 1,
+   "absentOnFrozen": 0
+  },
+  {
+   "family": 11,
+   "name": "a carport",
+   "tests": 1,
+   "passOnProduction": 1,
+   "failOnFrozen": 0,
+   "passOnFrozen": 1,
+   "absentOnFrozen": 0
+  },
+  {
+   "family": 12,
+   "name": "a recessed entrance with its back wall (005N)",
+   "tests": 2,
+   "passOnProduction": 2,
+   "failOnFrozen": 1,
+   "passOnFrozen": 1,
+   "absentOnFrozen": 0
+  },
+  {
+   "family": 13,
+   "name": "mirrored and turned",
+   "tests": 10,
+   "passOnProduction": 10,
+   "failOnFrozen": 8,
+   "passOnFrozen": 2,
+   "absentOnFrozen": 0
+  },
+  {
+   "family": 14,
+   "name": "one side, one body, one direction (the mutation gates)",
+   "tests": 4,
+   "passOnProduction": 4,
+   "failOnFrozen": 3,
+   "passOnFrozen": 1,
+   "absentOnFrozen": 0
+  },
+  {
+   "family": 15,
+   "name": "review round 1",
+   "tests": 16,
+   "passOnProduction": 16,
+   "failOnFrozen": 13,
+   "passOnFrozen": 3,
+   "absentOnFrozen": 0
+  },
+  {
+   "family": 16,
+   "name": "review round 2, the platform probe (F4: R2A-1, R2A-2)",
+   "tests": 11,
+   "passOnProduction": 11,
+   "failOnFrozen": 9,
+   "passOnFrozen": 2,
+   "absentOnFrozen": 0
+  },
+  {
+   "family": 17,
+   "name": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "tests": 59,
+   "passOnProduction": 59,
+   "failOnFrozen": 0,
+   "passOnFrozen": 0,
+   "absentOnFrozen": 59
+  }
+ ],
+ "tests": [
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — the readings as drawn",
+   "test": "case A: the strips, their words and the bodies on them, as written out",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — the readings as drawn",
+   "test": "case A: backOn’s back edge is the envelope’s side (to 1e-9 px), and a body is on the strip exactly within a wall of it",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — the readings as drawn",
+   "test": "case B: the strips, their words and the bodies on them, as written out",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — the readings as drawn",
+   "test": "case B: backOn’s back edge is the envelope’s side (to 1e-9 px), and a body is on the strip exactly within a wall of it",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — the readings as drawn",
+   "test": "case C: the strips, their words and the bodies on them, as written out",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — the readings as drawn",
+   "test": "case C: backOn’s back edge is the envelope’s side (to 1e-9 px), and a body is on the strip exactly within a wall of it",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — the readings as drawn",
+   "test": "case A: the reason, whole",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — every reading sits away from every bound by more than ±0.2 px can move it",
+   "test": "case A: 25 bounds, the tightest 0.50 px from its bound where ±0.2 px moves it at most 0.40 px (front: depth text vs its rounding (px))",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — every reading sits away from every bound by more than ±0.2 px can move it",
+   "test": "case B: 38 bounds, the tightest 0.42 px from its bound where ±0.2 px moves it at most 0.40 px (east: depth text vs its rounding (px))",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — every reading sits away from every bound by more than ±0.2 px can move it",
+   "test": "case C: 16 bounds, the tightest 0.50 px from its bound where ±0.2 px moves it at most 0.40 px (front: depth text vs its rounding (px))",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — mirrored, turned and transposed: the same decision, transformed",
+   "test": "case A, id: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — mirrored, turned and transposed: the same decision, transformed",
+   "test": "case A, mirrorX: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — mirrored, turned and transposed: the same decision, transformed",
+   "test": "case A, mirrorY: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — mirrored, turned and transposed: the same decision, transformed",
+   "test": "case A, turn90: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — mirrored, turned and transposed: the same decision, transformed",
+   "test": "case A, turn180: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — mirrored, turned and transposed: the same decision, transformed",
+   "test": "case A, turn270: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — mirrored, turned and transposed: the same decision, transformed",
+   "test": "case A, transpose: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — mirrored, turned and transposed: the same decision, transformed",
+   "test": "case A, antitranspose: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — mirrored, turned and transposed: the same decision, transformed",
+   "test": "case B, id: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — mirrored, turned and transposed: the same decision, transformed",
+   "test": "case B, mirrorX: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — mirrored, turned and transposed: the same decision, transformed",
+   "test": "case B, mirrorY: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — mirrored, turned and transposed: the same decision, transformed",
+   "test": "case B, turn90: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — mirrored, turned and transposed: the same decision, transformed",
+   "test": "case B, turn180: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — mirrored, turned and transposed: the same decision, transformed",
+   "test": "case B, turn270: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — mirrored, turned and transposed: the same decision, transformed",
+   "test": "case B, transpose: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — mirrored, turned and transposed: the same decision, transformed",
+   "test": "case B, antitranspose: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — mirrored, turned and transposed: the same decision, transformed",
+   "test": "case C, id: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — mirrored, turned and transposed: the same decision, transformed",
+   "test": "case C, mirrorX: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — mirrored, turned and transposed: the same decision, transformed",
+   "test": "case C, mirrorY: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — mirrored, turned and transposed: the same decision, transformed",
+   "test": "case C, turn90: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — mirrored, turned and transposed: the same decision, transformed",
+   "test": "case C, turn180: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — mirrored, turned and transposed: the same decision, transformed",
+   "test": "case C, turn270: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — mirrored, turned and transposed: the same decision, transformed",
+   "test": "case C, transpose: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — mirrored, turned and transposed: the same decision, transformed",
+   "test": "case C, antitranspose: the sides named, the words (depth and cover), the gap id's side, backOn on every body, and the covered stretches and back edge to 1e-9 px",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — mirrored, turned and transposed: the same decision, transformed",
+   "test": "the eight symmetries map the four sides as the sheet does (front ↔ rear under a top–bottom mirror, front → west under a quarter turn clockwise on screen, …)",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — the bands in any order",
+   "test": "case A, bands reversed: the same decision, the same gap ids, the same covered stretches to the bit",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — the bands in any order",
+   "test": "case A, bands rotated by one: the same decision, the same gap ids, the same covered stretches to the bit",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — the bands in any order",
+   "test": "case A, bands shuffled (seed 7): the same decision, the same gap ids, the same covered stretches to the bit",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — the bands in any order",
+   "test": "case A, bands shuffled (seed 1009): the same decision, the same gap ids, the same covered stretches to the bit",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — the bands in any order",
+   "test": "case A, bands shuffled (seed 65537): the same decision, the same gap ids, the same covered stretches to the bit",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — the bands in any order",
+   "test": "case B, bands reversed: the same decision, the same gap ids, the same covered stretches to the bit",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — the bands in any order",
+   "test": "case B, bands rotated by one: the same decision, the same gap ids, the same covered stretches to the bit",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — the bands in any order",
+   "test": "case B, bands shuffled (seed 7): the same decision, the same gap ids, the same covered stretches to the bit",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — the bands in any order",
+   "test": "case B, bands shuffled (seed 1009): the same decision, the same gap ids, the same covered stretches to the bit",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — the bands in any order",
+   "test": "case B, bands shuffled (seed 65537): the same decision, the same gap ids, the same covered stretches to the bit",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — the bands in any order",
+   "test": "case C, bands reversed: the same decision, the same gap ids, the same covered stretches to the bit",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — the bands in any order",
+   "test": "case C, bands rotated by one: the same decision, the same gap ids, the same covered stretches to the bit",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — the bands in any order",
+   "test": "case C, bands shuffled (seed 7): the same decision, the same gap ids, the same covered stretches to the bit",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — the bands in any order",
+   "test": "case C, bands shuffled (seed 1009): the same decision, the same gap ids, the same covered stretches to the bit",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — the bands in any order",
+   "test": "case C, bands shuffled (seed 65537): the same decision, the same gap ids, the same covered stretches to the bit",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — ±0.2 px at the face-pair tolerances, away from the bounds",
+   "test": "case A: each of its 48 coordinates (every band face and end, the extent, the envelope, every body) moved by +0.2 and by −0.2 px alone: the same decision",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — ±0.2 px at the face-pair tolerances, away from the bounds",
+   "test": "case A: every coordinate jittered at once within ±0.2 px (twelve seeds), as drawn and under the eight symmetries: the same (transformed) decision, and the transformed covered stretches of the jittered reading to 1e-9 px",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — ±0.2 px at the face-pair tolerances, away from the bounds",
+   "test": "case B: each of its 40 coordinates (every band face and end, the extent, the envelope, every body) moved by +0.2 and by −0.2 px alone: the same decision",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — ±0.2 px at the face-pair tolerances, away from the bounds",
+   "test": "case B: every coordinate jittered at once within ±0.2 px (twelve seeds), as drawn and under the eight symmetries: the same (transformed) decision, and the transformed covered stretches of the jittered reading to 1e-9 px",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — ±0.2 px at the face-pair tolerances, away from the bounds",
+   "test": "case C: each of its 28 coordinates (every band face and end, the extent, the envelope, every body) moved by +0.2 and by −0.2 px alone: the same decision",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — ±0.2 px at the face-pair tolerances, away from the bounds",
+   "test": "case C: every coordinate jittered at once within ±0.2 px (twelve seeds), as drawn and under the eight symmetries: the same (transformed) decision, and the transformed covered stretches of the jittered reading to 1e-9 px",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — at a bound, and only there, ±0.2 px may flip the decision",
+   "test": "case D: a cover of exactly 0.25 names the strip (25%); the piece 0.2 px longer still does, 0.2 px shorter does not",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — at a bound, and only there, ±0.2 px may flip the decision",
+   "test": "case D: at the bound, the eight symmetries still agree (the rule is symmetric even where it is on the edge)",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 17,
+   "familyName": "G10 at unit level (wallStripsOf on a hand-built reading)",
+   "group": "005Q G10 (unit) — at a bound, and only there, ±0.2 px may flip the decision",
+   "test": "case A: a body whose stretch overlaps the covered one by exactly a wall (18 px) is not on the strip; 0.2 px more and it is",
+   "production": "passed",
+   "frozen": "absent",
+   "file": "packages/reconstruction/test/wall-strip-unit.test.ts"
+  },
+  {
+   "family": 1,
+   "familyName": "a face pair on the front wall",
+   "group": "005Q wall strip — 1. a face pair on the front wall",
+   "test": "the body cut on the front wall’s inner face: the face is named, the ring SOURCE_DERIVED, no terrace, no return (frozen: terrace-front-0, SOURCE_EXACT)",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 1,
+   "familyName": "a face pair on the front wall",
+   "group": "005Q wall strip — 1. a face pair on the front wall",
+   "test": "the layout keeps the strip as its ZONE region, names an AMBIGUOUS gap for it and says so in the body’s why; the MASS feature is SOURCE_DERIVED",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 2,
+   "familyName": "the chains tick on the outer face only",
+   "group": "005Q wall strip — 2. the chains tick on the outer face only",
+   "test": "the body reaches the outer face: no zone, no gap, the ring SOURCE_EXACT (as frozen)",
+   "production": "passed",
+   "frozen": "passed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 3,
+   "familyName": "wall thickness",
+   "group": "005Q wall strip — 3. wall thickness",
+   "test": "a 10 px front wall (under 0.7 of the 18 px walls) cut on its inner face is no wall strip: no gap; the frozen terrace stays (a bound of the rule, recorded)",
+   "production": "passed",
+   "frozen": "passed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 3,
+   "familyName": "wall thickness",
+   "group": "005Q wall strip — 3. wall thickness",
+   "test": "24 px walls at 0.019 m/px (a 23.7 px cell) reproduce the defect, and the rule fires on the thick wall",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 4,
+   "familyName": "a pier in the strip",
+   "group": "005Q wall strip — 4. a pier in the strip",
+   "test": "a 40 px pier (shorter than 2.5 walls) in front of a wall whose outer face is the strip’s back: no gap, as frozen",
+   "production": "passed",
+   "frozen": "passed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 4,
+   "familyName": "a pier in the strip",
+   "group": "005Q wall strip — 4. a pier in the strip",
+   "test": "a 120 px pier (long enough, but 20 % of the strip): no gap, as frozen",
+   "production": "passed",
+   "frozen": "passed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 5,
+   "familyName": "the face window",
+   "group": "005Q wall strip — 5. the face window",
+   "test": "every tick 0.2 px down: the band claim no longer ties, the body reaches the outer face, there is no strip to name (as frozen)",
+   "production": "passed",
+   "frozen": "passed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 5,
+   "familyName": "the face window",
+   "group": "005Q wall strip — 5. the face window",
+   "test": "every tick 0.2 px up: the strip moves by 0.2 px with them and the band’s faces stay on the same rows, so the decision is the one of family 1",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 5,
+   "familyName": "the face window",
+   "group": "005Q wall strip — 5. the face window",
+   "test": "the wall thickened 9 px inward past the tick (27 px band, window 9.45 px): its inner face is 9 px off the strip’s edge and it fires",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 5,
+   "familyName": "the face window",
+   "group": "005Q wall strip — 5. the face window",
+   "test": "thickened 10 px inward (28 px band, window 9.8 px): 10 px off, outside the window, no gap; the frozen terrace stays",
+   "production": "passed",
+   "frozen": "passed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 6,
+   "familyName": "a garage door in the wall",
+   "group": "005Q wall strip — 6. a garage door in the wall",
+   "test": "a 3 m door between piers in the strip’s wall: the band still covers the side, the rule fires and no terrace is read in the door’s stretch",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 6,
+   "familyName": "a garage door in the wall",
+   "group": "005Q wall strip — 6. a garage door in the wall",
+   "test": "the same door with the chains on the outer face only: no strip, no gap, no terrace, as frozen",
+   "production": "passed",
+   "frozen": "passed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 7,
+   "familyName": "a stepped front",
+   "group": "005Q wall strip — 7. a stepped front",
+   "test": "the forward stretch’s band covers 25.7 % of the strip: the rule fires and no terrace is read along the niche",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 7,
+   "familyName": "a stepped front",
+   "group": "005Q wall strip — 7. a stepped front",
+   "test": "24 % of the strip: no gap, as frozen (the niche keeps the frozen terrace reading)",
+   "production": "passed",
+   "frozen": "passed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 8,
+   "familyName": "an open terrace beyond the front wall",
+   "group": "005Q wall strip — 8. an open terrace beyond the front wall",
+   "test": "a 4 m outlined terrace: the zone stays a terrace, no gap, the ring SOURCE_EXACT, as frozen",
+   "production": "passed",
+   "frozen": "passed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 9,
+   "familyName": "porch posts",
+   "group": "005Q wall strip — 9. porch posts",
+   "test": "16 px posts on the terrace’s edge: no gap, the terrace stays, as frozen",
+   "production": "passed",
+   "frozen": "passed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 9,
+   "familyName": "porch posts",
+   "group": "005Q wall strip — 9. porch posts",
+   "test": "16 px posts in a 17 px strip in front of a wall whose outer face is the strip’s back: no gap, as frozen",
+   "production": "passed",
+   "frozen": "passed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 10,
+   "familyName": "a pergola",
+   "group": "005Q wall strip — 10. a pergola",
+   "test": "thin lines and two small posts beyond the front wall: no gap, the terrace reading as frozen",
+   "production": "passed",
+   "frozen": "passed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 11,
+   "familyName": "a carport",
+   "group": "005Q wall strip — 11. a carport",
+   "test": "two wall-thick side walls and an open mouth: no gap (the side walls cross the strip, they do not lie along it), the carport outside every mass, as frozen",
+   "production": "passed",
+   "frozen": "passed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 12,
+   "familyName": "a recessed entrance with its back wall (005N)",
+   "group": "005Q wall strip — 12. a recessed entrance with its back wall (005N)",
+   "test": "as 005N dimensions it: the recess stays a recess with both returns, no zone, no gap, as frozen",
+   "production": "passed",
+   "frozen": "passed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 12,
+   "familyName": "a recessed entrance with its back wall (005N)",
+   "group": "005Q wall strip — 12. a recessed entrance with its back wall (005N)",
+   "test": "with an inner chain on the front wall’s inner face, cut there: the face is named and the strip carries no terrace, while the entrance stays a recess with both returns",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 13,
+   "familyName": "mirrored and turned",
+   "group": "005Q wall strip — 13. mirrored and turned",
+   "test": "the north-wall face pair, id: the rear wall’s outer face is named, the ring SOURCE_DERIVED, no terrace (frozen: terrace-rear-0)",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 13,
+   "familyName": "mirrored and turned",
+   "group": "005Q wall strip — 13. mirrored and turned",
+   "test": "the north-wall face pair, mirrorX: the rear wall’s outer face is named, the ring SOURCE_DERIVED, no terrace (frozen: terrace-rear-0)",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 13,
+   "familyName": "mirrored and turned",
+   "group": "005Q wall strip — 13. mirrored and turned",
+   "test": "the north-wall face pair, mirrorY: the front wall’s outer face is named, the ring SOURCE_DERIVED, no terrace (frozen: terrace-front-0)",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 13,
+   "familyName": "mirrored and turned",
+   "group": "005Q wall strip — 13. mirrored and turned",
+   "test": "the north-wall face pair, turn90: the east wall’s outer face is named, the ring SOURCE_DERIVED, no terrace (frozen: terrace-east-0)",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 13,
+   "familyName": "mirrored and turned",
+   "group": "005Q wall strip — 13. mirrored and turned",
+   "test": "the north-wall face pair, turn270: the west wall’s outer face is named, the ring SOURCE_DERIVED, no terrace (frozen: terrace-west-0)",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 13,
+   "familyName": "mirrored and turned",
+   "group": "005Q wall strip — 13. mirrored and turned",
+   "test": "family 1, id: the front wall’s outer face is named",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 13,
+   "familyName": "mirrored and turned",
+   "group": "005Q wall strip — 13. mirrored and turned",
+   "test": "family 1, mirrorX: the front wall’s outer face is named",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 13,
+   "familyName": "mirrored and turned",
+   "group": "005Q wall strip — 13. mirrored and turned",
+   "test": "family 1, mirrorY: no strip, as frozen",
+   "production": "passed",
+   "frozen": "passed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 13,
+   "familyName": "mirrored and turned",
+   "group": "005Q wall strip — 13. mirrored and turned",
+   "test": "family 1, turn90: no strip, as frozen",
+   "production": "passed",
+   "frozen": "passed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 13,
+   "familyName": "mirrored and turned",
+   "group": "005Q wall strip — 13. mirrored and turned",
+   "test": "family 1, turn270: the east wall’s outer face is named",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 14,
+   "familyName": "one side, one body, one direction (the mutation gates)",
+   "group": "005Q wall strip — 14. one side, one body, one direction (the mutation gates)",
+   "test": "a rear wall strip beside an open terrace beyond the front wall: the rear face is named and its floor goes, the front terrace stays (frozen: both terraces)",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 14,
+   "familyName": "one side, one body, one direction (the mutation gates)",
+   "group": "005Q wall strip — 14. one side, one body, one direction (the mutation gates)",
+   "test": "an L: only the body that stands on the strip’s back edge is open; the wing beside it, its south face 7.65 m short of the strip, stays MEASURED and SOURCE_EXACT (frozen: both exact, a terrace)",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 14,
+   "familyName": "one side, one body, one direction (the mutation gates)",
+   "group": "005Q wall strip — 14. one side, one body, one direction (the mutation gates)",
+   "test": "nine wall-thick stall walls crossing a 5 m strip (27 % of its length in their thickness): they cross it, they do not lie along it — no gap, as frozen",
+   "production": "passed",
+   "frozen": "passed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 14,
+   "familyName": "one side, one body, one direction (the mutation gates)",
+   "group": "005Q wall strip — 14. one side, one body, one direction (the mutation gates)",
+   "test": "wall-thick pieces each shorter than 2.5 walls, covering 40 % of the strip, are no wall: handed to the pass through the sheet cache, they name no face",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 15,
+   "familyName": "review round 1",
+   "group": "005Q wall strip — 15. review round 1",
+   "test": "(a) two bodies on a stepped front: the house cut on its front wall’s inner face is open; the garage beside it, its own outer face on the envelope line and no wall ink in front of it, is not (frozen: both exact, a terrace)",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 15,
+   "familyName": "review round 1",
+   "group": "005Q wall strip — 15. review round 1",
+   "test": "(b) a face pair and a platform outlined beyond the same wall: the face is named, the platform is named and not built, the ring SOURCE_DERIVED (frozen: the recess floor continued 3.95 m to the outline, SOURCE_EXACT)",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 15,
+   "familyName": "review round 1",
+   "group": "005Q wall strip — 15. review round 1",
+   "test": "(b) no platform is named where nothing is outlined beyond the strip, nor beyond a zone that is no wall strip",
+   "production": "passed",
+   "frozen": "passed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 15,
+   "familyName": "review round 1",
+   "group": "005Q wall strip — 15. review round 1",
+   "test": "(c) a 13 px front wall 6 px clear of its strip’s edges in all (19 px strip, window 5): no gap, the outcome is the frozen one, terrace and all",
+   "production": "passed",
+   "frozen": "passed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 15,
+   "familyName": "review round 1",
+   "group": "005Q wall strip — 15. review round 1",
+   "test": "(c) the same wall 5 px clear in all (18 px strip): inside the window, the rule fires",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 15,
+   "familyName": "review round 1",
+   "group": "005Q wall strip — 15. review round 1",
+   "test": "(d) the depth the gap states is the strip’s at the scale across it: 17.5 px × 0.02 m/px for a front strip under a 0.026 × 0.02 registration (the larger scale would say 0.46 m)",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 15,
+   "familyName": "review round 1",
+   "group": "005Q wall strip — 15. review round 1",
+   "test": "(d) turned so the strip is the east one, under a 0.02 × 0.026 registration: the depth is at the x scale, 0.35 m",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 15,
+   "familyName": "review round 1",
+   "group": "005Q wall strip — 15. review round 1, the overlap bound",
+   "test": "(a) a body beside the covered stretch is open only when the wall ink runs on in front of it for more than a wall: 15 px no, 30 px yes (handed to the pass through the sheet cache)",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 15,
+   "familyName": "review round 1",
+   "group": "005Q wall strip — 15. review round 1, the overlap bound",
+   "test": "(a) review round 2 (R2A-6), the front strip: a reach of wallPx ± 2 — 16 px is not open, 20 px is",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 15,
+   "familyName": "review round 1",
+   "group": "005Q wall strip — 15. review round 1, the overlap bound",
+   "test": "(a) review round 2 (R2A-6), the front strip: two pieces overlapping each other in front of the garage, 14 and 16 px into its stretch — the union is 16 px, the sum 30: not open (the stretches are merged before they are counted)",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 15,
+   "familyName": "review round 1",
+   "group": "005Q wall strip — 15. review round 1, the overlap bound",
+   "test": "(a) review round 2 (R2A-6), the front strip: two pieces at the garage's two ends, each 14 px into its stretch (less than a wall), together 28 px (more): open",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 15,
+   "familyName": "review round 1",
+   "group": "005Q wall strip — 15. review round 1, the overlap bound",
+   "test": "(a) review round 2 (R2A-6), turned 90° (turn270: the same strip drawn as the east one, the overlap taken along y): a reach of wallPx ± 2 — 16 px is not open, 20 px is",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 15,
+   "familyName": "review round 1",
+   "group": "005Q wall strip — 15. review round 1, the overlap bound",
+   "test": "(a) review round 2 (R2A-6), turned 90° (turn270: the same strip drawn as the east one, the overlap taken along y): two pieces overlapping each other in front of the garage, 14 and 16 px into its stretch — the union is 16 px, the sum 30: not open (the stretches are merged before they are counted)",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 15,
+   "familyName": "review round 1",
+   "group": "005Q wall strip — 15. review round 1, the overlap bound",
+   "test": "(a) review round 2 (R2A-6), turned 90° (turn270: the same strip drawn as the east one, the overlap taken along y): two pieces at the garage's two ends, each 14 px into its stretch (less than a wall), together 28 px (more): open",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 15,
+   "familyName": "review round 1",
+   "group": "005Q wall strip — 15. review round 1, the bounds the fixes made redundant elsewhere",
+   "test": "(a) the face distance: a body over the covered stretch whose own face is 203 px short of the strip is not open (frozen: both exact, a terrace)",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 15,
+   "familyName": "review round 1",
+   "group": "005Q wall strip — 15. review round 1, the bounds the fixes made redundant elsewhere",
+   "test": "(c) a block crossing the strip as deep as the strip, wall-thick both ways, is not the wall lying along it: two 96 × 99 px blocks in the carport’s 100 px strip name no face (handed to the pass through the sheet cache)",
+   "production": "passed",
+   "frozen": "passed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 16,
+   "familyName": "review round 2, the platform probe (F4: R2A-1, R2A-2)",
+   "group": "005Q wall strip — 16. review round 2, the platform probe (F4: R2A-1, R2A-2)",
+   "test": "(a) an L whose wing stands nowhere near the cut wall, a platform outlined in front of the house only: the face and the platform are named, nothing is built (frozen: the recess floor carried 3.95 m out, both bodies exact)",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 16,
+   "familyName": "review round 2, the platform probe (F4: R2A-1, R2A-2)",
+   "group": "005Q wall strip — 16. review round 2, the platform probe (F4: R2A-1, R2A-2)",
+   "test": "(a) the L mirrored left–right (frozen: the emitter refuses the terrace it builds there) and turned 270° (the strip is the east one; frozen: terrace-east-0, 3.95 m): the platform is named on the side the wall is drawn on, read across the house",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 16,
+   "familyName": "review round 2, the platform probe (F4: R2A-1, R2A-2)",
+   "group": "005Q wall strip — 16. review round 2, the platform probe (F4: R2A-1, R2A-2)",
+   "test": "(a) the L mirrored top–bottom and turned 90°: the band claim’s tie cuts the house on its wall’s outer face, so there is no strip and nothing is named — the frozen outcome, whole",
+   "production": "passed",
+   "frozen": "passed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 16,
+   "familyName": "review round 2, the platform probe (F4: R2A-1, R2A-2)",
+   "group": "005Q wall strip — 16. review round 2, the platform probe (F4: R2A-1, R2A-2)",
+   "test": "(b) the north-wall face pair with a platform outlined beyond it, id: the rear wall’s outer face and “the platform the plan outlines beyond the rear wall” are named, nothing is built (frozen: terrace-rear-0 carried out to the outline)",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 16,
+   "familyName": "review round 2, the platform probe (F4: R2A-1, R2A-2)",
+   "group": "005Q wall strip — 16. review round 2, the platform probe (F4: R2A-1, R2A-2)",
+   "test": "(b) the north-wall face pair with a platform outlined beyond it, mirrorX: the rear wall’s outer face and “the platform the plan outlines beyond the rear wall” are named, nothing is built (frozen: the emitter refuses the terrace it builds)",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 16,
+   "familyName": "review round 2, the platform probe (F4: R2A-1, R2A-2)",
+   "group": "005Q wall strip — 16. review round 2, the platform probe (F4: R2A-1, R2A-2)",
+   "test": "(b) the north-wall face pair with a platform outlined beyond it, mirrorY: the front wall’s outer face and “the platform the plan outlines beyond the front wall” are named, nothing is built (frozen: terrace-front-0 carried out to the outline)",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 16,
+   "familyName": "review round 2, the platform probe (F4: R2A-1, R2A-2)",
+   "group": "005Q wall strip — 16. review round 2, the platform probe (F4: R2A-1, R2A-2)",
+   "test": "(b) the north-wall face pair with a platform outlined beyond it, turn90: the east wall’s outer face and “the platform the plan outlines beyond the east wall” are named, nothing is built (frozen: the emitter refuses the terrace it builds)",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 16,
+   "familyName": "review round 2, the platform probe (F4: R2A-1, R2A-2)",
+   "group": "005Q wall strip — 16. review round 2, the platform probe (F4: R2A-1, R2A-2)",
+   "test": "(b) the north-wall face pair with a platform outlined beyond it, turn270: the west wall’s outer face and “the platform the plan outlines beyond the west wall” are named, nothing is built (frozen: terrace-west-0 carried out to the outline)",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 16,
+   "familyName": "review round 2, the platform probe (F4: R2A-1, R2A-2)",
+   "group": "005Q wall strip — 16. review round 2, the platform probe (F4: R2A-1, R2A-2)",
+   "test": "(b) the five redraws name the platform with all four side words",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 16,
+   "familyName": "review round 2, the platform probe (F4: R2A-1, R2A-2)",
+   "group": "005Q wall strip — 16. review round 2, the platform probe (F4: R2A-1, R2A-2)",
+   "test": "(b) family 15 (b)’s face pair and platform redrawn: mirrored left–right the front platform, turned 270° the east one are named (frozen: the emitter refuses the terrace; terrace-east-0 carried 3.95 m out); mirrored top–bottom and turned 90° no strip, no platform, as frozen",
+   "production": "passed",
+   "frozen": "failed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  },
+  {
+   "family": 16,
+   "familyName": "review round 2, the platform probe (F4: R2A-1, R2A-2)",
+   "group": "005Q wall strip — 16. review round 2, the platform probe (F4: R2A-1, R2A-2)",
+   "test": "(c) a hatched platform outlined beyond a real terrace zone (no wall strip anywhere): the terrace carried 4 m out to it, as frozen; no face and no platform is named",
+   "production": "passed",
+   "frozen": "passed",
+   "file": "packages/reconstruction/test/wall-strip.test.ts"
+  }
+ ]
+}

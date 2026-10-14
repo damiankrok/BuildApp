@@ -419,3 +419,38 @@ round is drawn only if a production behaviour change passed every 005P gate (`re
      repeated.
    - First bad decisions are named from the Evidence Pack and the trace (SOURCE, METRIC, AS_PRINTED_VIEW,
      PLAN_RESOLUTION, BINDING, ORIENTATION, EXTENT, TOPOLOGY_BOUNDARY, STOREY, EMISSION, OTHER).
+
+## Round 12 (BUILDPLAN-ANALYZER-005Q)
+
+The protocol of round 11, steps 1–6, with these differences only. Everything here is fixed before the freeze, and the
+round is drawn only because a production behaviour change (layout inference 1.2.0, candidate N1a: the exterior wall
+strip is named, never built) passed every 005Q gate (`research/analyzer-005q/preregistration.md` §4–§7).
+
+1. **Two ARCHON families from the committed round-1 pool** (`holdout/pool.txt`, `POOL_SHA256 = 800c2a1e…2ed41`), both
+   unstratified, drawn as round 11 draws them. No stratum: whether a house's plan cuts a body on a wall's inner face
+   cannot be read from a page's markup without reading its drawings, so `TARGET_CLASS_EXERCISED` is read after the seal.
+2. **Excluded families** (`excluded-families-round-12.txt`), built by `research/analyzer-005q/exclusions.mjs`
+   (manifest: `stage-reports/artifacts/analyzer-005q/blind-round/exclusion-manifest.json`): round 11's list and
+   sources; round 11's two draws (miniaturka and krasnokwiatach, now development material) and every family their
+   cached pages link to; every family a text file of the 005M, 005O, 005P or 005Q research names. `dom-w-rarytasach`
+   (the OWNER's development anchor) is on it. Its sha-256 is recorded in the exclusion manifest and the stage report.
+3. **Freeze.** `PRE_HOLDOUT_12_SHA` is the pushed HEAD whose full CI is green. Nothing is committed between the freeze
+   and the draw.
+4. **Draw.** `node holdout/select.mjs select --round 12 --pool holdout/pool.txt --pool-sha256 800c2a1ed9daee9efd2654c64b061e430094dc38fc459b805af27ff9fad2ed41 --pre-holdout-sha <sha>`.
+   - `seed = SHA256(PRE_HOLDOUT_12_SHA + "BUILDPLAN-005Q-EXTERIOR-BOUNDARY-HOLDOUT")`.
+5. **Run once each, NEW then OLD, pick 1 then pick 2.**
+   - **NEW** (the frozen code, layout 1.2.0), live, exactly as round 11's NEW.
+   - **OLD** (the 005Q base `04d5568`, layout 1.1.0), solver only, on the NEW run's sealed package, graph and metric
+     evidence, with the base's `packages/reconstruction/src` exported by `git archive` outside the repository and
+     aliased for that process, as round 11's OLD. The solver's input graph is copied into the OLD output directory so the
+     verdict reads it (round 11's note).
+   - Neither run is repeated, and no page, area or published figure is read between the two runs.
+6. **Verdict** by `holdout/verdict.mjs` as committed at the freeze, unchanged — no condition or threshold added or
+   moved — for NEW and for OLD, sealed with the first-bad record of each before any diagnosis. After sealing:
+   - `TARGET_CLASS_EXERCISED = YES | NO` — YES when the NEW run's layout names an outer-face gap (`gap-outer-face-…`,
+     "the outer face of the building’s … wall"), or the OLD and NEW models differ; NO otherwise.
+   - A fresh `ALGORITHMIC_FAIL`, a false-confident scale, a wrong floor, a fabricated wall, terrace or room, or a
+     SOURCE_EXACT ring on a wall's inner face in the NEW run forces the stage to PARTIAL at most. Nothing is patched
+     after the draw, and the draw is never repeated.
+   - First bad decisions are named from the Evidence Pack and the trace (SOURCE, METRIC, PLAN_RESOLUTION, BINDING,
+     ORIENTATION, EXTENT, FACE, PIER, TOPOLOGY_BOUNDARY, STOREY, EMISSION, OTHER).
