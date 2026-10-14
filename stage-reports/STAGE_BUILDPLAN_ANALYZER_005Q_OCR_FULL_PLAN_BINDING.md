@@ -165,7 +165,19 @@ równolegle z czytnikami prawdy S5 (rywalizacja o CPU); S5 sam: 189,8 ms/crop.
 
 ## J. Bramki, zamrożenie, CI
 
-(uzupełnione w commicie zamykającym — §P)
+| bramka | wynik (Node 22.22.2, ten kontener, drzewo zamykające `137ba16` + ten raport) |
+| --- | --- |
+| zamrożenie produkcji | **`FREEZE: IDENTICAL`** — także po `npm run build` i `npm run e2e` (`production-freeze-end.md`) |
+| `npm install` | up to date, exit 0 |
+| `npm run typecheck` | pass |
+| `npm test` | 181 plików zielonych, 1 pominięty; **2 569 testów zielonych**, 11 pominiętych; **2 czerwone**: `apps/analyzer-api/test/worker.test.ts` („two jobs run side by side…”, „a job stuck inside its thread…”) — `Test timed out in 120000ms` przy pełnym równoległym przebiegu (1 836 s czasu testów w 694 s). Kod produkcyjny jest bajt w bajt zamrożony, a test nie dotyka `research/`. **Jedna ponowna próba** samego pliku: **3/3 zielone w 31 s**. Blok izolacji 005Q‑OCR: `research-isolation.test.ts` 45/45 |
+| `npm run build` | pass |
+| `npm run e2e` | **47/47** |
+| testy harnessu | `python3 -I research/analyzer-005q-ocr/test_binding.py`: 15/15 |
+| po e2e | `git checkout -- stage-reports/artifacts` (e2e nadpisuje PNG dowodowe wcześniejszych etapów) |
+
+CI: workflow repozytorium uruchamia się na `claude/**`; wynik przebiegu commita zamykającego jest podany w przekazaniu (raport nie
+może zawierać przebiegu własnego commita).
 
 ## K. Recenzje (2, LEAN; `artifacts/…/review/reviews-round1.json`)
 
@@ -233,4 +245,33 @@ Detektor może wrócić jako wąski proponent tylko dla odcinków bez etykiety �
 
 ## P. Polecenia, SHA, CI
 
-(uzupełnione w commicie zamykającym)
+Katalog roboczy poza repozytorium: `W=/home/user/work005q-ocr` (wagi, odczyty, prawda, dzienniki). Z katalogu głównego repozytorium:
+
+```bash
+# 0. zamrożenie i modele (pobrane do $W/models, przypięte rewizją i sha256)
+node research/analyzer-005q-ocr/freeze-manifest.mjs write stage-reports/artifacts/analyzer-005q-ocr/production-freeze-start.json
+#    PP-OCRv6_tiny_det_onnx@2ba1506c → $W/models/det-tiny ; PP-OCRv6_medium_rec_onnx@50c7eaca → $W/models/rec-medium (+ dict.json z inference.yml)
+pip install --target $W/pylib onnxruntime==1.22.0 ; apt-get install tesseract-ocr     # tylko czytniki prawdy, poza repo
+# 1. manifest korpusu i smoke (S5, skala 1 i 2)
+npx vite-node research/analyzer-005q-ocr/fullplan.ts -- --stage manifest
+npx vite-node research/analyzer-005q-ocr/fullplan.ts -- --stage contenders --only S5 --scale 1   # i --scale 2 (tylko smoke)
+# 2. kandydaci B0/B1 na pozostałych arkuszach
+npx vite-node research/analyzer-005q-ocr/fullplan.ts -- --stage contenders --only S1,S2,S3,S4,S6,S7,S8,S9 --scale 1
+# 3. prawda lokalna (R1 medium przez r1_server.py, R2 Tesseract), dwie partie
+OMP_THREAD_LIMIT=1 npx vite-node research/analyzer-005q-ocr/truth.ts -- --only S1,S2,S3,S4
+OMP_THREAD_LIMIT=1 npx vite-node research/analyzer-005q-ocr/truth.ts -- --only S5            # (wcześniej, smoke)
+OMP_THREAD_LIMIT=1 npx vite-node research/analyzer-005q-ocr/truth.ts -- --only S6,S7,S8,S9
+# 4. scoring (prawda spotyka kandydatów tylko tu) i artefakty
+python3 -I research/analyzer-005q-ocr/test_binding.py
+for m in primary sensitivity; do python3 -I research/analyzer-005q-ocr/score.py --work $W --out stage-reports/artifacts/analyzer-005q-ocr --mode $m; done
+python3 -I research/analyzer-005q-ocr/export_artifacts.py --work $W --out stage-reports/artifacts/analyzer-005q-ocr
+# 5. bramki
+node research/analyzer-005q-ocr/freeze-manifest.mjs check stage-reports/artifacts/analyzer-005q-ocr/production-freeze-start.json
+npm install && npm run typecheck && npm test && npm run build && npm run e2e
+```
+
+SHA: baza `0aaa31f5af3e98fa9d9ca51887e5185333de267b`; preregistracja `1343c6b`; addendum A `38664f3`; wyniki + addendum B `6d9bb9a`;
+addendum C + raport `137ba16`; zamknięcie: commit niosący tę sekcję. Gałąź `analyzer/paddleocr-full-plan-binding-research-v1`,
+lustro `claude/new-session-3kzcgh` (te same SHA).
+
+**Token końcowy: `PASS_RESEARCH_BUILDPLAN_ANALYZER_005Q_OCR`.** Zatrzymano na 005Q‑OCR: bez 005R, bez 005S, bez Androida, bez zmian produkcji.
