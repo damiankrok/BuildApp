@@ -88,7 +88,7 @@ def truth_binding(item, dims, lines):
             if not so or same_segment(so, seg):
                 continue
             ro = int(o['value']) / max(1e-6, so['toPx'] - so['fromPx'])
-            if abs(r / ro - 1) <= PROPORTIONAL:
+            if r > 0 and ro > 0 and abs(r / ro - 1) <= PROPORTIONAL:
                 hits.append(seg)
                 break
     hits = _dedupe_segments(hits)
@@ -140,7 +140,7 @@ def scale_cluster(pairs, tol=0.015, min_labels=3, min_lines=2):
     """The largest group of value/px ratios within ±1.5 % of its median, from >= 3 labels on >= 2 distinct lines."""
     if not pairs:
         return None
-    ratios = sorted((p['value'] / max(1e-6, p['px']), p['line']) for p in pairs if p['px'] > 0)
+    ratios = sorted((p['value'] / max(1e-6, p['px']), p['line']) for p in pairs if p['px'] > 0 and p['value'] > 0)
     best = None
     for r0, _ in ratios:
         grp = [(r, ln) for r, ln in ratios if abs(r / r0 - 1) <= tol]

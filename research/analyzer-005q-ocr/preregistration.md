@@ -91,3 +91,12 @@ Changes, fixed now:
    `R1_CONFIDENT`. R1_CONFIDENT is calibrated on the tier-A items (prior transcription) of the same sheets and the
    calibration is reported; value-accuracy claims for B1 rest on PRIMARY only.
 4. Truth-reader temp files are per process (two batches ran in parallel; a shared temp file would race).
+
+## Addendum B (after the first score — a scorer defect, not a threshold)
+
+The first scorer run took, for B0, the FIRST corroborating reading among the incumbent's orientation twins of one ink
+(the frozen reader proposes the same box once per quarter/half turn), while B1 used the preregistered rule "the turn
+with the higher top posterior". Ten B0 "wrong reads" were upside-down twins (`028` for 870, `062` for 790, `002` for
+700). B0 now uses the same max-p rule as B1, and both contenders report `RotationalTwins` (two turns of one ink both
+corroborate with different values) separately. First-run totals are kept in `label-chain-score-*-run1.json` for audit.
+Bindings, truth and thresholds are unchanged. The binding-on-truth table is added as a view of existing fields.

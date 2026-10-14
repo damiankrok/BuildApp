@@ -1,0 +1,196 @@
+{
+ "independentFamilies": 8,
+ "schema": "buildapp.005q-ocr.corpus-manifest",
+ "sheets": [
+  {
+   "b0Reproduced": true,
+   "bytesSha256": "e4e5edc4f68d751d71b9c819a0d7746d639a974a28b069f8b00254aed880f97a",
+   "case": "dom-w-glogownikach",
+   "family": "dom-w-glogownikach",
+   "frameId": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+   "frozenChains": 88,
+   "lineage": "glog-ground-plan",
+   "metricsSha256": "142b6f653a65c6115bb57ff1f4dda58d2ab568138209b327e82d154e586064a5",
+   "orientationOfSheet": "as published (north/up not asserted)",
+   "page": {
+    "height": 853,
+    "width": 853
+   },
+   "role": "FAILURE",
+   "sealedLattices": 107,
+   "sheet": "S1",
+   "smoke": false,
+   "tickedRuns": 111,
+   "variantByteHash": "e4e5edc4f68d751d71b9c819a0d7746d639a974a28b069f8b00254aed880f97a"
+  },
+  {
+   "b0Reproduced": true,
+   "bytesSha256": "7d263097171657056cb05178023d655d81b13f3b37f69fdcc945f537f747c0fe",
+   "case": "dom-w-murajach",
+   "family": "dom-w-murajach",
+   "frameId": "frame-asset-rzut-36e1e5a39d-fb4609c5e2",
+   "frozenChains": 79,
+   "lineage": "muraje-ground-plan",
+   "metricsSha256": "c1a3b8902ded1fabfa33478486486ebfc0df3cc63aad28f94f75cff043b575e3",
+   "orientationOfSheet": "as published (north/up not asserted)",
+   "page": {
+    "height": 853,
+    "width": 853
+   },
+   "role": "FAILURE",
+   "sealedLattices": 64,
+   "sheet": "S2",
+   "smoke": false,
+   "tickedRuns": 84,
+   "variantByteHash": "7d263097171657056cb05178023d655d81b13f3b37f69fdcc945f537f747c0fe"
+  },
+  {
+   "b0Reproduced": true,
+   "bytesSha256": "7ae52c24424b17889ea2d8757dcd95ce93a4462adf8e27041d1e8ec9a298c70c",
+   "case": "dom-w-murajach",
+   "family": "dom-w-murajach",
+   "frameId": "frame-asset-rzut-44d6d1166d-006f85ed53",
+   "frozenChains": 55,
+   "lineage": "muraje-ground-plan",
+   "metricsSha256": "c1a3b8902ded1fabfa33478486486ebfc0df3cc63aad28f94f75cff043b575e3",
+   "orientationOfSheet": "as published (north/up not asserted)",
+   "page": {
+    "height": 853,
+    "width": 853
+   },
+   "role": "FAILURE",
+   "sealedLattices": 39,
+   "sheet": "S3",
+   "smoke": false,
+   "tickedRuns": 57,
+   "variantByteHash": "7ae52c24424b17889ea2d8757dcd95ce93a4462adf8e27041d1e8ec9a298c70c"
+  },
+  {
+   "b0Reproduced": true,
+   "bytesSha256": "6cf4b609e9415f318b6145111cbb1600b9d99e88a91f93a2537c76daf3443a7d",
+   "case": "dom-w-gozdzikowcach",
+   "family": "dom-w-gozdzikowcach",
+   "frameId": "frame-asset-rzut-01d4b6474c-64bd1e0f2f",
+   "frozenChains": 58,
+   "lineage": "gozdz-ground-plan",
+   "metricsSha256": "71c061c591b6c94d59e2cf904bf583bb02f51612e4c2c547df45cfc54e57e5c7",
+   "orientationOfSheet": "as published (north/up not asserted)",
+   "page": {
+    "height": 853,
+    "width": 853
+   },
+   "role": "FAILURE",
+   "sealedLattices": 57,
+   "sheet": "S4",
+   "smoke": false,
+   "tickedRuns": 65,
+   "variantByteHash": "6cf4b609e9415f318b6145111cbb1600b9d99e88a91f93a2537c76daf3443a7d"
+  },
+  {
+   "b0Reproduced": true,
+   "bytesSha256": "abfdb2625576ef47745921944dc64662fd7aed144f4a0e4d67015804dc9176d6",
+   "case": "marcowki",
+   "family": "marcowki",
+   "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+   "frozenChains": 57,
+   "lineage": "marcowki-plan-a",
+   "metricsSha256": "89e13d720ab5f644f750cfecf459a74b9f69c1aeca6cfd93977629e48f413ab4",
+   "orientationOfSheet": "as published (north/up not asserted)",
+   "page": {
+    "height": 853,
+    "width": 853
+   },
+   "role": "CONTROL",
+   "sealedLattices": 59,
+   "sheet": "S5",
+   "smoke": true,
+   "tickedRuns": 62,
+   "variantByteHash": "abfdb2625576ef47745921944dc64662fd7aed144f4a0e4d67015804dc9176d6"
+  },
+  {
+   "b0Reproduced": true,
+   "bytesSha256": "1cd41ad66781948ab0fe9bb5b8720ee542ee4cf0b83a1cedcce1593aa8e731fa",
+   "case": "kosacce-clean",
+   "family": "kosacce",
+   "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+   "frozenChains": 80,
+   "lineage": "kosacce-plan-a",
+   "metricsSha256": "17409bed11af5aecba19c8a3792c37c003db7dbeb87d47cbf197f0eaff724b33",
+   "orientationOfSheet": "as published (north/up not asserted)",
+   "page": {
+    "height": 853,
+    "width": 853
+   },
+   "role": "CONTROL",
+   "sealedLattices": 132,
+   "sheet": "S6",
+   "smoke": false,
+   "tickedRuns": 103,
+   "variantByteHash": "1cd41ad66781948ab0fe9bb5b8720ee542ee4cf0b83a1cedcce1593aa8e731fa"
+  },
+  {
+   "b0Reproduced": true,
+   "bytesSha256": "10e0a72c8322cb94dbe34209a48a4ec0e40e338cf729e1fba6fd585db222d714",
+   "case": "dom-w-zurawkach",
+   "family": "dom-w-zurawkach",
+   "frameId": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+   "frozenChains": 47,
+   "lineage": "zurawkach-plan-a",
+   "metricsSha256": "01ef8fe6d0b118c01b231253d8b8875858f01799f1ad94c69321b044b0988d45",
+   "orientationOfSheet": "as published (north/up not asserted)",
+   "page": {
+    "height": 853,
+    "width": 853
+   },
+   "role": "CONTROL",
+   "sealedLattices": 57,
+   "sheet": "S7",
+   "smoke": false,
+   "tickedRuns": 48,
+   "variantByteHash": "10e0a72c8322cb94dbe34209a48a4ec0e40e338cf729e1fba6fd585db222d714"
+  },
+  {
+   "b0Reproduced": true,
+   "bytesSha256": "79a8fa44d886ab09cc15328bb379b3f4de830684e7b12573f9df9f0d85b1564a",
+   "case": "A06",
+   "family": "A06",
+   "frameId": "frame-asset-rzut-f08001e3c4-8b24c71f3f",
+   "frozenChains": 46,
+   "lineage": "a06-plan-a",
+   "metricsSha256": "745c2a676209b62d87230d497365bd01764ec060ef7949358bb7c8a1bfa977d4",
+   "orientationOfSheet": "as published (north/up not asserted)",
+   "page": {
+    "height": 853,
+    "width": 853
+   },
+   "role": "CONTROL",
+   "sealedLattices": 45,
+   "sheet": "S8",
+   "smoke": false,
+   "tickedRuns": 51,
+   "variantByteHash": "79a8fa44d886ab09cc15328bb379b3f4de830684e7b12573f9df9f0d85b1564a"
+  },
+  {
+   "b0Reproduced": true,
+   "bytesSha256": "54fe7ec5d9cc7878e34c8851568538fb1d6693eac1610ff4c164a85f2b7c2674",
+   "case": "D02",
+   "family": "D02",
+   "frameId": "frame-asset-alex-rzut-parter-4707ebe458-81447f88e6",
+   "frozenChains": 35,
+   "lineage": "d02-ground-plan",
+   "metricsSha256": "769c759a608be4822078d67dc9e04efb2317a4a876f5587b09dab6694a0b46db",
+   "orientationOfSheet": "as published (north/up not asserted)",
+   "page": {
+    "height": 1202,
+    "width": 962
+   },
+   "role": "CONTROL",
+   "sealedLattices": 19,
+   "sheet": "S9",
+   "smoke": false,
+   "tickedRuns": 37,
+   "variantByteHash": "54fe7ec5d9cc7878e34c8851568538fb1d6693eac1610ff4c164a85f2b7c2674"
+  }
+ ],
+ "version": 1
+}

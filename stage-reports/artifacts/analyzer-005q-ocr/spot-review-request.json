@@ -1,0 +1,308 @@
+{
+ "instruction": "open the sheet (variantByteHash) locally, look at pageBox, write the printed value and whether it is a dimension label of the line beside it",
+ "items": [
+  {
+   "axis": "VERTICAL",
+   "case": "dom-w-glogownikach",
+   "localTruth": "346",
+   "pageBox": {
+    "x0": 341,
+    "x1": 353,
+    "y0": 287,
+    "y1": 306
+   },
+   "sheet": "S1",
+   "truthTier": "PRIOR_TRANSCRIPTION",
+   "variantByteHash": "e4e5edc4f68d751d71b9c819a0d7746d639a974a28b069f8b00254aed880f97a",
+   "why": "STATEMENT_VALUE_REWRITTEN"
+  },
+  {
+   "axis": "VERTICAL",
+   "case": "dom-w-glogownikach",
+   "localTruth": "472",
+   "pageBox": {
+    "x0": 162,
+    "x1": 175,
+    "y0": 437,
+    "y1": 456
+   },
+   "sheet": "S1",
+   "truthTier": "PRIOR_TRANSCRIPTION",
+   "variantByteHash": "e4e5edc4f68d751d71b9c819a0d7746d639a974a28b069f8b00254aed880f97a",
+   "why": "STATEMENT_VALUE_REWRITTEN"
+  },
+  {
+   "axis": "VERTICAL",
+   "case": "dom-w-glogownikach",
+   "localTruth": "302",
+   "pageBox": {
+    "x0": 535,
+    "x1": 548,
+    "y0": 437,
+    "y1": 457
+   },
+   "sheet": "S1",
+   "truthTier": "PRIOR_TRANSCRIPTION",
+   "variantByteHash": "e4e5edc4f68d751d71b9c819a0d7746d639a974a28b069f8b00254aed880f97a",
+   "why": "STATEMENT_VALUE_REWRITTEN"
+  },
+  {
+   "axis": "HORIZONTAL",
+   "case": "dom-w-glogownikach",
+   "localTruth": "224",
+   "pageBox": {
+    "x0": 241,
+    "x1": 261,
+    "y0": 465,
+    "y1": 478
+   },
+   "sheet": "S1",
+   "truthTier": "PRIOR_TRANSCRIPTION",
+   "variantByteHash": "e4e5edc4f68d751d71b9c819a0d7746d639a974a28b069f8b00254aed880f97a",
+   "why": "STATEMENT_VALUE_REWRITTEN"
+  },
+  {
+   "axis": "HORIZONTAL",
+   "case": "dom-w-glogownikach",
+   "localTruth": "350",
+   "pageBox": {
+    "x0": 718,
+    "x1": 738,
+    "y0": 465,
+    "y1": 478
+   },
+   "sheet": "S1",
+   "truthTier": "PRIOR_TRANSCRIPTION",
+   "variantByteHash": "e4e5edc4f68d751d71b9c819a0d7746d639a974a28b069f8b00254aed880f97a",
+   "why": "STATEMENT_VALUE_REWRITTEN"
+  },
+  {
+   "axis": "HORIZONTAL",
+   "case": "dom-w-glogownikach",
+   "localTruth": "280",
+   "pageBox": {
+    "x0": 122,
+    "x1": 142,
+    "y0": 465,
+    "y1": 478
+   },
+   "sheet": "S1",
+   "truthTier": "PRIOR_TRANSCRIPTION",
+   "variantByteHash": "e4e5edc4f68d751d71b9c819a0d7746d639a974a28b069f8b00254aed880f97a",
+   "why": "STATEMENT_VALUE_REWRITTEN"
+  },
+  {
+   "axis": "VERTICAL",
+   "case": "dom-w-glogownikach",
+   "localTruth": "870",
+   "pageBox": {
+    "x0": 24,
+    "x1": 37,
+    "y0": 362,
+    "y1": 382
+   },
+   "sheet": "S1",
+   "truthTier": "PRIOR_TRANSCRIPTION",
+   "variantByteHash": "e4e5edc4f68d751d71b9c819a0d7746d639a974a28b069f8b00254aed880f97a",
+   "why": "B1_NEW"
+  },
+  {
+   "axis": "HORIZONTAL",
+   "case": "dom-w-glogownikach",
+   "localTruth": "143",
+   "pageBox": {
+    "x0": 113.5,
+    "x1": 138.9,
+    "y0": 242.7,
+    "y1": 273.2
+   },
+   "sheet": "S1",
+   "truthTier": "LOCAL_DOUBLE_READ",
+   "variantByteHash": "e4e5edc4f68d751d71b9c819a0d7746d639a974a28b069f8b00254aed880f97a",
+   "why": "NEVER_PROPOSED"
+  },
+  {
+   "axis": "VERTICAL",
+   "case": "dom-w-glogownikach",
+   "localTruth": "42",
+   "pageBox": {
+    "x0": 181.2,
+    "x1": 211.8,
+    "y0": 450.5,
+    "y1": 479
+   },
+   "sheet": "S1",
+   "truthTier": "LOCAL_DOUBLE_READ",
+   "variantByteHash": "e4e5edc4f68d751d71b9c819a0d7746d639a974a28b069f8b00254aed880f97a",
+   "why": "NEVER_PROPOSED"
+  },
+  {
+   "axis": "HORIZONTAL",
+   "case": "dom-w-murajach",
+   "localTruth": "115",
+   "pageBox": {
+    "x0": 316,
+    "x1": 339,
+    "y0": 531,
+    "y1": 548
+   },
+   "sheet": "S2",
+   "truthTier": "PRIOR_TRANSCRIPTION",
+   "variantByteHash": "7d263097171657056cb05178023d655d81b13f3b37f69fdcc945f537f747c0fe",
+   "why": "STATEMENT_VALUE_REWRITTEN"
+  },
+  {
+   "axis": "VERTICAL",
+   "case": "dom-w-murajach",
+   "localTruth": "252",
+   "pageBox": {
+    "x0": 222,
+    "x1": 239,
+    "y0": 567,
+    "y1": 593
+   },
+   "sheet": "S2",
+   "truthTier": "PRIOR_TRANSCRIPTION",
+   "variantByteHash": "7d263097171657056cb05178023d655d81b13f3b37f69fdcc945f537f747c0fe",
+   "why": "STATEMENT_VALUE_REWRITTEN"
+  },
+  {
+   "axis": "HORIZONTAL",
+   "case": "dom-w-murajach",
+   "localTruth": "1020",
+   "pageBox": {
+    "x0": 409,
+    "x1": 442,
+    "y0": 787,
+    "y1": 804
+   },
+   "sheet": "S2",
+   "truthTier": "PRIOR_TRANSCRIPTION",
+   "variantByteHash": "7d263097171657056cb05178023d655d81b13f3b37f69fdcc945f537f747c0fe",
+   "why": "STATEMENT_VALUE_REWRITTEN"
+  },
+  {
+   "axis": "HORIZONTAL",
+   "case": "dom-w-murajach",
+   "localTruth": "314",
+   "pageBox": {
+    "x0": 622.1,
+    "x1": 657.9,
+    "y0": 526.1,
+    "y1": 550.9
+   },
+   "sheet": "S2",
+   "truthTier": "LOCAL_DOUBLE_READ",
+   "variantByteHash": "7d263097171657056cb05178023d655d81b13f3b37f69fdcc945f537f747c0fe",
+   "why": "NEVER_PROPOSED"
+  },
+  {
+   "axis": "VERTICAL",
+   "case": "dom-w-murajach",
+   "localTruth": "298",
+   "pageBox": {
+    "x0": 175,
+    "x1": 192,
+    "y0": 289,
+    "y1": 315
+   },
+   "sheet": "S3",
+   "truthTier": "PRIOR_TRANSCRIPTION",
+   "variantByteHash": "7ae52c24424b17889ea2d8757dcd95ce93a4462adf8e27041d1e8ec9a298c70c",
+   "why": "STATEMENT_VALUE_REWRITTEN"
+  },
+  {
+   "axis": "VERTICAL",
+   "case": "dom-w-murajach",
+   "localTruth": "298",
+   "pageBox": {
+    "x0": 616,
+    "x1": 633,
+    "y0": 289,
+    "y1": 315
+   },
+   "sheet": "S3",
+   "truthTier": "PRIOR_TRANSCRIPTION",
+   "variantByteHash": "7ae52c24424b17889ea2d8757dcd95ce93a4462adf8e27041d1e8ec9a298c70c",
+   "why": "STATEMENT_VALUE_REWRITTEN"
+  },
+  {
+   "axis": "HORIZONTAL",
+   "case": "dom-w-murajach",
+   "localTruth": "288",
+   "pageBox": {
+    "x0": 213,
+    "x1": 239,
+    "y0": 527,
+    "y1": 544
+   },
+   "sheet": "S3",
+   "truthTier": "PRIOR_TRANSCRIPTION",
+   "variantByteHash": "7ae52c24424b17889ea2d8757dcd95ce93a4462adf8e27041d1e8ec9a298c70c",
+   "why": "STATEMENT_VALUE_REWRITTEN"
+  },
+  {
+   "axis": "VERTICAL",
+   "case": "dom-w-murajach",
+   "localTruth": "352",
+   "pageBox": {
+    "x0": 616,
+    "x1": 633,
+    "y0": 501,
+    "y1": 528
+   },
+   "sheet": "S3",
+   "truthTier": "PRIOR_TRANSCRIPTION",
+   "variantByteHash": "7ae52c24424b17889ea2d8757dcd95ce93a4462adf8e27041d1e8ec9a298c70c",
+   "why": "STATEMENT_VALUE_REWRITTEN"
+  },
+  {
+   "axis": "HORIZONTAL",
+   "case": "dom-w-murajach",
+   "localTruth": "326",
+   "pageBox": {
+    "x0": 582.4,
+    "x1": 620.6,
+    "y0": 234.4,
+    "y1": 262.6
+   },
+   "sheet": "S3",
+   "truthTier": "LOCAL_DOUBLE_READ",
+   "variantByteHash": "7ae52c24424b17889ea2d8757dcd95ce93a4462adf8e27041d1e8ec9a298c70c",
+   "why": "NEVER_PROPOSED"
+  },
+  {
+   "axis": "HORIZONTAL",
+   "case": "dom-w-gozdzikowcach",
+   "localTruth": "524",
+   "pageBox": {
+    "x0": 528,
+    "x1": 547,
+    "y0": 705,
+    "y1": 718
+   },
+   "sheet": "S4",
+   "truthTier": "PRIOR_TRANSCRIPTION",
+   "variantByteHash": "6cf4b609e9415f318b6145111cbb1600b9d99e88a91f93a2537c76daf3443a7d",
+   "why": "STATEMENT_VALUE_REWRITTEN"
+  },
+  {
+   "axis": "HORIZONTAL",
+   "case": "dom-w-gozdzikowcach",
+   "localTruth": "362",
+   "pageBox": {
+    "x0": 359,
+    "x1": 379,
+    "y0": 257,
+    "y1": 270
+   },
+   "sheet": "S4",
+   "truthTier": "PRIOR_TRANSCRIPTION",
+   "variantByteHash": "6cf4b609e9415f318b6145111cbb1600b9d99e88a91f93a2537c76daf3443a7d",
+   "why": "STATEMENT_VALUE_REWRITTEN"
+  }
+ ],
+ "schema": "buildapp.005q-ocr.spot-review-request",
+ "status": "NOT_RUN_HUMAN \u2014 no human reviewer was available in this session; no image was shown to any remote model",
+ "version": 1
+}

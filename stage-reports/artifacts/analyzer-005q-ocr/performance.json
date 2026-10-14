@@ -1,0 +1,165 @@
+{
+ "androidOffline": "ESTIMATED ONLY, not tested: +1.8 MB model in the APK beside the 4.5 MB recogniser; the same WASM runtime. On this x86 container B1 costs ~2 s detection + ~20\u201330 s recognition per 853 px plan sheet (all boxes, both turns); a phone is typically 2\u20134x slower. Reading only detector boxes that lie on a frozen dimension line would cut recognition several-fold \u2014 not measured.",
+ "detector": {
+  "bytes": 1780590,
+  "firstSheetIncludesSessionCreate": true,
+  "model": "PP-OCRv6_tiny_det",
+  "msPerSheet": {
+   "max": 2755,
+   "median": 1813,
+   "min": 1613
+  },
+  "sha256": "193bab7a04fca699a6c82e6abb5b81bdb28177f0abd4062552b04908dafb19f8"
+ },
+ "environment": "x86_64 container, 4 vCPU, Node 22.22.2, onnxruntime-web 1.30.0 WASM single thread (the shipped runtime); the S1\u2013S4,S6\u2013S9 batch overlapped the truth readers on S5 (CPU contention); S5 ran alone",
+ "peakRssMb": 523,
+ "perSheet": [
+  {
+   "b0": 107,
+   "b0Reproduced": true,
+   "b1Boxes": 73,
+   "b1Crops": 146,
+   "detectorMs": 2755,
+   "detectorTiles": 4,
+   "page": "853x853",
+   "perCropMs": 193.6,
+   "readNumbersMs": 963,
+   "recogniseMs": 28272,
+   "rssMb": 421,
+   "sheet": "S1"
+  },
+  {
+   "b0": 64,
+   "b0Reproduced": true,
+   "b1Boxes": 41,
+   "b1Crops": 82,
+   "detectorMs": 1813,
+   "detectorTiles": 4,
+   "page": "853x853",
+   "perCropMs": 213.9,
+   "readNumbersMs": 575,
+   "recogniseMs": 17538,
+   "rssMb": 446,
+   "sheet": "S2"
+  },
+  {
+   "b0": 39,
+   "b0Reproduced": true,
+   "b1Boxes": 29,
+   "b1Crops": 58,
+   "detectorMs": 1622,
+   "detectorTiles": 4,
+   "page": "853x853",
+   "perCropMs": 200.7,
+   "readNumbersMs": 441,
+   "recogniseMs": 11642,
+   "rssMb": 463,
+   "sheet": "S3"
+  },
+  {
+   "b0": 57,
+   "b0Reproduced": true,
+   "b1Boxes": 63,
+   "b1Crops": 126,
+   "detectorMs": 1796,
+   "detectorTiles": 4,
+   "page": "853x853",
+   "perCropMs": 194.9,
+   "readNumbersMs": 427,
+   "recogniseMs": 24551,
+   "rssMb": 487,
+   "sheet": "S4"
+  },
+  {
+   "b0": 132,
+   "b0Reproduced": true,
+   "b1Boxes": 80,
+   "b1Crops": 160,
+   "detectorMs": 1613,
+   "detectorTiles": 4,
+   "page": "853x853",
+   "perCropMs": 191.1,
+   "readNumbersMs": 705,
+   "recogniseMs": 30570,
+   "rssMb": 513,
+   "sheet": "S6"
+  },
+  {
+   "b0": 57,
+   "b0Reproduced": true,
+   "b1Boxes": 61,
+   "b1Crops": 122,
+   "detectorMs": 1900,
+   "detectorTiles": 4,
+   "page": "853x853",
+   "perCropMs": 185.2,
+   "readNumbersMs": 393,
+   "recogniseMs": 22595,
+   "rssMb": 513,
+   "sheet": "S7"
+  },
+  {
+   "b0": 45,
+   "b0Reproduced": true,
+   "b1Boxes": 48,
+   "b1Crops": 96,
+   "detectorMs": 1741,
+   "detectorTiles": 4,
+   "page": "853x853",
+   "perCropMs": 196.6,
+   "readNumbersMs": 424,
+   "recogniseMs": 18877,
+   "rssMb": 513,
+   "sheet": "S8"
+  },
+  {
+   "b0": 19,
+   "b0Reproduced": true,
+   "b1Boxes": 29,
+   "b1Crops": 58,
+   "detectorMs": 2198,
+   "detectorTiles": 6,
+   "page": "962x1202",
+   "perCropMs": 172.6,
+   "readNumbersMs": 547,
+   "recogniseMs": 10011,
+   "rssMb": 523,
+   "sheet": "S9"
+  },
+  {
+   "b0": 59,
+   "b0Reproduced": true,
+   "b1Boxes": 57,
+   "b1Crops": 114,
+   "detectorMs": 2066,
+   "detectorTiles": 4,
+   "page": "853x853",
+   "perCropMs": 189.8,
+   "readNumbersMs": 596,
+   "recogniseMs": 21637,
+   "rssMb": 440,
+   "sheet": "S5"
+  }
+ ],
+ "recogniserOnB1Boxes": {
+  "cropsPerSheet": [
+   146,
+   82,
+   58,
+   126,
+   160,
+   122,
+   96,
+   58,
+   114
+  ],
+  "msPerCrop4Variants": {
+   "max": 213.9,
+   "median": 193.6,
+   "min": 172.6
+  },
+  "note": "both turns of every box are read (2 crops per box)"
+ },
+ "schema": "buildapp.005q-ocr.performance",
+ "version": 1
+}

@@ -1,0 +1,327 @@
+{
+ "falseDetectionCounts": {
+  "S1": {
+   "AMBIGUOUS_READ": 6
+  },
+  "S2": {
+   "AMBIGUOUS_READ": 4,
+   "NOT_A_DIMENSION:OFF_LINE": 2
+  },
+  "S3": {
+   "AMBIGUOUS_READ": 7,
+   "NOT_A_DIMENSION:OFF_LINE": 1
+  },
+  "S4": {
+   "AMBIGUOUS_READ": 5
+  },
+  "S5": {
+   "AMBIGUOUS_READ": 4,
+   "NOT_A_DIMENSION:OFF_LINE": 1
+  },
+  "S6": {
+   "AMBIGUOUS_READ": 11,
+   "NOT_A_DIMENSION:OFF_LINE": 1
+  },
+  "S7": {
+   "AMBIGUOUS_READ": 9,
+   "NOT_A_DIMENSION:OFF_LINE": 1
+  },
+  "S8": {
+   "AMBIGUOUS_READ": 7,
+   "NOT_A_DIMENSION:OFF_LINE": 1
+  },
+  "S9": {}
+ },
+ "records": [
+  {
+   "axis": "HORIZONTAL",
+   "b0Binding": "CORRECT",
+   "b0ClassicText": "115",
+   "b0ClassicToken": true,
+   "b0Detected": true,
+   "b0Loss": "NONE",
+   "b0RotationalTwin": false,
+   "b0Statement": {
+    "origin": "CHAIN_CORRECTED",
+    "tokenText": "115",
+    "value": 415
+   },
+   "b0Value": "415",
+   "b0ValueCorrect": true,
+   "b1Detected": true,
+   "b1Merged": false,
+   "b1RotationalTwin": false,
+   "b1Value": "415",
+   "b1ValueCorrect": true,
+   "b2": "CORRECT",
+   "b2Contested": false,
+   "b2Sources": [
+    "B0",
+    "B1"
+   ],
+   "bindingTruth": "TRUTH",
+   "box": {
+    "x0": 423,
+    "x1": 443,
+    "y0": 30,
+    "y1": 42
+   },
+   "case": "marcowki",
+   "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+   "kind": "GROUNDED: read right, bound right, statement = ink",
+   "origins": [
+    "B1",
+    "CLASSIC",
+    "PRIOR"
+   ],
+   "sheet": "S5",
+   "truth": "PRIOR_TRANSCRIPTION",
+   "value": "415",
+   "variantByteHash": "abfdb2625576ef47745921944dc64662fd7aed144f4a0e4d67015804dc9176d6"
+  },
+  {
+   "axis": "HORIZONTAL",
+   "b0Binding": "NO_TRUTH",
+   "b0ClassicText": "1385",
+   "b0ClassicToken": true,
+   "b0Detected": true,
+   "b0Loss": "STATEMENT_VALUE_REWRITTEN",
+   "b0RotationalTwin": false,
+   "b0Statement": {
+    "origin": "CHAIN_CORRECTED",
+    "tokenText": "1385",
+    "value": 1382
+   },
+   "b0Value": "1385",
+   "b0ValueCorrect": true,
+   "b1Detected": true,
+   "b1Merged": false,
+   "b1RotationalTwin": false,
+   "b1Value": "1385",
+   "b1ValueCorrect": true,
+   "b2": "BOUND_NO_TRUTH",
+   "b2Contested": false,
+   "b2Sources": [
+    "B0",
+    "B1"
+   ],
+   "bindingTruth": "NO_LINE_TRUTH",
+   "box": {
+    "x0": 355,
+    "x1": 381,
+    "y0": 730,
+    "y1": 742
+   },
+   "case": "dom-w-gozdzikowcach",
+   "frameId": "frame-asset-rzut-01d4b6474c-64bd1e0f2f",
+   "kind": "GROUNDED_THEN_REWRITTEN: every reader right, chain correction replaced the printed value (gozdzikowcach 1385)",
+   "origins": [
+    "B1",
+    "CLASSIC",
+    "PRIOR"
+   ],
+   "sheet": "S4",
+   "truth": "PRIOR_TRANSCRIPTION",
+   "value": "1385",
+   "variantByteHash": "6cf4b609e9415f318b6145111cbb1600b9d99e88a91f93a2537c76daf3443a7d"
+  },
+  {
+   "axis": "VERTICAL",
+   "b0Binding": "NO_TRUTH",
+   "b0ClassicText": "019",
+   "b0ClassicToken": true,
+   "b0Detected": true,
+   "b0Loss": "NONE",
+   "b0RotationalTwin": true,
+   "b0Statement": {
+    "origin": "CHAIN_CORRECTED",
+    "tokenText": "810",
+    "value": 870
+   },
+   "b0Value": "870",
+   "b0ValueCorrect": true,
+   "b1Detected": true,
+   "b1Merged": false,
+   "b1RotationalTwin": false,
+   "b1Value": "870",
+   "b1ValueCorrect": true,
+   "b2": "BOUND_NO_TRUTH",
+   "b2Contested": true,
+   "b2Sources": [
+    "B0",
+    "B1"
+   ],
+   "bindingTruth": "NO_LINE_TRUTH",
+   "box": {
+    "x0": 24,
+    "x1": 37,
+    "y0": 362,
+    "y1": 382
+   },
+   "case": "dom-w-glogownikach",
+   "frameId": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+   "kind": "AMBIGUOUS_ORIENTATION: two turns of one ink both corroborate (glogownikach 870 / 028)",
+   "origins": [
+    "B1",
+    "CLASSIC",
+    "PRIOR"
+   ],
+   "sheet": "S1",
+   "truth": "PRIOR_TRANSCRIPTION",
+   "value": "870",
+   "variantByteHash": "e4e5edc4f68d751d71b9c819a0d7746d639a974a28b069f8b00254aed880f97a"
+  },
+  {
+   "axis": "HORIZONTAL",
+   "b0Binding": "NOT_BOUND",
+   "b0ClassicText": null,
+   "b0ClassicToken": false,
+   "b0Detected": false,
+   "b0Loss": "NEVER_PROPOSED",
+   "b0RotationalTwin": false,
+   "b0Statement": null,
+   "b0Value": null,
+   "b0ValueCorrect": null,
+   "b1Detected": true,
+   "b1Merged": false,
+   "b1OrientationCorrect": true,
+   "b1RotationalTwin": false,
+   "b1Value": "326",
+   "b1ValueCorrect": true,
+   "b2": "BOUND_NO_TRUTH",
+   "b2Contested": false,
+   "b2Sources": [
+    "B1"
+   ],
+   "bindingTruth": "NO_LINE_TRUTH",
+   "box": {
+    "x0": 582.44,
+    "x1": 620.56,
+    "y0": 234.44,
+    "y1": 262.56
+   },
+   "case": "dom-w-murajach",
+   "frameId": "frame-asset-rzut-44d6d1166d-006f85ed53",
+   "kind": "MISSED_BY_INCUMBENT_FOUND_BY_B1",
+   "origins": [
+    "B1"
+   ],
+   "sheet": "S3",
+   "truth": "LOCAL_DOUBLE_READ",
+   "value": "326",
+   "variantByteHash": "7ae52c24424b17889ea2d8757dcd95ce93a4462adf8e27041d1e8ec9a298c70c"
+  },
+  {
+   "axis": "HORIZONTAL",
+   "b0Binding": "NOT_BOUND",
+   "b0ClassicText": null,
+   "b0ClassicToken": false,
+   "b0Detected": false,
+   "b0Loss": "NEVER_PROPOSED",
+   "b0RotationalTwin": false,
+   "b0Statement": null,
+   "b0Value": null,
+   "b0ValueCorrect": null,
+   "b1Detected": false,
+   "b1Merged": false,
+   "b1RotationalTwin": false,
+   "b1Value": null,
+   "b1ValueCorrect": null,
+   "b2": "NO_CANDIDATE",
+   "bindingTruth": "NO_LINE_TRUTH",
+   "box": {
+    "x0": 113.5,
+    "x1": 138.916667,
+    "y0": 242.7,
+    "y1": 273.25
+   },
+   "case": "dom-w-glogownikach",
+   "frameId": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+   "kind": "MISSED_BY_BOTH: number in a line window only",
+   "origins": [
+    "LINE_WINDOW"
+   ],
+   "sheet": "S1",
+   "truth": "LOCAL_DOUBLE_READ",
+   "value": "143",
+   "variantByteHash": "e4e5edc4f68d751d71b9c819a0d7746d639a974a28b069f8b00254aed880f97a"
+  },
+  {
+   "axis": "HORIZONTAL",
+   "b0Binding": "NOT_BOUND",
+   "b0ClassicText": "110",
+   "b0ClassicToken": true,
+   "b0Detected": true,
+   "b0Loss": "READ_RIGHT_NOT_BOUND",
+   "b0RotationalTwin": false,
+   "b0Statement": null,
+   "b0Value": "110",
+   "b0ValueCorrect": true,
+   "b1Detected": true,
+   "b1Merged": false,
+   "b1RotationalTwin": false,
+   "b1Value": null,
+   "b1ValueCorrect": null,
+   "b2": "SEGMENT_TAKEN",
+   "b2Contested": false,
+   "b2Sources": [
+    "B0"
+   ],
+   "bindingTruth": "NO_LINE_TRUTH",
+   "box": {
+    "x0": 67,
+    "x1": 85,
+    "y0": 409,
+    "y1": 419
+   },
+   "case": "dom-w-murajach",
+   "frameId": "frame-asset-rzut-36e1e5a39d-fb4609c5e2",
+   "kind": "READ_RIGHT_NOT_BOUND: the incumbent read it and never bound it",
+   "origins": [
+    "B1",
+    "CLASSIC"
+   ],
+   "sheet": "S2",
+   "truth": "LOCAL_DOUBLE_READ",
+   "value": "110",
+   "variantByteHash": "7d263097171657056cb05178023d655d81b13f3b37f69fdcc945f537f747c0fe"
+  },
+  {
+   "axis": "HORIZONTAL",
+   "b0Binding": "NOT_BOUND",
+   "b0ClassicText": null,
+   "b0ClassicToken": false,
+   "b0Detected": false,
+   "b0Loss": "NEVER_PROPOSED",
+   "b0RotationalTwin": false,
+   "b0Statement": null,
+   "b0Value": null,
+   "b0ValueCorrect": null,
+   "b1Detected": true,
+   "b1Merged": false,
+   "b1RotationalTwin": false,
+   "b1Value": "288",
+   "b1ValueCorrect": false,
+   "b2": "NO_CANDIDATE",
+   "bindingTruth": "NO_LINE_TRUTH",
+   "box": {
+    "x0": 232,
+    "x1": 253,
+    "y0": 520.4,
+    "y1": 546.25
+   },
+   "case": "dom-w-murajach",
+   "frameId": "frame-asset-rzut-44d6d1166d-006f85ed53",
+   "kind": "B1_WRONG_TURN",
+   "origins": [
+    "LINE_WINDOW"
+   ],
+   "sheet": "S3",
+   "truth": "R1_CONFIDENT",
+   "value": "88",
+   "variantByteHash": "7ae52c24424b17889ea2d8757dcd95ce93a4462adf8e27041d1e8ec9a298c70c"
+  }
+ ],
+ "schema": "buildapp.005q-ocr.observation-records",
+ "version": 1
+}

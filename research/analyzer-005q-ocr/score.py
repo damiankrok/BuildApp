@@ -124,6 +124,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--work', required=True)
     ap.add_argument('--out', required=True)
+    ap.add_argument('--only', default='')
     ap.add_argument('--mode', choices=['primary', 'sensitivity'], default='primary')
     a = ap.parse_args()
     corpus = load(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'corpus.json'))['sheets']
@@ -133,6 +134,8 @@ def main():
     conf = defaultdict(Counter)
     for s in corpus:
         sid = s['id']
+        if a.only and sid not in a.only.split(','):
+            continue
         con = load(f"{a.work}/contenders/{sid}.json")
         tru = load(f"{a.work}/truth/{sid}.json")
         man = load(f"{a.work}/manifest/{sid}.json")
@@ -183,7 +186,7 @@ def main():
         for bx in con['b1']:
             best = max(bx['reads'], key=lambda r: r['p']) if bx['reads'] else None
             if best:
-                b1.append({'box': {k: bx[k] for k in ('x0', 'x1', 'y0', 'y1')}, 'raw': bx['raw'], 'axis': axis_of(best['orientation']), 'orientation': best['orientation'], 'top': best['top'], 'corr': corroborating(best), 'rival': [r for r in bx['reads'] if r is not best]})
+                b1.append({'box': {k: bx[k] for k in ('x0', 'x1', 'y0', 'y1')}, 'raw': bx['raw'], 'axis': axis_of(best['orientation']), 'orientation': best['orientation'], 'top': best['top'], 'p': best['p'], 'corr': corroborating(best), 'rival': [r for r in bx['reads'] if r is not best]})
         classic = [t for t in con['classic'] if t['glyphs'] >= 2]
         # --- per truth dimension label
         rows = []
@@ -199,7 +202,10 @@ def main():
             r['b0ClassicToken'] = bool(mc)
             ext = [l['external'] for l in m0 if l.get('external')]
             corr0 = [e for e in ext if corroborating({'p': e['p'], 'stable': e['stable'], 'greedy': e['greedy'], 'top': e['top']})]
+            # addendum B: the same rule as B1 — of the orientation twins of one ink, the reading with the higher top p
+            corr0.sort(key=lambda e: -e['p'])
             r['b0Value'] = corr0[0]['top'] if corr0 else None
+            r['b0RotationalTwin'] = len({e['top'] for e in corr0}) > 1
             r['b0ValueCorrect'] = r['b0Value'] == i['value'] if r['b0Value'] is not None else None
             r['b0ClassicText'] = mc[0]['text'] if mc else None
             if mb:
@@ -211,8 +217,9 @@ def main():
                 r['b0Binding'] = 'NOT_BOUND'
             # B1
             r['b1Detected'] = bool(m1)
-            corr1 = [x for x in m1 if x['corr']]
+            corr1 = sorted([x for x in m1 if x['corr']], key=lambda x: -x['p'])
             r['b1Value'] = corr1[0]['top'] if corr1 else None
+            r['b1RotationalTwin'] = any(corroborating(rv) and rv['top'] != x['top'] for x in corr1 for rv in x['rival'])
             r['b1ValueCorrect'] = r['b1Value'] == i['value'] if r['b1Value'] is not None else None
             r['b1Merged'] = bool(m1) and not corr1 and any(len(x['top']) > len(i['value']) for x in m1)
             if corr1 and i.get('orientation') and i['truth'] == 'LOCAL_DOUBLE_READ':
@@ -332,6 +339,10 @@ def main():
             'b1ValueCorrect': sum(1 for r in rows if r['b1ValueCorrect']), 'b1ValueWrong': sum(1 for r in rows if r['b1ValueCorrect'] is False),
             'b1NewCorrectValues': sum(1 for r in rows if r['b1ValueCorrect'] and not r['b0Detected']),
             'b1OrientationCorrect': sum(1 for r in rows if r.get('b1OrientationCorrect') is True), 'b1OrientationWrong': sum(1 for r in rows if r.get('b1OrientationCorrect') is False),
+            'b0RotationalTwins': sum(1 for r in rows if r.get('b0RotationalTwin')), 'b1RotationalTwins': sum(1 for r in rows if r.get('b1RotationalTwin')),
+            'b0StatementRewrittenAlthoughTokenWasRight': sum(1 for r in rows if r['b0Loss'] == 'STATEMENT_VALUE_REWRITTEN' and r['b0Statement']['tokenText'] == r['value']),
+            'b0StatementRewrittenByOrigin': dict(Counter(r['b0Statement']['origin'] for r in rows if r['b0Loss'] == 'STATEMENT_VALUE_REWRITTEN')),
+            'bindingOnTruth': {'b0': dict(Counter(r['b0Binding'] for r in rows if r['bindingTruth'] == 'TRUTH')), 'b2': dict(Counter(r.get('b2') for r in rows if r['bindingTruth'] == 'TRUTH'))},
             'b0Loss': dict(Counter(r['b0Loss'] for r in rows)),
             'b0Binding': dict(Counter(r['b0Binding'] for r in rows)), 'b2': dict(Counter(r.get('b2') for r in rows)),
             'b2FalseBindings': len(false_b2), 'b2FalseBindingClasses': dict(Counter(f['truthClass'] for f in false_b2)),
@@ -347,9 +358,9 @@ def main():
         sheets_out.append(summ)
         for r in rows:
             records.append({'sheet': sid, 'case': s['case'], 'variantByteHash': man['variantByteHash'], 'frameId': s['frameId'], **r})
-        for k in ('dimensionLabels', 'b0Detected', 'b1Detected', 'b1OnlyDetected', 'b0OnlyDetected', 'b0ValueCorrect', 'b0ValueWrong', 'b1ValueCorrect', 'b1ValueWrong', 'b1NewCorrectValues', 'b2FalseBindings'):
+        for k in ('b0RotationalTwins', 'b1RotationalTwins', 'b0StatementRewrittenAlthoughTokenWasRight', 'dimensionLabels', 'b0Detected', 'b1Detected', 'b1OnlyDetected', 'b0OnlyDetected', 'b0ValueCorrect', 'b0ValueWrong', 'b1ValueCorrect', 'b1ValueWrong', 'b1NewCorrectValues', 'b2FalseBindings'):
             agg[(('SMOKE' if s.get('smoke') else 'MAIN'), k)] += summ[k]
-        for k in ('b0Loss', 'b0Binding', 'b2', 'b1FalseDetections', 'bindingTruth', 'truthTier', 'truthQualityTierAvsLocal', 'r1ConfidentVsTierA', 'itemClasses'):
+        for k in ('b0StatementRewrittenByOrigin', 'b0Loss', 'b0Binding', 'b2', 'b1FalseDetections', 'bindingTruth', 'truthTier', 'truthQualityTierAvsLocal', 'r1ConfidentVsTierA', 'itemClasses'):
             for kk, vv in summ[k].items():
                 conf[(('SMOKE' if s.get('smoke') else 'MAIN'), k)][str(kk)] += vv
     os.makedirs(a.out, exist_ok=True)
