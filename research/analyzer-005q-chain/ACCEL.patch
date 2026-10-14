@@ -1,0 +1,40 @@
+--- a/packages/source-metrics/src/extract.ts
++++ b/packages/source-metrics/src/extract.ts
+@@ -21,6 +21,8 @@
+  * driven by synthetic drawings in a test, which is the only way to know that
+  * what comes out is a reading of the page rather than a memory of one project.
+  */
++import * as accelFs from 'node:fs'
++import * as accelCrypto from 'node:crypto'
+ import { NO_CHECKPOINT, round6, stableId } from '@buildapp/source-common'
+ import type { Checkpoint } from '@buildapp/source-common'
+ import type { PixelPoint, PixelRect } from '@buildapp/source-common'
+@@ -647,7 +649,7 @@
+     // reconstruction can pick the one its own evidence — the plan gap, the
+     // elevation — agrees with.
+     if (plane === 'PLAN_XZ') {
+-      for (const ring of readOpeningCallouts(raster, { frameId: frame.id, checkpoint })) {
++      for (const ring of accelCallouts005qChain(frame.variantByteHash, frame.id, () => readOpeningCallouts(raster, { frameId: frame.id, checkpoint }))) {
+         if (ring.widthCandidates.length === 0 || ring.heightCandidates.length === 0) continue
+         const centre: PixelPoint = { x: ring.circle.cx, y: ring.circle.cy }
+         const near = nearest(observations, ['OPENING', 'WINDOW', 'DOOR', 'OPENING_INTERVAL'], centre)
+@@ -1210,3 +1212,19 @@
+ 
+ /** 005H: the external reading as recorded — its key is the lattice's id, so it is not repeated. */
+ const externalRecord = (x: ExternalReading): NonNullable<NumericLatticeRecord['external']> => ({ engine: x.engine, modelSha256: x.modelSha256, runtime: x.runtime, topK: x.topK.map((c) => ({ text: c.text, p: c.p })), greedy: { text: x.greedy.text, meanP: x.greedy.meanP }, stable: x.stable, variants: x.variants.map((v) => ({ variant: v.variant, top: v.top, p: v.p })) })
++
++// 005Q-CHAIN research harness acceleration (ACCEL.patch; never production). The ring-callout reader is a pure function of
++// the decoded raster and the frame id (its checkpoint only reports progress) and costs ~90 % of the extraction; no
++// challenger touches it. With ACCEL_005Q_CHAIN_DIR set, its readings are memoised on disk per (variant bytes, frame).
++// The C0-ACCEL control must equal plain C0 byte for byte on every row, or the acceleration is not used.
++function accelCallouts005qChain<T>(variantByteHash: string, frameId: string, read: () => T): T {
++  const dir = typeof process !== 'undefined' ? process.env.ACCEL_005Q_CHAIN_DIR : undefined
++  if (!dir) return read()
++  const file = `${dir}/${variantByteHash}-${accelCrypto.createHash('sha256').update(frameId).digest('hex').slice(0, 24)}.json`
++  if (accelFs.existsSync(file)) return JSON.parse(accelFs.readFileSync(file, 'utf8')) as T
++  const out = read()
++  accelFs.mkdirSync(dir, { recursive: true })
++  accelFs.writeFileSync(`${file}.${process.pid}.tmp`, JSON.stringify(out))
++  accelFs.renameSync(`${file}.${process.pid}.tmp`, file)
++  return out
++}
