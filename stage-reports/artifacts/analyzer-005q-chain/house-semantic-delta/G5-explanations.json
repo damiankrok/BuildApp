@@ -1,0 +1,3415 @@
+{
+ "schema": "buildapp.005q-chain.g5-explanations",
+ "variants": {
+  "C1": [
+   {
+    "case": "dom-pod-jarzabem",
+    "firstDifferingDecision": {
+     "now": {
+      "chosen": "copy dimensioned 19f8c2fa6e, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 181.8 m\u00b2 (-16.1% of 216.76), NEAR, corroborated by ISOTROPY",
+      "outcome": "RESOLVED",
+      "reading1": "copy dimensioned 19f8c2fa6e, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 181.8 m\u00b2 (-16.1% of 216.76), NEAR, corroborated by ISOTROPY"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "chosen": "copy area_table 4813950087, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 191.0 m\u00b2 (-11.9% of 216.76), NEAR, corroborated by ISOTROPY",
+      "outcome": "RESOLVED",
+      "reading1": "copy area_table 4813950087, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 191.0 m\u00b2 (-11.9% of 216.76), NEAR, corroborated by ISOTROPY"
+     }
+    },
+    "mechanism": "REGISTRATION_LOST",
+    "now": [
+     "COMPLETED",
+     null,
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 2,
+       "READ": 7
+      },
+      "confidence": 0.845393,
+      "mppX": 0.028009,
+      "mppY": 0.028035
+     },
+     {
+      "anchors": {
+       "READ": 4
+      },
+      "confidence": 0.777774,
+      "mppX": 0.042197,
+      "mppY": 0.043568
+     }
+    ],
+    "scaleCmPerPx": [
+     2.8022,
+     4.28825
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-cafd34a77a-4813950087",
+     "frame-asset-gotowy-projekt-dom-pod-jarzabem-15-g-rzut-19f8c2fa6e"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-morelach",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "KEPT",
+      "reading1": "copy dimensioned 027bb2e82d, chain extent, registered scale, largest-first tiling, sides as gridded: 3 bodies, 111.9 m\u00b2 (-2.3% of 114.53), AGREES"
+     },
+     "stage": "METRIC_CHALLENGE",
+     "was": {
+      "outcome": "KEPT",
+      "reading1": "copy dimensioned 027bb2e82d, chain extent, registered scale, largest-first tiling, sides as gridded: 3 bodies, 112.0 m\u00b2 (-2.2% of 114.53), AGREES"
+     }
+    },
+    "mechanism": "REGISTRATION_MOVED",
+    "now": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 4,
+       "READ": 2
+      },
+      "confidence": 0.878802,
+      "mppX": 0.01996,
+      "mppY": 0.02027
+     },
+     {
+      "anchors": {
+       "READ": 6
+      },
+      "confidence": 0.848789,
+      "mppX": 0.019957,
+      "mppY": 0.020028
+     }
+    ],
+    "scaleCmPerPx": [
+     2.0115,
+     1.99925
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+     "frame-asset-rzut-63ae7d4e86-027bb2e82d"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ]
+   },
+   {
+    "case": "rarytasy-g2e",
+    "firstDifferingDecision": {
+     "now": {
+      "chosen": "copy dimensioned 59a406b738, chain extent, scale 2.755764 cm/px, largest-first tiling, sides as gridded: 2 bodies, 184.6 m\u00b2 (-2.7% of 189.77), AGREES, corroborated by ISOTROPY",
+      "chosenRefuted": 0.237551,
+      "outcome": "REPLACED",
+      "reading1": "copy dimensioned 59a406b738, chain extent, scale 2.755764 cm/px, largest-first tiling, sides as gridded: 2 bodies, 184.6 m\u00b2 (-2.7% of 189.77), AGREES, corroborated by ISOTROPY",
+      "registrationRefuted": 0.639985,
+      "sourceConflict": "AS_READ_REFUTATION,OUTER_TOTALS"
+     },
+     "stage": "METRIC_CHALLENGE",
+     "was": null
+    },
+    "mechanism": "REGISTRATION_MOVED",
+    "now": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 9,
+       "READ": 1
+      },
+      "confidence": 0.861106,
+      "mppX": 0.027579,
+      "mppY": 0.02752
+     },
+     {
+      "anchors": {
+       "READ": 4
+      },
+      "confidence": 0.797835,
+      "mppX": 0.040127,
+      "mppY": 0.027516
+     }
+    ],
+    "scaleCmPerPx": [
+     2.75495,
+     2.7558
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-e8520c3ad3-59a406b738",
+     "frame-asset-rzut-e8520c3ad3-59a406b738"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ]
+   },
+   {
+    "case": "rarytasy-eoze",
+    "firstDifferingDecision": {
+     "now": null,
+     "stage": "METRIC_CHALLENGE",
+     "was": {
+      "chosen": "copy dimensioned e3a3d0015d, chain extent, scale 2.222222 cm/px, largest-first tiling, sides as gridded: 1 body, 124.0 m\u00b2 (+1.6% of 122.07), AGREES, corroborated by ISOTROPY+CROSS_COPY",
+      "chosenRefuted": 0.114611,
+      "outcome": "REPLACED",
+      "reading1": "copy dimensioned e3a3d0015d, chain extent, scale 2.222222 cm/px, largest-first tiling, sides as gridded: 1 body, 124.0 m\u00b2 (+1.6% of 122.07), AGREES, corroborated by ISOTROPY+CROSS_COPY",
+      "registrationRefuted": 0.334843,
+      "sourceConflict": "OUTER_TOTALS"
+     }
+    },
+    "mechanism": "REGISTRATION_MOVED",
+    "now": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 5,
+       "READ": 2
+      },
+      "confidence": 0.875562,
+      "mppX": 0.022237,
+      "mppY": 0.020855
+     },
+     {
+      "anchors": {
+       "READ": 4
+      },
+      "confidence": 0.786505,
+      "mppX": 0.022236,
+      "mppY": 0.022222
+     }
+    ],
+    "scaleCmPerPx": [
+     2.2222,
+     2.2229
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+     "frame-asset-rzut-b747b42ad2-e3a3d0015d"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ]
+   },
+   {
+    "case": "alt-marcowki",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy unknown c68728b8e4, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 35.2 m\u00b2 (-73.1% of 131.16), WRONG"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy unknown c68728b8e4, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 35.2 m\u00b2 (-73.2% of 131.16), WRONG"
+     }
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": null,
+      "confidence": null,
+      "mppX": null,
+      "mppY": null
+     },
+     {
+      "anchors": null,
+      "confidence": null,
+      "mppX": null,
+      "mppY": null
+     }
+    ],
+    "scaleCmPerPx": [
+     null,
+     null
+    ],
+    "selectedFrame": [
+     "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+     "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02"
+    ],
+    "was": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-azaliach",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned 19006df9bc, wall-witness extent, registered scale, largest-first tiling, sides as gridded: 0 bodies, 0.0 m\u00b2, UNKNOWN, NO_BODY+NO_WORLD_FRAME"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy area_table 79ba9b7966, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 69.3 m\u00b2 (-0.5% of 69.69), UNKNOWN (the figure is spent)"
+     }
+    },
+    "mechanism": "REGISTRATION_MOVED",
+    "now": [
+     "FAILED",
+     "PLAN_NO_BUILT_REGIONS/PLAN_DECOMPOSITION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 1,
+       "READ": 2,
+       "READ_DEPENDS_ON_SCALE": 1
+      },
+      "confidence": 0.787139,
+      "mppX": 0.018615,
+      "mppY": 0.01864
+     },
+     {
+      "anchors": {
+       "READ": 2
+      },
+      "confidence": 0.493128,
+      "mppX": 0.018615,
+      "mppY": 0.018615
+     }
+    ],
+    "scaleCmPerPx": [
+     1.86275,
+     1.8615
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-86bef468f3-19006df9bc",
+     "frame-asset-rzut-86bef468f3-19006df9bc"
+    ],
+    "was": [
+     "FAILED",
+     "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-dabecjach",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy area_table 0fd2019dc2, chain extent, registered scale, walled-first tiling, sides as gridded: 3 bodies, 126.4 m\u00b2 (-25.1% of 168.76), WRONG, corroborated by ISOTROPY+CROSS_COPY"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned c936d50299, chain extent, registered scale, largest-first tiling, outer faces: 1 body, 137.2 m\u00b2 (-18.7% of 168.76), UNKNOWN (the figure is spent)"
+     }
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "FAILED",
+     "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 1,
+       "READ": 7
+      },
+      "confidence": 0.886246,
+      "mppX": 0.028113,
+      "mppY": 0.02815
+     },
+     {
+      "anchors": {
+       "READ": 7
+      },
+      "confidence": 0.888299,
+      "mppX": 0.028113,
+      "mppY": 0.028149
+     }
+    ],
+    "scaleCmPerPx": [
+     2.81315,
+     2.8131
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-1a56066c62-10b0ec4131",
+     "frame-asset-rzut-1a56066c62-10b0ec4131"
+    ],
+    "was": [
+     "FAILED",
+     "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-pod-milorzebem",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "NO_ALTERNATIVE"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy area_table 0f7c5bafc8, chain extent, scale 2.285714 cm/px, largest-first tiling, outer faces: 3 bodies, 36.6 m\u00b2 (-55.8% of 82.81), WRONG"
+     }
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": null,
+      "confidence": null,
+      "mppX": null,
+      "mppY": null
+     },
+     {
+      "anchors": null,
+      "confidence": null,
+      "mppX": null,
+      "mppY": null
+     }
+    ],
+    "scaleCmPerPx": [
+     null,
+     null
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+     "frame-asset-rzut-ebe6069a09-06bbb9fc62"
+    ],
+    "was": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-cyklamenach",
+    "firstDifferingDecision": {
+     "now": null,
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned 07d4ca005c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 92.3 m\u00b2 (-0.2% of 92.48), UNKNOWN (the figure is spent)"
+     }
+    },
+    "mechanism": "REGISTRATION_MOVED",
+    "now": [
+     "COMPLETED",
+     null,
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 6,
+       "READ": 1,
+       "READ_DEPENDS_ON_SCALE": 1
+      },
+      "confidence": 0.855574,
+      "mppX": 0.020272,
+      "mppY": 0.020298
+     },
+     {
+      "anchors": {
+       "READ": 4
+      },
+      "confidence": 0.793207,
+      "mppX": 0.020282,
+      "mppY": 0.034509
+     }
+    ],
+    "scaleCmPerPx": [
+     2.0285,
+     2.73955
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-fa38f527ea-8e7eb2ad66",
+     "frame-asset-rzut-fa38f527ea-8e7eb2ad66"
+    ],
+    "was": [
+     "FAILED",
+     "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "A05",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned 646c151798, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 107.4 m\u00b2 (-14.9% of 126.23), UNKNOWN (the figure is spent)"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy area_table 2a1e4f9cc1, chain extent, registered scale, largest-first tiling, sides as gridded, pocket mouths shut: 1 body, 124.2 m\u00b2 (-1.6% of 126.23), UNKNOWN (the figure is spent)"
+     }
+    },
+    "mechanism": "REGISTRATION_MOVED",
+    "now": [
+     "FAILED",
+     "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 2,
+       "READ": 4,
+       "READ_DEPENDS_ON_SCALE": 1
+      },
+      "confidence": 0.872094,
+      "mppX": 0.0211,
+      "mppY": 0.021105
+     },
+     {
+      "anchors": {
+       "READ": 5
+      },
+      "confidence": 0.886536,
+      "mppX": 0.0211,
+      "mppY": 0.021277
+     }
+    ],
+    "scaleCmPerPx": [
+     2.11025,
+     2.11885
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-238dfbc50b-38cf8e09f5",
+     "frame-asset-rzut-238dfbc50b-38cf8e09f5"
+    ],
+    "was": [
+     "FAILED",
+     "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-murajach",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned fb4609c5e2, chain extent, registered scale, largest-first tiling, outer faces: 1 body, 195.4 m\u00b2 (+157.7% of 75.83), WRONG"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned fb4609c5e2, chain extent, registered scale, largest-first tiling, outer faces: 1 body, 178.2 m\u00b2 (+135.0% of 75.83), WRONG"
+     }
+    },
+    "mechanism": "REGISTRATION_MOVED",
+    "now": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 3
+      },
+      "confidence": 0.718133,
+      "mppX": 0.024514,
+      "mppY": 0.024724
+     },
+     {
+      "anchors": {
+       "READ": 2
+      },
+      "confidence": 0.438331,
+      "mppX": 0.024756,
+      "mppY": 0.024756
+     }
+    ],
+    "scaleCmPerPx": [
+     2.4619,
+     2.4756
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-36e1e5a39d-fb4609c5e2",
+     "frame-asset-rzut-36e1e5a39d-fb4609c5e2"
+    ],
+    "was": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-glogownikach",
+    "firstDifferingDecision": null,
+    "mechanism": "REGISTRATION_LOST",
+    "now": [
+     "FAILED",
+     "MODEL_EMISSION_FAILED/None",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 9,
+       "READ": 1
+      },
+      "confidence": 0.849053,
+      "mppX": 0.026261,
+      "mppY": 0.026207
+     },
+     null
+    ],
+    "scaleCmPerPx": [
+     2.6234,
+     null
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+     null
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-akebiach",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned 06e48d2241, wall-ink extent, registered scale, walled-first tiling, outer faces: 4 bodies, 130.6 m\u00b2 (-47.7% of 249.42), WRONG"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned 4d37f1b2ba, chain extent, registered scale, largest-first tiling, outer faces: 7 bodies, 103.6 m\u00b2 (-58.5% of 249.42), WRONG, corroborated by ISOTROPY"
+     }
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "FAILED",
+     "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 1,
+       "READ": 7
+      },
+      "confidence": 0.860172,
+      "mppX": 0.029086,
+      "mppY": 0.029036
+     },
+     {
+      "anchors": {
+       "READ": 7
+      },
+      "confidence": 0.857642,
+      "mppX": 0.029073,
+      "mppY": 0.029036
+     }
+    ],
+    "scaleCmPerPx": [
+     2.9061,
+     2.90545
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
+     "frame-asset-rzut-8984f3a30b-4d37f1b2ba"
+    ],
+    "was": [
+     "FAILED",
+     "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+     "ALGORITHMIC_FAIL"
+    ]
+   }
+  ],
+  "C1N1": [
+   {
+    "case": "dom-pod-jarzabem",
+    "firstDifferingDecision": {
+     "now": {
+      "chosen": "copy dimensioned 397808a266, chain extent, registered scale, walled-first tiling, sides as gridded: 1 body, 205.2 m\u00b2 (-5.3% of 216.76), AGREES, corroborated by ISOTROPY+CROSS_COPY",
+      "outcome": "RESOLVED",
+      "reading1": "copy dimensioned 397808a266, chain extent, registered scale, walled-first tiling, sides as gridded: 1 body, 205.2 m\u00b2 (-5.3% of 216.76), AGREES, corroborated by ISOTROPY+CROSS_COPY"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "chosen": "copy area_table 4813950087, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 191.0 m\u00b2 (-11.9% of 216.76), NEAR, corroborated by ISOTROPY",
+      "outcome": "RESOLVED",
+      "reading1": "copy area_table 4813950087, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 191.0 m\u00b2 (-11.9% of 216.76), NEAR, corroborated by ISOTROPY"
+     }
+    },
+    "mechanism": "REGISTRATION_LOST",
+    "now": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 2,
+       "READ": 7
+      },
+      "confidence": 0.845393,
+      "mppX": 0.028009,
+      "mppY": 0.028035
+     },
+     {
+      "anchors": {
+       "READ": 4
+      },
+      "confidence": 0.791131,
+      "mppX": 0.028003,
+      "mppY": 0.027816
+     }
+    ],
+    "scaleCmPerPx": [
+     2.8022,
+     2.79095
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-cafd34a77a-4813950087",
+     "frame-asset-rzut-9354eb066f-397808a266"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-morelach",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "KEPT",
+      "reading1": "copy dimensioned 027bb2e82d, chain extent, registered scale, largest-first tiling, sides as gridded: 3 bodies, 111.9 m\u00b2 (-2.3% of 114.53), AGREES"
+     },
+     "stage": "METRIC_CHALLENGE",
+     "was": {
+      "outcome": "KEPT",
+      "reading1": "copy dimensioned 027bb2e82d, chain extent, registered scale, largest-first tiling, sides as gridded: 3 bodies, 112.0 m\u00b2 (-2.2% of 114.53), AGREES"
+     }
+    },
+    "mechanism": "REGISTRATION_MOVED",
+    "now": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 4,
+       "READ": 2
+      },
+      "confidence": 0.878802,
+      "mppX": 0.01996,
+      "mppY": 0.02027
+     },
+     {
+      "anchors": {
+       "READ": 6
+      },
+      "confidence": 0.848789,
+      "mppX": 0.019957,
+      "mppY": 0.020028
+     }
+    ],
+    "scaleCmPerPx": [
+     2.0115,
+     1.99925
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+     "frame-asset-rzut-63ae7d4e86-027bb2e82d"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ]
+   },
+   {
+    "case": "rarytasy-eoze",
+    "firstDifferingDecision": {
+     "now": null,
+     "stage": "METRIC_CHALLENGE",
+     "was": {
+      "chosen": "copy dimensioned e3a3d0015d, chain extent, scale 2.222222 cm/px, largest-first tiling, sides as gridded: 1 body, 124.0 m\u00b2 (+1.6% of 122.07), AGREES, corroborated by ISOTROPY+CROSS_COPY",
+      "chosenRefuted": 0.114611,
+      "outcome": "REPLACED",
+      "reading1": "copy dimensioned e3a3d0015d, chain extent, scale 2.222222 cm/px, largest-first tiling, sides as gridded: 1 body, 124.0 m\u00b2 (+1.6% of 122.07), AGREES, corroborated by ISOTROPY+CROSS_COPY",
+      "registrationRefuted": 0.334843,
+      "sourceConflict": "OUTER_TOTALS"
+     }
+    },
+    "mechanism": "REGISTRATION_MOVED",
+    "now": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 5,
+       "READ": 2
+      },
+      "confidence": 0.875562,
+      "mppX": 0.022237,
+      "mppY": 0.020855
+     },
+     {
+      "anchors": {
+       "READ": 5
+      },
+      "confidence": 0.849094,
+      "mppX": 0.022236,
+      "mppY": 0.022222
+     }
+    ],
+    "scaleCmPerPx": [
+     2.2222,
+     2.2229
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+     "frame-asset-rzut-b747b42ad2-e3a3d0015d"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ]
+   },
+   {
+    "case": "dom-w-azaliach",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned a0edbd164d, chain extent, registered scale, largest-first tiling, sides as gridded: 0 bodies, 0.0 m\u00b2, UNKNOWN, NO_BODY+NO_WORLD_FRAME"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy area_table 79ba9b7966, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 69.3 m\u00b2 (-0.5% of 69.69), UNKNOWN (the figure is spent)"
+     }
+    },
+    "mechanism": "REGISTRATION_MOVED",
+    "now": [
+     "FAILED",
+     "PLAN_NO_BUILT_REGIONS/PLAN_DECOMPOSITION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 1,
+       "READ": 2,
+       "READ_DEPENDS_ON_SCALE": 1
+      },
+      "confidence": 0.787139,
+      "mppX": 0.018615,
+      "mppY": 0.01864
+     },
+     {
+      "anchors": {
+       "READ": 2
+      },
+      "confidence": 0.493128,
+      "mppX": 0.018615,
+      "mppY": 0.018615
+     }
+    ],
+    "scaleCmPerPx": [
+     1.86275,
+     1.8615
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-86bef468f3-19006df9bc",
+     "frame-asset-rzut-86bef468f3-19006df9bc"
+    ],
+    "was": [
+     "FAILED",
+     "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-dabecjach",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy area_table 0fd2019dc2, chain extent, registered scale, walled-first tiling, sides as gridded: 3 bodies, 126.4 m\u00b2 (-25.1% of 168.76), WRONG, corroborated by ISOTROPY+CROSS_COPY"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned c936d50299, chain extent, registered scale, largest-first tiling, outer faces: 1 body, 137.2 m\u00b2 (-18.7% of 168.76), UNKNOWN (the figure is spent)"
+     }
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "FAILED",
+     "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 1,
+       "READ": 7
+      },
+      "confidence": 0.886246,
+      "mppX": 0.028113,
+      "mppY": 0.02815
+     },
+     {
+      "anchors": {
+       "READ": 7
+      },
+      "confidence": 0.888299,
+      "mppX": 0.028113,
+      "mppY": 0.028149
+     }
+    ],
+    "scaleCmPerPx": [
+     2.81315,
+     2.8131
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-1a56066c62-10b0ec4131",
+     "frame-asset-rzut-1a56066c62-10b0ec4131"
+    ],
+    "was": [
+     "FAILED",
+     "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-pod-milorzebem",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "NO_ALTERNATIVE"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy area_table 0f7c5bafc8, chain extent, scale 2.285714 cm/px, largest-first tiling, outer faces: 3 bodies, 36.6 m\u00b2 (-55.8% of 82.81), WRONG"
+     }
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": null,
+      "confidence": null,
+      "mppX": null,
+      "mppY": null
+     },
+     {
+      "anchors": null,
+      "confidence": null,
+      "mppX": null,
+      "mppY": null
+     }
+    ],
+    "scaleCmPerPx": [
+     null,
+     null
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+     "frame-asset-rzut-ebe6069a09-06bbb9fc62"
+    ],
+    "was": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-cyklamenach",
+    "firstDifferingDecision": {
+     "now": null,
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned 07d4ca005c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 92.3 m\u00b2 (-0.2% of 92.48), UNKNOWN (the figure is spent)"
+     }
+    },
+    "mechanism": "REGISTRATION_MOVED",
+    "now": [
+     "COMPLETED",
+     null,
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 6,
+       "READ": 1,
+       "READ_DEPENDS_ON_SCALE": 1
+      },
+      "confidence": 0.855574,
+      "mppX": 0.020272,
+      "mppY": 0.020298
+     },
+     {
+      "anchors": {
+       "READ": 4
+      },
+      "confidence": 0.793365,
+      "mppX": 0.02028,
+      "mppY": 0.034509
+     }
+    ],
+    "scaleCmPerPx": [
+     2.0285,
+     2.73945
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-fa38f527ea-8e7eb2ad66",
+     "frame-asset-rzut-fa38f527ea-8e7eb2ad66"
+    ],
+    "was": [
+     "FAILED",
+     "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "A05",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned 646c151798, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 107.5 m\u00b2 (-14.8% of 126.23), UNKNOWN (the figure is spent)"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy area_table 2a1e4f9cc1, chain extent, registered scale, largest-first tiling, sides as gridded, pocket mouths shut: 1 body, 124.2 m\u00b2 (-1.6% of 126.23), UNKNOWN (the figure is spent)"
+     }
+    },
+    "mechanism": "REGISTRATION_MOVED",
+    "now": [
+     "FAILED",
+     "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 2,
+       "READ": 4,
+       "READ_DEPENDS_ON_SCALE": 1
+      },
+      "confidence": 0.872094,
+      "mppX": 0.0211,
+      "mppY": 0.021105
+     },
+     {
+      "anchors": {
+       "READ": 5
+      },
+      "confidence": 0.886536,
+      "mppX": 0.0211,
+      "mppY": 0.021277
+     }
+    ],
+    "scaleCmPerPx": [
+     2.11025,
+     2.11885
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-238dfbc50b-38cf8e09f5",
+     "frame-asset-rzut-238dfbc50b-38cf8e09f5"
+    ],
+    "was": [
+     "FAILED",
+     "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "D00",
+    "firstDifferingDecision": {
+     "now": null,
+     "stage": "METRIC_CHALLENGE",
+     "was": {
+      "outcome": "KEPT",
+      "reading1": "copy unknown 20137a1a68, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 154.2 m\u00b2 (-18.7% of 189.7), NEAR"
+     }
+    },
+    "mechanism": "REGISTRATION_MOVED",
+    "now": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "READ": 2
+      },
+      "confidence": 0.50336,
+      "mppX": 0.013197,
+      "mppY": 0.013197
+     },
+     {
+      "anchors": {
+       "READ": 3
+      },
+      "confidence": 0.734579,
+      "mppX": 0.013197,
+      "mppY": 0.01375
+     }
+    ],
+    "scaleCmPerPx": [
+     1.3197,
+     1.34735
+    ],
+    "selectedFrame": [
+     "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+     "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-murajach",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned fb4609c5e2, chain extent, registered scale, largest-first tiling, outer faces: 2 bodies, 182.2 m\u00b2 (+140.3% of 75.83), WRONG, DEGENERATE_GEOMETRY"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned fb4609c5e2, chain extent, registered scale, largest-first tiling, outer faces: 1 body, 178.2 m\u00b2 (+135.0% of 75.83), WRONG"
+     }
+    },
+    "mechanism": "REGISTRATION_MOVED",
+    "now": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 3
+      },
+      "confidence": 0.718133,
+      "mppX": 0.024514,
+      "mppY": 0.024724
+     },
+     {
+      "anchors": {
+       "READ": 3
+      },
+      "confidence": 0.68151,
+      "mppX": 0.024756,
+      "mppY": 0.02449
+     }
+    ],
+    "scaleCmPerPx": [
+     2.4619,
+     2.4623
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-36e1e5a39d-fb4609c5e2",
+     "frame-asset-rzut-36e1e5a39d-fb4609c5e2"
+    ],
+    "was": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-akebiach",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned 06e48d2241, wall-ink extent, registered scale, walled-first tiling, outer faces: 4 bodies, 130.6 m\u00b2 (-47.7% of 249.42), WRONG"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned 4d37f1b2ba, chain extent, registered scale, largest-first tiling, outer faces: 7 bodies, 103.6 m\u00b2 (-58.5% of 249.42), WRONG, corroborated by ISOTROPY"
+     }
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "FAILED",
+     "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 1,
+       "READ": 7
+      },
+      "confidence": 0.860172,
+      "mppX": 0.029086,
+      "mppY": 0.029036
+     },
+     {
+      "anchors": {
+       "READ": 7
+      },
+      "confidence": 0.857642,
+      "mppX": 0.029073,
+      "mppY": 0.029036
+     }
+    ],
+    "scaleCmPerPx": [
+     2.9061,
+     2.90545
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
+     "frame-asset-rzut-8984f3a30b-4d37f1b2ba"
+    ],
+    "was": [
+     "FAILED",
+     "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+     "ALGORITHMIC_FAIL"
+    ]
+   }
+  ],
+  "C2": [
+   {
+    "case": "dom-pod-jarzabem",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned 19f8c2fa6e, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 189.3 m\u00b2 (-12.7% of 216.76), NEAR, corroborated by ISOTROPY"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "chosen": "copy area_table 4813950087, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 191.0 m\u00b2 (-11.9% of 216.76), NEAR, corroborated by ISOTROPY",
+      "outcome": "RESOLVED",
+      "reading1": "copy area_table 4813950087, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 191.0 m\u00b2 (-11.9% of 216.76), NEAR, corroborated by ISOTROPY"
+     }
+    },
+    "mechanism": "REGISTRATION_LOST",
+    "now": [
+     "FAILED",
+     "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 2,
+       "READ": 7
+      },
+      "confidence": 0.845393,
+      "mppX": 0.028009,
+      "mppY": 0.028035
+     },
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 5
+      },
+      "confidence": 0.864628,
+      "mppX": 0.027881,
+      "mppY": 0.027819
+     }
+    ],
+    "scaleCmPerPx": [
+     2.8022,
+     2.785
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-cafd34a77a-4813950087",
+     "frame-asset-rzut-9354eb066f-397808a266"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-morelach",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "KEPT",
+      "reading1": "copy dimensioned 027bb2e82d, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 106.7 m\u00b2 (-6.8% of 114.53), NEAR, corroborated by CROSS_COPY"
+     },
+     "stage": "METRIC_CHALLENGE",
+     "was": {
+      "outcome": "KEPT",
+      "reading1": "copy dimensioned 027bb2e82d, chain extent, registered scale, largest-first tiling, sides as gridded: 3 bodies, 112.0 m\u00b2 (-2.2% of 114.53), AGREES"
+     }
+    },
+    "mechanism": "REGISTRATION_MOVED",
+    "now": [
+     "COMPLETED",
+     null,
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 4,
+       "READ": 2
+      },
+      "confidence": 0.878802,
+      "mppX": 0.01996,
+      "mppY": 0.02027
+     },
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 1,
+       "READ": 1
+      },
+      "confidence": 0.502211,
+      "mppX": 0.019896,
+      "mppY": 0.019896
+     }
+    ],
+    "scaleCmPerPx": [
+     2.0115,
+     1.9896
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+     "frame-asset-rzut-63ae7d4e86-027bb2e82d"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ]
+   },
+   {
+    "case": "marcowki",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned 33a5ff46cd, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 146.5 m\u00b2 (+11.7% of 131.16), UNKNOWN (the figure is spent), corroborated by ISOTROPY"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": null
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "FAILED",
+     "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 6,
+       "READ": 3
+      },
+      "confidence": 0.861215,
+      "mppX": 0.026426,
+      "mppY": 0.026468
+     },
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 3,
+       "READ": 1
+      },
+      "confidence": 0.818321,
+      "mppX": 0.026425,
+      "mppY": 0.02649
+     }
+    ],
+    "scaleCmPerPx": [
+     2.6447,
+     2.64575
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-19a11bc745-33a5ff46cd",
+     "frame-asset-rzut-19a11bc745-33a5ff46cd"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ]
+   },
+   {
+    "case": "rarytasy-g2e",
+    "firstDifferingDecision": {
+     "now": {
+      "chosen": "copy dimensioned 59a406b738, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 193.6 m\u00b2 (+2.0% of 189.77), AGREES, corroborated by ISOTROPY",
+      "chosenRefuted": 0.393314,
+      "outcome": "REPLACED",
+      "reading1": "copy dimensioned 59a406b738, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 193.6 m\u00b2 (+2.0% of 189.77), AGREES, corroborated by ISOTROPY"
+     },
+     "stage": "METRIC_CHALLENGE",
+     "was": null
+    },
+    "mechanism": "REGISTRATION_MOVED",
+    "now": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 9,
+       "READ": 1
+      },
+      "confidence": 0.861106,
+      "mppX": 0.027579,
+      "mppY": 0.02752
+     },
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 4
+      },
+      "confidence": 0.810591,
+      "mppX": 0.027534,
+      "mppY": 0.0275
+     }
+    ],
+    "scaleCmPerPx": [
+     2.75495,
+     2.7517
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-e8520c3ad3-59a406b738",
+     "frame-asset-rzut-e8520c3ad3-59a406b738"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ]
+   },
+   {
+    "case": "rarytasy-eoze",
+    "firstDifferingDecision": {
+     "now": {
+      "chosen": "copy dimensioned e3a3d0015d, chain extent, scale 2.222222 cm/px, largest-first tiling, sides as gridded: 1 body, 124.0 m\u00b2 (+1.6% of 122.07), AGREES, corroborated by ISOTROPY+CROSS_COPY",
+      "chosenRefuted": 0.040508,
+      "outcome": "REPLACED",
+      "reading1": "copy dimensioned e3a3d0015d, chain extent, scale 2.222222 cm/px, largest-first tiling, sides as gridded: 1 body, 124.0 m\u00b2 (+1.6% of 122.07), AGREES, corroborated by ISOTROPY+CROSS_COPY",
+      "registrationRefuted": 0.288619,
+      "sourceConflict": "OUTER_TOTALS"
+     },
+     "stage": "METRIC_CHALLENGE",
+     "was": {
+      "chosen": "copy dimensioned e3a3d0015d, chain extent, scale 2.222222 cm/px, largest-first tiling, sides as gridded: 1 body, 124.0 m\u00b2 (+1.6% of 122.07), AGREES, corroborated by ISOTROPY+CROSS_COPY",
+      "chosenRefuted": 0.114611,
+      "outcome": "REPLACED",
+      "reading1": "copy dimensioned e3a3d0015d, chain extent, scale 2.222222 cm/px, largest-first tiling, sides as gridded: 1 body, 124.0 m\u00b2 (+1.6% of 122.07), AGREES, corroborated by ISOTROPY+CROSS_COPY",
+      "registrationRefuted": 0.334843,
+      "sourceConflict": "OUTER_TOTALS"
+     }
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 5,
+       "READ": 2
+      },
+      "confidence": 0.875562,
+      "mppX": 0.022237,
+      "mppY": 0.020855
+     },
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 1,
+       "READ": 2
+      },
+      "confidence": 0.719988,
+      "mppX": 0.022236,
+      "mppY": 0.020855
+     }
+    ],
+    "scaleCmPerPx": [
+     2.2222,
+     2.2222
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+     "frame-asset-rzut-b747b42ad2-e3a3d0015d"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ]
+   },
+   {
+    "case": "alt-marcowki",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy unknown c68728b8e4, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 34.2 m\u00b2 (-73.9% of 131.16), WRONG"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy unknown c68728b8e4, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 35.2 m\u00b2 (-73.2% of 131.16), WRONG"
+     }
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": null,
+      "confidence": null,
+      "mppX": null,
+      "mppY": null
+     },
+     {
+      "anchors": null,
+      "confidence": null,
+      "mppX": null,
+      "mppY": null
+     }
+    ],
+    "scaleCmPerPx": [
+     null,
+     null
+    ],
+    "selectedFrame": [
+     "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+     "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02"
+    ],
+    "was": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-cyklamenach",
+    "firstDifferingDecision": {
+     "now": null,
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned 07d4ca005c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 92.3 m\u00b2 (-0.2% of 92.48), UNKNOWN (the figure is spent)"
+     }
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "COMPLETED",
+     null,
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 6,
+       "READ": 1,
+       "READ_DEPENDS_ON_SCALE": 1
+      },
+      "confidence": 0.855574,
+      "mppX": 0.020272,
+      "mppY": 0.020298
+     },
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 4,
+       "READ_DEPENDS_ON_SCALE": 1
+      },
+      "confidence": 0.871492,
+      "mppX": 0.020277,
+      "mppY": 0.020301
+     }
+    ],
+    "scaleCmPerPx": [
+     2.0285,
+     2.0289
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-fa38f527ea-8e7eb2ad66",
+     "frame-asset-rzut-fa38f527ea-8e7eb2ad66"
+    ],
+    "was": [
+     "FAILED",
+     "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "A00",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned c1ed5b382c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 146.5 m\u00b2 (-0.3% of 147.01), UNKNOWN (the figure is spent), corroborated by ISOTROPY"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned c1ed5b382c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 145.7 m\u00b2 (-0.9% of 147.01), UNKNOWN (the figure is spent), corroborated by ISOTROPY"
+     }
+    },
+    "mechanism": "REGISTRATION_MOVED",
+    "now": [
+     "FAILED",
+     "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 7,
+       "READ": 1
+      },
+      "confidence": 0.849935,
+      "mppX": 0.02305,
+      "mppY": 0.023088
+     },
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 4,
+       "READ": 1
+      },
+      "confidence": 0.85914,
+      "mppX": 0.02305,
+      "mppY": 0.023738
+     }
+    ],
+    "scaleCmPerPx": [
+     2.3069,
+     2.3394
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-db1e8df563-19bef9a91e",
+     "frame-asset-rzut-db1e8df563-19bef9a91e"
+    ],
+    "was": [
+     "FAILED",
+     "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "A04",
+    "firstDifferingDecision": {
+     "now": null,
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy area_table da7064452b, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 104.1 m\u00b2 (-6.9% of 111.79), UNKNOWN (the figure is spent), corroborated by ISOTROPY"
+     }
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "COMPLETED",
+     null,
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 7,
+       "READ": 3
+      },
+      "confidence": 0.851121,
+      "mppX": 0.025505,
+      "mppY": 0.025474
+     },
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 3,
+       "READ": 2
+      },
+      "confidence": 0.843513,
+      "mppX": 0.02551,
+      "mppY": 0.025494
+     }
+    ],
+    "scaleCmPerPx": [
+     2.54895,
+     2.5502
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-4f91f26bdf-589c8abdb3",
+     "frame-asset-rzut-4f91f26bdf-589c8abdb3"
+    ],
+    "was": [
+     "FAILED",
+     "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "A06",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "KEPT",
+      "reading1": "copy dimensioned 8b24c71f3f, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 78.3 m\u00b2 (-0.8% of 78.92), AGREES, corroborated by ISOTROPY"
+     },
+     "stage": "METRIC_CHALLENGE",
+     "was": {
+      "outcome": "KEPT",
+      "reading1": "copy dimensioned 8b24c71f3f, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 79.1 m\u00b2 (+0.2% of 78.92), AGREES, corroborated by ISOTROPY"
+     }
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 2,
+       "READ": 3,
+       "READ_DEPENDS_ON_SCALE": 1
+      },
+      "confidence": 0.862909,
+      "mppX": 0.020726,
+      "mppY": 0.020714
+     },
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 1,
+       "READ": 2,
+       "READ_DEPENDS_ON_SCALE": 1
+      },
+      "confidence": 0.80688,
+      "mppX": 0.020734,
+      "mppY": 0.020714
+     }
+    ],
+    "scaleCmPerPx": [
+     2.072,
+     2.0724
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-f08001e3c4-8b24c71f3f",
+     "frame-asset-rzut-f08001e3c4-8b24c71f3f"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ]
+   },
+   {
+    "case": "D00",
+    "firstDifferingDecision": {
+     "now": null,
+     "stage": "METRIC_CHALLENGE",
+     "was": {
+      "outcome": "KEPT",
+      "reading1": "copy unknown 20137a1a68, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 154.2 m\u00b2 (-18.7% of 189.7), NEAR"
+     }
+    },
+    "mechanism": "REGISTRATION_LOST",
+    "now": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "READ": 2
+      },
+      "confidence": 0.50336,
+      "mppX": 0.013197,
+      "mppY": 0.013197
+     },
+     {
+      "anchors": null,
+      "confidence": null,
+      "mppX": null,
+      "mppY": null
+     }
+    ],
+    "scaleCmPerPx": [
+     1.3197,
+     null
+    ],
+    "selectedFrame": [
+     "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+     "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-murajach",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned fb4609c5e2, chain extent, registered scale, largest-first tiling, outer faces: 1 body, 181.2 m\u00b2 (+139.0% of 75.83), WRONG"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned fb4609c5e2, chain extent, registered scale, largest-first tiling, outer faces: 1 body, 178.2 m\u00b2 (+135.0% of 75.83), WRONG"
+     }
+    },
+    "mechanism": "REGISTRATION_MOVED",
+    "now": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 3
+      },
+      "confidence": 0.718133,
+      "mppX": 0.024514,
+      "mppY": 0.024724
+     },
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 2
+      },
+      "confidence": 0.66,
+      "mppX": 0.024515,
+      "mppY": 0.023604
+     }
+    ],
+    "scaleCmPerPx": [
+     2.4619,
+     2.40595
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-36e1e5a39d-fb4609c5e2",
+     "frame-asset-rzut-36e1e5a39d-fb4609c5e2"
+    ],
+    "was": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-akebiach",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned 4d37f1b2ba, chain extent, registered scale, largest-first tiling, sides as gridded, pocket mouths shut: 4 bodies, 140.6 m\u00b2 (-43.6% of 249.42), WRONG, corroborated by ISOTROPY"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned 4d37f1b2ba, chain extent, registered scale, largest-first tiling, outer faces: 7 bodies, 103.6 m\u00b2 (-58.5% of 249.42), WRONG, corroborated by ISOTROPY"
+     }
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "FAILED",
+     "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 1,
+       "READ": 7
+      },
+      "confidence": 0.860172,
+      "mppX": 0.029086,
+      "mppY": 0.029036
+     },
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 1,
+       "READ": 6
+      },
+      "confidence": 0.858364,
+      "mppX": 0.029086,
+      "mppY": 0.029039
+     }
+    ],
+    "scaleCmPerPx": [
+     2.9061,
+     2.90625
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
+     "frame-asset-rzut-8984f3a30b-4d37f1b2ba"
+    ],
+    "was": [
+     "FAILED",
+     "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-tymianku",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned 2b0ad412cf, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 148.6 m\u00b2 (+7.0% of 138.89), UNKNOWN (the figure is spent), corroborated by ISOTROPY"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": null
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "FAILED",
+     "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 2,
+       "READ": 8
+      },
+      "confidence": 0.880696,
+      "mppX": 0.023772,
+      "mppY": 0.023744
+     },
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 1,
+       "READ": 6
+      },
+      "confidence": 0.895253,
+      "mppX": 0.023755,
+      "mppY": 0.023744
+     }
+    ],
+    "scaleCmPerPx": [
+     2.3758,
+     2.37495
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-360da4c58d-2b0ad412cf",
+     "frame-asset-rzut-360da4c58d-2b0ad412cf"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ]
+   }
+  ],
+  "C3": [
+   {
+    "case": "dom-w-morelach",
+    "firstDifferingDecision": {
+     "now": null,
+     "stage": "METRIC_CHALLENGE",
+     "was": {
+      "outcome": "KEPT",
+      "reading1": "copy dimensioned 027bb2e82d, chain extent, registered scale, largest-first tiling, sides as gridded: 3 bodies, 112.0 m\u00b2 (-2.2% of 114.53), AGREES"
+     }
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 4,
+       "READ": 2
+      },
+      "confidence": 0.878802,
+      "mppX": 0.01996,
+      "mppY": 0.02027
+     },
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 4,
+       "READ": 2
+      },
+      "confidence": 0.878802,
+      "mppX": 0.01996,
+      "mppY": 0.02027
+     }
+    ],
+    "scaleCmPerPx": [
+     2.0115,
+     2.0115
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+     "frame-asset-rzut-63ae7d4e86-027bb2e82d"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ]
+   },
+   {
+    "case": "dom-w-azaliach",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned a0edbd164d, chain extent, registered scale, largest-first tiling, sides as gridded: 0 bodies, 0.0 m\u00b2, UNKNOWN, NO_BODY+NO_WORLD_FRAME"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy area_table 79ba9b7966, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 69.3 m\u00b2 (-0.5% of 69.69), UNKNOWN (the figure is spent)"
+     }
+    },
+    "mechanism": "REGISTRATION_MOVED",
+    "now": [
+     "FAILED",
+     "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 1,
+       "READ": 2,
+       "READ_DEPENDS_ON_SCALE": 1
+      },
+      "confidence": 0.787139,
+      "mppX": 0.018615,
+      "mppY": 0.01864
+     },
+     {
+      "anchors": {
+       "READ": 2
+      },
+      "confidence": 0.493128,
+      "mppX": 0.018615,
+      "mppY": 0.018615
+     }
+    ],
+    "scaleCmPerPx": [
+     1.86275,
+     1.8615
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-86bef468f3-19006df9bc",
+     "frame-asset-rzut-86bef468f3-19006df9bc"
+    ],
+    "was": [
+     "FAILED",
+     "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-dabecjach",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy area_table 0fd2019dc2, chain extent, registered scale, walled-first tiling, sides as gridded: 3 bodies, 126.4 m\u00b2 (-25.1% of 168.76), WRONG, corroborated by ISOTROPY+CROSS_COPY"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned c936d50299, chain extent, registered scale, largest-first tiling, outer faces: 1 body, 137.2 m\u00b2 (-18.7% of 168.76), UNKNOWN (the figure is spent)"
+     }
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "FAILED",
+     "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 1,
+       "READ": 7
+      },
+      "confidence": 0.886246,
+      "mppX": 0.028113,
+      "mppY": 0.02815
+     },
+     {
+      "anchors": {
+       "READ": 7
+      },
+      "confidence": 0.888296,
+      "mppX": 0.028113,
+      "mppY": 0.028149
+     }
+    ],
+    "scaleCmPerPx": [
+     2.81315,
+     2.8131
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-1a56066c62-10b0ec4131",
+     "frame-asset-rzut-1a56066c62-10b0ec4131"
+    ],
+    "was": [
+     "FAILED",
+     "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-murajach",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned fb4609c5e2, chain extent, registered scale, largest-first tiling, outer faces: 1 body, 178.1 m\u00b2 (+134.8% of 75.83), WRONG"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned fb4609c5e2, chain extent, registered scale, largest-first tiling, outer faces: 1 body, 178.2 m\u00b2 (+135.0% of 75.83), WRONG"
+     }
+    },
+    "mechanism": "REGISTRATION_MOVED",
+    "now": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 3
+      },
+      "confidence": 0.718133,
+      "mppX": 0.024514,
+      "mppY": 0.024724
+     },
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 2
+      },
+      "confidence": 0.483218,
+      "mppX": 0.024514,
+      "mppY": 0.024514
+     }
+    ],
+    "scaleCmPerPx": [
+     2.4619,
+     2.4514
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-36e1e5a39d-fb4609c5e2",
+     "frame-asset-rzut-36e1e5a39d-fb4609c5e2"
+    ],
+    "was": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   }
+  ],
+  "C4": [
+   {
+    "case": "dom-pod-jarzabem",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned 19f8c2fa6e, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 189.3 m\u00b2 (-12.7% of 216.76), NEAR, corroborated by ISOTROPY"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "chosen": "copy area_table 4813950087, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 191.0 m\u00b2 (-11.9% of 216.76), NEAR, corroborated by ISOTROPY",
+      "outcome": "RESOLVED",
+      "reading1": "copy area_table 4813950087, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 191.0 m\u00b2 (-11.9% of 216.76), NEAR, corroborated by ISOTROPY"
+     }
+    },
+    "mechanism": "REGISTRATION_LOST",
+    "now": [
+     "FAILED",
+     "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 2,
+       "READ": 7
+      },
+      "confidence": 0.845393,
+      "mppX": 0.028009,
+      "mppY": 0.028035
+     },
+     {
+      "anchors": {
+       "READ": 3
+      },
+      "confidence": 0.720844,
+      "mppX": 0.028022,
+      "mppY": 0.027816
+     }
+    ],
+    "scaleCmPerPx": [
+     2.8022,
+     2.7919
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-cafd34a77a-4813950087",
+     "frame-asset-rzut-9354eb066f-397808a266"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-morelach",
+    "firstDifferingDecision": {
+     "now": null,
+     "stage": "METRIC_CHALLENGE",
+     "was": {
+      "outcome": "KEPT",
+      "reading1": "copy dimensioned 027bb2e82d, chain extent, registered scale, largest-first tiling, sides as gridded: 3 bodies, 112.0 m\u00b2 (-2.2% of 114.53), AGREES"
+     }
+    },
+    "mechanism": "REGISTRATION_MOVED",
+    "now": [
+     "COMPLETED",
+     null,
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 4,
+       "READ": 2
+      },
+      "confidence": 0.878802,
+      "mppX": 0.01996,
+      "mppY": 0.02027
+     },
+     {
+      "anchors": {
+       "READ": 4
+      },
+      "confidence": 0.765433,
+      "mppX": 0.019887,
+      "mppY": 0.019974
+     }
+    ],
+    "scaleCmPerPx": [
+     2.0115,
+     1.99305
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+     "frame-asset-rzut-63ae7d4e86-027bb2e82d"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ]
+   },
+   {
+    "case": "marcowki",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned 33a5ff46cd, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 146.3 m\u00b2 (+11.6% of 131.16), UNKNOWN (the figure is spent), corroborated by ISOTROPY"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": null
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "FAILED",
+     "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 6,
+       "READ": 3
+      },
+      "confidence": 0.861215,
+      "mppX": 0.026426,
+      "mppY": 0.026468
+     },
+     {
+      "anchors": {
+       "READ": 4
+      },
+      "confidence": 0.818321,
+      "mppX": 0.026425,
+      "mppY": 0.026455
+     }
+    ],
+    "scaleCmPerPx": [
+     2.6447,
+     2.644
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-19a11bc745-33a5ff46cd",
+     "frame-asset-rzut-19a11bc745-33a5ff46cd"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ]
+   },
+   {
+    "case": "rarytasy-g2e",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy area_table 666b0a8861, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 200.9 m\u00b2 (+5.8% of 189.77), UNKNOWN (the figure is spent), corroborated by ISOTROPY"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": null
+    },
+    "mechanism": "REGISTRATION_MOVED",
+    "now": [
+     "FAILED",
+     "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 9,
+       "READ": 1
+      },
+      "confidence": 0.861106,
+      "mppX": 0.027579,
+      "mppY": 0.02752
+     },
+     {
+      "anchors": {
+       "READ": 3
+      },
+      "confidence": 0.714854,
+      "mppX": 0.077778,
+      "mppY": 0.027516
+     }
+    ],
+    "scaleCmPerPx": [
+     2.75495,
+     5.2647
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-e8520c3ad3-59a406b738",
+     "frame-asset-rzut-e8520c3ad3-59a406b738"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ]
+   },
+   {
+    "case": "rarytasy-eoze",
+    "firstDifferingDecision": {
+     "now": null,
+     "stage": "METRIC_CHALLENGE",
+     "was": {
+      "chosen": "copy dimensioned e3a3d0015d, chain extent, scale 2.222222 cm/px, largest-first tiling, sides as gridded: 1 body, 124.0 m\u00b2 (+1.6% of 122.07), AGREES, corroborated by ISOTROPY+CROSS_COPY",
+      "chosenRefuted": 0.114611,
+      "outcome": "REPLACED",
+      "reading1": "copy dimensioned e3a3d0015d, chain extent, scale 2.222222 cm/px, largest-first tiling, sides as gridded: 1 body, 124.0 m\u00b2 (+1.6% of 122.07), AGREES, corroborated by ISOTROPY+CROSS_COPY",
+      "registrationRefuted": 0.334843,
+      "sourceConflict": "OUTER_TOTALS"
+     }
+    },
+    "mechanism": "REGISTRATION_MOVED",
+    "now": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 5,
+       "READ": 2
+      },
+      "confidence": 0.875562,
+      "mppX": 0.022237,
+      "mppY": 0.020855
+     },
+     {
+      "anchors": {
+       "READ": 4
+      },
+      "confidence": 0.786505,
+      "mppX": 0.022236,
+      "mppY": 0.022222
+     }
+    ],
+    "scaleCmPerPx": [
+     2.2222,
+     2.2229
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+     "frame-asset-rzut-b747b42ad2-e3a3d0015d"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ]
+   },
+   {
+    "case": "alt-marcowki",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy unknown c68728b8e4, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 34.2 m\u00b2 (-73.9% of 131.16), WRONG"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy unknown c68728b8e4, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 35.2 m\u00b2 (-73.2% of 131.16), WRONG"
+     }
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": null,
+      "confidence": null,
+      "mppX": null,
+      "mppY": null
+     },
+     {
+      "anchors": null,
+      "confidence": null,
+      "mppX": null,
+      "mppY": null
+     }
+    ],
+    "scaleCmPerPx": [
+     null,
+     null
+    ],
+    "selectedFrame": [
+     "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+     "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02"
+    ],
+    "was": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-azaliach",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned 19006df9bc, wall-witness extent, registered scale, largest-first tiling, sides as gridded: 0 bodies, 0.0 m\u00b2, UNKNOWN, NO_BODY+NO_WORLD_FRAME"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy area_table 79ba9b7966, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 69.3 m\u00b2 (-0.5% of 69.69), UNKNOWN (the figure is spent)"
+     }
+    },
+    "mechanism": "REGISTRATION_MOVED",
+    "now": [
+     "FAILED",
+     "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 1,
+       "READ": 2,
+       "READ_DEPENDS_ON_SCALE": 1
+      },
+      "confidence": 0.787139,
+      "mppX": 0.018615,
+      "mppY": 0.01864
+     },
+     {
+      "anchors": {
+       "READ": 2
+      },
+      "confidence": 0.493128,
+      "mppX": 0.018615,
+      "mppY": 0.018615
+     }
+    ],
+    "scaleCmPerPx": [
+     1.86275,
+     1.8615
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-86bef468f3-19006df9bc",
+     "frame-asset-rzut-86bef468f3-19006df9bc"
+    ],
+    "was": [
+     "FAILED",
+     "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-dabecjach",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy area_table 0fd2019dc2, chain extent, registered scale, walled-first tiling, sides as gridded: 3 bodies, 126.4 m\u00b2 (-25.1% of 168.76), WRONG, corroborated by ISOTROPY+CROSS_COPY"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned c936d50299, chain extent, registered scale, largest-first tiling, outer faces: 1 body, 137.2 m\u00b2 (-18.7% of 168.76), UNKNOWN (the figure is spent)"
+     }
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "FAILED",
+     "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 1,
+       "READ": 7
+      },
+      "confidence": 0.886246,
+      "mppX": 0.028113,
+      "mppY": 0.02815
+     },
+     {
+      "anchors": {
+       "READ": 7
+      },
+      "confidence": 0.888296,
+      "mppX": 0.028113,
+      "mppY": 0.028149
+     }
+    ],
+    "scaleCmPerPx": [
+     2.81315,
+     2.8131
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-1a56066c62-10b0ec4131",
+     "frame-asset-rzut-1a56066c62-10b0ec4131"
+    ],
+    "was": [
+     "FAILED",
+     "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-pod-milorzebem",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "NO_ALTERNATIVE"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy area_table 0f7c5bafc8, chain extent, scale 2.285714 cm/px, largest-first tiling, outer faces: 3 bodies, 36.6 m\u00b2 (-55.8% of 82.81), WRONG"
+     }
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": null,
+      "confidence": null,
+      "mppX": null,
+      "mppY": null
+     },
+     {
+      "anchors": null,
+      "confidence": null,
+      "mppX": null,
+      "mppY": null
+     }
+    ],
+    "scaleCmPerPx": [
+     null,
+     null
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+     "frame-asset-rzut-ebe6069a09-06bbb9fc62"
+    ],
+    "was": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-cyklamenach",
+    "firstDifferingDecision": {
+     "now": null,
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned 07d4ca005c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 92.3 m\u00b2 (-0.2% of 92.48), UNKNOWN (the figure is spent)"
+     }
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "COMPLETED",
+     null,
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 6,
+       "READ": 1,
+       "READ_DEPENDS_ON_SCALE": 1
+      },
+      "confidence": 0.855574,
+      "mppX": 0.020272,
+      "mppY": 0.020298
+     },
+     {
+      "anchors": {
+       "READ": 2
+      },
+      "confidence": 0.490286,
+      "mppX": 0.02029,
+      "mppY": 0.02029
+     }
+    ],
+    "scaleCmPerPx": [
+     2.0285,
+     2.029
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-fa38f527ea-8e7eb2ad66",
+     "frame-asset-rzut-fa38f527ea-8e7eb2ad66"
+    ],
+    "was": [
+     "FAILED",
+     "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "A00",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned c1ed5b382c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 146.5 m\u00b2 (-0.3% of 147.01), UNKNOWN (the figure is spent), corroborated by ISOTROPY"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned c1ed5b382c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 145.7 m\u00b2 (-0.9% of 147.01), UNKNOWN (the figure is spent), corroborated by ISOTROPY"
+     }
+    },
+    "mechanism": "REGISTRATION_MOVED",
+    "now": [
+     "FAILED",
+     "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 7,
+       "READ": 1
+      },
+      "confidence": 0.849935,
+      "mppX": 0.02305,
+      "mppY": 0.023088
+     },
+     {
+      "anchors": {
+       "READ": 5
+      },
+      "confidence": 0.860322,
+      "mppX": 0.02305,
+      "mppY": 0.023038
+     }
+    ],
+    "scaleCmPerPx": [
+     2.3069,
+     2.3044
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-db1e8df563-19bef9a91e",
+     "frame-asset-rzut-db1e8df563-19bef9a91e"
+    ],
+    "was": [
+     "FAILED",
+     "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "A04",
+    "firstDifferingDecision": {
+     "now": null,
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy area_table da7064452b, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 104.1 m\u00b2 (-6.9% of 111.79), UNKNOWN (the figure is spent), corroborated by ISOTROPY"
+     }
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "COMPLETED",
+     null,
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 7,
+       "READ": 3
+      },
+      "confidence": 0.851121,
+      "mppX": 0.025505,
+      "mppY": 0.025474
+     },
+     {
+      "anchors": {
+       "READ": 3
+      },
+      "confidence": 0.734453,
+      "mppX": 0.025511,
+      "mppY": 0.025494
+     }
+    ],
+    "scaleCmPerPx": [
+     2.54895,
+     2.55025
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-4f91f26bdf-589c8abdb3",
+     "frame-asset-rzut-4f91f26bdf-589c8abdb3"
+    ],
+    "was": [
+     "FAILED",
+     "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "A05",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned 646c151798, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 107.8 m\u00b2 (-14.6% of 126.23), UNKNOWN (the figure is spent)"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy area_table 2a1e4f9cc1, chain extent, registered scale, largest-first tiling, sides as gridded, pocket mouths shut: 1 body, 124.2 m\u00b2 (-1.6% of 126.23), UNKNOWN (the figure is spent)"
+     }
+    },
+    "mechanism": "REGISTRATION_MOVED",
+    "now": [
+     "FAILED",
+     "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 2,
+       "READ": 4,
+       "READ_DEPENDS_ON_SCALE": 1
+      },
+      "confidence": 0.872094,
+      "mppX": 0.0211,
+      "mppY": 0.021105
+     },
+     {
+      "anchors": {
+       "READ": 5
+      },
+      "confidence": 0.886536,
+      "mppX": 0.0211,
+      "mppY": 0.021277
+     }
+    ],
+    "scaleCmPerPx": [
+     2.11025,
+     2.11885
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-238dfbc50b-38cf8e09f5",
+     "frame-asset-rzut-238dfbc50b-38cf8e09f5"
+    ],
+    "was": [
+     "FAILED",
+     "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "A06",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "KEPT",
+      "reading1": "copy dimensioned 8b24c71f3f, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 78.3 m\u00b2 (-0.8% of 78.92), AGREES, corroborated by ISOTROPY"
+     },
+     "stage": "METRIC_CHALLENGE",
+     "was": {
+      "outcome": "KEPT",
+      "reading1": "copy dimensioned 8b24c71f3f, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 79.1 m\u00b2 (+0.2% of 78.92), AGREES, corroborated by ISOTROPY"
+     }
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 2,
+       "READ": 3,
+       "READ_DEPENDS_ON_SCALE": 1
+      },
+      "confidence": 0.862909,
+      "mppX": 0.020726,
+      "mppY": 0.020714
+     },
+     {
+      "anchors": {
+       "READ": 2
+      },
+      "confidence": 0.66,
+      "mppX": 0.020734,
+      "mppY": 0.020703
+     }
+    ],
+    "scaleCmPerPx": [
+     2.072,
+     2.07185
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-f08001e3c4-8b24c71f3f",
+     "frame-asset-rzut-f08001e3c4-8b24c71f3f"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ]
+   },
+   {
+    "case": "D00",
+    "firstDifferingDecision": {
+     "now": null,
+     "stage": "METRIC_CHALLENGE",
+     "was": {
+      "outcome": "KEPT",
+      "reading1": "copy unknown 20137a1a68, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 154.2 m\u00b2 (-18.7% of 189.7), NEAR"
+     }
+    },
+    "mechanism": "REGISTRATION_LOST",
+    "now": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "READ": 2
+      },
+      "confidence": 0.50336,
+      "mppX": 0.013197,
+      "mppY": 0.013197
+     },
+     {
+      "anchors": null,
+      "confidence": null,
+      "mppX": null,
+      "mppY": null
+     }
+    ],
+    "scaleCmPerPx": [
+     1.3197,
+     null
+    ],
+    "selectedFrame": [
+     "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+     "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-murajach",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "NO_ALTERNATIVE"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned fb4609c5e2, chain extent, registered scale, largest-first tiling, outer faces: 1 body, 178.2 m\u00b2 (+135.0% of 75.83), WRONG"
+     }
+    },
+    "mechanism": "REGISTRATION_LOST",
+    "now": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 3
+      },
+      "confidence": 0.718133,
+      "mppX": 0.024514,
+      "mppY": 0.024724
+     },
+     {
+      "anchors": {
+       "READ": 2
+      },
+      "confidence": 0.494626,
+      "mppX": 0.030343,
+      "mppY": 0.030343
+     }
+    ],
+    "scaleCmPerPx": [
+     2.4619,
+     3.0343
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-36e1e5a39d-fb4609c5e2",
+     "frame-asset-rzut-44d6d1166d-006f85ed53"
+    ],
+    "was": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-glogownikach",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned d1223ce8ba, chain extent, registered scale, largest-first tiling, outer faces: 2 bodies, 143.3 m\u00b2 (-19.6% of 178.13), UNKNOWN (the figure is spent)"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": null
+    },
+    "mechanism": "REGISTRATION_MOVED",
+    "now": [
+     "FAILED",
+     "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 9,
+       "READ": 1
+      },
+      "confidence": 0.849053,
+      "mppX": 0.026261,
+      "mppY": 0.026207
+     },
+     {
+      "anchors": {
+       "READ": 3
+      },
+      "confidence": 0.695536,
+      "mppX": 0.041758,
+      "mppY": 0.026209
+     }
+    ],
+    "scaleCmPerPx": [
+     2.6234,
+     3.39835
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+     "frame-asset-rzut-70b6aa153a-0cb0a5c1d9"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-akebiach",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy area_table 920547f86d, chain extent, registered scale, largest-first tiling, sides as gridded: 3 bodies, 101.4 m\u00b2 (-59.3% of 249.42), WRONG, corroborated by ISOTROPY"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned 4d37f1b2ba, chain extent, registered scale, largest-first tiling, outer faces: 7 bodies, 103.6 m\u00b2 (-58.5% of 249.42), WRONG, corroborated by ISOTROPY"
+     }
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "FAILED",
+     "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 1,
+       "READ": 7
+      },
+      "confidence": 0.860172,
+      "mppX": 0.029086,
+      "mppY": 0.029036
+     },
+     {
+      "anchors": {
+       "READ": 6
+      },
+      "confidence": 0.85527,
+      "mppX": 0.029073,
+      "mppY": 0.029039
+     }
+    ],
+    "scaleCmPerPx": [
+     2.9061,
+     2.9056
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
+     "frame-asset-rzut-8984f3a30b-4d37f1b2ba"
+    ],
+    "was": [
+     "FAILED",
+     "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-tymianku",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned 2b0ad412cf, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 148.6 m\u00b2 (+7.0% of 138.89), UNKNOWN (the figure is spent), corroborated by ISOTROPY"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": null
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "FAILED",
+     "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 2,
+       "READ": 8
+      },
+      "confidence": 0.880696,
+      "mppX": 0.023772,
+      "mppY": 0.023744
+     },
+     {
+      "anchors": {
+       "READ": 6
+      },
+      "confidence": 0.895768,
+      "mppX": 0.023772,
+      "mppY": 0.023744
+     }
+    ],
+    "scaleCmPerPx": [
+     2.3758,
+     2.3758
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-360da4c58d-2b0ad412cf",
+     "frame-asset-rzut-360da4c58d-2b0ad412cf"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ]
+   }
+  ],
+  "N1": [
+   {
+    "case": "dom-pod-jarzabem",
+    "firstDifferingDecision": {
+     "now": {
+      "chosen": "copy dimensioned 19f8c2fa6e, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 191.8 m\u00b2 (-11.5% of 216.76), NEAR, corroborated by ISOTROPY",
+      "outcome": "RESOLVED",
+      "reading1": "copy dimensioned 19f8c2fa6e, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 191.8 m\u00b2 (-11.5% of 216.76), NEAR, corroborated by ISOTROPY"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "chosen": "copy area_table 4813950087, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 191.0 m\u00b2 (-11.9% of 216.76), NEAR, corroborated by ISOTROPY",
+      "outcome": "RESOLVED",
+      "reading1": "copy area_table 4813950087, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 191.0 m\u00b2 (-11.9% of 216.76), NEAR, corroborated by ISOTROPY"
+     }
+    },
+    "mechanism": "REGISTRATION_LOST",
+    "now": [
+     "COMPLETED",
+     null,
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 2,
+       "READ": 7
+      },
+      "confidence": 0.845393,
+      "mppX": 0.028009,
+      "mppY": 0.028035
+     },
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 1,
+       "READ": 2
+      },
+      "confidence": 0.475686,
+      "mppX": 0.043567,
+      "mppY": 0.043567
+     }
+    ],
+    "scaleCmPerPx": [
+     2.8022,
+     4.3567
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-cafd34a77a-4813950087",
+     "frame-asset-gotowy-projekt-dom-pod-jarzabem-15-g-rzut-19f8c2fa6e"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "rarytasy-eoze",
+    "firstDifferingDecision": {
+     "now": {
+      "chosen": "copy dimensioned e3a3d0015d, chain extent, scale 2.222222 cm/px, largest-first tiling, sides as gridded: 1 body, 124.0 m\u00b2 (+1.6% of 122.07), AGREES, corroborated by ISOTROPY+CROSS_COPY",
+      "chosenRefuted": 0.114482,
+      "outcome": "REPLACED",
+      "reading1": "copy dimensioned e3a3d0015d, chain extent, scale 2.222222 cm/px, largest-first tiling, sides as gridded: 1 body, 124.0 m\u00b2 (+1.6% of 122.07), AGREES, corroborated by ISOTROPY+CROSS_COPY",
+      "registrationRefuted": 0.334467,
+      "sourceConflict": "OUTER_TOTALS"
+     },
+     "stage": "METRIC_CHALLENGE",
+     "was": {
+      "chosen": "copy dimensioned e3a3d0015d, chain extent, scale 2.222222 cm/px, largest-first tiling, sides as gridded: 1 body, 124.0 m\u00b2 (+1.6% of 122.07), AGREES, corroborated by ISOTROPY+CROSS_COPY",
+      "chosenRefuted": 0.114611,
+      "outcome": "REPLACED",
+      "reading1": "copy dimensioned e3a3d0015d, chain extent, scale 2.222222 cm/px, largest-first tiling, sides as gridded: 1 body, 124.0 m\u00b2 (+1.6% of 122.07), AGREES, corroborated by ISOTROPY+CROSS_COPY",
+      "registrationRefuted": 0.334843,
+      "sourceConflict": "OUTER_TOTALS"
+     }
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 5,
+       "READ": 2
+      },
+      "confidence": 0.875562,
+      "mppX": 0.022237,
+      "mppY": 0.020855
+     },
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 4,
+       "READ": 2
+      },
+      "confidence": 0.873609,
+      "mppX": 0.022237,
+      "mppY": 0.020855
+     }
+    ],
+    "scaleCmPerPx": [
+     2.2222,
+     2.2222
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+     "frame-asset-rzut-b747b42ad2-e3a3d0015d"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ]
+   },
+   {
+    "case": "alt-marcowki",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy unknown c68728b8e4, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 35.3 m\u00b2 (-73.1% of 131.16), WRONG"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy unknown c68728b8e4, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 35.2 m\u00b2 (-73.2% of 131.16), WRONG"
+     }
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": null,
+      "confidence": null,
+      "mppX": null,
+      "mppY": null
+     },
+     {
+      "anchors": null,
+      "confidence": null,
+      "mppX": null,
+      "mppY": null
+     }
+    ],
+    "scaleCmPerPx": [
+     null,
+     null
+    ],
+    "selectedFrame": [
+     "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+     "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02"
+    ],
+    "was": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-gozdzikowcach",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "KEPT",
+      "reading1": "copy dimensioned 64bd1e0f2f, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 131.6 m\u00b2 (-0.7% of 132.52), AGREES",
+      "registrationRefuted": 0.301669,
+      "sourceConflict": "OUTER_TOTALS"
+     },
+     "stage": "METRIC_CHALLENGE",
+     "was": null
+    },
+    "mechanism": "NO_PLAN_FRAME",
+    "now": [
+     "FAILED",
+     "MODEL_EMISSION_FAILED/None",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     null,
+     null
+    ],
+    "scaleCmPerPx": [
+     null,
+     null
+    ],
+    "selectedFrame": [
+     null,
+     null
+    ],
+    "was": [
+     "FAILED",
+     "MODEL_EMISSION_FAILED/None",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "D00",
+    "firstDifferingDecision": {
+     "now": null,
+     "stage": "METRIC_CHALLENGE",
+     "was": {
+      "outcome": "KEPT",
+      "reading1": "copy unknown 20137a1a68, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 154.2 m\u00b2 (-18.7% of 189.7), NEAR"
+     }
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "READ": 2
+      },
+      "confidence": 0.50336,
+      "mppX": 0.013197,
+      "mppY": 0.013197
+     },
+     {
+      "anchors": {
+       "READ": 2
+      },
+      "confidence": 0.50336,
+      "mppX": 0.013197,
+      "mppY": 0.013197
+     }
+    ],
+    "scaleCmPerPx": [
+     1.3197,
+     1.3197
+    ],
+    "selectedFrame": [
+     "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+     "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-murajach",
+    "firstDifferingDecision": {
+     "now": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned fb4609c5e2, chain extent, registered scale, largest-first tiling, outer faces: 2 bodies, 172.5 m\u00b2 (+127.4% of 75.83), WRONG"
+     },
+     "stage": "PLAN_RESOLUTION",
+     "was": {
+      "outcome": "INCONCLUSIVE",
+      "reading1": "copy dimensioned fb4609c5e2, chain extent, registered scale, largest-first tiling, outer faces: 1 body, 178.2 m\u00b2 (+135.0% of 75.83), WRONG"
+     }
+    },
+    "mechanism": "STATEMENTS_ONLY",
+    "now": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "registration": [
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 3
+      },
+      "confidence": 0.718133,
+      "mppX": 0.024514,
+      "mppY": 0.024724
+     },
+     {
+      "anchors": {
+       "CHAIN_CORRECTED": 2
+      },
+      "confidence": 0.66,
+      "mppX": 0.024515,
+      "mppY": 0.024724
+     }
+    ],
+    "scaleCmPerPx": [
+     2.4619,
+     2.46195
+    ],
+    "selectedFrame": [
+     "frame-asset-rzut-36e1e5a39d-fb4609c5e2",
+     "frame-asset-rzut-36e1e5a39d-fb4609c5e2"
+    ],
+    "was": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   }
+  ]
+ },
+ "version": 1
+}
