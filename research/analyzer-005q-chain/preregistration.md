@@ -179,3 +179,33 @@ input is a sealed legacy evidence set that no source-metrics challenger can reac
 evaluated on the 45 `EXTRACT` rows; the legacy rows' counts are reported apart (`a_legacyRowsUnreachable`; identical in
 every variant). Nothing else in the gates changed; C1's other results were read before this addendum and are reported as
 first scored.
+
+### Addendum C (after the three reviews; disclosed — corrections of the scorers and the gate evaluator, no threshold changed, no replay re-run)
+
+Three read-only reviews (A provenance, B binding/truth, C full-solver semantics), each P0/P1 re-run by two skeptics;
+dispositions in `stage-reports/artifacts/analyzer-005q-chain/post-review/reviews.json`; one negative test per fixed
+finding in `research/analyzer-005q-chain/test_review_fixes.py` (11 tests; all fail on the first-scored code, all pass now).
+The first-scored values are kept beside the corrected ones in every artifact.
+
+- **G2c (B-01, P0).** The truth-sheet clause is evaluated on **both axes** (the definition names no axis; the first
+  implementation read mppX only), and a sheet without TRUE_SCALE gets an anisotropy clause (|mppY/mppX − 1| > 3 % at
+  confidence ≥ 0.5); both counted new against C0's sheet. The X-only result stays as `c_xOnlyFirstScored`.
+- **Label correctness (B-02, P0).** `correctPrintedBound` counted a label without binding truth as correctly bound; it is
+  now split into `…Verified` / `…Unverified`, with an audit-only span plausibility (stated value / segment px /
+  TRUE_SCALE, > 3 %) and `spuriousCertaintyWithSpanAudit`. TRUE_SCALE is truth: the audit lives in the scorer only.
+- **G2d (A1).** Compared per SOURCE_EXACT element (collection:id = interpretation) against C0, not as a per-row count.
+  No origin tracing is attempted: any new or changed SOURCE_EXACT element counts (stricter than "unless traced to READ").
+- **G2b′ (B-05).** A token stated as a printed READ number on more than one segment (more than in C0) fails G2.
+- **G2a′ (A5).** Part of G2's pass for the variants that claim it (C3, C4), as addendum A required.
+- **Binding sensitivity (B-03).** Binding counts are also reported without the 2 questionable binding truths (§1).
+- **Abstention (B-08).** A label on a segment the variant marked `labelled` without evidence is an explicit abstention.
+- **G1 split (C-4, C-5).** G1 failures are listed as material or minor (only footprint ≤ 0.1 m² and opening widths ≤ 1 cm,
+  same kinds/hosts/count); the gate is unchanged. `byteOnlyModelChanges` is renamed `changesBelowSummaryResolution`
+  (the summary does not see room outlines, wall endpoints or opening offsets).
+- **Published footprint (C-1).** Correction of §2's wording: the published footprint is an input of the frozen production
+  solver in every variant (layout gate > 20 % BLOCKING; plan-resolution footprint buckets) — not only of the offline
+  verdict. No challenger reads it; rows now carry `publishedFigure` / `gateBlocking`, and G5 names
+  PUBLISHED_AREA_REFUSAL. G2c counts false-confident scales that pass this production check.
+- **Renamed field (B-12).** `scaleDependentValueEqualsInk` compared with the truth value; it is `…EqualsTruth`.
+
+Effect: every variant fails G1 (material failures in all six) before and after; ADOPTION_RECOMMENDATION stays NONE.

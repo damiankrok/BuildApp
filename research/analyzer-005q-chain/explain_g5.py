@@ -6,7 +6,9 @@
 
 For each row the gate lists, it records the first decision stage whose outcome or reading differs from C0 (stage order as
 recorded by score_houses.py), both readings, and what moved upstream in the selected plan frame: registration presence,
-anchor count, metres per pixel X/Y, scale. The mechanism class is computed from those facts only (no published figure):
+anchor count, metres per pixel X/Y, scale. The mechanism class is computed from those facts (addendum C, C-1: plus the production solver's own use of the
+published footprint, which every variant receives — the class PUBLISHED_AREA_REFUSAL comes first when it applies):
+  PUBLISHED_AREA_REFUSAL the variant's run is refused by the layout gate's FOOTPRINT_AREA_WRONG and C0's is not
   REGISTRATION_LOST     the selected frame had a registration under C0 and has none (or a different frame) now
   REGISTRATION_MOVED    the registration exists in both and mpp moved by more than 0.1 %
   STATEMENTS_ONLY       the registration is unchanged (<= 0.1 %); only the stated values / statements changed
@@ -44,7 +46,9 @@ def main():
             sv = (v.get('metric') or {}).get(v.get('frame') or '', {}) if v.get('frame') else {}
             reg_b = sb.get('mppX') is not None
             reg_v = sv.get('mppX') is not None
-            if not b.get('frame') and not v.get('frame'):
+            if v.get('gateBlocking') == 'FOOTPRINT_AREA_WRONG' and b.get('gateBlocking') != 'FOOTPRINT_AREA_WRONG':
+                mech = 'PUBLISHED_AREA_REFUSAL'
+            elif not b.get('frame') and not v.get('frame'):
                 mech = 'NO_PLAN_FRAME'
             elif reg_b and (not reg_v or b.get('frame') != v.get('frame')):
                 mech = 'REGISTRATION_LOST'
@@ -56,7 +60,8 @@ def main():
                         'selectedFrame': [b.get('frame'), v.get('frame')],
                         'registration': [{k: sb.get(k) for k in ('mppX', 'mppY', 'anchors', 'confidence')} if sb else None,
                                          {k: sv.get(k) for k in ('mppX', 'mppY', 'anchors', 'confidence')} if sv else None],
-                        'scaleCmPerPx': [b.get('scaleCmPerPx'), v.get('scaleCmPerPx')]})
+                        'scaleCmPerPx': [b.get('scaleCmPerPx'), v.get('scaleCmPerPx')],
+                        'publishedFigure': [b.get('publishedFigure'), v.get('publishedFigure')], 'gateBlocking': [b.get('gateBlocking'), v.get('gateBlocking')]})
         out['variants'][L] = lst
     json.dump(out, open(a.out, 'w'), indent=1, sort_keys=True)
     for L, lst in out['variants'].items():

@@ -42,7 +42,12 @@
     "primary:MAIN": {
      "binding:CORRECT": 13,
      "binding:WRONG": 2,
+     "bindingExclQuestionable:CORRECT": 13,
+     "bindingExclQuestionable:WRONG": 0,
      "correctPrintedBound": 10,
+     "correctPrintedBoundSpanImplausible": 0,
+     "correctPrintedBoundUnverified": 5,
+     "correctPrintedBoundVerified": 5,
      "firstBad": {
       "NEVER_PROPOSED": 3,
       "NONE": 10,
@@ -59,14 +64,21 @@
      },
      "labels": 110,
      "scaleDependentAnchor": 42,
-     "scaleDependentValueEqualsInk": 12,
+     "scaleDependentValueEqualsTruth": 12,
+     "soundAbstention": 0,
      "spuriousCertainty": 4,
+     "spuriousCertaintyWithSpanAudit": 4,
      "wrongWhenAsserted": 3
     },
     "primary:SMOKE": {
      "binding:CORRECT": 5,
      "binding:WRONG": 0,
+     "bindingExclQuestionable:CORRECT": 5,
+     "bindingExclQuestionable:WRONG": 0,
      "correctPrintedBound": 4,
+     "correctPrintedBoundSpanImplausible": 0,
+     "correctPrintedBoundUnverified": 2,
+     "correctPrintedBoundVerified": 2,
      "firstBad": {
       "NEVER_PROPOSED": 1,
       "NONE": 4,
@@ -77,8 +89,10 @@
      },
      "labels": 17,
      "scaleDependentAnchor": 6,
-     "scaleDependentValueEqualsInk": 2,
+     "scaleDependentValueEqualsTruth": 2,
+     "soundAbstention": 0,
      "spuriousCertainty": 0,
+     "spuriousCertaintyWithSpanAudit": 0,
      "wrongWhenAsserted": 0
     },
     "primary:perSheet": {
@@ -158,7 +172,12 @@
     "sensitivity:MAIN": {
      "binding:CORRECT": 13,
      "binding:WRONG": 3,
+     "bindingExclQuestionable:CORRECT": 13,
+     "bindingExclQuestionable:WRONG": 0,
      "correctPrintedBound": 10,
+     "correctPrintedBoundSpanImplausible": 0,
+     "correctPrintedBoundUnverified": 5,
+     "correctPrintedBoundVerified": 5,
      "firstBad": {
       "NEVER_PROPOSED": 23,
       "NONE": 10,
@@ -175,14 +194,21 @@
      },
      "labels": 152,
      "scaleDependentAnchor": 42,
-     "scaleDependentValueEqualsInk": 12,
+     "scaleDependentValueEqualsTruth": 12,
+     "soundAbstention": 0,
      "spuriousCertainty": 4,
+     "spuriousCertaintyWithSpanAudit": 4,
      "wrongWhenAsserted": 3
     },
     "sensitivity:SMOKE": {
      "binding:CORRECT": 5,
      "binding:WRONG": 0,
+     "bindingExclQuestionable:CORRECT": 5,
+     "bindingExclQuestionable:WRONG": 0,
      "correctPrintedBound": 4,
+     "correctPrintedBoundSpanImplausible": 0,
+     "correctPrintedBoundUnverified": 2,
+     "correctPrintedBoundVerified": 2,
      "firstBad": {
       "NEVER_PROPOSED": 3,
       "NONE": 4,
@@ -193,8 +219,10 @@
      },
      "labels": 20,
      "scaleDependentAnchor": 6,
-     "scaleDependentValueEqualsInk": 2,
+     "scaleDependentValueEqualsTruth": 2,
+     "soundAbstention": 0,
      "spuriousCertainty": 0,
+     "spuriousCertaintyWithSpanAudit": 0,
      "wrongWhenAsserted": 0
     },
     "sensitivity:perSheet": {
@@ -292,11 +320,75 @@
      "rarytasy-eoze",
      "rarytasy-g2e"
     ],
+    "G1material": [
+     "A03",
+     "dom-pod-jarzabem",
+     "dom-w-daliach",
+     "dom-w-modrzykach",
+     "dom-w-morelach",
+     "dom-w-tunbergiach",
+     "dom-w-tymianku",
+     "kosacce-clean",
+     "kosacce-tracked",
+     "marcowki",
+     "rarytasy-g2e"
+    ],
+    "G1minor": [
+     "dom-w-cieszyniankach",
+     "dom-w-jablonkach",
+     "rarytasy-eoze"
+    ],
     "G2": false,
     "G2a": 0,
     "G2a'": 43,
     "G2b": 0,
+    "G2b'": {
+     "kosacce-clean": [
+      0,
+      1
+     ],
+     "kosacce-tracked": [
+      0,
+      1
+     ]
+    },
     "G2c": [
+     {
+      "baseline": [
+       "COMPLETED",
+       -1.33
+      ],
+      "case": "kosacce-clean",
+      "residualPct": 11.18
+     },
+     {
+      "baseline": [
+       "COMPLETED",
+       -1.33
+      ],
+      "case": "kosacce-tracked",
+      "residualPct": 11.18
+     },
+     {
+      "baseline": [
+       "COMPLETED",
+       -5.48
+      ],
+      "case": "dom-w-tymianku",
+      "residualPct": -7.76
+     },
+     {
+      "errX": 0.7765,
+      "errY": -0.0028,
+      "sheet": "S1"
+     },
+     {
+      "anisotropy": 0.1378,
+      "noTrueScale": true,
+      "sheet": "S3"
+     }
+    ],
+    "G2cXOnlyFirstScored": [
      {
       "baseline": [
        "COMPLETED",
@@ -326,7 +418,19 @@
       "sheet": "S1"
      }
     ],
-    "G2d": [],
+    "G2d": [
+     "dom-w-morelach",
+     "marcowki",
+     "rarytasy-g2e",
+     "kosacce-clean",
+     "kosacce-tracked",
+     "willa-miranda",
+     "dom-w-modrzykach",
+     "dom-w-helikoniach",
+     "dom-w-cyklamenach",
+     "dom-w-tymianku"
+    ],
+    "G2dCountFirstScored": [],
     "G3": false,
     "G3changes": 36,
     "G5changed": [
@@ -411,7 +515,12 @@
     "primary:MAIN": {
      "binding:CORRECT": 13,
      "binding:WRONG": 2,
+     "bindingExclQuestionable:CORRECT": 13,
+     "bindingExclQuestionable:WRONG": 0,
      "correctPrintedBound": 41,
+     "correctPrintedBoundSpanImplausible": 12,
+     "correctPrintedBoundUnverified": 31,
+     "correctPrintedBoundVerified": 10,
      "firstBad": {
       "NEVER_PROPOSED": 3,
       "NONE": 41,
@@ -428,14 +537,21 @@
      },
      "labels": 110,
      "scaleDependentAnchor": 0,
-     "scaleDependentValueEqualsInk": 4,
+     "scaleDependentValueEqualsTruth": 4,
+     "soundAbstention": 0,
      "spuriousCertainty": 4,
+     "spuriousCertaintyWithSpanAudit": 16,
      "wrongWhenAsserted": 3
     },
     "primary:SMOKE": {
      "binding:CORRECT": 5,
      "binding:WRONG": 0,
+     "bindingExclQuestionable:CORRECT": 5,
+     "bindingExclQuestionable:WRONG": 0,
      "correctPrintedBound": 9,
+     "correctPrintedBoundSpanImplausible": 2,
+     "correctPrintedBoundUnverified": 4,
+     "correctPrintedBoundVerified": 5,
      "firstBad": {
       "NEVER_PROPOSED": 1,
       "NONE": 9,
@@ -446,8 +562,10 @@
      },
      "labels": 17,
      "scaleDependentAnchor": 0,
-     "scaleDependentValueEqualsInk": 0,
+     "scaleDependentValueEqualsTruth": 0,
+     "soundAbstention": 0,
      "spuriousCertainty": 0,
+     "spuriousCertaintyWithSpanAudit": 2,
      "wrongWhenAsserted": 0
     },
     "primary:perSheet": {
@@ -527,7 +645,12 @@
     "sensitivity:MAIN": {
      "binding:CORRECT": 13,
      "binding:WRONG": 3,
+     "bindingExclQuestionable:CORRECT": 13,
+     "bindingExclQuestionable:WRONG": 0,
      "correctPrintedBound": 40,
+     "correctPrintedBoundSpanImplausible": 11,
+     "correctPrintedBoundUnverified": 30,
+     "correctPrintedBoundVerified": 10,
      "firstBad": {
       "NEVER_PROPOSED": 23,
       "NONE": 40,
@@ -544,14 +667,21 @@
      },
      "labels": 152,
      "scaleDependentAnchor": 0,
-     "scaleDependentValueEqualsInk": 4,
+     "scaleDependentValueEqualsTruth": 4,
+     "soundAbstention": 0,
      "spuriousCertainty": 5,
+     "spuriousCertaintyWithSpanAudit": 16,
      "wrongWhenAsserted": 3
     },
     "sensitivity:SMOKE": {
      "binding:CORRECT": 5,
      "binding:WRONG": 0,
+     "bindingExclQuestionable:CORRECT": 5,
+     "bindingExclQuestionable:WRONG": 0,
      "correctPrintedBound": 9,
+     "correctPrintedBoundSpanImplausible": 2,
+     "correctPrintedBoundUnverified": 4,
+     "correctPrintedBoundVerified": 5,
      "firstBad": {
       "NEVER_PROPOSED": 3,
       "NONE": 9,
@@ -562,8 +692,10 @@
      },
      "labels": 20,
      "scaleDependentAnchor": 0,
-     "scaleDependentValueEqualsInk": 0,
+     "scaleDependentValueEqualsTruth": 0,
+     "soundAbstention": 0,
      "spuriousCertainty": 0,
+     "spuriousCertaintyWithSpanAudit": 2,
      "wrongWhenAsserted": 0
     },
     "sensitivity:perSheet": {
@@ -732,11 +864,71 @@
      "rarytasy-eoze",
      "rarytasy-g2e"
     ],
+    "G1material": [
+     "A03",
+     "dom-pod-jarzabem",
+     "dom-w-daliach",
+     "dom-w-modrzykach",
+     "dom-w-morelach",
+     "dom-w-tunbergiach",
+     "dom-w-tymianku",
+     "kosacce-clean",
+     "kosacce-tracked",
+     "marcowki",
+     "rarytasy-g2e"
+    ],
+    "G1minor": [
+     "dom-w-cieszyniankach",
+     "dom-w-jablonkach",
+     "dom-w-zurawkach",
+     "rarytasy-eoze"
+    ],
     "G2": false,
     "G2a": 0,
     "G2a'": 51,
     "G2b": 0,
+    "G2b'": {
+     "kosacce-clean": [
+      0,
+      1
+     ],
+     "kosacce-tracked": [
+      0,
+      1
+     ]
+    },
     "G2c": [
+     {
+      "baseline": [
+       "COMPLETED",
+       -1.33
+      ],
+      "case": "kosacce-clean",
+      "residualPct": 11.22
+     },
+     {
+      "baseline": [
+       "COMPLETED",
+       -1.33
+      ],
+      "case": "kosacce-tracked",
+      "residualPct": 11.22
+     },
+     {
+      "baseline": [
+       "COMPLETED",
+       -5.48
+      ],
+      "case": "dom-w-tymianku",
+      "residualPct": -7.76
+     },
+     {
+      "anisotropy": 0.1378,
+      "noTrueScale": true,
+      "sheet": "S3"
+     }
+    ],
+    "G2cXOnlyFirstScored": [
      {
       "baseline": [
        "COMPLETED",
@@ -762,7 +954,21 @@
       "residualPct": -7.76
      }
     ],
-    "G2d": [],
+    "G2d": [
+     "dom-pod-jarzabem",
+     "dom-w-morelach",
+     "marcowki",
+     "rarytasy-g2e",
+     "kosacce-clean",
+     "kosacce-tracked",
+     "willa-miranda",
+     "dom-w-modrzykach",
+     "dom-w-helikoniach",
+     "dom-w-cyklamenach",
+     "A03",
+     "dom-w-tymianku"
+    ],
+    "G2dCountFirstScored": [],
     "G3": false,
     "G3changes": 43,
     "G5changed": [
@@ -850,7 +1056,12 @@
     "primary:MAIN": {
      "binding:CORRECT": 17,
      "binding:WRONG": 2,
+     "bindingExclQuestionable:CORRECT": 17,
+     "bindingExclQuestionable:WRONG": 0,
      "correctPrintedBound": 47,
+     "correctPrintedBoundSpanImplausible": 11,
+     "correctPrintedBoundUnverified": 32,
+     "correctPrintedBoundVerified": 15,
      "firstBad": {
       "NEVER_PROPOSED": 3,
       "NONE": 46,
@@ -866,14 +1077,21 @@
      },
      "labels": 110,
      "scaleDependentAnchor": 0,
-     "scaleDependentValueEqualsInk": 4,
+     "scaleDependentValueEqualsTruth": 4,
+     "soundAbstention": 0,
      "spuriousCertainty": 3,
+     "spuriousCertaintyWithSpanAudit": 14,
      "wrongWhenAsserted": 2
     },
     "primary:SMOKE": {
      "binding:CORRECT": 5,
      "binding:WRONG": 0,
+     "bindingExclQuestionable:CORRECT": 5,
+     "bindingExclQuestionable:WRONG": 0,
      "correctPrintedBound": 9,
+     "correctPrintedBoundSpanImplausible": 2,
+     "correctPrintedBoundUnverified": 4,
+     "correctPrintedBoundVerified": 5,
      "firstBad": {
       "NEVER_PROPOSED": 1,
       "NONE": 9,
@@ -884,8 +1102,10 @@
      },
      "labels": 17,
      "scaleDependentAnchor": 0,
-     "scaleDependentValueEqualsInk": 0,
+     "scaleDependentValueEqualsTruth": 0,
+     "soundAbstention": 0,
      "spuriousCertainty": 0,
+     "spuriousCertaintyWithSpanAudit": 2,
      "wrongWhenAsserted": 0
     },
     "primary:perSheet": {
@@ -965,7 +1185,12 @@
     "sensitivity:MAIN": {
      "binding:CORRECT": 17,
      "binding:WRONG": 3,
+     "bindingExclQuestionable:CORRECT": 17,
+     "bindingExclQuestionable:WRONG": 0,
      "correctPrintedBound": 46,
+     "correctPrintedBoundSpanImplausible": 10,
+     "correctPrintedBoundUnverified": 31,
+     "correctPrintedBoundVerified": 15,
      "firstBad": {
       "NEVER_PROPOSED": 23,
       "NONE": 45,
@@ -982,14 +1207,21 @@
      },
      "labels": 152,
      "scaleDependentAnchor": 0,
-     "scaleDependentValueEqualsInk": 4,
+     "scaleDependentValueEqualsTruth": 4,
+     "soundAbstention": 0,
      "spuriousCertainty": 4,
+     "spuriousCertaintyWithSpanAudit": 14,
      "wrongWhenAsserted": 2
     },
     "sensitivity:SMOKE": {
      "binding:CORRECT": 5,
      "binding:WRONG": 0,
+     "bindingExclQuestionable:CORRECT": 5,
+     "bindingExclQuestionable:WRONG": 0,
      "correctPrintedBound": 9,
+     "correctPrintedBoundSpanImplausible": 2,
+     "correctPrintedBoundUnverified": 4,
+     "correctPrintedBoundVerified": 5,
      "firstBad": {
       "NEVER_PROPOSED": 3,
       "NONE": 9,
@@ -1000,8 +1232,10 @@
      },
      "labels": 20,
      "scaleDependentAnchor": 0,
-     "scaleDependentValueEqualsInk": 0,
+     "scaleDependentValueEqualsTruth": 0,
+     "soundAbstention": 0,
      "spuriousCertainty": 0,
+     "spuriousCertaintyWithSpanAudit": 2,
      "wrongWhenAsserted": 0
     },
     "sensitivity:perSheet": {
@@ -1152,11 +1386,61 @@
      "marcowki",
      "rarytasy-g2e"
     ],
+    "G1material": [
+     "A02",
+     "A06",
+     "dom-pod-jarzabem",
+     "dom-w-cieszyniankach",
+     "dom-w-modrzykach",
+     "dom-w-morelach",
+     "dom-w-tymianku",
+     "dom-w-zurawkach",
+     "kosacce-clean",
+     "kosacce-tracked",
+     "marcowki",
+     "rarytasy-g2e"
+    ],
+    "G1minor": [
+     "A03",
+     "dom-miniaturka"
+    ],
     "G2": false,
     "G2a": 420,
     "G2a'": 91,
     "G2b": 0,
+    "G2b'": {},
     "G2c": [
+     {
+      "baseline": [
+       "COMPLETED",
+       -2.17
+      ],
+      "case": "dom-w-morelach",
+      "residualPct": -6.8
+     },
+     {
+      "baseline": [
+       "FAILED",
+       null
+      ],
+      "case": "dom-w-cyklamenach",
+      "residualPct": -7.69
+     },
+     {
+      "baseline": [
+       "FAILED",
+       null
+      ],
+      "case": "A04",
+      "residualPct": -6.92
+     },
+     {
+      "anisotropy": -0.0372,
+      "noTrueScale": true,
+      "sheet": "S2"
+     }
+    ],
+    "G2cXOnlyFirstScored": [
      {
       "baseline": [
        "COMPLETED",
@@ -1182,7 +1466,24 @@
       "residualPct": -6.92
      }
     ],
-    "G2d": [],
+    "G2d": [
+     "dom-w-morelach",
+     "rarytasy-g2e",
+     "kosacce-clean",
+     "kosacce-tracked",
+     "willa-miranda",
+     "dom-w-zurawkach",
+     "dom-w-modrzykach",
+     "dom-w-helikoniach",
+     "dom-w-cyklamenach",
+     "A02",
+     "A03",
+     "A04",
+     "A06",
+     "dom-w-cieszyniankach",
+     "dom-miniaturka"
+    ],
+    "G2dCountFirstScored": [],
     "G3": false,
     "G3changes": 63,
     "G5changed": [
@@ -1265,7 +1566,12 @@
     "primary:MAIN": {
      "binding:CORRECT": 13,
      "binding:WRONG": 2,
+     "bindingExclQuestionable:CORRECT": 13,
+     "bindingExclQuestionable:WRONG": 0,
      "correctPrintedBound": 9,
+     "correctPrintedBoundSpanImplausible": 0,
+     "correctPrintedBoundUnverified": 4,
+     "correctPrintedBoundVerified": 5,
      "firstBad": {
       "NEVER_PROPOSED": 3,
       "NONE": 9,
@@ -1282,14 +1588,21 @@
      },
      "labels": 110,
      "scaleDependentAnchor": 29,
-     "scaleDependentValueEqualsInk": 11,
+     "scaleDependentValueEqualsTruth": 11,
+     "soundAbstention": 60,
      "spuriousCertainty": 1,
+     "spuriousCertaintyWithSpanAudit": 1,
      "wrongWhenAsserted": 1
     },
     "primary:SMOKE": {
      "binding:CORRECT": 3,
      "binding:WRONG": 0,
+     "bindingExclQuestionable:CORRECT": 3,
+     "bindingExclQuestionable:WRONG": 0,
      "correctPrintedBound": 1,
+     "correctPrintedBoundSpanImplausible": 0,
+     "correctPrintedBoundUnverified": 1,
+     "correctPrintedBoundVerified": 0,
      "firstBad": {
       "NEVER_PROPOSED": 1,
       "NONE": 1,
@@ -1300,8 +1613,10 @@
      },
      "labels": 17,
      "scaleDependentAnchor": 3,
-     "scaleDependentValueEqualsInk": 2,
+     "scaleDependentValueEqualsTruth": 2,
+     "soundAbstention": 10,
      "spuriousCertainty": 0,
+     "spuriousCertaintyWithSpanAudit": 0,
      "wrongWhenAsserted": 0
     },
     "primary:perSheet": {
@@ -1381,7 +1696,12 @@
     "sensitivity:MAIN": {
      "binding:CORRECT": 13,
      "binding:WRONG": 2,
+     "bindingExclQuestionable:CORRECT": 13,
+     "bindingExclQuestionable:WRONG": 0,
      "correctPrintedBound": 9,
+     "correctPrintedBoundSpanImplausible": 0,
+     "correctPrintedBoundUnverified": 4,
+     "correctPrintedBoundVerified": 5,
      "firstBad": {
       "NEVER_PROPOSED": 23,
       "NONE": 9,
@@ -1398,14 +1718,21 @@
      },
      "labels": 152,
      "scaleDependentAnchor": 29,
-     "scaleDependentValueEqualsInk": 11,
+     "scaleDependentValueEqualsTruth": 11,
+     "soundAbstention": 69,
      "spuriousCertainty": 1,
+     "spuriousCertaintyWithSpanAudit": 1,
      "wrongWhenAsserted": 1
     },
     "sensitivity:SMOKE": {
      "binding:CORRECT": 3,
      "binding:WRONG": 0,
+     "bindingExclQuestionable:CORRECT": 3,
+     "bindingExclQuestionable:WRONG": 0,
      "correctPrintedBound": 1,
+     "correctPrintedBoundSpanImplausible": 0,
+     "correctPrintedBoundUnverified": 1,
+     "correctPrintedBoundVerified": 0,
      "firstBad": {
       "NEVER_PROPOSED": 3,
       "NONE": 1,
@@ -1416,8 +1743,10 @@
      },
      "labels": 20,
      "scaleDependentAnchor": 3,
-     "scaleDependentValueEqualsInk": 2,
+     "scaleDependentValueEqualsTruth": 2,
+     "soundAbstention": 10,
      "spuriousCertainty": 0,
+     "spuriousCertaintyWithSpanAudit": 0,
      "wrongWhenAsserted": 0
     },
     "sensitivity:perSheet": {
@@ -1523,12 +1852,25 @@
      "dom-w-modrzykach",
      "dom-w-tymianku"
     ],
+    "G1material": [
+     "dom-w-modrzykach",
+     "dom-w-tymianku"
+    ],
+    "G1minor": [
+     "dom-miniaturka"
+    ],
     "G2": false,
     "G2a": 448,
     "G2a'": 0,
     "G2b": 0,
+    "G2b'": {},
     "G2c": [],
-    "G2d": [],
+    "G2cXOnlyFirstScored": [],
+    "G2d": [
+     "dom-w-modrzykach",
+     "dom-miniaturka"
+    ],
+    "G2dCountFirstScored": [],
     "G3": false,
     "G3changes": 11,
     "G5changed": [
@@ -1591,7 +1933,12 @@
     "primary:MAIN": {
      "binding:CORRECT": 13,
      "binding:WRONG": 2,
+     "bindingExclQuestionable:CORRECT": 13,
+     "bindingExclQuestionable:WRONG": 0,
      "correctPrintedBound": 10,
+     "correctPrintedBoundSpanImplausible": 0,
+     "correctPrintedBoundUnverified": 5,
+     "correctPrintedBoundVerified": 5,
      "firstBad": {
       "NEVER_PROPOSED": 3,
       "NONE": 10,
@@ -1608,14 +1955,21 @@
      },
      "labels": 110,
      "scaleDependentAnchor": 39,
-     "scaleDependentValueEqualsInk": 11,
+     "scaleDependentValueEqualsTruth": 11,
+     "soundAbstention": 0,
      "spuriousCertainty": 4,
+     "spuriousCertaintyWithSpanAudit": 4,
      "wrongWhenAsserted": 3
     },
     "primary:SMOKE": {
      "binding:CORRECT": 5,
      "binding:WRONG": 0,
+     "bindingExclQuestionable:CORRECT": 5,
+     "bindingExclQuestionable:WRONG": 0,
      "correctPrintedBound": 4,
+     "correctPrintedBoundSpanImplausible": 0,
+     "correctPrintedBoundUnverified": 2,
+     "correctPrintedBoundVerified": 2,
      "firstBad": {
       "NEVER_PROPOSED": 1,
       "NONE": 4,
@@ -1626,8 +1980,10 @@
      },
      "labels": 17,
      "scaleDependentAnchor": 6,
-     "scaleDependentValueEqualsInk": 2,
+     "scaleDependentValueEqualsTruth": 2,
+     "soundAbstention": 0,
      "spuriousCertainty": 0,
+     "spuriousCertaintyWithSpanAudit": 0,
      "wrongWhenAsserted": 0
     },
     "primary:perSheet": {
@@ -1707,7 +2063,12 @@
     "sensitivity:MAIN": {
      "binding:CORRECT": 13,
      "binding:WRONG": 3,
+     "bindingExclQuestionable:CORRECT": 13,
+     "bindingExclQuestionable:WRONG": 0,
      "correctPrintedBound": 10,
+     "correctPrintedBoundSpanImplausible": 0,
+     "correctPrintedBoundUnverified": 5,
+     "correctPrintedBoundVerified": 5,
      "firstBad": {
       "NEVER_PROPOSED": 23,
       "NONE": 10,
@@ -1724,14 +2085,21 @@
      },
      "labels": 152,
      "scaleDependentAnchor": 39,
-     "scaleDependentValueEqualsInk": 11,
+     "scaleDependentValueEqualsTruth": 11,
+     "soundAbstention": 0,
      "spuriousCertainty": 4,
+     "spuriousCertaintyWithSpanAudit": 4,
      "wrongWhenAsserted": 3
     },
     "sensitivity:SMOKE": {
      "binding:CORRECT": 5,
      "binding:WRONG": 0,
+     "bindingExclQuestionable:CORRECT": 5,
+     "bindingExclQuestionable:WRONG": 0,
      "correctPrintedBound": 4,
+     "correctPrintedBoundSpanImplausible": 0,
+     "correctPrintedBoundUnverified": 2,
+     "correctPrintedBoundVerified": 2,
      "firstBad": {
       "NEVER_PROPOSED": 3,
       "NONE": 4,
@@ -1742,8 +2110,10 @@
      },
      "labels": 20,
      "scaleDependentAnchor": 6,
-     "scaleDependentValueEqualsInk": 2,
+     "scaleDependentValueEqualsTruth": 2,
+     "soundAbstention": 0,
      "spuriousCertainty": 0,
+     "spuriousCertaintyWithSpanAudit": 0,
      "wrongWhenAsserted": 0
     },
     "sensitivity:perSheet": {
@@ -1845,11 +2215,64 @@
      "rarytasy-eoze",
      "rarytasy-g2e"
     ],
+    "G1material": [
+     "A02",
+     "A03",
+     "A06",
+     "dom-pod-jarzabem",
+     "dom-w-cieszyniankach",
+     "dom-w-daliach",
+     "dom-w-modrzykach",
+     "dom-w-morelach",
+     "dom-w-tymianku",
+     "dom-w-zurawkach",
+     "kosacce-clean",
+     "kosacce-tracked",
+     "marcowki",
+     "rarytasy-g2e"
+    ],
+    "G1minor": [
+     "dom-miniaturka",
+     "dom-w-jablonkach",
+     "rarytasy-eoze"
+    ],
     "G2": false,
     "G2a": 0,
     "G2a'": 0,
     "G2b": 0,
+    "G2b'": {},
     "G2c": [
+     {
+      "baseline": [
+       "COMPLETED",
+       -2.17
+      ],
+      "case": "dom-w-morelach",
+      "residualPct": -6.77
+     },
+     {
+      "baseline": [
+       "FAILED",
+       null
+      ],
+      "case": "dom-w-cyklamenach",
+      "residualPct": -7.58
+     },
+     {
+      "baseline": [
+       "FAILED",
+       null
+      ],
+      "case": "A04",
+      "residualPct": -6.92
+     },
+     {
+      "errX": 0.5886,
+      "errY": -0.0029,
+      "sheet": "S1"
+     }
+    ],
+    "G2cXOnlyFirstScored": [
      {
       "baseline": [
        "COMPLETED",
@@ -1879,7 +2302,23 @@
       "sheet": "S1"
      }
     ],
-    "G2d": [],
+    "G2d": [
+     "dom-w-morelach",
+     "kosacce-clean",
+     "kosacce-tracked",
+     "willa-miranda",
+     "dom-w-zurawkach",
+     "dom-w-modrzykach",
+     "dom-w-helikoniach",
+     "dom-w-cyklamenach",
+     "A02",
+     "A03",
+     "A04",
+     "A06",
+     "dom-w-cieszyniankach",
+     "dom-miniaturka"
+    ],
+    "G2dCountFirstScored": [],
     "G3": false,
     "G3changes": 69,
     "G5changed": [
@@ -1973,7 +2412,12 @@
     "primary:MAIN": {
      "binding:CORRECT": 13,
      "binding:WRONG": 2,
+     "bindingExclQuestionable:CORRECT": 13,
+     "bindingExclQuestionable:WRONG": 0,
      "correctPrintedBound": 30,
+     "correctPrintedBoundSpanImplausible": 6,
+     "correctPrintedBoundUnverified": 20,
+     "correctPrintedBoundVerified": 10,
      "firstBad": {
       "NEVER_PROPOSED": 3,
       "NONE": 30,
@@ -1990,14 +2434,21 @@
      },
      "labels": 110,
      "scaleDependentAnchor": 0,
-     "scaleDependentValueEqualsInk": 3,
+     "scaleDependentValueEqualsTruth": 3,
+     "soundAbstention": 61,
      "spuriousCertainty": 2,
+     "spuriousCertaintyWithSpanAudit": 8,
      "wrongWhenAsserted": 1
     },
     "primary:SMOKE": {
      "binding:CORRECT": 3,
      "binding:WRONG": 0,
+     "bindingExclQuestionable:CORRECT": 3,
+     "bindingExclQuestionable:WRONG": 0,
      "correctPrintedBound": 4,
+     "correctPrintedBoundSpanImplausible": 0,
+     "correctPrintedBoundUnverified": 1,
+     "correctPrintedBoundVerified": 3,
      "firstBad": {
       "NEVER_PROPOSED": 1,
       "NONE": 4,
@@ -2007,8 +2458,10 @@
      },
      "labels": 17,
      "scaleDependentAnchor": 0,
-     "scaleDependentValueEqualsInk": 0,
+     "scaleDependentValueEqualsTruth": 0,
+     "soundAbstention": 10,
      "spuriousCertainty": 0,
+     "spuriousCertaintyWithSpanAudit": 0,
      "wrongWhenAsserted": 0
     },
     "primary:perSheet": {
@@ -2088,7 +2541,12 @@
     "sensitivity:MAIN": {
      "binding:CORRECT": 13,
      "binding:WRONG": 2,
+     "bindingExclQuestionable:CORRECT": 13,
+     "bindingExclQuestionable:WRONG": 0,
      "correctPrintedBound": 30,
+     "correctPrintedBoundSpanImplausible": 6,
+     "correctPrintedBoundUnverified": 20,
+     "correctPrintedBoundVerified": 10,
      "firstBad": {
       "NEVER_PROPOSED": 23,
       "NONE": 30,
@@ -2105,14 +2563,21 @@
      },
      "labels": 152,
      "scaleDependentAnchor": 0,
-     "scaleDependentValueEqualsInk": 3,
+     "scaleDependentValueEqualsTruth": 3,
+     "soundAbstention": 70,
      "spuriousCertainty": 2,
+     "spuriousCertaintyWithSpanAudit": 8,
      "wrongWhenAsserted": 1
     },
     "sensitivity:SMOKE": {
      "binding:CORRECT": 3,
      "binding:WRONG": 0,
+     "bindingExclQuestionable:CORRECT": 3,
+     "bindingExclQuestionable:WRONG": 0,
      "correctPrintedBound": 4,
+     "correctPrintedBoundSpanImplausible": 0,
+     "correctPrintedBoundUnverified": 1,
+     "correctPrintedBoundVerified": 3,
      "firstBad": {
       "NEVER_PROPOSED": 3,
       "NONE": 4,
@@ -2122,8 +2587,10 @@
      },
      "labels": 20,
      "scaleDependentAnchor": 0,
-     "scaleDependentValueEqualsInk": 0,
+     "scaleDependentValueEqualsTruth": 0,
+     "soundAbstention": 10,
      "spuriousCertainty": 0,
+     "spuriousCertaintyWithSpanAudit": 0,
      "wrongWhenAsserted": 0
     },
     "sensitivity:perSheet": {
@@ -2286,12 +2753,43 @@
      "marcowki",
      "rarytasy-g2e"
     ],
+    "G1material": [
+     "dom-pod-jarzabem",
+     "kosacce-clean",
+     "kosacce-tracked",
+     "marcowki",
+     "rarytasy-g2e"
+    ],
+    "G1minor": [
+     "A03",
+     "dom-miniaturka",
+     "dom-w-arkadiach",
+     "dom-w-zurawkach"
+    ],
     "G2": false,
     "G2a": 468,
     "G2a'": 119,
     "G2b": 0,
-    "G2c": [],
-    "G2d": [],
+    "G2b'": {},
+    "G2c": [
+     {
+      "errX": -0.0125,
+      "errY": 0.0496,
+      "sheet": "S4"
+     }
+    ],
+    "G2cXOnlyFirstScored": [],
+    "G2d": [
+     "dom-pod-jarzabem",
+     "marcowki",
+     "rarytasy-g2e",
+     "kosacce-clean",
+     "kosacce-tracked",
+     "dom-w-helikoniach",
+     "A03",
+     "dom-miniaturka"
+    ],
+    "G2dCountFirstScored": [],
     "G3": false,
     "G3changes": 26,
     "G5changed": [
@@ -2356,7 +2854,12 @@
     "primary:MAIN": {
      "binding:CORRECT": 17,
      "binding:WRONG": 2,
+     "bindingExclQuestionable:CORRECT": 17,
+     "bindingExclQuestionable:WRONG": 0,
      "correctPrintedBound": 32,
+     "correctPrintedBoundSpanImplausible": 1,
+     "correctPrintedBoundUnverified": 17,
+     "correctPrintedBoundVerified": 15,
      "firstBad": {
       "NEVER_PROPOSED": 3,
       "NONE": 31,
@@ -2373,14 +2876,21 @@
      },
      "labels": 110,
      "scaleDependentAnchor": 24,
-     "scaleDependentValueEqualsInk": 3,
+     "scaleDependentValueEqualsTruth": 3,
+     "soundAbstention": 0,
      "spuriousCertainty": 3,
+     "spuriousCertaintyWithSpanAudit": 4,
      "wrongWhenAsserted": 2
     },
     "primary:SMOKE": {
      "binding:CORRECT": 5,
      "binding:WRONG": 0,
+     "bindingExclQuestionable:CORRECT": 5,
+     "bindingExclQuestionable:WRONG": 0,
      "correctPrintedBound": 7,
+     "correctPrintedBoundSpanImplausible": 0,
+     "correctPrintedBoundUnverified": 2,
+     "correctPrintedBoundVerified": 5,
      "firstBad": {
       "NEVER_PROPOSED": 1,
       "NONE": 7,
@@ -2391,8 +2901,10 @@
      },
      "labels": 17,
      "scaleDependentAnchor": 3,
-     "scaleDependentValueEqualsInk": 0,
+     "scaleDependentValueEqualsTruth": 0,
+     "soundAbstention": 0,
      "spuriousCertainty": 0,
+     "spuriousCertaintyWithSpanAudit": 0,
      "wrongWhenAsserted": 0
     },
     "primary:perSheet": {
@@ -2422,7 +2934,7 @@
      },
      "S4": {
       "correctPrintedBound": 5,
-      "falseConfidentScale": false,
+      "falseConfidentScale": true,
       "labels": 13,
       "registrationErrVsTrueScale": -0.0125,
       "scaleDependentAnchor": 2,
@@ -2472,7 +2984,12 @@
     "sensitivity:MAIN": {
      "binding:CORRECT": 17,
      "binding:WRONG": 3,
+     "bindingExclQuestionable:CORRECT": 17,
+     "bindingExclQuestionable:WRONG": 0,
      "correctPrintedBound": 32,
+     "correctPrintedBoundSpanImplausible": 1,
+     "correctPrintedBoundUnverified": 17,
+     "correctPrintedBoundVerified": 15,
      "firstBad": {
       "NEVER_PROPOSED": 23,
       "NONE": 31,
@@ -2489,14 +3006,21 @@
      },
      "labels": 152,
      "scaleDependentAnchor": 24,
-     "scaleDependentValueEqualsInk": 3,
+     "scaleDependentValueEqualsTruth": 3,
+     "soundAbstention": 0,
      "spuriousCertainty": 3,
+     "spuriousCertaintyWithSpanAudit": 4,
      "wrongWhenAsserted": 2
     },
     "sensitivity:SMOKE": {
      "binding:CORRECT": 5,
      "binding:WRONG": 0,
+     "bindingExclQuestionable:CORRECT": 5,
+     "bindingExclQuestionable:WRONG": 0,
      "correctPrintedBound": 7,
+     "correctPrintedBoundSpanImplausible": 0,
+     "correctPrintedBoundUnverified": 2,
+     "correctPrintedBoundVerified": 5,
      "firstBad": {
       "NEVER_PROPOSED": 3,
       "NONE": 7,
@@ -2507,8 +3031,10 @@
      },
      "labels": 20,
      "scaleDependentAnchor": 3,
-     "scaleDependentValueEqualsInk": 0,
+     "scaleDependentValueEqualsTruth": 0,
+     "soundAbstention": 0,
      "spuriousCertainty": 0,
+     "spuriousCertaintyWithSpanAudit": 0,
      "wrongWhenAsserted": 0
     },
     "sensitivity:perSheet": {
@@ -2538,7 +3064,7 @@
      },
      "S4": {
       "correctPrintedBound": 5,
-      "falseConfidentScale": false,
+      "falseConfidentScale": true,
       "labels": 17,
       "registrationErrVsTrueScale": -0.0125,
       "scaleDependentAnchor": 2,

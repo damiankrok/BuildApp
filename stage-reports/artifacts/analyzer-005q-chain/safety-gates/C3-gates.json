@@ -1,6 +1,6 @@
 {
  "G1": {
-  "byteOnlyModelChanges": [
+  "changesBelowSummaryResolution": [
    "A06",
    "dom-w-jablonkach"
   ],
@@ -59,6 +59,7 @@
       ]
      ]
     },
+    "minor": true,
     "why": "SEMANTIC_MODEL"
    },
    {
@@ -127,6 +128,7 @@
       ]
      ]
     },
+    "minor": false,
     "why": "SEMANTIC_MODEL"
    },
    {
@@ -215,8 +217,16 @@
       ]
      ]
     },
+    "minor": false,
     "why": "SEMANTIC_MODEL"
    }
+  ],
+  "materialFailures": [
+   "dom-w-modrzykach",
+   "dom-w-tymianku"
+  ],
+  "minorFailures": [
+   "dom-miniaturka"
   ],
   "pass": false
  },
@@ -276,8 +286,30 @@
    "willa-miranda": 14
   },
   "a_total": 448,
+  "b2_multiAssertedTokens": {},
   "b_inkFirstMismatch": {},
   "c_newFalseConfident": [],
+  "c_xOnlyFirstScored": [],
+  "d_sourceExactChanged": [
+   {
+    "case": "dom-w-modrzykach",
+    "changed": {
+     "wallRings:ring-main-0": [
+      "13.89 \u00d7 8.85 m body from the plan's printed chains and wall bands",
+      "13.45 \u00d7 8.85 m body from the plan's printed chains and wall bands"
+     ]
+    }
+   },
+   {
+    "case": "dom-miniaturka",
+    "changed": {
+     "wallRings:ring-attached-0-0": [
+      "1.00 \u00d7 6.23 m body from the plan's printed chains and wall bands",
+      "1.00 \u00d7 6.22 m body from the plan's printed chains and wall bands"
+     ]
+    }
+   }
+  ],
   "d_sourceExactIncrease": [],
   "e_note": "changed refusals are classified by hand from their decision paths (G5 list)",
   "pass": false

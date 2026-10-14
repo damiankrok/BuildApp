@@ -1,11 +1,48 @@
 {
- "schema": "buildapp.005q-chain.determinism",
- "version": 1,
- "rule": "S1 (preregistration §2): C0 (production, no alias, given order, 3 workers) and C0dup (zero-challenger variant copy with ACCEL.patch only, reverse order, 1 worker, memo cold then warm) byte-identical on every row",
- "rows": 48,
+ "addendumC": "review C-6 correction: C0dup was not memo-cold throughout \u2014 C1 started at 16:10Z on the shared memo while C0dup ran until 17:56Z, so C0dup was partly warm; the challengers started before S1 was established. Every evidence-bearing file is identical, so S1 holds; S2 (C0warm, rotated order, warm memo) holds on all 48 rows (S2-C0-vs-C0warm.json), so the challengers' use of the memo is confirmed after the fact, as preregistration \u00a72 requires.",
+ "alsoObserved": {
+  "C0VsPROD3Solver": "byte-identical on the 46 rows 005Q replayed",
+  "C0VsSealedEvidence": "45/45 byte-identical",
+  "blind12": "C0 model = the sealed blind-12 NEW run for dom-w-tymianku and dom-w-daliach"
+ },
+ "differingOnlyInWallClockFields": {
+  "extract/analysis-trace.json": [
+   "entries[].durationMs",
+   "entries[].startedAtMs"
+  ],
+  "extract/diagnostics.json": [
+   "trace.entries[].durationMs",
+   "trace.entries[].startedAtMs"
+  ],
+  "extract/performance.json": [
+   "wall time, RSS, tick gaps",
+   "phases[].counters.readings/rings/ringsTotal absent on memo hits (expected ACCEL difference: the ring-callout reader did not run)"
+  ],
+  "extract/result-summary.json": [
+   "startedAt",
+   "completedAt",
+   "recogniser.ms",
+   "timings.*Ms"
+  ],
+  "logs, replay.json": [
+   "wall time, peak RSS"
+  ]
+ },
  "filesCompared": 491,
- "identical": ["metric-evidence.json (45 EXTRACT rows)", "model.json", "program.json", "failure.json", "unresolved.json", "provenance.json", "plan-diagnostics/digest.json", "solve/analysis-trace.json", "solve/result-summary.json"],
- "differingOnlyInWallClockFields": {"extract/analysis-trace.json": ["entries[].durationMs", "entries[].startedAtMs"], "extract/diagnostics.json": ["trace.entries[].durationMs", "trace.entries[].startedAtMs"], "extract/result-summary.json": ["startedAt", "completedAt", "recogniser.ms", "timings.*Ms"], "logs, replay.json": ["wall time, peak RSS"]},
+ "identical": [
+  "metric-evidence.json (45 EXTRACT rows)",
+  "model.json",
+  "program.json",
+  "failure.json",
+  "unresolved.json",
+  "provenance.json",
+  "plan-diagnostics/digest.json",
+  "solve/analysis-trace.json",
+  "solve/result-summary.json"
+ ],
+ "rows": 48,
+ "rule": "S1 (preregistration \u00a72): C0 (production, no alias, given order, 3 workers) and C0dup (zero-challenger variant copy with ACCEL.patch only, reverse order, 1 worker, memo cold then warm) byte-identical on every row",
+ "schema": "buildapp.005q-chain.determinism",
  "verdict": "S1 HOLDS",
- "alsoObserved": {"C0VsSealedEvidence": "45/45 byte-identical", "C0VsPROD3Solver": "byte-identical on the 46 rows 005Q replayed", "blind12": "C0 model = the sealed blind-12 NEW run for dom-w-tymianku and dom-w-daliach"}
+ "version": 1
 }

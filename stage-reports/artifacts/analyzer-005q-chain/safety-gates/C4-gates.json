@@ -1,6 +1,6 @@
 {
  "G1": {
-  "byteOnlyModelChanges": [
+  "changesBelowSummaryResolution": [
    "dom-w-tunbergiach"
   ],
   "failures": [
@@ -44,6 +44,7 @@
       ]
      ]
     },
+    "minor": false,
     "why": "SEMANTIC_MODEL"
    },
    {
@@ -107,6 +108,7 @@
       11
      ]
     },
+    "minor": false,
     "why": "SEMANTIC_MODEL"
    },
    {
@@ -185,6 +187,7 @@
       ]
      ]
     },
+    "minor": false,
     "why": "SEMANTIC_MODEL"
    },
    {
@@ -241,10 +244,12 @@
       ]
      ]
     },
+    "minor": true,
     "why": "SEMANTIC_MODEL"
    },
    {
     "case": "dom-pod-jarzabem",
+    "minor": false,
     "now": [
      "FAILED",
      "ALGORITHMIC_FAIL"
@@ -329,10 +334,12 @@
       }
      ]
     },
+    "minor": false,
     "why": "SEMANTIC_MODEL"
    },
    {
     "case": "dom-w-daliach",
+    "minor": false,
     "now": [
      "COMPLETED",
      "ALGORITHMIC_FAIL"
@@ -391,6 +398,7 @@
       ]
      ]
     },
+    "minor": true,
     "why": "SEMANTIC_MODEL"
    },
    {
@@ -473,10 +481,12 @@
       }
      ]
     },
+    "minor": false,
     "why": "SEMANTIC_MODEL"
    },
    {
     "case": "dom-w-morelach",
+    "minor": false,
     "now": [
      "COMPLETED",
      "ALGORITHMIC_FAIL"
@@ -489,6 +499,7 @@
    },
    {
     "case": "dom-w-tymianku",
+    "minor": false,
     "now": [
      "FAILED",
      "ALGORITHMIC_FAIL"
@@ -586,6 +597,7 @@
       }
      ]
     },
+    "minor": false,
     "why": "SEMANTIC_MODEL"
    },
    {
@@ -652,6 +664,7 @@
       }
      ]
     },
+    "minor": false,
     "why": "SEMANTIC_MODEL"
    },
    {
@@ -718,10 +731,12 @@
       }
      ]
     },
+    "minor": false,
     "why": "SEMANTIC_MODEL"
    },
    {
     "case": "marcowki",
+    "minor": false,
     "now": [
      "FAILED",
      "ALGORITHMIC_FAIL"
@@ -784,10 +799,12 @@
       ]
      ]
     },
+    "minor": true,
     "why": "SEMANTIC_MODEL"
    },
    {
     "case": "rarytasy-g2e",
+    "minor": false,
     "now": [
      "FAILED",
      "ALGORITHMIC_FAIL"
@@ -798,6 +815,27 @@
     ],
     "why": "VERDICT_OR_OUTCOME"
    }
+  ],
+  "materialFailures": [
+   "A02",
+   "A03",
+   "A06",
+   "dom-pod-jarzabem",
+   "dom-w-cieszyniankach",
+   "dom-w-daliach",
+   "dom-w-modrzykach",
+   "dom-w-morelach",
+   "dom-w-tymianku",
+   "dom-w-zurawkach",
+   "kosacce-clean",
+   "kosacce-tracked",
+   "marcowki",
+   "rarytasy-g2e"
+  ],
+  "minorFailures": [
+   "dom-miniaturka",
+   "dom-w-jablonkach",
+   "rarytasy-eoze"
   ],
   "pass": false
  },
@@ -811,6 +849,7 @@
   },
   "a_scaleDependentAnchors": {},
   "a_total": 0,
+  "b2_multiAssertedTokens": {},
   "b_inkFirstMismatch": {},
   "c_newFalseConfident": [
    {
@@ -838,8 +877,199 @@
     "residualPct": -6.92
    },
    {
+    "errX": 0.5886,
+    "errY": -0.0029,
+    "sheet": "S1"
+   }
+  ],
+  "c_xOnlyFirstScored": [
+   {
+    "baseline": [
+     "COMPLETED",
+     -2.17
+    ],
+    "case": "dom-w-morelach",
+    "residualPct": -6.77
+   },
+   {
+    "baseline": [
+     "FAILED",
+     null
+    ],
+    "case": "dom-w-cyklamenach",
+    "residualPct": -7.58
+   },
+   {
+    "baseline": [
+     "FAILED",
+     null
+    ],
+    "case": "A04",
+    "residualPct": -6.92
+   },
+   {
     "registrationErrVsTrueScale": 0.5886,
     "sheet": "S1"
+   }
+  ],
+  "d_sourceExactChanged": [
+   {
+    "case": "dom-w-morelach",
+    "changed": {
+     "wallRings:ring-attached-0-0": [
+      "3.80 \u00d7 8.08 m body from the plan's printed chains and wall bands",
+      "3.80 \u00d7 7.98 m body from the plan's printed chains and wall bands"
+     ],
+     "wallRings:ring-main-0": [
+      "7.31 \u00d7 10.62 m body from the plan's printed chains and wall bands",
+      "7.28 \u00d7 10.50 m body from the plan's printed chains and wall bands"
+     ]
+    }
+   },
+   {
+    "case": "kosacce-clean",
+    "changed": {
+     "wallRings:ring-attached-0-0": [
+      "6.48 \u00d7 3.70 m body from the plan's printed chains and wall bands",
+      "6.65 \u00d7 3.70 m body from the plan's printed chains and wall bands"
+     ],
+     "wallRings:ring-main-0": [
+      "14.54 \u00d7 8.90 m body from the plan's printed chains and wall bands",
+      "14.56 \u00d7 8.90 m body from the plan's printed chains and wall bands"
+     ]
+    }
+   },
+   {
+    "case": "kosacce-tracked",
+    "changed": {
+     "wallRings:ring-attached-0-0": [
+      "6.48 \u00d7 3.70 m body from the plan's printed chains and wall bands",
+      "6.65 \u00d7 3.70 m body from the plan's printed chains and wall bands"
+     ],
+     "wallRings:ring-main-0": [
+      "14.54 \u00d7 8.90 m body from the plan's printed chains and wall bands",
+      "14.56 \u00d7 8.90 m body from the plan's printed chains and wall bands"
+     ]
+    }
+   },
+   {
+    "case": "willa-miranda",
+    "changed": {
+     "roofs:roof-main": [
+      "22\u00b0 gable on the authority of published specification; the side renders span the walled depth only; verge boards along both rakes, front 0.80 m wide by 0.30 m deep",
+      "22\u00b0 gable on the authority of published specification; the side renders span the walled depth only; verge boards along both rakes, front 0.62 m wide by 0.30 m deep, rear 0.30 m wide by 0.30 m deep"
+     ],
+     "wallRings:ring-attached-0-0": [
+      "6.51 \u00d7 2.45 m body from the plan's printed chains and wall bands",
+      "6.52 \u00d7 2.45 m body from the plan's printed chains and wall bands"
+     ]
+    }
+   },
+   {
+    "case": "dom-w-zurawkach",
+    "changed": {
+     "wallRings:ring-attached-0--1": [
+      "4.30 \u00d7 9.50 m body from the plan's printed chains and wall bands",
+      "3.79 \u00d7 9.50 m body from the plan's printed chains and wall bands"
+     ]
+    }
+   },
+   {
+    "case": "dom-w-modrzykach",
+    "changed": {
+     "wallRings:ring-attached-1-0": [
+      "7.24 \u00d7 1.66 m body from the plan's printed chains and wall bands",
+      "7.21 \u00d7 1.48 m body from the plan's printed chains and wall bands"
+     ],
+     "wallRings:ring-main-0": [
+      "13.89 \u00d7 8.85 m body from the plan's printed chains and wall bands",
+      "13.45 \u00d7 8.85 m body from the plan's printed chains and wall bands"
+     ]
+    }
+   },
+   {
+    "case": "dom-w-helikoniach",
+    "changed": {
+     "wallRings:ring-main-0": [
+      "6.46 \u00d7 12.01 m body from the plan's printed chains and wall bands",
+      "6.47 \u00d7 12.01 m body from the plan's printed chains and wall bands"
+     ]
+    }
+   },
+   {
+    "case": "dom-w-cyklamenach",
+    "changed": {
+     "roofs:roof-main": [
+      null,
+      "38\u00b0 gable on the authority of published specification; the side renders span the walled depth only"
+     ],
+     "wallRings:ring-attached-0-0": [
+      null,
+      "3.56 \u00d7 1.23 m body from the plan's printed chains and wall bands"
+     ],
+     "wallRings:ring-main-0": [
+      null,
+      "9.12 \u00d7 8.89 m body from the plan's printed chains and wall bands"
+     ]
+    }
+   },
+   {
+    "case": "A02",
+    "changed": {
+     "wallRings:ring-main-0": [
+      "9.20 \u00d7 14.55 m body from the plan's printed chains and wall bands",
+      "9.20 \u00d7 14.32 m body from the plan's printed chains and wall bands"
+     ]
+    }
+   },
+   {
+    "case": "A03",
+    "changed": {
+     "wallRings:ring-main-0": [
+      "9.11 \u00d7 12.01 m body from the plan's printed chains and wall bands",
+      "9.10 \u00d7 12.01 m body from the plan's printed chains and wall bands"
+     ]
+    }
+   },
+   {
+    "case": "A04",
+    "changed": {
+     "roofs:roof-main": [
+      null,
+      "40\u00b0 gable on the authority of published specification; the side renders span the walled depth only"
+     ],
+     "wallRings:ring-main-0": [
+      null,
+      "7.70 \u00d7 13.51 m body from the plan's printed chains and wall bands"
+     ]
+    }
+   },
+   {
+    "case": "A06",
+    "changed": {
+     "wallRings:ring-attached-0-0": [
+      "3.88 \u00d7 1.44 m body from the plan's printed chains and wall bands",
+      "3.34 \u00d7 1.44 m body from the plan's printed chains and wall bands"
+     ]
+    }
+   },
+   {
+    "case": "dom-w-cieszyniankach",
+    "changed": {
+     "wallRings:ring-main-0": [
+      "11.70 \u00d7 15.80 m body from the plan's printed chains and wall bands",
+      "11.70 \u00d7 16.60 m body from the plan's printed chains and wall bands"
+     ]
+    }
+   },
+   {
+    "case": "dom-miniaturka",
+    "changed": {
+     "wallRings:ring-attached-0-0": [
+      "1.00 \u00d7 6.23 m body from the plan's printed chains and wall bands",
+      "1.00 \u00d7 6.22 m body from the plan's printed chains and wall bands"
+     ]
+    }
    }
   ],
   "d_sourceExactIncrease": [],

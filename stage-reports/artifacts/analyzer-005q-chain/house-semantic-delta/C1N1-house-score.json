@@ -16,6 +16,7 @@
     "chainCorrected": 6,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 6,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "AXIS_MAJORITY": 1,
      "AXIS_SELF_CONSISTENCY": 21,
@@ -34,6 +35,7 @@
    "family": "dom-pod-jarzabem",
    "footprintResidualPct": -5.34,
    "frame": "frame-asset-rzut-9354eb066f-397808a266",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-pod-jarzabem-15-g-rzut-19f8c2fa6e": {
      "anchors": {
@@ -147,6 +149,10 @@
      "GABLE:30"
     ],
     "rooms": 5,
+    "sourceExact": {
+     "roofs:roof-main": "30\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+     "wallRings:ring-main-0": "19.10 \u00d7 10.74 m body from the plan's printed chains and wall bands"
+    },
     "stairs": 0,
     "storeys": 1,
     "terraces": [
@@ -163,6 +169,9 @@
    "modelSha256": "8f6b47d6cfded2eae441a1f1ebbb9cee8c21f072bc5b1bcd7d68c0992e0ac0f0",
    "outcome": "COMPLETED",
    "programSha256": "a7d60c4f2e630cb9cb5106d019c4382cec21b2154a4de718926809d69a9fbc4f",
+   "publishedFigure": [
+    "SCORED"
+   ],
    "refusal": null,
    "scaleCmPerPx": 2.79095,
    "semantics": {
@@ -358,6 +367,16 @@
       6,
       5
      ],
+     "sourceExact": [
+      {
+       "roofs:roof-main": "30\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+       "wallRings:ring-main-0": "19.10 \u00d7 10.00 m body from the plan's printed chains and wall bands"
+      },
+      {
+       "roofs:roof-main": "30\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+       "wallRings:ring-main-0": "19.10 \u00d7 10.74 m body from the plan's printed chains and wall bands"
+      }
+     ],
      "terraces": [
       [
        "PAVED:1.24",
@@ -408,6 +427,7 @@
     "chainCorrected": 6,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 6,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "AXIS_SELF_CONSISTENCY": 7,
      "OTHER_AXIS_SCALE": 1,
@@ -426,6 +446,7 @@
    "family": "dom-w-arkadiach",
    "footprintResidualPct": -0.49,
    "frame": "frame-asset-rzut-16680ee739-bb2ced8b98",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-arkadiach-6-rzut-part-6a7a5261ea": {
      "registration": null,
@@ -566,6 +587,10 @@
      "GABLE:42"
     ],
     "rooms": 7,
+    "sourceExact": {
+     "roofs:roof-main": "42\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+     "wallRings:ring-main-0": "7.40 \u00d7 9.40 m body from the plan's printed chains and wall bands"
+    },
     "stairs": 1,
     "storeys": 2,
     "terraces": [],
@@ -577,6 +602,7 @@
    "modelSha256": "35b605e7daba983d3690426b9f1c903c721acf19bf19456a9edcb73f6e7a3e57",
    "outcome": "COMPLETED",
    "programSha256": "aa04fbdf3cb3c4256852a89e2ff65b37e45d43c7e1e509be749567888588acea",
+   "publishedFigure": [],
    "refusal": null,
    "scaleCmPerPx": 1.84605,
    "semantics": {
@@ -679,6 +705,7 @@
     "chainCorrected": 2,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 0,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "AXIS_MAJORITY": 2,
      "AXIS_SELF_CONSISTENCY": 1,
@@ -698,6 +725,7 @@
    "family": "dom-w-modrzewnicy",
    "footprintResidualPct": null,
    "frame": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-modrzewnicy-10-g2e-oz-1f0c5c3416": {
      "registration": null,
@@ -795,6 +823,9 @@
    "modelSha256": null,
    "outcome": "FAILED",
    "programSha256": null,
+   "publishedFigure": [
+    "SCORED"
+   ],
    "refusal": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale; a total and the children it frames disagree as read, each stating one of the two scales, and no reading outside them decides. The scales its readings state are 1.761978 cm/px (1 independent,",
    "scaleCmPerPx": null,
    "semantics": {
@@ -845,6 +876,7 @@
     "chainCorrected": 3,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 11,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "AXIS_MAJORITY": 4,
      "AXIS_SELF_CONSISTENCY": 2,
@@ -865,6 +897,7 @@
    "family": "dom-w-morelach",
    "footprintResidualPct": -2.31,
    "frame": "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-morelach-n-rzut-parte-4c4bf673d0": {
      "anchors": {
@@ -1022,6 +1055,11 @@
      "FLAT:0"
     ],
     "rooms": 8,
+    "sourceExact": {
+     "wallRings:ring-attached-0-0": "3.80 \u00d7 8.09 m body from the plan's printed chains and wall bands",
+     "wallRings:ring-attached-1-0": "1.00 \u00d7 3.50 m body from the plan's printed chains and wall bands",
+     "wallRings:ring-main-0": "7.31 \u00d7 10.62 m body from the plan's printed chains and wall bands"
+    },
     "stairs": 1,
     "storeys": 2,
     "terraces": [],
@@ -1033,6 +1071,9 @@
    "modelSha256": "303744144474d00a6252a38509d29e0c28c18da4732f9da9ff8e58e04371a827",
    "outcome": "COMPLETED",
    "programSha256": "971ce0562be6c125f63d13973ed835cfb3a707b86d07a28c9da9e6d05d9e8c04",
+   "publishedFigure": [
+    "SCORED"
+   ],
    "refusal": null,
    "scaleCmPerPx": 1.99925,
    "semantics": {
@@ -1240,6 +1281,18 @@
       7,
       8
      ],
+     "sourceExact": [
+      {
+       "wallRings:ring-attached-0-0": "3.80 \u00d7 8.08 m body from the plan's printed chains and wall bands",
+       "wallRings:ring-attached-1-0": "1.06 \u00d7 3.50 m body from the plan's printed chains and wall bands",
+       "wallRings:ring-main-0": "7.31 \u00d7 10.62 m body from the plan's printed chains and wall bands"
+      },
+      {
+       "wallRings:ring-attached-0-0": "3.80 \u00d7 8.09 m body from the plan's printed chains and wall bands",
+       "wallRings:ring-attached-1-0": "1.00 \u00d7 3.50 m body from the plan's printed chains and wall bands",
+       "wallRings:ring-main-0": "7.31 \u00d7 10.62 m body from the plan's printed chains and wall bands"
+      }
+     ],
      "walls": [
       {
        "EXTERIOR": 20,
@@ -1272,6 +1325,7 @@
     "chainCorrected": 9,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 9,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "AXIS_SELF_CONSISTENCY": 11,
      "OTHER_AXIS_SCALE": 2,
@@ -1290,6 +1344,7 @@
    "family": "marcowki",
    "footprintResidualPct": -0.38,
    "frame": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-pa-6eb2541c24": {
      "anchors": {
@@ -1455,6 +1510,11 @@
      "GABLE:40"
     ],
     "rooms": 12,
+    "sourceExact": {
+     "roofs:roof-main": "40\u00b0 gable on the authority of published specification; both side renders span the characteristic depth at the ridge scale, so the roof reaches the outer planes; verge boards along both rakes, front 0.61 m wide by 0.99 m deep, rear 0.61 m wide by 1.00 m deep",
+     "wallRings:ring-attached-0-0": "4.15 \u00d7 7.50 m body from the plan's printed chains and wall bands",
+     "wallRings:ring-main-0": "7.90 \u00d7 12.60 m body from the plan's printed chains and wall bands"
+    },
     "stairs": 1,
     "storeys": 2,
     "terraces": [
@@ -1469,6 +1529,7 @@
    "modelSha256": "a88ea400e7d5e6238260eff753ea35d09fa35f88985f8c9ba5d2effd3bcc6ce0",
    "outcome": "COMPLETED",
    "programSha256": "bc0d573ae1aa3bf1991399578b0d751b8a6500ba97c861c46b6c7ebe817268aa",
+   "publishedFigure": [],
    "refusal": null,
    "scaleCmPerPx": 2.64345,
    "semantics": {
@@ -1642,6 +1703,19 @@
        "WINDOW:4.7:ring-main-0-w2"
       ]
      ],
+     "sourceExact": [
+      {
+       "roofs:roof-attached-0": "the section draws a 0.36 m slab with its top at 2.89 over this body on 6 columns and its outer wall continues to 3.12; its edge over the zone is the portal head, the roof of attached-0 projects over its zone; its edge is the 0.71 m band",
+       "roofs:roof-main": "40\u00b0 gable on the authority of published specification; both side renders span the characteristic depth at the ridge scale, so the roof reaches the outer planes; verge boards along both rakes, front 0.61 m wide by 0.99 m deep, rear 0.61 m wide by 1.00 m deep",
+       "wallRings:ring-attached-0-0": "4.15 \u00d7 7.51 m body from the plan's printed chains and wall bands",
+       "wallRings:ring-main-0": "7.90 \u00d7 12.61 m body from the plan's printed chains and wall bands"
+      },
+      {
+       "roofs:roof-main": "40\u00b0 gable on the authority of published specification; both side renders span the characteristic depth at the ridge scale, so the roof reaches the outer planes; verge boards along both rakes, front 0.61 m wide by 0.99 m deep, rear 0.61 m wide by 1.00 m deep",
+       "wallRings:ring-attached-0-0": "4.15 \u00d7 7.50 m body from the plan's printed chains and wall bands",
+       "wallRings:ring-main-0": "7.90 \u00d7 12.60 m body from the plan's printed chains and wall bands"
+      }
+     ],
      "terraces": [
       [
        "PAVED:10.68",
@@ -1674,6 +1748,7 @@
     "chainCorrected": 9,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 7,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "AXIS_MAJORITY": 6,
      "AXIS_SELF_CONSISTENCY": 3,
@@ -1694,6 +1769,7 @@
    "family": "rarytasy",
    "footprintResidualPct": 0.47,
    "frame": "frame-asset-rzut-e8520c3ad3-59a406b738",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-rzut-7d0192a519": {
      "anchors": {
@@ -1812,6 +1888,11 @@
      "GABLE:30"
     ],
     "rooms": 9,
+    "sourceExact": {
+     "roofs:roof-main": "30\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+     "wallRings:ring-attached-0-0": "7.17 \u00d7 6.20 m body from the plan's printed chains and wall bands",
+     "wallRings:ring-main-0": "17.20 \u00d7 8.50 m body from the plan's printed chains and wall bands"
+    },
     "stairs": 0,
     "storeys": 1,
     "terraces": [
@@ -1826,6 +1907,7 @@
    "modelSha256": "b74cc99b7413b950a19ed4472ee30486cae6ecf40379590b6df2238ec669f433",
    "outcome": "COMPLETED",
    "programSha256": "4422fe59b88581b1a712e68221858f285979dfeb098b733977b2c403be1ad8b7",
+   "publishedFigure": [],
    "refusal": null,
    "scaleCmPerPx": 2.754,
    "semantics": {
@@ -2004,6 +2086,18 @@
        "WINDOW:4:ring-main-0-w2"
       ]
      ],
+     "sourceExact": [
+      {
+       "roofs:roof-main": "30\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+       "wallRings:ring-attached-0-0": "6.17 \u00d7 6.20 m body from the plan's printed chains and wall bands",
+       "wallRings:ring-main-0": "17.21 \u00d7 8.50 m body from the plan's printed chains and wall bands"
+      },
+      {
+       "roofs:roof-main": "30\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+       "wallRings:ring-attached-0-0": "7.17 \u00d7 6.20 m body from the plan's printed chains and wall bands",
+       "wallRings:ring-main-0": "17.20 \u00d7 8.50 m body from the plan's printed chains and wall bands"
+      }
+     ],
      "terraces": [
       [
        "UNKNOWN:12.72",
@@ -2036,6 +2130,7 @@
     "chainCorrected": 9,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 12,
+    "multiAssertedTokens": 1,
     "orientationDecidedBy": {
      "AXIS_MAJORITY": 4,
      "AXIS_SELF_CONSISTENCY": 16,
@@ -2058,6 +2153,7 @@
    "family": "kosacce",
    "footprintResidualPct": 11.22,
    "frame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-kosaccach-46-rzut-par-803d3d68d8": {
      "anchors": {
@@ -2173,6 +2269,12 @@
      "GABLE:35"
     ],
     "rooms": 10,
+    "sourceExact": {
+     "roofs:roof-main": "35\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+     "wallRings:ring-attached-0-0": "12.03 \u00d7 3.70 m body from the plan's printed chains and wall bands",
+     "wallRings:ring-attached-1-0": "2.05 \u00d7 4.35 m body from the plan's printed chains and wall bands",
+     "wallRings:ring-main-0": "14.55 \u00d7 8.90 m body from the plan's printed chains and wall bands"
+    },
     "stairs": 0,
     "storeys": 1,
     "terraces": [],
@@ -2184,6 +2286,7 @@
    "modelSha256": "b2b5ee2237e85ac3662382bf20e891424f96269c92f38ee9a2a0ece8a2108a07",
    "outcome": "COMPLETED",
    "programSha256": "faf6512aa3b3181b7aa38d70aec91b4f5a6053d2926e88c0b9b71a2a73913d03",
+   "publishedFigure": [],
    "refusal": null,
    "scaleCmPerPx": 2.4062,
    "semantics": {
@@ -2355,6 +2458,20 @@
        "WINDOW:3.3:ring-main-0-w1",
        "WINDOW:5.12:ring-attached-0-0-w2"
       ]
+     ],
+     "sourceExact": [
+      {
+       "roofs:roof-main": "35\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+       "wallRings:ring-attached-0-0": "6.48 \u00d7 3.70 m body from the plan's printed chains and wall bands",
+       "wallRings:ring-attached-1-0": "2.04 \u00d7 4.35 m body from the plan's printed chains and wall bands",
+       "wallRings:ring-main-0": "14.54 \u00d7 8.90 m body from the plan's printed chains and wall bands"
+      },
+      {
+       "roofs:roof-main": "35\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+       "wallRings:ring-attached-0-0": "12.03 \u00d7 3.70 m body from the plan's printed chains and wall bands",
+       "wallRings:ring-attached-1-0": "2.05 \u00d7 4.35 m body from the plan's printed chains and wall bands",
+       "wallRings:ring-main-0": "14.55 \u00d7 8.90 m body from the plan's printed chains and wall bands"
+      }
      ],
      "walls": [
       {
@@ -2388,6 +2505,7 @@
     "chainCorrected": 9,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 12,
+    "multiAssertedTokens": 1,
     "orientationDecidedBy": {
      "AXIS_MAJORITY": 4,
      "AXIS_SELF_CONSISTENCY": 16,
@@ -2410,6 +2528,7 @@
    "family": "kosacce",
    "footprintResidualPct": 11.22,
    "frame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-kosaccach-46-rzut-par-803d3d68d8": {
      "anchors": {
@@ -2525,6 +2644,12 @@
      "GABLE:35"
     ],
     "rooms": 10,
+    "sourceExact": {
+     "roofs:roof-main": "35\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+     "wallRings:ring-attached-0-0": "12.03 \u00d7 3.70 m body from the plan's printed chains and wall bands",
+     "wallRings:ring-attached-1-0": "2.05 \u00d7 4.35 m body from the plan's printed chains and wall bands",
+     "wallRings:ring-main-0": "14.55 \u00d7 8.90 m body from the plan's printed chains and wall bands"
+    },
     "stairs": 0,
     "storeys": 1,
     "terraces": [],
@@ -2536,6 +2661,7 @@
    "modelSha256": "b2b5ee2237e85ac3662382bf20e891424f96269c92f38ee9a2a0ece8a2108a07",
    "outcome": "COMPLETED",
    "programSha256": "faf6512aa3b3181b7aa38d70aec91b4f5a6053d2926e88c0b9b71a2a73913d03",
+   "publishedFigure": [],
    "refusal": null,
    "scaleCmPerPx": 2.4062,
    "semantics": {
@@ -2708,6 +2834,20 @@
        "WINDOW:5.12:ring-attached-0-0-w2"
       ]
      ],
+     "sourceExact": [
+      {
+       "roofs:roof-main": "35\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+       "wallRings:ring-attached-0-0": "6.48 \u00d7 3.70 m body from the plan's printed chains and wall bands",
+       "wallRings:ring-attached-1-0": "2.04 \u00d7 4.35 m body from the plan's printed chains and wall bands",
+       "wallRings:ring-main-0": "14.54 \u00d7 8.90 m body from the plan's printed chains and wall bands"
+      },
+      {
+       "roofs:roof-main": "35\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+       "wallRings:ring-attached-0-0": "12.03 \u00d7 3.70 m body from the plan's printed chains and wall bands",
+       "wallRings:ring-attached-1-0": "2.05 \u00d7 4.35 m body from the plan's printed chains and wall bands",
+       "wallRings:ring-main-0": "14.55 \u00d7 8.90 m body from the plan's printed chains and wall bands"
+      }
+     ],
      "walls": [
       {
        "EXTERIOR": 12,
@@ -2740,6 +2880,7 @@
     "chainCorrected": 5,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 4,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "AXIS_MAJORITY": 2,
      "OTHER_AXIS_SCALE": 3,
@@ -2758,6 +2899,7 @@
    "family": "rarytasy",
    "footprintResidualPct": 1.57,
    "frame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-rarytasach-e-oze-rzut-1dede27c71": {
      "anchors": {
@@ -2869,6 +3011,10 @@
      "GABLE:30"
     ],
     "rooms": 8,
+    "sourceExact": {
+     "roofs:roof-main": "30\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+     "wallRings:ring-main-0": "16.01 \u00d7 7.74 m body from the plan's printed chains and wall bands"
+    },
     "stairs": 0,
     "storeys": 1,
     "terraces": [],
@@ -2880,6 +3026,7 @@
    "modelSha256": "1351d80e4d53f35d0d8eef31352470096924a6492c64ee0961010f5150f8605f",
    "outcome": "COMPLETED",
    "programSha256": "62aac332e509ef08bed1949d239557204b7a807c054d27d824b9204b2d1aff0e",
+   "publishedFigure": [],
    "refusal": null,
    "scaleCmPerPx": 2.2229,
    "semantics": {
@@ -3013,6 +3160,7 @@
     "chainCorrected": 16,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 0,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {},
     "read": 10,
     "scaleDependentAnchors": 16,
@@ -3024,6 +3172,7 @@
    "family": "rarytasy",
    "footprintResidualPct": -4.21,
    "frame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-rarytasach-e-oze-rzut-1dede27c71": {
      "anchors": {
@@ -3123,6 +3272,10 @@
      "GABLE:30"
     ],
     "rooms": 8,
+    "sourceExact": {
+     "roofs:roof-main": "30\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+     "wallRings:ring-main-0": "16.01 \u00d7 7.30 m body from the plan's printed chains and wall bands"
+    },
     "stairs": 0,
     "storeys": 1,
     "terraces": [
@@ -3139,6 +3292,9 @@
    "modelSha256": "0a0e019df52a473a95e977cae5e88bfe08a8c417e64cb8866e47bc572a602603",
    "outcome": "COMPLETED",
    "programSha256": "05c788f9f6004a55b6fc0a341fac69adba08e874137fefbe7bff49f8b05e0674",
+   "publishedFigure": [
+    "VERIFIED"
+   ],
    "refusal": null,
    "scaleCmPerPx": 2.2236,
    "semantics": {
@@ -3253,6 +3409,7 @@
     "chainCorrected": 2,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 1,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "OTHER_AXIS_SCALE": 1,
      "PAGE_UPRIGHT": 12,
@@ -3270,6 +3427,7 @@
    "family": "marcowki",
    "footprintResidualPct": null,
    "frame": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02": {
      "registration": null,
@@ -3323,6 +3481,9 @@
    "modelSha256": null,
    "outcome": "FAILED",
    "programSha256": null,
+   "publishedFigure": [
+    "SCORED"
+   ],
    "refusal": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 1.710048 cm/px (0 independent, plausible); 1.339869 cm/px (0 independent, plausible); 0.52356 cm/px (0 independent, ruled out by the walls); 0 printed readi",
    "scaleCmPerPx": null,
    "semantics": {
@@ -3368,6 +3529,7 @@
     "chainCorrected": 14,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 7,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "OTHER_AXIS_SCALE": 6,
      "PAGE_UPRIGHT": 23,
@@ -3385,6 +3547,7 @@
    "family": "dom-w-jablonkach",
    "footprintResidualPct": -0.4,
    "frame": "frame-asset-rzut-a8bdd8cd1d-d80b709d74",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-jab-onkach-22-rzut-pa-1ad9e4dc60": {
      "registration": null,
@@ -3543,6 +3706,10 @@
      "GABLE:40"
     ],
     "rooms": 8,
+    "sourceExact": {
+     "roofs:roof-main": "40\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+     "wallRings:ring-main-0": "11.00 \u00d7 9.00 m body from the plan's printed chains and wall bands"
+    },
     "stairs": 1,
     "storeys": 2,
     "terraces": [
@@ -3556,6 +3723,7 @@
    "modelSha256": "6802ef30c68fa730e93f1babf56ac05acfada74b40e20969d890ed144c69ec73",
    "outcome": "COMPLETED",
    "programSha256": "066edb07b4ca3970d58a51d22a7b196337cafba931fabce34443014a5035e110",
+   "publishedFigure": [],
    "refusal": null,
    "scaleCmPerPx": 2.1124,
    "semantics": {
@@ -3699,6 +3867,7 @@
     "chainCorrected": 14,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 7,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "AXIS_SELF_CONSISTENCY": 14,
      "CHAIN_SELF_CONSISTENCY": 2,
@@ -3720,6 +3889,7 @@
    "family": "willa-miranda",
    "footprintResidualPct": -2.17,
    "frame": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-willa-miranda-11-g2-rzut-pa-122944115c": {
      "registration": null,
@@ -3868,6 +4038,14 @@
      "GABLE:22"
     ],
     "rooms": 5,
+    "sourceExact": {
+     "roofs:roof-attached-0": "the section draws a 0.33 m slab with its top at 3.21 over this body on 6 columns and its outer wall continues to 3.73",
+     "roofs:roof-attached-1": "the section draws a 0.32 m slab with its top at 3.20 over this body on 6 columns",
+     "roofs:roof-main": "22\u00b0 gable on the authority of published specification; the side renders span the walled depth only; verge boards along both rakes, front 0.80 m wide by 0.30 m deep",
+     "wallRings:ring-attached-0-0": "6.11 \u00d7 2.45 m body from the plan's printed chains and wall bands",
+     "wallRings:ring-attached-1-0": "5.41 \u00d7 2.45 m body from the plan's printed chains and wall bands",
+     "wallRings:ring-main-0": "15.00 \u00d7 9.20 m body from the plan's printed chains and wall bands"
+    },
     "stairs": 0,
     "storeys": 1,
     "terraces": [],
@@ -3879,6 +4057,7 @@
    "modelSha256": "39804dd6989ac005c7bffb1c2f7906f480031a5fb773f19851f0cfe0720059b2",
    "outcome": "COMPLETED",
    "programSha256": "ade6acfa1d4cd74ee8c04b2050fc032363f6c62dbca0a9dd01a8ab8394975c27",
+   "publishedFigure": [],
    "refusal": null,
    "scaleCmPerPx": 2.6809,
    "semantics": {
@@ -4034,6 +4213,24 @@
        "WINDOW:6.06:ring-main-0-w0"
       ]
      ],
+     "sourceExact": [
+      {
+       "roofs:roof-attached-0": "the section draws a 0.33 m slab with its top at 3.21 over this body on 5 columns and its outer wall continues to 3.56",
+       "roofs:roof-attached-1": "the section draws a 0.31 m slab with its top at 3.19 over this body on 5 columns",
+       "roofs:roof-main": "22\u00b0 gable on the authority of published specification; the side renders span the walled depth only; verge boards along both rakes, front 0.80 m wide by 0.30 m deep",
+       "wallRings:ring-attached-0-0": "6.51 \u00d7 2.45 m body from the plan's printed chains and wall bands",
+       "wallRings:ring-attached-1-0": "5.48 \u00d7 2.45 m body from the plan's printed chains and wall bands",
+       "wallRings:ring-main-0": "15.00 \u00d7 9.20 m body from the plan's printed chains and wall bands"
+      },
+      {
+       "roofs:roof-attached-0": "the section draws a 0.33 m slab with its top at 3.21 over this body on 6 columns and its outer wall continues to 3.73",
+       "roofs:roof-attached-1": "the section draws a 0.32 m slab with its top at 3.20 over this body on 6 columns",
+       "roofs:roof-main": "22\u00b0 gable on the authority of published specification; the side renders span the walled depth only; verge boards along both rakes, front 0.80 m wide by 0.30 m deep",
+       "wallRings:ring-attached-0-0": "6.11 \u00d7 2.45 m body from the plan's printed chains and wall bands",
+       "wallRings:ring-attached-1-0": "5.41 \u00d7 2.45 m body from the plan's printed chains and wall bands",
+       "wallRings:ring-main-0": "15.00 \u00d7 9.20 m body from the plan's printed chains and wall bands"
+      }
+     ],
      "walls": [
       {
        "EXTERIOR": 12,
@@ -4066,6 +4263,7 @@
     "chainCorrected": 3,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 2,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "AXIS_MAJORITY": 3,
      "AXIS_SELF_CONSISTENCY": 20,
@@ -4086,6 +4284,7 @@
    "family": "dom-w-zurawkach",
    "footprintResidualPct": -0.84,
    "frame": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-zurawkach-3-p-rzut-pa-2d7956d088": {
      "anchors": {
@@ -4292,6 +4491,11 @@
      "GABLE:40"
     ],
     "rooms": 14,
+    "sourceExact": {
+     "roofs:roof-main": "40\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+     "wallRings:ring-attached-0--1": "4.30 \u00d7 9.50 m body from the plan's printed chains and wall bands",
+     "wallRings:ring-main--1": "7.50 \u00d7 8.00 m body from the plan's printed chains and wall bands"
+    },
     "stairs": 1,
     "storeys": 3,
     "terraces": [],
@@ -4303,6 +4507,7 @@
    "modelSha256": "296d5ce1942b483685a7554d7dc795ace14312c4f8b78b9af0615da1eb0e61e2",
    "outcome": "COMPLETED",
    "programSha256": "7d5d0b308346766baa38bac63cdc37fcdb901be34f4200404b539fb781668db6",
+   "publishedFigure": [],
    "refusal": null,
    "scaleCmPerPx": 2.2176,
    "semantics": {
@@ -4433,6 +4638,7 @@
     "chainCorrected": 7,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 4,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "AXIS_MAJORITY": 4,
      "AXIS_SELF_CONSISTENCY": 14,
@@ -4453,6 +4659,7 @@
    "family": "dom-w-modrzykach",
    "footprintResidualPct": 2.27,
    "frame": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-modrzykach-3-g2-rzut-0378cbcdae": {
      "anchors": {
@@ -4566,6 +4773,12 @@
      "GABLE:25"
     ],
     "rooms": 7,
+    "sourceExact": {
+     "roofs:roof-main": "25\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+     "wallRings:ring-attached-0-0": "4.56 \u00d7 11.13 m body from the plan's printed chains and wall bands",
+     "wallRings:ring-attached-1-0": "7.50 \u00d7 1.66 m body from the plan's printed chains and wall bands",
+     "wallRings:ring-main-0": "13.89 \u00d7 8.85 m body from the plan's printed chains and wall bands"
+    },
     "stairs": 0,
     "storeys": 1,
     "terraces": [],
@@ -4577,6 +4790,7 @@
    "modelSha256": "394dd110de741f3478c421d9255b5eb5c3569ee0333a7ad23bede503263fa443",
    "outcome": "COMPLETED",
    "programSha256": "f6ac15de0dd33c50a24355b0b09982a025ba0a5263e22ce4e135d2c3416ab2cc",
+   "publishedFigure": [],
    "refusal": null,
    "scaleCmPerPx": 2.74845,
    "semantics": {
@@ -4756,6 +4970,20 @@
        "WINDOW:5.0:ring-main-0-w0",
        "WINDOW:5.8:ring-main-0-w2"
       ]
+     ],
+     "sourceExact": [
+      {
+       "roofs:roof-main": "25\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+       "wallRings:ring-attached-0-0": "4.56 \u00d7 11.13 m body from the plan's printed chains and wall bands",
+       "wallRings:ring-attached-1-0": "7.24 \u00d7 1.66 m body from the plan's printed chains and wall bands",
+       "wallRings:ring-main-0": "13.89 \u00d7 8.85 m body from the plan's printed chains and wall bands"
+      },
+      {
+       "roofs:roof-main": "25\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+       "wallRings:ring-attached-0-0": "4.56 \u00d7 11.13 m body from the plan's printed chains and wall bands",
+       "wallRings:ring-attached-1-0": "7.50 \u00d7 1.66 m body from the plan's printed chains and wall bands",
+       "wallRings:ring-main-0": "13.89 \u00d7 8.85 m body from the plan's printed chains and wall bands"
+      }
      ]
     },
     "outcomeChanged": false,
@@ -4784,6 +5012,7 @@
     "chainCorrected": 3,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 1,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "OTHER_AXIS_SCALE": 5,
      "PAGE_UPRIGHT": 44,
@@ -4801,6 +5030,7 @@
    "family": "dom-w-azaliach",
    "footprintResidualPct": null,
    "frame": "frame-asset-rzut-86bef468f3-19006df9bc",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-azaliach-3-rzut-parte-38849e6936": {
      "registration": null,
@@ -4899,6 +5129,9 @@
    "modelSha256": null,
    "outcome": "FAILED",
    "programSha256": null,
+   "publishedFigure": [
+    "SCORED"
+   ],
    "refusal": "8 cells of the 853\u00d7853 px floor plan are enclosed, but every region they make is bounded by line work rather than wall, so none of them is a building; 35 other readings of the plan were weighed and none survived to a full composition",
    "scaleCmPerPx": 1.8615,
    "semantics": {
@@ -4951,6 +5184,7 @@
     "chainCorrected": 13,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 7,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "AXIS_MAJORITY": 1,
      "AXIS_SELF_CONSISTENCY": 11,
@@ -4971,6 +5205,7 @@
    "family": "dom-w-dabecjach",
    "footprintResidualPct": null,
    "frame": "frame-asset-rzut-1a56066c62-10b0ec4131",
+   "gateBlocking": "FOOTPRINT_AREA_WRONG",
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-dabecjach-2-g2-rzut-p-ce9a927d9b": {
      "anchors": {
@@ -5088,6 +5323,9 @@
    "modelSha256": null,
    "outcome": "FAILED",
    "programSha256": null,
+   "publishedFigure": [
+    "SPENT"
+   ],
    "refusal": "the building's outline cannot be established: read with drawn openings only it is B_STRICT 41.3 m\u00b2 (perimeter 131.8 m: 64% wall, 45.4 m drawn openings, 0.0 m blank gaps bridged, 1.6 m unsupported); bridging blank door-sized gaps by what lies behind them it is B_EXCLUSION 90.3 m\u00b2 (perimeter 96.0 m: 5",
    "scaleCmPerPx": 2.8131,
    "semantics": {
@@ -5176,6 +5414,7 @@
     "chainCorrected": 6,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 4,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "OTHER_AXIS_SCALE": 4,
      "PAGE_UPRIGHT": 22,
@@ -5193,6 +5432,7 @@
    "family": "dom-w-tunbergiach",
    "footprintResidualPct": -0.37,
    "frame": "frame-asset-rzut-83377e8ffc-c1a88b7f25",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-tunbergiach-7-r2-rzut-18016ee823": {
      "registration": null,
@@ -5414,6 +5654,10 @@
      "GABLE:39"
     ],
     "rooms": 12,
+    "sourceExact": {
+     "roofs:roof-main": "39\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+     "wallRings:ring-main-0": "11.73 \u00d7 10.00 m body from the plan's printed chains and wall bands"
+    },
     "stairs": 1,
     "storeys": 3,
     "terraces": [],
@@ -5425,6 +5669,9 @@
    "modelSha256": "d2ae136f17fed7c81164962d23cb941b92f76bc2a91f8a9f73844a8e58892ada",
    "outcome": "COMPLETED",
    "programSha256": "f83b227f2bf6b47c90872f518e87ca94ccd5efe76d64956a7b4df6856c6963e5",
+   "publishedFigure": [
+    "SCORED"
+   ],
    "refusal": null,
    "scaleCmPerPx": 2.0933,
    "semantics": {
@@ -5676,6 +5923,7 @@
     "chainCorrected": 1,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 0,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "PAGE_UPRIGHT": 1,
      "SINGLE_READING": 1
@@ -5690,6 +5938,7 @@
    "family": "aster-viii",
    "footprintResidualPct": null,
    "frame": "frame-asset-aster-viii-rzut-parter-7e90859c03-b39fd620c2",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-aster-viii-rzut-parter-7e90859c03-b39fd620c2": {
      "registration": null,
@@ -5708,6 +5957,9 @@
    "modelSha256": null,
    "outcome": "FAILED",
    "programSha256": null,
+   "publishedFigure": [
+    "SCORED"
+   ],
    "refusal": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 2.087379 cm/px (0 independent, plausible); 9.078014 cm/px (0 independent, ruled out by the walls); 21.333333 cm/px (0 independent, ruled out by the walls); ",
    "scaleCmPerPx": null,
    "semantics": {
@@ -5770,6 +6022,7 @@
     "chainCorrected": 6,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 0,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "PAGE_UPRIGHT": 3,
      "SINGLE_READING": 3,
@@ -5785,6 +6038,7 @@
    "family": "galaktyka",
    "footprintResidualPct": null,
    "frame": "frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770": {
      "registration": null,
@@ -5813,6 +6067,9 @@
    "modelSha256": null,
    "outcome": "FAILED",
    "programSha256": null,
+   "publishedFigure": [
+    "SCORED"
+   ],
    "refusal": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.005102 cm/px (0 independent, ruled out by the walls); 0.87747 cm/px (0 independent, plausible); 0 printed readings contradict the one it was read at. What",
    "scaleCmPerPx": null,
    "semantics": {
@@ -5862,6 +6119,7 @@
     "chainCorrected": 16,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 0,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {},
     "read": 10,
     "scaleDependentAnchors": 16,
@@ -5873,6 +6131,7 @@
    "family": "rarytasy",
    "footprintResidualPct": -4.37,
    "frame": "frame-asset-rzut-2abfc5825d-e842a14c7f",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-rarytasach-e-oze-rzut-1dede27c71": {
      "anchors": {
@@ -5972,6 +6231,10 @@
      "GABLE:30"
     ],
     "rooms": 8,
+    "sourceExact": {
+     "roofs:roof-main": "30\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+     "wallRings:ring-main-0": "16.01 \u00d7 7.29 m body from the plan's printed chains and wall bands"
+    },
     "stairs": 0,
     "storeys": 1,
     "terraces": [
@@ -5988,6 +6251,9 @@
    "modelSha256": "a27f3a5e808ee09feae908ba2295f9762087993401a8e111ea9291b16719fc51",
    "outcome": "COMPLETED",
    "programSha256": "f280d05ef773db66fc75e0da3c500e9c9b71eed8e3c1877e652d0085b8245b21",
+   "publishedFigure": [
+    "VERIFIED"
+   ],
    "refusal": null,
    "scaleCmPerPx": 2.2236,
    "semantics": {
@@ -6104,6 +6370,7 @@
     "chainCorrected": 7,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 1,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "PAGE_UPRIGHT": 18,
      "SINGLE_READING": 4,
@@ -6120,6 +6387,7 @@
    "family": "dom-pod-milorzebem",
    "footprintResidualPct": null,
    "frame": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-pod-mi-orzebem-21-gb-rz-70d82b7242": {
      "registration": null,
@@ -6223,6 +6491,9 @@
    "modelSha256": null,
    "outcome": "FAILED",
    "programSha256": null,
+   "publishedFigure": [
+    "SCORED"
+   ],
    "refusal": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 2.444658 cm/px (1 independent, plausible); 2.290019 cm/px (1 independent, plausible); 4.48062 cm/px (1 independent, ruled out by the walls); 0 printed readi",
    "scaleCmPerPx": null,
    "semantics": {
@@ -6267,6 +6538,7 @@
     "chainCorrected": 4,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 3,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "AXIS_SELF_CONSISTENCY": 10,
      "OTHER_AXIS_SCALE": 5,
@@ -6288,6 +6560,7 @@
    "family": "dom-w-helikoniach",
    "footprintResidualPct": -18.77,
    "frame": "frame-asset-rzut-d5842da623-4c943a2b00",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-helikoniach-3-e-oze-r-0b91cfbf4f": {
      "registration": null,
@@ -6423,6 +6696,10 @@
      "GABLE:40"
     ],
     "rooms": 3,
+    "sourceExact": {
+     "roofs:roof-main": "40\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+     "wallRings:ring-main-0": "6.47 \u00d7 12.00 m body from the plan's printed chains and wall bands"
+    },
     "stairs": 0,
     "storeys": 1,
     "terraces": [
@@ -6436,6 +6713,7 @@
    "modelSha256": "2351b535346421b78d72197d18dee155867565ff29865bb9836e51ad007bbf6e",
    "outcome": "COMPLETED",
    "programSha256": "6c52666d63b8744b40961017f4362bbb26ae9b1fbec568a3aeb3a53a385d9aa9",
+   "publishedFigure": [],
    "refusal": null,
    "scaleCmPerPx": 2.30535,
    "semantics": {
@@ -6554,6 +6832,16 @@
        "WINDOW:6.1:ring-main-0-w3"
       ]
      ],
+     "sourceExact": [
+      {
+       "roofs:roof-main": "40\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+       "wallRings:ring-main-0": "6.46 \u00d7 12.01 m body from the plan's printed chains and wall bands"
+      },
+      {
+       "roofs:roof-main": "40\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+       "wallRings:ring-main-0": "6.47 \u00d7 12.00 m body from the plan's printed chains and wall bands"
+      }
+     ],
      "terraces": [
       [
        "PAVED:34.72"
@@ -6589,6 +6877,7 @@
     "chainCorrected": 26,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 0,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {},
     "read": 10,
     "scaleDependentAnchors": 25,
@@ -6600,6 +6889,7 @@
    "family": "kosacce",
    "footprintResidualPct": null,
    "frame": "frame-asset-rzut-94f54ada01-bdf7aa09e8",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-kosaccach-46-rzut-par-803d3d68d8": {
      "anchors": {
@@ -6657,6 +6947,9 @@
    "modelSha256": null,
    "outcome": "FAILED",
    "programSha256": null,
+   "publishedFigure": [
+    "SPENT"
+   ],
    "refusal": "the lowest storey covers 33.15 m\u00b2 against the 164.47 m\u00b2 the publisher prints \u2014 79.8% apart: the decomposition is not of this building 35 other readings of the plan were weighed and none holds: the best, copy area_table bdf7aa09e8, chain extent, registered scale, walled-first tiling, sides as gridded",
    "scaleCmPerPx": 2.4062,
    "semantics": {
@@ -6706,6 +6999,7 @@
     "chainCorrected": 7,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 2,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "AXIS_SELF_CONSISTENCY": 15,
      "OTHER_AXIS_SCALE": 1,
@@ -6724,6 +7018,7 @@
    "family": "dom-w-gozdzikowcach",
    "footprintResidualPct": null,
    "frame": null,
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-gozdzikowcach-3-rzut-30a58f9df4": {
      "registration": null,
@@ -6822,6 +7117,7 @@
    "modelSha256": null,
    "outcome": "FAILED",
    "programSha256": null,
+   "publishedFigure": [],
    "refusal": "the model refused command 135 (placeChimney): INVALID_COMMAND",
    "scaleCmPerPx": null,
    "semantics": {
@@ -6858,6 +7154,7 @@
     "chainCorrected": 6,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 10,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "AXIS_SELF_CONSISTENCY": 9,
      "OTHER_AXIS_SCALE": 4,
@@ -6878,6 +7175,7 @@
    "family": "dom-w-cyklamenach",
    "footprintResidualPct": -0.2,
    "frame": "frame-asset-rzut-fa38f527ea-8e7eb2ad66",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-cyklamenach-3-s-rzut-07d4ca005c": {
      "anchors": {
@@ -7016,6 +7314,10 @@
      "GABLE:38"
     ],
     "rooms": 2,
+    "sourceExact": {
+     "roofs:roof-main": "38\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+     "wallRings:ring-main-0": "9.12 \u00d7 10.12 m body from the plan's printed chains and wall bands"
+    },
     "stairs": 0,
     "storeys": 1,
     "terraces": [],
@@ -7027,6 +7329,7 @@
    "modelSha256": "a24c1beee5d807dec6f4b096d2f4b29594d068f17a31c932318e141393a74e6d",
    "outcome": "COMPLETED",
    "programSha256": "8434d317d2ac8762fbcb6adbcaf0ad26c03d10a817e500ac4a781b3385a2ed67",
+   "publishedFigure": [],
    "refusal": null,
    "scaleCmPerPx": 2.73945,
    "semantics": {
@@ -7136,6 +7439,13 @@
       null,
       2
      ],
+     "sourceExact": [
+      null,
+      {
+       "roofs:roof-main": "38\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+       "wallRings:ring-main-0": "9.12 \u00d7 10.12 m body from the plan's printed chains and wall bands"
+      }
+     ],
      "stairs": [
       null,
       0
@@ -7182,6 +7492,7 @@
     "chainCorrected": 5,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 5,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "AXIS_SELF_CONSISTENCY": 22,
      "OTHER_AXIS_SCALE": 4,
@@ -7200,6 +7511,7 @@
    "family": "A00",
    "footprintResidualPct": null,
    "frame": "frame-asset-rzut-db1e8df563-19bef9a91e",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-goldstarach-2-rzut-pa-c1ed5b382c": {
      "anchors": {
@@ -7272,6 +7584,9 @@
    "modelSha256": null,
    "outcome": "FAILED",
    "programSha256": null,
+   "publishedFigure": [
+    "SPENT"
+   ],
    "refusal": "the lowest storey covers 23.59 m\u00b2 against the 147.01 m\u00b2 the publisher prints \u2014 84.0% apart: the decomposition is not of this building 95 other readings of the plan were weighed and none holds: the best, copy dimensioned c1ed5b382c, chain extent, registered scale, largest-first tiling, sides as gridd",
    "scaleCmPerPx": 2.3044,
    "semantics": {
@@ -7325,6 +7640,7 @@
     "chainCorrected": 9,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 8,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "OTHER_AXIS_SCALE": 5,
      "PAGE_UPRIGHT": 44,
@@ -7342,6 +7658,7 @@
    "family": "A01",
    "footprintResidualPct": null,
    "frame": null,
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-jarzmiankach-rzut-par-da66d24e09": {
      "anchors": {
@@ -7455,6 +7772,7 @@
    "modelSha256": null,
    "outcome": "FAILED",
    "programSha256": null,
+   "publishedFigure": [],
    "refusal": "the model refused command 89 (placeWindow): FILL_TOO_LARGE",
    "scaleCmPerPx": null,
    "semantics": {
@@ -7491,6 +7809,7 @@
     "chainCorrected": 5,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 1,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "AXIS_MAJORITY": 9,
      "AXIS_SELF_CONSISTENCY": 11,
@@ -7509,6 +7828,7 @@
    "family": "A02",
    "footprintResidualPct": 2.88,
    "frame": "frame-asset-rzut-2c17aa3eda-b6cebfd23d",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-czosnkach-e-rzut-part-e0f6b54643": {
      "anchors": {
@@ -7615,6 +7935,10 @@
      "GABLE:30"
     ],
     "rooms": 4,
+    "sourceExact": {
+     "roofs:roof-main": "30\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+     "wallRings:ring-main-0": "9.20 \u00d7 14.55 m body from the plan's printed chains and wall bands"
+    },
     "stairs": 0,
     "storeys": 1,
     "terraces": [],
@@ -7626,6 +7950,7 @@
    "modelSha256": "98229d5fa8d6ff8e682001061ff703e6e8c0be4a5412a71b77439e2b8aa92155",
    "outcome": "COMPLETED",
    "programSha256": "addd302c8ef616d25003a1c3ce53d75079a384404b1de7bcbe80865f92838d47",
+   "publishedFigure": [],
    "refusal": null,
    "scaleCmPerPx": 2.4919,
    "semantics": {
@@ -7706,6 +8031,7 @@
     "chainCorrected": 12,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 3,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "AXIS_SELF_CONSISTENCY": 9,
      "OTHER_AXIS_SCALE": 2,
@@ -7724,6 +8050,7 @@
    "family": "A03",
    "footprintResidualPct": -0.32,
    "frame": "frame-asset-rzut-1f95f4ce4d-eaa13be831",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-arletach-3-e-oze-rzut-a5198b9420": {
      "anchors": {
@@ -7878,6 +8205,10 @@
      "GABLE:40"
     ],
     "rooms": 11,
+    "sourceExact": {
+     "roofs:roof-main": "40\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+     "wallRings:ring-main-0": "9.10 \u00d7 12.01 m body from the plan's printed chains and wall bands"
+    },
     "stairs": 1,
     "storeys": 2,
     "terraces": [],
@@ -7889,6 +8220,7 @@
    "modelSha256": "0b7562cf2bbc6c583f43e7081d3b288ee7cdd55303238cd9a9a6488fca43797a",
    "outcome": "COMPLETED",
    "programSha256": "ee00ec5ab8a575f311733f8c193bdee1ab82a474fc3619b8f8ad5c9d2ea3776a",
+   "publishedFigure": [],
    "refusal": null,
    "scaleCmPerPx": 2.5071,
    "semantics": {
@@ -8037,6 +8369,16 @@
      "rooms": [
       10,
       11
+     ],
+     "sourceExact": [
+      {
+       "roofs:roof-main": "40\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+       "wallRings:ring-main-0": "9.11 \u00d7 12.01 m body from the plan's printed chains and wall bands"
+      },
+      {
+       "roofs:roof-main": "40\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+       "wallRings:ring-main-0": "9.10 \u00d7 12.01 m body from the plan's printed chains and wall bands"
+      }
      ]
     },
     "outcomeChanged": false,
@@ -8065,6 +8407,7 @@
     "chainCorrected": 10,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 9,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "AXIS_MAJORITY": 3,
      "AXIS_SELF_CONSISTENCY": 15,
@@ -8084,6 +8427,7 @@
    "family": "A04",
    "footprintResidualPct": null,
    "frame": "frame-asset-rzut-4f91f26bdf-589c8abdb3",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-ligolach-m-rzut-parte-b58e005d2b": {
      "anchors": {
@@ -8197,6 +8541,9 @@
    "modelSha256": null,
    "outcome": "FAILED",
    "programSha256": null,
+   "publishedFigure": [
+    "SPENT"
+   ],
    "refusal": "the lowest storey covers 54.67 m\u00b2 against the 111.79 m\u00b2 the publisher prints \u2014 51.1% apart: the decomposition is not of this building 67 other readings of the plan were weighed and none holds: the best, copy area_table da7064452b, wall-ink extent, registered scale, largest-first tiling, sides as gri",
    "scaleCmPerPx": 2.5493,
    "semantics": {
@@ -8252,6 +8599,7 @@
     "chainCorrected": 5,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 4,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "AXIS_SELF_CONSISTENCY": 14,
      "OTHER_AXIS_SCALE": 4,
@@ -8270,6 +8618,7 @@
    "family": "A05",
    "footprintResidualPct": null,
    "frame": "frame-asset-rzut-238dfbc50b-38cf8e09f5",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-we-wrzosach-rzut-parter-646c151798": {
      "anchors": {
@@ -8338,6 +8687,9 @@
    "modelSha256": null,
    "outcome": "FAILED",
    "programSha256": null,
+   "publishedFigure": [
+    "SPENT"
+   ],
    "refusal": "the lowest storey covers 32.05 m\u00b2 against the 126.23 m\u00b2 the publisher prints \u2014 74.6% apart: the decomposition is not of this building 87 other readings of the plan were weighed and none holds: the best, copy dimensioned 646c151798, chain extent, registered scale, largest-first tiling, sides as gridd",
    "scaleCmPerPx": 2.11885,
    "semantics": {
@@ -8403,6 +8755,7 @@
     "chainCorrected": 12,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 3,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "OTHER_AXIS_SCALE": 5,
      "PAGE_UPRIGHT": 26,
@@ -8420,6 +8773,7 @@
    "family": "A06",
    "footprintResidualPct": 0.18,
    "frame": "frame-asset-rzut-f08001e3c4-8b24c71f3f",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-bratkach-26-r2be-rzut-317155a9d8": {
      "anchors": {
@@ -8591,6 +8945,11 @@
      "GABLE:30"
     ],
     "rooms": 12,
+    "sourceExact": {
+     "roofs:roof-main": "30\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+     "wallRings:ring-attached-0-0": "3.88 \u00d7 1.44 m body from the plan's printed chains and wall bands",
+     "wallRings:ring-main-0": "7.34 \u00d7 10.01 m body from the plan's printed chains and wall bands"
+    },
     "stairs": 1,
     "storeys": 2,
     "terraces": [],
@@ -8602,6 +8961,9 @@
    "modelSha256": "abc39e50a3fce35456e786ee66f6d572029e3f662147ee7caa068ae576eb674a",
    "outcome": "COMPLETED",
    "programSha256": "369eb47059f4356e5fe3653f637d555013b7044287019b1f78bba8b903ef010f",
+   "publishedFigure": [
+    "SCORED"
+   ],
    "refusal": null,
    "scaleCmPerPx": 2.0714,
    "semantics": {
@@ -8697,6 +9059,7 @@
     "chainCorrected": 7,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 1,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "OTHER_AXIS_SCALE": 3,
      "PAGE_UPRIGHT": 29,
@@ -8714,6 +9077,7 @@
    "family": "A07",
    "footprintResidualPct": -0.37,
    "frame": "frame-asset-rzut-dec884e019-46909f56cf",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-willa-maja-r2-rzut-parteru-59eb18ef0e": {
      "anchors": {
@@ -8899,6 +9263,10 @@
      "GABLE:22"
     ],
     "rooms": 13,
+    "sourceExact": {
+     "roofs:roof-main": "22\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+     "wallRings:ring-main-0": "17.22 \u00d7 7.80 m body from the plan's printed chains and wall bands"
+    },
     "stairs": 1,
     "storeys": 2,
     "terraces": [],
@@ -8910,6 +9278,7 @@
    "modelSha256": "f0b04887c8d0ba8007bfd9d6d00d5c12ffc54308b4e0450569479a2e0d8c3514",
    "outcome": "COMPLETED",
    "programSha256": "911b538190c059ca9931f593fe47964eb159e854b6c9fea57e5f88295fbb96d8",
+   "publishedFigure": [],
    "refusal": null,
    "scaleCmPerPx": 2.3153,
    "semantics": {
@@ -9016,6 +9385,7 @@
     "chainCorrected": 7,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 0,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "PAGE_UPRIGHT": 2,
      "SINGLE_READING": 1,
@@ -9031,6 +9401,7 @@
    "family": "D00",
    "footprintResidualPct": null,
    "frame": "frame-asset-mars-rzut-parter-0022b323f2-20137a1a68",
+   "gateBlocking": "FOOTPRINT_AREA_WRONG",
    "metric": {
     "frame-asset-mars-rzut-dzia-ki-135d616dff-ad20d4f0ba": {
      "anchors": {
@@ -9073,6 +9444,9 @@
    "modelSha256": null,
    "outcome": "FAILED",
    "programSha256": null,
+   "publishedFigure": [
+    "SPENT"
+   ],
    "refusal": "the floor plan's scale cannot be established: the page vote's 1.316832 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it. The scales its readings state are 1.321424 cm/px (0 independent, plausible); 0.641509 cm/px (0 independent, plau",
    "scaleCmPerPx": 1.34735,
    "semantics": {
@@ -9215,6 +9589,13 @@
       4,
       null
      ],
+     "sourceExact": [
+      {
+       "wallRings:ring-attached-0-0": "7.84 \u00d7 2.02 m body from the plan's printed chains and wall bands",
+       "wallRings:ring-main-0": "14.58 \u00d7 9.49 m body from the plan's printed chains and wall bands"
+      },
+      null
+     ],
      "stairs": [
       0,
       null
@@ -9263,6 +9644,7 @@
     "chainCorrected": 2,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 0,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "PAGE_UPRIGHT": 4,
      "UNDECIDED": 9
@@ -9277,6 +9659,7 @@
    "family": "D01",
    "footprintResidualPct": null,
    "frame": "frame-asset-faun-iii-rzut-parter-4a4a325758-4fb0a88a30",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-faun-iii-rzut-dzia-ki-7a7a31530a-a2863d2ae3": {
      "anchors": {
@@ -9314,6 +9697,9 @@
    "modelSha256": null,
    "outcome": "FAILED",
    "programSha256": null,
+   "publishedFigure": [
+    "SCORED"
+   ],
    "refusal": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.082803 cm/px (1 independent, ruled out by the walls); 1.349693 cm/px (1 independent, plausible); 0.103853 cm/px (0 independent, ruled out by the walls); 0",
    "scaleCmPerPx": null,
    "semantics": {
@@ -9360,6 +9746,7 @@
     "chainCorrected": 3,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 0,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "SINGLE_READING": 1,
      "UNDECIDED": 1
@@ -9374,6 +9761,7 @@
    "family": "D02",
    "footprintResidualPct": null,
    "frame": "frame-asset-alex-rzut-parter-4707ebe458-81447f88e6",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-alex-rzut-parter-4707ebe458-81447f88e6": {
      "registration": null,
@@ -9402,6 +9790,9 @@
    "modelSha256": null,
    "outcome": "FAILED",
    "programSha256": null,
+   "publishedFigure": [
+    "SCORED"
+   ],
    "refusal": "the floor plan's scale cannot be established: the page vote's 1.909091 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it. The scales its readings state are 0.646154 cm/px (0 independent, ruled out by the walls); 0 printed readings con",
    "scaleCmPerPx": null,
    "semantics": {
@@ -9449,6 +9840,7 @@
     "chainCorrected": 3,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 0,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "PAGE_UPRIGHT": 6,
      "SINGLE_READING": 2,
@@ -9464,6 +9856,7 @@
    "family": "D03",
    "footprintResidualPct": null,
    "frame": "frame-asset-megan-iv-rzut-parter-bbb305d67a-0f9f921b7b",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-megan-iv-rzut-parter-bbb305d67a-0f9f921b7b": {
      "registration": null,
@@ -9501,6 +9894,9 @@
    "modelSha256": null,
    "outcome": "FAILED",
    "programSha256": null,
+   "publishedFigure": [
+    "SCORED"
+   ],
    "refusal": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.058559 cm/px (1 independent, ruled out by the walls); 5.163934 cm/px (0 independent, ruled out by the walls); 0.423077 cm/px (0 independent, ruled out by ",
    "scaleCmPerPx": null,
    "semantics": {
@@ -9545,6 +9941,7 @@
     "chainCorrected": 2,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 0,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "PAGE_UPRIGHT": 3,
      "UNDECIDED": 2
@@ -9559,6 +9956,7 @@
    "family": "D04",
    "footprintResidualPct": null,
    "frame": "frame-asset-aiko-rzut-parter-c5c8f02d57-f2f752629a",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-aiko-rzut-dzia-ki-bcb20efb07-118f13e7af": {
      "anchors": {
@@ -9586,6 +9984,9 @@
    "modelSha256": null,
    "outcome": "FAILED",
    "programSha256": null,
+   "publishedFigure": [
+    "SCORED"
+   ],
    "refusal": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 66.879121 cm/px (0 independent, ruled out by the walls); 0.238095 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it wa",
    "scaleCmPerPx": null,
    "semantics": {
@@ -9639,6 +10040,7 @@
     "chainCorrected": 3,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 0,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "PAGE_UPRIGHT": 3,
      "UNDECIDED": 2
@@ -9653,6 +10055,7 @@
    "family": "D05",
    "footprintResidualPct": null,
    "frame": "frame-asset-dobry-rzut-parter-0019c75b9a-70a0349ded",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-dobry-rzut-dzia-ki-5831d1414f-dccf4b2ff1": {
      "anchors": {
@@ -9690,6 +10093,9 @@
    "modelSha256": null,
    "outcome": "FAILED",
    "programSha256": null,
+   "publishedFigure": [
+    "SCORED"
+   ],
    "refusal": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.947368 cm/px (0 independent, plausible); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itse",
    "scaleCmPerPx": null,
    "semantics": {
@@ -9740,6 +10146,7 @@
     "chainCorrected": 4,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 8,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "OTHER_AXIS_SCALE": 4,
      "PAGE_UPRIGHT": 29,
@@ -9757,6 +10164,7 @@
    "family": "dom-w-murajach",
    "footprintResidualPct": null,
    "frame": "frame-asset-rzut-36e1e5a39d-fb4609c5e2",
+   "gateBlocking": "FOOTPRINT_AREA_WRONG",
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-murajach-rzut-parteru-6316fef3dd": {
      "registration": null,
@@ -9860,6 +10268,9 @@
    "modelSha256": null,
    "outcome": "FAILED",
    "programSha256": null,
+   "publishedFigure": [
+    "SPENT"
+   ],
    "refusal": "the floor plan's scale cannot be established: the page vote's 2.451224 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it. The scales its readings state are 2.475398 cm/px (0 independent, plausible); 0.086134 cm/px (0 independent, rule",
    "scaleCmPerPx": 2.4623,
    "semantics": {
@@ -9911,6 +10322,7 @@
     "chainCorrected": 4,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 1,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "AXIS_SELF_CONSISTENCY": 11,
      "OTHER_AXIS_SCALE": 2,
@@ -9929,6 +10341,7 @@
    "family": "dom-w-cieszyniankach",
    "footprintResidualPct": -5.1,
    "frame": "frame-asset-rzut-ebb40feeba-0459d5961d",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-cieszyniankach-12-ge-a4c5eebc44": {
      "anchors": {
@@ -10038,6 +10451,10 @@
      "GABLE:30"
     ],
     "rooms": 4,
+    "sourceExact": {
+     "roofs:roof-main": "30\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+     "wallRings:ring-main-0": "11.70 \u00d7 15.80 m body from the plan's printed chains and wall bands"
+    },
     "stairs": 0,
     "storeys": 1,
     "terraces": [
@@ -10051,6 +10468,7 @@
    "modelSha256": "f33edc862f5db3083e6c17789956c5f95fcffbd9d556edc0a101cac1aaf61fd8",
    "outcome": "COMPLETED",
    "programSha256": "542bc6b4e205fcf19dfabe90ff894674ee7bd5a6dc7dea0d91b817717ede1580",
+   "publishedFigure": [],
    "refusal": null,
    "scaleCmPerPx": 2.77835,
    "semantics": {
@@ -10188,6 +10606,7 @@
     "chainCorrected": 11,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 3,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "AXIS_MAJORITY": 9,
      "OTHER_AXIS_SCALE": 2,
@@ -10208,6 +10627,7 @@
    "family": "dom-w-glogownikach",
    "footprintResidualPct": -7.99,
    "frame": "frame-asset-rzut-70b6aa153a-0cb0a5c1d9",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-g-ogownikach-g-rzut-p-d1223ce8ba": {
      "anchors": {
@@ -10313,6 +10733,9 @@
      "GABLE:30"
     ],
     "rooms": 8,
+    "sourceExact": {
+     "roofs:roof-main": "30\u00b0 gable on the authority of published specification; the side renders span the walled depth only"
+    },
     "stairs": 0,
     "storeys": 1,
     "terraces": [],
@@ -10324,6 +10747,7 @@
    "modelSha256": "36cfeb9333b82ec44cbcacb0823e0e774174570483450b54baa0768277ee1547",
    "outcome": "COMPLETED",
    "programSha256": "10a25412a00013889049126ce57842d36eaf535faf9f489ea0d7893e037b3968",
+   "publishedFigure": [],
    "refusal": null,
    "scaleCmPerPx": 2.625,
    "semantics": {
@@ -10469,6 +10893,7 @@
     "chainCorrected": 8,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 5,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "AXIS_SELF_CONSISTENCY": 13,
      "CHAIN_SELF_CONSISTENCY": 2,
@@ -10488,6 +10913,7 @@
    "family": "dom-w-akebiach",
    "footprintResidualPct": null,
    "frame": "frame-asset-rzut-8984f3a30b-4d37f1b2ba",
+   "gateBlocking": "FOOTPRINT_AREA_WRONG",
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-akebiach-5-rzut-parte-06e48d2241": {
      "anchors": {
@@ -10591,6 +11017,9 @@
    "modelSha256": null,
    "outcome": "FAILED",
    "programSha256": null,
+   "publishedFigure": [
+    "SPENT"
+   ],
    "refusal": "the lowest storey covers 96.93 m\u00b2 against the 249.42 m\u00b2 the publisher prints \u2014 61.1% apart: the decomposition is not of this building; 55 other readings of the plan were weighed and none survived to a full composition",
    "scaleCmPerPx": 2.90545,
    "semantics": {
@@ -10658,6 +11087,7 @@
     "chainCorrected": 7,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 5,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "AXIS_SELF_CONSISTENCY": 24,
      "CHAIN_SELF_CONSISTENCY": 3,
@@ -10677,6 +11107,7 @@
    "family": "dom-miniaturka",
    "footprintResidualPct": 1.48,
    "frame": "frame-asset-rzut-3da149ce7e-6d4f61a890",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-miniaturka-2-rzut-parte-4ed276d23e": {
      "anchors": {
@@ -10842,6 +11273,11 @@
      "GABLE:40"
     ],
     "rooms": 7,
+    "sourceExact": {
+     "roofs:roof-main": "40\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+     "wallRings:ring-attached-0-0": "1.00 \u00d7 6.23 m body from the plan's printed chains and wall bands",
+     "wallRings:ring-main-0": "11.71 \u00d7 8.72 m body from the plan's printed chains and wall bands"
+    },
     "stairs": 1,
     "storeys": 2,
     "terraces": [],
@@ -10853,6 +11289,7 @@
    "modelSha256": "934c47c848b90e163be727d33b000b4f2e2000a9dab7188f2c9aae07edded4c8",
    "outcome": "COMPLETED",
    "programSha256": "91363744760dedbf10c39b22b466be8e2f1221994bf6a6a19c3a9dcde67c0e11",
+   "publishedFigure": [],
    "refusal": null,
    "scaleCmPerPx": 2.08885,
    "semantics": {
@@ -10955,6 +11392,7 @@
     "chainCorrected": 7,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 3,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "AXIS_MAJORITY": 3,
      "AXIS_SELF_CONSISTENCY": 19,
@@ -10975,6 +11413,7 @@
    "family": "dom-w-krasnokwiatach",
    "footprintResidualPct": null,
    "frame": "frame-asset-rzut-071d5075ee-723651b1ff",
+   "gateBlocking": "FOOTPRINT_AREA_WRONG",
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-krasnokwiatach-rzut-p-20446cabaa": {
      "registration": null,
@@ -11078,6 +11517,9 @@
    "modelSha256": null,
    "outcome": "FAILED",
    "programSha256": null,
+   "publishedFigure": [
+    "SPENT"
+   ],
    "refusal": "the lowest storey covers 11.67 m\u00b2 against the 143.18 m\u00b2 the publisher prints \u2014 91.8% apart: the decomposition is not of this building; 47 other readings of the plan were weighed and none survived to a full composition",
    "scaleCmPerPx": 2.5113,
    "semantics": {
@@ -11138,6 +11580,7 @@
     "chainCorrected": 5,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 2,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "AXIS_MAJORITY": 3,
      "AXIS_SELF_CONSISTENCY": 20,
@@ -11159,6 +11602,7 @@
    "family": "dom-w-tymianku",
    "footprintResidualPct": -7.76,
    "frame": "frame-asset-rzut-360da4c58d-2b0ad412cf",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-tymianku-5-t-rzut-par-3a20e08c81": {
      "anchors": {
@@ -11326,6 +11770,10 @@
      "FLAT:0"
     ],
     "rooms": 5,
+    "sourceExact": {
+     "wallRings:ring-attached-0-0": "3.37 \u00d7 1.20 m body from the plan's printed chains and wall bands",
+     "wallRings:ring-main-0": "10.62 \u00d7 11.68 m body from the plan's printed chains and wall bands"
+    },
     "stairs": 1,
     "storeys": 2,
     "terraces": [],
@@ -11337,6 +11785,7 @@
    "modelSha256": "2ac9d50f181e02811d1df64d3b00e8e8cc9c4ead3d49020a494772ff38eac219",
    "outcome": "COMPLETED",
    "programSha256": "2ba7565ba286f4675c54d4dc0cc408d91f905c008797b92a8ad163226b62facc",
+   "publishedFigure": [],
    "refusal": null,
    "scaleCmPerPx": 2.3783,
    "semantics": {
@@ -11559,6 +12008,17 @@
       11,
       5
      ],
+     "sourceExact": [
+      {
+       "wallRings:ring-attached-0-0": "9.53 \u00d7 1.45 m body from the plan's printed chains and wall bands",
+       "wallRings:ring-attached-1-0": "3.37 \u00d7 1.20 m body from the plan's printed chains and wall bands",
+       "wallRings:ring-main-0": "10.62 \u00d7 10.68 m body from the plan's printed chains and wall bands"
+      },
+      {
+       "wallRings:ring-attached-0-0": "3.37 \u00d7 1.20 m body from the plan's printed chains and wall bands",
+       "wallRings:ring-main-0": "10.62 \u00d7 11.68 m body from the plan's printed chains and wall bands"
+      }
+     ],
      "walls": [
       {
        "EXTERIOR": 20,
@@ -11591,6 +12051,7 @@
     "chainCorrected": 7,
     "inkFirstMismatch": 0,
     "inkFirstStatements": 5,
+    "multiAssertedTokens": 0,
     "orientationDecidedBy": {
      "AXIS_MAJORITY": 7,
      "OTHER_AXIS_SCALE": 3,
@@ -11611,6 +12072,7 @@
    "family": "dom-w-daliach",
    "footprintResidualPct": 0.39,
    "frame": "frame-asset-rzut-efbfc7f809-0bd7f8c4bd",
+   "gateBlocking": null,
    "metric": {
     "frame-asset-gotowy-projekt-dom-w-daliach-5-ge-rzut-par-6d975f3d06": {
      "registration": null,
@@ -11759,6 +12221,10 @@
      "GABLE:42"
     ],
     "rooms": 6,
+    "sourceExact": {
+     "roofs:roof-main": "42\u00b0 gable on the authority of published specification; the side renders span the walled depth only",
+     "wallRings:ring-main-0": "12.80 \u00d7 9.96 m body from the plan's printed chains and wall bands"
+    },
     "stairs": 1,
     "storeys": 2,
     "terraces": [
@@ -11773,6 +12239,7 @@
    "modelSha256": "081a539c9bce601ae23df35bada1c2002a306ce39e47b4a10543e41f48959370",
    "outcome": "COMPLETED",
    "programSha256": "731513a3e66d6dbbff8a3e0391d266e2e6844e6cd19704229d6117159454ee23",
+   "publishedFigure": [],
    "refusal": null,
    "scaleCmPerPx": 2.18815,
    "semantics": {

@@ -17,11 +17,23 @@
       "reading1": "copy area_table 4813950087, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 191.0 m\u00b2 (-11.9% of 216.76), NEAR, corroborated by ISOTROPY"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "REGISTRATION_LOST",
     "now": [
      "COMPLETED",
      null,
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SCORED"
+     ],
+     [
+      "SCORED"
+     ]
     ],
     "registration": [
      {
@@ -69,11 +81,23 @@
       "reading1": "copy dimensioned 027bb2e82d, chain extent, registered scale, largest-first tiling, sides as gridded: 3 bodies, 112.0 m\u00b2 (-2.2% of 114.53), AGREES"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "REGISTRATION_MOVED",
     "now": [
      "COMPLETED",
      null,
      "PASS"
+    ],
+    "publishedFigure": [
+     [
+      "SCORED"
+     ],
+     [
+      "SCORED"
+     ]
     ],
     "registration": [
      {
@@ -122,11 +146,21 @@
      "stage": "METRIC_CHALLENGE",
      "was": null
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "REGISTRATION_MOVED",
     "now": [
      "COMPLETED",
      null,
      "PASS"
+    ],
+    "publishedFigure": [
+     [],
+     [
+      "VERIFIED"
+     ]
     ],
     "registration": [
      {
@@ -175,11 +209,21 @@
       "sourceConflict": "OUTER_TOTALS"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "REGISTRATION_MOVED",
     "now": [
      "COMPLETED",
      null,
      "PASS"
+    ],
+    "publishedFigure": [
+     [
+      "VERIFIED"
+     ],
+     []
     ],
     "registration": [
      {
@@ -227,11 +271,23 @@
       "reading1": "copy unknown c68728b8e4, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 35.2 m\u00b2 (-73.2% of 131.16), WRONG"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "STATEMENTS_ONLY",
     "now": [
      "FAILED",
      "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SCORED"
+     ],
+     [
+      "SCORED"
+     ]
     ],
     "registration": [
      {
@@ -274,11 +330,23 @@
       "reading1": "copy area_table 79ba9b7966, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 69.3 m\u00b2 (-0.5% of 69.69), UNKNOWN (the figure is spent)"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "REGISTRATION_MOVED",
     "now": [
      "FAILED",
      "PLAN_NO_BUILT_REGIONS/PLAN_DECOMPOSITION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SPENT"
+     ],
+     [
+      "SCORED"
+     ]
     ],
     "registration": [
      {
@@ -327,11 +395,23 @@
       "reading1": "copy dimensioned c936d50299, chain extent, registered scale, largest-first tiling, outer faces: 1 body, 137.2 m\u00b2 (-18.7% of 168.76), UNKNOWN (the figure is spent)"
      }
     },
-    "mechanism": "STATEMENTS_ONLY",
+    "gateBlocking": [
+     null,
+     "FOOTPRINT_AREA_WRONG"
+    ],
+    "mechanism": "PUBLISHED_AREA_REFUSAL",
     "now": [
      "FAILED",
      "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SPENT"
+     ],
+     [
+      "SPENT"
+     ]
     ],
     "registration": [
      {
@@ -378,11 +458,23 @@
       "reading1": "copy area_table 0f7c5bafc8, chain extent, scale 2.285714 cm/px, largest-first tiling, outer faces: 3 bodies, 36.6 m\u00b2 (-55.8% of 82.81), WRONG"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "STATEMENTS_ONLY",
     "now": [
      "FAILED",
      "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SCORED"
+     ],
+     [
+      "SCORED"
+     ]
     ],
     "registration": [
      {
@@ -422,11 +514,21 @@
       "reading1": "copy dimensioned 07d4ca005c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 92.3 m\u00b2 (-0.2% of 92.48), UNKNOWN (the figure is spent)"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "REGISTRATION_MOVED",
     "now": [
      "COMPLETED",
      null,
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SPENT"
+     ],
+     []
     ],
     "registration": [
      {
@@ -475,11 +577,23 @@
       "reading1": "copy area_table 2a1e4f9cc1, chain extent, registered scale, largest-first tiling, sides as gridded, pocket mouths shut: 1 body, 124.2 m\u00b2 (-1.6% of 126.23), UNKNOWN (the figure is spent)"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "REGISTRATION_MOVED",
     "now": [
      "FAILED",
      "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SPENT"
+     ],
+     [
+      "SPENT"
+     ]
     ],
     "registration": [
      {
@@ -528,11 +642,23 @@
       "reading1": "copy dimensioned fb4609c5e2, chain extent, registered scale, largest-first tiling, outer faces: 1 body, 178.2 m\u00b2 (+135.0% of 75.83), WRONG"
      }
     },
+    "gateBlocking": [
+     "FOOTPRINT_AREA_WRONG",
+     "FOOTPRINT_AREA_WRONG"
+    ],
     "mechanism": "REGISTRATION_MOVED",
     "now": [
      "FAILED",
      "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SPENT"
+     ],
+     [
+      "SPENT"
+     ]
     ],
     "registration": [
      {
@@ -569,11 +695,19 @@
    {
     "case": "dom-w-glogownikach",
     "firstDifferingDecision": null,
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "REGISTRATION_LOST",
     "now": [
      "FAILED",
      "MODEL_EMISSION_FAILED/None",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [],
+     []
     ],
     "registration": [
      {
@@ -614,11 +748,23 @@
       "reading1": "copy dimensioned 4d37f1b2ba, chain extent, registered scale, largest-first tiling, outer faces: 7 bodies, 103.6 m\u00b2 (-58.5% of 249.42), WRONG, corroborated by ISOTROPY"
      }
     },
+    "gateBlocking": [
+     "FOOTPRINT_AREA_WRONG",
+     "FOOTPRINT_AREA_WRONG"
+    ],
     "mechanism": "STATEMENTS_ONLY",
     "now": [
      "FAILED",
      "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SPENT"
+     ],
+     [
+      "SPENT"
+     ]
     ],
     "registration": [
      {
@@ -670,11 +816,23 @@
       "reading1": "copy area_table 4813950087, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 191.0 m\u00b2 (-11.9% of 216.76), NEAR, corroborated by ISOTROPY"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "REGISTRATION_LOST",
     "now": [
      "COMPLETED",
      null,
      "PASS"
+    ],
+    "publishedFigure": [
+     [
+      "SCORED"
+     ],
+     [
+      "SCORED"
+     ]
     ],
     "registration": [
      {
@@ -722,11 +880,23 @@
       "reading1": "copy dimensioned 027bb2e82d, chain extent, registered scale, largest-first tiling, sides as gridded: 3 bodies, 112.0 m\u00b2 (-2.2% of 114.53), AGREES"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "REGISTRATION_MOVED",
     "now": [
      "COMPLETED",
      null,
      "PASS"
+    ],
+    "publishedFigure": [
+     [
+      "SCORED"
+     ],
+     [
+      "SCORED"
+     ]
     ],
     "registration": [
      {
@@ -775,11 +945,21 @@
       "sourceConflict": "OUTER_TOTALS"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "REGISTRATION_MOVED",
     "now": [
      "COMPLETED",
      null,
      "PASS"
+    ],
+    "publishedFigure": [
+     [
+      "VERIFIED"
+     ],
+     []
     ],
     "registration": [
      {
@@ -827,11 +1007,23 @@
       "reading1": "copy area_table 79ba9b7966, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 69.3 m\u00b2 (-0.5% of 69.69), UNKNOWN (the figure is spent)"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "REGISTRATION_MOVED",
     "now": [
      "FAILED",
      "PLAN_NO_BUILT_REGIONS/PLAN_DECOMPOSITION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SPENT"
+     ],
+     [
+      "SCORED"
+     ]
     ],
     "registration": [
      {
@@ -880,11 +1072,23 @@
       "reading1": "copy dimensioned c936d50299, chain extent, registered scale, largest-first tiling, outer faces: 1 body, 137.2 m\u00b2 (-18.7% of 168.76), UNKNOWN (the figure is spent)"
      }
     },
-    "mechanism": "STATEMENTS_ONLY",
+    "gateBlocking": [
+     null,
+     "FOOTPRINT_AREA_WRONG"
+    ],
+    "mechanism": "PUBLISHED_AREA_REFUSAL",
     "now": [
      "FAILED",
      "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SPENT"
+     ],
+     [
+      "SPENT"
+     ]
     ],
     "registration": [
      {
@@ -931,11 +1135,23 @@
       "reading1": "copy area_table 0f7c5bafc8, chain extent, scale 2.285714 cm/px, largest-first tiling, outer faces: 3 bodies, 36.6 m\u00b2 (-55.8% of 82.81), WRONG"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "STATEMENTS_ONLY",
     "now": [
      "FAILED",
      "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SCORED"
+     ],
+     [
+      "SCORED"
+     ]
     ],
     "registration": [
      {
@@ -975,11 +1191,21 @@
       "reading1": "copy dimensioned 07d4ca005c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 92.3 m\u00b2 (-0.2% of 92.48), UNKNOWN (the figure is spent)"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "REGISTRATION_MOVED",
     "now": [
      "COMPLETED",
      null,
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SPENT"
+     ],
+     []
     ],
     "registration": [
      {
@@ -1028,11 +1254,23 @@
       "reading1": "copy area_table 2a1e4f9cc1, chain extent, registered scale, largest-first tiling, sides as gridded, pocket mouths shut: 1 body, 124.2 m\u00b2 (-1.6% of 126.23), UNKNOWN (the figure is spent)"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "REGISTRATION_MOVED",
     "now": [
      "FAILED",
      "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SPENT"
+     ],
+     [
+      "SPENT"
+     ]
     ],
     "registration": [
      {
@@ -1078,11 +1316,23 @@
       "reading1": "copy unknown 20137a1a68, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 154.2 m\u00b2 (-18.7% of 189.7), NEAR"
      }
     },
-    "mechanism": "REGISTRATION_MOVED",
+    "gateBlocking": [
+     null,
+     "FOOTPRINT_AREA_WRONG"
+    ],
+    "mechanism": "PUBLISHED_AREA_REFUSAL",
     "now": [
      "FAILED",
      "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SCORED"
+     ],
+     [
+      "SPENT"
+     ]
     ],
     "registration": [
      {
@@ -1129,11 +1379,23 @@
       "reading1": "copy dimensioned fb4609c5e2, chain extent, registered scale, largest-first tiling, outer faces: 1 body, 178.2 m\u00b2 (+135.0% of 75.83), WRONG"
      }
     },
+    "gateBlocking": [
+     "FOOTPRINT_AREA_WRONG",
+     "FOOTPRINT_AREA_WRONG"
+    ],
     "mechanism": "REGISTRATION_MOVED",
     "now": [
      "FAILED",
      "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SPENT"
+     ],
+     [
+      "SPENT"
+     ]
     ],
     "registration": [
      {
@@ -1180,11 +1442,23 @@
       "reading1": "copy dimensioned 4d37f1b2ba, chain extent, registered scale, largest-first tiling, outer faces: 7 bodies, 103.6 m\u00b2 (-58.5% of 249.42), WRONG, corroborated by ISOTROPY"
      }
     },
+    "gateBlocking": [
+     "FOOTPRINT_AREA_WRONG",
+     "FOOTPRINT_AREA_WRONG"
+    ],
     "mechanism": "STATEMENTS_ONLY",
     "now": [
      "FAILED",
      "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SPENT"
+     ],
+     [
+      "SPENT"
+     ]
     ],
     "registration": [
      {
@@ -1235,11 +1509,23 @@
       "reading1": "copy area_table 4813950087, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 191.0 m\u00b2 (-11.9% of 216.76), NEAR, corroborated by ISOTROPY"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "REGISTRATION_LOST",
     "now": [
      "FAILED",
      "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SCORED"
+     ],
+     [
+      "SCORED"
+     ]
     ],
     "registration": [
      {
@@ -1287,11 +1573,23 @@
       "reading1": "copy dimensioned 027bb2e82d, chain extent, registered scale, largest-first tiling, sides as gridded: 3 bodies, 112.0 m\u00b2 (-2.2% of 114.53), AGREES"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "REGISTRATION_MOVED",
     "now": [
      "COMPLETED",
      null,
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SCORED"
+     ],
+     [
+      "SCORED"
+     ]
     ],
     "registration": [
      {
@@ -1337,11 +1635,21 @@
      "stage": "PLAN_RESOLUTION",
      "was": null
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "STATEMENTS_ONLY",
     "now": [
      "FAILED",
      "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [],
+     [
+      "SPENT"
+     ]
     ],
     "registration": [
      {
@@ -1389,11 +1697,21 @@
      "stage": "METRIC_CHALLENGE",
      "was": null
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "REGISTRATION_MOVED",
     "now": [
      "COMPLETED",
      null,
      "PASS"
+    ],
+    "publishedFigure": [
+     [],
+     [
+      "SCORED"
+     ]
     ],
     "registration": [
      {
@@ -1449,11 +1767,23 @@
       "sourceConflict": "OUTER_TOTALS"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "STATEMENTS_ONLY",
     "now": [
      "COMPLETED",
      null,
      "PASS"
+    ],
+    "publishedFigure": [
+     [
+      "VERIFIED"
+     ],
+     [
+      "VERIFIED"
+     ]
     ],
     "registration": [
      {
@@ -1502,11 +1832,23 @@
       "reading1": "copy unknown c68728b8e4, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 35.2 m\u00b2 (-73.2% of 131.16), WRONG"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "STATEMENTS_ONLY",
     "now": [
      "FAILED",
      "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SCORED"
+     ],
+     [
+      "SCORED"
+     ]
     ],
     "registration": [
      {
@@ -1546,11 +1888,21 @@
       "reading1": "copy dimensioned 07d4ca005c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 92.3 m\u00b2 (-0.2% of 92.48), UNKNOWN (the figure is spent)"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "STATEMENTS_ONLY",
     "now": [
      "COMPLETED",
      null,
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SPENT"
+     ],
+     []
     ],
     "registration": [
      {
@@ -1600,11 +1952,23 @@
       "reading1": "copy dimensioned c1ed5b382c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 145.7 m\u00b2 (-0.9% of 147.01), UNKNOWN (the figure is spent), corroborated by ISOTROPY"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "REGISTRATION_MOVED",
     "now": [
      "FAILED",
      "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SPENT"
+     ],
+     [
+      "SPENT"
+     ]
     ],
     "registration": [
      {
@@ -1650,11 +2014,23 @@
       "reading1": "copy area_table da7064452b, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 104.1 m\u00b2 (-6.9% of 111.79), UNKNOWN (the figure is spent), corroborated by ISOTROPY"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "STATEMENTS_ONLY",
     "now": [
      "COMPLETED",
      null,
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SPENT"
+     ],
+     [
+      "SCORED"
+     ]
     ],
     "registration": [
      {
@@ -1703,11 +2079,23 @@
       "reading1": "copy dimensioned 8b24c71f3f, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 79.1 m\u00b2 (+0.2% of 78.92), AGREES, corroborated by ISOTROPY"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "STATEMENTS_ONLY",
     "now": [
      "COMPLETED",
      null,
      "PASS"
+    ],
+    "publishedFigure": [
+     [
+      "SCORED"
+     ],
+     [
+      "SCORED"
+     ]
     ],
     "registration": [
      {
@@ -1755,11 +2143,23 @@
       "reading1": "copy unknown 20137a1a68, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 154.2 m\u00b2 (-18.7% of 189.7), NEAR"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "REGISTRATION_LOST",
     "now": [
      "FAILED",
      "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SCORED"
+     ],
+     [
+      "SCORED"
+     ]
     ],
     "registration": [
      {
@@ -1804,11 +2204,23 @@
       "reading1": "copy dimensioned fb4609c5e2, chain extent, registered scale, largest-first tiling, outer faces: 1 body, 178.2 m\u00b2 (+135.0% of 75.83), WRONG"
      }
     },
+    "gateBlocking": [
+     "FOOTPRINT_AREA_WRONG",
+     "FOOTPRINT_AREA_WRONG"
+    ],
     "mechanism": "REGISTRATION_MOVED",
     "now": [
      "FAILED",
      "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SPENT"
+     ],
+     [
+      "SPENT"
+     ]
     ],
     "registration": [
      {
@@ -1855,11 +2267,23 @@
       "reading1": "copy dimensioned 4d37f1b2ba, chain extent, registered scale, largest-first tiling, outer faces: 7 bodies, 103.6 m\u00b2 (-58.5% of 249.42), WRONG, corroborated by ISOTROPY"
      }
     },
+    "gateBlocking": [
+     "FOOTPRINT_AREA_WRONG",
+     "FOOTPRINT_AREA_WRONG"
+    ],
     "mechanism": "STATEMENTS_ONLY",
     "now": [
      "FAILED",
      "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SPENT"
+     ],
+     [
+      "SPENT"
+     ]
     ],
     "registration": [
      {
@@ -1905,11 +2329,21 @@
      "stage": "PLAN_RESOLUTION",
      "was": null
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "STATEMENTS_ONLY",
     "now": [
      "FAILED",
      "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [],
+     [
+      "SPENT"
+     ]
     ],
     "registration": [
      {
@@ -1957,11 +2391,21 @@
       "reading1": "copy dimensioned 027bb2e82d, chain extent, registered scale, largest-first tiling, sides as gridded: 3 bodies, 112.0 m\u00b2 (-2.2% of 114.53), AGREES"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "STATEMENTS_ONLY",
     "now": [
      "COMPLETED",
      null,
      "PASS"
+    ],
+    "publishedFigure": [
+     [
+      "SCORED"
+     ],
+     []
     ],
     "registration": [
      {
@@ -2010,11 +2454,23 @@
       "reading1": "copy area_table 79ba9b7966, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 69.3 m\u00b2 (-0.5% of 69.69), UNKNOWN (the figure is spent)"
      }
     },
-    "mechanism": "REGISTRATION_MOVED",
+    "gateBlocking": [
+     null,
+     "FOOTPRINT_AREA_WRONG"
+    ],
+    "mechanism": "PUBLISHED_AREA_REFUSAL",
     "now": [
      "FAILED",
      "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SPENT"
+     ],
+     [
+      "SPENT"
+     ]
     ],
     "registration": [
      {
@@ -2063,11 +2519,23 @@
       "reading1": "copy dimensioned c936d50299, chain extent, registered scale, largest-first tiling, outer faces: 1 body, 137.2 m\u00b2 (-18.7% of 168.76), UNKNOWN (the figure is spent)"
      }
     },
-    "mechanism": "STATEMENTS_ONLY",
+    "gateBlocking": [
+     null,
+     "FOOTPRINT_AREA_WRONG"
+    ],
+    "mechanism": "PUBLISHED_AREA_REFUSAL",
     "now": [
      "FAILED",
      "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SPENT"
+     ],
+     [
+      "SPENT"
+     ]
     ],
     "registration": [
      {
@@ -2115,11 +2583,23 @@
       "reading1": "copy dimensioned fb4609c5e2, chain extent, registered scale, largest-first tiling, outer faces: 1 body, 178.2 m\u00b2 (+135.0% of 75.83), WRONG"
      }
     },
+    "gateBlocking": [
+     "FOOTPRINT_AREA_WRONG",
+     "FOOTPRINT_AREA_WRONG"
+    ],
     "mechanism": "REGISTRATION_MOVED",
     "now": [
      "FAILED",
      "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SPENT"
+     ],
+     [
+      "SPENT"
+     ]
     ],
     "registration": [
      {
@@ -2169,11 +2649,23 @@
       "reading1": "copy area_table 4813950087, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 191.0 m\u00b2 (-11.9% of 216.76), NEAR, corroborated by ISOTROPY"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "REGISTRATION_LOST",
     "now": [
      "FAILED",
      "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SCORED"
+     ],
+     [
+      "SCORED"
+     ]
     ],
     "registration": [
      {
@@ -2218,11 +2710,21 @@
       "reading1": "copy dimensioned 027bb2e82d, chain extent, registered scale, largest-first tiling, sides as gridded: 3 bodies, 112.0 m\u00b2 (-2.2% of 114.53), AGREES"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "REGISTRATION_MOVED",
     "now": [
      "COMPLETED",
      null,
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SCORED"
+     ],
+     []
     ],
     "registration": [
      {
@@ -2267,11 +2769,21 @@
      "stage": "PLAN_RESOLUTION",
      "was": null
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "STATEMENTS_ONLY",
     "now": [
      "FAILED",
      "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [],
+     [
+      "SPENT"
+     ]
     ],
     "registration": [
      {
@@ -2316,11 +2828,21 @@
      "stage": "PLAN_RESOLUTION",
      "was": null
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "REGISTRATION_MOVED",
     "now": [
      "FAILED",
      "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [],
+     [
+      "SPENT"
+     ]
     ],
     "registration": [
      {
@@ -2369,11 +2891,21 @@
       "sourceConflict": "OUTER_TOTALS"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "REGISTRATION_MOVED",
     "now": [
      "COMPLETED",
      null,
      "PASS"
+    ],
+    "publishedFigure": [
+     [
+      "VERIFIED"
+     ],
+     []
     ],
     "registration": [
      {
@@ -2421,11 +2953,23 @@
       "reading1": "copy unknown c68728b8e4, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 35.2 m\u00b2 (-73.2% of 131.16), WRONG"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "STATEMENTS_ONLY",
     "now": [
      "FAILED",
      "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SCORED"
+     ],
+     [
+      "SCORED"
+     ]
     ],
     "registration": [
      {
@@ -2468,11 +3012,23 @@
       "reading1": "copy area_table 79ba9b7966, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 69.3 m\u00b2 (-0.5% of 69.69), UNKNOWN (the figure is spent)"
      }
     },
-    "mechanism": "REGISTRATION_MOVED",
+    "gateBlocking": [
+     null,
+     "FOOTPRINT_AREA_WRONG"
+    ],
+    "mechanism": "PUBLISHED_AREA_REFUSAL",
     "now": [
      "FAILED",
      "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SPENT"
+     ],
+     [
+      "SPENT"
+     ]
     ],
     "registration": [
      {
@@ -2521,11 +3077,23 @@
       "reading1": "copy dimensioned c936d50299, chain extent, registered scale, largest-first tiling, outer faces: 1 body, 137.2 m\u00b2 (-18.7% of 168.76), UNKNOWN (the figure is spent)"
      }
     },
-    "mechanism": "STATEMENTS_ONLY",
+    "gateBlocking": [
+     null,
+     "FOOTPRINT_AREA_WRONG"
+    ],
+    "mechanism": "PUBLISHED_AREA_REFUSAL",
     "now": [
      "FAILED",
      "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SPENT"
+     ],
+     [
+      "SPENT"
+     ]
     ],
     "registration": [
      {
@@ -2572,11 +3140,23 @@
       "reading1": "copy area_table 0f7c5bafc8, chain extent, scale 2.285714 cm/px, largest-first tiling, outer faces: 3 bodies, 36.6 m\u00b2 (-55.8% of 82.81), WRONG"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "STATEMENTS_ONLY",
     "now": [
      "FAILED",
      "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SCORED"
+     ],
+     [
+      "SCORED"
+     ]
     ],
     "registration": [
      {
@@ -2616,11 +3196,21 @@
       "reading1": "copy dimensioned 07d4ca005c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 92.3 m\u00b2 (-0.2% of 92.48), UNKNOWN (the figure is spent)"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "STATEMENTS_ONLY",
     "now": [
      "COMPLETED",
      null,
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SPENT"
+     ],
+     []
     ],
     "registration": [
      {
@@ -2669,11 +3259,23 @@
       "reading1": "copy dimensioned c1ed5b382c, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 145.7 m\u00b2 (-0.9% of 147.01), UNKNOWN (the figure is spent), corroborated by ISOTROPY"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "REGISTRATION_MOVED",
     "now": [
      "FAILED",
      "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SPENT"
+     ],
+     [
+      "SPENT"
+     ]
     ],
     "registration": [
      {
@@ -2718,11 +3320,23 @@
       "reading1": "copy area_table da7064452b, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 104.1 m\u00b2 (-6.9% of 111.79), UNKNOWN (the figure is spent), corroborated by ISOTROPY"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "STATEMENTS_ONLY",
     "now": [
      "COMPLETED",
      null,
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SPENT"
+     ],
+     [
+      "SCORED"
+     ]
     ],
     "registration": [
      {
@@ -2770,11 +3384,23 @@
       "reading1": "copy area_table 2a1e4f9cc1, chain extent, registered scale, largest-first tiling, sides as gridded, pocket mouths shut: 1 body, 124.2 m\u00b2 (-1.6% of 126.23), UNKNOWN (the figure is spent)"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "REGISTRATION_MOVED",
     "now": [
      "FAILED",
      "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SPENT"
+     ],
+     [
+      "SPENT"
+     ]
     ],
     "registration": [
      {
@@ -2823,11 +3449,23 @@
       "reading1": "copy dimensioned 8b24c71f3f, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 79.1 m\u00b2 (+0.2% of 78.92), AGREES, corroborated by ISOTROPY"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "STATEMENTS_ONLY",
     "now": [
      "COMPLETED",
      null,
      "PASS"
+    ],
+    "publishedFigure": [
+     [
+      "SCORED"
+     ],
+     [
+      "SCORED"
+     ]
     ],
     "registration": [
      {
@@ -2873,11 +3511,23 @@
       "reading1": "copy unknown 20137a1a68, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 154.2 m\u00b2 (-18.7% of 189.7), NEAR"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "REGISTRATION_LOST",
     "now": [
      "FAILED",
      "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SCORED"
+     ],
+     [
+      "SCORED"
+     ]
     ],
     "registration": [
      {
@@ -2921,11 +3571,23 @@
       "reading1": "copy dimensioned fb4609c5e2, chain extent, registered scale, largest-first tiling, outer faces: 1 body, 178.2 m\u00b2 (+135.0% of 75.83), WRONG"
      }
     },
+    "gateBlocking": [
+     "FOOTPRINT_AREA_WRONG",
+     "FOOTPRINT_AREA_WRONG"
+    ],
     "mechanism": "REGISTRATION_LOST",
     "now": [
      "FAILED",
      "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SPENT"
+     ],
+     [
+      "SPENT"
+     ]
     ],
     "registration": [
      {
@@ -2969,11 +3631,21 @@
      "stage": "PLAN_RESOLUTION",
      "was": null
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "REGISTRATION_MOVED",
     "now": [
      "FAILED",
      "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [],
+     [
+      "SPENT"
+     ]
     ],
     "registration": [
      {
@@ -3021,11 +3693,23 @@
       "reading1": "copy dimensioned 4d37f1b2ba, chain extent, registered scale, largest-first tiling, outer faces: 7 bodies, 103.6 m\u00b2 (-58.5% of 249.42), WRONG, corroborated by ISOTROPY"
      }
     },
+    "gateBlocking": [
+     "FOOTPRINT_AREA_WRONG",
+     "FOOTPRINT_AREA_WRONG"
+    ],
     "mechanism": "STATEMENTS_ONLY",
     "now": [
      "FAILED",
      "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SPENT"
+     ],
+     [
+      "SPENT"
+     ]
     ],
     "registration": [
      {
@@ -3070,11 +3754,21 @@
      "stage": "PLAN_RESOLUTION",
      "was": null
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "STATEMENTS_ONLY",
     "now": [
      "FAILED",
      "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [],
+     [
+      "SPENT"
+     ]
     ],
     "registration": [
      {
@@ -3126,11 +3820,23 @@
       "reading1": "copy area_table 4813950087, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 191.0 m\u00b2 (-11.9% of 216.76), NEAR, corroborated by ISOTROPY"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "REGISTRATION_LOST",
     "now": [
      "COMPLETED",
      null,
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SCORED"
+     ],
+     [
+      "SCORED"
+     ]
     ],
     "registration": [
      {
@@ -3187,11 +3893,23 @@
       "sourceConflict": "OUTER_TOTALS"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "STATEMENTS_ONLY",
     "now": [
      "COMPLETED",
      null,
      "PASS"
+    ],
+    "publishedFigure": [
+     [
+      "VERIFIED"
+     ],
+     [
+      "VERIFIED"
+     ]
     ],
     "registration": [
      {
@@ -3240,11 +3958,23 @@
       "reading1": "copy unknown c68728b8e4, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 35.2 m\u00b2 (-73.2% of 131.16), WRONG"
      }
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "STATEMENTS_ONLY",
     "now": [
      "FAILED",
      "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SCORED"
+     ],
+     [
+      "SCORED"
+     ]
     ],
     "registration": [
      {
@@ -3286,11 +4016,21 @@
      "stage": "METRIC_CHALLENGE",
      "was": null
     },
+    "gateBlocking": [
+     null,
+     null
+    ],
     "mechanism": "NO_PLAN_FRAME",
     "now": [
      "FAILED",
      "MODEL_EMISSION_FAILED/None",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [],
+     [
+      "VERIFIED"
+     ]
     ],
     "registration": [
      null,
@@ -3320,11 +4060,23 @@
       "reading1": "copy unknown 20137a1a68, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 154.2 m\u00b2 (-18.7% of 189.7), NEAR"
      }
     },
-    "mechanism": "STATEMENTS_ONLY",
+    "gateBlocking": [
+     null,
+     "FOOTPRINT_AREA_WRONG"
+    ],
+    "mechanism": "PUBLISHED_AREA_REFUSAL",
     "now": [
      "FAILED",
      "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SCORED"
+     ],
+     [
+      "SPENT"
+     ]
     ],
     "registration": [
      {
@@ -3371,11 +4123,23 @@
       "reading1": "copy dimensioned fb4609c5e2, chain extent, registered scale, largest-first tiling, outer faces: 1 body, 178.2 m\u00b2 (+135.0% of 75.83), WRONG"
      }
     },
+    "gateBlocking": [
+     "FOOTPRINT_AREA_WRONG",
+     "FOOTPRINT_AREA_WRONG"
+    ],
     "mechanism": "STATEMENTS_ONLY",
     "now": [
      "FAILED",
      "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
      "ALGORITHMIC_FAIL"
+    ],
+    "publishedFigure": [
+     [
+      "SPENT"
+     ],
+     [
+      "SPENT"
+     ]
     ],
     "registration": [
      {

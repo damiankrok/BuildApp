@@ -1,0 +1,366 @@
+{
+ "method": "three independent read-only reviewers (A provenance/self-anchoring, B label-to-line/rotation/correlation/truth quality, C full-solver semantics/open sides/storeys/area-oracle leakage); every P0/P1 re-run by two skeptics instructed to refute by reproduction; severity after verification is the skeptics' corrected severity",
+ "reviews": [
+  {
+   "findings": [
+    {
+     "claimedSeverity": "P1",
+     "disposition": "FIXED",
+     "dispositionDetail": "G2d now compares SOURCE_EXACT elements (collection:id = interpretation) against C0 (gates.py d_sourceExactChanged; score_houses.py model.sourceExact); first-scored count kept. Every variant now fails G2d (C1 10 rows, C2 15, C3 2, N1 8, C4 14, C1N1 12). Report \u00a7B/\u00a7G corrected.",
+     "evidence": "gates.py:69-78 compares only sum(n for k in evidenceStatus if k.endswith(':SOURCE_EXACT')) between C0 and the variant. The preregistration \u00a76 G2d text is 'no new SOURCE_EXACT on a row unless traced to a READ statement', but the gate does no tracing. Comparing elements one by one (model.json evidence.status == SOURCE_EXACT, keyed by collection:id) gives these changes against C0, all reported as G2d [] in safety-gates/*-gates.json and as 'G2d (wi\u0119cej SOURCE_EXACT) = 0 we wszystkich' in the stage report line 139: C1 kosacce-clean/-tracked wallRings:ring-attached-0-0 SOURCE_EXACT '6.48 \u00d7 3.70 m' -> '12.04 \u00d7 3.70 m' (count 4 -> 4; this is the +11.18 % row); C1 tymianku ring-main-0 10.62\u00d710.68 -> 10.62\u00d711.68; C1N1 dom-pod-jarzabem ring-main-0 19.10\u00d710.00 -> 19.10\u00d710.74; C2 cieszyniankach 11.70\u00d715.80 -> 11.70\u00d716.60; C2 rarytasy-g2e ring-attached-0-0 6.17\u00d76.20 -> 5.97\u00d78.62. There are changed SOURCE_EXACT facts in all six variants. Mechanism (code-read, K): an INK_FIRST statement has origin READ, so plan-resolution.ts:218 zeroSubstitution / :228 asRead treat its ink value as printed, the layout ladder takes cited.value (layout.ts:1139-1147), and v2/emit.ts:193 writes ring SOURCE_EXACT with no basis check. So the answer to question (5) is yes: INK_FIRST READ reaches SOURCE_EXACT. As written (an INK_FIRST statement is READ), G2d's definition would allow it, and as implemented (a net count) G2d cannot observe it. Only G2c's footprint residual catches the kosacce case. The report \u00a7B cites G2d as the test of D8.",
+     "id": "A1",
+     "negativeTest": "test_A1_a_changed_SOURCE_EXACT_with_the_same_count_fails_G2d",
+     "refutedVotes": 0,
+     "reproducedVotes": 2,
+     "reproduction": "python3 -I /tmp/claude-0/review-a/se.py C1,C2,C3,N1,C4,C1N1   (read-only; diffs SOURCE_EXACT elements of runs/<V>/<case>/solve/model.json against runs/C0)",
+     "skepticSeverity": [
+      "P1",
+      "P1"
+     ],
+     "title": "G2d cannot see INK_FIRST (or any) value reaching SOURCE_EXACT: it is a per-row net count, and changed SOURCE_EXACT facts pass as 'G2d = 0'"
+    },
+    {
+     "claimedSeverity": "P1",
+     "disposition": "DISCLOSED (P2 after verification)",
+     "dispositionDetail": "Reported in \u00a7G/\u00a7H: C1N1 has 31 anchors from chains N1 re-read at a LEGACY_UNCONFIRMED frame scale (values equal the ink as read; not self-witnesses by origin, but selected by fit to an unsupported scale); C1N1 restated as \"no CHAIN_CORRECTED anchors\", not \"no scale-dependent anchors\".",
+     "evidence": "N1.patch offers a re-read on every frame with lattices 'at the scale the frame stands at'. On LEGACY_UNCONFIRMED frames that scale is the substitution-seeded legacy L. C1's anchor rule drops `anchorable` (C1.patch: `void anchorable`), so readings chosen because they fit L become anchors of L. Preregistration \u00a75 (N1) itself says such reads 'are new statements, not new witnesses'. Count over the 45 EXTRACT rows: 31 C1N1 anchors come from chains that only N1 re-read on LEGACY_UNCONFIRMED frames (115 more on CONFIRMED frames). Example, dom-w-murajach S2 frame \u2026fb4609c5e2 (LEGACY_UNCONFIRMED, solution 2.451224 = L). C1N1 rereadChainIds are [chain-horizontal-524, chain-vertical-364]. Its registration anchors are Y READ 240 over 98 px (chain-vertical-364, 240/98 = 2.449 \u2248 L), X READ 115 over 48.5 px (re-read) and X INK 1020 over 412 px. That gives a registration of 2.4756 / 2.449 cm/px at confidence 0.68, where C0 had 0.718 with 3 CC anchors. G2a = 0 for C1N1, and the report (\u00a7F/\u00a7G/\u00a7H: 'kotwice zale\u017cne od skali 0') presents C1N1 as free of scale-dependent anchors.",
+     "id": "A2",
+     "negativeTest": null,
+     "refutedVotes": 1,
+     "reproducedVotes": 2,
+     "reproduction": "python3 -I /tmp/claude-0/review-a/n1_legacy_anchors.py ; python3 -I /tmp/claude-0/review-a/anchors.py C0,N1,C1N1 dom-w-murajach v",
+     "skepticSeverity": [
+      "P2",
+      "P2"
+     ],
+     "title": "C1N1 anchors READ values that N1 re-read at the unsupported LEGACY_UNCONFIRMED scale (a self-witness through selection); G2a and G2a\u2032 do not count them"
+    },
+    {
+     "claimedSeverity": "P1",
+     "disposition": "DISCLOSED (P2 after verification)",
+     "dispositionDetail": "Report \u00a7M: in the frozen plan resolution (metricsAtScale) the SCALE_DEPENDENT alternative C1 keeps can replace the ink under a challenge scale (rarytasy-g2e, 4 statements, simulated); a future C1-like change must exclude SCALE_DEPENDENT alternatives there (separate, authorised change).",
+     "evidence": "plan-resolution.ts:363-366 (metricsAtScale): a statement that disagrees with a challenge scale is re-read through [firstReadCm, ...alternatives sorted by confidence then value]. C1 stores the scale's choice as an alternative with confidence 0.2 and why 'SCALE_DEPENDENT \u2026 never a witness', so it is an ordinary candidate there. C1 rarytasy-g2e is a known-good row whose PASS is kept. Its decision path is METRIC_CHALLENGE REPLACED on copy \u202659a406b738 at 2.755764 cm/px, while C0's path is empty (G5-explanations C1 rarytasy-g2e: registration mppX 0.040127 vs mppY 0.027516). At that scale, 4 INK_FIRST statements re-read back to their SCALE_DEPENDENT values: 315@78.5px->215, 339@41px->114, 315@40.5px->111, 180@37px->100. This holds for tolerancePx 2\u20135 (plan-resolution.ts:607 uses max(2, wallPx/2)). Reread spans get basis DERIVED (layout.ts:1866-1867), but emit.ts:193 rings carry no basis check. So on this row the claim that C1 'states the ink' does not describe what reaches geometry. It is the frozen reconstruction (D8), not the patch, but it changes how C1's effect on known-good rows should be read. Caveat: this is a faithful re-implementation of metricsAtScale on the sealed evidence. The run does not seal rereadEvidenceIds.",
+     "id": "A3",
+     "negativeTest": null,
+     "refutedVotes": 0,
+     "reproducedVotes": 2,
+     "reproduction": "python3 -I /tmp/claude-0/review-a/reread_sim.py",
+     "skepticSeverity": [
+      "P2",
+      "P2"
+     ],
+     "title": "Downstream, plan resolution can put C1's SCALE_DEPENDENT alternative back in place of the ink (scale value under a READ label)"
+    },
+    {
+     "claimedSeverity": "P1",
+     "disposition": "DISCLOSED (P2 after verification)",
+     "dispositionDetail": "Report \u00a7E: C1 ink = external reader confident (LEADS, 176/262) or external + lattice agree (AGREES, 86/262); the CLEAR/SUPPORTED filter is redundant with the decision.",
+     "evidence": "ensemble.ts:139-153: LEADS means the lattice is not confident (AMBIGUOUS or LOW_QUALITY) and only the external reader is confident, stable and heard. numeric-lattice.ts header (and its imports of scoreCell and segment from ocr.js) shows that the lattice is the 005D template matcher re-reading 'the reader's own cuts', the same family as the classic token. Across the 45 EXTRACT rows of C1, 176 of 262 INK_FIRST statements are LEADS (84 of 127 anchored INK_FIRST). In 82 of those 176, the lattice's own as-read equals the classic token text, so the two template readings agree with each other and the external reader alone overrides them. AGREES makes up the other 86, and in 44 of them the lattice's own class is AMBIGUOUS or LOW_QUALITY, raised to CLEAR by AGREES. Every INK_FIRST value equals the external (PP-OCR) reading. The ink sees no scale, so it is not a self-witness, but the preregistration \u00a73 says 'a single reader \u2026 gives no ink' while it admits LEADS. c1.spec.ts tests 'single reader' only as 'no ensemble', and its class tests (AGREES+AMBIGUOUS, LEADS+LOW_QUALITY) are states that ensembleOf never produces (AGREES always gives CLEAR, LEADS always SUPPORTED), so the CLEAR/SUPPORTED filter is vacuous.",
+     "id": "A4",
+     "negativeTest": null,
+     "refutedVotes": 0,
+     "reproducedVotes": 2,
+     "reproduction": "python3 -I /tmp/claude-0/review-a/ink.py C1   (also C4, C1N1); keys are (decision, lattice asRead == classic, lattice own class, ink == scale value)",
+     "skepticSeverity": [
+      "P2",
+      "P2"
+     ],
+     "title": "C1's 'corroborated ink' is a single confident reader in two thirds of statements, and the second reader is the classic token's own template family"
+    }
+   ],
+   "lens": "A",
+   "p2": [
+    {
+     "disposition": "Correct \u00a7E.2 to say C1 excludes only OTHER_AXIS_SCALE orientation. Add `and (variant not in {C3,C4} or a2_total == 0)` to the G2 pass, or state why it is reported only. Add C0's 132 to the G2a\u2032 column in place of '\u2014'.",
+     "evidence": "For C1 the 43 G2a\u2032 anchors split into UNDECIDED READ 18, UNDECIDED INK_FIRST 7, AXIS_SELF_CONSISTENCY (joinedCm) READ 14 and AXIS_SELF_CONSISTENCY INK_FIRST 4. C1 excludes only OTHER_AXIS_SCALE: its INK derivation copies orientation.dependsOnScale, which production sets only for OTHER_AXIS_SCALE (metric-solution.ts:1473). The C1 description in report \u00a7E.2 says 'kotwice tylko z READ, nie z orientacji zale\u017cnej od skali', but table \u00a7G shows 43. gates.py:62-67 computes a2 but G2 'pass' omits it, and addendum A's rule that G2a\u2032 must be 0 under C3/C4 is not encoded. C3 and C4 are 0, so no verdict changes.",
+     "id": "A5",
+     "title": "C1 and C1N1 keep 43 and 51 anchors from vertical chains whose orientation came from joinedCm or the page vote; the report describes C1 anchors as not scale-oriented, and gates.py never uses G2a\u2032 in a pass"
+    },
+    {
+     "disposition": "In \u00a7F and the summary, show 'correct printed, binding verified / unverified' (C1 10/31) next to the total.",
+     "evidence": "score_labels.py:132 counts binding NO_TRUTH as bound-correct. Records in /home/user/work005q-chain/lab/label-records-*-primary.json, MAIN only: C1 41 = 10 CORRECT + 31 NO_TRUTH; C1N1 47 = 15 + 32; C4 30 = 10 + 20; C0 10 = 5 + 5. The report itself names wrong-span promotion as C1's failure mode (\u00a7A summary row, \u00a7M.1).",
+     "id": "A6",
+     "title": "C1's label gain '10 -> 41 correct printed and bound' is mostly unverified binding, and C1 puts ink on spans the scale chose"
+    },
+    {
+     "disposition": "Disclose in \u00a7F/\u00a7G that the Murajach negative control has no TRUE_SCALE and that the check is X-only. Optionally add a Y check. No verdict change.",
+     "evidence": "score_labels.py:179-181 uses reg[0].metresPerPixelX against the 005O TRUE_SCALE. S2 and S3 have trueScale None, so falseConfidentScale is None. C1N1 builds S2 (\u2026fb4609c5e2) at 2.4756/2.449 cm/px with confidence 0.68 from the 1020/412-px fragment, which the causal map \u00a76.1 calls wrongly bound. C1 builds S3 (\u2026006f85ed53) at X 2.667 / Y 3.034 with confidence 0.727 (anisotropy 1.14). G2c sees neither, and Y is never checked on any sheet. The report's registration-move census covers moves against C0 descriptively.",
+     "id": "A7",
+     "title": "G2c's sheet arm is blind on Murajach S2/S3 and checks only mppX"
+    },
+    {
+     "disposition": "Cite the per-element SOURCE_EXACT diff (A1) or the label frame data for kosacce instead, or pick an example that is actually in the G5 list.",
+     "evidence": "Stage report line 159 cites 'STATEMENTS_ONLY \u2026 np. C1 kosacce-clean +11,2 % przy mpp bez zmian' as coming from house-semantic-delta/G5-explanations.json, where `grep -c kosacce` returns 0. Its outcome and decision path did not change, only the verdict. The mechanism itself is right: the S6 registration error is -0.0003 in both C0 and C1.",
+     "id": "A8",
+     "title": "The report cites C1 kosacce-clean as a STATEMENTS_ONLY example of G5-explanations.json, but that row is not in the file"
+    },
+    {
+     "disposition": "Treat every challenger number as conditional until C0warm == C0 byte for byte on all rows. If S2 fails, re-run without ACCEL as preregistered.",
+     "evidence": "runs/C0warm has 26 row directories and no C0warm.done; queue2.out shows 'C0warm start 2026-10-14T19:56:18Z'; report \u00a7D shows \u27eaS2\u27eb. Preregistration \u00a72 says challengers run without ACCEL unless S2 holds. Only a one-row ACCEL-cold/warm smoke run (dom-miniaturka) exists.",
+     "id": "A9",
+     "title": "Stop rule S2 is unresolved but every challenger already ran with ACCEL"
+    }
+   ],
+   "summary": "Review A (provenance and self-anchoring) finds no P0. None of the findings changes the NONE recommendation, because every variant still fails G1.\n\nWhat I confirmed:\n- **Freeze and isolation:** the freeze check is IDENTICAL, the diff touches only allowed paths, patch hashes are as preregistered, and no patch line names a row.\n- **The scorer's evidence gates:** recomputed independently on 5 rows \u00d7 6 variants, they match exactly.\n- **Addendum B:** the 57 legacy-row anchors are identical in every variant and \u00a71 already declared those rows unreachable, so it is a fair scope correction that changed no verdict.\n- **G2a = 0 for C1, C4 and C1N1** holds on the raw evidence.\n\nWhere self-witnessing survives in ways the gates do not count:\n- **C1N1 (A2):** 31 anchors are READ values that N1 re-read at the unsupported, substitution-seeded scale of LEGACY_UNCONFIRMED frames. Example: Murajach S2 gets a Y scale of 2.449 from 240/98 px, registration confidence 0.68.\n- **C1 and C1N1 orientation (A5):** they keep 43 and 51 anchors from vertical chains oriented by joinedCm or the page vote. The report's description of C1 omits this, and gates.py never uses G2a\u2032 in a pass.\n- **Reconstruction (A3):** plan resolution can put C1's SCALE_DEPENDENT alternative back as the statement value. Simulated on known-good rarytasy-g2e at its challenge scale, 4 ink values revert to the scale's values.\n\nOn question (5): INK_FIRST READ does reach SOURCE_EXACT, and G2d cannot catch it (A1). G2d is a per-row net count, so changed SOURCE_EXACT facts pass. The clearest case is C1 kosacce ring-attached-0-0 going from 6.48 m to 12.04 m wide, still SOURCE_EXACT, while the report says 'G2d = 0'.\n\nOn question (4): C1's 'corroborated ink' is a single confident external reader in 176 of 262 statements (A4). The other reader, the lattice, belongs to the classic token's template family, and in 82 of those cases it agrees with the classic token.\n\nRemaining P2 findings:\n- C1's 10 \u2192 41 label gain counts 31 unverified bindings (A6).\n- G2c's sheet arm is blind on Murajach and checks only X (A7).\n- The report cites kosacce as a G5 example, but kosacce is not in G5-explanations.json (A8).\n- Stop rule S2 is still pending while all challenger numbers already depend on ACCEL (A9).\n\nReproduction scripts are in /tmp/claude-0/review-a/: anchors.py, ink.py, se.py, recompute.py, reread_sim.py, n1_legacy_anchors.py.",
+   "title": "provenance and self-anchoring",
+   "verifiedOk": [
+    "Freeze: `node research/analyzer-005q-chain/freeze-manifest.mjs check \u2026/production-freeze-start.json` prints FREEZE: IDENTICAL at HEAD 07508f7. `git diff cd0c513 --name-only` touches only research/analyzer-005q-chain/, stage-reports/artifacts/analyzer-005q-chain/, the 005Q-CHAIN stage report and tests/architecture/research-isolation.test.ts. No image, pdf, onnx or bin files. Worktree clean.",
+    "Patch hashes of ACCEL, C1\u2013C4, N1, C1N1 and the specs match preregistration \u00a79. Every v-<VARIANT>/variant.json records rev cd0c513 and exactly the registered patch sha256s.",
+    "No candidate patch adds a line naming a row, family, published figure, verdict, truth path or scratch path. A substring scan of all + lines found only 'raster' (contains 'aster') in ACCEL.patch, which is a false positive; the architecture test uses word boundaries.",
+    "score_houses.py evidence_gates was recomputed independently (my own lattice match by token box and orientation, scale-oriented set keyed by frameId+chainId, valueText check added). Results are identical for scaleDependentAnchors, scaleOrientedAnchors, inkFirstStatements and inkFirstMismatch on dom-w-gozdzikowcach, dom-w-glogownikach, dom-w-murajach, dom-pod-jarzabem and kosacce-clean under C1, C2, C3, N1, C4 and C1N1. Every INK_FIRST statement matched exactly one lattice record.",
+    "Raw anchors: C1, C4 and C1N1 have 0 registration anchors citing CHAIN_CORRECTED or dependsOnScale evidence on all EXTRACT rows. CC level datums are excluded in C1. C2, C3 and N1 keep 420, 448 and 468 such anchors, which matches the headline G2a claim.",
+    "C3 and C4 have 0 scale-oriented (G2a\u2032) anchors. Vertical AXIS_SELF_CONSISTENCY is only the joinedCm route (metric-solution.ts:798-808), so the scorer's Y-axis set {OTHER_AXIS_SCALE, UNDECIDED, AXIS_SELF_CONSISTENCY} matches addendum A.",
+    "Addendum B is justified and not goal-shifting in effect. The 57 legacy-row anchors (16/16/25) are identical in C0 and every variant, preregistration \u00a71 already declares those rows unreachable by source-metrics challengers, and the change did not alter any verdict: C1 fails G1 and G2c regardless. It is disclosed as post-C1 in both the preregistration and the report.",
+    "G2b is implemented as defined (ink = ensemble asReadValueCm, decision AGREES/LEADS, origin READ) and is 0 in all variants.",
+    "The INK_FIRST ink is independent of any scale: ensemble.ts and numeric-lattice.ts take no scale, chain or span. INK_FIRST derivations carry the classic rawText, the ink valueText and orientation.dependsOnScale.",
+    "The headline 'no challenger adoption-eligible / NONE' is unaffected by every finding above. Each variant fails G1, independently of A1\u2013A9."
+   ]
+  },
+  {
+   "findings": [
+    {
+     "claimedSeverity": "P0",
+     "disposition": "FIXED",
+     "dispositionDetail": "score_labels.py: false-confident scale on both axes, anisotropy flag for sheets without TRUE_SCALE; gates.py G2c counts them new against C0 (X-only first-scored kept). New entries: N1 S4 (Y +4.96 %), C1 and C1N1 S3 (anisotropy 0.138), C2 S2 (0.037).",
+     "evidence": "research/analyzer-005q-chain/score_labels.py:162-164 compute registrationErrVsTrueScale and falseConfidentScale from reg[0]['metresPerPixelX'] only. gates.py:73-74 builds G2c from that flag. Preregistration \u00a76 G2c reads 'a truth sheet whose registration moves > 3 % from TRUE_SCALE at confidence >= 0.5', which names no axis. Raw evidence for N1 S4 (Gozdzikowce, runs/N1/dom-w-gozdzikowcach): mppX 0.025241, mppY 0.026829, confidence 0.66, TRUE_SCALE 2.5561, so Y is +4.96 %. The whole Y scale rests on one CHAIN_CORRECTED anchor: 55 from raw text '135' over 20.5 px. Yet safety-gates/N1-gates.json G2.c_newFalseConfident = [] and commit a77c3c5 says 'no false-confident scale'. Sheets with no TRUE_SCALE (S2, S3) are never checked at all: C1 and C1N1 S3 have anisotropy Y/X 1.138 at confidence 0.727 (anchors READ 298/98.5 px, 298/98 px, 288/108 px), and C2 S2 has anisotropy 0.963 at 0.66. None of these appear in G2c.",
+     "id": "B-01",
+     "negativeTest": "test_B01_false_scale_on_the_Y_axis_is_caught, test_B01_anisotropy_without_true_scale_is_flagged, test_B01_gate_counts_a_Y_axis_false_scale_new_against_C0",
+     "refutedVotes": 0,
+     "reproducedVotes": 2,
+     "reproduction": "python3 -I -c \"import json,gzip,sys;sys.path.insert(0,'/home/user/BuildApp/research/analyzer-005q-ocr');import score as S;f='frame-asset-rzut-01d4b6474c-64bd1e0f2f';ts=S.true_scale(f);m=json.loads(gzip.open('/home/user/work005q-chain/runs/N1/dom-w-gozdzikowcach/extract/metric-evidence.json.gz').read());r=[x for x in m['coordinateRegistrations'] if x.get('frameId')==f][0];print(r['metresPerPixelX']*100/ts-1,r['metresPerPixelY']*100/ts-1,r['confidence'])\"  \u2192 -0.0125 0.0496 0.66. Full per-variant scan (X, Y and anisotropy): the inline scripts under /tmp/claude-0/review-b (see the anisotropy scan in the session).",
+     "skepticSeverity": [
+      "P0",
+      "P0"
+     ],
+     "title": "G2c truth-sheet false-confident-scale check looks at the X axis only and needs TRUE_SCALE, so it misses a Y-axis false scale under N1 and anisotropic registrations under C1, C1N1 and C2"
+    },
+    {
+     "claimedSeverity": "P0",
+     "disposition": "FIXED",
+     "dispositionDetail": "score_labels.py splits correctPrintedBound into Verified / Unverified and adds the span audit (stated / px / TRUE_SCALE > 3 %) and spuriousCertaintyWithSpanAudit. C1: 41 = 10 verified + 31 unverified, 12 on implausible spans; spurious with span audit 4 -> 16. Report \u00a7F rewritten; C1 label gain no longer presented as 41 correct bindings.",
+     "evidence": "score_labels.py:145-146: correctPrintedBound accepts binding in ('CORRECT','NO_TRUTH'), and spuriousCertainty fires on a wrong span only when binding == 'WRONG'. Binding truth exists for only 19 of 110 PRIMARY MAIN labels. Of C1's 31 gains, 26 are NO_TRUTH. Audit of stated value / span px / TRUE_SCALE (audit only, never used to choose truth): 12 of C1's 35 measurable correctPrintedBound labels are more than 3 % off, most of them by 40-110 %. Examples: S1 224 on 47 px (1.812, anchor), 280 on 60.5 px (1.761, anchor), 302 on 193 px (0.595); S4 362 on 72.5 px (1.953); S6 176/342/270/370/236/226 (1.41/1.72/1.75/2.11/1.75/1.06); S7 176 (1.279); S8 165 (0.895). The same audit finds C4: 6, C1N1: 11, N1: 1 and C0: 0. paired-matrix/label-score-primary.json reports C1 correctPrintedBound 41 and spuriousCertainty 4 (same as C0). Under the preregistered definition ('asserted printed value wrong or bound wrong') the figures are about 29 and at least 16.",
+     "id": "B-02",
+     "negativeTest": "test_B02_unverified_binding_is_not_counted_as_verified_and_a_wrong_span_is_audited",
+     "refutedVotes": 0,
+     "reproducedVotes": 2,
+     "reproduction": "python3 -I /home/user/BuildApp/research/analyzer-005q-chain/score_labels.py --runs /home/user/work005q-chain/runs --labels C0,C1,C4,C1N1,N1 --mode primary --out /tmp/x; then for each record with correctPrintedBound, look up the statement's segment px in runs/<V>/<case>/extract/metric-evidence.json.gz chains[].segments[evidenceId] and compute int(value)/px/score.true_scale(frameId) (script /tmp/claude-0/review-b/spans2.py).",
+     "skepticSeverity": [
+      "P0",
+      "P0"
+     ],
+     "title": "correctPrintedBound and spuriousCertainty count unverified bindings as correct, so C1's wrong-span promotions are scored as gains and spurious certainty shows 4 -> 4"
+    },
+    {
+     "claimedSeverity": "P1",
+     "disposition": "FIXED",
+     "dispositionDetail": "score_labels.py reports binding counts without the 2 questionable binding truths (preregistration \u00a71): binding WRONG = 0 in every variant without them; S7 212 marked as a probable truth artefact; erratum to causal-map \u00a76.5 in the report.",
+     "evidence": "Preregistration \u00a71 says the 2 of 19 binding truths more than 3 % from TRUE_SCALE are questionable and that 'every binding number is also reported without those 2'. score_labels.py and assemble.py contain no such computation. Records show binding:WRONG = {S6 196, S7 212} in C0, C1, N1 and C4. Their truth segments sit at 0.772x and 2.94x TRUE_SCALE. S7 212 is stated READ 212 on 95.5 px = 1.000 x TRUE_SCALE 2.2189, so the variant's span is right and the truth's 32.5 px span is wrong. Without these two, binding:WRONG = 0 in every variant, which means the binding check never caught a variant error. causal-map.md:127 ('READ != correct: `212` bound wrong') rests on this questionable truth.",
+     "id": "B-03",
+     "negativeTest": "test_B03_a_questionable_binding_truth_is_excluded",
+     "refutedVotes": 0,
+     "reproducedVotes": 2,
+     "reproduction": "From /tmp/x/label-records-C0-primary.json, list the records with binding=='WRONG'. Then for each S7 212 statement compute value/(toPx-fromPx)/2.2189 \u2192 1.000, and for its bindingTruth segment 212/32.5/2.2189 \u2192 2.94 (script /tmp/claude-0/review-b/spans.py C0 S6,S7).",
+     "skepticSeverity": [
+      "P1",
+      "P1"
+     ],
+     "title": "The only two binding:WRONG labels in every variant are the two questionable binding truths; the preregistered 'without those 2' sensitivity is not computed, and S7 212 is probably a truth error"
+    },
+    {
+     "claimedSeverity": "P1",
+     "disposition": "FIXED (text)",
+     "dispositionDetail": "Report \u00a7F/\u00a7G attribute C4 S1 (+58.86 %) to C2 geometric span (190 bound to 45.5 px instead of 71 px) plus C1 promotion; C2 section notes the 0.3 / fewest-marks rule can mis-bind a label production bound correctly (S1 190).",
+     "evidence": "S1 chain-horizontal-481-b5c03be77e: in C0 and C1 the label 190 sits on 552->623 = 71 px (190/71/2.6286 = 1.018, correct). In C2 and C4, geometricSpanC2 picks the elementary interval 577.5->623 = 45.5 px (ratio 1.589). In C4 that READ 190/45.5 px is the only X anchor of the S1 registration (anchors: 190/45.5 H, 920/350 V, 870/333 V), so X is +58.86 % at confidence 0.696 (safety-gates/C4-gates.json G2c, registrationErrVsTrueScale 0.5886). The 224/280 wrong-span inks behind C1's +77.65 % are absent in C4: C2 makes them labelled-unresolved. C2 also yields C4 S7 335 on 52.5 px (2.876). The headline groups C4 with 'promote wrong-span ink' without saying the span came from C2.",
+     "id": "B-04",
+     "negativeTest": null,
+     "refutedVotes": 0,
+     "reproducedVotes": 2,
+     "reproduction": "python3 -I /tmp/claude-0/review-b/s1_190.py (prints segments of chain-horizontal-481-* for C0, C1, C2, C4) and python3 -I /tmp/claude-0/review-b/anc.py C0 C1 C4 C1N1 (prints the S1 anchors with span ratios).",
+     "skepticSeverity": [
+      "P1",
+      "P1"
+     ],
+     "title": "C4's S1 false-confident scale comes from C2's geometric span, not from C1's wrong-span ink; C2's centring rule itself rebinds a correctly bound label to a wrong span"
+    },
+    {
+     "claimedSeverity": "P1",
+     "disposition": "FIXED",
+     "dispositionDetail": "score_houses.py multiAssertedTokens; gates.py G2b' fails a variant with more tokens stated as READ on more than one segment than C0: C1 and C1N1 (kosacce-clean/-tracked, ink 370 on 73 px and 47 px). Recorded as a C1 defect (an ink may state at most one span).",
+     "evidence": "kosacce-clean S6 (and kosacce-tracked), token ocr-170-49a7570f60 (classic text '170') on chain-horizontal-655-c1788826e4. In C0 it is two CHAIN_CORRECTED segments, 555.5-628.5 (174) and 628.5-675.5 (110). In C1 both become READ 370 with derivation INK_FIRST, on 73 px and 47 px (2.11x and 3.27x TRUE_SCALE). The duplicate is the same in C1N1. G2b passes because each statement equals the ink. c1.spec has no one-ink-one-statement case. The scorer silently takes the first id (score_labels.py:122-123, stm.sort by id) and counts it as correctPrintedBound.",
+     "id": "B-05",
+     "negativeTest": "test_B05_one_ink_stated_on_two_segments_is_counted, test_B05_gate_fails_on_a_new_multi_asserted_token",
+     "refutedVotes": 0,
+     "reproducedVotes": 2,
+     "reproduction": "python3 -I /tmp/claude-0/review-b/dup.py \u2192 C1 {'tokensWith>1AssertedREAD': 2} (kosacce-clean, kosacce-tracked: READ 370 on 73.0 and 47.0 px); C0 has 0.",
+     "skepticSeverity": [
+      "P1",
+      "P2"
+     ],
+     "title": "C1 states one ink as two READ printed dimensions on two different spans; no spec or gate catches it"
+    },
+    {
+     "claimedSeverity": "P1",
+     "disposition": "DISCLOSED (P2 after verification)",
+     "dispositionDetail": "Report \u00a7F per-sheet note: C1 gains concentrate on S6/S1, whose rows regress (kosacce +11.18 % via statements, glogownikach registration +77.65 %).",
+     "evidence": "C1 PRIMARY gains by sheet: S6 10 (6 measurably wrong-span plus the duplicated 370), S1 6 (3 wrong-span, 2 of them X anchors), S4 5, S3 4, S7 3, S2 2, S8 1. House level (house-semantic-delta/C1-house-score.json vs baseline): kosacce-clean, whose model frame is S6 (frame-asset-rzut-f530d6ebf2-668d857ed9), goes PASS -> ALGORITHMIC_FAIL, footprint 162.28 -> 182.85 m2 (+11.18 %) at an unchanged scale (2.40625 -> 2.4062). The wrong-span statements on S6 are not anchors, so the effect enters through statements (layout ladder), not the registration. glogownikach goes COMPLETED -> FAILED with the S1 registration +77.65 %. safety-gates/C1-gates.json records kosacce-clean only as 'VERDICT_OR_OUTCOME'. The causal link from S6 wrong-span statements to the footprint change is co-location and is not yet verified on the layout trace.",
+     "id": "B-06",
+     "negativeTest": null,
+     "refutedVotes": 0,
+     "reproducedVotes": 2,
+     "reproduction": "python3 -I /tmp/claude-0/review-b/an1.py (gains by sheet); python3 -I /tmp/claude-0/review-b/spans2.py (wrong-span list); then compare kosacce-clean in baseline/C0-house-score.json and house-semantic-delta/C1-house-score.json (vsBaseline.modelSemantic.footprintM2, scale, verdict).",
+     "skepticSeverity": [
+      "P2",
+      "P2"
+     ],
+     "title": "C1's label gains fall on the very rows whose houses regress, but no artifact connects them"
+    },
+    {
+     "claimedSeverity": "P1",
+     "disposition": "DISCLOSED (P2 after verification)",
+     "dispositionDetail": "Report LABEL_TRUTH: all truth is machine-made (tier A = two cloud-model transcriptions from 005O of the same crop the recogniser reads; tier B = local double read); no human review; C1 value gain described as agreement with a same-crop transcription.",
+     "evidence": "Tier A (PRIOR_TRANSCRIPTION) is two runs of a cloud vision-capable model on the token box +35 % pad, 'the same pixels PP-OCRv6 reads'. research/analyzer-005o/transcription-protocol.md says 'They are not human'. 005O measured 0/507 disagreement between corroborating PP-OCRv6 and this transcription. Tier B R1 is PP-OCRv6 medium, the same family as the deployed recogniser, plus Tesseract. All 31 of C1's PRIMARY gains are tier A. N1 adds 6 tier B. The 005Q-OCR human spot review is NOT_RUN. 005Q-CHAIN preregistration \u00a71 calls tier A '005O double blind transcription' without saying it is model-based. 005O also disclosed control-value bias for exactly the Glogowniki 224 and 280 crops. No truth file or published figure is reachable by a challenger (checked).",
+     "id": "B-07",
+     "negativeTest": null,
+     "refutedVotes": 2,
+     "reproducedVotes": 2,
+     "reproduction": "Read research/analyzer-005o/transcription-protocol.md lines 5-30 and research/analyzer-005q-ocr/preregistration.md lines 19-26 and 79-92. Then: python3 -I /tmp/claude-0/review-b/an1.py \u2192 'C1 gained 31 ... by tier Counter({PRIOR_TRANSCRIPTION: 31})'.",
+     "skepticSeverity": [
+      "P2",
+      "P2"
+     ],
+     "title": "Truth is entirely machine-made, and the tier that holds all of C1's gains transcribes the same crop the ensemble reads, so the value-level gain is close to circular"
+    },
+    {
+     "claimedSeverity": "P1",
+     "disposition": "FIXED",
+     "dispositionDetail": "score_labels.py counts a label on a labelled segment without evidence as an explicit abstention; C2 60 and C4 61 explicit abstentions (17/18 of them replace a C0 statement, 15 of those were CHAIN_CORRECTED).",
+     "evidence": "score_labels.py:132 looks only in metrics['unresolved'] for entries whose ocrTokenIds overlap the label. C2 records its abstentions as chain segments with labelled: true and no evidence (C2.patch extract.ts hunk). soundAbstention = 0 in every variant. All 17 PRIMARY MAIN labels that lose their statement under C2 (18 under C4) sit on a labelled-unresolved segment, and 15 of those statements were C0 scale-dependent (CHAIN_CORRECTED). Instead they appear as READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT 25 -> 39 and binding:NOT_BOUND 54 -> 71.",
+     "id": "B-08",
+     "negativeTest": "test_B08_a_labelled_unresolved_segment_is_an_abstention",
+     "refutedVotes": 0,
+     "reproducedVotes": 2,
+     "reproduction": "python3 -I /tmp/claude-0/review-b/abst.py \u2192 C2 {'lostStatement': 17, 'onLabelledUnresolvedSegment': 17, 'C0wasAsserted': 2, 'C0wasCorrect': 1}.",
+     "skepticSeverity": [
+      "P1",
+      "P1"
+     ],
+     "title": "The preregistered 'sound abstention' measure never fires, so C2's explicit abstentions are scored as losses"
+    }
+   ],
+   "lens": "B",
+   "p2": [
+    {
+     "disposition": "In the report, call these 'orientation unwitnessed (page vote)', not 'scale-dependent', and give the 32 C3-only flags their own count.",
+     "evidence": "metric-solution.ts:851-856: the UNDECIDED fallback is the orientation of legacy.tokensPerChain, which comes from assignLabels (chains.ts:573-574, geometric) under page vote KEPT, or else a tokenMerit comparison. No scale is involved. C3.patch rewrites chainOrientation.dependsOnScale to include this case. In provenance.json, C3's READ+dependsOnScale goes 26 -> 58, and score_labels then labels such statements SCALE_DEPENDENT_VALUE. The preregistration discloses the choice ('flagged dependsOnScale (no witness)'), and Addendum A's G2a\u2032 explicitly includes the page vote.",
+     "id": "B-09",
+     "title": "C3 sets dependsOnScale on UNDECIDED vertical chains whose way up came from the page vote, not from a scale"
+    },
+    {
+     "disposition": "Record the unmutated c1.spec and c2.spec exits next to each mutation result, and record M1, M2, M4 and M8 outcomes before G7 is claimed.",
+     "evidence": "/home/user/work005q-chain/mut/results.json has M3, M5, M6 and M7. There is no M1, M2, M4 or M8, although commit 63bf8ac says M8 was killed. A spec config exists in dev/C2/.spec (dev/C2 is byte-identical to v-C2), but no unmutated exit status is recorded. A hand trace of c2.spec shows the kill is genuine: at centred 0.3 every geometricSpanC2 case passes; at 1.0 the case 'label at 95 on [0,100,200]' returns {0,1} instead of {0,2}, the case 'at 70 on [0,60,140,200]' returns {1,2}, and 'at 5 on [0,100]' returns {0,1} instead of null.",
+     "id": "B-10",
+     "title": "The M6 kill has no recorded positive control, and results.json lists only M3, M5, M6 and M7"
+    },
+    {
+     "disposition": "Add a note in the report that every set label denotes development rows (or rename BLIND_9 to BLIND_9_REVEALED) so the labels cannot be quoted as fresh.",
+     "evidence": "No committed prose calls blind 9-12 'fresh blind'. preregistration.md:10-12 and the cases.json _comment say they are development. But cases.json, case-inventory/case-inventory.json and every *-house-score.json carry set 'BLIND_9' (no _REVEALED suffix, unlike 10-12) and 'FRESH_005K' for 14 rows.",
+     "id": "B-11",
+     "title": "Inherited set labels BLIND_9 and FRESH_005K still appear in committed artifacts"
+    },
+    {
+     "disposition": "Rename it to scaleDependentValueEqualsTruth, or compare with readerValues.",
+     "evidence": "score_labels.py:120: (not asserted) and str(int(round(e['value']))) == i['value'], where i['value'] is the truth label value, not the ensemble or ink reading. causal-map.md:142 reads it as '12 of them equal the ink by accident'.",
+     "id": "B-12",
+     "title": "scaleDependentValueEqualsInk compares with the truth value, not the ink"
+    }
+   ],
+   "summary": "The headline holds: no challenger is adoption-eligible and NONE is the right recommendation. But the label-level and truth-sheet measures that support it are weaker than the artifacts suggest.\n\nTwo P0s:\n- **B-01.** G2c's truth-sheet check reads mppX only and needs TRUE_SCALE. It misses N1's S4 Y scale at +4.96 % (confidence 0.66), resting on a single CHAIN_CORRECTED 55/20.5 px anchor. It also misses C1 and C1N1 S3 anisotropy of 13.8 % at confidence 0.727. N1's 'no false-confident scale' is therefore wrong.\n- **B-02.** correctPrintedBound and spuriousCertainty treat unverified bindings (91 of 110 labels) as correct. 12 of C1's 35 measurable 'correct printed+bound' labels sit on spans 6-110 % off TRUE_SCALE, so C1's 41 and 'spurious certainty 4 -> 4' misstate the wrong-span promotion the headline itself names.\n\nP1s:\n- **B-03.** The only two binding:WRONG labels are the two questionable truths, and the 'without those 2' view is missing. S7 212 is right on its span (1.000x), so the truth is wrong there.\n- **B-04.** C4's S1 false scale comes from C2's geometric span: 190 moves from 71 px (correct) to 45.5 px.\n- **B-05.** C1 states one kosacce ink as two READ 370 statements on two spans.\n- **B-06.** C1's label gains sit on exactly the rows that regress (kosacce PASS -> FAIL +11 % at unchanged scale; glogownikach COMPLETED -> FAILED), and no artifact links them.\n- **B-07.** All truth is machine-made. All 31 C1 gains are tier A, a model transcription of the same crop the ensemble reads, so the value gain is close to circular.\n- **B-08.** The sound-abstention measure never fires, so C2's 17 explicit abstentions count as losses.\n\nP2s cover C3's dependsOnScale naming (B-09), missing mutation records and positive controls (B-10), inherited BLIND_9 / FRESH_005K set labels (B-11), and a misnamed counter (B-12).\n\nVerified as fine: the scorer reproduces the committed files exactly, an independent recount of three sheets agrees, label counts match the preregistration, truth is isolated from challengers, production is untouched, C2's parameters are principled, and the M6 kill is genuine by hand trace. Scratch scripts are in /tmp/claude-0/review-b/.",
+   "title": "label-to-line, rotation, correlation, truth quality",
+   "verifiedOk": [
+    "score_labels.py re-run read-only into /tmp/claude-0/review-b reproduces the committed paired-matrix/label-score-primary.json exactly for all 7 variants (C0, C1, C2, C3, N1, C4, C1N1).",
+    "Independent recount of truth-label matching on S1, S4 and S6 for C0, C1 and C4 (own centre-in-box matching, own lattice corroboration, own statement and anchor lookup from the raw metric-evidence.json.gz): 0 mismatches against the scorer's records.",
+    "PRIMARY = 110 MAIN labels (59 tier A + 51 tier B) plus 17 smoke on S5, and SENSITIVITY = 152 MAIN plus 20 smoke, as preregistered; binding truth exists for 19 MAIN labels with 2 more than 3 % off TRUE_SCALE, as stated.",
+    "Truth and published figures are not reachable by any challenger: no added patch line names truth, work005, a row, a family or a published figure, and the 005Q-CHAIN isolation describe block (tests/architecture/research-isolation.test.ts:678-740) enforces this. git diff cd0c513..HEAD touches only research/analyzer-005q-chain, stage-reports/artifacts/analyzer-005q-chain and the isolation test, so production is unchanged.",
+    "Patch and spec sha256 values match preregistration \u00a79.",
+    "The attribution of C1's S1 false-confident scale is correct: the only X anchors are READ 224 on 47 px (1.812x) and READ 280 on 60.5 px (1.761x), giving X +77.65 % at confidence 0.83. Under C1N1 the N1 re-read moves 224 onto 85.5 px (0.997), and S1 is no longer false-confident.",
+    "C3's UNDECIDED handling matches the code path (metric-solution.ts:851-856, chainOrientation at :1473), and Addendum A's G2a\u2032 set {OTHER_AXIS_SCALE, AXIS_SELF_CONSISTENCY via joinedCm, UNDECIDED} for Y matches the decideVertical routes.",
+    "C2's parameters (centring 0.3, at most 2 marks) are production's existing centredOn values (axis-topology.ts:202-213) and spansFor's 0.3 (chains.ts:320), not tuned to the benchmark. A hand trace shows c2.spec kills M6.",
+    "No rotated-label bias in the scorer: matching is axis-specific, leading-zero twins are excluded consistently with causal-map \u00a76.4, the only rotational twins are S3 298/867 and S6 269/697, and C1's gains split 26 horizontal / 15 vertical against a label mix of 62 / 48.",
+    "Committed prose never calls blind rounds 9-12 'fresh blind'; the preregistration and the cases.json comment say development."
+   ]
+  },
+  {
+   "findings": [
+    {
+     "claimedSeverity": "P1",
+     "disposition": "FIXED",
+     "dispositionDetail": "Docstrings and report corrected: the production solver receives the published footprint in every variant (layout gate > 20 % BLOCKING; plan resolution footprint buckets). score_houses.py records publishedFigure and gateBlocking; explain_g5.py names PUBLISHED_AREA_REFUSAL (C1 dabecjach; C1N1 dabecjach, D00; C3 and C4 azaliach, dabecjach; N1 D00). G2c is stated as counting false-confident scales that pass this production check.",
+     "evidence": "research/analyzer-005q/solve.ts:66 passes `publishedAreas: pkg.publishedFacts, publishedRooms: pkg.publishedRooms` into reconstructV2. replay.mjs runs that solve step for every variant. packages/reconstruction/src/layout-gate.ts:149-151 turns the published value into FOOTPRINT_AREA_AGREES/NEAR/WRONG, and WRONG (more than 20 %) is BLOCKING. plan-resolution.ts:392-396 and :497-515 rank readings by footprint bucket, AGREES first; :569-570 marks the figure SCORED/SPENT/VERIFIED. This contradicts preregistration.md:83 ('the only place a published figure meets a variant') and the score_houses.py docstring. Effect on variants, from runs/<V>/<case>/solve/analysis-trace.json `publishedFigure` and failure.json diagnostics: N1 and C1N1 D00 go from SCORED to SPENT. N1 D00 failure.json has gateBlocking=FOOTPRINT_AREA_WRONG: the first reading is refused by the published area, where C0 completed at -18.71 %. C2 and C4 marcowki and dom-w-tymianku, and C4 rarytasy-g2e and dom-w-glogownikach, also go to SPENT. C1N1 dom-pod-jarzabem moves from NEAR to AGREES and becomes a PASS. G5-explanations.json labels N1 D00 'STATEMENTS_ONLY' without naming the published-area refusal. No challenger patch reads the figure (grep is clean) and the path is the same in every variant, so this is not a truth leak into a challenger, hence P1 not P0. But a variant's scale errors over 20 % become refusals, and readings within 6 % are preferred, before G2c looks. The report's '0 new false-confident scales' for N1 and C3 is therefore conditional on this check.",
+     "id": "C-1",
+     "negativeTest": "test_C1_a_published_area_refusal_is_named",
+     "refutedVotes": 0,
+     "reproducedVotes": 2,
+     "reproduction": "grep -n 'publishedAreas\\|publishedRooms' /home/user/BuildApp/research/analyzer-005q/solve.ts; sed -n 145,152p /home/user/BuildApp/packages/reconstruction/src/layout-gate.ts; python3 -I -c \"import json;f=json.load(open('/home/user/work005q-chain/runs/N1/D00/solve/failure.json'));print(f['reasonCode'],f['diagnostics']['gateBlocking'])\"; grep -o '\"publishedFigure\": *\"[A-Z]*\"' /home/user/work005q-chain/runs/{C0,N1}/D00/solve/analysis-trace.json",
+     "skepticSeverity": [
+      "P1",
+      "P1"
+     ],
+     "title": "The published footprint is inside the solve path of every variant, so the claim that the verdict is the only place a published figure meets a variant is false and G2c is measured after an in-solver area check"
+    }
+   ],
+   "lens": "C",
+   "p2": [
+    {
+     "disposition": "In \u00a7G say this PASS is away from correct for the open-porch control: open sides are closed and the plan reading that agrees with the published area is chosen (see C-1). Do not count it as an improvement anywhere.",
+     "evidence": "Report \u00a7G lists 'C1N1 \u2014 jak C1 plus dom-pod-jarzabem ALGORITHMIC_FAIL \u2192 PASS' with no direction. house-semantic-delta/C1N1-house-score.json row dom-pod-jarzabem, semantics.wideOpenings: C0 [OPENING_IN_WALL 3.84, 6.22; OPEN_SIDE 4.04, 4.4, 4.68] \u2192 C1N1 [OPENING_IN_WALL 3.89, 4.01, 6.22, 6.22; OPEN_SIDE 5.99]. So two open sides of the open-porch fixture (preregistration \u00a76 G1 'dom-pod-jarzabem open porch'; G3 negative fixture) become walls with openings. The front-recess terraces disappear, footprintM2 goes 191.0 \u2192 205.18 (residual -11.88 \u2192 -5.34) and walls go EXTERIOR 10\u21926. decisionPath changes copy (area_table 4813950087 \u2192 dimensioned 397808a266) and moves from NEAR to AGREES with the published 216.76 m\u00b2. G5 classes it as REGISTRATION_LOST.",
+     "id": "C-2",
+     "title": "The C1N1 dom-pod-jarzabem FAIL\u2192PASS comes from closing the named open-porch control, not from a repair"
+    },
+    {
+     "disposition": "Add balconies, railings and boundary bodies (porch class) to the \u00a7G safety sentence, with the N1 marcowki and C1/N1 jarzabem rows.",
+     "evidence": "Report \u00a7G 'Bezpiecze\u0144stwo taras\u00f3w, okien, drzwi i kondygnacji' names openings, walls, rooms, terraces and footprint only. N1 marcowki: model balconies 2\u21921 (balcony-front-1 removed), railings 2\u21921, rooms 12\u219211 (main-room-0-5 gone), walls EXTERIOR 20\u219218, openings 21\u219219; the verdict stays PASS, residual -0.29 \u2192 -0.38. dom-pod-jarzabem under C1 and N1: the COVERED_TERRACE:12.6 body (the porch) disappears. Under C1 terrace area also grows from 65.6 to 101.6 m\u00b2 (rear 47.75 \u2192 77.68, front 17.09), and the residual goes -11.88 \u2192 -16.14. N1-gates.json G1 failures already contain the balconies diff, but the report text does not.",
+     "id": "C-3",
+     "title": "The \u00a7G safety paragraph leaves out the loss of a balcony on marcowki and of the porch body on jarzabem"
+    },
+    {
+     "disposition": "Rename byteOnlyModelChanges to 'changes below summary resolution' and give the largest displacement per row, as preregistration \u00a76 requires. State in the report that G1 does not see room or wall geometry below its summary. No verdict changes.",
+     "evidence": "semantic() in gates.py:20-24 compares counts and kinds only. It does not compare room polygons or areas, wall endpoints, opening offset/sill/height, stairs, chimneys, or terrace edge/hostWallIds. Bodies and wideOpenings are compared only in G3. Rows that safety-gates/*-gates.json reports as byte-only are not trace/provenance-only, as preregistration \u00a76 says they should be explained. C1, C3 and C1N1 on A06: main-room-0-3 polygon goes from 36 to 42 vertices, with 5 cm boundary moves (z 3.572\u21923.622, 4.172\u21924.222, 3.872\u21923.922) and a new 5 cm jog. Nine interior walls move up to 6 mm and stairs minZ moves by 5 mm. C2 and C4 on tunbergiach: opening offsets move by 2 cm (3.70\u21923.68, 1.86\u21921.84) and walls by 1-2 cm. I checked every known-good row that passes G1 in every variant: no categorical field (kinds, door/window, terrace edge, hostWallIds, levels, heights) changed, so no door/window, open-side, terrace-side or storey change is hidden.",
+     "id": "C-4",
+     "title": "The G1 summary cannot see room outlines, wall endpoints and opening offsets, and the 'byteOnlyModelChanges' are geometry changes that are not explained"
+    },
+    {
+     "disposition": "In \u00a7G split each G1 count into material changes and changes of 1 cm / 0.1 m\u00b2 or less. The gate definition stays as preregistered.",
+     "evidence": "My recomputation from house-semantic-delta/*-house-score.json against baseline/C0-house-score.json matches the gates exactly (C1 14, C2 14, C3 3, N1 9, C4 17, C1N1 15). Several entries are only 1 cm width or 0.01-0.08 m\u00b2 changes: N1 dom-w-arkadiach (four widths +1 cm), dom-miniaturka (-1 cm, 108.34\u2192108.33), A03 (2.01\u21922.00, 109.35\u2192109.27), dom-w-zurawkach (100.88\u2192100.85 only); C3 dom-miniaturka. Every variant still has at least one material change, so no verdict changes. C3 dom-w-modrzykach: footprint 185.68\u2192181.79, and on ring-main-0-w1 [DOOR 1.98, WINDOW 1.46] becomes [DOOR 1.46, WINDOW 5.91]. C3 dom-w-tymianku: WINDOW 1.66\u21921.55. N1: marcowki, jarzabem, kosacce, rarytasy-g2e.",
+     "id": "C-5",
+     "title": "G1 at 2 dp counts rounding-level jitter the same as material changes"
+    },
+    {
+     "disposition": "List performance.json counters as an expected ACCEL difference. Describe C0dup as partly warm, sharing its memo with C1. Note that the challengers ran before S1/S2 were confirmed. Record S2 when C0warm finishes.",
+     "evidence": "determinism/S1-C0-vs-C0dup.json does not mention extract/performance.json. That file differs between C0 and C0dup in non-time fields: the ring-callout counters `phases[].counters.readings/rings/ringsTotal` are missing in C0dup on 25 of 45 EXTRACT rows. Those are memo hits. C0dup was not cold: queue.out shows C1 started at 16:10Z on the shared accel-memo while C0dup ran until 17:56Z (C0dup.done). Report \u00a7D says 'pami\u0119\u0107 zimna'. Challengers also started before S1 was established, and S2 (C0warm) runs only after all challengers. Every evidence-bearing file is identical, so S1 holds. C0warm so far: 34 rows finished, 196 files compared, all identical to C0.",
+     "id": "C-6",
+     "title": "The S1 artifact says only wall-clock fields differ and that C0dup's memo was cold; neither is accurate, though S1 still holds"
+    }
+   ],
+   "summary": "Review C (full-solver semantic regressions). The headline holds: no variant is adoption-eligible. My independent G1 recomputation gives C1 14, C2 14, C3 3, N1 9, C4 17, C1N1 15, which matches the gate files. No variant changes storeys or level heights on any row. Reconstruction code is byte-identical in every variant copy, and production is unchanged from the base. The C0 baseline is supported: 21 PASS, 45/45 extractions byte-equal to the sealed evidence, and the solver equal to PROD3 on the rows checked.\n\nMain issue (C-1, P1): the production solver receives the published footprint and room list in every variant (solve.ts \u2192 layout-gate FOOTPRINT_AREA_* / plan-resolution bucket ranking). The 'only place a published figure meets a variant' claim is therefore false, and G2c is measured after an in-solver area check. Examples: N1 D00 is refused by FOOTPRINT_AREA_WRONG, and C1N1 jarzabem moves from NEAR to AGREES and becomes a PASS. This is not a challenger leak and it can only hide damage, so NONE stands.\n\nTerraces, windows, doors and storeys, judged against the offline verdict, which only checks storeys, upper rooms, footprint and built openings. Opening and terrace direction is otherwise undetermined.\n- C1 away: kosacce \u00d72 (openings 20\u219222, +11.18 %, PASS\u2192FAIL), tymianku (openings 36\u219226, -7.76 %, FAIL), daliach (openings 17\u219214, upper rooms fail).\n- C1 jarzabem away: porch body lost, terraces +36 m\u00b2, -11.88 \u2192 -16.14 %.\n- C1 cyklamenach: a refused row now completes at -0.2 % with Y registration +70 %, and still fails storeys; a false-confident completion.\n- C1 glogownikach: a wrong model (-8 %) is replaced by an emission failure; safer, but not a principled refusal.\n- C1 morelach, modrzykach, tunbergiach and A03 open/close openings with small residual changes or none: undetermined. marcowki, rarytasy-g2e/-eoze, jablonkach, cieszyniankach and helikoniach change by about 1 cm: neutral. willa-miranda (not known-good) turns a 4.99 m door into a 4.14 m window on the attached body: undetermined by the verdict, though it looks like a lost garage door.\n- N1: marcowki loses the front balcony, a railing and a room (verdict still PASS, -0.29 \u2192 -0.38): away. jarzabem loses the porch body and its front terrace grows to 18.96 m\u00b2, while the footprint moves slightly closer (-11.52 %): mixed. D00 becomes a refusal through the published-area gate: toward safety. kosacce openings 20\u219222 at -1.29 %: undetermined. The rest are about 1 cm.\n- C1N1 jarzabem: the PASS comes from closing the open-porch control (C-2).\n\nP2 items: the safety text omits balconies and bodies (C-3). Geometry changes below G1's resolution are labelled byte-only (C-4); there are no hidden kind, terrace-side or height changes. G1 counts mix 1 cm jitter with material changes (C-5). The S1 wording on wall-clock fields and the cold memo is inaccurate, but S1 holds and S2 holds so far on 34 rows (C-6).\n\nScratch scripts are in /tmp/claude-0/review-c/ (g1.py, tos.py, vc.py, rich.py, cat.py, det.py).",
+   "title": "full-solver semantic regressions, open sides, storeys, area-oracle leakage",
+   "verifiedOk": [
+    "Known-good set: gates.py CONTROLS equals the preregistration \u00a76 list. Known-good = 21 C0 PASS \u222a controls = 23 rows.",
+    "G1 recomputed independently from house-semantic-delta/*-house-score.json against baseline/C0-house-score.json. C3 = 3 (dom-miniaturka, dom-w-modrzykach, dom-w-tymianku), N1 = 9 (A03, miniaturka, jarzabem, arkadiach, zurawkach, kosacce-clean/-tracked, marcowki, rarytasy-g2e). C1 14, C2 14, C4 17 and C1N1 15 also match the gate files.",
+    "In every variant, no row with a model changes storey count or level heights.",
+    "PASS/completed counts (C0 21/26, C1 17/26, C2 18/24, C3 21/26, N1 21/25, C4 16/22, C1N1 18/26) and the verdict-change lists in report \u00a7G match the artifacts. C3 and N1 change no verdict.",
+    "G3 counts (36/63/11/26/69/43) and G5 counts (13/14/4/6/19/11) match. Every G5 changed case has an entry in G5-explanations.json.",
+    "Verdicts recomputed read-only with holdout/verdict.mjs: kosacce-clean C0 PASS (-1.33) and C1 FAIL (footprint +11.18); dom-w-daliach C0 PASS and C1 FAIL (upperStoreysHoldTheirRooms).",
+    "No challenger patch, ACCEL.patch, replay.mjs or variant.mjs reads or names publishedFacts/publishedAreas/footprint/verdict/truth. All patch targets are packages/source-metrics/src. Patch sha256 values equal preregistration \u00a79 and each v-*/variant.json.",
+    "G5 by construction holds: packages/reconstruction/src in every /home/user/work005q-chain/v-* copy is identical to the worktree, and `git diff cd0c513 HEAD -- packages/ apps/ holdout/` is empty. The only deep import of source-metrics is apps/local-analyzer self-test (`@buildapp/source-metrics/recogniser`), which is not on the replay path.",
+    "S1 checked on marcowki and dom-w-glogownikach: metric-evidence, extract model, solve model/program/unresolved/provenance/analysis-trace/result-summary and the digests are byte-identical. extract analysis-trace and result-summary differ only in duration, startedAt and timings (performance.json: see C-6).",
+    "C0 extraction: all 45 EXTRACT rows' metric-evidence.json.gz decompress byte-identical to the sealed cases.json metrics.",
+    "C0 solve equals 005Q PROD3 (model/program/unresolved/provenance) on marcowki, dom-w-glogownikach, kosacce-clean and A06.",
+    "In the rows checked (C0, C1, N1, C3), the extract-step model sha equals the solve-step model sha on every EXTRACT row.",
+    "C0warm interim (S2): 34 finished rows are byte-identical to C0 on evidence, model, program, failure, unresolved, provenance, trace and digest."
+   ]
+  }
+ ],
+ "schema": "buildapp.005q-chain.post-review",
+ "verdictImpact": "no finding changes a variant verdict: every variant fails G1 before and after the corrections; ADOPTION_RECOMMENDATION stays NONE",
+ "version": 1
+}

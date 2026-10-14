@@ -6,7 +6,7 @@
 
 Per development row of research/analyzer-005q-chain/cases.json and one replay label (runs/<label>/<case>/{extract,solve}):
   outcome / refusal code / decision path (005O `outcome`), the frozen holdout/verdict.mjs verdict and footprint residual
-  (the ONLY place a published figure meets a variant, offline, after the run), model/program/failure sha256, the 005Q
+  (offline, after the run), model/program/failure sha256, the 005Q
   semantics (wall rings with their evidence status, terraces, wide openings, boundary bodies, unresolved gaps, MASS
   provenance), and the 005Q-CHAIN metric semantics of the run's OWN extracted evidence: per plan frame the registration
   (scale, confidence, anchors by origin: READ / READ_DEPENDS_ON_SCALE / CHAIN_CORRECTED / LEVEL...), the metric solution
@@ -14,6 +14,16 @@ Per development row of research/analyzer-005q-chain/cases.json and one replay la
   openings by kind with widths, rooms, terraces, roofs, footprint) for the semantic diff.
 With --baseline, each row says what changed (model bytes, failure, decision path, semantics, metric) and the gates G1-G5
 are evaluated (gates are definitions in preregistration.md §6; this file computes them, it does not choose them).
+
+Addendum C (review C-1, correction): the published footprint is NOT met only offline. The frozen production solver
+receives it in every variant (research/analyzer-005q/solve.ts passes publishedFacts to reconstructV2): the layout gate
+refuses a lowest storey > 20 % off (FOOTPRINT_AREA_WRONG, BLOCKING) and plan resolution ranks readings by footprint
+bucket. No challenger patch reads it (the path is production's, identical in every variant), but a variant's large scale
+damage can surface as a refusal before G2c looks. Each row therefore records `publishedFigure` (SCORED / SPENT /
+VERIFIED / NEAR …, from the solve trace) and `gateBlocking` (from failure.json).
+Addendum C (review A1): `sourceExact` lists every SOURCE_EXACT element (collection:id = interpretation) so G2d compares
+elements, not a per-row count. Addendum C (review B-05): `multiAssertedTokens` counts OCR tokens stated as READ (not
+scale-dependent) by more than one LINEAR_DIMENSION evidence on different segments (one ink, two printed numbers).
 """
 import argparse, gzip, hashlib, json, os, shutil, subprocess, sys, tempfile
 from collections import Counter
@@ -118,7 +128,14 @@ def evidence_gates(m):
                 e = ev.get(eid)
                 if e and e.get('chainId') in scale_oriented and e.get('kind') == 'LINEAR_DIMENSION':
                     scale_oriented_anchors += 1
-    return {'scaleDependentAnchors': scale_dep_anchor, 'scaleOrientedAnchors': scale_oriented_anchors, 'inkFirstStatements': ink_first, 'inkFirstMismatch': ink_mismatch, 'orientationDecidedBy': {str(k): v for k, v in orient.items()},
+    # addendum C (B-05): one ink asserted as a printed READ number on more than one segment
+    seg_ids = {g['evidenceId'] for ch in m.get('chains', []) for g in ch['segments'] if g.get('evidenceId')}
+    per_tok = Counter()
+    for e in m['evidence']:
+        if e['id'] in seg_ids and e.get('kind') == 'LINEAR_DIMENSION' and e['origin'] == 'READ' and not (e.get('derivation') or {}).get('dependsOnScale') and len(e.get('ocrTokenIds') or []) == 1:
+            per_tok[e['ocrTokenIds'][0]] += 1
+    multi = sum(1 for n in per_tok.values() if n > 1)
+    return {'multiAssertedTokens': multi, 'scaleDependentAnchors': scale_dep_anchor, 'scaleOrientedAnchors': scale_oriented_anchors, 'inkFirstStatements': ink_first, 'inkFirstMismatch': ink_mismatch, 'orientationDecidedBy': {str(k): v for k, v in orient.items()},
             'chainCorrected': sum(1 for e in m['evidence'] if e['origin'] == 'CHAIN_CORRECTED'), 'read': sum(1 for e in m['evidence'] if e['origin'] == 'READ' and e['kind'] == 'LINEAR_DIMENSION')}
 
 
@@ -130,12 +147,15 @@ def model_summary(solve_dir):
     levels = sorted(m.get('levels', []), key=lambda l: l.get('index', 0))
     low = levels[0]['id'] if levels else None
     exact = Counter()
+    source_exact = {}
     for k, v in m.items():
         if isinstance(v, list):
             for x in v:
                 st = (x.get('evidence') or {}).get('status') if isinstance(x, dict) else None
                 if st:
                     exact[f'{k}:{st}'] += 1
+                if st == 'SOURCE_EXACT':
+                    source_exact[f"{k}:{x.get('id')}"] = (x.get('evidence') or {}).get('interpretation')
     return {
         'storeys': len(levels), 'levelHeights': [round(l.get('height', 0), 2) for l in levels],
         'walls': dict(Counter(w.get('kind') for w in m.get('walls', []))),
@@ -146,6 +166,7 @@ def model_summary(solve_dir):
         'balconies': len(m.get('balconies', [])), 'stairs': len(m.get('stairs', [])),
         'footprintM2': round(sum(Q.ring_area(s['polygon']) for s in m.get('slabs', []) if s.get('levelId') == low), 2),
         'evidenceStatus': dict(exact),
+        'sourceExact': dict(sorted(source_exact.items())),
     }
 
 
@@ -164,7 +185,29 @@ def row(case, base):
     fp = (v.get('conditions') or {}).get('footprint') or {}
     r['footprintResidualPct'] = fp.get('residualPct')
     r['failedConditions'] = sorted(k for k, c in (v.get('conditions') or {}).items() if not c.get('holds'))
+    tr = os.path.join(solve, 'analysis-trace.json')
+    r['publishedFigure'] = sorted(set(_published(json.load(open(tr))))) if os.path.exists(tr) else None
+    fl = os.path.join(solve, 'failure.json')
+    r['gateBlocking'] = ((json.load(open(fl)).get('diagnostics') or {}).get('gateBlocking')) if os.path.exists(fl) else None
     return r
+
+
+def _published(trace):
+    """Every `publishedFigure` value anywhere in the solve trace (addendum C, C-1)."""
+    out = []
+
+    def walk(x):
+        if isinstance(x, dict):
+            for k, v in x.items():
+                if k == 'publishedFigure' and isinstance(v, str):
+                    out.append(v)
+                else:
+                    walk(v)
+        elif isinstance(x, list):
+            for v in x:
+                walk(v)
+    walk(trace)
+    return out
 
 
 def changed(a, b):

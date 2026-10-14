@@ -38,7 +38,8 @@ def main():
     lab = {m: load(f'{W}/lab/label-score-{m}.json') for m in ('primary', 'sensitivity') if os.path.exists(f'{W}/lab/label-score-{m}.json')}
     house = {L: load(f'{W}/score-{L}.json') for L in labels}
     gates = {L: load(f'{W}/gates-{L}.json') for L in labels if os.path.exists(f'{W}/gates-{L}.json')}
-    keys = ['labels', 'correctPrintedBound', 'spuriousCertainty', 'wrongWhenAsserted', 'scaleDependentAnchor', 'scaleDependentValueEqualsInk', 'binding:CORRECT', 'binding:WRONG']
+    keys = ['labels', 'correctPrintedBound', 'correctPrintedBoundVerified', 'correctPrintedBoundUnverified', 'correctPrintedBoundSpanImplausible', 'spuriousCertainty', 'spuriousCertaintyWithSpanAudit',
+            'wrongWhenAsserted', 'scaleDependentAnchor', 'scaleDependentValueEqualsTruth', 'soundAbstention', 'binding:CORRECT', 'binding:WRONG', 'bindingExclQuestionable:CORRECT', 'bindingExclQuestionable:WRONG']
     pm = {'schema': 'buildapp.005q-chain.paired-matrix', 'version': 1, 'variants': {}}
     for L in labels:
         v = {'label': {}, 'house': house[L]['summary'] | {}, 'gates': None}
@@ -56,8 +57,10 @@ def main():
             v['label'][f'{m}:perSheet'] = {s['sheet']: {k: s.get('counts', {}).get(k, 0) for k in ('labels', 'correctPrintedBound', 'spuriousCertainty', 'scaleDependentAnchor')} | {'falseConfidentScale': (s.get('frame') or {}).get('falseConfidentScale'), 'registrationErrVsTrueScale': (s.get('frame') or {}).get('registrationErrVsTrueScale')} for s in var['sheets'] if 'counts' in s}
         if L in gates:
             g = gates[L]
-            v['gates'] = {'G1': g['G1']['pass'], 'G1failures': [f['case'] for f in g['G1']['failures']], 'G2': g['G2']['pass'], 'G2a': g['G2']['a_total'], "G2a'": g['G2']['a2_total'],
-                          'G2b': sum(g['G2']['b_inkFirstMismatch'].values()), 'G2c': g['G2']['c_newFalseConfident'], 'G2d': g['G2']['d_sourceExactIncrease'], 'G3': g['G3']['pass'], 'G3changes': len(g['G3']['changes']),
+            v['gates'] = {'G1': g['G1']['pass'], 'G1failures': [f['case'] for f in g['G1']['failures']], 'G1material': g['G1']['materialFailures'], 'G1minor': g['G1']['minorFailures'],
+                          'G2': g['G2']['pass'], 'G2a': g['G2']['a_total'], "G2a'": g['G2']['a2_total'],
+                          'G2b': sum(g['G2']['b_inkFirstMismatch'].values()), "G2b'": g['G2']['b2_multiAssertedTokens'], 'G2c': g['G2']['c_newFalseConfident'], 'G2cXOnlyFirstScored': g['G2']['c_xOnlyFirstScored'],
+                          'G2d': [x['case'] for x in g['G2']['d_sourceExactChanged']], 'G2dCountFirstScored': g['G2']['d_sourceExactIncrease'], 'G3': g['G3']['pass'], 'G3changes': len(g['G3']['changes']),
                           'G5changed': [c['case'] for c in g['G5']['changedRefusalsOrDecisions']], 'admissible': g['admissible']}
         pm['variants'][L] = v
     os.makedirs(f'{a.out}/paired-matrix', exist_ok=True)

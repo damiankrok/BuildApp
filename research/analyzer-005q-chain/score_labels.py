@@ -21,7 +21,15 @@ Per truth dimension label, from the variant's evidence on the label's frame:
   first-bad   NEVER_PROPOSED / NOT_ON_A_CHAIN / READ_NOT_CORROBORATED / ROTATIONAL_TWIN_AMBIGUOUS / READ_WRONG /
               READ_RIGHT_NOT_BOUND:<UNASSIGNED|AMBIGUOUS|NO_DECISION|BOUND_NO_STATEMENT> / READ_RIGHT_BOUND_WRONG /
               SCALE_DEPENDENT_VALUE (statement not asserted as printed) / PRINTED_VALUE_WRONG / NONE
-and the explicit abstentions a variant records (UnresolvedMetric entries naming the ink's token) as SOUND_ABSTENTION.
+and the explicit abstentions a variant records (UnresolvedMetric entries naming the ink's token, or — addendum C, review
+B-08 — a chain segment the variant marked `labelled` without evidence under the ink) as SOUND_ABSTENTION.
+Addendum C (post-review corrections; the preregistered columns are kept unchanged beside the corrected ones):
+  correctPrintedBound is split into ...Verified (binding truth CORRECT) and ...Unverified (no binding truth) — B-02;
+  spanRatio = stated value / segment px / TRUE_SCALE and spanImplausible (|ratio - 1| > 3 %) are an AUDIT column (truth
+  scale, never a gate input of a challenger); spuriousCertaintyWithSpanAudit adds asserted values on an implausible span;
+  binding counts are also reported without the 2 questionable binding truths (truth segment > 3 % off TRUE_SCALE) — B-03;
+  the frame's false-confident scale is evaluated on BOTH axes, and sheets without TRUE_SCALE get an anisotropy flag
+  (|mppY/mppX - 1| > 3 % at confidence >= 0.5) — B-01.
 Correlation: S2/S3 are one publisher package; S5 is the smoke sheet (reported apart); copies are never pooled as
 independent truth. Output: numbers, values and page boxes only.
 """
@@ -77,6 +85,33 @@ def corroborating_value(lat):
     return None
 
 
+def on_labelled_unresolved(metrics, fid, item):
+    """Addendum C (B-08): the ink sits, along its own axis and within 2.2 label heights of the baseline, on a chain segment
+    the variant marked `labelled` without stating anything (an explicit abstention, C2's labelled-unresolved span)."""
+    b = item['box']
+    cx, cy = (b['x0'] + b['x1']) / 2, (b['y0'] + b['y1']) / 2
+    h = short_side(b)
+    for ch in metrics['chains']:
+        if ch['frameId'] != fid or ch['axis'] != item['axis']:
+            continue
+        along, across = (cx, cy) if ch['axis'] == 'HORIZONTAL' else (cy, cx)
+        if abs(across - ch['baselinePx']) > 2.2 * h:
+            continue
+        if any(g.get('labelled') and not g.get('evidenceId') and g['fromPx'] <= along <= g['toPx'] for g in ch['segments']):
+            return True
+    return False
+
+
+def truth_segment_questionable(i, ts):
+    """Preregistration §1: a binding truth whose segment is > 3 % from TRUE_SCALE is questionable."""
+    bt = i['bindingTruth']
+    if bt['status'] != 'TRUTH' or not ts:
+        return False
+    sg = bt['segment']
+    px = abs(sg['toPx'] - sg['fromPx'])
+    return px > 0 and abs(int(i['value']) / px / ts - 1) > 0.03
+
+
 def score_sheet(sheet, metrics, dims, ts):
     fid = sheet['frameId']
     toks = {t['id']: t for t in metrics['ocrTokens'] if t['frameId'] == fid}
@@ -125,13 +160,18 @@ def score_sheet(sheet, metrics, dims, ts):
             asserted = e['origin'] == 'READ' and not dep
             r['printed'] = None if not asserted else str(int(round(e['value'])))
             r['scaleDependent'] = not asserted
-            r['scaleDependentValueEqualsInk'] = (not asserted) and str(int(round(e['value']))) == i['value']
+            r['scaleDependentValueEqualsTruth'] = (not asserted) and str(int(round(e['value']))) == i['value']
+            px = abs(seg['toPx'] - seg['fromPx'])
+            r['spanPx'] = px
+            r['spanRatio'] = round(e['value'] / px / ts, 4) if ts and px > 0 else None
         else:
             r['statement'] = None
             r['binding'] = 'NOT_BOUND'
             r['printed'] = None
             r['scaleDependent'] = False
-        r['abstention'] = any(set(u.get('ocrTokenIds', [])) & tok_ids for u in unresolved if 'unattached' not in u['id'])
+        r['abstention'] = any(set(u.get('ocrTokenIds', [])) & tok_ids for u in unresolved if 'unattached' not in u['id']) or (
+            r['statement'] is None and on_labelled_unresolved(metrics, fid, i))
+        r['bindingTruthQuestionable'] = truth_segment_questionable(i, ts)
         # first bad decision on the path ink -> statement
         if not mt and not ml:
             fb = 'NEVER_PROPOSED'
@@ -156,6 +196,10 @@ def score_sheet(sheet, metrics, dims, ts):
         r['firstBad'] = fb
         r['spuriousCertainty'] = r['printed'] is not None and (r['printed'] != i['value'] or r['binding'] == 'WRONG')
         r['correctPrintedBound'] = r['printed'] == i['value'] and r['binding'] in ('CORRECT', 'NO_TRUTH')
+        r['correctPrintedBoundVerified'] = r['printed'] == i['value'] and r['binding'] == 'CORRECT'
+        r['correctPrintedBoundUnverified'] = r['printed'] == i['value'] and r['binding'] == 'NO_TRUTH'
+        r['spanImplausible'] = r.get('spanRatio') is not None and abs(r['spanRatio'] - 1) > 0.03
+        r['spuriousCertaintyWithSpanAudit'] = r['spuriousCertainty'] or (r['printed'] is not None and r['spanImplausible'])
         r['scaleDependentAnchor'] = bool(r['statement'] and r['scaleDependent'] and r['statement']['anchor'])
         rows.append(r)
     # frame level
@@ -174,8 +218,18 @@ def score_sheet(sheet, metrics, dims, ts):
              'solution': {'relation': sol['relation'], 'confidence': sol['confidence'], 'cmPerPixelX': sol['cmPerPixelX'], 'independentWitnesses': sol.get('independentWitnesses')} if sol else None,
              'trueScale005O': ts}
     if reg and ts:
-        frame['registrationErrVsTrueScale'] = round(reg[0]['metresPerPixelX'] * 100 / ts - 1, 4)
-        frame['falseConfidentScale'] = abs(reg[0]['metresPerPixelX'] * 100 / ts - 1) > 0.03 and (reg[0]['confidence'] or 0) >= 0.5
+        # preregistered implementation (X only) kept as falseConfidentScaleXOnly; addendum C (B-01): both axes
+        ex = reg[0]['metresPerPixelX'] * 100 / ts - 1
+        ey = (reg[0]['metresPerPixelY'] * 100 / ts - 1) if reg[0].get('metresPerPixelY') else 0.0
+        conf = (reg[0]['confidence'] or 0) >= 0.5
+        frame['registrationErrVsTrueScale'] = round(ex, 4)
+        frame['registrationErrVsTrueScaleY'] = round(ey, 4)
+        frame['falseConfidentScaleXOnly'] = abs(ex) > 0.03 and conf
+        frame['falseConfidentScale'] = max(abs(ex), abs(ey)) > 0.03 and conf
+    if reg and reg[0].get('metresPerPixelY'):
+        an = reg[0]['metresPerPixelY'] / reg[0]['metresPerPixelX'] - 1
+        frame['anisotropy'] = round(an, 4)
+        frame['anisotropicConfidentScale'] = abs(an) > 0.03 and (reg[0]['confidence'] or 0) >= 0.5
     return rows, frame
 
 
@@ -209,9 +263,15 @@ def main():
                 c['decision:' + r['decision']] += 1
                 c['binding:' + r['binding']] += 1
                 c['correctPrintedBound'] += r['correctPrintedBound']
+                c['correctPrintedBoundVerified'] += r['correctPrintedBoundVerified']
+                c['correctPrintedBoundUnverified'] += r['correctPrintedBoundUnverified']
+                c['correctPrintedBoundSpanImplausible'] += r['correctPrintedBound'] and r['spanImplausible']
+                c['spuriousCertaintyWithSpanAudit'] += r['spuriousCertaintyWithSpanAudit']
+                if not r['bindingTruthQuestionable']:
+                    c['bindingExclQuestionable:' + r['binding']] += 1
                 c['spuriousCertainty'] += r['spuriousCertainty']
                 c['scaleDependentAnchor'] += r['scaleDependentAnchor']
-                c['scaleDependentValueEqualsInk'] += bool(r.get('scaleDependentValueEqualsInk'))
+                c['scaleDependentValueEqualsTruth'] += bool(r.get('scaleDependentValueEqualsTruth'))
                 c['soundAbstention'] += r['abstention']
                 if r['statement'] and r['statement']['origin'] == 'READ' and not r['statement']['dependsOnScale'] and r['printed'] != r['value']:
                     c['wrongWhenAsserted'] += 1
