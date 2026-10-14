@@ -1,23 +1,252 @@
 {
- "schema": "buildapp.005q-chain.recommendation",
- "version": 1,
  "adoptionRecommendation": "NONE",
- "rule": "preregistration.md §6-§7: a challenger failing any of G1-G5 is NOT_ADOPTION_ELIGIBLE; among eligible ones choose fewest spurious certainties / false-confident scales, then most correct printed-and-bound PRIMARY labels, then smallest change; at most one, or NONE",
+ "afterReviews": "numbers after addendum C (post-review scorer/gate corrections); no verdict changed",
  "eligible": [],
+ "nextStepForOwnerDecision": "not tested here: let the ink replace a correction only on a span the label measures geometrically (C2 as a precondition of C1, not beside it), and account for every known-good model change against the drawing rather than a threshold; needs a separately authorised stage",
+ "productionFreeze": "IDENTICAL (freeze/production-freeze-start.json vs production-freeze-end.json: only head differs)",
+ "rule": "preregistration.md \u00a76-\u00a77: a challenger failing any of G1-G5 is NOT_ADOPTION_ELIGIBLE; among eligible ones choose fewest spurious certainties / false-confident scales, then most correct printed-and-bound PRIMARY labels, then smallest change; at most one, or NONE",
+ "schema": "buildapp.005q-chain.recommendation",
  "variants": {
-  "C1":   {"eligible": false, "failed": ["G1 (14 known-good rows)", "G2 (a' 43, c 4: kosacce x2 +11.18 %, tymianku -7.76 %, sheet S1 registration 77.65 % off TRUE_SCALE)", "G3 (36)"], "labelsPrimaryCorrect": 41, "pass": 17},
-  "C2":   {"eligible": false, "failed": ["G1 (14)", "G2 (a 420, a' 91, c 3)", "G3 (63)"], "labelsPrimaryCorrect": 9, "pass": 18},
-  "C3":   {"eligible": false, "failed": ["G1 (3: miniaturka, modrzykach, tymianku)", "G2 (a 448)", "G3 (11)"], "labelsPrimaryCorrect": 10, "pass": 21},
-  "N1":   {"eligible": false, "failed": ["G1 (9)", "G2 (a 468, a' 119)", "G3 (26)"], "labelsPrimaryCorrect": 32, "pass": 21},
-  "C4":   {"eligible": false, "failed": ["G1 (17)", "G2 (c 4 incl. S1 58.86 %)", "G3 (69)"], "labelsPrimaryCorrect": 30, "pass": 16},
-  "C1N1": {"eligible": false, "failed": ["G1 (15)", "G2 (a' 51, c 3)", "G3 (43)"], "labelsPrimaryCorrect": 47, "pass": 18}
+  "C1": {
+   "G1": {
+    "failures": 14,
+    "material": [
+     "A03",
+     "dom-pod-jarzabem",
+     "dom-w-daliach",
+     "dom-w-modrzykach",
+     "dom-w-morelach",
+     "dom-w-tunbergiach",
+     "dom-w-tymianku",
+     "kosacce-clean",
+     "kosacce-tracked",
+     "marcowki",
+     "rarytasy-g2e"
+    ]
+   },
+   "G2": {
+    "a": 0,
+    "a'": 43,
+    "b'": {
+     "kosacce-clean": [
+      0,
+      1
+     ],
+     "kosacce-tracked": [
+      0,
+      1
+     ]
+    },
+    "c": [
+     "kosacce-clean",
+     "kosacce-tracked",
+     "dom-w-tymianku",
+     "S1",
+     "S3"
+    ],
+    "dRows": 10
+   },
+   "G3changes": 36,
+   "eligible": false,
+   "labelsPrimary": {
+    "correctPrintedBound": 41,
+    "correctPrintedBoundSpanImplausible": 12,
+    "correctPrintedBoundVerified": 10,
+    "spuriousCertaintyWithSpanAudit": 16
+   },
+   "pass": 17
+  },
+  "C1N1": {
+   "G1": {
+    "failures": 15,
+    "material": [
+     "A03",
+     "dom-pod-jarzabem",
+     "dom-w-daliach",
+     "dom-w-modrzykach",
+     "dom-w-morelach",
+     "dom-w-tunbergiach",
+     "dom-w-tymianku",
+     "kosacce-clean",
+     "kosacce-tracked",
+     "marcowki",
+     "rarytasy-g2e"
+    ]
+   },
+   "G2": {
+    "a": 0,
+    "a'": 51,
+    "b'": {
+     "kosacce-clean": [
+      0,
+      1
+     ],
+     "kosacce-tracked": [
+      0,
+      1
+     ]
+    },
+    "c": [
+     "kosacce-clean",
+     "kosacce-tracked",
+     "dom-w-tymianku",
+     "S3"
+    ],
+    "dRows": 12
+   },
+   "G3changes": 43,
+   "eligible": false,
+   "labelsPrimary": {
+    "correctPrintedBound": 47,
+    "correctPrintedBoundSpanImplausible": 11,
+    "correctPrintedBoundVerified": 15,
+    "spuriousCertaintyWithSpanAudit": 14
+   },
+   "pass": 18
+  },
+  "C2": {
+   "G1": {
+    "failures": 14,
+    "material": [
+     "A02",
+     "A06",
+     "dom-pod-jarzabem",
+     "dom-w-cieszyniankach",
+     "dom-w-modrzykach",
+     "dom-w-morelach",
+     "dom-w-tymianku",
+     "dom-w-zurawkach",
+     "kosacce-clean",
+     "kosacce-tracked",
+     "marcowki",
+     "rarytasy-g2e"
+    ]
+   },
+   "G2": {
+    "a": 420,
+    "a'": 91,
+    "b'": {},
+    "c": [
+     "dom-w-morelach",
+     "dom-w-cyklamenach",
+     "A04",
+     "S2"
+    ],
+    "dRows": 15
+   },
+   "G3changes": 63,
+   "eligible": false,
+   "labelsPrimary": {
+    "correctPrintedBound": 9,
+    "correctPrintedBoundSpanImplausible": 0,
+    "correctPrintedBoundVerified": 5,
+    "spuriousCertaintyWithSpanAudit": 1
+   },
+   "pass": 18
+  },
+  "C3": {
+   "G1": {
+    "failures": 3,
+    "material": [
+     "dom-w-modrzykach",
+     "dom-w-tymianku"
+    ]
+   },
+   "G2": {
+    "a": 448,
+    "a'": 0,
+    "b'": {},
+    "c": [],
+    "dRows": 2
+   },
+   "G3changes": 11,
+   "eligible": false,
+   "labelsPrimary": {
+    "correctPrintedBound": 10,
+    "correctPrintedBoundSpanImplausible": 0,
+    "correctPrintedBoundVerified": 5,
+    "spuriousCertaintyWithSpanAudit": 4
+   },
+   "pass": 21
+  },
+  "C4": {
+   "G1": {
+    "failures": 17,
+    "material": [
+     "A02",
+     "A03",
+     "A06",
+     "dom-pod-jarzabem",
+     "dom-w-cieszyniankach",
+     "dom-w-daliach",
+     "dom-w-modrzykach",
+     "dom-w-morelach",
+     "dom-w-tymianku",
+     "dom-w-zurawkach",
+     "kosacce-clean",
+     "kosacce-tracked",
+     "marcowki",
+     "rarytasy-g2e"
+    ]
+   },
+   "G2": {
+    "a": 0,
+    "a'": 0,
+    "b'": {},
+    "c": [
+     "dom-w-morelach",
+     "dom-w-cyklamenach",
+     "A04",
+     "S1"
+    ],
+    "dRows": 14
+   },
+   "G3changes": 69,
+   "eligible": false,
+   "labelsPrimary": {
+    "correctPrintedBound": 30,
+    "correctPrintedBoundSpanImplausible": 6,
+    "correctPrintedBoundVerified": 10,
+    "spuriousCertaintyWithSpanAudit": 8
+   },
+   "pass": 16
+  },
+  "N1": {
+   "G1": {
+    "failures": 9,
+    "material": [
+     "dom-pod-jarzabem",
+     "kosacce-clean",
+     "kosacce-tracked",
+     "marcowki",
+     "rarytasy-g2e"
+    ]
+   },
+   "G2": {
+    "a": 468,
+    "a'": 119,
+    "b'": {},
+    "c": [
+     "S4"
+    ],
+    "dRows": 8
+   },
+   "G3changes": 26,
+   "eligible": false,
+   "labelsPrimary": {
+    "correctPrintedBound": 32,
+    "correctPrintedBoundSpanImplausible": 1,
+    "correctPrintedBoundVerified": 15,
+    "spuriousCertaintyWithSpanAudit": 4
+   },
+   "pass": 21
+  }
  },
+ "version": 1,
  "whatWasLearned": [
   "Self-anchoring (CHAIN_CORRECTED values anchoring the scale they were chosen for) is real and widespread (627 anchors at the base) but removing it alone is unsafe: scale-chosen values are consistent with scale-chosen spans; the ink is truer but lands on a span it does not measure (wrong-span promotion).",
   "The order of a future fix must be: span from geometry -> value from ink -> anchor from that value; C4 (C1+C2+C3 side by side) does not implement that order and still fails G1 and has a false-confident scale on S1.",
   "The re-read gate (N1) is a real bottleneck: correct PRIMARY labels 10 -> 32 with no verdict change and no false-confident scale, but it leaves self-anchoring in place (G2a 468) and changes 9 known-good models.",
   "The footprint residual is a weak guard of the scale: registrations moved +45 % to +182 % (rarytasy-g2e, glogownikach, cyklamenach, jarzabem) with the footprint unchanged, because the footprint comes from statements on the grid ladder."
- ],
- "nextStepForOwnerDecision": "not tested here: let the ink replace a correction only on a span the label measures geometrically (C2 as a precondition of C1, not beside it), and account for every known-good model change against the drawing rather than a threshold; needs a separately authorised stage",
- "productionFreeze": "IDENTICAL (see freeze/production-freeze-end.json)"
+ ]
 }
