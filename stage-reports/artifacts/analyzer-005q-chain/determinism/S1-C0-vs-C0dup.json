@@ -1,0 +1,11 @@
+{
+ "schema": "buildapp.005q-chain.determinism",
+ "version": 1,
+ "rule": "S1 (preregistration §2): C0 (production, no alias, given order, 3 workers) and C0dup (zero-challenger variant copy with ACCEL.patch only, reverse order, 1 worker, memo cold then warm) byte-identical on every row",
+ "rows": 48,
+ "filesCompared": 491,
+ "identical": ["metric-evidence.json (45 EXTRACT rows)", "model.json", "program.json", "failure.json", "unresolved.json", "provenance.json", "plan-diagnostics/digest.json", "solve/analysis-trace.json", "solve/result-summary.json"],
+ "differingOnlyInWallClockFields": {"extract/analysis-trace.json": ["entries[].durationMs", "entries[].startedAtMs"], "extract/diagnostics.json": ["trace.entries[].durationMs", "trace.entries[].startedAtMs"], "extract/result-summary.json": ["startedAt", "completedAt", "recogniser.ms", "timings.*Ms"], "logs, replay.json": ["wall time, peak RSS"]},
+ "verdict": "S1 HOLDS",
+ "alsoObserved": {"C0VsSealedEvidence": "45/45 byte-identical", "C0VsPROD3Solver": "byte-identical on the 46 rows 005Q replayed", "blind12": "C0 model = the sealed blind-12 NEW run for dom-w-tymianku and dom-w-daliach"}
+}

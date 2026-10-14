@@ -1,0 +1,546 @@
+{
+ "G1": {
+  "byteOnlyModelChanges": [
+   "A06",
+   "dom-w-jablonkach"
+  ],
+  "failures": [
+   {
+    "case": "dom-miniaturka",
+    "diff": {
+     "footprintM2": [
+      108.34,
+      108.33
+     ],
+     "openings": [
+      [
+       "DOOR:0.79:main-iwall-1-x-0",
+       "DOOR:0.79:main-iwall-1-x-5-b",
+       "DOOR:0.88:main-iwall-0-z-0",
+       "DOOR:0.88:main-iwall-0-z-3-a",
+       "DOOR:0.9:main-iwall-1-x-3-a",
+       "DOOR:1.04:ring-main-0-w0",
+       "DOOR:1.5:ring-attached-0-0-w1",
+       "DOOR:1.5:ring-main-0-w2",
+       "DOOR:1.5:ring-main-1-w1",
+       "DOOR:1.8:ring-main-0-w2",
+       "DOOR:3.3:ring-main-0-w1",
+       "WINDOW:0.76:ring-attached-0-0-w1",
+       "WINDOW:0.9:ring-main-0-w0",
+       "WINDOW:0.9:ring-main-0-w1",
+       "WINDOW:1.06:ring-main-1-w3",
+       "WINDOW:1.06:ring-main-1-w3",
+       "WINDOW:1.0:ring-main-0-w2",
+       "WINDOW:1.0:ring-main-0-w3",
+       "WINDOW:1.19:ring-main-0-w0",
+       "WINDOW:2.49:ring-main-0-w0"
+      ],
+      [
+       "DOOR:0.79:main-iwall-1-x-0",
+       "DOOR:0.79:main-iwall-1-x-5-b",
+       "DOOR:0.87:main-iwall-0-z-0",
+       "DOOR:0.87:main-iwall-0-z-3-a",
+       "DOOR:0.9:main-iwall-1-x-3-a",
+       "DOOR:1.04:ring-main-0-w0",
+       "DOOR:1.5:ring-attached-0-0-w1",
+       "DOOR:1.5:ring-main-0-w2",
+       "DOOR:1.5:ring-main-1-w1",
+       "DOOR:1.8:ring-main-0-w2",
+       "DOOR:3.29:ring-main-0-w1",
+       "WINDOW:0.76:ring-attached-0-0-w1",
+       "WINDOW:0.9:ring-main-0-w0",
+       "WINDOW:0.9:ring-main-0-w1",
+       "WINDOW:1.06:ring-main-1-w3",
+       "WINDOW:1.06:ring-main-1-w3",
+       "WINDOW:1.0:ring-main-0-w2",
+       "WINDOW:1.0:ring-main-0-w3",
+       "WINDOW:1.19:ring-main-0-w0",
+       "WINDOW:2.49:ring-main-0-w0"
+      ]
+     ]
+    },
+    "why": "SEMANTIC_MODEL"
+   },
+   {
+    "case": "dom-w-modrzykach",
+    "diff": {
+     "footprintM2": [
+      185.68,
+      181.79
+     ],
+     "openings": [
+      [
+       "DOOR:0.53:ring-main-0-w3",
+       "DOOR:0.62:ring-attached-1-0-w1",
+       "DOOR:0.74:ring-main-0-w3",
+       "DOOR:0.82:main-iwall-0-z-5",
+       "DOOR:0.87:ring-main-0-w0",
+       "DOOR:0.88:main-iwall-0-z-1",
+       "DOOR:0.91:main-iwall-0-x-4",
+       "DOOR:0.91:main-iwall-0-x-4",
+       "DOOR:0.91:main-iwall-0-z-7",
+       "DOOR:0.99:ring-main-0-w0",
+       "DOOR:0.99:ring-main-0-w2",
+       "DOOR:1.07:ring-attached-0-0-w3",
+       "DOOR:1.29:ring-main-0-w3",
+       "DOOR:1.81:ring-main-0-w2",
+       "DOOR:1.84:ring-main-0-w0",
+       "DOOR:1.98:ring-main-0-w1",
+       "DOOR:2.45:ring-attached-1-0-w0",
+       "DOOR:2.81:ring-main-0-w0",
+       "DOOR:2.94:ring-main-0-w3",
+       "DOOR:3.0:ring-attached-0-0-w3",
+       "DOOR:3.13:ring-attached-0-0-w0",
+       "DOOR:3.62:ring-attached-0-0-w2",
+       "DOOR:4.06:ring-attached-1-0-w0",
+       "WINDOW:1.46:ring-main-0-w1",
+       "WINDOW:5.0:ring-main-0-w0",
+       "WINDOW:5.8:ring-main-0-w2"
+      ],
+      [
+       "DOOR:0.53:ring-main-0-w3",
+       "DOOR:0.62:ring-attached-1-0-w1",
+       "DOOR:0.74:ring-main-0-w3",
+       "DOOR:0.82:main-iwall-0-z-5",
+       "DOOR:0.87:ring-main-0-w0",
+       "DOOR:0.88:main-iwall-0-z-1",
+       "DOOR:0.91:main-iwall-0-x-4",
+       "DOOR:0.91:main-iwall-0-x-4",
+       "DOOR:0.91:main-iwall-0-z-7",
+       "DOOR:0.99:ring-main-0-w0",
+       "DOOR:0.99:ring-main-0-w2",
+       "DOOR:1.07:ring-attached-0-0-w3",
+       "DOOR:1.29:ring-main-0-w3",
+       "DOOR:1.46:ring-main-0-w1",
+       "DOOR:1.81:ring-main-0-w2",
+       "DOOR:1.84:ring-main-0-w0",
+       "DOOR:2.45:ring-attached-1-0-w0",
+       "DOOR:2.81:ring-main-0-w0",
+       "DOOR:2.94:ring-main-0-w3",
+       "DOOR:3.0:ring-attached-0-0-w3",
+       "DOOR:3.13:ring-attached-0-0-w0",
+       "DOOR:3.62:ring-attached-0-0-w2",
+       "DOOR:4.06:ring-attached-1-0-w0",
+       "WINDOW:4.73:ring-main-0-w0",
+       "WINDOW:5.36:ring-main-0-w2",
+       "WINDOW:5.91:ring-main-0-w1"
+      ]
+     ]
+    },
+    "why": "SEMANTIC_MODEL"
+   },
+   {
+    "case": "dom-w-tymianku",
+    "diff": {
+     "footprintM2": [
+      131.28,
+      131.25
+     ],
+     "openings": [
+      [
+       "DOOR:0.44:ring-attached-0-1-w1",
+       "DOOR:0.59:ring-attached-0-0-w2",
+       "DOOR:0.76:ring-main-1-w2",
+       "DOOR:0.88:main-iwall-0-z-0",
+       "DOOR:0.88:main-iwall-0-z-4",
+       "DOOR:0.88:ring-main-0-w0",
+       "DOOR:0.98:ring-main-1-w2",
+       "DOOR:0.9:main-iwall-0-z-7",
+       "DOOR:0.9:main-iwall-1-x-8",
+       "DOOR:0.9:ring-attached-0-0-w2",
+       "DOOR:0.9:ring-attached-0-1-w2",
+       "DOOR:1.0:main-iwall-0-x-5",
+       "DOOR:1.21:ring-main-1-w2",
+       "DOOR:1.8:ring-main-1-w0",
+       "DOOR:1.8:ring-main-1-w0",
+       "DOOR:2.0:ring-main-0-w2",
+       "DOOR:2.26:ring-main-1-w2",
+       "DOOR:2.54:ring-attached-1-0-w0",
+       "DOOR:3.01:ring-main-0-w2",
+       "DOOR:3.16:ring-main-0-w0",
+       "DOOR:3.38:ring-main-1-w2",
+       "WINDOW:0.44:ring-attached-0-0-w3",
+       "WINDOW:0.44:ring-attached-0-1-w3",
+       "WINDOW:0.78:ring-main-1-w3",
+       "WINDOW:0.9:ring-attached-0-1-w2",
+       "WINDOW:0.9:ring-attached-0-1-w2",
+       "WINDOW:0.9:ring-main-0-w1",
+       "WINDOW:1.0:ring-main-0-w0",
+       "WINDOW:1.0:ring-main-0-w1",
+       "WINDOW:1.66:ring-main-0-w3",
+       "WINDOW:1.8:ring-attached-0-0-w2",
+       "WINDOW:1.8:ring-main-0-w1",
+       "WINDOW:3.28:ring-main-0-w3",
+       "WINDOW:3.7:ring-main-1-w3",
+       "WINDOW:4.01:ring-main-0-w2",
+       "WINDOW:5.01:ring-main-1-w3"
+      ],
+      [
+       "DOOR:0.45:ring-attached-0-1-w1",
+       "DOOR:0.59:ring-attached-0-0-w2",
+       "DOOR:0.76:ring-main-1-w2",
+       "DOOR:0.88:main-iwall-0-z-0",
+       "DOOR:0.88:main-iwall-0-z-4",
+       "DOOR:0.88:ring-main-0-w0",
+       "DOOR:0.98:ring-main-1-w2",
+       "DOOR:0.9:main-iwall-0-z-7",
+       "DOOR:0.9:main-iwall-1-x-8",
+       "DOOR:0.9:ring-attached-0-0-w2",
+       "DOOR:0.9:ring-attached-0-1-w2",
+       "DOOR:1.0:main-iwall-0-x-5",
+       "DOOR:1.21:ring-main-1-w2",
+       "DOOR:1.8:ring-main-1-w0",
+       "DOOR:1.8:ring-main-1-w0",
+       "DOOR:2.0:ring-main-0-w2",
+       "DOOR:2.26:ring-main-1-w2",
+       "DOOR:2.54:ring-attached-1-0-w0",
+       "DOOR:3.01:ring-main-0-w2",
+       "DOOR:3.16:ring-main-0-w0",
+       "DOOR:3.38:ring-main-1-w2",
+       "WINDOW:0.45:ring-attached-0-0-w3",
+       "WINDOW:0.45:ring-attached-0-1-w3",
+       "WINDOW:0.77:ring-main-1-w3",
+       "WINDOW:0.9:ring-attached-0-1-w2",
+       "WINDOW:0.9:ring-attached-0-1-w2",
+       "WINDOW:0.9:ring-main-0-w1",
+       "WINDOW:1.0:ring-main-0-w0",
+       "WINDOW:1.0:ring-main-0-w1",
+       "WINDOW:1.55:ring-main-0-w3",
+       "WINDOW:1.8:ring-attached-0-0-w2",
+       "WINDOW:1.8:ring-main-0-w1",
+       "WINDOW:3.28:ring-main-0-w3",
+       "WINDOW:3.65:ring-main-1-w3",
+       "WINDOW:4.01:ring-main-0-w2",
+       "WINDOW:5.01:ring-main-1-w3"
+      ]
+     ]
+    },
+    "why": "SEMANTIC_MODEL"
+   }
+  ],
+  "pass": false
+ },
+ "G2": {
+  "a2_scaleOrientedAnchors": {},
+  "a2_total": 0,
+  "a_legacyRowsUnreachable": {
+   "eoze-legacy-area": 16,
+   "eoze-legacy-every": 16,
+   "kosacce-area-alone": 25
+  },
+  "a_scaleDependentAnchors": {
+   "A00": 10,
+   "A01": 13,
+   "A02": 6,
+   "A03": 14,
+   "A04": 23,
+   "A05": 9,
+   "A06": 13,
+   "A07": 7,
+   "D00": 7,
+   "D01": 2,
+   "D02": 3,
+   "D03": 3,
+   "D04": 2,
+   "D05": 3,
+   "alt-marcowki": 4,
+   "aster-viii": 1,
+   "dom-miniaturka": 9,
+   "dom-pod-jarzabem": 13,
+   "dom-pod-milorzebem": 8,
+   "dom-w-akebiach": 10,
+   "dom-w-arkadiach": 10,
+   "dom-w-azaliach": 3,
+   "dom-w-cieszyniankach": 4,
+   "dom-w-cyklamenach": 14,
+   "dom-w-dabecjach": 12,
+   "dom-w-daliach": 8,
+   "dom-w-glogownikach": 18,
+   "dom-w-gozdzikowcach": 16,
+   "dom-w-helikoniach": 8,
+   "dom-w-jablonkach": 13,
+   "dom-w-krasnokwiatach": 7,
+   "dom-w-modrzewnicy": 1,
+   "dom-w-modrzykach": 15,
+   "dom-w-morelach": 12,
+   "dom-w-murajach": 12,
+   "dom-w-tunbergiach": 10,
+   "dom-w-tymianku": 5,
+   "dom-w-zurawkach": 8,
+   "galaktyka": 4,
+   "kosacce-clean": 24,
+   "kosacce-tracked": 24,
+   "marcowki": 19,
+   "rarytasy-eoze": 10,
+   "rarytasy-g2e": 17,
+   "willa-miranda": 14
+  },
+  "a_total": 448,
+  "b_inkFirstMismatch": {},
+  "c_newFalseConfident": [],
+  "d_sourceExactIncrease": [],
+  "e_note": "changed refusals are classified by hand from their decision paths (G5 list)",
+  "pass": false
+ },
+ "G3": {
+  "changes": [
+   {
+    "case": "dom-w-modrzykach",
+    "now": [
+     "PROJECTING_WING:B:153.4",
+     "UNKNOWN:-:3.9"
+    ],
+    "was": [
+     "PROJECTING_WING:B:153.3",
+     "UNKNOWN:-:3.9"
+    ],
+    "what": "bodies"
+   },
+   {
+    "case": "dom-w-azaliach",
+    "now": [
+     "UNKNOWN:-:4.7"
+    ],
+    "was": [
+     "PROJECTING_WING:B:6.3",
+     "RECESSED_ATTACHED:-:15.3",
+     "SEPARATE_BODY:-:1.5",
+     "UNKNOWN:-:44.7"
+    ],
+    "what": "bodies"
+   },
+   {
+    "case": "dom-w-azaliach",
+    "now": [],
+    "was": [
+     "ATTACHED_ROOM:REJECTED:0"
+    ],
+    "what": "completions"
+   },
+   {
+    "case": "dom-w-helikoniach",
+    "now": [
+     {
+      "areaM2": 34.49,
+      "surface": "PAVED",
+      "why": "the floor of the rear recess and the platform the plan outlines beyond it"
+     }
+    ],
+    "was": [
+     {
+      "areaM2": 34.72,
+      "surface": "PAVED",
+      "why": "the floor of the rear recess and the platform the plan outlines beyond it"
+     }
+    ],
+    "what": "terraces"
+   },
+   {
+    "case": "dom-w-helikoniach",
+    "now": [
+     "PROJECTING_WING:B:4.9",
+     "PROJECTING_WING:B:45.8",
+     "UNKNOWN:-:0.9",
+     "UNKNOWN:-:1.8",
+     "UNKNOWN:-:3.9"
+    ],
+    "was": [
+     "PROJECTING_WING:B:4.9",
+     "PROJECTING_WING:B:45.9",
+     "UNKNOWN:-:0.9",
+     "UNKNOWN:-:1.8",
+     "UNKNOWN:-:3.9"
+    ],
+    "what": "bodies"
+   },
+   {
+    "case": "A00",
+    "now": [
+     "ATTACHED_ROOM:REJECTED:0",
+     "BOX_COMPLETION:QUESTION:49.5",
+     "BOX_COMPLETION:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0.5",
+     "BOX_COMPLETION:REJECTED:1.2",
+     "BOX_COMPLETION:REJECTED:35.4"
+    ],
+    "was": [
+     "ATTACHED_ROOM:REJECTED:0",
+     "BOX_COMPLETION:QUESTION:49.6",
+     "BOX_COMPLETION:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0.5",
+     "BOX_COMPLETION:REJECTED:1.2",
+     "BOX_COMPLETION:REJECTED:35.5"
+    ],
+    "what": "completions"
+   },
+   {
+    "case": "A05",
+    "now": [
+     "FLUSH_ATTACHED:-:0.5",
+     "FLUSH_ATTACHED:-:0.5",
+     "UNKNOWN:-:2.7",
+     "UNKNOWN:-:3.5"
+    ],
+    "was": [
+     "FLUSH_ATTACHED:-:0.5",
+     "FLUSH_ATTACHED:-:0.5",
+     "UNKNOWN:-:2.8",
+     "UNKNOWN:-:3.6"
+    ],
+    "what": "bodies"
+   },
+   {
+    "case": "A05",
+    "now": [
+     "OPENING_IN_WALL:3.66",
+     "OPENING_IN_WALL:3.76",
+     "OPEN_SIDE:0.99",
+     "OPEN_SIDE:3.02",
+     "OPEN_SIDE:4.11"
+    ],
+    "was": [
+     "OPENING_IN_WALL:3.74",
+     "OPENING_IN_WALL:3.76",
+     "OPEN_SIDE:0.99",
+     "OPEN_SIDE:3.02",
+     "OPEN_SIDE:4.11"
+    ],
+    "what": "wideOpenings"
+   },
+   {
+    "case": "A05",
+    "now": [
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:10.7"
+    ],
+    "was": [
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "ATTACHED_ROOM:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:0",
+     "BOX_COMPLETION:REJECTED:10.9"
+    ],
+    "what": "completions"
+   },
+   {
+    "case": "dom-w-murajach",
+    "now": [
+     "FLUSH_ATTACHED:-:3.7",
+     "UNKNOWN:-:0.2",
+     "UNKNOWN:-:0.3"
+    ],
+    "was": [
+     "FLUSH_ATTACHED:-:3.8",
+     "UNKNOWN:-:0.2",
+     "UNKNOWN:-:0.4"
+    ],
+    "what": "bodies"
+   },
+   {
+    "case": "dom-miniaturka",
+    "now": [
+     "OPEN_SIDE:3.85"
+    ],
+    "was": [
+     "OPEN_SIDE:3.86"
+    ],
+    "what": "wideOpenings"
+   }
+  ],
+  "pass": false
+ },
+ "G5": {
+  "changedRefusalsOrDecisions": [
+   {
+    "case": "dom-w-morelach",
+    "decisionPathChanged": true,
+    "now": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ],
+    "was": [
+     "COMPLETED",
+     null,
+     "PASS"
+    ]
+   },
+   {
+    "case": "dom-w-azaliach",
+    "decisionPathChanged": true,
+    "now": [
+     "FAILED",
+     "PLAN_LAYOUT_REJECTED/STRUCTURAL_LAYOUT",
+     "ALGORITHMIC_FAIL"
+    ],
+    "was": [
+     "FAILED",
+     "PLAN_RESOLUTION_INCONCLUSIVE/PLAN_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-dabecjach",
+    "decisionPathChanged": true,
+    "now": [
+     "FAILED",
+     "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "was": [
+     "FAILED",
+     "BOUNDARY_RESOLUTION_INCONCLUSIVE/BOUNDARY_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   },
+   {
+    "case": "dom-w-murajach",
+    "decisionPathChanged": true,
+    "now": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ],
+    "was": [
+     "FAILED",
+     "METRIC_RESOLUTION_INCONCLUSIVE/METRIC_RESOLUTION",
+     "ALGORITHMIC_FAIL"
+    ]
+   }
+  ],
+  "note": "every entry needs a hand explanation in the report; no reconstruction code differs between variants (G5 by construction)"
+ },
+ "admissible": false,
+ "baseline": "C0",
+ "knownGood": [
+  "A02",
+  "A03",
+  "A06",
+  "A07",
+  "dom-miniaturka",
+  "dom-pod-jarzabem",
+  "dom-w-arkadiach",
+  "dom-w-cieszyniankach",
+  "dom-w-daliach",
+  "dom-w-jablonkach",
+  "dom-w-modrzykach",
+  "dom-w-morelach",
+  "dom-w-tunbergiach",
+  "dom-w-tymianku",
+  "dom-w-zurawkach",
+  "eoze-legacy-area",
+  "eoze-legacy-every",
+  "kosacce-area-alone",
+  "kosacce-clean",
+  "kosacce-tracked",
+  "marcowki",
+  "rarytasy-eoze",
+  "rarytasy-g2e"
+ ],
+ "variant": "C3"
+}
