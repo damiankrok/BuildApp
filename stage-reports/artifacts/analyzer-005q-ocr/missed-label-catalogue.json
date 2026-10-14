@@ -1,19 +1,26 @@
 {
- "murajachInventory": [
+ "murajachInventoryPrimary": [
   {
    "b0Detected": true,
+   "b0Loss": [
+    "STATEMENT_VALUE_REWRITTEN"
+   ],
    "b0ValueCorrect": true,
    "b1Detected": true,
    "b1ValueCorrect": true,
    "b2": [
-    "BOUND_NO_TRUTH"
+    "NO_LINE"
    ],
    "class005O": "c",
    "printed": "1020",
-   "truthItemFound": true
+   "truthItemFound": true,
+   "truthTier": "PRIOR_TRANSCRIPTION"
   },
   {
    "b0Detected": true,
+   "b0Loss": [
+    "READ_RIGHT_NOT_BOUND"
+   ],
    "b0ValueCorrect": true,
    "b1Detected": true,
    "b1ValueCorrect": true,
@@ -22,10 +29,14 @@
    ],
    "class005O": "d",
    "printed": "740",
-   "truthItemFound": true
+   "truthItemFound": true,
+   "truthTier": "LOCAL_DOUBLE_READ"
   },
   {
    "b0Detected": true,
+   "b0Loss": [
+    "READ_NOT_CORROBORATED"
+   ],
    "b0ValueCorrect": false,
    "b1Detected": true,
    "b1ValueCorrect": false,
@@ -34,10 +45,14 @@
    ],
    "class005O": "b",
    "printed": "402",
-   "truthItemFound": true
+   "truthItemFound": true,
+   "truthTier": "LOCAL_DOUBLE_READ"
   },
   {
    "b0Detected": true,
+   "b0Loss": [
+    "READ_RIGHT_NOT_BOUND"
+   ],
    "b0ValueCorrect": true,
    "b1Detected": true,
    "b1ValueCorrect": true,
@@ -46,10 +61,14 @@
    ],
    "class005O": "c",
    "printed": "410",
-   "truthItemFound": true
+   "truthItemFound": true,
+   "truthTier": "LOCAL_DOUBLE_READ"
   },
   {
    "b0Detected": true,
+   "b0Loss": [
+    "STATEMENT_VALUE_REWRITTEN"
+   ],
    "b0ValueCorrect": true,
    "b1Detected": true,
    "b1ValueCorrect": true,
@@ -58,10 +77,14 @@
    ],
    "class005O": "c",
    "printed": "252",
-   "truthItemFound": true
+   "truthItemFound": true,
+   "truthTier": "PRIOR_TRANSCRIPTION"
   },
   {
    "b0Detected": true,
+   "b0Loss": [
+    "READ_RIGHT_NOT_BOUND"
+   ],
    "b0ValueCorrect": true,
    "b1Detected": true,
    "b1ValueCorrect": false,
@@ -70,10 +93,14 @@
    ],
    "class005O": "c",
    "printed": "240",
-   "truthItemFound": true
+   "truthItemFound": true,
+   "truthTier": "LOCAL_DOUBLE_READ"
   },
   {
    "b0Detected": true,
+   "b0Loss": [
+    "READ_RIGHT_NOT_BOUND"
+   ],
    "b0ValueCorrect": true,
    "b1Detected": true,
    "b1ValueCorrect": true,
@@ -82,10 +109,14 @@
    ],
    "class005O": "c",
    "printed": "582",
-   "truthItemFound": true
+   "truthItemFound": true,
+   "truthTier": "LOCAL_DOUBLE_READ"
   },
   {
    "b0Detected": true,
+   "b0Loss": [
+    "STATEMENT_VALUE_REWRITTEN"
+   ],
    "b0ValueCorrect": true,
    "b1Detected": false,
    "b1ValueCorrect": false,
@@ -94,54 +125,38 @@
    ],
    "class005O": "c",
    "printed": "115",
-   "truthItemFound": true
+   "truthItemFound": true,
+   "truthTier": "PRIOR_TRANSCRIPTION"
   },
   {
-   "b0Detected": true,
-   "b0ValueCorrect": false,
-   "b1Detected": false,
-   "b1ValueCorrect": false,
-   "b2": [
-    "NO_CANDIDATE"
-   ],
    "class005O": "c",
    "printed": "153",
-   "truthItemFound": true
+   "status": "NOT_MEASURED",
+   "truthItemFound": false
   },
   {
-   "b0Detected": false,
-   "b0ValueCorrect": false,
-   "b1Detected": false,
-   "b1ValueCorrect": false,
-   "b2": [],
    "class005O": "c",
    "printed": "202",
+   "status": "NOT_MEASURED",
    "truthItemFound": false
   },
   {
-   "b0Detected": false,
-   "b0ValueCorrect": false,
-   "b1Detected": true,
-   "b1ValueCorrect": true,
-   "b2": [
-    "BOUND_NO_TRUTH"
-   ],
    "class005O": "a",
    "printed": "160",
-   "truthItemFound": true
+   "status": "NOT_MEASURED",
+   "truthItemFound": false
   },
   {
-   "b0Detected": false,
-   "b0ValueCorrect": false,
-   "b1Detected": false,
-   "b1ValueCorrect": false,
-   "b2": [],
    "class005O": "a",
    "printed": "256",
+   "status": "NOT_MEASURED",
    "truthItemFound": false
   },
   {
    "b0Detected": false,
+   "b0Loss": [
+    "NEVER_PROPOSED"
+   ],
    "b0ValueCorrect": false,
    "b1Detected": true,
    "b1ValueCorrect": false,
@@ -150,26 +165,221 @@
    ],
    "class005O": "a",
    "printed": "314",
-   "truthItemFound": true
+   "truthItemFound": true,
+   "truthTier": "LOCAL_DOUBLE_READ"
   },
   {
-   "b0Detected": false,
+   "class005O": "a",
+   "printed": "209",
+   "status": "NOT_MEASURED",
+   "truthItemFound": false
+  },
+  {
+   "class005O": "a",
+   "printed": "95",
+   "status": "NOT_MEASURED",
+   "truthItemFound": false
+  }
+ ],
+ "murajachInventorySensitivity": [
+  {
+   "b0Detected": true,
+   "b0Loss": [
+    "STATEMENT_VALUE_REWRITTEN"
+   ],
+   "b0ValueCorrect": true,
+   "b1Detected": true,
+   "b1ValueCorrect": true,
+   "b2": [
+    "NO_LINE"
+   ],
+   "class005O": "c",
+   "printed": "1020",
+   "truthItemFound": true,
+   "truthTier": "PRIOR_TRANSCRIPTION"
+  },
+  {
+   "b0Detected": true,
+   "b0Loss": [
+    "READ_RIGHT_NOT_BOUND"
+   ],
+   "b0ValueCorrect": true,
+   "b1Detected": true,
+   "b1ValueCorrect": true,
+   "b2": [
+    "BOUND_NO_TRUTH"
+   ],
+   "class005O": "d",
+   "printed": "740",
+   "truthItemFound": true,
+   "truthTier": "LOCAL_DOUBLE_READ"
+  },
+  {
+   "b0Detected": true,
+   "b0Loss": [
+    "READ_NOT_CORROBORATED"
+   ],
+   "b0ValueCorrect": false,
+   "b1Detected": true,
+   "b1ValueCorrect": false,
+   "b2": [
+    "NO_CANDIDATE"
+   ],
+   "class005O": "b",
+   "printed": "402",
+   "truthItemFound": true,
+   "truthTier": "LOCAL_DOUBLE_READ"
+  },
+  {
+   "b0Detected": true,
+   "b0Loss": [
+    "READ_RIGHT_NOT_BOUND"
+   ],
+   "b0ValueCorrect": true,
+   "b1Detected": true,
+   "b1ValueCorrect": true,
+   "b2": [
+    "BOUND_NO_TRUTH"
+   ],
+   "class005O": "c",
+   "printed": "410",
+   "truthItemFound": true,
+   "truthTier": "LOCAL_DOUBLE_READ"
+  },
+  {
+   "b0Detected": true,
+   "b0Loss": [
+    "STATEMENT_VALUE_REWRITTEN"
+   ],
+   "b0ValueCorrect": true,
+   "b1Detected": true,
+   "b1ValueCorrect": true,
+   "b2": [
+    "BOUND_NO_TRUTH"
+   ],
+   "class005O": "c",
+   "printed": "252",
+   "truthItemFound": true,
+   "truthTier": "PRIOR_TRANSCRIPTION"
+  },
+  {
+   "b0Detected": true,
+   "b0Loss": [
+    "READ_RIGHT_NOT_BOUND"
+   ],
+   "b0ValueCorrect": true,
+   "b1Detected": true,
+   "b1ValueCorrect": false,
+   "b2": [
+    "BOUND_NO_TRUTH"
+   ],
+   "class005O": "c",
+   "printed": "240",
+   "truthItemFound": true,
+   "truthTier": "LOCAL_DOUBLE_READ"
+  },
+  {
+   "b0Detected": true,
+   "b0Loss": [
+    "READ_RIGHT_NOT_BOUND"
+   ],
+   "b0ValueCorrect": true,
+   "b1Detected": true,
+   "b1ValueCorrect": true,
+   "b2": [
+    "BOUND_NO_TRUTH"
+   ],
+   "class005O": "c",
+   "printed": "582",
+   "truthItemFound": true,
+   "truthTier": "LOCAL_DOUBLE_READ"
+  },
+  {
+   "b0Detected": true,
+   "b0Loss": [
+    "STATEMENT_VALUE_REWRITTEN"
+   ],
+   "b0ValueCorrect": true,
+   "b1Detected": false,
+   "b1ValueCorrect": false,
+   "b2": [
+    "BOUND_NO_TRUTH"
+   ],
+   "class005O": "c",
+   "printed": "115",
+   "truthItemFound": true,
+   "truthTier": "PRIOR_TRANSCRIPTION"
+  },
+  {
+   "b0Detected": true,
+   "b0Loss": [
+    "READ_NOT_CORROBORATED"
+   ],
    "b0ValueCorrect": false,
    "b1Detected": false,
    "b1ValueCorrect": false,
-   "b2": [],
-   "class005O": "a",
-   "printed": "209",
+   "b2": [
+    "NO_CANDIDATE"
+   ],
+   "class005O": "c",
+   "printed": "153",
+   "truthItemFound": true,
+   "truthTier": "R1_CONFIDENT"
+  },
+  {
+   "class005O": "c",
+   "printed": "202",
+   "status": "NOT_MEASURED",
    "truthItemFound": false
   },
   {
    "b0Detected": false,
+   "b0Loss": [
+    "NEVER_PROPOSED"
+   ],
    "b0ValueCorrect": false,
-   "b1Detected": false,
+   "b1Detected": true,
+   "b1ValueCorrect": true,
+   "b2": [
+    "BOUND_NO_TRUTH"
+   ],
+   "class005O": "a",
+   "printed": "160",
+   "truthItemFound": true,
+   "truthTier": "R1_CONFIDENT"
+  },
+  {
+   "class005O": "a",
+   "printed": "256",
+   "status": "NOT_MEASURED",
+   "truthItemFound": false
+  },
+  {
+   "b0Detected": false,
+   "b0Loss": [
+    "NEVER_PROPOSED"
+   ],
+   "b0ValueCorrect": false,
+   "b1Detected": true,
    "b1ValueCorrect": false,
-   "b2": [],
+   "b2": [
+    "NO_CANDIDATE"
+   ],
+   "class005O": "a",
+   "printed": "314",
+   "truthItemFound": true,
+   "truthTier": "LOCAL_DOUBLE_READ"
+  },
+  {
+   "class005O": "a",
+   "printed": "209",
+   "status": "NOT_MEASURED",
+   "truthItemFound": false
+  },
+  {
    "class005O": "a",
    "printed": "95",
+   "status": "NOT_MEASURED",
    "truthItemFound": false
   }
  ],
@@ -205,7 +415,7 @@
    "b0Loss": "READ_NOT_CORROBORATED",
    "b1Detected": true,
    "b1Value": "169",
-   "b2": "BOUND_NO_TRUTH",
+   "b2": "SEGMENT_TAKEN",
    "box": {
     "x0": 327,
     "x1": 356,
@@ -353,7 +563,7 @@
    "b0Loss": "NEVER_PROPOSED",
    "b1Detected": true,
    "b1Value": "326",
-   "b2": "BOUND_NO_TRUTH",
+   "b2": "NO_LINE",
    "box": {
     "x0": 582.44,
     "x1": 620.56,
@@ -520,30 +730,6 @@
    "variantByteHash": "abfdb2625576ef47745921944dc64662fd7aed144f4a0e4d67015804dc9176d6"
   },
   {
-   "axis": "HORIZONTAL",
-   "b0ClassicToken": false,
-   "b0Detected": false,
-   "b0Loss": "NEVER_PROPOSED",
-   "b1Detected": false,
-   "b1Value": null,
-   "b2": "NO_CANDIDATE",
-   "box": {
-    "x0": 103.5,
-    "x1": 228,
-    "y0": 267.25,
-    "y1": 297.8
-   },
-   "case": "marcowki",
-   "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
-   "origins": [
-    "LINE_WINDOW"
-   ],
-   "sheet": "S5",
-   "truth": "LOCAL_DOUBLE_READ",
-   "value": "002",
-   "variantByteHash": "abfdb2625576ef47745921944dc64662fd7aed144f4a0e4d67015804dc9176d6"
-  },
-  {
    "axis": "VERTICAL",
    "b0ClassicToken": true,
    "b0Detected": true,
@@ -573,7 +759,7 @@
    "axis": "VERTICAL",
    "b0ClassicToken": true,
    "b0Detected": true,
-   "b0Loss": "READ_WRONG",
+   "b0Loss": "READ_NOT_CORROBORATED",
    "b1Detected": false,
    "b1Value": null,
    "b2": "NO_CANDIDATE",
@@ -592,32 +778,6 @@
    "sheet": "S6",
    "truth": "PRIOR_TRANSCRIPTION",
    "value": "176",
-   "variantByteHash": "1cd41ad66781948ab0fe9bb5b8720ee542ee4cf0b83a1cedcce1593aa8e731fa"
-  },
-  {
-   "axis": "VERTICAL",
-   "b0ClassicToken": true,
-   "b0Detected": true,
-   "b0Loss": "READ_WRONG",
-   "b1Detected": true,
-   "b1Value": "890",
-   "b2": "CORRECT",
-   "box": {
-    "x0": 787,
-    "x1": 799,
-    "y0": 512,
-    "y1": 532
-   },
-   "case": "kosacce-clean",
-   "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
-   "origins": [
-    "B1",
-    "CLASSIC",
-    "PRIOR"
-   ],
-   "sheet": "S6",
-   "truth": "PRIOR_TRANSCRIPTION",
-   "value": "890",
    "variantByteHash": "1cd41ad66781948ab0fe9bb5b8720ee542ee4cf0b83a1cedcce1593aa8e731fa"
   },
   {
@@ -670,32 +830,6 @@
    "variantByteHash": "1cd41ad66781948ab0fe9bb5b8720ee542ee4cf0b83a1cedcce1593aa8e731fa"
   },
   {
-   "axis": "VERTICAL",
-   "b0ClassicToken": true,
-   "b0Detected": true,
-   "b0Loss": "READ_WRONG",
-   "b1Detected": true,
-   "b1Value": "008",
-   "b2": "CORRECT",
-   "box": {
-    "x0": 45,
-    "x1": 60,
-    "y0": 266,
-    "y1": 290
-   },
-   "case": "dom-w-zurawkach",
-   "frameId": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
-   "origins": [
-    "B1",
-    "CLASSIC",
-    "PRIOR"
-   ],
-   "sheet": "S7",
-   "truth": "PRIOR_TRANSCRIPTION",
-   "value": "800",
-   "variantByteHash": "10e0a72c8322cb94dbe34209a48a4ec0e40e338cf729e1fba6fd585db222d714"
-  },
-  {
    "axis": "HORIZONTAL",
    "b0ClassicToken": true,
    "b0Detected": true,
@@ -727,7 +861,7 @@
    "b0Loss": "READ_NOT_CORROBORATED",
    "b1Detected": true,
    "b1Value": "254",
-   "b2": "BOUND_NO_TRUTH",
+   "b2": "NO_LINE",
    "box": {
     "x0": 618.56,
     "x1": 641.44,
@@ -752,7 +886,7 @@
    "b0Loss": "READ_NOT_CORROBORATED",
    "b1Detected": true,
    "b1Value": "144",
-   "b2": "BOUND_NO_TRUTH",
+   "b2": "CORRECT",
    "box": {
     "x0": 75,
     "x1": 91,
@@ -1086,30 +1220,6 @@
    "sheet": "S3",
    "truth": "R1_CONFIDENT",
    "value": "88",
-   "variantByteHash": "7ae52c24424b17889ea2d8757dcd95ce93a4462adf8e27041d1e8ec9a298c70c"
-  },
-  {
-   "axis": "HORIZONTAL",
-   "b0ClassicToken": false,
-   "b0Detected": false,
-   "b0Loss": "NEVER_PROPOSED",
-   "b1Detected": false,
-   "b1Value": null,
-   "b2": "NO_CANDIDATE",
-   "box": {
-    "x0": 495.5,
-    "x1": 587.5,
-    "y0": 637.25,
-    "y1": 663.1
-   },
-   "case": "dom-w-murajach",
-   "frameId": "frame-asset-rzut-44d6d1166d-006f85ed53",
-   "origins": [
-    "LINE_WINDOW"
-   ],
-   "sheet": "S3",
-   "truth": "R1_CONFIDENT",
-   "value": "081",
    "variantByteHash": "7ae52c24424b17889ea2d8757dcd95ce93a4462adf8e27041d1e8ec9a298c70c"
   },
   {
@@ -1452,30 +1562,6 @@
    "variantByteHash": "1cd41ad66781948ab0fe9bb5b8720ee542ee4cf0b83a1cedcce1593aa8e731fa"
   },
   {
-   "axis": "VERTICAL",
-   "b0ClassicToken": true,
-   "b0Detected": true,
-   "b0Loss": "READ_NOT_CORROBORATED",
-   "b1Detected": false,
-   "b1Value": null,
-   "b2": "NO_CANDIDATE",
-   "box": {
-    "x0": 696,
-    "x1": 756,
-    "y0": 92,
-    "y1": 334
-   },
-   "case": "kosacce-clean",
-   "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
-   "origins": [
-    "CLASSIC"
-   ],
-   "sheet": "S6",
-   "truth": "R1_CONFIDENT",
-   "value": "00000",
-   "variantByteHash": "1cd41ad66781948ab0fe9bb5b8720ee542ee4cf0b83a1cedcce1593aa8e731fa"
-  },
-  {
    "axis": "HORIZONTAL",
    "b0ClassicToken": false,
    "b0Detected": false,
@@ -1617,30 +1703,6 @@
    "sheet": "S7",
    "truth": "R1_CONFIDENT",
    "value": "501",
-   "variantByteHash": "10e0a72c8322cb94dbe34209a48a4ec0e40e338cf729e1fba6fd585db222d714"
-  },
-  {
-   "axis": "HORIZONTAL",
-   "b0ClassicToken": false,
-   "b0Detected": false,
-   "b0Loss": "NEVER_PROPOSED",
-   "b1Detected": false,
-   "b1Value": null,
-   "b2": "NO_CANDIDATE",
-   "box": {
-    "x0": 383.5,
-    "x1": 422,
-    "y0": 363.1,
-    "y1": 384.25
-   },
-   "case": "dom-w-zurawkach",
-   "frameId": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
-   "origins": [
-    "LINE_WINDOW"
-   ],
-   "sheet": "S7",
-   "truth": "R1_CONFIDENT",
-   "value": "01",
    "variantByteHash": "10e0a72c8322cb94dbe34209a48a4ec0e40e338cf729e1fba6fd585db222d714"
   },
   {

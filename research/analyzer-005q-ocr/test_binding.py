@@ -54,6 +54,19 @@ class TruthBinding(unittest.TestCase):
         self.assertEqual(r['status'], 'TRUTH')
         self.assertEqual((r['segment']['fromPx'], r['segment']['toPx']), (0, 200))
 
+    def test_truth_can_differ_from_the_centre_segment(self):
+        # the label sits over [200, 300] (100 px) but 600 is proportional to the peer (200 over 100 px) only on [300, 600]
+        a, b = item('600', 250, 92), item('200', 50, 92)
+        line = {**H_LINE, 'ticks': [{'atPx': 0}, {'atPx': 100}, {'atPx': 200}, {'atPx': 300}, {'atPx': 600}]}
+        r = truth_binding(a, [a, b], [line])
+        self.assertEqual(r['status'], 'TRUTH')
+        self.assertEqual((r['segment']['fromPx'], r['segment']['toPx']), (300, 600))
+
+    def test_rejected_marks_do_not_split_segments(self):
+        line = {**H_LINE, 'ticks': [{'atPx': 0, 'class': 'TICK'}, {'atPx': 120, 'class': 'REJECTED'}, {'atPx': 200, 'class': 'TICK'}]}
+        s = segment_at(line, box(100, 92))
+        self.assertEqual((s['fromPx'], s['toPx']), (0, 200))
+
     def test_no_peer_no_truth(self):
         a = item('400', 100, 92)
         self.assertEqual(truth_binding(a, [a], [H_LINE])['status'], 'NO_LINE_TRUTH')

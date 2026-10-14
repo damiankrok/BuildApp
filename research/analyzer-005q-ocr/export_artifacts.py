@@ -43,7 +43,7 @@ def main():
         return [{k: r[k] for k in ('sheet', 'case', 'frameId', 'variantByteHash', 'value', 'truth', 'axis', 'box', 'origins', 'b0Loss', 'b0Detected', 'b0ClassicToken', 'b1Detected', 'b1Value', 'b2') if k in r}
                 for r in rows if r['b0Loss'] in ('NEVER_PROPOSED', 'TOKEN_NOT_ON_A_CHAIN', 'READ_NOT_CORROBORATED', 'READ_WRONG')]
     json.dump({'schema': 'buildapp.005q-ocr.missed-labels', 'version': 1, 'primary': cat(prim), 'sensitivityOnly': [x for x in cat(sens) if x['truth'] == 'R1_CONFIDENT'],
-               'murajachInventory': next(s['murajachInventoryCheck'] for s in ss['sheets'] if 'murajachInventoryCheck' in s)},
+               'murajachInventoryPrimary': next(s['murajachInventoryCheck'] for s in sp['sheets'] if 'murajachInventoryCheck' in s), 'murajachInventorySensitivity': next(s['murajachInventoryCheck'] for s in ss['sheets'] if 'murajachInventoryCheck' in s)},
               open(f'{O}/missed-label-catalogue.json', 'w'), indent=1, sort_keys=True)
 
     # false bindings / rewritten statements

@@ -64,21 +64,6 @@
   {
    "axis": "HORIZONTAL",
    "case": "dom-w-glogownikach",
-   "localTruth": "350",
-   "pageBox": {
-    "x0": 718,
-    "x1": 738,
-    "y0": 465,
-    "y1": 478
-   },
-   "sheet": "S1",
-   "truthTier": "PRIOR_TRANSCRIPTION",
-   "variantByteHash": "e4e5edc4f68d751d71b9c819a0d7746d639a974a28b069f8b00254aed880f97a",
-   "why": "STATEMENT_VALUE_REWRITTEN"
-  },
-  {
-   "axis": "HORIZONTAL",
-   "case": "dom-w-glogownikach",
    "localTruth": "280",
    "pageBox": {
     "x0": 122,
@@ -209,7 +194,7 @@
    "sheet": "S3",
    "truthTier": "PRIOR_TRANSCRIPTION",
    "variantByteHash": "7ae52c24424b17889ea2d8757dcd95ce93a4462adf8e27041d1e8ec9a298c70c",
-   "why": "STATEMENT_VALUE_REWRITTEN"
+   "why": "ROTATIONAL_TWIN_AMBIGUOUS"
   },
   {
    "axis": "VERTICAL",
@@ -224,7 +209,7 @@
    "sheet": "S3",
    "truthTier": "PRIOR_TRANSCRIPTION",
    "variantByteHash": "7ae52c24424b17889ea2d8757dcd95ce93a4462adf8e27041d1e8ec9a298c70c",
-   "why": "STATEMENT_VALUE_REWRITTEN"
+   "why": "ROTATIONAL_TWIN_AMBIGUOUS"
   },
   {
    "axis": "HORIZONTAL",
@@ -295,6 +280,21 @@
     "x1": 379,
     "y0": 257,
     "y1": 270
+   },
+   "sheet": "S4",
+   "truthTier": "PRIOR_TRANSCRIPTION",
+   "variantByteHash": "6cf4b609e9415f318b6145111cbb1600b9d99e88a91f93a2537c76daf3443a7d",
+   "why": "STATEMENT_VALUE_REWRITTEN"
+  },
+  {
+   "axis": "HORIZONTAL",
+   "case": "dom-w-gozdzikowcach",
+   "localTruth": "317",
+   "pageBox": {
+    "x0": 360,
+    "x1": 380,
+    "y0": 705,
+    "y1": 718
    },
    "sheet": "S4",
    "truthTier": "PRIOR_TRANSCRIPTION",

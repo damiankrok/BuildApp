@@ -46,13 +46,22 @@ def on_line(line, box, axis, h):
     return abs(across - line['baselinePx']) / max(1.0, h) <= ON_LINE_ACROSS and line['ticks'][0]['atPx'] <= along <= line['ticks'][-1]['atPx']
 
 
+def tick_marks(line):
+    """Addendum C: only marks production classes TICK (a ticked run carries no class and keeps every mark)."""
+    return [k['atPx'] for k in line['ticks'] if k.get('class', 'TICK') == 'TICK']
+
+
+def segments_of(line):
+    t = tick_marks(line)
+    return [{'axis': line['axis'], 'baselinePx': line['baselinePx'], 'fromPx': a, 'toPx': b, 'line': line['id']} for a, b in zip(t, t[1:]) if b > a]
+
+
 def segment_at(line, box):
-    """The segment between two consecutive marks that contains the box centre along the line."""
+    """The tick-to-tick segment that contains the box centre along the line."""
     along, _ = _along_across(line, box)
-    t = [k['atPx'] for k in line['ticks']]
-    for a, b in zip(t, t[1:]):
-        if a <= along <= b and b > a:
-            return {'axis': line['axis'], 'baselinePx': line['baselinePx'], 'fromPx': a, 'toPx': b, 'line': line['id']}
+    for s in segments_of(line):
+        if s['fromPx'] <= along <= s['toPx']:
+            return s
     return None
 
 
@@ -69,31 +78,36 @@ def _dedupe_segments(segs):
 
 
 def truth_binding(item, dims, lines):
-    """The segment, on a frozen line the label lies on, whose length makes the label's value proportional (within 3 %)
-    to at least one OTHER truth label's value on the same line. Line-internal only: no page scale, no registration."""
+    """Addendum C: the segment (TICK marks only), among EVERY segment of every frozen line the label lies on, whose length
+    makes the label's value proportional (within 3 %) to another truth label on the same line, that peer measured on the
+    segment under its own position. Unique -> TRUTH; several equal ones of which one lies under the label -> TRUTH
+    (tie broken by position, flagged); else AMBIGUOUS_BINDING / NO_LINE_TRUTH. Line-internal only: no page scale."""
     if not item.get('value') or not INT.match(item['value']):
         return {'status': 'NO_VALUE'}
     hits = []
     for ln in lines:
         if not on_line(ln, item['box'], item['axis'], item['h']):
             continue
-        seg = segment_at(ln, item['box'])
-        if not seg:
-            continue
-        r = int(item['value']) / max(1e-6, seg['toPx'] - seg['fromPx'])
-        for o in dims:
-            if o is item or not o.get('value') or not INT.match(o['value']) or not on_line(ln, o['box'], o['axis'], o['h']):
+        segs = segments_of(ln)
+        peers = [o for o in dims if o is not item and o.get('value') and INT.match(o['value']) and int(o['value']) > 0 and on_line(ln, o['box'], o['axis'], o['h'])]
+        for seg in segs:  # addendum C: every segment of the line, not only the one under the label's centre
+            r = int(item['value']) / max(1e-6, seg['toPx'] - seg['fromPx'])
+            if r <= 0:
                 continue
-            so = segment_at(ln, o['box'])
-            if not so or same_segment(so, seg):
-                continue
-            ro = int(o['value']) / max(1e-6, so['toPx'] - so['fromPx'])
-            if r > 0 and ro > 0 and abs(r / ro - 1) <= PROPORTIONAL:
-                hits.append(seg)
-                break
+            # each peer contributes the segment under its own position; only the item's segment is left free
+            for o in peers:
+                so = segment_at(ln, o['box'])
+                if so and not same_segment(so, seg) and abs(r / (int(o['value']) / max(1e-6, so['toPx'] - so['fromPx'])) - 1) <= PROPORTIONAL:
+                    hits.append(seg)
+                    break
     hits = _dedupe_segments(hits)
     if len(hits) == 1:
         return {'status': 'TRUTH', 'segment': hits[0]}
+    # equal-length segments are equally proportional: only then does the label's position break the tie
+    along = {ln['id']: _along_across(ln, item['box'])[0] for ln in lines}
+    under = [h for h in hits if h['fromPx'] <= along[h['line']] <= h['toPx']]
+    if len(hits) > 1 and len(under) == 1:
+        return {'status': 'TRUTH', 'segment': under[0], 'tieBrokenByPosition': True}
     return {'status': 'AMBIGUOUS_BINDING' if hits else 'NO_LINE_TRUTH', **({'segments': hits} if hits else {})}
 
 

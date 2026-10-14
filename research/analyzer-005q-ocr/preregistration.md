@@ -100,3 +100,28 @@ with the higher top posterior". Ten B0 "wrong reads" were upside-down twins (`02
 700). B0 now uses the same max-p rule as B1, and both contenders report `RotationalTwins` (two turns of one ink both
 corroborate with different values) separately. First-run totals are kept in `label-chain-score-*-run1.json` for audit.
 Bindings, truth and thresholds are unchanged. The binding-on-truth table is added as a view of existing fields.
+
+## Addendum C (after the two focused reviews — defects, disclosed; no B1/B2 threshold changes)
+
+Review findings (`stage-reports/artifacts/analyzer-005q-ocr/review/`) reopened P0/P1 only:
+
+1. **P0 — segments.** Truth binding and B2 split a frozen line at EVERY mark, including marks production classes
+   `QUESTIONABLE` / `REJECTED`. On S5 three truth segments were 19–24 % off the page scale yet proportional to each other.
+   Now both use only marks of class `TICK` (a ticked run carries no class and keeps all its marks). LINE_WINDOW bands were
+   cut at every mark in the truth run; they are not re-run (more, narrower windows — a wider sampling frame, not a narrower one).
+2. **P0 — circular binding truth.** Truth tested only the segment containing the label centre, which is B2's own rule. Now
+   truth tests EVERY tick-to-tick segment of every line the label lies on and accepts the unique one proportional (±3 %) to
+   a segment of another truth label on the same line; several → `AMBIGUOUS_BINDING`. B2 is unchanged (centre rule), so it can
+   now be wrong. As an AUDIT only (never to choose truth), the scorer reports how many binding truths lie > 3 % from the 005O
+   transcription TRUE_SCALE.
+3. Orientation twins: when two turns of one ink both corroborate with different values the row is
+   `ROTATIONAL_TWIN_AMBIGUOUS` for that contender and leaves value right/wrong; values must have 2–5 digits; a leading-zero
+   reading (`002`, `081`) is not a dimension label (`NOT_A_DIMENSION:LEADING_ZERO`, usually a half turn). B2 merges B0's
+   orientation twins of one ink into one candidate (the preregistered "one candidate per ink").
+4. New first-loss class `READ_RIGHT_ENSEMBLE_REJECTED` (the crop reading was right, the ensemble kept another value) before
+   `READ_RIGHT_NOT_BOUND`.
+5. Detection is reported per truth tier; tier A (005O statement crops = B0's own boxes) cannot measure B0 recall, so the B0-vs-B1
+   discovery comparison is taken from tier B. B1 "false detections" on undecided truth are `UNVERIFIED`; only confirmed
+   `NOT_A_DIMENSION` counts as false. Orientation accuracy applies §4(c)'s ≥ 0.1 gap rule. Labels of the murajach inventory
+   with no truth item are `NOT_MEASURED`, not "missed".
+6. Disclosed: the `r > 0` / `value > 0` guards added to binding.py in 6d9bb9a (a division by zero on `00`); no numeric effect.

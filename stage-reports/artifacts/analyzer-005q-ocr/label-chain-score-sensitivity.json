@@ -4,16 +4,18 @@
  "sheets": [
   {
    "b0Binding": {
+    "CORRECT": 1,
     "NOT_BOUND": 19,
-    "NO_TRUTH": 10
+    "NO_TRUTH": 9
    },
    "b0Detected": 21,
    "b0Loss": {
     "NEVER_PROPOSED": 7,
     "NONE": 4,
     "READ_NOT_CORROBORATED": 3,
-    "READ_RIGHT_NOT_BOUND": 8,
-    "STATEMENT_VALUE_REWRITTEN": 6,
+    "READ_RIGHT_ENSEMBLE_NOT_KEPT": 2,
+    "READ_RIGHT_NOT_BOUND": 7,
+    "STATEMENT_VALUE_REWRITTEN": 5,
     "TOKEN_NOT_ON_A_CHAIN": 1
    },
    "b0OnlyDetected": 1,
@@ -21,41 +23,77 @@
    "b0RotationalTwins": 1,
    "b0StatementRewrittenAlthoughTokenWasRight": 0,
    "b0StatementRewrittenByOrigin": {
-    "CHAIN_CORRECTED": 5,
+    "CHAIN_CORRECTED": 4,
     "READ": 1
    },
-   "b0ValueCorrect": 18,
+   "b0ValueCorrect": 17,
    "b0ValueWrong": 0,
    "b1Boxes": 73,
    "b1Corroborating": 25,
    "b1Detected": 25,
    "b1FalseDetections": {
-    "AMBIGUOUS_READ": 3,
-    "NO_TRUTH_ITEM": 1
+    "UNVERIFIED": 4
    },
    "b1NewCorrectValues": 3,
    "b1OnlyDetected": 5,
-   "b1OrientationCorrect": 6,
+   "b1OrientationCorrect": 3,
    "b1OrientationWrong": 0,
    "b1RotationalTwins": 0,
    "b1ValueCorrect": 15,
    "b1ValueWrong": 0,
    "b2": {
-    "BOUND_NO_TRUTH": 17,
+    "BOUND_NO_TRUTH": 14,
+    "CORRECT": 2,
     "NO_CANDIDATE": 8,
-    "NO_LINE": 1,
-    "UNRESOLVED": 3
+    "NO_LINE": 2,
+    "SEGMENT_TAKEN": 1,
+    "UNRESOLVED": 2
    },
    "b2FalseBindingClasses": {},
    "b2FalseBindings": 0,
    "bindingOnTruth": {
-    "b0": {},
-    "b2": {}
+    "b0": {
+     "CORRECT": 1,
+     "NOT_BOUND": 3
+    },
+    "b2": {
+     "CORRECT": 2,
+     "NO_CANDIDATE": 2
+    }
    },
    "bindingTruth": {
-    "NO_LINE_TRUTH": 29
+    "AMBIGUOUS_BINDING": 2,
+    "NO_LINE_TRUTH": 23,
+    "TRUTH": 4
+   },
+   "bindingTruthAudit": {
+    "offTrueScaleOver3pct": 2,
+    "tieBrokenByPosition": 0
    },
    "case": "dom-w-glogownikach",
+   "detectionByTier": {
+    "LOCAL_DOUBLE_READ": {
+     "b0": 10,
+     "b0ValueCorrect": 8,
+     "b1": 9,
+     "b1ValueCorrect": 6,
+     "n": 12
+    },
+    "PRIOR_TRANSCRIPTION": {
+     "b0": 10,
+     "b0ValueCorrect": 9,
+     "b1": 10,
+     "b1ValueCorrect": 6,
+     "n": 10
+    },
+    "R1_CONFIDENT": {
+     "b0": 1,
+     "b0ValueCorrect": 0,
+     "b1": 6,
+     "b1ValueCorrect": 3,
+     "n": 7
+    }
+   },
    "dimensionLabels": 29,
    "family": "dom-w-glogownikach",
    "itemClasses": {
@@ -130,19 +168,20 @@
    "b1Corroborating": 19,
    "b1Detected": 13,
    "b1FalseDetections": {
-    "AMBIGUOUS_READ": 2,
-    "NOT_A_DIMENSION:OFF_LINE": 3
+    "NOT_A_DIMENSION:OFF_LINE": 3,
+    "UNVERIFIED": 2
    },
    "b1NewCorrectValues": 1,
    "b1OnlyDetected": 2,
-   "b1OrientationCorrect": 5,
+   "b1OrientationCorrect": 0,
    "b1OrientationWrong": 0,
    "b1RotationalTwins": 0,
    "b1ValueCorrect": 8,
    "b1ValueWrong": 0,
    "b2": {
-    "BOUND_NO_TRUTH": 10,
+    "BOUND_NO_TRUTH": 9,
     "NO_CANDIDATE": 3,
+    "NO_LINE": 1,
     "SEGMENT_TAKEN": 2
    },
    "b2FalseBindingClasses": {},
@@ -154,13 +193,41 @@
    "bindingTruth": {
     "NO_LINE_TRUTH": 15
    },
+   "bindingTruthAudit": {
+    "offTrueScaleOver3pct": 0,
+    "tieBrokenByPosition": 0
+   },
    "case": "dom-w-murajach",
+   "detectionByTier": {
+    "LOCAL_DOUBLE_READ": {
+     "b0": 9,
+     "b0ValueCorrect": 8,
+     "b1": 10,
+     "b1ValueCorrect": 5,
+     "n": 10
+    },
+    "PRIOR_TRANSCRIPTION": {
+     "b0": 3,
+     "b0ValueCorrect": 3,
+     "b1": 2,
+     "b1ValueCorrect": 2,
+     "n": 3
+    },
+    "R1_CONFIDENT": {
+     "b0": 1,
+     "b0ValueCorrect": 0,
+     "b1": 1,
+     "b1ValueCorrect": 1,
+     "n": 2
+    }
+   },
    "dimensionLabels": 15,
    "family": "dom-w-murajach",
    "itemClasses": {
     "AMBIGUOUS_READ": 69,
     "DIMENSION": 15,
-    "NOT_A_DIMENSION:OFF_LINE": 15,
+    "NOT_A_DIMENSION:LEADING_ZERO": 1,
+    "NOT_A_DIMENSION:OFF_LINE": 14,
     "NOT_A_DIMENSION:TEXT": 1,
     "UNREADABLE": 1
    },
@@ -170,18 +237,25 @@
    "murajachInventoryCheck": [
     {
      "b0Detected": true,
+     "b0Loss": [
+      "STATEMENT_VALUE_REWRITTEN"
+     ],
      "b0ValueCorrect": true,
      "b1Detected": true,
      "b1ValueCorrect": true,
      "b2": [
-      "BOUND_NO_TRUTH"
+      "NO_LINE"
      ],
      "class005O": "c",
      "printed": "1020",
-     "truthItemFound": true
+     "truthItemFound": true,
+     "truthTier": "PRIOR_TRANSCRIPTION"
     },
     {
      "b0Detected": true,
+     "b0Loss": [
+      "READ_RIGHT_NOT_BOUND"
+     ],
      "b0ValueCorrect": true,
      "b1Detected": true,
      "b1ValueCorrect": true,
@@ -190,10 +264,14 @@
      ],
      "class005O": "d",
      "printed": "740",
-     "truthItemFound": true
+     "truthItemFound": true,
+     "truthTier": "LOCAL_DOUBLE_READ"
     },
     {
      "b0Detected": true,
+     "b0Loss": [
+      "READ_NOT_CORROBORATED"
+     ],
      "b0ValueCorrect": false,
      "b1Detected": true,
      "b1ValueCorrect": false,
@@ -202,10 +280,14 @@
      ],
      "class005O": "b",
      "printed": "402",
-     "truthItemFound": true
+     "truthItemFound": true,
+     "truthTier": "LOCAL_DOUBLE_READ"
     },
     {
      "b0Detected": true,
+     "b0Loss": [
+      "READ_RIGHT_NOT_BOUND"
+     ],
      "b0ValueCorrect": true,
      "b1Detected": true,
      "b1ValueCorrect": true,
@@ -214,10 +296,14 @@
      ],
      "class005O": "c",
      "printed": "410",
-     "truthItemFound": true
+     "truthItemFound": true,
+     "truthTier": "LOCAL_DOUBLE_READ"
     },
     {
      "b0Detected": true,
+     "b0Loss": [
+      "STATEMENT_VALUE_REWRITTEN"
+     ],
      "b0ValueCorrect": true,
      "b1Detected": true,
      "b1ValueCorrect": true,
@@ -226,10 +312,14 @@
      ],
      "class005O": "c",
      "printed": "252",
-     "truthItemFound": true
+     "truthItemFound": true,
+     "truthTier": "PRIOR_TRANSCRIPTION"
     },
     {
      "b0Detected": true,
+     "b0Loss": [
+      "READ_RIGHT_NOT_BOUND"
+     ],
      "b0ValueCorrect": true,
      "b1Detected": true,
      "b1ValueCorrect": false,
@@ -238,10 +328,14 @@
      ],
      "class005O": "c",
      "printed": "240",
-     "truthItemFound": true
+     "truthItemFound": true,
+     "truthTier": "LOCAL_DOUBLE_READ"
     },
     {
      "b0Detected": true,
+     "b0Loss": [
+      "READ_RIGHT_NOT_BOUND"
+     ],
      "b0ValueCorrect": true,
      "b1Detected": true,
      "b1ValueCorrect": true,
@@ -250,10 +344,14 @@
      ],
      "class005O": "c",
      "printed": "582",
-     "truthItemFound": true
+     "truthItemFound": true,
+     "truthTier": "LOCAL_DOUBLE_READ"
     },
     {
      "b0Detected": true,
+     "b0Loss": [
+      "STATEMENT_VALUE_REWRITTEN"
+     ],
      "b0ValueCorrect": true,
      "b1Detected": false,
      "b1ValueCorrect": false,
@@ -262,10 +360,14 @@
      ],
      "class005O": "c",
      "printed": "115",
-     "truthItemFound": true
+     "truthItemFound": true,
+     "truthTier": "PRIOR_TRANSCRIPTION"
     },
     {
      "b0Detected": true,
+     "b0Loss": [
+      "READ_NOT_CORROBORATED"
+     ],
      "b0ValueCorrect": false,
      "b1Detected": false,
      "b1ValueCorrect": false,
@@ -274,20 +376,20 @@
      ],
      "class005O": "c",
      "printed": "153",
-     "truthItemFound": true
+     "truthItemFound": true,
+     "truthTier": "R1_CONFIDENT"
     },
     {
-     "b0Detected": false,
-     "b0ValueCorrect": false,
-     "b1Detected": false,
-     "b1ValueCorrect": false,
-     "b2": [],
      "class005O": "c",
      "printed": "202",
+     "status": "NOT_MEASURED",
      "truthItemFound": false
     },
     {
      "b0Detected": false,
+     "b0Loss": [
+      "NEVER_PROPOSED"
+     ],
      "b0ValueCorrect": false,
      "b1Detected": true,
      "b1ValueCorrect": true,
@@ -296,20 +398,20 @@
      ],
      "class005O": "a",
      "printed": "160",
-     "truthItemFound": true
+     "truthItemFound": true,
+     "truthTier": "R1_CONFIDENT"
     },
     {
-     "b0Detected": false,
-     "b0ValueCorrect": false,
-     "b1Detected": false,
-     "b1ValueCorrect": false,
-     "b2": [],
      "class005O": "a",
      "printed": "256",
+     "status": "NOT_MEASURED",
      "truthItemFound": false
     },
     {
      "b0Detected": false,
+     "b0Loss": [
+      "NEVER_PROPOSED"
+     ],
      "b0ValueCorrect": false,
      "b1Detected": true,
      "b1ValueCorrect": false,
@@ -318,26 +420,19 @@
      ],
      "class005O": "a",
      "printed": "314",
-     "truthItemFound": true
+     "truthItemFound": true,
+     "truthTier": "LOCAL_DOUBLE_READ"
     },
     {
-     "b0Detected": false,
-     "b0ValueCorrect": false,
-     "b1Detected": false,
-     "b1ValueCorrect": false,
-     "b2": [],
      "class005O": "a",
      "printed": "209",
+     "status": "NOT_MEASURED",
      "truthItemFound": false
     },
     {
-     "b0Detected": false,
-     "b0ValueCorrect": false,
-     "b1Detected": false,
-     "b1ValueCorrect": false,
-     "b2": [],
      "class005O": "a",
      "printed": "95",
+     "status": "NOT_MEASURED",
      "truthItemFound": false
     }
    ],
@@ -378,42 +473,46 @@
   },
   {
    "b0Binding": {
-    "NOT_BOUND": 6,
+    "NOT_BOUND": 5,
     "NO_TRUTH": 5
    },
    "b0Detected": 8,
    "b0Loss": {
-    "NEVER_PROPOSED": 3,
+    "NEVER_PROPOSED": 2,
     "READ_NOT_CORROBORATED": 1,
-    "READ_RIGHT_NOT_BOUND": 3,
-    "STATEMENT_VALUE_REWRITTEN": 4
+    "READ_RIGHT_ENSEMBLE_NOT_KEPT": 2,
+    "READ_RIGHT_NOT_BOUND": 1,
+    "ROTATIONAL_TWIN_AMBIGUOUS": 2,
+    "STATEMENT_VALUE_REWRITTEN": 2
    },
    "b0OnlyDetected": 0,
    "b0Proposals": 39,
    "b0RotationalTwins": 2,
    "b0StatementRewrittenAlthoughTokenWasRight": 0,
    "b0StatementRewrittenByOrigin": {
-    "CHAIN_CORRECTED": 4
+    "CHAIN_CORRECTED": 2
    },
-   "b0ValueCorrect": 7,
+   "b0ValueCorrect": 5,
    "b0ValueWrong": 0,
    "b1Boxes": 29,
    "b1Corroborating": 22,
    "b1Detected": 10,
    "b1FalseDetections": {
-    "AMBIGUOUS_READ": 5,
-    "NOT_A_DIMENSION:OFF_LINE": 3
+    "NOT_A_DIMENSION:LEADING_ZERO": 1,
+    "NOT_A_DIMENSION:OFF_LINE": 2,
+    "UNVERIFIED": 5
    },
    "b1NewCorrectValues": 1,
    "b1OnlyDetected": 2,
-   "b1OrientationCorrect": 3,
+   "b1OrientationCorrect": 1,
    "b1OrientationWrong": 0,
    "b1RotationalTwins": 0,
    "b1ValueCorrect": 7,
    "b1ValueWrong": 1,
    "b2": {
-    "BOUND_NO_TRUTH": 8,
-    "NO_CANDIDATE": 3
+    "BOUND_NO_TRUTH": 5,
+    "NO_CANDIDATE": 2,
+    "NO_LINE": 3
    },
    "b2FalseBindingClasses": {},
    "b2FalseBindings": 0,
@@ -422,15 +521,43 @@
     "b2": {}
    },
    "bindingTruth": {
-    "NO_LINE_TRUTH": 11
+    "NO_LINE_TRUTH": 10
+   },
+   "bindingTruthAudit": {
+    "offTrueScaleOver3pct": 0,
+    "tieBrokenByPosition": 0
    },
    "case": "dom-w-murajach",
-   "dimensionLabels": 11,
+   "detectionByTier": {
+    "LOCAL_DOUBLE_READ": {
+     "b0": 3,
+     "b0ValueCorrect": 3,
+     "b1": 4,
+     "b1ValueCorrect": 3,
+     "n": 4
+    },
+    "PRIOR_TRANSCRIPTION": {
+     "b0": 5,
+     "b0ValueCorrect": 2,
+     "b1": 5,
+     "b1ValueCorrect": 4,
+     "n": 5
+    },
+    "R1_CONFIDENT": {
+     "b0": 0,
+     "b0ValueCorrect": 0,
+     "b1": 1,
+     "b1ValueCorrect": 0,
+     "n": 1
+    }
+   },
+   "dimensionLabels": 10,
    "family": "dom-w-murajach",
    "itemClasses": {
     "AMBIGUOUS_READ": 53,
-    "DIMENSION": 11,
-    "NOT_A_DIMENSION:OFF_LINE": 9,
+    "DIMENSION": 10,
+    "NOT_A_DIMENSION:LEADING_ZERO": 2,
+    "NOT_A_DIMENSION:OFF_LINE": 8,
     "NOT_A_DIMENSION:TEXT": 1
    },
    "items": 74,
@@ -468,7 +595,7 @@
    "truthTier": {
     "LOCAL_DOUBLE_READ": 4,
     "PRIOR_TRANSCRIPTION": 5,
-    "R1_CONFIDENT": 2
+    "R1_CONFIDENT": 1
    }
   },
   {
@@ -499,12 +626,12 @@
    "b1Corroborating": 20,
    "b1Detected": 16,
    "b1FalseDetections": {
-    "AMBIGUOUS_READ": 3,
-    "NOT_A_DIMENSION:OFF_LINE": 1
+    "NOT_A_DIMENSION:OFF_LINE": 1,
+    "UNVERIFIED": 3
    },
    "b1NewCorrectValues": 1,
    "b1OnlyDetected": 3,
-   "b1OrientationCorrect": 5,
+   "b1OrientationCorrect": 1,
    "b1OrientationWrong": 0,
    "b1RotationalTwins": 0,
    "b1ValueCorrect": 10,
@@ -529,7 +656,34 @@
     "NO_LINE_TRUTH": 14,
     "TRUTH": 3
    },
+   "bindingTruthAudit": {
+    "offTrueScaleOver3pct": 0,
+    "tieBrokenByPosition": 1
+   },
    "case": "dom-w-gozdzikowcach",
+   "detectionByTier": {
+    "LOCAL_DOUBLE_READ": {
+     "b0": 7,
+     "b0ValueCorrect": 7,
+     "b1": 7,
+     "b1ValueCorrect": 5,
+     "n": 7
+    },
+    "PRIOR_TRANSCRIPTION": {
+     "b0": 6,
+     "b0ValueCorrect": 5,
+     "b1": 6,
+     "b1ValueCorrect": 4,
+     "n": 6
+    },
+    "R1_CONFIDENT": {
+     "b0": 0,
+     "b0ValueCorrect": 0,
+     "b1": 3,
+     "b1ValueCorrect": 1,
+     "n": 4
+    }
+   },
    "dimensionLabels": 17,
    "family": "dom-w-gozdzikowcach",
    "itemClasses": {
@@ -585,19 +739,18 @@
   },
   {
    "b0Binding": {
-    "CORRECT": 2,
-    "NOT_BOUND": 11,
-    "NO_TRUTH": 6,
-    "WRONG": 2
+    "CORRECT": 5,
+    "NOT_BOUND": 10,
+    "NO_TRUTH": 5
    },
    "b0Detected": 15,
    "b0Loss": {
-    "NEVER_PROPOSED": 4,
-    "NONE": 4,
+    "NEVER_PROPOSED": 3,
+    "NONE": 6,
     "READ_NOT_CORROBORATED": 3,
-    "READ_RIGHT_BOUND_WRONG": 2,
     "READ_RIGHT_NOT_BOUND": 2,
-    "STATEMENT_VALUE_REWRITTEN": 4,
+    "ROTATIONAL_TWIN_AMBIGUOUS": 1,
+    "STATEMENT_VALUE_REWRITTEN": 3,
     "TOKEN_NOT_ON_A_CHAIN": 2
    },
    "b0OnlyDetected": 0,
@@ -605,55 +758,84 @@
    "b0RotationalTwins": 3,
    "b0StatementRewrittenAlthoughTokenWasRight": 0,
    "b0StatementRewrittenByOrigin": {
-    "CHAIN_CORRECTED": 4
+    "CHAIN_CORRECTED": 3
    },
-   "b0ValueCorrect": 12,
+   "b0ValueCorrect": 9,
    "b0ValueWrong": 0,
    "b1Boxes": 57,
    "b1Corroborating": 23,
    "b1Detected": 19,
    "b1FalseDetections": {
-    "AMBIGUOUS_READ": 4,
-    "NOT_A_DIMENSION:OFF_LINE": 1
+    "NOT_A_DIMENSION:OFF_LINE": 1,
+    "UNVERIFIED": 4
    },
    "b1NewCorrectValues": 1,
    "b1OnlyDetected": 4,
-   "b1OrientationCorrect": 5,
+   "b1OrientationCorrect": 2,
    "b1OrientationWrong": 0,
    "b1RotationalTwins": 1,
-   "b1ValueCorrect": 13,
+   "b1ValueCorrect": 12,
    "b1ValueWrong": 0,
    "b2": {
-    "BOUND_NO_TRUTH": 9,
+    "BOUND_NO_TRUTH": 7,
     "CORRECT": 5,
-    "NO_CANDIDATE": 6,
-    "UNRESOLVED": 1
+    "NO_CANDIDATE": 5,
+    "SEGMENT_TAKEN": 1,
+    "UNRESOLVED": 1,
+    "WRONG": 1
    },
    "b2FalseBindingClasses": {},
    "b2FalseBindings": 0,
    "bindingOnTruth": {
     "b0": {
-     "CORRECT": 2,
-     "NOT_BOUND": 3,
-     "WRONG": 2
+     "CORRECT": 5,
+     "NOT_BOUND": 2
     },
     "b2": {
      "CORRECT": 5,
-     "NO_CANDIDATE": 1,
-     "UNRESOLVED": 1
+     "UNRESOLVED": 1,
+     "WRONG": 1
     }
    },
    "bindingTruth": {
-    "NO_LINE_TRUTH": 14,
+    "NO_LINE_TRUTH": 13,
     "TRUTH": 7
    },
+   "bindingTruthAudit": {
+    "offTrueScaleOver3pct": 1,
+    "tieBrokenByPosition": 2
+   },
    "case": "marcowki",
-   "dimensionLabels": 21,
+   "detectionByTier": {
+    "LOCAL_DOUBLE_READ": {
+     "b0": 5,
+     "b0ValueCorrect": 2,
+     "b1": 6,
+     "b1ValueCorrect": 5,
+     "n": 7
+    },
+    "PRIOR_TRANSCRIPTION": {
+     "b0": 10,
+     "b0ValueCorrect": 7,
+     "b1": 10,
+     "b1ValueCorrect": 7,
+     "n": 10
+    },
+    "R1_CONFIDENT": {
+     "b0": 0,
+     "b0ValueCorrect": 0,
+     "b1": 3,
+     "b1ValueCorrect": 0,
+     "n": 3
+    }
+   },
+   "dimensionLabels": 20,
    "family": "marcowki",
    "itemClasses": {
     "AMBIGUOUS_READ": 84,
-    "DIMENSION": 21,
-    "NOT_A_DIMENSION:OFF_LINE": 10,
+    "DIMENSION": 20,
+    "NOT_A_DIMENSION:LEADING_ZERO": 2,
+    "NOT_A_DIMENSION:OFF_LINE": 9,
     "NOT_A_DIMENSION:TEXT": 3,
     "UNREADABLE": 3
    },
@@ -679,7 +861,13 @@
     },
     "B2": {
      "HORIZONTAL": null,
-     "VERTICAL": null,
+     "VERTICAL": {
+      "errVsTrueScale": 0.0009,
+      "labels": 4,
+      "lines": 2,
+      "of": 7,
+      "scale": 2.64489
+     },
      "axisConsistent": false,
      "falseConfident": false
     },
@@ -691,7 +879,7 @@
     "AGREES": 10
    },
    "truthTier": {
-    "LOCAL_DOUBLE_READ": 8,
+    "LOCAL_DOUBLE_READ": 7,
     "PRIOR_TRANSCRIPTION": 10,
     "R1_CONFIDENT": 3
    }
@@ -699,71 +887,107 @@
   {
    "b0Binding": {
     "CORRECT": 5,
-    "NOT_BOUND": 19,
-    "NO_TRUTH": 12
+    "NOT_BOUND": 18,
+    "NO_TRUTH": 10,
+    "WRONG": 2
    },
-   "b0Detected": 30,
+   "b0Detected": 29,
    "b0Loss": {
     "NEVER_PROPOSED": 5,
-    "NONE": 6,
+    "NONE": 7,
     "READ_NOT_CORROBORATED": 5,
-    "READ_RIGHT_NOT_BOUND": 7,
-    "READ_WRONG": 2,
-    "STATEMENT_VALUE_REWRITTEN": 10,
+    "READ_RIGHT_BOUND_WRONG": 2,
+    "READ_RIGHT_ENSEMBLE_NOT_KEPT": 1,
+    "READ_RIGHT_NOT_BOUND": 6,
+    "ROTATIONAL_TWIN_AMBIGUOUS": 1,
+    "STATEMENT_VALUE_REWRITTEN": 7,
     "TOKEN_NOT_ON_A_CHAIN": 1
    },
-   "b0OnlyDetected": 5,
+   "b0OnlyDetected": 4,
    "b0Proposals": 132,
-   "b0RotationalTwins": 4,
-   "b0StatementRewrittenAlthoughTokenWasRight": 2,
+   "b0RotationalTwins": 3,
+   "b0StatementRewrittenAlthoughTokenWasRight": 1,
    "b0StatementRewrittenByOrigin": {
-    "CHAIN_CORRECTED": 9,
+    "CHAIN_CORRECTED": 6,
     "READ": 1
    },
-   "b0ValueCorrect": 23,
-   "b0ValueWrong": 2,
+   "b0ValueCorrect": 21,
+   "b0ValueWrong": 0,
    "b1Boxes": 80,
    "b1Corroborating": 39,
    "b1Detected": 29,
    "b1FalseDetections": {
-    "AMBIGUOUS_READ": 3,
-    "NOT_A_DIMENSION:OFF_LINE": 6
+    "NOT_A_DIMENSION:OFF_LINE": 6,
+    "UNVERIFIED": 3
    },
    "b1NewCorrectValues": 1,
    "b1OnlyDetected": 4,
-   "b1OrientationCorrect": 5,
+   "b1OrientationCorrect": 1,
    "b1OrientationWrong": 0,
    "b1RotationalTwins": 1,
-   "b1ValueCorrect": 21,
+   "b1ValueCorrect": 20,
    "b1ValueWrong": 0,
    "b2": {
-    "BOUND_NO_TRUTH": 19,
+    "BOUND_NO_TRUTH": 16,
     "CORRECT": 6,
-    "NO_CANDIDATE": 10,
-    "SEGMENT_TAKEN": 1
+    "NO_CANDIDATE": 9,
+    "NO_LINE": 1,
+    "SEGMENT_TAKEN": 2,
+    "WRONG": 1
    },
    "b2FalseBindingClasses": {},
    "b2FalseBindings": 0,
    "bindingOnTruth": {
     "b0": {
      "CORRECT": 5,
-     "NOT_BOUND": 2
+     "NOT_BOUND": 3,
+     "WRONG": 2
     },
     "b2": {
      "CORRECT": 6,
-     "NO_CANDIDATE": 1
+     "NO_CANDIDATE": 2,
+     "SEGMENT_TAKEN": 1,
+     "WRONG": 1
     }
    },
    "bindingTruth": {
-    "NO_LINE_TRUTH": 29,
-    "TRUTH": 7
+    "NO_LINE_TRUTH": 25,
+    "TRUTH": 10
+   },
+   "bindingTruthAudit": {
+    "offTrueScaleOver3pct": 3,
+    "tieBrokenByPosition": 0
    },
    "case": "kosacce-clean",
-   "dimensionLabels": 36,
+   "detectionByTier": {
+    "LOCAL_DOUBLE_READ": {
+     "b0": 5,
+     "b0ValueCorrect": 3,
+     "b1": 5,
+     "b1ValueCorrect": 5,
+     "n": 5
+    },
+    "PRIOR_TRANSCRIPTION": {
+     "b0": 20,
+     "b0ValueCorrect": 15,
+     "b1": 17,
+     "b1ValueCorrect": 12,
+     "n": 20
+    },
+    "R1_CONFIDENT": {
+     "b0": 4,
+     "b0ValueCorrect": 3,
+     "b1": 7,
+     "b1ValueCorrect": 3,
+     "n": 10
+    }
+   },
+   "dimensionLabels": 35,
    "family": "kosacce",
    "itemClasses": {
     "AMBIGUOUS_READ": 116,
-    "DIMENSION": 36,
+    "DIMENSION": 35,
+    "NOT_A_DIMENSION:LEADING_ZERO": 1,
     "NOT_A_DIMENSION:OFF_LINE": 20,
     "NOT_A_DIMENSION:TEXT": 3,
     "UNREADABLE": 10
@@ -791,11 +1015,11 @@
     },
     "B2": {
      "HORIZONTAL": {
-      "errVsTrueScale": -0.0003,
-      "labels": 5,
+      "errVsTrueScale": -0.0004,
+      "labels": 4,
       "lines": 2,
-      "of": 16,
-      "scale": 2.4058
+      "of": 13,
+      "scale": 2.40543
      },
      "VERTICAL": null,
      "axisConsistent": false,
@@ -813,22 +1037,24 @@
    "truthTier": {
     "LOCAL_DOUBLE_READ": 5,
     "PRIOR_TRANSCRIPTION": 20,
-    "R1_CONFIDENT": 11
+    "R1_CONFIDENT": 10
    }
   },
   {
    "b0Binding": {
     "CORRECT": 3,
-    "NOT_BOUND": 13,
-    "NO_TRUTH": 6
+    "NOT_BOUND": 12,
+    "NO_TRUTH": 5,
+    "WRONG": 1
    },
    "b0Detected": 15,
    "b0Loss": {
-    "NEVER_PROPOSED": 7,
+    "NEVER_PROPOSED": 6,
     "NONE": 5,
     "READ_NOT_CORROBORATED": 2,
-    "READ_RIGHT_NOT_BOUND": 4,
-    "READ_WRONG": 1,
+    "READ_RIGHT_BOUND_WRONG": 1,
+    "READ_RIGHT_NOT_BOUND": 3,
+    "ROTATIONAL_TWIN_AMBIGUOUS": 1,
     "STATEMENT_VALUE_REWRITTEN": 3
    },
    "b0OnlyDetected": 1,
@@ -839,49 +1065,80 @@
     "CHAIN_CORRECTED": 2,
     "READ": 1
    },
-   "b0ValueCorrect": 12,
-   "b0ValueWrong": 1,
+   "b0ValueCorrect": 11,
+   "b0ValueWrong": 0,
    "b1Boxes": 61,
    "b1Corroborating": 25,
    "b1Detected": 20,
    "b1FalseDetections": {
-    "AMBIGUOUS_READ": 4,
-    "NOT_A_DIMENSION:OFF_LINE": 2
+    "NOT_A_DIMENSION:OFF_LINE": 2,
+    "UNVERIFIED": 4
    },
    "b1NewCorrectValues": 4,
    "b1OnlyDetected": 6,
-   "b1OrientationCorrect": 2,
+   "b1OrientationCorrect": 1,
    "b1OrientationWrong": 0,
    "b1RotationalTwins": 2,
-   "b1ValueCorrect": 12,
-   "b1ValueWrong": 1,
+   "b1ValueCorrect": 11,
+   "b1ValueWrong": 0,
    "b2": {
-    "BOUND_NO_TRUTH": 13,
+    "BOUND_NO_TRUTH": 11,
     "CORRECT": 4,
-    "NO_CANDIDATE": 4,
-    "UNRESOLVED": 1
+    "NO_CANDIDATE": 3,
+    "NO_LINE": 2,
+    "WRONG": 1
    },
    "b2FalseBindingClasses": {},
    "b2FalseBindings": 0,
    "bindingOnTruth": {
     "b0": {
      "CORRECT": 3,
-     "NOT_BOUND": 1
+     "NOT_BOUND": 1,
+     "WRONG": 1
     },
     "b2": {
-     "CORRECT": 4
+     "CORRECT": 4,
+     "WRONG": 1
     }
    },
    "bindingTruth": {
-    "NO_LINE_TRUTH": 18,
-    "TRUTH": 4
+    "NO_LINE_TRUTH": 16,
+    "TRUTH": 5
+   },
+   "bindingTruthAudit": {
+    "offTrueScaleOver3pct": 1,
+    "tieBrokenByPosition": 0
    },
    "case": "dom-w-zurawkach",
-   "dimensionLabels": 22,
+   "detectionByTier": {
+    "LOCAL_DOUBLE_READ": {
+     "b0": 5,
+     "b0ValueCorrect": 3,
+     "b1": 5,
+     "b1ValueCorrect": 2,
+     "n": 5
+    },
+    "PRIOR_TRANSCRIPTION": {
+     "b0": 9,
+     "b0ValueCorrect": 8,
+     "b1": 9,
+     "b1ValueCorrect": 5,
+     "n": 9
+    },
+    "R1_CONFIDENT": {
+     "b0": 1,
+     "b0ValueCorrect": 0,
+     "b1": 6,
+     "b1ValueCorrect": 4,
+     "n": 7
+    }
+   },
+   "dimensionLabels": 21,
    "family": "dom-w-zurawkach",
    "itemClasses": {
     "AMBIGUOUS_READ": 90,
-    "DIMENSION": 22,
+    "DIMENSION": 21,
+    "NOT_A_DIMENSION:LEADING_ZERO": 1,
     "NOT_A_DIMENSION:OFF_LINE": 7,
     "NOT_A_DIMENSION:TEXT": 6
    },
@@ -910,7 +1167,7 @@
       "errVsTrueScale": -0.0004,
       "labels": 3,
       "lines": 2,
-      "of": 11,
+      "of": 9,
       "scale": 2.21805
      },
      "VERTICAL": null,
@@ -929,20 +1186,22 @@
    "truthTier": {
     "LOCAL_DOUBLE_READ": 5,
     "PRIOR_TRANSCRIPTION": 9,
-    "R1_CONFIDENT": 8
+    "R1_CONFIDENT": 7
    }
   },
   {
    "b0Binding": {
+    "CORRECT": 2,
     "NOT_BOUND": 18,
-    "NO_TRUTH": 6
+    "NO_TRUTH": 4
    },
    "b0Detected": 13,
    "b0Loss": {
     "NEVER_PROPOSED": 6,
     "NONE": 4,
     "READ_NOT_CORROBORATED": 2,
-    "READ_RIGHT_NOT_BOUND": 6,
+    "READ_RIGHT_ENSEMBLE_NOT_KEPT": 1,
+    "READ_RIGHT_NOT_BOUND": 5,
     "STATEMENT_VALUE_REWRITTEN": 1,
     "TOKEN_NOT_ON_A_CHAIN": 5
    },
@@ -959,33 +1218,65 @@
    "b1Corroborating": 21,
    "b1Detected": 19,
    "b1FalseDetections": {
-    "AMBIGUOUS_READ": 5,
-    "NOT_A_DIMENSION:OFF_LINE": 1
+    "NOT_A_DIMENSION:OFF_LINE": 1,
+    "UNVERIFIED": 5
    },
    "b1NewCorrectValues": 0,
    "b1OnlyDetected": 7,
-   "b1OrientationCorrect": 5,
+   "b1OrientationCorrect": 3,
    "b1OrientationWrong": 0,
    "b1RotationalTwins": 0,
    "b1ValueCorrect": 9,
    "b1ValueWrong": 2,
    "b2": {
     "BOUND_NO_TRUTH": 8,
+    "CORRECT": 2,
     "NO_CANDIDATE": 11,
     "NO_LINE": 1,
-    "SEGMENT_TAKEN": 2,
-    "UNRESOLVED": 2
+    "SEGMENT_TAKEN": 2
    },
    "b2FalseBindingClasses": {},
    "b2FalseBindings": 0,
    "bindingOnTruth": {
-    "b0": {},
-    "b2": {}
+    "b0": {
+     "CORRECT": 2
+    },
+    "b2": {
+     "CORRECT": 2
+    }
    },
    "bindingTruth": {
-    "NO_LINE_TRUTH": 24
+    "NO_LINE_TRUTH": 22,
+    "TRUTH": 2
+   },
+   "bindingTruthAudit": {
+    "offTrueScaleOver3pct": 0,
+    "tieBrokenByPosition": 0
    },
    "case": "A06",
+   "detectionByTier": {
+    "LOCAL_DOUBLE_READ": {
+     "b0": 6,
+     "b0ValueCorrect": 5,
+     "b1": 6,
+     "b1ValueCorrect": 5,
+     "n": 8
+    },
+    "PRIOR_TRANSCRIPTION": {
+     "b0": 6,
+     "b0ValueCorrect": 5,
+     "b1": 6,
+     "b1ValueCorrect": 3,
+     "n": 6
+    },
+    "R1_CONFIDENT": {
+     "b0": 1,
+     "b0ValueCorrect": 1,
+     "b1": 7,
+     "b1ValueCorrect": 1,
+     "n": 10
+    }
+   },
    "dimensionLabels": 24,
    "family": "A06",
    "itemClasses": {
@@ -1017,7 +1308,13 @@
     },
     "B2": {
      "HORIZONTAL": null,
-     "VERTICAL": null,
+     "VERTICAL": {
+      "errVsTrueScale": 0.0,
+      "labels": 3,
+      "lines": 2,
+      "of": 4,
+      "scale": 2.0724
+     },
      "axisConsistent": false,
      "falseConfident": false
     },
@@ -1073,7 +1370,20 @@
    "bindingTruth": {
     "NO_LINE_TRUTH": 1
    },
+   "bindingTruthAudit": {
+    "offTrueScaleOver3pct": 0,
+    "tieBrokenByPosition": 0
+   },
    "case": "D02",
+   "detectionByTier": {
+    "R1_CONFIDENT": {
+     "b0": 1,
+     "b0ValueCorrect": 0,
+     "b1": 0,
+     "b1ValueCorrect": 0,
+     "n": 1
+    }
+   },
    "dimensionLabels": 1,
    "family": "D02",
    "itemClasses": {
@@ -1115,58 +1425,64 @@
  "totals": {
   "MAIN": {
    "b0Binding": {
-    "CORRECT": 10,
-    "NOT_BOUND": 99,
-    "NO_TRUTH": 46
+    "CORRECT": 13,
+    "NOT_BOUND": 96,
+    "NO_TRUTH": 40,
+    "WRONG": 3
    },
-   "b0Detected": 114,
+   "b0Detected": 113,
    "b0Loss": {
-    "NEVER_PROPOSED": 33,
-    "NONE": 20,
+    "NEVER_PROPOSED": 31,
+    "NONE": 21,
     "READ_NOT_CORROBORATED": 17,
-    "READ_RIGHT_NOT_BOUND": 43,
-    "READ_WRONG": 3,
-    "STATEMENT_VALUE_REWRITTEN": 31,
+    "READ_RIGHT_BOUND_WRONG": 3,
+    "READ_RIGHT_ENSEMBLE_NOT_KEPT": 6,
+    "READ_RIGHT_NOT_BOUND": 37,
+    "ROTATIONAL_TWIN_AMBIGUOUS": 4,
+    "STATEMENT_VALUE_REWRITTEN": 25,
     "TOKEN_NOT_ON_A_CHAIN": 8
    },
-   "b0OnlyDetected": 11,
-   "b0RotationalTwins": 9,
-   "b0StatementRewrittenAlthoughTokenWasRight": 6,
+   "b0OnlyDetected": 10,
+   "b0RotationalTwins": 8,
+   "b0StatementRewrittenAlthoughTokenWasRight": 5,
    "b0StatementRewrittenByOrigin": {
-    "CHAIN_CORRECTED": 28,
+    "CHAIN_CORRECTED": 22,
     "READ": 3
    },
-   "b0ValueCorrect": 94,
-   "b0ValueWrong": 3,
+   "b0ValueCorrect": 88,
+   "b0ValueWrong": 0,
    "b1Detected": 132,
    "b1FalseDetections": {
-    "AMBIGUOUS_READ": 25,
-    "NOT_A_DIMENSION:OFF_LINE": 16,
-    "NO_TRUTH_ITEM": 1
+    "NOT_A_DIMENSION:LEADING_ZERO": 1,
+    "NOT_A_DIMENSION:OFF_LINE": 15,
+    "UNVERIFIED": 26
    },
    "b1NewCorrectValues": 11,
    "b1OnlyDetected": 29,
    "b1RotationalTwins": 3,
-   "b1ValueCorrect": 82,
-   "b1ValueWrong": 4,
+   "b1ValueCorrect": 80,
+   "b1ValueWrong": 3,
    "b2": {
-    "BOUND_NO_TRUTH": 85,
-    "CORRECT": 13,
-    "NO_CANDIDATE": 44,
-    "NO_LINE": 2,
-    "SEGMENT_TAKEN": 5,
-    "UNRESOLVED": 6
+    "BOUND_NO_TRUTH": 73,
+    "CORRECT": 17,
+    "NO_CANDIDATE": 41,
+    "NO_LINE": 10,
+    "SEGMENT_TAKEN": 7,
+    "UNRESOLVED": 2,
+    "WRONG": 2
    },
    "b2FalseBindings": 0,
    "bindingTruth": {
-    "NO_LINE_TRUTH": 141,
-    "TRUTH": 14
+    "AMBIGUOUS_BINDING": 2,
+    "NO_LINE_TRUTH": 126,
+    "TRUTH": 24
    },
-   "dimensionLabels": 155,
+   "dimensionLabels": 152,
    "itemClasses": {
     "AMBIGUOUS_READ": 706,
-    "DIMENSION": 155,
-    "NOT_A_DIMENSION:OFF_LINE": 91,
+    "DIMENSION": 152,
+    "NOT_A_DIMENSION:LEADING_ZERO": 5,
+    "NOT_A_DIMENSION:OFF_LINE": 89,
     "NOT_A_DIMENSION:TEXT": 21,
     "UNREADABLE": 20
    },
@@ -1183,60 +1499,62 @@
    "truthTier": {
     "LOCAL_DOUBLE_READ": 51,
     "PRIOR_TRANSCRIPTION": 59,
-    "R1_CONFIDENT": 45
+    "R1_CONFIDENT": 42
    }
   },
   "SMOKE": {
    "b0Binding": {
-    "CORRECT": 2,
-    "NOT_BOUND": 11,
-    "NO_TRUTH": 6,
-    "WRONG": 2
+    "CORRECT": 5,
+    "NOT_BOUND": 10,
+    "NO_TRUTH": 5
    },
    "b0Detected": 15,
    "b0Loss": {
-    "NEVER_PROPOSED": 4,
-    "NONE": 4,
+    "NEVER_PROPOSED": 3,
+    "NONE": 6,
     "READ_NOT_CORROBORATED": 3,
-    "READ_RIGHT_BOUND_WRONG": 2,
     "READ_RIGHT_NOT_BOUND": 2,
-    "STATEMENT_VALUE_REWRITTEN": 4,
+    "ROTATIONAL_TWIN_AMBIGUOUS": 1,
+    "STATEMENT_VALUE_REWRITTEN": 3,
     "TOKEN_NOT_ON_A_CHAIN": 2
    },
    "b0OnlyDetected": 0,
    "b0RotationalTwins": 3,
    "b0StatementRewrittenAlthoughTokenWasRight": 0,
    "b0StatementRewrittenByOrigin": {
-    "CHAIN_CORRECTED": 4
+    "CHAIN_CORRECTED": 3
    },
-   "b0ValueCorrect": 12,
+   "b0ValueCorrect": 9,
    "b0ValueWrong": 0,
    "b1Detected": 19,
    "b1FalseDetections": {
-    "AMBIGUOUS_READ": 4,
-    "NOT_A_DIMENSION:OFF_LINE": 1
+    "NOT_A_DIMENSION:OFF_LINE": 1,
+    "UNVERIFIED": 4
    },
    "b1NewCorrectValues": 1,
    "b1OnlyDetected": 4,
    "b1RotationalTwins": 1,
-   "b1ValueCorrect": 13,
+   "b1ValueCorrect": 12,
    "b1ValueWrong": 0,
    "b2": {
-    "BOUND_NO_TRUTH": 9,
+    "BOUND_NO_TRUTH": 7,
     "CORRECT": 5,
-    "NO_CANDIDATE": 6,
-    "UNRESOLVED": 1
+    "NO_CANDIDATE": 5,
+    "SEGMENT_TAKEN": 1,
+    "UNRESOLVED": 1,
+    "WRONG": 1
    },
    "b2FalseBindings": 0,
    "bindingTruth": {
-    "NO_LINE_TRUTH": 14,
+    "NO_LINE_TRUTH": 13,
     "TRUTH": 7
    },
-   "dimensionLabels": 21,
+   "dimensionLabels": 20,
    "itemClasses": {
     "AMBIGUOUS_READ": 84,
-    "DIMENSION": 21,
-    "NOT_A_DIMENSION:OFF_LINE": 10,
+    "DIMENSION": 20,
+    "NOT_A_DIMENSION:LEADING_ZERO": 2,
+    "NOT_A_DIMENSION:OFF_LINE": 9,
     "NOT_A_DIMENSION:TEXT": 3,
     "UNREADABLE": 3
    },
@@ -1248,7 +1566,7 @@
     "AGREES": 10
    },
    "truthTier": {
-    "LOCAL_DOUBLE_READ": 8,
+    "LOCAL_DOUBLE_READ": 7,
     "PRIOR_TRANSCRIPTION": 10,
     "R1_CONFIDENT": 3
    }

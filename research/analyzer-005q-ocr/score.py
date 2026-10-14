@@ -44,7 +44,7 @@ def classify(value):
     if value is None:
         return None
     if INT.match(value):
-        return 'INT'
+        return 'LEADING_ZERO' if value.startswith('0') else 'INT'  # addendum C: usually a half turn
     if re.fullmatch(r'[0-9]+[.,][0-9]+', value):
         return 'DECIMAL_OR_AREA'
     return 'TEXT'
@@ -77,7 +77,7 @@ def build_items(con, tru, prior, sensitivity):
         status, value = local_status(it['r1']['text'], it['r1']['meanP'], it['r2'])
         if it['origin'] == 'LINE_WINDOW' and status not in ('LOCAL_DOUBLE_READ', 'R1_CONFIDENT'):
             continue  # an empty band is not a location
-        locs.append({'tier': 'B' if status != 'R1_CONFIDENT' else 'C', 'box': it['box'], 'axis': it['axis'], 'value': value, 'status': status, 'origin': it['origin'], 'orientation': it['orientation'], 'r1': it['r1']['text'], 'r2': it['r2']})
+        locs.append({'tier': 'B' if status != 'R1_CONFIDENT' else 'C', 'box': it['box'], 'axis': it['axis'], 'value': value, 'status': status, 'origin': it['origin'], 'orientation': it['orientation'], 'r1': it['r1']['text'], 'r2': it['r2'], 'r1gap': it['r1']['meanP'] - it['r1']['rival']['meanP']})
     if not sensitivity:
         for l in locs:
             if l['tier'] == 'C':
@@ -95,7 +95,7 @@ def build_items(con, tru, prior, sensitivity):
         if host:
             host['reads'].append({'tier': l['tier'], 'status': l['status'], 'value': l['value'], 'origin': l['origin']})
             continue
-        items.append({'box': l['box'], 'axis': l['axis'], 'reads': [{'tier': l['tier'], 'status': l['status'], 'value': l['value'], 'origin': l['origin']}], 'orientation': l.get('orientation')})
+        items.append({'box': l['box'], 'axis': l['axis'], 'reads': [{'tier': l['tier'], 'status': l['status'], 'value': l['value'], 'origin': l['origin']}], 'orientation': l.get('orientation'), 'r1gap': l.get('r1gap')})
     for i in items:
         a = [r for r in i['reads'] if r['tier'] == 'A']
         b = {r['value'] for r in i['reads'] if r['tier'] == 'B' and r['status'] == 'LOCAL_DOUBLE_READ'}
@@ -152,6 +152,8 @@ def main():
             i['onLine'] = [c['id'] for c in lines if on_line(c, i['box'], i['axis'], h)]
             if i['kind'] == 'INT':
                 i['class'] = 'DIMENSION' if i['onLine'] else 'NOT_A_DIMENSION:OFF_LINE'
+            elif i['kind'] == 'LEADING_ZERO':
+                i['class'] = 'NOT_A_DIMENSION:LEADING_ZERO'
             elif i['kind'] == 'DECIMAL_OR_AREA':
                 i['class'] = 'NOT_A_DIMENSION:DECIMAL_OR_AREA'
             elif i['kind'] == 'TEXT':
@@ -200,13 +202,13 @@ def main():
             # B0
             r['b0Detected'] = bool(m0)
             r['b0ClassicToken'] = bool(mc)
-            ext = [l['external'] for l in m0 if l.get('external')]
-            corr0 = [e for e in ext if corroborating({'p': e['p'], 'stable': e['stable'], 'greedy': e['greedy'], 'top': e['top']})]
-            # addendum B: the same rule as B1 — of the orientation twins of one ink, the reading with the higher top p
-            corr0.sort(key=lambda e: -e['p'])
-            r['b0Value'] = corr0[0]['top'] if corr0 else None
-            r['b0RotationalTwin'] = len({e['top'] for e in corr0}) > 1
-            r['b0ValueCorrect'] = r['b0Value'] == i['value'] if r['b0Value'] is not None else None
+            # addendum B: the same rule as B1 — of the orientation twins of one ink, the reading with the higher top p;
+            # addendum C: values of 2-5 digits only; two turns corroborating different values = ROTATIONAL_TWIN (unscored)
+            corr0 = sorted([l for l in m0 if l.get('external') and INT.match(l['external']['top']) and corroborating({'p': l['external']['p'], 'stable': l['external']['stable'], 'greedy': l['external']['greedy'], 'top': l['external']['top']})], key=lambda l: -l['external']['p'])
+            r['b0Value'] = corr0[0]['external']['top'] if corr0 else None
+            r['b0Ensemble'] = corr0[0].get('ensemble') if corr0 else None
+            r['b0RotationalTwin'] = len({l['external']['top'] for l in corr0}) > 1
+            r['b0ValueCorrect'] = None if r['b0Value'] is None or r['b0RotationalTwin'] else r['b0Value'] == i['value']
             r['b0ClassicText'] = mc[0]['text'] if mc else None
             if mb:
                 seg = mb[0]['seg']
@@ -217,12 +219,12 @@ def main():
                 r['b0Binding'] = 'NOT_BOUND'
             # B1
             r['b1Detected'] = bool(m1)
-            corr1 = sorted([x for x in m1 if x['corr']], key=lambda x: -x['p'])
+            corr1 = sorted([x for x in m1 if x['corr'] and INT.match(x['top'])], key=lambda x: -x['p'])
             r['b1Value'] = corr1[0]['top'] if corr1 else None
-            r['b1RotationalTwin'] = any(corroborating(rv) and rv['top'] != x['top'] for x in corr1 for rv in x['rival'])
-            r['b1ValueCorrect'] = r['b1Value'] == i['value'] if r['b1Value'] is not None else None
+            r['b1RotationalTwin'] = any(corroborating(rv) and INT.match(rv['top']) and rv['top'] != x['top'] for x in corr1 for rv in x['rival'])
+            r['b1ValueCorrect'] = None if r['b1Value'] is None or r['b1RotationalTwin'] else r['b1Value'] == i['value']
             r['b1Merged'] = bool(m1) and not corr1 and any(len(x['top']) > len(i['value']) for x in m1)
-            if corr1 and i.get('orientation') and i['truth'] == 'LOCAL_DOUBLE_READ':
+            if corr1 and i.get('orientation') and i['truth'] == 'LOCAL_DOUBLE_READ' and (i.get('r1gap') or 0) >= 0.1:
                 r['b1OrientationCorrect'] = corr1[0]['orientation'] == i['orientation']
             # first-bad class for the incumbent
             if not mc and not m0:
@@ -231,8 +233,12 @@ def main():
                 r['b0Loss'] = 'TOKEN_NOT_ON_A_CHAIN'
             elif r['b0Value'] is None:
                 r['b0Loss'] = 'READ_NOT_CORROBORATED'
-            elif not r['b0ValueCorrect']:
+            elif r['b0RotationalTwin'] and not (r['b0Statement'] and r['b0Statement']['value'] is not None and str(int(round(r['b0Statement']['value']))) == i['value']):
+                r['b0Loss'] = 'ROTATIONAL_TWIN_AMBIGUOUS'
+            elif r['b0ValueCorrect'] is False:
                 r['b0Loss'] = 'READ_WRONG'
+            elif r['b0Ensemble'] and r['b0Ensemble'].get('asRead') not in (None, i['value']) and not (r['b0Statement'] and r['b0Statement']['value'] is not None and str(int(round(r['b0Statement']['value']))) == i['value']):
+                r['b0Loss'] = 'READ_RIGHT_ENSEMBLE_NOT_KEPT'
             elif r['b0Binding'] == 'NOT_BOUND':
                 r['b0Loss'] = 'READ_RIGHT_NOT_BOUND'
             elif r['b0Binding'] == 'WRONG':
@@ -244,10 +250,15 @@ def main():
             rows.append(r)
         # --- B2: blind binding on the union of corroborating candidates (one per ink)
         cands = []
-        for l in b0:
+        for l in sorted(b0, key=lambda l: -(l.get('external') or {}).get('p', 0)):
             e = l.get('external')
             if e and corroborating({'p': e['p'], 'stable': e['stable'], 'greedy': e['greedy'], 'top': e['top']}) and INT.match(e['top']):
-                cands.append({'box': l['box'], 'axis': axis_of(l['orientation']), 'values': {e['top']}, 'src': {'B0'}})
+                ax = axis_of(l['orientation'])
+                twin = next((c for c in cands if c['axis'] == ax and (contains(l['box'], center(c['box'])) or contains(c['box'], center(l['box'])))), None)
+                if twin:  # addendum C: B0's orientation twins of one ink are ONE candidate
+                    twin['values'].add(e['top'])
+                else:
+                    cands.append({'box': l['box'], 'axis': ax, 'values': {e['top']}, 'src': {'B0'}})
         for x in b1:
             if not (x['corr'] and INT.match(x['top'])):
                 continue
@@ -282,7 +293,8 @@ def main():
             if any(cd['axis'] == i['axis'] and (contains(i['box'], center(cd['box'])) or contains(cd['box'], center(i['box']))) for i in dims):
                 continue
             host = next((i for i in items if contains(i['box'], center(cd['box'])) or contains(cd['box'], center(i['box']))), None)
-            false_b2.append({'values': sorted(cd['values']), 'src': sorted(cd['src']), 'box': cd['box'], 'truthClass': host['class'] if host else 'NO_TRUTH_ITEM'})
+            cls = host['class'] if host else 'NO_TRUTH_ITEM'
+            false_b2.append({'values': sorted(cd['values']), 'src': sorted(cd['src']), 'box': cd['box'], 'truthClass': 'UNVERIFIED' if cls in ('AMBIGUOUS_READ', 'UNREADABLE', 'NO_TRUTH_ITEM') else cls})
         # B1 false detections: corroborating integer readings not on a truth dimension label
         false_b1 = Counter()
         for x in b1:
@@ -291,7 +303,8 @@ def main():
             if any(x['axis'] == i['axis'] and contains(x['box'], center(i['box'])) for i in dims):
                 continue
             host = next((i for i in items if contains(x['box'], center(i['box']))), None)
-            false_b1[host['class'] if host else 'NO_TRUTH_ITEM'] += 1
+            cls = host['class'] if host else 'NO_TRUTH_ITEM'
+            false_b1['UNVERIFIED' if cls in ('AMBIGUOUS_READ', 'UNREADABLE', 'NO_TRUTH_ITEM') else cls] += 1
         # --- scale evidence (scorer only compares with TRUE_SCALE)
         ts = true_scale(s['frameId'])
 
@@ -339,6 +352,8 @@ def main():
             'b1ValueCorrect': sum(1 for r in rows if r['b1ValueCorrect']), 'b1ValueWrong': sum(1 for r in rows if r['b1ValueCorrect'] is False),
             'b1NewCorrectValues': sum(1 for r in rows if r['b1ValueCorrect'] and not r['b0Detected']),
             'b1OrientationCorrect': sum(1 for r in rows if r.get('b1OrientationCorrect') is True), 'b1OrientationWrong': sum(1 for r in rows if r.get('b1OrientationCorrect') is False),
+            'detectionByTier': {t: {'n': sum(1 for r in rows if r['truth'] == t), 'b0': sum(1 for r in rows if r['truth'] == t and r['b0Detected']), 'b1': sum(1 for r in rows if r['truth'] == t and r['b1Detected']), 'b1ValueCorrect': sum(1 for r in rows if r['truth'] == t and r['b1ValueCorrect']), 'b0ValueCorrect': sum(1 for r in rows if r['truth'] == t and r['b0ValueCorrect'])} for t in sorted({r['truth'] for r in rows})},
+            'bindingTruthAudit': {'tieBrokenByPosition': sum(1 for i in dims if i['bindingTruth'].get('tieBrokenByPosition')), 'offTrueScaleOver3pct': sum(1 for i in dims if ts and i['bindingTruth']['status'] == 'TRUTH' and abs(int(i['value']) / max(1e-6, i['bindingTruth']['segment']['toPx'] - i['bindingTruth']['segment']['fromPx']) / ts - 1) > 0.03)},
             'b0RotationalTwins': sum(1 for r in rows if r.get('b0RotationalTwin')), 'b1RotationalTwins': sum(1 for r in rows if r.get('b1RotationalTwin')),
             'b0StatementRewrittenAlthoughTokenWasRight': sum(1 for r in rows if r['b0Loss'] == 'STATEMENT_VALUE_REWRITTEN' and r['b0Statement']['tokenText'] == r['value']),
             'b0StatementRewrittenByOrigin': dict(Counter(r['b0Statement']['origin'] for r in rows if r['b0Loss'] == 'STATEMENT_VALUE_REWRITTEN')),
@@ -353,7 +368,10 @@ def main():
             for p in inventory['perPrintedDimension']:
                 v = str(p['printed'])
                 hit = [r for r in rows if r['value'] == v]
-                inv.append({'printed': v, 'class005O': p['class'], 'truthItemFound': bool(hit), 'b0Detected': any(r['b0Detected'] for r in hit), 'b0ValueCorrect': any(r['b0ValueCorrect'] for r in hit), 'b1Detected': any(r['b1Detected'] for r in hit), 'b1ValueCorrect': any(r['b1ValueCorrect'] for r in hit), 'b2': [r.get('b2') for r in hit]})
+                if not hit:
+                    inv.append({'printed': v, 'class005O': p['class'], 'truthItemFound': False, 'status': 'NOT_MEASURED'})
+                    continue
+                inv.append({'printed': v, 'class005O': p['class'], 'truthItemFound': True, 'truthTier': hit[0]['truth'], 'b0Detected': any(r['b0Detected'] for r in hit), 'b0ValueCorrect': any(r['b0ValueCorrect'] for r in hit), 'b1Detected': any(r['b1Detected'] for r in hit), 'b1ValueCorrect': any(r['b1ValueCorrect'] for r in hit), 'b2': [r.get('b2') for r in hit], 'b0Loss': [r['b0Loss'] for r in hit]})
             summ['murajachInventoryCheck'] = inv
         sheets_out.append(summ)
         for r in rows:
