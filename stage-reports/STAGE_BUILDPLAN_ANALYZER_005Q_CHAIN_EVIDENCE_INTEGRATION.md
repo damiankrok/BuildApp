@@ -353,7 +353,7 @@ identyfikatory pochodzenia. **Wszystkie 48 wierszy jest rozwojowych**; blind 9�
 | `spec/c1.spec.ts`, `spec/c2.spec.ts` na kopiach wariantów | 5/5, 9/9 |
 | `test_review_fixes.py` | 11/11 (na kodzie z pierwszego liczenia: 11/11 padają) |
 | zamrożenie | **FREEZE: IDENTICAL** (start i koniec) |
-| CI na końcowym SHA | ⟪CI⟫ |
+| CI | `BuildApp CI` run **38636571399** (push, attempt 1) na `eaeb6df13cd2a3a51b1f9b5e1e496bafb41d9824` — **success**: 39 zadań zielonych, 2 pominięte zgodnie z projektem (publikacja `preview-latest` i `owner-preview-latest` — OWNER APK nietknięty), w tym Android UI evidence gate, Playwright, Node 18 parity i wszystkie domy rozwojowe. Commit zamykający zmienia wyłącznie ten raport; jego przebieg CI podaje handoff. |
 
 ## M. Rekomendacja i ograniczenia
 
@@ -386,4 +386,21 @@ Czego ten etap uczy:
 
 ## N. Handoff
 
-⟪HANDOFF⟫
+```
+STAGE: BUILDPLAN-ANALYZER-005Q-CHAIN
+VERDICT: PASS_RESEARCH — porównanie C0–C4 + N1 + C1N1 na tych samych 48 wierszach rozwojowych, pełne powtórki solvera, 3 recenzje (2 P0 + 6 P1 naprawione w scorerach/bramkach, 11 testów negatywnych); żaden wariant niekwalifikowalny
+BRANCH: analyzer/ink-first-chain-binding-integration-research-v1 (+ lustro claude/new-session-3kzcgh)
+BASE: cd0c513bcbbb5a00dc7115c887daada1800f9172
+HEAD: commit zamykający z tym raportem (pełny SHA w handoffie czatu)
+CI: BuildApp CI 38636571399, attempt 1, success na eaeb6df13cd2a3a51b1f9b5e1e496bafb41d9824 (przebieg commitu zamykającego w handoffie czatu)
+FULL_REPORT: stage-reports/STAGE_BUILDPLAN_ANALYZER_005Q_CHAIN_EVIDENCE_INTEGRATION.md
+FIRST_BAD: chain (podstawienia głosują skalę + wybór w odcinku bez kary) → registration (CHAIN_CORRECTED kotwiczy swoją skalę) → consumer (SOURCE_EXACT bez pochodzenia); OCR pierwszy zły tylko w 3/110
+COMPARED: C0, C1, C2, C3, C4, N1 (umotywowany D7: 25 etykiet powiązanych bez wypowiedzi), C1N1
+LABEL_TRUTH: PRIMARY 110 MAIN (poziom A transkrypcje modelem z 005O + poziom B lokalny podwójny odczyt), SENSITIVITY 152 (+R1_CONFIDENT); całość maszynowa, przegląd człowieka NIE wykonany; prawda wiązania 19/110
+END_TO_END: 6 wariantów × 48 pełnych powtórek (+ C0, C0dup, C0warm); względem C0: PASS C1 21→17, C2 18, C3 21, N1 21, C4 16, C1N1 18 (jarzabem FAIL→PASS przez zamknięcie otwartego ganku — od poprawnego); G1 materialnie 11/12/2/5/14/11
+PRODUCTION_FREEZE: IDENTICAL
+ADOPTION_RECOMMENDATION: NONE
+VISUAL_ROADMAP: 005R still pending; 005S later
+ARM64_005H: PENDING
+FINAL_TOKEN: PASS_RESEARCH_BUILDPLAN_ANALYZER_005Q_CHAIN_NO_SAFE_ADOPTION
+```
