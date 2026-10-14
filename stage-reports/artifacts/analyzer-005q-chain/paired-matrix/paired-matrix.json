@@ -640,7 +640,77 @@
       "spuriousCertainty": 0
      }
     }
-   }
+   },
+   "registrationMovesOver3pct": [
+    {
+     "anisotropy": [
+      0.0009,
+      0.0325
+     ],
+     "case": "dom-pod-jarzabem",
+     "dMppX": 0.5066,
+     "dMppY": 0.5541,
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "residualPct": [
+      -11.88,
+      -16.14
+     ]
+    },
+    {
+     "anisotropy": [
+      0.0013,
+      0.7015
+     ],
+     "case": "dom-w-cyklamenach",
+     "dMppX": 0.0005,
+     "dMppY": 0.7001,
+     "outcome": [
+      "FAILED",
+      "COMPLETED"
+     ],
+     "residualPct": [
+      null,
+      -0.2
+     ]
+    },
+    {
+     "anisotropy": [
+      0.0621,
+      0.0006
+     ],
+     "case": "rarytasy-eoze",
+     "dMppX": -0.0,
+     "dMppY": 0.0655,
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "residualPct": [
+      1.57,
+      1.57
+     ]
+    },
+    {
+     "anisotropy": [
+      0.0021,
+      0.3143
+     ],
+     "case": "rarytasy-g2e",
+     "dMppX": 0.455,
+     "dMppY": -0.0001,
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "residualPct": [
+      -2.75,
+      -2.73
+     ]
+    }
+   ]
   },
   "C1N1": {
    "gates": {
@@ -1008,7 +1078,60 @@
       "spuriousCertainty": 0
      }
     }
-   }
+   },
+   "registrationMovesOver3pct": [
+    {
+     "anisotropy": [
+      0.0,
+      0.0419
+     ],
+     "case": "D00",
+     "dMppX": 0.0,
+     "dMppY": 0.0419,
+     "outcome": [
+      "COMPLETED",
+      "FAILED"
+     ],
+     "residualPct": [
+      -18.71,
+      null
+     ]
+    },
+    {
+     "anisotropy": [
+      0.0013,
+      0.7016
+     ],
+     "case": "dom-w-cyklamenach",
+     "dMppX": 0.0004,
+     "dMppY": 0.7001,
+     "outcome": [
+      "FAILED",
+      "COMPLETED"
+     ],
+     "residualPct": [
+      null,
+      -0.2
+     ]
+    },
+    {
+     "anisotropy": [
+      0.0621,
+      0.0006
+     ],
+     "case": "rarytasy-eoze",
+     "dMppX": -0.0,
+     "dMppY": 0.0655,
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "residualPct": [
+      1.57,
+      1.57
+     ]
+    }
+   ]
   },
   "C2": {
    "gates": {
@@ -1371,7 +1494,26 @@
       "spuriousCertainty": 0
      }
     }
-   }
+   },
+   "registrationMovesOver3pct": [
+    {
+     "anisotropy": [
+      0.0086,
+      0.0372
+     ],
+     "case": "dom-w-murajach",
+     "dMppX": 0.0,
+     "dMppY": -0.0453,
+     "outcome": [
+      "FAILED",
+      "FAILED"
+     ],
+     "residualPct": [
+      null,
+      null
+     ]
+    }
+   ]
   },
   "C3": {
    "gates": {
@@ -1678,7 +1820,8 @@
       "spuriousCertainty": 0
      }
     }
-   }
+   },
+   "registrationMovesOver3pct": []
   },
   "C4": {
    "gates": {
@@ -2057,7 +2200,77 @@
       "spuriousCertainty": 0
      }
     }
-   }
+   },
+   "registrationMovesOver3pct": [
+    {
+     "anisotropy": [
+      0.0021,
+      0.3724
+     ],
+     "case": "dom-w-glogownikach",
+     "dMppX": 0.5901,
+     "dMppY": 0.0001,
+     "outcome": [
+      "COMPLETED",
+      "FAILED"
+     ],
+     "residualPct": [
+      -8.04,
+      null
+     ]
+    },
+    {
+     "anisotropy": [
+      0.0086,
+      0.0
+     ],
+     "case": "dom-w-murajach",
+     "dMppX": 0.2378,
+     "dMppY": 0.2273,
+     "outcome": [
+      "FAILED",
+      "FAILED"
+     ],
+     "residualPct": [
+      null,
+      null
+     ]
+    },
+    {
+     "anisotropy": [
+      0.0621,
+      0.0006
+     ],
+     "case": "rarytasy-eoze",
+     "dMppX": -0.0,
+     "dMppY": 0.0655,
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "residualPct": [
+      1.57,
+      1.57
+     ]
+    },
+    {
+     "anisotropy": [
+      0.0021,
+      0.6462
+     ],
+     "case": "rarytasy-g2e",
+     "dMppX": 1.8202,
+     "dMppY": -0.0001,
+     "outcome": [
+      "COMPLETED",
+      "FAILED"
+     ],
+     "residualPct": [
+      -2.75,
+      null
+     ]
+    }
+   ]
   },
   "N1": {
    "gates": {
@@ -2372,7 +2585,26 @@
       "spuriousCertainty": 0
      }
     }
-   }
+   },
+   "registrationMovesOver3pct": [
+    {
+     "anisotropy": [
+      0.0009,
+      0.0
+     ],
+     "case": "dom-pod-jarzabem",
+     "dMppX": 0.5555,
+     "dMppY": 0.554,
+     "outcome": [
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "residualPct": [
+      -11.88,
+      -11.52
+     ]
+    }
+   ]
   }
  },
  "version": 1

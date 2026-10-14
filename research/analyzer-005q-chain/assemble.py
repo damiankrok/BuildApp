@@ -74,6 +74,25 @@ def main():
                                                 'selectedRegistration': {k: sel.get(k) for k in ('mppX', 'mppY', 'confidence', 'anchors')} if sel else None,
                                                 'modelChangedVsC0': (r.get('vsBaseline') or {}).get('modelChanged'), 'semanticVsC0': (r.get('vsBaseline') or {}).get('modelSemantic') is not None if r.get('vsBaseline') else None}
     json.dump({'schema': 'buildapp.005q-chain.rows', 'version': 1, 'rows': rows}, open(f'{a.out}/paired-matrix/rows.json', 'w'), indent=1, sort_keys=True)
+    # descriptive (not a preregistered gate): the selected plan frame's registration moving > 3 % from C0 on ANY row, or
+    # its anisotropy |mppY/mppX - 1| exceeding 3 % where C0's did not. G2c sees a scale move only on a truth sheet or through
+    # the footprint residual of a row C0 completed within 6 %; this census shows the moves G2c cannot see.
+    for L in labels:
+        if L == 'C0':
+            continue
+        moved = []
+        for case, per in sorted(rows.items()):
+            b, v = (per.get('C0') or {}).get('selectedRegistration'), (per.get(L) or {}).get('selectedRegistration')
+            if not b or not v or not b.get('mppX') or not v.get('mppX'):
+                continue
+            dx, dy = v['mppX'] / b['mppX'] - 1, (v['mppY'] / b['mppY'] - 1) if b.get('mppY') and v.get('mppY') else 0
+            an_b = abs(b['mppY'] / b['mppX'] - 1) if b.get('mppY') else 0
+            an_v = abs(v['mppY'] / v['mppX'] - 1) if v.get('mppY') else 0
+            if max(abs(dx), abs(dy)) > 0.03 or (an_v > 0.03 and an_b <= 0.03):
+                moved.append({'case': case, 'dMppX': round(dx, 4), 'dMppY': round(dy, 4), 'anisotropy': [round(an_b, 4), round(an_v, 4)],
+                              'outcome': [per['C0'].get('outcome'), per[L].get('outcome')], 'residualPct': [per['C0'].get('footprintResidualPct'), per[L].get('footprintResidualPct')]})
+        pm['variants'][L]['registrationMovesOver3pct'] = moved
+    json.dump(pm, open(f'{a.out}/paired-matrix/paired-matrix.json', 'w'), indent=1, sort_keys=True)
     # provenance
     prov = {}
     for L in labels:
