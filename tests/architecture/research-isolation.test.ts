@@ -665,3 +665,76 @@ describe('005Q-OCR production cannot reach the full-plan OCR bake-off, and the b
     expect(contenders).not.toMatch(/truth|transcri|labels\/|sheet-key|label-rows|trueScale/i)
   })
 })
+
+/**
+ * BUILDPLAN-ANALYZER-005Q-CHAIN — the ink-first / binding / orientation integration study is research. Its challengers
+ * are patches (`research/analyzer-005q-chain/candidates/*.patch`, `ACCEL.patch`) applied to a copy of the base's
+ * source-metrics OUTSIDE the repository and aliased only for the replay process; production never sees them. A patch may
+ * touch only `packages/source-metrics/src` (reconstruction, plan resolution and the 005P statement contest stay byte
+ * for byte production's in every variant), and no added line may name a development row, a family, a published figure,
+ * a verdict, a truth file or a scratch path (G4 / mutation M8: a challenger that knows which house it is reading is not a
+ * rule about drawings).
+ */
+describe('005Q-CHAIN production cannot reach the integration study, and its challengers are blind to the rows', () => {
+  const stageFiles = (): string[] =>
+    [
+      ...execFileSync('git', ['ls-files'], { cwd: ROOT, encoding: 'utf8' }).split('\n'),
+      ...execFileSync('git', ['ls-files', '--others', '--exclude-standard'], { cwd: ROOT, encoding: 'utf8' }).split('\n'),
+    ].filter((f) => f.startsWith('research/analyzer-005q-chain/') || f.startsWith('stage-reports/artifacts/analyzer-005q-chain/'))
+  const patches = (): string[] => stageFiles().filter((f) => f.endsWith('.patch'))
+  const added = (patch: string): string[] =>
+    read(patch)
+      .split('\n')
+      .filter((l) => l.startsWith('+') && !l.startsWith('+++'))
+
+  it('no production source imports research/analyzer-005q-chain or names a challenger rule or the harness', () => {
+    const offenders: string[] = []
+    for (const f of productionSources()) {
+      const text = read(f)
+      for (const spec of importsOf(text)) if (/analyzer-005q-chain|research\//.test(spec)) offenders.push(`${f} imports ${spec}`)
+      if (/inkOfC1|InkC1|inkFirstC1|geometricSpanC2|C2_BOUNDS|C3_SCALE_ROUTES|ACCEL_005Q_CHAIN|accelCallouts005qChain|005Q-CHAIN/.test(codeOf(text))) offenders.push(`${f} names the 005Q-CHAIN study`)
+    }
+    expect(offenders).toEqual([])
+  })
+
+  it('the study tracks only code and text — no crop, sheet, page, model weight or archive', () => {
+    const files = stageFiles()
+    expect(files.length).toBeGreaterThan(0)
+    expect(files.filter((f) => !/\.(py|ts|mjs|json|md|patch)$/i.test(f))).toEqual([])
+    for (const f of files) {
+      const text = read(f)
+      expect(text, f).not.toMatch(/(data:(image|application)\/[\w.+-]+;base64,|iVBORw0KGgo|\/9j\/4|UklGR|R0lGOD)[A-Za-z0-9+/]{40,}/)
+      expect(text, f).not.toMatch(/[A-Za-z0-9+/]{256,}={0,2}/)
+      expect(statSync(join(ROOT, f)).size, f).toBeLessThanOrEqual(4 * 2 ** 20)
+    }
+  })
+
+  it('every challenger patch touches only packages/source-metrics/src, never reconstruction', () => {
+    const list = patches()
+    expect(list.length).toBeGreaterThanOrEqual(7)
+    for (const p of list) {
+      const targets = [...read(p).matchAll(/^\+\+\+ b\/(\S+)/gm)].map((m) => m[1])
+      expect(targets.length, p).toBeGreaterThan(0)
+      for (const t of targets) expect(t, p).toMatch(/^packages\/source-metrics\/src\/[\w-]+\.ts$/)
+    }
+  })
+
+  it('no added line of any challenger names a development row, family, published figure, verdict, truth file or scratch path', () => {
+    const cases = JSON.parse(read('research/analyzer-005q-chain/cases.json')).cases as Array<{ case: string; family: string }>
+    const names = [...new Set(cases.flatMap((c) => [c.case, c.family]))].filter((n) => n.length >= 3)
+    const forbidden = [...names.map((n) => n.toLowerCase()), 'publishedfacts', 'publishedareas', 'publishedrooms', 'footprint', 'verdict', 'label-records', 'truth', 'work005', 'trueScale'.toLowerCase(), 'murajach', 'gozdzik', 'glogownik']
+    const offenders: string[] = []
+    for (const p of patches())
+      for (const line of added(p)) {
+        const low = line.toLowerCase()
+        for (const word of forbidden) if (new RegExp(`(^|[^a-z0-9])${word.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')}([^a-z0-9]|$)`).test(low)) offenders.push(`${p}: ${word}`)
+      }
+    expect(offenders).toEqual([])
+  })
+
+  it('every writer refuses an output or a variant copy inside the repository', () => {
+    expect(codeOf(read('research/analyzer-005q-chain/replay.mjs'))).toMatch(/if \(work === REPO \|\| work\.startsWith\(REPO \+ '\/'\)\) throw new Error/)
+    expect(codeOf(read('research/analyzer-005q-chain/variant.mjs'))).toMatch(/work === REPO \|\| work\.startsWith\(REPO \+ '\/'\)\) throw new Error/)
+    expect(codeOf(read('research/analyzer-005q-chain/spec/run-spec.mjs'))).toMatch(/variant\.startsWith\(REPO \+ '\/'\)\) throw new Error/)
+  })
+})

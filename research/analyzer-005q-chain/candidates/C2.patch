@@ -1,0 +1,129 @@
+diff --git a/packages/source-metrics/src/chains.ts b/packages/source-metrics/src/chains.ts
+index 9ef175c..04b78f4 100644
+--- a/packages/source-metrics/src/chains.ts
++++ b/packages/source-metrics/src/chains.ts
+@@ -224,6 +224,8 @@ export type SolvedSegment = {
+   /** How far the reading misses what the pixels say, in pixels and in centimetres. */
+   residualPx?: number
+   residualCm?: number
++  /** 005Q-CHAIN C2 (research): a label is printed on this span (bound but unread, or bound to no line) — never DERIVED. */
++  labelledUnresolved?: true
+ }
+ 
+ export type SolvedChain = {
+@@ -584,7 +586,8 @@ export function solveFrameChains(
+   // A frame whose only supported scale the drawing rules out has no scale. Its
+   // chains are still cut — at no scale, so nothing on them is derived — and
+   // the numbers they carry stay unread rather than being bent to fit.
+-  const solved = chains.map((chain, i) => (pooled === undefined ? solveChain(chain, [], { ...options, fixedScale: undefined }) : solveChain(chain, tokensPerChain[i], { ...options, fixedScale: (chain.axis === 'HORIZONTAL' ? scaleX : scaleY) ?? pooled })))
++  const unboundAt = (i: number): number[] => assignment.decisions.filter((d) => d.status !== 'BOUND').flatMap((d) => d.candidates.filter((c) => c.chain === i).map((c) => c.along))
++  const solved = chains.map((chain, i) => (pooled === undefined ? solveChain(chain, [], { ...options, fixedScale: undefined }) : solveChain(chain, tokensPerChain[i], { ...options, fixedScale: (chain.axis === 'HORIZONTAL' ? scaleX : scaleY) ?? pooled, unboundAt: unboundAt(i) })))
+   return {
+     scaleX,
+     scaleY,
+@@ -618,7 +621,7 @@ export function solveFrameChains(
+  * only on a chain that has at least one reading confirming that scale; a span
+  * whose number cannot be reconciled with the scale is left UNRESOLVED.
+  */
+-export function solveChain(chain: RawChain, tokens: readonly ChainToken[], options: { tolerancePx?: number; minPixelLength?: number; fixedScale?: number; topology?: boolean; minCorrectionPx?: number } = {}): SolvedChain {
++export function solveChain(chain: RawChain, tokens: readonly ChainToken[], options: { tolerancePx?: number; minPixelLength?: number; fixedScale?: number; topology?: boolean; minCorrectionPx?: number; unboundAt?: readonly number[] } = {}): SolvedChain {
+   const tolerance = options.tolerancePx ?? 2.2
+   const minLength = options.minPixelLength ?? 6
+   const ticks = chain.ticks
+@@ -636,6 +639,13 @@ export function solveChain(chain: RawChain, tokens: readonly ChainToken[], optio
+   }
+   if (scale === undefined || ticks.length < 2) return { segments: [], residualPx: 0, readSegments: 0, skippedTicks: [], scaleVotes: [] }
+   const cmPerPixel = scale
++  // 005Q-CHAIN C2 GEOMETRIC_BIND (research): which span a label measures is decided by the drawing alone — the span it is
++  // centred on (within 0.3 of its length, across at most two marks: 005B's `centredOn` / `spansFor` test), the one with
++  // the fewest marks between its ends; two such spans with the same count is UNRESOLVED (the label measures neither).
++  // The scale then only decides how the label's ink is read on that span (READ / CHAIN_CORRECTED / unread), never
++  // which span: a span containing a label that is not the label's geometric span carries it unread.
++  const geoSpan = new Map<ChainToken, { from: number; to: number } | null>()
++  for (const t of tokens) geoSpan.set(t, geometricSpanC2(ticks, t.atPx, kind))
+ 
+   /** The best reading for the span between two ticks, and what it is worth. */
+   type Span = { merit: number; token?: ChainToken; reading?: ChainToken['readings'][number]; missPx?: number; impossible: boolean }
+@@ -659,6 +669,7 @@ export function solveChain(chain: RawChain, tokens: readonly ChainToken[], optio
+     else if (kind(from) === 'REJECTED' || kind(to) === 'REJECTED') span = { merit: -Infinity, impossible: true }
+     else if (skippedMarks > 3) span = { merit: -Infinity, impossible: true }
+     else if (inside.length > 1) span = { merit: -Infinity, impossible: true }
++    else if (inside.length === 1 && !sameSpanC2(geoSpan.get(inside[0]), from, to)) span = { merit: -0.5, token: inside[0], impossible: false }
+     else if (inside.length === 0) {
+       // A span with nothing on it is neither evidence nor an error. It is
+       // worth almost nothing — enough that the solver keeps a tick it has no
+@@ -740,6 +751,8 @@ export function solveChain(chain: RawChain, tokens: readonly ChainToken[], optio
+     const toPx = ticks[b].atPx
+     const pixelLength = round6(toPx - fromPx)
+     const segment: SolvedSegment = { index: segments.length, fromPx, toPx, pixelLength, fromTick: a, toTick: b, rejected: [], origin: 'UNRESOLVED', confidence: 0 }
++    // C2: a span a label is printed on (bound and unread, or a label the assignment left unbound) is never "nothing printed".
++    if (span.token || (options.unboundAt ?? []).some((at) => at >= fromPx && at <= toPx)) segment.labelledUnresolved = true
+     if (span.token) {
+       for (const reading of span.token.readings) {
+         if (span.reading && reading.text === span.reading.text) continue
+@@ -779,6 +792,7 @@ export function solveChain(chain: RawChain, tokens: readonly ChainToken[], optio
+     for (const segment of segments) {
+       if (segment.valueCm !== undefined || segment.token !== undefined) continue
+       if (segment.origin !== 'UNRESOLVED') continue
++      if (segment.labelledUnresolved) continue
+       segment.valueCm = round6(cmPerPixel * segment.pixelLength)
+       segment.origin = 'DERIVED'
+       segment.confidence = 0.4
+@@ -801,3 +815,30 @@ export function solveChain(chain: RawChain, tokens: readonly ChainToken[], optio
+ /** A deterministic id for a chain: a function of where it is, never of when it was found. */
+ export const chainId = (frameId: string, axis: ChainAxis, baselinePx: number, ticks: readonly number[]): string =>
+   stableId('chain', `${axis.toLowerCase()}-${Math.round(baselinePx)}`, { frameId, axis, baselinePx: round6(baselinePx), ticks: ticks.map(round6) })
++
++// 005Q-CHAIN C2 GEOMETRIC_BIND (research only). The span of a chain a label at `along` measures, from the marks alone:
++// spans whose ends are measurement points (not REJECTED under topology), across at most two non-rejected marks, centred
++// on the label within 0.3 of their length; the one with the fewest marks between its ends; null when none is centred or
++// two spans tie. Never a value, a reading or a scale.
++export const C2_BOUNDS = { centred: 0.3, maxSkipped: 2 } as const
++export function geometricSpanC2(ticks: RawChain['ticks'], along: number, kind: (i: number) => 'TICK' | 'QUESTIONABLE' | 'REJECTED'): { from: number; to: number } | null {
++  let best: { from: number; to: number; skipped: number } | null = null
++  let tie = false
++  for (let from = 0; from < ticks.length; from += 1) {
++    if (kind(from) === 'REJECTED' || ticks[from].atPx > along) continue
++    let skipped = 0
++    for (let to = from + 1; to < ticks.length; to += 1) {
++      if (to > from + 1 && kind(to - 1) !== 'REJECTED') skipped += 1
++      if (skipped > C2_BOUNDS.maxSkipped) break
++      if (kind(to) === 'REJECTED' || ticks[to].atPx < along) continue
++      const length = ticks[to].atPx - ticks[from].atPx
++      if (length <= 0 || Math.abs(along - (ticks[from].atPx + ticks[to].atPx) / 2) > length * C2_BOUNDS.centred) continue
++      if (!best || skipped < best.skipped) {
++        best = { from, to, skipped }
++        tie = false
++      } else if (skipped === best.skipped && (from !== best.from || to !== best.to)) tie = true
++    }
++  }
++  return best && !tie ? { from: best.from, to: best.to } : null
++}
++const sameSpanC2 = (g: { from: number; to: number } | null | undefined, from: number, to: number): boolean => !!g && g.from === from && g.to === to
+diff --git a/packages/source-metrics/src/extract.ts b/packages/source-metrics/src/extract.ts
+index 2e4f97a..c841fa6 100644
+--- a/packages/source-metrics/src/extract.ts
++++ b/packages/source-metrics/src/extract.ts
+@@ -1008,7 +1008,7 @@ function buildChain(
+         })
+       }
+     } else {
+-      segments.push({ index: segment.index, fromPx: segment.fromPx, toPx: segment.toPx, pixelLength: segment.pixelLength, confidence: 0, ...(segment.token ? { labelled: true as const } : {}) })
++      segments.push({ index: segment.index, fromPx: segment.fromPx, toPx: segment.toPx, pixelLength: segment.pixelLength, confidence: 0, ...(segment.token || segment.labelledUnresolved ? { labelled: true as const } : {}) })
+     }
+   }
+ 
+diff --git a/packages/source-metrics/src/metric-solution.ts b/packages/source-metrics/src/metric-solution.ts
+index 68eb225..8c5b0bb 100644
+--- a/packages/source-metrics/src/metric-solution.ts
++++ b/packages/source-metrics/src/metric-solution.ts
+@@ -1307,7 +1307,8 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
+     // 005E: re-read from lattices, a span is given a value other than its ink's as-read one only where it is long enough
+     // to decide a scale itself (`DECISIVE_SPAN_TOLERANCES`): the scale choosing a value is the same statement reversed.
+     const minCorrectionPx = input.lattices ? DECISIVE_SPAN_TOLERANCES * tol : undefined
+-    const s = axisScale === undefined ? solveChain(chain, [], { tolerancePx: tol, minPixelLength: minLength }) : solveChain(chain, mine, { tolerancePx: tol, minPixelLength: minLength, fixedScale: axisScale, topology: replaced, minCorrectionPx })
++    const unboundAt = finalAssignment.decisions.filter((d) => d.status !== 'BOUND').flatMap((d) => d.candidates.filter((x) => x.chain === c).map((x) => x.along))
++    const s = axisScale === undefined ? solveChain(chain, [], { tolerancePx: tol, minPixelLength: minLength }) : solveChain(chain, mine, { tolerancePx: tol, minPixelLength: minLength, fixedScale: axisScale, topology: replaced, minCorrectionPx, unboundAt })
+     return { solved: s, tokens: [...mine] }
+   })
+   const better = (c: number): boolean => {

@@ -1,0 +1,333 @@
+diff --git a/packages/source-metrics/src/chains.ts b/packages/source-metrics/src/chains.ts
+index 9ef175c..04b78f4 100644
+--- a/packages/source-metrics/src/chains.ts
++++ b/packages/source-metrics/src/chains.ts
+@@ -224,6 +224,8 @@ export type SolvedSegment = {
+   /** How far the reading misses what the pixels say, in pixels and in centimetres. */
+   residualPx?: number
+   residualCm?: number
++  /** 005Q-CHAIN C2 (research): a label is printed on this span (bound but unread, or bound to no line) — never DERIVED. */
++  labelledUnresolved?: true
+ }
+ 
+ export type SolvedChain = {
+@@ -584,7 +586,8 @@ export function solveFrameChains(
+   // A frame whose only supported scale the drawing rules out has no scale. Its
+   // chains are still cut — at no scale, so nothing on them is derived — and
+   // the numbers they carry stay unread rather than being bent to fit.
+-  const solved = chains.map((chain, i) => (pooled === undefined ? solveChain(chain, [], { ...options, fixedScale: undefined }) : solveChain(chain, tokensPerChain[i], { ...options, fixedScale: (chain.axis === 'HORIZONTAL' ? scaleX : scaleY) ?? pooled })))
++  const unboundAt = (i: number): number[] => assignment.decisions.filter((d) => d.status !== 'BOUND').flatMap((d) => d.candidates.filter((c) => c.chain === i).map((c) => c.along))
++  const solved = chains.map((chain, i) => (pooled === undefined ? solveChain(chain, [], { ...options, fixedScale: undefined }) : solveChain(chain, tokensPerChain[i], { ...options, fixedScale: (chain.axis === 'HORIZONTAL' ? scaleX : scaleY) ?? pooled, unboundAt: unboundAt(i) })))
+   return {
+     scaleX,
+     scaleY,
+@@ -618,7 +621,7 @@ export function solveFrameChains(
+  * only on a chain that has at least one reading confirming that scale; a span
+  * whose number cannot be reconciled with the scale is left UNRESOLVED.
+  */
+-export function solveChain(chain: RawChain, tokens: readonly ChainToken[], options: { tolerancePx?: number; minPixelLength?: number; fixedScale?: number; topology?: boolean; minCorrectionPx?: number } = {}): SolvedChain {
++export function solveChain(chain: RawChain, tokens: readonly ChainToken[], options: { tolerancePx?: number; minPixelLength?: number; fixedScale?: number; topology?: boolean; minCorrectionPx?: number; unboundAt?: readonly number[] } = {}): SolvedChain {
+   const tolerance = options.tolerancePx ?? 2.2
+   const minLength = options.minPixelLength ?? 6
+   const ticks = chain.ticks
+@@ -636,6 +639,13 @@ export function solveChain(chain: RawChain, tokens: readonly ChainToken[], optio
+   }
+   if (scale === undefined || ticks.length < 2) return { segments: [], residualPx: 0, readSegments: 0, skippedTicks: [], scaleVotes: [] }
+   const cmPerPixel = scale
++  // 005Q-CHAIN C2 GEOMETRIC_BIND (research): which span a label measures is decided by the drawing alone — the span it is
++  // centred on (within 0.3 of its length, across at most two marks: 005B's `centredOn` / `spansFor` test), the one with
++  // the fewest marks between its ends; two such spans with the same count is UNRESOLVED (the label measures neither).
++  // The scale then only decides how the label's ink is read on that span (READ / CHAIN_CORRECTED / unread), never
++  // which span: a span containing a label that is not the label's geometric span carries it unread.
++  const geoSpan = new Map<ChainToken, { from: number; to: number } | null>()
++  for (const t of tokens) geoSpan.set(t, geometricSpanC2(ticks, t.atPx, kind))
+ 
+   /** The best reading for the span between two ticks, and what it is worth. */
+   type Span = { merit: number; token?: ChainToken; reading?: ChainToken['readings'][number]; missPx?: number; impossible: boolean }
+@@ -659,6 +669,7 @@ export function solveChain(chain: RawChain, tokens: readonly ChainToken[], optio
+     else if (kind(from) === 'REJECTED' || kind(to) === 'REJECTED') span = { merit: -Infinity, impossible: true }
+     else if (skippedMarks > 3) span = { merit: -Infinity, impossible: true }
+     else if (inside.length > 1) span = { merit: -Infinity, impossible: true }
++    else if (inside.length === 1 && !sameSpanC2(geoSpan.get(inside[0]), from, to)) span = { merit: -0.5, token: inside[0], impossible: false }
+     else if (inside.length === 0) {
+       // A span with nothing on it is neither evidence nor an error. It is
+       // worth almost nothing — enough that the solver keeps a tick it has no
+@@ -740,6 +751,8 @@ export function solveChain(chain: RawChain, tokens: readonly ChainToken[], optio
+     const toPx = ticks[b].atPx
+     const pixelLength = round6(toPx - fromPx)
+     const segment: SolvedSegment = { index: segments.length, fromPx, toPx, pixelLength, fromTick: a, toTick: b, rejected: [], origin: 'UNRESOLVED', confidence: 0 }
++    // C2: a span a label is printed on (bound and unread, or a label the assignment left unbound) is never "nothing printed".
++    if (span.token || (options.unboundAt ?? []).some((at) => at >= fromPx && at <= toPx)) segment.labelledUnresolved = true
+     if (span.token) {
+       for (const reading of span.token.readings) {
+         if (span.reading && reading.text === span.reading.text) continue
+@@ -779,6 +792,7 @@ export function solveChain(chain: RawChain, tokens: readonly ChainToken[], optio
+     for (const segment of segments) {
+       if (segment.valueCm !== undefined || segment.token !== undefined) continue
+       if (segment.origin !== 'UNRESOLVED') continue
++      if (segment.labelledUnresolved) continue
+       segment.valueCm = round6(cmPerPixel * segment.pixelLength)
+       segment.origin = 'DERIVED'
+       segment.confidence = 0.4
+@@ -801,3 +815,30 @@ export function solveChain(chain: RawChain, tokens: readonly ChainToken[], optio
+ /** A deterministic id for a chain: a function of where it is, never of when it was found. */
+ export const chainId = (frameId: string, axis: ChainAxis, baselinePx: number, ticks: readonly number[]): string =>
+   stableId('chain', `${axis.toLowerCase()}-${Math.round(baselinePx)}`, { frameId, axis, baselinePx: round6(baselinePx), ticks: ticks.map(round6) })
++
++// 005Q-CHAIN C2 GEOMETRIC_BIND (research only). The span of a chain a label at `along` measures, from the marks alone:
++// spans whose ends are measurement points (not REJECTED under topology), across at most two non-rejected marks, centred
++// on the label within 0.3 of their length; the one with the fewest marks between its ends; null when none is centred or
++// two spans tie. Never a value, a reading or a scale.
++export const C2_BOUNDS = { centred: 0.3, maxSkipped: 2 } as const
++export function geometricSpanC2(ticks: RawChain['ticks'], along: number, kind: (i: number) => 'TICK' | 'QUESTIONABLE' | 'REJECTED'): { from: number; to: number } | null {
++  let best: { from: number; to: number; skipped: number } | null = null
++  let tie = false
++  for (let from = 0; from < ticks.length; from += 1) {
++    if (kind(from) === 'REJECTED' || ticks[from].atPx > along) continue
++    let skipped = 0
++    for (let to = from + 1; to < ticks.length; to += 1) {
++      if (to > from + 1 && kind(to - 1) !== 'REJECTED') skipped += 1
++      if (skipped > C2_BOUNDS.maxSkipped) break
++      if (kind(to) === 'REJECTED' || ticks[to].atPx < along) continue
++      const length = ticks[to].atPx - ticks[from].atPx
++      if (length <= 0 || Math.abs(along - (ticks[from].atPx + ticks[to].atPx) / 2) > length * C2_BOUNDS.centred) continue
++      if (!best || skipped < best.skipped) {
++        best = { from, to, skipped }
++        tie = false
++      } else if (skipped === best.skipped && (from !== best.from || to !== best.to)) tie = true
++    }
++  }
++  return best && !tie ? { from: best.from, to: best.to } : null
++}
++const sameSpanC2 = (g: { from: number; to: number } | null | undefined, from: number, to: number): boolean => !!g && g.from === from && g.to === to
+diff --git a/packages/source-metrics/src/extract.ts b/packages/source-metrics/src/extract.ts
+index 2e4f97a..73ecc6b 100644
+--- a/packages/source-metrics/src/extract.ts
++++ b/packages/source-metrics/src/extract.ts
+@@ -419,6 +419,8 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
+     const axisGroups = dimensionAxisGroups(frame.id, measured, ids, labelHeightPx)
+     let finalAssignment: LabelAssignmentDecision[] | undefined
+     let finalConventions: SideConventions | undefined
++    // 005Q-CHAIN C1 (research): the frame's lattices, kept for the ink-first statement rule in buildChain.
++    let inkLattices: Map<TextToken, { id: string; lattice: LabelLattice }> | undefined
+     if (isPlan && read.raw) {
+       // 005E: the numeric lattice of every ink that lies on a dimension line — the geometric test the label assignment
+       // makes, before any scale — re-read from the very ink field its pass read. Image only.
+@@ -458,6 +460,7 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
+         }
+       }
+       for (const [token, { id, lattice }] of lattices) numericLattices.push(latticeRecord(id, frame.id, token, lattice))
++      inkLattices = lattices
+       const metric = solveFrameMetric({ frameId: frame.id, assetId: frame.assetId, chains: measured, chainIds: ids, raw: read.raw, legacyTokens: read.tokens, legacy: solution, tolerancePx, plausibility, checkpoint, lattices })
+       solvedChains = metric.solved
+       finalAssignment = metric.assignment
+@@ -481,7 +484,7 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
+         scaleStands && reread.has(index)
+           ? (g: SolvedChain['segments'][number]): boolean => legacySolved.segments.some((l) => l.fromPx === g.fromPx && l.toPx === g.toPx && l.origin === g.origin && l.valueCm === g.valueCm && l.confidence === g.confidence)
+           : undefined
+-      const record = buildChain(frame, chain, solved, tokensById, evidence, anchors, usedTokens, orientationOf?.[index], anchorable, axisGroups.perChain[index])
++      const record = buildChain(frame, chain, solved, tokensById, evidence, anchors, usedTokens, orientationOf?.[index], anchorable, axisGroups.perChain[index], (t) => inkOfC1(inkLattices?.get(t)))
+       if (record) chains.push(record)
+     })
+     if (isPlan) {
+@@ -759,6 +762,8 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
+       placed.forEach((d, i) => {
+         const solved = ladder.datums[i]
+         if (solved.value === undefined || solved.value <= 0) return
++        // 005Q-CHAIN C1: a height the ladder's own fit chose (CHAIN_CORRECTED) does not anchor the scale it fits.
++        if (solved.origin === 'CHAIN_CORRECTED') return
+         const pixelSpan = Math.abs((ladder.zeroRowPx as number) - solved.rowPx)
+         if (pixelSpan < 20) return
+         anchors.push({
+@@ -916,6 +921,7 @@ function buildChain(
+   orientation?: { orientation: TextToken['orientation'] | null; dependsOnScale: boolean },
+   anchorable?: (segment: SolvedChain['segments'][number]) => boolean,
+   topology?: ChainAxisTopology,
++  inkOf?: (token: TextToken) => InkC1 | undefined,
+ ): DimensionChain | undefined {
+   const id = chainId(frame.id, chain.axis, chain.baselinePx, chain.ticks.map((t) => t.atPx))
+   const axis = chain.axis === 'HORIZONTAL' ? 'X' : 'Y'
+@@ -930,6 +936,15 @@ function buildChain(
+     const along = (at: number): PixelPoint => (chain.axis === 'HORIZONTAL' ? { x: at, y: chain.baselinePx } : { x: chain.baselinePx, y: at })
+     if (segment.valueCm !== undefined && segment.origin !== 'UNRESOLVED') {
+       const evidenceId = stableId('metric', 'dimension', { frameId: frame.id, chain: id, from: segment.fromPx, to: segment.toPx })
++      // 005Q-CHAIN C1 INK-FIRST (research): a value the frame scale chose (CHAIN_CORRECTED) is never the printed
++      // number when the frozen ensemble (lattice + external reader, AGREES or LEADS, CLEAR/SUPPORTED, an integer
++      // without a leading zero) read the ink: the statement states that reading (READ), and the scale's choice stays an
++      // alternative marked SCALE_DEPENDENT. Rival confident readings (CONTESTS) give no ink: the statement stays
++      // CHAIN_CORRECTED (scale-dependent) and, by the anchor rule below, never endorses the scale.
++      const ink = segment.origin === 'CHAIN_CORRECTED' && segment.token ? inkOf?.(segment.token) : undefined
++      const statedCm = ink ? ink.valueCm : segment.valueCm
++      const statedOrigin: MetricEvidence['origin'] = ink ? 'READ' : segment.origin
++      if (ink) inkFirstC1.set(evidenceId, { scaleChosenCm: segment.valueCm, scaleChosenText: segment.text ?? '', ink })
+       const association: Association = {
+         kind: segment.token ? 'WITNESS_LINE_PAIR' : 'DIMENSION_LINE',
+         score: round6(segment.token ? Math.max(0.15, 1 - (segment.residualPx ?? 0) / 2.2) : 0.3),
+@@ -944,9 +959,9 @@ function buildChain(
+         frameId: frame.id,
+         assetId: frame.assetId,
+         variantByteHash: frame.variantByteHash,
+-        value: segment.valueCm,
++        value: statedCm,
+         unit: 'cm',
+-        origin: segment.origin,
++        origin: statedOrigin,
+         // What the reader saw, never the value it was turned into (005B; the schema always said so).
+         rawText: segment.token?.text ?? segment.text ?? '',
+         textBox: segment.token?.box,
+@@ -956,14 +971,21 @@ function buildChain(
+         chainId: id,
+         ocrTokenIds: record ? [record.id] : [],
+         observationIds: chain.observationIds,
+-        alternatives: segment.rejected.slice(0, 4).map((r) => ({ value: r.valueCm, unit: 'cm' as const, rawText: r.text, confidence: 0.2, why: r.why })),
++        alternatives: [
++          ...(ink && segment.valueCm !== ink.valueCm ? [{ value: segment.valueCm, unit: 'cm' as const, rawText: segment.text ?? '', confidence: 0.2, why: 'SCALE_DEPENDENT: the value the frame scale chose for this span (CHAIN_CORRECTED); never printed, never a witness of that scale' }] : []),
++          ...segment.rejected.filter((r) => !ink || r.valueCm !== ink.valueCm).slice(0, ink ? 3 : 4).map((r) => ({ value: r.valueCm, unit: 'cm' as const, rawText: r.text, confidence: 0.2, why: r.why })),
++        ],
+         confidence: segment.confidence,
+         provenance: {
+           extractor: segment.origin === 'DERIVED' ? 'DERIVED' : 'CHAIN_SOLVER',
+           name: `metrics.chain-solver@${METRIC_READER_VERSION}`,
+-          detail: segment.origin === 'CHAIN_CORRECTED' ? `the reader read "${segment.token?.text ?? ''}"; at the frame's scale "${segment.text}" fits the span` : association.why,
++          detail: ink
++            ? `INK_FIRST: the ensemble read the ink as "${ink.text}" (${ink.decision}); the classic reader read "${segment.token?.text ?? ''}"; the frame's scale chose "${segment.text}" (kept as a SCALE_DEPENDENT alternative)`
++            : segment.origin === 'CHAIN_CORRECTED' ? `the reader read "${segment.token?.text ?? ''}"; at the frame's scale "${segment.text}" fits the span` : association.why,
+         },
+-        ...(segment.token && segment.text !== undefined && (segment.origin === 'CHAIN_CORRECTED' || orientation?.dependsOnScale)
++        ...(ink && segment.token
++          ? { derivation: { rawText: segment.token.text, orientation: segment.token.orientation, valueText: ink.text, substitutions: 0, dependsOnScale: orientation?.dependsOnScale ?? false, why: 'INK_FIRST: the corroborated ensemble reading of this ink, not the value the frame scale chose' } }
++          : segment.token && segment.text !== undefined && (segment.origin === 'CHAIN_CORRECTED' || orientation?.dependsOnScale)
+           ? {
+               derivation: {
+                 rawText: segment.token.text,
+@@ -974,7 +996,7 @@ function buildChain(
+                 why:
+                   segment.origin === 'CHAIN_CORRECTED'
+                     ? 'a substitution chosen because it fits the scale the frame was solved at: a value downstream of that scale, never a witness for it'
+-                    : 'read the way up the other axis’s scale chose: not a witness of the two axes agreeing',
++                    : 'read the way up nothing but a scale or the page vote chose (005Q-CHAIN C3): both quarter turns stay on the record, and neither is a witness',
+               },
+             }
+           : {}),
+@@ -985,8 +1007,8 @@ function buildChain(
+         toPx: segment.toPx,
+         pixelLength: segment.pixelLength,
+         evidenceId,
+-        valueCm: segment.valueCm,
+-        origin: segment.origin,
++        valueCm: statedCm,
++        origin: statedOrigin,
+         confidence: segment.confidence,
+         residualCm: segment.residualCm,
+         ...(segment.token ? { labelled: true as const } : {}),
+@@ -996,19 +1018,24 @@ function buildChain(
+       // output is how a registration comes to report a residual of zero while
+       // being wrong.
+       if (segment.origin !== 'DERIVED' && segment.confidence > 0) fittedCount += 1
+-      if (segment.origin !== 'DERIVED' && segment.confidence > 0 && (anchorable?.(segment) ?? true)) {
++      // 005Q-CHAIN C1: exactly the values printed and read anchor a registration — never one a scale chose
++      // (CHAIN_CORRECTED) nor a reading whose way up the other axis's scale chose (dependsOnScale). The legacy-identity
++      // filter (`anchorable`, which blocks a re-read chain's anchors unless they equal the vote's own) is not applied: an
++      // ink READ on a re-read chain is a reading of the drawing, and the vote's corrections are no longer anchors to match.
++      void anchorable
++      if (statedOrigin === 'READ' && !orientation?.dependsOnScale && segment.confidence > 0) {
+         anchors.push({
+           id: stableId('anchor', 'chain-segment', { frameId: frame.id, chain: id, from: segment.fromPx, to: segment.toPx }),
+           kind: 'CHAIN_SEGMENT',
+           evidenceIds: [evidenceId],
+           axis,
+           pixelSpan: segment.pixelLength,
+-          metricSpan: round6(segment.valueCm / 100),
++          metricSpan: round6(statedCm / 100),
+           weight: segment.confidence,
+         })
+       }
+     } else {
+-      segments.push({ index: segment.index, fromPx: segment.fromPx, toPx: segment.toPx, pixelLength: segment.pixelLength, confidence: 0, ...(segment.token ? { labelled: true as const } : {}) })
++      segments.push({ index: segment.index, fromPx: segment.fromPx, toPx: segment.toPx, pixelLength: segment.pixelLength, confidence: 0, ...(segment.token || segment.labelledUnresolved ? { labelled: true as const } : {}) })
+     }
+   }
+ 
+@@ -1023,7 +1050,7 @@ function buildChain(
+     ticksPx: chain.ticks.map((t) => t.atPx),
+     ...(chain.ticks.some((t) => t.class !== undefined) ? { marks: chain.ticks.map((t) => ({ atPx: t.atPx, class: t.class ?? 'TICK', reasons: [...(t.reasons ?? [])].sort() })) } : {}),
+     segments,
+-    derivedTotalCm: solved.derivedTotalCm,
++    derivedTotalCm: solved.derivedTotalCm === undefined ? undefined : round6(segments.reduce((a, g) => a + (g.valueCm ?? 0), 0)),
+     scale: solved.cmPerPixel === undefined ? undefined : { cmPerPixel: solved.cmPerPixel, residualRatio: round6(solved.residualPx), readSegments: solved.readSegments },
+     closes,
+     observationIds: chain.observationIds,
+@@ -1228,3 +1255,18 @@ function accelCallouts005qChain<T>(variantByteHash: string, frameId: string, rea
+   accelFs.renameSync(`${file}.${process.pid}.tmp`, file)
+   return out
+ }
++
++// 005Q-CHAIN C1 INK-FIRST (research only). The ink of one label as the frozen ensemble read it, when it is a corroborated
++// reading: AGREES (both readers) or LEADS (the external reader, corroborating), class CLEAR/SUPPORTED, an integer of 2-5
++// digits without a leading zero. Nothing here sees a scale, a chain or a published figure.
++export type InkC1 = { valueCm: number; text: string; decision: string; latticeId: string }
++export function inkOfC1(held: { id: string; lattice: LabelLattice } | undefined): InkC1 | undefined {
++  const e = held?.lattice.ensemble
++  if (!held || !e) return undefined
++  if (e.decision !== 'AGREES' && e.decision !== 'LEADS') return undefined
++  if (e.ocrClass !== 'CLEAR' && e.ocrClass !== 'SUPPORTED') return undefined
++  if (!/^[1-9]\d{1,4}$/.test(e.asRead) || e.asReadValueCm === undefined) return undefined
++  return { valueCm: e.asReadValueCm, text: e.asRead, decision: e.decision, latticeId: held.id }
++}
++/** Research telemetry of the C1 rule (never sealed): evidence id -> what the scale chose and what the ink read. */
++export const inkFirstC1 = new Map<string, { scaleChosenCm: number; scaleChosenText: string; ink: InkC1 }>()
+diff --git a/packages/source-metrics/src/metric-solution.ts b/packages/source-metrics/src/metric-solution.ts
+index 68eb225..2d3156c 100644
+--- a/packages/source-metrics/src/metric-solution.ts
++++ b/packages/source-metrics/src/metric-solution.ts
+@@ -802,7 +802,9 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
+     const joins = (o: TextOrientation, cl: Cluster | undefined): boolean => cl !== undefined && obsOn(c, o).some((x) => Math.abs(x.cm / cl.cm - x.px) <= tol)
+     const jA = joins(a, clA)
+     const jB = joins(b, clB)
+-    if (jA !== jB) {
++    // 005Q-CHAIN C3 ORIENTATION (research): a reading turned to join a scale other chains agree on is the page scale
++    // choosing the way up — never a decision. The route is closed; typography or nothing decides.
++    if (C3_SCALE_ROUTES && jA !== jB) {
+       const o = jA ? a : b
+       const cl = (jA ? clA : clB) as Cluster
+       return { orientation: o, decidedBy: 'AXIS_SELF_CONSISTENCY', joinedCm: cl.cm, why: `read ${o === a ? 'bottom to top' : 'top to bottom'}, a label joins ${cl.members.length} vertical labels on other chains that agree on ${cl.cm} cm/px` }
+@@ -838,7 +840,8 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
+       choices[c] = { orientation: majority, decidedBy: 'AXIS_MAJORITY', why: `${Math.max(cw, ccw)} chains on this sheet decided on their own evidence that its vertical text reads ${majority === a ? 'bottom to top' : 'top to bottom'}, and ${Math.min(cw, ccw)} the other way` }
+       continue
+     }
+-    if (xScale) {
++    // C3: the other axis's scale never decides which way up a label is.
++    if (C3_SCALE_ROUTES && xScale) {
+       const rawFits = (o: TextOrientation): number => obsOn(c, o).filter((x) => Math.abs(x.cm / xScale.cm - x.px) <= tol).length
+       const latFits = (o: TextOrientation): number => latticeFits(chains[c], entriesOn(c, o), xScale.cm, tol, minLength)
+       const [ra, rb] = [rawFits(a), rawFits(b)]
+@@ -1307,7 +1310,8 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
+     // 005E: re-read from lattices, a span is given a value other than its ink's as-read one only where it is long enough
+     // to decide a scale itself (`DECISIVE_SPAN_TOLERANCES`): the scale choosing a value is the same statement reversed.
+     const minCorrectionPx = input.lattices ? DECISIVE_SPAN_TOLERANCES * tol : undefined
+-    const s = axisScale === undefined ? solveChain(chain, [], { tolerancePx: tol, minPixelLength: minLength }) : solveChain(chain, mine, { tolerancePx: tol, minPixelLength: minLength, fixedScale: axisScale, topology: replaced, minCorrectionPx })
++    const unboundAt = finalAssignment.decisions.filter((d) => d.status !== 'BOUND').flatMap((d) => d.candidates.filter((x) => x.chain === c).map((x) => x.along))
++    const s = axisScale === undefined ? solveChain(chain, [], { tolerancePx: tol, minPixelLength: minLength }) : solveChain(chain, mine, { tolerancePx: tol, minPixelLength: minLength, fixedScale: axisScale, topology: replaced, minCorrectionPx, unboundAt })
+     return { solved: s, tokens: [...mine] }
+   })
+   const better = (c: number): boolean => {
+@@ -1470,7 +1474,8 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
+     topology: topologyOf(),
+     why: whyOf(relation, confidence, selected, L, legacyStats.independentGroups, contest) + (undecidedConflict ? '; a total and the children it frames disagree as read, each stating one of the two scales, and no reading outside them decides' : '') + (undecidedRival ? '; every reading that states it fits the rival scale too through one of its own other values, so nothing decides between them' : '') + (falseConsensus ? `; false consensus: ${falseConsensus.why}` : ''),
+   }
+-  const chainOrientation = chains.map((_, c) => ({ orientation: choices[c].orientation, dependsOnScale: choices[c].decidedBy === 'OTHER_AXIS_SCALE' }))
++  // C3: an UNDECIDED vertical chain's way up is the page vote's, kept as a record: no witness (as OTHER_AXIS_SCALE was).
++  const chainOrientation = chains.map((chain, c) => ({ orientation: choices[c].orientation, dependsOnScale: choices[c].decidedBy === 'OTHER_AXIS_SCALE' || (chain.axis === 'VERTICAL' && choices[c].decidedBy === 'UNDECIDED') }))
+ 
+   return {
+     solution,
+@@ -1750,3 +1755,9 @@ function structuralSupport(frameId: string, chains: readonly RawChain[], chainId
+   }
+   return out
+ }
++
++// 005Q-CHAIN C3 (research only): the two orientation routes that take a scale as their evidence (AXIS_SELF_CONSISTENCY
++// joining other chains' cluster, OTHER_AXIS_SCALE) are closed; an UNDECIDED chain keeps the page vote's way up as a
++// record, marked as no witness (dependsOnScale in the chain orientation, which extract.ts turns into a derivation and
++// excludes from the registration).
++const C3_SCALE_ROUTES = false

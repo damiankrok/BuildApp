@@ -1,0 +1,68 @@
+diff --git a/packages/source-metrics/src/extract.ts b/packages/source-metrics/src/extract.ts
+index 2e4f97a..c76de43 100644
+--- a/packages/source-metrics/src/extract.ts
++++ b/packages/source-metrics/src/extract.ts
+@@ -974,7 +974,7 @@ function buildChain(
+                 why:
+                   segment.origin === 'CHAIN_CORRECTED'
+                     ? 'a substitution chosen because it fits the scale the frame was solved at: a value downstream of that scale, never a witness for it'
+-                    : 'read the way up the other axis’s scale chose: not a witness of the two axes agreeing',
++                    : 'read the way up nothing but a scale or the page vote chose (005Q-CHAIN C3): both quarter turns stay on the record, and neither is a witness',
+               },
+             }
+           : {}),
+@@ -996,7 +996,8 @@ function buildChain(
+       // output is how a registration comes to report a residual of zero while
+       // being wrong.
+       if (segment.origin !== 'DERIVED' && segment.confidence > 0) fittedCount += 1
+-      if (segment.origin !== 'DERIVED' && segment.confidence > 0 && (anchorable?.(segment) ?? true)) {
++      // 005Q-CHAIN C3: a segment read the way up a scale or the page vote chose anchors nothing.
++      if (segment.origin !== 'DERIVED' && !orientation?.dependsOnScale && segment.confidence > 0 && (anchorable?.(segment) ?? true)) {
+         anchors.push({
+           id: stableId('anchor', 'chain-segment', { frameId: frame.id, chain: id, from: segment.fromPx, to: segment.toPx }),
+           kind: 'CHAIN_SEGMENT',
+diff --git a/packages/source-metrics/src/metric-solution.ts b/packages/source-metrics/src/metric-solution.ts
+index 68eb225..b015bd6 100644
+--- a/packages/source-metrics/src/metric-solution.ts
++++ b/packages/source-metrics/src/metric-solution.ts
+@@ -802,7 +802,9 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
+     const joins = (o: TextOrientation, cl: Cluster | undefined): boolean => cl !== undefined && obsOn(c, o).some((x) => Math.abs(x.cm / cl.cm - x.px) <= tol)
+     const jA = joins(a, clA)
+     const jB = joins(b, clB)
+-    if (jA !== jB) {
++    // 005Q-CHAIN C3 ORIENTATION (research): a reading turned to join a scale other chains agree on is the page scale
++    // choosing the way up — never a decision. The route is closed; typography or nothing decides.
++    if (C3_SCALE_ROUTES && jA !== jB) {
+       const o = jA ? a : b
+       const cl = (jA ? clA : clB) as Cluster
+       return { orientation: o, decidedBy: 'AXIS_SELF_CONSISTENCY', joinedCm: cl.cm, why: `read ${o === a ? 'bottom to top' : 'top to bottom'}, a label joins ${cl.members.length} vertical labels on other chains that agree on ${cl.cm} cm/px` }
+@@ -838,7 +840,8 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
+       choices[c] = { orientation: majority, decidedBy: 'AXIS_MAJORITY', why: `${Math.max(cw, ccw)} chains on this sheet decided on their own evidence that its vertical text reads ${majority === a ? 'bottom to top' : 'top to bottom'}, and ${Math.min(cw, ccw)} the other way` }
+       continue
+     }
+-    if (xScale) {
++    // C3: the other axis's scale never decides which way up a label is.
++    if (C3_SCALE_ROUTES && xScale) {
+       const rawFits = (o: TextOrientation): number => obsOn(c, o).filter((x) => Math.abs(x.cm / xScale.cm - x.px) <= tol).length
+       const latFits = (o: TextOrientation): number => latticeFits(chains[c], entriesOn(c, o), xScale.cm, tol, minLength)
+       const [ra, rb] = [rawFits(a), rawFits(b)]
+@@ -1470,7 +1473,8 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
+     topology: topologyOf(),
+     why: whyOf(relation, confidence, selected, L, legacyStats.independentGroups, contest) + (undecidedConflict ? '; a total and the children it frames disagree as read, each stating one of the two scales, and no reading outside them decides' : '') + (undecidedRival ? '; every reading that states it fits the rival scale too through one of its own other values, so nothing decides between them' : '') + (falseConsensus ? `; false consensus: ${falseConsensus.why}` : ''),
+   }
+-  const chainOrientation = chains.map((_, c) => ({ orientation: choices[c].orientation, dependsOnScale: choices[c].decidedBy === 'OTHER_AXIS_SCALE' }))
++  // C3: an UNDECIDED vertical chain's way up is the page vote's, kept as a record: no witness (as OTHER_AXIS_SCALE was).
++  const chainOrientation = chains.map((chain, c) => ({ orientation: choices[c].orientation, dependsOnScale: choices[c].decidedBy === 'OTHER_AXIS_SCALE' || (chain.axis === 'VERTICAL' && choices[c].decidedBy === 'UNDECIDED') }))
+ 
+   return {
+     solution,
+@@ -1750,3 +1754,9 @@ function structuralSupport(frameId: string, chains: readonly RawChain[], chainId
+   }
+   return out
+ }
++
++// 005Q-CHAIN C3 (research only): the two orientation routes that take a scale as their evidence (AXIS_SELF_CONSISTENCY
++// joining other chains' cluster, OTHER_AXIS_SCALE) are closed; an UNDECIDED chain keeps the page vote's way up as a
++// record, marked as no witness (dependsOnScale in the chain orientation, which extract.ts turns into a derivation and
++// excludes from the registration).
++const C3_SCALE_ROUTES = false

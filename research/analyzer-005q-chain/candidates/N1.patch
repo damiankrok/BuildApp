@@ -1,0 +1,18 @@
+diff --git a/packages/source-metrics/src/metric-solution.ts b/packages/source-metrics/src/metric-solution.ts
+index 68eb225..b203062 100644
+--- a/packages/source-metrics/src/metric-solution.ts
++++ b/packages/source-metrics/src/metric-solution.ts
+@@ -1300,7 +1300,12 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
+   // different story about the same ink, not more evidence.
+   const offers = chains.map((chain, c) => {
+     const mine = perChain[c] ?? []
+-    if (!replaced && (!rereadable || sameEntries(mine, legacy.tokensPerChain[c]))) return null
++    // 005Q-CHAIN N1 INK RE-READ (research): every chain whose labels have lattices is offered a re-read from its inks
++    // (the ensemble reading as READ, the ink's plausible values as corrections) at the scale the frame stands at, whatever
++    // the relation — the vote's own chain otherwise keeps a classic-token substitution where the ink was read, and a
++    // label the assignment bound but the vote's reading could not fit stays unread. The offer is still adopted only when
++    // it READS more of the chain than the vote's did and takes no ink another chain reads (unchanged below).
++    if (!replaced && !(input.lattices && input.lattices.size > 0) && (!rereadable || sameEntries(mine, legacy.tokensPerChain[c]))) return null
+     const axisScale = pooled === undefined ? undefined : (chain.axis === 'HORIZONTAL' ? scaleX : scaleY) ?? pooled
+     // 005D: a chain read again at a REPLACED scale is cut by its marks' classes: a rejected mark is no
+     // cut, a questionable one costs nothing to run across. A confirmed scale keeps the vote's cuts.
