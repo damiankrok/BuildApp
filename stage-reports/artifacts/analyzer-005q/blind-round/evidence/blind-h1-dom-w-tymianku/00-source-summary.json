@@ -1,0 +1,76 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": 19,
+  "assetsByDocument": {
+    "ELEVATION": 4,
+    "FLOOR_PLAN": 8,
+    "PERSPECTIVE_RENDER": 4,
+    "SECTION": 1,
+    "SITE_PLAN": 1,
+    "UNKNOWN": 1
+  },
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-tymianku-5-t-m82a207b1b6d72",
+  "contentHash": "3c79178fdaf459eb756d555e4fbd9e59855fc744532dd75a446f76461428cb17",
+  "failuresByCode": {
+    "BYTE_IDENTICAL": 5,
+    "HTTP_STATUS": 12
+  },
+  "note": "facts and hashes only; no publisher drawing, page or render is in this pack",
+  "packageId": "src-m82a207b1b6d72-8295904878",
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "unit": "m2",
+      "value": 8.34
+    },
+    {
+      "key": "building_height",
+      "unit": "m",
+      "value": 9.33
+    },
+    {
+      "key": "floor_area",
+      "unit": "m2",
+      "value": 206.54
+    },
+    {
+      "key": "footprint_area",
+      "unit": "m2",
+      "value": 138.89
+    },
+    {
+      "key": "garage_area",
+      "unit": "m2",
+      "value": 18.89
+    },
+    {
+      "key": "house_net_area",
+      "unit": "m2",
+      "value": 164.99
+    },
+    {
+      "key": "roof_area",
+      "unit": "m2",
+      "value": 221.1
+    },
+    {
+      "key": "total_area",
+      "unit": "m2",
+      "value": 268.52
+    },
+    {
+      "key": "usable_area",
+      "unit": "m2",
+      "value": 192.22
+    },
+    {
+      "key": "volume",
+      "unit": "none",
+      "value": 996.4
+    }
+  ],
+  "runId": "new"
+}

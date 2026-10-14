@@ -1,0 +1,63 @@
+{
+  "run": "<scratch>/h1/old",
+  "completed": true,
+  "labelledPlanStoreys": [
+    "ATTIC",
+    "GROUND"
+  ],
+  "publishedFootprintM2": 138.89,
+  "checklist": {
+    "noFloorPlan": false,
+    "legibleOverallDimension": {
+      "ocrTokensOnGroundCopies": 220,
+      "tallestPx": 47,
+      "needsRawMeasurement": false
+    },
+    "wallsUnder4pxOnEveryGroundCopy": false,
+    "groundWallPx": [
+      {
+        "frameId": "frame-asset-rzut-360da4c58d-2b0ad412cf",
+        "sizePx": {
+          "height": 853,
+          "width": 853
+        },
+        "wallPx": 19
+      }
+    ],
+    "floorPlanAssetsLost": []
+  },
+  "conditions": {
+    "storeys": {
+      "model": 2,
+      "plans": 2,
+      "holds": true
+    },
+    "upperStoreysHoldTheirRooms": {
+      "upperRingM2": 127.24,
+      "publishedUpperRoomsM2": 89.8,
+      "holds": true
+    },
+    "openingsAllBuilt": {
+      "holds": true,
+      "message": null
+    },
+    "footprint": {
+      "builtM2": 131.28,
+      "publishedM2": 138.89,
+      "residualPct": -5.48,
+      "holds": true
+    },
+    "resolvedWithAWitness": {
+      "holds": true,
+      "note": "the first reading held"
+    },
+    "replacedByTheDrawing": {
+      "holds": true,
+      "note": "no challenge"
+    }
+  },
+  "bodies": null,
+  "unresolved": null,
+  "warnings": [],
+  "verdict": "PASS"
+}

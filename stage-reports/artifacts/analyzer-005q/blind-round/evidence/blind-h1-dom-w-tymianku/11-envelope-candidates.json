@@ -1,0 +1,146 @@
+{
+  "boundary": {
+    "accepted": true,
+    "candidates": [
+      {
+        "areaM2": 128.80208,
+        "cells": 391,
+        "gapsBridged": 27,
+        "id": "A_LONG_BAND_BOX",
+        "maxBridgedGapM": 3.015488,
+        "perimeterM": 45.494792,
+        "strongOpeningM": 0,
+        "unsupportedM": 16.119084,
+        "wallM": 24.778011,
+        "weakOpeningM": 9.384284
+      },
+      {
+        "areaM2": 115.316045,
+        "cells": 349,
+        "gapsBridged": 27,
+        "id": "B_OPENING_AWARE_OUTLINE",
+        "maxBridgedGapM": 3.015488,
+        "perimeterM": 66.257576,
+        "strongOpeningM": 11.131303,
+        "unsupportedM": 0.332696,
+        "wallM": 45.409293,
+        "weakOpeningM": 9.384284
+      }
+    ],
+    "extensions": [
+      {
+        "accepted": false,
+        "areaM2": 0.363347,
+        "cells": 3,
+        "continuesAcrossM": 0
+      },
+      {
+        "accepted": true,
+        "areaM2": 3.690478,
+        "cells": 15,
+        "continuesAcrossM": 3.519508
+      },
+      {
+        "accepted": false,
+        "areaM2": 0.3278,
+        "cells": 1,
+        "continuesAcrossM": 0
+      },
+      {
+        "accepted": true,
+        "areaM2": 3.776825,
+        "cells": 3,
+        "continuesAcrossM": 3.14979
+      },
+      {
+        "accepted": false,
+        "areaM2": 0.541582,
+        "cells": 1,
+        "continuesAcrossM": 0
+      }
+    ],
+    "gaps": {
+      "DRAWING_BREAK_SUPPORTED": 264,
+      "OPENING_SUPPORTED": 23,
+      "TRUE_EXTERIOR_GAP": 55,
+      "UNKNOWN_GAP": 28
+    },
+    "policies": {
+      "disagree": true,
+      "exclusionAccepted": true,
+      "exclusionAreaM2": 132.994252,
+      "strictAccepted": false,
+      "strictAreaM2": 100.063214
+    },
+    "why": "the outline continues the box's interior past its edge (2 components): the plan is cut on the outline"
+  },
+  "cells": {
+    "enclosed": 384,
+    "total": 456
+  },
+  "extentConflicts": [
+    {
+      "boxPx": 280,
+      "chainIds": [
+        "chain-horizontal-731-960d1c8866",
+        "chain-horizontal-764-4b455c8fe4"
+      ],
+      "decision": "INCONCLUSIVE",
+      "extentPx": 238,
+      "gapM": 0.998424,
+      "gapWalls": 2.210526,
+      "missingStrip": {
+        "x0": 238,
+        "x1": 280,
+        "y0": 108,
+        "y1": 669
+      },
+      "side": "W",
+      "strength": "STRONG",
+      "stretches": [
+        {
+          "fromPx": 108,
+          "toPx": 274.5
+        },
+        {
+          "fromPx": 432.5,
+          "toPx": 669
+        }
+      ],
+      "why": "something enclosed reaches the W side the chains state 1.00 m past the box, and fails the attached-room guards: nothing is built"
+    },
+    {
+      "boxPx": 618.5,
+      "chainIds": [
+        "chain-vertical-58-5e718a161a",
+        "chain-vertical-93-85462a017c"
+      ],
+      "decision": "INCONCLUSIVE",
+      "extentPx": 669,
+      "gapM": 1.199072,
+      "gapWalls": 2.657895,
+      "missingStrip": {
+        "x0": 238,
+        "x1": 727.5,
+        "y0": 618.5,
+        "y1": 669
+      },
+      "side": "S",
+      "strength": "STRONG",
+      "stretches": [
+        {
+          "fromPx": 238,
+          "toPx": 563.5
+        }
+      ],
+      "why": "something enclosed reaches the S side the chains state 1.20 m past the box, and fails the attached-room guards: nothing is built"
+    }
+  ],
+  "frameId": "frame-asset-rzut-360da4c58d-2b0ad412cf",
+  "longBandBox": {
+    "x0": 280,
+    "x1": 727,
+    "y0": 108,
+    "y1": 618.5
+  }
+}

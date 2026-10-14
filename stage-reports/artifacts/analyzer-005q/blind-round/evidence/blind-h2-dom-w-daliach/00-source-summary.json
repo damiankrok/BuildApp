@@ -1,0 +1,76 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": 22,
+  "assetsByDocument": {
+    "ELEVATION": 4,
+    "FLOOR_PLAN": 8,
+    "PERSPECTIVE_RENDER": 6,
+    "SECTION": 1,
+    "SITE_PLAN": 1,
+    "UNKNOWN": 2
+  },
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-daliach-5-ge-me3c2885945467",
+  "contentHash": "a017b603b141836d46808392793e397433605c1749bdc5ee4baf145cbdd3831c",
+  "failuresByCode": {
+    "BYTE_IDENTICAL": 5,
+    "HTTP_STATUS": 9
+  },
+  "note": "facts and hashes only; no publisher drawing, page or render is in this pack",
+  "packageId": "src-me3c2885945467-b9d9cb4912",
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "unit": "m2",
+      "value": 5.98
+    },
+    {
+      "key": "building_height",
+      "unit": "m",
+      "value": 9.14
+    },
+    {
+      "key": "floor_area",
+      "unit": "m2",
+      "value": 191.93
+    },
+    {
+      "key": "footprint_area",
+      "unit": "m2",
+      "value": 126.96
+    },
+    {
+      "key": "garage_area",
+      "unit": "m2",
+      "value": 20.84
+    },
+    {
+      "key": "house_net_area",
+      "unit": "m2",
+      "value": 148.25
+    },
+    {
+      "key": "roof_area",
+      "unit": "m2",
+      "value": 189.2
+    },
+    {
+      "key": "total_area",
+      "unit": "m2",
+      "value": 249.01
+    },
+    {
+      "key": "usable_area_without_stairs",
+      "unit": "m2",
+      "value": 169.47
+    },
+    {
+      "key": "volume",
+      "unit": "none",
+      "value": 890.19
+    }
+  ],
+  "runId": "new"
+}

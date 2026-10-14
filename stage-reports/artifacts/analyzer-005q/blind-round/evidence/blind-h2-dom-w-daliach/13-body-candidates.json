@@ -1,0 +1,74 @@
+{
+  "bays": [],
+  "bodies": [
+    {
+      "areaM2": 2.909801,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": true,
+      "id": "body-0",
+      "junctionWallShare": 0.378641,
+      "mouthM": 3.085221,
+      "rect": {
+        "x0": 528,
+        "x1": 734,
+        "y0": 660,
+        "y1": 689.5
+      },
+      "relation": "UNKNOWN",
+      "sideWallShare": 0.520764
+    }
+  ],
+  "completions": [
+    {
+      "areaBeforeM2": 2.909801,
+      "areaM2": 2.726173,
+      "decision": "REJECTED",
+      "evidence": {
+        "chains": 0,
+        "glazing": 0,
+        "returns": 0,
+        "strictEncloses": true,
+        "vehicleDoors": 0
+      },
+      "id": "completion-0",
+      "junction": {
+        "doorM": 2.735125,
+        "lengthM": 4.223033,
+        "openM": 0
+      },
+      "kind": "ATTACHED_ROOM",
+      "reason": "NO_STRONG_EXTENT: no side the chains strongly state lies past the box where it reaches",
+      "rect": {
+        "x0": 541,
+        "x1": 734,
+        "y0": 660,
+        "y1": 689.5
+      },
+      "rectBefore": {
+        "x0": 528,
+        "x1": 734,
+        "y0": 660,
+        "y1": 689.5
+      },
+      "sides": {
+        "lengthM": 5.51413,
+        "postShare": 0,
+        "wallShare": 0.503979
+      },
+      "weakGaps": []
+    }
+  ],
+  "frameId": "frame-asset-rzut-efbfc7f809-0bd7f8c4bd",
+  "masses": [
+    {
+      "id": "mass-0",
+      "rect": {
+        "x0": 149,
+        "x1": 734,
+        "y0": 205,
+        "y1": 660
+      }
+    }
+  ]
+}

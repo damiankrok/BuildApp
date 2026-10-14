@@ -1,0 +1,60 @@
+{
+  "baseFrameId": "frame-asset-rzut-efbfc7f809-0bd7f8c4bd",
+  "storeys": [
+    {
+      "chosen": {
+        "offsetX": 13,
+        "offsetY": 71.434783,
+        "scale": 0.99849,
+        "score": 0.437841,
+        "stated": false,
+        "targetId": "walls"
+      },
+      "decision": "STACKED",
+      "frameId": "frame-asset-rzut-07439af7f5-70b183e2a4",
+      "held": null,
+      "margin": 0.074999,
+      "printedScale": {
+        "k": 0.553149,
+        "outcome": "REFUTED"
+      },
+      "regions": [
+        {
+          "body": false,
+          "bounds": {
+            "x0": 0.683717,
+            "x1": 3.250853,
+            "z0": 0.223652,
+            "z1": 5.43639
+          },
+          "overhang": "NOT_A_BODY",
+          "regionId": "region-built-0-0",
+          "standsOn": [],
+          "unsupportedM2": 13.381807
+        },
+        {
+          "body": true,
+          "bounds": {
+            "x0": 0.454314,
+            "x1": 12.548451,
+            "z0": 0.223652,
+            "z1": 9.27218
+          },
+          "overhang": "NONE",
+          "regionId": "region-built-3-0",
+          "standsOn": [
+            "mass-0"
+          ],
+          "unsupportedM2": 0
+        }
+      ],
+      "resolution": 0.006126,
+      "scaleBasis": {
+        "basis": "WALL_PAIRS",
+        "corroborated": true
+      },
+      "storeyIndex": 1,
+      "why": "stands on mass-0"
+    }
+  ]
+}

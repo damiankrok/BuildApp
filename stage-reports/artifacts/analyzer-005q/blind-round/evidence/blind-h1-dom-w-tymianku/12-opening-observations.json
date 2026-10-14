@@ -1,0 +1,296 @@
+{
+  "callouts": [
+    {
+      "box": {
+        "x0": 502,
+        "x1": 524,
+        "y0": 95,
+        "y1": 117
+      },
+      "id": "metric-callout-ring-0f9b2445a8",
+      "rawText": "456/400",
+      "value": 456
+    },
+    {
+      "box": {
+        "x0": 496,
+        "x1": 518,
+        "y0": 331,
+        "y1": 353
+      },
+      "id": "metric-callout-ring-3ded8c3b07",
+      "rawText": "406/80",
+      "value": 406
+    },
+    {
+      "box": {
+        "x0": 483,
+        "x1": 505,
+        "y0": 95,
+        "y1": 117
+      },
+      "id": "metric-callout-ring-3f1806da78",
+      "rawText": "366/400",
+      "value": 366
+    },
+    {
+      "box": {
+        "x0": 245,
+        "x1": 273,
+        "y0": 555,
+        "y1": 583
+      },
+      "id": "metric-callout-ring-57d1fbf4a8",
+      "rawText": "188/140",
+      "value": 188
+    },
+    {
+      "box": {
+        "x0": 617,
+        "x1": 635,
+        "y0": 98,
+        "y1": 116
+      },
+      "id": "metric-callout-ring-62615242b1",
+      "rawText": "401/400",
+      "value": 401
+    },
+    {
+      "box": {
+        "x0": 293,
+        "x1": 313,
+        "y0": 611,
+        "y1": 631
+      },
+      "id": "metric-callout-ring-641fa70276",
+      "rawText": "400/400",
+      "value": 400
+    },
+    {
+      "box": {
+        "x0": 729,
+        "x1": 755,
+        "y0": 295,
+        "y1": 321
+      },
+      "id": "metric-callout-ring-6db674b525",
+      "rawText": "100/47",
+      "value": 100
+    },
+    {
+      "box": {
+        "x0": 495,
+        "x1": 519,
+        "y0": 353,
+        "y1": 377
+      },
+      "id": "metric-callout-ring-771147b4a4",
+      "rawText": "406/400",
+      "value": 406
+    },
+    {
+      "box": {
+        "x0": 243,
+        "x1": 271,
+        "y0": 142,
+        "y1": 170
+      },
+      "id": "metric-callout-ring-785c69b0f2",
+      "rawText": "108/230",
+      "value": 108
+    },
+    {
+      "box": {
+        "x0": 734,
+        "x1": 762,
+        "y0": 481,
+        "y1": 509
+      },
+      "id": "metric-callout-ring-96c2ade490",
+      "rawText": "180/90",
+      "value": 180
+    },
+    {
+      "box": {
+        "x0": 446,
+        "x1": 474,
+        "y0": 563,
+        "y1": 591
+      },
+      "id": "metric-callout-ring-a58e277d68",
+      "rawText": "400/77",
+      "value": 400
+    },
+    {
+      "box": {
+        "x0": 384,
+        "x1": 402,
+        "y0": 138,
+        "y1": 156
+      },
+      "id": "metric-callout-ring-b094fb3875",
+      "rawText": "400/74",
+      "value": 400
+    },
+    {
+      "box": {
+        "x0": 604,
+        "x1": 632,
+        "y0": 73,
+        "y1": 101
+      },
+      "id": "metric-callout-ring-d1bdaa37f0",
+      "rawText": "180/140",
+      "value": 180
+    },
+    {
+      "box": {
+        "x0": 601,
+        "x1": 619,
+        "y0": 98,
+        "y1": 116
+      },
+      "id": "metric-callout-ring-e861fa5c52",
+      "rawText": "417/400",
+      "value": 417
+    },
+    {
+      "box": {
+        "x0": 365,
+        "x1": 389,
+        "y0": 138,
+        "y1": 162
+      },
+      "id": "metric-callout-ring-e8f4c10f58",
+      "rawText": "406/177",
+      "value": 406
+    },
+    {
+      "box": {
+        "x0": 298,
+        "x1": 326,
+        "y0": 627,
+        "y1": 655
+      },
+      "id": "metric-callout-ring-f419d71d42",
+      "rawText": "107/140",
+      "value": 107
+    },
+    {
+      "box": {
+        "x0": 730,
+        "x1": 756,
+        "y0": 347,
+        "y1": 373
+      },
+      "id": "metric-callout-ring-fd910ff43d",
+      "rawText": "47/44",
+      "value": 47
+    }
+  ],
+  "frameId": "frame-asset-rzut-360da4c58d-2b0ad412cf",
+  "gapClasses": {
+    "DRAWING_BREAK_SUPPORTED": 264,
+    "OPENING_SUPPORTED": 23,
+    "TRUE_EXTERIOR_GAP": 55,
+    "UNKNOWN_GAP": 28
+  },
+  "wideOpenings": [
+    {
+      "axis": "X",
+      "decision": "OPEN_SIDE",
+      "fromPx": 275,
+      "id": "wide-X-270-275-452",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 270,
+      "score": 0.477563,
+      "toPx": 452,
+      "why": "a 4.20 m gap between two pieces of one wall, wider than a lintel conventionally spans, with only 25% of it drawn across: where the wall stops",
+      "widthM": 4.202688
+    },
+    {
+      "axis": "X",
+      "decision": "OPEN_SIDE",
+      "fromPx": 275,
+      "id": "wide-X-280-275-452",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 280,
+      "score": 0.477563,
+      "toPx": 452,
+      "why": "a 4.20 m gap between two pieces of one wall, wider than a lintel conventionally spans, with only 25% of it drawn across: where the wall stops",
+      "widthM": 4.202688
+    },
+    {
+      "axis": "X",
+      "decision": "OPEN_SIDE",
+      "fromPx": 275,
+      "id": "wide-X-293-275-452",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 292.5,
+      "score": 0.477563,
+      "toPx": 452,
+      "why": "a 4.20 m gap between two pieces of one wall, wider than a lintel conventionally spans, with only 25% of it drawn across: where the wall stops",
+      "widthM": 4.202688
+    },
+    {
+      "axis": "X",
+      "decision": "OPEN_SIDE",
+      "fromPx": 275,
+      "id": "wide-X-309-275-452",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 309,
+      "score": 0.477563,
+      "toPx": 452,
+      "why": "a 4.20 m gap between two pieces of one wall, wider than a lintel conventionally spans, with only 25% of it drawn across: where the wall stops",
+      "widthM": 4.202688
+    },
+    {
+      "axis": "Y",
+      "decision": "OPEN_SIDE",
+      "fromPx": 279,
+      "id": "wide-Y-275-279-516",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 274.5,
+      "score": 0.423569,
+      "toPx": 516,
+      "why": "a 5.63 m gap between two pieces of one wall, wider than a lintel conventionally spans, with only 17% of it drawn across: where the wall stops",
+      "widthM": 5.633964
+    },
+    {
+      "axis": "Y",
+      "decision": "OPEN_SIDE",
+      "fromPx": 279,
+      "id": "wide-Y-284-279-516",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 284.272727,
+      "score": 0.423569,
+      "toPx": 516,
+      "why": "a 5.63 m gap between two pieces of one wall, wider than a lintel conventionally spans, with only 17% of it drawn across: where the wall stops",
+      "widthM": 5.633964
+    },
+    {
+      "axis": "Y",
+      "decision": "OPEN_SIDE",
+      "fromPx": 279,
+      "id": "wide-Y-433-279-434",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 432.5,
+      "score": 0.581106,
+      "toPx": 434,
+      "why": "a 3.68 m gap between two pieces of one wall, wider than a lintel conventionally spans, with only 39% of it drawn across: where the wall stops",
+      "widthM": 3.68466
+    },
+    {
+      "axis": "Y",
+      "decision": "OPEN_SIDE",
+      "fromPx": 279,
+      "id": "wide-Y-446-279-434",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 445.5,
+      "score": 0.581106,
+      "toPx": 434,
+      "why": "a 3.68 m gap between two pieces of one wall, wider than a lintel conventionally spans, with only 39% of it drawn across: where the wall stops",
+      "widthM": 3.68466
+    }
+  ]
+}

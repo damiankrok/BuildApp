@@ -1,0 +1,124 @@
+{
+  "callouts": [
+    {
+      "box": {
+        "x0": 338,
+        "x1": 366,
+        "y0": 560,
+        "y1": 588
+      },
+      "id": "metric-callout-ring-10bfc6c7c2",
+      "rawText": "400/400",
+      "value": 400
+    },
+    {
+      "box": {
+        "x0": 744,
+        "x1": 772,
+        "y0": 505,
+        "y1": 533
+      },
+      "id": "metric-callout-ring-12a49fcfd5",
+      "rawText": "290/120",
+      "value": 290
+    },
+    {
+      "box": {
+        "x0": 653,
+        "x1": 673,
+        "y0": 532,
+        "y1": 552
+      },
+      "id": "metric-callout-ring-2fb33327df",
+      "rawText": "41/41",
+      "value": 41
+    },
+    {
+      "box": {
+        "x0": 644,
+        "x1": 672,
+        "y0": 168,
+        "y1": 196
+      },
+      "id": "metric-callout-ring-34e031464a",
+      "rawText": "40/230",
+      "value": 40
+    },
+    {
+      "box": {
+        "x0": 460,
+        "x1": 490,
+        "y0": 647,
+        "y1": 677
+      },
+      "id": "metric-callout-ring-c7b7952f59",
+      "rawText": "150/210",
+      "value": 150
+    },
+    {
+      "box": {
+        "x0": 618,
+        "x1": 648,
+        "y0": 685,
+        "y1": 715
+      },
+      "id": "metric-callout-ring-ce639b712f",
+      "rawText": "275/225",
+      "value": 275
+    },
+    {
+      "box": {
+        "x0": 253,
+        "x1": 281,
+        "y0": 649,
+        "y1": 677
+      },
+      "id": "metric-callout-ring-db406c2123",
+      "rawText": "260/230",
+      "value": 260
+    },
+    {
+      "box": {
+        "x0": 437,
+        "x1": 457,
+        "y0": 33,
+        "y1": 53
+      },
+      "id": "metric-callout-ring-eb78571e5f",
+      "rawText": "400/400",
+      "value": 400
+    },
+    {
+      "box": {
+        "x0": 110,
+        "x1": 140,
+        "y0": 407,
+        "y1": 437
+      },
+      "id": "metric-callout-ring-f22ca329f8",
+      "rawText": "240/230",
+      "value": 240
+    }
+  ],
+  "frameId": "frame-asset-rzut-efbfc7f809-0bd7f8c4bd",
+  "gapClasses": {
+    "DRAWING_BREAK_SUPPORTED": 419,
+    "OPENING_SUPPORTED": 24,
+    "TRUE_EXTERIOR_GAP": 121,
+    "UNKNOWN_GAP": 26
+  },
+  "wideOpenings": [
+    {
+      "axis": "Y",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 210,
+      "id": "wide-Y-205-210-359",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 205,
+      "score": 0.8,
+      "toPx": 359,
+      "why": "a 3.26 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+      "widthM": 3.260269
+    }
+  ]
+}

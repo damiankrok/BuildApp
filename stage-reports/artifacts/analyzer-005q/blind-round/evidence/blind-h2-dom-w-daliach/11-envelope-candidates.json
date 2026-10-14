@@ -1,0 +1,64 @@
+{
+  "boundary": {
+    "accepted": false,
+    "candidates": [
+      {
+        "areaM2": 127.450425,
+        "cells": 684,
+        "gapsBridged": 26,
+        "id": "A_LONG_BAND_BOX",
+        "maxBridgedGapM": 3.173035,
+        "perimeterM": 45.5143,
+        "strongOpeningM": 7.089662,
+        "unsupportedM": 9.015249,
+        "wallM": 26.083477,
+        "weakOpeningM": 3.325912
+      },
+      {
+        "areaM2": 124.671748,
+        "cells": 659,
+        "gapsBridged": 26,
+        "id": "B_OPENING_AWARE_OUTLINE",
+        "maxBridgedGapM": 3.173035,
+        "perimeterM": 50.809942,
+        "strongOpeningM": 14.551337,
+        "unsupportedM": 0.142227,
+        "wallM": 32.790467,
+        "weakOpeningM": 3.325912
+      }
+    ],
+    "extensions": [
+      {
+        "accepted": false,
+        "areaM2": 2.909801,
+        "cells": 14,
+        "continuesAcrossM": 0
+      }
+    ],
+    "gaps": {
+      "DRAWING_BREAK_SUPPORTED": 419,
+      "OPENING_SUPPORTED": 24,
+      "TRUE_EXTERIOR_GAP": 121,
+      "UNKNOWN_GAP": 26
+    },
+    "policies": {
+      "disagree": false,
+      "exclusionAccepted": false,
+      "exclusionAreaM2": 127.450425,
+      "strictAccepted": false,
+      "strictAreaM2": 127.450425
+    },
+    "why": "the outline adds nothing the box leaves open: the box stands"
+  },
+  "cells": {
+    "enclosed": 15,
+    "total": 20
+  },
+  "frameId": "frame-asset-rzut-efbfc7f809-0bd7f8c4bd",
+  "longBandBox": {
+    "x0": 149,
+    "x1": 734,
+    "y0": 205,
+    "y1": 660
+  }
+}

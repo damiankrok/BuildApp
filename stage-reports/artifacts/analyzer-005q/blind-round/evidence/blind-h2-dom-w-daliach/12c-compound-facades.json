@@ -1,0 +1,33 @@
+{
+  "copies": [
+    {
+      "decompositionId": "dec-64f50506c7bd3288",
+      "frameId": "frame-asset-rzut-efbfc7f809-0bd7f8c4bd",
+      "scale": {
+        "anchors": 5,
+        "mppX": 0.021881,
+        "mppY": 0.021883,
+        "rmsM": 0.019345
+      },
+      "spans": [
+        {
+          "axis": "Y",
+          "fromPx": 210,
+          "id": "compound-Y-205-210-359",
+          "inkFromPx": 210,
+          "inkToPx": 348,
+          "intervals": [],
+          "inward": 1,
+          "linePx": 205,
+          "reading": "BOX",
+          "separators": [],
+          "toPx": 359,
+          "why": "no wall-thick ink inside the gap: one gap",
+          "widthM": 3.260269
+        }
+      ],
+      "storey": "GROUND"
+    }
+  ],
+  "selectedPlanFrameId": "frame-asset-rzut-efbfc7f809-0bd7f8c4bd"
+}

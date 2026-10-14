@@ -1,0 +1,2016 @@
+{
+  "assignment": [
+    {
+      "box": {
+        "x0": 156,
+        "x1": 163,
+        "y0": 76,
+        "y1": 84
+      },
+      "candidates": [
+        {
+          "againstConvention": false,
+          "centred": false,
+          "chainId": "chain-horizontal-92-3daeb3bc32",
+          "cost": 3.833333,
+          "interval": 0,
+          "offset": 1.333333,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-horizontal-92-3daeb3bc32",
+        "interval": 0
+      },
+      "orientation": "HORIZONTAL",
+      "status": "BOUND",
+      "text": "14"
+    },
+    {
+      "box": {
+        "x0": 306,
+        "x1": 349,
+        "y0": 89,
+        "y1": 160
+      },
+      "candidates": [
+        {
+          "againstConvention": true,
+          "centred": true,
+          "chainId": "chain-vertical-236-744d5af472",
+          "cost": 3.079545,
+          "interval": 0,
+          "offset": 2.079545,
+          "side": "AFTER"
+        },
+        {
+          "againstConvention": true,
+          "centred": true,
+          "chainId": "chain-vertical-268-ae4dd756aa",
+          "cost": 2.363636,
+          "interval": 0,
+          "offset": 1.363636,
+          "side": "AFTER"
+        },
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-vertical-348-e029ae6453",
+          "cost": 0.465909,
+          "interval": 2,
+          "offset": 0.465909,
+          "side": "ACROSS"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-vertical-268-ae4dd756aa",
+        "interval": 0
+      },
+      "margin": 0.715909,
+      "orientation": "ROTATED_CW",
+      "status": "BOUND",
+      "text": "773"
+    },
+    {
+      "box": {
+        "x0": 352,
+        "x1": 360,
+        "y0": 127,
+        "y1": 134
+      },
+      "candidates": [
+        {
+          "againstConvention": true,
+          "centred": true,
+          "chainId": "chain-vertical-348-e029ae6453",
+          "cost": 1.888889,
+          "interval": 2,
+          "offset": 0.888889,
+          "side": "AFTER"
+        }
+      ],
+      "margin": 0.111111,
+      "orientation": "ROTATED_CCW",
+      "status": "UNASSIGNED",
+      "text": "15"
+    },
+    {
+      "box": {
+        "x0": 351,
+        "x1": 359,
+        "y0": 148,
+        "y1": 155
+      },
+      "candidates": [
+        {
+          "againstConvention": true,
+          "centred": true,
+          "chainId": "chain-vertical-348-e029ae6453",
+          "cost": 1.777778,
+          "interval": 2,
+          "offset": 0.777778,
+          "side": "AFTER"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-vertical-348-e029ae6453",
+        "interval": 2
+      },
+      "margin": 0.111111,
+      "orientation": "ROTATED_CW",
+      "status": "BOUND",
+      "text": "11"
+    },
+    {
+      "box": {
+        "x0": 592,
+        "x1": 640,
+        "y0": 153,
+        "y1": 200
+      },
+      "candidates": [
+        {
+          "againstConvention": false,
+          "centred": false,
+          "chainId": "chain-horizontal-214-37c5839ce3",
+          "cost": 3.28125,
+          "interval": 2,
+          "offset": 0.78125,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-horizontal-214-37c5839ce3",
+        "interval": 2
+      },
+      "orientation": "HORIZONTAL",
+      "status": "BOUND",
+      "text": "00"
+    },
+    {
+      "box": {
+        "x0": 257,
+        "x1": 276,
+        "y0": 272,
+        "y1": 285
+      },
+      "candidates": [
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-horizontal-288-b67a57a80c",
+          "cost": 0.678571,
+          "interval": 3,
+          "offset": 0.678571,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-horizontal-288-b67a57a80c",
+        "interval": 3
+      },
+      "orientation": "HORIZONTAL",
+      "status": "BOUND",
+      "text": "010"
+    },
+    {
+      "box": {
+        "x0": 649,
+        "x1": 666,
+        "y0": 272,
+        "y1": 285
+      },
+      "candidates": [
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-horizontal-288-b67a57a80c",
+          "cost": 0.678571,
+          "interval": 15,
+          "offset": 0.678571,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-horizontal-288-b67a57a80c",
+        "interval": 15
+      },
+      "orientation": "HORIZONTAL",
+      "status": "BOUND",
+      "text": "173"
+    },
+    {
+      "box": {
+        "x0": 215,
+        "x1": 228,
+        "y0": 337,
+        "y1": 357
+      },
+      "candidates": [
+        {
+          "againstConvention": true,
+          "centred": false,
+          "chainId": "chain-vertical-211-a87f783575",
+          "cost": 4.285714,
+          "interval": 3,
+          "offset": 0.785714,
+          "side": "AFTER"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-vertical-211-a87f783575",
+        "interval": 3
+      },
+      "orientation": "ROTATED_CW",
+      "status": "BOUND",
+      "text": "510"
+    },
+    {
+      "box": {
+        "x0": 571,
+        "x1": 584,
+        "y0": 337,
+        "y1": 357
+      },
+      "candidates": [
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-vertical-588-61851c5938",
+          "cost": 0.75,
+          "interval": 3,
+          "offset": 0.75,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-vertical-588-61851c5938",
+        "interval": 3
+      },
+      "orientation": "ROTATED_CW",
+      "status": "BOUND",
+      "text": "105"
+    },
+    {
+      "box": {
+        "x0": 663,
+        "x1": 676,
+        "y0": 337,
+        "y1": 357
+      },
+      "candidates": [
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-vertical-680-b418ffedae",
+          "cost": 0.75,
+          "interval": 2,
+          "offset": 0.75,
+          "side": "BEFORE"
+        },
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-vertical-686-f7bf1e5633",
+          "cost": 1.178571,
+          "interval": 2,
+          "offset": 1.178571,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-vertical-680-b418ffedae",
+        "interval": 2
+      },
+      "margin": 0.428571,
+      "orientation": "ROTATED_CW",
+      "status": "BOUND",
+      "text": "758"
+    },
+    {
+      "box": {
+        "x0": 51,
+        "x1": 63,
+        "y0": 413,
+        "y1": 432
+      },
+      "candidates": [
+        {
+          "againstConvention": true,
+          "centred": true,
+          "chainId": "chain-vertical-42-fe1a646c47",
+          "cost": 2.153846,
+          "interval": 0,
+          "offset": 1.153846,
+          "side": "AFTER"
+        },
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-vertical-67-97335ecfb1",
+          "cost": 0.769231,
+          "interval": 0,
+          "offset": 0.769231,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-vertical-67-97335ecfb1",
+        "interval": 0
+      },
+      "margin": 5.230769,
+      "orientation": "ROTATED_CW",
+      "status": "BOUND",
+      "text": "450"
+    },
+    {
+      "box": {
+        "x0": 25,
+        "x1": 38,
+        "y0": 437,
+        "y1": 462
+      },
+      "candidates": [
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-vertical-42-fe1a646c47",
+          "cost": 0.75,
+          "interval": 0,
+          "offset": 0.75,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-vertical-42-fe1a646c47",
+        "interval": 0
+      },
+      "margin": 5.25,
+      "orientation": "ROTATED_CW",
+      "status": "BOUND",
+      "text": "1000"
+    },
+    {
+      "box": {
+        "x0": 572,
+        "x1": 584,
+        "y0": 546,
+        "y1": 565
+      },
+      "candidates": [
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-vertical-588-61851c5938",
+          "cost": 0.769231,
+          "interval": 6,
+          "offset": 0.769231,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-vertical-588-61851c5938",
+        "interval": 6
+      },
+      "orientation": "ROTATED_CW",
+      "status": "BOUND",
+      "text": "600"
+    },
+    {
+      "box": {
+        "x0": 348,
+        "x1": 357,
+        "y0": 558,
+        "y1": 567
+      },
+      "candidates": [
+        {
+          "againstConvention": true,
+          "centred": true,
+          "chainId": "chain-vertical-338-56ab1a30b4",
+          "cost": 2.45,
+          "interval": 0,
+          "offset": 1.45,
+          "side": "AFTER"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-vertical-338-56ab1a30b4",
+        "interval": 0
+      },
+      "margin": 3.55,
+      "orientation": "ROTATED_CW",
+      "status": "BOUND",
+      "text": "21"
+    },
+    {
+      "box": {
+        "x0": 380,
+        "x1": 420,
+        "y0": 577,
+        "y1": 606
+      },
+      "candidates": [
+        {
+          "againstConvention": true,
+          "centred": false,
+          "chainId": "chain-vertical-338-56ab1a30b4",
+          "cost": 5.012195,
+          "interval": 0,
+          "offset": 1.512195,
+          "side": "AFTER"
+        },
+        {
+          "againstConvention": false,
+          "centred": false,
+          "chainId": "chain-vertical-461-ec21433587",
+          "cost": 3.987805,
+          "interval": 0,
+          "offset": 1.487805,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-vertical-461-ec21433587",
+        "interval": 0
+      },
+      "margin": 2.012195,
+      "orientation": "ROTATED_CCW",
+      "status": "BOUND",
+      "text": "17"
+    },
+    {
+      "box": {
+        "x0": 257,
+        "x1": 276,
+        "y0": 594,
+        "y1": 606
+      },
+      "candidates": [
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-horizontal-610-728a162344",
+          "cost": 0.769231,
+          "interval": 2,
+          "offset": 0.769231,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-horizontal-610-728a162344",
+        "interval": 2
+      },
+      "orientation": "HORIZONTAL",
+      "status": "BOUND",
+      "text": "050"
+    },
+    {
+      "box": {
+        "x0": 393,
+        "x1": 411,
+        "y0": 594,
+        "y1": 606
+      },
+      "candidates": [
+        {
+          "againstConvention": true,
+          "centred": true,
+          "chainId": "chain-horizontal-575-358beff02c",
+          "cost": 2.923077,
+          "interval": 2,
+          "offset": 1.923077,
+          "side": "AFTER"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-horizontal-575-358beff02c",
+        "interval": 2
+      },
+      "orientation": "HORIZONTAL",
+      "status": "BOUND",
+      "text": "134"
+    },
+    {
+      "box": {
+        "x0": 475,
+        "x1": 496,
+        "y0": 594,
+        "y1": 606
+      },
+      "candidates": [
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-horizontal-610-cc39810ae8",
+          "cost": 0.769231,
+          "interval": 1,
+          "offset": 0.769231,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-horizontal-610-cc39810ae8",
+        "interval": 1
+      },
+      "orientation": "HORIZONTAL",
+      "status": "BOUND",
+      "text": "217"
+    },
+    {
+      "box": {
+        "x0": 51,
+        "x1": 63,
+        "y0": 656,
+        "y1": 674
+      },
+      "candidates": [
+        {
+          "againstConvention": true,
+          "centred": false,
+          "chainId": "chain-vertical-42-fe1a646c47",
+          "cost": 4.653846,
+          "interval": 0,
+          "offset": 1.153846,
+          "side": "AFTER"
+        },
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-vertical-67-97335ecfb1",
+          "cost": 0.769231,
+          "interval": 1,
+          "offset": 0.769231,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-vertical-67-97335ecfb1",
+        "interval": 1
+      },
+      "margin": 5.230769,
+      "orientation": "ROTATED_CW",
+      "status": "BOUND",
+      "text": "110"
+    },
+    {
+      "box": {
+        "x0": 667,
+        "x1": 712,
+        "y0": 704,
+        "y1": 732
+      },
+      "candidates": [
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-horizontal-754-20994ab841",
+          "cost": 1.241379,
+          "interval": 2,
+          "offset": 1.241379,
+          "side": "BEFORE"
+        },
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-horizontal-759-9ab37bf4f7",
+          "cost": 1.413793,
+          "interval": 0,
+          "offset": 1.413793,
+          "side": "BEFORE"
+        },
+        {
+          "againstConvention": false,
+          "centred": false,
+          "chainId": "chain-horizontal-780-1b5049158e",
+          "cost": 4.637931,
+          "interval": 0,
+          "offset": 2.137931,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-horizontal-759-9ab37bf4f7",
+        "interval": 0
+      },
+      "margin": 0.212201,
+      "orientation": "HORIZONTAL",
+      "status": "BOUND",
+      "text": "3±±"
+    },
+    {
+      "box": {
+        "x0": 553,
+        "x1": 597,
+        "y0": 707,
+        "y1": 732
+      },
+      "candidates": [
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-horizontal-754-20994ab841",
+          "cost": 1.326923,
+          "interval": 1,
+          "offset": 1.326923,
+          "side": "BEFORE"
+        },
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-horizontal-759-9ab37bf4f7",
+          "cost": 1.519231,
+          "interval": 0,
+          "offset": 1.519231,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-horizontal-754-20994ab841",
+        "interval": 1
+      },
+      "margin": 4.673077,
+      "orientation": "HORIZONTAL",
+      "status": "BOUND",
+      "text": "±±5"
+    },
+    {
+      "box": {
+        "x0": 325,
+        "x1": 345,
+        "y0": 738,
+        "y1": 750
+      },
+      "candidates": [
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-horizontal-754-20994ab841",
+          "cost": 0.769231,
+          "interval": 0,
+          "offset": 0.769231,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-horizontal-754-20994ab841",
+        "interval": 0
+      },
+      "margin": 5.230769,
+      "orientation": "HORIZONTAL",
+      "status": "BOUND",
+      "text": "815"
+    },
+    {
+      "box": {
+        "x0": 618,
+        "x1": 638,
+        "y0": 738,
+        "y1": 750
+      },
+      "candidates": [
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-horizontal-754-20994ab841",
+          "cost": 0.769231,
+          "interval": 2,
+          "offset": 0.769231,
+          "side": "BEFORE"
+        },
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-horizontal-759-9ab37bf4f7",
+          "cost": 1.153846,
+          "interval": 0,
+          "offset": 1.153846,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-horizontal-754-20994ab841",
+        "interval": 2
+      },
+      "margin": 0.212201,
+      "orientation": "HORIZONTAL",
+      "status": "BOUND",
+      "text": "015"
+    },
+    {
+      "box": {
+        "x0": 422,
+        "x1": 447,
+        "y0": 764,
+        "y1": 776
+      },
+      "candidates": [
+        {
+          "againstConvention": true,
+          "centred": true,
+          "chainId": "chain-horizontal-754-20994ab841",
+          "cost": 2.230769,
+          "interval": 0,
+          "offset": 1.230769,
+          "side": "AFTER"
+        },
+        {
+          "againstConvention": false,
+          "centred": true,
+          "chainId": "chain-horizontal-780-1b5049158e",
+          "cost": 0.769231,
+          "interval": 0,
+          "offset": 0.769231,
+          "side": "BEFORE"
+        }
+      ],
+      "chosen": {
+        "chainId": "chain-horizontal-780-1b5049158e",
+        "interval": 0
+      },
+      "margin": 5.230769,
+      "orientation": "HORIZONTAL",
+      "status": "BOUND",
+      "text": "1160"
+    }
+  ],
+  "assignmentSource": "FINAL",
+  "counts": {
+    "ambiguous": 0,
+    "bound": 23,
+    "unassigned": 1
+  },
+  "endSpans": [],
+  "frameId": "frame-asset-rzut-efbfc7f809-0bd7f8c4bd",
+  "groups": [
+    {
+      "axis": "HORIZONTAL",
+      "chainIds": [
+        "chain-horizontal-214-37c5839ce3",
+        "chain-horizontal-220-f78da47653",
+        "chain-horizontal-230-70c26347d2",
+        "chain-horizontal-245-0d2e23bbf3",
+        "chain-horizontal-253-4901070033",
+        "chain-horizontal-267-19e75480ce",
+        "chain-horizontal-288-b67a57a80c",
+        "chain-horizontal-327-7568a77176",
+        "chain-horizontal-328-d2db081b49"
+      ],
+      "id": "axis-group-horizontal-214-aab3f619f6",
+      "relations": [
+        {
+          "aChainId": "chain-horizontal-214-37c5839ce3",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-220-f78da47653",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-214-37c5839ce3",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-230-70c26347d2",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-214-37c5839ce3",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-245-0d2e23bbf3",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-214-37c5839ce3",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-253-4901070033",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-214-37c5839ce3",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-267-19e75480ce",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-288-b67a57a80c",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-214-37c5839ce3",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-214-37c5839ce3",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-327-7568a77176",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-214-37c5839ce3",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-328-d2db081b49",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-220-f78da47653",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-230-70c26347d2",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-220-f78da47653",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-245-0d2e23bbf3",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-220-f78da47653",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-253-4901070033",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-220-f78da47653",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-267-19e75480ce",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-288-b67a57a80c",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-220-f78da47653",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-220-f78da47653",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-327-7568a77176",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-220-f78da47653",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-328-d2db081b49",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-245-0d2e23bbf3",
+          "alignedEnds": [
+            false,
+            true
+          ],
+          "bChainId": "chain-horizontal-230-70c26347d2",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-230-70c26347d2",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-253-4901070033",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-230-70c26347d2",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-267-19e75480ce",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-288-b67a57a80c",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-230-70c26347d2",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-230-70c26347d2",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-327-7568a77176",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-230-70c26347d2",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-328-d2db081b49",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-245-0d2e23bbf3",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-253-4901070033",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-245-0d2e23bbf3",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-267-19e75480ce",
+          "kind": "SUBDIVIDES"
+        },
+        {
+          "aChainId": "chain-horizontal-288-b67a57a80c",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-245-0d2e23bbf3",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-245-0d2e23bbf3",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-327-7568a77176",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-245-0d2e23bbf3",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-328-d2db081b49",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-253-4901070033",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-267-19e75480ce",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-288-b67a57a80c",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-253-4901070033",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-253-4901070033",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-327-7568a77176",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-253-4901070033",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-328-d2db081b49",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-288-b67a57a80c",
+          "alignedEnds": [
+            true,
+            false
+          ],
+          "bChainId": "chain-horizontal-267-19e75480ce",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-267-19e75480ce",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-327-7568a77176",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-267-19e75480ce",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-328-d2db081b49",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-288-b67a57a80c",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-327-7568a77176",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-288-b67a57a80c",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-328-d2db081b49",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-327-7568a77176",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-328-d2db081b49",
+          "kind": "OVERLAPS"
+        }
+      ],
+      "separations": [
+        {
+          "fromChainId": "chain-horizontal-214-37c5839ce3",
+          "heights": 0.6,
+          "px": 6,
+          "toChainId": "chain-horizontal-220-f78da47653"
+        },
+        {
+          "fromChainId": "chain-horizontal-220-f78da47653",
+          "heights": 1,
+          "px": 10,
+          "toChainId": "chain-horizontal-230-70c26347d2"
+        },
+        {
+          "fromChainId": "chain-horizontal-230-70c26347d2",
+          "heights": 1.5,
+          "px": 15,
+          "toChainId": "chain-horizontal-245-0d2e23bbf3"
+        },
+        {
+          "fromChainId": "chain-horizontal-245-0d2e23bbf3",
+          "heights": 0.8,
+          "px": 8,
+          "toChainId": "chain-horizontal-253-4901070033"
+        },
+        {
+          "fromChainId": "chain-horizontal-253-4901070033",
+          "heights": 1.35,
+          "px": 13.5,
+          "toChainId": "chain-horizontal-267-19e75480ce"
+        },
+        {
+          "fromChainId": "chain-horizontal-267-19e75480ce",
+          "heights": 2.15,
+          "px": 21.5,
+          "toChainId": "chain-horizontal-288-b67a57a80c"
+        },
+        {
+          "fromChainId": "chain-horizontal-288-b67a57a80c",
+          "heights": 3.9,
+          "px": 39,
+          "toChainId": "chain-horizontal-327-7568a77176"
+        },
+        {
+          "fromChainId": "chain-horizontal-327-7568a77176",
+          "heights": 0.1,
+          "px": 1,
+          "toChainId": "chain-horizontal-328-d2db081b49"
+        }
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "chainIds": [
+        "chain-horizontal-370-b1f7da1fcb",
+        "chain-horizontal-382-d4b3a2c8a0",
+        "chain-horizontal-407-74fc5152b1"
+      ],
+      "id": "axis-group-horizontal-370-a8ffcaa598",
+      "relations": [
+        {
+          "aChainId": "chain-horizontal-382-d4b3a2c8a0",
+          "alignedEnds": [
+            true,
+            true
+          ],
+          "bChainId": "chain-horizontal-370-b1f7da1fcb",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-370-b1f7da1fcb",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-407-74fc5152b1",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-382-d4b3a2c8a0",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-407-74fc5152b1",
+          "kind": "CONTAINS"
+        }
+      ],
+      "separations": [
+        {
+          "fromChainId": "chain-horizontal-370-b1f7da1fcb",
+          "heights": 1.2,
+          "px": 12,
+          "toChainId": "chain-horizontal-382-d4b3a2c8a0"
+        },
+        {
+          "fromChainId": "chain-horizontal-382-d4b3a2c8a0",
+          "heights": 2.5,
+          "px": 25,
+          "toChainId": "chain-horizontal-407-74fc5152b1"
+        }
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "chainIds": [
+        "chain-horizontal-383-5bc310872c",
+        "chain-horizontal-420-c72e6d0cb9"
+      ],
+      "id": "axis-group-horizontal-383-d283e4c6a1",
+      "relations": [
+        {
+          "aChainId": "chain-horizontal-420-c72e6d0cb9",
+          "alignedEnds": [
+            true,
+            true
+          ],
+          "bChainId": "chain-horizontal-383-5bc310872c",
+          "kind": "CONTAINS"
+        }
+      ],
+      "separations": [
+        {
+          "fromChainId": "chain-horizontal-383-5bc310872c",
+          "heights": 3.7,
+          "px": 37,
+          "toChainId": "chain-horizontal-420-c72e6d0cb9"
+        }
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "chainIds": [
+        "chain-horizontal-610-728a162344",
+        "chain-horizontal-630-3aecdbdacd",
+        "chain-horizontal-634-c7d7864a91",
+        "chain-horizontal-663-97b82e2585"
+      ],
+      "id": "axis-group-horizontal-610-476f1c0916",
+      "relations": [
+        {
+          "aChainId": "chain-horizontal-630-3aecdbdacd",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-610-728a162344",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-634-c7d7864a91",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-610-728a162344",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-663-97b82e2585",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-610-728a162344",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-634-c7d7864a91",
+          "alignedEnds": [
+            true,
+            true
+          ],
+          "bChainId": "chain-horizontal-630-3aecdbdacd",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-630-3aecdbdacd",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-663-97b82e2585",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-634-c7d7864a91",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-663-97b82e2585",
+          "kind": "CONTAINS"
+        }
+      ],
+      "separations": [
+        {
+          "fromChainId": "chain-horizontal-610-728a162344",
+          "heights": 2,
+          "px": 20,
+          "toChainId": "chain-horizontal-630-3aecdbdacd"
+        },
+        {
+          "fromChainId": "chain-horizontal-630-3aecdbdacd",
+          "heights": 0.4,
+          "px": 4,
+          "toChainId": "chain-horizontal-634-c7d7864a91"
+        },
+        {
+          "fromChainId": "chain-horizontal-634-c7d7864a91",
+          "heights": 2.85,
+          "px": 28.5,
+          "toChainId": "chain-horizontal-663-97b82e2585"
+        }
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "chainIds": [
+        "chain-horizontal-731-48711d43ba",
+        "chain-horizontal-754-20994ab841",
+        "chain-horizontal-759-9ab37bf4f7",
+        "chain-horizontal-780-1b5049158e"
+      ],
+      "id": "axis-group-horizontal-731-fa6fd86493",
+      "relations": [
+        {
+          "aChainId": "chain-horizontal-754-20994ab841",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-731-48711d43ba",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-731-48711d43ba",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-759-9ab37bf4f7",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-horizontal-780-1b5049158e",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-731-48711d43ba",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-754-20994ab841",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-759-9ab37bf4f7",
+          "kind": "SUBDIVIDES"
+        },
+        {
+          "aChainId": "chain-horizontal-780-1b5049158e",
+          "alignedEnds": [
+            true,
+            true
+          ],
+          "bChainId": "chain-horizontal-754-20994ab841",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-780-1b5049158e",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-759-9ab37bf4f7",
+          "kind": "CONTAINS"
+        }
+      ],
+      "separations": [
+        {
+          "fromChainId": "chain-horizontal-731-48711d43ba",
+          "heights": 2.3,
+          "px": 23,
+          "toChainId": "chain-horizontal-754-20994ab841"
+        },
+        {
+          "fromChainId": "chain-horizontal-754-20994ab841",
+          "heights": 0.5,
+          "px": 5,
+          "toChainId": "chain-horizontal-759-9ab37bf4f7"
+        },
+        {
+          "fromChainId": "chain-horizontal-759-9ab37bf4f7",
+          "heights": 2.1,
+          "px": 21,
+          "toChainId": "chain-horizontal-780-1b5049158e"
+        }
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "chainIds": [
+        "chain-horizontal-90-eae6bce50c",
+        "chain-horizontal-92-757570efb9",
+        "chain-horizontal-124-83148d0aaa"
+      ],
+      "id": "axis-group-horizontal-90-79671d0224",
+      "relations": [
+        {
+          "aChainId": "chain-horizontal-92-757570efb9",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-90-eae6bce50c",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-124-83148d0aaa",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-90-eae6bce50c",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-124-83148d0aaa",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-92-757570efb9",
+          "kind": "CONTAINS"
+        }
+      ],
+      "separations": [
+        {
+          "fromChainId": "chain-horizontal-90-eae6bce50c",
+          "heights": 0.25,
+          "px": 2.5,
+          "toChainId": "chain-horizontal-92-757570efb9"
+        },
+        {
+          "fromChainId": "chain-horizontal-92-757570efb9",
+          "heights": 3.2,
+          "px": 32,
+          "toChainId": "chain-horizontal-124-83148d0aaa"
+        }
+      ]
+    },
+    {
+      "axis": "HORIZONTAL",
+      "chainIds": [
+        "chain-horizontal-92-3daeb3bc32",
+        "chain-horizontal-124-6550fa088e",
+        "chain-horizontal-156-1c979dc927",
+        "chain-horizontal-159-e660e512e6"
+      ],
+      "id": "axis-group-horizontal-92-32e8edc328",
+      "relations": [
+        {
+          "aChainId": "chain-horizontal-124-6550fa088e",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-92-3daeb3bc32",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-92-3daeb3bc32",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-156-1c979dc927",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-92-3daeb3bc32",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-159-e660e512e6",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-124-6550fa088e",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-156-1c979dc927",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-124-6550fa088e",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-159-e660e512e6",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-horizontal-156-1c979dc927",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-horizontal-159-e660e512e6",
+          "kind": "CONTAINS"
+        }
+      ],
+      "separations": [
+        {
+          "fromChainId": "chain-horizontal-92-3daeb3bc32",
+          "heights": 3.2,
+          "px": 32,
+          "toChainId": "chain-horizontal-124-6550fa088e"
+        },
+        {
+          "fromChainId": "chain-horizontal-124-6550fa088e",
+          "heights": 3.2,
+          "px": 32,
+          "toChainId": "chain-horizontal-156-1c979dc927"
+        },
+        {
+          "fromChainId": "chain-horizontal-156-1c979dc927",
+          "heights": 0.3,
+          "px": 3,
+          "toChainId": "chain-horizontal-159-e660e512e6"
+        }
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "chainIds": [
+        "chain-vertical-149-dd479d459b",
+        "chain-vertical-159-6c95e6d9e0"
+      ],
+      "id": "axis-group-vertical-149-f85429e7d0",
+      "relations": [
+        {
+          "aChainId": "chain-vertical-149-dd479d459b",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-vertical-159-6c95e6d9e0",
+          "kind": "CONTAINS"
+        }
+      ],
+      "separations": [
+        {
+          "fromChainId": "chain-vertical-149-dd479d459b",
+          "heights": 1,
+          "px": 10,
+          "toChainId": "chain-vertical-159-6c95e6d9e0"
+        }
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "chainIds": [
+        "chain-vertical-178-cab04b77ed",
+        "chain-vertical-189-87e587e35d",
+        "chain-vertical-211-a87f783575"
+      ],
+      "id": "axis-group-vertical-178-eb1953c6db",
+      "relations": [
+        {
+          "aChainId": "chain-vertical-189-87e587e35d",
+          "alignedEnds": [
+            true,
+            true
+          ],
+          "bChainId": "chain-vertical-178-cab04b77ed",
+          "kind": "SUBDIVIDES"
+        },
+        {
+          "aChainId": "chain-vertical-211-a87f783575",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-vertical-178-cab04b77ed",
+          "kind": "SUBDIVIDES"
+        },
+        {
+          "aChainId": "chain-vertical-211-a87f783575",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-vertical-189-87e587e35d",
+          "kind": "SUBDIVIDES"
+        }
+      ],
+      "separations": [
+        {
+          "fromChainId": "chain-vertical-178-cab04b77ed",
+          "heights": 1.1,
+          "px": 11,
+          "toChainId": "chain-vertical-189-87e587e35d"
+        },
+        {
+          "fromChainId": "chain-vertical-189-87e587e35d",
+          "heights": 2.15,
+          "px": 21.5,
+          "toChainId": "chain-vertical-211-a87f783575"
+        }
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "chainIds": [
+        "chain-vertical-236-744d5af472",
+        "chain-vertical-268-ae4dd756aa"
+      ],
+      "id": "axis-group-vertical-236-a1c0057932",
+      "relations": [
+        {
+          "aChainId": "chain-vertical-268-ae4dd756aa",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-vertical-236-744d5af472",
+          "kind": "CONTAINS"
+        }
+      ],
+      "separations": [
+        {
+          "fromChainId": "chain-vertical-236-744d5af472",
+          "heights": 3.15,
+          "px": 31.5,
+          "toChainId": "chain-vertical-268-ae4dd756aa"
+        }
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "chainIds": [
+        "chain-vertical-348-31f36982ac",
+        "chain-vertical-358-cc1127ca38"
+      ],
+      "id": "axis-group-vertical-348-a3b9e0ff45",
+      "relations": [
+        {
+          "aChainId": "chain-vertical-348-31f36982ac",
+          "alignedEnds": [
+            true,
+            true
+          ],
+          "bChainId": "chain-vertical-358-cc1127ca38",
+          "kind": "CONTAINS"
+        }
+      ],
+      "separations": [
+        {
+          "fromChainId": "chain-vertical-348-31f36982ac",
+          "heights": 1,
+          "px": 10,
+          "toChainId": "chain-vertical-358-cc1127ca38"
+        }
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "chainIds": [
+        "chain-vertical-42-fe1a646c47",
+        "chain-vertical-67-97335ecfb1",
+        "chain-vertical-103-fbab522dc7"
+      ],
+      "id": "axis-group-vertical-42-cf5bbdd8ec",
+      "relations": [
+        {
+          "aChainId": "chain-vertical-67-97335ecfb1",
+          "alignedEnds": [
+            true,
+            true
+          ],
+          "bChainId": "chain-vertical-42-fe1a646c47",
+          "kind": "SUBDIVIDES"
+        },
+        {
+          "aChainId": "chain-vertical-42-fe1a646c47",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-vertical-103-fbab522dc7",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-vertical-67-97335ecfb1",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-vertical-103-fbab522dc7",
+          "kind": "OVERLAPS"
+        }
+      ],
+      "separations": [
+        {
+          "fromChainId": "chain-vertical-42-fe1a646c47",
+          "heights": 2.5,
+          "px": 25,
+          "toChainId": "chain-vertical-67-97335ecfb1"
+        },
+        {
+          "fromChainId": "chain-vertical-67-97335ecfb1",
+          "heights": 3.6,
+          "px": 36,
+          "toChainId": "chain-vertical-103-fbab522dc7"
+        }
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "chainIds": [
+        "chain-vertical-473-7e032e4422",
+        "chain-vertical-511-8af7e65fc5"
+      ],
+      "id": "axis-group-vertical-473-3dae56c0d6",
+      "relations": [
+        {
+          "aChainId": "chain-vertical-473-7e032e4422",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-vertical-511-8af7e65fc5",
+          "kind": "CONTAINS"
+        }
+      ],
+      "separations": [
+        {
+          "fromChainId": "chain-vertical-473-7e032e4422",
+          "heights": 3.8,
+          "px": 38,
+          "toChainId": "chain-vertical-511-8af7e65fc5"
+        }
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "chainIds": [
+        "chain-vertical-582-7c29f6f6f0",
+        "chain-vertical-588-61851c5938",
+        "chain-vertical-595-0d1b9be0ae",
+        "chain-vertical-609-9d5c3ff374"
+      ],
+      "id": "axis-group-vertical-582-b5ce936dab",
+      "relations": [
+        {
+          "aChainId": "chain-vertical-582-7c29f6f6f0",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-vertical-588-61851c5938",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-vertical-582-7c29f6f6f0",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-vertical-595-0d1b9be0ae",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-vertical-582-7c29f6f6f0",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-vertical-609-9d5c3ff374",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-vertical-588-61851c5938",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-vertical-595-0d1b9be0ae",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-vertical-588-61851c5938",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-vertical-609-9d5c3ff374",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-vertical-595-0d1b9be0ae",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-vertical-609-9d5c3ff374",
+          "kind": "OVERLAPS"
+        }
+      ],
+      "separations": [
+        {
+          "fromChainId": "chain-vertical-582-7c29f6f6f0",
+          "heights": 0.6,
+          "px": 6,
+          "toChainId": "chain-vertical-588-61851c5938"
+        },
+        {
+          "fromChainId": "chain-vertical-588-61851c5938",
+          "heights": 0.7,
+          "px": 7,
+          "toChainId": "chain-vertical-595-0d1b9be0ae"
+        },
+        {
+          "fromChainId": "chain-vertical-595-0d1b9be0ae",
+          "heights": 1.4,
+          "px": 14,
+          "toChainId": "chain-vertical-609-9d5c3ff374"
+        }
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "chainIds": [
+        "chain-vertical-660-aca097f9c6",
+        "chain-vertical-670-bdd6e4b97f",
+        "chain-vertical-674-5d38550828"
+      ],
+      "id": "axis-group-vertical-660-d07deac7dd",
+      "relations": [
+        {
+          "aChainId": "chain-vertical-660-aca097f9c6",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-vertical-670-bdd6e4b97f",
+          "kind": "OVERLAPS"
+        },
+        {
+          "aChainId": "chain-vertical-674-5d38550828",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-vertical-660-aca097f9c6",
+          "kind": "CONTAINS"
+        },
+        {
+          "aChainId": "chain-vertical-674-5d38550828",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-vertical-670-bdd6e4b97f",
+          "kind": "CONTAINS"
+        }
+      ],
+      "separations": [
+        {
+          "fromChainId": "chain-vertical-660-aca097f9c6",
+          "heights": 1,
+          "px": 10,
+          "toChainId": "chain-vertical-670-bdd6e4b97f"
+        },
+        {
+          "fromChainId": "chain-vertical-670-bdd6e4b97f",
+          "heights": 0.4,
+          "px": 4,
+          "toChainId": "chain-vertical-674-5d38550828"
+        }
+      ]
+    },
+    {
+      "axis": "VERTICAL",
+      "chainIds": [
+        "chain-vertical-680-b418ffedae",
+        "chain-vertical-686-f7bf1e5633"
+      ],
+      "id": "axis-group-vertical-680-e9dde2bf04",
+      "relations": [
+        {
+          "aChainId": "chain-vertical-686-f7bf1e5633",
+          "alignedEnds": [
+            false,
+            false
+          ],
+          "bChainId": "chain-vertical-680-b418ffedae",
+          "kind": "CONTAINS"
+        }
+      ],
+      "separations": [
+        {
+          "fromChainId": "chain-vertical-680-b418ffedae",
+          "heights": 0.6,
+          "px": 6,
+          "toChainId": "chain-vertical-686-f7bf1e5633"
+        }
+      ]
+    }
+  ],
+  "labelHeightPx": 10,
+  "labelInkLines": [],
+  "labelInkMarks": [
+    {
+      "atPx": 261,
+      "chainId": "chain-horizontal-267-19e75480ce",
+      "class": "QUESTIONABLE"
+    },
+    {
+      "atPx": 266.5,
+      "chainId": "chain-horizontal-288-b67a57a80c",
+      "class": "QUESTIONABLE"
+    },
+    {
+      "atPx": 400,
+      "chainId": "chain-horizontal-288-b67a57a80c",
+      "class": "QUESTIONABLE"
+    },
+    {
+      "atPx": 414,
+      "chainId": "chain-horizontal-288-b67a57a80c",
+      "class": "QUESTIONABLE"
+    },
+    {
+      "atPx": 432,
+      "chainId": "chain-horizontal-288-b67a57a80c",
+      "class": "REJECTED"
+    },
+    {
+      "atPx": 458,
+      "chainId": "chain-horizontal-288-b67a57a80c",
+      "class": "REJECTED"
+    },
+    {
+      "atPx": 627.5,
+      "chainId": "chain-horizontal-754-20994ab841",
+      "class": "QUESTIONABLE"
+    },
+    {
+      "atPx": 348,
+      "chainId": "chain-vertical-211-a87f783575",
+      "class": "QUESTIONABLE"
+    },
+    {
+      "atPx": 280.272727,
+      "chainId": "chain-vertical-473-7e032e4422",
+      "class": "QUESTIONABLE"
+    },
+    {
+      "atPx": 296,
+      "chainId": "chain-vertical-473-7e032e4422",
+      "class": "QUESTIONABLE"
+    },
+    {
+      "atPx": 308,
+      "chainId": "chain-vertical-473-7e032e4422",
+      "class": "QUESTIONABLE"
+    },
+    {
+      "atPx": 346.5,
+      "chainId": "chain-vertical-473-7e032e4422",
+      "class": "QUESTIONABLE"
+    },
+    {
+      "atPx": 346.5,
+      "chainId": "chain-vertical-588-61851c5938",
+      "class": "QUESTIONABLE"
+    },
+    {
+      "atPx": 554.5,
+      "chainId": "chain-vertical-588-61851c5938",
+      "class": "QUESTIONABLE"
+    },
+    {
+      "atPx": 346.5,
+      "chainId": "chain-vertical-680-b418ffedae",
+      "class": "QUESTIONABLE"
+    }
+  ],
+  "legend": {
+    "AMBIGUOUS": "#8a2fd1",
+    "BOUND": "#1f5fd1",
+    "LABEL_INK_MARK": "#d11f1f",
+    "OVERALL": "#1f5fd1",
+    "PARTIAL": "#e08a00",
+    "SUBDIVISION": "#1b8a3a",
+    "UNASSIGNED": "#9a9a9a"
+  },
+  "omitted": 0,
+  "recorded": true,
+  "refutations": [],
+  "sideConventions": {
+    "HORIZONTAL": {
+      "anchors": {
+        "across": 0,
+        "after": 1,
+        "before": 5
+      },
+      "basis": "STATED",
+      "side": "BEFORE"
+    },
+    "VERTICAL": {
+      "anchors": {
+        "across": 0,
+        "after": 1,
+        "before": 3
+      },
+      "basis": "CONSISTENT",
+      "side": "BEFORE"
+    }
+  },
+  "singleLines": 28
+}
