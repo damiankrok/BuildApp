@@ -1,0 +1,487 @@
+{
+ "mode": "sensitivity",
+ "schema": "buildapp.005q-chain.label-score",
+ "variants": {
+  "C0": {
+   "sheets": [
+    {
+     "case": "dom-w-glogownikach",
+     "counts": {
+      "binding:CORRECT": 1,
+      "binding:NOT_BOUND": 19,
+      "binding:NO_TRUTH": 9,
+      "correctPrintedBound": 0,
+      "decision:BOUND": 20,
+      "decision:NO_DECISION": 9,
+      "firstBad:NEVER_PROPOSED": 5,
+      "firstBad:NOT_ON_A_CHAIN": 3,
+      "firstBad:PRINTED_VALUE_WRONG": 1,
+      "firstBad:READ_NOT_CORROBORATED": 6,
+      "firstBad:READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 7,
+      "firstBad:SCALE_DEPENDENT_VALUE": 7,
+      "labels": 29,
+      "reader:CORRECT": 15,
+      "reader:NONE": 14,
+      "scaleDependentAnchor": 9,
+      "scaleDependentValueEqualsInk": 4,
+      "soundAbstention": 0,
+      "spuriousCertainty": 1,
+      "wrongWhenAsserted": 1
+     },
+     "family": "dom-w-glogownikach",
+     "frame": {
+      "anchorsByOrigin": {
+       "CHAIN_CORRECTED": 9,
+       "READ": 1
+      },
+      "falseConfidentScale": false,
+      "registration": true,
+      "registrationConfidence": 0.849053,
+      "registrationErrVsTrueScale": -0.0009,
+      "registrationMppX": 0.026261,
+      "solution": {
+       "cmPerPixelX": 2.626058,
+       "confidence": "STRONG",
+       "independentWitnesses": 2,
+       "relation": "CONFIRMED"
+      },
+      "trueScale005O": 2.6285714285714286
+     },
+     "lineage": "glog-ground-plan",
+     "role": "FAILURE",
+     "sheet": "S1",
+     "smoke": false
+    },
+    {
+     "case": "dom-w-murajach",
+     "counts": {
+      "binding:NOT_BOUND": 12,
+      "binding:NO_TRUTH": 3,
+      "correctPrintedBound": 0,
+      "decision:AMBIGUOUS": 5,
+      "decision:BOUND": 6,
+      "decision:NO_DECISION": 4,
+      "firstBad:NEVER_PROPOSED": 1,
+      "firstBad:NOT_ON_A_CHAIN": 1,
+      "firstBad:READ_NOT_CORROBORATED": 2,
+      "firstBad:READ_RIGHT_NOT_BOUND:AMBIGUOUS": 4,
+      "firstBad:READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 2,
+      "firstBad:READ_RIGHT_NOT_BOUND:NO_DECISION": 2,
+      "firstBad:SCALE_DEPENDENT_VALUE": 3,
+      "labels": 15,
+      "reader:CORRECT": 11,
+      "reader:NONE": 4,
+      "scaleDependentAnchor": 3,
+      "scaleDependentValueEqualsInk": 0,
+      "soundAbstention": 0,
+      "spuriousCertainty": 0
+     },
+     "family": "dom-w-murajach",
+     "frame": {
+      "anchorsByOrigin": {
+       "CHAIN_CORRECTED": 3
+      },
+      "registration": true,
+      "registrationConfidence": 0.718133,
+      "registrationMppX": 0.024514,
+      "solution": {
+       "cmPerPixelX": 2.451224,
+       "confidence": "INCONCLUSIVE",
+       "independentWitnesses": 0,
+       "relation": "LEGACY_UNCONFIRMED"
+      },
+      "trueScale005O": null
+     },
+     "lineage": "muraje-ground-plan",
+     "role": "FAILURE",
+     "sheet": "S2",
+     "smoke": false
+    },
+    {
+     "case": "dom-w-murajach",
+     "counts": {
+      "binding:NOT_BOUND": 5,
+      "binding:NO_TRUTH": 5,
+      "correctPrintedBound": 0,
+      "decision:BOUND": 7,
+      "decision:NO_DECISION": 3,
+      "firstBad:NEVER_PROPOSED": 1,
+      "firstBad:NOT_ON_A_CHAIN": 1,
+      "firstBad:READ_NOT_CORROBORATED": 3,
+      "firstBad:READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 1,
+      "firstBad:ROTATIONAL_TWIN_AMBIGUOUS": 1,
+      "firstBad:SCALE_DEPENDENT_VALUE": 3,
+      "labels": 10,
+      "reader:CORRECT": 4,
+      "reader:NONE": 5,
+      "reader:ROTATIONAL_TWIN": 1,
+      "scaleDependentAnchor": 5,
+      "scaleDependentValueEqualsInk": 0,
+      "soundAbstention": 0,
+      "spuriousCertainty": 0
+     },
+     "family": "dom-w-murajach",
+     "frame": {
+      "anchorsByOrigin": {
+       "CHAIN_CORRECTED": 6
+      },
+      "registration": true,
+      "registrationConfidence": 0.880305,
+      "registrationMppX": 0.015373,
+      "solution": {
+       "cmPerPixelX": 1.53235,
+       "confidence": "INCONCLUSIVE",
+       "independentWitnesses": 0,
+       "relation": "LEGACY_UNCONFIRMED"
+      },
+      "trueScale005O": null
+     },
+     "lineage": "muraje-ground-plan",
+     "role": "FAILURE",
+     "sheet": "S3",
+     "smoke": false
+    },
+    {
+     "case": "dom-w-gozdzikowcach",
+     "counts": {
+      "binding:CORRECT": 2,
+      "binding:NOT_BOUND": 11,
+      "binding:NO_TRUTH": 4,
+      "correctPrintedBound": 0,
+      "decision:BOUND": 13,
+      "decision:NO_DECISION": 4,
+      "firstBad:NEVER_PROPOSED": 2,
+      "firstBad:NOT_ON_A_CHAIN": 2,
+      "firstBad:READ_NOT_CORROBORATED": 1,
+      "firstBad:READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 7,
+      "firstBad:SCALE_DEPENDENT_VALUE": 5,
+      "labels": 17,
+      "reader:CORRECT": 12,
+      "reader:NONE": 5,
+      "scaleDependentAnchor": 6,
+      "scaleDependentValueEqualsInk": 1,
+      "soundAbstention": 0,
+      "spuriousCertainty": 0
+     },
+     "family": "dom-w-gozdzikowcach",
+     "frame": {
+      "anchorsByOrigin": {
+       "CHAIN_CORRECTED": 6
+      },
+      "falseConfidentScale": false,
+      "registration": true,
+      "registrationConfidence": 0.846052,
+      "registrationErrVsTrueScale": -0.0085,
+      "registrationMppX": 0.025344,
+      "solution": {
+       "cmPerPixelX": 2.533553,
+       "confidence": "SUPPORTED",
+       "independentWitnesses": 4,
+       "relation": "CONFIRMED"
+      },
+      "trueScale005O": 2.55609756097561
+     },
+     "lineage": "gozdz-ground-plan",
+     "role": "FAILURE",
+     "sheet": "S4",
+     "smoke": false
+    },
+    {
+     "case": "marcowki",
+     "counts": {
+      "binding:CORRECT": 5,
+      "binding:NOT_BOUND": 10,
+      "binding:NO_TRUTH": 5,
+      "correctPrintedBound": 4,
+      "decision:BOUND": 14,
+      "decision:NO_DECISION": 6,
+      "firstBad:NEVER_PROPOSED": 3,
+      "firstBad:NONE": 4,
+      "firstBad:NOT_ON_A_CHAIN": 2,
+      "firstBad:READ_NOT_CORROBORATED": 3,
+      "firstBad:READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 2,
+      "firstBad:SCALE_DEPENDENT_VALUE": 6,
+      "labels": 20,
+      "reader:CORRECT": 12,
+      "reader:NONE": 8,
+      "scaleDependentAnchor": 6,
+      "scaleDependentValueEqualsInk": 2,
+      "soundAbstention": 0,
+      "spuriousCertainty": 0
+     },
+     "family": "marcowki",
+     "frame": {
+      "anchorsByOrigin": {
+       "CHAIN_CORRECTED": 6,
+       "READ": 3
+      },
+      "falseConfidentScale": false,
+      "registration": true,
+      "registrationConfidence": 0.861215,
+      "registrationErrVsTrueScale": 0.0,
+      "registrationMppX": 0.026426,
+      "solution": {
+       "cmPerPixelX": 2.642489,
+       "confidence": "STRONG",
+       "independentWitnesses": 4,
+       "relation": "CONFIRMED"
+      },
+      "trueScale005O": 2.642543859649123
+     },
+     "lineage": "marcowki-plan-a",
+     "role": "CONTROL",
+     "sheet": "S5",
+     "smoke": true
+    },
+    {
+     "case": "kosacce-clean",
+     "counts": {
+      "binding:CORRECT": 5,
+      "binding:NOT_BOUND": 18,
+      "binding:NO_TRUTH": 10,
+      "binding:WRONG": 2,
+      "correctPrintedBound": 3,
+      "decision:BOUND": 24,
+      "decision:NO_DECISION": 10,
+      "decision:UNASSIGNED": 1,
+      "firstBad:NEVER_PROPOSED": 4,
+      "firstBad:NONE": 3,
+      "firstBad:NOT_ON_A_CHAIN": 2,
+      "firstBad:PRINTED_VALUE_WRONG": 1,
+      "firstBad:READ_NOT_CORROBORATED": 6,
+      "firstBad:READ_RIGHT_BOUND_WRONG": 2,
+      "firstBad:READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 4,
+      "firstBad:READ_RIGHT_NOT_BOUND:NO_DECISION": 1,
+      "firstBad:READ_RIGHT_NOT_BOUND:UNASSIGNED": 1,
+      "firstBad:ROTATIONAL_TWIN_AMBIGUOUS": 1,
+      "firstBad:SCALE_DEPENDENT_VALUE": 10,
+      "labels": 35,
+      "reader:CORRECT": 22,
+      "reader:NONE": 12,
+      "reader:ROTATIONAL_TWIN": 1,
+      "scaleDependentAnchor": 13,
+      "scaleDependentValueEqualsInk": 4,
+      "soundAbstention": 0,
+      "spuriousCertainty": 1,
+      "wrongWhenAsserted": 1
+     },
+     "family": "kosacce",
+     "frame": {
+      "anchorsByOrigin": {
+       "CHAIN_CORRECTED": 14,
+       "READ": 4
+      },
+      "falseConfidentScale": false,
+      "registration": true,
+      "registrationConfidence": 0.860271,
+      "registrationErrVsTrueScale": -0.0003,
+      "registrationMppX": 0.024058,
+      "solution": {
+       "cmPerPixelX": 2.405799,
+       "confidence": "STRONG",
+       "independentWitnesses": 7,
+       "relation": "CONFIRMED"
+      },
+      "trueScale005O": 2.4064665127020786
+     },
+     "lineage": "kosacce-plan-a",
+     "role": "CONTROL",
+     "sheet": "S6",
+     "smoke": false
+    },
+    {
+     "case": "dom-w-zurawkach",
+     "counts": {
+      "binding:CORRECT": 3,
+      "binding:NOT_BOUND": 12,
+      "binding:NO_TRUTH": 5,
+      "binding:WRONG": 1,
+      "correctPrintedBound": 4,
+      "decision:BOUND": 14,
+      "decision:NO_DECISION": 7,
+      "firstBad:NEVER_PROPOSED": 4,
+      "firstBad:NONE": 4,
+      "firstBad:NOT_ON_A_CHAIN": 2,
+      "firstBad:PRINTED_VALUE_WRONG": 1,
+      "firstBad:READ_NOT_CORROBORATED": 2,
+      "firstBad:READ_RIGHT_BOUND_WRONG": 1,
+      "firstBad:READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 3,
+      "firstBad:ROTATIONAL_TWIN_AMBIGUOUS": 1,
+      "firstBad:SCALE_DEPENDENT_VALUE": 3,
+      "labels": 21,
+      "reader:CORRECT": 12,
+      "reader:NONE": 8,
+      "reader:ROTATIONAL_TWIN": 1,
+      "scaleDependentAnchor": 3,
+      "scaleDependentValueEqualsInk": 1,
+      "soundAbstention": 0,
+      "spuriousCertainty": 2,
+      "wrongWhenAsserted": 1
+     },
+     "family": "dom-w-zurawkach",
+     "frame": {
+      "anchorsByOrigin": {
+       "CHAIN_CORRECTED": 3,
+       "READ": 6
+      },
+      "falseConfidentScale": false,
+      "registration": true,
+      "registrationConfidence": 0.878656,
+      "registrationErrVsTrueScale": -0.0003,
+      "registrationMppX": 0.022182,
+      "solution": {
+       "cmPerPixelX": 2.218163,
+       "confidence": "STRONG",
+       "independentWitnesses": 5,
+       "relation": "CONFIRMED"
+      },
+      "trueScale005O": 2.2189349112426036
+     },
+     "lineage": "zurawkach-plan-a",
+     "role": "CONTROL",
+     "sheet": "S7",
+     "smoke": false
+    },
+    {
+     "case": "A06",
+     "counts": {
+      "binding:CORRECT": 2,
+      "binding:NOT_BOUND": 18,
+      "binding:NO_TRUTH": 4,
+      "correctPrintedBound": 3,
+      "decision:BOUND": 10,
+      "decision:NO_DECISION": 12,
+      "decision:UNASSIGNED": 2,
+      "firstBad:NEVER_PROPOSED": 6,
+      "firstBad:NONE": 3,
+      "firstBad:NOT_ON_A_CHAIN": 5,
+      "firstBad:READ_NOT_CORROBORATED": 3,
+      "firstBad:READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 4,
+      "firstBad:READ_RIGHT_NOT_BOUND:UNASSIGNED": 1,
+      "firstBad:SCALE_DEPENDENT_VALUE": 2,
+      "labels": 24,
+      "reader:CORRECT": 10,
+      "reader:NONE": 14,
+      "scaleDependentAnchor": 3,
+      "scaleDependentValueEqualsInk": 2,
+      "soundAbstention": 0,
+      "spuriousCertainty": 0
+     },
+     "family": "A06",
+     "frame": {
+      "anchorsByOrigin": {
+       "CHAIN_CORRECTED": 2,
+       "READ": 3,
+       "READ_DEPENDS_ON_SCALE": 1
+      },
+      "falseConfidentScale": false,
+      "registration": true,
+      "registrationConfidence": 0.862909,
+      "registrationErrVsTrueScale": 0.0001,
+      "registrationMppX": 0.020726,
+      "solution": {
+       "cmPerPixelX": 2.073446,
+       "confidence": "WEAK",
+       "independentWitnesses": 2,
+       "relation": "REPLACED"
+      },
+      "trueScale005O": 2.072398190045249
+     },
+     "lineage": "a06-plan-a",
+     "role": "CONTROL",
+     "sheet": "S8",
+     "smoke": false
+    },
+    {
+     "case": "D02",
+     "counts": {
+      "binding:NOT_BOUND": 1,
+      "correctPrintedBound": 0,
+      "decision:NO_DECISION": 1,
+      "firstBad:READ_NOT_CORROBORATED": 1,
+      "labels": 1,
+      "reader:NONE": 1,
+      "scaleDependentAnchor": 0,
+      "scaleDependentValueEqualsInk": 0,
+      "soundAbstention": 0,
+      "spuriousCertainty": 0
+     },
+     "family": "D02",
+     "frame": {
+      "anchorsByOrigin": {},
+      "registration": false,
+      "registrationConfidence": null,
+      "registrationMppX": null,
+      "solution": {
+       "cmPerPixelX": 1.909091,
+       "confidence": "INCONCLUSIVE",
+       "independentWitnesses": 0,
+       "relation": "LEGACY_UNCONFIRMED"
+      },
+      "trueScale005O": null
+     },
+     "lineage": "d02-ground-plan",
+     "role": "CONTROL",
+     "sheet": "S9",
+     "smoke": false
+    }
+   ],
+   "totals": {
+    "MAIN": {
+     "binding:CORRECT": 13,
+     "binding:NOT_BOUND": 96,
+     "binding:NO_TRUTH": 40,
+     "binding:WRONG": 3,
+     "correctPrintedBound": 10,
+     "decision:AMBIGUOUS": 5,
+     "decision:BOUND": 94,
+     "decision:NO_DECISION": 50,
+     "decision:UNASSIGNED": 3,
+     "firstBad:NEVER_PROPOSED": 23,
+     "firstBad:NONE": 10,
+     "firstBad:NOT_ON_A_CHAIN": 16,
+     "firstBad:PRINTED_VALUE_WRONG": 3,
+     "firstBad:READ_NOT_CORROBORATED": 24,
+     "firstBad:READ_RIGHT_BOUND_WRONG": 3,
+     "firstBad:READ_RIGHT_NOT_BOUND:AMBIGUOUS": 4,
+     "firstBad:READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 28,
+     "firstBad:READ_RIGHT_NOT_BOUND:NO_DECISION": 3,
+     "firstBad:READ_RIGHT_NOT_BOUND:UNASSIGNED": 2,
+     "firstBad:ROTATIONAL_TWIN_AMBIGUOUS": 3,
+     "firstBad:SCALE_DEPENDENT_VALUE": 33,
+     "labels": 152,
+     "reader:CORRECT": 86,
+     "reader:NONE": 63,
+     "reader:ROTATIONAL_TWIN": 3,
+     "scaleDependentAnchor": 42,
+     "scaleDependentValueEqualsInk": 12,
+     "soundAbstention": 0,
+     "spuriousCertainty": 4,
+     "wrongWhenAsserted": 3
+    },
+    "SMOKE": {
+     "binding:CORRECT": 5,
+     "binding:NOT_BOUND": 10,
+     "binding:NO_TRUTH": 5,
+     "correctPrintedBound": 4,
+     "decision:BOUND": 14,
+     "decision:NO_DECISION": 6,
+     "firstBad:NEVER_PROPOSED": 3,
+     "firstBad:NONE": 4,
+     "firstBad:NOT_ON_A_CHAIN": 2,
+     "firstBad:READ_NOT_CORROBORATED": 3,
+     "firstBad:READ_RIGHT_NOT_BOUND:BOUND_NO_STATEMENT": 2,
+     "firstBad:SCALE_DEPENDENT_VALUE": 6,
+     "labels": 20,
+     "reader:CORRECT": 12,
+     "reader:NONE": 8,
+     "scaleDependentAnchor": 6,
+     "scaleDependentValueEqualsInk": 2,
+     "soundAbstention": 0,
+     "spuriousCertainty": 0
+    }
+   }
+  }
+ },
+ "version": 1
+}
