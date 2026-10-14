@@ -160,3 +160,33 @@ ring provenance identical to N1a; both outer-face gaps still named (the main bod
 both sides; both strips are as deep as their bands); only text may differ (the gap reason's wording and depth, the
 ledger reason). No platform gap on glogownikach (the base's terraces there carried no extension). If any geometry,
 status or count differs from N1a, PROD2 is not adopted without a further addendum.
+
+### Addendum C (review round 2; written and committed before the PROD3 replay starts)
+
+**Disclosed ordering (R2B-04).** The PROD2 replay was started at about 00:12:30, before Addendum B was committed
+(00:14:13); nine rows had finished by 00:14:06. `dom-w-glogownikach`, the only row the prediction concerned, finished at
+00:18:20, after the commit. PROD3 below is started strictly after this addendum's commit and is the production replay
+of record.
+
+**G10 (R2B-02).** G10 is a *unit-level* gate ("band order, chain order, mirrored and rotated plans and ±0.2 px
+perturbations … give the same decision"). The tests up to round 2 checked band and chain order and translation at unit
+level, but mirror, rotation and ±0.2 px only **end to end**, where the decision depends on orientation because the
+upstream band claim (`plan-decomposition.ts:509`, unchanged, identical in the base) breaks a face tie toward the lower
+pixel: the base then cuts the body on the inner face in some orientations and not in others, and N1a names the strip
+exactly where the base reads one. That end-to-end dependence is a property of the base, not of the rule, and is disclosed
+as such. G10 is evaluated as written, at unit level: `wallStripsOf` (exported for the test) on a reading, its mirror
+images and quarter turns, and ±0.2 px perturbations of bands, extent and envelope away from the bounds, must give the
+same (transformed) decision. If it does not, N1a is not admissible.
+
+**Changes (no geometry):** `wallStripsOf` and its type are exported for the unit test; the platform probe of F4 runs
+across the ground-storey bodies standing on the strip's back (the span the recess reading probes) and skips a strip no
+body stands on (R2A-1); the gap reason states the observation ("wall-thick ink … fills the strip … the body's own wall,
+or another wall layer; the wall's outer face is not resolved", R2C-02); docstring corrections (R2A-3, R2C-04).
+
+**Prediction (PROD3).** 45 rows byte-identical to PROD2; `dom-w-glogownikach` differs from PROD2 only in the two
+outer-face gap reasons in `unresolved.json`; no platform gap.
+
+**C1 (R2B-01, recorded, nothing changes for the selection).** Besides failing G5, C1 and C1N1a change openings without
+new evidence (helikoniach: a door read as a window and a window as a door, one window lost; glogownikach: the garage
+door re-bound from "300/225" to "360/225") and raise helikoniach's MASS to SOURCE_EXACT. Under §4 that is also a
+disqualifying prediction failure.
