@@ -1,0 +1,17 @@
+{
+ "a": "C0",
+ "b": "C0warm",
+ "cases": 48,
+ "clockOnly": {
+  "analysis-trace.json": 45,
+  "diagnostics.json": 21,
+  "result-summary.json": 24
+ },
+ "differs": [],
+ "identical": 401,
+ "logsApart": 186,
+ "oneSided": [],
+ "schema": "buildapp.005q-chain.determinism-compare",
+ "verdict": "HOLDS",
+ "version": 1
+}
