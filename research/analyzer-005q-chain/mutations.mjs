@@ -122,5 +122,9 @@ if (want('M8')) {
   record('M8', 'research-isolation.test.ts', status !== 0, { testExit: status })
 }
 mkdirSync(join(W, 'mut'), { recursive: true })
-writeFileSync(join(W, 'mut', 'results.json'), JSON.stringify({ schema: 'buildapp.005q-chain.mutations', version: 1, results }, null, 1) + '\n')
-process.stdout.write(`${results.filter((r) => r.outcome === 'KILLED').length}/${results.length} killed\n`)
+// results of earlier invocations (--only) are kept; a mutation run again replaces its own entry
+const file = join(W, 'mut', 'results.json')
+const kept = existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')).results.filter((r) => !results.some((x) => x.id === r.id)) : []
+const all = [...kept, ...results].sort((a, b) => a.id.localeCompare(b.id))
+writeFileSync(file, JSON.stringify({ schema: 'buildapp.005q-chain.mutations', version: 1, results: all }, null, 1) + '\n')
+process.stdout.write(`${all.filter((r) => r.outcome === 'KILLED').length}/${all.length} killed\n`)
