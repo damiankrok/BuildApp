@@ -108,7 +108,17 @@ def evidence_gates(m):
         if not l or ens.get('asReadValueCm') != e['value'] or ens.get('decision') not in ('AGREES', 'LEADS') or e['origin'] != 'READ':
             ink_mismatch += 1
     orient = Counter(d.get('decidedBy') for s in m.get('metricSolutions', []) for d in s.get('orientationDecisions', []))
-    return {'scaleDependentAnchors': scale_dep_anchor, 'inkFirstStatements': ink_first, 'inkFirstMismatch': ink_mismatch, 'orientationDecidedBy': {str(k): v for k, v in orient.items()},
+    # G2a' (addendum A): anchors from a vertical chain whose way up a scale or the page vote chose (OTHER_AXIS_SCALE,
+    # vertical AXIS_SELF_CONSISTENCY by joining other chains, UNDECIDED) — independent of any flag the variant writes.
+    scale_oriented = {d['chainId'] for s in m.get('metricSolutions', []) for d in s.get('orientationDecisions', []) if d.get('axis') == 'Y' and d.get('decidedBy') in ('OTHER_AXIS_SCALE', 'UNDECIDED', 'AXIS_SELF_CONSISTENCY')}
+    scale_oriented_anchors = 0
+    for r in m.get('coordinateRegistrations', []):
+        for a in r.get('anchors', []):
+            for eid in a.get('evidenceIds', []):
+                e = ev.get(eid)
+                if e and e.get('chainId') in scale_oriented and e.get('kind') == 'LINEAR_DIMENSION':
+                    scale_oriented_anchors += 1
+    return {'scaleDependentAnchors': scale_dep_anchor, 'scaleOrientedAnchors': scale_oriented_anchors, 'inkFirstStatements': ink_first, 'inkFirstMismatch': ink_mismatch, 'orientationDecidedBy': {str(k): v for k, v in orient.items()},
             'chainCorrected': sum(1 for e in m['evidence'] if e['origin'] == 'CHAIN_CORRECTED'), 'read': sum(1 for e in m['evidence'] if e['origin'] == 'READ' and e['kind'] == 'LINEAR_DIMENSION')}
 
 

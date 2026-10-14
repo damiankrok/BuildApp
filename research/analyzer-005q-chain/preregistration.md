@@ -159,3 +159,15 @@ Filled by the commit that adds this file (`candidates/*.patch`, `ACCEL.patch`); 
 | `candidates/C1N1.patch` | `756725e7c484c45096f43d16641f12c1902feb6d87dad85286954d30b1edbfeb` |
 | `spec/c1.spec.ts` | `682038dec89e2a7222d26e2b962eea58af2f2565b983f9de352245a9b5fb1fc2` |
 | `spec/c2.spec.ts` | `d32355deb09657143eb61d4b9afba5d6335c9bc1328fe9625fa12cba258449cc` |
+
+## Addenda
+
+### Addendum A (before any challenger or mutation ran; the challengers' queue waits for C0)
+
+- **G2a′ measured directly.** Besides G2a (anchors citing CHAIN_CORRECTED or `dependsOnScale` evidence), `score_houses.py`
+  counts **anchors from a vertical chain whose way up a scale or the page vote chose** (`orientationDecisions` with axis Y
+  and `decidedBy` ∈ {OTHER_AXIS_SCALE, AXIS_SELF_CONSISTENCY (the joinedCm route), UNDECIDED}), independently of any flag
+  the variant writes. It is the gate that kills M4 (a C3 copy that stops flagging UNDECIDED chains): under C3/C4 it must
+  be 0 on every row. It is reported for every variant; it is not part of C1's G2 (C1 does not change orientation).
+- **Gate evaluator** `gates.py`: G1 known-good = every C0 `PASS` row ∪ the controls named in §6; G3 also lists any change in
+  room count or walls by kind; G5 lists every changed outcome, refusal code or decision path. Definitions unchanged.
