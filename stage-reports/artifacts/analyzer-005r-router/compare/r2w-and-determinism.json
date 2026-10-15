@@ -1,0 +1,16 @@
+{
+ "schema": "research.005r-router.r2w-determinism.0.1",
+ "R2w_oneWitnessDiagnostic": {
+  "note": "never adoptable (one witness class); byte match to 005R carousel truth only, no anchor mapping",
+  "rows": {
+   "rarytasy-g2e": {"modelIdentical": true, "perspectiveFrames": 25, "framesGated": 3, "facadeObservationsR0": 765, "facadeObservationsLeft": 698},
+   "rarytasy-eoze": {"modelIdentical": true, "perspectiveFrames": 24, "framesGated": 4, "facadeObservationsR0": 739, "facadeObservationsLeft": 608},
+   "kosacce-clean": {"modelIdentical": true, "perspectiveFrames": 19, "framesGated": 0, "facadeObservationsR0": 815, "facadeObservationsLeft": 815},
+   "A02": {"modelIdentical": true, "perspectiveFrames": 28, "framesGated": 9, "facadeObservationsR0": 1239, "facadeObservationsLeft": 798},
+   "willa-miranda": {"modelIdentical": true, "perspectiveFrames": 18, "framesGated": 12, "facadeObservationsR0": 832, "facadeObservationsLeft": 226},
+   "dom-w-jablonkach": {"modelIdentical": true, "perspectiveFrames": 18, "framesGated": 10, "facadeObservationsR0": 655, "facadeObservationsLeft": 230}
+  }
+ },
+ "R0_vs_R0rev": {"rows": 37, "orderReversed": true, "byteIdentical": ["model.json", "observation-graph.json.gz", "failure.json"], "summaryIdenticalExceptWallClockMs": 37, "summaryRawByteIdentical": 0, "note": "R0rev ran the base source through the unpatched alias copy (R0copy), so it is also the harness control on 37 rows (the preregistration named 2)"},
+ "N1_vs_N1shuf": {"rows": 37, "orderReversedAndAssetsShuffled": true, "byteIdentical": ["model.json", "observation-graph.json.gz", "metric-evidence.json.gz", "candidate.json.gz", "failure.json"], "summaryIdenticalExceptWallClockMs": 37}
+}
