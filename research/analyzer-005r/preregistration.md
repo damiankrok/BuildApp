@@ -218,3 +218,20 @@ reported as diagnostics and never as headline numbers.
   page body (e.g. the `widok-N` header copies) UNKNOWN, while their full-size near-duplicates carry STRUCTURE truth. A2
   gives an UNKNOWN-truth asset the truth of its lineage group when that group has exactly one structural truth role,
   and re-scores every contender per asset. The primary scores stay the preregistered ones.
+
+### Addendum B — 2026-10-15T~04:10Z (after V2 run 1 was scored)
+
+- **B1 — V2 implementation faithfulness (post-hoc check, synthetic images only).** V2 routed every real image to
+  INTERIOR_RENDER. `addenda/b1_v2_faithfulness.py` compares V2's routing logits with the library's own
+  `OwlViTModel(...).logits_per_image` on 20 synthetic images (max |Δ| 2·10⁻⁶) and measures the image-embedding spread
+  (pairwise cosine 0.997–1.000). The collapse is therefore a property of the pinned model's pooled image embedding, not
+  of the harness. Nothing is changed in V2; its preregistered τ procedure gave τ = 0.95.
+- **Bug fix in `assemble.py` (no outcome change).** The first assembly run stopped with a KeyError: the V1/V2 routing
+  files also hold the synthetic rows, which are not corpus assets. The fix skips ids absent from the corpus (they are
+  scored by `score_features.py`). The documents and gates of V0a/V0b written before the stop were regenerated identically.
+- **`claims.py` was written after the preregistration** (§5.3 named the measurement — edition-level publisher-claim
+  consistency — but not its code). It reads the product's own category breadcrumb ("należy do kategorii") and its
+  `#bottom-description` text; the first two selector versions found nothing and were corrected before any comparison was
+  read. It is descriptive only and feeds no decision rule.
+- **`mutations.py` M10** first looked for a V2 edition summary; V2 proposes nothing under its own routing, so M10 now uses
+  the first contender that has a summary (N1). 12/12 mutations caught.

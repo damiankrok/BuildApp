@@ -1,0 +1,95 @@
+{
+ "M10_correlated_witnesses": {
+  "caught": true,
+  "violations": [
+   "CORRELATION"
+  ]
+ },
+ "M11_caption_in_manifest": {
+  "caught": true,
+  "isolationTestExit": 1,
+  "restored": true
+ },
+ "M12_name_in_prompts": {
+  "caught": true,
+  "isolationTestExit": 1,
+  "restored": true
+ },
+ "M1_scorer_swap": {
+  "caught": true,
+  "oracleCoverage": 1.0,
+  "oracleRisk": 0.0,
+  "swappedRisk": 1.0
+ },
+ "M2_split_leak": {
+  "caught": true,
+  "devGroups": 360,
+  "leakedNTrain": 585,
+  "modelNTrain": 360
+ },
+ "M3_source_swap": {
+  "caught": true,
+  "expected": [
+   "IDENTITY"
+  ],
+  "violations": [
+   "IDENTITY"
+  ]
+ },
+ "M4_edition_swap": {
+  "caught": true,
+  "expected": [
+   "EDITION_MIX"
+  ],
+  "violations": [
+   "EDITION_MIX"
+  ]
+ },
+ "M5_fabricated_box": {
+  "caught": true,
+  "expected": [
+   "FABRICATED_BOX"
+  ],
+  "violations": [
+   "FABRICATED_BOX"
+  ]
+ },
+ "M6_name_leakage": {
+  "caught": true,
+  "expected": [
+   "LEAKAGE_TOKEN"
+  ],
+  "violations": [
+   "LEAKAGE_TOKEN"
+  ]
+ },
+ "M7_false_confidence": {
+  "caught": true,
+  "expected": [
+   "CONFIDENCE",
+   "OBS"
+  ],
+  "violations": [
+   "AUTHORITY",
+   "CONFIDENCE",
+   "OBS"
+  ]
+ },
+ "M8_metric_from_render": {
+  "caught": true,
+  "expected": [
+   "METRIC"
+  ],
+  "violations": [
+   "METRIC"
+  ]
+ },
+ "M9_interior_to_exterior": {
+  "caught": true,
+  "interiorToExteriorClaims_truth": 485
+ },
+ "_summary": {
+  "caught": 12,
+  "mutations": 12
+ }
+}

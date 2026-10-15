@@ -1,0 +1,33 @@
+{
+ "anchorVsDevRowG2E5": {
+  "bytesX": 43,
+  "bytesY": 55,
+  "sharedBytes": 10,
+  "sharedLineageGroups": 5
+ },
+ "anchorVsEoze": {
+  "bytesX": 43,
+  "bytesY": 55,
+  "sharedBytes": 25,
+  "sharedLineageGroups": 12
+ },
+ "assetsSharedAcrossEditions": 64,
+ "assetsSharedAcrossFamilies": 0,
+ "devRowVsEoze": {
+  "bytesX": 55,
+  "bytesY": 55,
+  "sharedBytes": 10,
+  "sharedLineageGroups": 3
+ },
+ "lineageGroups": 761,
+ "lineageGroupsSpanningEditions": 66,
+ "maxEditionsPublishingOneAsset": 14,
+ "rarytasyEditions": 17,
+ "rarytasyPairs": 136,
+ "rarytasyPairsSharingBytes": 109,
+ "schema": "research.005r.edition-identity.0.1",
+ "sharedByTruthRole": {
+  "INTERIOR_RENDER": 37,
+  "UNKNOWN": 27
+ }
+}

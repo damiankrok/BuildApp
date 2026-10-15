@@ -1,0 +1,5911 @@
+{
+ "contenders": {
+  "N1": {
+   "DEV": {
+    "asset": {
+     "confusion": {
+      "EXTERIOR_RENDER": {
+       "UNKNOWN": 58
+      },
+      "FLOOR_PLAN": {
+       "FLOOR_PLAN": 104
+      },
+      "INTERIOR_RENDER": {
+       "INTERIOR_RENDER": 14,
+       "UNKNOWN": 92
+      },
+      "SECTION": {
+       "SECTION": 36
+      },
+      "SITE_PLAN": {
+       "SITE_PLAN": 36
+      },
+      "TECHNICAL_ELEVATION": {
+       "TECHNICAL_ELEVATION": 140,
+       "UNKNOWN": 2
+      }
+     },
+     "coverage": 0.6846,
+     "families": 20,
+     "familyBootstrap95": [
+      0.0,
+      0.0
+     ],
+     "interiorToExteriorAssets": [],
+     "interiorToExteriorRoutes": 0,
+     "n": 482,
+     "perClass": {
+      "EXTERIOR_RENDER": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 58,
+       "wrongAs": []
+      },
+      "FLOOR_PLAN": {
+       "correct": 104,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 104,
+       "recall": 1.0,
+       "resolvedN": 104,
+       "truthN": 104,
+       "wrongAs": []
+      },
+      "INTERIOR_RENDER": {
+       "correct": 14,
+       "coverage": 0.1321,
+       "precision": 1.0,
+       "predicted": 14,
+       "recall": 0.1321,
+       "resolvedN": 14,
+       "truthN": 106,
+       "wrongAs": []
+      },
+      "SECTION": {
+       "correct": 36,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 36,
+       "recall": 1.0,
+       "resolvedN": 36,
+       "truthN": 36,
+       "wrongAs": []
+      },
+      "SITE_PLAN": {
+       "correct": 36,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 36,
+       "recall": 1.0,
+       "resolvedN": 36,
+       "truthN": 36,
+       "wrongAs": []
+      },
+      "TECHNICAL_ELEVATION": {
+       "correct": 140,
+       "coverage": 0.9859,
+       "precision": 1.0,
+       "predicted": 140,
+       "recall": 0.9859,
+       "resolvedN": 140,
+       "truthN": 142,
+       "wrongAs": []
+      }
+     },
+     "resolved": 330,
+     "riskCoverage": [
+      {
+       "coverage": 0.0021,
+       "resolved": 1,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0104,
+       "resolved": 5,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0207,
+       "resolved": 10,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0415,
+       "resolved": 20,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.1037,
+       "resolved": 50,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.2075,
+       "resolved": 100,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.4149,
+       "resolved": 200,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.6846,
+       "resolved": 330,
+       "risk": 0.0
+      }
+     ],
+     "selectiveRisk": 0.0,
+     "technicalVsMarketing": 0,
+     "technicalVsMarketingAssets": [],
+     "wilson95": [
+      0.0,
+      0.0115
+     ],
+     "wrong": 0,
+     "wrongExamples": []
+    },
+    "byFamily": {
+     "archon:dom-miniaturka": {
+      "interiorToExteriorRoutes": 0,
+      "n": 7,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-pod-milorzebem": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-w-arkadiach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 18,
+      "resolved": 9,
+      "wrong": 0
+     },
+     "archon:dom-w-azaliach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-bratkach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 11,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-w-cyklamenach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 6,
+      "wrong": 0
+     },
+     "archon:dom-w-daliach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-w-glogownikach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 11,
+      "resolved": 5,
+      "wrong": 0
+     },
+     "archon:dom-w-jarzmiankach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-kosaccach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 21,
+      "resolved": 6,
+      "wrong": 0
+     },
+     "archon:dom-w-krasnokwiatach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 7,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-marcowkach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-w-modrzykach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 7,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-morelach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-w-murajach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 22,
+      "resolved": 9,
+      "wrong": 0
+     },
+     "archon:dom-w-rarytasach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 140,
+      "resolved": 90,
+      "wrong": 0
+     },
+     "archon:dom-w-tunbergiach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 6,
+      "wrong": 0
+     },
+     "archon:dom-w-tymianku": {
+      "interiorToExteriorRoutes": 0,
+      "n": 8,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-we-wrzosach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 7,
+      "resolved": 6,
+      "wrong": 0
+     },
+     "archon:willa-maja": {
+      "interiorToExteriorRoutes": 0,
+      "n": 24,
+      "resolved": 10,
+      "wrong": 0
+     }
+    },
+    "byPublisher": {
+     "archon": {
+      "confusion": {
+       "EXTERIOR_RENDER": {
+        "UNKNOWN": 44
+       },
+       "FLOOR_PLAN": {
+        "FLOOR_PLAN": 44
+       },
+       "INTERIOR_RENDER": {
+        "INTERIOR_RENDER": 14,
+        "UNKNOWN": 84
+       },
+       "SECTION": {
+        "SECTION": 26
+       },
+       "SITE_PLAN": {
+        "SITE_PLAN": 22
+       },
+       "TECHNICAL_ELEVATION": {
+        "TECHNICAL_ELEVATION": 124,
+        "UNKNOWN": 2
+       }
+      },
+      "coverage": 0.6389,
+      "families": 20,
+      "familyBootstrap95": [
+       0.0,
+       0.0
+      ],
+      "interiorToExteriorAssets": [],
+      "interiorToExteriorRoutes": 0,
+      "n": 360,
+      "perClass": {
+       "EXTERIOR_RENDER": {
+        "correct": 0,
+        "coverage": 0.0,
+        "precision": null,
+        "predicted": 0,
+        "recall": 0.0,
+        "resolvedN": 0,
+        "truthN": 44,
+        "wrongAs": []
+       },
+       "FLOOR_PLAN": {
+        "correct": 44,
+        "coverage": 1.0,
+        "precision": 1.0,
+        "predicted": 44,
+        "recall": 1.0,
+        "resolvedN": 44,
+        "truthN": 44,
+        "wrongAs": []
+       },
+       "INTERIOR_RENDER": {
+        "correct": 14,
+        "coverage": 0.1429,
+        "precision": 1.0,
+        "predicted": 14,
+        "recall": 0.1429,
+        "resolvedN": 14,
+        "truthN": 98,
+        "wrongAs": []
+       },
+       "SECTION": {
+        "correct": 26,
+        "coverage": 1.0,
+        "precision": 1.0,
+        "predicted": 26,
+        "recall": 1.0,
+        "resolvedN": 26,
+        "truthN": 26,
+        "wrongAs": []
+       },
+       "SITE_PLAN": {
+        "correct": 22,
+        "coverage": 1.0,
+        "precision": 1.0,
+        "predicted": 22,
+        "recall": 1.0,
+        "resolvedN": 22,
+        "truthN": 22,
+        "wrongAs": []
+       },
+       "TECHNICAL_ELEVATION": {
+        "correct": 124,
+        "coverage": 0.9841,
+        "precision": 1.0,
+        "predicted": 124,
+        "recall": 0.9841,
+        "resolvedN": 124,
+        "truthN": 126,
+        "wrongAs": []
+       }
+      },
+      "resolved": 230,
+      "riskCoverage": [
+       {
+        "coverage": 0.0028,
+        "resolved": 1,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0139,
+        "resolved": 5,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0278,
+        "resolved": 10,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0556,
+        "resolved": 20,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.1389,
+        "resolved": 50,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.2778,
+        "resolved": 100,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.5556,
+        "resolved": 200,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.6389,
+        "resolved": 230,
+        "risk": 0.0
+       }
+      ],
+      "selectiveRisk": 0.0,
+      "technicalVsMarketing": 0,
+      "technicalVsMarketingAssets": [],
+      "wilson95": [
+       0.0,
+       0.0164
+      ],
+      "wrong": 0,
+      "wrongExamples": []
+     }
+    },
+    "duplicateCorrelation": {
+     "groupsWithDifferentOutputs": 0,
+     "groupsWithSeveralAssets": 79
+    },
+    "lineageGroup": {
+     "confusion": {
+      "EXTERIOR_RENDER": {
+       "UNKNOWN": 44
+      },
+      "FLOOR_PLAN": {
+       "FLOOR_PLAN": 44
+      },
+      "INTERIOR_RENDER": {
+       "INTERIOR_RENDER": 14,
+       "UNKNOWN": 84
+      },
+      "SECTION": {
+       "SECTION": 26
+      },
+      "SITE_PLAN": {
+       "SITE_PLAN": 22
+      },
+      "TECHNICAL_ELEVATION": {
+       "TECHNICAL_ELEVATION": 124,
+       "UNKNOWN": 2
+      }
+     },
+     "coverage": 0.6389,
+     "families": 20,
+     "familyBootstrap95": [
+      0.0,
+      0.0
+     ],
+     "interiorToExteriorAssets": [],
+     "interiorToExteriorRoutes": 0,
+     "n": 360,
+     "perClass": {
+      "EXTERIOR_RENDER": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 44,
+       "wrongAs": []
+      },
+      "FLOOR_PLAN": {
+       "correct": 44,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 44,
+       "recall": 1.0,
+       "resolvedN": 44,
+       "truthN": 44,
+       "wrongAs": []
+      },
+      "INTERIOR_RENDER": {
+       "correct": 14,
+       "coverage": 0.1429,
+       "precision": 1.0,
+       "predicted": 14,
+       "recall": 0.1429,
+       "resolvedN": 14,
+       "truthN": 98,
+       "wrongAs": []
+      },
+      "SECTION": {
+       "correct": 26,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 26,
+       "recall": 1.0,
+       "resolvedN": 26,
+       "truthN": 26,
+       "wrongAs": []
+      },
+      "SITE_PLAN": {
+       "correct": 22,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 22,
+       "recall": 1.0,
+       "resolvedN": 22,
+       "truthN": 22,
+       "wrongAs": []
+      },
+      "TECHNICAL_ELEVATION": {
+       "correct": 124,
+       "coverage": 0.9841,
+       "precision": 1.0,
+       "predicted": 124,
+       "recall": 0.9841,
+       "resolvedN": 124,
+       "truthN": 126,
+       "wrongAs": []
+      }
+     },
+     "resolved": 230,
+     "riskCoverage": [
+      {
+       "coverage": 0.0028,
+       "resolved": 1,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0139,
+       "resolved": 5,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0278,
+       "resolved": 10,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0556,
+       "resolved": 20,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.1389,
+       "resolved": 50,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.2778,
+       "resolved": 100,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.5556,
+       "resolved": 200,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.6389,
+       "resolved": 230,
+       "risk": 0.0
+      }
+     ],
+     "selectiveRisk": 0.0,
+     "technicalVsMarketing": 0,
+     "technicalVsMarketingAssets": [],
+     "wilson95": [
+      0.0,
+      0.0164
+     ],
+     "wrong": 0,
+     "wrongExamples": []
+    },
+    "pictorialUnspecified": {
+     "n": 0,
+     "outputs": {},
+     "technicalErrors": 0
+    }
+   },
+   "EVAL": {
+    "asset": {
+     "confusion": {
+      "EXTERIOR_RENDER": {
+       "UNKNOWN": 20
+      },
+      "FLOOR_PLAN": {
+       "FLOOR_PLAN": 46,
+       "UNKNOWN": 4
+      },
+      "INTERIOR_RENDER": {
+       "INTERIOR_RENDER": 54,
+       "UNKNOWN": 53
+      },
+      "SECTION": {
+       "SECTION": 14
+      },
+      "SITE_PLAN": {
+       "SITE_PLAN": 14
+      },
+      "TECHNICAL_ELEVATION": {
+       "TECHNICAL_ELEVATION": 52,
+       "UNKNOWN": 4
+      }
+     },
+     "coverage": 0.6897,
+     "families": 14,
+     "familyBootstrap95": [
+      0.0,
+      0.0
+     ],
+     "interiorToExteriorAssets": [],
+     "interiorToExteriorRoutes": 0,
+     "n": 261,
+     "perClass": {
+      "EXTERIOR_RENDER": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 20,
+       "wrongAs": []
+      },
+      "FLOOR_PLAN": {
+       "correct": 46,
+       "coverage": 0.92,
+       "precision": 1.0,
+       "predicted": 46,
+       "recall": 0.92,
+       "resolvedN": 46,
+       "truthN": 50,
+       "wrongAs": []
+      },
+      "INTERIOR_RENDER": {
+       "correct": 54,
+       "coverage": 0.5047,
+       "precision": 1.0,
+       "predicted": 54,
+       "recall": 0.5047,
+       "resolvedN": 54,
+       "truthN": 107,
+       "wrongAs": []
+      },
+      "SECTION": {
+       "correct": 14,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 14,
+       "recall": 1.0,
+       "resolvedN": 14,
+       "truthN": 14,
+       "wrongAs": []
+      },
+      "SITE_PLAN": {
+       "correct": 14,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 14,
+       "recall": 1.0,
+       "resolvedN": 14,
+       "truthN": 14,
+       "wrongAs": []
+      },
+      "TECHNICAL_ELEVATION": {
+       "correct": 52,
+       "coverage": 0.9286,
+       "precision": 1.0,
+       "predicted": 52,
+       "recall": 0.9286,
+       "resolvedN": 52,
+       "truthN": 56,
+       "wrongAs": []
+      }
+     },
+     "resolved": 180,
+     "riskCoverage": [
+      {
+       "coverage": 0.0038,
+       "resolved": 1,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0192,
+       "resolved": 5,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0383,
+       "resolved": 10,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0766,
+       "resolved": 20,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.1916,
+       "resolved": 50,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.3831,
+       "resolved": 100,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.6897,
+       "resolved": 180,
+       "risk": 0.0
+      }
+     ],
+     "selectiveRisk": 0.0,
+     "technicalVsMarketing": 0,
+     "technicalVsMarketingAssets": [],
+     "wilson95": [
+      0.0,
+      0.0209
+     ],
+     "wrong": 0,
+     "wrongExamples": []
+    },
+    "byFamily": {
+     "archon:dom-pod-jarzabem": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-akebiach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-arletach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 23,
+      "resolved": 16,
+      "wrong": 0
+     },
+     "archon:dom-w-cieszyniankach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 23,
+      "resolved": 14,
+      "wrong": 0
+     },
+     "archon:dom-w-czosnkach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 22,
+      "resolved": 15,
+      "wrong": 0
+     },
+     "archon:dom-w-dabecjach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 11,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-w-goldstarach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 16,
+      "resolved": 9,
+      "wrong": 0
+     },
+     "archon:dom-w-gozdzikowcach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 19,
+      "resolved": 10,
+      "wrong": 0
+     },
+     "archon:dom-w-helikoniach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-jablonkach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 24,
+      "resolved": 18,
+      "wrong": 0
+     },
+     "archon:dom-w-ligolach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 18,
+      "resolved": 10,
+      "wrong": 0
+     },
+     "archon:dom-w-modrzewnicy": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-zurawkach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 14,
+      "resolved": 5,
+      "wrong": 0
+     },
+     "archon:willa-miranda": {
+      "interiorToExteriorRoutes": 0,
+      "n": 24,
+      "resolved": 19,
+      "wrong": 0
+     }
+    },
+    "byPublisher": {
+     "archon": {
+      "confusion": {
+       "EXTERIOR_RENDER": {
+        "UNKNOWN": 20
+       },
+       "FLOOR_PLAN": {
+        "FLOOR_PLAN": 21,
+        "UNKNOWN": 2
+       },
+       "INTERIOR_RENDER": {
+        "INTERIOR_RENDER": 54,
+        "UNKNOWN": 53
+       },
+       "SECTION": {
+        "SECTION": 14
+       },
+       "SITE_PLAN": {
+        "SITE_PLAN": 14
+       },
+       "TECHNICAL_ELEVATION": {
+        "TECHNICAL_ELEVATION": 49,
+        "UNKNOWN": 4
+       }
+      },
+      "coverage": 0.658,
+      "families": 14,
+      "familyBootstrap95": [
+       0.0,
+       0.0
+      ],
+      "interiorToExteriorAssets": [],
+      "interiorToExteriorRoutes": 0,
+      "n": 231,
+      "perClass": {
+       "EXTERIOR_RENDER": {
+        "correct": 0,
+        "coverage": 0.0,
+        "precision": null,
+        "predicted": 0,
+        "recall": 0.0,
+        "resolvedN": 0,
+        "truthN": 20,
+        "wrongAs": []
+       },
+       "FLOOR_PLAN": {
+        "correct": 21,
+        "coverage": 0.913,
+        "precision": 1.0,
+        "predicted": 21,
+        "recall": 0.913,
+        "resolvedN": 21,
+        "truthN": 23,
+        "wrongAs": []
+       },
+       "INTERIOR_RENDER": {
+        "correct": 54,
+        "coverage": 0.5047,
+        "precision": 1.0,
+        "predicted": 54,
+        "recall": 0.5047,
+        "resolvedN": 54,
+        "truthN": 107,
+        "wrongAs": []
+       },
+       "SECTION": {
+        "correct": 14,
+        "coverage": 1.0,
+        "precision": 1.0,
+        "predicted": 14,
+        "recall": 1.0,
+        "resolvedN": 14,
+        "truthN": 14,
+        "wrongAs": []
+       },
+       "SITE_PLAN": {
+        "correct": 14,
+        "coverage": 1.0,
+        "precision": 1.0,
+        "predicted": 14,
+        "recall": 1.0,
+        "resolvedN": 14,
+        "truthN": 14,
+        "wrongAs": []
+       },
+       "TECHNICAL_ELEVATION": {
+        "correct": 49,
+        "coverage": 0.9245,
+        "precision": 1.0,
+        "predicted": 49,
+        "recall": 0.9245,
+        "resolvedN": 49,
+        "truthN": 53,
+        "wrongAs": []
+       }
+      },
+      "resolved": 152,
+      "riskCoverage": [
+       {
+        "coverage": 0.0043,
+        "resolved": 1,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0216,
+        "resolved": 5,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0433,
+        "resolved": 10,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0866,
+        "resolved": 20,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.2165,
+        "resolved": 50,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.4329,
+        "resolved": 100,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.658,
+        "resolved": 152,
+        "risk": 0.0
+       }
+      ],
+      "selectiveRisk": 0.0,
+      "technicalVsMarketing": 0,
+      "technicalVsMarketingAssets": [],
+      "wilson95": [
+       0.0,
+       0.0247
+      ],
+      "wrong": 0,
+      "wrongExamples": []
+     }
+    },
+    "duplicateCorrelation": {
+     "groupsWithDifferentOutputs": 0,
+     "groupsWithSeveralAssets": 26
+    },
+    "lineageGroup": {
+     "confusion": {
+      "EXTERIOR_RENDER": {
+       "UNKNOWN": 20
+      },
+      "FLOOR_PLAN": {
+       "FLOOR_PLAN": 21,
+       "UNKNOWN": 2
+      },
+      "INTERIOR_RENDER": {
+       "INTERIOR_RENDER": 54,
+       "UNKNOWN": 53
+      },
+      "SECTION": {
+       "SECTION": 14
+      },
+      "SITE_PLAN": {
+       "SITE_PLAN": 14
+      },
+      "TECHNICAL_ELEVATION": {
+       "TECHNICAL_ELEVATION": 49,
+       "UNKNOWN": 4
+      }
+     },
+     "coverage": 0.658,
+     "families": 14,
+     "familyBootstrap95": [
+      0.0,
+      0.0
+     ],
+     "interiorToExteriorAssets": [],
+     "interiorToExteriorRoutes": 0,
+     "n": 231,
+     "perClass": {
+      "EXTERIOR_RENDER": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 20,
+       "wrongAs": []
+      },
+      "FLOOR_PLAN": {
+       "correct": 21,
+       "coverage": 0.913,
+       "precision": 1.0,
+       "predicted": 21,
+       "recall": 0.913,
+       "resolvedN": 21,
+       "truthN": 23,
+       "wrongAs": []
+      },
+      "INTERIOR_RENDER": {
+       "correct": 54,
+       "coverage": 0.5047,
+       "precision": 1.0,
+       "predicted": 54,
+       "recall": 0.5047,
+       "resolvedN": 54,
+       "truthN": 107,
+       "wrongAs": []
+      },
+      "SECTION": {
+       "correct": 14,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 14,
+       "recall": 1.0,
+       "resolvedN": 14,
+       "truthN": 14,
+       "wrongAs": []
+      },
+      "SITE_PLAN": {
+       "correct": 14,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 14,
+       "recall": 1.0,
+       "resolvedN": 14,
+       "truthN": 14,
+       "wrongAs": []
+      },
+      "TECHNICAL_ELEVATION": {
+       "correct": 49,
+       "coverage": 0.9245,
+       "precision": 1.0,
+       "predicted": 49,
+       "recall": 0.9245,
+       "resolvedN": 49,
+       "truthN": 53,
+       "wrongAs": []
+      }
+     },
+     "resolved": 152,
+     "riskCoverage": [
+      {
+       "coverage": 0.0043,
+       "resolved": 1,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0216,
+       "resolved": 5,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0433,
+       "resolved": 10,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0866,
+       "resolved": 20,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.2165,
+       "resolved": 50,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.4329,
+       "resolved": 100,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.658,
+       "resolved": 152,
+       "risk": 0.0
+      }
+     ],
+     "selectiveRisk": 0.0,
+     "technicalVsMarketing": 0,
+     "technicalVsMarketingAssets": [],
+     "wilson95": [
+      0.0,
+      0.0247
+     ],
+     "wrong": 0,
+     "wrongExamples": []
+    },
+    "pictorialUnspecified": {
+     "n": 0,
+     "outputs": {},
+     "technicalErrors": 0
+    }
+   },
+   "meta": {
+    "contender": "N1"
+   }
+  },
+  "V0a": {
+   "DEV": {
+    "asset": {
+     "confusion": {
+      "EXTERIOR_RENDER": {
+       "UNKNOWN": 58
+      },
+      "FLOOR_PLAN": {
+       "FLOOR_PLAN": 104
+      },
+      "INTERIOR_RENDER": {
+       "UNKNOWN": 106
+      },
+      "SECTION": {
+       "SECTION": 36
+      },
+      "SITE_PLAN": {
+       "SITE_PLAN": 36
+      },
+      "TECHNICAL_ELEVATION": {
+       "TECHNICAL_ELEVATION": 142
+      }
+     },
+     "coverage": 0.6598,
+     "families": 20,
+     "familyBootstrap95": [
+      0.0,
+      0.0
+     ],
+     "interiorToExteriorAssets": [],
+     "interiorToExteriorRoutes": 0,
+     "n": 482,
+     "perClass": {
+      "EXTERIOR_RENDER": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 58,
+       "wrongAs": []
+      },
+      "FLOOR_PLAN": {
+       "correct": 104,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 104,
+       "recall": 1.0,
+       "resolvedN": 104,
+       "truthN": 104,
+       "wrongAs": []
+      },
+      "INTERIOR_RENDER": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 106,
+       "wrongAs": []
+      },
+      "SECTION": {
+       "correct": 36,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 36,
+       "recall": 1.0,
+       "resolvedN": 36,
+       "truthN": 36,
+       "wrongAs": []
+      },
+      "SITE_PLAN": {
+       "correct": 36,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 36,
+       "recall": 1.0,
+       "resolvedN": 36,
+       "truthN": 36,
+       "wrongAs": []
+      },
+      "TECHNICAL_ELEVATION": {
+       "correct": 142,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 142,
+       "recall": 1.0,
+       "resolvedN": 142,
+       "truthN": 142,
+       "wrongAs": []
+      }
+     },
+     "resolved": 318,
+     "riskCoverage": [
+      {
+       "coverage": 0.0021,
+       "resolved": 1,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0104,
+       "resolved": 5,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0207,
+       "resolved": 10,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0415,
+       "resolved": 20,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.1037,
+       "resolved": 50,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.2075,
+       "resolved": 100,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.4149,
+       "resolved": 200,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.6598,
+       "resolved": 318,
+       "risk": 0.0
+      }
+     ],
+     "selectiveRisk": 0.0,
+     "technicalVsMarketing": 0,
+     "technicalVsMarketingAssets": [],
+     "wilson95": [
+      0.0,
+      0.0119
+     ],
+     "wrong": 0,
+     "wrongExamples": []
+    },
+    "byFamily": {
+     "archon:dom-miniaturka": {
+      "interiorToExteriorRoutes": 0,
+      "n": 7,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-pod-milorzebem": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-w-arkadiach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 18,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-azaliach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-bratkach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 11,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-w-cyklamenach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 6,
+      "wrong": 0
+     },
+     "archon:dom-w-daliach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-w-glogownikach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 11,
+      "resolved": 5,
+      "wrong": 0
+     },
+     "archon:dom-w-jarzmiankach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-kosaccach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 21,
+      "resolved": 6,
+      "wrong": 0
+     },
+     "archon:dom-w-krasnokwiatach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 7,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-marcowkach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-w-modrzykach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 7,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-morelach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-w-murajach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 22,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-w-rarytasach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 140,
+      "resolved": 81,
+      "wrong": 0
+     },
+     "archon:dom-w-tunbergiach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-w-tymianku": {
+      "interiorToExteriorRoutes": 0,
+      "n": 8,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-we-wrzosach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 7,
+      "resolved": 6,
+      "wrong": 0
+     },
+     "archon:willa-maja": {
+      "interiorToExteriorRoutes": 0,
+      "n": 24,
+      "resolved": 8,
+      "wrong": 0
+     }
+    },
+    "byPublisher": {
+     "archon": {
+      "confusion": {
+       "EXTERIOR_RENDER": {
+        "UNKNOWN": 44
+       },
+       "FLOOR_PLAN": {
+        "FLOOR_PLAN": 44
+       },
+       "INTERIOR_RENDER": {
+        "UNKNOWN": 98
+       },
+       "SECTION": {
+        "SECTION": 26
+       },
+       "SITE_PLAN": {
+        "SITE_PLAN": 22
+       },
+       "TECHNICAL_ELEVATION": {
+        "TECHNICAL_ELEVATION": 126
+       }
+      },
+      "coverage": 0.6056,
+      "families": 20,
+      "familyBootstrap95": [
+       0.0,
+       0.0
+      ],
+      "interiorToExteriorAssets": [],
+      "interiorToExteriorRoutes": 0,
+      "n": 360,
+      "perClass": {
+       "EXTERIOR_RENDER": {
+        "correct": 0,
+        "coverage": 0.0,
+        "precision": null,
+        "predicted": 0,
+        "recall": 0.0,
+        "resolvedN": 0,
+        "truthN": 44,
+        "wrongAs": []
+       },
+       "FLOOR_PLAN": {
+        "correct": 44,
+        "coverage": 1.0,
+        "precision": 1.0,
+        "predicted": 44,
+        "recall": 1.0,
+        "resolvedN": 44,
+        "truthN": 44,
+        "wrongAs": []
+       },
+       "INTERIOR_RENDER": {
+        "correct": 0,
+        "coverage": 0.0,
+        "precision": null,
+        "predicted": 0,
+        "recall": 0.0,
+        "resolvedN": 0,
+        "truthN": 98,
+        "wrongAs": []
+       },
+       "SECTION": {
+        "correct": 26,
+        "coverage": 1.0,
+        "precision": 1.0,
+        "predicted": 26,
+        "recall": 1.0,
+        "resolvedN": 26,
+        "truthN": 26,
+        "wrongAs": []
+       },
+       "SITE_PLAN": {
+        "correct": 22,
+        "coverage": 1.0,
+        "precision": 1.0,
+        "predicted": 22,
+        "recall": 1.0,
+        "resolvedN": 22,
+        "truthN": 22,
+        "wrongAs": []
+       },
+       "TECHNICAL_ELEVATION": {
+        "correct": 126,
+        "coverage": 1.0,
+        "precision": 1.0,
+        "predicted": 126,
+        "recall": 1.0,
+        "resolvedN": 126,
+        "truthN": 126,
+        "wrongAs": []
+       }
+      },
+      "resolved": 218,
+      "riskCoverage": [
+       {
+        "coverage": 0.0028,
+        "resolved": 1,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0139,
+        "resolved": 5,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0278,
+        "resolved": 10,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0556,
+        "resolved": 20,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.1389,
+        "resolved": 50,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.2778,
+        "resolved": 100,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.5556,
+        "resolved": 200,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.6056,
+        "resolved": 218,
+        "risk": 0.0
+       }
+      ],
+      "selectiveRisk": 0.0,
+      "technicalVsMarketing": 0,
+      "technicalVsMarketingAssets": [],
+      "wilson95": [
+       0.0,
+       0.0173
+      ],
+      "wrong": 0,
+      "wrongExamples": []
+     }
+    },
+    "duplicateCorrelation": {
+     "groupsWithDifferentOutputs": 0,
+     "groupsWithSeveralAssets": 79
+    },
+    "lineageGroup": {
+     "confusion": {
+      "EXTERIOR_RENDER": {
+       "UNKNOWN": 44
+      },
+      "FLOOR_PLAN": {
+       "FLOOR_PLAN": 44
+      },
+      "INTERIOR_RENDER": {
+       "UNKNOWN": 98
+      },
+      "SECTION": {
+       "SECTION": 26
+      },
+      "SITE_PLAN": {
+       "SITE_PLAN": 22
+      },
+      "TECHNICAL_ELEVATION": {
+       "TECHNICAL_ELEVATION": 126
+      }
+     },
+     "coverage": 0.6056,
+     "families": 20,
+     "familyBootstrap95": [
+      0.0,
+      0.0
+     ],
+     "interiorToExteriorAssets": [],
+     "interiorToExteriorRoutes": 0,
+     "n": 360,
+     "perClass": {
+      "EXTERIOR_RENDER": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 44,
+       "wrongAs": []
+      },
+      "FLOOR_PLAN": {
+       "correct": 44,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 44,
+       "recall": 1.0,
+       "resolvedN": 44,
+       "truthN": 44,
+       "wrongAs": []
+      },
+      "INTERIOR_RENDER": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 98,
+       "wrongAs": []
+      },
+      "SECTION": {
+       "correct": 26,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 26,
+       "recall": 1.0,
+       "resolvedN": 26,
+       "truthN": 26,
+       "wrongAs": []
+      },
+      "SITE_PLAN": {
+       "correct": 22,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 22,
+       "recall": 1.0,
+       "resolvedN": 22,
+       "truthN": 22,
+       "wrongAs": []
+      },
+      "TECHNICAL_ELEVATION": {
+       "correct": 126,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 126,
+       "recall": 1.0,
+       "resolvedN": 126,
+       "truthN": 126,
+       "wrongAs": []
+      }
+     },
+     "resolved": 218,
+     "riskCoverage": [
+      {
+       "coverage": 0.0028,
+       "resolved": 1,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0139,
+       "resolved": 5,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0278,
+       "resolved": 10,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0556,
+       "resolved": 20,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.1389,
+       "resolved": 50,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.2778,
+       "resolved": 100,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.5556,
+       "resolved": 200,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.6056,
+       "resolved": 218,
+       "risk": 0.0
+      }
+     ],
+     "selectiveRisk": 0.0,
+     "technicalVsMarketing": 0,
+     "technicalVsMarketingAssets": [],
+     "wilson95": [
+      0.0,
+      0.0173
+     ],
+     "wrong": 0,
+     "wrongExamples": []
+    },
+    "pictorialUnspecified": {
+     "n": 0,
+     "outputs": {},
+     "technicalErrors": 0
+    },
+    "structureBasisOnly": {
+     "confusion": {
+      "EXTERIOR_RENDER": {
+       "UNKNOWN": 21
+      },
+      "FLOOR_PLAN": {
+       "FLOOR_PLAN": 44
+      },
+      "INTERIOR_RENDER": {
+       "UNKNOWN": 98
+      },
+      "SECTION": {
+       "SECTION": 26
+      },
+      "TECHNICAL_ELEVATION": {
+       "TECHNICAL_ELEVATION": 126
+      }
+     },
+     "coverage": 0.6222,
+     "families": 20,
+     "familyBootstrap95": [
+      0.0,
+      0.0
+     ],
+     "interiorToExteriorAssets": [],
+     "interiorToExteriorRoutes": 0,
+     "n": 315,
+     "perClass": {
+      "EXTERIOR_RENDER": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 21,
+       "wrongAs": []
+      },
+      "FLOOR_PLAN": {
+       "correct": 44,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 44,
+       "recall": 1.0,
+       "resolvedN": 44,
+       "truthN": 44,
+       "wrongAs": []
+      },
+      "INTERIOR_RENDER": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 98,
+       "wrongAs": []
+      },
+      "SECTION": {
+       "correct": 26,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 26,
+       "recall": 1.0,
+       "resolvedN": 26,
+       "truthN": 26,
+       "wrongAs": []
+      },
+      "TECHNICAL_ELEVATION": {
+       "correct": 126,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 126,
+       "recall": 1.0,
+       "resolvedN": 126,
+       "truthN": 126,
+       "wrongAs": []
+      }
+     },
+     "resolved": 196,
+     "riskCoverage": [
+      {
+       "coverage": 0.0032,
+       "resolved": 1,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0159,
+       "resolved": 5,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0317,
+       "resolved": 10,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0635,
+       "resolved": 20,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.1587,
+       "resolved": 50,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.3175,
+       "resolved": 100,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.6222,
+       "resolved": 196,
+       "risk": 0.0
+      }
+     ],
+     "selectiveRisk": 0.0,
+     "technicalVsMarketing": 0,
+     "technicalVsMarketingAssets": [],
+     "wilson95": [
+      0.0,
+      0.0192
+     ],
+     "wrong": 0,
+     "wrongExamples": []
+    }
+   },
+   "EVAL": {
+    "asset": {
+     "confusion": {
+      "EXTERIOR_RENDER": {
+       "UNKNOWN": 20
+      },
+      "FLOOR_PLAN": {
+       "FLOOR_PLAN": 50
+      },
+      "INTERIOR_RENDER": {
+       "UNKNOWN": 107
+      },
+      "SECTION": {
+       "SECTION": 14
+      },
+      "SITE_PLAN": {
+       "SITE_PLAN": 14
+      },
+      "TECHNICAL_ELEVATION": {
+       "TECHNICAL_ELEVATION": 56
+      }
+     },
+     "coverage": 0.5134,
+     "families": 14,
+     "familyBootstrap95": [
+      0.0,
+      0.0
+     ],
+     "interiorToExteriorAssets": [],
+     "interiorToExteriorRoutes": 0,
+     "n": 261,
+     "perClass": {
+      "EXTERIOR_RENDER": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 20,
+       "wrongAs": []
+      },
+      "FLOOR_PLAN": {
+       "correct": 50,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 50,
+       "recall": 1.0,
+       "resolvedN": 50,
+       "truthN": 50,
+       "wrongAs": []
+      },
+      "INTERIOR_RENDER": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 107,
+       "wrongAs": []
+      },
+      "SECTION": {
+       "correct": 14,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 14,
+       "recall": 1.0,
+       "resolvedN": 14,
+       "truthN": 14,
+       "wrongAs": []
+      },
+      "SITE_PLAN": {
+       "correct": 14,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 14,
+       "recall": 1.0,
+       "resolvedN": 14,
+       "truthN": 14,
+       "wrongAs": []
+      },
+      "TECHNICAL_ELEVATION": {
+       "correct": 56,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 56,
+       "recall": 1.0,
+       "resolvedN": 56,
+       "truthN": 56,
+       "wrongAs": []
+      }
+     },
+     "resolved": 134,
+     "riskCoverage": [
+      {
+       "coverage": 0.0038,
+       "resolved": 1,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0192,
+       "resolved": 5,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0383,
+       "resolved": 10,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0766,
+       "resolved": 20,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.1916,
+       "resolved": 50,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.3831,
+       "resolved": 100,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.5134,
+       "resolved": 134,
+       "risk": 0.0
+      }
+     ],
+     "selectiveRisk": 0.0,
+     "technicalVsMarketing": 0,
+     "technicalVsMarketingAssets": [],
+     "wilson95": [
+      0.0,
+      0.0279
+     ],
+     "wrong": 0,
+     "wrongExamples": []
+    },
+    "byFamily": {
+     "archon:dom-pod-jarzabem": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-akebiach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-w-arletach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 23,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-cieszyniankach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 23,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-czosnkach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 22,
+      "resolved": 6,
+      "wrong": 0
+     },
+     "archon:dom-w-dabecjach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 11,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-w-goldstarach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 16,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-gozdzikowcach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 19,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-w-helikoniach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-jablonkach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 24,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-w-ligolach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 18,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-w-modrzewnicy": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-zurawkach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 14,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:willa-miranda": {
+      "interiorToExteriorRoutes": 0,
+      "n": 24,
+      "resolved": 8,
+      "wrong": 0
+     }
+    },
+    "byPublisher": {
+     "archon": {
+      "confusion": {
+       "EXTERIOR_RENDER": {
+        "UNKNOWN": 20
+       },
+       "FLOOR_PLAN": {
+        "FLOOR_PLAN": 23
+       },
+       "INTERIOR_RENDER": {
+        "UNKNOWN": 107
+       },
+       "SECTION": {
+        "SECTION": 14
+       },
+       "SITE_PLAN": {
+        "SITE_PLAN": 14
+       },
+       "TECHNICAL_ELEVATION": {
+        "TECHNICAL_ELEVATION": 53
+       }
+      },
+      "coverage": 0.4502,
+      "families": 14,
+      "familyBootstrap95": [
+       0.0,
+       0.0
+      ],
+      "interiorToExteriorAssets": [],
+      "interiorToExteriorRoutes": 0,
+      "n": 231,
+      "perClass": {
+       "EXTERIOR_RENDER": {
+        "correct": 0,
+        "coverage": 0.0,
+        "precision": null,
+        "predicted": 0,
+        "recall": 0.0,
+        "resolvedN": 0,
+        "truthN": 20,
+        "wrongAs": []
+       },
+       "FLOOR_PLAN": {
+        "correct": 23,
+        "coverage": 1.0,
+        "precision": 1.0,
+        "predicted": 23,
+        "recall": 1.0,
+        "resolvedN": 23,
+        "truthN": 23,
+        "wrongAs": []
+       },
+       "INTERIOR_RENDER": {
+        "correct": 0,
+        "coverage": 0.0,
+        "precision": null,
+        "predicted": 0,
+        "recall": 0.0,
+        "resolvedN": 0,
+        "truthN": 107,
+        "wrongAs": []
+       },
+       "SECTION": {
+        "correct": 14,
+        "coverage": 1.0,
+        "precision": 1.0,
+        "predicted": 14,
+        "recall": 1.0,
+        "resolvedN": 14,
+        "truthN": 14,
+        "wrongAs": []
+       },
+       "SITE_PLAN": {
+        "correct": 14,
+        "coverage": 1.0,
+        "precision": 1.0,
+        "predicted": 14,
+        "recall": 1.0,
+        "resolvedN": 14,
+        "truthN": 14,
+        "wrongAs": []
+       },
+       "TECHNICAL_ELEVATION": {
+        "correct": 53,
+        "coverage": 1.0,
+        "precision": 1.0,
+        "predicted": 53,
+        "recall": 1.0,
+        "resolvedN": 53,
+        "truthN": 53,
+        "wrongAs": []
+       }
+      },
+      "resolved": 104,
+      "riskCoverage": [
+       {
+        "coverage": 0.0043,
+        "resolved": 1,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0216,
+        "resolved": 5,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0433,
+        "resolved": 10,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0866,
+        "resolved": 20,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.2165,
+        "resolved": 50,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.4329,
+        "resolved": 100,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.4502,
+        "resolved": 104,
+        "risk": 0.0
+       }
+      ],
+      "selectiveRisk": 0.0,
+      "technicalVsMarketing": 0,
+      "technicalVsMarketingAssets": [],
+      "wilson95": [
+       0.0,
+       0.0356
+      ],
+      "wrong": 0,
+      "wrongExamples": []
+     }
+    },
+    "duplicateCorrelation": {
+     "groupsWithDifferentOutputs": 0,
+     "groupsWithSeveralAssets": 26
+    },
+    "lineageGroup": {
+     "confusion": {
+      "EXTERIOR_RENDER": {
+       "UNKNOWN": 20
+      },
+      "FLOOR_PLAN": {
+       "FLOOR_PLAN": 23
+      },
+      "INTERIOR_RENDER": {
+       "UNKNOWN": 107
+      },
+      "SECTION": {
+       "SECTION": 14
+      },
+      "SITE_PLAN": {
+       "SITE_PLAN": 14
+      },
+      "TECHNICAL_ELEVATION": {
+       "TECHNICAL_ELEVATION": 53
+      }
+     },
+     "coverage": 0.4502,
+     "families": 14,
+     "familyBootstrap95": [
+      0.0,
+      0.0
+     ],
+     "interiorToExteriorAssets": [],
+     "interiorToExteriorRoutes": 0,
+     "n": 231,
+     "perClass": {
+      "EXTERIOR_RENDER": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 20,
+       "wrongAs": []
+      },
+      "FLOOR_PLAN": {
+       "correct": 23,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 23,
+       "recall": 1.0,
+       "resolvedN": 23,
+       "truthN": 23,
+       "wrongAs": []
+      },
+      "INTERIOR_RENDER": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 107,
+       "wrongAs": []
+      },
+      "SECTION": {
+       "correct": 14,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 14,
+       "recall": 1.0,
+       "resolvedN": 14,
+       "truthN": 14,
+       "wrongAs": []
+      },
+      "SITE_PLAN": {
+       "correct": 14,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 14,
+       "recall": 1.0,
+       "resolvedN": 14,
+       "truthN": 14,
+       "wrongAs": []
+      },
+      "TECHNICAL_ELEVATION": {
+       "correct": 53,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 53,
+       "recall": 1.0,
+       "resolvedN": 53,
+       "truthN": 53,
+       "wrongAs": []
+      }
+     },
+     "resolved": 104,
+     "riskCoverage": [
+      {
+       "coverage": 0.0043,
+       "resolved": 1,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0216,
+       "resolved": 5,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0433,
+       "resolved": 10,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0866,
+       "resolved": 20,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.2165,
+       "resolved": 50,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.4329,
+       "resolved": 100,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.4502,
+       "resolved": 104,
+       "risk": 0.0
+      }
+     ],
+     "selectiveRisk": 0.0,
+     "technicalVsMarketing": 0,
+     "technicalVsMarketingAssets": [],
+     "wilson95": [
+      0.0,
+      0.0356
+     ],
+     "wrong": 0,
+     "wrongExamples": []
+    },
+    "pictorialUnspecified": {
+     "n": 0,
+     "outputs": {},
+     "technicalErrors": 0
+    },
+    "structureBasisOnly": {
+     "confusion": {
+      "EXTERIOR_RENDER": {
+       "UNKNOWN": 10
+      },
+      "FLOOR_PLAN": {
+       "FLOOR_PLAN": 23
+      },
+      "INTERIOR_RENDER": {
+       "UNKNOWN": 107
+      },
+      "SECTION": {
+       "SECTION": 14
+      },
+      "TECHNICAL_ELEVATION": {
+       "TECHNICAL_ELEVATION": 53
+      }
+     },
+     "coverage": 0.4348,
+     "families": 14,
+     "familyBootstrap95": [
+      0.0,
+      0.0
+     ],
+     "interiorToExteriorAssets": [],
+     "interiorToExteriorRoutes": 0,
+     "n": 207,
+     "perClass": {
+      "EXTERIOR_RENDER": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 10,
+       "wrongAs": []
+      },
+      "FLOOR_PLAN": {
+       "correct": 23,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 23,
+       "recall": 1.0,
+       "resolvedN": 23,
+       "truthN": 23,
+       "wrongAs": []
+      },
+      "INTERIOR_RENDER": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 107,
+       "wrongAs": []
+      },
+      "SECTION": {
+       "correct": 14,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 14,
+       "recall": 1.0,
+       "resolvedN": 14,
+       "truthN": 14,
+       "wrongAs": []
+      },
+      "TECHNICAL_ELEVATION": {
+       "correct": 53,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 53,
+       "recall": 1.0,
+       "resolvedN": 53,
+       "truthN": 53,
+       "wrongAs": []
+      }
+     },
+     "resolved": 90,
+     "riskCoverage": [
+      {
+       "coverage": 0.0048,
+       "resolved": 1,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0242,
+       "resolved": 5,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0483,
+       "resolved": 10,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0966,
+       "resolved": 20,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.2415,
+       "resolved": 50,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.4348,
+       "resolved": 90,
+       "risk": 0.0
+      }
+     ],
+     "selectiveRisk": 0.0,
+     "technicalVsMarketing": 0,
+     "technicalVsMarketingAssets": [],
+     "wilson95": [
+      0.0,
+      0.0409
+     ],
+     "wrong": 0,
+     "wrongExamples": []
+    }
+   },
+   "meta": {
+    "contender": "V0a",
+    "source": "production source:acquire, unmodified"
+   }
+  },
+  "V0b": {
+   "DEV": {
+    "asset": {
+     "confusion": {
+      "EXTERIOR_RENDER": {
+       "UNKNOWN": 58
+      },
+      "FLOOR_PLAN": {
+       "FLOOR_PLAN": 104
+      },
+      "INTERIOR_RENDER": {
+       "INTERIOR_RENDER": 16,
+       "UNKNOWN": 90
+      },
+      "SECTION": {
+       "SECTION": 36
+      },
+      "SITE_PLAN": {
+       "SITE_PLAN": 36
+      },
+      "TECHNICAL_ELEVATION": {
+       "TECHNICAL_ELEVATION": 142
+      }
+     },
+     "coverage": 0.6929,
+     "families": 20,
+     "familyBootstrap95": [
+      0.0,
+      0.0
+     ],
+     "interiorToExteriorAssets": [],
+     "interiorToExteriorRoutes": 0,
+     "n": 482,
+     "perClass": {
+      "EXTERIOR_RENDER": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 58,
+       "wrongAs": []
+      },
+      "FLOOR_PLAN": {
+       "correct": 104,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 104,
+       "recall": 1.0,
+       "resolvedN": 104,
+       "truthN": 104,
+       "wrongAs": []
+      },
+      "INTERIOR_RENDER": {
+       "correct": 16,
+       "coverage": 0.1509,
+       "precision": 1.0,
+       "predicted": 16,
+       "recall": 0.1509,
+       "resolvedN": 16,
+       "truthN": 106,
+       "wrongAs": []
+      },
+      "SECTION": {
+       "correct": 36,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 36,
+       "recall": 1.0,
+       "resolvedN": 36,
+       "truthN": 36,
+       "wrongAs": []
+      },
+      "SITE_PLAN": {
+       "correct": 36,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 36,
+       "recall": 1.0,
+       "resolvedN": 36,
+       "truthN": 36,
+       "wrongAs": []
+      },
+      "TECHNICAL_ELEVATION": {
+       "correct": 142,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 142,
+       "recall": 1.0,
+       "resolvedN": 142,
+       "truthN": 142,
+       "wrongAs": []
+      }
+     },
+     "resolved": 334,
+     "riskCoverage": [
+      {
+       "coverage": 0.0021,
+       "resolved": 1,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0104,
+       "resolved": 5,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0207,
+       "resolved": 10,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0415,
+       "resolved": 20,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.1037,
+       "resolved": 50,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.2075,
+       "resolved": 100,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.4149,
+       "resolved": 200,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.6929,
+       "resolved": 334,
+       "risk": 0.0
+      }
+     ],
+     "selectiveRisk": 0.0,
+     "technicalVsMarketing": 0,
+     "technicalVsMarketingAssets": [],
+     "wilson95": [
+      0.0,
+      0.0114
+     ],
+     "wrong": 0,
+     "wrongExamples": []
+    },
+    "byFamily": {
+     "archon:dom-miniaturka": {
+      "interiorToExteriorRoutes": 0,
+      "n": 7,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-pod-milorzebem": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 10,
+      "wrong": 0
+     },
+     "archon:dom-w-arkadiach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 18,
+      "resolved": 9,
+      "wrong": 0
+     },
+     "archon:dom-w-azaliach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-bratkach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 11,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-w-cyklamenach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 6,
+      "wrong": 0
+     },
+     "archon:dom-w-daliach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-w-glogownikach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 11,
+      "resolved": 5,
+      "wrong": 0
+     },
+     "archon:dom-w-jarzmiankach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-kosaccach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 21,
+      "resolved": 6,
+      "wrong": 0
+     },
+     "archon:dom-w-krasnokwiatach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 7,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-marcowkach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-w-modrzykach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 7,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-morelach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-w-murajach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 22,
+      "resolved": 9,
+      "wrong": 0
+     },
+     "archon:dom-w-rarytasach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 140,
+      "resolved": 90,
+      "wrong": 0
+     },
+     "archon:dom-w-tunbergiach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-w-tymianku": {
+      "interiorToExteriorRoutes": 0,
+      "n": 8,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-we-wrzosach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 7,
+      "resolved": 6,
+      "wrong": 0
+     },
+     "archon:willa-maja": {
+      "interiorToExteriorRoutes": 0,
+      "n": 24,
+      "resolved": 10,
+      "wrong": 0
+     }
+    },
+    "byPublisher": {
+     "archon": {
+      "confusion": {
+       "EXTERIOR_RENDER": {
+        "UNKNOWN": 44
+       },
+       "FLOOR_PLAN": {
+        "FLOOR_PLAN": 44
+       },
+       "INTERIOR_RENDER": {
+        "INTERIOR_RENDER": 16,
+        "UNKNOWN": 82
+       },
+       "SECTION": {
+        "SECTION": 26
+       },
+       "SITE_PLAN": {
+        "SITE_PLAN": 22
+       },
+       "TECHNICAL_ELEVATION": {
+        "TECHNICAL_ELEVATION": 126
+       }
+      },
+      "coverage": 0.65,
+      "families": 20,
+      "familyBootstrap95": [
+       0.0,
+       0.0
+      ],
+      "interiorToExteriorAssets": [],
+      "interiorToExteriorRoutes": 0,
+      "n": 360,
+      "perClass": {
+       "EXTERIOR_RENDER": {
+        "correct": 0,
+        "coverage": 0.0,
+        "precision": null,
+        "predicted": 0,
+        "recall": 0.0,
+        "resolvedN": 0,
+        "truthN": 44,
+        "wrongAs": []
+       },
+       "FLOOR_PLAN": {
+        "correct": 44,
+        "coverage": 1.0,
+        "precision": 1.0,
+        "predicted": 44,
+        "recall": 1.0,
+        "resolvedN": 44,
+        "truthN": 44,
+        "wrongAs": []
+       },
+       "INTERIOR_RENDER": {
+        "correct": 16,
+        "coverage": 0.1633,
+        "precision": 1.0,
+        "predicted": 16,
+        "recall": 0.1633,
+        "resolvedN": 16,
+        "truthN": 98,
+        "wrongAs": []
+       },
+       "SECTION": {
+        "correct": 26,
+        "coverage": 1.0,
+        "precision": 1.0,
+        "predicted": 26,
+        "recall": 1.0,
+        "resolvedN": 26,
+        "truthN": 26,
+        "wrongAs": []
+       },
+       "SITE_PLAN": {
+        "correct": 22,
+        "coverage": 1.0,
+        "precision": 1.0,
+        "predicted": 22,
+        "recall": 1.0,
+        "resolvedN": 22,
+        "truthN": 22,
+        "wrongAs": []
+       },
+       "TECHNICAL_ELEVATION": {
+        "correct": 126,
+        "coverage": 1.0,
+        "precision": 1.0,
+        "predicted": 126,
+        "recall": 1.0,
+        "resolvedN": 126,
+        "truthN": 126,
+        "wrongAs": []
+       }
+      },
+      "resolved": 234,
+      "riskCoverage": [
+       {
+        "coverage": 0.0028,
+        "resolved": 1,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0139,
+        "resolved": 5,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0278,
+        "resolved": 10,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0556,
+        "resolved": 20,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.1389,
+        "resolved": 50,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.2778,
+        "resolved": 100,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.5556,
+        "resolved": 200,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.65,
+        "resolved": 234,
+        "risk": 0.0
+       }
+      ],
+      "selectiveRisk": 0.0,
+      "technicalVsMarketing": 0,
+      "technicalVsMarketingAssets": [],
+      "wilson95": [
+       0.0,
+       0.0162
+      ],
+      "wrong": 0,
+      "wrongExamples": []
+     }
+    },
+    "duplicateCorrelation": {
+     "groupsWithDifferentOutputs": 0,
+     "groupsWithSeveralAssets": 79
+    },
+    "lineageGroup": {
+     "confusion": {
+      "EXTERIOR_RENDER": {
+       "UNKNOWN": 44
+      },
+      "FLOOR_PLAN": {
+       "FLOOR_PLAN": 44
+      },
+      "INTERIOR_RENDER": {
+       "INTERIOR_RENDER": 16,
+       "UNKNOWN": 82
+      },
+      "SECTION": {
+       "SECTION": 26
+      },
+      "SITE_PLAN": {
+       "SITE_PLAN": 22
+      },
+      "TECHNICAL_ELEVATION": {
+       "TECHNICAL_ELEVATION": 126
+      }
+     },
+     "coverage": 0.65,
+     "families": 20,
+     "familyBootstrap95": [
+      0.0,
+      0.0
+     ],
+     "interiorToExteriorAssets": [],
+     "interiorToExteriorRoutes": 0,
+     "n": 360,
+     "perClass": {
+      "EXTERIOR_RENDER": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 44,
+       "wrongAs": []
+      },
+      "FLOOR_PLAN": {
+       "correct": 44,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 44,
+       "recall": 1.0,
+       "resolvedN": 44,
+       "truthN": 44,
+       "wrongAs": []
+      },
+      "INTERIOR_RENDER": {
+       "correct": 16,
+       "coverage": 0.1633,
+       "precision": 1.0,
+       "predicted": 16,
+       "recall": 0.1633,
+       "resolvedN": 16,
+       "truthN": 98,
+       "wrongAs": []
+      },
+      "SECTION": {
+       "correct": 26,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 26,
+       "recall": 1.0,
+       "resolvedN": 26,
+       "truthN": 26,
+       "wrongAs": []
+      },
+      "SITE_PLAN": {
+       "correct": 22,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 22,
+       "recall": 1.0,
+       "resolvedN": 22,
+       "truthN": 22,
+       "wrongAs": []
+      },
+      "TECHNICAL_ELEVATION": {
+       "correct": 126,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 126,
+       "recall": 1.0,
+       "resolvedN": 126,
+       "truthN": 126,
+       "wrongAs": []
+      }
+     },
+     "resolved": 234,
+     "riskCoverage": [
+      {
+       "coverage": 0.0028,
+       "resolved": 1,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0139,
+       "resolved": 5,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0278,
+       "resolved": 10,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0556,
+       "resolved": 20,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.1389,
+       "resolved": 50,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.2778,
+       "resolved": 100,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.5556,
+       "resolved": 200,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.65,
+       "resolved": 234,
+       "risk": 0.0
+      }
+     ],
+     "selectiveRisk": 0.0,
+     "technicalVsMarketing": 0,
+     "technicalVsMarketingAssets": [],
+     "wilson95": [
+      0.0,
+      0.0162
+     ],
+     "wrong": 0,
+     "wrongExamples": []
+    },
+    "pictorialUnspecified": {
+     "n": 0,
+     "outputs": {},
+     "technicalErrors": 0
+    }
+   },
+   "EVAL": {
+    "asset": {
+     "confusion": {
+      "EXTERIOR_RENDER": {
+       "UNKNOWN": 20
+      },
+      "FLOOR_PLAN": {
+       "FLOOR_PLAN": 50
+      },
+      "INTERIOR_RENDER": {
+       "INTERIOR_RENDER": 54,
+       "UNKNOWN": 53
+      },
+      "SECTION": {
+       "SECTION": 14
+      },
+      "SITE_PLAN": {
+       "SITE_PLAN": 14
+      },
+      "TECHNICAL_ELEVATION": {
+       "TECHNICAL_ELEVATION": 56
+      }
+     },
+     "coverage": 0.7203,
+     "families": 14,
+     "familyBootstrap95": [
+      0.0,
+      0.0
+     ],
+     "interiorToExteriorAssets": [],
+     "interiorToExteriorRoutes": 0,
+     "n": 261,
+     "perClass": {
+      "EXTERIOR_RENDER": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 20,
+       "wrongAs": []
+      },
+      "FLOOR_PLAN": {
+       "correct": 50,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 50,
+       "recall": 1.0,
+       "resolvedN": 50,
+       "truthN": 50,
+       "wrongAs": []
+      },
+      "INTERIOR_RENDER": {
+       "correct": 54,
+       "coverage": 0.5047,
+       "precision": 1.0,
+       "predicted": 54,
+       "recall": 0.5047,
+       "resolvedN": 54,
+       "truthN": 107,
+       "wrongAs": []
+      },
+      "SECTION": {
+       "correct": 14,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 14,
+       "recall": 1.0,
+       "resolvedN": 14,
+       "truthN": 14,
+       "wrongAs": []
+      },
+      "SITE_PLAN": {
+       "correct": 14,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 14,
+       "recall": 1.0,
+       "resolvedN": 14,
+       "truthN": 14,
+       "wrongAs": []
+      },
+      "TECHNICAL_ELEVATION": {
+       "correct": 56,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 56,
+       "recall": 1.0,
+       "resolvedN": 56,
+       "truthN": 56,
+       "wrongAs": []
+      }
+     },
+     "resolved": 188,
+     "riskCoverage": [
+      {
+       "coverage": 0.0038,
+       "resolved": 1,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0192,
+       "resolved": 5,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0383,
+       "resolved": 10,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0766,
+       "resolved": 20,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.1916,
+       "resolved": 50,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.3831,
+       "resolved": 100,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.7203,
+       "resolved": 188,
+       "risk": 0.0
+      }
+     ],
+     "selectiveRisk": 0.0,
+     "technicalVsMarketing": 0,
+     "technicalVsMarketingAssets": [],
+     "wilson95": [
+      0.0,
+      0.02
+     ],
+     "wrong": 0,
+     "wrongExamples": []
+    },
+    "byFamily": {
+     "archon:dom-pod-jarzabem": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-akebiach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-w-arletach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 23,
+      "resolved": 16,
+      "wrong": 0
+     },
+     "archon:dom-w-cieszyniankach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 23,
+      "resolved": 14,
+      "wrong": 0
+     },
+     "archon:dom-w-czosnkach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 22,
+      "resolved": 15,
+      "wrong": 0
+     },
+     "archon:dom-w-dabecjach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 11,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-w-goldstarach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 16,
+      "resolved": 9,
+      "wrong": 0
+     },
+     "archon:dom-w-gozdzikowcach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 19,
+      "resolved": 10,
+      "wrong": 0
+     },
+     "archon:dom-w-helikoniach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-jablonkach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 24,
+      "resolved": 18,
+      "wrong": 0
+     },
+     "archon:dom-w-ligolach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 18,
+      "resolved": 10,
+      "wrong": 0
+     },
+     "archon:dom-w-modrzewnicy": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-zurawkach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 14,
+      "resolved": 9,
+      "wrong": 0
+     },
+     "archon:willa-miranda": {
+      "interiorToExteriorRoutes": 0,
+      "n": 24,
+      "resolved": 20,
+      "wrong": 0
+     }
+    },
+    "byPublisher": {
+     "archon": {
+      "confusion": {
+       "EXTERIOR_RENDER": {
+        "UNKNOWN": 20
+       },
+       "FLOOR_PLAN": {
+        "FLOOR_PLAN": 23
+       },
+       "INTERIOR_RENDER": {
+        "INTERIOR_RENDER": 54,
+        "UNKNOWN": 53
+       },
+       "SECTION": {
+        "SECTION": 14
+       },
+       "SITE_PLAN": {
+        "SITE_PLAN": 14
+       },
+       "TECHNICAL_ELEVATION": {
+        "TECHNICAL_ELEVATION": 53
+       }
+      },
+      "coverage": 0.684,
+      "families": 14,
+      "familyBootstrap95": [
+       0.0,
+       0.0
+      ],
+      "interiorToExteriorAssets": [],
+      "interiorToExteriorRoutes": 0,
+      "n": 231,
+      "perClass": {
+       "EXTERIOR_RENDER": {
+        "correct": 0,
+        "coverage": 0.0,
+        "precision": null,
+        "predicted": 0,
+        "recall": 0.0,
+        "resolvedN": 0,
+        "truthN": 20,
+        "wrongAs": []
+       },
+       "FLOOR_PLAN": {
+        "correct": 23,
+        "coverage": 1.0,
+        "precision": 1.0,
+        "predicted": 23,
+        "recall": 1.0,
+        "resolvedN": 23,
+        "truthN": 23,
+        "wrongAs": []
+       },
+       "INTERIOR_RENDER": {
+        "correct": 54,
+        "coverage": 0.5047,
+        "precision": 1.0,
+        "predicted": 54,
+        "recall": 0.5047,
+        "resolvedN": 54,
+        "truthN": 107,
+        "wrongAs": []
+       },
+       "SECTION": {
+        "correct": 14,
+        "coverage": 1.0,
+        "precision": 1.0,
+        "predicted": 14,
+        "recall": 1.0,
+        "resolvedN": 14,
+        "truthN": 14,
+        "wrongAs": []
+       },
+       "SITE_PLAN": {
+        "correct": 14,
+        "coverage": 1.0,
+        "precision": 1.0,
+        "predicted": 14,
+        "recall": 1.0,
+        "resolvedN": 14,
+        "truthN": 14,
+        "wrongAs": []
+       },
+       "TECHNICAL_ELEVATION": {
+        "correct": 53,
+        "coverage": 1.0,
+        "precision": 1.0,
+        "predicted": 53,
+        "recall": 1.0,
+        "resolvedN": 53,
+        "truthN": 53,
+        "wrongAs": []
+       }
+      },
+      "resolved": 158,
+      "riskCoverage": [
+       {
+        "coverage": 0.0043,
+        "resolved": 1,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0216,
+        "resolved": 5,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0433,
+        "resolved": 10,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0866,
+        "resolved": 20,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.2165,
+        "resolved": 50,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.4329,
+        "resolved": 100,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.684,
+        "resolved": 158,
+        "risk": 0.0
+       }
+      ],
+      "selectiveRisk": 0.0,
+      "technicalVsMarketing": 0,
+      "technicalVsMarketingAssets": [],
+      "wilson95": [
+       0.0,
+       0.0237
+      ],
+      "wrong": 0,
+      "wrongExamples": []
+     }
+    },
+    "duplicateCorrelation": {
+     "groupsWithDifferentOutputs": 0,
+     "groupsWithSeveralAssets": 26
+    },
+    "lineageGroup": {
+     "confusion": {
+      "EXTERIOR_RENDER": {
+       "UNKNOWN": 20
+      },
+      "FLOOR_PLAN": {
+       "FLOOR_PLAN": 23
+      },
+      "INTERIOR_RENDER": {
+       "INTERIOR_RENDER": 54,
+       "UNKNOWN": 53
+      },
+      "SECTION": {
+       "SECTION": 14
+      },
+      "SITE_PLAN": {
+       "SITE_PLAN": 14
+      },
+      "TECHNICAL_ELEVATION": {
+       "TECHNICAL_ELEVATION": 53
+      }
+     },
+     "coverage": 0.684,
+     "families": 14,
+     "familyBootstrap95": [
+      0.0,
+      0.0
+     ],
+     "interiorToExteriorAssets": [],
+     "interiorToExteriorRoutes": 0,
+     "n": 231,
+     "perClass": {
+      "EXTERIOR_RENDER": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 20,
+       "wrongAs": []
+      },
+      "FLOOR_PLAN": {
+       "correct": 23,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 23,
+       "recall": 1.0,
+       "resolvedN": 23,
+       "truthN": 23,
+       "wrongAs": []
+      },
+      "INTERIOR_RENDER": {
+       "correct": 54,
+       "coverage": 0.5047,
+       "precision": 1.0,
+       "predicted": 54,
+       "recall": 0.5047,
+       "resolvedN": 54,
+       "truthN": 107,
+       "wrongAs": []
+      },
+      "SECTION": {
+       "correct": 14,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 14,
+       "recall": 1.0,
+       "resolvedN": 14,
+       "truthN": 14,
+       "wrongAs": []
+      },
+      "SITE_PLAN": {
+       "correct": 14,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 14,
+       "recall": 1.0,
+       "resolvedN": 14,
+       "truthN": 14,
+       "wrongAs": []
+      },
+      "TECHNICAL_ELEVATION": {
+       "correct": 53,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 53,
+       "recall": 1.0,
+       "resolvedN": 53,
+       "truthN": 53,
+       "wrongAs": []
+      }
+     },
+     "resolved": 158,
+     "riskCoverage": [
+      {
+       "coverage": 0.0043,
+       "resolved": 1,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0216,
+       "resolved": 5,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0433,
+       "resolved": 10,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0866,
+       "resolved": 20,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.2165,
+       "resolved": 50,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.4329,
+       "resolved": 100,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.684,
+       "resolved": 158,
+       "risk": 0.0
+      }
+     ],
+     "selectiveRisk": 0.0,
+     "technicalVsMarketing": 0,
+     "technicalVsMarketingAssets": [],
+     "wilson95": [
+      0.0,
+      0.0237
+     ],
+     "wrong": 0,
+     "wrongExamples": []
+    },
+    "pictorialUnspecified": {
+     "n": 0,
+     "outputs": {},
+     "technicalErrors": 0
+    }
+   },
+   "meta": {
+    "contender": "V0b"
+   }
+  },
+  "V1": {
+   "DEV": {
+    "asset": {
+     "confusion": {
+      "EXTERIOR_RENDER": {
+       "UNKNOWN": 58
+      },
+      "FLOOR_PLAN": {
+       "FLOOR_PLAN": 104
+      },
+      "INTERIOR_RENDER": {
+       "INTERIOR_RENDER": 91,
+       "UNKNOWN": 15
+      },
+      "SECTION": {
+       "SECTION": 36
+      },
+      "SITE_PLAN": {
+       "SITE_PLAN": 36
+      },
+      "TECHNICAL_ELEVATION": {
+       "SITE_PLAN": 2,
+       "TECHNICAL_ELEVATION": 140
+      }
+     },
+     "coverage": 0.8485,
+     "families": 20,
+     "familyBootstrap95": [
+      0.0,
+      0.0239
+     ],
+     "interiorToExteriorAssets": [],
+     "interiorToExteriorRoutes": 0,
+     "n": 482,
+     "perClass": {
+      "EXTERIOR_RENDER": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 58,
+       "wrongAs": []
+      },
+      "FLOOR_PLAN": {
+       "correct": 104,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 104,
+       "recall": 1.0,
+       "resolvedN": 104,
+       "truthN": 104,
+       "wrongAs": []
+      },
+      "INTERIOR_RENDER": {
+       "correct": 91,
+       "coverage": 0.8585,
+       "precision": 1.0,
+       "predicted": 91,
+       "recall": 0.8585,
+       "resolvedN": 91,
+       "truthN": 106,
+       "wrongAs": []
+      },
+      "SECTION": {
+       "correct": 36,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 36,
+       "recall": 1.0,
+       "resolvedN": 36,
+       "truthN": 36,
+       "wrongAs": []
+      },
+      "SITE_PLAN": {
+       "correct": 36,
+       "coverage": 1.0,
+       "precision": 0.9474,
+       "predicted": 38,
+       "recall": 1.0,
+       "resolvedN": 36,
+       "truthN": 36,
+       "wrongAs": []
+      },
+      "TECHNICAL_ELEVATION": {
+       "correct": 140,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 140,
+       "recall": 0.9859,
+       "resolvedN": 142,
+       "truthN": 142,
+       "wrongAs": [
+        "SITE_PLAN"
+       ]
+      }
+     },
+     "resolved": 409,
+     "riskCoverage": [
+      {
+       "coverage": 0.0021,
+       "resolved": 1,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0104,
+       "resolved": 5,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0207,
+       "resolved": 10,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0415,
+       "resolved": 20,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.1037,
+       "resolved": 50,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.2075,
+       "resolved": 100,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.4149,
+       "resolved": 200,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.8299,
+       "resolved": 400,
+       "risk": 0.0025
+      },
+      {
+       "coverage": 0.8485,
+       "resolved": 409,
+       "risk": 0.0049
+      }
+     ],
+     "selectiveRisk": 0.0049,
+     "technicalVsMarketing": 0,
+     "technicalVsMarketingAssets": [],
+     "wilson95": [
+      0.0013,
+      0.0177
+     ],
+     "wrong": 2,
+     "wrongExamples": [
+      {
+       "assetId": "a-15a3bbfc54263602",
+       "family": "archon:dom-w-tunbergiach",
+       "out": "SITE_PLAN",
+       "truth": "TECHNICAL_ELEVATION"
+      },
+      {
+       "assetId": "a-e93a8c111434b7f8",
+       "family": "archon:dom-w-tunbergiach",
+       "out": "SITE_PLAN",
+       "truth": "TECHNICAL_ELEVATION"
+      }
+     ]
+    },
+    "byFamily": {
+     "archon:dom-miniaturka": {
+      "interiorToExteriorRoutes": 0,
+      "n": 7,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-pod-milorzebem": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-w-arkadiach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 18,
+      "resolved": 16,
+      "wrong": 0
+     },
+     "archon:dom-w-azaliach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-bratkach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 11,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-w-cyklamenach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 6,
+      "wrong": 0
+     },
+     "archon:dom-w-daliach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-w-glogownikach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 11,
+      "resolved": 9,
+      "wrong": 0
+     },
+     "archon:dom-w-jarzmiankach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-kosaccach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 21,
+      "resolved": 19,
+      "wrong": 0
+     },
+     "archon:dom-w-krasnokwiatach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 7,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-marcowkach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-w-modrzykach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 7,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-morelach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 9,
+      "wrong": 0
+     },
+     "archon:dom-w-murajach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 22,
+      "resolved": 20,
+      "wrong": 0
+     },
+     "archon:dom-w-rarytasach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 140,
+      "resolved": 114,
+      "wrong": 0
+     },
+     "archon:dom-w-tunbergiach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 8,
+      "wrong": 2
+     },
+     "archon:dom-w-tymianku": {
+      "interiorToExteriorRoutes": 0,
+      "n": 8,
+      "resolved": 8,
+      "wrong": 0
+     },
+     "archon:dom-we-wrzosach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 7,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:willa-maja": {
+      "interiorToExteriorRoutes": 0,
+      "n": 24,
+      "resolved": 22,
+      "wrong": 0
+     }
+    },
+    "byPublisher": {
+     "archon": {
+      "confusion": {
+       "EXTERIOR_RENDER": {
+        "UNKNOWN": 44
+       },
+       "FLOOR_PLAN": {
+        "FLOOR_PLAN": 44
+       },
+       "INTERIOR_RENDER": {
+        "INTERIOR_RENDER": 87,
+        "UNKNOWN": 11
+       },
+       "SECTION": {
+        "SECTION": 26
+       },
+       "SITE_PLAN": {
+        "SITE_PLAN": 22
+       },
+       "TECHNICAL_ELEVATION": {
+        "SITE_PLAN": 2,
+        "TECHNICAL_ELEVATION": 124
+       }
+      },
+      "coverage": 0.8472,
+      "families": 20,
+      "familyBootstrap95": [
+       0.0,
+       0.0302
+      ],
+      "interiorToExteriorAssets": [],
+      "interiorToExteriorRoutes": 0,
+      "n": 360,
+      "perClass": {
+       "EXTERIOR_RENDER": {
+        "correct": 0,
+        "coverage": 0.0,
+        "precision": null,
+        "predicted": 0,
+        "recall": 0.0,
+        "resolvedN": 0,
+        "truthN": 44,
+        "wrongAs": []
+       },
+       "FLOOR_PLAN": {
+        "correct": 44,
+        "coverage": 1.0,
+        "precision": 1.0,
+        "predicted": 44,
+        "recall": 1.0,
+        "resolvedN": 44,
+        "truthN": 44,
+        "wrongAs": []
+       },
+       "INTERIOR_RENDER": {
+        "correct": 87,
+        "coverage": 0.8878,
+        "precision": 1.0,
+        "predicted": 87,
+        "recall": 0.8878,
+        "resolvedN": 87,
+        "truthN": 98,
+        "wrongAs": []
+       },
+       "SECTION": {
+        "correct": 26,
+        "coverage": 1.0,
+        "precision": 1.0,
+        "predicted": 26,
+        "recall": 1.0,
+        "resolvedN": 26,
+        "truthN": 26,
+        "wrongAs": []
+       },
+       "SITE_PLAN": {
+        "correct": 22,
+        "coverage": 1.0,
+        "precision": 0.9167,
+        "predicted": 24,
+        "recall": 1.0,
+        "resolvedN": 22,
+        "truthN": 22,
+        "wrongAs": []
+       },
+       "TECHNICAL_ELEVATION": {
+        "correct": 124,
+        "coverage": 1.0,
+        "precision": 1.0,
+        "predicted": 124,
+        "recall": 0.9841,
+        "resolvedN": 126,
+        "truthN": 126,
+        "wrongAs": [
+         "SITE_PLAN"
+        ]
+       }
+      },
+      "resolved": 305,
+      "riskCoverage": [
+       {
+        "coverage": 0.0028,
+        "resolved": 1,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0139,
+        "resolved": 5,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0278,
+        "resolved": 10,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0556,
+        "resolved": 20,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.1389,
+        "resolved": 50,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.2778,
+        "resolved": 100,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.5556,
+        "resolved": 200,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.8472,
+        "resolved": 305,
+        "risk": 0.0066
+       }
+      ],
+      "selectiveRisk": 0.0066,
+      "technicalVsMarketing": 0,
+      "technicalVsMarketingAssets": [],
+      "wilson95": [
+       0.0018,
+       0.0236
+      ],
+      "wrong": 2,
+      "wrongExamples": [
+       {
+        "assetId": "a-15a3bbfc54263602",
+        "family": "archon:dom-w-tunbergiach",
+        "out": "SITE_PLAN",
+        "truth": "TECHNICAL_ELEVATION"
+       },
+       {
+        "assetId": "a-e93a8c111434b7f8",
+        "family": "archon:dom-w-tunbergiach",
+        "out": "SITE_PLAN",
+        "truth": "TECHNICAL_ELEVATION"
+       }
+      ]
+     }
+    },
+    "duplicateCorrelation": {
+     "groupsWithDifferentOutputs": 0,
+     "groupsWithSeveralAssets": 79
+    },
+    "lineageGroup": {
+     "confusion": {
+      "EXTERIOR_RENDER": {
+       "UNKNOWN": 44
+      },
+      "FLOOR_PLAN": {
+       "FLOOR_PLAN": 44
+      },
+      "INTERIOR_RENDER": {
+       "INTERIOR_RENDER": 87,
+       "UNKNOWN": 11
+      },
+      "SECTION": {
+       "SECTION": 26
+      },
+      "SITE_PLAN": {
+       "SITE_PLAN": 22
+      },
+      "TECHNICAL_ELEVATION": {
+       "SITE_PLAN": 2,
+       "TECHNICAL_ELEVATION": 124
+      }
+     },
+     "coverage": 0.8472,
+     "families": 20,
+     "familyBootstrap95": [
+      0.0,
+      0.0302
+     ],
+     "interiorToExteriorAssets": [],
+     "interiorToExteriorRoutes": 0,
+     "n": 360,
+     "perClass": {
+      "EXTERIOR_RENDER": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 44,
+       "wrongAs": []
+      },
+      "FLOOR_PLAN": {
+       "correct": 44,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 44,
+       "recall": 1.0,
+       "resolvedN": 44,
+       "truthN": 44,
+       "wrongAs": []
+      },
+      "INTERIOR_RENDER": {
+       "correct": 87,
+       "coverage": 0.8878,
+       "precision": 1.0,
+       "predicted": 87,
+       "recall": 0.8878,
+       "resolvedN": 87,
+       "truthN": 98,
+       "wrongAs": []
+      },
+      "SECTION": {
+       "correct": 26,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 26,
+       "recall": 1.0,
+       "resolvedN": 26,
+       "truthN": 26,
+       "wrongAs": []
+      },
+      "SITE_PLAN": {
+       "correct": 22,
+       "coverage": 1.0,
+       "precision": 0.9167,
+       "predicted": 24,
+       "recall": 1.0,
+       "resolvedN": 22,
+       "truthN": 22,
+       "wrongAs": []
+      },
+      "TECHNICAL_ELEVATION": {
+       "correct": 124,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 124,
+       "recall": 0.9841,
+       "resolvedN": 126,
+       "truthN": 126,
+       "wrongAs": [
+        "SITE_PLAN"
+       ]
+      }
+     },
+     "resolved": 305,
+     "riskCoverage": [
+      {
+       "coverage": 0.0028,
+       "resolved": 1,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0139,
+       "resolved": 5,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0278,
+       "resolved": 10,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0556,
+       "resolved": 20,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.1389,
+       "resolved": 50,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.2778,
+       "resolved": 100,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.5556,
+       "resolved": 200,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.8472,
+       "resolved": 305,
+       "risk": 0.0066
+      }
+     ],
+     "selectiveRisk": 0.0066,
+     "technicalVsMarketing": 0,
+     "technicalVsMarketingAssets": [],
+     "wilson95": [
+      0.0018,
+      0.0236
+     ],
+     "wrong": 2,
+     "wrongExamples": [
+      {
+       "assetId": "a-15a3bbfc54263602",
+       "family": "archon:dom-w-tunbergiach",
+       "out": "SITE_PLAN",
+       "truth": "TECHNICAL_ELEVATION"
+      },
+      {
+       "assetId": "a-e93a8c111434b7f8",
+       "family": "archon:dom-w-tunbergiach",
+       "out": "SITE_PLAN",
+       "truth": "TECHNICAL_ELEVATION"
+      }
+     ]
+    },
+    "pictorialUnspecified": {
+     "n": 0,
+     "outputs": {},
+     "technicalErrors": 0
+    }
+   },
+   "EVAL": {
+    "asset": {
+     "confusion": {
+      "EXTERIOR_RENDER": {
+       "INTERIOR_RENDER": 2,
+       "UNKNOWN": 18
+      },
+      "FLOOR_PLAN": {
+       "FLOOR_PLAN": 46,
+       "SITE_PLAN": 4
+      },
+      "INTERIOR_RENDER": {
+       "INTERIOR_RENDER": 107
+      },
+      "SECTION": {
+       "SECTION": 14
+      },
+      "SITE_PLAN": {
+       "SITE_PLAN": 14
+      },
+      "TECHNICAL_ELEVATION": {
+       "TECHNICAL_ELEVATION": 52,
+       "UNKNOWN": 4
+      }
+     },
+     "coverage": 0.9157,
+     "families": 14,
+     "familyBootstrap95": [
+      0.0,
+      0.0658
+     ],
+     "interiorToExteriorAssets": [],
+     "interiorToExteriorRoutes": 0,
+     "n": 261,
+     "perClass": {
+      "EXTERIOR_RENDER": {
+       "correct": 0,
+       "coverage": 0.1,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 2,
+       "truthN": 20,
+       "wrongAs": [
+        "INTERIOR_RENDER"
+       ]
+      },
+      "FLOOR_PLAN": {
+       "correct": 46,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 46,
+       "recall": 0.92,
+       "resolvedN": 50,
+       "truthN": 50,
+       "wrongAs": [
+        "SITE_PLAN"
+       ]
+      },
+      "INTERIOR_RENDER": {
+       "correct": 107,
+       "coverage": 1.0,
+       "precision": 0.9817,
+       "predicted": 109,
+       "recall": 1.0,
+       "resolvedN": 107,
+       "truthN": 107,
+       "wrongAs": []
+      },
+      "SECTION": {
+       "correct": 14,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 14,
+       "recall": 1.0,
+       "resolvedN": 14,
+       "truthN": 14,
+       "wrongAs": []
+      },
+      "SITE_PLAN": {
+       "correct": 14,
+       "coverage": 1.0,
+       "precision": 0.7778,
+       "predicted": 18,
+       "recall": 1.0,
+       "resolvedN": 14,
+       "truthN": 14,
+       "wrongAs": []
+      },
+      "TECHNICAL_ELEVATION": {
+       "correct": 52,
+       "coverage": 0.9286,
+       "precision": 1.0,
+       "predicted": 52,
+       "recall": 0.9286,
+       "resolvedN": 52,
+       "truthN": 56,
+       "wrongAs": []
+      }
+     },
+     "resolved": 239,
+     "riskCoverage": [
+      {
+       "coverage": 0.0038,
+       "resolved": 1,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0192,
+       "resolved": 5,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0383,
+       "resolved": 10,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0766,
+       "resolved": 20,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.1916,
+       "resolved": 50,
+       "risk": 0.02
+      },
+      {
+       "coverage": 0.3831,
+       "resolved": 100,
+       "risk": 0.01
+      },
+      {
+       "coverage": 0.7663,
+       "resolved": 200,
+       "risk": 0.01
+      },
+      {
+       "coverage": 0.9157,
+       "resolved": 239,
+       "risk": 0.0251
+      }
+     ],
+     "selectiveRisk": 0.0251,
+     "technicalVsMarketing": 0,
+     "technicalVsMarketingAssets": [],
+     "wilson95": [
+      0.0116,
+      0.0537
+     ],
+     "wrong": 6,
+     "wrongExamples": [
+      {
+       "assetId": "a-319c789bf4761b5a",
+       "family": "archon:dom-w-akebiach",
+       "out": "INTERIOR_RENDER",
+       "truth": "EXTERIOR_RENDER"
+      },
+      {
+       "assetId": "a-4e79060c0f7c697d",
+       "family": "archon:willa-miranda",
+       "out": "SITE_PLAN",
+       "truth": "FLOOR_PLAN"
+      },
+      {
+       "assetId": "a-a364cc8854b98af0",
+       "family": "archon:willa-miranda",
+       "out": "SITE_PLAN",
+       "truth": "FLOOR_PLAN"
+      },
+      {
+       "assetId": "a-cdb98fea12feae98",
+       "family": "archon:dom-w-akebiach",
+       "out": "SITE_PLAN",
+       "truth": "FLOOR_PLAN"
+      },
+      {
+       "assetId": "a-cfc0aae6f0bb8603",
+       "family": "archon:dom-w-akebiach",
+       "out": "SITE_PLAN",
+       "truth": "FLOOR_PLAN"
+      },
+      {
+       "assetId": "a-dd02da30483f2947",
+       "family": "archon:dom-w-akebiach",
+       "out": "INTERIOR_RENDER",
+       "truth": "EXTERIOR_RENDER"
+      }
+     ]
+    },
+    "byFamily": {
+     "archon:dom-pod-jarzabem": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-akebiach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 10,
+      "wrong": 3
+     },
+     "archon:dom-w-arletach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 23,
+      "resolved": 21,
+      "wrong": 0
+     },
+     "archon:dom-w-cieszyniankach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 23,
+      "resolved": 21,
+      "wrong": 0
+     },
+     "archon:dom-w-czosnkach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 22,
+      "resolved": 20,
+      "wrong": 0
+     },
+     "archon:dom-w-dabecjach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 11,
+      "resolved": 11,
+      "wrong": 0
+     },
+     "archon:dom-w-goldstarach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 16,
+      "resolved": 14,
+      "wrong": 0
+     },
+     "archon:dom-w-gozdzikowcach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 19,
+      "resolved": 19,
+      "wrong": 0
+     },
+     "archon:dom-w-helikoniach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-jablonkach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 24,
+      "resolved": 22,
+      "wrong": 0
+     },
+     "archon:dom-w-ligolach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 18,
+      "resolved": 18,
+      "wrong": 0
+     },
+     "archon:dom-w-modrzewnicy": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 7,
+      "wrong": 0
+     },
+     "archon:dom-w-zurawkach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 14,
+      "resolved": 10,
+      "wrong": 0
+     },
+     "archon:willa-miranda": {
+      "interiorToExteriorRoutes": 0,
+      "n": 24,
+      "resolved": 22,
+      "wrong": 1
+     }
+    },
+    "byPublisher": {
+     "archon": {
+      "confusion": {
+       "EXTERIOR_RENDER": {
+        "INTERIOR_RENDER": 2,
+        "UNKNOWN": 18
+       },
+       "FLOOR_PLAN": {
+        "FLOOR_PLAN": 21,
+        "SITE_PLAN": 2
+       },
+       "INTERIOR_RENDER": {
+        "INTERIOR_RENDER": 107
+       },
+       "SECTION": {
+        "SECTION": 14
+       },
+       "SITE_PLAN": {
+        "SITE_PLAN": 14
+       },
+       "TECHNICAL_ELEVATION": {
+        "TECHNICAL_ELEVATION": 49,
+        "UNKNOWN": 4
+       }
+      },
+      "coverage": 0.9048,
+      "families": 14,
+      "familyBootstrap95": [
+       0.0,
+       0.0543
+      ],
+      "interiorToExteriorAssets": [],
+      "interiorToExteriorRoutes": 0,
+      "n": 231,
+      "perClass": {
+       "EXTERIOR_RENDER": {
+        "correct": 0,
+        "coverage": 0.1,
+        "precision": null,
+        "predicted": 0,
+        "recall": 0.0,
+        "resolvedN": 2,
+        "truthN": 20,
+        "wrongAs": [
+         "INTERIOR_RENDER"
+        ]
+       },
+       "FLOOR_PLAN": {
+        "correct": 21,
+        "coverage": 1.0,
+        "precision": 1.0,
+        "predicted": 21,
+        "recall": 0.913,
+        "resolvedN": 23,
+        "truthN": 23,
+        "wrongAs": [
+         "SITE_PLAN"
+        ]
+       },
+       "INTERIOR_RENDER": {
+        "correct": 107,
+        "coverage": 1.0,
+        "precision": 0.9817,
+        "predicted": 109,
+        "recall": 1.0,
+        "resolvedN": 107,
+        "truthN": 107,
+        "wrongAs": []
+       },
+       "SECTION": {
+        "correct": 14,
+        "coverage": 1.0,
+        "precision": 1.0,
+        "predicted": 14,
+        "recall": 1.0,
+        "resolvedN": 14,
+        "truthN": 14,
+        "wrongAs": []
+       },
+       "SITE_PLAN": {
+        "correct": 14,
+        "coverage": 1.0,
+        "precision": 0.875,
+        "predicted": 16,
+        "recall": 1.0,
+        "resolvedN": 14,
+        "truthN": 14,
+        "wrongAs": []
+       },
+       "TECHNICAL_ELEVATION": {
+        "correct": 49,
+        "coverage": 0.9245,
+        "precision": 1.0,
+        "predicted": 49,
+        "recall": 0.9245,
+        "resolvedN": 49,
+        "truthN": 53,
+        "wrongAs": []
+       }
+      },
+      "resolved": 209,
+      "riskCoverage": [
+       {
+        "coverage": 0.0043,
+        "resolved": 1,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0216,
+        "resolved": 5,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0433,
+        "resolved": 10,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0866,
+        "resolved": 20,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.2165,
+        "resolved": 50,
+        "risk": 0.02
+       },
+       {
+        "coverage": 0.4329,
+        "resolved": 100,
+        "risk": 0.01
+       },
+       {
+        "coverage": 0.8658,
+        "resolved": 200,
+        "risk": 0.015
+       },
+       {
+        "coverage": 0.9048,
+        "resolved": 209,
+        "risk": 0.0191
+       }
+      ],
+      "selectiveRisk": 0.0191,
+      "technicalVsMarketing": 0,
+      "technicalVsMarketingAssets": [],
+      "wilson95": [
+       0.0075,
+       0.0482
+      ],
+      "wrong": 4,
+      "wrongExamples": [
+       {
+        "assetId": "a-319c789bf4761b5a",
+        "family": "archon:dom-w-akebiach",
+        "out": "INTERIOR_RENDER",
+        "truth": "EXTERIOR_RENDER"
+       },
+       {
+        "assetId": "a-4e79060c0f7c697d",
+        "family": "archon:willa-miranda",
+        "out": "SITE_PLAN",
+        "truth": "FLOOR_PLAN"
+       },
+       {
+        "assetId": "a-cdb98fea12feae98",
+        "family": "archon:dom-w-akebiach",
+        "out": "SITE_PLAN",
+        "truth": "FLOOR_PLAN"
+       },
+       {
+        "assetId": "a-dd02da30483f2947",
+        "family": "archon:dom-w-akebiach",
+        "out": "INTERIOR_RENDER",
+        "truth": "EXTERIOR_RENDER"
+       }
+      ]
+     }
+    },
+    "duplicateCorrelation": {
+     "groupsWithDifferentOutputs": 0,
+     "groupsWithSeveralAssets": 26
+    },
+    "lineageGroup": {
+     "confusion": {
+      "EXTERIOR_RENDER": {
+       "INTERIOR_RENDER": 2,
+       "UNKNOWN": 18
+      },
+      "FLOOR_PLAN": {
+       "FLOOR_PLAN": 21,
+       "SITE_PLAN": 2
+      },
+      "INTERIOR_RENDER": {
+       "INTERIOR_RENDER": 107
+      },
+      "SECTION": {
+       "SECTION": 14
+      },
+      "SITE_PLAN": {
+       "SITE_PLAN": 14
+      },
+      "TECHNICAL_ELEVATION": {
+       "TECHNICAL_ELEVATION": 49,
+       "UNKNOWN": 4
+      }
+     },
+     "coverage": 0.9048,
+     "families": 14,
+     "familyBootstrap95": [
+      0.0,
+      0.0543
+     ],
+     "interiorToExteriorAssets": [],
+     "interiorToExteriorRoutes": 0,
+     "n": 231,
+     "perClass": {
+      "EXTERIOR_RENDER": {
+       "correct": 0,
+       "coverage": 0.1,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 2,
+       "truthN": 20,
+       "wrongAs": [
+        "INTERIOR_RENDER"
+       ]
+      },
+      "FLOOR_PLAN": {
+       "correct": 21,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 21,
+       "recall": 0.913,
+       "resolvedN": 23,
+       "truthN": 23,
+       "wrongAs": [
+        "SITE_PLAN"
+       ]
+      },
+      "INTERIOR_RENDER": {
+       "correct": 107,
+       "coverage": 1.0,
+       "precision": 0.9817,
+       "predicted": 109,
+       "recall": 1.0,
+       "resolvedN": 107,
+       "truthN": 107,
+       "wrongAs": []
+      },
+      "SECTION": {
+       "correct": 14,
+       "coverage": 1.0,
+       "precision": 1.0,
+       "predicted": 14,
+       "recall": 1.0,
+       "resolvedN": 14,
+       "truthN": 14,
+       "wrongAs": []
+      },
+      "SITE_PLAN": {
+       "correct": 14,
+       "coverage": 1.0,
+       "precision": 0.875,
+       "predicted": 16,
+       "recall": 1.0,
+       "resolvedN": 14,
+       "truthN": 14,
+       "wrongAs": []
+      },
+      "TECHNICAL_ELEVATION": {
+       "correct": 49,
+       "coverage": 0.9245,
+       "precision": 1.0,
+       "predicted": 49,
+       "recall": 0.9245,
+       "resolvedN": 49,
+       "truthN": 53,
+       "wrongAs": []
+      }
+     },
+     "resolved": 209,
+     "riskCoverage": [
+      {
+       "coverage": 0.0043,
+       "resolved": 1,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0216,
+       "resolved": 5,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0433,
+       "resolved": 10,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0866,
+       "resolved": 20,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.2165,
+       "resolved": 50,
+       "risk": 0.02
+      },
+      {
+       "coverage": 0.4329,
+       "resolved": 100,
+       "risk": 0.01
+      },
+      {
+       "coverage": 0.8658,
+       "resolved": 200,
+       "risk": 0.015
+      },
+      {
+       "coverage": 0.9048,
+       "resolved": 209,
+       "risk": 0.0191
+      }
+     ],
+     "selectiveRisk": 0.0191,
+     "technicalVsMarketing": 0,
+     "technicalVsMarketingAssets": [],
+     "wilson95": [
+      0.0075,
+      0.0482
+     ],
+     "wrong": 4,
+     "wrongExamples": [
+      {
+       "assetId": "a-319c789bf4761b5a",
+       "family": "archon:dom-w-akebiach",
+       "out": "INTERIOR_RENDER",
+       "truth": "EXTERIOR_RENDER"
+      },
+      {
+       "assetId": "a-4e79060c0f7c697d",
+       "family": "archon:willa-miranda",
+       "out": "SITE_PLAN",
+       "truth": "FLOOR_PLAN"
+      },
+      {
+       "assetId": "a-cdb98fea12feae98",
+       "family": "archon:dom-w-akebiach",
+       "out": "SITE_PLAN",
+       "truth": "FLOOR_PLAN"
+      },
+      {
+       "assetId": "a-dd02da30483f2947",
+       "family": "archon:dom-w-akebiach",
+       "out": "INTERIOR_RENDER",
+       "truth": "EXTERIOR_RENDER"
+      }
+     ]
+    },
+    "pictorialUnspecified": {
+     "n": 0,
+     "outputs": {},
+     "technicalErrors": 0
+    }
+   },
+   "meta": {
+    "contender": "V1"
+   }
+  },
+  "V2": {
+   "DEV": {
+    "asset": {
+     "confusion": {
+      "EXTERIOR_RENDER": {
+       "UNKNOWN": 58
+      },
+      "FLOOR_PLAN": {
+       "UNKNOWN": 104
+      },
+      "INTERIOR_RENDER": {
+       "INTERIOR_RENDER": 13,
+       "UNKNOWN": 93
+      },
+      "SECTION": {
+       "UNKNOWN": 36
+      },
+      "SITE_PLAN": {
+       "UNKNOWN": 36
+      },
+      "TECHNICAL_ELEVATION": {
+       "UNKNOWN": 142
+      }
+     },
+     "coverage": 0.027,
+     "families": 20,
+     "familyBootstrap95": [
+      0.0,
+      0.0
+     ],
+     "interiorToExteriorAssets": [],
+     "interiorToExteriorRoutes": 0,
+     "n": 482,
+     "perClass": {
+      "EXTERIOR_RENDER": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 58,
+       "wrongAs": []
+      },
+      "FLOOR_PLAN": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 104,
+       "wrongAs": []
+      },
+      "INTERIOR_RENDER": {
+       "correct": 13,
+       "coverage": 0.1226,
+       "precision": 1.0,
+       "predicted": 13,
+       "recall": 0.1226,
+       "resolvedN": 13,
+       "truthN": 106,
+       "wrongAs": []
+      },
+      "SECTION": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 36,
+       "wrongAs": []
+      },
+      "SITE_PLAN": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 36,
+       "wrongAs": []
+      },
+      "TECHNICAL_ELEVATION": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 142,
+       "wrongAs": []
+      }
+     },
+     "resolved": 13,
+     "riskCoverage": [
+      {
+       "coverage": 0.0021,
+       "resolved": 1,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0104,
+       "resolved": 5,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0207,
+       "resolved": 10,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.027,
+       "resolved": 13,
+       "risk": 0.0
+      }
+     ],
+     "selectiveRisk": 0.0,
+     "technicalVsMarketing": 0,
+     "technicalVsMarketingAssets": [],
+     "wilson95": [
+      0.0,
+      0.2281
+     ],
+     "wrong": 0,
+     "wrongExamples": []
+    },
+    "byFamily": {
+     "archon:dom-miniaturka": {
+      "interiorToExteriorRoutes": 0,
+      "n": 7,
+      "resolved": 0,
+      "wrong": 0
+     },
+     "archon:dom-pod-milorzebem": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 0,
+      "wrong": 0
+     },
+     "archon:dom-w-arkadiach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 18,
+      "resolved": 0,
+      "wrong": 0
+     },
+     "archon:dom-w-azaliach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 0,
+      "wrong": 0
+     },
+     "archon:dom-w-bratkach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 11,
+      "resolved": 0,
+      "wrong": 0
+     },
+     "archon:dom-w-cyklamenach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 0,
+      "wrong": 0
+     },
+     "archon:dom-w-daliach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 0,
+      "wrong": 0
+     },
+     "archon:dom-w-glogownikach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 11,
+      "resolved": 1,
+      "wrong": 0
+     },
+     "archon:dom-w-jarzmiankach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 0,
+      "wrong": 0
+     },
+     "archon:dom-w-kosaccach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 21,
+      "resolved": 1,
+      "wrong": 0
+     },
+     "archon:dom-w-krasnokwiatach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 7,
+      "resolved": 0,
+      "wrong": 0
+     },
+     "archon:dom-w-marcowkach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 0,
+      "wrong": 0
+     },
+     "archon:dom-w-modrzykach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 7,
+      "resolved": 0,
+      "wrong": 0
+     },
+     "archon:dom-w-morelach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 0,
+      "wrong": 0
+     },
+     "archon:dom-w-murajach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 22,
+      "resolved": 4,
+      "wrong": 0
+     },
+     "archon:dom-w-rarytasach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 140,
+      "resolved": 3,
+      "wrong": 0
+     },
+     "archon:dom-w-tunbergiach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 0,
+      "wrong": 0
+     },
+     "archon:dom-w-tymianku": {
+      "interiorToExteriorRoutes": 0,
+      "n": 8,
+      "resolved": 0,
+      "wrong": 0
+     },
+     "archon:dom-we-wrzosach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 7,
+      "resolved": 0,
+      "wrong": 0
+     },
+     "archon:willa-maja": {
+      "interiorToExteriorRoutes": 0,
+      "n": 24,
+      "resolved": 4,
+      "wrong": 0
+     }
+    },
+    "byPublisher": {
+     "archon": {
+      "confusion": {
+       "EXTERIOR_RENDER": {
+        "UNKNOWN": 44
+       },
+       "FLOOR_PLAN": {
+        "UNKNOWN": 44
+       },
+       "INTERIOR_RENDER": {
+        "INTERIOR_RENDER": 13,
+        "UNKNOWN": 85
+       },
+       "SECTION": {
+        "UNKNOWN": 26
+       },
+       "SITE_PLAN": {
+        "UNKNOWN": 22
+       },
+       "TECHNICAL_ELEVATION": {
+        "UNKNOWN": 126
+       }
+      },
+      "coverage": 0.0361,
+      "families": 20,
+      "familyBootstrap95": [
+       0.0,
+       0.0
+      ],
+      "interiorToExteriorAssets": [],
+      "interiorToExteriorRoutes": 0,
+      "n": 360,
+      "perClass": {
+       "EXTERIOR_RENDER": {
+        "correct": 0,
+        "coverage": 0.0,
+        "precision": null,
+        "predicted": 0,
+        "recall": 0.0,
+        "resolvedN": 0,
+        "truthN": 44,
+        "wrongAs": []
+       },
+       "FLOOR_PLAN": {
+        "correct": 0,
+        "coverage": 0.0,
+        "precision": null,
+        "predicted": 0,
+        "recall": 0.0,
+        "resolvedN": 0,
+        "truthN": 44,
+        "wrongAs": []
+       },
+       "INTERIOR_RENDER": {
+        "correct": 13,
+        "coverage": 0.1327,
+        "precision": 1.0,
+        "predicted": 13,
+        "recall": 0.1327,
+        "resolvedN": 13,
+        "truthN": 98,
+        "wrongAs": []
+       },
+       "SECTION": {
+        "correct": 0,
+        "coverage": 0.0,
+        "precision": null,
+        "predicted": 0,
+        "recall": 0.0,
+        "resolvedN": 0,
+        "truthN": 26,
+        "wrongAs": []
+       },
+       "SITE_PLAN": {
+        "correct": 0,
+        "coverage": 0.0,
+        "precision": null,
+        "predicted": 0,
+        "recall": 0.0,
+        "resolvedN": 0,
+        "truthN": 22,
+        "wrongAs": []
+       },
+       "TECHNICAL_ELEVATION": {
+        "correct": 0,
+        "coverage": 0.0,
+        "precision": null,
+        "predicted": 0,
+        "recall": 0.0,
+        "resolvedN": 0,
+        "truthN": 126,
+        "wrongAs": []
+       }
+      },
+      "resolved": 13,
+      "riskCoverage": [
+       {
+        "coverage": 0.0028,
+        "resolved": 1,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0139,
+        "resolved": 5,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0278,
+        "resolved": 10,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0361,
+        "resolved": 13,
+        "risk": 0.0
+       }
+      ],
+      "selectiveRisk": 0.0,
+      "technicalVsMarketing": 0,
+      "technicalVsMarketingAssets": [],
+      "wilson95": [
+       0.0,
+       0.2281
+      ],
+      "wrong": 0,
+      "wrongExamples": []
+     }
+    },
+    "duplicateCorrelation": {
+     "groupsWithDifferentOutputs": 0,
+     "groupsWithSeveralAssets": 79
+    },
+    "lineageGroup": {
+     "confusion": {
+      "EXTERIOR_RENDER": {
+       "UNKNOWN": 44
+      },
+      "FLOOR_PLAN": {
+       "UNKNOWN": 44
+      },
+      "INTERIOR_RENDER": {
+       "INTERIOR_RENDER": 13,
+       "UNKNOWN": 85
+      },
+      "SECTION": {
+       "UNKNOWN": 26
+      },
+      "SITE_PLAN": {
+       "UNKNOWN": 22
+      },
+      "TECHNICAL_ELEVATION": {
+       "UNKNOWN": 126
+      }
+     },
+     "coverage": 0.0361,
+     "families": 20,
+     "familyBootstrap95": [
+      0.0,
+      0.0
+     ],
+     "interiorToExteriorAssets": [],
+     "interiorToExteriorRoutes": 0,
+     "n": 360,
+     "perClass": {
+      "EXTERIOR_RENDER": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 44,
+       "wrongAs": []
+      },
+      "FLOOR_PLAN": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 44,
+       "wrongAs": []
+      },
+      "INTERIOR_RENDER": {
+       "correct": 13,
+       "coverage": 0.1327,
+       "precision": 1.0,
+       "predicted": 13,
+       "recall": 0.1327,
+       "resolvedN": 13,
+       "truthN": 98,
+       "wrongAs": []
+      },
+      "SECTION": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 26,
+       "wrongAs": []
+      },
+      "SITE_PLAN": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 22,
+       "wrongAs": []
+      },
+      "TECHNICAL_ELEVATION": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 126,
+       "wrongAs": []
+      }
+     },
+     "resolved": 13,
+     "riskCoverage": [
+      {
+       "coverage": 0.0028,
+       "resolved": 1,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0139,
+       "resolved": 5,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0278,
+       "resolved": 10,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0361,
+       "resolved": 13,
+       "risk": 0.0
+      }
+     ],
+     "selectiveRisk": 0.0,
+     "technicalVsMarketing": 0,
+     "technicalVsMarketingAssets": [],
+     "wilson95": [
+      0.0,
+      0.2281
+     ],
+     "wrong": 0,
+     "wrongExamples": []
+    },
+    "pictorialUnspecified": {
+     "n": 0,
+     "outputs": {},
+     "technicalErrors": 0
+    }
+   },
+   "EVAL": {
+    "asset": {
+     "confusion": {
+      "EXTERIOR_RENDER": {
+       "UNKNOWN": 20
+      },
+      "FLOOR_PLAN": {
+       "UNKNOWN": 50
+      },
+      "INTERIOR_RENDER": {
+       "INTERIOR_RENDER": 16,
+       "UNKNOWN": 91
+      },
+      "SECTION": {
+       "UNKNOWN": 14
+      },
+      "SITE_PLAN": {
+       "UNKNOWN": 14
+      },
+      "TECHNICAL_ELEVATION": {
+       "UNKNOWN": 56
+      }
+     },
+     "coverage": 0.0613,
+     "families": 14,
+     "familyBootstrap95": [
+      0.0,
+      0.0
+     ],
+     "interiorToExteriorAssets": [],
+     "interiorToExteriorRoutes": 0,
+     "n": 261,
+     "perClass": {
+      "EXTERIOR_RENDER": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 20,
+       "wrongAs": []
+      },
+      "FLOOR_PLAN": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 50,
+       "wrongAs": []
+      },
+      "INTERIOR_RENDER": {
+       "correct": 16,
+       "coverage": 0.1495,
+       "precision": 1.0,
+       "predicted": 16,
+       "recall": 0.1495,
+       "resolvedN": 16,
+       "truthN": 107,
+       "wrongAs": []
+      },
+      "SECTION": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 14,
+       "wrongAs": []
+      },
+      "SITE_PLAN": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 14,
+       "wrongAs": []
+      },
+      "TECHNICAL_ELEVATION": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 56,
+       "wrongAs": []
+      }
+     },
+     "resolved": 16,
+     "riskCoverage": [
+      {
+       "coverage": 0.0038,
+       "resolved": 1,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0192,
+       "resolved": 5,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0383,
+       "resolved": 10,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0613,
+       "resolved": 16,
+       "risk": 0.0
+      }
+     ],
+     "selectiveRisk": 0.0,
+     "technicalVsMarketing": 0,
+     "technicalVsMarketingAssets": [],
+     "wilson95": [
+      0.0,
+      0.1936
+     ],
+     "wrong": 0,
+     "wrongExamples": []
+    },
+    "byFamily": {
+     "archon:dom-pod-jarzabem": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 0,
+      "wrong": 0
+     },
+     "archon:dom-w-akebiach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 10,
+      "resolved": 0,
+      "wrong": 0
+     },
+     "archon:dom-w-arletach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 23,
+      "resolved": 3,
+      "wrong": 0
+     },
+     "archon:dom-w-cieszyniankach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 23,
+      "resolved": 1,
+      "wrong": 0
+     },
+     "archon:dom-w-czosnkach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 22,
+      "resolved": 1,
+      "wrong": 0
+     },
+     "archon:dom-w-dabecjach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 11,
+      "resolved": 2,
+      "wrong": 0
+     },
+     "archon:dom-w-goldstarach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 16,
+      "resolved": 1,
+      "wrong": 0
+     },
+     "archon:dom-w-gozdzikowcach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 19,
+      "resolved": 3,
+      "wrong": 0
+     },
+     "archon:dom-w-helikoniach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 0,
+      "wrong": 0
+     },
+     "archon:dom-w-jablonkach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 24,
+      "resolved": 1,
+      "wrong": 0
+     },
+     "archon:dom-w-ligolach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 18,
+      "resolved": 3,
+      "wrong": 0
+     },
+     "archon:dom-w-modrzewnicy": {
+      "interiorToExteriorRoutes": 0,
+      "n": 9,
+      "resolved": 0,
+      "wrong": 0
+     },
+     "archon:dom-w-zurawkach": {
+      "interiorToExteriorRoutes": 0,
+      "n": 14,
+      "resolved": 1,
+      "wrong": 0
+     },
+     "archon:willa-miranda": {
+      "interiorToExteriorRoutes": 0,
+      "n": 24,
+      "resolved": 0,
+      "wrong": 0
+     }
+    },
+    "byPublisher": {
+     "archon": {
+      "confusion": {
+       "EXTERIOR_RENDER": {
+        "UNKNOWN": 20
+       },
+       "FLOOR_PLAN": {
+        "UNKNOWN": 23
+       },
+       "INTERIOR_RENDER": {
+        "INTERIOR_RENDER": 16,
+        "UNKNOWN": 91
+       },
+       "SECTION": {
+        "UNKNOWN": 14
+       },
+       "SITE_PLAN": {
+        "UNKNOWN": 14
+       },
+       "TECHNICAL_ELEVATION": {
+        "UNKNOWN": 53
+       }
+      },
+      "coverage": 0.0693,
+      "families": 14,
+      "familyBootstrap95": [
+       0.0,
+       0.0
+      ],
+      "interiorToExteriorAssets": [],
+      "interiorToExteriorRoutes": 0,
+      "n": 231,
+      "perClass": {
+       "EXTERIOR_RENDER": {
+        "correct": 0,
+        "coverage": 0.0,
+        "precision": null,
+        "predicted": 0,
+        "recall": 0.0,
+        "resolvedN": 0,
+        "truthN": 20,
+        "wrongAs": []
+       },
+       "FLOOR_PLAN": {
+        "correct": 0,
+        "coverage": 0.0,
+        "precision": null,
+        "predicted": 0,
+        "recall": 0.0,
+        "resolvedN": 0,
+        "truthN": 23,
+        "wrongAs": []
+       },
+       "INTERIOR_RENDER": {
+        "correct": 16,
+        "coverage": 0.1495,
+        "precision": 1.0,
+        "predicted": 16,
+        "recall": 0.1495,
+        "resolvedN": 16,
+        "truthN": 107,
+        "wrongAs": []
+       },
+       "SECTION": {
+        "correct": 0,
+        "coverage": 0.0,
+        "precision": null,
+        "predicted": 0,
+        "recall": 0.0,
+        "resolvedN": 0,
+        "truthN": 14,
+        "wrongAs": []
+       },
+       "SITE_PLAN": {
+        "correct": 0,
+        "coverage": 0.0,
+        "precision": null,
+        "predicted": 0,
+        "recall": 0.0,
+        "resolvedN": 0,
+        "truthN": 14,
+        "wrongAs": []
+       },
+       "TECHNICAL_ELEVATION": {
+        "correct": 0,
+        "coverage": 0.0,
+        "precision": null,
+        "predicted": 0,
+        "recall": 0.0,
+        "resolvedN": 0,
+        "truthN": 53,
+        "wrongAs": []
+       }
+      },
+      "resolved": 16,
+      "riskCoverage": [
+       {
+        "coverage": 0.0043,
+        "resolved": 1,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0216,
+        "resolved": 5,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0433,
+        "resolved": 10,
+        "risk": 0.0
+       },
+       {
+        "coverage": 0.0693,
+        "resolved": 16,
+        "risk": 0.0
+       }
+      ],
+      "selectiveRisk": 0.0,
+      "technicalVsMarketing": 0,
+      "technicalVsMarketingAssets": [],
+      "wilson95": [
+       0.0,
+       0.1936
+      ],
+      "wrong": 0,
+      "wrongExamples": []
+     }
+    },
+    "duplicateCorrelation": {
+     "groupsWithDifferentOutputs": 0,
+     "groupsWithSeveralAssets": 26
+    },
+    "lineageGroup": {
+     "confusion": {
+      "EXTERIOR_RENDER": {
+       "UNKNOWN": 20
+      },
+      "FLOOR_PLAN": {
+       "UNKNOWN": 23
+      },
+      "INTERIOR_RENDER": {
+       "INTERIOR_RENDER": 16,
+       "UNKNOWN": 91
+      },
+      "SECTION": {
+       "UNKNOWN": 14
+      },
+      "SITE_PLAN": {
+       "UNKNOWN": 14
+      },
+      "TECHNICAL_ELEVATION": {
+       "UNKNOWN": 53
+      }
+     },
+     "coverage": 0.0693,
+     "families": 14,
+     "familyBootstrap95": [
+      0.0,
+      0.0
+     ],
+     "interiorToExteriorAssets": [],
+     "interiorToExteriorRoutes": 0,
+     "n": 231,
+     "perClass": {
+      "EXTERIOR_RENDER": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 20,
+       "wrongAs": []
+      },
+      "FLOOR_PLAN": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 23,
+       "wrongAs": []
+      },
+      "INTERIOR_RENDER": {
+       "correct": 16,
+       "coverage": 0.1495,
+       "precision": 1.0,
+       "predicted": 16,
+       "recall": 0.1495,
+       "resolvedN": 16,
+       "truthN": 107,
+       "wrongAs": []
+      },
+      "SECTION": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 14,
+       "wrongAs": []
+      },
+      "SITE_PLAN": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 14,
+       "wrongAs": []
+      },
+      "TECHNICAL_ELEVATION": {
+       "correct": 0,
+       "coverage": 0.0,
+       "precision": null,
+       "predicted": 0,
+       "recall": 0.0,
+       "resolvedN": 0,
+       "truthN": 53,
+       "wrongAs": []
+      }
+     },
+     "resolved": 16,
+     "riskCoverage": [
+      {
+       "coverage": 0.0043,
+       "resolved": 1,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0216,
+       "resolved": 5,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0433,
+       "resolved": 10,
+       "risk": 0.0
+      },
+      {
+       "coverage": 0.0693,
+       "resolved": 16,
+       "risk": 0.0
+      }
+     ],
+     "selectiveRisk": 0.0,
+     "technicalVsMarketing": 0,
+     "technicalVsMarketingAssets": [],
+     "wilson95": [
+      0.0,
+      0.1936
+     ],
+     "wrong": 0,
+     "wrongExamples": []
+    },
+    "pictorialUnspecified": {
+     "n": 0,
+     "outputs": {},
+     "technicalErrors": 0
+    }
+   },
+   "meta": {
+    "contender": "V2",
+    "devGroups": 360,
+    "end": true,
+    "loadSeconds": 7.757,
+    "peakRssMB": 1008.9,
+    "promptsSha256": "cd48e664e9986fbda0085ed1b87a85a79825d5bba45bea1ea9835b3617ee15fc",
+    "revision": "cbc355fb364588351c5d51c7f74465e8e7ec6f72",
+    "tau": 0.95,
+    "tauCurveDEV": [
+     {
+      "resolved": 360,
+      "risk": 0.7277777777777777,
+      "tau": 0.3
+     },
+     {
+      "resolved": 360,
+      "risk": 0.7277777777777777,
+      "tau": 0.35
+     },
+     {
+      "resolved": 360,
+      "risk": 0.7277777777777777,
+      "tau": 0.4
+     },
+     {
+      "resolved": 360,
+      "risk": 0.7277777777777777,
+      "tau": 0.45
+     },
+     {
+      "resolved": 360,
+      "risk": 0.7277777777777777,
+      "tau": 0.5
+     },
+     {
+      "resolved": 360,
+      "risk": 0.7277777777777777,
+      "tau": 0.55
+     },
+     {
+      "resolved": 360,
+      "risk": 0.7277777777777777,
+      "tau": 0.6
+     },
+     {
+      "resolved": 360,
+      "risk": 0.7277777777777777,
+      "tau": 0.65
+     },
+     {
+      "resolved": 360,
+      "risk": 0.7277777777777777,
+      "tau": 0.7
+     },
+     {
+      "resolved": 360,
+      "risk": 0.7277777777777777,
+      "tau": 0.75
+     },
+     {
+      "resolved": 360,
+      "risk": 0.7277777777777777,
+      "tau": 0.8
+     },
+     {
+      "resolved": 360,
+      "risk": 0.7277777777777777,
+      "tau": 0.85
+     },
+     {
+      "resolved": 120,
+      "risk": 0.275,
+      "tau": 0.9
+     },
+     {
+      "resolved": 13,
+      "risk": 0.0,
+      "tau": 0.95
+     }
+    ],
+    "threads": 3,
+    "torch": "2.11.0+cpu",
+    "version": "v2-owlvit-b32@1",
+    "wallSeconds": 3086.83,
+    "weightsSha256": "4dbe0399f0b7d7c8dddf1535a98769cc30743bebc877aea681998c8d984ce52b"
+   }
+  }
+ },
+ "humanLabels": "HUMAN_LABELS_NOT_RUN",
+ "schema": "research.005r.role-scores.0.1"
+}

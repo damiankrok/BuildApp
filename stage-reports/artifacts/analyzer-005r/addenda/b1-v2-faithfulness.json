@@ -1,0 +1,152 @@
+{
+ "imageEmbeddingCosine": {
+  "max": 1.0,
+  "mean": 0.9994,
+  "min": 0.9973
+ },
+ "images": 20,
+ "logitScale": 100.0,
+ "maxAbsLogitDiffOverAll": 2e-06,
+ "rows": [
+  {
+   "libTop": "INTERIOR_PHOTO",
+   "libTopProb": 0.4783,
+   "maxAbsLogitDiff": 1e-06,
+   "role": "DETAIL",
+   "syntheticId": "synthetic-f04-e1-detail-railing"
+  },
+  {
+   "libTop": "INTERIOR_PHOTO",
+   "libTopProb": 0.4639,
+   "maxAbsLogitDiff": 1e-06,
+   "role": "DETAIL",
+   "syntheticId": "synthetic-f01-e1-detail-window"
+  },
+  {
+   "libTop": "INTERIOR_PHOTO",
+   "libTopProb": 0.4562,
+   "maxAbsLogitDiff": 2e-06,
+   "role": "EXTERIOR_RENDER",
+   "syntheticId": "synthetic-f01-e1-render-front"
+  },
+  {
+   "libTop": "INTERIOR_PHOTO",
+   "libTopProb": 0.4605,
+   "maxAbsLogitDiff": 2e-06,
+   "role": "EXTERIOR_RENDER",
+   "syntheticId": "synthetic-f01-e1-render-rear"
+  },
+  {
+   "libTop": "INTERIOR_PHOTO",
+   "libTopProb": 0.4501,
+   "maxAbsLogitDiff": 2e-06,
+   "role": "EXTERIOR_RENDER",
+   "syntheticId": "synthetic-f02-e1-render-front"
+  },
+  {
+   "libTop": "INTERIOR_PHOTO",
+   "libTopProb": 0.4639,
+   "maxAbsLogitDiff": 1e-06,
+   "role": "FLOOR_PLAN",
+   "syntheticId": "synthetic-f01-e1-plan"
+  },
+  {
+   "libTop": "INTERIOR_PHOTO",
+   "libTopProb": 0.4619,
+   "maxAbsLogitDiff": 1e-06,
+   "role": "FLOOR_PLAN",
+   "syntheticId": "synthetic-f02-e1-plan"
+  },
+  {
+   "libTop": "INTERIOR_PHOTO",
+   "libTopProb": 0.4615,
+   "maxAbsLogitDiff": 2e-06,
+   "role": "FLOOR_PLAN",
+   "syntheticId": "synthetic-f03-e1-plan"
+  },
+  {
+   "libTop": "INTERIOR_PHOTO",
+   "libTopProb": 0.4537,
+   "maxAbsLogitDiff": 1e-06,
+   "role": "INTERIOR_RENDER",
+   "syntheticId": "synthetic-f01-e1-interior"
+  },
+  {
+   "libTop": "INTERIOR_PHOTO",
+   "libTopProb": 0.455,
+   "maxAbsLogitDiff": 2e-06,
+   "role": "INTERIOR_RENDER",
+   "syntheticId": "synthetic-f02-e1-interior"
+  },
+  {
+   "libTop": "INTERIOR_PHOTO",
+   "libTopProb": 0.4504,
+   "maxAbsLogitDiff": 1e-06,
+   "role": "INTERIOR_RENDER",
+   "syntheticId": "synthetic-f03-e1-interior"
+  },
+  {
+   "libTop": "INTERIOR_PHOTO",
+   "libTopProb": 0.4634,
+   "maxAbsLogitDiff": 1e-06,
+   "role": "SECTION",
+   "syntheticId": "synthetic-f01-e1-section"
+  },
+  {
+   "libTop": "INTERIOR_PHOTO",
+   "libTopProb": 0.4691,
+   "maxAbsLogitDiff": 2e-06,
+   "role": "SECTION",
+   "syntheticId": "synthetic-f02-e1-section"
+  },
+  {
+   "libTop": "INTERIOR_PHOTO",
+   "libTopProb": 0.4637,
+   "maxAbsLogitDiff": 1e-06,
+   "role": "SECTION",
+   "syntheticId": "synthetic-f03-e1-section"
+  },
+  {
+   "libTop": "INTERIOR_PHOTO",
+   "libTopProb": 0.4675,
+   "maxAbsLogitDiff": 1e-06,
+   "role": "SITE_PLAN",
+   "syntheticId": "synthetic-f01-e1-site"
+  },
+  {
+   "libTop": "INTERIOR_PHOTO",
+   "libTopProb": 0.4708,
+   "maxAbsLogitDiff": 1e-06,
+   "role": "SITE_PLAN",
+   "syntheticId": "synthetic-f02-e1-site"
+  },
+  {
+   "libTop": "INTERIOR_PHOTO",
+   "libTopProb": 0.4691,
+   "maxAbsLogitDiff": 2e-06,
+   "role": "SITE_PLAN",
+   "syntheticId": "synthetic-f03-e1-site"
+  },
+  {
+   "libTop": "INTERIOR_PHOTO",
+   "libTopProb": 0.4634,
+   "maxAbsLogitDiff": 2e-06,
+   "role": "TECHNICAL_ELEVATION",
+   "syntheticId": "synthetic-f01-e1-elev-front"
+  },
+  {
+   "libTop": "INTERIOR_PHOTO",
+   "libTopProb": 0.4647,
+   "maxAbsLogitDiff": 2e-06,
+   "role": "TECHNICAL_ELEVATION",
+   "syntheticId": "synthetic-f01-e1-elev-rear"
+  },
+  {
+   "libTop": "INTERIOR_PHOTO",
+   "libTopProb": 0.4649,
+   "maxAbsLogitDiff": 1e-06,
+   "role": "TECHNICAL_ELEVATION",
+   "syntheticId": "synthetic-f01-e1-elev-left"
+  }
+ ]
+}

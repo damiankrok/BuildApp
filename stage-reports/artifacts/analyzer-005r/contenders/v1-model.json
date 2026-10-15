@@ -1,0 +1,183 @@
+{
+ "contender": "V1",
+ "featureVersion": "v1-features@1",
+ "treeVersion": "v1-cart@1",
+ "trainedOn": "DEV lineage groups",
+ "nTrain": 360,
+ "version": "v1-cart@1",
+ "opts": {
+  "maxDepth": 4,
+  "minLeaf": 5,
+  "purity": 0.9,
+  "minLeafPredict": 5
+ },
+ "features": [
+  "aspect",
+  "logPixels",
+  "sat",
+  "colourful",
+  "top16",
+  "white",
+  "dark",
+  "edgeDensity",
+  "axisFrac",
+  "pitchedFrac",
+  "hvRatio",
+  "groundLine",
+  "poche",
+  "skyBright",
+  "skyBlue",
+  "skyEdge",
+  "skySat",
+  "ceilingSmooth",
+  "vegetation",
+  "warm"
+ ],
+ "root": {
+  "leaf": false,
+  "f": "aspect",
+  "t": 1.816425,
+  "n": 360,
+  "counts": {
+   "FLOOR_PLAN": 44,
+   "TECHNICAL_ELEVATION": 126,
+   "SITE_PLAN": 22,
+   "INTERIOR_RENDER": 98,
+   "SECTION": 26,
+   "EXTERIOR_RENDER": 44
+  },
+  "le": {
+   "leaf": false,
+   "f": "white",
+   "t": 0.237056,
+   "n": 244,
+   "counts": {
+    "FLOOR_PLAN": 44,
+    "SITE_PLAN": 22,
+    "INTERIOR_RENDER": 98,
+    "TECHNICAL_ELEVATION": 10,
+    "SECTION": 26,
+    "EXTERIOR_RENDER": 44
+   },
+   "le": {
+    "leaf": false,
+    "f": "aspect",
+    "t": 1.544514,
+    "n": 150,
+    "counts": {
+     "INTERIOR_RENDER": 98,
+     "TECHNICAL_ELEVATION": 8,
+     "EXTERIOR_RENDER": 44
+    },
+    "le": {
+     "leaf": true,
+     "n": 87,
+     "counts": {
+      "INTERIOR_RENDER": 87
+     },
+     "label": "INTERIOR_RENDER",
+     "purity": 1
+    },
+    "gt": {
+     "leaf": false,
+     "f": "aspect",
+     "t": 1.738823,
+     "n": 63,
+     "counts": {
+      "INTERIOR_RENDER": 11,
+      "TECHNICAL_ELEVATION": 8,
+      "EXTERIOR_RENDER": 44
+     },
+     "le": {
+      "leaf": true,
+      "n": 8,
+      "counts": {
+       "TECHNICAL_ELEVATION": 8
+      },
+      "label": "TECHNICAL_ELEVATION",
+      "purity": 1
+     },
+     "gt": {
+      "leaf": true,
+      "n": 55,
+      "counts": {
+       "INTERIOR_RENDER": 11,
+       "EXTERIOR_RENDER": 44
+      },
+      "label": "EXTERIOR_RENDER",
+      "purity": 0.8
+     }
+    }
+   },
+   "gt": {
+    "leaf": false,
+    "f": "colourful",
+    "t": 6.228459,
+    "n": 94,
+    "counts": {
+     "FLOOR_PLAN": 44,
+     "SITE_PLAN": 22,
+     "SECTION": 26,
+     "TECHNICAL_ELEVATION": 2
+    },
+    "le": {
+     "leaf": true,
+     "n": 26,
+     "counts": {
+      "SECTION": 26
+     },
+     "label": "SECTION",
+     "purity": 1
+    },
+    "gt": {
+     "leaf": false,
+     "f": "sat",
+     "t": 0.072112,
+     "n": 68,
+     "counts": {
+      "FLOOR_PLAN": 44,
+      "SITE_PLAN": 22,
+      "TECHNICAL_ELEVATION": 2
+     },
+     "le": {
+      "leaf": true,
+      "n": 44,
+      "counts": {
+       "FLOOR_PLAN": 44
+      },
+      "label": "FLOOR_PLAN",
+      "purity": 1
+     },
+     "gt": {
+      "leaf": true,
+      "n": 24,
+      "counts": {
+       "SITE_PLAN": 22,
+       "TECHNICAL_ELEVATION": 2
+      },
+      "label": "SITE_PLAN",
+      "purity": 0.9166666666666666
+     }
+    }
+   }
+  },
+  "gt": {
+   "leaf": true,
+   "n": 116,
+   "counts": {
+    "TECHNICAL_ELEVATION": 116
+   },
+   "label": "TECHNICAL_ELEVATION",
+   "purity": 1
+  }
+ },
+ "rules": [
+  "IF aspect <= 1.816425 AND white <= 0.237056 AND aspect <= 1.544514 THEN INTERIOR_RENDER   [DEV n=87, purity 1.000, {\"INTERIOR_RENDER\":87}]",
+  "IF aspect <= 1.816425 AND white <= 0.237056 AND aspect > 1.544514 AND aspect <= 1.738823 THEN TECHNICAL_ELEVATION   [DEV n=8, purity 1.000, {\"TECHNICAL_ELEVATION\":8}]",
+  "IF aspect <= 1.816425 AND white <= 0.237056 AND aspect > 1.544514 AND aspect > 1.738823 THEN UNKNOWN (leaf EXTERIOR_RENDER)   [DEV n=55, purity 0.800, {\"INTERIOR_RENDER\":11,\"EXTERIOR_RENDER\":44}]",
+  "IF aspect <= 1.816425 AND white > 0.237056 AND colourful <= 6.228459 THEN SECTION   [DEV n=26, purity 1.000, {\"SECTION\":26}]",
+  "IF aspect <= 1.816425 AND white > 0.237056 AND colourful > 6.228459 AND sat <= 0.072112 THEN FLOOR_PLAN   [DEV n=44, purity 1.000, {\"FLOOR_PLAN\":44}]",
+  "IF aspect <= 1.816425 AND white > 0.237056 AND colourful > 6.228459 AND sat > 0.072112 THEN SITE_PLAN   [DEV n=24, purity 0.917, {\"SITE_PLAN\":22,\"TECHNICAL_ELEVATION\":2}]",
+  "IF aspect > 1.816425 THEN TECHNICAL_ELEVATION   [DEV n=116, purity 1.000, {\"TECHNICAL_ELEVATION\":116}]"
+ ]
+}

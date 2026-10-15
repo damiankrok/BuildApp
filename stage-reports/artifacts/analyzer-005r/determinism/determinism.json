@@ -1,0 +1,22 @@
+{
+ "V0a": {
+  "runs": [
+   "online (seeded cache)",
+   "offline-r1",
+   "offline-r2"
+  ],
+  "packages": 51,
+  "rolesAndVariantsIdentical": "51/51",
+  "contentHash": "offline-r1 == offline-r2 on 51/51; online differs only in the failure code of unpublished hi-res probes (HTTP_STATUS 404 online vs OFFLINE_CACHE_MISS offline, 415 records), never in an asset, variant or role"
+ },
+ "V1": {
+  "runs": [
+   "node 22.22.2 r1",
+   "node 22.22.2 r2",
+   "node 18.20.4"
+  ],
+  "images": 1537,
+  "featuresIdentical": "r1 == r2 == node18 (bit for bit)"
+ },
+ "V2": "see v2-determinism.json (run 2)"
+}

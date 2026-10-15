@@ -119,7 +119,8 @@ def main(run, assembled, out):
         g = json.load(open(os.path.join(outd, 'gates.json')))['contenders']['V2']['hardGates']
     res['M9_interior_to_exterior'] = {'interiorToExteriorClaims_truth': g['interiorToExteriorClaims_truth'], 'caught': g['interiorToExteriorClaims_truth'] > 0}
     # M10
-    sums = sorted(glob.glob(os.path.join(assembled, 'V2', 'edition-*.json')))
+    # V2 proposes nothing under its own routing, so it has no edition summary: use the first contender that has one
+    sums = [p for c in ('V2', 'N1', 'V1') for p in sorted(glob.glob(os.path.join(assembled, c, 'edition-*.json')))]
     sdoc = next((json.load(open(p)) for p in sums if json.load(open(p))['hypotheses']), None)
     if sdoc:
         sdoc['hypotheses'][0]['independentWitnesses'] = len({x['lineageGroup'] for x in sdoc['hypotheses'][0]['support']}) + 1

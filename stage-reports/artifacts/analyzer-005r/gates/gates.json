@@ -1,0 +1,135 @@
+{
+ "codeSha256": {
+  "assemble.py": "7e436dee43f2a029d256c46345677ec04fcc5816b52ebcc2b78988532a646ba9",
+  "schema/validate.py": "823dcd203e5f7503afca8c236dc75b018b3a3a9d95b4c91fa9dddfbafd9c7614"
+ },
+ "contenders": {
+  "N1": {
+   "counts": {
+    "byKind": {
+     "BALCONY": 5,
+     "CANOPY_ENTRANCE": 2,
+     "COLUMN_POST": 1,
+     "COVERED_TERRACE": 2,
+     "EXTERIOR_DOOR": 159,
+     "EXTERIOR_STEPS": 36,
+     "GARAGE_DOOR": 36,
+     "LOGGIA": 4,
+     "PERGOLA_OPEN": 6,
+     "RAILING": 10,
+     "WINDOW": 717
+    },
+    "documents": 1220,
+    "editionSummaries": 49,
+    "observations": 37261,
+    "proposedPresent": 978,
+    "proposedPresentOnInteriorTruth": 0,
+    "proposedPresentOnTechnicalNonElevationTruth": 0,
+    "rejected": 28731,
+    "unresolved": 7552
+   },
+   "hardGates": {
+    "crossEditionMixing": 0,
+    "fabricatedBoxes": 0,
+    "interiorToExteriorClaims_truth": 0,
+    "interiorToExteriorClaims_validator": 0,
+    "leakage": 0,
+    "ungroundedAuthoritative": 0
+   },
+   "violations": {}
+  },
+  "V0a": {
+   "counts": {
+    "byKind": {},
+    "documents": 1220,
+    "editionSummaries": 0,
+    "observations": 0,
+    "proposedPresent": 0,
+    "proposedPresentOnInteriorTruth": 0,
+    "proposedPresentOnTechnicalNonElevationTruth": 0,
+    "rejected": 0,
+    "unresolved": 0
+   },
+   "hardGates": {
+    "crossEditionMixing": 0,
+    "fabricatedBoxes": 0,
+    "interiorToExteriorClaims_truth": 0,
+    "interiorToExteriorClaims_validator": 0,
+    "leakage": 0,
+    "ungroundedAuthoritative": 0
+   },
+   "violations": {}
+  },
+  "V0b": {
+   "counts": {
+    "byKind": {},
+    "documents": 1220,
+    "editionSummaries": 0,
+    "observations": 0,
+    "proposedPresent": 0,
+    "proposedPresentOnInteriorTruth": 0,
+    "proposedPresentOnTechnicalNonElevationTruth": 0,
+    "rejected": 0,
+    "unresolved": 0
+   },
+   "hardGates": {
+    "crossEditionMixing": 0,
+    "fabricatedBoxes": 0,
+    "interiorToExteriorClaims_truth": 0,
+    "interiorToExteriorClaims_validator": 0,
+    "leakage": 0,
+    "ungroundedAuthoritative": 0
+   },
+   "violations": {}
+  },
+  "V1": {
+   "counts": {
+    "byKind": {
+     "GARAGE_DOOR": 1,
+     "RAILING": 5037
+    },
+    "documents": 1220,
+    "editionSummaries": 49,
+    "observations": 5038,
+    "proposedPresent": 5038,
+    "proposedPresentOnInteriorTruth": 0,
+    "proposedPresentOnTechnicalNonElevationTruth": 0,
+    "rejected": 0,
+    "unresolved": 0
+   },
+   "hardGates": {
+    "crossEditionMixing": 0,
+    "fabricatedBoxes": 0,
+    "interiorToExteriorClaims_truth": 0,
+    "interiorToExteriorClaims_validator": 0,
+    "leakage": 0,
+    "ungroundedAuthoritative": 0
+   },
+   "violations": {}
+  },
+  "V2": {
+   "counts": {
+    "byKind": {},
+    "documents": 1220,
+    "editionSummaries": 0,
+    "observations": 37261,
+    "proposedPresent": 0,
+    "proposedPresentOnInteriorTruth": 0,
+    "proposedPresentOnTechnicalNonElevationTruth": 0,
+    "rejected": 37261,
+    "unresolved": 0
+   },
+   "hardGates": {
+    "crossEditionMixing": 0,
+    "fabricatedBoxes": 0,
+    "interiorToExteriorClaims_truth": 0,
+    "interiorToExteriorClaims_validator": 0,
+    "leakage": 0,
+    "ungroundedAuthoritative": 0
+   },
+   "violations": {}
+  }
+ },
+ "forbiddenTokens": 87,
+ "schema": "research.005r.gates.0.1"
+}

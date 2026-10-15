@@ -1,0 +1,34 @@
+{
+ "contender": "V0b",
+ "featureVersion": "v1-features@1",
+ "treeVersion": "v1-cart@1",
+ "trainedOn": "DEV lineage groups that V0 calls PERSPECTIVE_RENDER",
+ "nTrain": 16,
+ "version": "v1-cart@1",
+ "opts": {
+  "maxDepth": 1,
+  "minLeaf": 5,
+  "purity": 0.9,
+  "minLeafPredict": 5
+ },
+ "features": [
+  "skyBlue",
+  "skyBright",
+  "skyEdge",
+  "vegetation",
+  "warm",
+  "ceilingSmooth"
+ ],
+ "root": {
+  "leaf": true,
+  "n": 16,
+  "counts": {
+   "INTERIOR_RENDER": 16
+  },
+  "label": "INTERIOR_RENDER",
+  "purity": 1
+ },
+ "rules": [
+  "IF TRUE THEN INTERIOR_RENDER   [DEV n=16, purity 1.000, {\"INTERIOR_RENDER\":16}]"
+ ]
+}

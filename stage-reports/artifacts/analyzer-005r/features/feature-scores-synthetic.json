@@ -1,0 +1,1642 @@
+{
+ "V1cues": {
+  "controls": {
+   "downscaleKindJaccard": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "editionPairs": [
+    {
+     "fromKind": "PERGOLA_OPEN",
+     "images": [
+      {
+       "e1": {
+        "COVERED_TERRACE": [
+         false,
+         false
+        ],
+        "PERGOLA_OPEN": [
+         false,
+         false
+        ]
+       },
+       "e2": {
+        "COVERED_TERRACE": [
+         false,
+         false
+        ],
+        "PERGOLA_OPEN": [
+         false,
+         false
+        ]
+       },
+       "role": "TECHNICAL_ELEVATION",
+       "view": "FRONT"
+      },
+      {
+       "e1": {
+        "COVERED_TERRACE": [
+         false,
+         false
+        ],
+        "PERGOLA_OPEN": [
+         false,
+         true
+        ]
+       },
+       "e2": {
+        "COVERED_TERRACE": [
+         false,
+         true
+        ],
+        "PERGOLA_OPEN": [
+         false,
+         false
+        ]
+       },
+       "role": "TECHNICAL_ELEVATION",
+       "view": "REAR"
+      },
+      {
+       "e1": {
+        "COVERED_TERRACE": [
+         false,
+         false
+        ],
+        "PERGOLA_OPEN": [
+         false,
+         true
+        ]
+       },
+       "e2": {
+        "COVERED_TERRACE": [
+         false,
+         true
+        ],
+        "PERGOLA_OPEN": [
+         false,
+         false
+        ]
+       },
+       "role": "TECHNICAL_ELEVATION",
+       "view": "LEFT"
+      },
+      {
+       "e1": {
+        "COVERED_TERRACE": [
+         false,
+         false
+        ],
+        "PERGOLA_OPEN": [
+         false,
+         true
+        ]
+       },
+       "e2": {
+        "COVERED_TERRACE": [
+         false,
+         true
+        ],
+        "PERGOLA_OPEN": [
+         false,
+         false
+        ]
+       },
+       "role": "TECHNICAL_ELEVATION",
+       "view": "RIGHT"
+      },
+      {
+       "e1": {
+        "COVERED_TERRACE": [
+         false,
+         false
+        ],
+        "PERGOLA_OPEN": [
+         false,
+         true
+        ]
+       },
+       "e2": {
+        "COVERED_TERRACE": [
+         false,
+         true
+        ],
+        "PERGOLA_OPEN": [
+         false,
+         false
+        ]
+       },
+       "role": "EXTERIOR_RENDER",
+       "view": "FRONT_RIGHT_OBLIQUE"
+      },
+      {
+       "e1": {
+        "COVERED_TERRACE": [
+         false,
+         false
+        ],
+        "PERGOLA_OPEN": [
+         false,
+         true
+        ]
+       },
+       "e2": {
+        "COVERED_TERRACE": [
+         false,
+         true
+        ],
+        "PERGOLA_OPEN": [
+         false,
+         false
+        ]
+       },
+       "role": "EXTERIOR_RENDER",
+       "view": "REAR_LEFT_OBLIQUE"
+      }
+     ],
+     "pair": "synthetic:f01-e1\u2194synthetic:f01-e2",
+     "toKind": "COVERED_TERRACE"
+    },
+    {
+     "fromKind": "CLOSED_GARAGE",
+     "images": [
+      {
+       "e1": {
+        "CARPORT": [
+         false,
+         false
+        ],
+        "CLOSED_GARAGE": [
+         false,
+         false
+        ]
+       },
+       "e2": {
+        "CARPORT": [
+         false,
+         true
+        ],
+        "CLOSED_GARAGE": [
+         false,
+         false
+        ]
+       },
+       "role": "TECHNICAL_ELEVATION",
+       "view": "FRONT"
+      },
+      {
+       "e1": {
+        "CARPORT": [
+         false,
+         false
+        ],
+        "CLOSED_GARAGE": [
+         false,
+         false
+        ]
+       },
+       "e2": {
+        "CARPORT": [
+         false,
+         true
+        ],
+        "CLOSED_GARAGE": [
+         false,
+         false
+        ]
+       },
+       "role": "TECHNICAL_ELEVATION",
+       "view": "REAR"
+      },
+      {
+       "e1": {
+        "CARPORT": [
+         false,
+         false
+        ],
+        "CLOSED_GARAGE": [
+         false,
+         false
+        ]
+       },
+       "e2": {
+        "CARPORT": [
+         false,
+         true
+        ],
+        "CLOSED_GARAGE": [
+         false,
+         false
+        ]
+       },
+       "role": "TECHNICAL_ELEVATION",
+       "view": "LEFT"
+      },
+      {
+       "e1": {
+        "CARPORT": [
+         false,
+         false
+        ],
+        "CLOSED_GARAGE": [
+         false,
+         false
+        ]
+       },
+       "e2": {
+        "CARPORT": [
+         false,
+         true
+        ],
+        "CLOSED_GARAGE": [
+         false,
+         false
+        ]
+       },
+       "role": "TECHNICAL_ELEVATION",
+       "view": "RIGHT"
+      },
+      {
+       "e1": {
+        "CARPORT": [
+         false,
+         false
+        ],
+        "CLOSED_GARAGE": [
+         false,
+         false
+        ]
+       },
+       "e2": {
+        "CARPORT": [
+         false,
+         true
+        ],
+        "CLOSED_GARAGE": [
+         false,
+         false
+        ]
+       },
+       "role": "EXTERIOR_RENDER",
+       "view": "FRONT_RIGHT_OBLIQUE"
+      },
+      {
+       "e1": {
+        "CARPORT": [
+         false,
+         false
+        ],
+        "CLOSED_GARAGE": [
+         false,
+         false
+        ]
+       },
+       "e2": {
+        "CARPORT": [
+         false,
+         true
+        ],
+        "CLOSED_GARAGE": [
+         false,
+         false
+        ]
+       },
+       "role": "EXTERIOR_RENDER",
+       "view": "REAR_RIGHT_OBLIQUE"
+      }
+     ],
+     "pair": "synthetic:f02-e1\u2194synthetic:f02-e2",
+     "toKind": "CARPORT"
+    },
+    {
+     "fromKind": "BALCONY",
+     "images": [
+      {
+       "e1": {
+        "BALCONY": [
+         false,
+         true
+        ]
+       },
+       "e2": {
+        "BALCONY": [
+         false,
+         false
+        ]
+       },
+       "role": "TECHNICAL_ELEVATION",
+       "view": "FRONT"
+      },
+      {
+       "e1": {
+        "BALCONY": [
+         false,
+         false
+        ]
+       },
+       "e2": {
+        "BALCONY": [
+         false,
+         false
+        ]
+       },
+       "role": "TECHNICAL_ELEVATION",
+       "view": "REAR"
+      },
+      {
+       "e1": {
+        "BALCONY": [
+         false,
+         true
+        ]
+       },
+       "e2": {
+        "BALCONY": [
+         false,
+         false
+        ]
+       },
+       "role": "TECHNICAL_ELEVATION",
+       "view": "LEFT"
+      },
+      {
+       "e1": {
+        "BALCONY": [
+         false,
+         true
+        ]
+       },
+       "e2": {
+        "BALCONY": [
+         false,
+         false
+        ]
+       },
+       "role": "TECHNICAL_ELEVATION",
+       "view": "RIGHT"
+      },
+      {
+       "e1": {
+        "BALCONY": [
+         false,
+         true
+        ]
+       },
+       "e2": {
+        "BALCONY": [
+         false,
+         false
+        ]
+       },
+       "role": "EXTERIOR_RENDER",
+       "view": "FRONT_RIGHT_OBLIQUE"
+      },
+      {
+       "e1": {
+        "BALCONY": [
+         false,
+         false
+        ]
+       },
+       "e2": {
+        "BALCONY": [
+         false,
+         false
+        ]
+       },
+       "role": "EXTERIOR_RENDER",
+       "view": "REAR_LEFT_OBLIQUE"
+      }
+     ],
+     "pair": "synthetic:f04-e1\u2194synthetic:f04-e2",
+     "toKind": null
+    }
+   ],
+   "editionPairsNote": "per image: kind \u2192 [detected, truth-present]",
+   "mirrorKindJaccard": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "oracleElevations": {
+   "cropHallucinations": 0,
+   "interiorDetections": 0,
+   "lookalikeConfusions": {},
+   "perKind": {
+    "BALCONY": {
+     "FN": 27,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "CANOPY_ENTRANCE": {
+     "FN": 30,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "CARPORT": {
+     "FN": 15,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "COLUMN_POST": {
+     "FN": 128,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "COVERED_TERRACE": {
+     "FN": 22,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "EXTERIOR_DOOR": {
+     "FN": 27,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "EXTERIOR_STEPS": {
+     "FN": 45,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "GARAGE_DOOR": {
+     "FN": 7,
+     "FP": 0,
+     "TP": 7,
+     "precision": 1.0,
+     "recall": 0.5
+    },
+    "LOGGIA": {
+     "FN": 14,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "PERGOLA_OPEN": {
+     "FN": 19,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "RAILING": {
+     "FN": 24,
+     "FP": 36,
+     "TP": 6,
+     "precision": 0.1429,
+     "recall": 0.2
+    },
+    "TERRACE_AT_GRADE": {
+     "FN": 24,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "WINDOW": {
+     "FN": 250,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    }
+   },
+   "pooled": {
+    "FN": 632,
+    "FP": 36,
+    "TP": 13,
+    "precision": 0.2653,
+    "recall": 0.0202
+   }
+  },
+  "ownRouting": {
+   "cropHallucinations": 0,
+   "interiorDetections": 0,
+   "lookalikeConfusions": {},
+   "perKind": {
+    "BALCONY": {
+     "FN": 27,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "CANOPY_ENTRANCE": {
+     "FN": 30,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "CARPORT": {
+     "FN": 15,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "COLUMN_POST": {
+     "FN": 128,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "COVERED_TERRACE": {
+     "FN": 22,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "EXTERIOR_DOOR": {
+     "FN": 27,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "EXTERIOR_STEPS": {
+     "FN": 45,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "GARAGE_DOOR": {
+     "FN": 7,
+     "FP": 0,
+     "TP": 7,
+     "precision": 1.0,
+     "recall": 0.5
+    },
+    "LOGGIA": {
+     "FN": 14,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "PERGOLA_OPEN": {
+     "FN": 19,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "RAILING": {
+     "FN": 24,
+     "FP": 36,
+     "TP": 6,
+     "precision": 0.1429,
+     "recall": 0.2
+    },
+    "TERRACE_AT_GRADE": {
+     "FN": 24,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "WINDOW": {
+     "FN": 250,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    }
+   },
+   "pooled": {
+    "FN": 632,
+    "FP": 36,
+    "TP": 13,
+    "precision": 0.2653,
+    "recall": 0.0202
+   }
+  }
+ },
+ "V2": {
+  "controls@0.2": {
+   "downscaleKindJaccard": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "editionPairs": [
+    {
+     "fromKind": "PERGOLA_OPEN",
+     "images": [
+      {
+       "e1": {
+        "COVERED_TERRACE": [
+         false,
+         false
+        ],
+        "PERGOLA_OPEN": [
+         false,
+         false
+        ]
+       },
+       "e2": {
+        "COVERED_TERRACE": [
+         false,
+         false
+        ],
+        "PERGOLA_OPEN": [
+         false,
+         false
+        ]
+       },
+       "role": "TECHNICAL_ELEVATION",
+       "view": "FRONT"
+      },
+      {
+       "e1": {
+        "COVERED_TERRACE": [
+         false,
+         false
+        ],
+        "PERGOLA_OPEN": [
+         false,
+         true
+        ]
+       },
+       "e2": {
+        "COVERED_TERRACE": [
+         false,
+         true
+        ],
+        "PERGOLA_OPEN": [
+         false,
+         false
+        ]
+       },
+       "role": "TECHNICAL_ELEVATION",
+       "view": "REAR"
+      },
+      {
+       "e1": {
+        "COVERED_TERRACE": [
+         false,
+         false
+        ],
+        "PERGOLA_OPEN": [
+         false,
+         true
+        ]
+       },
+       "e2": {
+        "COVERED_TERRACE": [
+         false,
+         true
+        ],
+        "PERGOLA_OPEN": [
+         false,
+         false
+        ]
+       },
+       "role": "TECHNICAL_ELEVATION",
+       "view": "LEFT"
+      },
+      {
+       "e1": {
+        "COVERED_TERRACE": [
+         false,
+         false
+        ],
+        "PERGOLA_OPEN": [
+         false,
+         true
+        ]
+       },
+       "e2": {
+        "COVERED_TERRACE": [
+         false,
+         true
+        ],
+        "PERGOLA_OPEN": [
+         false,
+         false
+        ]
+       },
+       "role": "TECHNICAL_ELEVATION",
+       "view": "RIGHT"
+      },
+      {
+       "e1": {
+        "COVERED_TERRACE": [
+         false,
+         false
+        ],
+        "PERGOLA_OPEN": [
+         false,
+         true
+        ]
+       },
+       "e2": {
+        "COVERED_TERRACE": [
+         false,
+         true
+        ],
+        "PERGOLA_OPEN": [
+         false,
+         false
+        ]
+       },
+       "role": "EXTERIOR_RENDER",
+       "view": "FRONT_RIGHT_OBLIQUE"
+      },
+      {
+       "e1": {
+        "COVERED_TERRACE": [
+         false,
+         false
+        ],
+        "PERGOLA_OPEN": [
+         false,
+         true
+        ]
+       },
+       "e2": {
+        "COVERED_TERRACE": [
+         false,
+         true
+        ],
+        "PERGOLA_OPEN": [
+         false,
+         false
+        ]
+       },
+       "role": "EXTERIOR_RENDER",
+       "view": "REAR_LEFT_OBLIQUE"
+      }
+     ],
+     "pair": "synthetic:f01-e1\u2194synthetic:f01-e2",
+     "toKind": "COVERED_TERRACE"
+    },
+    {
+     "fromKind": "CLOSED_GARAGE",
+     "images": [
+      {
+       "e1": {
+        "CARPORT": [
+         false,
+         false
+        ],
+        "CLOSED_GARAGE": [
+         false,
+         false
+        ]
+       },
+       "e2": {
+        "CARPORT": [
+         false,
+         true
+        ],
+        "CLOSED_GARAGE": [
+         false,
+         false
+        ]
+       },
+       "role": "TECHNICAL_ELEVATION",
+       "view": "FRONT"
+      },
+      {
+       "e1": {
+        "CARPORT": [
+         false,
+         false
+        ],
+        "CLOSED_GARAGE": [
+         false,
+         false
+        ]
+       },
+       "e2": {
+        "CARPORT": [
+         false,
+         true
+        ],
+        "CLOSED_GARAGE": [
+         false,
+         false
+        ]
+       },
+       "role": "TECHNICAL_ELEVATION",
+       "view": "REAR"
+      },
+      {
+       "e1": {
+        "CARPORT": [
+         false,
+         false
+        ],
+        "CLOSED_GARAGE": [
+         false,
+         false
+        ]
+       },
+       "e2": {
+        "CARPORT": [
+         false,
+         true
+        ],
+        "CLOSED_GARAGE": [
+         false,
+         false
+        ]
+       },
+       "role": "TECHNICAL_ELEVATION",
+       "view": "LEFT"
+      },
+      {
+       "e1": {
+        "CARPORT": [
+         false,
+         false
+        ],
+        "CLOSED_GARAGE": [
+         false,
+         false
+        ]
+       },
+       "e2": {
+        "CARPORT": [
+         false,
+         true
+        ],
+        "CLOSED_GARAGE": [
+         false,
+         false
+        ]
+       },
+       "role": "TECHNICAL_ELEVATION",
+       "view": "RIGHT"
+      },
+      {
+       "e1": {
+        "CARPORT": [
+         false,
+         false
+        ],
+        "CLOSED_GARAGE": [
+         false,
+         false
+        ]
+       },
+       "e2": {
+        "CARPORT": [
+         false,
+         true
+        ],
+        "CLOSED_GARAGE": [
+         false,
+         false
+        ]
+       },
+       "role": "EXTERIOR_RENDER",
+       "view": "FRONT_RIGHT_OBLIQUE"
+      },
+      {
+       "e1": {
+        "CARPORT": [
+         false,
+         false
+        ],
+        "CLOSED_GARAGE": [
+         false,
+         false
+        ]
+       },
+       "e2": {
+        "CARPORT": [
+         false,
+         true
+        ],
+        "CLOSED_GARAGE": [
+         false,
+         false
+        ]
+       },
+       "role": "EXTERIOR_RENDER",
+       "view": "REAR_RIGHT_OBLIQUE"
+      }
+     ],
+     "pair": "synthetic:f02-e1\u2194synthetic:f02-e2",
+     "toKind": "CARPORT"
+    },
+    {
+     "fromKind": "BALCONY",
+     "images": [
+      {
+       "e1": {
+        "BALCONY": [
+         false,
+         true
+        ]
+       },
+       "e2": {
+        "BALCONY": [
+         true,
+         false
+        ]
+       },
+       "role": "TECHNICAL_ELEVATION",
+       "view": "FRONT"
+      },
+      {
+       "e1": {
+        "BALCONY": [
+         false,
+         false
+        ]
+       },
+       "e2": {
+        "BALCONY": [
+         false,
+         false
+        ]
+       },
+       "role": "TECHNICAL_ELEVATION",
+       "view": "REAR"
+      },
+      {
+       "e1": {
+        "BALCONY": [
+         true,
+         true
+        ]
+       },
+       "e2": {
+        "BALCONY": [
+         false,
+         false
+        ]
+       },
+       "role": "TECHNICAL_ELEVATION",
+       "view": "LEFT"
+      },
+      {
+       "e1": {
+        "BALCONY": [
+         true,
+         true
+        ]
+       },
+       "e2": {
+        "BALCONY": [
+         false,
+         false
+        ]
+       },
+       "role": "TECHNICAL_ELEVATION",
+       "view": "RIGHT"
+      },
+      {
+       "e1": {
+        "BALCONY": [
+         true,
+         true
+        ]
+       },
+       "e2": {
+        "BALCONY": [
+         false,
+         false
+        ]
+       },
+       "role": "EXTERIOR_RENDER",
+       "view": "FRONT_RIGHT_OBLIQUE"
+      },
+      {
+       "e1": {
+        "BALCONY": [
+         false,
+         false
+        ]
+       },
+       "e2": {
+        "BALCONY": [
+         false,
+         false
+        ]
+       },
+       "role": "EXTERIOR_RENDER",
+       "view": "REAR_LEFT_OBLIQUE"
+      }
+     ],
+     "pair": "synthetic:f04-e1\u2194synthetic:f04-e2",
+     "toKind": null
+    }
+   ],
+   "editionPairsNote": "per image: kind \u2192 [detected, truth-present]",
+   "mirrorKindJaccard": [
+    1.0,
+    1.0,
+    0.6667,
+    0.6,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.6667
+   ]
+  },
+  "oracle@0.05": {
+   "cropHallucinations": 24,
+   "interiorDetections": 0,
+   "lookalikeConfusions": {
+    "CLOSED_GARAGE\u2192CARPORT": 9,
+    "DARK_WINDOW_NEAR_GARAGE\u2192GARAGE_DOOR": 1,
+    "PARKING_BAY\u2192CARPORT": 11,
+    "PARKING_BAY\u2192GARAGE_DOOR": 2,
+    "SOLID_PARAPET\u2192RAILING": 15
+   },
+   "perKind": {
+    "BALCONY": {
+     "FN": 0,
+     "FP": 81,
+     "TP": 40,
+     "precision": 0.3306,
+     "recall": 1.0
+    },
+    "CANOPY_ENTRANCE": {
+     "FN": 30,
+     "FP": 248,
+     "TP": 11,
+     "precision": 0.0425,
+     "recall": 0.2683
+    },
+    "CARPORT": {
+     "FN": 13,
+     "FP": 48,
+     "TP": 6,
+     "precision": 0.1111,
+     "recall": 0.3158
+    },
+    "COLUMN_POST": {
+     "FN": 249,
+     "FP": 56,
+     "TP": 5,
+     "precision": 0.082,
+     "recall": 0.0197
+    },
+    "COVERED_TERRACE": {
+     "FN": 29,
+     "FP": 155,
+     "TP": 7,
+     "precision": 0.0432,
+     "recall": 0.1944
+    },
+    "EXTERIOR_DOOR": {
+     "FN": 2,
+     "FP": 479,
+     "TP": 47,
+     "precision": 0.0894,
+     "recall": 0.9592
+    },
+    "EXTERIOR_STEPS": {
+     "FN": 45,
+     "FP": 2,
+     "TP": 19,
+     "precision": 0.9048,
+     "recall": 0.2969
+    },
+    "GARAGE_DOOR": {
+     "FN": 8,
+     "FP": 315,
+     "TP": 18,
+     "precision": 0.0541,
+     "recall": 0.6923
+    },
+    "LOGGIA": {
+     "FN": 18,
+     "FP": 138,
+     "TP": 7,
+     "precision": 0.0483,
+     "recall": 0.28
+    },
+    "PERGOLA_OPEN": {
+     "FN": 18,
+     "FP": 51,
+     "TP": 15,
+     "precision": 0.2273,
+     "recall": 0.4545
+    },
+    "RAILING": {
+     "FN": 5,
+     "FP": 97,
+     "TP": 46,
+     "precision": 0.3217,
+     "recall": 0.902
+    },
+    "TERRACE_AT_GRADE": {
+     "FN": 33,
+     "FP": 108,
+     "TP": 10,
+     "precision": 0.0847,
+     "recall": 0.2326
+    },
+    "WINDOW": {
+     "FN": 21,
+     "FP": 168,
+     "TP": 511,
+     "precision": 0.7526,
+     "recall": 0.9605
+    }
+   },
+   "pooled": {
+    "FN": 471,
+    "FP": 1946,
+    "TP": 742,
+    "precision": 0.276,
+    "recall": 0.6117
+   }
+  },
+  "oracle@0.1": {
+   "cropHallucinations": 3,
+   "interiorDetections": 0,
+   "lookalikeConfusions": {
+    "SOLID_PARAPET\u2192RAILING": 1
+   },
+   "perKind": {
+    "BALCONY": {
+     "FN": 8,
+     "FP": 27,
+     "TP": 32,
+     "precision": 0.5424,
+     "recall": 0.8
+    },
+    "CANOPY_ENTRANCE": {
+     "FN": 37,
+     "FP": 15,
+     "TP": 4,
+     "precision": 0.2105,
+     "recall": 0.0976
+    },
+    "CARPORT": {
+     "FN": 19,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "COLUMN_POST": {
+     "FN": 254,
+     "FP": 1,
+     "TP": 0,
+     "precision": 0.0,
+     "recall": 0.0
+    },
+    "COVERED_TERRACE": {
+     "FN": 36,
+     "FP": 7,
+     "TP": 0,
+     "precision": 0.0,
+     "recall": 0.0
+    },
+    "EXTERIOR_DOOR": {
+     "FN": 3,
+     "FP": 164,
+     "TP": 46,
+     "precision": 0.219,
+     "recall": 0.9388
+    },
+    "EXTERIOR_STEPS": {
+     "FN": 63,
+     "FP": 0,
+     "TP": 1,
+     "precision": 1.0,
+     "recall": 0.0156
+    },
+    "GARAGE_DOOR": {
+     "FN": 12,
+     "FP": 121,
+     "TP": 14,
+     "precision": 0.1037,
+     "recall": 0.5385
+    },
+    "LOGGIA": {
+     "FN": 21,
+     "FP": 54,
+     "TP": 4,
+     "precision": 0.069,
+     "recall": 0.16
+    },
+    "PERGOLA_OPEN": {
+     "FN": 33,
+     "FP": 2,
+     "TP": 0,
+     "precision": 0.0,
+     "recall": 0.0
+    },
+    "RAILING": {
+     "FN": 12,
+     "FP": 12,
+     "TP": 39,
+     "precision": 0.7647,
+     "recall": 0.7647
+    },
+    "TERRACE_AT_GRADE": {
+     "FN": 41,
+     "FP": 10,
+     "TP": 2,
+     "precision": 0.1667,
+     "recall": 0.0465
+    },
+    "WINDOW": {
+     "FN": 21,
+     "FP": 72,
+     "TP": 511,
+     "precision": 0.8765,
+     "recall": 0.9605
+    }
+   },
+   "pooled": {
+    "FN": 560,
+    "FP": 485,
+    "TP": 653,
+    "precision": 0.5738,
+    "recall": 0.5383
+   }
+  },
+  "oracle@0.2": {
+   "cropHallucinations": 0,
+   "interiorDetections": 0,
+   "lookalikeConfusions": {},
+   "perKind": {
+    "BALCONY": {
+     "FN": 29,
+     "FP": 1,
+     "TP": 11,
+     "precision": 0.9167,
+     "recall": 0.275
+    },
+    "CANOPY_ENTRANCE": {
+     "FN": 41,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "CARPORT": {
+     "FN": 19,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "COLUMN_POST": {
+     "FN": 254,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "COVERED_TERRACE": {
+     "FN": 36,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "EXTERIOR_DOOR": {
+     "FN": 3,
+     "FP": 18,
+     "TP": 46,
+     "precision": 0.7188,
+     "recall": 0.9388
+    },
+    "EXTERIOR_STEPS": {
+     "FN": 64,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "GARAGE_DOOR": {
+     "FN": 26,
+     "FP": 7,
+     "TP": 0,
+     "precision": 0.0,
+     "recall": 0.0
+    },
+    "LOGGIA": {
+     "FN": 25,
+     "FP": 7,
+     "TP": 0,
+     "precision": 0.0,
+     "recall": 0.0
+    },
+    "PERGOLA_OPEN": {
+     "FN": 33,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "RAILING": {
+     "FN": 49,
+     "FP": 0,
+     "TP": 2,
+     "precision": 1.0,
+     "recall": 0.0392
+    },
+    "TERRACE_AT_GRADE": {
+     "FN": 43,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "WINDOW": {
+     "FN": 27,
+     "FP": 23,
+     "TP": 505,
+     "precision": 0.9564,
+     "recall": 0.9492
+    }
+   },
+   "pooled": {
+    "FN": 649,
+    "FP": 56,
+    "TP": 564,
+    "precision": 0.9097,
+    "recall": 0.465
+   }
+  },
+  "oracle@0.3": {
+   "cropHallucinations": 0,
+   "interiorDetections": 0,
+   "lookalikeConfusions": {},
+   "perKind": {
+    "BALCONY": {
+     "FN": 40,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "CANOPY_ENTRANCE": {
+     "FN": 41,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "CARPORT": {
+     "FN": 19,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "COLUMN_POST": {
+     "FN": 254,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "COVERED_TERRACE": {
+     "FN": 36,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "EXTERIOR_DOOR": {
+     "FN": 9,
+     "FP": 6,
+     "TP": 40,
+     "precision": 0.8696,
+     "recall": 0.8163
+    },
+    "EXTERIOR_STEPS": {
+     "FN": 64,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "GARAGE_DOOR": {
+     "FN": 26,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "LOGGIA": {
+     "FN": 25,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "PERGOLA_OPEN": {
+     "FN": 33,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "RAILING": {
+     "FN": 51,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "TERRACE_AT_GRADE": {
+     "FN": 43,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "WINDOW": {
+     "FN": 139,
+     "FP": 7,
+     "TP": 393,
+     "precision": 0.9825,
+     "recall": 0.7387
+    }
+   },
+   "pooled": {
+    "FN": 780,
+    "FP": 13,
+    "TP": 433,
+    "precision": 0.9709,
+    "recall": 0.357
+   }
+  },
+  "oracle@0.5": {
+   "cropHallucinations": 0,
+   "interiorDetections": 0,
+   "lookalikeConfusions": {},
+   "perKind": {
+    "BALCONY": {
+     "FN": 40,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "CANOPY_ENTRANCE": {
+     "FN": 41,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "CARPORT": {
+     "FN": 19,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "COLUMN_POST": {
+     "FN": 254,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "COVERED_TERRACE": {
+     "FN": 36,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "EXTERIOR_DOOR": {
+     "FN": 44,
+     "FP": 0,
+     "TP": 5,
+     "precision": 1.0,
+     "recall": 0.102
+    },
+    "EXTERIOR_STEPS": {
+     "FN": 64,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "GARAGE_DOOR": {
+     "FN": 26,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "LOGGIA": {
+     "FN": 25,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "PERGOLA_OPEN": {
+     "FN": 33,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "RAILING": {
+     "FN": 51,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "TERRACE_AT_GRADE": {
+     "FN": 43,
+     "FP": 0,
+     "TP": 0,
+     "precision": null,
+     "recall": 0.0
+    },
+    "WINDOW": {
+     "FN": 362,
+     "FP": 0,
+     "TP": 170,
+     "precision": 1.0,
+     "recall": 0.3195
+    }
+   },
+   "pooled": {
+    "FN": 1038,
+    "FP": 0,
+    "TP": 175,
+    "precision": 1.0,
+    "recall": 0.1443
+   }
+  },
+  "ownRouting@0.2": {
+   "cropHallucinations": 0,
+   "interiorDetections": 0,
+   "lookalikeConfusions": {},
+   "perKind": {},
+   "pooled": {
+    "FN": 0,
+    "FP": 0,
+    "TP": 0,
+    "precision": null,
+    "recall": null
+   }
+  }
+ },
+ "note": "synthetic known truth; not real-source generalisation",
+ "schema": "research.005r.feature-scores-synthetic.0.1",
+ "seed": 5005,
+ "truthSha256": "02d2fd8ebb3512c9ec16e0b785a0384c323646c86bd19878c0af1179575c48dd"
+}

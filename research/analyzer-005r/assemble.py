@@ -107,6 +107,8 @@ def main(private_p, manifest_p, truth_p, runs, out_dir):
                             'proposedPresentOnInteriorTruth': 0, 'proposedPresentOnTechnicalNonElevationTruth': 0, 'byKind': {}}
         per_edition = {}
         for aid in sorted(routes):
+            if aid not in assets:
+                continue  # synthetic rows of V1/V2 outputs are scored by score_features.py, not assembled here
             a = assets[aid]
             if not a['scoredSize']:
                 continue
