@@ -1,0 +1,3075 @@
+{
+ "c2AssetsBeforeLineageDedup": 150,
+ "counts": {
+  "S1": 15,
+  "S2": 95,
+  "S3": 34,
+  "S4": 68,
+  "S5": 88
+ },
+ "questions": {
+  "drawingKind": [
+   "TECHNICAL_LINE_DRAWING",
+   "PHOTO_REAL_RENDER",
+   "PHOTOGRAPH",
+   "CANNOT_TELL"
+  ],
+  "projection": [
+   "ORTHOGRAPHIC_FACADE",
+   "PERSPECTIVE",
+   "PLAN_OR_SECTION",
+   "CANNOT_TELL"
+  ],
+  "sameHouseAsEdition": [
+   "YES",
+   "NO",
+   "CANNOT_TELL"
+  ],
+  "sceneScope": [
+   "INTERIOR",
+   "EXTERIOR",
+   "BOTH_VISIBLE",
+   "NOT_A_SCENE",
+   "CANNOT_TELL"
+  ]
+ },
+ "rows": [
+  {
+   "assetSha": "04aa597a95dd847c6b016902af987b6adb189c58002631282c93b1a2b31c6fae",
+   "editionIds": [
+    "archon:m8f729a787dd1d"
+   ],
+   "lineageGroup": "lg-04aa597a95dd",
+   "split": "DEV",
+   "stratum": "S1"
+  },
+  {
+   "assetSha": "3b237a5b835ed022d990fa3640952876f1fc3f359f77a45036c3f97a72fb6211",
+   "editionIds": [
+    "archon:m1cf2958b1b904"
+   ],
+   "lineageGroup": "lg-0b1797624bf4",
+   "split": "DEV",
+   "stratum": "S1"
+  },
+  {
+   "assetSha": "45a46949e2fee98586c27c746ef8de7e8923081682ebf96f0b322bf54031bbc1",
+   "editionIds": [
+    "archon:m1b323a6595d29"
+   ],
+   "lineageGroup": "lg-45a46949e2fe",
+   "split": "DEV",
+   "stratum": "S1"
+  },
+  {
+   "assetSha": "46d2a4958eb226355a4b441e8bf26495e8535912255aa555001455acdb638b91",
+   "editionIds": [
+    "archon:m1b323a6595d29"
+   ],
+   "lineageGroup": "lg-46d2a4958eb2",
+   "split": "DEV",
+   "stratum": "S1"
+  },
+  {
+   "assetSha": "5ef52b6851729a420f53446c5a891e974c55678f2a51f3c16cb36ce89960ff26",
+   "editionIds": [
+    "archon:m113295f6cdcfc"
+   ],
+   "lineageGroup": "lg-5ef52b685172",
+   "split": "DEV",
+   "stratum": "S1"
+  },
+  {
+   "assetSha": "7b90735f9afd2a46163de02a92c9e62ad11d5f4d1edaf302c5d08b501de34b60",
+   "editionIds": [
+    "archon:m113295f6cdcfc"
+   ],
+   "lineageGroup": "lg-7b90735f9afd",
+   "split": "DEV",
+   "stratum": "S1"
+  },
+  {
+   "assetSha": "859a8eadbb68efbd9616c9c7b647249049ddd6085c60067b21da0cbe035082ef",
+   "editionIds": [
+    "archon:m8f729a787dd1d"
+   ],
+   "lineageGroup": "lg-0399bc18928b",
+   "split": "DEV",
+   "stratum": "S1"
+  },
+  {
+   "assetSha": "891ba53840df5a0d51a2e1269b3932f29daa4c679ad6572268f854297a5b8901",
+   "editionIds": [
+    "archon:m738275b7537b0"
+   ],
+   "lineageGroup": "lg-0399bc18928b",
+   "split": "DEV",
+   "stratum": "S1"
+  },
+  {
+   "assetSha": "a7b6983b55211ddcb06aeca40539963542b481724ba07bae83693a43ac200191",
+   "editionIds": [
+    "archon:mdab2497c5cb47"
+   ],
+   "lineageGroup": "lg-a7b6983b5521",
+   "split": "DEV",
+   "stratum": "S1"
+  },
+  {
+   "assetSha": "cc9275b19217bc8cc5f9833a7b507fd186635c71d10a4478d39636d5abca44ad",
+   "editionIds": [
+    "archon:m953292c7d56c7"
+   ],
+   "lineageGroup": "lg-3eae76e62a63",
+   "split": "DEV",
+   "stratum": "S1"
+  },
+  {
+   "assetSha": "ce8f68881dd5612d6d4996da7d397fbaf0879fd585ad6cf7170c4348e03751b1",
+   "editionIds": [
+    "archon:m953292c7d56c7"
+   ],
+   "lineageGroup": "lg-ce8f68881dd5",
+   "split": "DEV",
+   "stratum": "S1"
+  },
+  {
+   "assetSha": "d0cf7391cd79cf676017d6818d8b4e32361074486790c1dd7975cca7f15aa238",
+   "editionIds": [
+    "archon:m113295f6cdcfc"
+   ],
+   "lineageGroup": "lg-c937054ebb57",
+   "split": "DEV",
+   "stratum": "S1"
+  },
+  {
+   "assetSha": "e0f74c516710f31d01588e2c7b30838598fb67d01885d0b15a804d52140ab959",
+   "editionIds": [
+    "archon:mdab2497c5cb47"
+   ],
+   "lineageGroup": "lg-e0f74c516710",
+   "split": "DEV",
+   "stratum": "S1"
+  },
+  {
+   "assetSha": "e316269d8fb808cc3730a4accb14456a5ed32884d872c3225826a21dd04d374c",
+   "editionIds": [
+    "archon:m738275b7537b0"
+   ],
+   "lineageGroup": "lg-ab242d5dbe56",
+   "split": "DEV",
+   "stratum": "S1"
+  },
+  {
+   "assetSha": "e9e94adc950f3ed91269e37ded2b59660b97d41077cf595b58ef1c5641944333",
+   "editionIds": [
+    "archon:m1cf2958b1b904"
+   ],
+   "lineageGroup": "lg-e9e94adc950f",
+   "split": "DEV",
+   "stratum": "S1"
+  },
+  {
+   "assetSha": "01736aa9ddf895a01732b04bded69e3442f8f4b0633482794023d07edf03bd99",
+   "editionIds": [
+    "archon:m49324d69ef143"
+   ],
+   "lineageGroup": "lg-01736aa9ddf8",
+   "split": "EVAL",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "027348592b16f72a47cdd93ade9cc2ee71cc40e69d0695fea4c9b2e160974910",
+   "editionIds": [
+    "archon:mfc224c195bead"
+   ],
+   "lineageGroup": "lg-027348592b16",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "06faac61bce2a1e6bf8785a0e0c1070fe6b147b4f9b407bd0b984f0c2441225c",
+   "editionIds": [
+    "archon:m3622914468605"
+   ],
+   "lineageGroup": "lg-06faac61bce2",
+   "split": "EVAL",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "0a2e9f4c01e4db0f70ad178ca262a1fdf0d3fa02ec2f26d7eec8ee57df04d55e",
+   "editionIds": [
+    "archon:m3ea28300f9b3e"
+   ],
+   "lineageGroup": "lg-0a2e9f4c01e4",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "0c3f2fb0f93d872a61d226e21608c46effc810a890f41721d786ee5f345efb9b",
+   "editionIds": [
+    "archon:m66e296fe1336a"
+   ],
+   "lineageGroup": "lg-0c3f2fb0f93d",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "0d2ae1eee1460f2b08af77bc18f8292d6341f9cc760373dee99a624670bcda3e",
+   "editionIds": [
+    "archon:mca1285ded6b78"
+   ],
+   "lineageGroup": "lg-0d2ae1eee146",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "0ed85c637e386464a0f64c595bd5c7e229c4457a3004b16535b760a0598e6434",
+   "editionIds": [
+    "archon:m82628f55aecdb"
+   ],
+   "lineageGroup": "lg-0ed85c637e38",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "15f0dda66ab4f2ba1263838d67c5ca43753db0562d6d8ffcf2cede48da246c90",
+   "editionIds": [
+    "archon:m504267f869cbe"
+   ],
+   "lineageGroup": "lg-15f0dda66ab4",
+   "split": "EVAL",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "16a2acdd662ef47eec8de8cf60022ed6426c1d0b6f1fb61741ddc45b662482b3",
+   "editionIds": [
+    "archon:m504267f869cbe"
+   ],
+   "lineageGroup": "lg-16a2acdd662e",
+   "split": "EVAL",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "19ecd2d1bcabcee6f1f9be749f560e6ddaa00e043257dcb90a6ae909a147dac9",
+   "editionIds": [
+    "archon:m5962845af9cea"
+   ],
+   "lineageGroup": "lg-19ecd2d1bcab",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "1ba5a8ac3c2caa55632454605337f51639782304f354524e366d756431594029",
+   "editionIds": [
+    "archon:m1cf2958b1b904"
+   ],
+   "lineageGroup": "lg-1ba5a8ac3c2c",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "1cdf3d838b94ed874b81554624cc7c03f774abc836512f763698381c2dd7f7cd",
+   "editionIds": [
+    "archon:ma6726144fab3e"
+   ],
+   "lineageGroup": "lg-1cdf3d838b94",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "1e7f3986017c83a4fa7e89dc69a513c0991782171c0e337cf39d3da7c78a5225",
+   "editionIds": [
+    "archon:me3c2885945467"
+   ],
+   "lineageGroup": "lg-1e7f3986017c",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "201e8b150732de60909e2137c3815f5d9a119bad7c8888c25350cdcd1df4d27d",
+   "editionIds": [
+    "archon:mbad2613634abe"
+   ],
+   "lineageGroup": "lg-201e8b150732",
+   "split": "EVAL",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "21b4331b77f317ab5d96e58c3b1ce0814ce3f83dfbe07abef0b8c708a41cff72",
+   "editionIds": [
+    "archon:m738275b7537b0"
+   ],
+   "lineageGroup": "lg-21b4331b77f3",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "24d904ef5960f4f5fea9f2215e22dcb2e62582089858580405e17581a6f0768a",
+   "editionIds": [
+    "archon:md842941974a5c"
+   ],
+   "lineageGroup": "lg-24d904ef5960",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "2825219558e1c716829f5127d420d98d868e72a88d4fed12af406c4a48f147dc",
+   "editionIds": [
+    "archon:m44320b977e1a7"
+   ],
+   "lineageGroup": "lg-2825219558e1",
+   "split": "EVAL",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "2c668ea3c2fb69c0b097f9c671ba5d8199bc1136a800dd0126440bf6fbcda695",
+   "editionIds": [
+    "archon:m54c27ca96beaf"
+   ],
+   "lineageGroup": "lg-2c668ea3c2fb",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "3179d93abea90c2950f64093275f7adb11ab7d4a333d805350fd5e59db32f441",
+   "editionIds": [
+    "archon:m168264238cc55"
+   ],
+   "lineageGroup": "lg-3179d93abea9",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "33ab5639ad92885fdd11e559c59869c8dc3e37857a02ca6e8a02b48e57c8b77d",
+   "editionIds": [
+    "archon:m31d28af4f88c7"
+   ],
+   "lineageGroup": "lg-33ab5639ad92",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "34c7df81a74fcbaf976dd7fd05452d64e3b3c8b6910bce8cab15a95fdefc5d02",
+   "editionIds": [
+    "archon:m43d25c0636969"
+   ],
+   "lineageGroup": "lg-34c7df81a74f",
+   "split": "EVAL",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "39a67dcb4589a6f79aea6a9cfb9a33b1a140f33ecaa91b0106d12f4b7b8ade89",
+   "editionIds": [
+    "archon:m79923e950094d"
+   ],
+   "lineageGroup": "lg-39a67dcb4589",
+   "split": "EVAL",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "3ec50d1c43f6812bbdf6719f5fdb90e314f9164c66c468ed60cb22e40335be68",
+   "editionIds": [
+    "archon:m1cf2958b1b904"
+   ],
+   "lineageGroup": "lg-3ec50d1c43f6",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "4156e63559895c0961c6f32021e2305c8ed54ea98059a7085051618cd992dbc4",
+   "editionIds": [
+    "archon:m7fa285c730ca2"
+   ],
+   "lineageGroup": "lg-055886a73b54",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "45d31df980c9b62554e8b6a8e08f94361891074a5cc29243ff3ca2f4d0276c86",
+   "editionIds": [
+    "archon:mdc729ab12a662"
+   ],
+   "lineageGroup": "lg-45d31df980c9",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "47846f2027a880ceb199926392db70fcd470ffcbb19babbdead1d20a930d1135",
+   "editionIds": [
+    "archon:md842941974a5c"
+   ],
+   "lineageGroup": "lg-47846f2027a8",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "4b24c6637d2119a68776f840244a090d4e4d660d34b8e73c9d28d22e21fda5a3",
+   "editionIds": [
+    "archon:m60124f28f071a"
+   ],
+   "lineageGroup": "lg-4b24c6637d21",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "4e4381b8a0d2cfbac200a91d30133a305bb20e3fcf0ce2c733d0af23c48135bf",
+   "editionIds": [
+    "archon:mf6628752fa61f"
+   ],
+   "lineageGroup": "lg-4e4381b8a0d2",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "4ea43606297481f5ba63f0df6a8393c6e048163e99e2a263b26bf08e05ed6efa",
+   "editionIds": [
+    "archon:mcc7297f3e22da"
+   ],
+   "lineageGroup": "lg-418868a7512f",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "539e8d6448a785879fc1012ce8dac568392c996f41984518440050d222db81de",
+   "editionIds": [
+    "archon:mf6628752fa61f"
+   ],
+   "lineageGroup": "lg-218d04ff381f",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "56a5c8b137acd559f36ff35018163487a3d40b1c6c4938fccd5a1bd237b97d19",
+   "editionIds": [
+    "archon:md4721b13efcd5"
+   ],
+   "lineageGroup": "lg-56a5c8b137ac",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "56b970493622d6c637df7116c1284047fd014194aa428c1411ba534cf9f34a14",
+   "editionIds": [
+    "archon:mdab2497c5cb47"
+   ],
+   "lineageGroup": "lg-56b970493622",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "5764498529a9db2d97fbb0569f2d6cea06547a6e41aab824b51777d388ee5851",
+   "editionIds": [
+    "archon:m4c723a6c22f61"
+   ],
+   "lineageGroup": "lg-5764498529a9",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "57fb2e5c40aec3cd5c86ff6cab07c5268de29fa31a5fef53d4bab3c6adc164c9",
+   "editionIds": [
+    "archon:m113295f6cdcfc"
+   ],
+   "lineageGroup": "lg-57fb2e5c40ae",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "584f434b51c6250dc48786e6f9166a22b603bb66693d0b795751926477c52fda",
+   "editionIds": [
+    "archon:m5962845af9cea"
+   ],
+   "lineageGroup": "lg-584f434b51c6",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "59c8b347d4ed834c3e6a7f4584adbdd72225439162c8901f5b55c618c0f4c792",
+   "editionIds": [
+    "archon:mdf423d61e7247"
+   ],
+   "lineageGroup": "lg-59c8b347d4ed",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "5b9c39379f85723eef64d045cfc995ffec5c35c3c1ab6b4e6d2b696b66f228f1",
+   "editionIds": [
+    "archon:m2fa281446a8ca"
+   ],
+   "lineageGroup": "lg-5b9c39379f85",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "602be05b0979a7182556b7550f2bc20546f7ec5ed99fa097c60a47cac3baaf48",
+   "editionIds": [
+    "archon:md6026d579e43f"
+   ],
+   "lineageGroup": "lg-602be05b0979",
+   "split": "EVAL",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "6168b5199e95c8692ee60d7f954218e5a3fcfb30f61e30cbdaba02ea22957a97",
+   "editionIds": [
+    "archon:m82628f55aecdb"
+   ],
+   "lineageGroup": "lg-6168b5199e95",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "61dbe294fb98895facf6e927f325eb5323d1981e336ad2d02c1585ba42dd0f0b",
+   "editionIds": [
+    "archon:m8a12761847734"
+   ],
+   "lineageGroup": "lg-61dbe294fb98",
+   "split": "EVAL",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "6c7e8fc586b261654b175f78aa66ca18fb029e9da47efd080daa8ff7fa239561",
+   "editionIds": [
+    "archon:md4721b13efcd5"
+   ],
+   "lineageGroup": "lg-11b4766f2f26",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "6cad166431bcfe36a98cb4aeb267eac5002f77e0d1b01200304d1d4268f26d9d",
+   "editionIds": [
+    "archon:m8f729a787dd1d"
+   ],
+   "lineageGroup": "lg-4add4fecff81",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "6d9bad23e8d990510c6762cc003c4d5dc0be6500d441bc28d2fa9f91a33369de",
+   "editionIds": [
+    "archon:md03289269ca84"
+   ],
+   "lineageGroup": "lg-6d9bad23e8d9",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "748305b28d0e500ded292e1dad083b7bf4f3ea02b6e69df72a7089113617e225",
+   "editionIds": [
+    "archon:mec7296fe14c2b"
+   ],
+   "lineageGroup": "lg-347b29912d99",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "7ab98716d729d6834155048ce57e577f802f57cc560f2c59bb549a8d2190983a",
+   "editionIds": [
+    "archon:mec7296fe14c2b"
+   ],
+   "lineageGroup": "lg-7ab98716d729",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "7ad66f5355f270e549966c558974b726190790fd71147f1f0d1628ba3d3d3358",
+   "editionIds": [
+    "archon:mfc224c195bead"
+   ],
+   "lineageGroup": "lg-7ad66f5355f2",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "7eedda6d9cf0bcb5fb74498b386881b34fada5174d90b202c1e372cfb18ddd95",
+   "editionIds": [
+    "archon:md4e2138a2d1a5"
+   ],
+   "lineageGroup": "lg-7eedda6d9cf0",
+   "split": "EVAL",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "8128ea4b7759aa773b5f6ae09adde5c44d4b33091ac603001acd6277cf6d86c0",
+   "editionIds": [
+    "archon:m95a1f6e528ef4"
+   ],
+   "lineageGroup": "lg-1bb9972d4a3c",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "82a74efe2cd78bf83312567581341ac5ce20f7874ecd9a1420428c49de2ad9eb",
+   "editionIds": [
+    "archon:m953292c7d56c7"
+   ],
+   "lineageGroup": "lg-82a74efe2cd7",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "86141f7ad22561240caf42702070316d92ad29be7b0422260f3de4bdf5ba9681",
+   "editionIds": [
+    "archon:m3ea28300f9b3e"
+   ],
+   "lineageGroup": "lg-86141f7ad225",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "87b4c8a6a009a04f64f53294a24996ad683c53a9d9b1df8a778601e4b42161cd",
+   "editionIds": [
+    "archon:m4c723a6c22f61"
+   ],
+   "lineageGroup": "lg-87b4c8a6a009",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "89961d5748549018fb7c8e89ffba87b8f74f1d894b33d25009fe870844f69ce5",
+   "editionIds": [
+    "archon:m3622914468605"
+   ],
+   "lineageGroup": "lg-89961d574854",
+   "split": "EVAL",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "8e772c61b1303189eae4a92b9f927339fee6baa82692c76508ac964b34c28167",
+   "editionIds": [
+    "archon:m113295f6cdcfc"
+   ],
+   "lineageGroup": "lg-8e772c61b130",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "92d73877659b65291e93936a1e314a44be0ab0c309d149184c04cf968015aa93",
+   "editionIds": [
+    "archon:mbad2613634abe"
+   ],
+   "lineageGroup": "lg-92d73877659b",
+   "split": "EVAL",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "94c6fa20de583cbb3c9b029b54ee690dcacff6c7289d60184f344b94cfc3894a",
+   "editionIds": [
+    "archon:mb6e29738c35fa"
+   ],
+   "lineageGroup": "lg-94c6fa20de58",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "98f9db648e7f2ef2bf8faa856ce98c2dbe9f846fe8719b54f303b73cb3f200bd",
+   "editionIds": [
+    "archon:ma772868ccf62c"
+   ],
+   "lineageGroup": "lg-98f9db648e7f",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "9d1b7014d3a0882e14c6dbca5e09ed825fd92dc41ce284c39935e877c856824f",
+   "editionIds": [
+    "archon:m3c91f90ec5ffe"
+   ],
+   "lineageGroup": "lg-0003e400f761",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "9d889bd77b146420ab61fb49a545f6ba66b1f63c83f97cdb3a88c9a3c4f621ce",
+   "editionIds": [
+    "archon:m66e296fe1336a"
+   ],
+   "lineageGroup": "lg-9d889bd77b14",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "9e25d531d812512e5eb8385de6113519492ecf9193c8266431398a6c5e39928e",
+   "editionIds": [
+    "archon:mca1285ded6b78"
+   ],
+   "lineageGroup": "lg-9e25d531d812",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "9ec888eb0db6580b692b2fa8ed760143065a1c04b59d785e70bc593875fe171b",
+   "editionIds": [
+    "archon:mb0e2566e7cb18"
+   ],
+   "lineageGroup": "lg-9ec888eb0db6",
+   "split": "EVAL",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "a1b1e20442492c0214157baa7870a0f631f4710d96076b7fe18046601d24769d",
+   "editionIds": [
+    "archon:m49324d69ef143"
+   ],
+   "lineageGroup": "lg-a1b1e2044249",
+   "split": "EVAL",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "a6aedf2787443029b71891bbcb5e277a816e0250dec1d2bdccd3e6ee9a6f77b7",
+   "editionIds": [
+    "archon:m953292c7d56c7"
+   ],
+   "lineageGroup": "lg-a6aedf278744",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "ac22c85182b93af87d37a870cbbd8e7b6f5b010e301b40d5243791b41113a465",
+   "editionIds": [
+    "archon:m84f2903cb8e14"
+   ],
+   "lineageGroup": "lg-ac22c85182b9",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "ad91042ee8a023f363989faea131655e5c76ac33bb971a22b3ad11dc86ba9253",
+   "editionIds": [
+    "archon:m1b323a6595d29"
+   ],
+   "lineageGroup": "lg-366bc83136eb",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "b065b624dd696108d41298e63c7d5fe4a5091c05b0f7ee66f2b058f7666add02",
+   "editionIds": [
+    "archon:ma6726144fab3e"
+   ],
+   "lineageGroup": "lg-9f98815ca6b5",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "b0f57bd955f987138484984dfc4c55189c1055f827d405ecde82cb5547cc3b9b",
+   "editionIds": [
+    "archon:m1d2240bad8ffb"
+   ],
+   "lineageGroup": "lg-b0f57bd955f9",
+   "split": "EVAL",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "b15504ef6fa0dd5eaac6a960b1f464abad7b55a0a7845cc8ca6496115c2e5e60",
+   "editionIds": [
+    "archon:mdf423d61e7247"
+   ],
+   "lineageGroup": "lg-596e023123f6",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "b21fa418317ce99d21c53b59cea3394e7c4ebdf16b7796bac7fb2fe3963808dd",
+   "editionIds": [
+    "archon:md4e2138a2d1a5"
+   ],
+   "lineageGroup": "lg-b21fa418317c",
+   "split": "EVAL",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "b764eb2a6a2e176e2705d75e0494e412be62ce89299de72787418cf8396c8080",
+   "editionIds": [
+    "archon:ma3023a3277371"
+   ],
+   "lineageGroup": "lg-b764eb2a6a2e",
+   "split": "EVAL",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "b78d06f693fed4946b405765d1106a558bdfd2dd82169a693a470177a322bcb4",
+   "editionIds": [
+    "archon:m54c27ca96beaf"
+   ],
+   "lineageGroup": "lg-ac04d77dd62b",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "bc60db6187a8d76bca9898c8a3ad884978914edf5278c6548b296b137e162a15",
+   "editionIds": [
+    "archon:m60124f28f071a"
+   ],
+   "lineageGroup": "lg-8336d587897f",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "bd6bb3a3e97f9b02223cd63bbfd1b2f35e0dd045ee02c3e633949cad00181462",
+   "editionIds": [
+    "archon:mb0e2566e7cb18"
+   ],
+   "lineageGroup": "lg-bd6bb3a3e97f",
+   "split": "EVAL",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "c09081c3d7ad4e5308c8661ac209e45ee58d07e22889d7fe32955ce326646831",
+   "editionIds": [
+    "archon:m1d2240bad8ffb"
+   ],
+   "lineageGroup": "lg-52bef25273e5",
+   "split": "EVAL",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "ca6fc8080a5afad99906f0109729e4b2bc4fd0822bbf2731337d0265a083c168",
+   "editionIds": [
+    "archon:m44320b977e1a7"
+   ],
+   "lineageGroup": "lg-be54892c2801",
+   "split": "EVAL",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "cbbf700627a576c9fb45f4262df2e25e2c3b6eece92bf837079b97e059b27036",
+   "editionIds": [
+    "archon:me3c2885945467"
+   ],
+   "lineageGroup": "lg-a7dafaae1e54",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "d32a9a415739bd07cf8cf3800f46dfa0cf0dae7b044be64535429dee2b8da0b9",
+   "editionIds": [
+    "archon:m2fa281446a8ca"
+   ],
+   "lineageGroup": "lg-18fc65eabe52",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "dd19d04d563d2119b55e84875dacfc444e1122aeb2ce3189210b6898883bc427",
+   "editionIds": [
+    "archon:m82a207b1b6d72"
+   ],
+   "lineageGroup": "lg-dd19d04d563d",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "df52c4765785958f89ff31c95a0b5fb102bc89387acda019953b40289a124002",
+   "editionIds": [
+    "archon:ma7f290037d154"
+   ],
+   "lineageGroup": "lg-447ed401ecaf",
+   "split": "EVAL",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "df5daf2e4d3a44d04d887e590b21f264436df85b2fa9e8314956c1174a08fd10",
+   "editionIds": [
+    "archon:m7fa285c730ca2"
+   ],
+   "lineageGroup": "lg-0af087748ff0",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "e14b67d63c97964c38e0bbe5e2af5fc7eac0d33d154ea3a5ea8f0f30e86e050e",
+   "editionIds": [
+    "archon:m79923e950094d"
+   ],
+   "lineageGroup": "lg-e14b67d63c97",
+   "split": "EVAL",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "e612b704cada0a2a3c17a7731bd6aed5a00c944795a9fc2ea1fbb1e451737f50",
+   "editionIds": [
+    "archon:md6026d579e43f"
+   ],
+   "lineageGroup": "lg-e612b704cada",
+   "split": "EVAL",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "e65626026c18de8c467ca275125e3fe38487b82bc1a54c1370ded592732b71ae",
+   "editionIds": [
+    "archon:ma7f290037d154"
+   ],
+   "lineageGroup": "lg-e65626026c18",
+   "split": "EVAL",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "e70f9af55fd199348b7275f96abe90826bdf9182d435038a2b5f47d4fab6452e",
+   "editionIds": [
+    "archon:mdc729ab12a662"
+   ],
+   "lineageGroup": "lg-411606a363a9",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "e924d6b95bbb14fa581062a77714e5e5dcf778c3945acb61c433beab590ca712",
+   "editionIds": [
+    "archon:m43d25c0636969"
+   ],
+   "lineageGroup": "lg-0213e778bb02",
+   "split": "EVAL",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "e9fb8fac2f3e714ca5f0363ac425da08da6874478d2b41c7d5ac63a72843d434",
+   "editionIds": [
+    "archon:mdab2497c5cb47"
+   ],
+   "lineageGroup": "lg-99468a75d371",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "ee1a83cc56b5829ff7f894f9a56d4373ca95faff52048fa2a620a0b93e06477c",
+   "editionIds": [
+    "archon:m3c91f90ec5ffe"
+   ],
+   "lineageGroup": "lg-ee1a83cc56b5",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "f00affa187aa123b1c1c03e234d3921137ad5c3b59b5e4cf92943e146a979393",
+   "editionIds": [
+    "archon:m8a12761847734"
+   ],
+   "lineageGroup": "lg-97a459a54ffa",
+   "split": "EVAL",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "f5664db791d223e77a86443f45da4b1740953e9164c9df1b12facd690b999a1f",
+   "editionIds": [
+    "archon:ma772868ccf62c"
+   ],
+   "lineageGroup": "lg-a4bc4f4627d5",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "f780bde5428188ad5e22b6604d3197d684b065d6c42b611dbf3e8463aff2305b",
+   "editionIds": [
+    "archon:m168264238cc55"
+   ],
+   "lineageGroup": "lg-f780bde54281",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "f8e32cef46516bbb99c5a49d5d55780d59dcf53f3b0f6e98dd8b9d2554cf6c68",
+   "editionIds": [
+    "archon:m82a207b1b6d72"
+   ],
+   "lineageGroup": "lg-60d0808fd5a7",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "fbc6938002829ca44c8d982dcbb28fb2bfc9381bf356e68b3a21a1f29e783e76",
+   "editionIds": [
+    "archon:m1b323a6595d29"
+   ],
+   "lineageGroup": "lg-fbc693800282",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "fc4d47cc29bd353ad461d83176c802a25ff95d59f556dfce36220f67b84338d0",
+   "editionIds": [
+    "archon:m95a1f6e528ef4"
+   ],
+   "lineageGroup": "lg-fc4d47cc29bd",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "fda3484f4da05436e59244ad09b0b4ec2b31dc1ba2bb72a09e5e92f1c50c3490",
+   "editionIds": [
+    "archon:mcc7297f3e22da"
+   ],
+   "lineageGroup": "lg-fda3484f4da0",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "fdcce860aea30c17df42f6403252922edddcc792e33614e9d62078fabe3b0bc6",
+   "editionIds": [
+    "archon:ma3023a3277371"
+   ],
+   "lineageGroup": "lg-1aa619be22e7",
+   "split": "EVAL",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "ffff8b7e151fccbd08ab8ad21d97050e1e8f7528772ce9a83e43ff52d1ace2f8",
+   "editionIds": [
+    "archon:m8f729a787dd1d"
+   ],
+   "lineageGroup": "lg-ffff8b7e151f",
+   "split": "DEV",
+   "stratum": "S2"
+  },
+  {
+   "assetSha": "057c7aa3e06f2cd98c4d3e9405d6619f3a5a17b332920d892152ca7f618147a1",
+   "editionIds": [
+    "archon:m79923e950094d"
+   ],
+   "lineageGroup": "lg-057c7aa3e06f",
+   "split": "EVAL",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "0f880d2be03ed1b885195feb4d8378bcdbca7848f46383b90d2d654aea288f03",
+   "editionIds": [
+    "archon:m168264238cc55"
+   ],
+   "lineageGroup": "lg-0f880d2be03e",
+   "split": "DEV",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "15bbcff8dbc7816b500a18dc203dc243e46aed7f12f1e469972350ba2b357756",
+   "editionIds": [
+    "archon:m1d2240bad8ffb"
+   ],
+   "lineageGroup": "lg-15bbcff8dbc7",
+   "split": "EVAL",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "1a5b090c52e49e9374759cca528e040052cca3b5953d8216f4d42df278408866",
+   "editionIds": [
+    "archon:mf6628752fa61f"
+   ],
+   "lineageGroup": "lg-1a5b090c52e4",
+   "split": "DEV",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "1ca18825c0d47ab33cadee6bdf34f9de5f471e20d1106de7950e1665e2c909ee",
+   "editionIds": [
+    "archon:m504267f869cbe"
+   ],
+   "lineageGroup": "lg-1ca18825c0d4",
+   "split": "EVAL",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "2e73588d4303b0ecb61ddef053c3e917464ff1f0389ca237a27178b1c71a6c92",
+   "editionIds": [
+    "archon:mcc7297f3e22da"
+   ],
+   "lineageGroup": "lg-2e73588d4303",
+   "split": "DEV",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "2f1796ae1d0a9921571806cb400c164e3078140bcb5622c3bc94596f2d1c71dd",
+   "editionIds": [
+    "archon:m79923e950094d"
+   ],
+   "lineageGroup": "lg-2f1796ae1d0a",
+   "split": "EVAL",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "3abe7d4dc7c8b4f5ca150ee99a0d00f06498c920d776f223192b818c8f782929",
+   "editionIds": [
+    "archon:ma3023a3277371"
+   ],
+   "lineageGroup": "lg-3abe7d4dc7c8",
+   "split": "EVAL",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "3db6e024c2a75736f2ed500a2054873f187953bc4a9f7a31051b1f5ec600b26d",
+   "editionIds": [
+    "archon:m95a1f6e528ef4"
+   ],
+   "lineageGroup": "lg-3db6e024c2a7",
+   "split": "DEV",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "4b73c187880d047ddc04574899002f541b4e3a9577e207f4245ba8827c74f595",
+   "editionIds": [
+    "archon:m3622914468605"
+   ],
+   "lineageGroup": "lg-4b73c187880d",
+   "split": "EVAL",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "55f755ed38f3ed4f6284884b9cc510e34b4f4954daae98c3e929383877e7e07d",
+   "editionIds": [
+    "archon:m1cf2958b1b904",
+    "archon:m66e296fe1336a",
+    "archon:m738275b7537b0",
+    "archon:m7fa285c730ca2",
+    "archon:m82628f55aecdb",
+    "archon:m8f729a787dd1d",
+    "archon:mca1285ded6b78",
+    "archon:mdc729ab12a662"
+   ],
+   "lineageGroup": "lg-48c31f828171",
+   "split": "DEV",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "67aec0e269c8d89dd8124abb9f4b291b2b5cd045d032a530b8908c1a6f847d38",
+   "editionIds": [
+    "archon:m3622914468605"
+   ],
+   "lineageGroup": "lg-67aec0e269c8",
+   "split": "EVAL",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "6b9231209f842a74f4d0c098b46c692807aa7871b5e2e552c11723ef3a084e2c",
+   "editionIds": [
+    "archon:md4e2138a2d1a5"
+   ],
+   "lineageGroup": "lg-6b9231209f84",
+   "split": "EVAL",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "6d3db554bf5e9dc38bbf749b30aece0c6fc744c7ed9f952e64e535b6a284ad7b",
+   "editionIds": [
+    "archon:ma772868ccf62c"
+   ],
+   "lineageGroup": "lg-6d3db554bf5e",
+   "split": "DEV",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "775fb02b3351ffac51d10eb0d93149586f28aa2b2ce16cfe284e32ed783026b2",
+   "editionIds": [
+    "archon:mfc224c195bead"
+   ],
+   "lineageGroup": "lg-2ec2cf703765",
+   "split": "DEV",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "7d6ccf763eb4e17894cc4745a6ad8233cb63d2d628d6ea73ef2bd2b6603e50d3",
+   "editionIds": [
+    "archon:ma772868ccf62c"
+   ],
+   "lineageGroup": "lg-69f4f1ba124d",
+   "split": "DEV",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "8380a78990b34325f3d9f8f7e956cc101c18d9033021849a42dd07d19f57cdd1",
+   "editionIds": [
+    "archon:ma3023a3277371"
+   ],
+   "lineageGroup": "lg-8380a78990b3",
+   "split": "EVAL",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "89f2896cd7e0df13be00386b8d7707d9565a679e8f3a229091a9d1c11db79db9",
+   "editionIds": [
+    "archon:m504267f869cbe"
+   ],
+   "lineageGroup": "lg-89f2896cd7e0",
+   "split": "EVAL",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "8f53b9db8241d5d7444a1c2ea96ff76be2c923501fa53c12c414ab343db2a5c8",
+   "editionIds": [
+    "archon:mb0e2566e7cb18"
+   ],
+   "lineageGroup": "lg-8f53b9db8241",
+   "split": "EVAL",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "93a809be1d6a5b7e53cf9ed7712760334e5fc39187c406099307967aceefd968",
+   "editionIds": [
+    "archon:m43d25c0636969"
+   ],
+   "lineageGroup": "lg-93a809be1d6a",
+   "split": "EVAL",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "94bce82ef9554ad2a9114edb13674ed90352efd2e0c50e9658cf43642cc734a3",
+   "editionIds": [
+    "archon:m168264238cc55"
+   ],
+   "lineageGroup": "lg-496a002c9622",
+   "split": "DEV",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "95a8167b11a3512a6b13a5667cf3f76cf667ecc1717e9e5a974a10be64c9e143",
+   "editionIds": [
+    "archon:ma7f290037d154"
+   ],
+   "lineageGroup": "lg-2575e38ae248",
+   "split": "EVAL",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "96287818cae12b2ea18e931e7fa315075342ff195ec5d4f1329630ef8ed584c7",
+   "editionIds": [
+    "archon:m3c91f90ec5ffe"
+   ],
+   "lineageGroup": "lg-2e21f532788c",
+   "split": "DEV",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "a02974a370b4046aef2e886b98de438c899695c9356a11f51015185e929bfd1c",
+   "editionIds": [
+    "archon:mb0e2566e7cb18"
+   ],
+   "lineageGroup": "lg-a02974a370b4",
+   "split": "EVAL",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "a1b79729f428fb1cc8f076e1c115b18b0511ae052715b5aa383d36e2ff11b88a",
+   "editionIds": [
+    "archon:md4e2138a2d1a5"
+   ],
+   "lineageGroup": "lg-a1b79729f428",
+   "split": "EVAL",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "a200c68717c0de73f7dc0432a4ae68fba833d020650e22fa8de7653cd52a99aa",
+   "editionIds": [
+    "archon:m3ea28300f9b3e",
+    "archon:m5962845af9cea",
+    "archon:m738275b7537b0",
+    "archon:m7fa285c730ca2",
+    "archon:m8f729a787dd1d",
+    "archon:md03289269ca84"
+   ],
+   "lineageGroup": "lg-a200c68717c0",
+   "split": "DEV",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "aad8e9fda87127622e900b25deada55cb6c5536361ba84f06b9e9b9fda69ce11",
+   "editionIds": [
+    "archon:m43d25c0636969"
+   ],
+   "lineageGroup": "lg-aad8e9fda871",
+   "split": "EVAL",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "b37c79ffb8a0ac08eeb7e9d2527413083c8dc8bfa3c40cf552911c5380e97bb6",
+   "editionIds": [
+    "archon:mfc224c195bead"
+   ],
+   "lineageGroup": "lg-a987dcdf6d06",
+   "split": "DEV",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "c2195a38c62e3e40dcd1915060215367ee6edf4c9e904f1f6176653f1049b853",
+   "editionIds": [
+    "archon:mcc7297f3e22da"
+   ],
+   "lineageGroup": "lg-a2ddc68eddb1",
+   "split": "DEV",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "c5334abf31a146ca686e9a5007e3fe71006acd3cc3c7b024fb6a313f5c89a345",
+   "editionIds": [
+    "archon:mf6628752fa61f"
+   ],
+   "lineageGroup": "lg-c5334abf31a1",
+   "split": "DEV",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "ca828589e59a34b523ca7634c664e7143b06cf341506e8ded4965867a5dcc758",
+   "editionIds": [
+    "archon:m49324d69ef143"
+   ],
+   "lineageGroup": "lg-ca828589e59a",
+   "split": "EVAL",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "dc2cf69d468a0e0baa5a7f5580c73f1f57fb9782e7063dd010c2f4261598c6ef",
+   "editionIds": [
+    "archon:ma7f290037d154"
+   ],
+   "lineageGroup": "lg-dc2cf69d468a",
+   "split": "EVAL",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "e2ba29b3ea6c0d23f50712d493ab5eda097ad0e9d7c3d3d088f0c53f71908491",
+   "editionIds": [
+    "archon:m49324d69ef143"
+   ],
+   "lineageGroup": "lg-e2ba29b3ea6c",
+   "split": "EVAL",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "fdfa665ff3bc2b2ffca5e559215426a9083c2aa2b3a7880e01fe46a6c975e141",
+   "editionIds": [
+    "archon:m1d2240bad8ffb"
+   ],
+   "lineageGroup": "lg-f17f23c54ae4",
+   "split": "EVAL",
+   "stratum": "S3"
+  },
+  {
+   "assetSha": "02f4d8ebc89236c6bc6af2eb68fb84b9b5b74ddb6c8f8c4478e7359c1dc76b03",
+   "editionIds": [
+    "archon:ma6726144fab3e"
+   ],
+   "lineageGroup": "lg-02f4d8ebc892",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "03c8111a84eea56be4be5485431d4b16374d4ae91faaabe9f2571580af4bd55a",
+   "editionIds": [
+    "archon:m8a12761847734"
+   ],
+   "lineageGroup": "lg-03c8111a84ee",
+   "split": "EVAL",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "05c6f70ce4fef85304d46b684fd9ce6e3fdc96723b2d1c4e8070d0b38119869e",
+   "editionIds": [
+    "archon:m95a1f6e528ef4"
+   ],
+   "lineageGroup": "lg-05c6f70ce4fe",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "0de04fc1a624f65c7d67b0622ca382819955771cfd47e8ce3e4e5baca6d5e9ed",
+   "editionIds": [
+    "archon:md842941974a5c"
+   ],
+   "lineageGroup": "lg-07b38134ebd5",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "0edbb701e3423487c246b07061cd429b9443ba6b5d669d50a0e4c735635a476d",
+   "editionIds": [
+    "archon:me3c2885945467"
+   ],
+   "lineageGroup": "lg-0edbb701e342",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "1aeb08f4382a69f617c0815526accb5cd9867d9d128e323b91417c9e4f976102",
+   "editionIds": [
+    "archon:m79923e950094d"
+   ],
+   "lineageGroup": "lg-1aeb08f4382a",
+   "split": "EVAL",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "1c731257e7fe6c802031e6e02c272325f2ff61264d22cf7fbde36a26fd61c8f7",
+   "editionIds": [
+    "archon:ma6726144fab3e"
+   ],
+   "lineageGroup": "lg-1c731257e7fe",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "2b38666e00d9b7928ddf309e1a7838ddf70abb818f6bcfca949a1a682c63b09a",
+   "editionIds": [
+    "archon:m8a12761847734"
+   ],
+   "lineageGroup": "lg-2b38666e00d9",
+   "split": "EVAL",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "2b3e151bc1f158ee3bf8d26685ed7ea659908e75a9ae8ed200a88f288f94ed39",
+   "editionIds": [
+    "archon:mb0e2566e7cb18"
+   ],
+   "lineageGroup": "lg-2b3e151bc1f1",
+   "split": "EVAL",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "2d42842123fbe3a274729e6c83a8b96b6c72a0c5c2f3636adadeb0281a3d174e",
+   "editionIds": [
+    "archon:ma772868ccf62c"
+   ],
+   "lineageGroup": "lg-2d42842123fb",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "2d7e3d6347929f8450c1868524945da650e1bfdd761edee5c82e579b2a2b782b",
+   "editionIds": [
+    "archon:mdab2497c5cb47"
+   ],
+   "lineageGroup": "lg-2d7e3d634792",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "2e0db294fdc9d49adc9ca3545b2966bcc678955ba0ddf22345f7c201459586b6",
+   "editionIds": [
+    "archon:mdf423d61e7247"
+   ],
+   "lineageGroup": "lg-07df43a23321",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "3160f20adc0f821f3bd5e3ab369c7bfc0301ae49c3246d8ae1876990bbc2833b",
+   "editionIds": [
+    "archon:ma7f290037d154"
+   ],
+   "lineageGroup": "lg-0e5a96e7acd4",
+   "split": "EVAL",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "3186bfdf401da0bf3ab25705c5e8ddf23ae2f818c21ed51fcd5412786bdfecc4",
+   "editionIds": [
+    "archon:md4e2138a2d1a5"
+   ],
+   "lineageGroup": "lg-3186bfdf401d",
+   "split": "EVAL",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "3ccda0a531af544062b7c4293893e28a10e4e17728876034799c169d1901b220",
+   "editionIds": [
+    "archon:mdab2497c5cb47"
+   ],
+   "lineageGroup": "lg-3a78a3068ee9",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "3fedd9e65aaf34964cce0d864b63cebe615fd8a7eb7d2336bb80f2d9f23540ae",
+   "editionIds": [
+    "archon:m44320b977e1a7"
+   ],
+   "lineageGroup": "lg-3fedd9e65aaf",
+   "split": "EVAL",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "470d258df3f60106bec2eb32572c476d6113c1b1f3629e6e0286a6e8ec6a559d",
+   "editionIds": [
+    "archon:md6026d579e43f"
+   ],
+   "lineageGroup": "lg-470d258df3f6",
+   "split": "EVAL",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "4ac158cde4de0fd19db63e501b8a972abe5762bc4455d961b3dd2d457b270a89",
+   "editionIds": [
+    "archon:m82a207b1b6d72"
+   ],
+   "lineageGroup": "lg-4ac158cde4de",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "4afc4f11bd6482157dbbdef7f14319bb3e22c2fde8da987537c20260b2d38dde",
+   "editionIds": [
+    "archon:mb0e2566e7cb18"
+   ],
+   "lineageGroup": "lg-4afc4f11bd64",
+   "split": "EVAL",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "4c30eb59d3b8601899efe3d77f5b64c65b34eb603cbbdd0106626d17346e4c84",
+   "editionIds": [
+    "archon:m3622914468605"
+   ],
+   "lineageGroup": "lg-4c30eb59d3b8",
+   "split": "EVAL",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "5024af9dd8c67a770ade559644c08d848d99172feff9e7f4c0667afbd16cabcd",
+   "editionIds": [
+    "archon:m504267f869cbe"
+   ],
+   "lineageGroup": "lg-5024af9dd8c6",
+   "split": "EVAL",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "531f38c10eaa806634e15153d9d77a93c85250726c3a19bd80f4aa6e104ddfb6",
+   "editionIds": [
+    "archon:ma7f290037d154"
+   ],
+   "lineageGroup": "lg-531f38c10eaa",
+   "split": "EVAL",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "56b13759e43c04f8c17cdc12b0a8dcdddb82a858ddb562339a130fdd26a8ab64",
+   "editionIds": [
+    "archon:m1b323a6595d29"
+   ],
+   "lineageGroup": "lg-310a475b7269",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "56fc5eb1cf33d535a66a480106a0eaea73f4528c8fa42abed13797e09ac8f895",
+   "editionIds": [
+    "archon:m953292c7d56c7"
+   ],
+   "lineageGroup": "lg-56fc5eb1cf33",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "5871a94e9a30833c7768f563045e868b4c8a3fa3a086cc34352b9958b6feee67",
+   "editionIds": [
+    "archon:md4e2138a2d1a5"
+   ],
+   "lineageGroup": "lg-1caef51af5e7",
+   "split": "EVAL",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "5ada4858bca201dd881546444cd9701a22d51fae7c4963a2470a8ae09f39ca9c",
+   "editionIds": [
+    "archon:m4c723a6c22f61"
+   ],
+   "lineageGroup": "lg-3d7c1ee54382",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "5c5464736507f1cc295a068427f7aaf1558421c135a6f875f692094a1c8982ee",
+   "editionIds": [
+    "archon:m44320b977e1a7"
+   ],
+   "lineageGroup": "lg-459cea69a627",
+   "split": "EVAL",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "5ca40f8e763ae6c10200a2ede094864b43d9d0fe817fddd18088dcfe7cecef22",
+   "editionIds": [
+    "archon:m1d2240bad8ffb"
+   ],
+   "lineageGroup": "lg-5ca40f8e763a",
+   "split": "EVAL",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "5f747bd44fdcf7569a8bad67ffe4f8802403d2fa64b732b1be5265b14951132c",
+   "editionIds": [
+    "archon:m504267f869cbe"
+   ],
+   "lineageGroup": "lg-5f747bd44fdc",
+   "split": "EVAL",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "66f49a37ba08f041e45041898a3c5e28a054f47d9beaf89a1333843d4cf7f26c",
+   "editionIds": [
+    "archon:md4721b13efcd5"
+   ],
+   "lineageGroup": "lg-66f49a37ba08",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "69d83dee47856be2a69c582b861b81a9397649629460d050a18fe0e68bb4c635",
+   "editionIds": [
+    "archon:mcc7297f3e22da"
+   ],
+   "lineageGroup": "lg-69d83dee4785",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "6e80cf9a6b323e9d7fab695e278d902681b234446ced5297d8f14a17f942be5c",
+   "editionIds": [
+    "archon:m168264238cc55"
+   ],
+   "lineageGroup": "lg-6e80cf9a6b32",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "701b0762ad57ba7b876c06b692d31cf6725b1e2c61aa928ae8016895a033d086",
+   "editionIds": [
+    "archon:mcc7297f3e22da"
+   ],
+   "lineageGroup": "lg-701b0762ad57",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "7075aedd3eaf08d8a76a42f163727afd31c54df043815c2b21646a7c0727eb5e",
+   "editionIds": [
+    "archon:m4c723a6c22f61"
+   ],
+   "lineageGroup": "lg-1ca8dc5ce140",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "732ff026016a9054368f56c1d80a23a344554b7138d5f296de682a1db4bf0068",
+   "editionIds": [
+    "archon:md6026d579e43f"
+   ],
+   "lineageGroup": "lg-6f43d8c817ac",
+   "split": "EVAL",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "74ad8013b0b0494519f5d5504f1fabc17bcd51ebc37108f6ee87e2296f84d626",
+   "editionIds": [
+    "archon:mdc729ab12a662"
+   ],
+   "lineageGroup": "lg-0e71271fbc21",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "7d03069c7e9de3d7ebeb7a74da323d4270d4bc2cb9a177e3291198f3638e9ecd",
+   "editionIds": [
+    "archon:m43d25c0636969"
+   ],
+   "lineageGroup": "lg-7a06a73de039",
+   "split": "EVAL",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "7ddd291686d92f03ce507978b1542972456bac617076026a6f610a2a9c882a87",
+   "editionIds": [
+    "archon:md4721b13efcd5"
+   ],
+   "lineageGroup": "lg-511a85416404",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "801d8a76731c9c9fcd3eb50cb66208196f630c65328c3c8415b66e42979856c5",
+   "editionIds": [
+    "archon:mdf423d61e7247"
+   ],
+   "lineageGroup": "lg-1c8ce45ba6fa",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "829104617a35df496b9a7bc741e1be4953c6e09dc25d999b84bf3a65a3d29f6b",
+   "editionIds": [
+    "archon:m49324d69ef143"
+   ],
+   "lineageGroup": "lg-7d37046c3e2b",
+   "split": "EVAL",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "82aa51d07758b6fac103f4fc732d7a2b2bcfc11377ab7d7cfa24817c0c25ac0e",
+   "editionIds": [
+    "archon:m60124f28f071a"
+   ],
+   "lineageGroup": "lg-31987936843e",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "8489d3f6da9a805d093a8c3ab7f48e08104d4d44243c5dfe184f0f24b9d24bc6",
+   "editionIds": [
+    "archon:m60124f28f071a"
+   ],
+   "lineageGroup": "lg-8489d3f6da9a",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "84ebf5b30670882bd566c8b9bd0ab1f848f3252fa5fa28cda053ab5d5c9ce26e",
+   "editionIds": [
+    "archon:m2fa281446a8ca"
+   ],
+   "lineageGroup": "lg-84ebf5b30670",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "8daf59bb1e691e246bee4a55f2e09324dda32cc45bf6b1ad093f88ed118dd272",
+   "editionIds": [
+    "archon:ma3023a3277371"
+   ],
+   "lineageGroup": "lg-8daf59bb1e69",
+   "split": "EVAL",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "928d92a1eb0020fc91b9bd6dc7c708e84ec4d1a464c9f618cf0985fdf4ac3789",
+   "editionIds": [
+    "archon:mbad2613634abe"
+   ],
+   "lineageGroup": "lg-895d1442facc",
+   "split": "EVAL",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "93e150872f599485c653ceba5d54655d6e117780c088cb3aff4b9390625562dd",
+   "editionIds": [
+    "archon:m2fa281446a8ca"
+   ],
+   "lineageGroup": "lg-149d9116dff2",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "99741d287609d4d38b30ae367513403450e019cce38c9aeed3d9863cca59e270",
+   "editionIds": [
+    "archon:m1d2240bad8ffb"
+   ],
+   "lineageGroup": "lg-6301bc5a0be0",
+   "split": "EVAL",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "a24098d8c730f1f01b6a47ff7be921b77ee0535b60372a6956e4a5d626c1b3fd",
+   "editionIds": [
+    "archon:ma3023a3277371"
+   ],
+   "lineageGroup": "lg-26c0d860d888",
+   "split": "EVAL",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "a2582979534ec425c0d8151a7426395e3bd4fa7acf5f79362e37a1e5555067d5",
+   "editionIds": [
+    "archon:m49324d69ef143"
+   ],
+   "lineageGroup": "lg-20c02367b8cd",
+   "split": "EVAL",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "a51dc96f6ba645ec50526f38c7ad1ab0f070815c5d44287aa6e548921ff04509",
+   "editionIds": [
+    "archon:me3c2885945467"
+   ],
+   "lineageGroup": "lg-4c2b8afc99fc",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "a586f1972e6fb0b91b0265d35650cbd41a1a4769bcde386b06689d5ca99ee9b6",
+   "editionIds": [
+    "archon:ma772868ccf62c"
+   ],
+   "lineageGroup": "lg-7dbbe6c2f661",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "aaab11ec6a45a64bc938bc03036f360531e5969a3efabf8f27c0793a2c5964d2",
+   "editionIds": [
+    "archon:m82a207b1b6d72"
+   ],
+   "lineageGroup": "lg-7fdba5a3822f",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "ad6935c460b106ab8a24ab61efc89bac6d3d7edeb4e24fa57386b63f09919a91",
+   "editionIds": [
+    "archon:m1b323a6595d29"
+   ],
+   "lineageGroup": "lg-6d4f63e79cd2",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "ae3d462736aef01e69c5a154a910168bd959d82bc5e8b1e8f009579099535336",
+   "editionIds": [
+    "archon:mf6628752fa61f"
+   ],
+   "lineageGroup": "lg-9060d6e80983",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "b045a9a4d1676a76cc592b8798f07f824f53949efaaaffca4aede107e25a87f2",
+   "editionIds": [
+    "archon:m953292c7d56c7"
+   ],
+   "lineageGroup": "lg-78278d8eb101",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "ba3b6fcdb641c18ea012387d4065a00583db535aa84142427b29eb20f7749b87",
+   "editionIds": [
+    "archon:md03289269ca84"
+   ],
+   "lineageGroup": "lg-0394a9ee0b68",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "bdb16521aea7d3f7ab07793c27c1fe9bbc072362cb81220a493a8f862e04175d",
+   "editionIds": [
+    "archon:mbad2613634abe"
+   ],
+   "lineageGroup": "lg-a85d772e1a49",
+   "split": "EVAL",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "bf8a0f726b6e5af1be8d2c25a72d91454ecb8b117bdb884c24ee7c31c8c2c804",
+   "editionIds": [
+    "archon:mfc224c195bead"
+   ],
+   "lineageGroup": "lg-02e024d8f3e9",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "c3574fd965950b5f21faa1cee377fbb513f1fce20ea20169e5797c305d239ae7",
+   "editionIds": [
+    "archon:m3622914468605"
+   ],
+   "lineageGroup": "lg-bfc0fffbe2ad",
+   "split": "EVAL",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "c7e5fa6246f41bf484fa40529eb6eb23abd46bd02b536c1eb6a95541148c7609",
+   "editionIds": [
+    "archon:m3c91f90ec5ffe"
+   ],
+   "lineageGroup": "lg-77d1ba164922",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "dff9eebecd640c2c98abaa45559dcd2830837909855ad716db09172987047fc1",
+   "editionIds": [
+    "archon:mfc224c195bead"
+   ],
+   "lineageGroup": "lg-0a72a08a5806",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "e57951c1a28e22747b592e0687b358bf363b1d811c0860a1d7fcf021b271abd9",
+   "editionIds": [
+    "archon:m168264238cc55"
+   ],
+   "lineageGroup": "lg-ddb542129aac",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "e5a2d902d848e74c4770e04e87582ece6916dfb33220124896b2694b28600b23",
+   "editionIds": [
+    "archon:m3c91f90ec5ffe"
+   ],
+   "lineageGroup": "lg-0c16d3865b33",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "e93a8c111434b7f86e8f0dfaccc1fcff36476bad568dd632b0a58195baec8f33",
+   "editionIds": [
+    "archon:md842941974a5c"
+   ],
+   "lineageGroup": "lg-e93a8c111434",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "e9c93d88d65f62279072ff2827a3ae4550c4d0039ba31952203b2815f7048f3f",
+   "editionIds": [
+    "archon:mf6628752fa61f"
+   ],
+   "lineageGroup": "lg-8598a2728273",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "eb28b0bca18bd36c7441486930506c0b8065ddc04b9bb091105350286334b676",
+   "editionIds": [
+    "archon:m43d25c0636969"
+   ],
+   "lineageGroup": "lg-0d9736f99219",
+   "split": "EVAL",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "ee9e860dd70c88d8aea3c518aa876712dc4defd3acb35b36c6314e1c07af58e6",
+   "editionIds": [
+    "archon:m95a1f6e528ef4"
+   ],
+   "lineageGroup": "lg-75791a386c56",
+   "split": "DEV",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "f0a3023e58ec750977d2a5a747fb2436945b5b3b1502933b9ab241bd66204ae3",
+   "editionIds": [
+    "archon:m79923e950094d"
+   ],
+   "lineageGroup": "lg-e2a3f10a2296",
+   "split": "EVAL",
+   "stratum": "S4"
+  },
+  {
+   "assetSha": "053b2a6f23a53dc5d78241306921a743f432022fce4a4aef789e477f128a5f11",
+   "editionIds": [
+    "archon:m113295f6cdcfc",
+    "archon:m1cf2958b1b904",
+    "archon:m31d28af4f88c7",
+    "archon:m66e296fe1336a",
+    "archon:m84f2903cb8e14",
+    "archon:mb6e29738c35fa",
+    "archon:mec7296fe14c2b"
+   ],
+   "lineageGroup": "lg-053b2a6f23a5",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "053e8e4766a79714726f65d0f548a6e3ee534ab88a2cd5465dbeff12963f0639",
+   "editionIds": [
+    "archon:m84f2903cb8e14",
+    "archon:mb6e29738c35fa"
+   ],
+   "lineageGroup": "lg-053e8e4766a7",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "086ff7389bb20717bbbfaed0b7bc225c9c5e556cbbca38f243a7281b41631d28",
+   "editionIds": [
+    "archon:m113295f6cdcfc",
+    "archon:m1cf2958b1b904",
+    "archon:m31d28af4f88c7",
+    "archon:m3ea28300f9b3e",
+    "archon:m5962845af9cea",
+    "archon:m66e296fe1336a",
+    "archon:m738275b7537b0",
+    "archon:m7fa285c730ca2",
+    "archon:m82628f55aecdb",
+    "archon:m84f2903cb8e14",
+    "archon:m8f729a787dd1d",
+    "archon:mb6e29738c35fa",
+    "archon:md03289269ca84",
+    "archon:mec7296fe14c2b"
+   ],
+   "lineageGroup": "lg-086ff7389bb2",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "0a2e9f4c01e4db0f70ad178ca262a1fdf0d3fa02ec2f26d7eec8ee57df04d55e",
+   "editionIds": [
+    "archon:m3ea28300f9b3e"
+   ],
+   "lineageGroup": "lg-0a2e9f4c01e4",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "0b5a104459d5370a7d8421507b42a9559ba9107d5674e4a26a9c1be97ff7fff0",
+   "editionIds": [
+    "archon:m113295f6cdcfc",
+    "archon:m1cf2958b1b904",
+    "archon:m31d28af4f88c7",
+    "archon:m66e296fe1336a",
+    "archon:m84f2903cb8e14",
+    "archon:mb6e29738c35fa",
+    "archon:mec7296fe14c2b"
+   ],
+   "lineageGroup": "lg-0b5a104459d5",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "0be43d629e7d8b2361d629b7b65c0e7f7c9d98ee8065113cb2c40243384e8ff8",
+   "editionIds": [
+    "archon:m113295f6cdcfc",
+    "archon:m1cf2958b1b904",
+    "archon:m31d28af4f88c7",
+    "archon:m66e296fe1336a",
+    "archon:m84f2903cb8e14",
+    "archon:mb6e29738c35fa",
+    "archon:mec7296fe14c2b"
+   ],
+   "lineageGroup": "lg-0be43d629e7d",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "0c0af99f3a77050f69ba936cad5d3a44c011b7969ae8fa810c7d0138087db66a",
+   "editionIds": [
+    "archon:m3ea28300f9b3e",
+    "archon:m5962845af9cea",
+    "archon:m738275b7537b0",
+    "archon:m7fa285c730ca2",
+    "archon:m8f729a787dd1d",
+    "archon:md03289269ca84"
+   ],
+   "lineageGroup": "lg-0c0af99f3a77",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "0db489c2a40b22a803b3db5f8ebe7d7b6a3107153235412828670dbf38750a9d",
+   "editionIds": [
+    "archon:m3ea28300f9b3e"
+   ],
+   "lineageGroup": "lg-0db489c2a40b",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "0ec5494a5b155539dab48f0861e9c93c717518b9f56820fe79e893f318026f90",
+   "editionIds": [
+    "archon:m84f2903cb8e14"
+   ],
+   "lineageGroup": "lg-0ec5494a5b15",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "123a6287cb96716b9287488340e2c3dd2a966c776faa74a8d86f253cb757ef1c",
+   "editionIds": [
+    "archon:m84f2903cb8e14"
+   ],
+   "lineageGroup": "lg-123a6287cb96",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "1c4e4765a5bb64281fdfe458f4fcc233ec9bb05b3794d2965d005ffe23bfe36a",
+   "editionIds": [
+    "archon:m113295f6cdcfc",
+    "archon:m1cf2958b1b904",
+    "archon:m31d28af4f88c7",
+    "archon:m66e296fe1336a",
+    "archon:m84f2903cb8e14",
+    "archon:mb6e29738c35fa",
+    "archon:mec7296fe14c2b"
+   ],
+   "lineageGroup": "lg-1c4e4765a5bb",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "1d06a0c9b3425ded6fa7385e2f6182a2cbbc274cb2305feed605c4f0293982f6",
+   "editionIds": [
+    "archon:m84f2903cb8e14"
+   ],
+   "lineageGroup": "lg-00078e5de250",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "2789278275afc0bdf3199af748589b8bd85aa8dda839ec6c9c6ab78126ca5516",
+   "editionIds": [
+    "archon:m84f2903cb8e14"
+   ],
+   "lineageGroup": "lg-2789278275af",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "280dc8e923cb561a99f1e5d595b39db13d6073d1f49c675e443661e6eddc46b7",
+   "editionIds": [
+    "archon:m3ea28300f9b3e"
+   ],
+   "lineageGroup": "lg-280dc8e923cb",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "2a0a137d5297d66aab210dc3872fc19b90b622289a3c1df30d2745622df841c6",
+   "editionIds": [
+    "archon:m84f2903cb8e14"
+   ],
+   "lineageGroup": "lg-0a2e9f4c01e4",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "2a491bb9e88737738d4a1bca754488e34ee95564d88fe7c7cd75ddf14eb9385d",
+   "editionIds": [
+    "archon:m84f2903cb8e14"
+   ],
+   "lineageGroup": "lg-0a2e9f4c01e4",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "342f39f70da7109755958330aa9e27d9ecbd4c25ec014902cac8ea76bab27ccc",
+   "editionIds": [
+    "archon:m113295f6cdcfc",
+    "archon:m1cf2958b1b904",
+    "archon:m31d28af4f88c7",
+    "archon:m3ea28300f9b3e",
+    "archon:m5962845af9cea",
+    "archon:m66e296fe1336a",
+    "archon:m738275b7537b0",
+    "archon:m7fa285c730ca2",
+    "archon:m82628f55aecdb",
+    "archon:m84f2903cb8e14",
+    "archon:m8f729a787dd1d",
+    "archon:mb6e29738c35fa",
+    "archon:md03289269ca84",
+    "archon:mec7296fe14c2b"
+   ],
+   "lineageGroup": "lg-342f39f70da7",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "34a70dd12bf2f72b3691b3dc3d60aa291804f9ca804fbd8070fb1dfdf8b7714e",
+   "editionIds": [
+    "archon:m3ea28300f9b3e"
+   ],
+   "lineageGroup": "lg-0db489c2a40b",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "37f64057fcf2da0f6cbc4d2be6276a92b3039074876d53a8d8d25aa4a7c6beee",
+   "editionIds": [
+    "archon:m84f2903cb8e14",
+    "archon:mb6e29738c35fa"
+   ],
+   "lineageGroup": "lg-37f64057fcf2",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "3985476910563dd7ef4d161313ce4a49ff786ad04cc6c8d8855b87f5b8aa7f31",
+   "editionIds": [
+    "archon:m3ea28300f9b3e",
+    "archon:m5962845af9cea",
+    "archon:m738275b7537b0",
+    "archon:m7fa285c730ca2",
+    "archon:m8f729a787dd1d",
+    "archon:md03289269ca84"
+   ],
+   "lineageGroup": "lg-0c0af99f3a77",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "40400ddefb64699cd5816d15903e54a2b6260e2a6ab832c3914e013201b04585",
+   "editionIds": [
+    "archon:m84f2903cb8e14"
+   ],
+   "lineageGroup": "lg-40400ddefb64",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "419ba89ad21e25d990e71bb7e40e7b5d294911a3e0b0945b1f5b1a0dcd5dcc85",
+   "editionIds": [
+    "archon:m84f2903cb8e14"
+   ],
+   "lineageGroup": "lg-419ba89ad21e",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "4205a263bdf33dd0984c8ac28aade4e40d58ed8ca7b29f7c7be6779bbe03fa73",
+   "editionIds": [
+    "archon:m84f2903cb8e14",
+    "archon:mb6e29738c35fa"
+   ],
+   "lineageGroup": "lg-053e8e4766a7",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "42bf314be6b2e82cb1635f35539ca159f4c1b86273b04a33fa4d08ffe10c19de",
+   "editionIds": [
+    "archon:m3ea28300f9b3e",
+    "archon:m5962845af9cea",
+    "archon:m738275b7537b0",
+    "archon:m7fa285c730ca2",
+    "archon:m8f729a787dd1d",
+    "archon:md03289269ca84"
+   ],
+   "lineageGroup": "lg-42bf314be6b2",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "465d2b11c22ad1a0fc662ea6059703b5c25f650294603e699733cdbb0917f2f5",
+   "editionIds": [
+    "archon:m113295f6cdcfc",
+    "archon:m1cf2958b1b904",
+    "archon:m31d28af4f88c7",
+    "archon:m66e296fe1336a",
+    "archon:m82628f55aecdb",
+    "archon:m84f2903cb8e14",
+    "archon:mb6e29738c35fa",
+    "archon:mec7296fe14c2b"
+   ],
+   "lineageGroup": "lg-465d2b11c22a",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "46928b174b26ad73da233d9b540a0c04ac1037e33e4b409dece215c9b3fc79f7",
+   "editionIds": [
+    "archon:m3ea28300f9b3e"
+   ],
+   "lineageGroup": "lg-0a2e9f4c01e4",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "48a2e30c4c96822ebacee81447764b68c2b99091608f01f6b9cfd5517c985aac",
+   "editionIds": [
+    "archon:m113295f6cdcfc",
+    "archon:m1cf2958b1b904",
+    "archon:m31d28af4f88c7",
+    "archon:m3ea28300f9b3e",
+    "archon:m5962845af9cea",
+    "archon:m66e296fe1336a",
+    "archon:m738275b7537b0",
+    "archon:m7fa285c730ca2",
+    "archon:m82628f55aecdb",
+    "archon:m84f2903cb8e14",
+    "archon:m8f729a787dd1d",
+    "archon:mb6e29738c35fa",
+    "archon:md03289269ca84",
+    "archon:mec7296fe14c2b"
+   ],
+   "lineageGroup": "lg-342f39f70da7",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "4b0e765ee3ed70fb8065fd9a543c424e187a0257b44dd7aae5cf79ac4bec8eb5",
+   "editionIds": [
+    "archon:m3ea28300f9b3e"
+   ],
+   "lineageGroup": "lg-4b0e765ee3ed",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "4d8a4f1140fc189ee55838e8be22d7ea5b32e606da2371cb01cacff7d76a9775",
+   "editionIds": [
+    "archon:m3ea28300f9b3e"
+   ],
+   "lineageGroup": "lg-4d8a4f1140fc",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "51ecc3137fecbc1152271fbdb4812925afebe06b72e11fd57f6e5492192b0260",
+   "editionIds": [
+    "archon:m84f2903cb8e14",
+    "archon:mb6e29738c35fa"
+   ],
+   "lineageGroup": "lg-51ecc3137fec",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "521a4f1c5e3fd6dd77c5491144978aaeb0d0ea762cea28e5523deef59aaf4298",
+   "editionIds": [
+    "archon:m84f2903cb8e14"
+   ],
+   "lineageGroup": "lg-521a4f1c5e3f",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "536fe746cfb44b14bc0b73f42ad438f61ea4d38f1dfb3150d7b6dfb952900698",
+   "editionIds": [
+    "archon:m113295f6cdcfc",
+    "archon:m1cf2958b1b904",
+    "archon:m31d28af4f88c7",
+    "archon:m66e296fe1336a",
+    "archon:m84f2903cb8e14",
+    "archon:mb6e29738c35fa",
+    "archon:mec7296fe14c2b"
+   ],
+   "lineageGroup": "lg-536fe746cfb4",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "543e1c67a2a5162b66b20fc027ba89fc4a32786a16528b7c7678f098a02e5e48",
+   "editionIds": [
+    "archon:m3ea28300f9b3e",
+    "archon:m5962845af9cea",
+    "archon:m738275b7537b0",
+    "archon:m7fa285c730ca2",
+    "archon:m8f729a787dd1d",
+    "archon:md03289269ca84"
+   ],
+   "lineageGroup": "lg-543e1c67a2a5",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "545da6903d84820f34a5b046225e012dd12428fc5184055835cc157692e37d38",
+   "editionIds": [
+    "archon:m84f2903cb8e14"
+   ],
+   "lineageGroup": "lg-545da6903d84",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "5a9e4762529aea51b2d7d28514cec496dd7215852862717eb0017d62112ea437",
+   "editionIds": [
+    "archon:m84f2903cb8e14",
+    "archon:mb6e29738c35fa"
+   ],
+   "lineageGroup": "lg-5a9e4762529a",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "5abdd6bd46f7f1e134fc3025b809ce180a594de126052e0770ed2ab2bff43c3b",
+   "editionIds": [
+    "archon:m3ea28300f9b3e"
+   ],
+   "lineageGroup": "lg-5abdd6bd46f7",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "5bbadcdc5712d6ad14172e13816bc342d810c4d0adcda4322f025f5b5d139329",
+   "editionIds": [
+    "archon:m3ea28300f9b3e"
+   ],
+   "lineageGroup": "lg-5bbadcdc5712",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "5f1681d383d1a9606ccf22ffeb21569b553c58e9dfb1ae2f3cabca910c151b2a",
+   "editionIds": [
+    "archon:m113295f6cdcfc",
+    "archon:m1cf2958b1b904",
+    "archon:m31d28af4f88c7",
+    "archon:m66e296fe1336a",
+    "archon:m84f2903cb8e14",
+    "archon:mb6e29738c35fa",
+    "archon:mec7296fe14c2b"
+   ],
+   "lineageGroup": "lg-5f1681d383d1",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "6312dad5ceb7c65f340d2d9f3a4213a2cf288e8b8493e8160253c0eb3817df35",
+   "editionIds": [
+    "archon:m113295f6cdcfc",
+    "archon:m1cf2958b1b904",
+    "archon:m31d28af4f88c7",
+    "archon:m3ea28300f9b3e",
+    "archon:m5962845af9cea",
+    "archon:m66e296fe1336a",
+    "archon:m738275b7537b0",
+    "archon:m7fa285c730ca2",
+    "archon:m82628f55aecdb",
+    "archon:m84f2903cb8e14",
+    "archon:m8f729a787dd1d",
+    "archon:mb6e29738c35fa",
+    "archon:md03289269ca84",
+    "archon:mec7296fe14c2b"
+   ],
+   "lineageGroup": "lg-086ff7389bb2",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "649571ac681c803e606867d7b4525bd1b75aaffbaa0e7ef1cc614f039e0c250f",
+   "editionIds": [
+    "archon:m3ea28300f9b3e",
+    "archon:m5962845af9cea",
+    "archon:m738275b7537b0",
+    "archon:m7fa285c730ca2",
+    "archon:m8f729a787dd1d",
+    "archon:md03289269ca84"
+   ],
+   "lineageGroup": "lg-649571ac681c",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "667394b4259b91eaa10c8ce293e81042adc8796ce931e0a51ed1351d006d218d",
+   "editionIds": [
+    "archon:m113295f6cdcfc",
+    "archon:m1cf2958b1b904",
+    "archon:m31d28af4f88c7",
+    "archon:m66e296fe1336a",
+    "archon:m84f2903cb8e14",
+    "archon:mb6e29738c35fa",
+    "archon:mec7296fe14c2b"
+   ],
+   "lineageGroup": "lg-0b5a104459d5",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "6b142fb298e5ca0d4d546c8bcf86c887d3a6f43eed93df9327edfcc7e8a77666",
+   "editionIds": [
+    "archon:m84f2903cb8e14"
+   ],
+   "lineageGroup": "lg-00078e5de250",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "7100113adcf272b00d6bfbcd33c6a87d3917234db6f3311ea0dc8f8371883e93",
+   "editionIds": [
+    "archon:m84f2903cb8e14",
+    "archon:mb6e29738c35fa"
+   ],
+   "lineageGroup": "lg-51ecc3137fec",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "71e82b635da957d14c3449e7eb800c2c76bc21683eb908a54ea6b406c08766ae",
+   "editionIds": [
+    "archon:m3ea28300f9b3e",
+    "archon:m5962845af9cea",
+    "archon:m738275b7537b0",
+    "archon:m7fa285c730ca2",
+    "archon:m8f729a787dd1d",
+    "archon:md03289269ca84"
+   ],
+   "lineageGroup": "lg-71e82b635da9",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "736f0358fa33766647e59e19348ed072c598c8857ee09d41c10eaf4a19250dc2",
+   "editionIds": [
+    "archon:m113295f6cdcfc",
+    "archon:m1cf2958b1b904",
+    "archon:m31d28af4f88c7",
+    "archon:m3ea28300f9b3e",
+    "archon:m66e296fe1336a",
+    "archon:m738275b7537b0",
+    "archon:m7fa285c730ca2",
+    "archon:m82628f55aecdb",
+    "archon:m84f2903cb8e14",
+    "archon:m8f729a787dd1d",
+    "archon:mb6e29738c35fa",
+    "archon:mec7296fe14c2b"
+   ],
+   "lineageGroup": "lg-086ff7389bb2",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "76185b3bd638e742c5ee4648955975808a0a5ede1ea1a72d68303851d8099545",
+   "editionIds": [
+    "archon:m3ea28300f9b3e"
+   ],
+   "lineageGroup": "lg-76185b3bd638",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "7861bd540d99cc229216a300d14f6d00b9aeb4febebd291a3c3d9a9a12273306",
+   "editionIds": [
+    "archon:m113295f6cdcfc",
+    "archon:m1cf2958b1b904",
+    "archon:m31d28af4f88c7",
+    "archon:m3ea28300f9b3e",
+    "archon:m5962845af9cea",
+    "archon:m66e296fe1336a",
+    "archon:m738275b7537b0",
+    "archon:m7fa285c730ca2",
+    "archon:m82628f55aecdb",
+    "archon:m84f2903cb8e14",
+    "archon:m8f729a787dd1d",
+    "archon:mb6e29738c35fa",
+    "archon:md03289269ca84",
+    "archon:mec7296fe14c2b"
+   ],
+   "lineageGroup": "lg-086ff7389bb2",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "7cae1a34efc3f249b285707dc97de0a97f6f6c5fab67383fb93b6ae299b87a7a",
+   "editionIds": [
+    "archon:m3ea28300f9b3e"
+   ],
+   "lineageGroup": "lg-76185b3bd638",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "7f6f74941ccca0183a4afeff43fec8b1ca4c47d022bb5ea32560a5dae0ad6aa3",
+   "editionIds": [
+    "archon:m3ea28300f9b3e"
+   ],
+   "lineageGroup": "lg-280dc8e923cb",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "83ad8ee320dd8608a19319913b5130acc550d7afcee3ee535f281d5d9e7138bc",
+   "editionIds": [
+    "archon:m1cf2958b1b904",
+    "archon:m31d28af4f88c7",
+    "archon:m66e296fe1336a",
+    "archon:m84f2903cb8e14",
+    "archon:mb6e29738c35fa",
+    "archon:mec7296fe14c2b"
+   ],
+   "lineageGroup": "lg-83ad8ee320dd",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "86141f7ad22561240caf42702070316d92ad29be7b0422260f3de4bdf5ba9681",
+   "editionIds": [
+    "archon:m3ea28300f9b3e"
+   ],
+   "lineageGroup": "lg-86141f7ad225",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "8651197cd18c49d9c552a285d15f9807c8b6cb2d947240ea7cdfb899b3909241",
+   "editionIds": [
+    "archon:m3ea28300f9b3e",
+    "archon:m5962845af9cea",
+    "archon:m738275b7537b0",
+    "archon:m7fa285c730ca2",
+    "archon:m82628f55aecdb",
+    "archon:m8f729a787dd1d",
+    "archon:mca1285ded6b78",
+    "archon:md03289269ca84"
+   ],
+   "lineageGroup": "lg-8651197cd18c",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "8736044003b7a4c3b5af9703db431a46c42ab9ecec216fd6e5ecaee7316918ac",
+   "editionIds": [
+    "archon:m113295f6cdcfc",
+    "archon:m1cf2958b1b904",
+    "archon:m31d28af4f88c7",
+    "archon:m66e296fe1336a",
+    "archon:m84f2903cb8e14",
+    "archon:mb6e29738c35fa",
+    "archon:mec7296fe14c2b"
+   ],
+   "lineageGroup": "lg-5f1681d383d1",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "8dab9256a38b53e88c6bbc2447c302d7af4e424c6b24e1cf7592c2be60427d41",
+   "editionIds": [
+    "archon:m1cf2958b1b904",
+    "archon:m31d28af4f88c7",
+    "archon:m66e296fe1336a",
+    "archon:m84f2903cb8e14",
+    "archon:mb6e29738c35fa",
+    "archon:mec7296fe14c2b"
+   ],
+   "lineageGroup": "lg-83ad8ee320dd",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "8effe7bfab85e6ed150a0958421080b5484c688889f7d348973f9250ac633799",
+   "editionIds": [
+    "archon:m113295f6cdcfc",
+    "archon:m1cf2958b1b904",
+    "archon:m31d28af4f88c7",
+    "archon:m3ea28300f9b3e",
+    "archon:m5962845af9cea",
+    "archon:m66e296fe1336a",
+    "archon:m738275b7537b0",
+    "archon:m7fa285c730ca2",
+    "archon:m82628f55aecdb",
+    "archon:m84f2903cb8e14",
+    "archon:m8f729a787dd1d",
+    "archon:mb6e29738c35fa",
+    "archon:md03289269ca84",
+    "archon:mec7296fe14c2b"
+   ],
+   "lineageGroup": "lg-342f39f70da7",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "91fadc5f1238eeb21014255225485e6e4cef8a2284a5755c1caf816efc03503c",
+   "editionIds": [
+    "archon:m113295f6cdcfc",
+    "archon:m1cf2958b1b904",
+    "archon:m31d28af4f88c7",
+    "archon:m66e296fe1336a",
+    "archon:m82628f55aecdb",
+    "archon:m84f2903cb8e14",
+    "archon:mb6e29738c35fa",
+    "archon:mec7296fe14c2b"
+   ],
+   "lineageGroup": "lg-465d2b11c22a",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "9245104bbfc036830f300feef378ed10d012f4d3921c4079c3a3dd394eb6697e",
+   "editionIds": [
+    "archon:m84f2903cb8e14",
+    "archon:mb6e29738c35fa"
+   ],
+   "lineageGroup": "lg-5a9e4762529a",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "9565c98b89eb86b75c4ec4af2caa3bf85e7e6fa7550f1c0e017711ecde852d1d",
+   "editionIds": [
+    "archon:m84f2903cb8e14"
+   ],
+   "lineageGroup": "lg-9565c98b89eb",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "9917c0c1d7188d3a6fdb9a0420ffc303b0d7127eacf404dae34cf2d88b1954c9",
+   "editionIds": [
+    "archon:m3ea28300f9b3e"
+   ],
+   "lineageGroup": "lg-5abdd6bd46f7",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "9fdd3e4385d9967c794b7bfaa218f5a84b138bf8d22c38a786fcd492d2926e6a",
+   "editionIds": [
+    "archon:m3ea28300f9b3e",
+    "archon:m5962845af9cea",
+    "archon:m738275b7537b0",
+    "archon:m7fa285c730ca2",
+    "archon:m8f729a787dd1d",
+    "archon:md03289269ca84"
+   ],
+   "lineageGroup": "lg-9fdd3e4385d9",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "a027682bddae61b1cc2facfa4f256e09e6adeacccf3bce5cbc59bbe4545c1b91",
+   "editionIds": [
+    "archon:m84f2903cb8e14"
+   ],
+   "lineageGroup": "lg-123a6287cb96",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "a194c2e1d1914ae92dc90691513870f44a218d6c5317b9ea4e9929c872b359a2",
+   "editionIds": [
+    "archon:m84f2903cb8e14"
+   ],
+   "lineageGroup": "lg-9565c98b89eb",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "a200c68717c0de73f7dc0432a4ae68fba833d020650e22fa8de7653cd52a99aa",
+   "editionIds": [
+    "archon:m3ea28300f9b3e",
+    "archon:m5962845af9cea",
+    "archon:m738275b7537b0",
+    "archon:m7fa285c730ca2",
+    "archon:m8f729a787dd1d",
+    "archon:md03289269ca84"
+   ],
+   "lineageGroup": "lg-a200c68717c0",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "a98ec3101c2e9b8416e2bd9415027b1fa0e26a28e4182659eb9dbb9e7404e27c",
+   "editionIds": [
+    "archon:m3ea28300f9b3e"
+   ],
+   "lineageGroup": "lg-0ec5494a5b15",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "a9b0fa0340ada9fa112471c7314ca3be51d347cda33d3d49687a4c77b51198f6",
+   "editionIds": [
+    "archon:m84f2903cb8e14"
+   ],
+   "lineageGroup": "lg-0ca38707d0c7",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "ac22c85182b93af87d37a870cbbd8e7b6f5b010e301b40d5243791b41113a465",
+   "editionIds": [
+    "archon:m84f2903cb8e14"
+   ],
+   "lineageGroup": "lg-ac22c85182b9",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "b800c740cfdac07ba268c0adae61327d1be9fa9d7889d4df33a391842f0ac9ef",
+   "editionIds": [
+    "archon:m3ea28300f9b3e"
+   ],
+   "lineageGroup": "lg-5bbadcdc5712",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "bd27d7b823f4aee3da0fd6b7c612368a174d5216aa3b51991d2aa18316db9c1a",
+   "editionIds": [
+    "archon:m113295f6cdcfc",
+    "archon:m1cf2958b1b904",
+    "archon:m31d28af4f88c7",
+    "archon:m66e296fe1336a",
+    "archon:m82628f55aecdb",
+    "archon:m84f2903cb8e14",
+    "archon:mb6e29738c35fa",
+    "archon:mec7296fe14c2b"
+   ],
+   "lineageGroup": "lg-bd27d7b823f4",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "c16def7c32158e02cd18affe5b90bde77abb30da87ea8c4d9623ff8db3fb687d",
+   "editionIds": [
+    "archon:m113295f6cdcfc",
+    "archon:m1cf2958b1b904",
+    "archon:m31d28af4f88c7",
+    "archon:m3ea28300f9b3e",
+    "archon:m5962845af9cea",
+    "archon:m66e296fe1336a",
+    "archon:m738275b7537b0",
+    "archon:m7fa285c730ca2",
+    "archon:m82628f55aecdb",
+    "archon:m84f2903cb8e14",
+    "archon:m8f729a787dd1d",
+    "archon:mb6e29738c35fa",
+    "archon:md03289269ca84",
+    "archon:mec7296fe14c2b"
+   ],
+   "lineageGroup": "lg-c16def7c3215",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "c4df8395c3ff954a2068d15ee9869d48895da54047f9468f7339145d65240888",
+   "editionIds": [
+    "archon:m113295f6cdcfc",
+    "archon:m1cf2958b1b904",
+    "archon:m31d28af4f88c7",
+    "archon:m66e296fe1336a",
+    "archon:m82628f55aecdb",
+    "archon:m84f2903cb8e14",
+    "archon:mb6e29738c35fa",
+    "archon:mec7296fe14c2b"
+   ],
+   "lineageGroup": "lg-bd27d7b823f4",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "c8cc37c4599b0d6d1f2fd8173b1e20f3db5e1ce7847d27b0e3ab7c396d11c828",
+   "editionIds": [
+    "archon:m84f2903cb8e14"
+   ],
+   "lineageGroup": "lg-319fb918d576",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "cb4e39b8f51e413440e58e2caf4a9384ec1ddadb6122f2ccb94d720713a07d33",
+   "editionIds": [
+    "archon:m3ea28300f9b3e",
+    "archon:m5962845af9cea",
+    "archon:m738275b7537b0",
+    "archon:m7fa285c730ca2",
+    "archon:m8f729a787dd1d",
+    "archon:md03289269ca84"
+   ],
+   "lineageGroup": "lg-71e82b635da9",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "d56592ce3c25f19d8f3573f4904bf5492f3121dbc937598c66e892fd1206f302",
+   "editionIds": [
+    "archon:m3ea28300f9b3e",
+    "archon:m5962845af9cea",
+    "archon:m738275b7537b0",
+    "archon:m7fa285c730ca2",
+    "archon:m82628f55aecdb",
+    "archon:m8f729a787dd1d",
+    "archon:mca1285ded6b78",
+    "archon:md03289269ca84"
+   ],
+   "lineageGroup": "lg-d56592ce3c25",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "d95c8ff9ed79d6e083fb6dc77103e0c247f3c1eafb0c540cb4a1aaa6218d3021",
+   "editionIds": [
+    "archon:m113295f6cdcfc",
+    "archon:m1cf2958b1b904",
+    "archon:m31d28af4f88c7",
+    "archon:m3ea28300f9b3e",
+    "archon:m5962845af9cea",
+    "archon:m66e296fe1336a",
+    "archon:m738275b7537b0",
+    "archon:m7fa285c730ca2",
+    "archon:m82628f55aecdb",
+    "archon:m84f2903cb8e14",
+    "archon:m8f729a787dd1d",
+    "archon:mb6e29738c35fa",
+    "archon:md03289269ca84",
+    "archon:mec7296fe14c2b"
+   ],
+   "lineageGroup": "lg-342f39f70da7",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "e32c7794f64371064b7c07342780d03fe7d6c8dc9af0aa14e74f19e7e8412f5e",
+   "editionIds": [
+    "archon:m3ea28300f9b3e"
+   ],
+   "lineageGroup": "lg-e32c7794f643",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "e38109d96fcce5c508e0b612e132a8114dcbdcec8bb563d8f2b665556a35cebf",
+   "editionIds": [
+    "archon:m113295f6cdcfc",
+    "archon:m1cf2958b1b904",
+    "archon:m31d28af4f88c7",
+    "archon:m3ea28300f9b3e",
+    "archon:m5962845af9cea",
+    "archon:m66e296fe1336a",
+    "archon:m738275b7537b0",
+    "archon:m7fa285c730ca2",
+    "archon:m82628f55aecdb",
+    "archon:m84f2903cb8e14",
+    "archon:m8f729a787dd1d",
+    "archon:mb6e29738c35fa",
+    "archon:md03289269ca84",
+    "archon:mec7296fe14c2b"
+   ],
+   "lineageGroup": "lg-c16def7c3215",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "e66c670c5e5ca4ae381aed67f1f37401e333cbf5e733056f6564993caec7998f",
+   "editionIds": [
+    "archon:m84f2903cb8e14"
+   ],
+   "lineageGroup": "lg-58c89594c49d",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "e73e256f2d9cab51ca87c8761d9c16aa878b05c3198809c736dee41d7258d80f",
+   "editionIds": [
+    "archon:m3ea28300f9b3e",
+    "archon:m5962845af9cea",
+    "archon:m738275b7537b0",
+    "archon:m7fa285c730ca2",
+    "archon:m8f729a787dd1d",
+    "archon:md03289269ca84"
+   ],
+   "lineageGroup": "lg-9fdd3e4385d9",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "e773910c48bdb916773d8bb00b282b3b0bf33a3974b5b83b1611dc7f8d7cc6a6",
+   "editionIds": [
+    "archon:m113295f6cdcfc",
+    "archon:m1cf2958b1b904",
+    "archon:m31d28af4f88c7",
+    "archon:m66e296fe1336a",
+    "archon:m84f2903cb8e14",
+    "archon:mb6e29738c35fa",
+    "archon:mec7296fe14c2b"
+   ],
+   "lineageGroup": "lg-e773910c48bd",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "e91116217e8c0852bc28f1d36c482e1014452d7afe295342e34e2afd25188d7f",
+   "editionIds": [
+    "archon:m113295f6cdcfc",
+    "archon:m1cf2958b1b904",
+    "archon:m31d28af4f88c7",
+    "archon:m66e296fe1336a",
+    "archon:m84f2903cb8e14",
+    "archon:mb6e29738c35fa",
+    "archon:mec7296fe14c2b"
+   ],
+   "lineageGroup": "lg-1c4e4765a5bb",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "edd1fe3d8f2b2bbfb0f16cd0cf6f5f04efe86e3ff549716530e7fca7584c9321",
+   "editionIds": [
+    "archon:m113295f6cdcfc",
+    "archon:m1cf2958b1b904",
+    "archon:m31d28af4f88c7",
+    "archon:m66e296fe1336a",
+    "archon:m84f2903cb8e14",
+    "archon:mb6e29738c35fa",
+    "archon:mec7296fe14c2b"
+   ],
+   "lineageGroup": "lg-e773910c48bd",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "f06218bb2b5c5c75f2b34f561ccbec775d022325131c0f0458a9a3e13e2e9e69",
+   "editionIds": [
+    "archon:m84f2903cb8e14"
+   ],
+   "lineageGroup": "lg-419ba89ad21e",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "f0a0e825e289115f4761d8d5b1c0eb2273e5bc3e8b4572d394a1ea6ff637f848",
+   "editionIds": [
+    "archon:m3ea28300f9b3e",
+    "archon:m5962845af9cea",
+    "archon:m738275b7537b0",
+    "archon:m7fa285c730ca2",
+    "archon:m82628f55aecdb",
+    "archon:m8f729a787dd1d",
+    "archon:mca1285ded6b78",
+    "archon:md03289269ca84"
+   ],
+   "lineageGroup": "lg-8651197cd18c",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "f5b982c22d13af294c6f88c6de5d526201362149d39ab0f85c451bd87c27b112",
+   "editionIds": [
+    "archon:m3ea28300f9b3e"
+   ],
+   "lineageGroup": "lg-e32c7794f643",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "f862f05c6d3ca843b219c1661258d472a07eee5781b223b69a01f35004779c1c",
+   "editionIds": [
+    "archon:m84f2903cb8e14"
+   ],
+   "lineageGroup": "lg-0ca38707d0c7",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "f89ca02efa52e07e466f6f60d78fa8809e66c4fe24197018784e4462009b98fe",
+   "editionIds": [
+    "archon:m3ea28300f9b3e",
+    "archon:m5962845af9cea",
+    "archon:m738275b7537b0",
+    "archon:m7fa285c730ca2",
+    "archon:m8f729a787dd1d"
+   ],
+   "lineageGroup": "lg-543e1c67a2a5",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "fae59278b13a8ea766359c7c29ce0fc588bec566e79b46d5666784bc8c643258",
+   "editionIds": [
+    "archon:m84f2903cb8e14",
+    "archon:mb6e29738c35fa"
+   ],
+   "lineageGroup": "lg-37f64057fcf2",
+   "split": "DEV",
+   "stratum": "S5"
+  },
+  {
+   "assetSha": "fcc35fa131b35d520b29f7d6b5908af20282c15849d5297d641949c4398ea744",
+   "editionIds": [
+    "archon:m3ea28300f9b3e",
+    "archon:m5962845af9cea",
+    "archon:m738275b7537b0",
+    "archon:m7fa285c730ca2",
+    "archon:m82628f55aecdb",
+    "archon:m8f729a787dd1d",
+    "archon:mca1285ded6b78",
+    "archon:md03289269ca84"
+   ],
+   "lineageGroup": "lg-d56592ce3c25",
+   "split": "DEV",
+   "stratum": "S5"
+  }
+ ],
+ "schema": "research.005r-router.spot-review-manifest.0.1",
+ "seed": "BUILDPLAN-005R-ROUTER-SPOT-REVIEW",
+ "status": "NOT_RUN_HUMAN_TRUTH"
+}

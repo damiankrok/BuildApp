@@ -1,0 +1,29 @@
+--- a/packages/source-analyzer/src/analyze.ts
++++ b/packages/source-analyzer/src/analyze.ts
+@@ -161,7 +161,16 @@
+     const before = builder.observationCount
+     const analysis: AssetAnalysis = { asset, frame, prepared, observations: [], visionAttempted: false, visionAccepted: 0 }
+ 
+-    if (document === 'ELEVATION' || document === 'PERSPECTIVE_RENDER') {
++    // The facade extractors read an ORTHOGRAPHIC facade: an outline, a ridge, rectangles in the wall plane. Every
++    // reader of what they write (the metric layer, cross-view identity, elevation registration) reads orthographic
++    // frames only, so on a perspective picture, an interior or an exterior one alike, they could only write claims
++    // about the facade that nothing can measure. Such a frame is still declared, because a perspective camera is
++    // solved from its raster, and it is refused by name instead of being read as a facade.
++    const perspectiveRefused = document === 'PERSPECTIVE_RENDER' && asset.roles.projection !== 'ORTHOGRAPHIC_ELEVATION'
++    if (perspectiveRefused) {
++      builder.unresolved(`facade observations on the perspective render ${asset.id}`, `the facade extractors read orthographic views only and this picture's projection is ${asset.roles.projection}, so nothing on it was read as a facade`, 'NOT_ATTEMPTED', asset.id)
++      skipped.push({ assetId: asset.id, reason: `facade extractors not run: projection ${asset.roles.projection} is not orthographic` })
++    } else if (document === 'ELEVATION' || document === 'PERSPECTIVE_RENDER') {
+       const handles = Object.fromEntries(ELEVATION_EXTRACTORS.map((e) => [e.key, declare(e.name, e.version, 'DETERMINISTIC_CV')])) as ElevationHandles
+       analysis.elevation = extractElevation(builder, frame, prepared, handles)
+     } else if (document === 'FLOOR_PLAN') {
+@@ -221,7 +230,7 @@
+     checkpoint.tick()
+     if (options.retainPrepared === false) delete analysis.prepared
+     analysis.observations = builder.snapshot().filter((o) => o.frameId === frame.id)
+-    if (builder.observationCount === before && !analysis.visionAttempted) {
++    if (builder.observationCount === before && !analysis.visionAttempted && !perspectiveRefused) {
+       builder.unresolved(`any observation at all on asset ${asset.id}`, 'the extractors for this document role found nothing in the image', 'MISSING', asset.id)
+     }
+     assets.push(analysis)

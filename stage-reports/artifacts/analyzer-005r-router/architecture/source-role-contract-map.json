@@ -1,0 +1,28 @@
+{
+ "schema": "research.005r-router.source-role-contract-map.0.1",
+ "base": "8d414567e16e9a790bcf56cbebc10d778c6eb268",
+ "axes": {
+  "a_drawingKind_projection": {"production": "SourceRoles.document + SourceRoles.projection (schema.ts:45,67)", "derivation": "words -> document -> projectionForDocument (roles.ts:69-83); no adapter claims projection", "note": "an orthographic facade may be photo-real; projection, not shading, is the geometric axis"},
+  "b_sceneScope": {"production": "ABSENT (no INTERIOR/EXTERIOR anywhere in packages/source-package/src)", "values_needed": ["INTERIOR", "EXTERIOR", "UNKNOWN", "CONTESTED"], "decision": "NOT added to production in this stage (enum migration out of scope, brief §6); research-only in R1"},
+  "c_channelAndStrength": {"production": "RoleEvidence {dimension, signal, detail, confidence} (schema.ts:82-92); signals url-slug, caption, channel, endpoint, context", "notRead": ["data-fancybox-position", "data-fancybox group id"], "independenceClasses": {
+    "PUBLISHER_GALLERY": ["carousel position", "data-caption", "title/alt", "asset storage path segment (/w1/, /k3/, /l3/)", "slug words of the same upload"],
+    "PUBLISHER_PAGE_STRUCTURE": ["elevation tab", "floor fragment index", "hotspot endpoint"],
+    "PIXELS": ["none admissible in this stage: 005R V1 format shortcut (A1), V2 constant output"],
+    "HUMAN": ["NOT_RUN"]
+   }, "rule": "two claims are independent only if they come from different classes; carousel + caption of one gallery is ONE witness (brief §2, §5 R2)"},
+  "d_editionLineage": {"production": "package id carries the project code; no edition field; asset ids per package", "research": "005R byte-hash ledger + dHash lineage groups (identity/edition-identity.json)", "rule": "near-duplicates across editions count once (CORRELATION); never vote across editions"},
+  "e_eligibility": {"production": "none (the adapter fetches any public page it supports)", "research": "005R corpus/source-eligibility.json: ARCHON USABLE_FOR_LOCAL_RESEARCH; DobreDomy/Archipelag/Domy w Stylu SOURCE_NOT_USABLE; earlier DobreDomy use OWNER_DECISION_PENDING"}
+ },
+ "producerConsumerContract": {
+  "facadeObservationProducer": "source-analyzer analyze.ts:164 routes by document (ELEVATION | PERSPECTIVE_RENDER)",
+  "facadeObservationConsumers": {
+   "source-metrics extract.ts:88-89": "ORTHOGRAPHIC_* only",
+   "source-analyzer identity.ts:70": "ORTHOGRAPHIC* only",
+   "reconstruction solve.ts:312": "ORTHOGRAPHIC_ELEVATION only",
+   "reconstruct-v2.ts:1166-1179": "PERSPECTIVE: raster only for the camera; observations only into the ledger",
+   "reconstruct-v2.ts:1148-1152,1410-1425": "ledger dispositions"
+  },
+  "mismatch": "the producer is the only component that routes facade reading by document instead of by projection (FB-2)"
+ },
+ "firstBad": {"FB-0": "information loss: archon.ts:355-372 never reads data-fancybox-position", "FB-1": "archon.ts:98 PERSPECTIVE_RENDER without scene: incomplete, not wrong", "FB-2": "analyze.ts:164-166 first unsafe evidence assertion: orthographic facade observations written on perspective frames", "FB-3": "reconstruct-v2.ts:1177 ledger claims a depth-order check no code performs"}
+}
