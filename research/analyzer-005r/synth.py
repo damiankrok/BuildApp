@@ -34,8 +34,10 @@ Truth semantics.
   * `visibility` is FULL, or PARTIAL with `partialReasons` CLIPPED (some projected part lies outside the image or
     behind the near plane) and/or OCCLUDED (visible pixels < 98% of the pixels the feature's own primitives cover in
     the image; self-occlusion inside one feature does not count). `visibleFraction` = visible / covered-in-image.
-  * A feature or look-alike with zero visible pixels is not listed in `features`/`lookalikes`; it is listed in
-    `hiddenFeatures` (present in the house, not visible in this view).
+  * A feature or look-alike present in the house is listed in `hiddenFeatures` instead of `features`/`lookalikes`,
+    with a `reason`: NOT_VISIBLE (zero visible pixels), EDGE_ON (a facade-mounted window/door/garage door whose host
+    facade turns from the camera by more than ~78 deg: only a sliver of its frame can show), BELOW_MIN_SIZE (fewer
+    than 12 visible pixels, or a visible extent under 3 px).
   * Features share their parent's `assemblyId`: the posts of a covered terrace, carport, pergola or entrance canopy
     are COLUMN_POST features (one per post, `part` = post index) and a balcony's or loggia's balusters are its RAILING;
     the garage door shares the closed garage's id. Pergola posts are COLUMN_POSTs too.
@@ -48,7 +50,9 @@ Truth semantics.
     fixtures, not detector truth.
   * Lineage: mirror flips boxes about the vertical centre line; downscale maps [x0,y0,x1,y1) to
     [floor(x0/2), floor(y0/2), ceil(x1/2), ceil(y1/2)); a crop recomputes truth from the parent's id buffer inside
-    the crop window and lists the parent features it removed in `excludedByCrop`.
+    the crop window (visibleFraction stays relative to the parent render) and lists the parent features it removed
+    in `excludedByCrop` (and the kinds left with no observation at all in `excludedKindsByCrop`). A downscale moves
+    features whose halved box falls below the minimum size to `hiddenFeatures` (BELOW_MIN_SIZE).
 Limitations: no shadows, textures or anti-aliasing; balusters thinner than ~1 px can drop out at small scale; plans,
 sections and site plans are schematic and not consistent with a structural design; label "text" is dashes.
 """
@@ -129,7 +133,7 @@ def place(rng, segs, gap=0.7):
 def draw_params(seed, i):
     rng = np.random.default_rng([seed, i])
     u = lambda a, b: round(float(rng.uniform(a, b)), 2)
-    ch = dict(storeys=int(rng.integers(1, 3)), roof=str(rng.choice(['GABLE', 'HIP', 'FLAT'])),
+    ch = dict(storeys=int(rng.integers(1, 3)), roof=('GABLE', 'HIP', 'FLAT')[i % 3],
               steps=bool(rng.random() < 0.6), canopy=bool(rng.random() < 0.5), canopyPosts=bool(rng.random() < 0.5),
               side=str(rng.choice(['NONE', 'CARPORT', 'GARAGE'], p=[0.3, 0.35, 0.35])),
               darkWindow=bool(rng.random() < 0.6), parking=bool(rng.random() < 0.4),
@@ -149,7 +153,7 @@ def draw_params(seed, i):
                    'SOLID_PARAPET': dict(roof='FLAT'), 'PARKING_BAY': dict(parking=True),
                    'DARK_WINDOW_NEAR_GARAGE': dict(side='GARAGE', darkWindow=True)}.get(f, {}))
         if f == 'EAVES_OVERHANG':
-            ch.update(storeys=1, canopy=False, roof='GABLE' if ch['roof'] == 'FLAT' else ch['roof'])
+            ch.update(storeys=1, canopy=False, roof='HIP' if ch['roof'] == 'FLAT' else ch['roof'])
     if ch['side'] != 'GARAGE':
         ch['darkWindow'] = False
     if ch['storeys'] == 1:
@@ -680,7 +684,7 @@ def fill_hatched(im, hatch, poly):
 
 
 def floor_plan(p):
-    W, D, s_ = p['W'], p['D'], None
+    W, D = p['W'], p['D']
     dep = max([r['dep'] for r in p['rear']] or [0])
     xmin = -3.5 if p['parking'] else -0.6; xmax = W + GARAGE_W + 0.4 if p['side'] != 'NONE' else W + 0.6
     zmin, zmax = -D - dep - 0.4, max(p['nsteps'] * 0.3, 1.3 if p['canopy'] else 0, 1.0 if p['parking'] else 0) + 0.4
@@ -1018,7 +1022,8 @@ def emit_house(C, p, full):
     C.emit(res['rgb'][c[1]:c[3], c[0]:c[2]], sid_of(p, 'render-front-crop'), p, 'EXTERIOR_RENDER', 'PERSPECTIVE',
            parent['viewSideTruth'], parent['coverage'], f, l, h, absent,
            lineage=dict(parentId=parent['syntheticId'], op='crop', window=list(c)),
-           extra=dict(excludedByCrop=[dict(kind=k, assemblyId=a, part=pt) for k, a, pt in lost]))
+           extra=dict(excludedByCrop=[dict(kind=k, assemblyId=a, part=pt) for k, a, pt in lost],
+                      excludedKindsByCrop=sorted({k for k, _, _ in lost} - {r['kind'] for r in f})))
     res, parent = rend['rear']
     img = Image.fromarray(np.clip(np.rint(res['rgb']), 0, 255).astype(np.uint8), 'RGB')
     small = np.array(img.resize((img.width // 2, img.height // 2), Image.BOX))
