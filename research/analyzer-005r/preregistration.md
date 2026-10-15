@@ -203,4 +203,18 @@ report says so.
 | synthetic `truth.json` | `e2bcec5e387eceddd91e4d09dd904953733c458116607284740fd2881babbd12` |
 
 ## Addenda
-(none yet — every later change is appended here with a timestamp and its reason)
+
+### Addendum A — 2026-10-15T02:10Z (after the V0a/V0b/V1/N1 EVAL role scores and V1's fitted rules were seen; before any V2 output was read)
+
+Two **post-hoc diagnostics**. They change no contender, no threshold, no truth and no decision rule of §8; they are
+reported as diagnostics and never as headline numbers.
+
+- **A1 — aspect-ratio shortcut control.** V1's fitted rules split mainly on `aspect` (publisher image formats: ARCHON
+  elevations ≈ 2.5:1, interiors square or portrait). The synthetic set cannot expose this, because its sizes were
+  specified to resemble ARCHON's before the rules existed. Metamorphic test: every scored, truth-bearing asset is
+  letterboxed to a square canvas (padding white; and separately mid-grey 128) and V1 (features → the same fitted rules)
+  and V2 (routing only) are re-run. Reported: share of resolved outputs that change, by truth class and split.
+- **A2 — lineage-propagated truth (sensitivity).** The preregistered truth leaves page images reached only through the
+  page body (e.g. the `widok-N` header copies) UNKNOWN, while their full-size near-duplicates carry STRUCTURE truth. A2
+  gives an UNKNOWN-truth asset the truth of its lineage group when that group has exactly one structural truth role,
+  and re-scores every contender per asset. The primary scores stay the preregistered ones.
