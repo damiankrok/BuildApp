@@ -11,7 +11,7 @@
  */
 import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
-import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { mkdirSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 
 const REPO = resolve(import.meta.dirname, '../..')
@@ -32,6 +32,9 @@ const rev = arg('rev', BASE)
 rmSync(work, { recursive: true, force: true })
 mkdirSync(work, { recursive: true })
 execFileSync('sh', ['-c', `git archive ${rev} packages/source-analyzer packages/source-vision | tar -x -C '${work}'`], { cwd: REPO })
+// third-party imports of the copy (zod in source-vision) resolve from the workspace's node_modules; every @buildapp
+// import is aliased below and wins over this link (the realpath is the workspace's, so one module instance)
+symlinkSync(join(REPO, 'node_modules'), join(work, 'node_modules'))
 const patches = all('patch').map((p) => resolve(p))
 for (const p of patches) execFileSync('patch', ['-p1', '--forward', '--batch', '-i', p], { cwd: work })
 writeFileSync(

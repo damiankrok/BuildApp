@@ -177,4 +177,10 @@ flags of earlier protocols are kept as historical risk classifications.
 
 ## ADDENDA
 
-(none yet)
+**A (2026-10-15T22:21Z, after Tier A, before any N1v replay; harness only, no predicate touched).** `variant.mjs`
+links the workspace `node_modules` into the variant copy: the copied `source-vision/src/schema.ts` imports `zod`, which
+cannot resolve from outside the repository. Every `@buildapp/*` import stays aliased (the alias wins; realpath is the
+workspace's, so one module instance). Probe: through the variant config `tasksForRoles` exists and returns `[]` for a
+perspective render (it does not exist at the base). New `variant.mjs` hash recorded in the commit carrying this
+addendum. Tier A results at that moment: Node 22 focused 91/91, Node 18.20.4 focused 91/91, mutations 8/8 killed by
+behavioural assertions (`stage-reports/artifacts/analyzer-005r-router-n1/tier-a/`).

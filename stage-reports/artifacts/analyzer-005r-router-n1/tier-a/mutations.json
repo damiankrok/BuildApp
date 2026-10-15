@@ -1,0 +1,112 @@
+{
+ "schema": "research.005r-router-n1.mutations.1",
+ "killed": 8,
+ "total": 8,
+ "tests": [
+  "packages/source-analyzer/test/projection-gate.test.ts",
+  "packages/source-analyzer/test/mutations-02.test.ts",
+  "packages/source-analyzer/test/vision-path.test.ts",
+  "packages/source-vision/test/vision.test.ts"
+ ],
+ "results": [
+  {
+   "id": "M1-no-gate",
+   "what": "projection bypass: perspective frames read as facades again",
+   "outcome": "KILLED",
+   "failed": 4,
+   "behavioural": true,
+   "failedTests": [
+    "the facade extractors read orthographic frames only > a perspective picture, interior or exterior, is declared, carries no facade observation and one named refusal",
+    "the facade extractors read orthographic frames only > with the product reasoner configured, the refusal stands alone: no facade vision pass is asked for, so none is reported missing",
+    "the facade vision task is routed by the same rule (mock live provider, no network) > a perspective picture, interior or exterior, is never offered to a facade provider, and no vision answer lands on it",
+    "2. the front perspective is dropped from the package > loses the frame and the named refusal it carried, and says the asset is gone rather than silently shrinking"
+   ]
+  },
+  {
+   "id": "M2-document-only",
+   "what": "orthographic evidence deleted: a render an adapter declares orthographic is refused",
+   "outcome": "KILLED",
+   "failed": 1,
+   "behavioural": true,
+   "failedTests": [
+    "the facade extractors read orthographic frames only > a render an adapter declares orthographic is read as a facade"
+   ]
+  },
+  {
+   "id": "M3-gate-elevations",
+   "what": "lost technical facade: elevations gated by projection too",
+   "outcome": "KILLED",
+   "failed": 2,
+   "behavioural": true,
+   "failedTests": [
+    "the task contract handed to a provider > asks for a facade decomposition only on a picture that can be read as an orthographic facade",
+    "the facade extractors read orthographic frames only > an elevation is never refused, whatever projection it was sealed with"
+   ]
+  },
+  {
+   "id": "M4-false-missing",
+   "what": "refused frame also reported as read-and-found-nothing",
+   "outcome": "KILLED",
+   "failed": 2,
+   "behavioural": true,
+   "failedTests": [
+    "the facade extractors read orthographic frames only > a perspective picture, interior or exterior, is declared, carries no facade observation and one named refusal",
+    "the facade extractors read orthographic frames only > with the product reasoner configured, the refusal stands alone: no facade vision pass is asked for, so none is reported missing"
+   ]
+  },
+  {
+   "id": "M5-silent-skip",
+   "what": "fail-closed without a typed refusal",
+   "outcome": "KILLED",
+   "failed": 4,
+   "behavioural": true,
+   "failedTests": [
+    "the facade extractors read orthographic frames only > a perspective picture, interior or exterior, is declared, carries no facade observation and one named refusal",
+    "the facade extractors read orthographic frames only > with the product reasoner configured, the refusal stands alone: no facade vision pass is asked for, so none is reported missing",
+    "the facade vision task is routed by the same rule (mock live provider, no network) > a perspective picture, interior or exterior, is never offered to a facade provider, and no vision answer lands on it",
+    "2. the front perspective is dropped from the package > loses the frame and the named refusal it carried, and says the asset is gone rather than silently shrinking"
+   ]
+  },
+  {
+   "id": "M6-gate-everything",
+   "what": "over-broad drop: all facade reading stopped",
+   "outcome": "KILLED",
+   "failed": 10,
+   "behavioural": true,
+   "failedTests": [
+    "a recorded answer joins the graph beside the deterministic reading > lands as observations on the frame the analyzer chose, carrying the provider version",
+    "a recorded answer joins the graph beside the deterministic reading > finds the SAME member with the CV extractor, and keeps the two readings apart",
+    "the facade extractors read orthographic frames only > the same pixels give facade observations as an elevation (control)",
+    "the facade extractors read orthographic frames only > an elevation's observations do not depend on the perspective pictures published beside it",
+    "the facade extractors read orthographic frames only > a render an adapter declares orthographic is read as a facade",
+    "the facade extractors read orthographic frames only > an elevation is never refused, whatever projection it was sealed with",
+    "3. one major opening is erased from the facade > reports one fewer opening, in the place it was erased from",
+    "4. the thick facade member is erased > reports no linear volume candidate at all, rather than a weaker one",
+    "5. the member keeps its colour and loses its depth > is demoted from a solid to a surface: the same band, a different claim",
+    "6. one side return of the recess is removed > finds one fewer return and names the side it could not find"
+   ]
+  },
+  {
+   "id": "M7-vision-bypass",
+   "what": "live vision bypass: the facade task is requested and applied on perspective frames (false facade evidence the ledger would then call corroboration)",
+   "outcome": "KILLED",
+   "failed": 3,
+   "behavioural": true,
+   "failedTests": [
+    "a well-formed answer > refuses to land a facade decomposition on a perspective frame, and lands the same answer on the same bytes filed as an elevation",
+    "the facade extractors read orthographic frames only > with the product reasoner configured, the refusal stands alone: no facade vision pass is asked for, so none is reported missing",
+    "the facade vision task is routed by the same rule (mock live provider, no network) > a perspective picture, interior or exterior, is never offered to a facade provider, and no vision answer lands on it"
+   ]
+  },
+  {
+   "id": "M8-apply-guard-removed",
+   "what": "the apply boundary lands a facade answer on a perspective frame",
+   "outcome": "KILLED",
+   "failed": 1,
+   "behavioural": true,
+   "failedTests": [
+    "a well-formed answer > refuses to land a facade decomposition on a perspective frame, and lands the same answer on the same bytes filed as an elevation"
+   ]
+  }
+ ]
+}
