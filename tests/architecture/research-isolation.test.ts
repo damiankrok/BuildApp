@@ -746,3 +746,87 @@ describe('005Q-CHAIN production cannot reach the integration study, and its chal
     expect(run.status).toBe(0)
   })
 })
+
+/**
+ * BUILDPLAN-ANALYZER-005R — the visual asset router and exterior-observation study is research. It ran a deterministic
+ * pixel router (Node), one local open-vocabulary detector (OWL-ViT, Python, weights outside the repository) and the
+ * unmodified production acquirer on ARCHON pages read locally. The repository keeps code, text, hashes and aggregate
+ * numbers: no publisher pixel, caption, page, crop, synthetic image or model weight; the routers never read metadata.
+ */
+describe('005R production cannot reach the visual-asset study, which commits no pixels, captions or weights', () => {
+  const stageFiles = (): string[] =>
+    [
+      ...execFileSync('git', ['ls-files'], { cwd: ROOT, encoding: 'utf8' }).split('\n'),
+      ...execFileSync('git', ['ls-files', '--others', '--exclude-standard'], { cwd: ROOT, encoding: 'utf8' }).split('\n'),
+    ].filter((f) => f.startsWith('research/analyzer-005r/') || f.startsWith('stage-reports/artifacts/analyzer-005r/'))
+
+  it('no production source imports research/analyzer-005r or names the detector, the router or the harness', () => {
+    const offenders: string[] = []
+    for (const f of productionSources()) {
+      const text = read(f)
+      for (const spec of importsOf(text)) if (/analyzer-005r|research\//.test(spec)) offenders.push(`${f} imports ${spec}`)
+      if (/owl-?vit|OwlViT|visual-observations\.0\.1|visual-edition-summary|v1-features@|v1-cart@|v1-cues@|005R/i.test(codeOf(text))) offenders.push(`${f} names the 005R study`)
+    }
+    expect(offenders).toEqual([])
+  })
+
+  it('the study tracks only code and text — no image, page, crop, archive or weight — and no embedded pixels', () => {
+    const files = stageFiles()
+    expect(files.length).toBeGreaterThan(0)
+    expect(files.filter((f) => !/\.(py|mjs|sh|json|md)$/i.test(f))).toEqual([])
+    for (const f of files) {
+      const text = read(f)
+      expect(text, f).not.toMatch(/(data:(image|application)\/[\w.+-]+;base64,|iVBORw0KGgo|\/9j\/4|UklGR|R0lGOD)[A-Za-z0-9+/]{40,}/)
+      expect(text, f).not.toMatch(/[A-Za-z0-9+/]{256,}={0,2}/)
+      expect(statSync(join(ROOT, f)).size, f).toBeLessThanOrEqual(4 * 2 ** 20)
+    }
+  })
+
+  it('the committed corpus manifest carries hashes, URLs and channel names but no caption, page text or excluded publisher', () => {
+    const manifest = JSON.parse(read('stage-reports/artifacts/analyzer-005r/corpus/corpus-manifest.json')) as {
+      assets: Array<{ variantSha256: string; memberships: Array<Record<string, string>> }>
+      excludedEditions: Array<{ status: string }>
+    }
+    expect(manifest.assets.length).toBeGreaterThan(0)
+    for (const a of manifest.assets) {
+      expect(a.variantSha256).toMatch(/^[0-9a-f]{64}$/)
+      for (const m of a.memberships) {
+        expect(Object.keys(m).sort()).toEqual(['channel', 'editionKey', 'host', 'url', 'via'])
+        expect(m.url).not.toMatch(/dobredomy\.pl/)
+      }
+    }
+    expect(manifest.excludedEditions.every((e) => e.status === 'SOURCE_NOT_USABLE')).toBe(true)
+    expect(read('research/analyzer-005r/acquire.py')).toMatch(/'www\.dobredomy\.pl': 'Regulamin §7\.2/)
+  })
+
+  it('the pixel routers and the detector read image bytes only — never a caption, channel, truth or manifest — and the prompts name no project', () => {
+    for (const f of ['research/analyzer-005r/v1/features.mjs', 'research/analyzer-005r/v1/tree.mjs', 'research/analyzer-005r/v1/cues.mjs', 'research/analyzer-005r/v2/run_owlvit.py']) {
+      const code = f.endsWith('.py') ? read(f).replace(/"""[\s\S]*?"""/g, ' ').replace(/#.*$/gm, ' ') : codeOf(read(f))
+      expect(code, f).not.toMatch(/caption|channel|survey|truth|manifest|editionKey|fancybox|roleTruth/i)
+    }
+    const manifest = JSON.parse(read('stage-reports/artifacts/analyzer-005r/corpus/corpus-manifest.json')) as { editions: Record<string, { family: string; canonicalUrls: string[] }> }
+    const names = new Set<string>()
+    for (const e of Object.values(manifest.editions)) {
+      for (const t of e.family.split(':')[1].split('-')) if (t.length >= 5) names.add(t)
+      for (const u of e.canonicalUrls) for (const t of (/\/projekt-([a-z0-9-]+)-m[0-9a-f]{8,}/.exec(u)?.[1] ?? '').split('-')) if (t.length >= 5) names.add(t)
+    }
+    const prompts = /PROMPTS = \{[\s\S]*?\n\}\n/.exec(read('research/analyzer-005r/v2/run_owlvit.py'))?.[0] ?? ''
+    expect(prompts.length).toBeGreaterThan(100)
+    expect([...names].filter((n) => new RegExp(`\\b${n}\\b`, 'i').test(prompts))).toEqual([])
+    expect(prompts).not.toMatch(/archon|rarytas|m²|area|powierzch/i)
+  })
+
+  it('every pixel writer refuses an output directory inside the repository', () => {
+    expect(read('research/analyzer-005r/acquire.py')).toMatch(/REFUSED: publisher bytes never go inside the repository/)
+    expect(read('research/analyzer-005r/synth.py')).toMatch(/REFUSED: generated images stay outside the repository/)
+    const run = spawnSync('python3', ['-I', join(ROOT, 'research/analyzer-005r/acquire.py'), 'fetch', join(ROOT, 'tmp-005r-refused')], { cwd: ROOT, encoding: 'utf8' })
+    expect(run.status).not.toBe(0)
+    expect(existsSync(join(ROOT, 'tmp-005r-refused'))).toBe(false)
+  })
+
+  it('the research JSON contract rejects every preregistered mutation (source and edition swap, fabricated box, leakage, interior to exterior, false confidence)', () => {
+    const run = spawnSync('python3', ['-I', join(ROOT, 'research/analyzer-005r/schema/test_schema.py')], { cwd: ROOT, encoding: 'utf8' })
+    expect(run.stderr, run.stderr).toMatch(/Ran \d+ tests[\s\S]*\nOK\s*$/)
+    expect(run.status).toBe(0)
+  })
+})

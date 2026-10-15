@@ -271,8 +271,20 @@ def fetch(work):
     print('done', len(urls), sum(1 for v in fetched.values() if v.get('status') == 'OK'))
 
 
+REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
+
+
+def outside_repo(work):
+    w = os.path.realpath(work)
+    if w == REPO or w.startswith(REPO + os.sep):
+        raise SystemExit('REFUSED: publisher bytes never go inside the repository (brief §4)')
+    return w
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if len(sys.argv) > 2:
+        outside_repo(sys.argv[2])
     if cmd == 'survey':
         survey(sys.argv[2], sys.argv[3])
     elif cmd == 'fetch':

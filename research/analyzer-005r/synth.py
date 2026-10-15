@@ -1073,6 +1073,9 @@ def main():
     ap = argparse.ArgumentParser(description='Synthetic known-truth architectural images (research only).')
     ap.add_argument('out'); ap.add_argument('--seed', type=int, default=5005); ap.add_argument('--houses', type=int, default=12)
     a = ap.parse_args()
+    repo = os.path.realpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
+    if os.path.realpath(a.out) == repo or os.path.realpath(a.out).startswith(repo + os.sep):
+        raise SystemExit('REFUSED: generated images stay outside the repository')
     os.makedirs(os.path.join(a.out, 'images'), exist_ok=True)
     with open(os.path.abspath(__file__), 'rb') as fh:
         gen_sha = hashlib.sha256(fh.read()).hexdigest()
