@@ -90,7 +90,9 @@ def compare_row(a_dir, b_dir):
             kinds[k] = kinds.get(k, 0) + 1
     r['removedByKind'] = dict(sorted(kinds.items()))
     if fa or fb:
-        r['P3'] = (fa or {}).get('metricEvidenceHash') is not None and (fb or {}).get('metricEvidenceHash') is not None or None
+        # post-review A-2: a typed failure keeps no metric evidence content, and its hash embeds the graph identity, so
+        # nothing comparable exists: NOT_MEASURED, never PASS (preregistration §5)
+        r['P3'] = None
         return r
     xa, xb = load(f'{a_dir}/metric-evidence.json.gz', True), load(f'{b_dir}/metric-evidence.json.gz', True)
     r['P3'] = None if xa is None or xb is None else canon(blank(xa)) == canon(blank(xb))

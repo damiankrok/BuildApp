@@ -6,7 +6,7 @@
   "A00": {
    "P1": true,
    "P2": true,
-   "P3": true,
+   "P3": null,
    "P4": false,
    "P4detail": {
     "extractorsRemoved": [],
@@ -46,7 +46,7 @@
   "A01": {
    "P1": true,
    "P2": true,
-   "P3": true,
+   "P3": null,
    "P4": false,
    "P4detail": {
     "extractorsRemoved": [],
@@ -196,7 +196,7 @@
   "A04": {
    "P1": true,
    "P2": true,
-   "P3": true,
+   "P3": null,
    "P4": false,
    "P4detail": {
     "extractorsRemoved": [],
@@ -237,7 +237,7 @@
   "A05": {
    "P1": true,
    "P2": true,
-   "P3": true,
+   "P3": null,
    "P4": false,
    "P4detail": {
     "extractorsRemoved": [],
@@ -387,7 +387,7 @@
   "alt-marcowki": {
    "P1": true,
    "P2": true,
-   "P3": true,
+   "P3": null,
    "P4": false,
    "P4detail": {
     "extractorsRemoved": [],
@@ -487,7 +487,7 @@
   "dom-pod-milorzebem": {
    "P1": true,
    "P2": true,
-   "P3": true,
+   "P3": null,
    "P4": false,
    "P4detail": {
     "extractorsRemoved": [],
@@ -527,7 +527,7 @@
   "dom-w-akebiach": {
    "P1": true,
    "P2": true,
-   "P3": true,
+   "P3": null,
    "P4": false,
    "P4detail": {
     "extractorsRemoved": [],
@@ -573,7 +573,7 @@
   "dom-w-azaliach": {
    "P1": true,
    "P2": true,
-   "P3": true,
+   "P3": null,
    "P4": false,
    "P4detail": {
     "extractorsRemoved": [],
@@ -668,7 +668,7 @@
   "dom-w-cyklamenach": {
    "P1": true,
    "P2": true,
-   "P3": true,
+   "P3": null,
    "P4": false,
    "P4detail": {
     "extractorsRemoved": [],
@@ -708,7 +708,7 @@
   "dom-w-dabecjach": {
    "P1": true,
    "P2": true,
-   "P3": true,
+   "P3": null,
    "P4": false,
    "P4detail": {
     "extractorsRemoved": [],
@@ -857,7 +857,7 @@
   "dom-w-gozdzikowcach": {
    "P1": true,
    "P2": true,
-   "P3": true,
+   "P3": null,
    "P4": false,
    "P4detail": {
     "extractorsRemoved": [],
@@ -1007,7 +1007,7 @@
   "dom-w-krasnokwiatach": {
    "P1": true,
    "P2": true,
-   "P3": true,
+   "P3": null,
    "P4": false,
    "P4detail": {
     "extractorsRemoved": [],
@@ -1161,7 +1161,7 @@
   "dom-w-murajach": {
    "P1": true,
    "P2": true,
-   "P3": true,
+   "P3": null,
    "P4": false,
    "P4detail": {
     "extractorsRemoved": [],
@@ -1714,11 +1714,24 @@
   "P3": {
    "fail": [],
    "notMeasured": [
+    "A00",
+    "A01",
+    "A04",
+    "A05",
+    "alt-marcowki",
+    "dom-pod-milorzebem",
+    "dom-w-akebiach",
+    "dom-w-azaliach",
+    "dom-w-cyklamenach",
+    "dom-w-dabecjach",
+    "dom-w-gozdzikowcach",
+    "dom-w-krasnokwiatach",
     "dom-w-morelach",
+    "dom-w-murajach",
     "marcowki",
     "rarytasy-g2e"
    ],
-   "pass": 31
+   "pass": 18
   },
   "P4": {
    "fail": [

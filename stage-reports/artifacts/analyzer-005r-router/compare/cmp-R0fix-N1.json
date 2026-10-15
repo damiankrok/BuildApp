@@ -115,7 +115,7 @@
   "dom-w-modrzewnicy": {
    "P1": true,
    "P2": true,
-   "P3": true,
+   "P3": null,
    "P4": false,
    "P4detail": {
     "extractorsRemoved": [],
@@ -332,8 +332,10 @@
   },
   "P3": {
    "fail": [],
-   "notMeasured": [],
-   "pass": 6
+   "notMeasured": [
+    "dom-w-modrzewnicy"
+   ],
+   "pass": 5
   },
   "P4": {
    "fail": [

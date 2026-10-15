@@ -14,7 +14,7 @@ attempt 2 `success`). Gałąź `analyzer/visual-source-role-guard-v1`. Bez APK, 
 | pytanie | odpowiedź z pomiarów |
 | --- | --- |
 | Dlaczego wnętrza trafiają do analizy elewacji? | **Pierwsza niebezpieczna asercja dowodowa (deterministyczna):** `analyze.ts:164-166` kieruje każdą klatkę `PERSPECTIVE_RENDER` do pięciu ekstraktorów **ortogonalnej** fasady. Rola (`archon.ts:98`, „wizualizacja” → `PERSPECTIVE_RENDER`) nie jest błędna — wnętrze *jest* renderem perspektywicznym; jest niepełna (brak zakresu sceny). Błąd leży w routingu: wszyscy konsumenci obserwacji fasady (metryki `extract.ts:88-89`, tożsamość między widokami `identity.ts:70`, rejestracja `solve.ts:312`) czytają tylko klatki ortogonalne, a sam producent routuje po `document`, nie po `projection`. Ledger potem twierdzi, że obserwacje posłużyły do sprawdzenia głębi (`reconstruct-v2.ts:1177`), czego żaden kod nie robi (kamera czyta raster, `camera.ts:838`). |
-| Czy obserwacje z renderów perspektywicznych (w tym wnętrz) zmieniają dziś model 3D? | **Na 37 znanych wierszach DEV, przez kanał deterministyczny — nie.** Usunięcie wszystkich 14 987 obserwacji fasady z 381 klatek perspektywicznych (wnętrz i zewnętrznych razem; N1) daje 23 modele bajt-w-bajt identyczne i 14 identycznych typowanych odmów, te same dowody metryczne, te same kamery (25 rozwiązanych na 7 wierszach). Kanał wizji (zdalny, wyłączony) nie był testowany; nowe domy nie były testowane. Szkoda jest w **dowodach i proweniencji**: obserwacje fasady (kalenice, otwory) zapisane na klatkach perspektywicznych i 922 wpisy „USED_AS_CORROBORATION” o sprawdzeniu, którego żaden kod nie wykonuje (7 wierszy). Ile z tych klatek to wnętrza — `NOT_MEASURED` (tylko struktura wydawcy). |
+| Czy obserwacje z renderów perspektywicznych (w tym wnętrz) zmieniają dziś model 3D? | **Na 37 znanych wierszach DEV, przez kanał deterministyczny — nie.** Usunięcie wszystkich 15 893 obserwacji fasady z 403 klatek perspektywicznych (wnętrz i zewnętrznych razem; N1) daje 23 modele bajt-w-bajt identyczne i 14 identycznych typowanych odmów, te same dowody metryczne (treść porównana na 23 wierszach z modelem; na 14 odmowach `NOT_MEASURED`), te same kamery. Kanał wizji (zdalny; domyślnie wyłączony, włączany jednym udokumentowanym przełącznikiem serwera `ANALYZER_VISION=live`) nie był testowany; nowe domy nie były testowane. Szkoda jest w **dowodach i proweniencji**: obserwacje fasady (kalenice, otwory) zapisane na klatkach perspektywicznych i wpisy „USED_AS_CORROBORATION” o sprawdzeniu, którego żaden kod nie wykonuje (liczby P8 w §F). Ile z tych klatek to wnętrza — `NOT_MEASURED` (tylko struktura wydawcy). |
 | Czy da się wiarygodnie rozróżnić wnętrze / zewnętrze? | **Nie na dostępnej prawdzie.** Ludzkich etykiet brak (`NOT_RUN_HUMAN_TRUTH`; przygotowano lokalne zadanie spot-review, 300 pozycji). Struktura strony to jeden kanał wydawcy i ma znane błędy (15 widoków zewnętrznych w karuzeli wnętrz). R1: **0 z 1 352 zasobów** ma dwóch świadków sceny z różnych klas niezależności, więc R2 (bramka sceny) nie bramkuje niczego. |
 | Czy wdrożono poprawkę? | **Nie.** Mój wariant N1 (bramka projekcji, bez klasyfikacji sceny) przeszedł P1 (model), P2, P3, P6, P8, P9, P10 i 6/6 mutacji, ale **nie przeszedł P4, P5 i P7 w brzmieniu prerejestracji** (P4: usunięte luki obejmują też własne luki ekstraktora fasady na klatkach perspektywicznych; P5/P7: różni się pole zegarowe `recogniser.ms` — ten sam predykat nie przechodzi też R0 vs R0rev, czyli inkumbent sam ze sobą). Reguła §6.1 ustalona przed wynikami mówi: dowolna porażka → `NO_SAFE_ADOPTION`. Poprawka predykatu po odpieczętowaniu nie może nieść wdrożenia; N1 jest gotowy jako kandydat na osobny etap (`research/analyzer-005r-router/n1-staged/`). |
 
@@ -24,12 +24,12 @@ attempt 2 `success`). Gałąź `analyzer/visual-source-role-guard-v1`. Bez APK, 
   `packages/source-package` i `packages/source-analyzer`). Start `67d2cf8`. Koniec: **FREEZE: IDENTICAL** — żaden plik
   produkcyjny, test poza `tests/architecture/research-isolation.test.ts`, asset, WASM ani model nie zmienił się.
 - Dotknięte ścieżki: `research/analyzer-005r-router/`, `stage-reports/artifacts/analyzer-005r-router/`, ten raport,
-  `PROJECT_STATUS.md`, blok 005R-ROUTER w `tests/architecture/research-isolation.test.ts`.
+  `PROJECT_STATUS.md` (dopisek na końcu etapu), blok 005R-ROUTER w `tests/architecture/research-isolation.test.ts`.
 - Dysk: 593 MB wolnego na starcie; usunięto wyłącznie odtwarzalne `node_modules` starych snapshotów (`work005f/snap-*`).
 - **Incydent operatorski (jawnie):** przy liczeniu wierszy zaimportowałem `replay.mjs`, który wykonywał się przy imporcie
   i nadpisał 3 ukończone wiersze R0 (jarzabem, arkadiach, modrzewnicy). Procesy ubite; skrypt zabezpieczony
   (`main()` tylko przy uruchomieniu bezpośrednim); te 3 wiersze (i 3 bez zapisanych dowodów metrycznych) policzono
-  ponownie jako **R0fix** przez niezałatany alias bazy. R0fix = R0 potwierdza R0rev (37/37).
+  ponownie jako **R0fix** przez niezałatany alias bazy. Na tych wierszach R0fix zastępuje R0; R0rev (cała baza przez ten sam alias) jest z nim zgodny 37/37.
 
 ## B. Audyt (Faza A)
 
@@ -39,9 +39,10 @@ kandydat → model, z liniami kodu bazy. Najważniejsze:
 
 - **FB-0 (utrata informacji):** `data-fancybox-position` nie jest czytane nigdzie (`archon.ts`, `discovery.ts`: 0 trafień).
 - **FB-1:** `archon.ts:98` — rola poprawna na swojej osi, niepełna.
-- **FB-2 (pierwsza niebezpieczna asercja *deterministyczna*):** `analyze.ts:164-166`. Routing wizji (`analyze.ts:178` →
-  `tasks.ts:38`) ma ten sam defekt, gdy skonfigurowano dostawcę zdalnego — kanał wizji pozostaje otwarty (wyłączony
-  we wszystkich ścieżkach produktu; niemierzalny bez wysyłania pikseli).
+- **FB-2 (pierwsza niebezpieczna asercja *deterministyczna*):** `analyze.ts:164-166`. Routing wizji (`analyze.ts:179` →
+  `tasks.ts:38`) ma ten sam defekt, gdy skonfigurowano dostawcę zdalnego — kanał wizji pozostaje otwarty (domyślnie
+  wyłączony; włącza go `ANALYZER_VISION=live` w `apps/analyzer-api`, a w aplikacji lokalnej nie ma dostawcy;
+  niemierzalny bez wysyłania pikseli).
 - **FB-3:** `reconstruct-v2.ts:1177` — fałszywa proweniencja w ledgerze.
 - Mapa konsumentów (§4): żaden konsument nie przenosi obserwacji z klatek perspektywicznych do modelu, sceny, poziomów
   jakości ani ostrzeżeń; zmieniają się hashe niosące tożsamość grafu (metryki, układ, graf cech, zbiór hipotez) i to,
@@ -79,7 +80,7 @@ wierszy jest **37** (45 EXTRACT − 8 DobreDomy). Kontrola harnessu R0copy obję
 | wariant | status | wynik |
 | --- | --- | --- |
 | R0 | RUN, 37 wierszy (+R0fix 6, +R0rev 37) | 14 typowanych odmów (bez zmian), 23 modele; deterministyczny (R0 = R0rev bajt w bajt: model, graf, porażki) |
-| R1 META-PROVENANCE | RUN (tylko badanie) | 198 INTERIOR_HINT, 39 EXTERIOR_HINT, **15 CONTESTED** (dokładnie C1), 1 100 UNKNOWN; **0** zasobów z dwiema klasami świadków; 38 grup linii ze wskazówką sceny przekracza edycję (nie scalane) |
+| R1 META-PROVENANCE | RUN (tylko badanie) | 198 INTERIOR_HINT, 39 EXTERIOR_HINT, **15 CONTESTED** (dokładnie C1), 1 100 UNKNOWN; **0** zasobów z dwiema klasami świadków — to wynika z definicji (jeden akt archiwizacji wydawcy = jedna klasa), nie jest odkryciem: na stronie ARCHON nie ma drugiego, niezależnego kanału sceny; 38 grup linii ze wskazówką sceny przekracza edycję (nie scalane) |
 | R2 GATE-ONLY | RUN (z konstrukcji) | bramkuje **0** klatek — R2 ≡ R0 |
 | R2w (diagnostyka, jeden świadek) | RUN, 6 wierszy | modele identyczne; bramkuje 0–12 z 18–28 klatek perspektywicznych na wiersz (bez kotwic karuzeli) i zostawia 226–815 obserwacji fasady na wiersz — bramka sceny byłaby niedopuszczalna **i** niekompletna |
 | R3 | NOT_RUN | brak nowego mierzonego sygnału treści; V1/V2 wykluczone przez 005R |
@@ -91,7 +92,7 @@ wierszy jest **37** (45 EXTRACT − 8 DobreDomy). Kontrola harnessu R0copy obję
 | --- | --- |
 | P1 model | **PASS 37/37** — 23 modele bajt-w-bajt + 14 identycznych typowanych odmów (34 vs R0, 3 vs R0fix; 6 sprawdzone też vs R0fix) — Marcówki (balkon), Jarząb (ganek), G2E-5, e-OZE, Głogowniki, Dalie: bez zmian |
 | P2 dowody ortogonalne | PASS (każda klatka ortogonalna: te same obserwacje, ta sama lista klatek) |
-| P3 dowody metryczne (treść) | PASS na każdym wierszu z zachowanymi dowodami |
+| P3 dowody metryczne (treść) | PASS na 23 wierszach z modelem (18 vs R0, 5 vs R0fix); **NOT_MEASURED** na 14 typowanych odmowach (treść nie zachowana, a hash niesie tożsamość grafu; pierwsza wersja porównania błędnie liczyła tu samą obecność hasha — poprawione po recenzji A) |
 | **P4 diff grafu = dokładnie bramka** | **FAIL 37/37** — poza przewidzianymi elementami usunięte są też luki `MISSING` „the left/right side wall of the recess …”, które ekstraktor fasady sam emituje na klatkach perspektywicznych; P4 ich nie wyliczył |
 | **P5 podsumowanie** | **FAIL** na każdym ukończonym wierszu — `recogniser.ms` (czas zegarowy) |
 | P6 kandydat (treść) | PASS |
