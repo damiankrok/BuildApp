@@ -1975,4 +1975,6 @@ Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005R_ROUTER_SOURCE_ROLE_GUARD.md
   `source-package.json` files of earlier stages and in 005R history (OWNER decision, nothing rewritten); earlier
   DobreDomy use is OWNER_DECISION_PENDING.
 - Gates: typecheck, build, e2e 47/47 green; `npm test` 2584 passed with two `WorkerExecutor` timeouts under replay load,
-  63/63 when rerun alone; CI on the pushed head is authoritative (stage report handoff).
+  63/63 when rerun alone. CI: green on the last content commit `f3e3606` (run 38754629214, 39/2); on the report-only
+  commit after it the Android UI evidence job failed twice on the known Compose `openStage` race (run 38759573725, attempts
+  1–2, one rerun used) — not this stage's code, recorded rather than retried further.

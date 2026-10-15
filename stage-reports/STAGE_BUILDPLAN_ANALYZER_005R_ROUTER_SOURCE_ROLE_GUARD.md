@@ -177,7 +177,12 @@ VERDICT: NO_SAFE_ADOPTION
 BRANCH: analyzer/visual-source-role-guard-v1 (+ fast-forward mirror claude/new-session-3kzcgh, required for GitHub Actions; no force-push)
 BASE: 8d414567e16e9a790bcf56cbebc10d778c6eb268
 HEAD: the commit carrying this block (its parent f3e36062228e944936f308d9ed48c79d6e0e9779 is the last content commit; this block is report-only)
-CI: https://github.com/damiankrok/BuildApp/actions/runs/38754629214 — attempt 1, success, 39 success / 2 skipped (41 jobs) on f3e3606; the final report-only commit is re-verified in the closing message
+CI: run 38754629214 on f3e3606 (last content commit) — attempt 1 SUCCESS, 39 success / 2 skipped (41 jobs).
+    run 38759573725 on dfb7e3e (report-only change vs f3e3606) — 38 success / 2 skipped / 1 FAILURE in both attempt 1 and its one
+    permitted rerun (attempt 2): android-ui-evidence, ProductFlowDeviceTest default-font pass, "Detected multithreaded access to
+    SnapshotStateObserver" in Evidence.openStage (the known Compose UI race; 14 default-* screenshots missing). Not caused by this
+    stage (no app or package file differs from base; the same job passed on f3e3606 with identical code); not rerun again, no test
+    weakened, Android fixing out of scope. The run on the commit carrying this correction is reported in the closing message.
 FULL_REPORT: stage-reports/STAGE_BUILDPLAN_ANALYZER_005R_ROUTER_SOURCE_ROLE_GUARD.md
 FIRST_BAD: archon.ts:98 role "wizualizacja" → PERSPECTIVE_RENDER (correct, scene-less; carousel position never read) → analyze.ts:164-166 routes it into the five ORTHOGRAPHIC facade extractors although every consumer reads orthographic frames only → first unsafe (deterministic) evidence assertion: facade observations (RIDGE, OPENING, LOGGIA …) on perspective frames; then reconstruct-v2.ts:1177 claims a depth-order check no code performs. Vision routing (analyze.ts:179 → tasks.ts:38) has the same defect when a remote provider is switched on.
 PRODUCTION_CHANGE: NONE
