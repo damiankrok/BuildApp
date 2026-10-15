@@ -1,0 +1,58 @@
+{
+ "label": "N1v",
+ "config": "variant-N1v/vite.config.mjs",
+ "order": "given",
+ "par": 3,
+ "rows": [
+  {
+   "case": "A00",
+   "code": 0,
+   "wall": 284.411428553,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "dom-pod-jarzabem",
+   "code": 0,
+   "wall": 284.350895516,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "kosacce-clean",
+   "code": 0,
+   "wall": 311.277937717,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "marcowki",
+   "code": 0,
+   "wall": 351.199484417,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "rarytasy-g2e",
+   "code": 0,
+   "wall": 314.615463352,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  }
+ ]
+}

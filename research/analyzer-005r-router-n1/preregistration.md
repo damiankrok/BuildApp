@@ -184,3 +184,12 @@ workspace's, so one module instance). Probe: through the variant config `tasksFo
 perspective render (it does not exist at the base). New `variant.mjs` hash recorded in the commit carrying this
 addendum. Tier A results at that moment: Node 22 focused 91/91, Node 18.20.4 focused 91/91, mutations 8/8 killed by
 behavioural assertions (`stage-reports/artifacts/analyzer-005r-router-n1/tier-a/`).
+
+**B (2026-10-15T23:39Z, after P1–P6 and P8 were scored on DEV, before N1vshuf finished; reported only, never a
+predicate, cannot change any verdict).** P8 found `featureGraphHash` different on 18/18 rows while every P8 predicate
+held. `reconstruction/src/v2/graph.ts:228-229` seals that hash over `observationGraphHash` and `metricEvidenceHash`,
+both identity-carrying, so the difference is expected by construction. Diagnostic `feature-graph.ts` / `fg-run.sh`
+dumps the feature-graph content with those two inputs (and the hash) removed, for R0 (base tree, sealed run outputs)
+and N1v (variant), on the 18 camera rows; the result is reported as `featureGraphContentEqual` per row. It runs
+concurrently with N1vshuf, whose timings are not a predicate.
+

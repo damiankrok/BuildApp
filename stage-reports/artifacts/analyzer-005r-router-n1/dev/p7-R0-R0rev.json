@@ -1,0 +1,273 @@
+{
+ "a": "runs-prior/R0",
+ "aOverrides": [
+  "runs-prior/R0fix"
+ ],
+ "b": "runs-prior/R0rev",
+ "mode": "determinism",
+ "perRow": {
+  "A00": {
+   "P7prime": true,
+   "failure.json": true,
+   "observation-graph.json.gz": true
+  },
+  "A01": {
+   "P7prime": true,
+   "failure.json": true,
+   "observation-graph.json.gz": true
+  },
+  "A02": {
+   "P7prime": true,
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": true
+  },
+  "A03": {
+   "P7prime": true,
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": true
+  },
+  "A04": {
+   "P7prime": true,
+   "failure.json": true,
+   "observation-graph.json.gz": true
+  },
+  "A05": {
+   "P7prime": true,
+   "failure.json": true,
+   "observation-graph.json.gz": true
+  },
+  "A06": {
+   "P7prime": true,
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": true
+  },
+  "A07": {
+   "P7prime": true,
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": true
+  },
+  "alt-marcowki": {
+   "P7prime": true,
+   "failure.json": true,
+   "observation-graph.json.gz": true
+  },
+  "dom-miniaturka": {
+   "P7prime": true,
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": true
+  },
+  "dom-pod-jarzabem": {
+   "P7prime": true,
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": true
+  },
+  "dom-pod-milorzebem": {
+   "P7prime": true,
+   "failure.json": true,
+   "observation-graph.json.gz": true
+  },
+  "dom-w-akebiach": {
+   "P7prime": true,
+   "failure.json": true,
+   "observation-graph.json.gz": true
+  },
+  "dom-w-arkadiach": {
+   "P7prime": true,
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": true
+  },
+  "dom-w-azaliach": {
+   "P7prime": true,
+   "failure.json": true,
+   "observation-graph.json.gz": true
+  },
+  "dom-w-cieszyniankach": {
+   "P7prime": true,
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": true
+  },
+  "dom-w-cyklamenach": {
+   "P7prime": true,
+   "failure.json": true,
+   "observation-graph.json.gz": true
+  },
+  "dom-w-dabecjach": {
+   "P7prime": true,
+   "failure.json": true,
+   "observation-graph.json.gz": true
+  },
+  "dom-w-daliach": {
+   "P7prime": true,
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": true
+  },
+  "dom-w-glogownikach": {
+   "P7prime": true,
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": true
+  },
+  "dom-w-gozdzikowcach": {
+   "P7prime": true,
+   "failure.json": true,
+   "observation-graph.json.gz": true
+  },
+  "dom-w-helikoniach": {
+   "P7prime": true,
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": true
+  },
+  "dom-w-jablonkach": {
+   "P7prime": true,
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": true
+  },
+  "dom-w-krasnokwiatach": {
+   "P7prime": true,
+   "failure.json": true,
+   "observation-graph.json.gz": true
+  },
+  "dom-w-modrzewnicy": {
+   "P7prime": true,
+   "failure.json": true,
+   "observation-graph.json.gz": true
+  },
+  "dom-w-modrzykach": {
+   "P7prime": true,
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": true
+  },
+  "dom-w-morelach": {
+   "P7prime": true,
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": true
+  },
+  "dom-w-murajach": {
+   "P7prime": true,
+   "failure.json": true,
+   "observation-graph.json.gz": true
+  },
+  "dom-w-tunbergiach": {
+   "P7prime": true,
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": true
+  },
+  "dom-w-tymianku": {
+   "P7prime": true,
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": true
+  },
+  "dom-w-zurawkach": {
+   "P7prime": true,
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": true
+  },
+  "kosacce-clean": {
+   "P7prime": true,
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": true
+  },
+  "kosacce-tracked": {
+   "P7prime": true,
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": true
+  },
+  "marcowki": {
+   "P7prime": true,
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": true
+  },
+  "rarytasy-eoze": {
+   "P7prime": true,
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": true
+  },
+  "rarytasy-g2e": {
+   "P7prime": true,
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": true
+  },
+  "willa-miranda": {
+   "P7prime": true,
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": true
+  }
+ },
+ "rows": 37,
+ "schema": "research.005r-router-n1.compare.1",
+ "summary": {
+  "P7prime": {
+   "fail": [],
+   "notMeasured": [],
+   "pass": 37
+  }
+ }
+}

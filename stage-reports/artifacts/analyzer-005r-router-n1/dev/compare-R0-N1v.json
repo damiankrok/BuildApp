@@ -1,0 +1,1826 @@
+{
+ "a": "runs-prior/R0",
+ "aOverrides": [
+  "runs-prior/R0fix"
+ ],
+ "b": "runs/N1v",
+ "mode": "predicates",
+ "perRow": {
+  "A00": {
+   "P1": true,
+   "P2": true,
+   "P3": null,
+   "P4prime": true,
+   "P5prime": null,
+   "P6": null,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 14,
+    "perspectiveFrames": 14,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 77,
+     "LOGGIA": 23,
+     "MASS_REGION": 14,
+     "OPENING": 260,
+     "RIDGE": 13,
+     "ROOF_EDGE": 56,
+     "SILHOUETTE": 14,
+     "SURFACE_REGION": 71
+    },
+    "typed": {
+     "T1_observationRemoved": 528,
+     "T2_relationRemoved": 152,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 44,
+      "VISION_FACADE_GAP": 14
+     },
+     "T4_refusalAdded": 14,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "REFUSED RECONSTRUCTION_FAILED/RECONSTRUCTION_FAILED PLAN_RESOLUTION_INCONCLUSIVE"
+  },
+  "A01": {
+   "P1": true,
+   "P2": true,
+   "P3": null,
+   "P4prime": true,
+   "P5prime": null,
+   "P6": null,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 5,
+    "perspectiveFrames": 5,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 48,
+     "LOGGIA": 10,
+     "MASS_REGION": 5,
+     "OPENING": 49,
+     "RIDGE": 5,
+     "ROOF_EDGE": 20,
+     "SILHOUETTE": 5,
+     "SURFACE_REGION": 37
+    },
+    "typed": {
+     "T1_observationRemoved": 179,
+     "T2_relationRemoved": 78,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 20,
+      "VISION_FACADE_GAP": 5
+     },
+     "T4_refusalAdded": 5,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "REFUSED RECONSTRUCTION_FAILED/RECONSTRUCTION_FAILED MODEL_EMISSION_FAILED"
+  },
+  "A02": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4prime": true,
+   "P5diff": [],
+   "P5prime": true,
+   "P6": true,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 28,
+    "perspectiveFrames": 28,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 219,
+     "LOGGIA": 84,
+     "MASS_REGION": 28,
+     "OPENING": 588,
+     "RIDGE": 27,
+     "ROOF_EDGE": 112,
+     "SILHOUETTE": 28,
+     "SURFACE_REGION": 146,
+     "WALL_REGION": 7
+    },
+    "typed": {
+     "T1_observationRemoved": 1239,
+     "T2_relationRemoved": 428,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 150,
+      "VISION_FACADE_GAP": 28
+     },
+     "T4_refusalAdded": 28,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "MODEL",
+   "perf": {
+    "observationMs": [
+     59700,
+     48140
+    ],
+    "peakRssMB": [
+     1049,
+     1100
+    ],
+    "totalMs": [
+     335040,
+     310230
+    ]
+   }
+  },
+  "A03": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4prime": true,
+   "P5diff": [],
+   "P5prime": true,
+   "P6": true,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 19,
+    "perspectiveFrames": 19,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 149,
+     "LOGGIA": 74,
+     "MASS_REGION": 19,
+     "OPENING": 439,
+     "RIDGE": 19,
+     "ROOF_EDGE": 76,
+     "SILHOUETTE": 19,
+     "SURFACE_REGION": 85,
+     "WALL_REGION": 8
+    },
+    "typed": {
+     "T1_observationRemoved": 888,
+     "T2_relationRemoved": 360,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 126,
+      "VISION_FACADE_GAP": 19
+     },
+     "T4_refusalAdded": 19,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "MODEL",
+   "perf": {
+    "observationMs": [
+     49803,
+     39870
+    ],
+    "peakRssMB": [
+     978,
+     938
+    ],
+    "totalMs": [
+     367108,
+     341895
+    ]
+   }
+  },
+  "A04": {
+   "P1": true,
+   "P2": true,
+   "P3": null,
+   "P4prime": true,
+   "P5prime": null,
+   "P6": null,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 14,
+    "perspectiveFrames": 14,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 77,
+     "LOGGIA": 54,
+     "MASS_REGION": 14,
+     "OPENING": 325,
+     "RIDGE": 14,
+     "ROOF_EDGE": 56,
+     "SILHOUETTE": 14,
+     "SURFACE_REGION": 46,
+     "WALL_REGION": 2
+    },
+    "typed": {
+     "T1_observationRemoved": 602,
+     "T2_relationRemoved": 199,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 93,
+      "VISION_FACADE_GAP": 14
+     },
+     "T4_refusalAdded": 14,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "REFUSED RECONSTRUCTION_FAILED/RECONSTRUCTION_FAILED PLAN_RESOLUTION_INCONCLUSIVE"
+  },
+  "A05": {
+   "P1": true,
+   "P2": true,
+   "P3": null,
+   "P4prime": true,
+   "P5prime": null,
+   "P6": null,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 5,
+    "perspectiveFrames": 5,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 27,
+     "LOGGIA": 12,
+     "MASS_REGION": 5,
+     "OPENING": 75,
+     "RIDGE": 5,
+     "ROOF_EDGE": 20,
+     "SILHOUETTE": 5,
+     "SURFACE_REGION": 25,
+     "WALL_REGION": 1
+    },
+    "typed": {
+     "T1_observationRemoved": 175,
+     "T2_relationRemoved": 62,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 21,
+      "VISION_FACADE_GAP": 5
+     },
+     "T4_refusalAdded": 5,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "REFUSED RECONSTRUCTION_FAILED/RECONSTRUCTION_FAILED PLAN_RESOLUTION_INCONCLUSIVE"
+  },
+  "A06": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4prime": true,
+   "P5diff": [],
+   "P5prime": true,
+   "P6": true,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 11,
+    "perspectiveFrames": 11,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 73,
+     "LOGGIA": 14,
+     "MASS_REGION": 11,
+     "OPENING": 137,
+     "RIDGE": 11,
+     "ROOF_EDGE": 44,
+     "SILHOUETTE": 11,
+     "SURFACE_REGION": 36
+    },
+    "typed": {
+     "T1_observationRemoved": 337,
+     "T2_relationRemoved": 131,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 28,
+      "VISION_FACADE_GAP": 11
+     },
+     "T4_refusalAdded": 11,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "MODEL",
+   "perf": {
+    "observationMs": [
+     32206,
+     30627
+    ],
+    "peakRssMB": [
+     890,
+     892
+    ],
+    "totalMs": [
+     329654,
+     307393
+    ]
+   }
+  },
+  "A07": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4prime": true,
+   "P5diff": [],
+   "P5prime": true,
+   "P6": true,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 22,
+    "perspectiveFrames": 22,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 175,
+     "LOGGIA": 68,
+     "MASS_REGION": 22,
+     "OPENING": 478,
+     "RIDGE": 22,
+     "ROOF_EDGE": 88,
+     "SILHOUETTE": 22,
+     "SURFACE_REGION": 103,
+     "WALL_REGION": 2
+    },
+    "typed": {
+     "T1_observationRemoved": 980,
+     "T2_relationRemoved": 397,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 125,
+      "VISION_FACADE_GAP": 22
+     },
+     "T4_refusalAdded": 22,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "MODEL",
+   "perf": {
+    "observationMs": [
+     64604,
+     53489
+    ],
+    "peakRssMB": [
+     1067,
+     1152
+    ],
+    "totalMs": [
+     539194,
+     485240
+    ]
+   }
+  },
+  "alt-marcowki": {
+   "P1": true,
+   "P2": true,
+   "P3": null,
+   "P4prime": true,
+   "P5prime": null,
+   "P6": null,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 4,
+    "perspectiveFrames": 4,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 36,
+     "LOGGIA": 7,
+     "MASS_REGION": 4,
+     "OPENING": 63,
+     "RIDGE": 4,
+     "ROOF_EDGE": 16,
+     "SILHOUETTE": 4,
+     "SURFACE_REGION": 26
+    },
+    "typed": {
+     "T1_observationRemoved": 160,
+     "T2_relationRemoved": 59,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 14,
+      "VISION_FACADE_GAP": 4
+     },
+     "T4_refusalAdded": 4,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "REFUSED RECONSTRUCTION_FAILED/RECONSTRUCTION_FAILED METRIC_RESOLUTION_INCONCLUSIVE"
+  },
+  "dom-miniaturka": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4prime": true,
+   "P5diff": [],
+   "P5prime": true,
+   "P6": true,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 4,
+    "perspectiveFrames": 4,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 42,
+     "LOGGIA": 13,
+     "MASS_REGION": 4,
+     "OPENING": 33,
+     "RIDGE": 4,
+     "ROOF_EDGE": 16,
+     "SILHOUETTE": 4,
+     "SURFACE_REGION": 20
+    },
+    "typed": {
+     "T1_observationRemoved": 136,
+     "T2_relationRemoved": 71,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 26,
+      "VISION_FACADE_GAP": 4
+     },
+     "T4_refusalAdded": 4,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "MODEL",
+   "perf": {
+    "observationMs": [
+     23050,
+     21028
+    ],
+    "peakRssMB": [
+     894,
+     907
+    ],
+    "totalMs": [
+     353208,
+     318348
+    ]
+   }
+  },
+  "dom-pod-jarzabem": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4prime": true,
+   "P5diff": [],
+   "P5prime": true,
+   "P6": true,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 4,
+    "perspectiveFrames": 4,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 29,
+     "LOGGIA": 6,
+     "MASS_REGION": 4,
+     "OPENING": 69,
+     "RIDGE": 4,
+     "ROOF_EDGE": 16,
+     "SILHOUETTE": 4,
+     "SURFACE_REGION": 15
+    },
+    "typed": {
+     "T1_observationRemoved": 147,
+     "T2_relationRemoved": 51,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 12,
+      "VISION_FACADE_GAP": 4
+     },
+     "T4_refusalAdded": 4,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "MODEL",
+   "perf": {
+    "observationMs": [
+     17844,
+     16185
+    ],
+    "peakRssMB": [
+     962,
+     947
+    ],
+    "totalMs": [
+     351081,
+     277735
+    ]
+   }
+  },
+  "dom-pod-milorzebem": {
+   "P1": true,
+   "P2": true,
+   "P3": null,
+   "P4prime": true,
+   "P5prime": null,
+   "P6": null,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 6,
+    "perspectiveFrames": 6,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 28,
+     "LOGGIA": 9,
+     "MASS_REGION": 6,
+     "OPENING": 112,
+     "RIDGE": 4,
+     "ROOF_EDGE": 24,
+     "SILHOUETTE": 6,
+     "SURFACE_REGION": 29
+    },
+    "typed": {
+     "T1_observationRemoved": 218,
+     "T2_relationRemoved": 53,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 18,
+      "VISION_FACADE_GAP": 6
+     },
+     "T4_refusalAdded": 6,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "REFUSED RECONSTRUCTION_FAILED/RECONSTRUCTION_FAILED METRIC_RESOLUTION_INCONCLUSIVE"
+  },
+  "dom-w-akebiach": {
+   "P1": true,
+   "P2": true,
+   "P3": null,
+   "P4prime": true,
+   "P5prime": null,
+   "P6": null,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 4,
+    "perspectiveFrames": 4,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 17,
+     "LOGGIA": 2,
+     "MASS_REGION": 4,
+     "OPENING": 30,
+     "RIDGE": 4,
+     "ROOF_EDGE": 16,
+     "SILHOUETTE": 4,
+     "SURFACE_REGION": 27
+    },
+    "typed": {
+     "T1_observationRemoved": 104,
+     "T2_relationRemoved": 35,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 4,
+      "VISION_FACADE_GAP": 4
+     },
+     "T4_refusalAdded": 4,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "REFUSED RECONSTRUCTION_FAILED/RECONSTRUCTION_FAILED PLAN_LAYOUT_REJECTED"
+  },
+  "dom-w-arkadiach": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4prime": true,
+   "P5diff": [],
+   "P5prime": true,
+   "P6": true,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 13,
+    "perspectiveFrames": 13,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 121,
+     "LOGGIA": 18,
+     "MASS_REGION": 13,
+     "OPENING": 237,
+     "RIDGE": 13,
+     "ROOF_EDGE": 52,
+     "SILHOUETTE": 13,
+     "SURFACE_REGION": 56,
+     "WALL_REGION": 2
+    },
+    "typed": {
+     "T1_observationRemoved": 525,
+     "T2_relationRemoved": 239,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 24,
+      "VISION_FACADE_GAP": 13
+     },
+     "T4_refusalAdded": 13,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "MODEL",
+   "perf": {
+    "observationMs": [
+     41412,
+     32909
+    ],
+    "peakRssMB": [
+     934,
+     950
+    ],
+    "totalMs": [
+     371569,
+     283937
+    ]
+   }
+  },
+  "dom-w-azaliach": {
+   "P1": true,
+   "P2": true,
+   "P3": null,
+   "P4prime": true,
+   "P5prime": null,
+   "P6": null,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 5,
+    "perspectiveFrames": 5,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 48,
+     "LOGGIA": 4,
+     "MASS_REGION": 5,
+     "OPENING": 90,
+     "RIDGE": 3,
+     "ROOF_EDGE": 20,
+     "SILHOUETTE": 5,
+     "SURFACE_REGION": 29
+    },
+    "typed": {
+     "T1_observationRemoved": 204,
+     "T2_relationRemoved": 64,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 8,
+      "VISION_FACADE_GAP": 5
+     },
+     "T4_refusalAdded": 5,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "REFUSED RECONSTRUCTION_FAILED/RECONSTRUCTION_FAILED PLAN_RESOLUTION_INCONCLUSIVE"
+  },
+  "dom-w-cieszyniankach": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4prime": true,
+   "P5diff": [],
+   "P5prime": true,
+   "P6": true,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 18,
+    "perspectiveFrames": 18,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 107,
+     "LOGGIA": 51,
+     "MASS_REGION": 18,
+     "OPENING": 409,
+     "RIDGE": 16,
+     "ROOF_EDGE": 72,
+     "SILHOUETTE": 18,
+     "SURFACE_REGION": 84,
+     "WALL_REGION": 2
+    },
+    "typed": {
+     "T1_observationRemoved": 777,
+     "T2_relationRemoved": 251,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 96,
+      "VISION_FACADE_GAP": 18
+     },
+     "T4_refusalAdded": 18,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "MODEL",
+   "perf": {
+    "observationMs": [
+     46918,
+     37439
+    ],
+    "peakRssMB": [
+     934,
+     960
+    ],
+    "totalMs": [
+     284125,
+     247659
+    ]
+   }
+  },
+  "dom-w-cyklamenach": {
+   "P1": true,
+   "P2": true,
+   "P3": null,
+   "P4prime": true,
+   "P5prime": null,
+   "P6": null,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 6,
+    "perspectiveFrames": 6,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 34,
+     "LOGGIA": 16,
+     "MASS_REGION": 6,
+     "OPENING": 120,
+     "RIDGE": 6,
+     "ROOF_EDGE": 24,
+     "SILHOUETTE": 6,
+     "SURFACE_REGION": 31
+    },
+    "typed": {
+     "T1_observationRemoved": 243,
+     "T2_relationRemoved": 80,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 32,
+      "VISION_FACADE_GAP": 6
+     },
+     "T4_refusalAdded": 6,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "REFUSED RECONSTRUCTION_FAILED/RECONSTRUCTION_FAILED PLAN_RESOLUTION_INCONCLUSIVE"
+  },
+  "dom-w-dabecjach": {
+   "P1": true,
+   "P2": true,
+   "P3": null,
+   "P4prime": true,
+   "P5prime": null,
+   "P6": null,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 8,
+    "perspectiveFrames": 8,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 65,
+     "LOGGIA": 26,
+     "MASS_REGION": 8,
+     "OPENING": 122,
+     "RIDGE": 8,
+     "ROOF_EDGE": 32,
+     "SILHOUETTE": 8,
+     "SURFACE_REGION": 23
+    },
+    "typed": {
+     "T1_observationRemoved": 292,
+     "T2_relationRemoved": 125,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 51,
+      "VISION_FACADE_GAP": 8
+     },
+     "T4_refusalAdded": 8,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "REFUSED RECONSTRUCTION_FAILED/RECONSTRUCTION_FAILED BOUNDARY_RESOLUTION_INCONCLUSIVE"
+  },
+  "dom-w-daliach": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4prime": true,
+   "P5diff": [],
+   "P5prime": true,
+   "P6": true,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 6,
+    "perspectiveFrames": 6,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 50,
+     "LOGGIA": 10,
+     "MASS_REGION": 6,
+     "OPENING": 78,
+     "RIDGE": 4,
+     "ROOF_EDGE": 24,
+     "SILHOUETTE": 6,
+     "SURFACE_REGION": 28
+    },
+    "typed": {
+     "T1_observationRemoved": 206,
+     "T2_relationRemoved": 76,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 20,
+      "VISION_FACADE_GAP": 6
+     },
+     "T4_refusalAdded": 6,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "MODEL",
+   "perf": {
+    "observationMs": [
+     26999,
+     23317
+    ],
+    "peakRssMB": [
+     1036,
+     1014
+    ],
+    "totalMs": [
+     454770,
+     403859
+    ]
+   }
+  },
+  "dom-w-glogownikach": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4prime": true,
+   "P5diff": [],
+   "P5prime": true,
+   "P6": true,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 8,
+    "perspectiveFrames": 8,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 70,
+     "LOGGIA": 28,
+     "MASS_REGION": 8,
+     "OPENING": 91,
+     "RIDGE": 8,
+     "ROOF_EDGE": 32,
+     "SILHOUETTE": 8,
+     "SURFACE_REGION": 33,
+     "WALL_REGION": 1
+    },
+    "typed": {
+     "T1_observationRemoved": 279,
+     "T2_relationRemoved": 142,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 51,
+      "VISION_FACADE_GAP": 8
+     },
+     "T4_refusalAdded": 8,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "MODEL",
+   "perf": {
+    "observationMs": [
+     29698,
+     25005
+    ],
+    "peakRssMB": [
+     960,
+     967
+    ],
+    "totalMs": [
+     326537,
+     290897
+    ]
+   }
+  },
+  "dom-w-gozdzikowcach": {
+   "P1": true,
+   "P2": true,
+   "P3": null,
+   "P4prime": true,
+   "P5prime": null,
+   "P6": null,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 15,
+    "perspectiveFrames": 15,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 148,
+     "LOGGIA": 50,
+     "MASS_REGION": 15,
+     "OPENING": 351,
+     "RIDGE": 15,
+     "ROOF_EDGE": 60,
+     "SILHOUETTE": 15,
+     "SURFACE_REGION": 84,
+     "WALL_REGION": 5
+    },
+    "typed": {
+     "T1_observationRemoved": 743,
+     "T2_relationRemoved": 272,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 89,
+      "VISION_FACADE_GAP": 15
+     },
+     "T4_refusalAdded": 15,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "REFUSED RECONSTRUCTION_FAILED/RECONSTRUCTION_FAILED MODEL_EMISSION_FAILED"
+  },
+  "dom-w-helikoniach": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4prime": true,
+   "P5diff": [],
+   "P5prime": true,
+   "P6": true,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 4,
+    "perspectiveFrames": 4,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 35,
+     "LOGGIA": 6,
+     "MASS_REGION": 4,
+     "OPENING": 72,
+     "RIDGE": 4,
+     "ROOF_EDGE": 16,
+     "SILHOUETTE": 4,
+     "SURFACE_REGION": 18
+    },
+    "typed": {
+     "T1_observationRemoved": 159,
+     "T2_relationRemoved": 57,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 12,
+      "VISION_FACADE_GAP": 4
+     },
+     "T4_refusalAdded": 4,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "MODEL",
+   "perf": {
+    "observationMs": [
+     18763,
+     17465
+    ],
+    "peakRssMB": [
+     879,
+     906
+    ],
+    "totalMs": [
+     316380,
+     306160
+    ]
+   }
+  },
+  "dom-w-jablonkach": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4prime": true,
+   "P5diff": [],
+   "P5prime": true,
+   "P6": true,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 18,
+    "perspectiveFrames": 18,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 82,
+     "LOGGIA": 52,
+     "MASS_REGION": 18,
+     "OPENING": 351,
+     "RIDGE": 18,
+     "ROOF_EDGE": 72,
+     "SILHOUETTE": 18,
+     "SURFACE_REGION": 43,
+     "WALL_REGION": 1
+    },
+    "typed": {
+     "T1_observationRemoved": 655,
+     "T2_relationRemoved": 217,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 90,
+      "VISION_FACADE_GAP": 18
+     },
+     "T4_refusalAdded": 18,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "MODEL",
+   "perf": {
+    "observationMs": [
+     47473,
+     39858
+    ],
+    "peakRssMB": [
+     1039,
+     1043
+    ],
+    "totalMs": [
+     453248,
+     427210
+    ]
+   }
+  },
+  "dom-w-krasnokwiatach": {
+   "P1": true,
+   "P2": true,
+   "P3": null,
+   "P4prime": true,
+   "P5prime": null,
+   "P6": null,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 4,
+    "perspectiveFrames": 4,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 19,
+     "LOGGIA": 6,
+     "MASS_REGION": 4,
+     "OPENING": 39,
+     "RIDGE": 4,
+     "ROOF_EDGE": 16,
+     "SILHOUETTE": 4,
+     "SURFACE_REGION": 36
+    },
+    "typed": {
+     "T1_observationRemoved": 128,
+     "T2_relationRemoved": 41,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 12,
+      "VISION_FACADE_GAP": 4
+     },
+     "T4_refusalAdded": 4,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "REFUSED RECONSTRUCTION_FAILED/RECONSTRUCTION_FAILED PLAN_LAYOUT_REJECTED"
+  },
+  "dom-w-modrzewnicy": {
+   "P1": true,
+   "P2": true,
+   "P3": null,
+   "P4prime": true,
+   "P5prime": null,
+   "P6": null,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 5,
+    "perspectiveFrames": 5,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 60,
+     "LOGGIA": 19,
+     "MASS_REGION": 5,
+     "OPENING": 97,
+     "RIDGE": 5,
+     "ROOF_EDGE": 20,
+     "SILHOUETTE": 5,
+     "SURFACE_REGION": 22,
+     "WALL_REGION": 1
+    },
+    "typed": {
+     "T1_observationRemoved": 234,
+     "T2_relationRemoved": 100,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 37,
+      "VISION_FACADE_GAP": 5
+     },
+     "T4_refusalAdded": 5,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "REFUSED RECONSTRUCTION_FAILED/RECONSTRUCTION_FAILED METRIC_RESOLUTION_INCONCLUSIVE"
+  },
+  "dom-w-modrzykach": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4prime": true,
+   "P5diff": [],
+   "P5prime": true,
+   "P6": true,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 5,
+    "perspectiveFrames": 5,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 32,
+     "LOGGIA": 11,
+     "MASS_REGION": 5,
+     "OPENING": 23,
+     "RIDGE": 5,
+     "ROOF_EDGE": 20,
+     "SILHOUETTE": 5,
+     "SURFACE_REGION": 23
+    },
+    "typed": {
+     "T1_observationRemoved": 124,
+     "T2_relationRemoved": 63,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 22,
+      "VISION_FACADE_GAP": 5
+     },
+     "T4_refusalAdded": 5,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "MODEL",
+   "perf": {
+    "observationMs": [
+     18347,
+     17797
+    ],
+    "peakRssMB": [
+     903,
+     884
+    ],
+    "totalMs": [
+     285492,
+     274030
+    ]
+   }
+  },
+  "dom-w-morelach": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4prime": true,
+   "P5diff": [],
+   "P5prime": true,
+   "P6": true,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 5,
+    "perspectiveFrames": 5,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 44,
+     "LOGGIA": 10,
+     "MASS_REGION": 5,
+     "OPENING": 52,
+     "RIDGE": 5,
+     "ROOF_EDGE": 20,
+     "SILHOUETTE": 5,
+     "SURFACE_REGION": 28
+    },
+    "typed": {
+     "T1_observationRemoved": 169,
+     "T2_relationRemoved": 75,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 16,
+      "VISION_FACADE_GAP": 5
+     },
+     "T4_refusalAdded": 5,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "MODEL",
+   "perf": {
+    "observationMs": [
+     30331,
+     22312
+    ],
+    "peakRssMB": [
+     988,
+     952
+    ],
+    "totalMs": [
+     330046,
+     290515
+    ]
+   }
+  },
+  "dom-w-murajach": {
+   "P1": true,
+   "P2": true,
+   "P3": null,
+   "P4prime": true,
+   "P5prime": null,
+   "P6": null,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 16,
+    "perspectiveFrames": 16,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 138,
+     "LOGGIA": 70,
+     "MASS_REGION": 16,
+     "OPENING": 373,
+     "RIDGE": 16,
+     "ROOF_EDGE": 64,
+     "SILHOUETTE": 16,
+     "SURFACE_REGION": 74,
+     "WALL_REGION": 2
+    },
+    "typed": {
+     "T1_observationRemoved": 769,
+     "T2_relationRemoved": 298,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 116,
+      "VISION_FACADE_GAP": 16
+     },
+     "T4_refusalAdded": 16,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "REFUSED RECONSTRUCTION_FAILED/RECONSTRUCTION_FAILED METRIC_RESOLUTION_INCONCLUSIVE"
+  },
+  "dom-w-tunbergiach": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4prime": true,
+   "P5diff": [],
+   "P5prime": true,
+   "P6": true,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 4,
+    "perspectiveFrames": 4,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 30,
+     "LOGGIA": 3,
+     "MASS_REGION": 4,
+     "OPENING": 33,
+     "RIDGE": 4,
+     "ROOF_EDGE": 16,
+     "SILHOUETTE": 4,
+     "SURFACE_REGION": 14
+    },
+    "typed": {
+     "T1_observationRemoved": 108,
+     "T2_relationRemoved": 49,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 6,
+      "VISION_FACADE_GAP": 4
+     },
+     "T4_refusalAdded": 4,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "MODEL",
+   "perf": {
+    "observationMs": [
+     28979,
+     27677
+    ],
+    "peakRssMB": [
+     979,
+     1004
+    ],
+    "totalMs": [
+     388413,
+     372334
+    ]
+   }
+  },
+  "dom-w-tymianku": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4prime": true,
+   "P5diff": [],
+   "P5prime": true,
+   "P6": true,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 4,
+    "perspectiveFrames": 4,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 17,
+     "LOGGIA": 3,
+     "MASS_REGION": 4,
+     "OPENING": 57,
+     "RIDGE": 4,
+     "ROOF_EDGE": 16,
+     "SILHOUETTE": 4,
+     "SURFACE_REGION": 8
+    },
+    "typed": {
+     "T1_observationRemoved": 113,
+     "T2_relationRemoved": 36,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 6,
+      "VISION_FACADE_GAP": 4
+     },
+     "T4_refusalAdded": 4,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "MODEL",
+   "perf": {
+    "observationMs": [
+     22300,
+     21451
+    ],
+    "peakRssMB": [
+     921,
+     934
+    ],
+    "totalMs": [
+     331494,
+     296441
+    ]
+   }
+  },
+  "dom-w-zurawkach": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4prime": true,
+   "P5diff": [],
+   "P5prime": true,
+   "P6": true,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 10,
+    "perspectiveFrames": 10,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 22,
+     "LOGGIA": 19,
+     "MASS_REGION": 10,
+     "OPENING": 182,
+     "RIDGE": 10,
+     "ROOF_EDGE": 40,
+     "SILHOUETTE": 10,
+     "SURFACE_REGION": 8
+    },
+    "typed": {
+     "T1_observationRemoved": 301,
+     "T2_relationRemoved": 81,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 38,
+      "VISION_FACADE_GAP": 10
+     },
+     "T4_refusalAdded": 10,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "MODEL",
+   "perf": {
+    "observationMs": [
+     38318,
+     35924
+    ],
+    "peakRssMB": [
+     942,
+     958
+    ],
+    "totalMs": [
+     431037,
+     418658
+    ]
+   }
+  },
+  "kosacce-clean": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4prime": true,
+   "P5diff": [],
+   "P5prime": true,
+   "P6": true,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 19,
+    "perspectiveFrames": 19,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 172,
+     "LOGGIA": 51,
+     "MASS_REGION": 19,
+     "OPENING": 381,
+     "RIDGE": 19,
+     "ROOF_EDGE": 76,
+     "SILHOUETTE": 19,
+     "SURFACE_REGION": 72,
+     "WALL_REGION": 6
+    },
+    "typed": {
+     "T1_observationRemoved": 815,
+     "T2_relationRemoved": 324,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 74,
+      "VISION_FACADE_GAP": 19
+     },
+     "T4_refusalAdded": 19,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "MODEL",
+   "perf": {
+    "observationMs": [
+     52091,
+     44167
+    ],
+    "peakRssMB": [
+     977,
+     966
+    ],
+    "totalMs": [
+     409999,
+     304009
+    ]
+   }
+  },
+  "kosacce-tracked": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4prime": true,
+   "P5diff": [],
+   "P5prime": true,
+   "P6": true,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 19,
+    "perspectiveFrames": 19,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 172,
+     "LOGGIA": 51,
+     "MASS_REGION": 19,
+     "OPENING": 381,
+     "RIDGE": 19,
+     "ROOF_EDGE": 76,
+     "SILHOUETTE": 19,
+     "SURFACE_REGION": 72,
+     "WALL_REGION": 6
+    },
+    "typed": {
+     "T1_observationRemoved": 815,
+     "T2_relationRemoved": 324,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 74,
+      "VISION_FACADE_GAP": 19
+     },
+     "T4_refusalAdded": 19,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "MODEL",
+   "perf": {
+    "observationMs": [
+     49124,
+     40426
+    ],
+    "peakRssMB": [
+     995,
+     1018
+    ],
+    "totalMs": [
+     409082,
+     311905
+    ]
+   }
+  },
+  "marcowki": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4prime": true,
+   "P5diff": [],
+   "P5prime": true,
+   "P6": true,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 4,
+    "perspectiveFrames": 4,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 58,
+     "LOGGIA": 8,
+     "MASS_REGION": 4,
+     "OPENING": 74,
+     "RIDGE": 4,
+     "ROOF_EDGE": 16,
+     "SILHOUETTE": 4,
+     "SURFACE_REGION": 37
+    },
+    "typed": {
+     "T1_observationRemoved": 205,
+     "T2_relationRemoved": 82,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 16,
+      "VISION_FACADE_GAP": 4
+     },
+     "T4_refusalAdded": 4,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "MODEL",
+   "perf": {
+    "observationMs": [
+     24873,
+     18454
+    ],
+    "peakRssMB": [
+     1044,
+     1048
+    ],
+    "totalMs": [
+     373860,
+     343855
+    ]
+   }
+  },
+  "rarytasy-eoze": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4prime": true,
+   "P5diff": [],
+   "P5prime": true,
+   "P6": true,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 24,
+    "perspectiveFrames": 24,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 125,
+     "LOGGIA": 44,
+     "MASS_REGION": 24,
+     "OPENING": 314,
+     "RIDGE": 24,
+     "ROOF_EDGE": 96,
+     "SILHOUETTE": 24,
+     "SURFACE_REGION": 88
+    },
+    "typed": {
+     "T1_observationRemoved": 739,
+     "T2_relationRemoved": 277,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 77,
+      "VISION_FACADE_GAP": 24
+     },
+     "T4_refusalAdded": 24,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "MODEL",
+   "perf": {
+    "observationMs": [
+     73843,
+     45029
+    ],
+    "peakRssMB": [
+     1031,
+     1025
+    ],
+    "totalMs": [
+     402758,
+     306001
+    ]
+   }
+  },
+  "rarytasy-g2e": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4prime": true,
+   "P5diff": [],
+   "P5prime": true,
+   "P6": true,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 25,
+    "perspectiveFrames": 25,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 120,
+     "LOGGIA": 45,
+     "MASS_REGION": 25,
+     "OPENING": 335,
+     "RIDGE": 25,
+     "ROOF_EDGE": 100,
+     "SILHOUETTE": 25,
+     "SURFACE_REGION": 87,
+     "WALL_REGION": 3
+    },
+    "typed": {
+     "T1_observationRemoved": 765,
+     "T2_relationRemoved": 270,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 84,
+      "VISION_FACADE_GAP": 25
+     },
+     "T4_refusalAdded": 25,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "MODEL",
+   "perf": {
+    "observationMs": [
+     59784,
+     47848
+    ],
+    "peakRssMB": [
+     1006,
+     982
+    ],
+    "totalMs": [
+     323258,
+     307927
+    ]
+   }
+  },
+  "willa-miranda": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4prime": true,
+   "P5diff": [],
+   "P5prime": true,
+   "P6": true,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 18,
+    "perspectiveFrames": 18,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 128,
+     "LOGGIA": 91,
+     "MASS_REGION": 18,
+     "OPENING": 406,
+     "RIDGE": 17,
+     "ROOF_EDGE": 72,
+     "SILHOUETTE": 18,
+     "SURFACE_REGION": 77,
+     "WALL_REGION": 5
+    },
+    "typed": {
+     "T1_observationRemoved": 832,
+     "T2_relationRemoved": 305,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 155,
+      "VISION_FACADE_GAP": 18
+     },
+     "T4_refusalAdded": 18,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "MODEL",
+   "perf": {
+    "observationMs": [
+     44425,
+     36574
+    ],
+    "peakRssMB": [
+     957,
+     941
+    ],
+    "totalMs": [
+     419541,
+     396614
+    ]
+   }
+  }
+ },
+ "rows": 37,
+ "schema": "research.005r-router-n1.compare.1",
+ "summary": {
+  "P1": {
+   "fail": [],
+   "notMeasured": [],
+   "pass": 37
+  },
+  "P2": {
+   "fail": [],
+   "notMeasured": [],
+   "pass": 37
+  },
+  "P3": {
+   "fail": [],
+   "notMeasured": [
+    "A00",
+    "A01",
+    "A04",
+    "A05",
+    "alt-marcowki",
+    "dom-pod-milorzebem",
+    "dom-w-akebiach",
+    "dom-w-azaliach",
+    "dom-w-cyklamenach",
+    "dom-w-dabecjach",
+    "dom-w-gozdzikowcach",
+    "dom-w-krasnokwiatach",
+    "dom-w-modrzewnicy",
+    "dom-w-murajach"
+   ],
+   "pass": 23
+  },
+  "P4prime": {
+   "fail": [],
+   "notMeasured": [],
+   "pass": 37
+  },
+  "P5prime": {
+   "fail": [],
+   "notMeasured": [
+    "A00",
+    "A01",
+    "A04",
+    "A05",
+    "alt-marcowki",
+    "dom-pod-milorzebem",
+    "dom-w-akebiach",
+    "dom-w-azaliach",
+    "dom-w-cyklamenach",
+    "dom-w-dabecjach",
+    "dom-w-gozdzikowcach",
+    "dom-w-krasnokwiatach",
+    "dom-w-modrzewnicy",
+    "dom-w-murajach"
+   ],
+   "pass": 23
+  },
+  "P6": {
+   "fail": [],
+   "notMeasured": [
+    "A00",
+    "A01",
+    "A04",
+    "A05",
+    "alt-marcowki",
+    "dom-pod-milorzebem",
+    "dom-w-akebiach",
+    "dom-w-azaliach",
+    "dom-w-cyklamenach",
+    "dom-w-dabecjach",
+    "dom-w-gozdzikowcach",
+    "dom-w-krasnokwiatach",
+    "dom-w-modrzewnicy",
+    "dom-w-murajach"
+   ],
+   "pass": 23
+  },
+  "gapsRemovedByCategory": {
+   "EXTRACTOR_GAP_MISSING": 1887,
+   "VISION_FACADE_GAP": 403
+  },
+  "observationsRemoved": 15893,
+  "refusalsAdded": 403,
+  "unexpectedTotal": 0
+ }
+}

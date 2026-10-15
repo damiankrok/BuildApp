@@ -1,0 +1,29 @@
+{
+ "ELEVATION_MISLABELLED_RISK": 0,
+ "corpus005R_structuralElevations": 198,
+ "corpus005R_structuralElevationsFiledAsPerspective": 0,
+ "corpus005R_truthToIncumbentDocument": {
+  "EXTERIOR_RENDER->NOT_ACQUIRED": 39,
+  "EXTERIOR_RENDER->UNKNOWN": 39,
+  "FLOOR_PLAN->FLOOR_PLAN": 154,
+  "INTERIOR_RENDER->NOT_ACQUIRED": 142,
+  "INTERIOR_RENDER->PERSPECTIVE_RENDER": 70,
+  "INTERIOR_RENDER->UNKNOWN": 1,
+  "SECTION->SECTION": 50,
+  "SITE_PLAN->SITE_PLAN": 50,
+  "TECHNICAL_ELEVATION->ELEVATION": 198,
+  "UNKNOWN->ELEVATION": 198,
+  "UNKNOWN->NOT_ACQUIRED": 70,
+  "UNKNOWN->PERSPECTIVE_RENDER": 286,
+  "UNKNOWN->SECTION": 47,
+  "UNKNOWN->UNKNOWN": 8
+ },
+ "devPerspectiveAssetsByStructure": {
+  "INTERIOR_RENDER": 68,
+  "NOT_IN_005R_CORPUS": 74,
+  "UNKNOWN": 261
+ },
+ "devRows": 37,
+ "note": "structure is the publisher filing (hint), not truth",
+ "schema": "research.005r-router.p9.0.1"
+}

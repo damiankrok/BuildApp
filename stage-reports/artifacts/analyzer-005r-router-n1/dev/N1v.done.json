@@ -1,0 +1,328 @@
+{
+ "label": "N1v",
+ "config": "variant-N1v/vite.config.mjs",
+ "order": "given",
+ "par": 3,
+ "rows": [
+  {
+   "case": "A01",
+   "code": 0,
+   "wall": 401.620334533,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "A02",
+   "code": 0,
+   "wall": 317.381762665,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "A03",
+   "code": 0,
+   "wall": 348.713501447,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "A04",
+   "code": 0,
+   "wall": 466.978855976,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "A05",
+   "code": 0,
+   "wall": 182.487198728,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "A06",
+   "code": 0,
+   "wall": 314.169920749,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "A07",
+   "code": 0,
+   "wall": 491.85237582,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "alt-marcowki",
+   "code": 0,
+   "wall": 137.333785773,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "dom-miniaturka",
+   "code": 0,
+   "wall": 325.1653148,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "dom-pod-milorzebem",
+   "code": 0,
+   "wall": 269.553614515,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "dom-w-akebiach",
+   "code": 0,
+   "wall": 367.18284263,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "dom-w-arkadiach",
+   "code": 0,
+   "wall": 290.58647253,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "dom-w-azaliach",
+   "code": 0,
+   "wall": 339.945070091,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "dom-w-cieszyniankach",
+   "code": 0,
+   "wall": 254.662448053,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "dom-w-cyklamenach",
+   "code": 0,
+   "wall": 355.905508258,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "dom-w-dabecjach",
+   "code": 0,
+   "wall": 387.94960725,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "dom-w-daliach",
+   "code": 0,
+   "wall": 410.869919172,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "dom-w-glogownikach",
+   "code": 0,
+   "wall": 297.15702427,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "dom-w-gozdzikowcach",
+   "code": 0,
+   "wall": 389.198734031,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "dom-w-helikoniach",
+   "code": 0,
+   "wall": 313.116834641,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "dom-w-jablonkach",
+   "code": 0,
+   "wall": 434.554030687,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "dom-w-krasnokwiatach",
+   "code": 0,
+   "wall": 392.619992186,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "dom-w-modrzewnicy",
+   "code": 0,
+   "wall": 352.966790841,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "dom-w-modrzykach",
+   "code": 0,
+   "wall": 280.625958488,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "dom-w-morelach",
+   "code": 0,
+   "wall": 297.50433453,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "dom-w-murajach",
+   "code": 0,
+   "wall": 362.990067191,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "dom-w-tunbergiach",
+   "code": 0,
+   "wall": 379.127334411,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "dom-w-tymianku",
+   "code": 0,
+   "wall": 303.516738654,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "dom-w-zurawkach",
+   "code": 0,
+   "wall": 425.76099843,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "kosacce-tracked",
+   "code": 0,
+   "wall": 319.755898452,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "rarytasy-eoze",
+   "code": 0,
+   "wall": 312.591472358,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  },
+  {
+   "case": "willa-miranda",
+   "code": 0,
+   "wall": 403.404188615,
+   "sources": {
+    "tree": "003d3715404bb05e2c7f0ab8d92b410ce3b8f64fb5447584573343c2630e7714",
+    "variant": "33ea5810f6b71f4da69bab771a55028e02ac56c20099d1a32a51e58107c919cd"
+   },
+   "moved": false
+  }
+ ]
+}

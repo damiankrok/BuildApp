@@ -1,0 +1,463 @@
+{
+ "perRow": {
+  "A02": {
+   "P8": true,
+   "added": 0,
+   "baseline": "R0",
+   "cameras": 28,
+   "camerasEqual": true,
+   "camerasSolved": [
+    7,
+    7
+   ],
+   "challenger": "N1v",
+   "challengerPerspectiveEvidence": 0,
+   "featureGraphHashEqual": false,
+   "modelEqual": true,
+   "noPerspectiveCorroborationLeft": true,
+   "noneAdded": true,
+   "removed": 1239,
+   "removedAllPerspective": true,
+   "removedByDisposition": {
+    "IGNORED_WITH_REASON": 945,
+    "USED_AS_CORROBORATION": 294
+   },
+   "violations": 0,
+   "violationsEqual": true
+  },
+  "A03": {
+   "P8": true,
+   "added": 0,
+   "baseline": "R0",
+   "cameras": 19,
+   "camerasEqual": true,
+   "camerasSolved": [
+    1,
+    1
+   ],
+   "challenger": "N1v",
+   "challengerPerspectiveEvidence": 0,
+   "featureGraphHashEqual": false,
+   "modelEqual": true,
+   "noPerspectiveCorroborationLeft": true,
+   "noneAdded": true,
+   "removed": 888,
+   "removedAllPerspective": true,
+   "removedByDisposition": {
+    "IGNORED_WITH_REASON": 840,
+    "USED_AS_CORROBORATION": 48
+   },
+   "violations": 0,
+   "violationsEqual": true
+  },
+  "A06": {
+   "P8": true,
+   "added": 0,
+   "baseline": "R0",
+   "cameras": 11,
+   "camerasEqual": true,
+   "camerasSolved": [
+    6,
+    6
+   ],
+   "challenger": "N1v",
+   "challengerPerspectiveEvidence": 0,
+   "featureGraphHashEqual": false,
+   "modelEqual": true,
+   "noPerspectiveCorroborationLeft": true,
+   "noneAdded": true,
+   "removed": 337,
+   "removedAllPerspective": true,
+   "removedByDisposition": {
+    "IGNORED_WITH_REASON": 131,
+    "USED_AS_CORROBORATION": 206
+   },
+   "violations": 0,
+   "violationsEqual": true
+  },
+  "A07": {
+   "P8": true,
+   "added": 0,
+   "baseline": "R0",
+   "cameras": 22,
+   "camerasEqual": true,
+   "camerasSolved": [
+    1,
+    1
+   ],
+   "challenger": "N1v",
+   "challengerPerspectiveEvidence": 0,
+   "featureGraphHashEqual": false,
+   "modelEqual": true,
+   "noPerspectiveCorroborationLeft": true,
+   "noneAdded": true,
+   "removed": 980,
+   "removedAllPerspective": true,
+   "removedByDisposition": {
+    "IGNORED_WITH_REASON": 937,
+    "USED_AS_CORROBORATION": 43
+   },
+   "violations": 0,
+   "violationsEqual": true
+  },
+  "dom-miniaturka": {
+   "P8": true,
+   "added": 0,
+   "baseline": "R0",
+   "cameras": 4,
+   "camerasEqual": true,
+   "camerasSolved": [
+    4,
+    4
+   ],
+   "challenger": "N1v",
+   "challengerPerspectiveEvidence": 0,
+   "featureGraphHashEqual": false,
+   "modelEqual": true,
+   "noPerspectiveCorroborationLeft": true,
+   "noneAdded": true,
+   "removed": 136,
+   "removedAllPerspective": true,
+   "removedByDisposition": {
+    "USED_AS_CORROBORATION": 136
+   },
+   "violations": 0,
+   "violationsEqual": true
+  },
+  "dom-pod-jarzabem": {
+   "P8": true,
+   "added": 0,
+   "baseline": "R0fix",
+   "cameras": 4,
+   "camerasEqual": true,
+   "camerasSolved": [
+    1,
+    1
+   ],
+   "challenger": "N1v",
+   "challengerPerspectiveEvidence": 0,
+   "featureGraphHashEqual": false,
+   "modelEqual": true,
+   "noPerspectiveCorroborationLeft": true,
+   "noneAdded": true,
+   "removed": 147,
+   "removedAllPerspective": true,
+   "removedByDisposition": {
+    "IGNORED_WITH_REASON": 124,
+    "USED_AS_CORROBORATION": 23
+   },
+   "violations": 0,
+   "violationsEqual": true
+  },
+  "dom-w-arkadiach": {
+   "P8": true,
+   "added": 0,
+   "baseline": "R0fix",
+   "cameras": 13,
+   "camerasEqual": true,
+   "camerasSolved": [
+    2,
+    2
+   ],
+   "challenger": "N1v",
+   "challengerPerspectiveEvidence": 0,
+   "featureGraphHashEqual": false,
+   "modelEqual": true,
+   "noPerspectiveCorroborationLeft": true,
+   "noneAdded": true,
+   "removed": 525,
+   "removedAllPerspective": true,
+   "removedByDisposition": {
+    "IGNORED_WITH_REASON": 455,
+    "USED_AS_CORROBORATION": 70
+   },
+   "violations": 0,
+   "violationsEqual": true
+  },
+  "dom-w-cieszyniankach": {
+   "P8": true,
+   "added": 0,
+   "baseline": "R0",
+   "cameras": 18,
+   "camerasEqual": true,
+   "camerasSolved": [
+    1,
+    1
+   ],
+   "challenger": "N1v",
+   "challengerPerspectiveEvidence": 0,
+   "featureGraphHashEqual": false,
+   "modelEqual": true,
+   "noPerspectiveCorroborationLeft": true,
+   "noneAdded": true,
+   "removed": 777,
+   "removedAllPerspective": true,
+   "removedByDisposition": {
+    "IGNORED_WITH_REASON": 716,
+    "USED_AS_CORROBORATION": 61
+   },
+   "violations": 0,
+   "violationsEqual": true
+  },
+  "dom-w-daliach": {
+   "P8": true,
+   "added": 0,
+   "baseline": "R0",
+   "cameras": 6,
+   "camerasEqual": true,
+   "camerasSolved": [
+    2,
+    2
+   ],
+   "challenger": "N1v",
+   "challengerPerspectiveEvidence": 0,
+   "featureGraphHashEqual": false,
+   "modelEqual": true,
+   "noPerspectiveCorroborationLeft": true,
+   "noneAdded": true,
+   "removed": 206,
+   "removedAllPerspective": true,
+   "removedByDisposition": {
+    "IGNORED_WITH_REASON": 119,
+    "USED_AS_CORROBORATION": 87
+   },
+   "violations": 0,
+   "violationsEqual": true
+  },
+  "dom-w-glogownikach": {
+   "P8": true,
+   "added": 0,
+   "baseline": "R0",
+   "cameras": 8,
+   "camerasEqual": true,
+   "camerasSolved": [
+    2,
+    2
+   ],
+   "challenger": "N1v",
+   "challengerPerspectiveEvidence": 0,
+   "featureGraphHashEqual": false,
+   "modelEqual": true,
+   "noPerspectiveCorroborationLeft": true,
+   "noneAdded": true,
+   "removed": 279,
+   "removedAllPerspective": true,
+   "removedByDisposition": {
+    "IGNORED_WITH_REASON": 240,
+    "USED_AS_CORROBORATION": 39
+   },
+   "violations": 0,
+   "violationsEqual": true
+  },
+  "dom-w-jablonkach": {
+   "P8": true,
+   "added": 0,
+   "baseline": "R0",
+   "cameras": 18,
+   "camerasEqual": true,
+   "camerasSolved": [
+    2,
+    2
+   ],
+   "challenger": "N1v",
+   "challengerPerspectiveEvidence": 0,
+   "featureGraphHashEqual": false,
+   "modelEqual": true,
+   "noPerspectiveCorroborationLeft": true,
+   "noneAdded": true,
+   "removed": 655,
+   "removedAllPerspective": true,
+   "removedByDisposition": {
+    "IGNORED_WITH_REASON": 581,
+    "USED_AS_CORROBORATION": 74
+   },
+   "violations": 0,
+   "violationsEqual": true
+  },
+  "dom-w-zurawkach": {
+   "P8": true,
+   "added": 0,
+   "baseline": "R0",
+   "cameras": 10,
+   "camerasEqual": true,
+   "camerasSolved": [
+    4,
+    4
+   ],
+   "challenger": "N1v",
+   "challengerPerspectiveEvidence": 0,
+   "featureGraphHashEqual": false,
+   "modelEqual": true,
+   "noPerspectiveCorroborationLeft": true,
+   "noneAdded": true,
+   "removed": 301,
+   "removedAllPerspective": true,
+   "removedByDisposition": {
+    "IGNORED_WITH_REASON": 214,
+    "USED_AS_CORROBORATION": 87
+   },
+   "violations": 0,
+   "violationsEqual": true
+  },
+  "kosacce-clean": {
+   "P8": true,
+   "added": 0,
+   "baseline": "R0",
+   "cameras": 19,
+   "camerasEqual": true,
+   "camerasSolved": [
+    5,
+    5
+   ],
+   "challenger": "N1v",
+   "challengerPerspectiveEvidence": 0,
+   "featureGraphHashEqual": false,
+   "modelEqual": true,
+   "noPerspectiveCorroborationLeft": true,
+   "noneAdded": true,
+   "removed": 815,
+   "removedAllPerspective": true,
+   "removedByDisposition": {
+    "IGNORED_WITH_REASON": 628,
+    "USED_AS_CORROBORATION": 187
+   },
+   "violations": 0,
+   "violationsEqual": true
+  },
+  "kosacce-tracked": {
+   "P8": true,
+   "added": 0,
+   "baseline": "R0",
+   "cameras": 19,
+   "camerasEqual": true,
+   "camerasSolved": [
+    5,
+    5
+   ],
+   "challenger": "N1v",
+   "challengerPerspectiveEvidence": 0,
+   "featureGraphHashEqual": false,
+   "modelEqual": true,
+   "noPerspectiveCorroborationLeft": true,
+   "noneAdded": true,
+   "removed": 815,
+   "removedAllPerspective": true,
+   "removedByDisposition": {
+    "IGNORED_WITH_REASON": 628,
+    "USED_AS_CORROBORATION": 187
+   },
+   "violations": 0,
+   "violationsEqual": true
+  },
+  "marcowki": {
+   "P8": true,
+   "added": 0,
+   "baseline": "R0fix",
+   "cameras": 4,
+   "camerasEqual": true,
+   "camerasSolved": [
+    3,
+    3
+   ],
+   "challenger": "N1v",
+   "challengerPerspectiveEvidence": 0,
+   "featureGraphHashEqual": false,
+   "modelEqual": true,
+   "noPerspectiveCorroborationLeft": true,
+   "noneAdded": true,
+   "removed": 205,
+   "removedAllPerspective": true,
+   "removedByDisposition": {
+    "IGNORED_WITH_REASON": 65,
+    "USED_AS_CORROBORATION": 140
+   },
+   "violations": 0,
+   "violationsEqual": true
+  },
+  "rarytasy-eoze": {
+   "P8": true,
+   "added": 0,
+   "baseline": "R0",
+   "cameras": 24,
+   "camerasEqual": true,
+   "camerasSolved": [
+    3,
+    3
+   ],
+   "challenger": "N1v",
+   "challengerPerspectiveEvidence": 0,
+   "featureGraphHashEqual": false,
+   "modelEqual": true,
+   "noPerspectiveCorroborationLeft": true,
+   "noneAdded": true,
+   "removed": 739,
+   "removedAllPerspective": true,
+   "removedByDisposition": {
+    "IGNORED_WITH_REASON": 658,
+    "USED_AS_CORROBORATION": 81
+   },
+   "violations": 0,
+   "violationsEqual": true
+  },
+  "rarytasy-g2e": {
+   "P8": true,
+   "added": 0,
+   "baseline": "R0fix",
+   "cameras": 25,
+   "camerasEqual": true,
+   "camerasSolved": [
+    12,
+    12
+   ],
+   "challenger": "N1v",
+   "challengerPerspectiveEvidence": 0,
+   "featureGraphHashEqual": false,
+   "modelEqual": true,
+   "noPerspectiveCorroborationLeft": true,
+   "noneAdded": true,
+   "removed": 765,
+   "removedAllPerspective": true,
+   "removedByDisposition": {
+    "IGNORED_WITH_REASON": 437,
+    "USED_AS_CORROBORATION": 328
+   },
+   "violations": 1,
+   "violationsEqual": true
+  },
+  "willa-miranda": {
+   "P8": true,
+   "added": 0,
+   "baseline": "R0",
+   "cameras": 18,
+   "camerasEqual": true,
+   "camerasSolved": [
+    6,
+    6
+   ],
+   "challenger": "N1v",
+   "challengerPerspectiveEvidence": 0,
+   "featureGraphHashEqual": false,
+   "modelEqual": true,
+   "noPerspectiveCorroborationLeft": true,
+   "noneAdded": true,
+   "removed": 832,
+   "removedAllPerspective": true,
+   "removedByDisposition": {
+    "IGNORED_WITH_REASON": 637,
+    "USED_AS_CORROBORATION": 195
+   },
+   "violations": 0,
+   "violationsEqual": true
+  }
+ },
+ "schema": "research.005r-router-n1.p8.1",
+ "summary": {
+  "P8fail": [],
+  "P8pass": 18,
+  "camerasSolvedBaseline": 67,
+  "camerasSolvedChallenger": 67,
+  "recordsAdded": 0,
+  "rows": 18,
+  "usedAsCorroborationRemoved": 2286
+ }
+}

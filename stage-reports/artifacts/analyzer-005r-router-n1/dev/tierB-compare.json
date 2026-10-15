@@ -1,0 +1,304 @@
+{
+ "a": "runs-prior/R0",
+ "aOverrides": [
+  "runs-prior/R0fix"
+ ],
+ "b": "runs/N1v",
+ "mode": "predicates",
+ "perRow": {
+  "A00": {
+   "P1": true,
+   "P2": true,
+   "P3": null,
+   "P4prime": true,
+   "P5prime": null,
+   "P6": null,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 14,
+    "perspectiveFrames": 14,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 77,
+     "LOGGIA": 23,
+     "MASS_REGION": 14,
+     "OPENING": 260,
+     "RIDGE": 13,
+     "ROOF_EDGE": 56,
+     "SILHOUETTE": 14,
+     "SURFACE_REGION": 71
+    },
+    "typed": {
+     "T1_observationRemoved": 528,
+     "T2_relationRemoved": 152,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 44,
+      "VISION_FACADE_GAP": 14
+     },
+     "T4_refusalAdded": 14,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "REFUSED RECONSTRUCTION_FAILED/RECONSTRUCTION_FAILED PLAN_RESOLUTION_INCONCLUSIVE"
+  },
+  "dom-pod-jarzabem": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4prime": true,
+   "P5diff": [],
+   "P5prime": true,
+   "P6": true,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 4,
+    "perspectiveFrames": 4,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 29,
+     "LOGGIA": 6,
+     "MASS_REGION": 4,
+     "OPENING": 69,
+     "RIDGE": 4,
+     "ROOF_EDGE": 16,
+     "SILHOUETTE": 4,
+     "SURFACE_REGION": 15
+    },
+    "typed": {
+     "T1_observationRemoved": 147,
+     "T2_relationRemoved": 51,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 12,
+      "VISION_FACADE_GAP": 4
+     },
+     "T4_refusalAdded": 4,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "MODEL",
+   "perf": {
+    "observationMs": [
+     17844,
+     16185
+    ],
+    "peakRssMB": [
+     962,
+     947
+    ],
+    "totalMs": [
+     351081,
+     277735
+    ]
+   }
+  },
+  "kosacce-clean": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4prime": true,
+   "P5diff": [],
+   "P5prime": true,
+   "P6": true,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 19,
+    "perspectiveFrames": 19,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 172,
+     "LOGGIA": 51,
+     "MASS_REGION": 19,
+     "OPENING": 381,
+     "RIDGE": 19,
+     "ROOF_EDGE": 76,
+     "SILHOUETTE": 19,
+     "SURFACE_REGION": 72,
+     "WALL_REGION": 6
+    },
+    "typed": {
+     "T1_observationRemoved": 815,
+     "T2_relationRemoved": 324,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 74,
+      "VISION_FACADE_GAP": 19
+     },
+     "T4_refusalAdded": 19,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "MODEL",
+   "perf": {
+    "observationMs": [
+     52091,
+     44167
+    ],
+    "peakRssMB": [
+     977,
+     966
+    ],
+    "totalMs": [
+     409999,
+     304009
+    ]
+   }
+  },
+  "marcowki": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4prime": true,
+   "P5diff": [],
+   "P5prime": true,
+   "P6": true,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 4,
+    "perspectiveFrames": 4,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 58,
+     "LOGGIA": 8,
+     "MASS_REGION": 4,
+     "OPENING": 74,
+     "RIDGE": 4,
+     "ROOF_EDGE": 16,
+     "SILHOUETTE": 4,
+     "SURFACE_REGION": 37
+    },
+    "typed": {
+     "T1_observationRemoved": 205,
+     "T2_relationRemoved": 82,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 16,
+      "VISION_FACADE_GAP": 4
+     },
+     "T4_refusalAdded": 4,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "MODEL",
+   "perf": {
+    "observationMs": [
+     24873,
+     18454
+    ],
+    "peakRssMB": [
+     1044,
+     1048
+    ],
+    "totalMs": [
+     373860,
+     343855
+    ]
+   }
+  },
+  "rarytasy-g2e": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4prime": true,
+   "P5diff": [],
+   "P5prime": true,
+   "P6": true,
+   "graph": {
+    "orthographicFramesUnchanged": true,
+    "perspectiveAssets": 25,
+    "perspectiveFrames": 25,
+    "removedByKind": {
+     "LINEAR_VOLUME_CANDIDATE": 120,
+     "LOGGIA": 45,
+     "MASS_REGION": 25,
+     "OPENING": 335,
+     "RIDGE": 25,
+     "ROOF_EDGE": 100,
+     "SILHOUETTE": 25,
+     "SURFACE_REGION": 87,
+     "WALL_REGION": 3
+    },
+    "typed": {
+     "T1_observationRemoved": 765,
+     "T2_relationRemoved": 270,
+     "T3_gapRemoved": {
+      "EXTRACTOR_GAP_MISSING": 84,
+      "VISION_FACADE_GAP": 25
+     },
+     "T4_refusalAdded": 25,
+     "T5_extractorRemoved": [],
+     "T6_conflictRemoved": 0
+    },
+    "unexpected": [],
+    "unexpectedCount": 0
+   },
+   "outcome": "MODEL",
+   "perf": {
+    "observationMs": [
+     59784,
+     47848
+    ],
+    "peakRssMB": [
+     1006,
+     982
+    ],
+    "totalMs": [
+     323258,
+     307927
+    ]
+   }
+  }
+ },
+ "rows": 5,
+ "schema": "research.005r-router-n1.compare.1",
+ "summary": {
+  "P1": {
+   "fail": [],
+   "notMeasured": [],
+   "pass": 5
+  },
+  "P2": {
+   "fail": [],
+   "notMeasured": [],
+   "pass": 5
+  },
+  "P3": {
+   "fail": [],
+   "notMeasured": [
+    "A00"
+   ],
+   "pass": 4
+  },
+  "P4prime": {
+   "fail": [],
+   "notMeasured": [],
+   "pass": 5
+  },
+  "P5prime": {
+   "fail": [],
+   "notMeasured": [
+    "A00"
+   ],
+   "pass": 4
+  },
+  "P6": {
+   "fail": [],
+   "notMeasured": [
+    "A00"
+   ],
+   "pass": 4
+  },
+  "gapsRemovedByCategory": {
+   "EXTRACTOR_GAP_MISSING": 230,
+   "VISION_FACADE_GAP": 66
+  },
+  "observationsRemoved": 2460,
+  "refusalsAdded": 66,
+  "unexpectedTotal": 0
+ }
+}
