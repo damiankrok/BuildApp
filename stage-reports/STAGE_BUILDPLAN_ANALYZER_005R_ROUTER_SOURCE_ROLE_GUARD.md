@@ -97,9 +97,9 @@ wierszy jest **37** (45 EXTRACT − 8 DobreDomy). Kontrola harnessu R0copy obję
 | **P5 podsumowanie** | **FAIL** na każdym ukończonym wierszu — `recogniser.ms` (czas zegarowy) |
 | P6 kandydat (treść) | PASS |
 | **P7 determinizm** | **FAIL w brzmieniu prerejestracji** (podsumowanie bajt w bajt). Model/graf/metryki/kandydat/porażki N1 = N1shuf 37/37 (odwrócona kolejność + tasowanie zasobów w pakiecie); podsumowanie różni się tylko `recogniser.ms`. **Inkumbent też nie przechodzi:** R0 vs R0rev — 0/37 surowych podsumowań identycznych (ten sam powód), co pokazuje, że P5/P7 były wadliwie wyspecyfikowane; to nie zmienia werdyktu. Harness już wcześniej wycinał `startedAt`/`completedAt` (`run-case.ts`), czego P5 nie wymieniał — ujawnione tutaj. |
-| P8 ledger | PASS 7/7 — usunięte tylko rekordy o dowodach perspektywicznych (w tym 922 `USED_AS_CORROBORATION`), 0 dodanych, 0 naruszeń, kamery identyczne |
+| P8 ledger | PASS 18/18 (każdy wiersz z rozwiązaną kamerą perspektywiczną; pierwsza wersja liczyła tylko 7 — poprawione po recenzji A) — usunięte tylko rekordy o dowodach perspektywicznych (w tym **2 286** `USED_AS_CORROBORATION`), 0 dodanych, 0 naruszeń ledgera, 67 rozwiązanych kamer identycznych; jedno naruszenie grafu cech na G2E-5 istnieje już w R0 i jest identyczne |
 | P9 ryzyko elewacji jako renderu | PASS — 0 ze 198 elewacji strukturalnych ma rolę `PERSPECTIVE_RENDER` |
-| P10 pokrycie | spełnione — 37 wierszy z klatkami perspektywicznymi, 7 z rozwiązaną kamerą |
+| P10 pokrycie | spełnione — 37 wierszy z klatkami perspektywicznymi, 18 z rozwiązaną kamerą |
 
 **Wrażliwość post-hoc — NIE jest wynikiem i NIE zmienia werdyktu:** zdefiniowane po odczycie wyników N1
 (`52b4884`) P4′ (każda usunięta luka zakotwiczona w zasobie perspektywicznym) i P5′/P7′ (bez pól `ms`) byłyby
@@ -142,10 +142,18 @@ zawierają, i jedno zdanie niebędące tekstem wydawcy) wciąż istnieje w histo
 `source-package.json` na HEAD (wcześniejsze etapy, 3 z DobreDomy) zawiera podpisy i prozę specyfikacji wydawcy.
 Nic nie przepisano, nie usunięto ani nie wypchnięto siłą; decyzja należy do OWNER-a.
 
-## J. Bramki
+## J. Bramki i recenzje
 
-Patrz `stage-reports/artifacts/analyzer-005r-router/gates.json`: `npm install`,
-`npm run typecheck`, `npm test`, `npm run build`, `npm run e2e`; testy izolacji (nowy blok 005R-ROUTER).
+`stage-reports/artifacts/analyzer-005r-router/gates.json`. Node 22.22.2. `npm install` 0; `npm run typecheck` 0;
+`npm test`: 2584 zaliczone / 11 pominięte, **2 czerwone** — dwa testy `WorkerExecutor` w `apps/analyzer-api` przekroczyły
+120 s, gdy na tych samych 4 rdzeniach szło 11 replayów ledgera; jedno ponowne uruchomienie samego pliku (z blokiem
+izolacji): 63/63, exit 0, żaden test nie osłabiony. `npm run build` 0; `npm run e2e` **47/47**. Zamrożenie końcowe:
+**IDENTICAL** (po przywróceniu śledzonych zrzutów e2e, które bramka nadpisuje). Pełny przebieg CI na wypchniętym
+HEAD jest rozstrzygający — patrz handoff.
+
+Recenzje: dwie przed implementacją (`reviews/pre-skeptic.md`, `reviews/pre-code-critic.md`), trzy po
+(`reviews/post-review-dispositions.md`: źródło/semantyka, niezależność prawdy/bezpieczeństwo, runtime/prywatność).
+Żadnego P0; wszystkie P1 naprawione w artefaktach; werdykt bez zmian.
 
 ## K. Ograniczenia
 

@@ -2,6 +2,7 @@
  "A02": {
   "P8": true,
   "added": 0,
+  "baseline": "R0",
   "camerasEqual": true,
   "camerasSolved": 7,
   "modelEqual": true,
@@ -12,6 +13,7 @@
  "A03": {
   "P8": true,
   "added": 0,
+  "baseline": "R0",
   "camerasEqual": true,
   "camerasSolved": 1,
   "modelEqual": true,
@@ -19,9 +21,21 @@
   "removedUsedAsCorroboration": 48,
   "violationsN1": 0
  },
+ "A06": {
+  "P8": true,
+  "added": 0,
+  "baseline": "R0",
+  "camerasEqual": true,
+  "camerasSolved": 6,
+  "modelEqual": true,
+  "removed": 337,
+  "removedUsedAsCorroboration": 206,
+  "violationsN1": 0
+ },
  "A07": {
   "P8": true,
   "added": 0,
+  "baseline": "R0",
   "camerasEqual": true,
   "camerasSolved": 1,
   "modelEqual": true,
@@ -29,9 +43,76 @@
   "removedUsedAsCorroboration": 43,
   "violationsN1": 0
  },
+ "dom-miniaturka": {
+  "P8": true,
+  "added": 0,
+  "baseline": "R0",
+  "camerasEqual": true,
+  "camerasSolved": 4,
+  "modelEqual": true,
+  "removed": 136,
+  "removedUsedAsCorroboration": 136,
+  "violationsN1": 0
+ },
+ "dom-pod-jarzabem": {
+  "P8": true,
+  "added": 0,
+  "baseline": "R0fix",
+  "camerasEqual": true,
+  "camerasSolved": 1,
+  "modelEqual": true,
+  "removed": 147,
+  "removedUsedAsCorroboration": 23,
+  "violationsN1": 0
+ },
+ "dom-w-arkadiach": {
+  "P8": true,
+  "added": 0,
+  "baseline": "R0fix",
+  "camerasEqual": true,
+  "camerasSolved": 2,
+  "modelEqual": true,
+  "removed": 525,
+  "removedUsedAsCorroboration": 70,
+  "violationsN1": 0
+ },
+ "dom-w-cieszyniankach": {
+  "P8": true,
+  "added": 0,
+  "baseline": "R0",
+  "camerasEqual": true,
+  "camerasSolved": 1,
+  "modelEqual": true,
+  "removed": 777,
+  "removedUsedAsCorroboration": 61,
+  "violationsN1": 0
+ },
+ "dom-w-daliach": {
+  "P8": true,
+  "added": 0,
+  "baseline": "R0",
+  "camerasEqual": true,
+  "camerasSolved": 2,
+  "modelEqual": true,
+  "removed": 206,
+  "removedUsedAsCorroboration": 87,
+  "violationsN1": 0
+ },
+ "dom-w-glogownikach": {
+  "P8": true,
+  "added": 0,
+  "baseline": "R0",
+  "camerasEqual": true,
+  "camerasSolved": 2,
+  "modelEqual": true,
+  "removed": 279,
+  "removedUsedAsCorroboration": 39,
+  "violationsN1": 0
+ },
  "dom-w-jablonkach": {
   "P8": true,
   "added": 0,
+  "baseline": "R0",
   "camerasEqual": true,
   "camerasSolved": 2,
   "modelEqual": true,
@@ -39,9 +120,21 @@
   "removedUsedAsCorroboration": 74,
   "violationsN1": 0
  },
+ "dom-w-zurawkach": {
+  "P8": true,
+  "added": 0,
+  "baseline": "R0",
+  "camerasEqual": true,
+  "camerasSolved": 4,
+  "modelEqual": true,
+  "removed": 301,
+  "removedUsedAsCorroboration": 87,
+  "violationsN1": 0
+ },
  "kosacce-clean": {
   "P8": true,
   "added": 0,
+  "baseline": "R0",
   "camerasEqual": true,
   "camerasSolved": 5,
   "modelEqual": true,
@@ -49,9 +142,32 @@
   "removedUsedAsCorroboration": 187,
   "violationsN1": 0
  },
+ "kosacce-tracked": {
+  "P8": true,
+  "added": 0,
+  "baseline": "R0",
+  "camerasEqual": true,
+  "camerasSolved": 5,
+  "modelEqual": true,
+  "removed": 815,
+  "removedUsedAsCorroboration": 187,
+  "violationsN1": 0
+ },
+ "marcowki": {
+  "P8": true,
+  "added": 0,
+  "baseline": "R0fix",
+  "camerasEqual": true,
+  "camerasSolved": 3,
+  "modelEqual": true,
+  "removed": 205,
+  "removedUsedAsCorroboration": 140,
+  "violationsN1": 0
+ },
  "rarytasy-eoze": {
   "P8": true,
   "added": 0,
+  "baseline": "R0",
   "camerasEqual": true,
   "camerasSolved": 3,
   "modelEqual": true,
@@ -59,9 +175,21 @@
   "removedUsedAsCorroboration": 81,
   "violationsN1": 0
  },
+ "rarytasy-g2e": {
+  "P8": true,
+  "added": 0,
+  "baseline": "R0fix",
+  "camerasEqual": true,
+  "camerasSolved": 12,
+  "modelEqual": true,
+  "removed": 765,
+  "removedUsedAsCorroboration": 328,
+  "violationsN1": 1
+ },
  "willa-miranda": {
   "P8": true,
   "added": 0,
+  "baseline": "R0",
   "camerasEqual": true,
   "camerasSolved": 6,
   "modelEqual": true,

@@ -11,7 +11,7 @@
 ## Leakage of interior pictures into facade evidence
 
 - **Before (R0, production base):** every `PERSPECTIVE_RENDER` frame is read by the five orthographic facade
-  extractors. On the 34 development rows with a valid baseline: 381 perspective frames, **14 987** facade observations
+  extractors. On the 34 development rows with a valid first baseline: 381 perspective frames, **14 987** facade observations (all 37 rows with R0fix: 403 frames, 15 893)
   (OPENING 6 923, LINEAR_VOLUME_CANDIDATE 2 684, SURFACE_REGION 1 648, ROOF_EDGE 1 524, LOGGIA 1 025, MASS_REGION 381,
   SILHOUETTE 381, RIDGE 370, WALL_REGION 51). How many of those frames are interiors is **NOT_MEASURED** on independent
   truth. By PUBLISHER_STRUCTURE (byte match to 005R's carousel truth, not truth): 68 of the 403 perspective assets in
@@ -22,8 +22,8 @@
   says nothing about the vision channel (`tasks.ts:38`, off in every product path, not measurable without sending
   pixels) and nothing about an interior that would be filed as `ELEVATION` (P9: 0 of 198 structural elevations are
   filed as perspective; the reverse case has no measured instance in 005R V0a either).
-- **Ledger (P8, 7 rows with 25 solved perspective cameras):** N1 removes only records about perspective evidence;
-  922 of them were `USED_AS_CORROBORATION` with the reason "depth order was checked against it", a check no code
+- **Ledger (P8, all 18 rows with a solved perspective camera, 67 cameras):** N1 removes only records about perspective evidence;
+  2 286 of them were `USED_AS_CORROBORATION` with the reason "depth order was checked against it", a check no code
   performs (FB-3). Cameras, solved counts, model hashes identical.
 
 ## Router candidates and scene truth

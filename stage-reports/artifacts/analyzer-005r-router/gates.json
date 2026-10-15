@@ -1,0 +1,21 @@
+{
+ "schema": "research.005r-router.gates.0.1",
+ "node": "v22.22.2",
+ "npmInstall": "exit 0",
+ "typecheck": "exit 0",
+ "test": {
+  "exit": 1,
+  "files": "Test Files  1 failed | 181 passed | 1 skipped (183)",
+  "tests": "Tests  2 failed | 2584 passed | 11 skipped (2597)",
+  "failures": [
+   "apps/analyzer-api/test/worker.test.ts \u2014 two WorkerExecutor tests timed out at 120 s while 11 ledger replays ran on the same 4 cores"
+  ],
+  "rerunAlone": "apps/analyzer-api/test/worker.test.ts + tests/architecture/research-isolation.test.ts: 2 files, 63/63 passed, exit 0 (one rerun of the red file, no test weakened)"
+ },
+ "build": "exit 0",
+ "e2e": "47 passed (6.1m)",
+ "freezeEnd": "FREEZE: IDENTICAL after restoring the tracked e2e screenshots under stage-reports/artifacts/ that `npm run e2e` rewrites (a side effect of the gate, restored with git checkout; none belongs to this stage)",
+ "analyzerTestsWithStagedN1": "52/52 (packages/source-analyzer, patch applied locally, then removed)",
+ "gateMutations": "6/6 killed",
+ "note": "no production code changed; CI on the pushed head is the authoritative full run"
+}
