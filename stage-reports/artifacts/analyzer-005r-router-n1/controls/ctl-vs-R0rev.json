@@ -1,0 +1,41 @@
+{
+ "a": "runs-prior/R0rev",
+ "aOverrides": [],
+ "b": "runs/R0ctl",
+ "mode": "determinism",
+ "perRow": {
+  "dom-pod-jarzabem": {
+   "P7prime": true,
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": true
+  },
+  "marcowki": {
+   "P7prime": true,
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": true
+  },
+  "rarytasy-g2e": {
+   "P7prime": true,
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": true
+  }
+ },
+ "rows": 3,
+ "schema": "research.005r-router-n1.compare.1",
+ "summary": {
+  "P7prime": {
+   "fail": [],
+   "notMeasured": [],
+   "pass": 3
+  }
+ }
+}

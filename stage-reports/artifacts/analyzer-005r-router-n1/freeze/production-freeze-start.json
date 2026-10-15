@@ -1,0 +1,150 @@
+{
+ "head": "0f2c347c0be03a32510f1e54460eab6fdf1b65a5",
+ "paths": {
+  "apps": {
+   "files": 277,
+   "index": "7de5493352eb25d68bf7c17ffbafc6f70f5a81f9542932897b852024580716e0",
+   "disk": "670cd86fbb57907f23950c57a3db471ae2fad68937179ddebd0b93387194ca65"
+  },
+  ".github": {
+   "files": 2,
+   "index": "2e64ed3a7150375f9b2981d75477f2b72db73265c68816f798a945d614459b53",
+   "disk": "6a2bf74d0bf7b1be4b5dde6c6658731621b565521135161cbd807405740e5292"
+  },
+  "package.json": {
+   "files": 1,
+   "index": "b8fad16b5eb30f8c06eb5cefe9d59e54f0f482fa207faeb02a1205f5275cc060",
+   "disk": "1c37c6ffc2b454197b6cc7c125a6ed8202dcbff86aafaf85c1b8eb2e3a6d2880"
+  },
+  "package-lock.json": {
+   "files": 1,
+   "index": "c3ec2e155f3d4e52cc7449c86b6c8a2006aa80d5d27437235233585f929ad64a",
+   "disk": "3c3d2e7aba0db7242de76dc0b5d9f5c7dfef380def56d0b00f611bae01655ee6"
+  },
+  "tsconfig.json": {
+   "files": 1,
+   "index": "ee5d22743c3b6088716a913706245ee9983a3855390de46559a49647f0d42c9a",
+   "disk": "8bde4120a1184ff55ba04872b83d5f907941cdb0cd86f3c3ef3eef427f405ed6"
+  },
+  "tsconfig.base.json": {
+   "files": 1,
+   "index": "e40ed8f2b70a0197d2c01e9c99105ac4ebda3b22e4074eb19b933d44932db4a5",
+   "disk": "4e26b27dd1b180d42d75b5654df77292754bd441a69dac426b982e8389b74005"
+  },
+  "vitest.config.ts": {
+   "files": 1,
+   "index": "6cd105b8c7b3bc113264100a8d7a4c328e9dc9478b2add9a2477c61aae3e2c50",
+   "disk": "f5ad7c203aa9f84ea30ff23d6fa20a737b35828a9991b3367e46b50afd71f633"
+  },
+  "docs": {
+   "files": 28,
+   "index": "254e2593c04d2113a6cce2581460aaa4355bcf5f62e935c2197deaaac8b5ecfe",
+   "disk": "a8b1217f53280a2888ad889fea0be22f87d88af66a2cf2900bebecede1285c0b"
+  },
+  "packages/architecture": {
+   "files": 30,
+   "index": "d8d720d8bbcc96a102ae3dc19ac67af688b7362660b7e11ff67c1f8632315b83",
+   "disk": "808b0cfd2444676a43be73c76606bcc894de99c1664ae0d6783692ea91241cd9"
+  },
+  "packages/source-package": {
+   "files": 39,
+   "index": "c54507eae0f3cc6900c77e4bec84c651a1997809819069722a2cdd35675cf498",
+   "disk": "d089dd6f08d0c90046f794935b49c12adb436db3c0fc3e8662018727ed6c7b80"
+  },
+  "packages/source-observations": {
+   "files": 9,
+   "index": "bd0d2999f2a0df2f512f48fe80536389d0ace4e4235db6eb8c9bb3c9cfe49019",
+   "disk": "f7452e09dfc6ea9a1561dbf1e46db3beabfebd42c7505e5fd143916566f1aff1"
+  },
+  "packages/reconstruction": {
+   "files": 116,
+   "index": "c1d426d678c70434fcf6828b8cf906088dbd0a1c1ddf5942f88fc03e795c6276",
+   "disk": "c6c5bb8340a791795a01da7f7ec9628a5113098e1a01d2cbd400bdba7b37c12d"
+  },
+  "packages/numeric-recogniser-ort": {
+   "files": 17,
+   "index": "f4822dfb855a7b4eeea99e8eab4991ec281a9a20fc306576065dc22540725d1b",
+   "disk": "334f92f56e0e139e4a67016346779aabdfd8977f4bcdea6a8dd417bca24ed7e1"
+  },
+  "apps/local-analyzer": {
+   "files": 28,
+   "index": "ee8269f36b81e9c6a0f1498d8d23d7bf1c48e4f51d8182404f52ca8586ab0ffd",
+   "disk": "19fdc1e6d09188e9ec3e9191646b098c48926aeb2fc98af294059949889e3b79"
+  },
+  "apps/android": {
+   "files": 194,
+   "index": "56c66642a15316134166cd9454b09d47f3a1577e2f014859d648df9b8310bd4f",
+   "disk": "f06a12ef715e46a5f9d12bf6183b61e6e7fec134ed931a13202fb5d88971a661"
+  },
+  "tests": {
+   "files": 29,
+   "disk": "860301c111d1ac2cb285729afc467068aecd57c425fe2e85c4f87040e86d684b"
+  }
+ },
+ "outsideAllowlist": {
+  "files": 3792,
+  "disk": "1ab122ad6e8fa8046fff60cf394849dfd7fe2a5e898981851c345217970c0c0b"
+ },
+ "assets": {
+  "packages/numeric-recogniser-ort/models": {
+   "packages/numeric-recogniser-ort/models/PP-OCRv6_tiny_rec.dict.json": "9a8199f82393355db5423a9ac7ed6f821350c17237a7c9d8fc40566bc3eafd6b",
+   "packages/numeric-recogniser-ort/models/PP-OCRv6_tiny_rec.onnx": "9ef676d6ed3c88256a2d92c640c44f25b0c40947e111b14b8be8f594091563e6",
+   "packages/numeric-recogniser-ort/models/manifest.json": "61f249f23cf7a4dcd80701b6a9b688e2d2b5f1f9a8707b2ce35ccc82180bab07"
+  },
+  "apps/local-analyzer/dist": {
+   "apps/local-analyzer/dist/analyzer.mjs": "66a7aa655e5218e73aaac86af8503077d811fbd38c8175968f1181defbf3c83c",
+   "apps/local-analyzer/dist/fixture-main.mjs": "7bf8e5cb52fe539273949a8a23d819ecd7cbb418cd276985ceb689e1cf04e356",
+   "apps/local-analyzer/dist/fixture.mjs": "e5f7132f565ba9cad6a2d554e9a9b1017a08ccc64f3d3af784a7265268d11026",
+   "apps/local-analyzer/dist/main.mjs": "f1a69daac12fba70c799edcd9aa5049db6f7a4bf6844ecebb45f0e8c08b06aaa",
+   "apps/local-analyzer/dist/manifest.json": "eeb1a2f215c19be22963329646f6817f8296d685fa07b3b169c04b71f61a564a",
+   "apps/local-analyzer/dist/meta-ocr-self-test.json": "b933bd31d7d960372d6925ba212412efa9655cd54d2ecee100b5a3bba6298a28",
+   "apps/local-analyzer/dist/meta-ocr-worker.json": "aa8a886c8b3960da25eb3f98c8ba75aab77b2c21d76a6160a91ce83aeb67f824",
+   "apps/local-analyzer/dist/meta.json": "70fe0cef785897d85229bc2221e8e00c20881f83bc22321e02861b485f85ada0",
+   "apps/local-analyzer/dist/models/PP-OCRv6_tiny_rec.dict.json": "9a8199f82393355db5423a9ac7ed6f821350c17237a7c9d8fc40566bc3eafd6b",
+   "apps/local-analyzer/dist/models/PP-OCRv6_tiny_rec.onnx": "9ef676d6ed3c88256a2d92c640c44f25b0c40947e111b14b8be8f594091563e6",
+   "apps/local-analyzer/dist/ocr-self-test.mjs": "ec6c175f9cc4f3abc8bbb2990f547d488398280b93b98a873d82dfbc5549e8de",
+   "apps/local-analyzer/dist/ocr-worker.mjs": "c6c3130ed6e8260c1ecf86bd972c704d748aec9f59a3ca1b5796054090247554",
+   "apps/local-analyzer/dist/ort-wasm-simd-threaded.mjs": "e13f7f94fc51b4ca72b12faeb1ee95f4ace6dfbc8939bc718aabdc0a27c4299b",
+   "apps/local-analyzer/dist/ort-wasm-simd-threaded.wasm": "3398c10d07d229bd91b364548e130e0e51a8e5704b88c7c083ebbeb78842dee2"
+  },
+  "node_modules/onnxruntime-web/dist/ort-wasm-simd-threaded.wasm": "3398c10d07d229bd91b364548e130e0e51a8e5704b88c7c083ebbeb78842dee2",
+  "node_modules/onnxruntime-web/dist/ort-wasm-simd-threaded.mjs": "e13f7f94fc51b4ca72b12faeb1ee95f4ace6dfbc8939bc718aabdc0a27c4299b",
+  "node_modules/onnxruntime-web/package.json": "16f69f755509990539aeb1c8445884960e91adcacab2e8dca8e44ee43601df5c"
+ },
+ "scopeFiles": {
+  "packages/source-analyzer/package.json": "00bc825c864e2d943338356e14095cffe86dd04e0e9ed0306f9f233abfad5b09",
+  "packages/source-analyzer/scripts/audit.ts": "295e43a0debbdf53b5c51429642e8bf72cbf2ced414412940e97de829349074f",
+  "packages/source-analyzer/scripts/extract.ts": "e328907a4720aa2ea1795332187b1ddf034d6c5bcd4fd32dfa52ac8f3c44b9ce",
+  "packages/source-analyzer/scripts/fixtures.ts": "bb61b913cc756d823c1a9be4912aeeeca5f17aedf21b5a628c89f4b73d2d2b2c",
+  "packages/source-analyzer/scripts/marcowki.ts": "e71ce587eba471fdc6cc4814c383c324a6574ac098e2ab260c8ccde3384efdb4",
+  "packages/source-analyzer/src/analyze.ts": "e9b1313062905799706f8b0da3231cb8aa97531a53b9c0c2a85f4938cd61d4ef",
+  "packages/source-analyzer/src/depth.ts": "290fec89a8eccb0e41ec30450b10eafcef94f7c068489368ac5f98c297e3e26b",
+  "packages/source-analyzer/src/extractors/elevation.ts": "0844f94cd62d588092c2287258b5f49cf88374c20b4f026a8b22c638dff8b36c",
+  "packages/source-analyzer/src/extractors/plan.ts": "a5f4b07ab84b8730cda7498ae0b5a4e73eb9f5192e504fcd806f668b28f60430",
+  "packages/source-analyzer/src/extractors/section.ts": "71d1a9963e2f6be90f54777d755c5c0726b2903ecb3f6addb37a0ddac83e0b94",
+  "packages/source-analyzer/src/identity.ts": "363982370f9562c43bca01618b584f9a67564798bddd6cd6495eca042b0707c1",
+  "packages/source-analyzer/src/index.ts": "c87b35de2f3db56cca7de45f463ab292f6d436c4b120cc0d37e4497c92855a3d",
+  "packages/source-analyzer/src/overlay.ts": "daaacb294f34f2bb684e592963e52b4f6fb513b5e68025f645e625c2692fb4a3",
+  "packages/source-analyzer/src/prepare.ts": "776bbe7899472b4bc68f35c3eee2d61d6bd500fbc492c735ec55fe3f8bb31fe4",
+  "packages/source-analyzer/src/stair.ts": "3a6744b11e9a8bcba74415f4d8f65f74ac4717b4523c6d244d9dd208fe791d2e",
+  "packages/source-analyzer/src/strokes.ts": "39fc21e2301f0db81f96ee6208b2e17cdfcc01c6eb33c469a0fbccb181e41eff",
+  "packages/source-analyzer/test/depth.test.ts": "359f861dc08f718b227aa9f46e5e274bdd30277c5edd49b8d710de18e0dda5d5",
+  "packages/source-analyzer/test/draw.ts": "799a0426debc57f041f9e2a3e6e51d999efd1ca2317646ab0bc34937acb3b1f1",
+  "packages/source-analyzer/test/mutations-02.test.ts": "d26eded47f27a20c61965a0be6ac779d60c5319a7d77762edfef6675258e86ac",
+  "packages/source-analyzer/test/prepare.test.ts": "f889bc6f298fc706f2f41004b044e3444685bfc3438abf6f00a21db475e42684",
+  "packages/source-analyzer/test/scene.ts": "bd9518b37c26106581a1ca0cb4af13f8ae46ec675227b77867f2a500e9790ca0",
+  "packages/source-analyzer/test/stair.test.ts": "75e1cc419bbb94afc77ed74d06edf2f37232b36a0c60e68279317ca946a5762a",
+  "packages/source-analyzer/test/vision-path.test.ts": "18910cbd502ff0323c0949da7be02c0ff00f9772b89382a3f839e2f5dd845fd5",
+  "packages/source-vision/package.json": "3e5440b2c70a61da2dad2ad581c60803dd93267d30c44bc32329cc866b4f8e44",
+  "packages/source-vision/src/apply.ts": "a87185d6105181d4016e4561da798f61fe06c47caac14b63b1710a30febb6e48",
+  "packages/source-vision/src/index.ts": "ad2dd08a353ad084305f0b30115476e6c7dbba9f0e01eec94065b1a649e70624",
+  "packages/source-vision/src/providers/anthropic.ts": "6aad94adaf0aa83d55928b08d513f2028615fdabb33443cac98dec9f88a3f6b3",
+  "packages/source-vision/src/providers/fixture.ts": "e295cc3a7b0bc0946b7971b878a910c3f0bf62f4ac935faadb545d3e2ec1a872",
+  "packages/source-vision/src/providers/null.ts": "c3c3e9251c5b4e9114b8b566f5fccdc16b23e0b80a1d89432396865dcb9299ca",
+  "packages/source-vision/src/reasoner.ts": "416e6aae8eac86a970f32385833007b690310eae058e7a656c47a32c3ce527fb",
+  "packages/source-vision/src/schema.ts": "d1573a3b94315aea48f297668c4fdfa5f0c5e37afa3f6753052d965c2b4795c9",
+  "packages/source-vision/src/tasks.ts": "31d7f811783efd44bf0487c4c6ecb8ddd39fe1389969e7b73721269a1d087d86",
+  "packages/source-vision/src/validate.ts": "4dea131caab554c2d5bf8642424347f0fb56af05b5276c5b28b8c7aaf1afcf9b",
+  "packages/source-vision/test/vision.test.ts": "cd4528a5eaf473c92b5c7fc9de8f79a14a0449f21926acb4a387cd7471ca3ab3"
+ }
+}
