@@ -14,6 +14,7 @@
 import { spawn } from 'node:child_process'
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 const REPO = resolve(import.meta.dirname, '../..')
 const USABLE_HOSTS = new Set(['www.archon.pl', 'www.projektydomownowoczesnych.pl'])
@@ -35,35 +36,40 @@ export function eligibleRows() {
     .map((c) => ({ ...c, host: new URL(JSON.parse(readFileSync(c.package, 'utf8')).canonicalUrl).host }))
     .filter((c) => USABLE_HOSTS.has(c.host))
 }
-let todo = eligibleRows().filter((c) => !only || only.split(',').includes(c.case))
-if (arg('order', 'given') === 'reverse') todo = [...todo].reverse()
-const par = Number(arg('par', '3'))
-mkdirSync(join(work, 'runs', label), { recursive: true })
+// Importing this file (e.g. for eligibleRows) must never start a replay.
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) await main()
 
-const runOne = (c) =>
-  new Promise((done) => {
-    const out = join(work, 'runs', label, c.case)
-    rmSync(out, { recursive: true, force: true })
-    mkdirSync(out, { recursive: true })
-    const t0 = process.hrtime.bigint()
-    const child = spawn('npx', ['vite-node', ...(config ? ['--config', config] : []), 'research/analyzer-005r-router/run-case.ts', '--', '--package', c.package, '--cache', c.cache, '--out', out, ...(shuffle ? ['--shuffle', `${shuffle}:${c.case}`] : [])], { cwd: REPO, env: { ...process.env, OFFLINE: '1' } })
-    let log = ''
-    child.stdout.on('data', (d) => (log += d))
-    child.stderr.on('data', (d) => (log += d))
-    child.on('close', (code) => {
-      const wall = Number(process.hrtime.bigint() - t0) / 1e9
-      writeFileSync(join(out, 'run.log'), `${log}\nexit ${code} wall ${wall.toFixed(2)} config ${config || 'none'}\n`)
-      process.stdout.write(`${label} ${c.case} exit ${code} ${wall.toFixed(1)} s\n`)
-      done({ case: c.case, code, wall })
+async function main() {
+  let todo = eligibleRows().filter((c) => !only || only.split(',').includes(c.case))
+  if (arg('order', 'given') === 'reverse') todo = [...todo].reverse()
+  const par = Number(arg('par', '3'))
+  mkdirSync(join(work, 'runs', label), { recursive: true })
+
+  const runOne = (c) =>
+    new Promise((done) => {
+      const out = join(work, 'runs', label, c.case)
+      rmSync(out, { recursive: true, force: true })
+      mkdirSync(out, { recursive: true })
+      const t0 = process.hrtime.bigint()
+      const child = spawn('npx', ['vite-node', ...(config ? ['--config', config] : []), 'research/analyzer-005r-router/run-case.ts', '--', '--package', c.package, '--cache', c.cache, '--out', out, ...(shuffle ? ['--shuffle', `${shuffle}:${c.case}`] : [])], { cwd: REPO, env: { ...process.env, OFFLINE: '1' } })
+      let log = ''
+      child.stdout.on('data', (d) => (log += d))
+      child.stderr.on('data', (d) => (log += d))
+      child.on('close', (code) => {
+        const wall = Number(process.hrtime.bigint() - t0) / 1e9
+        writeFileSync(join(out, 'run.log'), `${log}\nexit ${code} wall ${wall.toFixed(2)} config ${config || 'none'}\n`)
+        process.stdout.write(`${label} ${c.case} exit ${code} ${wall.toFixed(1)} s\n`)
+        done({ case: c.case, code, wall })
+      })
     })
-  })
 
-let next = 0
-const results = []
-await Promise.all(
-  Array.from({ length: par }, async () => {
-    while (next < todo.length) results.push(await runOne(todo[next++]))
-  }),
-)
-writeFileSync(join(work, 'runs', `${label}.done.json`), JSON.stringify({ label, config: config || null, order: arg('order', 'given'), par, rows: results.sort((a, b) => a.case.localeCompare(b.case)) }, null, 1) + '\n')
-if (!existsSync(join(work, 'runs', label))) process.exit(1)
+  let next = 0
+  const results = []
+  await Promise.all(
+    Array.from({ length: par }, async () => {
+      while (next < todo.length) results.push(await runOne(todo[next++]))
+    }),
+  )
+  writeFileSync(join(work, 'runs', `${label}.done.json`), JSON.stringify({ label, config: config || null, order: arg('order', 'given'), par, rows: results.sort((a, b) => a.case.localeCompare(b.case)) }, null, 1) + '\n')
+  if (!existsSync(join(work, 'runs', label))) process.exit(1)
+}

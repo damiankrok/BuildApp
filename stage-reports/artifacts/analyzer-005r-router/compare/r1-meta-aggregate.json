@@ -1,0 +1,42 @@
+{
+ "assets": 1352,
+ "assetsWithTwoIndependentSceneClasses": 0,
+ "independentSceneWitnessClassesPerAsset": {
+  "0": 1100,
+  "1": 252
+ },
+ "lineageGroupsWithSceneHintSpanningEditions": 38,
+ "note": "PROPOSALS from one publisher filing act; CHANNEL_AGREEMENT with the 005R structural truth is circular for INTERIOR/EXTERIOR and is not accuracy. HUMAN_LABELS_NOT_RUN.",
+ "proposalByTruth005R": {
+  "EXTERIOR_RENDER": {
+   "EXTERIOR_HINT": 39,
+   "UNKNOWN": 39
+  },
+  "FLOOR_PLAN": {
+   "UNKNOWN": 154
+  },
+  "INTERIOR_RENDER": {
+   "CONTESTED": 15,
+   "INTERIOR_HINT": 198
+  },
+  "SECTION": {
+   "UNKNOWN": 50
+  },
+  "SITE_PLAN": {
+   "UNKNOWN": 50
+  },
+  "TECHNICAL_ELEVATION": {
+   "UNKNOWN": 198
+  },
+  "UNKNOWN": {
+   "UNKNOWN": 609
+  }
+ },
+ "proposals": {
+  "CONTESTED": 15,
+  "EXTERIOR_HINT": 39,
+  "INTERIOR_HINT": 198,
+  "UNKNOWN": 1100
+ },
+ "schema": "research.005r-router.r1-meta.0.1"
+}

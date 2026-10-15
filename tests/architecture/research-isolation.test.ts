@@ -865,3 +865,55 @@ describe('005R production cannot reach the visual-asset study, which commits no 
     expect(run.status).toBe(0)
   })
 })
+
+/**
+ * BUILDPLAN-ANALYZER-005R-ROUTER — the source-role guard study is research around one bounded production gate. Its
+ * harnesses replay sealed development packages offline and write every output outside the repository; the repository
+ * keeps code, text, hashes and aggregate numbers: no publisher pixel, caption, page or weight.
+ */
+describe('005R-ROUTER production cannot reach the router study, which commits no pixels or captions', () => {
+  const stageFiles = (): string[] =>
+    [
+      ...execFileSync('git', ['ls-files'], { cwd: ROOT, encoding: 'utf8' }).split('\n'),
+      ...execFileSync('git', ['ls-files', '--others', '--exclude-standard'], { cwd: ROOT, encoding: 'utf8' }).split('\n'),
+    ].filter((f) => f.startsWith('research/analyzer-005r-router/') || f.startsWith('stage-reports/artifacts/analyzer-005r-router/'))
+
+  it('no production source imports the router study or names its harness', () => {
+    const offenders: string[] = []
+    for (const f of productionSources()) {
+      const text = read(f)
+      for (const spec of importsOf(text)) if (/analyzer-005r-router|research\//.test(spec)) offenders.push(`${f} imports ${spec}`)
+      if (/005R-ROUTER|run-case\.ts|r1_meta|spot_review/i.test(codeOf(text))) offenders.push(`${f} names the router study`)
+    }
+    expect(offenders).toEqual([])
+  })
+
+  it('the study tracks only code and text, with no embedded pixels and no caption, title or page-text field', () => {
+    const files = stageFiles()
+    expect(files.length).toBeGreaterThan(0)
+    expect(files.filter((f) => !/\.(py|mjs|ts|sh|json|md|patch)$/i.test(f))).toEqual([])
+    const textKeys: string[] = []
+    const walk = (f: string, x: unknown): void => {
+      if (Array.isArray(x)) for (const v of x) walk(f, v)
+      else if (x && typeof x === 'object')
+        for (const [k, v] of Object.entries(x)) {
+          if (/^(captions?|titles?|pageText|rawText|alt|altText|heading|description|html|figcaption|url|localPath)$/i.test(k)) textKeys.push(`${f}: ${k}`)
+          walk(f, v)
+        }
+    }
+    for (const f of files) {
+      const text = read(f)
+      expect(text, f).not.toMatch(/(data:(image|application)\/[\w.+-]+;base64,|iVBORw0KGgo|\/9j\/4|UklGR|R0lGOD)[A-Za-z0-9+/]{40,}/)
+      expect(statSync(join(ROOT, f)).size, f).toBeLessThanOrEqual(4 * 2 ** 20)
+      if (f.endsWith('.json')) walk(f, JSON.parse(text))
+    }
+    expect(textKeys).toEqual([])
+  })
+
+  it('every replay writer refuses an output inside the repository, and the replay refuses publishers screened unusable', () => {
+    for (const f of ['research/analyzer-005r-router/run-case.ts', 'research/analyzer-005r-router/ledger.ts']) expect(read(f)).toMatch(/REFUSED: replay outputs never go inside the repository/)
+    expect(read('research/analyzer-005r-router/replay.mjs')).toMatch(/throw new Error\('replays live outside the repository'\)/)
+    expect(read('research/analyzer-005r-router/replay.mjs')).toMatch(/USABLE_HOSTS = new Set\(\['www\.archon\.pl', 'www\.projektydomownowoczesnych\.pl'\]\)/)
+    expect(read('research/analyzer-005r-router/variant.mjs')).toMatch(/a variant copy lives outside the repository/)
+  })
+})

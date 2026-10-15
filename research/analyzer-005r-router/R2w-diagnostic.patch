@@ -1,0 +1,34 @@
+--- a/packages/source-analyzer/src/analyze.ts
++++ b/packages/source-analyzer/src/analyze.ts
+@@ -94,6 +94,8 @@
+   skipped: Array<{ assetId: string; reason: string }>
+ }
+ 
++const R2W_INTERIOR = new Set<string>(JSON.parse((await import('node:fs')).readFileSync(process.env.R2W_SHAS as string, 'utf8')) as string[])
++
+ const contextFactsFor = (pkg: SourcePackage): VisionContextFact[] => pkg.publishedFacts.map((f) => ({ label: f.label, value: f.value, unit: f.unit }))
+ 
+ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeOptions): Promise<AnalysisResult> {
+@@ -161,7 +163,12 @@
+     const before = builder.observationCount
+     const analysis: AssetAnalysis = { asset, frame, prepared, observations: [], visionAttempted: false, visionAccepted: 0 }
+ 
+-    if (document === 'ELEVATION' || document === 'PERSPECTIVE_RENDER') {
++    // R2w (research diagnostic, never production): skip the facade extractors on a perspective frame whose bytes the
++    // publisher's interiors carousel holds (ONE witness class; 005R structural truth by byte hash).
++    const r2wSkip = document === 'PERSPECTIVE_RENDER' && R2W_INTERIOR.has(variant.byteHash)
++    if (r2wSkip) {
++      builder.unresolved(`facade observations on the perspective render ${asset.id}`, 'R2w diagnostic: filed under the publisher interiors carousel', 'NOT_ATTEMPTED', asset.id)
++    } else if (document === 'ELEVATION' || document === 'PERSPECTIVE_RENDER') {
+       const handles = Object.fromEntries(ELEVATION_EXTRACTORS.map((e) => [e.key, declare(e.name, e.version, 'DETERMINISTIC_CV')])) as ElevationHandles
+       analysis.elevation = extractElevation(builder, frame, prepared, handles)
+     } else if (document === 'FLOOR_PLAN') {
+@@ -221,7 +228,7 @@
+     checkpoint.tick()
+     if (options.retainPrepared === false) delete analysis.prepared
+     analysis.observations = builder.snapshot().filter((o) => o.frameId === frame.id)
+-    if (builder.observationCount === before && !analysis.visionAttempted) {
++    if (builder.observationCount === before && !analysis.visionAttempted && !r2wSkip) {
+       builder.unresolved(`any observation at all on asset ${asset.id}`, 'the extractors for this document role found nothing in the image', 'MISSING', asset.id)
+     }
+     assets.push(analysis)
