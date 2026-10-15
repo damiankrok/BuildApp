@@ -16,7 +16,7 @@
    "node 18.20.4"
   ],
   "images": 1537,
-  "featuresIdentical": "r1 == r2 == node18 (bit for bit)"
+  "featuresIdentical": "feature payloads (assetId, width, height, features) identical r1 == r2 == node18 on 1537/1537 images; the files are not byte-identical, they differ only in the per-image timing field ms (reviewer C-7); fitted model and predictions are byte-identical from any of the three"
  },
  "V2": "see v2-determinism.json (run 2)"
 }

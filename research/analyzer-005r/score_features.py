@@ -17,6 +17,7 @@ Reported per source (V2 at the preregistered operating score 0.20 and a sweep; V
   consistency. Gating: ORACLE (truth role ∈ exterior evidence) and, when given, each contender's own routing.
 Synthetic correctness is not real-source generalisation.
 """
+import hashlib
 import json
 import sys
 
@@ -163,7 +164,8 @@ def main(argv):
         if flag in argv:
             routes[name] = {r['assetId']: r for r in json.load(open(argv[argv.index(flag) + 1]))['rows']}
     oracle = lambda img: img['roleTruth'] in EXT
-    rep = {'schema': 'research.005r.feature-scores-synthetic.0.1', 'truthSha256': truth.get('generatorSha256'), 'seed': truth.get('seed'),
+    rep = {'schema': 'research.005r.feature-scores-synthetic.0.1', 'generatorSha256': truth.get('generatorSha256'),
+           'truthSha256': hashlib.sha256(open(argv[0], 'rb').read()).hexdigest(), 'seed': truth.get('seed'),
            'note': 'synthetic known truth; not real-source generalisation', 'V2': {}, 'V1cues': {}}
     for thr in SWEEP:
         g = lambda img, thr=thr: dets_v2(v2[img['syntheticId']], thr) if img['syntheticId'] in v2 else None

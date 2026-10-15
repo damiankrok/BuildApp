@@ -243,9 +243,11 @@ a correction of a defect in the research tooling or a **sensitivity** run report
 of it.
 
 **Erratum (reviewer B-9).** The headers of Addenda A and B carry wrong times. A was committed at 2026-10-15T01:54:14Z
-(`cfe95ab`), not 02:10Z; B at 02:41:05Z (`da66e48`), not ~04:10Z. The ordering claim of A (before any V2 output was
-read) is supported by file times outside Git: truth.json 01:36:23, role-scores-partial.json 01:53:19, commit `cfe95ab`
-01:54:14, v2-run1.log first written 02:27:01. The texts of A and B are left as committed.
+(`cfe95ab`), not 02:10Z; B at 02:41:05Z (`da66e48`), not ~04:10Z. The ordering claim of A (before any V2 output was read) rests on file times outside Git: truth.json 01:36:23,
+role-scores-partial.json 01:53:19, commit `cfe95ab` 01:54:14, and V2.json (the first file derived from V2 output, the
+scored routes) written 02:28:39. V2 run 1 was already running before A (v2-run1.log created 01:36:28, last written
+02:27:01; v2-run1.jsonl created 01:36:46, complete 02:28:04). File times show when V2 output was written, not when it
+was read; the claim is that V2 was not scored before 02:28:39. The texts of A and B are left as committed.
 
 **C1 — truth defect, interiors carousel (reviewer B-1, P1, confirmed).** 15 items of the ARCHON interiors carousel are
 exterior views (their captions name a styling variant or "all segments"); the structural rule made them
@@ -288,8 +290,9 @@ UNKNOWN"; it is reported as such.
 
 **Order deviation (reviewer C-6).** §9 asked for the V0a offline replays before V1/V2. The actual order (file times):
 preregistration commit 01:36:09 → V2 run 1 started ≈ 01:36:37 (ended 02:28:04) → V1 features r1 written 01:42:11 →
-V0 offline r1 finished 01:46:55, r2 01:49:04 → V1/V0b fit and scores → Addendum A (01:54:14) → V2 scored → Addendum B
-(02:41:05) → reviews → Addendum C → V2 run 2 (determinism) → A1 for V2. Harmless for the results: V0 never reads V1 or
+V0 offline r1 finished 01:46:55, r2 01:49:04 → V1/V0b fit and scores → Addendum A (01:54:14) → V2 scored (V2.json 02:28:39) → V2 run 2 (determinism) started
+≈ 02:28:40, right after run 1, and ran until 03:27:43, through Addendum B (02:41:05) and the reviews (≈ 02:43–03:14) →
+its comparison written 03:32:17 → A1 for V2 started 03:32:25 → Addendum C written 03:33Z. Harmless for the results: V0 never reads V1 or
 V2 output, and no V2 output was read before Addendum A.
 
 **Wording corrections.** (C-7) V1's three feature files are not byte-identical: they differ in the per-image timing
@@ -298,7 +301,8 @@ Node 18.20.4, and the fitted model and predictions are byte-identical from any o
 with WHITE padding — was not run before the reviews; it runs after V2 run 2 and is reported in the stage report. A grey
 letterbox is V2's own preprocessing, so the grey variant is the identity for V2.
 
-**Research files created or changed after `bdd50b8` (reviewer C-5).** None feeds a §8 decision input except through
+**Files created or changed after `bdd50b8` (reviewer C-5): research files, plus the 005R block of the repository
+isolation test.** None feeds a §8 decision input except through
 the scorers named in §5; all are diagnostics, sensitivity runs, tooling fixes or tests. SHA-256 at the commit that
 carries this addendum:
 
@@ -317,11 +321,12 @@ carries this addendum:
 | `claims.py` | added | `da66e48` | `9aa125d3af21dd35` | measurement code named in §5 |
 | `edition_identity.py` | added | `cfe95ab` | `41dd867905fe927e` | measurement code named in §5 |
 | `licensing.md` | changed | `5e9bc93` | `035d65b9b6a67475` | prose (licence matrix; C-9 corrections) |
-| `mutations.py` | added | `30dd205` | `2bab8e4c2ea13c28` | safeguard suite (§9 named the mutations, not their code; written whole after `bdd50b8`) |
+| `mutations.py` | added | `30dd205` | `be35152b63f7a93f` | safeguard suite (§9 named the mutations, not their code; written whole after `bdd50b8`) |
 | `schema/examples/example-manifest.json` | changed | `5e9bc93` | `1ac99b26654f8d79` | test |
 | `schema/test_schema.py` | changed | `5e9bc93` | `b0aa0c226ff118b2` | test |
 | `schema/validate.py` | changed | `5e9bc93` | `f929ee0ec7d05278` | scorer / assembler / validator (fixes in addenda B, C) |
-| `score_features.py` | changed | `80b455d` | `238dba672513f601` | scorer / assembler / validator (fixes in addenda B, C) |
+| `score_features.py` | changed | `80b455d` | `878a8dfd879e6f2d` | scorer / assembler / validator (fixes in addenda B, C) |
 | `score_roles.py` | changed | `5e9bc93` | `53745b6123a7c1f0` | scorer / assembler / validator (fixes in addenda B, C) |
+| `tests/architecture/research-isolation.test.ts` (005R block; path from the repository root) | changed | `20fffbd` | `7545d6da6efd3514` | test (isolation; A-10 strengthening; run by mutations M11/M12) |
 
 The preregistration file itself carries the addenda.

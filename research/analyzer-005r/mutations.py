@@ -142,7 +142,7 @@ def main(run, assembled, out):
     # M11 / M12: edit committed files in the working tree, run the isolation block, restore byte for byte
     for name, path, edit, pattern in (
         ('M11_caption_in_manifest', 'stage-reports/artifacts/analyzer-005r/corpus/corpus-manifest.json',
-         lambda s: s.replace('"channel": "', '"caption": "Strefa dzienna", "channel": "', 1), 'committed corpus manifest'),
+         lambda s: s.replace('"channel": "', '"caption": "planted caption", "channel": "', 1), 'committed corpus manifest'),
         ('M12_name_in_prompts', 'research/analyzer-005r/v2/run_owlvit.py',
          lambda s: s.replace("'a terrace', 'a paved patio'", "'a terrace of Dom w Rarytasach', 'a paved patio'", 1), 'prompts name no project'),
     ):

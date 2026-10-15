@@ -1,0 +1,423 @@
+{
+ "schema": "research.005r.review-dispositions.0.1",
+ "note": "Sanitized: ids, severities, verifier verdicts and dispositions only; reviewer prose stays outside Git because it quotes publisher captions. P0/P1 were each re-run by two adversarial verifiers.",
+ "p0": 0,
+ "findings": [
+  {
+   "id": "A-1",
+   "reviewer": "A",
+   "originalSeverity": "P1",
+   "verifiers": [
+    {
+     "verifier": 0,
+     "verdict": "confirmed",
+     "severity": "P1",
+     "reproduced": true
+    },
+    {
+     "verifier": 1,
+     "verdict": "confirmed",
+     "severity": "P1",
+     "reproduced": true
+    }
+   ],
+   "finalSeverity": "P1",
+   "disposition": "fixed",
+   "commit": "fa090be"
+  },
+  {
+   "id": "A-2",
+   "reviewer": "A",
+   "originalSeverity": "P1",
+   "verifiers": [
+    {
+     "verifier": 0,
+     "verdict": "confirmed",
+     "severity": "P1",
+     "reproduced": true
+    },
+    {
+     "verifier": 1,
+     "verdict": "confirmed",
+     "severity": "P1",
+     "reproduced": true
+    }
+   ],
+   "finalSeverity": "P1",
+   "disposition": "fixed",
+   "commit": "b98927b"
+  },
+  {
+   "id": "A-3",
+   "reviewer": "A",
+   "originalSeverity": "P1",
+   "verifiers": [
+    {
+     "verifier": 0,
+     "verdict": "downgrade-to-P2",
+     "severity": "P2",
+     "reproduced": true
+    },
+    {
+     "verifier": 1,
+     "verdict": "downgrade-to-P2",
+     "severity": "P2",
+     "reproduced": true
+    }
+   ],
+   "finalSeverity": "P2",
+   "disposition": "fixed",
+   "commit": "b98927b"
+  },
+  {
+   "id": "A-4",
+   "reviewer": "A",
+   "originalSeverity": "P1",
+   "verifiers": [
+    {
+     "verifier": 0,
+     "verdict": "downgrade-to-P2",
+     "severity": "P2",
+     "reproduced": true
+    },
+    {
+     "verifier": 1,
+     "verdict": "downgrade-to-P2",
+     "severity": "P2",
+     "reproduced": true
+    }
+   ],
+   "finalSeverity": "P2",
+   "disposition": "fixed",
+   "commit": "b98927b"
+  },
+  {
+   "id": "A-5",
+   "reviewer": "A",
+   "originalSeverity": "P2",
+   "verifiers": [],
+   "finalSeverity": "P2",
+   "disposition": "disclosed (report \u00a7N)",
+   "commit": "4980b95"
+  },
+  {
+   "id": "A-6",
+   "reviewer": "A",
+   "originalSeverity": "P2",
+   "verifiers": [],
+   "finalSeverity": "P2",
+   "disposition": "disclosed (addendum C, report \u00a7H)",
+   "commit": "b98927b"
+  },
+  {
+   "id": "A-7",
+   "reviewer": "A",
+   "originalSeverity": "P2",
+   "verifiers": [],
+   "finalSeverity": "P2",
+   "disposition": "fixed for future runs",
+   "commit": "4980b95"
+  },
+  {
+   "id": "A-8",
+   "reviewer": "A",
+   "originalSeverity": "P2",
+   "verifiers": [],
+   "finalSeverity": "P2",
+   "disposition": "fixed outside Git (private survey stripped)",
+   "commit": null
+  },
+  {
+   "id": "A-9",
+   "reviewer": "A",
+   "originalSeverity": "P2",
+   "verifiers": [],
+   "finalSeverity": "P2",
+   "disposition": "disclosed (report \u00a7N)",
+   "commit": "4980b95"
+  },
+  {
+   "id": "A-10",
+   "reviewer": "A",
+   "originalSeverity": "P2",
+   "verifiers": [],
+   "finalSeverity": "P2",
+   "disposition": "fixed (tests strengthened, negative-tested)",
+   "commit": "4980b95"
+  },
+  {
+   "id": "A-11",
+   "reviewer": "A",
+   "originalSeverity": "P2",
+   "verifiers": [],
+   "finalSeverity": "P2",
+   "disposition": "disclosed (report \u00a7N)",
+   "commit": "4980b95"
+  },
+  {
+   "id": "B-1",
+   "reviewer": "B",
+   "originalSeverity": "P1",
+   "verifiers": [
+    {
+     "verifier": 0,
+     "verdict": "confirmed",
+     "severity": "P1",
+     "reproduced": true
+    },
+    {
+     "verifier": 1,
+     "verdict": "confirmed",
+     "severity": "P1",
+     "reproduced": true
+    }
+   ],
+   "finalSeverity": "P1",
+   "disposition": "sensitivity (addendum C1); preregistered truth unchanged",
+   "commit": "b98927b"
+  },
+  {
+   "id": "B-2",
+   "reviewer": "B",
+   "originalSeverity": "P1",
+   "verifiers": [
+    {
+     "verifier": 0,
+     "verdict": "confirmed",
+     "severity": "P1",
+     "reproduced": true
+    },
+    {
+     "verifier": 1,
+     "verdict": "confirmed",
+     "severity": "P1",
+     "reproduced": true
+    }
+   ],
+   "finalSeverity": "P1",
+   "disposition": "sensitivity (addendum C2/C12)",
+   "commit": "b98927b"
+  },
+  {
+   "id": "B-3",
+   "reviewer": "B",
+   "originalSeverity": "P1",
+   "verifiers": [
+    {
+     "verifier": 0,
+     "verdict": "confirmed",
+     "severity": "P1",
+     "reproduced": true
+    },
+    {
+     "verifier": 1,
+     "verdict": "confirmed",
+     "severity": "P1",
+     "reproduced": true
+    }
+   ],
+   "finalSeverity": "P1",
+   "disposition": "fixed",
+   "commit": "b98927b"
+  },
+  {
+   "id": "B-4",
+   "reviewer": "B",
+   "originalSeverity": "P2",
+   "verifiers": [],
+   "finalSeverity": "P2",
+   "disposition": "disclosed (report \u00a7G)",
+   "commit": "4980b95"
+  },
+  {
+   "id": "B-5",
+   "reviewer": "B",
+   "originalSeverity": "P2",
+   "verifiers": [],
+   "finalSeverity": "P2",
+   "disposition": "disclosed (addendum C, report \u00a7H)",
+   "commit": "b98927b"
+  },
+  {
+   "id": "B-6",
+   "reviewer": "B",
+   "originalSeverity": "P2",
+   "verifiers": [],
+   "finalSeverity": "P2",
+   "disposition": "reworded",
+   "commit": "b98927b"
+  },
+  {
+   "id": "B-7",
+   "reviewer": "B",
+   "originalSeverity": "P2",
+   "verifiers": [],
+   "finalSeverity": "P2",
+   "disposition": "fixed",
+   "commit": "b98927b"
+  },
+  {
+   "id": "B-8",
+   "reviewer": "B",
+   "originalSeverity": "P2",
+   "verifiers": [],
+   "finalSeverity": "P2",
+   "disposition": "fixed",
+   "commit": "b98927b"
+  },
+  {
+   "id": "B-9",
+   "reviewer": "B",
+   "originalSeverity": "P2",
+   "verifiers": [],
+   "finalSeverity": "P2",
+   "disposition": "erratum (addendum C)",
+   "commit": "b98927b"
+  },
+  {
+   "id": "B-10",
+   "reviewer": "B",
+   "originalSeverity": "P2",
+   "verifiers": [],
+   "finalSeverity": "P2",
+   "disposition": "reworded (scope)",
+   "commit": "b98927b"
+  },
+  {
+   "id": "C-1",
+   "reviewer": "C",
+   "originalSeverity": "P1",
+   "verifiers": [
+    {
+     "verifier": 0,
+     "verdict": "downgrade-to-P2",
+     "severity": "P2",
+     "reproduced": false
+    },
+    {
+     "verifier": 1,
+     "verdict": "downgrade-to-P2",
+     "severity": "P2",
+     "reproduced": false
+    }
+   ],
+   "finalSeverity": "P2",
+   "disposition": "fixed",
+   "commit": "fa090be"
+  },
+  {
+   "id": "C-2",
+   "reviewer": "C",
+   "originalSeverity": "P1",
+   "verifiers": [
+    {
+     "verifier": 0,
+     "verdict": "downgrade-to-P2",
+     "severity": "P2",
+     "reproduced": true
+    },
+    {
+     "verifier": 1,
+     "verdict": "confirmed",
+     "severity": "P1",
+     "reproduced": true
+    }
+   ],
+   "finalSeverity": "P1",
+   "disposition": "sensitivity (addendum C3); claims withdrawn",
+   "commit": "b98927b"
+  },
+  {
+   "id": "C-3",
+   "reviewer": "C",
+   "originalSeverity": "P1",
+   "verifiers": [
+    {
+     "verifier": 0,
+     "verdict": "confirmed",
+     "severity": "P1",
+     "reproduced": true
+    },
+    {
+     "verifier": 1,
+     "verdict": "downgrade-to-P2",
+     "severity": "P2",
+     "reproduced": true
+    }
+   ],
+   "finalSeverity": "P1",
+   "disposition": "reworded",
+   "commit": "4980b95"
+  },
+  {
+   "id": "C-4",
+   "reviewer": "C",
+   "originalSeverity": "P2",
+   "verifiers": [],
+   "finalSeverity": "P2",
+   "disposition": "erratum (addendum C)",
+   "commit": "b98927b"
+  },
+  {
+   "id": "C-5",
+   "reviewer": "C",
+   "originalSeverity": "P2",
+   "verifiers": [],
+   "finalSeverity": "P2",
+   "disposition": "file table (addendum C)",
+   "commit": "f9de696"
+  },
+  {
+   "id": "C-6",
+   "reviewer": "C",
+   "originalSeverity": "P2",
+   "verifiers": [],
+   "finalSeverity": "P2",
+   "disposition": "disclosed (addendum C); bench threads aligned",
+   "commit": "4980b95"
+  },
+  {
+   "id": "C-7",
+   "reviewer": "C",
+   "originalSeverity": "P2",
+   "verifiers": [],
+   "finalSeverity": "P2",
+   "disposition": "reworded",
+   "commit": "closing commit"
+  },
+  {
+   "id": "C-8",
+   "reviewer": "C",
+   "originalSeverity": "P2",
+   "verifiers": [],
+   "finalSeverity": "P2",
+   "disposition": "run (A1-V2)",
+   "commit": "5ebe940"
+  },
+  {
+   "id": "C-9",
+   "reviewer": "C",
+   "originalSeverity": "P2",
+   "verifiers": [],
+   "finalSeverity": "P2",
+   "disposition": "licensing.md corrected",
+   "commit": "4980b95"
+  },
+  {
+   "id": "C-10",
+   "reviewer": "C",
+   "originalSeverity": "P2",
+   "verifiers": [],
+   "finalSeverity": "P2",
+   "disposition": "fixed",
+   "commit": "b98927b"
+  }
+ ],
+ "closingConsistencyCheck": {
+  "lenses": 4,
+  "findingsReported": 30,
+  "confirmedByVerifier": 27,
+  "refuted": 3,
+  "verdictChanged": false
+ }
+}

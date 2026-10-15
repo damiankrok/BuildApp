@@ -168,7 +168,7 @@ Per stage, the columns (a)–(d) give what happens to **(a)** technical elevatio
 
 | (a) | (b) | (c) | (d) |
 |---|---|---|---|
-| ELEVATION from the `elewacj` slug or caption. A photo-real orthographic render receives the same role (§3.0). | PERSPECTIVE_RENDER if a caption or slug names `widok`/`wizualizacja`. Otherwise UNKNOWN, or in DobreDomy a wrong role (see below). | **PERSPECTIVE_RENDER**, because the caption contains "wizualizacja" (for example "Strefa dzienna (wizualizacja 1 widok 1)", "Wizualizacja kuchni"). MEASURED: g2e has 19 interior of 25 PR assets, e-OZE 18 of 24 (R3-14). | No PHOTO role. A photo becomes PERSPECTIVE_RENDER only through a caption word or the og:image fallback, otherwise UNKNOWN. |
+| ELEVATION from the `elewacj` slug or caption. A photo-real orthographic render receives the same role (§3.0). | PERSPECTIVE_RENDER if a caption or slug names `widok`/`wizualizacja`. Otherwise UNKNOWN, or in DobreDomy a wrong role (see below). | **PERSPECTIVE_RENDER**, because the caption contains "wizualizacja" (for example a day-zone interior caption and a kitchen caption, both naming "wizualizacja"; captions are not quoted in Git). MEASURED: g2e has 19 interior of 25 PR assets, e-OZE 18 of 24 (R3-14). | No PHOTO role. A photo becomes PERSPECTIVE_RENDER only through a caption word or the og:image fallback, otherwise UNKNOWN. |
 
 - MEASURED (DobreDomy tagline defect): across D00–D05 there are 42 `_wN` render files. 6 are PERSPECTIVE_RENDER (one
   og:image per house, at 0.4), **19 are SITE_PLAN** (+ATTIC +ORTHOGRAPHIC_PLAN, triggered by "na wąską działkę"), and
@@ -525,7 +525,7 @@ WINDOW/EXTERIOR_DOOR/GARAGE_DOOR/RAILING/COLUMN_POST/COVERED_TERRACE as an `Asse
 
 ### 7.2 Shared byte-identical images across editions (MEASURED)
 
-- All 5 `w2` interior renders ("strefa dzienna, wizualizacja 2", 1600×1600) are byte-identical between g2e
+- All 5 `w2` interior renders (a day-zone interior caption, 1600×1600) are byte-identical between g2e
   (`m84f2903cb8e14`, `__60824-60828`) and e-OZE (`m738275b7537b0`, `__60744-60748`). Asset ids differ
   (`…-415e0cdd54` vs `…-fe995e9210`). Variant ids share the filename content-hash token and the byteHash-derived suffix
   (for example `…-d462240dc46d62deb-b2889835ae`) (R3-20, as corrected).
@@ -575,7 +575,7 @@ WINDOW/EXTERIOR_DOOR/GARAGE_DOOR/RAILING/COLUMN_POST/COVERED_TERRACE as an `Asse
 4. **Observation graph.** It has no slot for those assemblies or for an asset class (KNOWN, R4-23).
 5. **Vision.** Not run in any product or default path. If it were configured, it is remote and receives interiors as
    facades (KNOWN, §3.5).
-6. **Text.** Publisher prose naming "taras osłonięty pergolą", "zadaszone wejście" or "Pełne zadaszenie nad tarasem" is
+6. **Text.** Publisher prose naming a pergola over the terrace, a covered entrance or a fully roofed terrace is
    never parsed (R6-08, R6-09, R6 unverified). KNOWN: the specification reader handles only the `roof`, `knee_wall` and
    `walls` keys (`source-metrics/src/specifications.ts:136,176,185`); `cross-source.ts:135-136` reads only `roof`.
    KNOWN: ARCHON `SPEC_KEYS` also produces `garage_door` (`archon.ts:220`), `stairs` (`:222`) and `terrace`
@@ -602,10 +602,10 @@ images viewed here.
 
 | # | case | publisher / prior evidence | model state (MEASURED) | first bad operation | tags |
 |---|---|---|---|---|---|
-| A | rarytasy-g2e (G2E-5, `m84f…`) | 005Q inventory: the region east of the garage is open ground with a paved path, a dashed overhead line and a planter (documented claim). Text: "efektownie zadaszone wejście" (R6-08). | `terrace-front-0` (12.7 m²) and `terrace-front-822` (≈ 55.7 m²), both surface UNKNOWN, "floor of the front recess", SOURCE_DERIVED, TERRACE L2:2. TOPOLOGY recesses 1, returns 0 (R6-04, R6-11). | `reconstruct-v2.ts:689-690` pushes a zero-return zone into `recesses` (its `why` reads "a zone, not a recess", `recesses.ts:171-173`). `:1098-1123` then emits each open interval as a TERRACE with hard-coded SOURCE_DERIVED (`:1121`). | code KNOWN; state MEASURED; "first bad" = R6 inference over both |
-| C | dom-pod-jarzabem | Text: "Pełne zadaszenie nad tarasem", "wejściowy podcień" (R6-08). | 8 terraces including `terrace-rear-0` at z 11..13.5 (re-counted: 8). Roof-main GABLE Z with footprint z 1..11. ELEVATION_REGISTRATION 0/3, all AMBIGUOUS (R6-07, R6-14). | Elevation registration fails for all three views. Then `zoneVotes` is empty, so `coversZones = zoneVotes.length > 0 && …` is false (`reconstruct-v2.ts:601-608`), the roof stops at the walls, and the terrace stays uncovered. The roof note "the side renders span the walled depth only" is printed for *any* false `coversZones` (`:613`), so it is misleading when no view registered. | code KNOWN; state MEASURED (R6, unverified apart from the terrace count); "first bad" = inference |
+| A | rarytasy-g2e (G2E-5, `m84f…`) | 005Q inventory: the region east of the garage is open ground with a paved path, a dashed overhead line and a planter (documented claim). Text: "<publisher text, not quoted in Git>" (R6-08). | `terrace-front-0` (12.7 m²) and `terrace-front-822` (≈ 55.7 m²), both surface UNKNOWN, "floor of the front recess", SOURCE_DERIVED, TERRACE L2:2. TOPOLOGY recesses 1, returns 0 (R6-04, R6-11). | `reconstruct-v2.ts:689-690` pushes a zero-return zone into `recesses` (its `why` reads "a zone, not a recess", `recesses.ts:171-173`). `:1098-1123` then emits each open interval as a TERRACE with hard-coded SOURCE_DERIVED (`:1121`). | code KNOWN; state MEASURED; "first bad" = R6 inference over both |
+| C | dom-pod-jarzabem | Text: "<publisher text, not quoted in Git>", "<publisher text, not quoted in Git>" (R6-08). | 8 terraces including `terrace-rear-0` at z 11..13.5 (re-counted: 8). Roof-main GABLE Z with footprint z 1..11. ELEVATION_REGISTRATION 0/3, all AMBIGUOUS (R6-07, R6-14). | Elevation registration fails for all three views. Then `zoneVotes` is empty, so `coversZones = zoneVotes.length > 0 && …` is false (`reconstruct-v2.ts:601-608`), the roof stops at the walls, and the terrace stays uncovered. The roof note "the side renders span the walled depth only" is printed for *any* false `coversZones` (`:613`), so it is misleading when no view registered. | code KNOWN; state MEASURED (R6, unverified apart from the terrace count); "first bad" = inference |
 | C′ | dom-pod-jarzabem | spec "czterospadowy, nachylenie 30 st." | GABLE (re-checked) | v2 hard-codes `kind: 'GABLE'` (`:613`). The spec reader's HIP rule (`specifications.ts:71`, re-checked in the final pass) is ignored. | KNOWN / MEASURED |
-| X | rarytasy-g2e interiors | captions "strefa dzienna", "wizualizacja kuchni/łazienki" | 19 interior PR frames carry RIDGE, OPENING, LOGGIA and other observations (R3-12) | Role assignment: `archon.ts:98` maps "wizualizacja" to PERSPECTIVE_RENDER (the schema has no interior class, `schema.ts:45`). `analyze.ts:164` then routes it to the elevation extractors. | KNOWN / MEASURED |
+| X | rarytasy-g2e interiors | day-zone, kitchen and bathroom interior captions (not quoted in Git) | 19 interior PR frames carry RIDGE, OPENING, LOGGIA and other observations (R3-12) | Role assignment: `archon.ts:98` maps "wizualizacja" to PERSPECTIVE_RENDER (the schema has no interior class, `schema.ts:45`). `analyze.ts:164` then routes it to the elevation extractors. | KNOWN / MEASURED |
 
 ### 8.3 Where the first bad operation is UNAVAILABLE
 
