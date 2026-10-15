@@ -1,0 +1,43 @@
+{
+ "schema": "research.005r-router.mutations.0.1",
+ "killed": 6,
+ "total": 6,
+ "results": [
+  {
+   "id": "M1-no-gate",
+   "what": "interior leakage: perspective frames read as facades again",
+   "outcome": "KILLED",
+   "failed": "3"
+  },
+  {
+   "id": "M2-document-only",
+   "what": "gate ignores the projection an adapter claims",
+   "outcome": "KILLED",
+   "failed": "1"
+  },
+  {
+   "id": "M3-gate-elevations",
+   "what": "lost technical facade: elevations gated by projection too",
+   "outcome": "KILLED",
+   "failed": "1"
+  },
+  {
+   "id": "M4-false-missing",
+   "what": "refused frame also reported as read-and-found-nothing",
+   "outcome": "KILLED",
+   "failed": "1"
+  },
+  {
+   "id": "M5-silent-skip",
+   "what": "fail-closed without a typed refusal",
+   "outcome": "KILLED",
+   "failed": "3"
+  },
+  {
+   "id": "M6-gate-everything",
+   "what": "all facade reading stopped",
+   "outcome": "KILLED",
+   "failed": "8"
+  }
+ ]
+}
