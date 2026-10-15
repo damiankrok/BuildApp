@@ -1,0 +1,178 @@
+diff --git a/packages/source-analyzer/src/analyze.ts b/packages/source-analyzer/src/analyze.ts
+index 8bf84f5..23f4b2a 100644
+--- a/packages/source-analyzer/src/analyze.ts
++++ b/packages/source-analyzer/src/analyze.ts
+@@ -161,7 +161,16 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
+     const before = builder.observationCount
+     const analysis: AssetAnalysis = { asset, frame, prepared, observations: [], visionAttempted: false, visionAccepted: 0 }
+ 
+-    if (document === 'ELEVATION' || document === 'PERSPECTIVE_RENDER') {
++    // The facade extractors read an ORTHOGRAPHIC facade: an outline, a ridge, rectangles in the wall plane. Every
++    // reader of what they write (the metric layer, cross-view identity, elevation registration) reads orthographic
++    // frames only, so on a perspective picture, an interior or an exterior one alike, they could only write claims
++    // about the facade that nothing can measure. Such a frame is still declared, because a perspective camera is
++    // solved from its raster, and it is refused by name instead of being read as a facade.
++    const perspectiveRefused = document === 'PERSPECTIVE_RENDER' && asset.roles.projection !== 'ORTHOGRAPHIC_ELEVATION'
++    if (perspectiveRefused) {
++      builder.unresolved(`facade observations on the perspective render ${asset.id}`, `the facade extractors read orthographic views only and this picture's projection is ${asset.roles.projection}, so nothing on it was read as a facade`, 'NOT_ATTEMPTED', asset.id)
++      skipped.push({ assetId: asset.id, reason: `facade extractors not run: projection ${asset.roles.projection} is not orthographic` })
++    } else if (document === 'ELEVATION' || document === 'PERSPECTIVE_RENDER') {
+       const handles = Object.fromEntries(ELEVATION_EXTRACTORS.map((e) => [e.key, declare(e.name, e.version, 'DETERMINISTIC_CV')])) as ElevationHandles
+       analysis.elevation = extractElevation(builder, frame, prepared, handles)
+     } else if (document === 'FLOOR_PLAN') {
+@@ -221,7 +230,7 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
+     checkpoint.tick()
+     if (options.retainPrepared === false) delete analysis.prepared
+     analysis.observations = builder.snapshot().filter((o) => o.frameId === frame.id)
+-    if (builder.observationCount === before && !analysis.visionAttempted) {
++    if (builder.observationCount === before && !analysis.visionAttempted && !perspectiveRefused) {
+       builder.unresolved(`any observation at all on asset ${asset.id}`, 'the extractors for this document role found nothing in the image', 'MISSING', asset.id)
+     }
+     assets.push(analysis)
+diff --git a/packages/source-analyzer/test/mutations-02.test.ts b/packages/source-analyzer/test/mutations-02.test.ts
+index 8331461..c084d3f 100644
+--- a/packages/source-analyzer/test/mutations-02.test.ts
++++ b/packages/source-analyzer/test/mutations-02.test.ts
+@@ -103,13 +103,19 @@ describe('1. the section is served at a quarter of its resolution', () => {
+ })
+ 
+ describe('2. the front perspective is dropped from the package', () => {
+-  it('loses the observations that only it carried, and says the asset is gone rather than silently shrinking', async () => {
++  it('loses the frame and the named refusal it carried, and says the asset is gone rather than silently shrinking', async () => {
+     const withRender = await analyseScene([FRONT, RENDER])
+     const without = await analyseScene([FRONT])
+     expect(withRender.graph.relations.filter((r) => r.provenance.extractor === 'DERIVED').length).toBeGreaterThanOrEqual(0)
+     expect(withRender.graph.coordinateFrames).toHaveLength(2)
+     expect(without.graph.coordinateFrames).toHaveLength(1)
+-    expect(without.graph.observations.length).toBeLessThan(withRender.graph.observations.length)
++    // A perspective frame is declared but not read as a facade (projection-consumer alignment): it carries no
++    // observation of its own, only a named refusal, and dropping it removes both the frame and that refusal.
++    const renderFrame = withRender.graph.coordinateFrames.find((f) => f.roles.document === 'PERSPECTIVE_RENDER')
++    expect(withRender.graph.observations.filter((o) => o.frameId === renderFrame?.id)).toHaveLength(0)
++    expect(without.graph.observations.length).toBe(withRender.graph.observations.length)
++    expect(withRender.graph.unresolved.filter((u) => u.assetId === renderFrame?.assetId && u.status === 'NOT_ATTEMPTED' && u.what.startsWith('facade observations on the perspective render'))).toHaveLength(1)
++    expect(without.graph.unresolved.filter((u) => u.assetId === renderFrame?.assetId)).toHaveLength(0)
+     expect(without.graph.contentHash).not.toBe(withRender.graph.contentHash)
+     expect(without.graph.coordinateFrames.some((f) => f.roles.document === 'PERSPECTIVE_RENDER')).toBe(false)
+     expect(withRender.graph.coordinateFrames.some((f) => f.roles.document === 'PERSPECTIVE_RENDER')).toBe(true)
+diff --git a/packages/source-analyzer/test/projection-gate.test.ts b/packages/source-analyzer/test/projection-gate.test.ts
+new file mode 100644
+index 0000000..d80b08c
+--- /dev/null
++++ b/packages/source-analyzer/test/projection-gate.test.ts
+@@ -0,0 +1,115 @@
++/**
++ * The facade extractors read only frames a facade can be measured on.
++ *
++ * Every reader of what the facade extractors write (the metric layer, cross-view
++ * identity, elevation registration) reads orthographic frames only. On a
++ * perspective picture, interior or exterior alike, the extractors could only
++ * write claims about a facade that nothing can measure: a bathroom render once
++ * carried four "ridges" and a hundred "openings". Such a frame is still declared,
++ * because a perspective camera is solved from its raster, and it is refused by
++ * name instead of being read.
++ *
++ * Every case asserts against a control that shows the same pixels DO produce
++ * facade observations when they are filed as an orthographic view, so a gate
++ * that silently stopped all facade reading would fail here too.
++ */
++import { describe, expect, it } from 'vitest'
++import { nullVisionReasoner } from '@buildapp/source-vision'
++import type { SourceObservationGraph } from '@buildapp/source-observations'
++import { analyzeSourcePackage } from '../src/index.js'
++import { analyseScene, scene } from './scene.js'
++import type { SceneDrawing } from './scene.js'
++import { BLACK, WALL, fill, line, rectOutline, sheet } from './draw.js'
++import type { Raster } from '@buildapp/source-cv'
++
++/** A drawn facade: a wall with three openings and a member across it. */
++function facade(): Raster {
++  const r = sheet(900, 460)
++  fill(r, 40, 60, 860, 420, WALL)
++  rectOutline(r, 40, 60, 860, 420, BLACK)
++  for (let i = 0; i < 3; i += 1) {
++    const x = 90 + i * 150
++    fill(r, x, 250, x + 90, 380, [120, 130, 140])
++    rectOutline(r, x, 250, x + 90, 380, BLACK, 2)
++  }
++  fill(r, 70, 140, 830, 166, [198, 192, 182])
++  line(r, 70, 140, 830, 140, BLACK)
++  line(r, 70, 166, 830, 166, BLACK)
++  return r
++}
++
++/** A room seen in one-point perspective: floor, ceiling and wall edges converging, a window and a door in the back wall. */
++function room(): Raster {
++  const r = sheet(960, 640, [236, 232, 224])
++  fill(r, 300, 200, 660, 440, [214, 208, 198])
++  rectOutline(r, 300, 200, 660, 440, BLACK, 2)
++  for (const [x0, y0, x1, y1] of [[0, 0, 300, 200], [960, 0, 660, 200], [0, 640, 300, 440], [960, 640, 660, 440]]) line(r, x0, y0, x1, y1, BLACK, 2)
++  fill(r, 340, 240, 470, 360, [170, 196, 222])
++  rectOutline(r, 340, 240, 470, 360, BLACK, 3)
++  line(r, 405, 240, 405, 360, BLACK, 2)
++  fill(r, 530, 270, 610, 440, [150, 120, 96])
++  rectOutline(r, 530, 270, 610, 440, BLACK, 2)
++  return r
++}
++
++const FRONT: SceneDrawing = { slug: 'front', raster: facade(), roles: { document: 'ELEVATION', view: 'FRONT' } }
++const RENDER: SceneDrawing = { slug: 'render', raster: facade(), roles: { document: 'PERSPECTIVE_RENDER', view: 'UNKNOWN' } }
++const ROOM: SceneDrawing = { slug: 'room', raster: room(), roles: { document: 'PERSPECTIVE_RENDER', view: 'UNKNOWN' } }
++
++const frameOf = (g: SourceObservationGraph, assetId: string) => g.coordinateFrames.find((f) => f.assetId === assetId)
++const observationsOn = (g: SourceObservationGraph, assetId: string) => g.observations.filter((o) => o.frameId === frameOf(g, assetId)?.id)
++const refusalsOf = (g: SourceObservationGraph, assetId: string) => g.unresolved.filter((u) => u.assetId === assetId && u.status === 'NOT_ATTEMPTED' && u.what.startsWith('facade observations on the perspective render'))
++
++describe('the facade extractors read orthographic frames only', () => {
++  it('the same pixels give facade observations as an elevation (control)', async () => {
++    const asElevation = await analyseScene([{ ...ROOM, slug: 'room', roles: { document: 'ELEVATION', view: 'FRONT' } }, { ...RENDER, roles: { document: 'ELEVATION', view: 'REAR' } }])
++    expect(observationsOn(asElevation.graph, 'asset-room').length).toBeGreaterThan(0)
++    expect(observationsOn(asElevation.graph, 'asset-render').length).toBeGreaterThan(0)
++  })
++
++  it('a perspective picture, interior or exterior, is declared, carries no facade observation and one named refusal', async () => {
++    const run = await analyseScene([FRONT, RENDER, ROOM])
++    for (const assetId of ['asset-render', 'asset-room']) {
++      const frame = frameOf(run.graph, assetId)
++      expect(frame?.roles.projection).toBe('PERSPECTIVE')
++      expect(observationsOn(run.graph, assetId)).toHaveLength(0)
++      expect(refusalsOf(run.graph, assetId)).toHaveLength(1)
++      // refused by name, never reported as read-and-found-nothing
++      expect(run.graph.unresolved.filter((u) => u.assetId === assetId && u.status === 'MISSING')).toHaveLength(0)
++      expect(run.skipped.filter((s) => s.assetId === assetId)).toHaveLength(1)
++    }
++  })
++
++  it("an elevation's observations do not depend on the perspective pictures published beside it", async () => {
++    const alone = await analyseScene([FRONT])
++    const beside = await analyseScene([FRONT, RENDER, ROOM])
++    expect(JSON.stringify(observationsOn(beside.graph, 'asset-front'))).toBe(JSON.stringify(observationsOn(alone.graph, 'asset-front')))
++    expect(observationsOn(alone.graph, 'asset-front').length).toBeGreaterThan(0)
++  })
++
++  it('a render an adapter declares orthographic is read as a facade', async () => {
++    const run = await analyseScene([{ ...RENDER, roles: { document: 'PERSPECTIVE_RENDER', view: 'FRONT', projection: 'ORTHOGRAPHIC_ELEVATION' } }])
++    expect(observationsOn(run.graph, 'asset-render').length).toBeGreaterThan(0)
++    expect(refusalsOf(run.graph, 'asset-render')).toHaveLength(0)
++  })
++
++  it('an elevation is never refused, whatever projection it was sealed with', async () => {
++    const run = await analyseScene([{ ...FRONT, roles: { document: 'ELEVATION', view: 'FRONT', projection: 'PERSPECTIVE' } }])
++    expect(observationsOn(run.graph, 'asset-front').length).toBeGreaterThan(0)
++    expect(refusalsOf(run.graph, 'asset-front')).toHaveLength(0)
++  })
++
++  it('with the product reasoner configured, the refusal stands beside the vision gap', async () => {
++    const { pkg, bytes } = scene([FRONT, ROOM])
++    const run = await analyzeSourcePackage(pkg, { bytes: async (url) => bytes.get(url) ?? null, vision: nullVisionReasoner() })
++    expect(observationsOn(run.graph, 'asset-room')).toHaveLength(0)
++    expect(refusalsOf(run.graph, 'asset-room')).toHaveLength(1)
++    expect(run.graph.unresolved.some((u) => u.assetId === 'asset-room' && u.what.startsWith('a facade decomposition vision pass'))).toBe(true)
++  })
++
++  it('the graph does not depend on the order the package lists its assets in', async () => {
++    const a = await analyseScene([FRONT, RENDER, ROOM])
++    const b = await analyseScene([ROOM, RENDER, FRONT])
++    expect(b.graph.contentHash).toBe(a.graph.contentHash)
++  })
++})

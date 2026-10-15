@@ -78,6 +78,9 @@ def compare_row(a_dir, b_dir):
     ok_removed = all(u['status'] == 'MISSING' and u.get('assetId') in persp_assets and u['what'].startswith('any observation at all on asset') for u in un_removed)
     ext_ok = B[6] <= A[6] and all('"cv.' in e for e in A[6] - B[6])
     r['P4'] = bool(not added and all(A[5][o] in A[1] for o in removed) and persp_obs_b == 0 and rel_ok and ok_added and ok_removed and ext_ok)
+    # POST-HOC sensitivity (never a verdict): P4' accepts every removed gap that is anchored to a perspective asset
+    r['P4posthoc'] = bool(not added and all(A[5][o] in A[1] for o in removed) and persp_obs_b == 0 and rel_ok and ok_added and all(u.get('assetId') in persp_assets for u in un_removed) and ext_ok)
+    r['unresolvedRemovedKinds'] = sorted({(u['status'], u['what'].split(' at (')[0][:60]) for u in un_removed})
     r['P4detail'] = {'perspectiveFrames': len(A[1]), 'perspectiveAssets': len(persp_assets), 'observationsRemoved': len(removed), 'observationsAdded': len(added), 'perspectiveObservationsInB': persp_obs_b,
                      'relationsRemoved': len(rel_removed), 'relationsAdded': len(rel_added), 'unresolvedAdded': len(un_added), 'unresolvedRemoved': len(un_removed), 'extractorsRemoved': sorted(json.loads(e)['name'] for e in A[6] - B[6])}
     kinds = {}
@@ -97,6 +100,10 @@ def compare_row(a_dir, b_dir):
     cdiff = sorted(k for k in set(sa['counts']) | set(sb['counts']) if k != 'observations' and sa['counts'].get(k) != sb['counts'].get(k))
     r['P5'] = not diff and not cdiff
     r['P5diff'] = diff + [f'counts.{k}' for k in cdiff]
+    # POST-HOC sensitivity (never a verdict): P5' drops wall-clock `ms` fields, which differ between any two runs
+    def no_ms(x):
+        return {k: no_ms(v) for k, v in x.items() if k != 'ms'} if isinstance(x, dict) else [no_ms(v) for v in x] if isinstance(x, list) else x
+    r['P5posthoc'] = not [k for k in diff if canon(no_ms(sa.get(k))) != canon(no_ms(sb.get(k)))] and not cdiff
     ca, cb = load(f'{a_dir}/candidate.json.gz', True), load(f'{b_dir}/candidate.json.gz', True)
     r['P6'] = canon(blank(ca)) == canon(blank(cb))
     pa, pb = load(f'{a_dir}/perf.json'), load(f'{b_dir}/perf.json')
