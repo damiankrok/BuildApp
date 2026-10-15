@@ -58,7 +58,8 @@ A post-hoc truth correction cannot change a preregistered verdict. The sensitivi
    INTERIOR_RENDER up to τ = 0.85 (DEV risk 72.8 %). Its own τ procedure therefore lands at 0.95 and 6.9 % EVAL
    coverage. On 20 synthetic images, its pooled image embeddings are nearly identical (pairwise cosine
    0.997–1.000, B1). The harness matches the library to 2·10⁻⁶. V2 is deterministic: two full runs are identical on
-   1 537/1 537 assets.
+   1 537/1 537 assets. Its top routing class is INTERIOR_RENDER for all 743 truth-bearing images under both its own grey
+   letterbox and a white one (A1-V2). It is format-invariant only because its output is constant.
 
 ## Reopen conditions (all needed)
 

@@ -120,7 +120,11 @@ kotwice karuzeli (A-3, C-2, C3). Na DEV odpowiednio 16 i wszystkie.
 - **V2, router bezużyteczny.** Na prawdziwych obrazach DEV wszystkie rozstrzygnięte grupy są INTERIOR_RENDER aż do
   τ = 0,85 (ryzyko DEV 72,8 %, EVAL 53,7 %). Procedura τ z prerejestracji dała więc τ = 0,95 i 6,9 % pokrycia. Na
   20 obrazach **syntetycznych** logity zgadzają się z biblioteką (|Δ| ≤ 2·10⁻⁶), a osadzenia obrazów są praktycznie
-  stałe (kosinus 0,997–1,000; B1, zakres tylko syntetyczny, recenzja B-10). {{A1_V2}}
+  stałe (kosinus 0,997–1,000; B1, zakres tylko syntetyczny, recenzja B-10). **A1 dla V2 (uruchomione po recenzjach, C-8):** dla
+  wszystkich 743 obrazów z prawdą najwyższą klasą routingu jest INTERIOR_RENDER, zarówno przy szarym dopełnieniu
+  (własne przetwarzanie V2), jak i przy białym. „Niezmienniczość” wynika tu ze stałości, nie z rozpoznania. Przy
+  τ = 0,95 rozstrzyga się 29 (szare) albo 8 (białe) wnętrz, a 21 z tych rozstrzygnięć zmienia się z formatem
+  (`addenda/a1-v2.json`).
 - **Wrażliwość prawdy (Addendum C, post-hoc).** Tabela pokazuje V1 na EVAL po ponownym dopasowaniu na DEV:
 
   | prawda | EXTERIOR_RENDER popr./prawda | ELEVATION popr./prawda | pokrycie | ryzyko | górna granica bootstrap | §8 |
@@ -215,7 +219,11 @@ dokładnie jeden test i ten test przechodzi (recenzja C-10). `mutations/mutation
 - V2: dwa pełne przebiegi (3 wątki, te same wagi, prompty i torch 2.11.0+cpu) dają **1 537/1 537 identycznych
   wierszy**: prawdopodobieństwa routingu oraz każdą ramkę i jej wynik, bez pól czasu. Skrót treści obu przebiegów to
   `6c61e141…`. Czas ścienny 3 087 s i 3 540 s, szczytowy RSS 1 009 MB (`determinism/v2-determinism.json`).
-- Koszt: {{BENCH}}
+- Koszt (`runtime/bench.json`). Próbka warstwowa: 60 obrazów, po 10 na klasę. Maszyna x86_64, 4 rdzenie, bez
+  innych obciążeń; to nie telefon. **V1**: mediana 149 ms na obraz, p95 313 ms (Node 22); 147 / 282 ms na
+  **Node 18.20.4**; szczytowy RSS 212 / 175 MB; kod 24,8 kB, bez wag. **V2** (PyTorch CPU, 3 wątki): zimny start
+  2,5 s, routing 0,83 s, detekcja 0,90 s na obraz (p50), łącznie około 1,7 s; RSS 1 012 MB; wagi 613 MB;
+  `NOT_RUN_NODE18`, bo nie zbudowano portu ONNX/Node. ARM64: `PENDING`.
 - Licencje (`research/analyzer-005r/licensing.md`): V1 korzysta wyłącznie z zależności już produkcyjnych (BSD-3/MIT).
   V2 jest **LICENSE_BLOCKED** dla produktu. Wagi są na Apache-2.0, ale karta modelu sama mówi „intended as a research
   output for research communities … primary intended users … AI researchers”. Do tego crawl jest nieujawniony, a

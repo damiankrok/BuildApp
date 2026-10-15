@@ -1,0 +1,55 @@
+{
+ "V1_assetBytes": 24814,
+ "V1_node18": {
+  "perClassMs_p50": {
+   "EXTERIOR_RENDER": 257,
+   "FLOOR_PLAN": 96,
+   "INTERIOR_RENDER": 180,
+   "SECTION": 104,
+   "SITE_PLAN": 43,
+   "TECHNICAL_ELEVATION": 188
+  },
+  "perImageMs_p50": 147,
+  "perImageMs_p95": 282,
+  "stdout": "features 60 (v1-features@1, node v18.20.4, peak rss 175 MB)",
+  "wallSeconds": 9.45
+ },
+ "V1_node22": {
+  "perClassMs_p50": {
+   "EXTERIOR_RENDER": 272,
+   "FLOOR_PLAN": 68,
+   "INTERIOR_RENDER": 182,
+   "SECTION": 100,
+   "SITE_PLAN": 43,
+   "TECHNICAL_ELEVATION": 202
+  },
+  "perImageMs_p50": 149,
+  "perImageMs_p95": 313,
+  "stdout": "features 60 (v1-features@1, node v22.22.2, peak rss 212 MB)",
+  "wallSeconds": 9.24
+ },
+ "V2_python_cpu": {
+  "coldLoadSeconds": 2.467,
+  "detectSeconds_p50": 0.9004,
+  "detectSeconds_p95": 0.9863,
+  "firstImageSeconds": 1.755,
+  "node18": "NOT_RUN_NODE18 (PyTorch; no Node/ONNX port was built)",
+  "peakRssMB": 1012.4,
+  "perClassSeconds_p50": {
+   "EXTERIOR_RENDER": 1.7671,
+   "FLOOR_PLAN": 1.6493,
+   "INTERIOR_RENDER": 1.7004,
+   "SECTION": 1.7827,
+   "SITE_PLAN": 1.6809,
+   "TECHNICAL_ELEVATION": 1.6642
+  },
+  "routeSeconds_p50": 0.8259,
+  "routeSeconds_p95": 0.8944,
+  "threads": 3,
+  "wallSeconds": 112.58,
+  "weightsBytes": 612983940
+ },
+ "cpu": 4,
+ "note": "x86_64 container CPU; not a phone. ARM64: PENDING",
+ "sampleSize": 60
+}
