@@ -282,7 +282,22 @@ przechodzi progu. Granica ryzyka wynosi wtedy 6,15 %, a trafienia biorą się ze
 
 ## M. Testy, zamrożenie, CI
 
-{{GATES}}
+| bramka | wynik |
+| --- | --- |
+| zamrożenie produkcji | **FREEZE: IDENTICAL** (`freeze-manifest.mjs check` względem `freeze/production-freeze-start.json`; koniec: `freeze/production-freeze-end.json`, skrót wszystkiego poza allowlistą równy startowemu). Od `39061db` zmieniły się wyłącznie ścieżki dozwolone briefem. |
+| `npm run typecheck` | zielone |
+| `npm test` | **2 583 passed, 11 skipped**, exit 0 w drugim przebiegu. Pierwszy przebieg (przed poprawkami) dał 3 porażki: jedną prawdziwą (`a1-v1.jsonl` odrzucony przez test izolacji, naprawione w `fa090be`) i dwa przekroczenia 120 s `WorkerExecutor` pod pełnym obciążeniem CPU (równolegle szedł V2). Drugi przebieg poszedł na cichej maszynie i był zielony bez zmian w tych testach. |
+| `npm run build` | zielone |
+| `npm run e2e` | **47/47 passed** w pierwszym podejściu (5,8 min). Zrzuty dowodowe wcześniejszych etapów, które e2e nadpisuje, przywrócono przez `git checkout -- stage-reports/artifacts`. Ponowienie dla wyścigu UI Compose nie było potrzebne. |
+| test izolacji (cały plik) | 57/57, w tym blok 005R 6/6 wzmocniony po recenzji A-10 |
+| testy kontraktu JSON | 18/18 (`schema/test_schema.py`) |
+| mutacje | 13/13 zabitych (M11 ponowiony po zmianie fiksury) |
+| determinizm | V0 51/51 pakietów; cechy V1 identyczne na Node 22 ×2 i 18.20.4; V2 1 537/1 537 wierszy |
+| CI | podane w handoffie dla końcowego HEAD (każdy push anuluje poprzedni przebieg na lustrze) |
+
+Historia gałęzi: wcześniejsze commity tej gałęzi zawierają w audycie kilka krótkich cytatów podpisów i opisów wydawcy.
+Na HEAD są usunięte (kontrola zamykająca). Wyczyszczenie historii wymagałoby przepisania jej i force-pusha, a to
+decyzja OWNER-a.
 
 ## N. Rekomendacja i ograniczenia
 
@@ -302,4 +317,21 @@ fotografie (EXTERIOR/INTERIOR_PHOTO) i DETAIL na prawdziwych danych — `NOT_SAM
 
 ## O. Handoff
 
-{{HANDOFF}}
+```
+STAGE: BUILDPLAN-ANALYZER-005R
+VERDICT: PARTIAL_RESEARCH
+BRANCH: analyzer/visual-asset-exterior-json-research-v1 (+ mirror claude/new-session-3kzcgh)
+BASE: 39061dbed453d7af4e538b1fcbe4584496fa223e
+HEAD: commit niosący ten raport (pełny SHA i CI w odpowiedzi końcowej)
+FULL_REPORT: stage-reports/STAGE_BUILDPLAN_ANALYZER_005R_VISUAL_ASSET_EXTERIOR_JSON.md
+ARCHITECTURE_AUDIT: research/analyzer-005r/current-pipeline-audit.md
+DATASET / GROUND_TRUTH: real ARCHON only (50 editions, 34 families, 1 352 assets, 761 lineage groups; DEV 20 / EVAL 14 families); truth = publisher page structure; HUMAN_LABELS_NOT_RUN; synthetic 185 images / 12 houses with constructed feature truth; DobreDomy, Archipelag, Domy w Stylu SOURCE_NOT_USABLE
+CONTENDERS: V0a RUN, V0b RUN, V1 RUN, V2 RUN (OWL-ViT B/32 local), N1 RUN (falsified), V3 NOT_RUN_PREVIOUS_005M_SAFETY
+ROLE_METRICS: EVAL lineage groups, preregistered truth: drawings near-perfect for all; EXTERIOR_RENDER 0/20 correct for every contender; V1 cov 90.5 %, risk 1.9 % (boot ≤ 5.43 %), EXT coverage 10 %; V2 cov 6.9 %; post-hoc corrected truth C12: V1 EXT 46/46 but risk bound 6.15 % and format shortcut (A1 97.7 % flips)
+EXTERIOR_FEATURE_METRICS: real images NOT_MEASURED (no independent truth); synthetic oracle V2@0.2 P 0.910 R 0.465 (windows/doors only; 0 pergola/carport/canopy/terrace/steps/posts; balcony 11/40, railing 2/51); V2 on real interiors 253 windows, 153 exterior doors
+JSON_SCHEMA: research/analyzer-005r/schema/ (research.visual-observations.0.1, research.visual-edition-summary.0.1); mapping to existing types: current-pipeline-audit.md §6, §9
+RUNTIME_LICENSE: x86 CPU: V1 149 ms/img p50 (Node 18.20.4: 147 ms), 212/175 MB RSS, 24.8 kB, no weights; V2 ≈ 1.7 s/img, 1 012 MB RSS, 613 MB weights, NOT_RUN_NODE18; ARM64 PENDING; OWL-ViT LICENSE_BLOCKED (card: research output); no new permissions
+FREEZE: IDENTICAL
+NEXT_RECOMMENDATION: NO_SAFE_VISUAL_CANDIDATE
+FINAL_TOKEN: PARTIAL_RESEARCH_BUILDPLAN_ANALYZER_005R_NO_SAFE_VISUAL_CANDIDATE_ARCHON_ONLY
+```
