@@ -1,0 +1,277 @@
+{
+ "a": "N1",
+ "b": "N1shuf",
+ "mode": "identical",
+ "perRow": {
+  "A00": {
+   "failure.json": true,
+   "observation-graph.json.gz": true
+  },
+  "A01": {
+   "failure.json": true,
+   "observation-graph.json.gz": true
+  },
+  "A02": {
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": false
+  },
+  "A03": {
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": false
+  },
+  "A04": {
+   "failure.json": true,
+   "observation-graph.json.gz": true
+  },
+  "A05": {
+   "failure.json": true,
+   "observation-graph.json.gz": true
+  },
+  "A06": {
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": false
+  },
+  "A07": {
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": false
+  },
+  "alt-marcowki": {
+   "failure.json": true,
+   "observation-graph.json.gz": true
+  },
+  "dom-miniaturka": {
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": false
+  },
+  "dom-pod-jarzabem": {
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": false
+  },
+  "dom-pod-milorzebem": {
+   "failure.json": true,
+   "observation-graph.json.gz": true
+  },
+  "dom-w-akebiach": {
+   "failure.json": true,
+   "observation-graph.json.gz": true
+  },
+  "dom-w-arkadiach": {
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": false
+  },
+  "dom-w-azaliach": {
+   "failure.json": true,
+   "observation-graph.json.gz": true
+  },
+  "dom-w-cieszyniankach": {
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": false
+  },
+  "dom-w-cyklamenach": {
+   "failure.json": true,
+   "observation-graph.json.gz": true
+  },
+  "dom-w-dabecjach": {
+   "failure.json": true,
+   "observation-graph.json.gz": true
+  },
+  "dom-w-daliach": {
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": false
+  },
+  "dom-w-glogownikach": {
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": false
+  },
+  "dom-w-gozdzikowcach": {
+   "failure.json": true,
+   "observation-graph.json.gz": true
+  },
+  "dom-w-helikoniach": {
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": false
+  },
+  "dom-w-jablonkach": {
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": false
+  },
+  "dom-w-krasnokwiatach": {
+   "failure.json": true,
+   "observation-graph.json.gz": true
+  },
+  "dom-w-modrzewnicy": {
+   "failure.json": true,
+   "observation-graph.json.gz": true
+  },
+  "dom-w-modrzykach": {
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": false
+  },
+  "dom-w-morelach": {
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": false
+  },
+  "dom-w-murajach": {
+   "failure.json": true,
+   "observation-graph.json.gz": true
+  },
+  "dom-w-tunbergiach": {
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": false
+  },
+  "dom-w-tymianku": {
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": false
+  },
+  "dom-w-zurawkach": {
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": false
+  },
+  "kosacce-clean": {
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": false
+  },
+  "kosacce-tracked": {
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": false
+  },
+  "marcowki": {
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": false
+  },
+  "rarytasy-eoze": {
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": false
+  },
+  "rarytasy-g2e": {
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": false
+  },
+  "willa-miranda": {
+   "candidate.json.gz": true,
+   "metric-evidence.json.gz": true,
+   "model.json": true,
+   "observation-graph.json.gz": true,
+   "summary.json": false
+  }
+ },
+ "rows": 37,
+ "schema": "research.005r-router.compare.0.1",
+ "summary": {
+  "candidate.json.gz": {
+   "fail": [],
+   "notMeasured": [],
+   "pass": 23
+  },
+  "metric-evidence.json.gz": {
+   "fail": [],
+   "notMeasured": [],
+   "pass": 23
+  },
+  "model.json": {
+   "fail": [],
+   "notMeasured": [],
+   "pass": 23
+  },
+  "observation-graph.json.gz": {
+   "fail": [],
+   "notMeasured": [],
+   "pass": 37
+  },
+  "summary.json": {
+   "fail": [
+    "A02",
+    "A03",
+    "A06",
+    "A07",
+    "dom-miniaturka",
+    "dom-pod-jarzabem",
+    "dom-w-arkadiach",
+    "dom-w-cieszyniankach",
+    "dom-w-daliach",
+    "dom-w-glogownikach",
+    "dom-w-helikoniach",
+    "dom-w-jablonkach",
+    "dom-w-modrzykach",
+    "dom-w-morelach",
+    "dom-w-tunbergiach",
+    "dom-w-tymianku",
+    "dom-w-zurawkach",
+    "kosacce-clean",
+    "kosacce-tracked",
+    "marcowki",
+    "rarytasy-eoze",
+    "rarytasy-g2e",
+    "willa-miranda"
+   ],
+   "notMeasured": [],
+   "pass": 0
+  }
+ }
+}

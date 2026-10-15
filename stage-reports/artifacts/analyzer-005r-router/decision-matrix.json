@@ -1,0 +1,33 @@
+{
+ "schema": "research.005r-router.decision-matrix.0.1",
+ "base": "8d414567e16e9a790bcf56cbebc10d778c6eb268",
+ "preregistration": ["research/analyzer-005r-router/preregistration.md (014781c)", "research/analyzer-005r-router/preregistration-addendum-A.md (0992344)"],
+ "variants": {
+  "R0": {"status": "RUN", "rows": 37, "note": "incumbent; 3 rows overwritten by an operator error re-run as R0fix through the unpatched alias copy (R0copy), 3 more re-run there to collect metric evidence"},
+  "R1": {"status": "RUN (research only)", "result": {"assets": 1352, "INTERIOR_HINT": 198, "EXTERIOR_HINT": 39, "CONTESTED": 15, "UNKNOWN": 1100, "twoIndependentSceneClasses": 0}, "adoptable": false, "why": "proposal-only; its INTERIOR/EXTERIOR evidence is the 005R truth channel (circular); production use would need an adapter + schema change and human truth"},
+  "R2": {"status": "RUN (by construction)", "framesGated": 0, "adoptable": false, "why": "no perspective frame has two scene witnesses from different independence classes (R1); pixels inadmissible (005R A1, V2 constant); HUMAN NOT_RUN"},
+  "R2w": {"status": "RUN (diagnostic, 6 rows)", "adoptable": false, "why": "one witness class (PUBLISHER_GALLERY); never adoptable"},
+  "R3": {"status": "NOT_RUN", "why": "no new measured content signal; V1 barred (format shortcut A1), V2/OWL-ViT barred (005R NO_SAFE, licence unresolved); no new weights in this stage; replaced by N1 (brief §5)"},
+  "N1": {
+   "status": "RUN (37 DEV rows, + reversed/shuffled replay, + ledger replay on 7 rows)",
+   "predicatesAsPreregistered": {
+    "P1_model": "PASS 37/37 (34 against R0, 3 against R0fix; 6 rows double-checked against R0fix)",
+    "P2_orthographicEvidence": "PASS 37/37",
+    "P3_metricEvidenceContent": "PASS on every row with metric evidence kept (31 vs R0 + 6 vs R0fix)",
+    "P4_graphDiffIsExactlyTheGate": "FAIL 37/37 — removed unresolved entries include the facade extractors' own 'side wall of the recess' MISSING gaps on perspective frames, which P4 did not enumerate",
+    "P5_summary": "FAIL on every completed row — recogniser.ms (wall-clock) differs; the harness stripped only startedAt/completedAt",
+    "P6_candidateContent": "PASS on every completed row",
+    "P7_determinism": "model/graph/metric/candidate/failure identical N1 vs N1shuf 37/37; summary FAIL as written (same wall-clock field); R0 vs R0rev see report",
+    "P8_ledger": "PASS 7/7 (25 solved cameras; 922 false USED_AS_CORROBORATION removed; 0 violations)",
+    "P9_elevationMislabelRisk": "PASS: 0 of 198 structural elevations filed as PERSPECTIVE_RENDER",
+    "P10_coverage": "MET: 37 rows with perspective frames; 7 rows with solved cameras (>= 5)"
+   },
+   "posthocSensitivity": {"P4prime_allRemovedGapsAnchoredToPerspectiveAssets": "PASS 37/37", "P5prime_withoutWallClockMs": "PASS on every completed row", "P7prime_withoutWallClockMs": "PASS 37/37", "note": "post-hoc; cannot change the preregistered verdict"},
+   "decision": "NO_SAFE_ADOPTION",
+   "why": "preregistration §6.1: any failed predicate P1-P9 is NO_SAFE_ADOPTION; P4 and P5 failed as written. Their causes are understood and benign on inspection, but a predicate corrected after unsealing cannot carry an adoption.",
+   "staged": "research/analyzer-005r-router/n1-staged/ (patch + tests, 6/6 mutants killed)"
+  }
+ },
+ "productionChange": "NONE",
+ "blind13": "NOT_RUN (no production behaviour change)"
+}

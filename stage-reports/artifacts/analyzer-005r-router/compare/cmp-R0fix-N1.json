@@ -1,0 +1,377 @@
+{
+ "a": "R0fix",
+ "b": "N1",
+ "mode": "predicates",
+ "perRow": {
+  "dom-pod-jarzabem": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4": false,
+   "P4detail": {
+    "extractorsRemoved": [],
+    "observationsAdded": 0,
+    "observationsRemoved": 147,
+    "perspectiveAssets": 4,
+    "perspectiveFrames": 4,
+    "perspectiveObservationsInB": 0,
+    "relationsAdded": 0,
+    "relationsRemoved": 51,
+    "unresolvedAdded": 4,
+    "unresolvedRemoved": 12
+   },
+   "P4posthoc": true,
+   "P5": false,
+   "P5diff": [
+    "recogniser"
+   ],
+   "P5posthoc": true,
+   "P6": true,
+   "observationMs": [
+    17844,
+    25670
+   ],
+   "outcome": "COMPLETED",
+   "peakRssMB": [
+    962,
+    932
+   ],
+   "removedByKind": {
+    "LINEAR_VOLUME_CANDIDATE": 29,
+    "LOGGIA": 6,
+    "MASS_REGION": 4,
+    "OPENING": 69,
+    "RIDGE": 4,
+    "ROOF_EDGE": 16,
+    "SILHOUETTE": 4,
+    "SURFACE_REGION": 15
+   },
+   "unresolvedRemovedKinds": [
+    [
+     "MISSING",
+     "the left side wall of the recess"
+    ],
+    [
+     "MISSING",
+     "the right side wall of the recess"
+    ]
+   ]
+  },
+  "dom-w-arkadiach": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4": false,
+   "P4detail": {
+    "extractorsRemoved": [],
+    "observationsAdded": 0,
+    "observationsRemoved": 525,
+    "perspectiveAssets": 13,
+    "perspectiveFrames": 13,
+    "perspectiveObservationsInB": 0,
+    "relationsAdded": 0,
+    "relationsRemoved": 239,
+    "unresolvedAdded": 13,
+    "unresolvedRemoved": 24
+   },
+   "P4posthoc": true,
+   "P5": false,
+   "P5diff": [
+    "recogniser"
+   ],
+   "P5posthoc": true,
+   "P6": true,
+   "observationMs": [
+    41412,
+    48968
+   ],
+   "outcome": "COMPLETED",
+   "peakRssMB": [
+    934,
+    920
+   ],
+   "removedByKind": {
+    "LINEAR_VOLUME_CANDIDATE": 121,
+    "LOGGIA": 18,
+    "MASS_REGION": 13,
+    "OPENING": 237,
+    "RIDGE": 13,
+    "ROOF_EDGE": 52,
+    "SILHOUETTE": 13,
+    "SURFACE_REGION": 56,
+    "WALL_REGION": 2
+   },
+   "unresolvedRemovedKinds": [
+    [
+     "MISSING",
+     "the left side wall of the recess"
+    ],
+    [
+     "MISSING",
+     "the right side wall of the recess"
+    ]
+   ]
+  },
+  "dom-w-modrzewnicy": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4": false,
+   "P4detail": {
+    "extractorsRemoved": [],
+    "observationsAdded": 0,
+    "observationsRemoved": 234,
+    "perspectiveAssets": 5,
+    "perspectiveFrames": 5,
+    "perspectiveObservationsInB": 0,
+    "relationsAdded": 0,
+    "relationsRemoved": 100,
+    "unresolvedAdded": 5,
+    "unresolvedRemoved": 37
+   },
+   "P4posthoc": true,
+   "outcome": "FAILED RECONSTRUCTION_FAILED/RECONSTRUCTION_FAILED",
+   "removedByKind": {
+    "LINEAR_VOLUME_CANDIDATE": 60,
+    "LOGGIA": 19,
+    "MASS_REGION": 5,
+    "OPENING": 97,
+    "RIDGE": 5,
+    "ROOF_EDGE": 20,
+    "SILHOUETTE": 5,
+    "SURFACE_REGION": 22,
+    "WALL_REGION": 1
+   },
+   "unresolvedRemovedKinds": [
+    [
+     "MISSING",
+     "the left side wall of the recess"
+    ],
+    [
+     "MISSING",
+     "the right side wall of the recess"
+    ]
+   ]
+  },
+  "dom-w-morelach": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4": false,
+   "P4detail": {
+    "extractorsRemoved": [],
+    "observationsAdded": 0,
+    "observationsRemoved": 169,
+    "perspectiveAssets": 5,
+    "perspectiveFrames": 5,
+    "perspectiveObservationsInB": 0,
+    "relationsAdded": 0,
+    "relationsRemoved": 75,
+    "unresolvedAdded": 5,
+    "unresolvedRemoved": 16
+   },
+   "P4posthoc": true,
+   "P5": false,
+   "P5diff": [
+    "recogniser"
+   ],
+   "P5posthoc": true,
+   "P6": true,
+   "observationMs": [
+    30331,
+    23575
+   ],
+   "outcome": "COMPLETED",
+   "peakRssMB": [
+    988,
+    994
+   ],
+   "removedByKind": {
+    "LINEAR_VOLUME_CANDIDATE": 44,
+    "LOGGIA": 10,
+    "MASS_REGION": 5,
+    "OPENING": 52,
+    "RIDGE": 5,
+    "ROOF_EDGE": 20,
+    "SILHOUETTE": 5,
+    "SURFACE_REGION": 28
+   },
+   "unresolvedRemovedKinds": [
+    [
+     "MISSING",
+     "the left side wall of the recess"
+    ],
+    [
+     "MISSING",
+     "the right side wall of the recess"
+    ]
+   ]
+  },
+  "marcowki": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4": false,
+   "P4detail": {
+    "extractorsRemoved": [],
+    "observationsAdded": 0,
+    "observationsRemoved": 205,
+    "perspectiveAssets": 4,
+    "perspectiveFrames": 4,
+    "perspectiveObservationsInB": 0,
+    "relationsAdded": 0,
+    "relationsRemoved": 82,
+    "unresolvedAdded": 4,
+    "unresolvedRemoved": 16
+   },
+   "P4posthoc": true,
+   "P5": false,
+   "P5diff": [
+    "recogniser"
+   ],
+   "P5posthoc": true,
+   "P6": true,
+   "observationMs": [
+    24873,
+    18248
+   ],
+   "outcome": "COMPLETED",
+   "peakRssMB": [
+    1044,
+    943
+   ],
+   "removedByKind": {
+    "LINEAR_VOLUME_CANDIDATE": 58,
+    "LOGGIA": 8,
+    "MASS_REGION": 4,
+    "OPENING": 74,
+    "RIDGE": 4,
+    "ROOF_EDGE": 16,
+    "SILHOUETTE": 4,
+    "SURFACE_REGION": 37
+   },
+   "unresolvedRemovedKinds": [
+    [
+     "MISSING",
+     "the left side wall of the recess"
+    ],
+    [
+     "MISSING",
+     "the right side wall of the recess"
+    ]
+   ]
+  },
+  "rarytasy-g2e": {
+   "P1": true,
+   "P2": true,
+   "P3": true,
+   "P4": false,
+   "P4detail": {
+    "extractorsRemoved": [],
+    "observationsAdded": 0,
+    "observationsRemoved": 765,
+    "perspectiveAssets": 25,
+    "perspectiveFrames": 25,
+    "perspectiveObservationsInB": 0,
+    "relationsAdded": 0,
+    "relationsRemoved": 270,
+    "unresolvedAdded": 25,
+    "unresolvedRemoved": 84
+   },
+   "P4posthoc": true,
+   "P5": false,
+   "P5diff": [
+    "recogniser"
+   ],
+   "P5posthoc": true,
+   "P6": true,
+   "observationMs": [
+    59784,
+    47813
+   ],
+   "outcome": "COMPLETED",
+   "peakRssMB": [
+    1006,
+    1003
+   ],
+   "removedByKind": {
+    "LINEAR_VOLUME_CANDIDATE": 120,
+    "LOGGIA": 45,
+    "MASS_REGION": 25,
+    "OPENING": 335,
+    "RIDGE": 25,
+    "ROOF_EDGE": 100,
+    "SILHOUETTE": 25,
+    "SURFACE_REGION": 87,
+    "WALL_REGION": 3
+   },
+   "unresolvedRemovedKinds": [
+    [
+     "MISSING",
+     "the left side wall of the recess"
+    ],
+    [
+     "MISSING",
+     "the right side wall of the recess"
+    ]
+   ]
+  }
+ },
+ "rows": 6,
+ "schema": "research.005r-router.compare.0.1",
+ "summary": {
+  "P1": {
+   "fail": [],
+   "notMeasured": [],
+   "pass": 6
+  },
+  "P2": {
+   "fail": [],
+   "notMeasured": [],
+   "pass": 6
+  },
+  "P3": {
+   "fail": [],
+   "notMeasured": [],
+   "pass": 6
+  },
+  "P4": {
+   "fail": [
+    "dom-pod-jarzabem",
+    "dom-w-arkadiach",
+    "dom-w-modrzewnicy",
+    "dom-w-morelach",
+    "marcowki",
+    "rarytasy-g2e"
+   ],
+   "notMeasured": [],
+   "pass": 0
+  },
+  "P4posthoc": {
+   "fail": [],
+   "notMeasured": [],
+   "pass": 6
+  },
+  "P5": {
+   "fail": [
+    "dom-pod-jarzabem",
+    "dom-w-arkadiach",
+    "dom-w-morelach",
+    "marcowki",
+    "rarytasy-g2e"
+   ],
+   "notMeasured": [],
+   "pass": 0
+  },
+  "P5posthoc": {
+   "fail": [],
+   "notMeasured": [],
+   "pass": 5
+  },
+  "P6": {
+   "fail": [],
+   "notMeasured": [],
+   "pass": 5
+  }
+ }
+}
