@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "research.visual-observations.0.1",
+  "producer": {"stage": "BUILDPLAN-ANALYZER-005R", "contender": "EXAMPLE", "detector": "research-detector@pinned-example", "capabilities": ["LOCALIZER"], "codeSha256": "0000000000000000000000000000000000000000000000000000000000000000"},
+  "asset": {
+    "publisher": "example.invalid",
+    "editionKey": "example:edition-1",
+    "canonicalUrl": "https://example.invalid/projects/edition-1",
+    "assetId": "example-asset",
+    "variantSha256": "1111111111111111111111111111111111111111111111111111111111111111",
+    "variantUrl": "https://example.invalid/images/edition-1/view-1.jpg",
+    "decoded": {"width": 1280, "height": 853},
+    "lineage": {"op": "ORIGINAL", "parentSha256": null},
+    "editionsPublishingSameBytes": ["example:edition-1"],
+    "roleClaims": [
+      {"claimId": "claim-1", "source": "PUBLISHER_METADATA", "basis": "publisher gallery position: exterior visualisation", "role": "EXTERIOR_RENDER"},
+      {"claimId": "claim-2", "source": "PIXEL_ROUTER", "basis": "research-router@pinned-example", "role": "EXTERIOR_RENDER"}
+    ],
+    "role": "EXTERIOR_RENDER",
+    "roleStatus": "PROPOSED",
+    "roleEvidenceIds": ["claim-1", "claim-2"],
+    "roleAlternatives": ["EXTERIOR_PHOTO", "UNKNOWN"],
+    "roleConfidence": {"type": "UNVALIDATED_SCORE", "value": 0.71},
+    "viewSide": {"value": "REAR_OBLIQUE", "basis": "publisher caption names the garden side; not inferred from pixels", "mirrorAmbiguous": true}
+  },
+  "observations": [
+    {"id": "observation-1", "kind": "PERGOLA_OPEN", "status": "PROPOSED", "presence": "FEATURE_PRESENT", "viewSide": "REAR_OBLIQUE",
+     "pixelBox": {"x0": 10, "y0": 20, "x1": 100, "y1": 120}, "normBox": {"x0": 0.0078125, "y0": 0.023446658851113716, "x1": 0.078125, "y1": 0.14067995310668227},
+     "evidenceAssetId": "example-asset", "evidenceVariantSha256": "1111111111111111111111111111111111111111111111111111111111111111",
+     "detector": "research-detector@pinned-example", "confidence": {"type": "UNVALIDATED_SCORE", "value": 0.63},
+     "alternatives": ["COVERED_TERRACE", "CANOPY_ENTRANCE", "UNKNOWN_ASSEMBLY"],
+     "visibleEvidence": ["POSTS", "PARALLEL_BEAMS", "SKY_BETWEEN_BEAMS"],
+     "reason": "visible posts and open beams; roof cover not established", "assemblyCandidateId": "assembly-candidate-1", "metricDimensions": null},
+    {"id": "observation-2", "kind": "CARPORT", "status": "UNRESOLVED", "presence": "UNRESOLVED", "viewSide": "REAR_OBLIQUE",
+     "pixelBox": null, "normBox": null,
+     "evidenceAssetId": "example-asset", "evidenceVariantSha256": "1111111111111111111111111111111111111111111111111111111111111111",
+     "detector": "research-detector@pinned-example", "confidence": {"type": "NONE", "value": null},
+     "alternatives": [], "visibleEvidence": [],
+     "reason": "this side of the building is outside the field of view; absence is not asserted", "assemblyCandidateId": null, "metricDimensions": null}
+  ]
+}

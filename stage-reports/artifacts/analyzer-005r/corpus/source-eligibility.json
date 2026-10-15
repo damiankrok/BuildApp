@@ -1,0 +1,16 @@
+{
+  "schema": "research.005r.source-eligibility.0.1",
+  "screenedAt": "2026-10-15",
+  "rule": "brief §4: if a web source prohibits the intended local automated processing, record SOURCE_NOT_USABLE and use other eligible sources. Screening = robots.txt of the host + the publisher's own terms page, read as text; no image of a screened publisher was fetched before its decision.",
+  "intendedProcessing": "download the public project page and its images once, keep the bytes only in a local work directory outside Git, compute features and run a local model on them; publish only hashes, URLs and aggregate numbers; no redistribution, no remote AI",
+  "publishers": [
+    {"host": "www.archon.pl (+ assets.archon.pl, cdn1.archon.pl)", "status": "USABLE_FOR_LOCAL_RESEARCH", "robots": "product pages, /products/ and /product_fancybox_*/ not disallowed; cdn1 has no robots file", "terms": "Regulamin sklepu (art-10001): users must respect copyright and IP; no clause prohibiting copying for local analysis or automated processing was found", "caveat": "no licence to redistribute pixels; pixels never enter Git or a remote API"},
+    {"host": "www.projektydomownowoczesnych.pl", "status": "USABLE_FOR_LOCAL_RESEARCH", "robots": "only search paths disallowed", "terms": "no terms page linked from the project page (privacy policy only)", "caveat": "republishes an ARCHON project under the same project code: same edition, not an independent publisher"},
+    {"host": "www.dobredomy.pl", "status": "SOURCE_NOT_USABLE", "robots": "/*?* disallowed (earlier stages fetched '?p=' slide copies)", "terms": "Regulamin §7.2: copying, modifying, transmitting electronically, reproducing, using and distributing the site's materials is permitted only with the Seller's consent", "action": "8 survey pages deleted from the work directory; no DobreDomy image fetched by 005R; editions excluded from the corpus", "noteForOwner": "earlier stages (005C, 005K, 005Q-CHAIN rows D00–D05, aster-viii, galaktyka) processed DobreDomy pages and images; whether consent exists is an OWNER question 005R does not answer"},
+    {"host": "www.archipelag.pl", "status": "SOURCE_NOT_USABLE", "terms": "Prawa autorskie: copying, modifying, transmitting, reproducing, use and distribution only with the studio's consent"},
+    {"host": "www.domywstylu.pl", "status": "SOURCE_NOT_USABLE", "terms": "Prawa autorskie: copying, modifying, reproducing, use and distribution only with MTM STYL's consent"},
+    {"host": "z500.pl", "status": "NOT_SCREENED_TERMS_NOT_READABLE", "terms": "regulamin page served without readable terms text to a non-JavaScript client; not used"},
+    {"host": "www.mgprojekt.com.pl", "status": "NOT_SCREENED_TERMS_NOT_FOUND", "terms": "no terms link found in the server-rendered homepage; not used"}
+  ],
+  "consequence": "the real corpus is single-publisher (ARCHON, plus one republishing host of an ARCHON edition). Every real-image conclusion of 005R is ARCHON-scoped; a second publisher is NOT_MEASURED."
+}

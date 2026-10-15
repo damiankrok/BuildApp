@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "research.visual-edition-summary.0.1",
+  "producer": {"stage": "BUILDPLAN-ANALYZER-005R", "contender": "EXAMPLE", "detector": "research-detector@pinned-example"},
+  "editionKey": "example:edition-1",
+  "canonicalUrl": "https://example.invalid/projects/edition-1",
+  "hypotheses": [
+    {"id": "hypothesis-1", "kind": "PERGOLA_OPEN", "status": "PROPOSED", "independentWitnesses": 1,
+     "support": [
+       {"observationId": "observation-1", "variantSha256": "1111111111111111111111111111111111111111111111111111111111111111", "lineageGroup": "lineage-1"},
+       {"observationId": "observation-7", "variantSha256": "2222222222222222222222222222222222222222222222222222222222222222", "lineageGroup": "lineage-1"}
+     ],
+     "reason": "two crops of one rendering are one witness; no geometric or second-source witness yet", "metricDimensions": null}
+  ]
+}
