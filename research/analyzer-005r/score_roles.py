@@ -101,7 +101,7 @@ def main(truth_p, out_p, *cont_ps):
                 o = outs.get(aid, {'role': 'UNKNOWN', 'resolved': False, 'score': None})
                 pub = t['editions'][0].split(':')[0]
                 base.append({'assetId': aid, 'truth': t['roleTruth'], 'out': o['role'] if o['resolved'] else 'UNKNOWN', 'resolved': bool(o['resolved']),
-                             'score': o.get('score'), 'family': t['family'], 'group': t['lineageGroup'], 'basis': t['basis'], 'publisher': pub})
+                             'score': o.get('score'), 'v0doc': o.get('v0Document'), 'family': t['family'], 'group': t['lineageGroup'], 'basis': t['basis'], 'publisher': pub})
             groups = {}
             for r in base:
                 groups.setdefault(r['group'], []).append(r)
@@ -120,6 +120,13 @@ def main(truth_p, out_p, *cont_ps):
             s['pictorialUnspecified'] = {'n': len(pu), 'outputs': dist, 'technicalErrors': sum(v for k, v in dist.items() if k in ('FLOOR_PLAN', 'TECHNICAL_ELEVATION', 'SECTION', 'SITE_PLAN', 'DETAIL'))}
             if name == 'V0a':
                 s['structureBasisOnly'] = metrics([r for r in per_group if r['basis'] == 'STRUCTURE'])
+                # reviewer A-3: V0a never RESOLVES an interior to exterior evidence, but production analyze.ts:164 feeds
+                # every PERSPECTIVE_RENDER into the facade extractors — that consumer leakage is the incumbent's real
+                # interior→exterior route and is counted here, separately from the router metric above
+                pc = [r for r in per_group if r['truth'] in INTERIOR and r['v0doc'] == 'PERSPECTIVE_RENDER']
+                s['interiorToExteriorRoutes_perspectiveConsumer'] = {'lineageGroups': len(pc), 'families': len({r['family'] for r in pc}),
+                                                                     'assets': sum(1 for r in base if r['truth'] in INTERIOR and r['v0doc'] == 'PERSPECTIVE_RENDER'),
+                                                                     'interiorGroups': sum(1 for r in per_group if r['truth'] in INTERIOR)}
             s['byFamily'] = {f: {k: v for k, v in metrics([r for r in per_group if r['family'] == f]).items() if k in ('n', 'resolved', 'wrong', 'interiorToExteriorRoutes')}
                              for f in sorted({r['family'] for r in per_group})}
             crep[split] = s

@@ -154,6 +154,57 @@ class Negative(unittest.TestCase):
         self.assertIn('ROLE', codes(d))
 
 
+def mut(f, base=ASSET):
+    d = copy.deepcopy(base)
+    f(d)
+    return d
+
+
+o0 = lambda d: d['observations'][0]
+
+
+class ReviewerBypasses(unittest.TestCase):
+    """Reviewer A (005R) wrote 25 documents that the first validator accepted. Each must now be rejected with the code
+    named here. S3 (a support observationId that names no observation) is a documented residual: a standalone summary
+    does not carry its observation documents, so the cross-check belongs to the assembler, not to this validator."""
+    CASES = [
+        ('B1 authority token inside a list', lambda d: o0(d).__setitem__('visibleEvidence', ['SOURCE_EXACT']), ASSET, {'AUTHORITY'}),
+        ('B1b metric text inside a list', lambda d: o0(d).__setitem__('visibleEvidence', ['MEASURED width 3.20 m']), ASSET, {'METRIC', 'AUTHORITY', 'OBS'}),
+        ('B2 authority inside alternatives', lambda d: o0(d).__setitem__('alternatives', ['USER_CONFIRMED']), ASSET, {'AUTHORITY', 'OBS'}),
+        ('B3 lowercase authority value', lambda d: o0(d).__setitem__('fidelity', 'source_exact'), ASSET, {'AUTHORITY', 'SCHEMA_KEY'}),
+        ('B4 metric under another key', lambda d: o0(d).update(widthMeters=3.2, dimensions={'w_m': 3.2}), ASSET, {'SCHEMA_KEY'}),
+        ('B5 metric in reason text', lambda d: o0(d).__setitem__('reason', 'pergola 3.2 m x 4.0 m wide'), ASSET, {'METRIC'}),
+        ('B6 box under another key from a classifier', lambda d: (d['producer'].__setitem__('capabilities', ['CLASSIFIER']), [o.update(pixelBox=None, normBox=None, bbox=[10, 20, 100, 120]) for o in d['observations']]), ASSET, {'SCHEMA_KEY'}),
+        ('B7 box on the asset from a classifier', lambda d: d['asset'].update(pixelBox={'x0': 0, 'y0': 0, 'x1': 10, 'y1': 10}), ASSET, {'SCHEMA_KEY'}),
+        ('B8 NONE confidence with a value', lambda d: o0(d).__setitem__('confidence', {'type': 'NONE', 'value': 0.99}), ASSET, {'CONFIDENCE'}),
+        ('B9 roleConfidence value out of [0,1]', lambda d: d['asset'].__setitem__('roleConfidence', {'type': 'UNVALIDATED_SCORE', 'value': 7}), ASSET, {'CONFIDENCE'}),
+        ('B10 absence claim on an interior', lambda d: (d['asset'].update(role='INTERIOR_RENDER'), o0(d).update(presence='FEATURE_ABSENT_IF_VISIBLE', coverage={'regionCovered': True, 'basis': 'x'})), ASSET, {'ROUTING'}),
+        ('B11 presence claim on an interior, status UNRESOLVED', lambda d: (d['asset'].update(role='INTERIOR_RENDER'), o0(d).update(status='UNRESOLVED')), ASSET, {'ROUTING'}),
+        ('B12 CROP with an unpublished parent', lambda d: (d['asset'].update(variantSha256='3' * 64, lineage={'op': 'CROP', 'parentSha256': '9' * 64}), [o.update(evidenceVariantSha256='3' * 64) for o in d['observations']]), ASSET, {'EDITION_MIX'}),
+        ('B13 edition unknown to the manifest', lambda d: d['asset'].update(editionKey='example:edition-99', lineage={'op': 'DERIVED', 'parentSha256': '9' * 64}), ASSET, {'EDITION_MIX'}),
+        ('B15 forbidden token in a key name', lambda d: o0(d).__setitem__('dom w example', 1), ASSET, {'LEAKAGE_TOKEN'}),
+        ('B16 caption under a synonym key', lambda d: o0(d).update(altText='Dom w Example - widok'), ASSET, {'SCHEMA_KEY'}),
+        ('B17 PROPOSED presence with no visible evidence', lambda d: o0(d).update(visibleEvidence=[]), ASSET, {'OBS'}),
+        ('B18 role evidence contradicting the role', lambda d: d['asset']['roleClaims'][1].update(role='INTERIOR_RENDER'), ASSET, {'ROLE'}),
+        ('B19 decoded size not that of the bytes', lambda d: d['asset'].update(decoded={'width': 99999, 'height': 99999}), ASSET, {'IDENTITY'}),
+        ('S1 one lineage group relabelled as two witnesses', lambda s: (s['hypotheses'][0]['support'][1].update(lineageGroup='lineage-2'), s['hypotheses'][0].update(independentWitnesses=2)), SUMMARY, {'CORRELATION'}),
+        ('S2 canonicalUrl of another edition', lambda s: s.update(canonicalUrl='https://example.invalid/projects/edition-2'), SUMMARY, {'IDENTITY'}),
+        ('S4 negative witness count', lambda s: s['hypotheses'][0].update(independentWitnesses=-1), SUMMARY, {'CORRELATION'}),
+        ('S5 PROPOSED hypothesis with no support', lambda s: s['hypotheses'][0].update(support=[], independentWitnesses=0), SUMMARY, {'HYP'}),
+        ('S6 presence key not in the summary contract', lambda s: s['hypotheses'][0].update(presence='FEATURE_ABSENT_IF_VISIBLE'), SUMMARY, {'SCHEMA_KEY'}),
+        ('S7 witness count given as a boolean', lambda s: s['hypotheses'][0].update(independentWitnesses=True), SUMMARY, {'CORRELATION'}),
+        ('S8 identity across images asserted', lambda s: s['hypotheses'][0].update(structureIdentityAcrossImages='ESTABLISHED'), SUMMARY, {'HYP'}),
+    ]
+
+    def test_every_bypass_rejected(self):
+        for name, f, base, expect in self.CASES:
+            got = codes(mut(f, base), forbidden=['dom w example'])
+            self.assertTrue(got & expect, f'{name}: got {sorted(got)}, expected one of {sorted(expect)}')
+
+    def test_slug_in_list_value(self):
+        self.assertIn('LEAKAGE_TOKEN', codes(mut(lambda d: o0(d).__setitem__('visibleEvidence', ['as in dom w example'])), forbidden=['dom w example']))
+
+
 if __name__ == '__main__':
     r = unittest.main(exit=False, verbosity=1).result
     sys.exit(0 if r.wasSuccessful() else 1)

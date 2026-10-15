@@ -168,7 +168,7 @@
      "toKind": "COVERED_TERRACE"
     },
     {
-     "fromKind": "CLOSED_GARAGE",
+     "fromKind": "GARAGE_DOOR",
      "images": [
       {
        "e1": {
@@ -176,9 +176,9 @@
          false,
          false
         ],
-        "CLOSED_GARAGE": [
-         false,
-         false
+        "GARAGE_DOOR": [
+         true,
+         true
         ]
        },
        "e2": {
@@ -186,7 +186,7 @@
          false,
          true
         ],
-        "CLOSED_GARAGE": [
+        "GARAGE_DOOR": [
          false,
          false
         ]
@@ -200,7 +200,7 @@
          false,
          false
         ],
-        "CLOSED_GARAGE": [
+        "GARAGE_DOOR": [
          false,
          false
         ]
@@ -210,7 +210,7 @@
          false,
          true
         ],
-        "CLOSED_GARAGE": [
+        "GARAGE_DOOR": [
          false,
          false
         ]
@@ -224,7 +224,7 @@
          false,
          false
         ],
-        "CLOSED_GARAGE": [
+        "GARAGE_DOOR": [
          false,
          false
         ]
@@ -234,7 +234,7 @@
          false,
          true
         ],
-        "CLOSED_GARAGE": [
+        "GARAGE_DOOR": [
          false,
          false
         ]
@@ -248,7 +248,7 @@
          false,
          false
         ],
-        "CLOSED_GARAGE": [
+        "GARAGE_DOOR": [
          false,
          false
         ]
@@ -258,7 +258,7 @@
          false,
          true
         ],
-        "CLOSED_GARAGE": [
+        "GARAGE_DOOR": [
          false,
          false
         ]
@@ -272,9 +272,9 @@
          false,
          false
         ],
-        "CLOSED_GARAGE": [
+        "GARAGE_DOOR": [
          false,
-         false
+         true
         ]
        },
        "e2": {
@@ -282,7 +282,7 @@
          false,
          true
         ],
-        "CLOSED_GARAGE": [
+        "GARAGE_DOOR": [
          false,
          false
         ]
@@ -296,7 +296,7 @@
          false,
          false
         ],
-        "CLOSED_GARAGE": [
+        "GARAGE_DOOR": [
          false,
          false
         ]
@@ -306,7 +306,7 @@
          false,
          true
         ],
-        "CLOSED_GARAGE": [
+        "GARAGE_DOOR": [
          false,
          false
         ]
@@ -441,6 +441,10 @@
   "oracleElevations": {
    "cropHallucinations": 0,
    "interiorDetections": 0,
+   "interiorDetectionsUngated": 31,
+   "interiorDetectionsUngatedByKind": {
+    "RAILING": 31
+   },
    "lookalikeConfusions": {},
    "perKind": {
     "BALCONY": {
@@ -546,6 +550,10 @@
   "ownRouting": {
    "cropHallucinations": 0,
    "interiorDetections": 0,
+   "interiorDetectionsUngated": 31,
+   "interiorDetectionsUngatedByKind": {
+    "RAILING": 31
+   },
    "lookalikeConfusions": {},
    "perKind": {
     "BALCONY": {
@@ -818,7 +826,7 @@
      "toKind": "COVERED_TERRACE"
     },
     {
-     "fromKind": "CLOSED_GARAGE",
+     "fromKind": "GARAGE_DOOR",
      "images": [
       {
        "e1": {
@@ -826,9 +834,9 @@
          false,
          false
         ],
-        "CLOSED_GARAGE": [
+        "GARAGE_DOOR": [
          false,
-         false
+         true
         ]
        },
        "e2": {
@@ -836,8 +844,8 @@
          false,
          true
         ],
-        "CLOSED_GARAGE": [
-         false,
+        "GARAGE_DOOR": [
+         true,
          false
         ]
        },
@@ -850,7 +858,7 @@
          false,
          false
         ],
-        "CLOSED_GARAGE": [
+        "GARAGE_DOOR": [
          false,
          false
         ]
@@ -860,7 +868,7 @@
          false,
          true
         ],
-        "CLOSED_GARAGE": [
+        "GARAGE_DOOR": [
          false,
          false
         ]
@@ -874,7 +882,7 @@
          false,
          false
         ],
-        "CLOSED_GARAGE": [
+        "GARAGE_DOOR": [
          false,
          false
         ]
@@ -884,7 +892,7 @@
          false,
          true
         ],
-        "CLOSED_GARAGE": [
+        "GARAGE_DOOR": [
          false,
          false
         ]
@@ -898,7 +906,7 @@
          false,
          false
         ],
-        "CLOSED_GARAGE": [
+        "GARAGE_DOOR": [
          false,
          false
         ]
@@ -908,7 +916,7 @@
          false,
          true
         ],
-        "CLOSED_GARAGE": [
+        "GARAGE_DOOR": [
          false,
          false
         ]
@@ -922,9 +930,9 @@
          false,
          false
         ],
-        "CLOSED_GARAGE": [
+        "GARAGE_DOOR": [
          false,
-         false
+         true
         ]
        },
        "e2": {
@@ -932,7 +940,7 @@
          false,
          true
         ],
-        "CLOSED_GARAGE": [
+        "GARAGE_DOOR": [
          false,
          false
         ]
@@ -946,7 +954,7 @@
          false,
          false
         ],
-        "CLOSED_GARAGE": [
+        "GARAGE_DOOR": [
          false,
          false
         ]
@@ -956,7 +964,7 @@
          false,
          true
         ],
-        "CLOSED_GARAGE": [
+        "GARAGE_DOOR": [
          false,
          false
         ]
@@ -1091,6 +1099,15 @@
   "oracle@0.05": {
    "cropHallucinations": 24,
    "interiorDetections": 0,
+   "interiorDetectionsUngated": 38,
+   "interiorDetectionsUngatedByKind": {
+    "CANOPY_ENTRANCE": 7,
+    "EXTERIOR_DOOR": 10,
+    "GARAGE_DOOR": 2,
+    "RAILING": 4,
+    "TERRACE_AT_GRADE": 3,
+    "WINDOW": 12
+   },
    "lookalikeConfusions": {
     "CLOSED_GARAGE\u2192CARPORT": 9,
     "DARK_WINDOW_NEAR_GARAGE\u2192GARAGE_DOOR": 1,
@@ -1202,6 +1219,10 @@
   "oracle@0.1": {
    "cropHallucinations": 3,
    "interiorDetections": 0,
+   "interiorDetectionsUngated": 12,
+   "interiorDetectionsUngatedByKind": {
+    "WINDOW": 12
+   },
    "lookalikeConfusions": {
     "SOLID_PARAPET\u2192RAILING": 1
    },
@@ -1309,6 +1330,10 @@
   "oracle@0.2": {
    "cropHallucinations": 0,
    "interiorDetections": 0,
+   "interiorDetectionsUngated": 12,
+   "interiorDetectionsUngatedByKind": {
+    "WINDOW": 12
+   },
    "lookalikeConfusions": {},
    "perKind": {
     "BALCONY": {
@@ -1414,6 +1439,10 @@
   "oracle@0.3": {
    "cropHallucinations": 0,
    "interiorDetections": 0,
+   "interiorDetectionsUngated": 12,
+   "interiorDetectionsUngatedByKind": {
+    "WINDOW": 12
+   },
    "lookalikeConfusions": {},
    "perKind": {
     "BALCONY": {
@@ -1519,6 +1548,10 @@
   "oracle@0.5": {
    "cropHallucinations": 0,
    "interiorDetections": 0,
+   "interiorDetectionsUngated": 12,
+   "interiorDetectionsUngatedByKind": {
+    "WINDOW": 12
+   },
    "lookalikeConfusions": {},
    "perKind": {
     "BALCONY": {
@@ -1624,6 +1657,10 @@
   "ownRouting@0.2": {
    "cropHallucinations": 0,
    "interiorDetections": 0,
+   "interiorDetectionsUngated": 12,
+   "interiorDetectionsUngatedByKind": {
+    "WINDOW": 12
+   },
    "lookalikeConfusions": {},
    "perKind": {},
    "pooled": {

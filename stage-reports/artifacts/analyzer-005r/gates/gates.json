@@ -1,7 +1,7 @@
 {
  "codeSha256": {
-  "assemble.py": "7e436dee43f2a029d256c46345677ec04fcc5816b52ebcc2b78988532a646ba9",
-  "schema/validate.py": "823dcd203e5f7503afca8c236dc75b018b3a3a9d95b4c91fa9dddfbafd9c7614"
+  "assemble.py": "22e9a38de1732416cdad70dbc2c34fb853e351ac97c87633226d49b8819f52df",
+  "schema/validate.py": "f929ee0ec7d052788ad644a2c3800d61c51a72e0e41c62695d4c64e9f6ed39de"
  },
  "contenders": {
   "N1": {
@@ -90,11 +90,11 @@
     },
     "documents": 1220,
     "editionSummaries": 49,
-    "observations": 5038,
+    "observations": 21259,
     "proposedPresent": 5038,
     "proposedPresentOnInteriorTruth": 0,
     "proposedPresentOnTechnicalNonElevationTruth": 0,
-    "rejected": 0,
+    "rejected": 16221,
     "unresolved": 0
    },
    "hardGates": {

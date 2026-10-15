@@ -20,11 +20,14 @@ which safeguard caught it. A mutation that is not caught is a FAILED safeguard a
   M10 correlated witnesses counted twice in an edition summary                                  → validator CORRELATION
   M11 a caption field in the committed corpus manifest                                          → isolation test fails
   M12 a project name in the V2 prompts                                                          → isolation test fails
+      (M11/M12 count only when the unmutated baseline runs exactly one passing test, reviewer C-10)
+  M13 summary support naming an observation that was never written                              → assembler DANGLING_SUPPORT
 """
 import copy
 import glob
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -50,7 +53,8 @@ def score(truth_p, cont):
 
 def isolation_test(pattern):
     r = subprocess.run(['npx', '--no-install', 'vitest', 'run', 'tests/architecture/research-isolation.test.ts', '-t', pattern], cwd=REPO, capture_output=True, text=True)
-    return r.returncode
+    out = r.stdout + r.stderr
+    return r.returncode, bool(re.search(r'Tests\s+1 passed', out)), bool(re.search(r'Tests\s+1 failed', out))
 
 
 def main(run, assembled, out):
@@ -126,6 +130,15 @@ def main(run, assembled, out):
         sdoc['hypotheses'][0]['independentWitnesses'] = len({x['lineageGroup'] for x in sdoc['hypotheses'][0]['support']}) + 1
         got = codes(validate_document(sdoc, manifest, []))
         res['M10_correlated_witnesses'] = {'violations': got, 'caught': 'CORRELATION' in got}
+        # M13: support row pointing at an observation that does not exist (reviewer A, S3); the assembler's check
+        sys.path.insert(0, HERE)
+        from assemble import dangling_support
+        written = {s['observationId']: s['variantSha256'] for h in sdoc['hypotheses'] for s in h['support']}
+        clean = dangling_support(sdoc, written)
+        d13 = copy.deepcopy(sdoc)
+        d13['hypotheses'][0]['support'][0]['observationId'] = 'never-written'
+        got13 = dangling_support(d13, written)
+        res['M13_dangling_support'] = {'cleanViolations': len(clean), 'violations': len(got13), 'caught': not clean and bool(got13)}
     # M11 / M12: edit committed files in the working tree, run the isolation block, restore byte for byte
     for name, path, edit, pattern in (
         ('M11_caption_in_manifest', 'stage-reports/artifacts/analyzer-005r/corpus/corpus-manifest.json',
@@ -135,12 +148,16 @@ def main(run, assembled, out):
     ):
         p = os.path.join(REPO, path)
         orig = open(p, 'rb').read()
+        # reviewer C-10: the unmutated baseline must run exactly one test and pass it, else a red or empty pattern
+        # would count as a catch
+        base_rc, base_pass, _ = isolation_test(pattern)
         try:
             open(p, 'w').write(edit(orig.decode()))
-            rc = isolation_test(pattern)
+            rc, _, one_failed = isolation_test(pattern)
         finally:
             open(p, 'wb').write(orig)
-        res[name] = {'isolationTestExit': rc, 'caught': rc != 0, 'restored': open(p, 'rb').read() == orig}
+        res[name] = {'baselineExit': base_rc, 'baselineOnePassed': base_pass, 'isolationTestExit': rc, 'oneFailed': one_failed,
+                     'caught': base_rc == 0 and base_pass and rc != 0 and one_failed, 'restored': open(p, 'rb').read() == orig}
     res['_summary'] = {'mutations': len([k for k in res if not k.startswith('_')]), 'caught': sum(1 for k, v in res.items() if not k.startswith('_') and v['caught'])}
     json.dump(res, open(out, 'w'), indent=1, sort_keys=True)
     print(json.dumps(res['_summary']))

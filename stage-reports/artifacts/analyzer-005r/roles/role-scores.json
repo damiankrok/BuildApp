@@ -1529,6 +1529,12 @@
      "groupsWithDifferentOutputs": 0,
      "groupsWithSeveralAssets": 79
     },
+    "interiorToExteriorRoutes_perspectiveConsumer": {
+     "assets": 16,
+     "families": 5,
+     "interiorGroups": 98,
+     "lineageGroups": 16
+    },
     "lineageGroup": {
      "confusion": {
       "EXTERIOR_RENDER": {
@@ -2179,6 +2185,12 @@
     "duplicateCorrelation": {
      "groupsWithDifferentOutputs": 0,
      "groupsWithSeveralAssets": 26
+    },
+    "interiorToExteriorRoutes_perspectiveConsumer": {
+     "assets": 54,
+     "families": 9,
+     "interiorGroups": 107,
+     "lineageGroups": 54
     },
     "lineageGroup": {
      "confusion": {

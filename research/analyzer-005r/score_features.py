@@ -72,7 +72,7 @@ def match(img, dets):
 
 
 def evaluate(truth, getdets, gate):
-    per, look, crop_h, interior = {}, {}, 0, 0
+    per, look, crop_h, interior, interior_all, interior_kinds = {}, {}, 0, 0, 0, {}
     for img in truth['images']:
         if not img.get('featuresAnnotated'):
             continue
@@ -80,7 +80,13 @@ def evaluate(truth, getdets, gate):
         if dets is None:
             continue
         if img['roleTruth'] == 'INTERIOR_RENDER':
+            # reviewer B-3: the preregistered interior control is "any exterior detection on an interior image". The
+            # gated count is what reaches a consumer behind this gate (0 by construction under the oracle); the
+            # ungated count is the detector's own behaviour on interiors and is the control itself.
             interior += len(dets) if gate(img) else 0
+            interior_all += len(dets)
+            for d in dets:
+                interior_kinds[d['kind']] = interior_kinds.get(d['kind'], 0) + 1
             continue
         if not gate(img):
             continue
@@ -107,7 +113,8 @@ def evaluate(truth, getdets, gate):
     tot['precision'] = round(tot['TP'] / (tot['TP'] + tot['FP']), 4) if tot['TP'] + tot['FP'] else None
     tot['recall'] = round(tot['TP'] / (tot['TP'] + tot['FN']), 4) if tot['TP'] + tot['FN'] else None
     return {'perKind': dict(sorted(per.items())), 'pooled': tot, 'lookalikeConfusions': dict(sorted(look.items())),
-            'cropHallucinations': crop_h, 'interiorDetections': interior}
+            'cropHallucinations': crop_h, 'interiorDetections': interior,
+            'interiorDetectionsUngated': interior_all, 'interiorDetectionsUngatedByKind': dict(sorted(interior_kinds.items()))}
 
 
 def controls(truth, getdets):
@@ -123,8 +130,11 @@ def controls(truth, getdets):
             j = len(ka & kb) / len(ka | kb) if ka | kb else 1.0
             (mirror if lin['op'] == 'mirror' else down).append(round(j, 4))
     pairs = []
+    # reviewer B-7: a look-alike swap kind is not a feature kind; check the feature it carries (a closed garage's door)
+    carried = {'CLOSED_GARAGE': 'GARAGE_DOOR'}
     for p in truth['editionPairs']:
         frm, to = p['swap'].get('fromKind'), p['swap'].get('toKind')
+        frm, to = carried.get(frm, frm), carried.get(to, to)
         row = {'pair': p['e1'] + '↔' + p['e2'], 'fromKind': frm, 'toKind': to, 'images': []}
         for img in truth['images']:
             if img['editionKey'] != p['e2'] or (img.get('lineage') or {}).get('op') or not img.get('featuresAnnotated'):
@@ -173,7 +183,7 @@ def main(argv):
     json.dump(rep, open(out, 'w'), indent=1, sort_keys=True)
     for k, v in rep['V2'].items():
         if 'pooled' in v:
-            print('V2', k, v['pooled'], 'look', sum(v['lookalikeConfusions'].values()), 'crop', v['cropHallucinations'], 'interior', v['interiorDetections'])
+            print('V2', k, v['pooled'], 'look', sum(v['lookalikeConfusions'].values()), 'crop', v['cropHallucinations'], 'interior', v['interiorDetections'], 'ungated', v['interiorDetectionsUngated'])
     for k, v in rep['V1cues'].items():
         if 'pooled' in v:
             print('V1', k, v['pooled'], 'look', sum(v['lookalikeConfusions'].values()))

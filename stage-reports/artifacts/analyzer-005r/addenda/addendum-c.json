@@ -1,0 +1,1383 @@
+{
+ "C3_V0a_lineage": {
+  "DEV": {
+   "interiorToExteriorRoutes_perspectiveConsumer": {
+    "assets": 97,
+    "families": 11,
+    "interiorGroups": 98,
+    "lineageGroups": 92
+   },
+   "lineageGroup": {
+    "coverage": 0.6056,
+    "families": 20,
+    "familyBootstrap95": [
+     0.0,
+     0.0
+    ],
+    "interiorToExteriorRoutes": 0,
+    "n": 360,
+    "resolved": 218,
+    "selectiveRisk": 0.0,
+    "wilson95": [
+     0.0,
+     0.0173
+    ],
+    "wrong": 0
+   },
+   "structureBasisOnly": {
+    "coverage": 0.6222,
+    "families": 20,
+    "familyBootstrap95": [
+     0.0,
+     0.0
+    ],
+    "interiorToExteriorRoutes": 0,
+    "n": 315,
+    "resolved": 196,
+    "selectiveRisk": 0.0,
+    "wilson95": [
+     0.0,
+     0.0192
+    ],
+    "wrong": 0
+   }
+  },
+  "EVAL": {
+   "interiorToExteriorRoutes_perspectiveConsumer": {
+    "assets": 107,
+    "families": 10,
+    "interiorGroups": 107,
+    "lineageGroups": 107
+   },
+   "lineageGroup": {
+    "coverage": 0.4502,
+    "families": 14,
+    "familyBootstrap95": [
+     0.0,
+     0.0
+    ],
+    "interiorToExteriorRoutes": 0,
+    "n": 231,
+    "resolved": 104,
+    "selectiveRisk": 0.0,
+    "wilson95": [
+     0.0,
+     0.0356
+    ],
+    "wrong": 0
+   },
+   "structureBasisOnly": {
+    "coverage": 0.4348,
+    "families": 14,
+    "familyBootstrap95": [
+     0.0,
+     0.0
+    ],
+    "interiorToExteriorRoutes": 0,
+    "n": 207,
+    "resolved": 90,
+    "selectiveRisk": 0.0,
+    "wilson95": [
+     0.0,
+     0.0409
+    ],
+    "wrong": 0
+   }
+  }
+ },
+ "V0a_byteMatched_perspectiveConsumer": {
+  "DEV": {
+   "assets": 16,
+   "families": 5,
+   "interiorGroups": 98,
+   "lineageGroups": 16
+  },
+  "EVAL": {
+   "assets": 54,
+   "families": 9,
+   "interiorGroups": 107,
+   "lineageGroups": 54
+  }
+ },
+ "byVariant": {
+  "C12": {
+   "N1": {
+    "EXTERIOR_RENDER": {
+     "correct": 28,
+     "coverage": 0.6087,
+     "precision": 1.0,
+     "resolvedN": 28,
+     "truthN": 46,
+     "wrongAs": []
+    },
+    "INTERIOR_RENDER": {
+     "correct": 53,
+     "coverage": 0.4953,
+     "precision": 1.0,
+     "resolvedN": 53,
+     "truthN": 107,
+     "wrongAs": []
+    },
+    "TECHNICAL_ELEVATION": {
+     "correct": 49,
+     "coverage": 0.9245,
+     "precision": 1.0,
+     "resolvedN": 49,
+     "truthN": 53,
+     "wrongAs": []
+    },
+    "coverage": 0.5603,
+    "families": 14,
+    "familyBootstrap95": [
+     0.0,
+     0.0
+    ],
+    "interiorToExteriorRoutes": 0,
+    "n": 257,
+    "resolved": 144,
+    "section8Bar": {
+     "ELEV>=0.70": true,
+     "EXT>=0.70": false,
+     "allNumericConditions": false,
+     "families>=8": true,
+     "interiorToExterior==0": true,
+     "riskUpper<=0.05": true
+    },
+    "selectiveRisk": 0.0,
+    "wilson95": [
+     0.0,
+     0.026
+    ],
+    "wrong": 0
+   },
+   "V0a": {
+    "EXTERIOR_RENDER": {
+     "correct": 0,
+     "coverage": 0.0,
+     "precision": null,
+     "resolvedN": 0,
+     "truthN": 46,
+     "wrongAs": []
+    },
+    "INTERIOR_RENDER": {
+     "correct": 0,
+     "coverage": 0.0,
+     "precision": null,
+     "resolvedN": 0,
+     "truthN": 107,
+     "wrongAs": []
+    },
+    "TECHNICAL_ELEVATION": {
+     "correct": 53,
+     "coverage": 1.0,
+     "precision": 1.0,
+     "resolvedN": 53,
+     "truthN": 53,
+     "wrongAs": []
+    },
+    "coverage": 0.4047,
+    "families": 14,
+    "familyBootstrap95": [
+     0.0,
+     0.0
+    ],
+    "interiorToExteriorRoutes": 0,
+    "n": 257,
+    "resolved": 104,
+    "section8Bar": {
+     "ELEV>=0.70": true,
+     "EXT>=0.70": false,
+     "allNumericConditions": "not a candidate router (\u00a78 names V1, V2, N1)",
+     "families>=8": true,
+     "interiorToExterior==0": true,
+     "riskUpper<=0.05": true
+    },
+    "selectiveRisk": 0.0,
+    "wilson95": [
+     0.0,
+     0.0356
+    ],
+    "wrong": 0
+   },
+   "V0b": {
+    "EXTERIOR_RENDER": {
+     "correct": 28,
+     "coverage": 0.6087,
+     "precision": 0.9655,
+     "resolvedN": 28,
+     "truthN": 46,
+     "wrongAs": []
+    },
+    "INTERIOR_RENDER": {
+     "correct": 53,
+     "coverage": 0.5047,
+     "precision": 1.0,
+     "resolvedN": 54,
+     "truthN": 107,
+     "wrongAs": [
+      "EXTERIOR_RENDER"
+     ]
+    },
+    "TECHNICAL_ELEVATION": {
+     "correct": 53,
+     "coverage": 1.0,
+     "precision": 1.0,
+     "resolvedN": 53,
+     "truthN": 53,
+     "wrongAs": []
+    },
+    "coverage": 0.7237,
+    "families": 14,
+    "familyBootstrap95": [
+     0.0,
+     0.0182
+    ],
+    "interiorToExteriorRoutes": 1,
+    "n": 257,
+    "resolved": 186,
+    "section8Bar": {
+     "ELEV>=0.70": true,
+     "EXT>=0.70": false,
+     "allNumericConditions": "not a candidate router (\u00a78 names V1, V2, N1)",
+     "families>=8": true,
+     "interiorToExterior==0": false,
+     "riskUpper<=0.05": true
+    },
+    "selectiveRisk": 0.0054,
+    "wilson95": [
+     0.0009,
+     0.0298
+    ],
+    "wrong": 1
+   },
+   "V1": {
+    "EXTERIOR_RENDER": {
+     "correct": 46,
+     "coverage": 1.0,
+     "precision": 0.92,
+     "resolvedN": 46,
+     "truthN": 46,
+     "wrongAs": []
+    },
+    "INTERIOR_RENDER": {
+     "correct": 102,
+     "coverage": 0.9533,
+     "precision": 1.0,
+     "resolvedN": 102,
+     "truthN": 107,
+     "wrongAs": []
+    },
+    "TECHNICAL_ELEVATION": {
+     "correct": 49,
+     "coverage": 1.0,
+     "precision": 1.0,
+     "resolvedN": 53,
+     "truthN": 53,
+     "wrongAs": [
+      "EXTERIOR_RENDER"
+     ]
+    },
+    "coverage": 0.8366,
+    "families": 14,
+    "familyBootstrap95": [
+     0.0,
+     0.0615
+    ],
+    "interiorToExteriorRoutes": 0,
+    "n": 257,
+    "resolved": 215,
+    "section8Bar": {
+     "ELEV>=0.70": true,
+     "EXT>=0.70": true,
+     "allNumericConditions": false,
+     "families>=8": true,
+     "interiorToExterior==0": true,
+     "riskUpper<=0.05": false
+    },
+    "selectiveRisk": 0.0186,
+    "wilson95": [
+     0.0073,
+     0.0469
+    ],
+    "wrong": 4
+   },
+   "V2": {
+    "EXTERIOR_RENDER": {
+     "correct": 0,
+     "coverage": 0.0,
+     "precision": null,
+     "resolvedN": 0,
+     "truthN": 46,
+     "wrongAs": []
+    },
+    "INTERIOR_RENDER": {
+     "correct": 16,
+     "coverage": 0.1495,
+     "precision": 1.0,
+     "resolvedN": 16,
+     "truthN": 107,
+     "wrongAs": []
+    },
+    "TECHNICAL_ELEVATION": {
+     "correct": 0,
+     "coverage": 0.0,
+     "precision": null,
+     "resolvedN": 0,
+     "truthN": 53,
+     "wrongAs": []
+    },
+    "coverage": 0.0623,
+    "families": 14,
+    "familyBootstrap95": [
+     0.0,
+     0.0
+    ],
+    "interiorToExteriorRoutes": 0,
+    "n": 257,
+    "resolved": 16,
+    "section8Bar": {
+     "ELEV>=0.70": false,
+     "EXT>=0.70": false,
+     "allNumericConditions": false,
+     "families>=8": true,
+     "interiorToExterior==0": true,
+     "riskUpper<=0.05": true
+    },
+    "selectiveRisk": 0.0,
+    "wilson95": [
+     0.0,
+     0.1936
+    ],
+    "wrong": 0
+   }
+  },
+  "C1r": {
+   "N1": {
+    "EXTERIOR_RENDER": {
+     "correct": 0,
+     "coverage": 0.0,
+     "precision": null,
+     "resolvedN": 0,
+     "truthN": 20,
+     "wrongAs": []
+    },
+    "INTERIOR_RENDER": {
+     "correct": 54,
+     "coverage": 0.5047,
+     "precision": 1.0,
+     "resolvedN": 54,
+     "truthN": 107,
+     "wrongAs": []
+    },
+    "TECHNICAL_ELEVATION": {
+     "correct": 49,
+     "coverage": 0.9245,
+     "precision": 1.0,
+     "resolvedN": 49,
+     "truthN": 53,
+     "wrongAs": []
+    },
+    "coverage": 0.5065,
+    "families": 14,
+    "familyBootstrap95": [
+     0.0,
+     0.0
+    ],
+    "interiorToExteriorRoutes": 0,
+    "n": 231,
+    "resolved": 117,
+    "section8Bar": {
+     "ELEV>=0.70": true,
+     "EXT>=0.70": false,
+     "allNumericConditions": false,
+     "families>=8": true,
+     "interiorToExterior==0": true,
+     "riskUpper<=0.05": true
+    },
+    "selectiveRisk": 0.0,
+    "wilson95": [
+     0.0,
+     0.0318
+    ],
+    "wrong": 0
+   },
+   "V0a": {
+    "EXTERIOR_RENDER": {
+     "correct": 0,
+     "coverage": 0.0,
+     "precision": null,
+     "resolvedN": 0,
+     "truthN": 20,
+     "wrongAs": []
+    },
+    "INTERIOR_RENDER": {
+     "correct": 0,
+     "coverage": 0.0,
+     "precision": null,
+     "resolvedN": 0,
+     "truthN": 107,
+     "wrongAs": []
+    },
+    "TECHNICAL_ELEVATION": {
+     "correct": 53,
+     "coverage": 1.0,
+     "precision": 1.0,
+     "resolvedN": 53,
+     "truthN": 53,
+     "wrongAs": []
+    },
+    "coverage": 0.4502,
+    "families": 14,
+    "familyBootstrap95": [
+     0.0,
+     0.0
+    ],
+    "interiorToExteriorRoutes": 0,
+    "n": 231,
+    "resolved": 104,
+    "section8Bar": {
+     "ELEV>=0.70": true,
+     "EXT>=0.70": false,
+     "allNumericConditions": "not a candidate router (\u00a78 names V1, V2, N1)",
+     "families>=8": true,
+     "interiorToExterior==0": true,
+     "riskUpper<=0.05": true
+    },
+    "selectiveRisk": 0.0,
+    "wilson95": [
+     0.0,
+     0.0356
+    ],
+    "wrong": 0
+   },
+   "V0b": {
+    "EXTERIOR_RENDER": {
+     "correct": 0,
+     "coverage": 0.0,
+     "precision": null,
+     "resolvedN": 0,
+     "truthN": 20,
+     "wrongAs": []
+    },
+    "INTERIOR_RENDER": {
+     "correct": 49,
+     "coverage": 0.4579,
+     "precision": 1.0,
+     "resolvedN": 49,
+     "truthN": 107,
+     "wrongAs": []
+    },
+    "TECHNICAL_ELEVATION": {
+     "correct": 53,
+     "coverage": 1.0,
+     "precision": 1.0,
+     "resolvedN": 53,
+     "truthN": 53,
+     "wrongAs": []
+    },
+    "coverage": 0.6623,
+    "families": 14,
+    "familyBootstrap95": [
+     0.0,
+     0.0
+    ],
+    "interiorToExteriorRoutes": 0,
+    "n": 231,
+    "resolved": 153,
+    "section8Bar": {
+     "ELEV>=0.70": true,
+     "EXT>=0.70": false,
+     "allNumericConditions": "not a candidate router (\u00a78 names V1, V2, N1)",
+     "families>=8": true,
+     "interiorToExterior==0": true,
+     "riskUpper<=0.05": true
+    },
+    "selectiveRisk": 0.0,
+    "wilson95": [
+     0.0,
+     0.0245
+    ],
+    "wrong": 0
+   },
+   "V1": {
+    "EXTERIOR_RENDER": {
+     "correct": 18,
+     "coverage": 1.0,
+     "precision": 0.8182,
+     "resolvedN": 20,
+     "truthN": 20,
+     "wrongAs": [
+      "INTERIOR_RENDER"
+     ]
+    },
+    "INTERIOR_RENDER": {
+     "correct": 107,
+     "coverage": 1.0,
+     "precision": 0.9817,
+     "resolvedN": 107,
+     "truthN": 107,
+     "wrongAs": []
+    },
+    "TECHNICAL_ELEVATION": {
+     "correct": 49,
+     "coverage": 1.0,
+     "precision": 1.0,
+     "resolvedN": 53,
+     "truthN": 53,
+     "wrongAs": [
+      "EXTERIOR_RENDER"
+     ]
+    },
+    "coverage": 0.8398,
+    "families": 14,
+    "familyBootstrap95": [
+     0.0,
+     0.0881
+    ],
+    "interiorToExteriorRoutes": 0,
+    "n": 231,
+    "resolved": 194,
+    "section8Bar": {
+     "ELEV>=0.70": true,
+     "EXT>=0.70": true,
+     "allNumericConditions": false,
+     "families>=8": true,
+     "interiorToExterior==0": true,
+     "riskUpper<=0.05": false
+    },
+    "selectiveRisk": 0.0309,
+    "wilson95": [
+     0.0142,
+     0.0658
+    ],
+    "wrong": 6
+   },
+   "V2": {
+    "EXTERIOR_RENDER": {
+     "correct": 0,
+     "coverage": 0.0,
+     "precision": null,
+     "resolvedN": 0,
+     "truthN": 20,
+     "wrongAs": []
+    },
+    "INTERIOR_RENDER": {
+     "correct": 16,
+     "coverage": 0.1495,
+     "precision": 1.0,
+     "resolvedN": 16,
+     "truthN": 107,
+     "wrongAs": []
+    },
+    "TECHNICAL_ELEVATION": {
+     "correct": 0,
+     "coverage": 0.0,
+     "precision": null,
+     "resolvedN": 0,
+     "truthN": 53,
+     "wrongAs": []
+    },
+    "coverage": 0.0693,
+    "families": 14,
+    "familyBootstrap95": [
+     0.0,
+     0.0
+    ],
+    "interiorToExteriorRoutes": 0,
+    "n": 231,
+    "resolved": 16,
+    "section8Bar": {
+     "ELEV>=0.70": false,
+     "EXT>=0.70": false,
+     "allNumericConditions": false,
+     "families>=8": true,
+     "interiorToExterior==0": true,
+     "riskUpper<=0.05": true
+    },
+    "selectiveRisk": 0.0,
+    "wilson95": [
+     0.0,
+     0.1936
+    ],
+    "wrong": 0
+   }
+  },
+  "C1x": {
+   "N1": {
+    "EXTERIOR_RENDER": {
+     "correct": 0,
+     "coverage": 0.0,
+     "precision": null,
+     "resolvedN": 0,
+     "truthN": 20,
+     "wrongAs": []
+    },
+    "INTERIOR_RENDER": {
+     "correct": 54,
+     "coverage": 0.5047,
+     "precision": 1.0,
+     "resolvedN": 54,
+     "truthN": 107,
+     "wrongAs": []
+    },
+    "TECHNICAL_ELEVATION": {
+     "correct": 49,
+     "coverage": 0.9245,
+     "precision": 1.0,
+     "resolvedN": 49,
+     "truthN": 53,
+     "wrongAs": []
+    },
+    "coverage": 0.5065,
+    "families": 14,
+    "familyBootstrap95": [
+     0.0,
+     0.0
+    ],
+    "interiorToExteriorRoutes": 0,
+    "n": 231,
+    "resolved": 117,
+    "section8Bar": {
+     "ELEV>=0.70": true,
+     "EXT>=0.70": false,
+     "allNumericConditions": false,
+     "families>=8": true,
+     "interiorToExterior==0": true,
+     "riskUpper<=0.05": true
+    },
+    "selectiveRisk": 0.0,
+    "wilson95": [
+     0.0,
+     0.0318
+    ],
+    "wrong": 0
+   },
+   "V0a": {
+    "EXTERIOR_RENDER": {
+     "correct": 0,
+     "coverage": 0.0,
+     "precision": null,
+     "resolvedN": 0,
+     "truthN": 20,
+     "wrongAs": []
+    },
+    "INTERIOR_RENDER": {
+     "correct": 0,
+     "coverage": 0.0,
+     "precision": null,
+     "resolvedN": 0,
+     "truthN": 107,
+     "wrongAs": []
+    },
+    "TECHNICAL_ELEVATION": {
+     "correct": 53,
+     "coverage": 1.0,
+     "precision": 1.0,
+     "resolvedN": 53,
+     "truthN": 53,
+     "wrongAs": []
+    },
+    "coverage": 0.4502,
+    "families": 14,
+    "familyBootstrap95": [
+     0.0,
+     0.0
+    ],
+    "interiorToExteriorRoutes": 0,
+    "n": 231,
+    "resolved": 104,
+    "section8Bar": {
+     "ELEV>=0.70": true,
+     "EXT>=0.70": false,
+     "allNumericConditions": "not a candidate router (\u00a78 names V1, V2, N1)",
+     "families>=8": true,
+     "interiorToExterior==0": true,
+     "riskUpper<=0.05": true
+    },
+    "selectiveRisk": 0.0,
+    "wilson95": [
+     0.0,
+     0.0356
+    ],
+    "wrong": 0
+   },
+   "V0b": {
+    "EXTERIOR_RENDER": {
+     "correct": 0,
+     "coverage": 0.0,
+     "precision": null,
+     "resolvedN": 0,
+     "truthN": 20,
+     "wrongAs": []
+    },
+    "INTERIOR_RENDER": {
+     "correct": 54,
+     "coverage": 0.5047,
+     "precision": 1.0,
+     "resolvedN": 54,
+     "truthN": 107,
+     "wrongAs": []
+    },
+    "TECHNICAL_ELEVATION": {
+     "correct": 53,
+     "coverage": 1.0,
+     "precision": 1.0,
+     "resolvedN": 53,
+     "truthN": 53,
+     "wrongAs": []
+    },
+    "coverage": 0.684,
+    "families": 14,
+    "familyBootstrap95": [
+     0.0,
+     0.0
+    ],
+    "interiorToExteriorRoutes": 0,
+    "n": 231,
+    "resolved": 158,
+    "section8Bar": {
+     "ELEV>=0.70": true,
+     "EXT>=0.70": false,
+     "allNumericConditions": "not a candidate router (\u00a78 names V1, V2, N1)",
+     "families>=8": true,
+     "interiorToExterior==0": true,
+     "riskUpper<=0.05": true
+    },
+    "selectiveRisk": 0.0,
+    "wilson95": [
+     0.0,
+     0.0237
+    ],
+    "wrong": 0
+   },
+   "V1": {
+    "EXTERIOR_RENDER": {
+     "correct": 18,
+     "coverage": 1.0,
+     "precision": 0.8182,
+     "resolvedN": 20,
+     "truthN": 20,
+     "wrongAs": [
+      "INTERIOR_RENDER"
+     ]
+    },
+    "INTERIOR_RENDER": {
+     "correct": 107,
+     "coverage": 1.0,
+     "precision": 0.9817,
+     "resolvedN": 107,
+     "truthN": 107,
+     "wrongAs": []
+    },
+    "TECHNICAL_ELEVATION": {
+     "correct": 49,
+     "coverage": 1.0,
+     "precision": 1.0,
+     "resolvedN": 53,
+     "truthN": 53,
+     "wrongAs": [
+      "EXTERIOR_RENDER"
+     ]
+    },
+    "coverage": 0.8398,
+    "families": 14,
+    "familyBootstrap95": [
+     0.0,
+     0.0881
+    ],
+    "interiorToExteriorRoutes": 0,
+    "n": 231,
+    "resolved": 194,
+    "section8Bar": {
+     "ELEV>=0.70": true,
+     "EXT>=0.70": true,
+     "allNumericConditions": false,
+     "families>=8": true,
+     "interiorToExterior==0": true,
+     "riskUpper<=0.05": false
+    },
+    "selectiveRisk": 0.0309,
+    "wilson95": [
+     0.0142,
+     0.0658
+    ],
+    "wrong": 6
+   },
+   "V2": {
+    "EXTERIOR_RENDER": {
+     "correct": 0,
+     "coverage": 0.0,
+     "precision": null,
+     "resolvedN": 0,
+     "truthN": 20,
+     "wrongAs": []
+    },
+    "INTERIOR_RENDER": {
+     "correct": 16,
+     "coverage": 0.1495,
+     "precision": 1.0,
+     "resolvedN": 16,
+     "truthN": 107,
+     "wrongAs": []
+    },
+    "TECHNICAL_ELEVATION": {
+     "correct": 0,
+     "coverage": 0.0,
+     "precision": null,
+     "resolvedN": 0,
+     "truthN": 53,
+     "wrongAs": []
+    },
+    "coverage": 0.0693,
+    "families": 14,
+    "familyBootstrap95": [
+     0.0,
+     0.0
+    ],
+    "interiorToExteriorRoutes": 0,
+    "n": 231,
+    "resolved": 16,
+    "section8Bar": {
+     "ELEV>=0.70": false,
+     "EXT>=0.70": false,
+     "allNumericConditions": false,
+     "families>=8": true,
+     "interiorToExterior==0": true,
+     "riskUpper<=0.05": true
+    },
+    "selectiveRisk": 0.0,
+    "wilson95": [
+     0.0,
+     0.1936
+    ],
+    "wrong": 0
+   }
+  },
+  "C2": {
+   "N1": {
+    "EXTERIOR_RENDER": {
+     "correct": 28,
+     "coverage": 0.6087,
+     "precision": 1.0,
+     "resolvedN": 28,
+     "truthN": 46,
+     "wrongAs": []
+    },
+    "INTERIOR_RENDER": {
+     "correct": 53,
+     "coverage": 0.4953,
+     "precision": 1.0,
+     "resolvedN": 53,
+     "truthN": 107,
+     "wrongAs": []
+    },
+    "TECHNICAL_ELEVATION": {
+     "correct": 49,
+     "coverage": 0.9245,
+     "precision": 1.0,
+     "resolvedN": 49,
+     "truthN": 53,
+     "wrongAs": []
+    },
+    "coverage": 0.5603,
+    "families": 14,
+    "familyBootstrap95": [
+     0.0,
+     0.0
+    ],
+    "interiorToExteriorRoutes": 0,
+    "n": 257,
+    "resolved": 144,
+    "section8Bar": {
+     "ELEV>=0.70": true,
+     "EXT>=0.70": false,
+     "allNumericConditions": false,
+     "families>=8": true,
+     "interiorToExterior==0": true,
+     "riskUpper<=0.05": true
+    },
+    "selectiveRisk": 0.0,
+    "wilson95": [
+     0.0,
+     0.026
+    ],
+    "wrong": 0
+   },
+   "V0a": {
+    "EXTERIOR_RENDER": {
+     "correct": 0,
+     "coverage": 0.0,
+     "precision": null,
+     "resolvedN": 0,
+     "truthN": 46,
+     "wrongAs": []
+    },
+    "INTERIOR_RENDER": {
+     "correct": 0,
+     "coverage": 0.0,
+     "precision": null,
+     "resolvedN": 0,
+     "truthN": 107,
+     "wrongAs": []
+    },
+    "TECHNICAL_ELEVATION": {
+     "correct": 53,
+     "coverage": 1.0,
+     "precision": 1.0,
+     "resolvedN": 53,
+     "truthN": 53,
+     "wrongAs": []
+    },
+    "coverage": 0.4047,
+    "families": 14,
+    "familyBootstrap95": [
+     0.0,
+     0.0
+    ],
+    "interiorToExteriorRoutes": 0,
+    "n": 257,
+    "resolved": 104,
+    "section8Bar": {
+     "ELEV>=0.70": true,
+     "EXT>=0.70": false,
+     "allNumericConditions": "not a candidate router (\u00a78 names V1, V2, N1)",
+     "families>=8": true,
+     "interiorToExterior==0": true,
+     "riskUpper<=0.05": true
+    },
+    "selectiveRisk": 0.0,
+    "wilson95": [
+     0.0,
+     0.0356
+    ],
+    "wrong": 0
+   },
+   "V0b": {
+    "EXTERIOR_RENDER": {
+     "correct": 28,
+     "coverage": 0.6087,
+     "precision": 0.9655,
+     "resolvedN": 28,
+     "truthN": 46,
+     "wrongAs": []
+    },
+    "INTERIOR_RENDER": {
+     "correct": 53,
+     "coverage": 0.5047,
+     "precision": 1.0,
+     "resolvedN": 54,
+     "truthN": 107,
+     "wrongAs": [
+      "EXTERIOR_RENDER"
+     ]
+    },
+    "TECHNICAL_ELEVATION": {
+     "correct": 53,
+     "coverage": 1.0,
+     "precision": 1.0,
+     "resolvedN": 53,
+     "truthN": 53,
+     "wrongAs": []
+    },
+    "coverage": 0.7237,
+    "families": 14,
+    "familyBootstrap95": [
+     0.0,
+     0.0182
+    ],
+    "interiorToExteriorRoutes": 1,
+    "n": 257,
+    "resolved": 186,
+    "section8Bar": {
+     "ELEV>=0.70": true,
+     "EXT>=0.70": false,
+     "allNumericConditions": "not a candidate router (\u00a78 names V1, V2, N1)",
+     "families>=8": true,
+     "interiorToExterior==0": false,
+     "riskUpper<=0.05": true
+    },
+    "selectiveRisk": 0.0054,
+    "wilson95": [
+     0.0009,
+     0.0298
+    ],
+    "wrong": 1
+   },
+   "V1": {
+    "EXTERIOR_RENDER": {
+     "correct": 28,
+     "coverage": 0.6087,
+     "precision": 1.0,
+     "resolvedN": 28,
+     "truthN": 46,
+     "wrongAs": []
+    },
+    "INTERIOR_RENDER": {
+     "correct": 102,
+     "coverage": 0.9533,
+     "precision": 1.0,
+     "resolvedN": 102,
+     "truthN": 107,
+     "wrongAs": []
+    },
+    "TECHNICAL_ELEVATION": {
+     "correct": 49,
+     "coverage": 0.9245,
+     "precision": 1.0,
+     "resolvedN": 49,
+     "truthN": 53,
+     "wrongAs": []
+    },
+    "coverage": 0.751,
+    "families": 14,
+    "familyBootstrap95": [
+     0.0,
+     0.0
+    ],
+    "interiorToExteriorRoutes": 0,
+    "n": 257,
+    "resolved": 193,
+    "section8Bar": {
+     "ELEV>=0.70": true,
+     "EXT>=0.70": false,
+     "allNumericConditions": false,
+     "families>=8": true,
+     "interiorToExterior==0": true,
+     "riskUpper<=0.05": true
+    },
+    "selectiveRisk": 0.0,
+    "wilson95": [
+     0.0,
+     0.0195
+    ],
+    "wrong": 0
+   },
+   "V2": {
+    "EXTERIOR_RENDER": {
+     "correct": 0,
+     "coverage": 0.0,
+     "precision": null,
+     "resolvedN": 0,
+     "truthN": 46,
+     "wrongAs": []
+    },
+    "INTERIOR_RENDER": {
+     "correct": 16,
+     "coverage": 0.1495,
+     "precision": 1.0,
+     "resolvedN": 16,
+     "truthN": 107,
+     "wrongAs": []
+    },
+    "TECHNICAL_ELEVATION": {
+     "correct": 0,
+     "coverage": 0.0,
+     "precision": null,
+     "resolvedN": 0,
+     "truthN": 53,
+     "wrongAs": []
+    },
+    "coverage": 0.0623,
+    "families": 14,
+    "familyBootstrap95": [
+     0.0,
+     0.0
+    ],
+    "interiorToExteriorRoutes": 0,
+    "n": 257,
+    "resolved": 16,
+    "section8Bar": {
+     "ELEV>=0.70": false,
+     "EXT>=0.70": false,
+     "allNumericConditions": false,
+     "families>=8": true,
+     "interiorToExterior==0": true,
+     "riskUpper<=0.05": true
+    },
+    "selectiveRisk": 0.0,
+    "wilson95": [
+     0.0,
+     0.1936
+    ],
+    "wrong": 0
+   }
+  },
+  "preregistered": {
+   "N1": {
+    "EXTERIOR_RENDER": {
+     "correct": 0,
+     "coverage": 0.0,
+     "precision": null,
+     "resolvedN": 0,
+     "truthN": 20,
+     "wrongAs": []
+    },
+    "INTERIOR_RENDER": {
+     "correct": 54,
+     "coverage": 0.5047,
+     "precision": 1.0,
+     "resolvedN": 54,
+     "truthN": 107,
+     "wrongAs": []
+    },
+    "TECHNICAL_ELEVATION": {
+     "correct": 49,
+     "coverage": 0.9245,
+     "precision": 1.0,
+     "resolvedN": 49,
+     "truthN": 53,
+     "wrongAs": []
+    },
+    "coverage": 0.658,
+    "families": 14,
+    "familyBootstrap95": [
+     0.0,
+     0.0
+    ],
+    "interiorToExteriorRoutes": 0,
+    "n": 231,
+    "resolved": 152,
+    "section8Bar": {
+     "ELEV>=0.70": true,
+     "EXT>=0.70": false,
+     "allNumericConditions": false,
+     "families>=8": true,
+     "interiorToExterior==0": true,
+     "riskUpper<=0.05": true
+    },
+    "selectiveRisk": 0.0,
+    "wilson95": [
+     0.0,
+     0.0247
+    ],
+    "wrong": 0
+   },
+   "V0a": {
+    "EXTERIOR_RENDER": {
+     "correct": 0,
+     "coverage": 0.0,
+     "precision": null,
+     "resolvedN": 0,
+     "truthN": 20,
+     "wrongAs": []
+    },
+    "INTERIOR_RENDER": {
+     "correct": 0,
+     "coverage": 0.0,
+     "precision": null,
+     "resolvedN": 0,
+     "truthN": 107,
+     "wrongAs": []
+    },
+    "TECHNICAL_ELEVATION": {
+     "correct": 53,
+     "coverage": 1.0,
+     "precision": 1.0,
+     "resolvedN": 53,
+     "truthN": 53,
+     "wrongAs": []
+    },
+    "coverage": 0.4502,
+    "families": 14,
+    "familyBootstrap95": [
+     0.0,
+     0.0
+    ],
+    "interiorToExteriorRoutes": 0,
+    "n": 231,
+    "resolved": 104,
+    "section8Bar": {
+     "ELEV>=0.70": true,
+     "EXT>=0.70": false,
+     "allNumericConditions": "not a candidate router (\u00a78 names V1, V2, N1)",
+     "families>=8": true,
+     "interiorToExterior==0": true,
+     "riskUpper<=0.05": true
+    },
+    "selectiveRisk": 0.0,
+    "wilson95": [
+     0.0,
+     0.0356
+    ],
+    "wrong": 0
+   },
+   "V0b": {
+    "EXTERIOR_RENDER": {
+     "correct": 0,
+     "coverage": 0.0,
+     "precision": null,
+     "resolvedN": 0,
+     "truthN": 20,
+     "wrongAs": []
+    },
+    "INTERIOR_RENDER": {
+     "correct": 54,
+     "coverage": 0.5047,
+     "precision": 1.0,
+     "resolvedN": 54,
+     "truthN": 107,
+     "wrongAs": []
+    },
+    "TECHNICAL_ELEVATION": {
+     "correct": 53,
+     "coverage": 1.0,
+     "precision": 1.0,
+     "resolvedN": 53,
+     "truthN": 53,
+     "wrongAs": []
+    },
+    "coverage": 0.684,
+    "families": 14,
+    "familyBootstrap95": [
+     0.0,
+     0.0
+    ],
+    "interiorToExteriorRoutes": 0,
+    "n": 231,
+    "resolved": 158,
+    "section8Bar": {
+     "ELEV>=0.70": true,
+     "EXT>=0.70": false,
+     "allNumericConditions": "not a candidate router (\u00a78 names V1, V2, N1)",
+     "families>=8": true,
+     "interiorToExterior==0": true,
+     "riskUpper<=0.05": true
+    },
+    "selectiveRisk": 0.0,
+    "wilson95": [
+     0.0,
+     0.0237
+    ],
+    "wrong": 0
+   },
+   "V1": {
+    "EXTERIOR_RENDER": {
+     "correct": 0,
+     "coverage": 0.1,
+     "precision": null,
+     "resolvedN": 2,
+     "truthN": 20,
+     "wrongAs": [
+      "INTERIOR_RENDER"
+     ]
+    },
+    "INTERIOR_RENDER": {
+     "correct": 107,
+     "coverage": 1.0,
+     "precision": 0.9817,
+     "resolvedN": 107,
+     "truthN": 107,
+     "wrongAs": []
+    },
+    "TECHNICAL_ELEVATION": {
+     "correct": 49,
+     "coverage": 0.9245,
+     "precision": 1.0,
+     "resolvedN": 49,
+     "truthN": 53,
+     "wrongAs": []
+    },
+    "coverage": 0.9048,
+    "families": 14,
+    "familyBootstrap95": [
+     0.0,
+     0.0543
+    ],
+    "interiorToExteriorRoutes": 0,
+    "n": 231,
+    "resolved": 209,
+    "section8Bar": {
+     "ELEV>=0.70": true,
+     "EXT>=0.70": false,
+     "allNumericConditions": false,
+     "families>=8": true,
+     "interiorToExterior==0": true,
+     "riskUpper<=0.05": false
+    },
+    "selectiveRisk": 0.0191,
+    "wilson95": [
+     0.0075,
+     0.0482
+    ],
+    "wrong": 4
+   },
+   "V2": {
+    "EXTERIOR_RENDER": {
+     "correct": 0,
+     "coverage": 0.0,
+     "precision": null,
+     "resolvedN": 0,
+     "truthN": 20,
+     "wrongAs": []
+    },
+    "INTERIOR_RENDER": {
+     "correct": 16,
+     "coverage": 0.1495,
+     "precision": 1.0,
+     "resolvedN": 16,
+     "truthN": 107,
+     "wrongAs": []
+    },
+    "TECHNICAL_ELEVATION": {
+     "correct": 0,
+     "coverage": 0.0,
+     "precision": null,
+     "resolvedN": 0,
+     "truthN": 53,
+     "wrongAs": []
+    },
+    "coverage": 0.0693,
+    "families": 14,
+    "familyBootstrap95": [
+     0.0,
+     0.0
+    ],
+    "interiorToExteriorRoutes": 0,
+    "n": 231,
+    "resolved": 16,
+    "section8Bar": {
+     "ELEV>=0.70": false,
+     "EXT>=0.70": false,
+     "allNumericConditions": false,
+     "families>=8": true,
+     "interiorToExterior==0": true,
+     "riskUpper<=0.05": true
+    },
+    "selectiveRisk": 0.0,
+    "wilson95": [
+     0.0,
+     0.1936
+    ],
+    "wrong": 0
+   }
+  }
+ },
+ "note": "POST-HOC sensitivity (preregistration Addendum C); the preregistered truth stays the headline. EVAL lineage-group scores.",
+ "schema": "research.005r.addendum-c.0.1",
+ "truthVariants": {
+  "stylingItems": 15,
+  "variants": {
+   "C12": {
+    "excluded": 0,
+    "relabelled": 15,
+    "slugLabelled": 150
+   },
+   "C1r": {
+    "excluded": 0,
+    "relabelled": 15,
+    "slugLabelled": 0
+   },
+   "C1x": {
+    "excluded": 15,
+    "relabelled": 0,
+    "slugLabelled": 0
+   },
+   "C2": {
+    "excluded": 0,
+    "relabelled": 0,
+    "slugLabelled": 150
+   }
+  },
+  "viewSlugAssets": 150
+ }
+}

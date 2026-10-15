@@ -1,0 +1,35 @@
+{
+ "compared": "routing probabilities and every detection box/score per asset (timing excluded)",
+ "contentSha256Run1": "6c61e1410b5c3332da098faff40f6a3955402b9c838eee1bc8edbdb73bf2b508",
+ "contentSha256Run2": "6c61e1410b5c3332da098faff40f6a3955402b9c838eee1bc8edbdb73bf2b508",
+ "differingRows": 0,
+ "identicalRows": 1537,
+ "metaIdentical": true,
+ "peakRssMB": [
+  1008.9,
+  1010.5
+ ],
+ "run1Meta": {
+  "promptsSha256": "cd48e664e9986fbda0085ed1b87a85a79825d5bba45bea1ea9835b3617ee15fc",
+  "revision": "cbc355fb364588351c5d51c7f74465e8e7ec6f72",
+  "threads": 3,
+  "torch": "2.11.0+cpu",
+  "version": "v2-owlvit-b32@1",
+  "weightsSha256": "4dbe0399f0b7d7c8dddf1535a98769cc30743bebc877aea681998c8d984ce52b"
+ },
+ "run1Rows": 1537,
+ "run2Meta": {
+  "promptsSha256": "cd48e664e9986fbda0085ed1b87a85a79825d5bba45bea1ea9835b3617ee15fc",
+  "revision": "cbc355fb364588351c5d51c7f74465e8e7ec6f72",
+  "threads": 3,
+  "torch": "2.11.0+cpu",
+  "version": "v2-owlvit-b32@1",
+  "weightsSha256": "4dbe0399f0b7d7c8dddf1535a98769cc30743bebc877aea681998c8d984ce52b"
+ },
+ "run2Rows": 1537,
+ "schema": "research.005r.v2-determinism.0.1",
+ "wallSeconds": [
+  3086.83,
+  3540.3
+ ]
+}

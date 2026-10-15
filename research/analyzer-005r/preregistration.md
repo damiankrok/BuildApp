@@ -235,3 +235,55 @@ reported as diagnostics and never as headline numbers.
   read. It is descriptive only and feeds no decision rule.
 - **`mutations.py` M10** first looked for a V2 edition summary; V2 proposes nothing under its own routing, so M10 now uses
   the first contender that has a summary (N1). 12/12 mutations caught.
+
+### Addendum C — written 2026-10-15T03:33Z (after the three reviews; every item is post-hoc)
+
+Nothing in §8 changes. The preregistered truth, contenders and thresholds stay the headline; everything below is either
+a correction of a defect in the research tooling or a **sensitivity** run reported next to the headline, never instead
+of it.
+
+**Erratum (reviewer B-9).** The headers of Addenda A and B carry wrong times. A was committed at 2026-10-15T01:54:14Z
+(`cfe95ab`), not 02:10Z; B at 02:41:05Z (`da66e48`), not ~04:10Z. The ordering claim of A (before any V2 output was
+read) is supported by file times outside Git: truth.json 01:36:23, role-scores-partial.json 01:53:19, commit `cfe95ab`
+01:54:14, v2-run1.log first written 02:27:01. The texts of A and B are left as committed.
+
+**C1 — truth defect, interiors carousel (reviewer B-1, P1, confirmed).** 15 items of the ARCHON interiors carousel are
+exterior views (their captions name a styling variant or "all segments"); the structural rule made them
+INTERIOR_RENDER. All 15 are in DEV. `addenda/c_truth_variants.py` writes two variants: C1x (the 15 excluded as
+TRUTH_CONFLICT) and C1r (relabelled EXTERIOR_RENDER). V1 and V0b are refitted on DEV under each (`addenda/c_run.sh`).
+
+**C2 — page view copies without truth (reviewer B-2, P1, confirmed).** 150 assets whose file name is `widok-<n>` (a
+page view of the house) carry no structural truth and were therefore not scored, although V1 routes many of them. C2
+labels them EXTERIOR_RENDER from that slug (basis SLUG, independentOfV0 = false). C12 combines C1r and C2.
+
+**C3 — V0a byte-only matching (reviewer C-2, P1, confirmed).** V0a joins the incumbent's output to 005R assets by exact
+byte hash; the incumbent fetched carousel thumbnails, 005R scores the full-size originals, so the incumbent's
+roles for those originals were reported NOT_ACQUIRED. `addenda/c3_v0a_lineage.py` maps them through the page's
+carousel anchor (original ↔ thumbnail). This corrects a claim of the draft report (see the report §F).
+Disclosure: the V0 run was offline only in its two replays. The first (seeding) run let the unmodified production
+command fetch what the seeded cache lacked: the cache holds 1 205 entries not hard-linked from the 005R corpus, written
+01:37–01:44Z (710 JPEG, 158 GIF, 337 HTML; about 100 of the HTML are survey/carousel pages, so roughly 1 100 are real
+production cache-miss fetches). They went through the production URL-safety layer; the cache keeps no URLs, so their
+hosts are not re-verified here. No such bytes enter Git.
+
+**C4 — tooling corrections after the reviews (no rule change):**
+- `schema/validate.py` (reviewer A-2, P1): closed key sets at every level, list elements walked, authority values
+  case-insensitive, metric text in prose rejected, confidence range checked, exterior claims refused on assets not
+  routed to exterior evidence, role evidence must agree with the role, the manifest's sizes and lineage groups are
+  binding, witness counts are integers bounded by distinct lineage groups. 24 of reviewer A's 25 bypass documents are
+  now unit tests; the 25th (a summary row naming an observation that does not exist) cannot be checked from a summary
+  alone and is checked by the assembler (`DANGLING_SUPPORT`, mutation M13).
+- `assemble.py` (reviewer A-4): V1 cues on assets V1 does not route to elevation evidence are kept as REJECTED records
+  instead of being dropped.
+- `score_roles.py` (reviewers A-3, B-8): V0a's consumer leakage (interiors the incumbent labels PERSPECTIVE_RENDER,
+  which `analyze.ts:164` feeds to the facade extractors) is reported as its own field.
+- `score_features.py` (reviewers B-3, B-7): the interior control is now also counted without the routing gate (the
+  preregistered control); the edition-pair control maps the closed-garage look-alike to the kind it carries.
+- `mutations.py` (reviewer C-10): M11/M12 count only when the unmutated baseline runs exactly one passing test; M13 added.
+
+**Other disclosures.** Six lineage groups cross the DEV/EVAL split (reviewer B-5; dHash connected components chain
+different families' drawings; none is in a gating class). V0b's stump on scene features is the constant
+"IF TRUE THEN INTERIOR" on DEV (reviewer C-2), so V0b equals "V0a, and INTERIOR_RENDER for everything V0a leaves
+UNKNOWN"; it is reported as such. The order of work after the preregistration was: V0a twice offline → V1 features
+(Node 22 twice, Node 18 once) → V1/V0b fit → scores → Addendum A → V2 run 1 → scores → Addendum B → reviews →
+Addendum C → V2 run 2 (determinism) → A1 for V2.

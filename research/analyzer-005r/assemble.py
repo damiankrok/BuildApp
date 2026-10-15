@@ -12,8 +12,8 @@ titles). Output documents stay OUTSIDE Git (they name publisher URLs at full det
 (gates.json) is committed.
 
 Task-B sources per contender:  V0a / V0b → none (the incumbent reads no render and its elevation readings are
-geometry for the solver, not 005R observations — see current-pipeline-audit.md); V1 → v1 cues on assets V1 routes
-TECHNICAL_ELEVATION; V2 → OWL-ViT boxes on assets V2 routes to exterior evidence; N1 → OWL-ViT boxes on assets N1
+geometry for the solver, not 005R observations — see current-pipeline-audit.md); V1 → v1 cues, PROPOSED only on assets V1
+routes TECHNICAL_ELEVATION (REJECTED records everywhere else); V2 → OWL-ViT boxes on assets V2 routes to exterior evidence; N1 → OWL-ViT boxes on assets N1
 routes to exterior evidence. A detection on an asset the contender did NOT route to exterior evidence is kept as a
 REJECTED record (never dropped, never FEATURE_PRESENT).
 
@@ -73,6 +73,13 @@ def load_jsonl(p):
     return out
 
 
+def dangling_support(sdoc, all_obs):
+    """The cross-document check a standalone summary cannot make (reviewer A, S3): every support row names an observation
+    this contender actually wrote, on the same bytes."""
+    return [f'DANGLING_SUPPORT {h["id"]}: support names {s["observationId"]!r}, which is not an observation of these bytes'
+            for h in sdoc['hypotheses'] for s in h['support'] if all_obs.get(s['observationId']) != s['variantSha256']]
+
+
 def main(private_p, manifest_p, truth_p, runs, out_dir):
     corpus = json.load(open(private_p))
     manifest = json.load(open(manifest_p))
@@ -106,6 +113,7 @@ def main(private_p, manifest_p, truth_p, runs, out_dir):
         viol, counts = {}, {'documents': 0, 'observations': 0, 'proposedPresent': 0, 'rejected': 0, 'unresolved': 0,
                             'proposedPresentOnInteriorTruth': 0, 'proposedPresentOnTechnicalNonElevationTruth': 0, 'byKind': {}}
         per_edition = {}
+        all_obs = {}   # observationId -> variantSha256 of every observation written for this contender
         for aid in sorted(routes):
             if aid not in assets:
                 continue  # synthetic rows of V1/V2 outputs are scored by score_features.py, not assembled here
@@ -143,13 +151,15 @@ def main(private_p, manifest_p, truth_p, runs, out_dir):
                                        'mirrorAmbiguous': True}},
                 'observations': [],
             }
-            routed_ext = r['resolved'] and role in EXT
+            routed_ext = r['resolved'] and role in EXT and (cname != 'V1' or role == 'TECHNICAL_ELEVATION')  # V1 cues are drawing cues
             raw = []
             if cname in ('V2', 'N1') and aid in v2raw and 'detections' in v2raw[aid]:
                 for kind, lst in sorted(v2raw[aid]['detections'].items()):
                     for d in lst:
                         raw.append({'kind': kind, 'box': d['box'], 'score': d['score'], 'visible': ['OPEN_VOCABULARY_DETECTOR_MATCH']})
-            if cname == 'V1' and aid in cues and role == 'TECHNICAL_ELEVATION' and r['resolved']:
+            # every V1 cue is kept: PROPOSED only on an asset V1 routes to elevation evidence, REJECTED on any other
+            # asset (reviewer A-4: a dropped cue hides how often the cue rules fire on the wrong kind of image)
+            if cname == 'V1' and aid in cues:
                 for c in cues[aid].get('cues', []):
                     raw.append({'kind': c['kind'], 'box': c['box'], 'score': c['score'], 'visible': c['visibleEvidence']})
             raw.sort(key=lambda d: (-d['score'], d['kind'], d['box']))
@@ -176,6 +186,7 @@ def main(private_p, manifest_p, truth_p, runs, out_dir):
                                 if proposed else ('kept as a record: the asset is not routed to exterior evidence (role ' + role + ')' if not routed_ext else 'below the operating score')),
                      'assemblyCandidateId': cand, 'metricDimensions': None}
                 doc['observations'].append(o)
+                all_obs[oid] = a['variantSha256']
                 counts['observations'] += 1
                 if proposed:
                     counts['proposedPresent'] += 1
@@ -210,7 +221,7 @@ def main(private_p, manifest_p, truth_p, runs, out_dir):
                              'metricDimensions': None})
             sdoc = {'schemaVersion': 'research.visual-edition-summary.0.1', 'producer': {'stage': 'BUILDPLAN-ANALYZER-005R', 'contender': cname, 'detector': detector},
                     'editionKey': ek, 'canonicalUrl': corpus['editions'][ek]['canonicalUrls'][0], 'hypotheses': hyps}
-            errs = validate_document(sdoc, manifest, forbidden)
+            errs = validate_document(sdoc, manifest, forbidden) + dangling_support(sdoc, all_obs)
             for e in errs:
                 viol[e.split(' ')[0]] = viol.get(e.split(' ')[0], 0) + 1
             json.dump(sdoc, open(os.path.join(cdir, f'edition-{ek.replace(":", "_")}.json'), 'w'), indent=1, sort_keys=True)
@@ -218,7 +229,7 @@ def main(private_p, manifest_p, truth_p, runs, out_dir):
         counts['editionSummaries'] = sums
         gates['contenders'][cname] = {'counts': counts, 'violations': viol,
                                       'hardGates': {'ungroundedAuthoritative': sum(viol.get(k, 0) for k in ('AUTHORITY', 'METRIC', 'CONFIDENCE', 'IDENTITY')),
-                                                    'crossEditionMixing': viol.get('EDITION_MIX', 0),
+                                                    'crossEditionMixing': viol.get('EDITION_MIX', 0) + viol.get('DANGLING_SUPPORT', 0),
                                                     'interiorToExteriorClaims_validator': viol.get('ROUTING', 0),
                                                     'interiorToExteriorClaims_truth': counts['proposedPresentOnInteriorTruth'],
                                                     'fabricatedBoxes': viol.get('FABRICATED_BOX', 0) + viol.get('BOX', 0),
