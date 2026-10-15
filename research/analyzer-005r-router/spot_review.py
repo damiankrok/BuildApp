@@ -34,6 +34,14 @@ QUESTIONS = {
 }
 
 
+def refuse_inside_repo(*paths):
+    repo = os.path.realpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
+    for p in paths:
+        real = os.path.realpath(p)
+        if real == repo or real.startswith(repo + os.sep):
+            sys.exit(f'REFUSED: private outputs never go inside the repository ({p})')
+
+
 def rank(key):
     return hashlib.sha256(f'{SEED}:{key}'.encode()).hexdigest()
 
@@ -52,6 +60,7 @@ def per_family(rows, k=2):
 
 
 def main(corpus_p, truth_p, images_dir, private_dir, manifest_p):
+    refuse_inside_repo(private_dir)
     import re
     corpus = {a['assetId']: a for a in json.load(open(corpus_p))['assets']}
     truth = {r['assetId']: r for r in json.load(open(truth_p))['rows']}
@@ -79,6 +88,11 @@ def main(corpus_p, truth_p, images_dir, private_dir, manifest_p):
                           'existingLabels': {'truth005R': r['truth'], 'basis': r['basis'], 'shownToReviewer': False},
                           'requested': QUESTIONS, 'answer': None, 'reviewer': None, 'reviewedAt': None})
             manifest_rows.append({'stratum': name, 'assetSha': r['sha256'], 'editionIds': r['editions'], 'lineageGroup': r['lineageGroup'], 'split': r['split']})
+    # The reviewer's copy: no stratum, no existing label, seeded shuffle, so nothing anchors an answer to the
+    # publisher's filing (post-review B-5). The full task file stays with the operator for scoring later.
+    blind = [{'item': i, 'assetSha': t['assetSha'], 'localPath': t['localPath'], 'sourceBox': t['sourceBox'], 'requested': QUESTIONS, 'answer': None, 'reviewer': None, 'reviewedAt': None}
+             for i, t in enumerate(sorted({t['assetSha']: t for t in tasks}.values(), key=lambda t: rank('review:' + t['assetSha'])))]
+    json.dump({'schema': 'research.005r-router.spot-review-reviewer-copy.0.1', 'items': blind}, open(os.path.join(private_dir, 'spot-review-REVIEWER-COPY.json'), 'w'), indent=1)
     json.dump({'schema': 'research.005r-router.spot-review-task.0.1', 'protocol': 'stage-reports/artifacts/analyzer-005r-router/truth/owner-spot-review-request.md', 'tasks': tasks},
               open(os.path.join(private_dir, 'spot-review-tasks.json'), 'w'), indent=1, sort_keys=True)
     manifest = {'schema': 'research.005r-router.spot-review-manifest.0.1', 'seed': SEED, 'status': 'NOT_RUN_HUMAN_TRUTH',

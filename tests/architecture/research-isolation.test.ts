@@ -904,6 +904,7 @@ describe('005R-ROUTER production cannot reach the router study, which commits no
     for (const f of files) {
       const text = read(f)
       expect(text, f).not.toMatch(/(data:(image|application)\/[\w.+-]+;base64,|iVBORw0KGgo|\/9j\/4|UklGR|R0lGOD)[A-Za-z0-9+/]{40,}/)
+      expect(text, f).not.toMatch(/[A-Za-z0-9+/]{256,}={0,2}/)
       expect(statSync(join(ROOT, f)).size, f).toBeLessThanOrEqual(4 * 2 ** 20)
       if (f.endsWith('.json')) walk(f, JSON.parse(text))
     }
@@ -915,5 +916,10 @@ describe('005R-ROUTER production cannot reach the router study, which commits no
     expect(read('research/analyzer-005r-router/replay.mjs')).toMatch(/throw new Error\('replays live outside the repository'\)/)
     expect(read('research/analyzer-005r-router/replay.mjs')).toMatch(/USABLE_HOSTS = new Set\(\['www\.archon\.pl', 'www\.projektydomownowoczesnych\.pl'\]\)/)
     expect(read('research/analyzer-005r-router/variant.mjs')).toMatch(/a variant copy lives outside the repository/)
+    for (const f of ['research/analyzer-005r-router/spot_review.py', 'research/analyzer-005r-router/r1_meta.py']) {
+      const run = spawnSync('python3', ['-I', join(ROOT, f), 'x', 'y', join(ROOT, 'tmp-005r-router-refused'), join(ROOT, 'tmp-005r-router-refused.json'), 'z'], { cwd: ROOT, encoding: 'utf8' })
+      expect(run.status, f).not.toBe(0)
+      expect(existsSync(join(ROOT, 'tmp-005r-router-refused')) || existsSync(join(ROOT, 'tmp-005r-router-refused.json'))).toBe(false)
+    }
   })
 })

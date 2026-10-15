@@ -36,6 +36,8 @@ const out = resolve(value('out'))
 if (out === REPO || out.startsWith(`${REPO}/`)) throw new Error('REFUSED: replay outputs never go inside the repository')
 mkdirSync(out, { recursive: true })
 const sealed = SourcePackageSchema.parse(JSON.parse(readFileSync(value('package'), 'utf8')))
+// The same eligibility as replay.mjs, enforced here too (005R source-eligibility.json): no SOURCE_NOT_USABLE publisher.
+if (!['www.archon.pl', 'www.projektydomownowoczesnych.pl'].includes(new URL(sealed.canonicalUrl).host)) throw new Error(`REFUSED: ${new URL(sealed.canonicalUrl).host} is not screened USABLE_FOR_LOCAL_RESEARCH`)
 // --shuffle <seed>: permute the package's asset list (a seeded Fisher–Yates), so order invariance is tested inside a
 // package and not only across rows. The sealed content hash is carried unchanged: only the list order moves.
 const shuffleSeed = argv.includes('--shuffle') ? value('shuffle') : null

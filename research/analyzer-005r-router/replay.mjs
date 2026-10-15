@@ -25,6 +25,8 @@ const arg = (n, f) => {
 const work = resolve(arg('work', '/home/user/work005r-router'))
 if (work === REPO || work.startsWith(REPO + '/')) throw new Error('replays live outside the repository')
 const label = arg('label', 'R0')
+if (!/^[A-Za-z0-9_-]+$/.test(label)) throw new Error('a label is letters, digits, _ and - only')
+if (existsSync(join(work, 'runs', `${label}.done.json`)) && !process.argv.includes('--overwrite')) throw new Error(`label ${label} already finished; pass --overwrite to replace it`)
 const config = arg('config', '')
 const only = arg('cases', '')
 const shuffle = arg('shuffle', '')

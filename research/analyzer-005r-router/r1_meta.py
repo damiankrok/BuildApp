@@ -29,6 +29,7 @@ The private output (captions classes, URLs) stays outside Git; the aggregate hol
 """
 import collections
 import json
+import os
 import re
 import sys
 
@@ -36,6 +37,14 @@ INTERIOR_WORDS = re.compile(r'wn[eę]trz|kuchni|salon|strefa dzienna|[lł]azien|
 STYLING = re.compile(r'stylizacj|wszystkich segment', re.I)
 VIEW = re.compile(r'\bwidok\b', re.I)
 VIEW_SLUG = re.compile(r'^widok-\d')
+
+
+def refuse_inside_repo(*paths):
+    repo = os.path.realpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
+    for p in paths:
+        real = os.path.realpath(p)
+        if real == repo or real.startswith(repo + os.sep):
+            sys.exit(f'REFUSED: private outputs never go inside the repository ({p})')
 
 
 def witnesses(asset):
@@ -74,6 +83,7 @@ def proposal(ws):
 
 
 def main(corpus_p, truth_p, private_p, agg_p):
+    refuse_inside_repo(private_p)
     corpus = json.load(open(corpus_p))
     truth = {r['assetId']: r for r in json.load(open(truth_p))['rows']}
     private, agg = [], collections.Counter()

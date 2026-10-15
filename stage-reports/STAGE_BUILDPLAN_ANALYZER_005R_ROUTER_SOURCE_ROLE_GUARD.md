@@ -1,8 +1,9 @@
 # STAGE BUILDPLAN-ANALYZER-005R-ROUTER — router ról źródła i ochrona geometrii przed wnętrzami
 
 **Werdykt: `NO_SAFE_ADOPTION`** · `RESEARCH_RESULT: FIRST_BAD_LOCATED + N1_MEASURED_NOT_ADOPTED` ·
-`PRODUCTION_CHANGE: NONE` · `REAL_TRUTH: NOT_RUN` (scena), `TECHNICALLY_INDEPENDENT` (tylko niezmienniczość modelu
-w kontrfakcie N1) · `MODEL_DIFF: 0 / 37` · `TARGET_CLASS_EXERCISED: tak (381 klatek perspektywicznych w 34 wierszach)` ·
+`PRODUCTION_CHANGE: NONE` · `REAL_TRUTH: NOT_RUN` · `MODEL_DIFF: NONE` (produkcja bez zmian; w kontrfakcie N1: 23
+modele bajt-w-bajt identyczne + 14 identycznych typowanych odmów na 37 wierszach DEV — porównanie bitowe, nie prawda o
+scenie) · `TARGET_CLASS_EXERCISED: tak (381 klatek perspektywicznych w 34 wierszach)` ·
 `BLIND_13: NOT_RUN` · `ARM64: PENDING`.
 
 Baza `8d414567e16e9a790bcf56cbebc10d778c6eb268` (sprawdzona: upstream, lustro i lokalny HEAD równe; CI `38681024256`
@@ -13,9 +14,9 @@ attempt 2 `success`). Gałąź `analyzer/visual-source-role-guard-v1`. Bez APK, 
 | pytanie | odpowiedź z pomiarów |
 | --- | --- |
 | Dlaczego wnętrza trafiają do analizy elewacji? | **Pierwsza niebezpieczna asercja dowodowa (deterministyczna):** `analyze.ts:164-166` kieruje każdą klatkę `PERSPECTIVE_RENDER` do pięciu ekstraktorów **ortogonalnej** fasady. Rola (`archon.ts:98`, „wizualizacja” → `PERSPECTIVE_RENDER`) nie jest błędna — wnętrze *jest* renderem perspektywicznym; jest niepełna (brak zakresu sceny). Błąd leży w routingu: wszyscy konsumenci obserwacji fasady (metryki `extract.ts:88-89`, tożsamość między widokami `identity.ts:70`, rejestracja `solve.ts:312`) czytają tylko klatki ortogonalne, a sam producent routuje po `document`, nie po `projection`. Ledger potem twierdzi, że obserwacje posłużyły do sprawdzenia głębi (`reconstruct-v2.ts:1177`), czego żaden kod nie robi (kamera czyta raster, `camera.ts:838`). |
-| Czy wnętrza psują dziś model 3D? | **Nie — zmierzone.** Usunięcie wszystkich 14 987 obserwacji fasady z 381 klatek perspektywicznych (N1) daje **bajt-w-bajt ten sam model na 37/37 wierszach**, te same dowody metryczne, te same kamery (25 rozwiązanych na 7 wierszach). Szkoda jest w **dowodach i proweniencji**, nie w geometrii: fałszywe „kalenice” i „otwory” na wnętrzach w grafie i 922 fałszywe wpisy „USED_AS_CORROBORATION” w ledgerze (7 wierszy). |
+| Czy obserwacje z renderów perspektywicznych (w tym wnętrz) zmieniają dziś model 3D? | **Na 37 znanych wierszach DEV, przez kanał deterministyczny — nie.** Usunięcie wszystkich 14 987 obserwacji fasady z 381 klatek perspektywicznych (wnętrz i zewnętrznych razem; N1) daje 23 modele bajt-w-bajt identyczne i 14 identycznych typowanych odmów, te same dowody metryczne, te same kamery (25 rozwiązanych na 7 wierszach). Kanał wizji (zdalny, wyłączony) nie był testowany; nowe domy nie były testowane. Szkoda jest w **dowodach i proweniencji**: obserwacje fasady (kalenice, otwory) zapisane na klatkach perspektywicznych i 922 wpisy „USED_AS_CORROBORATION” o sprawdzeniu, którego żaden kod nie wykonuje (7 wierszy). Ile z tych klatek to wnętrza — `NOT_MEASURED` (tylko struktura wydawcy). |
 | Czy da się wiarygodnie rozróżnić wnętrze / zewnętrze? | **Nie na dostępnej prawdzie.** Ludzkich etykiet brak (`NOT_RUN_HUMAN_TRUTH`; przygotowano lokalne zadanie spot-review, 300 pozycji). Struktura strony to jeden kanał wydawcy i ma znane błędy (15 widoków zewnętrznych w karuzeli wnętrz). R1: **0 z 1 352 zasobów** ma dwóch świadków sceny z różnych klas niezależności, więc R2 (bramka sceny) nie bramkuje niczego. |
-| Czy wdrożono poprawkę? | **Nie.** Mój wariant N1 (bramka projekcji, bez klasyfikacji sceny) przeszedł P1 (model), P2, P3, P6, P8, P9, P10 i 6/6 mutacji, ale **nie przeszedł P4 i P5 w brzmieniu prerejestracji** (P4: usunięte luki obejmują też własne luki ekstraktora fasady na klatkach perspektywicznych; P5: różni się pole zegarowe `recogniser.ms`). Reguła §6.1 ustalona przed wynikami mówi: dowolna porażka → `NO_SAFE_ADOPTION`. Poprawka predykatu po odpieczętowaniu nie może nieść wdrożenia; N1 jest gotowy jako kandydat na osobny etap (`research/analyzer-005r-router/n1-staged/`). |
+| Czy wdrożono poprawkę? | **Nie.** Mój wariant N1 (bramka projekcji, bez klasyfikacji sceny) przeszedł P1 (model), P2, P3, P6, P8, P9, P10 i 6/6 mutacji, ale **nie przeszedł P4, P5 i P7 w brzmieniu prerejestracji** (P4: usunięte luki obejmują też własne luki ekstraktora fasady na klatkach perspektywicznych; P5/P7: różni się pole zegarowe `recogniser.ms` — ten sam predykat nie przechodzi też R0 vs R0rev, czyli inkumbent sam ze sobą). Reguła §6.1 ustalona przed wynikami mówi: dowolna porażka → `NO_SAFE_ADOPTION`. Poprawka predykatu po odpieczętowaniu nie może nieść wdrożenia; N1 jest gotowy jako kandydat na osobny etap (`research/analyzer-005r-router/n1-staged/`). |
 
 ## A. Baza, zamrożenie, zakres
 
@@ -55,7 +56,11 @@ kandydat → model, z liniami kodu bazy. Najważniejsze:
 
 `research/analyzer-005r-router/preregistration.md` (`014781c`) i `preregistration-addendum-A.md` (`0992344`), oba przed
 pierwszym przebiegiem N1/R1/R2w. Warianty R0, R0copy, R1, R2, R2w, R3 (NOT_RUN), N1; predykaty P1–P10; weta; reguła
-decyzji; plan ślepej rundy 13. **Odstępstwo jawne:** prerejestracja mówi o 38 wierszach DEV; kwalifikujących się
+decyzji; plan ślepej rundy 13. **Addendum A (przed N1) to re-specyfikacja, nie tylko zaostrzenie:** P3 z równości hasha
+na równość treści po wyczyszczeniu pól tożsamości; P5 dopuszcza `metricEvidenceHash`; P6 czyści wszystkie identyfikatory
+i hashe `hypothesisSet*`/`featureGraph*`/`structuralLayout*`/`metricEvidence*` zamiast wymagać równego
+`hypothesisSetHash` (treść kandydata nadal musi być identyczna). Każda zmiana wynika z odczytu kodu (hashe niosące
+tożsamość grafu) i została zapisana przed przebiegiem. **Odstępstwo jawne:** prerejestracja mówi o 38 wierszach DEV; kwalifikujących się
 wierszy jest **37** (45 EXTRACT − 8 DobreDomy). Kontrola harnessu R0copy objęła 37 wierszy zamiast 2.
 
 ## D. Prawda
@@ -84,20 +89,22 @@ wierszy jest **37** (45 EXTRACT − 8 DobreDomy). Kontrola harnessu R0copy obję
 
 | predykat | wynik |
 | --- | --- |
-| P1 model | **PASS 37/37** (34 vs R0, 3 vs R0fix; 6 sprawdzone też vs R0fix) — Marcówki (balkon), Jarząb (ganek), G2E-5, e-OZE, Głogowniki, Dalie: bez zmian |
+| P1 model | **PASS 37/37** — 23 modele bajt-w-bajt + 14 identycznych typowanych odmów (34 vs R0, 3 vs R0fix; 6 sprawdzone też vs R0fix) — Marcówki (balkon), Jarząb (ganek), G2E-5, e-OZE, Głogowniki, Dalie: bez zmian |
 | P2 dowody ortogonalne | PASS (każda klatka ortogonalna: te same obserwacje, ta sama lista klatek) |
 | P3 dowody metryczne (treść) | PASS na każdym wierszu z zachowanymi dowodami |
 | **P4 diff grafu = dokładnie bramka** | **FAIL 37/37** — poza przewidzianymi elementami usunięte są też luki `MISSING` „the left/right side wall of the recess …”, które ekstraktor fasady sam emituje na klatkach perspektywicznych; P4 ich nie wyliczył |
 | **P5 podsumowanie** | **FAIL** na każdym ukończonym wierszu — `recogniser.ms` (czas zegarowy) |
 | P6 kandydat (treść) | PASS |
-| P7 determinizm | model/graf/metryki/kandydat/porażki N1 = N1shuf 37/37 (odwrócona kolejność + tasowanie zasobów w pakiecie); podsumowanie: ten sam FAIL zegarowy co P5 |
+| **P7 determinizm** | **FAIL w brzmieniu prerejestracji** (podsumowanie bajt w bajt). Model/graf/metryki/kandydat/porażki N1 = N1shuf 37/37 (odwrócona kolejność + tasowanie zasobów w pakiecie); podsumowanie różni się tylko `recogniser.ms`. **Inkumbent też nie przechodzi:** R0 vs R0rev — 0/37 surowych podsumowań identycznych (ten sam powód), co pokazuje, że P5/P7 były wadliwie wyspecyfikowane; to nie zmienia werdyktu. Harness już wcześniej wycinał `startedAt`/`completedAt` (`run-case.ts`), czego P5 nie wymieniał — ujawnione tutaj. |
 | P8 ledger | PASS 7/7 — usunięte tylko rekordy o dowodach perspektywicznych (w tym 922 `USED_AS_CORROBORATION`), 0 dodanych, 0 naruszeń, kamery identyczne |
 | P9 ryzyko elewacji jako renderu | PASS — 0 ze 198 elewacji strukturalnych ma rolę `PERSPECTIVE_RENDER` |
 | P10 pokrycie | spełnione — 37 wierszy z klatkami perspektywicznymi, 7 z rozwiązaną kamerą |
 
-**Wrażliwość post-hoc (nie zmienia werdyktu):** P4′ (każda usunięta luka zakotwiczona w zasobie perspektywicznym)
-PASS 37/37; P5′/P7′ bez pól `ms` PASS. Przyczyny porażek są zrozumiane i wyglądają na łagodne, ale to wniosek po
-odpieczętowaniu — dokładnie ten typ korekty, który w 005R (Addendum C) nie mógł zmienić werdyktu.
+**Wrażliwość post-hoc — NIE jest wynikiem i NIE zmienia werdyktu:** zdefiniowane po odczycie wyników N1
+(`52b4884`) P4′ (każda usunięta luka zakotwiczona w zasobie perspektywicznym) i P5′/P7′ (bez pól `ms`) byłyby
+spełnione. To wniosek po odpieczętowaniu, dokładnie ten typ korekty, który w 005R (Addendum C) nie mógł zmienić
+werdyktu; N1 **nie** „przeszedł co do istoty” — przejdzie albo nie przejdzie dopiero w nowym etapie z predykatami
+ustalonymi przed przebiegiem i ze świeżą ślepą rundą.
 
 Testy N1 (przygotowane, niewdrożone): `packages/source-analyzer` 52/52 z łatką; nowy `projection-gate.test.ts`
 (7 testów, każdy z kontrolą „te same piksele jako elewacja dają obserwacje”); zmieniona asercja
@@ -116,7 +123,7 @@ bramka tylko po dokumencie, bramkowanie elewacji, fałszywe MISSING, cicha odmow
 | 0 nowych SOURCE_EXACT z renderu | model bez zmian |
 | 0 użycia SOURCE_NOT_USABLE | wiersze DobreDomy odrzucone przez harness (`USABLE_HOSTS`) |
 | 0 naruszeń JSON/proweniencji | brak zmiany produkcyjnej; N1: 0 naruszeń ledgera |
-| determinizm | R0 = R0rev, N1 = N1shuf (poza polami zegarowymi) |
+| determinizm | produkcja bez zmian. P7 jak prerejestrowany: FAIL (pole zegarowe, także dla R0 vs R0rev); modele, grafy, metryki i porażki bajt w bajt identyczne w obu parach |
 
 ## H. Wydajność (N1, zmierzone, nie wdrożone)
 
@@ -127,14 +134,16 @@ Faza obserwacji średnio 39,6 s → 34,3 s (21 ukończonych wierszy, Node 22, x8
 
 `stage-reports/artifacts/analyzer-005r-router/source-license-history-review.md`. ARCHON `USABLE_FOR_LOCAL_RESEARCH`
 (nie sublicencja); DobreDomy/Archipelag/Domy w Stylu `SOURCE_NOT_USABLE`; wcześniejsze użycie DobreDomy:
-**OWNER_DECISION_PENDING**. Żaden piksel nie trafił do zdalnego modelu. Historia: 27 cytatów wydawcy usuniętych
-w `91b4d61` wciąż istnieje w historii (`c1ab121`, `20fffbd`, `4980b95`, `dade188`); **ważniejsze:** 35 śledzonych
+**OWNER_DECISION_PENDING**. Żaden piksel nie trafił do zdalnego modelu. Historia: 27 cytowanych polskich fragmentów usuniętych w `91b4d61` (6 krótkich fraz wydawcy, notatki recenzentów, które je
+zawierają, i jedno zdanie niebędące tekstem wydawcy) wciąż istnieje w historii (`c1ab121`, `20fffbd`, `4980b95`,
+`dade188`); w `audit-raw.json` na HEAD 15 linii pasuje do usuniętych prefiksów — **wymaga sprawdzenia linia po linii**
+(nie ustalono, że tekst 005R na HEAD jest czysty); **ważniejsze:** 35 śledzonych
 `source-package.json` na HEAD (wcześniejsze etapy, 3 z DobreDomy) zawiera podpisy i prozę specyfikacji wydawcy.
 Nic nie przepisano, nie usunięto ani nie wypchnięto siłą; decyzja należy do OWNER-a.
 
 ## J. Bramki
 
-Patrz `stage-reports/artifacts/analyzer-005r-router/gates.json` (uzupełniane po przebiegu): `npm install`,
+Patrz `stage-reports/artifacts/analyzer-005r-router/gates.json`: `npm install`,
 `npm run typecheck`, `npm test`, `npm run build`, `npm run e2e`; testy izolacji (nowy blok 005R-ROUTER).
 
 ## K. Ograniczenia

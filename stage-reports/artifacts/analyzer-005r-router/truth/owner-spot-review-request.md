@@ -19,8 +19,9 @@ the draw cannot be re-rolled) from the 005R corpus that already sits on this mac
 
 - Committed: `spot-review-manifest.json` — asset SHA-256, edition ids, lineage group, split, stratum. No caption, no
   URL, no pixel.
-- Private (outside Git): `/home/user/work005r-router/spot-review/spot-review-tasks.json` — the same rows with the local
-  file path and empty answer slots.
+- Private (outside Git): `spot-review-tasks.json` (operator's file: strata and existing labels, for scoring later) and
+  `spot-review-REVIEWER-COPY.json` (296 distinct images, seeded shuffle, **no stratum and no existing label**, so
+  nothing anchors an answer to the publisher's filing), both in the private work directory.
 
 ## Questions per image (closed lists, `CANNOT_TELL` always allowed)
 
@@ -32,16 +33,16 @@ the draw cannot be re-rolled) from the 005R corpus that already sits on this mac
 
 ## Protocol, if OWNER chooses to answer
 
-1. Open the private task file on this machine (or a copy on OWNER's own computer). The images are never uploaded,
+1. Open the **reviewer copy** on this machine (or a copy on OWNER's own computer). The images are never uploaded,
    never sent to a model, and never committed.
-2. The existing 005R label is stored with `shownToReviewer: false`. Hide it while answering; it is the publisher's
-   filing, which is what is being checked.
+2. The reviewer copy carries no stratum and no existing label; the publisher's filing (what is being checked) is
+   joined back by asset hash only after the answers are frozen.
 3. Fill `answer`, `reviewer` (initials) and `reviewedAt`. One pass; no edits after a later stage has scored against
    the answers.
 4. A second, independent reviewer on a seeded 20 % subset gives inter-rater agreement; without it the labels are
    `HUMAN_VERIFIED_SINGLE`.
-5. A later stage freezes the answered file by hash **before** any router is scored on it. S1–S5 are 005R DEV / prior
-   exposure; they can calibrate, never serve as a blind.
+5. A later stage freezes the answered file by hash **before** any router is scored on it. S1–S5 come from 005R DEV (224 rows) **and** EVAL (76
+   rows); all of it is prior exposure. They can calibrate, never serve as a blind.
 
 ## Why it matters
 

@@ -9,8 +9,8 @@
  *  1. Per named production path (packages/, apps/, .github/, manifests, lockfile, holdout/, docs/, tests/ other than
  *     the one 005R isolation test): tracked file count, SHA-256 over `git ls-files -s` (mode, blob, path) and a
  *     SHA-256 of every tracked file's bytes on disk, so an uncommitted edit fails too.
- *  2. EVERYTHING tracked outside the 005R allowlist, as one digest: research/analyzer-005r/**,
- *     stage-reports/artifacts/analyzer-005r/**, stage-reports/STAGE_BUILDPLAN_ANALYZER_005R_*.md, PROJECT_STATUS.md and
+ *  2. EVERYTHING tracked outside the 005R-ROUTER allowlist, as one digest: research/analyzer-005r-router/**,
+ *     stage-reports/artifacts/analyzer-005r-router/**, stage-reports/STAGE_BUILDPLAN_ANALYZER_005R_ROUTER_*.md, PROJECT_STATUS.md and
  *     tests/architecture/research-isolation.test.ts are the only paths 005R may touch.
  * Plus the untracked embedded runtime assets (PP-OCRv6 model and dictionary, local-analyzer bundle, onnxruntime-web
  * WASM, loader and package.json) — the "models, dictionary, WASM and binaries" of the brief.
