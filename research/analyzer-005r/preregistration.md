@@ -302,4 +302,26 @@ letterbox is V2's own preprocessing, so the grey variant is the identity for V2.
 the scorers named in §5; all are diagnostics, sensitivity runs, tooling fixes or tests. SHA-256 at the commit that
 carries this addendum:
 
-{{POSTPREG_TABLE}}
+| file | status vs `bdd50b8` | first commit | SHA-256 (first 16) | role |
+| --- | --- | --- | --- | --- |
+| `acquire.py` | changed | `5e9bc93` | `23a9d14cd7760bf9` | acquisition (ran before; fix for future runs) |
+| `addenda/a1_aspect_v1.mjs` | added | `30dd205` | `2e917280c6b36fa3` | diagnostic / sensitivity (addendum) |
+| `addenda/a1_aspect_v2.py` | added | `30dd205` | `6be85c7fc71a76cb` | diagnostic / sensitivity (addendum) |
+| `addenda/a2_propagate.py` | added | `30dd205` | `c7377d16099abc79` | diagnostic / sensitivity (addendum) |
+| `addenda/b1_v2_faithfulness.py` | added | `da66e48` | `39abc1f4e38e2c00` | diagnostic / sensitivity (addendum) |
+| `addenda/c3_v0a_lineage.py` | added | `b98927b` | `8bbde289c7ff4c49` | diagnostic / sensitivity (addendum) |
+| `addenda/c_run.sh` | added | `b98927b` | `86404827acf3aeac` | diagnostic / sensitivity (addendum) |
+| `addenda/c_truth_variants.py` | added | `b98927b` | `9008eaf97b1bfb4b` | diagnostic / sensitivity (addendum) |
+| `assemble.py` | changed | `5e9bc93` | `22e9a38de1732416` | scorer / assembler / validator (fixes in addenda B, C) |
+| `bench.py` | added | `30dd205` | `64430c3236d936d7` | measurement code named in §5 |
+| `claims.py` | added | `da66e48` | `9aa125d3af21dd35` | measurement code named in §5 |
+| `edition_identity.py` | added | `cfe95ab` | `41dd867905fe927e` | measurement code named in §5 |
+| `licensing.md` | changed | `5e9bc93` | `035d65b9b6a67475` | prose (licence matrix; C-9 corrections) |
+| `mutations.py` | added | `30dd205` | `2bab8e4c2ea13c28` | safeguard suite (§9 named the mutations, not their code; written whole after `bdd50b8`) |
+| `schema/examples/example-manifest.json` | changed | `5e9bc93` | `1ac99b26654f8d79` | test |
+| `schema/test_schema.py` | changed | `5e9bc93` | `b0aa0c226ff118b2` | test |
+| `schema/validate.py` | changed | `5e9bc93` | `f929ee0ec7d05278` | scorer / assembler / validator (fixes in addenda B, C) |
+| `score_features.py` | changed | `80b455d` | `238dba672513f601` | scorer / assembler / validator (fixes in addenda B, C) |
+| `score_roles.py` | changed | `5e9bc93` | `53745b6123a7c1f0` | scorer / assembler / validator (fixes in addenda B, C) |
+
+The preregistration file itself carries the addenda.
