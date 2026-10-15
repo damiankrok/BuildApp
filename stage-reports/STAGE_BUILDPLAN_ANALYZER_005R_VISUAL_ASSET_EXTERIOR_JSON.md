@@ -8,12 +8,12 @@ Baza `39061dbed453d7af4e538b1fcbe4584496fa223e` (zamknięcie 005Q-CHAIN). Gałą
 
 | pytanie | odpowiedź z pomiarów |
 | --- | --- |
-| Czy da się lokalnie i offline odróżnić rzuty, elewacje, przekroje, sytuacje, wizualizacje zewnętrzne i wnętrza? | **Rysunki techniczne tak, wizualizacje zewnętrzne nie.** Na EVAL (14 rodzin ARCHON, 231 grup linii) wszystkie routery trafiają rzuty, przekroje, sytuacje i elewacje prawie bez błędu, ale **żaden nie rozpoznaje poprawnie ani jednej z 20 grup wizualizacji zewnętrznych**. Preregistrowany próg (≥ 70 % pokrycia EXTERIOR_RENDER) nie jest spełniony przez żaden wariant. |
-| Który algorytm lokalny jest najlepszy? | Na sumach V1 (deterministyczne cechy CV + reguły z DEV): 90,5 % pokrycia, 1,9 % ryzyka selektywnego. **Ale V1 rozpoznaje format obrazu, nie treść**: po dopełnieniu tych samych pikseli do kwadratu prawie każde rozstrzygnięcie się zmienia (A1), a wszystkie 54 syntetyczne wizualizacje zewnętrzne trafiają do „wnętrz”. V2 (OWL-ViT B/32, lokalnie) jako klasyfikator jest zdegenerowany: osadzenia obrazów mają między sobą kosinus 0,997–1,000 (B1), więc wszystko jest „wnętrzem”. |
-| Czy któryś detektor rozpoznaje tarasy, pergole, balustrady, wiaty, daszki? | **Nie.** Nawet na syntetycznej prawdzie, z idealnym routingiem, V2 przy progu 0,20 znajduje 0/33 pergol, 0/19 wiat, 0/41 daszków wejściowych, 0/36 tarasów zadaszonych, 0/43 tarasów na gruncie, 0/64 schodów, 0/254 słupów, 11/40 balkonów i 2/51 balustrad. Dobrze widzi tylko okna (P 0,96, R 0,95) i drzwi. Na prawdziwych obrazach prawdy cech nie ma (**HUMAN_LABELS_NOT_RUN**): wyniki tylko opisowe. |
-| Co jest główną przyczyną utraty elementów zewnętrznych dziś? | **Pierwsza zła operacja (KNOWN, audyt §8.2 X):** adapter ARCHON zamienia „wizualizacja” na `PERSPECTIVE_RENDER` bez klasy wnętrza (`archon.ts:98`, `schema.ts:45`), a `analyze.ts:164` puszcza te obrazy przez ekstraktory elewacji. **Zmierzone:** na pełnowymiarowych obrazach każdy obraz, który produkcja nazywa `PERSPECTIVE_RENDER` i ma prawdę strukturalną, jest **wnętrzem** (70 z 70); żadna z 78 pełnowymiarowych wizualizacji zewnętrznych nie dostaje tej roli. |
+| Czy da się lokalnie i offline odróżnić rzuty, elewacje, przekroje, sytuacje, wizualizacje zewnętrzne i wnętrza? | **Rysunki techniczne tak, wizualizacje zewnętrzne nie bezpiecznie.** Na EVAL (14 rodzin ARCHON, 231 grup linii) routery trafiają rzuty, przekroje, sytuacje i elewacje prawie bez błędu. Na preregistrowanej prawdzie **żaden nie rozpoznaje poprawnie ani jednej z 20 grup wizualizacji zewnętrznych**. Recenzja B znalazła dwa błędy prawdy. Po ich poprawieniu (Addendum C, post-hoc) V1 trafia 46/46 grup zewnętrznych. Mimo to nie przechodzi progu §8: górna granica ryzyka wynosi 6,15 % przy dopuszczalnych 5 %, a trafienia biorą się z formatu obrazu (patrz niżej). |
+| Który algorytm lokalny jest najlepszy? | Na sumach wygrywa V1 (deterministyczne cechy CV + reguły z DEV): 90,5 % pokrycia przy 1,9 % ryzyka selektywnego. **V1 rozpoznaje jednak częściowo format obrazu, nie treść.** Po dopełnieniu tych samych pikseli do kwadratu zmienia się 58,6 % rozstrzygnięć (tło białe) albo 29,9 % (tło szare). Dotyczy to elewacji i wnętrz; rzuty, przekroje i sytuacje nie zmieniają się nigdy (A1). U V1 dopasowanego na poprawionej prawdzie zmienia się 97,7 % rozstrzygnięć, w tym **wszystkie** 93 trafione wizualizacje zewnętrzne. Wszystkie 54 syntetyczne wizualizacje zewnętrzne trafiają do „wnętrz”. V2 (OWL-ViT B/32, lokalnie) jako router jest bezużyteczny: na DEV wszystko jest „wnętrzem” aż do τ = 0,85, a na 20 obrazach syntetycznych osadzenia obrazów mają między sobą kosinus 0,997–1,000 (B1). |
+| Czy któryś detektor rozpoznaje tarasy, pergole, balustrady, wiaty, daszki? | **Nie.** Nawet na syntetycznej prawdzie, z idealnym routingiem, V2 przy progu 0,20 znajduje 0/33 pergol, 0/19 wiat, 0/41 daszków wejściowych, 0/36 tarasów zadaszonych, 0/43 tarasów na gruncie, 0/64 schodów, 0/254 słupów, 11/40 balkonów i 2/51 balustrad. Dobrze widzi tylko okna (P 0,96, R 0,95) i drzwi, ale **także na wnętrzach**: 12 okien na 12 syntetycznych wnętrzach, a na prawdziwych wnętrzach 253 okna i 153 „drzwi zewnętrzne”. Na prawdziwych obrazach prawdy cech nie ma (**HUMAN_LABELS_NOT_RUN**), więc te wyniki są tylko opisowe. |
+| Co jest główną przyczyną utraty elementów zewnętrznych dziś? | **Pierwsza zła operacja (KNOWN, audyt §8.2 X):** adapter ARCHON zamienia „wizualizacja” na `PERSPECTIVE_RENDER` bez klasy wnętrza (`archon.ts:98`, `schema.ts:45`), a `analyze.ts:164` puszcza te obrazy przez ekstraktory elewacji. **Zmierzone przez kotwice karuzeli (Addendum C3):** produkcja daje `PERSPECTIVE_RENDER` 134 wnętrzom i 39 wizualizacjom zewnętrznym bez rozróżnienia. Do ekstraktorów fasady trafia **każda ze 107 grup wnętrz EVAL**. Wcześniejsze „70 z 70 to wnętrza, 0 z 78 zewnętrznych” było artefaktem dopasowania po bajtach i zostało wycofane. |
 | Czy wiersz „rarytasy-g2e” to dom OWNER-a? | **Nie.** To „Dom w rarytasach **5** (G2E)” `m84f2903cb8e14`. Kotwica OWNER-a `m3ea28300f9b3e` nie ma w repozytorium żadnego przebiegu. Kotwica dzieli 25 bajtowo identycznych obrazów z e-OZE i tylko 10 z „rarytasy-g2e”; 109 ze 136 par edycji Rarytasów dzieli bajty. |
-| Rekomendacja | **`NO_SAFE_VISUAL_CANDIDATE`** (zakres: ARCHON). Bezpieczny kontrakt JSON istnieje i działa, bramki bezpieczeństwa przeszły — ale **przez wstrzymanie się**, nie przez rozpoznanie. Najbardziej obiecujący sygnał routera to **struktura strony wydawcy**, której adapter dziś nie czyta; to zmiana produkcyjna, poza zakresem 005R. |
+| Rekomendacja | **`NO_SAFE_VISUAL_CANDIDATE`** (zakres: ARCHON). Bezpieczny kontrakt JSON istnieje i wytrzymał red team. Bramki bezpieczeństwa przeszły, ale **przez wstrzymanie się**, nie przez rozpoznanie. Najbardziej obiecujący sygnał routera to **struktura strony wydawcy**, której adapter dziś nie czyta. To jednak zmiana produkcyjna, poza zakresem 005R. Ten sam kanał ma błędy wydawcy: w karuzeli wnętrz leży 15 widoków zewnętrznych. |
 
 **Werdykt: `PARTIAL_RESEARCH_BUILDPLAN_ANALYZER_005R_NO_SAFE_VISUAL_CANDIDATE`.** Pytanie o router zmierzone do końca
 (odpowiedź negatywna); pytanie o cechy zewnętrzne na prawdziwych obrazach — `NOT_MEASURED` (brak niezależnej prawdy);
@@ -67,7 +67,7 @@ reguły decyzji, hashe kodu, promptów i wag.
   formatu obrazu) i A2 (prawda propagowana w grupie linii). Nie zmieniają żadnej reguły.
 - **Addendum B** (po V2): B1 (wierność implementacji V2), poprawka błędu w `assemble.py` (wiersze syntetyczne),
   `claims.py` napisany po prerejestracji (metryka była zarejestrowana, kod nie), M10 w mutacjach.
-- {{ADDENDUM_C}}
+- **Addendum C** (po recenzjach, w całości post-hoc). Erratum czasów A i B (A 01:54:14Z, B 02:41:05Z). Wrażliwość prawdy: C1 to 15 widoków zewnętrznych w karuzeli wnętrz, C2 to 150 kopii `widok-N` bez prawdy, C12 łączy obie poprawki. V1 i V0b są przy tym ponownie dopasowane na DEV. C3 to mapowanie V0a przez kotwice karuzeli. Poprawki narzędzi po recenzjach: walidator, assembler, scorery i mutacje. Odstępstwo od kolejności z §9 jest jawne. Na końcu tabela SHA-256 wszystkich plików badawczych zmienionych po `bdd50b8`. Żadna reguła §8 się nie zmienia. Wyniki: `addenda/addendum-c.json`, `addenda/a1-v1-c12.json`.
 
 ## D. Korpus i prawda
 
@@ -100,19 +100,41 @@ reguły decyzji, hashe kodu, promptów i wag.
 
 | wariant | rozstrz. / 231 | pokrycie | ryzyko selekt. (Wilson; bootstrap rodzin) | EXTERIOR_RENDER popr./rozstrz./prawda | INTERIOR | ELEVATION | wnętrze→zewn. |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| V0a | 104 | 45,0 % | 0 % (0–3,6; 0–0) | 0 / 0 / 20 | 0/0/107 | 53/53/53 | 0 |
+| V0a (zgodność metadanych¹) | 104 | 45,0 % | 0 % (0–3,6; 0–0) | 0 / 0 / 20 | 0/0/107 | 53/53/53 | 0 (konsument: **54**; przez kotwice **107**)² |
 | V0b | 158 | 68,4 % | 0 % (0–2,4; 0–0) | 0 / 0 / 20 | 54/54/107 | 53/53/53 | 0 |
 | V1 | 209 | 90,5 % | 1,9 % (0,8–4,8; 0–5,4) | **0 / 2 / 20** | 107/107/107 | 49/49/53 | 0 |
 | V2 | 16 | 6,9 % | 0 % (0–19,4; 0–0) | 0 / 0 / 20 | 16/16/107 | 0/0/53 | 0 |
 | N1 | 152 | 65,8 % | 0 % (0–2,5; 0–0) | 0 / 0 / 20 | 54/54/107 | 49/49/53 | 0 |
 
-- V0a na samej bazie STRUCTURE: 90 rozstrzygnięć z 207, ryzyko 0.
-- **V1 — skrót formatu (A1):** po dopełnieniu do kwadratu (białym) elewacje → SITE_PLAN (136/140 DEV, 50/52 EVAL),
-  wnętrza → SITE_PLAN/FLOOR_PLAN (103/107 EVAL); szarym — elewacje → INTERIOR_RENDER (140 DEV, 52 EVAL). Reguły V1
-  dzielą głównie po `aspect` (`contenders/v1-model.json`). Syntetyczne wizualizacje zewnętrzne (1280×853): 54/54 → wnętrze.
-- **V2 — klasyfikator zdegenerowany (B1):** logity zgodne z biblioteką (|Δ| ≤ 2·10⁻⁶), ale osadzenia obrazów są
-  praktycznie stałe (kosinus 0,997–1,000). Bez progu wszystko jest INTERIOR_RENDER: pewnie błędnych 53,7 % EVAL,
-  72,8 % DEV. Procedura τ z prerejestracji dała τ = 0,95.
+¹ Wiersz V0a liczy też 14 grup SITE_PLAN, których prawda pochodzi z tego samego slugu „sytuacja”, który czyta V0a
+(recenzja B-8). Właściwa dokładność V0a liczy się na samej bazie STRUCTURE: **90 rozstrzygnięć z 207, ryzyko 0**.
+² Router V0a nie rozstrzyga wnętrza jako zewnętrza, ale produkcja przekazuje każde `PERSPECTIVE_RENDER` do
+ekstraktorów fasady. Takich grup wnętrz EVAL jest 54 przy dopasowaniu po bajtach i 107 ze 107 przy dopasowaniu przez
+kotwice karuzeli (A-3, C-2, C3). Na DEV odpowiednio 16 i wszystkie.
+- **V1, skrót formatu (A1).** Na zasobach rozstrzygniętych i z prawdą dopełnienie do kwadratu zmienia **58,6 %**
+  wyjść (tło białe, 380/648) albo **29,9 %** (tło szare, 194/648). Przy tle białym elewacje przechodzą w SITE_PLAN, a
+  wnętrza w SITE_PLAN lub FLOOR_PLAN (186 ze 198). Przy tle szarym elewacje przechodzą w INTERIOR_RENDER (194/194), a
+  wnętrza się nie zmieniają. Rzuty, przekroje i sytuacje (218 zasobów) nie zmieniają się nigdy. Reguły V1 dzielą
+  głównie po `aspect` (`contenders/v1-model.json`). Syntetyczne wizualizacje zewnętrzne (1280×853) trafiają do
+  wnętrz w 54 na 54 przypadki.
+- **V2, router bezużyteczny.** Na prawdziwych obrazach DEV wszystkie rozstrzygnięte grupy są INTERIOR_RENDER aż do
+  τ = 0,85 (ryzyko DEV 72,8 %, EVAL 53,7 %). Procedura τ z prerejestracji dała więc τ = 0,95 i 6,9 % pokrycia. Na
+  20 obrazach **syntetycznych** logity zgadzają się z biblioteką (|Δ| ≤ 2·10⁻⁶), a osadzenia obrazów są praktycznie
+  stałe (kosinus 0,997–1,000; B1, zakres tylko syntetyczny, recenzja B-10). {{A1_V2}}
+- **Wrażliwość prawdy (Addendum C, post-hoc).** Tabela pokazuje V1 na EVAL po ponownym dopasowaniu na DEV:
+
+  | prawda | EXTERIOR_RENDER popr./prawda | ELEVATION popr./prawda | pokrycie | ryzyko | górna granica bootstrap | §8 |
+  | --- | --- | --- | --- | --- | --- | --- |
+  | preregistrowana | 0/20 | 49/53 | 90,5 % | 1,9 % | 5,43 % | nie |
+  | C1 (15 widoków zewn. z karuzeli wnętrz) | 18/20 | 49/53 | 84,0 % | 3,1 % | 8,81 % | nie |
+  | C2 (150 kopii `widok-N`) | 28/46 | 49/53 | 75,1 % | 0 % | 0 % | nie (EXT 60,9 % < 70 %) |
+  | C12 (obie) | **46/46** | 49/53 | 83,7 % | 1,9 % | **6,15 %** | **nie** (ryzyko > 5 %) |
+
+  Na każdej prawdzie N1 i V0b mają 0/20 albo 28/46 grup zewnętrznych, a V2 zawsze 0. Pod C12 V1 nie rozstrzyga
+  żadnego rzutu ani sytuacji. Kontrola A1 na modelu C12 zmienia 97,7 % jego wyjść (białe tło) albo 63,6 % (szare), w
+  tym wszystkie 93 trafione wizualizacje zewnętrzne (`addenda/a1-v1-c12.json`). Poprawka prawdy post-hoc nie zmienia
+  werdyktu preregistrowanego. Pokazuje natomiast, że „0 z 20” nie znaczy „V1 nie widzi zewnętrza”. Znaczy tyle, że
+  V1 widzi je na formatach jednego wydawcy, ale nie dość bezpiecznie i nie z właściwego powodu.
 - **N1 odrzucony przez własny falsyfikator** (§6 prerejestracji): ryzyko nie niższe niż V0b (0 = 0) i pokrycie
   EXTERIOR_RENDER 0 % < 50 %.
 - A2 (prawda propagowana w grupie, wrażliwość): żaden wariant nie ma ani jednego poprawnego EXTERIOR_RENDER na EVAL.
@@ -124,16 +146,26 @@ reguły decyzji, hashe kodu, promptów i wag.
 (P 0,96, R 0,95) i drzwi (P 0,72, R 0,94). Klasy docelowe: PERGOLA 0/33, CARPORT 0/19, CANOPY 0/41, COVERED_TERRACE
 0/36, TERRACE 0/43, STEPS 0/64, COLUMN 0/254, BALCONY 11/40 (1 FP), RAILING 2/51, GARAGE_DOOR 0/26 (7 FP), LOGGIA 0/25
 (7 FP). Look-alike: 0 przy 0,2 (38 przy 0,05). Kadr: 0 halucynacji przy 0,2 (24 przy 0,05). Lustro: Jaccard rodzajów
-0,6–1,0. Pary edycji: zamieniony element nie jest wykrywany w żadnej wersji (f01, f02); f04 — balkon „widziany” na
-edycji bez balkonu. Krzywa progów w `features/feature-scores-synthetic.json`.
+0,6–1,0. Pary edycji: f01 (pergola) daje wynik pusty, bo pergoli V2 nie wykrywa w żadnej wersji. W f02 (wiata ↔ zamknięty
+garaż, poprawka B-7: garaż sprawdzany jako GARAGE_DOOR) brama jest wykryta na edycji bez garażu, a nie na edycji z
+garażem. W f04 balkon jest „widziany” na edycji bez balkonu. **Kontrola wnętrz (poprawka B-3, liczona bez bramki
+routingu):** V2 znajduje na 12 syntetycznych wnętrzach 12 okien przy progu 0,2 i 38 detekcji przy 0,05, a wskazówki
+V1 odpalają tam 31 razy. Krzywa progów jest w `features/feature-scores-synthetic.json`.
 **V1 (wskazówki na elewacjach):** GARAGE_DOOR P 1,0 R 0,5 (7/14); RAILING P 0,14 (36 FP).
+**Kontrole negatywne briefu, których nie zmierzono (B-4):** daszek wejściowy → dach główny, balustrada → ściana i
+belki pergoli → dach zadaszony są mierzone tylko w odwrotnym kierunku (okap → daszek, attyka → balustrada, daszek
+pełny → pergola) albo pustym wynikiem (V2 nie widzi pergol). Przemianowania strony lustrzanej elewacji nie
+testowano, bo żaden wariant nie wnioskuje strony z pikseli (`mirrorAmbiguous: true` zawsze). Pary edycji A→B istnieją
+tylko syntetycznie, a na prawdziwych bliźniaczych edycjach nie.
 
 **Prawdziwe (bez prawdy — opisowo):**
-- Według własnego routingu: V0a/V0b/V2 nie proponują nic; V1 proponuje **5 037 balustrad** na 49 edycjach (żadna nie
-  deklaruje balustrady) — wskazówka okresowości odpala na okładzinach/szprosach; N1 proponuje 978 (okna 717, drzwi 159,
-  brama 36, schody 36, pergola 6…) wyłącznie na elewacjach.
-- Z routingiem z prawdy strukturalnej (wyrocznia) V2 na wnętrzach daje 153 „drzwi zewnętrzne”, 28 balustrad, 26
-  schodów, 8 tarasów, 4 wiaty — bez routera detektor produkowałby twierdzenia wnętrze→zewnątrz.
+- Według własnego routingu V0a, V0b i V2 nie proponują nic. V1 proponuje **5 038 obserwacji**, prawie same
+  balustrady, na 49 edycjach, z których żadna nie deklaruje balustrady. Wskazówka okresowości odpala na okładzinach
+  i szprosach. Pozostałe **16 221** wskazówek V1 na zasobach, których V1 nie kieruje do elewacji, jest teraz zapisane
+  jako REJECTED (recenzja A-4); wcześniej po cichu je pomijano. N1 proponuje 978 obserwacji (okna 717, drzwi 159,
+  brama 36, schody 36, pergola 6…), wyłącznie na elewacjach.
+- Przy routingu z prawdy strukturalnej (wyrocznia) V2 daje na wnętrzach 253 okna, 153 „drzwi zewnętrzne”,
+  28 balustrad, 26 schodów, 8 tarasów i 4 wiaty. Bez routera detektor produkowałby twierdzenia wnętrze→zewnątrz.
 - Roszczenia wydawcy na poziomie edycji (kategorie + opis): pergola 28 edycji, taras 47, garaż 29, daszek 14, taras
   zadaszony 10, balkon 7. N1 „potwierdza” pergolę na 4/28 i bramę na 16/29; tarasu nie proponuje nikt. To spójność,
   nie dokładność.
@@ -143,37 +175,91 @@ edycji bez balkonu. Krzywa progów w `features/feature-scores-synthetic.json`.
 64 zasoby publikowane bajtowo przez ≥ 2 edycje (wszystkie to wnętrza lub obrazy bez prawdy), maksimum 14 edycji
 na jeden obraz, 66 grup linii przekracza edycję; 0 zasobów między rodzinami. Kotwica `m3ea…` vs „rarytasy-g2e”
 (G2E-5): 10 wspólnych bajtów / 5 grup; vs e-OZE: 25 / 12. Żadna wizualizacja zewnętrzna ani elewacja nie jest
-wspólna między edycjami. Kontrakt JSON wymusza tożsamość (EDITION_MIX, CORRELATION — zabite mutacjami).
+**bajtowo** wspólna między edycjami. **13 grup linii** (bliskie duplikaty) z prawdą zewnętrzną lub elewacją przekracza
+jednak edycję (recenzja B-6). Jedna z nich obejmuje cztery edycje, w tym kotwicę. Bliski duplikat nie dowodzi więc ani
+różnicy, ani zgodności edycji. Kontrakt JSON wymusza tożsamość (EDITION_MIX, CORRELATION i DANGLING_SUPPORT, każda
+zabita mutacją). Sześć grup linii przekracza też podział DEV/EVAL, bo dHash łączy łańcuchowo rysunki różnych rodzin
+(B-5). Żadna nie należy do klasy bramkującej.
 
 ## I. Kontrakt JSON i bramki twarde
 
 `research/analyzer-005r/schema/` — `research.visual-observations.0.1` i `research.visual-edition-summary.0.1`
-(walidator stdlib, przykłady syntetyczne, 16 testów). Powiązania z istniejącymi typami (bez ich zastępowania): audyt §6
-i §9. 6 100 dokumentów i 98 podsumowań edycji: **0 naruszeń** u każdego wariantu — 0 twierdzeń autorytatywnych,
-0 mieszania edycji, 0 twierdzeń wnętrze→zewnątrz (walidator i prawda), 0 sfabrykowanych ramek, 0 przecieków.
+(walidator stdlib, przykłady syntetyczne, **18 testów**). Powiązania z istniejącymi typami, bez ich zastępowania,
+opisuje audyt §6 i §9. **Red team (recenzja A-2):** recenzent napisał 25 dokumentów, które pierwsza wersja walidatora
+przyjmowała. Szukały luk w listach, wielkości liter, synonimach kluczy, nieznanych kluczach i obejściach edycji
+i linii. Walidator ma teraz zamknięte zbiory kluczy na każdym poziomie i sprawdza wartości w listach oraz zakres
+pewności. Twierdzenie o zewnętrzu przyjmuje wyłącznie na zasobie skierowanym do dowodu zewnętrznego. Rozmiar i grupę
+linii bierze z manifestu jako wiążące. 24 z tych dokumentów są testami jednostkowymi. Dwudziesty piąty (wiersz wsparcia
+wskazujący nieistniejącą obserwację) sprawdza assembler (DANGLING_SUPPORT, mutacja M13). Wynik ponownej walidacji:
+6 100 dokumentów (V1: 21 259 obserwacji, w tym 16 221 REJECTED) i 98 podsumowań edycji, **0 naruszeń** u każdego
+wariantu. To 0 twierdzeń autorytatywnych, 0 mieszania edycji, 0 twierdzeń wnętrze→zewnątrz (walidator i prawda),
+0 sfabrykowanych ramek i 0 przecieków.
 **Bramki przeszły przez wstrzymanie, nie przez rozpoznanie.**
 
-## J. Mutacje — 12/12 zabitych
+## J. Mutacje — 13/13 zabitych
 
 M1 zamiana prawdy/wyjścia w scorerze, M2 wyciek EVAL do dopasowania, M3 zamiana źródła, M4 zamiana edycji,
 M5 sfabrykowana ramka, M6 nazwa projektu w uzasadnieniu, M7 promocja pewności, M8 wymiar metryczny z renderu,
 M9 wnętrza routowane jako zewnętrze (licznik prawdy > 0), M10 skorelowani świadkowie liczeni dwa razy, M11 podpis
-w manifeście (test izolacji pada), M12 nazwa projektu w promptach (test izolacji pada). `mutations/mutations.json`.
+w manifeście (test izolacji pada), M12 nazwa projektu w promptach (test izolacji pada), M13 wsparcie wskazujące
+nieistniejącą obserwację (DANGLING_SUPPORT). M11 i M12 liczą się tylko wtedy, gdy przebieg bez mutacji uruchamia
+dokładnie jeden test i ten test przechodzi (recenzja C-10). `mutations/mutations.json`.
 
 ## K. Determinizm, koszt, licencje
 
 - V0: role i warianty identyczne w 51/51 pakietach (online, offline r1, offline r2); r1 = r2 bajtowo w skrócie treści;
   online różni się tylko kodem porażki sond hi-res (HTTP 404 vs brak w cache).
-- V1: cechy identyczne bit w bit — Node 22 ×2 i **Node 18.20.4**.
-- V2: {{V2_DETERMINISM}}
+- V1: **treść cech** (szerokość, wysokość, cechy) jest identyczna na 1 537/1 537 obrazach w przebiegach Node 22 ×2
+  i **Node 18.20.4**. Same pliki różnią się polem czasu `ms` (recenzja C-7). Model i predykcje są identyczne bajtowo
+  niezależnie od tego, z którego przebiegu pochodzą.
+- V2: dwa pełne przebiegi (3 wątki, te same wagi, prompty i torch 2.11.0+cpu) dają **1 537/1 537 identycznych
+  wierszy**: prawdopodobieństwa routingu oraz każdą ramkę i jej wynik, bez pól czasu. Skrót treści obu przebiegów to
+  `6c61e141…`. Czas ścienny 3 087 s i 3 540 s, szczytowy RSS 1 009 MB (`determinism/v2-determinism.json`).
 - Koszt: {{BENCH}}
-- Licencje (`research/analyzer-005r/licensing.md`): V1 — zależności już produkcyjne (BSD-3/MIT). V2 — wagi Apache-2.0,
-  ale dane treningowe częściowo nieujawnione i częściowo niekomercyjne → **LICENSE_BLOCKED** dla produktu. V3 nie
-  pobrany.
+- Licencje (`research/analyzer-005r/licensing.md`): V1 korzysta wyłącznie z zależności już produkcyjnych (BSD-3/MIT).
+  V2 jest **LICENSE_BLOCKED** dla produktu. Wagi są na Apache-2.0, ale karta modelu sama mówi „intended as a research
+  output for research communities … primary intended users … AI researchers”. Do tego crawl jest nieujawniony, a
+  licencje zbiorów karta pomija; to, że część z nich jest niekomercyjna, wiadomo spoza karty (C-9). Rewizja pochodzi
+  z URL-a `resolve/cbc355fb…`. V3 nie został pobrany.
 
 ## L. Recenzje (A/B/C, każde P0/P1 sprawdzane przez dwóch sceptyków)
 
-{{REVIEWS}}
+Trzech niezależnych recenzentów: A (schemat, źródła, tożsamość wydawcy, prywatność, izolacja), B (semantyka
+negatywna na prawdziwych obrazach, przecieki, prawda) i C (środowisko, licencje, odtwarzalność). Każde P0/P1
+odtwarzało dwóch weryfikatorów-adwersarzy, każdy we własnym katalogu. **P0: brak.** Surowe wyniki leżą w
+`/home/user/work005r/reviews.json` (poza Git, bo cytują podpisy).
+
+| id | waga po weryfikacji | ustalenie | dyspozycja |
+| --- | --- | --- | --- |
+| A-1 / C-1 | P1 → P2 (nie odtwarza się na HEAD) | blok izolacji 005R czerwony przez `a1-v1.jsonl` | naprawione w `fa090be` (plik `.json`) |
+| A-2 | **P1** (2×) | walidator przepuszcza 25 dokumentów-obejść | **naprawione**: zamknięte klucze, listy, wielkość liter, ROUTING, manifest wiążący; 24 obejścia jako testy, 25. w assemblerze (M13) |
+| A-3 / B-8 | P1 → P2 (2×) | brak licznika „konsument PERSPECTIVE_RENDER” dla V0a; V0a na wierszach SLUG w tabeli | naprawione: pole w `role-scores.json` (54 EVAL/16 DEV; 107 przez kotwice), przypis w §F |
+| A-4 | P1 → P2 (2×) | assembler gubi 16 221 wskazówek V1 | naprawione: zapisywane jako REJECTED |
+| **B-1** | **P1** (2×) | prawda STRUCTURE: 15 widoków zewnętrznych w karuzeli wnętrz | prawda preregistrowana **bez zmian**; wrażliwość C1x/C1r w Addendum C, wynik w §F |
+| **B-2** | **P1** (2×) | 150 kopii `widok-N` bez prawdy, które routery kierują do wnętrz | wrażliwość C2 i C12 w Addendum C, wynik w §F |
+| **B-3** | **P1** (2×) | kontrola wnętrz w syntetyce nie mogła odpalić | naprawione: liczona bez bramki (V2: 12 okien na 12 wnętrzach; V1: 31) |
+| **C-2** | **P1** (1× potw., 1× P2) | V0a dopasowany tylko po bajtach; miniatury vs oryginały | C3 przez kotwice karuzeli; **wycofane** „0 z 78” i „70 z 70”; ujawnione ~1 100 pobrań produkcji przy zasiewaniu |
+| C-3 | P1 → P2 (1×) / P1 (1×) | „prawie każde rozstrzygnięcie się zmienia” — przesadzone | przeformułowane: 58,6 % / 29,9 %, per klasa |
+| A-5 | P2 | konflikty prawdy w grupach bliskich duplikatów nieoznaczane | ujawnione (§N) |
+| A-6 / B-5 | P2 | 6 grup linii przekracza DEV/EVAL | ujawnione (§H, Addendum C) |
+| A-7 | P2 | robots „fail open”, przekierowania przed allowlistą | naprawione w `acquire.py`; w przebiegu 005R 0 przekierowań między hostami |
+| A-8 | P2 | resztki ankiety DobreDomy w katalogu roboczym | usunięte (8 rekordów → editionKey + powód) |
+| A-9 / A-11 | P2 | szablonowe pola tożsamości; świadkowie rysunek+render liczeni jako dwaj | ujawnione (§N) |
+| A-10 | P2 | testy izolacji pilnują mniej, niż mówią tytuły | wzmocnione: zamknięte klucze manifestu, skan kluczy tekstowych we wszystkich JSON 005R, `run.mjs` i A1 w skanie „tylko bajty”; sprawdzone podłożeniem błędu |
+| B-4 | P2 | kontrole negatywne briefu częściowo niezmierzone | ujawnione (§G) |
+| B-6 | P2 | przesadzone „flips almost every”, „nic zewnętrznego nie jest wspólne” | przeformułowane (13 grup linii między edycjami) |
+| B-7 | P2 | para f02 sprawdzała nieistniejący rodzaj | naprawione (GARAGE_DOOR) |
+| B-9 / C-4 | P2 | błędne czasy Addendów A/B | erratum w Addendum C |
+| B-10 | P2 | B1 tylko na syntetyce, cytowane ogólnie | zakres dopisany; dowód z prawdziwych obrazów to krzywa τ na DEV |
+| C-5 | P2 | kod po prerejestracji bez skrótów | tabela SHA-256 w Addendum C |
+| C-6 | P2 | kolejność §9 niezachowana | ujawnione z czasami plików; bench na 3 wątkach jak przebiegi |
+| C-7 | P2 | „bit w bit” dla V1 przesadzone | przeformułowane (§K) |
+| C-8 | P2 | A1 dla V2 obiecane, nieuruchomione | uruchomione (§F) |
+| C-9 | P2 | uzasadnienie licencji wykracza poza kartę | `licensing.md` poprawione |
+| C-10 | P2 | M11/M12 bez przebiegu bazowego | naprawione |
+
+Werdykt `NO_SAFE_VISUAL_CANDIDATE` przetrwał recenzje, ale **z innego powodu niż w szkicu**. Nie wynika już z
+„0 z 20” na wizualizacjach zewnętrznych. Wynika z granicy ryzyka po poprawce prawdy i ze skrótu formatu.
 
 ## M. Testy, zamrożenie, CI
 
@@ -182,11 +268,16 @@ w manifeście (test izolacji pada), M12 nazwa projektu w promptach (test izolacj
 ## N. Rekomendacja i ograniczenia
 
 **NEXT_RECOMMENDATION: `NO_SAFE_VISUAL_CANDIDATE`** — `stage-reports/artifacts/analyzer-005r/recommendation.md`.
-Z reguły §8: żaden router nie osiąga ≥ 70 % pokrycia EXTERIOR_RENDER na EVAL; `NOT_MEASURED` nie zachodzi
-(14 rodzin EVAL ≥ 8); `PROPOSE_005S_VISUAL_HANDOFF` nieosiągalne bez niezależnej prawdy cech.
+Wynika z reguły §8. Na preregistrowanej prawdzie żaden router nie osiąga ≥ 70 % pokrycia EXTERIOR_RENDER na EVAL.
+Na poprawionej prawdzie (post-hoc) V1 osiąga pokrycie, ale przekracza granicę ryzyka (6,15 % > 5 %) i ma skrót
+formatu. `NOT_MEASURED` nie zachodzi, bo rodzin EVAL jest 14 ≥ 8. `PROPOSE_005S_VISUAL_HANDOFF` jest nieosiągalne bez
+niezależnej prawdy cech.
 
-Ograniczenia: jeden wydawca (ARCHON); prawda ról z metadanych strukturalnych, nie od człowieka; brak prawdy cech
-na prawdziwych obrazach; rodzina Rarytasy cała w DEV; syntetyczne rozmiary obrazów naśladują ARCHON (skrót formatu
+Ograniczenia: jeden wydawca (ARCHON). Prawda ról pochodzi z metadanych strukturalnych, nie od człowieka, i ma
+błędy wydawcy (B-1, B-2). Konflikty prawdy wewnątrz grup bliskich duplikatów (A-5) nie są oznaczane, a pola
+tożsamości w złożonych dokumentach (op linii, canonicalUrl przedruku) są szablonowe (A-9). Świadkowie z rysunku
+technicznego i z renderu liczą się jako dwaj (A-11): to ukryte ryzyko, które dziś niczego nie zmienia, bo V1
+proponuje tylko z rysunków, a N1 tylko z elewacji. Brak prawdy cech na prawdziwych obrazach; rodzina Rarytasy cała w DEV; syntetyczne rozmiary obrazów naśladują ARCHON (skrót formatu
 niewidoczny na syntetyce — stąd A1); V2 tylko w Pythonie na x86 (`NOT_RUN_NODE18`), telefon ARM64 `PENDING`;
 fotografie (EXTERIOR/INTERIOR_PHOTO) i DETAIL na prawdziwych danych — `NOT_SAMPLED`.
 

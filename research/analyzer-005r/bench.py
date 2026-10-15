@@ -56,7 +56,7 @@ def main(run, out, n=60):
                                  'perClassMs_p50': {k: pct(v, 0.5) for k, v in sorted(byc.items())}, 'stdout': r.stdout.strip()}
         vp = os.path.join(d, 'v2.jsonl')
         t0 = time.time()
-        subprocess.run([VENV_PY, '-I', os.path.join(HERE, 'v2', 'run_owlvit.py'), sp, vp, '--threads', '4'], capture_output=True, text=True, check=True,
+        subprocess.run([VENV_PY, '-I', os.path.join(HERE, 'v2', 'run_owlvit.py'), sp, vp, '--threads', '3'], capture_output=True, text=True, check=True,
                        env={**os.environ, 'HF_HUB_OFFLINE': '1', 'TRANSFORMERS_OFFLINE': '1'})
         wall = time.time() - t0
         lines = [json.loads(l) for l in open(vp)]
@@ -70,7 +70,7 @@ def main(run, out, n=60):
         res['V2_python_cpu'] = {'wallSeconds': round(wall, 2), 'coldLoadSeconds': meta.get('loadSeconds'), 'peakRssMB': meta.get('peakRssMB'),
                                 'firstImageSeconds': round(rows[0]['timing']['route_s'] + rows[0]['timing']['detect_s'], 3) if rows else None,
                                 'routeSeconds_p50': pct(route, 0.5), 'routeSeconds_p95': pct(route, 0.95), 'detectSeconds_p50': pct(det, 0.5), 'detectSeconds_p95': pct(det, 0.95),
-                                'perClassSeconds_p50': {k: pct(v, 0.5) for k, v in sorted(byc.items())}, 'threads': 4,
+                                'perClassSeconds_p50': {k: pct(v, 0.5) for k, v in sorted(byc.items())}, 'threads': 3,
                                 'weightsBytes': 612983940, 'node18': 'NOT_RUN_NODE18 (PyTorch; no Node/ONNX port was built)'}
     res['V1_assetBytes'] = sum(os.path.getsize(os.path.join(HERE, 'v1', f)) for f in ('features.mjs', 'tree.mjs', 'cues.mjs', 'run.mjs'))
     json.dump(res, open(out, 'w'), indent=1, sort_keys=True)

@@ -797,12 +797,47 @@ describe('005R production cannot reach the visual-asset study, which commits no 
     }
     expect(manifest.excludedEditions.every((e) => e.status === 'SOURCE_NOT_USABLE')).toBe(true)
     expect(read('research/analyzer-005r/acquire.py')).toMatch(/'www\.dobredomy\.pl': 'Regulamin §7\.2/)
+    // closed key sets at every level of the manifest (reviewer A-10: a caption at asset or edition level must fail too)
+    const full = JSON.parse(read('stage-reports/artifacts/analyzer-005r/corpus/corpus-manifest.json')) as Record<string, unknown> & {
+      assets: Array<Record<string, unknown>>
+      editions: Record<string, Record<string, unknown>>
+    }
+    expect(Object.keys(full).sort()).toEqual(['assets', 'dhashMax', 'editions', 'excludedEditions', 'failures', 'minSideScored', 'note', 'schema', 'splitSalt'])
+    for (const a of full.assets)
+      expect(Object.keys(a).sort()).toEqual(['ahash', 'assetId', 'bytes', 'dhash', 'editions', 'families', 'family', 'format', 'height', 'lineageGroup', 'memberships', 'scoredSize', 'split', 'variantSha256', 'width'])
+    for (const e of Object.values(full.editions))
+      expect(Object.keys(e).sort()).toEqual(['canonicalUrls', 'editionKey', 'family', 'hosts', 'pageSha256', 'pageStatus', 'split', 'variantSha256'])
+    // and no committed 005R JSON anywhere carries a caption, title or page-text field
+    const textKeys: string[] = []
+    const walk = (f: string, x: unknown): void => {
+      if (Array.isArray(x)) for (const v of x) walk(f, v)
+      else if (x && typeof x === 'object')
+        for (const [k, v] of Object.entries(x)) {
+          if (/^(captions?|titles?|pageText|rawText|alt|altText|heading|description|html|figcaption)$/i.test(k)) textKeys.push(`${f}: ${k}`)
+          walk(f, v)
+        }
+    }
+    for (const f of stageFiles().filter((f) => f.endsWith('.json'))) walk(f, JSON.parse(read(f)))
+    expect(textKeys).toEqual([])
   })
 
   it('the pixel routers and the detector read image bytes only — never a caption, channel, truth or manifest — and the prompts name no project', () => {
-    for (const f of ['research/analyzer-005r/v1/features.mjs', 'research/analyzer-005r/v1/tree.mjs', 'research/analyzer-005r/v1/cues.mjs', 'research/analyzer-005r/v2/run_owlvit.py']) {
-      const code = f.endsWith('.py') ? read(f).replace(/"""[\s\S]*?"""/g, ' ').replace(/#.*$/gm, ' ') : codeOf(read(f))
-      expect(code, f).not.toMatch(/caption|channel|survey|truth|manifest|editionKey|fancybox|roleTruth/i)
+    const forbidden = /caption|channel|survey|truth|manifest|editionKey|fancybox|roleTruth/i
+    const pyCode = (f: string): string => read(f).replace(/"""[\s\S]*?"""/g, ' ').replace(/#.*$/gm, ' ')
+    for (const f of ['research/analyzer-005r/v1/features.mjs', 'research/analyzer-005r/v1/tree.mjs', 'research/analyzer-005r/v1/cues.mjs', 'research/analyzer-005r/v2/run_owlvit.py',
+      'research/analyzer-005r/addenda/a1_aspect_v1.mjs', 'research/analyzer-005r/addenda/a1_aspect_v2.py']) {
+      expect(f.endsWith('.py') ? pyCode(f) : codeOf(read(f)), f).not.toMatch(forbidden)
+    }
+    // run.mjs: the feature, predict and cue paths read bytes and a model only; the two fit commands legitimately read
+    // DEV truth and are exempt (reviewer A-10)
+    const runMjs = codeOf(read('research/analyzer-005r/v1/run.mjs'))
+    const pixelPaths = [
+      /if \(cmd === 'features'\)[\s\S]*?(?=\} else if \(cmd === 'fit-v1'\))/.exec(runMjs)?.[0] ?? '',
+      /\} else if \(cmd === 'predict'\)[\s\S]*$/.exec(runMjs)?.[0] ?? '',
+    ]
+    for (const part of pixelPaths) {
+      expect(part.length).toBeGreaterThan(200)
+      expect(part).not.toMatch(forbidden)
     }
     const manifest = JSON.parse(read('stage-reports/artifacts/analyzer-005r/corpus/corpus-manifest.json')) as { editions: Record<string, { family: string; canonicalUrls: string[] }> }
     const names = new Set<string>()

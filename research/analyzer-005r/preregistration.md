@@ -284,6 +284,22 @@ hosts are not re-verified here. No such bytes enter Git.
 **Other disclosures.** Six lineage groups cross the DEV/EVAL split (reviewer B-5; dHash connected components chain
 different families' drawings; none is in a gating class). V0b's stump on scene features is the constant
 "IF TRUE THEN INTERIOR" on DEV (reviewer C-2), so V0b equals "V0a, and INTERIOR_RENDER for everything V0a leaves
-UNKNOWN"; it is reported as such. The order of work after the preregistration was: V0a twice offline → V1 features
-(Node 22 twice, Node 18 once) → V1/V0b fit → scores → Addendum A → V2 run 1 → scores → Addendum B → reviews →
-Addendum C → V2 run 2 (determinism) → A1 for V2.
+UNKNOWN"; it is reported as such.
+
+**Order deviation (reviewer C-6).** §9 asked for the V0a offline replays before V1/V2. The actual order (file times):
+preregistration commit 01:36:09 → V2 run 1 started ≈ 01:36:37 (ended 02:28:04) → V1 features r1 written 01:42:11 →
+V0 offline r1 finished 01:46:55, r2 01:49:04 → V1/V0b fit and scores → Addendum A (01:54:14) → V2 scored → Addendum B
+(02:41:05) → reviews → Addendum C → V2 run 2 (determinism) → A1 for V2. Harmless for the results: V0 never reads V1 or
+V2 output, and no V2 output was read before Addendum A.
+
+**Wording corrections.** (C-7) V1's three feature files are not byte-identical: they differ in the per-image timing
+field `ms`. The feature payloads (width, height, features) are identical on 1 537/1 537 images across Node 22 ×2 and
+Node 18.20.4, and the fitted model and predictions are byte-identical from any of the three. (C-8) A1 for V2 — routing
+with WHITE padding — was not run before the reviews; it runs after V2 run 2 and is reported in the stage report. A grey
+letterbox is V2's own preprocessing, so the grey variant is the identity for V2.
+
+**Research files created or changed after `bdd50b8` (reviewer C-5).** None feeds a §8 decision input except through
+the scorers named in §5; all are diagnostics, sensitivity runs, tooling fixes or tests. SHA-256 at the commit that
+carries this addendum:
+
+{{POSTPREG_TABLE}}

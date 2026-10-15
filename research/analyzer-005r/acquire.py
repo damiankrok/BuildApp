@@ -14,7 +14,11 @@ Politeness and lawfulness:
   * robots.txt of every host is honoured (urllib.robotparser); DobreDomy disallows URLs with a query string, so only
     the clean originals (/dd_files/Image/projekty/<code>/<file>) are fetched there.
   * one request per REQUEST_GAP_S seconds, one connection, a descriptive User-Agent, a byte cap per response.
-  * only hosts in HOST_ALLOW are contacted; nothing is uploaded anywhere.
+  * only hosts in HOST_ALLOW are contacted, and a redirect hop is checked before it is followed; nothing is uploaded.
+  * robots.txt unreachable (5xx, network error) means full disallow; a 4xx means no robots file; Crawl-delay is honoured
+    (reviewer A-7). The 005R acquisition ran before this fix: none of its 1 871 responses was redirected to another
+    host; robots outcomes were not logged, and a re-check gives 200 with rules for www/assets.archon.pl and 404 for
+    cdn1.archon.pl, which both versions treat as "no restriction", so the fix would not have changed what was fetched.
 
 Structural label channels (recorded per candidate; the scorer decides what counts as truth, see preregistration.md):
   ARCHON  carousel `data-fancybox-position` (fancybox3Interiors / Floor / CrossSection / Elevations / ...), the page's
@@ -47,28 +51,52 @@ _last = [0.0]
 _robots = {}
 
 
+class _NoOffAllowlistRedirect(urllib.request.HTTPRedirectHandler):
+    """Reviewer A-7: a redirect hop is checked BEFORE it is followed — off the allowlist or onto a publisher whose terms
+    exclude this processing, the request stops and nothing is fetched from the target."""
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        host = urllib.parse.urlsplit(newurl).hostname
+        if urllib.parse.urlsplit(newurl).scheme != 'https' or host not in HOST_ALLOW or host in SOURCE_NOT_USABLE:
+            raise urllib.error.HTTPError(newurl, code, 'REDIRECT_OFF_ALLOWLIST', headers, fp)
+        return super().redirect_request(req, fp, code, msg, headers, newurl)
+
+
+_opener = urllib.request.build_opener(_NoOffAllowlistRedirect)
+
+
 def allowed(url):
     p = urllib.parse.urlsplit(url)
-    if p.scheme != 'https' or p.hostname not in HOST_ALLOW:
+    if p.scheme != 'https' or p.hostname not in HOST_ALLOW or p.hostname in SOURCE_NOT_USABLE:
         return False
     rp = _robots.get(p.hostname)
     if rp is None:
         rp = urllib.robotparser.RobotFileParser()
-        try:
-            raw = _get(f'https://{p.hostname}/robots.txt', check=False)[0]
-            text = raw.decode('utf-8', 'replace') if raw else ''
-            # cdn1.archon.pl answers "Not found" (no robots file): no restriction
+        raw, kind, _ = _get(f'https://{p.hostname}/robots.txt', check=False)
+        if raw is not None:
+            # a 2xx body without any group (cdn1.archon.pl answers a plain "Not found" page) carries no rule
+            text = raw.decode('utf-8', 'replace')
             rp.parse(text.splitlines() if 'user-agent' in text.lower() else [])
-        except Exception:
-            rp.parse([])
+        elif kind.startswith('HTTP_4'):
+            rp.parse([])                             # RFC 9309: robots file unavailable (4xx) → no restriction
+        else:
+            rp.disallow_all = True                   # RFC 9309: unreachable (5xx, network error) → full disallow
         _robots[p.hostname] = rp
     return rp.can_fetch(UA, url) and rp.can_fetch('*', url)
+
+
+def _crawl_delay(host):
+    rp = _robots.get(host)
+    d = None
+    if rp is not None and not getattr(rp, 'disallow_all', False):
+        d = rp.crawl_delay(UA) or rp.crawl_delay('*')
+    return max(REQUEST_GAP_S, float(d or 0))
 
 
 def _get(url, check=True, xhr=False):
     if check and not allowed(url):
         return None, 'ROBOTS_OR_HOST_DISALLOWED', None
-    wait = REQUEST_GAP_S - (time.time() - _last[0])
+    wait = _crawl_delay(urllib.parse.urlsplit(url).hostname) - (time.time() - _last[0])
     if wait > 0:
         time.sleep(wait)
     _last[0] = time.time()
@@ -77,7 +105,7 @@ def _get(url, check=True, xhr=False):
         headers['X-Requested-With'] = 'XMLHttpRequest'
     req = urllib.request.Request(url, headers=headers)
     try:
-        with urllib.request.urlopen(req, timeout=40) as r:
+        with _opener.open(req, timeout=40) as r:
             final = r.geturl()
             if urllib.parse.urlsplit(final).hostname not in HOST_ALLOW:
                 return None, 'REDIRECT_OFF_ALLOWLIST', final
@@ -86,7 +114,7 @@ def _get(url, check=True, xhr=False):
                 return None, 'TOO_LARGE', final
             return data, r.headers.get('Content-Type', ''), final
     except urllib.error.HTTPError as e:
-        return None, f'HTTP_{e.code}', url
+        return None, ('REDIRECT_OFF_ALLOWLIST' if e.msg == 'REDIRECT_OFF_ALLOWLIST' else f'HTTP_{e.code}'), url
     except Exception as e:  # network failure is recorded, never hidden
         return None, f'ERROR_{type(e).__name__}', url
 

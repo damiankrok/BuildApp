@@ -6,14 +6,25 @@
   ]
  },
  "M11_caption_in_manifest": {
+  "baselineExit": 0,
+  "baselineOnePassed": true,
   "caught": true,
   "isolationTestExit": 1,
+  "oneFailed": true,
   "restored": true
  },
  "M12_name_in_prompts": {
+  "baselineExit": 0,
+  "baselineOnePassed": true,
   "caught": true,
   "isolationTestExit": 1,
+  "oneFailed": true,
   "restored": true
+ },
+ "M13_dangling_support": {
+  "caught": true,
+  "cleanViolations": 0,
+  "violations": 1
  },
  "M1_scorer_swap": {
   "caught": true,
@@ -89,7 +100,7 @@
   "interiorToExteriorClaims_truth": 485
  },
  "_summary": {
-  "caught": 12,
-  "mutations": 12
+  "caught": 13,
+  "mutations": 13
  }
 }
