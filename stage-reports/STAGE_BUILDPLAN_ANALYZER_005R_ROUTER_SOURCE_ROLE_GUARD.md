@@ -168,3 +168,30 @@ Recenzje: dwie przed implementacją (`reviews/pre-skeptic.md`, `reviews/pre-code
 zakotwiczona w zasobie perspektywicznym) i P5′/P7′ (bez pól zegarowych), ustalonymi **przed** nowym przebiegiem; ten sam
 zestaw 37 wierszy DEV jako regresja plus świeża ślepa runda 13 (nieużyte rodziny ARCHON, predykaty bitowe i pokrycie),
 Node 18, ewentualnie bramka wizji po projekcji jako osobna decyzja. Łatka i testy są w `research/analyzer-005r-router/n1-staged/`.
+
+## Handoff
+
+```
+STAGE: BUILDPLAN-ANALYZER-005R-ROUTER
+VERDICT: NO_SAFE_ADOPTION
+BRANCH: analyzer/visual-source-role-guard-v1 (+ fast-forward mirror claude/new-session-3kzcgh, required for GitHub Actions; no force-push)
+BASE: 8d414567e16e9a790bcf56cbebc10d778c6eb268
+HEAD: the commit carrying this block (its parent f3e36062228e944936f308d9ed48c79d6e0e9779 is the last content commit; this block is report-only)
+CI: https://github.com/damiankrok/BuildApp/actions/runs/38754629214 — attempt 1, success, 39 success / 2 skipped (41 jobs) on f3e3606; the final report-only commit is re-verified in the closing message
+FULL_REPORT: stage-reports/STAGE_BUILDPLAN_ANALYZER_005R_ROUTER_SOURCE_ROLE_GUARD.md
+FIRST_BAD: archon.ts:98 role "wizualizacja" → PERSPECTIVE_RENDER (correct, scene-less; carousel position never read) → analyze.ts:164-166 routes it into the five ORTHOGRAPHIC facade extractors although every consumer reads orthographic frames only → first unsafe (deterministic) evidence assertion: facade observations (RIDGE, OPENING, LOGGIA …) on perspective frames; then reconstruct-v2.ts:1177 claims a depth-order check no code performs. Vision routing (analyze.ts:179 → tasks.ts:38) has the same defect when a remote provider is switched on.
+PRODUCTION_CHANGE: NONE
+INDEPENDENT_TRUTH: HUMAN NOT_RUN (local 300-item spot-review request prepared, optional, blind reviewer copy); PUBLISHER_STRUCTURE only (005R corpus: 50 ARCHON editions, 1 352 assets; OWNER m3ea… and G2E-5 m84f… DEV only); N1 claims are bit-level comparisons on 37 ARCHON DEV rows (DobreDomy refused)
+COMPARE: R0 incumbent (deterministic, 14 typed refusals / 23 models); R1 research-only typed witnesses: 198 INTERIOR_HINT / 39 EXTERIOR_HINT / 15 CONTESTED (= C1) / 1 100 UNKNOWN, 0 two-class witnesses by definition; R2 gates 0 frames (≡ R0); R2w one-witness diagnostic: gates 0–12 of 18–28 frames per row, models identical, never adoptable; R3 NOT_RUN (no new content signal, V1/V2 barred); N1 projection gate: 23 models + 14 refusals identical, orthographic evidence identical, metric content identical on 23 rows, ledger 18/18 only perspective evidence (2 286 false USED_AS_CORROBORATION gone, 67 cameras identical), deterministic under shuffle, 6/6 mutants killed — but P4, P5, P7 FAIL as preregistered → NO_SAFE_ADOPTION
+INTERIOR_TO_EXTERIOR: before NOT_MEASURED on independent truth (PUBLISHER_STRUCTURE: 68 of 403 perspective assets on DEV filed as interiors; 005R: 107 EVAL interior groups); after: production unchanged; N1 counterfactual 0 facade observations on any perspective frame (deterministic channel only)
+EXTERIOR_PRESERVATION: production unchanged; N1: 0 elevation frames changed, 0 of 198 structural elevations filed as PERSPECTIVE_RENDER (P9), 0 models changed (Marcówki balcony, Jarząb porch, G2E-5, e-OZE, Głogowniki, Dalie included); exterior renders lose the same never-consumed observations as interiors
+MODEL_DIFF: NONE in production; N1 counterfactual 0 / 37 rows
+PRIVACY_LICENSE: ARCHON USABLE_FOR_LOCAL_RESEARCH only (no sublicence); DobreDomy/Archipelag/Domy w Stylu SOURCE_NOT_USABLE, earlier DobreDomy use OWNER_DECISION_PENDING; no pixel to any remote model, no image opened by Claude, no pixel/caption committed; Git history: 005R publisher phrases remain in history (c1ab121, 20fffbd, 4980b95, dade188) and 35 sealed source-package.json at HEAD carry publisher text — OWNER decision, nothing rewritten
+FREEZE: start 67d2cf8 manifest = end manifest: IDENTICAL (production code, tests except the isolation block, assets, models, WASM); production diff vs base: none
+TESTS_REVIEWS_MUTATIONS: typecheck 0; npm test 2584 passed / 2 WorkerExecutor timeouts under replay load, 63/63 when rerun alone; build 0; e2e 47/47; CI 39/2 green; reviews: 2 pre (skeptic, code critic) + 3 post (source, truth, runtime) — 0 P0, all P1 fixed, verdict unchanged; mutations 6/6 (staged N1)
+BLIND_13: NOT_RUN (no production behaviour change; target exercised on DEV: 403 perspective frames)
+ARM64: PENDING
+ADOPTION_RECOMMENDATION: NONE
+NEXT_RECOMMENDATION: 005R-ROUTER-N1-ADOPT — re-preregister N1 with P4′ (every removed graph item anchored to a perspective asset) and P5′/P7′ (wall-clock fields excluded) fixed before the run, P8 on every camera row, P3 NOT_MEASURED on refusals, the same 37 DEV rows as regression plus a fresh blind 13, Node 18 parity; vision-by-projection as a separate decision
+FINAL_TOKEN: NO_SAFE_ADOPTION_BUILDPLAN_ANALYZER_005R_ROUTER
+```
