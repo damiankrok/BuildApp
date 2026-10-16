@@ -1,0 +1,851 @@
+{
+ "proposals": [
+  {
+   "alternatives": [
+    "PRESENT_BUT_UNCLAIMED"
+   ],
+   "assetByteHash": null,
+   "channels": {
+    "orthographicTechnicalConfirmation": "NONE",
+    "pixelInterpretation": "NOT_ATTEMPTED",
+    "publisherStructureClaim": "CLAIM_NEGATIVE",
+    "reviewerAdjudication": "NOT_RUN"
+   },
+   "confidenceOrAbstain": {
+    "confidence": 0.7
+   },
+   "correlationGroup": "edition:synthetic:ed-b",
+   "featureClass": "GARAGE_ENCLOSED",
+   "featureRelation": null,
+   "featureRelationBasis": "NONE",
+   "frameId": null,
+   "metricAuthority": "NONE",
+   "pixelRegion": null,
+   "projectEditionId": "synthetic:ed-b",
+   "projection": "NOT_APPLICABLE",
+   "proposalId": "p-148ff7399e1c9376",
+   "proposalKind": "FEATURE",
+   "refusalReason": null,
+   "role": "NOT_APPLICABLE",
+   "schemaVersion": "research.exterior-proposals.0.1",
+   "scope": "EDITION",
+   "sourceEvidence": [
+    {
+     "anchorKind": "PUBLISHER_CATEGORY",
+     "byteHashes": [],
+     "correlationGroup": "publisher:synthetic:ed-b",
+     "editionKey": "synthetic:ed-b",
+     "featureClass": "GARAGE_ENCLOSED",
+     "polarity": "NEGATIVE",
+     "projection": "NONE",
+     "provenance": null,
+     "ref": "category:GARAGE_ENCLOSED"
+    },
+    {
+     "anchorKind": "TECHNICAL_SCHEDULE",
+     "byteHashes": [],
+     "correlationGroup": "schedule:synthetic:ed-b",
+     "editionKey": "synthetic:ed-b",
+     "featureClass": "GARAGE_ENCLOSED",
+     "polarity": "NEGATIVE",
+     "projection": "ORTHOGRAPHIC_PLAN",
+     "provenance": "PRINTED_SCHEDULE",
+     "ref": "schedule:no-garage-among-10"
+    }
+   ],
+   "sourceKind": "EDITION_FUSION",
+   "verificationStatus": "TECHNICAL_NEGATIVE_CORROBORATED",
+   "viewSide": "NOT_APPLICABLE"
+  },
+  {
+   "alternatives": [],
+   "assetByteHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "channels": {
+    "orthographicTechnicalConfirmation": "NOT_APPLICABLE",
+    "pixelInterpretation": "NOT_ATTEMPTED",
+    "publisherStructureClaim": "INTERIORS_CAROUSEL_INTERIOR_ZONE",
+    "reviewerAdjudication": "NOT_RUN"
+   },
+   "confidenceOrAbstain": {
+    "confidence": 0.7
+   },
+   "correlationGroup": "lg-int",
+   "featureClass": null,
+   "featureRelation": null,
+   "featureRelationBasis": "NONE",
+   "frameId": "asset:aaaaaaaaaaaaaaaa",
+   "metricAuthority": "NONE",
+   "pixelRegion": null,
+   "projectEditionId": "synthetic:ed-b",
+   "projection": "PERSPECTIVE",
+   "proposalId": "p-1c6c15b979b71c5b",
+   "proposalKind": "SCENE_ROLE",
+   "refusalReason": null,
+   "role": "INTERIOR_PERSPECTIVE",
+   "schemaVersion": "research.exterior-proposals.0.1",
+   "scope": "FRAME",
+   "sourceEvidence": [
+    {
+     "anchorKind": "PUBLISHER_STRUCTURE",
+     "byteHashes": [
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+     ],
+     "correlationGroup": "lg-int",
+     "editionKey": "synthetic:ed-b",
+     "featureClass": null,
+     "polarity": "NEUTRAL",
+     "projection": "NONE",
+     "provenance": null,
+     "ref": "structure:CAROUSEL:fancybox3Interiors:INTERIOR_ZONE"
+    }
+   ],
+   "sourceKind": "PERSPECTIVE_FRAME",
+   "verificationStatus": "ROLE_FROM_STRUCTURE",
+   "viewSide": "NOT_APPLICABLE"
+  },
+  {
+   "alternatives": [],
+   "assetByteHash": null,
+   "channels": {
+    "orthographicTechnicalConfirmation": "NONE",
+    "pixelInterpretation": "NOT_ATTEMPTED",
+    "publisherStructureClaim": "CLAIM_POSITIVE",
+    "reviewerAdjudication": "NOT_RUN"
+   },
+   "confidenceOrAbstain": {
+    "confidence": 0.3
+   },
+   "correlationGroup": "edition:synthetic:ed-a",
+   "featureClass": "PERGOLA",
+   "featureRelation": "OPEN_COVER",
+   "featureRelationBasis": "PUBLISHER_CLAIM",
+   "frameId": null,
+   "metricAuthority": "NONE",
+   "pixelRegion": null,
+   "projectEditionId": "synthetic:ed-a",
+   "projection": "NOT_APPLICABLE",
+   "proposalId": "p-1edff72100af9425",
+   "proposalKind": "FEATURE",
+   "refusalReason": null,
+   "role": "NOT_APPLICABLE",
+   "schemaVersion": "research.exterior-proposals.0.1",
+   "scope": "EDITION",
+   "sourceEvidence": [
+    {
+     "anchorKind": "PUBLISHER_CATEGORY",
+     "byteHashes": [],
+     "correlationGroup": "publisher:synthetic:ed-a",
+     "editionKey": "synthetic:ed-a",
+     "featureClass": "PERGOLA",
+     "polarity": "POSITIVE",
+     "projection": "NONE",
+     "provenance": null,
+     "ref": "category:PERGOLA"
+    }
+   ],
+   "sourceKind": "EDITION_FUSION",
+   "verificationStatus": "PUBLISHER_CLAIM_ONLY",
+   "viewSide": "NOT_APPLICABLE"
+  },
+  {
+   "alternatives": [],
+   "assetByteHash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+   "channels": {
+    "orthographicTechnicalConfirmation": "NOT_APPLICABLE",
+    "pixelInterpretation": "NOT_ATTEMPTED",
+    "publisherStructureClaim": "ELEVATIONS_TAB",
+    "reviewerAdjudication": "NOT_RUN"
+   },
+   "confidenceOrAbstain": {
+    "confidence": 0.7
+   },
+   "correlationGroup": "lg-elev",
+   "featureClass": null,
+   "featureRelation": null,
+   "featureRelationBasis": "NONE",
+   "frameId": "frame-elev",
+   "metricAuthority": "NONE",
+   "pixelRegion": null,
+   "projectEditionId": "synthetic:ed-a",
+   "projection": "ORTHOGRAPHIC_ELEVATION",
+   "proposalId": "p-529b5f2978f744aa",
+   "proposalKind": "SCENE_ROLE",
+   "refusalReason": null,
+   "role": "TECHNICAL_ELEVATION",
+   "schemaVersion": "research.exterior-proposals.0.1",
+   "scope": "FRAME",
+   "sourceEvidence": [
+    {
+     "anchorKind": "PRODUCTION_FRAME_ROLE",
+     "byteHashes": [
+      "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+     ],
+     "correlationGroup": "lg-elev",
+     "editionKey": "synthetic:ed-a",
+     "featureClass": null,
+     "polarity": "NEUTRAL",
+     "projection": "ORTHOGRAPHIC_ELEVATION",
+     "provenance": null,
+     "ref": "frame:frame-elev:ELEVATION"
+    },
+    {
+     "anchorKind": "PUBLISHER_STRUCTURE",
+     "byteHashes": [
+      "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+     ],
+     "correlationGroup": "lg-elev",
+     "editionKey": "synthetic:ed-a",
+     "featureClass": null,
+     "polarity": "NEUTRAL",
+     "projection": "NONE",
+     "provenance": null,
+     "ref": "structure:PAGE:elevations-tab:N/A"
+    }
+   ],
+   "sourceKind": "TECHNICAL_ELEVATION_FRAME",
+   "verificationStatus": "ROLE_FROM_STRUCTURE",
+   "viewSide": "FRONT"
+  },
+  {
+   "alternatives": [
+    "VISIBLE_IN_FRAME",
+    "NOT_VISIBLE_IN_FRAME"
+   ],
+   "assetByteHash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+   "channels": {
+    "orthographicTechnicalConfirmation": "NOT_APPLICABLE",
+    "pixelInterpretation": "NOT_ATTEMPTED",
+    "publisherStructureClaim": "HERO_GALLERY",
+    "reviewerAdjudication": "NOT_RUN"
+   },
+   "confidenceOrAbstain": {
+    "abstain": true
+   },
+   "correlationGroup": "lg-hero",
+   "featureClass": "GARAGE_ENCLOSED",
+   "featureRelation": null,
+   "featureRelationBasis": "NONE",
+   "frameId": "asset:ffffffffffffffff",
+   "metricAuthority": "NONE",
+   "pixelRegion": null,
+   "projectEditionId": "synthetic:ed-a",
+   "projection": "PERSPECTIVE",
+   "proposalId": "p-66de8c875a1375b8",
+   "proposalKind": "FEATURE_VISIBILITY",
+   "refusalReason": "FRAME_VISIBILITY_NOT_MEASURABLE: no pixel reader qualifies (005R V1/V2 negative baselines) and no reviewer adjudication ran",
+   "role": "EXTERIOR_PERSPECTIVE",
+   "schemaVersion": "research.exterior-proposals.0.1",
+   "scope": "FRAME",
+   "sourceEvidence": [
+    {
+     "anchorKind": "PUBLISHER_STRUCTURE",
+     "byteHashes": [
+      "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+     ],
+     "correlationGroup": "lg-hero",
+     "editionKey": "synthetic:ed-a",
+     "featureClass": null,
+     "polarity": "NEUTRAL",
+     "projection": "NONE",
+     "provenance": null,
+     "ref": "structure:PAGE:fancybox3ProdBigImg0:N/A"
+    }
+   ],
+   "sourceKind": "PERSPECTIVE_FRAME",
+   "verificationStatus": "UNRESOLVED",
+   "viewSide": "NOT_APPLICABLE"
+  },
+  {
+   "alternatives": [
+    "VISIBLE_IN_FRAME",
+    "NOT_VISIBLE_IN_FRAME"
+   ],
+   "assetByteHash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+   "channels": {
+    "orthographicTechnicalConfirmation": "NOT_APPLICABLE",
+    "pixelInterpretation": "NOT_ATTEMPTED",
+    "publisherStructureClaim": "HERO_GALLERY",
+    "reviewerAdjudication": "NOT_RUN"
+   },
+   "confidenceOrAbstain": {
+    "abstain": true
+   },
+   "correlationGroup": "lg-hero",
+   "featureClass": "TERRACE",
+   "featureRelation": null,
+   "featureRelationBasis": "NONE",
+   "frameId": "asset:ffffffffffffffff",
+   "metricAuthority": "NONE",
+   "pixelRegion": null,
+   "projectEditionId": "synthetic:ed-a",
+   "projection": "PERSPECTIVE",
+   "proposalId": "p-69a390b50aa65f3d",
+   "proposalKind": "FEATURE_VISIBILITY",
+   "refusalReason": "FRAME_VISIBILITY_NOT_MEASURABLE: no pixel reader qualifies (005R V1/V2 negative baselines) and no reviewer adjudication ran",
+   "role": "EXTERIOR_PERSPECTIVE",
+   "schemaVersion": "research.exterior-proposals.0.1",
+   "scope": "FRAME",
+   "sourceEvidence": [
+    {
+     "anchorKind": "PUBLISHER_STRUCTURE",
+     "byteHashes": [
+      "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+     ],
+     "correlationGroup": "lg-hero",
+     "editionKey": "synthetic:ed-a",
+     "featureClass": null,
+     "polarity": "NEUTRAL",
+     "projection": "NONE",
+     "provenance": null,
+     "ref": "structure:PAGE:fancybox3ProdBigImg0:N/A"
+    }
+   ],
+   "sourceKind": "PERSPECTIVE_FRAME",
+   "verificationStatus": "UNRESOLVED",
+   "viewSide": "NOT_APPLICABLE"
+  },
+  {
+   "alternatives": [
+    "VISIBLE_IN_FRAME",
+    "NOT_VISIBLE_IN_FRAME"
+   ],
+   "assetByteHash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+   "channels": {
+    "orthographicTechnicalConfirmation": "NOT_APPLICABLE",
+    "pixelInterpretation": "NOT_ATTEMPTED",
+    "publisherStructureClaim": "HERO_GALLERY",
+    "reviewerAdjudication": "NOT_RUN"
+   },
+   "confidenceOrAbstain": {
+    "abstain": true
+   },
+   "correlationGroup": "lg-hero",
+   "featureClass": "PERGOLA",
+   "featureRelation": null,
+   "featureRelationBasis": "NONE",
+   "frameId": "asset:ffffffffffffffff",
+   "metricAuthority": "NONE",
+   "pixelRegion": null,
+   "projectEditionId": "synthetic:ed-a",
+   "projection": "PERSPECTIVE",
+   "proposalId": "p-7b7e449721235c44",
+   "proposalKind": "FEATURE_VISIBILITY",
+   "refusalReason": "FRAME_VISIBILITY_NOT_MEASURABLE: no pixel reader qualifies (005R V1/V2 negative baselines) and no reviewer adjudication ran",
+   "role": "EXTERIOR_PERSPECTIVE",
+   "schemaVersion": "research.exterior-proposals.0.1",
+   "scope": "FRAME",
+   "sourceEvidence": [
+    {
+     "anchorKind": "PUBLISHER_STRUCTURE",
+     "byteHashes": [
+      "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+     ],
+     "correlationGroup": "lg-hero",
+     "editionKey": "synthetic:ed-a",
+     "featureClass": null,
+     "polarity": "NEUTRAL",
+     "projection": "NONE",
+     "provenance": null,
+     "ref": "structure:PAGE:fancybox3ProdBigImg0:N/A"
+    }
+   ],
+   "sourceKind": "PERSPECTIVE_FRAME",
+   "verificationStatus": "UNRESOLVED",
+   "viewSide": "NOT_APPLICABLE"
+  },
+  {
+   "alternatives": [],
+   "assetByteHash": null,
+   "channels": {
+    "orthographicTechnicalConfirmation": "CONFIRMED",
+    "pixelInterpretation": "NOT_ATTEMPTED",
+    "publisherStructureClaim": "CLAIM_POSITIVE",
+    "reviewerAdjudication": "NOT_RUN"
+   },
+   "confidenceOrAbstain": {
+    "confidence": 0.8
+   },
+   "correlationGroup": "edition:synthetic:ed-a",
+   "featureClass": "GARAGE_ENCLOSED",
+   "featureRelation": "SOLID_COVER",
+   "featureRelationBasis": "TECHNICAL",
+   "frameId": null,
+   "metricAuthority": "NONE",
+   "pixelRegion": null,
+   "projectEditionId": "synthetic:ed-a",
+   "projection": "NOT_APPLICABLE",
+   "proposalId": "p-8c21dd233f2c6a7f",
+   "proposalKind": "FEATURE",
+   "refusalReason": null,
+   "role": "NOT_APPLICABLE",
+   "schemaVersion": "research.exterior-proposals.0.1",
+   "scope": "EDITION",
+   "sourceEvidence": [
+    {
+     "anchorKind": "PUBLISHER_CATEGORY",
+     "byteHashes": [],
+     "correlationGroup": "publisher:synthetic:ed-a",
+     "editionKey": "synthetic:ed-a",
+     "featureClass": "GARAGE_ENCLOSED",
+     "polarity": "POSITIVE",
+     "projection": "NONE",
+     "provenance": null,
+     "ref": "category:GARAGE_ENCLOSED"
+    },
+    {
+     "anchorKind": "TECHNICAL_PARAM",
+     "byteHashes": [],
+     "correlationGroup": "schedule:synthetic:ed-a",
+     "editionKey": "synthetic:ed-a",
+     "featureClass": "GARAGE_ENCLOSED",
+     "polarity": "POSITIVE",
+     "projection": "NONE",
+     "provenance": "PRINTED_SCHEDULE",
+     "ref": "param:garageAreaPrinted"
+    },
+    {
+     "anchorKind": "TECHNICAL_PARAM",
+     "byteHashes": [],
+     "correlationGroup": "schedule:synthetic:ed-a",
+     "editionKey": "synthetic:ed-a",
+     "featureClass": "GARAGE_ENCLOSED",
+     "polarity": "POSITIVE",
+     "projection": "NONE",
+     "provenance": "PRINTED_SCHEDULE",
+     "ref": "param:garageDoorSpecified"
+    },
+    {
+     "anchorKind": "TECHNICAL_SCHEDULE",
+     "byteHashes": [],
+     "correlationGroup": "schedule:synthetic:ed-a",
+     "editionKey": "synthetic:ed-a",
+     "featureClass": "GARAGE_ENCLOSED",
+     "polarity": "POSITIVE",
+     "projection": "ORTHOGRAPHIC_PLAN",
+     "provenance": "PRINTED_SCHEDULE",
+     "ref": "schedule:GARAGE_ENCLOSED:1"
+    }
+   ],
+   "sourceKind": "EDITION_FUSION",
+   "verificationStatus": "TECHNICALLY_CORROBORATED",
+   "viewSide": "NOT_APPLICABLE"
+  },
+  {
+   "alternatives": [],
+   "assetByteHash": null,
+   "channels": {
+    "orthographicTechnicalConfirmation": "CONFIRMED",
+    "pixelInterpretation": "NOT_ATTEMPTED",
+    "publisherStructureClaim": "CLAIM_POSITIVE",
+    "reviewerAdjudication": "NOT_RUN"
+   },
+   "confidenceOrAbstain": {
+    "confidence": 0.8
+   },
+   "correlationGroup": "edition:synthetic:ed-a",
+   "featureClass": "TERRACE",
+   "featureRelation": null,
+   "featureRelationBasis": "NONE",
+   "frameId": null,
+   "metricAuthority": "NONE",
+   "pixelRegion": null,
+   "projectEditionId": "synthetic:ed-a",
+   "projection": "NOT_APPLICABLE",
+   "proposalId": "p-8ccac1af425b9a4c",
+   "proposalKind": "FEATURE",
+   "refusalReason": null,
+   "role": "NOT_APPLICABLE",
+   "schemaVersion": "research.exterior-proposals.0.1",
+   "scope": "EDITION",
+   "sourceEvidence": [
+    {
+     "anchorKind": "PRODUCTION_TECHNICAL_FEATURE",
+     "byteHashes": [
+      "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+     ],
+     "correlationGroup": "production:feat-terrace",
+     "editionKey": "synthetic:ed-a",
+     "featureClass": "TERRACE",
+     "polarity": "POSITIVE",
+     "projection": "ORTHOGRAPHIC_ELEVATION",
+     "provenance": "SOURCE_DERIVED",
+     "ref": "production:TERRACE:feat-terrace"
+    },
+    {
+     "anchorKind": "PUBLISHER_DESCRIPTION",
+     "byteHashes": [],
+     "correlationGroup": "publisher:synthetic:ed-a",
+     "editionKey": "synthetic:ed-a",
+     "featureClass": "TERRACE",
+     "polarity": "POSITIVE",
+     "projection": "NONE",
+     "provenance": null,
+     "ref": "description:TERRACE"
+    }
+   ],
+   "sourceKind": "EDITION_FUSION",
+   "verificationStatus": "TECHNICALLY_CORROBORATED",
+   "viewSide": "NOT_APPLICABLE"
+  },
+  {
+   "alternatives": [
+    "TECHNICAL_ELEVATION",
+    "EXTERIOR_PERSPECTIVE",
+    "INTERIOR_PERSPECTIVE"
+   ],
+   "assetByteHash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+   "channels": {
+    "orthographicTechnicalConfirmation": "NOT_APPLICABLE",
+    "pixelInterpretation": "NOT_ATTEMPTED",
+    "publisherStructureClaim": "STRUCTURE_CONFLICT",
+    "reviewerAdjudication": "NOT_RUN"
+   },
+   "confidenceOrAbstain": {
+    "abstain": true
+   },
+   "correlationGroup": "lg-conf",
+   "featureClass": null,
+   "featureRelation": null,
+   "featureRelationBasis": "NONE",
+   "frameId": "asset:cccccccccccccccc",
+   "metricAuthority": "NONE",
+   "pixelRegion": null,
+   "projectEditionId": "synthetic:ed-b",
+   "projection": "UNKNOWN",
+   "proposalId": "p-90123fb201e678d2",
+   "proposalKind": "SCENE_ROLE",
+   "refusalReason": "structural channels of this lineage group disagree (gallery / tab / interiors carousel / caption class)",
+   "role": "OTHER_UNKNOWN",
+   "schemaVersion": "research.exterior-proposals.0.1",
+   "scope": "FRAME",
+   "sourceEvidence": [
+    {
+     "anchorKind": "PUBLISHER_STRUCTURE",
+     "byteHashes": [
+      "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+     ],
+     "correlationGroup": "lg-conf",
+     "editionKey": "synthetic:ed-b",
+     "featureClass": null,
+     "polarity": "NEUTRAL",
+     "projection": "NONE",
+     "provenance": null,
+     "ref": "structure:CAROUSEL:fancybox3Interiors:EXTERIOR_NAMED"
+    }
+   ],
+   "sourceKind": "UNKNOWN_FRAME",
+   "verificationStatus": "UNRESOLVED",
+   "viewSide": "UNKNOWN"
+  },
+  {
+   "alternatives": [],
+   "assetByteHash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+   "channels": {
+    "orthographicTechnicalConfirmation": "NOT_APPLICABLE",
+    "pixelInterpretation": "V1_NON_AUTHORITATIVE_DISAGREES",
+    "publisherStructureClaim": "HERO_GALLERY",
+    "reviewerAdjudication": "NOT_RUN"
+   },
+   "confidenceOrAbstain": {
+    "confidence": 0.7
+   },
+   "correlationGroup": "lg-hero",
+   "featureClass": null,
+   "featureRelation": null,
+   "featureRelationBasis": "NONE",
+   "frameId": "asset:ffffffffffffffff",
+   "metricAuthority": "NONE",
+   "pixelRegion": null,
+   "projectEditionId": "synthetic:ed-a",
+   "projection": "PERSPECTIVE",
+   "proposalId": "p-92c6ff9bd5079a0c",
+   "proposalKind": "SCENE_ROLE",
+   "refusalReason": null,
+   "role": "EXTERIOR_PERSPECTIVE",
+   "schemaVersion": "research.exterior-proposals.0.1",
+   "scope": "FRAME",
+   "sourceEvidence": [
+    {
+     "anchorKind": "PIXEL_ROUTER_V1",
+     "byteHashes": [
+      "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+     ],
+     "correlationGroup": "lg-hero",
+     "editionKey": "synthetic:ed-a",
+     "featureClass": null,
+     "polarity": "NEUTRAL",
+     "projection": "NONE",
+     "provenance": null,
+     "ref": "v1:INTERIOR_RENDER"
+    },
+    {
+     "anchorKind": "PUBLISHER_STRUCTURE",
+     "byteHashes": [
+      "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+     ],
+     "correlationGroup": "lg-hero",
+     "editionKey": "synthetic:ed-a",
+     "featureClass": null,
+     "polarity": "NEUTRAL",
+     "projection": "NONE",
+     "provenance": null,
+     "ref": "structure:PAGE:fancybox3ProdBigImg0:N/A"
+    }
+   ],
+   "sourceKind": "PERSPECTIVE_FRAME",
+   "verificationStatus": "ROLE_FROM_STRUCTURE",
+   "viewSide": "NOT_APPLICABLE"
+  },
+  {
+   "alternatives": [
+    "GARAGE_ENCLOSED",
+    "TERRACE",
+    "ENTRANCE_CANOPY",
+    "CARPORT"
+   ],
+   "assetByteHash": null,
+   "channels": {
+    "orthographicTechnicalConfirmation": "CONFIRMED",
+    "pixelInterpretation": "NOT_ATTEMPTED",
+    "publisherStructureClaim": "NONE",
+    "reviewerAdjudication": "NOT_RUN"
+   },
+   "confidenceOrAbstain": {
+    "confidence": 0.6
+   },
+   "correlationGroup": "edition:synthetic:ed-a",
+   "featureClass": "UNKNOWN_ASSEMBLY",
+   "featureRelation": "SOLID_COVER",
+   "featureRelationBasis": "TECHNICAL",
+   "frameId": null,
+   "metricAuthority": "SOURCE_DERIVED",
+   "pixelRegion": null,
+   "projectEditionId": "synthetic:ed-a",
+   "projection": "NOT_APPLICABLE",
+   "proposalId": "p-9d10cc7785f461f3",
+   "proposalKind": "FEATURE",
+   "refusalReason": null,
+   "role": "NOT_APPLICABLE",
+   "schemaVersion": "research.exterior-proposals.0.1",
+   "scope": "EDITION",
+   "sourceEvidence": [
+    {
+     "anchorKind": "PRODUCTION_TECHNICAL_FEATURE",
+     "byteHashes": [
+      "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+     ],
+     "correlationGroup": "production:feat-slab",
+     "editionKey": "synthetic:ed-a",
+     "featureClass": "UNKNOWN_ASSEMBLY",
+     "polarity": "POSITIVE",
+     "projection": "ORTHOGRAPHIC_ELEVATION",
+     "provenance": "SOURCE_EXACT",
+     "ref": "production:ATTACHED_ROOF:feat-slab"
+    }
+   ],
+   "sourceKind": "EDITION_FUSION",
+   "verificationStatus": "TECHNICAL_ONLY",
+   "viewSide": "NOT_APPLICABLE"
+  },
+  {
+   "alternatives": [],
+   "assetByteHash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+   "channels": {
+    "orthographicTechnicalConfirmation": "CONFIRMED",
+    "pixelInterpretation": "NOT_ATTEMPTED",
+    "publisherStructureClaim": "ELEVATIONS_TAB",
+    "reviewerAdjudication": "NOT_RUN"
+   },
+   "confidenceOrAbstain": {
+    "confidence": 0.6
+   },
+   "correlationGroup": "lg-elev",
+   "featureClass": "TERRACE",
+   "featureRelation": null,
+   "featureRelationBasis": "NONE",
+   "frameId": "frame-elev",
+   "metricAuthority": "SOURCE_DERIVED",
+   "pixelRegion": null,
+   "projectEditionId": "synthetic:ed-a",
+   "projection": "ORTHOGRAPHIC_ELEVATION",
+   "proposalId": "p-c96c78ea8f8a5e0b",
+   "proposalKind": "FEATURE",
+   "refusalReason": null,
+   "role": "TECHNICAL_ELEVATION",
+   "schemaVersion": "research.exterior-proposals.0.1",
+   "scope": "FRAME",
+   "sourceEvidence": [
+    {
+     "anchorKind": "PRODUCTION_TECHNICAL_FEATURE",
+     "byteHashes": [
+      "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+     ],
+     "correlationGroup": "production:feat-terrace",
+     "editionKey": "synthetic:ed-a",
+     "featureClass": "TERRACE",
+     "polarity": "POSITIVE",
+     "projection": "ORTHOGRAPHIC_ELEVATION",
+     "provenance": "SOURCE_DERIVED",
+     "ref": "production:TERRACE:feat-terrace"
+    },
+    {
+     "anchorKind": "PUBLISHER_DESCRIPTION",
+     "byteHashes": [],
+     "correlationGroup": "publisher:synthetic:ed-a",
+     "editionKey": "synthetic:ed-a",
+     "featureClass": "TERRACE",
+     "polarity": "POSITIVE",
+     "projection": "NONE",
+     "provenance": null,
+     "ref": "description:TERRACE"
+    }
+   ],
+   "sourceKind": "TECHNICAL_ELEVATION_FRAME",
+   "verificationStatus": "TECHNICALLY_CORROBORATED",
+   "viewSide": "FRONT"
+  },
+  {
+   "alternatives": [],
+   "assetByteHash": null,
+   "channels": {
+    "orthographicTechnicalConfirmation": "NONE",
+    "pixelInterpretation": "NOT_ATTEMPTED",
+    "publisherStructureClaim": "CLAIM_POSITIVE",
+    "reviewerAdjudication": "NOT_RUN"
+   },
+   "confidenceOrAbstain": {
+    "confidence": 0.3
+   },
+   "correlationGroup": "edition:synthetic:ed-b",
+   "featureClass": "TERRACE",
+   "featureRelation": null,
+   "featureRelationBasis": "NONE",
+   "frameId": null,
+   "metricAuthority": "NONE",
+   "pixelRegion": null,
+   "projectEditionId": "synthetic:ed-b",
+   "projection": "NOT_APPLICABLE",
+   "proposalId": "p-d428e3471fb0724e",
+   "proposalKind": "FEATURE",
+   "refusalReason": null,
+   "role": "NOT_APPLICABLE",
+   "schemaVersion": "research.exterior-proposals.0.1",
+   "scope": "EDITION",
+   "sourceEvidence": [
+    {
+     "anchorKind": "PUBLISHER_DESCRIPTION",
+     "byteHashes": [],
+     "correlationGroup": "publisher:synthetic:ed-b",
+     "editionKey": "synthetic:ed-b",
+     "featureClass": "TERRACE",
+     "polarity": "POSITIVE",
+     "projection": "NONE",
+     "provenance": null,
+     "ref": "description:TERRACE"
+    }
+   ],
+   "sourceKind": "EDITION_FUSION",
+   "verificationStatus": "PUBLISHER_CLAIM_ONLY",
+   "viewSide": "NOT_APPLICABLE"
+  },
+  {
+   "alternatives": [
+    "GARAGE_ENCLOSED",
+    "TERRACE",
+    "ENTRANCE_CANOPY",
+    "CARPORT"
+   ],
+   "assetByteHash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+   "channels": {
+    "orthographicTechnicalConfirmation": "CONFIRMED",
+    "pixelInterpretation": "NOT_ATTEMPTED",
+    "publisherStructureClaim": "ELEVATIONS_TAB",
+    "reviewerAdjudication": "NOT_RUN"
+   },
+   "confidenceOrAbstain": {
+    "confidence": 0.6
+   },
+   "correlationGroup": "lg-elev",
+   "featureClass": "UNKNOWN_ASSEMBLY",
+   "featureRelation": "SOLID_COVER",
+   "featureRelationBasis": "TECHNICAL",
+   "frameId": "frame-elev",
+   "metricAuthority": "SOURCE_DERIVED",
+   "pixelRegion": null,
+   "projectEditionId": "synthetic:ed-a",
+   "projection": "ORTHOGRAPHIC_ELEVATION",
+   "proposalId": "p-ecf13d158745f265",
+   "proposalKind": "FEATURE",
+   "refusalReason": null,
+   "role": "TECHNICAL_ELEVATION",
+   "schemaVersion": "research.exterior-proposals.0.1",
+   "scope": "FRAME",
+   "sourceEvidence": [
+    {
+     "anchorKind": "PRODUCTION_TECHNICAL_FEATURE",
+     "byteHashes": [
+      "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+     ],
+     "correlationGroup": "production:feat-slab",
+     "editionKey": "synthetic:ed-a",
+     "featureClass": "UNKNOWN_ASSEMBLY",
+     "polarity": "POSITIVE",
+     "projection": "ORTHOGRAPHIC_ELEVATION",
+     "provenance": "SOURCE_EXACT",
+     "ref": "production:ATTACHED_ROOF:feat-slab"
+    }
+   ],
+   "sourceKind": "TECHNICAL_ELEVATION_FRAME",
+   "verificationStatus": "TECHNICAL_ONLY",
+   "viewSide": "FRONT"
+  },
+  {
+   "alternatives": [],
+   "assetByteHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "channels": {
+    "orthographicTechnicalConfirmation": "NOT_APPLICABLE",
+    "pixelInterpretation": "NOT_ATTEMPTED",
+    "publisherStructureClaim": "INTERIORS_CAROUSEL_INTERIOR_ZONE",
+    "reviewerAdjudication": "NOT_RUN"
+   },
+   "confidenceOrAbstain": {
+    "confidence": 0.7
+   },
+   "correlationGroup": "lg-int",
+   "featureClass": null,
+   "featureRelation": null,
+   "featureRelationBasis": "NONE",
+   "frameId": "asset:aaaaaaaaaaaaaaaa",
+   "metricAuthority": "NONE",
+   "pixelRegion": null,
+   "projectEditionId": "synthetic:ed-a",
+   "projection": "PERSPECTIVE",
+   "proposalId": "p-f041f2cca403e350",
+   "proposalKind": "SCENE_ROLE",
+   "refusalReason": null,
+   "role": "INTERIOR_PERSPECTIVE",
+   "schemaVersion": "research.exterior-proposals.0.1",
+   "scope": "FRAME",
+   "sourceEvidence": [
+    {
+     "anchorKind": "PUBLISHER_STRUCTURE",
+     "byteHashes": [
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+     ],
+     "correlationGroup": "lg-int",
+     "editionKey": "synthetic:ed-a",
+     "featureClass": null,
+     "polarity": "NEUTRAL",
+     "projection": "NONE",
+     "provenance": null,
+     "ref": "structure:CAROUSEL:fancybox3Interiors:INTERIOR_ZONE"
+    }
+   ],
+   "sourceKind": "PERSPECTIVE_FRAME",
+   "verificationStatus": "ROLE_FROM_STRUCTURE",
+   "viewSide": "NOT_APPLICABLE"
+  }
+ ],
+ "schemaVersion": "research.exterior-proposals.0.1",
+ "variant": "B1"
+}

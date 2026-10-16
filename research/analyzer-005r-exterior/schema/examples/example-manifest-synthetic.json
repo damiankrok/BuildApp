@@ -1,0 +1,263 @@
+{
+ "assets": [
+  {
+   "assetByteHash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+   "assetId": "a-eeeeeeee",
+   "editions": [
+    "synthetic:ed-a"
+   ],
+   "family": "synthetic:fam",
+   "height": 600,
+   "lineageGroup": "lg-elev",
+   "memberships": [
+    {
+     "captionClass": "N/A",
+     "channel": "PAGE:elevations-tab",
+     "editionKey": "synthetic:ed-a"
+    }
+   ],
+   "productionFrames": {
+    "synthetic:ed-a": {
+     "byteHash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+     "document": "ELEVATION",
+     "frameId": "frame-elev",
+     "projection": "ORTHOGRAPHIC_ELEVATION",
+     "view": "FRONT"
+    }
+   },
+   "purposes": [],
+   "selectedFor": [
+    "synthetic:ed-a"
+   ],
+   "structureBasis005r": "STRUCTURE",
+   "structureRole005r": "TECHNICAL_ELEVATION",
+   "v1PixelRole": null,
+   "width": 800
+  },
+  {
+   "assetByteHash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+   "assetId": "a-ffffffff",
+   "editions": [
+    "synthetic:ed-a"
+   ],
+   "family": "synthetic:fam",
+   "height": 600,
+   "lineageGroup": "lg-hero",
+   "memberships": [
+    {
+     "captionClass": "N/A",
+     "channel": "PAGE:fancybox3ProdBigImg0",
+     "editionKey": "synthetic:ed-a"
+    }
+   ],
+   "productionFrames": {},
+   "purposes": [],
+   "selectedFor": [
+    "synthetic:ed-a"
+   ],
+   "structureBasis005r": "STRUCTURE",
+   "structureRole005r": "EXTERIOR_RENDER",
+   "v1PixelRole": {
+    "paddedA1": null,
+    "resolved": true,
+    "role": "INTERIOR_RENDER"
+   },
+   "width": 800
+  },
+  {
+   "assetByteHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "assetId": "a-aaaaaaaa",
+   "editions": [
+    "synthetic:ed-a",
+    "synthetic:ed-b"
+   ],
+   "family": "synthetic:fam",
+   "height": 600,
+   "lineageGroup": "lg-int",
+   "memberships": [
+    {
+     "captionClass": "INTERIOR_ZONE",
+     "channel": "CAROUSEL:fancybox3Interiors",
+     "editionKey": "synthetic:ed-a"
+    },
+    {
+     "captionClass": "INTERIOR_ZONE",
+     "channel": "CAROUSEL:fancybox3Interiors",
+     "editionKey": "synthetic:ed-b"
+    }
+   ],
+   "productionFrames": {},
+   "purposes": [],
+   "selectedFor": [
+    "synthetic:ed-a",
+    "synthetic:ed-b"
+   ],
+   "structureBasis005r": "STRUCTURE",
+   "structureRole005r": "INTERIOR_RENDER",
+   "v1PixelRole": null,
+   "width": 800
+  },
+  {
+   "assetByteHash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+   "assetId": "a-cccccccc",
+   "editions": [
+    "synthetic:ed-b"
+   ],
+   "family": "synthetic:fam",
+   "height": 600,
+   "lineageGroup": "lg-conf",
+   "memberships": [
+    {
+     "captionClass": "EXTERIOR_NAMED",
+     "channel": "CAROUSEL:fancybox3Interiors",
+     "editionKey": "synthetic:ed-b"
+    }
+   ],
+   "productionFrames": {},
+   "purposes": [],
+   "selectedFor": [
+    "synthetic:ed-b"
+   ],
+   "structureBasis005r": "STRUCTURE",
+   "structureRole005r": "INTERIOR_RENDER",
+   "v1PixelRole": null,
+   "width": 800
+  }
+ ],
+ "editions": {
+  "synthetic:ed-a": {
+   "editionKey": "synthetic:ed-a",
+   "family": "synthetic:fam",
+   "n1vRow": "syn",
+   "pageSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+   "publisherClaims": {
+    "categoriesFound": 3,
+    "category": {
+     "GARAGE_ENCLOSED": "POSITIVE",
+     "PERGOLA": "POSITIVE"
+    },
+    "categoryCover": [],
+    "descriptionChars": 10,
+    "descriptionCover": [],
+    "descriptionKinds": {
+     "TERRACE": "POSITIVE"
+    },
+    "naivePageWide": [
+     "CARPORT"
+    ]
+   },
+   "split005r": "DEV",
+   "technical": {
+    "featureSource": "FEATURE_GRAPH",
+    "features": [
+     {
+      "anchorId": "feat-terrace",
+      "featureClass": "TERRACE",
+      "frames": [
+       {
+        "byteHash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "frameId": "frame-elev",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+       }
+      ],
+      "productionDeniesRecess": false,
+      "productionFamily": "TERRACE",
+      "provenance": "SOURCE_DERIVED",
+      "quality": "L2",
+      "relation": "UNKNOWN",
+      "saysColumns": false,
+      "technicalMeaning": "x",
+      "viewFamilies": [
+       "ELEVATION",
+       "PLAN"
+      ]
+     },
+     {
+      "anchorId": "feat-slab",
+      "featureClass": "UNKNOWN_ASSEMBLY",
+      "frames": [
+       {
+        "byteHash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "frameId": "frame-elev",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+       }
+      ],
+      "productionDeniesRecess": false,
+      "productionFamily": "ATTACHED_ROOF",
+      "provenance": "SOURCE_EXACT",
+      "quality": "L2",
+      "relation": "SOLID_COVER",
+      "saysColumns": true,
+      "technicalMeaning": "x",
+      "viewFamilies": [
+       "ELEVATION",
+       "PLAN"
+      ]
+     }
+    ],
+    "frames": [
+     {
+      "byteHash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "document": "ELEVATION",
+      "frameId": "frame-elev",
+      "projection": "ORTHOGRAPHIC_ELEVATION",
+      "view": "FRONT"
+     }
+    ],
+    "garageDoorsInModel": 0,
+    "modelSha256": "1111111111111111111111111111111111111111111111111111111111111111",
+    "observationGraphHash": "2222222222222222222222222222222222222222222222222222222222222222"
+   },
+   "technicalSchedule": {
+    "params": {
+     "garageAreaPrinted": true,
+     "garageDoorSpecified": true
+    },
+    "roomsListed": 12,
+    "scheduleKinds": {
+     "GARAGE_ENCLOSED": 1
+    },
+    "vestibuleEntries": 1
+   }
+  },
+  "synthetic:ed-b": {
+   "editionKey": "synthetic:ed-b",
+   "family": "synthetic:fam",
+   "n1vRow": "syn",
+   "pageSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+   "publisherClaims": {
+    "categoriesFound": 3,
+    "category": {
+     "GARAGE_ENCLOSED": "NEGATIVE"
+    },
+    "categoryCover": [],
+    "descriptionChars": 10,
+    "descriptionCover": [],
+    "descriptionKinds": {
+     "TERRACE": "POSITIVE"
+    },
+    "naivePageWide": [
+     "CARPORT"
+    ]
+   },
+   "split005r": "DEV",
+   "technical": null,
+   "technicalSchedule": {
+    "params": {
+     "garageAreaPrinted": false,
+     "garageDoorSpecified": false
+    },
+    "roomsListed": 10,
+    "scheduleKinds": {},
+    "vestibuleEntries": 1
+   }
+  }
+ },
+ "extendedNegatives": [],
+ "families": [
+  "synthetic:fam"
+ ],
+ "groups": {},
+ "schema": "x",
+ "seed": "x"
+}

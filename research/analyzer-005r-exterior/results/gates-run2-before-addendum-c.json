@@ -1,0 +1,565 @@
+{
+ "falsification": {
+  "F1_no_technical_inputs": {
+   "technicalOnly": 0,
+   "technicallyCorroborated": 0
+  },
+  "F2_no_publisher_claims": {
+   "technicallyCorroborated": 0
+  },
+  "F3_launder_G2E5_into_owner_anchor": {
+   "caughtAfterRelabel": 0,
+   "caughtAsIs": 1,
+   "laundered": 1,
+   "note": "after relabelling, only anchors that cite frame bytes the anchor edition never published are caught",
+   "uncaughtAfterRelabel": 1
+  }
+ },
+ "gates": {
+  "G1_variant_isolation": {
+   "byteAssetsPublishedByMoreThanOneEdition": 5,
+   "correlationGroupsSpanningEditions": {
+    "lg-086ff7389bb2": [
+     "archon:m3ea28300f9b3e",
+     "archon:m738275b7537b0",
+     "archon:m84f2903cb8e14"
+    ]
+   },
+   "editionMixErrors": 0,
+   "ownerAnchorStatuses": {
+    "PUBLISHER_CLAIM_ONLY": 2,
+    "TECHNICALLY_CORROBORATED": 1
+   },
+   "ownerAnchorTechnicalAnchors": 0,
+   "pass": true
+  },
+  "G2_interiors": {
+   "B0_selectedInteriors": {
+    "OTHER_UNKNOWN": 14
+   },
+   "B1": {
+    "extended": {
+     "INTERIOR_PERSPECTIVE": 113
+    },
+    "extendedExteriorNamed": {
+     "OTHER_UNKNOWN": 2
+    },
+    "selected": {
+     "INTERIOR_PERSPECTIVE": 12,
+     "OTHER_UNKNOWN": 2
+    }
+   },
+   "pass": true,
+   "promotedToExterior": 0
+  },
+  "G3_perspective_authority": {
+   "n1ProjectionGuardUnchanged": true,
+   "pass": true,
+   "perspectiveProposals": 47,
+   "sourceExactFromPerspectiveAnchor": 0,
+   "structuralWallOrRoofAssertions": 0,
+   "withMetricAuthority": 0
+  },
+  "G4_lookalikes": {
+   "controls": {
+    "LA1_vestibule_is_not_carport": {
+     "carportClaims": 0,
+     "carportProposalsPresent": 0,
+     "carportScheduleEntries": 0,
+     "editionsNaivePageWideWiat": 14,
+     "pass": true,
+     "vestibuleScheduleEntries": 16
+    },
+    "LA2_site_navigation_is_not_a_claim": {
+     "CARPORT": {
+      "naivePageWide": 14,
+      "productClaim": 0
+     },
+     "GARAGE_ENCLOSED": {
+      "naivePageWide": 14,
+      "productClaim": 9
+     },
+     "PERGOLA": {
+      "naivePageWide": 6,
+      "productClaim": 6
+     },
+     "TERRACE": {
+      "naivePageWide": 14,
+      "productClaim": 14
+     },
+     "pass": true
+    },
+    "LA3_open_pergola_vs_solid_cover": {
+     "note": "a technical slab in the same edition is a different object until localized; it never corroborates nor refutes the pergola",
+     "pass": true,
+     "pergolaClaimEditionsWithATechnicalSolidSlab": [],
+     "pergolaCorroborated": 0,
+     "pergolaProposals": 6,
+     "pergolaWithSolidCover": 0
+    },
+    "LA4_uncovered_vs_covered_terrace": {
+     "pass": true,
+     "relation": {
+      "None/NONE": 8,
+      "SOLID_COVER/PUBLISHER_CLAIM": 6
+     },
+     "technicalSolidCoverOnTerrace": 0,
+     "terraceProposals": 14
+    },
+    "LA5_scan_columns_are_not_columns": {
+     "columnsProposals": {},
+     "columnsProposalsFromProduction": 0,
+     "pass": true,
+     "productionWhyMentionsColumns": 7
+    },
+    "LA6_canopy_vs_balcony": {
+     "balcony": {
+      "PUBLISHER_CLAIM_ONLY": 2,
+      "VISUAL_ONLY_NOT_INDEPENDENTLY_VERIFIED": 1
+     },
+     "canopy": {
+      "PUBLISHER_CLAIM_ONLY": 5
+     },
+     "crossClassAnchors": 0,
+     "pass": true
+    },
+    "LA7_carport_vs_enclosed_garage": {
+     "carportCorroborated": 0,
+     "garage": {
+      "TECHNICALLY_CORROBORATED": 9,
+      "TECHNICAL_NEGATIVE_CORROBORATED": 5
+     },
+     "garageCorroboratedButNoGarageDoorInProductionModel": [
+      "archon:m2fa281446a8ca",
+      "archon:m43d25c0636969",
+      "archon:m49324d69ef143",
+      "archon:m504267f869cbe",
+      "archon:m84f2903cb8e14",
+      "archon:ma772868ccf62c",
+      "archon:mb0e2566e7cb18",
+      "archon:mbad2613634abe"
+     ],
+     "pass": true
+    },
+    "LA8_terrace_vs_building_mass": {
+     "pass": true,
+     "terraceAnchorsFromNonTerraceProduction": 0
+    }
+   },
+   "pass": true
+  },
+  "G5_stability": {
+   "controls": {
+    "S1_order": {
+     "identical": 10,
+     "runs": 10
+    },
+    "S2_duplicates": {
+     "editionProposalsIdentical": true,
+     "exactDuplicateFrameProposalsIdentical": true,
+     "exactDuplicatesAdded": 76,
+     "nearDuplicateSameRole": "34/34",
+     "nearDuplicatesAdded": 36
+    },
+    "S3_resize_pad": {
+     "editionProposalsIdentical": true,
+     "note": "B1 decodes no pixel: an attached copy keeps its structural role; an unattached copy abstains",
+     "outcomes": {
+      "padGreySquare:attached:same": 71,
+      "padGreySquare:unattached:OTHER_UNKNOWN": 71,
+      "padWhiteSquare:attached:same": 71,
+      "padWhiteSquare:unattached:OTHER_UNKNOWN": 71,
+      "resize50:attached:same": 71,
+      "resize50:unattached:OTHER_UNKNOWN": 71
+     },
+     "transformedFiles": 228
+    },
+    "S4_pixel_channel_under_padding": {
+     "grey:flipped": 17,
+     "grey:same": 9,
+     "white:flipped": 23,
+     "white:same": 3
+    },
+    "S5_pixel_channel_not_decisive": {
+     "decisionsIdentical": true
+    }
+   },
+   "pass": true
+  },
+  "G6_evidence_validity": {
+   "firstErrors": {
+    "B0": [],
+    "B1": []
+   },
+   "pass": true,
+   "technicallyCorroborated": 15,
+   "trace": [
+    {
+     "class": "GARAGE_ENCLOSED",
+     "edition": "archon:m3ea28300f9b3e",
+     "scope": "EDITION",
+     "technical": [
+      "param:garageAreaPrinted",
+      "param:garageDoorSpecified",
+      "schedule:GARAGE_ENCLOSED"
+     ],
+     "technicalBytesOverlapPerspective": false
+    },
+    {
+     "class": "GARAGE_ENCLOSED",
+     "edition": "archon:m2fa281446a8ca",
+     "scope": "EDITION",
+     "technical": [
+      "param:garageAreaPrinted",
+      "param:garageDoorSpecified",
+      "schedule:GARAGE_ENCLOSED"
+     ],
+     "technicalBytesOverlapPerspective": false
+    },
+    {
+     "class": "GARAGE_ENCLOSED",
+     "edition": "archon:m49324d69ef143",
+     "scope": "EDITION",
+     "technical": [
+      "param:garageAreaPrinted",
+      "param:garageDoorSpecified",
+      "schedule:GARAGE_ENCLOSED"
+     ],
+     "technicalBytesOverlapPerspective": false
+    },
+    {
+     "class": "TERRACE",
+     "edition": "archon:m84f2903cb8e14",
+     "scope": "EDITION",
+     "technical": [
+      "production:TERRACE",
+      "production:TERRACE"
+     ],
+     "technicalBytesOverlapPerspective": false
+    },
+    {
+     "class": "GARAGE_ENCLOSED",
+     "edition": "archon:m504267f869cbe",
+     "scope": "EDITION",
+     "technical": [
+      "param:garageAreaPrinted",
+      "param:garageDoorSpecified",
+      "schedule:GARAGE_ENCLOSED"
+     ],
+     "technicalBytesOverlapPerspective": false
+    },
+    {
+     "class": "TERRACE",
+     "edition": "archon:m2fa281446a8ca",
+     "scope": "EDITION",
+     "technical": [
+      "production:TERRACE",
+      "production:TERRACE"
+     ],
+     "technicalBytesOverlapPerspective": false
+    },
+    {
+     "class": "GARAGE_ENCLOSED",
+     "edition": "archon:m84f2903cb8e14",
+     "scope": "EDITION",
+     "technical": [
+      "param:garageAreaPrinted",
+      "param:garageDoorSpecified",
+      "schedule:GARAGE_ENCLOSED"
+     ],
+     "technicalBytesOverlapPerspective": false
+    },
+    {
+     "class": "GARAGE_ENCLOSED",
+     "edition": "archon:mb0e2566e7cb18",
+     "scope": "EDITION",
+     "technical": [
+      "param:garageAreaPrinted",
+      "param:garageDoorSpecified",
+      "schedule:GARAGE_ENCLOSED"
+     ],
+     "technicalBytesOverlapPerspective": false
+    },
+    {
+     "class": "GARAGE_ENCLOSED",
+     "edition": "archon:m43d25c0636969",
+     "scope": "EDITION",
+     "technical": [
+      "param:garageAreaPrinted",
+      "param:garageDoorSpecified",
+      "schedule:GARAGE_ENCLOSED"
+     ],
+     "technicalBytesOverlapPerspective": false
+    },
+    {
+     "class": "TERRACE",
+     "edition": "archon:md6026d579e43f",
+     "scope": "EDITION",
+     "technical": [
+      "production:TERRACES"
+     ],
+     "technicalBytesOverlapPerspective": false
+    },
+    {
+     "class": "TERRACE",
+     "edition": "archon:m43d25c0636969",
+     "scope": "EDITION",
+     "technical": [
+      "production:TERRACE"
+     ],
+     "technicalBytesOverlapPerspective": false
+    },
+    {
+     "class": "TERRACE",
+     "edition": "archon:mb0e2566e7cb18",
+     "scope": "EDITION",
+     "technical": [
+      "production:TERRACE"
+     ],
+     "technicalBytesOverlapPerspective": false
+    },
+    {
+     "class": "GARAGE_ENCLOSED",
+     "edition": "archon:mbad2613634abe",
+     "scope": "EDITION",
+     "technical": [
+      "param:garageAreaPrinted",
+      "param:garageDoorSpecified",
+      "schedule:GARAGE_ENCLOSED"
+     ],
+     "technicalBytesOverlapPerspective": false
+    },
+    {
+     "class": "GARAGE_ENCLOSED",
+     "edition": "archon:ma772868ccf62c",
+     "scope": "EDITION",
+     "technical": [
+      "param:garageAreaPrinted",
+      "param:garageDoorSpecified",
+      "schedule:GARAGE_ENCLOSED"
+     ],
+     "technicalBytesOverlapPerspective": false
+    },
+    {
+     "class": "TERRACE",
+     "edition": "archon:mbad2613634abe",
+     "scope": "EDITION",
+     "technical": [
+      "production:TERRACE",
+      "production:TERRACE",
+      "production:TERRACE",
+      "production:TERRACE",
+      "production:TERRACE",
+      "production:TERRACE",
+      "production:TERRACE",
+      "production:TERRACE"
+     ],
+     "technicalBytesOverlapPerspective": false
+    }
+   ],
+   "validatorErrors": {
+    "B0": 0,
+    "B1": 0
+   }
+  },
+  "G7_scope_freeze": {
+   "base": "bfaf286e95105c2cdb32df2d298d3cd93bd43449",
+   "frozenTouched": [],
+   "n1ProjectionGuardUnchanged": true,
+   "outsideAllowlist": [],
+   "pass": true,
+   "touched": [
+    "research/analyzer-005r-exterior/common.py",
+    "research/analyzer-005r-exterior/contenders.py",
+    "research/analyzer-005r-exterior/gates.py",
+    "research/analyzer-005r-exterior/ledger.py",
+    "research/analyzer-005r-exterior/preregistration.md",
+    "research/analyzer-005r-exterior/results/corpus-manifest.json",
+    "research/analyzer-005r-exterior/results/gates.json",
+    "research/analyzer-005r-exterior/results/proposals-B0.json",
+    "research/analyzer-005r-exterior/results/proposals-B1.json",
+    "research/analyzer-005r-exterior/schema/test_schema.py",
+    "research/analyzer-005r-exterior/schema/validate.py"
+   ],
+   "verdict": "IDENTICAL"
+  }
+ },
+ "hardGatesPass": true,
+ "manifestSha256": "04d71a40699454bcd996348ec09893c0861a6b6c63ead5aea3f80996befc0d40",
+ "preregistrationSha256": "82f197f0d5020d241814bcd1f0de3c39ef705bfa36bd31ad093f5a015f898e44",
+ "proposalCounts": {
+  "B0": 90,
+  "B1": 152
+ },
+ "proposalHashes": {
+  "B0": "1f2e949a88088344fe6051bdab0bf96867c974cab3f5f6fd1150ef0385074ed2",
+  "B1": "47ca47e0064f53e14692f92f22ccba78377ec602873d6ec36323edcaea6abf55"
+ },
+ "schema": "research.005r-exterior.gates.0.1",
+ "sealedScripts": {
+  "common.py": "1f3b004a15815907c256bca8cb03119b65416599a9df7d901f32ba7bfe3a2fc1",
+  "contenders.py": "3296ef22a78e6b5cdb44c1d416a0729951520a53655abb58baa5eb31c41e659f",
+  "gates.py": "81485e132096d573cd98c83735cf76d6453eb37d14f288bb185a5f469006c409",
+  "ledger.py": "74f1dbcc3f3b10b302308b7b5aae24bc1c1d1cf70d579f1093f72e2592eeb782",
+  "schema/test_schema.py": "81d271319e35f0f3dc652dfa173e8b3c29d91b0425e9cd7d104c125f5a3ec101",
+  "schema/validate.py": "63e9953e2d2d2a7b14fbacd7417b8b993853c24530212ed11de6f404a522d4cd"
+ },
+ "tables": {
+  "abstention": {
+   "B0": {
+    "editionConflicts": 0,
+    "frameScene": 71,
+    "frameSceneAbstain": 56,
+    "refusals": {
+     "production never received these bytes for this edition": 45,
+     "the adapter has no interior/exterior class for a perspective render": 11
+    }
+   },
+   "B1": {
+    "editionConflicts": 0,
+    "frameScene": 71,
+    "frameSceneAbstain": 38,
+    "refusals": {
+     "FRAME_VISIBILITY_NOT_MEASURABLE": 19,
+     "no structural channel names this scene": 32,
+     "structural channels of this lineage group disagree (gallery / tab / interiors carousel / caption class)": 6
+    }
+   }
+  },
+  "classesByFamily": {
+   "BALCONY": {
+    "PUBLISHER_CLAIM_ONLY": 2,
+    "VISUAL_ONLY_NOT_INDEPENDENTLY_VERIFIED": 1
+   },
+   "CARPORT": {},
+   "COLUMNS_SUPPORTS": {},
+   "ENTRANCE_CANOPY": {
+    "PUBLISHER_CLAIM_ONLY": 5
+   },
+   "GARAGE_ENCLOSED": {
+    "TECHNICALLY_CORROBORATED": 8,
+    "TECHNICAL_NEGATIVE_CORROBORATED": 5
+   },
+   "LARGE_GLAZING": {
+    "PUBLISHER_CLAIM_ONLY": 7
+   },
+   "LOGGIA": {},
+   "PERGOLA": {
+    "PUBLISHER_CLAIM_ONLY": 4
+   },
+   "RAILING": {
+    "PUBLISHER_CLAIM_ONLY": 1,
+    "VISUAL_ONLY_NOT_INDEPENDENTLY_VERIFIED": 1
+   },
+   "TERRACE": {
+    "PUBLISHER_CLAIM_ONLY": 7,
+    "TECHNICALLY_CORROBORATED": 6
+   },
+   "UNKNOWN_ASSEMBLY": {
+    "TECHNICAL_ONLY": 4
+   }
+  },
+  "elevationFrameFeatures": {
+   "B0": {
+    "UNKNOWN_ASSEMBLY:VISUAL_ONLY_NOT_INDEPENDENTLY_VERIFIED": 1
+   },
+   "B1": {
+    "UNKNOWN_ASSEMBLY:VISUAL_ONLY_NOT_INDEPENDENTLY_VERIFIED": 1
+   }
+  },
+  "features": {
+   "B0": {
+    "BALCONY": {
+     "VISUAL_ONLY_NOT_INDEPENDENTLY_VERIFIED": 1
+    },
+    "RAILING": {
+     "VISUAL_ONLY_NOT_INDEPENDENTLY_VERIFIED": 1
+    },
+    "TERRACE": {
+     "TECHNICAL_ONLY": 6
+    },
+    "UNKNOWN_ASSEMBLY": {
+     "TECHNICAL_ONLY": 10
+    }
+   },
+   "B1": {
+    "BALCONY": {
+     "PUBLISHER_CLAIM_ONLY": 2,
+     "VISUAL_ONLY_NOT_INDEPENDENTLY_VERIFIED": 1
+    },
+    "ENTRANCE_CANOPY": {
+     "PUBLISHER_CLAIM_ONLY": 5
+    },
+    "GARAGE_ENCLOSED": {
+     "TECHNICALLY_CORROBORATED": 9,
+     "TECHNICAL_NEGATIVE_CORROBORATED": 5
+    },
+    "LARGE_GLAZING": {
+     "PUBLISHER_CLAIM_ONLY": 7
+    },
+    "PERGOLA": {
+     "PUBLISHER_CLAIM_ONLY": 6
+    },
+    "RAILING": {
+     "PUBLISHER_CLAIM_ONLY": 1,
+     "VISUAL_ONLY_NOT_INDEPENDENTLY_VERIFIED": 1
+    },
+    "TERRACE": {
+     "PUBLISHER_CLAIM_ONLY": 8,
+     "TECHNICALLY_CORROBORATED": 6
+    },
+    "UNKNOWN_ASSEMBLY": {
+     "TECHNICAL_ONLY": 10
+    }
+   }
+  },
+  "frameFeatureVisibility": {
+   "B0": {},
+   "B1": {
+    "BALCONY:UNRESOLVED": 1,
+    "ENTRANCE_CANOPY:UNRESOLVED": 1,
+    "GARAGE_ENCLOSED:UNRESOLVED": 4,
+    "LARGE_GLAZING:UNRESOLVED": 4,
+    "PERGOLA:UNRESOLVED": 3,
+    "RAILING:UNRESOLVED": 1,
+    "TERRACE:UNRESOLVED": 5
+   }
+  },
+  "scene": {
+   "B0": {
+    "byAsset": {
+     "EXTERIOR_RENDER -> OTHER_UNKNOWN": 14,
+     "INTERIOR_RENDER -> OTHER_UNKNOWN": 14,
+     "TECHNICAL_ELEVATION -> OTHER_UNKNOWN": 1,
+     "TECHNICAL_ELEVATION -> TECHNICAL_ELEVATION": 15,
+     "UNKNOWN -> OTHER_UNKNOWN": 27
+    },
+    "byLineageGroup": {
+     "EXTERIOR_RENDER -> OTHER_UNKNOWN": 14,
+     "INTERIOR_RENDER -> OTHER_UNKNOWN": 9,
+     "TECHNICAL_ELEVATION -> OTHER_UNKNOWN": 1,
+     "TECHNICAL_ELEVATION -> TECHNICAL_ELEVATION": 13,
+     "UNKNOWN -> OTHER_UNKNOWN": 20
+    }
+   },
+   "B1": {
+    "byAsset": {
+     "EXTERIOR_RENDER -> EXTERIOR_PERSPECTIVE": 5,
+     "EXTERIOR_RENDER -> OTHER_UNKNOWN": 9,
+     "INTERIOR_RENDER -> INTERIOR_PERSPECTIVE": 12,
+     "INTERIOR_RENDER -> OTHER_UNKNOWN": 2,
+     "TECHNICAL_ELEVATION -> TECHNICAL_ELEVATION": 16,
+     "UNKNOWN -> OTHER_UNKNOWN": 27
+    },
+    "byLineageGroup": {
+     "EXTERIOR_RENDER -> EXTERIOR_PERSPECTIVE": 5,
+     "EXTERIOR_RENDER -> OTHER_UNKNOWN": 9,
+     "INTERIOR_RENDER -> INTERIOR_PERSPECTIVE": 7,
+     "INTERIOR_RENDER -> OTHER_UNKNOWN": 2,
+     "TECHNICAL_ELEVATION -> TECHNICAL_ELEVATION": 14,
+     "UNKNOWN -> OTHER_UNKNOWN": 20
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,120 @@
+{
+ "posthoc": true,
+ "rows": [
+  {
+   "basis": "schedule, area and door spec are the same publisher page",
+   "class": "GARAGE_ENCLOSED",
+   "edition": "archon:m2fa281446a8ca",
+   "family": "archon:dom-w-marcowkach",
+   "strict": "PUBLISHER_SPEC_SHEET_CONSISTENCY"
+  },
+  {
+   "basis": "schedule, area and door spec are the same publisher page",
+   "class": "GARAGE_ENCLOSED",
+   "edition": "archon:m3ea28300f9b3e",
+   "family": "archon:dom-w-rarytasach",
+   "strict": "PUBLISHER_SPEC_SHEET_CONSISTENCY"
+  },
+  {
+   "basis": "schedule, area and door spec are the same publisher page",
+   "class": "GARAGE_ENCLOSED",
+   "edition": "archon:m43d25c0636969",
+   "family": "archon:dom-w-cieszyniankach",
+   "strict": "PUBLISHER_SPEC_SHEET_CONSISTENCY"
+  },
+  {
+   "basis": "schedule, area and door spec are the same publisher page",
+   "class": "GARAGE_ENCLOSED",
+   "edition": "archon:m49324d69ef143",
+   "family": "archon:willa-miranda",
+   "strict": "PUBLISHER_SPEC_SHEET_CONSISTENCY"
+  },
+  {
+   "basis": "schedule, area and door spec are the same publisher page",
+   "class": "GARAGE_ENCLOSED",
+   "edition": "archon:m504267f869cbe",
+   "family": "archon:dom-w-arletach",
+   "strict": "PUBLISHER_SPEC_SHEET_CONSISTENCY"
+  },
+  {
+   "basis": "schedule, area and door spec are the same publisher page",
+   "class": "GARAGE_ENCLOSED",
+   "edition": "archon:m84f2903cb8e14",
+   "family": "archon:dom-w-rarytasach",
+   "strict": "PUBLISHER_SPEC_SHEET_CONSISTENCY"
+  },
+  {
+   "basis": "schedule, area and door spec are the same publisher page",
+   "class": "GARAGE_ENCLOSED",
+   "edition": "archon:ma772868ccf62c",
+   "family": "archon:dom-w-glogownikach",
+   "strict": "PUBLISHER_SPEC_SHEET_CONSISTENCY"
+  },
+  {
+   "basis": "schedule, area and door spec are the same publisher page",
+   "class": "GARAGE_ENCLOSED",
+   "edition": "archon:mb0e2566e7cb18",
+   "family": "archon:dom-w-jablonkach",
+   "strict": "PUBLISHER_SPEC_SHEET_CONSISTENCY"
+  },
+  {
+   "basis": "schedule, area and door spec are the same publisher page",
+   "class": "GARAGE_ENCLOSED",
+   "edition": "archon:mbad2613634abe",
+   "family": "archon:dom-pod-jarzabem",
+   "strict": "PUBLISHER_SPEC_SHEET_CONSISTENCY"
+  },
+  {
+   "basis": "sighted=True undeniedRecess=True categoryClaim=False",
+   "class": "TERRACE",
+   "edition": "archon:m2fa281446a8ca",
+   "family": "archon:dom-w-marcowkach",
+   "strict": "WEAK"
+  },
+  {
+   "basis": "sighted=True undeniedRecess=False categoryClaim=True",
+   "class": "TERRACE",
+   "edition": "archon:m43d25c0636969",
+   "family": "archon:dom-w-cieszyniankach",
+   "strict": "WEAK"
+  },
+  {
+   "basis": "sighted=True undeniedRecess=False categoryClaim=False",
+   "class": "TERRACE",
+   "edition": "archon:m84f2903cb8e14",
+   "family": "archon:dom-w-rarytasach",
+   "strict": "WEAK"
+  },
+  {
+   "basis": "sighted=True undeniedRecess=True categoryClaim=True",
+   "class": "TERRACE",
+   "edition": "archon:mb0e2566e7cb18",
+   "family": "archon:dom-w-jablonkach",
+   "strict": "TECHNICALLY_CORROBORATED_STRICT"
+  },
+  {
+   "basis": "sighted=True undeniedRecess=True categoryClaim=True",
+   "class": "TERRACE",
+   "edition": "archon:mbad2613634abe",
+   "family": "archon:dom-pod-jarzabem",
+   "strict": "TECHNICALLY_CORROBORATED_STRICT"
+  },
+  {
+   "basis": "sighted=False undeniedRecess=False categoryClaim=False",
+   "class": "TERRACE",
+   "edition": "archon:md6026d579e43f",
+   "family": "archon:dom-w-helikoniach",
+   "strict": "WEAK"
+  }
+ ],
+ "schema": "research.005r-exterior.addendum-e.0.1",
+ "strictFamilies": {
+  "GARAGE_ENCLOSED": 0,
+  "TERRACE": 2
+ },
+ "summary": {
+  "GARAGE_ENCLOSED:PUBLISHER_SPEC_SHEET_CONSISTENCY": 9,
+  "TERRACE:TECHNICALLY_CORROBORATED_STRICT": 2,
+  "TERRACE:WEAK": 4
+ }
+}

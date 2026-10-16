@@ -1,0 +1,20 @@
+{
+ "B1_ms_max": 10.2,
+ "B1_ms_p50": 7.8,
+ "codeBytes": {
+  "common.py": 3925,
+  "contenders.py": 21762,
+  "ledger.py": 18961,
+  "schema/validate.py": 20271
+ },
+ "machine": "x86_64 container, Python 3.11.15, single process",
+ "manifestBytes": 368793,
+ "newDependencies": 0,
+ "note": "B1 reads only the hashed manifest; the gates run (~60 s) is dominated by writing 228 resize/pad PNG copies for S3. ARM64 NOT_MEASURED.",
+ "peakRssMB": 22.6,
+ "pixelDecodeInB1": false,
+ "proposalsB1Bytes": 278123,
+ "runs": 20,
+ "validate_ms": 2.2,
+ "weights": 0
+}

@@ -923,3 +923,85 @@ describe('005R-ROUTER production cannot reach the router study, which commits no
     }
   })
 })
+
+/**
+ * BUILDPLAN-ANALYZER-005R-EXTERIOR — source-linked exterior evidence JSON is research. It reads the hashed 005R corpus,
+ * cached page text and sealed N1v production runs locally, decodes no pixel for interpretation and shows no image to
+ * any model. The repository keeps code, hashes, ids, channel names, caption classes, claim kind sets and counts.
+ */
+describe('005R-EXTERIOR production cannot reach the exterior evidence study, which commits no pixels, captions or text', () => {
+  const stageFiles = (): string[] =>
+    [
+      ...execFileSync('git', ['ls-files'], { cwd: ROOT, encoding: 'utf8' }).split('\n'),
+      ...execFileSync('git', ['ls-files', '--others', '--exclude-standard'], { cwd: ROOT, encoding: 'utf8' }).split('\n'),
+    ].filter((f) => f.startsWith('research/analyzer-005r-exterior/'))
+
+  it('no production source imports the study or names its contract', () => {
+    const offenders: string[] = []
+    for (const f of productionSources()) {
+      const text = read(f)
+      for (const spec of importsOf(text)) if (/analyzer-005r-exterior|research\//.test(spec)) offenders.push(`${f} imports ${spec}`)
+      if (/exterior-proposals\.0\.1|005R-EXTERIOR|TECHNICALLY_CORROBORATED/i.test(codeOf(text))) offenders.push(`${f} names the 005R-EXTERIOR study`)
+    }
+    expect(offenders).toEqual([])
+  })
+
+  it('the study tracks only code and text, with no embedded pixels, local paths, URLs or caption/text fields', () => {
+    const files = stageFiles()
+    expect(files.length).toBeGreaterThan(0)
+    expect(files.filter((f) => !/\.(py|json|md)$/i.test(f))).toEqual([])
+    const textKeys: string[] = []
+    const walk = (f: string, x: unknown): void => {
+      if (Array.isArray(x)) for (const v of x) walk(f, v)
+      else if (x && typeof x === 'object')
+        for (const [k, v] of Object.entries(x)) {
+          if (/^(captions?|titles?|pageText|rawText|alt|altText|heading|description|html|figcaption|urls?|localPath|localFile|why)$/i.test(k)) textKeys.push(`${f}: ${k}`)
+          walk(f, v)
+        }
+    }
+    for (const f of files) {
+      const text = read(f)
+      expect(text, f).not.toMatch(/(data:(image|application)\/[\w.+-]+;base64,|iVBORw0KGgo|\/9j\/4|UklGR|R0lGOD)[A-Za-z0-9+/]{40,}/)
+      expect(text, f).not.toMatch(/[A-Za-z0-9+/]{256,}={0,2}/)
+      expect(statSync(join(ROOT, f)).size, f).toBeLessThanOrEqual(4 * 2 ** 20)
+      if (f.endsWith('.json')) {
+        expect(text, f).not.toMatch(/https?:\/\/|\/home\/|\/tmp\//)
+        walk(f, JSON.parse(text))
+      }
+    }
+    expect(textKeys).toEqual([])
+  })
+
+  it('every private writer refuses an output inside the repository', () => {
+    for (const [f, args] of [
+      ['research/analyzer-005r-exterior/ledger.py', ['x', 'y', 'z', join(ROOT, 'tmp-005r-exterior-refused'), join(ROOT, 'tmp-005r-exterior-refused.json')]],
+      ['research/analyzer-005r-exterior/gates.py', ['x', join(ROOT, 'tmp-005r-exterior-refused.json'), join(ROOT, 'tmp-005r-exterior-refused'), 'r']],
+    ] as const) {
+      const run = spawnSync('python3', ['-I', join(ROOT, f), ...args], { cwd: ROOT, encoding: 'utf8' })
+      expect(run.status, f).not.toBe(0)
+      expect(run.stderr + run.stdout, f).toMatch(/REFUSED: private ledgers and publisher-derived files stay outside the repository/)
+      expect(existsSync(join(ROOT, 'tmp-005r-exterior-refused')) || existsSync(join(ROOT, 'tmp-005r-exterior-refused.json'))).toBe(false)
+    }
+  })
+
+  it('the research JSON contract refuses every preregistered mutation (edition mix and laundering, perspective authority, interior to exterior, fabricated corroboration)', () => {
+    const run = spawnSync('python3', ['-I', join(ROOT, 'research/analyzer-005r-exterior/schema/test_schema.py')], { cwd: ROOT, encoding: 'utf8' })
+    expect(run.stderr, run.stderr).toMatch(/Ran \d+ tests[\s\S]*\nOK\s*$/)
+    expect(run.status).toBe(0)
+    // the independent audit's forgery suite (addendum E), built from the committed manifest and B1 output
+    const forged = spawnSync('python3', ['-I', join(ROOT, 'research/analyzer-005r-exterior/schema/test_bypasses.py')], { cwd: ROOT, encoding: 'utf8' })
+    expect(forged.stdout, forged.stdout + forged.stderr).toMatch(/OK: \d+ forgeries refused/)
+    expect(forged.status).toBe(0)
+  })
+
+  it('the committed gates record the sealed preregistration, all seven hard gates and the scope freeze', () => {
+    const g = JSON.parse(read('research/analyzer-005r-exterior/results/gates.json')) as {
+      preregistrationSha256: string
+      hardGatesPass: boolean
+      gates: Record<string, { pass: boolean }>
+    }
+    expect(Object.keys(g.gates).sort()).toEqual(['G1_variant_isolation', 'G2_interiors', 'G3_perspective_authority', 'G4_lookalikes', 'G5_stability', 'G6_evidence_validity', 'G7_scope_freeze'])
+    expect(g.preregistrationSha256).toMatch(/^[0-9a-f]{64}$/)
+    expect(g.hardGatesPass).toBe(true)
+  })
+})
