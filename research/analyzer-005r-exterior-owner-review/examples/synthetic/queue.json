@@ -1,0 +1,262 @@
+{
+ "images": [
+  {
+   "acceptedByteHashes": [
+    "cedda61358de8f5fd703b9a33a0c8bc45de643b6cb974eb752a3ced1e0936b27",
+    "d8af998afca8fa855b604b07ea9168b0e327392a5323ff007d7b31e4b439ccaf"
+   ],
+   "height": 200,
+   "imageId": "img-5a633b90ef",
+   "width": 320
+  },
+  {
+   "acceptedByteHashes": [
+    "6562789b18e22ad6bb60f1f1c5e5ee0c36c30b29b4205cd557272cd3d2d3f365"
+   ],
+   "height": 200,
+   "imageId": "img-66c94fab6d",
+   "width": 320
+  },
+  {
+   "acceptedByteHashes": [
+    "6a9da1f8e714007f1a58eb981e6d8ab7fae69ac815badbd0cbff9df38abb0a91"
+   ],
+   "height": 200,
+   "imageId": "img-8dea27dbdb",
+   "width": 320
+  },
+  {
+   "acceptedByteHashes": [
+    "00f93baa9488b088895b8ce0e3222e76d8031b1a9992d624c1b92b2a31f2b64b"
+   ],
+   "height": 200,
+   "imageId": "img-903cbcf1c4",
+   "width": 320
+  },
+  {
+   "acceptedByteHashes": [
+    "6d8c7f7582d24415e086256638dfc9278dff1c83c6d89002ec7fda327b505d04"
+   ],
+   "height": 200,
+   "imageId": "img-91913bb865",
+   "width": 320
+  }
+ ],
+ "inputs": {
+  "synthetic": "make_synthetic_demo.py"
+ },
+ "packId": "synthetic-demo-owner-review-v1",
+ "packKind": "SYNTHETIC",
+ "preregistrationSha256": "71c901e9bc6c03e727d1d27ace604c4bfe9939df81337171722cc70be6b1c110",
+ "questions": [
+  {
+   "acceptedByteHashes": [
+    "cedda61358de8f5fd703b9a33a0c8bc45de643b6cb974eb752a3ced1e0936b27",
+    "d8af998afca8fa855b604b07ea9168b0e327392a5323ff007d7b31e4b439ccaf"
+   ],
+   "anchorByteHash": "cedda61358de8f5fd703b9a33a0c8bc45de643b6cb974eb752a3ced1e0936b27",
+   "correlationGroup": "lg-syn-house",
+   "featureClass": "CARPORT",
+   "imageId": "img-5a633b90ef",
+   "kind": "FEATURE_VISIBILITY",
+   "lineageGroup": "lg-syn-house",
+   "order": 1,
+   "projectEditionId": "synthetic:edition-a",
+   "questionId": "q-fe62f29278e2",
+   "subAnswer": "COVER",
+   "tier": "PRIORITY"
+  },
+  {
+   "acceptedByteHashes": [
+    "cedda61358de8f5fd703b9a33a0c8bc45de643b6cb974eb752a3ced1e0936b27",
+    "d8af998afca8fa855b604b07ea9168b0e327392a5323ff007d7b31e4b439ccaf"
+   ],
+   "anchorByteHash": "cedda61358de8f5fd703b9a33a0c8bc45de643b6cb974eb752a3ced1e0936b27",
+   "correlationGroup": "lg-syn-house",
+   "featureClass": "PERGOLA",
+   "imageId": "img-5a633b90ef",
+   "kind": "FEATURE_VISIBILITY",
+   "lineageGroup": "lg-syn-house",
+   "order": 2,
+   "projectEditionId": "synthetic:edition-a",
+   "questionId": "q-bb4cd69a0e15",
+   "subAnswer": "COVER",
+   "tier": "PRIORITY"
+  },
+  {
+   "acceptedByteHashes": [
+    "cedda61358de8f5fd703b9a33a0c8bc45de643b6cb974eb752a3ced1e0936b27",
+    "d8af998afca8fa855b604b07ea9168b0e327392a5323ff007d7b31e4b439ccaf"
+   ],
+   "anchorByteHash": "cedda61358de8f5fd703b9a33a0c8bc45de643b6cb974eb752a3ced1e0936b27",
+   "correlationGroup": "lg-syn-house",
+   "featureClass": null,
+   "imageId": "img-5a633b90ef",
+   "kind": "SCENE_SCOPE",
+   "lineageGroup": "lg-syn-house",
+   "order": 3,
+   "projectEditionId": "synthetic:edition-a",
+   "questionId": "q-afa89aa1d89a",
+   "subAnswer": null,
+   "tier": "PRIORITY"
+  },
+  {
+   "acceptedByteHashes": [
+    "6d8c7f7582d24415e086256638dfc9278dff1c83c6d89002ec7fda327b505d04"
+   ],
+   "anchorByteHash": "6d8c7f7582d24415e086256638dfc9278dff1c83c6d89002ec7fda327b505d04",
+   "correlationGroup": "lg-syn-house-b",
+   "featureClass": "PERGOLA",
+   "imageId": "img-91913bb865",
+   "kind": "FEATURE_VISIBILITY",
+   "lineageGroup": "lg-syn-house-b",
+   "order": 4,
+   "projectEditionId": "synthetic:edition-b",
+   "questionId": "q-9430e7a30b26",
+   "subAnswer": "COVER",
+   "tier": "PRIORITY"
+  },
+  {
+   "acceptedByteHashes": [
+    "6a9da1f8e714007f1a58eb981e6d8ab7fae69ac815badbd0cbff9df38abb0a91"
+   ],
+   "anchorByteHash": "6a9da1f8e714007f1a58eb981e6d8ab7fae69ac815badbd0cbff9df38abb0a91",
+   "correlationGroup": "lg-syn-interior",
+   "featureClass": null,
+   "imageId": "img-8dea27dbdb",
+   "kind": "SCENE_SCOPE",
+   "lineageGroup": "lg-syn-interior",
+   "order": 5,
+   "projectEditionId": "synthetic:edition-a",
+   "questionId": "q-1f146f8cfe33",
+   "subAnswer": null,
+   "tier": "SECONDARY"
+  },
+  {
+   "acceptedByteHashes": [
+    "6a9da1f8e714007f1a58eb981e6d8ab7fae69ac815badbd0cbff9df38abb0a91"
+   ],
+   "anchorByteHash": "6a9da1f8e714007f1a58eb981e6d8ab7fae69ac815badbd0cbff9df38abb0a91",
+   "correlationGroup": "lg-syn-interior",
+   "featureClass": "COLUMN",
+   "imageId": "img-8dea27dbdb",
+   "kind": "FEATURE_VISIBILITY",
+   "lineageGroup": "lg-syn-interior",
+   "order": 6,
+   "projectEditionId": "synthetic:edition-a",
+   "questionId": "q-9f430bff5100",
+   "subAnswer": null,
+   "tier": "SECONDARY"
+  },
+  {
+   "acceptedByteHashes": [
+    "00f93baa9488b088895b8ce0e3222e76d8031b1a9992d624c1b92b2a31f2b64b"
+   ],
+   "anchorByteHash": "00f93baa9488b088895b8ce0e3222e76d8031b1a9992d624c1b92b2a31f2b64b",
+   "correlationGroup": "lg-syn-missing",
+   "featureClass": "GARAGE",
+   "imageId": "img-903cbcf1c4",
+   "kind": "FEATURE_VISIBILITY",
+   "lineageGroup": "lg-syn-missing",
+   "order": 7,
+   "projectEditionId": "synthetic:edition-b",
+   "questionId": "q-f00b17cea4cb",
+   "subAnswer": null,
+   "tier": "SECONDARY"
+  },
+  {
+   "acceptedByteHashes": [
+    "6562789b18e22ad6bb60f1f1c5e5ee0c36c30b29b4205cd557272cd3d2d3f365"
+   ],
+   "anchorByteHash": "6562789b18e22ad6bb60f1f1c5e5ee0c36c30b29b4205cd557272cd3d2d3f365",
+   "correlationGroup": "lg-syn-elev",
+   "featureClass": "UNKNOWN_ASSEMBLY",
+   "imageId": "img-66c94fab6d",
+   "kind": "FEATURE_VISIBILITY",
+   "lineageGroup": "lg-syn-elev",
+   "order": 8,
+   "projectEditionId": "synthetic:edition-a",
+   "questionId": "q-045b6ee0af7a",
+   "subAnswer": "ASSEMBLY",
+   "tier": "SECONDARY"
+  }
+ ],
+ "schema": "research.005r-exterior.owner-review-queue.0.1",
+ "seed": "BUILDPLAN-005R-EXTERIOR-OWNER-REVIEW-SYNTHETIC-V1",
+ "vocab": {
+  "assembly": [
+   "GARAGE",
+   "COVERED_TERRACE",
+   "ENTRANCE_CANOPY",
+   "CARPORT",
+   "OTHER",
+   "UNKNOWN"
+  ],
+  "cover": [
+   "OPEN_MEMBERS",
+   "CONTINUOUS_COVER",
+   "NO_COVER",
+   "UNKNOWN"
+  ],
+  "coverClasses": [
+   "PERGOLA",
+   "CARPORT",
+   "ENTRANCE_CANOPY",
+   "TERRACE"
+  ],
+  "evidenceSource": [
+   "ELEVATION_IN_PACK",
+   "PLAN_OR_SECTION_ON_PAGE",
+   "ELEVATION_ON_PAGE",
+   "OTHER"
+  ],
+  "featureAnswer": [
+   "PRESENT",
+   "ABSENT",
+   "NOT_SHOWN",
+   "CANNOT_TELL"
+  ],
+  "featureClasses": [
+   "PERGOLA",
+   "CARPORT",
+   "ENTRANCE_CANOPY",
+   "COLUMN",
+   "BALCONY",
+   "LOGGIA",
+   "RAILING",
+   "TERRACE",
+   "GARAGE",
+   "ROOFCOVER",
+   "OPENING_GLAZING",
+   "UNKNOWN_ASSEMBLY"
+  ],
+  "mirrored": [
+   "YES",
+   "NO"
+  ],
+  "sceneAnswer": [
+   "EXTERIOR",
+   "INTERIOR",
+   "BOTH_VISIBLE",
+   "NOT_A_SCENE",
+   "CANNOT_TELL"
+  ],
+  "side": [
+   "FRONT",
+   "GARDEN",
+   "LEFT",
+   "RIGHT"
+  ],
+  "sourceContext": [
+   "AGREES",
+   "DISAGREES",
+   "NO_CONTEXT"
+  ],
+  "technicalEvidence": [
+   "TECHNICAL_SHOWS",
+   "TECHNICAL_DOES_NOT_SHOW",
+   "NO_TECHNICAL_EVIDENCE",
+   "CANNOT_TELL"
+  ]
+ }
+}

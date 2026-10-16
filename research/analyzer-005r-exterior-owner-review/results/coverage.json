@@ -1,0 +1,67 @@
+{
+ "b1FeatureVisibility": {
+  "excluded": 0,
+  "represented": 19,
+  "total": 19
+ },
+ "byClass": {
+  "BALCONY": 4,
+  "CARPORT": 7,
+  "COLUMN": 8,
+  "ENTRANCE_CANOPY": 1,
+  "GARAGE": 4,
+  "LOGGIA": 3,
+  "OPENING_GLAZING": 4,
+  "PERGOLA": 4,
+  "RAILING": 2,
+  "ROOFCOVER": 0,
+  "TERRACE": 5,
+  "UNKNOWN_ASSEMBLY": 1
+ },
+ "byEdition": {
+  "archon:m2fa281446a8ca": 2,
+  "archon:m3ea28300f9b3e": 8,
+  "archon:m43d25c0636969": 3,
+  "archon:m49324d69ef143": 11,
+  "archon:m504267f869cbe": 7,
+  "archon:m738275b7537b0": 3,
+  "archon:m84f2903cb8e14": 2,
+  "archon:m953292c7d56c7": 2,
+  "archon:ma772868ccf62c": 7,
+  "archon:ma7f290037d154": 3,
+  "archon:mb0e2566e7cb18": 3,
+  "archon:mbad2613634abe": 2,
+  "archon:md6026d579e43f": 5,
+  "archon:md842941974a5c": 2
+ },
+ "byKind": {
+  "FEATURE_VISIBILITY": 43,
+  "SCENE_SCOPE": 17
+ },
+ "byRule": {
+  "R1": 19,
+  "R2": 10,
+  "R3": 9,
+  "R4": 8,
+  "R5": 14
+ },
+ "bySourceKind": {
+  "EXTERIOR_RENDER_FRAME": 38,
+  "INTERIOR_FRAME": 6,
+  "STRUCTURE_CONFLICT_FRAME": 2,
+  "TECHNICAL_ELEVATION_FRAME": 14
+ },
+ "classAccuracy": "NOT_MEASURED",
+ "editions": 14,
+ "humanTruth": "NOT_RUN",
+ "images": 35,
+ "lineageGroups": 35,
+ "lineageGroupsAnsweredUnderMoreThanOneEdition": [],
+ "packId": "archon-005r-exterior-owner-review-v1",
+ "priority": 34,
+ "publisherClaimedClassQuestions": 20,
+ "questions": 60,
+ "queueSha256": "215e18bd0712c787bff4413f646e1d0e6581f822eb2bada332734a39d42bde76",
+ "schema": "research.005r-exterior.owner-review-coverage.0.1",
+ "secondary": 26
+}

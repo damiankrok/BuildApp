@@ -1,0 +1,236 @@
+{
+ "counts": {
+  "REVIEWED_VISUAL": 6,
+  "TECHNICALLY_CROSSCHECKED": 1,
+  "UNREVIEWED": 1,
+  "conflicts": 1,
+  "notBlind": 0,
+  "questions": 8
+ },
+ "labels": [
+  {
+   "anchorByteHash": "cedda61358de8f5fd703b9a33a0c8bc45de643b6cb974eb752a3ced1e0936b27",
+   "conflict": false,
+   "featureClass": "CARPORT",
+   "kind": "FEATURE_VISIBILITY",
+   "lineageGroup": "lg-syn-house",
+   "metricAuthority": "NONE",
+   "phase1": {
+    "answer": "ABSENT",
+    "answeredAt": null,
+    "assembly": null,
+    "cover": null,
+    "mirrored": null,
+    "notes": null,
+    "region": null,
+    "side": null
+   },
+   "phase2": {
+    "evidenceSource": null,
+    "notes": null,
+    "sourceContext": null,
+    "technicalEvidence": "NO_TECHNICAL_EVIDENCE"
+   },
+   "projectEditionId": "synthetic:edition-a",
+   "questionId": "q-fe62f29278e2",
+   "reviewedByteHash": "cedda61358de8f5fd703b9a33a0c8bc45de643b6cb974eb752a3ced1e0936b27",
+   "reviewerOrigin": "SYNTHETIC_EXAMPLE",
+   "status": "REVIEWED_VISUAL",
+   "viewingMode": "LOCAL_BYTES_HASH_MATCHED"
+  },
+  {
+   "anchorByteHash": "cedda61358de8f5fd703b9a33a0c8bc45de643b6cb974eb752a3ced1e0936b27",
+   "conflict": true,
+   "featureClass": "PERGOLA",
+   "kind": "FEATURE_VISIBILITY",
+   "lineageGroup": "lg-syn-house",
+   "metricAuthority": "NONE",
+   "phase1": {
+    "answer": "PRESENT",
+    "answeredAt": null,
+    "assembly": null,
+    "cover": "OPEN_MEMBERS",
+    "mirrored": null,
+    "notes": "PRZYKŁAD SYNTETYCZNY",
+    "region": [
+     0.64,
+     0.46,
+     0.875,
+     0.75
+    ],
+    "side": null
+   },
+   "phase2": {
+    "evidenceSource": "ELEVATION_IN_PACK",
+    "notes": "PRZYKŁAD SYNTETYCZNY: konflikt zostaje",
+    "sourceContext": null,
+    "technicalEvidence": "TECHNICAL_DOES_NOT_SHOW"
+   },
+   "projectEditionId": "synthetic:edition-a",
+   "questionId": "q-bb4cd69a0e15",
+   "reviewedByteHash": "d8af998afca8fa855b604b07ea9168b0e327392a5323ff007d7b31e4b439ccaf",
+   "reviewerOrigin": "SYNTHETIC_EXAMPLE",
+   "status": "TECHNICALLY_CROSSCHECKED",
+   "viewingMode": "LOCAL_BYTES_HASH_MATCHED"
+  },
+  {
+   "anchorByteHash": "cedda61358de8f5fd703b9a33a0c8bc45de643b6cb974eb752a3ced1e0936b27",
+   "conflict": false,
+   "featureClass": null,
+   "kind": "SCENE_SCOPE",
+   "lineageGroup": "lg-syn-house",
+   "metricAuthority": "NONE",
+   "phase1": {
+    "answer": "EXTERIOR",
+    "answeredAt": null,
+    "assembly": null,
+    "cover": null,
+    "mirrored": null,
+    "notes": null,
+    "region": null,
+    "side": null
+   },
+   "phase2": {
+    "evidenceSource": null,
+    "notes": null,
+    "sourceContext": "AGREES",
+    "technicalEvidence": null
+   },
+   "projectEditionId": "synthetic:edition-a",
+   "questionId": "q-afa89aa1d89a",
+   "reviewedByteHash": "cedda61358de8f5fd703b9a33a0c8bc45de643b6cb974eb752a3ced1e0936b27",
+   "reviewerOrigin": "SYNTHETIC_EXAMPLE",
+   "status": "REVIEWED_VISUAL",
+   "viewingMode": "LOCAL_BYTES_HASH_MATCHED"
+  },
+  {
+   "anchorByteHash": "6d8c7f7582d24415e086256638dfc9278dff1c83c6d89002ec7fda327b505d04",
+   "conflict": null,
+   "featureClass": "PERGOLA",
+   "kind": "FEATURE_VISIBILITY",
+   "lineageGroup": "lg-syn-house-b",
+   "metricAuthority": "NONE",
+   "phase1": {
+    "answer": "CANNOT_TELL",
+    "answeredAt": null,
+    "assembly": null,
+    "cover": null,
+    "mirrored": null,
+    "notes": null,
+    "region": null,
+    "side": null
+   },
+   "phase2": null,
+   "projectEditionId": "synthetic:edition-b",
+   "questionId": "q-9430e7a30b26",
+   "reviewedByteHash": "6d8c7f7582d24415e086256638dfc9278dff1c83c6d89002ec7fda327b505d04",
+   "reviewerOrigin": "SYNTHETIC_EXAMPLE",
+   "status": "REVIEWED_VISUAL",
+   "viewingMode": "LOCAL_BYTES_HASH_MATCHED"
+  },
+  {
+   "anchorByteHash": "6a9da1f8e714007f1a58eb981e6d8ab7fae69ac815badbd0cbff9df38abb0a91",
+   "conflict": null,
+   "featureClass": null,
+   "kind": "SCENE_SCOPE",
+   "lineageGroup": "lg-syn-interior",
+   "metricAuthority": "NONE",
+   "phase1": {
+    "answer": "INTERIOR",
+    "answeredAt": null,
+    "assembly": null,
+    "cover": null,
+    "mirrored": null,
+    "notes": null,
+    "region": null,
+    "side": null
+   },
+   "phase2": null,
+   "projectEditionId": "synthetic:edition-a",
+   "questionId": "q-1f146f8cfe33",
+   "reviewedByteHash": "6a9da1f8e714007f1a58eb981e6d8ab7fae69ac815badbd0cbff9df38abb0a91",
+   "reviewerOrigin": "SYNTHETIC_EXAMPLE",
+   "status": "REVIEWED_VISUAL",
+   "viewingMode": "LOCAL_BYTES_HASH_MATCHED"
+  },
+  {
+   "anchorByteHash": "6a9da1f8e714007f1a58eb981e6d8ab7fae69ac815badbd0cbff9df38abb0a91",
+   "conflict": null,
+   "featureClass": "COLUMN",
+   "kind": "FEATURE_VISIBILITY",
+   "lineageGroup": "lg-syn-interior",
+   "metricAuthority": "NONE",
+   "phase1": {
+    "answer": "ABSENT",
+    "answeredAt": null,
+    "assembly": null,
+    "cover": null,
+    "mirrored": null,
+    "notes": "PRZYKŁAD SYNTETYCZNY: słup we wnętrzu to nie podpora zewnętrzna",
+    "region": null,
+    "side": null
+   },
+   "phase2": null,
+   "projectEditionId": "synthetic:edition-a",
+   "questionId": "q-9f430bff5100",
+   "reviewedByteHash": "6a9da1f8e714007f1a58eb981e6d8ab7fae69ac815badbd0cbff9df38abb0a91",
+   "reviewerOrigin": "SYNTHETIC_EXAMPLE",
+   "status": "REVIEWED_VISUAL",
+   "viewingMode": "LOCAL_BYTES_HASH_MATCHED"
+  },
+  {
+   "anchorByteHash": "00f93baa9488b088895b8ce0e3222e76d8031b1a9992d624c1b92b2a31f2b64b",
+   "conflict": null,
+   "featureClass": "GARAGE",
+   "kind": "FEATURE_VISIBILITY",
+   "lineageGroup": "lg-syn-missing",
+   "metricAuthority": "NONE",
+   "phase1": null,
+   "phase2": null,
+   "projectEditionId": "synthetic:edition-b",
+   "questionId": "q-f00b17cea4cb",
+   "reviewedByteHash": null,
+   "reviewerOrigin": null,
+   "status": "UNREVIEWED",
+   "viewingMode": null
+  },
+  {
+   "anchorByteHash": "6562789b18e22ad6bb60f1f1c5e5ee0c36c30b29b4205cd557272cd3d2d3f365",
+   "conflict": false,
+   "featureClass": "UNKNOWN_ASSEMBLY",
+   "kind": "FEATURE_VISIBILITY",
+   "lineageGroup": "lg-syn-elev",
+   "metricAuthority": "NONE",
+   "phase1": {
+    "answer": "PRESENT",
+    "answeredAt": null,
+    "assembly": "UNKNOWN",
+    "cover": null,
+    "mirrored": null,
+    "notes": null,
+    "region": null,
+    "side": null
+   },
+   "phase2": {
+    "evidenceSource": null,
+    "notes": null,
+    "sourceContext": null,
+    "technicalEvidence": "CANNOT_TELL"
+   },
+   "projectEditionId": "synthetic:edition-a",
+   "questionId": "q-045b6ee0af7a",
+   "reviewedByteHash": "6562789b18e22ad6bb60f1f1c5e5ee0c36c30b29b4205cd557272cd3d2d3f365",
+   "reviewerOrigin": "SYNTHETIC_EXAMPLE",
+   "status": "REVIEWED_VISUAL",
+   "viewingMode": "LOCAL_BYTES_HASH_MATCHED"
+  }
+ ],
+ "packId": "synthetic-demo-owner-review-v1",
+ "packKind": "SYNTHETIC",
+ "phase1Seal": {
+  "digest": "4996640e9ccd1893e5c6803017917bf15e10f643317abaf88fadfaef5a1cb172",
+  "sealedCount": 7
+ },
+ "queueSha256": "7d9e41c195c979bc233064e8011d80c9f47b67df76b631d99a6a4289da5149ab",
+ "schema": "research.005r-exterior.owner-review-labels.0.1"
+}

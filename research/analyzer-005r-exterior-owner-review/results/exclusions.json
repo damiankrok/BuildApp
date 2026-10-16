@@ -1,0 +1,37 @@
+{
+ "packId": "archon-005r-exterior-owner-review-v1",
+ "rows": [
+  {
+   "answeredUnder": "archon:m3ea28300f9b3e",
+   "lineageGroup": "lg-086ff7389bb2",
+   "projectEditionId": "archon:m738275b7537b0",
+   "reason": "BYTE_SHARED_LINEAGE_NOT_PROPAGATED"
+  },
+  {
+   "answeredUnder": "archon:m3ea28300f9b3e",
+   "lineageGroup": "lg-086ff7389bb2",
+   "projectEditionId": "archon:m84f2903cb8e14",
+   "reason": "BYTE_SHARED_LINEAGE_NOT_PROPAGATED"
+  },
+  {
+   "b1ProposalId": null,
+   "featureClass": "COLUMN",
+   "keptRule": "R2",
+   "kind": "FEATURE_VISIBILITY",
+   "lineageGroup": "lg-c9a0e676ff72",
+   "projectEditionId": "archon:m49324d69ef143",
+   "reason": "DEDUP_SAME_KEY",
+   "rule": "R2"
+  },
+  {
+   "featureClass": null,
+   "kind": "SCENE_SCOPE",
+   "lineageGroup": "lg-6d3db554bf5e",
+   "projectEditionId": "archon:ma772868ccf62c",
+   "questionId": "q-f2fae92cefb3",
+   "reason": "CAP_60",
+   "rule": "R4"
+  }
+ ],
+ "schema": "research.005r-exterior.owner-review-exclusions.0.1"
+}

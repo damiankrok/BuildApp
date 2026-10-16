@@ -1005,3 +1005,101 @@ describe('005R-EXTERIOR production cannot reach the exterior evidence study, whi
     expect(g.hardGatesPass).toBe(true)
   })
 })
+
+/**
+ * BUILDPLAN-ANALYZER-005R-EXTERIOR OWNER truth pack — a local, offline review page and its source-free queue. The pack
+ * holds code, ids, byte hashes, project-page addresses and the OWNER's future answers; never a publisher pixel. Only a
+ * person's click may write an answer, and production never reaches it.
+ */
+describe('005R-EXTERIOR OWNER review pack stays research, offline and pixel-free', () => {
+  const DIR = 'research/analyzer-005r-exterior-owner-review/'
+  const packFiles = (): string[] =>
+    [
+      ...execFileSync('git', ['ls-files'], { cwd: ROOT, encoding: 'utf8' }).split('\n'),
+      ...execFileSync('git', ['ls-files', '--others', '--exclude-standard'], { cwd: ROOT, encoding: 'utf8' }).split('\n'),
+    ].filter((f) => f.startsWith(DIR))
+
+  it('no production source imports or names the review pack', () => {
+    const offenders: string[] = []
+    for (const f of productionSources()) {
+      const text = read(f)
+      for (const spec of importsOf(text)) if (/owner-review/.test(spec)) offenders.push(`${f} imports ${spec}`)
+      if (/owner-review-(queue|labels)|OWNER_LOCAL_REVIEW|OwnerReviewCore/.test(codeOf(text))) offenders.push(`${f} names the review pack`)
+    }
+    expect(offenders).toEqual([])
+  })
+
+  it('tracks only text: no picture, no embedded pixels, URLs only as public project pages', () => {
+    const files = packFiles()
+    expect(files.length).toBeGreaterThan(10)
+    expect(files.filter((f) => !/\.(py|json|md|js|mjs|css|html)$/i.test(f))).toEqual([])
+    const textKeys: string[] = []
+    const walk = (f: string, x: unknown): void => {
+      if (Array.isArray(x)) for (const v of x) walk(f, v)
+      else if (x && typeof x === 'object')
+        for (const [k, v] of Object.entries(x)) {
+          if (/^(captions?|titles?|pageText|rawText|alt|altText|heading|description|html|figcaption|urls?|imageUrl|localPath|localFile)$/i.test(k)) textKeys.push(`${f}: ${k}`)
+          walk(f, v)
+        }
+    }
+    for (const f of files) {
+      const text = read(f)
+      expect(text, f).not.toMatch(/(data:(image|application)\/[\w.+-]+;base64,|iVBORw0KGgo|\/9j\/4|UklGR|R0lGOD|Qk[0-9A-Za-z+/]{2}AAAAAAA)[A-Za-z0-9+/]{40,}/)
+      expect(text, f).not.toMatch(/[A-Za-z0-9+/]{256,}={0,2}/)
+      expect(text, f).not.toMatch(/\/home\/|\/tmp\/|\/root\//)
+      expect(statSync(join(ROOT, f)).size, f).toBeLessThanOrEqual(2 ** 20)
+      // data and documents (not the scripts that build or check them) may name only public project pages
+      const isData = /\.(json|md|html)$/.test(f) || /\/(pack|examples)\//.test(f)
+      for (const m of isData ? text.matchAll(/https?:\/\/[^\s"'`)<>]+/g) : []) {
+        const ok = /^https:\/\/www\.archon\.pl\/projekty-domow\/[a-z0-9-]+$/.test(m[0]) || /^http:\/\/127\.0\.0\.1:/.test(m[0])
+        expect(ok, `${f}: ${m[0]}`).toBe(true)
+      }
+      if (f.endsWith('.json')) walk(f, JSON.parse(text))
+    }
+    expect(textKeys).toEqual([])
+    // image addresses (any host, any extension) never appear, not even the CDN the publisher serves pictures from
+    const data = files.filter((f) => /\.(json|md|html)$/.test(f) || /\/(pack|examples)\//.test(f))
+    expect(data.filter((f) => /cdn1\.archon|assets\.archon|\.jpe?g\b|\.png\b|\.webp\b/i.test(read(f)))).toEqual([])
+  })
+
+  it('the page is offline by construction: a closed CSP and no network API in the page code', () => {
+    const html = read(`${DIR}review.html`)
+    expect(html).toMatch(/default-src 'none'; script-src 'self'; style-src 'self'; img-src blob:; connect-src 'none'/)
+    for (const f of ['review-core.js', 'review-ui.js', 'boot.js', 'sha256.js'])
+      expect(codeOf(read(`${DIR}tool/${f}`)), f).not.toMatch(/\bfetch\(|XMLHttpRequest|WebSocket|sendBeacon|EventSource|navigator\.serviceWorker|\bimport\(/)
+  })
+
+  it('private and pixel writers refuse the repository', () => {
+    for (const [f, args] of [
+      ['make_synthetic_demo.py', [join(ROOT, 'tmp-owner-review-refused')]],
+      ['check_page_access.py', [join(ROOT, 'tmp-owner-review-refused')]],
+    ] as const) {
+      const run = spawnSync('python3', ['-I', join(ROOT, DIR, f), ...args], { cwd: ROOT, encoding: 'utf8' })
+      expect(run.status, f).not.toBe(0)
+      expect(run.stderr + run.stdout, f).toMatch(/REFUSED/)
+      expect(existsSync(join(ROOT, 'tmp-owner-review-refused'))).toBe(false)
+    }
+  })
+
+  it('the queue rebuilds byte-identically and its rule and review tests pass', () => {
+    const check = spawnSync('python3', ['-I', join(ROOT, DIR, 'build_pack.py'), '--check'], { cwd: ROOT, encoding: 'utf8' })
+    expect(check.stdout + check.stderr).toMatch(/OK: pack reproducible/)
+    const py = spawnSync('python3', ['-I', join(ROOT, DIR, 'test/test_pack.py')], { cwd: ROOT, encoding: 'utf8' })
+    expect(py.stderr, py.stderr).toMatch(/Ran \d+ tests[\s\S]*\nOK\s*$/)
+    const node = spawnSync(process.execPath, ['--test', join(ROOT, DIR, 'test/core.test.mjs')], { cwd: ROOT, encoding: 'utf8' })
+    expect(node.stdout, node.stdout + node.stderr).toMatch(/# fail 0/)
+    expect(node.status).toBe(0)
+  })
+
+  it('no human truth is claimed: the committed template is empty and the only filled example is SYNTHETIC', () => {
+    const t = JSON.parse(read(`${DIR}pack/labels-template-EMPTY.json`)) as { labels: { status: string; reviewerOrigin: unknown }[] }
+    expect(t.labels.every((l) => l.status === 'UNREVIEWED' && l.reviewerOrigin === null)).toBe(true)
+    const tracked = packFiles().filter((f) => f.endsWith('.json'))
+    for (const f of tracked) expect(read(f), f).not.toMatch(/"OWNER_LOCAL_REVIEW"/)
+    const ex = JSON.parse(read(`${DIR}examples/example-labels-SYNTHETIC.json`)) as { packKind: string; labels: { reviewerOrigin: string | null }[] }
+    expect(ex.packKind).toBe('SYNTHETIC')
+    expect(ex.labels.every((l) => l.reviewerOrigin === null || l.reviewerOrigin === 'SYNTHETIC_EXAMPLE')).toBe(true)
+    const cov = JSON.parse(read(`${DIR}results/coverage.json`)) as { humanTruth: string; classAccuracy: string }
+    expect([cov.humanTruth, cov.classAccuracy]).toEqual(['NOT_RUN', 'NOT_MEASURED'])
+  })
+})
