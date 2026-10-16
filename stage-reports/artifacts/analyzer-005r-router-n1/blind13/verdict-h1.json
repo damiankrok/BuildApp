@@ -1,0 +1,47 @@
+{
+ "applicable": {
+  "P1": true,
+  "P2": true,
+  "P4prime": true
+ },
+ "drawnSha": "d069fa6f54ffe7ba39c93d3d96ef8087d03a29e5",
+ "elevationFrames": 4,
+ "graph": {
+  "removedByKind": {
+   "LINEAR_VOLUME_CANDIDATE": 84,
+   "LOGGIA": 10,
+   "MASS_REGION": 6,
+   "OPENING": 79,
+   "RIDGE": 6,
+   "ROOF_EDGE": 24,
+   "SILHOUETTE": 6,
+   "SURFACE_REGION": 36
+  },
+  "typed": {
+   "T1_observationRemoved": 251,
+   "T2_relationRemoved": 118,
+   "T3_gapRemoved": {
+    "EXTRACTOR_GAP_MISSING": 20,
+    "VISION_FACADE_GAP": 6
+   },
+   "T4_refusalAdded": 6,
+   "T5_extractorRemoved": [],
+   "T6_conflictRemoved": 0
+  },
+  "unexpectedCount": 0
+ },
+ "head": "d069fa6f54ffe7ba39c93d3d96ef8087d03a29e5",
+ "house": "h1",
+ "ledger": "NOT_EXERCISED",
+ "notMeasured": [
+  "P3 (typed refusal keeps no metric content)",
+  "P5prime",
+  "P6"
+ ],
+ "outcome": "REFUSED RECONSTRUCTION_FAILED/RECONSTRUCTION_FAILED MODEL_EMISSION_FAILED",
+ "p8": null,
+ "refusedPerspectiveFrames": 6,
+ "schema": "research.005r-router-n1.blind.1",
+ "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-jasminowcach-2-e-m13029133c9f62",
+ "verdict": "PASS"
+}

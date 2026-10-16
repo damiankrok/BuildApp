@@ -1978,3 +1978,26 @@ Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005R_ROUTER_SOURCE_ROLE_GUARD.md
   63/63 when rerun alone. CI: green on the last content commit `f3e3606` (run 38754629214, 39/2); on the report-only
   commit after it the Android UI evidence job failed twice on the known Compose `openStage` race (run 38759573725, attempts
   1–2, one rerun used) — not this stage's code, recorded rather than retried further.
+
+## Where projection-aware facade routing stands (STAGE BUILDPLAN-ANALYZER-005R-ROUTER-N1-ADOPT)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005R_ROUTER_N1_ADOPTION_GATE.md`. Evidence:
+`stage-reports/artifacts/analyzer-005r-router-n1/`. Harness, audit and preregistration (`dc9f735`, addenda A–C):
+`research/analyzer-005r-router-n1/`. Branch `analyzer/visual-source-projection-guard-adoption-v1`.
+
+- **Production change (one policy):** `readsAsFacade(roles)` in `packages/source-vision/src/tasks.ts` routes the
+  deterministic facade extractors (`source-analyzer/src/analyze.ts`), the `FACADE_DECOMPOSITION` vision task
+  (`tasksForRoles`) and the vision apply boundary. A perspective render, interior or exterior, stays a declared frame
+  (cameras still solve from its raster) but carries no facade observation, only a named `NOT_ATTEMPTED` refusal.
+  Elevations are never refused. No enum, schema, role, geometry, OCR or UI change.
+- **Measured:** 37 ARCHON DEV rows — models 23/23 and typed refusals 14/14 identical, orthographic evidence identical,
+  metric and candidate content identical on 23, graph diff fully accounted (0 unexpected), deterministic under reversal
+  and shuffle; 18 camera rows — 67/67 cameras identical, 2 286 false `USED_AS_CORROBORATION` records gone, 0 added;
+  vision path closed (mock live provider, 2 vision mutants); 9/9 mutants; Node 22 and Node 18 focused suites green;
+  BLIND_13 (round 13, `dom-w-jasminowcach`, `dom-przy-skwerze`) PASS 2/2.
+- **Not claimed:** no scene classifier, no interior/exterior truth (`HUMAN_TRUTH: NOT_RUN`), no exterior detector,
+  no 3D change; ARM64 physical PENDING; no APK.
+- **Open (disclosed):** analyzer version labels unchanged although the graph and its hashes change on pages with
+  renders; `apps/web/src/sample-observations.json` still shows facade observations on a perspective frame;
+  `npm test` / `npm run e2e` not run locally (FAST CI budget) — the one CI run on the final head is decisive and is
+  reported in the closing handoff.

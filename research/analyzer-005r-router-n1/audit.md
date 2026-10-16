@@ -82,6 +82,14 @@ reverted; no DEV row, anchor or replay has run with it before preregistration.
 - The two reviews (preregistration §6, "after Tier C") were started while this last Tier C leg (N1vshuf) was still
   running; they had P1–P6 and P8 on 37/18 rows, not P7′ on N1vshuf. Disclosed process deviation; no predicate depends
   on review timing.
+- **INC-4 (2026-10-16, after the round-13 draw, before anything was acquired).** `blind.mjs`'s clean-tree check
+  parsed `git status --porcelain` after a whole-output `trim()`, so the only dirty line (` M holdout/LEDGER.ndjson`,
+  expected after the draw) lost its leading space and was not recognised: both houses were refused before any directory
+  was created. HEAD had to stay the drawn SHA, so the fix could not be committed first; the blind ran once from
+  `blind-inc4.mjs` (outside the repo at run time, committed afterwards; sha256 `0b52fc7e…d484`), which differs from the
+  pinned `blind.mjs` in exactly two lines: `REPO` is the absolute repository path, and the clean check uses
+  `git status --porcelain -z`. The harness pins, run-once refusal and fail-closed steps are unchanged. The draw was not
+  repeated.
 - `pkill -f` with a pattern matching my own shell ended that shell twice (exit 144); the processes were then killed by
   pid. No file was affected.
 

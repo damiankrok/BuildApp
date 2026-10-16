@@ -1,0 +1,58 @@
+{
+ "applicable": {
+  "P1": true,
+  "P2": true,
+  "P3": true,
+  "P4prime": true,
+  "P5prime": true,
+  "P6": true,
+  "P8": true
+ },
+ "drawnSha": "d069fa6f54ffe7ba39c93d3d96ef8087d03a29e5",
+ "elevationFrames": 4,
+ "graph": {
+  "removedByKind": {
+   "LINEAR_VOLUME_CANDIDATE": 83,
+   "LOGGIA": 36,
+   "MASS_REGION": 9,
+   "OPENING": 153,
+   "RIDGE": 9,
+   "ROOF_EDGE": 36,
+   "SILHOUETTE": 9,
+   "SURFACE_REGION": 37,
+   "WALL_REGION": 4
+  },
+  "typed": {
+   "T1_observationRemoved": 376,
+   "T2_relationRemoved": 166,
+   "T3_gapRemoved": {
+    "EXTRACTOR_GAP_MISSING": 61,
+    "VISION_FACADE_GAP": 9
+   },
+   "T4_refusalAdded": 9,
+   "T5_extractorRemoved": [],
+   "T6_conflictRemoved": 0
+  },
+  "unexpectedCount": 0
+ },
+ "head": "d069fa6f54ffe7ba39c93d3d96ef8087d03a29e5",
+ "house": "h2",
+ "ledger": "EXERCISED",
+ "notMeasured": [],
+ "outcome": "MODEL",
+ "p8": {
+  "added": 0,
+  "camerasSolved": [
+   4,
+   4
+  ],
+  "removedByDisposition": {
+   "IGNORED_WITH_REASON": 243,
+   "USED_AS_CORROBORATION": 133
+  }
+ },
+ "refusedPerspectiveFrames": 9,
+ "schema": "research.005r-router-n1.blind.1",
+ "url": "https://www.archon.pl/projekty-domow/projekt-dom-przy-skwerze-e-ver-2-me7e273a70f1b4",
+ "verdict": "PASS"
+}
