@@ -193,3 +193,19 @@ dumps the feature-graph content with those two inputs (and the hash) removed, fo
 and N1v (variant), on the 18 camera rows; the result is reported as `featureGraphContentEqual` per row. It runs
 concurrently with N1vshuf, whose timings are not a predicate.
 
+**C (2026-10-16, after Tier C and the one review round, before PRE_HOLDOUT_13_SHA; harness and tests only, no predicate
+touched).** Results at this point: P1 37/37, P2 37/37, P3 23/23 (+14 NOT_MEASURED), P4′ 37/37 with 0 unexpected,
+P5′ 23/23, P6 23/23, P7′ R0=R0rev 37/37 and N1v=N1vshuf 37/37, P8 18/18 (67/67 cameras), P9 0/198 + 146/146
+elevations unrefused, P10 runtime median 0.84, RSS 1.08×, +2 544 source bytes, Node 22 and Node 18 focused 91/91,
+V and mutations green. Review dispositions in `stage-reports/artifacts/analyzer-005r-router-n1/reviews/dispositions.md`.
+Changes: (1) R-B #1 — `blind.mjs` refuses an existing house directory, pins `compare_n1.py` 8bcb3c08…3ddb,
+`p8_n1.py` cf676507…a035, `run-case.ts` cc8203f3…dbb, `ledger.ts` a5a4cfe9…c032, `variant.mjs` d29313cc…fe80, and
+stops fail-closed on any non-zero step; `blind.mjs` sha256 `6a963f0b1dc46a31d268583427a9c34f2195f9a861ce4fb14a897a642d117f9c`.
+(2) R-B #2 — `holdout/select.mjs` refuses a second draw under a round ≥ 13 label (sha256 `c20dd96f…e3ba`).
+(3) R-B #3 — one assertion added to `vision.test.ts` (apply boundary lands an answer on an ELEVATION sealed
+PERSPECTIVE) and mutant M9 (9/9 killed behaviourally). The production patch is
+`candidate/n1v-production-final.patch` (`f296551d…1c45`): its three `src` hunks are byte-identical to
+`n1v-production.patch`, and the tree's `source-analyzer/src` and `source-vision/src` are byte-identical to the
+DEV-measured variant. Rule 7.2 is reached: the patch is applied to production, and this commit is pushed to the
+stage branch only as `PRE_HOLDOUT_13_SHA`.
+

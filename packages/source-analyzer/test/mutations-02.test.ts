@@ -103,13 +103,19 @@ describe('1. the section is served at a quarter of its resolution', () => {
 })
 
 describe('2. the front perspective is dropped from the package', () => {
-  it('loses the observations that only it carried, and says the asset is gone rather than silently shrinking', async () => {
+  it('loses the frame and the named refusal it carried, and says the asset is gone rather than silently shrinking', async () => {
     const withRender = await analyseScene([FRONT, RENDER])
     const without = await analyseScene([FRONT])
     expect(withRender.graph.relations.filter((r) => r.provenance.extractor === 'DERIVED').length).toBeGreaterThanOrEqual(0)
     expect(withRender.graph.coordinateFrames).toHaveLength(2)
     expect(without.graph.coordinateFrames).toHaveLength(1)
-    expect(without.graph.observations.length).toBeLessThan(withRender.graph.observations.length)
+    // A perspective frame is declared but not read as a facade (projection-consumer alignment): it carries no
+    // observation of its own, only a named refusal, and dropping it removes both the frame and that refusal.
+    const renderFrame = withRender.graph.coordinateFrames.find((f) => f.roles.document === 'PERSPECTIVE_RENDER')
+    expect(withRender.graph.observations.filter((o) => o.frameId === renderFrame?.id)).toHaveLength(0)
+    expect(without.graph.observations.length).toBe(withRender.graph.observations.length)
+    expect(withRender.graph.unresolved.filter((u) => u.assetId === renderFrame?.assetId && u.status === 'NOT_ATTEMPTED' && u.what.startsWith('facade observations on the perspective render'))).toHaveLength(1)
+    expect(without.graph.unresolved.filter((u) => u.assetId === renderFrame?.assetId)).toHaveLength(0)
     expect(without.graph.contentHash).not.toBe(withRender.graph.contentHash)
     expect(without.graph.coordinateFrames.some((f) => f.roles.document === 'PERSPECTIVE_RENDER')).toBe(false)
     expect(withRender.graph.coordinateFrames.some((f) => f.roles.document === 'PERSPECTIVE_RENDER')).toBe(true)

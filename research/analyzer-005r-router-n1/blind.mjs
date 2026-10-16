@@ -13,6 +13,7 @@
  * Refuses unless the tree is clean and HEAD equals the drawn SHA recorded in holdout/LEDGER.ndjson.
  */
 import { execFileSync, spawnSync } from 'node:child_process'
+import { createHash } from 'node:crypto'
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { gunzipSync } from 'node:zlib'
@@ -30,11 +31,21 @@ if (git('status', '--porcelain').split('\n').filter((l) => l && l.slice(3) !== '
 const draw = readFileSync(join(REPO, 'holdout/LEDGER.ndjson'), 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l)).find((d) => d.label === 'BUILDPLAN-005R-ROUTER-N1-ADOPT-HOLDOUT')
 if (!draw || !draw.urls.includes(url)) throw new Error('REFUSED: the address is not a round-13 draw')
 if (draw.preHoldoutSha !== head) throw new Error(`REFUSED: HEAD ${head} is not the drawn SHA ${draw.preHoldoutSha}`)
+// Review R-B #1 (addendum C): the harness the blind relies on is pinned to the hashes recorded before the freeze;
+// a house runs exactly once (an existing house directory is refused, never resumed or overwritten); any step that
+// exits non-zero stops the run fail-closed.
+const PINS = {"compare_n1.py": "8bcb3c08d331bd91fd5a46b60b87ff282f5f8792a29fb081b91d7126ffa03ddb", "p8_n1.py": "cf6765076c31dda89003f49f0445c59d6e00272711021c0c90cedbbc749ca035", "run-case.ts": "cc8203f31f13c0e9c72fab1528d15c0c50c4073e04923cc55e5d6b365edffdbb", "ledger.ts": "a5a4cfe9f00f87a522f8b0d953aa42ace62719d5e1c65e1fa8a3bdd698b1c032", "variant.mjs": "d29313ccd5bfa5e9c30469783ad7118569a34182a43e36087c057683d137fe80"}
+for (const [f, want] of Object.entries(PINS)) {
+  const got = createHash('sha256').update(readFileSync(join(REPO, 'research/analyzer-005r-router-n1', f))).digest('hex')
+  if (got !== want) throw new Error(`REFUSED: ${f} is ${got}, pinned ${want}`)
+}
 const dir = join(work, house)
+if (existsSync(dir)) throw new Error(`REFUSED: ${dir} exists; a blind house runs once and is never resumed or overwritten`)
 const cache = join(dir, 'cache'), acq = join(dir, 'acquire'), runs = join(dir, 'runs'), led = join(dir, 'ledger')
 for (const d of [cache, acq, runs, led]) mkdirSync(d, { recursive: true })
 const sh = (cmd, args, env = {}) => {
   const r = spawnSync(cmd, args, { cwd: REPO, encoding: 'utf8', env: { ...process.env, ...env }, maxBuffer: 1 << 28 })
+  if (r.status !== 0) throw new Error(`STOPPED fail-closed: ${cmd} ${args.slice(0, 3).join(' ')} exited ${r.status}\n${String(r.stderr).slice(-2000)}`)
   return { code: r.status, out: `${r.stdout}\n${r.stderr}` }
 }
 const log = []

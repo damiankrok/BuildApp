@@ -20,7 +20,7 @@ Base `0f2c347c0be03a32510f1e54460eab6fdf1b65a5` (local = origin `analyzer/visual
 | 9 | cross-view identity | `source-analyzer/src/identity.ts:70-123` | orthographic pairs only. |
 | 10 | elevation registration | `reconstruction/src/solve.ts:312` | `ORTHOGRAPHIC_ELEVATION` only. |
 | 11 | perspective camera | `reconstruction/src/v2/reconstruct-v2.ts:1166-1171`, `v2/camera.ts:838` | solved from the **raster** (silhouette corners), not from observations. Unaffected by any observation change. |
-| 12 | ledger (**false provenance**) | `reconstruct-v2.ts:1177` | every observation on a perspective frame with a solved camera is recorded `USED_AS_CORROBORATION` "depth order was checked against it" — no code performs that check. |
+| 12 | ledger (**false provenance**) | `reconstruct-v2.ts:1177` | every observation on a perspective frame with a solved camera is recorded `USED_AS_CORROBORATION` "depth order was checked against it" — no code performs that check. A second site (review R-A F7): when no camera/roof can be attempted, perspective RIDGE/ROOF_EDGE fall through to `reconstruct-v2.ts:1418` and are also recorded `USED_AS_CORROBORATION`. |
 | 13 | LVC stripe rule | `reconstruct-v2.ts:1148-1153` | a LINEAR_VOLUME_CANDIDATE on an unregistered view → `IGNORED_WITH_REASON`. |
 | 14 | candidate / model / refusal / UI | `analysis-service/src/run.ts` summary; Android analyzer screen | model, refusals, quality levels and warnings never read perspective observations (005R-ROUTER consumer map §4; re-measured byte-for-byte there). UI shows observation counts and hash prefixes. |
 
@@ -73,6 +73,15 @@ reverted; no DEV row, anchor or replay has run with it before preregistration.
   `source-analyzer`/`source-vision` sources before and after each row (`sources.json`, `TREE_MOVED`); challengers run
   only through the variant alias (`variant.mjs` now copies and aliases `source-vision` too). The control was rerun
   clean (`R0ctl`, 3 rows, `moved: false`).
+- **INC-3 (2026-10-15 ~23:50Z, during N1vshuf).** The session container restarted. N1vshuf had completed 7 rows
+  (dom-w-tymianku, dom-w-krasnokwiatach, dom-w-daliach, dom-miniaturka, dom-w-glogownikach, dom-w-akebiach,
+  dom-w-cieszyniankach); 3 rows (A06, A07, dom-w-murajach) were mid-run with no output. As preregistration §3 allows
+  for a harness crash before any output, the remaining 30 rows were run once more with the same `--order reverse
+  --shuffle N1-ADOPT` (the per-package shuffle seed is `N1-ADOPT:<row>`, so each package's asset order is unchanged);
+  the 7 completed rows were kept. Logs: `N1vshuf-part1.out`, `N1vshuf-part2.out` (outside Git).
+- The two reviews (preregistration §6, "after Tier C") were started while this last Tier C leg (N1vshuf) was still
+  running; they had P1–P6 and P8 on 37/18 rows, not P7′ on N1vshuf. Disclosed process deviation; no predicate depends
+  on review timing.
 - `pkill -f` with a pattern matching my own shell ended that shell twice (exit 144); the processes were then killed by
   pid. No file was affected.
 

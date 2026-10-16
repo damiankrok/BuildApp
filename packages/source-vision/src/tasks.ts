@@ -90,6 +90,21 @@ export const taskDefinition = (task: VisionTask): TaskDefinition => {
 /** The tasks that apply to a document role, in the order they should be run. */
 export const tasksForDocument = (document: string): TaskDefinition[] => TASKS.filter((t) => t.documents.includes(document))
 
+/**
+ * Whether a picture can be read as an orthographic facade: an elevation, or a
+ * render an adapter declares orthographic. Every reader of facade evidence (the
+ * metric layer, cross-view identity, elevation registration) reads orthographic
+ * frames only, so on a perspective picture, interior or exterior alike, a facade
+ * reading could only make claims about a facade that nothing can measure. The
+ * deterministic extractors and the facade vision task are routed by this one rule.
+ */
+export const readsAsFacade = (roles: { document: string; projection?: string }): boolean =>
+  roles.document === 'ELEVATION' || (roles.document === 'PERSPECTIVE_RENDER' && roles.projection === 'ORTHOGRAPHIC_ELEVATION')
+
+/** The tasks that apply to a picture with these roles: its document's tasks, less a facade decomposition it cannot be read as. */
+export const tasksForRoles = (roles: { document: string; projection?: string }): TaskDefinition[] =>
+  tasksForDocument(roles.document).filter((t) => t.task !== 'FACADE_DECOMPOSITION' || readsAsFacade(roles))
+
 // ---------------------------------------------------------------------------
 // The JSON Schema handed to a provider
 // ---------------------------------------------------------------------------

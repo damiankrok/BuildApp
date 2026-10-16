@@ -27,8 +27,10 @@ import {
   fixtureVisionReasoner,
   nullVisionReasoner,
   parseProviderJson,
+  readsAsFacade,
   taskDefinition,
   tasksForDocument,
+  tasksForRoles,
   toPixelGeometry,
   validateVisionResponse,
   visionResponseJsonSchema,
@@ -79,6 +81,22 @@ describe('a well-formed answer', () => {
     const response = validateVisionResponse(good(), request())
     expect(response.observations).toHaveLength(2)
     expect(response.relations[0].from).toBe(0)
+  })
+
+  it('refuses to land a facade decomposition on a perspective frame, and lands the same answer on the same bytes filed as an elevation', () => {
+    const provider = { id: 'vision.test', model: 'test-1', version: '1.0.0' }
+    const builder = new ObservationGraphBuilder('pkg-1', 'c'.repeat(64))
+    const handle = builder.declareExtractor(extractorNameFor(provider, 'FACADE_DECOMPOSITION'), extractorVersionFor(provider), 'VISION_MODEL')
+    const render = builder.declareFrame('asset-render', HASH, { width: 1000, height: 500 }, { document: 'PERSPECTIVE_RENDER', storey: 'NOT_APPLICABLE', annotation: 'PLAIN', view: 'UNKNOWN', projection: 'PERSPECTIVE' })
+    expect(() => applyVisionResponse(builder, handle, render, validateVisionResponse(good(), request()), provider, 'FACADE_DECOMPOSITION')).toThrow(/only an orthographic view is read as a facade/)
+    expect(builder.observationCount).toBe(0)
+    const front = builder.declareFrame('asset-front', HASH, { width: 1000, height: 500 }, { document: 'ELEVATION', storey: 'NOT_APPLICABLE', annotation: 'PLAIN', view: 'FRONT', projection: 'ORTHOGRAPHIC_ELEVATION' })
+    expect(applyVisionResponse(builder, handle, front, validateVisionResponse(good(), request()), provider, 'FACADE_DECOMPOSITION').observations).toHaveLength(2)
+    // an elevation is a facade whatever projection it was sealed with: the apply boundary follows the same rule as the routing
+    const sealedPerspective = builder.declareFrame('asset-side', HASH, { width: 1000, height: 500 }, { document: 'ELEVATION', storey: 'NOT_APPLICABLE', annotation: 'PLAIN', view: 'LEFT', projection: 'PERSPECTIVE' })
+    let landed = -1
+    expect(() => { landed = applyVisionResponse(builder, handle, sealedPerspective, validateVisionResponse(good(), request()), provider, 'FACADE_DECOMPOSITION').observations.length }).not.toThrow()
+    expect(landed).toBe(2)
   })
 
   it('becomes observations on the frame the CALLER chose, never one the provider names', () => {
@@ -238,6 +256,21 @@ describe('the task contract handed to a provider', () => {
     expect(tasksForDocument('ELEVATION').map((t) => t.task)).toEqual(['FACADE_DECOMPOSITION'])
     expect(tasksForDocument('FLOOR_PLAN').map((t) => t.task)).toEqual(['PLAN_INTERPRETATION'])
     expect(tasksForDocument('SITE_PLAN')).toEqual([])
+  })
+
+  it('asks for a facade decomposition only on a picture that can be read as an orthographic facade', () => {
+    expect(tasksForRoles({ document: 'ELEVATION', projection: 'ORTHOGRAPHIC_ELEVATION' }).map((t) => t.task)).toEqual(['FACADE_DECOMPOSITION'])
+    // an elevation is a facade whatever projection it was sealed with: the rule never downgrades one
+    expect(tasksForRoles({ document: 'ELEVATION', projection: 'PERSPECTIVE' }).map((t) => t.task)).toEqual(['FACADE_DECOMPOSITION'])
+    expect(tasksForRoles({ document: 'PERSPECTIVE_RENDER', projection: 'ORTHOGRAPHIC_ELEVATION' }).map((t) => t.task)).toEqual(['FACADE_DECOMPOSITION'])
+    // a perspective picture, interior or exterior, and one whose projection nobody stated, is not a facade
+    for (const projection of ['PERSPECTIVE', 'UNKNOWN', undefined]) {
+      expect(tasksForRoles({ document: 'PERSPECTIVE_RENDER', projection })).toEqual([])
+      expect(readsAsFacade({ document: 'PERSPECTIVE_RENDER', projection })).toBe(false)
+    }
+    // the other documents keep their own tasks
+    expect(tasksForRoles({ document: 'FLOOR_PLAN', projection: 'ORTHOGRAPHIC_PLAN' }).map((t) => t.task)).toEqual(['PLAN_INTERPRETATION'])
+    expect(tasksForRoles({ document: 'SECTION', projection: 'ORTHOGRAPHIC_SECTION' }).map((t) => t.task)).toEqual(['SECTION_INTERPRETATION'])
   })
 })
 

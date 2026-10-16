@@ -21,7 +21,7 @@ import { ObservationGraphBuilder } from '@buildapp/source-observations'
 import type { ExtractorHandle, SourceCoordinateFrame, SourceObservation, SourceObservationGraph } from '@buildapp/source-observations'
 import { selectedVariant } from '@buildapp/source-package'
 import type { SourceAsset, SourcePackage } from '@buildapp/source-package'
-import { VisionResponseRejected, VisionUnavailable, applyVisionResponse, extractorNameFor, extractorVersionFor, tasksForDocument } from '@buildapp/source-vision'
+import { VisionResponseRejected, VisionUnavailable, applyVisionResponse, extractorNameFor, extractorVersionFor, readsAsFacade, tasksForRoles } from '@buildapp/source-vision'
 import type { VisionContextFact, VisionReasoner, VisionTask, VisionTrace } from '@buildapp/source-vision'
 import { prepareRaster } from './prepare.js'
 import type { Prepared } from './prepare.js'
@@ -161,7 +161,17 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
     const before = builder.observationCount
     const analysis: AssetAnalysis = { asset, frame, prepared, observations: [], visionAttempted: false, visionAccepted: 0 }
 
-    if (document === 'ELEVATION' || document === 'PERSPECTIVE_RENDER') {
+    // The facade readers, deterministic and vision alike, read an ORTHOGRAPHIC facade: an outline, a ridge,
+    // rectangles in the wall plane. Every reader of what they write (the metric layer, cross-view identity,
+    // elevation registration) reads orthographic frames only, so on a perspective picture, an interior or an
+    // exterior one alike, they could only write claims about the facade that nothing can measure. Such a frame is
+    // still declared, because a perspective camera is solved from its raster, and it is refused by name instead of
+    // being read as a facade (`readsAsFacade`).
+    const perspectiveRefused = document === 'PERSPECTIVE_RENDER' && !readsAsFacade(asset.roles)
+    if (perspectiveRefused) {
+      builder.unresolved(`facade observations on the perspective render ${asset.id}`, `the facade extractors and the facade vision task read orthographic views only and this picture's projection is ${asset.roles.projection}, so nothing on it was read as a facade`, 'NOT_ATTEMPTED', asset.id)
+      skipped.push({ assetId: asset.id, reason: `facade extractors not run: projection ${asset.roles.projection} is not orthographic` })
+    } else if (document === 'ELEVATION' || document === 'PERSPECTIVE_RENDER') {
       const handles = Object.fromEntries(ELEVATION_EXTRACTORS.map((e) => [e.key, declare(e.name, e.version, 'DETERMINISTIC_CV')])) as ElevationHandles
       analysis.elevation = extractElevation(builder, frame, prepared, handles)
     } else if (document === 'FLOOR_PLAN') {
@@ -176,7 +186,7 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
     }
 
     // ---- the vision pass, alongside and never instead ---------------------
-    const tasks = tasksForDocument(document)
+    const tasks = tasksForRoles(asset.roles)
       .map((t) => t.task)
       .filter((t) => options.visionTasks === undefined || options.visionTasks.includes(t))
     for (const task of tasks) {
@@ -221,7 +231,7 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
     checkpoint.tick()
     if (options.retainPrepared === false) delete analysis.prepared
     analysis.observations = builder.snapshot().filter((o) => o.frameId === frame.id)
-    if (builder.observationCount === before && !analysis.visionAttempted) {
+    if (builder.observationCount === before && !analysis.visionAttempted && !perspectiveRefused) {
       builder.unresolved(`any observation at all on asset ${asset.id}`, 'the extractors for this document role found nothing in the image', 'MISSING', asset.id)
     }
     assets.push(analysis)

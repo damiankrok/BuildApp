@@ -298,6 +298,9 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     const declared = JSON.parse(readFileSync(join(root, 'holdout', 'pool.meta.json'), 'utf8')).poolSha256
     if (sha256(text) !== arg('pool-sha256') || sha256(text) !== declared) throw new Error('pool hash does not match the declared and committed POOL_SHA256')
     const exclusions = readFileSync(join(root, 'holdout', round.excluded), 'utf8')
+    // round 13 onward (005R-ROUTER-N1-ADOPT review R-B #2): a label already in the ledger, committed or not, is burned;
+    // a second draw under it is refused rather than appended
+    if (Number(arg('round')) >= 13 && readFileSync(join(root, 'holdout', 'LEDGER.ndjson'), 'utf8').split('\n').some((l) => l && JSON.parse(l).label === round.label)) throw new Error(`refusing: ${round.label} was already drawn`)
     if (round.picks === 1) {
       // Round 3: one ARCHON draw, one DobreDomy draw, each with its own label and pool.
       git('ls-files', '--error-unmatch', `holdout/${DOBREDOMY.pool}`, `holdout/${DOBREDOMY.meta}`, `holdout/${DOBREDOMY.excluded}`)

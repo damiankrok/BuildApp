@@ -20,6 +20,7 @@
 import { round6 } from '@buildapp/source-common'
 import type { ObservationGraphBuilder, ExtractorHandle, PixelGeometry, SourceCoordinateFrame, SourceObservation } from '@buildapp/source-observations'
 import type { VisionGeometry, VisionObservationResponse, VisionProviderInfo, VisionTask } from './schema.js'
+import { readsAsFacade } from './tasks.js'
 
 /** The smallest positional tolerance a vision model's answer may carry, in pixels. */
 export const MIN_VISION_POSITION_PX = 1
@@ -61,6 +62,7 @@ export type AppliedVision = {
  */
 export function applyVisionResponse(builder: ObservationGraphBuilder, extractor: ExtractorHandle, frame: SourceCoordinateFrame, response: VisionObservationResponse, provider: VisionProviderInfo, task: VisionTask): AppliedVision {
   if (frame.variantByteHash !== response.assetByteHash) throw new Error(`refusing to apply a ${task} answer about bytes ${response.assetByteHash.slice(0, 12)} to frame ${frame.id}, which is bytes ${frame.variantByteHash.slice(0, 12)}`)
+  if (task === 'FACADE_DECOMPOSITION' && !readsAsFacade(frame.roles)) throw new Error(`refusing to apply a ${task} answer to frame ${frame.id}: its projection is ${frame.roles.projection}, and only an orthographic view is read as a facade`)
 
   const larger = Math.max(frame.size.width, frame.size.height)
   let flooredUncertainty = 0

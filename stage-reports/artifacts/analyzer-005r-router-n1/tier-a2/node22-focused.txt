@@ -1,0 +1,29 @@
+ ✓ packages/source-analyzer/test/vision-path.test.ts (5 tests)
+   ✓ a recorded answer joins the graph beside the deterministic reading > lands as observations on the frame the analyzer chose, carrying the provider version 
+   ✓ a recorded answer joins the graph beside the deterministic reading > finds the SAME member with the CV extractor, and keeps the two readings apart 
+   ✓ a recorded answer joins the graph beside the deterministic reading > runs the deterministic extractors whether or not a provider is configured, and says which happened 
+ ✓ packages/source-analyzer/test/stair.test.ts (14 tests)
+ ✓ packages/source-analyzer/test/depth.test.ts (9 tests)
+ ✓ packages/source-vision/test/vision.test.ts (36 tests)
+ ✓ packages/source-analyzer/test/prepare.test.ts (2 tests)
+ ✓ packages/source-analyzer/test/projection-gate.test.ts (10 tests)
+   ✓ the facade extractors read orthographic frames only > the same pixels give facade observations as an elevation (control) 
+   ✓ the facade extractors read orthographic frames only > a perspective picture, interior or exterior, is declared, carries no facade observation and one named refusal 
+   ✓ the facade extractors read orthographic frames only > an elevation's observations do not depend on the perspective pictures published beside it 
+   ✓ the facade extractors read orthographic frames only > with the product reasoner configured, the refusal stands alone: no facade vision pass is asked for, so none is reported missing 
+   ✓ the facade extractors read orthographic frames only > the graph does not depend on the order the package lists its assets in 
+   ✓ the facade vision task is routed by the same rule (mock live provider, no network) > a perspective picture, interior or exterior, is never offered to a facade provider, and no vision answer lands on it 
+ ✓ packages/source-analyzer/test/mutations-02.test.ts (15 tests)
+   ✓ 1. the section is served at a quarter of its resolution > reads fewer level datums, and every reading it does make is coarser 
+   ✓ 2. the front perspective is dropped from the package > loses the frame and the named refusal it carried, and says the asset is gone rather than silently shrinking 
+   ✓ 3. one major opening is erased from the facade > reports one fewer opening, in the place it was erased from 
+   ✓ 4. the thick facade member is erased > reports no linear volume candidate at all, rather than a weaker one 
+   ✓ 5. the member keeps its colour and loses its depth > is demoted from a solid to a surface: the same band, a different claim 
+   ✓ 6. one side return of the recess is removed > finds one fewer return and names the side it could not find 
+   ✓ 7. the facade is mirrored > produces a mirrored reading and a different hash, so a flip is never mistaken for the same source 
+   ✓ 8. the two side elevation labels are swapped > changes the package hash and the graph hash, because a role is part of what an asset IS 
+   ✓ 9. the stair loses its direction arrow > stops asserting a staircase and records the ambiguity instead of guessing a way up 
+   ✓ 10. half the stair treads are erased > counts what is there and says the count is a lower bound 
+ Test Files  7 passed (7)
+      Tests  91 passed (91)
+exit 0

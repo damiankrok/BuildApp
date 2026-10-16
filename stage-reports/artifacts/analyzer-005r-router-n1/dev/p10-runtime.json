@@ -1,0 +1,24 @@
+{
+ "patchBytesAddedSrc": {
+  "analyze.ts": 1205,
+  "tasks.ts": 1055,
+  "apply.ts": 284,
+  "total": 2544
+ },
+ "observationMsMedianRatioN1vR0": 0.84,
+ "observationMsRatioRange": [
+  0.61,
+  0.97
+ ],
+ "meanObservationMs": {
+  "R0": 39169,
+  "N1v": 32304
+ },
+ "peakRssMaxMB": {
+  "R0": 1067,
+  "N1v": 1152,
+  "ratio": 1.08
+ },
+ "rows": 23,
+ "load": "par 3, Node 22.22.2, x86_64, 4 cores"
+}
