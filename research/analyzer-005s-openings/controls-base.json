@@ -1,0 +1,191 @@
+{
+ "schema": "research.005s-openings.controls.0.1",
+ "base": "7ceb4b09dd88bb528507779571add74a358bc696",
+ "what": "v2 solver replay on sealed N1v rows vs the sealed model hash",
+ "rows": [
+  {
+   "case": "A02",
+   "sealedModelSha256": "98229d5fa8d6ff8e682001061ff703e6e8c0be4a5412a71b77439e2b8aa92155",
+   "replayModelSha256": "98229d5fa8d6ff8e682001061ff703e6e8c0be4a5412a71b77439e2b8aa92155",
+   "identical": true,
+   "exteriorOpenings": 9,
+   "reconstructMs": 5041
+  },
+  {
+   "case": "A03",
+   "sealedModelSha256": "4b0fc06a76054bf95be60b9ab84df3c8fcb2bb7c6c77d24f253bafc3ddcc03c7",
+   "replayModelSha256": "4b0fc06a76054bf95be60b9ab84df3c8fcb2bb7c6c77d24f253bafc3ddcc03c7",
+   "identical": true,
+   "exteriorOpenings": 12,
+   "reconstructMs": 5134
+  },
+  {
+   "case": "A06",
+   "sealedModelSha256": "38baa9606a55fb149b9025464d0dc1f1db0d91dd9ef8976b9cbc190690278ee2",
+   "replayModelSha256": "38baa9606a55fb149b9025464d0dc1f1db0d91dd9ef8976b9cbc190690278ee2",
+   "identical": true,
+   "exteriorOpenings": 16,
+   "reconstructMs": 4941
+  },
+  {
+   "case": "A07",
+   "sealedModelSha256": "f0b04887c8d0ba8007bfd9d6d00d5c12ffc54308b4e0450569479a2e0d8c3514",
+   "replayModelSha256": "f0b04887c8d0ba8007bfd9d6d00d5c12ffc54308b4e0450569479a2e0d8c3514",
+   "identical": true,
+   "exteriorOpenings": 24,
+   "reconstructMs": 7649
+  },
+  {
+   "case": "dom-miniaturka",
+   "sealedModelSha256": "cbe3a5fca94b15427d9db34968060678d4b821a92fde62fbfb49431dbf68d8e0",
+   "replayModelSha256": "cbe3a5fca94b15427d9db34968060678d4b821a92fde62fbfb49431dbf68d8e0",
+   "identical": true,
+   "exteriorOpenings": 15,
+   "reconstructMs": 3667
+  },
+  {
+   "case": "dom-pod-jarzabem",
+   "sealedModelSha256": "df2aa66c8591107a1ff3608d02164ad80f4a7609c963915cb17fe7312e64553f",
+   "replayModelSha256": "df2aa66c8591107a1ff3608d02164ad80f4a7609c963915cb17fe7312e64553f",
+   "identical": true,
+   "exteriorOpenings": 14,
+   "reconstructMs": 5707
+  },
+  {
+   "case": "dom-w-arkadiach",
+   "sealedModelSha256": "a1ac7a1b67b195839e7150e1da7a508b4b583d266a96d10b9c9322deae1f10b7",
+   "replayModelSha256": "a1ac7a1b67b195839e7150e1da7a508b4b583d266a96d10b9c9322deae1f10b7",
+   "identical": true,
+   "exteriorOpenings": 8,
+   "reconstructMs": 4588
+  },
+  {
+   "case": "dom-w-cieszyniankach",
+   "sealedModelSha256": "a96afbb19139b304a126b87dd0949ac1604aaad006973ce0dcddb4472cbb1ad3",
+   "replayModelSha256": "a96afbb19139b304a126b87dd0949ac1604aaad006973ce0dcddb4472cbb1ad3",
+   "identical": true,
+   "exteriorOpenings": 15,
+   "reconstructMs": 4010
+  },
+  {
+   "case": "dom-w-daliach",
+   "sealedModelSha256": "bd67c81396e3944beb6c72a1e8a3a138a0ced9bcab12e41d451b0bec99d93b69",
+   "replayModelSha256": "bd67c81396e3944beb6c72a1e8a3a138a0ced9bcab12e41d451b0bec99d93b69",
+   "identical": true,
+   "exteriorOpenings": 9,
+   "reconstructMs": 4156
+  },
+  {
+   "case": "dom-w-glogownikach",
+   "sealedModelSha256": "19cb8fdebcacf35cd35927f0bd466eddd409e2826e5a7eaea6f598ad0def5ea6",
+   "replayModelSha256": "19cb8fdebcacf35cd35927f0bd466eddd409e2826e5a7eaea6f598ad0def5ea6",
+   "identical": true,
+   "exteriorOpenings": 13,
+   "reconstructMs": 3576
+  },
+  {
+   "case": "dom-w-helikoniach",
+   "sealedModelSha256": "27642deb363a860dfb9dca75d2dd143499242704666d07c937f3ef41db7d4be0",
+   "replayModelSha256": "27642deb363a860dfb9dca75d2dd143499242704666d07c937f3ef41db7d4be0",
+   "identical": true,
+   "exteriorOpenings": 8,
+   "reconstructMs": 2442
+  },
+  {
+   "case": "dom-w-jablonkach",
+   "sealedModelSha256": "a81652d034b4f9de2c0f43cce1365a0d6d9414d90ed0fb83056fd6582700a4bb",
+   "replayModelSha256": "a81652d034b4f9de2c0f43cce1365a0d6d9414d90ed0fb83056fd6582700a4bb",
+   "identical": true,
+   "exteriorOpenings": 12,
+   "reconstructMs": 4487
+  },
+  {
+   "case": "dom-w-modrzykach",
+   "sealedModelSha256": "b125b9d24f1fb1fcb0004d45f2034fb949247f917a20893ea8b857d837946615",
+   "replayModelSha256": "b125b9d24f1fb1fcb0004d45f2034fb949247f917a20893ea8b857d837946615",
+   "identical": true,
+   "exteriorOpenings": 21,
+   "reconstructMs": 2083
+  },
+  {
+   "case": "dom-w-morelach",
+   "sealedModelSha256": "58ee0e7bfea429faa04ae01f88bd9e6c2131eb8030648803ea2c4fb15c9ea703",
+   "replayModelSha256": "58ee0e7bfea429faa04ae01f88bd9e6c2131eb8030648803ea2c4fb15c9ea703",
+   "identical": true,
+   "exteriorOpenings": 21,
+   "reconstructMs": 3214
+  },
+  {
+   "case": "dom-w-tunbergiach",
+   "sealedModelSha256": "780ecd4e59ad2fd513bc0c9eace1c2f76a487b09de23c1943dc3ddae9843f282",
+   "replayModelSha256": "780ecd4e59ad2fd513bc0c9eace1c2f76a487b09de23c1943dc3ddae9843f282",
+   "identical": true,
+   "exteriorOpenings": 21,
+   "reconstructMs": 5949
+  },
+  {
+   "case": "dom-w-tymianku",
+   "sealedModelSha256": "681a38257d7eedf5341b6211f1dbbb9643ce1487bb839a8f8f0bd2bb6cda19c9",
+   "replayModelSha256": "681a38257d7eedf5341b6211f1dbbb9643ce1487bb839a8f8f0bd2bb6cda19c9",
+   "identical": true,
+   "exteriorOpenings": 31,
+   "reconstructMs": 3003
+  },
+  {
+   "case": "dom-w-zurawkach",
+   "sealedModelSha256": "a8ef42a5613bde1f0c59f8535c642fa8bd95609a436dfdc0f1ae7258732df7d1",
+   "replayModelSha256": "a8ef42a5613bde1f0c59f8535c642fa8bd95609a436dfdc0f1ae7258732df7d1",
+   "identical": true,
+   "exteriorOpenings": 25,
+   "reconstructMs": 4425
+  },
+  {
+   "case": "kosacce-clean",
+   "sealedModelSha256": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+   "replayModelSha256": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+   "identical": true,
+   "exteriorOpenings": 13,
+   "reconstructMs": 6095
+  },
+  {
+   "case": "kosacce-tracked",
+   "sealedModelSha256": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+   "replayModelSha256": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+   "identical": true,
+   "exteriorOpenings": 13,
+   "reconstructMs": 5798
+  },
+  {
+   "case": "marcowki",
+   "sealedModelSha256": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+   "replayModelSha256": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+   "identical": true,
+   "exteriorOpenings": 12,
+   "reconstructMs": 5494
+  },
+  {
+   "case": "rarytasy-eoze",
+   "sealedModelSha256": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
+   "replayModelSha256": "2f342a941ee7de8f1646ff7dc8af9eff14ffdd99d06a0245f3facd19cced24d6",
+   "identical": true,
+   "exteriorOpenings": 11,
+   "reconstructMs": 8154
+  },
+  {
+   "case": "rarytasy-g2e",
+   "sealedModelSha256": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+   "replayModelSha256": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+   "identical": true,
+   "exteriorOpenings": 13,
+   "reconstructMs": 9359
+  },
+  {
+   "case": "willa-miranda",
+   "sealedModelSha256": "84af704b09664eb5997d5a12265663ba45f2aaf456098190e43f914f34c34c81",
+   "replayModelSha256": "84af704b09664eb5997d5a12265663ba45f2aaf456098190e43f914f34c34c81",
+   "identical": true,
+   "exteriorOpenings": 14,
+   "reconstructMs": 5978
+  }
+ ]
+}

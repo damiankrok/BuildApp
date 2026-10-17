@@ -1,0 +1,50 @@
+diff --git a/packages/reconstruction/src/v2/openings-v2.ts b/packages/reconstruction/src/v2/openings-v2.ts
+index feb59fb..baa7cd7 100644
+--- a/packages/reconstruction/src/v2/openings-v2.ts
++++ b/packages/reconstruction/src/v2/openings-v2.ts
+@@ -214,6 +214,7 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
+     let elevation: OpeningV2['elevation']
+     for (const { view, raster } of input.views) {
+       const ext = elevationExtent(raster, view, interval, host.floorY, host.storeyHeightM)
++      if (process.env.DBG005S) console.error('DBG005S-OP', JSON.stringify({ facade: host.facade, mass: host.massId, storey: host.storeyIndex, interval, cols: [view.pxOf(interval[0]), view.pxOf(interval[1])], extentX: [view.registration.extent.x0, view.registration.extent.x1], rows: [view.pyOf(host.floorY + host.storeyHeightM + 0.3), view.pyOf(host.floorY - 0.05)], extentY: [view.registration.extent.y0, view.registration.extent.y1], w: raster.width, h: raster.height, ext: ext ? { sillY: ext.sillY, headY: ext.headY, contrast: ext.contrast, share: ext.share } : null }))
+       if (!ext) continue
+       if (ext.headY - ext.sillY < 0.5) continue
+       const confidence = round6(Math.min(0.85, 0.4 + ext.contrast / 100))
+diff --git a/packages/reconstruction/src/v2/reconstruct-v2.ts b/packages/reconstruction/src/v2/reconstruct-v2.ts
+index 70d4313..f7964dd 100644
+--- a/packages/reconstruction/src/v2/reconstruct-v2.ts
++++ b/packages/reconstruction/src/v2/reconstruct-v2.ts
+@@ -34,7 +34,7 @@ import type { RecessTopology, ZoneSide } from './recesses.js'
+ import { readInterior } from './interior.js'
+ import type { InteriorReading, LabelToken } from './interior.js'
+ import { assembleStair, findTreadLadders, poolLadders } from './stair-topology.js'
+-import { readWallOpenings } from './openings-v2.js'
++import { elevationExtent, readWallOpenings } from './openings-v2.js'
+ import type { OpeningV2, WallHost } from './openings-v2.js'
+ import { readAttachedRoof, readChimneys, readRooflights, registerSection } from './roof-details.js'
+ import { readFasciaBand, readRailing, readVergeMember } from './facade.js'
+@@ -875,6 +875,24 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
+     if (mass) relate('HOSTED_BY', `feat-${o.id}`, mass.featureId, `an opening in the ${o.facade.toLowerCase()} wall`)
+     if (o.callout) record({ evidenceId: o.callout.evidenceId, evidenceKind: 'METRIC', what: `callout ${o.callout.widthCm}/${o.callout.heightCm}`, authority: 'HIGH', featureId: `feat-${o.id}`, disposition: 'USED_IN_MODEL', reason: 'the opening’s printed width and height', stage: 'METRIC_SOLVE' })
+   }
++  if (process.env.DBG005S) {
++    const OPP = { FRONT: 'REAR', REAR: 'FRONT', LEFT: 'RIGHT', RIGHT: 'LEFT' } as const
++    const FAC = { FRONT: 'FRONT', REAR: 'REAR', LEFT: 'WEST', RIGHT: 'EAST' } as const
++    for (const reg of elevations) {
++      const v = views.find((x) => x.view.registration.frameId === reg.frameId)!
++      const alt = registerElevationV2({ id: reg.frameId, assetId: reg.assetId }, reg.extent, OPP[reg.side], reg.sideConfidence, 'dbg', world, ridgeY!, sideEaves, terrain)
++      const score = (view: ElevationFrameV2 | undefined, facade: string) => {
++        if (!view) return null
++        const os = openings.filter((o) => o.facade === facade)
++        const hit = (iv: [number, number], si: number) => { const l = levelOf(si); if (!l) return false; const e = elevationExtent(v.raster, view, iv, l.elevation, l.height); return !!e && e.headY - e.sillY >= 0.5 }
++        const gaps = os.map((o) => hit(o.interval, o.storeyIndex))
++        // blanks: same widths shifted into wall between openings (first free slot to the right, else left)
++        const blanks = os.map((o) => { const w = o.interval[1] - o.interval[0]; const same = os.filter((q) => q.storeyIndex === o.storeyIndex); for (const d of [w + 0.6, -(w + 0.6), 2 * w + 1.2, -(2 * w + 1.2)]) { const iv: [number, number] = [o.interval[0] + d, o.interval[1] + d]; if (same.some((q) => q.interval[0] < iv[1] + 0.3 && iv[0] - 0.3 < q.interval[1])) continue; const m = masses.find((mm) => mm.id === o.massId)!; const lo = facade === 'FRONT' || facade === 'REAR' ? m.x0 : m.z0; const hi = facade === 'FRONT' || facade === 'REAR' ? m.x1 : m.z1; if (iv[0] < lo + 0.3 || iv[1] > hi - 0.3) continue; return hit(iv, o.storeyIndex) } return null })
++        return { n: gaps.length, hits: gaps.filter(Boolean).length, blanksN: blanks.filter((b) => b !== null).length, blankHits: blanks.filter((b) => b === true).length }
++      }
++      console.error('DBG005S-FACE', JSON.stringify({ side: reg.side, sideWhy: reg.sideWhy.slice(0, 60), assigned: score(v.view, FAC[reg.side]), opposite: score(alt ? elevationFrameFromV2(alt, world) : undefined, FAC[OPP[reg.side]]) }))
++    }
++  }
+   step({ stage: 'openings', what: 'openings cut from the plans, sized by callouts and elevations', method: 'DISCRETE_SELECTION', detail: `${openings.length} facade openings (${openings.filter((o) => o.callout).length} with a printed callout, ${openings.filter((o) => o.elevation).length} read on an elevation, ${openings.filter((o) => o.profile === 'RAKED_SINGLE').length} raked) and ${sharedDoors.length} doorway${sharedDoors.length === 1 ? '' : 's'} between bodies`, inputs: masses.length * 4, outputs: openings.length + sharedDoors.length })
+ 
+   // ---------------------------------------------------------------------------
