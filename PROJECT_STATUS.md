@@ -2053,3 +2053,12 @@ Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005S_N1_TECHNICAL_OPENINGS.md`. 
 pipeline (plan gap + printed callout for position/width, rendered elevation for sill/head) is unchanged, because no
 development row showed a source-provable mis-placed or omitted opening that a registered orthographic elevation could fix.
 The replay harness `research/analyzer-005s-openings/replay-reconstruct.ts` re-runs only the v2 solver on sealed N1 rows.
+
+
+## Where public technical PDFs stand (STAGE BUILDPLAN-ANALYZER-005S-N2-PUBLIC-TECHNICAL-PDF-GATE)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005S_N2_PUBLIC_TECHNICAL_PDF_GATE.md`; preregistration, ledger and a
+source-contract check: `research/analyzer-005s-technical-pdf/`. Verdict `NO_USABLE_PUBLIC_TECHNICAL_PDF`, no production
+change. For the three preregistered development editions (`m168264238cc55`, `m43d25c0636969`, `m84f2903cb8e14`) and the
+OWNER example (`m3ea28300f9b3e`, isolation only) the publisher links the project-card PDF only through an e-mail lead form;
+the unlinked print endpoint was not used, so no PDF byte was read and no opening changed.

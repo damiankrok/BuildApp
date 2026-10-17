@@ -1,0 +1,55 @@
+{
+ "schema": "research.005s-technical-pdf.ledger.0.1",
+ "base": "3fe0ba22287a462bd02a65b1576d5aba0ef0d340",
+ "preregistrationSha256": "558a0e6fda87d241385206437fe79bac2ac19f33699189ae67bfcfbe30f3a8e2",
+ "readAt": "2026-10-17T11:58Z",
+ "accessRule": "public, no login, no bypass of a publisher download gate; bytes outside Git only; no cloud OCR/VLM",
+ "publisherRoute": {
+  "linkedOnPage": "'Karta projektu - wersja podstawowa (PDF)' and '... - lustrzane odbicie (PDF)' -> /crm_task_project_card_downloads/new.js?product_id=<id>",
+  "routeBehaviour": "opens a lead form; the PDF is e-mailed after the visitor gives e-mail/name/phone, answers marketing questions and accepts the privacy policy",
+  "classification": "ACCESS_GATED_EMAIL_LEAD_FORM",
+  "unlinkedPrintEndpoint": "/gotowe-projekty-domow-wydruk/pdf/<product_id>?file_name=<slug> answers 200 application/pdf without login, but is not linked from any of the 4 project pages read; using it with product ids taken from the gated form would bypass the publisher's download gate -> not used"
+ },
+ "cases": [
+  {
+   "case": "dom-w-arkadiach", "edition": "m168264238cc55", "selection": "POOR (noSourceVertical 8/8)",
+   "page": "https://www.archon.pl/projekty-domow/projekt-dom-w-arkadiach-6-m168264238cc55",
+   "pageHttp": "200 text/html", "pageSha256": "f56366c46a386bbf3b38efc8b1e0b6d5d43f2eb7bec7cf73ed01d19d86002e43",
+   "pdfRoute": {"basic": "product_id=62954 (form title 'Dom w arkadiach 6')", "mirror": "product_id=63529 (form title 'Lustrzane odbicie - Dom w arkadiach 6')"},
+   "publicNoLogin": false, "pdfDownloaded": false, "pdfSha256": null, "pages": null, "structure": "NOT_EXAMINED",
+   "technicalLinework": "NOT_EXAMINED", "printedDimensionOrDatum": "NOT_EXAMINED", "scaleOrientationProof": "NOT_EXAMINED",
+   "contradiction": null, "status": "NOT_READABLE_FOR_METRIC_USE", "refusal": ["ACCESS_GATED_EMAIL_LEAD_FORM", "MIRROR_EDITION_COEXISTS"]
+  },
+  {
+   "case": "dom-w-cieszyniankach", "edition": "m43d25c0636969", "selection": "POOR (noSourceVertical 15/15)",
+   "page": "https://www.archon.pl/projekty-domow/projekt-dom-w-cieszyniankach-12-ge-m43d25c0636969",
+   "pageHttp": "200 text/html", "pageSha256": "9cf4ac54e25b92e3cfe5267aa9f5a1d013af3d4be4d7d195d2b978994140d099",
+   "pdfRoute": {"basic": "product_id=57648 (form title 'Dom w cieszyniankach 12 (GE)')", "mirror": "product_id=57650 (form title 'Lustrzane odbicie - Dom w cieszyniankach 12 (GE)')"},
+   "publicNoLogin": false, "pdfDownloaded": false, "pdfSha256": null, "pages": null, "structure": "NOT_EXAMINED",
+   "technicalLinework": "NOT_EXAMINED", "printedDimensionOrDatum": "NOT_EXAMINED", "scaleOrientationProof": "NOT_EXAMINED",
+   "contradiction": null, "status": "NOT_READABLE_FOR_METRIC_USE", "refusal": ["ACCESS_GATED_EMAIL_LEAD_FORM", "MIRROR_EDITION_COEXISTS"]
+  },
+  {
+   "case": "rarytasy-g2e", "edition": "m84f2903cb8e14", "selection": "KNOWN_GOOD (SOURCE_* sill 12/13)",
+   "page": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+   "pageHttp": "200 text/html", "pageSha256": "1d176f0eeceff1a8befb6b613538605c39cdeea934d6da8e2c3dd6e5fb73b139",
+   "pdfRoute": {"basic": "product_id=74283 (form title 'Dom w rarytasach 5 (G2E)'; form JS sha256 03b3526fe72902de1f1cc40329bec2d319257fea835f6023b4d8965b4775cbbe)", "mirror": "product_id=74284 (form title 'Lustrzane odbicie - Dom w rarytasach 5 (G2E)')"},
+   "publicNoLogin": false, "pdfDownloaded": false, "pdfSha256": null, "pages": null, "structure": "NOT_EXAMINED",
+   "technicalLinework": "NOT_EXAMINED", "printedDimensionOrDatum": "NOT_EXAMINED", "scaleOrientationProof": "NOT_EXAMINED",
+   "contradiction": null, "status": "NOT_READABLE_FOR_METRIC_USE", "refusal": ["ACCESS_GATED_EMAIL_LEAD_FORM", "MIRROR_EDITION_COEXISTS"]
+  }
+ ],
+ "ownerExample": {
+  "edition": "m3ea28300f9b3e", "role": "EDITION_ISOLATION_AND_FORMAT_EXAMPLE_ONLY", "attachedToModelledRow": false,
+  "page": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-g2e-m3ea28300f9b3e",
+  "pageHttp": "200 text/html", "pageSha256": "cee3d033ec4a02759daec295914871efdccf6d5c3d829f30ec3085b0e06e5b23",
+  "pageCardProductIds": [71110, 71111],
+  "pdf": "https://www.archon.pl/gotowe-projekty-domow-wydruk/pdf/71110?file_name=archon-dom-w-rarytasach-g2e",
+  "pdfHead": "HTTP 200, content-type application/pdf, content-disposition attachment filename=archon-dom-w-rarytasach-g2e.pdf, no content-length",
+  "linkedFromProjectPage": false, "pdfDownloaded": false,
+  "publicDescription": "plan, section and four small elevation thumbnails (coordinator's note of the indexed description; not verified here)",
+  "status": "NOT_READABLE_FOR_METRIC_USE",
+  "refusal": ["UNLINKED_ENDPOINT_OF_GATED_CARD", "FOUR_TINY_THUMBNAIL_ELEVATIONS (as described)", "EDITION_NOT_MODELLED (m3ea != m84f)"]
+ },
+ "summary": {"dev": 3, "devPublicNoLogin": 0, "devPdfBytesRead": 0, "ownerPdfBytesRead": 0, "qualifyingPairs": 0, "verdict": "NO_USABLE_PUBLIC_TECHNICAL_PDF"}
+}
