@@ -2080,3 +2080,18 @@ Branch `analyzer/005t-preview-first-paddle-binding-v1` from `f055528`. Verdict `
 - **Not built:** no `APPROXIMATE_PREVIEW` class, no result/protocol/Android change; PaddleOCR binding not entered (neither
   case stops in OCR). `ANDROID_VISUAL_NOT_RUN`; CI, holdout and APK NOT_RUN; solver version label not bumped.
 - **Next (recommendation):** `dom-w-gozdzikowcach` `placeChimney INVALID_COMMAND`, the other emission-stage refusal.
+
+
+## Where the second emission refusal stands (STAGE BUILDPLAN-ANALYZER-005T-N2)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005T_N2_CHIMNEY_RECOVERY_AND_MODEL_WARNINGS.md`; diagnosis:
+`research/analyzer-005t-n2/`. Branch `analyzer/005t-n2-chimney-recovery-warnings-v1` from `987a354`. Verdict
+`NO_SAFE_CHIMNEY_RECOVERY`, zero production change.
+
+- `dom-w-gozdzikowcach` (`placeChimney chimney-0`, height 0) has no roof at all: no ridge datum was read, so no main roof
+  and no registered elevation; the chimney had no top. Recovering it would give a roofless two-storey box (diagnostic
+  model `9ab62e9e…`, 0 roofs) of a house printed with a 40° gable; the refusal stands. Blocking seam: the ridge datum
+  (`levels.topDatum`) when only the publisher's pitch and building height are known — a roof-solver stage, not a chimney fix.
+- A01 warnings are correct in production (6 of 9 `LIMITING`; Android shows „Model gotowy z ograniczeniami”); the 005T-V1
+  research tally and report line that said none were limiting are corrected.
+- Control `rarytasy-g2e` identical; 18 targeted tests green. CI, APK, Android visual review NOT_RUN.

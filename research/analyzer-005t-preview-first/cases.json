@@ -70,7 +70,14 @@
     "publishedFootprintM2": 87.53,
     "windows": 10,
     "doors": 14,
-    "limitingWarnings": [],
+    "limitingWarnings": [
+     "LAYOUT_STOREY_COVERAGE_DISAGREES",
+     "LAYOUT_STOREY_COVERAGE_DISAGREES",
+     "OPENINGS_NOT_BUILT",
+     "RESIDUALS_OUTSIDE_TOLERANCE",
+     "EXTERIOR_JOINTS",
+     "INVARIANT_VIOLATIONS"
+    ],
     "warnings": [
      "GRAPH_REPLAYED",
      "SOURCE_BYTE_IDENTICAL",
@@ -90,7 +97,46 @@
      "agrees": 17,
      "disagreements": 3,
      "leads": 25
-    }
+    },
+    "warningSeverities": [
+     [
+      "GRAPH_REPLAYED",
+      "INFO"
+     ],
+     [
+      "SOURCE_BYTE_IDENTICAL",
+      "INFO"
+     ],
+     [
+      "GUESSED_ADDRESS_HTTP_STATUS",
+      "INFO"
+     ],
+     [
+      "LAYOUT_STOREY_COVERAGE_DISAGREES",
+      "LIMITING"
+     ],
+     [
+      "LAYOUT_STOREY_COVERAGE_DISAGREES",
+      "LIMITING"
+     ],
+     [
+      "OPENINGS_NOT_BUILT",
+      "LIMITING"
+     ],
+     [
+      "RESIDUALS_OUTSIDE_TOLERANCE",
+      "LIMITING"
+     ],
+     [
+      "EXTERIOR_JOINTS",
+      "LIMITING"
+     ],
+     [
+      "INVARIANT_VIOLATIONS",
+      "LIMITING"
+     ]
+    ],
+    "limitingWarningsNote": "005T-N2 correction: the V1 tally read a \"limiting\" key the result does not have and listed none; the result carries severity, and 6 of its 9 warnings are LIMITING"
    },
    "class": "CANONICAL (strict path; no gate changed)"
   },

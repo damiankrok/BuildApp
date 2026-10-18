@@ -1,0 +1,140 @@
+{
+ "schema": "research.005t-n2.diagnosis.0.1",
+ "base": "987a354f5adcae2130fc2adc268f92305ab204ff",
+ "goździkowce": {
+  "case": "dom-w-gozdzikowcach",
+  "edition": "m79923e950094d",
+  "inputs": "N1v observation graph replayed; metric evidence re-extracted once OFFLINE (PP-OCRv6) from cached bytes",
+  "n1vMetricEvidenceHash": "f747d8a40ed30fe70bc0c2f70c2f8100b911479bf8ad0ca1b764a4bd48004aaf",
+  "resealedMetricEvidenceHash": "f747d8a40ed30fe70bc0c2f70c2f8100b911479bf8ad0ca1b764a4bd48004aaf",
+  "before": {
+   "reasonCode": "MODEL_EMISSION_FAILED",
+   "stage": "BUILDING_MODEL",
+   "command": "placeChimney",
+   "commandIndex": 135,
+   "commandId": "chimney-0",
+   "code": "INVALID_COMMAND",
+   "detail": "Number must be greater than 0 (height)"
+  },
+  "chimney": {
+   "footprintM": {
+    "x": [
+     4.258192,
+     5.201624
+    ],
+    "z": [
+     2.783602,
+     3.651882
+    ]
+   },
+   "provenance": "SOURCE_DERIVED",
+   "why": "a 0.94 x 0.87 m solid block drawn on storeys 0, 1, not seen above the roof on any render",
+   "topY": null,
+   "emittedHeight": 0
+  },
+  "building": {
+   "masses": [
+    {
+     "id": "main",
+     "x": [
+      0,
+      13.82
+     ],
+     "z": [
+      0,
+      9.5
+     ],
+     "storeys": [
+      0,
+      1
+     ]
+    }
+   ],
+   "wallThicknessM": 0.304128,
+   "mainRoof": null,
+   "attachedRoofs": 0,
+   "ridgeDatum": null
+  },
+  "publisher": {
+   "roof": "dwuspadowy, nachylenie 40 st.",
+   "buildingHeightM": 8.68,
+   "kneeWallCm": 115
+  },
+  "firstBad": "emitter falls back to top = 0 when the building has no main roof and the chimney no measured top (the solver's own roofTopY falls back to the top storey's wallTop); behind it, the building has no roof at all because no ridge datum was read from a section (reconstruct-v2.ts: ridgeY = levels.topDatum undefined, so no main roof and no elevation registration)",
+  "diagnosticVariant": {
+   "change": "chimney top = top storey wallTop when there is no main roof (NOT committed)",
+   "outcome": "COMPLETED",
+   "modelSha256": "9ab62e9e3ffc5be5f3b04143eb7a81fc101e4af9d5d2d1fec9f4592788d92039",
+   "roofs": 0,
+   "levels": [
+    [
+     0,
+     2.8
+    ],
+    [
+     2.8,
+     2.8
+    ]
+   ],
+   "windows": 5,
+   "chimneyHeightM": 5.6
+  },
+  "classification": "source gap behind an emitter inconsistency: recovering the chimney yields a roofless two-storey box of a house the publisher prints with a 40 deg gable and a 1.15 m knee wall; no built N1v row has zero roofs",
+  "decision": "NO_SAFE_CHIMNEY_RECOVERY: refusal stands, zero production diff"
+ },
+ "a01Warnings": {
+  "source": "actual summary of the 005T-V1 full run (summary.json, outside Git)",
+  "exteriorErrors": 14,
+  "residualsOutsideTolerance": 2,
+  "residuals": 6,
+  "warnings": [
+   [
+    "GRAPH_REPLAYED",
+    "INFO"
+   ],
+   [
+    "SOURCE_BYTE_IDENTICAL",
+    "INFO"
+   ],
+   [
+    "GUESSED_ADDRESS_HTTP_STATUS",
+    "INFO"
+   ],
+   [
+    "LAYOUT_STOREY_COVERAGE_DISAGREES",
+    "LIMITING"
+   ],
+   [
+    "LAYOUT_STOREY_COVERAGE_DISAGREES",
+    "LIMITING"
+   ],
+   [
+    "OPENINGS_NOT_BUILT",
+    "LIMITING"
+   ],
+   [
+    "RESIDUALS_OUTSIDE_TOLERANCE",
+    "LIMITING"
+   ],
+   [
+    "EXTERIOR_JOINTS",
+    "LIMITING"
+   ],
+   [
+    "INVARIANT_VIOLATIONS",
+    "LIMITING"
+   ]
+  ],
+  "androidLimitingWarnings": 6,
+  "androidRule": "AnalyzerDtos.kt AnalysisSummary.limitingWarnings = warningDetails with severity != INFO (read, not executed)",
+  "androidState": "Model gotowy z ograniczeniami + count of warnings + analyzer_result_limited_body",
+  "productionBug": false
+ },
+ "control": {
+  "case": "rarytasy-g2e",
+  "edition": "m84f2903cb8e14",
+  "sealed": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+  "replay": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+  "identical": true
+ }
+}

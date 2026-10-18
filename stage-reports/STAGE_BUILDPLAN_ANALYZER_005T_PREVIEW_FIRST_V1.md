@@ -66,7 +66,7 @@ rzutu, skali ani OCR. A01: okno 1,06 × 1,42 m dostaje ramę 0,08 m wsuniętą 0
 | obrys zewn. (bbox) | — | 10,50 × 8,01 m; wydawca: powierzchnia zabudowy 87,53 m² (porównanie opisowe, nie miara trafności) |
 | jakość cech | — | L1 49, L2 15, L0 0 |
 | weryfikacja | — | replay BYTE_IDENTICAL; 6 rezyduów, 2 poza tolerancją; zamknięcie DEGRADED: 14 uwag na złączach zewn. (ostrzeżenie w wyniku) |
-| ostrzeżenia | — | m.in. `LAYOUT_STOREY_COVERAGE_DISAGREES` (poddasze wystaje 14,2 m² poza bryły), `EXTERIOR_JOINTS`, `RESIDUALS_OUTSIDE_TOLERANCE`; żadne nie jest oznaczone jako ograniczające |
+| ostrzeżenia | — | m.in. `LAYOUT_STOREY_COVERAGE_DISAGREES` (poddasze wystaje 14,2 m² poza bryły), `EXTERIOR_JOINTS`, `RESIDUALS_OUTSIDE_TOLERANCE`; **6 z 9 ma `severity: LIMITING`** (korekta 005T-N2: pierwotny zapis odczytał nieistniejące pole i błędnie podał „żadne”) |
 
 Opisowo (bez obrazu, bez oceny procentowej): bryła dwukondygnacyjna z dwuspadowym dachem 40° i dwiema niskimi
 przybudówkami z płaskim dachem. Czy OWNER rozpozna w tym dom ze strony — **niezmierzone**; nie twierdzę żadnego „90 %”.
