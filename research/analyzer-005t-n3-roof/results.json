@@ -1,0 +1,128 @@
+{
+ "schema": "research.005t-n3.roof-datum.0.1",
+ "base": "ae63f12599fb2bc7c95bc591775e3fa20c3c7756",
+ "case": "dom-w-gozdzikowcach",
+ "edition": "m79923e950094d",
+ "inputs": {
+  "graph": "N1v sealed",
+  "metricEvidenceHash": "f747d8a40ed30fe70bc0c2f70c2f8100b911479bf8ad0ca1b764a4bd48004aaf",
+  "network": "none (offline, cached bytes)"
+ },
+ "facts": {
+  "roofKind": "GABLE (PUBLISHED_SPECIFICATION)",
+  "pitchDeg": 40,
+  "ridgeAxis": "X (layout default: the long way)",
+  "bodyM": [
+   13.82,
+   9.5
+  ],
+  "halfSpanAcrossRidgeM": 4.75,
+  "topFloorY": 2.8,
+  "topFloorProvenance": "ASSUMED_FOR_RENDERING (convention; the section printed one level marker, 2.46 m, too few for a ladder)",
+  "kneeWallM": 1.15,
+  "publishedBuildingHeightM": 8.68,
+  "printedTerrain": null,
+  "printedRidge": null
+ },
+ "equation": "R = F + K + h*tan(p) = 2.80 + 1.15 + 4.75*tan40 = 7.935723; H - R = 0.744277 in [0.05, 1.78] -> consistent; axis Z would give R = 9.748 (H - R < 0, incompatible; not used to choose)",
+ "before": {
+  "outcome": "MODEL_EMISSION_FAILED",
+  "command": "placeChimney chimney-0 height 0",
+  "roofs": 0
+ },
+ "after": {
+  "outcome": "COMPLETED",
+  "modelSha256": "a612a399e0b2dd25974202fe37982abb1b620b554fcabf7af4603596678fd33f",
+  "sceneSha256": "50002e00f3674aed856de133acd4540e5eb649e302df98432fc52f22abbf989c",
+  "sceneBytes": 423540,
+  "counts": {
+   "masses": 1,
+   "openings": 17,
+   "rooms": 6,
+   "chimneys": 1,
+   "meshes": 162,
+   "triangles": 3736,
+   "commands": 193
+  },
+  "roof": {
+   "kind": "GABLE",
+   "pitchDeg": 40,
+   "ridgeY": 7.935723,
+   "eaveOffsetM": 1.15,
+   "meshes": 1,
+   "provenance": "SOURCE_DERIVED; ridge and eave ASSUMED_FOR_RENDERING"
+  },
+  "topStoreyWalls": "FOLLOW_ROOF",
+  "chimney": {
+   "heightM": 7.835723,
+   "height": "ASSUMED (existing convention: 0.10 m under the ridge; top not seen on any render)"
+  },
+  "distinctObjectIds": 109,
+  "quality": {
+   "L0": 11,
+   "L1": 80,
+   "L2": 7
+  },
+  "verification": {
+   "closure": {
+    "exteriorErrors": 0,
+    "exteriorFindings": 0,
+    "interiorFindings": 60
+   },
+   "replay": "BYTE_IDENTICAL",
+   "residuals": 0,
+   "residualsOutsideTolerance": 0
+  },
+  "warnings": [
+   [
+    "GRAPH_REPLAYED",
+    "INFO"
+   ],
+   [
+    "SOURCE_BYTE_IDENTICAL",
+    "INFO"
+   ],
+   [
+    "GUESSED_ADDRESS_HTTP_STATUS",
+    "INFO"
+   ],
+   [
+    "LAYOUT_STOREY_COVERAGE_DISAGREES",
+    "LIMITING"
+   ],
+   [
+    "APPROXIMATE_ROOF_DATUM",
+    "LIMITING"
+   ],
+   [
+    "INVARIANT_VIOLATIONS",
+    "LIMITING"
+   ]
+  ]
+ },
+ "controls": [
+  {
+   "case": "rarytasy-g2e",
+   "edition": "m84f2903cb8e14",
+   "model": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+   "identical": true
+  },
+  {
+   "case": "dom-w-cieszyniankach",
+   "roof": "HIP",
+   "model": "a96afbb19139b304a126b87dd0949ac1604aaad006973ce0dcddb4472cbb1ad3",
+   "identical": true
+  },
+  {
+   "case": "marcowki",
+   "model": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+   "identical": true
+  },
+  {
+   "case": "A01",
+   "edition": "m60124f28f071a",
+   "model": "4ced017981088d05aa0f2b245b1f80a343c8b338855e14154e3a150040846b54",
+   "identical": true
+  }
+ ]
+}

@@ -495,6 +495,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
       openingFits: reconstruction.openingFits,
       metric: reconstruction.planDiagnostics.plans.find((p) => p.frameId === reconstruction.planDiagnostics.selectedPlanFrameId)?.metric,
       extentWeak: reconstruction.planDiagnostics.plans.find((p) => p.frameId === reconstruction.planDiagnostics.selectedPlanFrameId)?.extentWeak,
+      ...(reconstruction.roofDatum ? { approximateRoofDatum: { ridgeY: reconstruction.roofDatum.ridgeY, buildingHeightM: reconstruction.roofDatum.buildingHeightM } } : {}),
     })
 
     const result: LinkAnalysisResult = {

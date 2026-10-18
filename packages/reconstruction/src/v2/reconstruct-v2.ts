@@ -69,6 +69,8 @@ import type { FeatureQualityReport } from './quality.js'
 import { repairFromResiduals, verifyAgainstViews } from './verify.js'
 import type { RepairTrace, SourceViewResidual } from './verify.js'
 import { dominantTone, lumaAt } from './scan.js'
+import { approximateRidgeDatum } from './roof-datum.js'
+import type { ApproximateRidge } from './roof-datum.js'
 
 // 2.2.0 (005A): a plan the first reading refuses is re-read by the plan
 // resolver before the run stops (PLAN_RESOLVER_VERSION names its readings).
@@ -150,6 +152,8 @@ export type ReconstructionV2Result = {
   planDiagnostics: PlanDiagnosticsReport
   /** Every opening the model could not take as the drawings print it: shrunk, lowered, or not built, with why. */
   openingFits: OpeningFit[]
+  /** 005T-N3: the main roof's ridge was not printed and was taken approximately (`roof-datum.ts`); absent otherwise. */
+  roofDatum?: ApproximateRidge
 }
 
 type Ctx = {
@@ -465,6 +469,26 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     if (k < 0) return round6((levels.floors[0] ?? 0) - CONVENTIONS.storeyHeight * -k)
     return round6((levels.floors[levels.floors.length - 1] ?? 0) + CONVENTIONS.storeyHeight * (k - levels.floors.length + 1))
   }
+  // 005T-N3: without a printed ridge, a gable the page specifies may take an approximate ridge from its printed knee
+  // wall and pitch, checked against the published building height (`roof-datum.ts`). It feeds the roof and the top
+  // storey only; the elevations stay registered on printed datums alone.
+  const mainSupport = layout.roofSupports.find((r) => r.massId === main.sourceMassId)
+  const approximateRidge = approximateRidgeDatum({
+    printedRidgeY: ridgeY,
+    roof: mainSupport ? { kind: mainSupport.kind, pitchDeg: mainSupport.pitchDeg?.value, pitchAuthority: mainSupport.authority, ridgeAxis: mainSupport.ridgeAxis } : undefined,
+    body: main,
+    topFloorY: datumOf(topStorey),
+    topFloorPrinted: levels.measured && groundAt + topStorey < levels.floors.length,
+    metrics,
+    publishedFacts: options.publishedAreas ?? [],
+    printedTerrainY: metrics.evidence.filter((e) => e.kind === 'LEVEL_DATUM' && e.value < 0 && e.value > -1.5).sort((a, b) => b.confidence - a.confidence)[0]?.value,
+  })
+  const roofDatum = approximateRidge.ok ? approximateRidge.datum : undefined
+  const roofRidgeY = ridgeY ?? roofDatum?.ridgeY
+  if (roofDatum) {
+    gap({ what: 'the ridge height of the main roof', reason: `not printed: ${roofDatum.why}`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: roofDatum.evidenceIds })
+    step({ stage: 'roof', what: 'an approximate ridge datum from the knee wall, the pitch and the span', method: 'DIRECT', detail: roofDatum.why, inputs: roofDatum.evidenceIds.length + 1, outputs: 1 })
+  }
   const levelStoreys = [...new Set(masses.flatMap((m) => m.storeys))].sort((a, b) => a - b)
   levelStoreys.forEach((index, i) => {
     const elevation = datumOf(index)
@@ -475,7 +499,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const printed = levels.heights[groundAt + index] ?? CONVENTIONS.storeyHeight
     const stated = above !== undefined && printed > above - elevation + 1e-6 ? round6(above - elevation) : printed
     const pitched = layout.roofSupports.some((r) => r.massId === main.sourceMassId && r.kind !== 'FLAT' && r.kind !== 'UNKNOWN')
-    const height = index === topStorey && pitched && ridgeY !== undefined && ridgeY > elevation + stated ? round6(ridgeY - elevation) : round6(stated)
+    const height = index === topStorey && pitched && roofRidgeY !== undefined && roofRidgeY > elevation + stated ? round6(roofRidgeY - elevation) : round6(stated)
     const featureId = feature('LEVEL', `level-${index}`, { elevation: { value: elevation, low: elevation - 0.02, high: elevation + 0.02 }, height: { value: stated, low: stated - 0.05, high: stated + 0.05 } }, sectionFrame ? [sighting(sectionFrame, `level datum of storey ${index}`, 0.9, [])] : [], levels.measured ? 'SOURCE_EXACT' : 'ASSUMED_FOR_RENDERING', levels.measured ? 'a printed level datum on the section' : 'a conventional storey height', { printed: levels.measured, unresolvedProperties: levels.measured ? [] : ['elevation', 'height'] })
     levelsV2.push({ index, id: `lvl-${i}`, elevation, height, wallTop: round6(elevation + stated), featureId })
   })
@@ -558,7 +582,8 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // ---------------------------------------------------------------------------
   const support = layout.roofSupports.find((r) => r.massId === main.sourceMassId)
   let mainRoof: BuildingV2['mainRoof']
-  if (support && support.kind !== 'FLAT' && support.kind !== 'UNKNOWN' && support.pitchDeg && ridgeY !== undefined) {
+  if (support && support.kind !== 'FLAT' && support.kind !== 'UNKNOWN' && support.pitchDeg && roofRidgeY !== undefined) {
+    const ridgeY = roofRidgeY
     // Which way the ridge runs is read off the renders: a gable end has an
     // apex at mid-span, a side view a flat top. A view votes only when the
     // difference is unmistakable; the layout's own axis stands when no view
@@ -609,8 +634,8 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const footprint = ridgeAxis === 'Z' ? { x0: main.x0, x1: main.x1, z0: coversZones ? world.envelope.z0 : main.z0, z1: coversZones ? world.envelope.z1 : main.z1 } : { x0: coversZones ? world.envelope.x0 : main.x0, x1: coversZones ? world.envelope.x1 : main.x1, z0: main.z0, z1: main.z1 }
     const sids = sideViews.map((v) => sighting(frameById.get(v.view.registration.frameId) as SourceCoordinateFrame, 'roof silhouette spanning the zones', 0.8))
     if (sectionFrame) sids.push(sighting(sectionFrame, 'roof pitch and ridge', 0.9))
-    const featureId = feature('ROOF', 'roof-main', { pitchDeg: { value: pitch, low: pitch - 0.5, high: pitch + 0.5, unit: 'deg' }, ridgeY: { value: ridgeY, low: ridgeY - 0.02, high: ridgeY + 0.02 }, eaveY: { value: eaveY, low: eaveY - 0.05, high: eaveY + 0.05 }, extent: { value: footprint.z1 - footprint.z0, low: footprint.z1 - footprint.z0 - 0.1, high: footprint.z1 - footprint.z0 + 0.1 } }, sids, support.authority === 'PUBLISHED_SPECIFICATION' || support.authority === 'PRINTED_ANGLE' ? 'SOURCE_EXACT' : 'SOURCE_DERIVED', support.why, { printed: true, uncertaintyM: 0.05, parameterProvenance: { extent: coversZones ? 'SOURCE_CORROBORATED' : 'SOURCE_DERIVED', eaveY: 'SOURCE_DERIVED' } })
-    mainRoof = { massId: main.id, kind: 'GABLE', pitchDeg: pitch, ridgeAxis, ridgeAt, eaveY, ridgeY, footprint, coversZones, coversZonesWhy: coversZones ? `both side renders span the characteristic depth at the ridge scale, so the roof reaches the outer planes` : 'the side renders span the walled depth only', buildUpVerticalM: round6(Math.max(0.15, eaveY - (levelOf(topStorey)?.wallTop ?? eaveY))), thicknessM: CONVENTIONS.roofThickness, authority: support.authority, featureId, provenance: support.authority === 'PUBLISHED_SPECIFICATION' || support.authority === 'PRINTED_ANGLE' ? 'SOURCE_EXACT' : 'SOURCE_DERIVED' }
+    const featureId = feature('ROOF', 'roof-main', { pitchDeg: { value: pitch, low: pitch - 0.5, high: pitch + 0.5, unit: 'deg' }, ridgeY: { value: ridgeY, low: ridgeY - 0.02, high: ridgeY + 0.02 }, eaveY: { value: eaveY, low: eaveY - 0.05, high: eaveY + 0.05 }, extent: { value: footprint.z1 - footprint.z0, low: footprint.z1 - footprint.z0 - 0.1, high: footprint.z1 - footprint.z0 + 0.1 } }, sids, roofDatum ? 'SOURCE_DERIVED' : support.authority === 'PUBLISHED_SPECIFICATION' || support.authority === 'PRINTED_ANGLE' ? 'SOURCE_EXACT' : 'SOURCE_DERIVED', roofDatum ? `${support.why}; ${roofDatum.why}` : support.why, { printed: !roofDatum, uncertaintyM: roofDatum ? 0.3 : 0.05, parameterProvenance: { extent: coversZones ? 'SOURCE_CORROBORATED' : 'SOURCE_DERIVED', eaveY: roofDatum ? 'ASSUMED_FOR_RENDERING' : 'SOURCE_DERIVED', ...(roofDatum ? { ridgeY: 'ASSUMED_FOR_RENDERING' } : {}) } })
+    mainRoof = { massId: main.id, kind: 'GABLE', pitchDeg: pitch, ridgeAxis, ridgeAt, eaveY, ridgeY, footprint, coversZones, coversZonesWhy: coversZones ? `both side renders span the characteristic depth at the ridge scale, so the roof reaches the outer planes` : 'the side renders span the walled depth only', buildUpVerticalM: round6(Math.max(0.15, eaveY - (levelOf(topStorey)?.wallTop ?? eaveY))), thicknessM: CONVENTIONS.roofThickness, authority: support.authority, featureId, provenance: roofDatum ? 'SOURCE_DERIVED' : support.authority === 'PUBLISHED_SPECIFICATION' || support.authority === 'PRINTED_ANGLE' ? 'SOURCE_EXACT' : 'SOURCE_DERIVED' }
     for (const e of support.evidenceIds) record({ evidenceId: e, evidenceKind: 'METRIC', what: 'the roof pitch statement', authority: 'HIGH', featureId, disposition: 'USED_IN_MODEL', reason: 'the main roof pitch', stage: 'METRIC_SOLVE' })
     step({ stage: 'roof', what: 'the main roof', method: 'DISCRETE_SELECTION', detail: `${pitch}° ${support.kind.toLowerCase()} ridge along ${ridgeAxis} (${axisWhy}), eave ${eaveY}, ${mainRoof.coversZonesWhy}`, inputs: sideViews.length, outputs: 1 })
   } else {
@@ -1458,7 +1483,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const violations = { graph: featureGraphViolations(graphDraft), ledger: ledgerViolations(ctx.ledger, [...graph.observations.map((o) => o.id), ...metrics.evidence.map((e) => e.id)]) }
   step({ stage: 'quality', what: 'per-feature quality', method: 'DIRECT', detail: Object.entries(quality.summary).map(([fam, levels]) => `${fam} ${Object.entries(levels).map(([l, n]) => `${l}:${n}`).join('/')}`).join(', '), inputs: ctx.solved.length, outputs: quality.records.length })
 
-  return { layout, building, candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations, closure: closureNotes, planDiagnostics, openingFits: fit.fits }
+  return { layout, building, candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations, closure: closureNotes, planDiagnostics, openingFits: fit.fits, ...(roofDatum ? { roofDatum } : {}) }
 }
 
 /** The columns of a render across which a band of the given rows carries dark tone: the band's along extent. */

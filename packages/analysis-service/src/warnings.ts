@@ -67,6 +67,8 @@ export type WarningInputs = {
   metric?: { confidence: string; relation: string; independentWitnesses: number; isotropy: string }
   /** 005B: the base plan's frame was supplied by its walls, not by its dimension chains. */
   extentWeak?: boolean
+  /** 005T-N3: the main roof's ridge was not printed and was taken approximately for rendering. */
+  approximateRoofDatum?: { ridgeY: number; buildingHeightM: number }
 }
 
 const plural = (n: number, one: string, many: string): string => `${n} ${n === 1 ? one : many}`
@@ -111,6 +113,8 @@ export function warningsOf(input: WarningInputs): AnalysisWarning[] {
     out.push({ code: 'METRIC_SCALE_UNSUPPORTED', severity: 'LIMITING', message: 'no printed dimension read as printed supports the plan\u2019s scale: every value that agrees with it was fitted to it' })
   if (input.extentWeak)
     out.push({ code: 'PLAN_EXTENT_FROM_WALLS', severity: 'LIMITING', message: 'the plan\u2019s extent was taken from its walls: its dimension chains describe only part of it' })
+  if (input.approximateRoofDatum)
+    out.push({ code: 'APPROXIMATE_ROOF_DATUM', severity: 'LIMITING', message: `no section prints the ridge: the roof is drawn at an approximate ${input.approximateRoofDatum.ridgeY.toFixed(2)} m from the printed knee wall and pitch, checked against the published ${input.approximateRoofDatum.buildingHeightM.toFixed(2)} m building height; its heights, and the chimney's, are for viewing only` })
   if (input.residualsOutside > 0) out.push({ code: 'RESIDUALS_OUTSIDE_TOLERANCE', severity: 'LIMITING', message: `${input.residualsOutside} of ${input.residuals} source-view checks outside tolerance` })
   if (input.exteriorJointErrors > 0) out.push({ code: 'EXTERIOR_JOINTS', severity: 'LIMITING', message: `${plural(input.exteriorJointErrors, 'exterior joint finding', 'exterior joint findings')} in the closure audit` })
   if (input.graphViolations + input.ledgerViolations > 0) {

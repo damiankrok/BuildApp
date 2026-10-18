@@ -2095,3 +2095,22 @@ Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005T_N2_CHIMNEY_RECOVERY_AND_MOD
 - A01 warnings are correct in production (6 of 9 `LIMITING`; Android shows „Model gotowy z ograniczeniami”); the 005T-V1
   research tally and report line that said none were limiting are corrected.
 - Control `rarytasy-g2e` identical; 18 targeted tests green. CI, APK, Android visual review NOT_RUN.
+
+
+## Where the approximate roof datum stands (STAGE BUILDPLAN-ANALYZER-005T-N3)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005T_N3_ROOF_DATUM_RECOVERY.md`; preregistration and results:
+`research/analyzer-005t-n3-roof/`. Branch `analyzer/005t-n3-roof-datum-recovery-v1` from `ae63f12`. Verdict
+`SAFE_ROOF_DATUM_RECOVERY_REAL_3D` (approximate visual preview; OWNER visual NOT_RUN).
+
+- **Production change (one rule):** without a printed section ridge, a GABLE the page specifies takes an approximate
+  ridge R = top floor + printed knee wall + half span · tan(printed pitch), accepted only if the published building
+  height leaves a plausible terrain + build-up (0.05–1.78 m); it feeds the roof and the top storey only, is labelled
+  `ASSUMED_FOR_RENDERING` (roof `SOURCE_DERIVED`, never EXACT), and adds the LIMITING warning `APPROXIMATE_ROOF_DATUM`
+  (`packages/reconstruction/src/v2/roof-datum.ts`). A printed ridge always wins; HIP/FLAT/UNKNOWN are never routed here.
+- **Measured:** `dom-w-gozdzikowcach` (`m79923e950094d`) refused → COMPLETED: 40° gable, ridge 7.936 m, model
+  `a612a399…`, scene `50002e00…` (162 meshes), round-trip and replay verified, 0 exterior joint errors, 3 LIMITING
+  warnings. Controls g2e, Cieszynianki (HIP), Marcówki, A01: 4/4 model hashes identical. 39 targeted + 111
+  architecture tests green; typecheck green.
+- **Unknown:** the attic floor (2.80 m convention), terrain and eave build-up; chimney top (existing convention, ASSUMED).
+  No quantities or costs from this geometry. CI, APK, Android visual review NOT_RUN.

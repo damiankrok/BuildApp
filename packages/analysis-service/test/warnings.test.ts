@@ -115,4 +115,15 @@ describe('metric and extent warnings (005B): weak metric truth is never silent',
   it('a base plan framed by its walls limits the result', () => {
     expect(codes({ visionMode: 'DETERMINISTIC_ONLY', failures: [], ...clean, metric: metric('STRONG'), extentWeak: true })).toEqual(['PLAN_EXTENT_FROM_WALLS'])
   })
+
+  it('005T-N3: an approximate roof datum limits the result, in the warning the phone counts', () => {
+    const w = warningsOf({ visionMode: 'DETERMINISTIC_ONLY', failures: [], ...clean, approximateRoofDatum: { ridgeY: 7.935723, buildingHeightM: 8.68 } })
+    const roof = w.find((x) => x.code === 'APPROXIMATE_ROOF_DATUM')
+    expect(roof?.severity).toBe('LIMITING')
+    expect(roof?.message).toContain('7.94')
+    expect(roof?.message).toContain('viewing only')
+    // the Android summary counts every warning whose severity is not INFO (AnalyzerDtos.kt limitingWarnings)
+    expect(w.filter((x) => x.severity !== 'INFO').map((x) => x.code)).toEqual(['APPROXIMATE_ROOF_DATUM'])
+    expect(warningsOf({ visionMode: 'DETERMINISTIC_ONLY', failures: [], ...clean }).some((x) => x.code === 'APPROXIMATE_ROOF_DATUM')).toBe(false)
+  })
 })
