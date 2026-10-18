@@ -2062,3 +2062,21 @@ source-contract check: `research/analyzer-005s-technical-pdf/`. Verdict `NO_USAB
 change. For the three preregistered development editions (`m168264238cc55`, `m43d25c0636969`, `m84f2903cb8e14`) and the
 OWNER example (`m3ea28300f9b3e`, isolation only) the publisher links the project-card PDF only through an e-mail lead form;
 the unlinked print endpoint was not used, so no PDF byte was read and no opening changed.
+
+
+## Where preview-first stands (STAGE BUILDPLAN-ANALYZER-005T-PREVIEW-FIRST-V1)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005T_PREVIEW_FIRST_V1.md`; cases and hashes: `research/analyzer-005t-preview-first/`.
+Branch `analyzer/005t-preview-first-paddle-binding-v1` from `f055528`. Verdict `PARTIAL_PREVIEW_FIRST`.
+
+- **Production change (one rule):** exterior windows and doors are framed inside the wall the solver read
+  (`frameWithinWall`, `packages/reconstruction/src/v2/emit.ts`). The solver accepts walls from 0.15 m, the model's default
+  frames reach 0.20 m (window) / 0.22 m (door): a house read with thinner walls was refused at its first window. Where the
+  default fits nothing is emitted, so built models are unchanged by construction. No gate, validator, OCR or contract changed.
+- **Measured:** development row A01 (`m60124f28f071a`, formerly `MODEL_EMISSION_FAILED`) now completes canonically —
+  model `4ced0179…`, scene `22871168…` (107 meshes), replay byte-identical, closure DEGRADED (14 exterior joint findings).
+  A00 (`PLAN_RESOLUTION_INCONCLUSIVE`) unchanged and not preview-eligible (only the published footprint picks its reading).
+  Controls Marcówki, Cieszynianki, Rarytasy G2E, Jabłonki: 4/4 model hashes identical. Targeted typecheck and 492 tests green.
+- **Not built:** no `APPROXIMATE_PREVIEW` class, no result/protocol/Android change; PaddleOCR binding not entered (neither
+  case stops in OCR). `ANDROID_VISUAL_NOT_RUN`; CI, holdout and APK NOT_RUN; solver version label not bumped.
+- **Next (recommendation):** `dom-w-gozdzikowcach` `placeChimney INVALID_COMMAND`, the other emission-stage refusal.

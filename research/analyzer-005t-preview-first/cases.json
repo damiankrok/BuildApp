@@ -1,0 +1,149 @@
+{
+ "schema": "research.005t-preview-first.cases.0.1",
+ "base": "f055528351fd13a8ca748f4f073a391927a358e0",
+ "what": "first stop of two sealed N1v refusals, before/after the 005T emitter fix, and four known-good controls; numbers and ids only",
+ "inputs": "N1v observation graph replayed; metric evidence re-extracted once OFFLINE from cached bytes with PP-OCRv6 (seal-case.ts) and checked equal to the N1v failure's metricEvidenceHash",
+ "failures": [
+  {
+   "case": "A01",
+   "edition": "m60124f28f071a",
+   "n1vMetricEvidenceHash": "58951b02a5bb1ea48f33a4750e46ff6581dd7079655d2baa77eb3c8fd2da1502",
+   "resealedMetricEvidenceHash": "58951b02a5bb1ea48f33a4750e46ff6581dd7079655d2baa77eb3c8fd2da1502",
+   "before": {
+    "reasonCode": "MODEL_EMISSION_FAILED",
+    "stage": "BUILDING_MODEL",
+    "command": "placeWindow",
+    "commandIndex": 89,
+    "commandId": "opening-0-east-1-0-unit",
+    "detail": "frame reaches 0.2 m into a 0.152325 m wall",
+    "scene": null
+   },
+   "firstBad": "emitter: exterior window/door frames take the model defaults (window inset 0.12 + depth 0.08 = 0.20 m; door 0.10 + 0.12 = 0.22 m) while the solver accepts a wall read from 0.15 m; the wall read here is 0.152325 m",
+   "after": {
+    "outcome": "COMPLETED",
+    "modelSha256": "4ced017981088d05aa0f2b245b1f80a343c8b338855e14154e3a150040846b54",
+    "sceneSha256": "22871168f8b8dc557b6a53992ee7de2823a7eb819f22d50d75c70c26627d87fd",
+    "sceneBytes": 315414,
+    "counts": {
+     "masses": 3,
+     "openings": 21,
+     "rooms": 5,
+     "terraces": 1,
+     "meshes": 107,
+     "triangles": 2524,
+     "commands": 150
+    },
+    "quality": {
+     "L0": 0,
+     "L1": 49,
+     "L2": 15
+    },
+    "verification": {
+     "closure": {
+      "exteriorErrors": 14,
+      "exteriorFindings": 14,
+      "interiorFindings": 25
+     },
+     "replay": "BYTE_IDENTICAL",
+     "residuals": 6,
+     "residualsOutsideTolerance": 2
+    },
+    "exteriorWallThicknessM": 0.152325,
+    "levels": [
+     [
+      0,
+      2.8
+     ],
+     [
+      2.8,
+      5.36
+     ]
+    ],
+    "roofs": {
+     "main": "GABLE 40 deg",
+     "attached": "2 FLAT"
+    },
+    "exteriorBboxM": [
+     10.5,
+     8.008434
+    ],
+    "publishedFootprintM2": 87.53,
+    "windows": 10,
+    "doors": 14,
+    "limitingWarnings": [],
+    "warnings": [
+     "GRAPH_REPLAYED",
+     "SOURCE_BYTE_IDENTICAL",
+     "GUESSED_ADDRESS_HTTP_STATUS",
+     "LAYOUT_STOREY_COVERAGE_DISAGREES",
+     "LAYOUT_STOREY_COVERAGE_DISAGREES",
+     "OPENINGS_NOT_BUILT",
+     "RESIDUALS_OUTSIDE_TOLERANCE",
+     "EXTERIOR_JOINTS",
+     "INVARIANT_VIOLATIONS"
+    ],
+    "recogniser": {
+     "crops": 294,
+     "stable": 156,
+     "confident": 66,
+     "corroborating": 65,
+     "agrees": 17,
+     "disagreements": 3,
+     "leads": 25
+    }
+   },
+   "class": "CANONICAL (strict path; no gate changed)"
+  },
+  {
+   "case": "A00",
+   "n1vMetricEvidenceHash": "8770229fac767f5b98d1c6977114f1e4897b10a05f6e2292a47b38fd375220b5",
+   "resealedMetricEvidenceHash": "8770229fac767f5b98d1c6977114f1e4897b10a05f6e2292a47b38fd375220b5",
+   "before": {
+    "reasonCode": "PLAN_RESOLUTION_INCONCLUSIVE",
+    "stage": "REGISTRATION",
+    "firstReading": "PLAN_LAYOUT_REJECTED (lowest storey 30.34 m2 vs 147.01 m2 printed)",
+    "bestReading": "1 body, 145.7 m2 (-0.9 %), bucket UNKNOWN: the published footprint already refused the first reading",
+    "metricConfidence": "STRONG",
+    "independentWitnesses": 6
+   },
+   "after": {
+    "outcome": "PLAN_RESOLUTION_INCONCLUSIVE (unchanged)"
+   },
+   "previewEligible": false,
+   "why": "the only thing that picks the best reading is the published footprint that refused the first one: a preview from it would let the published area choose its own outline (self-corroboration, forbidden by the brief)"
+  }
+ ],
+ "controls": [
+  {
+   "case": "marcowki",
+   "sealed": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+   "replay": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+   "identical": true,
+   "minExteriorWallM": 0.489658
+  },
+  {
+   "case": "dom-w-cieszyniankach",
+   "roof": "hipped",
+   "sealed": "a96afbb19139b304a126b87dd0949ac1604aaad006973ce0dcddb4472cbb1ad3",
+   "replay": "a96afbb19139b304a126b87dd0949ac1604aaad006973ce0dcddb4472cbb1ad3",
+   "identical": true,
+   "minExteriorWallM": 0.458865
+  },
+  {
+   "case": "rarytasy-g2e",
+   "sealed": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+   "replay": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+   "identical": true,
+   "minExteriorWallM": 0.441264
+  },
+  {
+   "case": "dom-w-jablonkach",
+   "note": "the only built row with exterior walls under 0.22 m",
+   "sealed": "a81652d034b4f9de2c0f43cce1365a0d6d9414d90ed0fb83056fd6582700a4bb",
+   "replay": "a81652d034b4f9de2c0f43cce1365a0d6d9414d90ed0fb83056fd6582700a4bb",
+   "identical": true,
+   "minExteriorWallM": 0.210325
+  }
+ ],
+ "byConstruction": "all 23 built N1v rows: the rule emits nothing where the default frame fits the ring wall; every one of them was accepted with default frames, so none can change (4 replayed to confirm)"
+}
