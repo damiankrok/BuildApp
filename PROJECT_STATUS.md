@@ -2114,3 +2114,20 @@ Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005T_N3_ROOF_DATUM_RECOVERY.md`;
   architecture tests green; typecheck green.
 - **Unknown:** the attic floor (2.80 m convention), terrain and eave build-up; chimney top (existing convention, ASSUMED).
   No quantities or costs from this geometry. CI, APK, Android visual review NOT_RUN.
+
+
+## Where the owner's two-house visual APK stands (STAGE BUILDPLAN-OWNER-005T-TWO-HOUSES-VISUAL-APK)
+
+Report: `stage-reports/STAGE_BUILDPLAN_OWNER_005T_TWO_HOUSES_VISUAL_APK.md`. Branch `owner/005t-two-houses-visual-apk-v1`
+from `c4618749`.
+
+- The phone ships, first in its list and offline, `jarzmianki-005t-visual` (`m60124f28f071a`, model `4ced0179…`) and
+  `gozdzikowce-005t-visual` (`m79923e950094d`, model `a612a399…`): the sealed pipeline models, pinned by SHA-256 in
+  `packages/candidates/src/owner-005t/`; their scene bytes equal the pipeline's (`22871168…`, `50002e00…`). The five
+  earlier scenes are unchanged. Subtitles say MODEL ORIENTACYJNY — nie do kosztorysu.
+- `-PvisualReview=005t` builds a side-by-side test app `com.buildplan.preview.visual005t` („BuildPlan 3D – test”);
+  without it the app is unchanged. One local build: arm64 APK `26203a60…57dc`, versionCode 479, preview signer
+  `6e48fac4…`, signature and alignment verified, assets checked inside the APK.
+- Distribution: the APK is committed at `stage-reports/artifacts/owner-005t/BuildPlan-005T-two-houses-arm64.apk`
+  (creating a GitHub release was refused to this session, HTTP 403). CI, mirror, `preview-latest`, `owner-preview-latest`
+  untouched. OWNER_VISUAL_NOT_RUN.

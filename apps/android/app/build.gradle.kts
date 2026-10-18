@@ -110,6 +110,16 @@ val previewVersion: PreviewVersion = run {
     }
 }
 
+/**
+ * BUILDPLAN-OWNER-005T: an opt-in side-by-side test app for a visual review. `-PvisualReview=005t` installs as
+ * `com.buildplan.preview.visual005t` with the label "BuildPlan 3D – test", beside the owner's installed preview:
+ * it neither updates nor replaces it, shares none of its data, and its versionCode does not compete with the
+ * preview's. Absent — every normal build — the app's id, label and versionCode are exactly as before.
+ */
+val visualReview: String? = providers.gradleProperty("visualReview").orNull?.trim()?.takeIf { it.isNotEmpty() }?.also {
+    if (!Regex("[a-z0-9]{1,16}").matches(it)) throw GradleException("visualReview must be 1-16 lowercase letters or digits, got '$it'")
+}
+
 val previewCommit: String = previewEnv("GITHUB_SHA") ?: gitStdout("rev-parse", "HEAD") ?: "unknown"
 
 // ---------------------------------------------------------------------------
@@ -304,6 +314,8 @@ android {
         // same id would be an update/signature conflict rather than a
         // second app. This preview must be installable alongside it.
         applicationId = "com.buildplan.preview"
+        if (visualReview != null) applicationIdSuffix = ".visual$visualReview"
+        manifestPlaceholders["appLabel"] = if (visualReview != null) "BuildPlan 3D – test" else "@string/app_name"
         minSdk = 26
         targetSdk = 35
         versionCode = previewVersion.code
@@ -482,7 +494,7 @@ val previewVersionFile = tasks.register("previewVersionFile") {
     group = "build"
     description = "Write VERSION.txt: the preview APKs' versionCode, versionName, commit and signing key."
     val out = layout.buildDirectory.file("preview-version/VERSION.txt")
-    val applicationId: String = android.defaultConfig.applicationId ?: android.namespace ?: "com.buildplan.preview"
+    val applicationId: String = (android.defaultConfig.applicationId ?: android.namespace ?: "com.buildplan.preview") + (android.defaultConfig.applicationIdSuffix ?: "")
     val versionCode: Int = previewVersion.code
     val versionName: String = previewVersion.name
     val versionSource: String = previewVersion.source
