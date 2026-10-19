@@ -1,0 +1,623 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005V-WALL-FIRST-FACADE-ALIGNMENT-V1",
+ "base": "eff66f49c2bbb53a524b893734ea2e74925a0525",
+ "replay": "research/analyzer-005t-n2/replay-solver.ts over the sealed N1v graph and metric evidence, offline (no OCR, no network)",
+ "scenes": "compileBuilding + buildMobileSceneBundle; roundTrip and deterministic true for all four",
+ "houses": {
+  "A01 Jarzmianki m60124f28f071a": {
+   "role": "PRIMARY",
+   "before": {
+    "modelSha256": "eb7935899e484121e3949a1ac6d1f756ccc93ad0cce432f947222bfb37b902fd",
+    "sceneSha256": "e75e24c8ea6915918f5b03ea0126bdddbbb87af3f7ece74c51187b16958fea44",
+    "meshes": 100,
+    "objects": 77,
+    "geometryErrors": 7,
+    "openingAboveWallTop": 7,
+    "exteriorOpenings": 12,
+    "byKind": {
+     "DOOR": 1,
+     "WINDOW": 11
+    },
+    "interiorDoors": 9,
+    "roofs": [
+     {
+      "kind": "GABLE",
+      "pitchDeg": 40,
+      "ridgeAxis": "Z"
+     }
+    ],
+    "chimneys": 0,
+    "openings": [
+     {
+      "id": "main-idoor-0-0",
+      "wallId": "main-iwall-0-z-0",
+      "kind": "DOOR",
+      "u0": 0.073,
+      "u1": 0.339,
+      "widthM": 0.784,
+      "sillM": 0,
+      "heightM": 2.1,
+      "status": "SOURCE_DERIVED",
+      "kindBasis": null
+     },
+     {
+      "id": "main-idoor-0-1",
+      "wallId": "main-iwall-0-z-6",
+      "kind": "DOOR",
+      "u0": 0.138,
+      "u1": 0.332,
+      "widthM": 0.885,
+      "sillM": 0,
+      "heightM": 2.1,
+      "status": "SOURCE_DERIVED",
+      "kindBasis": null
+     },
+     {
+      "id": "main-idoor-0-2",
+      "wallId": "main-iwall-0-z-6",
+      "kind": "DOOR",
+      "u0": 0.768,
+      "u1": 0.962,
+      "widthM": 0.885,
+      "sillM": 0,
+      "heightM": 2.1,
+      "status": "SOURCE_DERIVED",
+      "kindBasis": null
+     },
+     {
+      "id": "main-idoor-0-3",
+      "wallId": "main-iwall-0-x-1",
+      "kind": "DOOR",
+      "u0": 0.189,
+      "u1": 0.401,
+      "widthM": 0.894,
+      "sillM": 0,
+      "heightM": 2.1,
+      "status": "SOURCE_DERIVED",
+      "kindBasis": null
+     },
+     {
+      "id": "main-idoor-0-4",
+      "wallId": "main-iwall-0-x-3",
+      "kind": "DOOR",
+      "u0": 0.537,
+      "u1": 0.93,
+      "widthM": 0.894,
+      "sillM": 0,
+      "heightM": 2.1,
+      "status": "SOURCE_DERIVED",
+      "kindBasis": null
+     },
+     {
+      "id": "main-idoor-1-0",
+      "wallId": "main-iwall-1-z-0",
+      "kind": "DOOR",
+      "u0": 0.286,
+      "u1": 0.655,
+      "widthM": 0.817,
+      "sillM": 0,
+      "heightM": 2.1,
+      "status": "SOURCE_DERIVED",
+      "kindBasis": null
+     },
+     {
+      "id": "main-idoor-1-1",
+      "wallId": "main-iwall-1-z-8",
+      "kind": "DOOR",
+      "u0": 0.378,
+      "u1": 0.888,
+      "widthM": 0.817,
+      "sillM": 0,
+      "heightM": 2.1,
+      "status": "SOURCE_DERIVED",
+      "kindBasis": null
+     },
+     {
+      "id": "main-idoor-1-2",
+      "wallId": "main-iwall-1-x-2",
+      "kind": "DOOR",
+      "u0": 0.164,
+      "u1": 0.374,
+      "widthM": 0.844,
+      "sillM": 0,
+      "heightM": 2.1,
+      "status": "SOURCE_DERIVED",
+      "kindBasis": null
+     },
+     {
+      "id": "main-idoor-1-3",
+      "wallId": "main-iwall-1-x-6",
+      "kind": "DOOR",
+      "u0": 0.102,
+      "u1": 0.475,
+      "widthM": 0.825,
+      "sillM": 0,
+      "heightM": 2.1,
+      "status": "SOURCE_DERIVED",
+      "kindBasis": null
+     },
+     {
+      "id": "opening-0-east-1-0",
+      "wallId": "ring-main-0-w1",
+      "kind": "WINDOW",
+      "u0": 0.457,
+      "u1": 0.589,
+      "widthM": 1.06,
+      "sillM": 0.78,
+      "heightM": 1.42,
+      "status": "SOURCE_CORROBORATED",
+      "kindBasis": "VISUAL_INFERRED"
+     },
+     {
+      "id": "opening-0-rear-2-0",
+      "wallId": "ring-main-0-w2",
+      "kind": "WINDOW",
+      "u0": 0.685,
+      "u1": 0.901,
+      "widthM": 2.26,
+      "sillM": 0.5,
+      "heightM": 1.7,
+      "status": "SOURCE_DERIVED",
+      "kindBasis": "VISUAL_INFERRED"
+     },
+     {
+      "id": "opening-0-rear-2-1",
+      "wallId": "ring-main-0-w2",
+      "kind": "WINDOW",
+      "u0": 0.137,
+      "u1": 0.309,
+      "widthM": 1.808,
+      "sillM": 0.9,
+      "heightM": 1.3,
+      "status": "ASSUMED",
+      "kindBasis": "ASSUMED"
+     },
+     {
+      "id": "opening-0-west-3-0",
+      "wallId": "ring-main-0-w3",
+      "kind": "WINDOW",
+      "u0": 0.365,
+      "u1": 0.586,
+      "widthM": 1.77,
+      "sillM": 0.9,
+      "heightM": 1.3,
+      "status": "ASSUMED",
+      "kindBasis": "ASSUMED"
+     },
+     {
+      "id": "opening-0-west-3-1",
+      "wallId": "ring-main-0-w3",
+      "kind": "WINDOW",
+      "u0": 0.817,
+      "u1": 0.975,
+      "widthM": 1.261,
+      "sillM": 0.9,
+      "heightM": 1.3,
+      "status": "ASSUMED",
+      "kindBasis": "ASSUMED"
+     },
+     {
+      "id": "opening-1-front-4-0",
+      "wallId": "ring-main-1-w0",
+      "kind": "WINDOW",
+      "u0": 0.013,
+      "u1": 0.071,
+      "widthM": 0.6,
+      "sillM": 0.9,
+      "heightM": 0.797,
+      "status": "ASSUMED",
+      "kindBasis": "ASSUMED"
+     },
+     {
+      "id": "opening-1-front-4-1",
+      "wallId": "ring-main-1-w0",
+      "kind": "WINDOW",
+      "u0": 0.179,
+      "u1": 0.563,
+      "widthM": 4.031,
+      "sillM": 0.9,
+      "heightM": 1.3,
+      "status": "ASSUMED",
+      "kindBasis": "ASSUMED"
+     },
+     {
+      "id": "opening-1-front-4-2",
+      "wallId": "ring-main-1-w0",
+      "kind": "WINDOW",
+      "u0": 0.565,
+      "u1": 0.847,
+      "widthM": 2.962,
+      "sillM": 0.9,
+      "heightM": 1.3,
+      "status": "ASSUMED",
+      "kindBasis": "ASSUMED"
+     },
+     {
+      "id": "opening-1-front-4-3",
+      "wallId": "ring-main-1-w0",
+      "kind": "WINDOW",
+      "u0": 0.849,
+      "u1": 0.981,
+      "widthM": 1.387,
+      "sillM": 0.9,
+      "heightM": 1.3,
+      "status": "ASSUMED",
+      "kindBasis": "ASSUMED"
+     },
+     {
+      "id": "opening-1-rear-6-0",
+      "wallId": "ring-main-1-w2",
+      "kind": "WINDOW",
+      "u0": 0.011,
+      "u1": 0.08,
+      "widthM": 0.716,
+      "sillM": 0.9,
+      "heightM": 0.699,
+      "status": "ASSUMED",
+      "kindBasis": "ASSUMED"
+     },
+     {
+      "id": "opening-1-west-7-0",
+      "wallId": "ring-main-1-w3",
+      "kind": "DOOR",
+      "u0": 0.206,
+      "u1": 0.343,
+      "widthM": 1.1,
+      "sillM": 0,
+      "heightM": 2.2,
+      "status": "SOURCE_CORROBORATED",
+      "kindBasis": "VISUAL_INFERRED"
+     },
+     {
+      "id": "opening-1-west-7-1",
+      "wallId": "ring-main-1-w3",
+      "kind": "WINDOW",
+      "u0": 0.566,
+      "u1": 0.691,
+      "widthM": 1.002,
+      "sillM": 1.137111,
+      "heightM": 1.218,
+      "status": "SOURCE_DERIVED",
+      "kindBasis": "VISUAL_INFERRED"
+     }
+    ]
+   },
+   "after": {
+    "modelSha256": "d93291577e2d795f19a2ebfab698e1e655ecf007f342e5ba7166c4c886a61be2",
+    "sceneSha256": "ba514cf5eb2124fc082d07a994ed37ab3bf81af883f2db4feddaa08bfbcb312d",
+    "meshes": 126,
+    "objects": 93,
+    "geometryErrors": 0,
+    "openingAboveWallTop": 0,
+    "exteriorOpenings": 11,
+    "byKind": {
+     "DOOR": 4,
+     "WINDOW": 7
+    },
+    "interiorDoors": 9,
+    "roofs": [
+     {
+      "kind": "GABLE",
+      "pitchDeg": 40,
+      "ridgeAxis": "X"
+     }
+    ],
+    "chimneys": 2,
+    "openings": [
+     {
+      "id": "main-idoor-0-0",
+      "wallId": "main-iwall-0-z-0",
+      "kind": "DOOR",
+      "u0": 0.073,
+      "u1": 0.339,
+      "widthM": 0.784,
+      "sillM": 0,
+      "heightM": 2.1,
+      "status": "SOURCE_DERIVED",
+      "kindBasis": null
+     },
+     {
+      "id": "main-idoor-0-1",
+      "wallId": "main-iwall-0-z-6",
+      "kind": "DOOR",
+      "u0": 0.138,
+      "u1": 0.332,
+      "widthM": 0.885,
+      "sillM": 0,
+      "heightM": 2.1,
+      "status": "SOURCE_DERIVED",
+      "kindBasis": null
+     },
+     {
+      "id": "main-idoor-0-2",
+      "wallId": "main-iwall-0-z-6",
+      "kind": "DOOR",
+      "u0": 0.768,
+      "u1": 0.962,
+      "widthM": 0.885,
+      "sillM": 0,
+      "heightM": 2.1,
+      "status": "SOURCE_DERIVED",
+      "kindBasis": null
+     },
+     {
+      "id": "main-idoor-0-3",
+      "wallId": "main-iwall-0-x-1",
+      "kind": "DOOR",
+      "u0": 0.189,
+      "u1": 0.401,
+      "widthM": 0.894,
+      "sillM": 0,
+      "heightM": 2.1,
+      "status": "SOURCE_DERIVED",
+      "kindBasis": null
+     },
+     {
+      "id": "main-idoor-0-4",
+      "wallId": "main-iwall-0-x-3",
+      "kind": "DOOR",
+      "u0": 0.537,
+      "u1": 0.93,
+      "widthM": 0.894,
+      "sillM": 0,
+      "heightM": 2.1,
+      "status": "SOURCE_DERIVED",
+      "kindBasis": null
+     },
+     {
+      "id": "main-idoor-1-0",
+      "wallId": "main-iwall-1-z-0",
+      "kind": "DOOR",
+      "u0": 0.286,
+      "u1": 0.655,
+      "widthM": 0.817,
+      "sillM": 0,
+      "heightM": 2.1,
+      "status": "SOURCE_DERIVED",
+      "kindBasis": null
+     },
+     {
+      "id": "main-idoor-1-1",
+      "wallId": "main-iwall-1-z-8",
+      "kind": "DOOR",
+      "u0": 0.378,
+      "u1": 0.888,
+      "widthM": 0.817,
+      "sillM": 0,
+      "heightM": 2.1,
+      "status": "SOURCE_DERIVED",
+      "kindBasis": null
+     },
+     {
+      "id": "main-idoor-1-2",
+      "wallId": "main-iwall-1-x-2",
+      "kind": "DOOR",
+      "u0": 0.164,
+      "u1": 0.374,
+      "widthM": 0.844,
+      "sillM": 0,
+      "heightM": 2.1,
+      "status": "SOURCE_DERIVED",
+      "kindBasis": null
+     },
+     {
+      "id": "main-idoor-1-3",
+      "wallId": "main-iwall-1-x-6",
+      "kind": "DOOR",
+      "u0": 0.102,
+      "u1": 0.475,
+      "widthM": 0.825,
+      "sillM": 0,
+      "heightM": 2.1,
+      "status": "SOURCE_DERIVED",
+      "kindBasis": null
+     },
+     {
+      "id": "opening-0-east-1-0",
+      "wallId": "ring-main-0-w1",
+      "kind": "WINDOW",
+      "u0": 0.457,
+      "u1": 0.589,
+      "widthM": 1.06,
+      "sillM": 0.78,
+      "heightM": 1.42,
+      "status": "SOURCE_CORROBORATED",
+      "kindBasis": "VISUAL_INFERRED"
+     },
+     {
+      "id": "opening-0-front-0-0",
+      "wallId": "ring-main-0-w0",
+      "kind": "WINDOW",
+      "u0": 0.013,
+      "u1": 0.259,
+      "widthM": 2.584,
+      "sillM": 0.9,
+      "heightM": 1.3,
+      "status": "ASSUMED",
+      "kindBasis": "ASSUMED"
+     },
+     {
+      "id": "opening-0-front-0-1",
+      "wallId": "ring-main-0-w0",
+      "kind": "DOOR",
+      "u0": 0.427,
+      "u1": 0.522,
+      "widthM": 0.995,
+      "sillM": 0,
+      "heightM": 2.1,
+      "status": "ASSUMED",
+      "kindBasis": "VISUAL_INFERRED"
+     },
+     {
+      "id": "opening-0-front-0-2",
+      "wallId": "ring-main-0-w0",
+      "kind": "DOOR",
+      "u0": 0.65,
+      "u1": 0.751,
+      "widthM": 1.056,
+      "sillM": 0,
+      "heightM": 2.1,
+      "status": "ASSUMED",
+      "kindBasis": "SOURCE_DERIVED"
+     },
+     {
+      "id": "opening-0-front-0-3",
+      "wallId": "ring-main-0-w0",
+      "kind": "DOOR",
+      "u0": 0.803,
+      "u1": 0.888,
+      "widthM": 0.894,
+      "sillM": 0,
+      "heightM": 2.1,
+      "status": "ASSUMED",
+      "kindBasis": "SOURCE_DERIVED"
+     },
+     {
+      "id": "opening-0-rear-2-0",
+      "wallId": "ring-main-0-w2",
+      "kind": "WINDOW",
+      "u0": 0.685,
+      "u1": 0.901,
+      "widthM": 2.26,
+      "sillM": 0.5,
+      "heightM": 1.7,
+      "status": "SOURCE_DERIVED",
+      "kindBasis": "VISUAL_INFERRED"
+     },
+     {
+      "id": "opening-0-rear-2-1",
+      "wallId": "ring-main-0-w2",
+      "kind": "WINDOW",
+      "u0": 0.137,
+      "u1": 0.309,
+      "widthM": 1.808,
+      "sillM": 0.9,
+      "heightM": 1.3,
+      "status": "ASSUMED",
+      "kindBasis": "ASSUMED"
+     },
+     {
+      "id": "opening-0-west-3-0",
+      "wallId": "ring-main-0-w3",
+      "kind": "WINDOW",
+      "u0": 0.365,
+      "u1": 0.586,
+      "widthM": 1.77,
+      "sillM": 0.9,
+      "heightM": 1.3,
+      "status": "ASSUMED",
+      "kindBasis": "ASSUMED"
+     },
+     {
+      "id": "opening-0-west-3-1",
+      "wallId": "ring-main-0-w3",
+      "kind": "WINDOW",
+      "u0": 0.817,
+      "u1": 0.975,
+      "widthM": 1.261,
+      "sillM": 0.9,
+      "heightM": 1.3,
+      "status": "ASSUMED",
+      "kindBasis": "ASSUMED"
+     },
+     {
+      "id": "opening-1-west-7-0",
+      "wallId": "ring-main-1-w3",
+      "kind": "DOOR",
+      "u0": 0.206,
+      "u1": 0.343,
+      "widthM": 1.1,
+      "sillM": 0,
+      "heightM": 2.2,
+      "status": "SOURCE_CORROBORATED",
+      "kindBasis": "VISUAL_INFERRED"
+     },
+     {
+      "id": "opening-1-west-7-1",
+      "wallId": "ring-main-1-w3",
+      "kind": "WINDOW",
+      "u0": 0.566,
+      "u1": 0.691,
+      "widthM": 1.002,
+      "sillM": 1.137111,
+      "heightM": 1.218,
+      "status": "SOURCE_DERIVED",
+      "kindBasis": "VISUAL_INFERRED"
+     }
+    ]
+   }
+  },
+  "Gozdzikowce 3 m79923e950094d": {
+   "role": "CONTROL",
+   "before": {
+    "modelSha256": "b022b7c703e8223017585969458998e97180bb6e3fbf5f752e6ae822775687ec",
+    "sceneSha256": "0f52a4feb8bd7061f2e53836f9619220495d79370b9374c9b2c2f63b1ec35829",
+    "meshes": 161,
+    "objects": 115,
+    "geometryErrors": 1,
+    "openingAboveWallTop": 1,
+    "exteriorOpenings": 17,
+    "byKind": {
+     "DOOR": 7,
+     "WINDOW": 10
+    },
+    "interiorDoors": 12,
+    "roofs": [
+     {
+      "kind": "GABLE",
+      "pitchDeg": 40,
+      "ridgeAxis": "X"
+     }
+    ],
+    "chimneys": 1
+   },
+   "after": {
+    "modelSha256": "911456a88b2530c9cf01b348dc7045a7b7bcc6d85e62e58221e5f205d41efbbc",
+    "sceneSha256": "bbb16ee403340782a3a158dd5bc33d546ad20828592799bdae2cb99586084199",
+    "meshes": 161,
+    "objects": 115,
+    "geometryErrors": 0,
+    "openingAboveWallTop": 0,
+    "exteriorOpenings": 16,
+    "byKind": {
+     "DOOR": 7,
+     "WINDOW": 9
+    },
+    "interiorDoors": 12,
+    "roofs": [
+     {
+      "kind": "GABLE",
+      "pitchDeg": 40,
+      "ridgeAxis": "X"
+     }
+    ],
+    "chimneys": 1
+   },
+   "change": "opening-1-front-4-0 (a 0.59 m gap in the attic knee wall, assumed heights, emitted above the wall top and dropped by the geometry) is now refused by name; the N4 garage door, room 8, roof, chimney and every wall unchanged"
+  }
+ },
+ "controls": {
+  "marcowki": {
+   "projectId": "m2fa281446a8ca",
+   "modelSha256Before": "f607464936c7a13368d7f9307fb004e5bbad8b0da4490981851a33616c573321",
+   "modelSha256After": "f607464936c7a13368d7f9307fb004e5bbad8b0da4490981851a33616c573321",
+   "outcome": "IDENTICAL"
+  },
+  "rarytasy-g2e": {
+   "projectId": "m84f2903cb8e14",
+   "modelSha256Before": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+   "modelSha256After": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+   "outcome": "IDENTICAL"
+  },
+  "dom-w-cieszyniankach": {
+   "projectId": "m43d25c0636969",
+   "modelSha256Before": "e4e562923319084fda0b9ae934bcb1185a7098c53e7727c82f9afdcb592c1f6c",
+   "modelSha256After": "e4e562923319084fda0b9ae934bcb1185a7098c53e7727c82f9afdcb592c1f6c",
+   "outcome": "IDENTICAL"
+  }
+ },
+ "controlsNotRun": {
+  "Rarytasy OWNER m3ea…": "NOT_RUN: no sealed replay input for that model in this environment (the G2E development case m84f… above is run separately)",
+  "hip-roof house": "NOT_RUN: none of the five sealed replay cases has a hip roof"
+ }
+}

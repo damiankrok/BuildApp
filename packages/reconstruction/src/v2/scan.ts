@@ -20,6 +20,22 @@ export function lumaAt(r: Raster, x: number, y: number): number {
   return 0.299 * r.data[o] + 0.587 * r.data[o + 1] + 0.114 * r.data[o + 2]
 }
 
+/** 005V: the widest channel spread still read as neutral ink (a render's sky and foliage are wider). */
+export const NEUTRAL_INK_CHROMA = 40
+
+/**
+ * 005V: the topmost row in a column holding neutral ink — darker than paper and not saturated. An outline on a line
+ * drawing, or a roof on a render; a render's blue sky, darker than paper, is not ink.
+ */
+export function topNeutralInkRow(r: Raster, x: number, y0: number, y1: number): number | undefined {
+  for (let y = y0; y <= y1; y += 1) {
+    if (lumaAt(r, x, y) >= 200) continue
+    const [red, green, blue] = rgbAt(r, x, y)
+    if (Math.max(red, green, blue) - Math.min(red, green, blue) < NEUTRAL_INK_CHROMA) return y
+  }
+  return undefined
+}
+
 export function rgbAt(r: Raster, x: number, y: number): [number, number, number] {
   const xi = Math.round(x)
   const yi = Math.round(y)

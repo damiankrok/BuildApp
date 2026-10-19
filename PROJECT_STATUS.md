@@ -2209,3 +2209,21 @@ dimensions are not.
   callouts.
 - **Controls:** Rarytasy G2E, Marcówki and Cieszynianki are identical. A01 only numbers room 1 = Wiatrołap.
 - OWNER_VISUAL_NOT_RETESTED; CI/APK NOT_RUN; the `research-isolation` APK-size gate is still red from `074d6ae`.
+
+## A01's facades, wall first (STAGE BUILDPLAN-ANALYZER-005V-WALL-FIRST-FACADE-ALIGNMENT-V1)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005V_WALL_FIRST_FACADE_ALIGNMENT.md`; ledger and before/after:
+`research/analyzer-005v-facade/`. Branch `analyzer/005v-wall-first-facade-alignment-v1` from `eff66f4`. Verdict
+`VISUAL_FACADE_FIT_IMPROVED_WITH_EVIDENCE` (not an OWNER pass).
+
+- **Roof axis:** the apex vote counted a render's blue sky as ink, so A01's ridge ran along Z and the front became a
+  gable. Ink is now neutral (`topNeutralInkRow`): ridge along X, eave walls front and rear, 2 chimneys.
+- **Eaves:** an ASSUMED head above the eaves is lowered under them while ≥ 1.0 m of window remains, else the gap is
+  refused by name (knee wall). `OPENING_ABOVE_WALL_TOP`: A01 7 → 0, Goździkowce 1 → 0.
+- **Ground front:** the registered face missed the drawn wall by 1–2 px, so the whole wall read as one gap and was
+  dropped. Only then is the wall looked for 0.5 m in / 0.15 m out. A01 front: 0 → 4 openings, each within 0.01 u/L of
+  the elevation; 2 of 4 kinds right (two tall glazings read as DOOR), heights ASSUMED.
+- **Controls:** Goździkowce keeps the N4 garage door, room 8, roof and walls (only a 0.59 m knee-wall gap goes);
+  Marcówki, Rarytasy G2E and Cieszynianki identical.
+- **Found, not fixed:** `wall-strip.test.ts` has been 40/63 red since 005U-N3 (`d5d14be`); the
+  `research-isolation` APK-size gate is still red. OWNER_ZIP_NOT_AVAILABLE; OWNER_VISUAL_NOT_RETESTED; CI/APK NOT_RUN.

@@ -1,0 +1,275 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005V-WALL-FIRST-FACADE-ALIGNMENT-V1",
+ "name": "SOURCE_VIEW_FACADE_LEDGER",
+ "house": "A01 Jarzmianki m60124f28f071a",
+ "sourceEdition": "the publisher page cache the sealed N1v graph was built from (005K gap set); not refetched in 005V; images viewed privately outside the repository, never copied into it",
+ "ownerZip": "OWNER_ZIP_NOT_AVAILABLE",
+ "frame": {
+  "frontSide": "SHEET_BOTTOM",
+  "verified": true,
+  "how": "the front elevation (the entrance facade) shows, left to right, the same four ground openings as the bottom wall of the ground plan (250/220, 100/220, 105/210 entrance, 90/210), at the same u/L to within 0.01; the plan is not mirrored"
+ },
+ "units": "u0/u1 = position along the wall as a fraction of its length L, from the wall start (front: from the west corner); widths in metres",
+ "firstBad": [
+  {
+   "id": "a",
+   "what": "facade mapping",
+   "finding": "not bad: FRONT = SHEET_BOTTOM is right; the left elevation is the left side",
+   "evidence": "front elevation vs ground plan bottom wall, u/L calibrated"
+  },
+  {
+   "id": "roof-axis",
+   "what": "roof axis (the cause of the front reading as a gable)",
+   "finding": "FIRST_BAD: the apex vote read a render sky as ink (luma < 200), every column topped at the frame edge, the vote was 0.00 and the layout fallback (ridgeAxisFromRise, rise from the +3.60 eave on the overhang) chose the ridge along Z, so the front and rear became gables",
+   "fix": "topNeutralInkRow: ink is neutral (channel spread < 40); the left elevation now votes a gable apex (+1.94 m), ridge along X, eave walls front and rear, gables left and right as on the section and the side elevations"
+  },
+  {
+   "id": "c",
+   "what": "OPENING_ABOVE_WALL_TOP with assumed heights",
+   "finding": "FIRST_BAD: gaps in the attic eave walls (knee wall 1.36 m) emitted with the conventional 0.9/2.2 m sill/head; the geometry refused them (7 errors in A01, 1 in Gozdzikowce)",
+   "fix": "WallHost.eaveTopY: an ASSUMED head above the eaves is lowered to 5 cm under them while at least 1.0 m of window remains (kept ASSUMED, the lowering noted); otherwise the gap is refused by name (knee wall), never emitted for the geometry to drop. Heights a callout reads are never moved."
+  },
+  {
+   "id": "b",
+   "what": "source openings missing from the ground front",
+   "finding": "FIRST_BAD: planGaps scanned the registered face line (row 558), 1-2 px below the drawn wall band (rows 536-556, wall drawn ~0.42 m, read 0.152 m); no wall piece was found, the whole 10.5 m wall read as one gap and was dropped by the 6.5 m maximum, so all four openings were lost",
+   "fix": "only when the registered line crosses no wall ink at all: the line is looked for 0.5 m inward / 0.15 m outward and taken where it crosses the most wall ink (>= 30 % of the wall); a line that finds the wall is never moved"
+  },
+  {
+   "id": "d",
+   "what": "datums",
+   "finding": "OPEN: storey 1 at the 2.8 m convention against the printed +3.06; eave wall top 4.435 against 3.06 + 1.36 = 4.42 (source)",
+   "fix": null
+  },
+  {
+   "id": "e",
+   "what": "renderer",
+   "finding": "not bad: the web viewer draws compileBuilding output as is; the defects were all upstream of the emitter",
+   "evidence": "status line: before 7 errors, after geometry ok"
+  }
+ ],
+ "walls": [
+  {
+   "wall": "ring-main-0-w0",
+   "facade": "FRONT",
+   "storey": 0,
+   "L": 10.5,
+   "calibrated": true,
+   "source": {
+    "plan": [
+     "250/220",
+     "100/220",
+     "105/210 (entrance)",
+     "90/210"
+    ],
+    "elevation": [
+     {
+      "what": "large glazing",
+      "u0": 0.015,
+      "u1": 0.255
+     },
+     {
+      "what": "tall glazing",
+      "u0": 0.429,
+      "u1": 0.521
+     },
+     {
+      "what": "entrance door",
+      "u0": 0.651,
+      "u1": 0.726
+     },
+     {
+      "what": "timber panel (no opening)",
+      "u0": 0.75,
+      "u1": 0.802
+     },
+     {
+      "what": "glazed side panel",
+      "u0": 0.807,
+      "u1": 0.883
+     }
+    ],
+    "evidenceType": "plan + elevation"
+   },
+   "before": [],
+   "after": [
+    {
+     "id": "opening-0-front-0-0",
+     "kind": "WINDOW",
+     "u0": 0.013,
+     "u1": 0.259
+    },
+    {
+     "id": "opening-0-front-0-1",
+     "kind": "DOOR",
+     "u0": 0.427,
+     "u1": 0.522
+    },
+    {
+     "id": "opening-0-front-0-2",
+     "kind": "DOOR",
+     "u0": 0.65,
+     "u1": 0.751
+    },
+    {
+     "id": "opening-0-front-0-3",
+     "kind": "DOOR",
+     "u0": 0.803,
+     "u1": 0.888
+    }
+   ],
+   "verdict": "IMPROVED",
+   "notes": [
+    "positions 4/4 within 0.01 u/L of the elevation",
+    "kind right 2/4: the 1.00 m and 0.89 m openings are tall glazing on the elevation and DOOR in the model (kind VISUAL_INFERRED / SOURCE_DERIVED from the plan symbol) - REMAINING",
+    "heights ASSUMED: the 2.58 m glazing is 0.9 + 1.3 m in the model, ~2.2 m floor to head on the elevation - REMAINING",
+    "entrance: the 1.06 m opening is a DOOR from the plan door symbol; the elevation shows the entrance at the same u/L, but the model carries no ENTRANCE role (UNRESOLVED_ENTRANCE: no field for it; not invented)"
+   ]
+  },
+  {
+   "wall": "ring-main-1-w0",
+   "facade": "FRONT",
+   "storey": 1,
+   "calibrated": false,
+   "source": {
+    "plan": "eave wall with knee wall 1.36 m; roof windows 78/118 in the roof plane, none in the wall",
+    "elevation": "roof plane with roof windows and two chimneys above the eaves",
+    "evidenceType": "attic plan + section + front elevation"
+   },
+   "before": [
+    "opening-1-front-4-0..3 (four windows of a gable that is not there; dropped by the geometry as OPENING_ABOVE_WALL_TOP)"
+   ],
+   "after": [],
+   "verdict": "IMPROVED",
+   "notes": [
+    "roof windows not modelled (no roof-window element) - REMAINING"
+   ]
+  },
+  {
+   "wall": "ring-main-1-w2",
+   "facade": "REAR",
+   "storey": 1,
+   "calibrated": false,
+   "source": {
+    "plan": "eave wall with knee wall, roof windows",
+    "evidenceType": "attic plan"
+   },
+   "before": [
+    "opening-1-rear-6-0 (0.72 m, above the wall top, dropped)"
+   ],
+   "after": [],
+   "verdict": "IMPROVED",
+   "notes": [
+    "refused by name: knee wall"
+   ]
+  },
+  {
+   "wall": "ring-main-1-w3",
+   "facade": "WEST",
+   "storey": 1,
+   "calibrated": false,
+   "source": {
+    "plan": "gable: 110/220 x2",
+    "evidenceType": "attic plan + left elevation"
+   },
+   "before": [
+    "DOOR 1.10",
+    "WINDOW 1.00"
+   ],
+   "after": [
+    "DOOR 1.10",
+    "WINDOW 1.00"
+   ],
+   "verdict": "UNCHANGED",
+   "notes": [
+    "NOT_VERIFIED against the elevation u/L; the gable now stands on this wall (before: on the front)"
+   ]
+  },
+  {
+   "wall": "ring-main-1-w1",
+   "facade": "EAST",
+   "storey": 1,
+   "calibrated": false,
+   "source": {
+    "plan": "gable: 100/220 x2",
+    "evidenceType": "attic plan"
+   },
+   "before": [],
+   "after": [],
+   "verdict": "UNCHANGED",
+   "notes": [
+    "MISSING: two openings of the source - REMAINING, NOT_VERIFIED why"
+   ]
+  },
+  {
+   "wall": "ring-main-0-w1",
+   "facade": "EAST",
+   "storey": 0,
+   "calibrated": false,
+   "before": [
+    "WINDOW 1.06"
+   ],
+   "after": [
+    "WINDOW 1.06"
+   ],
+   "verdict": "UNCHANGED",
+   "notes": [
+    "NOT_VERIFIED"
+   ]
+  },
+  {
+   "wall": "ring-main-0-w2",
+   "facade": "REAR",
+   "storey": 0,
+   "calibrated": false,
+   "before": [
+    "WINDOW 2.26",
+    "WINDOW 1.81"
+   ],
+   "after": [
+    "WINDOW 2.26",
+    "WINDOW 1.81"
+   ],
+   "verdict": "UNCHANGED",
+   "notes": [
+    "NOT_VERIFIED"
+   ]
+  },
+  {
+   "wall": "ring-main-0-w3",
+   "facade": "WEST",
+   "storey": 0,
+   "calibrated": false,
+   "before": [
+    "WINDOW 1.77",
+    "WINDOW 1.26"
+   ],
+   "after": [
+    "WINDOW 1.77",
+    "WINDOW 1.26"
+   ],
+   "verdict": "UNCHANGED",
+   "notes": [
+    "NOT_VERIFIED"
+   ]
+  }
+ ],
+ "roof": {
+  "before": {
+   "kind": "GABLE",
+   "pitchDeg": 40,
+   "ridgeAxis": "Z",
+   "chimneys": 0,
+   "wrongSide": true
+  },
+  "after": {
+   "kind": "GABLE",
+   "pitchDeg": 40,
+   "ridgeAxis": "X",
+   "chimneys": 2,
+   "wrongSide": false
+  },
+  "source": "section +8.16 ridge / 40 deg / knee wall 1.36; front and garden elevations are eave sides, side elevations gables",
+  "verdict": "IMPROVED"
+ }
+}

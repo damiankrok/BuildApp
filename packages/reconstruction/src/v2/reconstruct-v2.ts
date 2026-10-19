@@ -68,13 +68,14 @@ import { qualityLevelOf, sealQualityReport } from './quality.js'
 import type { FeatureQualityReport } from './quality.js'
 import { repairFromResiduals, verifyAgainstViews } from './verify.js'
 import type { RepairTrace, SourceViewResidual } from './verify.js'
-import { dominantTone, lumaAt } from './scan.js'
+import { dominantTone, lumaAt, topNeutralInkRow } from './scan.js'
 import { approximateRidgeDatum } from './roof-datum.js'
 import type { ApproximateRidge } from './roof-datum.js'
 
 // 2.2.0 (005A): a plan the first reading refuses is re-read by the plan
 // resolver before the run stops (PLAN_RESOLVER_VERSION names its readings).
 // Accepted houses are read exactly as before.
+
 export const SOLVER_V2_VERSION = '2.3.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
@@ -593,15 +594,15 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       const extent = v.view.registration.extent
       // The topmost ink in a column: an outline on a line drawing, the roof
       // or a tree on a render. Trees only lower a peak, and a lowered peak
-      // only withholds a vote.
+      // only withholds a vote. 005V: the ink is neutral (`topNeutralInkRow`): a render's sky is not.
       // Sampled on the main body's own span, so an attached body in the same
       // view does not move the apex column off the gable.
       const along = v.view.side === 'FRONT' || v.view.side === 'REAR' ? [main.x0, main.x1] : [main.z0, main.z1]
       const at = (f: number): number | undefined => {
         const x = Math.round(v.view.pxOf(along[0] + (along[1] - along[0]) * f))
         if (x < extent.x0 || x > extent.x1) return undefined
-        for (let y = Math.max(0, extent.y0 - 4); y <= extent.y1; y += 1) if (lumaAt(v.raster, x, y) < 200) return v.view.yOf(y)
-        return undefined
+        const y = topNeutralInkRow(v.raster, x, Math.max(0, extent.y0 - 4), extent.y1)
+        return y === undefined ? undefined : v.view.yOf(y)
       }
       const mid = at(0.5)
       const ends = [at(0.15), at(0.85)].filter((y): y is number => y !== undefined)
@@ -889,8 +890,10 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         const from = facade === 'FRONT' || facade === 'REAR' ? r.x0 : r.z0
         const to = facade === 'FRONT' || facade === 'REAR' ? r.x1 : r.z1
         const gable = isGableEnd(m, facade) && index === topStorey && mainRoof ? { eaveY: mainRoof.eaveY, pitchDeg: mainRoof.pitchDeg, ridgeAlongAt: mainRoof.ridgeAt, eaveAtLow: from, eaveAtHigh: to, buildUpVerticalM: mainRoof.buildUpVerticalM } : undefined
-        const host: WallHost = { massId: m.id, facade, planeAt, from, to, centreAt: round6(planeAt + (inward * T) / 2), storeyIndex: index, ...(gable ? { gable } : {}), floorY: l.elevation, storeyHeightM: gable ? round6(mainRoof!.ridgeY - l.elevation) : l.height }
-        const found = readWallOpenings({ plan: entry.frame, planRaster: entry.raster, host, wallThicknessM: T, callouts, views: viewsOf(facade), attachedSingleStorey: m.role === 'ATTACHED' && m.storeys.length === 1, ...(vehicleMouths.has(`${m.id}:${facade}`) && index === 0 ? { vehicleMouth: vehicleMouths.get(`${m.id}:${facade}`) } : {}), index: hostIndex++ })
+        // 005V: a top-storey wall of the main body parallel to the ridge stops where the roof's underside meets it.
+        const underEaves = !gable && mainRoof && m.id === main.id && index === topStorey ? round6(mainRoof.eaveY - mainRoof.thicknessM / Math.cos((mainRoof.pitchDeg * Math.PI) / 180)) : undefined
+        const host: WallHost = { massId: m.id, facade, planeAt, from, to, centreAt: round6(planeAt + (inward * T) / 2), storeyIndex: index, ...(gable ? { gable } : {}), ...(underEaves !== undefined ? { eaveTopY: underEaves } : {}), floorY: l.elevation, storeyHeightM: gable ? round6(mainRoof!.ridgeY - l.elevation) : l.height }
+        const found = readWallOpenings({ plan: entry.frame, planRaster: entry.raster, host, wallThicknessM: T, callouts, views: viewsOf(facade), attachedSingleStorey: m.role === 'ATTACHED' && m.storeys.length === 1, onRefused: (r) => gap({ what: `the gap ${r.interval[0].toFixed(2)}..${r.interval[1].toFixed(2)} on the ${facade.toLowerCase()} wall of ${m.id}, storey ${index}`, reason: r.why, status: 'REFUSED', observationIds: [], evidenceIds: [] }), ...(vehicleMouths.has(`${m.id}:${facade}`) && index === 0 ? { vehicleMouth: vehicleMouths.get(`${m.id}:${facade}`) } : {}), index: hostIndex++ })
         for (const o of found) {
           // A gap on a face another body stands against is a door between the two bodies, not a facade opening.
           const other = masses.find((xm) => {

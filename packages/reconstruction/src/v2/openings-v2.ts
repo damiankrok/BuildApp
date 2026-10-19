@@ -36,6 +36,11 @@ export type WallHost = {
   storeyIndex: number
   /** Whether this wall is a gable end (perpendicular to the ridge) of a pitched roof, with the roof geometry to rake heads against. */
   gable?: { eaveY: number; pitchDeg: number; ridgeAlongAt: number; eaveAtLow: number; eaveAtHigh: number; buildUpVerticalM: number }
+  /**
+   * 005V: the top of a wall that runs under the eaves of the roof over it (a top storey's wall parallel to the ridge),
+   * absolute: where the roof's underside meets the wall. Absent for gable ends and for walls with a storey above.
+   */
+  eaveTopY?: number
   floorY: number
   storeyHeightM: number
 }
@@ -69,6 +74,16 @@ export type OpeningV2 = {
 }
 
 export type OpeningOptions = { minWidthM?: number; maxWidthM?: number; calloutReachM?: number; stubMaxM?: number }
+/** 005V: how far inward of a registered face that crosses no wall ink the wall is looked for … */
+const WALL_SEARCH_INWARD_M = 0.5
+/** … and how far outward. */
+const WALL_SEARCH_OUTWARD_M = 0.15
+/** 005V: the share of the wall's length a line found that way must cross as wall ink to be taken for the wall. */
+const WALL_SEARCH_MIN_COVER = 0.3
+/** 005V: how far below the eaves an assumed head stays. */
+const EAVE_CLEARANCE_M = 0.05
+/** 005V: the least window an assumed opening may be lowered to under the eaves; below it the gap is refused. */
+const MIN_ASSUMED_WINDOW_M = 1.0
 const DEFAULTS: Required<OpeningOptions> = { minWidthM: 0.5, maxWidthM: 6.5, calloutReachM: 2.0, stubMaxM: 0.3 }
 
 /**
@@ -104,13 +119,36 @@ export function planGaps(raster: Raster, plan: PlanFrameV2, host: WallHost, wall
   const along = host.facade === 'FRONT' || host.facade === 'REAR' ? 'X' : 'Y'
   const mpp = (plan.mppX + plan.mppY) / 2
   const wallPx = wallThicknessM / mpp
-  const centrePx = along === 'X' ? plan.toPixel(0, host.centreAt).y : plan.toPixel(host.centreAt, 0).x
+  const registeredPx = along === 'X' ? plan.toPixel(0, host.centreAt).y : plan.toPixel(host.centreAt, 0).x
   const p0 = along === 'X' ? plan.toPixel(host.from, host.centreAt).x : plan.toPixel(host.centreAt, host.to).y
   const p1 = along === 'X' ? plan.toPixel(host.to, host.centreAt).x : plan.toPixel(host.centreAt, host.from).y
   const from = Math.min(p0, p1) + wallPx * 0.9
   const to = Math.max(p0, p1) - wallPx * 0.9
   // Solid where at least 60 % of the wall's thickness is ink across the centre line.
-  const pieces = bandPieces(raster, along, centrePx, from, to, wallPx * 0.45, Math.max(2, Math.round(wallPx * 0.9 * 0.55)))
+  const piecesAt = (c: number) => bandPieces(raster, along, c, from, to, wallPx * 0.45, Math.max(2, Math.round(wallPx * 0.9 * 0.55)))
+  let centrePx = registeredPx
+  let pieces = piecesAt(centrePx)
+  // 005V: wall first. When the registered line crosses no wall ink at all — the face registered a few pixels off the
+  // drawn band, or a wall drawn thicker than it was read — the wall's whole length would read as one gap and be
+  // dropped, losing every opening in it. The line is then looked for in a narrow band about the registered face (up to
+  // WALL_SEARCH_INWARD_M inward, WALL_SEARCH_OUTWARD_M outward): the line crossing the most wall ink is the wall. A line
+  // that finds the wall is never moved.
+  if (pieces.length === 0) {
+    const inward = host.facade === 'FRONT' || host.facade === 'WEST' ? 1 : -1
+    const towardInside = Math.sign((along === 'X' ? plan.toPixel(0, host.centreAt + inward).y : plan.toPixel(host.centreAt + inward, 0).x) - registeredPx) || 1
+    const coverage = (ps: ReturnType<typeof piecesAt>): number => ps.reduce((a, q) => a + (q.to - q.from + 1), 0)
+    let best = { c: registeredPx, ps: pieces, cover: 0 }
+    for (let d = -Math.round(WALL_SEARCH_OUTWARD_M / mpp); d <= Math.round(WALL_SEARCH_INWARD_M / mpp); d += 1) {
+      const c = registeredPx + towardInside * d
+      const ps = piecesAt(c)
+      const cover = coverage(ps)
+      if (cover > best.cover) best = { c, ps, cover }
+    }
+    if (best.cover >= WALL_SEARCH_MIN_COVER * (to - from)) {
+      centrePx = best.c
+      pieces = best.ps
+    }
+  }
   const solid = mergeRuns(pieces, 2)
   const minGapPx = opt.minWidthM / mpp
   const gaps = gapsBetween(solid, from, to, minGapPx * 0.8)
@@ -178,6 +216,8 @@ export type OpeningReadingInput = {
    * drawing, its heights assumed unless something reads them. Absent everywhere else.
    */
   vehicleMouth?: { from: number; to: number; roomId: string; why: string }
+  /** 005V: a gap not built as an opening, and why — reported by the caller as a refusal, never dropped silently. */
+  onRefused?: (refusal: { interval: [number, number]; why: string }) => void
   index: number
 }
 
@@ -311,6 +351,19 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
       unresolved.push('sill and head (no callout read and no elevation shows this wall)')
       if (!doorBySymbol) unresolved.push('kind (no callout, no elevation and no door symbol on the plan: drawn as a window, not read as one)')
       else if (!doorSwing) unresolved.push('kind (an empty ground-storey gap a door wide, read as a door by the plan convention; no swing drawn)')
+    }
+    // --- 005V: under the eaves. A head nothing read is a convention; where it would reach above the wall the roof
+    // stops it at, it is lowered under the eaves while a window of at least MIN_ASSUMED_WINDOW_M remains. Below that
+    // the gap holds no window the convention can draw — a knee wall, often with roof windows drawn above it on the
+    // plan — and it is refused by name instead of emitted for the geometry to drop. A read height is never moved.
+    if (heightsAssumed && host.eaveTopY !== undefined && headY > host.eaveTopY - EAVE_CLEARANCE_M) {
+      const lowered = round6(host.eaveTopY - EAVE_CLEARANCE_M)
+      if (lowered - sillY < MIN_ASSUMED_WINDOW_M) {
+        input.onRefused?.({ interval: [lo, hi], why: `a ${widthPlan.toFixed(2)} m gap in the ${host.facade.toLowerCase()} wall of ${host.massId} on storey ${host.storeyIndex}, under the eaves: the wall stops ${(host.eaveTopY - host.floorY).toFixed(2)} m above the floor, too low for the assumed ${(headY - sillY).toFixed(2)} m window from ${(sillY - host.floorY).toFixed(2)} m (a knee wall; no callout or elevation reads an opening there) — not built` })
+        continue
+      }
+      unresolved.push(`head lowered from ${(headY - host.floorY).toFixed(2)} to ${(lowered - host.floorY).toFixed(2)} m above the floor, under the eaves (assumed heights)`)
+      headY = lowered
     }
     // --- profile: on a gable end, a head above the soffit at the far jamb is raked along the roof.
     let profile: HeadProfile = 'RECTANGULAR'
