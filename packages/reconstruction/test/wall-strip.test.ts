@@ -61,7 +61,7 @@
  */
 import { describe, expect, it } from 'vitest'
 import { inferStructuralLayout, openFacesOf, planSheet, reconstructV2 } from '../src/index.js'
-import { TRANSFORMS } from './transforms.js'
+import { TRANSFORMS, render } from './transforms.js'
 import type { Transform } from './transforms.js'
 import { FIXTURES, FRAME, OUTER_FACE, compileFixture, fixtureFrame, fixtureOptions, outcomeOf } from './wall-strip-plans.js'
 import type { FixtureName, Outcome } from './wall-strip-plans.js'
@@ -169,12 +169,32 @@ const run = (name: FixtureName, t: Transform = 'id'): { o: Outcome; f: Frozen } 
   return { o: outcomeOf(compiled(name, t)), f }
 }
 
+/**
+ * 005V-N2: versioned semantic deltas over the frozen record, one fixture and one redraw each. `FROZEN` stays the 005Q
+ * base's historical outcome, untouched; an entry here says only that the current reader returns another wall count on
+ * that exact fixture and redraw, why, and is held by its own structural test (family 12) — never by the count alone.
+ *
+ * 005U-N3 reads a wall as thick as the outer wall as a partition. On the 005N entrance, correctly registered (every
+ * side of its body stands on drawn wall), that adds the five 12 px walls drawn round the recess and the garage, which
+ * the frozen reader, capped at 0.72 of the outer wall, never saw: 4 walls then, 9 now.
+ */
+const N3_THICK_INTERIOR_WALLS_EXPECTED: Readonly<Record<string, { walls: number; why: string }>> = {
+  'entrance:id': { walls: 9, why: '005U-N3: the five 12 px walls drawn round the recess and the garage are read as interior walls' },
+}
+const frozenKeyOf = new Map<Frozen, string>(Object.entries(FROZEN).map(([k, v]) => [v, k]))
+/** The wall count the current reader is held to: the frozen record's, unless this exact fixture and redraw has a versioned delta. */
+const wallsExpected = (f: Frozen): number => {
+  const key = frozenKeyOf.get(f)
+  const delta = key === undefined ? undefined : N3_THICK_INTERIOR_WALLS_EXPECTED[key]
+  return delta === undefined ? f.walls : delta.walls
+}
+
 /** What the frame is measured from is the frozen solver's, to the digit: the bodies, the world frame, the zones, the walls, the layout's recesses; no return is read. */
 function frameAsFrozen(o: Outcome, f: Frozen): void {
   expect(o.masses).toEqual(f.masses)
   expect(o.world).toEqual(f.world)
   expect(o.zones).toEqual(f.zones)
-  expect(o.modelWalls).toBe(f.walls)
+  expect(o.modelWalls).toBe(wallsExpected(f))
   expect(o.layoutRecesses).toEqual(f.layoutRecesses)
   expect(o.recessRegions).toBe(f.recessRegions)
   expect(o.returns).toEqual([])
@@ -371,6 +391,64 @@ describe('005Q wall strip — 12. a recessed entrance with its back wall (005N)'
     holdsFrozen(o, f)
     expect(o.layoutRecesses).toEqual(['MAX_Z:11'])
     expect(o.recessRegions).toBe(1)
+  })
+
+  it('005V-N2: the four extra walls over the frozen record are exactly the five drawn 12 px walls round the recess and the garage, once each, and the body stands on its drawn walls', () => {
+    // The fixture as drawn (`entrance()` in wall-strip-plans.ts): 12 px walls at 5 cm/px, the outer ring's west face at
+    // column 40 and its front face at row 279, so world x = (column − 40) × 0.05 and z = (280 − row) × 0.05.
+    const drawn: Array<{ name: string; axis: 'X' | 'Z'; rect: [number, number, number, number] }> = [
+      { name: 'the recess’s west return', axis: 'Z', rect: [108, 150, 119, 279] },
+      { name: 'the recess’s east return, between the recess and the garage', axis: 'Z', rect: [180, 150, 191, 279] },
+      { name: 'the wall between the garage and the house', axis: 'Z', rect: [252, 150, 263, 279] },
+      { name: 'the recess’s back wall (with its door)', axis: 'X', rect: [108, 228, 191, 239] },
+      { name: 'the back wall of the garage and vestibule block', axis: 'X', rect: [108, 150, 263, 161] },
+    ]
+    // the evidence is on the sheet: every pixel of every drawn wall outside its doorways is ink
+    const raster = render(FIXTURES.entrance().p, 'id')
+    const ink = (x: number, y: number): boolean => raster.data[(y * raster.width + x) * 4] < 100
+    const doorways = [[135, 155, 228, 239], [210, 225, 150, 161]]
+    for (const d of drawn) {
+      const [x0, y0, x1, y1] = d.rect
+      for (let y = y0; y <= y1; y += 1) for (let x = x0; x <= x1; x += 1) if (!doorways.some(([a, b, c, e]) => x >= a && x <= b && y >= c && y <= e)) expect(ink(x, y)).toBe(true)
+    }
+    const r = compiled('entrance')
+    const wx = (c: number): number => (c - 40) * 0.05
+    const wz = (row: number): number => (280 - row) * 0.05
+    const interior = r.model.walls.filter((w) => w.kind === 'INTERIOR')
+    const matchedBy = new Map<string, string>()
+    for (const d of drawn) {
+      const [x0, y0, x1, y1] = d.rect
+      // the band the wall's ink occupies across its axis, and its span along it
+      const band = d.axis === 'Z' ? [wx(x0), wx(x1 + 1)] : [wz(y1 + 1), wz(y0)]
+      const span = d.axis === 'Z' ? [wz(y1 + 1), wz(y0)] : [wx(x0), wx(x1 + 1)]
+      const matches = interior.filter((w) => {
+        const vertical = Math.abs(w.start.x - w.end.x) < 1e-6
+        if (vertical !== (d.axis === 'Z')) return false
+        const at = vertical ? w.start.x : w.start.z
+        const [a, b] = vertical ? [Math.min(w.start.z, w.end.z), Math.max(w.start.z, w.end.z)] : [Math.min(w.start.x, w.end.x), Math.max(w.start.x, w.end.x)]
+        const inBand = at >= band[0] - 0.05 && at <= band[1] + 0.05
+        const withinSpan = a >= span[0] - 0.6 && b <= span[1] + 0.6
+        const covers = Math.min(b, span[1]) - Math.max(a, span[0]) >= 0.5 * (span[1] - span[0])
+        return inBand && withinSpan && covers
+      })
+      expect(matches.map((w) => w.id), d.name).toHaveLength(1)
+      expect(matchedBy.has(matches[0].id), `${matches[0].id} answers two drawn walls`).toBe(false)
+      matchedBy.set(matches[0].id, d.name)
+      expect(matches[0].thickness).toBeCloseTo(0.6, 2)
+    }
+    // no interior wall beyond the five drawn ones
+    expect(interior).toHaveLength(drawn.length)
+    expect(r.model.walls.length).toBe(N3_THICK_INTERIOR_WALLS_EXPECTED['entrance:id'].walls)
+    // correctly registered: no side of the body stands off its drawn walls (the 39 misregistered redraws all do)
+    expect(r.unresolved.filter((u) => u.what.startsWith('wall-thick partitions'))).toEqual([])
+    expect(compiled('facePair').unresolved.some((u) => u.what.startsWith('wall-thick partitions'))).toBe(true)
+  })
+
+  it('005V-N2: the versioned delta is this one fixture and redraw, and the historical record is untouched', () => {
+    expect(Object.keys(N3_THICK_INTERIOR_WALLS_EXPECTED)).toEqual(['entrance:id'])
+    expect(FROZEN['entrance:id'].walls).toBe(4)
+    for (const t of TRANSFORMS.filter((x) => x !== 'id')) expect(N3_THICK_INTERIOR_WALLS_EXPECTED[`entrance:${t}`]).toBeUndefined()
+    expect(N3_THICK_INTERIOR_WALLS_EXPECTED['entranceFacePair:id']).toBeUndefined()
   })
 
   it('with an inner chain on the front wall’s inner face, cut there: the face is named and the strip carries no terrace, while the entrance stays a recess with both returns', () => {

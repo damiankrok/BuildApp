@@ -125,6 +125,13 @@ export type InteriorOptions = {
   onDebug?: (info: { axis: 'X' | 'Z'; centrePx: number; thick: number; runsPx: Array<{ from: number; to: number }> }) => void
 }
 
+/**
+ * 005V-N1: the share of a side's length along which a body's drawn outer wall must show wall ink in its band for the
+ * body to count as standing on its walls there. An outer wall with every opening a facade carries, or an open garage
+ * mouth, still shows ink at its corners and piers; a side with ink at fewer than one position in twenty has no wall.
+ */
+export const UNWALLED_SIDE_COVER = 0.05
+
 const DEFAULTS: Required<Omit<InteriorOptions, 'onDebug' | 'extraBarriers' | 'labelArea'>> = { minPartitionFraction: 0.2, maxPartitionFraction: 1.0, thinPartitionFraction: 0.72, minPieceM: 0.55, doorMinM: 0.6, doorMaxM: 1.35, cellM: 0.05 }
 
 /** Neutral dark ink: a wall, not a coloured annotation. */
@@ -224,12 +231,44 @@ export function readInterior(
     }
   }
 
+  // 005V-N1: a wall-thick partition is told from the outer wall by where the outer wall is, so the body must stand on
+  // its drawn walls. On each side, the band where the body puts the outer wall (one and a half outer walls inside the
+  // interior's edge to two outside it) is looked at along the side: a drawn outer wall holds ink there along most of
+  // the side, openings and an open garage mouth notwithstanding. A side with wall ink at almost no position along it
+  // (UNWALLED_SIDE_COVER) is a body registered beyond its drawing — the drawn outer wall then stands inside the
+  // interior, where it would pass for a partition. The registration is uncertain there, and the thick partitions
+  // 005U-N3 admits are not read on this body and storey; the thin ones are read as before.
+  const sideCover = (vertical: boolean, high: boolean): number => {
+    const reach = Math.ceil(wallPx * 2)
+    const inside = Math.ceil(wallPx * 1.5)
+    const extent = vertical ? W : H
+    const length = vertical ? H : W
+    const [from, to] = high ? [extent - 1 - inside, extent - 1 + reach] : [-reach, inside]
+    let walled = 0
+    for (let along = 0; along < length; along += 1) {
+      let len = 0
+      for (let c = from; c <= to; c += 1) {
+        const dark = vertical ? wallInk(raster, px0 + c, py0 + along) : wallInk(raster, px0 + along, py0 + c)
+        len = dark ? len + 1 : 0
+        if (len >= minThick) {
+          walled += 1
+          break
+        }
+      }
+    }
+    return walled / length
+  }
+  const unwalled = (['west', 'east', 'top', 'bottom'] as const).filter((_, k) => sideCover(k < 2, k % 2 === 1) < UNWALLED_SIDE_COVER)
+  const thickAdmitted = unwalled.length === 0
+  if (!thickAdmitted && maxThick > thinThick) {
+    unresolved.push({ what: `wall-thick partitions on storey ${storeyIndex}`, reason: `the body stands on no drawn wall along its ${unwalled.join(', ')} side${unwalled.length > 1 ? 's' : ''} on this sheet: its registration is uncertain there, and ink as thick as the outer wall inside it may be the outer wall itself, so only partitions thinner than the outer wall are read` })
+  }
   // 005U-N3: a wall as thick as the outer wall is a partition only standing clear of the outer wall. Within one
   // outer-wall thickness of the interior's edge, ink that thick is the outer wall's own — drawn thicker than it was
   // read, which the inset by the read thickness left inside — so there the thin-partition bound stays.
   const capAcross = (vertical: boolean, across: number): number => {
     const extent = vertical ? W : H
-    return across < wallPx || across > extent - 1 - wallPx ? Math.min(maxThick, thinThick) : maxThick
+    return !thickAdmitted || across < wallPx || across > extent - 1 - wallPx ? Math.min(maxThick, thinThick) : maxThick
   }
   // A pixel is "partition ink" for a vertical wall when its horizontal run is
   // partition-thick and its vertical run is long; and symmetrically.

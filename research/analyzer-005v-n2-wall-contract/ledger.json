@@ -1,0 +1,150 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005V-N2-WALL-CONTRACT-ADOPTION",
+ "base": "2b3f6cae2826055d886e2c124e4af7e1390c63ff",
+ "productionChange": {
+  "file": "packages/reconstruction/src/v2/interior.ts",
+  "what": "research/analyzer-005v-n1-wall-strip/candidate-unwalled-side.patch applied as is: UNWALLED_SIDE_COVER = 0.05",
+  "chimneyRule": "unchanged (solid blocks still use the thin bound)"
+ },
+ "wallStrip": {
+  "before": {
+   "tests": 63,
+   "passed": 23,
+   "failed": 40
+  },
+  "after": {
+   "tests": 65,
+   "passed": 65,
+   "failed": 0,
+   "of which original": "63/63",
+   "new": [
+    "005V-N2 structural entrance test",
+    "005V-N2 delta-scope test"
+   ]
+  },
+  "previouslyRed": {
+   "count": 40,
+   "misregisteredOuterWall": 39,
+   "entranceContract": 1,
+   "evidence": "all 165 misregistered fixture bodies (35 fixtures x 5 redraws, some with two bodies) have a side whose wall-band coverage is 0.00-0.015 and now carry the unresolved note \"wall-thick partitions on storey 0\"; the 30 correctly registered ones have every side >= 0.596 (research/analyzer-005v-n1-wall-strip/first-bad.json)"
+  }
+ },
+ "frozen": {
+  "FROZEN[entrance:id].walls": 4,
+  "changed": false,
+  "versionedDelta": {
+   "name": "N3_THICK_INTERIOR_WALLS_EXPECTED",
+   "entries": {
+    "entrance:id": 9
+   },
+   "scope": "exact fixture and redraw (keyed by the frozen record object); entrance:mirrorX/mirrorY/turn90/turn270 and entranceFacePair:* have no entry and are held to FROZEN"
+  }
+ },
+ "entranceStructure": {
+  "frame": "world x = (column - 40) x 0.05, z = (280 - row) x 0.05; 12 px = 0.60 m walls",
+  "drawnWalls": [
+   {
+    "name": "recess west return",
+    "rect_px": [
+     108,
+     150,
+     119,
+     279
+    ],
+    "axis": "Z"
+   },
+   {
+    "name": "recess east return / recess-garage wall",
+    "rect_px": [
+     180,
+     150,
+     191,
+     279
+    ],
+    "axis": "Z"
+   },
+   {
+    "name": "garage-house wall",
+    "rect_px": [
+     252,
+     150,
+     263,
+     279
+    ],
+    "axis": "Z"
+   },
+   {
+    "name": "recess back wall (door 135..155)",
+    "rect_px": [
+     108,
+     228,
+     191,
+     239
+    ],
+    "axis": "X"
+   },
+   {
+    "name": "back wall of garage and vestibule block (door 210..225)",
+    "rect_px": [
+     108,
+     150,
+     263,
+     161
+    ],
+    "axis": "X"
+   }
+  ],
+  "matching": "each drawn wall answered by exactly one INTERIOR model wall of the same orientation, its line inside the drawn ink band +-0.05 m, within the span +-0.60 m and covering >= 50 % of it, 0.60 m thick; no model interior wall left unmatched; every pixel of every drawn wall outside its doorways checked to be ink on the rendered fixture",
+  "registration": "no \"wall-thick partitions\" unresolved note on entrance:id (every side stands on drawn wall: 1.00 / 1.00 / 1.00 / 0.60); facePair:id carries it"
+ },
+ "controls": {
+  "positive": "interior-unwalled-side.test.ts: a 12 px garage fire wall inside a house whose body stands on its drawn walls is read (passes with and without the change)",
+  "negative": "the same sheet under a body registered 6 m past the drawn east (and, mirrored, west) wall: that wall is no partition and the side is named; a partition thinner than the outer wall is still read (4 tests red before the change, green after)"
+ },
+ "replays": {
+  "A01 Jarzmianki m60124f28f071a": {
+   "n1": "d93291577e2d795f19a2ebfab698e1e655ecf007f342e5ba7166c4c886a61be2",
+   "n2": "d93291577e2d795f19a2ebfab698e1e655ecf007f342e5ba7166c4c886a61be2",
+   "identical": true
+  },
+  "Gozdzikowce 3 m79923e950094d": {
+   "n1": "911456a88b2530c9cf01b348dc7045a7b7bcc6d85e62e58221e5f205d41efbbc",
+   "n2": "911456a88b2530c9cf01b348dc7045a7b7bcc6d85e62e58221e5f205d41efbbc",
+   "identical": true
+  },
+  "Marcowki m2fa281446a8ca": {
+   "n1": "f607464936c7a13368d7f9307fb004e5bbad8b0da4490981851a33616c573321",
+   "n2": "f607464936c7a13368d7f9307fb004e5bbad8b0da4490981851a33616c573321",
+   "identical": true
+  },
+  "Rarytasy 5 G2E m84f2903cb8e14": {
+   "n1": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+   "n2": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+   "identical": true
+  },
+  "Dom w cieszyniankach m43d25c0636969": {
+   "n1": "e4e562923319084fda0b9ae934bcb1185a7098c53e7727c82f9afdcb592c1f6c",
+   "n2": "e4e562923319084fda0b9ae934bcb1185a7098c53e7727c82f9afdcb592c1f6c",
+   "identical": true
+  }
+ },
+ "replaysNotRun": {
+  "Rarytasy OWNER m3ea…": "NOT_RUN (no sealed input; m84f… not substituted)"
+ },
+ "retained": {
+  "Gozdzikowce": {
+   "garageRoom": "26.09 m2, numbered 8 = Garaz",
+   "fireWall": "main-iwall-0-z-13, 0.303 m, x ~ 8.9",
+   "opening-0-front-0-2": "DOOR 3.22 m, head 2.20 m ASSUMED",
+   "callout325x225": "UNRESOLVED"
+  },
+  "A01": {
+   "roof": "GABLE, ridge X",
+   "chimneys": 2,
+   "groundFrontOpenings": 4,
+   "OPENING_ABOVE_WALL_TOP": 0
+  }
+ },
+ "apkGate": "KNOWN_BASELINE_FAIL: stage-reports/artifacts/owner-005t/BuildPlan-005T-two-houses-arm64.apk 39,556,682 B > 32 MB; untouched",
+ "cieszyniankiMainIwall0z0": "NOT_VERIFIED: 0.417 m at x 3.07, z 12.35..16.13, no wall ink west of it; unchanged by this stage"
+}

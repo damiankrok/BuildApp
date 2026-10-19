@@ -2245,3 +2245,22 @@ Verdict `PARTIAL_REGRESSION_RECOVERY_NOT_ADOPTED`: **no production change**.
   between a garage and the house, like Goździkowce's fire wall. Only a decision on that frozen record can make it
   63/63.
 - Committed tree = base: `wall-strip` 23/63; the APK-size gate is still red. CI/APK NOT_RUN; OWNER_VISUAL_NOT_RETESTED.
+
+## The wall guard and the entrance contract (STAGE BUILDPLAN-ANALYZER-005V-N2-WALL-CONTRACT-ADOPTION)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005V_N2_WALL_CONTRACT_ADOPTION.md`; ledger:
+`research/analyzer-005v-n2-wall-contract/ledger.json`. Branch `analyzer/005v-n2-wall-contract-adoption-v1` from
+`2b3f6ca`. Verdict `ADOPTED_WALL_GUARD_AND_VERSIONED_ENTRANCE_CONTRACT`.
+
+- **Production:** `interior.ts` takes the N1 candidate as is. A body side with wall ink at < 5 % of its length makes
+  the registration uncertain (named in `unresolved`), and 005U-N3's thick partitions are not read on that body.
+- **Contract:** `FROZEN['entrance:id'].walls` stays 4. A versioned `N3_THICK_INTERIOR_WALLS_EXPECTED` holds 9 for that
+  one fixture and redraw only, checked structurally against the five 12 px walls drawn in `entrance()`.
+- **Tests:**
+  - `wall-strip` 23/63 → 65/65 (all 63 original + 2 new);
+  - new `interior-unwalled-side` 5/5 (4 of the 5 red before);
+  - N3/N4/005V unit tests and `tsc` green.
+- **Replays:** the 5 dev cases are byte-identical to N1. Goździkowce's garage (room 8, fire wall, 3.22 m door) and
+  A01's ridge X, 2 chimneys and 4 front openings stay.
+- The APK-size gate is still red (KNOWN_BASELINE_FAIL); Rarytasy OWNER m3ea… NOT_RUN; CI/APK NOT_RUN;
+  OWNER_VISUAL_NOT_RETESTED.
