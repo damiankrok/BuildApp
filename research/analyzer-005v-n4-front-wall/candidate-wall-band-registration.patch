@@ -1,0 +1,179 @@
+diff --git a/packages/reconstruction/src/v2/frame.ts b/packages/reconstruction/src/v2/frame.ts
+index 892a65d..4b16345 100644
+--- a/packages/reconstruction/src/v2/frame.ts
++++ b/packages/reconstruction/src/v2/frame.ts
+@@ -320,14 +320,19 @@ export function registerElevationV2(
+   ridgeY: number,
+   sideEavesOverhangM: number,
+   terrainY?: number,
++  /** 005V-N4: the extent's x span is the walls' drawn span (not the silhouette's): only the walled width scales it. */
++  walledOnly = false,
+ ): ElevationRegistrationV2 | undefined {
+   const widthPx = extent.x1 - extent.x0
+   const heightPx = extent.y1 - extent.y0
+   if (widthPx <= 0 || heightPx <= 0) return undefined
+   const e = world.envelope
+   const w = world.walled
+-  const candidates: Array<{ spanM: number; along0: number; along1: number; why: string }> =
+-    side === 'FRONT' || side === 'REAR'
++  const candidates: Array<{ spanM: number; along0: number; along1: number; why: string }> = walledOnly
++    ? side === 'FRONT' || side === 'REAR'
++      ? [{ spanM: w.x1 - w.x0, along0: w.x0, along1: w.x1, why: `the ${(w.x1 - w.x0).toFixed(2)} m walled width (the walls' drawn span under the roof)` }]
++      : [{ spanM: w.z1 - w.z0, along0: w.z0, along1: w.z1, why: `the ${(w.z1 - w.z0).toFixed(2)} m walled depth (the walls' drawn span under the roof)` }]
++    : side === 'FRONT' || side === 'REAR'
+       ? [{ spanM: e.x1 - e.x0 + 2 * sideEavesOverhangM, along0: e.x0 - sideEavesOverhangM, along1: e.x1 + sideEavesOverhangM, why: `the ${(e.x1 - e.x0).toFixed(2)} m width of the envelope${sideEavesOverhangM > 0 ? ` plus ${sideEavesOverhangM} m of eaves each side` : ''}` }]
+       : [
+           { spanM: e.z1 - e.z0, along0: e.z0, along1: e.z1, why: `the ${(e.z1 - e.z0).toFixed(2)} m characteristic depth (the roof over the zones)` },
+diff --git a/packages/reconstruction/src/v2/reconstruct-v2.ts b/packages/reconstruction/src/v2/reconstruct-v2.ts
+index 2fb5faf..1b4ca88 100644
+--- a/packages/reconstruction/src/v2/reconstruct-v2.ts
++++ b/packages/reconstruction/src/v2/reconstruct-v2.ts
+@@ -68,7 +68,7 @@ import { qualityLevelOf, sealQualityReport } from './quality.js'
+ import type { FeatureQualityReport } from './quality.js'
+ import { repairFromResiduals, verifyAgainstViews } from './verify.js'
+ import type { RepairTrace, SourceViewResidual } from './verify.js'
+-import { dominantTone, lumaAt, topNeutralInkRow } from './scan.js'
++import { dominantTone, lumaAt, neutralBands, topNeutralInkRow } from './scan.js'
+ import { approximateRidgeDatum } from './roof-datum.js'
+ import type { ApproximateRidge } from './roof-datum.js'
+ 
+@@ -557,7 +557,19 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
+     const frame = frameById.get(r.frameId)
+     const raster = frame ? options.raster(frame) : undefined
+     if (!frame || !raster || ridgeY === undefined) continue
+-    const reg = registerElevationV2({ id: r.frameId, assetId: r.assetId }, r.extent, r.side, r.sideConfidence, r.sideWhy, world, ridgeY, sideEaves, terrain)
++    let reg = registerElevationV2({ id: r.frameId, assetId: r.assetId }, r.extent, r.side, r.sideConfidence, r.sideWhy, world, ridgeY, sideEaves, terrain)
++    // 005V-N4: a silhouette that fits no span of the house may take in what stands beside it (a pergola) or a roof's
++    // overhang. The walls are then looked for as a repeated band of neutral pixels across the silhouette, scaled by the
++    // walled width alone; the apex stays the ridge datum, and only a band whose ground then lands on the terrain within
++    // the same tolerance is taken (the one that lands nearest). The openings are not used to choose it.
++    if (!reg) {
++      const walled = neutralBands(raster, r.extent)
++        .filter((b) => b.share >= WALL_BAND_MIN_SHARE && b.x1 - b.x0 >= WALL_BAND_MIN_WIDTH * (r.extent.x1 - r.extent.x0))
++        .map((b) => ({ b, reg: registerElevationV2({ id: r.frameId, assetId: r.assetId }, { ...r.extent, x0: b.x0, x1: b.x1 }, r.side as 'FRONT' | 'REAR' | 'LEFT' | 'RIGHT', r.sideConfidence, `${r.sideWhy}; scaled on the walls' band, columns ${b.x0}..${b.x1} of the silhouette's ${r.extent.x0}..${r.extent.x1} (${b.rows} rows)`, world, ridgeY, sideEaves, terrain, true) }))
++        .filter((c): c is { b: typeof c.b; reg: NonNullable<typeof c.reg> } => c.reg !== undefined)
++        .sort((a, b) => a.reg.anisotropyCheck - b.reg.anisotropyCheck)
++      reg = walled[0]?.reg
++    }
+     if (!reg) {
+       gap({ what: `a v2 registration for the ${r.side.toLowerCase()} elevation`, reason: 'its silhouette fits neither the walled nor the characteristic span with the ridge at its apex', status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
+       continue
+@@ -1549,3 +1561,9 @@ function fasciaExtent(raster: Raster, view: ElevationFrameV2, span: { from: numb
+   if (Math.abs(b - a) < 0.8) return undefined
+   return { from: round6(Math.min(a, b)), to: round6(Math.max(a, b)) }
+ }
++
++/** 005V-N4: a band of the elevation is a candidate for the walls only when it repeats on this share of the rows … */
++const WALL_BAND_MIN_SHARE = 0.1
++/** … and spans this share of the silhouette's width. */
++const WALL_BAND_MIN_WIDTH = 0.4
++
+diff --git a/packages/reconstruction/src/v2/scan.ts b/packages/reconstruction/src/v2/scan.ts
+index e06c9c1..5ce07d9 100644
+--- a/packages/reconstruction/src/v2/scan.ts
++++ b/packages/reconstruction/src/v2/scan.ts
+@@ -27,6 +27,37 @@ export const NEUTRAL_INK_CHROMA = 40
+  * 005V: the topmost row in a column holding neutral ink — darker than paper and not saturated. An outline on a line
+  * drawing, or a roof on a render; a render's blue sky, darker than paper, is not ink.
+  */
++/**
++ * 005V-N4: the repeated horizontal bands of neutral pixels (wall, roof, plinth) across an elevation silhouette, as
++ * candidates for the house's wall span. On each row of the silhouette's middle (15 % in from the top and the bottom), the
++ * run of neutral pixels through the silhouette's centre column is taken; rows whose runs end within ±3 px of each other
++ * form one band. A pergola, sky, foliage or a window breaks a run; a wall below the eaves and a roof do not.
++ */
++export function neutralBands(r: Raster, extent: { x0: number; y0: number; x1: number; y1: number }): Array<{ x0: number; x1: number; rows: number; share: number; y0: number; y1: number }> {
++  const h = extent.y1 - extent.y0
++  const c = Math.round((extent.x0 + extent.x1) / 2)
++  const neutral = (x: number, y: number): boolean => {
++    const [red, green, blue] = rgbAt(r, x, y)
++    return Math.max(red, green, blue) - Math.min(red, green, blue) < NEUTRAL_INK_CHROMA
++  }
++  const bands: Array<{ x0: number; x1: number; rows: number; y0: number; y1: number }> = []
++  let n = 0
++  for (let y = Math.round(extent.y0 + 0.15 * h); y <= Math.round(extent.y1 - 0.15 * h); y += 1) {
++    n += 1
++    if (!neutral(c, y)) continue
++    let a = c
++    while (a - 1 >= extent.x0 && neutral(a - 1, y)) a -= 1
++    let b = c
++    while (b + 1 <= extent.x1 && neutral(b + 1, y)) b += 1
++    const band = bands.find((k) => Math.abs(k.x0 - a) <= 3 && Math.abs(k.x1 - b) <= 3)
++    if (band) {
++      band.rows += 1
++      band.y1 = y
++    } else bands.push({ x0: a, x1: b, rows: 1, y0: y, y1: y })
++  }
++  return bands.map((k) => ({ ...k, share: n > 0 ? k.rows / n : 0 }))
++}
++
+ export function topNeutralInkRow(r: Raster, x: number, y0: number, y1: number): number | undefined {
+   for (let y = y0; y <= y1; y += 1) {
+     if (lumaAt(r, x, y) >= 200) continue
+diff --git a/packages/reconstruction/test/elevation-wall-band.test.ts b/packages/reconstruction/test/elevation-wall-band.test.ts
+new file mode 100644
+index 0000000..c0b1535
+--- /dev/null
++++ b/packages/reconstruction/test/elevation-wall-band.test.ts
+@@ -0,0 +1,61 @@
++/**
++ * BUILDPLAN-ANALYZER-005V-N4 (research patch): an elevation silhouette that takes in a pergola beside the house and a
++ * roof wider than the walls is scaled on the walls' own band. Synthetic renders only; no drawing of any real building.
++ */
++import { describe, expect, it } from 'vitest'
++import { neutralBands, registerElevationV2 } from '../src/index.js'
++import type { WorldFrameV2 } from '../src/index.js'
++
++const W = 900
++const H = 520
++/** Sky; a grey roof x 140..760 rows 60..240; a white-and-grey wall x 200..700 rows 240..460; a beige pergola x 40..190 rows 300..460. */
++function render(opts: { wall?: boolean; pergola?: boolean } = {}) {
++  const data = new Uint8ClampedArray(W * H * 4)
++  for (let y = 0; y < H; y += 1) {
++    for (let x = 0; x < W; x += 1) {
++      let c: [number, number, number] = [110, 170, 230]
++      if (x >= 140 && x <= 760 && y >= 60 && y < 240) c = [80, 80, 82]
++      if ((opts.wall ?? true) && x >= 200 && x <= 700 && y >= 240 && y <= 460) c = y < 300 ? [235, 235, 235] : [150, 150, 152]
++      if ((opts.pergola ?? true) && x >= 40 && x <= 190 && y >= 300 && y <= 460 && (x % 30 < 6 || y < 312)) c = [205, 170, 130]
++      const o = (y * W + x) * 4
++      data[o] = c[0]
++      data[o + 1] = c[1]
++      data[o + 2] = c[2]
++      data[o + 3] = 255
++    }
++  }
++  return { width: W, height: H, data }
++}
++const extent = { x0: 40, y0: 60, x1: 760, y1: 460 }
++const world: WorldFrameV2 = { envelope: { x0: 0, z0: 0, x1: 10, z1: 8 }, walled: { x0: 0, z0: 0, x1: 10, z1: 8 }, zFlip: 8, frontSide: 'SHEET_BOTTOM', why: 'synthetic' }
++// 10 m of wall over 501 px: 0.01996 m/px; 400 px of silhouette is 7.98 m; the ridge datum 7.98 puts the ground at 0.
++const RIDGE = 7.98
++
++describe('005V-N4 the walls band of an elevation (research patch)', () => {
++  it('the wall under the roof is a repeated neutral band of its own, the pergola beside it is not neutral and breaks no band', () => {
++    const bands = neutralBands(render(), extent)
++    const wall = bands.find((b) => Math.abs(b.x0 - 200) <= 1 && Math.abs(b.x1 - 700) <= 1)
++    const roof = bands.find((b) => Math.abs(b.x0 - 140) <= 1 && Math.abs(b.x1 - 760) <= 1)
++    expect(wall).toBeDefined()
++    expect(roof).toBeDefined()
++    expect(bands.some((b) => b.x0 < 140)).toBe(false)
++  })
++
++  it('the silhouette span (pergola + roof) fails the vertical check; the walls band, scaled by the walled width, passes it', () => {
++    expect(registerElevationV2({ id: 'f', assetId: 'a' }, extent, 'FRONT', 0.9, 'synthetic', world, RIDGE, 0, 0)).toBeUndefined()
++    const reg = registerElevationV2({ id: 'f', assetId: 'a' }, { ...extent, x0: 200, x1: 700 }, 'FRONT', 0.9, 'synthetic', world, RIDGE, 0, 0, true)
++    expect(reg).toBeDefined()
++    expect(reg?.mpp).toBeCloseTo(10 / 500, 4)
++    expect(Math.abs(reg?.bottomY ?? 9)).toBeLessThan(0.1)
++    expect(reg?.alongAtLeft).toBe(0)
++  })
++
++  it('the roof band scaled by the walled width is refused: the ground lands far off the terrain', () => {
++    expect(registerElevationV2({ id: 'f', assetId: 'a' }, { ...extent, x0: 140, x1: 760 }, 'FRONT', 0.9, 'synthetic', world, RIDGE, 0, 0, true)).toBeUndefined()
++  })
++
++  it('no wall drawn under the roof (a gable seen roof-only, or a cut sheet): no band the width of a wall', () => {
++    const bands = neutralBands(render({ wall: false }), extent)
++    expect(bands.some((b) => Math.abs(b.x0 - 200) <= 1 && Math.abs(b.x1 - 700) <= 1)).toBe(false)
++  })
++})

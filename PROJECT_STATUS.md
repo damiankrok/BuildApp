@@ -2283,3 +2283,18 @@ render steps: `research/analyzer-005v-n3-facade/`. Branch `analyzer/005v-n3-a01-
   - `glazing-symbol` 6/6 (3 red on the base); `wall-strip` 65/65; `tsc` clean.
 - Needs a coordinator decision (adopt with the 100/220 caveat, or front elevation registration first). APK-size gate
   still red; CI/APK NOT_RUN; OWNER_VISUAL_NOT_RETESTED.
+
+## A01 front elevation registration: research only (STAGE BUILDPLAN-ANALYZER-005V-N4-A01-FRONT-WALL-REGISTRATION)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005V_N4_A01_FRONT_WALL_REGISTRATION.md`; preregistration, ledger and the
+candidate: `research/analyzer-005v-n4-front-wall/`. Branch `analyzer/005v-n4-a01-front-wall-registration-v1` from
+`83c4142`. Verdict `PARTIAL_FRONT_REGISTRATION_RESEARCH_ONLY`: **no production change**.
+
+- **Registration works:** scaled on the walls' neutral band (FRONT 411–1027 px; the rear band is also 617 px) by the
+  plan's 10.5 m, with the ridge datum as anchor.
+  - Ground at −0.26 against terrain −0.72 (error 0.46; −0.32 on the section: 0.06).
+  - The four front gaps land on the elevation's openings with u/L residuals ≤ 0.004, in order, not mirrored.
+- **Not adopted:** the shared opening-height reader (mean-luma contrast) misses glass drawn with blinds and reflections.
+  It reads 100/220 as 0.06–0.99 m and finds nothing on the other three, so adoption would worsen A01.
+  - The candidate also adds 2 A01 rooflights and changes one Cieszynianki window and its roof (unverified).
+- The N3 glazing patch is not applied. APK-size gate still red; CI/APK NOT_RUN; OWNER_VISUAL_NOT_RETESTED.

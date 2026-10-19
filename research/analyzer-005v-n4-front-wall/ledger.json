@@ -1,0 +1,351 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005V-N4-A01-FRONT-WALL-REGISTRATION",
+ "base": "83c41421f6217d6a94ea07689d8f68b4548ec6cc",
+ "verdict": "PARTIAL_FRONT_REGISTRATION_RESEARCH_ONLY",
+ "productionChanged": false,
+ "sourceAccess": "private cached rasters of the sealed N1v source (005K gap set), viewed locally, never committed or published; no new download",
+ "frameIdentity": {
+  "frame": "frame-asset-...-elewacja-b74ed2020b",
+  "graphView": "FRONT",
+  "check": "the four gaps of the plan's bottom (front) wall project, through the wall-band registration, onto the four openings of this elevation in the same order (columns below); not the rear (the rear frame ...-19da37ded6 registers separately with its own band), not mirrored, the same sealed edition"
+ },
+ "privateMeasurementsFrontElevation": {
+  "note": "pixel rows/columns of the cached 1280 x 630 elevation, measured privately; observations, not production constants",
+  "silhouetteExtent": {
+   "x0": 210,
+   "y0": 122,
+   "x1": 1071,
+   "y1": 616
+  },
+  "pergola": {
+   "x": [
+    190,
+    410
+   ],
+   "rows": "~460..610",
+   "colour": "beige, channel spread > 40 (not neutral)"
+  },
+  "roof": {
+   "x": [
+    365,
+    1071
+   ],
+   "rows": [
+    123,
+    377
+   ],
+   "neutralBandRows": 169
+  },
+  "wallUnderEaves": {
+   "x": [
+    411,
+    1027
+   ],
+   "rows": [
+    378,
+    475
+   ],
+   "neutralBandRows": 47
+  },
+  "ridgeRow": 123,
+  "eaveRow": 377,
+  "groundRow(silhouette bottom)": 616,
+  "inMetres(with the registration below)": {
+   "ridge": 8.16,
+   "eave": 3.81,
+   "openingHeads(row~478)": 2.09,
+   "openingSills(row~605)": -0.07,
+   "silhouetteBottom": -0.26
+  },
+  "rearElevationWallBand": {
+   "x": [
+    286,
+    903
+   ],
+   "width_px": 617,
+   "note": "the same 617 px as the front band, for the same 10.5 m wall: an independent consistency check of the band"
+  }
+ },
+ "firstBad": [
+  {
+   "step": "registerElevationFrames -> registerElevationV2 (v2/frame.ts), called from v2/reconstruct-v2.ts ~560",
+   "finding": "the FRONT silhouette (x 210..1071) takes in the pergola, and its FRONT span candidate is the bare 10.5 m envelope (side overhang 0): ground lands at +1.9 m (silhouette) or +0.79 m (roof only) against the terrain datum -0.72; refused (error > 0.9)"
+  },
+  {
+   "step": "elevationExtent -> verticalOpeningExtent (opening heights on a registered render)",
+   "finding": "once registered, the reader finds no extent on 250/220, 105/210 and 90/210 and reads 100/220 as rows 542..597 (0.06..1.00 m): over the glass the render draws striped blinds and reflections (luma 50..217, channel spread 30..64) whose mean luma is near the wall's (~150, spread 6); a mean-luma contrast misses the upper glass. This is the remaining FIRST_BAD for the heights"
+  }
+ ],
+ "candidate": {
+  "patch": "research/analyzer-005v-n4-front-wall/candidate-wall-band-registration.patch",
+  "what": "only when the silhouette registration is refused: repeated neutral bands across the silhouette (>= 10 % of rows, >= 40 % of its width) are scaled by the walled width alone (one scale for x and y); the apex stays the ridge datum; a band is taken only if the ground then lands on the terrain within the unchanged 0.9 m; nearest wins. Openings are not used to choose it.",
+  "registrationResult": {
+   "FRONT": {
+    "band": [
+     411,
+     1027
+    ],
+    "mpp": 0.017045,
+    "zeroRow": 600.72,
+    "groundAt": -0.26,
+    "terrainDatum": -0.72,
+    "error": 0.46,
+    "sectionGroundCheck": "-0.32 printed on the section: residual 0.06"
+   },
+   "REAR": {
+    "band": [
+     286,
+     903
+    ],
+    "mpp": 0.017018,
+    "groundAt": -0.3,
+    "error": 0.42
+   }
+  },
+  "independentCheck_openings": [
+   {
+    "source": "250/220",
+    "elevationCols_private": [
+     420,
+     568
+    ],
+    "projectedGapCols": [
+     419.1,
+     570.7
+    ],
+    "residual_uL": 0.003
+   },
+   {
+    "source": "100/220",
+    "elevationCols_private": [
+     675,
+     732
+    ],
+    "projectedGapCols": [
+     674.3,
+     732.7
+    ],
+    "residual_uL": 0.001
+   },
+   {
+    "source": "105/210 (+timber panel)",
+    "elevationCols_private": [
+     812,
+     873
+    ],
+    "projectedGapCols": [
+     811.4,
+     873.3
+    ],
+    "residual_uL": 0.001
+   },
+   {
+    "source": "90/210",
+    "elevationCols_private": [
+     908,
+     955
+    ],
+    "projectedGapCols": [
+     905.5,
+     957.9
+    ],
+    "residual_uL": 0.004
+   }
+  ],
+  "orderAndMirror": "same order, not mirrored",
+  "downstreamOnA01": {
+   "front": [
+    {
+     "id": "opening-0-front-0-0",
+     "hostWall": "ring-main-0-w0",
+     "kind": "WINDOW",
+     "fill": "WINDOW glass",
+     "u0": 0.013,
+     "u1": 0.259,
+     "widthM": 2.584,
+     "sillM": 0.9,
+     "headM": 2.2,
+     "provenance": {
+      "head": "SOURCE_DERIVED",
+      "height": "ASSUMED",
+      "kind": "ASSUMED",
+      "offset": "SOURCE_DERIVED",
+      "sill": "ASSUMED",
+      "width": "SOURCE_DERIVED"
+     }
+    },
+    {
+     "id": "opening-0-front-0-1",
+     "hostWall": "ring-main-0-w0",
+     "kind": "DOOR",
+     "fill": "DOOR mat-timber",
+     "u0": 0.427,
+     "u1": 0.522,
+     "widthM": 0.995,
+     "sillM": 0.056973,
+     "headM": 0.993,
+     "provenance": {
+      "head": "SOURCE_DERIVED",
+      "height": "VISUAL_INFERRED",
+      "kind": "VISUAL_INFERRED",
+      "offset": "SOURCE_DERIVED",
+      "sill": "VISUAL_INFERRED",
+      "width": "SOURCE_DERIVED"
+     }
+    },
+    {
+     "id": "opening-0-front-0-2",
+     "hostWall": "ring-main-0-w0",
+     "kind": "DOOR",
+     "fill": "DOOR mat-timber",
+     "u0": 0.65,
+     "u1": 0.751,
+     "widthM": 1.056,
+     "sillM": 0,
+     "headM": 2.1,
+     "provenance": {
+      "head": "SOURCE_DERIVED",
+      "height": "ASSUMED",
+      "kind": "SOURCE_DERIVED",
+      "offset": "SOURCE_DERIVED",
+      "sill": "ASSUMED",
+      "width": "SOURCE_DERIVED"
+     }
+    },
+    {
+     "id": "opening-0-front-0-3",
+     "hostWall": "ring-main-0-w0",
+     "kind": "DOOR",
+     "fill": "DOOR mat-timber",
+     "u0": 0.803,
+     "u1": 0.888,
+     "widthM": 0.894,
+     "sillM": 0,
+     "headM": 2.1,
+     "provenance": {
+      "head": "SOURCE_DERIVED",
+      "height": "ASSUMED",
+      "kind": "SOURCE_DERIVED",
+      "offset": "SOURCE_DERIVED",
+      "sill": "ASSUMED",
+      "width": "SOURCE_DERIVED"
+     }
+    }
+   ],
+   "other": "roofOpenings 2 -> 4 and rooflights 0 -> 2 (roof windows read on the newly registered front/rear renders; the source has 78/118 roof windows; not verified opening by opening)"
+  },
+  "downstreamOnControls": {
+   "dom-w-cieszyniankach": "an elevation newly registered by the band: opening-0-west-3-0 (4.23 m) WINDOW 0.90/1.30 ASSUMED -> 1.15/1.33 VISUAL_INFERRED, the roof record and one surface region change; not verified against the source",
+   "gozd": "identical",
+   "marcowki": "identical",
+   "rarytasy-g2e": "identical"
+  },
+  "tests": {
+   "elevation-wall-band.test.ts": "4/4 with the patch, 2 red on the base",
+   "wall-strip": "65/65",
+   "interior-unwalled-side": "5/5",
+   "garage-label-mouth": "13/13",
+   "roof-apex-eaves": "10/10",
+   "tsc": "clean"
+  }
+ },
+ "before": {
+  "a01Front": [
+   {
+    "id": "opening-0-front-0-0",
+    "hostWall": "ring-main-0-w0",
+    "kind": "WINDOW",
+    "fill": "WINDOW glass",
+    "u0": 0.013,
+    "u1": 0.259,
+    "widthM": 2.584,
+    "sillM": 0.9,
+    "headM": 2.2,
+    "provenance": {
+     "head": "SOURCE_DERIVED",
+     "height": "ASSUMED",
+     "kind": "ASSUMED",
+     "offset": "SOURCE_DERIVED",
+     "sill": "ASSUMED",
+     "width": "SOURCE_DERIVED"
+    }
+   },
+   {
+    "id": "opening-0-front-0-1",
+    "hostWall": "ring-main-0-w0",
+    "kind": "DOOR",
+    "fill": "DOOR mat-timber",
+    "u0": 0.427,
+    "u1": 0.522,
+    "widthM": 0.995,
+    "sillM": 0,
+    "headM": 2.1,
+    "provenance": {
+     "head": "SOURCE_DERIVED",
+     "height": "ASSUMED",
+     "kind": "VISUAL_INFERRED",
+     "offset": "SOURCE_DERIVED",
+     "sill": "ASSUMED",
+     "width": "SOURCE_DERIVED"
+    }
+   },
+   {
+    "id": "opening-0-front-0-2",
+    "hostWall": "ring-main-0-w0",
+    "kind": "DOOR",
+    "fill": "DOOR mat-timber",
+    "u0": 0.65,
+    "u1": 0.751,
+    "widthM": 1.056,
+    "sillM": 0,
+    "headM": 2.1,
+    "provenance": {
+     "head": "SOURCE_DERIVED",
+     "height": "ASSUMED",
+     "kind": "SOURCE_DERIVED",
+     "offset": "SOURCE_DERIVED",
+     "sill": "ASSUMED",
+     "width": "SOURCE_DERIVED"
+    }
+   },
+   {
+    "id": "opening-0-front-0-3",
+    "hostWall": "ring-main-0-w0",
+    "kind": "DOOR",
+    "fill": "DOOR mat-timber",
+    "u0": 0.803,
+    "u1": 0.888,
+    "widthM": 0.894,
+    "sillM": 0,
+    "headM": 2.1,
+    "provenance": {
+     "head": "SOURCE_DERIVED",
+     "height": "ASSUMED",
+     "kind": "SOURCE_DERIVED",
+     "offset": "SOURCE_DERIVED",
+     "sill": "ASSUMED",
+     "width": "SOURCE_DERIVED"
+    }
+   }
+  ]
+ },
+ "replays": {
+  "base": {
+   "A01 Jarzmianki m60124f28f071a": "d93291577e2d795f19a2ebfab698e1e655ecf007f342e5ba7166c4c886a61be2",
+   "Gozdzikowce 3 m79923e950094d": "911456a88b2530c9cf01b348dc7045a7b7bcc6d85e62e58221e5f205d41efbbc",
+   "Marcowki m2fa281446a8ca": "f607464936c7a13368d7f9307fb004e5bbad8b0da4490981851a33616c573321",
+   "Rarytasy 5 G2E m84f2903cb8e14": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+   "Dom w cieszyniankach m43d25c0636969": "e4e562923319084fda0b9ae934bcb1185a7098c53e7727c82f9afdcb592c1f6c"
+  },
+  "candidate": {
+   "A01 Jarzmianki m60124f28f071a": "82c5d02e80d844f9634031b0d9ecbe394d75f47703840da1d837e6fc09c47101",
+   "Gozdzikowce 3 m79923e950094d": "911456a88b2530c9cf01b348dc7045a7b7bcc6d85e62e58221e5f205d41efbbc",
+   "Marcowki m2fa281446a8ca": "f607464936c7a13368d7f9307fb004e5bbad8b0da4490981851a33616c573321",
+   "Rarytasy 5 G2E m84f2903cb8e14": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+   "Dom w cieszyniankach m43d25c0636969": "69f790d507753c04335f2cc583261bb0cb6c3180c179ae9977fadcf0b8cc80ec"
+  },
+  "notRun": "Rarytasy OWNER m3ea… (no sealed input; DEV m84f… not substituted)"
+ },
+ "glazingPatchN3": "not applied: the precondition (registered, plausible sill/head on the four front openings) is not met",
+ "renders": "RENDER_NOT_RUN for a candidate that is not adopted and makes the 100/220 worse; no visual pass claimed"
+}
