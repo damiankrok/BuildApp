@@ -2227,3 +2227,21 @@ Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005V_WALL_FIRST_FACADE_ALIGNMENT
   Marcówki, Rarytasy G2E and Cieszynianki identical.
 - **Found, not fixed:** `wall-strip.test.ts` has been 40/63 red since 005U-N3 (`d5d14be`); the
   `research-isolation` APK-size gate is still red. OWNER_ZIP_NOT_AVAILABLE; OWNER_VISUAL_NOT_RETESTED; CI/APK NOT_RUN.
+
+## The wall-strip regression, diagnosed (STAGE BUILDPLAN-ANALYZER-005V-N1-WALL-STRIP-REGRESSION-RECOVERY)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005V_N1_WALL_STRIP_REGRESSION_RECOVERY.md`; evidence and the candidate:
+`research/analyzer-005v-n1-wall-strip/`. Branch `analyzer/005v-n1-wall-strip-regression-recovery-v1` from `6af3d71`.
+Verdict `PARTIAL_REGRESSION_RECOVERY_NOT_ADOPTED`: **no production change**.
+
+- **First bad:** all 40 `wall-strip.test.ts` failures are one assertion (the model wall count). The 005Q fixtures
+  register the body at 0.026 m/px against a drawing at 0.05 m/px, so the house's own outer walls (18 px) stand inside
+  the interior. 005U-N3 admits partitions up to the outer wall's thickness, so it reads them as partitions.
+- **Candidate (not adopted):** a body side with wall ink at < 5 % of its length is unwalled. Its registration is then
+  uncertain, and N3's thick partitions are not read on that body. Fixture bodies with this signature score 0.00–0.015;
+  real bodies with thick pieces score ≥ 0.35.
+  - Result: `wall-strip` 62/63, the 5 real replays byte-identical, N3/N4 unit tests green.
+- **Blocker:** `entrance:id` (005N) is correctly registered; its five extra walls are drawn 12 px walls, two of them
+  between a garage and the house, like Goździkowce's fire wall. Only a decision on that frozen record can make it
+  63/63.
+- Committed tree = base: `wall-strip` 23/63; the APK-size gate is still red. CI/APK NOT_RUN; OWNER_VISUAL_NOT_RETESTED.

@@ -1,0 +1,2669 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005V-N1-WALL-STRIP-REGRESSION-RECOVERY",
+ "units": "px on the plan raster; \"crop\" = the interior box (body inset by the read outer wall) as [x0, y0, width, height]; coverage = share of positions along a side (or a piece) with a run of wall ink at least minThick long",
+ "firstBad": {
+  "fixture": "facePair (005Q family 1), transform id",
+  "registration": {
+   "chainsScale": "0.05 m/px (the chains)",
+   "planFrameScale": "0.026 m/px (fixture MPP)",
+   "body": {
+    "x0": 0,
+    "z0": 0.455,
+    "x1": 30,
+    "z1": 17.605
+   },
+   "crop": [
+    78,
+    78,
+    1118,
+    624
+   ],
+   "raster": [
+    760,
+    600
+   ],
+   "note": "the 30 x 17.15 m body maps to 1154 x 660 px at 0.026 m/px: it runs past the 760 x 600 sheet; the drawn house (outer faces x 60..660, y 60..420) occupies its north-west part"
+  },
+  "drawnOuterWall": {
+   "east": "x 643..660 (18 px)",
+   "south": "y 403..420 (18 px)"
+  },
+  "wallPx": 18,
+  "minThick": 4,
+  "thinThick (0.72 x)": 13,
+  "maxThick (N3: 1.0 x)": 18,
+  "falseWalls": [
+   {
+    "axis": "vertical",
+    "centreCrop": 573.5,
+    "raster_x": 651.5,
+    "world_x": 15.379,
+    "thick": 18,
+    "length": 343,
+    "distanceToInteriorEdge": {
+     "west": 574,
+     "east": 543
+    },
+    "wallInkBeyond": {
+     "west": 1.0,
+     "east": 0.0
+    }
+   },
+   {
+    "axis": "horizontal",
+    "centreCrop": 333.5,
+    "raster_y": 411.5,
+    "world_z": 8.466,
+    "thick": 18,
+    "length": 583,
+    "distanceToInteriorEdge": {
+     "north": 334,
+     "south": 289
+    },
+    "wallInkBeyond": {
+     "north": 1.0,
+     "south": 0.0
+    }
+   }
+  ],
+  "whyItCrosses": "18 px > thinThick 13 (rejected before 005U-N3) and <= maxThick 18 (admitted since); capAcross keeps the thin bound only within one outer wall (18 px) of the interior edge, and these walls stand 543 and 289 px inside it, so the cap does not apply: the house's own east and south walls become two interior walls (7 model walls against the frozen 5)",
+  "sideCoverage": {
+   "west": 0.55,
+   "east": 0.0,
+   "top": 0.521,
+   "bottom": 0.0
+  }
+ },
+ "pairedRealWall": {
+  "case": "Gozdzikowce 3 m79923e950094d, storey 0",
+  "wall": "the garage fire wall, world x 8.91",
+  "crop": [
+   108,
+   234,
+   522,
+   352
+  ],
+  "centreCrop": 340,
+  "thick": 12,
+  "wallPx": 12.03,
+  "thinThick": 9,
+  "maxThick": 12,
+  "distanceToInteriorEdge": {
+   "west": 340,
+   "east": 181
+  },
+  "wallInkBeyond": {
+   "west": 1.0,
+   "east": "0.443 / 0.865 (two pieces)"
+  },
+  "sideCoverage": {
+   "west": 0.65,
+   "east": 0.56,
+   "top": 0.57,
+   "bottom": 0.35
+  },
+  "evidence": "12 px of neutral ink between the garage and the house, standing 15 and 28 outer walls clear of the interior edges; the body stands on drawn walls on all four sides (lowest 0.35, the front with the open garage mouth)"
+ },
+ "entranceConflict": {
+  "fixture": "entrance (005N), transform id",
+  "sideCoverage": {
+   "west": 1.0,
+   "east": 1.0,
+   "top": 1.0,
+   "bottom": 0.6
+  },
+  "frozenWalls": 4,
+  "n3Walls": 9,
+  "extraWalls": [
+   {
+    "id": "main-iwall-0-z-0",
+    "at": "x 3.975",
+    "what": "the left return of the entrance recess (layout recess x 3.675..7.275)"
+   },
+   {
+    "id": "main-iwall-0-z-1",
+    "at": "x 7.575",
+    "what": "the right return of the recess = the wall between recess/vestibule and garage"
+   },
+   {
+    "id": "main-iwall-0-x-2",
+    "at": "z 2.025",
+    "what": "the back of the recess (layout backAt 2.325)"
+   },
+   {
+    "id": "main-iwall-0-z-2",
+    "at": "x 11.175",
+    "what": "the garage's east wall, between garage and house"
+   },
+   {
+    "id": "main-iwall-0-x-0",
+    "at": "z 5.925",
+    "what": "the back wall of the garage and vestibule block"
+   }
+  ],
+  "finding": "correctly registered (every side covered >= 0.60): the five walls are drawn 12 px walls (the outer wall's thickness). Two of them separate a garage from the house exactly as Gozdzikowce's fire wall does, so no general rule can drop them and keep that wall; the frozen 4 is the pre-N3 reader's output"
+ },
+ "sideCoverage": {
+  "fixtures": {
+   "bodies": 195,
+   "minBelow0.1": 165,
+   "maxOfThoseMins": 0.015,
+   "lowestOtherwise": 0.596,
+   "rows": [
+    {
+     "fixture": "facePair:id",
+     "storey": 0,
+     "west": 0.55,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "facePair:mirrorX",
+     "storey": 0,
+     "west": 0.55,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "facePair:mirrorY",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "facePair:turn90",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "facePair:turn270",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.55,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "outerOnly:id",
+     "storey": 0,
+     "west": 0.522,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "outerOnly:mirrorX",
+     "storey": 0,
+     "west": 0.522,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "outerOnly:mirrorY",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "outerOnly:turn90",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "outerOnly:turn270",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.522,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "thinWall:id",
+     "storey": 0,
+     "west": 0.522,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "thinWall:mirrorX",
+     "storey": 0,
+     "west": 0.522,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "thinWall:mirrorY",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "thinWall:turn90",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "thinWall:turn270",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.522,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "thickWalls:id",
+     "storey": 0,
+     "west": 0.402,
+     "east": 0,
+     "top": 0.377,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "thickWalls:mirrorX",
+     "storey": 0,
+     "west": 0.402,
+     "east": 0,
+     "top": 0.376,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "thickWalls:mirrorY",
+     "storey": 0,
+     "west": 0.373,
+     "east": 0,
+     "top": 0.377,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "thickWalls:turn90",
+     "storey": 0,
+     "west": 0.377,
+     "east": 0,
+     "top": 0.373,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "thickWalls:turn270",
+     "storey": 0,
+     "west": 0.376,
+     "east": 0,
+     "top": 0.402,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "shortPier:id",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "shortPier:mirrorX",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "shortPier:mirrorY",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "shortPier:turn90",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "shortPier:turn270",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "longPier:id",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "longPier:mirrorX",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "longPier:mirrorY",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "longPier:turn90",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "longPier:turn270",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "ticksDown:id",
+     "storey": 0,
+     "west": 0.523,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "ticksDown:mirrorX",
+     "storey": 0,
+     "west": 0.523,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "ticksDown:mirrorY",
+     "storey": 0,
+     "west": 0.52,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "ticksDown:turn90",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.52,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "ticksDown:turn270",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.523,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "ticksUp:id",
+     "storey": 0,
+     "west": 0.549,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "ticksUp:mirrorX",
+     "storey": 0,
+     "west": 0.549,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "ticksUp:mirrorY",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "ticksUp:turn90",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "ticksUp:turn270",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.549,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "inward9:id",
+     "storey": 0,
+     "west": 0.55,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "inward9:mirrorX",
+     "storey": 0,
+     "west": 0.55,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "inward9:mirrorY",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "inward9:turn90",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "inward9:turn270",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.55,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "inward10:id",
+     "storey": 0,
+     "west": 0.55,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "inward10:mirrorX",
+     "storey": 0,
+     "west": 0.55,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "inward10:mirrorY",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "inward10:turn90",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "inward10:turn270",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.55,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "garageDoor:id",
+     "storey": 0,
+     "west": 0.55,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "garageDoor:mirrorX",
+     "storey": 0,
+     "west": 0.55,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "garageDoor:mirrorY",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.468,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "garageDoor:turn90",
+     "storey": 0,
+     "west": 0.468,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "garageDoor:turn270",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.55,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "garageDoorOuterOnly:id",
+     "storey": 0,
+     "west": 0.522,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "garageDoorOuterOnly:mirrorX",
+     "storey": 0,
+     "west": 0.522,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "garageDoorOuterOnly:mirrorY",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.468,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "garageDoorOuterOnly:turn90",
+     "storey": 0,
+     "west": 0.468,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "garageDoorOuterOnly:turn270",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.522,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "stepAbove:id",
+     "storey": 0,
+     "west": 0.55,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "stepAbove:mirrorX",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "stepAbove:mirrorY",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "stepAbove:turn90",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "stepAbove:turn270",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "stepBelow:id",
+     "storey": 0,
+     "west": 0.55,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "stepBelow:mirrorX",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "stepBelow:mirrorY",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "stepBelow:turn90",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "stepBelow:turn270",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "openTerrace:id",
+     "storey": 0,
+     "west": 0.524,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "openTerrace:mirrorX",
+     "storey": 0,
+     "west": 0.524,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "openTerrace:mirrorY",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "openTerrace:turn90",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "openTerrace:turn270",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.524,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "porchPosts:id",
+     "storey": 0,
+     "west": 0.548,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "porchPosts:mirrorX",
+     "storey": 0,
+     "west": 0.548,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "porchPosts:mirrorY",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "porchPosts:turn90",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "porchPosts:turn270",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.548,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "postsInStrip:id",
+     "storey": 0,
+     "west": 0.546,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "postsInStrip:mirrorX",
+     "storey": 0,
+     "west": 0.546,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "postsInStrip:mirrorY",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "postsInStrip:turn90",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "postsInStrip:turn270",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.546,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "pergola:id",
+     "storey": 0,
+     "west": 0.542,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "pergola:mirrorX",
+     "storey": 0,
+     "west": 0.542,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "pergola:mirrorY",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "pergola:turn90",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "pergola:turn270",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.542,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "carport:id",
+     "storey": 0,
+     "west": 0.522,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "carport:mirrorX",
+     "storey": 0,
+     "west": 0.522,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "carport:mirrorY",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "carport:turn90",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "carport:turn270",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.522,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "entrance:id",
+     "storey": 0,
+     "west": 1,
+     "east": 1,
+     "top": 1,
+     "bottom": 0.596,
+     "min": 0.596
+    },
+    {
+     "fixture": "entrance:mirrorX",
+     "storey": 0,
+     "west": 1,
+     "east": 1,
+     "top": 1,
+     "bottom": 0.596,
+     "min": 0.596
+    },
+    {
+     "fixture": "entrance:mirrorY",
+     "storey": 0,
+     "west": 1,
+     "east": 1,
+     "top": 0.596,
+     "bottom": 1,
+     "min": 0.596
+    },
+    {
+     "fixture": "entrance:turn90",
+     "storey": 0,
+     "west": 0.596,
+     "east": 1,
+     "top": 1,
+     "bottom": 1,
+     "min": 0.596
+    },
+    {
+     "fixture": "entrance:turn270",
+     "storey": 0,
+     "west": 1,
+     "east": 0.596,
+     "top": 1,
+     "bottom": 1,
+     "min": 0.596
+    },
+    {
+     "fixture": "entranceFacePair:id",
+     "storey": 0,
+     "west": 0.87,
+     "east": 0,
+     "top": 0.817,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "entranceFacePair:mirrorX",
+     "storey": 0,
+     "west": 0.87,
+     "east": 0,
+     "top": 0.817,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "entranceFacePair:mirrorY",
+     "storey": 0,
+     "west": 0.825,
+     "east": 0,
+     "top": 0.499,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "entranceFacePair:turn90",
+     "storey": 0,
+     "west": 0.499,
+     "east": 0,
+     "top": 0.825,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "entranceFacePair:turn270",
+     "storey": 0,
+     "west": 0.817,
+     "east": 0,
+     "top": 0.87,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "rearFacePair:id",
+     "storey": 0,
+     "west": 0.522,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "rearFacePair:mirrorX",
+     "storey": 0,
+     "west": 0.522,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "rearFacePair:mirrorY",
+     "storey": 0,
+     "west": 0.546,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "rearFacePair:turn90",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.546,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "rearFacePair:turn270",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.522,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "rearStripFrontTerrace:id",
+     "storey": 0,
+     "west": 0.524,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "rearStripFrontTerrace:mirrorX",
+     "storey": 0,
+     "west": 0.524,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "rearStripFrontTerrace:mirrorY",
+     "storey": 0,
+     "west": 0.546,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "rearStripFrontTerrace:turn90",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.546,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "rearStripFrontTerrace:turn270",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.524,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "ell:id",
+     "storey": 0,
+     "west": 0.55,
+     "east": 0,
+     "top": 0.943,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "ell:id",
+     "storey": 0,
+     "west": 0,
+     "east": 0,
+     "top": 0,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "ell:mirrorX",
+     "storey": 0,
+     "west": 0.029,
+     "east": 0,
+     "top": 0.133,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "ell:mirrorX",
+     "storey": 0,
+     "west": 0.524,
+     "east": 0.015,
+     "top": 1,
+     "bottom": 0.482,
+     "min": 0.015
+    },
+    {
+     "fixture": "ell:mirrorY",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.523,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "ell:mirrorY",
+     "storey": 0,
+     "west": 0,
+     "east": 0,
+     "top": 0,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "ell:turn90",
+     "storey": 0,
+     "west": 0.523,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "ell:turn90",
+     "storey": 0,
+     "west": 0,
+     "east": 0,
+     "top": 0,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "ell:turn270",
+     "storey": 0,
+     "west": 0.133,
+     "east": 0,
+     "top": 0.029,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "ell:turn270",
+     "storey": 0,
+     "west": 1,
+     "east": 0.482,
+     "top": 0.524,
+     "bottom": 0.015,
+     "min": 0.015
+    },
+    {
+     "fixture": "stalls:id",
+     "storey": 0,
+     "west": 0.67,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "stalls:mirrorX",
+     "storey": 0,
+     "west": 0.67,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "stalls:mirrorY",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "stalls:turn90",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "stalls:turn270",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.67,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "twoBodies:id",
+     "storey": 0,
+     "west": 0.55,
+     "east": 0,
+     "top": 0.523,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "twoBodies:id",
+     "storey": 0,
+     "west": 0,
+     "east": 0,
+     "top": 0,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "twoBodies:mirrorX",
+     "storey": 0,
+     "west": 0.029,
+     "east": 0,
+     "top": 0.133,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "twoBodies:mirrorX",
+     "storey": 0,
+     "west": 0,
+     "east": 0,
+     "top": 0.482,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "twoBodies:mirrorY",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.943,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "twoBodies:mirrorY",
+     "storey": 0,
+     "west": 0,
+     "east": 0,
+     "top": 0,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "twoBodies:turn90",
+     "storey": 0,
+     "west": 0.943,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "twoBodies:turn90",
+     "storey": 0,
+     "west": 0,
+     "east": 0,
+     "top": 0,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "twoBodies:turn270",
+     "storey": 0,
+     "west": 0.133,
+     "east": 0,
+     "top": 0.029,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "twoBodies:turn270",
+     "storey": 0,
+     "west": 0.482,
+     "east": 0,
+     "top": 0,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "bodyBehind:id",
+     "storey": 0,
+     "west": 0.206,
+     "east": 0,
+     "top": 0.04,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "bodyBehind:id",
+     "storey": 0,
+     "west": 1,
+     "east": 0,
+     "top": 0.523,
+     "bottom": 0.073,
+     "min": 0
+    },
+    {
+     "fixture": "bodyBehind:mirrorX",
+     "storey": 0,
+     "west": 0.155,
+     "east": 0,
+     "top": 0.04,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "bodyBehind:mirrorX",
+     "storey": 0,
+     "west": 0,
+     "east": 0,
+     "top": 0.133,
+     "bottom": 0.029,
+     "min": 0
+    },
+    {
+     "fixture": "bodyBehind:mirrorY",
+     "storey": 0,
+     "west": 0.881,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "bodyBehind:mirrorY",
+     "storey": 0,
+     "west": 0,
+     "east": 0,
+     "top": 0,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "bodyBehind:turn90",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.881,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "bodyBehind:turn90",
+     "storey": 0,
+     "west": 0,
+     "east": 0,
+     "top": 0,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "bodyBehind:turn270",
+     "storey": 0,
+     "west": 0.04,
+     "east": 0,
+     "top": 0.155,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "bodyBehind:turn270",
+     "storey": 0,
+     "west": 0.133,
+     "east": 0.029,
+     "top": 0,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "facePairPlatform:id",
+     "storey": 0,
+     "west": 1,
+     "east": 1,
+     "top": 1,
+     "bottom": 1,
+     "min": 1
+    },
+    {
+     "fixture": "facePairPlatform:mirrorX",
+     "storey": 0,
+     "west": 1,
+     "east": 1,
+     "top": 1,
+     "bottom": 1,
+     "min": 1
+    },
+    {
+     "fixture": "facePairPlatform:mirrorY",
+     "storey": 0,
+     "west": 1,
+     "east": 1,
+     "top": 1,
+     "bottom": 1,
+     "min": 1
+    },
+    {
+     "fixture": "facePairPlatform:turn90",
+     "storey": 0,
+     "west": 1,
+     "east": 1,
+     "top": 1,
+     "bottom": 1,
+     "min": 1
+    },
+    {
+     "fixture": "facePairPlatform:turn270",
+     "storey": 0,
+     "west": 1,
+     "east": 1,
+     "top": 1,
+     "bottom": 1,
+     "min": 1
+    },
+    {
+     "fixture": "thinFrontFloating:id",
+     "storey": 0,
+     "west": 0.457,
+     "east": 0,
+     "top": 0.439,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "thinFrontFloating:mirrorX",
+     "storey": 0,
+     "west": 0.457,
+     "east": 0,
+     "top": 0.438,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "thinFrontFloating:mirrorY",
+     "storey": 0,
+     "west": 0.437,
+     "east": 0,
+     "top": 0.439,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "thinFrontFloating:turn90",
+     "storey": 0,
+     "west": 0.439,
+     "east": 0,
+     "top": 0.437,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "thinFrontFloating:turn270",
+     "storey": 0,
+     "west": 0.438,
+     "east": 0,
+     "top": 0.457,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "thinFrontFilled:id",
+     "storey": 0,
+     "west": 0.457,
+     "east": 0,
+     "top": 0.439,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "thinFrontFilled:mirrorX",
+     "storey": 0,
+     "west": 0.457,
+     "east": 0,
+     "top": 0.438,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "thinFrontFilled:mirrorY",
+     "storey": 0,
+     "west": 0.437,
+     "east": 0,
+     "top": 0.439,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "thinFrontFilled:turn90",
+     "storey": 0,
+     "west": 0.439,
+     "east": 0,
+     "top": 0.437,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "thinFrontFilled:turn270",
+     "storey": 0,
+     "west": 0.438,
+     "east": 0,
+     "top": 0.457,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "facePairAniso:id",
+     "storey": 0,
+     "west": 0.416,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "facePairAniso:mirrorX",
+     "storey": 0,
+     "west": 0.416,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "facePairAniso:mirrorY",
+     "storey": 0,
+     "west": 0.394,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "facePairAniso:turn90",
+     "storey": 0,
+     "west": 0.397,
+     "east": 0,
+     "top": 0.521,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "facePairAniso:turn270",
+     "storey": 0,
+     "west": 0.396,
+     "east": 0,
+     "top": 0.55,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "facePairAnisoTurned:id",
+     "storey": 0,
+     "west": 0.55,
+     "east": 0,
+     "top": 0.397,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "facePairAnisoTurned:mirrorX",
+     "storey": 0,
+     "west": 0.55,
+     "east": 0,
+     "top": 0.396,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "facePairAnisoTurned:mirrorY",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.397,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "facePairAnisoTurned:turn90",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.394,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "facePairAnisoTurned:turn270",
+     "storey": 0,
+     "west": 0.521,
+     "east": 0,
+     "top": 0.416,
+     "bottom": 0,
+     "min": 0
+    },
+    {
+     "fixture": "ellPlatform:id",
+     "storey": 0,
+     "west": 1,
+     "east": 1,
+     "top": 1,
+     "bottom": 1,
+     "min": 1
+    },
+    {
+     "fixture": "ellPlatform:id",
+     "storey": 0,
+     "west": 1,
+     "east": 1,
+     "top": 1,
+     "bottom": 1,
+     "min": 1
+    },
+    {
+     "fixture": "ellPlatform:mirrorX",
+     "storey": 0,
+     "west": 1,
+     "east": 1,
+     "top": 1,
+     "bottom": 1,
+     "min": 1
+    },
+    {
+     "fixture": "ellPlatform:mirrorX",
+     "storey": 0,
+     "west": 1,
+     "east": 1,
+     "top": 1,
+     "bottom": 1,
+     "min": 1
+    },
+    {
+     "fixture": "ellPlatform:mirrorY",
+     "storey": 0,
+     "west": 1,
+     "east": 1,
+     "top": 1,
+     "bottom": 1,
+     "min": 1
+    },
+    {
+     "fixture": "ellPlatform:mirrorY",
+     "storey": 0,
+     "west": 1,
+     "east": 1,
+     "top": 1,
+     "bottom": 1,
+     "min": 1
+    },
+    {
+     "fixture": "ellPlatform:turn90",
+     "storey": 0,
+     "west": 1,
+     "east": 1,
+     "top": 1,
+     "bottom": 1,
+     "min": 1
+    },
+    {
+     "fixture": "ellPlatform:turn90",
+     "storey": 0,
+     "west": 1,
+     "east": 1,
+     "top": 1,
+     "bottom": 1,
+     "min": 1
+    },
+    {
+     "fixture": "ellPlatform:turn270",
+     "storey": 0,
+     "west": 1,
+     "east": 1,
+     "top": 1,
+     "bottom": 1,
+     "min": 1
+    },
+    {
+     "fixture": "ellPlatform:turn270",
+     "storey": 0,
+     "west": 1,
+     "east": 1,
+     "top": 1,
+     "bottom": 1,
+     "min": 1
+    },
+    {
+     "fixture": "rearFacePairPlatform:id",
+     "storey": 0,
+     "west": 1,
+     "east": 1,
+     "top": 1,
+     "bottom": 1,
+     "min": 1
+    },
+    {
+     "fixture": "rearFacePairPlatform:mirrorX",
+     "storey": 0,
+     "west": 1,
+     "east": 1,
+     "top": 1,
+     "bottom": 1,
+     "min": 1
+    },
+    {
+     "fixture": "rearFacePairPlatform:mirrorY",
+     "storey": 0,
+     "west": 1,
+     "east": 1,
+     "top": 1,
+     "bottom": 1,
+     "min": 1
+    },
+    {
+     "fixture": "rearFacePairPlatform:turn90",
+     "storey": 0,
+     "west": 1,
+     "east": 1,
+     "top": 1,
+     "bottom": 1,
+     "min": 1
+    },
+    {
+     "fixture": "rearFacePairPlatform:turn270",
+     "storey": 0,
+     "west": 1,
+     "east": 1,
+     "top": 1,
+     "bottom": 1,
+     "min": 1
+    },
+    {
+     "fixture": "terraceZonePlatform:id",
+     "storey": 0,
+     "west": 1,
+     "east": 1,
+     "top": 1,
+     "bottom": 1,
+     "min": 1
+    },
+    {
+     "fixture": "terraceZonePlatform:mirrorX",
+     "storey": 0,
+     "west": 1,
+     "east": 1,
+     "top": 1,
+     "bottom": 1,
+     "min": 1
+    },
+    {
+     "fixture": "terraceZonePlatform:mirrorY",
+     "storey": 0,
+     "west": 1,
+     "east": 1,
+     "top": 1,
+     "bottom": 1,
+     "min": 1
+    },
+    {
+     "fixture": "terraceZonePlatform:turn90",
+     "storey": 0,
+     "west": 1,
+     "east": 1,
+     "top": 1,
+     "bottom": 1,
+     "min": 1
+    },
+    {
+     "fixture": "terraceZonePlatform:turn270",
+     "storey": 0,
+     "west": 1,
+     "east": 1,
+     "top": 1,
+     "bottom": 1,
+     "min": 1
+    }
+   ]
+  },
+  "realCases": [
+   {
+    "case": "a01",
+    "storey": 0,
+    "body": [
+     0,
+     0,
+     10.5,
+     8.008
+    ],
+    "wallPx": 7.54,
+    "west": 0.598,
+    "east": 0.872,
+    "top": 0.608,
+    "bottom": 0.46,
+    "min": 0.46
+   },
+   {
+    "case": "a01",
+    "storey": 1,
+    "body": [
+     0,
+     0,
+     10.5,
+     8.008
+    ],
+    "wallPx": 8.17,
+    "west": 0.733,
+    "east": 0.055,
+    "top": 0.932,
+    "bottom": 0.996,
+    "min": 0.055
+   },
+   {
+    "case": "gozd",
+    "storey": 0,
+    "body": [
+     0,
+     0,
+     13.82,
+     9.5
+    ],
+    "wallPx": 12.03,
+    "west": 0.653,
+    "east": 0.56,
+    "top": 0.567,
+    "bottom": 0.352,
+    "min": 0.352
+   },
+   {
+    "case": "gozd",
+    "storey": 1,
+    "body": [
+     0,
+     0,
+     13.82,
+     9.5
+    ],
+    "wallPx": 11.92,
+    "west": 0.599,
+    "east": 0.63,
+    "top": 1,
+    "bottom": 1,
+    "min": 0.599
+   },
+   {
+    "case": "marcowki",
+    "storey": 0,
+    "body": [
+     0,
+     0.991,
+     7.9,
+     13.601
+    ],
+    "wallPx": 18.51,
+    "west": 0.802,
+    "east": 0.663,
+    "top": 0.324,
+    "bottom": 0.695,
+    "min": 0.324
+   },
+   {
+    "case": "marcowki",
+    "storey": 0,
+    "body": [
+     7.9,
+     0.991,
+     12.05,
+     8.501
+    ],
+    "wallPx": 18.51,
+    "west": 0.862,
+    "east": 1,
+    "top": 0.683,
+    "bottom": 0.142,
+    "min": 0.142
+   },
+   {
+    "case": "marcowki",
+    "storey": 1,
+    "body": [
+     0,
+     0.991,
+     7.9,
+     13.601
+    ],
+    "wallPx": 18.63,
+    "west": 1,
+    "east": 1,
+    "top": 0.337,
+    "bottom": 0.617,
+    "min": 0.337
+   },
+   {
+    "case": "rarytasy-g2e",
+    "storey": 0,
+    "body": [
+     0,
+     6.2,
+     17.21,
+     14.7
+    ],
+    "wallPx": 16.02,
+    "west": 0.87,
+    "east": 0.69,
+    "top": 0.438,
+    "bottom": 0.735,
+    "min": 0.438
+   },
+   {
+    "case": "rarytasy-g2e",
+    "storey": 0,
+    "body": [
+     2.052,
+     0,
+     8.224,
+     6.2
+    ],
+    "wallPx": 16.02,
+    "west": 0.813,
+    "east": 0.813,
+    "top": 0.932,
+    "bottom": 0.099,
+    "min": 0.099
+   },
+   {
+    "case": "dom-w-cieszyniankach",
+    "storey": 0,
+    "body": [
+     0,
+     0.8,
+     11.7,
+     16.6
+    ],
+    "wallPx": 16.51,
+    "west": 0.394,
+    "east": 0.609,
+    "top": 0.433,
+    "bottom": 0.487,
+    "min": 0.394
+   }
+  ]
+ },
+ "realWallThickPieces": [
+  {
+   "case": "a01",
+   "storeyIndex": 0,
+   "vertical": true,
+   "centre": 186.5,
+   "thick": 6,
+   "len": 97,
+   "wallPx": 7.54,
+   "thinThick": 5,
+   "maxThick": 8,
+   "world": 3.950295,
+   "wallInkBeyondLow": {
+    "frac": 1,
+    "medDist": 171,
+    "toEdge": 187
+   },
+   "wallInkBeyondHigh": {
+    "frac": 1,
+    "medDist": 104,
+    "toEdge": 314
+   }
+  },
+  {
+   "case": "a01",
+   "storeyIndex": 0,
+   "vertical": true,
+   "centre": 186.5,
+   "thick": 6,
+   "len": 18,
+   "wallPx": 7.54,
+   "thinThick": 5,
+   "maxThick": 8,
+   "world": 3.950295,
+   "wallInkBeyondLow": {
+    "frac": 0.722,
+    "medDist": 1,
+    "toEdge": 187
+   },
+   "wallInkBeyondHigh": {
+    "frac": 1,
+    "medDist": 49,
+    "toEdge": 314
+   }
+  },
+  {
+   "case": "a01",
+   "storeyIndex": 0,
+   "vertical": true,
+   "centre": 186.5,
+   "thick": 6,
+   "len": 19,
+   "wallPx": 7.54,
+   "thinThick": 5,
+   "maxThick": 8,
+   "world": 3.950295,
+   "wallInkBeyondLow": {
+    "frac": 1,
+    "medDist": 1,
+    "toEdge": 187
+   },
+   "wallInkBeyondHigh": {
+    "frac": 1,
+    "medDist": 1,
+    "toEdge": 314
+   }
+  },
+  {
+   "case": "a01",
+   "storeyIndex": 0,
+   "vertical": true,
+   "centre": 241.5,
+   "thick": 6,
+   "len": 60,
+   "wallPx": 7.54,
+   "thinThick": 5,
+   "maxThick": 8,
+   "world": 5.067345,
+   "wallInkBeyondLow": {
+    "frac": 1,
+    "medDist": 226,
+    "toEdge": 242
+   },
+   "wallInkBeyondHigh": {
+    "frac": 1,
+    "medDist": 49,
+    "toEdge": 259
+   }
+  },
+  {
+   "case": "a01",
+   "storeyIndex": 0,
+   "vertical": true,
+   "centre": 296.5,
+   "thick": 6,
+   "len": 154,
+   "wallPx": 7.54,
+   "thinThick": 5,
+   "maxThick": 8,
+   "world": 6.184395,
+   "wallInkBeyondLow": {
+    "frac": 1,
+    "medDist": 50,
+    "toEdge": 297
+   },
+   "wallInkBeyondHigh": {
+    "frac": 1,
+    "medDist": 1,
+    "toEdge": 204
+   }
+  },
+  {
+   "case": "a01",
+   "storeyIndex": 0,
+   "vertical": true,
+   "centre": 296.5,
+   "thick": 6,
+   "len": 167,
+   "wallPx": 7.54,
+   "thinThick": 5,
+   "maxThick": 8,
+   "world": 6.184395,
+   "wallInkBeyondLow": {
+    "frac": 0.719,
+    "medDist": 281,
+    "toEdge": 297
+   },
+   "wallInkBeyondHigh": {
+    "frac": 1,
+    "medDist": 86,
+    "toEdge": 204
+   }
+  },
+  {
+   "case": "a01",
+   "storeyIndex": 0,
+   "vertical": true,
+   "centre": 388.5,
+   "thick": 6,
+   "len": 15,
+   "wallPx": 7.54,
+   "thinThick": 5,
+   "maxThick": 8,
+   "world": 8.052915,
+   "wallInkBeyondLow": {
+    "frac": 0.467,
+    "medDist": 1,
+    "toEdge": 389
+   },
+   "wallInkBeyondHigh": {
+    "frac": 0.6,
+    "medDist": 1,
+    "toEdge": 112
+   }
+  },
+  {
+   "case": "a01",
+   "storeyIndex": 0,
+   "vertical": true,
+   "centre": 388.5,
+   "thick": 6,
+   "len": 99,
+   "wallPx": 7.54,
+   "thinThick": 5,
+   "maxThick": 8,
+   "world": 8.052915,
+   "wallInkBeyondLow": {
+    "frac": 0.909,
+    "medDist": 87,
+    "toEdge": 389
+   },
+   "wallInkBeyondHigh": {
+    "frac": 1,
+    "medDist": 95,
+    "toEdge": 112
+   }
+  },
+  {
+   "case": "a01",
+   "storeyIndex": 0,
+   "vertical": true,
+   "centre": 388.5,
+   "thick": 6,
+   "len": 33,
+   "wallPx": 7.54,
+   "thinThick": 5,
+   "maxThick": 8,
+   "world": 8.052915,
+   "wallInkBeyondLow": {
+    "frac": 1,
+    "medDist": 1,
+    "toEdge": 389
+   },
+   "wallInkBeyondHigh": {
+    "frac": 1,
+    "medDist": 1,
+    "toEdge": 112
+   }
+  },
+  {
+   "case": "a01",
+   "storeyIndex": 0,
+   "vertical": false,
+   "centre": 150.5,
+   "thick": 6,
+   "len": 67,
+   "wallPx": 7.54,
+   "thinThick": 5,
+   "maxThick": 8,
+   "world": 4.811262,
+   "wallInkBeyondLow": {
+    "frac": 1,
+    "medDist": 150,
+    "toEdge": 151
+   },
+   "wallInkBeyondHigh": {
+    "frac": 0.522,
+    "medDist": 210,
+    "toEdge": 231
+   }
+  },
+  {
+   "case": "a01",
+   "storeyIndex": 0,
+   "vertical": false,
+   "centre": 150.5,
+   "thick": 6,
+   "len": 39,
+   "wallPx": 7.54,
+   "thinThick": 5,
+   "maxThick": 8,
+   "world": 4.811262,
+   "wallInkBeyondLow": {
+    "frac": 1,
+    "medDist": 150,
+    "toEdge": 151
+   },
+   "wallInkBeyondHigh": {
+    "frac": 1,
+    "medDist": 62,
+    "toEdge": 231
+   }
+  },
+  {
+   "case": "a01",
+   "storeyIndex": 0,
+   "vertical": false,
+   "centre": 150.5,
+   "thick": 6,
+   "len": 125,
+   "wallPx": 7.54,
+   "thinThick": 5,
+   "maxThick": 8,
+   "world": 4.811262,
+   "wallInkBeyondLow": {
+    "frac": 0.512,
+    "medDist": 150,
+    "toEdge": 151
+   },
+   "wallInkBeyondHigh": {
+    "frac": 1,
+    "medDist": 83,
+    "toEdge": 231
+   }
+  },
+  {
+   "case": "a01",
+   "storeyIndex": 0,
+   "vertical": false,
+   "centre": 218.5,
+   "thick": 6,
+   "len": 60,
+   "wallPx": 7.54,
+   "thinThick": 5,
+   "maxThick": 8,
+   "world": 3.443918,
+   "wallInkBeyondLow": {
+    "frac": 1,
+    "medDist": 63,
+    "toEdge": 219
+   },
+   "wallInkBeyondHigh": {
+    "frac": 0.967,
+    "medDist": 1,
+    "toEdge": 163
+   }
+  },
+  {
+   "case": "a01",
+   "storeyIndex": 0,
+   "vertical": false,
+   "centre": 218.5,
+   "thick": 6,
+   "len": 15,
+   "wallPx": 7.54,
+   "thinThick": 5,
+   "maxThick": 8,
+   "world": 3.443918,
+   "wallInkBeyondLow": {
+    "frac": 1,
+    "medDist": 63,
+    "toEdge": 219
+   },
+   "wallInkBeyondHigh": {
+    "frac": 0.8,
+    "medDist": 141,
+    "toEdge": 163
+   }
+  },
+  {
+   "case": "a01",
+   "storeyIndex": 0,
+   "vertical": false,
+   "centre": 218.5,
+   "thick": 6,
+   "len": 15,
+   "wallPx": 7.54,
+   "thinThick": 5,
+   "maxThick": 8,
+   "world": 3.443918,
+   "wallInkBeyondLow": {
+    "frac": 1,
+    "medDist": 1,
+    "toEdge": 219
+   },
+   "wallInkBeyondHigh": {
+    "frac": 1,
+    "medDist": 1,
+    "toEdge": 163
+   }
+  },
+  {
+   "case": "a01",
+   "storeyIndex": 0,
+   "vertical": false,
+   "centre": 263.5,
+   "thick": 6,
+   "len": 14,
+   "wallPx": 7.54,
+   "thinThick": 5,
+   "maxThick": 8,
+   "world": 2.539058,
+   "wallInkBeyondLow": {
+    "frac": 1,
+    "medDist": 1,
+    "toEdge": 264
+   },
+   "wallInkBeyondHigh": {
+    "frac": 1,
+    "medDist": 1,
+    "toEdge": 118
+   }
+  },
+  {
+   "case": "a01",
+   "storeyIndex": 0,
+   "vertical": false,
+   "centre": 263.5,
+   "thick": 6,
+   "len": 116,
+   "wallPx": 7.54,
+   "thinThick": 5,
+   "maxThick": 8,
+   "world": 2.539058,
+   "wallInkBeyondLow": {
+    "frac": 1,
+    "medDist": 1,
+    "toEdge": 264
+   },
+   "wallInkBeyondHigh": {
+    "frac": 0.621,
+    "medDist": 97,
+    "toEdge": 118
+   }
+  },
+  {
+   "case": "gozd",
+   "storeyIndex": 0,
+   "vertical": true,
+   "centre": 339.5,
+   "thick": 12,
+   "len": 176,
+   "wallPx": 12.03,
+   "thinThick": 9,
+   "maxThick": 12,
+   "world": 8.908416,
+   "wallInkBeyondLow": {
+    "frac": 1,
+    "medDist": 142,
+    "toEdge": 340
+   },
+   "wallInkBeyondHigh": {
+    "frac": 0.443,
+    "medDist": 168,
+    "toEdge": 181
+   }
+  },
+  {
+   "case": "gozd",
+   "storeyIndex": 0,
+   "vertical": true,
+   "centre": 339.5,
+   "thick": 12,
+   "len": 141,
+   "wallPx": 12.03,
+   "thinThick": 9,
+   "maxThick": 12,
+   "world": 8.908416,
+   "wallInkBeyondLow": {
+    "frac": 1,
+    "medDist": 77,
+    "toEdge": 340
+   },
+   "wallInkBeyondHigh": {
+    "frac": 0.865,
+    "medDist": 168,
+    "toEdge": 181
+   }
+  },
+  {
+   "case": "gozd",
+   "storeyIndex": 0,
+   "vertical": false,
+   "centre": 123.5,
+   "thick": 10,
+   "len": 8,
+   "wallPx": 12.03,
+   "thinThick": 9,
+   "maxThick": 12,
+   "world": 6.060337,
+   "wallInkBeyondLow": {
+    "frac": 1,
+    "medDist": 1,
+    "toEdge": 124
+   },
+   "wallInkBeyondHigh": {
+    "frac": 1,
+    "medDist": 1,
+    "toEdge": 227
+   }
+  },
+  {
+   "case": "gozd",
+   "storeyIndex": 0,
+   "vertical": false,
+   "centre": 123.5,
+   "thick": 10,
+   "len": 11,
+   "wallPx": 12.03,
+   "thinThick": 9,
+   "maxThick": 12,
+   "world": 6.060337,
+   "wallInkBeyondLow": {
+    "frac": 1,
+    "medDist": 115,
+    "toEdge": 124
+   },
+   "wallInkBeyondHigh": {
+    "frac": 1,
+    "medDist": 82,
+    "toEdge": 227
+   }
+  },
+  {
+   "case": "gozd",
+   "storeyIndex": 0,
+   "vertical": false,
+   "centre": 123.5,
+   "thick": 10,
+   "len": 116,
+   "wallPx": 12.03,
+   "thinThick": 9,
+   "maxThick": 12,
+   "world": 6.060337,
+   "wallInkBeyondLow": {
+    "frac": 0.414,
+    "medDist": 115,
+    "toEdge": 124
+   },
+   "wallInkBeyondHigh": {
+    "frac": 0.888,
+    "medDist": 39,
+    "toEdge": 227
+   }
+  },
+  {
+   "case": "marcowki",
+   "storeyIndex": 1,
+   "vertical": true,
+   "centre": 116.5,
+   "thick": 18,
+   "len": 25,
+   "wallPx": 18.63,
+   "thinThick": 13,
+   "maxThick": 19,
+   "world": 3.556312,
+   "wallInkBeyondLow": {
+    "frac": 1,
+    "medDist": 112,
+    "toEdge": 117
+   },
+   "wallInkBeyondHigh": {
+    "frac": 1,
+    "medDist": 139,
+    "toEdge": 146
+   }
+  },
+  {
+   "case": "dom-w-cieszyniankach",
+   "storeyIndex": 0,
+   "vertical": true,
+   "centre": 86,
+   "thick": 15,
+   "len": 100,
+   "wallPx": 16.51,
+   "thinThick": 12,
+   "maxThick": 17,
+   "world": 2.860207,
+   "wallInkBeyondLow": {
+    "frac": 0,
+    "medDist": null,
+    "toEdge": 86
+   },
+   "wallInkBeyondHigh": {
+    "frac": 1,
+    "medDist": 108,
+    "toEdge": 301
+   }
+  },
+  {
+   "case": "dom-w-cieszyniankach",
+   "storeyIndex": 0,
+   "vertical": true,
+   "centre": 86,
+   "thick": 15,
+   "len": 32,
+   "wallPx": 16.51,
+   "thinThick": 12,
+   "maxThick": 17,
+   "world": 2.860207,
+   "wallInkBeyondLow": {
+    "frac": 0.5,
+    "medDist": 80,
+    "toEdge": 86
+   },
+   "wallInkBeyondHigh": {
+    "frac": 1,
+    "medDist": 108,
+    "toEdge": 301
+   }
+  },
+  {
+   "case": "dom-w-cieszyniankach",
+   "storeyIndex": 0,
+   "vertical": true,
+   "centre": 296.5,
+   "thick": 14,
+   "len": 38,
+   "wallPx": 16.51,
+   "thinThick": 12,
+   "maxThick": 17,
+   "world": 8.705582,
+   "wallInkBeyondLow": {
+    "frac": 1,
+    "medDist": 39,
+    "toEdge": 297
+   },
+   "wallInkBeyondHigh": {
+    "frac": 1,
+    "medDist": 86,
+    "toEdge": 90
+   }
+  },
+  {
+   "case": "dom-w-cieszyniankach",
+   "storeyIndex": 0,
+   "vertical": false,
+   "centre": 324,
+   "thick": 13,
+   "len": 24,
+   "wallPx": 16.51,
+   "thinThick": 12,
+   "maxThick": 17,
+   "world": 7.11679,
+   "wallInkBeyondLow": {
+    "frac": 1,
+    "medDist": 151,
+    "toEdge": 324
+   },
+   "wallInkBeyondHigh": {
+    "frac": 1,
+    "medDist": 141,
+    "toEdge": 210
+   }
+  }
+ ]
+}

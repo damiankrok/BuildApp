@@ -1,0 +1,71 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005V-N1-WALL-STRIP-REGRESSION-RECOVERY",
+ "baseline": "6af3d71659b59764895b2440cebe366eb812774b",
+ "productionAdopted": false,
+ "candidate": "research/analyzer-005v-n1-wall-strip/candidate-unwalled-side.patch (UNWALLED_SIDE_COVER = 0.05; not applied to the tree)",
+ "wallStrip": {
+  "baseline": {
+   "passed": 23,
+   "failed": 40
+  },
+  "candidate": {
+   "passed": 62,
+   "failed": 1,
+   "stillFailing": "005Q wall strip — 12. a recessed entrance with its back wall (005N) > as 005N dimensions it (expected 9 to be 4)"
+  },
+  "committedTree": {
+   "passed": 23,
+   "failed": 40
+  }
+ },
+ "replays": {
+  "method": "research/analyzer-005t-n2/replay-solver.ts over the sealed N1v graph and metric evidence, offline (no OCR, no network)",
+  "cases": {
+   "A01 Jarzmianki m60124f28f071a": {
+    "baselineModelSha256": "d93291577e2d795f19a2ebfab698e1e655ecf007f342e5ba7166c4c886a61be2",
+    "candidateModelSha256": "d93291577e2d795f19a2ebfab698e1e655ecf007f342e5ba7166c4c886a61be2",
+    "outcome": "IDENTICAL"
+   },
+   "Gozdzikowce 3 m79923e950094d": {
+    "baselineModelSha256": "911456a88b2530c9cf01b348dc7045a7b7bcc6d85e62e58221e5f205d41efbbc",
+    "candidateModelSha256": "911456a88b2530c9cf01b348dc7045a7b7bcc6d85e62e58221e5f205d41efbbc",
+    "outcome": "IDENTICAL"
+   },
+   "Marcowki m2fa281446a8ca": {
+    "baselineModelSha256": "f607464936c7a13368d7f9307fb004e5bbad8b0da4490981851a33616c573321",
+    "candidateModelSha256": "f607464936c7a13368d7f9307fb004e5bbad8b0da4490981851a33616c573321",
+    "outcome": "IDENTICAL"
+   },
+   "Rarytasy 5 G2E m84f2903cb8e14": {
+    "baselineModelSha256": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+    "candidateModelSha256": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+    "outcome": "IDENTICAL"
+   },
+   "Dom w cieszyniankach m43d25c0636969": {
+    "baselineModelSha256": "e4e562923319084fda0b9ae934bcb1185a7098c53e7727c82f9afdcb592c1f6c",
+    "candidateModelSha256": "e4e562923319084fda0b9ae934bcb1185a7098c53e7727c82f9afdcb592c1f6c",
+    "outcome": "IDENTICAL"
+   }
+  },
+  "notRun": {
+   "Rarytasy OWNER m3ea…": "NOT_RUN: no sealed replay input in this environment; not substituted by m84f…"
+  }
+ },
+ "retainedOnBaselineAndCandidate": {
+  "A01": {
+   "roof": "GABLE, ridge along X",
+   "chimneys": 2,
+   "groundFrontOpenings": 4,
+   "OPENING_ABOVE_WALL_TOP": 0
+  },
+  "Gozdzikowce": {
+   "garageRoom": "26.09 m2 room numbered 8 = Garaz (published 25.38 m2)",
+   "opening-0-front-0-2": "DOOR 3.22 m wide, head 2.20 m ASSUMED",
+   "callout 325/225": "UNRESOLVED"
+  }
+ },
+ "controls": {
+  "stairAdjacentWall": "NOT_APPLICABLE: none of the five replayed cases has a wall-thick piece next to a stair",
+  "cieszyniankiX3_07": "main-iwall-0-z-0 (0.417 m, x 3.07, z 12.35..16.13): an N3-era wall-thick piece with no wall ink to its west at any position along it (wallInkBeyond west 0.0) while the body stands on walls on every side (lowest 0.39); unchanged by the candidate; NOT_VERIFIED against the source plan"
+ }
+}
