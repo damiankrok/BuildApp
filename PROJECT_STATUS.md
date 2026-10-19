@@ -2264,3 +2264,22 @@ Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005V_N2_WALL_CONTRACT_ADOPTION.m
   A01's ridge X, 2 chimneys and 4 front openings stay.
 - The APK-size gate is still red (KNOWN_BASELINE_FAIL); Rarytasy OWNER m3ea… NOT_RUN; CI/APK NOT_RUN;
   OWNER_VISUAL_NOT_RETESTED.
+
+## A01 front glazing: diagnosed, candidate not adopted (STAGE BUILDPLAN-ANALYZER-005V-N3-A01-FACADE-GLAZING-AND-PROPORTIONS)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005V_N3_A01_FACADE_GLAZING_AND_PROPORTIONS.md`; ledger, candidate patch and
+render steps: `research/analyzer-005v-n3-facade/`. Branch `analyzer/005v-n3-a01-facade-glazing-proportions-v1` from
+`b353729`. Verdict `PARTIAL_NOT_ADOPTED`: **no production change**.
+
+- **First bad (kind):** `glazingDrawn` counted only ink darker than luma 160, while this plan draws glazing as thin grey
+  lines (181–199). Its scan also started at the smaller of the gap's x and y ("mixed min"). So 100/220 and 90/210 were
+  doors.
+- **First bad (heights):** the FRONT elevation is refused at registration: its silhouette takes in a pergola, and the
+  verge overhang along x is unknown. No front opening gets a read height.
+- **Candidate (light-line glazing + mixed-min fix + glazed door from glazing and a swing):**
+  - A01 front 90/210 becomes glass at 0.89 × 2.10 m.
+  - A01 front 100/220 becomes a glass window at the assumed 0.9 m sill — **worse height** (1.30 against 2.20).
+  - Control changes verified on each plan: Goździkowce ×3, Marcówki ×1 improved; Cieszynianki ×2 material only.
+  - `glazing-symbol` 6/6 (3 red on the base); `wall-strip` 65/65; `tsc` clean.
+- Needs a coordinator decision (adopt with the 100/220 caveat, or front elevation registration first). APK-size gate
+  still red; CI/APK NOT_RUN; OWNER_VISUAL_NOT_RETESTED.

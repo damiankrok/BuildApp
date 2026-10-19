@@ -1,0 +1,232 @@
+diff --git a/packages/reconstruction/src/v2/openings-v2.ts b/packages/reconstruction/src/v2/openings-v2.ts
+index a313b70..5f27082 100644
+--- a/packages/reconstruction/src/v2/openings-v2.ts
++++ b/packages/reconstruction/src/v2/openings-v2.ts
+@@ -232,6 +232,8 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
+     const [lo, hi] = gap.interval
+     const widthPlan = round6(hi - lo)
+     const centre = (lo + hi) / 2
++    // 005V-N3: the drawn wall band the gap was read on, across the wall, in sheet pixels.
++    const bandCentre = along === 'X' ? (gap.pixelRect.y0 + gap.pixelRect.y1) / 2 : (gap.pixelRect.x0 + gap.pixelRect.x1) / 2
+     const unresolved: string[] = []
+     // --- the callout: nearest printed w/h within reach with a width reading that agrees with the gap.
+     // The gap's own width is the evidence that picks among the reader's width
+@@ -270,6 +272,7 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
+     // --- sill and head
+     let heightsAssumed = false
+     let doorBySymbol = false
++    let glazedDoorBySymbol = false
+     let doorSwing = false
+     let sillY: number
+     let headY: number
+@@ -343,13 +346,18 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
+       // swing makes one. Never a garage door, a glazed door or a full-height screen: those need a height read.
+       heightsAssumed = true
+       doorSwing = doorSwingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM)
+-      doorBySymbol = widthM <= 1.3 && !glazingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM) && (doorSwing || host.storeyIndex === 0)
+-      sillY = doorBySymbol ? host.floorY : round6(host.floorY + CONVENTIONS.windowSill)
+-      headY = round6(host.floorY + (doorBySymbol ? 2.1 : CONVENTIONS.openingHead))
++      const glazed = glazingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM, bandCentre)
++      doorBySymbol = widthM <= 1.3 && !glazed && (doorSwing || host.storeyIndex === 0)
++      // 005V-N3: glazing drawn across the gap AND a leaf's swing beside it is a glazed door (a balcony or terrace door):
++      // both symbols are on the plan, so the kind is read; its heights are a door's, assumed.
++      glazedDoorBySymbol = widthM <= GLAZED_DOOR_MAX_M && glazed && doorSwing
++      const door = doorBySymbol || glazedDoorBySymbol
++      sillY = door ? host.floorY : round6(host.floorY + CONVENTIONS.windowSill)
++      headY = round6(host.floorY + (door ? 2.1 : CONVENTIONS.openingHead))
+       prov.sill = 'ASSUMED_FOR_RENDERING'
+       prov.head = 'ASSUMED_FOR_RENDERING'
+       unresolved.push('sill and head (no callout read and no elevation shows this wall)')
+-      if (!doorBySymbol) unresolved.push('kind (no callout, no elevation and no door symbol on the plan: drawn as a window, not read as one)')
++      if (!door) unresolved.push(glazed ? 'kind (glazing drawn across the gap and no swing: a window; whether it reaches the floor is not read)' : 'kind (no callout, no elevation and no door symbol on the plan: drawn as a window, not read as one)')
+       else if (!doorSwing) unresolved.push('kind (an empty ground-storey gap a door wide, read as a door by the plan convention; no swing drawn)')
+     }
+     // --- 005V: under the eaves. A head nothing read is a convention; where it would reach above the wall the roof
+@@ -392,7 +400,7 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
+       !!mouth &&
+       host.storeyIndex === 0 &&
+       Math.min(hi, mouth.to) - Math.max(lo, mouth.from) >= 0.8 * Math.max(widthPlan, mouth.to - mouth.from) &&
+-      !glazingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM)
++      !glazingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM, bandCentre)
+     let family: OpeningFamily = 'UNKNOWN'
+     const reachesFloor = sillY - host.floorY < 0.12
+     if (mouthGap && heightsAssumed && mouth) {
+@@ -404,8 +412,8 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
+       unresolved.push(`a vehicle door: ${mouth.why}; its sill and head are assumed (${CONVENTIONS.openingHead} m) — no callout or elevation reads them`)
+     } else if (mouthGap && !heightsAssumed && sillY - host.floorY < 0.1) family = 'GARAGE_DOOR'
+     else if (heightsAssumed) {
+-      family = doorBySymbol ? 'DOOR' : 'WINDOW'
+-      prov.family = doorBySymbol ? (doorSwing ? 'SOURCE_DERIVED' : 'VISUAL_SEMANTIC') : 'ASSUMED_FOR_RENDERING'
++      family = glazedDoorBySymbol ? 'GLAZED_DOOR' : doorBySymbol ? 'DOOR' : 'WINDOW'
++      prov.family = glazedDoorBySymbol ? 'SOURCE_DERIVED' : doorBySymbol ? (doorSwing ? 'SOURCE_DERIVED' : 'VISUAL_SEMANTIC') : 'ASSUMED_FOR_RENDERING'
+     }
+     else if (attachedVehicle) family = 'GARAGE_DOOR'
+     else if (reachesFloor && widthM >= 2.0) family = 'MULTI_PANEL_GLAZING'
+@@ -413,7 +421,7 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
+       // The plan symbol decides between a door and a glazed opening: a window is
+       // drawn with its glazing lines across the gap, a door leaves the gap empty
+       // (and usually draws its leaf and swing beside it).
+-      const glazed = glazingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM)
++      const glazed = glazingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM, bandCentre)
+       if (reachesFloor && !glazed && widthM <= 1.3 && headY - sillY <= 2.35) family = 'DOOR'
+       else if (reachesFloor && glazed && widthM >= 0.75 && widthM <= 2.0 && host.storeyIndex === 0 && !doorSwingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM)) family = 'WINDOW'
+       else if (reachesFloor && widthM > 1.3 && widthM < 2.0) family = 'GLAZED_DOOR'
+@@ -451,13 +459,22 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
+ }
+ 
+ /** Thin glazing lines drawn across the gap within the wall's thickness: a window or a glazed screen. */
+-function glazingDrawn(raster: Raster, plan: PlanFrameV2, host: WallHost, interval: [number, number], wallThicknessM: number): boolean {
++/** 005V-N3: the widest gap a glazed door with a single drawn swing is read in (wider is a screen, not one leaf). */
++const GLAZED_DOOR_MAX_M = 1.3
++/** 005V-N3: a thin glazing line is darker than a floor fill or the paper, lighter than wall ink allows for. */
++const GLAZING_LINE_LUMA = 215
++/** 005V-N3: how far either side of the drawn band's centre the glazing lines are looked for. */
++const GLAZING_WINDOW_M = 0.25
++
++function glazingDrawn(raster: Raster, plan: PlanFrameV2, host: WallHost, interval: [number, number], wallThicknessM: number, bandCentrePx?: number): boolean {
+   const along = host.facade === 'FRONT' || host.facade === 'REAR' ? 'X' : 'Y'
+   const mpp = (plan.mppX + plan.mppY) / 2
+   const half = (wallThicknessM * 0.45) / mpp
+   const a0 = along === 'X' ? plan.toPixel(interval[0] + 0.1, host.centreAt) : plan.toPixel(host.centreAt, interval[1] - 0.1)
+   const a1 = along === 'X' ? plan.toPixel(interval[1] - 0.1, host.centreAt) : plan.toPixel(host.centreAt, interval[0] + 0.1)
+-  const from = Math.round(Math.min(a0.x, a1.x, a0.y, a1.y) === Math.min(a0.x, a1.x) && along === 'X' ? Math.min(a0.x, a1.x) : Math.min(a0.y, a1.y))
++  // 005V-N3: the span along the wall — x for a front or rear wall, y for a side one. (It was the smaller of all four
++  // coordinates, which for a gap lying further across the sheet than down it started the scan at its row number.)
++  const from = Math.round(along === 'X' ? Math.min(a0.x, a1.x) : Math.min(a0.y, a1.y))
+   const to = Math.round(along === 'X' ? Math.max(a0.x, a1.x) : Math.max(a0.y, a1.y))
+   const centre = along === 'X' ? a0.y : a0.x
+   let withInk = 0
+@@ -471,7 +488,33 @@ function glazingDrawn(raster: Raster, plan: PlanFrameV2, host: WallHost, interva
+     n += 1
+     if (dark >= 1 && dark <= Math.max(2, half * 0.6)) withInk += 1
+   }
+-  return n > 0 && withInk / n >= 0.6
++  if (n > 0 && withInk / n >= 0.6) return true
++  return glazingLinesDrawn(raster, from, to, along, bandCentrePx ?? centre, Math.max(half, GLAZING_WINDOW_M / mpp))
++}
++
++/**
++ * 005V-N3: the light glazing symbol. Many plans draw a window's frame and glass as thin grey lines across the gap,
++ * lighter than wall ink (and than the dark-ink test above), between the room's floor fill and the paper outside. A
++ * door's gap carries at most one such line — the threshold where the floor fill meets the paper — so a column with
++ * two or more distinct thin lines across the drawn wall band is glazed, and the gap is glazed where most of its columns
++ * are. The band is the drawn one (`bandCentrePx`, where the gap was read), not the registered face.
++ */
++function glazingLinesDrawn(raster: Raster, from: number, to: number, along: 'X' | 'Y', centre: number, half: number): boolean {
++  let glazed = 0
++  let n = 0
++  for (let i = from; i <= to; i += 1) {
++    let lines = 0
++    let inLine = false
++    for (let d = -Math.ceil(half); d <= Math.ceil(half); d += 1) {
++      const l = along === 'X' ? lumaOf(raster, i, centre + d) : lumaOf(raster, centre + d, i)
++      const line = l < GLAZING_LINE_LUMA
++      if (line && !inLine) lines += 1
++      inLine = line
++    }
++    n += 1
++    if (lines >= 2) glazed += 1
++  }
++  return n > 0 && glazed / n >= 0.6
+ }
+ 
+ const lumaOf = (r: Raster, x: number, y: number): number => {
+diff --git a/packages/reconstruction/test/glazing-symbol.test.ts b/packages/reconstruction/test/glazing-symbol.test.ts
+new file mode 100644
+index 0000000..0cea011
+--- /dev/null
++++ b/packages/reconstruction/test/glazing-symbol.test.ts
+@@ -0,0 +1,93 @@
++/**
++ * BUILDPLAN-ANALYZER-005V-N3: the plan's glazing symbol decides a gap's kind when nothing reads its heights.
++ *
++ * Plans draw a window's frame and glass as thin grey lines across the gap, lighter than wall ink; a door leaves at most
++ * a threshold line and draws its leaf's swing in the room. Two bugs hid the glazing: only ink darker than luma 160
++ * counted, and the scan along the wall started at the smaller of the gap's x and y coordinates, so a gap lying further
++ * across the sheet than down it was scanned from its row number. Synthetic sheets only; no drawing of any real building.
++ */
++import { describe, expect, it } from 'vitest'
++import { readWallOpenings } from '../src/index.js'
++import type { OpeningReadingInput, PlanFrameV2, WallHost } from '../src/index.js'
++
++const MPP = 0.02
++const O = 20
++const OY = 400
++const W = 760
++const H = 520
++const px = (x: number, z: number) => ({ x: O + x / MPP, y: OY + z / MPP })
++type Gap = { from: number; to: number; lines?: Array<{ row: number; luma: number }>; swing?: boolean }
++
++/** A 14 m front wall, 0.4 m thick (rows 400..420), with gaps; room inside below row 420. */
++function sheet(gaps: Gap[]): { raster: OpeningReadingInput['planRaster']; plan: PlanFrameV2 } {
++  const data = new Uint8ClampedArray(W * H * 4).fill(255)
++  const set = (x: number, y: number, l: number): void => {
++    const o = (Math.round(y) * W + Math.round(x)) * 4
++    data[o] = data[o + 1] = data[o + 2] = l
++  }
++  const inGap = (x: number): boolean => gaps.some((g) => x >= px(g.from, 0).x && x <= px(g.to, 0).x)
++  for (let y = px(0, 0).y; y <= px(0, 0.4).y; y += 1) for (let x = px(0, 0).x; x <= px(14, 0).x; x += 1) if (!inGap(x)) set(x, y, 0)
++  for (const g of gaps) {
++    for (const line of g.lines ?? []) for (let x = px(g.from, 0).x; x <= px(g.to, 0).x; x += 1) set(x, line.row, line.luma)
++    if (g.swing) {
++      // a quarter circle of the leaf's width, hinged at the gap's left jamb, inside the room
++      const r = (g.to - g.from) / MPP
++      const cx = px(g.from, 0).x
++      const cy = px(0, 0.4).y + 2
++      for (let a = 0; a <= 90; a += 0.5) set(cx + r * Math.cos((a * Math.PI) / 180), cy + r * Math.sin((a * Math.PI) / 180), 60)
++      for (let y = cy; y <= cy + r; y += 1) set(cx + 1, y, 60)
++    }
++  }
++  const plan: PlanFrameV2 = { frameId: 'frame-plan', assetId: 'asset-plan', storeyIndex: 0, mppX: MPP, mppY: MPP, originPx: { x: O, y: OY }, why: 'synthetic', toWorld: (x, y) => ({ x: (x - O) * MPP, z: (y - OY) * MPP }), toPixel: (x, z) => px(x, z), wallPx: 0.2 / MPP }
++  return { raster: { width: W, height: H, data }, plan }
++}
++const host: WallHost = { massId: 'main', facade: 'FRONT', planeAt: 0, from: 0, to: 14, centreAt: 0.2, storeyIndex: 0, floorY: 0, storeyHeightM: 2.8 }
++const read = (gaps: Gap[]) => {
++  const { raster, plan } = sheet(gaps)
++  return readWallOpenings({ plan, planRaster: raster, host, wallThicknessM: 0.4, callouts: [], views: [], attachedSingleStorey: false, index: 0 })
++}
++/** Glazing as many plans draw it: frame and glass lines in light grey across the wall band. */
++const lightGlazing = [{ row: 404, luma: 199 }, { row: 410, luma: 199 }, { row: 416, luma: 195 }]
++/** A threshold: one line where the floor meets the paper. */
++const threshold = [{ row: 404, luma: 187 }]
++
++describe('005V-N3 the glazing symbol on the plan (no callout, no elevation)', () => {
++  it('light grey glazing lines across a door-wide ground-storey gap make it a window, not a door (red before)', () => {
++    const [o] = read([{ from: 9, to: 10, lines: lightGlazing }])
++    expect(o.family).toBe('WINDOW')
++    expect(o.provenance.family).toBe('ASSUMED_FOR_RENDERING')
++    expect(o.provenance.sill).toBe('ASSUMED_FOR_RENDERING')
++    expect(o.unresolved.some((u) => u.startsWith('kind (glazing drawn'))).toBe(true)
++  })
++
++  it('a threshold line alone is no glazing: the empty ground-storey gap stays a door by the plan convention', () => {
++    const [o] = read([{ from: 9, to: 10, lines: threshold }])
++    expect(o.family).toBe('DOOR')
++    expect(o.sillY).toBe(0)
++  })
++
++  it('glazing and a drawn swing make a glazed door: kind read from both symbols, door heights assumed (red before)', () => {
++    const [o] = read([{ from: 9, to: 10, lines: lightGlazing, swing: true }])
++    expect(o.family).toBe('GLAZED_DOOR')
++    expect(o.provenance.family).toBe('SOURCE_DERIVED')
++    expect(o.sillY).toBe(0)
++    expect(o.headY).toBeCloseTo(2.1, 6)
++    expect(o.provenance.head).toBe('ASSUMED_FOR_RENDERING')
++  })
++
++  it('a swing without glazing stays a plain door', () => {
++    const [o] = read([{ from: 9, to: 10, lines: threshold, swing: true }])
++    expect(o.family).toBe('DOOR')
++  })
++
++  it('dark glazing on a gap further across the sheet than down it is scanned along the gap, not from its row number (red before)', () => {
++    const [o] = read([{ from: 9, to: 10, lines: [{ row: 410, luma: 40 }] }])
++    expect(o.family).toBe('WINDOW')
++  })
++
++  it('a wide glazed screen with nothing read stays a window placeholder (never a full-height screen without a height read)', () => {
++    const [o] = read([{ from: 9, to: 11.6, lines: lightGlazing }])
++    expect(o.family).toBe('WINDOW')
++    expect(o.sillY).toBeCloseTo(0.9, 6)
++  })
++})

@@ -1,0 +1,382 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005V-N3-A01-FACADE-GLAZING-AND-PROPORTIONS",
+ "base": "b35372963b3d8a0d7e3d3f487077e66be47905a8",
+ "verdict": "PARTIAL_NOT_ADOPTED",
+ "productionChanged": false,
+ "sourceEdition": "the publisher page cache the sealed N1v graph was built from (005K gap set); images viewed privately, never copied into the repository; printed callouts read by eye privately (the pipeline reads none of these four)",
+ "frontRegistration": {
+  "frontSide": "SHEET_BOTTOM",
+  "check": "the elevation the graph labels FRONT (frame ...elewacja-b74ed2020b) shows left to right the four openings of the ground plan's bottom wall in the same order and u/L to within 0.01 (005V ledger); not mirrored, not the rear (the rear frame ...elewacja-19da37ded6 shows the garden facade)",
+  "axis": "u from the west corner, L = 10.5 m"
+ },
+ "firstBad": [
+  {
+   "what": "kind of 100/220 and 90/210 (DOOR instead of glazing)",
+   "where": "openings-v2.ts glazingDrawn",
+   "finding": "(1) only ink darker than luma 160 counted; these plans draw glazing as thin grey lines at luma 181-199 (pier ink 32, floor fill 231, paper 248-255), so no glazing was seen and the ground-storey door convention made a door; (2) the scan along the wall started at the smaller of the gap's x and y coordinates, so the 90/210 gap (x 648..682 px, wall at row ~557) was scanned from column 558 across the pier and the entrance",
+   "chain": "plan gap read (planGaps, 005V wall search) -> no callout read, no elevation -> heightsAssumed -> doorBySymbol = width<=1.3 && !glazingDrawn && storey 0 -> family DOOR, sill 0 / head 2.1 ASSUMED -> emit cutOpening DOOR + placeDoor mat-timber -> brown leaf mesh"
+  },
+  {
+   "what": "vertical proportions of all four front openings (ASSUMED)",
+   "where": "reconstruct-v2.ts elevation registration (registerElevationV2)",
+   "finding": "the FRONT elevation is registered upstream with extent x 210..1071 px: the silhouette takes in a pergola standing beside the house (columns 210..410). The roof alone spans 367..1071 px, the walls about 411..1027 px; the FRONT span candidate is the bare 10.5 m envelope (side overhang along x unknown, 0). Neither 861 px nor the 704 px roof span puts the ground on the terrain datum (+0.79 m against -0.72 m for the roof span; error > 0.9 m), so the front is refused and no front opening gets a read height. Fixing it needs the wall span under the roof and the verge overhang: a third production change, not attempted here"
+  }
+ ],
+ "front": {
+  "source": [
+   {
+    "printed": "250/220",
+    "what": "large glazing",
+    "u0": 0.015,
+    "u1": 0.255,
+    "sillM": 0.0,
+    "headM": 2.2
+   },
+   {
+    "printed": "100/220",
+    "what": "tall glazing (plan: 3 thin glazing lines, no swing)",
+    "u0": 0.429,
+    "u1": 0.521,
+    "sillM": 0.0,
+    "headM": 2.2
+   },
+   {
+    "printed": "105/210",
+    "what": "entrance door (plan: swing arc, threshold line only)",
+    "u0": 0.651,
+    "u1": 0.726,
+    "sillM": 0.0,
+    "headM": 2.1
+   },
+   {
+    "printed": "90/210",
+    "what": "glazed side panel (plan: 3 thin glazing lines; the swing the detector finds is the entrance door's)",
+    "u0": 0.807,
+    "u1": 0.883,
+    "sillM": 0.0,
+    "headM": 2.1
+   }
+  ],
+  "before": [
+   {
+    "id": "opening-0-front-0-0",
+    "hostWall": "ring-main-0-w0",
+    "modelKind": "WINDOW",
+    "fill": "WINDOW glass",
+    "u0": 0.013,
+    "u1": 0.259,
+    "widthM": 2.584,
+    "widthOverL": 0.246,
+    "sillM": 0.9,
+    "heightM": 1.3,
+    "headM": 2.2,
+    "evidence": {
+     "head": "SOURCE_DERIVED",
+     "height": "ASSUMED",
+     "kind": "ASSUMED",
+     "offset": "SOURCE_DERIVED",
+     "sill": "ASSUMED",
+     "width": "SOURCE_DERIVED"
+    },
+    "status": "ASSUMED"
+   },
+   {
+    "id": "opening-0-front-0-1",
+    "hostWall": "ring-main-0-w0",
+    "modelKind": "DOOR",
+    "fill": "DOOR mat-timber",
+    "u0": 0.427,
+    "u1": 0.522,
+    "widthM": 0.995,
+    "widthOverL": 0.095,
+    "sillM": 0,
+    "heightM": 2.1,
+    "headM": 2.1,
+    "evidence": {
+     "head": "SOURCE_DERIVED",
+     "height": "ASSUMED",
+     "kind": "VISUAL_INFERRED",
+     "offset": "SOURCE_DERIVED",
+     "sill": "ASSUMED",
+     "width": "SOURCE_DERIVED"
+    },
+    "status": "ASSUMED"
+   },
+   {
+    "id": "opening-0-front-0-2",
+    "hostWall": "ring-main-0-w0",
+    "modelKind": "DOOR",
+    "fill": "DOOR mat-timber",
+    "u0": 0.65,
+    "u1": 0.751,
+    "widthM": 1.056,
+    "widthOverL": 0.101,
+    "sillM": 0,
+    "heightM": 2.1,
+    "headM": 2.1,
+    "evidence": {
+     "head": "SOURCE_DERIVED",
+     "height": "ASSUMED",
+     "kind": "SOURCE_DERIVED",
+     "offset": "SOURCE_DERIVED",
+     "sill": "ASSUMED",
+     "width": "SOURCE_DERIVED"
+    },
+    "status": "ASSUMED"
+   },
+   {
+    "id": "opening-0-front-0-3",
+    "hostWall": "ring-main-0-w0",
+    "modelKind": "DOOR",
+    "fill": "DOOR mat-timber",
+    "u0": 0.803,
+    "u1": 0.888,
+    "widthM": 0.894,
+    "widthOverL": 0.085,
+    "sillM": 0,
+    "heightM": 2.1,
+    "headM": 2.1,
+    "evidence": {
+     "head": "SOURCE_DERIVED",
+     "height": "ASSUMED",
+     "kind": "SOURCE_DERIVED",
+     "offset": "SOURCE_DERIVED",
+     "sill": "ASSUMED",
+     "width": "SOURCE_DERIVED"
+    },
+    "status": "ASSUMED"
+   }
+  ],
+  "candidate": [
+   {
+    "id": "opening-0-front-0-0",
+    "hostWall": "ring-main-0-w0",
+    "modelKind": "WINDOW",
+    "fill": "WINDOW glass",
+    "u0": 0.013,
+    "u1": 0.259,
+    "widthM": 2.584,
+    "widthOverL": 0.246,
+    "sillM": 0.9,
+    "heightM": 1.3,
+    "headM": 2.2,
+    "evidence": {
+     "head": "SOURCE_DERIVED",
+     "height": "ASSUMED",
+     "kind": "ASSUMED",
+     "offset": "SOURCE_DERIVED",
+     "sill": "ASSUMED",
+     "width": "SOURCE_DERIVED"
+    },
+    "status": "ASSUMED"
+   },
+   {
+    "id": "opening-0-front-0-1",
+    "hostWall": "ring-main-0-w0",
+    "modelKind": "WINDOW",
+    "fill": "WINDOW glass",
+    "u0": 0.427,
+    "u1": 0.522,
+    "widthM": 0.995,
+    "widthOverL": 0.095,
+    "sillM": 0.9,
+    "heightM": 1.3,
+    "headM": 2.2,
+    "evidence": {
+     "head": "SOURCE_DERIVED",
+     "height": "ASSUMED",
+     "kind": "ASSUMED",
+     "offset": "SOURCE_DERIVED",
+     "sill": "ASSUMED",
+     "width": "SOURCE_DERIVED"
+    },
+    "status": "ASSUMED"
+   },
+   {
+    "id": "opening-0-front-0-2",
+    "hostWall": "ring-main-0-w0",
+    "modelKind": "DOOR",
+    "fill": "DOOR mat-timber",
+    "u0": 0.65,
+    "u1": 0.751,
+    "widthM": 1.056,
+    "widthOverL": 0.101,
+    "sillM": 0,
+    "heightM": 2.1,
+    "headM": 2.1,
+    "evidence": {
+     "head": "SOURCE_DERIVED",
+     "height": "ASSUMED",
+     "kind": "SOURCE_DERIVED",
+     "offset": "SOURCE_DERIVED",
+     "sill": "ASSUMED",
+     "width": "SOURCE_DERIVED"
+    },
+    "status": "ASSUMED"
+   },
+   {
+    "id": "opening-0-front-0-3",
+    "hostWall": "ring-main-0-w0",
+    "modelKind": "DOOR",
+    "fill": "DOOR mat-glass glazing FULL",
+    "u0": 0.803,
+    "u1": 0.888,
+    "widthM": 0.894,
+    "widthOverL": 0.085,
+    "sillM": 0,
+    "heightM": 2.1,
+    "headM": 2.1,
+    "evidence": {
+     "head": "SOURCE_DERIVED",
+     "height": "ASSUMED",
+     "kind": "SOURCE_DERIVED",
+     "offset": "SOURCE_DERIVED",
+     "sill": "ASSUMED",
+     "width": "SOURCE_DERIVED"
+    },
+    "status": "ASSUMED"
+   }
+  ]
+ },
+ "perOpeningVerdict": [
+  {
+   "source": "250/220",
+   "before": "WINDOW glass 0.90..2.20 ASSUMED",
+   "candidate": "unchanged",
+   "vsSource": "position ok; sill assumed 0.9 against 0 - unchanged"
+  },
+  {
+   "source": "100/220",
+   "before": "DOOR timber 0..2.10 (kind VISUAL_INFERRED)",
+   "candidate": "WINDOW glass 0.90..2.20 (kind ASSUMED_FOR_RENDERING, heights ASSUMED)",
+   "vsSource": "kind/material improved (glass); vertical proportion WORSE: 1.30 m tall against 2.20 (was 2.10)"
+  },
+  {
+   "source": "105/210",
+   "before": "DOOR timber 0..2.10 (SOURCE_DERIVED)",
+   "candidate": "unchanged",
+   "vsSource": "correct entrance symbol kept"
+  },
+  {
+   "source": "90/210",
+   "before": "DOOR timber 0..2.10 (SOURCE_DERIVED)",
+   "candidate": "GLAZED_DOOR full glass 0..2.10",
+   "vsSource": "material improved, 0.89 x 2.10 matches 90/210; the swing that makes it a glazed door is the entrance door's arc (pre-existing doorSwingDrawn false positive), the source shows a fixed side panel"
+  }
+ ],
+ "otherA01": [
+  {
+   "id": "opening-1-west-7-0",
+   "source": "110/220 attic gable, glazing lines + swing (balcony door)",
+   "before": "DOOR timber 0..2.20 (heights read on the left elevation)",
+   "candidate": "WINDOW glass 0..2.20",
+   "vsSource": "material and proportion match; kind would be GLAZED_DOOR (the read-heights branch does not take the swing)"
+  }
+ ],
+ "controls": {
+  "gozd": [
+   {
+    "id": "opening-0-west-3-1",
+    "source": "110/140 window, glazing lines, no swing",
+    "before": "DOOR timber 0..2.10",
+    "candidate": "WINDOW glass 0.90..2.20 (source ~0.80..2.20)",
+    "vsSource": "improved"
+   },
+   {
+    "id": "opening-1-east-5-0",
+    "source": "110/220 + swing",
+    "before": "DOOR timber 0..2.10",
+    "candidate": "GLAZED_DOOR glass 0..2.10",
+    "vsSource": "improved"
+   },
+   {
+    "id": "opening-1-east-5-2",
+    "source": "110/220 + swing",
+    "before": "DOOR timber",
+    "candidate": "GLAZED_DOOR glass",
+    "vsSource": "improved"
+   },
+   {
+    "invariants": "garage room 8 (26.09 m2), fire wall, opening-0-front-0-2 DOOR 3.22 m unchanged"
+   }
+  ],
+  "marcowki": [
+   {
+    "id": "opening-0-west-3-0",
+    "source": "90/230, glazing lines, no swing",
+    "before": "DOOR timber 0..2.30 (read)",
+    "candidate": "WINDOW glass 0..2.30",
+    "vsSource": "improved"
+   }
+  ],
+  "dom-w-cieszyniankach": [
+   {
+    "id": "opening-0-east-1-1 / 1-2",
+    "source": "90/150 windows (kitchen, bathroom)",
+    "before": "DOOR timber 0..2.10 (swing false positive from furniture, pre-existing)",
+    "candidate": "GLAZED_DOOR glass 0..2.10",
+    "vsSource": "material closer, kind and height still wrong (pre-existing swing misread)"
+   }
+  ],
+  "rarytasy-g2e": "identical"
+ },
+ "replays": {
+  "base": {
+   "A01 Jarzmianki m60124f28f071a": "d93291577e2d795f19a2ebfab698e1e655ecf007f342e5ba7166c4c886a61be2",
+   "Gozdzikowce 3 m79923e950094d": "911456a88b2530c9cf01b348dc7045a7b7bcc6d85e62e58221e5f205d41efbbc",
+   "Marcowki m2fa281446a8ca": "f607464936c7a13368d7f9307fb004e5bbad8b0da4490981851a33616c573321",
+   "Rarytasy 5 G2E m84f2903cb8e14": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+   "Dom w cieszyniankach m43d25c0636969": "e4e562923319084fda0b9ae934bcb1185a7098c53e7727c82f9afdcb592c1f6c"
+  },
+  "candidate": {
+   "A01 Jarzmianki m60124f28f071a": "1a427304b56dd184edeba3b41c83d38b2cdd3d5ff73f80de223c566bf4385b9a",
+   "Gozdzikowce 3 m79923e950094d": "2a477a3e7e91b4ba1d3ba82a6675bf63309f316a97540df2b676c26814943dc6",
+   "Marcowki m2fa281446a8ca": "cf7977438b0053903f0398548d0bfb0b569760864d1aa8c258992fc7459faee0",
+   "Rarytasy 5 G2E m84f2903cb8e14": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+   "Dom w cieszyniankach m43d25c0636969": "79e674892ff90c5bbe7bd8f0d7fab86b9e77b721fe746d30f05076000bb6ee95"
+  },
+  "notRun": "Rarytasy OWNER m3ea… (no sealed input; m84f… not substituted)"
+ },
+ "scenes": [
+  {
+   "key": "a01-before",
+   "modelSha256": "d93291577e2d795f19a2ebfab698e1e655ecf007f342e5ba7166c4c886a61be2",
+   "sceneSha256": "ba514cf5eb2124fc082d07a994ed37ab3bf81af883f2db4feddaa08bfbcb312d",
+   "meshes": 126,
+   "errors": 0,
+   "openingAboveWallTop": 0,
+   "roundTrip": true
+  },
+  {
+   "key": "a01-after",
+   "modelSha256": "1a427304b56dd184edeba3b41c83d38b2cdd3d5ff73f80de223c566bf4385b9a",
+   "sceneSha256": "6be3b3f5ec758bf5f065445efcc397aee00ee0f40071bede56a47e5a60c98a17",
+   "meshes": 125,
+   "errors": 0,
+   "openingAboveWallTop": 0,
+   "roundTrip": true
+  }
+ ],
+ "tests": {
+  "candidate": {
+   "glazing-symbol.test.ts": "6/6 (3 red on the base: light glazing, glazed door, mixed-min)",
+   "wall-strip": "65/65",
+   "interior-unwalled-side": "5/5",
+   "garage-label-mouth": "13/13",
+   "roof-apex-eaves": "10/10",
+   "packages/reconstruction + research-isolation": "864/865 (the 1 red: APK-size gate)",
+   "tsc": "clean"
+  },
+  "committedTree": "unchanged from the base (no production code, no test added)"
+ },
+ "renders": {
+  "renderer": "BuildWorld web (apps/web, Three.js), vite build + vite preview, headless Chromium (SwiftShader)",
+  "script": "research/analyzer-005v-facade/capture-preview.mjs",
+  "views": [
+   "1-przod (front ortho)",
+   "6-perspektywa (3/4)",
+   "3-lewa (left side)"
+  ],
+  "delivered": "outside the repository (ZIP in the session files); no publisher pixels"
+ }
+}
