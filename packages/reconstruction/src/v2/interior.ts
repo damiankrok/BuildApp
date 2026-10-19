@@ -95,8 +95,18 @@ export type InteriorReading = {
 export type InteriorOptions = {
   /** Thinnest partition, as a fraction of the external wall thickness. */
   minPartitionFraction?: number
-  /** Thickest, as a fraction of the external wall thickness. */
+  /**
+   * Thickest, as a fraction of the external wall thickness. 005U-N3: an interior wall may be as thick as the outer
+   * wall — a bearing wall, or the fire wall between an integral garage and the house — and is still a wall that
+   * divides rooms, not a solid block; thicker than the outer wall it is not read as a partition.
+   */
   maxPartitionFraction?: number
+  /**
+   * 005U-N3: the thin-partition bound, as a fraction of the external wall thickness: the thickest partition read
+   * against the outer wall, and the thickness ink must exceed in both directions to be a solid block (a chimney, a
+   * column).
+   */
+  thinPartitionFraction?: number
   /** Shortest piece worth believing, in metres. */
   minPieceM?: number
   /** Door gap range, in metres. */
@@ -110,7 +120,7 @@ export type InteriorOptions = {
   onDebug?: (info: { axis: 'X' | 'Z'; centrePx: number; thick: number; runsPx: Array<{ from: number; to: number }> }) => void
 }
 
-const DEFAULTS: Required<Omit<InteriorOptions, 'onDebug' | 'extraBarriers'>> = { minPartitionFraction: 0.2, maxPartitionFraction: 0.72, minPieceM: 0.55, doorMinM: 0.6, doorMaxM: 1.35, cellM: 0.05 }
+const DEFAULTS: Required<Omit<InteriorOptions, 'onDebug' | 'extraBarriers'>> = { minPartitionFraction: 0.2, maxPartitionFraction: 1.0, thinPartitionFraction: 0.72, minPieceM: 0.55, doorMinM: 0.6, doorMaxM: 1.35, cellM: 0.05 }
 
 /** Neutral dark ink: a wall, not a coloured annotation. */
 const wallInk = (r: Raster, x: number, y: number): boolean => {
@@ -147,6 +157,9 @@ export function readInterior(
   const wallPx = wallThicknessM / mpp
   const minThick = Math.max(2, Math.round(wallPx * opt.minPartitionFraction))
   const maxThick = Math.max(minThick + 1, Math.round(wallPx * opt.maxPartitionFraction))
+  // 005U-N3: the solid-block rule keeps the thin bound: where two wall-thick partitions cross, the crossing must not
+  // separate from the walls into a compact "block" and be read as a chimney.
+  const thinThick = Math.max(minThick + 1, Math.round(wallPx * opt.thinPartitionFraction))
   const minPiecePx = opt.minPieceM / mpp
 
   // The interior in pixels: the body inset by its external wall.
@@ -193,15 +206,22 @@ export function readInterior(
     }
   }
 
+  // 005U-N3: a wall as thick as the outer wall is a partition only standing clear of the outer wall. Within one
+  // outer-wall thickness of the interior's edge, ink that thick is the outer wall's own — drawn thicker than it was
+  // read, which the inset by the read thickness left inside — so there the thin-partition bound stays.
+  const capAcross = (vertical: boolean, across: number): number => {
+    const extent = vertical ? W : H
+    return across < wallPx || across > extent - 1 - wallPx ? Math.min(maxThick, thinThick) : maxThick
+  }
   // A pixel is "partition ink" for a vertical wall when its horizontal run is
   // partition-thick and its vertical run is long; and symmetrically.
   const isVerticalWallPixel = (x: number, y: number): boolean => {
     const h = hRun[y * W + x]
-    return h >= minThick && h <= maxThick && vRun[y * W + x] >= minPiecePx * 0.6
+    return h >= minThick && h <= capAcross(true, x) && vRun[y * W + x] >= minPiecePx * 0.6
   }
   const isHorizontalWallPixel = (x: number, y: number): boolean => {
     const v = vRun[y * W + x]
-    return v >= minThick && v <= maxThick && hRun[y * W + x] >= minPiecePx * 0.6
+    return v >= minThick && v <= capAcross(false, y) && hRun[y * W + x] >= minPiecePx * 0.6
   }
 
   type Axis = { centre: number; thick: number; runs: Array<{ from: number; to: number }> }
@@ -223,7 +243,7 @@ export function readInterior(
         let j = i
         while (j + 1 < n && profile[j + 1] >= minPiecePx * 0.6) j += 1
         const thick = j - i + 1
-        if (thick >= minThick - 1 && thick <= maxThick * 2 + 2) {
+        if (thick >= minThick - 1 && thick <= capAcross(vertical, (i + j) / 2) * 2 + 2) {
           // Along the axis: solid where at least a partition's thickness of the
           // band's columns is ink. The band may be wider than one wall (two
           // walls a few pixels apart, or a wall beside a line of furniture),
@@ -273,8 +293,9 @@ export function readInterior(
               }
             }
             const pieceThick = medianOf(pieceCounts)
-            if (pieceThick < minThick - 1 || pieceThick > maxThick) continue
-            axes.push({ centre: medianOf(centres), thick: pieceThick, runs: [run] })
+            const centre = medianOf(centres)
+            if (pieceThick < minThick - 1 || pieceThick > capAcross(vertical, centre)) continue
+            axes.push({ centre, thick: pieceThick, runs: [run] })
           }
         }
         i = j + 1
@@ -338,11 +359,11 @@ export function readInterior(
     w.confidence = round6(w.ends.start === 'JUNCTION' && w.ends.end === 'JUNCTION' ? 0.8 : w.ends.start === 'JUNCTION' || w.ends.end === 'JUNCTION' ? 0.65 : 0.35)
   }
 
-  // Solid blocks: neutral ink thicker than a partition in both directions (a chimney, a column).
+  // Solid blocks: neutral ink thicker than a thin partition in both directions (a chimney, a column).
   const blocks: SolidBlock[] = []
   {
     const seen = new Uint8Array(W * H)
-    const thickEnough = (x: number, y: number): boolean => at(x, y) === 1 && hRun[y * W + x] > maxThick && vRun[y * W + x] > maxThick
+    const thickEnough = (x: number, y: number): boolean => at(x, y) === 1 && hRun[y * W + x] > thinThick && vRun[y * W + x] > thinThick
     for (let y = 0; y < H; y += 1) {
       for (let x = 0; x < W; x += 1) {
         if (seen[y * W + x] || !thickEnough(x, y)) continue

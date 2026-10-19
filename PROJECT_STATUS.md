@@ -2161,3 +2161,25 @@ Branch `analyzer/005u-n2-plan-mass-first-bad-v1` from `074c956`. Verdict `SAFE_M
 - **Measured:** A01 is one body under one gable (model `5ea8bbca…`), exterior openings 20 → 12 (the dropped ones stood on
   interior lines). Rarytasy G2E, Marcówki, Cieszynianki and Goździkowce are byte-identical.
 - OWNER_VISUAL_NOT_RETESTED; CI/APK NOT_RUN; `research-isolation` APK-size gate still red from `074d6ae` (known baseline).
+
+## Goździkowce's integral garage (STAGE BUILDPLAN-ANALYZER-005U-N3-INTEGRAL-GARAGE-FIRST-BAD)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005U_N3_INTEGRAL_GARAGE_FIRST_BAD.md`; trace:
+`research/analyzer-005u-n3-garage/`. Branch `analyzer/005u-n3-integral-garage-first-bad-v1` from `b19960d`. Verdict
+`PARTIAL_ROOM_BOUNDARY_FIX_NO_GARAGE_DOOR`.
+
+- **First bad:** `readInterior` capped a partition at 0.72 × the outer wall (9 px). The garage's fire wall is as thick as
+  the outer wall (12 px), so it was never read and the ground floor flooded into one 106.75 m² room.
+- **Fix:** a partition may be as thick as the outer wall. It is not treated so within one outer-wall thickness of the
+  interior edge (the outer wall's own ink), and solid blocks (chimneys) keep the 0.72 bound.
+- **Goździkowce (`5a828478…`):** the garage is its own room, 26.09 m² at x 9.0–13.5 × z 0.3–6.55. Its exterior,
+  roof and chimney are byte-identical.
+  - It is not labelled: the "8" token was discarded by the page vote.
+  - There is still no garage door: the printed `325/225` reads as `176/140`, so the mouth stays an ASSUMED placeholder.
+- **Controls:**
+  - Rarytasy G2E: identical.
+  - Marcówki: one attic T-junction re-trimmed.
+  - Cieszynianki: +1 real thick wall and door.
+  - A01: +11 real 0.12 m partitions on the ground floor. The outer wall reads 0.152 m, so the old cap was 5 px.
+  - Every change was checked against the cached sheet.
+- OWNER_VISUAL_NOT_RETESTED; CI/APK NOT_RUN; the `research-isolation` APK-size gate is still red from `074d6ae`.

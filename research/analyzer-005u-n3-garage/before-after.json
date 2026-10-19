@@ -1,0 +1,660 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005U-N3-INTEGRAL-GARAGE-FIRST-BAD",
+ "baseline": "b19960d86bdd2aec19a222137133f0b421a858f8",
+ "method": "offline sealed solver replay (research/analyzer-005t-n2/replay-solver.ts): N1v graph + metric evidence, cached bytes, no OCR, no network",
+ "cases": {
+  "gozd": {
+   "modelId": "m79923e950094d",
+   "role": "TARGET",
+   "before": {
+    "modelSha256": "faf56de0a9e5f1413c34d04bd28716d5b4e31f740399807744bdd10ab449b80a",
+    "walls": 43,
+    "exteriorWalls": 8,
+    "interiorWalls": 35,
+    "openings": 28,
+    "exteriorOpenings": 17,
+    "doors": 17,
+    "windows": 11,
+    "roofs": [
+     [
+      "roof-main",
+      "GABLE"
+     ]
+    ],
+    "chimneys": [
+     "chimney-0"
+    ],
+    "rooms": [
+     {
+      "id": "main-room-0-0",
+      "level": "lvl-0",
+      "areaM2": 106.75
+     },
+     {
+      "id": "main-room-1-4",
+      "level": "lvl-1",
+      "areaM2": 7.18
+     },
+     {
+      "id": "main-room-1-1",
+      "level": "lvl-1",
+      "areaM2": 7.27
+     },
+     {
+      "id": "main-room-1-2",
+      "level": "lvl-1",
+      "areaM2": 10.93
+     },
+     {
+      "id": "main-room-1-3",
+      "level": "lvl-1",
+      "areaM2": 15.82
+     },
+     {
+      "id": "main-room-1-0",
+      "level": "lvl-1",
+      "areaM2": 57.22
+     }
+    ]
+   },
+   "after": {
+    "modelSha256": "5a828478a6e895cfc84f5d80b36596a15856bd692f7acd5aa8130e97aa56fe0a",
+    "walls": 44,
+    "exteriorWalls": 8,
+    "interiorWalls": 36,
+    "openings": 29,
+    "exteriorOpenings": 17,
+    "doors": 18,
+    "windows": 11,
+    "roofs": [
+     [
+      "roof-main",
+      "GABLE"
+     ]
+    ],
+    "chimneys": [
+     "chimney-0"
+    ],
+    "rooms": [
+     {
+      "id": "main-room-0-3",
+      "level": "lvl-0",
+      "areaM2": 9.77
+     },
+     {
+      "id": "main-room-0-2",
+      "level": "lvl-0",
+      "areaM2": 10.56
+     },
+     {
+      "id": "main-room-0-1",
+      "level": "lvl-0",
+      "areaM2": 26.09
+     },
+     {
+      "id": "main-room-0-0",
+      "level": "lvl-0",
+      "areaM2": 57.91
+     },
+     {
+      "id": "main-room-1-4",
+      "level": "lvl-1",
+      "areaM2": 7.18
+     },
+     {
+      "id": "main-room-1-1",
+      "level": "lvl-1",
+      "areaM2": 7.27
+     },
+     {
+      "id": "main-room-1-2",
+      "level": "lvl-1",
+      "areaM2": 10.93
+     },
+     {
+      "id": "main-room-1-3",
+      "level": "lvl-1",
+      "areaM2": 15.82
+     },
+     {
+      "id": "main-room-1-0",
+      "level": "lvl-1",
+      "areaM2": 57.22
+     }
+    ]
+   },
+   "garage": {
+    "room": "main-room-0-1",
+    "boundsM": {
+     "x0": 9.0,
+     "x1": 13.5,
+     "z0": 0.3,
+     "z1": 6.55
+    },
+    "areaM2": 26.09,
+    "label": null,
+    "labelWhy": "no room number read: the token \"8\" at the garage label (box x 534-544, y 484-500, confidence 0.55) was DISCARDED by the page vote, which kept \"/13\"; the area agreeing with the published 25.38 m2 is a check, not an identification",
+    "mouthOpening": {
+     "id": "opening-0-front-0-2",
+     "kind": "WINDOW",
+     "widthM": 3.218688,
+     "offsetM": 9.326592,
+     "wallId": "ring-main-0-w0",
+     "provenance": "kind/sill/height ASSUMED; width SOURCE_DERIVED (plan gap)",
+     "unchanged": true
+    },
+    "printedCallout": {
+     "evidenceId": "metric-callout-ring-fcc74e2d4b",
+     "read": "176/140",
+     "confidence": 0.14318,
+     "widthCandidates": [
+      176,
+      170,
+      476,
+      126,
+      186,
+      175
+     ],
+     "note": "printed 325/225 (seen on the cached sheet, not committed); no candidate within 12 % of the 3.22 m gap, so no callout is bound"
+    },
+    "garageDoor": "NOT_RECOVERED"
+   }
+  },
+  "a01": {
+   "modelId": "m60124f28f071a",
+   "role": "CONTROL",
+   "before": {
+    "modelSha256": "5ea8bbca53f566ecd573413f7b0ac61231a70a4e8d9f809837693c84ec0082e9",
+    "walls": 25,
+    "exteriorWalls": 8,
+    "interiorWalls": 17,
+    "openings": 16,
+    "exteriorOpenings": 12,
+    "doors": 5,
+    "windows": 11,
+    "roofs": [
+     [
+      "roof-main",
+      "GABLE"
+     ]
+    ],
+    "chimneys": [],
+    "rooms": [
+     {
+      "id": "main-room-0-0",
+      "level": "lvl-0",
+      "areaM2": 78.35
+     },
+     {
+      "id": "main-room-1-1",
+      "level": "lvl-1",
+      "areaM2": 11.17
+     },
+     {
+      "id": "main-room-1-0",
+      "level": "lvl-1",
+      "areaM2": 59.78
+     }
+    ]
+   },
+   "after": {
+    "modelSha256": "2b61ec4ab8a2533a43a9a258eebb6313ac71383ada0d2b83b2cb1c2828550445",
+    "walls": 36,
+    "exteriorWalls": 8,
+    "interiorWalls": 28,
+    "openings": 21,
+    "exteriorOpenings": 12,
+    "doors": 10,
+    "windows": 11,
+    "roofs": [
+     [
+      "roof-main",
+      "GABLE"
+     ]
+    ],
+    "chimneys": [],
+    "rooms": [
+     {
+      "id": "main-room-0-3",
+      "level": "lvl-0",
+      "areaM2": 4.48
+     },
+     {
+      "id": "main-room-0-4",
+      "level": "lvl-0",
+      "areaM2": 5.02
+     },
+     {
+      "id": "main-room-0-2",
+      "level": "lvl-0",
+      "areaM2": 5.1
+     },
+     {
+      "id": "main-room-0-1",
+      "level": "lvl-0",
+      "areaM2": 5.48
+     },
+     {
+      "id": "main-room-0-5",
+      "level": "lvl-0",
+      "areaM2": 12.1
+     },
+     {
+      "id": "main-room-0-0",
+      "level": "lvl-0",
+      "areaM2": 40.76
+     },
+     {
+      "id": "main-room-1-1",
+      "level": "lvl-1",
+      "areaM2": 11.17
+     },
+     {
+      "id": "main-room-1-0",
+      "level": "lvl-1",
+      "areaM2": 59.78
+     }
+    ]
+   }
+  },
+  "marcowki": {
+   "modelId": null,
+   "role": "CONTROL",
+   "before": {
+    "modelSha256": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+    "walls": 40,
+    "exteriorWalls": 20,
+    "interiorWalls": 20,
+    "openings": 21,
+    "exteriorOpenings": 12,
+    "doors": 12,
+    "windows": 9,
+    "roofs": [
+     [
+      "roof-attached-0",
+      "FLAT"
+     ],
+     [
+      "roof-main",
+      "GABLE"
+     ]
+    ],
+    "chimneys": [
+     "chimney-0",
+     "chimney-1"
+    ],
+    "rooms": [
+     {
+      "id": "main-room-0-5",
+      "level": "lvl-0",
+      "areaM2": 1.7
+     },
+     {
+      "id": "main-room-0-1",
+      "level": "lvl-0",
+      "areaM2": 3.43
+     },
+     {
+      "id": "main-room-0-4",
+      "level": "lvl-0",
+      "areaM2": 3.76
+     },
+     {
+      "id": "main-room-0-2",
+      "level": "lvl-0",
+      "areaM2": 5.56
+     },
+     {
+      "id": "main-room-0-0",
+      "level": "lvl-0",
+      "areaM2": 9.03
+     },
+     {
+      "id": "attached-0-room-0-0",
+      "level": "lvl-0",
+      "areaM2": 20.56
+     },
+     {
+      "id": "main-room-0-3",
+      "level": "lvl-0",
+      "areaM2": 47.59
+     },
+     {
+      "id": "main-room-1-3",
+      "level": "lvl-1",
+      "areaM2": 6.44
+     },
+     {
+      "id": "main-room-1-1",
+      "level": "lvl-1",
+      "areaM2": 7.45
+     },
+     {
+      "id": "main-room-1-4",
+      "level": "lvl-1",
+      "areaM2": 14.81
+     },
+     {
+      "id": "main-room-1-0",
+      "level": "lvl-1",
+      "areaM2": 18.28
+     },
+     {
+      "id": "main-room-1-2",
+      "level": "lvl-1",
+      "areaM2": 20.89
+     }
+    ]
+   },
+   "after": {
+    "modelSha256": "f607464936c7a13368d7f9307fb004e5bbad8b0da4490981851a33616c573321",
+    "walls": 40,
+    "exteriorWalls": 20,
+    "interiorWalls": 20,
+    "openings": 21,
+    "exteriorOpenings": 12,
+    "doors": 12,
+    "windows": 9,
+    "roofs": [
+     [
+      "roof-attached-0",
+      "FLAT"
+     ],
+     [
+      "roof-main",
+      "GABLE"
+     ]
+    ],
+    "chimneys": [
+     "chimney-0",
+     "chimney-1"
+    ],
+    "rooms": [
+     {
+      "id": "main-room-0-5",
+      "level": "lvl-0",
+      "areaM2": 1.7
+     },
+     {
+      "id": "main-room-0-1",
+      "level": "lvl-0",
+      "areaM2": 3.43
+     },
+     {
+      "id": "main-room-0-4",
+      "level": "lvl-0",
+      "areaM2": 3.76
+     },
+     {
+      "id": "main-room-0-2",
+      "level": "lvl-0",
+      "areaM2": 5.56
+     },
+     {
+      "id": "main-room-0-0",
+      "level": "lvl-0",
+      "areaM2": 9.03
+     },
+     {
+      "id": "attached-0-room-0-0",
+      "level": "lvl-0",
+      "areaM2": 20.56
+     },
+     {
+      "id": "main-room-0-3",
+      "level": "lvl-0",
+      "areaM2": 47.59
+     },
+     {
+      "id": "main-room-1-3",
+      "level": "lvl-1",
+      "areaM2": 6.44
+     },
+     {
+      "id": "main-room-1-1",
+      "level": "lvl-1",
+      "areaM2": 7.43
+     },
+     {
+      "id": "main-room-1-4",
+      "level": "lvl-1",
+      "areaM2": 14.81
+     },
+     {
+      "id": "main-room-1-0",
+      "level": "lvl-1",
+      "areaM2": 18.28
+     },
+     {
+      "id": "main-room-1-2",
+      "level": "lvl-1",
+      "areaM2": 20.89
+     }
+    ]
+   }
+  },
+  "dom-w-cieszyniankach": {
+   "modelId": null,
+   "role": "CONTROL",
+   "before": {
+    "modelSha256": "5ca09ead25d323867444cb7023e31e88c9a095fe134598b92d0e754d312eedfc",
+    "walls": 23,
+    "exteriorWalls": 4,
+    "interiorWalls": 19,
+    "openings": 19,
+    "exteriorOpenings": 15,
+    "doors": 8,
+    "windows": 11,
+    "roofs": [
+     [
+      "roof-main",
+      "GABLE"
+     ]
+    ],
+    "chimneys": [],
+    "rooms": [
+     {
+      "id": "main-room-0-1",
+      "level": "lvl-0",
+      "areaM2": 3.98
+     },
+     {
+      "id": "main-room-0-3",
+      "level": "lvl-0",
+      "areaM2": 13.47
+     },
+     {
+      "id": "main-room-0-2",
+      "level": "lvl-0",
+      "areaM2": 18.25
+     },
+     {
+      "id": "main-room-0-0",
+      "level": "lvl-0",
+      "areaM2": 114.08
+     }
+    ]
+   },
+   "after": {
+    "modelSha256": "e4e562923319084fda0b9ae934bcb1185a7098c53e7727c82f9afdcb592c1f6c",
+    "walls": 24,
+    "exteriorWalls": 4,
+    "interiorWalls": 20,
+    "openings": 20,
+    "exteriorOpenings": 15,
+    "doors": 9,
+    "windows": 11,
+    "roofs": [
+     [
+      "roof-main",
+      "GABLE"
+     ]
+    ],
+    "chimneys": [],
+    "rooms": [
+     {
+      "id": "main-room-0-1",
+      "level": "lvl-0",
+      "areaM2": 3.98
+     },
+     {
+      "id": "main-room-0-3",
+      "level": "lvl-0",
+      "areaM2": 12.76
+     },
+     {
+      "id": "main-room-0-4",
+      "level": "lvl-0",
+      "areaM2": 13.47
+     },
+     {
+      "id": "main-room-0-2",
+      "level": "lvl-0",
+      "areaM2": 18.25
+     },
+     {
+      "id": "main-room-0-0",
+      "level": "lvl-0",
+      "areaM2": 99.49
+     }
+    ]
+   }
+  },
+  "rarytasy-g2e": {
+   "modelId": "m84f2903cb8e14",
+   "role": "CONTROL",
+   "before": {
+    "modelSha256": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+    "walls": 20,
+    "exteriorWalls": 8,
+    "interiorWalls": 12,
+    "openings": 20,
+    "exteriorOpenings": 13,
+    "doors": 11,
+    "windows": 9,
+    "roofs": [
+     [
+      "roof-main",
+      "GABLE"
+     ]
+    ],
+    "chimneys": [
+     "chimney-0"
+    ],
+    "rooms": [
+     {
+      "id": "main-room-0-4",
+      "level": "lvl-0",
+      "areaM2": 2.68
+     },
+     {
+      "id": "main-room-0-1",
+      "level": "lvl-0",
+      "areaM2": 3.87
+     },
+     {
+      "id": "main-room-0-3",
+      "level": "lvl-0",
+      "areaM2": 4.57
+     },
+     {
+      "id": "main-room-0-2",
+      "level": "lvl-0",
+      "areaM2": 5.11
+     },
+     {
+      "id": "main-room-0-6",
+      "level": "lvl-0",
+      "areaM2": 11.4
+     },
+     {
+      "id": "main-room-0-7",
+      "level": "lvl-0",
+      "areaM2": 11.4
+     },
+     {
+      "id": "main-room-0-5",
+      "level": "lvl-0",
+      "areaM2": 16.15
+     },
+     {
+      "id": "attached-0-room-0-0",
+      "level": "lvl-0",
+      "areaM2": 28.09
+     },
+     {
+      "id": "main-room-0-0",
+      "level": "lvl-0",
+      "areaM2": 59.6
+     }
+    ]
+   },
+   "after": {
+    "modelSha256": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+    "walls": 20,
+    "exteriorWalls": 8,
+    "interiorWalls": 12,
+    "openings": 20,
+    "exteriorOpenings": 13,
+    "doors": 11,
+    "windows": 9,
+    "roofs": [
+     [
+      "roof-main",
+      "GABLE"
+     ]
+    ],
+    "chimneys": [
+     "chimney-0"
+    ],
+    "rooms": [
+     {
+      "id": "main-room-0-4",
+      "level": "lvl-0",
+      "areaM2": 2.68
+     },
+     {
+      "id": "main-room-0-1",
+      "level": "lvl-0",
+      "areaM2": 3.87
+     },
+     {
+      "id": "main-room-0-3",
+      "level": "lvl-0",
+      "areaM2": 4.57
+     },
+     {
+      "id": "main-room-0-2",
+      "level": "lvl-0",
+      "areaM2": 5.11
+     },
+     {
+      "id": "main-room-0-6",
+      "level": "lvl-0",
+      "areaM2": 11.4
+     },
+     {
+      "id": "main-room-0-7",
+      "level": "lvl-0",
+      "areaM2": 11.4
+     },
+     {
+      "id": "main-room-0-5",
+      "level": "lvl-0",
+      "areaM2": 16.15
+     },
+     {
+      "id": "attached-0-room-0-0",
+      "level": "lvl-0",
+      "areaM2": 28.09
+     },
+     {
+      "id": "main-room-0-0",
+      "level": "lvl-0",
+      "areaM2": 59.6
+     }
+    ]
+   }
+  }
+ }
+}
