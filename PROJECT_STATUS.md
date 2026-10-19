@@ -2183,3 +2183,29 @@ Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005U_N3_INTEGRAL_GARAGE_FIRST_BA
   - A01: +11 real 0.12 m partitions on the ground floor. The outer wall reads 0.152 m, so the old cap was 5 px.
   - Every change was checked against the cached sheet.
 - OWNER_VISUAL_NOT_RETESTED; CI/APK NOT_RUN; the `research-isolation` APK-size gate is still red from `074d6ae`.
+
+## Goździkowce's garage door (STAGE BUILDPLAN-ANALYZER-005U-N4-GARAGE-LABEL-CALLOUT-FIRST-BAD)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005U_N4_GARAGE_LABEL_CALLOUT_FIRST_BAD.md`; trace:
+`research/analyzer-005u-n4-garage-ocr/`. Branch `analyzer/005u-n4-garage-label-callout-first-bad-v1` from `d5d14be`. Verdict
+`SAFE_INTEGRAL_GARAGE_DOOR_RECOVERED`. The garage's identity and the door's kind are source-derived; the door's
+dimensions are not.
+
+- **First bad (label):** the page orientation vote (`dedupeOrientations`, merit × glyph count) kept a 3-glyph rotated
+  garble `/13` over the upright `8` on the same ink, and `reconstruct-v2` dropped discarded readings before numbering
+  rooms.
+- **Label fix:** a set-aside reading may number a room only when all of these hold:
+  - it is upright;
+  - it is the one reading of its ink naming a published room;
+  - the same number is printed nowhere else on the storey;
+  - the number is still free;
+  - the room is within 40 % of the published area.
+- **First bad (door):** `GARAGE_DOOR` needed an ATTACHED single-storey body.
+- **Door fix:** the one plan `OPEN_SIDE` along a published-garage room's outer face is a vehicle door in any body. Two
+  such sides are AMBIGUOUS.
+- **Goździkowce (`b022b7c7…`):** `main-room-0-1` is now 8 = Garaż. `opening-0-front-0-2` is a GARAGE_DOOR, 3.22 m from
+  the plan gap, kind SOURCE_DERIVED, sill and head ASSUMED (0 / 2.2 m).
+- **Callout 325/225:** UNRESOLVED. The template reader saw 3–5 px digits and read 176/140; PP-OCRv6 has no route to ring
+  callouts.
+- **Controls:** Rarytasy G2E, Marcówki and Cieszynianki are identical. A01 only numbers room 1 = Wiatrołap.
+- OWNER_VISUAL_NOT_RETESTED; CI/APK NOT_RUN; the `research-isolation` APK-size gate is still red from `074d6ae`.

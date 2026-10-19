@@ -1,0 +1,380 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005U-N4-GARAGE-LABEL-CALLOUT-FIRST-BAD",
+ "baseline": "d5d14be1708cfc7cc21587a56619a4a65f286b6c",
+ "cases": {
+  "gozd": {
+   "modelId": "m79923e950094d",
+   "role": "TARGET",
+   "before": {
+    "modelSha256": "5a828478a6e895cfc84f5d80b36596a15856bd692f7acd5aa8130e97aa56fe0a",
+    "openings": 29,
+    "doors": 18,
+    "windows": 11,
+    "walls": 44,
+    "roofs": [
+     "roof-main"
+    ],
+    "chimneys": [
+     "chimney-0"
+    ],
+    "numberedRooms": [
+     [
+      "main-room-0-0",
+      "3 = Spiżarnia 2.2 m² published (2498 % o"
+     ],
+     [
+      "main-room-0-2",
+      "1 = Wiatrołap 6.86 m² published (54 % of"
+     ],
+     [
+      "main-room-0-3",
+      "7 = Kotłownia 10.21 m² published (-4 % o"
+     ],
+     [
+      "main-room-1-0",
+      "1 = Schody 3.82 m² published (1398 % off"
+     ],
+     [
+      "main-room-1-1",
+      "1 = Schody 3.82 m² published (90 % off)"
+     ],
+     [
+      "main-room-1-3",
+      "7 = Pokój 12.98 m² published (22 % off)"
+     ],
+     [
+      "main-room-1-4",
+      "8 = Garderoba 5.59 m² published (28 % of"
+     ]
+    ]
+   },
+   "after": {
+    "modelSha256": "b022b7c703e8223017585969458998e97180bb6e3fbf5f752e6ae822775687ec",
+    "openings": 29,
+    "doors": 19,
+    "windows": 10,
+    "walls": 44,
+    "roofs": [
+     "roof-main"
+    ],
+    "chimneys": [
+     "chimney-0"
+    ],
+    "numberedRooms": [
+     [
+      "main-room-0-0",
+      "3 = Spiżarnia 2.2 m² published (2498 % o"
+     ],
+     [
+      "main-room-0-1",
+      "8 from an upright reading the orientatio"
+     ],
+     [
+      "main-room-0-2",
+      "1 = Wiatrołap 6.86 m² published (54 % of"
+     ],
+     [
+      "main-room-0-3",
+      "7 = Kotłownia 10.21 m² published (-4 % o"
+     ],
+     [
+      "main-room-1-0",
+      "1 = Schody 3.82 m² published (1398 % off"
+     ],
+     [
+      "main-room-1-1",
+      "1 = Schody 3.82 m² published (90 % off)"
+     ],
+     [
+      "main-room-1-3",
+      "7 = Pokój 12.98 m² published (22 % off)"
+     ],
+     [
+      "main-room-1-4",
+      "8 = Garderoba 5.59 m² published (28 % of"
+     ]
+    ]
+   }
+  },
+  "a01": {
+   "modelId": "m60124f28f071a",
+   "role": "CONTROL",
+   "before": {
+    "modelSha256": "2b61ec4ab8a2533a43a9a258eebb6313ac71383ada0d2b83b2cb1c2828550445",
+    "openings": 21,
+    "doors": 10,
+    "windows": 11,
+    "walls": 36,
+    "roofs": [
+     "roof-main"
+    ],
+    "chimneys": [],
+    "numberedRooms": [
+     [
+      "main-room-0-0",
+      "2 = Korytarz 2.27 m² published (1696 % o"
+     ],
+     [
+      "main-room-0-5",
+      "6 = Pokój 10.95 m² published (10 % off)"
+     ],
+     [
+      "main-room-1-0",
+      "1 = Schody 6.23 m² published (834 % off)"
+     ],
+     [
+      "main-room-1-1",
+      "8 = Pokój 10.6 m² published (5 % off)"
+     ]
+    ]
+   },
+   "after": {
+    "modelSha256": "eb7935899e484121e3949a1ac6d1f756ccc93ad0cce432f947222bfb37b902fd",
+    "openings": 21,
+    "doors": 10,
+    "windows": 11,
+    "walls": 36,
+    "roofs": [
+     "roof-main"
+    ],
+    "chimneys": [],
+    "numberedRooms": [
+     [
+      "main-room-0-0",
+      "2 = Korytarz 2.27 m² published (1696 % o"
+     ],
+     [
+      "main-room-0-1",
+      "1 from an upright reading the orientatio"
+     ],
+     [
+      "main-room-0-5",
+      "6 = Pokój 10.95 m² published (10 % off)"
+     ],
+     [
+      "main-room-1-0",
+      "1 = Schody 6.23 m² published (834 % off)"
+     ],
+     [
+      "main-room-1-1",
+      "8 = Pokój 10.6 m² published (5 % off)"
+     ]
+    ]
+   },
+   "changeWhy": "main-room-0-1 numbered 1 = Wiatrołap 4.49 m² (room 5.48 m², 22 % off) from the upright set-aside \"1\" at px 581-587 × 468-487, where the plan prints room 1; the other \"1\" readings on the storey are dimension-sized (below 1.15 × the median height). Only the room record changes; walls, openings, roof unchanged."
+  },
+  "marcowki": {
+   "modelId": null,
+   "role": "CONTROL",
+   "before": {
+    "modelSha256": "f607464936c7a13368d7f9307fb004e5bbad8b0da4490981851a33616c573321",
+    "openings": 21,
+    "doors": 12,
+    "windows": 9,
+    "walls": 40,
+    "roofs": [
+     "roof-attached-0",
+     "roof-main"
+    ],
+    "chimneys": [
+     "chimney-0",
+     "chimney-1"
+    ],
+    "numberedRooms": [
+     [
+      "main-room-0-2",
+      "9 = Garaż 24.1 m² published (-77 % off)"
+     ],
+     [
+      "main-room-0-3",
+      "3 = Kuchnia 9.63 m² published (394 % off"
+     ],
+     [
+      "main-room-1-3",
+      "5 = Pralnia 5.59 m² published (15 % off)"
+     ]
+    ]
+   },
+   "after": {
+    "modelSha256": "f607464936c7a13368d7f9307fb004e5bbad8b0da4490981851a33616c573321",
+    "openings": 21,
+    "doors": 12,
+    "windows": 9,
+    "walls": 40,
+    "roofs": [
+     "roof-attached-0",
+     "roof-main"
+    ],
+    "chimneys": [
+     "chimney-0",
+     "chimney-1"
+    ],
+    "numberedRooms": [
+     [
+      "main-room-0-2",
+      "9 = Garaż 24.1 m² published (-77 % off)"
+     ],
+     [
+      "main-room-0-3",
+      "3 = Kuchnia 9.63 m² published (394 % off"
+     ],
+     [
+      "main-room-1-3",
+      "5 = Pralnia 5.59 m² published (15 % off)"
+     ]
+    ]
+   },
+   "rejected": [
+    "ground: set-aside upright \"4\" at px 372-381 × 562-578 is the printed \"9\" of the garage misread; another label in the footprint (px 143-153 × 562-578) also reads \"4\" → not taken",
+    "attic: set-aside upright \"4\" at px 117-126 × 498-514 is the printed room 4 (Łazienka) — a CORRECT reading the rule declines conservatively, because another label in the footprint (px 117-126 × 289-305, inverted) also reads \"4\""
+   ]
+  },
+  "dom-w-cieszyniankach": {
+   "modelId": null,
+   "role": "CONTROL",
+   "before": {
+    "modelSha256": "e4e562923319084fda0b9ae934bcb1185a7098c53e7727c82f9afdcb592c1f6c",
+    "openings": 20,
+    "doors": 9,
+    "windows": 11,
+    "walls": 24,
+    "roofs": [
+     "roof-main"
+    ],
+    "chimneys": [],
+    "numberedRooms": [
+     [
+      "main-room-0-0",
+      "1 = Wiatrołap 4.17 m² published (2286 % "
+     ],
+     [
+      "main-room-0-2",
+      "1 = Wiatrołap 4.17 m² published (338 % o"
+     ],
+     [
+      "main-room-0-4",
+      "5 = Kuchnia 11.47 m² published (17 % off"
+     ]
+    ]
+   },
+   "after": {
+    "modelSha256": "e4e562923319084fda0b9ae934bcb1185a7098c53e7727c82f9afdcb592c1f6c",
+    "openings": 20,
+    "doors": 9,
+    "windows": 11,
+    "walls": 24,
+    "roofs": [
+     "roof-main"
+    ],
+    "chimneys": [],
+    "numberedRooms": [
+     [
+      "main-room-0-0",
+      "1 = Wiatrołap 4.17 m² published (2286 % "
+     ],
+     [
+      "main-room-0-2",
+      "1 = Wiatrołap 4.17 m² published (338 % o"
+     ],
+     [
+      "main-room-0-4",
+      "5 = Kuchnia 11.47 m² published (17 % off"
+     ]
+    ]
+   }
+  },
+  "rarytasy-g2e": {
+   "modelId": "m84f2903cb8e14",
+   "role": "CONTROL",
+   "before": {
+    "modelSha256": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+    "openings": 20,
+    "doors": 11,
+    "windows": 9,
+    "walls": 20,
+    "roofs": [
+     "roof-main"
+    ],
+    "chimneys": [
+     "chimney-0"
+    ],
+    "numberedRooms": [
+     [
+      "attached-0-room-0-0",
+      "1 = Wiatrołap 4.72 m² published (495 % o"
+     ],
+     [
+      "main-room-0-0",
+      "10 = Łazienka 7.02 m² published (749 % o"
+     ],
+     [
+      "main-room-0-1",
+      "11 = Łazienka 4.03 m² published (-4 % of"
+     ],
+     [
+      "main-room-0-2",
+      "12 = Kotłownia z pralnią 5.19 m² publish"
+     ],
+     [
+      "main-room-0-3",
+      "1 = Wiatrołap 4.72 m² published (-3 % of"
+     ],
+     [
+      "main-room-0-6",
+      "13 = Garaż 35.52 m² published (-68 % off"
+     ],
+     [
+      "main-room-0-7",
+      "13 = Garaż 35.52 m² published (-68 % off"
+     ]
+    ]
+   },
+   "after": {
+    "modelSha256": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+    "openings": 20,
+    "doors": 11,
+    "windows": 9,
+    "walls": 20,
+    "roofs": [
+     "roof-main"
+    ],
+    "chimneys": [
+     "chimney-0"
+    ],
+    "numberedRooms": [
+     [
+      "attached-0-room-0-0",
+      "1 = Wiatrołap 4.72 m² published (495 % o"
+     ],
+     [
+      "main-room-0-0",
+      "10 = Łazienka 7.02 m² published (749 % o"
+     ],
+     [
+      "main-room-0-1",
+      "11 = Łazienka 4.03 m² published (-4 % of"
+     ],
+     [
+      "main-room-0-2",
+      "12 = Kotłownia z pralnią 5.19 m² publish"
+     ],
+     [
+      "main-room-0-3",
+      "1 = Wiatrołap 4.72 m² published (-3 % of"
+     ],
+     [
+      "main-room-0-6",
+      "13 = Garaż 35.52 m² published (-68 % off"
+     ],
+     [
+      "main-room-0-7",
+      "13 = Garaż 35.52 m² published (-68 % off"
+     ]
+    ]
+   },
+   "rejected": [
+    "main-room-0-4 2.69 m² offered \"5\" (Salon 31.96 m², 92 % off) → not taken by the area check"
+   ]
+  }
+ }
+}

@@ -171,6 +171,13 @@ export type OpeningReadingInput = {
   views: Array<{ view: ElevationFrameV2; raster: Raster }>
   /** A wider gap than this on the ground storey of an attached single-storey body reads as a vehicle door. */
   attachedSingleStorey: boolean
+  /**
+   * 005U-N4: the one vehicle mouth bound to a garage room on this wall: a room the publisher's list names a garage
+   * (by a number read inside it), meeting this outer wall, where the plan leaves exactly one side open. The gap that is
+   * that mouth is a vehicle door in any body — integral garages stand in the main one — its kind derived from the
+   * drawing, its heights assumed unless something reads them. Absent everywhere else.
+   */
+  vehicleMouth?: { from: number; to: number; roomId: string; why: string }
   index: number
 }
 
@@ -326,9 +333,24 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
     // --- family
     // 005U: a vehicle door, a door or a full-height screen needs a sill something READ; an assumed one decides nothing.
     const attachedVehicle = !heightsAssumed && input.attachedSingleStorey && host.storeyIndex === 0 && widthM >= 2.2 && sillY - host.floorY < 0.1
+    // 005U-N4: the gap that is a garage room's one open side, with nothing drawn across it as glazing.
+    const mouth = input.vehicleMouth
+    const mouthGap =
+      !!mouth &&
+      host.storeyIndex === 0 &&
+      Math.min(hi, mouth.to) - Math.max(lo, mouth.from) >= 0.8 * Math.max(widthPlan, mouth.to - mouth.from) &&
+      !glazingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM)
     let family: OpeningFamily = 'UNKNOWN'
     const reachesFloor = sillY - host.floorY < 0.12
-    if (heightsAssumed) {
+    if (mouthGap && heightsAssumed && mouth) {
+      family = 'GARAGE_DOOR'
+      prov.family = 'SOURCE_DERIVED'
+      sillY = host.floorY
+      headY = round6(host.floorY + CONVENTIONS.openingHead)
+      for (let k = unresolved.length - 1; k >= 0; k -= 1) if (unresolved[k].startsWith('kind (')) unresolved.splice(k, 1)
+      unresolved.push(`a vehicle door: ${mouth.why}; its sill and head are assumed (${CONVENTIONS.openingHead} m) — no callout or elevation reads them`)
+    } else if (mouthGap && !heightsAssumed && sillY - host.floorY < 0.1) family = 'GARAGE_DOOR'
+    else if (heightsAssumed) {
       family = doorBySymbol ? 'DOOR' : 'WINDOW'
       prov.family = doorBySymbol ? (doorSwing ? 'SOURCE_DERIVED' : 'VISUAL_SEMANTIC') : 'ASSUMED_FOR_RENDERING'
     }
@@ -419,4 +441,44 @@ function doorSwingDrawn(raster: Raster, plan: PlanFrameV2, host: WallHost, inter
   const q = plan.toPixel(a1.x, a1.z)
   const f = inkFraction(raster, Math.min(p.x, q.x), Math.min(p.y, q.y), Math.max(p.x, q.x), Math.max(p.y, q.y), 140)
   return f > 0.02 && f < 0.25
+}
+
+/** 005U-N4: a room the publisher's list names a garage (the name, in the languages the sources print). */
+export const GARAGE_LABEL = /gara[zżg]/i
+
+/**
+ * 005U-N4: the open sides of the plan that bound a garage room on an outer wall.
+ *
+ * The room is a garage only by a number read inside it naming a published garage — never by its area. A side counts
+ * when the plan's decomposition decided the wall stops there (an open side, not the mouth of a recess), on one of the
+ * body's outer faces, along the room's own face, for at least 80 % of its width. The caller takes a vehicle door from
+ * exactly one; several are a question, none is nothing.
+ */
+export function garageMouth(
+  room: { number?: string; label?: string; bounds: { x0: number; z0: number; x1: number; z1: number } },
+  body: { x0: number; z0: number; x1: number; z1: number },
+  wideOpenings: ReadonlyArray<{ axis: 'X' | 'Y'; linePx: number; fromPx: number; toPx: number; decision: string; compound?: { intervalId: string; role: string } }>,
+  plan: Pick<PlanFrameV2, 'toWorld'>,
+  wallThicknessM: number,
+): Array<{ facade: 'FRONT' | 'REAR' | 'WEST' | 'EAST'; from: number; to: number; id: string }> {
+  if (!room.number || !room.label || !GARAGE_LABEL.test(room.label)) return []
+  const reach = wallThicknessM + 0.2
+  const out: Array<{ facade: 'FRONT' | 'REAR' | 'WEST' | 'EAST'; from: number; to: number; id: string }> = []
+  for (const w of wideOpenings) {
+    if (w.decision !== 'OPEN_SIDE' || w.compound?.role === 'RECESS_MOUTH') continue
+    const a = w.axis === 'Y' ? plan.toWorld(w.fromPx, w.linePx) : plan.toWorld(w.linePx, w.fromPx)
+    const b = w.axis === 'Y' ? plan.toWorld(w.toPx, w.linePx) : plan.toWorld(w.linePx, w.toPx)
+    const from = w.axis === 'Y' ? Math.min(a.x, b.x) : Math.min(a.z, b.z)
+    const to = w.axis === 'Y' ? Math.max(a.x, b.x) : Math.max(a.z, b.z)
+    const at = w.axis === 'Y' ? a.z : a.x
+    const facade = w.axis === 'Y' ? (Math.abs(at - body.z0) <= reach ? 'FRONT' : Math.abs(at - body.z1) <= reach ? 'REAR' : undefined) : Math.abs(at - body.x0) <= reach ? 'WEST' : Math.abs(at - body.x1) <= reach ? 'EAST' : undefined
+    if (!facade) continue
+    const roomFace = facade === 'FRONT' ? room.bounds.z0 : facade === 'REAR' ? room.bounds.z1 : facade === 'WEST' ? room.bounds.x0 : room.bounds.x1
+    if (Math.abs(roomFace - at) > reach) continue
+    const roomFrom = w.axis === 'Y' ? room.bounds.x0 : room.bounds.z0
+    const roomTo = w.axis === 'Y' ? room.bounds.x1 : room.bounds.z1
+    if (Math.min(to, roomTo) - Math.max(from, roomFrom) < 0.8 * (to - from)) continue
+    out.push({ facade, from: round6(from), to: round6(to), id: w.compound?.intervalId ?? `${w.axis}-${w.linePx}-${w.fromPx}-${w.toPx}` })
+  }
+  return out
 }

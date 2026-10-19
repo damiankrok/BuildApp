@@ -114,13 +114,18 @@ export type InteriorOptions = {
   doorMaxM?: number
   /** Flood-fill cell size, in metres. */
   cellM?: number
+  /**
+   * 005U-N4: the storey's whole footprint in world metres (every body on it), where a room number's other printings
+   * are looked for; the body alone when absent.
+   */
+  labelArea?: { x0: number; z0: number; x1: number; z1: number }
   /** Rectangles that are not floor on this storey (a stair flight, a void), as room barriers. */
   extraBarriers?: ReadonlyArray<{ x0: number; z0: number; x1: number; z1: number }>
   /** Diagnostics hook. */
   onDebug?: (info: { axis: 'X' | 'Z'; centrePx: number; thick: number; runsPx: Array<{ from: number; to: number }> }) => void
 }
 
-const DEFAULTS: Required<Omit<InteriorOptions, 'onDebug' | 'extraBarriers'>> = { minPartitionFraction: 0.2, maxPartitionFraction: 1.0, thinPartitionFraction: 0.72, minPieceM: 0.55, doorMinM: 0.6, doorMaxM: 1.35, cellM: 0.05 }
+const DEFAULTS: Required<Omit<InteriorOptions, 'onDebug' | 'extraBarriers' | 'labelArea'>> = { minPartitionFraction: 0.2, maxPartitionFraction: 1.0, thinPartitionFraction: 0.72, minPieceM: 0.55, doorMinM: 0.6, doorMaxM: 1.35, cellM: 0.05 }
 
 /** Neutral dark ink: a wall, not a coloured annotation. */
 const wallInk = (r: Raster, x: number, y: number): boolean => {
@@ -139,7 +144,20 @@ const medianOf = (xs: readonly number[]): number => {
 }
 
 /** Room number tokens: what the OCR read inside the body, with pixel boxes. */
-export type LabelToken = { text: string; box: PixelRect; heightPx: number; confidence: number }
+export type LabelToken = {
+  text: string
+  box: PixelRect
+  heightPx: number
+  confidence: number
+  /**
+   * 005U-N4: a reading the page's orientation vote set aside — the same ink read another way up won the clash. It never
+   * numbers a room by itself: it is a candidate, heard only for a room no kept reading numbers, and only when it is the
+   * one reading of its ink that names a published room on the storey.
+   */
+  setAside?: boolean
+  /** Which way up the reading was taken; a room number is printed upright. */
+  orientation?: string
+}
 
 export function readInterior(
   raster: Raster,
@@ -547,9 +565,10 @@ export function readInterior(
   }
 
   // Room numbers: large short digit tokens inside a room.
-  const heights = tokens.map((t) => t.heightPx).sort((a, b) => a - b)
+  const keptTokens = tokens.filter((t) => !t.setAside)
+  const heights = keptTokens.map((t) => t.heightPx).sort((a, b) => a - b)
   const medianHeight = heights.length > 0 ? heights[Math.floor(heights.length / 2)] : 0
-  for (const t of tokens) {
+  for (const t of keptTokens) {
     if (!/^\d{1,2}$/.test(t.text)) continue
     if (medianHeight > 0 && t.heightPx < medianHeight * 1.15) continue
     const cx = (t.box.x0 + t.box.x1) / 2
@@ -580,6 +599,63 @@ export function readInterior(
         room.confidence = 0.5
       }
     }
+  }
+  // 005U-N4: a room no kept reading numbers may take its number from a reading the orientation vote set aside — the
+  // page-wide vote picks one way up per clash by summed merit, and a garbled reading of the same ink another way up
+  // (more glyphs, each matched worse) can outvote a clean one. The set-aside reading is heard only when it is the ONE
+  // reading of its ink, any way up, that names a published room on this storey; when the published number is not
+  // already some other room's; and when no other ink in the room offers a number. Anything else stays unnumbered and
+  // is named. The area is never consulted to choose.
+  const numberIn = (t: LabelToken): string | undefined => (/^\d{1,2}$/.test(t.text) && publishedRooms.some((p) => p.number === t.text) ? t.text : undefined)
+  const sameInk = (a: PixelRect, b: PixelRect): boolean => Math.min(a.x1, b.x1) - Math.max(a.x0, b.x0) > 0 && Math.min(a.y1, b.y1) - Math.max(a.y0, b.y0) > 0
+  const taken = new Set(rooms.map((r) => r.number).filter((n): n is string => !!n))
+  for (const room of rooms) {
+    if (room.number || publishedRooms.length === 0) continue
+    const inside = tokens.filter((t) => t.setAside && t.orientation === 'HORIZONTAL' && (medianHeight === 0 || t.heightPx >= medianHeight * 1.15) && pointInPolygon(plan.toWorld((t.box.x0 + t.box.x1) / 2, (t.box.y0 + t.box.y1) / 2), room.polygon))
+    const offers = new Set<string>()
+    for (const t of inside) {
+      const readings = tokens.filter((o) => sameInk(o.box, t.box))
+      const numbers = [...new Set(readings.map(numberIn).filter((n): n is string => !!n))]
+      if (numbers.length === 1 && numberIn(t) === numbers[0]) offers.add(numbers[0])
+      else if (numbers.length > 1) unresolved.push({ what: `the number of ${room.id}`, reason: `one printed label reads as ${numbers.join(' or ')} alike, each a published room: not chosen` })
+    }
+    if (offers.size !== 1) {
+      if (offers.size > 1) unresolved.push({ what: `the number of ${room.id}`, reason: `set-aside readings offer ${[...offers.keys()].join(' and ')}: not chosen` })
+      continue
+    }
+    const [number] = [...offers]
+    // A room's number is printed once on its storey: the same number read on any other ink in the footprint, any way
+    // up and at a room number's size, makes this reading one of two, and neither is taken.
+    const area = options.labelArea ?? body
+    const inArea = (o: LabelToken): boolean => {
+      const w = plan.toWorld((o.box.x0 + o.box.x1) / 2, (o.box.y0 + o.box.y1) / 2)
+      return w.x >= area.x0 && w.x <= area.x1 && w.z >= area.z0 && w.z <= area.z1
+    }
+    const own = inside.filter((t) => numberIn(t) === number)
+    const elsewhere = tokens.filter((o) => o.text === number && (medianHeight === 0 || o.heightPx >= medianHeight * 1.15) && inArea(o) && !own.some((t) => sameInk(o.box, t.box)))
+    if (elsewhere.length > 0) {
+      unresolved.push({ what: `the number of ${room.id}`, reason: `a set-aside upright reading says ${number}, and ${elsewhere.length} other label${elsewhere.length === 1 ? '' : 's'} on the storey read ${number} too: not taken` })
+      continue
+    }
+    if (taken.has(number)) {
+      unresolved.push({ what: `the number of ${room.id}`, reason: `a set-aside reading says ${number}, already another room's number` })
+      continue
+    }
+    const published = publishedRooms.find((p) => p.number === number)
+    if (!published) continue
+    // A reading the vote set aside carries less than a kept one: the published area is its check (never its chooser),
+    // and a room far off it — open plan or not — keeps no number from it.
+    const off = Math.abs(room.areaM2 - published.areaM2) / published.areaM2
+    if (off > 0.4) {
+      unresolved.push({ what: `the number of ${room.id}`, reason: `a set-aside upright reading says ${number} (${published.label} ${published.areaM2} m²), but the room's ${room.areaM2} m² is ${(off * 100).toFixed(0)} % off it: not taken` })
+      continue
+    }
+    taken.add(number)
+    room.number = number
+    room.why += `; numbered ${number} from an upright reading the orientation vote set aside (the only reading of that label naming a published room) = ${published.label} ${published.areaM2} m² published (${((room.areaM2 / published.areaM2 - 1) * 100).toFixed(0)} % off)`
+    room.label = published.label
+    room.publishedAreaM2 = published.areaM2
+    room.confidence = round6(Math.min(0.75, 0.55 + (off < 0.15 ? 0.15 : 0)))
   }
   return { storeyIndex, frameId: plan.frameId, walls: kept, doors: keptDoors, blocks, rooms, unresolved }
 }
