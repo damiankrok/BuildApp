@@ -27,21 +27,21 @@ import type { OpeningFit, ReconstructionCandidate, UnresolvedCandidate, SolverSt
 import { HYPOTHESIS_SET_SCHEMA, HYPOTHESIS_SET_SCHEMA_VERSION } from '../hypotheses.js'
 import type { PrimitiveHypothesisSet } from '../hypotheses.js'
 import { hashArtifact } from '@buildapp/source-common'
-import { elevationFrameFromV2, flipZ, planFrameByOuterFaces, planFrameV2, registerElevationV2, worldFrameFrom } from './frame.js'
+import { elevationFrameFromV2, flipZ, outerWallFaces, planFrameByOuterFaces, planFrameBySameSheet, planFrameV2, registerElevationV2, worldFrameFrom } from './frame.js'
 import type { ElevationFrameV2, ElevationRegistrationV2, PlanFrameV2, WorldFrameV2 } from './frame.js'
 import { scanZoneForReturns } from './recesses.js'
 import type { RecessTopology, ZoneSide } from './recesses.js'
 import { readInterior } from './interior.js'
 import type { InteriorReading, LabelToken } from './interior.js'
 import { assembleStair, findTreadLadders, poolLadders } from './stair-topology.js'
-import { garageMouth, readWallOpenings } from './openings-v2.js'
+import { elevationExtent, garageMouth, planGaps, readWallOpenings, wallAppearanceExtent } from './openings-v2.js'
 import type { OpeningV2, WallHost } from './openings-v2.js'
 import { readAttachedRoof, readChimneys, readRooflights, registerSection } from './roof-details.js'
 import { readFasciaBand, readRailing, readVergeMember } from './facade.js'
 import type { FacadeAssemblyHypothesis, FacadeMember } from './facade.js'
-import { solvePerspectiveCamera } from './camera.js'
+import { skyMask, solvePerspectiveCamera } from './camera.js'
 import { attachedGableLayout, readAttachedRoofForm } from './attached-roof-form.js'
-import { decideSideOrientation, mainTopProfile } from './side-orientation.js'
+import { decideSideOrientation, decideSidesByOpenings, gableApexRow, gableOutline, mainTopProfile, sameSheetSideRegistration } from './side-orientation.js'
 import type { PerspectiveCameraV2 } from './camera.js'
 import { emitBuilding } from './emit.js'
 import { ReconstructionFailure, planCounts } from '../failure.js'
@@ -532,8 +532,11 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       // still wrong by the L. A registration fitted from the walls alone states nothing the faces must yield to.
       const statedBasis = ['STATED', 'PRINTED_SCALE'].includes(draft.alignments.get(plan.frame.id)?.basis ?? '')
       const agrees = !aligned || !byFaces || !statedBasis || Math.abs(byFaces.mppX / aligned.mppX - 1) <= PLAN_FRAME_SCALE_AGREEMENT
-      frame = byFaces && agrees ? byFaces : aligned
-      why = byFaces && agrees ? byFaces.why : byFaces ? `its outer wall faces would put it at ${byFaces.mppX} m/px against the ${aligned?.mppX} m/px its registration onto the plan below states; the registration stands` : 'no outer faces found'
+      // 005W-N1: faces that fit no scale of their own, on a sheet drawn exactly like the base plan's, take the base frame.
+      const baseEntry = draft.base ? planByStorey.get(storeyIndexOf(draft.plans.find((p) => p.frame.id === draft.base?.frame.id) ?? plan)) : undefined
+      const sameSheet = !byFaces && !statedBasis && baseEntry && baseEntry.plan.frame.id !== plan.frame.id ? planFrameBySameSheet(plan, index, raster, baseEntry) : undefined
+      frame = byFaces && agrees ? byFaces : sameSheet ?? aligned
+      why = byFaces && agrees ? byFaces.why : sameSheet ? sameSheet.why : byFaces ? `its outer wall faces would put it at ${byFaces.mppX} m/px against the ${aligned?.mppX} m/px its registration onto the plan below states; the registration stands` : 'no outer faces found'
     }
     if (!frame) {
       gap({ what: `a registration for the storey ${index} plan`, reason: 'neither its chains, its outer faces nor an alignment onto the base plan fixed a scale for it', status: 'MISSING', observationIds: [], evidenceIds: [] })
@@ -548,11 +551,15 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
 
   // Elevation registrations (v2): silhouettes from the 03R extents, scales from the plan width and the ridge datum.
   const terrain = metrics.evidence.filter((e) => e.kind === 'LEVEL_DATUM' && e.value < 0 && e.value > -1.5).sort((a, b) => b.confidence - a.confidence)[0]?.value
-  const { registrations: legacy } = registerElevationFrames(graph, { width: main.x1 - main.x0 + masses.filter((m) => m.id !== main.id).reduce((a, m) => a + Math.max(0, m.x1 - main.x1) + Math.max(0, main.x0 - m.x0), 0), depth: world.walled.z1 - world.walled.z0, totalHeight: ridgeY ?? levelsV2[levelsV2.length - 1].wallTop }, keep, options.raster)
+  const { registrations: legacy, refused: legacyRefused } = registerElevationFrames(graph, { width: main.x1 - main.x0 + masses.filter((m) => m.id !== main.id).reduce((a, m) => a + Math.max(0, m.x1 - main.x1) + Math.max(0, main.x0 - m.x0), 0), depth: world.walled.z1 - world.walled.z0, totalHeight: ridgeY ?? levelsV2[levelsV2.length - 1].wallTop }, keep, options.raster)
   const elevations: ElevationRegistrationV2[] = []
   const views: Array<{ view: ElevationFrameV2; raster: Raster }> = []
   /** 005W: elevations registered on the walls' band alone (005V-N4): read for the openings of their facade, nothing else. */
   const openingOnlyViews: Array<{ view: ElevationFrameV2; raster: Raster; bandOnly: true }> = []
+  /** 005W-N1: the band registrations behind those views, by frame, so a side decision can move them to the other wall. */
+  const bandRegistrations = new Map<string, ElevationRegistrationV2>()
+  /** 005W-N1: side views re-registered at the sheet scale of the front or rear, read in their place for the openings. */
+  const openingViewOverrides = new Map<string, { view: ElevationFrameV2; raster: Raster; bandOnly: true }>()
   const sideEaves = layout.roofSupports.find((r) => r.massId === main.sourceMassId)?.overhangM?.value ?? 0
   for (const r of legacy) {
     if (!r.side) continue
@@ -576,6 +583,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       const band = walled[0]?.reg
       if (band) {
         openingOnlyViews.push({ view: elevationFrameFromV2(band, world), raster, bandOnly: true })
+        bandRegistrations.set(band.frameId, band)
         step({ stage: 'registration', what: `the ${r.side.toLowerCase()} elevation registered on its walls' band, for its openings only`, method: 'DIRECT', detail: `${band.mpp} m/px, ground at ${band.bottomY} (${band.spanWhy})`, inputs: 1, outputs: 1 })
         continue
       }
@@ -694,6 +702,154 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         }
       }
       step({ stage: 'registration', what: 'the unlabelled side views oriented by the main body’s profile', method: 'DISCRETE_SELECTION', detail: decision.why, inputs: sides.length, outputs: decision.swap ? sides.length : 0 })
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // G1c. 005W-N1: which side wall each unlabelled side view shows, from the openings
+  // ---------------------------------------------------------------------------
+  // A symmetric gable fits its profile both ways, and a side view no silhouette registered is placed on the one wall
+  // left. The plan's gaps in the two side walls are the objects both views must show: the views, silhouette- and
+  // band-registered alike, are scored as assigned and all moved to the other wall, and swapped together only on a clear
+  // reading (decideSidesByOpenings). Nothing else of a view changes: its scale, its ground and its use stay as they were.
+  {
+    const unlabelledSide = (frameId: string, side: string): boolean => (side === 'LEFT' || side === 'RIGHT') && frameById.get(frameId)?.roles.view === 'SIDE_UNSPECIFIED'
+    const moved = (reg: ElevationRegistrationV2, walledOnly: boolean): ElevationRegistrationV2 | undefined => {
+      const other = reg.side === 'LEFT' ? 'RIGHT' : 'LEFT'
+      return ridgeY === undefined ? undefined : registerElevationV2({ id: reg.frameId, assetId: reg.assetId }, reg.extent, other, reg.sideConfidence, `${reg.sideWhy}; moved to the ${other.toLowerCase()} wall by the openings the plan draws in the side walls`, world, ridgeY, sideEaves, terrain, walledOnly)
+    }
+    const silhouetteSides = views
+      .map((v, index) => ({ v, index, reg: elevations.find((e) => e.frameId === v.view.registration.frameId) }))
+      .filter((x) => unlabelledSide(x.v.view.registration.frameId, x.v.view.side) && x.reg)
+      .map((x) => ({ ...x, again: moved(x.reg as ElevationRegistrationV2, false) }))
+    const bandSides = openingOnlyViews
+      .map((v, index) => ({ v, index, reg: bandRegistrations.get(v.view.registration.frameId) }))
+      .filter((x) => unlabelledSide(x.v.view.registration.frameId, x.v.view.side) && x.reg)
+      .map((x) => ({ ...x, again: moved(x.reg as ElevationRegistrationV2, true) }))
+    // A side elevation the publisher labels a side, refused at registration because its silhouette (a pergola, a
+    // terrace beside the house) fits no span, is the opposite side wall of the one silhouette-registered side view when
+    // the two are drawn on one sheet scale: the main roof's gable outline spans the same pixels on both, in two bands of
+    // rows. It then takes that view's scale and ground row, mirrored, with its own gable axis on the ridge; read for its
+    // openings only, like any band-registered view (sameSheetSideRegistration).
+    const sheetSides: Array<{ v: { view: ElevationFrameV2; raster: Raster; bandOnly: true }; index: number; again: ElevationRegistrationV2 | undefined }> = []
+    const mate = silhouetteSides.length === 1 ? silhouetteSides[0] : undefined
+    if (mate && mainRoof && ridgeY !== undefined && mainRoof.ridgeAxis === 'X') {
+      const mateReg = mate.reg as ElevationRegistrationV2
+      for (const r of legacyRefused) {
+        const frame = frameById.get(r.frameId)
+        const raster = frame ? options.raster(frame) : undefined
+        if (!frame || !raster || frame.roles.view !== 'SIDE_UNSPECIFIED') continue
+        let mask = skyMasks.get(raster)
+        if (!mask) {
+          mask = skyMask(raster)
+          skyMasks.set(raster, mask)
+        }
+        let mateMask = skyMasks.get(mate.v.raster)
+        if (!mateMask) {
+          mateMask = skyMask(mate.v.raster)
+          skyMasks.set(mate.v.raster, mateMask)
+        }
+        const apexRow = mate.v.view.pyOf(ridgeY)
+        const eaveRow = mate.v.view.pyOf(mainRoof.eaveY)
+        const outlineOf = (m: Mask): ReturnType<typeof gableOutline> => gableOutline(m, apexRow, eaveRow)
+        // The mate's ground row is its silhouette's top put on the ridge; where its own gable outline places the apex,
+        // that row is the ridge instead (gableApexRow), for both views of the sheet.
+        const apex = gableApexRow(outlineOf(mateMask), mainRoof.pitchDeg)
+        const sheetMate: ElevationRegistrationV2 = apex ? { ...mateReg, zeroRow: round6(apex.row + ridgeY / mateReg.mpp), why: `${mateReg.why}; ${apex.why}, which is the ridge datum` } : mateReg
+        const built = (side: 'LEFT' | 'RIGHT') => sameSheetSideRegistration({ id: frame.id, assetId: frame.assetId }, side, sheetMate, mate.v.view, outlineOf(mateMask), outlineOf(mask), mainRoof.ridgeAt, r.why)
+        const reg = built(mateReg.side === 'LEFT' ? 'RIGHT' : 'LEFT')
+        options.debug?.(`same-sheet side ${frame.id}: ${reg ? reg.why : 'refused'}`)
+        if (!reg) continue
+        const v = { view: elevationFrameFromV2(reg, world), raster, bandOnly: true as const }
+        openingOnlyViews.push(v)
+        bandRegistrations.set(reg.frameId, reg)
+        sheetSides.push({ v, index: openingOnlyViews.length - 1, again: built(reg.side === 'LEFT' ? 'RIGHT' : 'LEFT') })
+      }
+    }
+    const all = [...silhouetteSides, ...bandSides, ...sheetSides]
+    if (all.length > 0 && all.every((x) => x.again)) {
+      const gapsOf = (side: 'LEFT' | 'RIGHT') =>
+        main.storeys.flatMap((index) => {
+          const entry = planByStorey.get(index)
+          const l = levelOf(index)
+          if (!entry || !l) return []
+          const r = rectAt(main, index)
+          const facade = side === 'LEFT' ? 'WEST' : 'EAST'
+          const planeAt = facade === 'WEST' ? r.x0 : r.x1
+          const inward = facade === 'WEST' ? 1 : -1
+          const gable = mainRoof?.ridgeAxis === 'X' && index === topStorey
+          const host: WallHost = { massId: main.id, facade, planeAt, from: r.z0, to: r.z1, centreAt: round6(planeAt + (inward * T) / 2), storeyIndex: index, floorY: l.elevation, storeyHeightM: gable ? round6((mainRoof as NonNullable<typeof mainRoof>).ridgeY - l.elevation) : l.height }
+          const gaps = planGaps(entry.raster, entry.frame, host, T).map((g) => g.interval).sort((p, q) => p[0] - q[0])
+          const solids: Array<[number, number]> = []
+          let solidFrom = r.z0
+          for (const g of gaps) {
+            if (g[0] > solidFrom) solids.push([solidFrom, g[0]])
+            solidFrom = Math.max(solidFrom, g[1])
+          }
+          if (r.z1 > solidFrom) solids.push([solidFrom, r.z1])
+          const topY = gable ? round6((mainRoof as NonNullable<typeof mainRoof>).eaveY) : l.elevation + l.height
+          return gaps.map((interval) => ({ interval, floorY: host.floorY, storeyHeightM: host.storeyHeightM, solids, topY }))
+        })
+      const decision = decideSidesByOpenings(
+        all.map((x) => ({ current: x.v.view, swapped: elevationFrameFromV2(x.again as ElevationRegistrationV2, world), raster: x.v.raster })),
+        gapsOf,
+        (raster, view, g) => {
+          const ext = elevationExtent(raster, view, g.interval, g.floorY, g.storeyHeightM) ?? wallAppearanceExtent(raster, view, g.interval, g.solids, g.floorY, g.topY)
+          return !!ext && ext.headY - ext.sillY >= 0.5
+        },
+        options.debug,
+      )
+      if (decision.swap) {
+        for (const x of silhouetteSides) {
+          const again = x.again as ElevationRegistrationV2
+          views[x.index] = { view: elevationFrameFromV2(again, world), raster: x.v.raster }
+          const at = elevations.findIndex((e) => e.frameId === again.frameId)
+          if (at >= 0) elevations[at] = again
+        }
+        for (const x of [...bandSides, ...sheetSides]) {
+          const again = x.again as ElevationRegistrationV2
+          openingOnlyViews[x.index] = { view: elevationFrameFromV2(again, world), raster: x.v.raster, bandOnly: true }
+          bandRegistrations.set(again.frameId, again)
+        }
+      }
+      step({ stage: 'registration', what: 'the unlabelled side views placed on their walls by the openings', method: 'DISCRETE_SELECTION', detail: decision.why, inputs: all.length, outputs: decision.swap ? all.length : 0 })
+    }
+    // For the openings, the side views of the sheet are read at the scale of a front or rear view of the same sheet: a
+    // raster of the same size whose ridge row is the side view's gable apex (within 1 % of its height). The front and
+    // rear scales come from the walled width; a side view's comes from its silhouette, which takes in eaves, chimneys
+    // and terraces. Each keeps its gable axis on the ridge, and is read band-only, with the per-wall check.
+    if (mate && sheetSides.length > 0 && mainRoof && ridgeY !== undefined) {
+      const refs = [...bandRegistrations.values(), ...elevations].filter((r) => r.side === 'FRONT' || r.side === 'REAR')
+      const baseEntry = [...planByStorey.values()].find((e) => e.plan.frame.id === draft.base?.frame.id)
+      const baseFaces = baseEntry ? outerWallFaces(baseEntry.raster, baseEntry.plan.wallPx, baseEntry.plan.extent) : undefined
+      const drawnMidZ = baseEntry && baseFaces ? round6((baseEntry.frame.toWorld(baseFaces.x0, baseFaces.y0).z + baseEntry.frame.toWorld(baseFaces.x0, baseFaces.y1).z) / 2) : undefined
+      const sides = [{ view: views[mate.index].view, raster: views[mate.index].raster, reg: elevations.find((e) => e.frameId === views[mate.index].view.registration.frameId) }, ...sheetSides.map((x) => ({ view: openingOnlyViews[x.index].view, raster: openingOnlyViews[x.index].raster, reg: bandRegistrations.get(openingOnlyViews[x.index].view.registration.frameId) }))]
+      for (const side of sides) {
+        if (!side.reg) continue
+        let mask = skyMasks.get(side.raster)
+        if (!mask) {
+          mask = skyMask(side.raster)
+          skyMasks.set(side.raster, mask)
+        }
+        const outline = gableOutline(mask, side.view.pyOf(ridgeY), side.view.pyOf(mainRoof.eaveY))
+        const apex = gableApexRow(outline, mainRoof.pitchDeg)
+        if (!outline || !apex) continue
+        const axis = (outline.bands[0].centre + outline.bands[1].centre) / 2
+        const ref = refs.find((r) => {
+          const f = frameById.get(r.frameId)
+          const raster = f ? options.raster(f) : undefined
+          const ridgeRow = r.zeroRow - ridgeY / r.mpp
+          return !!raster && raster.width === side.raster.width && raster.height === side.raster.height && Math.abs(ridgeRow - apex.row) <= 0.01 * (r.zeroRow - ridgeRow)
+        })
+        if (!ref) continue
+        const sign: 1 | -1 = side.reg.side === 'RIGHT' ? 1 : -1
+        // Along the house the gable axis is the middle of the outline the base plan draws, where the plans measure from
+        // (a symmetric gable's ridge); it stands only within 0.3 m of the roof's own ridge line.
+        if (drawnMidZ === undefined || Math.abs(drawnMidZ - mainRoof.ridgeAt) > 0.3) continue
+        const reg: ElevationRegistrationV2 = { ...side.reg, mpp: ref.mpp, zeroRow: round6(apex.row + ridgeY / ref.mpp), alongSign: sign, alongAtLeft: round6(drawnMidZ - sign * (axis - side.reg.extent.x0) * ref.mpp), spanWhy: `the sheet scale of ${ref.frameId} (${ref.side.toLowerCase()}), whose ridge row is this view's gable apex`, why: `${apex.why}; at the ${ref.mpp} m/px of the ${ref.side.toLowerCase()} view of the same sheet, with the gable axis at column ${axis.toFixed(1)} over the middle of the base plan's drawn outline, z ${drawnMidZ}` }
+        openingViewOverrides.set(reg.frameId, { view: elevationFrameFromV2(reg, world), raster: side.raster, bandOnly: true })
+        step({ stage: 'registration', what: `the ${reg.side.toLowerCase()} view at the sheet scale, for its openings`, method: 'DIRECT', detail: reg.why, inputs: 1, outputs: 1 })
+      }
     }
   }
 
@@ -876,6 +1032,8 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // G5/H. openings on every exterior wall, cross-view
   // ---------------------------------------------------------------------------
   const openings: OpeningV2[] = []
+  /** 005W-N1: band-registered views some wall's gaps confirmed (readWallOpenings' per-wall check). */
+  const acceptedBandViews = new Set<string>()
   const sharedDoors: BuildingV2['sharedDoors'] = []
   const isGableEnd = (m: MassV2, facade: 'FRONT' | 'REAR' | 'WEST' | 'EAST'): boolean => !!mainRoof && m.id === main.id && ((mainRoof.ridgeAxis === 'Z' && (facade === 'FRONT' || facade === 'REAR')) || (mainRoof.ridgeAxis === 'X' && (facade === 'WEST' || facade === 'EAST')))
   // 005U-N4: a garage room's one open side (`garageMouth`): the room is named a garage by a number read inside it
@@ -915,7 +1073,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         // 005V: a top-storey wall of the main body parallel to the ridge stops where the roof's underside meets it.
         const underEaves = !gable && mainRoof && m.id === main.id && index === topStorey ? round6(mainRoof.eaveY - mainRoof.thicknessM / Math.cos((mainRoof.pitchDeg * Math.PI) / 180)) : undefined
         const host: WallHost = { massId: m.id, facade, planeAt, from, to, centreAt: round6(planeAt + (inward * T) / 2), storeyIndex: index, ...(gable ? { gable } : {}), ...(underEaves !== undefined ? { eaveTopY: underEaves } : {}), floorY: l.elevation, storeyHeightM: gable ? round6(mainRoof!.ridgeY - l.elevation) : l.height }
-        const found = readWallOpenings({ plan: entry.frame, planRaster: entry.raster, host, wallThicknessM: T, callouts, views: [...viewsOf(facade), ...openingOnlyViews.filter((v) => v.view.side === (facade === 'WEST' ? 'LEFT' : facade === 'EAST' ? 'RIGHT' : facade))], attachedSingleStorey: m.role === 'ATTACHED' && m.storeys.length === 1, onRefused: (r) => gap({ what: `the gap ${r.interval[0].toFixed(2)}..${r.interval[1].toFixed(2)} on the ${facade.toLowerCase()} wall of ${m.id}, storey ${index}`, reason: r.why, status: 'REFUSED', observationIds: [], evidenceIds: [] }), ...(vehicleMouths.has(`${m.id}:${facade}`) && index === 0 ? { vehicleMouth: vehicleMouths.get(`${m.id}:${facade}`) } : {}), index: hostIndex++ })
+        const found = readWallOpenings({ onBandViewAccepted: (frameId) => acceptedBandViews.add(frameId), plan: entry.frame, planRaster: entry.raster, host, wallThicknessM: T, callouts, views: [...viewsOf(facade), ...openingOnlyViews.filter((v) => v.view.side === (facade === 'WEST' ? 'LEFT' : facade === 'EAST' ? 'RIGHT' : facade))].map((v) => openingViewOverrides.get(v.view.registration.frameId) ?? v), attachedSingleStorey: m.role === 'ATTACHED' && m.storeys.length === 1, onRefused: (r) => gap({ what: `the gap ${r.interval[0].toFixed(2)}..${r.interval[1].toFixed(2)} on the ${facade.toLowerCase()} wall of ${m.id}, storey ${index}`, reason: r.why, status: 'REFUSED', observationIds: [], evidenceIds: [] }), ...(vehicleMouths.has(`${m.id}:${facade}`) && index === 0 ? { vehicleMouth: vehicleMouths.get(`${m.id}:${facade}`) } : {}), index: hostIndex++ })
         for (const o of found) {
           // A gap on a face another body stands against is a door between the two bodies, not a facade opening.
           const other = masses.find((xm) => {
@@ -1053,7 +1211,10 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // Rooflights on the side renders.
   const rooflights: BuildingV2['rooflights'] = []
   if (mainRoof) {
-    for (const v of views) {
+    // 005W-N1: a band-registered view stands for the roof only where its own facade's walls confirmed it: the plan's gaps
+    // read on it as openings closed by wall above (readWallOpenings' per-wall check, at least two gaps).
+    const confirmedBand = openingOnlyViews.filter((v) => acceptedBandViews.has(v.view.registration.frameId))
+    for (const v of [...views, ...confirmedBand]) {
       const eaveSide = mainRoof.ridgeAxis === 'Z' ? (v.view.side === 'LEFT' ? 'LOW' : v.view.side === 'RIGHT' ? 'HIGH' : undefined) : v.view.side === 'FRONT' ? 'LOW' : v.view.side === 'REAR' ? 'HIGH' : undefined
       if (!eaveSide) continue
       const eaveAlong = mainRoof.ridgeAxis === 'Z' ? (eaveSide === 'LOW' ? main.x0 : main.x1) : eaveSide === 'LOW' ? main.z0 : main.z1

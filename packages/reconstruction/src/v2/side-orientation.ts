@@ -19,7 +19,7 @@
 import { round6 } from '@buildapp/source-common'
 import type { Mask, Raster } from '@buildapp/source-cv'
 import { skyMask } from './camera.js'
-import type { ElevationFrameV2 } from './frame.js'
+import type { ElevationFrameV2, ElevationRegistrationV2 } from './frame.js'
 
 export type SideProfile = {
   /** The run along the view the profile is known over. */
@@ -131,4 +131,153 @@ export function decideSideOrientation(views: ReadonlyArray<{ current: ElevationF
   const swap = agree === read
   const figures = `the main body's side profile fits ${current.toFixed(2)} m as assigned and ${mirrored.toFixed(2)} m mirrored (median error, summed over ${read} view${read === 1 ? '' : 's'}; ${agree} of ${read} prefer the mirrored reading by at least ${MARGIN_M} m)`
   return { swap, current: round6(current), mirrored: round6(mirrored), why: swap ? `${figures}: the two side views were assigned the wrong way round and are swapped` : `${figures}: the assignment stands` }
+}
+
+/** 005W-N1: the share of a wall's plan gaps one side assignment must read more than the other before it is taken. */
+const OPENINGS_MARGIN = 1 / 3
+
+/** One plan gap of a side wall, with what its storey's wall reading needs: the wall's solid stretches and its top. */
+export type SideGap = { interval: [number, number]; floorY: number; storeyHeightM: number; solids: ReadonlyArray<[number, number]>; topY: number }
+
+/**
+ * 005W-N1: which side wall the unlabelled side views show, read from the openings. The plan says where each side wall
+ * has its gaps; an elevation of that wall shows an opening over each of them. The views are scored together as
+ * assigned and with every one of them moved to the other side wall (and so mirrored): the share of the assigned wall's
+ * gaps that read as an opening of at least 0.5 m on the view. Swapped only where every view on its own reads the other
+ * wall's gaps better than its assigned wall's, the swapped share is at least a half and beats the assigned one by a
+ * third, and there are at least two gaps on each side to test: independent drawings agreeing is the evidence. The same gap being an opening on the plan and on the view is what makes
+ * them one object; the elevation's own heights are read later, as for any view.
+ */
+export function decideSidesByOpenings(
+  views: ReadonlyArray<{ current: ElevationFrameV2; swapped: ElevationFrameV2; raster: Raster }>,
+  gapsOf: (side: 'LEFT' | 'RIGHT') => readonly SideGap[],
+  read: (raster: Raster, view: ElevationFrameV2, gap: SideGap) => boolean,
+  debug?: (line: string) => void,
+): { swap: boolean; current: number; swapped: number; why: string } {
+  const sideOf = (v: ElevationFrameV2): 'LEFT' | 'RIGHT' => (v.side === 'LEFT' ? 'LEFT' : 'RIGHT')
+  let currentRead = 0
+  let currentTotal = 0
+  let swappedRead = 0
+  let swappedTotal = 0
+  let preferSwapped = 0
+  for (const v of views) {
+    const asAssigned = gapsOf(sideOf(v.current))
+    const asSwapped = gapsOf(sideOf(v.swapped))
+    const c = asAssigned.filter((g) => read(v.raster, v.current, g)).length
+    const s = asSwapped.filter((g) => read(v.raster, v.swapped, g)).length
+    debug?.(`side openings ${v.current.registration.frameId}: as assigned (${v.current.side}) ${c} of ${asAssigned.length} gaps read, swapped (${v.swapped.side}) ${s} of ${asSwapped.length}`)
+    if (asAssigned.length < 2 || asSwapped.length < 2) return { swap: false, current: 0, swapped: 0, why: 'a side wall has fewer than two plan gaps to test the views against: the assignment stands' }
+    currentRead += c
+    currentTotal += asAssigned.length
+    swappedRead += s
+    swappedTotal += asSwapped.length
+    if (s / asSwapped.length > c / asAssigned.length) preferSwapped += 1
+  }
+  if (views.length === 0) return { swap: false, current: 0, swapped: 0, why: 'no unlabelled side view: nothing to decide' }
+  const current = round6(currentRead / currentTotal)
+  const swapped = round6(swappedRead / swappedTotal)
+  const swap = preferSwapped === views.length && swapped >= 0.5 && swapped - current >= OPENINGS_MARGIN - 1e-9
+  const figures = `the plan's side-wall gaps read as openings on ${currentRead} of ${currentTotal} as assigned and ${swappedRead} of ${swappedTotal} with the side views swapped`
+  return { swap, current, swapped, why: swap ? `${figures}: the side views show the other walls and are swapped` : `${figures}: the assignment stands` }
+}
+
+/** 005W-N1: how closely two side views' gable outlines must agree in width, per band of rows, to be one sheet scale. */
+export const SAME_SHEET_OUTLINE_TOLERANCE = 0.02
+
+/**
+ * The rows of the main roof's gable, as shares of the way from the apex down to the eaves, the outline is read on:
+ * the lower half, under the chimneys that stand above the roof near the ridge and widen its outline there.
+ */
+const OUTLINE_BANDS: ReadonlyArray<readonly [number, number]> = [
+  [0.5, 0.7],
+  [0.75, 0.95],
+]
+
+export type GableOutline = { bands: Array<{ width: number; centre: number; rows: number; row: number }> }
+
+/**
+ * 005W-N1: the main roof's gable outline on a side view, between the apex row and the eaves row: on each row of a band,
+ * the first and the last pixel that is not sky; per band, the median width and centre. A band where fewer than five
+ * rows have sky on both sides is not read.
+ */
+export function gableOutline(mask: Mask, apexRow: number, eaveRow: number): GableOutline | undefined {
+  const bands: GableOutline['bands'] = []
+  for (const [a, b] of OUTLINE_BANDS) {
+    const widths: number[] = []
+    const centres: number[] = []
+    const ys: number[] = []
+    for (let y = Math.round(apexRow + a * (eaveRow - apexRow)); y <= Math.round(apexRow + b * (eaveRow - apexRow)); y += 1) {
+      if (y < 0 || y >= mask.height) continue
+      let x0 = -1
+      let x1 = -1
+      for (let x = 0; x < mask.width; x += 1) if (mask.data[y * mask.width + x] === 0) { x0 = x; break }
+      for (let x = mask.width - 1; x >= 0; x -= 1) if (mask.data[y * mask.width + x] === 0) { x1 = x; break }
+      if (x0 <= 0 || x1 >= mask.width - 1 || x1 <= x0) continue
+      widths.push(x1 + 1 - x0)
+      centres.push((x0 + x1 + 1) / 2)
+      ys.push(y)
+    }
+    if (widths.length < 5) return undefined
+    bands.push({ width: medianOf(widths), centre: medianOf(centres), rows: widths.length, row: medianOf(ys) })
+  }
+  return { bands }
+}
+
+/**
+ * 005W-N1: a side view registered as the opposite wall of a silhouette-registered side view drawn on the same sheet.
+ * Both must show the main gable at one scale and one height: its outline the same width (within 2 %) in each of two
+ * bands of rows, both centred on one column per view (within 1 % of the width), and the mate's own gable axis must land
+ * on the ridge (within 0.3 m). The view then takes the mate's scale and ground row, runs the other way along the house,
+ * and puts its gable axis on the ridge. Undefined where any of this does not hold.
+ */
+export function sameSheetSideRegistration(
+  frame: { id: string; assetId: string },
+  side: 'LEFT' | 'RIGHT',
+  mate: ElevationRegistrationV2,
+  mateView: ElevationFrameV2,
+  mateOutline: GableOutline | undefined,
+  outline: GableOutline | undefined,
+  ridgeAt: number,
+  refusedWhy: string,
+): ElevationRegistrationV2 | undefined {
+  if (!mateOutline || !outline) return undefined
+  for (let i = 0; i < OUTLINE_BANDS.length; i += 1) if (!(Math.abs(outline.bands[i].width / mateOutline.bands[i].width - 1) <= SAME_SHEET_OUTLINE_TOLERANCE)) return undefined
+  const axisOf = (o: GableOutline): number | undefined => (Math.abs(o.bands[0].centre - o.bands[1].centre) <= 0.01 * o.bands[1].width ? (o.bands[0].centre + o.bands[1].centre) / 2 : undefined)
+  const mateAxis = axisOf(mateOutline)
+  const axis = axisOf(outline)
+  if (mateAxis === undefined || axis === undefined) return undefined
+  if (!(Math.abs(mateView.alongOf(mateAxis) - ridgeAt) <= 0.3)) return undefined
+  const alongSign: 1 | -1 = side === 'RIGHT' ? 1 : -1
+  const extent = { x0: Math.round(axis - (mate.extent.x1 - mateAxis)), y0: mate.extent.y0, x1: Math.round(axis + (mateAxis - mate.extent.x0)), y1: mate.extent.y1 }
+  const widths = outline.bands.map((b, i) => `${b.width} against ${mateOutline.bands[i].width} px`).join(', ')
+  return {
+    ...mate,
+    frameId: frame.id,
+    assetId: frame.assetId,
+    side,
+    sideConfidence: 0.4,
+    sideWhy: `the publisher labels this drawing a side elevation, refused at registration (${refusedWhy}); it shows the main gable at the scale of the ${mate.side.toLowerCase()} view, so it is taken as the opposite side wall`,
+    extent,
+    alongAtLeft: round6(ridgeAt - alongSign * (axis - extent.x0) * mate.mpp),
+    alongSign,
+    spanWhy: `the sheet scale of ${mate.frameId}: the gable outline spans ${widths} in two bands of rows`,
+    confidence: round6(Math.min(mate.confidence, 0.4)),
+    why: `the gable outline is ${widths} wide on the ${mate.side.toLowerCase()} view's rows: one sheet scale, ${mate.mpp} m/px and its ground row ${mate.zeroRow}; the gable axis at column ${axis.toFixed(1)} is the ridge at ${ridgeAt}`,
+  }
+}
+
+/**
+ * 005W-N1: the row of the gable's apex on a side view, from its outline: the roof's two edges run at the pitch, so the
+ * outline's half-width grows by 1 / tan(pitch) a row, and the apex is where the two bands' line meets zero width.
+ * Undefined unless the outline's own slope between the two bands is the stated pitch within 10 % — chimneys, a
+ * dormer or a hip in the bands break it. A silhouette's top row is a chimney's top as often as the ridge.
+ */
+export function gableApexRow(outline: GableOutline | undefined, pitchDeg: number): { row: number; why: string } | undefined {
+  if (!outline || outline.bands.length < 2) return undefined
+  const [a, b] = outline.bands
+  const tan = Math.tan((pitchDeg * Math.PI) / 180)
+  const slope = (b.row - a.row) / ((b.width - a.width) / 2)
+  if (!(Math.abs(slope / tan - 1) <= 0.1)) return undefined
+  const row = round6(((a.row - (a.width / 2) * tan) + (b.row - (b.width / 2) * tan)) / 2)
+  return { row, why: `the gable outline widens ${(b.width - a.width).toFixed(0)} px over ${(b.row - a.row).toFixed(0)} rows (slope ${slope.toFixed(3)} against tan ${pitchDeg}° = ${tan.toFixed(3)}), so its apex is at row ${row.toFixed(1)}` }
 }

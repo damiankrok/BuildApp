@@ -265,6 +265,43 @@ export function planFrameByOuterFaces(plan: PlanReading, storeyIndex: number, wo
   }
 }
 
+/** 005W-N1: how closely two plans' drawn outlines must agree, per axis and in pixels, to be one sheet scale. */
+export const SAME_SHEET_TOLERANCE = 0.01
+
+/**
+ * 005W-N1: a storey plan drawn at the base plan's own sheet scale. Where the storey's outer faces span the same pixels
+ * as the base plan's on BOTH axes (within 1 %), the two sheets show one outline at one scale, and the storey takes the
+ * base plan's registration moved onto its own faces — the scale and any anisotropy the base frame carries included.
+ * The faces alone would put the storey on the body with a scale per axis; a base frame whose two axes differ by more
+ * than the faces may (3 %) then refuses every storey drawn exactly like it. Undefined where either outline is not
+ * found or the spans differ: a smaller attic, an L on one leg, another scale.
+ */
+export function planFrameBySameSheet(plan: PlanReading, storeyIndex: number, raster: { width: number; height: number; data: Uint8ClampedArray }, base: { plan: PlanReading; frame: PlanFrameV2; raster: { width: number; height: number; data: Uint8ClampedArray } }): PlanFrameV2 | undefined {
+  const faces = outerWallFaces(raster, plan.wallPx, plan.extent)
+  const baseFaces = outerWallFaces(base.raster, base.plan.wallPx, base.plan.extent)
+  if (!faces || !baseFaces) return undefined
+  const sx = (faces.x1 - faces.x0) / (baseFaces.x1 - baseFaces.x0)
+  const sy = (faces.y1 - faces.y0) / (baseFaces.y1 - baseFaces.y0)
+  if (!(Math.abs(sx - 1) <= SAME_SHEET_TOLERANCE && Math.abs(sy - 1) <= SAME_SHEET_TOLERANCE)) return undefined
+  const toPixel = (x: number, z: number): { x: number; y: number } => {
+    const p = base.frame.toPixel(x, z)
+    return { x: round6(faces.x0 + (p.x - baseFaces.x0) * sx), y: round6(faces.y0 + (p.y - baseFaces.y0) * sy) }
+  }
+  const toWorld = (px: number, py: number): { x: number; z: number } => base.frame.toWorld(baseFaces.x0 + (px - faces.x0) / sx, baseFaces.y0 + (py - faces.y0) / sy)
+  return {
+    frameId: plan.frame.id,
+    assetId: plan.frame.assetId,
+    storeyIndex,
+    mppX: round6(base.frame.mppX / sx),
+    mppY: round6(base.frame.mppY / sy),
+    originPx: toPixel(0, 0),
+    why: `its outer wall faces (px ${faces.x0}..${faces.x1} × ${faces.y0}..${faces.y1}) span the base plan's (px ${baseFaces.x0}..${baseFaces.x1} × ${baseFaces.y0}..${baseFaces.y1}) to ${(Math.abs(sx - 1) * 100).toFixed(1)} % and ${(Math.abs(sy - 1) * 100).toFixed(1)} %: one outline at one sheet scale, so the base plan's registration is moved onto it`,
+    toWorld,
+    toPixel,
+    wallPx: plan.wallPx,
+  }
+}
+
 // ---------------------------------------------------------------------------
 // Registering an elevation render in the v2 frame
 // ---------------------------------------------------------------------------

@@ -93,6 +93,20 @@ const DEFAULTS: Required<OpeningOptions> = { minWidthM: 0.5, maxWidthM: 6.5, cal
  * `height candidate`; a callout read as one OCR token carries one reading per
  * half, at the token's confidence.
  */
+/** 005W-N1: below this recogniser confidence a callout's height does not stand over an elevation that contradicts it. */
+export const WEAK_CALLOUT_CONFIDENCE = 0.3
+
+/**
+ * 005W-N1: whether a printed height is too weak a reading to stand over the elevation: read below
+ * WEAK_CALLOUT_CONFIDENCE, more than 0.5 m off the elevation's extent, and none of the recogniser's height readings
+ * within 0.2 m of it. A height read with confidence, or one the elevation could be a reading of, stands as before.
+ */
+export function weakPrintedHeight(confidence: number | undefined, printedM: number, drawnM: number, candidates: ReadonlyArray<{ cm: number }> | undefined): boolean {
+  if (confidence === undefined || confidence >= WEAK_CALLOUT_CONFIDENCE) return false
+  if (Math.abs(drawnM - printedM) <= 0.5) return false
+  return !(candidates ?? []).some((c) => Math.abs(c.cm / 100 - drawnM) <= 0.2)
+}
+
 export function calloutCandidates(evidence: MetricEvidence): { widths: Array<{ cm: number; score: number }>; heights: Array<{ cm: number; score: number }> } | null {
   const widths = evidence.alternatives.filter((a) => a.why.startsWith('width candidate')).map((a) => ({ cm: a.value, score: a.confidence }))
   const heights = evidence.alternatives.filter((a) => a.why.startsWith('height candidate')).map((a) => ({ cm: a.value, score: a.confidence }))
@@ -335,6 +349,8 @@ export type OpeningReadingInput = {
   vehicleMouth?: { from: number; to: number; roomId: string; why: string }
   /** 005V: a gap not built as an opening, and why — reported by the caller as a refusal, never dropped silently. */
   onRefused?: (refusal: { interval: [number, number]; why: string }) => void
+  /** 005W-N1: told the frame of every band-registered view that passed this wall's check (its gaps read on it). */
+  onBandViewAccepted?: (frameId: string) => void
   index: number
 }
 
@@ -360,7 +376,9 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
   const views = input.views.filter((v) => {
     if (!v.bandOnly) return true
     const read = gaps.filter((g) => wallAppearanceExtent(v.raster, v.view, g.interval, solids, host.floorY, wallTop(g.interval)) !== null).length
-    return gaps.length >= 2 && read >= Math.ceil((2 * gaps.length) / 3)
+    const accepted = gaps.length >= 2 && read >= Math.ceil((2 * gaps.length) / 3)
+    if (accepted) input.onBandViewAccepted?.(v.view.registration.frameId)
+    return accepted
   })
   for (const gap of gaps) {
     const [lo, hi] = gap.interval
@@ -437,6 +455,15 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
         headY = round6(sillY + h)
         prov.sill = 'SOURCE_CORROBORATED'
         prov.head = 'SOURCE_CORROBORATED'
+      } else if (weakPrintedHeight(input.callouts.find((e) => e.id === callout?.evidenceId)?.confidence, h, elevation.headY - elevation.sillY, callout.heightCandidates)) {
+        // 005W-N1: a height the recogniser read weakly, contradicted by the elevation by more than half a metre, with no
+        // reading among its own candidates the elevation fits, is not printed evidence over the drawing: the elevation's
+        // extent stands. The printed width, which the plan's gap agreed with, stays.
+        sillY = elevation.sillY
+        headY = elevation.headY
+        prov.sill = 'IMAGE_METRIC_REGISTERED'
+        prov.head = 'IMAGE_METRIC_REGISTERED'
+        unresolved.push(`the printed height read ${h.toFixed(2)} m with confidence ${(input.callouts.find((e) => e.id === callout?.evidenceId)?.confidence ?? 0).toFixed(2)} against the elevation's ${(elevation.headY - elevation.sillY).toFixed(2)} m (${elevation.sillY.toFixed(2)}..${elevation.headY.toFixed(2)}), and none of its height readings fits the elevation: the elevation stands`)
       } else {
         // The printed height stands over a contrast band that contradicts it;
         // the band's sill is kept only where an opening of the printed height
@@ -590,6 +617,23 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
       confidence,
       why: `a ${widthPlan.toFixed(2)} m gap in the ${host.facade.toLowerCase()} wall of ${host.massId} on storey ${host.storeyIndex}${callout ? `, printed ${callout.widthCm}/${callout.heightCm}` : ', no callout read'}${elevation ? `, ${(elevation.headY - elevation.sillY).toFixed(2)} m tall on the elevation` : ', not read on an elevation'}${profile === 'RAKED_SINGLE' ? `; on a gable end its head rakes from ${headY.toFixed(2)} to ${headFarY?.toFixed(2)}` : ''}`,
     })
+  }
+  // 005W-N1: a gap nothing read — no callout, no elevation — beside one of the same width (within 0.05 m) on the same
+  // wall and storey whose callout was read, is drawn like it: its sill, head and kind, named as assumed for rendering
+  // with the sibling it follows. Only a rectangular head under the wall's top, and only from a printed sibling; nothing
+  // is measured by it, and the kind it takes stays assumed.
+  for (const o of out) {
+    if (o.callout || o.elevation || o.provenance.sill !== 'ASSUMED_FOR_RENDERING' || o.provenance.head !== 'ASSUMED_FOR_RENDERING') continue
+    const sibling = out.find((x) => x !== o && x.callout && x.provenance.head !== 'UNRESOLVED' && x.profile === 'RECTANGULAR' && Math.abs(x.widthM - o.widthM) <= 0.05)
+    if (!sibling) continue
+    if (host.gable && sibling.headY > Math.min(gableSoffitY(host.gable, o.interval[0]), gableSoffitY(host.gable, o.interval[1])) - 0.05) continue
+    if (host.eaveTopY !== undefined && sibling.headY > host.eaveTopY - EAVE_CLEARANCE_M) continue
+    o.sillY = sibling.sillY
+    o.headY = sibling.headY
+    o.family = sibling.family
+    o.unresolved = [...o.unresolved.filter((u) => !u.startsWith('sill and head') && !u.startsWith('kind')), `sill, head and kind assumed from ${sibling.id}, the same ${o.widthM.toFixed(2)} m width on this wall, printed ${sibling.callout?.widthCm}/${sibling.callout?.heightCm}`]
+    o.provenance = { ...o.provenance, family: 'VISUAL_SEMANTIC' }
+    o.why = `${o.why}; drawn like ${sibling.id} (the same width on this wall, printed)`
   }
   return out
 }

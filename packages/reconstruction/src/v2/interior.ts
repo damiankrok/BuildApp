@@ -418,6 +418,9 @@ export function readInterior(
 
   // Solid blocks: neutral ink thicker than a thin partition in both directions (a chimney, a column).
   const blocks: SolidBlock[] = []
+  // 005W-N1: compact cores recovered from regions a partition runs into. They go out with the reading (the chimneys are
+  // read from them) but stay out of the partitions, doors and rooms below, which read as before.
+  const cores: Array<Omit<SolidBlock, 'id'>> = []
   {
     const seen = new Uint8Array(W * H)
     const thickEnough = (x: number, y: number): boolean => at(x, y) === 1 && hRun[y * W + x] > thinThick && vRun[y * W + x] > thinThick
@@ -426,6 +429,7 @@ export function readInterior(
         if (seen[y * W + x] || !thickEnough(x, y)) continue
         // flood
         const stack = [[x, y]]
+        const region: number[] = []
         let minX = x
         let maxX = x
         let minY = y
@@ -434,6 +438,7 @@ export function readInterior(
         seen[y * W + x] = 1
         while (stack.length > 0) {
           const [cx, cy] = stack.pop() as [number, number]
+          region.push(cy * W + cx)
           n += 1
           if (cx < minX) minX = cx
           if (cx > maxX) maxX = cx
@@ -450,10 +455,27 @@ export function readInterior(
         const bw = (maxX - minX + 1) * mpp
         const bh = (maxY - minY + 1) * mpp
         const fill = n / ((maxX - minX + 1) * (maxY - minY + 1))
-        if (bw >= 0.3 && bh >= 0.3 && bw <= 1.6 && bh <= 1.6 && fill >= 0.7) {
-          const a = plan.toWorld(px0 + minX, py0 + maxY + 1)
-          const b = plan.toWorld(px0 + maxX + 1, py0 + minY)
-          blocks.push({ id: `block-${storeyIndex}-${blocks.length}`, storeyIndex, x0: round6(a.x), z0: round6(a.z), x1: round6(b.x), z1: round6(b.z), pixelRect: { x0: px0 + minX, y0: py0 + minY, x1: px0 + maxX + 1, y1: py0 + maxY + 1 }, why: `a ${bw.toFixed(2)} × ${bh.toFixed(2)} m block of solid ink (${Math.round(fill * 100)} % filled)` })
+        const push = (r: { minX: number; maxX: number; minY: number; maxY: number }, fillOf: number, how: string, into: 'blocks' | 'cores'): void => {
+          const a = plan.toWorld(px0 + r.minX, py0 + r.maxY + 1)
+          const b = plan.toWorld(px0 + r.maxX + 1, py0 + r.minY)
+          const block = { storeyIndex, x0: round6(a.x), z0: round6(a.z), x1: round6(b.x), z1: round6(b.z), pixelRect: { x0: px0 + r.minX, y0: py0 + r.minY, x1: px0 + r.maxX + 1, y1: py0 + r.maxY + 1 }, why: `a ${((r.maxX - r.minX + 1) * mpp).toFixed(2)} × ${((r.maxY - r.minY + 1) * mpp).toFixed(2)} m block of solid ink (${Math.round(fillOf * 100)} % filled)${how}` }
+          if (into === 'blocks') blocks.push({ id: `block-${storeyIndex}-${blocks.length}`, ...block })
+          else cores.push(block)
+        }
+        if (bw >= 0.3 && bh >= 0.3 && bw <= 1.6 && bh <= 1.6 && fill >= 0.7) push({ minX, maxX, minY, maxY }, fill, '', 'blocks')
+        else if (bw >= 0.3 && bh >= 0.3 && fill < 0.7) {
+          // 005W-N1: a block a partition runs into is one region with it, and the partition's length empties the
+          // region's box. Its compact core is what is left of the region where the ink runs, inside the region, at
+          // least the block minimum (0.3 m) both across and along — the partition's thin arm falls away, a crossing of
+          // two thin partitions leaves only the crossing. The core must then pass the same box and fill tests as any
+          // block, which a crossing, a partition thick, does not.
+          const core = coreOfRegion(region, W, Math.ceil(0.3 / mpp))
+          for (const c of core) {
+            const cw = (c.maxX - c.minX + 1) * mpp
+            const ch = (c.maxY - c.minY + 1) * mpp
+            const cf = c.n / ((c.maxX - c.minX + 1) * (c.maxY - c.minY + 1))
+            if (cw >= 0.3 && ch >= 0.3 && cw <= 1.6 && ch <= 1.6 && cf >= 0.7) push(c, cf, `, the compact core of a ${bw.toFixed(2)} × ${bh.toFixed(2)} m region a partition runs into`, 'cores')
+          }
         }
       }
     }
@@ -696,7 +718,7 @@ export function readInterior(
     room.publishedAreaM2 = published.areaM2
     room.confidence = round6(Math.min(0.75, 0.55 + (off < 0.15 ? 0.15 : 0)))
   }
-  return { storeyIndex, frameId: plan.frameId, walls: kept, doors: keptDoors, blocks, rooms, unresolved }
+  return { storeyIndex, frameId: plan.frameId, walls: kept, doors: keptDoors, blocks: [...blocks, ...cores.map((c, i) => ({ id: `block-${storeyIndex}-${blocks.length + i}`, ...c }))], rooms, unresolved }
 }
 
 /** Trace the outer boundary of a set of grid cells as a rectilinear polygon (anticlockwise in the x/z plane). */
@@ -751,4 +773,45 @@ function pointInPolygon(p: { x: number; z: number }, poly: ReadonlyArray<{ x: nu
     if (a.z > p.z !== b.z > p.z && p.x < ((b.x - a.x) * (p.z - a.z)) / (b.z - a.z) + a.x) inside = !inside
   }
   return inside
+}
+
+/**
+ * 005W-N1: the compact parts of one flood region (indices `y * width + x`): the pixels whose horizontal and vertical ink
+ * runs, counted inside the region only, are both at least `minRun` long, grouped 4-connected. Returns each part's box and
+ * pixel count.
+ */
+export function coreOfRegion(region: readonly number[], width: number, minRun: number): Array<{ minX: number; maxX: number; minY: number; maxY: number; n: number }> {
+  const inRegion = new Set(region)
+  const run = (i: number, step: number, sameLine: (j: number) => boolean): number => {
+    let k = 1
+    for (let j = i - step; inRegion.has(j) && sameLine(j); j -= step) k += 1
+    for (let j = i + step; inRegion.has(j) && sameLine(j); j += step) k += 1
+    return k
+  }
+  const core = new Set(region.filter((i) => run(i, 1, (j) => Math.floor(j / width) === Math.floor(i / width)) >= minRun && run(i, width, () => true) >= minRun))
+  const out: Array<{ minX: number; maxX: number; minY: number; maxY: number; n: number }> = []
+  const seen = new Set<number>()
+  for (const start of [...core].sort((a, b) => a - b)) {
+    if (seen.has(start)) continue
+    const stack = [start]
+    seen.add(start)
+    const box = { minX: Infinity, maxX: -Infinity, minY: Infinity, maxY: -Infinity, n: 0 }
+    while (stack.length > 0) {
+      const i = stack.pop() as number
+      const x = i % width
+      const y = Math.floor(i / width)
+      box.n += 1
+      box.minX = Math.min(box.minX, x)
+      box.maxX = Math.max(box.maxX, x)
+      box.minY = Math.min(box.minY, y)
+      box.maxY = Math.max(box.maxY, y)
+      for (const j of [x > 0 ? i - 1 : -1, x < width - 1 ? i + 1 : -1, i - width, i + width]) {
+        if (j < 0 || seen.has(j) || !core.has(j)) continue
+        seen.add(j)
+        stack.push(j)
+      }
+    }
+    out.push(box)
+  }
+  return out
 }

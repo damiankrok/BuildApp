@@ -2335,3 +2335,31 @@ Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005W_GOAL_DRIVEN_VISUAL_ITERATIO
   (timber door → glass).
 - **Tests:** reconstruction 803/803; tsc clean. The APK-size gate is still red; CI/APK NOT_RUN.
 - **Renders** are outside the repo (`/home/user/work005w/005w-renders.zip`).
+
+## A01 attic gables and rooflights (STAGE BUILDPLAN-ANALYZER-005W-N1-A01-ATTIC-ROOFLIGHTS-VISUAL)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005W_N1_A01_ATTIC_ROOFLIGHTS_VISUAL.md`; ledger:
+`research/analyzer-005w-n1-attic/ledger.json`. Branch `analyzer/005w-n1-a01-attic-rooflights-visual-v1` from
+`224e429`. Status `PARTIAL_ATTIC_RECOVERY` (not owner-accepted).
+
+- **Same-sheet storey plan frame:** a storey whose outer faces span the base plan's pixels on both axes (≤ 1 %) takes
+  the base frame moved onto them. The A01 attic plan was on an 8 %-agreement wall-pair fit at 0.923 scale.
+- **Side views placed by the openings:** both unlabelled side views are scored against the plan's side-wall gaps and
+  swapped together only when each prefers it. A refused side view is registered on the same sheet as its mate (gable
+  outline widths). For openings, side views are read at the front/rear sheet scale, with the ridge row on the gable
+  apex from the outline.
+- **Weak printed heights** (< 0.3 confidence, > 0.5 m off the elevation, no fitting candidate) no longer stand over
+  the elevation. A gap nothing read follows its printed same-width sibling, marked ASSUMED_FOR_RENDERING.
+- **Chimney cores:** a block a partition runs into keeps its ≥ 0.3 m core (chimneys only).
+- **Rooflights** may come from a band view that passed the per-wall opening check.
+- **A01 attic:** 4/4 gable windows tall and on the right walls: east `100/220` ×2 newly built, west #2 0–2.20.
+  - Rooflights: 2 of 7.
+  - Chimneys: 3, which matches front and rear; this is a deliberate change of the brief's "2 chimneys", pending the
+    owner.
+  - Front unchanged.
+- **Controls:** Gozdzikowce, Marcówki, Cieszynianki and Rarytasy G2E are byte-identical; Rarytasy OWNER is NOT_RUN.
+- **Wall tone:** it is now grey render (`readMassTones` unchanged). It reads the source's grey ground storey from the
+  correctly placed east view; owner to judge.
+- **Tests:** reconstruction 817/817; tsc clean.
+- **Renders** are outside the repo (`/home/user/work005w-n1/005w-n1-renders.zip`, SHA-256 `0ed20537…`). The APK-size
+  gate is still red; CI/APK NOT_RUN.
