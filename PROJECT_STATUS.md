@@ -2147,3 +2147,17 @@ Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005U_OWNER_VISUAL_FIRST_BAD_FIX.
   Controls Rarytasy G2E and Marcówki identical; Cieszynianki changes (assumed doors 6→4, the same correction).
 - **Not fixed (named):** A01's attached strips inside the main gable footprint (plan decomposition); Goździkowce's
   integral garage (no garage room on the plan reading). Owner screenshots were not available to this session. No APK.
+
+## A01's false attached bodies (STAGE BUILDPLAN-ANALYZER-005U-N2-PLAN-MASS-FIRST-BAD)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005U_N2_PLAN_MASS_FIRST_BAD.md`; trace: `research/analyzer-005u-n2-mass/`.
+Branch `analyzer/005u-n2-plan-mass-first-bad-v1` from `074c956`. Verdict `SAFE_MASS_TOPOLOGY_FIX_WITH_MEASURED_3D_CHANGE`.
+
+- **First bad:** `planBodies` unioned A01's five ground regions (no wall between them) but its rectangularity test
+  refused the box because of wall-thin cells: the inner half of the outer wall and a partition core. One house became
+  MAIN + two ATTACHED strips with flat roofs inside the gable's footprint.
+- **Fix:** inside a group's box, a cell no wider than max(0.5 m, 1.5 × wall thickness) that stands against drawn wall
+  (wall + opening ≥ 0.5) is wall material. It never joins regions a wall separates.
+- **Measured:** A01 is one body under one gable (model `5ea8bbca…`), exterior openings 20 → 12 (the dropped ones stood on
+  interior lines). Rarytasy G2E, Marcówki, Cieszynianki and Goździkowce are byte-identical.
+- OWNER_VISUAL_NOT_RETESTED; CI/APK NOT_RUN; `research-isolation` APK-size gate still red from `074d6ae` (known baseline).

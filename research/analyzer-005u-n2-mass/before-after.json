@@ -1,0 +1,200 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005U-N2-PLAN-MASS-FIRST-BAD",
+ "baseline": "074c956bf5951c8b78bbbcafa33e0a4279a11c7e",
+ "method": "offline sealed solver replay (research/analyzer-005t-n2/replay-solver.ts); no OCR, no network",
+ "A01": {
+  "modelId": "m60124f28f071a",
+  "before": {
+   "modelSha256": "3a2566047b6f95cc4491e8261b3eaa1658c36b4f4689701c228c54ed4e481a28",
+   "rings": [
+    {
+     "id": "ring-attached-0-0",
+     "levelId": "lvl-0"
+    },
+    {
+     "id": "ring-attached-1-0",
+     "levelId": "lvl-0"
+    },
+    {
+     "id": "ring-main-0",
+     "levelId": "lvl-0"
+    },
+    {
+     "id": "ring-main-1",
+     "levelId": "lvl-1"
+    }
+   ],
+   "roofs": [
+    {
+     "id": "roof-attached-0",
+     "kind": "FLAT",
+     "pitchDeg": 0,
+     "footprint": {
+      "maxX": 6.196,
+      "maxZ": 8.008,
+      "minX": 0,
+      "minZ": 6.406
+     }
+    },
+    {
+     "id": "roof-attached-1",
+     "kind": "FLAT",
+     "pitchDeg": 0,
+     "footprint": {
+      "maxX": 10.5,
+      "maxZ": 7.858,
+      "minX": 6.436,
+      "minZ": 6.406
+     }
+    },
+    {
+     "id": "roof-main",
+     "kind": "GABLE",
+     "pitchDeg": 40,
+     "footprint": {
+      "maxX": 10.5,
+      "maxZ": 8.3,
+      "minX": 0,
+      "minZ": 0
+     }
+    }
+   ],
+   "openings": 24,
+   "doors": 7,
+   "windows": 17,
+   "walls": 32,
+   "exteriorWalls": 16,
+   "rooms": [
+    {
+     "id": "attached-0-room-0-0",
+     "levelId": "lvl-0",
+     "areaM2": 7.67
+    },
+    {
+     "id": "attached-1-room-0-0",
+     "levelId": "lvl-0",
+     "areaM2": 3.97
+    },
+    {
+     "id": "main-room-0-0",
+     "levelId": "lvl-0",
+     "areaM2": 62.03
+    },
+    {
+     "id": "main-room-1-0",
+     "levelId": "lvl-1",
+     "areaM2": 50.71
+    },
+    {
+     "id": "main-room-1-1",
+     "levelId": "lvl-1",
+     "areaM2": 6.07
+    }
+   ],
+   "exteriorOpenings": {
+    "lvl-0": {
+     "WINDOW": 7,
+     "DOOR": 2,
+     "other": 0
+    },
+    "lvl-1": {
+     "WINDOW": 10,
+     "DOOR": 1,
+     "other": 0
+    }
+   },
+   "exteriorOpeningsWidthAtLeast3m": 6
+  },
+  "after": {
+   "modelSha256": "5ea8bbca53f566ecd573413f7b0ac61231a70a4e8d9f809837693c84ec0082e9",
+   "rings": [
+    {
+     "id": "ring-main-0",
+     "levelId": "lvl-0"
+    },
+    {
+     "id": "ring-main-1",
+     "levelId": "lvl-1"
+    }
+   ],
+   "roofs": [
+    {
+     "id": "roof-main",
+     "kind": "GABLE",
+     "pitchDeg": 40,
+     "footprint": {
+      "maxX": 10.5,
+      "maxZ": 8.3,
+      "minX": 0,
+      "minZ": 0
+     }
+    }
+   ],
+   "openings": 16,
+   "doors": 5,
+   "windows": 11,
+   "walls": 25,
+   "exteriorWalls": 8,
+   "rooms": [
+    {
+     "id": "main-room-0-0",
+     "levelId": "lvl-0",
+     "areaM2": 78.35
+    },
+    {
+     "id": "main-room-1-0",
+     "levelId": "lvl-1",
+     "areaM2": 59.78
+    },
+    {
+     "id": "main-room-1-1",
+     "levelId": "lvl-1",
+     "areaM2": 11.17
+    }
+   ],
+   "exteriorOpenings": {
+    "lvl-0": {
+     "WINDOW": 5,
+     "DOOR": 0,
+     "other": 0
+    },
+    "lvl-1": {
+     "WINDOW": 6,
+     "DOOR": 1,
+     "other": 0
+    }
+   },
+   "exteriorOpeningsWidthAtLeast3m": 1
+  }
+ },
+ "controls": {
+  "rarytasy-g2e": {
+   "modelId": "m84f2903cb8e14",
+   "modelSha256Before": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+   "modelSha256After": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+   "changed": false,
+   "beforeRecordedAt": "005U-V1 report on 074c956 (prefix/suffix as recorded there)"
+  },
+  "marcowki": {
+   "modelId": null,
+   "modelSha256Before": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+   "modelSha256After": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+   "changed": false,
+   "beforeRecordedAt": "005U-V1 report on 074c956 (prefix/suffix as recorded there)"
+  },
+  "dom-w-cieszyniankach": {
+   "modelId": null,
+   "modelSha256Before": "5ca09ead25d323867444cb7023e31e88c9a095fe134598b92d0e754d312eedfc",
+   "modelSha256After": "5ca09ead25d323867444cb7023e31e88c9a095fe134598b92d0e754d312eedfc",
+   "changed": false,
+   "beforeRecordedAt": "005U-V1 report on 074c956 (prefix/suffix as recorded there)"
+  },
+  "dom-w-gozdzikowcach": {
+   "modelId": "m79923e950094d",
+   "modelSha256Before": "faf56de0a9e5f1413c34d04bd28716d5b4e31f740399807744bdd10ab449b80a",
+   "modelSha256After": "faf56de0a9e5f1413c34d04bd28716d5b4e31f740399807744bdd10ab449b80a",
+   "changed": false,
+   "beforeRecordedAt": "005U-V1 report on 074c956 (prefix/suffix as recorded there)"
+  }
+ }
+}

@@ -2693,10 +2693,21 @@ export function planBodies(decomposition: PlanDecomposition, wallShare = 0.5): P
       const region = recessOf(c)
       return region !== undefined && pxArea(region.rect) * m2PerPx <= POCKET_FLOOR_M2
     }
+    // 005U-N2: a cell no wider across than a wall band can be, standing against drawn wall (a door or window in that
+    // wall still counts as the wall), is the wall itself — the inner half of a thick outer wall the outline cut
+    // through, or the core of a partition between two rooms — not ground the body wraps. It neither belongs to the
+    // body nor makes a hole in it: left as a hole, it split one walled house into its rooms (the band of rooms behind
+    // the outer wall reported as two "attached" bodies). Ground a body can wrap — a courtyard, a porch, the notch of
+    // an L — is never that narrow: a body is at least a metre across. It only lets regions already joined (no wall
+    // between them) close into one box; it never joins regions a wall separates.
+    const metresPerPx = decomposition.wallThickness.px > 0 ? decomposition.wallThickness.m / decomposition.wallThickness.px : 0
+    const wallSliverPx = metresPerPx > 0 ? Math.max(WALL_SLIVER_MIN_M, WALL_SLIVER_FACTOR * decomposition.wallThickness.m) / metresPerPx : 0
+    const wallMaterial = (c: PlanCell): boolean =>
+      wallSliverPx > 0 && Math.min(c.rect.x1 - c.rect.x0, c.rect.y1 - c.rect.y0) <= wallSliverPx && c.edges.some((e) => e.wall + e.opening >= 0.5)
     const rectangular = decomposition.cells.every((c) => {
       const inside = c.rect.x0 >= rect.x0 && c.rect.x1 <= rect.x1 && c.rect.y0 >= rect.y0 && c.rect.y1 <= rect.y1
       if (!inside) return true
-      return own.has(`${c.ix}:${c.iy}`) || pocket(c)
+      return own.has(`${c.ix}:${c.iy}`) || pocket(c) || wallMaterial(c)
     })
     if (!rectangular) {
       for (const part of parts) out.push(part)
@@ -2955,6 +2966,10 @@ export type BoundaryRecord = {
 
 /** The pocket rule's floor (the pipeline's `max(6 m², 2.5 w²)`): a recess no larger is a pocket of the body around it. */
 const POCKET_FLOOR_M2 = 6
+/** 005U-N2: the widest cell read as wall material rather than ground, inside a body's box: never less than this … */
+const WALL_SLIVER_MIN_M = 0.5
+/** … and up to this many of the plan's own wall thicknesses. */
+const WALL_SLIVER_FACTOR = 1.5
 /** Two outlines this close in area are one reading (the AGREES band of the layout gate). */
 const POLICY_AGREES = 0.06
 
