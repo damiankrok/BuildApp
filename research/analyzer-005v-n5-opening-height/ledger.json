@@ -1,0 +1,37 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005V-N5-ELEVATION-OPENING-HEIGHT",
+ "base": "631b2481ffdb40e659dbe47327fe6e351c0934a6",
+ "verdict": "NO_SAFE_OPENING_HEIGHT_FIX",
+ "productionChanged": false,
+ "sourceAccess": "private cached rasters of the sealed N1v source for m60124f28f071a; read locally; no pixels committed or published; no download, no OCR",
+ "firstBad": {
+  "where": "packages/image-metrology/src/opening.ts verticalOpeningExtent (via v2/openings-v2.ts elevationExtent)",
+  "mechanism": "per row: median GRAY of the opening band against median gray of narrow wall strips either side, min of the two differences; Otsu splits rows into wall-like and hole-like; the longest contiguous hole-like run is the opening",
+  "whyItFailsHere": [
+   "striped blinds and reflections: rows alternate light and dark around the wall's grey, so the gray difference drops below the Otsu split on many rows and the run breaks (100/220: only the lower dark part, rows 549..598)",
+   "Otsu on a multi-level glass profile sets the split high (hole median 45..97/255): moderately different glass rows count as wall",
+   "reference strips: the 250/220 left strip falls off the wall edge (pergola side), the 90/210 left strip on the timber panel beside the entrance; the wall's own spread (8..19) then hides the glass",
+   "sill: the bottom frame line merges with the plinth and with dark reflections; no variant separates it"
+  ]
+ },
+ "variantsTried": [
+  "production-like gray + Otsu",
+  "rgb (max channel) + Otsu",
+  "gray + wall-spread limit max(8, 4 sigma)",
+  "rgb + wall-spread limit max(8, 4 sigma)",
+  "full-width dark frame line (head only)"
+ ],
+ "outcome": {
+  "opening-0-front-0-0 (250/220)": "no variant reads it (best: noise band at ~1.0 m); frame line gives the head at 2.11 m, no sill",
+  "opening-0-front-0-1 (100/220)": "rgb + spread limit reads rows 477..604 = 2.11 / -0.06 m (manual 2.20 / 0): the only full read",
+  "opening-0-front-0-2 (105/210)": "rgb + spread limit: head 1.85, sill -0.06 (manual 2.10 / 0): head 0.25 m low",
+  "opening-0-front-0-3 (90/210)": "every variant reads a band ~1.27..1.89 m (the upper glass): a false window band; adopting would replace the 0..2.10 door/panel with a 0.6 m window",
+  "summary": "1 of 4 correct, 1 partial, 1 harmful, 1 unreadable: the acceptance (no opening worse, 90/210 not a false band, 250/220 not on an assumed sill) fails; Phase A gives no safe production change, so Phases B and C are not reached"
+ },
+ "phaseB": "not reached (the N4 registration was used diagnostically only, as the frame in which the columns were projected; not applied to the tree)",
+ "phaseC": "not reached (the N3 glazing patch was not applied)",
+ "controls": "not replayed: no production change; the committed tree equals the base, so every model hash equals the base (A01 d93291577e2d..., Gozdzikowce 911456a88b25..., Marcowki f607464936c7..., Rarytasy G2E 9f5fd342a53e..., Cieszynianki e4e562923319...)",
+ "renders": "VISUAL_NOT_VERIFIED / not run: no geometry change",
+ "nextMinimalStep": "a reader that takes the head from the full-width frame line (consistent on all four: row 477 = 2.11 m) and the sill from where the band's difference from the wall meets the plinth line, with references chosen on wall pixels only (rejecting a strip that differs from the wall above the opening); preregistered on FRONT + REAR of A01 and at least one registered elevation of another house, with synthetic blinds / reflections / pergola negatives",
+ "trace": "trace-summary.ndjson"
+}

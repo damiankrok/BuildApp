@@ -2298,3 +2298,17 @@ candidate: `research/analyzer-005v-n4-front-wall/`. Branch `analyzer/005v-n4-a01
   It reads 100/220 as 0.06–0.99 m and finds nothing on the other three, so adoption would worsen A01.
   - The candidate also adds 2 A01 rooflights and changes one Cieszynianki window and its roof (unverified).
 - The N3 glazing patch is not applied. APK-size gate still red; CI/APK NOT_RUN; OWNER_VISUAL_NOT_RETESTED.
+
+## Elevation opening heights: no safe fix (STAGE BUILDPLAN-ANALYZER-005V-N5-ELEVATION-OPENING-HEIGHT)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005V_N5_ELEVATION_OPENING_HEIGHT.md`; trace:
+`research/analyzer-005v-n5-opening-height/`. Branch `analyzer/005v-n5-elevation-opening-height-v1` from `631b248`.
+Verdict `NO_SAFE_OPENING_HEIGHT_FIX`: **no production change**.
+
+- **First bad:** `verticalOpeningExtent` compares the median grey of each row against wall strips and splits with Otsu.
+  On A01's front render, blinds and reflections break the run, and two reference strips land off the wall.
+- **Five variants tried** (grey/RGB × Otsu/wall-spread limit, plus a frame-line head). The best reads 1 of 4 openings
+  correctly (100/220 at 0–2.11 m), 1 partially, 1 unreadably, and one harmfully: a false 1.3–1.9 m band on 90/210.
+  The frame line gives a consistent head (2.11 m on 4/4) but no sill.
+- The N4 and N3 patches were not applied; model hashes equal the base.
+- VISUAL_NOT_VERIFIED; OWNER_VISUAL_NOT_RETESTED; APK-size gate still red; CI/APK NOT_RUN.
