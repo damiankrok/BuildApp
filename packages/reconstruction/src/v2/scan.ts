@@ -27,6 +27,37 @@ export const NEUTRAL_INK_CHROMA = 40
  * 005V: the topmost row in a column holding neutral ink — darker than paper and not saturated. An outline on a line
  * drawing, or a roof on a render; a render's blue sky, darker than paper, is not ink.
  */
+/**
+ * 005V-N4: the repeated horizontal bands of neutral pixels (wall, roof, plinth) across an elevation silhouette, as
+ * candidates for the house's wall span. On each row of the silhouette's middle (15 % in from the top and the bottom), the
+ * run of neutral pixels through the silhouette's centre column is taken; rows whose runs end within ±3 px of each other
+ * form one band. A pergola, sky, foliage or a window breaks a run; a wall below the eaves and a roof do not.
+ */
+export function neutralBands(r: Raster, extent: { x0: number; y0: number; x1: number; y1: number }): Array<{ x0: number; x1: number; rows: number; share: number; y0: number; y1: number }> {
+  const h = extent.y1 - extent.y0
+  const c = Math.round((extent.x0 + extent.x1) / 2)
+  const neutral = (x: number, y: number): boolean => {
+    const [red, green, blue] = rgbAt(r, x, y)
+    return Math.max(red, green, blue) - Math.min(red, green, blue) < NEUTRAL_INK_CHROMA
+  }
+  const bands: Array<{ x0: number; x1: number; rows: number; y0: number; y1: number }> = []
+  let n = 0
+  for (let y = Math.round(extent.y0 + 0.15 * h); y <= Math.round(extent.y1 - 0.15 * h); y += 1) {
+    n += 1
+    if (!neutral(c, y)) continue
+    let a = c
+    while (a - 1 >= extent.x0 && neutral(a - 1, y)) a -= 1
+    let b = c
+    while (b + 1 <= extent.x1 && neutral(b + 1, y)) b += 1
+    const band = bands.find((k) => Math.abs(k.x0 - a) <= 3 && Math.abs(k.x1 - b) <= 3)
+    if (band) {
+      band.rows += 1
+      band.y1 = y
+    } else bands.push({ x0: a, x1: b, rows: 1, y0: y, y1: y })
+  }
+  return bands.map((k) => ({ ...k, share: n > 0 ? k.rows / n : 0 }))
+}
+
 export function topNeutralInkRow(r: Raster, x: number, y0: number, y1: number): number | undefined {
   for (let y = y0; y <= y1; y += 1) {
     if (lumaAt(r, x, y) >= 200) continue

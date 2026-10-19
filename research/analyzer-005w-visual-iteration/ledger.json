@@ -1,0 +1,126 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005W-GOAL-DRIVEN-VISUAL-ITERATION",
+ "base": "d2a6cb383f606337f5edbcdb89a618fe262c4988",
+ "verdict": "VISUAL_CANDIDATE_IMPROVED_OWNER_REVIEW_PENDING",
+ "ownerVisual": "OWNER_REVIEW_PENDING (not accepted by the owner)",
+ "source": "private cached rasters of the sealed N1v source packages (A01, Marcowki, Rarytasy G2E, Cieszynianki) read locally; no download, no OCR, no publisher pixel in the repository; OWNER ZIP not available",
+ "method": "opening read as an object against the wall it is cut in: the plan's solid stretches of the same wall give the wall's per-row colour on the registered elevation; rows where most of the opening's columns match no stretch belong to the opening; slats/transoms bridged (0.3 m); the run must be closed above by wall (0.1 m lintel) and stays under the wall top (storey, eaves, gable rake); sill within 0.15 m of the floor snaps to the floor. Used only for gaps without a printed callout, and only where the contrast reader read nothing or a part of the same opening.",
+ "reused": {
+  "N4 wall-band registration": "adopted for opening reading only (bandOnly views); roof, rooflights, chimneys and wall finish keep to silhouette-registered views; a band-only view is accepted per wall only where >= 2/3 of the plan's gaps (at least 2) read on it as openings",
+  "N3 light glazing symbol": "adopted only for gaps whose heights an elevation read; the assumed-heights branch and the garage-mouth test keep the base glazing test (with its original span) unchanged",
+  "N3 GLAZED_DOOR by symbol (assumed heights)": "rejected: changed Gozdzikowce and Cieszynianki door kinds without a height read"
+ },
+ "iterations": [
+  {
+   "n": 1,
+   "change": "N4 band registration (full) + N3 patch (full) + object reader as primary everywhere",
+   "effect": "A01 front 4/4 read (0-2.09 / 0-2.09 / 0-2.02 / 0-2.02); but every control changed: Marcowki attic runs 3-8 m into the gable, Rarytasy sills moved, Cieszynianki roof axis Z->X and walls dark, Gozdzikowce door kinds",
+   "kept": false
+  },
+  {
+   "n": 2,
+   "change": "lintel required, search capped at the wall top (eaves/gable), rows with no plain wall sample break a run, arbitration: object reader only where the contrast reader read nothing or a contained part",
+   "effect": "runaway reads gone; Rarytasy/Marcowki sills still moved where a callout prints the height",
+   "kept": false
+  },
+  {
+   "n": 3,
+   "change": "object reader not used when a callout prints the height; floor snap 0.15 m",
+   "effect": "Rarytasy G2E byte-identical; Marcowki only west-3-0; Gozdzikowce still changed (N3 assumed branch)",
+   "kept": false
+  },
+  {
+   "n": 4,
+   "change": "N3 light glazing only for read heights; base glazing test restored elsewhere",
+   "effect": "Gozdzikowce byte-identical",
+   "kept": false
+  },
+  {
+   "n": 5,
+   "change": "band-registered views feed openings only",
+   "effect": "Cieszynianki roof and wall material back to base; A01 loses the 2 rooflights the band view had produced (their along-slope position looked wrong); Cieszynianki front read 0-2.76 on a 3.75 m gap through a band registration at about half the true scale",
+   "kept": false
+  },
+  {
+   "n": 6,
+   "change": "band-only view check per wall (>= 2/3 of gaps, >= 2, read as closed openings)",
+   "effect": "Cieszynianki byte-identical; A01 front unchanged (4/4 read)",
+   "kept": true
+  }
+ ],
+ "a01Front": [
+  {
+   "id": "opening-0-front-0-0",
+   "evalLabel": "250/220",
+   "before": "WINDOW glass, sill 0.90, h 1.30, ASSUMED",
+   "after": "WINDOW (MULTI_PANEL_GLAZING) glass, sill 0.00, h 2.09, VISUAL_INFERRED"
+  },
+  {
+   "id": "opening-0-front-0-1",
+   "evalLabel": "100/220",
+   "before": "DOOR timber, 0.00, h 2.10, assumed heights",
+   "after": "WINDOW glass full height, 0.00, h 2.09, VISUAL_INFERRED"
+  },
+  {
+   "id": "opening-0-front-0-2",
+   "evalLabel": "105/210",
+   "before": "DOOR timber, 0.00, h 2.10",
+   "after": "DOOR timber, 0.00, h 2.02, VISUAL_INFERRED (entrance kept)"
+  },
+  {
+   "id": "opening-0-front-0-3",
+   "evalLabel": "90/210",
+   "before": "DOOR timber, 0.00, h 2.10",
+   "after": "WINDOW glass full height, 0.00, h 2.02, VISUAL_INFERRED; kind from the plan's glazing lines and no swing of its own"
+  }
+ ],
+ "a01Other": [
+  {
+   "id": "opening-0-rear-2-1",
+   "before": "WINDOW 0.90/1.30 ASSUMED",
+   "after": "GLAZED_DOOR 0-2.12 VISUAL_INFERRED (rear terrace glazing)"
+  },
+  {
+   "id": "opening-1-west-7-0",
+   "before": "DOOR timber 0-2.20",
+   "after": "WINDOW glass 0-2.20 (printed height kept; kind from the glazing symbol)"
+  }
+ ],
+ "controls": {
+  "gozdzikowce": "911456a88b2530c9cf01b348dc7045a7b7bcc6d85e62e58221e5f205d41efbbc (identical to base; garage no 8, its wall and the 3.22 m door unchanged)",
+  "rarytasy-g2e-m84f": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7 (identical)",
+  "cieszynianki": "e4e562923319084fda0b9ae934bcb1185a7098c53e7727c82f9afdcb592c1f6c (identical)",
+  "marcowki": "cf7977438b0053903f0398548d0bfb0b569760864d1aa8c258992fc7459faee0 (base f607464936c7...): one change, opening-0-west-3-0 0.9 m wide, 0-2.30 (heights unchanged): timber DOOR -> glass WINDOW; the side render shows a narrow full-height glazed element; whether it opens is not read",
+  "a01": "f7375a47b982e475efe0d52cfbd30aab0981b154d06ba6c004acdad1c1c37317 (base d93291577e2d...)",
+  "rarytasy-owner-m3ea": "NOT_RUN (never substituted by m84f)"
+ },
+ "open": [
+  "A01 rooflights 78/118 still absent (band view not used for the roof)",
+  "A01 second attic gable window 100/220 stays 1.14/1.22: the base WEST registration is off by about 100 px at that gable",
+  "A01 entrance leaf drawn timber (source: dark panel); upper white band and pergola not modelled",
+  "Cieszynianki west full-height glazing reads looked right but its band registration fails the per-wall check: kept assumed"
+ ],
+ "renders": {
+  "viewer": "apps/web BuildWorld (Three.js), vite build of the working tree, SwiftShader, research/analyzer-005v-facade/capture-preview.mjs",
+  "zip": "/home/user/work005w/005w-renders.zip (outside the repository)",
+  "zipSha256": "850e361f37410a968aee465b1c02f218e10a847b73e06e8137ca3efb30f9bfea",
+  "models": {
+   "a01-przed": "d9329157",
+   "a01-po": "f7375a47",
+   "gozd-przed": "911456a8",
+   "gozd-po": "911456a8"
+  }
+ },
+ "tests": {
+  "packages/reconstruction": "52 files, 803/803",
+  "elevation-opening-extent (new)": "11/11",
+  "tsc": "clean",
+  "research-isolation": "70/71, KNOWN_BASELINE_FAIL: tracked APK 39 556 682 B > 32 MB",
+  "notRun": [
+   "41-job CI",
+   "APK",
+   "emulator",
+   "e2e"
+  ]
+ }
+}

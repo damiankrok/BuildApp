@@ -320,14 +320,19 @@ export function registerElevationV2(
   ridgeY: number,
   sideEavesOverhangM: number,
   terrainY?: number,
+  /** 005V-N4: the extent's x span is the walls' drawn span (not the silhouette's): only the walled width scales it. */
+  walledOnly = false,
 ): ElevationRegistrationV2 | undefined {
   const widthPx = extent.x1 - extent.x0
   const heightPx = extent.y1 - extent.y0
   if (widthPx <= 0 || heightPx <= 0) return undefined
   const e = world.envelope
   const w = world.walled
-  const candidates: Array<{ spanM: number; along0: number; along1: number; why: string }> =
-    side === 'FRONT' || side === 'REAR'
+  const candidates: Array<{ spanM: number; along0: number; along1: number; why: string }> = walledOnly
+    ? side === 'FRONT' || side === 'REAR'
+      ? [{ spanM: w.x1 - w.x0, along0: w.x0, along1: w.x1, why: `the ${(w.x1 - w.x0).toFixed(2)} m walled width (the walls' drawn span under the roof)` }]
+      : [{ spanM: w.z1 - w.z0, along0: w.z0, along1: w.z1, why: `the ${(w.z1 - w.z0).toFixed(2)} m walled depth (the walls' drawn span under the roof)` }]
+    : side === 'FRONT' || side === 'REAR'
       ? [{ spanM: e.x1 - e.x0 + 2 * sideEavesOverhangM, along0: e.x0 - sideEavesOverhangM, along1: e.x1 + sideEavesOverhangM, why: `the ${(e.x1 - e.x0).toFixed(2)} m width of the envelope${sideEavesOverhangM > 0 ? ` plus ${sideEavesOverhangM} m of eaves each side` : ''}` }]
       : [
           { spanM: e.z1 - e.z0, along0: e.z0, along1: e.z1, why: `the ${(e.z1 - e.z0).toFixed(2)} m characteristic depth (the roof over the zones)` },

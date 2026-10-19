@@ -2312,3 +2312,26 @@ Verdict `NO_SAFE_OPENING_HEIGHT_FIX`: **no production change**.
   The frame line gives a consistent head (2.11 m on 4/4) but no sill.
 - The N4 and N3 patches were not applied; model hashes equal the base.
 - VISUAL_NOT_VERIFIED; OWNER_VISUAL_NOT_RETESTED; APK-size gate still red; CI/APK NOT_RUN.
+
+## Elevation openings read as objects (STAGE BUILDPLAN-ANALYZER-005W-GOAL-DRIVEN-VISUAL-ITERATION)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005W_GOAL_DRIVEN_VISUAL_ITERATION.md`; ledger:
+`research/analyzer-005w-visual-iteration/ledger.json`. Branch `analyzer/005w-goal-driven-visual-iteration-v1` from
+`d2a6cb3`. Status `VISUAL_CANDIDATE_IMPROVED_OWNER_REVIEW_PENDING` (not owner-accepted).
+
+- **New opening reader** in `openings-v2.ts`: an opening's vertical extent is read as an object against the wall. It
+  takes the wall's per-row colour from the plan's solid stretches, requires a lintel and stays under the wall top. It
+  is used only without a printed height, and only where the contrast reader read nothing or read part of the same
+  opening.
+- **N4 wall-band registration** feeds openings only, and is accepted per wall only where ≥ 2/3 of the gaps read on it.
+- **N3 light glazing symbol** is used only for gaps with read heights.
+- **A01 front:**
+  - 250/220 → glazing 0–2.09
+  - 100/220 → full-height glass
+  - 105/210 → entrance door
+  - 90/210 → full-height glass
+- **A01 rear:** the terrace door now reaches the floor.
+- **Controls:** Gozdzikowce, Rarytasy G2E and Cieszynianki are byte-identical. Marcówki has one side opening
+  (timber door → glass).
+- **Tests:** reconstruction 803/803; tsc clean. The APK-size gate is still red; CI/APK NOT_RUN.
+- **Renders** are outside the repo (`/home/user/work005w/005w-renders.zip`).

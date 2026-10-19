@@ -68,7 +68,7 @@ import { qualityLevelOf, sealQualityReport } from './quality.js'
 import type { FeatureQualityReport } from './quality.js'
 import { repairFromResiduals, verifyAgainstViews } from './verify.js'
 import type { RepairTrace, SourceViewResidual } from './verify.js'
-import { dominantTone, lumaAt, topNeutralInkRow } from './scan.js'
+import { dominantTone, lumaAt, neutralBands, topNeutralInkRow } from './scan.js'
 import { approximateRidgeDatum } from './roof-datum.js'
 import type { ApproximateRidge } from './roof-datum.js'
 
@@ -551,13 +551,35 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const { registrations: legacy } = registerElevationFrames(graph, { width: main.x1 - main.x0 + masses.filter((m) => m.id !== main.id).reduce((a, m) => a + Math.max(0, m.x1 - main.x1) + Math.max(0, main.x0 - m.x0), 0), depth: world.walled.z1 - world.walled.z0, totalHeight: ridgeY ?? levelsV2[levelsV2.length - 1].wallTop }, keep, options.raster)
   const elevations: ElevationRegistrationV2[] = []
   const views: Array<{ view: ElevationFrameV2; raster: Raster }> = []
+  /** 005W: elevations registered on the walls' band alone (005V-N4): read for the openings of their facade, nothing else. */
+  const openingOnlyViews: Array<{ view: ElevationFrameV2; raster: Raster; bandOnly: true }> = []
   const sideEaves = layout.roofSupports.find((r) => r.massId === main.sourceMassId)?.overhangM?.value ?? 0
   for (const r of legacy) {
     if (!r.side) continue
     const frame = frameById.get(r.frameId)
     const raster = frame ? options.raster(frame) : undefined
     if (!frame || !raster || ridgeY === undefined) continue
-    const reg = registerElevationV2({ id: r.frameId, assetId: r.assetId }, r.extent, r.side, r.sideConfidence, r.sideWhy, world, ridgeY, sideEaves, terrain)
+    let reg = registerElevationV2({ id: r.frameId, assetId: r.assetId }, r.extent, r.side, r.sideConfidence, r.sideWhy, world, ridgeY, sideEaves, terrain)
+    // 005V-N4: a silhouette that fits no span of the house may take in what stands beside it (a pergola) or a roof's
+    // overhang. The walls are then looked for as a repeated band of neutral pixels across the silhouette, scaled by the
+    // walled width alone; the apex stays the ridge datum, and only a band whose ground then lands on the terrain within
+    // the same tolerance is taken (the one that lands nearest). The openings are not used to choose it.
+    if (!reg) {
+      // 005W: a view registered on the walls' band feeds the openings of its facade only. The roof, the rooflights,
+      // the chimneys and the wall finish keep to views the silhouette registered: the band says where the walls are, not
+      // where the roof's outline or the render's colours sit.
+      const walled = neutralBands(raster, r.extent)
+        .filter((b) => b.share >= WALL_BAND_MIN_SHARE && b.x1 - b.x0 >= WALL_BAND_MIN_WIDTH * (r.extent.x1 - r.extent.x0))
+        .map((b) => ({ b, reg: registerElevationV2({ id: r.frameId, assetId: r.assetId }, { ...r.extent, x0: b.x0, x1: b.x1 }, r.side as 'FRONT' | 'REAR' | 'LEFT' | 'RIGHT', r.sideConfidence, `${r.sideWhy}; scaled on the walls' band, columns ${b.x0}..${b.x1} of the silhouette's ${r.extent.x0}..${r.extent.x1} (${b.rows} rows)`, world, ridgeY, sideEaves, terrain, true) }))
+        .filter((c): c is { b: typeof c.b; reg: NonNullable<typeof c.reg> } => c.reg !== undefined)
+        .sort((a, b) => a.reg.anisotropyCheck - b.reg.anisotropyCheck)
+      const band = walled[0]?.reg
+      if (band) {
+        openingOnlyViews.push({ view: elevationFrameFromV2(band, world), raster, bandOnly: true })
+        step({ stage: 'registration', what: `the ${r.side.toLowerCase()} elevation registered on its walls' band, for its openings only`, method: 'DIRECT', detail: `${band.mpp} m/px, ground at ${band.bottomY} (${band.spanWhy})`, inputs: 1, outputs: 1 })
+        continue
+      }
+    }
     if (!reg) {
       gap({ what: `a v2 registration for the ${r.side.toLowerCase()} elevation`, reason: 'its silhouette fits neither the walled nor the characteristic span with the ridge at its apex', status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
       continue
@@ -893,7 +915,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         // 005V: a top-storey wall of the main body parallel to the ridge stops where the roof's underside meets it.
         const underEaves = !gable && mainRoof && m.id === main.id && index === topStorey ? round6(mainRoof.eaveY - mainRoof.thicknessM / Math.cos((mainRoof.pitchDeg * Math.PI) / 180)) : undefined
         const host: WallHost = { massId: m.id, facade, planeAt, from, to, centreAt: round6(planeAt + (inward * T) / 2), storeyIndex: index, ...(gable ? { gable } : {}), ...(underEaves !== undefined ? { eaveTopY: underEaves } : {}), floorY: l.elevation, storeyHeightM: gable ? round6(mainRoof!.ridgeY - l.elevation) : l.height }
-        const found = readWallOpenings({ plan: entry.frame, planRaster: entry.raster, host, wallThicknessM: T, callouts, views: viewsOf(facade), attachedSingleStorey: m.role === 'ATTACHED' && m.storeys.length === 1, onRefused: (r) => gap({ what: `the gap ${r.interval[0].toFixed(2)}..${r.interval[1].toFixed(2)} on the ${facade.toLowerCase()} wall of ${m.id}, storey ${index}`, reason: r.why, status: 'REFUSED', observationIds: [], evidenceIds: [] }), ...(vehicleMouths.has(`${m.id}:${facade}`) && index === 0 ? { vehicleMouth: vehicleMouths.get(`${m.id}:${facade}`) } : {}), index: hostIndex++ })
+        const found = readWallOpenings({ plan: entry.frame, planRaster: entry.raster, host, wallThicknessM: T, callouts, views: [...viewsOf(facade), ...openingOnlyViews.filter((v) => v.view.side === (facade === 'WEST' ? 'LEFT' : facade === 'EAST' ? 'RIGHT' : facade))], attachedSingleStorey: m.role === 'ATTACHED' && m.storeys.length === 1, onRefused: (r) => gap({ what: `the gap ${r.interval[0].toFixed(2)}..${r.interval[1].toFixed(2)} on the ${facade.toLowerCase()} wall of ${m.id}, storey ${index}`, reason: r.why, status: 'REFUSED', observationIds: [], evidenceIds: [] }), ...(vehicleMouths.has(`${m.id}:${facade}`) && index === 0 ? { vehicleMouth: vehicleMouths.get(`${m.id}:${facade}`) } : {}), index: hostIndex++ })
         for (const o of found) {
           // A gap on a face another body stands against is a door between the two bodies, not a facade opening.
           const other = masses.find((xm) => {
@@ -1549,3 +1571,8 @@ function fasciaExtent(raster: Raster, view: ElevationFrameV2, span: { from: numb
   if (Math.abs(b - a) < 0.8) return undefined
   return { from: round6(Math.min(a, b)), to: round6(Math.max(a, b)) }
 }
+
+/** 005V-N4: a band of the elevation is a candidate for the walls only when it repeats on this share of the rows … */
+const WALL_BAND_MIN_SHARE = 0.1
+/** … and spans this share of the silhouette's width. */
+const WALL_BAND_MIN_WIDTH = 0.4

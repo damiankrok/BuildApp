@@ -192,6 +192,120 @@ export function elevationExtent(raster: Raster, view: ElevationFrameV2, interval
   return { sillY: round6(Math.max(floorY, Math.min(y0, y1))), headY: round6(Math.max(y0, y1)), contrast: extent.contrast, share: extent.share, why: extent.why }
 }
 
+/** 005W: the narrowest stretch of solid wall whose appearance on an elevation is learnt (narrower is a pier or a jamb). */
+const WALL_SAMPLE_MIN_M = 0.3
+/** 005W: a sample row of a wall stretch this varied (sum of channel deviations) is not plain wall: occluded, a corner, a pipe. */
+const WALL_SAMPLE_MAX_SPREAD = 24
+/** 005W: a pixel within this distance (sum of channel differences) of a wall stretch's colour in its row looks like wall. */
+const WALL_MATCH_MIN = 18
+/** 005W: rows where at least this share of the opening's columns does not look like wall belong to the opening. */
+const OPENING_ROW_SHARE = 0.5
+/** 005W: rows of glass that happen to match the wall (a blind's slat, a reflection) are bridged up to this height. */
+const OPENING_BRIDGE_M = 0.3
+/** 005W: the wall read over an opening's head that closes it above. */
+const OPENING_LINTEL_M = 0.1
+/** 005W: a read sill this close to the storey floor is the floor (a threshold or a frame read as wall). */
+const FLOOR_SNAP_M = 0.15
+
+/**
+ * 005W: a gap's vertical extent read as an OBJECT against the wall it is cut in. The plan says which stretches of this
+ * wall are solid; on a registered elevation those stretches show what the wall looks like, row by row (plaster, a
+ * cladding band, a plinth). A row of the opening's columns belongs to the opening where most of its pixels look like
+ * none of them — glass, a blind, a reflection, a frame or a door leaf alike — so a striped blind or a reflected tree is
+ * not mistaken for wall the way a mean-brightness contrast mistakes it. Short runs of wall-like rows inside the opening
+ * (a slat, a transom) are bridged; the longest run in the storey is the opening, and only when wall closes it above.
+ * Nothing is learnt where the plan gives no solid stretch wide enough to sample, or where no stretch shows plain wall.
+ * The caller uses it only for a gap no callout prints a height for, and keeps the contrast reader's band wherever that
+ * band is not contained in this one.
+ */
+export function wallAppearanceExtent(raster: Raster, view: ElevationFrameV2, interval: [number, number], solids: ReadonlyArray<[number, number]>, floorY: number, topY: number): { sillY: number; headY: number; contrast: number; share: number; why: string } | null {
+  const mpp = Math.abs(view.yOf(0) - view.yOf(1))
+  if (!(mpp > 0)) return null
+  const col = (along: number): number => view.pxOf(along)
+  const c0 = Math.min(col(interval[0]), col(interval[1]))
+  const c1 = Math.max(col(interval[0]), col(interval[1]))
+  const inset = Math.max(1, (c1 - c0) * 0.1)
+  const from = Math.max(0, Math.round(c0 + inset))
+  const to = Math.min(raster.width - 1, Math.round(c1 - inset))
+  if (to - from < 3) return null
+  const trim = Math.max(2, 0.05 / mpp)
+  const samples: Array<[number, number]> = []
+  for (const [a, b] of solids) {
+    if (Math.abs(b - a) < WALL_SAMPLE_MIN_M) continue
+    const s0 = Math.max(0, Math.round(Math.min(col(a), col(b)) + trim))
+    const s1 = Math.min(raster.width - 1, Math.round(Math.max(col(a), col(b)) - trim))
+    if (s1 > s0) samples.push([s0, s1])
+  }
+  if (samples.length === 0) return null
+  const top = Math.max(0, Math.round(Math.min(view.pyOf(topY), view.pyOf(floorY))))
+  const bottom = Math.min(raster.height - 1, Math.round(Math.max(view.pyOf(topY), view.pyOf(floorY))))
+  if (bottom - top < 4) return null
+  const d = raster.data
+  const rgb = (x: number, y: number): [number, number, number] => {
+    const o = (y * raster.width + x) * 4
+    return [d[o], d[o + 1], d[o + 2]]
+  }
+  const median = (v: number[]): number => {
+    const s = [...v].sort((p, q) => p - q)
+    return s[s.length >> 1]
+  }
+  const share: number[] = []
+  for (let y = top; y <= bottom; y += 1) {
+    const walls: Array<{ c: [number, number, number]; tol: number }> = []
+    for (const [s0, s1] of samples) {
+      const px: Array<[number, number, number]> = []
+      for (let x = s0; x <= s1; x += 1) px.push(rgb(x, y))
+      const c: [number, number, number] = [median(px.map((p) => p[0])), median(px.map((p) => p[1])), median(px.map((p) => p[2]))]
+      const spread = median(px.map((p) => Math.abs(p[0] - c[0]) + Math.abs(p[1] - c[1]) + Math.abs(p[2] - c[2])))
+      if (spread <= WALL_SAMPLE_MAX_SPREAD) walls.push({ c, tol: Math.max(WALL_MATCH_MIN, 3 * spread) })
+    }
+    if (walls.length === 0) {
+      // Nothing here shows the wall (a roof, the sky, an occluded stretch): the row is neither wall nor opening.
+      share.push(Number.NaN)
+      continue
+    }
+    let foreign = 0
+    for (let x = from; x <= to; x += 1) {
+      const p = rgb(x, y)
+      if (!walls.some((w) => Math.abs(p[0] - w.c[0]) + Math.abs(p[1] - w.c[1]) + Math.abs(p[2] - w.c[2]) < w.tol)) foreign += 1
+    }
+    share.push(foreign / (to - from + 1))
+  }
+  const bridge = Math.round(OPENING_BRIDGE_M / mpp)
+  let best: { a: number; b: number } | null = null
+  let run: { a: number; b: number } | null = null
+  for (let i = 0; i < share.length; i += 1) {
+    if (Number.isNaN(share[i])) {
+      run = null
+      continue
+    }
+    if (share[i] < OPENING_ROW_SHARE) continue
+    if (run && i - run.b <= bridge) run.b = i
+    else run = { a: i, b: i }
+    if (!best || run.b - run.a > best.b - best.a) best = { ...run }
+  }
+  if (!best) return null
+  // The opening has wall over its head: rows that look like the wall, read as such, close it above. A run that leaves
+  // the wall (into the roof, the sky, a gable no stretch samples) is not an opening's extent.
+  const lintel = Math.max(2, Math.round(OPENING_LINTEL_M / mpp))
+  const above = share.slice(Math.max(0, best.a - lintel), best.a)
+  if (above.length < lintel || above.some((v) => Number.isNaN(v) || v >= OPENING_ROW_SHARE)) return null
+  const inRun = share.slice(best.a, best.b + 1)
+  const mean = inRun.reduce((p, q) => p + q, 0) / inRun.length
+  if (mean < 0.6) return null
+  const headY = view.yOf(top + best.a)
+  const lowY = view.yOf(top + best.b + 1)
+  // A run ending this close to the floor reaches it: the last rows are a threshold or a frame, not wall.
+  const sill = Math.min(lowY, headY) - floorY <= FLOOR_SNAP_M ? floorY : Math.min(lowY, headY)
+  return {
+    sillY: round6(Math.max(floorY, sill)),
+    headY: round6(Math.max(lowY, headY)),
+    contrast: round6(Math.min(45, 100 * (mean - 0.5))),
+    share: round6(mean),
+    why: `rows ${top + best.a}..${top + best.b} unlike the wall's ${samples.length} solid stretch${samples.length === 1 ? '' : 'es'} on ${Math.round(mean * 100)} % of the opening's columns`,
+  }
+}
+
 /** The roof soffit height over a point on a gable-end wall. */
 export function gableSoffitY(gable: NonNullable<WallHost['gable']>, along: number): number {
   const fromEave = Math.min(Math.abs(along - gable.eaveAtLow), Math.abs(along - gable.eaveAtHigh))
@@ -205,8 +319,11 @@ export type OpeningReadingInput = {
   host: WallHost
   wallThicknessM: number
   callouts: readonly MetricEvidence[]
-  /** Elevations that show this facade, with their rasters. */
-  views: Array<{ view: ElevationFrameV2; raster: Raster }>
+  /**
+   * Elevations that show this facade, with their rasters. 005W: `bandOnly` marks a view registered on the walls' band
+   * alone (no silhouette fit): it is read only where the plan's gaps on this wall show as openings on it.
+   */
+  views: Array<{ view: ElevationFrameV2; raster: Raster; bandOnly?: boolean }>
   /** A wider gap than this on the ground storey of an attached single-storey body reads as a vehicle door. */
   attachedSingleStorey: boolean
   /**
@@ -228,10 +345,29 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
   const gaps = planGaps(input.planRaster, plan, host, input.wallThicknessM, options)
   const out: OpeningV2[] = []
   const along = host.facade === 'FRONT' || host.facade === 'REAR' ? 'X' : 'Z'
+  // 005W: the solid stretches of this wall, between its gaps — where an elevation shows what the wall looks like.
+  const solids: Array<[number, number]> = []
+  let solidFrom = Math.min(host.from, host.to)
+  for (const g of [...gaps].sort((p, q) => p.interval[0] - q.interval[0])) {
+    if (g.interval[0] > solidFrom) solids.push([solidFrom, g.interval[0]])
+    solidFrom = Math.max(solidFrom, g.interval[1])
+  }
+  if (Math.max(host.from, host.to) > solidFrom) solids.push([solidFrom, Math.max(host.from, host.to)])
+  // 005W: a view registered on the walls' band alone is a hypothesis about where this wall is on the render. It stands
+  // only where most of the plan's gaps (at least two) read on it as openings closed by wall above — the gaps check the
+  // registration; they never chose it. Otherwise the wall reads as if that view were not there.
+  const wallTop = (interval: [number, number]): number => Math.min(host.floorY + host.storeyHeightM, host.eaveTopY ?? Number.POSITIVE_INFINITY, host.gable ? Math.max(gableSoffitY(host.gable, interval[0]), gableSoffitY(host.gable, interval[1])) : Number.POSITIVE_INFINITY)
+  const views = input.views.filter((v) => {
+    if (!v.bandOnly) return true
+    const read = gaps.filter((g) => wallAppearanceExtent(v.raster, v.view, g.interval, solids, host.floorY, wallTop(g.interval)) !== null).length
+    return gaps.length >= 2 && read >= Math.ceil((2 * gaps.length) / 3)
+  })
   for (const gap of gaps) {
     const [lo, hi] = gap.interval
     const widthPlan = round6(hi - lo)
     const centre = (lo + hi) / 2
+    // 005V-N3: the drawn wall band the gap was read on, across the wall, in sheet pixels.
+    const bandCentre = along === 'X' ? (gap.pixelRect.y0 + gap.pixelRect.y1) / 2 : (gap.pixelRect.x0 + gap.pixelRect.x1) / 2
     const unresolved: string[] = []
     // --- the callout: nearest printed w/h within reach with a width reading that agrees with the gap.
     // The gap's own width is the evidence that picks among the reader's width
@@ -260,8 +396,15 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
     const interval: [number, number] = callout ? [round6(centre - widthM / 2), round6(centre + widthM / 2)] : [lo, hi]
     // --- the elevations
     let elevation: OpeningV2['elevation']
-    for (const { view, raster } of input.views) {
-      const ext = elevationExtent(raster, view, interval, host.floorY, host.storeyHeightM)
+    // 005W: where this wall ends above the floor: the storey, the eaves it runs under, or the rake over a gable end.
+    const wallTopY = wallTop(interval)
+    for (const { view, raster } of views) {
+      // A printed callout fixes the height; the contrast reader's band only places it, as before 005W.
+      const extNew = callout ? null : wallAppearanceExtent(raster, view, interval, solids, host.floorY, wallTopY)
+      const extOld = elevationExtent(raster, view, interval, host.floorY, host.storeyHeightM)
+      // The contrast reader stands where it read something the object reader does not contain; where it read nothing,
+      // or only a part of the same opening (a blind's dark half), the object reader's whole extent replaces it.
+      const ext = !extOld ? extNew : extNew && extNew.sillY <= extOld.sillY + 0.1 && extNew.headY >= extOld.headY - 0.1 ? extNew : extOld
       if (!ext) continue
       if (ext.headY - ext.sillY < 0.5) continue
       const confidence = round6(Math.min(0.85, 0.4 + ext.contrast / 100))
@@ -413,7 +556,8 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
       // The plan symbol decides between a door and a glazed opening: a window is
       // drawn with its glazing lines across the gap, a door leaves the gap empty
       // (and usually draws its leaf and swing beside it).
-      const glazed = glazingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM)
+      // 005W: with heights read off an elevation, the plan's light glazing symbol (005V-N3) counts as well as dark ink.
+      const glazed = glazingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM) || glazingLinesDrawn(input.planRaster, plan, host, interval, input.wallThicknessM, bandCentre)
       if (reachesFloor && !glazed && widthM <= 1.3 && headY - sillY <= 2.35) family = 'DOOR'
       else if (reachesFloor && glazed && widthM >= 0.75 && widthM <= 2.0 && host.storeyIndex === 0 && !doorSwingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM)) family = 'WINDOW'
       else if (reachesFloor && widthM > 1.3 && widthM < 2.0) family = 'GLAZED_DOOR'
@@ -472,6 +616,45 @@ function glazingDrawn(raster: Raster, plan: PlanFrameV2, host: WallHost, interva
     if (dark >= 1 && dark <= Math.max(2, half * 0.6)) withInk += 1
   }
   return n > 0 && withInk / n >= 0.6
+}
+
+/** 005V-N3: a thin glazing line is darker than a floor fill or the paper, lighter than wall ink allows for. */
+const GLAZING_LINE_LUMA = 215
+/** 005V-N3: how far either side of the drawn band's centre the glazing lines are looked for. */
+const GLAZING_WINDOW_M = 0.25
+
+/**
+ * 005V-N3: the light glazing symbol. Many plans draw a window's frame and glass as thin grey lines across the gap,
+ * lighter than wall ink (and than the dark-ink test above), between the room's floor fill and the paper outside. A
+ * door's gap carries at most one such line — the threshold where the floor fill meets the paper — so a column with
+ * two or more distinct thin lines across the drawn wall band is glazed, and the gap is glazed where most of its columns
+ * are. The band is the drawn one (`bandCentrePx`, where the gap was read), not the registered face. 005W: consulted
+ * only for a gap whose heights an elevation read; the span runs along the wall (x for a front or rear wall, y for a
+ * side one).
+ */
+function glazingLinesDrawn(raster: Raster, plan: PlanFrameV2, host: WallHost, interval: [number, number], wallThicknessM: number, bandCentrePx: number): boolean {
+  const along = host.facade === 'FRONT' || host.facade === 'REAR' ? 'X' : 'Y'
+  const mpp = (plan.mppX + plan.mppY) / 2
+  const half = Math.max((wallThicknessM * 0.45) / mpp, GLAZING_WINDOW_M / mpp)
+  const a0 = along === 'X' ? plan.toPixel(interval[0] + 0.1, host.centreAt) : plan.toPixel(host.centreAt, interval[1] - 0.1)
+  const a1 = along === 'X' ? plan.toPixel(interval[1] - 0.1, host.centreAt) : plan.toPixel(host.centreAt, interval[0] + 0.1)
+  const from = Math.round(along === 'X' ? Math.min(a0.x, a1.x) : Math.min(a0.y, a1.y))
+  const to = Math.round(along === 'X' ? Math.max(a0.x, a1.x) : Math.max(a0.y, a1.y))
+  let glazed = 0
+  let n = 0
+  for (let i = from; i <= to; i += 1) {
+    let lines = 0
+    let inLine = false
+    for (let d = -Math.ceil(half); d <= Math.ceil(half); d += 1) {
+      const l = along === 'X' ? lumaOf(raster, i, bandCentrePx + d) : lumaOf(raster, bandCentrePx + d, i)
+      const line = l < GLAZING_LINE_LUMA
+      if (line && !inLine) lines += 1
+      inLine = line
+    }
+    n += 1
+    if (lines >= 2) glazed += 1
+  }
+  return n > 0 && glazed / n >= 0.6
 }
 
 const lumaOf = (r: Raster, x: number, y: number): number => {
