@@ -18,6 +18,7 @@ import type { MetricEvidence } from '@buildapp/source-metrics'
 import type { ElevationFrameV2, PlanFrameV2 } from './frame.js'
 import { bandPieces, gapsBetween, inkFraction, mergeRuns } from './scan.js'
 import type { ProvenanceStatus } from './graph.js'
+import { CONVENTIONS } from '../solve.js'
 
 export type Facade = 'FRONT' | 'REAR' | 'WEST' | 'EAST'
 export type OpeningFamily = 'WINDOW' | 'DOOR' | 'GARAGE_DOOR' | 'GLAZED_DOOR' | 'MULTI_PANEL_GLAZING' | 'UNKNOWN'
@@ -220,6 +221,9 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
       if (!elevation || confidence > elevation.confidence) elevation = { frameId: view.registration.frameId, sillY: ext.sillY, headY: ext.headY, contrast: ext.contrast, confidence }
     }
     // --- sill and head
+    let heightsAssumed = false
+    let doorBySymbol = false
+    let doorSwing = false
     let sillY: number
     let headY: number
     const prov: OpeningV2['provenance'] = { interval: 'SOURCE_DERIVED', width: callout ? 'SOURCE_EXACT' : 'SOURCE_DERIVED', sill: 'UNRESOLVED', head: 'UNRESOLVED', profile: 'SOURCE_DERIVED', family: 'VISUAL_SEMANTIC' }
@@ -282,11 +286,24 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
       prov.sill = 'IMAGE_METRIC_REGISTERED'
       prov.head = 'IMAGE_METRIC_REGISTERED'
     } else {
-      sillY = host.floorY
-      headY = round6(host.floorY + 2.1)
+      // 005U: nothing reads this opening's heights — no callout, no elevation. A sill the solver assumes is not evidence
+      // of what the opening is: it used to be set at the floor and then read back as "reaches the floor", which made a
+      // door, a glazed door, a multi-panel screen or a garage door of every unread gap (upper-storey doors with no
+      // balcony, a vehicle door no source shows). Only the plan's own door symbol makes a door now; anything else is
+      // drawn as a window at the conventional sill and head, and both the kind and the heights are named as assumed.
+      // The plan's convention still stands where it is plausible: a gap a door's width with no glazing drawn across it
+      // is a door on the ground storey (an entrance); above it, where an outside door needs a balcony, only a drawn
+      // swing makes one. Never a garage door, a glazed door or a full-height screen: those need a height read.
+      heightsAssumed = true
+      doorSwing = doorSwingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM)
+      doorBySymbol = widthM <= 1.3 && !glazingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM) && (doorSwing || host.storeyIndex === 0)
+      sillY = doorBySymbol ? host.floorY : round6(host.floorY + CONVENTIONS.windowSill)
+      headY = round6(host.floorY + (doorBySymbol ? 2.1 : CONVENTIONS.openingHead))
       prov.sill = 'ASSUMED_FOR_RENDERING'
       prov.head = 'ASSUMED_FOR_RENDERING'
       unresolved.push('sill and head (no callout read and no elevation shows this wall)')
+      if (!doorBySymbol) unresolved.push('kind (no callout, no elevation and no door symbol on the plan: drawn as a window, not read as one)')
+      else if (!doorSwing) unresolved.push('kind (an empty ground-storey gap a door wide, read as a door by the plan convention; no swing drawn)')
     }
     // --- profile: on a gable end, a head above the soffit at the far jamb is raked along the roof.
     let profile: HeadProfile = 'RECTANGULAR'
@@ -307,10 +324,15 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
       }
     }
     // --- family
-    const attachedVehicle = input.attachedSingleStorey && host.storeyIndex === 0 && widthM >= 2.2 && sillY - host.floorY < 0.1
+    // 005U: a vehicle door, a door or a full-height screen needs a sill something READ; an assumed one decides nothing.
+    const attachedVehicle = !heightsAssumed && input.attachedSingleStorey && host.storeyIndex === 0 && widthM >= 2.2 && sillY - host.floorY < 0.1
     let family: OpeningFamily = 'UNKNOWN'
     const reachesFloor = sillY - host.floorY < 0.12
-    if (attachedVehicle) family = 'GARAGE_DOOR'
+    if (heightsAssumed) {
+      family = doorBySymbol ? 'DOOR' : 'WINDOW'
+      prov.family = doorBySymbol ? (doorSwing ? 'SOURCE_DERIVED' : 'VISUAL_SEMANTIC') : 'ASSUMED_FOR_RENDERING'
+    }
+    else if (attachedVehicle) family = 'GARAGE_DOOR'
     else if (reachesFloor && widthM >= 2.0) family = 'MULTI_PANEL_GLAZING'
     else {
       // The plan symbol decides between a door and a glazed opening: a window is

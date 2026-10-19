@@ -2131,3 +2131,19 @@ from `c4618749`.
 - Distribution: the APK is committed at `stage-reports/artifacts/owner-005t/BuildPlan-005T-two-houses-arm64.apk`
   (creating a GitHub release was refused to this session, HTTP 403). CI, mirror, `preview-latest`, `owner-preview-latest`
   untouched. OWNER_VISUAL_NOT_RUN.
+
+
+## Where the owner's visual failure stands (STAGE BUILDPLAN-ANALYZER-005U-OWNER-VISUAL-FIRST-BAD-FIX-V1)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005U_OWNER_VISUAL_FIRST_BAD_FIX.md`; trace and metrics:
+`research/analyzer-005u-owner-visual/`. Branch `analyzer/005u-owner-visual-first-bad-fix-v1` from `074d6ae`. Verdict
+`OWNER_VISUAL_FIRST_BAD_FIXED_PARTIAL`. The OWNER judged both 005T houses unrecognizable; that stands until re-reviewed.
+
+- **First bad (fixed):** `openings-v2.ts` set an unread opening's sill at the floor (ASSUMED) and then read it back as
+  "reaches the floor", making doors, glazed doors, multi-panel screens and garage doors of unread gaps. Now, without a
+  read height, only the plan decides: a drawn swing, or an empty ≤1.3 m gap on the ground storey, is a door; anything else
+  is a window placeholder with its kind and heights ASSUMED; never a garage/glazed/multi-panel door from an assumption.
+- **Measured:** A01 garage door 1→0, attic doors 5→1; Goździkowce attic doors 6→2 (windows 0→4); no opening lost.
+  Controls Rarytasy G2E and Marcówki identical; Cieszynianki changes (assumed doors 6→4, the same correction).
+- **Not fixed (named):** A01's attached strips inside the main gable footprint (plan decomposition); Goździkowce's
+  integral garage (no garage room on the plan reading). Owner screenshots were not available to this session. No APK.
