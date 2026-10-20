@@ -36,7 +36,8 @@ import type { InteriorReading, LabelToken } from './interior.js'
 import { assembleStair, findTreadLadders, poolLadders } from './stair-topology.js'
 import { elevationExtent, garageMouth, planGaps, readWallOpenings, wallAppearanceExtent } from './openings-v2.js'
 import type { OpeningV2, WallHost } from './openings-v2.js'
-import { readAttachedRoof, readChimneys, readRooflights, registerSection } from './roof-details.js'
+import { readAttachedRoof, readChimneys, readPlanRooflights, readRooflights, registerSection } from './roof-details.js'
+import type { PlanRooflightReading, RooflightReading } from './roof-details.js'
 import { readFasciaBand, readRailing, readVergeMember } from './facade.js'
 import type { FacadeAssemblyHypothesis, FacadeMember } from './facade.js'
 import { skyMask, solvePerspectiveCamera } from './camera.js'
@@ -49,7 +50,7 @@ import type { PlanDiagnosticsReport } from '../failure.js'
 import { LAYOUT_REFUSAL_CODES, dimensionEvidenceOf, layoutRefused, layoutRejectionOf, planDiagnosticsOf, planFailureOf } from '../plan-diagnostics.js'
 import { PLAN_RESOLVER_VERSION, challengeFirstReading, challengeRecord, firstReadingNeedsChallenge, resolutionRecord, resolvePlan, sourceConflictReviewFor, withdrawnRecord } from '../plan-resolution.js'
 import type { SourceConflictReview } from '../plan-resolution.js'
-import { metricSolutionFor } from '@buildapp/source-metrics'
+import { metricSolutionFor, readTintedCallouts } from '@buildapp/source-metrics'
 import type { ResolverProgress } from '../plan-resolution.js'
 import type { PlanSheet } from '../layout.js'
 import type { Checkpoint } from '@buildapp/source-common'
@@ -1210,6 +1211,22 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   })
   // Rooflights on the side renders.
   const rooflights: BuildingV2['rooflights'] = []
+  // 005X: the rooflights the plan of the storey under the main roof states, first. The plan says that a rooflight is
+  // there, on which slope, where along the ridge and how big; a render only confirms it (or adds one the plan does not
+  // state, as before). A rooflight is never lost because a render could not measure it.
+  const planRooflights: PlanRooflightReading[] = []
+  const topEntry = mainRoof && mainRoof.kind === 'GABLE' ? planByStorey.get(topStorey) : undefined
+  if (mainRoof && topEntry) {
+    const r = rectAt(main, topStorey)
+    const a = topEntry.frame.toPixel(r.x0, r.z1)
+    const b = topEntry.frame.toPixel(r.x1, r.z0)
+    const region = { x0: Math.min(a.x, b.x), y0: Math.min(a.y, b.y), x1: Math.max(a.x, b.x), y1: Math.max(a.y, b.y) }
+    const mpp = (topEntry.frame.mppX + topEntry.frame.mppY) / 2
+    const callouts = readTintedCallouts(topEntry.raster, { region, frameId: topEntry.frame.frameId, minRadiusPx: Math.max(6, 0.15 / mpp), maxRadiusPx: Math.max(10, 0.45 / mpp) })
+    planRooflights.push(...readPlanRooflights(callouts, topEntry.frame, r, T, { ridgeAxis: mainRoof.ridgeAxis, ridgeAt: mainRoof.ridgeAt, pitchDeg: mainRoof.pitchDeg, eaveY: mainRoof.eaveY }))
+    step({ stage: 'roof-details', what: 'rooflights stated by the plan under the roof', method: 'DIRECT', detail: `${callouts.length} callout ring${callouts.length === 1 ? '' : 's'} inside the storey, ${planRooflights.length} read as rooflights`, inputs: callouts.length, outputs: planRooflights.length })
+  }
+  const renderRooflights: Array<RooflightReading & { frameIds: string[] }> = []
   if (mainRoof) {
     // 005W-N1: a band-registered view stands for the roof only where its own facade's walls confirmed it: the plan's gaps
     // read on it as openings closed by wall above (readWallOpenings' per-wall check, at least two gaps).
@@ -1229,13 +1246,39 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
           return onThisSlope && Math.min(along[1], r.alongTo) - Math.max(along[0], r.alongFrom) > -0.05
         })
         if (chimneyThere) continue
-        const frame = frameById.get(r.frameId)
-        const sid = frame ? [sighting(frame, 'a light patch in the roof plane', r.confidence)] : []
-        const widthM = round6(r.alongTo - r.alongFrom)
-        const lengthM = round6(Math.hypot(r.slopeTo - r.slopeFrom, r.yTo - r.yFrom))
-        const featureId = feature('ROOFLIGHT', r.id, { along: { value: r.alongFrom, low: r.alongFrom - 0.1, high: r.alongFrom + 0.1 }, width: { value: widthM, low: widthM - 0.1, high: widthM + 0.1 }, length: { value: lengthM, low: lengthM - 0.15, high: lengthM + 0.15 } }, sid, 'IMAGE_METRIC_REGISTERED', r.why, { uncertaintyM: 0.1, unresolvedProperties: ['exact position up the slope'] })
-        rooflights.push({ ...r, featureId, provenance: 'IMAGE_METRIC_REGISTERED', widthM, lengthM })
+        renderRooflights.push({ ...r, frameIds: [r.frameId] })
       }
+    }
+    const overlapsAlong = (p: { alongFrom: number; alongTo: number }, q: { alongFrom: number; alongTo: number }): boolean => Math.min(p.alongTo, q.alongTo) - Math.max(p.alongFrom, q.alongFrom) > 0.5 * Math.min(p.alongTo - p.alongFrom, q.alongTo - q.alongFrom)
+    const chimneyAt = (r: { alongFrom: number; alongTo: number; slopeFrom: number; slopeTo: number }): boolean =>
+      chimneys.some((c) => {
+        const along = mainRoof.ridgeAxis === 'Z' ? [c.z0, c.z1] : [c.x0, c.x1]
+        const across = mainRoof.ridgeAxis === 'Z' ? [c.x0, c.x1] : [c.z0, c.z1]
+        return Math.min(along[1], r.alongTo) - Math.max(along[0], r.alongFrom) > 0 && Math.min(across[1], Math.max(r.slopeFrom, r.slopeTo)) - Math.max(across[0], Math.min(r.slopeFrom, r.slopeTo)) > 0
+      })
+    // Plan rooflights, each confirmed where a render shows a patch on the same slope over the same stretch of ridge.
+    for (const p of planRooflights) {
+      if (chimneyAt(p)) continue
+      const seen = renderRooflights.filter((r) => r.slope === p.slope && overlapsAlong(p, r))
+      const sids = [sighting((topEntry as NonNullable<typeof topEntry>).plan.frame, 'a rooflight callout inside the storey under the roof', p.confidence)]
+      for (const r of seen) {
+        const frame = frameById.get(r.frameId)
+        if (frame) sids.push(sighting(frame, 'a light patch in the roof plane over the same stretch of ridge', r.confidence))
+      }
+      const provenance: ProvenanceStatus = seen.length > 0 ? 'SOURCE_CORROBORATED' : 'SOURCE_DERIVED'
+      const why = `${p.why}${seen.length > 0 ? `; a render shows it on the same slope (${seen.map((r) => r.id).join(', ')})` : '; no render confirms it (watermark, contrast or no registered view of that slope)'}`
+      const featureId = feature('ROOFLIGHT', p.id, { along: { value: p.alongFrom, low: p.alongFrom - 0.1, high: p.alongFrom + 0.1 }, width: { value: p.widthM, low: p.widthM - 0.05, high: p.widthM + 0.05 }, length: { value: p.lengthM, low: p.lengthM - 0.05, high: p.lengthM + 0.05 } }, sids, provenance, why, { uncertaintyM: 0.1, unresolvedProperties: ['exact position up the slope'] })
+      rooflights.push({ ...p, why, featureId, provenance })
+    }
+    // A patch no plan rooflight explains stays what it was: a rooflight read on a render alone.
+    for (const r of renderRooflights) {
+      if (rooflights.some((p) => p.slope === r.slope && overlapsAlong(p, r))) continue
+      const frame = frameById.get(r.frameId)
+      const sid = frame ? [sighting(frame, 'a light patch in the roof plane', r.confidence)] : []
+      const widthM = round6(r.alongTo - r.alongFrom)
+      const lengthM = round6(Math.hypot(r.slopeTo - r.slopeFrom, r.yTo - r.yFrom))
+      const featureId = feature('ROOFLIGHT', r.id, { along: { value: r.alongFrom, low: r.alongFrom - 0.1, high: r.alongFrom + 0.1 }, width: { value: widthM, low: widthM - 0.1, high: widthM + 0.1 }, length: { value: lengthM, low: lengthM - 0.15, high: lengthM + 0.15 } }, sid, 'IMAGE_METRIC_REGISTERED', r.why, { uncertaintyM: 0.1, unresolvedProperties: ['exact position up the slope'] })
+      rooflights.push({ ...r, featureId, provenance: 'IMAGE_METRIC_REGISTERED', widthM, lengthM })
     }
   }
   step({ stage: 'roof-details', what: 'attached roofs, chimneys, rooflights', method: 'DISCRETE_SELECTION', detail: `${attachedRoofs.length} attached roof${attachedRoofs.length === 1 ? '' : 's'} (${attachedRoofs.filter((r) => r.reading).length} from the section), ${chimneys.length} chimney${chimneys.length === 1 ? '' : 's'}, ${rooflights.length} rooflight${rooflights.length === 1 ? '' : 's'}`, inputs: views.length, outputs: attachedRoofs.length + chimneys.length + rooflights.length })

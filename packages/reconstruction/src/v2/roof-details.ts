@@ -11,7 +11,8 @@
  */
 import { round6 } from '@buildapp/source-common'
 import type { Raster } from '@buildapp/source-cv'
-import type { ElevationFrameV2 } from './frame.js'
+import type { CalloutReading } from '@buildapp/source-metrics'
+import type { ElevationFrameV2, PlanFrameV2 } from './frame.js'
 import { inkRuns, lumaAt, mergeRuns, toneClass, rgbAt } from './scan.js'
 import type { SolidBlock } from './interior.js'
 
@@ -326,4 +327,72 @@ const median = (xs: readonly number[]): number => {
   const s = [...xs].sort((a, b) => a - b)
   const m = Math.floor(s.length / 2)
   return s.length % 2 === 1 ? s[m] : (s[m - 1] + s[m]) / 2
+}
+
+/** 005X: a rooflight the top storey's plan states: its callout, standing inside the storey under a slope. */
+export type PlanRooflightReading = RooflightReading & { widthM: number; lengthM: number; calloutId: string; centre: { x: number; z: number } }
+
+/** The sizes a callout inside a roofed storey may state for a rooflight, in metres: outside them it is some other symbol. */
+const ROOFLIGHT_WIDTH_M = { min: 0.3, max: 1.6 } as const
+const ROOFLIGHT_LENGTH_M = { min: 0.4, max: 2.0 } as const
+
+/**
+ * 005X: rooflights from the plan of the storey under the roof. A plan states a rooflight the way it states a window: a
+ * `width / length` callout, here standing inside the storey rather than beside a wall, on the part of the floor a slope
+ * covers. Each callout read as a coherent pair, split by its bar, whose centre lies inside the storey's walls and whose
+ * numbers are a rooflight's size, is one rooflight: along the ridge it is centred on the callout and as wide as the
+ * callout says; up the slope it is centred on the callout too, its plan depth the stated length foreshortened by the
+ * pitch. Where up the slope the publisher drew the symbol relative to the glass is not known, so that position stays
+ * an uncertainty of the caller's record; the existence, the slope, the along-ridge place and the size are the plan's.
+ */
+export function readPlanRooflights(
+  callouts: ReadonlyArray<CalloutReading>,
+  plan: Pick<PlanFrameV2, 'toWorld' | 'frameId'>,
+  body: { x0: number; z0: number; x1: number; z1: number },
+  wallThicknessM: number,
+  roof: { ridgeAxis: 'X' | 'Z'; ridgeAt: number; pitchDeg: number; eaveY: number },
+): PlanRooflightReading[] {
+  const tan = Math.tan((roof.pitchDeg * Math.PI) / 180)
+  const cos = Math.cos((roof.pitchDeg * Math.PI) / 180)
+  const out: PlanRooflightReading[] = []
+  for (const c of callouts) {
+    if (c.widthCm === null || c.heightCm === null || !c.bar) continue
+    const widthM = c.widthCm / 100
+    const lengthM = c.heightCm / 100
+    if (widthM < ROOFLIGHT_WIDTH_M.min || widthM > ROOFLIGHT_WIDTH_M.max || lengthM < ROOFLIGHT_LENGTH_M.min || lengthM > ROOFLIGHT_LENGTH_M.max) continue
+    const centre = plan.toWorld(c.circle.cx, c.circle.cy)
+    const inside = centre.x > body.x0 + wallThicknessM && centre.x < body.x1 - wallThicknessM && centre.z > body.z0 + wallThicknessM && centre.z < body.z1 - wallThicknessM
+    if (!inside) continue
+    const along = roof.ridgeAxis === 'X' ? centre.x : centre.z
+    const across = roof.ridgeAxis === 'X' ? centre.z : centre.x
+    const slope: 'LOW' | 'HIGH' = across < roof.ridgeAt ? 'LOW' : 'HIGH'
+    const eaveAlong = roof.ridgeAxis === 'X' ? (slope === 'LOW' ? body.z0 : body.z1) : slope === 'LOW' ? body.x0 : body.x1
+    const depth = lengthM * cos
+    // Up the slope: centred on the callout, kept between the wall plane and the ridge.
+    const lo = slope === 'LOW' ? eaveAlong + 0.05 : roof.ridgeAt + 0.05
+    const hi = slope === 'LOW' ? roof.ridgeAt - 0.05 : eaveAlong - 0.05
+    if (hi - lo < depth) continue
+    const from = Math.min(Math.max(across - depth / 2, lo), hi - depth)
+    const to = from + depth
+    const heightAt = (a: number): number => roof.eaveY + Math.abs(a - eaveAlong) * tan
+    out.push({
+      id: '',
+      slope,
+      alongFrom: round6(along - widthM / 2),
+      alongTo: round6(along + widthM / 2),
+      slopeFrom: round6(from),
+      slopeTo: round6(to),
+      yFrom: round6(Math.min(heightAt(from), heightAt(to))),
+      yTo: round6(Math.max(heightAt(from), heightAt(to))),
+      frameId: plan.frameId,
+      confidence: round6(Math.min(0.8, 0.4 + c.confidence * 0.6)),
+      why: `a ${c.widthCm}/${c.heightCm} callout inside the storey under the roof, on the ${slope === 'LOW' ? 'lower-coordinate' : 'higher-coordinate'} slope at ${along.toFixed(2)} m along the ridge (${c.why})`,
+      widthM: round6(widthM),
+      lengthM: round6(lengthM),
+      calloutId: c.id,
+      centre: { x: round6(centre.x), z: round6(centre.z) },
+    })
+  }
+  out.sort((a, b) => (a.slope === b.slope ? a.alongFrom - b.alongFrom : a.slope === 'LOW' ? -1 : 1))
+  return out.map((r, i) => ({ ...r, id: `rooflight-plan-${r.slope === 'LOW' ? 'low' : 'high'}-${i}` }))
 }
