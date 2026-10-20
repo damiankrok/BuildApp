@@ -51,13 +51,13 @@ function digits(r: Raster, text: string, x: number, y: number, s: number, c: RGB
 }
 
 /** A callout ring of paper on a tinted field: a faint grey circle, a bar, digits above and below. */
-function tintedCallout(r: Raster, cx: number, cy: number, radius: number, upper: string, lower: string): void {
+function tintedCallout(r: Raster, cx: number, cy: number, radius: number, upper: string, lower: string, bar = true): void {
   for (let y = -radius; y <= radius; y += 1) for (let x = -radius; x <= radius; x += 1) if (x * x + y * y <= radius * radius) put(r, cx + x, cy + y, [231, 231, 232])
   for (let a = 0; a < 720; a += 1) {
     const t = (a * Math.PI) / 360
     put(r, cx + radius * Math.cos(t), cy + radius * Math.sin(t), [170, 170, 172])
   }
-  for (let x = -radius + 2; x <= radius - 2; x += 1) put(r, cx + x, cy, [175, 175, 177])
+  if (bar) for (let x = -radius + 2; x <= radius - 2; x += 1) put(r, cx + x, cy, [175, 175, 177])
   digits(r, upper, cx - upper.length * 2 - 1, cy - 7, 1, [40, 40, 40])
   digits(r, lower, cx - lower.length * 2 - 1, cy + 2, 1, [40, 40, 40])
 }
@@ -77,6 +77,25 @@ describe('005X tinted callout rings', () => {
     const rooflightRing = onlyBarred.find((f) => Math.abs(f.circle.cx - 60) <= 2 && Math.abs(f.circle.cy - 40) <= 2)
     expect(rooflightRing).toEqual(ring)
     expect(onlyBarred.every((f) => f.bar !== null)).toBe(true)
+  })
+
+  it('005X-N3: the bar gate sends only barred rings to OCR and reads them exactly as without it', () => {
+    const r = canvas(260, 120, [231, 231, 232])
+    rect(r, 0, 20, 260, 60, [210, 210, 212])
+    tintedCallout(r, 60, 40, 14, '78', '118')
+    tintedCallout(r, 180, 40, 14, '78', '118', false) // the same symbol with no bar
+    const all = { rings: 0, ocr: 0 }
+    const gate = { rings: 0, ocr: 0 }
+    const ungated = readTintedCallouts(r, { minRadiusPx: 10, maxRadiusPx: 18, stats: all })
+    const gated = readTintedCallouts(r, { minRadiusPx: 10, maxRadiusPx: 18, requireBar: true, stats: gate })
+    expect(ungated.some((f) => Math.abs(f.circle.cx - 60) <= 2 && f.bar !== null)).toBe(true)
+    // the barless symbol is no longer read: fewer circles go to OCR, though more of its circles may be looked at,
+    // because no reading of it claims them
+    expect(gate.ocr).toBeLessThan(all.ocr)
+    expect(gate.ocr).toBe(ungated.filter((f) => f.bar !== null).length)
+    // every barred reading, in the same order, field for field
+    expect(gated).toEqual(ungated.filter((f) => f.bar !== null))
+    expect(gated.some((f) => Math.abs(f.circle.cx - 180) <= 2)).toBe(false)
   })
 
   it('reports nothing on a sheet without rings', () => {

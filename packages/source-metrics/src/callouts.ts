@@ -1094,8 +1094,13 @@ export type TintedCalloutOptions = {
    * condition of the full one, so the readings are the same with it and without it; only the time differs.
    */
   prefilter?: boolean
-  /** 005X-N3: when consumers require the printed separator bar, avoid expensive digit OCR for rings without one. Off by default for other callout uses. */
+  /**
+   * 005X-N3: return only rings split by a printed bar (what plan rooflights need), with exactly the readings the full
+   * reader gives them, and skip the digit OCR of barless rings wherever it cannot change those. Off by default.
+   */
   requireBar?: boolean
+  /** 005X-N3: when given, filled with how many rings were found and how many of them were sent to digit OCR (the cost). */
+  stats?: { rings: number; ocr: number }
 }
 
 /** How much lighter than its own ring a callout's interior must be, and the ring than the field around it, in grey levels. */
@@ -1249,8 +1254,11 @@ export function readTintedCallouts(raster: Raster, options: TintedCalloutOptions
   }
   const cache = boundedRenderCache()
   const readings: CalloutReading[] = []
-  for (const h of places.flat()) {
-    if (readings.some((k) => Math.hypot(k.circle.cx - h.cx, k.circle.cy - h.cy) < Math.max(k.circle.radiusPx, h.r))) continue
+  // The circles a reading has claimed: a circle near one is the same symbol and is not read again.
+  const claimed: Array<{ cx: number; cy: number; r: number }> = []
+  const flat = places.flat()
+  // The cheap part of a circle's test (its ink, its clear margin, its bar); null when it is not a callout.
+  const inspect = (h: Hit): { bar: Bar | null } | null => {
     // Ink inside the disc: darker than the disc's paper by half its contrast with the ring.
     const cut = h.interior - (h.interior - h.ring) / 2
     const inkInside = (x: number, y: number): boolean => g(x, y) < cut
@@ -1264,7 +1272,7 @@ export function readTintedCallouts(raster: Raster, options: TintedCalloutOptions
       }
     const interiorInk = area > 0 ? inkCount / area : 0
     // Digits, not an empty circle and not a filled blob.
-    if (interiorInk < 0.04 || interiorInk > 0.45) continue
+    if (interiorInk < 0.04 || interiorInk > 0.45) return null
     // The digits stand clear of the ring: a band just inside it is paper nearly all the way round, apart from where the
     // bar meets it. Lines crossing the circle (hatching, a stair's treads, a leader) put ink there.
     let margin = 0
@@ -1274,7 +1282,7 @@ export function readTintedCallouts(raster: Raster, options: TintedCalloutOptions
       const py = Math.round(h.cy + (h.r - 2.5) * sin[i])
       if (inkInside(px, py)) margin += 1
     }
-    if (margin > ANGLES * TINT_MARGIN_INK) continue
+    if (margin > ANGLES * TINT_MARGIN_INK) return null
     const mask: Mask = { width, height, data: new Uint8Array(0) }
     const local = (x: number, y: number): number => (inkInside(x, y) ? 1 : 0)
     // The bar: the row near the centre with the longest run of ink across the disc.
@@ -1294,10 +1302,31 @@ export function readTintedCallouts(raster: Raster, options: TintedCalloutOptions
       }
     }
     if (bestRun < (2 * half + 1) * 0.6) bar = null
-    // Plan rooflights require a separator bar. OCR of this ring cannot change their answer if it lacks one.
-    // Keep the older OCR fallback for other consumers that may accept symbols without a visible bar.
-    if (options.requireBar && !bar) continue
     void mask
+    return { bar }
+  }
+  // 005X-N3 (`requireBar`): only barred rings are wanted. A reading claims the circles about it, so a barless ring's
+  // reading can still decide which barred circle is read: directly (a later barred circle near it) or through a chain
+  // (it claims a barless circle whose own reading would have claimed a barred one). `matters` is that reach, worked
+  // back from the last circle; a barless ring outside it is not read, because nothing it could claim is ever returned.
+  // The barred readings are then exactly the full reader's; only the OCR (most of this function's time) is saved.
+  const inspected = options.requireBar ? flat.map(inspect) : undefined
+  const matters: boolean[] = new Array(flat.length).fill(false)
+  if (inspected)
+    for (let i = flat.length - 1; i >= 0; i -= 1) {
+      if (!inspected[i] || inspected[i]?.bar) continue
+      for (let k = i + 1; k < flat.length && !matters[i]; k += 1)
+        if (inspected[k] && (inspected[k]?.bar || matters[k]) && Math.hypot(flat[k].cx - flat[i].cx, flat[k].cy - flat[i].cy) < Math.max(flat[k].r, flat[i].r)) matters[i] = true
+    }
+  for (let i = 0; i < flat.length; i += 1) {
+    const h = flat[i]
+    if (claimed.some((k) => Math.hypot(k.cx - h.cx, k.cy - h.cy) < Math.max(k.r, h.r))) continue
+    const seen = inspected ? inspected[i] : inspect(h)
+    if (!seen) continue
+    const { bar } = seen
+    if (options.stats) options.stats.rings += 1
+    if (options.requireBar && !bar && !matters[i]) continue
+    if (options.stats) options.stats.ocr += 1
     const box: PixelRect = { x0: h.cx - h.r, y0: h.cy - h.r, x1: h.cx + h.r, y1: h.cy + h.r }
     const size = 2 * h.r + 1
     // The interior as darkness against the disc's own paper, the ring and the bar painted out.
@@ -1323,6 +1352,8 @@ export function readTintedCallouts(raster: Raster, options: TintedCalloutOptions
     const lower = splitBottom < size - 1 ? readHalf(cache, halfOf(splitBottom + 1, size - 1), HEIGHT_RANGE, undefined, classifyDigit, HALF_TUNING) : EMPTY_HALF
     const complete = coherent(upper, lower, h)
     if (!bar && !complete) continue
+    claimed.push({ cx: h.cx, cy: h.cy, r: h.r })
+    if (options.requireBar && !bar) continue
     readings.push({
       id: stableId('callout-tinted', options.frameId ?? '', { cx: h.cx, cy: h.cy }),
       circle: { cx: h.cx, cy: h.cy, radiusPx: h.r },
