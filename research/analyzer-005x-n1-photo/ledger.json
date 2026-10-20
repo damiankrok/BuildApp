@@ -269,5 +269,18 @@
   "readTintedCallouts speed for phones"
  ],
  "provenance": "photo path: every value ASSUMED_FOR_RENDERING or VISUAL_SEMANTIC/VISUAL_INFERRED, never SOURCE_EXACT; model name MODEL ORIENTACYJNY Z 1 ZDJĘCIA; no rooms; nothing reaches take-off or costing",
- "tests": "reconstruction new 9 (photo-roof-openings-005x-n1) + 7 (generic-openings-005x, one assertion updated for plane roofs)"
+ "tests": "reconstruction + tests/architecture + apps/web/src: 1190/1191 (the one failure is the known tracked-APK size gate, KNOWN_BASELINE_FAIL); new photo-roof-openings-005x-n1 9/9; generic-openings-005x 7/7 (one assertion updated for plane roofs); tsc clean",
+ "renders": {
+  "zip": "005x-n1-renders.zip (outside the repo, attached to the session)",
+  "sha256": "e50ea930f043c08ae14e380dab6bbce58414f16ba9d851a895f743aea5285a42",
+  "views": "perspective 3/4, left, right, top; fixed app camera presets per pair",
+  "models": {
+   "ownerBefore": "8b42664f",
+   "ownerAfter": "a478b5ff",
+   "a01VisBefore": "2b85d3e7",
+   "a01VisAfter": "a32163dc",
+   "a01MultiSource": "1661d4bf",
+   "gozdzikowce": "911456a8"
+  }
+ }
 }

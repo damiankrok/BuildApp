@@ -194,7 +194,7 @@ Cztery frontowe wizualizacje innych domów z legalnych cache'y: Goździkowce 3, 
   - szary dach z białym pasem niżej (okap nie pod pasem);
   - obraz bez domu.
 - `generic-openings-005x.test.ts`: 7 testów. Jedna asercja zmieniona strukturalnie, bo dach jest teraz z połaci (`roofs + roofPlanes ≥ 2`).
-- Pełne pakiety zmienione (`reconstruction`), testy architektury i `apps/web`: wyniki w ledgerze/odpowiedzi końcowej.
+- Pełne pakiety zmienione (`reconstruction`), testy architektury i `apps/web/src`: **1190/1191**. Jedyny fail to znana bramka rozmiaru śledzonego APK (`research-isolation.test.ts`, `KNOWN_BASELINE_FAIL`, jak w 005X).
 - `tsc` (root i `apps/web`) czysty.
 - Nie uruchamiano 41-job CI, APK, emulatora ani e2e. Bramka APK 39 556 682 B > 32 MB to znany `KNOWN_BASELINE_FAIL`, nieruszany.
 
@@ -229,4 +229,4 @@ Wszystkie rendery są w prawdziwym BuildWorld, ze stałą kamerą (presety aplik
 - A01 multi-source (= 005X);
 - Goździkowce jako kontrola.
 
-ZIP leży poza repo i jest dołączony do sesji. Rendery nie zawierają pikseli źródłowych. Zdjęcia OWNER-a i wizualizacje wydawcy nie są commitowane.
+ZIP `005x-n1-renders.zip` (SHA-256 `e50ea930f043c08ae14e380dab6bbce58414f16ba9d851a895f743aea5285a42`, 2,48 MB) leży poza repo i jest dołączony do sesji. Rendery nie zawierają pikseli źródłowych. Zdjęcia OWNER-a i wizualizacje wydawcy nie są commitowane.
