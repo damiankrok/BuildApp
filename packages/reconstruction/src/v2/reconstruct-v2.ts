@@ -1248,7 +1248,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       const b = topEntry.frame.toPixel(r.x1, r.z0)
       const region = { x0: Math.min(a.x, b.x), y0: Math.min(a.y, b.y), x1: Math.max(a.x, b.x), y1: Math.max(a.y, b.y) }
       const mpp = (topEntry.frame.mppX + topEntry.frame.mppY) / 2
-      const callouts = readTintedCallouts(topEntry.raster, { region, frameId: topEntry.frame.frameId, minRadiusPx: Math.max(6, 0.15 / mpp), maxRadiusPx: Math.max(10, 0.45 / mpp) })
+      const callouts = readTintedCallouts(topEntry.raster, { region, frameId: topEntry.frame.frameId, minRadiusPx: Math.max(6, 0.15 / mpp), maxRadiusPx: Math.max(10, 0.45 / mpp), requireBar: true })
       planRooflights.push(...readPlanRooflights(callouts, topEntry.frame, r, T, { ridgeAxis: mainRoof.ridgeAxis, ridgeAt: mainRoof.ridgeAt, pitchDeg: mainRoof.pitchDeg, eaveY: mainRoof.eaveY }))
       options.debug?.(`plan-rooflights ${callouts.length} rings, ${planRooflights.length} rooflights, ${renderRooflights.length} render patches`)
       step({ stage: 'roof-details', what: 'rooflights stated by the plan under the roof', method: 'DIRECT', detail: `${callouts.length} callout ring${callouts.length === 1 ? '' : 's'} inside the storey, ${planRooflights.length} read as rooflights`, inputs: callouts.length, outputs: planRooflights.length })
