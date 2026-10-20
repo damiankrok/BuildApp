@@ -1237,10 +1237,11 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     }
     // 005X: the rooflights the plan of the storey under the main roof states. The plan says that a rooflight is there, on
     // which slope, where along the ridge and how big; a render only confirms it (or adds one the plan does not state, as
-    // before). 005X-N1: reading the plan's callout rings is the costliest step of the run (a quarter of a minute on a
-    // desktop for a full storey, several times that on a phone), so it is taken only where a render already shows a
-    // rooflight in the roof: a house the renders show without any is not searched for them.
-    const topEntry = mainRoof.kind === 'GABLE' && renderRooflights.length > 0 ? planByStorey.get(topStorey) : undefined
+    // before). 005X-N2: the plan is read for them whether or not a render shows one — the plan is the ground, a render
+    // only confirms (DEC-UNIVERSAL-OPENING-CORE-003); 005X-N1 had made the reading wait on a render's patch. Reading the
+    // callout rings stays the costliest step of the run: the ring search is narrowed by a pooled test that cannot rule
+    // out a ring the full test would find (`readTintedCallouts` prefilter), the reading of the candidates is not.
+    const topEntry = mainRoof.kind === 'GABLE' ? planByStorey.get(topStorey) : undefined
     if (topEntry) {
       const r = rectAt(main, topStorey)
       const a = topEntry.frame.toPixel(r.x0, r.z1)
@@ -1249,6 +1250,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       const mpp = (topEntry.frame.mppX + topEntry.frame.mppY) / 2
       const callouts = readTintedCallouts(topEntry.raster, { region, frameId: topEntry.frame.frameId, minRadiusPx: Math.max(6, 0.15 / mpp), maxRadiusPx: Math.max(10, 0.45 / mpp) })
       planRooflights.push(...readPlanRooflights(callouts, topEntry.frame, r, T, { ridgeAxis: mainRoof.ridgeAxis, ridgeAt: mainRoof.ridgeAt, pitchDeg: mainRoof.pitchDeg, eaveY: mainRoof.eaveY }))
+      options.debug?.(`plan-rooflights ${callouts.length} rings, ${planRooflights.length} rooflights, ${renderRooflights.length} render patches`)
       step({ stage: 'roof-details', what: 'rooflights stated by the plan under the roof', method: 'DIRECT', detail: `${callouts.length} callout ring${callouts.length === 1 ? '' : 's'} inside the storey, ${planRooflights.length} read as rooflights`, inputs: callouts.length, outputs: planRooflights.length })
     }
     const overlapsAlong = (p: { alongFrom: number; alongTo: number }, q: { alongFrom: number; alongTo: number }): boolean => Math.min(p.alongTo, q.alongTo) - Math.max(p.alongFrom, q.alongFrom) > 0.5 * Math.min(p.alongTo - p.alongFrom, q.alongTo - q.alongFrom)

@@ -67,12 +67,27 @@ export type PictureOpening = {
   why: string
 }
 
+/**
+ * How the wall under the roof was told from the roof: a light neutral band under the eaves (rendered walls in daylight),
+ * or, where no such band stands, the roof's own colour learnt from the picture and ended by whatever is not roof (a dark,
+ * timbered or shaded wall, a dusk picture).
+ */
+export type SingleImageMode = 'NEUTRAL_BAND' | 'GENERAL' | 'SILHOUETTE'
+
+/**
+ * What the picture supports: openings read off it (DETAILS_SUPPORTED, still indicative), or a closed body with the roof
+ * as read and no openings (COARSE_INDICATIVE). Neither is ever a verified detail.
+ */
+export type SingleImageQuality = 'DETAILS_SUPPORTED' | 'COARSE_INDICATIVE'
+
 export type SingleImageReading = {
   ok: true
+  mode: SingleImageMode
+  quality: SingleImageQuality
   /** Pixel rows of the wall's eave and ground lines at the wall's two ends. */
   wall: { x0: number; x1: number; eave: [number, number]; ground: [number, number]; widthM: number; heightM: number; storeys: number }
   /** The stretches of the front with eaves of their own, left to right, in metres along the front. */
-  segments: Array<{ x0: number; x1: number; along: [number, number]; eave: [number, number]; heightM: number; main: boolean; ends: { min: RoofEndReading; max: RoofEndReading } }>
+  segments: Array<{ x0: number; x1: number; along: [number, number]; eave: [number, number]; heightM: number; main: boolean; ends: { min: RoofEndReading; max: RoofEndReading }; /** Along the front (X, the default) or back from it (Z: a gable facing the camera). */ ridgeAxis?: 'X' | 'Z' }>
   roof: { topRow: number; riseM: number; pitchDeg: number; depthM: number }
   colours: { roof: [number, number, number]; wall: [number, number, number] }
   openings: PictureOpening[]
@@ -114,6 +129,7 @@ const ENTRANCE_MULLION_M = 0.35
 const COLLINEAR_EAVE_PX = 4
 /** ... for this share of the read columns of each. */
 const COLLINEAR_SHARE = 0.7
+const COLLINEAR_EAVE_PX_GENERAL = 7
 /** The most stretches of eave read, one after another, before the rest is left unread. */
 const MAX_EAVE_STRETCHES = 4
 /** Rows under an eave line sampled for the wall it should stand on, and the share of them that must be neutral wall. */
@@ -128,6 +144,8 @@ const GABLE_MIN_RISE = 0.2
 const GABLE_MIN_RISE_PX = 12
 /** Columns of a gable face further apart than this belong to two faces. */
 const GABLE_GAP_PX = 25
+/** GENERAL: the share of a gable face's base its raised wall must span. */
+const GABLE_RAISED_SHARE = 0.6
 /** Rows from a rake's line down to the face under it: the verge board and its shadow. */
 const RAKE_SOFFIT_PX = 12
 /** A rake slopes at least this steeply in the picture (rows per column). */
@@ -168,6 +186,65 @@ const RAMP_END = 0.65
 const RAMP_INSET = 0.08
 /** How far past a wall's end, as a share of the picture's width, a hip's outline is followed down. */
 const HIP_REACH_BEYOND = 0.08
+/** GENERAL: the half side of the window a surface's local mean colour is taken over. */
+const SMOOTH_RADIUS = 3
+/** GENERAL: a saturated pixel is planting only in these hues (yellow-green to cyan, degrees) and over this luma. */
+const PLANT_HUE = [60, 200] as const
+const PLANT_LUMA_MIN = 40
+/** A picture of a house shows sky over at least this share of its top band (this share of its height). */
+const SKY_TOP_BAND = 0.08
+const SKY_TOP_SHARE = 0.25
+/** GENERAL: a row's sky is the mean of at least so many sky pixels in it; a smooth pixel within this of it is sky too. */
+const SKY_ROW_MIN = 8
+const SKY_ROW_DIST = 18
+const SKY_TEXTURE_MAX = 4
+/** GENERAL: the covering's colour tolerance, from its own spread, kept to this range (levels). */
+const ROOF_TOL_MIN = 20
+const ROOF_TOL_MAX = 48
+const ROOF_TOL_LOCAL_MIN = 16
+const ROOF_TOL_LOCAL_MAX = 28
+/** GENERAL: colours further than this from the covering's are not counted in its spread. */
+const SPREAD_CAP = 48
+/** GENERAL: a covering region grows to neighbours whose local mean differs by at most this (levels per channel)... */
+const ROOF_STEP = 4
+/** ... and that stay within this many tolerances of its colour, or, by each column's own colour, at least this far. */
+const ROOF_LOOSE = 1.5
+const LOCAL_FLOOR = 30
+/** GENERAL: columns either side whose own covering colour makes a column's. */
+const LOCAL_SPAN = 10
+/** GENERAL: the picture-wide hypothesis has leaked where fewer than this share of its edges stand over wall as the column one's do. */
+const LEAK_SHARE = 0.5
+/** GENERAL: an outline this share of the height above its median over ±SPIKE_SPAN columns is a chimney; patches within SPIKE_MARGIN columns of it are its base. */
+const SPIKE_SPAN = 40
+const SPIKE_RISE = 0.03
+const SPIKE_MARGIN = 8
+/** SILHOUETTE: columns of the outline further apart than this share of the width are two things; the outline's top
+ * must lie above this share of the height; its run must span this share of the width; its rise over its corners this
+ * share of the height. */
+const OUTLINE_GAP = 0.02
+const OUTLINE_LOWEST = 0.75
+const OUTLINE_MIN_SHARE = 0.3
+const OUTLINE_MIN_RISE = 0.04
+/** SILHOUETTE: the outline dropping by this share of the height within a few columns is a corner of the roof. */
+const OUTLINE_DROP = 0.12
+/** SILHOUETTE: a wall under the roof taller than this share of its width is taken as two storeys. */
+const TWO_STOREY_ASPECT = 0.45
+/** SILHOUETTE: corners further apart in height than this share of the roof's rise are not both eaves. */
+const CORNER_SPREAD = 0.25
+/** SILHOUETTE: an inverted V whose base spans this share of the outline is a gable facing the camera. */
+const FRONT_GABLE_SHARE = 0.4
+/** SILHOUETTE: an end whose outline comes down over this share of the width is hipped. */
+const HIP_OUTLINE_SHARE = 0.2
+/** GENERAL: the widest eave read must span this share of the house's outline, or the outline decides. */
+const GENERAL_MIN_SPAN = 0.35
+/** GENERAL: rows of something else, as a share of the picture's height, that a covering's run crosses (a rooflight, a letter). */
+const ROOF_GAP_SHARE = 0.025
+/** GENERAL: rows looked ahead (share of the picture's height) where the covering is interrupted, and the share of them it must hold to go on. */
+const ROOF_AHEAD_SHARE = 0.06
+const ROOF_AHEAD_SHARE_HELD = 0.3
+/** GENERAL: the wall under its eaves is at least this share of the picture tall, and at one end at most this many times the other. */
+const FOOT_MIN_SHARE = 0.06
+const FOOT_SPREAD = 2.5
 
 const rgb = (r: Raster, x: number, y: number): RGB => {
   const o = (y * r.width + x) * 4
@@ -187,6 +264,8 @@ const hueOf = (c: RGB): number => {
   return (h * 60 + 360) % 360
 }
 const green = (c: RGB): boolean => c[1] - Math.max(c[0], c[2]) >= 8
+/** 005X-N2: a light bluish pixel is sky the sky's flood did not reach (a cloud's edge, a gap in a tree), not a wall. */
+const skyLike = (c: RGB): boolean => c[2] - Math.max(c[0], c[1]) >= 6 && lumaOf(c) >= 120
 /** Living planting is a vivid green; the trees glass reflects are a dull one. */
 const foliage = (c: RGB): boolean => green(c) && satOf(c) > 0.25
 const dist = (a: RGB, b: RGB): number => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2])
@@ -239,12 +318,18 @@ export function textureMap(raster: Raster): Float32Array {
 }
 
 /** The share of foliage (green) and flowers (strongly saturated) about each pixel, over 9 × 9. */
-function vegetationShare(raster: Raster): Float32Array {
+/**
+ * ALL: foliage and anything strongly saturated (flowers). 005X-N2: DARK_SAFE leaves out near-black pixels, whose
+ * saturation is noise (5,6,10 is "50 % saturated"); LEAVES keeps only saturated greens — what a covering's or a wall's
+ * colour is sampled against, since a red covering or a timber cladding is as saturated as a flower bed.
+ */
+function vegetationShare(raster: Raster, kind: 'ALL' | 'DARK_SAFE' | 'LEAVES' = 'ALL'): Float32Array {
   const n = raster.width * raster.height
   const v = new Float32Array(n)
   for (let i = 0; i < n; i += 1) {
     const c: RGB = [raster.data[i * 4], raster.data[i * 4 + 1], raster.data[i * 4 + 2]]
-    v[i] = foliage(c) || satOf(c) > 0.45 ? 1 : 0
+    const saturated = satOf(c) > 0.45 && (kind === 'ALL' || lumaOf(c) >= PLANT_LUMA_MIN) && (kind !== 'LEAVES' || (hueOf(c) >= PLANT_HUE[0] && hueOf(c) <= PLANT_HUE[1]))
+    v[i] = foliage(c) || saturated ? 1 : 0
   }
   return boxMean(v, raster.width, raster.height, 4)
 }
@@ -321,12 +406,313 @@ function peakedFace(pts: ReadonlyArray<{ x: number; y: number }>): { apexX: numb
  * wall band wide enough to place anything on.
  */
 export function readSingleImage(raster: Raster, options: SingleImageOptions = {}): SingleImageReading | SingleImageRefusal {
+  // 005X-N2: every reading stands a house against the sky; a picture whose top shows little or no sky (a close-up of a
+  // wall, a picture of something else) is refused before any reading invents a roof on it
+  const sky = skyMask(raster)
+  const band = Math.max(1, Math.round(raster.height * SKY_TOP_BAND))
+  let skyTop = 0
+  for (let i = 0; i < raster.width * band; i += 1) skyTop += sky.data[i]
+  if (skyTop < SKY_TOP_SHARE * raster.width * band) return { ok: false, reason: 'no sky over the house: the picture\'s top shows too little sky to stand a roof against', why: [`${Math.round((100 * skyTop) / (raster.width * band))} % of the top ${band} rows is sky`] }
+  return readByModes(raster, options)
+}
+
+function readByModes(raster: Raster, options: SingleImageOptions): SingleImageReading | SingleImageRefusal {
+  const band = readPicture(raster, options, 'NEUTRAL_BAND')
+  if (band.ok) return band
+  options.debug?.(`mode NEUTRAL_BAND refused: ${band.reason}; reading again by the roof's own colour`)
+  const general = readPicture(raster, options, 'GENERAL')
+  if (general.ok) return { ...general, why: [`no light neutral band under the eaves (${band.reason}): the roof was told from the wall by its own colour`, ...general.why] }
+  options.debug?.(`mode GENERAL refused: ${general.reason}; reading the house's outline against the sky`)
+  const outline = readSilhouette(raster, options)
+  if (outline.ok) return { ...outline, why: [`no light neutral band under the eaves (${band.reason})`, `no eave line by the roof's own colour (${general.reason})`, ...outline.why] }
+  return { ok: false, reason: outline.reason, why: [`by a light neutral band under the eaves: ${band.reason}`, `by the roof's own colour: ${general.reason}`, ...outline.why] }
+}
+
+/**
+ * The house's outline against the sky: per column the first row under the widened sky with structure (not sky, not
+ * planting) under it; the widest run of such columns, small gaps (a downpipe, a thin tree) bridged. Undefined where no
+ * run spans a good share of the picture.
+ */
+function houseOutline(raster: Raster, sky: { data: Uint8Array }, veg: Float32Array): { a: number; b: number; top: number[] } | undefined {
+  const W = raster.width
+  const H = raster.height
+  const top: number[] = new Array(W).fill(-1)
+  for (let x = 0; x < W; x += 1) {
+    for (let y = 0; y < H - 5; y += 1) {
+      let solid = true
+      for (let k = 0; k < 5 && solid; k += 1) if (sky.data[(y + k) * W + x]) solid = false
+      if (!solid) continue
+      // a tree's crown is not the house: an outline starting in planting is no outline
+      if (veg[y * W + x] < VEGETATION_SHARE && veg[(y + 4) * W + x] < VEGETATION_SHARE) top[x] = y
+      break
+    }
+  }
+  const gap = Math.round(W * OUTLINE_GAP)
+  let best: [number, number] | undefined
+  let start = -1
+  let last = -1
+  for (let x = 0; x <= W; x += 1) {
+    const on = x < W && top[x] >= 0 && top[x] < H * OUTLINE_LOWEST
+    if (on) {
+      if (start < 0 || x - last > gap) {
+        if (start >= 0 && (!best || last - start > best[1] - best[0])) best = [start, last]
+        start = x
+      }
+      last = x
+    }
+    if (x === W && start >= 0 && (!best || last - start > best[1] - best[0])) best = [start, last]
+  }
+  if (!best || best[1] - best[0] < OUTLINE_MIN_SHARE * W) return undefined
+  return { a: best[0], b: best[1], top }
+}
+
+/**
+ * Level 1, the coarse fallback: a closed body from the house's outline alone, where neither a light band nor the
+ * covering's colour gave an eave line (a dark or timbered front at dusk, a gable facing the camera). The outline's two
+ * lower corners give the eaves; an inverted V over most of the outline is a gable facing the camera (the ridge running
+ * back from the picture); otherwise the ridge runs along the front. The foot is where facade gives way to planting or
+ * ground. No openings and no rooflights are read: the body is COARSE_INDICATIVE, every length assumed.
+ */
+function readSilhouette(raster: Raster, options: SingleImageOptions): SingleImageReading | SingleImageRefusal {
+  const W = raster.width
+  const H = raster.height
+  const why: string[] = []
+  const assumptions: string[] = []
+  const texture = textureMap(raster)
+  const sky = widenSky(raster, skyMask(raster), texture)
+  const veg = vegetationShare(raster, 'DARK_SAFE')
+  const outline = houseOutline(raster, sky, veg)
+  options.debug?.(`outline-top ${JSON.stringify(outline?.top ?? [])}`)
+  if (!outline) return { ok: false, reason: 'no house outline against the sky: no run of structure under the sky spans a good share of the picture', why }
+  const { a, b } = outline
+  // the outline, a median over a few columns against a chimney's or an antenna's spike
+  const T = outline.top.map((_, x) => {
+    const vs = outline.top.slice(Math.max(a, x - 3), Math.min(b, x + 3) + 1).filter((v) => v >= 0)
+    return vs.length > 0 ? median(vs) : -1
+  })
+  why.push(`the house's outline against the sky over columns ${a}..${b}`)
+  // the roof's lower corners: from the outline's highest point outwards, as long as it does not drop at once by a good
+  // share of the picture (the wall's side under the corner, a lower body beside it, the planting)
+  let apex0 = a
+  for (let x = a; x <= b; x += 1) if (T[x] >= 0 && T[x] < T[apex0]) apex0 = x
+  const drop = OUTLINE_DROP * H
+  const bridge = Math.round(W * OUTLINE_GAP)
+  const corner = (dir: 1 | -1): number => {
+    let x = apex0
+    for (;;) {
+      // the next read column a few columns on, across a short gap in the outline (a chimney's shadow, a downpipe)
+      let k = 3
+      while (k <= bridge && x + dir * k >= a && x + dir * k <= b && T[x + dir * k] < 0) k += 1
+      const nx = x + dir * k
+      if (nx < a || nx > b || T[nx] < 0 || Math.abs(T[nx] - T[x]) > drop) return x
+      x = nx
+    }
+  }
+  const ca = corner(-1)
+  const cb = corner(1)
+  if (cb - ca < OUTLINE_MIN_SHARE * W) return { ok: false, reason: 'the roof\'s outline between its lower corners is too narrow', why: [...why, `corners at ${ca} and ${cb}`] }
+  const eL = T[ca]
+  const eR = T[cb]
+  // two corners far apart in height are not both eaves: the higher is where the roof steps down onto another behind it;
+  // the eaves are then level through the lower one
+  const level = Math.abs(eR - eL) > CORNER_SPREAD * (Math.max(eL, eR) - T[apex0])
+  const eave = level ? { a: 0, b: Math.max(eL, eR) } : { a: (eR - eL) / Math.max(1, cb - ca), b: eL - ((eR - eL) / Math.max(1, cb - ca)) * ca }
+  if (level) why.push(`the outline's corners stand ${Math.abs(eR - eL).toFixed(0)} px apart in height: the eaves taken level through the lower one`)
+  const eaveAt = (x: number): number => eave.a * x + eave.b
+  // the foot: in each of a dozen stretches the lowest row of facade (not sky, not planting) before planting takes over
+  const lows: Array<{ x: number; y: number }> = []
+  for (let k = 0; k < 12; k += 1) {
+    const x0 = Math.round(ca + ((cb - ca) * k) / 12)
+    const x1 = Math.round(ca + ((cb - ca) * (k + 1)) / 12)
+    let low: { x: number; y: number } | undefined
+    for (let x = x0; x < x1; x += 2) {
+      let lastFacade = -1
+      for (let y = Math.max(0, Math.round(eaveAt(x))); y < H; y += 1) {
+        const i = y * W + x
+        const o = i * 4
+        const c: RGB = [raster.data[o], raster.data[o + 1], raster.data[o + 2]]
+        if (!sky.data[i] && veg[i] < VEGETATION_SHARE && !foliage(c)) lastFacade = y
+        else if (lastFacade >= 0 && y - lastFacade > 12) break
+      }
+      // facade running to the picture's bottom edge (paving, a drive) shows no foot in that column
+      if (lastFacade > eaveAt(x) + FOOT_MIN_SHARE * H && lastFacade < H - 3 && (!low || lastFacade > low.y)) low = { x, y: lastFacade }
+    }
+    if (low) lows.push(low)
+  }
+  const foot = robustLine(lows, 12, { about: eave.a, within: FOOT_LEAN })
+  options.debug?.(`silhouette-foot ${JSON.stringify({ ca, cb, eL, eR, lows, foot })}`)
+  if (!foot || foot.inliers < 3) return { ok: false, reason: 'no wall foot under the outline: planting or the picture\'s edge hides it', why: [...why, `${lows.length} stretch lows`] }
+  const footAt = (x: number): number => foot.a * x + foot.b
+  const hL = footAt(ca) - eaveAt(ca)
+  const hR = footAt(cb) - eaveAt(cb)
+  if (Math.min(hL, hR) < FOOT_MIN_SHARE * H || Math.max(hL, hR) > FOOT_SPREAD * Math.min(hL, hR)) return { ok: false, reason: 'the outline\'s corners and the foot do not make a wall: the eaves could not be placed', why: [...why, `wall ${hL.toFixed(0)} px at the left, ${hR.toFixed(0)} px at the right`] }
+  why.push(`eaves through the roof's lower corners (${ca}, ${eL.toFixed(0)}) and (${cb}, ${eR.toFixed(0)}), foot y = ${foot.a.toFixed(4)} x + ${foot.b.toFixed(1)} (${foot.inliers} of ${lows.length} stretch lows)`)
+  // the top: the highest point of the outline, and whether an inverted V over most of it says a gable faces the camera
+  const apexX = apex0
+  const rise = eaveAt(apexX) - T[apexX]
+  if (rise < OUTLINE_MIN_RISE * H) return { ok: false, reason: 'the outline shows no roof rising over its corners', why }
+  const raisedPts = [] as Array<{ x: number; y: number }>
+  for (let x = ca; x <= cb; x += 2) if (T[x] >= 0 && T[x] < eaveAt(x) - 0.2 * rise) raisedPts.push({ x, y: T[x] })
+  const face = peakedFace(raisedPts)
+  const heightPx = (x: number): number => footAt(x) - eaveAt(x)
+  let x0 = ca
+  let x1 = cb
+  let ridgeAxis: 'X' | 'Z' = 'X'
+  if (face) {
+    // where the rakes come down to the eave line
+    const xl = (eave.b - face.left.b) / (face.left.a - eave.a)
+    const xr = (eave.b - face.right.b) / (face.right.a - eave.a)
+    if (xl < face.apexX && face.apexX < xr && xr - xl >= FRONT_GABLE_SHARE * (cb - ca)) {
+      ridgeAxis = 'Z'
+      x0 = Math.max(ca, Math.round(xl))
+      x1 = Math.min(cb, Math.round(xr))
+      why.push(`an inverted V over columns ${x0}..${x1} of the outline, apex at (${face.apexX.toFixed(0)}, ${face.apexY.toFixed(0)}): a gable facing the camera, its ridge running back`)
+      if (x0 - a > 0.1 * (b - a) || b - x1 > 0.1 * (b - a)) assumptions.push(`the outline beyond the gable (${a}..${x0} and ${x1}..${b}) is not modelled`)
+    }
+  }
+  if (ridgeAxis === 'X' && (ca - a > 0.1 * (b - a) || b - cb > 0.1 * (b - a))) assumptions.push(`the outline beyond the roof's corners (${a}..${ca} and ${cb}..${b}) is not modelled`)
+  {
+    {
+    }
+  }
+  const midX = (x0 + x1) / 2
+  // the scale: no door is read, so a storey is assumed; a wall standing taller than about half the body's width under
+  // the roof is two storeys (a house proportion, not a reading)
+  const storeysAssumed = heightPx(midX) > TWO_STOREY_ASPECT * (x1 - x0) ? 2 : 1
+  const wallH = (options.storeyHeightM ?? 2.9) * storeysAssumed
+  const widthM = round6(((x1 - x0) * wallH) / heightPx(midX))
+  const riseM = round6((rise * wallH) / heightPx(apexX))
+  const half = ridgeAxis === 'Z' ? widthM / 2 : 0
+  const depthM = round6(ridgeAxis === 'Z' ? Math.max(7, Math.min(14, widthM * 1.3)) : Math.max(6, Math.min(12, widthM * 0.9)))
+  const pitchDeg = round6(Math.max(20, Math.min(55, (Math.atan(riseM / (ridgeAxis === 'Z' ? half : depthM / 2)) * 180) / Math.PI)))
+  // a ridge along the front: an end whose outline comes down gradually over a good share of the width is hipped
+  const endOf = (side: 'MIN' | 'MAX'): RoofEndReading => {
+    if (ridgeAxis === 'Z') return { kind: 'GABLE', evidence: 'GABLE_FACE', why: 'the gable faces the camera; its back end is not seen and taken as a gable' }
+    const from = side === 'MIN' ? x0 : x1
+    const dir = side === 'MIN' ? 1 : -1
+    let k = 0
+    while (k < x1 - x0 && T[from + dir * k] >= 0 && T[from + dir * k] > T[apexX] + 0.1 * rise) k += 1
+    return k >= HIP_OUTLINE_SHARE * (x1 - x0) ? { kind: 'HIP', evidence: 'RAMP', why: `the outline comes down over ${Math.round((100 * k) / (x1 - x0))} % of the width at this end` } : { kind: 'GABLE', evidence: 'UNSEEN', why: `the outline rises within ${Math.round((100 * k) / (x1 - x0))} % of the width at this end: a gable taken` }
+  }
+  const segEnds = { min: endOf('MIN'), max: endOf('MAX') }
+  assumptions.push(`wall height ${wallH.toFixed(2)} m eaves to ground (${storeysAssumed} storey${storeysAssumed === 1 ? '' : 's'} assumed from the wall's proportion: no openings read to scale it); the front ${widthM.toFixed(2)} m wide at that scale; depth ${depthM.toFixed(2)} m and pitch ${pitchDeg.toFixed(1)}° from the outline's rise of ${riseM.toFixed(2)} m; the picture's perspective is not corrected`)
+  assumptions.push('no openings, rooflights or cross gables are read from the outline: the body is coarse and indicative only; the sides, the back and the roof behind the outline are a closed hypothesis')
+  options.debug?.(`silhouette ${JSON.stringify({ a, b, eL, eR, foot, apexX, apexY: T[apexX], ridgeAxis, x0, x1 })}`)
+  return {
+    ok: true,
+    mode: 'SILHOUETTE',
+    quality: 'COARSE_INDICATIVE',
+    wall: { x0, x1, eave: [round6(eaveAt(x0)), round6(eaveAt(x1))], ground: [round6(footAt(x0)), round6(footAt(x1))], widthM, heightM: wallH, storeys: storeysAssumed },
+    segments: [{ x0, x1, along: [0, widthM], eave: [round6(eaveAt(x0)), round6(eaveAt(x1))], heightM: wallH, main: true, ends: segEnds, ridgeAxis }],
+    gables: [],
+    roof: { topRow: T[apexX], riseM, pitchDeg, depthM },
+    colours: { roof: [0, 0, 0], wall: [0, 0, 0] },
+    openings: [],
+    rooflights: [],
+    assumptions,
+    why,
+  }
+}
+
+/** The local mean colour over a (2r+1)² window: a covering's tile rows, a watermark's letters and noise average out. */
+function smoothColours(raster: Raster, r: number): [Float32Array, Float32Array, Float32Array] {
+  const W = raster.width
+  const H = raster.height
+  const ch = (k: number): Float32Array => {
+    const v = new Float32Array(W * H)
+    for (let i = 0; i < W * H; i += 1) v[i] = raster.data[i * 4 + k]
+    return boxMean(v, W, H, r)
+  }
+  return [ch(0), ch(1), ch(2)]
+}
+
+/** The median of the fullest neighbourhood of colour bins (`shift` bits per channel dropped): a picture's commonest colour. */
+function modalColour(samples: readonly RGB[], shift: number): RGB {
+  const n = 256 >> shift
+  const binOf = (c: RGB): number => ((c[0] >> shift) * n + (c[1] >> shift)) * n + (c[2] >> shift)
+  const counts = new Map<number, number>()
+  for (const c of samples) counts.set(binOf(c), (counts.get(binOf(c)) ?? 0) + 1)
+  const parts = (k: number): [number, number, number] => [Math.floor(k / (n * n)), Math.floor(k / n) % n, k % n]
+  const around = (k: number): number => {
+    const [r, g, b] = parts(k)
+    let s = 0
+    for (let dr = -1; dr <= 1; dr += 1)
+      for (let dg = -1; dg <= 1; dg += 1)
+        for (let db = -1; db <= 1; db += 1) {
+          const rr = r + dr
+          const gg = g + dg
+          const bb = b + db
+          if (rr >= 0 && rr < n && gg >= 0 && gg < n && bb >= 0 && bb < n) s += counts.get((rr * n + gg) * n + bb) ?? 0
+        }
+    return s
+  }
+  const fullest = parts([...counts.keys()].map((k) => [k, around(k)] as const).sort((p, q) => q[1] - p[1] || p[0] - q[0])[0][0])
+  return medianColour(samples.filter((c) => Math.abs((c[0] >> shift) - fullest[0]) <= 1 && Math.abs((c[1] >> shift) - fullest[1]) <= 1 && Math.abs((c[2] >> shift) - fullest[2]) <= 1))
+}
+
+/**
+ * GENERAL: the sky the flood from the picture's top reached, widened to smooth pixels connected to it whose colour is
+ * that of the sky in their own row (a dusk sky darkens and changes hue towards the horizon, past where the flood's
+ * pale-or-blue test holds). Rows the flood did not reach take the nearest row above that it did.
+ */
+function widenSky(raster: Raster, sky: { width: number; height: number; data: Uint8Array }, texture: Float32Array): { width: number; height: number; data: Uint8Array } {
+  const W = raster.width
+  const H = raster.height
+  const out = new Uint8Array(sky.data)
+  const rowSky: Array<RGB | undefined> = []
+  for (let y = 0; y < H; y += 1) {
+    let n = 0
+    const s = [0, 0, 0]
+    for (let x = 0; x < W; x += 1) {
+      if (!sky.data[y * W + x]) continue
+      const o = (y * W + x) * 4
+      s[0] += raster.data[o]
+      s[1] += raster.data[o + 1]
+      s[2] += raster.data[o + 2]
+      n += 1
+    }
+    rowSky.push(n >= SKY_ROW_MIN ? [s[0] / n, s[1] / n, s[2] / n] : rowSky[y - 1])
+  }
+  const like = (i: number): boolean => {
+    const y = Math.floor(i / W)
+    const c = rowSky[y]
+    if (!c || texture[i] > SKY_TEXTURE_MAX) return false
+    const o = i * 4
+    return Math.hypot(raster.data[o] - c[0], raster.data[o + 1] - c[1], raster.data[o + 2] - c[2]) <= SKY_ROW_DIST
+  }
+  const stack: number[] = []
+  for (let i = 0; i < W * H; i += 1) if (out[i]) stack.push(i)
+  while (stack.length > 0) {
+    const i = stack.pop() as number
+    const x = i % W
+    for (const j of [x + 1 < W ? i + 1 : -1, x > 0 ? i - 1 : -1, i + W < W * H ? i + W : -1, i - W]) {
+      if (j < 0 || out[j] || !like(j)) continue
+      out[j] = 1
+      stack.push(j)
+    }
+  }
+  return { width: W, height: H, data: out }
+}
+
+function readPicture(raster: Raster, options: SingleImageOptions, mode: SingleImageMode): SingleImageReading | SingleImageRefusal {
+  const general = mode === 'GENERAL'
   const why: string[] = []
   const assumptions: string[] = []
   const W = raster.width
   const H = raster.height
-  const sky = skyMask(raster)
+  const sky = general ? widenSky(raster, skyMask(raster), textureMap(raster)) : skyMask(raster)
   const isSky = (x: number, y: number): boolean => sky.data[y * W + x] === 1
+  const veg = vegetationShare(raster, general ? 'DARK_SAFE' : 'ALL')
+  // GENERAL: what the covering's and the wall's colours are sampled and grown against: leaves only
+  const plant = general ? vegetationShare(raster, 'LEAVES') : veg
+  // GENERAL: every surface is told by its local mean colour, so a covering's lit and shaded tile rows are one colour
+  const sm = general ? smoothColours(raster, SMOOTH_RADIUS) : undefined
+  const smAt = (x: number, y: number): RGB => {
+    if (!sm) return rgb(raster, x, y)
+    const i = y * W + x
+    return [sm[0][i], sm[1][i], sm[2][i]]
+  }
+  const texture = textureMap(raster)
   // --- the roof's colour: the first non-sky, non-planting band under the sky, over the middle half of the picture
   const roofSamples: RGB[] = []
   const tops: number[] = new Array(W).fill(-1)
@@ -341,11 +727,12 @@ export function readSingleImage(raster: Raster, options: SingleImageOptions = {}
   }
   for (let x = Math.floor(W * 0.25); x < W * 0.75; x += 2) {
     if (tops[x] < 0) continue
-    for (let y = tops[x] + 3; y < Math.min(H, tops[x] + 40); y += 1) {
+    for (let y = tops[x] + (general ? SMOOTH_RADIUS + 3 : 3); y < Math.min(H, tops[x] + (general ? 30 : 40)); y += 1) {
       const c = rgb(raster, x, y)
       // A cloud the sky's flood did not reach is pale or blue; a covering is neither.
-      if (green(c) || c[2] - Math.max(c[0], c[1]) >= 6 || (lumaOf(c) >= 200 && satOf(c) < 0.12)) continue
-      roofSamples.push(c)
+      // GENERAL: the widened sky holds the clouds and the dusk sky; a bluish covering in dusk light is a covering
+      if (general ? isSky(x, y) || plant[y * W + x] >= VEGETATION_SHARE || green(c) : green(c) || c[2] - Math.max(c[0], c[1]) >= 6 || (lumaOf(c) >= 200 && satOf(c) < 0.12)) continue
+      roofSamples.push(general ? smAt(x, y) : c)
     }
   }
   if (roofSamples.length < 50) return { ok: false, reason: 'no roof under the sky: the picture does not show a house against the sky', why }
@@ -370,14 +757,22 @@ export function readSingleImage(raster: Raster, options: SingleImageOptions = {}
   }
   const fullest = [...counts.keys()].map((k) => [k, around(k)] as const).sort((p, q) => q[1] - p[1] || p[0] - q[0])[0][0]
   const near = (c: RGB): boolean => Math.abs((c[0] >> 5) - (fullest >> 6)) <= 1 && Math.abs((c[1] >> 5) - ((fullest >> 3) & 7)) <= 1 && Math.abs((c[2] >> 5) - (fullest & 7)) <= 1
-  const roof = medianColour(roofSamples.filter(near))
+  const roof = general ? modalColour(roofSamples, 4) : medianColour(roofSamples.filter(near))
+  // GENERAL: the covering's own spread about its colour sets how far from it a surface is something else
+  const roofTol = Math.max(ROOF_TOL_MIN, Math.min(ROOF_TOL_MAX, 3 * median(roofSamples.map((c) => dist(c, roof)).filter((d) => d <= SPREAD_CAP)) + 6))
+  /** GENERAL: of the covering's colour, by the picture-wide model. */
+  let coverDist: Float32Array | undefined
+  const coveringColour = (x: number, y: number): boolean => !isSky(x, y) && plant[y * W + x] < VEGETATION_SHARE && (coverDist ? coverDist[y * W + x] : dist(smAt(x, y), roof)) <= roofTol
+  // GENERAL: the covering as grown regions (filled once the roof's top is known); until then, by colour
+  let covering: Uint8Array | undefined
+  const roofAt = (x: number, y: number): boolean => (general ? (covering ? covering[y * W + x] === 1 : coveringColour(x, y)) : isRoof(rgb(raster, x, y)))
   // Where trees stand behind a roof, the first thing under the sky is planting: the roof's top there is the first
   // roof-coloured pixel under it, found once the roof's colour is known.
   const findTop = (x: number): number => {
     for (let y = 0; y < H * 0.85; y += 1) {
       if (isSky(x, y)) continue
       const c = rgb(raster, x, y)
-      if (isRoof(c) && isRoof(rgb(raster, x, Math.min(H - 1, y + 2))) && isRoof(rgb(raster, x, Math.min(H - 1, y + 4)))) return y
+      if (general ? roofAt(x, y) && roofAt(x, Math.min(H - 1, y + 2)) && roofAt(x, Math.min(H - 1, y + 4)) : isRoof(c) && isRoof(rgb(raster, x, Math.min(H - 1, y + 2))) && isRoof(rgb(raster, x, Math.min(H - 1, y + 4)))) return y
     }
     return -1
   }
@@ -386,7 +781,7 @@ export function readSingleImage(raster: Raster, options: SingleImageOptions = {}
   const roofSat = satOf(roof)
   const isRoof = (c: RGB): boolean => !green(c) && (roofSat > 0.2 ? satOf(c) > 0.15 && Math.min(Math.abs(hueOf(c) - roofHue), 360 - Math.abs(hueOf(c) - roofHue)) <= 30 : satOf(c) < 0.2 && lumaOf(c) < 170)
   for (let x = 0; x < W; x += 1) tops[x] = findTop(x)
-  why.push(`roof colour ${roof.join(',')} (median of the band under the sky over the middle half)`)
+  why.push(general ? `roof colour ${roof.map((v) => Math.round(v)).join(',')} ± ${roofTol.toFixed(0)} (commonest local mean colour of the band under the sky over the middle half)` : `roof colour ${roof.join(',')} (median of the band under the sky over the middle half)`)
   // --- per column: where the roof ends, and the wall colour under it
   const eaveRows: Array<{ x: number; y: number }> = []
   const wallSamples: RGB[] = []
@@ -402,7 +797,159 @@ export function readSingleImage(raster: Raster, options: SingleImageOptions = {}
   const tint = (c: RGB): [number, number] => [c[0] - c[1], c[2] - c[1]]
   const roofTint = tint(roof)
   const otherTint = (c: RGB): boolean => lumaOf(c) > 60 && Math.hypot(tint(c)[0] - roofTint[0], tint(c)[1] - roofTint[1]) > TINT_APART
-  for (let x = 0; x < W; x += 1) {
+  // GENERAL: the covering is grown down from its top as a region whose local colour changes smoothly — a lit slope
+  // shading into a shaded one, a watermark's letter gone round — and that stays near the covering's colour. Two
+  // hypotheses are grown: near the picture's covering colour, and near each column's own (a roof lit unevenly along
+  // the picture); each column offers the lower edge of each, and an edge stands as the eaves only where wall, not
+  // covering, planting or sky, stands under it.
+  const candidates: number[][] = Array.from({ length: W }, () => [])
+  if (general) {
+    const n = W * H
+    const own: Array<RGB | undefined> = new Array(W).fill(undefined)
+    for (let x = 0; x < W; x += 1) {
+      if (tops[x] < 0) continue
+      const cs: RGB[] = []
+      for (let y = tops[x] + SMOOTH_RADIUS + 3; y < Math.min(H, tops[x] + 30); y += 1) if (!isSky(x, y) && plant[y * W + x] < VEGETATION_SHARE && dist(smAt(x, y), roof) <= SPREAD_CAP) cs.push(smAt(x, y))
+      if (cs.length >= 6) own[x] = medianColour(cs)
+    }
+    const localRoof: Array<RGB | undefined> = own.map((_, x) => {
+      const cs = own.slice(Math.max(0, x - LOCAL_SPAN), x + LOCAL_SPAN + 1).filter((c): c is RGB => !!c)
+      return cs.length > 0 ? medianColour(cs) : undefined
+    })
+    const spread: number[] = []
+    for (let x = 0; x < W; x += 1) {
+      const l = localRoof[x]
+      if (!l || tops[x] < 0) continue
+      for (let y = tops[x] + SMOOTH_RADIUS + 3; y < Math.min(H, tops[x] + 30); y += 1) {
+        const d = dist(smAt(x, y), l)
+        if (d <= SPREAD_CAP) spread.push(d)
+      }
+    }
+    const localTol = Math.max(ROOF_TOL_LOCAL_MIN, Math.min(ROOF_TOL_LOCAL_MAX, 2 * median(spread) + 6))
+    const dG = new Float32Array(n).fill(Infinity)
+    const dL = new Float32Array(n).fill(Infinity)
+    for (let y = 0; y < H; y += 1)
+      for (let x = 0; x < W; x += 1) {
+        const i = y * W + x
+        if (isSky(x, y) || plant[i] >= VEGETATION_SHARE) continue
+        const c = smAt(x, y)
+        dG[i] = dist(c, roof)
+        const l = localRoof[x]
+        if (l) dL[i] = dist(c, l)
+      }
+    coverDist = dG
+    const grow = (inside: (i: number) => boolean, seed: (i: number) => boolean): Uint8Array => {
+      const m = new Uint8Array(n)
+      const stack = new Int32Array(n)
+      let top = 0
+      for (let x = 0; x < W; x += 1) {
+        if (tops[x] < 0) continue
+        for (let y = tops[x] + 2; y < Math.min(H, tops[x] + 9); y += 1) {
+          const i = y * W + x
+          if (!m[i] && inside(i) && seed(i)) {
+            m[i] = 1
+            stack[top++] = i
+          }
+        }
+      }
+      while (top > 0) {
+        const i = stack[--top]
+        const x = i % W
+        for (const j of [x + 1 < W ? i + 1 : -1, x > 0 ? i - 1 : -1, i + W < n ? i + W : -1, i - W]) {
+          if (j < 0 || m[j] || !inside(j)) continue
+          const sm3 = sm as [Float32Array, Float32Array, Float32Array]
+          if (Math.max(Math.abs(sm3[0][i] - sm3[0][j]), Math.abs(sm3[1][i] - sm3[1][j]), Math.abs(sm3[2][i] - sm3[2][j])) > ROOF_STEP) continue
+          m[j] = 1
+          stack[top++] = j
+        }
+      }
+      return m
+    }
+    const byPicture = grow((i) => dG[i] <= ROOF_LOOSE * roofTol, (i) => dG[i] <= roofTol)
+    const byColumn = grow((i) => dG[i] <= ROOF_LOOSE * roofTol && dL[i] <= Math.max(ROOF_LOOSE * localTol, LOCAL_FLOOR), (i) => dL[i] <= localTol)
+    covering = new Uint8Array(n)
+    for (let i = 0; i < n; i += 1) covering[i] = byPicture[i] | byColumn[i]
+    if (options.debug) {
+      const runs: number[] = []
+      for (let i = 0; i < n; i += 1) {
+        const v = byPicture[i] + 2 * byColumn[i]
+        if (runs.length > 0 && runs[runs.length - 2] === v) runs[runs.length - 1] += 1
+        else runs.push(v, 1)
+      }
+      options.debug(`covering ${W} ${H} ${runs.join(',')}`)
+    }
+    // a column's lower edge of a region: its last row before rows ahead that are mostly not region
+    const ahead = Math.max(12, Math.round(H * ROOF_AHEAD_SHARE))
+    const col = new Int32Array(H + 1)
+    const edgeOf = (m: Uint8Array, x: number): number => {
+      for (let y = 0; y < H; y += 1) col[y + 1] = col[y] + (y >= tops[x] && m[y * W + x] ? 1 : 0)
+      let last = -1
+      for (let y = tops[x]; y < H; y += 1) {
+        if (m[y * W + x]) {
+          last = y
+          continue
+        }
+        if (last < 0 && y - tops[x] > ahead) break
+        const to = Math.min(H, y + ahead)
+        if ((col[to] - col[y]) / (to - y) < ROOF_AHEAD_SHARE_HELD) break
+      }
+      return last >= 0 && last - tops[x] >= 4 && last < H - ahead ? last : -1
+    }
+    // wall under an edge: neither the covering's colour, nor planting, nor sky, over most of a band under it
+    const wallUnder = (x: number, e: number): boolean => {
+      let all = 0
+      let wallish = 0
+      for (let y = e + 3; y <= Math.min(H - 1, e + WALL_UNDER_EAVE_ROWS); y += 2) {
+        all += 1
+        const i = y * W + x
+        if (!isSky(x, y) && !skyLike(rgb(raster, x, y)) && plant[i] < VEGETATION_SHARE && !foliage(rgb(raster, x, y)) && dG[i] > roofTol) wallish += 1
+      }
+      return all > 0 && wallish >= WALL_UNDER_EAVE_SHARE * all
+    }
+    // A hypothesis that has run down a wall of nearly the covering's colour ends on planting or the ground, not over
+    // wall: where most of its edges do so while the other's stand over wall, it has leaked and the other decides alone.
+    const overGround = (x: number, e: number): boolean => {
+      let all = 0
+      let ground = 0
+      for (let y = e + 3; y <= Math.min(H - 1, e + WALL_UNDER_EAVE_ROWS); y += 2) {
+        all += 1
+        if (isSky(x, y) || veg[y * W + x] >= VEGETATION_SHARE || foliage(rgb(raster, x, y))) ground += 1
+      }
+      return all === 0 || ground >= WALL_UNDER_EAVE_SHARE * all
+    }
+    const picEdges = Array.from({ length: W }, (_, x) => (tops[x] < 0 ? -1 : edgeOf(byPicture, x)))
+    const colEdges = Array.from({ length: W }, (_, x) => (tops[x] < 0 ? -1 : edgeOf(byColumn, x)))
+    const standing = (es: number[]): number => es.filter((e, x) => e >= 0 && !overGround(x, e)).length
+    const leaked = standing(picEdges) < LEAK_SHARE * standing(colEdges)
+    if (leaked) {
+      covering = byColumn
+      for (let i = 0; i < n; i += 1) if (!byColumn[i]) dG[i] = Math.max(dG[i], roofTol + 1)
+      why.push('the covering grown by the picture-wide colour ran on down the wall to the ground: each column\'s own colour decides')
+    }
+    let offered = 0
+    for (let x = 0; x < W; x += 1) {
+      if (tops[x] < 0) continue
+      const es = (leaked ? [colEdges[x]] : [picEdges[x], colEdges[x]]).filter((e) => e >= 0)
+      offered += es.length
+      // the lowest edge with wall under it, of those both hypotheses hold the covering over: an edge higher up with
+      // "wall" under it is the covering lit otherwise, and one only the picture-wide colour reaches may have run on
+      // into a shaded band of the wall
+      const both = (e: number): boolean => {
+        let k = 0
+        for (let y = Math.max(0, e - 4); y <= e; y += 1) if (byPicture[y * W + x] && byColumn[y * W + x]) k += 1
+        return k >= 3
+      }
+      const valid = es.filter((e) => wallUnder(x, e)).sort((p, q) => q - p)
+      const kept = valid.find(both) ?? valid[0]
+      if (kept !== undefined) {
+        roofEnd[x] = kept
+        endedOnTint[x] = 1
+        candidates[x].push(kept)
+      }
+    }
+    why.push(`covering grown by the picture's colour (± ${roofTol.toFixed(0)}) and by each column's own (± ${localTol.toFixed(0)}); ${offered} column edges offered, ${candidates.filter((c) => c.length > 0).length} with wall under them`)
+  }
+  for (let x = 0; x < W && !general; x += 1) {
     if (tops[x] < 0) continue
     let roofLike = 0
     let end = -1
@@ -429,19 +976,30 @@ export function readSingleImage(raster: Raster, options: SingleImageOptions = {}
   }
   for (let x = 0; x < W; x += 1) {
     if (roofEnd[x] < 0) continue
-    for (let y = roofEnd[x] + 6; y < Math.min(H, roofEnd[x] + 30); y += 1) {
+    // GENERAL: under the soffit's shadow, a band a tenth of the picture deep
+    for (let y = roofEnd[x] + (general ? Math.max(6, Math.round(0.02 * H)) : 6); y < Math.min(H, roofEnd[x] + (general ? Math.round(0.1 * H) : 30)); y += 1) {
       const c = rgb(raster, x, y)
-      if (!green(c) && satOf(c) < 0.25) wallSamples.push(c)
+      if (general) {
+        if (!isSky(x, y) && !coveringColour(x, y) && plant[y * W + x] < VEGETATION_SHARE && !foliage(c)) wallSamples.push(smAt(x, y))
+      } else if (!green(c) && satOf(c) < 0.25) wallSamples.push(c)
     }
   }
   if (wallSamples.length < 100) return { ok: false, reason: 'no wall under the roof: nothing neutral stands under the roof band', why }
   // The wall is the lightest common neutral under the roof: the median of the brighter half (shadows under the eaves
   // and glass are the darker half).
   const bright = [...wallSamples].sort((a, b) => lumaOf(b) - lumaOf(a)).slice(0, Math.ceil(wallSamples.length / 2))
-  const wall = medianColour(bright)
+  // GENERAL: the wall is the commonest colour under the roof, dark or timbered as well as light
+  const wall = general ? modalColour(wallSamples, 4) : medianColour(bright)
   const wallTol = Math.max(28, 0.14 * lumaOf(wall))
   const isWall = (c: RGB): boolean => dist(c, wall) <= wallTol
-  why.push(`wall colour ${wall.join(',')} (median of the lighter half of the band under the roof)`)
+  why.push(general ? `wall colour ${wall.map((v) => Math.round(v)).join(',')} (commonest local mean colour of the band under the roof)` : `wall colour ${wall.join(',')} (median of the lighter half of the band under the roof)`)
+  /** GENERAL: the facade's surface — its wall colour, or busy (glass, frames), or much darker (glass in shade) — not planting or sky. */
+  const facadeAt = (x: number, y: number): boolean => {
+    const i = y * W + x
+    const c = rgb(raster, x, y)
+    // a front of several finishes (render, boards, a plinth) is facade as a whole: it ends at planting, not at a finish
+    return !isSky(x, y) && plant[i] < VEGETATION_SHARE && !foliage(c)
+  }
   // --- the wall band: its first row under the roof, and its foot: the end of the run of neutral surface (wall, light or
   // shaded, and the glass and frames in it) before planting, paving or a coloured plinth takes over for good.
   const neutral = (c: RGB): boolean => !green(c) && satOf(c) < 0.22 && lumaOf(c) > 50
@@ -459,7 +1017,7 @@ export function readSingleImage(raster: Raster, options: SingleImageOptions = {}
     eaveRows.push({ x, y: first })
     let lastNeutral = first
     for (let y = first; y < H; y += 1) {
-      if (neutral(rgb(raster, x, y))) lastNeutral = y
+      if (general ? facadeAt(x, y) : neutral(rgb(raster, x, y))) lastNeutral = y
       else if (y - lastNeutral > 12) break
     }
     if (lastNeutral - first > 12) footRows.push({ x, y: lastNeutral })
@@ -499,7 +1057,7 @@ export function readSingleImage(raster: Raster, options: SingleImageOptions = {}
         sampled += 1
         const c = rgb(raster, x, y)
         // (a cloud the sky's flood did not reach is neutral too, but blue)
-        if (neutral(c) && c[2] - Math.max(c[0], c[1]) < 6) wallLike += 1
+        if (general ? !isSky(x, y) && !skyLike(c) && !coveringColour(x, y) && plant[y * W + x] < VEGETATION_SHARE : neutral(c) && c[2] - Math.max(c[0], c[1]) < 6) wallLike += 1
       }
     if (sampled === 0 || wallLike / sampled < WALL_UNDER_EAVE_SHARE) {
       remaining = remaining.filter((p) => p.x < best[0] || p.x > best[1])
@@ -528,8 +1086,10 @@ export function readSingleImage(raster: Raster, options: SingleImageOptions = {}
     // one line through the eave rows of both holds most of each: the short stretch's own fit may lean, its rows do not
     const ofS = eaveRows.filter((p) => p.x >= s.x0 && p.x <= s.x1)
     const ofT = eaveRows.filter((p) => p.x >= t.x0 && p.x <= t.x1)
-    const line = robustLine([...ofS, ...ofT], COLLINEAR_EAVE_PX)
-    const holds = (pts: Array<{ x: number; y: number }>): boolean => !!line && pts.filter((p) => Math.abs(p.y - (line.a * p.x + line.b)) <= COLLINEAR_EAVE_PX).length >= COLLINEAR_SHARE * pts.length
+    // GENERAL: eave rows read off a covering's colour scatter more than those over a light band
+    const tolPx = general ? COLLINEAR_EAVE_PX_GENERAL : COLLINEAR_EAVE_PX
+    const line = robustLine([...ofS, ...ofT], tolPx)
+    const holds = (pts: Array<{ x: number; y: number }>): boolean => !!line && pts.filter((p) => Math.abs(p.y - (line.a * p.x + line.b)) <= tolPx).length >= COLLINEAR_SHARE * pts.length
     if (!line || !holds(ofS) || !holds(ofT)) {
       i += 1
       continue
@@ -541,6 +1101,12 @@ export function readSingleImage(raster: Raster, options: SingleImageOptions = {}
   const wx0 = segments[0].x0
   const wx1 = segments[segments.length - 1].x1
   if (main.x1 - main.x0 < W * 0.12) return { ok: false, reason: 'the visible wall is too narrow to place openings on', why: [...why, `segments ${segments.map((g) => `${g.x0}..${g.x1} y=${g.a.toFixed(3)}x+${g.b.toFixed(0)}`).join('; ')}`] }
+  if (general) {
+    // an eave read over a small part of the house is a part's (a porch, a wing) or a band's: the outline decides
+    const house = houseOutline(raster, sky, veg)
+    options.debug?.(`outline ${house ? `${house.a}..${house.b}` : 'none'} against eaves ${main.x0}..${main.x1} ${JSON.stringify(house?.top ?? [])}`)
+    if (house && main.x1 - main.x0 < GENERAL_MIN_SPAN * (house.b - house.a)) return { ok: false, reason: `the eaves read (${main.x0}..${main.x1}) cover too little of the house's outline (${house.a}..${house.b})`, why }
+  }
   const eaveOf = (s: Segment) => (x: number): number => s.a * x + s.b
   const eaveAt = eaveOf(main)
   // The foot: planting, a flower box or a car in front of the wall only ever hides its lower part, so a column's foot
@@ -578,7 +1144,15 @@ export function readSingleImage(raster: Raster, options: SingleImageOptions = {}
     const depth = median(lows.map((p) => p.y - (main.a * p.x + main.b)))
     return depth > 8 ? { a: main.a, b: main.b + depth, inliers: lows.filter((p) => Math.abs(p.y - (main.a * p.x + main.b + depth)) <= 6).length } : undefined
   }
-  const foot = fitted && Math.abs(fitted.a - main.a) <= FOOT_LEAN && fitted.inliers >= 3 ? fitted : parallel()
+  // GENERAL: a foot that leaves the wall less than a few rows tall at one end, or several times taller at one end than at
+  // the other, ran along a band of the facade, not its foot
+  const plausible = (f: { a: number; b: number } | undefined): boolean => {
+    if (!f || !general) return !!f
+    const h0 = f.a * main.x0 + f.b - (main.a * main.x0 + main.b)
+    const h1 = f.a * main.x1 + f.b - (main.a * main.x1 + main.b)
+    return Math.min(h0, h1) >= FOOT_MIN_SHARE * H && Math.max(h0, h1) <= FOOT_SPREAD * Math.min(h0, h1)
+  }
+  const foot = fitted && Math.abs(fitted.a - main.a) <= FOOT_LEAN && fitted.inliers >= 3 && plausible(fitted) ? fitted : plausible(parallel()) ? parallel() : undefined
   if (foot && foot !== fitted) assumptions.push('the wall\'s foot could not be fitted as a line of its own: taken parallel to the eaves at the median depth of the stretch lows')
   if (!foot || foot.inliers < 3) return { ok: false, reason: 'no straight wall foot could be fitted', why: [...why, `${segments.length} eave segments, ${lows.length} stretch lows`] }
   const footAt = (x: number): number => foot.a * x + foot.b
@@ -611,6 +1185,9 @@ export function readSingleImage(raster: Raster, options: SingleImageOptions = {}
     if (!(xl < face.apexX && face.apexX < xr) || xr - xl < minRun * 0.8) continue
     const lean = (face.apexX - xl) / (xr - face.apexX)
     if (lean < 1 / 3 || lean > 3) continue
+    // GENERAL: a gable's face is wall over most of its base; a chimney or a dormer's cheek raised over a few columns, its
+    // "rakes" the covering's slope beside it, is not
+    if (general && (run[run.length - 1].x - run[0].x) < GABLE_RAISED_SHARE * (xr - xl)) continue
     const inside = xl >= wx0 - GABLE_GAP_PX && xr <= wx1 + GABLE_GAP_PX
     gableFaces.push({ x0: Math.round(xl), x1: Math.round(xr), apexX: round6(face.apexX), apexY: round6(face.apexY), left: face.left, right: face.right, kind: inside ? 'CROSS' : 'END', ...(inside ? {} : { side: face.apexX < wx0 ? ('MIN' as const) : ('MAX' as const) }), residualPx: round6(face.residual) })
   }
@@ -633,7 +1210,8 @@ export function readSingleImage(raster: Raster, options: SingleImageOptions = {}
     if (!segmentAt(x)) continue
     for (let y = Math.ceil(bandTop(x)) + 1; y < Math.floor(footAt(x)); y += 1) {
       const c = rgb(raster, x, y)
-      if (neutral(c)) lumaGrid[y * W + x] = lumaOf(c)
+      // GENERAL: the wall about an opening is any smooth facade surface, of whatever finish
+      if (general ? facadeAt(x, y) && texture[y * W + x] <= TEXTURE_MIN : neutral(c)) lumaGrid[y * W + x] = lumaOf(c)
     }
   }
   const refAt = (x: number, y: number): number => {
@@ -654,8 +1232,6 @@ export function readSingleImage(raster: Raster, options: SingleImageOptions = {}
   // grey, dark, in sun or in shade — is smooth, while glass reflects, frames and bars cut it, a door has panels and a
   // gate its ribs. A light gate in a light wall and a dark wall beside dark glass are both read; a smooth very dark
   // rectangle (dark glass in shade, a dark leaf) is read by its darkness against the wall about it.
-  const texture = textureMap(raster)
-  const veg = vegetationShare(raster)
   const mask = new Uint8Array(W * H)
   for (let x = wx0; x <= wx1; x += 1) {
     if (!segmentAt(x)) continue
@@ -972,8 +1548,20 @@ export function readSingleImage(raster: Raster, options: SingleImageOptions = {}
       for (let y = Math.max(0, tops[x] + 2); y < bottom; y += 1) {
         if (isSky(x, y)) continue
         const c = rgb(raster, x, y)
-        if (!isRoof(c) && !green(c) && (Math.abs(lumaOf(c) - roofL) > ROOFLIGHT_CONTRAST || satOf(c) > 0.3)) rmask[y * W + x] = 1
+        if (!(general ? roofAt(x, y) : isRoof(c)) && !green(c) && (Math.abs(lumaOf(c) - roofL) > ROOFLIGHT_CONTRAST || satOf(c) > 0.3)) rmask[y * W + x] = 1
       }
+    }
+    // GENERAL: columns where the roof's outline stands well above its run on either side: a chimney, a vent
+    const spike = new Uint8Array(W)
+    if (general)
+      for (let x = 0; x < W; x += 1) {
+        if (tops[x] < 0) continue
+        const around = tops.slice(Math.max(0, x - SPIKE_SPAN), x + SPIKE_SPAN + 1).filter((v) => v >= 0)
+        if (around.length > 0 && tops[x] < median(around) - SPIKE_RISE * H) spike[x] = 1
+      }
+    const underSpike = (x0: number, x1: number): boolean => {
+      for (let x = Math.max(0, x0 - SPIKE_MARGIN); x <= Math.min(W - 1, x1 + SPIKE_MARGIN); x += 1) if (spike[x]) return true
+      return false
     }
     const rseen = new Uint8Array(W * H)
     const patches: Array<{ x0: number; y0: number; x1: number; y1: number; n: number; touchesTop: boolean }> = []
@@ -1058,6 +1646,8 @@ export function readSingleImage(raster: Raster, options: SingleImageOptions = {}
       const bw = x1 - x0 + 1
       const bh = y1 - y0 + 1
       if (touchesTop || n < 30 || bh < 5 || bh > 2.5 * bw || a1 - a0 < ROOFLIGHT_MIN_M || a1 - a0 > 1.8) continue
+      // GENERAL: a patch under a spike of the roof's outline (a chimney) is its base and shadow, not a rooflight
+      if (general && underSpike(x0, x1)) continue
       // Glass set in the covering: the covering surrounds it on most of a ring a few pixels outside its box.
       let ring = 0
       let roofy = 0
@@ -1065,13 +1655,13 @@ export function readSingleImage(raster: Raster, options: SingleImageOptions = {}
         for (const yy of [y0 - 3, y1 + 3]) {
           if (xx < 0 || yy < 0 || xx >= W || yy >= H) continue
           ring += 1
-          if (isRoof(rgb(raster, xx, yy))) roofy += 1
+          if (general ? roofAt(xx, yy) : isRoof(rgb(raster, xx, yy))) roofy += 1
         }
       for (let yy = y0 - 3; yy <= y1 + 3; yy += 1)
         for (const xx of [x0 - 3, x1 + 3]) {
           if (xx < 0 || yy < 0 || xx >= W || yy >= H) continue
           ring += 1
-          if (isRoof(rgb(raster, xx, yy))) roofy += 1
+          if (general ? roofAt(xx, yy) : isRoof(rgb(raster, xx, yy))) roofy += 1
         }
       options.debug?.(`patch-ring ${x0},${y0} ${(roofy / Math.max(1, ring)).toFixed(2)} along ${a0.toFixed(2)}..${a1.toFixed(2)}`)
       if (ring === 0 || roofy / ring < 0.6) continue
@@ -1196,6 +1786,8 @@ export function readSingleImage(raster: Raster, options: SingleImageOptions = {}
   }
   return {
     ok: true,
+    mode,
+    quality: kept.length > 0 ? 'DETAILS_SUPPORTED' : 'COARSE_INDICATIVE',
     wall: { x0: wx0, x1: wx1, eave: [round6(eaveAt(wx0)), round6(eaveAt(wx1))], ground: [round6(footAt(wx0)), round6(footAt(wx1))], widthM: round6(widthM), heightM: round6(wallH), storeys },
     segments: segments.map((s, i) => ({ x0: s.x0, x1: s.x1, along: [round6(cuts[i][0]), round6(cuts[i][1])] as [number, number], eave: [round6(eaveOf(s)(s.x0)), round6(eaveOf(s)(s.x1))] as [number, number], heightM: round6(s === main ? wallH : segmentHeight(s)), main: s === main, ends: roofEnds[i] })),
     gables: gableFaces.map((g) => {
@@ -1236,8 +1828,9 @@ export function buildingFromSingleImage(reading: SingleImageReading, options: Si
     const seg = reading.segments[i]
     const eaveY = eaveOf(i)
     const ends = { min: seg.ends.min.kind, max: seg.ends.max.kind }
-    const layout = planeRoofLayout({ x0: m.x0, x1: m.x1, z0: m.z0, z1: m.z1 }, 'X', pitch, eaveY, ends)
-    return { massId: m.id, ridgeAxis: 'X', pitchDeg: pitch, eaveY, ridgeY: layout.ridgeY, ends, thicknessM: thickness, layout, featureId: `photo-roof-${m.id}`, provenance: 'ASSUMED_FOR_RENDERING', why: `one picture: ${seg.ends.min.kind.toLowerCase()} at the left end (${seg.ends.min.why}), ${seg.ends.max.kind.toLowerCase()} at the right (${seg.ends.max.why}); pitch and depth assumed` }
+    const axis = seg.ridgeAxis ?? 'X'
+    const layout = planeRoofLayout({ x0: m.x0, x1: m.x1, z0: m.z0, z1: m.z1 }, axis, pitch, eaveY, ends)
+    return { massId: m.id, ridgeAxis: axis, pitchDeg: pitch, eaveY, ridgeY: layout.ridgeY, ends, thicknessM: thickness, layout, featureId: `photo-roof-${m.id}`, provenance: 'ASSUMED_FOR_RENDERING', why: `one picture: ${seg.ends.min.kind.toLowerCase()} at the left end (${seg.ends.min.why}), ${seg.ends.max.kind.toLowerCase()} at the right (${seg.ends.max.why}); pitch and depth assumed` }
   })
   const main = masses.find((m) => m.role === 'MAIN') as MassV2
   const mainRoof = planeRoofs.find((r) => r.massId === main.id) as PlaneRoofV2

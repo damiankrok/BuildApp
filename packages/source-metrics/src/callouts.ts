@@ -1089,6 +1089,11 @@ export type TintedCalloutOptions = {
   region?: PixelRect
   /** The frame the readings are made on; part of every reading's id. */
   frameId?: string
+  /**
+   * 005X-N2: look for rings only about centres a cheap pooled test cannot rule out (default). The test is a necessary
+   * condition of the full one, so the readings are the same with it and without it; only the time differs.
+   */
+  prefilter?: boolean
 }
 
 /** How much lighter than its own ring a callout's interior must be, and the ring than the field around it, in grey levels. */
@@ -1104,6 +1109,36 @@ const TINT_RING_BOTH_SHARE = 0.4
 const TINT_TRIES_PER_PLACE = 3
 /** Of the points just inside the ring (away from the bar), the share that may carry ink. */
 const TINT_MARGIN_INK = 0.1
+/**
+ * 005X-N2 prefilter: candidate centres on a grid of this step, radii every other pixel, and the half side of the window
+ * over which the darkest (for the ring) and lightest (for the disc inside it) grey is pooled. A centre the full test
+ * accepts is at most 2 px (per axis) from a grid centre, its radius at most 1 px from a grid radius, and its sampled
+ * points at most 0.7 px off the radius and 0.71 px off by rounding, twice: under 6 px from the pooled point. So the
+ * pooled ring is at least as dark, and the pooled disc at least as light, at every ray where the full test holds.
+ */
+const PREFILTER_STEP = 4
+const PREFILTER_POOL = 6
+
+/** The darkest (or lightest) grey within a (2p+1)² window about each pixel; beyond the sheet counts as paper (255). */
+function poolGrey(src: Gray, p: number, darkest: boolean): Uint8ClampedArray {
+  const { width, height, data } = src
+  const pick = darkest ? Math.min : Math.max
+  const rows = new Uint8ClampedArray(width * height)
+  for (let y = 0; y < height; y += 1)
+    for (let x = 0; x < width; x += 1) {
+      let v = x - p < 0 || x + p >= width ? 255 : darkest ? 255 : 0
+      for (let k = Math.max(0, x - p); k <= Math.min(width - 1, x + p); k += 1) v = pick(v, data[y * width + k])
+      rows[y * width + x] = v
+    }
+  const out = new Uint8ClampedArray(width * height)
+  for (let x = 0; x < width; x += 1)
+    for (let y = 0; y < height; y += 1) {
+      let v = y - p < 0 || y + p >= height ? 255 : darkest ? 255 : 0
+      for (let k = Math.max(0, y - p); k <= Math.min(height - 1, y + p); k += 1) v = pick(v, rows[k * width + x])
+      out[y * width + x] = v
+    }
+  return out
+}
 
 /**
  * 005X: opening callouts drawn on a tinted field — a shaded knee-wall strip, a hatched zone — where the ring is a faint
@@ -1160,9 +1195,36 @@ export function readTintedCallouts(raster: Raster, options: TintedCalloutOptions
       }
     }
   }
+  // 005X-N2: the grid centres a pooled test cannot rule out. At a ring the full test accepts, at least 24 of the 32 rays
+  // pass, so at least 8 of the 16 even ones; pooled (ring darkest, disc lightest about each point) those 8 still pass.
+  let candidate: (cx: number, cy: number) => boolean = () => true
+  if (options.prefilter !== false) {
+    const dark = poolGrey(grey, PREFILTER_POOL, true)
+    const light = poolGrey(grey, PREFILTER_POOL, false)
+    const at = (a: Uint8ClampedArray, x: number, y: number): number => (x < 0 || y < 0 || x >= width || y >= height ? 255 : a[y * width + x])
+    const gw = Math.floor((x1 + 2 - x0) / PREFILTER_STEP) + 1
+    const gh = Math.floor((y1 + 2 - y0) / PREFILTER_STEP) + 1
+    const flags = new Uint8Array(Math.max(0, gw * gh))
+    for (let j = 0; j < gh; j += 1)
+      for (let k = 0; k < gw; k += 1) {
+        const gx = x0 + k * PREFILTER_STEP
+        const gy = y0 + j * PREFILTER_STEP
+        for (let r = minR; r <= maxR + 1 && !flags[j * gw + k]; r += 2) {
+          let pass = 0
+          for (let i = 0; i < ANGLES; i += 2) {
+            const ring = at(dark, Math.round(gx + r * cos[i]), Math.round(gy + r * sin[i]))
+            const inside = at(light, Math.round(gx + (r - 3) * cos[i]), Math.round(gy + (r - 3) * sin[i]))
+            if (ring <= inside - TINT_INTERIOR_OVER_RING) pass += 1
+            else if (i / 2 + 1 - pass > ANGLES / 2 - ANGLES / 4) break
+          }
+          if (pass >= ANGLES / 4) flags[j * gw + k] = 1
+        }
+      }
+    candidate = (cx, cy) => flags[Math.round((cy - y0) / PREFILTER_STEP) * gw + Math.round((cx - x0) / PREFILTER_STEP)] === 1
+  }
   // A coarse pass on every other pixel, then every pixel about what it found: a ring passes the test over a few pixels of
   // centre, so the coarse grid misses none, and the fine pass finds the best centre.
-  for (let cy = y0; cy <= y1; cy += 2) for (let cx = x0; cx <= x1; cx += 2) test(cx, cy)
+  for (let cy = y0; cy <= y1; cy += 2) for (let cx = x0; cx <= x1; cx += 2) if (candidate(cx, cy)) test(cx, cy)
   const coarse = [...hits]
   hits.length = 0
   const seen = new Set<number>()

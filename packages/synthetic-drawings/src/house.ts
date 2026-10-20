@@ -126,7 +126,20 @@ export type SyntheticChimney = { x0: number; z0: number; x1: number; z1: number;
  * `height` are measured up from the eaves. Needs `roof.covering`, or there is
  * no plane to be lighter than.
  */
-export type SyntheticRooflight = { slope: 'LOW' | 'HIGH'; along: number; width: number; y: number; height: number }
+export type SyntheticRooflight = {
+  slope: 'LOW' | 'HIGH'
+  along: number
+  width: number
+  y: number
+  height: number
+  /**
+   * 005X-N2: the plan of the storey under the roof states it, as a `width / length` callout (centimetres) at its place:
+   * a ring of grey ink with a bar, the two numbers above and below it.
+   */
+  stated?: { widthCm: number; lengthCm: number }
+  /** 005X-N2: false keeps it off the elevations: only the plan says it is there. Drawn there by default. */
+  onElevations?: boolean
+}
 
 /** A return wall standing in the front zone, MODEL frame: wall-thick ink from the front wall face to the zone's mouth, with its west face at `x`. */
 export type SyntheticReturn = { storey: number; x: number; width?: number }
@@ -735,9 +748,41 @@ function renderModelPlan(house: SyntheticHouse, options: SheetOptions & { storey
   chain(c, { axis: 'HORIZONTAL', at: originY - 34, start: chainX0, parts: partsX, ppm, capHeight: dimCap, slant: o.slant, weight: o.lineWeight })
   chain(c, { axis: 'VERTICAL', at: originX - 74, start: chainZ0, parts: [spanZ], ppm, capHeight: dimCap, slant: o.slant, weight: o.lineWeight })
   chain(c, { axis: 'VERTICAL', at: originX - 34, start: chainZ0, parts: partsZ, ppm, capHeight: dimCap, slant: o.slant, weight: o.lineWeight })
+  // 005X-N2: rooflights the plan of the storey under the roof states, each a callout at its place: centred along the
+  // ridge on the rooflight, and across it where the rooflight's middle stands up the slope (its height over the eaves
+  // run off at the pitch from the wall plane on its side).
+  if (storeyIndex === house.storeys.length - 1) {
+    const tan = Math.tan((house.roof.pitchDeg * Math.PI) / 180)
+    const radius = Math.round(CALLOUT_RADIUS_M * ppm)
+    for (const r of house.rooflights ?? []) {
+      if (!r.stated) continue
+      const run = (r.y + r.height / 2) / tan
+      const along = r.along + r.width / 2
+      const across = house.roof.ridgeAxis === 'X' ? (r.slope === 'LOW' ? za + run : zb - run) : r.slope === 'LOW' ? xa + run : xb - run
+      const cx = Math.round(house.roof.ridgeAxis === 'X' ? px(along) : px(across))
+      const cy = Math.round(house.roof.ridgeAxis === 'X' ? py(across) : py(along))
+      calloutRing(c, cx, cy, radius, String(r.stated.widthCm), String(r.stated.lengthCm))
+    }
+  }
   if (o.clutter > 0) annotate(c, { x0: px(xa), y0: py(zb), x1: px(xb), y1: py(za) }, o.clutter, o.capHeight, ppm, storeyIndex)
   if (o.speckle > 0) c.speckle(o.speckle, 11)
   return c
+}
+
+/** 005X-N2: a callout's radius on the plan, in metres. */
+const CALLOUT_RADIUS_M = 0.42
+
+/** 005X-N2: a `upper / lower` callout: a grey ring of paper, a bar across its middle, the numbers above and below. */
+function calloutRing(c: Canvas, cx: number, cy: number, radius: number, upper: string, lower: string): void {
+  c.fill(cx - radius, cy - radius, cx + radius, cy + radius, 255)
+  for (let a = 0; a < 1440; a += 1) {
+    const t = (a * Math.PI) / 720
+    c.plot(Math.round(cx + radius * Math.cos(t)), Math.round(cy + radius * Math.sin(t)), 90)
+  }
+  c.line(cx - radius + 3, cy, cx + radius - 3, cy, 1, 90)
+  const cap = Math.max(6, Math.round(radius * 0.42))
+  c.text(upper, cx - c.textWidth(upper, cap) / 2, cy - cap - 3, cap)
+  c.text(lower, cx - c.textWidth(lower, cap) / 2, cy + 3, cap)
 }
 
 /**
@@ -780,7 +825,7 @@ function renderModelElevation(house: SyntheticHouse, side: Side, options: SheetO
     c.fill(ux(roofRange[0]), yOf(ridge), ux(roofRange[1]), yOf(wallHeight), house.roof.covering)
     const shows = house.roof.ridgeAxis === 'Z' ? (side === 'LEFT' ? 'LOW' : side === 'RIGHT' ? 'HIGH' : undefined) : side === 'FRONT' ? 'LOW' : side === 'REAR' ? 'HIGH' : undefined
     for (const r of house.rooflights ?? []) {
-      if (r.slope !== shows) continue
+      if (r.slope !== shows || r.onElevations === false) continue
       const [u0, u1] = range(r.along, r.along + r.width)
       c.fill(ux(u0), yOf(wallHeight + r.y + r.height), ux(u1), yOf(wallHeight + r.y), TONE.rooflight)
     }
