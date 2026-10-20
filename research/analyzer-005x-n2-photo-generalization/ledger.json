@@ -247,7 +247,22 @@
   "4 Wikimedia Commons photos (CC BY 2.0/3.0, CC BY-SA 4.0; outside repo)",
   "real attic plan rasters for the prefilter check (outside repo)"
  ],
- "tests": "PENDING",
- "renders": "PENDING",
+ "tests": "vitest packages/reconstruction packages/source-metrics packages/synthetic-drawings tests/architecture apps/web/src: 1502/1503 (the one failure is the tracked-APK size gate, stage-reports/artifacts/owner-005t/BuildPlan-005T-two-houses-arm64.apk 39 556 682 B > 32 MB: KNOWN_BASELINE_FAIL); new photo-generalization-005x-n2 9/9, plan-first-rooflights-005x-n2 3/3 (fails 0/2 with the old render gate, verified); tsc clean; five offline replays byte-identical",
+ "renders": {
+  "zip": "005x-n2-renders.zip (outside the repo, attached to the session)",
+  "sha256": "f475fc0534a242593c3ff267865c8168068ad403fc0cc93fed048b8180f76421",
+  "views": "perspective 3/4, front, left, top; app camera presets; BuildWorld web (Three.js, SwiftShader)",
+  "contents": "model renders + Photo... UI screenshots only; no source pixels; SHA256SUMS.txt inside",
+  "models": {
+   "owner": "a478b5ff",
+   "a01vis": "a32163dc",
+   "gozd": "68cf845d",
+   "ciesz": "1f9a015d",
+   "rary": "c63c30da",
+   "marcowkiOptInSilhouette": "444703e6",
+   "blindB1Rejected": "d05ffa1c",
+   "blindB4Rejected": "10a65fbb"
+  }
+ },
  "proposal": "on-device segmentation model (facade/roof/sky/planting) via ONNX Runtime Web/WASM replacing colour masks in GENERAL; not run"
 }

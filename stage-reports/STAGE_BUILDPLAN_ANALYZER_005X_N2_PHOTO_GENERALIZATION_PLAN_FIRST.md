@@ -131,7 +131,7 @@ BuildWorld nie widać szczeliny ani z-fightingu w tym miejscu przy domyślnych k
 - nowe: `photo-generalization-005x-n2.test.ts` (9 testów — ciemna ściana o zmierzchu, drewno bez fałszywych otworów,
   szara ściana w cieniu, szczyt frontowy: domyślnie odmowa / na życzenie SILHOUETTE z kalenicą w głąb, determinizm,
   `DETAILS_SUPPORTED` tylko z otworami, odmowa obrazu bez domu, odmowa obrazu bez nieba), `plan-first-rooflights-005x-n2.test.ts` (3).
-- zmienione pakiety: wynik w ledgerze (`tests`); tsc czysty; 5 replayów jak wyżej.
+- zmienione pakiety (reconstruction, source-metrics, synthetic-drawings, tests/architecture, apps/web/src): **1502/1503**; jedyna porażka to bramka rozmiaru śledzonego APK (KNOWN_BASELINE_FAIL); tsc czysty; 5 replayów jak wyżej.
 - BuildWorld UI smoke (`Photo…`, przeglądarkowy dekoder JPEG): Goździkowce 1 otwór + 2 połaciowe (GENERAL), 2.5 s;
   Cieszynianki 7 otworów (CLI: 7) ; Rarytasy 3 otwory (CLI: 2 — różnica dekodera JPEG przeglądarki vs CLI, znana z N1);
   Marcówki — nazwana odmowa; 0 błędów strony.
@@ -169,3 +169,9 @@ pakietu i 0.5–2 s na telefonie. Nie uruchamiano, nie zakładano — tylko prop
 W repozytorium nie ma żadnych pikseli zdjęć, wizualizacji ani rzutów. Obrazy: prywatne zdjęcie OWNER-a i A01 (bez
 zmian), cztery wizualizacje kontrolne (istniejące legalne cache), cztery zdjęcia Commons (licencje CC, autorzy
 w `blind-manifest.md`) — wszystkie poza repo. Rendery i zrzuty UI zawierają wyłącznie widok modelu BuildWorld.
+
+## 13. Artefakt renderów
+
+`005x-n2-renders.zip` (poza repo, załączony do rozmowy), SHA-256 `f475fc0534a242593c3ff267865c8168068ad403fc0cc93fed048b8180f76421`; w środku `SHA256SUMS.txt` każdego pliku,
+`CZYTAJ.md` z tabelą przed/po, rendery BuildWorld (¾, przód, lewa, góra) i zrzuty przycisku `Photo…`. Odmowy są w tabeli,
+bez obrazka.
