@@ -2363,3 +2363,24 @@ Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005W_N1_A01_ATTIC_ROOFLIGHTS_VIS
 - **Tests:** reconstruction 817/817; tsc clean.
 - **Renders** are outside the repo (`/home/user/work005w-n1/005w-n1-renders.zip`, SHA-256 `0ed20537…`). The APK-size
   gate is still red; CI/APK NOT_RUN.
+
+## Universal openings + one picture (STAGE BUILDPLAN-ANALYZER-005X-REV1)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005X_REV1_GENERIC_OPENINGS_MULTISOURCE_SINGLE_IMAGE.md`; ledger:
+`research/analyzer-005x-generic-openings/ledger.json`. Branch `analyzer/005x-generic-openings-multisource-single-image-v1`
+from `e9b9e3e`. Phase A `PARTIAL_GENERIC_OPENINGS_ADOPTED`, phase B `ENGINE_ONLY` (not owner-accepted).
+
+- **Plan-first rooflights.** `readTintedCallouts` (source-metrics) reads faint callout rings on tinted knee-wall
+  strips. `readPlanRooflights` places each coherent rooflight callout inside the roofed storey on its slope. Renders
+  only corroborate.
+- **A01 rooflights:** 2 → 6 of 7, matching the plan and the elevations. The missing one is under the watermark. The
+  rest of A01 is unchanged.
+- **Controls:** Gozdzikowce, Marcówki, Cieszynianki and Rarytasy G2E are byte-identical; Rarytasy OWNER is NOT_RUN.
+- **One picture** (`single-image.ts`): deterministic CV turns a perspective picture into the same `BuildingV2`.
+  - Eave segments as bodies, gables, `OpeningV2` on the front, rooflights.
+  - Emitted as `MODEL ORIENTACYJNY Z 1 ZDJĘCIA`; every value is assumed or visual.
+  - Owner's picture: 3 bodies, 3 correct openings + 1 false, 2 rooflights.
+  - A second (publisher) picture: poor.
+  - No app entry yet (ENGINE_ONLY).
+- **Tests:** packages 1194/1195 (APK gate), new 7/7; tsc clean. CI/APK NOT_RUN.
+- **Renders** are outside the repo (`/home/user/work005x/005x-renders.zip`).

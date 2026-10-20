@@ -1,0 +1,85 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005X-REV1-GENERIC-OPENINGS-MULTISOURCE-SINGLE-IMAGE",
+ "base": "e9b9e3ef3945c5d740eb7536a04b756146e32786",
+ "branch": "analyzer/005x-generic-openings-multisource-single-image-v1",
+ "decision": "DEC-UNIVERSAL-OPENING-CORE-003 (v3.15.1): openings first, one representation, the single picture on the same concepts",
+ "verdicts": {
+  "phaseA": "PARTIAL_GENERIC_OPENINGS_ADOPTED",
+  "phaseB": "ENGINE_ONLY",
+  "secondRealPicture": "SECOND_REAL_PICTURE_POOR (a private publisher visualisation of A01: eave fitted to the white render band, 2 openings of ~6 visible)",
+  "ownerVisual": "OWNER_REVIEW_PENDING (not accepted by the owner)"
+ },
+ "audit": {
+  "route": "SourcePackage -> roles (FLOOR_PLAN / ELEVATION / PERSPECTIVE_RENDER) -> plan/elevation extractors (perspective refused by name in source-analyzer analyze.ts, unchanged) -> metric evidence (callout rings read in source-metrics) -> reconstruct-v2: OpeningV2 per wall gap, RooflightReading per slope -> BuildingV2 -> emitBuilding (cutOpening / cutRoofOpening + placeWindow/placeDoor/placeRooflight) -> fitOpeningsToHosts -> model -> BuildWorld",
+  "rooflightLoss": "before 005X a rooflight existed only if a render showed a light patch in the roof plane of a registered view (readRooflights). The plan's rooflight callouts were never read: the metric ring reader needs ink, and these rings are a faint grey line (~170) round a paper disc (~231) on a tinted knee-wall strip (~210). A01: 0 of 7 callout rings read; the front band view gave 2 rooflights, the rear band view does not pass the wall check, the third front one sits under the watermark."
+ },
+ "phaseA": {
+  "changes": [
+   "source-metrics readTintedCallouts: a callout drawn as a faint ring round a paper disc on a tinted field, read by the same half reader (readHalf) as any callout",
+   "reconstruction readPlanRooflights: a coherent callout with a bar, inside the storey under a gable, of a rooflight's size -> a rooflight on the slope it stands under, centred on the callout along the ridge, the stated length foreshortened by the pitch up the slope; position up the slope an uncertainty",
+   "reconstruct-v2: plan rooflights first; a render patch on the same slope over the same stretch of ridge corroborates (SOURCE_CORROBORATED), otherwise SOURCE_DERIVED; a render patch no plan rooflight explains stays IMAGE_METRIC_REGISTERED as before"
+  ],
+  "iterations": [
+   { "n": 1, "change": "ring test: ring darker than disc AND field on 70 % of 32 rays", "effect": "1 of 7 rings (the others touch the wall band or a dimension line)", "kept": false },
+   { "n": 2, "change": "ring darker than the disc on 80 %, than the field on 40 %", "effect": "5 of 7, all read 78/118; 34 s on the full sheet", "kept": false },
+   { "n": 3, "change": "drop the tinted-field condition (the stair rooflight's ring is on plain paper)", "effect": "still 5; stair noise rings appear (all incoherent)", "kept": true },
+   { "n": 4, "change": "ring share 0.75; a candidate that does not read frees its place for the next", "effect": "7 of 7 (6 read 78/118, 1 under the watermark read 218/118 without a bar); 458 s", "kept": false },
+   { "n": 5, "change": "places of hits 2.5 px apart, 3 tries each; early exit on the ray test", "effect": "7 of 7, 152 s", "kept": false },
+   { "n": 6, "change": "digits must stand clear of the ring (ink just inside the ring <= 10 % of rays)", "effect": "6 of 7 (the watermark one fails the margin), 15 s, 44 reads", "kept": true },
+   { "n": 7, "change": "plan rooflights in the solver, corroborated by render patches", "effect": "A01: 6 rooflights (4 rear SOURCE_DERIVED, 2 front SOURCE_CORROBORATED); controls byte-identical", "kept": true }
+  ],
+  "a01": {
+   "before": "fe1a61b6ec0563c1580d524a80b606de4aab0db2b5bebb406f4b3be39c18a960: 2 rooflights (front, x 7.41-8.08 / 8.28-8.95, z 0.27-0.92)",
+   "after": "1661d4bfad926948042cdab8997beafb741f7ebf2014c0f9132b5e75dc8448c9: 6 rooflights",
+   "rooflights": [
+    { "id": "rooflight-plan-low-0", "x": "7.33-8.11", "z": "0.47-1.37", "status": "SOURCE_CORROBORATED", "sourcePlanX": 7.8, "sourceElevationX": 7.7 },
+    { "id": "rooflight-plan-low-1", "x": "8.24-9.02", "z": "0.47-1.37", "status": "SOURCE_CORROBORATED", "sourcePlanX": 8.6, "sourceElevationX": 8.6 },
+    { "id": "rooflight-plan-high-2", "x": "2.43-3.21", "z": "7.05-7.96", "status": "SOURCE_DERIVED", "sourcePlanX": 2.8, "sourceElevationX": "2.6-2.8" },
+    { "id": "rooflight-plan-high-3", "x": "4.24-5.02", "z": "7.05-7.96", "status": "SOURCE_DERIVED", "sourcePlanX": 4.6, "sourceElevationX": 4.6 },
+    { "id": "rooflight-plan-high-4", "x": "7.35-8.13", "z": "7.05-7.96", "status": "SOURCE_DERIVED", "sourcePlanX": 7.8, "sourceElevationX": 7.7 },
+    { "id": "rooflight-plan-high-5", "x": "8.24-9.02", "z": "7.05-7.96", "status": "SOURCE_DERIVED", "sourcePlanX": 8.6, "sourceElevationX": 8.6 }
+   ],
+   "missing": "front x ~2.8: its plan ring is crossed by the watermark (fails the margin test) and its render patch merges with the watermark; not invented",
+   "upSlope": "front rooflights moved from z 0.27-0.92 (render patch, ~0.3 m low) to 0.47-1.37 (centred on the plan callout); rear ones meet the model's eave because the model's depth is 8.008 against the printed 8.30 (unchanged, out of scope)",
+   "unchanged": "front openings, 4 gable windows, 3 chimneys, ridge X, 40 deg, one MAIN; only roofOpenings/rooflights and their evidence differ"
+  },
+  "controls": {
+   "gozdzikowce-m79923e950094d": "911456a88b2530c9cf01b348dc7045a7b7bcc6d85e62e58221e5f205d41efbbc (identical)",
+   "marcowki": "cf7977438b0053903f0398548d0bfb0b569760864d1aa8c258992fc7459faee0 (identical)",
+   "cieszynianki": "e4e562923319084fda0b9ae934bcb1185a7098c53e7727c82f9afdcb592c1f6c (identical)",
+   "rarytasy-g2e-m84f2903cb8e14": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7 (identical)",
+   "rarytasy-owner-m3ea": "NOT_RUN (no input; never substituted by G2E)"
+  }
+ },
+ "phaseB": {
+  "engine": "packages/reconstruction/src/single-image/single-image.ts: readSingleImage -> buildingFromSingleImage (BuildingV2: masses per eave segment, main gable, attached gables via attachedGableLayout, OpeningV2 on the front walls, RooflightReading on the main front slope) -> emitBuilding -> fitOpeningsToHosts -> model named 'MODEL ORIENTACYJNY Z 1 ZDJĘCIA'",
+  "runtime": "deterministic CV in the app's own packages (sky mask, colour relative classes, robust lines, morphology); no vision model, no network; the app UI does not call it yet (ENGINE_ONLY); CLI research/analyzer-005x-generic-openings/single-image.ts",
+  "perspectiveGuard": "packages/source-analyzer/src/analyze.ts unchanged: perspective pictures are still refused by the facade readers",
+  "provenance": "openings ASSUMED_FOR_RENDERING (scale assumed: storey 2.9 m, focal one picture width), kind VISUAL_SEMANTIC, rooflights VISUAL_SEMANTIC, roof and depth ASSUMED_FOR_RENDERING; nothing SOURCE_EXACT, nothing for take-off",
+  "iterations": [
+   { "n": 1, "change": "roof run by colour distance", "effect": "refused: tile shading breaks the run", "kept": false },
+   { "n": 2, "change": "roof runs from the sky to the first light neutral run; covering by hue", "effect": "eaves found on the main front; foot on the soffit", "kept": true },
+   { "n": 3, "change": "foot as the end of the neutral run; lowest foot per stretch, line through those", "effect": "foot line right on the main front", "kept": true },
+   { "n": 4, "change": "openings darker than the column's wall brightness", "effect": "the shaded upper wall reads as one opening; 0 openings", "kept": false },
+   { "n": 5, "change": "2D local wall brightness + texture; morphological opening; joined panes", "effect": "main window found; storeys over-counted", "kept": true },
+   { "n": 6, "change": "eave segments (wing, main, bay); roof top found by roof colour under trees; storeys from large openings only; rooflight must be surrounded by covering", "effect": "3 segments; main window, bay window, entrance (joined pieces); 2 rooflights", "kept": true },
+   { "n": 7, "change": "darkness threshold 0.8", "effect": "shaded walls flagged", "kept": false }
+  ],
+  "ownerPicture": {
+   "inputSha256": "11697dc923bcda4b4a829454324035e3c3beb3cbd4c040a06c60834ed0ebdd1d",
+   "modelSha256": "8b42664fbce47de0c72171c50ac95d3a318671a83fc9f9f69a477977ff094a77",
+   "segments": "3 (left wing over the garage, main front, right bay)",
+   "openings": "4: main front window (correct), bay window (correct), entrance read as tall glazing 0.5-2.3 (its glazed parts joined; the real door reaches the floor behind the steps), one false narrow opening at the garage door's shadowed edge",
+   "missed": "garage door (light grey, ~20 % darker than the wall), the dormer's arched window (above the eaves), the windows of the left wing behind the car/porch columns",
+   "rooflights": "2 of 3 visible (the right one stands over the bay, outside the main segment's roof)",
+   "roof": "simplified: gables along the front (the real roof is hipped with a front dormer gable)"
+  },
+  "secondPicture": {
+   "input": "a private publisher visualisation of A01 (not committed)",
+   "modelSha256": "d72986f834aab5a86be1b569280452740f90c2ae9f5e3cd84aeb09e56240c2ce",
+   "result": "poor: the eave line is fitted to the white render band under the real eaves; 2 small openings of ~6; no rooflights (white-framed rooflights on a grey roof)"
+  }
+ },
+ "tests": "see report",
+ "renders": "outside the repository, see report"
+}
