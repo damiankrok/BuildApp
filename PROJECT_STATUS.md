@@ -2431,3 +2431,21 @@ NOT_READY), WEB_APP_PHOTO_ENTRY_UPDATED, ANDROID_ENGINE_ONLY, OWNER_VISUAL_PENDI
 - **Controls:** A01 1661d4bf, Goździkowce 911456a8, Marcówki cf797743, Cieszynianki e4e56292, Rarytasy G2E 9f5fd342 —
   unchanged; Rarytasy OWNER NOT_RUN.
 - **NON_MANIFOLD** (owner model): the bay's front wall with its window cut, under a pyramid roof; not fixed.
+
+## A new publisher, WebP, and an exact rooflight OCR gate (STAGE BUILDPLAN-ANALYZER-005X-N3)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005X_N3_CROSS_PROVIDER_SIMPLE_HOUSE.md`; ledger:
+`research/analyzer-005x-n3-cross-provider/ledger.json`. Branch `analyzer/005x-n3-cross-provider-simple-house-v1` from the
+candidate `629a11d`. Verdicts: OCR_BAR_GATE_EXACT_ADOPTED (Android NOT_READY), NEW_PROVIDER_FAIL_NAMED,
+SEGMENTATION_NOT_ADOPTED_RESEARCH_ONLY, OWNER_VISUAL_PENDING.
+
+- **WebP:** `decodeImage` decodes WebP through libwebp (`@jsquash/webp`, WASM, synchronous in Node), bit-exact with libwebp.
+  A plan served only as WebP was reported as a page "without a plan".
+- **TeA AR-18 TREND P** (new publisher, test only): URL route now reads the plan but refuses on scale (dimension digits 7-9 px,
+  below legibility; gates untouched). `Photo…` refuses both renders (clouds and trees are not sky). No model, no false model.
+- **Rooflight callouts:** `readTintedCallouts({ requireBar })` returns exactly the full reader's barred readings and skips the
+  OCR of barless rings that cannot claim a barred one (directly or through a chain). OCR 536 -> 148 on five plans; whole
+  analysis 156-159 s -> 96 s for the five controls; all five models byte-identical; A01 6/7.
+- **Segmentation:** licence audit; the only cleared model with roof/sky/vegetation classes (DETR-R50 panoptic ONNX) gives
+  scrambled masks in its available export and costs 8.5-11.6 s and 1.1-1.4 GB on a desktop. Not adopted.
+- **BLIND-N3** (4 Commons photos, frozen): 0/4 correct, 1 false model (default GENERAL mode).

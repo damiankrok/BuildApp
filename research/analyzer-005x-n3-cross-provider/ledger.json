@@ -1,0 +1,88 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005X-N3-CROSS-PROVIDER-SIMPLE-HOUSE",
+ "baseAccepted": "586fa40859e6811cf44db4e76797324f84122fe2",
+ "candidate": "analyzer/005x-n3-tinted-callout-bar-gate-candidate-v1 @ 629a11d5f875ac0602ee1fd402a022f646dc774f (3 commits over N2, no drift)",
+ "branch": "analyzer/005x-n3-cross-provider-simple-house-v1",
+ "mirror": "claude/new-session-3kzcgh @ bfaf286e95105c2cdb32df2d298d3cd93bd43449 (untouched)",
+ "commits": {
+  "preregistration": "2669fbf",
+  "exactBarGate": "ba5163e",
+  "webp": "577b317",
+  "researchScripts": "e63d7ae",
+  "blindFreeze": "71c1458",
+  "final": "see git log"
+ },
+ "verdicts": {
+  "CODE_OPTIMISATION": "OCR_BAR_GATE_EXACT_ADOPTED (candidate gate was inexact; fixed to be exact by construction); Android NOT_READY",
+  "NEW_PROJECT_TEA": "NEW_PROVIDER_FAIL_NAMED (N2: WebP undecodable -> 'no floor plan'; N3: plan read, named refusal on scale; photo: named refusals)",
+  "SEGMENTATION_PHOTOS": "SEGMENTATION_NOT_ADOPTED_RESEARCH_ONLY; BLIND-N3 0/4 correct, 1 false model",
+  "OWNER_VISUAL": "OWNER_VISUAL_PENDING",
+  "ALL_PASSED": false
+ },
+ "tea": {
+  "url": "https://teaprojekt.pl/gotowe-projekty-domow/projekt-domu-ar-18-trend-p/",
+  "pageSha256": "3ea2e29f0e5b4db1d0012dbd93a202737d0f2803934b11fabd828fc593e64923",
+  "inputs": "1 ground plan 800x800 WebP; 2 exterior renders JPEG 1200x675; 5 interior renders; site plan; no elevations, no section; 11 published facts, 9 rooms",
+  "planSha256": "b6d7b878d31ee02c85be3d87f4af62741e39195b6c4e16e92b0094cf7f6203dc",
+  "frontSha256": "4f891612264eaa39a2c7004b64cd1a9648be492018eee2ddb1bec34b32db856f",
+  "gardenSha256": "afb5586bb32df217bb3331c146e492170f09510f2d4e61e3413778c0c532fb17",
+  "n2Url": "REFUSED: the project page exposes no floor plan (FIRST_BAD: no decoder for webp)",
+  "n3Url": "REFUSED: scale cannot be established (page vote 1.833613 cm/px LEGACY_UNCONFIRMED; '1460' ~7 px misread; '745' read)",
+  "photoFront": "REFUSED: eaves 833..1098 cover too little of outline 0..1199 (clouds/trees not sky)",
+  "photoGarden": "REFUSED: no straight eave line",
+  "photoGardenOptInSilhouette": "05d6d022 (ridge along long side, 1 storey, overhang 0; 20 deg instead of 35; 0 openings)"
+ },
+ "webp": {
+  "library": "@jsquash/webp 1.5.0 (libwebp, Apache-2.0)",
+  "bitExactVsLibwebp": "33/33",
+  "rejected": "@stacksjs/ts-webp 0.1.6: loses last 2 rows at odd heights, wrong VP8L"
+ },
+ "calloutBench": {
+  "ocrUngated": 536,
+  "ocrGated": 148,
+  "perHouseSaving": {
+   "a01": 0.488,
+   "ciesz": 0.691,
+   "gozd": 0.64,
+   "marcowki": 0.66,
+   "rary": 0.728
+  },
+  "barredReadingsIdentical": "5/5"
+ },
+ "wholeAnalysisSeconds": {
+  "n2": [
+   159.4,
+   156.2
+  ],
+  "n3": [
+   96.1,
+   96.4
+  ]
+ },
+ "controls": {
+  "a01": "1661d4bf (=)",
+  "gozd": "911456a8 (=)",
+  "marcowki": "cf797743 (=)",
+  "ciesz": "e4e56292 (=)",
+  "rary": "9f5fd342 (=)",
+  "rarytasOwner": "NOT_RUN",
+  "photoOwner": "a478b5ff (=)",
+  "photoA01": "a32163dc (=)"
+ },
+ "segmentation": {
+  "tested": "Xenova/detr-resnet-50-panoptic onnx/model_quantized.onnx sha256 93abfec8b8abd77329f203726b231ee5e5d4c2d52c881a74ab1c1134d888c41d (Apache-2.0)",
+  "result": "class set right, masks spatially scrambled (export fixes 64x64/16x16 shapes); 8.5-11.6 s, +1.1-1.4 GB on desktop",
+  "rejectedLicence": "SegFormer (NVIDIA non-commercial), MaskFormer ADE (no licence), Mask2Former (other)"
+ },
+ "blindN3": {
+  "n1": "6b351f43 WRONG (false model)",
+  "n2": "REFUSED (house visible; coverage)",
+  "n3": "REFUSED (correct: no sky, house in forest)",
+  "n4": "07fab7f7 PARTIAL"
+ },
+ "tests": "N3: source-package, source-metrics, generic-openings (8), plan-first (3), photo-generalization-n2, tests/architecture: 870/871, only fail tracked-APK >32 MB (KNOWN_BASELINE_FAIL); tsc clean. N2 base: generic-openings 7 + plan-first 3 = 10/10",
+ "renderZip": {
+  "file": "005x-n3-renders.zip (outside repo)",
+  "sha256": "3fb11a7c453a7027d730b1c8c0e6a7ec99793d41050f1b8a6afa5f7cff5d2239"
+ }
+}
