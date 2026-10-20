@@ -72,6 +72,11 @@ describe('005X tinted callout rings', () => {
     const ring = found.find((f) => Math.abs(f.circle.cx - 60) <= 2 && Math.abs(f.circle.cy - 40) <= 2)
     expect(ring).toBeDefined()
     expect(ring?.bar).not.toBeNull()
+    // The rooflight-only option must preserve valid readings while skipping OCR for barless rings.
+    const onlyBarred = readTintedCallouts(r, { minRadiusPx: 10, maxRadiusPx: 18, requireBar: true })
+    const rooflightRing = onlyBarred.find((f) => Math.abs(f.circle.cx - 60) <= 2 && Math.abs(f.circle.cy - 40) <= 2)
+    expect(rooflightRing).toEqual(ring)
+    expect(onlyBarred.every((f) => f.bar !== null)).toBe(true)
   })
 
   it('reports nothing on a sheet without rings', () => {
