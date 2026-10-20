@@ -1211,21 +1211,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   })
   // Rooflights on the side renders.
   const rooflights: BuildingV2['rooflights'] = []
-  // 005X: the rooflights the plan of the storey under the main roof states, first. The plan says that a rooflight is
-  // there, on which slope, where along the ridge and how big; a render only confirms it (or adds one the plan does not
-  // state, as before). A rooflight is never lost because a render could not measure it.
   const planRooflights: PlanRooflightReading[] = []
-  const topEntry = mainRoof && mainRoof.kind === 'GABLE' ? planByStorey.get(topStorey) : undefined
-  if (mainRoof && topEntry) {
-    const r = rectAt(main, topStorey)
-    const a = topEntry.frame.toPixel(r.x0, r.z1)
-    const b = topEntry.frame.toPixel(r.x1, r.z0)
-    const region = { x0: Math.min(a.x, b.x), y0: Math.min(a.y, b.y), x1: Math.max(a.x, b.x), y1: Math.max(a.y, b.y) }
-    const mpp = (topEntry.frame.mppX + topEntry.frame.mppY) / 2
-    const callouts = readTintedCallouts(topEntry.raster, { region, frameId: topEntry.frame.frameId, minRadiusPx: Math.max(6, 0.15 / mpp), maxRadiusPx: Math.max(10, 0.45 / mpp) })
-    planRooflights.push(...readPlanRooflights(callouts, topEntry.frame, r, T, { ridgeAxis: mainRoof.ridgeAxis, ridgeAt: mainRoof.ridgeAt, pitchDeg: mainRoof.pitchDeg, eaveY: mainRoof.eaveY }))
-    step({ stage: 'roof-details', what: 'rooflights stated by the plan under the roof', method: 'DIRECT', detail: `${callouts.length} callout ring${callouts.length === 1 ? '' : 's'} inside the storey, ${planRooflights.length} read as rooflights`, inputs: callouts.length, outputs: planRooflights.length })
-  }
   const renderRooflights: Array<RooflightReading & { frameIds: string[] }> = []
   if (mainRoof) {
     // 005W-N1: a band-registered view stands for the roof only where its own facade's walls confirmed it: the plan's gaps
@@ -1248,6 +1234,22 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         if (chimneyThere) continue
         renderRooflights.push({ ...r, frameIds: [r.frameId] })
       }
+    }
+    // 005X: the rooflights the plan of the storey under the main roof states. The plan says that a rooflight is there, on
+    // which slope, where along the ridge and how big; a render only confirms it (or adds one the plan does not state, as
+    // before). 005X-N1: reading the plan's callout rings is the costliest step of the run (a quarter of a minute on a
+    // desktop for a full storey, several times that on a phone), so it is taken only where a render already shows a
+    // rooflight in the roof: a house the renders show without any is not searched for them.
+    const topEntry = mainRoof.kind === 'GABLE' && renderRooflights.length > 0 ? planByStorey.get(topStorey) : undefined
+    if (topEntry) {
+      const r = rectAt(main, topStorey)
+      const a = topEntry.frame.toPixel(r.x0, r.z1)
+      const b = topEntry.frame.toPixel(r.x1, r.z0)
+      const region = { x0: Math.min(a.x, b.x), y0: Math.min(a.y, b.y), x1: Math.max(a.x, b.x), y1: Math.max(a.y, b.y) }
+      const mpp = (topEntry.frame.mppX + topEntry.frame.mppY) / 2
+      const callouts = readTintedCallouts(topEntry.raster, { region, frameId: topEntry.frame.frameId, minRadiusPx: Math.max(6, 0.15 / mpp), maxRadiusPx: Math.max(10, 0.45 / mpp) })
+      planRooflights.push(...readPlanRooflights(callouts, topEntry.frame, r, T, { ridgeAxis: mainRoof.ridgeAxis, ridgeAt: mainRoof.ridgeAt, pitchDeg: mainRoof.pitchDeg, eaveY: mainRoof.eaveY }))
+      step({ stage: 'roof-details', what: 'rooflights stated by the plan under the roof', method: 'DIRECT', detail: `${callouts.length} callout ring${callouts.length === 1 ? '' : 's'} inside the storey, ${planRooflights.length} read as rooflights`, inputs: callouts.length, outputs: planRooflights.length })
     }
     const overlapsAlong = (p: { alongFrom: number; alongTo: number }, q: { alongFrom: number; alongTo: number }): boolean => Math.min(p.alongTo, q.alongTo) - Math.max(p.alongFrom, q.alongFrom) > 0.5 * Math.min(p.alongTo - p.alongFrom, q.alongTo - q.alongFrom)
     const chimneyAt = (r: { alongFrom: number; alongTo: number; slopeFrom: number; slopeTo: number }): boolean =>

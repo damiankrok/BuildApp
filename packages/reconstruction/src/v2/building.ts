@@ -13,6 +13,7 @@ import type { AttachedRoofReading, ChimneyReading, RooflightReading } from './ro
 import type { FacadeMember, FacadeAssemblyHypothesis } from './facade.js'
 import type { ProvenanceStatus } from './graph.js'
 import type { AttachedGableLayout, AttachedRoofForm } from './attached-roof-form.js'
+import type { PlaneRoofLayout, RoofEnd } from './plane-roof.js'
 
 export type LevelV2 = { index: number; id: string; elevation: number; height: number; wallTop: number; featureId: string }
 
@@ -66,6 +67,25 @@ export type MainRoofV2 = {
   provenance: ProvenanceStatus
 }
 
+/**
+ * 005X-N1: a pitched roof over one body as its own planes — two slopes and, at each end of the ridge, a gable or a hip
+ * (`planeRoofLayout`). It stands in for the main gable or a pitched attached roof where a body's ends are not both
+ * gables; a body carries at most one roof of any kind.
+ */
+export type PlaneRoofV2 = {
+  massId: string
+  ridgeAxis: 'X' | 'Z'
+  pitchDeg: number
+  eaveY: number
+  ridgeY: number
+  ends: { min: RoofEnd; max: RoofEnd }
+  thicknessM: number
+  layout: PlaneRoofLayout
+  featureId: string
+  provenance: ProvenanceStatus
+  why: string
+}
+
 export type AttachedRoofV2 = {
   massId: string
   reading?: AttachedRoofReading
@@ -97,6 +117,8 @@ export type PitchedAttachedRoofV2 = {
   footprint: { x0: number; z0: number; x1: number; z1: number }
   layout: AttachedGableLayout
   form: Extract<AttachedRoofForm, { kind: 'GABLE' }>
+  /** 005X-N1: the roof plane its valleys die into, where the main roof is a plane roof rather than `roof-main`. */
+  joinRoofId?: string
   featureId: string
   provenance: ProvenanceStatus
 }
@@ -226,6 +248,8 @@ export type BuildingV2 = {
   attachedRoofs: AttachedRoofV2[]
   /** Attached bodies whose own roof the elevations show pitched; never also in `attachedRoofs`. */
   pitchedAttachedRoofs: PitchedAttachedRoofV2[]
+  /** 005X-N1: bodies under a roof of their own planes (a hip at either end); never also under another roof kind. */
+  planeRoofs?: PlaneRoofV2[]
   recesses: RecessTopology[]
   returns: ReturnWallV2[]
   balconies: BalconyV2[]
@@ -237,7 +261,8 @@ export type BuildingV2 = {
   returnTones: ReturnToneV2[]
   facadeGraph: FacadeGraph
   chimneys: Array<ChimneyReading & { featureId: string; provenance: ProvenanceStatus }>
-  rooflights: Array<RooflightReading & { featureId: string; provenance: ProvenanceStatus; widthM: number; lengthM: number }>
+  /** A rooflight with `planeId` is cut in that plane of a plane roof, its `along`/`slope` read as plan x/z (ridge X) or z/x. */
+  rooflights: Array<RooflightReading & { featureId: string; provenance: ProvenanceStatus; widthM: number; lengthM: number; planeId?: string; ridgeAxis?: 'X' | 'Z' }>
   openings: OpeningV2[]
   /** Openings that pass through two coincident walls of two bodies. */
   sharedDoors: Array<OpeningV2 & { otherMassId: string }>

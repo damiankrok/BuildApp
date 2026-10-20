@@ -8,6 +8,7 @@
  * w0 front (x0→x1 at z0), w1 east (z0→z1 at x1), w2 rear (x1→x0 at z1),
  * w3 west (z1→z0 at x0).
  */
+import type { PlaneRoofKey } from './plane-roof.js'
 import { round6 } from '@buildapp/source-common'
 import type { BuildingCommand } from '@buildapp/commands'
 import type { EvidenceStatus } from '@buildapp/model'
@@ -104,6 +105,8 @@ export function wallOffset(mass: Pick<MassV2, 'x0' | 'z0' | 'x1' | 'z1'>, facade
 
 /** The ids of the two planes of a pitched attached roof, low side first. */
 export const pitchedPlaneIds = (massId: string): [string, string] => [`roof-${massId}-plane-low`, `roof-${massId}-plane-high`]
+/** 005X-N1: the id of one plane of a body's plane roof. */
+export const planeRoofPlaneId = (massId: string, key: PlaneRoofKey): string => `roof-${massId}-plane-${key.toLowerCase().replace('_', '-')}`
 
 export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: string) => void): EmitResult {
   const program: BuildingCommand[] = []
@@ -150,6 +153,15 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     }
   }
 
+  // --- 005X-N1: the planes of plane roofs (a hip at either end), ahead of the walls that die into them ---
+  for (const r of b.planeRoofs ?? []) {
+    const l = levelOf(Math.max(...(b.masses.find((m) => m.id === r.massId)?.storeys ?? [0])))
+    if (!l) continue
+    for (const plane of r.layout.planes) {
+      push({ type: 'createRoofPlane', id: planeRoofPlaneId(r.massId, plane.key), levelId: l.id, boundary: plane.boundary, datum: plane.datum, pitchDeg: plane.pitchDeg, downslope: plane.downslope, thickness: r.thicknessM, materialId: MATERIALS_V2.roof }, r.featureId, 'roofPlanes')
+    }
+  }
+
   // --- masses: slab and ring per storey -------------------------------------
   const capWallIds: string[] = []
   const attachedCapIds = new Map<string, string[]>()
@@ -176,6 +188,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       const isTop = storey === Math.max(...m.storeys)
       const attached = b.attachedRoofs.find((r) => r.massId === m.id)
       const pitched = isTop ? b.pitchedAttachedRoofs.find((r) => r.massId === m.id) : undefined
+      const planeRoof = isTop ? b.planeRoofs?.find((r) => r.massId === m.id) : undefined
       const holes = b.stair && b.stair.toLevel === storey && m.id === b.masses.find((x) => x.role === 'MAIN')?.id ? [[{ x: b.stair.slabHole.x0, z: b.stair.slabHole.z0 }, { x: b.stair.slabHole.x1, z: b.stair.slabHole.z0 }, { x: b.stair.slabHole.x1, z: b.stair.slabHole.z1 }, { x: b.stair.slabHole.x0, z: b.stair.slabHole.z1 }]] : undefined
       // A floor slab over a storey of this body spans between the inner faces
       // of the walls that carry it: the walls run from the ground to the
@@ -194,13 +207,13 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       if (!m.pieceOf) push({ type: 'createSlab', id: `slab-${m.id}-${storey}`, levelId: l.id, polygon: slabPolygon, ...(clippedHoles ? { holes: clippedHoles } : {}), topOffset: 0, thickness: b.slabThicknessM, materialId: MATERIALS_V2.slab }, m.featureId, 'slabs')
       // A single-storey attached body under a flat roof: its walls rise to the parapet where the section draws one.
       // Under its own pitched roof a body's walls die into the roof's planes: the gable ends rise to the ridge.
-      const height = pitched ? round6(pitched.ridgeY - l.elevation + 0.5) : attached && isTop ? round6((attached.parapetTopY ?? attached.slabTopY) - l.elevation) : round6(l.height)
+      const height = planeRoof ? round6(planeRoof.ridgeY - l.elevation + 0.5) : pitched ? round6(pitched.ridgeY - l.elevation + 0.5) : attached && isTop ? round6((attached.parapetTopY ?? attached.slabTopY) - l.elevation) : round6(l.height)
       const ringId = `ring-${m.id}-${storey}`
       // The body's walls take the tone the renders show for them: a dark body is built in dark render.
       const tone = b.massTones.find((t) => t.massId === m.id)
       const ringMaterial = tone && tone.share >= 0.5 ? materialForTone(tone.tone, MATERIALS_V2.wall) : MATERIALS_V2.wall
-      push({ type: 'createWallRing', id: ringId, levelId: l.id, polygon, thickness: b.wallThicknessM, height, baseOffset: 0, kind: 'EXTERIOR', cornerOwnership: 'ALTERNATE', ...(pitched ? { topProfile: { kind: 'FOLLOW_ROOF_PLANES' as const, planeIds: pitchedPlaneIds(pitched.massId) } } : {}), materialId: ringMaterial }, m.featureId, 'wallRings')
-      if (isTop && !attached && !pitched) capWallIds.push(`${ringId}-w0`, `${ringId}-w1`, `${ringId}-w2`, `${ringId}-w3`)
+      push({ type: 'createWallRing', id: ringId, levelId: l.id, polygon, thickness: b.wallThicknessM, height, baseOffset: 0, kind: 'EXTERIOR', cornerOwnership: 'ALTERNATE', ...(planeRoof ? { topProfile: { kind: 'FOLLOW_ROOF_PLANES' as const, planeIds: planeRoof.layout.planes.map((pl) => planeRoofPlaneId(planeRoof.massId, pl.key)) } } : pitched ? { topProfile: { kind: 'FOLLOW_ROOF_PLANES' as const, planeIds: pitchedPlaneIds(pitched.massId) } } : {}), materialId: ringMaterial }, m.featureId, 'wallRings')
+      if (isTop && !attached && !pitched && !planeRoof) capWallIds.push(`${ringId}-w0`, `${ringId}-w1`, `${ringId}-w2`, `${ringId}-w3`)
       if (attached && isTop) attachedCapIds.set(m.id, [`${ringId}-w0`, `${ringId}-w1`, `${ringId}-w2`, `${ringId}-w3`])
     }
     // the storey the body was measured on: the one with no footprint of its own (a basement below it may have one)
@@ -431,10 +444,28 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     for (const plane of r.layout.planes) {
       const wall = r.ridgeAxis === 'Z' ? (plane.key === 'LOW' ? `${ring}-w3` : `${ring}-w1`) : plane.key === 'LOW' ? `${ring}-w0` : `${ring}-w2`
       push({ type: 'createRelationship', kind: 'SUPPORTED_BY', from: idOf(plane.key), to: wall, note: 'the plane bears on the wall under its eave' })
-      if (r.layout.join.kind === 'VALLEY' && b.mainRoof) push({ type: 'createRelationship', kind: 'INTERSECTS', from: idOf(plane.key), to: 'roof-main', note: `a valley: ${r.layout.join.why}` })
+      if (r.layout.join.kind === 'VALLEY' && (b.mainRoof || r.joinRoofId)) push({ type: 'createRelationship', kind: 'INTERSECTS', from: idOf(plane.key), to: r.joinRoofId ?? 'roof-main', note: `a valley: ${r.layout.join.why}` })
     }
     for (const plane of r.layout.planes) {
       evidence(idOf(plane.key), r.provenance, `${r.form.why}; ${r.layout.join.why}`, { pitchDeg: r.pitchSource === 'STATED' ? 'SOURCE_DERIVED' : 'IMAGE_METRIC_REGISTERED', boundary: 'SOURCE_DERIVED' })
+    }
+  }
+
+  // 005X-N1: a plane roof: its ridge, its hips, its free edges, each plane on the wall under its eave.
+  for (const r of b.planeRoofs ?? []) {
+    const mass = b.masses.find((m) => m.id === r.massId)
+    const l = levelOf(Math.max(...(mass?.storeys ?? [0])))
+    if (!mass || !l) continue
+    const idOf = (key: PlaneRoofKey): string => planeRoofPlaneId(r.massId, key)
+    for (const j of r.layout.joins) push({ type: 'connectRoofPlanes', id: `roof-${r.massId}-${j.kind.toLowerCase()}-${j.keys.map((k) => k.toLowerCase().replace('_', '-')).join('-')}`, kind: j.kind, planeIds: [idOf(j.keys[0]), idOf(j.keys[1])] }, r.featureId, 'roofEdges')
+    for (const e of r.layout.eaves) push({ type: 'createRoofEdge', id: `roof-${r.massId}-eave-${e.key.toLowerCase().replace('_', '-')}`, kind: 'EAVE', planeId: idOf(e.key), start: e.start, end: e.end }, r.featureId, 'roofEdges')
+    for (const e of r.layout.verges) push({ type: 'createRoofEdge', id: `roof-${r.massId}-verge-${e.key.toLowerCase()}-${Math.round((r.ridgeAxis === 'Z' ? e.start.z : e.start.x) * 1000)}`, kind: 'VERGE', planeId: idOf(e.key), start: e.start, end: e.end }, r.featureId, 'roofEdges')
+    const ring = `ring-${mass.id}-${l.index}`
+    // the wall each plane bears on: the slopes on the walls along the ridge, an end plane on the end wall under it
+    const wallOf: Record<PlaneRoofKey, string> = r.ridgeAxis === 'Z' ? { LOW: `${ring}-w3`, HIGH: `${ring}-w1`, END_MIN: `${ring}-w0`, END_MAX: `${ring}-w2` } : { LOW: `${ring}-w0`, HIGH: `${ring}-w2`, END_MIN: `${ring}-w3`, END_MAX: `${ring}-w1` }
+    for (const plane of r.layout.planes) {
+      push({ type: 'createRelationship', kind: 'SUPPORTED_BY', from: idOf(plane.key), to: wallOf[plane.key], note: 'the plane bears on the wall under its eave' })
+      evidence(idOf(plane.key), r.provenance, r.why, { pitchDeg: r.provenance, boundary: r.provenance })
     }
   }
 
@@ -478,7 +509,15 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     evidence(c.id, c.provenance, c.why, { height: c.topY === undefined ? 'ASSUMED_FOR_RENDERING' : 'IMAGE_METRIC_REGISTERED' })
   }
   for (const r of b.rooflights) {
-    if (!b.mainRoof) break
+    if (r.planeId) {
+      // 005X-N1: in a plane of a plane roof, cut plumb (a plane takes vertical cuts only)
+      const footprint = r.ridgeAxis === 'Z' ? { minX: Math.min(r.slopeFrom, r.slopeTo), maxX: Math.max(r.slopeFrom, r.slopeTo), minZ: r.alongFrom, maxZ: r.alongTo } : { minX: r.alongFrom, maxX: r.alongTo, minZ: Math.min(r.slopeFrom, r.slopeTo), maxZ: Math.max(r.slopeFrom, r.slopeTo) }
+      push({ type: 'cutRoofOpening', id: r.id, roofId: r.planeId, kind: 'ROOFLIGHT', footprint, cut: 'VERTICAL' }, r.featureId, 'roofOpenings')
+      push({ type: 'placeRooflight', id: `${r.id}-unit`, roofOpeningId: r.id, materialId: MATERIALS_V2.glass }, r.featureId, 'rooflights')
+      evidence(r.id, r.provenance, r.why)
+      continue
+    }
+    if (!b.mainRoof) continue
     const along: [number, number] = [r.alongFrom, r.alongTo]
     const slope: [number, number] = [Math.min(r.slopeFrom, r.slopeTo), Math.max(r.slopeFrom, r.slopeTo)]
     const footprint = b.mainRoof.ridgeAxis === 'Z' ? { minX: slope[0], maxX: slope[1], minZ: along[0], maxZ: along[1] } : { minX: along[0], maxX: along[1], minZ: slope[0], maxZ: slope[1] }
