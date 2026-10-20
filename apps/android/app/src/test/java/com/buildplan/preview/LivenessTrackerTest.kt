@@ -50,6 +50,18 @@ class LivenessTrackerTest {
     }
 
     @Test
+    fun `a twelve-minute heavy step with heartbeats stays a heavy step, never no response`() {
+        // BUILDPLAN-ANALYZER-005Y: time alone is never a failure; a live process inside one long step is shown as such.
+        val t = LivenessTracker()
+        for (i in 0..720) {
+            t.observe(status(seq = i.toLong()), now = i * 1_000L)
+            if (i >= 30) assertTrue("second $i", t.verdict(i * 1_000L) is Liveness.HeavyStep)
+        }
+        val last = t.verdict(720_000)
+        assertTrue(last is Liveness.HeavyStep && last.frozenForMs >= 690_000)
+    }
+
+    @Test
     fun `no heartbeat for 45 s is no response, counted from the last heartbeat`() {
         val t = LivenessTracker()
         t.observe(status(seq = 1), now = 0)

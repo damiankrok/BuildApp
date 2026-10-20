@@ -32,10 +32,13 @@ export function presetPosition(preset: ViewPreset, f: Framing): { position: THRE
     case 'top':
       // Looking straight down with model +z (into the building) up the screen.
       return { position: new THREE.Vector3(c.x, c.y + d, c.z), up: new THREE.Vector3(0, 0, -1) }
+    case 'perspective-rear':
+      // The diagonal opposite the app's ¾ view: behind and to the model's -x, so the two ¾ shots see all four facades.
+      return { position: new THREE.Vector3(c.x - d * 0.62, c.y + d * 0.42, c.z - d * 0.7), up }
     case 'perspective':
     default:
       return { position: new THREE.Vector3(c.x + d * 0.62, c.y + d * 0.42, c.z + d * 0.7), up }
   }
 }
 
-export const isOrthographic = (preset: ViewPreset): boolean => preset !== 'perspective'
+export const isOrthographic = (preset: ViewPreset): boolean => preset !== 'perspective' && preset !== 'perspective-rear'

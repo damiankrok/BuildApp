@@ -55,7 +55,7 @@ import {
 import { BuildingSession, type BuildingCommand, type CommandResult } from '@buildapp/commands'
 import { compileBuilding, type CompiledMesh, type CompiledScene } from '@buildapp/geometry'
 
-export type ViewPreset = 'perspective' | 'front' | 'rear' | 'left' | 'right' | 'top'
+export type ViewPreset = 'perspective' | 'perspective-rear' | 'front' | 'rear' | 'left' | 'right' | 'top'
 
 /**
  * The viewer's category filters (BUILDAPP-03G): what a person asks to see or

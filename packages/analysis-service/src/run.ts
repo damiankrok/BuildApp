@@ -444,6 +444,8 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
       throw reconstructionError('SCENE_COMPILE_FAILED', 'COMPILING_SCENE', 'COMPILE', 'the geometry compiler could not compile the model the analyzer built')
     }
     report('COMPILING_SCENE', 0.6, `${scene.meshes.length} meshes`)
+    // 005Y: a heartbeat between the heavy steps of the scene and its verification, none of which ticks inside.
+    checkpoint.tick({ subphase: { id: 'SCENE_BUNDLE', label: 'packing the scene' } })
     const bundle = buildMobileSceneBundle(model, { scene })
     const sceneText = serializeBundle(bundle)
     throwIfAborted(signal)
@@ -453,7 +455,9 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     // --- VERIFYING ----------------------------------------------------------
     report('VERIFYING', 0)
     checkpoint.phase('VERIFY')
+    checkpoint.tick({ subphase: { id: 'REPLAY', label: 'replaying the candidate' } })
     const replay = verifyReplay(reconstruction.candidate)
+    checkpoint.tick({ subphase: { id: 'ROUND_TRIP', label: 'reloading the scene' } })
     if (!replay.ok) {
       trace.record('VERIFYING', 'REPLAY', 'FAILED', {}, { reasonCode: 'VERIFY_REPLAY_FAILED' })
       throw reconstructionError('VERIFY_REPLAY_FAILED', 'VERIFYING', 'REPLAY', 'the sealed candidate does not replay to the model it describes')
@@ -465,6 +469,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     }
     trace.record('VERIFYING', 'REPLAY', 'PASSED', { commands: reconstruction.candidate.program.length })
     report('VERIFYING', 0.3, 'replay byte-identical; checking joints')
+    checkpoint.tick({ subphase: { id: 'CLOSURE', label: 'checking the joints' } })
     let closure: ClosureReport
     try {
       closure = geometryClosureAudit(model, scene)

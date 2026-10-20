@@ -144,6 +144,201 @@ export function readAttachedRoof(raster: Raster, section: SectionFrame, massId: 
   }
 }
 
+/** 005Y: how far the main roof projects past the walls under its eaves, as a section across the ridge draws it. */
+export type EavesReading = {
+  overhangM: number
+  sides: Array<{ face: 'LEFT' | 'RIGHT'; overhangM: number; columns: number; residualPx: number }>
+  /** Metres per pixel of the section, from its outer walls matched to the span across the ridge. */
+  mpp: number
+  /** The pitch the section's roof lines draw, against the stated one. */
+  drawnPitchDeg: [number, number]
+  /** World y of the underside of the eaves' lip the reading implies, when the section's vertical datum is known. */
+  lipUndersideY?: number
+  /** A printed level on the section that marks that lip, when one does. */
+  printedLipY?: number
+  confidence: number
+  why: string
+}
+
+/** The eaves projections a section may show: below the lower bound there is nothing to draw, above the upper it is no eaves. */
+const EAVES_OVERHANG_M = { min: 0.12, max: 1.5 } as const
+/** How far the two eaves of one roof may differ for one projection to stand for both. */
+const EAVES_SIDES_AGREE_M = 0.3
+/** How far the slope the section draws may differ from the stated pitch, in degrees, for the lines to be the roof's. */
+const EAVES_PITCH_AGREE_DEG = 4
+/** How far from the fitted roof line the roof's top ink may lie, in pixels, and still be that line. */
+const EAVES_LINE_TOLERANCE_PX = 3
+/** A printed level within this of the implied lip underside corroborates it. */
+const EAVES_PRINTED_TOLERANCE_M = 0.15
+/** The two outer walls of a section must span at least this share of the sheet's width to be the body's. */
+const EAVES_MIN_SPAN_SHARE = 0.2
+
+/** The topmost ink row of a column between two rows, or undefined. */
+function topInk(raster: Raster, x: number, from: number, to: number): number | undefined {
+  for (let y = Math.max(0, from); y <= Math.min(raster.height - 1, to); y += 1) if (lumaAt(raster, x, y) < 110) return y
+  return undefined
+}
+
+/** The share of a slope's columns whose topmost ink must lie on its line for the line to be the roof's. */
+const EAVES_MIN_LINE_SHARE = 0.35
+/** The roof's apex must stand this close to the middle of the walls, as a share of their span, for them to be its outer walls. */
+const EAVES_APEX_CENTRED_SHARE = 0.04
+
+/**
+ * The roof's top line over columns x0..x1 of a top-ink profile: the intercept the stated slope gathers most columns on
+ * (a vote, so a chimney, a label or a rooflight above the slope does not move it), then the slope and intercept
+ * refitted to those columns by least squares.
+ */
+function slopeLine(top: ReadonlyArray<number | undefined>, x0: number, x1: number, slope: number): { slope: number; intercept: number; share: number; residualPx: number } | undefined {
+  const votes = new Map<number, number>()
+  let n = 0
+  for (let x = x0; x <= x1; x += 1) {
+    const y = top[x]
+    if (y === undefined) continue
+    n += 1
+    const c = Math.round(y - slope * x)
+    for (let d = -1; d <= 1; d += 1) votes.set(c + d, (votes.get(c + d) ?? 0) + (d === 0 ? 2 : 1))
+  }
+  if (n < 6) return undefined
+  const best = [...votes.entries()].sort((p, q) => q[1] - p[1] || p[0] - q[0])[0]
+  if (!best) return undefined
+  const on: Array<{ x: number; y: number }> = []
+  for (let x = x0; x <= x1; x += 1) {
+    const y = top[x]
+    if (y !== undefined && Math.abs(y - (best[0] + slope * x)) <= EAVES_LINE_TOLERANCE_PX) on.push({ x, y })
+  }
+  if (on.length < Math.max(6, EAVES_MIN_LINE_SHARE * (x1 - x0 + 1))) return undefined
+  const mx = on.reduce((acc, p) => acc + p.x, 0) / on.length
+  const my = on.reduce((acc, p) => acc + p.y, 0) / on.length
+  const sxx = on.reduce((acc, p) => acc + (p.x - mx) ** 2, 0)
+  const fitted = sxx > 0 ? on.reduce((acc, p) => acc + (p.x - mx) * (p.y - my), 0) / sxx : slope
+  const intercept = my - fitted * mx
+  return { slope: fitted, intercept, share: on.length / (x1 - x0 + 1), residualPx: median(on.map((p) => Math.abs(p.y - (intercept + fitted * p.x)))) }
+}
+
+/**
+ * 005Y: the main roof's eaves projection from a section that cuts across its ridge.
+ *
+ * The section's own scale comes from its outer walls matched to the body's span across the ridge; nothing about the
+ * sheet's printed levels is needed. Walls are the long, thick vertical runs of ink; of every pair of them, the outer
+ * walls are the widest pair over which the roof's two top lines — each found by a vote at the stated pitch over the
+ * columns between a wall and the middle, then refitted — draw the stated pitch within a few degrees and meet over the
+ * middle of the pair. A section along the ridge, a post beside the house, or a wall inside it does not pass. From
+ * each outer wall face the line is then followed outward while the topmost ink stays on it; where it ends, the eaves
+ * end. Both eaves must be read and agree, or nothing is returned: the projection is then unknown and the roof keeps
+ * its edge at the walls. A horizontal line beside the house (a pergola, a terrace) leaves the sloping line within a
+ * few columns and does not extend the reading.
+ *
+ * When the section's vertical datum is registered, a printed level that marks the lip the projection implies (its
+ * underside, the roof's vertical thickness below the top) corroborates it; it is never the source of the number.
+ */
+export function readEavesOverhang(
+  raster: Raster,
+  spanAcrossRidgeM: number,
+  roof: { pitchDeg: number; thicknessM: number },
+  datum?: { zeroRow: number; mppY: number; printedLevels: readonly number[] },
+  onDebug?: (message: string) => void,
+): EavesReading | undefined {
+  const slopeStated = Math.tan((roof.pitchDeg * Math.PI) / 180)
+  if (!(slopeStated > 0.05) || !(spanAcrossRidgeM > 2)) return undefined
+  const w = raster.width
+  const h = raster.height
+  // Columns whose longest dark run is long: walls (and posts, flues, partitions — the pairing sorts them out).
+  const longest: number[] = []
+  const top: Array<number | undefined> = []
+  for (let x = 0; x < w; x += 1) {
+    let best = 0
+    let run = 0
+    for (let y = 0; y < h; y += 1) {
+      if (lumaAt(raster, x, y) < 90) run += 1
+      else run = 0
+      if (run > best) best = run
+    }
+    longest.push(best)
+    top.push(topInk(raster, x, 0, h - 1))
+  }
+  const tallest = Math.max(...longest)
+  if (tallest < 40) return undefined
+  const cols: number[] = []
+  for (let x = 0; x < w; x += 1) if (longest[x] >= Math.max(40, 0.25 * tallest)) cols.push(x)
+  const runs = mergeRuns(cols.map((x) => ({ from: x, to: x })), 2).filter((r) => r.to - r.from + 1 >= 4)
+  onDebug?.(`eaves wall candidates: ${runs.map((r) => `${r.from}..${r.to}`).join(' ')}`)
+  type Pair = { left: number; right: number; lines: { LEFT: NonNullable<ReturnType<typeof slopeLine>>; RIGHT: NonNullable<ReturnType<typeof slopeLine>> }; drawn: [number, number] }
+  let chosen: Pair | undefined
+  for (let i = 0; i < runs.length; i += 1) {
+    for (let j = runs.length - 1; j > i; j -= 1) {
+      const left = runs[i].from
+      const right = runs[j].to + 1
+      if (right - left < EAVES_MIN_SPAN_SHARE * w || (chosen && right - left <= chosen.right - chosen.left)) continue
+      const mid = (left + right) / 2
+      const inset = Math.round(0.08 * (right - left))
+      const l = slopeLine(top, left + 2, Math.round(mid) - inset, -slopeStated)
+      const r = slopeLine(top, Math.round(mid) + inset, right - 2, slopeStated)
+      if (!l || !r) continue
+      const drawn: [number, number] = [round6((Math.atan(-l.slope) * 180) / Math.PI), round6((Math.atan(r.slope) * 180) / Math.PI)]
+      if (drawn.some((d) => Math.abs(d - roof.pitchDeg) > EAVES_PITCH_AGREE_DEG)) continue
+      const apexX = (r.intercept - l.intercept) / (l.slope - r.slope)
+      if (Math.abs(apexX - mid) > EAVES_APEX_CENTRED_SHARE * (right - left)) continue
+      chosen = { left, right, lines: { LEFT: l, RIGHT: r }, drawn }
+    }
+  }
+  if (!chosen) return undefined
+  const { left, right, lines, drawn } = chosen
+  const mpp = spanAcrossRidgeM / (right - left)
+  onDebug?.(`eaves walls ${left}..${right} at ${mpp.toFixed(5)} m/px, lines drawn at ${drawn.join('° / ')}° on ${(lines.LEFT.share * 100).toFixed(0)} % / ${(lines.RIGHT.share * 100).toFixed(0)} % of their columns`)
+  const sides: EavesReading['sides'] = []
+  for (const face of ['LEFT', 'RIGHT'] as const) {
+    const line = lines[face]
+    const dir = face === 'LEFT' ? -1 : 1
+    const wallCol = face === 'LEFT' ? left : right - 1
+    const gapCols = Math.max(2, Math.round(0.08 / mpp))
+    const maxCols = Math.ceil((EAVES_OVERHANG_M.max + 0.3) / mpp)
+    let last = -1
+    let miss = 0
+    let columns = 0
+    for (let k = 1; k <= maxCols; k += 1) {
+      const x = wallCol + dir * k
+      const expected = line.intercept + line.slope * x
+      // On the line: ink within the tolerance of it (a beam or a label just above does not hide the roof under it).
+      const y = topInk(raster, x, Math.round(expected - EAVES_LINE_TOLERANCE_PX), Math.round(expected + EAVES_LINE_TOLERANCE_PX))
+      if (y !== undefined) {
+        last = k
+        miss = 0
+        columns += 1
+      } else if (++miss > gapCols) break
+    }
+    onDebug?.(`eaves ${face}: followed ${last} columns (${columns} on the line)`)
+    if (last < 0) return undefined
+    sides.push({ face, overhangM: round6(last * mpp), columns, residualPx: round6(line.residualPx) })
+  }
+  const [a, b] = sides
+  if (sides.some((x) => x.overhangM < EAVES_OVERHANG_M.min || x.overhangM > EAVES_OVERHANG_M.max)) return undefined
+  if (Math.abs(a.overhangM - b.overhangM) > EAVES_SIDES_AGREE_M) return undefined
+  // One projection for both eaves: the smaller, so neither eave is drawn past what the section shows.
+  const overhangM = round6(Math.min(a.overhangM, b.overhangM))
+  let lipUndersideY: number | undefined
+  let printedLipY: number | undefined
+  if (datum) {
+    const drop = roof.thicknessM / Math.cos((roof.pitchDeg * Math.PI) / 180)
+    const narrow = a.overhangM <= b.overhangM ? a : b
+    const line = lines[narrow.face]
+    const lipCol = narrow.face === 'LEFT' ? left - Math.round(narrow.overhangM / mpp) : right - 1 + Math.round(narrow.overhangM / mpp)
+    lipUndersideY = round6((datum.zeroRow - (line.intercept + line.slope * lipCol)) * datum.mppY - drop)
+    const lip = lipUndersideY
+    printedLipY = datum.printedLevels.filter((v) => Math.abs(v - lip) <= EAVES_PRINTED_TOLERANCE_M).sort((p, q) => Math.abs(p - lip) - Math.abs(q - lip))[0]
+  }
+  return {
+    overhangM,
+    sides,
+    mpp: round6(mpp),
+    drawnPitchDeg: drawn,
+    ...(lipUndersideY !== undefined ? { lipUndersideY } : {}),
+    ...(printedLipY !== undefined ? { printedLipY } : {}),
+    confidence: printedLipY !== undefined ? 0.85 : 0.7,
+    why: `the section's roof lines (drawn at ${drawn[0].toFixed(1)}° and ${drawn[1].toFixed(1)}° against the stated ${roof.pitchDeg}°, meeting over the middle of the outer walls) run ${a.overhangM.toFixed(2)} m and ${b.overhangM.toFixed(2)} m past those walls (${a.columns} and ${b.columns} columns at ${mpp.toFixed(4)} m/px, the walls matched to the ${spanAcrossRidgeM.toFixed(2)} m span across the ridge)${lipUndersideY !== undefined ? `; the eaves' lip then sits at ${lipUndersideY.toFixed(2)}${printedLipY !== undefined ? `, where the section prints ${printedLipY >= 0 ? '+' : ''}${printedLipY.toFixed(2)}` : ', which no printed level marks'}` : ''}`,
+  }
+}
+
 export type ChimneyReading = {
   id: string
   x0: number

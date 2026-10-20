@@ -29,6 +29,7 @@ export const BUILTIN_MODELS: ReadonlyArray<{ id: string; label: string; modelId:
 
 const VIEWS: Array<{ id: ViewPreset; label: string }> = [
   { id: 'perspective', label: 'Persp' },
+  { id: 'perspective-rear', label: 'Persp rear' },
   { id: 'front', label: 'Front' },
   { id: 'rear', label: 'Rear' },
   { id: 'left', label: 'Left' },

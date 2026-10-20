@@ -332,7 +332,14 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       const half = run.thicknessM / 2
       const start = run.axis === 'X' ? { x: round6(run.from), z: round6(run.at - half) } : { x: round6(run.at + half), z: round6(run.from) }
       const end = run.axis === 'X' ? { x: round6(run.to), z: round6(run.at - half) } : { x: round6(run.at + half), z: round6(run.to) }
-      push({ type: 'createWall', id: run.id, levelId: l.id, start, end, thickness: round6(run.thicknessM), height, baseOffset: 0, kind: 'INTERIOR', materialId: MATERIALS_V2.partition }, run.featureId, 'walls')
+      // 005Y: a partition on the top storey of a body under a plane roof dies into its planes, as the ring does.
+      const under = (b.planeRoofs ?? []).find((r) => {
+        const m = b.masses.find((x) => x.id === r.massId)
+        const mid = { x: (start.x + end.x) / 2, z: (start.z + end.z) / 2 }
+        return !!m && storey.storeyIndex === Math.max(...m.storeys) && mid.x >= m.x0 - 1e-6 && mid.x <= m.x1 + 1e-6 && mid.z >= m.z0 - 1e-6 && mid.z <= m.z1 + 1e-6
+      })
+      const topProfile = under ? { topProfile: { kind: 'FOLLOW_ROOF_PLANES' as const, planeIds: under.layout.planes.map((pl) => planeRoofPlaneId(under.massId, pl.key)) } } : {}
+      push({ type: 'createWall', id: run.id, levelId: l.id, start, end, thickness: round6(run.thicknessM), height, baseOffset: 0, kind: 'INTERIOR', ...topProfile, materialId: MATERIALS_V2.partition }, run.featureId, 'walls')
       emittedInteriorByStorey.set(storey.storeyIndex, [...(emittedInteriorByStorey.get(storey.storeyIndex) ?? []), run.id])
       for (const piece of run.pieces) if (piece !== run.id) bindings.push({ featureId: piece, objectId: run.id, objectKind: 'walls', commandIndex: program.length - 1 })
       evidence(run.id, 'SOURCE_DERIVED', `${run.pieces.length} piece${run.pieces.length === 1 ? '' : 's'} of partition ink on the plan${run.doors.length > 0 ? ` with ${run.doors.length} door gap${run.doors.length === 1 ? '' : 's'}` : ''}`, { height: 'SOURCE_DERIVED' })
@@ -384,7 +391,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
         eaveOffset: round6(roof.eaveY - (l?.elevation ?? 0)),
         pitchDeg: roof.pitchDeg,
         ridgeAxis: roof.ridgeAxis,
-        overhang: 0,
+        overhang: roof.eaves?.overhangM ?? 0,
         thickness: roof.thicknessM,
         ...vergeMembers(),
         materialId: MATERIALS_V2.roof,
@@ -394,7 +401,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       'roofs',
     )
     for (const v of b.verges) bindings.push({ featureId: v.featureId, objectId: 'roof-main', objectKind: 'roofs', commandIndex: program.length - 1 })
-    evidence('roof-main', roof.provenance, `${roof.pitchDeg}° gable on the authority of ${roof.authority.toLowerCase().replace(/_/g, ' ')}; ${roof.coversZonesWhy}${b.verges.length > 0 ? `; verge boards along both rakes, ${b.verges.map((v) => `${v.side.toLowerCase()} ${(v.member.widthM ?? 0).toFixed(2)} m wide by ${v.depthM.toFixed(2)} m deep`).join(', ')}` : ''}`, { footprint: roof.coversZones ? 'SOURCE_CORROBORATED' : 'SOURCE_DERIVED', ...(b.verges.length > 0 ? { 'edgeMembers.verge': b.verges.every((v) => v.depthProvenance === 'SOURCE_DERIVED') ? 'SOURCE_DERIVED' : 'IMAGE_METRIC_REGISTERED' } : {}) })
+    evidence('roof-main', roof.provenance, `${roof.pitchDeg}° gable on the authority of ${roof.authority.toLowerCase().replace(/_/g, ' ')}; ${roof.coversZonesWhy}${b.verges.length > 0 ? `; verge boards along both rakes, ${b.verges.map((v) => `${v.side.toLowerCase()} ${(v.member.widthM ?? 0).toFixed(2)} m wide by ${v.depthM.toFixed(2)} m deep`).join(', ')}` : ''}${roof.eaves ? `; eaves ${roof.eaves.overhangM.toFixed(2)} m past the walls: ${roof.eaves.why}; the gable ends project as far, which no source states` : ''}`, { footprint: roof.coversZones ? 'SOURCE_CORROBORATED' : 'SOURCE_DERIVED', ...(roof.eaves ? { overhang: roof.eaves.provenance, 'overhang.gableEnds': 'ASSUMED_FOR_RENDERING' } : {}), ...(b.verges.length > 0 ? { 'edgeMembers.verge': b.verges.every((v) => v.depthProvenance === 'SOURCE_DERIVED') ? 'SOURCE_DERIVED' : 'IMAGE_METRIC_REGISTERED' } : {}) })
   }
   for (const r of b.attachedRoofs) {
     const mass = b.masses.find((m) => m.id === r.massId)

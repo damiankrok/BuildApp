@@ -65,6 +65,10 @@ export type MainRoofV2 = {
   authority: string
   featureId: string
   provenance: ProvenanceStatus
+  /** 005Y: the eaves projection a section across the ridge draws, one value for every edge; absent when none was read. */
+  eaves?: { overhangM: number; provenance: ProvenanceStatus; why: string }
+  /** 005Y: what stands at each end of the ridge as the eaves-side elevations draw it; absent when they do not agree. */
+  ends?: { min: RoofEnd; max: RoofEnd; why: string }
 }
 
 /**

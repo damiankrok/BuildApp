@@ -323,6 +323,8 @@ export type ElevationRegistrationV2 = {
   zeroRow: number
   /** What the silhouette's width was matched to, in metres, and the alternatives it beat. */
   spanM: number
+  /** 005Y: the eaves projection (from the section) the span includes on each side, when it does. */
+  eavesM?: number
   spanWhy: string
   /** Where the silhouette's bottom lands in metres: near the terrain datum for a sound registration. */
   bottomY: number
@@ -330,6 +332,9 @@ export type ElevationRegistrationV2 = {
   confidence: number
   why: string
 }
+
+/** 005Y: the largest ground error at which a span including the section's eaves registers a render. */
+const SECTION_EAVES_MAX_GROUND_ERROR_M = 0.3
 
 /**
  * Register a rendered elevation with ONE scale, from the silhouette's width
@@ -359,13 +364,18 @@ export function registerElevationV2(
   terrainY?: number,
   /** 005V-N4: the extent's x span is the walls' drawn span (not the silhouette's): only the walled width scales it. */
   walledOnly = false,
+  /**
+   * 005Y: the eaves projection a section draws, on every edge of the roof. A render's silhouette may then span the
+   * walls plus that projection on both sides; each span is offered with it as well as without, and the ground decides.
+   */
+  sectionEavesM?: number,
 ): ElevationRegistrationV2 | undefined {
   const widthPx = extent.x1 - extent.x0
   const heightPx = extent.y1 - extent.y0
   if (widthPx <= 0 || heightPx <= 0) return undefined
   const e = world.envelope
   const w = world.walled
-  const candidates: Array<{ spanM: number; along0: number; along1: number; why: string }> = walledOnly
+  const candidates: Array<{ spanM: number; along0: number; along1: number; why: string; eavesM?: number }> = (walledOnly
     ? side === 'FRONT' || side === 'REAR'
       ? [{ spanM: w.x1 - w.x0, along0: w.x0, along1: w.x1, why: `the ${(w.x1 - w.x0).toFixed(2)} m walled width (the walls' drawn span under the roof)` }]
       : [{ spanM: w.z1 - w.z0, along0: w.z0, along1: w.z1, why: `the ${(w.z1 - w.z0).toFixed(2)} m walled depth (the walls' drawn span under the roof)` }]
@@ -374,7 +384,17 @@ export function registerElevationV2(
       : [
           { spanM: e.z1 - e.z0, along0: e.z0, along1: e.z1, why: `the ${(e.z1 - e.z0).toFixed(2)} m characteristic depth (the roof over the zones)` },
           { spanM: w.z1 - w.z0, along0: w.z0, along1: w.z1, why: `the ${(w.z1 - w.z0).toFixed(2)} m walled depth` },
-        ]
+        ]).slice()
+  if (!walledOnly && sectionEavesM !== undefined && sectionEavesM > 0) {
+    const eaves = sectionEavesM
+    const walledSpan = side === 'FRONT' || side === 'REAR' ? { a0: w.x0, a1: w.x1, what: 'walled width' } : { a0: w.z0, a1: w.z1, what: 'walled depth' }
+    const envelopeSpan = side === 'FRONT' || side === 'REAR' ? { a0: e.x0, a1: e.x1, what: 'envelope width' } : { a0: e.z0, a1: e.z1, what: 'characteristic depth' }
+    for (const sp of envelopeSpan.a1 - envelopeSpan.a0 > walledSpan.a1 - walledSpan.a0 + 0.05 ? [walledSpan, envelopeSpan] : [walledSpan]) {
+      const spanM = sp.a1 - sp.a0 + 2 * eaves
+      if (candidates.some((c) => Math.abs(c.spanM - spanM) < 0.02)) continue
+      candidates.push({ spanM, along0: sp.a0 - eaves, along1: sp.a1 + eaves, eavesM: eaves, why: `the ${(sp.a1 - sp.a0).toFixed(2)} m ${sp.what} plus the section's ${eaves.toFixed(2)} m of eaves each side` })
+    }
+  }
   // The vertical scale that puts the apex on the ridge and the bottom on the terrain is the check; the width decides.
   const scored = candidates.map((c) => {
     const mpp = c.spanM / widthPx
@@ -385,6 +405,9 @@ export function registerElevationV2(
   scored.sort((a, b) => a.err - b.err)
   const best = scored[0]
   if (best.err > 0.9) return undefined
+  // 005Y: a span that includes the section's eaves is a new reading of the silhouette; it is taken only where it
+  // lands the ground well, so a silhouette widened by a tree is not read as eaves.
+  if (best.eavesM !== undefined && best.err > SECTION_EAVES_MAX_GROUND_ERROR_M) return undefined
   const mpp = best.mpp
   const zeroRow = extent.y1 + best.bottomY / mpp
   // Direction along the facade seen from outside: FRONT west→east, REAR east→west, LEFT (west wall) rear→front, RIGHT (east wall) front→rear.
@@ -402,6 +425,7 @@ export function registerElevationV2(
     alongSign,
     zeroRow: round6(zeroRow),
     spanM: round6(best.spanM),
+    ...(best.eavesM !== undefined ? { eavesM: best.eavesM } : {}),
     spanWhy: best.why + (scored.length > 1 ? ` (beats ${scored.slice(1).map((s) => `${s.spanM.toFixed(2)} m, which would put the ground ${s.bottomY.toFixed(2)} m`).join('; ')})` : ''),
     bottomY: round6(best.bottomY),
     anisotropyCheck: round6(best.err),

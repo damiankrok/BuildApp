@@ -909,6 +909,9 @@ function coherent(upper: HalfReading, lower: HalfReading, circle: Circle): boole
 const CALLOUT_SUBPHASE = { id: 'CALLOUT_RINGS', label: 'reading opening callouts' }
 /** Before the rings are read: the masks, their components and the ring search, which on a large sheet is the longer half. */
 const CALLOUT_SEARCH = { id: 'CALLOUT_SEARCH', label: 'finding opening callouts' }
+/** 005Y: the two stages of the tinted-field reader, as the progress shows them. */
+const TINTED_SEARCH = { id: 'TINTED_CALLOUT_SEARCH', label: 'finding callouts on a tinted field' }
+const TINTED_READ = { id: 'TINTED_CALLOUT_RINGS', label: 'reading callouts on a tinted field' }
 
 /**
  * How much memory of prototype renders one reading keeps. A render is a pure
@@ -1101,6 +1104,11 @@ export type TintedCalloutOptions = {
   requireBar?: boolean
   /** 005X-N3: when given, filled with how many rings were found and how many of them were sent to digit OCR (the cost). */
   stats?: { rings: number; ocr: number }
+  /**
+   * 005Y: the run's checkpoint, ticked at every row of the ring search and at every place read, so a long search on a
+   * slow device keeps sending heartbeats and can be cancelled. Write-only: the readings are the same with it and without.
+   */
+  checkpoint?: Checkpoint
 }
 
 /** How much lighter than its own ring a callout's interior must be, and the ring than the field around it, in grey levels. */
@@ -1212,7 +1220,8 @@ export function readTintedCallouts(raster: Raster, options: TintedCalloutOptions
     const gw = Math.floor((x1 + 2 - x0) / PREFILTER_STEP) + 1
     const gh = Math.floor((y1 + 2 - y0) / PREFILTER_STEP) + 1
     const flags = new Uint8Array(Math.max(0, gw * gh))
-    for (let j = 0; j < gh; j += 1)
+    for (let j = 0; j < gh; j += 1) {
+      options.checkpoint?.tick({ subphase: TINTED_SEARCH })
       for (let k = 0; k < gw; k += 1) {
         const gx = x0 + k * PREFILTER_STEP
         const gy = y0 + j * PREFILTER_STEP
@@ -1227,11 +1236,15 @@ export function readTintedCallouts(raster: Raster, options: TintedCalloutOptions
           if (pass >= ANGLES / 4) flags[j * gw + k] = 1
         }
       }
+    }
     candidate = (cx, cy) => flags[Math.round((cy - y0) / PREFILTER_STEP) * gw + Math.round((cx - x0) / PREFILTER_STEP)] === 1
   }
   // A coarse pass on every other pixel, then every pixel about what it found: a ring passes the test over a few pixels of
   // centre, so the coarse grid misses none, and the fine pass finds the best centre.
-  for (let cy = y0; cy <= y1; cy += 2) for (let cx = x0; cx <= x1; cx += 2) if (candidate(cx, cy)) test(cx, cy)
+  for (let cy = y0; cy <= y1; cy += 2) {
+    options.checkpoint?.tick({ subphase: TINTED_SEARCH })
+    for (let cx = x0; cx <= x1; cx += 2) if (candidate(cx, cy)) test(cx, cy)
+  }
   const coarse = [...hits]
   hits.length = 0
   const seen = new Set<number>()
@@ -1319,6 +1332,7 @@ export function readTintedCallouts(raster: Raster, options: TintedCalloutOptions
         if (inspected[k] && (inspected[k]?.bar || matters[k]) && Math.hypot(flat[k].cx - flat[i].cx, flat[k].cy - flat[i].cy) < Math.max(flat[k].r, flat[i].r)) matters[i] = true
     }
   for (let i = 0; i < flat.length; i += 1) {
+    options.checkpoint?.tick({ subphase: TINTED_READ, counters: { places: i + 1, placesTotal: flat.length, readings: readings.length } })
     const h = flat[i]
     if (claimed.some((k) => Math.hypot(k.cx - h.cx, k.cy - h.cy) < Math.max(k.r, h.r))) continue
     const seen = inspected ? inspected[i] : inspect(h)
