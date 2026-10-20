@@ -1094,6 +1094,8 @@ export type TintedCalloutOptions = {
    * condition of the full one, so the readings are the same with it and without it; only the time differs.
    */
   prefilter?: boolean
+  /** 005X-N3: when consumers require the printed separator bar, avoid expensive digit OCR for rings without one. Off by default for other callout uses. */
+  requireBar?: boolean
 }
 
 /** How much lighter than its own ring a callout's interior must be, and the ring than the field around it, in grey levels. */
@@ -1292,6 +1294,9 @@ export function readTintedCallouts(raster: Raster, options: TintedCalloutOptions
       }
     }
     if (bestRun < (2 * half + 1) * 0.6) bar = null
+    // Plan rooflights require a separator bar. OCR of this ring cannot change their answer if it lacks one.
+    // Keep the older OCR fallback for other consumers that may accept symbols without a visible bar.
+    if (options.requireBar && !bar) continue
     void mask
     const box: PixelRect = { x0: h.cx - h.r, y0: h.cy - h.r, x1: h.cx + h.r, y1: h.cy + h.r }
     const size = 2 * h.r + 1
