@@ -8,13 +8,18 @@
  * tall, and a pipeline that trusts the markup silently mis-scales every
  * measurement taken off that drawing.
  *
- * `decodeImage` produces an RGBA raster for the deterministic CV layer. The
- * three formats the benchmark publisher actually serves are supported (JPEG,
- * GIF, PNG); anything else is an honest failure rather than a guess.
+ * `decodeImage` produces an RGBA raster for the deterministic CV layer. JPEG,
+ * GIF and PNG (the benchmark publisher's formats) and WebP (005X-N3: the
+ * default upload format of common publishing platforms; a plan served only as
+ * WebP was otherwise a page "without a plan") are supported; anything else is
+ * an honest failure rather than a guess.
  */
+import { readFileSync } from 'node:fs'
+import { createRequire } from 'node:module'
 import jpeg from 'jpeg-js'
 import { PNG } from 'pngjs'
 import { GifReader } from 'omggif'
+import webpDecoderFactory from '@jsquash/webp/codec/dec/webp_dec.js'
 import type { PixelSize } from '@buildapp/source-common'
 
 export type ImageFormat = 'jpeg' | 'png' | 'gif' | 'webp' | 'bmp'
@@ -150,6 +155,11 @@ function decodeByFormat(bytes: Uint8Array, format: ImageFormat): Raster {
       const png = PNG.sync.read(Buffer.from(bytes))
       return { width: png.width, height: png.height, data: new Uint8ClampedArray(png.data.buffer, png.data.byteOffset, png.data.byteLength) }
     }
+    if (format === 'webp') {
+      const out = webpDecoder().decode(bytes.slice().buffer)
+      if (!out) throw new Error('libwebp refused the bitstream')
+      return { width: out.width, height: out.height, data: new Uint8ClampedArray(out.data.buffer, out.data.byteOffset, out.data.byteLength) }
+    }
     if (format === 'gif') {
       const reader = new GifReader(Buffer.from(bytes) as unknown as Uint8Array)
       const data = new Uint8ClampedArray(reader.width * reader.height * 4)
@@ -161,6 +171,36 @@ function decodeByFormat(bytes: Uint8Array, format: ImageFormat): Raster {
     throw new DecodeFailed('CORRUPT', `${format} decode failed: ${(e as Error).message}`)
   }
   throw new DecodeFailed('UNSUPPORTED_FORMAT', `no decoder for ${format}`)
+}
+
+/**
+ * libwebp's own decoder (Squoosh build, `@jsquash/webp`, Apache-2.0), compiled once and instantiated synchronously
+ * so `decodeImage` stays a plain function. Its output was checked bit for bit against libwebp (`dwebp`) on lossy,
+ * lossless, alpha and odd-sized files; a decoder that differs from the reference by a row would move every
+ * measurement taken near a drawing's edge.
+ */
+type WasmRuntime = { Module: new (bytes: Uint8Array) => object; Instance: new (module: object, imports: object) => { exports: object } }
+let webp: { decode(data: ArrayBuffer): { width: number; height: number; data: Uint8ClampedArray } | null } | undefined
+function webpDecoder(): NonNullable<typeof webp> {
+  if (webp) return webp
+  // The project's TypeScript library is plain ES2022 (no DOM); the runtime itself is Node's.
+  const { Module, Instance } = (globalThis as unknown as { WebAssembly: WasmRuntime }).WebAssembly
+  const wasm = new Module(readFileSync(createRequire(import.meta.url).resolve('@jsquash/webp/codec/dec/webp_dec.wasm')))
+  const module: Record<string, unknown> = {
+    noInitialRun: true,
+    instantiateWasm: (imports: object, ready: (instance: object) => void) => {
+      const instance = new Instance(wasm, imports)
+      ready(instance)
+      return instance.exports
+    },
+  }
+  // Emscripten fills the object it is given; with a synchronous instantiation `decode` is there on return. A failed
+  // start rejects the factory's promise as well — that rejection is the same failure the check below throws.
+  let failure = ''
+  webpDecoderFactory(module).catch((e: unknown) => { failure = String(e) })
+  if (typeof module.decode !== 'function') throw new Error(`the WebP decoder did not initialise synchronously ${failure}`.trim())
+  webp = module as unknown as NonNullable<typeof webp>
+  return webp
 }
 
 /** Media type implied by the actual bytes, for cross-checking a server's claim. */

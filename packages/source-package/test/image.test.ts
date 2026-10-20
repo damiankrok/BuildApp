@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto'
 import { describe, expect, it } from 'vitest'
 import { DecodeFailed, decodeImage, mediaTypeOfFormat, probeImage } from '../src/index.js'
 import { gifBytes, jpegBytes, jpegComment, pngBytes, spliceAfterSoi, utf8 } from './helpers.js'
@@ -127,6 +128,45 @@ describe('decodeImage — the decoder is cross-checked against the container hea
     try {
       decodeImage(truncated)
       expect.unreachable('truncated pixel data must not decode')
+    } catch (e) {
+      expect((e as DecodeFailed).code).toBe('CORRUPT')
+    }
+  })
+})
+
+// 005X-N3: WebP, the default upload format of common publishing platforms. Both files below were encoded from
+// synthetic pixels (no publisher image); the expected output is libwebp's own (dwebp / Pillow) decoding.
+const pattern = (x: number, y: number): number[] => [(x * 37 + y * 11) % 256, (x * 5 + y * 53) % 256, (x * x + y) % 256, 40 + x * 10]
+const webpLossless17x9 = Uint8Array.from(Buffer.from('UklGRkoAAABXRUJQVlA4TD4AAAAvEAACELkKRPQ/dhE96H9AUds2UHcY0vgz3HtIFAQAUKaybScWTHH3TMoAC4lJySmpaekZmVnZObl5+R3YGw==', 'base64'))
+const webpLossy33x21 = Uint8Array.from(
+  Buffer.from(
+    'UklGRjICAABXRUJQVlA4ICYCAADwDACdASohABUAPrVMnEsnJCKhqqwA4BaJbACdMoR9H7N+KvsCU7+gfgDaETB9RLNH0AOdu/0H6ze4D9Jelm9gD0E/Ku9lD9vrACxBbHsYLjCyBHPme7CHHOQkeWn5frmr8QBSNPdTr6ZJvZZdfLDAAP7dvnwhKnwwxiAf0dhPJf58Jj3S2C1ybEdSU4SB854971ZA9xrBX49DoA6vW4NhmcQmnwaTGigspAFC4dVvPgh3rrxPh98u/6RQSqrC74B3ExQYIUGYql/vz75xZ8LCzSd38+z8BWyDH2rpXwcBR621q0uobEy4uI0J8U8+V9h40jpuF5jn/7PkrFElNGPd2vWjq/KVbFKakM6g1Y/7aiwsQAo9qtgO6Y2g6HA6MxDjYGYf+6Lxwygf+mBGCMeD2tujhHaAQL/qTP11PfEMOHopWHsVIGaJ9Sw1KwJwIfkh6Sjl7a3rMtptFRDjaKiG+glSLFOEkA0Hnn/wk5/gkn4+H/BJRqRCzC9ByopA6zyQloYQCDb0hiAZf0Jp1H38qvHGf/wLZrMVimWCUe56wXxd8myGzBHiN8F1Oo+4UcP+Ff7b/imt1r+g2T1ZPb1x1o2CpNXjp4V4xz7ocf3SY1JkR1BJI9OS9kLTX4uUzliX/EydHDQJur+25Eb/4nPV6ywIRjN90/QxvU2gZC2b2KgXbhv3q7D2j4I8ToHJv4x68CwXCRbVv7LtSnjEs2zuUAhMP8AA',
+    'base64',
+  ),
+)
+
+describe('decodeImage — WebP through libwebp', () => {
+  it('decodes a lossless WebP with alpha to exactly its pixels', () => {
+    expect(probeImage(webpLossless17x9)).toEqual({ format: 'webp', size: { width: 17, height: 9 } })
+    const r = decodeImage(webpLossless17x9)
+    expect([r.width, r.height]).toEqual([17, 9])
+    for (let y = 0; y < 9; y++) for (let x = 0; x < 17; x++) expect([...r.data.subarray((y * 17 + x) * 4, (y * 17 + x) * 4 + 4)]).toEqual(pattern(x, y))
+  })
+
+  it('decodes a lossy WebP of odd size bit for bit as libwebp does, last rows included', () => {
+    const r = decodeImage(webpLossy33x21)
+    expect([r.width, r.height]).toEqual([33, 21])
+    expect(createHash('sha256').update(r.data).digest('hex')).toBe('91e5b6e0b37980c3ab2c9ffc28c3eff6d9b1b080b97a21f02aa5ead923b5c725')
+    // the input bytes are not consumed or altered by the decoder
+    expect(decodeImage(webpLossy33x21).data).toEqual(r.data)
+  })
+
+  it('throws CORRUPT for a WebP whose bitstream is cut short', () => {
+    const truncated = webpLossy33x21.slice(0, 120)
+    expect(probeImage(truncated)?.size).toEqual({ width: 33, height: 21 })
+    try {
+      decodeImage(truncated)
+      expect.unreachable('a truncated VP8 bitstream must not decode')
     } catch (e) {
       expect((e as DecodeFailed).code).toBe('CORRUPT')
     }
