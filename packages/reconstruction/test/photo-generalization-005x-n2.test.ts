@@ -3,8 +3,9 @@
  *
  * - a dark wall under a darker roof at dusk, a timber-clad wall and a grey wall in shade are read by the roof's own
  *   colour (GENERAL): a closed body, its eaves where the covering ends, the timber's boards no openings;
- * - a gable facing the camera, its eaves at the outline's corners and no eave line along the front, is read from the
- *   outline (SILHOUETTE): a coarse body whose ridge runs back from the picture, without openings;
+ * - a gable facing the camera, its eaves at the outline's corners and no eave line along the front, is refused by
+ *   default and, where the caller asks for the outline fallback, read from the outline (SILHOUETTE): a coarse body whose
+ *   ridge runs back from the picture, without openings;
  * - what a reading supports is said: openings read are DETAILS_SUPPORTED, a body without them COARSE_INDICATIVE;
  * - a picture with no house, and a house with no sky over it, are refused by name, never given a typical house;
  * - the same picture gives the same model.
@@ -112,8 +113,12 @@ describe('005X-N2 a gable facing the camera, read from the outline', () => {
     return r
   }
 
-  it('builds a coarse body whose ridge runs back from the picture, and no openings', () => {
-    const result = reconstructFromSingleImage(frontGable(), 'm-front-gable')
+  it('is refused by default: the outline fallback is the caller\'s choice', () => {
+    expect(readSingleImage(frontGable()).ok).toBe(false)
+  })
+
+  it('builds, when asked to, a coarse body whose ridge runs back from the picture, and no openings', () => {
+    const result = reconstructFromSingleImage(frontGable(), 'm-front-gable', { outlineFallback: true })
     expect(result.ok).toBe(true)
     if (!result.ok) return
     expect(result.reading.mode).toBe('SILHOUETTE')
@@ -127,8 +132,8 @@ describe('005X-N2 a gable facing the camera, read from the outline', () => {
   })
 
   it('gives the same model for the same picture', () => {
-    const a = reconstructFromSingleImage(frontGable(), 'm-same')
-    const b = reconstructFromSingleImage(frontGable(), 'm-same')
+    const a = reconstructFromSingleImage(frontGable(), 'm-same', { outlineFallback: true })
+    const b = reconstructFromSingleImage(frontGable(), 'm-same', { outlineFallback: true })
     expect(a.ok && b.ok && a.modelJson === b.modelJson).toBe(true)
   })
 })

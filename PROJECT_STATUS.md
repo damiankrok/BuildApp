@@ -2408,3 +2408,26 @@ APP_READY for BuildWorld web (ENGINE_ONLY for Android), OWNER_VISUAL_PENDING.
 - **`readTintedCallouts`** now runs only where a render shows a rooflight: 3 of the 5 controls skip it, and all five
   stay byte-identical. It is still too slow for a phone.
 - **BuildWorld** has a "Photo…" entry: the picture is decoded in the browser and opens in the rotatable viewer.
+
+## One photo without a light band; rooflights from the plan first (STAGE BUILDPLAN-ANALYZER-005X-N2)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005X_N2_PHOTO_GENERALIZATION_PLAN_FIRST.md`; ledger:
+`research/analyzer-005x-n2-photo-generalization/ledger.json`. Branch `analyzer/005x-n2-photo-generalization-plan-first-v1`
+from `28cc5ee`. Verdicts: PHOTO_GENERALIZATION_PARTIAL_DEV_ONLY, PLAN_FIRST_ROOFLIGHTS_FIXED (Android performance
+NOT_READY), WEB_APP_PHOTO_ENTRY_UPDATED, ANDROID_ENGINE_ONLY, OWNER_VISUAL_PENDING.
+
+- **One picture, in modes:** the N1 light-band reading first (unchanged, byte-identical on its pictures); then GENERAL:
+  the covering grown by its own local colour (picture-wide and per-column hypotheses), eaves kept only over wall, any
+  wall colour. Every reading states `mode` and `quality` (DETAILS_SUPPORTED with openings, COARSE_INDICATIVE without).
+  A picture without sky over the house is refused before any mode.
+- **Development pictures:** Goździkowce, Cieszynianki and Rarytasy G2E now give a closed indicative body (were refused);
+  Marcówki (gable facing the camera) is still refused. Gates and doors on multi-finish fronts are often missed; a
+  publisher's watermark gives a false rooflight on two of them.
+- **Blind photos** (4 Commons photos, frozen before tuning): 0/4 correct. The outline mode (SILHOUETTE) built two wrong
+  bodies from trees and mountains, so it is off by default (`outlineFallback`); final code refuses all four by name.
+- **Plan first:** the attic plan's rooflight callouts are read whether or not a render shows a rooflight; test with
+  plan-only callouts. The ring search has a pooled prefilter that cannot drop a ring (identical readings on four real
+  plans), but OCR dominates: still 25-42 s per house on a desktop.
+- **Controls:** A01 1661d4bf, Goździkowce 911456a8, Marcówki cf797743, Cieszynianki e4e56292, Rarytasy G2E 9f5fd342 —
+  unchanged; Rarytasy OWNER NOT_RUN.
+- **NON_MANIFOLD** (owner model): the bay's front wall with its window cut, under a pyramid roof; not fixed.

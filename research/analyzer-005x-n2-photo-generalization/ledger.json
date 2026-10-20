@@ -1,0 +1,253 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005X-N2-PHOTO-GENERALIZATION-PLAN-FIRST",
+ "base": "28cc5ee0f417dd8e4bb8861648f69e932d072610",
+ "branch": "analyzer/005x-n2-photo-generalization-plan-first-v1",
+ "main": "no 'main' branch exists on origin; remote HEAD claude/buildapp-buildworld-v1-7y6yqh @ c399a299 untouched",
+ "mirror": "claude/new-session-3kzcgh @ bfaf286e95105c2cdb32df2d298d3cd93bd43449 (untouched)",
+ "commits": {
+  "preregistration": "8342c46",
+  "blindFrozenManifest": "43aafef",
+  "preBlindCodeFreeze": "5dc23fa",
+  "final": "see git log (report/ledger commit)"
+ },
+ "verdicts": {
+  "PHOTO_GENERALIZATION": "PHOTO_GENERALIZATION_PARTIAL_DEV_ONLY: 3/4 development controls give a closed indicative body (was 0/4); blind 0/4 correct; 0 false models in the default modes on the blind set; not universal",
+  "PLAN_FIRST_ROOFLIGHTS": "PLAN_FIRST_ROOFLIGHTS_FIXED (plan read independently of renders; regression test); Android performance NOT_READY",
+  "WEB_APP": "WEB_APP_PHOTO_ENTRY_UPDATED (Photo... shows mode and quality; same path as CLI)",
+  "ANDROID": "ANDROID_ENGINE_ONLY",
+  "OWNER_VISUAL": "OWNER_VISUAL_PENDING",
+  "ALL_PASSED": false
+ },
+ "sets": {
+  "DEV_N1": {
+   "owner": "11697dc923bcda4b4a829454324035e3c3beb3cbd4c040a06c60834ed0ebdd1d",
+   "a01vis": "d92ae9f8832e6f7a7c28faf3ac866ef044b845784472ada5d1ea07324ff40ac3"
+  },
+  "DEV_N2_formerHoldOut": {
+   "gozd": "b751eeb4…",
+   "ciesz": "0213e778…",
+   "marcowki": "d32a9a41…",
+   "rary": "2a0a137d…",
+   "note": "known to the executor since N2; not a hold-out"
+  },
+  "BLIND_N2": "see blind-manifest.md (4 Wikimedia Commons photos, CC BY / CC BY-SA, hashes frozen before tuning)"
+ },
+ "metrics": {
+  "owner": {
+   "n1": "a478b5ff",
+   "n2": "a478b5ff",
+   "mode": "NEUTRAL_BAND",
+   "quality": "DETAILS_SUPPORTED",
+   "falseOpenings": 0,
+   "geometry": "0 errors, 1 warning NON_MANIFOLD (ring-wing-1-0-w0)",
+   "ms": 1344
+  },
+  "a01vis": {
+   "n1": "a32163dc",
+   "n2": "a32163dc",
+   "mode": "NEUTRAL_BAND",
+   "quality": "DETAILS_SUPPORTED",
+   "falseOpenings": 0,
+   "geometry": "0/0",
+   "ms": 1456
+  },
+  "gozd": {
+   "n1": "REFUSED no straight eave line",
+   "n2": "68cf845d",
+   "mode": "GENERAL",
+   "quality": "DETAILS_SUPPORTED",
+   "eave": "at the gutter",
+   "foot": "at the shrubs",
+   "roof": "gable along the front",
+   "mainOpenings": "window read; entrance door and garage gate missed",
+   "rooflights": "2 of 3",
+   "falseOpenings": 0,
+   "falseRooflights": 0,
+   "geometry": "0/0",
+   "ms": 1623
+  },
+  "ciesz": {
+   "n1": "REFUSED",
+   "n2": "1f9a015d",
+   "mode": "GENERAL",
+   "quality": "DETAILS_SUPPORTED",
+   "eave": "at the gutter",
+   "foot": "at the terrace",
+   "roof": "hipped (HIP/HIP)",
+   "mainOpenings": "windows and terrace glazing partly",
+   "falseOpenings": "about 2 (ornamental grass as gate, interior item)",
+   "falseRooflights": "1 (watermark letter)",
+   "geometry": "0/0",
+   "ms": 1535
+  },
+  "rary": {
+   "n1": "REFUSED",
+   "n2": "c63c30da",
+   "mode": "GENERAL",
+   "quality": "DETAILS_SUPPORTED",
+   "eave": "correct over 244..716 px",
+   "foot": "correct",
+   "roof": "gable; garage wing and side gables not modelled",
+   "mainOpenings": "main window; entrance as window; garage gate missed",
+   "falseRooflights": "1 (watermark)",
+   "geometry": "0/0",
+   "ms": 1516
+  },
+  "marcowki": {
+   "n1": "REFUSED",
+   "n2": "REFUSED no straight eave line (default)",
+   "optInSilhouette": "444703e6 front gable, ridge Z, COARSE_INDICATIVE (not adopted)",
+   "ms": 703
+  }
+ },
+ "blind": {
+  "frozenRun_5dc23fa": {
+   "b1": "SILHOUETTE model d05ffa1c — WRONG (spruce crowns taken as roof)",
+   "b2": "REFUSED corners too narrow",
+   "b3": "REFUSED no house outline (flat-roofed block, out of scope)",
+   "b4": "SILHOUETTE model 10a65fbb — WRONG (mountains/water as roof)"
+  },
+  "decision": "SILHOUETTE removed from the default chain (outlineFallback=false); a mode switch, not threshold tuning",
+  "finalCodeRun_notBlindAnymore": {
+   "b1": "REFUSED",
+   "b2": "REFUSED",
+   "b3": "REFUSED",
+   "b4": "REFUSED"
+  },
+  "result": "0/4 correct models; 0 false models with the final default modes"
+ },
+ "planFirst": {
+  "change": "reconstruct-v2 reads the attic plan's rooflight callouts whenever the main roof is a gable, independent of render patches",
+  "test": "plan-first-rooflights-005x-n2.test.ts: plan-only callouts -> 2 SOURCE_DERIVED rooflights; old gate -> 0 (verified); no symbols -> 0",
+  "prefilter": "pooled necessary-condition test in readTintedCallouts; identical readings on 4 real attic plans (A01, Galaktyka, Marcowki, blind-11 h2); time saving 3-15 % (OCR of ~600 candidate rings dominates)",
+  "timing": "single replay 25-42 s desktop (a01 25, gozd 25, marcowki 25, ciesz 32, rary 42); five in parallel 79 s (N1 38 s)",
+  "android": "NOT_READY",
+  "a01": "6/7 rooflights from the plan, 7th UNRESOLVED; depth 8.008 m unchanged"
+ },
+ "controls": {
+  "a01": "1661d4bf (=)",
+  "gozd": "911456a8 (=)",
+  "marcowki": "cf797743 (=)",
+  "ciesz": "e4e56292 (=)",
+  "rary": "9f5fd342 (=)",
+  "rarytasOwner": "NOT_RUN"
+ },
+ "nonManifold": "owner model: ring-wing-1-0-w0, 6 open edges; disappears without the bay window photo-opening-4 -> opening cut in a wall topped by four pyramid planes; not at hip/cross-gable/valley joins; no visible gap at default cameras; not fixed (geometry kernel), no VISUAL_VERIFIED",
+ "performance": {
+  "nodeMedianMs": {
+   "owner": 1344,
+   "a01vis": 1456,
+   "gozd": 1623,
+   "ciesz": 1535,
+   "marcowki": 703,
+   "rary": 1516
+  },
+  "browser": "Photo... 2.1-2.6 s from file pick to model on screen (SwiftShader)"
+ },
+ "iterations": [
+  {
+   "n": 1,
+   "change": "GENERAL mode as fallback after NEUTRAL_BAND; smoothed roof colour, gap-run",
+   "kept": "partly"
+  },
+  {
+   "n": 2,
+   "change": "rival wall colour + facade = non-planting + foot plausibility",
+   "kept": "foot plausibility kept; rival rejected later"
+  },
+  {
+   "n": 3,
+   "change": "looser eave merge, gable face needs raised base, smooth-facade reference",
+   "kept": true
+  },
+  {
+   "n": 4,
+   "change": "look-ahead roof run",
+   "kept": false,
+   "why": "ends scattered inside the roof"
+  },
+  {
+   "n": 5,
+   "change": "rival only when apart; deeper wall band",
+   "kept": false,
+   "why": "global colour cannot cover an unevenly lit roof"
+  },
+  {
+   "n": 6,
+   "change": "region growing with picture-wide and per-column hypotheses; edge kept only over wall",
+   "kept": true
+  },
+  {
+   "n": 7,
+   "change": "lowest valid edge; local tolerance cap",
+   "kept": true
+  },
+  {
+   "n": 8,
+   "change": "widened sky (dusk); edge supported by both hypotheses",
+   "kept": true
+  },
+  {
+   "n": 9,
+   "change": "no bluish-cloud filter in GENERAL sampling",
+   "kept": true
+  },
+  {
+   "n": 10,
+   "change": "wider wall reference window",
+   "kept": false,
+   "why": "4-6 s, no gain"
+  },
+  {
+   "n": 11,
+   "change": "textured wall-colour pixels can be openings",
+   "kept": true
+  },
+  {
+   "n": 12,
+   "change": "leak detection between hypotheses",
+   "kept": true
+  },
+  {
+   "n": "13-21",
+   "change": "SILHOUETTE outline reader (corners walk, level eave, storey proportion)",
+   "kept": "implemented; opt-in only after blind test"
+  },
+  {
+   "n": 22,
+   "change": "chimney spike blocks rooflights",
+   "kept": true
+  },
+  {
+   "n": 23,
+   "change": "sky-over-house precondition (all modes); leaves-only planting for colour sampling and wall checks; sky-like pixels are not wall",
+   "kept": true
+  },
+  {
+   "n": "post-blind",
+   "change": "SILHOUETTE off by default",
+   "kept": true
+  }
+ ],
+ "rejected": [
+  "mode-of-raw-pixels roof colour",
+  "fixed-gap roof run",
+  "rival wall colour",
+  "wide reference window",
+  "global-only and local-only covering",
+  "first instead of lowest edge",
+  "foliage-only planting everywhere",
+  "SILHOUETTE by default"
+ ],
+ "provenance": "photo path: ASSUMED_FOR_RENDERING / VISUAL_INFERRED / VISUAL_SEMANTIC, never SOURCE_EXACT; model name MODEL ORIENTACYJNY Z 1 ZDJECIA; nothing reaches take-off or costing",
+ "sources": [
+  "owner photo (private, outside repo)",
+  "A01 visualisation (legal cache, outside repo)",
+  "4 publisher visualisations (legal caches, outside repo)",
+  "4 Wikimedia Commons photos (CC BY 2.0/3.0, CC BY-SA 4.0; outside repo)",
+  "real attic plan rasters for the prefilter check (outside repo)"
+ ],
+ "tests": "PENDING",
+ "renders": "PENDING",
+ "proposal": "on-device segmentation model (facade/roof/sky/planting) via ONNX Runtime Web/WASM replacing colour masks in GENERAL; not run"
+}

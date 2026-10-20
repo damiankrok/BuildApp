@@ -47,6 +47,13 @@ export type SingleImageOptions = {
   focalWidths?: number
   /** The wall thickness the closed body is drawn with. */
   wallThicknessM?: number
+  /**
+   * 005X-N2: where neither the light band nor the covering's colour gives an eave line, build a coarse body from the
+   * house's outline against the sky (SILHOUETTE). Off by default: on photographs never seen before (BLIND-N2) the
+   * outline took trees and mountains behind the house for its roof in both pictures it was tried on; a wrong body is
+   * worse than a refusal. Kept for pictures where the house stands clear against the sky, at the caller's choice.
+   */
+  outlineFallback?: boolean
   debug?: (line: string) => void
 }
 
@@ -422,6 +429,7 @@ function readByModes(raster: Raster, options: SingleImageOptions): SingleImageRe
   options.debug?.(`mode NEUTRAL_BAND refused: ${band.reason}; reading again by the roof's own colour`)
   const general = readPicture(raster, options, 'GENERAL')
   if (general.ok) return { ...general, why: [`no light neutral band under the eaves (${band.reason}): the roof was told from the wall by its own colour`, ...general.why] }
+  if (!options.outlineFallback) return { ok: false, reason: general.reason, why: [`by a light neutral band under the eaves: ${band.reason}`, ...general.why] }
   options.debug?.(`mode GENERAL refused: ${general.reason}; reading the house's outline against the sky`)
   const outline = readSilhouette(raster, options)
   if (outline.ok) return { ...outline, why: [`no light neutral band under the eaves (${band.reason})`, `no eave line by the roof's own colour (${general.reason})`, ...outline.why] }

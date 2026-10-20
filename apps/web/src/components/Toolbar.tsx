@@ -106,7 +106,7 @@ export function Toolbar({ panel, onPanel }: { panel: RightPanel; onPanel: (p: Ri
       return
     }
     store.loadJson(result.modelJson)
-    setPhotoNote(`${result.reading.openings.length} openings, ${result.reading.rooflights.length} rooflights — indicative, not measured`)
+    setPhotoNote(`${result.reading.quality === 'COARSE_INDICATIVE' ? 'coarse body, no openings read' : `${result.reading.openings.length} openings, ${result.reading.rooflights.length} rooflights`} (${result.reading.mode}) — indicative, not measured`)
   }
 
   return (
