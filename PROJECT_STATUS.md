@@ -2449,3 +2449,52 @@ SEGMENTATION_NOT_ADOPTED_RESEARCH_ONLY, OWNER_VISUAL_PENDING.
 - **Segmentation:** licence audit; the only cleared model with roof/sky/vegetation classes (DETR-R50 panoptic ONNX) gives
   scrambled masks in its available export and costs 8.5-11.6 s and 1.1-1.4 GB on a desktop. Not adopted.
 - **BLIND-N3** (4 Commons photos, frozen): 0/4 correct, 1 false model (default GENERAL mode).
+
+## Five ARCHON houses, rendered for the owner: eaves, a hipped roof and liveness (STAGE BUILDPLAN-ANALYZER-005Y)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005Y_ARCHON_FIVE_HOUSE_VISUAL_CLOSURE.md`. Ledger:
+`research/analyzer-005y-archon-visual/ledger.json`. Branch `analyzer/005y-archon-five-house-visual-closure-v1`, from
+`a6dc724`. Verdict: **OWNER_VISUAL_PENDING**.
+
+**Runs**
+- All five houses ran the full production path offline, with the ORT recogniser: sealed package → observations →
+  metrics → v2 → model → scene → verify.
+- On the base commit this reproduces the 005X-N3 models byte for byte.
+- On the final head, the full run and the solver replay give the same model for every house.
+
+**Changes**
+- **Eaves:** `readEavesOverhang` reads the eaves projection from the section, and it becomes the main roof's
+  `overhang`.
+  - A01: 0.91 m, corroborated by the printed +3.60.
+  - Goździkowce: 0.90 m.
+  - Cieszynianki: 0.90 m.
+  - Marcówki and Rarytasy: none, as drawn.
+- **Hipped main roof (v2):** Cieszynianki's page states a four-way roof. It is now built as a plane roof with an
+  eaves projection, and the top-storey partitions follow its planes.
+- **Render registration:** an extra span candidate that includes the section's eaves, accepted only at a ground
+  error of 0.3 m or less. It was not taken on any final house.
+
+**Models (before → after)**
+- A01: 1661d4bf → 40ccaaae.
+- Goździkowce: 911456a8 → 1856a617.
+- Cieszynianki: e4e56292 → 9478c6d1.
+- Marcówki and Rarytasy DEV: unchanged.
+- Rarytasy OWNER m3ea: run for the first time from the 005R corpus cache, as a separate, unverified row (b7501212).
+
+**Liveness**
+- New ticks inside the tinted-callout search, the roof details and scene compile/verify.
+- Longest silence on the desktop: 4.4–7.9 s before, 1.5–2.6 s after.
+- Tests: a 12-minute healthy run, a 50 s silence and a cancel (TS), and a 12-minute heavy step (Kotlin).
+- No time limit was added.
+- Android: ANDROID_LIVENESS_NOT_DEVICE_VERIFIED.
+
+**Named gaps**
+- A01 depth is 8.008 m against the printed 830: the rear wall strip is read as a zone.
+- A01 is missing its 7th rooflight: the ring is undetected.
+- Goździkowce: 0/7 rooflights and no callouts read, because the template OCR misreads them.
+- Cieszynianki: no garage door, no chimneys, no porches.
+- Marcówki: the balcony door has a timber leaf.
+
+**Research**
+- Paddle on callout halves: 104/142 exact against the template's 63/142, and 71/71 confident readings correct.
+- Recommended as the next step, gated by the plan's gap width.

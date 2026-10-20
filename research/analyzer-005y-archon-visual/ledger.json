@@ -1,0 +1,1314 @@
+{
+ "schema": "buildplan.005y.visual-ledger",
+ "date": "2026-10-20",
+ "base": "a6dc724d2ea864a3cc7bab76f0e97ec06635ca54",
+ "head": "3c51686 (code; report commit follows)",
+ "pipeline": "second-house.ts --package <sealed SourcePackage> --cache <byte cache> --recogniser (ORT PaddleOCR worker), OFFLINE=1: SourcePackage -> observation graph -> metric evidence -> reconstructV2 -> model -> scene compile -> verify; identity from the package as phone/service",
+ "renderer": "apps/web BuildWorld (Three.js), vite preview, Chromium SwiftShader, 8 presets",
+ "houses": {
+  "a01": {
+   "name": "Jarzmianki A01",
+   "productId": "m60124f28f071a",
+   "sourcePackageHash": "019e70a1dcd30bf289f9fcd01071686fd87d519e9e98c46990e928365808ec3f",
+   "assets": 21,
+   "hashes": {
+    "observationGraphHash": "bd616e2640e2d475c64b774d4f342e07f16b88faf3056e473a89d69eaa12faa2",
+    "metricEvidenceHash": "58951b02a5bb1ea48f33a4750e46ff6581dd7079655d2baa77eb3c8fd2da1502",
+    "candidateHash": "593175c332543228476f0b1979a97dc4ad973872ed539331013819dd22916446",
+    "modelHash": "40ccaaaefaf9b98889af4c637a8ac4a0ff517818f42d44cf48d42b2fb18136e3",
+    "sceneSha256": "0f79e46b041f620e31d0ea6ef7476a7c885d133c107a99a6d7d3e76109753b57"
+   },
+   "before": {
+    "modelSha256": "1661d4bfad926948042cdab8997beafb741f7ebf2014c0f9132b5e75dc8448c9",
+    "footprintM": [
+     10.5,
+     8.008
+    ],
+    "levels": [
+     [
+      "lvl-0",
+      0,
+      2.8
+     ],
+     [
+      "lvl-1",
+      2.8,
+      5.36
+     ]
+    ],
+    "masses": 2,
+    "roofs": [
+     {
+      "id": "roof-main",
+      "kind": "GABLE",
+      "pitchDeg": 40,
+      "ridgeAxis": "X",
+      "overhangM": 0,
+      "eaveY": 4.8
+     }
+    ],
+    "roofPlanes": {},
+    "ridgeY": 8.16,
+    "openings": {
+     "s0-east": {
+      "WINDOW": 1
+     },
+     "s0-front": {
+      "WINDOW": 3,
+      "DOOR": 1
+     },
+     "s0-rear": {
+      "WINDOW": 1,
+      "GLAZED_DOOR": 1
+     },
+     "s0-west": {
+      "GLAZED_DOOR": 1,
+      "WINDOW": 1
+     },
+     "s1-east": {
+      "WINDOW": 2
+     },
+     "s1-west": {
+      "WINDOW": 2
+     }
+    },
+    "openingWidths": {
+     "s0-east": [
+      "W1.06"
+     ],
+     "s0-front": [
+      "W2.58",
+      "W1.00",
+      "D1.06",
+      "W0.89"
+     ],
+     "s0-rear": [
+      "W2.26",
+      "G1.81"
+     ],
+     "s0-west": [
+      "G1.77",
+      "W1.26"
+     ],
+     "s1-east": [
+      "W1.00",
+      "W1.00"
+     ],
+     "s1-west": [
+      "W1.10",
+      "W1.09"
+     ]
+    },
+    "rooflights": 6,
+    "rooflightIds": [
+     "rooflight-plan-high-2",
+     "rooflight-plan-high-3",
+     "rooflight-plan-high-4",
+     "rooflight-plan-high-5",
+     "rooflight-plan-low-0",
+     "rooflight-plan-low-1"
+    ],
+    "chimneys": 3,
+    "balconies": 0,
+    "railings": 0,
+    "terraces": 1,
+    "runSeconds": 310.268201413,
+    "maxTickGapMs": 7903,
+    "peakRssMB": 971,
+    "elevations": [
+     {
+      "frameId": "frame-asset-gotowy-projekt-dom-w-jarzmiankach-elewacja-7854cc828b",
+      "side": "RIGHT",
+      "mpp": 0.016179,
+      "spanM": 8.3,
+      "spanWhy": "the 8.30 m characteristic depth (the roof over the zones) (beats 8.01 m, which would put the ground 0.28 m)",
+      "bottomY": -0.010565,
+      "groundErrorM": 0.709435,
+      "extent": {
+       "x0": 377,
+       "y0": 111,
+       "x1": 890,
+       "y1": 616
+      }
+     }
+    ],
+    "section": {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-jarzmiankach-przekroj-0e2c07be96",
+     "mpp": 0.013951975609756096,
+     "originCol": 323,
+     "zeroRow": 638.954458
+    }
+   },
+   "after": {
+    "modelSha256": "40ccaaaefaf9b98889af4c637a8ac4a0ff517818f42d44cf48d42b2fb18136e3",
+    "footprintM": [
+     10.5,
+     8.008
+    ],
+    "levels": [
+     [
+      "lvl-0",
+      0,
+      2.8
+     ],
+     [
+      "lvl-1",
+      2.8,
+      5.36
+     ]
+    ],
+    "masses": 2,
+    "roofs": [
+     {
+      "id": "roof-main",
+      "kind": "GABLE",
+      "pitchDeg": 40,
+      "ridgeAxis": "X",
+      "overhangM": 0.906878,
+      "eaveY": 4.8
+     }
+    ],
+    "roofPlanes": {},
+    "ridgeY": 8.16,
+    "openings": {
+     "s0-east": {
+      "WINDOW": 1
+     },
+     "s0-front": {
+      "WINDOW": 3,
+      "DOOR": 1
+     },
+     "s0-rear": {
+      "WINDOW": 1,
+      "GLAZED_DOOR": 1
+     },
+     "s0-west": {
+      "GLAZED_DOOR": 1,
+      "WINDOW": 1
+     },
+     "s1-east": {
+      "WINDOW": 2
+     },
+     "s1-west": {
+      "WINDOW": 2
+     }
+    },
+    "openingWidths": {
+     "s0-east": [
+      "W1.06"
+     ],
+     "s0-front": [
+      "W2.58",
+      "W1.00",
+      "D1.06",
+      "W0.89"
+     ],
+     "s0-rear": [
+      "W2.26",
+      "G1.81"
+     ],
+     "s0-west": [
+      "G1.77",
+      "W1.26"
+     ],
+     "s1-east": [
+      "W1.00",
+      "W1.00"
+     ],
+     "s1-west": [
+      "W1.10",
+      "W1.09"
+     ]
+    },
+    "rooflights": 6,
+    "rooflightIds": [
+     "rooflight-plan-high-2",
+     "rooflight-plan-high-3",
+     "rooflight-plan-high-4",
+     "rooflight-plan-high-5",
+     "rooflight-plan-low-0",
+     "rooflight-plan-low-1"
+    ],
+    "chimneys": 3,
+    "balconies": 0,
+    "railings": 0,
+    "terraces": 1,
+    "runSeconds": 306.285592178,
+    "maxTickGapMs": 2584,
+    "maxTelemetryGapMs": 2539,
+    "telemetryEvents": 283,
+    "peakRssMB": 952,
+    "elevations": [
+     {
+      "frameId": "frame-asset-gotowy-projekt-dom-w-jarzmiankach-elewacja-7854cc828b",
+      "side": "RIGHT",
+      "mpp": 0.016179,
+      "spanM": 8.3,
+      "spanWhy": "the 8.30 m characteristic depth (the roof over the zones) (beats 8.01 m, which would put the ground 0.28 m; 10.39 m, which would put the ground -2.06 m; 10.68 m, which would put the ground -2.35 m)",
+      "bottomY": -0.010565,
+      "groundErrorM": 0.709435,
+      "extent": {
+       "x0": 377,
+       "y0": 111,
+       "x1": 890,
+       "y1": 616
+      }
+     }
+    ],
+    "section": {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-jarzmiankach-przekroj-0e2c07be96",
+     "mpp": 0.013951975609756096,
+     "originCol": 323,
+     "zeroRow": 638.954458
+    }
+   },
+   "replayEqualsFullRun": true
+  },
+  "gozd": {
+   "name": "Goździkowce 3",
+   "productId": "m79923e950094d",
+   "sourcePackageHash": "37be1543b0a9ae16b522ab864efd83f09653641c58bb308713c434d42541ad12",
+   "assets": 30,
+   "hashes": {
+    "observationGraphHash": "cf2d1b3fd9756ed8382e9c01845a03bd2580ee89b2e423f12802bc2294aaaca2",
+    "metricEvidenceHash": "f747d8a40ed30fe70bc0c2f70c2f8100b911479bf8ad0ca1b764a4bd48004aaf",
+    "candidateHash": "fdb66322b19a89dee3a430bfb00091cde186ca624130c34606111808b80ff390",
+    "modelHash": "1856a617ce52da04aceaa5d5ccfa464c9efe09a4edfe42bcf1d7552837900ea7",
+    "sceneSha256": "d9a8fe90a57e024dffcc38a271129b139150c8b65bf1b0934acf28d19e83dac8"
+   },
+   "before": {
+    "modelSha256": "911456a88b2530c9cf01b348dc7045a7b7bcc6d85e62e58221e5f205d41efbbc",
+    "footprintM": [
+     13.82,
+     9.5
+    ],
+    "levels": [
+     [
+      "lvl-0",
+      0,
+      2.8
+     ],
+     [
+      "lvl-1",
+      2.8,
+      5.135723
+     ]
+    ],
+    "masses": 2,
+    "roofs": [
+     {
+      "id": "roof-main",
+      "kind": "GABLE",
+      "pitchDeg": 40,
+      "ridgeAxis": "X",
+      "overhangM": 0,
+      "eaveY": 3.95
+     }
+    ],
+    "roofPlanes": {},
+    "ridgeY": 7.936,
+    "openings": {
+     "s0-east": {
+      "DOOR": 1,
+      "WINDOW": 1
+     },
+     "s0-front": {
+      "WINDOW": 2,
+      "GARAGE_DOOR": 1
+     },
+     "s0-rear": {
+      "WINDOW": 2,
+      "DOOR": 2
+     },
+     "s0-west": {
+      "WINDOW": 1,
+      "DOOR": 1
+     },
+     "s1-east": {
+      "DOOR": 2,
+      "WINDOW": 1
+     },
+     "s1-west": {
+      "WINDOW": 2
+     }
+    },
+    "openingWidths": {
+     "s0-east": [
+      "D1.03",
+      "W2.87"
+     ],
+     "s0-front": [
+      "W4.29",
+      "W3.14",
+      "G3.22"
+     ],
+     "s0-rear": [
+      "W2.97",
+      "W1.80",
+      "D0.51",
+      "D0.99"
+     ],
+     "s0-west": [
+      "W1.97",
+      "D1.06"
+     ],
+     "s1-east": [
+      "D1.10",
+      "W1.10",
+      "D1.10"
+     ],
+     "s1-west": [
+      "W1.79",
+      "W1.79"
+     ]
+    },
+    "rooflights": 0,
+    "rooflightIds": [],
+    "chimneys": 1,
+    "balconies": 0,
+    "railings": 0,
+    "terraces": 0,
+    "runSeconds": 287.962398042,
+    "maxTickGapMs": 4399,
+    "peakRssMB": 1010,
+    "elevations": [],
+    "section": null
+   },
+   "after": {
+    "modelSha256": "1856a617ce52da04aceaa5d5ccfa464c9efe09a4edfe42bcf1d7552837900ea7",
+    "footprintM": [
+     13.82,
+     9.5
+    ],
+    "levels": [
+     [
+      "lvl-0",
+      0,
+      2.8
+     ],
+     [
+      "lvl-1",
+      2.8,
+      5.135723
+     ]
+    ],
+    "masses": 2,
+    "roofs": [
+     {
+      "id": "roof-main",
+      "kind": "GABLE",
+      "pitchDeg": 40,
+      "ridgeAxis": "X",
+      "overhangM": 0.89801,
+      "eaveY": 3.95
+     }
+    ],
+    "roofPlanes": {},
+    "ridgeY": 7.936,
+    "openings": {
+     "s0-east": {
+      "DOOR": 1,
+      "WINDOW": 1
+     },
+     "s0-front": {
+      "WINDOW": 2,
+      "GARAGE_DOOR": 1
+     },
+     "s0-rear": {
+      "WINDOW": 2,
+      "DOOR": 2
+     },
+     "s0-west": {
+      "WINDOW": 1,
+      "DOOR": 1
+     },
+     "s1-east": {
+      "DOOR": 2,
+      "WINDOW": 1
+     },
+     "s1-west": {
+      "WINDOW": 2
+     }
+    },
+    "openingWidths": {
+     "s0-east": [
+      "D1.03",
+      "W2.87"
+     ],
+     "s0-front": [
+      "W4.29",
+      "W3.14",
+      "G3.22"
+     ],
+     "s0-rear": [
+      "W2.97",
+      "W1.80",
+      "D0.51",
+      "D0.99"
+     ],
+     "s0-west": [
+      "W1.97",
+      "D1.06"
+     ],
+     "s1-east": [
+      "D1.10",
+      "W1.10",
+      "D1.10"
+     ],
+     "s1-west": [
+      "W1.79",
+      "W1.79"
+     ]
+    },
+    "rooflights": 0,
+    "rooflightIds": [],
+    "chimneys": 1,
+    "balconies": 0,
+    "railings": 0,
+    "terraces": 0,
+    "runSeconds": 293.261266039,
+    "maxTickGapMs": 1621,
+    "maxTelemetryGapMs": 1971,
+    "telemetryEvents": 271,
+    "peakRssMB": 987,
+    "elevations": [],
+    "section": null
+   },
+   "replayEqualsFullRun": true
+  },
+  "marcowki": {
+   "name": "Marcówki (GE)",
+   "productId": "m2fa281446a8ca",
+   "sourcePackageHash": "753709900c02b84211ee5c6088ef84f9ff2c93a2b4560318ca0fd0e222eef8d0",
+   "assets": 20,
+   "hashes": {
+    "observationGraphHash": "3ee2ffec2c36f3f39022f1a5ba0d844b3a4b1f31a2d3a3f551e31d495159b22e",
+    "metricEvidenceHash": "7b1e8885d404e53e46690399a613f3ba749e3a6b8fb183ab68faa02d50c677aa",
+    "candidateHash": "e674a9f94fba2ac5f788bb5160cfaf719199775a592fa61e4d8cdcf0110caf69",
+    "modelHash": "cf7977438b0053903f0398548d0bfb0b569760864d1aa8c258992fc7459faee0",
+    "sceneSha256": "a08a7052526b5e5750a3cf4628cab9666b7ae7e7bb4ab53060df8e507dfd98dd"
+   },
+   "before": {
+    "modelSha256": "cf7977438b0053903f0398548d0bfb0b569760864d1aa8c258992fc7459faee0",
+    "footprintM": [
+     12.05,
+     14.601
+    ],
+    "levels": [
+     [
+      "lvl-0",
+      0,
+      3.06
+     ],
+     [
+      "lvl-1",
+      3.06,
+      4.89
+     ]
+    ],
+    "masses": 3,
+    "roofs": [
+     {
+      "id": "roof-attached-0",
+      "kind": "FLAT",
+      "pitchDeg": 0,
+      "ridgeAxis": "X",
+      "overhangM": 0,
+      "eaveY": 2.89
+     },
+     {
+      "id": "roof-main",
+      "kind": "GABLE",
+      "pitchDeg": 40,
+      "ridgeAxis": "Z",
+      "overhangM": 0,
+      "eaveY": 4.636
+     }
+    ],
+    "roofPlanes": {},
+    "ridgeY": 7.95,
+    "openings": {
+     "s0-east": {
+      "WINDOW": 1
+     },
+     "s0-front": {
+      "WINDOW": 2,
+      "GARAGE_DOOR": 1
+     },
+     "s0-rear": {
+      "WINDOW": 2
+     },
+     "s0-west": {
+      "WINDOW": 2
+     },
+     "s1-front": {
+      "WINDOW": 1
+     },
+     "s1-rear": {
+      "WINDOW": 2
+     },
+     "sopening-0": {
+      "DOOR": 1
+     }
+    },
+    "openingWidths": {
+     "s0-east": [
+      "W3.00"
+     ],
+     "s0-front": [
+      "W1.10",
+      "W1.05",
+      "G2.75"
+     ],
+     "s0-rear": [
+      "W1.00",
+      "W4.70"
+     ],
+     "s0-west": [
+      "W0.90",
+      "W1.40"
+     ],
+     "s1-front": [
+      "W2.70"
+     ],
+     "s1-rear": [
+      "W2.34",
+      "W2.34"
+     ],
+     "sopening-0": [
+      "D0.90"
+     ]
+    },
+    "rooflights": 3,
+    "rooflightIds": [
+     "rooflight-left-0",
+     "rooflight-left-1",
+     "rooflight-right-0"
+    ],
+    "chimneys": 2,
+    "balconies": 2,
+    "railings": 2,
+    "terraces": 2,
+    "runSeconds": 268.05390036,
+    "maxTickGapMs": 4878,
+    "peakRssMB": 1011,
+    "elevations": [
+     {
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+      "side": "REAR",
+      "mpp": 0.016806,
+      "spanM": 12.05,
+      "spanWhy": "the 12.05 m width of the envelope",
+      "bottomY": -0.150558,
+      "groundErrorM": 0.150558,
+      "extent": {
+       "x0": 254,
+       "y0": 104,
+       "x1": 971,
+       "y1": 586
+      }
+     },
+     {
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
+      "side": "FRONT",
+      "mpp": 0.016853,
+      "spanM": 12.05,
+      "spanWhy": "the 12.05 m width of the envelope",
+      "bottomY": -0.223776,
+      "groundErrorM": 0.223776,
+      "extent": {
+       "x0": 374,
+       "y0": 104,
+       "x1": 1089,
+       "y1": 589
+      }
+     },
+     {
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c",
+      "side": "LEFT",
+      "mpp": 0.016555,
+      "spanM": 14.601283,
+      "spanWhy": "the 14.60 m characteristic depth (the roof over the zones) (beats 12.61 m, which would put the ground 1.04 m)",
+      "bottomY": -0.045941,
+      "groundErrorM": 0.045941,
+      "extent": {
+       "x0": 199,
+       "y0": 100,
+       "x1": 1081,
+       "y1": 583
+      }
+     },
+     {
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
+      "side": "RIGHT",
+      "mpp": 0.016783,
+      "spanM": 14.601283,
+      "spanWhy": "the 14.60 m characteristic depth (the roof over the zones) (beats 12.61 m, which would put the ground 0.86 m)",
+      "bottomY": -0.256928,
+      "groundErrorM": 0.256928,
+      "extent": {
+       "x0": 206,
+       "y0": 100,
+       "x1": 1076,
+       "y1": 589
+      }
+     }
+    ],
+    "section": {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-przekro-5270f96cea",
+     "mpp": 0.013787185354691076,
+     "originCol": 128,
+     "zeroRow": 642.645531
+    }
+   },
+   "after": {
+    "modelSha256": "cf7977438b0053903f0398548d0bfb0b569760864d1aa8c258992fc7459faee0",
+    "footprintM": [
+     12.05,
+     14.601
+    ],
+    "levels": [
+     [
+      "lvl-0",
+      0,
+      3.06
+     ],
+     [
+      "lvl-1",
+      3.06,
+      4.89
+     ]
+    ],
+    "masses": 3,
+    "roofs": [
+     {
+      "id": "roof-attached-0",
+      "kind": "FLAT",
+      "pitchDeg": 0,
+      "ridgeAxis": "X",
+      "overhangM": 0,
+      "eaveY": 2.89
+     },
+     {
+      "id": "roof-main",
+      "kind": "GABLE",
+      "pitchDeg": 40,
+      "ridgeAxis": "Z",
+      "overhangM": 0,
+      "eaveY": 4.636
+     }
+    ],
+    "roofPlanes": {},
+    "ridgeY": 7.95,
+    "openings": {
+     "s0-east": {
+      "WINDOW": 1
+     },
+     "s0-front": {
+      "WINDOW": 2,
+      "GARAGE_DOOR": 1
+     },
+     "s0-rear": {
+      "WINDOW": 2
+     },
+     "s0-west": {
+      "WINDOW": 2
+     },
+     "s1-front": {
+      "WINDOW": 1
+     },
+     "s1-rear": {
+      "WINDOW": 2
+     },
+     "sopening-0": {
+      "DOOR": 1
+     }
+    },
+    "openingWidths": {
+     "s0-east": [
+      "W3.00"
+     ],
+     "s0-front": [
+      "W1.10",
+      "W1.05",
+      "G2.75"
+     ],
+     "s0-rear": [
+      "W1.00",
+      "W4.70"
+     ],
+     "s0-west": [
+      "W0.90",
+      "W1.40"
+     ],
+     "s1-front": [
+      "W2.70"
+     ],
+     "s1-rear": [
+      "W2.34",
+      "W2.34"
+     ],
+     "sopening-0": [
+      "D0.90"
+     ]
+    },
+    "rooflights": 3,
+    "rooflightIds": [
+     "rooflight-left-0",
+     "rooflight-left-1",
+     "rooflight-right-0"
+    ],
+    "chimneys": 2,
+    "balconies": 2,
+    "railings": 2,
+    "terraces": 2,
+    "runSeconds": 265.619982556,
+    "maxTickGapMs": 2279,
+    "maxTelemetryGapMs": 2756,
+    "telemetryEvents": 246,
+    "peakRssMB": 982,
+    "elevations": [
+     {
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+      "side": "REAR",
+      "mpp": 0.016806,
+      "spanM": 12.05,
+      "spanWhy": "the 12.05 m width of the envelope",
+      "bottomY": -0.150558,
+      "groundErrorM": 0.150558,
+      "extent": {
+       "x0": 254,
+       "y0": 104,
+       "x1": 971,
+       "y1": 586
+      }
+     },
+     {
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
+      "side": "FRONT",
+      "mpp": 0.016853,
+      "spanM": 12.05,
+      "spanWhy": "the 12.05 m width of the envelope",
+      "bottomY": -0.223776,
+      "groundErrorM": 0.223776,
+      "extent": {
+       "x0": 374,
+       "y0": 104,
+       "x1": 1089,
+       "y1": 589
+      }
+     },
+     {
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c",
+      "side": "LEFT",
+      "mpp": 0.016555,
+      "spanM": 14.601283,
+      "spanWhy": "the 14.60 m characteristic depth (the roof over the zones) (beats 12.61 m, which would put the ground 1.04 m)",
+      "bottomY": -0.045941,
+      "groundErrorM": 0.045941,
+      "extent": {
+       "x0": 199,
+       "y0": 100,
+       "x1": 1081,
+       "y1": 583
+      }
+     },
+     {
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
+      "side": "RIGHT",
+      "mpp": 0.016783,
+      "spanM": 14.601283,
+      "spanWhy": "the 14.60 m characteristic depth (the roof over the zones) (beats 12.61 m, which would put the ground 0.86 m)",
+      "bottomY": -0.256928,
+      "groundErrorM": 0.256928,
+      "extent": {
+       "x0": 206,
+       "y0": 100,
+       "x1": 1076,
+       "y1": 589
+      }
+     }
+    ],
+    "section": {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-przekro-5270f96cea",
+     "mpp": 0.013787185354691076,
+     "originCol": 128,
+     "zeroRow": 642.645531
+    }
+   },
+   "replayEqualsFullRun": true
+  },
+  "ciesz": {
+   "name": "Cieszynianki 12 (GE)",
+   "productId": "m43d25c0636969",
+   "sourcePackageHash": "63034b633b353f90f9a7f6dad38f47f993ffba78500f4b803c267a26e22c2324",
+   "assets": 30,
+   "hashes": {
+    "observationGraphHash": "a4f459a47e9862edf21418992059230d088a1fe16dea116af6116ae6e5885e23",
+    "metricEvidenceHash": "4ed60fa3cfa1465cbc59751ccad686e7340842192fb53499356c594004d6f2bb",
+    "candidateHash": "18b6d06418a2a9d7977b40487d8c72f5e5135dab8f1d2ef420d087de9b4cc79f",
+    "modelHash": "9478c6d10a4fdd221b1a527db721709c21ceffefe564f4f45b424c378b57c577",
+    "sceneSha256": "cda3106857c5a0d6a01e0322d425762294a8060571c486a71e738a8685229670"
+   },
+   "before": {
+    "modelSha256": "e4e562923319084fda0b9ae934bcb1185a7098c53e7727c82f9afdcb592c1f6c",
+    "footprintM": [
+     11.7,
+     15.8
+    ],
+    "levels": [
+     [
+      "lvl-0",
+      0,
+      7.2
+     ]
+    ],
+    "masses": 1,
+    "roofs": [
+     {
+      "id": "roof-main",
+      "kind": "GABLE",
+      "pitchDeg": 30,
+      "ridgeAxis": "Z",
+      "overhangM": 0,
+      "eaveY": 3.823
+     }
+    ],
+    "roofPlanes": {},
+    "ridgeY": 7.2,
+    "openings": {
+     "s0-east": {
+      "WINDOW": 2,
+      "DOOR": 2
+     },
+     "s0-front": {
+      "WINDOW": 2,
+      "DOOR": 1
+     },
+     "s0-rear": {
+      "WINDOW": 3
+     },
+     "s0-west": {
+      "WINDOW": 4,
+      "DOOR": 1
+     }
+    },
+    "openingWidths": {
+     "s0-east": [
+      "W2.00",
+      "D0.89",
+      "D0.92",
+      "W2.00"
+     ],
+     "s0-front": [
+      "W3.75",
+      "D1.06",
+      "W3.69"
+     ],
+     "s0-rear": [
+      "W2.17",
+      "W1.50",
+      "W2.50"
+     ],
+     "s0-west": [
+      "W4.23",
+      "W2.31",
+      "W2.31",
+      "D0.86",
+      "W1.22"
+     ]
+    },
+    "rooflights": 0,
+    "rooflightIds": [],
+    "chimneys": 0,
+    "balconies": 0,
+    "railings": 0,
+    "terraces": 1,
+    "runSeconds": 188.685388274,
+    "maxTickGapMs": 5732,
+    "peakRssMB": 1007,
+    "elevations": [],
+    "section": null
+   },
+   "after": {
+    "modelSha256": "9478c6d10a4fdd221b1a527db721709c21ceffefe564f4f45b424c378b57c577",
+    "footprintM": [
+     11.7,
+     15.8
+    ],
+    "levels": [
+     [
+      "lvl-0",
+      0,
+      7.2
+     ]
+    ],
+    "masses": 1,
+    "roofs": [],
+    "roofPlanes": {
+     "roof-main-plane-end": 2,
+     "roof-main-plane": 2
+    },
+    "ridgeY": 7.2,
+    "openings": {
+     "s0-east": {
+      "WINDOW": 2,
+      "DOOR": 2
+     },
+     "s0-front": {
+      "WINDOW": 2,
+      "DOOR": 1
+     },
+     "s0-rear": {
+      "WINDOW": 3
+     },
+     "s0-west": {
+      "WINDOW": 4,
+      "DOOR": 1
+     }
+    },
+    "openingWidths": {
+     "s0-east": [
+      "W2.00",
+      "D0.89",
+      "D0.92",
+      "W2.00"
+     ],
+     "s0-front": [
+      "W3.75",
+      "D1.06",
+      "W3.69"
+     ],
+     "s0-rear": [
+      "W2.17",
+      "W1.50",
+      "W2.50"
+     ],
+     "s0-west": [
+      "W4.23",
+      "W2.31",
+      "W2.31",
+      "D0.86",
+      "W1.22"
+     ]
+    },
+    "rooflights": 0,
+    "rooflightIds": [],
+    "chimneys": 0,
+    "balconies": 0,
+    "railings": 0,
+    "terraces": 1,
+    "runSeconds": 187.33478632,
+    "maxTickGapMs": 2624,
+    "maxTelemetryGapMs": 3471,
+    "telemetryEvents": 169,
+    "peakRssMB": 994,
+    "elevations": [],
+    "section": null
+   },
+   "replayEqualsFullRun": true
+  },
+  "rary": {
+   "name": "Rarytasy 5 (G2E) — DEV",
+   "productId": "m84f2903cb8e14",
+   "sourcePackageHash": "02963768a63b99eb20005d533569950aafd52168ffa73e00070662e379553135",
+   "assets": 37,
+   "hashes": {
+    "observationGraphHash": "a766c502967bf420f70c854336cda509719c0b99b1674756414c5af9e2ed7b59",
+    "metricEvidenceHash": "eda04bf63dad74ea609b95d923890f002dadc741778b53492887fb5d5372c97c",
+    "candidateHash": "e14de1c2a4d9d2552056d64232efdd7249fa1b7f2d018c5ad96689bc41b80a38",
+    "modelHash": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+    "sceneSha256": "9896cd83b74f406bc58c6fc8ecd67544bd5a0eff0075aa04d32904a3e6ea1b60"
+   },
+   "before": {
+    "modelSha256": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+    "footprintM": [
+     17.21,
+     14.7
+    ],
+    "levels": [
+     [
+      "lvl-0",
+      0,
+      5.7
+     ]
+    ],
+    "masses": 2,
+    "roofs": [
+     {
+      "id": "roof-main",
+      "kind": "GABLE",
+      "pitchDeg": 30,
+      "ridgeAxis": "X",
+      "overhangM": 0,
+      "eaveY": 3.246
+     }
+    ],
+    "roofPlanes": {
+     "roof-attached-0-plane": 2
+    },
+    "ridgeY": 5.7,
+    "openings": {
+     "s0-east": {
+      "WINDOW": 3
+     },
+     "s0-front": {
+      "DOOR": 1,
+      "WINDOW": 2,
+      "GARAGE_DOOR": 1
+     },
+     "s0-rear": {
+      "WINDOW": 2,
+      "GLAZED_DOOR": 2
+     },
+     "s0-west": {
+      "WINDOW": 2
+     }
+    },
+    "openingWidths": {
+     "s0-east": [
+      "W1.20",
+      "W1.20",
+      "W3.86"
+     ],
+     "s0-front": [
+      "D1.00",
+      "W1.00",
+      "W2.50",
+      "G5.00"
+     ],
+     "s0-rear": [
+      "W2.30",
+      "G1.50",
+      "G1.50",
+      "W4.00"
+     ],
+     "s0-west": [
+      "W1.00",
+      "W1.00"
+     ]
+    },
+    "rooflights": 0,
+    "rooflightIds": [],
+    "chimneys": 1,
+    "balconies": 0,
+    "railings": 0,
+    "terraces": 2,
+    "runSeconds": 237.619025141,
+    "maxTickGapMs": 6459,
+    "peakRssMB": 1013,
+    "elevations": [
+     {
+      "frameId": "frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elew-5de5935285",
+      "side": "FRONT",
+      "mpp": 0.016596,
+      "spanM": 17.21,
+      "spanWhy": "the 17.21 m width of the envelope",
+      "bottomY": -0.374118,
+      "groundErrorM": 0.054118,
+      "extent": {
+       "x0": 137,
+       "y0": 139,
+       "x1": 1174,
+       "y1": 505
+      }
+     },
+     {
+      "frameId": "frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elew-c383df2964",
+      "side": "REAR",
+      "mpp": 0.016725,
+      "spanM": 17.21,
+      "spanWhy": "the 17.21 m width of the envelope",
+      "bottomY": -0.404616,
+      "groundErrorM": 0.084616,
+      "extent": {
+       "x0": 128,
+       "y0": 141,
+       "x1": 1157,
+       "y1": 506
+      }
+     },
+     {
+      "frameId": "frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elew-8abaf52877",
+      "side": "RIGHT",
+      "mpp": 0.015589,
+      "spanM": 14.7,
+      "spanWhy": "the 14.70 m characteristic depth (the roof over the zones) (beats 14.70 m, which would put the ground 0.46 m)",
+      "bottomY": 0.462248,
+      "groundErrorM": 0.782248,
+      "extent": {
+       "x0": 115,
+       "y0": 169,
+       "x1": 1058,
+       "y1": 505
+      }
+     },
+     {
+      "frameId": "frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elew-1417866f23",
+      "side": "LEFT",
+      "mpp": 0.01637,
+      "spanM": 14.7,
+      "spanWhy": "the 14.70 m characteristic depth (the roof over the zones) (beats 14.70 m, which would put the ground 0.20 m)",
+      "bottomY": 0.199777,
+      "groundErrorM": 0.519777,
+      "extent": {
+       "x0": 244,
+       "y0": 169,
+       "x1": 1142,
+       "y1": 505
+      }
+     }
+    ],
+    "section": null
+   },
+   "after": {
+    "modelSha256": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+    "footprintM": [
+     17.21,
+     14.7
+    ],
+    "levels": [
+     [
+      "lvl-0",
+      0,
+      5.7
+     ]
+    ],
+    "masses": 2,
+    "roofs": [
+     {
+      "id": "roof-main",
+      "kind": "GABLE",
+      "pitchDeg": 30,
+      "ridgeAxis": "X",
+      "overhangM": 0,
+      "eaveY": 3.246
+     }
+    ],
+    "roofPlanes": {
+     "roof-attached-0-plane": 2
+    },
+    "ridgeY": 5.7,
+    "openings": {
+     "s0-east": {
+      "WINDOW": 3
+     },
+     "s0-front": {
+      "DOOR": 1,
+      "WINDOW": 2,
+      "GARAGE_DOOR": 1
+     },
+     "s0-rear": {
+      "WINDOW": 2,
+      "GLAZED_DOOR": 2
+     },
+     "s0-west": {
+      "WINDOW": 2
+     }
+    },
+    "openingWidths": {
+     "s0-east": [
+      "W1.20",
+      "W1.20",
+      "W3.86"
+     ],
+     "s0-front": [
+      "D1.00",
+      "W1.00",
+      "W2.50",
+      "G5.00"
+     ],
+     "s0-rear": [
+      "W2.30",
+      "G1.50",
+      "G1.50",
+      "W4.00"
+     ],
+     "s0-west": [
+      "W1.00",
+      "W1.00"
+     ]
+    },
+    "rooflights": 0,
+    "rooflightIds": [],
+    "chimneys": 1,
+    "balconies": 0,
+    "railings": 0,
+    "terraces": 2,
+    "runSeconds": 237.684410062,
+    "maxTickGapMs": 1490,
+    "maxTelemetryGapMs": 1964,
+    "telemetryEvents": 213,
+    "peakRssMB": 996,
+    "elevations": [
+     {
+      "frameId": "frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elew-5de5935285",
+      "side": "FRONT",
+      "mpp": 0.016596,
+      "spanM": 17.21,
+      "spanWhy": "the 17.21 m width of the envelope",
+      "bottomY": -0.374118,
+      "groundErrorM": 0.054118,
+      "extent": {
+       "x0": 137,
+       "y0": 139,
+       "x1": 1174,
+       "y1": 505
+      }
+     },
+     {
+      "frameId": "frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elew-c383df2964",
+      "side": "REAR",
+      "mpp": 0.016725,
+      "spanM": 17.21,
+      "spanWhy": "the 17.21 m width of the envelope",
+      "bottomY": -0.404616,
+      "groundErrorM": 0.084616,
+      "extent": {
+       "x0": 128,
+       "y0": 141,
+       "x1": 1157,
+       "y1": 506
+      }
+     },
+     {
+      "frameId": "frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elew-8abaf52877",
+      "side": "RIGHT",
+      "mpp": 0.015589,
+      "spanM": 14.7,
+      "spanWhy": "the 14.70 m characteristic depth (the roof over the zones) (beats 14.70 m, which would put the ground 0.46 m)",
+      "bottomY": 0.462248,
+      "groundErrorM": 0.782248,
+      "extent": {
+       "x0": 115,
+       "y0": 169,
+       "x1": 1058,
+       "y1": 505
+      }
+     },
+     {
+      "frameId": "frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elew-1417866f23",
+      "side": "LEFT",
+      "mpp": 0.01637,
+      "spanM": 14.7,
+      "spanWhy": "the 14.70 m characteristic depth (the roof over the zones) (beats 14.70 m, which would put the ground 0.20 m)",
+      "bottomY": 0.199777,
+      "groundErrorM": 0.519777,
+      "extent": {
+       "x0": 244,
+       "y0": 169,
+       "x1": 1142,
+       "y1": 505
+      }
+     }
+    ],
+    "section": null
+   },
+   "replayEqualsFullRun": true
+  },
+  "rary_owner_m3ea": {
+   "status": "NOT_RUN",
+   "reason": "INPUT_MISSING: no sealed source package for the OWNER Rarytasy m3ea… exists in this environment; DEV G2E is not substituted"
+  }
+ }
+}
