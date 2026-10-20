@@ -1,0 +1,273 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005X-N1-UNIVERSAL-PHOTO-ROOF-OPENINGS",
+ "base": "7626403c5fe288ce8a2b4d28015aa93fbc10a982",
+ "branch": "analyzer/005x-n1-universal-photo-roof-openings-v1",
+ "mirror": "claude/new-session-3kzcgh @ bfaf286e95105c2cdb32df2d298d3cd93bd43449 (unchanged, not switched)",
+ "verdicts": {
+  "GENERAL_OPENINGS": "GENERAL_OPENINGS_PRESERVED (A01 6/7 plan rooflights, 7th UNRESOLVED; Gozdzikowce, Marcowki, Cieszynianki, Rarytasy G2E: byte-identical models)",
+  "PHOTO_VISUAL": "PHOTO_VISUAL_IMPROVED on both development pictures (owner photo, A01 visualisation); generalisation to unseen houses NOT shown (hold-out 0/4 usable)",
+  "APP": "APP_READY for BuildWorld web (Photo... entry, same runtime, in-browser decode); the Android product app is not wired: ENGINE_ONLY there",
+  "OWNER_VISUAL": "OWNER_VISUAL_PENDING"
+ },
+ "inputs": {
+  "ownerPhoto": {
+   "sha256": "11697dc923bcda4b4a829454324035e3c3beb3cbd4c040a06c60834ed0ebdd1d",
+   "note": "private, not committed"
+  },
+  "a01Visualisation": {
+   "sha256": "d92ae9f8832e6f7a7c28faf3ac866ef044b845784472ada5d1ea07324ff40ac3",
+   "note": "private publisher visualisation from the legal 005W-N1 cache, not committed"
+  },
+  "holdOut": "front visualisations of Gozdzikowce 3, Cieszynianki 12 GE, Marcowki GE, Rarytasy 5 G2E (800x600, existing legal caches); not used for tuning; not committed"
+ },
+ "featuresBeforeAfter": {
+  "ownerPhoto": {
+   "model": {
+    "before": "8b42664f (005X, 7626403)",
+    "after": "a478b5ff (CLI decoder) / 2a2f6255 (standard JPEG decode, as in the browser)"
+   },
+   "roof": {
+    "before": "gable only, one per segment",
+    "after": "main body hipped both ends (RAMP evidence), bay hipped; cross gable over the entrance as its own body with valleys into the main slope"
+   },
+   "bodies": {
+    "before": "3 segments (wing 72..175, main 347..556, bay 635..697 px)",
+    "after": "wing+main one body (one eave line), bay, cross gable"
+   },
+   "gate": {
+    "before": "missed",
+    "after": "GARAGE_DOOR (light, opaque leaf)"
+   },
+   "entrance": {
+    "before": "window-like glazing",
+    "after": "GLAZED_DOOR to the floor (door + side light joined)"
+   },
+   "dormerArchedWindow": {
+    "before": "missed",
+    "after": "read in the cross gable face, head flagged ARCHED (built level-headed, noted)"
+   },
+   "windows": {
+    "before": "main window, bay window",
+    "after": "main window, bay window"
+   },
+   "rooflights": {
+    "before": "2 of 3",
+    "after": "3 of 3 (one placed on the hip facet)"
+   },
+   "falseOpenings": {
+    "before": 1,
+    "after": 0
+   },
+   "openingsList": {
+    "before": [
+     "GLAZED_DOOR 3.10..3.77 sill 0.00 head 0.98",
+     "WINDOW 8.02..9.38 sill 0.50 head 2.31",
+     "WINDOW 12.41..13.74 sill 1.18 head 2.14",
+     "WINDOW 16.52..17.28 sill 0.82 head 1.85"
+    ],
+    "after": [
+     "GARAGE_DOOR 2.77..5.84 sill 0.00 head 2.20",
+     "WINDOW 8.22..10.66 sill 4.29 head 6.08 ARCHED (in cross gable)",
+     "GLAZED_DOOR 9.55..10.98 sill 0.00 head 2.54",
+     "WINDOW 14.45..16.08 sill 1.37 head 2.55",
+     "WINDOW 19.56..20.30 sill 0.92 head 2.33"
+    ]
+   },
+   "wallHeightM": {
+    "before": 2.9,
+    "after": 3.384
+   }
+  },
+  "a01Visualisation": {
+   "model": {
+    "before": "2b85d3e7 (005X, 7626403)",
+    "after": "a32163dc"
+   },
+   "roofColour": {
+    "before": [
+     190,
+     204,
+     216
+    ],
+    "after": [
+     123,
+     128,
+     130
+    ],
+    "note": "005X read a cloud as the covering"
+   },
+   "eave": {
+    "before": "rows [291, 326] (fitted on the white band under the eaves, 4 segments)",
+    "after": "rows [253, 293] (where the grey covering ends, one segment)"
+   },
+   "roof": {
+    "before": "gable per segment",
+    "after": "one gable body (left end PLATEAU, right end SYMMETRY)"
+   },
+   "openings": {
+    "before": [
+     "WINDOW 0.90..1.58 sill 2.25 head 3.99"
+    ],
+    "after": [
+     "GLAZED_DOOR 0.20..2.64 sill 0.00 head 2.19",
+     "GLAZED_DOOR 4.18..5.15 sill 0.00 head 2.20",
+     "WINDOW 5.65..7.08 sill 0.51 head 2.29",
+     "WINDOW 8.49..9.17 sill 0.84 head 2.38"
+    ],
+    "visibleInSource": "about 6"
+   },
+   "rooflights": {
+    "before": 0,
+    "after": "3 (count right; the pair on the right placed approximately, a reflection splits one glass)"
+   },
+   "wallHeightM": {
+    "before": 2.9,
+    "after": 3.65,
+    "note": "door-height prior: the band over the ground storey is now wall"
+   }
+  }
+ },
+ "holdOut": {
+  "005X": {
+   "gozd": "refused (no eave)",
+   "ciesz": "refused (no eave)",
+   "marcowki": "model with 0 openings",
+   "rary": "refused (no eave)"
+  },
+  "005X-N1 blind first run": {
+   "gozd": "wrong (eave fitted near the ridge, 1 false window)",
+   "ciesz": "refused (wall too narrow)",
+   "marcowki": "refused (no foot)",
+   "rary": "refused (no eave)"
+  },
+  "005X-N1 final (after later robustness changes, no longer blind)": {
+   "gozd": "refused",
+   "ciesz": "refused",
+   "marcowki": "refused",
+   "rary": "refused"
+  },
+  "conclusion": "no usable model on any unseen house: dusk renders, dark walls, front-facing gables and timber cladding are outside what this deterministic reader handles; refusals are by name"
+ },
+ "controls": {
+  "a01": "1661d4bf (= 005X)",
+  "gozd": "911456a8 (= 005X)",
+  "marcowki": "cf797743 (= 005X)",
+  "ciesz": "e4e56292 (= 005X)",
+  "rary": "9f5fd342 (= 005X)",
+  "rarytasOwner": "NOT_RUN"
+ },
+ "performance": {
+  "singleImage": "1.1-1.4 s per 800x600 picture in Node (median of 5: owner 1.29 s, A01 1.36 s; process RSS 375-412 MB incl. vite-node); in the browser 2.6-3.0 s from file pick to model on screen",
+  "tintedCallouts": "23-34 s per house with five replays in parallel (about 15 s alone) in 005X on every gable house; now run only where a render shows a rooflight patch (A01, Marcowki): parallel five-replay wall time 80 s -> 38 s; still too slow for a phone where it runs (blocker)"
+ },
+ "iterations": [
+  {
+   "n": 1,
+   "change": "grey covering ends at a run of rows of another tint; roof colour = commonest colour of the band under the sky (not the median)",
+   "effect": "A01: roof colour was a cloud, eave on the white band; now covering read and eave at the gutter",
+   "kept": true
+  },
+  {
+   "n": 2,
+   "change": "openings by texture (3x3 deviation) instead of darkness alone; planting = vivid green only",
+   "effect": "A01 openings 0 -> 4 (glass reflecting trees is dull green); owner gate found",
+   "kept": true
+  },
+  {
+   "n": 3,
+   "change": "split components at thin columns; pane join needs 55 % fill; door + side light joined",
+   "effect": "owner door one opening, gate separated from pilaster",
+   "kept": true
+  },
+  {
+   "n": 4,
+   "change": "collinear eave stretches are one wall; foot fitted over the widest read stretch",
+   "effect": "owner wing+main one body",
+   "kept": true
+  },
+  {
+   "n": 5,
+   "change": "REJECTED: foot as the robust line over all column feet",
+   "effect": "foot ran on paving/path edges, wrong scale",
+   "kept": false
+  },
+  {
+   "n": 6,
+   "change": "gable faces (wall above the eave in an inverted V); band under the rakes searched for openings",
+   "effect": "owner cross gable and arched window read",
+   "kept": true
+  },
+  {
+   "n": 7,
+   "change": "rooflights over all segments by contrast with the covering; fragments merged; adjacent ones shrunk to the model's least gap",
+   "effect": "owner 2 -> 3, A01 0 -> 3",
+   "kept": true
+  },
+  {
+   "n": 8,
+   "change": "roof ends: PLATEAU / RAMP / GABLE_FACE / PARTY / SYMMETRY; plane roofs (planeRoofLayout) in the emitter",
+   "effect": "owner hipped; A01 gable",
+   "kept": true
+  },
+  {
+   "n": 9,
+   "change": "REJECTED: hip vs gable by projecting ridge ends with the pinhole model",
+   "effect": "A01's shifted-lens render puts depth recession the wrong way; not discriminative",
+   "kept": false
+  },
+  {
+   "n": 10,
+   "change": "depth from the hip's run (half the depth under one pitch); cross gable body 1 m deep with valleys",
+   "effect": "closed model, no closure errors",
+   "kept": true
+  },
+  {
+   "n": 11,
+   "change": "scale from a door/gate on the foot (2.2 m); gate vs glazed door by lightness against the wall; low foot patches and eave strips dropped; openings straddling a cross gable's eave line dropped; arched head flag",
+   "effect": "A01 knee wall restored (3.65 m), owner false window removed",
+   "kept": true
+  },
+  {
+   "n": 12,
+   "change": "REJECTED: 2D closing (radius 2) and vertical closing of the opening mask",
+   "effect": "neighbouring openings merged, owner read as 2 storeys",
+   "kept": false
+  },
+  {
+   "n": 13,
+   "change": "REJECTED (post hold-out): 12 rows of covering before a tint stop",
+   "effect": "A01 lost its terrace glazing",
+   "kept": false
+  },
+  {
+   "n": 14,
+   "change": "decoder robustness: colour mode over neighbouring bins, eave run gap 2.5 % of width, wall-under-eave check (not sky), merge by one line through both stretches, foot leaning at most 0.12 from the eave with a parallel fallback",
+   "effect": "owner photo gives the same structure under the CLI decoder and the browser's (standard) decoder; previously the browser decode produced a broken model",
+   "kept": true
+  },
+  {
+   "n": 15,
+   "change": "cross gable verges/eaves 0.1 m proud of its walls; an opening at a gable's apex centred on its axis",
+   "effect": "closure audit 0 errors on both photo models",
+   "kept": true
+  },
+  {
+   "n": 16,
+   "change": "plan callout reader gated on a render rooflight patch",
+   "effect": "controls byte-identical, 3 of 5 houses skip the 15-30 s step",
+   "kept": true
+  }
+ ],
+ "notImplemented": [
+  "ARCHED heads are noted, not built (model has level heads only)",
+  "left wing roof height: wing and main share one eave so one roof covers both (the garage roof is lower on the photo)",
+  "bay projection and porch columns",
+  "chimney from the photo",
+  "window positions on side/rear walls (not seen)",
+  "hold-out houses: dusk/dark/timber facades refused",
+  "Android entry",
+  "readTintedCallouts speed for phones"
+ ],
+ "provenance": "photo path: every value ASSUMED_FOR_RENDERING or VISUAL_SEMANTIC/VISUAL_INFERRED, never SOURCE_EXACT; model name MODEL ORIENTACYJNY Z 1 ZDJĘCIA; no rooms; nothing reaches take-off or costing",
+ "tests": "reconstruction new 9 (photo-roof-openings-005x-n1) + 7 (generic-openings-005x, one assertion updated for plane roofs)"
+}

@@ -1,9 +1,10 @@
 import type { JSX } from 'react'
-import { useMemo, useRef } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { VIEW_CATEGORIES, viewCategoriesOf, type ViewCategory, type ViewPreset } from '@buildapp/editor'
 import { createDemoBuilding } from '@buildapp/demo'
 import { createMarcowkiReferenceBuilding } from '@buildapp/reference-marcowki'
 import { SEALED_CANDIDATES, modelOf } from '@buildapp/candidates'
+import { reconstructFromSingleImage } from '@buildapp/reconstruction'
 import { RENDER_STYLES, renderStyleStore, useRenderStyle, useSnapshot, useStore, type RenderStyleId } from '../use-store.js'
 
 /**
@@ -54,6 +55,8 @@ export function Toolbar({ panel, onPanel }: { panel: RightPanel; onPanel: (p: Ri
   }, [snap.model])
   const renderStyle = useRenderStyle()
   const fileRef = useRef<HTMLInputElement>(null)
+  const photoRef = useRef<HTMLInputElement>(null)
+  const [photoNote, setPhotoNote] = useState('')
   // A model the analyzer service made is named by its label ("<project> (analysis)"), not "(file)".
   const isAnalysis = snap.model.id.startsWith('m-analysis-')
 
@@ -76,6 +79,34 @@ export function Toolbar({ panel, onPanel }: { panel: RightPanel; onPanel: (p: Ri
     const text = await file.text()
     store.loadJson(text)
     e.target.value = ''
+  }
+
+  // 005X-N1: one photograph of a house, read here in the browser by the same single-image path the analyzer uses, into
+  // an indicative model (named MODEL ORIENTACYJNY Z 1 ZDJĘCIA) the viewport opens like any other. The picture is decoded
+  // on a canvas and never leaves the page.
+  const onPhoto = async (e: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
+    const file = e.target.files?.[0]
+    e.target.value = ''
+    if (!file) return
+    setPhotoNote('reading the photo…')
+    const bitmap = await createImageBitmap(file)
+    const canvas = document.createElement('canvas')
+    canvas.width = bitmap.width
+    canvas.height = bitmap.height
+    const ctx = canvas.getContext('2d')
+    if (!ctx) {
+      setPhotoNote('this browser cannot decode the photo')
+      return
+    }
+    ctx.drawImage(bitmap, 0, 0)
+    const image = ctx.getImageData(0, 0, bitmap.width, bitmap.height)
+    const result = reconstructFromSingleImage({ width: image.width, height: image.height, data: image.data }, `m-photo-${Date.now().toString(36)}`)
+    if (!result.ok) {
+      setPhotoNote(`no model: ${result.reason}`)
+      return
+    }
+    store.loadJson(result.modelJson)
+    setPhotoNote(`${result.reading.openings.length} openings, ${result.reading.rooflights.length} rooflights — indicative, not measured`)
   }
 
   return (
@@ -124,6 +155,11 @@ export function Toolbar({ panel, onPanel }: { panel: RightPanel; onPanel: (p: Ri
           Load JSON
         </button>
         <input ref={fileRef} type="file" accept="application/json,.json" style={{ display: 'none' }} data-testid="load-input" onChange={onFile} />
+        <button data-testid="photo" onClick={() => photoRef.current?.click()} title="Read one photograph of a house into an indicative, rotatable model (MODEL ORIENTACYJNY Z 1 ZDJĘCIA)">
+          Photo…
+        </button>
+        <input ref={photoRef} type="file" accept="image/*" style={{ display: 'none' }} data-testid="photo-input" onChange={(e) => void onPhoto(e)} />
+        {photoNote ? <span data-testid="photo-note">{photoNote}</span> : null}
         <label>model</label>
         <select
           data-testid="model-select"

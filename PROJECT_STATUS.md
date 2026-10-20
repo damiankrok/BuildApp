@@ -2384,3 +2384,27 @@ from `e9b9e3e`. Phase A `PARTIAL_GENERIC_OPENINGS_ADOPTED`, phase B `ENGINE_ONLY
   - No app entry yet (ENGINE_ONLY).
 - **Tests:** packages 1194/1195 (APK gate), new 7/7; tsc clean. CI/APK NOT_RUN.
 - **Renders** are outside the repo (`/home/user/work005x/005x-renders.zip`).
+
+## One photo: roof types, gables, gates (STAGE BUILDPLAN-ANALYZER-005X-N1)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005X_N1_UNIVERSAL_PHOTO_ROOF_OPENINGS.md`; ledger:
+`research/analyzer-005x-n1-photo/ledger.json`. Branch `analyzer/005x-n1-universal-photo-roof-openings-v1` from
+`7626403`. Verdicts: GENERAL_OPENINGS_PRESERVED, PHOTO_VISUAL_IMPROVED (two development pictures; hold-out 0/4),
+APP_READY for BuildWorld web (ENGINE_ONLY for Android), OWNER_VISUAL_PENDING.
+
+- **Plane roofs** (`v2/plane-roof.ts`): a body's roof as its own planes, each ridge end a gable or a hip. Emitted
+  through `createRoofPlane`/`connectRoofPlanes`; walls follow the planes. The drawing path does not use it yet.
+- **One picture:**
+  - Roof ends are read: plateau, ramp, gable face, party, symmetry.
+  - Cross gables are read and become a shallow body with valleys into the main slope.
+  - Openings are found by texture: light gates, dark glass, the gable window above the eaves. A door-height prior
+    sets the scale.
+  - Rooflights are read over the whole roof.
+  - The structure no longer depends on the JPEG decoder.
+- **Owner photo:** hipped body and bay, cross gable, gate, entrance, arched window, 2 windows, 3/3 rooflights, 0 false
+  openings.
+- **A01 visualisation:** the eave is now at the gutter (005X had it at the white band), 4 openings, 3 rooflights.
+- **Hold-out** (4 other houses): no usable model, refused by name.
+- **`readTintedCallouts`** now runs only where a render shows a rooflight: 3 of the 5 controls skip it, and all five
+  stay byte-identical. It is still too slow for a phone.
+- **BuildWorld** has a "Photo…" entry: the picture is decoded in the browser and opens in the rotatable viewer.
