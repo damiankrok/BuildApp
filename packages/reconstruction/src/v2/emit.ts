@@ -603,14 +603,16 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     const levelDoor = raked && kind === 'DOOR'
     const height = levelDoor && heightFar !== undefined ? Math.min(heightNear, heightFar) : heightNear
     push({ type: 'cutOpening', id: o.id, wallId, kind, offset: Math.max(0, offset), sill, width: o.widthM, height, ...(raked && !levelDoor ? { head: { kind: 'RAKED', heightFar } } : {}) }, o.id, 'openings')
+    // 005Y-N4 (C): a swing and hinge only from the leaf and arc the plan draws; the wall's u may run against the plan's axis
+    const drawnSwing: { swing?: 'IN' | 'OUT'; hingeSide?: 'LEFT' | 'RIGHT' } = o.leaf ? { swing: o.leaf.swing, hingeSide: (o.leaf.hingeAt === 'LOW') !== reversed ? 'LEFT' : 'RIGHT' } : {}
     if (kind === 'WINDOW') {
       push({ type: 'placeWindow', id: `${o.id}-unit`, openingId: o.id, ...(o.mullions.length > 0 ? { mullions: o.mullions } : {}), ...frameWithinWall('WINDOW', b.wallThicknessM), materialId: MATERIALS_V2.glass }, o.id, 'windows')
     } else if (o.family === 'GARAGE_DOOR') {
       push({ type: 'placeDoor', id: `${o.id}-leaf`, openingId: o.id, ...frameWithinWall('DOOR', b.wallThicknessM), assembly: { panels: [{ kind: 'PANEL', fraction: 1 }], mullionWidth: 0.04 } }, o.id, 'doors')
     } else if (o.family === 'GLAZED_DOOR') {
-      push({ type: 'placeDoor', id: `${o.id}-leaf`, openingId: o.id, ...frameWithinWall('DOOR', b.wallThicknessM), assembly: { panels: [{ kind: 'LEAF', fraction: 1, hinge: 'LEFT', glazing: 'FULL' }], mullionWidth: 0.04 }, materialId: MATERIALS_V2.glass }, o.id, 'doors')
+      push({ type: 'placeDoor', id: `${o.id}-leaf`, openingId: o.id, ...frameWithinWall('DOOR', b.wallThicknessM), ...drawnSwing, assembly: { panels: [{ kind: 'LEAF', fraction: 1, hinge: drawnSwing.hingeSide ?? 'LEFT', glazing: 'FULL' }], mullionWidth: 0.04 }, materialId: MATERIALS_V2.glass }, o.id, 'doors')
     } else {
-      push({ type: 'placeDoor', id: `${o.id}-leaf`, openingId: o.id, ...frameWithinWall('DOOR', b.wallThicknessM), materialId: MATERIALS_V2.timber }, o.id, 'doors')
+      push({ type: 'placeDoor', id: `${o.id}-leaf`, openingId: o.id, ...frameWithinWall('DOOR', b.wallThicknessM), ...drawnSwing, materialId: MATERIALS_V2.timber }, o.id, 'doors')
     }
     evidence(o.id, o.provenance.head === 'SOURCE_EXACT' || o.provenance.head === 'SOURCE_CORROBORATED' ? 'SOURCE_CORROBORATED' : o.provenance.head === 'ASSUMED_FOR_RENDERING' ? 'ASSUMED_FOR_RENDERING' : 'SOURCE_DERIVED', o.why, { offset: o.provenance.interval, width: o.provenance.width, sill: o.provenance.sill, height: o.provenance.head, head: o.provenance.profile, kind: o.provenance.family })
   }

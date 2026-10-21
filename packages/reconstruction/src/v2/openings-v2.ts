@@ -61,6 +61,8 @@ export type OpeningV2 = {
   tallEdge?: 'LOW' | 'HIGH'
   profile: HeadProfile
   family: OpeningFamily
+  /** 005Y-N4 (C): the leaf as the plan draws it — which way it swings and at which end of the gap it hangs — when read. */
+  leaf?: DrawnDoorLeaf
   callout?: { widthCm: number; heightCm: number; evidenceId: string; distanceM: number; heightCandidates?: Array<{ cm: number; score: number }>; resolvedBy?: string }
   elevation?: { frameId: string; sillY: number; headY: number; contrast: number; confidence: number }
   /** Mullion positions as fractions of the width, from stubs the plan draws inside the gap. */
@@ -584,6 +586,9 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
       Math.min(hi, mouth.to) - Math.max(lo, mouth.from) >= 0.8 * Math.max(widthPlan, mouth.to - mouth.from) &&
       !glazingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM)
     let family: OpeningFamily = 'UNKNOWN'
+    // 005Y-N4 (C): the drawn leaf, when its symbol is read; the callout rings printed on the plan hide what is under them
+    let leaf: DrawnDoorLeaf | undefined
+    const calloutBoxes: PixelBox[] = input.callouts.flatMap((e) => (e.textBox ? [{ x0: e.textBox.x0 - 2, y0: e.textBox.y0 - 2, x1: e.textBox.x1 + 2, y1: e.textBox.y1 + 2 }] : []))
     const reachesFloor = sillY - host.floorY < 0.12
     if (mouthGap && heightsAssumed && mouth) {
       family = 'GARAGE_DOOR'
@@ -610,9 +615,10 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
       // gap is wide, and the arc it sweeps to the other — are a glazed leaf in a door, not a window to the floor. The
       // lines may be a threshold rather than glass: the leaf's glazing is named as read from them. On the ground storey
       // only: above it a floor-length glazing with no balcony in the model is a French window, drawn as before.
-      else if (reachesFloor && glazed && host.storeyIndex === 0 && widthM >= 0.75 && widthM <= 1.3 && headY - sillY <= 2.35 && doorLeafDrawn(input.planRaster, plan, host, interval, input.wallThicknessM)) {
+      else if (reachesFloor && glazed && host.storeyIndex === 0 && widthM >= 0.75 && widthM <= 1.3 && headY - sillY <= 2.35 && (leaf = doorLeafFound(input.planRaster, plan, host, interval, input.wallThicknessM, calloutBoxes, input.trace ? (d) => input.trace?.({ kind: 'DOOR_LEAF_DEBUG', interval: [round6(lo), round6(hi)], facade: host.facade, massId: host.massId, ...d }) : undefined)) !== undefined) {
         family = 'GLAZED_DOOR'
         prov.family = 'SOURCE_DERIVED'
+        if (leaf.swing === 'OUT') unresolved.push('opens outward: its leaf and arc are drawn outside the wall')
         unresolved.push('the leaf’s glazing (lines across the gap beside a drawn leaf and swing: glass, or a threshold the plan draws the same way)')
       } else if (reachesFloor && glazed && widthM >= 0.75 && widthM <= 2.0 && host.storeyIndex === 0 && !doorSwingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM)) family = 'WINDOW'
       else if (reachesFloor && widthM > 1.3 && widthM < 2.0) family = 'GLAZED_DOOR'
@@ -621,7 +627,7 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
     }
     const mullions = gap.stubs.map(([s0, s1]) => round6(((s0 + s1) / 2 - interval[0]) / widthM)).filter((f) => f > 0.05 && f < 0.95)
     const confidence = round6(Math.min(0.92, 0.5 + (callout ? 0.2 : 0) + (elevation ? 0.15 : 0) + (callout && elevation && prov.head === 'SOURCE_CORROBORATED' ? 0.07 : 0)))
-    input.trace?.({ kind: 'OPENING_GAP', id: `opening-${host.storeyIndex}-${host.facade.toLowerCase()}-${input.index}-${out.length}`, frameId: plan.frameId, massId: host.massId, storey: host.storeyIndex, facade: host.facade, pixelRect: gap.pixelRect, intervalM: [round6(lo), round6(hi)], widthPlanM: widthPlan, callouts: weighed, callout: callout ? { widthCm: callout.widthCm, heightCm: callout.heightCm, evidenceId: callout.evidenceId } : null, elevation: elevation ? { frameId: elevation.frameId, sillY: elevation.sillY, headY: elevation.headY } : null, family, provenanceFamily: prov.family, sillY: round6(sillY), headY: round6(headY), unresolved })
+    input.trace?.({ kind: 'OPENING_GAP', id: `opening-${host.storeyIndex}-${host.facade.toLowerCase()}-${input.index}-${out.length}`, frameId: plan.frameId, massId: host.massId, storey: host.storeyIndex, facade: host.facade, pixelRect: gap.pixelRect, intervalM: [round6(lo), round6(hi)], widthPlanM: widthPlan, callouts: weighed, callout: callout ? { widthCm: callout.widthCm, heightCm: callout.heightCm, evidenceId: callout.evidenceId } : null, elevation: elevation ? { frameId: elevation.frameId, sillY: elevation.sillY, headY: elevation.headY } : null, family, ...(leaf ? { leaf } : {}), provenanceFamily: prov.family, sillY: round6(sillY), headY: round6(headY), unresolved })
     out.push({
       id: `opening-${host.storeyIndex}-${host.facade.toLowerCase()}-${input.index}-${out.length}`,
       storeyIndex: host.storeyIndex,
@@ -636,6 +642,7 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
       tallEdge,
       profile,
       family,
+      ...(leaf ? { leaf } : {}),
       callout,
       elevation,
       mullions,
@@ -677,12 +684,29 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
  * ink-fraction test (`doorSwingDrawn`) cannot tell them apart. Leaf and arc are lines — paper a hand's breadth to either
  * side — where a planter's shrubs, a hatched floor or a filled symbol are blots.
  */
-export function doorLeafDrawn(raster: Raster, plan: PlanFrameV2, host: WallHost, interval: [number, number], wallThicknessM: number): boolean {
+export function doorLeafDrawn(raster: Raster, plan: PlanFrameV2, host: WallHost, interval: [number, number], wallThicknessM: number, occluders: readonly PixelBox[] = []): boolean {
+  return doorLeafFound(raster, plan, host, interval, wallThicknessM, occluders) !== undefined
+}
+
+/** 005Y-N4 (C): a pixel rectangle printed over the drawing (a callout's ring): what lies under it is not seen. */
+export type PixelBox = { x0: number; y0: number; x1: number; y1: number }
+/** 005Y-N4 (C): a drawn leaf and its arc: which way it opens (IN: into the body) and at which end of the gap it hangs. */
+export type DrawnDoorLeaf = { swing: 'IN' | 'OUT'; hingeAt: 'LOW' | 'HIGH' }
+
+/**
+ * 005Y-N4 (C): `doorLeafDrawn`, telling which side of the wall the leaf and its arc are drawn on and at which jamb the
+ * leaf hangs. A callout printed over the arc (as a door's own size often is, beside it) hides it: samples under an
+ * `occluders` box are unseen, neither ink nor paper, and the arc is judged on what is seen: at least half of it, or a
+ * third of it inked nearly throughout. With nothing hidden the test is `doorLeafDrawn`'s, unchanged.
+ */
+export function doorLeafFound(raster: Raster, plan: PlanFrameV2, host: WallHost, interval: [number, number], wallThicknessM: number, occluders: readonly PixelBox[] = [], debug?: (record: Record<string, unknown>) => void): DrawnDoorLeaf | undefined {
   const w = interval[1] - interval[0]
   const into = host.facade === 'FRONT' || host.facade === 'WEST' ? 1 : -1
   const alongX = host.facade === 'FRONT' || host.facade === 'REAR'
   const step = (plan.mppX + plan.mppY) / 2
-  return [into, -into].some((inward) => {
+  const hidden = (p: { x: number; y: number }): boolean => occluders.some((b) => p.x >= b.x0 && p.x <= b.x1 && p.y >= b.y0 && p.y <= b.y1)
+  let found: DrawnDoorLeaf | undefined
+  ;[into, -into].some((inward) => {
     const inner = host.centreAt + (inward * wallThicknessM) / 2
     const at = (along: number, depth: number): { x: number; y: number } => (alongX ? plan.toPixel(along, inner + inward * depth) : plan.toPixel(inner + inward * depth, along))
     const ground: number[] = []
@@ -702,6 +726,7 @@ export function doorLeafDrawn(raster: Raster, plan: PlanFrameV2, host: WallHost,
       let k = 0
       let n = 0
       for (let d = from; d <= to; d += step) {
+        if (hidden(at(along, d))) continue
         n += 1
         if (dark(at(along, d))) k += 1
       }
@@ -713,32 +738,36 @@ export function doorLeafDrawn(raster: Raster, plan: PlanFrameV2, host: WallHost,
       let k = 0
       let n = 0
       for (let d = 0.2 * w; d <= 0.9 * w; d += step) {
-        if (!dark(at(along, d))) continue
+        if (!dark(at(along, d)) || hidden(at(along + towards * 0.1, d))) continue
         n += 1
         if (!dark(at(along + towards * 0.1, d))) k += 1
       }
       return n === 0 ? 0 : k / n
     }
-    for (const [hinge, towards] of [[interval[0], 1], [interval[1], -1]] as const) {
+    for (const [hinge, towards, hingeAt] of [[interval[0], 1, 'LOW'], [interval[1], -1, 'HIGH']] as const) {
       // the leaf, at an offset from the jamb up to a leaf's thickness
       let leafAt: number | undefined
       for (let off = 0; off <= 0.12 && leafAt === undefined; off += step) {
         const along = hinge + towards * off
         if (share(0, 0.9 * w, along) >= 0.8 && share(1.1 * w, 1.3 * w, along) <= 0.3 && thinLeaf(along, towards) >= 0.7) leafAt = along
       }
+      debug?.({ inward, hingeAt, leafAt: leafAt === undefined ? null : round6(leafAt), leafShares: [0, 0.03, 0.06, 0.09, 0.12].map((off) => { const al = hinge + towards * off; return [round6(share(0, 0.9 * w, al)), round6(share(1.1 * w, 1.3 * w, al)), round6(thinLeaf(al, towards))] }) })
       if (leafAt === undefined) continue
       // the arc, its radius the gap's width, inked from 6° to 84° off the wall — reaching the far jamb and the leaf's
       // tip — and a line, paper a hand's breadth inside and outside it, from 30° on (nearer the wall it runs into the
       // wall's own ink), about one pivot in the wall's thickness
-      let found = false
-      for (let pivot = -wallThicknessM; pivot <= 0.1 * w && !found; pivot += step) {
+      let arc = false
+      for (let pivot = -wallThicknessM; pivot <= 0.1 * w && !arc; pivot += step) {
         let inked = 0
         let n = 0
         let thin = 0
         let m = 0
+        let samples = 0
         for (let deg = 6; deg <= 84; deg += 3) {
           const a = (deg * Math.PI) / 180
           const on = (r: number): boolean => dark(at(leafAt + towards * r * Math.cos(a), pivot + r * Math.sin(a)))
+          samples += 1
+          if (hidden(at(leafAt + towards * w * Math.cos(a), pivot + w * Math.sin(a)))) continue
           n += 1
           if (!on(w)) continue
           inked += 1
@@ -746,12 +775,19 @@ export function doorLeafDrawn(raster: Raster, plan: PlanFrameV2, host: WallHost,
           m += 1
           if (!on(w - 0.1) && !on(w + 0.1)) thin += 1
         }
-        found = inked / n >= 0.6 && m > 0 && thin / m >= 0.5
+        // unhidden, the arc as before; partly under a callout, a third of it seen and inked nearly throughout
+        const seenEnough = (n >= samples / 2 && inked / n >= 0.6) || (n < samples && n >= samples / 3 && inked / n >= 0.9)
+        arc = seenEnough && m > 0 && thin / m >= 0.5
+        if (debug && inked > 0) debug({ inward, hingeAt, pivot: round6(pivot), samples, seen: n, inked, thin, m })
       }
-      if (found) return true
+      if (arc) {
+        found = { swing: inward === into ? 'IN' : 'OUT', hingeAt }
+        return true
+      }
     }
     return false
   })
+  return found
 }
 
 /** Thin glazing lines drawn across the gap within the wall's thickness: a window or a glazed screen. */
