@@ -2570,3 +2570,23 @@ Unresolved, named: Marcówki stair (landing 0.30 m into the east wall; partition
 INTERSECTIONs; needs a stair-soffit top profile or the stair layout in reconstruction); Rarytasy entrance door opening
 outward still a window; side-view registration itself; phantom 421/71; chimneys lost for want of a registered side view
 (Arganie, Trytomy); corner posts kept by the model invariant; OWNER m3ea NOT_RUN.
+
+## Source-grounded architectural reasoning: stairs in their shaft, doors under callouts, rooflight symbols, AI second look (STAGE BUILDPLAN-ANALYZER-005Y-N4)
+
+Status: **PARTIAL_SOURCE_GROUNDED · OWNER_VISUAL_PENDING**. Branch `analyzer/005y-n4-general-architectural-understanding-v1`
+from `02cda69`; report `stage-reports/STAGE_BUILDPLAN_ANALYZER_005Y_N4_ARCHITECTURAL_UNDERSTANDING.md`, ledger
+`research/analyzer-005y-n4/ledger.json`. No new analog acquired; Trytomy, Arganie and Sasanki 3 replayed as controls.
+
+| Rule | Where | Effect on the five houses |
+|---|---|---|
+| A landing climbed onto over its edge riser starts on that riser (`LANDING.onRiser`, opt-in; default unchanged) | `model/stair-layout.ts`, `schema.ts`, `reconstruction/v2/emit.ts` | Marcówki U stair 3.89 → 3.62 m deep (one going too far before) |
+| A stair against the walls beside its flights, moved ≤ 0.15 m with its slab hole; walls walked into are under it; opposite walls too close → refused, ≤ 3 cm split and named | `reconstruction/v2/stair-fit.ts` | Marcówki moved (−0.037, +0.082) m |
+| Interior partitions under a flight stop at its stepped underside (POLYLINE top); nothing deleted | `reconstruction/v2/stair-fit.ts` | Marcówki 4 partitions (room 5, `**` closet); INTERSECTION 7 → 1 (named 2 cm chimney/wall residual) |
+| A door symbol under a printed callout: hidden samples neither ink nor paper; the leaf gives swing and hinge (`doorLeafFound`, `OpeningV2.leaf`) | `reconstruction/v2/openings-v2.ts`, `emit.ts` | Rarytasy entrance WINDOW → door opening OUT, hinge at the drawn jamb; Marcówki entrance hinge from the drawing |
+| Rooflight drawn symbol read only when it clearly wins (`drawnRooflightSymbol`) | `reconstruction/v2/roof-details.ts` | none passes on the five houses: positions stay at the ring, uncertainty named; A01 6/7, Goździkowce 7/7 |
+| AI_SECOND_LOOK: one flagged ambiguity, crop + hashes + 2–3 reader hypotheses, record `AI_SAYS/CV_SAYS`, provenance AI_SUGGESTED, owner consent required | `source-vision/second-look.ts` | no key, no consent: all three real questions `AI_SECOND_LOOK_LIVE_NOT_RUN`; production stays DETERMINISTIC_ONLY |
+
+Not done, named: pierless corner glazing (Goździkowce: grey-ring OCR 260/140 → 700/40 and 110/140 → 416/147, gap extent
+over a lighter-hatched wall, and the `OPENING_TOUCHES_WALL_EDGE` contract — design only); winders (`winderRegions` stays
+empty; the analogs with winders fail earlier in `findTreadLadders`, so the ≥ 3 analog stairs gate is NOT met); Rarytasy
+garage extent and phantom 471/71, sidelight, canopy and post; A01 7th rooflight ring; OWNER m3ea NOT_RUN.
