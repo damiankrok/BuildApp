@@ -79,13 +79,70 @@ export function worldFrameFrom(draft: StructuralLayoutDraft): WorldFrameV2 | und
   }
 }
 
+/** Beyond this share of disagreement with the sheet's scale, a face-to-face scale is not trusted to rescale the sheet. */
+const FACE_SCALE_MAX_SHARE = 0.03
+/**
+ * The sheet's scale stands unless it lays the stated span this many pixels or more off the drawn faces: a tick drawn
+ * on the face's first or last ink pixel is a pixel either way, and that is not a reason to rescale a sheet.
+ */
+const FACE_MISS_MIN_PX = 2
+/** An outer wall face is a wall band at least this share of the extent long, its outer edge within a wall of the extent's end. */
+const FACE_BAND_MIN_SHARE = 0.25
+
+type FaceBand = { axis: 'HORIZONTAL' | 'VERTICAL'; bounds: { x0: number; y0: number; x1: number; y1: number }; length: number }
+
+/**
+ * The outer wall faces at the two ends of one axis of a plan's extent: the outer edges of the long wall bands on each
+ * end, or undefined where either end is not a drawn outer face (an end the extent took from something else).
+ */
+export function outerFacesAlong(bands: readonly FaceBand[], axis: 'X' | 'Y', from: number, to: number): { from: number; to: number } | undefined {
+  const across = axis === 'X' ? 'VERTICAL' : 'HORIZONTAL'
+  const long = bands.filter((b) => b.axis === across && b.length >= FACE_BAND_MIN_SHARE * Math.abs(to - from))
+  const lowEdge = (b: FaceBand): number => (axis === 'X' ? b.bounds.x0 : b.bounds.y0)
+  // Band bounds are inclusive: the face is one past the last ink pixel.
+  const highEdge = (b: FaceBand): number => (axis === 'X' ? b.bounds.x1 : b.bounds.y1) + 1
+  // Within a couple of pixels of the extent's end, not a wall: a chain that stops on a wall's inner face has the outer
+  // face a wall away, and that is a different statement (a face pair), not a scale error.
+  const nearest = (edges: number[], at: number): number | undefined => edges.filter((e) => Math.abs(e - at) <= FACE_MISS_MIN_PX).sort((p, q) => Math.abs(p - at) - Math.abs(q - at) || p - q)[0]
+  const f0 = nearest(long.map(lowEdge), from)
+  const f1 = nearest(long.map(highEdge), to)
+  return f0 !== undefined && f1 !== undefined && f1 > f0 ? { from: f0, to: f1 } : undefined
+}
+
+/**
+ * The metres per pixel that make the span the chains state across the base plan's extent run from outer wall face to
+ * outer wall face, as an overall dimension does.
+ *
+ * Why: the registration's scale is a least-squares fit over the sheet's anchors, and an axis anchored only by short
+ * spans carries their pixel rounding — 2–3 % on a 0.55 m span. The layout sized the building by the chains (the
+ * ladder), so a frame scaled by the registration ends the building a few pixels off the drawn wall face, and the wall
+ * ink left between is read as a wall of its own. The extent's ends are not always the faces either (a grid line a few
+ * pixels outside them), so the stated metres are laid between the faces the plan's own wall bands draw. Where nothing
+ * is stated, no long wall band marks a face at both ends, or the sheet's scale already lands within a pixel or so of
+ * the faces, the sheet's scale stands.
+ */
+export function faceToFaceMetresPerPixel(at: ((px: number) => number) | undefined, extentFrom: number, extentTo: number, faces: { from: number; to: number } | undefined, registered: number): number {
+  if (!at || !faces || !(extentTo > extentFrom)) return registered
+  const stated = at(extentTo) - at(extentFrom)
+  const facesPx = faces.to - faces.from
+  if (Math.abs(stated / registered - facesPx) < FACE_MISS_MIN_PX) return registered
+  const mpp = stated / facesPx
+  return Math.abs(mpp / registered - 1) <= FACE_SCALE_MAX_SHARE ? mpp : registered
+}
+
 /** A plan reading registered into the v2 frame through the 03R world frame of the base plan. */
 export function planFrameV2(plan: PlanReading, storeyIndex: number, world: WorldFrameV2, draft: StructuralLayoutDraft): PlanFrameV2 | undefined {
   const base = draft.frame
   if (!base) return undefined
   const isBase = draft.base?.frame.id === plan.frame.id
-  let mppX = base.metresPerPixelX
-  let mppY = base.metresPerPixelY
+  const basePlan = draft.base
+  const extent = basePlan?.decomposition.envelope?.rect
+  const facesX = extent && basePlan ? outerFacesAlong(basePlan.bands, 'X', extent.x0, extent.x1) : undefined
+  const facesY = extent && basePlan ? outerFacesAlong(basePlan.bands, 'Y', extent.y0, extent.y1) : undefined
+  const baseMppX = extent ? faceToFaceMetresPerPixel(base.x, extent.x0, extent.x1, facesX, base.metresPerPixelX) : base.metresPerPixelX
+  const baseMppY = extent ? faceToFaceMetresPerPixel(base.z, extent.y0, extent.y1, facesY, base.metresPerPixelY) : base.metresPerPixelY
+  let mppX = baseMppX
+  let mppY = baseMppY
   let ox = base.originPx.x
   let oy = base.originPx.y
   let why = 'the base plan, through the chain-registered world frame of the 03R layout'
@@ -93,8 +150,8 @@ export function planFrameV2(plan: PlanReading, storeyIndex: number, world: World
     const alignment = draft.alignments.get(plan.frame.id)
     if (!alignment) return undefined
     // base_px = other_px * scale + offset  ⇒  other_px = (base_px − offset) / scale
-    mppX = base.metresPerPixelX * alignment.scale
-    mppY = base.metresPerPixelY * alignment.scale
+    mppX = baseMppX * alignment.scale
+    mppY = baseMppY * alignment.scale
     ox = (base.originPx.x - alignment.offsetX) / alignment.scale
     oy = (base.originPx.y - alignment.offsetY) / alignment.scale
     why = `aligned onto the base plan by its walls (${alignment.why})`
