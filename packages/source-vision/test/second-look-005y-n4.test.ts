@@ -6,13 +6,13 @@
  *    is refused; the record's provenance is always AI_SUGGESTED, never a source fact.
  */
 import { describe, expect, it, vi } from 'vitest'
-import { sha256Hex } from '@buildapp/source-common'
+import { createHash } from 'node:crypto'
 import { fixtureKey, fixtureVisionReasoner, nullVisionReasoner, secondLook, secondLookLine } from '../src/index.js'
 import type { SecondLookQuestion, VisionReasoner } from '../src/index.js'
 
 // a synthetic crop: the bytes stand for an encoded picture of a ring printed "260/140"; only their hash matters here
 const bytes = new TextEncoder().encode('synthetic ring callout 260/140 on a grey floor fill')
-const cropHash = sha256Hex(bytes)
+const cropHash = createHash('sha256').update(bytes).digest('hex')
 const question = (cv: string | null): SecondLookQuestion => ({
   id: 'q-corner-front',
   ambiguity: 'a ring callout beside a corner window read as 700/40, which fits no gap; its glyphs are faint on a grey fill',

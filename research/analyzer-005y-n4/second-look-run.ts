@@ -13,7 +13,7 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { PNG } from 'pngjs'
-import { sha256Hex } from '@buildapp/source-common'
+import { createHash } from 'node:crypto'
 import { anthropicVisionReasoner, secondLook, secondLookLine } from '@buildapp/source-vision'
 
 type Q = { id: string; ambiguity: string; house: string; assetId: string; assetByteHash: string; png: string; ring: { x0: number; y0: number; x1: number; y1: number }; hypotheses: Array<{ id: string; text: string }>; cv: { hypothesisId: string | null; why: string } }
@@ -35,7 +35,7 @@ for (const q of questions) {
   const bytes = PNG.sync.write(crop)
   writeFileSync(join(out, `${q.id}.png`), bytes)
   const record = await secondLook(
-    { id: q.id, ambiguity: q.ambiguity, source: { assetId: q.assetId, assetByteHash: q.assetByteHash, cropRectPx: { x0, y0, x1, y1 } }, crop: { bytes, byteHash: sha256Hex(bytes), mediaType: 'image/png', width: crop.width, height: crop.height }, hypotheses: q.hypotheses, cv: q.cv },
+    { id: q.id, ambiguity: q.ambiguity, source: { assetId: q.assetId, assetByteHash: q.assetByteHash, cropRectPx: { x0, y0, x1, y1 } }, crop: { bytes, byteHash: createHash('sha256').update(bytes).digest('hex'), mediaType: 'image/png', width: crop.width, height: crop.height }, hypotheses: q.hypotheses, cv: q.cv },
     reasoner,
     { ownerConsent: consent },
   )
