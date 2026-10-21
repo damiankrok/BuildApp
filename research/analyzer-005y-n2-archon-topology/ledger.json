@@ -1,0 +1,636 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005Y-N2-ARCHON-TOPOLOGY-OPENINGS-VISUAL",
+ "status": [
+  "PARTIAL_SOURCE_GROUNDED",
+  "OWNER_VISUAL_PENDING",
+  "STOP"
+ ],
+ "base": "4f4116b57cceb4187e219de8f2761053560098cb",
+ "branch": "analyzer/005y-n2-archon-topology-openings-debug-v1",
+ "mirrorUntouched": {
+  "branch": "claude/new-session-3kzcgh",
+  "sha": "bfaf286e95105c2cdb32df2d298d3cd93bd43449"
+ },
+ "houses": {
+  "a01": {
+   "modelSha256": {
+    "before": "be796f9fc24a411f7a1a4178b57516888f48b501fbe7b5c3000f70e8bcbb2127",
+    "after": "2ebcf05b9bdb3120df714a7994c5fb491919540cfa8edb3caa8f5c58603a509c"
+   },
+   "productionSeconds": {
+    "before": 384.899910791,
+    "after": 383.134249048
+   },
+   "exit": {
+    "before": "exit=0",
+    "after": "exit=0"
+   },
+   "footprintM": {
+    "before": [
+     10.5,
+     8.008
+    ],
+    "after": [
+     10.5,
+     8.008
+    ]
+   },
+   "chimneys": {
+    "before": 3,
+    "after": 3
+   },
+   "rooflights": {
+    "before": 6,
+    "after": 6,
+    "readings": [
+     "direct",
+     "template/other",
+     "direct",
+     "direct",
+     "direct",
+     "direct"
+    ]
+   },
+   "pockets": [],
+   "passages": [],
+   "openingsChanged": []
+  },
+  "gozd": {
+   "modelSha256": {
+    "before": "68d6f2e7f57f879406f933317f95efaf812d1a6aed88a1366b8b6f33264f55a4",
+    "after": "869774d095b76fcb200205b125d0bb4284d48da227b8b96ff192bba12907ccaa"
+   },
+   "productionSeconds": {
+    "before": 355.098431756,
+    "after": 337.710473711
+   },
+   "exit": {
+    "before": "exit=0",
+    "after": "exit=0"
+   },
+   "footprintM": {
+    "before": [
+     13.82,
+     9.5
+    ],
+    "after": [
+     13.82,
+     9.5
+    ]
+   },
+   "chimneys": {
+    "before": 1,
+    "after": 1
+   },
+   "rooflights": {
+    "before": 7,
+    "after": 7,
+    "readings": [
+     "sibling",
+     "direct",
+     "sibling",
+     "sibling",
+     "direct",
+     "sibling",
+     "direct"
+    ]
+   },
+   "pockets": [
+    "pocket-main-0-0-back",
+    "pocket-main-0-0-return-high",
+    "pocket-main-0-0-return-low"
+   ],
+   "passages": [
+    {
+     "id": "pocket-main-0-0-mouth",
+     "wall": "ring-main-0-w0",
+     "kind": "PASSAGE",
+     "width": 3.19,
+     "sill": 0,
+     "height": 2.52,
+     "fill": "NONE"
+    }
+   ],
+   "openingsChanged": [
+    {
+     "id": "opening-0-front-0-1",
+     "before": [
+      "WINDOW",
+      "WINDOW",
+      3.14,
+      0.9,
+      1.3
+     ],
+     "after": null
+    },
+    {
+     "id": "pocket-main-0-0-mouth",
+     "before": null,
+     "after": [
+      "PASSAGE",
+      "NONE",
+      3.19,
+      0,
+      2.52
+     ]
+    },
+    {
+     "id": "pocket-main-0-0-opening-0-front-8-0",
+     "before": null,
+     "after": [
+      "DOOR",
+      "DOOR",
+      1.05,
+      0,
+      2.1
+     ]
+    }
+   ]
+  },
+  "marcowki": {
+   "modelSha256": {
+    "before": "bf80f4556a7c2b7447b9d674915e93e2d8cd8aaaaf84f42d8fe1033bb9fc7b61",
+    "after": "124e5abc5e6959d89011f2a06edac1e5b9bc135981d959355feaa9173da66545"
+   },
+   "productionSeconds": {
+    "before": 351.838971272,
+    "after": 324.43282626
+   },
+   "exit": {
+    "before": "exit=0",
+    "after": "exit=0"
+   },
+   "footprintM": {
+    "before": [
+     12.05,
+     12.61
+    ],
+    "after": [
+     12.05,
+     12.61
+    ]
+   },
+   "chimneys": {
+    "before": 2,
+    "after": 2
+   },
+   "rooflights": {
+    "before": 3,
+    "after": 3,
+    "readings": [
+     "template/other",
+     "template/other",
+     "template/other"
+    ]
+   },
+   "pockets": [],
+   "passages": [],
+   "openingsChanged": [
+    {
+     "id": "opening-0-front-0-1",
+     "before": [
+      "WINDOW",
+      "WINDOW",
+      1.05,
+      0,
+      2.1
+     ],
+     "after": [
+      "DOOR",
+      "GLAZED",
+      1.05,
+      0,
+      2.1
+     ]
+    }
+   ]
+  },
+  "ciesz": {
+   "modelSha256": {
+    "before": "f512a136a1d4bd5f2a0c712c59d5279a9c1c41a83cd3d8c6a40c2ad4fadf2f6c",
+    "after": "2ac1ed37c1af60c0710582f99ee6642a50d062e922c1440a11fd3062034cc0ad"
+   },
+   "productionSeconds": {
+    "before": 223.755948472,
+    "after": 209.705997303
+   },
+   "exit": {
+    "before": "exit=0",
+    "after": "exit=0"
+   },
+   "footprintM": {
+    "before": [
+     11.7,
+     15.8
+    ],
+    "after": [
+     11.7,
+     16.6
+    ]
+   },
+   "chimneys": {
+    "before": 2,
+    "after": 2
+   },
+   "rooflights": {
+    "before": 0,
+    "after": 0,
+    "readings": []
+   },
+   "pockets": [
+    "pocket-main-0-0-back",
+    "pocket-main-0-0-return-high",
+    "pocket-main-0-0-return-low"
+   ],
+   "passages": [
+    {
+     "id": "pocket-main-0-0-mouth",
+     "wall": "ring-main-0-w0",
+     "kind": "PASSAGE",
+     "width": 2.54,
+     "sill": 0,
+     "height": 3.3,
+     "fill": "NONE"
+    }
+   ],
+   "openingsChanged": [
+    {
+     "id": "opening-0-front-0-0",
+     "before": [
+      "WINDOW",
+      "WINDOW",
+      3.75,
+      0.9,
+      1.3
+     ],
+     "after": [
+      "WINDOW",
+      "WINDOW",
+      1.81,
+      0.9,
+      1.3
+     ]
+    },
+    {
+     "id": "opening-0-front-0-1",
+     "before": [
+      "DOOR",
+      "DOOR",
+      1.06,
+      0,
+      2.1
+     ],
+     "after": null
+    },
+    {
+     "id": "opening-0-front-0-2",
+     "before": [
+      "WINDOW",
+      "WINDOW",
+      3.69,
+      0.9,
+      1.3
+     ],
+     "after": [
+      "WINDOW",
+      "WINDOW",
+      2.75,
+      0.9,
+      1.3
+     ]
+    },
+    {
+     "id": "opening-0-west-3-4",
+     "before": [
+      "WINDOW",
+      "WINDOW",
+      1.22,
+      0.9,
+      1.3
+     ],
+     "after": [
+      "WINDOW",
+      "WINDOW",
+      2.02,
+      0.9,
+      1.3
+     ]
+    },
+    {
+     "id": "pocket-main-0-0-mouth",
+     "before": null,
+     "after": [
+      "PASSAGE",
+      "NONE",
+      2.54,
+      0,
+      3.3
+     ]
+    },
+    {
+     "id": "pocket-main-0-0-opening-0-front-4-0",
+     "before": null,
+     "after": [
+      "DOOR",
+      "DOOR",
+      0.88,
+      0,
+      2.1
+     ]
+    }
+   ]
+  },
+  "rary": {
+   "modelSha256": {
+    "before": "3f0f71833f035914f1eea68164d571919358b585fadd9cca66aba1ce9f69daa3",
+    "after": "3f0f71833f035914f1eea68164d571919358b585fadd9cca66aba1ce9f69daa3"
+   },
+   "productionSeconds": {
+    "before": 303.597434093,
+    "after": 300.532482028
+   },
+   "exit": {
+    "before": "exit=0",
+    "after": "exit=0"
+   },
+   "footprintM": {
+    "before": [
+     17.21,
+     14.7
+    ],
+    "after": [
+     17.21,
+     14.7
+    ]
+   },
+   "chimneys": {
+    "before": 1,
+    "after": 1
+   },
+   "rooflights": {
+    "before": 0,
+    "after": 0,
+    "readings": []
+   },
+   "pockets": [],
+   "passages": [],
+   "openingsChanged": []
+  }
+ },
+ "decisions": [
+  {
+   "id": "D1",
+   "what": "front of a body through thin bay strips",
+   "where": "packages/reconstruction/src/layout.ts bayStripsOf, pocketRecesses",
+   "firstBad": "layout.ts:1797 MIN_MASS_WALL_FRACTION 0.35 (base)",
+   "house": "ciesz",
+   "outcome": "ADOPTED",
+   "evidence": "mass 11.70 x 15.80 -> 11.70 x 16.60; right elevation then registers on a 16.60 m walled span"
+  },
+  {
+   "id": "D2",
+   "what": "recess inside a body's rectangle built as a pocket (PASSAGE, returns, back wall on the plan's ink, back-wall openings, rooms barred, partitions past it kept)",
+   "where": "packages/reconstruction/src/v2/reconstruct-v2.ts pocketsOf; building.ts PocketV2; emit.ts; wall-topology.ts keepBeyond",
+   "firstBad": "reconstruct-v2.ts:407 (layout.recesses only counted) and :1162 (the gap on the face became an opening)",
+   "house": "ciesz, gozd",
+   "outcome": "ADOPTED"
+  },
+  {
+   "id": "D3",
+   "what": "a wall following roof planes stops at the plane inside its holes",
+   "where": "packages/geometry/src/compile.ts",
+   "firstBad": "compile.ts:161 holesOfPlane into planeSurface; architecture-compiler.ts:101 coveringAt",
+   "house": "ciesz",
+   "outcome": "ADOPTED",
+   "evidence": "scene diagnostics 1 -> 0; plane-hole-wall test reproduces (6 m + warning without, 2.3 m with)"
+  },
+  {
+   "id": "D4",
+   "what": "a door's plan symbol read strictly (leaf + arc, thin, ending, either face), ground storey",
+   "where": "packages/reconstruction/src/v2/openings-v2.ts doorLeafDrawn + GLAZED_DOOR rule",
+   "firstBad": "openings-v2.ts:601/604 (glazed floor-level door-width gap with a swing falls to WINDOW) and :736 (ink-fraction swing test, fixed grey)",
+   "house": "marcowki",
+   "outcome": "ADOPTED"
+  },
+  {
+   "id": "D5",
+   "what": "one ground per house for band-registered views",
+   "where": "reconstruct-v2.ts after the elevation registration loop",
+   "firstBad": "frame.ts:407 ground tolerance 0.9 m",
+   "house": "ciesz (right elevation exposed by D1)",
+   "outcome": "ADOPTED (refusal by name)"
+  },
+  {
+   "id": "D6",
+   "what": "sibling-supported recogniser readings say so",
+   "where": "packages/reconstruction/src/v2/roof-details.ts withRecognisedHalves",
+   "firstBad": "roof-details.ts:716 (base) reading without its support",
+   "house": "gozd, a01",
+   "outcome": "ADOPTED (text only)"
+  },
+  {
+   "id": "D7",
+   "what": "audit of interior.filter(... masses.find(... || true))",
+   "where": "reconstruct-v2.ts:1313 (base)",
+   "outcome": "REMOVED dead filter; every reading always passed; behaviour unchanged"
+  },
+  {
+   "id": "D8",
+   "what": "A01 rear wall strip",
+   "firstBad": "layout.ts:476 band window maxThickness round(1.9 x wallPx) = 21 px vs a 22 px exterior wall; layout.ts:2250 wallStripsOf has no band to see",
+   "outcome": "REFUSED (see rejectedTrials R2, R3)"
+  },
+  {
+   "id": "D9",
+   "what": "Cieszynianki garage family",
+   "firstBad": "openings-v2.ts:524 (no garage door without a read height or a labelled garage room); ring 75/25 refused (dropped leading digit, unstable)",
+   "outcome": "REFUSED: family stays ASSUMED_FOR_RENDERING; width 2.75 from the plan gap"
+  }
+ ],
+ "rejectedTrials": [
+  {
+   "id": "R1",
+   "trial": "N2_FORCE_BAYS: Cieszynianki bay strips as separate 0.8 m bodies",
+   "result": "MODEL_EMISSION_FAILED (WALL_CONSUMED, WALLS_OVERLAP)",
+   "decision": "removed"
+  },
+  {
+   "id": "R2",
+   "trial": "band window max(1.9w, 2w+1) for every band",
+   "result": "A01 depth 8.30 and zone-min_z gone; Gozdzikowce garage 325/225 -> window, partitions changed, chimneys 1 -> 2",
+   "decision": "rejected (regression on another house)"
+  },
+  {
+   "id": "R3",
+   "trial": "add only thick (>1.9w), long (>=6w) bands clear of the window's bands",
+   "result": "A01 PLAN_RESOLUTION_INCONCLUSIVE (35 m2 vs 87.5 m2)",
+   "decision": "rejected"
+  },
+  {
+   "id": "R4",
+   "trial": "door rule without thinness / leaf end",
+   "result": "Marcowki 110/230 by a planter -> door (shrubs as leaf and arc); Rarytasy cupboard edge as a leaf",
+   "decision": "tightened"
+  },
+  {
+   "id": "R5",
+   "trial": "door rule on every storey",
+   "result": "Gozdzikowce attic: 1 of 3 identical 110/220 a door",
+   "decision": "limited to the ground storey"
+  },
+  {
+   "id": "R6",
+   "trial": "pocket walls on the region's edges",
+   "result": "005N entrance fixture: walls half a wall off (region cut on centre lines)",
+   "decision": "faces from the plan's ink"
+  },
+  {
+   "id": "R7",
+   "trial": "pocket walls as hosts dropping collinear partitions",
+   "result": "partitions behind the recess lost",
+   "decision": "keepBeyond"
+  },
+  {
+   "id": "R8",
+   "trial": "pocket walls full storey height under an upper slab",
+   "result": "Gozdzikowce 3x COPLANAR_DUPLICATE with slab-main-1",
+   "decision": "stop under the slab"
+  }
+ ],
+ "commands": [
+  "OFFLINE=1 PROGRESS=1 TELEMETRY=1 npx vite-node packages/analysis-service/scripts/second-house.ts -- --package <pkg> --cache <cache> --out <dir> --recogniser   (scripts/prod5.sh, five houses, base and final)",
+  "FEATURE_DEBUG=1 npx vite-node research/analyzer-005y-archon-visual/replay-solver.ts -- --run <run> --package <pkg> --cache <cache> --out <dir> --grep <re>   (scripts/replay5.sh)",
+  "npx vite-node research/analyzer-005y-n2-archon-topology/scene-diagnostics.ts -- <model.json>",
+  "npx vite-node research/analyzer-005y-n2-archon-topology/band-window.ts -- <plan.png>",
+  "npx tsc -p tsconfig.json",
+  "npx vitest run packages/reconstruction packages/geometry packages/model packages/source-metrics",
+  "npx vite build apps/web --outDir <out>/dist; npx vite preview apps/web --outDir <out>/dist --port 4182; node capture.mjs <models.json> <shots>"
+ ],
+ "checkpointGaps": [
+  {
+   "house": "a01",
+   "run": "before",
+   "events": 353,
+   "totalMs": 373276,
+   "maxGapMs": 2432,
+   "maxGapAt": "EXTRACTING_OBSERVATIONS/METRIC_FRAMES -> EXTRACTING_OBSERVATIONS/METRIC_FRAMES (HEARTBEAT)",
+   "kinds": [
+    "HEARTBEAT",
+    "PHASE_START"
+   ]
+  },
+  {
+   "house": "a01",
+   "run": "after",
+   "events": 354,
+   "totalMs": 372946,
+   "maxGapMs": 2033,
+   "maxGapAt": "EXTRACTING_OBSERVATIONS/METRIC_FRAMES -> EXTRACTING_OBSERVATIONS/METRIC_FRAMES (HEARTBEAT)",
+   "kinds": [
+    "HEARTBEAT",
+    "PHASE_START"
+   ]
+  },
+  {
+   "house": "gozd",
+   "run": "before",
+   "events": 322,
+   "totalMs": 343318,
+   "maxGapMs": 2312,
+   "maxGapAt": "EXTRACTING_OBSERVATIONS/OBSERVE_ASSETS -> EXTRACTING_OBSERVATIONS/OBSERVE_ASSETS (HEARTBEAT)",
+   "kinds": [
+    "HEARTBEAT",
+    "PHASE_START"
+   ]
+  },
+  {
+   "house": "gozd",
+   "run": "after",
+   "events": 309,
+   "totalMs": 327187,
+   "maxGapMs": 1868,
+   "maxGapAt": "EXTRACTING_OBSERVATIONS/METRIC_FRAMES -> EXTRACTING_OBSERVATIONS/METRIC_FRAMES (HEARTBEAT)",
+   "kinds": [
+    "HEARTBEAT",
+    "PHASE_START"
+   ]
+  },
+  {
+   "house": "marcowki",
+   "run": "before",
+   "events": 323,
+   "totalMs": 341291,
+   "maxGapMs": 2779,
+   "maxGapAt": "SOLVING_METRICS/SOLVE_METRICS -> BUILDING_MODEL/BUILD_MODEL (PHASE_START)",
+   "kinds": [
+    "HEARTBEAT",
+    "PHASE_START"
+   ]
+  },
+  {
+   "house": "marcowki",
+   "run": "after",
+   "events": 300,
+   "totalMs": 315762,
+   "maxGapMs": 2622,
+   "maxGapAt": "SOLVING_METRICS/SOLVE_METRICS -> BUILDING_MODEL/BUILD_MODEL (PHASE_START)",
+   "kinds": [
+    "HEARTBEAT",
+    "PHASE_START"
+   ]
+  },
+  {
+   "house": "ciesz",
+   "run": "before",
+   "events": 199,
+   "totalMs": 213538,
+   "maxGapMs": 2425,
+   "maxGapAt": "EXTRACTING_OBSERVATIONS/METRIC_FRAMES -> EXTRACTING_OBSERVATIONS/METRIC_FRAMES (HEARTBEAT)",
+   "kinds": [
+    "HEARTBEAT",
+    "PHASE_START"
+   ]
+  },
+  {
+   "house": "ciesz",
+   "run": "after",
+   "events": 190,
+   "totalMs": 200813,
+   "maxGapMs": 3095,
+   "maxGapAt": "EXTRACTING_OBSERVATIONS/METRIC_FRAMES -> EXTRACTING_OBSERVATIONS/METRIC_FRAMES (HEARTBEAT)",
+   "kinds": [
+    "HEARTBEAT",
+    "PHASE_START"
+   ]
+  },
+  {
+   "house": "rary",
+   "run": "before",
+   "events": 273,
+   "totalMs": 291192,
+   "maxGapMs": 2246,
+   "maxGapAt": "EXTRACTING_OBSERVATIONS/METRIC_FRAMES -> EXTRACTING_OBSERVATIONS/METRIC_FRAMES (HEARTBEAT)",
+   "kinds": [
+    "HEARTBEAT",
+    "PHASE_START"
+   ]
+  },
+  {
+   "house": "rary",
+   "run": "after",
+   "events": 271,
+   "totalMs": 289399,
+   "maxGapMs": 1888,
+   "maxGapAt": "EXTRACTING_OBSERVATIONS/OBSERVE_ASSETS -> EXTRACTING_OBSERVATIONS/OBSERVE_ASSETS (HEARTBEAT)",
+   "kinds": [
+    "HEARTBEAT",
+    "PHASE_START"
+   ]
+  }
+ ],
+ "failures": [
+  "a baseline started while layout.ts was being edited (each house loads code afresh): killed, WIP saved as a patch, baseline rerun on a clean tree",
+  "a final production run started before the door rule's thinness fix: stopped and rerun on the committed code",
+  "pkill/grep patterns matching the agent's own shell ended two commands (exit 144); processes are stopped by PID since"
+ ]
+}
