@@ -86,11 +86,13 @@ export type WallCompileOutput = {
 }
 
 const EPS = 1e-9
+/** Breaks along a wall closer than this are one: a micrometre, far below anything drawn, far above rounding. */
+const BREAK_MERGE = 1e-6
 
-function uniqueSorted(values: number[], lo: number, hi: number): number[] {
+function uniqueSorted(values: number[], lo: number, hi: number, merge = EPS): number[] {
   const all = values.filter((x) => Number.isFinite(x) && x >= lo - EPS && x <= hi + EPS).sort((a, b) => a - b)
   const out: number[] = []
-  for (const x of all) if (out.length === 0 || x - out[out.length - 1] > EPS) out.push(x)
+  for (const x of all) if (out.length === 0 || x - out[out.length - 1] > merge) out.push(x)
   if (out.length > 0) {
     out[0] = lo
     out[out.length - 1] = hi
@@ -216,7 +218,7 @@ export function compileWall(input: WallCompileInput): WallCompileOutput {
     const hit = topCache.get(key)
     if (hit !== undefined) return hit
     let t = input.top(u, c)
-    for (const b of bBreaks) if (Math.abs(t - b) <= EPS) t = b
+    for (const b of bBreaks) if (Math.abs(t - b) <= BREAK_MERGE) t = b
     topCache.set(key, t)
     return t
   }
@@ -257,7 +259,9 @@ export function compileWall(input: WallCompileInput): WallCompileOutput {
   const withHeads = uniqueSorted([...candidateBreaks, ...headCrossings], A0, A1)
   const crossings: number[] = []
   for (let i = 0; i + 1 < withHeads.length; i++) crossings.push(...crossingsBetween(withHeads[i], withHeads[i + 1], [0, T]))
-  const aBreaks = uniqueSorted([...withHeads, ...crossings], A0, A1)
+  // A crossing a hair from a jamb (a head that meets the top exactly at its edge) is that jamb: two breaks a micrometre
+  // apart tile a strip with no width, and its faces are slivers that close nothing.
+  const aBreaks = uniqueSorted([...withHeads, ...crossings], A0, A1, BREAK_MERGE)
 
   const covering = (u0: number, u1: number): Opening[] => accepted.filter((o) => o.offset <= u0 + EPS && o.offset + o.width >= u1 - EPS)
 

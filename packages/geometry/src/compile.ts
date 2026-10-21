@@ -41,6 +41,11 @@ const byId = <T extends { id: string }>(list: readonly T[]): T[] => [...list].so
 
 export type WallTop = { top: TopFunction; breaks: number[]; diagnostics: CompileDiagnostic[] }
 
+/** How far inside a wall's material its top is read when the point itself lies on an edge member's boundary. */
+const BOUNDARY_NUDGE = 1e-6
+/** A change of underside this large across `BOUNDARY_NUDGE` is a member's step, not the slope of a plate. */
+const STRIP_STEP = 1e-3
+
 /**
  * The top function of a wall: flat, an explicit polyline, or the underside of
  * a roof. `span` is the physical `a` range the wall occupies after topology
@@ -85,10 +90,21 @@ export function wallTopFunction(
   }
   const g = entry.geometry
   const f = wallFrame(wall, level)
+  // A wall's face or end can lie exactly on the inner edge of an edge member's strip (a wall standing behind a gable
+  // frame, its outer face against the frame's back): the point is on the strip's boundary, but the wall's material is
+  // not under the strip. The top there is the underside above the material, so a point whose underside differs a hair
+  // inside the wall is read there. Elsewhere the underside is continuous and the point is read where it is.
+  const inside = (u: number, c: number): { x: number; z: number } => wallPlanPoint(f, Math.min(Math.max(u, span.a0 + BOUNDARY_NUDGE), span.a1 - BOUNDARY_NUDGE), Math.min(Math.max(c, BOUNDARY_NUDGE), wall.thickness - BOUNDARY_NUDGE))
   const top: TopFunction = (u, c) => {
     const p = wallPlanPoint(f, u, c)
     if (!g.covers(p.x, p.z)) return wall.height
-    return Math.min(wall.height, g.undersideAt(p.x, p.z) - f.baseY)
+    let under = g.undersideAt(p.x, p.z)
+    const q = inside(u, c)
+    if (g.covers(q.x, q.z)) {
+      const there = g.undersideAt(q.x, q.z)
+      if (Math.abs(there - under) > STRIP_STEP) under = there
+    }
+    return Math.min(wall.height, under - f.baseY)
   }
   const breaks: number[] = []
   const diagnostics: CompileDiagnostic[] = []
