@@ -669,10 +669,17 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
         const first = h.flights[0]
         // The first riser line's left-hand end, facing the direction of travel.
         const start = first.direction === 'PLUS_X' ? { x: first.from, z: first.band.to } : first.direction === 'MINUS_X' ? { x: first.from, z: first.band.from } : first.direction === 'PLUS_Z' ? { x: first.band.from, z: first.from } : { x: first.band.to, z: first.from }
-        const segments: Array<{ kind: 'FLIGHT'; risers: number; going: number } | { kind: 'LANDING'; length: number; turn: 'NONE' | 'LEFT' | 'RIGHT'; onRiser?: true }> = []
+        const segments: Array<{ kind: 'FLIGHT'; risers: number; going: number } | { kind: 'LANDING'; length: number; turn: 'NONE' | 'LEFT' | 'RIGHT'; onRiser?: true } | { kind: 'WINDER'; risers: number; turn: 'LEFT' | 'RIGHT'; angleDeg: 90 }> = []
         h.flights.forEach((f, i) => {
-          segments.push({ kind: 'FLIGHT', risers: f.risers, going: round6(f.goingM) })
           const landing = h.landings[i]
+          // 005Y-N5 (C4): a fanning square's first riser is the flight's last line (its entry edge): the flight hands it to
+          // the winder, whose drawn tread lines are the rest
+          if (landing?.winders && f.risers > 1) {
+            segments.push({ kind: 'FLIGHT', risers: f.risers - 1, going: round6(f.goingM) })
+            segments.push({ kind: 'WINDER', risers: landing.winders + 1, turn: landing.turn, angleDeg: 90 })
+            return
+          }
+          segments.push({ kind: 'FLIGHT', risers: f.risers, going: round6(f.goingM) })
           // 005Y-N4: the landing square starts on the flight's last riser line (the landing edge is that riser), so the riser climbs onto it
           if (landing) segments.push({ kind: 'LANDING', length: round6(h.widthM), turn: landing.turn, onRiser: true })
         })

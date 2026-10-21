@@ -47,7 +47,17 @@ export type StairFlightHypothesis = {
   goingM: number
 }
 
-export type StairLandingHypothesis = { index: number; x0: number; z0: number; x1: number; z1: number; turn: 'LEFT' | 'RIGHT' }
+export type StairLandingHypothesis = {
+  index: number
+  x0: number
+  z0: number
+  x1: number
+  z1: number
+  turn: 'LEFT' | 'RIGHT'
+  /** 005Y-N5 (C4): the tread lines a winder draws across the square (its risers), when it fans instead of resting. */
+  winders?: number
+  windersWhy?: string
+}
 
 export type StairTopologyHypothesis = {
   id: string
@@ -401,10 +411,20 @@ export function assembleStair(raster: Raster, plan: PlanFrameV2, ladders: readon
         return centreOf(l) < (nextL.lines[0] + nextL.lines[nextL.lines.length - 1]) / 2
       })()
       const nextDirection = nextL.along === 'X' ? (nextForward ? 'PLUS_X' : 'MINUS_X') : nextForward ? 'PLUS_Z' : 'MINUS_Z'
-      landings.push({ index: landings.length, ...roundRect(square), turn: turnOf(direction, nextDirection) })
+      const turn = turnOf(direction, nextDirection)
+      // 005Y-N5 (C4): the square fans when tread lines radiate across it from the newel, the corner on the turn side of
+      // the entry edge
+      const d = DIRECTION_VECTORS[direction]
+      const left = { x: -d.z, z: d.x }
+      const right = { x: d.z, z: -d.x }
+      const side = turn === 'LEFT' ? left : right
+      const sideBand = (side.x + side.z > 0 ? l.band.to : l.band.from)
+      const newel = l.along === 'X' ? { x: lastLine, z: sideBand } : { x: sideBand, z: lastLine }
+      const fan = flights[flights.length - 1].risers > 1 ? winderTreadLines(raster, plan, square, newel, turn === 'LEFT' ? right : left, d, widthM) : undefined
+      landings.push({ index: landings.length, ...roundRect(square), turn, ...(fan ? { winders: fan.anglesDeg.length, windersWhy: fan.why } : {}) })
     }
   }
-  const risersTotal = flights.reduce((a, f) => a + f.risers, 0)
+  const risersTotal = flights.reduce((a, f) => a + f.risers, 0) + landings.reduce((a, l) => a + (l.winders ?? 0), 0)
   const riserM = risersTotal > 0 ? riseM / risersTotal : 0
   const goingOk = flights.every((f) => f.goingM >= opt.goingMinM && f.goingM <= opt.goingMaxM)
   const riserOk = riserM >= 0.15 && riserM <= 0.2
@@ -425,7 +445,7 @@ export function assembleStair(raster: Raster, plan: PlanFrameV2, ladders: readon
     start: { x: round6(start.x), z: round6(start.z) },
     flights,
     landings,
-    winderRegions: [],
+    winderRegions: landings.filter((l) => l.winders).map((l) => roundRect(l)),
     turnKind,
     risersTotal,
     riserCountInterval: { low: lowRisers, high: highRisers },
@@ -433,8 +453,83 @@ export function assembleStair(raster: Raster, plan: PlanFrameV2, ladders: readon
     arrow,
     confidence,
     unresolved,
-    why: `${flights.length} tread ladder${flights.length === 1 ? '' : 's'} (${flights.map((f) => `${f.risers} risers ${f.direction.toLowerCase().replace('_', ' ')} at ${f.goingM.toFixed(3)} m`).join(', ')}) with ${landings.length} corner square${landings.length === 1 ? '' : 's'} between them; ${risersTotal} risers over ${riseM.toFixed(2)} m = ${riserM.toFixed(3)} m each${arrow ? `; the arrowhead at (${arrow.x}, ${arrow.z}) fixes the climb` : '; no arrowhead found'}`,
+    why: `${flights.length} tread ladder${flights.length === 1 ? '' : 's'} (${flights.map((f) => `${f.risers} risers ${f.direction.toLowerCase().replace('_', ' ')} at ${f.goingM.toFixed(3)} m`).join(', ')}) with ${landings.length} corner square${landings.length === 1 ? '' : 's'} between them${landings.some((l) => l.winders) ? ` (${landings.filter((l) => l.winders).map((l) => `winders: ${l.windersWhy}`).join('; ')})` : ''}; ${risersTotal} risers over ${riseM.toFixed(2)} m = ${riserM.toFixed(3)} m each${arrow ? `; the arrowhead at (${arrow.x}, ${arrow.z}) fixes the climb` : '; no arrowhead found'}`,
   }
+}
+
+/** 005Y-N5 (C4): a winder's tread line radiates from the newel corner of the turn square … */
+const WINDER_RAY_INK_SHARE = 0.7
+/** … looked for at angles a whole degree apart, at least this far from either edge of the square (a flight's riser line) … */
+const WINDER_EDGE_CLEAR_DEG = 8
+/** … and the n lines a winder draws split the quarter turn into n + 1 equal wedges, each within this of its share. */
+const WINDER_SPACING_TOLERANCE_DEG = 8
+/** A line is lighter than the paper by this much at least, darker than this absolute luma. */
+const WINDER_LINE_LUMA = 215
+const WINDER_LINE_CONTRAST = 15
+
+/**
+ * 005Y-N5 (C4): the tread lines of a winder in a turn square. A flat landing leaves the square empty between the two
+ * flights; winders fan it into wedges about the newel — the square's corner on the turn side of the entry edge — with
+ * tread lines running from that corner to the outer walls. Rays from the newel are scored by the share of their length
+ * (from a fifth of the stair's width to the square's far edges) that is a line darker than the square's own paper; the
+ * peaks clear of the square's edges are the tread lines. They count only when they split the quarter turn evenly (n
+ * lines, n + 1 wedges, each within `WINDER_SPACING_TOLERANCE_DEG` of its share): a break line or a handrail crossing
+ * the square does neither. Returns the lines' angles, or nothing (a landing).
+ */
+export function winderTreadLines(raster: Raster, plan: PlanFrameV2, square: { x0: number; z0: number; x1: number; z1: number }, newel: { x: number; z: number }, across: { x: number; z: number }, travel: { x: number; z: number }, widthM: number): { anglesDeg: number[]; why: string } | undefined {
+  const mpp = (plan.mppX + plan.mppY) / 2
+  const lumaAt = (x: number, z: number): number => {
+    const p = plan.toPixel(x, z)
+    let best = 255
+    for (const [dx, dy] of [[0, 0], [1, 0], [-1, 0], [0, 1], [0, -1]]) best = Math.min(best, lumaAtPx(raster, p.x + dx, p.y + dy))
+    return best
+  }
+  // the square's paper: the median luma over its area
+  const samples: number[] = []
+  for (let x = square.x0; x <= square.x1; x += mpp * 2) for (let z = square.z0; z <= square.z1; z += mpp * 2) {
+    const p = plan.toPixel(x, z)
+    samples.push(lumaAtPx(raster, p.x, p.y))
+  }
+  if (samples.length === 0) return undefined
+  samples.sort((a, b) => a - b)
+  const paper = samples[samples.length >> 1]
+  const inside = (x: number, z: number): boolean => x >= square.x0 - 1e-6 && x <= square.x1 + 1e-6 && z >= square.z0 - 1e-6 && z <= square.z1 + 1e-6
+  const score: number[] = []
+  for (let deg = 0; deg <= 90; deg += 1) {
+    const t = (deg * Math.PI) / 180
+    const dir = { x: across.x * Math.cos(t) + travel.x * Math.sin(t), z: across.z * Math.cos(t) + travel.z * Math.sin(t) }
+    let n = 0
+    let ink = 0
+    for (let r = 0.2 * widthM; ; r += mpp) {
+      const x = newel.x + dir.x * r
+      const z = newel.z + dir.z * r
+      if (!inside(x, z)) break
+      n += 1
+      const l = lumaAt(x, z)
+      if (l < WINDER_LINE_LUMA && paper - l >= WINDER_LINE_CONTRAST) ink += 1
+    }
+    score.push(n >= 5 ? ink / n : 0)
+  }
+  const peaks: number[] = []
+  for (let deg = WINDER_EDGE_CLEAR_DEG; deg <= 90 - WINDER_EDGE_CLEAR_DEG; deg += 1) {
+    if (score[deg] < WINDER_RAY_INK_SHARE) continue
+    if (score[deg] < score[deg - 1] || score[deg] < score[deg + 1]) continue
+    if (peaks.length > 0 && deg - peaks[peaks.length - 1] < WINDER_EDGE_CLEAR_DEG) {
+      if (score[deg] > score[peaks[peaks.length - 1]]) peaks[peaks.length - 1] = deg
+      continue
+    }
+    peaks.push(deg)
+  }
+  if (peaks.length === 0) return undefined
+  const share = 90 / (peaks.length + 1)
+  if (!peaks.every((a, i) => Math.abs(a - share * (i + 1)) <= WINDER_SPACING_TOLERANCE_DEG)) return undefined
+  return { anglesDeg: peaks, why: `${peaks.length} tread line${peaks.length === 1 ? '' : 's'} fan from the newel at ${peaks.join('°, ')}° (ink on ${peaks.map((a) => Math.round(score[a] * 100)).join(', ')} % of each ray), splitting the quarter turn into ${peaks.length + 1} wedges` }
+}
+
+const DIRECTION_VECTORS: Record<StairFlightHypothesis['direction'], { x: number; z: number }> = { PLUS_X: { x: 1, z: 0 }, MINUS_X: { x: -1, z: 0 }, PLUS_Z: { x: 0, z: 1 }, MINUS_Z: { x: 0, z: -1 } }
+const lumaAtPx = (r: Raster, x: number, y: number): number => {
+  const [red, green, blue] = rgbAt(r, x, y)
+  return 0.299 * red + 0.587 * green + 0.114 * blue
 }
 
 const roundRect = (r: { x0: number; z0: number; x1: number; z1: number }): { x0: number; z0: number; x1: number; z1: number } => ({ x0: round6(r.x0), z0: round6(r.z0), x1: round6(r.x1), z1: round6(r.z1) })
