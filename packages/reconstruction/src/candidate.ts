@@ -25,7 +25,7 @@
  */
 import { z } from 'zod'
 import { hashArtifact, round6, sha256Hex } from '@buildapp/source-common'
-import { BuildingCommandSchema, applyCommand, runCommands } from '@buildapp/commands'
+import { BuildingCommandSchema, applyCommand, applyCommands, runCommands } from '@buildapp/commands'
 import type { BuildingCommand, CommandFailure } from '@buildapp/commands'
 import { createEmptyModel, openingHeadRange, physicalCore, resolveWallTopology, serializeModel, wallLength } from '@buildapp/model'
 import type { CanonicalBuildingModel } from '@buildapp/model'
@@ -197,6 +197,11 @@ export type CandidateDraft = Omit<ReconstructionCandidate, 'id' | 'contentHash' 
  */
 export function buildCandidateModel(program: readonly BuildingCommand[], label: string, modelId: string): CanonicalBuildingModel {
   return runCommands(createEmptyModel(modelId, label), program)
+}
+
+/** Does a whole program apply to an empty model? How a fitter that edits a program checks the edit without keeping the model. */
+export function programApplies(program: readonly BuildingCommand[], label: string, modelId: string): boolean {
+  return applyCommands(createEmptyModel(modelId, label), program).failedAt === undefined
 }
 
 /** Seal a draft: run its program, hash the model it builds, and derive the candidate's own id. */

@@ -10,10 +10,10 @@
  * less room than the stair takes, nothing moves and the conflict is named.
  */
 import type { BuildingCommand } from '@buildapp/commands'
-import { applyCommands, runCommands } from '@buildapp/commands'
-import { createEmptyModel, layoutStair, resolveWallTopology, wallPhysicalFootprint } from '@buildapp/model'
+import { layoutStair, resolveWallTopology, wallPhysicalFootprint } from '@buildapp/model'
 import type { CanonicalBuildingModel } from '@buildapp/model'
 import { round6 } from '@buildapp/source-common'
+import { buildCandidateModel, programApplies } from '../candidate.js'
 
 /** 005Y-N4 (D): a stair's place is read to within this: a bounding wall overlapping it by more is not moved away from. */
 export const STAIR_SNAP_MAX_M = 0.15
@@ -119,7 +119,7 @@ function obstaclesOn(model: CanonicalBuildingModel, levelId: string): StairObsta
  * untouched.
  */
 export function fitStairToBoundingWalls(program: readonly BuildingCommand[], label: string, modelId: string): { program: BuildingCommand[]; fits: StairFit[] } {
-  const model = runCommands(createEmptyModel(modelId, label), program)
+  const model = buildCandidateModel(program, label, modelId)
   const fits: StairFit[] = []
   const moves = new Map<string, { dx: number; dz: number; toLevelId: string; extent: Box }>()
   for (const s of model.stairs) {
@@ -211,7 +211,7 @@ export function underStairProfile(
  * whose openings the lowered top would no longer hold, keeps its height and is named.
  */
 export function followStairSoffits(program: readonly BuildingCommand[], label: string, modelId: string): { program: BuildingCommand[]; walls: UnderStairWall[] } {
-  const model = runCommands(createEmptyModel(modelId, label), program)
+  const model = buildCandidateModel(program, label, modelId)
   const topology = resolveWallTopology(model)
   const walls: UnderStairWall[] = []
   const profiles = new Map<string, Array<{ u: number; height: number }>>()
@@ -247,7 +247,7 @@ export function followStairSoffits(program: readonly BuildingCommand[], label: s
   for (const [wallId, points] of profiles) {
     const next = out.map((c): BuildingCommand => (c.type === 'createWall' && c.id === wallId ? { ...c, topProfile: { kind: 'POLYLINE', points } } : c))
     // the lowered top must still hold the wall's openings: the model's own validator decides
-    if (applyCommands(createEmptyModel(modelId, label), next).failedAt === undefined) out = next
+    if (programApplies(next, label, modelId)) out = next
     else {
       const entry = walls.find((x) => x.wallId === wallId)
       if (entry) Object.assign(entry, { action: 'REFUSED', why: `${wallId} stands under the stair, but its openings do not fit under the flights' underside: kept at its height, the conflict named` })
