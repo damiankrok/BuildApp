@@ -465,6 +465,9 @@ export function readPlans(options: StructuralLayoutOptions): { plans: PlanReadin
  * every hatch and leader line on a large one, or narrow enough to reject those
  * and blind to half the walls on the small one.
  */
+/** 005Y-N5 (C5): a survey band this share of the longest one's length or more runs the length of the building. */
+const RUNNING_WALL_SHARE = 0.8
+
 export function planSheet(frame: SourceCoordinateFrame, options: StructuralLayoutOptions, bandOptions: Required<PlanBandOptions> = { ...DEFAULT_BANDS, ...options.bands }): PlanSheet | undefined {
   const cached = options.sheetCache?.get(frame.id)
   if (cached) return cached
@@ -473,9 +476,14 @@ export function planSheet(frame: SourceCoordinateFrame, options: StructuralLayou
   const mask = adaptiveInkMask(inkChannel(raster), {})
   const survey = runLengthBands(mask, bandOptions)
   const wallPx = bandWallThickness(survey, DEFAULT_BANDS.minThickness * 2)
+  // 005Y-N5 (C5): the window must hold the walls that run the length of the building (`RUNNING_WALL_SHARE`). Where the sheet's partitions
+  // outnumber its outer walls, the typical thickness is a partition's, and an outer wall a hair over 1.9 of it (A01:
+  // 22 px against 11) was dropped from the second pass — its side of the house then stood on the next line inside.
+  const longest = Math.max(0, ...survey.map((b) => b.length))
+  const runningWalls = survey.filter((b) => b.length >= longest * RUNNING_WALL_SHARE).map((b) => b.thickness)
   const bands = runLengthBands(mask, {
     minThickness: Math.max(3, Math.round(wallPx * 0.45)),
-    maxThickness: Math.max(6, Math.round(wallPx * 1.9)),
+    maxThickness: Math.min(bandOptions.maxThickness, Math.max(6, Math.round(wallPx * 1.9), Math.ceil(Math.max(0, ...runningWalls)) + 1)),
     minLength: Math.max(8, Math.round(wallPx * 1.6)),
   })
   const sheet: PlanSheet = { mask, bands, wallPx, decompositions: new Map(), witness: wallWitness(bands, wallPx, mask) }
