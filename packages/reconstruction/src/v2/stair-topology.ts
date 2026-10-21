@@ -92,6 +92,32 @@ export type StairOptions = {
 const DEFAULTS: Required<Omit<StairOptions, 'onDebug'>> = { goingMinM: 0.21, goingMaxM: 0.34, treadMinM: 0.75, treadMaxM: 1.5, minLines: 4 }
 
 /**
+ * A run of scans across a flight is broken for a few pixels by what is drawn over the treads — the walking line's
+ * arrowhead, a label — and by no more than this. Groups whose lines match are merged again across wider breaks, which
+ * also glues on sequences beyond the flight (the next flight of a U stair, a wardrobe's shelves); a group too wide
+ * for one flight is taken apart into the runs of scans broken by no more than this, each judged on its own.
+ */
+const LADDER_BREAK_MAX_PX = 12
+
+/** Split each group's scans where consecutive scans are more than `maxBreakPx` apart. */
+export function splitAtBreaks<S extends { scan: number }>(groups: ReadonlyArray<{ members: S[]; spacing: number }>, maxBreakPx: number): Array<{ members: S[]; spacing: number }> {
+  const out: Array<{ members: S[]; spacing: number }> = []
+  for (const g of groups) {
+    const members = [...g.members].sort((a, b) => a.scan - b.scan)
+    let run: S[] = []
+    for (const m of members) {
+      if (run.length > 0 && m.scan - run[run.length - 1].scan > maxBreakPx) {
+        out.push({ members: run, spacing: g.spacing })
+        run = []
+      }
+      run.push(m)
+    }
+    if (run.length > 0) out.push({ members: run, spacing: g.spacing })
+  }
+  return out
+}
+
+/**
  * Tread ladders inside a body: sequences of thin strokes at an even spacing,
  * seen on several scan lines across the same band.
  */
@@ -184,7 +210,10 @@ export function findTreadLadders(raster: Raster, plan: PlanFrameV2, body: { x0: 
         }
       }
     }
-    for (const { members: group, spacing } of groups) {
+    // A group wider than any flight is taken apart at its breaks: the flight is one of the runs (see `splitAtBreaks`).
+    const bandMOf = (g: { members: Array<{ scan: number }> }): number => (g.members[g.members.length - 1].scan - g.members[0].scan + 1) * mpp
+    const candidates = groups.flatMap((g) => (bandMOf(g) > opt.treadMaxM ? splitAtBreaks([g], LADDER_BREAK_MAX_PX) : [g]))
+    for (const { members: group, spacing } of candidates) {
       const seed = group[0]
       const support = group.length
       const bandPx = group[group.length - 1].scan - group[0].scan + 1

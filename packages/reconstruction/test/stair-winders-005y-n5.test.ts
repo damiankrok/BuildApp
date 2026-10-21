@@ -9,6 +9,7 @@ import { describe, expect, it } from 'vitest'
 import type { Raster } from '@buildapp/source-cv'
 import { assembleStair, findTreadLadders } from '../src/index.js'
 import type { PlanFrameV2 } from '../src/index.js'
+import { splitAtBreaks } from '../src/v2/stair-topology.js'
 
 const MPP = 0.01
 const W = 600
@@ -74,5 +75,17 @@ describe('005Y-N5 (C4) winders in the corner square of a turning stair', () => {
   it('a stray diagonal that does not radiate from the newel, or lines that split the turn unevenly, decide nothing', () => {
     expect(read([[{ x: 3.2, z: 1 }, { x: 4, z: 1.8 }]])?.landings[0].winders).toBeUndefined()
     expect(read([ray(20), ray(30)])?.landings[0].winders).toBeUndefined()
+  })
+})
+
+describe('splitAtBreaks (005Y-N6 F5)', () => {
+  const scans = (...s: number[]) => s.map((scan) => ({ scan }))
+  it('a flight broken by an arrowhead stays one run; sequences glued on across a wider break are cut off', () => {
+    const [flight, glued] = splitAtBreaks([{ members: scans(397, 398, 399, 410, 411, 436, 441, 442, 465, 466, 471, 490), spacing: 14 }], 12)
+    expect(flight.members.map((m) => m.scan)).toEqual([397, 398, 399, 410, 411])
+    expect(glued.members[0].scan).toBe(436)
+  })
+  it('a group with no break wider than the limit is returned whole', () => {
+    expect(splitAtBreaks([{ members: scans(1, 5, 9, 13), spacing: 10 }], 12)).toHaveLength(1)
   })
 })
