@@ -1,0 +1,502 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005Y-N3",
+ "base": "e1806e014eff62fcf80b6199cb1ff1bce89cd2db",
+ "codeHead": "3c20c5c5bcd7bd28a556d04797c9ab8af4b8a0b1",
+ "status": [
+  "PARTIAL_SOURCE_GROUNDED",
+  "OWNER_VISUAL_PENDING"
+ ],
+ "owner_m3ea": "NOT_RUN (no input; not substituted)",
+ "matrix": [
+  {
+   "house": "a01",
+   "modelBefore": "2ebcf05b9bdb3120",
+   "modelAfter": "d67a026f8cf93dff",
+   "productionSeconds": 373.67086842,
+   "maxHeartbeatGapSeconds": 2.27,
+   "before": {
+    "rooflights": 6,
+    "chimneys": 3,
+    "openings": 22,
+    "roofKinds": [
+     "GABLE"
+    ],
+    "roofPlanes": 0,
+    "relationships": 0
+   },
+   "after": {
+    "rooflights": 6,
+    "chimneys": 3,
+    "openings": 22,
+    "roofKinds": [
+     "GABLE"
+    ],
+    "roofPlanes": 0,
+    "relationships": 3
+   },
+   "closureBefore": {
+    "ERROR:INTERSECTION": 2,
+    "ERROR:GAP": 50,
+    "WARNING:COPLANAR_DUPLICATE": 4
+   },
+   "closureAfter": {
+    "ERROR:GAP": 50,
+    "WARNING:COPLANAR_DUPLICATE": 4
+   },
+   "nonManifold": {
+    "before": 0,
+    "after": 0
+   },
+   "compileDiagnostics": {
+    "before": 0,
+    "after": 0
+   }
+  },
+  {
+   "house": "gozd",
+   "modelBefore": "869774d095b76fcb",
+   "modelAfter": "b0eb6d82ae56b327",
+   "productionSeconds": 325.707081112,
+   "maxHeartbeatGapSeconds": 1.89,
+   "before": {
+    "rooflights": 7,
+    "chimneys": 1,
+    "openings": 29,
+    "roofKinds": [
+     "GABLE"
+    ],
+    "roofPlanes": 0,
+    "relationships": 0
+   },
+   "after": {
+    "rooflights": 7,
+    "chimneys": 1,
+    "openings": 29,
+    "roofKinds": [
+     "GABLE"
+    ],
+    "roofPlanes": 0,
+    "relationships": 1
+   },
+   "closureBefore": {
+    "ERROR:GAP": 66
+   },
+   "closureAfter": {
+    "ERROR:GAP": 66
+   },
+   "nonManifold": {
+    "before": 0,
+    "after": 0
+   },
+   "compileDiagnostics": {
+    "before": 0,
+    "after": 0
+   }
+  },
+  {
+   "house": "marcowki",
+   "modelBefore": "124e5abc5e6959d8",
+   "modelAfter": "124e5abc5e6959d8",
+   "productionSeconds": 306.083198683,
+   "maxHeartbeatGapSeconds": 2.93,
+   "before": {
+    "rooflights": 3,
+    "chimneys": 2,
+    "openings": 21,
+    "roofKinds": [
+     "FLAT",
+     "GABLE"
+    ],
+    "roofPlanes": 0,
+    "relationships": 0
+   },
+   "after": {
+    "rooflights": 3,
+    "chimneys": 2,
+    "openings": 21,
+    "roofKinds": [
+     "FLAT",
+     "GABLE"
+    ],
+    "roofPlanes": 0,
+    "relationships": 0
+   },
+   "closureBefore": {
+    "ERROR:INTERSECTION": 7,
+    "ERROR:GAP": 35
+   },
+   "closureAfter": {
+    "ERROR:INTERSECTION": 7,
+    "ERROR:GAP": 35
+   },
+   "nonManifold": {
+    "before": 0,
+    "after": 0
+   },
+   "compileDiagnostics": {
+    "before": 0,
+    "after": 0
+   }
+  },
+  {
+   "house": "ciesz",
+   "modelBefore": "2ac1ed37c1af60c0",
+   "modelAfter": "4de216ed46550423",
+   "productionSeconds": 201.025646687,
+   "maxHeartbeatGapSeconds": 2.19,
+   "before": {
+    "rooflights": 0,
+    "chimneys": 2,
+    "openings": 20,
+    "roofKinds": [],
+    "roofPlanes": 4,
+    "relationships": 4
+   },
+   "after": {
+    "rooflights": 0,
+    "chimneys": 2,
+    "openings": 20,
+    "roofKinds": [],
+    "roofPlanes": 4,
+    "relationships": 5
+   },
+   "closureBefore": {
+    "ERROR:INTERSECTION": 2,
+    "ERROR:GAP": 24,
+    "WARNING:COPLANAR_DUPLICATE": 2
+   },
+   "closureAfter": {
+    "ERROR:INTERSECTION": 2,
+    "ERROR:GAP": 24,
+    "WARNING:COPLANAR_DUPLICATE": 2
+   },
+   "nonManifold": {
+    "before": 0,
+    "after": 0
+   },
+   "compileDiagnostics": {
+    "before": 0,
+    "after": 0
+   }
+  },
+  {
+   "house": "rary",
+   "modelBefore": "3f0f71833f035914",
+   "modelAfter": "f6886fd278755ee5",
+   "productionSeconds": 273.714743228,
+   "maxHeartbeatGapSeconds": 1.97,
+   "before": {
+    "rooflights": 0,
+    "chimneys": 1,
+    "openings": 20,
+    "roofKinds": [
+     "GABLE"
+    ],
+    "roofPlanes": 2,
+    "relationships": 4
+   },
+   "after": {
+    "rooflights": 0,
+    "chimneys": 2,
+    "openings": 20,
+    "roofKinds": [
+     "GABLE"
+    ],
+    "roofPlanes": 2,
+    "relationships": 5
+   },
+   "closureBefore": {
+    "ERROR:GAP": 19
+   },
+   "closureAfter": {
+    "ERROR:GAP": 19
+   },
+   "nonManifold": {
+    "before": 0,
+    "after": 0
+   },
+   "compileDiagnostics": {
+    "before": 0,
+    "after": 0
+   }
+  }
+ ],
+ "symptoms": [
+  {
+   "id": "H2-marcowki-gable-eave-triangle",
+   "hypothesis": "H2",
+   "house": "marcowki",
+   "views": [
+    "5-34",
+    "6-34",
+    "3-lewa",
+    "4-prawa"
+   ],
+   "objects": [
+    "ring-main-1-w0",
+    "ring-main-1-w2",
+    "roof-main:verge-min-z",
+    "roof-main:verge-max-z"
+   ],
+   "sourceProof": "the front and rear gables carry a portal frame (verge member as deep as the porch); the wall behind it is under the roof plate, not under the frame",
+   "analog": "every gable with a verge member as deep as the zone in front of the wall (synthetic test frame-boundary-wall-005y-n3)",
+   "firstBad": "packages/geometry/src/roof-compiler.ts:135 (inStrip closed bounds) read by packages/geometry/src/compile.ts:91 (FOLLOW_ROOF top at the face point)",
+   "counterfactual": "same model.json (hash 124e5abc5e6959d8 unchanged), compiler fixed: the outer-face top 3.843 m -> 4.270 m at x 7.9, the triangle hole between frame foot and eave closes; 132 triangles less on the two gable walls, no other mesh in any house changes",
+   "fix": "compile.ts: the top is read a micrometre inside the wall material where the underside steps there; wall-compiler.ts: breaks within 1 µm merged, top snapped to a height break within 1 µm",
+   "impact": "triangle gone at both gables (zoom H2-*)",
+   "regressions": "none: per-mesh triangle counts identical in a01, gozd, ciesz, rary",
+   "remainingGap": "light rake line inside the frame pre-exists (frame underside), unchanged",
+   "status": "FIXED_SOURCE_GROUNDED"
+  },
+  {
+   "id": "H1-corner-window-piece-read-as-door",
+   "hypothesis": "H1",
+   "house": "gozd",
+   "views": [
+    "3-lewa",
+    "5-34"
+   ],
+   "objects": [
+    "opening-0-west-3-1",
+    "opening-0-front-0-0"
+   ],
+   "sourceProof": "ground plan: kitchen corner window 260/140 front + 110/140 side on thin glazing lines round the corner, no pier",
+   "analog": "trytomach (corner glazing 157/230 + 277/230, its front piece read DOOR); ciesz east wall 90/150 x2 read DOOR",
+   "firstBad": "packages/reconstruction/src/v2/openings-v2.ts:527 (base): the unread ground-storey door convention checked only dark-ink glazing, not the light frame lines",
+   "counterfactual": "with glazingLinesDrawn added: gozd west-3-1 DOOR->WINDOW, ciesz east-1-1/1-2 DOOR->WINDOW (bathroom and boiler room 90/150 on the plan), trytomach front-0-3 DOOR->WINDOW; a01, marcowki, rary unchanged; arganiach, sasankach3 unchanged",
+   "fix": "door convention needs no glazing by either symbol",
+   "impact": "3 corrections in the five houses, 1 in the analog",
+   "regressions": "trytomach attic 0.68 m fragment of a 150/210 French window DOOR->WINDOW: wrong before and after (fragmented gaps, callouts unread) - neutral",
+   "remainingGap": "heights of the corner pieces stay assumed (callouts 260/140, 110/140, 200/150, 120/150, 157/230, 277/230 not read by the recogniser)",
+   "status": "FIXED_SOURCE_GROUNDED"
+  },
+  {
+   "id": "H1-corner-assembly-relation",
+   "hypothesis": "H1",
+   "house": "a01,gozd,ciesz",
+   "views": [
+    "5-34",
+    "8-gora-bez-dachu"
+   ],
+   "objects": [
+    "opening-0-front-0-0 + opening-0-west-3-1 (a01, gozd)",
+    "opening-0-front-0-0 + opening-0-west-3-4 (ciesz)"
+   ],
+   "sourceProof": "a01: 250/220 + 118/220 round the front-left corner; gozd: 260/140 + 110/140; ciesz: 200/150 + 120/150 - all on thin lines, no pier",
+   "analog": "trytomach front-right corner (157/230 + 277/230)",
+   "firstBad": "none: the analyzer had no representation of one glazing in two walls",
+   "counterfactual": "cornerAssemblies on the same openings: 4 assemblies found (3 houses + analog), all source-confirmed; no pair at a corner with a pier",
+   "fix": "cornerAssemblies (openings-v2.ts) -> OpeningV2.cornerWith -> createRelationship ALIGNS_WITH note CORNER_GLAZING (emit.ts); geometry unchanged",
+   "impact": "relation in model.json, featureTrace CORNER_ASSEMBLY",
+   "regressions": "none",
+   "remainingGap": "the model keeps the corner square as wall: OPENING_TOUCHES_WALL_EDGE forbids an opening reaching a wall edge, so a pierless corner is not representable without a schema decision",
+   "status": "PARTIAL_SOURCE_GROUNDED"
+  },
+  {
+   "id": "H4-rary-second-chimney",
+   "hypothesis": "H4",
+   "house": "rary",
+   "views": [
+    "1-przod",
+    "3-lewa",
+    "5-34",
+    "7-gora-dach"
+   ],
+   "objects": [
+    "chimney-1",
+    "roof-attached-0-plane-high",
+    "ring-main-0-w0"
+   ],
+   "sourceProof": "front and side elevations both draw two stacks: the fireplace one (~3.8 m from the rear) and a second at the front wall by the garage junction (~6.2 m from the left, ~7.9 m from the rear); the plan has both solid blocks",
+   "analog": "arganiach and trytomach: their stacks are rejected for another reason (no render registered on the side the reader looks from: viewsTried []) - same symptom, different firstBad",
+   "firstBad": "packages/reconstruction/src/v2/reconstruct-v2.ts:1424 (base): roofTopY knew only the main roof, so the render scan started under the garage cross-gable that covers the block",
+   "counterfactual": "hostRoofTopAt on the same evidence: the block (5.75-6.66, 6.62-7.06) READ on the left view, top 5.67 m (front elevation, its own scale: 5.55 m); other houses unchanged",
+   "fix": "hostRoofTopAt (roof-details.ts); emit cuts the stack plumb in the attached plane that holds it, and states OVERLAPS_INTENTIONALLY with an outer wall the plan draws it into",
+   "impact": "rary chimneys 1 -> 2; a01 two pre-existing chimney/wall INTERSECTIONs resolved as stated relations (block flush with the wall, 1 cm)",
+   "regressions": "none",
+   "remainingGap": "stacks rejected for want of a registered side view (arganiach 2, trytomach 2) - not addressed",
+   "status": "FIXED_SOURCE_GROUNDED"
+  },
+  {
+   "id": "H5-rary-rear-glazing-to-roof",
+   "hypothesis": "H5",
+   "house": "rary",
+   "views": [
+    "2-tyl",
+    "6-34"
+   ],
+   "objects": [
+    "opening-0-rear-2-0"
+   ],
+   "sourceProof": "ground plan prints 230/230 at the rear-left glazing",
+   "analog": "marcowki garage door printed 275/225 read 275/275 (weak lattice reading too) - not changed: 225 is no firm head on that storey",
+   "firstBad": "packages/reconstruction/src/v2/openings-v2.ts:421 (base): the first lattice height reading 290 (0.68) taken over 230 (0.65), the recogniser not confirming either",
+   "counterfactual": "commonHeadReading: 290 -> 230 (the head the recogniser read firmly on the east 120/230 windows); no other opening in the five houses or the analogs changes",
+   "fix": "commonHeadReading in openings-v2.ts, applied in reconstruct-v2.ts with provenance SOURCE_DERIVED and both readings named",
+   "impact": "head 2.90 -> 2.30 m",
+   "regressions": "none",
+   "remainingGap": "marcowki garage door 275/275 stays (needs the recogniser to read 225)",
+   "status": "FIXED_SOURCE_GROUNDED"
+  },
+  {
+   "id": "H5-rary-garage-window-too-high",
+   "hypothesis": "H5",
+   "house": "rary",
+   "views": [
+    "3-lewa",
+    "4-prawa"
+   ],
+   "objects": [
+    "opening-0-west-7-0",
+    "frame ...elew-8abaf52877",
+    "frame ...elew-1417866f23"
+   ],
+   "sourceProof": "side elevation: garage and gable windows with sills ~1.0 m above the ground; model read 1.48 m",
+   "analog": "sasankach3 front/rear views (chimney cap above the ridge is the silhouette top) refused the same way; a01 left view refused, no opening affected",
+   "firstBad": "packages/reconstruction/src/v2/reconstruct-v2.ts:592 (base): a silhouette registration hung from the ridge datum at a top row that is not the ridge (narrow gable apex): ground at +0.46/+0.20 m against the printed terrain -0.32 m; the N2 ground test (line 627) covered band views only",
+   "counterfactual": "viewGroundRefusals: the two side views are not read for opening heights; sill 1.48 -> 0.80 m (printed 100/140, common head 2.2); roof form and chimneys still read on them",
+   "fix": "viewGroundRefusals (terrain first, else an outnumbering cluster; a tie refuses nothing)",
+   "impact": "garage side window 0.5 m lower",
+   "regressions": "rary phantom 421/71 strip moves up (0.59 -> 1.49 m): phantom before and after",
+   "remainingGap": "the side views themselves stay mis-registered for openings; the phantom 421/71 strip",
+   "status": "PARTIAL_SOURCE_GROUNDED"
+  },
+  {
+   "id": "H5-rary-entrance-narrow-window",
+   "hypothesis": "H5/H1",
+   "house": "rary",
+   "views": [
+    "1-przod",
+    "5-34"
+   ],
+   "objects": [
+    "opening-0-front-0-1"
+   ],
+   "sourceProof": "plan: 105/210 entrance door hinged at its right jamb, leaf and arc opening outward onto the porch",
+   "analog": "-",
+   "firstBad": "packages/reconstruction/src/v2/openings-v2.ts:609 (base): doorSwingDrawn samples the inner face only; doorLeafDrawn does not recognise this symbol",
+   "counterfactual": "REJECTED experiment: an outer-face swing sample left rary unchanged and turned the a01 corner-glazing piece 118/220 into a DOOR",
+   "fix": "none (reverted)",
+   "impact": "-",
+   "regressions": "-",
+   "remainingGap": "entrance stays WINDOW 1.05 x 2.10",
+   "status": "UNRESOLVED"
+  },
+  {
+   "id": "H3-marcowki-stair",
+   "hypothesis": "H3",
+   "house": "marcowki",
+   "views": [
+    "8-gora-bez-dachu",
+    "section x 6.9"
+   ],
+   "objects": [
+    "stair-main",
+    "main-iwall-0-x-1",
+    "main-iwall-0-x-2",
+    "main-iwall-0-z-10",
+    "ring-main-0-w1",
+    "chimney-0",
+    "chimney-1"
+   ],
+   "sourceProof": "ground plan: room 5 and the ** closet lie under the upper flights (drawn dashed above the cut); the upper slab has its stair hole (no double-height void needed)",
+   "analog": "melisie2 (void over the living room) refused by the plan reader (PLAN_NO_WALLED_ENVELOPE): NOT_RUN for this class",
+   "firstBad": "two: (1) packages/reconstruction/src/v2/stair-topology.ts (landing laid as a width-square past the first flight) puts the stair 0.30 m into the east wall (0.436 m3); (2) partitions under the flight are emitted at full storey height - the model has no top profile that follows a stair soffit",
+   "counterfactual": "not run: a fix needs the stair layout on the reconstruction side or a stair-soffit top profile in the model contract",
+   "fix": "none",
+   "impact": "all 7 marcowki INTERSECTIONs are this stair",
+   "regressions": "-",
+   "remainingGap": "STAIR wall/partition conflicts named, not fixed; SOURCE_UNRESOLVED for any void",
+   "status": "UNRESOLVED"
+  },
+  {
+   "id": "H1-gozd-pocket-70-210",
+   "hypothesis": "H1",
+   "house": "gozd",
+   "views": [
+    "1-przod"
+   ],
+   "objects": [
+    "pocket-main-0-0 returns"
+   ],
+   "sourceProof": "70/210 on the pocket side, 105/210 on its back wall: two source entities",
+   "analog": "-",
+   "firstBad": "unchanged since N2 (the return is not read for openings)",
+   "counterfactual": "-",
+   "fix": "none",
+   "impact": "-",
+   "regressions": "-",
+   "remainingGap": "70/210 not built",
+   "status": "UNRESOLVED"
+  }
+ ],
+ "analogs": [
+  {
+   "name": "Dom w trytomach (G)",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-trytomach-g-m6802645623649",
+   "run": "COMPLETED",
+   "modelBefore": "a7e7a4106a8857fd",
+   "modelAfterReplay": "65fa9c73e6554e77",
+   "featureClass": "CORNER_GLAZING",
+   "sourceCrop": "private: debug ZIP crops/crop-corner.png",
+   "identity": "front 157/230 + side 277/230 round the front-right corner, door leaf at the far end of the side piece",
+   "firstBad": "front piece DOOR by the door convention (light glazing not consulted); both pieces stop 0.38 m short of the corner (corner square); callouts unread",
+   "alternative": "WINDOW family + CORNER_GLAZING relation",
+   "gate": "DOOR->WINDOW; relation found; no other analog change"
+  },
+  {
+   "name": "Dom w melisie ver. 2",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-melisie-ver-2-m76e2570aeb41c",
+   "run": "REFUSED PLAN_NO_WALLED_ENVELOPE",
+   "featureClass": "STAIR_VOID / DOUBLE_HEIGHT",
+   "sourceCrop": "-",
+   "identity": "not reconstructed",
+   "firstBad": "plan decomposition (out of scope)",
+   "alternative": "-",
+   "gate": "NOT_RUN: no universality claimed for H3"
+  },
+  {
+   "name": "Dom w arganiach (G2E)",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-arganiach-g2e-m32b290f26a4e8",
+   "run": "COMPLETED",
+   "modelBefore": "34a95a766d169f39",
+   "modelAfterReplay": "34a95a766d169f39",
+   "featureClass": "CHIMNEY / ENTRANCE_SIDELIGHT",
+   "sourceCrop": "private: analogs/arganiach front elevation",
+   "identity": "two stacks on the main slope (one over the garage part of the same roof); door with a side light",
+   "firstBad": "both plan blocks rejected with no view tried (viewsTried []): no side view registered for the reader",
+   "alternative": "-",
+   "gate": "unchanged by every N3 rule (regression control)"
+  },
+  {
+   "name": "Dom w sasankach 3 (G)",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-sasankach-3-g-mb292397cb1840",
+   "run": "COMPLETED",
+   "modelBefore": "bad67c176db421f4",
+   "modelAfterReplay": "b75c613aaa514524",
+   "featureClass": "CHIMNEY / VIEW REGISTRATION",
+   "sourceCrop": "private: analogs/sasankach3 front elevation",
+   "identity": "the stack stands at the main gable apex, NOT over the garage (the brief's hypothesis does not hold); its cap rises above the ridge",
+   "firstBad": "front/rear silhouettes topped by the chimney cap: ground +0.24/+0.27 m against terrain -0.57 m",
+   "alternative": "views refused for opening heights",
+   "gate": "openings unchanged, the refusal named (hash change from the gap record only)"
+  }
+ ],
+ "rejectedExperiments": [
+  {
+   "id": "outer-face door swing",
+   "result": "rary unchanged, a01 corner-glazing piece 118/220 became DOOR: reverted"
+  },
+  {
+   "id": "median ground for silhouette views",
+   "result": "2 vs 2 split refused all four rary views including the right front/rear: replaced by terrain-first / outnumbering cluster"
+  }
+ ],
+ "gates": {
+  "rooflights": "a01 6, gozd 7 (unchanged)",
+  "chimneys": "a01 3, ciesz 2 (unchanged), rary 1 -> 2",
+  "roofKinds": "unchanged",
+  "nonManifold": "0 everywhere",
+  "newGapOrIntersection": "none; a01 INTERSECTION 2 -> 0 (stated relations)"
+ }
+}

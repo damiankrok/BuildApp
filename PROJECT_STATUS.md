@@ -2544,3 +2544,29 @@ Still open, each with its first bad step in the report:
 | rary | rear 230/230 | gate |
 | rary | phantom 471/71 | ring detector |
 | OWNER m3ea | not touched | — |
+
+## Shared primitives across houses: corners, frames, chimney hosts, weak heights (STAGE BUILDPLAN-ANALYZER-005Y-N3)
+
+Status: **PARTIAL_SOURCE_GROUNDED · OWNER_VISUAL_PENDING**. Branch `analyzer/005y-n3-cross-house-architectural-primitives-v1`
+from `e1806e0`; report `stage-reports/STAGE_BUILDPLAN_ANALYZER_005Y_N3_CROSS_HOUSE_ARCHITECTURAL_PRIMITIVES.md`, ledger
+`research/analyzer-005y-n3-architectural-primitives/ledger.json`. Each rule was checked on another house or an ARCHON
+analog (Trytomy, Arganie, Sasanki 3; Melisa 2 refused by the plan reader) before it was taken.
+
+| Primitive | Where | Effect on the five houses |
+|---|---|---|
+| A wall behind a gable frame reaches the roof plate (strip boundary read inside the wall) | `geometry/compile.ts`, `wall-compiler.ts` | Marcówki: the triangle under both eaves gone; no other mesh changes |
+| Door convention needs no glazing by either symbol | `openings-v2.ts` | Goździkowce corner-window piece, Cieszynianki 2 × 90/150: DOOR → WINDOW |
+| Corner assembly (`cornerAssemblies`, `ALIGNS_WITH` CORNER_GLAZING) | `openings-v2.ts`, `emit.ts` | A01, Goździkowce, Cieszynianki; geometry unchanged (corner square stays wall) |
+| Chimney against the roof covering its block (`hostRoofTopAt`) + plumb cut in attached planes | `roof-details.ts`, `emit.ts` | Rarytasy DEV chimneys 1 → 2; A01 chimney/wall overlap stated |
+| Storey common head over a weak printed height (`commonHeadReading`) | `openings-v2.ts` | Rarytasy rear glazing 230/290 → 230/230 (as printed) |
+| Silhouette views off the printed terrain not read for opening heights (`viewGroundRefusals`) | `openings-v2.ts` | Rarytasy garage window sill 1.48 → 0.80 m |
+
+Model hashes (first 16): A01 `2ebcf05b9bdb3120` → `d67a026f8cf93dff`, Goździkowce `869774d095b76fcb` → `b0eb6d82ae56b327`,
+Marcówki `124e5abc5e6959d8` (unchanged; scene changed), Cieszynianki `2ac1ed37c1af60c0` → `4de216ed46550423`, Rarytasy DEV
+`3f0f71833f035914` → `f6886fd278755ee5`. Rooflights (A01 6, Goździkowce 7), chimneys (A01 3, Cieszynianki 2) and roof kinds
+unchanged; NON_MANIFOLD 0; no new GAP/INTERSECTION; A01 INTERSECTION 2 → 0. Max heartbeat gap 2.93 s.
+
+Unresolved, named: Marcówki stair (landing 0.30 m into the east wall; partitions under the flight at full height — all 7
+INTERSECTIONs; needs a stair-soffit top profile or the stair layout in reconstruction); Rarytasy entrance door opening
+outward still a window; side-view registration itself; phantom 421/71; chimneys lost for want of a registered side view
+(Arganie, Trytomy); corner posts kept by the model invariant; OWNER m3ea NOT_RUN.
