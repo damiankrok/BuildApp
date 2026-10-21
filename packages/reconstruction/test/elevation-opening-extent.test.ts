@@ -188,11 +188,14 @@ describe('005W the opening read as an object against the wall', () => {
     expect(out.map((o) => Math.round(o.headY * 10) / 10)).toEqual([2.2, 2.2, 2.1, 2.1])
   })
 
-  it('without an elevation nothing changes: assumed heights, the ground-storey door convention, the window placeholder', () => {
-    // The light glazing symbol is consulted only for a gap whose heights an elevation read; unread, a door-wide gap on
-    // the ground storey stays a door by the plan convention, as before 005W.
+  it('without an elevation: assumed heights, the ground-storey door convention for an empty gap, the window placeholder', () => {
+    // 005Y-N3 (H1): unread, a door-wide gap on the ground storey is a door by the plan convention only when nothing is
+    // drawn across it as glazing — by either symbol. The light lines a frame and glass are drawn with make the two
+    // narrow glazed gaps windows (assumed heights); the gap with a swing drawn and no glazing stays a door. (005W had
+    // kept the light symbol for read heights only; across the five development houses that made a corner window's
+    // return and two 90/150 windows doors.)
     const out = read([])
-    expect(out.map((o) => o.family)).toEqual(['WINDOW', 'DOOR', 'DOOR', 'DOOR'])
+    expect(out.map((o) => o.family)).toEqual(['WINDOW', 'WINDOW', 'DOOR', 'WINDOW'])
     expect(out.every((o) => o.provenance.sill === 'ASSUMED_FOR_RENDERING')).toBe(true)
   })
 
@@ -206,7 +209,7 @@ describe('005W the opening read as an object against the wall', () => {
     const r = elevation(GREY, OPENINGS(GREY))
     const out = read([{ view: view(1.3), raster: r, bandOnly: true }])
     expect(out.every((o) => o.provenance.sill === 'ASSUMED_FOR_RENDERING')).toBe(true)
-    expect(out.map((o) => o.family)).toEqual(['WINDOW', 'DOOR', 'DOOR', 'DOOR'])
+    expect(out.map((o) => o.family)).toEqual(['WINDOW', 'WINDOW', 'DOOR', 'WINDOW'])
   })
 
   it('a band-only view with a single gap on the wall cannot be checked and is not read', () => {
