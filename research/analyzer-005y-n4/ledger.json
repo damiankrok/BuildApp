@@ -1,0 +1,514 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005Y-N4",
+ "base": "02cda69c6dbe4d94baf0db1bf22044606a91a0f8",
+ "codeHead": "7822c467c0afe212a91caa1044b2b85eee8e8006",
+ "status": [
+  "PARTIAL_SOURCE_GROUNDED",
+  "OWNER_VISUAL_PENDING"
+ ],
+ "owner_m3ea": "NOT_RUN (no input; not substituted)",
+ "aiSecondLook": {
+  "live": "AI_SECOND_LOOK_LIVE_NOT_RUN (no credentials, no owner consent)",
+  "records": [
+   {
+    "house": "gozd",
+    "ambiguity": "a ring callout beside the kitchen corner window read 700/40 (confidence 0.26); no width candidate fits the plan gap: the opening gets assumed heights",
+    "hypotheses": [
+     {
+      "id": "w700h40",
+      "text": "700/40"
+     },
+     {
+      "id": "w200h40",
+      "text": "200/40"
+     },
+     {
+      "id": "w100h48",
+      "text": "100/48"
+     }
+    ],
+    "cropRectPx": {
+     "x0": 132,
+     "y0": 588,
+     "x1": 182,
+     "y1": 638
+    },
+    "questionId": "gozd-ring-ba1359980c",
+    "provider": {
+     "id": "vision.anthropic",
+     "model": "claude-opus-5",
+     "version": "1.0.0+contract-1.0.0"
+    },
+    "cvSays": null,
+    "provenance": "AI_SUGGESTED",
+    "sourceAssetByteHash": "6cf4b609e9415f318b6145111cbb1600b9d99e88a91f93a2537c76daf3443a7d",
+    "status": "AI_SECOND_LOOK_LIVE_NOT_RUN",
+    "reason": "the owner has not consented to sending a crop of the drawing to an external provider",
+    "aiSays": null,
+    "aiHypothesisId": null,
+    "agreement": "NONE",
+    "modes": {
+     "CV_ONLY": null,
+     "CV_AI_SUGGESTION": null,
+     "CV_AI_VALIDATED": null
+    }
+   },
+   {
+    "house": "gozd",
+    "ambiguity": "a ring callout beside the west piece of the kitchen corner window read 416/147 (confidence 0.23); rejected for width",
+    "hypotheses": [
+     {
+      "id": "w416h147",
+      "text": "416/147"
+     },
+     {
+      "id": "w616h140",
+      "text": "616/140"
+     },
+     {
+      "id": "w46h142",
+      "text": "46/142"
+     }
+    ],
+    "cropRectPx": {
+     "x0": 52,
+     "y0": 538,
+     "x1": 100,
+     "y1": 586
+    },
+    "questionId": "gozd-ring-dbb97112bf",
+    "provider": {
+     "id": "vision.anthropic",
+     "model": "claude-opus-5",
+     "version": "1.0.0+contract-1.0.0"
+    },
+    "cvSays": null,
+    "provenance": "AI_SUGGESTED",
+    "sourceAssetByteHash": "6cf4b609e9415f318b6145111cbb1600b9d99e88a91f93a2537c76daf3443a7d",
+    "status": "AI_SECOND_LOOK_LIVE_NOT_RUN",
+    "reason": "the owner has not consented to sending a crop of the drawing to an external provider",
+    "aiSays": null,
+    "aiHypothesisId": null,
+    "agreement": "NONE",
+    "modes": {
+     "CV_ONLY": null,
+     "CV_AI_SUGGESTION": null,
+     "CV_AI_VALIDATED": null
+    }
+   },
+   {
+    "house": "rary",
+    "ambiguity": "a ring callout read 471/71 (confidence 0.30) taken for a 3.8 m gap in the garage side wall, which the plan draws as a door",
+    "hypotheses": [
+     {
+      "id": "w471h71",
+      "text": "471/71"
+     },
+     {
+      "id": "w421h71",
+      "text": "421/71"
+     },
+     {
+      "id": "w571h71",
+      "text": "571/71"
+     }
+    ],
+    "cropRectPx": {
+     "x0": 305,
+     "y0": 492,
+     "x1": 349,
+     "y1": 536
+    },
+    "questionId": "rary-ring-0fc852e6de",
+    "provider": {
+     "id": "vision.anthropic",
+     "model": "claude-opus-5",
+     "version": "1.0.0+contract-1.0.0"
+    },
+    "cvSays": "421/71",
+    "provenance": "AI_SUGGESTED",
+    "sourceAssetByteHash": "6b142fb298e5ca0d4d546c8bcf86c887d3a6f43eed93df9327edfcc7e8a77666",
+    "status": "AI_SECOND_LOOK_LIVE_NOT_RUN",
+    "reason": "the owner has not consented to sending a crop of the drawing to an external provider",
+    "aiSays": null,
+    "aiHypothesisId": null,
+    "agreement": "NONE",
+    "modes": {
+     "CV_ONLY": "421/71",
+     "CV_AI_SUGGESTION": null,
+     "CV_AI_VALIDATED": null
+    }
+   }
+  ]
+ },
+ "matrix": [
+  {
+   "house": "a01",
+   "modelBefore": "d67a026f8cf93dff",
+   "modelAfter": "b740fc7d3697fa9e",
+   "productionSeconds": 367.33096644,
+   "maxHeartbeatGapSeconds": 1.95,
+   "before": {
+    "rooflights": 6,
+    "chimneys": 3,
+    "openings": 22,
+    "doorsOut": 0,
+    "stairs": [
+     "PLACEHOLDER"
+    ],
+    "polylineWalls": 0,
+    "roofKinds": [
+     "GABLE"
+    ],
+    "relationships": 3
+   },
+   "after": {
+    "rooflights": 6,
+    "chimneys": 3,
+    "openings": 22,
+    "doorsOut": 0,
+    "stairs": [
+     "PLACEHOLDER"
+    ],
+    "polylineWalls": 0,
+    "roofKinds": [
+     "GABLE"
+    ],
+    "relationships": 3
+   },
+   "closureBefore": {
+    "ERROR:GAP": 50,
+    "WARNING:COPLANAR_DUPLICATE": 4
+   },
+   "closureAfter": {
+    "ERROR:GAP": 50,
+    "WARNING:COPLANAR_DUPLICATE": 4
+   }
+  },
+  {
+   "house": "gozd",
+   "modelBefore": "b0eb6d82ae56b327",
+   "modelAfter": "2e7c5ba6429bcd90",
+   "productionSeconds": 337.55709738,
+   "maxHeartbeatGapSeconds": 2.08,
+   "before": {
+    "rooflights": 7,
+    "chimneys": 1,
+    "openings": 29,
+    "doorsOut": 0,
+    "stairs": [
+     "PLACEHOLDER"
+    ],
+    "polylineWalls": 0,
+    "roofKinds": [
+     "GABLE"
+    ],
+    "relationships": 1
+   },
+   "after": {
+    "rooflights": 7,
+    "chimneys": 1,
+    "openings": 29,
+    "doorsOut": 0,
+    "stairs": [
+     "PLACEHOLDER"
+    ],
+    "polylineWalls": 0,
+    "roofKinds": [
+     "GABLE"
+    ],
+    "relationships": 1
+   },
+   "closureBefore": {
+    "ERROR:GAP": 66
+   },
+   "closureAfter": {
+    "ERROR:GAP": 66
+   }
+  },
+  {
+   "house": "marcowki",
+   "modelBefore": "124e5abc5e6959d8",
+   "modelAfter": "2980cc9c19403b31",
+   "productionSeconds": 333.196442653,
+   "maxHeartbeatGapSeconds": 2.79,
+   "before": {
+    "rooflights": 3,
+    "chimneys": 2,
+    "openings": 21,
+    "doorsOut": 0,
+    "stairs": [
+     "FLIGHTS"
+    ],
+    "polylineWalls": 0,
+    "roofKinds": [
+     "FLAT",
+     "GABLE"
+    ],
+    "relationships": 0
+   },
+   "after": {
+    "rooflights": 3,
+    "chimneys": 2,
+    "openings": 21,
+    "doorsOut": 0,
+    "stairs": [
+     "FLIGHTS"
+    ],
+    "polylineWalls": 4,
+    "roofKinds": [
+     "FLAT",
+     "GABLE"
+    ],
+    "relationships": 0
+   },
+   "closureBefore": {
+    "ERROR:INTERSECTION": 7,
+    "ERROR:GAP": 35
+   },
+   "closureAfter": {
+    "ERROR:GAP": 35,
+    "ERROR:INTERSECTION": 1
+   }
+  },
+  {
+   "house": "ciesz",
+   "modelBefore": "4de216ed46550423",
+   "modelAfter": "4de216ed46550423",
+   "productionSeconds": 199.397051488,
+   "maxHeartbeatGapSeconds": 2.14,
+   "before": {
+    "rooflights": 0,
+    "chimneys": 2,
+    "openings": 20,
+    "doorsOut": 0,
+    "stairs": [],
+    "polylineWalls": 0,
+    "roofKinds": [],
+    "relationships": 5
+   },
+   "after": {
+    "rooflights": 0,
+    "chimneys": 2,
+    "openings": 20,
+    "doorsOut": 0,
+    "stairs": [],
+    "polylineWalls": 0,
+    "roofKinds": [],
+    "relationships": 5
+   },
+   "closureBefore": {
+    "ERROR:INTERSECTION": 2,
+    "ERROR:GAP": 24,
+    "WARNING:COPLANAR_DUPLICATE": 2
+   },
+   "closureAfter": {
+    "ERROR:INTERSECTION": 2,
+    "ERROR:GAP": 24,
+    "WARNING:COPLANAR_DUPLICATE": 2
+   }
+  },
+  {
+   "house": "rary",
+   "modelBefore": "f6886fd278755ee5",
+   "modelAfter": "c308cd0e2d47f87a",
+   "productionSeconds": 288.171737979,
+   "maxHeartbeatGapSeconds": 2.15,
+   "before": {
+    "rooflights": 0,
+    "chimneys": 2,
+    "openings": 20,
+    "doorsOut": 0,
+    "stairs": [],
+    "polylineWalls": 0,
+    "roofKinds": [
+     "GABLE"
+    ],
+    "relationships": 5
+   },
+   "after": {
+    "rooflights": 0,
+    "chimneys": 2,
+    "openings": 20,
+    "doorsOut": 1,
+    "stairs": [],
+    "polylineWalls": 0,
+    "roofKinds": [
+     "GABLE"
+    ],
+    "relationships": 5
+   },
+   "closureBefore": {
+    "ERROR:GAP": 19
+   },
+   "closureAfter": {
+    "ERROR:GAP": 19
+   }
+  }
+ ],
+ "symptoms": [
+  {
+   "id": "D-marcowki-landing-one-going-long",
+   "area": "D",
+   "house": "marcowki",
+   "objects": [
+    "stair-main"
+   ],
+   "sourceProof": "attic plan: U stair 5+7+5 risers in a shaft ~3.6 m deep between the wall faces; the landing edges are riser lines",
+   "analog": "synthetic U stair (stair-fit-005y-n4)",
+   "firstBad": "packages/model/src/stair-layout.ts: a FLIGHT laid a tread after its last riser and the LANDING began beyond it, while the reader counts the landing edge as that riser",
+   "counterfactual": "onRiser landings: depth 3.887 -> 3.624 m; 17 risers x 0.180 m unchanged",
+   "fix": "LANDING.onRiser (opt-in) + emitter sets it",
+   "status": "FIXED_SOURCE_GROUNDED"
+  },
+  {
+   "id": "D-marcowki-stair-in-walls",
+   "area": "D",
+   "house": "marcowki",
+   "objects": [
+    "stair-main",
+    "ring-main-0-w1",
+    "main-iwall-0-x-5",
+    "chimney-1",
+    "main-iwall-0-x-0"
+   ],
+   "sourceProof": "plan: flights run against the outer wall, the partition and the stack; shaft between faces 3.627 m",
+   "analog": "synthetic quarter turn and straight flight (stairSnap tests)",
+   "firstBad": "plan-to-plan registration (stair from the attic plan, walls from the ground plan): the outline 4-7 cm into the walls beside its flights",
+   "counterfactual": "moved (-0.037, +0.082) m within the 0.15 m reading uncertainty; 1.9 cm chimney/wall residual split and named",
+   "fix": "fitStairToBoundingWalls",
+   "status": "FIXED_SOURCE_GROUNDED"
+  },
+  {
+   "id": "D-marcowki-partitions-under-flights",
+   "area": "D",
+   "house": "marcowki",
+   "objects": [
+    "main-iwall-0-x-1",
+    "main-iwall-0-x-2",
+    "main-iwall-0-z-10",
+    "main-iwall-0-z-3"
+   ],
+   "sourceProof": "ground plan: room 5 and the ** closet lie under the flights",
+   "analog": "synthetic partition under a flight; a wall crossing the lowest steps refused; a grazed wall kept",
+   "firstBad": "emit.ts: interior walls at full storey height whatever stands above them",
+   "counterfactual": "POLYLINE top stepped under the flights (min 0.90-2.52 m)",
+   "fix": "followStairSoffits",
+   "status": "FIXED_SOURCE_GROUNDED"
+  },
+  {
+   "id": "D-winders",
+   "area": "D",
+   "house": "analogs",
+   "objects": [
+    "trytomach stair",
+    "sasankach3 stair"
+   ],
+   "sourceProof": "both analogs draw quarter-turn winders (diagonal lines in the corner)",
+   "analog": "-",
+   "firstBad": "packages/reconstruction/src/v2/stair-topology.ts findTreadLadders: trytomach one 4-riser ladder, no arrow (placeholder); sasankach3 no ladder (MISSING)",
+   "counterfactual": "not run",
+   "fix": "none",
+   "status": "UNRESOLVED (>=3 analog stairs gate NOT met)"
+  },
+  {
+   "id": "C-rary-entrance-window",
+   "area": "C",
+   "house": "rary",
+   "objects": [
+    "opening-0-front-0-1"
+   ],
+   "sourceProof": "plan: 105/210 entrance, leaf drawn open outward from the jamb at the smaller x, arc to the other jamb, the 105/210 ring printed over half the arc and beside the leaf",
+   "analog": "marcowki entrance (hinge from the drawing, inward); synthetic leaf under a ring (door-leaf-occluded tests); a01 corner piece stays a window",
+   "firstBad": "openings-v2.ts doorLeafDrawn: samples under the callout read as paper (arc 11/27 seen, leaf paper test hits the ring)",
+   "counterfactual": "hidden samples unseen: GLAZED_DOOR swing OUT hinge LOW; no other opening in the five houses or analogs changes family",
+   "fix": "doorLeafFound + OpeningV2.leaf + emitter swing/hingeSide",
+   "status": "FIXED_SOURCE_GROUNDED"
+  },
+  {
+   "id": "C-rary-garage-side-door",
+   "area": "C",
+   "house": "rary",
+   "objects": [
+    "opening-0-east-5-0"
+   ],
+   "sourceProof": "plan: a 100/210 door in the garage side wall",
+   "analog": "-",
+   "firstBad": "garage mass extent: east wall ~0.6 m inside the drawn wall, so the reader sees a 3.8 m gap and takes the 471/71 ring for a 4.21 x 0.71 window",
+   "counterfactual": "not run",
+   "fix": "none",
+   "status": "UNRESOLVED"
+  },
+  {
+   "id": "A-rooflight-ring-vs-symbol",
+   "area": "A",
+   "house": "gozd,a01",
+   "objects": [
+    "rooflights"
+   ],
+   "sourceProof": "attic plans draw each rooflight as a dashed rectangle; the ring sits toward its eave end (gozd residual ~0.13-0.17 m by hand)",
+   "analog": "synthetic symbol tests",
+   "firstBad": "the reader places the window at the ring centre",
+   "counterfactual": "drawnRooflightSymbol finds no unambiguous symbol on the five houses (eave edge on the eave strip / ring disc)",
+   "fix": "reader with explicit ambiguity; positions unchanged",
+   "status": "UNRESOLVED_NAMED"
+  },
+  {
+   "id": "B-gozd-corner",
+   "area": "B",
+   "house": "gozd",
+   "objects": [
+    "opening-0-front-0-0",
+    "opening-0-west-3-1"
+   ],
+   "sourceProof": "plan: 260/140 front + 110/140 side round the kitchen corner, no pier",
+   "analog": "-",
+   "firstBad": "(1) OCR of grey rings: 700/40 (0.26), 416/147 (0.23); (2) front gap 4.29 m over a lighter-hatched wall; (3) OPENING_TOUCHES_WALL_EDGE keeps the corner square",
+   "counterfactual": "AI_SECOND_LOOK questions built; LIVE_NOT_RUN",
+   "fix": "none (design only)",
+   "status": "UNRESOLVED"
+  }
+ ],
+ "analogs": [
+  {
+   "name": "Dom w trytomach (G)",
+   "run": "REPLAY (sealed N3 graph + metrics)",
+   "modelReplay": "047b0f1c27b1b2ce"
+  },
+  {
+   "name": "Dom w arganiach (G2E)",
+   "run": "REPLAY (sealed N3 graph + metrics)",
+   "modelReplay": "34a95a766d169f39"
+  },
+  {
+   "name": "Dom w sasankach 3 (G)",
+   "run": "REPLAY (sealed N3 graph + metrics)",
+   "modelReplay": "947ea52be264d686"
+  }
+ ],
+ "rejectedExperiments": [
+  {
+   "id": "A contrast-based line test",
+   "result": "0/13 symbols"
+  },
+  {
+   "id": "A best pair without the ring centre inside",
+   "result": "furniture chosen, residual -0.77 m"
+  },
+  {
+   "id": "D lower every overlapping wall",
+   "result": "x-0 lowered along its whole length for a 2 cm residual"
+  },
+  {
+   "id": "D walls walked into as bounding",
+   "result": "contradictory constraints (z-3 under the top flight arrival)"
+  }
+ ],
+ "gates": {
+  "rooflights": "a01 6/7, gozd 7/7 unchanged",
+  "chimneys": "unchanged",
+  "nonManifold": "0 everywhere",
+  "newGapOrIntersection": "none; marcowki INTERSECTION 7 -> 1 (named residual)",
+  "analogStairs": "NOT MET (1 readable flight stair in the inputs)"
+ }
+}

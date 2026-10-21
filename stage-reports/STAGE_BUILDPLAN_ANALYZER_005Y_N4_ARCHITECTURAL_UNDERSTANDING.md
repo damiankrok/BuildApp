@@ -144,7 +144,15 @@ jak w N2/N3); powrót wnęki może mieć własne otwory dopiero, gdy czytnik bę
 
 ## 2. Wyniki na pięciu domach (pełna ścieżka źródło→model→scena, offline)
 
-<!-- MATRIX -->
+| Dom | model przed → po | czas [s] | max przerwa heartbeat [s] | domknięcie przed → po | zmiana |
+|---|---|---|---|---|---|
+| A01 | `d67a026f8cf93dff` → `b740fc7d3697fa9e` | 367 | 1.95 | GAP 50, COPLANAR_DUPLICATE 4 → GAP 50, COPLANAR_DUPLICATE 4 | tylko tekst `why` okien połaciowych |
+| Goździkowce | `b0eb6d82ae56b327` → `2e7c5ba6429bcd90` | 338 | 2.08 | GAP 66 → GAP 66 | tylko tekst `why` okien połaciowych |
+| Marcówki | `124e5abc5e6959d8` → `2980cc9c19403b31` | 333 | 2.79 | INTERSECTION 7, GAP 35 → GAP 35, INTERSECTION 1 | schody (onRiser, dosunięcie), 4 ścianki pod biegiem, zawias wejścia |
+| Cieszynianki | `4de216ed46550423` → `4de216ed46550423` | 199 | 2.14 | INTERSECTION 2, GAP 24, COPLANAR_DUPLICATE 2 → INTERSECTION 2, GAP 24, COPLANAR_DUPLICATE 2 | bez zmian (ten sam skrót) |
+| Rarytasy DEV | `f6886fd278755ee5` → `c308cd0e2d47f87a` | 288 | 2.15 | GAP 19 → GAP 19 | wejście: drzwi OUT zamiast okna |
+
+Okna połaciowe A01 6, Goździkowce 7; kominy, rodzaje dachu i liczby otworów bez zmian; NON_MANIFOLD 0 i diagnostyki kompilacji 0 wszędzie; żadnego nowego GAP ani INTERSECTION. Rarytasy: 116 → 118 siatek (skrzydło drzwi z ramą). Analogi (replay): Trytomach `047b0f1c27b1b2ce`, Arganie `34a95a766d169f39`, Sasanki 3 `947ea52be264d686` — bez zmian względem replay N3 na BASE.
 
 ## 3. Co dalej jest niepewne
 
@@ -168,7 +176,10 @@ jak w N2/N3); powrót wnęki może mieć własne otwory dopiero, gdy czytnik bę
 
 ## 5. Bramki
 
-<!-- GATES -->
+* `tsc` (cały monorepo): 0 błędów.
+* Testy zmienionych pakietów: `model`, `commands`, `geometry` 189/189; `reconstruction`, `architecture`, `reference-marcowki`, `editor` 1060/1060 (w tym nowe: stair-fit 10, door-leaf-occluded 5, rooflight-symbol 3); `source-vision` 42/42 (w tym second-look 6).
+* 5 pełnych przebiegów produkcyjnych źródło→model→scena offline (OFFLINE=1, cache zapieczętowany, rozpoznawacz ORT): skróty identyczne z replay; max przerwa heartbeat 2,79 s.
+* Bez CI 41 zadań, bez APK, bez emulatora (zgodnie z poleceniem).
 
 ## 6. Dysk
 
