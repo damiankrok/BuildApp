@@ -100,10 +100,18 @@ fun gitStdout(vararg args: String): String? = try {
     null // git is not installed
 }
 
+/**
+ * An owner test build made outside CI has to install over the CI preview the owner already has, whose versionCode
+ * (1000 + run) is above any commit count. `-PpreviewVersionCode=<n>` sets it explicitly, and the versionName says so
+ * (`-owner`), so the APK never passes for a CI build. Whoever passes it picks n above the last published preview.
+ */
+val ownerVersionCode: Int? = providers.gradleProperty("previewVersionCode").orNull?.trim()?.toIntOrNull()?.takeIf { it > 0 }
+
 val previewVersion: PreviewVersion = run {
     val runNumber = previewEnv("GITHUB_RUN_NUMBER")?.toIntOrNull()
     val commits = if (runNumber == null) gitStdout("rev-list", "--count", "HEAD")?.toIntOrNull() else null
     when {
+        ownerVersionCode != null -> PreviewVersion(ownerVersionCode, "0.$ownerVersionCode.0-owner", "-PpreviewVersionCode=$ownerVersionCode (owner test build)")
         runNumber != null -> PreviewVersion(PREVIEW_VERSION_CODE_BASE + runNumber, "0.$runNumber.0-preview", "GITHUB_RUN_NUMBER=$runNumber")
         commits != null && commits > 0 -> PreviewVersion(commits, "0.$commits.0-local", "git rev-list --count HEAD")
         else -> PreviewVersion(1, "0.0.1-local", "no git history available")
