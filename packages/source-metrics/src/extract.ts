@@ -45,7 +45,7 @@ import type { ExternalReading, LabelCrop, LabelRecogniser } from './recogniser.j
 import { textAxisOf } from './ocr.js'
 import { readOpeningCallouts, readTintedCallouts } from './callouts.js'
 import type { CalloutReading } from './callouts.js'
-import { CALLOUT_RECOGNISER_NAME, CALLOUT_RECOGNISER_VERSION, corroborateBySibling, judgeCalloutHalf, ringHalfCrops } from './callout-recogniser.js'
+import { CALLOUT_RECOGNISER_NAME, CALLOUT_RECOGNISER_VERSION, corroborateBySibling, judgeCalloutHalf, PLAN_CORROBORATED_WIDTH, planCorroborableWidth, ringHalfCrops } from './callout-recogniser.js'
 import type { OcrResult, TextToken } from './ocr.js'
 import { parseNumber, readingLattice } from './parse.js'
 import { registerFrame, solveLevelLadder } from './registration.js'
@@ -734,7 +734,20 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
       for (const ring of openingRings) {
         const heardRing = heardRings.get(ring)
         const recognised = heardRing?.accepted && heardRing.width.valueCm !== undefined && heardRing.height.valueCm !== undefined ? heardRing : undefined
-        if (!recognised && (ring.widthCandidates.length === 0 || ring.heightCandidates.length === 0)) continue
+        // 005Y-N5: on a ring only one half of which passed the gate, that half's reading still leads its own candidates,
+        // and a width reading the gate refused rides along as a candidate the reconstruction may take only where the
+        // plan gap it labels agrees with it (`PLAN_CORROBORATED_WIDTH`). A refused height never does: nothing on the plan
+        // measures a height, so a refused height reading is not a candidate at all.
+        const halfHeard = !recognised && heardRing ? heardRing : undefined
+        const heardWidthHalf = halfHeard?.width.accepted && halfHeard.width.valueCm !== undefined ? halfHeard.width : undefined
+        const heardHeightHalf = halfHeard?.height.accepted && halfHeard.height.valueCm !== undefined ? halfHeard.height : undefined
+        const refusedWidth = halfHeard ? planCorroborableWidth(halfHeard.width) : undefined
+        // The template's reading of the other half is kept only where it read the half the recogniser passed the same
+        // way: a template that misread this ring's ink once (700 for 200) has no claim on its other half either.
+        const templateWidths = heardHeightHalf && ring.heightCandidates[0]?.value !== heardHeightHalf.valueCm ? [] : ring.widthCandidates
+        const templateHeights = heardWidthHalf && ring.widthCandidates[0]?.value !== heardWidthHalf.valueCm ? [] : ring.heightCandidates
+        if (!recognised && (templateWidths.length === 0 && !heardWidthHalf && !refusedWidth)) continue
+        if (!recognised && templateHeights.length === 0 && !heardHeightHalf) continue
         const centre: PixelPoint = { x: ring.circle.cx, y: ring.circle.cy }
         const near = nearest(observations, ['OPENING', 'WINDOW', 'DOOR', 'OPENING_INTERVAL'], centre)
         const attached = near !== undefined && near.distance <= ring.circle.radiusPx * 6
@@ -744,9 +757,10 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
               height: { text: recognised.height.text, value: recognised.height.valueCm as number, score: recognised.height.p },
             }
           : undefined
-        const width = heard?.width ?? ring.widthCandidates[0]
-        const height = heard?.height ?? ring.heightCandidates[0]
-        const readable = heard !== undefined || (ring.widthCm !== null && ring.heightCm !== null)
+        const width = heard?.width ?? (heardWidthHalf ? { text: heardWidthHalf.text, value: heardWidthHalf.valueCm as number, score: heardWidthHalf.p } : undefined) ?? templateWidths[0] ?? (refusedWidth ? { text: refusedWidth.text, value: refusedWidth.valueCm, score: refusedWidth.confidence } : undefined)
+        const height = heard?.height ?? (heardHeightHalf ? { text: heardHeightHalf.text, value: heardHeightHalf.valueCm as number, score: heardHeightHalf.p } : undefined) ?? templateHeights[0]
+        if (!width || !height) continue
+        const readable = heard !== undefined || heardWidthHalf !== undefined || heardHeightHalf !== undefined || (ring.widthCm !== null && ring.heightCm !== null)
         evidence.push({
           id: stableId('metric', 'callout-ring', { frameId: frame.id, cx: ring.circle.cx, cy: ring.circle.cy }),
           kind: 'OPENING_CALLOUT',
@@ -771,8 +785,11 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
                   { value: heard.height.value, unit: 'cm' as const, rawText: heard.height.text, confidence: round6(heard.height.score), why: `height candidate: the recogniser read the lower half as ${heard.height.text} (p ${recognised.height.p}, mean ${recognised.height.meanP}, stable, ${recognised.height.glyphs} glyphs)` },
                 ]
               : []),
-            ...ring.widthCandidates.map((c) => ({ value: c.value, unit: 'cm' as const, rawText: c.text, confidence: round6(Math.min(1, c.score)), why: `width candidate: the upper half read as ${c.text} (match ${c.score})` })),
-            ...ring.heightCandidates.map((c) => ({ value: c.value, unit: 'cm' as const, rawText: c.text, confidence: round6(Math.min(1, c.score)), why: `height candidate: the lower half read as ${c.text} (match ${c.score})` })),
+            ...(heardWidthHalf ? [{ value: heardWidthHalf.valueCm as number, unit: 'cm' as const, rawText: heardWidthHalf.text, confidence: round6(heardWidthHalf.p), why: `width candidate: the recogniser read the upper half as ${heardWidthHalf.text} (p ${heardWidthHalf.p}, mean ${heardWidthHalf.meanP}, stable, ${heardWidthHalf.glyphs} glyphs; the lower half was refused: ${halfHeard?.height.why})` }] : []),
+            ...(heardHeightHalf ? [{ value: heardHeightHalf.valueCm as number, unit: 'cm' as const, rawText: heardHeightHalf.text, confidence: round6(heardHeightHalf.p), why: `height candidate: the recogniser read the lower half as ${heardHeightHalf.text} (p ${heardHeightHalf.p}, mean ${heardHeightHalf.meanP}, stable, ${heardHeightHalf.glyphs} glyphs; the upper half was refused: ${halfHeard?.width.why})` }] : []),
+            ...templateWidths.map((c) => ({ value: c.value, unit: 'cm' as const, rawText: c.text, confidence: round6(Math.min(1, c.score)), why: `width candidate: the upper half read as ${c.text} (match ${c.score})` })),
+            ...templateHeights.map((c) => ({ value: c.value, unit: 'cm' as const, rawText: c.text, confidence: round6(Math.min(1, c.score)), why: `height candidate: the lower half read as ${c.text} (match ${c.score})` })),
+            ...(refusedWidth ? [{ value: refusedWidth.valueCm, unit: 'cm' as const, rawText: refusedWidth.text, confidence: refusedWidth.confidence, why: `width candidate: ${PLAN_CORROBORATED_WIDTH}: the recogniser read the upper half as ${refusedWidth.text} but the gate refused it (${refusedWidth.why}); usable only where the plan gap agrees` }] : []),
           ],
           confidence: round6(Math.min(1, Math.max(0.05, Math.min(width.score, height.score))) * (ring.bar ? 1 : 0.5) * (readable ? 1 : 0.6)),
           provenance: { extractor: 'NUMERIC_OCR', name: `metrics.callout-ring@${METRIC_READER_VERSION}`, detail: ring.why },

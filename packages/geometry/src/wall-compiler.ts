@@ -148,9 +148,23 @@ export function compileWall(input: WallCompileInput): WallCompileOutput {
 
   const candidateBreaks = uniqueSorted([A0, A1, ...input.topBreaks, ...openings.flatMap((o) => [o.offset, o.offset + o.width])], A0, A1)
 
+  // 005Y-N5: an opening that reaches the wall's physical end runs on through the corner (`Opening.openEnd`): that end
+  // is open between its sill and head. Only a plain end can open; a skewed end zone has no face to open.
+  const touchesStart = (o: Opening): boolean => Math.abs(o.offset - A0) <= EPS
+  const touchesEnd = (o: Opening): boolean => Math.abs(o.offset + o.width - A1) <= EPS
   // Accept openings whose head clears the top everywhere along their span, on both faces.
   const accepted: Opening[] = []
   for (const o of openings) {
+    const openAt = [...(touchesStart(o) ? (['start'] as const) : []), ...(touchesEnd(o) ? (['end'] as const) : [])]
+    if (openAt.some((at) => zones.some((z) => z.at === at)) || (openAt.length > 0 && o.head?.kind === 'RAKED')) {
+      diagnostics.push({
+        code: 'OPENING_OPEN_END_UNSUPPORTED',
+        severity: 'ERROR',
+        message: `opening ${o.id} runs on through the ${openAt.join(' and ')} of wall ${wall.id}, which ${o.head?.kind === 'RAKED' ? 'it cannot do under a raked head' : 'ends in a skewed zone'}; the opening was not cut`,
+        objectId: o.id,
+      })
+      continue
+    }
     const a0 = o.offset
     const a1 = o.offset + o.width
     const us = [a0, a1, ...candidateBreaks.filter((u) => u > a0 + EPS && u < a1 - EPS)]
@@ -330,10 +344,12 @@ export function compileWall(input: WallCompileInput): WallCompileOutput {
   for (const o of accepted) {
     const list = reveals.get(o.id) ?? []
     const s = sillOf(o)
-    for (const [a, outward] of [
-      [o.offset, uPlus],
-      [o.offset + o.width, uMinus],
+    for (const [a, outward, open] of [
+      [o.offset, uPlus, touchesStart(o)],
+      [o.offset + o.width, uMinus, touchesEnd(o)],
     ] as const) {
+      // an open end has no jamb: the opening runs on through the corner
+      if (open) continue
       const h = headAt(o, a)
       const bs = [s, ...bBreaks.filter((b) => b > s + EPS && b < h - EPS), h]
       for (let j = 0; j + 1 < bs.length; j++) {
@@ -371,6 +387,17 @@ export function compileWall(input: WallCompileInput): WallCompileOutput {
     const zone = zones.find((z) => z.at === at)
     if (!zone) {
       const u = at === 'start' ? A0 : A1
+      // An open end (005Y-N5) keeps its end face below the sill and above the head only.
+      const open = accepted.find((o) => (at === 'start' ? touchesStart(o) : touchesEnd(o)))
+      if (open) {
+        const s = sillOf(open)
+        const h = headAt(open, u)
+        const below = (chain: Vec3[]): Vec3[] => chain.filter((p) => p.y - frame.origin.y <= s + EPS)
+        const above = (chain: Vec3[]): Vec3[] => chain.filter((p) => p.y - frame.origin.y >= h - EPS)
+        if (s > EPS) zip(below(chainAt(u, 0)), below(chainAt(u, T)), outward)
+        zip(above(chainAt(u, 0)), above(chainAt(u, T)), outward)
+        continue
+      }
       zip(chainAt(u, 0), chainAt(u, T), outward)
       continue
     }

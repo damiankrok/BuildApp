@@ -249,6 +249,13 @@ export const OpeningSchema = z
     height: positive,
     head: OpeningHeadSchema.optional(),
     leaves: z.array(OpeningLeafSchema).optional(),
+    /**
+     * 005Y-N5: the opening runs on through the CORNER junction at this end of its wall: between its sill and head there
+     * is no wall material from its edge to the wall's physical end, and the corner block is open. The opening on the
+     * other wall of that corner must state the same, with the same sill and height and a level head — one glazing
+     * round a corner with no pier, in two walls. Its edge must lie within the other wall's thickness of the corner.
+     */
+    openEnd: WallEndSchema.optional(),
   })
   .strict()
 export type Opening = z.infer<typeof OpeningSchema>

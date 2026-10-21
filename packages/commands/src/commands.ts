@@ -28,6 +28,7 @@ import {
   Vec2Schema,
   Vec3Schema,
   WallEndRefSchema,
+  WallEndSchema,
   WallJunctionKindSchema,
   RoofEdgeMembersSchema,
   RoofPlateInsetSchema,
@@ -220,6 +221,7 @@ export const CutOpeningSchema = z
     height: positive,
     head: OpeningHeadSchema.optional(),
     leaves: z.array(OpeningLeafSchema).optional(),
+    openEnd: WallEndSchema.optional(),
   })
   .strict()
 

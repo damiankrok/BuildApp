@@ -15,6 +15,7 @@ import type { PixelRect } from '@buildapp/source-common'
 import type { Raster } from '@buildapp/source-cv'
 import { verticalOpeningExtent } from '@buildapp/image-metrology'
 import type { MetricEvidence } from '@buildapp/source-metrics'
+import { PLAN_CORROBORATED_WIDTH } from '@buildapp/source-metrics'
 import type { ElevationFrameV2, PlanFrameV2 } from './frame.js'
 import { bandPieces, gapsBetween, inkFraction, mergeRuns, wallBodyPieces } from './scan.js'
 import type { ProvenanceStatus } from './graph.js'
@@ -63,7 +64,7 @@ export type OpeningV2 = {
   family: OpeningFamily
   /** 005Y-N4 (C): the leaf as the plan draws it — which way it swings and at which end of the gap it hangs — when read. */
   leaf?: DrawnDoorLeaf
-  callout?: { widthCm: number; heightCm: number; evidenceId: string; distanceM: number; heightCandidates?: Array<{ cm: number; score: number }>; resolvedBy?: string }
+  callout?: { widthCm: number; heightCm: number; evidenceId: string; distanceM: number; heightCandidates?: Array<{ cm: number; score: number }>; resolvedBy?: string; widthCorroboratedByPlan?: true }
   elevation?: { frameId: string; sillY: number; headY: number; contrast: number; confidence: number }
   /** Mullion positions as fractions of the width, from stubs the plan draws inside the gap. */
   mullions: number[]
@@ -79,6 +80,12 @@ export type OpeningV2 = {
    * own wall; the relation is what says they are one thing.
    */
   cornerWith?: string
+  /**
+   * 005Y-N5: the end of this piece's plan interval at the corner (LOW: the smaller coordinate) where the glazing runs
+   * on through the corner block — set only when the corner assembly has no pier and its two pieces share one sill and
+   * one level head (`openCornerBand`); the model then opens the block between them (`Opening.openEnd`).
+   */
+  openEnd?: 'LOW' | 'HIGH'
 }
 
 export type OpeningOptions = { minWidthM?: number; maxWidthM?: number; calloutReachM?: number; stubMaxM?: number }
@@ -115,8 +122,10 @@ export function weakPrintedHeight(confidence: number | undefined, printedM: numb
   return !(candidates ?? []).some((c) => Math.abs(c.cm / 100 - drawnM) <= 0.2)
 }
 
-export function calloutCandidates(evidence: MetricEvidence): { widths: Array<{ cm: number; score: number }>; heights: Array<{ cm: number; score: number }> } | null {
-  const widths = evidence.alternatives.filter((a) => a.why.startsWith('width candidate')).map((a) => ({ cm: a.value, score: a.confidence }))
+export function calloutCandidates(evidence: MetricEvidence): { widths: Array<{ cm: number; score: number; planCorroborated?: true }>; heights: Array<{ cm: number; score: number }> } | null {
+  const widths = evidence.alternatives
+    .filter((a) => a.why.startsWith('width candidate'))
+    .map((a) => (a.why.includes(PLAN_CORROBORATED_WIDTH) ? { cm: a.value, score: a.confidence, planCorroborated: true as const } : { cm: a.value, score: a.confidence }))
   const heights = evidence.alternatives.filter((a) => a.why.startsWith('height candidate')).map((a) => ({ cm: a.value, score: a.confidence }))
   if (widths.length > 0 && heights.length > 0) return { widths, heights }
   const pair = calloutPair(evidence)
@@ -420,7 +429,12 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
         if (seen) weighed.push({ ...seen, decision: 'REJECTED', reason: `confidence ${ev.confidence} < 0.2` })
         continue
       }
-      const agreeing = cands.widths.slice(0, 3).filter((c) => Math.abs(c.cm / 100 - widthPlan) <= Math.max(0.12, widthPlan * 0.12))
+      // 005Y-N5: a width reading the recogniser's gate refused counts only where the gap agrees with it — by the same
+      // rule as the reader's own candidates, the gap being the second measurement that accepts it — and only where
+      // none of the reader's own first three agrees.
+      const fits = (c: { cm: number }): boolean => Math.abs(c.cm / 100 - widthPlan) <= Math.max(0.12, widthPlan * 0.12)
+      const readerOwn = cands.widths.filter((c) => !c.planCorroborated).slice(0, 3).filter(fits)
+      const agreeing = readerOwn.length > 0 ? readerOwn : cands.widths.filter((c) => c.planCorroborated && fits(c))
       if (agreeing.length === 0) {
         if (seen) weighed.push({ ...seen, decision: 'REJECTED', reason: `no width reading within 12 % of the ${widthPlan.toFixed(2)} m gap` })
         continue
@@ -429,7 +443,15 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
       const width = agreeing.reduce((best, c) => (c.score > best.score ? c : best), agreeing[0])
       const distance = round6(Math.hypot(alongDistance, acrossDistance))
       if (callout && callout.distanceM <= distance) continue
-      callout = { widthCm: width.cm, heightCm: cands.heights[0].cm, evidenceId: ev.id, distanceM: distance, heightCandidates: cands.heights, ...(width !== cands.widths[0] ? { resolvedBy: `the ${widthPlan.toFixed(2)} m plan gap picked the width reading ${width.cm} over ${cands.widths[0].cm}` } : {}) }
+      callout = {
+        widthCm: width.cm,
+        heightCm: cands.heights[0].cm,
+        evidenceId: ev.id,
+        distanceM: distance,
+        heightCandidates: cands.heights,
+        ...(width.planCorroborated ? { widthCorroboratedByPlan: true as const } : {}),
+        ...(width !== cands.widths[0] ? { resolvedBy: width.planCorroborated ? `the ${widthPlan.toFixed(2)} m plan gap corroborated the width reading ${width.cm} the recogniser's gate refused, over ${cands.widths[0].cm}` : `the ${widthPlan.toFixed(2)} m plan gap picked the width reading ${width.cm} over ${cands.widths[0].cm}` } : {}),
+      }
     }
     // The interval: the plan gap, its width corrected to the printed one about the gap's centre.
     const widthM = callout ? round6(callout.widthCm / 100) : widthPlan
@@ -456,7 +478,7 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
     let doorSwing = false
     let sillY: number
     let headY: number
-    const prov: OpeningV2['provenance'] = { interval: 'SOURCE_DERIVED', width: callout ? 'SOURCE_EXACT' : 'SOURCE_DERIVED', sill: 'UNRESOLVED', head: 'UNRESOLVED', profile: 'SOURCE_DERIVED', family: 'VISUAL_SEMANTIC' }
+    const prov: OpeningV2['provenance'] = { interval: 'SOURCE_DERIVED', width: callout ? (callout.widthCorroboratedByPlan ? 'SOURCE_CORROBORATED' : 'SOURCE_EXACT') : 'SOURCE_DERIVED', sill: 'UNRESOLVED', head: 'UNRESOLVED', profile: 'SOURCE_DERIVED', family: 'VISUAL_SEMANTIC' }
     if (callout && elevation) {
       // The elevation's own height picks among the reader's height candidates
       // when the best one disagrees with it and another, nearly as good, does not.
@@ -926,6 +948,23 @@ const CORNER_PIER_INK = 0.35
 const CORNER_WALL_INK_LUMA = 100
 
 export type CornerAssembly = { a: string; b: string; corner: { x: number; z: number }; pierInk: number; why: string }
+
+/** 005Y-N5: two pieces of one corner glazing share one band when their sills and heads agree within this (m). */
+export const OPEN_CORNER_BAND_M = 0.005
+
+/**
+ * 005Y-N5: whether a pierless corner assembly opens its corner block, and why. Both pieces must be rectangular (level
+ * heads) and share a sill and a head: the block is one opening only between one sill and one head. Nothing is averaged
+ * or assumed to make them agree — pieces at different heights keep the corner square as wall.
+ */
+export function openCornerBand(a: Pick<OpeningV2, 'id' | 'sillY' | 'headY' | 'headFarY' | 'profile'>, b: Pick<OpeningV2, 'id' | 'sillY' | 'headY' | 'headFarY' | 'profile'>): { open: boolean; why: string } {
+  const level = (o: typeof a): boolean => o.profile === 'RECTANGULAR' && (o.headFarY === undefined || Math.abs(o.headFarY - o.headY) <= OPEN_CORNER_BAND_M)
+  if (!level(a) || !level(b)) return { open: false, why: `${!level(a) ? a.id : b.id} has no level head: the corner square stays wall` }
+  const dSill = Math.abs(a.sillY - b.sillY)
+  const dHead = Math.abs(a.headY - b.headY)
+  if (dSill > OPEN_CORNER_BAND_M || dHead > OPEN_CORNER_BAND_M) return { open: false, why: `the pieces differ by ${dSill.toFixed(3)} m at the sill and ${dHead.toFixed(3)} m at the head: the corner square stays wall between two bands` }
+  return { open: true, why: `one band ${a.sillY.toFixed(2)}..${a.headY.toFixed(2)} m in both pieces: the corner block is open between them` }
+}
 
 /**
  * 005Y-N3 (H1): corner assemblies among one body's openings on one storey. Two openings in perpendicular walls whose

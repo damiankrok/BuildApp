@@ -14,7 +14,7 @@ import type { SourceCoordinateFrame, SourceObservationGraph } from '@buildapp/so
 import { inkChannel } from '@buildapp/source-cv'
 import { extractMetricEvidence, extractMetricEvidenceAsync } from '../src/extract.js'
 import { readOpeningCallouts } from '../src/callouts.js'
-import { corroborateBySibling, glyphCount, judgeCalloutHalf, ringHalfCrops } from '../src/callout-recogniser.js'
+import { corroborateBySibling, glyphCount, judgeCalloutHalf, planCorroborableWidth, ringHalfCrops } from '../src/callout-recogniser.js'
 import type { CalloutHalfVerdict } from '../src/callout-recogniser.js'
 import type { ExternalReading, LabelCrop, LabelRecogniser } from '../src/recogniser.js'
 import { METRIC_EVIDENCE_CALLOUT_RING_SCHEMA_VERSION } from '../src/schema.js'
@@ -72,6 +72,34 @@ describe('ring halves for the recogniser', () => {
     for (const y of [1, 2, 3, 5, 6, 7]) g.data[y * 12 + 2] = 0
     for (const y of [1, 2, 3, 4, 5, 6, 7]) g.data[y * 12 + 8] = 0
     expect(glyphCount(g)).toBe(2)
+  })
+
+  it('005Y-N5: counts a digit whose pale stroke broke off in the next column as one glyph, digits one clear column apart as two', () => {
+    // A small 4 on a tinted disc: its diagonal (columns 2..3) lost the pixel joining it to the stem (column 4).
+    const g = { width: 12, height: 9, data: new Uint8ClampedArray(12 * 9).fill(255) }
+    for (const [x, y] of [[3, 1], [3, 2], [2, 3], [2, 4]]) g.data[y * 12 + x] = 0
+    for (const y of [1, 2, 3, 4, 5, 6, 7]) g.data[y * 12 + 4] = 0
+    for (const x of [2, 3]) g.data[5 * 12 + x] = 0
+    expect(glyphCount(g)).toBe(1)
+    // The same stroke with a clear column before the next digit stays two.
+    for (const y of [1, 2, 3, 4, 5, 6, 7]) g.data[y * 12 + 6] = 0
+    expect(glyphCount(g)).toBe(2)
+  })
+})
+
+describe('005Y-N5: a refused width reading as a plan-corroborable candidate', () => {
+  it('offers an unconfident width reading of an opening size at half its posterior', () => {
+    const v = judgeCalloutHalf(reading('260', 0.74, 0.8, false), 1, 'width')
+    expect(v.accepted).toBe(false)
+    const c = planCorroborableWidth(v)
+    expect(c?.valueCm).toBe(260)
+    expect(c?.confidence).toBeCloseTo(0.37, 6)
+  })
+  it('offers nothing for an accepted half, a non-number, or a size no opening has', () => {
+    expect(planCorroborableWidth(judgeCalloutHalf(reading('120'), 3, 'width'))).toBeUndefined()
+    expect(planCorroborableWidth(judgeCalloutHalf(reading('1a0', 0.5, 0.5), 3, 'width'))).toBeUndefined()
+    expect(planCorroborableWidth(judgeCalloutHalf(reading('7', 0.5, 0.5), 3, 'width'))).toBeUndefined()
+    expect(planCorroborableWidth(judgeCalloutHalf(reading('990', 0.5, 0.5), 3, 'width'))).toBeUndefined()
   })
 })
 
@@ -167,15 +195,21 @@ describe('the recogniser in the metric reading', () => {
     expect(ev?.alternatives.slice(2).some((a) => a.value === 110)).toBe(true)
   })
 
-  it('a ring a half of which fails keeps the template’s reading, and says why on its record', async () => {
+  it('a ring a half of which fails keeps the template’s reading for that half, leads with the half that passed, and says why on its record (005Y-N5)', async () => {
     const { recogniser } = recogniserOf((k) => (k.key.endsWith('u') ? reading('110') : k.key.endsWith('l') ? reading('30') : undefined))
     const set = await extractMetricEvidenceAsync({ ...options, recogniser })
     const off = extractMetricEvidence(options)
     const rec = (set.calloutRings ?? []).find((r) => Math.abs(r.centrePx.x - 90) <= 3)
     expect(rec?.accepted).toBe(false)
     expect(rec?.height.why).toMatch(/glyphs|not an opening/)
-    expect(ringCallout(set)?.rawText).toBe(ringCallout(off)?.rawText)
-    expect(ringCallout(set)?.alternatives).toEqual(ringCallout(off)?.alternatives)
+    const offHeight = (ringCallout(off)?.rawText ?? '').split('/')[1]
+    expect(ringCallout(set)?.rawText).toBe(`110/${offHeight}`)
+    const alts = ringCallout(set)?.alternatives ?? []
+    expect(alts[0]).toMatchObject({ value: 110, rawText: '110' })
+    expect(alts[0].why).toMatch(/^width candidate: the recogniser read the upper half as 110 .*the lower half was refused/)
+    // The refused height reading (30) is no candidate at all; the template's own candidates follow unchanged.
+    expect(alts.some((a) => a.rawText === '30')).toBe(false)
+    expect(alts.slice(1)).toEqual(ringCallout(off)?.alternatives)
   })
 
   it('without a recogniser the set carries no ring records and keeps its version', () => {

@@ -91,7 +91,8 @@ export function ringHalfCrops(ink: Gray, circle: { cx: number; cy: number; radiu
 
 /**
  * How many glyphs a half's ink holds: its 8-connected ink components of at least 3 px, those whose column spans overlap
- * by half the narrower one merged (a digit broken across its waist is one glyph). Digits of a callout are printed apart,
+ * by half the narrower one, or touching with no clear column between them, merged (a digit broken across its waist
+ * or along a pale stroke is one glyph). Digits of a callout are printed apart,
  * so a reading with fewer digits than this left a glyph unread.
  */
 export function glyphCount(g: Gray): number {
@@ -133,7 +134,9 @@ export function glyphCount(g: Gray): number {
   for (const s of kept) {
     const last = merged[merged.length - 1]
     const overlap = last ? Math.min(last.x1, s.x1) - Math.max(last.x0, s.x0) + 1 : 0
-    if (last && overlap >= 0.5 * Math.min(last.x1 - last.x0 + 1, s.x1 - s.x0 + 1)) {
+    // 005Y-N5: pieces in touching columns are one glyph too. Digits are printed with a clear column between them; a
+    // pale anti-aliased stroke (the diagonal of a small 4 on a tinted disc) breaks off its digit with no gap at all.
+    if (last && (overlap >= 0.5 * Math.min(last.x1 - last.x0 + 1, s.x1 - s.x0 + 1) || s.x0 <= last.x1 + 1)) {
       last.x0 = Math.min(last.x0, s.x0)
       last.x1 = Math.max(last.x1, s.x1)
     } else merged.push({ ...s })
@@ -160,6 +163,24 @@ export function corroborateBySibling(rings: ReadonlyArray<{ id: string; width: C
     out.set(r.id, { width: lift(r.width, r.unstableOnly.width), height: lift(r.height, r.unstableOnly.height) })
   }
   return out
+}
+
+/** The mark a gate-refused width candidate carries in its `why`: the reconstruction may take it only where the plan gap agrees. */
+export const PLAN_CORROBORATED_WIDTH = 'PLAN_CORROBORATED_WIDTH'
+
+/**
+ * 005Y-N5: a width reading the gate refused — not confident, not stable, or with a glyph the count says went unread —
+ * that is still two or three digits of an opening's width. It is offered only as a candidate whose acceptance needs a
+ * second, independent measurement of the same thing (the plan gap the ring labels), at half its posterior so that a
+ * candidate the gate let through outranks it. A dropped digit (118 read as 18) cannot fit the gap it labels.
+ * Heights have no such second measurement on a plan, so nothing like this exists for them.
+ */
+export function planCorroborableWidth(v: CalloutHalfVerdict): { text: string; valueCm: number; confidence: number; why: string } | undefined {
+  if (v.accepted || !/^\d{2,3}$/.test(v.text)) return undefined
+  const valueCm = Number(v.text)
+  const range = CALLOUT_RANGE_CM.width
+  if (valueCm < range.min || valueCm > range.max) return undefined
+  return { text: v.text, valueCm, confidence: round6(Math.max(0.05, v.p * 0.5)), why: v.why }
 }
 
 /** What became of one half's reading. */

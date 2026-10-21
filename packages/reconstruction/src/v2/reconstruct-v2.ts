@@ -34,7 +34,7 @@ import type { RecessTopology, ZoneSide } from './recesses.js'
 import { readInterior } from './interior.js'
 import type { InteriorReading, LabelToken } from './interior.js'
 import { assembleStair, findTreadLadders, poolLadders } from './stair-topology.js'
-import { FIRM_CALLOUT_CONFIDENCE, commonHeadReading, cornerAssemblies, elevationExtent, garageMouth, planGaps, readWallOpenings, viewGroundRefusals, wallAppearanceExtent } from './openings-v2.js'
+import { FIRM_CALLOUT_CONFIDENCE, commonHeadReading, cornerAssemblies, openCornerBand, elevationExtent, garageMouth, planGaps, readWallOpenings, viewGroundRefusals, wallAppearanceExtent } from './openings-v2.js'
 import { lumaOf } from './openings-v2.js'
 import type { OpeningV2, WallHost } from './openings-v2.js'
 import { planeRoofLayout } from './plane-roof.js'
@@ -1240,13 +1240,20 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       // 005Y-N3 (H1): one glazing wrapping a corner of this body on this storey: its two pieces are named one assembly
       const here = openings.filter((o) => o.massId === m.id && o.storeyIndex === index)
       for (const c of cornerAssemblies(here, r, T, entry.raster, entry.frame)) {
+        const pa = openings.find((x) => x.id === c.a)
+        const pb = openings.find((x) => x.id === c.b)
+        // 005Y-N5: a pierless corner whose two pieces share one band is opened through the corner block
+        const band = pa && pb ? openCornerBand(pa, pb) : { open: false, why: 'a piece is missing' }
         for (const [self, other] of [[c.a, c.b], [c.b, c.a]] as const) {
           const o = openings.find((x) => x.id === self)
           if (!o) continue
           o.cornerWith = other
-          o.unresolved.push(`one glazing with ${other} round the corner (${c.corner.x.toFixed(2)}, ${c.corner.z.toFixed(2)}); the plan draws no pier there, but the model keeps the corner square as wall: an opening leaves wall material at both its sides`)
+          if (band.open) {
+            const along = o.facade === 'FRONT' || o.facade === 'REAR' ? c.corner.x : c.corner.z
+            o.openEnd = Math.abs(o.interval[0] - along) <= Math.abs(o.interval[1] - along) ? 'LOW' : 'HIGH'
+          } else o.unresolved.push(`one glazing with ${other} round the corner (${c.corner.x.toFixed(2)}, ${c.corner.z.toFixed(2)}); the plan draws no pier there, but ${band.why}`)
         }
-        options.featureTrace?.({ kind: 'CORNER_ASSEMBLY', massId: m.id, storey: index, a: c.a, b: c.b, corner: c.corner, pierInk: c.pierInk, decision: 'READ', why: c.why })
+        options.featureTrace?.({ kind: 'CORNER_ASSEMBLY', massId: m.id, storey: index, a: c.a, b: c.b, corner: c.corner, pierInk: c.pierInk, decision: 'READ', open: band.open, why: `${c.why}; ${band.why}` })
         step({ stage: 'openings', what: `the corner assembly ${c.a} + ${c.b}`, method: 'DIRECT', detail: c.why, inputs: 2, outputs: 1 })
       }
     }

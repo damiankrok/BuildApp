@@ -374,6 +374,7 @@ function execute(d: Draft, c: ResolvedCommand): void {
         height: c.height,
         head: c.head,
         leaves: c.leaves,
+        openEnd: c.openEnd,
       })
       return
     case 'placeWindow':

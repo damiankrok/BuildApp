@@ -17,6 +17,7 @@ import {
   wallFrame,
   wallPlanPoint,
   openingLeaves,
+  openEndJoin,
   type CanonicalBuildingModel,
   type Level,
   type Opening,
@@ -183,16 +184,35 @@ export function compileBuilding(model: CanonicalBuildingModel): CompiledScene {
 
   // Every cut each wall carries: its own openings plus the leaves of openings hosted elsewhere.
   // A leaf is the same semantic opening restated in that wall's frame (same id, its own offset).
+  const windowByOpening = new Map(model.windows.map((w) => [w.openingId, w]))
+  const doorByOpening = new Map(model.doors.map((d) => [d.openingId, d]))
+  // 005Y-N5: an opening running on through a corner cuts its wall to the wall's physical end (the wall compiler leaves
+  // that end open between sill and head), and its fill runs on to meet the fill across the corner face to face: the
+  // owner's fill stops at the outer face of the other fill's frame, the trimmed wall's fill runs into the corner block
+  // up to the inner face of the owner's frame. A stated open end without its join is cut as stated (a validation warning).
+  const fillSpans = new Map<string, Opening>()
+  const openCut = (o: Opening): Opening => {
+    const joined = o.openEnd ? openEndJoin(model, topology, o) : undefined
+    if (!o.openEnd || !joined?.ok) return o
+    const span = joined.join.span
+    const cut: Opening = { ...o, offset: span.a0, width: span.a1 - span.a0 }
+    const across = windowByOpening.get(joined.join.partner.id) ?? doorByOpening.get(joined.join.partner.id)
+    if (across) {
+      const reach = joined.join.role === 'OWNER' ? -across.frameInset : joined.join.partnerWall.thickness - across.frameInset - across.frameDepth
+      const a0 = o.openEnd === 'START' ? span.a0 - reach : span.a0
+      const a1 = o.openEnd === 'END' ? span.a1 + reach : span.a1
+      fillSpans.set(o.id, { ...o, offset: a0, width: a1 - a0 })
+    }
+    return cut
+  }
   const cutsByWall = new Map<string, Opening[]>()
   for (const o of byId(model.openings)) {
     for (const leaf of openingLeaves(o)) {
-      const cut: Opening = leaf.wallId === o.wallId ? o : { ...o, wallId: leaf.wallId, offset: leaf.offset, leaves: undefined }
+      const cut: Opening = leaf.wallId === o.wallId ? openCut(o) : { ...o, wallId: leaf.wallId, offset: leaf.offset, leaves: undefined }
       cutsByWall.set(leaf.wallId, [...(cutsByWall.get(leaf.wallId) ?? []), cut])
     }
   }
   const primaryWallOf = new Map(model.openings.map((o) => [o.id, o.wallId]))
-  const windowByOpening = new Map(model.windows.map((w) => [w.openingId, w]))
-  const doorByOpening = new Map(model.doors.map((d) => [d.openingId, d]))
   const regionsByWall = new Map<string, typeof model.surfaceRegions>()
   for (const r of byId(model.surfaceRegions)) regionsByWall.set(r.hostId, [...(regionsByWall.get(r.hostId) ?? []), r])
 
@@ -241,7 +261,7 @@ export function compileBuilding(model: CanonicalBuildingModel): CompiledScene {
       if (!primary) continue
       const win = windowByOpening.get(o.id)
       if (win) {
-        for (const piece of compileWindowFill(win, o, r.frame)) {
+        for (const piece of compileWindowFill(win, fillSpans.get(o.id) ?? o, r.frame)) {
           meshes.push({
             objectId: win.id,
             objectKind: 'window',
@@ -258,7 +278,7 @@ export function compileBuilding(model: CanonicalBuildingModel): CompiledScene {
       }
       const door = doorByOpening.get(o.id)
       if (door) {
-        for (const piece of compileDoorFill(door, o, r.frame).pieces) {
+        for (const piece of compileDoorFill(door, fillSpans.get(o.id) ?? o, r.frame).pieces) {
           meshes.push({
             objectId: door.id,
             objectKind: 'door',

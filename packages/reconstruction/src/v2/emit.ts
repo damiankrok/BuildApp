@@ -602,7 +602,9 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     const raked = heightFar !== undefined && o.profile === 'RAKED_SINGLE'
     const levelDoor = raked && kind === 'DOOR'
     const height = levelDoor && heightFar !== undefined ? Math.min(heightNear, heightFar) : heightNear
-    push({ type: 'cutOpening', id: o.id, wallId, kind, offset: Math.max(0, offset), sill, width: o.widthM, height, ...(raked && !levelDoor ? { head: { kind: 'RAKED', heightFar } } : {}) }, o.id, 'openings')
+    // 005Y-N5: the end of the wall at an open corner: the plan's LOW end is the wall's START unless the wall runs against the plan axis
+    const openEnd = o.openEnd && !raked ? ((o.openEnd === 'LOW') !== reversed ? 'START' : 'END') : undefined
+    push({ type: 'cutOpening', id: o.id, wallId, kind, offset: Math.max(0, offset), sill, width: o.widthM, height, ...(raked && !levelDoor ? { head: { kind: 'RAKED', heightFar } } : {}), ...(openEnd ? { openEnd } : {}) }, o.id, 'openings')
     // 005Y-N4 (C): a swing and hinge only from the leaf and arc the plan draws; the wall's u may run against the plan's axis
     const drawnSwing: { swing?: 'IN' | 'OUT'; hingeSide?: 'LEFT' | 'RIGHT' } = o.leaf ? { swing: o.leaf.swing, hingeSide: (o.leaf.hingeAt === 'LOW') !== reversed ? 'LEFT' : 'RIGHT' } : {}
     if (kind === 'WINDOW') {
@@ -624,7 +626,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     cutAndFill(o, ringWallId(mass.id, o.storeyIndex, o.facade), offset, reversed, l)
   }
   // 005Y-N3 (H1): a corner assembly is one relationship between its two openings, written once
-  for (const o of b.openings) if (o.cornerWith && o.id < o.cornerWith && b.openings.some((x) => x.id === o.cornerWith)) push({ type: 'createRelationship', kind: 'ALIGNS_WITH', from: o.id, to: o.cornerWith, note: 'CORNER_GLAZING: one glazing round the corner of the body, in two walls; no pier drawn between the pieces' })
+  for (const o of b.openings) if (o.cornerWith && o.id < o.cornerWith && b.openings.some((x) => x.id === o.cornerWith)) push({ type: 'createRelationship', kind: 'ALIGNS_WITH', from: o.id, to: o.cornerWith, note: `CORNER_GLAZING: one glazing round the corner of the body, in two walls; no pier drawn between the pieces${o.openEnd ? '; the corner block is open between their common sill and head' : '; the corner square stays wall (the pieces do not share one band)'}` })
   // 005Y-N2: a recess in a body's face — a passage through the ring wall over its mouth, its returns and back wall as
   // walls of their own, and the back wall's openings cut in it
   for (const p of b.pockets ?? []) {

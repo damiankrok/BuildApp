@@ -22,6 +22,7 @@ import {
 import { layoutStair } from './stair-layout.js'
 import { linearSolidCutIssue, linearSolidIsDegenerate } from './linear-solid.js'
 import { physicalCore, resolveWallTopology, wallOverlapIssues } from './topology.js'
+import { openEndJoin } from './open-end.js'
 import { architectureIssues } from './validate-architecture.js'
 
 export type { ValidationCode, ValidationIssue, ValidationResult } from './issues.js'
@@ -180,12 +181,21 @@ export function semanticIssues(m: CanonicalBuildingModel): ValidationIssue[] {
     }
     if (!leafOk) continue
     const range = openingHeadRange(o)
+    // 005Y-N5: an opening running on through a corner is checked over the span it cuts, open on that side.
+    let openSpan: { a0: number; a1: number } | undefined
+    if (o.openEnd) {
+      const joined = openEndJoin(m, topology, o)
+      if (joined.ok) openSpan = joined.join.span
+      else warn('OPENING_OPEN_END_UNMATCHED', `opening ${o.id} states an open ${o.openEnd} but is cut closed on that side: ${joined.reason}`, o.id, 'openEnd')
+    }
     for (const leaf of leaves) {
       const wall = m.walls.find((w) => w.id === leaf.wallId)!
       const where = leaf.wallId === o.wallId ? `wall ${wall.id}` : `leaf wall ${wall.id}`
       const L = wallLength(wall)
-      const a0 = leaf.offset
-      const a1 = leaf.offset + o.width
+      const a0 = openSpan?.a0 ?? leaf.offset
+      const a1 = openSpan?.a1 ?? leaf.offset + o.width
+      const openAtStart = openSpan !== undefined && o.openEnd === 'START'
+      const openAtEnd = openSpan !== undefined && o.openEnd === 'END'
       const b0 = o.sill
       const b1 = range.max
       if (a0 < -EPS || a1 > L + EPS || b0 < -EPS || b1 > wall.height + EPS) {
@@ -196,7 +206,7 @@ export function semanticIssues(m: CanonicalBuildingModel): ValidationIssue[] {
         )
         continue
       }
-      if (a0 <= EPS || a1 >= L - EPS || b1 >= wall.height - EPS) {
+      if ((a0 <= EPS && !openAtStart) || (a1 >= L - EPS && !openAtEnd) || b1 >= wall.height - EPS) {
         err(
           'OPENING_TOUCHES_WALL_EDGE',
           `opening ${o.id} touches a side or the top edge of ${where}; an opening must leave wall material on both sides and above it (a sill at the base is allowed)`,
@@ -207,7 +217,7 @@ export function semanticIssues(m: CanonicalBuildingModel): ValidationIssue[] {
       const extent = topology.extents.get(wall.id)
       if (extent) {
         const core = physicalCore(extent)
-        if (a0 <= core.a0 + EPS || a1 >= core.a1 - EPS) {
+        if ((a0 <= core.a0 + EPS && !openAtStart) || (a1 >= core.a1 - EPS && !openAtEnd)) {
           const intrusion = Math.max(core.a0 - a0, a1 - core.a1)
           err(
             'OPENING_IN_JUNCTION_ZONE',

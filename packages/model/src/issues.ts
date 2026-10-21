@@ -36,6 +36,8 @@ export type ValidationCode =
   | 'OPENING_LEAF_INVALID'
   | 'OPENING_LEAF_LEVEL_MISMATCH'
   | 'OPENING_LEAF_NOT_PARALLEL'
+  // --- 005Y-N5: an opening running on through a corner ---
+  | 'OPENING_OPEN_END_UNMATCHED'
   // --- roof openings ---
   | 'UNKNOWN_ROOF_OPENING'
   | 'ROOF_OPENING_OUTSIDE_HOST'
