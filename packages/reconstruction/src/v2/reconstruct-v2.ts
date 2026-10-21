@@ -1561,7 +1561,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       // 005Y-N1: a ring the metric reading's recogniser read reads what it read (`withRecognisedHalves`).
       const callouts = withRecognisedHalves(readTintedCallouts(topEntry.raster, { region, frameId: topEntry.frame.frameId, minRadiusPx: Math.max(6, 0.15 / mpp), maxRadiusPx: Math.max(10, 0.45 / mpp), requireBar: true, ...(options.checkpoint ? { checkpoint: options.checkpoint } : {}) }), topEntry.frame.frameId, metrics.calloutRings)
       for (const c of callouts) { const w = topEntry.frame.toWorld(c.circle.cx, c.circle.cy); options.debug?.(`plan-rooflight ring ${c.widthCm}/${c.heightCm} bar ${!!c.bar} at px ${c.circle.cx.toFixed(0)},${c.circle.cy.toFixed(0)} world ${w.x.toFixed(2)},${w.z.toFixed(2)} body ${r.x0},${r.z0}..${r.x1},${r.z1}`) }
-      planRooflights.push(...readPlanRooflights(callouts, topEntry.frame, r, T, { ridgeAxis: mainRoof.ridgeAxis, ridgeAt: mainRoof.ridgeAt, pitchDeg: mainRoof.pitchDeg, eaveY: mainRoof.eaveY }, options.featureTrace))
+      planRooflights.push(...readPlanRooflights(callouts, topEntry.frame, r, T, { ridgeAxis: mainRoof.ridgeAxis, ridgeAt: mainRoof.ridgeAt, pitchDeg: mainRoof.pitchDeg, eaveY: mainRoof.eaveY }, options.featureTrace, topEntry.raster))
       options.debug?.(`plan-rooflights ${callouts.length} rings, ${planRooflights.length} rooflights, ${renderRooflights.length} render patches`)
       step({ stage: 'roof-details', what: 'rooflights stated by the plan under the roof', method: 'DIRECT', detail: `${callouts.length} callout ring${callouts.length === 1 ? '' : 's'} inside the storey, ${planRooflights.length} read as rooflights`, inputs: callouts.length, outputs: planRooflights.length })
     }
