@@ -297,3 +297,54 @@ export function cluster1d(values: readonly number[], tolerance: number): Array<{
   }
   return out
 }
+
+/** 005Y-N5: a wall drawn as a flat grey fill instead of black ink is darker than this (room fills and hatching are lighter). */
+export const WALL_FILL_LUMA = 130
+/** 005Y-N5: a flat fill varies by no more than this between neighbouring pixels (hatching, text and furniture lines do). */
+export const WALL_FILL_FLATNESS = 6
+
+/**
+ * 005Y-N5: the pieces of a wall band read as the wall's own body rather than as ink about a fixed line. A column is
+ * solid where a contiguous run of wall ink at least `minRun` pixels thick lies within `reach` pixels of `linePx` —
+ * ink that continues a pixel either way along the band, as a wall does and a textured symbol does not —
+ * so a band drawn a few pixels off the registered face still reads as one wall — and wall ink is either dark ink
+ * (below `threshold`) or a flat fill darker than WALL_FILL_LUMA: a plan that draws some walls in a dark grey fill
+ * (another material, a lower wall) draws walls all the same. Thin glazing lines, hatching and text are never a run
+ * that thick and flat.
+ */
+export function wallBodyPieces(r: Raster, axis: 'X' | 'Y', linePx: number, from: number, to: number, reach: number, minRun: number, threshold = 90): Run[] {
+  const at = (i: number, d: number): number => (axis === 'X' ? lumaAt(r, i, linePx + d) : lumaAt(r, linePx + d, i))
+  const dark = (i: number, d: number): boolean => {
+    const l = at(i, d)
+    if (l < threshold) return true
+    if (l >= WALL_FILL_LUMA) return false
+    return [at(i, d - 1), at(i, d + 1), at(i - 1, d), at(i + 1, d)].every((n) => Math.abs(n - l) <= WALL_FILL_FLATNESS)
+  }
+  // a wall runs on along itself: its ink continues a pixel either way along the band (a blot of foliage, a symbol's
+  // texture or a letter does not)
+  const ink = (i: number, d: number): boolean => dark(i, d) && dark(i - 1, d) && dark(i + 1, d)
+  const solid: boolean[] = []
+  const lo = Math.floor(from)
+  const hi = Math.ceil(to)
+  const R = Math.ceil(reach)
+  for (let i = lo; i <= hi; i += 1) {
+    let best = 0
+    let run = 0
+    for (let d = -R; d <= R; d += 1) {
+      run = ink(i, d) ? run + 1 : 0
+      if (run > best) best = run
+    }
+    solid.push(best >= minRun)
+  }
+  const out: Run[] = []
+  let start: number | undefined
+  for (let k = 0; k <= solid.length; k += 1) {
+    const s = k < solid.length && solid[k]
+    if (s && start === undefined) start = lo + k
+    if (!s && start !== undefined) {
+      out.push({ from: start, to: lo + k - 1 })
+      start = undefined
+    }
+  }
+  return out
+}

@@ -16,7 +16,7 @@ import type { Raster } from '@buildapp/source-cv'
 import { verticalOpeningExtent } from '@buildapp/image-metrology'
 import type { MetricEvidence } from '@buildapp/source-metrics'
 import type { ElevationFrameV2, PlanFrameV2 } from './frame.js'
-import { bandPieces, gapsBetween, inkFraction, mergeRuns } from './scan.js'
+import { bandPieces, gapsBetween, inkFraction, mergeRuns, wallBodyPieces } from './scan.js'
 import type { ProvenanceStatus } from './graph.js'
 import { CONVENTIONS } from '../solve.js'
 
@@ -171,7 +171,10 @@ export function planGaps(raster: Raster, plan: PlanFrameV2, host: WallHost, wall
       pieces = best.ps
     }
   }
-  const solid = mergeRuns(pieces, 2)
+  // 005Y-N5: the wall's own body about the line found — a band drawn a few pixels off it, or in a flat grey fill,
+  // still closes the gap there; the thin-ink reading above stays (stubs and mullions come from it)
+  const body = wallBodyPieces(raster, along, centrePx, from, to, wallPx * 0.75, Math.max(2, Math.round(wallPx * 0.5)))
+  const solid = mergeRuns([...pieces, ...body], 2)
   const minGapPx = opt.minWidthM / mpp
   const gaps = gapsBetween(solid, from, to, minGapPx * 0.8)
   const toWorld = (px: number): number => (along === 'X' ? plan.toWorld(px, centrePx).x : plan.toWorld(centrePx, px).z)
