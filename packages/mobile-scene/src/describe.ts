@@ -131,6 +131,49 @@ const fact = (ctx: Ctx, label: string, value: string | undefined): void => {
   if (value !== undefined) ctx.facts.push({ label, value })
 }
 
+/** A schema enum (`PART_OF`, `RIDGE`) as the lower-case phrase a relation row reads with. */
+const phraseOf = (kind: string): string => kind.toLowerCase().replace(/_/g, ' ')
+
+type StairSegment = { kind: string; risers?: number; length?: number; turn?: string; angleDeg?: number }
+
+/** One line for a stair's run of segments: `flight 4, winder 3 left 90°, landing 0.90 m right, flight 9`. */
+export function stairSegmentSummary(segments: readonly StairSegment[]): string {
+  return segments
+    .map((x) =>
+      x.kind === 'FLIGHT'
+        ? `flight ${x.risers}`
+        : x.kind === 'WINDER'
+          ? `winder ${x.risers} ${x.turn?.toLowerCase()} ${x.angleDeg}°`
+          : `landing ${len(x.length ?? 0)}${x.turn && x.turn !== 'NONE' ? ` ${x.turn.toLowerCase()}` : ''}`,
+    )
+    .join(', ')
+}
+
+/**
+ * A stair's facts. A placeholder says only where it stands; real flights add their risers, the rise they share
+ * (from the two storeys' levels and the stair's own offsets) and the run of flights, winders and landings.
+ */
+function describeStair(ctx: Ctx, object: SemanticObject, any: Record<string, unknown>): void {
+  relate(ctx, 'arrives at storey', any.toLevelId as string)
+  fact(ctx, 'Type', String(any.kind) === 'FLIGHTS' ? 'Real flights' : 'Placeholder')
+  fact(ctx, 'Footprint', rectSize(any.footprint as PlanRect))
+  if (String(any.kind) !== 'FLIGHTS') return
+  const segments = any.segments as StairSegment[]
+  const risers = segments.reduce((s, x) => s + (x.risers ?? 0), 0)
+  const fromLevel = ctx.model.levels.find((l) => l.id === levelIdOf(object))
+  const toLevel = ctx.model.levels.find((l) => l.id === (any.toLevelId as string))
+  fact(ctx, 'Width', len(any.width as number))
+  fact(ctx, 'Risers', String(risers))
+  if (fromLevel && toLevel && risers > 0) {
+    const rise = toLevel.elevation + (any.topOffset as number) - (fromLevel.elevation + (any.baseOffset as number))
+    fact(ctx, 'Total rise', len(rise))
+    fact(ctx, 'Riser height', len(rise / risers))
+  }
+  fact(ctx, 'Travel', String(any.direction))
+  fact(ctx, 'Segments', stairSegmentSummary(segments))
+  fact(ctx, 'Waist', len(any.waist as number))
+}
+
 /**
  * Relationships and facts for one object.
  *
@@ -149,10 +192,10 @@ export function describeObject(
 
   relate(ctx, 'storey', levelIdOf(object))
   // 1.6.0: what the object is part of — its assemblies, then the typed relationships it takes part in.
-  for (const a of assembliesContaining(model, (object as { id: string }).id)) relate(ctx, `part of ${a.kind.toLowerCase().replace(/_/g, ' ')}`, a.id)
+  for (const a of assembliesContaining(model, (object as { id: string }).id)) relate(ctx, `part of ${phraseOf(a.kind)}`, a.id)
   for (const r of model.relationships) {
     const id = (object as { id: string }).id
-    if (r.from === id) relate(ctx, r.kind.toLowerCase().replace(/_/g, ' '), r.to)
+    if (r.from === id) relate(ctx, phraseOf(r.kind), r.to)
   }
 
   switch (kind) {
@@ -296,40 +339,9 @@ export function describeObject(
       fact(ctx, 'Base offset', len(any.baseOffset as number))
       break
     }
-    case 'stair': {
-      relate(ctx, 'arrives at storey', any.toLevelId as string)
-      fact(ctx, 'Type', String(any.kind) === 'FLIGHTS' ? 'Real flights' : 'Placeholder')
-      fact(ctx, 'Footprint', rectSize(any.footprint as PlanRect))
-      if (String(any.kind) === 'FLIGHTS') {
-        const segments = any.segments as { kind: string; risers?: number; length?: number; turn?: string; angleDeg?: number }[]
-        const risers = segments.reduce((s, x) => s + (x.risers ?? 0), 0)
-        const fromLevel = model.levels.find((l) => l.id === levelIdOf(object))
-        const toLevel = model.levels.find((l) => l.id === (any.toLevelId as string))
-        fact(ctx, 'Width', len(any.width as number))
-        fact(ctx, 'Risers', String(risers))
-        if (fromLevel && toLevel && risers > 0) {
-          const rise = toLevel.elevation + (any.topOffset as number) - (fromLevel.elevation + (any.baseOffset as number))
-          fact(ctx, 'Total rise', len(rise))
-          fact(ctx, 'Riser height', len(rise / risers))
-        }
-        fact(ctx, 'Travel', String(any.direction))
-        fact(
-          ctx,
-          'Segments',
-          segments
-            .map((x) =>
-              x.kind === 'FLIGHT'
-                ? `flight ${x.risers}`
-                : x.kind === 'WINDER'
-                  ? `winder ${x.risers} ${x.turn?.toLowerCase()} ${x.angleDeg}°`
-                  : `landing ${len(x.length ?? 0)}${x.turn && x.turn !== 'NONE' ? ` ${x.turn.toLowerCase()}` : ''}`,
-            )
-            .join(', '),
-        )
-        fact(ctx, 'Waist', len(any.waist as number))
-      }
+    case 'stair':
+      describeStair(ctx, object, any)
       break
-    }
     case 'terrace': {
       const poly = any.polygon as { x: number; z: number }[]
       fact(ctx, 'Area', area(polygonArea(poly)))
@@ -380,7 +392,7 @@ export function describeObject(
       fact(ctx, 'Pitch', deg(any.pitchDeg as number))
       fact(ctx, 'Area in plan', area(polygonArea(poly)))
       fact(ctx, 'Thickness', len(any.thickness as number))
-      for (const e of model.roofEdges.filter((x) => x.planeIds.includes(o.id))) relate(ctx, e.kind.toLowerCase().replace(/_/g, ' '), e.id)
+      for (const e of model.roofEdges.filter((x) => x.planeIds.includes(o.id))) relate(ctx, phraseOf(e.kind), e.id)
       const holes = model.roofOpenings.filter((x) => x.roofId === o.id)
       if (holes.length > 0) fact(ctx, 'Openings', String(holes.length))
       break
