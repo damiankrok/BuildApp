@@ -601,6 +601,9 @@ function relationOf(a: Solid, b: Solid, s: Semantics): ClosureRelation | null {
       const follows = w?.topProfile?.kind === 'FOLLOW_ROOF_PLANES' && w.topProfile.planeIds.includes(q.objectId)
       return { a: p.id, b: q.id, label: 'WALL<->ROOF', kind: follows ? 'CONTACT' : 'SEPARATION', why: follows ? 'the wall top follows the plane underside' : 'the wall does not follow this plane' }
     }
+    // As over a one-piece roof: a stack pierces the plane it stands under, whether the plane is cut round it (the
+    // overlap is then gone) or the stack stands across a ridge or hip, where no cut confined to one plane can hold it.
+    if (p.kind === 'roofPlane' && q.kind === 'chimney') return { a: p.id, b: q.id, label: 'CHIMNEY<->ROOF', kind: 'PENETRATION', why: 'a stack pierces the roof plane' }
     if (p.kind === 'linearSolid' && q.kind === 'roofPlane') {
       const host = s.solids.get(p.objectId)?.hostId
       const on = host === q.objectId || (host !== undefined && (s.edgePlanes.get(host) ?? []).includes(q.objectId))
