@@ -81,7 +81,7 @@ try {
   // 005Y: each elevation's registration (its scale, the span it was matched to, where its ground lands) and the section's
   const regs = r.registrations as unknown as { elevations: Array<Record<string, unknown>>; section?: Record<string, unknown> }
   writeFileSync(join(out, 'registrations.json'), JSON.stringify({ elevations: regs.elevations.map((e) => ({ frameId: e.frameId, side: e.side, mpp: e.mpp, spanM: e.spanM, eavesM: e.eavesM, spanWhy: e.spanWhy, bottomY: e.bottomY, groundErrorM: e.anisotropyCheck, extent: e.extent })), section: regs.section ?? null, steps: r.steps.filter((x) => /regist/.test(x.what)).map((x) => `${x.what}: ${x.detail}`) }, null, 1) + '\n')
-  writeFileSync(join(out, 'layout-summary.json'), JSON.stringify({ masses: r.layout.masses.map((m) => ({ id: m.id, role: m.role, widthM: m.widthM.value, depthM: m.depthM.value, depthWhy: m.depthM.why })), regions: r.layout.footprintRegions.map((x) => ({ id: x.id, kind: x.kind, pixelRect: x.pixelRect, why: x.why })), unresolved: r.layout.unresolved.map((g) => ({ id: g.id, what: g.what, reason: g.reason })) }, null, 1) + '\n')
+  writeFileSync(join(out, 'layout-summary.json'), JSON.stringify({ masses: r.layout.masses.map((m) => ({ id: m.id, role: m.role, widthM: m.widthM.value, depthM: m.depthM.value, depthWhy: m.depthM.why })), regions: r.layout.footprintRegions.map((x) => ({ id: x.id, kind: x.kind, pixelRect: x.pixelRect, why: x.why })), unresolved: r.layout.unresolved.map((g) => ({ id: g.id, what: g.what, reason: g.reason })), gate: r.layout.gate }, null, 1) + '\n')
   console.log(JSON.stringify(summary))
 } catch (error) {
   const e = error as { code?: string; message?: string; diagnostics?: unknown }

@@ -360,6 +360,8 @@ export type OpeningReadingInput = {
   views: Array<{ view: ElevationFrameV2; raster: Raster; bandOnly?: boolean }>
   /** A wider gap than this on the ground storey of an attached single-storey body reads as a vehicle door. */
   attachedSingleStorey: boolean
+  /** 005Y-N5 (C3): rooms of this body the publisher's list names garages (ground storey only). */
+  garageRooms?: ReadonlyArray<{ bounds: { x0: number; z0: number; x1: number; z1: number }; why: string }>
   /**
    * 005U-N4: the one vehicle mouth bound to a garage room on this wall: a room the publisher's list names a garage
    * (by a number read inside it), meeting this outer wall, where the plan leaves exactly one side open. The gap that is
@@ -635,7 +637,19 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
       // (and usually draws its leaf and swing beside it).
       // 005W: with heights read off an elevation, the plan's light glazing symbol (005V-N3) counts as well as dark ink.
       const glazed = glazingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM) || glazingLinesDrawn(input.planRaster, plan, host, interval, input.wallThicknessM, bandCentre)
+      // 005Y-N5 (C3): in a wall of a room the publisher's list names a garage, an opening to the floor a door wide is
+      // its door: lines across the gap there are the frame, not a French window's glass (a garage has none)
+      const garage = (input.garageRooms ?? []).find((g) => {
+        const face = host.facade === 'FRONT' ? g.bounds.z0 : host.facade === 'REAR' ? g.bounds.z1 : host.facade === 'WEST' ? g.bounds.x0 : g.bounds.x1
+        const [r0, r1] = host.facade === 'FRONT' || host.facade === 'REAR' ? [g.bounds.x0, g.bounds.x1] : [g.bounds.z0, g.bounds.z1]
+        return Math.abs(face - host.planeAt) <= input.wallThicknessM + 0.2 && lo >= r0 - input.wallThicknessM && hi <= r1 + input.wallThicknessM
+      })
       if (reachesFloor && !glazed && widthM <= 1.3 && headY - sillY <= 2.35) family = 'DOOR'
+      else if (reachesFloor && garage && widthM <= 1.3 && headY - sillY <= 2.35) {
+        family = 'DOOR'
+        prov.family = 'VISUAL_SEMANTIC'
+        unresolved.push(`a door by its room: ${garage.why}; its leaf is not read on the plan`)
+      }
       // 005Y-N2: lines across the gap and a door's own symbol beside it — a leaf drawn open from one jamb, as long as the
       // gap is wide, and the arc it sweeps to the other — are a glazed leaf in a door, not a window to the floor. The
       // lines may be a threshold rather than glass: the leaf's glazing is named as read from them. On the ground storey

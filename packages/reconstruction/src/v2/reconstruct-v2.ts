@@ -34,7 +34,7 @@ import type { RecessTopology, ZoneSide } from './recesses.js'
 import { readInterior } from './interior.js'
 import type { InteriorReading, LabelToken } from './interior.js'
 import { assembleStair, findTreadLadders, poolLadders } from './stair-topology.js'
-import { FIRM_CALLOUT_CONFIDENCE, commonHeadReading, cornerAssemblies, openCornerBand, elevationExtent, garageMouth, planGaps, readWallOpenings, viewGroundRefusals, wallAppearanceExtent } from './openings-v2.js'
+import { FIRM_CALLOUT_CONFIDENCE, GARAGE_LABEL, commonHeadReading, cornerAssemblies, openCornerBand, elevationExtent, garageMouth, planGaps, readWallOpenings, viewGroundRefusals, wallAppearanceExtent } from './openings-v2.js'
 import { lumaOf } from './openings-v2.js'
 import type { OpeningV2, WallHost } from './openings-v2.js'
 import { planeRoofLayout } from './plane-roof.js'
@@ -1186,6 +1186,8 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // 005U-N4: a garage room's one open side (`garageMouth`): the room is named a garage by a number read inside it
   // and the publisher's list, never by its area; two open sides, or none, and no gap is made a vehicle door.
   const vehicleMouths = new Map<string, { from: number; to: number; roomId: string; why: string }>()
+  // 005Y-N5 (C3): the garage rooms the publisher's list names, for the doors in their walls
+  const garageRooms: Array<{ massId: string; bounds: { x0: number; z0: number; x1: number; z1: number }; why: string }> = []
   const decomposition = draft.base?.decomposition
   for (const reading of interior) {
     const entry = planByStorey.get(reading.storeyIndex)
@@ -1193,6 +1195,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     for (const room of reading.rooms) {
       const mass = masses.find((x) => room.id.startsWith(`${x.id}-`))
       if (!mass) continue
+      if (room.number && room.label && GARAGE_LABEL.test(room.label)) garageRooms.push({ massId: mass.id, bounds: room.bounds, why: `${room.id}, numbered ${room.number} = ${room.label} on the publisher's list` })
       const found = garageMouth(room, rectAt(mass, reading.storeyIndex), decomposition.wideOpenings, entry.frame, T)
       if (found.length === 1) {
         const [f] = found
@@ -1203,6 +1206,14 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     }
   }
   let hostIndex = 0
+  // 005Y-N5 (C3): a body's garage: a room of it the publisher's list names a garage, or — where the room's number was
+  // not read — the whole body, when a vehicle door was read in one of its walls
+  const garagesOf = (m: MassV2, r: { x0: number; z0: number; x1: number; z1: number }): Array<{ bounds: { x0: number; z0: number; x1: number; z1: number }; why: string }> => {
+    const named = garageRooms.filter((g) => g.massId === m.id)
+    if (named.length > 0) return named
+    const vehicle = openings.find((o) => o.massId === m.id && o.storeyIndex === 0 && o.family === 'GARAGE_DOOR')
+    return vehicle ? [{ bounds: r, why: `the body ${m.id} holds a vehicle door (${vehicle.id})` }] : []
+  }
   for (const m of masses) {
     for (const index of m.storeys) {
       const entry = planByStorey.get(index)
@@ -1220,7 +1231,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         // 005V: a top-storey wall of the main body parallel to the ridge stops where the roof's underside meets it.
         const underEaves = !gable && mainRoof && m.id === main.id && index === topStorey ? round6(mainRoof.eaveY - mainRoof.thicknessM / Math.cos((mainRoof.pitchDeg * Math.PI) / 180)) : undefined
         const host: WallHost = { massId: m.id, facade, planeAt, from, to, centreAt: round6(planeAt + (inward * T) / 2), storeyIndex: index, ...(gable ? { gable } : {}), ...(underEaves !== undefined ? { eaveTopY: underEaves } : {}), floorY: l.elevation, storeyHeightM: gable ? round6(mainRoof!.ridgeY - l.elevation) : l.height }
-        const found = readWallOpenings({ ...(options.featureTrace ? { trace: options.featureTrace } : {}), onBandViewAccepted: (frameId) => acceptedBandViews.add(frameId), plan: entry.frame, planRaster: entry.raster, host, wallThicknessM: T, callouts, views: [...viewsOf(facade).filter((v) => !openingHeightRefused.has(v.view.registration.frameId) || openingViewOverrides.has(v.view.registration.frameId)), ...openingOnlyViews.filter((v) => v.view.side === (facade === 'WEST' ? 'LEFT' : facade === 'EAST' ? 'RIGHT' : facade))].map((v) => openingViewOverrides.get(v.view.registration.frameId) ?? v), attachedSingleStorey: m.role === 'ATTACHED' && m.storeys.length === 1, onRefused: (r) => gap({ what: `the gap ${r.interval[0].toFixed(2)}..${r.interval[1].toFixed(2)} on the ${facade.toLowerCase()} wall of ${m.id}, storey ${index}`, reason: r.why, status: 'REFUSED', observationIds: [], evidenceIds: [] }), ...(vehicleMouths.has(`${m.id}:${facade}`) && index === 0 ? { vehicleMouth: vehicleMouths.get(`${m.id}:${facade}`) } : {}), index: hostIndex++ })
+        const found = readWallOpenings({ ...(options.featureTrace ? { trace: options.featureTrace } : {}), onBandViewAccepted: (frameId) => acceptedBandViews.add(frameId), plan: entry.frame, planRaster: entry.raster, host, wallThicknessM: T, callouts, views: [...viewsOf(facade).filter((v) => !openingHeightRefused.has(v.view.registration.frameId) || openingViewOverrides.has(v.view.registration.frameId)), ...openingOnlyViews.filter((v) => v.view.side === (facade === 'WEST' ? 'LEFT' : facade === 'EAST' ? 'RIGHT' : facade))].map((v) => openingViewOverrides.get(v.view.registration.frameId) ?? v), attachedSingleStorey: m.role === 'ATTACHED' && m.storeys.length === 1, onRefused: (r) => gap({ what: `the gap ${r.interval[0].toFixed(2)}..${r.interval[1].toFixed(2)} on the ${facade.toLowerCase()} wall of ${m.id}, storey ${index}`, reason: r.why, status: 'REFUSED', observationIds: [], evidenceIds: [] }), ...(vehicleMouths.has(`${m.id}:${facade}`) && index === 0 ? { vehicleMouth: vehicleMouths.get(`${m.id}:${facade}`) } : {}), ...(index === 0 ? { garageRooms: garagesOf(m, r) } : {}), index: hostIndex++ })
         for (const o of found) {
           // A gap on a face another body stands against is a door between the two bodies, not a facade opening.
           const other = masses.find((xm) => {

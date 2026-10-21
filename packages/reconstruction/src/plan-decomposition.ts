@@ -490,7 +490,10 @@ export function gridLines(
     }
 
     // --- then the bands, which join the chain line they belong to ------------
-    for (const band of bands) {
+    // 005Y-N5 (C3): longest first, so that a wall sets its own line and a scrap of ink beside it joins that line —
+    // not the other way round, where a 23 px mark made the line and a garage's whole side wall was pulled onto it, and
+    // then thinned away under a room's dimension tick that has no wall there.
+    for (const band of [...bands].sort((a, b) => b.length - a.length || a.axisPx - b.axisPx || (a.axis < b.axis ? -1 : a.axis > b.axis ? 1 : 0))) {
       const across = (band.axis === 'VERTICAL') === (axis === 'X')
       if (!across) continue
       const px = band.axisPx
