@@ -236,6 +236,10 @@ const WALL_MATCH_MIN = 18
 const OPENING_ROW_SHARE = 0.5
 /** 005W: rows of glass that happen to match the wall (a blind's slat, a reflection) are bridged up to this height. */
 const OPENING_BRIDGE_M = 0.3
+/** 005Y-N5 (C5): a row this unlike the wall on the opening's columns is the opening itself, wholly (glass, a leaf, a blind). */
+const OPENING_WHOLE_ROW_SHARE = 0.9
+/** 005Y-N5 (C5): a partly foreign stretch at an opening's end this tall or taller is not its frame, sill board or shutter box. */
+const OPENING_OVERLAY_MIN_M = 0.5
 /** 005W: the wall read over an opening's head that closes it above. */
 const OPENING_LINTEL_M = 0.1
 /** 005W: a read sill this close to the storey floor is the floor (a threshold or a frame read as wall). */
@@ -324,11 +328,22 @@ export function wallAppearanceExtent(raster: Raster, view: ElevationFrameV2, int
   const lintel = Math.max(2, Math.round(OPENING_LINTEL_M / mpp))
   const above = share.slice(Math.max(0, best.a - lintel), best.a)
   if (above.length < lintel || above.some((v) => Number.isNaN(v) || v >= OPENING_ROW_SHARE)) return null
-  const inRun = share.slice(best.a, best.b + 1)
+  // 005Y-N5 (C5): a stretch at either end of the run whose rows are only partly unlike the wall — none of them as unlike
+  // it as the opening's own glass or leaf, which covers (nearly) every column — and taller than any frame, sill board or
+  // shutter box, is something over the wall beside the opening (a watermark, a shadow, a sign), not the opening: its
+  // head or sill is where the rows turn wholly foreign.
+  const whole = (i: number): boolean => share[i] >= OPENING_WHOLE_ROW_SHARE
+  const overlayRows = OPENING_OVERLAY_MIN_M / mpp
+  let a = best.a
+  let b = best.b
+  while (a < b && !whole(a)) a += 1
+  while (b > a && !whole(b)) b -= 1
+  const trimmed = whole(a) ? { a: a - best.a >= overlayRows ? a : best.a, b: best.b - b >= overlayRows ? b : best.b } : best
+  const inRun = share.slice(trimmed.a, trimmed.b + 1)
   const mean = inRun.reduce((p, q) => p + q, 0) / inRun.length
   if (mean < 0.6) return null
-  const headY = view.yOf(top + best.a)
-  const lowY = view.yOf(top + best.b + 1)
+  const headY = view.yOf(top + trimmed.a)
+  const lowY = view.yOf(top + trimmed.b + 1)
   // A run ending this close to the floor reaches it: the last rows are a threshold or a frame, not wall.
   const sill = Math.min(lowY, headY) - floorY <= FLOOR_SNAP_M ? floorY : Math.min(lowY, headY)
   return {
@@ -336,7 +351,7 @@ export function wallAppearanceExtent(raster: Raster, view: ElevationFrameV2, int
     headY: round6(Math.max(lowY, headY)),
     contrast: round6(Math.min(45, 100 * (mean - 0.5))),
     share: round6(mean),
-    why: `rows ${top + best.a}..${top + best.b} unlike the wall's ${samples.length} solid stretch${samples.length === 1 ? '' : 'es'} on ${Math.round(mean * 100)} % of the opening's columns`,
+    why: `rows ${top + trimmed.a}..${top + trimmed.b}${trimmed.a !== best.a || trimmed.b !== best.b ? ` (of ${top + best.a}..${top + best.b}: the rest only partly unlike the wall)` : ''} unlike the wall's ${samples.length} solid stretch${samples.length === 1 ? '' : 'es'} on ${Math.round(mean * 100)} % of the opening's columns`,
   }
 }
 
@@ -399,8 +414,10 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
   const wallTop = (interval: [number, number]): number => Math.min(host.floorY + host.storeyHeightM, host.eaveTopY ?? Number.POSITIVE_INFINITY, host.gable ? Math.max(gableSoffitY(host.gable, interval[0]), gableSoffitY(host.gable, interval[1])) : Number.POSITIVE_INFINITY)
   const views = input.views.filter((v) => {
     if (!v.bandOnly) return true
-    const read = gaps.filter((g) => wallAppearanceExtent(v.raster, v.view, g.interval, solids, host.floorY, wallTop(g.interval)) !== null).length
+    const reads = gaps.map((g) => wallAppearanceExtent(v.raster, v.view, g.interval, solids, host.floorY, wallTop(g.interval)))
+    const read = reads.filter((x) => x !== null).length
     const accepted = gaps.length >= 2 && read >= Math.ceil((2 * gaps.length) / 3)
+    input.trace?.({ kind: 'BAND_VIEW_CHECK', frameId: v.view.registration.frameId, massId: host.massId, storey: host.storeyIndex, facade: host.facade, accepted, px: [v.view.pxOf(host.from), v.view.pxOf(host.to)], py: [v.view.pyOf(host.floorY), v.view.pyOf(host.floorY + host.storeyHeightM)], raster: [v.raster.width, v.raster.height], gaps: gaps.map((g, i) => ({ intervalM: g.interval, read: reads[i] ? { sillY: reads[i]?.sillY, headY: reads[i]?.headY } : null })) })
     if (accepted) input.onBandViewAccepted?.(v.view.registration.frameId)
     return accepted
   })
@@ -604,7 +621,7 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
     }
     // --- family
     // 005U: a vehicle door, a door or a full-height screen needs a sill something READ; an assumed one decides nothing.
-    const attachedVehicle = !heightsAssumed && input.attachedSingleStorey && host.storeyIndex === 0 && widthM >= 2.2 && sillY - host.floorY < 0.1
+    const attachedVehicle = !heightsAssumed && input.attachedSingleStorey && host.storeyIndex === 0 && widthM >= VEHICLE_DOOR_MIN_WIDTH_M && sillY - host.floorY < 0.1
     // 005U-N4: the gap that is a garage room's one open side, with nothing drawn across it as glazing.
     const mouth = input.vehicleMouth
     const mouthGap =
@@ -617,14 +634,21 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
     let leaf: DrawnDoorLeaf | undefined
     const calloutBoxes: PixelBox[] = input.callouts.flatMap((e) => (e.textBox ? [{ x0: e.textBox.x0 - 2, y0: e.textBox.y0 - 2, x1: e.textBox.x1 + 2, y1: e.textBox.y1 + 2 }] : []))
     const reachesFloor = sillY - host.floorY < 0.12
-    if (mouthGap && heightsAssumed && mouth) {
+    // 005Y-N5 (C5): the plan's own symbol of an overhead door across a ground-storey gap a vehicle passes through
+    const tracks = host.storeyIndex === 0 && widthPlan >= VEHICLE_DOOR_MIN_WIDTH_M && (heightsAssumed || reachesFloor) ? overheadDoorTracks(input.planRaster, plan, host, [lo, hi], input.wallThicknessM) : undefined
+    if (heightsAssumed && (mouthGap && mouth ? true : !!tracks)) {
       family = 'GARAGE_DOOR'
       prov.family = 'SOURCE_DERIVED'
       sillY = host.floorY
       headY = round6(host.floorY + CONVENTIONS.openingHead)
       for (let k = unresolved.length - 1; k >= 0; k -= 1) if (unresolved[k].startsWith('kind (')) unresolved.splice(k, 1)
-      unresolved.push(`a vehicle door: ${mouth.why}; its sill and head are assumed (${CONVENTIONS.openingHead} m) — no callout or elevation reads them`)
+      unresolved.push(`a vehicle door: ${mouthGap && mouth ? mouth.why : tracks?.why}; its sill and head are assumed (${CONVENTIONS.openingHead} m) — no callout or elevation reads them`)
     } else if (mouthGap && !heightsAssumed && sillY - host.floorY < 0.1) family = 'GARAGE_DOOR'
+    else if (tracks && !heightsAssumed) {
+      family = 'GARAGE_DOOR'
+      prov.family = 'SOURCE_DERIVED'
+      unresolved.push(`a vehicle door: ${tracks.why}`)
+    }
     else if (heightsAssumed) {
       family = doorBySymbol ? 'DOOR' : 'WINDOW'
       prov.family = doorBySymbol ? (doorSwing ? 'SOURCE_DERIVED' : 'VISUAL_SEMANTIC') : 'ASSUMED_FOR_RENDERING'
@@ -912,6 +936,87 @@ function doorSwingDrawn(raster: Raster, plan: PlanFrameV2, host: WallHost, inter
   const q = plan.toPixel(a1.x, a1.z)
   const f = inkFraction(raster, Math.min(p.x, q.x), Math.min(p.y, q.y), Math.max(p.x, q.x), Math.max(p.y, q.y), 140)
   return f > 0.02 && f < 0.25
+}
+
+/** 005Y-N5 (C5): a gap narrower than this is no vehicle door (m). */
+const VEHICLE_DOOR_MIN_WIDTH_M = 2.2
+/** 005Y-N5 (C5): a plan's overhead-door track is a line lighter than wall ink (`GLAZING_LINE_LUMA`) … */
+const TRACK_INK_LUMA = GLAZING_LINE_LUMA
+/** … looked for this far either side of each jamb, along the wall (m) … */
+const TRACK_SEARCH_ALONG_M = 0.3
+/** … starting within this distance of the wall's inner face (m) … */
+const TRACK_START_M = 0.3
+/** … broken into dashes by gaps no longer than this (m) … */
+const TRACK_DASH_GAP_M = 0.3
+/** … and at least this long: a door's height, folded up under the ceiling (m). */
+export const TRACK_MIN_LENGTH_M = 1.5
+/** 005Y-N5 (C5): a dashed line is ink on this share of its length at least, and short of solid at most. */
+const TRACK_INK_SHARE: readonly [number, number] = [0.25, 0.92]
+/** 005Y-N5 (C5): along a dotted line drawn soft the ink's lightness swings by this much a pixel on average; along a solid one it holds. */
+const TRACK_DOT_SWING_LUMA = 8
+/** 005Y-N5 (C5): the two tracks of one door agree in length within this share. */
+const TRACK_LENGTH_AGREEMENT = 0.1
+
+/**
+ * 005Y-N5 (C5): the plan symbol of an overhead (sectional or up-and-over) door: two thin dashed lines running from the
+ * gap's two jambs straight into the room, square to the wall and about a door's height long — the tracks the leaf
+ * folds back along. A line counts when it starts at the wall's inner face, is broken (into dashes, or into dark dots in
+ * soft grey ink whose lightness swings pixel to pixel — never solid like a partition) and stays thin (the paper beside it is not ink). Both jambs must carry one, of about one length.
+ * Returns the two lengths, or nothing.
+ */
+export function overheadDoorTracks(raster: Raster, plan: PlanFrameV2, host: WallHost, interval: [number, number], wallThicknessM: number): { lengthsM: [number, number]; why: string } | undefined {
+  const inward = host.facade === 'FRONT' || host.facade === 'WEST' ? 1 : -1
+  const alongX = host.facade === 'FRONT' || host.facade === 'REAR'
+  const mpp = (plan.mppX + plan.mppY) / 2
+  const face = host.centreAt + (inward * wallThicknessM) / 2
+  const at = (along: number, depth: number): { x: number; y: number } => (alongX ? plan.toPixel(along, face + inward * depth) : plan.toPixel(face + inward * depth, along))
+  const ink = (p: { x: number; y: number }): boolean => lumaOf(raster, Math.round(p.x), Math.round(p.y)) < TRACK_INK_LUMA
+  const step = mpp
+  const reach = TRACK_MIN_LENGTH_M * 2.5
+  const track = (along: number): number | undefined => {
+    let first: number | undefined
+    let last: number | undefined
+    let inked = 0
+    let swing = 0
+    let prev: number | undefined
+    let thin = 0
+    for (let d = 0; d <= reach; d += step) {
+      if (!ink(at(along, d))) {
+        if (last !== undefined && d - last > TRACK_DASH_GAP_M) break
+        if (first === undefined && d > TRACK_START_M) return undefined
+        continue
+      }
+      if (first === undefined) first = d
+      last = d
+      inked += 1
+      const p = at(along, d)
+      const l = lumaOf(raster, Math.round(p.x), Math.round(p.y))
+      if (prev !== undefined) swing += Math.abs(l - prev)
+      prev = l
+      const side = 3 * mpp
+      if (!ink(at(along - side, d)) && !ink(at(along + side, d))) thin += 1
+    }
+    if (first === undefined || last === undefined) return undefined
+    const length = last - first
+    const samples = length / step + 1
+    // Broken: gaps along it, or — a fine dotted line drawn soft — ink that alternates dark and grey; a partition is neither.
+    const broken = inked / samples <= TRACK_INK_SHARE[1] || (inked > 1 && swing / (inked - 1) >= TRACK_DOT_SWING_LUMA)
+    if (length < TRACK_MIN_LENGTH_M || inked / samples < TRACK_INK_SHARE[0] || !broken || thin < 0.8 * inked) return undefined
+    return length
+  }
+  const atJamb = (jamb: number): number | undefined => {
+    let best: number | undefined
+    for (let o = -TRACK_SEARCH_ALONG_M; o <= TRACK_SEARCH_ALONG_M; o += step) {
+      const l = track(jamb + o)
+      if (l !== undefined && (best === undefined || l > best)) best = l
+    }
+    return best
+  }
+  const a = atJamb(interval[0])
+  const b = atJamb(interval[1])
+  if (a === undefined || b === undefined) return undefined
+  if (Math.abs(a - b) > TRACK_LENGTH_AGREEMENT * Math.max(a, b)) return undefined
+  return { lengthsM: [round6(a), round6(b)], why: `an overhead door's tracks: dashed lines ${a.toFixed(2)} and ${b.toFixed(2)} m long run into the room from both jambs` }
 }
 
 /** 005U-N4: a room the publisher's list names a garage (the name, in the languages the sources print). */

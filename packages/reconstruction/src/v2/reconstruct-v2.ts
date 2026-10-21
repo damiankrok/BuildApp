@@ -45,7 +45,7 @@ import { readFasciaBand, readRailing, readVergeMember } from './facade.js'
 import type { FacadeAssemblyHypothesis, FacadeMember } from './facade.js'
 import { skyMask, solvePerspectiveCamera } from './camera.js'
 import { attachedGableLayout, readAttachedRoofForm } from './attached-roof-form.js'
-import { decideSideOrientation, decideSidesByOpenings, gableApexRow, gableOutline, mainTopProfile, sameSheetSideRegistration } from './side-orientation.js'
+import { decideSideOrientation, decideSidesByOpenings, gableApexRow, gableOutline, mainTopProfile, roofTopOverBand, sameSheetSideRegistration } from './side-orientation.js'
 import type { PerspectiveCameraV2 } from './camera.js'
 import { emitBuilding } from './emit.js'
 import { fitStairToBoundingWalls, followStairSoffits } from './stair-fit.js'
@@ -574,6 +574,8 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const bandRegistrations = new Map<string, ElevationRegistrationV2>()
   /** 005W-N1: side views re-registered at the sheet scale of the front or rear, read in their place for the openings. */
   const openingViewOverrides = new Map<string, { view: ElevationFrameV2; raster: Raster; bandOnly: true }>()
+  /** Sky masks of the elevation rasters, computed once per raster. */
+  const skyMasks = new Map<Raster, Mask>()
   const sideEaves = layout.roofSupports.find((r) => r.massId === main.sourceMassId)?.overhangM?.value ?? 0
   // 005Y: the eaves projection the section draws, read before the renders are registered: a render's silhouette spans
   // the walls plus the eaves, and registering it on the walls alone misses it. The span across the ridge is the
@@ -600,11 +602,22 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       // 005W: a view registered on the walls' band feeds the openings of its facade only. The roof, the rooflights,
       // the chimneys and the wall finish keep to views the silhouette registered: the band says where the walls are, not
       // where the roof's outline or the render's colours sit.
+      // 005Y-N5 (C5): where the silhouette's top is not the roof's (a roof traced as background), the band is also tried
+      // with the ridge datum on the top of what stands over it; the ground decides between the two, as between bands.
+      let mask = skyMasks.get(raster)
       const walled = neutralBands(raster, r.extent)
         .filter((b) => b.share >= WALL_BAND_MIN_SHARE && b.x1 - b.x0 >= WALL_BAND_MIN_WIDTH * (r.extent.x1 - r.extent.x0))
-        .map((b) => ({ b, reg: registerElevationV2({ id: r.frameId, assetId: r.assetId }, { ...r.extent, x0: b.x0, x1: b.x1 }, r.side as 'FRONT' | 'REAR' | 'LEFT' | 'RIGHT', r.sideConfidence, `${r.sideWhy}; scaled on the walls' band, columns ${b.x0}..${b.x1} of the silhouette's ${r.extent.x0}..${r.extent.x1} (${b.rows} rows)`, world, ridgeY, sideEaves, terrain, true) }))
-        .filter((c): c is { b: typeof c.b; reg: NonNullable<typeof c.reg> } => c.reg !== undefined)
+        .flatMap((b) => {
+          if (!mask) {
+            mask = skyMask(raster)
+            skyMasks.set(raster, mask)
+          }
+          const roofTop = roofTopOverBand(mask, r.extent.y0, r.extent.y1, b.x0, b.x1)
+          return [{ y0: r.extent.y0, why: '' }, ...(roofTop ? [{ y0: roofTop.row, why: `; apex taken at row ${roofTop.row}: ${roofTop.why}` }] : [])].map((top) => ({ b, reg: registerElevationV2({ id: r.frameId, assetId: r.assetId }, { ...r.extent, x0: b.x0, x1: b.x1, y0: top.y0 }, r.side as 'FRONT' | 'REAR' | 'LEFT' | 'RIGHT', r.sideConfidence, `${r.sideWhy}; scaled on the walls' band, columns ${b.x0}..${b.x1} of the silhouette's ${r.extent.x0}..${r.extent.x1} (${b.rows} rows)${top.why}`, world, ridgeY, sideEaves, terrain, true) }))
+        })
+        .filter((c): c is { b: { x0: number; x1: number; rows: number; share: number; y0: number; y1: number }; reg: NonNullable<ReturnType<typeof registerElevationV2>> } => c.reg !== undefined)
         .sort((a, b) => a.reg.anisotropyCheck - b.reg.anisotropyCheck)
+      options.debug?.(`wall-bands ${r.side} ${r.frameId} -> ${walled.map((c) => `${c.b.x0}..${c.b.x1}@${c.reg.extent.y0}:${c.reg.anisotropyCheck.toFixed(3)}`).join(' ')}`)
       const band = walled[0]?.reg
       if (band) {
         openingOnlyViews.push({ view: elevationFrameFromV2(band, world), raster, bandOnly: true })
@@ -792,7 +805,6 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // ---------------------------------------------------------------------------
   // G1b. which unlabelled side view is which, now that the main body's profile is known
   // ---------------------------------------------------------------------------
-  const skyMasks = new Map<Raster, Mask>()
   if (mainRoof && ridgeY !== undefined) {
     const roof = mainRoof
     const labelled = (frameId: string): boolean => {

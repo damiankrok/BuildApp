@@ -281,3 +281,69 @@ export function gableApexRow(outline: GableOutline | undefined, pitchDeg: number
   const row = round6(((a.row - (a.width / 2) * tan) + (b.row - (b.width / 2) * tan)) / 2)
   return { row, why: `the gable outline widens ${(b.width - a.width).toFixed(0)} px over ${(b.row - a.row).toFixed(0)} rows (slope ${slope.toFixed(3)} against tan ${pitchDeg}° = ${tan.toFixed(3)}), so its apex is at row ${row.toFixed(1)}` }
 }
+
+/** 005Y-N5 (C5): the share of a wall band's columns that must have more than sky directly over the silhouette's top. */
+export const ROOF_TOP_MIN_COVERED_SHARE = 0.5
+/** 005Y-N5 (C5): … rising over it by at least this share of the silhouette's height (a ridge cap or a chimney is less). */
+export const ROOF_TOP_MIN_RISE_SHARE = 0.1
+/** 005Y-N5 (C5): the two widths (shares of the band) at which a pointed roof top's outline is measured to find where it closes. */
+export const ROOF_TOP_POINTED_SHARE: readonly [number, number] = [0.2, 0.5]
+
+/**
+ * 005Y-N5 (C5): the top of what stands over a wall band, where a silhouette's top row is not it. A traced silhouette
+ * may stop at the eaves line — the roof read as background — and putting the ridge datum on that row scales the view by
+ * whatever band happens to land its ground. Over the band's columns, each column climbs from the silhouette's top
+ * while the pixels above are not the sky connected to the sheet's top (`skyMask`), and the roof's outline is the widest
+ * run of columns standing up to each row. A top that runs flat (a ridge seen lengthwise) is the row where the outline
+ * reaches a fifth of the band at once, so a chimney does not lift it; a top that narrows to a point (a hip or a gable
+ * seen end on) is where its outline closes, carried on from the rows where it is a fifth and half the band wide — never
+ * above what is drawn there. Nothing is returned
+ * where most of those columns (`ROOF_TOP_MIN_COVERED_SHARE`) do not rise over the silhouette's top by a tenth of its
+ * height (`ROOF_TOP_MIN_RISE_SHARE`: the top is the ridge already, with only its cap and the chimneys over it), or where the climb reaches the sheet's edge (a tree or the
+ * frame, not a roof).
+ */
+export function roofTopOverBand(mask: Mask, topRow: number, bottomRow: number, x0: number, x1: number): { row: number; why: string } | undefined {
+  const top = Math.round(topRow)
+  const tops: number[] = []
+  for (let x = Math.max(0, Math.round(x0)); x <= Math.min(mask.width - 1, Math.round(x1)); x += 1) {
+    let y = top
+    while (y - 1 >= 0 && mask.data[(y - 1) * mask.width + x] === 0) y -= 1
+    tops.push(y)
+  }
+  if (tops.length === 0) return undefined
+  // Over a ridge only the chimneys (and the ridge cap) rise into the sky; over an eaves line the roof does, on most of
+  // the band, and by a good part of the silhouette's own height.
+  const rise = ROOF_TOP_MIN_RISE_SHARE * (bottomRow - topRow)
+  const covered = tops.filter((y) => top - y >= rise).length / tops.length
+  if (covered < ROOF_TOP_MIN_COVERED_SHARE) return undefined
+  const highest = Math.min(...tops)
+  // The widest run of columns standing up to a row: the roof's outline there.
+  const widest = (y: number): number => {
+    let best = 0
+    let run = 0
+    for (const t of tops) {
+      run = t <= y ? run + 1 : 0
+      best = Math.max(best, run)
+    }
+    return best
+  }
+  const firstRow = (share: number): number | undefined => {
+    for (let y = highest; y < top; y += 1) if (widest(y) >= share * tops.length) return y
+    return undefined
+  }
+  const why = (row: number, how: string): string => `the silhouette's top row ${top} has the roof over it on ${Math.round(covered * 100)} % of the band's ${tops.length} columns; ${how}, row ${row}`
+  const r0 = firstRow(ROOF_TOP_POINTED_SHARE[0])
+  if (r0 === undefined || r0 <= 0 || r0 >= top - 2) return undefined
+  const w0 = widest(r0)
+  // A top seen lengthwise (a ridge) is flat: the outline reaches a fifth of the band in one row, over nothing wider than
+  // a chimney.
+  if (widest(r0 - 1) < w0 / 2) return { row: r0, why: why(r0, `its top runs flat across ${w0} columns at`) }
+  // A top seen end on (a hip or a gable end) narrows to a point, which a chimney may stand on: its apex is where the
+  // outline's two widths, carried on at their own slope, close — never above what is drawn there.
+  const r1 = firstRow(ROOF_TOP_POINTED_SHARE[1])
+  if (r1 === undefined || r1 <= r0) return undefined
+  const slope = (widest(r1) - w0) / (r1 - r0)
+  if (!(slope > 0)) return undefined
+  const row = round6(Math.max(highest, r0 - w0 / slope))
+  return { row, why: why(row, `its outline narrows ${slope.toFixed(2)} columns a row from ${w0} at row ${r0} and closes at`) }
+}
