@@ -600,8 +600,9 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
       if (reachesFloor && !glazed && widthM <= 1.3 && headY - sillY <= 2.35) family = 'DOOR'
       // 005Y-N2: lines across the gap and a door's own symbol beside it — a leaf drawn open from one jamb, as long as the
       // gap is wide, and the arc it sweeps to the other — are a glazed leaf in a door, not a window to the floor. The
-      // lines may be a threshold rather than glass: the leaf's glazing is named as read from them.
-      else if (reachesFloor && glazed && widthM >= 0.75 && widthM <= 1.3 && headY - sillY <= 2.35 && doorLeafDrawn(input.planRaster, plan, host, interval, input.wallThicknessM)) {
+      // lines may be a threshold rather than glass: the leaf's glazing is named as read from them. On the ground storey
+      // only: above it a floor-length glazing with no balcony in the model is a French window, drawn as before.
+      else if (reachesFloor && glazed && host.storeyIndex === 0 && widthM >= 0.75 && widthM <= 1.3 && headY - sillY <= 2.35 && doorLeafDrawn(input.planRaster, plan, host, interval, input.wallThicknessM)) {
         family = 'GLAZED_DOOR'
         prov.family = 'SOURCE_DERIVED'
         unresolved.push('the leaf’s glazing (lines across the gap beside a drawn leaf and swing: glass, or a threshold the plan draws the same way)')
@@ -665,7 +666,8 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
  * on most of its length about a pivot in the wall's thickness, where the frame stands. Ink is read against the paper
  * or the room's fill in front of the gap, not a fixed grey: a leaf is often a light line over a tinted floor. Hatching,
  * furniture, a cupboard's edge or a label make ink in the square in front of the gap but not this figure; the
- * ink-fraction test (`doorSwingDrawn`) cannot tell them apart.
+ * ink-fraction test (`doorSwingDrawn`) cannot tell them apart. Leaf and arc are lines — paper a hand's breadth to either
+ * side — where a planter's shrubs, a hatched floor or a filled symbol are blots.
  */
 export function doorLeafDrawn(raster: Raster, plan: PlanFrameV2, host: WallHost, interval: [number, number], wallThicknessM: number): boolean {
   const w = interval[1] - interval[0]
@@ -697,28 +699,48 @@ export function doorLeafDrawn(raster: Raster, plan: PlanFrameV2, host: WallHost,
       }
       return n === 0 ? 0 : k / n
     }
+    // a leaf is a line: paper a hand's breadth from it on the gap's side, away from the wall (on its other side a
+    // partition may run along it; a row of shrubs in a planter, a hatched or filled area, is ink on both)
+    const thinLeaf = (along: number, towards: 1 | -1): number => {
+      let k = 0
+      let n = 0
+      for (let d = 0.2 * w; d <= 0.9 * w; d += step) {
+        if (!dark(at(along, d))) continue
+        n += 1
+        if (!dark(at(along + towards * 0.1, d))) k += 1
+      }
+      return n === 0 ? 0 : k / n
+    }
     for (const [hinge, towards] of [[interval[0], 1], [interval[1], -1]] as const) {
       // the leaf, at an offset from the jamb up to a leaf's thickness
       let leafAt: number | undefined
       for (let off = 0; off <= 0.12 && leafAt === undefined; off += step) {
         const along = hinge + towards * off
-        if (share(0, 0.9 * w, along) >= 0.8 && share(1.1 * w, 1.3 * w, along) <= 0.3) leafAt = along
+        if (share(0, 0.9 * w, along) >= 0.8 && share(1.1 * w, 1.3 * w, along) <= 0.3 && thinLeaf(along, towards) >= 0.7) leafAt = along
       }
       if (leafAt === undefined) continue
-      // the arc, its radius the gap's width, from 6° to 84° off the wall — reaching the far jamb and the leaf's tip —
-      // about the best pivot in the wall's thickness
-      let best = 0
-      for (let pivot = -wallThicknessM; pivot <= 0.1 * w; pivot += step) {
-        let k = 0
+      // the arc, its radius the gap's width, inked from 6° to 84° off the wall — reaching the far jamb and the leaf's
+      // tip — and a line, paper a hand's breadth inside and outside it, from 30° on (nearer the wall it runs into the
+      // wall's own ink), about one pivot in the wall's thickness
+      let found = false
+      for (let pivot = -wallThicknessM; pivot <= 0.1 * w && !found; pivot += step) {
+        let inked = 0
         let n = 0
+        let thin = 0
+        let m = 0
         for (let deg = 6; deg <= 84; deg += 3) {
           const a = (deg * Math.PI) / 180
+          const on = (r: number): boolean => dark(at(leafAt + towards * r * Math.cos(a), pivot + r * Math.sin(a)))
           n += 1
-          if (dark(at(leafAt + towards * w * Math.cos(a), pivot + w * Math.sin(a)))) k += 1
+          if (!on(w)) continue
+          inked += 1
+          if (deg < 30) continue
+          m += 1
+          if (!on(w - 0.1) && !on(w + 0.1)) thin += 1
         }
-        best = Math.max(best, k / n)
+        found = inked / n >= 0.6 && m > 0 && thin / m >= 0.5
       }
-      if (best >= 0.6) return true
+      if (found) return true
     }
     return false
   })

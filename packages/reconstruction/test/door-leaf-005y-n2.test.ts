@@ -2,7 +2,8 @@
  * BUILDPLAN-ANALYZER-005Y-N2: a door's plan symbol read strictly (`doorLeafDrawn`). The gap is a metre wide in a front
  * wall 0.4 m thick, at 0.025 m/px. A door draws its leaf open from one jamb — a straight light line as long as the gap
  * is wide, then paper — and the arc it sweeps to the other jamb, on either face of the wall. Hatching, a cupboard's edge
- * running on past a leaf's length, or an arc with no leaf make ink in front of the gap but not this figure.
+ * running on past a leaf's length, a planter of shrubs, or an arc with no leaf make ink in front of the gap but not this
+ * figure.
  */
 import { describe, expect, it } from 'vitest'
 import { Canvas } from '@buildapp/synthetic-drawings'
@@ -58,6 +59,9 @@ describe('a door’s symbol beside a gap', () => {
   })
   it('is not a cupboard’s edge running on past a leaf’s length, with an arc beside it', () => {
     expect(read((c) => { leaf(c, 1, 2.5); arc(c, 1) })).toBe(false)
+  })
+  it('is not a planter of shrubs outside the gap — a blot of ink round the jamb and along the arc', () => {
+    expect(read((c) => { for (let x = 3.7; x <= 5.4; x += 0.25) for (let z = -0.1; z >= -1.3; z -= 0.25) { const p = px(x, z); for (let a = 0; a < 360; a += 4) for (let r = 0; r <= 5; r += 1) c.plot(Math.round(p.x + r * Math.cos((a * Math.PI) / 180)), Math.round(p.y + r * Math.sin((a * Math.PI) / 180)), 120) } })).toBe(false)
   })
   it('is not hatching', () => {
     expect(read((c) => { for (let k = -40; k < 80; k += 6) { const a = px(3.5 + k * MPP, T); const b = px(3.5 + k * MPP + 1.5, T + 1.5); c.line(a.x, a.y, b.x, b.y, 1, 120) } })).toBe(false)
