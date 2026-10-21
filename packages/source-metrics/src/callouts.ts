@@ -1155,6 +1155,99 @@ function poolGrey(src: Gray, p: number, darkest: boolean): Uint8ClampedArray {
   return out
 }
 
+/** One circle the tinted-ring search accepted: centre and radius in pixels, and the greys it measured. */
+type TintedRingHit = { cx: number; cy: number; r: number; share: number; interior: number; ring: number; outside: number }
+type TintedRingInspection = { bar: Bar | null }
+/** The rays a ring is sampled on. */
+const TINT_ANGLES = 32
+/** A callout's interior is digits: ink covers at least this share of the disc (an empty circle covers less) … */
+const TINT_DIGIT_INK_MIN = 0.04
+/** … and at most this share (a filled blob, a column, covers more). */
+const TINT_DIGIT_INK_MAX = 0.45
+/** Rays this close to horizontal (|sin| below it) are skipped in the margin test: the bar meets the ring there. */
+const TINT_MARGIN_SKIP_SIN = 0.3
+/** The bar is searched for within this share of the radius above and below the centre … */
+const TINT_BAR_SEARCH_SHARE = 0.25
+/** … and is a run of ink across at least this share of the disc's width. */
+const TINT_BAR_MIN_RUN_SHARE = 0.6
+const tintCos = Array.from({ length: TINT_ANGLES }, (_, i) => Math.cos((2 * Math.PI * i) / TINT_ANGLES))
+const tintSin = Array.from({ length: TINT_ANGLES }, (_, i) => Math.sin((2 * Math.PI * i) / TINT_ANGLES))
+
+/**
+ * The cheap part of a found circle's test: is it a callout, and where is its bar? Ink inside the disc is anything
+ * darker than the disc's paper by half its contrast with the ring. A callout holds digits (`TINT_DIGIT_INK_MIN`–`MAX`),
+ * stands clear of its ring (a line crossing the circle — hatching, treads, a leader — puts ink in the band just inside
+ * it), and is split by a bar: the row near the centre with the longest run of ink. Null when it is not a callout;
+ * `bar: null` when it is one with no bar found.
+ */
+export function inspectTintedRing(g: (x: number, y: number) => number, h: TintedRingHit): TintedRingInspection | null {
+  const cut = h.interior - (h.interior - h.ring) / 2
+  const inkInside = (x: number, y: number): boolean => g(x, y) < cut
+  let inkCount = 0
+  let area = 0
+  for (let y = -h.r + 3; y <= h.r - 3; y += 1)
+    for (let x = -h.r + 3; x <= h.r - 3; x += 1) {
+      if (x * x + y * y > (h.r - 3) * (h.r - 3)) continue
+      area += 1
+      if (inkInside(h.cx + x, h.cy + y)) inkCount += 1
+    }
+  const interiorInk = area > 0 ? inkCount / area : 0
+  if (interiorInk < TINT_DIGIT_INK_MIN || interiorInk > TINT_DIGIT_INK_MAX) return null
+  let margin = 0
+  for (let i = 0; i < TINT_ANGLES; i += 1) {
+    if (Math.abs(tintSin[i]) < TINT_MARGIN_SKIP_SIN) continue
+    if (inkInside(Math.round(h.cx + (h.r - 2.5) * tintCos[i]), Math.round(h.cy + (h.r - 2.5) * tintSin[i]))) margin += 1
+  }
+  if (margin > TINT_ANGLES * TINT_MARGIN_INK) return null
+  const half = Math.max(2, h.r - 3)
+  const reach = Math.max(2, Math.round(h.r * TINT_BAR_SEARCH_SHARE))
+  let bar: Bar | null = null
+  let bestRun = 0
+  for (let dy = -reach; dy <= reach; dy += 1) {
+    let run = 0
+    let best = 0
+    for (let x = h.cx - half; x <= h.cx + half; x += 1) {
+      run = inkInside(x, h.cy + dy) ? run + 1 : 0
+      best = Math.max(best, run)
+    }
+    if (best > bestRun) {
+      bestRun = best
+      bar = { y0: h.cy + dy, y1: h.cy + dy }
+    }
+  }
+  if (bestRun < (2 * half + 1) * TINT_BAR_MIN_RUN_SHARE) bar = null
+  return { bar }
+}
+
+/**
+ * A tinted ring's interior as two halves to read: darkness against the disc's own paper (so a faint print on a grey
+ * field reads like ink on white), with the ring and the bar painted out, split at the bar or, with none, at the centre.
+ * A half with no rows is undefined.
+ */
+export function tintedRingHalves(g: (x: number, y: number) => number, h: TintedRingHit, bar: Bar | null): { upper?: Gray; lower?: Gray } {
+  const x0 = h.cx - h.r
+  const y0 = h.cy - h.r
+  const size = 2 * h.r + 1
+  const crop: Gray = { width: size, height: size, data: new Uint8ClampedArray(size * size).fill(255) }
+  for (let y = 0; y < size; y += 1)
+    for (let x = 0; x < size; x += 1) {
+      const py = y0 + y
+      if (Math.hypot(x - h.r, y - h.r) > h.r - 2.5) continue
+      if (bar && py >= bar.y0 - 1 && py <= bar.y1 + 1) continue
+      const v = g(x0 + x, py)
+      crop.data[y * size + x] = Math.max(0, Math.min(255, Math.round(255 - ((h.interior - v) * 255) / Math.max(1, h.interior))))
+    }
+  const splitTop = bar ? bar.y0 - 1 - y0 : h.r
+  const splitBottom = bar ? bar.y1 + 1 - y0 : h.r
+  const rows = (a: number, b: number): Gray => {
+    const hh = Math.max(0, b - a + 1)
+    const data = new Uint8ClampedArray(size * hh)
+    for (let y = 0; y < hh; y += 1) for (let x = 0; x < size; x += 1) data[y * size + x] = crop.data[(a + y) * size + x]
+    return { width: size, height: hh, data }
+  }
+  return { upper: splitTop > 0 ? rows(0, splitTop - 1) : undefined, lower: splitBottom < size - 1 ? rows(splitBottom + 1, size - 1) : undefined }
+}
+
 /**
  * 005X: opening callouts drawn on a tinted field — a shaded knee-wall strip, a hatched zone — where the ring is a faint
  * grey line round a disc of paper. The ink reader above needs ink; here there is a contrast of a few dozen grey levels
@@ -1180,7 +1273,7 @@ export function readTintedCallouts(raster: Raster, options: TintedCalloutOptions
   // The darkest of three radii about r on one ray: a one-pixel ring drawn anti-aliased lands on one of them.
   const ringAt = (cx: number, cy: number, r: number, i: number): number => Math.min(g(Math.round(cx + (r - 0.7) * cos[i]), Math.round(cy + (r - 0.7) * sin[i])), g(Math.round(cx + r * cos[i]), Math.round(cy + r * sin[i])), g(Math.round(cx + (r + 0.7) * cos[i]), Math.round(cy + (r + 0.7) * sin[i])))
   const median = (xs: number[]): number => [...xs].sort((a, b) => a - b)[Math.floor(xs.length / 2)]
-  type Hit = { cx: number; cy: number; r: number; share: number; interior: number; ring: number; outside: number }
+  type Hit = TintedRingHit
   const hits: Hit[] = []
   const test = (cx: number, cy: number): void => {
     {
@@ -1270,54 +1363,7 @@ export function readTintedCallouts(raster: Raster, options: TintedCalloutOptions
   // The circles a reading has claimed: a circle near one is the same symbol and is not read again.
   const claimed: Array<{ cx: number; cy: number; r: number }> = []
   const flat = places.flat()
-  // The cheap part of a circle's test (its ink, its clear margin, its bar); null when it is not a callout.
-  const inspect = (h: Hit): { bar: Bar | null } | null => {
-    // Ink inside the disc: darker than the disc's paper by half its contrast with the ring.
-    const cut = h.interior - (h.interior - h.ring) / 2
-    const inkInside = (x: number, y: number): boolean => g(x, y) < cut
-    let inkCount = 0
-    let area = 0
-    for (let y = -h.r + 3; y <= h.r - 3; y += 1)
-      for (let x = -h.r + 3; x <= h.r - 3; x += 1) {
-        if (x * x + y * y > (h.r - 3) * (h.r - 3)) continue
-        area += 1
-        if (inkInside(h.cx + x, h.cy + y)) inkCount += 1
-      }
-    const interiorInk = area > 0 ? inkCount / area : 0
-    // Digits, not an empty circle and not a filled blob.
-    if (interiorInk < 0.04 || interiorInk > 0.45) return null
-    // The digits stand clear of the ring: a band just inside it is paper nearly all the way round, apart from where the
-    // bar meets it. Lines crossing the circle (hatching, a stair's treads, a leader) put ink there.
-    let margin = 0
-    for (let i = 0; i < ANGLES; i += 1) {
-      if (Math.abs(sin[i]) < 0.3) continue
-      const px = Math.round(h.cx + (h.r - 2.5) * cos[i])
-      const py = Math.round(h.cy + (h.r - 2.5) * sin[i])
-      if (inkInside(px, py)) margin += 1
-    }
-    if (margin > ANGLES * TINT_MARGIN_INK) return null
-    const mask: Mask = { width, height, data: new Uint8Array(0) }
-    const local = (x: number, y: number): number => (inkInside(x, y) ? 1 : 0)
-    // The bar: the row near the centre with the longest run of ink across the disc.
-    const half = Math.max(2, h.r - 3)
-    let bar: Bar | null = null
-    let bestRun = 0
-    for (let dy = -Math.max(2, Math.round(h.r * 0.25)); dy <= Math.max(2, Math.round(h.r * 0.25)); dy += 1) {
-      let run = 0
-      let best = 0
-      for (let x = h.cx - half; x <= h.cx + half; x += 1) {
-        run = local(x, h.cy + dy) ? run + 1 : 0
-        best = Math.max(best, run)
-      }
-      if (best > bestRun) {
-        bestRun = best
-        bar = { y0: h.cy + dy, y1: h.cy + dy }
-      }
-    }
-    if (bestRun < (2 * half + 1) * 0.6) bar = null
-    void mask
-    return { bar }
-  }
+  const inspect = (h: Hit): TintedRingInspection | null => inspectTintedRing(g, h)
   // 005X-N3 (`requireBar`): only barred rings are wanted. A reading claims the circles about it, so a barless ring's
   // reading can still decide which barred circle is read: directly (a later barred circle near it) or through a chain
   // (it claims a barless circle whose own reading would have claimed a barred one). `matters` is that reach, worked
@@ -1342,28 +1388,9 @@ export function readTintedCallouts(raster: Raster, options: TintedCalloutOptions
     if (options.requireBar && !bar && !matters[i]) continue
     if (options.stats) options.stats.ocr += 1
     const box: PixelRect = { x0: h.cx - h.r, y0: h.cy - h.r, x1: h.cx + h.r, y1: h.cy + h.r }
-    const size = 2 * h.r + 1
-    // The interior as darkness against the disc's own paper, the ring and the bar painted out.
-    const crop: Gray = { width: size, height: size, data: new Uint8ClampedArray(size * size).fill(255) }
-    for (let y = 0; y < size; y += 1)
-      for (let x = 0; x < size; x += 1) {
-        const px = box.x0 + x
-        const py = box.y0 + y
-        if (Math.hypot(x - h.r, y - h.r) > h.r - 2.5) continue
-        if (bar && py >= bar.y0 - 1 && py <= bar.y1 + 1) continue
-        const v = g(px, py)
-        crop.data[y * size + x] = Math.max(0, Math.min(255, Math.round(255 - ((h.interior - v) * 255) / Math.max(1, h.interior))))
-      }
-    const splitTop = bar ? bar.y0 - 1 - box.y0 : h.r
-    const splitBottom = bar ? bar.y1 + 1 - box.y0 : h.r
-    const halfOf = (a: number, b: number): Gray => {
-      const hh = Math.max(0, b - a + 1)
-      const data = new Uint8ClampedArray(size * hh)
-      for (let y = 0; y < hh; y += 1) for (let x = 0; x < size; x += 1) data[y * size + x] = crop.data[(a + y) * size + x]
-      return { width: size, height: hh, data }
-    }
-    const upper = splitTop > 0 ? readHalf(cache, halfOf(0, splitTop - 1), WIDTH_RANGE, undefined, classifyDigit, HALF_TUNING) : EMPTY_HALF
-    const lower = splitBottom < size - 1 ? readHalf(cache, halfOf(splitBottom + 1, size - 1), HEIGHT_RANGE, undefined, classifyDigit, HALF_TUNING) : EMPTY_HALF
+    const halves = tintedRingHalves(g, h, bar)
+    const upper = halves.upper ? readHalf(cache, halves.upper, WIDTH_RANGE, undefined, classifyDigit, HALF_TUNING) : EMPTY_HALF
+    const lower = halves.lower ? readHalf(cache, halves.lower, HEIGHT_RANGE, undefined, classifyDigit, HALF_TUNING) : EMPTY_HALF
     const complete = coherent(upper, lower, h)
     if (!bar && !complete) continue
     claimed.push({ cx: h.cx, cy: h.cy, r: h.r })

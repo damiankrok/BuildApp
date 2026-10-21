@@ -1,9 +1,8 @@
 /**
- * BUILDPLAN-ANALYZER-005Y-N1: the external numeric recogniser heard on plan CALLOUT RINGS — the circled `width / height`
- * printed beside each opening and each rooflight.
+ * The external numeric recogniser heard on plan CALLOUT RINGS — the circled `width / height` printed beside each
+ * opening and each rooflight.
  *
- * 005Y measured it (research/analyzer-005y-archon-visual/callout-paddle-probe.ts, five ARCHON houses, 142 hand-read
- * rings): the template reader of `callouts.ts` read 63 rings exactly, the pinned PP-OCRv6 tiny 104; every ring whose two
+ * Why the gates below are what they are: measured on 142 hand-read rings from five publisher houses, the template reader of `callouts.ts` read 63 rings exactly, the pinned PP-OCRv6 tiny 104; every ring whose two
  * halves the recogniser read CONFIDENTLY (stable under the bracket, posterior and mean character probability at least
  * `OCR_ENSEMBLE_BOUNDS`, its own greedy answer) was right, and the only confident wrong HALVES dropped a leading digit
  * (`105` read `5`, `118` read `18`, `230` read `30`). So a half is accepted here only when
