@@ -71,6 +71,12 @@ export type OpeningV2 = {
   unresolved: string[]
   confidence: number
   why: string
+  /**
+   * 005Y-N3 (H1): the other piece of a corner assembly — one glazing wrapping the corner of the body, its two pieces in
+   * two perpendicular walls with no pier drawn between them (`cornerAssemblies`). Each piece stays an opening of its
+   * own wall; the relation is what says they are one thing.
+   */
+  cornerWith?: string
 }
 
 export type OpeningOptions = { minWidthM?: number; maxWidthM?: number; calloutReachM?: number; stubMaxM?: number }
@@ -524,7 +530,9 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
       // swing makes one. Never a garage door, a glazed door or a full-height screen: those need a height read.
       heightsAssumed = true
       doorSwing = doorSwingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM)
-      doorBySymbol = widthM <= 1.3 && !glazingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM) && (doorSwing || host.storeyIndex === 0)
+      // 005Y-N3 (H1): glazing is either symbol — dark ink or the light lines a frame and glass are drawn with. A window's
+      // narrow piece (the return of a corner window, drawn on light lines round the corner) is not an empty gap.
+      doorBySymbol = widthM <= 1.3 && !glazingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM) && !glazingLinesDrawn(input.planRaster, plan, host, interval, input.wallThicknessM, bandCentre) && (doorSwing || host.storeyIndex === 0)
       sillY = doorBySymbol ? host.floorY : round6(host.floorY + CONVENTIONS.windowSill)
       headY = round6(host.floorY + (doorBySymbol ? 2.1 : CONVENTIONS.openingHead))
       prov.sill = 'ASSUMED_FOR_RENDERING'
@@ -867,6 +875,94 @@ export function garageMouth(
     const roomTo = w.axis === 'Y' ? room.bounds.x1 : room.bounds.z1
     if (Math.min(to, roomTo) - Math.max(from, roomFrom) < 0.8 * (to - from)) continue
     out.push({ facade, from: round6(from), to: round6(to), id: w.compound?.intervalId ?? `${w.axis}-${w.linePx}-${w.fromPx}-${w.toPx}` })
+  }
+  return out
+}
+
+/** 005Y-N3 (H1): how far past the corner square a piece of a corner assembly may stop: a frame's width. */
+const CORNER_REACH_EXTRA_M = 0.25
+/** 005Y-N3 (H1): the share of the corner square in wall ink above which the plan draws a pier there. */
+const CORNER_PIER_INK = 0.35
+/** 005Y-N3 (H1): wall ink is drawn darker than this; glazing lines, floor fill and paper are lighter. */
+const CORNER_WALL_INK_LUMA = 100
+
+export type CornerAssembly = { a: string; b: string; corner: { x: number; z: number }; pierInk: number; why: string }
+
+/**
+ * 005Y-N3 (H1): corner assemblies among one body's openings on one storey. Two openings in perpendicular walls whose
+ * ends both reach the corner they share — each stops within the other wall's thickness of the outer corner, plus a
+ * frame — are one glazing wrapping the corner when the plan draws no pier in the corner square (its share of wall ink
+ * stays under `CORNER_PIER_INK`). A corner whose square is wall ink holds two openings near a pier, not one assembly.
+ *
+ * Nothing about the openings changes: each keeps its own wall, interval, heights and kind. A door is never made a
+ * window here (or the reverse) — what each piece is stays decided by its own evidence.
+ */
+export function cornerAssemblies(openings: readonly OpeningV2[], rect: { x0: number; z0: number; x1: number; z1: number }, wallThicknessM: number, raster: Raster, plan: PlanFrameV2): CornerAssembly[] {
+  const out: CornerAssembly[] = []
+  const reach = wallThicknessM + CORNER_REACH_EXTRA_M
+  const used = new Set<string>()
+  const alongX = openings.filter((o) => o.facade === 'FRONT' || o.facade === 'REAR')
+  const alongZ = openings.filter((o) => o.facade === 'WEST' || o.facade === 'EAST')
+  for (const a of alongX) {
+    for (const b of alongZ) {
+      if (a.massId !== b.massId || a.storeyIndex !== b.storeyIndex || used.has(a.id) || used.has(b.id)) continue
+      const x = b.facade === 'WEST' ? rect.x0 : rect.x1
+      const z = a.facade === 'FRONT' ? rect.z0 : rect.z1
+      const aEnd = Math.min(Math.abs(a.interval[0] - x), Math.abs(a.interval[1] - x))
+      const bEnd = Math.min(Math.abs(b.interval[0] - z), Math.abs(b.interval[1] - z))
+      if (aEnd > reach || bEnd > reach) continue
+      const sx = b.facade === 'WEST' ? 1 : -1
+      const sz = a.facade === 'FRONT' ? 1 : -1
+      const p = plan.toPixel(x, z)
+      const q = plan.toPixel(x + sx * wallThicknessM, z + sz * wallThicknessM)
+      const pierInk = round6(inkFraction(raster, Math.min(p.x, q.x), Math.min(p.y, q.y), Math.max(p.x, q.x), Math.max(p.y, q.y), CORNER_WALL_INK_LUMA))
+      if (pierInk > CORNER_PIER_INK) continue
+      used.add(a.id)
+      used.add(b.id)
+      out.push({ a: a.id, b: b.id, corner: { x: round6(x), z: round6(z) }, pierInk, why: `${a.id} (${a.facade.toLowerCase()}) stops ${aEnd.toFixed(2)} m and ${b.id} (${b.facade.toLowerCase()}) ${bEnd.toFixed(2)} m from the corner (${x.toFixed(2)}, ${z.toFixed(2)}), and the plan draws no pier between them (${(pierInk * 100).toFixed(0)} % wall ink in the corner square): one glazing round the corner` })
+    }
+  }
+  return out
+}
+
+/** 005Y-N3 (H5): a callout the recogniser read at this confidence or above is a firm reading of its printed size. */
+export const FIRM_CALLOUT_CONFIDENCE = 0.9
+
+/**
+ * 005Y-N3 (H5): the storey's common head over a weak printed height. A printed height the recogniser did not confirm
+ * (the callout below `FIRM_CALLOUT_CONFIDENCE`: the lattice's reading alone), whose first reading matches no head the
+ * recogniser read firmly on the storey's other openings while its second or third does, takes that head: openings of
+ * one storey share their heads more often than a weak digit is right. Returns the height to take, or nothing.
+ */
+export function commonHeadReading(callout: { heightCm: number; heightCandidates?: ReadonlyArray<{ cm: number; score: number }> }, calloutConfidence: number, firmHeadsCm: ReadonlySet<number>): number | undefined {
+  if (calloutConfidence >= FIRM_CALLOUT_CONFIDENCE || !callout.heightCandidates || callout.heightCandidates.length < 2) return undefined
+  if (firmHeadsCm.has(callout.heightCm)) return undefined
+  return callout.heightCandidates.slice(1, 3).find((h) => firmHeadsCm.has(h.cm))?.cm
+}
+
+/** 005Y-N3 (H5): two registrations of one house whose grounds lie this close agree on it (the band test's tolerance). */
+export const GROUND_AGREEMENT_M = 0.3
+
+/**
+ * 005Y-N3 (H5): the views whose ground is off — hung from the ridge datum at a top row that is not the ridge. The ground
+ * is the printed terrain datum where the section gives one; without it, the views that agree with each other, when
+ * they outnumber the ones that do not (a tie decides nothing). Returns each refused view with the reason.
+ */
+export function viewGroundRefusals(views: ReadonlyArray<{ frameId: string; bottomY: number }>, others: ReadonlyArray<{ bottomY: number }>, terrainY: number | undefined): Array<{ frameId: string; reason: string }> {
+  const grounds = [...views, ...others]
+  const agreeing = (y: number): number => grounds.filter((g) => Math.abs(g.bottomY - y) <= GROUND_AGREEMENT_M).length
+  const out: Array<{ frameId: string; reason: string }> = []
+  for (const own of views) {
+    if (terrainY !== undefined) {
+      if (Math.abs(own.bottomY - terrainY) > GROUND_AGREEMENT_M) out.push({ frameId: own.frameId, reason: `it puts the ground at ${own.bottomY.toFixed(2)} m where the section prints the terrain at ${terrainY.toFixed(2)} m` })
+      continue
+    }
+    const mine = agreeing(own.bottomY)
+    const best = grounds.filter((g) => Math.abs(g.bottomY - own.bottomY) > GROUND_AGREEMENT_M).reduce<{ y: number; n: number } | undefined>((acc, g) => {
+      const n = agreeing(g.bottomY)
+      return !acc || n > acc.n ? { y: g.bottomY, n } : acc
+    }, undefined)
+    if (best && best.n >= 2 && best.n > mine) out.push({ frameId: own.frameId, reason: `it puts the ground at ${own.bottomY.toFixed(2)} m where ${best.n} of the house's other registered views agree on ${best.y.toFixed(2)} m` })
   }
   return out
 }

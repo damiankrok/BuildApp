@@ -34,12 +34,12 @@ import type { RecessTopology, ZoneSide } from './recesses.js'
 import { readInterior } from './interior.js'
 import type { InteriorReading, LabelToken } from './interior.js'
 import { assembleStair, findTreadLadders, poolLadders } from './stair-topology.js'
-import { elevationExtent, garageMouth, planGaps, readWallOpenings, wallAppearanceExtent } from './openings-v2.js'
+import { FIRM_CALLOUT_CONFIDENCE, commonHeadReading, cornerAssemblies, elevationExtent, garageMouth, planGaps, readWallOpenings, viewGroundRefusals, wallAppearanceExtent } from './openings-v2.js'
 import { lumaOf } from './openings-v2.js'
 import type { OpeningV2, WallHost } from './openings-v2.js'
 import { planeRoofLayout } from './plane-roof.js'
 import type { RoofEnd } from './plane-roof.js'
-import { readAttachedRoof, readEavesOverhang, readChimneys, readPlanRooflights, readRooflights, registerSection, registerSectionByTwoAnchors, sectionStackOver, withRecognisedHalves } from './roof-details.js'
+import { hostRoofTopAt, readAttachedRoof, readEavesOverhang, readChimneys, readPlanRooflights, readRooflights, registerSection, registerSectionByTwoAnchors, sectionStackOver, withRecognisedHalves } from './roof-details.js'
 import type { PlanRooflightReading, RooflightReading, SectionFrame } from './roof-details.js'
 import { readFasciaBand, readRailing, readVergeMember } from './facade.js'
 import type { FacadeAssemblyHypothesis, FacadeMember } from './facade.js'
@@ -635,6 +635,20 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     bandRegistrations.delete(own.frameId)
     gap({ what: `the heights of the openings on the ${own.side.toLowerCase()} elevation`, reason: `registered on its walls' band, it puts the ground at ${own.bottomY.toFixed(2)} m where the house's other ${others.length} registered views put it at ${median.toFixed(2)} m: its apex is not on the ridge datum, and the view is not read`, status: 'REFUSED', observationIds: [], evidenceIds: [] })
   }
+  // 005Y-N3 (H5): the same ground test for the views the silhouette registered. Hung from the ridge datum at the
+  // silhouette's top row, a view whose top row is not the ridge (a gable's apex too narrow to start the silhouette)
+  // puts the ground off. Near the apex its heights hold (a roof's outline, a chimney's top); low on the wall they are off
+  // by the ground's error, so its openings' heights are not read: the printed callout and the convention stand there,
+  // and the view is named. The ground is the printed terrain datum where the section gives one; without it, the views
+  // that agree with each other, when they outnumber the ones that do not — a tie decides nothing.
+  const openingHeightRefused = new Set<string>()
+  for (const { frameId, reason } of viewGroundRefusals(elevations, [...bandRegistrations.values()], terrain)) {
+    const own = elevations.find((e) => e.frameId === frameId)
+    if (!own) continue
+    openingHeightRefused.add(frameId)
+    gap({ what: `the heights of the openings on the ${own.side.toLowerCase()} elevation`, reason: `registered on its silhouette from the ridge datum, ${reason}: its top row is not the ridge, and heights low on its walls are not read (its roof outline and chimneys, near the datum, still are)`, status: 'REFUSED', observationIds: [], evidenceIds: [] })
+    options.featureTrace?.({ kind: 'VIEW_OPENING_HEIGHTS_REFUSED', frameId, side: own.side, groundY: own.bottomY, terrainY: terrain ?? null, decision: 'REFUSED', reason })
+  }
   step({ stage: 'registration', what: 'renders registered on the ridge datum', method: 'DIRECT', detail: elevations.map((e) => `${e.side}: ${e.mpp} m/px, ground at ${e.bottomY} (${e.spanWhy})`).join('; ') || 'none', inputs: legacy.length, outputs: elevations.length })
   const viewsOf = (facade: 'FRONT' | 'REAR' | 'WEST' | 'EAST'): Array<{ view: ElevationFrameV2; raster: Raster }> => views.filter((v) => v.view.side === (facade === 'WEST' ? 'LEFT' : facade === 'EAST' ? 'RIGHT' : facade))
   if (ridgeY === undefined && legacy.length > 0) gap({ what: 'a registration for the elevations', reason: 'no ridge datum was read from a section, and the elevations are registered on it', status: 'MISSING', observationIds: [], evidenceIds: [] })
@@ -1205,7 +1219,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         // 005V: a top-storey wall of the main body parallel to the ridge stops where the roof's underside meets it.
         const underEaves = !gable && mainRoof && m.id === main.id && index === topStorey ? round6(mainRoof.eaveY - mainRoof.thicknessM / Math.cos((mainRoof.pitchDeg * Math.PI) / 180)) : undefined
         const host: WallHost = { massId: m.id, facade, planeAt, from, to, centreAt: round6(planeAt + (inward * T) / 2), storeyIndex: index, ...(gable ? { gable } : {}), ...(underEaves !== undefined ? { eaveTopY: underEaves } : {}), floorY: l.elevation, storeyHeightM: gable ? round6(mainRoof!.ridgeY - l.elevation) : l.height }
-        const found = readWallOpenings({ ...(options.featureTrace ? { trace: options.featureTrace } : {}), onBandViewAccepted: (frameId) => acceptedBandViews.add(frameId), plan: entry.frame, planRaster: entry.raster, host, wallThicknessM: T, callouts, views: [...viewsOf(facade), ...openingOnlyViews.filter((v) => v.view.side === (facade === 'WEST' ? 'LEFT' : facade === 'EAST' ? 'RIGHT' : facade))].map((v) => openingViewOverrides.get(v.view.registration.frameId) ?? v), attachedSingleStorey: m.role === 'ATTACHED' && m.storeys.length === 1, onRefused: (r) => gap({ what: `the gap ${r.interval[0].toFixed(2)}..${r.interval[1].toFixed(2)} on the ${facade.toLowerCase()} wall of ${m.id}, storey ${index}`, reason: r.why, status: 'REFUSED', observationIds: [], evidenceIds: [] }), ...(vehicleMouths.has(`${m.id}:${facade}`) && index === 0 ? { vehicleMouth: vehicleMouths.get(`${m.id}:${facade}`) } : {}), index: hostIndex++ })
+        const found = readWallOpenings({ ...(options.featureTrace ? { trace: options.featureTrace } : {}), onBandViewAccepted: (frameId) => acceptedBandViews.add(frameId), plan: entry.frame, planRaster: entry.raster, host, wallThicknessM: T, callouts, views: [...viewsOf(facade).filter((v) => !openingHeightRefused.has(v.view.registration.frameId) || openingViewOverrides.has(v.view.registration.frameId)), ...openingOnlyViews.filter((v) => v.view.side === (facade === 'WEST' ? 'LEFT' : facade === 'EAST' ? 'RIGHT' : facade))].map((v) => openingViewOverrides.get(v.view.registration.frameId) ?? v), attachedSingleStorey: m.role === 'ATTACHED' && m.storeys.length === 1, onRefused: (r) => gap({ what: `the gap ${r.interval[0].toFixed(2)}..${r.interval[1].toFixed(2)} on the ${facade.toLowerCase()} wall of ${m.id}, storey ${index}`, reason: r.why, status: 'REFUSED', observationIds: [], evidenceIds: [] }), ...(vehicleMouths.has(`${m.id}:${facade}`) && index === 0 ? { vehicleMouth: vehicleMouths.get(`${m.id}:${facade}`) } : {}), index: hostIndex++ })
         for (const o of found) {
           // A gap on a face another body stands against is a door between the two bodies, not a facade opening.
           const other = masses.find((xm) => {
@@ -1222,7 +1236,41 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
           openings.push(o)
         }
       }
+      // 005Y-N3 (H1): one glazing wrapping a corner of this body on this storey: its two pieces are named one assembly
+      const here = openings.filter((o) => o.massId === m.id && o.storeyIndex === index)
+      for (const c of cornerAssemblies(here, r, T, entry.raster, entry.frame)) {
+        for (const [self, other] of [[c.a, c.b], [c.b, c.a]] as const) {
+          const o = openings.find((x) => x.id === self)
+          if (!o) continue
+          o.cornerWith = other
+          o.unresolved.push(`one glazing with ${other} round the corner (${c.corner.x.toFixed(2)}, ${c.corner.z.toFixed(2)}); the plan draws no pier there, but the model keeps the corner square as wall: an opening leaves wall material at both its sides`)
+        }
+        options.featureTrace?.({ kind: 'CORNER_ASSEMBLY', massId: m.id, storey: index, a: c.a, b: c.b, corner: c.corner, pierInk: c.pierInk, decision: 'READ', why: c.why })
+        step({ stage: 'openings', what: `the corner assembly ${c.a} + ${c.b}`, method: 'DIRECT', detail: c.why, inputs: 2, outputs: 1 })
+      }
     }
+  }
+  // 005Y-N3 (H5): a printed height the recogniser did not confirm (the lattice's reading alone), whose own runner-up is a
+  // head the recogniser did read firmly on this storey while its first reading matches none, takes that common head:
+  // openings of one storey share their heads more often than a weak digit is right. Named, both readings kept.
+  const calloutConfidence = (id: string): number => metrics.evidence.find((e) => e.id === id)?.confidence ?? 0
+  for (const o of openings) {
+    const c = o.callout
+    if (!c || o.elevation) continue
+    const firm = new Set(openings.filter((x) => x !== o && x.storeyIndex === o.storeyIndex && x.callout && calloutConfidence(x.callout.evidenceId) >= FIRM_CALLOUT_CONFIDENCE).map((x) => x.callout?.heightCm as number))
+    const commonCm = commonHeadReading(c, calloutConfidence(c.evidenceId), firm)
+    const common = commonCm === undefined ? undefined : { cm: commonCm }
+    const l = levelOf(o.storeyIndex)
+    if (!common || !l) continue
+    const h = common.cm / 100
+    const sillY = h >= 1.95 ? l.elevation : round6(l.elevation + Math.max(0, 2.2 - h))
+    o.unresolved.push(`the printed height reads ${c.heightCm} first and ${common.cm} second, the lattice's reading alone; ${common.cm} is the head the recogniser read firmly on other openings of this storey, and is taken`)
+    o.why = `${o.why}; its printed height taken as ${common.cm}, the storey's common head, over a weak ${c.heightCm}`
+    options.featureTrace?.({ kind: 'OPENING_COMMON_HEAD', id: o.id, from: c.heightCm, to: common.cm, firmHeadsOnStorey: [...firm].sort(), decision: 'CHANGED' })
+    o.callout = { ...c, heightCm: common.cm, resolvedBy: 'COMMON_HEAD' }
+    o.sillY = sillY
+    o.headY = round6(sillY + h)
+    o.provenance = { ...o.provenance, sill: h >= 1.95 ? 'SOURCE_DERIVED' : 'ASSUMED_FOR_RENDERING', head: 'SOURCE_DERIVED' }
   }
   // 005Y-N2: a recess the layout found inside a body (`bayStripsOf`, or any pocket lying within a body's rectangle): the
   // ring wall's gap over its mouth is a PASSAGE, not an opening to fill; two returns and a back wall close it, and the
@@ -1421,13 +1469,17 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     if (reading) for (const e of levels.evidenceIds) record({ evidenceId: e, evidenceKind: 'METRIC', what: 'a level datum', authority: 'HIGH', disposition: 'USED_IN_MODEL', reason: 'the section scale the attached roof was read at', stage: 'METRIC_SOLVE' })
   }
   // Chimneys.
-  const roofTopY = (x: number, z: number): number => {
+  const mainRoofTopY = (x: number, z: number): number => {
     if (!mainRoof) return levelsV2[levelsV2.length - 1].wallTop
     const tan = Math.tan((mainRoof.pitchDeg * Math.PI) / 180)
     const across = mainRoof.ridgeAxis === 'Z' ? x : z
     const half = mainRoof.ridgeAxis === 'Z' ? (main.x1 - main.x0) / 2 : (main.z1 - main.z0) / 2
     return mainRoof.ridgeY - Math.min(half, Math.abs(across - mainRoof.ridgeAt)) * tan
   }
+  // 005Y-N3 (H4): a chimney rises through the roof over its block, which need not be the main one: a stack over a
+  // garage's pitched roof, or in the valley where that roof runs into the main slope, stands on the highest roof
+  // surface covering it there. Where no roof the solver built covers the point, the main roof's profile stands as before.
+  const roofTopY = (x: number, z: number): number => hostRoofTopAt({ x, z }, { ...(mainRoof ? { main: { footprint: mainRoof.footprint, topAt: mainRoofTopY } } : {}), pitched: pitchedAttachedRoofs, flat: attachedRoofs }, mainRoofTopY)
   const chimneyViews = views.filter((v) => (mainRoof?.ridgeAxis === 'Z' ? v.view.side === 'FRONT' || v.view.side === 'REAR' : v.view.side === 'LEFT' || v.view.side === 'RIGHT'))
   // 005Y-N1: the section that confirms a chimney the plans show on one storey only: the ladder-registered one, or one
   // registered by two independent anchors for this alone (`registerSectionByTwoAnchors`).

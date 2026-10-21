@@ -547,6 +547,29 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       if (plane) push({ type: 'cutRoofOpening', id: `${c.id}-pen`, roofId: planeRoofPlaneId(planeRoof.massId, plane.key), kind: 'PENETRATION', footprint: { minX: c.x0, maxX: c.x1, minZ: c.z0, maxZ: c.z1 }, cut: 'VERTICAL', throughId: c.id }, c.featureId, 'roofOpenings')
       else notes.push(`${c.id} stands over a hip or the ridge of the plane roof: placed through it without a penetration cut, which a plane confines to itself`)
     }
+    // 005Y-N3 (H4): a stack under an attached body's pitched roof — over the garage, or in the valley where that roof
+    // runs onto the main slope — passes through that plane too: cut plumb in the plane that holds the whole stack.
+    const stackCorners = [{ x: c.x0, z: c.z0 }, { x: c.x1, z: c.z0 }, { x: c.x1, z: c.z1 }, { x: c.x0, z: c.z1 }]
+    for (const r of b.pitchedAttachedRoofs) {
+      const [lowId, highId] = pitchedPlaneIds(r.massId)
+      const touched = r.layout.planes.filter((pl) => stackCorners.some((q) => insidePolygon(q, pl.boundary)))
+      const whole = touched.find((pl) => stackCorners.every((q) => insidePolygon(q, pl.boundary)))
+      if (whole) push({ type: 'cutRoofOpening', id: `${c.id}-pen-${r.massId}`, roofId: whole.key === 'LOW' ? lowId : highId, kind: 'PENETRATION', footprint: { minX: c.x0, maxX: c.x1, minZ: c.z0, maxZ: c.z1 }, cut: 'VERTICAL', throughId: c.id }, c.featureId, 'roofOpenings')
+      else if (touched.length > 0) notes.push(`${c.id} stands across the ridge or an edge of the roof over ${r.massId}: placed through it without a penetration cut, which a plane confines to itself`)
+    }
+    // A stack the plan draws running into an outer wall it stands against is built into that wall: said, not moved.
+    for (const m of b.masses) {
+      for (const storey of m.storeys) {
+        const r = rectAt(m, storey)
+        const t = b.wallThicknessM
+        for (const side of ['FRONT', 'EAST', 'REAR', 'WEST'] as const) {
+          const w = side === 'FRONT' ? { x0: r.x0, x1: r.x1, z0: r.z0, z1: r.z0 + t } : side === 'REAR' ? { x0: r.x0, x1: r.x1, z0: r.z1 - t, z1: r.z1 } : side === 'WEST' ? { x0: r.x0, x1: r.x0 + t, z0: r.z0, z1: r.z1 } : { x0: r.x1 - t, x1: r.x1, z0: r.z0, z1: r.z1 }
+          const dx = Math.min(w.x1, c.x1) - Math.max(w.x0, c.x0)
+          const dz = Math.min(w.z1, c.z1) - Math.max(w.z0, c.z0)
+          if (dx > 0.01 && dz > 0.01) push({ type: 'createRelationship', kind: 'OVERLAPS_INTENTIONALLY', from: c.id, to: ringWallId(m.id, storey, side), note: `the plan draws the stack's block ${Math.min(dx, dz).toFixed(2)} m into this wall: built into it` })
+        }
+      }
+    }
     evidence(c.id, c.provenance, c.why, { height: c.topY === undefined ? 'ASSUMED_FOR_RENDERING' : 'IMAGE_METRIC_REGISTERED' })
   }
   for (const r of b.rooflights) {
@@ -598,6 +621,8 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     const { offset, reversed } = wallOffset(rectAt(mass, o.storeyIndex), o.facade, o.interval)
     cutAndFill(o, ringWallId(mass.id, o.storeyIndex, o.facade), offset, reversed, l)
   }
+  // 005Y-N3 (H1): a corner assembly is one relationship between its two openings, written once
+  for (const o of b.openings) if (o.cornerWith && o.id < o.cornerWith && b.openings.some((x) => x.id === o.cornerWith)) push({ type: 'createRelationship', kind: 'ALIGNS_WITH', from: o.id, to: o.cornerWith, note: 'CORNER_GLAZING: one glazing round the corner of the body, in two walls; no pier drawn between the pieces' })
   // 005Y-N2: a recess in a body's face — a passage through the ring wall over its mouth, its returns and back wall as
   // walls of their own, and the back wall's openings cut in it
   for (const p of b.pockets ?? []) {

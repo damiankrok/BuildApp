@@ -800,3 +800,43 @@ export function readPlanRooflights(
   out.sort((a, b) => (a.slope === b.slope ? a.alongFrom - b.alongFrom : a.slope === 'LOW' ? -1 : 1))
   return out.map((r, i) => ({ ...r, id: `rooflight-plan-${r.slope === 'LOW' ? 'low' : 'high'}-${i}` }))
 }
+
+/**
+ * 005Y-N3 (H4): the top of the roof over a plan point — the roof a chimney there rises through. Every roof the solver
+ * built that covers the point is weighed: the main roof inside its footprint, each plane of an attached body's pitched
+ * roof inside its outline (a valley's planes run onto the main slope), each attached flat roof inside its footprint;
+ * the highest covering surface is the one the stack stands on. Where none covers the point, `fallback` answers (the
+ * main roof's own profile, as chimneys were read before).
+ */
+export function hostRoofTopAt(
+  p: { x: number; z: number },
+  roofs: {
+    main?: { footprint: { x0: number; z0: number; x1: number; z1: number }; topAt: (x: number, z: number) => number }
+    pitched: ReadonlyArray<{ pitchDeg: number; layout: { planes: ReadonlyArray<{ boundary: ReadonlyArray<{ x: number; z: number }>; downslope: { x: number; z: number }; datum: { x: number; y: number; z: number } }> } }>
+    flat: ReadonlyArray<{ footprint: { x0: number; z0: number; x1: number; z1: number }; slabTopY: number; parapetTopY?: number }>
+  },
+  fallback: (x: number, z: number) => number,
+): number {
+  const within = (f: { x0: number; z0: number; x1: number; z1: number }): boolean => p.x >= f.x0 - 1e-6 && p.x <= f.x1 + 1e-6 && p.z >= f.z0 - 1e-6 && p.z <= f.z1 + 1e-6
+  const tops: number[] = []
+  if (roofs.main && within(roofs.main.footprint)) tops.push(roofs.main.topAt(p.x, p.z))
+  for (const r of roofs.pitched) {
+    const tan = Math.tan((r.pitchDeg * Math.PI) / 180)
+    for (const pl of r.layout.planes) if (insidePlanPolygon(p, pl.boundary)) tops.push(pl.datum.y - tan * ((p.x - pl.datum.x) * pl.downslope.x + (p.z - pl.datum.z) * pl.downslope.z))
+  }
+  for (const r of roofs.flat) if (within(r.footprint)) tops.push(r.parapetTopY ?? r.slabTopY)
+  return tops.length > 0 ? Math.max(...tops) : fallback(p.x, p.z)
+}
+
+/** 005Y-N3 (H4): a plan point inside a roof plane's outline (even-odd; a point on the outline counts as inside). */
+function insidePlanPolygon(p: { x: number; z: number }, poly: ReadonlyArray<{ x: number; z: number }>): boolean {
+  let inside = false
+  for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+    const a = poly[i]
+    const b = poly[j]
+    const cross = (b.x - a.x) * (p.z - a.z) - (b.z - a.z) * (p.x - a.x)
+    if (Math.abs(cross) < 1e-9 && p.x >= Math.min(a.x, b.x) - 1e-9 && p.x <= Math.max(a.x, b.x) + 1e-9 && p.z >= Math.min(a.z, b.z) - 1e-9 && p.z <= Math.max(a.z, b.z) + 1e-9) return true
+    if (a.z > p.z !== b.z > p.z && p.x < ((b.x - a.x) * (p.z - a.z)) / (b.z - a.z) + a.x) inside = !inside
+  }
+  return inside
+}
