@@ -70,6 +70,8 @@ import type { ArchitecturalEvidenceGraph, FeatureFamily, FeatureGraphDraft, Prov
 import { ledgerViolations, sealLedger } from './ledger.js'
 import type { EvidenceConsumptionLedger, EvidenceConsumptionRecord } from './ledger.js'
 import { qualityLevelOf, sealQualityReport } from './quality.js'
+import { createSolverRecorder, emptySolverRecord, viewFamilyOf } from './solver-recorder.js'
+import { readHouseStair } from './house-stair.js'
 import type { FeatureQualityReport } from './quality.js'
 import { repairFromResiduals, verifyAgainstViews } from './verify.js'
 import type { RepairTrace, SourceViewResidual } from './verify.js'
@@ -164,21 +166,6 @@ export type ReconstructionV2Result = {
   roofDatum?: ApproximateRidge
 }
 
-type Ctx = {
-  sightings: SourceSighting[]
-  measurements: FeatureGraphDraft['measurements']
-  hypotheses: FeatureGraphDraft['hypotheses']
-  alternatives: FeatureGraphDraft['alternatives']
-  solved: SolvedFeature[]
-  relations: FeatureGraphDraft['relations']
-  ledger: EvidenceConsumptionRecord[]
-  steps: SolverStep[]
-  unresolved: UnresolvedCandidate[]
-  traces: PrimitiveTrace[]
-  consumed: Map<string, EvidenceConsumptionRecord>
-}
-
-const viewFamilyOf = (frame: SourceCoordinateFrame): ViewFamily => (frame.roles.projection === 'ORTHOGRAPHIC_PLAN' ? (frame.roles.document === 'SITE_PLAN' ? 'SITE' : 'PLAN') : frame.roles.projection === 'ORTHOGRAPHIC_ELEVATION' ? 'ELEVATION' : frame.roles.projection === 'ORTHOGRAPHIC_SECTION' ? 'SECTION' : frame.roles.projection === 'PERSPECTIVE' ? 'PERSPECTIVE' : 'PAGE')
 
 /** 005Y: the roof's details (rooflights on the renders, eaves on the section), as the progress shows them. */
 const ROOF_DETAILS_SUBPHASE = { id: 'ROOF_DETAILS', label: 'reading the roof details' }
@@ -193,55 +180,11 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   let metrics = options.metrics
   options.onPhase?.('REGISTRATION')
   const keep = options.frameFilter
-  const ctx: Ctx = { sightings: [], measurements: [], hypotheses: [], alternatives: [], solved: [], relations: [], ledger: [], steps: [], unresolved: [], traces: [], consumed: new Map() }
-  const step = (s: Omit<SolverStep, 'index'>): void => {
-    ctx.steps.push({ ...s, index: ctx.steps.length })
-  }
-  const gap = (u: Omit<UnresolvedCandidate, 'id'>): void => {
-    ctx.unresolved.push({ ...u, id: stableId('gap', u.what.slice(0, 40).replace(/[^a-z0-9]+/gi, '-'), { what: u.what, status: u.status }) })
-  }
+  const ctx = emptySolverRecord()
+  const recorder = createSolverRecorder(ctx)
+  const { step, gap, record, sighting, feature, relate } = recorder
   const frameById = new Map(graph.coordinateFrames.map((f) => [f.id, f]))
-  const record = (r: EvidenceConsumptionRecord): void => {
-    const held = ctx.consumed.get(r.evidenceId)
-    // A stronger disposition replaces a weaker one; nothing is recorded twice.
-    const rank: Record<EvidenceConsumptionRecord['disposition'], number> = { USED_IN_MODEL: 5, USED_AS_CORROBORATION: 4, CONFLICTED: 3, UNRESOLVED: 2, REJECTED_WITH_REASON: 1, IGNORED_WITH_REASON: 0 }
-    if (held && rank[held.disposition] >= rank[r.disposition]) return
-    ctx.consumed.set(r.evidenceId, r)
-  }
-  const sighting = (frame: SourceCoordinateFrame, what: string, confidence: number, observationIds: string[] = [], pixelRect?: SourceSighting['pixelRect']): string => {
-    const id = stableId('sight', `${what.slice(0, 24)}-${frame.id.slice(-8)}`, { frame: frame.id, what, pixelRect: pixelRect ?? null })
-    if (!ctx.sightings.some((s) => s.id === id)) ctx.sightings.push({ id, frameId: frame.id, assetId: frame.assetId, viewFamily: viewFamilyOf(frame), observationIds, ...(pixelRect ? { pixelRect } : {}), what, confidence: round6(confidence) })
-    return id
-  }
-  const feature = (family: FeatureFamily, key: string, params: Record<string, { value: number; low: number; high: number; unit?: 'm' | 'deg' | 'count' | 'none' }>, sightingIds: string[], provenance: ProvenanceStatus, why: string, extra: { storeyIndex?: number; hostId?: string; unresolvedProperties?: string[]; printed?: boolean; uncertaintyM?: number; parameterProvenance?: Record<string, ProvenanceStatus>; confidence?: number } = {}): string => {
-    const hypothesisId = `hyp-${key}`
-    const featureId = `feat-${key}`
-    const parameters = Object.fromEntries(Object.entries(params).map(([k, p]) => [k, { value: round6(p.value), low: round6(p.low), high: round6(p.high), unit: p.unit ?? 'm' }]))
-    ctx.hypotheses.push({ id: hypothesisId, family, ...(extra.storeyIndex !== undefined ? { storeyIndex: extra.storeyIndex } : {}), ...(extra.hostId ? { hostId: extra.hostId } : {}), sightingIds, measurementIds: [], parameters, confidence: round6(extra.confidence ?? 0.7), why })
-    const frames = new Set(sightingIds.map((s) => ctx.sightings.find((x) => x.id === s)?.assetId).filter(Boolean))
-    const families = [...new Set(sightingIds.map((s) => ctx.sightings.find((x) => x.id === s)?.viewFamily).filter((f): f is ViewFamily => !!f))]
-    const solved: SolvedFeature = {
-      id: featureId,
-      family,
-      hypothesisId,
-      ...(extra.storeyIndex !== undefined ? { storeyIndex: extra.storeyIndex } : {}),
-      ...(extra.hostId ? { hostId: extra.hostId } : {}),
-      quality: 'L0',
-      provenance,
-      parameterProvenance: extra.parameterProvenance ?? {},
-      sourceCoverage: { viewFamilies: families, sightings: sightingIds.length, independentAssets: frames.size, printed: extra.printed ?? false },
-      uncertainty: extra.uncertaintyM !== undefined ? { m: extra.uncertaintyM } : {},
-      parameters,
-      unresolvedProperties: extra.unresolvedProperties ?? [],
-      why,
-    }
-    solved.quality = qualityLevelOf(solved)
-    ctx.solved.push(solved)
-    return featureId
-  }
-  const relate = (kind: FeatureGraphDraft['relations'][number]['kind'], fromId: string, toId: string, why: string, confidence = 0.8): void => {
-    ctx.relations.push({ id: stableId('rel', `${kind}-${fromId.slice(-10)}-${toId.slice(-10)}`, { kind, fromId, toId }), kind, fromId, toId, confidence, why })
-  }
+
 
   // ---------------------------------------------------------------------------
   // A/B/C. composition (03R), world frame, registrations
@@ -1061,50 +1004,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // G3. the stair: ladders on every plan, pooled
   // ---------------------------------------------------------------------------
   const rise = levelsV2.length > 1 ? round6(levelsV2[1].elevation - levelsV2[0].elevation) : 0
-  const ladderPool: Array<{ ladder: ReturnType<typeof findTreadLadders>[number]; storeyIndex: number }> = []
-  for (const [index, entry] of planByStorey) {
-    const body = { x0: main.x0, z0: main.z0, x1: main.x1, z1: main.z1 }
-    for (const ladder of findTreadLadders(entry.raster, entry.frame, body)) ladderPool.push({ ladder, storeyIndex: index })
-  }
-  const pooled = poolLadders(ladderPool)
-  let stair: BuildingV2['stair']
-  const stairPlan = planByStorey.get(topStorey) ?? planByStorey.get(0)
-  if (pooled.length > 0 && stairPlan && levelsV2.length > 1) {
-    const hypothesis = assembleStair(stairPlan.raster, stairPlan.frame, pooled.map((p) => p.ladder), 0, rise)
-    if (hypothesis) {
-      const sids = [...new Set(pooled.flatMap((p) => p.storeyIndices))].map((s) => planByStorey.get(s)).filter((e): e is NonNullable<typeof e> => !!e).map((e) => sighting(e.plan.frame, 'tread ladders of the stair', 0.8))
-      const sectionStair = graph.observations.filter((o) => o.kind === 'STAIR' && frameById.get(o.frameId)?.roles.projection === 'ORTHOGRAPHIC_SECTION')
-      if (sectionFrame && sectionStair.length > 0) {
-        sids.push(sighting(sectionFrame, 'step profile of the stair', 0.7, sectionStair.map((o) => o.id)))
-        for (const o of sectionStair) record({ evidenceId: o.id, evidenceKind: 'OBSERVATION', what: 'the section’s step profile', authority: 'MEDIUM', disposition: 'USED_AS_CORROBORATION', reason: 'corroborates the riser count of the lowest flight', stage: 'IDENTITY' })
-      }
-      const exact = hypothesis.unresolved.length === 0 && hypothesis.directionEvidence === 'ARROW'
-      const featureId = feature('STAIR', 'stair-main', { risers: { value: hypothesis.risersTotal, low: hypothesis.riserCountInterval.low, high: hypothesis.riserCountInterval.high, unit: 'count' }, width: { value: hypothesis.widthM, low: hypothesis.widthM - 0.05, high: hypothesis.widthM + 0.05 } }, sids, exact ? 'SOURCE_CORROBORATED' : 'SOURCE_DERIVED', hypothesis.why, { storeyIndex: 0, uncertaintyM: 0.04, unresolvedProperties: hypothesis.unresolved })
-      // The hole in the upper slab: the flights and landings that end within a head-height of the upper floor, plus the well between them.
-      const top = levelsV2[1].elevation
-      let cumulative = 0
-      const riserM = rise / Math.max(1, hypothesis.risersTotal)
-      const parts: Array<{ x0: number; z0: number; x1: number; z1: number }> = []
-      hypothesis.flights.forEach((f, i) => {
-        const endRise = (cumulative + f.risers) * riserM
-        const rect = f.direction === 'PLUS_X' || f.direction === 'MINUS_X' ? { x0: Math.min(f.from, f.to), x1: Math.max(f.from, f.to), z0: f.band.from, z1: f.band.to } : { x0: f.band.from, x1: f.band.to, z0: Math.min(f.from, f.to), z1: Math.max(f.from, f.to) }
-        if (top - endRise < 2.0) parts.push(rect)
-        const landing = hypothesis.landings[i]
-        if (landing && top - endRise < 2.0) parts.push(landing)
-        cumulative += f.risers
-      })
-      const inner = { x0: Math.min(...hypothesis.flights.map((f) => f.band.from), ...hypothesis.landings.map((l) => l.x0)), x1: Math.max(...hypothesis.landings.map((l) => l.x1), ...hypothesis.flights.map((f) => f.band.to)) }
-      void inner
-      const holeParts = parts.length > 0 ? parts : [hypothesis.shaft]
-      const slabHole = { x0: round6(Math.min(...holeParts.map((p) => p.x0))), z0: round6(Math.min(...holeParts.map((p) => p.z0))), x1: round6(Math.max(...holeParts.map((p) => p.x1))), z1: round6(Math.max(...holeParts.map((p) => p.z1))) }
-      stair = { hypothesis, emit: exact ? 'FLIGHTS' : 'PLACEHOLDER', fromLevel: 0, toLevel: 1, slabHole, featureId, provenance: exact ? 'SOURCE_CORROBORATED' : 'SOURCE_DERIVED' }
-      step({ stage: 'stair', what: 'the stair, from its tread ladders', method: exact ? 'DISCRETE_SELECTION' : 'REFUSED', detail: hypothesis.why, inputs: pooled.length, outputs: 1 })
-      if (!exact) gap({ what: 'the exact steps of the stair', reason: `the ladders give the topology but ${hypothesis.unresolved.join('; ')}; a placeholder is built over the shaft`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
-    }
-  } else if (levelsV2.length > 1) {
-    step({ stage: 'stair', what: 'a stair between the storeys', method: 'REFUSED', detail: 'no tread ladder was found on any plan', inputs: 0, outputs: 0 })
-    gap({ what: 'the stair between the storeys', reason: 'no run of evenly spaced tread lines was found on any plan', status: 'MISSING', observationIds: [], evidenceIds: [] })
-  }
+  const stair = readHouseStair({ graph, frameById, sectionFrame, planByStorey, body: { x0: main.x0, z0: main.z0, x1: main.x1, z1: main.z1 }, topStorey, levels: levelsV2 }, recorder)
 
   // ---------------------------------------------------------------------------
   // G4. interior per storey (with the stair as a barrier where it is not floor)
