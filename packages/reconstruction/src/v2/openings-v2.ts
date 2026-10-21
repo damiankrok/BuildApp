@@ -44,6 +44,11 @@ export type WallHost = {
   eaveTopY?: number
   floorY: number
   storeyHeightM: number
+  /**
+   * 005Y-N5 (C5): `from` and `to` are the faces of the walls this one meets (a recess's back wall between its returns),
+   * not the outer corners of a ring: nothing of the meeting walls lies inside the span, so a gap may start at either end.
+   */
+  endsAtFaces?: boolean
 }
 
 export type OpeningV2 = {
@@ -153,8 +158,10 @@ export function planGaps(raster: Raster, plan: PlanFrameV2, host: WallHost, wall
   const registeredPx = along === 'X' ? plan.toPixel(0, host.centreAt).y : plan.toPixel(host.centreAt, 0).x
   const p0 = along === 'X' ? plan.toPixel(host.from, host.centreAt).x : plan.toPixel(host.centreAt, host.to).y
   const p1 = along === 'X' ? plan.toPixel(host.to, host.centreAt).x : plan.toPixel(host.centreAt, host.from).y
-  const from = Math.min(p0, p1) + wallPx * 0.9
-  const to = Math.max(p0, p1) - wallPx * 0.9
+  // The corner blocks of the walls this one meets stand inside a ring wall's span; a span between faces has none.
+  const endInset = host.endsAtFaces ? 0 : wallPx * 0.9
+  const from = Math.min(p0, p1) + endInset
+  const to = Math.max(p0, p1) - endInset
   // Solid where at least 60 % of the wall's thickness is ink across the centre line.
   const piecesAt = (c: number) => bandPieces(raster, along, c, from, to, wallPx * 0.45, Math.max(2, Math.round(wallPx * 0.9 * 0.55)))
   let centrePx = registeredPx

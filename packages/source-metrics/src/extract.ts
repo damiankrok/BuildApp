@@ -334,6 +334,19 @@ export async function extractMetricEvidenceAsync(options: ExtractAsyncOptions): 
  * The reading itself, as steps: it yields once per plan frame that has dimension labels when a recogniser is given,
  * and is handed back that frame's external readings; with none it never yields. One implementation for both callers.
  */
+/** 005Y-N5 (C5): storeys that stand under another, in the order a house stacks them. */
+const STOREY_ORDER: Readonly<Record<string, number>> = { BASEMENT: 0, GROUND: 1, UPPER: 2, ATTIC: 3 }
+
+/**
+ * 005Y-N5 (C5): whether the package holds a floor plan of a storey above this plan's storey — then nothing on this
+ * plan is under the roof (no roof window has its ring here). Unknown storeys decide nothing.
+ */
+export function storeyBelowAnother(frame: { roles: { document: string; storey: string } }, frames: ReadonlyArray<{ roles: { document: string; storey: string } }>): boolean {
+  const own = STOREY_ORDER[frame.roles.storey]
+  if (own === undefined || frame.roles.document !== 'FLOOR_PLAN') return false
+  return frames.some((f) => f.roles.document === 'FLOOR_PLAN' && (STOREY_ORDER[f.roles.storey] ?? -1) > own)
+}
+
 function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRecogniser, 'id' | 'model' | 'runtime' | 'runtimeSha256'> | undefined): Generator<RecogniserRequest, MetricEvidenceSet, ExternalReading[]> {
   const { graph } = options
   const keep = options.frameFilter ?? DEFAULT_FRAME_FILTER
@@ -661,6 +674,7 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
       // halves pass the gate (`judgeCalloutHalf`) reads what the recogniser read; every other ring keeps the template's
       // reading.
       const heardRings = new Map<CalloutReading, CalloutRingRecord>()
+      const tintedOpeningRings: CalloutReading[] = []
       if (recogniser && frame.roles.document === 'FLOOR_PLAN') {
         const own = metricSolutions.find((m) => m.frameId === frame.id)
         const cmpp = own?.cmPerPixelX && own.cmPerPixelY ? (own.cmPerPixelX + own.cmPerPixelY) / 2 : undefined
@@ -729,9 +743,13 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
           // A tinted ring no dark-ring reading stands for is not made an opening's callout: on a storey under the roof it
           // is as often a roof window's (read by the reconstruction from `calloutRings`), and nothing on this sheet tells
           // the two apart before the walls are known (005Y-N1: roof-window rings beside a knee wall made windows of its dashes).
+          // 005Y-N5 (C5): a storey with a floor plan of a storey above it is under no roof: a tinted ring there whose two
+          // halves the recogniser read through the gate is an opening's callout like a dark one.
+          if (storeyBelowAnother(frame, graph.coordinateFrames))
+            for (const ring of rings) if (ring.finders.length === 1 && ring.finders[0] === 'TINTED' && heardRings.get(ring.reading)?.accepted) tintedOpeningRings.push(ring.reading)
         }
       }
-      for (const ring of openingRings) {
+      for (const ring of [...openingRings, ...tintedOpeningRings]) {
         const heardRing = heardRings.get(ring)
         const recognised = heardRing?.accepted && heardRing.width.valueCm !== undefined && heardRing.height.valueCm !== undefined ? heardRing : undefined
         // 005Y-N5: on a ring only one half of which passed the gate, that half's reading still leads its own candidates,

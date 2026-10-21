@@ -14,7 +14,7 @@
  */
 import { describe, expect, it } from 'vitest'
 import type { Mask, Raster } from '@buildapp/source-cv'
-import { overheadDoorTracks, readWallOpenings, wallAppearanceExtent } from '../src/index.js'
+import { overheadDoorTracks, planGaps, readWallOpenings, wallAppearanceExtent } from '../src/index.js'
 import { roofTopOverBand } from '../src/v2/side-orientation.js'
 import type { ElevationFrameV2, PlanFrameV2, WallHost } from '../src/index.js'
 
@@ -198,5 +198,43 @@ describe('005Y-N5 (C5) overheadDoorTracks: the plan symbol of an overhead door',
   })
   it('does not read a vehicle door above the ground storey', () => {
     expect(familyOf(pair('DOTTED'), { ...HOST, storeyIndex: 1, floorY: 2.8 })?.family).not.toBe('GARAGE_DOOR')
+  })
+})
+
+// ---------------------------------------------------------------------------------------------------------------------
+// planGaps: a recess's back wall runs between its returns' faces
+// ---------------------------------------------------------------------------------------------------------------------
+
+describe('005Y-N5 (C5) planGaps on a wall whose span ends at the faces of the walls it meets', () => {
+  // the back wall of a recess 3 m wide: a 0.7 m door against its left end, a 1.05 m door in its middle
+  function back(): { raster: Raster; frame: PlanFrameV2 } {
+    const { raster, frame } = plan([], [20, 20])
+    const data = raster.data
+    const set = (x: number, y: number, l: number): void => {
+      const o = (Math.round(y) * PW + Math.round(x)) * 4
+      data[o] = data[o + 1] = data[o + 2] = l
+    }
+    for (let y = 0; y < PH; y += 1) for (let x = 0; x < PW; x += 1) set(x, y, 255)
+    // the returns' bodies outside the span (x < 5, x > 8), the back wall between with its two doors
+    for (let y = ppx(0, 0).y; y <= ppx(0, 0.4).y; y += 1) {
+      for (let x = ppx(4.6, 0).x; x <= ppx(8.4, 0).x; x += 1) {
+        const a = (x - PO) * MPP
+        if ((a >= 5 && a < 5.7) || (a >= 6.6 && a < 7.65)) continue
+        set(x, y, 0)
+      }
+    }
+    return { raster, frame }
+  }
+  const host: WallHost = { massId: 'main', facade: 'FRONT', planeAt: 0, from: 5, to: 8, centreAt: 0.2, storeyIndex: 0, floorY: 0, storeyHeightM: 2.8 }
+  it('reads the door against the end when the span stops at the faces', () => {
+    const { raster, frame } = back()
+    const gaps = planGaps(raster, frame, { ...host, endsAtFaces: true }, 0.4).map((g) => g.interval)
+    expect(gaps.some(([a, b]) => Math.abs(a - 5) < 0.05 && Math.abs(b - 5.7) < 0.05)).toBe(true)
+    expect(gaps.some(([a, b]) => Math.abs(a - 6.6) < 0.05 && Math.abs(b - 7.65) < 0.05)).toBe(true)
+  })
+  it('counterfactual: scanned as a ring wall (corner blocks inside its span) the door against the end is clipped away', () => {
+    const { raster, frame } = back()
+    const gaps = planGaps(raster, frame, host, 0.4).map((g) => g.interval)
+    expect(gaps.some(([a, b]) => b - a >= 0.6 && a < 5.1)).toBe(false)
   })
 })
