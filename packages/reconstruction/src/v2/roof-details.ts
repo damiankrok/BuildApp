@@ -698,6 +698,9 @@ const median = (xs: readonly number[]): number => {
 /** 005X: a rooflight the top storey's plan states: its callout, standing inside the storey under a slope. */
 export type PlanRooflightReading = RooflightReading & { widthM: number; lengthM: number; calloutId: string; centre: { x: number; z: number } }
 
+/** 005Y-N5 (C2): rings this close in distance from the eave stand in one row; symbols this close end at one eave line. */
+const ROW_ACROSS_M = 0.05
+
 /** The sizes a callout inside a roofed storey may state for a rooflight, in metres: outside them it is some other symbol. */
 const ROOFLIGHT_WIDTH_M = { min: 0.3, max: 1.6 } as const
 const ROOFLIGHT_LENGTH_M = { min: 0.4, max: 2.0 } as const
@@ -744,6 +747,8 @@ export function readPlanRooflights(
   const tan = Math.tan((roof.pitchDeg * Math.PI) / 180)
   const cos = Math.cos((roof.pitchDeg * Math.PI) / 180)
   const out: PlanRooflightReading[] = []
+  type Read = { c: CalloutReading; base: Record<string, unknown> | undefined; widthM: number; lengthM: number; centre: { x: number; z: number }; along: number; ringAcross: number; upslope: 1 | -1; symbol: DrawnRooflightSymbol | undefined }
+  const read: Read[] = []
   for (const c of callouts) {
     const base = trace ? { kind: 'ROOFLIGHT_RING', frameId: plan.frameId, calloutId: c.id, circle: c.circle, upperText: c.upperText, lowerText: c.lowerText, widthCm: c.widthCm, heightCm: c.heightCm, bar: !!c.bar, world: plan.toWorld(c.circle.cx, c.circle.cy) } : undefined
     const reject = (reason: string): void => {
@@ -768,8 +773,25 @@ export function readPlanRooflights(
     const along = roof.ridgeAxis === 'X' ? centre.x : centre.z
     const ringAcross = roof.ridgeAxis === 'X' ? centre.z : centre.x
     // 005Y-N4 (A): up the slope the rooflight is where its symbol is drawn; the ring is printed near it, not on its centre
-    const symbol = raster ? drawnRooflightSymbol(raster, plan as Pick<PlanFrameV2, 'toPixel' | 'toWorld'>, c.circle, widthM, lengthM * cos, roof.ridgeAxis, base ? (d) => trace?.({ kind: 'ROOFLIGHT_SYMBOL_DEBUG', calloutId: c.id, ...d }) : undefined) : undefined
-    const across = symbol ? (symbol.acrossFrom + symbol.acrossTo) / 2 : ringAcross
+    // up the slope is toward the ridge: away from the eave of the slope the ring stands on
+    const upslope: 1 | -1 = ringAcross < roof.ridgeAt ? 1 : -1
+    const symbol = raster ? drawnRooflightSymbol(raster, plan as Pick<PlanFrameV2, 'toPixel' | 'toWorld'>, c.circle, widthM, lengthM * cos, roof.ridgeAxis, base ? (d) => trace?.({ kind: 'ROOFLIGHT_SYMBOL_DEBUG', calloutId: c.id, ...d }) : undefined, upslope) : undefined
+    read.push({ c, base, widthM, lengthM, centre, along, ringAcross, upslope, symbol })
+  }
+  // 005Y-N5 (C2): rings of one row — one slope, one printed size, the same distance from the eave (within
+  // `ROW_ACROSS_M`) — share the line their symbols stop at toward the eave. Where every symbol read in the row stops at
+  // one eave line, a ring whose own symbol was not read takes that line, its depth the printed length's projection.
+  const eaveEnd = (r: Read): number | undefined => (r.symbol ? (r.upslope > 0 ? r.symbol.acrossFrom : r.symbol.acrossTo) : undefined)
+  const rowOf = (r: Read): Read[] => read.filter((x) => x.upslope === r.upslope && x.c.widthCm === r.c.widthCm && x.c.heightCm === r.c.heightCm && Math.abs(x.ringAcross - r.ringAcross) <= ROW_ACROSS_M)
+  for (const r of read) {
+    const { c, base, widthM, lengthM, centre, along, ringAcross, upslope, symbol } = r
+    const reject = (reason: string): void => {
+      if (base) trace?.({ ...base, decision: 'REJECTED', reason })
+    }
+    const row = symbol ? [] : rowOf(r)
+    const ends = row.map(eaveEnd).filter((e): e is number => e !== undefined)
+    const rowEave = ends.length > 0 && Math.max(...ends) - Math.min(...ends) <= ROW_ACROSS_M ? ends.reduce((a, b) => a + b, 0) / ends.length : undefined
+    const across = symbol ? (symbol.acrossFrom + symbol.acrossTo) / 2 : rowEave !== undefined ? rowEave + (upslope * lengthM * cos) / 2 : ringAcross
     const slope: 'LOW' | 'HIGH' = across < roof.ridgeAt ? 'LOW' : 'HIGH'
     const eaveAlong = roof.ridgeAxis === 'X' ? (slope === 'LOW' ? body.z0 : body.z1) : slope === 'LOW' ? body.x0 : body.x1
     const depth = lengthM * cos
@@ -780,7 +802,7 @@ export function readPlanRooflights(
       reject('the slope is too short for its plan depth')
       continue
     }
-    if (base) trace?.({ ...base, decision: 'READ', slope: across < roof.ridgeAt ? 'LOW' : 'HIGH', ringAcrossM: round6(ringAcross), symbol: symbol ?? null, acrossM: round6(across), residualM: round6(across - ringAcross) })
+    if (base) trace?.({ ...base, decision: 'READ', slope: across < roof.ridgeAt ? 'LOW' : 'HIGH', ringAcrossM: round6(ringAcross), symbol: symbol ?? null, acrossM: round6(across), residualM: round6(across - ringAcross), ...(rowEave !== undefined ? { rowEave: round6(rowEave), rowSymbols: ends.length } : {}) })
     const from = Math.min(Math.max(across - depth / 2, lo), hi - depth)
     const to = from + depth
     const heightAt = (a: number): number => roof.eaveY + Math.abs(a - eaveAlong) * tan
@@ -795,12 +817,66 @@ export function readPlanRooflights(
       yTo: round6(Math.max(heightAt(from), heightAt(to))),
       frameId: plan.frameId,
       confidence: round6(Math.min(0.8, 0.4 + c.confidence * 0.6)),
-      why: `a ${c.widthCm}/${c.heightCm} callout inside the storey under the roof, on the ${slope === 'LOW' ? 'lower-coordinate' : 'higher-coordinate'} slope at ${along.toFixed(2)} m along the ridge (${c.why})${symbol ? `; up the slope where its symbol is drawn: ${symbol.why}, ${(across - ringAcross).toFixed(2)} m from the ring` : '; up the slope at its ring (no single drawn symbol found beside it)'}`,
+      why: `a ${c.widthCm}/${c.heightCm} callout inside the storey under the roof, on the ${slope === 'LOW' ? 'lower-coordinate' : 'higher-coordinate'} slope at ${along.toFixed(2)} m along the ridge (${c.why})${symbol ? `; up the slope where its symbol is drawn: ${symbol.why}, ${(across - ringAcross).toFixed(2)} m from the ring` : rowEave !== undefined ? `; its own symbol not read, up the slope from the eave line where the ${ends.length} symbol(s) read in its row stop, ${(across - ringAcross).toFixed(2)} m from the ring` : '; up the slope at its ring (no single drawn symbol found beside it, none read in its row)'}`,
       widthM: round6(widthM),
       lengthM: round6(lengthM),
       calloutId: c.id,
       centre: { x: round6(centre.x), z: round6(centre.z) },
     })
+  }
+  // 005Y-N5 (C2): along each row whose symbols were read, a symbol of the same size on the same eave line with a callout
+  // bar inside is a rooflight whose ring the ring finder missed (`rowSymbolsWithoutRing`)
+  if (raster) {
+    const seen = new Set<Read>()
+    for (const r of read) {
+      if (seen.has(r)) continue
+      const row = rowOf(r)
+      for (const x of row) seen.add(x)
+      const ends = row.map(eaveEnd).filter((e): e is number => e !== undefined)
+      if (ends.length === 0 || Math.max(...ends) - Math.min(...ends) > ROW_ACROSS_M) continue
+      // the search follows the symbols as drawn: from where their sides stop toward the eave
+      const drawnEnds = row.filter((x) => x.symbol).map((x) => (x.upslope > 0 ? (x.symbol as DrawnRooflightSymbol).drawnAcross[0] : (x.symbol as DrawnRooflightSymbol).drawnAcross[1]))
+      const drawnEave = drawnEnds.reduce((a, b) => a + b, 0) / drawnEnds.length
+      const bars = row.filter((x) => x.c.bar).map((x) => { const w = plan.toWorld(x.c.circle.cx, (x.c.bar as { y: number }).y); return roof.ridgeAxis === 'X' ? w.z : w.x })
+      if (bars.length === 0) continue
+      const eave = ends.reduce((a, b) => a + b, 0) / ends.length
+      const barAcross = [...bars].sort((a, b) => a - b)[Math.floor(bars.length / 2)]
+      const pp = plan as Pick<PlanFrameV2, 'toPixel' | 'toWorld'>
+      const pxPerM = Math.hypot(pp.toPixel(1, 0).x - pp.toPixel(0, 0).x, pp.toPixel(1, 0).y - pp.toPixel(0, 0).y)
+      const radiusM = Math.min(...row.map((x) => x.c.circle.radiusPx)) / pxPerM
+      const alongLo = roof.ridgeAxis === 'X' ? body.x0 + wallThicknessM : body.z0 + wallThicknessM
+      const alongHi = roof.ridgeAxis === 'X' ? body.x1 - wallThicknessM : body.z1 - wallThicknessM
+      const drawnDepth = Math.abs(row.filter((x) => x.symbol).map((x) => (x.symbol as DrawnRooflightSymbol).drawnAcross).reduce((a, d) => a + (d[1] - d[0]), 0) / drawnEnds.length)
+      const found = rowSymbolsWithoutRing(raster, plan as Pick<PlanFrameV2, 'toPixel' | 'toWorld'>, roof.ridgeAxis, { eaveAcross: drawnEave, upslope: r.upslope, depthM: drawnDepth, widthM: r.widthM, barAcross, barHalfM: radiusM * 0.7, alongFrom: alongLo, alongTo: alongHi, taken: read.filter((x) => x.upslope === r.upslope).map((x) => x.along) }, trace ? (d) => trace({ kind: 'ROW_SYMBOL_DEBUG', frameId: plan.frameId, slope: r.upslope, eave: round6(eave), barAcross: round6(barAcross), ...d }) : undefined)
+      for (const f of found) {
+        const across = eave + (r.upslope * r.lengthM * cos) / 2
+        const slope: 'LOW' | 'HIGH' = across < roof.ridgeAt ? 'LOW' : 'HIGH'
+        const eaveAlong = roof.ridgeAxis === 'X' ? (slope === 'LOW' ? body.z0 : body.z1) : slope === 'LOW' ? body.x0 : body.x1
+        const depth = r.lengthM * cos
+        const from = across - depth / 2
+        const to = from + depth
+        const heightAt = (a: number): number => roof.eaveY + Math.abs(a - eaveAlong) * tan
+        const centre = roof.ridgeAxis === 'X' ? { x: f.along, z: barAcross } : { x: barAcross, z: f.along }
+        trace?.({ kind: 'ROOFLIGHT_RING', frameId: plan.frameId, calloutId: `row-symbol-${f.along}`, decision: 'READ', method: 'ROW_SYMBOL_WITHOUT_RING', slope, along: f.along, acrossM: round6(across), rowEave: round6(eave), sidesCover: f.sidesCover, edgeCover: f.edgeCover, barCover: f.barCover })
+        out.push({
+          id: '',
+          slope,
+          alongFrom: round6(f.along - r.widthM / 2),
+          alongTo: round6(f.along + r.widthM / 2),
+          slopeFrom: round6(from),
+          slopeTo: round6(to),
+          yFrom: round6(Math.min(heightAt(from), heightAt(to))),
+          yTo: round6(Math.max(heightAt(from), heightAt(to))),
+          frameId: plan.frameId,
+          confidence: 0.4,
+          why: `no ring read here, but ${f.why}; its size is its row's printed ${r.c.widthCm}/${r.c.heightCm}, which the symbol matches`,
+          widthM: round6(r.widthM),
+          lengthM: round6(r.lengthM),
+          calloutId: `row-symbol-${plan.frameId}-${f.along}`,
+          centre: { x: round6(centre.x), z: round6(centre.z) },
+        })
+      }
+    }
   }
   out.sort((a, b) => (a.slope === b.slope ? a.alongFrom - b.alongFrom : a.slope === 'LOW' ? -1 : 1))
   return out.map((r, i) => ({ ...r, id: `rooflight-plan-${r.slope === 'LOW' ? 'low' : 'high'}-${i}` }))
@@ -857,10 +933,27 @@ const SYMBOL_MARGIN = 0.15
 /** 005Y-N4 (A): a dashed edge covers this share of its length or more, and less than a solid line would. */
 const DASHED_MIN_COVER = 0.25
 const DASHED_MAX_COVER = 0.92
+/** 005Y-N5 (C2): a symbol line is grey: its channels differ by no more than this (a dimension line is coloured). */
+const SYMBOL_GREY_CHROMA = 40
+/** 005Y-N5 (C2): a dashed side has gaps no longer than this (px); a longer gap is where the side ends. */
+const SYMBOL_DASH_GAP_PX = 5
 /** 005Y-N4 (A): the drawn depth may differ from the printed length's plan projection by this share (drawing tolerance). */
 const SYMBOL_DEPTH_TOLERANCE = 0.2
 
-export type DrawnRooflightSymbol = { acrossFrom: number; acrossTo: number; edgesPx: [number, number]; cover: [number, number]; sidesCover: [number, number]; score: number; runnerUp: number; why: string }
+export type DrawnRooflightSymbol = {
+  acrossFrom: number
+  acrossTo: number
+  edgesPx: [number, number]
+  cover: [number, number]
+  sidesCover: [number, number]
+  score: number
+  runnerUp: number
+  /** 005Y-N5: the whole rectangle read, or its upslope edge and sides with the eave edge at the printed depth. */
+  method: 'RECTANGLE' | 'UPSLOPE_EDGE_AND_SIDES'
+  /** 005Y-N5: the across range the symbol is drawn over (less than the window's where a wall cuts it). */
+  drawnAcross: [number, number]
+  why: string
+}
 
 /**
  * 005Y-N4 (A): the rooflight's own symbol on the plan, beside its callout ring. A plan draws a rooflight as a rectangle
@@ -879,6 +972,8 @@ export function drawnRooflightSymbol(
   depthM: number,
   ridgeAxis: 'X' | 'Z',
   debug?: (record: Record<string, unknown>) => void,
+  /** 005Y-N5: which way up the slope runs in the across coordinate (+1 toward larger values), when known. */
+  upslope?: 1 | -1,
 ): DrawnRooflightSymbol | undefined {
   const c = plan.toWorld(ring.cx, ring.cy)
   const p0 = plan.toPixel(c.x, c.z)
@@ -891,7 +986,18 @@ export function drawnRooflightSymbol(
   const uc = { x: acrossV.x / pxPerM, y: acrossV.y / pxPerM }
   const widthPx = widthM * pxPerM
   const depthPx = depthM * pxPerM
+  const t0 = ridgeAxis === 'X' ? c.z : c.x
   const at = (s: number, t: number): number => lumaAt(raster, Math.round(ring.cx + ua.x * s + uc.x * t), Math.round(ring.cy + ua.y * s + uc.y * t))
+  // 005Y-N5: a symbol is drawn in grey; a coloured line (a dimension line, a room number) is not its edge
+  const grey = (s: number, t: number): boolean => {
+    const [r, g, b] = rgbAt(raster, Math.round(ring.cx + ua.x * s + uc.x * t), Math.round(ring.cy + ua.y * s + uc.y * t))
+    return Math.max(r, g, b) - Math.min(r, g, b) <= SYMBOL_GREY_CHROMA
+  }
+  /** A side's line pixel: grey and darker than the pixels 2 px either side of it along the ridge (a tone band is no line). */
+  const isLine = (s: number, t: number): boolean => {
+    const l = at(s, t)
+    return l >= SYMBOL_WALL_LUMA && l < SYMBOL_LINE_LUMA && grey(s, t) && l <= Math.min(at(s - 2, t), at(s + 2, t)) - ROW_SYMBOL_LINE_CONTRAST
+  }
   /**
    * Share of light-line pixels along a segment (darker than paper, lighter than wall ink); a segment through wall ink
    * is no symbol edge. The ring and its text are not the symbol: pixels inside its disc are skipped.
@@ -907,7 +1013,9 @@ export function drawnRooflightSymbol(
       if (Math.hypot(dx, dy) <= ring.radiusPx + 2) continue
       const l = at(s0, t0)
       if (l < SYMBOL_WALL_LUMA) wall += 1
-      if (l >= SYMBOL_WALL_LUMA && l < SYMBOL_LINE_LUMA) line += 1
+      // 005Y-N5: a line pixel stands out from the paper or tone either side of it (a tone band is not a line)
+      const [n1, n2] = alongFixed ? [at(s0 - 2, t0), at(s0 + 2, t0)] : [at(s0, t0 - 2), at(s0, t0 + 2)]
+      if (l >= SYMBOL_WALL_LUMA && l < SYMBOL_LINE_LUMA && grey(s0, t0) && l <= Math.min(n1, n2) - ROW_SYMBOL_LINE_CONTRAST) line += 1
       n += 1
     }
     return { share: n >= 4 ? line / n : 0, wall: n > 0 && wall > 0.3 * n }
@@ -946,14 +1054,162 @@ export function drawnRooflightSymbol(
       const rs = Math.max(right.wall ? 0 : right.share, side(widthPx / 2))
       debug?.({ pair: [a.t, b.t], ls: round6(ls), rs: round6(rs) })
       if (ls < DASHED_MIN_COVER || rs < DASHED_MIN_COVER) continue
-      const t0 = ridgeAxis === 'X' ? c.z : c.x
-      pairs.push({ acrossFrom: round6(t0 + a.t / pxPerM), acrossTo: round6(t0 + b.t / pxPerM), edgesPx: [a.t, b.t], cover: [round6(a.share), round6(b.share)], sidesCover: [round6(ls), round6(rs)], score: round6(Math.min(a.share, b.share) + Math.min(ls, rs)), runnerUp: 0, why: `a rectangle of light lines ${(d / pxPerM).toFixed(2)} m deep (the printed length's plan projection ${depthM.toFixed(2)} m), ${(widthPx / pxPerM).toFixed(2)} m wide, the ring between its edges` })
+      pairs.push({ acrossFrom: round6(t0 + a.t / pxPerM), acrossTo: round6(t0 + b.t / pxPerM), edgesPx: [a.t, b.t], cover: [round6(a.share), round6(b.share)], sidesCover: [round6(ls), round6(rs)], score: round6(Math.min(a.share, b.share) + Math.min(ls, rs)), runnerUp: 0, method: 'RECTANGLE', drawnAcross: [round6(t0 + a.t / pxPerM), round6(t0 + b.t / pxPerM)], why: `a rectangle of light lines ${(d / pxPerM).toFixed(2)} m deep (the printed length's plan projection ${depthM.toFixed(2)} m), ${(widthPx / pxPerM).toFixed(2)} m wide, the ring between its edges` })
     }
   }
   debug?.({ lines: lines.map((l) => [l.t, round6(l.share)]), depthPx: round6(depthPx), widthPx: round6(widthPx), pairs: pairs.length })
   const ranked = [...pairs].sort((p, q) => q.score - p.score || p.edgesPx[0] - q.edgesPx[0])
   const best = ranked[0]
-  if (!best) return undefined
   const runnerUp = ranked[1]?.score ?? 0
-  return best.score - runnerUp >= SYMBOL_MARGIN ? { ...best, runnerUp } : undefined
+  if (best && best.score - runnerUp >= SYMBOL_MARGIN) return { ...best, method: 'RECTANGLE', runnerUp }
+  if (best || upslope === undefined) return undefined
+  // 005Y-N5 (C2): no full rectangle. The symbol's eave-side edge often lies on the edge of the shaded band under the
+  // knee wall — a change of tone, not a line — while its upslope edge and its two sides are clean. Read those three:
+  // one grey line up the slope from the ring, both sides drawn back from it toward the eave; where both sides' dashes
+  // stop is the symbol's eave end, read from the drawing. Its depth must match the printed length's plan projection
+  // (`SYMBOL_DEPTH_TOLERANCE`) and the ring must stand between its two ends.
+  const open: DrawnRooflightSymbol[] = []
+  for (const l of lines) {
+    const t = l.t * upslope
+    if (t < ring.radiusPx || t > depthPx * (1 + SYMBOL_DEPTH_TOLERANCE)) continue
+    const eaveT = l.t - upslope * depthPx
+    const [lo, hi] = [Math.min(l.t, eaveT), Math.max(l.t, eaveT)]
+    const side = (s0: number): number => Math.max(...[-3, -2, -1, 0, 1, 2, 3].map((k) => cover(s0 + k, lo + 2, hi - 2, true)).filter((r) => !r.wall).map((r) => r.share), 0)
+    const ls = side(-widthPx / 2)
+    const rs = side(widthPx / 2)
+    // where each side's dashes end toward the eave: the drawn eave end of the symbol, its own edge line lost or not
+    const sideEnd = (s0: number): { end: number; atWall: boolean } | undefined => {
+      // the side is found within 3 px of the printed width, then followed a pixel either way as it runs
+      let k: number | undefined
+      let last: number | undefined
+      let gap = 0
+      for (let step = 2; step <= depthPx * (1 + SYMBOL_DEPTH_TOLERANCE) + 4; step += 1) {
+        const t = l.t - upslope * step
+        const hit = (k === undefined ? [0, -1, 1, -2, 2, -3, 3] : [k, k - 1, k + 1]).find((d) => isLine(s0 + d, t))
+        if (k === undefined && hit === undefined && step > 2 + SYMBOL_DASH_GAP_PX) break
+        if (hit !== undefined) {
+          k = hit
+          last = t
+          gap = 0
+        } else if (k !== undefined && ++gap > SYMBOL_DASH_GAP_PX) break
+      }
+      if (last === undefined || k === undefined) return undefined
+      // a side that stops on wall ink is cut by the wall: the plan draws the window only up to the wall's face
+      const atWall = [1, 2, 3, 4].some((d) => at(s0 + (k as number), (last as number) - upslope * d) < SYMBOL_WALL_LUMA)
+      return { end: last, atWall }
+    }
+    const endL = sideEnd(-widthPx / 2)
+    const endR = sideEnd(widthPx / 2)
+    const drawnEave = endL !== undefined && endR !== undefined ? (endL.end + endR.end) / 2 : undefined
+    const drawnDepth = drawnEave === undefined ? 0 : Math.abs(l.t - drawnEave)
+    const cutByWall = !!endL?.atWall && !!endR?.atWall && drawnDepth < depthPx
+    debug?.({ upslopeEdge: l.t, ls: round6(ls), rs: round6(rs), sideEnds: [endL?.end ?? null, endR?.end ?? null], atWall: [endL?.atWall ?? null, endR?.atWall ?? null], drawnDepthPx: round6(drawnDepth) })
+    if (ls < DASHED_MIN_COVER || rs < DASHED_MIN_COVER || drawnEave === undefined || endL === undefined || endR === undefined) continue
+    if (Math.abs(endL.end - endR.end) > 3) continue
+    if (!cutByWall && Math.abs(drawnDepth - depthPx) > SYMBOL_DEPTH_TOLERANCE * depthPx) continue
+    // the ring between the symbol's two drawn ends
+    if (drawnEave * upslope > 0) continue
+    // where the wall cuts the symbol, the window runs on under the wall line: its eave end the printed depth below its upslope edge
+    const windowEave = cutByWall ? l.t - upslope * depthPx : drawnEave
+    const [dlo, dhi] = [Math.min(l.t, windowEave), Math.max(l.t, windowEave)]
+    const from = round6(t0 + dlo / pxPerM)
+    const to = round6(t0 + dhi / pxPerM)
+    open.push({ acrossFrom: from, acrossTo: to, edgesPx: [Math.round(dlo), Math.round(dhi)], cover: upslope > 0 ? [0, round6(l.share)] : [round6(l.share), 0], sidesCover: [round6(ls), round6(rs)], score: round6(l.share + Math.min(ls, rs)), runnerUp: 0, method: 'UPSLOPE_EDGE_AND_SIDES', drawnAcross: [round6(t0 + Math.min(l.t, drawnEave) / pxPerM), round6(t0 + Math.max(l.t, drawnEave) / pxPerM)], why: `its upslope edge and both sides drawn ${(widthPx / pxPerM).toFixed(2)} m apart, ${(t / pxPerM).toFixed(2)} m up the slope from the ring; ${cutByWall ? `its sides cut by the wall's face ${(drawnDepth / pxPerM).toFixed(2)} m below it, the window running on under the wall line to the printed length's plan projection, ${depthM.toFixed(2)} m` : `its eave end where both sides' dashes stop, ${(drawnDepth / pxPerM).toFixed(2)} m below it (the printed length's plan projection is ${depthM.toFixed(2)} m)`}` })
+  }
+  const openRanked = [...open].sort((p, q) => q.score - p.score || p.edgesPx[0] - q.edgesPx[0])
+  const top = openRanked[0]
+  if (!top) return undefined
+  const second = openRanked[1]?.score ?? 0
+  if (top.score - second >= SYMBOL_MARGIN) return { ...top, runnerUp: second }
+  // Lines close together up the slope whose sides all stop at one eave end are one symbol drawn with a doubled edge
+  // (frame and sash, or a line and its shadow): the one whose depth is nearest the printed one stands for it. Eave ends
+  // apart are two symbols — an ambiguity, left unread.
+  const eaveOf = (o: DrawnRooflightSymbol): number => (upslope > 0 ? o.edgesPx[0] : o.edgesPx[1])
+  if (open.some((o) => Math.abs(eaveOf(o) - eaveOf(top)) > 2)) return undefined
+  const depthOf = (o: DrawnRooflightSymbol): number => Math.abs(o.edgesPx[1] - o.edgesPx[0])
+  const nearest = [...open].sort((p, q) => Math.abs(depthOf(p) - depthPx) - Math.abs(depthOf(q) - depthPx) || p.edgesPx[0] - q.edgesPx[0])[0]
+  return { ...nearest, runnerUp: second, why: `${nearest.why}; ${open.length} parallel lines up the slope share this eave end, the one nearest the printed depth taken` }
+}
+
+/** 005Y-N5 (C2): a found symbol's sides must be drawn over this share of the symbol's depth; its callout bar over this share of the disc. */
+const ROW_SYMBOL_SIDE_COVER = 0.5
+const ROW_SYMBOL_BAR_COVER = 0.6
+/** 005Y-N5 (C2): a line pixel is this much darker (luma) than the pixels 2 px either side of it. */
+const ROW_SYMBOL_LINE_CONTRAST = 15
+/** 005Y-N5 (C2): a drawn symbol's depth as a share of the printed length's plan projection (publishers draw them short). */
+const ROW_SYMBOL_DEPTH_RANGE = { min: 0.6, max: 1.2 } as const
+
+export type RowSymbolWithoutRing = { along: number; sidesCover: [number, number]; edgeCover: number; barCover: number; why: string }
+
+/**
+ * 005Y-N5 (C2): rooflights a row's ring finder missed (a ring whose outline the watermark or tint swallows). Along a row
+ * whose symbols were read, at one printed size and one eave line, a further rooflight is read only where two
+ * independent marks agree: the same symbol — both sides of the printed width drawn from the row's eave line over the
+ * printed depth, its upslope edge drawn across — and a callout's bar inside it at the row's bar position. Places within
+ * a symbol's width of a read ring are not searched. The printed size of such a ring is not read; it is the row's, which
+ * its symbol matches to the pixel. Returns positions along the ridge.
+ */
+export function rowSymbolsWithoutRing(
+  raster: Raster,
+  plan: Pick<PlanFrameV2, 'toPixel' | 'toWorld'>,
+  ridgeAxis: 'X' | 'Z',
+  row: { eaveAcross: number; upslope: 1 | -1; depthM: number; widthM: number; barAcross: number; barHalfM: number; alongFrom: number; alongTo: number; taken: readonly number[] },
+  debug?: (record: Record<string, unknown>) => void,
+): RowSymbolWithoutRing[] {
+  const P = (along: number, across: number): { x: number; y: number } => (ridgeAxis === 'X' ? plan.toPixel(along, across) : plan.toPixel(across, along))
+  const pxPerM = Math.hypot(P(row.alongFrom, row.eaveAcross + 1).x - P(row.alongFrom, row.eaveAcross).x, P(row.alongFrom, row.eaveAcross + 1).y - P(row.alongFrom, row.eaveAcross).y)
+  const step = 1 / pxPerM
+  const luma = (along: number, across: number): number => {
+    const p = P(along, across)
+    return lumaAt(raster, Math.round(p.x), Math.round(p.y))
+  }
+  /**
+   * A grey line pixel: darker than the paper or tone 2 px either side of it, across the line's own direction, by
+   * `ROW_SYMBOL_LINE_CONTRAST` — a tone band is not a line however grey it is.
+   */
+  const isLine = (along: number, across: number, lineAlongRidge: boolean): boolean => {
+    const p = P(along, across)
+    const l = luma(along, across)
+    const [r, g, b] = rgbAt(raster, p.x, p.y)
+    if (l < SYMBOL_WALL_LUMA || Math.max(r, g, b) - Math.min(r, g, b) > SYMBOL_GREY_CHROMA) return false
+    const [n1, n2] = lineAlongRidge ? [luma(along, across - 2 * step), luma(along, across + 2 * step)] : [luma(along - 2 * step, across), luma(along + 2 * step, across)]
+    return l <= Math.min(n1, n2) - ROW_SYMBOL_LINE_CONTRAST
+  }
+  /** Share of pixels of a world segment that are grey line, a few pixels either way across it taken at their best. */
+  const cover = (fixedAlong: boolean, fixed: number, from: number, to: number): number => {
+    let best = 0
+    for (const k of [-2, -1, 0, 1, 2]) {
+      let n = 0
+      let hit = 0
+      for (let v = Math.min(from, to) + 2 * step; v <= Math.max(from, to) - 2 * step; v += step) {
+        n += 1
+        if (fixedAlong ? isLine(fixed + k * step, v, false) : isLine(v, fixed + k * step, true)) hit += 1
+      }
+      best = Math.max(best, n > 0 ? hit / n : 0)
+    }
+    return best
+  }
+  // the drawn depth is the publisher's: searched between ROW_SYMBOL_DEPTH_RANGE of the printed length's projection
+  const scored: Array<RowSymbolWithoutRing & { score: number }> = []
+  for (let a = row.alongFrom + row.widthM / 2; a <= row.alongTo - row.widthM / 2; a += step) {
+    if (row.taken.some((t) => Math.abs(t - a) < row.widthM)) continue
+    const sure = row.eaveAcross + row.upslope * row.depthM * ROW_SYMBOL_DEPTH_RANGE.min
+    const ls = cover(true, a - row.widthM / 2, row.eaveAcross, sure)
+    const rs = cover(true, a + row.widthM / 2, row.eaveAcross, sure)
+    if (debug && ls >= 0.3 && rs >= 0.3) debug({ along: round6(a), ls: round6(ls), rs: round6(rs), bar: round6(cover(false, row.barAcross, a - row.barHalfM, a + row.barHalfM)) })
+    if (ls < ROW_SYMBOL_SIDE_COVER || rs < ROW_SYMBOL_SIDE_COVER) continue
+    let edge = 0
+    for (let d = ROW_SYMBOL_DEPTH_RANGE.min; d <= ROW_SYMBOL_DEPTH_RANGE.max; d += step / row.depthM) edge = Math.max(edge, cover(false, row.eaveAcross + row.upslope * row.depthM * d, a - row.widthM / 2, a + row.widthM / 2))
+    if (edge < DASHED_MIN_COVER) continue
+    const bar = cover(false, row.barAcross, a - row.barHalfM, a + row.barHalfM)
+    if (bar < ROW_SYMBOL_BAR_COVER) continue
+    scored.push({ along: round6(a), sidesCover: [round6(ls), round6(rs)], edgeCover: round6(edge), barCover: round6(bar), score: Math.min(ls, rs) + edge + bar, why: '' })
+  }
+  // one symbol per place: the best of each run of neighbouring positions
+  const out: RowSymbolWithoutRing[] = []
+  for (const c of [...scored].sort((p, q) => q.score - p.score || p.along - q.along)) {
+    if (out.some((o) => Math.abs(o.along - c.along) < row.widthM)) continue
+    out.push({ along: c.along, sidesCover: c.sidesCover, edgeCover: c.edgeCover, barCover: c.barCover, why: `the row's symbol drawn here — sides ${c.sidesCover.join('/')} of the printed depth, upslope edge ${c.edgeCover} — with a callout bar inside at the row's bar (${c.barCover}); the ring's outline itself not found` })
+  }
+  return out.sort((p, q) => p.along - q.along)
 }
