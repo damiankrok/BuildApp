@@ -1,0 +1,554 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005Y-N6-REV1",
+ "status": "OWNER_VISUAL_PENDING",
+ "base": "27d4ba59c343b3f2f564edceb90b84f4a7d37df8",
+ "apkCommit": "ffa07daddd34ed1fdb00e8c863669a06b16a0c53",
+ "baselineReds": {
+  "mobile-scene parity (2)": "FIXED: assets re-exported (468bdf8)",
+  "architecture analyzer-v2 research path in comment": "FIXED (054dc35)",
+  "architecture reconstruction stair-fit builds a model": "FIXED (5749ec1, refactor, byte-identical)",
+  "architecture research-isolation tracked APK 39,556,682 B > 32 MB": "BASELINE_RED_KEPT (APK_SIZE_GATE_BASELINE_FAIL; new APK 39,638,490 B)",
+  "architecture wall-strip 005Q byte-for-byte gates (2)": "BASELINE_RED_KEPT (historical 005Q base; documented, not weakened)",
+  "local-analyzer Larchfield scene vs 03Y1 contract snapshot": "BASELINE_RED_KEPT (fails identically at 27d4ba5; hash parity desktop/bundle/Node 18 passes)"
+ },
+ "refactors": [
+  {
+   "commit": "d789e7a",
+   "what": "openings: matchOpeningCallout, resolveSillAndHead, classifyOpeningFamily (pure, named thresholds)",
+   "parity": "replay byte-identical 8/8"
+  },
+  {
+   "commit": "1040673",
+   "what": "solver recorder + house stair out of reconstructV2",
+   "parity": "replay byte-identical 8/8"
+  },
+  {
+   "commit": "3917149",
+   "what": "wallBandWindow (plan wall-band window)",
+   "parity": "replay byte-identical 8/8"
+  },
+  {
+   "commit": "054dc35",
+   "what": "inspectTintedRing + tintedRingHalves out of readTintedCallouts",
+   "parity": "production metric-evidence.json and model.json byte-identical 8/8"
+  },
+  {
+   "commit": "f46a2e2",
+   "what": "describeStair + stairSegmentSummary + phraseOf (mobile-scene)",
+   "parity": "scene bundles byte-identical, 7 shipped + 8 production models"
+  },
+  {
+   "commit": "5749ec1",
+   "what": "stair-fit runs programs only through candidate.ts",
+   "parity": "replay byte-identical 8/8"
+  }
+ ],
+ "functionMap": {
+  "reconstructV2": "1929 lines/nest 10 -> 1842/10",
+  "readWallOpenings": "342/13 -> 184/4",
+  "readTintedCallouts": "221/7 -> 155/7",
+  "describeObject": "287/3 -> 256/2"
+ },
+ "fixes": {
+  "R1": {
+   "label": "FIXED_AND_VERIFIED",
+   "commit": "c954fba",
+   "finding": "0.427 m wall agrees with source (21-22 px drawn at 0.0203 m/px; spec 24 cm block + 20 cm EPS); depth 8.30 = printed 830. Defect was a phantom partition from registration mppY 0.020108 (2 short Y anchors) vs ticks 149..557 (0.020343)."
+  },
+  "R2": {
+   "label": "TABLE_DELIVERED",
+   "table": "TRYTOMY_OPENING_DIFF in the stage report",
+   "finding": "N5 removals match the source; L1 gable 150/210 and L0 west 100/120 callouts are not found (callout finder) and stay ASSUMED"
+  },
+  "R3": {
+   "label": "MAPPED",
+   "mapping": {
+    "a01": [
+     {
+      "n": 1,
+      "id": "rooflight-plan-low-0",
+      "printed": "-",
+      "slope": "?",
+      "alongRidgeM": null,
+      "centre": [
+       2.8,
+       0.722
+      ],
+      "sizePlan": [
+       0.78,
+       0.904
+      ],
+      "ringPx": null,
+      "ringFrame": null,
+      "binding": "SYMBOL_WITHOUT_RING",
+      "ringToWindowM": null,
+      "uncertainty": "±0.3 m (ring beside the symbol; no symbol read)"
+     },
+     {
+      "n": 2,
+      "id": "rooflight-plan-low-1",
+      "printed": "78/118",
+      "slope": "LOW",
+      "alongRidgeM": 7.7,
+      "centre": [
+       7.703,
+       0.722
+      ],
+      "sizePlan": [
+       0.78,
+       0.904
+      ],
+      "ringPx": [
+       560,
+       488
+      ],
+      "ringFrame": "-cdc1c4ebd8-9b8cd885e5",
+      "binding": "ROW_LINE (own symbol not read; eave line of its row)",
+      "ringToWindowM": 0.13,
+      "uncertainty": "±0.15 m along the slope (row eave line, own edge not read)"
+     },
+     {
+      "n": 3,
+      "id": "rooflight-plan-low-2",
+      "printed": "78/118",
+      "slope": "LOW",
+      "alongRidgeM": 8.61,
+      "centre": [
+       8.615,
+       0.722
+      ],
+      "sizePlan": [
+       0.78,
+       0.904
+      ],
+      "ringPx": [
+       605,
+       488
+      ],
+      "ringFrame": "-cdc1c4ebd8-9b8cd885e5",
+      "binding": "OWN_SYMBOL",
+      "ringToWindowM": 0.13,
+      "uncertainty": "±0.05 m (drawn symbol edges)"
+     },
+     {
+      "n": 4,
+      "id": "rooflight-plan-high-3",
+      "printed": "78/118",
+      "slope": "HIGH",
+      "alongRidgeM": 2.82,
+      "centre": [
+       2.818,
+       7.618
+      ],
+      "sizePlan": [
+       0.78,
+       0.904
+      ],
+      "ringPx": [
+       319,
+       160
+      ],
+      "ringFrame": "-cdc1c4ebd8-9b8cd885e5",
+      "binding": "OWN_SYMBOL",
+      "ringToWindowM": 0.13,
+      "uncertainty": "±0.05 m (drawn symbol edges)"
+     },
+     {
+      "n": 5,
+      "id": "rooflight-plan-high-4",
+      "printed": "78/118",
+      "slope": "HIGH",
+      "alongRidgeM": 4.56,
+      "centre": [
+       4.561,
+       7.618
+      ],
+      "sizePlan": [
+       0.78,
+       0.904
+      ],
+      "ringPx": [
+       405,
+       157
+      ],
+      "ringFrame": "-cdc1c4ebd8-9b8cd885e5",
+      "binding": "ROW_LINE (own symbol not read; eave line of its row)",
+      "ringToWindowM": 0.07,
+      "uncertainty": "±0.15 m along the slope (row eave line, own edge not read)"
+     },
+     {
+      "n": 6,
+      "id": "rooflight-plan-high-5",
+      "printed": "78/118",
+      "slope": "HIGH",
+      "alongRidgeM": 7.72,
+      "centre": [
+       7.723,
+       7.618
+      ],
+      "sizePlan": [
+       0.78,
+       0.904
+      ],
+      "ringPx": [
+       561,
+       159
+      ],
+      "ringFrame": "-cdc1c4ebd8-9b8cd885e5",
+      "binding": "OWN_SYMBOL",
+      "ringToWindowM": 0.11,
+      "uncertainty": "±0.05 m (drawn symbol edges)"
+     },
+     {
+      "n": 7,
+      "id": "rooflight-plan-high-6",
+      "printed": "78/118",
+      "slope": "HIGH",
+      "alongRidgeM": 8.61,
+      "centre": [
+       8.615,
+       7.618
+      ],
+      "sizePlan": [
+       0.78,
+       0.904
+      ],
+      "ringPx": [
+       605,
+       159
+      ],
+      "ringFrame": "-cdc1c4ebd8-9b8cd885e5",
+      "binding": "ROW_LINE (own symbol not read; eave line of its row)",
+      "ringToWindowM": 0.11,
+      "uncertainty": "±0.15 m along the slope (row eave line, own edge not read)"
+     }
+    ],
+    "gozd": [
+     {
+      "n": 1,
+      "id": "rooflight-plan-low-0",
+      "printed": "78/140",
+      "slope": "LOW",
+      "alongRidgeM": 5.76,
+      "centre": [
+       5.763,
+       0.945
+      ],
+      "sizePlan": [
+       0.78,
+       1.072
+      ],
+      "ringPx": [
+       330,
+       505
+      ],
+      "ringFrame": "-e8d096563f-6e44db362c",
+      "binding": "ROW_LINE (own symbol not read; eave line of its row)",
+      "ringToWindowM": 0.1,
+      "uncertainty": "±0.15 m along the slope (row eave line, own edge not read)"
+     },
+     {
+      "n": 2,
+      "id": "rooflight-plan-low-1",
+      "printed": "78/140",
+      "slope": "LOW",
+      "alongRidgeM": 9.0,
+      "centre": [
+       9.001,
+       0.945
+      ],
+      "sizePlan": [
+       0.78,
+       1.072
+      ],
+      "ringPx": [
+       457,
+       505
+      ],
+      "ringFrame": "-e8d096563f-6e44db362c",
+      "binding": "ROW_LINE (own symbol not read; eave line of its row)",
+      "ringToWindowM": 0.1,
+      "uncertainty": "±0.15 m along the slope (row eave line, own edge not read)"
+     },
+     {
+      "n": 3,
+      "id": "rooflight-plan-low-2",
+      "printed": "78/140",
+      "slope": "LOW",
+      "alongRidgeM": 12.04,
+      "centre": [
+       12.035,
+       0.945
+      ],
+      "sizePlan": [
+       0.78,
+       1.072
+      ],
+      "ringPx": [
+       576,
+       505
+      ],
+      "ringFrame": "-e8d096563f-6e44db362c",
+      "binding": "OWN_SYMBOL",
+      "ringToWindowM": 0.1,
+      "uncertainty": "±0.05 m (drawn symbol edges)"
+     },
+     {
+      "n": 4,
+      "id": "rooflight-plan-high-3",
+      "printed": "78/140",
+      "slope": "HIGH",
+      "alongRidgeM": 5.76,
+      "centre": [
+       5.763,
+       8.427
+      ],
+      "sizePlan": [
+       0.78,
+       1.072
+      ],
+      "ringPx": [
+       330,
+       198
+      ],
+      "ringFrame": "-e8d096563f-6e44db362c",
+      "binding": "ROW_LINE (own symbol not read; eave line of its row)",
+      "ringToWindowM": 0.26,
+      "uncertainty": "±0.15 m along the slope (row eave line, own edge not read)"
+     },
+     {
+      "n": 5,
+      "id": "rooflight-plan-high-4",
+      "printed": "78/140",
+      "slope": "HIGH",
+      "alongRidgeM": 8.11,
+      "centre": [
+       8.108,
+       8.427
+      ],
+      "sizePlan": [
+       0.78,
+       1.072
+      ],
+      "ringPx": [
+       422,
+       198
+      ],
+      "ringFrame": "-e8d096563f-6e44db362c",
+      "binding": "ROW_LINE (own symbol not read; eave line of its row)",
+      "ringToWindowM": 0.26,
+      "uncertainty": "±0.15 m along the slope (row eave line, own edge not read)"
+     },
+     {
+      "n": 6,
+      "id": "rooflight-plan-high-5",
+      "printed": "78/140",
+      "slope": "HIGH",
+      "alongRidgeM": 10.35,
+      "centre": [
+       10.352,
+       8.504
+      ],
+      "sizePlan": [
+       0.78,
+       1.072
+      ],
+      "ringPx": [
+       510,
+       198
+      ],
+      "ringFrame": "-e8d096563f-6e44db362c",
+      "binding": "OWN_SYMBOL",
+      "ringToWindowM": 0.18,
+      "uncertainty": "±0.05 m (drawn symbol edges)"
+     },
+     {
+      "n": 7,
+      "id": "rooflight-plan-high-6",
+      "printed": "78/140",
+      "slope": "HIGH",
+      "alongRidgeM": 12.04,
+      "centre": [
+       12.035,
+       8.504
+      ],
+      "sizePlan": [
+       0.78,
+       1.072
+      ],
+      "ringPx": [
+       576,
+       198
+      ],
+      "ringFrame": "-e8d096563f-6e44db362c",
+      "binding": "OWN_SYMBOL",
+      "ringToWindowM": 0.18,
+      "uncertainty": "±0.05 m (drawn symbol edges)"
+     }
+    ]
+   }
+  },
+  "F1": {
+   "label": "FIXED_AND_VERIFIED",
+   "commit": "cd59bd5"
+  },
+  "F2": {
+   "label": "GARAGE_FIXED_ENTRANCE_OPEN",
+   "commit": "bd0508c",
+   "finding": "196|688|836 chain not detected (planting drawn across both ticks); garage now 6.857 m vs 6.88; entrance column/canopy/sidelight unchanged"
+  },
+  "F3": {
+   "label": "NAMED_NOT_FIXED",
+   "finding": "corner rings 118/220 and 250/220 found as 9-11 px sub-circles; heads from elevations 2.04 vs 1.99 m; open-corner tolerance not loosened"
+  },
+  "F4": {
+   "label": "CLOSURE_FIXED_GROUND_CONFLICT_OPEN",
+   "commit": "f74cfb5",
+   "finding": "2 exterior intersections were chimney-2 across the hip ridge without a relation rule for roof planes; east elevation ground conflict unchanged"
+  },
+  "F5": {
+   "label": "PARTIAL",
+   "commit": "fa6fdbe",
+   "finding": "over-wide tread groups split at breaks; Sasanki 3 gains a stair, Trytomy re-placed; real flights still 1 (Marcowki); target 3 not met"
+  }
+ },
+ "models": {
+  "a01": {
+   "n5": "d8a71baf1618a44b",
+   "n6": "c9d774e402072f12",
+   "changed": true,
+   "verification": {
+    "closure": {
+     "exteriorErrors": 0,
+     "exteriorFindings": 0,
+     "interiorFindings": 33
+    },
+    "replay": "BYTE_IDENTICAL"
+   },
+   "metricEvidenceIdenticalToN5": true,
+   "why": "R1: phantom 0.10 m partition at z=0.427 and its 3 copied doors removed (face-to-face plan scale); interior doors along z move 3-8 cm"
+  },
+  "gozd": {
+   "n5": "8815c09a30807254",
+   "n6": "a21ad79edd67b5b9",
+   "changed": true,
+   "verification": {
+    "closure": {
+     "exteriorErrors": 0,
+     "exteriorFindings": 0,
+     "interiorFindings": 66
+    },
+    "replay": "BYTE_IDENTICAL"
+   },
+   "metricEvidenceIdenticalToN5": true,
+   "why": "F1: recess 70/210 opening WINDOW -> DOOR (drawn leaf/swing)"
+  },
+  "marcowki": {
+   "n5": "d8ec95cfc9381030",
+   "n6": "d8ec95cfc9381030",
+   "changed": false,
+   "verification": {
+    "closure": {
+     "exteriorErrors": 0,
+     "exteriorFindings": 0,
+     "interiorFindings": 36
+    },
+    "replay": "BYTE_IDENTICAL"
+   },
+   "metricEvidenceIdenticalToN5": true
+  },
+  "ciesz": {
+   "n5": "675c0850926cdd76",
+   "n6": "675c0850926cdd76",
+   "changed": false,
+   "verification": {
+    "closure": {
+     "exteriorErrors": 0,
+     "exteriorFindings": 0,
+     "interiorFindings": 26
+    },
+    "replay": "BYTE_IDENTICAL"
+   },
+   "metricEvidenceIdenticalToN5": true
+  },
+  "rary": {
+   "n5": "8edc193ad5a71ca5",
+   "n6": "73969751a434e0f6",
+   "changed": true,
+   "verification": {
+    "closure": {
+     "exteriorErrors": 0,
+     "exteriorFindings": 0,
+     "interiorFindings": 19
+    },
+    "replay": "BYTE_IDENTICAL"
+   },
+   "metricEvidenceIdenticalToN5": true,
+   "why": "F2: garage 6.665 -> 6.857 m (printed 688); garage door follows its wall"
+  },
+  "trytomach": {
+   "n5": "f3fc5061bb1360a0",
+   "n6": "1bf237bda74b7952",
+   "changed": true,
+   "verification": {
+    "closure": {
+     "exteriorErrors": 0,
+     "exteriorFindings": 0,
+     "interiorFindings": 30
+    },
+    "replay": "BYTE_IDENTICAL"
+   },
+   "metricEvidenceIdenticalToN5": true,
+   "why": "F5: recovered tread ladder; stair placeholder re-placed on it"
+  },
+  "arganiach": {
+   "n5": "34a95a766d169f39",
+   "n6": "34a95a766d169f39",
+   "changed": false,
+   "verification": {
+    "closure": {
+     "exteriorErrors": 5,
+     "exteriorFindings": 5,
+     "interiorFindings": 11
+    },
+    "replay": "BYTE_IDENTICAL"
+   },
+   "metricEvidenceIdenticalToN5": true
+  },
+  "sasankach3": {
+   "n5": "bf3a9836368e6c01",
+   "n6": "8e4539fdf72f8cb5",
+   "changed": true,
+   "verification": {
+    "closure": {
+     "exteriorErrors": 0,
+     "exteriorFindings": 0,
+     "interiorFindings": 66
+    },
+    "replay": "BYTE_IDENTICAL"
+   },
+   "metricEvidenceIdenticalToN5": true,
+   "why": "F5: stair gained (placeholder on a recovered 5-riser ladder)"
+  }
+ },
+ "production": "5 + 3 full offline runs with the recogniser at f74cfb5; each equals its replay byte for byte; later commits are byte-identical refactors/docs",
+ "apk": {
+  "file": "BuildPlan-Model-Preview-arm64-v8a-debug.apk",
+  "sha256": "02d79d613f160d7067380c1b234436b4e4544eb9a11f71103ff5b5e6ad4268e8",
+  "bytes": 39638490,
+  "applicationId": "com.buildplan.preview",
+  "versionCode": 1302,
+  "versionName": "0.1302.0-owner",
+  "abi": "arm64-v8a",
+  "signerCertSha256": "6e48fac4afaa3d70e70de5bc608aa4c4194206a9e6bc993dab56382b921ca0da",
+  "analyzerBundleSha256": "6ba2e270f9fb5f9dbb2a3474905bee6a8c71e07bea3babdabdb08e920cf33d71",
+  "onnxSha256": "9ef676d6ed3c88256a2d92c640c44f25b0c40947e111b14b8be8f594091563e6",
+  "publish": "BLOCKED: session GitHub proxy accepts JSON bodies only (415); delivered as a file",
+  "labels": [
+   "APK_BUILT_AND_ATTACHED",
+   "ANDROID_3D_NOT_DEVICE_VERIFIED",
+   "APK_SIZE_GATE_BASELINE_FAIL",
+   "OWNER_VISUAL_PENDING"
+  ]
+ }
+}
