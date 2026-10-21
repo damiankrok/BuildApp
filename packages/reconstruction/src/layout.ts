@@ -465,8 +465,38 @@ export function readPlans(options: StructuralLayoutOptions): { plans: PlanReadin
  * every hatch and leader line on a large one, or narrow enough to reject those
  * and blind to half the walls on the small one.
  */
-/** 005Y-N5 (C5): a survey band this share of the longest one's length or more runs the length of the building. */
+/** A survey band this share of the longest one's length or more runs the length of the building. */
 const RUNNING_WALL_SHARE = 0.8
+/** The second pass keeps bands from this share of the measured wall thickness (a thin partition) … */
+const WALL_WINDOW_MIN_SHARE = 0.45
+/** … up to this multiple of it (an outer wall drawn about twice a partition) … */
+const WALL_WINDOW_MAX_SHARE = 1.9
+/** … and no band shorter than this multiple of it (a hatch stroke or a door jamb is not a wall). */
+const WALL_WINDOW_MIN_LENGTH_SHARE = 1.6
+/** Floors in pixels, so that a tiny raster still has a window to look through. */
+const WALL_WINDOW_MIN_THICKNESS_PX = 3
+const WALL_WINDOW_MIN_MAX_PX = 6
+const WALL_WINDOW_MIN_LENGTH_PX = 8
+
+type SurveyBand = { length: number; thickness: number }
+
+/**
+ * The thickness and length window the second band pass looks through, from the first pass's survey. It is centred on
+ * the measured wall thickness `wallPx`, and widened to hold every wall that runs the length of the building
+ * (`RUNNING_WALL_SHARE`): where a sheet's partitions outnumber its outer walls the typical thickness is a partition's,
+ * and an outer wall a hair over `WALL_WINDOW_MAX_SHARE` of it (A01: 22 px against 11) would drop out of the second pass —
+ * its side of the house then stood on the next line inside. Only long bands widen the window: a short thick blot
+ * (a chimney, a column) does not.
+ */
+export function wallBandWindow(survey: readonly SurveyBand[], wallPx: number, maxThicknessPx: number): Required<Pick<PlanBandOptions, 'minThickness' | 'maxThickness' | 'minLength'>> {
+  const longest = Math.max(0, ...survey.map((b) => b.length))
+  const runningWallPx = Math.max(0, ...survey.filter((b) => b.length >= longest * RUNNING_WALL_SHARE).map((b) => b.thickness))
+  return {
+    minThickness: Math.max(WALL_WINDOW_MIN_THICKNESS_PX, Math.round(wallPx * WALL_WINDOW_MIN_SHARE)),
+    maxThickness: Math.min(maxThicknessPx, Math.max(WALL_WINDOW_MIN_MAX_PX, Math.round(wallPx * WALL_WINDOW_MAX_SHARE), Math.ceil(runningWallPx) + 1)),
+    minLength: Math.max(WALL_WINDOW_MIN_LENGTH_PX, Math.round(wallPx * WALL_WINDOW_MIN_LENGTH_SHARE)),
+  }
+}
 
 export function planSheet(frame: SourceCoordinateFrame, options: StructuralLayoutOptions, bandOptions: Required<PlanBandOptions> = { ...DEFAULT_BANDS, ...options.bands }): PlanSheet | undefined {
   const cached = options.sheetCache?.get(frame.id)
@@ -476,16 +506,7 @@ export function planSheet(frame: SourceCoordinateFrame, options: StructuralLayou
   const mask = adaptiveInkMask(inkChannel(raster), {})
   const survey = runLengthBands(mask, bandOptions)
   const wallPx = bandWallThickness(survey, DEFAULT_BANDS.minThickness * 2)
-  // 005Y-N5 (C5): the window must hold the walls that run the length of the building (`RUNNING_WALL_SHARE`). Where the sheet's partitions
-  // outnumber its outer walls, the typical thickness is a partition's, and an outer wall a hair over 1.9 of it (A01:
-  // 22 px against 11) was dropped from the second pass — its side of the house then stood on the next line inside.
-  const longest = Math.max(0, ...survey.map((b) => b.length))
-  const runningWalls = survey.filter((b) => b.length >= longest * RUNNING_WALL_SHARE).map((b) => b.thickness)
-  const bands = runLengthBands(mask, {
-    minThickness: Math.max(3, Math.round(wallPx * 0.45)),
-    maxThickness: Math.min(bandOptions.maxThickness, Math.max(6, Math.round(wallPx * 1.9), Math.ceil(Math.max(0, ...runningWalls)) + 1)),
-    minLength: Math.max(8, Math.round(wallPx * 1.6)),
-  })
+  const bands = runLengthBands(mask, wallBandWindow(survey, wallPx, bandOptions.maxThickness))
   const sheet: PlanSheet = { mask, bands, wallPx, decompositions: new Map(), witness: wallWitness(bands, wallPx, mask) }
   options.sheetCache?.set(frame.id, sheet)
   return sheet
