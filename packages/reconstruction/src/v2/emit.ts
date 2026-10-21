@@ -665,11 +665,12 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
         const first = h.flights[0]
         // The first riser line's left-hand end, facing the direction of travel.
         const start = first.direction === 'PLUS_X' ? { x: first.from, z: first.band.to } : first.direction === 'MINUS_X' ? { x: first.from, z: first.band.from } : first.direction === 'PLUS_Z' ? { x: first.band.from, z: first.from } : { x: first.band.to, z: first.from }
-        const segments: Array<{ kind: 'FLIGHT'; risers: number; going: number } | { kind: 'LANDING'; length: number; turn: 'NONE' | 'LEFT' | 'RIGHT' }> = []
+        const segments: Array<{ kind: 'FLIGHT'; risers: number; going: number } | { kind: 'LANDING'; length: number; turn: 'NONE' | 'LEFT' | 'RIGHT'; onRiser?: true }> = []
         h.flights.forEach((f, i) => {
           segments.push({ kind: 'FLIGHT', risers: f.risers, going: round6(f.goingM) })
           const landing = h.landings[i]
-          if (landing) segments.push({ kind: 'LANDING', length: round6(h.widthM), turn: landing.turn })
+          // 005Y-N4: the landing square starts on the flight's last riser line (the landing edge is that riser), so the riser climbs onto it
+          if (landing) segments.push({ kind: 'LANDING', length: round6(h.widthM), turn: landing.turn, onRiser: true })
         })
         push({ type: 'createStair', id: 'stair-main', levelId: from.id, toLevelId: to.id, start: { x: round6(start.x), z: round6(start.z) }, direction: first.direction, width: round6(h.widthM), segments }, s.featureId, 'stairs')
         evidence('stair-main', s.provenance, h.why)

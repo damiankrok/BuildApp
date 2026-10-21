@@ -28,7 +28,7 @@ export type StairStep = {
   line: { from: Vec2; to: Vec2 }
   /** Unit travel direction at this riser. */
   direction: Vec2
-  /** Plan polygon of the tread reached over this riser; null for the arrival riser (the destination floor). */
+  /** Plan polygon of the tread reached over this riser; null for the arrival riser (the destination floor) and for a riser onto an `onRiser` landing (the landing). */
   tread: Vec2[] | null
   /** World y of the tread surface (the top of this riser). */
   top: number
@@ -93,10 +93,14 @@ export function layoutStair(stair: FlightStair, level: Pick<Level, 'elevation'>,
 
   stair.segments.forEach((seg, si) => {
     if (seg.kind === 'FLIGHT') {
+      // 005Y-N4: a riser climbing straight onto the landing that follows has no tread of its own: the landing is it
+      const next = stair.segments[si + 1]
+      const ontoLanding = next?.kind === 'LANDING' && next.onRiser === true
       for (let i = 0; i < seg.risers; i++) {
         k++
-        steps.push({ riser: k, line: rl(), direction: { ...d }, tread: rect(p, d, seg.going, rightOf(d), W), top: round(baseY + k * h), segment: si })
-        p = add(p, d, seg.going)
+        const onto = ontoLanding && i === seg.risers - 1
+        steps.push({ riser: k, line: rl(), direction: { ...d }, tread: onto ? null : rect(p, d, seg.going, rightOf(d), W), top: round(baseY + k * h), segment: si })
+        if (!onto) p = add(p, d, seg.going)
       }
       return
     }

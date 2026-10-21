@@ -48,6 +48,7 @@ import { attachedGableLayout, readAttachedRoofForm } from './attached-roof-form.
 import { decideSideOrientation, decideSidesByOpenings, gableApexRow, gableOutline, mainTopProfile, sameSheetSideRegistration } from './side-orientation.js'
 import type { PerspectiveCameraV2 } from './camera.js'
 import { emitBuilding } from './emit.js'
+import { fitStairToBoundingWalls, followStairSoffits } from './stair-fit.js'
 import { ReconstructionFailure, planCounts } from '../failure.js'
 import type { PlanDiagnosticsReport } from '../failure.js'
 import { LAYOUT_REFUSAL_CODES, dimensionEvidenceOf, layoutRefused, layoutRejectionOf, planDiagnosticsOf, planFailureOf } from '../plan-diagnostics.js'
@@ -1944,7 +1945,20 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       ...(fit.errors[0]?.message ? { detail: fit.errors[0].message.slice(0, 200) } : {}),
     })
   }
-  const program = fit.program
+  // 005Y-N4 (D): the stair against the walls that bound its shaft, not in them (a move within the reading's uncertainty)
+  const stairFit = fitStairToBoundingWalls(fit.program, options.label, modelId)
+  // 005Y-N4 (D): partitions under the flights stop at the flights' underside (nothing deleted)
+  const soffits = followStairSoffits(stairFit.program, options.label, modelId)
+  const program = soffits.program
+  for (const w of soffits.walls) {
+    step({ stage: 'emission', what: `the wall ${w.wallId} under the stair`, method: w.action === 'FOLLOWS_SOFFIT' ? 'DIRECT' : 'REFUSED', detail: w.why, inputs: 1, outputs: w.action === 'FOLLOWS_SOFFIT' ? 1 : 0 })
+    if (w.action === 'REFUSED') gap({ what: `the wall ${w.wallId} where it meets ${w.stairId}`, reason: w.why, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
+  }
+  for (const f of stairFit.fits) {
+    if (f.action !== 'NONE') step({ stage: 'emission', what: 'the stair fitted to the walls bounding its shaft', method: f.action === 'MOVED' ? 'DIRECT' : 'REFUSED', detail: f.why, inputs: f.bounding.length, outputs: f.action === 'MOVED' ? 1 : 0 })
+    if (f.action === 'REFUSED') gap({ what: `the place of ${f.stairId} in its shaft`, reason: f.why, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
+    if (f.inside.length > 0) gap({ what: `the walls under ${f.stairId}`, reason: `${f.inside.join(', ')} stand inside the stair's outline, deeper than a reading's uncertainty: walls under a flight or landing; they are kept, and where they rise through the flight it is named, not hidden`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
+  }
   const bindings = emitted.bindings.filter((b) => fit.indexMap[b.commandIndex] >= 0).map((b) => ({ ...b, commandIndex: fit.indexMap[b.commandIndex] }))
   for (const f of fit.fits) {
     gap({ what: `the opening ${f.openingId} as the drawings print it`, reason: f.why, status: f.action === 'DROPPED' ? 'REFUSED' : 'AMBIGUOUS', observationIds: [], evidenceIds: [] })

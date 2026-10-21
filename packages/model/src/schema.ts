@@ -589,6 +589,10 @@ export type StairDirection = z.infer<typeof StairDirectionSchema>
  *   newel at equal angles and the next segment's first riser is the exit line.
  * LANDING — a level platform `length` along the travel direction (at least
  *   the stair width when it turns), optionally turning 90° LEFT or RIGHT.
+ *   `onRiser` (005Y-N4): the previous flight's last riser climbs straight onto
+ *   the landing — the landing starts on that riser line, and the riser has no
+ *   tread of its own (a plan whose landing edge is a riser line). Without it
+ *   the flight's last riser keeps its tread and the landing starts beyond it.
  *
  * LEFT / RIGHT are as seen walking up, on a plan drawn with x to the right
  * and z up the page: walking +x, LEFT turns towards +z.
@@ -596,7 +600,7 @@ export type StairDirection = z.infer<typeof StairDirectionSchema>
 export const StairSegmentSchema = z.discriminatedUnion('kind', [
   z.object({ kind: z.literal('FLIGHT'), risers: z.number().int().min(1), going: positive }).strict(),
   z.object({ kind: z.literal('WINDER'), risers: z.number().int().min(1), turn: z.enum(['LEFT', 'RIGHT']), angleDeg: z.union([z.literal(90), z.literal(180)]) }).strict(),
-  z.object({ kind: z.literal('LANDING'), length: positive, turn: z.enum(['NONE', 'LEFT', 'RIGHT']) }).strict(),
+  z.object({ kind: z.literal('LANDING'), length: positive, turn: z.enum(['NONE', 'LEFT', 'RIGHT']), onRiser: z.literal(true).optional() }).strict(),
 ])
 export type StairSegment = z.infer<typeof StairSegmentSchema>
 
