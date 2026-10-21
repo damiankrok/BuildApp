@@ -35,6 +35,7 @@ import { readInterior } from './interior.js'
 import type { InteriorReading, LabelToken } from './interior.js'
 import { assembleStair, findTreadLadders, poolLadders } from './stair-topology.js'
 import { elevationExtent, garageMouth, planGaps, readWallOpenings, wallAppearanceExtent } from './openings-v2.js'
+import { lumaOf } from './openings-v2.js'
 import type { OpeningV2, WallHost } from './openings-v2.js'
 import { planeRoofLayout } from './plane-roof.js'
 import type { RoofEnd } from './plane-roof.js'
@@ -618,6 +619,21 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     elevations.push(reg)
     views.push({ view: elevationFrameFromV2(reg, world), raster })
     for (const o of graph.observations.filter((x) => x.frameId === r.frameId && (x.kind === 'SILHOUETTE' || x.kind === 'MASS_REGION'))) record({ evidenceId: o.id, evidenceKind: 'OBSERVATION', what: `${o.kind} on the ${r.side.toLowerCase()} render`, authority: 'MEDIUM', disposition: 'USED_AS_CORROBORATION', reason: 'the silhouette the render was registered by; every feature read on the render rests on it', stage: 'REGISTRATION' })
+  }
+  // 005Y-N2: one house stands on one ground. A view registered on its walls' band takes its width from the band and its
+  // height from the apex on the ridge datum; where its ground lands more than 0.3 m from where the house's other
+  // registered views (at least two) put it — their median — the apex it was hung from is not the ridge, and its
+  // heights are not read: the view is left out, and named.
+  for (let i = openingOnlyViews.length - 1; i >= 0; i -= 1) {
+    const own = bandRegistrations.get(openingOnlyViews[i].view.registration.frameId)
+    if (!own) continue
+    const others = [...elevations, ...[...bandRegistrations.values()].filter((b) => b.frameId !== own.frameId)].map((r) => r.bottomY).sort((a, b) => a - b)
+    if (others.length < 2) continue
+    const median = others.length % 2 === 1 ? others[(others.length - 1) / 2] : (others[others.length / 2 - 1] + others[others.length / 2]) / 2
+    if (Math.abs(own.bottomY - median) <= 0.3) continue
+    openingOnlyViews.splice(i, 1)
+    bandRegistrations.delete(own.frameId)
+    gap({ what: `the heights of the openings on the ${own.side.toLowerCase()} elevation`, reason: `registered on its walls' band, it puts the ground at ${own.bottomY.toFixed(2)} m where the house's other ${others.length} registered views put it at ${median.toFixed(2)} m: its apex is not on the ridge datum, and the view is not read`, status: 'REFUSED', observationIds: [], evidenceIds: [] })
   }
   step({ stage: 'registration', what: 'renders registered on the ridge datum', method: 'DIRECT', detail: elevations.map((e) => `${e.side}: ${e.mpp} m/px, ground at ${e.bottomY} (${e.spanWhy})`).join('; ') || 'none', inputs: legacy.length, outputs: elevations.length })
   const viewsOf = (facade: 'FRONT' | 'REAR' | 'WEST' | 'EAST'): Array<{ view: ElevationFrameV2; raster: Raster }> => views.filter((v) => v.view.side === (facade === 'WEST' ? 'LEFT' : facade === 'EAST' ? 'RIGHT' : facade))
@@ -1229,10 +1245,47 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const assumedHead = round6(Math.min(l.elevation + l.height - slabT, wallTop - 0.2))
     const headY = read ? round6(Math.min(read.headY, wallTop - 0.2)) : assumedHead
     const id = `pocket-${host.id}-${index}-${pockets.length}`
+    // each wall's face towards the pocket is where the plan's ink says: the recess's region may be cut on the walls'
+    // faces or on their centre lines, as the grid fell. Across the line the region gives, at five places along it, the
+    // dark run that line falls in or touches (within a wall) is the wall; its edge on the pocket's side is the face.
+    const inkFace = (alongWall: 'X' | 'Z', at: number, span: [number, number], pocketSide: 1 | -1): number => {
+      const faces: number[] = []
+      const mppAcross = (entry.frame.mppX + entry.frame.mppY) / 2
+      for (const f of [0.2, 0.35, 0.5, 0.65, 0.8]) {
+        const s = span[0] + f * (span[1] - span[0])
+        const darkAt = (c: number): boolean => {
+          const p = alongWall === 'X' ? entry.frame.toPixel(s, c) : entry.frame.toPixel(c, s)
+          return lumaOf(entry.raster, p.x, p.y) < 128
+        }
+        // walk from the region's line into the wall (away from the pocket) until ink, then on until paper
+        let c = at - pocketSide * T
+        if (!darkAt(at) && !darkAt(at - pocketSide * mppAcross)) {
+          let found = false
+          for (let d = 0; d <= T; d += mppAcross) if (darkAt(at - pocketSide * d)) { c = at - pocketSide * d; found = true; break }
+          if (!found) continue
+        } else c = at
+        // from inside the wall, the face on the pocket's side
+        let face = c
+        for (let d = 0; d <= 1.5 * T; d += mppAcross) {
+          if (!darkAt(c + pocketSide * d)) break
+          face = c + pocketSide * d
+        }
+        faces.push(face)
+      }
+      if (faces.length < 3) return at
+      faces.sort((a, b) => a - b)
+      const median = faces[Math.floor(faces.length / 2)]
+      return Math.abs(median - at) <= T ? round6(median) : at
+    }
+    const depthAxis: 'X' | 'Z' = alongX ? 'Z' : 'X'
+    const lowFace = inkFace(depthAxis === 'Z' ? 'Z' : 'X', from, [Math.min(mouthAt, backAt), Math.max(mouthAt, backAt)], 1)
+    const highFace = inkFace(depthAxis === 'Z' ? 'Z' : 'X', to, [Math.min(mouthAt, backAt), Math.max(mouthAt, backAt)], -1)
+    const backFace = inkFace(alongX ? 'X' : 'Z', backAt, [lowFace, highFace], inward === 1 ? -1 : 1)
+    void depthAxis
     // the walls, each by its face towards the pocket (a wall's line is a face, its material to the left of its run): the
     // returns outside the mouth, from the ring wall's inner face to the back wall's far face; the back wall between them
     const ring0 = mouthAt + inward * T
-    const back1 = backAt + inward * T
+    const back1 = backFace + inward * T
     const at = (u: number, v: number): { x: number; z: number } => (alongX ? { x: round6(u), z: round6(v) } : { x: round6(v), z: round6(u) })
     const faced = (a: { x: number; z: number }, b: { x: number; z: number }, material: { x: number; z: number }): { start: { x: number; z: number }; end: { x: number; z: number } } => {
       const d = { x: b.x - a.x, z: b.z - a.z }
@@ -1242,19 +1295,19 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const highDir = alongX ? { x: 1, z: 0 } : { x: 0, z: 1 }
     const deepDir = alongX ? { x: 0, z: inward } : { x: inward, z: 0 }
     const walls: PocketV2['walls'] = [
-      { id: `${id}-return-low`, role: 'RETURN', ...faced(at(from, ring0), at(from, back1), lowDir), thicknessM: T },
-      { id: `${id}-return-high`, role: 'RETURN', ...faced(at(to, ring0), at(to, back1), highDir), thicknessM: T },
-      { id: `${id}-back`, role: 'BACK', ...faced(at(from, backAt), at(to, backAt), deepDir), thicknessM: T },
+      { id: `${id}-return-low`, role: 'RETURN', ...faced(at(lowFace, ring0), at(lowFace, back1), lowDir), thicknessM: T },
+      { id: `${id}-return-high`, role: 'RETURN', ...faced(at(highFace, ring0), at(highFace, back1), highDir), thicknessM: T },
+      { id: `${id}-back`, role: 'BACK', ...faced(at(lowFace, backFace), at(highFace, backFace), deepDir), thicknessM: T },
     ]
     const callouts = metrics.evidence.filter((e) => e.kind === 'OPENING_CALLOUT' && e.frameId === entry.plan.frame.id)
-    const backHost: WallHost = { massId: host.id, facade, planeAt: round6(backAt), from: round6(from), to: round6(to), centreAt: round6(backAt + (inward * T) / 2), storeyIndex: index, floorY: l.elevation, storeyHeightM: l.height }
+    const backHost: WallHost = { massId: host.id, facade, planeAt: round6(backFace), from: round6(lowFace), to: round6(highFace), centreAt: round6(backFace + (inward * T) / 2), storeyIndex: index, floorY: l.elevation, storeyHeightM: l.height }
     const backOpenings = readWallOpenings({ ...(options.featureTrace ? { trace: options.featureTrace } : {}), plan: entry.frame, planRaster: entry.raster, host: backHost, wallThicknessM: T, callouts, views: [], attachedSingleStorey: false, onRefused: (r) => gap({ what: `the gap ${r.interval[0].toFixed(2)}..${r.interval[1].toFixed(2)} on the back wall of the recess in ${host.id}'s ${facade.toLowerCase()} face`, reason: r.why, status: 'REFUSED', observationIds: [], evidenceIds: [] }), index: hostIndex++ }).map((o) => ({ ...o, id: `${id}-${o.id}` }))
-    const why = `${rec.why}; its mouth ${from.toFixed(2)}..${to.toFixed(2)} m on the ${facade.toLowerCase()} face is a passage${read ? `, its head read on the ${read.elevation?.frameId} elevation` : ', its head the storey\'s ceiling (assumed: the elevation does not read it)'}, and ${backOpenings.length} opening${backOpenings.length === 1 ? '' : 's'} stand in its back wall`
+    const why = `${rec.why}; its mouth ${lowFace.toFixed(2)}..${highFace.toFixed(2)} m between the returns' faces the plan's ink gives, on the ${facade.toLowerCase()} face is a passage${read ? `, its head read on the ${read.elevation?.frameId} elevation` : ', its head the storey\'s ceiling (assumed: the elevation does not read it)'}, and ${backOpenings.length} opening${backOpenings.length === 1 ? '' : 's'} stand in its back wall`
     const sid = sighting(entry.plan.frame, `a recess in the ${facade.toLowerCase()} face on the storey ${index} plan`, rec.confidence, [], region.pixelRect)
-    const featureId = feature('RECESS', id, { depth: { value: Math.abs(backAt - mouthAt), low: Math.abs(backAt - mouthAt) - 0.05, high: Math.abs(backAt - mouthAt) + 0.05 }, width: { value: to - from, low: to - from - 0.05, high: to - from + 0.05 }, headY: { value: headY, low: headY - 0.1, high: headY + 0.1 } }, [sid], 'SOURCE_DERIVED', why, { storeyIndex: index, hostId: host.featureId, uncertaintyM: 0.05, parameterProvenance: { headY: read ? 'IMAGE_METRIC_REGISTERED' : 'ASSUMED_FOR_RENDERING' } })
+    const featureId = feature('RECESS', id, { depth: { value: Math.abs(backFace - mouthAt), low: Math.abs(backFace - mouthAt) - 0.05, high: Math.abs(backFace - mouthAt) + 0.05 }, width: { value: highFace - lowFace, low: highFace - lowFace - 0.05, high: highFace - lowFace + 0.05 }, headY: { value: headY, low: headY - 0.1, high: headY + 0.1 } }, [sid], 'SOURCE_DERIVED', why, { storeyIndex: index, hostId: host.featureId, uncertaintyM: 0.05, parameterProvenance: { headY: read ? 'IMAGE_METRIC_REGISTERED' : 'ASSUMED_FOR_RENDERING' } })
     relate('HOSTED_BY', featureId, host.featureId, 'the recess opens through this body’s face')
     for (const o of over) gap({ what: `the gap ${o.interval[0].toFixed(2)}..${o.interval[1].toFixed(2)} on the ${facade.toLowerCase()} wall of ${host.id}, storey ${index}`, reason: `it is the mouth of a recess (${id}): a passage, not a ${o.family.toLowerCase().replace(/_/g, ' ')}`, status: 'REFUSED', observationIds: [], evidenceIds: [] })
-    pockets.push({ id, massId: host.id, facade, storeyIndex: index, from: round6(from), to: round6(to), mouthAt: round6(mouthAt), backAt: round6(backAt), headY, headProvenance: read ? 'IMAGE_METRIC_REGISTERED' : 'ASSUMED_FOR_RENDERING', walls, backOpenings, featureId, why })
+    pockets.push({ id, massId: host.id, facade, storeyIndex: index, from: round6(lowFace), to: round6(highFace), mouthAt: round6(mouthAt), backAt: round6(backFace), headY, headProvenance: read ? 'IMAGE_METRIC_REGISTERED' : 'ASSUMED_FOR_RENDERING', walls, backOpenings, featureId, why })
   }
   step({ stage: 'pockets', what: 'recesses inside a body’s face', method: 'DISCRETE_SELECTION', detail: pockets.map((p) => `${p.facade} ${p.from.toFixed(2)}..${p.to.toFixed(2)}, ${Math.abs(p.backAt - p.mouthAt).toFixed(2)} m deep, ${p.backOpenings.length} back openings`).join('; ') || 'none', inputs: layout.recesses.length, outputs: pockets.length })
   for (const o of [...openings, ...sharedDoors]) {
@@ -1390,7 +1443,9 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     options.debug?.(`chimney-section ${two ? two.why : 'none'}`)
     return two ? { section: two.section, raster, why: two.why } : undefined
   })()
-  const chimneyReadings = readChimneys(interior.filter((i) => masses.find((m) => i.walls.some((w) => w.id.startsWith(m.id)) || true)).map((i) => ({ storeyIndex: i.storeyIndex, blocks: i.blocks })), chimneyViews, roofTopY, options.featureTrace).flatMap((c) => {
+  // 005Y-N2 audit: every interior reading feeds the chimney reader — the filter that stood here (`masses.find(… || true)`)
+  // always found a body and so kept every reading; it is gone, and nothing it passed is left out
+  const chimneyReadings = readChimneys(interior.map((i) => ({ storeyIndex: i.storeyIndex, blocks: i.blocks })), chimneyViews, roofTopY, options.featureTrace).flatMap((c) => {
     if (c.renderFrames.length > 0 || c.storeysSeen.length >= 2) return [c]
     // 005Y-N1: a block on one storey only, above the roof on no registered render, stands when the section draws a stack
     // over it above the roof — the section is a drawing of the house, as the plans are.

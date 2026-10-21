@@ -181,11 +181,21 @@ const run = (name: FixtureName, t: Transform = 'id'): { o: Outcome; f: Frozen } 
 const N3_THICK_INTERIOR_WALLS_EXPECTED: Readonly<Record<string, { walls: number; why: string }>> = {
   'entrance:id': { walls: 9, why: '005U-N3: the five 12 px walls drawn round the recess and the garage are read as interior walls' },
 }
+/**
+ * 005Y-N2: a recess lying inside the body's rectangle is built as a pocket in its face — a passage through the ring wall,
+ * two returns and a back wall of its own. Where the reader built no partitions round it (a body standing off its drawn
+ * walls), those three walls are new; where it did (`entrance:id`), they take the place of the partitions it read round
+ * the recess, and the two that ran on past the recess stay partitions beyond it.
+ */
+const N2_POCKET_WALLS_EXPECTED: Readonly<Record<string, { walls: number; why: string }>> = {
+  'entrance:id': { walls: 11, why: '005Y-N2: the recess is a pocket: its returns and back wall are its own, and the two partitions on the returns\' lines carry on past it' },
+  'entranceFacePair:id': { walls: 7, why: '005Y-N2: the recess inside the body is a pocket: its two returns and its back wall are walls of their own' },
+}
 const frozenKeyOf = new Map<Frozen, string>(Object.entries(FROZEN).map(([k, v]) => [v, k]))
 /** The wall count the current reader is held to: the frozen record's, unless this exact fixture and redraw has a versioned delta. */
 const wallsExpected = (f: Frozen): number => {
   const key = frozenKeyOf.get(f)
-  const delta = key === undefined ? undefined : N3_THICK_INTERIOR_WALLS_EXPECTED[key]
+  const delta = key === undefined ? undefined : (N2_POCKET_WALLS_EXPECTED[key] ?? N3_THICK_INTERIOR_WALLS_EXPECTED[key])
   return delta === undefined ? f.walls : delta.walls
 }
 
@@ -393,7 +403,7 @@ describe('005Q wall strip — 12. a recessed entrance with its back wall (005N)'
     expect(o.recessRegions).toBe(1)
   })
 
-  it('005V-N2: the four extra walls over the frozen record are exactly the five drawn 12 px walls round the recess and the garage, once each, and the body stands on its drawn walls', () => {
+  it('005V-N2 / 005Y-N2: the walls over the frozen record answer exactly the five drawn 12 px walls round the recess and the garage — the recess\'s own three, and the partitions past it — and the body stands on its drawn walls', () => {
     // The fixture as drawn (`entrance()` in wall-strip-plans.ts): 12 px walls at 5 cm/px, the outer ring's west face at
     // column 40 and its front face at row 279, so world x = (column − 40) × 0.05 and z = (280 − row) × 0.05.
     const drawn: Array<{ name: string; axis: 'X' | 'Z'; rect: [number, number, number, number] }> = [
@@ -415,30 +425,42 @@ describe('005Q wall strip — 12. a recessed entrance with its back wall (005N)'
     const wx = (c: number): number => (c - 40) * 0.05
     const wz = (row: number): number => (280 - row) * 0.05
     const interior = r.model.walls.filter((w) => w.kind === 'INTERIOR')
+    // 005Y-N2: the recess is a pocket in the body's face; its returns and back wall are its own walls, each given by its
+    // face towards the pocket
+    const pocket = r.model.walls.filter((w) => w.id.includes('pocket-'))
+    expect(pocket.map((w) => w.id).sort()).toEqual(['pocket-main-0-0-back', 'pocket-main-0-0-return-high', 'pocket-main-0-0-return-low'])
     const matchedBy = new Map<string, string>()
     for (const d of drawn) {
       const [x0, y0, x1, y1] = d.rect
       // the band the wall's ink occupies across its axis, and its span along it
       const band = d.axis === 'Z' ? [wx(x0), wx(x1 + 1)] : [wz(y1 + 1), wz(y0)]
       const span = d.axis === 'Z' ? [wz(y1 + 1), wz(y0)] : [wx(x0), wx(x1 + 1)]
-      const matches = interior.filter((w) => {
+      // 005Y-N2: a drawn wall on whose line the recess stands is answered by the recess's own wall and the partition that
+      // carries on past it: at most two walls on its line, together along most of it
+      const matches = [...interior, ...pocket].filter((w) => {
         const vertical = Math.abs(w.start.x - w.end.x) < 1e-6
         if (vertical !== (d.axis === 'Z')) return false
         const at = vertical ? w.start.x : w.start.z
         const [a, b] = vertical ? [Math.min(w.start.z, w.end.z), Math.max(w.start.z, w.end.z)] : [Math.min(w.start.x, w.end.x), Math.max(w.start.x, w.end.x)]
         const inBand = at >= band[0] - 0.05 && at <= band[1] + 0.05
         const withinSpan = a >= span[0] - 0.6 && b <= span[1] + 0.6
-        const covers = Math.min(b, span[1]) - Math.max(a, span[0]) >= 0.5 * (span[1] - span[0])
-        return inBand && withinSpan && covers
+        return inBand && withinSpan && Math.min(b, span[1]) - Math.max(a, span[0]) >= 0.3
       })
-      expect(matches.map((w) => w.id), d.name).toHaveLength(1)
-      expect(matchedBy.has(matches[0].id), `${matches[0].id} answers two drawn walls`).toBe(false)
-      matchedBy.set(matches[0].id, d.name)
-      expect(matches[0].thickness).toBeCloseTo(0.6, 2)
+      const along = (w: (typeof matches)[number]): [number, number] => (Math.abs(w.start.x - w.end.x) < 1e-6 ? [Math.min(w.start.z, w.end.z), Math.max(w.start.z, w.end.z)] : [Math.min(w.start.x, w.end.x), Math.max(w.start.x, w.end.x)])
+      const covered = matches.reduce((sum, w) => sum + Math.max(0, Math.min(along(w)[1], span[1]) - Math.max(along(w)[0], span[0])), 0)
+      expect(matches.length, d.name).toBeGreaterThanOrEqual(1)
+      expect(matches.length, d.name).toBeLessThanOrEqual(2)
+      // (a back wall stands between the returns: its drawn rectangle takes in their thickness at both ends)
+      expect(covered, d.name).toBeGreaterThanOrEqual(0.7 * (span[1] - span[0]))
+      for (const m of matches) {
+        expect(matchedBy.has(m.id), `${m.id} answers two drawn walls`).toBe(false)
+        matchedBy.set(m.id, d.name)
+        expect(m.thickness).toBeCloseTo(0.6, 2)
+      }
     }
-    // no interior wall beyond the five drawn ones
-    expect(interior).toHaveLength(drawn.length)
-    expect(r.model.walls.length).toBe(N3_THICK_INTERIOR_WALLS_EXPECTED['entrance:id'].walls)
+    // no wall inside the ring that answers no drawn wall
+    expect(interior.length + pocket.length).toBe(matchedBy.size)
+    expect(r.model.walls.length).toBe(N2_POCKET_WALLS_EXPECTED['entrance:id'].walls)
     // correctly registered: no side of the body stands off its drawn walls (the 39 misregistered redraws all do)
     expect(r.unresolved.filter((u) => u.what.startsWith('wall-thick partitions'))).toEqual([])
     expect(compiled('facePair').unresolved.some((u) => u.what.startsWith('wall-thick partitions'))).toBe(true)
@@ -449,6 +471,7 @@ describe('005Q wall strip — 12. a recessed entrance with its back wall (005N)'
     expect(FROZEN['entrance:id'].walls).toBe(4)
     for (const t of TRANSFORMS.filter((x) => x !== 'id')) expect(N3_THICK_INTERIOR_WALLS_EXPECTED[`entrance:${t}`]).toBeUndefined()
     expect(N3_THICK_INTERIOR_WALLS_EXPECTED['entranceFacePair:id']).toBeUndefined()
+    expect(Object.keys(N2_POCKET_WALLS_EXPECTED)).toEqual(['entrance:id', 'entranceFacePair:id'])
   })
 
   it('with an inner chain on the front wall’s inner face, cut there: the face is named and the strip carries no terrace, while the entrance stays a recess with both returns', () => {

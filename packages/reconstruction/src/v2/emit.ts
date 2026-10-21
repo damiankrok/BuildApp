@@ -256,7 +256,8 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     const isTop = p.storeyIndex === Math.max(...mass.storeys)
     const planeRoof = isTop ? (b.planeRoofs ?? []).find((r) => r.massId === mass.id) : undefined
     for (const w of p.walls) {
-      push({ type: 'createWall', id: w.id, levelId: l.id, start: w.start, end: w.end, thickness: w.thicknessM, height: round6(l.height), baseOffset: 0, kind: 'EXTERIOR', ...(planeRoof ? { topProfile: { kind: 'FOLLOW_ROOF_PLANES' as const, planeIds: planeRoof.layout.planes.map((pl) => planeRoofPlaneId(planeRoof.massId, pl.key)) } } : {}), materialId: MATERIALS_V2.wall }, p.featureId, 'walls')
+      // under the storey above, a wall stops at that floor's slab, as a partition does
+      push({ type: 'createWall', id: w.id, levelId: l.id, start: w.start, end: w.end, thickness: w.thicknessM, height: isTop ? round6(l.height) : round6(l.height - b.slabThicknessM), baseOffset: 0, kind: 'EXTERIOR', ...(planeRoof ? { topProfile: { kind: 'FOLLOW_ROOF_PLANES' as const, planeIds: planeRoof.layout.planes.map((pl) => planeRoofPlaneId(planeRoof.massId, pl.key)) } } : {}), materialId: MATERIALS_V2.wall }, p.featureId, 'walls')
       if (isTop && !planeRoof && mass.role === 'MAIN') capWallIds.push(w.id)
       evidence(w.id, 'SOURCE_DERIVED', `the ${w.role === 'BACK' ? 'back wall' : 'return'} of ${p.id}: ${p.why}`)
     }
@@ -328,7 +329,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
         const length = Math.hypot(w.end.x - w.start.x, w.end.z - w.start.z)
         const inward = { x: -(w.end.z - w.start.z) / length, z: (w.end.x - w.start.x) / length }
         const half = w.thicknessM / 2
-        hosts.push(alongX ? { id: w.id, axis: 'X', at: round6(w.start.z + inward.z * half), thicknessM: w.thicknessM, from: Math.min(w.start.x, w.end.x), to: Math.max(w.start.x, w.end.x) } : { id: w.id, axis: 'Z', at: round6(w.start.x + inward.x * half), thicknessM: w.thicknessM, from: Math.min(w.start.z, w.end.z), to: Math.max(w.start.z, w.end.z) })
+        hosts.push(alongX ? { id: w.id, axis: 'X', at: round6(w.start.z + inward.z * half), thicknessM: w.thicknessM, from: Math.min(w.start.x, w.end.x), to: Math.max(w.start.x, w.end.x), keepBeyond: true } : { id: w.id, axis: 'Z', at: round6(w.start.x + inward.x * half), thicknessM: w.thicknessM, from: Math.min(w.start.z, w.end.z), to: Math.max(w.start.z, w.end.z), keepBeyond: true })
       }
     }
     for (const r of b.returns.filter((x) => x.storeyIndex === storey.storeyIndex)) {

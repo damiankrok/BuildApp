@@ -50,7 +50,12 @@ export type PlannedRun = {
 }
 
 /** An exterior wall, as a band: it runs along `axis`, centred at `at`, `thicknessM` across, from `from` to `to`. */
-export type HostBand = { id: string; axis: 'X' | 'Z'; at: number; thicknessM: number; from: number; to: number }
+/**
+ * An exterior wall partitions are planned against. 005Y-N2: `keepBeyond` marks a host that stands for only part of a
+ * line the plan draws on — a recess's return or back wall, whose line runs on into the building as a partition: a run
+ * inside it keeps what lies beyond its ends.
+ */
+export type HostBand = { id: string; axis: 'X' | 'Z'; at: number; thicknessM: number; from: number; to: number; keepBeyond?: boolean }
 
 export type PlanDecisionKind = 'FUSED_DUPLICATE' | 'DROPPED_INSIDE_HOST' | 'SNAPPED_OFF_HOST' | 'TRIMMED_TO_HOST' | 'TRIMMED_TO_PARTITION' | 'SPLIT_AT_CROSSING' | 'DROPPED_STUB' | 'DROPPED_SHORT' | 'DROPPED_UNRESOLVED_OVERLAP' | 'DOOR_DROPPED'
 
@@ -144,6 +149,21 @@ export function planWallTopology(input: readonly PlannedRun[], hosts: readonly H
       const hostBand = acrossOf(h)
       const penetration = Math.min(band.hi, hostBand.hi) - Math.max(band.lo, hostBand.lo)
       if (penetration <= EPS) continue
+      if (penetration >= current.thicknessM / 2 - EPS && h.keepBeyond) {
+        // the run goes on past the host's ends: what lies beyond them stays a partition, the rest is the host's
+        const beyond = [
+          { from: current.from, to: Math.min(current.to, h.from - opt.gapM) },
+          { from: Math.max(current.from, h.to + opt.gapM), to: current.to },
+        ].filter((p) => p.to - p.from > current.thicknessM)
+        const kept = [...beyond].sort((a, b) => b.to - b.from - (a.to - a.from))[0]
+        decisions.push({ kind: kept ? 'TRIMMED_TO_HOST' : 'DROPPED_INSIDE_HOST', runId: current.id, otherId: h.id, measuredM: round6(penetration), detail: kept ? `${current.id} runs on the line of ${h.id} and past its end: ${kept.from.toFixed(2)}..${kept.to.toFixed(2)} stays a partition` : `${current.id} lies ${penetration.toFixed(3)} m of its ${current.thicknessM.toFixed(3)} m inside ${h.id}, within its ends: that wall seen from inside, not a partition` })
+        if (!kept) {
+          for (const p of current.pieces) dropped.push({ pieceId: p, why: `read inside the wall ${h.id} (${penetration.toFixed(3)} m of ${current.thicknessM.toFixed(3)} m)` })
+          return []
+        }
+        current = { ...current, from: round6(kept.from), to: round6(kept.to), doors: current.doors.filter((d) => d.from >= kept.from && d.to <= kept.to) }
+        continue
+      }
       if (penetration >= current.thicknessM / 2 - EPS) {
         decisions.push({ kind: 'DROPPED_INSIDE_HOST', runId: current.id, otherId: h.id, measuredM: round6(penetration), detail: `${current.id} lies ${penetration.toFixed(3)} m of its ${current.thicknessM.toFixed(3)} m inside ${h.id}: the exterior wall seen from inside, not a partition` })
         for (const p of current.pieces) dropped.push({ pieceId: p, why: `read inside the exterior wall ${h.id} (${penetration.toFixed(3)} m of ${current.thicknessM.toFixed(3)} m)` })

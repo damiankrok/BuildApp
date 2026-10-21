@@ -598,7 +598,14 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
       // 005W: with heights read off an elevation, the plan's light glazing symbol (005V-N3) counts as well as dark ink.
       const glazed = glazingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM) || glazingLinesDrawn(input.planRaster, plan, host, interval, input.wallThicknessM, bandCentre)
       if (reachesFloor && !glazed && widthM <= 1.3 && headY - sillY <= 2.35) family = 'DOOR'
-      else if (reachesFloor && glazed && widthM >= 0.75 && widthM <= 2.0 && host.storeyIndex === 0 && !doorSwingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM)) family = 'WINDOW'
+      // 005Y-N2: lines across the gap and a door's own symbol beside it — a leaf drawn open from one jamb, as long as the
+      // gap is wide, and the arc it sweeps to the other — are a glazed leaf in a door, not a window to the floor. The
+      // lines may be a threshold rather than glass: the leaf's glazing is named as read from them.
+      else if (reachesFloor && glazed && widthM >= 0.75 && widthM <= 1.3 && headY - sillY <= 2.35 && doorLeafDrawn(input.planRaster, plan, host, interval, input.wallThicknessM)) {
+        family = 'GLAZED_DOOR'
+        prov.family = 'SOURCE_DERIVED'
+        unresolved.push('the leaf’s glazing (lines across the gap beside a drawn leaf and swing: glass, or a threshold the plan draws the same way)')
+      } else if (reachesFloor && glazed && widthM >= 0.75 && widthM <= 2.0 && host.storeyIndex === 0 && !doorSwingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM)) family = 'WINDOW'
       else if (reachesFloor && widthM > 1.3 && widthM < 2.0) family = 'GLAZED_DOOR'
       else if (reachesFloor && !glazed) family = 'DOOR'
       else family = 'WINDOW'
@@ -649,6 +656,72 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
     o.why = `${o.why}; drawn like ${sibling.id} (the same width on this wall, printed)`
   }
   return out
+}
+
+/**
+ * 005Y-N2: a door's plan symbol beside a gap, read strictly, on the face it is drawn on (a door opens in or out): a leaf
+ * drawn open — a thin straight run of ink square to the wall, from the wall's face at one jamb, as long as the gap is wide and
+ * ending there (paper on its line past 1.1 of the width) — and the arc it sweeps from its tip to the other jamb, inked
+ * on most of its length about a pivot in the wall's thickness, where the frame stands. Ink is read against the paper
+ * or the room's fill in front of the gap, not a fixed grey: a leaf is often a light line over a tinted floor. Hatching,
+ * furniture, a cupboard's edge or a label make ink in the square in front of the gap but not this figure; the
+ * ink-fraction test (`doorSwingDrawn`) cannot tell them apart.
+ */
+export function doorLeafDrawn(raster: Raster, plan: PlanFrameV2, host: WallHost, interval: [number, number], wallThicknessM: number): boolean {
+  const w = interval[1] - interval[0]
+  const into = host.facade === 'FRONT' || host.facade === 'WEST' ? 1 : -1
+  const alongX = host.facade === 'FRONT' || host.facade === 'REAR'
+  const step = (plan.mppX + plan.mppY) / 2
+  return [into, -into].some((inward) => {
+    const inner = host.centreAt + (inward * wallThicknessM) / 2
+    const at = (along: number, depth: number): { x: number; y: number } => (alongX ? plan.toPixel(along, inner + inward * depth) : plan.toPixel(inner + inward * depth, along))
+    const ground: number[] = []
+    for (let u = 0.1; u <= 0.9; u += 0.1) {
+      for (let v = 0.1; v <= 0.9; v += 0.1) {
+        const p = at(interval[0] + u * w, v * w)
+        ground.push(lumaOf(raster, Math.round(p.x), Math.round(p.y)))
+      }
+    }
+    ground.sort((a, b) => a - b)
+    const paper = ground[Math.floor(ground.length / 2)]
+    const dark = (p: { x: number; y: number }): boolean => {
+      for (let dy = -1; dy <= 1; dy += 1) for (let dx = -1; dx <= 1; dx += 1) if (lumaOf(raster, Math.round(p.x) + dx, Math.round(p.y) + dy) < paper - 35) return true
+      return false
+    }
+    const share = (from: number, to: number, along: number): number => {
+      let k = 0
+      let n = 0
+      for (let d = from; d <= to; d += step) {
+        n += 1
+        if (dark(at(along, d))) k += 1
+      }
+      return n === 0 ? 0 : k / n
+    }
+    for (const [hinge, towards] of [[interval[0], 1], [interval[1], -1]] as const) {
+      // the leaf, at an offset from the jamb up to a leaf's thickness
+      let leafAt: number | undefined
+      for (let off = 0; off <= 0.12 && leafAt === undefined; off += step) {
+        const along = hinge + towards * off
+        if (share(0, 0.9 * w, along) >= 0.8 && share(1.1 * w, 1.3 * w, along) <= 0.3) leafAt = along
+      }
+      if (leafAt === undefined) continue
+      // the arc, its radius the gap's width, from 6° to 84° off the wall — reaching the far jamb and the leaf's tip —
+      // about the best pivot in the wall's thickness
+      let best = 0
+      for (let pivot = -wallThicknessM; pivot <= 0.1 * w; pivot += step) {
+        let k = 0
+        let n = 0
+        for (let deg = 6; deg <= 84; deg += 3) {
+          const a = (deg * Math.PI) / 180
+          n += 1
+          if (dark(at(leafAt + towards * w * Math.cos(a), pivot + w * Math.sin(a)))) k += 1
+        }
+        best = Math.max(best, k / n)
+      }
+      if (best >= 0.6) return true
+    }
+    return false
+  })
 }
 
 /** Thin glazing lines drawn across the gap within the wall's thickness: a window or a glazed screen. */
@@ -714,7 +787,7 @@ function glazingLinesDrawn(raster: Raster, plan: PlanFrameV2, host: WallHost, in
   return n > 0 && glazed / n >= 0.6
 }
 
-const lumaOf = (r: Raster, x: number, y: number): number => {
+export const lumaOf = (r: Raster, x: number, y: number): number => {
   const xi = Math.round(x)
   const yi = Math.round(y)
   if (xi < 0 || yi < 0 || xi >= r.width || yi >= r.height) return 255

@@ -1,11 +1,11 @@
 /**
  * 005Y-N2 diagnostic (research only): compile a model.json with the production compiler and print its diagnostics
- * (what the viewer counts as errors and warnings), and every roof opening's triangle count.
+ * (what the viewer counts as errors and warnings) and the closure audit's findings by code (NON_MANIFOLD among them).
  *   npx vite-node research/analyzer-005y-n2-archon-topology/scene-diagnostics.ts -- <model.json>
  */
 import { readFileSync } from 'node:fs'
 import { validateModel } from '@buildapp/model'
-import { compileBuilding } from '@buildapp/geometry'
+import { compileBuilding, geometryClosureAudit } from '@buildapp/geometry'
 const file = process.argv[process.argv.length - 1]
 const v = validateModel(JSON.parse(readFileSync(file, 'utf8')))
 if (!v.model) {
@@ -14,7 +14,10 @@ if (!v.model) {
 }
 const scene = compileBuilding(v.model)
 for (const d of scene.diagnostics) console.log(JSON.stringify(d))
-console.log(`meshes ${scene.meshes?.length ?? '?'}; diagnostics ${scene.diagnostics.length}`)
+const closure = geometryClosureAudit(v.model, scene)
+const byCode = new Map<string, number>()
+for (const f of closure.findings) byCode.set(`${f.severity}:${f.code}`, (byCode.get(`${f.severity}:${f.code}`) ?? 0) + 1)
+console.log(`meshes ${scene.meshes?.length ?? '?'}; diagnostics ${scene.diagnostics.length}; nonManifold ${closure.metrics.nonManifoldSolidCount}; closure ${JSON.stringify(Object.fromEntries(byCode))}`)
 // Every mesh with a vertex inside a column (CHIMNEY_COLUMN="x0,x1,z0,z1"), and how high it reaches there.
 if (process.env.CHIMNEY_COLUMN) {
   const [x0, x1, z0, z1] = process.env.CHIMNEY_COLUMN.split(',').map(Number)

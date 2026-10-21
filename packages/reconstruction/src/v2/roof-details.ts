@@ -713,7 +713,11 @@ export function withRecognisedHalves(callouts: ReadonlyArray<CalloutReading>, fr
   return callouts.map((c) => {
     const r = own.find((k) => Math.hypot(k.centrePx.x - c.circle.cx, k.centrePx.y - c.circle.cy) <= RING_MATCH_PX)
     if (!r || r.width.valueCm === undefined || r.height.valueCm === undefined) return c
-    return { ...c, upperText: r.width.text, lowerText: r.height.text, widthCm: r.width.valueCm, heightCm: r.height.valueCm, why: `${c.why}; the recogniser read ${r.width.text}/${r.height.text} (${r.id})` }
+    // 005Y-N2: a half the gate took only because another ring on the same sheet reads the pair outright is that ring's
+    // reading carried over — the same publisher's ink, not a second witness — and says so
+    const lifted = [r.width, r.height].filter((h) => /on this sheet reads/.test(h.why))
+    const how = lifted.length > 0 ? `supported by a sibling on the same sheet (${lifted.map((h) => h.why).join('; ')}), not an independent reading` : 'outright, both halves'
+    return { ...c, upperText: r.width.text, lowerText: r.height.text, widthCm: r.width.valueCm, heightCm: r.height.valueCm, why: `${c.why}; the recogniser read ${r.width.text}/${r.height.text} (${r.id}), ${how}` }
   })
 }
 
