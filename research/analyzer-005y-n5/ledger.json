@@ -1,0 +1,240 @@
+{
+ "stage": "BUILDPLAN-ANALYZER-005Y-N5",
+ "status": "OWNER_VISUAL_PENDING",
+ "head": "8870e281eda6fb7e6bd33e3152892d6b33cc088f",
+ "models": {
+  "a01": {
+   "n4": "b740fc7d3697fa9e",
+   "n5": "d8a71baf1618a44b",
+   "verification": {
+    "closure": {
+     "exteriorErrors": 0,
+     "exteriorFindings": 1,
+     "interiorFindings": 34
+    },
+    "replay": "BYTE_IDENTICAL",
+    "residuals": 8,
+    "residualsOutsideTolerance": 5
+   },
+   "liveness": {
+    "events": 684,
+    "maxGapS": 4.03,
+    "spanS": 763.0
+   }
+  },
+  "gozd": {
+   "n4": "2e7c5ba6429bcd90",
+   "n5": "8815c09a30807254",
+   "verification": {
+    "closure": {
+     "exteriorErrors": 0,
+     "exteriorFindings": 0,
+     "interiorFindings": 66
+    },
+    "replay": "BYTE_IDENTICAL",
+    "residuals": 0,
+    "residualsOutsideTolerance": 0
+   },
+   "liveness": {
+    "events": 623,
+    "maxGapS": 3.68,
+    "spanS": 712.5
+   }
+  },
+  "marcowki": {
+   "n4": "2980cc9c19403b31",
+   "n5": "d8ec95cfc9381030",
+   "verification": {
+    "closure": {
+     "exteriorErrors": 0,
+     "exteriorFindings": 0,
+     "interiorFindings": 36
+    },
+    "replay": "BYTE_IDENTICAL",
+    "residuals": 66,
+    "residualsOutsideTolerance": 12
+   },
+   "liveness": {
+    "events": 607,
+    "maxGapS": 7.59,
+    "spanS": 680.7
+   }
+  },
+  "ciesz": {
+   "n4": "4de216ed46550423",
+   "n5": "675c0850926cdd76",
+   "verification": {
+    "closure": {
+     "exteriorErrors": 2,
+     "exteriorFindings": 2,
+     "interiorFindings": 26
+    },
+    "replay": "BYTE_IDENTICAL",
+    "residuals": 0,
+    "residualsOutsideTolerance": 0
+   },
+   "liveness": {
+    "events": 386,
+    "maxGapS": 5.06,
+    "spanS": 459.3
+   }
+  },
+  "rary": {
+   "n4": "c308cd0e2d47f87a",
+   "n5": "8edc193ad5a71ca5",
+   "verification": {
+    "closure": {
+     "exteriorErrors": 0,
+     "exteriorFindings": 0,
+     "interiorFindings": 19
+    },
+    "replay": "BYTE_IDENTICAL",
+    "residuals": 26,
+    "residualsOutsideTolerance": 20
+   },
+   "liveness": {
+    "events": 524,
+    "maxGapS": 3.33,
+    "spanS": 627.0
+   }
+  },
+  "trytomach": {
+   "n4": null,
+   "n5": "f3fc5061bb1360a0",
+   "verification": {
+    "closure": {
+     "exteriorErrors": 0,
+     "exteriorFindings": 0,
+     "interiorFindings": 30
+    },
+    "replay": "BYTE_IDENTICAL",
+    "residuals": 8,
+    "residualsOutsideTolerance": 5
+   },
+   "liveness": {
+    "events": 544,
+    "maxGapS": 4.6,
+    "spanS": 633.9
+   }
+  },
+  "arganiach": {
+   "n4": null,
+   "n5": "34a95a766d169f39",
+   "verification": {
+    "closure": {
+     "exteriorErrors": 5,
+     "exteriorFindings": 5,
+     "interiorFindings": 11
+    },
+    "replay": "BYTE_IDENTICAL",
+    "residuals": 12,
+    "residualsOutsideTolerance": 9
+   },
+   "liveness": {
+    "events": 630,
+    "maxGapS": 5.5,
+    "spanS": 749.6
+   }
+  },
+  "sasankach3": {
+   "n4": null,
+   "n5": "bf3a9836368e6c01",
+   "verification": {
+    "closure": {
+     "exteriorErrors": 0,
+     "exteriorFindings": 0,
+     "interiorFindings": 66
+    },
+    "replay": "BYTE_IDENTICAL",
+    "residuals": 14,
+    "residualsOutsideTolerance": 8
+   },
+   "liveness": {
+    "events": 597,
+    "maxGapS": 3.57,
+    "spanS": 678.4
+   }
+  }
+ },
+ "fixes": [
+  {
+   "id": "C1",
+   "house": "gozd",
+   "what": "kuchnia — narożnik bez słupa (grey-ring callouts, PLAN_CORROBORATED_WIDTH, openEnd przez naroże CORNER)",
+   "result": "260/140 + 110/140, oba 0,80–2,20, naroże otwarte",
+   "commit": "98f20c2",
+   "verified": "screen Z1"
+  },
+  {
+   "id": "C2",
+   "house": "gozd,a01",
+   "what": "okna połaciowe na narysowanym symbolu / wspólnej linii okapu rzędu / symbol bez pierścienia",
+   "result": "gozd 7/7, a01 6+1",
+   "commit": "20d1216"
+  },
+  {
+   "id": "C3",
+   "house": "rary,marcowki",
+   "what": "ściana boczna garażu na linii siatki; drzwi w ścianie garażu",
+   "result": "garaż 6.17→6.67 m; fantomowe okno 3.91×0.71 usunięte; drzwi 100/210",
+   "commit": "5175184",
+   "open": "wschodni bok garażu 0,21 m krótszy od 688; wejście (słup/daszek/doświetle) FIRST_BAD bez zmian"
+  },
+  {
+   "id": "C5a",
+   "house": "a01",
+   "what": "ściany biegnące przez dom w drugim przebiegu pasm",
+   "result": "głębokość 8,008→8,30 m; ściany zewn. 0,152→0,427 m",
+   "commit": "eb69b0e"
+  },
+  {
+   "id": "C5b",
+   "house": "ciesz",
+   "what": "brama garażowa: szczyt dachu nad sylwetką uciętą na okapie, nakładka (znak wodny) nad nadprożem, prowadnice bramy uchylnej",
+   "result": "okno 0,9–2,2 (założone) → GARAGE_DOOR 2,75×0–2,26 (druk 275/225); kuchnia 0,78–2,28 (druk 150)",
+   "commit": "1cd1303",
+   "verified": "screen Z6/Z7",
+   "analog": "Trytomy brama 2,75 m WINDOW→GARAGE_DOOR"
+  },
+  {
+   "id": "C5c",
+   "house": "gozd,ciesz",
+   "what": "ściana tylna wnęki skanowana do lic ścian bocznych; tintowane kółka na kondygnacji pod inną",
+   "result": "gozd drzwi 70/210 we wnęce (druk); ciesz drzwi wnęki 0,88→1,06 (druk 105/210); a01 nadproże 2,04→2,20 (druk)",
+   "commit": "d172ffa",
+   "open": "gozd 0,70 m drzwi klasyfikowane WINDOW (reguła GLAZED_DOOR od 0,75 m)"
+  },
+  {
+   "id": "C4",
+   "house": "—",
+   "what": "zabiegi schodów (WINDER) z linii stopni wachlujących od słupka",
+   "result": "brak zmian na 8 domach; dowód syntetyczny",
+   "commit": "8870e28",
+   "open": "Trytomy i Sasanki 3 rysują zabiegi, ale FIRST_BAD jest wcześniej (findTreadLadders); A01/Trytomy/Goździkowce: bieg ucięty linią przekroju → placeholder"
+  },
+  {
+   "id": "C4-chimney",
+   "house": "marcowki",
+   "what": "resztka 1,9 cm komin↔ściana",
+   "result": "NIE POPRAWIONE — odmowa: ~1 px rzutu (≈0,016 m/px), poniżej rozdzielczości źródła; nazwane w modelu",
+   "commit": null
+  }
+ ],
+ "ai": "AI_SECOND_LOOK_LIVE_NOT_RUN (brak zgody i klucza; nie wywołano API)",
+ "branches": {
+  "remoteHeads": 58,
+  "keep": 3,
+  "toDelete": 55,
+  "tags": 2,
+  "deletion": "BLOCKED proxy 403 — komenda: research/analyzer-005y-n5/delete-branches-command.sh"
+ },
+ "disk": {
+  "before": "37G used / 645M avail (99%)",
+  "after": "19G used / 19G avail (51%)"
+ },
+ "preexisting": [
+  "packages/mobile-scene parity.test.ts (2) — czerwone też na HEAD przed N5",
+  "Sasanki 3: 4 errors/4 warnings w przeglądarce — tak samo na początku N5",
+  "Cieszynianki: 2 INTERSECTION — jak w N4"
+ ]
+}
