@@ -20,6 +20,8 @@ import type { ElevationFrameV2, PlanFrameV2 } from './frame.js'
 import { bandPieces, gapsBetween, inkFraction, mergeRuns, wallBodyPieces } from './scan.js'
 import type { ProvenanceStatus } from './graph.js'
 import { CONVENTIONS } from '../solve.js'
+import { DOOR_MAX_WIDTH_M, REACHES_FLOOR_M, VEHICLE_DOOR_MIN_WIDTH_M, classifyOpeningFamily, elevationConfidence, matchOpeningCallout, preferredElevationExtent, resolveSillAndHead } from './opening-reading.js'
+import type { NearbyCallout } from './opening-reading.js'
 
 export type Facade = 'FRONT' | 'REAR' | 'WEST' | 'EAST'
 export type OpeningFamily = 'WINDOW' | 'DOOR' | 'GARAGE_DOOR' | 'GLAZED_DOOR' | 'MULTI_PANEL_GLAZING' | 'UNKNOWN'
@@ -400,6 +402,49 @@ export type OpeningReadingInput = {
   index: number
 }
 
+/** The head a door takes when the plan's convention, not a reading, made it a door (m above the floor). */
+const ASSUMED_DOOR_HEAD_M = 2.1
+/** A head this far above the soffit at the far jamb of a gable-end opening rakes along the roof. */
+const RAKE_SOFFIT_MARGIN_M = 0.05
+/** A raked head that comes this close to the sill means the opening was read narrower or lower than it is. */
+const RAKE_MIN_CLEAR_M = 0.3
+/** A garage room's face counts as this wall when it lies within the wall's thickness plus this. */
+const GARAGE_FACE_SLACK_M = 0.2
+
+/** The best elevation reading of an opening across the views that show its wall (the most confident one). */
+function readOpeningOnViews(views: OpeningReadingInput['views'], interval: [number, number], solids: ReadonlyArray<[number, number]>, host: WallHost, wallTopY: number, printed: boolean): OpeningV2['elevation'] {
+  let elevation: OpeningV2['elevation']
+  for (const { view, raster } of views) {
+    // A printed callout fixes the height; the contrast reader's band only places it.
+    const byObject = printed ? null : wallAppearanceExtent(raster, view, interval, solids, host.floorY, wallTopY)
+    const byContrast = elevationExtent(raster, view, interval, host.floorY, host.storeyHeightM)
+    const ext = preferredElevationExtent(byObject, byContrast)
+    if (!ext) continue
+    const confidence = elevationConfidence(ext.contrast)
+    if (!elevation || confidence > elevation.confidence) elevation = { frameId: view.registration.frameId, sillY: ext.sillY, headY: ext.headY, contrast: ext.contrast, confidence }
+  }
+  return elevation
+}
+
+/** On a gable end, a head above the soffit at the far jamb is raked along the roof; null where the head is level. */
+function rakedHead(host: WallHost, interval: [number, number], widthM: number, headY: number, sillY: number): { profile: HeadProfile; headFarY: number; tallEdge: 'LOW' | 'HIGH'; notes: string[] } | null {
+  if (!host.gable) return null
+  const soffitLow = gableSoffitY(host.gable, interval[0])
+  const soffitHigh = gableSoffitY(host.gable, interval[1])
+  const tallEdge: 'LOW' | 'HIGH' = soffitLow >= soffitHigh ? 'LOW' : 'HIGH'
+  const farSoffit = tallEdge === 'LOW' ? soffitHigh : soffitLow
+  if (headY <= farSoffit + RAKE_SOFFIT_MARGIN_M) return null
+  const headFarY = round6(headY - widthM * Math.tan((host.gable.pitchDeg * Math.PI) / 180))
+  return { profile: 'RAKED_SINGLE', headFarY, tallEdge, notes: headFarY <= sillY + RAKE_MIN_CLEAR_M ? ['the raked head would meet the sill: the opening is narrower or lower than read'] : [] }
+}
+
+/** Whether a garage room's bounds own this stretch of wall: its face on the wall's plane, the gap within its span. */
+function garageRoomHolds(bounds: { x0: number; z0: number; x1: number; z1: number }, host: WallHost, gap: [number, number], wallThicknessM: number): boolean {
+  const face = host.facade === 'FRONT' ? bounds.z0 : host.facade === 'REAR' ? bounds.z1 : host.facade === 'WEST' ? bounds.x0 : bounds.x1
+  const [r0, r1] = host.facade === 'FRONT' || host.facade === 'REAR' ? [bounds.x0, bounds.x1] : [bounds.z0, bounds.z1]
+  return Math.abs(face - host.planeAt) <= wallThicknessM + GARAGE_FACE_SLACK_M && gap[0] >= r0 - wallThicknessM && gap[1] <= r1 + wallThicknessM
+}
+
 /** Openings in one wall: plan gaps, then callouts, then the elevations. */
 export function readWallOpenings(input: OpeningReadingInput, options: OpeningOptions = {}): OpeningV2[] {
   const opt = { ...DEFAULTS, ...options }
@@ -428,176 +473,64 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
     if (accepted) input.onBandViewAccepted?.(v.view.registration.frameId)
     return accepted
   })
+  // The callouts near this wall that carry a reading, with their text placed in world metres.
+  const nearby: NearbyCallout[] = input.callouts.flatMap((ev) => {
+    if (!ev.textBox) return []
+    const candidates = calloutCandidates(ev)
+    if (!candidates) return []
+    const cx = (ev.textBox.x0 + ev.textBox.x1) / 2
+    const cy = (ev.textBox.y0 + ev.textBox.y1) / 2
+    return [{ id: ev.id, rawText: ev.rawText, confidence: ev.confidence, textCentre: plan.toWorld(cx, cy), pixelCentre: [round6(cx), round6(cy)] as [number, number], candidates }]
+  })
+  const calloutBoxes: PixelBox[] = input.callouts.flatMap((e) => (e.textBox ? [{ x0: e.textBox.x0 - 2, y0: e.textBox.y0 - 2, x1: e.textBox.x1 + 2, y1: e.textBox.y1 + 2 }] : []))
   for (const gap of gaps) {
     const [lo, hi] = gap.interval
     const widthPlan = round6(hi - lo)
     const centre = (lo + hi) / 2
-    // 005V-N3: the drawn wall band the gap was read on, across the wall, in sheet pixels.
+    // The drawn wall band the gap was read on, across the wall, in sheet pixels.
     const bandCentre = along === 'X' ? (gap.pixelRect.y0 + gap.pixelRect.y1) / 2 : (gap.pixelRect.x0 + gap.pixelRect.x1) / 2
     const unresolved: string[] = []
-    // --- the callout: nearest printed w/h within reach with a width reading that agrees with the gap.
-    // The gap's own width is the evidence that picks among the reader's width
-    // candidates; the height candidates travel on for the elevation to pick among.
-    let callout: OpeningV2['callout']
-    const weighed: Array<Record<string, unknown>> = []
-    for (const ev of input.callouts) {
-      if (!ev.textBox) continue
-      const cands = calloutCandidates(ev)
-      if (!cands) continue
-      const cx = (ev.textBox.x0 + ev.textBox.x1) / 2
-      const cy = (ev.textBox.y0 + ev.textBox.y1) / 2
-      const w = plan.toWorld(cx, cy)
-      const alongDistance = Math.abs((along === 'X' ? w.x : w.z) - centre)
-      const acrossDistance = Math.abs((along === 'X' ? w.z : w.x) - host.centreAt)
-      if (alongDistance > opt.calloutReachM || acrossDistance > opt.calloutReachM) continue
-      const seen = input.trace ? { evidenceId: ev.id, rawText: ev.rawText, px: [round6(cx), round6(cy)], confidence: ev.confidence, widths: cands.widths.slice(0, 3).map((c) => c.cm), heights: cands.heights.slice(0, 3).map((c) => c.cm), alongM: round6(alongDistance), acrossM: round6(acrossDistance) } : undefined
-      if (ev.confidence < 0.2) {
-        if (seen) weighed.push({ ...seen, decision: 'REJECTED', reason: `confidence ${ev.confidence} < 0.2` })
-        continue
-      }
-      // 005Y-N5: a width reading the recogniser's gate refused counts only where the gap agrees with it — by the same
-      // rule as the reader's own candidates, the gap being the second measurement that accepts it — and only where
-      // none of the reader's own first three agrees.
-      const fits = (c: { cm: number }): boolean => Math.abs(c.cm / 100 - widthPlan) <= Math.max(0.12, widthPlan * 0.12)
-      const readerOwn = cands.widths.filter((c) => !c.planCorroborated).slice(0, 3).filter(fits)
-      const agreeing = readerOwn.length > 0 ? readerOwn : cands.widths.filter((c) => c.planCorroborated && fits(c))
-      if (agreeing.length === 0) {
-        if (seen) weighed.push({ ...seen, decision: 'REJECTED', reason: `no width reading within 12 % of the ${widthPlan.toFixed(2)} m gap` })
-        continue
-      }
-      if (seen) weighed.push({ ...seen, decision: 'AGREES' })
-      const width = agreeing.reduce((best, c) => (c.score > best.score ? c : best), agreeing[0])
-      const distance = round6(Math.hypot(alongDistance, acrossDistance))
-      if (callout && callout.distanceM <= distance) continue
-      callout = {
-        widthCm: width.cm,
-        heightCm: cands.heights[0].cm,
-        evidenceId: ev.id,
-        distanceM: distance,
-        heightCandidates: cands.heights,
-        ...(width.planCorroborated ? { widthCorroboratedByPlan: true as const } : {}),
-        ...(width !== cands.widths[0] ? { resolvedBy: width.planCorroborated ? `the ${widthPlan.toFixed(2)} m plan gap corroborated the width reading ${width.cm} the recogniser's gate refused, over ${cands.widths[0].cm}` : `the ${widthPlan.toFixed(2)} m plan gap picked the width reading ${width.cm} over ${cands.widths[0].cm}` } : {}),
-      }
-    }
+    const matched = matchOpeningCallout({ centre, widthM: widthPlan }, host, nearby, opt.calloutReachM, !!input.trace)
+    const weighed = matched.weighed
+    let callout = matched.callout
     // The interval: the plan gap, its width corrected to the printed one about the gap's centre.
     const widthM = callout ? round6(callout.widthCm / 100) : widthPlan
     const interval: [number, number] = callout ? [round6(centre - widthM / 2), round6(centre + widthM / 2)] : [lo, hi]
-    // --- the elevations
-    let elevation: OpeningV2['elevation']
-    // 005W: where this wall ends above the floor: the storey, the eaves it runs under, or the rake over a gable end.
-    const wallTopY = wallTop(interval)
-    for (const { view, raster } of views) {
-      // A printed callout fixes the height; the contrast reader's band only places it, as before 005W.
-      const extNew = callout ? null : wallAppearanceExtent(raster, view, interval, solids, host.floorY, wallTopY)
-      const extOld = elevationExtent(raster, view, interval, host.floorY, host.storeyHeightM)
-      // The contrast reader stands where it read something the object reader does not contain; where it read nothing,
-      // or only a part of the same opening (a blind's dark half), the object reader's whole extent replaces it.
-      const ext = !extOld ? extNew : extNew && extNew.sillY <= extOld.sillY + 0.1 && extNew.headY >= extOld.headY - 0.1 ? extNew : extOld
-      if (!ext) continue
-      if (ext.headY - ext.sillY < 0.5) continue
-      const confidence = round6(Math.min(0.85, 0.4 + ext.contrast / 100))
-      if (!elevation || confidence > elevation.confidence) elevation = { frameId: view.registration.frameId, sillY: ext.sillY, headY: ext.headY, contrast: ext.contrast, confidence }
-    }
+    const elevation = readOpeningOnViews(views, interval, solids, host, wallTop(interval), !!callout)
     // --- sill and head
+    const prov: OpeningV2['provenance'] = { interval: 'SOURCE_DERIVED', width: callout ? (callout.widthCorroboratedByPlan ? 'SOURCE_CORROBORATED' : 'SOURCE_EXACT') : 'SOURCE_DERIVED', sill: 'UNRESOLVED', head: 'UNRESOLVED', profile: 'SOURCE_DERIVED', family: 'VISUAL_SEMANTIC' }
+    const calloutConfidence = (): number | undefined => input.callouts.find((e) => e.id === callout?.evidenceId)?.confidence
+    const read = resolveSillAndHead(host, { callout, elevation }, (h, drawn, candidates) => ({ weak: weakPrintedHeight(calloutConfidence(), h, drawn, candidates), confidence: calloutConfidence() ?? 0 }))
     let heightsAssumed = false
     let doorBySymbol = false
     let doorSwing = false
     let sillY: number
     let headY: number
-    const prov: OpeningV2['provenance'] = { interval: 'SOURCE_DERIVED', width: callout ? (callout.widthCorroboratedByPlan ? 'SOURCE_CORROBORATED' : 'SOURCE_EXACT') : 'SOURCE_DERIVED', sill: 'UNRESOLVED', head: 'UNRESOLVED', profile: 'SOURCE_DERIVED', family: 'VISUAL_SEMANTIC' }
-    if (callout && elevation) {
-      // The elevation's own height picks among the reader's height candidates
-      // when the best one disagrees with it and another, nearly as good, does not.
-      const drawn = elevation.headY - elevation.sillY
-      if (Math.abs(drawn - callout.heightCm / 100) > 0.2 && callout.heightCandidates) {
-        const top = callout.heightCandidates[0]?.score ?? 0
-        const fitting = callout.heightCandidates.filter((c) => Math.abs(c.cm / 100 - drawn) <= 0.15 && c.score >= top * 0.7)
-        if (fitting.length > 0) {
-          // Among readings the matcher rates alike, the one the elevation is nearest to.
-          const pick = fitting.reduce((best, c) => (Math.abs(c.cm / 100 - drawn) < Math.abs(best.cm / 100 - drawn) ? c : best), fitting[0])
-          callout = { ...callout, heightCm: pick.cm, resolvedBy: `${callout.resolvedBy ? `${callout.resolvedBy}; ` : ''}the elevation's ${drawn.toFixed(2)} m picked the height reading ${pick.cm} over ${callout.heightCandidates[0].cm}` }
-        }
-      }
-      const h = callout.heightCm / 100
-      const agree = Math.abs(elevation.headY - elevation.sillY - h) <= 0.2
-      if (agree) {
-        sillY = round6((elevation.sillY + Math.max(host.floorY, elevation.headY - h)) / 2)
-        headY = round6(sillY + h)
-        prov.sill = 'SOURCE_CORROBORATED'
-        prov.head = 'SOURCE_CORROBORATED'
-      } else if (weakPrintedHeight(input.callouts.find((e) => e.id === callout?.evidenceId)?.confidence, h, elevation.headY - elevation.sillY, callout.heightCandidates)) {
-        // 005W-N1: a height the recogniser read weakly, contradicted by the elevation by more than half a metre, with no
-        // reading among its own candidates the elevation fits, is not printed evidence over the drawing: the elevation's
-        // extent stands. The printed width, which the plan's gap agreed with, stays.
-        sillY = elevation.sillY
-        headY = elevation.headY
-        prov.sill = 'IMAGE_METRIC_REGISTERED'
-        prov.head = 'IMAGE_METRIC_REGISTERED'
-        unresolved.push(`the printed height read ${h.toFixed(2)} m with confidence ${(input.callouts.find((e) => e.id === callout?.evidenceId)?.confidence ?? 0).toFixed(2)} against the elevation's ${(elevation.headY - elevation.sillY).toFixed(2)} m (${elevation.sillY.toFixed(2)}..${elevation.headY.toFixed(2)}), and none of its height readings fits the elevation: the elevation stands`)
-      } else {
-        // The printed height stands over a contrast band that contradicts it;
-        // the band's sill is kept only where an opening of the printed height
-        // starting there would still fit in the storey.
-        const fits = elevation.sillY >= host.floorY - 0.05 && elevation.sillY + h <= host.floorY + host.storeyHeightM + 0.05
-        if (h >= 1.95) {
-          sillY = host.floorY
-          prov.sill = 'SOURCE_DERIVED'
-        } else if (fits) {
-          sillY = elevation.sillY
-          prov.sill = 'IMAGE_METRIC_REGISTERED'
-        } else {
-          sillY = round6(host.floorY + Math.max(0, 2.2 - h))
-          prov.sill = 'ASSUMED_FOR_RENDERING'
-        }
-        headY = round6(sillY + h)
-        prov.head = 'SOURCE_EXACT'
-        unresolved.push(`the elevation reads ${(elevation.headY - elevation.sillY).toFixed(2)} m tall (${elevation.sillY.toFixed(2)}..${elevation.headY.toFixed(2)}) against the printed ${h.toFixed(2)}; the printed height stands`)
-      }
-    } else if (callout) {
-      const h = callout.heightCm / 100
-      // A printed height with no elevation reading: a door-height opening reaches the floor, a shorter one takes a common head.
-      sillY = h >= 1.95 ? host.floorY : round6(host.floorY + Math.max(0, 2.2 - h))
-      headY = round6(sillY + h)
-      prov.sill = h >= 1.95 ? 'SOURCE_DERIVED' : 'ASSUMED_FOR_RENDERING'
-      prov.head = 'SOURCE_EXACT'
-      if (h < 1.95) unresolved.push('sill height (no elevation reading; a common head is assumed)')
-      // Two readings the matcher cannot tell apart, and nothing else to tell them by.
-      const rival = callout.heightCandidates?.slice(1).find((c) => c.score >= (callout?.heightCandidates?.[0].score ?? 0) - 0.02 && Math.abs(c.cm - (callout?.heightCm ?? 0)) >= 15)
-      if (rival) {
-        prov.head = 'UNRESOLVED'
-        unresolved.push(`the printed height reads ${callout.heightCm} or ${rival.cm} alike, and no elevation shows this wall`)
-      }
-    } else if (elevation) {
-      sillY = elevation.sillY
-      headY = elevation.headY
-      prov.sill = 'IMAGE_METRIC_REGISTERED'
-      prov.head = 'IMAGE_METRIC_REGISTERED'
+    if (read) {
+      ;({ sillY, headY, callout } = read)
+      prov.sill = read.sill
+      prov.head = read.head
+      unresolved.push(...read.notes)
     } else {
-      // 005U: nothing reads this opening's heights — no callout, no elevation. A sill the solver assumes is not evidence
-      // of what the opening is: it used to be set at the floor and then read back as "reaches the floor", which made a
-      // door, a glazed door, a multi-panel screen or a garage door of every unread gap (upper-storey doors with no
-      // balcony, a vehicle door no source shows). Only the plan's own door symbol makes a door now; anything else is
-      // drawn as a window at the conventional sill and head, and both the kind and the heights are named as assumed.
-      // The plan's convention still stands where it is plausible: a gap a door's width with no glazing drawn across it
-      // is a door on the ground storey (an entrance); above it, where an outside door needs a balcony, only a drawn
-      // swing makes one. Never a garage door, a glazed door or a full-height screen: those need a height read.
+      // Nothing reads this opening's heights. An assumed sill is not evidence of what the opening is: only the plan's
+      // own door symbol makes a door; anything else is drawn as a window at the conventional sill and head, and both
+      // the kind and the heights are named as assumed. A gap a door's width with no glazing drawn across it is a door
+      // on the ground storey (an entrance); above it, where an outside door needs a balcony, only a drawn swing makes one.
       heightsAssumed = true
       doorSwing = doorSwingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM)
-      // 005Y-N3 (H1): glazing is either symbol — dark ink or the light lines a frame and glass are drawn with. A window's
-      // narrow piece (the return of a corner window, drawn on light lines round the corner) is not an empty gap.
-      doorBySymbol = widthM <= 1.3 && !glazingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM) && !glazingLinesDrawn(input.planRaster, plan, host, interval, input.wallThicknessM, bandCentre) && (doorSwing || host.storeyIndex === 0)
+      // Glazing is either symbol — dark ink or the light lines a frame and glass are drawn with.
+      doorBySymbol = widthM <= DOOR_MAX_WIDTH_M && !glazingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM) && !glazingLinesDrawn(input.planRaster, plan, host, interval, input.wallThicknessM, bandCentre) && (doorSwing || host.storeyIndex === 0)
       sillY = doorBySymbol ? host.floorY : round6(host.floorY + CONVENTIONS.windowSill)
-      headY = round6(host.floorY + (doorBySymbol ? 2.1 : CONVENTIONS.openingHead))
+      headY = round6(host.floorY + (doorBySymbol ? ASSUMED_DOOR_HEAD_M : CONVENTIONS.openingHead))
       prov.sill = 'ASSUMED_FOR_RENDERING'
       prov.head = 'ASSUMED_FOR_RENDERING'
       unresolved.push('sill and head (no callout read and no elevation shows this wall)')
       if (!doorBySymbol) unresolved.push('kind (no callout, no elevation and no door symbol on the plan: drawn as a window, not read as one)')
       else if (!doorSwing) unresolved.push('kind (an empty ground-storey gap a door wide, read as a door by the plan convention; no swing drawn)')
     }
-    // --- 005V: under the eaves. A head nothing read is a convention; where it would reach above the wall the roof
-    // stops it at, it is lowered under the eaves while a window of at least MIN_ASSUMED_WINDOW_M remains. Below that
-    // the gap holds no window the convention can draw — a knee wall, often with roof windows drawn above it on the
-    // plan — and it is refused by name instead of emitted for the geometry to drop. A read height is never moved.
+    // --- under the eaves. A head nothing read is a convention; where it would reach above the wall the roof stops it
+    // at, it is lowered under the eaves while a window of at least MIN_ASSUMED_WINDOW_M remains. Below that the gap
+    // holds no window the convention can draw — a knee wall — and it is refused by name. A read height is never moved.
     if (heightsAssumed && host.eaveTopY !== undefined && headY > host.eaveTopY - EAVE_CLEARANCE_M) {
       const lowered = round6(host.eaveTopY - EAVE_CLEARANCE_M)
       if (lowered - sillY < MIN_ASSUMED_WINDOW_M) {
@@ -608,93 +541,47 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
       unresolved.push(`head lowered from ${(headY - host.floorY).toFixed(2)} to ${(lowered - host.floorY).toFixed(2)} m above the floor, under the eaves (assumed heights)`)
       headY = lowered
     }
-    // --- profile: on a gable end, a head above the soffit at the far jamb is raked along the roof.
-    let profile: HeadProfile = 'RECTANGULAR'
-    let headFarY: number | undefined
-    let tallEdge: OpeningV2['tallEdge']
-    if (host.gable) {
-      const soffitLow = gableSoffitY(host.gable, interval[0])
-      const soffitHigh = gableSoffitY(host.gable, interval[1])
-      const tall: 'LOW' | 'HIGH' = soffitLow >= soffitHigh ? 'LOW' : 'HIGH'
-      const farSoffit = tall === 'LOW' ? soffitHigh : soffitLow
-      if (headY > farSoffit + 0.05) {
-        profile = 'RAKED_SINGLE'
-        tallEdge = tall
-        const tan = Math.tan((host.gable.pitchDeg * Math.PI) / 180)
-        headFarY = round6(headY - widthM * tan)
-        prov.profile = 'SOURCE_DERIVED'
-        if (headFarY <= sillY + 0.3) unresolved.push('the raked head would meet the sill: the opening is narrower or lower than read')
-      }
+    const raked = rakedHead(host, interval, widthM, headY, sillY)
+    const profile = raked?.profile ?? 'RECTANGULAR'
+    const headFarY = raked?.headFarY
+    const tallEdge = raked?.tallEdge
+    if (raked) {
+      prov.profile = 'SOURCE_DERIVED'
+      unresolved.push(...raked.notes)
     }
     // --- family
-    // 005U: a vehicle door, a door or a full-height screen needs a sill something READ; an assumed one decides nothing.
-    const attachedVehicle = !heightsAssumed && input.attachedSingleStorey && host.storeyIndex === 0 && widthM >= VEHICLE_DOOR_MIN_WIDTH_M && sillY - host.floorY < 0.1
-    // 005U-N4: the gap that is a garage room's one open side, with nothing drawn across it as glazing.
     const mouth = input.vehicleMouth
-    const mouthGap =
-      !!mouth &&
-      host.storeyIndex === 0 &&
-      Math.min(hi, mouth.to) - Math.max(lo, mouth.from) >= 0.8 * Math.max(widthPlan, mouth.to - mouth.from) &&
-      !glazingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM)
-    let family: OpeningFamily = 'UNKNOWN'
-    // 005Y-N4 (C): the drawn leaf, when its symbol is read; the callout rings printed on the plan hide what is under them
-    let leaf: DrawnDoorLeaf | undefined
-    const calloutBoxes: PixelBox[] = input.callouts.flatMap((e) => (e.textBox ? [{ x0: e.textBox.x0 - 2, y0: e.textBox.y0 - 2, x1: e.textBox.x1 + 2, y1: e.textBox.y1 + 2 }] : []))
-    const reachesFloor = sillY - host.floorY < 0.12
-    // 005Y-N5 (C5): the plan's own symbol of an overhead door across a ground-storey gap a vehicle passes through
+    const mouthGap = !!mouth && host.storeyIndex === 0 && Math.min(hi, mouth.to) - Math.max(lo, mouth.from) >= 0.8 * Math.max(widthPlan, mouth.to - mouth.from) && !glazingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM)
+    const reachesFloor = sillY - host.floorY < REACHES_FLOOR_M
     const tracks = host.storeyIndex === 0 && widthPlan >= VEHICLE_DOOR_MIN_WIDTH_M && (heightsAssumed || reachesFloor) ? overheadDoorTracks(input.planRaster, plan, host, [lo, hi], input.wallThicknessM) : undefined
-    if (heightsAssumed && (mouthGap && mouth ? true : !!tracks)) {
-      family = 'GARAGE_DOOR'
-      prov.family = 'SOURCE_DERIVED'
+    const garageRoom = (input.garageRooms ?? []).find((g) => garageRoomHolds(g.bounds, host, [lo, hi], input.wallThicknessM))
+    const decision = classifyOpeningFamily({
+      storeyIndex: host.storeyIndex,
+      widthM,
+      sillAboveFloorM: sillY - host.floorY,
+      heightM: headY - sillY,
+      heightsAssumed,
+      doorBySymbol,
+      doorSwing,
+      ...(mouthGap && mouth ? { vehicleMouth: { why: mouth.why } } : {}),
+      ...(tracks ? { overheadTracks: { why: tracks.why } } : {}),
+      attachedSingleStorey: input.attachedSingleStorey,
+      ...(garageRoom ? { garageRoom: { why: garageRoom.why } } : {}),
+      symbols: {
+        glazed: () => glazingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM) || glazingLinesDrawn(input.planRaster, plan, host, interval, input.wallThicknessM, bandCentre),
+        leaf: () => doorLeafFound(input.planRaster, plan, host, interval, input.wallThicknessM, calloutBoxes, input.trace ? (d) => input.trace?.({ kind: 'DOOR_LEAF_DEBUG', interval: [round6(lo), round6(hi)], facade: host.facade, massId: host.massId, ...d }) : undefined),
+        swingDrawn: () => doorSwingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM),
+      },
+    })
+    const family = decision.family
+    const leaf = decision.leaf
+    if (decision.provenance) prov.family = decision.provenance
+    if (decision.vehicleDoorAssumedHeights) {
       sillY = host.floorY
       headY = round6(host.floorY + CONVENTIONS.openingHead)
       for (let k = unresolved.length - 1; k >= 0; k -= 1) if (unresolved[k].startsWith('kind (')) unresolved.splice(k, 1)
-      unresolved.push(`a vehicle door: ${mouthGap && mouth ? mouth.why : tracks?.why}; its sill and head are assumed (${CONVENTIONS.openingHead} m) — no callout or elevation reads them`)
-    } else if (mouthGap && !heightsAssumed && sillY - host.floorY < 0.1) family = 'GARAGE_DOOR'
-    else if (tracks && !heightsAssumed) {
-      family = 'GARAGE_DOOR'
-      prov.family = 'SOURCE_DERIVED'
-      unresolved.push(`a vehicle door: ${tracks.why}`)
     }
-    else if (heightsAssumed) {
-      family = doorBySymbol ? 'DOOR' : 'WINDOW'
-      prov.family = doorBySymbol ? (doorSwing ? 'SOURCE_DERIVED' : 'VISUAL_SEMANTIC') : 'ASSUMED_FOR_RENDERING'
-    }
-    else if (attachedVehicle) family = 'GARAGE_DOOR'
-    else if (reachesFloor && widthM >= 2.0) family = 'MULTI_PANEL_GLAZING'
-    else {
-      // The plan symbol decides between a door and a glazed opening: a window is
-      // drawn with its glazing lines across the gap, a door leaves the gap empty
-      // (and usually draws its leaf and swing beside it).
-      // 005W: with heights read off an elevation, the plan's light glazing symbol (005V-N3) counts as well as dark ink.
-      const glazed = glazingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM) || glazingLinesDrawn(input.planRaster, plan, host, interval, input.wallThicknessM, bandCentre)
-      // 005Y-N5 (C3): in a wall of a room the publisher's list names a garage, an opening to the floor a door wide is
-      // its door: lines across the gap there are the frame, not a French window's glass (a garage has none)
-      const garage = (input.garageRooms ?? []).find((g) => {
-        const face = host.facade === 'FRONT' ? g.bounds.z0 : host.facade === 'REAR' ? g.bounds.z1 : host.facade === 'WEST' ? g.bounds.x0 : g.bounds.x1
-        const [r0, r1] = host.facade === 'FRONT' || host.facade === 'REAR' ? [g.bounds.x0, g.bounds.x1] : [g.bounds.z0, g.bounds.z1]
-        return Math.abs(face - host.planeAt) <= input.wallThicknessM + 0.2 && lo >= r0 - input.wallThicknessM && hi <= r1 + input.wallThicknessM
-      })
-      if (reachesFloor && !glazed && widthM <= 1.3 && headY - sillY <= 2.35) family = 'DOOR'
-      else if (reachesFloor && garage && widthM <= 1.3 && headY - sillY <= 2.35) {
-        family = 'DOOR'
-        prov.family = 'VISUAL_SEMANTIC'
-        unresolved.push(`a door by its room: ${garage.why}; its leaf is not read on the plan`)
-      }
-      // 005Y-N2: lines across the gap and a door's own symbol beside it — a leaf drawn open from one jamb, as long as the
-      // gap is wide, and the arc it sweeps to the other — are a glazed leaf in a door, not a window to the floor. The
-      // lines may be a threshold rather than glass: the leaf's glazing is named as read from them. On the ground storey
-      // only: above it a floor-length glazing with no balcony in the model is a French window, drawn as before.
-      else if (reachesFloor && glazed && host.storeyIndex === 0 && widthM >= 0.75 && widthM <= 1.3 && headY - sillY <= 2.35 && (leaf = doorLeafFound(input.planRaster, plan, host, interval, input.wallThicknessM, calloutBoxes, input.trace ? (d) => input.trace?.({ kind: 'DOOR_LEAF_DEBUG', interval: [round6(lo), round6(hi)], facade: host.facade, massId: host.massId, ...d }) : undefined)) !== undefined) {
-        family = 'GLAZED_DOOR'
-        prov.family = 'SOURCE_DERIVED'
-        if (leaf.swing === 'OUT') unresolved.push('opens outward: its leaf and arc are drawn outside the wall')
-        unresolved.push('the leaf’s glazing (lines across the gap beside a drawn leaf and swing: glass, or a threshold the plan draws the same way)')
-      } else if (reachesFloor && glazed && widthM >= 0.75 && widthM <= 2.0 && host.storeyIndex === 0 && !doorSwingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM)) family = 'WINDOW'
-      else if (reachesFloor && widthM > 1.3 && widthM < 2.0) family = 'GLAZED_DOOR'
-      else if (reachesFloor && !glazed) family = 'DOOR'
-      else family = 'WINDOW'
-    }
+    unresolved.push(...decision.notes)
     const mullions = gap.stubs.map(([s0, s1]) => round6(((s0 + s1) / 2 - interval[0]) / widthM)).filter((f) => f > 0.05 && f < 0.95)
     const confidence = round6(Math.min(0.92, 0.5 + (callout ? 0.2 : 0) + (elevation ? 0.15 : 0) + (callout && elevation && prov.head === 'SOURCE_CORROBORATED' ? 0.07 : 0)))
     input.trace?.({ kind: 'OPENING_GAP', id: `opening-${host.storeyIndex}-${host.facade.toLowerCase()}-${input.index}-${out.length}`, frameId: plan.frameId, massId: host.massId, storey: host.storeyIndex, facade: host.facade, pixelRect: gap.pixelRect, intervalM: [round6(lo), round6(hi)], widthPlanM: widthPlan, callouts: weighed, callout: callout ? { widthCm: callout.widthCm, heightCm: callout.heightCm, evidenceId: callout.evidenceId } : null, elevation: elevation ? { frameId: elevation.frameId, sillY: elevation.sillY, headY: elevation.headY } : null, family, ...(leaf ? { leaf } : {}), provenanceFamily: prov.family, sillY: round6(sillY), headY: round6(headY), unresolved })
@@ -945,8 +832,6 @@ function doorSwingDrawn(raster: Raster, plan: PlanFrameV2, host: WallHost, inter
   return f > 0.02 && f < 0.25
 }
 
-/** 005Y-N5 (C5): a gap narrower than this is no vehicle door (m). */
-const VEHICLE_DOOR_MIN_WIDTH_M = 2.2
 /** 005Y-N5 (C5): a plan's overhead-door track is a line lighter than wall ink (`GLAZING_LINE_LUMA`) … */
 const TRACK_INK_LUMA = GLAZING_LINE_LUMA
 /** … looked for this far either side of each jamb, along the wall (m) … */
