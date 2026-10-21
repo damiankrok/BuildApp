@@ -2498,3 +2498,49 @@ Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005Y_ARCHON_FIVE_HOUSE_VISUAL_CL
 **Research**
 - Paddle on callout halves: 104/142 exact against the template's 63/142, and 71/71 confident readings correct.
 - Recommended as the next step, gated by the plan's gap width.
+
+## Source to feature: why the analyzer lost what a person sees (STAGE BUILDPLAN-ANALYZER-005Y-N1)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005Y_N1_SOURCE_TO_FEATURE_DEBUG.md`.
+Ledger: `research/analyzer-005y-n1-source-to-feature/ledger.json`.
+Branch `analyzer/005y-n1-source-to-feature-debug-v1`, from 005Y `98df11f`. Verdict OWNER_VISUAL_PENDING. Not ALL_GREEN: the tracked-APK > 32 MB gate stays a known failure.
+
+What changed:
+- **Plan callout rings are read by the pinned recogniser in the metric phase** (`callout-recogniser.ts`, schema 1.9.0 `calloutRings`).
+  - Gate: both halves stable and confident (posterior and mean ≥ 0.9), the model's own answer, 2–3 digits, no unread glyph (refuses 118→18, 105→5), an opening's size.
+  - A half refused only by the bracket is taken when a sibling ring on the sheet reads the same pair outright.
+  - Tinted-only rings feed roof windows, not opening callouts.
+  - Without a recogniser the set is byte-identical.
+- **A section with no ladder is registered for chimneys only, by two anchors**: the slab span against the plan, read through watermark gaps, and two printed levels.
+  - A single-storey chimney stands where the section draws a stack above its drawn roof line.
+  - A chimney no longer forces a hipped roof back to a gable: its penetration is cut plumb in its plane.
+- `verify.ts` no longer moves an assumed sill alone under a printed height.
+- `FEATURE_DEBUG` trace (`featureTrace`): write-only, hashes unchanged.
+
+Five full offline production runs with PaddleOCR (model before → after):
+
+| house | before | after | change |
+|---|---|---|---|
+| a01 | 40ccaaae | be796f9f | printed opening sizes |
+| gozd | 1856a617 | 68d6f2e7 | rooflights 0 → 7, printed opening sizes |
+| marcowki | cf797743 | bf80f455 | geometry unchanged |
+| ciesz | 9478c6d1 | f512a136 | chimneys 0 → 2, hip kept |
+| rary | 9f5fd342 | 3f0f7183 | east heads 2.9 → 2.3, front sizes |
+
+Longest heartbeat silence ≤ 2.6 s; runs 20–35 % longer.
+
+Still open, each with its first bad step in the report:
+
+| house | open item | first bad step |
+|---|---|---|
+| gozd | 7 ground callouts | precision gate |
+| gozd | ridge +8.36 and elevations | section text |
+| a01 | 7th rooflight | ring on a bed drawing |
+| a01 | depth 8.30 | layout |
+| ciesz | garage door | garage wall line |
+| ciesz | porches | layout |
+| ciesz | elevation silhouettes | roof missing from the silhouette |
+| marcowki | entrance read as a window | family cascade, weak swing test |
+| rary | rear 230/230 | gate |
+| rary | phantom 471/71 | ring detector |
+| OWNER m3ea | not touched | — |

@@ -501,7 +501,8 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
   // --- chimneys and rooflights ---------------------------------------------------
   for (const c of b.chimneys) {
     const l = levelOf(0)
-    const top = c.topY ?? (b.mainRoof ? b.mainRoof.ridgeY - 0.1 : 0)
+    const planeRoof = b.planeRoofs?.[0]
+    const top = c.topY ?? (b.mainRoof ? b.mainRoof.ridgeY - 0.1 : planeRoof ? planeRoof.ridgeY - 0.1 : 0)
     push({ type: 'placeChimney', id: c.id, levelId: l?.id ?? 'lvl-0', footprint: { minX: c.x0, maxX: c.x1, minZ: c.z0, maxZ: c.z1 }, baseOffset: 0, height: round6(top - (l?.elevation ?? 0)), materialId: MATERIALS_V2.chimney }, c.featureId, 'chimneys')
     if (b.mainRoof) {
       // The model cuts a penetration strictly within one slope; a stack that
@@ -512,6 +513,13 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       const straddles = roof.kind === 'GABLE' && across[0] < roof.ridgeAt + 0.01 && across[1] > roof.ridgeAt - 0.01
       if (straddles) notes.push(`${c.id} straddles the ridge at ${roof.ridgeAt}: placed through the roof without a penetration cut, which the model confines to one slope`)
       else push({ type: 'cutRoofOpening', id: `${c.id}-pen`, roofId: 'roof-main', kind: 'PENETRATION', footprint: { minX: c.x0, maxX: c.x1, minZ: c.z0, maxZ: c.z1 }, throughId: c.id }, c.featureId, 'roofOpenings')
+    } else if (planeRoof) {
+      // 005Y-N1: under a plane roof the penetration is cut plumb in the one plane that holds the whole stack (a plane
+      // takes vertical cuts only); a stack over a hip or the ridge is placed through without a cut, and noted.
+      const corners = [{ x: c.x0, z: c.z0 }, { x: c.x1, z: c.z0 }, { x: c.x1, z: c.z1 }, { x: c.x0, z: c.z1 }]
+      const plane = planeRoof.layout.planes.find((pl) => corners.every((q) => insidePolygon(q, pl.boundary)))
+      if (plane) push({ type: 'cutRoofOpening', id: `${c.id}-pen`, roofId: planeRoofPlaneId(planeRoof.massId, plane.key), kind: 'PENETRATION', footprint: { minX: c.x0, maxX: c.x1, minZ: c.z0, maxZ: c.z1 }, cut: 'VERTICAL', throughId: c.id }, c.featureId, 'roofOpenings')
+      else notes.push(`${c.id} stands over a hip or the ridge of the plane roof: placed through it without a penetration cut, which a plane confines to itself`)
     }
     evidence(c.id, c.provenance, c.why, { height: c.topY === undefined ? 'ASSUMED_FOR_RENDERING' : 'IMAGE_METRIC_REGISTERED' })
   }
@@ -619,4 +627,18 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
   }
 
   return { program, bindings, notes, dropped, topology }
+}
+
+/** 005Y-N1: a plan point inside (or on the edge of) a polygon, by crossings; the edge counts as inside. */
+function insidePolygon(p: { x: number; z: number }, poly: ReadonlyArray<{ x: number; z: number }>): boolean {
+  const eps = 1e-6
+  let inside = false
+  for (let i = 0, j = poly.length - 1; i < poly.length; j = i, i += 1) {
+    const a = poly[i]
+    const b = poly[j]
+    const cross = (b.x - a.x) * (p.z - a.z) - (b.z - a.z) * (p.x - a.x)
+    if (Math.abs(cross) <= eps && p.x >= Math.min(a.x, b.x) - eps && p.x <= Math.max(a.x, b.x) + eps && p.z >= Math.min(a.z, b.z) - eps && p.z <= Math.max(a.z, b.z) + eps) return true
+    if (a.z > p.z !== b.z > p.z && p.x < ((b.x - a.x) * (p.z - a.z)) / (b.z - a.z) + a.x) inside = !inside
+  }
+  return inside
 }

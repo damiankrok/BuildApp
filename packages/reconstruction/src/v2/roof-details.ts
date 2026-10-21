@@ -11,7 +11,7 @@
  */
 import { round6 } from '@buildapp/source-common'
 import type { Raster } from '@buildapp/source-cv'
-import type { CalloutReading } from '@buildapp/source-metrics'
+import type { CalloutReading, CalloutRingRecord } from '@buildapp/source-metrics'
 import type { ElevationFrameV2, PlanFrameV2 } from './frame.js'
 import { inkRuns, lumaAt, mergeRuns, toneClass, rgbAt } from './scan.js'
 import type { SolidBlock } from './interior.js'
@@ -76,6 +76,173 @@ export function registerSection(raster: Raster, mppHint: number, zeroRow: number
     pxOf: (along) => round6(originCol + along / mpp),
     pyOf: (y) => round6(zeroRow - y / mpp),
   }
+}
+
+/** 005Y-N1: the largest disagreement between a section's wall-span scale and its two printed levels' scale. */
+export const SECTION_TWO_ANCHOR_TOLERANCE = 0.05
+
+/**
+ * 005Y-N1: a section the metric reading could not scale by a ladder of levels (it read too few to check one) is
+ * registered for the chimneys alone by two independent anchors: its wall columns matched to the plan's span (the
+ * horizontal scale, `registerSection`) and two printed levels on their marker rules (the vertical scale). Taken only
+ * when the two scales agree within `SECTION_TWO_ANCHOR_TOLERANCE`; y = 0 is then placed from the more confident level at
+ * the walls' scale. Nothing else is read on a section registered this way.
+ */
+export function registerSectionByTwoAnchors(
+  raster: Raster,
+  levels: ReadonlyArray<{ value: number; row: number; confidence: number }>,
+  spans: Array<{ axis: 'X' | 'Z'; from: number; to: number }>,
+  frameId: string,
+): { section: SectionFrame; why: string } | undefined {
+  const ranked = [...levels].filter((l) => l.confidence >= 0.5).sort((a, b) => b.confidence - a.confidence)
+  const a = ranked[0]
+  const b = ranked.find((l) => Math.abs(l.value - (a?.value ?? 0)) >= 1 && Math.abs(l.row - (a?.row ?? 0)) >= 20)
+  if (!a || !b) return undefined
+  const hint = Math.abs(a.value - b.value) / Math.abs(a.row - b.row)
+  const register = (zeroRow: number): SectionFrame | undefined => registerSection(raster, hint, zeroRow, spans, frameId) ?? registerSectionBySlab(raster, hint, zeroRow, spans, frameId)
+  const first = register(a.row + a.value / hint)
+  if (!first || Math.abs(first.mpp / hint - 1) > SECTION_TWO_ANCHOR_TOLERANCE) return undefined
+  const section = register(a.row + a.value / first.mpp)
+  if (!section) return undefined
+  return { section, why: `the walls' outer faces give ${section.mpp.toFixed(6)} m/px against the plan's span, the printed levels ${a.value} and ${b.value} ${hint.toFixed(6)} m/px (${(Math.abs(section.mpp / hint - 1) * 100).toFixed(1)} % apart)` }
+}
+
+/**
+ * 005Y-N1: the outer faces of a section's walls where no wall is drawn as one long column (a single storey cut through
+ * its windows): the widest slab — rows of solid ink at least 0.12 m thick whose longest dark span is the same within
+ * 3 px, at least 3 m long at the hint's scale — runs from outer face to outer face. A span joins dark runs across gaps
+ * of up to 0.6 m (a watermark printed over the slab breaks it) and is at least 70 % ink. Its width is matched to the
+ * plan's span as `registerSection` matches the walls'.
+ */
+function registerSectionBySlab(raster: Raster, mppHint: number, zeroRow: number, spans: Array<{ axis: 'X' | 'Z'; from: number; to: number }>, frameId: string): SectionFrame | undefined {
+  const maxGap = Math.max(6, Math.round(0.6 / mppHint))
+  const longest: Array<{ from: number; to: number }> = []
+  for (let y = 0; y < raster.height; y += 1) {
+    const runs: Array<{ from: number; to: number }> = []
+    let start = -1
+    for (let x = 0; x <= raster.width; x += 1) {
+      const dark = x < raster.width && lumaAt(raster, x, y) < 90
+      if (dark && start < 0) start = x
+      if (!dark && start >= 0) {
+        runs.push({ from: start, to: x - 1 })
+        start = -1
+      }
+    }
+    let best = { from: 0, to: -1 }
+    for (let i = 0; i < runs.length; i += 1) {
+      let ink = 0
+      for (let j = i; j < runs.length; j += 1) {
+        if (j > i && runs[j].from - runs[j - 1].to - 1 > maxGap) break
+        ink += runs[j].to - runs[j].from + 1
+        const span = { from: runs[i].from, to: runs[j].to }
+        if (ink >= 0.7 * (span.to - span.from + 1) && span.to - span.from > best.to - best.from) best = span
+      }
+    }
+    longest.push(best)
+  }
+  const minRun = 3 / mppHint
+  const minRows = Math.max(3, Math.round(0.12 / mppHint))
+  let slab: { from: number; to: number } | undefined
+  for (let y = 0; y < longest.length; ) {
+    const r = longest[y]
+    if (r.to - r.from + 1 < minRun) {
+      y += 1
+      continue
+    }
+    let k = y + 1
+    while (k < longest.length && Math.abs(longest[k].from - r.from) <= 3 && Math.abs(longest[k].to - r.to) <= 3) k += 1
+    if (k - y >= minRows && (!slab || r.to - r.from > slab.to - slab.from)) slab = r
+    y = k
+  }
+  if (!slab) return undefined
+  const left = slab.from
+  const right = slab.to + 1
+  const widthM = (right - left) * mppHint
+  const match = spans.map((sp) => ({ sp, err: Math.abs(sp.to - sp.from - widthM) })).sort((p, q) => p.err - q.err)[0]
+  if (!match || match.err > 0.6) return undefined
+  const mpp = (match.sp.to - match.sp.from) / (right - left)
+  const originCol = left - match.sp.from / mpp
+  return {
+    frameId,
+    mpp,
+    zeroRow,
+    originCol: round6(originCol),
+    axis: match.sp.axis,
+    yOf: (py) => round6((zeroRow - py) * mpp),
+    alongOf: (px) => round6((px - originCol) * mpp),
+    pxOf: (along) => round6(originCol + along / mpp),
+    pyOf: (y) => round6(zeroRow - y / mpp),
+  }
+}
+
+/** 005Y-N1: a stack on a section: at least this tall above the roof, its sides broken by no more than this many rows (a hatch line drawn across it). */
+export const SECTION_STACK_MIN_M = 0.3
+const SECTION_STACK_MAX_BREAK_ROWS = 2
+/** 005Y-N1: a section's thin outline ink (stacks are drawn lighter than the cut). */
+const SECTION_LINE_BELOW = 215
+
+/**
+ * 005Y-N1: a chimney stack the section draws above the roof over a plan block. Upward from where the roof meets the
+ * block, a row is a stack's when it has outline ink on each side of the block's centre — within 0.3 m outside the
+ * block's edges, the two at least half the block's width apart — and paper (at least 80 %) between them. The stack
+ * stands when the longest run of such rows (broken by at most `SECTION_STACK_MAX_BREAK_ROWS`) starts within 0.15 m
+ * above the roof line the section draws over the block's centre — which must lie within 1 m of the model's roof there —
+ * and is at least `SECTION_STACK_MIN_M` tall; its top is the run's top row. Nothing under the drawn roof counts. The block's edges are the plan's;
+ * the stack drawn on the section may be wider (its cladding), never elsewhere.
+ */
+export function sectionStackOver(raster: Raster, section: SectionFrame, along: { from: number; to: number }, roofY: number): { topY: number; heightM: number } | undefined {
+  const p0 = section.pxOf(along.from)
+  const p1 = section.pxOf(along.to)
+  const a = Math.min(p0, p1)
+  const b = Math.max(p0, p1)
+  if (b - a < 4) return undefined
+  const centre = Math.round((a + b) / 2)
+  const reach = 0.3 / section.mpp
+  const lo = Math.max(0, Math.floor(a - reach))
+  const hi = Math.min(raster.width - 1, Math.ceil(b + reach))
+  const isInk = (x: number, y: number): boolean => lumaAt(raster, x, y) < SECTION_LINE_BELOW
+  const stackRow = (y: number): boolean => {
+    let left = -1
+    for (let x = centre; x >= lo; x -= 1) if (isInk(x, y)) { left = x; break }
+    let right = -1
+    for (let x = centre + 1; x <= hi; x += 1) if (isInk(x, y)) { right = x; break }
+    if (left < 0 || right < 0 || right - left < 0.5 * (b - a)) return false
+    let paper = 0
+    for (let x = left + 1; x < right; x += 1) if (!isInk(x, y)) paper += 1
+    return paper >= 0.8 * Math.max(1, right - left - 1)
+  }
+  // The roof as the section draws it over the block's centre: the first thick cut line from the top. Only what stands
+  // above it is a stack (an attic's struts and flues below it are not), and it must be the roof the model has there.
+  let roofRow = -1
+  for (let y = 0, run = 0; y < raster.height; y += 1) {
+    run = lumaAt(raster, centre, y) < 90 ? run + 1 : 0
+    if (run >= 3) {
+      roofRow = y - 2
+      break
+    }
+  }
+  if (roofRow < 0 || Math.abs(section.yOf(roofRow) - roofY) > 1) return undefined
+  const start = roofRow - 1
+  const stop = Math.max(0, Math.round(section.pyOf(roofY + 4)))
+  const leadIn = Math.round(0.15 / section.mpp)
+  let best: { bottom: number; top: number } | undefined
+  let runBottom = -1
+  let misses = 0
+  for (let y = start; y >= stop; y -= 1) {
+    if (stackRow(y)) {
+      if (runBottom < 0) runBottom = y
+      misses = 0
+      if (runBottom >= start - leadIn && (!best || runBottom - y > best.bottom - best.top)) best = { bottom: runBottom, top: y }
+    } else if (runBottom >= 0 && misses < SECTION_STACK_MAX_BREAK_ROWS) misses += 1
+    else {
+      runBottom = -1
+      misses = 0
+    }
+  }
+  if (!best) return undefined
+  const heightM = (best.bottom - best.top + 1) * section.mpp
+  if (heightM < SECTION_STACK_MIN_M) return undefined
+  return { topY: round6(section.yOf(best.top)), heightM: round6(heightM) }
 }
 
 export type AttachedRoofReading = {
@@ -348,6 +515,8 @@ export type ChimneyReading = {
   topY?: number
   storeysSeen: number[]
   renderFrames: string[]
+  /** 005Y-N1: the section that draws its stack above the roof, when that is what confirms it. */
+  sectionFrameId?: string
   confidence: number
   why: string
 }
@@ -357,7 +526,8 @@ export type ChimneyReading = {
  * that has a plan, and rise above the roof line on a render whose columns
  * cover them.
  */
-export function readChimneys(blocksByStorey: ReadonlyArray<{ storeyIndex: number; blocks: readonly SolidBlock[] }>, views: ReadonlyArray<{ view: ElevationFrameV2; raster: Raster }>, roofTopY: (x: number, z: number) => number): ChimneyReading[] {
+export function readChimneys(blocksByStorey: ReadonlyArray<{ storeyIndex: number; blocks: readonly SolidBlock[] }>, views: ReadonlyArray<{ view: ElevationFrameV2; raster: Raster }>, roofTopY: (x: number, z: number) => number, trace?: (record: Record<string, unknown>) => void): ChimneyReading[] {
+  if (trace) for (const s of blocksByStorey) for (const b of s.blocks) trace({ kind: 'SOLID_BLOCK', storey: s.storeyIndex, rect: { x0: b.x0, z0: b.z0, x1: b.x1, z1: b.z1 } })
   const top = blocksByStorey.reduce((a, b) => (b.storeyIndex > a.storeyIndex ? b : a), blocksByStorey[0])
   if (!top) return []
   const out: ChimneyReading[] = []
@@ -390,6 +560,7 @@ export function readChimneys(blocksByStorey: ReadonlyArray<{ storeyIndex: number
         topY = topY === undefined ? yTop : (topY + yTop) / 2
       }
     }
+    trace?.({ kind: 'CHIMNEY_BLOCK', storey: top.storeyIndex, rect: { x0: block.x0, z0: block.z0, x1: block.x1, z1: block.z1 }, storeysSeen, renderFrames, viewsTried: views.map((v) => v.view.registration.frameId), decision: storeysSeen.length < Math.min(2, blocksByStorey.length) && renderFrames.length === 0 ? 'REJECTED' : 'READ', reason: storeysSeen.length < Math.min(2, blocksByStorey.length) && renderFrames.length === 0 ? 'on one storey only and above the roof on no registered render' : undefined })
     if (storeysSeen.length < Math.min(2, blocksByStorey.length) && renderFrames.length === 0) continue
     out.push({
       id: `chimney-${out.length}`,
@@ -532,6 +703,21 @@ const ROOFLIGHT_WIDTH_M = { min: 0.3, max: 1.6 } as const
 const ROOFLIGHT_LENGTH_M = { min: 0.4, max: 2.0 } as const
 
 /**
+ * 005Y-N1: a ring the metric reading's recogniser read (`calloutRings`, schema 1.9.0) reads what it read: the reading at
+ * the same centre on the same frame (within `RING_MATCH_PX`) whose two halves both passed the recogniser's gate replaces
+ * the template's halves. Every other ring is returned as it was. The ring's circle and bar are the finder's own.
+ */
+export const RING_MATCH_PX = 2.5
+export function withRecognisedHalves(callouts: ReadonlyArray<CalloutReading>, frameId: string, rings: ReadonlyArray<CalloutRingRecord> | undefined): CalloutReading[] {
+  const own = (rings ?? []).filter((r) => r.frameId === frameId && r.accepted)
+  return callouts.map((c) => {
+    const r = own.find((k) => Math.hypot(k.centrePx.x - c.circle.cx, k.centrePx.y - c.circle.cy) <= RING_MATCH_PX)
+    if (!r || r.width.valueCm === undefined || r.height.valueCm === undefined) return c
+    return { ...c, upperText: r.width.text, lowerText: r.height.text, widthCm: r.width.valueCm, heightCm: r.height.valueCm, why: `${c.why}; the recogniser read ${r.width.text}/${r.height.text} (${r.id})` }
+  })
+}
+
+/**
  * 005X: rooflights from the plan of the storey under the roof. A plan states a rooflight the way it states a window: a
  * `width / length` callout, here standing inside the storey rather than beside a wall, on the part of the floor a slope
  * covers. Each callout read as a coherent pair, split by its bar, whose centre lies inside the storey's walls and whose
@@ -546,18 +732,33 @@ export function readPlanRooflights(
   body: { x0: number; z0: number; x1: number; z1: number },
   wallThicknessM: number,
   roof: { ridgeAxis: 'X' | 'Z'; ridgeAt: number; pitchDeg: number; eaveY: number },
+  /** 005Y-N1: diagnostics only (FEATURE_DEBUG): every ring and what became of it. Write-only. */
+  trace?: (record: Record<string, unknown>) => void,
 ): PlanRooflightReading[] {
   const tan = Math.tan((roof.pitchDeg * Math.PI) / 180)
   const cos = Math.cos((roof.pitchDeg * Math.PI) / 180)
   const out: PlanRooflightReading[] = []
   for (const c of callouts) {
-    if (c.widthCm === null || c.heightCm === null || !c.bar) continue
+    const base = trace ? { kind: 'ROOFLIGHT_RING', frameId: plan.frameId, calloutId: c.id, circle: c.circle, upperText: c.upperText, lowerText: c.lowerText, widthCm: c.widthCm, heightCm: c.heightCm, bar: !!c.bar, world: plan.toWorld(c.circle.cx, c.circle.cy) } : undefined
+    const reject = (reason: string): void => {
+      if (base) trace?.({ ...base, decision: 'REJECTED', reason })
+    }
+    if (c.widthCm === null || c.heightCm === null || !c.bar) {
+      reject(!c.bar ? 'no bar' : 'the halves were not read as one coherent pair')
+      continue
+    }
     const widthM = c.widthCm / 100
     const lengthM = c.heightCm / 100
-    if (widthM < ROOFLIGHT_WIDTH_M.min || widthM > ROOFLIGHT_WIDTH_M.max || lengthM < ROOFLIGHT_LENGTH_M.min || lengthM > ROOFLIGHT_LENGTH_M.max) continue
+    if (widthM < ROOFLIGHT_WIDTH_M.min || widthM > ROOFLIGHT_WIDTH_M.max || lengthM < ROOFLIGHT_LENGTH_M.min || lengthM > ROOFLIGHT_LENGTH_M.max) {
+      reject(`${c.widthCm}/${c.heightCm} is not a rooflight's size (width ${ROOFLIGHT_WIDTH_M.min}..${ROOFLIGHT_WIDTH_M.max} m, length ${ROOFLIGHT_LENGTH_M.min}..${ROOFLIGHT_LENGTH_M.max} m)`)
+      continue
+    }
     const centre = plan.toWorld(c.circle.cx, c.circle.cy)
     const inside = centre.x > body.x0 + wallThicknessM && centre.x < body.x1 - wallThicknessM && centre.z > body.z0 + wallThicknessM && centre.z < body.z1 - wallThicknessM
-    if (!inside) continue
+    if (!inside) {
+      reject('its centre is not inside the storey walls')
+      continue
+    }
     const along = roof.ridgeAxis === 'X' ? centre.x : centre.z
     const across = roof.ridgeAxis === 'X' ? centre.z : centre.x
     const slope: 'LOW' | 'HIGH' = across < roof.ridgeAt ? 'LOW' : 'HIGH'
@@ -566,7 +767,11 @@ export function readPlanRooflights(
     // Up the slope: centred on the callout, kept between the wall plane and the ridge.
     const lo = slope === 'LOW' ? eaveAlong + 0.05 : roof.ridgeAt + 0.05
     const hi = slope === 'LOW' ? roof.ridgeAt - 0.05 : eaveAlong - 0.05
-    if (hi - lo < depth) continue
+    if (hi - lo < depth) {
+      reject('the slope is too short for its plan depth')
+      continue
+    }
+    if (base) trace?.({ ...base, decision: 'READ', slope: across < roof.ridgeAt ? 'LOW' : 'HIGH' })
     const from = Math.min(Math.max(across - depth / 2, lo), hi - depth)
     const to = from + depth
     const heightAt = (a: number): number => roof.eaveY + Math.abs(a - eaveAlong) * tan

@@ -56,7 +56,9 @@ for (const asset of pkg.assets) {
 }
 const identity = identityOf(pkg, [archonAdapter, genericProjectPageAdapter])
 try {
+  const features: string[] = []
   const r = reconstructV2({
+    ...(process.env.FEATURE_DEBUG ? { featureTrace: (rec: Record<string, unknown>) => features.push(JSON.stringify(rec)) } : {}),
     debug: (line) => {
       if (grep.test(line)) console.log(`debug ${line}`)
     },
@@ -75,6 +77,7 @@ try {
   writeFileSync(join(out, 'model.json'), modelText)
   const summary = { outcome: 'COMPLETED', steps: r.steps.filter((x) => grep.test(x.what)).map((x) => `${x.what}: ${x.detail}`), modelSha256: createHash('sha256').update(modelText).digest('hex'), chimneys: r.model.chimneys.length, unresolved: r.unresolved.filter((u) => /chimney/i.test(u.what)).map((u) => ({ status: u.status, what: u.what, reason: u.reason })) }
   writeFileSync(join(out, 'summary.json'), JSON.stringify(summary, null, 1) + '\n')
+  if (process.env.FEATURE_DEBUG) writeFileSync(join(out, 'feature-trace.jsonl'), features.join('\n') + '\n')
   // 005Y: each elevation's registration (its scale, the span it was matched to, where its ground lands) and the section's
   const regs = r.registrations as unknown as { elevations: Array<Record<string, unknown>>; section?: Record<string, unknown> }
   writeFileSync(join(out, 'registrations.json'), JSON.stringify({ elevations: regs.elevations.map((e) => ({ frameId: e.frameId, side: e.side, mpp: e.mpp, spanM: e.spanM, eavesM: e.eavesM, spanWhy: e.spanWhy, bottomY: e.bottomY, groundErrorM: e.anisotropyCheck, extent: e.extent })), section: regs.section ?? null, steps: r.steps.filter((x) => /regist/.test(x.what)).map((x) => `${x.what}: ${x.detail}`) }, null, 1) + '\n')

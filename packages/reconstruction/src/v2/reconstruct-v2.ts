@@ -38,8 +38,8 @@ import { elevationExtent, garageMouth, planGaps, readWallOpenings, wallAppearanc
 import type { OpeningV2, WallHost } from './openings-v2.js'
 import { planeRoofLayout } from './plane-roof.js'
 import type { RoofEnd } from './plane-roof.js'
-import { readAttachedRoof, readEavesOverhang, readChimneys, readPlanRooflights, readRooflights, registerSection } from './roof-details.js'
-import type { PlanRooflightReading, RooflightReading } from './roof-details.js'
+import { readAttachedRoof, readEavesOverhang, readChimneys, readPlanRooflights, readRooflights, registerSection, registerSectionByTwoAnchors, sectionStackOver, withRecognisedHalves } from './roof-details.js'
+import type { PlanRooflightReading, RooflightReading, SectionFrame } from './roof-details.js'
 import { readFasciaBand, readRailing, readVergeMember } from './facade.js'
 import type { FacadeAssemblyHypothesis, FacadeMember } from './facade.js'
 import { skyMask, solvePerspectiveCamera } from './camera.js'
@@ -99,6 +99,8 @@ export type ReconstructionV2Options = {
   frameFilter?: (frame: SourceCoordinateFrame) => boolean
   /** Diagnostic lines from the readers, for a developer watching a run; never part of the result. */
   debug?: (message: string) => void
+  /** 005Y-N1: diagnostics only (FEATURE_DEBUG): candidate features and why each was kept or dropped. Write-only: the model is the same with it and without. */
+  featureTrace?: (record: Record<string, unknown>) => void
   /** The model's id; defaults to `m-auto-v2-<slug>`. Two sealed candidates of one project side by side need two. */
   modelId?: string
   /**
@@ -587,6 +589,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const raster = frame ? options.raster(frame) : undefined
     if (!frame || !raster || ridgeY === undefined) continue
     let reg = registerElevationV2({ id: r.frameId, assetId: r.assetId }, r.extent, r.side, r.sideConfidence, r.sideWhy, world, ridgeY, sideEaves, terrain, false, sectionEaves?.overhangM)
+    options.debug?.(`elevation-registration ${r.side} ${r.frameId} extent ${r.extent.x0},${r.extent.y0}..${r.extent.x1},${r.extent.y1} ridge ${ridgeY} terrain ${terrain} -> ${reg ? `${reg.mpp} m/px ground ${reg.bottomY}` : 'none'}`)
     // 005V-N4: a silhouette that fits no span of the house may take in what stands beside it (a pergola) or a roof's
     // overhang. The walls are then looked for as a repeated band of neutral pixels across the silhouette, scaled by the
     // walled width alone; the apex stays the ridge datum, and only a band whose ground then lands on the terrain within
@@ -1155,7 +1158,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         // 005V: a top-storey wall of the main body parallel to the ridge stops where the roof's underside meets it.
         const underEaves = !gable && mainRoof && m.id === main.id && index === topStorey ? round6(mainRoof.eaveY - mainRoof.thicknessM / Math.cos((mainRoof.pitchDeg * Math.PI) / 180)) : undefined
         const host: WallHost = { massId: m.id, facade, planeAt, from, to, centreAt: round6(planeAt + (inward * T) / 2), storeyIndex: index, ...(gable ? { gable } : {}), ...(underEaves !== undefined ? { eaveTopY: underEaves } : {}), floorY: l.elevation, storeyHeightM: gable ? round6(mainRoof!.ridgeY - l.elevation) : l.height }
-        const found = readWallOpenings({ onBandViewAccepted: (frameId) => acceptedBandViews.add(frameId), plan: entry.frame, planRaster: entry.raster, host, wallThicknessM: T, callouts, views: [...viewsOf(facade), ...openingOnlyViews.filter((v) => v.view.side === (facade === 'WEST' ? 'LEFT' : facade === 'EAST' ? 'RIGHT' : facade))].map((v) => openingViewOverrides.get(v.view.registration.frameId) ?? v), attachedSingleStorey: m.role === 'ATTACHED' && m.storeys.length === 1, onRefused: (r) => gap({ what: `the gap ${r.interval[0].toFixed(2)}..${r.interval[1].toFixed(2)} on the ${facade.toLowerCase()} wall of ${m.id}, storey ${index}`, reason: r.why, status: 'REFUSED', observationIds: [], evidenceIds: [] }), ...(vehicleMouths.has(`${m.id}:${facade}`) && index === 0 ? { vehicleMouth: vehicleMouths.get(`${m.id}:${facade}`) } : {}), index: hostIndex++ })
+        const found = readWallOpenings({ ...(options.featureTrace ? { trace: options.featureTrace } : {}), onBandViewAccepted: (frameId) => acceptedBandViews.add(frameId), plan: entry.frame, planRaster: entry.raster, host, wallThicknessM: T, callouts, views: [...viewsOf(facade), ...openingOnlyViews.filter((v) => v.view.side === (facade === 'WEST' ? 'LEFT' : facade === 'EAST' ? 'RIGHT' : facade))].map((v) => openingViewOverrides.get(v.view.registration.frameId) ?? v), attachedSingleStorey: m.role === 'ATTACHED' && m.storeys.length === 1, onRefused: (r) => gap({ what: `the gap ${r.interval[0].toFixed(2)}..${r.interval[1].toFixed(2)} on the ${facade.toLowerCase()} wall of ${m.id}, storey ${index}`, reason: r.why, status: 'REFUSED', observationIds: [], evidenceIds: [] }), ...(vehicleMouths.has(`${m.id}:${facade}`) && index === 0 ? { vehicleMouth: vehicleMouths.get(`${m.id}:${facade}`) } : {}), index: hostIndex++ })
         for (const o of found) {
           // A gap on a face another body stands against is a door between the two bodies, not a facade opening.
           const other = masses.find((xm) => {
@@ -1198,6 +1201,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const raster = options.raster(sectionFrame)
     const reg = metrics.coordinateRegistrations.find((r) => r.frameId === sectionFrame.id && r.plane === 'SECTION_HY')
     if (raster && reg) sectionReg = registerSection(raster, reg.metresPerPixelY, reg.originPx.y, [{ axis: 'X', from: world.envelope.x0, to: world.envelope.x1 }, { axis: 'Z', from: world.walled.z0, to: world.walled.z1 }], sectionFrame.id, ridgeY)
+    options.debug?.(`section-registration ${sectionFrame.id} ladder ${reg ? `${reg.metresPerPixelY} m/px zero ${reg.originPx.y}` : 'none'} -> ${sectionReg ? `${sectionReg.mpp} m/px origin ${sectionReg.originCol} axis ${sectionReg.axis}` : 'none'}`)
     if (sectionReg) step({ stage: 'registration', what: 'section registered by its wall columns', method: 'DIRECT', detail: `${sectionReg.mpp.toFixed(6)} m/px, a cross-section along ${sectionReg.axis}`, inputs: 1, outputs: 1 })
     // 005Y: the main roof's eaves projection, where the section cuts across its ridge (its own walls give its scale).
     if (raster && mainRoof) {
@@ -1292,13 +1296,37 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     return mainRoof.ridgeY - Math.min(half, Math.abs(across - mainRoof.ridgeAt)) * tan
   }
   const chimneyViews = views.filter((v) => (mainRoof?.ridgeAxis === 'Z' ? v.view.side === 'FRONT' || v.view.side === 'REAR' : v.view.side === 'LEFT' || v.view.side === 'RIGHT'))
-  const chimneyReadings = readChimneys(interior.filter((i) => masses.find((m) => i.walls.some((w) => w.id.startsWith(m.id)) || true)).map((i) => ({ storeyIndex: i.storeyIndex, blocks: i.blocks })), chimneyViews, roofTopY).filter((c) => c.renderFrames.length > 0 || c.storeysSeen.length >= 2)
+  // 005Y-N1: the section that confirms a chimney the plans show on one storey only: the ladder-registered one, or one
+  // registered by two independent anchors for this alone (`registerSectionByTwoAnchors`).
+  const chimneySection = ((): { section: SectionFrame; raster: Raster; why: string } | undefined => {
+    const raster = sectionFrame ? options.raster(sectionFrame) : undefined
+    if (!sectionFrame || !raster) return undefined
+    if (sectionReg) return { section: sectionReg, raster, why: 'the section registered by its ladder of levels' }
+    const levels = metrics.evidence
+      .filter((e) => e.kind === 'LEVEL_DATUM' && e.frameId === sectionFrame.id && e.measuredGeometry?.type === 'SEGMENT')
+      .map((e) => ({ value: e.value, row: (e.measuredGeometry as { a: { y: number } }).a.y, confidence: e.confidence }))
+    // The walls' outer faces: the walled spans.
+    const two = registerSectionByTwoAnchors(raster, levels, [{ axis: 'X', from: world.walled.x0, to: world.walled.x1 }, { axis: 'Z', from: world.walled.z0, to: world.walled.z1 }], sectionFrame.id)
+    options.debug?.(`chimney-section ${two ? two.why : 'none'}`)
+    return two ? { section: two.section, raster, why: two.why } : undefined
+  })()
+  const chimneyReadings = readChimneys(interior.filter((i) => masses.find((m) => i.walls.some((w) => w.id.startsWith(m.id)) || true)).map((i) => ({ storeyIndex: i.storeyIndex, blocks: i.blocks })), chimneyViews, roofTopY, options.featureTrace).flatMap((c) => {
+    if (c.renderFrames.length > 0 || c.storeysSeen.length >= 2) return [c]
+    // 005Y-N1: a block on one storey only, above the roof on no registered render, stands when the section draws a stack
+    // over it above the roof — the section is a drawing of the house, as the plans are.
+    const s = chimneySection
+    const stack = s ? sectionStackOver(s.raster, s.section, s.section.axis === 'X' ? { from: c.x0, to: c.x1 } : { from: c.z0, to: c.z1 }, roofTopY((c.x0 + c.x1) / 2, (c.z0 + c.z1) / 2)) : undefined
+    options.featureTrace?.({ kind: 'CHIMNEY_BLOCK', rect: { x0: c.x0, z0: c.z0, x1: c.x1, z1: c.z1 }, section: s ? { frameId: s.section.frameId, axis: s.section.axis, why: s.why } : null, stack: stack ?? null, decision: stack ? 'READ' : 'REJECTED', reason: stack ? `the section draws a stack ${stack.heightM} m above the roof over it` : `seen on one storey and above the roof on no registered render${s ? ', and the section draws no stack over it' : ', and no section is registered'}` })
+    if (!stack || !s) return []
+    return [{ ...c, topY: stack.topY, sectionFrameId: s.section.frameId, why: `${c.why}; the section draws its stack ${stack.heightM} m above the roof, to ${stack.topY.toFixed(2)} m` }]
+  })
   const chimneys: BuildingV2['chimneys'] = chimneyReadings.map((c) => {
     const sids = c.storeysSeen.map((s) => planByStorey.get(s)).filter((e): e is NonNullable<typeof e> => !!e).map((e) => sighting(e.plan.frame, 'solid block of a chimney', 0.7, [], undefined))
     for (const f of c.renderFrames) {
       const frame = frameById.get(f)
       if (frame) sids.push(sighting(frame, 'chimney above the roof line', 0.7))
     }
+    if (c.sectionFrameId && sectionFrame && sectionFrame.id === c.sectionFrameId) sids.push(sighting(sectionFrame, 'chimney stack above the roof on the section', 0.6))
     const featureId = feature('CHIMNEY', c.id, { x0: { value: c.x0, low: c.x0 - 0.06, high: c.x0 + 0.06 }, z0: { value: c.z0, low: c.z0 - 0.06, high: c.z0 + 0.06 }, ...(c.topY !== undefined ? { topY: { value: c.topY, low: c.topY - 0.1, high: c.topY + 0.1 } } : {}) }, sids, c.renderFrames.length > 0 ? 'SOURCE_CORROBORATED' : 'SOURCE_DERIVED', c.why, { uncertaintyM: 0.06, unresolvedProperties: c.topY === undefined ? ['topY'] : [], parameterProvenance: { topY: c.topY === undefined ? 'ASSUMED_FOR_RENDERING' : 'IMAGE_METRIC_REGISTERED' } })
     if (c.storeysSeen.length >= 2) relate('SAME_FEATURE_AS', sids[0], sids[1], 'the same block on both storeys’ plans')
     return { ...c, featureId, provenance: c.renderFrames.length > 0 ? 'SOURCE_CORROBORATED' : 'SOURCE_DERIVED' }
@@ -1343,9 +1371,10 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       const b = topEntry.frame.toPixel(r.x1, r.z0)
       const region = { x0: Math.min(a.x, b.x), y0: Math.min(a.y, b.y), x1: Math.max(a.x, b.x), y1: Math.max(a.y, b.y) }
       const mpp = (topEntry.frame.mppX + topEntry.frame.mppY) / 2
-      const callouts = readTintedCallouts(topEntry.raster, { region, frameId: topEntry.frame.frameId, minRadiusPx: Math.max(6, 0.15 / mpp), maxRadiusPx: Math.max(10, 0.45 / mpp), requireBar: true, ...(options.checkpoint ? { checkpoint: options.checkpoint } : {}) })
+      // 005Y-N1: a ring the metric reading's recogniser read reads what it read (`withRecognisedHalves`).
+      const callouts = withRecognisedHalves(readTintedCallouts(topEntry.raster, { region, frameId: topEntry.frame.frameId, minRadiusPx: Math.max(6, 0.15 / mpp), maxRadiusPx: Math.max(10, 0.45 / mpp), requireBar: true, ...(options.checkpoint ? { checkpoint: options.checkpoint } : {}) }), topEntry.frame.frameId, metrics.calloutRings)
       for (const c of callouts) { const w = topEntry.frame.toWorld(c.circle.cx, c.circle.cy); options.debug?.(`plan-rooflight ring ${c.widthCm}/${c.heightCm} bar ${!!c.bar} at px ${c.circle.cx.toFixed(0)},${c.circle.cy.toFixed(0)} world ${w.x.toFixed(2)},${w.z.toFixed(2)} body ${r.x0},${r.z0}..${r.x1},${r.z1}`) }
-      planRooflights.push(...readPlanRooflights(callouts, topEntry.frame, r, T, { ridgeAxis: mainRoof.ridgeAxis, ridgeAt: mainRoof.ridgeAt, pitchDeg: mainRoof.pitchDeg, eaveY: mainRoof.eaveY }))
+      planRooflights.push(...readPlanRooflights(callouts, topEntry.frame, r, T, { ridgeAxis: mainRoof.ridgeAxis, ridgeAt: mainRoof.ridgeAt, pitchDeg: mainRoof.pitchDeg, eaveY: mainRoof.eaveY }, options.featureTrace))
       options.debug?.(`plan-rooflights ${callouts.length} rings, ${planRooflights.length} rooflights, ${renderRooflights.length} render patches`)
       step({ stage: 'roof-details', what: 'rooflights stated by the plan under the roof', method: 'DIRECT', detail: `${callouts.length} callout ring${callouts.length === 1 ? '' : 's'} inside the storey, ${planRooflights.length} read as rooflights`, inputs: callouts.length, outputs: planRooflights.length })
     }
@@ -1668,12 +1697,13 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // ---------------------------------------------------------------------------
   // 005Y: a main roof hipped at an end is built as planes (`planeRoofLayout`), its eaves projection kept by laying the
   // planes out over the body grown by the projection with their eaves lowered along the slope. Only a roof nothing else
-  // is bound to as a gable is rebuilt: a chimney cut, a rooflight, a verge member or a roof meeting it keeps the gable
-  // and the hip is named instead.
+  // is bound to as a gable is rebuilt: a rooflight, a verge member or a roof meeting it keeps the gable and the hip is
+  // named instead.
   let planeRoofs: PlaneRoofV2[] | undefined
   let builtMainRoof = mainRoof
   if (mainRoof?.ends) {
-    const bound = [...(chimneys.length > 0 ? ['chimneys'] : []), ...(rooflights.some((r) => !r.planeId) ? ['rooflights'] : []), ...(verges.length > 0 ? ['verge boards'] : []), ...(pitchedAttachedRoofs.length > 0 ? ['attached pitched roofs'] : [])]
+    // 005Y-N1: a chimney no longer holds the roof as a gable: its penetration is cut plumb in the plane it stands in (emit).
+    const bound = [...(rooflights.some((r) => !r.planeId) ? ['rooflights'] : []), ...(verges.length > 0 ? ['verge boards'] : []), ...(pitchedAttachedRoofs.length > 0 ? ['attached pitched roofs'] : [])]
     if (bound.length > 0) gap({ what: 'the hipped ends of the main roof', reason: `${mainRoof.ends.why}, but ${bound.join(', ')} are bound to it as a gable; the gable is kept`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
     else {
       const r = mainRoof

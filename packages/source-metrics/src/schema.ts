@@ -43,7 +43,13 @@ export const METRIC_EVIDENCE_ENSEMBLE_SCHEMA_VERSION = '1.6.0' as const
  */
 export const METRIC_EVIDENCE_TOPOLOGY_SCHEMA_VERSION = '1.7.0' as const
 export const METRIC_EVIDENCE_TOPOLOGY_ENSEMBLE_SCHEMA_VERSION = '1.8.0' as const
-export const SUPPORTED_METRIC_EVIDENCE_VERSIONS = ['1.0.0', '1.1.0', '1.2.0', '1.3.0', '1.4.0', '1.5.0', '1.6.0', '1.7.0', '1.8.0'] as const
+/**
+ * 005Y-N1 (1.9.0): a set in which the recogniser also read the halves of plan callout rings carries each ring it read
+ * (`calloutRings`): the two halves' readings and the gate's verdict on each. A set read without one, or in which no ring
+ * was read, is a 1.7.0 / 1.8.0 set byte for byte.
+ */
+export const METRIC_EVIDENCE_CALLOUT_RING_SCHEMA_VERSION = '1.9.0' as const
+export const SUPPORTED_METRIC_EVIDENCE_VERSIONS = ['1.0.0', '1.1.0', '1.2.0', '1.3.0', '1.4.0', '1.5.0', '1.6.0', '1.7.0', '1.8.0', '1.9.0'] as const
 
 /** Why a crossing mark is doubted or rejected (005D; `TEXT_INK` 005I: label ink beside the line, not a stroke across it). */
 export const DimensionMarkReasonSchema = z.enum(['LIGHTER_THAN_LINE', 'FAINT_SIDE', 'ONE_SIDED', 'WEDGE_NOT_STROKE', 'COLOUR_MISMATCH', 'DUPLICATE', 'STYLE_MISMATCH', 'NO_LINE_REFERENCE', 'TEXT_INK'])
@@ -1036,6 +1042,30 @@ export const NumericLatticeRecordSchema = z
   .strict()
 export type NumericLatticeRecord = z.infer<typeof NumericLatticeRecordSchema>
 
+/** 005Y-N1: one half of a callout ring as the recogniser read it, and what the gate made of it (`callout-recogniser.ts`). */
+const CalloutHalfRecordSchema = z
+  .object({ text: z.string(), valueCm: z.number().positive().optional(), p: ProbabilitySchema, meanP: ProbabilitySchema, stable: z.boolean(), glyphs: z.number().int().nonnegative(), accepted: z.boolean(), why: z.string().min(1) })
+  .strict()
+/** 005Y-N1 (schema 1.9.0): one barred callout ring on a floor plan whose halves the recogniser read. */
+export const CalloutRingRecordSchema = z
+  .object({
+    id: z.string().min(1),
+    frameId: z.string().min(1),
+    centrePx: PixelPointSchema,
+    radiusPx: z.number().positive(),
+    barY: z.number().finite(),
+    /** Which ring finders found it: the dark opening-callout reader, the tinted-ring reader, or both. */
+    finders: z.array(z.enum(['OPENING', 'TINTED'])).min(1),
+    /** The template reader's halves, as it read them. */
+    template: z.object({ upperText: z.string(), lowerText: z.string() }).strict(),
+    width: CalloutHalfRecordSchema,
+    height: CalloutHalfRecordSchema,
+    /** Both halves passed the gate: the ring reads `width.valueCm / height.valueCm`. */
+    accepted: z.boolean(),
+  })
+  .strict()
+export type CalloutRingRecord = z.infer<typeof CalloutRingRecordSchema>
+
 export const MetricEvidenceSetSchema = z
   .object({
     schema: z.literal(METRIC_EVIDENCE_SCHEMA),
@@ -1067,6 +1097,8 @@ export const MetricEvidenceSetSchema = z
     recogniser: RecogniserRecordSchema.optional(),
     /** 1.7.0: each plan frame's dimension topology (005I). */
     dimensionTopology: z.array(DimensionTopologyRecordSchema).optional(),
+    /** 1.9.0: each callout ring the recogniser read (005Y-N1); absent when it read none. */
+    calloutRings: z.array(CalloutRingRecordSchema).optional(),
     contentHash: z.string().regex(/^[0-9a-f]{64}$/),
   })
   .strict()

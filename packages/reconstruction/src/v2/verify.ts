@@ -285,6 +285,12 @@ export function repairFromResiduals(b: BuildingV2, residuals: SourceViewResidual
         refused.push({ featureId: o.id, kind: 'RESIZE_OPENING', why: `${r.kind.toLowerCase()} already comes from a view; a second reading is recorded, not applied` })
         continue
       }
+      // 005Y-N1: a sill assumed under a printed height (the head derived from it) does not move alone: that would change
+      // the printed height. The view's reading is recorded, not applied.
+      if (r.kind === 'OPENING_SILL' && (o.provenance.head === 'SOURCE_EXACT' || o.provenance.head === 'SOURCE_CORROBORATED')) {
+        refused.push({ featureId: o.id, kind: 'RESIZE_OPENING', why: `the height is printed (${(o.headY - o.sillY).toFixed(2)} m); a sill the view reads ${r.residualM.toFixed(2)} m away would change it, so it is recorded, not applied` })
+        continue
+      }
       if (Math.abs(r.residualM) > 1.2) {
         refused.push({ featureId: o.id, kind: 'RESIZE_OPENING', why: `a ${r.residualM.toFixed(2)} m disagreement is not a repair, it is a different reading` })
         continue

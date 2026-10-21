@@ -349,6 +349,8 @@ export type OpeningReadingInput = {
   vehicleMouth?: { from: number; to: number; roomId: string; why: string }
   /** 005V: a gap not built as an opening, and why — reported by the caller as a refusal, never dropped silently. */
   onRefused?: (refusal: { interval: [number, number]; why: string }) => void
+  /** 005Y-N1: diagnostics only (FEATURE_DEBUG): every gap, every callout weighed for it and why, and what it became. Write-only. */
+  trace?: (record: Record<string, unknown>) => void
   /** 005W-N1: told the frame of every band-registered view that passed this wall's check (its gaps read on it). */
   onBandViewAccepted?: (frameId: string) => void
   index: number
@@ -391,6 +393,7 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
     // The gap's own width is the evidence that picks among the reader's width
     // candidates; the height candidates travel on for the elevation to pick among.
     let callout: OpeningV2['callout']
+    const weighed: Array<Record<string, unknown>> = []
     for (const ev of input.callouts) {
       if (!ev.textBox) continue
       const cands = calloutCandidates(ev)
@@ -401,9 +404,17 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
       const alongDistance = Math.abs((along === 'X' ? w.x : w.z) - centre)
       const acrossDistance = Math.abs((along === 'X' ? w.z : w.x) - host.centreAt)
       if (alongDistance > opt.calloutReachM || acrossDistance > opt.calloutReachM) continue
-      if (ev.confidence < 0.2) continue
+      const seen = input.trace ? { evidenceId: ev.id, rawText: ev.rawText, px: [round6(cx), round6(cy)], confidence: ev.confidence, widths: cands.widths.slice(0, 3).map((c) => c.cm), heights: cands.heights.slice(0, 3).map((c) => c.cm), alongM: round6(alongDistance), acrossM: round6(acrossDistance) } : undefined
+      if (ev.confidence < 0.2) {
+        if (seen) weighed.push({ ...seen, decision: 'REJECTED', reason: `confidence ${ev.confidence} < 0.2` })
+        continue
+      }
       const agreeing = cands.widths.slice(0, 3).filter((c) => Math.abs(c.cm / 100 - widthPlan) <= Math.max(0.12, widthPlan * 0.12))
-      if (agreeing.length === 0) continue
+      if (agreeing.length === 0) {
+        if (seen) weighed.push({ ...seen, decision: 'REJECTED', reason: `no width reading within 12 % of the ${widthPlan.toFixed(2)} m gap` })
+        continue
+      }
+      if (seen) weighed.push({ ...seen, decision: 'AGREES' })
       const width = agreeing.reduce((best, c) => (c.score > best.score ? c : best), agreeing[0])
       const distance = round6(Math.hypot(alongDistance, acrossDistance))
       if (callout && callout.distanceM <= distance) continue
@@ -530,6 +541,7 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
       const lowered = round6(host.eaveTopY - EAVE_CLEARANCE_M)
       if (lowered - sillY < MIN_ASSUMED_WINDOW_M) {
         input.onRefused?.({ interval: [lo, hi], why: `a ${widthPlan.toFixed(2)} m gap in the ${host.facade.toLowerCase()} wall of ${host.massId} on storey ${host.storeyIndex}, under the eaves: the wall stops ${(host.eaveTopY - host.floorY).toFixed(2)} m above the floor, too low for the assumed ${(headY - sillY).toFixed(2)} m window from ${(sillY - host.floorY).toFixed(2)} m (a knee wall; no callout or elevation reads an opening there) — not built` })
+        input.trace?.({ kind: 'OPENING_GAP', id: null, frameId: plan.frameId, massId: host.massId, storey: host.storeyIndex, facade: host.facade, pixelRect: gap.pixelRect, intervalM: [round6(lo), round6(hi)], widthPlanM: widthPlan, callouts: weighed, decision: 'REFUSED', reason: 'under the eaves, too low for an assumed window' })
         continue
       }
       unresolved.push(`head lowered from ${(headY - host.floorY).toFixed(2)} to ${(lowered - host.floorY).toFixed(2)} m above the floor, under the eaves (assumed heights)`)
@@ -593,6 +605,7 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
     }
     const mullions = gap.stubs.map(([s0, s1]) => round6(((s0 + s1) / 2 - interval[0]) / widthM)).filter((f) => f > 0.05 && f < 0.95)
     const confidence = round6(Math.min(0.92, 0.5 + (callout ? 0.2 : 0) + (elevation ? 0.15 : 0) + (callout && elevation && prov.head === 'SOURCE_CORROBORATED' ? 0.07 : 0)))
+    input.trace?.({ kind: 'OPENING_GAP', id: `opening-${host.storeyIndex}-${host.facade.toLowerCase()}-${input.index}-${out.length}`, frameId: plan.frameId, massId: host.massId, storey: host.storeyIndex, facade: host.facade, pixelRect: gap.pixelRect, intervalM: [round6(lo), round6(hi)], widthPlanM: widthPlan, callouts: weighed, callout: callout ? { widthCm: callout.widthCm, heightCm: callout.heightCm, evidenceId: callout.evidenceId } : null, elevation: elevation ? { frameId: elevation.frameId, sillY: elevation.sillY, headY: elevation.headY } : null, family, provenanceFamily: prov.family, sillY: round6(sillY), headY: round6(headY), unresolved })
     out.push({
       id: `opening-${host.storeyIndex}-${host.facade.toLowerCase()}-${input.index}-${out.length}`,
       storeyIndex: host.storeyIndex,

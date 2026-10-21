@@ -43,7 +43,9 @@ import type { EnsembledLattice as LabelLattice } from './ensemble.js'
 import { labelCrop } from './recogniser.js'
 import type { ExternalReading, LabelCrop, LabelRecogniser } from './recogniser.js'
 import { textAxisOf } from './ocr.js'
-import { readOpeningCallouts } from './callouts.js'
+import { readOpeningCallouts, readTintedCallouts } from './callouts.js'
+import type { CalloutReading } from './callouts.js'
+import { CALLOUT_RECOGNISER_NAME, CALLOUT_RECOGNISER_VERSION, corroborateBySibling, judgeCalloutHalf, ringHalfCrops } from './callout-recogniser.js'
 import type { OcrResult, TextToken } from './ocr.js'
 import { parseNumber, readingLattice } from './parse.js'
 import { registerFrame, solveLevelLadder } from './registration.js'
@@ -52,8 +54,11 @@ import { readSpecifications, SPEC_READER_NAME, SPEC_READER_VERSION } from './spe
 import type { PublishedSpecificationInput } from './specifications.js'
 import { sealMetricEvidence } from './hash.js'
 import type { MetricEvidenceDraft } from './hash.js'
-import { METRIC_EVIDENCE_TOPOLOGY_ENSEMBLE_SCHEMA_VERSION, METRIC_EVIDENCE_TOPOLOGY_SCHEMA_VERSION } from './schema.js'
-import type { Association, ChainRelation, DimensionChain, DimensionObservation, DimensionTopologyRecord, FrameMetricSolution, LabelAssignmentRecord, MetricConflict, MetricEvidence, MetricEvidenceSet, NumericLatticeRecord, OcrToken, RegistrationPlane, UnresolvedMetric } from './schema.js'
+import { METRIC_EVIDENCE_CALLOUT_RING_SCHEMA_VERSION, METRIC_EVIDENCE_TOPOLOGY_ENSEMBLE_SCHEMA_VERSION, METRIC_EVIDENCE_TOPOLOGY_SCHEMA_VERSION } from './schema.js'
+import type { Association, CalloutRingRecord, ChainRelation, DimensionChain, DimensionObservation, DimensionTopologyRecord, FrameMetricSolution, LabelAssignmentRecord, MetricConflict, MetricEvidence, MetricEvidenceSet, NumericLatticeRecord, OcrToken, RegistrationPlane, UnresolvedMetric } from './schema.js'
+
+/** 005Y-N1: the tinted-ring search window on a floor plan with no scale of its own: radius 6 px .. 2.6 % of the sheet's longer side. */
+export const TINTED_SEARCH_WITHOUT_SCALE = { minRadiusPx: 6, maxShareOfSheet: 0.026 } as const
 
 /** 1.4.0 (005I): labels are assigned to chains globally, and label-ink marks are no measurement points. */
 export const METRIC_READER_VERSION = '1.4.0' as const
@@ -345,6 +350,8 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
   const chainRelations: ChainRelation[] = []
   const numericLattices: NumericLatticeRecord[] = []
   const dimensionTopology: DimensionTopologyRecord[] = []
+  // 005Y-N1: the callout rings the recogniser read.
+  const calloutRings: CalloutRingRecord[] = []
   // 005H: how many labels the external recogniser read; none, and the set is the 1.5.0 set it was before.
   let heard = 0
   // 005E: identical label crops are read once in a run; a hit is verified byte for byte. (Twin copies of a published
@@ -647,14 +654,99 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
     // reconstruction can pick the one its own evidence — the plan gap, the
     // elevation — agrees with.
     if (plane === 'PLAN_XZ') {
-      for (const ring of readOpeningCallouts(raster, { frameId: frame.id, checkpoint })) {
-        if (ring.widthCandidates.length === 0 || ring.heightCandidates.length === 0) continue
+      const openingRings = readOpeningCallouts(raster, { frameId: frame.id, checkpoint })
+      // 005Y-N1: with a recogniser, every barred ring on a floor plan — the dark opening callouts, and the tinted rings
+      // (opening and rooflight callouts printed on a tint) sized as the reconstruction sizes them, 0.15..0.45 m in
+      // radius at this sheet's own scale — has its two halves read by the recogniser in one batch. A ring both of whose
+      // halves pass the gate (`judgeCalloutHalf`) reads what the recogniser read; every other ring keeps the template's
+      // reading.
+      const heardRings = new Map<CalloutReading, CalloutRingRecord>()
+      if (recogniser && frame.roles.document === 'FLOOR_PLAN') {
+        const own = metricSolutions.find((m) => m.frameId === frame.id)
+        const cmpp = own?.cmPerPixelX && own.cmPerPixelY ? (own.cmPerPixelX + own.cmPerPixelY) / 2 : undefined
+        // A plan the metric reading gave no scale of its own (an upper storey is often registered only later, against
+        // the one under it) is searched with a window a share of the sheet: only a search bound, never a measurement —
+        // a ring read here is used only where the reconstruction's own scaled search finds the same ring.
+        const window = cmpp
+          ? { minRadiusPx: Math.max(6, 15 / cmpp), maxRadiusPx: Math.max(10, 45 / cmpp) }
+          : { minRadiusPx: TINTED_SEARCH_WITHOUT_SCALE.minRadiusPx, maxRadiusPx: Math.max(10, Math.round(TINTED_SEARCH_WITHOUT_SCALE.maxShareOfSheet * Math.max(raster.width, raster.height))) }
+        const tinted = readTintedCallouts(raster, { frameId: frame.id, ...window, requireBar: true, checkpoint })
+        type Ring = { reading: CalloutReading; finders: Array<'OPENING' | 'TINTED'>; members: CalloutReading[] }
+        const rings: Ring[] = []
+        for (const [finder, list] of [['OPENING', openingRings], ['TINTED', tinted]] as const)
+          for (const c of list) {
+            if (!c.bar) continue
+            const same = rings.find((k) => Math.hypot(k.reading.circle.cx - c.circle.cx, k.reading.circle.cy - c.circle.cy) < Math.max(k.reading.circle.radiusPx, c.circle.radiusPx))
+            if (same) {
+              if (!same.finders.includes(finder)) same.finders.push(finder)
+              same.members.push(c)
+            } else rings.push({ reading: c, finders: [finder], members: [c] })
+          }
+        if (rings.length > 0) {
+          const ink = inkChannel(raster)
+          const crops: LabelCrop[] = []
+          const cut = rings.map((ring, i) => {
+            const halves = ringHalfCrops(ink, ring.reading.circle, (ring.reading.bar as { y: number }).y, `r${i}`)
+            for (const h of [halves.upper, halves.lower]) if (h) crops.push(h.crop)
+            return halves
+          })
+          const readings: ExternalReading[] = yield { frameId: frame.id, crops }
+          const byKey = new Map(readings.map((r) => [r.key, r]))
+          const records: CalloutRingRecord[] = []
+          const unstableOnly = new Map<string, { width: boolean; height: boolean }>()
+          for (const [i, ring] of rings.entries()) {
+            const { upper, lower } = cut[i]
+            const wr = upper ? byKey.get(upper.crop.key) : undefined
+            const hr = lower ? byKey.get(lower.crop.key) : undefined
+            const width = judgeCalloutHalf(wr, upper?.glyphs ?? 0, 'width')
+            const height = judgeCalloutHalf(hr, lower?.glyphs ?? 0, 'height')
+            // Would the half pass with the bracket's stability granted? (`corroborateBySibling`)
+            const passesButStability = (r: ExternalReading | undefined, glyphs: number, half: 'width' | 'height'): boolean => !!r && !r.stable && judgeCalloutHalf({ ...r, stable: true }, glyphs, half).accepted
+            const c = ring.reading
+            const record: CalloutRingRecord = {
+              id: stableId('callout-ring', 'recogniser', { frameId: frame.id, cx: c.circle.cx, cy: c.circle.cy }),
+              frameId: frame.id,
+              centrePx: { x: c.circle.cx, y: c.circle.cy },
+              radiusPx: c.circle.radiusPx,
+              barY: (c.bar as { y: number }).y,
+              finders: ring.finders,
+              template: { upperText: c.upperText, lowerText: c.lowerText },
+              width,
+              height,
+              accepted: width.accepted && height.accepted,
+            }
+            unstableOnly.set(record.id, { width: passesButStability(wr, upper?.glyphs ?? 0, 'width'), height: passesButStability(hr, lower?.glyphs ?? 0, 'height') })
+            records.push(record)
+          }
+          const lifted = corroborateBySibling(records.map((r) => ({ ...r, unstableOnly: unstableOnly.get(r.id) as { width: boolean; height: boolean } })))
+          for (const [i, ring] of rings.entries()) {
+            const base = records[i]
+            const up = lifted.get(base.id)
+            const record: CalloutRingRecord = up ? { ...base, width: up.width, height: up.height, accepted: true } : base
+            calloutRings.push(record)
+            for (const m of ring.members) heardRings.set(m, record)
+          }
+          // A tinted ring no dark-ring reading stands for is not made an opening's callout: on a storey under the roof it
+          // is as often a roof window's (read by the reconstruction from `calloutRings`), and nothing on this sheet tells
+          // the two apart before the walls are known (005Y-N1: roof-window rings beside a knee wall made windows of its dashes).
+        }
+      }
+      for (const ring of openingRings) {
+        const heardRing = heardRings.get(ring)
+        const recognised = heardRing?.accepted && heardRing.width.valueCm !== undefined && heardRing.height.valueCm !== undefined ? heardRing : undefined
+        if (!recognised && (ring.widthCandidates.length === 0 || ring.heightCandidates.length === 0)) continue
         const centre: PixelPoint = { x: ring.circle.cx, y: ring.circle.cy }
         const near = nearest(observations, ['OPENING', 'WINDOW', 'DOOR', 'OPENING_INTERVAL'], centre)
         const attached = near !== undefined && near.distance <= ring.circle.radiusPx * 6
-        const width = ring.widthCandidates[0]
-        const height = ring.heightCandidates[0]
-        const readable = ring.widthCm !== null && ring.heightCm !== null
+        const heard = recognised
+          ? {
+              width: { text: recognised.width.text, value: recognised.width.valueCm as number, score: recognised.width.p },
+              height: { text: recognised.height.text, value: recognised.height.valueCm as number, score: recognised.height.p },
+            }
+          : undefined
+        const width = heard?.width ?? ring.widthCandidates[0]
+        const height = heard?.height ?? ring.heightCandidates[0]
+        const readable = heard !== undefined || (ring.widthCm !== null && ring.heightCm !== null)
         evidence.push({
           id: stableId('metric', 'callout-ring', { frameId: frame.id, cx: ring.circle.cx, cy: ring.circle.cy }),
           kind: 'OPENING_CALLOUT',
@@ -673,12 +765,18 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
           ocrTokenIds: [],
           observationIds: attached ? [near.observation.id] : [],
           alternatives: [
+            ...(heard && recognised
+              ? [
+                  { value: heard.width.value, unit: 'cm' as const, rawText: heard.width.text, confidence: round6(heard.width.score), why: `width candidate: the recogniser read the upper half as ${heard.width.text} (p ${recognised.width.p}, mean ${recognised.width.meanP}, stable, ${recognised.width.glyphs} glyphs)` },
+                  { value: heard.height.value, unit: 'cm' as const, rawText: heard.height.text, confidence: round6(heard.height.score), why: `height candidate: the recogniser read the lower half as ${heard.height.text} (p ${recognised.height.p}, mean ${recognised.height.meanP}, stable, ${recognised.height.glyphs} glyphs)` },
+                ]
+              : []),
             ...ring.widthCandidates.map((c) => ({ value: c.value, unit: 'cm' as const, rawText: c.text, confidence: round6(Math.min(1, c.score)), why: `width candidate: the upper half read as ${c.text} (match ${c.score})` })),
             ...ring.heightCandidates.map((c) => ({ value: c.value, unit: 'cm' as const, rawText: c.text, confidence: round6(Math.min(1, c.score)), why: `height candidate: the lower half read as ${c.text} (match ${c.score})` })),
           ],
           confidence: round6(Math.min(1, Math.max(0.05, Math.min(width.score, height.score))) * (ring.bar ? 1 : 0.5) * (readable ? 1 : 0.6)),
           provenance: { extractor: 'NUMERIC_OCR', name: `metrics.callout-ring@${METRIC_READER_VERSION}`, detail: ring.why },
-          note: `width ${width.value} cm over height ${height.value} cm, from a ${2 * ring.circle.radiusPx} px ring callout${readable ? '' : ' (halves not read as one coherent pair)'}`,
+          note: `width ${width.value} cm over height ${height.value} cm, from a ${2 * ring.circle.radiusPx} px ring callout${heard ? ', read by the recogniser' : readable ? '' : ' (halves not read as one coherent pair)'}`,
         })
       }
     }
@@ -851,7 +949,7 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
     // 005H: a set in which the recogniser read at least one label says so in its version, its readers and its
     // `recogniser`. 005I: every set carries the dimension topology — 1.8.0 when the recogniser read a label, 1.7.0 when
     // it read nothing (no recogniser, or no dimensioned plan). Before 005I the latter was a 1.5.0 set.
-    schemaVersion: heard > 0 ? METRIC_EVIDENCE_TOPOLOGY_ENSEMBLE_SCHEMA_VERSION : METRIC_EVIDENCE_TOPOLOGY_SCHEMA_VERSION,
+    schemaVersion: calloutRings.length > 0 ? METRIC_EVIDENCE_CALLOUT_RING_SCHEMA_VERSION : heard > 0 ? METRIC_EVIDENCE_TOPOLOGY_ENSEMBLE_SCHEMA_VERSION : METRIC_EVIDENCE_TOPOLOGY_SCHEMA_VERSION,
     sourcePackageId: options.sourcePackageId,
     sourcePackageHash: options.sourcePackageHash,
     observationGraphId: graph.id,
@@ -867,6 +965,7 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
       { name: METRIC_SOLVER_NAME, version: METRIC_SOLVER_VERSION },
       { name: NUMERIC_LATTICE_NAME, version: heard > 0 ? NUMERIC_LATTICE_ENSEMBLE_VERSION : NUMERIC_LATTICE_VERSION },
       ...(heard > 0 ? [{ name: OCR_ENSEMBLE_NAME, version: OCR_ENSEMBLE_VERSION }] : []),
+      ...(calloutRings.length > 0 ? [{ name: CALLOUT_RECOGNISER_NAME, version: CALLOUT_RECOGNISER_VERSION }] : []),
     ],
     ocrTokens: ocrTokens.sort((a, b) => a.id.localeCompare(b.id)),
     evidence: evidence.sort((a, b) => a.id.localeCompare(b.id)),
@@ -879,7 +978,8 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
     metricSolutions: metricSolutions.sort((a, b) => (a.frameId < b.frameId ? -1 : a.frameId > b.frameId ? 1 : 0)),
     chainRelations,
     numericLattices: numericLattices.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)),
-    ...(recogniser && heard > 0 ? { recogniser: { id: recogniser.id, model: { name: recogniser.model.name, sha256: recogniser.model.sha256 }, runtime: recogniser.runtime, ...(recogniser.runtimeSha256 ? { runtimeSha256: recogniser.runtimeSha256 } : {}) } } : {}),
+    ...(calloutRings.length > 0 ? { calloutRings: calloutRings.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)) } : {}),
+    ...(recogniser && (heard > 0 || calloutRings.length > 0) ? { recogniser: { id: recogniser.id, model: { name: recogniser.model.name, sha256: recogniser.model.sha256 }, runtime: recogniser.runtime, ...(recogniser.runtimeSha256 ? { runtimeSha256: recogniser.runtimeSha256 } : {}) } } : {}),
     dimensionTopology: dimensionTopology.sort((a, b) => (a.frameId < b.frameId ? -1 : a.frameId > b.frameId ? 1 : 0)),
   }
   return sealMetricEvidence(draft, options.slug)
