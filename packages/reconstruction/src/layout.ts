@@ -163,6 +163,8 @@ export type StructuralLayoutOptions = {
   checkpoint?: Checkpoint
   /** 005K, experimental: the boundary's drawn-gap rule (`PlanDecompositionOptions.drawnGapRule`). OFF unless asked for. */
   drawnGapRule?: 'OFF' | 'ON'
+  /** 005Y-N2: diagnostics only — told about each region the base plan is weighed in. Write-only. */
+  debug?: (line: string) => void
 }
 
 /** The ink, wall bands and wall thickness of one plan copy: a function of its pixels alone. */
@@ -194,7 +196,7 @@ export type PlanReadingChoice = {
  * handed the publisher's figures to CHECK the layout against; the layout itself never sees them, whatever a caller
  * spreads into its options: every key it may read is named here.
  */
-export const LAYOUT_OPTION_KEYS = ['slug', 'sourcePackageId', 'sourcePackageHash', 'graph', 'metrics', 'raster', 'frameFilter', 'bands', 'plan', 'sheetCache', 'checkpoint', 'drawnGapRule'] as const satisfies ReadonlyArray<keyof StructuralLayoutOptions>
+export const LAYOUT_OPTION_KEYS = ['slug', 'sourcePackageId', 'sourcePackageHash', 'graph', 'metrics', 'raster', 'frameFilter', 'bands', 'plan', 'sheetCache', 'checkpoint', 'drawnGapRule', 'debug'] as const satisfies ReadonlyArray<keyof StructuralLayoutOptions>
 export function layoutOptionsOnly(options: StructuralLayoutOptions): StructuralLayoutOptions {
   const out: Record<string, unknown> = {}
   for (const key of LAYOUT_OPTION_KEYS) if (options[key] !== undefined) out[key] = options[key]
@@ -1564,6 +1566,102 @@ export function ringOfRect(rect: PixelRect, frame: WorldFrame): PlanRing {
   return rectangleRing(round6(Math.min(x0, x1)), round6(Math.min(z0, z1)), round6(Math.max(x0, x1)), round6(Math.max(z0, z1)))
 }
 
+/** 005Y-N2: a pocket between two bay strips of one body (`bayStripsOf`): a recess in the body's face, open at its mouth. */
+export type BayPocket = { bodyRegionId: string; side: PlanSide; rect: PixelRect; why: string }
+
+/**
+ * 005Y-N2: the front of a body reaching its outer face through strips too thin to be bodies of their own.
+ *
+ * A body cut on a line inside the building — the back of an entrance porch, say — leaves the building between that line
+ * and the walls' own face as strips the flood fill encloses, each less deep than two walls and a room between them,
+ * drawn shut across their outer face by wall, windows and a door, and shut towards the pocket between them. They are
+ * weighed for wall on the grid's lines, and a wall standing a hair inside the line, a door between two short piers,
+ * reads as line work there. Such a strip is no body, no terrace and no zone: it is the body's own front. A body's side
+ * takes them when, along that side, every strip lies between the body's face and the face of the walls (`envelope`),
+ * within the body's span; together they cover at least half of it; each is shut along its outer face (closure ≥ 0.62
+ * on every cell); and every stretch between them is a pocket of cells the flood fill reached (not built), shut along
+ * the body's face behind it and at both ends by the strips — a recess. A stretch at either end of the side (a notch at
+ * a corner, an L) does not qualify, and nothing is read on a side whose strips leave one. The body is then the
+ * rectangle to the walls' face, and each pocket a recess in it, open at its mouth on that face.
+ */
+export function bayStripsOf(regions: readonly PlanRegion[], decomposition: PlanDecomposition, frame: WorldFrame, minBodySpanM: number): { regions: PlanRegion[]; pockets: BayPocket[]; traces: string[] } {
+  const envelope = decomposition.envelope?.rect
+  const traces: string[] = []
+  if (!envelope || decomposition.envelope?.outline) return { regions: [...regions], pockets: [], traces }
+  const wallPx = decomposition.wallThickness.px
+  const cellAt = new Map(decomposition.cells.map((c) => [`${c.ix}:${c.iy}`, c]))
+  const walled = (r: PlanRegion): boolean => perimeterWallEvidence(r, decomposition, frame).fraction >= MIN_MASS_WALL_FRACTION
+  const bodies = regions.filter(walled)
+  const loose = regions.filter((r) => !walled(r))
+  const taken = new Set<string>()
+  const grown = new Map<string, PlanRegion>()
+  const pockets: BayPocket[] = []
+  const shut = (cells: ReadonlyArray<{ ix: number; iy: number }>, edge: number): boolean => cells.every((c) => (cellAt.get(`${c.ix}:${c.iy}`)?.edges[edge].closure ?? 0) >= 0.62)
+  for (const body of bodies) {
+    let rect = body.rect
+    let cells = [...body.cells]
+    const whys: string[] = []
+    for (let edge = 0; edge < 4; edge += 1) {
+      const side = SIDE_OF_EDGE[edge]
+      const across = side === 'MIN_X' || side === 'MAX_X'
+      const face = side === 'MIN_Z' ? rect.y0 : side === 'MAX_Z' ? rect.y1 : side === 'MIN_X' ? rect.x0 : rect.x1
+      const outer = side === 'MIN_Z' ? envelope.y0 : side === 'MAX_Z' ? envelope.y1 : side === 'MIN_X' ? envelope.x0 : envelope.x1
+      const depthPx = Math.abs(outer - face)
+      const mpp = across ? frame.metresPerPixelX : frame.metresPerPixelY
+      if (depthPx < wallPx / 2 || depthPx * mpp >= minBodySpanM) continue
+      const [b0, b1] = across ? [rect.y0, rect.y1] : [rect.x0, rect.x1]
+      const inner = (r: PixelRect): number => (side === 'MIN_Z' ? r.y1 : side === 'MAX_Z' ? r.y0 : side === 'MIN_X' ? r.x1 : r.x0)
+      const outerOf = (r: PixelRect): number => (side === 'MIN_Z' ? r.y0 : side === 'MAX_Z' ? r.y1 : side === 'MIN_X' ? r.x0 : r.x1)
+      const spanOf = (r: PixelRect): [number, number] => (across ? [r.y0, r.y1] : [r.x0, r.x1])
+      const found = loose.filter((r) => !taken.has(r.id) && Math.abs(inner(r.rect) - face) <= 1 && Math.abs(outerOf(r.rect) - outer) <= wallPx && spanOf(r.rect)[0] >= b0 - 1 && spanOf(r.rect)[1] <= b1 + 1).sort((p, q) => spanOf(p.rect)[0] - spanOf(q.rect)[0])
+      if (found.length < 2) continue
+      const covered = found.reduce((a, r) => a + spanOf(r.rect)[1] - spanOf(r.rect)[0], 0)
+      // the strips' outer face, every cell of it
+      const outerCells = (r: PlanRegion): Array<{ ix: number; iy: number }> => r.cells.filter((c) => {
+        const cell = cellAt.get(`${c.ix}:${c.iy}`)
+        return !!cell && Math.abs(outerOf(cell.rect) - outerOf(r.rect)) <= 1
+      })
+      const ends = [spanOf(found[0].rect)[0], spanOf(found[found.length - 1].rect)[1]]
+      const reasons: string[] = []
+      if (covered < 0.5 * (b1 - b0)) reasons.push(`the strips cover ${Math.round((100 * covered) / (b1 - b0))}% of the side`)
+      if (Math.abs(ends[0] - b0) > 1 || Math.abs(ends[1] - b1) > 1) reasons.push('the strips leave a stretch at an end of the side: a notch at a corner, not a recess')
+      for (const r of found) if (!shut(outerCells(r), edge)) reasons.push(`${r.id} is not shut along its outer face`)
+      const sidePockets: PixelRect[] = []
+      for (let i = 0; i + 1 < found.length; i += 1) {
+        const a = spanOf(found[i].rect)[1]
+        const b = spanOf(found[i + 1].rect)[0]
+        if (b - a <= 1) continue
+        const pocket: PixelRect = across ? { x0: Math.min(face, outer), x1: Math.max(face, outer), y0: a, y1: b } : { x0: a, x1: b, y0: Math.min(face, outer), y1: Math.max(face, outer) }
+        const inside = decomposition.cells.filter((c) => (c.rect.x0 + c.rect.x1) / 2 > pocket.x0 && (c.rect.x0 + c.rect.x1) / 2 < pocket.x1 && (c.rect.y0 + c.rect.y1) / 2 > pocket.y0 && (c.rect.y0 + c.rect.y1) / 2 < pocket.y1)
+        const backEdge = (edge + 2) % 4
+        const lowEnd = across ? 0 : 3
+        const highEnd = across ? 2 : 1
+        const lowCells = found[i].cells.filter((c) => (across ? cellAt.get(`${c.ix}:${c.iy}`)?.rect.y1 : cellAt.get(`${c.ix}:${c.iy}`)?.rect.x1) === a)
+        const highCells = found[i + 1].cells.filter((c) => (across ? cellAt.get(`${c.ix}:${c.iy}`)?.rect.y0 : cellAt.get(`${c.ix}:${c.iy}`)?.rect.x0) === b)
+        const backCells = inside.filter((c) => Math.abs(inner(c.rect) - face) <= 1)
+        if (inside.length === 0 || inside.some((c) => c.classification === 'BUILT')) reasons.push(`the stretch ${a}..${b} between ${found[i].id} and ${found[i + 1].id} is not an open pocket`)
+        else if (backCells.length === 0 || !shut(backCells, backEdge)) reasons.push(`the pocket ${a}..${b} is not shut along the body's face behind it`)
+        else if (lowCells.length === 0 || highCells.length === 0 || !shut(lowCells, highEnd) || !shut(highCells, lowEnd)) reasons.push(`the pocket ${a}..${b} is not shut at both ends by the strips`)
+        else sidePockets.push(pocket)
+      }
+      if (reasons.length > 0) {
+        traces.push(`bay-strips ${body.id} ${side}: ${found.map((r) => r.id).join(', ')} refused — ${reasons.join('; ')}`)
+        continue
+      }
+      for (const r of found) taken.add(r.id)
+      cells = [...cells, ...found.flatMap((r) => r.cells)]
+      rect = side === 'MIN_Z' ? { ...rect, y0: outer } : side === 'MAX_Z' ? { ...rect, y1: outer } : side === 'MIN_X' ? { ...rect, x0: outer } : { ...rect, x1: outer }
+      const depthM = round6(depthPx * mpp)
+      for (const pocket of sidePockets) pockets.push({ bodyRegionId: body.id, side, rect: pocket, why: `a pocket ${depthM.toFixed(2)} m deep between two strips of the body's ${side.replace('_', ' ').toLowerCase()} side, shut behind and at both ends: a recess open at its mouth on the walls' face` })
+      const why = `its ${side.replace('_', ' ').toLowerCase()} side reaches the walls' face ${depthM.toFixed(2)} m out through ${found.map((r) => r.id).join(', ')} — strips too thin to be bodies, enclosed and shut along their outer face${sidePockets.length > 0 ? `, with ${sidePockets.length} recess${sidePockets.length === 1 ? '' : 'es'} between them` : ''}`
+      whys.push(why)
+      traces.push(`bay-strips ${body.id} ${side}: ${why}`)
+    }
+    if (whys.length > 0) grown.set(body.id, { ...body, rect, cells, metric: { x0: round6(body.metric.x0 + (rect.x0 - body.rect.x0) * frame.metresPerPixelX), z0: round6(body.metric.z0 + (rect.y0 - body.rect.y0) * frame.metresPerPixelY), x1: round6(body.metric.x1 + (rect.x1 - body.rect.x1) * frame.metresPerPixelX), z1: round6(body.metric.z1 + (rect.y1 - body.rect.y1) * frame.metresPerPixelY) }, why: `${body.why}; ${whys.join('; ')}` })
+  }
+  return { regions: regions.filter((r) => !taken.has(r.id)).map((r) => grown.get(r.id) ?? r), pockets, traces }
+}
+
 /** How much of a region's perimeter is drawn as wall rather than as line work. §9's evidence for whether it is a building at all. */
 export function perimeterWallEvidence(region: PlanRegion, decomposition: PlanDecomposition, frame: WorldFrame, closureThreshold = 0.62): { perimeterM: number; walledM: number; fraction: number } {
   const mppX = frame.metresPerPixelX
@@ -1786,10 +1884,16 @@ export function inferStructuralLayout(given: StructuralLayoutOptions): Structura
   if (!baseStorey) return { ...empty, base, frame }
 
   // --- the base storey's regions -------------------------------------------
-  for (const found of built) {
-    const region = options.plan?.faces === 'OUTER_FACE' && options.plan.frameId === base.frame.id ? toOuterFaces(found, built, base) : found
+  // 005Y-N2: a strip too thin to be a body, enclosed, between a walled body and the walls' own face, is that body's
+  // front reaching its outer face; the pockets left between such strips are recesses in it (`bayStripsOf`).
+  const regionOf = (found: (typeof built)[number]) => (options.plan?.faces === 'OUTER_FACE' && options.plan.frameId === base.frame.id ? toOuterFaces(found, built, base) : found)
+  const strips = bayStripsOf(built.map(regionOf), base.decomposition, frame, minBodySpanM(wallM))
+  for (const t of strips.traces) options.debug?.(t)
+  for (const found of strips.regions) {
+    const region = found
     const ring = ringOfRect(region.rect, frame)
     const wallEvidence = perimeterWallEvidence(region, base.decomposition, frame)
+    options.debug?.(`region ${region.id} rect ${JSON.stringify(region.rect)} walled ${wallEvidence.fraction}`)
     // A body is enclosed by WALL. A region the flood fill could not reach but
     // whose boundary is almost all line work is a paved area, a canopy, an
     // annotation box or a piece of landscaping that happens to be drawn
@@ -2132,7 +2236,7 @@ export function inferStructuralLayout(given: StructuralLayoutOptions): Structura
     const mass = masses.find((m) => m.id === plane.massId)
     if (mass) mass.facadePlaneIds.push(plane.id)
   }
-  for (const found of recessesOf(base, frame, masses, baseStorey, options.metrics)) {
+  for (const found of [...recessesOf(base, frame, masses, baseStorey, options.metrics), ...pocketRecesses(strips.pockets, base, frame, masses, baseStorey, options.metrics)]) {
     footprintRegions.push(found.region)
     baseStorey.footprintRegionIds.push(found.region.id)
     recesses.push(found.recess)
@@ -2467,6 +2571,50 @@ function facadesOf(masses: readonly MassHypothesis[], storeys: readonly StoreyLa
     }
   }
   return out.sort((a, b) => a.id.localeCompare(b.id))
+}
+
+/**
+ * 005Y-N2: the pockets `bayStripsOf` left between the strips of a body's front, as recesses of that body: the mouth on
+ * the walls' face, the back on the line the body was first cut on, a return at both ends (the strips' own ends).
+ */
+function pocketRecesses(
+  pockets: readonly BayPocket[],
+  base: PlanReading,
+  frame: WorldFrame,
+  masses: readonly MassHypothesis[],
+  storey: StoreyLayoutHypothesis,
+  metrics: MetricEvidenceSet,
+): Array<{ recess: RecessHypothesis; region: FootprintRegionHypothesis }> {
+  const out: Array<{ recess: RecessHypothesis; region: FootprintRegionHypothesis }> = []
+  for (const pocket of pockets) {
+    const host = masses.find((m) => m.footprintRegionIds.includes(`footprint-${storey.index}-${pocket.bodyRegionId}`))
+    if (!host) continue
+    const ring = ringOfRect(pocket.rect, frame)
+    const b = ringBoundsOf(ring)
+    const side = pocket.side
+    const along = side === 'MIN_X' || side === 'MAX_X' ? { axis: 'X' as const, at: side === 'MIN_X' ? b.x0 : b.x1, from: b.z0, to: b.z1, backAt: side === 'MIN_X' ? b.x1 : b.x0, depth: b.x1 - b.x0 } : { axis: 'Z' as const, at: side === 'MIN_Z' ? b.z0 : b.z1, from: b.x0, to: b.x1, backAt: side === 'MIN_Z' ? b.z1 : b.z0, depth: b.z1 - b.z0 }
+    const regionId = `footprint-${storey.index}-pocket-${host.id}-${out.length}`
+    const evidenceIds = chainEvidenceFor(base, pocket.rect, metrics)
+    out.push({
+      region: { id: regionId, storeyId: storey.id, kind: 'RECESS', ring, areaM2: round6(ringArea(ring)), frameId: base.frame.id, pixelRect: pocket.rect, wallEvidence: { perimeterM: 0, walledM: 0, fraction: 0 }, observationIds: [], evidenceIds, confidence: 0.7, why: pocket.why },
+      recess: {
+        id: `recess-pocket-${host.id}-${out.length}`,
+        massId: host.id,
+        footprintRegionId: regionId,
+        mouthSide: side,
+        mouth: { axis: along.axis, at: round6(along.at), from: round6(along.from), to: round6(along.to) },
+        backAt: round6(along.backAt),
+        depthM: quantity(along.depth, along.depth * 0.9, along.depth * 1.1, 'm', 'DERIVED', evidenceIds, 'from the walls\' face to the line the body was first cut on, between grid lines the plan supports'),
+        returns: { low: true, high: true },
+        storeyIds: [storey.id],
+        observationIds: [],
+        evidenceIds,
+        confidence: 0.7,
+        why: pocket.why,
+      },
+    })
+  }
+  return out
 }
 
 /**

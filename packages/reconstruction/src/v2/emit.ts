@@ -247,6 +247,21 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     evidence(r.id, r.provenance, r.why)
   }
 
+  // 005Y-N2: the walls of a recess in a body's face, rising as the body's walls do: under the body's plane roof they die
+  // into its planes, under the main roof they are capped with it
+  for (const p of b.pockets ?? []) {
+    const mass = b.masses.find((m) => m.id === p.massId)
+    const l = levelOf(p.storeyIndex)
+    if (!mass || !l) continue
+    const isTop = p.storeyIndex === Math.max(...mass.storeys)
+    const planeRoof = isTop ? (b.planeRoofs ?? []).find((r) => r.massId === mass.id) : undefined
+    for (const w of p.walls) {
+      push({ type: 'createWall', id: w.id, levelId: l.id, start: w.start, end: w.end, thickness: w.thicknessM, height: round6(l.height), baseOffset: 0, kind: 'EXTERIOR', ...(planeRoof ? { topProfile: { kind: 'FOLLOW_ROOF_PLANES' as const, planeIds: planeRoof.layout.planes.map((pl) => planeRoofPlaneId(planeRoof.massId, pl.key)) } } : {}), materialId: MATERIALS_V2.wall }, p.featureId, 'walls')
+      if (isTop && !planeRoof && mass.role === 'MAIN') capWallIds.push(w.id)
+      evidence(w.id, 'SOURCE_DERIVED', `the ${w.role === 'BACK' ? 'back wall' : 'return'} of ${p.id}: ${p.why}`)
+    }
+  }
+
   // --- interior: partitions with their doors, rooms --------------------------------
   for (const storey of b.interior) {
     const l = levelOf(storey.storeyIndex)
@@ -305,6 +320,16 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       hosts.push({ id: `${ring}-w1`, axis: 'Z', at: round6(m.x1 - T / 2), thicknessM: T, from: m.z0, to: m.z1 })
       hosts.push({ id: `${ring}-w2`, axis: 'X', at: round6(m.z1 - T / 2), thicknessM: T, from: m.x0, to: m.x1 })
       hosts.push({ id: `${ring}-w3`, axis: 'Z', at: round6(m.x0 + T / 2), thicknessM: T, from: m.z0, to: m.z1 })
+    }
+    for (const p of (b.pockets ?? []).filter((x) => x.storeyIndex === storey.storeyIndex)) {
+      for (const w of p.walls) {
+        // the wall's line is its face; its material lies to the left of its run, its centre half a thickness in
+        const alongX = Math.abs(w.end.x - w.start.x) >= Math.abs(w.end.z - w.start.z)
+        const length = Math.hypot(w.end.x - w.start.x, w.end.z - w.start.z)
+        const inward = { x: -(w.end.z - w.start.z) / length, z: (w.end.x - w.start.x) / length }
+        const half = w.thicknessM / 2
+        hosts.push(alongX ? { id: w.id, axis: 'X', at: round6(w.start.z + inward.z * half), thicknessM: w.thicknessM, from: Math.min(w.start.x, w.end.x), to: Math.max(w.start.x, w.end.x) } : { id: w.id, axis: 'Z', at: round6(w.start.x + inward.x * half), thicknessM: w.thicknessM, from: Math.min(w.start.z, w.end.z), to: Math.max(w.start.z, w.end.z) })
+      }
     }
     for (const r of b.returns.filter((x) => x.storeyIndex === storey.storeyIndex)) {
       const alongX = Math.abs(r.end.x - r.start.x) >= Math.abs(r.end.z - r.start.z)
@@ -542,12 +567,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
   }
 
   // --- exterior openings ------------------------------------------------------------
-  for (const o of b.openings) {
-    const mass = b.masses.find((m) => m.id === o.massId)
-    const l = levelOf(o.storeyIndex)
-    if (!mass || !l) continue
-    const wallId = ringWallId(mass.id, o.storeyIndex, o.facade)
-    const { offset, reversed } = wallOffset(rectAt(mass, o.storeyIndex), o.facade, o.interval)
+  const cutAndFill = (o: OpeningV2, wallId: string, offset: number, reversed: boolean, l: { elevation: number }): void => {
     const sill = round6(Math.max(0, o.sillY - l.elevation))
     const nearIsTall = o.tallEdge === undefined ? true : (o.tallEdge === 'LOW') !== reversed
     const heightNear = round6(Math.max(0.3, (nearIsTall || o.headFarY === undefined ? o.headY : o.headFarY) - o.sillY))
@@ -569,6 +589,30 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       push({ type: 'placeDoor', id: `${o.id}-leaf`, openingId: o.id, ...frameWithinWall('DOOR', b.wallThicknessM), materialId: MATERIALS_V2.timber }, o.id, 'doors')
     }
     evidence(o.id, o.provenance.head === 'SOURCE_EXACT' || o.provenance.head === 'SOURCE_CORROBORATED' ? 'SOURCE_CORROBORATED' : o.provenance.head === 'ASSUMED_FOR_RENDERING' ? 'ASSUMED_FOR_RENDERING' : 'SOURCE_DERIVED', o.why, { offset: o.provenance.interval, width: o.provenance.width, sill: o.provenance.sill, height: o.provenance.head, head: o.provenance.profile, kind: o.provenance.family })
+  }
+  for (const o of b.openings) {
+    const mass = b.masses.find((m) => m.id === o.massId)
+    const l = levelOf(o.storeyIndex)
+    if (!mass || !l) continue
+    const { offset, reversed } = wallOffset(rectAt(mass, o.storeyIndex), o.facade, o.interval)
+    cutAndFill(o, ringWallId(mass.id, o.storeyIndex, o.facade), offset, reversed, l)
+  }
+  // 005Y-N2: a recess in a body's face — a passage through the ring wall over its mouth, its returns and back wall as
+  // walls of their own, and the back wall's openings cut in it
+  for (const p of b.pockets ?? []) {
+    const mass = b.masses.find((m) => m.id === p.massId)
+    const l = levelOf(p.storeyIndex)
+    if (!mass || !l) continue
+    const { offset } = wallOffset(rectAt(mass, p.storeyIndex), p.facade, [p.from, p.to])
+    push({ type: 'cutOpening', id: `${p.id}-mouth`, wallId: ringWallId(mass.id, p.storeyIndex, p.facade), kind: 'PASSAGE', offset: Math.max(0, offset), sill: 0, width: round6(p.to - p.from), height: round6(p.headY - l.elevation) }, p.featureId, 'openings')
+    evidence(`${p.id}-mouth`, p.headProvenance === 'ASSUMED_FOR_RENDERING' ? 'ASSUMED_FOR_RENDERING' : 'SOURCE_DERIVED', p.why, { height: p.headProvenance })
+    const back = p.walls.find((w) => w.role === 'BACK')
+    if (back) {
+      // offsets run from the back wall's start, which is at either end of the mouth
+      const startAlong = p.facade === 'FRONT' || p.facade === 'REAR' ? back.start.x : back.start.z
+      const reversed = Math.abs(startAlong - p.to) < Math.abs(startAlong - p.from)
+      for (const o of p.backOpenings) cutAndFill(o, back.id, round6(reversed ? p.to - o.interval[1] : o.interval[0] - p.from), reversed, l)
+    }
   }
   for (const d of b.sharedDoors) {
     const mass = b.masses.find((m) => m.id === d.massId)

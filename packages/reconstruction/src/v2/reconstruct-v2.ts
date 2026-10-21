@@ -58,7 +58,7 @@ import type { PlanSheet } from '../layout.js'
 import type { Checkpoint } from '@buildapp/source-common'
 import type { StructuralPassOptions } from '../structural.js'
 import { rectAt } from './building.js'
-import type { PlaneRoofV2, BuildingV2, EndCondition, MassToneV2, MassV2, ReturnWallV2, TerraceV2 } from './building.js'
+import type { PlaneRoofV2, BuildingV2, EndCondition, MassToneV2, MassV2, PocketV2, ReturnWallV2, TerraceV2 } from './building.js'
 import { buildFacadeGraph, closeBalconies, closePortalHeads, closeRailings, closeTerraces, closeVerges, alignStackedReturns, snapReturnsToBodyFaces } from './assembly-closure.js'
 import type { BalconyEnd, ClosureNote } from './assembly-closure.js'
 import { drawnShareOf, readTerraceExtension, terracePolygon } from './terrace.js'
@@ -246,7 +246,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // ---------------------------------------------------------------------------
   const sectionFrame = graph.coordinateFrames.find((f) => f.roles.projection === 'ORTHOGRAPHIC_SECTION' && (keep ? keep(f) : true))
   const levels = levelsFrom(metrics, sectionFrame?.id)
-  const structuralOptions: StructuralPassOptions = { slug: options.slug, sourcePackageId: options.sourcePackageId, sourcePackageHash: options.sourcePackageHash, graph, metrics, raster: options.raster, frameFilter: keep, levels, publishedAreas: options.publishedAreas, sheetCache: new Map<string, PlanSheet>(), ...(options.checkpoint ? { checkpoint: options.checkpoint } : {}), ...(options.drawnGapRule === 'ON' ? { drawnGapRule: 'ON' as const } : {}) }
+  const structuralOptions: StructuralPassOptions = { slug: options.slug, sourcePackageId: options.sourcePackageId, sourcePackageHash: options.sourcePackageHash, graph, metrics, raster: options.raster, frameFilter: keep, levels, publishedAreas: options.publishedAreas, sheetCache: new Map<string, PlanSheet>(), ...(options.checkpoint ? { checkpoint: options.checkpoint } : {}), ...(options.drawnGapRule === 'ON' ? { drawnGapRule: 'ON' as const } : {}), ...(options.debug ? { debug: options.debug } : {}) }
   const incumbent = composeStructuralLayout(structuralOptions)
   let { draft, layout } = incumbent
   let planDiagnostics: PlanDiagnosticsReport = planDiagnosticsOf(draft, graph, metrics, layout)
@@ -1066,6 +1066,35 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // ---------------------------------------------------------------------------
   // G4. interior per storey (with the stair as a barrier where it is not floor)
   // ---------------------------------------------------------------------------
+  // 005Y-N2: the recesses the layout found that lie inside a body's rectangle on their storey: pockets in one of its faces
+  // (`bayStripsOf`, or a pocket of the plan's decomposition the body's rectangle was cut over). A pocket has a return at
+  // both ends and room for them inside the face; one reaching a corner is a notch in the outline, refused by name.
+  type PocketSpec = { rec: (typeof layout.recesses)[number]; host: MassV2; region: (typeof layout.footprintRegions)[number]; index: number; rect: { x0: number; z0: number; x1: number; z1: number }; facade: 'FRONT' | 'REAR' | 'WEST' | 'EAST'; alongX: boolean; from: number; to: number; mouthAt: number; backAt: number; inward: number; refused?: string }
+  function pocketsOf(recs: typeof layout.recesses): PocketSpec[] {
+    const out: PocketSpec[] = []
+    for (const rec of recs) {
+      const host = masses.find((m) => m.sourceMassId === rec.massId && !m.pieceOf)
+      const region = layout.footprintRegions.find((r) => r.id === rec.footprintRegionId)
+      const index = layout.storeys.find((s) => rec.storeyIds.includes(s.id))?.index
+      if (!host || !region || index === undefined || !host.storeys.includes(index)) continue
+      const pr = v2Rect(ringBounds(region.ring))
+      const m = rectAt(host, index)
+      if (pr.x0 < m.x0 - 0.02 || pr.x1 > m.x1 + 0.02 || pr.z0 < m.z0 - 0.02 || pr.z1 > m.z1 + 0.02) continue
+      const facade = Math.abs(pr.z0 - m.z0) < 0.05 ? 'FRONT' : Math.abs(pr.z1 - m.z1) < 0.05 ? 'REAR' : Math.abs(pr.x0 - m.x0) < 0.05 ? 'WEST' : Math.abs(pr.x1 - m.x1) < 0.05 ? 'EAST' : undefined
+      if (!facade) continue
+      const alongX = facade === 'FRONT' || facade === 'REAR'
+      const [from, to] = alongX ? [pr.x0, pr.x1] : [pr.z0, pr.z1]
+      const mouthAt = facade === 'FRONT' ? pr.z0 : facade === 'REAR' ? pr.z1 : facade === 'WEST' ? pr.x0 : pr.x1
+      const backAt = facade === 'FRONT' ? pr.z1 : facade === 'REAR' ? pr.z0 : facade === 'WEST' ? pr.x1 : pr.x0
+      const inward = facade === 'FRONT' || facade === 'WEST' ? 1 : -1
+      // too shallow or too narrow to hold a back wall and two returns: a jog in the wall's ink, not a pocket
+      if (Math.abs(backAt - mouthAt) <= T || to - from <= 2 * T) continue
+      const [faceFrom, faceTo] = alongX ? [m.x0, m.x1] : [m.z0, m.z1]
+      const refused = !rec.returns.low || !rec.returns.high ? 'a return wall is not found at one of its ends: not a pocket the body wraps' : from < faceFrom + T - 0.02 || to > faceTo - T + 0.02 ? 'it reaches a corner of the body: a notch in its outline, not a pocket in one face, and the body is built as its rectangle' : undefined
+      out.push({ rec, host, region, index, rect: pr, facade, alongX, from, to, mouthAt, backAt, inward, ...(refused ? { refused } : {}) })
+    }
+    return out
+  }
   const interior: InteriorReading[] = []
   const publishedRooms = options.publishedRooms ?? []
   for (const [index, entry] of planByStorey) {
@@ -1093,6 +1122,8 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         cumulative += f.risers
       })
     }
+    // 005Y-N2: a recess inside a body (a pocket in its face) is outside: no room floods into it through its back wall's door
+    for (const p of pocketsOf(layout.recesses)) if (p.index === index && !p.refused) barriers.push(p.rect)
     const onStorey = masses.filter((x) => x.storeys.includes(index)).map((x) => rectAt(x, index))
     const labelArea = { x0: Math.min(...onStorey.map((r) => r.x0)), z0: Math.min(...onStorey.map((r) => r.z0)), x1: Math.max(...onStorey.map((r) => r.x1)), z1: Math.max(...onStorey.map((r) => r.z1)) }
     for (const m of masses.filter((x) => x.storeys.includes(index))) {
@@ -1177,6 +1208,55 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       }
     }
   }
+  // 005Y-N2: a recess the layout found inside a body (`bayStripsOf`, or any pocket lying within a body's rectangle): the
+  // ring wall's gap over its mouth is a PASSAGE, not an opening to fill; two returns and a back wall close it, and the
+  // back wall's own openings are read on its line in the plan.
+  const pockets: NonNullable<BuildingV2['pockets']> = []
+  for (const spec of pocketsOf(layout.recesses)) {
+    const { rec, host, region, index, facade, alongX, from, to, mouthAt, backAt, inward } = spec
+    const entry = planByStorey.get(index)
+    const l = levelOf(index)
+    if (!entry || !l) continue
+    if (spec.refused) {
+      gap({ what: `the recess ${rec.id} in ${host.id}'s ${facade.toLowerCase()} face`, reason: spec.refused, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
+      continue
+    }
+    // the facade's gaps over the mouth are the mouth itself: taken off the openings, their elevation head kept
+    const over = openings.filter((o) => o.massId === host.id && o.facade === facade && o.storeyIndex === index && Math.min(o.interval[1], to) - Math.max(o.interval[0], from) > 0.5 * Math.min(o.widthM, to - from))
+    for (const o of over) openings.splice(openings.indexOf(o), 1)
+    const read = over.find((o) => o.elevation && o.interval[1] - o.interval[0] >= 0.8 * (to - from))
+    const wallTop = main.id === host.id && index === topStorey && mainRoof ? round6(mainRoof.eaveY - mainRoof.thicknessM / Math.cos((mainRoof.pitchDeg * Math.PI) / 180)) : round6(l.elevation + l.height)
+    const assumedHead = round6(Math.min(l.elevation + l.height - slabT, wallTop - 0.2))
+    const headY = read ? round6(Math.min(read.headY, wallTop - 0.2)) : assumedHead
+    const id = `pocket-${host.id}-${index}-${pockets.length}`
+    // the walls, each by its face towards the pocket (a wall's line is a face, its material to the left of its run): the
+    // returns outside the mouth, from the ring wall's inner face to the back wall's far face; the back wall between them
+    const ring0 = mouthAt + inward * T
+    const back1 = backAt + inward * T
+    const at = (u: number, v: number): { x: number; z: number } => (alongX ? { x: round6(u), z: round6(v) } : { x: round6(v), z: round6(u) })
+    const faced = (a: { x: number; z: number }, b: { x: number; z: number }, material: { x: number; z: number }): { start: { x: number; z: number }; end: { x: number; z: number } } => {
+      const d = { x: b.x - a.x, z: b.z - a.z }
+      return -d.z * material.x + d.x * material.z > 0 ? { start: a, end: b } : { start: b, end: a }
+    }
+    const lowDir = alongX ? { x: -1, z: 0 } : { x: 0, z: -1 }
+    const highDir = alongX ? { x: 1, z: 0 } : { x: 0, z: 1 }
+    const deepDir = alongX ? { x: 0, z: inward } : { x: inward, z: 0 }
+    const walls: PocketV2['walls'] = [
+      { id: `${id}-return-low`, role: 'RETURN', ...faced(at(from, ring0), at(from, back1), lowDir), thicknessM: T },
+      { id: `${id}-return-high`, role: 'RETURN', ...faced(at(to, ring0), at(to, back1), highDir), thicknessM: T },
+      { id: `${id}-back`, role: 'BACK', ...faced(at(from, backAt), at(to, backAt), deepDir), thicknessM: T },
+    ]
+    const callouts = metrics.evidence.filter((e) => e.kind === 'OPENING_CALLOUT' && e.frameId === entry.plan.frame.id)
+    const backHost: WallHost = { massId: host.id, facade, planeAt: round6(backAt), from: round6(from), to: round6(to), centreAt: round6(backAt + (inward * T) / 2), storeyIndex: index, floorY: l.elevation, storeyHeightM: l.height }
+    const backOpenings = readWallOpenings({ ...(options.featureTrace ? { trace: options.featureTrace } : {}), plan: entry.frame, planRaster: entry.raster, host: backHost, wallThicknessM: T, callouts, views: [], attachedSingleStorey: false, onRefused: (r) => gap({ what: `the gap ${r.interval[0].toFixed(2)}..${r.interval[1].toFixed(2)} on the back wall of the recess in ${host.id}'s ${facade.toLowerCase()} face`, reason: r.why, status: 'REFUSED', observationIds: [], evidenceIds: [] }), index: hostIndex++ }).map((o) => ({ ...o, id: `${id}-${o.id}` }))
+    const why = `${rec.why}; its mouth ${from.toFixed(2)}..${to.toFixed(2)} m on the ${facade.toLowerCase()} face is a passage${read ? `, its head read on the ${read.elevation?.frameId} elevation` : ', its head the storey\'s ceiling (assumed: the elevation does not read it)'}, and ${backOpenings.length} opening${backOpenings.length === 1 ? '' : 's'} stand in its back wall`
+    const sid = sighting(entry.plan.frame, `a recess in the ${facade.toLowerCase()} face on the storey ${index} plan`, rec.confidence, [], region.pixelRect)
+    const featureId = feature('RECESS', id, { depth: { value: Math.abs(backAt - mouthAt), low: Math.abs(backAt - mouthAt) - 0.05, high: Math.abs(backAt - mouthAt) + 0.05 }, width: { value: to - from, low: to - from - 0.05, high: to - from + 0.05 }, headY: { value: headY, low: headY - 0.1, high: headY + 0.1 } }, [sid], 'SOURCE_DERIVED', why, { storeyIndex: index, hostId: host.featureId, uncertaintyM: 0.05, parameterProvenance: { headY: read ? 'IMAGE_METRIC_REGISTERED' : 'ASSUMED_FOR_RENDERING' } })
+    relate('HOSTED_BY', featureId, host.featureId, 'the recess opens through this body’s face')
+    for (const o of over) gap({ what: `the gap ${o.interval[0].toFixed(2)}..${o.interval[1].toFixed(2)} on the ${facade.toLowerCase()} wall of ${host.id}, storey ${index}`, reason: `it is the mouth of a recess (${id}): a passage, not a ${o.family.toLowerCase().replace(/_/g, ' ')}`, status: 'REFUSED', observationIds: [], evidenceIds: [] })
+    pockets.push({ id, massId: host.id, facade, storeyIndex: index, from: round6(from), to: round6(to), mouthAt: round6(mouthAt), backAt: round6(backAt), headY, headProvenance: read ? 'IMAGE_METRIC_REGISTERED' : 'ASSUMED_FOR_RENDERING', walls, backOpenings, featureId, why })
+  }
+  step({ stage: 'pockets', what: 'recesses inside a body’s face', method: 'DISCRETE_SELECTION', detail: pockets.map((p) => `${p.facade} ${p.from.toFixed(2)}..${p.to.toFixed(2)}, ${Math.abs(p.backAt - p.mouthAt).toFixed(2)} m deep, ${p.backOpenings.length} back openings`).join('; ') || 'none', inputs: layout.recesses.length, outputs: pockets.length })
   for (const o of [...openings, ...sharedDoors]) {
     const entry = planByStorey.get(o.storeyIndex)
     const sids = entry ? [sighting(entry.plan.frame, `wall gap ${o.interval[0].toFixed(2)}..${o.interval[1].toFixed(2)} on the ${o.facade.toLowerCase()} wall`, 0.7, [], o.planGap.pixelRect)] : []
@@ -1715,7 +1795,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       builtMainRoof = undefined
     }
   }
-  const building: BuildingV2 = { label: options.label, wallThicknessM: T, slabThicknessM: slabT, levels: levelsV2, masses, mainRoof: builtMainRoof, ...(planeRoofs ? { planeRoofs } : {}), attachedRoofs, pitchedAttachedRoofs, recesses, returns, balconies, railings, portalHeads, verges, terraces, massTones, returnTones, facadeGraph, chimneys, rooflights, openings, sharedDoors, interior, stair, assemblies, surfaceRegions, terrainY: terrain }
+  const building: BuildingV2 = { label: options.label, wallThicknessM: T, slabThicknessM: slabT, levels: levelsV2, masses, mainRoof: builtMainRoof, ...(planeRoofs ? { planeRoofs } : {}), attachedRoofs, pitchedAttachedRoofs, recesses, ...(pockets.length > 0 ? { pockets } : {}), returns, balconies, railings, portalHeads, verges, terraces, massTones, returnTones, facadeGraph, chimneys, rooflights, openings, sharedDoors, interior, stair, assemblies, surfaceRegions, terrainY: terrain }
   const residualsBefore = verifyAgainstViews({ building, views })
   const repair = repairFromResiduals(building, residualsBefore, 2)
   const residuals = verifyAgainstViews({ building, views })

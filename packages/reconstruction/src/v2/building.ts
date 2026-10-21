@@ -242,6 +242,31 @@ export type FacadeGraphEdge = { from: string; to: string; kind: 'CONTINUES_TO' |
 export type FacadeGraph = { nodes: FacadeGraphNode[]; edges: FacadeGraphEdge[] }
 export type SurfaceRegionV2 = { id: string; wallRef: { massId: string; storeyIndex: number; side: 'FRONT' | 'REAR' | 'WEST' | 'EAST' }; along: [number, number]; y: [number, number]; tone: string; featureId: string }
 
+/**
+ * 005Y-N2: a recess in a body's face — an entrance porch the body's walls wrap on three sides. The ring wall keeps
+ * running across its mouth above a PASSAGE (an opening with nothing in it); two returns and a back wall, each a wall of
+ * its own given by its face towards the pocket (its material to the left of its run), close it; the back wall's own openings are read on its line in the plan.
+ */
+export type PocketV2 = {
+  id: string
+  massId: string
+  facade: 'FRONT' | 'REAR' | 'WEST' | 'EAST'
+  storeyIndex: number
+  /** The mouth along the facade, in world metres, between the returns' inner faces. */
+  from: number
+  to: number
+  /** The facade plane and the back wall's face towards the pocket, along the depth axis. */
+  mouthAt: number
+  backAt: number
+  /** The top of the passage through the ring wall. */
+  headY: number
+  headProvenance: ProvenanceStatus
+  walls: Array<{ id: string; role: 'RETURN' | 'BACK'; start: { x: number; z: number }; end: { x: number; z: number }; thicknessM: number }>
+  backOpenings: OpeningV2[]
+  featureId: string
+  why: string
+}
+
 export type BuildingV2 = {
   label: string
   wallThicknessM: number
@@ -255,6 +280,8 @@ export type BuildingV2 = {
   /** 005X-N1: bodies under a roof of their own planes (a hip at either end); never also under another roof kind. */
   planeRoofs?: PlaneRoofV2[]
   recesses: RecessTopology[]
+  /** 005Y-N2: recesses in a body's face (`PocketV2`). */
+  pockets?: PocketV2[]
   returns: ReturnWallV2[]
   balconies: BalconyV2[]
   railings: RailingV2[]

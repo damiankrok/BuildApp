@@ -24,7 +24,6 @@ import {
   type RoofPlane,
   type Wall,
   STRUCTURAL_MEMBER_ROLES,
-  roofOpeningOutline,
   roofPlaneDrop,
   roofPlaneTopAt,
 } from '@buildapp/model'
@@ -158,8 +157,10 @@ export function compileBuilding(model: CanonicalBuildingModel): CompiledScene {
 
   // Roof planes (1.6.0), for the walls that die into them.
   const planeById = new Map<string, RoofPlane>(model.roofPlanes.map((p) => [p.id, p]))
-  const holesOfPlane = (planeId: string) => model.roofOpenings.filter((o) => o.roofId === planeId).sort((a, b) => (a.id < b.id ? -1 : 1)).map(roofOpeningOutline)
-  const planesSurface = (ids: readonly string[]): PlaneSurface => planeSurface(ids.map((id) => planeById.get(id)).filter((p): p is RoofPlane => p !== undefined), holesOfPlane)
+  // 005Y-N2: a wall under a plane stops at the plane even where the plane is cut: a chimney's penetration or a
+  // rooflight's opening is a hole in the roof's covering, not in what the roof bears on — a partition under one used to
+  // keep its nominal height there and rise through the roof as a spike.
+  const planesSurface = (ids: readonly string[]): PlaneSurface => planeSurface(ids.map((id) => planeById.get(id)).filter((p): p is RoofPlane => p !== undefined), () => [])
 
   // Junctions and rings -> physical wall extents. The model validated, so the resolution carries no errors.
   const topology = resolveWallTopology(model)
