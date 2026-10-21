@@ -283,5 +283,11 @@ export function classifyOpeningFamily(f: OpeningFamilyFacts): OpeningFamilyDecis
   if (reachesFloor && glazed && f.widthM >= GLAZED_DOOR_MIN_WIDTH_M && f.widthM <= MULTI_PANEL_MIN_WIDTH_M && f.storeyIndex === 0 && !f.symbols.swingDrawn()) return { family: 'WINDOW', notes: [] }
   if (reachesFloor && f.widthM > DOOR_MAX_WIDTH_M && f.widthM < MULTI_PANEL_MIN_WIDTH_M) return { family: 'GLAZED_DOOR', notes: [] }
   if (reachesFloor && !glazed) return { family: 'DOOR', notes: [] }
+  // Narrower than any glazed door, to the floor, with a leaf or its swing drawn: a plain door, and the lines across its
+  // gap are the threshold the plan draws there. Without a leaf or a swing it stays a window; the width cut is not moved.
+  if (reachesFloor && glazed && f.widthM < GLAZED_DOOR_MIN_WIDTH_M) {
+    const leaf = f.symbols.leaf()
+    if (leaf || f.symbols.swingDrawn()) return { family: 'DOOR', provenance: 'SOURCE_DERIVED', ...(leaf ? { leaf } : {}), notes: [`a door ${f.widthM.toFixed(2)} m wide: its ${leaf ? 'leaf' : 'swing'} is drawn, so the lines across the gap are its threshold, not glass`] }
+  }
   return { family: 'WINDOW', notes: [] }
 }

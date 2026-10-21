@@ -49,6 +49,17 @@ describe('classifyOpeningFamily', () => {
   it('a garage room makes a glazed-looking door-sized opening its door (no French window in a garage)', () => {
     expect(classifyOpeningFamily(facts({ garageRoom: { why: 'a garage' }, symbols: symbols({ glazed: true }) })).family).toBe('DOOR')
   })
+  it('narrower than a glazed door, to the floor, lines across the gap and a leaf or swing drawn: a door, its threshold drawn', () => {
+    const d = classifyOpeningFamily(facts({ widthM: 0.7, symbols: symbols({ glazed: true, leaf: true }) }))
+    expect(d.family).toBe('DOOR')
+    expect(d.notes[0]).toContain('threshold')
+    expect(classifyOpeningFamily(facts({ widthM: 0.7, symbols: symbols({ glazed: true, swing: true }) })).family).toBe('DOOR')
+  })
+  it('the same narrow glazed gap with neither leaf nor swing drawn stays a window, and the 0.75 m cut is not moved', () => {
+    expect(classifyOpeningFamily(facts({ widthM: 0.7, symbols: symbols({ glazed: true }) })).family).toBe('WINDOW')
+    expect(classifyOpeningFamily(facts({ widthM: 0.8, symbols: symbols({ glazed: true }) })).family).toBe('WINDOW')
+    expect(classifyOpeningFamily(facts({ widthM: 0.7, sillAboveFloorM: 0.9, heightM: 1.2, symbols: symbols({ glazed: true, leaf: true }) })).family).toBe('WINDOW')
+  })
   it('asks the plan for a leaf only where the rules reach it', () => {
     let asked = 0
     classifyOpeningFamily(facts({ sillAboveFloorM: 0.9, heightM: 1.3, symbols: { ...symbols(), leaf: () => (asked++, undefined) } }))
