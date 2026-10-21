@@ -1743,6 +1743,11 @@ export function perimeterWallEvidence(region: PlanRegion, decomposition: PlanDec
  * per cent of its footprint. Only sides no other body shares move: between two
  * bodies the axis is the boundary.
  */
+/** Does a region reach beyond a rectangle on any side (by more than half a pixel of rounding)? */
+export function reachesBeyond(rect: PixelRect, envelope: PixelRect): boolean {
+  return rect.x0 < envelope.x0 - 0.5 || rect.x1 > envelope.x1 + 0.5 || rect.y0 < envelope.y0 - 0.5 || rect.y1 > envelope.y1 + 0.5
+}
+
 function toOuterFaces(region: PlanRegion, bodies: readonly PlanRegion[], plan: PlanReading): PlanRegion {
   const half = plan.wallPx / 2
   const lineAt = (lines: readonly GridLine[], px: number): GridLine | undefined => lines.find((l) => Math.abs(l.px - px) < 0.5)
@@ -1915,7 +1920,9 @@ export function inferStructuralLayout(given: StructuralLayoutOptions): Structura
   // --- the base storey's regions -------------------------------------------
   // 005Y-N2: a strip too thin to be a body, enclosed, between a walled body and the walls' own face, is that body's
   // front reaching its outer face; the pockets left between such strips are recesses in it (`bayStripsOf`).
-  const regionOf = (found: (typeof built)[number]) => (options.plan?.faces === 'OUTER_FACE' && options.plan.frameId === base.frame.id ? toOuterFaces(found, built, base) : found)
+  // A body outside the envelope the chains measure (an attached garage, a wing) has no chain stating where its walls
+  // end; a side of it marked by a wall band alone is that wall's centre line, and the body reaches its outer face.
+  const regionOf = (found: (typeof built)[number]) => ((options.plan?.faces === 'OUTER_FACE' && options.plan.frameId === base.frame.id) || reachesBeyond(found.rect, envelope.rect) ? toOuterFaces(found, built, base) : found)
   const strips = bayStripsOf(built.map(regionOf), base.decomposition, frame, minBodySpanM(wallM))
   for (const t of strips.traces) options.debug?.(t)
   for (const found of strips.regions) {
