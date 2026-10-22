@@ -5,8 +5,13 @@
  * show where each opening sits in the wall's height and which openings a facade really has. Here every model opening of
  * a facade with a registered view is paired with the view's own reading (`facade-openings.ts`), one to one, and every
  * difference is named with its size: MISSING_IN_MODEL, EXTRA_IN_MODEL, HORIZONTAL_OFFSET, WIDTH_MISMATCH, SILL_MISMATCH,
- * HEAD_MISMATCH, WRONG_STOREY; a side view whose readings fit the opposite wall clearly better is WRONG_FACADE; a facade
- * with no registered view is UNREGISTERED_VIEW for each of its openings.
+ * HEAD_MISMATCH; a side view whose readings fit the opposite wall clearly better is WRONG_FACADE; a facade
+ * with no registered view is UNREGISTERED_VIEW for each of its openings. (N7-P2R: a wrong storey is not detected: a reading
+ * is paired only with an opening of its own storey band, so there is no WRONG_STOREY code to report as zero.)
+ *
+ * Each comparison also says how far it can be trusted (`status`): CONFIRMED_MATCH — read on the view on its own and
+ * agreeing; NOT_OBSERVED — in the model, not read on the view (neither confirmed nor contradicted); CONFLICT — a named
+ * difference beyond tolerance; VIEW_NOT_REGISTERED — no view to compare with. An opening not read is never a match.
  *
  * Corrections follow the stronger source, and only where the sources agree with each other:
  *   - a sill or head the model took by CONVENTION (no callout, no view) is taken from a view whose heights are
@@ -26,10 +31,14 @@ import type { FacadeOpeningReading, FacadeOpeningRejection, FacadeView } from '.
 import type { ProvenanceStatus } from './graph.js'
 import { HEIGHT_AGREEMENT_M, HEIGHT_PICK_MIN_SCORE_SHARE, HEIGHT_PICK_TOLERANCE_M, HEIGHT_RIVAL_MIN_CM } from './opening-reading.js'
 
-export type AlignmentCode = 'MISSING_IN_MODEL' | 'EXTRA_IN_MODEL' | 'HORIZONTAL_OFFSET' | 'WIDTH_MISMATCH' | 'SILL_MISMATCH' | 'HEAD_MISMATCH' | 'WRONG_FACADE' | 'WRONG_STOREY' | 'UNREGISTERED_VIEW'
+export type AlignmentCode = 'MISSING_IN_MODEL' | 'EXTRA_IN_MODEL' | 'HORIZONTAL_OFFSET' | 'WIDTH_MISMATCH' | 'SILL_MISMATCH' | 'HEAD_MISMATCH' | 'WRONG_FACADE' | 'UNREGISTERED_VIEW'
+
+/** N7-P2R: how far a comparison can be trusted. */
+export type ComparisonStatus = 'CONFIRMED_MATCH' | 'NOT_OBSERVED' | 'CONFLICT' | 'VIEW_NOT_REGISTERED'
 
 export type FacadeOpeningComparison = {
   facade: Facade
+  status: ComparisonStatus
   openingId?: string
   readingId?: string
   storeyIndex: number | null
@@ -80,7 +89,9 @@ export type FacadeAlignmentReport = {
   corrections: OpeningCorrection[]
   /** Facades no registered view covers, and why. */
   unregistered: Array<{ facade: Facade; why: string }>
-  counts: Record<AlignmentCode | 'MATCHED', number>
+  /** Code counts, and PAIRED: model openings a reading was paired with (whether or not they agree). */
+  counts: Record<AlignmentCode | 'PAIRED', number>
+  statusCounts: Record<ComparisonStatus, number>
 }
 
 const CENTRE_TOL_M = 0.1
@@ -132,8 +143,8 @@ export function alignFacades(input: {
         const inset = Math.min(0.1, o.widthM / 4)
         const share = got.foreignShare?.(o.storeyIndex, o.interval[0] + inset, o.interval[1] - inset)
         const scannedThere = (got.scanned ?? []).some((x) => overlap(o.interval[0], o.interval[1], x.from, x.to) > 0)
-        if (share !== undefined && share <= WALL_ONLY_SHARE && !scannedThere) comparisons.push({ facade: fv.facade, openingId: o.id, storeyIndex: o.storeyIndex, codes: ['EXTRA_IN_MODEL'], model: modelOf(o), note: `the view draws the wall's own materials across the plan's gap (${(share * 100).toFixed(1)} % of its pixels differ from the wall) and the plan-free scan finds no opening there: reported, the model is kept` })
-        else comparisons.push({ facade: fv.facade, openingId: o.id, storeyIndex: o.storeyIndex, codes: [], model: modelOf(o), note: 'not read on the view: no opening stands out from the wall there in a way the readers accept (a recess in shadow, a member in front, glass the wall’s colour); neither confirmed nor contradicted' })
+        if (share !== undefined && share <= WALL_ONLY_SHARE && !scannedThere) comparisons.push({ status: 'NOT_OBSERVED', facade: fv.facade, openingId: o.id, storeyIndex: o.storeyIndex, codes: ['EXTRA_IN_MODEL'], model: modelOf(o), note: `the view draws the wall's own materials across the plan's gap (${(share * 100).toFixed(1)} % of its pixels differ from the wall) and the plan-free scan finds no opening there: reported, the model is kept` })
+        else comparisons.push({ status: 'NOT_OBSERVED', facade: fv.facade, openingId: o.id, storeyIndex: o.storeyIndex, codes: [], model: modelOf(o), note: 'not read on the view: no opening stands out from the wall there in a way the readers accept (a recess in shadow, a member in front, glass the wall’s colour); neither confirmed nor contradicted' })
         continue
       }
       const delta = { centreM: round6((r.from + r.to) / 2 - (o.interval[0] + o.interval[1]) / 2), widthM: round6(r.widthM - o.widthM), sillM: round6(r.sillY - o.sillY), headM: round6(r.headY - o.headY) }
@@ -144,7 +155,7 @@ export function alignFacades(input: {
       if (Math.abs(delta.widthM) > Math.max(WIDTH_TOL_M, ta)) codes.push('WIDTH_MISMATCH')
       if (fv.heights && Math.abs(delta.sillM) > th) codes.push('SILL_MISMATCH')
       if (fv.heights && Math.abs(delta.headM) > th) codes.push('HEAD_MISMATCH')
-      comparisons.push({ facade: fv.facade, openingId: o.id, readingId: r.id, storeyIndex: o.storeyIndex, codes, model: modelOf(o), view: viewOf(r), delta, tolerance: { alongM: ta, heightM: th } })
+      comparisons.push({ status: 'NOT_OBSERVED', facade: fv.facade, openingId: o.id, readingId: r.id, storeyIndex: o.storeyIndex, codes, model: modelOf(o), view: viewOf(r), delta, tolerance: { alongM: ta, heightM: th } })
       // a printed height read two ways alike: the view's height picks the printed reading it fits, never its own value
       if (fv.heights && o.callout?.heightCandidates && !o.elevation && o.provenance.head === 'UNRESOLVED' && Math.abs(delta.sillM) <= th) {
         const cands = o.callout.heightCandidates
@@ -188,12 +199,12 @@ export function alignFacades(input: {
     // view, perhaps the other side's
     const plan = input.openings.filter((o) => o.facade === fv.facade)
     const unclaimed = got.candidates.filter((c) => !plan.some((o) => overlap(o.interval[0], o.interval[1], c.from, c.to) > MIN_ALONG_OVERLAP * Math.min(o.widthM, c.widthM) && (c.storeyIndex === null || c.storeyIndex === o.storeyIndex)))
-    for (const c of unclaimed) comparisons.push({ facade: fv.facade, readingId: c.id, storeyIndex: c.storeyIndex, codes: ['MISSING_IN_MODEL'], view: viewOf(c), note: 'the view draws an opening here; the plan has no gap: reported, not built (a wall the plan draws is not broken on a render’s word)' })
+    for (const c of unclaimed) comparisons.push({ status: 'NOT_OBSERVED', facade: fv.facade, readingId: c.id, storeyIndex: c.storeyIndex, codes: ['MISSING_IN_MODEL'], view: viewOf(c), note: 'the view draws an opening here; the plan has no gap: reported, not built (a wall the plan draws is not broken on a render’s word)' })
     if (fv.facade === 'WEST' || fv.facade === 'EAST') {
       const other = input.openings.filter((o) => o.facade === opposite[fv.facade])
       const here = got.candidates.length - unclaimed.length
       const there = got.candidates.filter((c) => other.some((o) => overlap(o.interval[0], o.interval[1], c.from, c.to) > MIN_ALONG_OVERLAP * Math.min(o.widthM, c.widthM))).length
-      if (got.candidates.length >= 2 && there >= here + 2) comparisons.push({ facade: fv.facade, storeyIndex: null, codes: ['WRONG_FACADE'], note: `${fv.frameId}: ${there} of its ${got.candidates.length} openings stand where the ${opposite[fv.facade].toLowerCase()} wall's openings are, ${here} where this wall's are: the view is likely the other side` })
+      if (got.candidates.length >= 2 && there >= here + 2) comparisons.push({ status: 'NOT_OBSERVED', facade: fv.facade, storeyIndex: null, codes: ['WRONG_FACADE'], note: `${fv.frameId}: ${there} of its ${got.candidates.length} openings stand where the ${opposite[fv.facade].toLowerCase()} wall's openings are, ${here} where this wall's are: the view is likely the other side` })
     }
     const mine = comparisons.slice(before)
     const issues = mine.filter((c) => c.codes.length > 0).length
@@ -205,14 +216,17 @@ export function alignFacades(input: {
   }
   for (const u of input.unregistered) {
     if (covered.has(u.facade)) continue
-    for (const o of input.openings.filter((x) => x.facade === u.facade)) comparisons.push({ facade: u.facade, openingId: o.id, storeyIndex: o.storeyIndex, codes: ['UNREGISTERED_VIEW'], model: modelOf(o), note: u.why })
+    for (const o of input.openings.filter((x) => x.facade === u.facade)) comparisons.push({ status: 'NOT_OBSERVED', facade: u.facade, openingId: o.id, storeyIndex: o.storeyIndex, codes: ['UNREGISTERED_VIEW'], model: modelOf(o), note: u.why })
   }
-  const counts = { MATCHED: 0, MISSING_IN_MODEL: 0, EXTRA_IN_MODEL: 0, HORIZONTAL_OFFSET: 0, WIDTH_MISMATCH: 0, SILL_MISMATCH: 0, HEAD_MISMATCH: 0, WRONG_FACADE: 0, WRONG_STOREY: 0, UNREGISTERED_VIEW: 0 } as FacadeAlignmentReport['counts']
+  const counts = { PAIRED: 0, MISSING_IN_MODEL: 0, EXTRA_IN_MODEL: 0, HORIZONTAL_OFFSET: 0, WIDTH_MISMATCH: 0, SILL_MISMATCH: 0, HEAD_MISMATCH: 0, WRONG_FACADE: 0, UNREGISTERED_VIEW: 0 } as FacadeAlignmentReport['counts']
+  const statusCounts: FacadeAlignmentReport['statusCounts'] = { CONFIRMED_MATCH: 0, NOT_OBSERVED: 0, CONFLICT: 0, VIEW_NOT_REGISTERED: 0 }
   for (const c of comparisons) {
-    if (c.openingId && c.readingId) counts.MATCHED += 1
+    c.status = c.codes.includes('UNREGISTERED_VIEW') ? 'VIEW_NOT_REGISTERED' : c.codes.length > 0 ? 'CONFLICT' : c.openingId && c.readingId ? 'CONFIRMED_MATCH' : 'NOT_OBSERVED'
+    statusCounts[c.status] += 1
+    if (c.openingId && c.readingId) counts.PAIRED += 1
     for (const code of c.codes) counts[code] += 1
   }
-  return { views: summaries, readings: allReadings, rejected: allRejected, comparisons, corrections, unregistered: [...input.unregistered].filter((u) => !covered.has(u.facade)), counts }
+  return { views: summaries, readings: allReadings, rejected: allRejected, comparisons, corrections, unregistered: [...input.unregistered].filter((u) => !covered.has(u.facade)), counts, statusCounts }
 }
 
 /** The openings with the corrections applied, each property's provenance saying where it now comes from. */

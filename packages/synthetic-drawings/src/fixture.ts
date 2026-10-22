@@ -107,6 +107,29 @@ export const SLIVERTON: SyntheticHouse = {
 }
 
 /**
+ * N7-P2R: SLIVERTON with its chains printed as the drawing has it — 8.40 m of house and the 0.45 m sliver beside it.
+ * The sliver's far wall is drawn 0.30 m thick with 0.15 m of paper between it and the house's wall: one wall between the
+ * two bodies, the house's. Read as a ring of four walls it overlaps itself; read as the drawing has it, it is a body
+ * with three walls of its own. Invented dimensions; a reconstruction of nothing.
+ */
+export const SLIVERTON_DIMENSIONED: SyntheticHouse = {
+  ...SLIVERTON,
+  name: 'Sliverton dimensioned',
+  chainsX: [8.85],
+}
+
+/**
+ * N7-P2R: a narrow body drawn with walls of its own, thinner than the house's: 0.50 m across, its walls 0.15 m, one of
+ * them drawn against the house's wall. A ring at the house's 0.30 m overlaps itself; at the 0.15 m drawn, it closes.
+ */
+export const THINWALL: SyntheticHouse = {
+  ...HOLLOWAY,
+  name: 'Thinwall',
+  chainsX: [8.4, 0.5],
+  wings: [{ name: 'store', width: 0.5, depth: 6.0, offsetZ: 4.2, storeys: 1, roof: 'FLAT', openings: [], ownWallThickness: 0.15 }],
+}
+
+/**
  * §25's third fixture: a footprint that steps, with a loggia bitten out of
  * the front.
  *

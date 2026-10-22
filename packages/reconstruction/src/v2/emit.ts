@@ -90,6 +90,10 @@ const modelStatus = (p: ProvenanceStatus): EvidenceStatus => {
 
 export const ringWallId = (massId: string, storey: number, side: 'FRONT' | 'EAST' | 'REAR' | 'WEST'): string => `ring-${massId}-${storey}-w${{ FRONT: 0, EAST: 1, REAR: 2, WEST: 3 }[side]}`
 
+const FACADE_INDEX = { FRONT: 0, EAST: 1, REAR: 2, WEST: 3 } as const
+/** N7-P2R: the edge of a body's ring the plan draws no wall of its own on, by index (w0 front … w3 west). */
+const openIndex = (m: Pick<MassV2, 'openSide'>): number | undefined => (m.openSide ? FACADE_INDEX[m.openSide] : undefined)
+
 /** Where an opening sits along its ring wall, measured from the wall's start in the anticlockwise traversal. */
 export function wallOffset(mass: Pick<MassV2, 'x0' | 'z0' | 'x1' | 'z1'>, facade: OpeningV2['facade'], interval: [number, number]): { offset: number; reversed: boolean } {
   switch (facade) {
@@ -140,6 +144,8 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
   for (const m of b.masses) onDebug?.(`mass ${m.id} (${m.role}) x ${m.x0}..${m.x1} z ${m.z0}..${m.z1} storeys ${m.storeys.join(',')} wall ${b.wallThicknessM}`)
   const levelId = (index: number): string => b.levels.find((l) => l.index === index)?.id ?? 'lvl-0'
   const levelOf = (index: number) => b.levels.find((l) => l.index === index)
+  /** N7-P2R: a body's wall thickness: the house's, unless the plan draws this body's walls thinner (`thin-body.ts`). */
+  const tOf = (m: Pick<MassV2, 'wallThicknessM'>): number => m.wallThicknessM ?? b.wallThicknessM
   for (const l of b.levels) {
     push({ type: 'createLevel', id: l.id, name: l.index === 0 ? 'Ground' : `Level ${l.index}`, index: l.index, elevation: round6(l.elevation), height: round6(l.height) }, l.featureId, 'levels')
   }
@@ -199,7 +205,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       // faces in one place. The lowest slab is the plinth and keeps the full
       // outline.
       const bearsOnWalls = storey !== Math.min(...m.storeys)
-      const inset = bearsOnWalls ? round6(b.wallThicknessM) : 0
+      const inset = bearsOnWalls ? round6(tOf(m)) : 0
       // the lowest storey's floor is its own footprint (council B5L-6: a partial basement's floor is under the basement only)
       const slabPolygon = inset > 0 ? [{ x: round6(m.x0 + inset), z: round6(m.z0 + inset) }, { x: round6(m.x1 - inset), z: round6(m.z0 + inset) }, { x: round6(m.x1 - inset), z: round6(m.z1 - inset) }, { x: round6(m.x0 + inset), z: round6(m.z1 - inset) }] : polygon
       // A stair void that reaches a wall ends at the wall's inner face: the slab is not there to be cut.
@@ -213,14 +219,33 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       // The body's walls take the tone the renders show for them: a dark body is built in dark render.
       const tone = b.massTones.find((t) => t.massId === m.id)
       const ringMaterial = tone && tone.share >= 0.5 ? materialForTone(tone.tone, MATERIALS_V2.wall) : MATERIALS_V2.wall
-      push({ type: 'createWallRing', id: ringId, levelId: l.id, polygon, thickness: b.wallThicknessM, height, baseOffset: 0, kind: 'EXTERIOR', cornerOwnership: 'ALTERNATE', ...(planeRoof ? { topProfile: { kind: 'FOLLOW_ROOF_PLANES' as const, planeIds: planeRoof.layout.planes.map((pl) => planeRoofPlaneId(planeRoof.massId, pl.key)) } } : pitched ? { topProfile: { kind: 'FOLLOW_ROOF_PLANES' as const, planeIds: pitchedPlaneIds(pitched.massId) } } : {}), materialId: ringMaterial }, m.featureId, 'wallRings')
-      if (isTop && !attached && !pitched && !planeRoof) capWallIds.push(`${ringId}-w0`, `${ringId}-w1`, `${ringId}-w2`, `${ringId}-w3`)
-      if (attached && isTop) attachedCapIds.set(m.id, [`${ringId}-w0`, `${ringId}-w1`, `${ringId}-w2`, `${ringId}-w3`])
+      const topProfile = planeRoof ? { topProfile: { kind: 'FOLLOW_ROOF_PLANES' as const, planeIds: planeRoof.layout.planes.map((pl) => planeRoofPlaneId(planeRoof.massId, pl.key)) } } : pitched ? { topProfile: { kind: 'FOLLOW_ROOF_PLANES' as const, planeIds: pitchedPlaneIds(pitched.massId) } } : {}
+      const ownWalls = [0, 1, 2, 3].filter((i) => i !== openIndex(m)).map((i) => `${ringId}-w${i}`)
+      if (openIndex(m) === undefined) push({ type: 'createWallRing', id: ringId, levelId: l.id, polygon, thickness: tOf(m), height, baseOffset: 0, kind: 'EXTERIOR', cornerOwnership: 'ALTERNATE', ...topProfile, materialId: ringMaterial }, m.featureId, 'wallRings')
+      else {
+        // N7-P2R: the plan draws one wall between this body and the one beside it — the other body's — so this body is
+        // built with its other three walls: the ring's edges in the ring's order, its two corners as the ring owns them
+        // (even edges own), and no wall on the shared side
+        const k = openIndex(m) as number
+        const [a, bb, c] = [(k + 1) % 4, (k + 2) % 4, (k + 3) % 4]
+        const edge = (i: number) => ({ start: polygon[i], end: polygon[(i + 1) % 4] })
+        const wallIdOf = (i: number): string => `${ringId}-w${i}`
+        const base = { type: 'createWall' as const, levelId: l.id, thickness: tOf(m), height, baseOffset: 0, kind: 'EXTERIOR' as const, ...topProfile, materialId: ringMaterial }
+        push({ ...base, id: wallIdOf(a), ...edge(a) }, m.featureId, 'walls')
+        push({ ...base, id: wallIdOf(c), ...edge(c) }, m.featureId, 'walls')
+        // the middle wall meets both: at vertex bb the owner is the even edge, as in the ring
+        push({ ...base, id: wallIdOf(bb), ...edge(bb), startJunction: { kind: 'CORNER', with: { wallId: wallIdOf(a), end: 'END' }, owner: bb % 2 === 0 ? 'SELF' : 'OTHER' }, endJunction: { kind: 'CORNER', with: { wallId: wallIdOf(c), end: 'START' }, owner: c % 2 === 0 ? 'OTHER' : 'SELF' } }, m.featureId, 'walls')
+        for (const id of ownWalls) evidence(id, 'SOURCE_DERIVED', `one of ${m.id}'s three own walls: the plan draws one wall on its ${(['FRONT', 'EAST', 'REAR', 'WEST'] as const)[k].toLowerCase()} side, shared with the body beside it`)
+      }
+      if (isTop && !attached && !pitched && !planeRoof) capWallIds.push(...ownWalls)
+      if (attached && isTop) attachedCapIds.set(m.id, ownWalls)
     }
     // the storey the body was measured on: the one with no footprint of its own (a basement below it may have one)
     const measuredOn = m.storeys.find((s) => !(m.storeyRects ?? []).some((r) => r.storey === s)) ?? m.storeys[0]
     // 005Q (N1): a body cut on a wall's inner face is not the printed chains' body: its ring says which face is open
-    if (m.outerFacesOpen && m.outerFacesOpen.length > 0) evidence(`ring-${m.id}-${measuredOn}`, 'SOURCE_DERIVED', `${(m.x1 - m.x0).toFixed(2)} × ${(m.z1 - m.z0).toFixed(2)} m body cut on a wall's inner face; unresolved: ${m.outerFacesOpen.join('; ')}`)
+    if (openIndex(m) !== undefined) {
+      // N7-P2R: no ring; each own wall carries its evidence (above)
+    } else if (m.outerFacesOpen && m.outerFacesOpen.length > 0) evidence(`ring-${m.id}-${measuredOn}`, 'SOURCE_DERIVED', `${(m.x1 - m.x0).toFixed(2)} × ${(m.z1 - m.z0).toFixed(2)} m body cut on a wall's inner face; unresolved: ${m.outerFacesOpen.join('; ')}`)
     else evidence(`ring-${m.id}-${measuredOn}`, 'SOURCE_EXACT', `${(m.x1 - m.x0).toFixed(2)} × ${(m.z1 - m.z0).toFixed(2)} m body from the plan's printed chains and wall bands`)
     for (const own of m.storeyRects ?? []) evidence(`ring-${m.id}-${own.storey}`, 'SOURCE_DERIVED', `storey ${own.storey}'s own walls, ${(own.x1 - own.x0).toFixed(2)} × ${(own.z1 - own.z0).toFixed(2)} m: the walled region of that storey's plan, registered onto the body below, where it stands on the body`)
   }
@@ -246,6 +271,14 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     if (under) returnsUnderAttached.set(under.massId, [...(returnsUnderAttached.get(under.massId) ?? []), r.id])
     else if (isTop) capWallIds.push(r.id)
     evidence(r.id, r.provenance, r.why)
+  }
+
+  // N7-P2R: a band the plan draws solid, read first as a body: one wall of its drawn thickness
+  for (const w of b.bandWalls ?? []) {
+    const l = levelOf(w.storeyIndex)
+    if (!l) continue
+    push({ type: 'createWall', id: w.id, levelId: l.id, start: w.start, end: w.end, thickness: w.thicknessM, height: round6(l.height), baseOffset: 0, kind: 'EXTERIOR', materialId: MATERIALS_V2.wall }, w.featureId, 'walls')
+    evidence(w.id, w.provenance, w.why)
   }
 
   // 005Y-N2: the walls of a recess in a body's face, rising as the body's walls do: under the body's plane roof they die
@@ -314,14 +347,15 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     const gapM = 0.015
     const hosts: HostBand[] = []
     for (const body of b.masses.filter((x) => x.storeys.includes(storey.storeyIndex))) {
-      const T = b.wallThicknessM
+      const T = tOf(body)
       const ring = `ring-${body.id}-${storey.storeyIndex}`
       // 005L (council B5L-7): the exterior walls on this storey are its own footprint's, not the body's
       const m = rectAt(body, storey.storeyIndex)
-      hosts.push({ id: `${ring}-w0`, axis: 'X', at: round6(m.z0 + T / 2), thicknessM: T, from: m.x0, to: m.x1 })
-      hosts.push({ id: `${ring}-w1`, axis: 'Z', at: round6(m.x1 - T / 2), thicknessM: T, from: m.z0, to: m.z1 })
-      hosts.push({ id: `${ring}-w2`, axis: 'X', at: round6(m.z1 - T / 2), thicknessM: T, from: m.x0, to: m.x1 })
-      hosts.push({ id: `${ring}-w3`, axis: 'Z', at: round6(m.x0 + T / 2), thicknessM: T, from: m.z0, to: m.z1 })
+      const own = (i: number): boolean => openIndex(body) !== i
+      if (own(0)) hosts.push({ id: `${ring}-w0`, axis: 'X', at: round6(m.z0 + T / 2), thicknessM: T, from: m.x0, to: m.x1 })
+      if (own(1)) hosts.push({ id: `${ring}-w1`, axis: 'Z', at: round6(m.x1 - T / 2), thicknessM: T, from: m.z0, to: m.z1 })
+      if (own(2)) hosts.push({ id: `${ring}-w2`, axis: 'X', at: round6(m.z1 - T / 2), thicknessM: T, from: m.x0, to: m.x1 })
+      if (own(3)) hosts.push({ id: `${ring}-w3`, axis: 'Z', at: round6(m.x0 + T / 2), thicknessM: T, from: m.z0, to: m.z1 })
     }
     for (const p of (b.pockets ?? []).filter((x) => x.storeyIndex === storey.storeyIndex)) {
       for (const w of p.walls) {
@@ -477,7 +511,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     const ring = `ring-${mass.id}-${l.index}`
     for (const plane of r.layout.planes) {
       const wall = r.ridgeAxis === 'Z' ? (plane.key === 'LOW' ? `${ring}-w3` : `${ring}-w1`) : plane.key === 'LOW' ? `${ring}-w0` : `${ring}-w2`
-      push({ type: 'createRelationship', kind: 'SUPPORTED_BY', from: idOf(plane.key), to: wall, note: 'the plane bears on the wall under its eave' })
+      if (wall !== `${ring}-w${openIndex(mass)}`) push({ type: 'createRelationship', kind: 'SUPPORTED_BY', from: idOf(plane.key), to: wall, note: 'the plane bears on the wall under its eave' })
       if (r.layout.join.kind === 'VALLEY' && (b.mainRoof || r.joinRoofId)) push({ type: 'createRelationship', kind: 'INTERSECTS', from: idOf(plane.key), to: r.joinRoofId ?? 'roof-main', note: `a valley: ${r.layout.join.why}` })
     }
     for (const plane of r.layout.planes) {
@@ -498,7 +532,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     // the wall each plane bears on: the slopes on the walls along the ridge, an end plane on the end wall under it
     const wallOf: Record<PlaneRoofKey, string> = r.ridgeAxis === 'Z' ? { LOW: `${ring}-w3`, HIGH: `${ring}-w1`, END_MIN: `${ring}-w0`, END_MAX: `${ring}-w2` } : { LOW: `${ring}-w0`, HIGH: `${ring}-w2`, END_MIN: `${ring}-w3`, END_MAX: `${ring}-w1` }
     for (const plane of r.layout.planes) {
-      push({ type: 'createRelationship', kind: 'SUPPORTED_BY', from: idOf(plane.key), to: wallOf[plane.key], note: 'the plane bears on the wall under its eave' })
+      if (wallOf[plane.key] !== `${ring}-w${openIndex(mass)}`) push({ type: 'createRelationship', kind: 'SUPPORTED_BY', from: idOf(plane.key), to: wallOf[plane.key], note: 'the plane bears on the wall under its eave' })
       evidence(idOf(plane.key), r.provenance, r.why, { pitchDeg: r.provenance, boundary: r.provenance })
     }
   }
@@ -674,7 +708,11 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     const { offset } = wallOffset(rectAt(mass, d.storeyIndex), d.facade, d.interval)
     const otherFacade = d.facade === 'EAST' ? 'WEST' : d.facade === 'WEST' ? 'EAST' : d.facade === 'FRONT' ? 'REAR' : 'FRONT'
     const otherOffset = wallOffset(rectAt(other, d.storeyIndex), otherFacade, d.interval).offset
-    push({ type: 'cutOpening', id: d.id, wallId, kind: 'DOOR', offset: Math.max(0, offset), sill: 0, width: d.widthM, height: round6(d.headY - d.sillY), leaves: [{ wallId: ringWallId(other.id, d.storeyIndex, otherFacade), offset: Math.max(0, otherOffset) }] }, d.id, 'openings')
+    // N7-P2R: a body with no wall of its own on the shared side: the door is cut in the one wall there is
+    const mineOpen = openIndex(mass) === FACADE_INDEX[d.facade]
+    const otherOpen = openIndex(other) === FACADE_INDEX[otherFacade]
+    const host = mineOpen ? { wallId: ringWallId(other.id, d.storeyIndex, otherFacade), offset: otherOffset } : { wallId, offset }
+    push({ type: 'cutOpening', id: d.id, wallId: host.wallId, kind: 'DOOR', offset: Math.max(0, host.offset), sill: 0, width: d.widthM, height: round6(d.headY - d.sillY), ...(mineOpen || otherOpen ? {} : { leaves: [{ wallId: ringWallId(other.id, d.storeyIndex, otherFacade), offset: Math.max(0, otherOffset) }] }) }, d.id, 'openings')
     push({ type: 'placeDoor', id: `${d.id}-leaf`, openingId: d.id, ...frameWithinWall('DOOR', b.wallThicknessM), materialId: MATERIALS_V2.timber }, d.id, 'doors')
     evidence(d.id, 'SOURCE_DERIVED', d.why, { height: d.provenance.head })
   }

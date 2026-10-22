@@ -79,6 +79,8 @@ const audit = {
   views: r.viewAudit,
   facadeAlignment: (r as { facadeAlignment?: unknown }).facadeAlignment ?? null,
   crossView: r.crossViewResiduals.views,
+  thinBodies: r.thinBodies,
+  openingCounts: r.openingCounts,
   openings: r.building.openings.map((o) => ({ id: o.id, facade: o.facade, storeyIndex: o.storeyIndex, interval: o.interval, sillY: o.sillY, headY: o.headY, provenance: o.provenance, callout: o.callout ?? null, elevation: o.elevation ?? null, why: o.why })),
 }
 writeFileSync(join(out, 'audit.json'), JSON.stringify(audit, null, 1) + '\n')

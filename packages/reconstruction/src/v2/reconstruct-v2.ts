@@ -69,7 +69,7 @@ import type { PlanSheet } from '../layout.js'
 import type { Checkpoint } from '@buildapp/source-common'
 import type { StructuralPassOptions } from '../structural.js'
 import { rectAt } from './building.js'
-import type { PlaneRoofV2, BuildingV2, EndCondition, MassToneV2, MassV2, PocketV2, ReturnWallV2, TerraceV2 } from './building.js'
+import type { BandWallV2, PlaneRoofV2, BuildingV2, EndCondition, MassToneV2, MassV2, PocketV2, ReturnWallV2, TerraceV2 } from './building.js'
 import { buildFacadeGraph, closeBalconies, closePortalHeads, closeRailings, closeTerraces, closeVerges, alignStackedReturns, snapReturnsToBodyFaces } from './assembly-closure.js'
 import type { BalconyEnd, ClosureNote } from './assembly-closure.js'
 import { drawnShareOf, readTerraceExtension, terracePolygon } from './terrace.js'
@@ -93,13 +93,15 @@ import type { MeasuredOpening } from './facade-alignment.js'
 import { alignFacades, applyOpeningCorrections } from './facade-alignment.js'
 import type { FacadeAlignmentReport } from './facade-alignment.js'
 import type { ViewAuditRecord } from './view-audit.js'
+import { adjudicateThinBody, thinBodies } from './thin-body.js'
+import type { ThinBodyRecord } from './thin-body.js'
 import type { ApproximateRidge } from './roof-datum.js'
 
 // 2.2.0 (005A): a plan the first reading refuses is re-read by the plan
 // resolver before the run stops (PLAN_RESOLVER_VERSION names its readings).
 // Accepted houses are read exactly as before.
 
-export const SOLVER_V2_VERSION = '2.4.0' as const
+export const SOLVER_V2_VERSION = '2.5.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
@@ -122,6 +124,12 @@ export type ReconstructionV2Options = {
   /** 005Y-N1: diagnostics only (FEATURE_DEBUG): candidate features and why each was kept or dropped. Write-only: the model is the same with it and without. */
   /** N7-P2, diagnostics only: each facade band's foreign mask, for overlays. Never part of a result. */
   facadeMaskSink?: (frameId: string, mask: Uint8Array, closed: Uint8Array, box: { c0: number; r0: number; W: number; H: number }) => void
+  /**
+   * N7-P2R, RESEARCH ONLY (never set in production): reproduce a misreading where segmentation makes it — a body's
+   * extent narrowed right after the bodies are read — and optionally switch the thin-body adjudication off, so a real
+   * program can be taken through misreading → refusal → diagnosis → recovery.
+   */
+  diagnostics?: { narrowMass?: { id: string; side: 'FRONT' | 'EAST' | 'REAR' | 'WEST'; keepM: number }; skipThinBodies?: boolean }
   featureTrace?: (record: Record<string, unknown>) => void
   /** The model's id; defaults to `m-auto-v2-<slug>`. Two sealed candidates of one project side by side need two. */
   modelId?: string
@@ -195,6 +203,14 @@ export type ReconstructionV2Result = {
   facadeAlignment: FacadeAlignmentReport
   /** N7-P2 (A): every elevation and perspective frame: whether and how it was registered and read, or why not. */
   viewAudit: ViewAuditRecord[]
+  /** N7-P2R: every attached body read narrower than its own two walls: what the source says it is, and what was built. */
+  thinBodies: ThinBodyRecord[]
+  /**
+   * N7-P2R: the openings counted where they come from — read on the plans (facade gaps and doorways between bodies),
+   * found on the registered elevations by the plan-free scan alone, built in the model (interior doors included), and
+   * left out by a partial preview.
+   */
+  openingCounts: { plan: number; elevationIndependent: number; model: number; skippedByPartialPreview: number }
   /** N7-P1: the storey heights were read from a section, or are a convention taken for viewing only. */
   heights: { measured: boolean; assumedStoreyHeightM?: number }
 }
@@ -457,6 +473,12 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     return { id, role: m.role === 'MAIN' ? 'MAIN' : 'ATTACHED', x0: round6(b.x0), z0: round6(z0), x1: round6(b.x1), z1: round6(z1), storeys, featureId, sourceMassId: m.id, ...(storeyRects.length > 0 ? { storeyRects } : {}), ...(facesOpen.length > 0 ? { outerFacesOpen: facesOpen } : {}) }
   })
   masses.push(...pieces)
+  const narrowed = options.diagnostics?.narrowMass
+  if (narrowed) {
+    const m = masses.find((x) => x.id === narrowed.id)
+    // keep `keepM` of the body measured from the side named: the far side is lost, as cells that stop short lose it
+    if (m) Object.assign(m, narrowed.side === 'WEST' ? { x1: round6(m.x0 + narrowed.keepM) } : narrowed.side === 'EAST' ? { x0: round6(m.x1 - narrowed.keepM) } : narrowed.side === 'FRONT' ? { z1: round6(m.z0 + narrowed.keepM) } : { z0: round6(m.z1 - narrowed.keepM) })
+  }
   const main = masses.find((m) => m.role === 'MAIN') ?? masses[0]
   const topStorey = Math.max(...main.storeys)
 
@@ -1010,6 +1032,49 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   }
 
   // ---------------------------------------------------------------------------
+  // N7-P2R: an attached body too narrow for its own two walls is adjudicated on the source — the plan's ink across it,
+  // the printed chains on its faces, the elevations that see it — before anything is read on its walls
+  // ---------------------------------------------------------------------------
+  const thinBodyRecords: ThinBodyRecord[] = []
+  const bandWalls: BandWallV2[] = []
+  for (const { mass, axis } of options.diagnostics?.skipThinBodies ? [] : thinBodies(masses, T)) {
+    const rec = adjudicateThinBody(mass, axis, {
+      masses,
+      wallThicknessM: T,
+      sourceOf: (id) => {
+        const lm = layout.masses.find((x) => x.id === id)
+        return lm ? { why: lm.why, widthBasis: (axis === 'X' ? lm.widthM : lm.depthM).basis, evidenceIds: (axis === 'X' ? lm.widthM : lm.depthM).evidenceIds } : undefined
+      },
+      plan: (index) => planByStorey.get(index),
+      chains: metrics.chains,
+      views: [...views, ...openingOnlyViews],
+      skyOf: (raster) => {
+        let mask = skyMasks.get(raster)
+        if (!mask) {
+          mask = skyMask(raster)
+          skyMasks.set(raster, mask)
+        }
+        return mask
+      },
+      levels: levelsV2,
+    })
+    thinBodyRecords.push(rec)
+    const d = rec.decision
+    if (d.kind === 'WIDEN' && d.after) Object.assign(mass, { x0: d.after.x0, z0: d.after.z0, x1: d.after.x1, z1: d.after.z1 })
+    else if (d.kind === 'SHARED_WALL' && d.openSide) mass.openSide = d.openSide
+    else if (d.kind === 'DRAWN_THIN_WALLS' && d.wallThicknessM !== undefined) mass.wallThicknessM = d.wallThicknessM
+    else if (d.kind === 'SOLID_WALL') {
+      // one wall on the band's far face, its material towards the face it shares
+      const far = rec.shared ? { WEST: 'EAST', EAST: 'WEST', FRONT: 'REAR', REAR: 'FRONT' }[rec.shared.facade] : axis === 'X' ? 'EAST' : 'REAR'
+      const line = far === 'EAST' ? { start: { x: mass.x1, z: mass.z0 }, end: { x: mass.x1, z: mass.z1 } } : far === 'WEST' ? { start: { x: mass.x0, z: mass.z1 }, end: { x: mass.x0, z: mass.z0 } } : far === 'REAR' ? { start: { x: mass.x1, z: mass.z1 }, end: { x: mass.x0, z: mass.z1 } } : { start: { x: mass.x0, z: mass.z0 }, end: { x: mass.x1, z: mass.z0 } }
+      for (const st of mass.storeys) bandWalls.push({ id: `band-${mass.id}-${st}`, sourceMassId: mass.sourceMassId, storeyIndex: st, ...line, thicknessM: round6(rec.narrowM), featureId: mass.featureId, provenance: 'SOURCE_DERIVED', why: `${d.why}; built as one wall where ${mass.id} was read` })
+      masses.splice(masses.indexOf(mass), 1)
+    }
+    step({ stage: 'massing', what: `N7-P2R: ${mass.id} is ${rec.narrowM.toFixed(2)} m across, narrower than two ${T.toFixed(2)} m walls`, method: d.kind === 'KEEP_PARTIAL' ? 'REFUSED' : 'DISCRETE_SELECTION', detail: `${d.kind}: ${d.why}; readings ${rec.hypotheses.map((h) => `${h.kind.toLowerCase()} ${h.status.toLowerCase()}`).join(', ')}; first bad: ${rec.firstBad}`, inputs: rec.hypotheses.length, outputs: d.kind === 'KEEP_PARTIAL' ? 0 : 1 })
+    if (d.kind === 'KEEP_PARTIAL') gap({ what: `the body ${mass.id}, ${rec.narrowM.toFixed(2)} m across`, reason: `narrower than its own two walls, and the source does not decide what it is: ${d.why}`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: rec.source.evidenceIds })
+  }
+
+  // ---------------------------------------------------------------------------
   // G2. recesses and returns from the zones, per storey
   // ---------------------------------------------------------------------------
   // 005Q (N1): a zone the layout names as the building's own wall (an unresolved outer face) is no recess and no terrace
@@ -1220,6 +1285,8 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       // 005L: this storey's own walls, which stand on its footprint over the body
       const r = rectAt(m, index)
       for (const facade of ['FRONT', 'EAST', 'REAR', 'WEST'] as const) {
+        // N7-P2R: no wall of its own on the side it shares: the other body's wall is read for that side's doors
+        if (m.openSide === facade) continue
         const planeAt = facade === 'FRONT' ? r.z0 : facade === 'REAR' ? r.z1 : facade === 'WEST' ? r.x0 : r.x1
         const inward = facade === 'FRONT' || facade === 'WEST' ? 1 : -1
         const from = facade === 'FRONT' || facade === 'REAR' ? r.x0 : r.z0
@@ -2112,7 +2179,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   if (facadeAlignment.corrections.length > 0) openings.splice(0, openings.length, ...applyOpeningCorrections(openings, facadeAlignment.corrections))
   step({ stage: 'verification', what: 'N7-P2: the openings each elevation draws against the plan’s', method: 'DIRECT', detail: `${facadeViews.length} view${facadeViews.length === 1 ? '' : 's'} read (${facadeViews.map((v) => `${v.facade.toLowerCase()} ${v.registration.toLowerCase().replace(/_/g, ' ')}${v.heights ? '' : ', positions only'}`).join('; ') || 'none'}); ${facadeAlignment.readings.length} openings read, ${facadeAlignment.rejected.length} rectangles rejected; ${Object.entries(facadeAlignment.counts).filter(([, n]) => n > 0).map(([k, n]) => `${k.toLowerCase()} ${n}`).join(', ')}; ${facadeAlignment.corrections.length} height${facadeAlignment.corrections.length === 1 ? '' : 's'} corrected`, inputs: openings.length, outputs: facadeAlignment.corrections.length })
   for (const c of facadeAlignment.corrections) ctx.traces.push({ objectId: c.openingId, kind: 'repair', hypothesisId: `hyp-${c.openingId}`, evidenceIds: [], observationIds: facadeAlignment.readings.find((r) => r.id === c.readingId)?.observationIds ?? [], rejected: [], why: c.why })
-  const building: BuildingV2 = { label: options.label, wallThicknessM: T, slabThicknessM: slabT, levels: levelsV2, masses, mainRoof: builtMainRoof, ...(planeRoofs ? { planeRoofs } : {}), attachedRoofs, pitchedAttachedRoofs, recesses, ...(pockets.length > 0 ? { pockets } : {}), ...(pergolas.length > 0 ? { pergolas } : {}), returns, balconies, railings, portalHeads, verges, terraces, massTones, returnTones, facadeGraph, chimneys, rooflights, openings, sharedDoors, interior, stair, assemblies, surfaceRegions, terrainY: terrain }
+  const building: BuildingV2 = { label: options.label, wallThicknessM: T, slabThicknessM: slabT, levels: levelsV2, masses, mainRoof: builtMainRoof, ...(planeRoofs ? { planeRoofs } : {}), attachedRoofs, pitchedAttachedRoofs, recesses, ...(pockets.length > 0 ? { pockets } : {}), ...(pergolas.length > 0 ? { pergolas } : {}), returns, balconies, railings, portalHeads, verges, terraces, massTones, returnTones, facadeGraph, chimneys, rooflights, openings, sharedDoors, interior, stair, assemblies, surfaceRegions, terrainY: terrain, ...(bandWalls.length > 0 ? { bandWalls } : {}) }
   const residualsBefore = verifyAgainstViews({ building, views })
   const repair = repairFromResiduals(building, residualsBefore, 2)
   const residuals = verifyAgainstViews({ building, views })
@@ -2332,7 +2399,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const violations = { graph: featureGraphViolations(graphDraft), ledger: ledgerViolations(ctx.ledger, [...graph.observations.map((o) => o.id), ...metrics.evidence.map((e) => e.id)]) }
   step({ stage: 'quality', what: 'per-feature quality', method: 'DIRECT', detail: Object.entries(quality.summary).map(([fam, levels]) => `${fam} ${Object.entries(levels).map(([l, n]) => `${l}:${n}`).join('/')}`).join(', '), inputs: ctx.solved.length, outputs: quality.records.length })
 
-  return { layout, building, candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations, closure: closureNotes, planDiagnostics, openingFits: fit.fits, ...(wallReconciliation ? { wallReconciliation } : {}), crossViewResiduals: crossView, ...(roofDatum ? { roofDatum } : {}), ...(partialPreview ? { partialPreview } : {}), facadeAlignment, viewAudit: viewAudit({ horizontalOnly: new Map(cornerRegistrations.map((r) => [r.frameId, r])), frames: graph.coordinateFrames.filter((f) => (keep ? keep(f) : true)), first: legacy, firstRefused: legacyRefused, refusals: viewRefusals, registered: elevations, openingsOnly: bandRegistrations, sameSheet: new Set(openingViewOverrides.keys()), heightsRefused: openingHeightRefused, cameras }), heights: levels.measured ? { measured: true } : { measured: false, assumedStoreyHeightM: CONVENTIONS.storeyHeight } }
+  return { layout, building, candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations, closure: closureNotes, planDiagnostics, openingFits: fit.fits, ...(wallReconciliation ? { wallReconciliation } : {}), crossViewResiduals: crossView, ...(roofDatum ? { roofDatum } : {}), ...(partialPreview ? { partialPreview } : {}), facadeAlignment, thinBodies: thinBodyRecords, openingCounts: { plan: openings.length + sharedDoors.length, elevationIndependent: [...facadeRead.values()].reduce((a, r) => a + r.scanned.length, 0), model: model.openings.length, skippedByPartialPreview: (partialPreview?.skipped ?? []).filter((x) => x.type === 'cutOpening').length }, viewAudit: viewAudit({ horizontalOnly: new Map(cornerRegistrations.map((r) => [r.frameId, r])), frames: graph.coordinateFrames.filter((f) => (keep ? keep(f) : true)), first: legacy, firstRefused: legacyRefused, refusals: viewRefusals, registered: elevations, openingsOnly: bandRegistrations, sameSheet: new Set(openingViewOverrides.keys()), heightsRefused: openingHeightRefused, cameras }), heights: levels.measured ? { measured: true } : { measured: false, assumedStoreyHeightM: CONVENTIONS.storeyHeight } }
 }
 
 /** The columns of a render across which a band of the given rows carries dark tone: the band's along extent. */

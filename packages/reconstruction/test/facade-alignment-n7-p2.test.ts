@@ -250,6 +250,21 @@ describe('N7-P2 plan against elevation: codes and the correction gate', () => {
   })
 })
 
+describe('N7-P2R how far a comparison can be trusted', () => {
+  it('an unread opening is NOT_OBSERVED, never a match; agreement is CONFIRMED_MATCH; a named difference is CONFLICT', () => {
+    const a = opening('a', { provenance: { ...opening('x').provenance, sill: 'SOURCE_EXACT', head: 'SOURCE_EXACT' } })
+    const b = opening('b', { interval: [5, 6], widthM: 1, provenance: { ...opening('x').provenance, sill: 'SOURCE_EXACT', head: 'SOURCE_EXACT' } })
+    const c = opening('c', { interval: [8, 9], widthM: 1, provenance: { ...opening('x').provenance, sill: 'SOURCE_EXACT', head: 'SOURCE_EXACT' } })
+    const e = opening('e', { facade: 'EAST', interval: [1, 2], widthM: 1 })
+    const r = alignFacades({ openings: [a, b, c, e], views: [view(raster0)], levels: [LEVEL], unregistered: [{ facade: 'EAST', why: 'no view' }], read: new Map([['frame-front', { measured: [{ opening: a, reading: reading('fm-a', 1, 2.5, 0.85, 2.15) }, { opening: b, reading: null }, { opening: c, reading: reading('fm-c', 8.4, 9.4, 0.85, 2.15) }], candidates: [], rejected: [] }]]) })
+    const st = Object.fromEntries(r.comparisons.filter((x) => x.openingId).map((x) => [x.openingId, x.status]))
+    expect(st).toEqual({ a: 'CONFIRMED_MATCH', b: 'NOT_OBSERVED', c: 'CONFLICT', e: 'VIEW_NOT_REGISTERED' })
+    expect(r.statusCounts).toEqual({ CONFIRMED_MATCH: 1, NOT_OBSERVED: 1, CONFLICT: 1, VIEW_NOT_REGISTERED: 1 })
+    expect(r.counts.PAIRED).toBe(2)
+    expect(Object.keys(r.counts)).not.toContain('WRONG_STOREY')
+  })
+})
+
 describe('N7-P2 view audit', () => {
   const f = (id: string, projection: string, view: string, document = projection === 'PERSPECTIVE' ? 'PERSPECTIVE_RENDER' : 'ELEVATION') => ({ id, assetId: `asset-${id}`, roles: { document, projection, view }, size: { width: 1280, height: 576 } }) as never
   it('never registers a perspective render as an elevation, and says what an unregistered view loses', () => {

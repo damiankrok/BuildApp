@@ -73,6 +73,11 @@ export type SyntheticWing = {
   storeys: number
   roof: 'FLAT' | 'GABLE'
   openings?: SyntheticOpening[]
+  /**
+   * N7-P2R: the wing's walls drawn at this thickness instead of the house's, with a wall of its own drawn against the
+   * main body's (a double wall at the junction). Absent: the house's thickness, sharing the main body's wall.
+   */
+  ownWallThickness?: number
 }
 
 /** A pocket bitten out of one facade: a loggia, a recessed entrance, a covered terrace. */
@@ -314,9 +319,11 @@ export function renderGroundPlan(house: SyntheticHouse, options: SheetOptions & 
     const wy0 = originY + wing.offsetZ * ppm
     const ww = wing.width * ppm + t
     const wd = wing.depth * ppm
-    c.fill(wx0, wy0, wx0 + ww, wy0 + t)
-    c.fill(wx0, wy0 + wd - t, wx0 + ww, wy0 + wd)
-    c.fill(wx0 + ww - t, wy0, wx0 + ww, wy0 + wd)
+    const tw = wing.ownWallThickness !== undefined ? wing.ownWallThickness * ppm : t
+    c.fill(wx0, wy0, wx0 + ww, wy0 + tw)
+    c.fill(wx0, wy0 + wd - tw, wx0 + ww, wy0 + wd)
+    c.fill(wx0 + ww - tw, wy0, wx0 + ww, wy0 + wd)
+    if (wing.ownWallThickness !== undefined) c.fill(wx0 + t, wy0, wx0 + t + tw, wy0 + wd)
     for (const opening of wing.openings ?? []) {
       const at = opening.at * ppm
       const width = opening.width * ppm

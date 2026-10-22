@@ -40,6 +40,14 @@ export type MassV2 = {
    * it has walls of its own on that storey and no slab — its floor is the body's, the ceiling of the storey below.
    */
   pieceOf?: string
+  /**
+   * N7-P2R: the side this body shares with another, where the plan draws one wall for both (`thin-body.ts`): the body
+   * is built with its other three walls, the other body's wall closing it. Set only for a body too narrow for a wall of
+   * its own there.
+   */
+  openSide?: 'FRONT' | 'EAST' | 'REAR' | 'WEST'
+  /** N7-P2R: the thickness the plan draws this body's walls at, where it is not the house's (`thin-body.ts`). */
+  wallThicknessM?: number
 }
 
 /** The rectangle a body's walls enclose on one storey: its own footprint there, or the body's (005L). */
@@ -321,4 +329,9 @@ export type BuildingV2 = {
   assemblies: FacadeAssemblyHypothesis[]
   surfaceRegions: SurfaceRegionV2[]
   terrainY?: number
+  /** N7-P2R: a band the plan draws solid, read first as a body: one wall of its drawn thickness (`thin-body.ts`). */
+  bandWalls?: BandWallV2[]
 }
+
+/** N7-P2R: a wall the plan draws as a solid band, stated on its outer face line, its material to the left of its run. */
+export type BandWallV2 = { id: string; sourceMassId: string; storeyIndex: number; start: { x: number; z: number }; end: { x: number; z: number }; thicknessM: number; featureId: string; provenance: ProvenanceStatus; why: string }
