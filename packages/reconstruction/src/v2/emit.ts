@@ -633,9 +633,16 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     const mass = b.masses.find((m) => m.id === p.massId)
     const l = levelOf(p.storeyIndex)
     if (!mass || !l) continue
-    const { offset } = wallOffset(rectAt(mass, p.storeyIndex), p.facade, [p.from, p.to])
-    push({ type: 'cutOpening', id: `${p.id}-mouth`, wallId: ringWallId(mass.id, p.storeyIndex, p.facade), kind: 'PASSAGE', offset: Math.max(0, offset), sill: 0, width: round6(p.to - p.from), height: round6(p.headY - l.elevation) }, p.featureId, 'openings')
+    const { offset, reversed } = wallOffset(rectAt(mass, p.storeyIndex), p.facade, [p.from, p.to])
+    // 005Y-N7 (C): a pocket at a corner opens through the corner block, together with the pocket in the other face
+    const openEnd = p.openEnd ? ((p.openEnd === 'LOW') !== reversed ? 'START' : 'END') : undefined
+    push({ type: 'cutOpening', id: `${p.id}-mouth`, wallId: ringWallId(mass.id, p.storeyIndex, p.facade), kind: 'PASSAGE', offset: Math.max(0, offset), sill: 0, width: round6(p.to - p.from), height: round6(p.headY - l.elevation), ...(openEnd ? { openEnd } : {}) }, p.featureId, 'openings')
     evidence(`${p.id}-mouth`, p.headProvenance === 'ASSUMED_FOR_RENDERING' ? 'ASSUMED_FOR_RENDERING' : 'SOURCE_DERIVED', p.why, { height: p.headProvenance })
+    if (p.post) {
+      // the post the plan draws at the open corner, up to the passages' head
+      push({ type: 'createColumn', id: `${p.id}-post`, levelId: l.id, role: 'POST', base: { x: round6((p.post.x0 + p.post.x1) / 2), z: round6((p.post.z0 + p.post.z1) / 2) }, baseOffset: 0, height: round6(p.headY - l.elevation), width: round6(p.post.x1 - p.post.x0), depth: round6(p.post.z1 - p.post.z0), materialId: MATERIALS_V2.wall }, p.featureId, 'linearSolids')
+      evidence(`${p.id}-post`, 'SOURCE_DERIVED', `the post the plan draws at the open corner of the recess; ${p.why}`, { height: p.headProvenance })
+    }
     const back = p.walls.find((w) => w.role === 'BACK')
     if (back) {
       // offsets run from the back wall's start, which is at either end of the mouth

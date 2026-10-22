@@ -265,6 +265,10 @@ export type PocketV2 = {
   headProvenance: ProvenanceStatus
   walls: Array<{ id: string; role: 'RETURN' | 'BACK'; start: { x: number; z: number }; end: { x: number; z: number }; thicknessM: number }>
   backOpenings: OpeningV2[]
+  /** 005Y-N7 (C): a pocket at a corner of the body: its passage runs on through the corner (LOW: the smaller end). */
+  openEnd?: 'LOW' | 'HIGH'
+  /** 005Y-N7 (C): the post the plan draws at the open corner, in world metres. */
+  post?: { x0: number; z0: number; x1: number; z1: number }
   featureId: string
   why: string
 }

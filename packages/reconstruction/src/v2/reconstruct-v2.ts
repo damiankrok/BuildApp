@@ -23,6 +23,8 @@ import type { StructuralLayoutHypothesisSet } from '../structural-layout.js'
 import { isWallStripZone, openFacesOf } from '../layout.js'
 import type { PlanReading } from '../layout.js'
 import { fitOpeningsToHosts, reconcileWallOverlaps, sealCandidate } from '../candidate.js'
+import { cornerPocketSpecs } from './corner-pockets.js'
+import { readCornerNotch } from './corner-recess.js'
 import { balconyRect, balustradePath, BALCONY_SLAB_ASSUMED_M, BALUSTRADE_HEIGHT_ASSUMED_M, floorLevelDoorGroups, readBalconyOutline } from './projecting-balcony.js'
 import { planReconcileTolerance, refusalDiagnostics, reportWallReconciliation } from './wall-reconciliation-report.js'
 import type { WallReconciliationReport } from './wall-reconciliation-report.js'
@@ -1292,6 +1294,48 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     relate('HOSTED_BY', featureId, host.featureId, 'the recess opens through this body’s face')
     for (const o of over) gap({ what: `the gap ${o.interval[0].toFixed(2)}..${o.interval[1].toFixed(2)} on the ${facade.toLowerCase()} wall of ${host.id}, storey ${index}`, reason: `it is the mouth of a recess (${id}): a passage, not a ${o.family.toLowerCase().replace(/_/g, ' ')}`, status: 'REFUSED', observationIds: [], evidenceIds: [] })
     pockets.push({ id, massId: host.id, facade, storeyIndex: index, from: round6(lowFace), to: round6(highFace), mouthAt: round6(mouthAt), backAt: round6(backFace), headY, headProvenance: read ? 'IMAGE_METRIC_REGISTERED' : 'ASSUMED_FOR_RENDERING', walls, backOpenings, featureId, why })
+  }
+  // 005Y-N7 (C): a covered terrace or porch cut out of a corner of a body (corner-recess.ts): two pockets, one in each
+  // face, whose passages open through the corner, the two back walls the plan draws, and the post at the outer corner
+  for (const host of masses.filter((m) => !m.pieceOf)) {
+    for (const index of host.storeys) {
+      const entry = planByStorey.get(index)
+      const l = levelOf(index)
+      if (!entry || !l) continue
+      const body = rectAt(host, index)
+      const rooms = interior.find((i) => i.storeyIndex === index)?.rooms ?? []
+      const insideRoom = (r: { x0: number; z0: number; x1: number; z1: number }): boolean => rooms.some((room) => room.label !== undefined && (room.bounds.x0 + room.bounds.x1) / 2 > r.x0 && (room.bounds.x0 + room.bounds.x1) / 2 < r.x1 && (room.bounds.z0 + room.bounds.z1) / 2 > r.z0 && (room.bounds.z0 + room.bounds.z1) / 2 < r.z1)
+      for (const zSide of ['FRONT', 'REAR'] as const) {
+        for (const xSide of ['WEST', 'EAST'] as const) {
+          const notch = readCornerNotch(entry.raster, entry.frame, body, T, xSide, zSide, insideRoom, (why) => options.debug?.(`corner-recess ${host.id} storey ${index}: ${why}`))
+          if (!notch) continue
+          // a corner already holding a pocket or a balcony is not read twice
+          if (pockets.some((p) => p.massId === host.id && p.storeyIndex === index && (p.facade === xSide || p.facade === zSide))) continue
+          const wallTop = main.id === host.id && index === topStorey && mainRoof ? round6(mainRoof.eaveY - mainRoof.thicknessM / Math.cos((mainRoof.pitchDeg * Math.PI) / 180)) : round6(l.elevation + l.height)
+          const headY = round6(Math.min(l.elevation + l.height - slabT, wallTop - 0.2))
+          const assembly = `corner-recess-${host.id}-${index}-${zSide.toLowerCase()}-${xSide.toLowerCase()}`
+          const sid = sighting(entry.plan.frame, `a recess cut out of the ${zSide.toLowerCase()}-${xSide.toLowerCase()} corner on the storey ${index} plan`, 0.75)
+          const featureId = feature('RECESS', assembly, { width: { value: notch.rect.x1 - notch.rect.x0, low: notch.rect.x1 - notch.rect.x0 - 0.05, high: notch.rect.x1 - notch.rect.x0 + 0.05 }, depth: { value: notch.rect.z1 - notch.rect.z0, low: notch.rect.z1 - notch.rect.z0 - 0.05, high: notch.rect.z1 - notch.rect.z0 + 0.05 }, headY: { value: headY, low: headY - 0.1, high: headY + 0.1 } }, [sid], 'SOURCE_DERIVED', notch.why, { storeyIndex: index, hostId: host.featureId, uncertaintyM: 0.05, parameterProvenance: { headY: 'ASSUMED_FOR_RENDERING' } })
+          relate('HOSTED_BY', featureId, host.featureId, 'the recess is cut out of this body’s corner, under its roof')
+          const callouts = metrics.evidence.filter((e) => e.kind === 'OPENING_CALLOUT' && e.frameId === entry.plan.frame.id)
+          for (const spec of cornerPocketSpecs(notch, body, T)) {
+            const { facade, from, to, mouthAt, backAt, openEnd, back } = spec
+            // the facade's gaps over the mouth are the open side itself: taken off the openings, and named
+            const over = openings.filter((o) => o.massId === host.id && o.facade === facade && o.storeyIndex === index && Math.min(o.interval[1], to) - Math.max(o.interval[0], from) > 0.5 * Math.min(o.widthM, to - from))
+            for (const o of over) {
+              openings.splice(openings.indexOf(o), 1)
+              gap({ what: `the gap ${o.interval[0].toFixed(2)}..${o.interval[1].toFixed(2)} on the ${facade.toLowerCase()} wall of ${host.id}, storey ${index}`, reason: `it is the open side of ${assembly}: a passage, not a ${o.family.toLowerCase().replace(/_/g, ' ')}`, status: 'REFUSED', observationIds: [], evidenceIds: [] })
+            }
+            const id = `pocket-${host.id}-${index}-${pockets.length}`
+            const backHost: WallHost = { massId: host.id, facade, planeAt: round6(back.faceAt), from: round6(back.from), to: round6(back.to), centreAt: round6(back.faceAt + (back.into * T) / 2), storeyIndex: index, floorY: l.elevation, storeyHeightM: l.height, endsAtFaces: true }
+            const backOpenings = readWallOpenings({ ...(options.featureTrace ? { trace: options.featureTrace } : {}), plan: entry.frame, planRaster: entry.raster, host: backHost, wallThicknessM: T, callouts, views: [], attachedSingleStorey: false, onRefused: (r) => gap({ what: `the gap ${r.interval[0].toFixed(2)}..${r.interval[1].toFixed(2)} on the back wall of ${assembly}`, reason: r.why, status: 'REFUSED', observationIds: [], evidenceIds: [] }), index: hostIndex++ }).map((o) => ({ ...o, id: `${id}-${o.id}` }))
+            const why = `${notch.why}; the ${facade.toLowerCase()} side ${from.toFixed(2)}..${to.toFixed(2)} is open through the corner under a head at the storey's ceiling (assumed: no elevation reads it), and ${backOpenings.length} opening${backOpenings.length === 1 ? '' : 's'} stand in the wall behind it`
+            pockets.push({ id, massId: host.id, facade, storeyIndex: index, from, to, mouthAt, backAt, headY, headProvenance: 'ASSUMED_FOR_RENDERING', walls: [{ id: `${id}-back`, role: 'BACK', start: back.start, end: back.end, thicknessM: T }], backOpenings, openEnd, ...(spec.carriesPost && notch.post ? { post: notch.post } : {}), featureId, why })
+          }
+          step({ stage: 'pockets', what: `a recess cut out of a corner of ${host.id}, storey ${index}`, method: 'DIRECT', detail: notch.why, inputs: 2, outputs: 2 })
+        }
+      }
+    }
   }
   step({ stage: 'pockets', what: 'recesses inside a body’s face', method: 'DISCRETE_SELECTION', detail: pockets.map((p) => `${p.facade} ${p.from.toFixed(2)}..${p.to.toFixed(2)}, ${Math.abs(p.backAt - p.mouthAt).toFixed(2)} m deep, ${p.backOpenings.length} back openings`).join('; ') || 'none', inputs: layout.recesses.length, outputs: pockets.length })
   for (const o of [...openings, ...sharedDoors]) {
