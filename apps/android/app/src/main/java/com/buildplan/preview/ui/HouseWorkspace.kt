@@ -476,6 +476,8 @@ private fun StatusRow(context: Context) {
     val scene = context.model.scene
     val entry = scene?.let { s -> context.model.scenes.firstOrNull { it.key == s.key } }
     val download = scene?.let { s -> analyzer.downloads.firstOrNull { it.key == s.key } }
+    // N7-P1: a partial 3D preview says so for as long as it is open; it is not a notice to be dismissed
+    val partial = download?.isPartialPreview == true
     val limited = download != null && (download.unresolvedCount > 0 || download.warningsCount > 0) && scene.key !in context.limitedSeen
     val sample = entry != null && entry.source != SceneSourceKind.DOWNLOADED
     val running = analyzer.isRunning
@@ -484,6 +486,7 @@ private fun StatusRow(context: Context) {
         ready != null -> Status.READY
         failed -> Status.FAILED
         running -> Status.RUNNING
+        partial -> Status.PARTIAL
         limited -> Status.LIMITED
         sample -> Status.SAMPLE
         else -> return
@@ -503,6 +506,7 @@ private fun StatusRow(context: Context) {
                         scene?.let { context.onLimitedSeen(it.key) }
                         context.onOpenSheet(Sheet.SOURCE)
                     }
+                    Status.PARTIAL -> context.onOpenSheet(Sheet.SOURCE)
                 }
             }
             .padding(start = Space.m, end = Space.s),
@@ -512,6 +516,7 @@ private fun StatusRow(context: Context) {
             Status.FAILED -> ShellIcons.caution to Palette.Error
             Status.RUNNING -> ShellIcons.link to Palette.InkMuted
             Status.LIMITED -> ShellIcons.caution to Palette.InkMuted
+            Status.PARTIAL -> ShellIcons.caution to Palette.Ink
             Status.SAMPLE -> ShellIcons.link to Palette.InkMuted
         }
         Icon(icon, contentDescription = null, tint = tint, modifier = Modifier.size(Sizes.iconSmall))
@@ -522,6 +527,7 @@ private fun StatusRow(context: Context) {
                 Status.RUNNING -> stringResource(R.string.house_analysis_running_short)
                 Status.FAILED -> stringResource(R.string.house_analysis_failed_short)
                 Status.LIMITED -> stringResource(R.string.house_status_limited_short)
+                Status.PARTIAL -> stringResource(R.string.house_status_partial_short)
                 Status.SAMPLE -> stringResource(R.string.house_status_sample_add)
             },
             style = MaterialTheme.typography.bodySmall,
@@ -539,7 +545,7 @@ private fun StatusRow(context: Context) {
 }
 
 /** What the status row can say, one at a time, by priority. */
-private enum class Status { READY, FAILED, RUNNING, LIMITED, SAMPLE }
+private enum class Status { READY, FAILED, RUNNING, PARTIAL, LIMITED, SAMPLE }
 
 /** The analyzer's own progress, 0..100, for the running line. */
 internal fun analysisPercent(analyzer: AnalyzerViewModel): Int {

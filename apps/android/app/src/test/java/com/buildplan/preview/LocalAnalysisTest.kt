@@ -20,6 +20,7 @@ import com.buildplan.preview.analyzer.local.LocalRuntimeManifest
 import com.buildplan.preview.analyzer.local.Scheduler
 import com.buildplan.preview.scene.AnalysisOrigin
 import com.buildplan.preview.scene.DownloadedScenes
+import com.buildplan.preview.scene.PreviewOutcome
 import java.io.File
 import java.io.IOException
 import org.junit.Assert.assertEquals
@@ -42,6 +43,10 @@ class LocalAnalysisTest {
 
     private fun resource(name: String): ByteArray =
         requireNotNull(javaClass.classLoader?.getResourceAsStream("analyzer-contract/$name")) { "missing test resource $name" }.use { it.readBytes() }
+
+    /** N7-P1: what the built bundle wrote for the synthetic Sliverton link (`apps/local-analyzer`, fixture `sliverton`). */
+    private fun partialResource(name: String): ByteArray =
+        requireNotNull(javaClass.classLoader?.getResourceAsStream("analyzer-partial/$name")) { "missing test resource $name" }.use { it.readBytes() }
 
     private val summaryJson = resource("result.json").decodeToString()
     private val sceneBytes = resource("scene.json")
@@ -157,14 +162,14 @@ class LocalAnalysisTest {
                 (detail?.let { ""","detail":"$it"""" } ?: "") + """},"elapsedMs":12000,"rssBytes":400000000}""",
         )
 
-        fun writeResult(scene: ByteArray = sceneBytes) {
+        fun writeResult(scene: ByteArray = sceneBytes, summary: String = summaryJson) {
             val out = File(run.arg("out"))
             File(out, "scene.json").writeBytes(scene)
-            File(out, "result.json").writeText(summaryJson)
+            File(out, "result.json").writeText(summary)
         }
 
-        fun done() = line(
-            """{"type":"done","summary":$summaryJson,"files":{},""" +
+        fun done(summary: String = summaryJson) = line(
+            """{"type":"done","summary":$summary,"files":{},""" +
                 """"metrics":{"elapsedMs":245000,"memory":{"rssBytes":900000000,"peakRssBytes":1650000000,"peakSource":"VmHWM","heapUsedBytes":60000000,"arrayBuffersBytes":120000000},""" +
                 """"timings":{"acquisitionMs":19000,"observationMs":21000,"metricExtractionMs":190000,"reconstructionMs":9000,"compileMs":400,"verificationMs":1500,"totalMs":241000},"sceneBytes":${sceneBytes.size}},""" +
                 """"sources":{"packageHash":"${"a".repeat(64)}","pageHash":"${"b".repeat(64)}","assets":[]}}""",
@@ -233,6 +238,59 @@ class LocalAnalysisTest {
         assertEquals(listOf(report), w.finished)
         w.assertNothingLeft()
         assertFalse(w.local.isBusy)
+    }
+
+    /**
+     * N7-P1: the REAL files the built analyzer bundle wrote for the synthetic Sliverton link — its attached body refused
+     * (`WALLS_OVERLAP` between the ring's w1 and w3, command 21) after a valid main body — reach the scene store as a
+     * partial 3D preview that opens, and keep saying what they are after a restart.
+     */
+    @Test
+    fun `a partial 3D preview is stored like any result, opens, and stays marked partial with its refusal`() {
+        val partialSummary = partialResource("result.json").decodeToString()
+        val partialScene = partialResource("scene.json")
+        val w = World()
+        w.start()
+        w.hello()
+        w.writeResult(partialScene, partialSummary)
+        w.done(partialSummary)
+        w.processGone()
+
+        val completed = w.last as AnalysisState.Completed
+        assertTrue(completed.summary.preview.isPartial)
+        assertEquals(PreviewOutcome.PARTIAL_3D_PREVIEW, completed.summary.preview.outcome)
+        val failure = completed.summary.preview.partial!!.failure
+        assertEquals(21, failure.commandIndex)
+        assertEquals("ring-attached-0-0", failure.id)
+        assertEquals(listOf("WALLS_OVERLAP"), failure.codes)
+        assertTrue(failure.message, failure.message.startsWith("walls ring-attached-0-0-w1 and ring-attached-0-0-w3 share"))
+        assertEquals(2, completed.summary.preview.built.wallRings)
+        assertEquals("FLOOR_PLAN", completed.summary.sourceBasis?.document)
+        assertTrue(completed.entry.isPartialPreview)
+        // the limitation is counted, never hidden: the partial warning is one of the limiting ones
+        assertTrue(completed.summary.limitingWarnings.any { it.startsWith("partial 3D preview") })
+        // stored, and after a restart still marked partial with the same refusal, and still opens
+        val restarted = DownloadedScenes(File(w.root, "analyses"))
+        val kept = restarted.find(completed.entry.key)
+        assertNotNull(kept)
+        assertTrue(kept!!.isPartialPreview)
+        assertEquals("ring-attached-0-0", kept.preview?.partial?.failure?.id)
+        assertEquals(listOf("slab-attached-0-0", "ring-attached-0-0", "roof-attached-0"), kept.preview?.partial?.missing?.map { it.id })
+        assertTrue(restarted.load(completed.entry.key) is com.buildplan.preview.scene.SceneLoadResult.Ok)
+        w.assertNothingLeft()
+    }
+
+    @Test
+    fun `a summary from an analyzer before N7-P1 reads as a complete model`() {
+        val w = World()
+        w.start()
+        w.hello()
+        w.writeResult()
+        w.done()
+        w.processGone()
+        val completed = w.last as AnalysisState.Completed
+        assertFalse(completed.summary.preview.isPartial)
+        assertFalse(completed.entry.isPartialPreview)
     }
 
     @Test

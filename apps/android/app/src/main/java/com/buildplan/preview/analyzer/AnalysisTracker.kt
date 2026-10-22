@@ -99,6 +99,7 @@ fun recordOf(summary: AnalysisSummary, jobId: String, fallbackUrl: String, fallb
     warningsCount = summary.limitingWarnings.size,
     visionMode = summary.vision.mode,
     origin = origin,
+    preview = summary.preview,
 )
 
 /** The next state, and how long to wait before the next [AnalysisTracker.step]; null once nothing is left to do. */

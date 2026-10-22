@@ -78,6 +78,7 @@ import com.buildplan.preview.analyzer.LocalRunReport
 import com.buildplan.preview.analyzer.RetryAction
 import com.buildplan.preview.analyzer.StageChecklist
 import com.buildplan.preview.analyzer.StageRow
+import com.buildplan.preview.scene.PreviewOutcome
 import com.buildplan.preview.analyzer.StageState
 import com.buildplan.preview.analyzer.LivenessTracker
 import com.buildplan.preview.analyzer.Liveness
@@ -615,12 +616,20 @@ private fun Failure(
 @Composable
 private fun Result(summary: AnalysisSummary, entry: DownloadedSceneEntry, local: LocalRunReport?, onOpen: () -> Unit) {
     var open by rememberSaveable { mutableStateOf(false) }
-    val limited = summary.unresolved.isNotEmpty() || summary.limitingWarnings.isNotEmpty()
+    // N7-P1: a partial 3D preview is never said as a ready model, however few warnings it carries
+    val partial = summary.preview.isPartial
+    val limited = partial || summary.unresolved.isNotEmpty() || summary.limitingWarnings.isNotEmpty()
     Column(verticalArrangement = Arrangement.spacedBy(Space.s)) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Space.s)) {
             Icon(if (limited) ShellIcons.caution else ShellIcons.check, null, tint = Palette.Ink, modifier = Modifier.size(Sizes.iconSmall))
             Text(
-                stringResource(if (limited) R.string.analyzer_result_limited else R.string.analyzer_result_ready),
+                stringResource(
+                    when {
+                        partial -> R.string.analyzer_result_partial
+                        limited -> R.string.analyzer_result_limited
+                        else -> R.string.analyzer_result_ready
+                    },
+                ),
                 style = MaterialTheme.typography.titleMedium,
                 color = Palette.Ink,
                 // The end of a job minutes long is said as it happens, not found later (cycle 3, C3-06).
@@ -644,12 +653,56 @@ private fun Result(summary: AnalysisSummary, entry: DownloadedSceneEntry, local:
                     summary.limitingWarnings.size.takeIf { it > 0 }?.let { pluralStringResource(R.plurals.count_warnings, it, it) },
                 ).joinToString(" · "),
             )
-            Body(stringResource(R.string.analyzer_result_limited_body))
+            Body(stringResource(if (partial) R.string.analyzer_result_partial_body else R.string.analyzer_result_limited_body))
         }
-        InkButton(stringResource(R.string.house_open_3d), onClick = onOpen, icon = ShellIcons.cube, modifier = Modifier.fillMaxWidth())
+        if (partial || summary.preview.provisional.isNotEmpty()) PreviewOutcomeDetails(summary.preview)
+        InkButton(stringResource(if (partial) R.string.analyzer_open_partial_3d else R.string.house_open_3d), onClick = onOpen, icon = ShellIcons.cube, modifier = Modifier.fillMaxWidth())
         Foldout(stringResource(R.string.analyzer_details), open, onToggle = { open = !open }) {
             AnalysisDiagnostics(summary)
             local?.let { LocalCost(it) }
+        }
+    }
+}
+
+/**
+ * N7-P1: what a model is, beside it — what was built, what is missing, the object the model refused, and which
+ * dimensions or heights are only for viewing. Shared with the source sheet, where it is read from the stored record.
+ */
+@Composable
+internal fun PreviewOutcomeDetails(preview: PreviewOutcome) {
+    Column(verticalArrangement = Arrangement.spacedBy(Space.m)) {
+        val partial = preview.partial?.takeIf { preview.isPartial }
+        if (partial != null) {
+            Section(stringResource(R.string.partial_built)) {
+                val b = preview.built
+                Body(stringResource(R.string.partial_built_rows, b.wallRings, b.walls, b.slabs, b.roofs + b.roofPlanes, b.openings, b.rooms))
+                if (partial.basis == "MINIMAL_BASE") StatusText(stringResource(R.string.partial_basis_minimal))
+                partial.checkpoint?.let { StatusText(stringResource(R.string.partial_checkpoint, it.commands, it.modelSha256.take(12))) }
+            }
+            Section(stringResource(R.string.partial_missing)) {
+                if (partial.missing.isEmpty()) Body(stringResource(R.string.analyzer_none))
+                for (m in partial.missing) {
+                    Column(Modifier.padding(bottom = Space.xs)) {
+                        Text(listOfNotNull(m.type, m.id).joinToString(" "), style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
+                        StatusText(m.why)
+                    }
+                }
+            }
+            Section(stringResource(R.string.partial_failed_at)) {
+                val f = partial.failure
+                Text(stringResource(R.string.partial_failed_row, f.commandIndex, f.type, f.id.orEmpty(), f.codes.joinToString(", ")), style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
+                if (f.message.isNotBlank()) StatusText(f.message)
+                for (other in partial.failures.drop(1)) StatusText(stringResource(R.string.partial_failed_row, other.commandIndex, other.type, other.id.orEmpty(), other.codes.joinToString(", ")))
+            }
+        }
+        Section(stringResource(R.string.partial_provisional)) {
+            if (preview.provisional.isEmpty()) Body(stringResource(R.string.partial_provisional_none))
+            for (p in preview.provisional) {
+                Column(Modifier.padding(bottom = Space.xs)) {
+                    Text(p.code, style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
+                    StatusText(p.what)
+                }
+            }
         }
     }
 }

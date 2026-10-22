@@ -224,6 +224,11 @@ fun SourceSheet(preview: PreviewViewModel, analyzer: AnalyzerViewModel, progress
                 modifier = Modifier.padding(top = Space.s).semantics { heading() },
             )
             SourceStatus(entry?.source ?: SceneSourceKind.BUNDLED, download, resultShown)
+            // N7-P1: a partial model says beside it what it is, from the record kept with the scene
+            download?.preview?.takeIf { it.isPartial }?.let { outcome ->
+                SectionHeading(stringResource(R.string.analyzer_result_partial))
+                PreviewOutcomeDetails(outcome)
+            }
             AnalysisLine(analyzer, onAnalyze)
             if (resultShown && completed != null) {
                 SectionHeading(stringResource(R.string.analyzer_details))
@@ -277,7 +282,8 @@ fun SourceSheet(preview: PreviewViewModel, analyzer: AnalyzerViewModel, progress
 /** Where the model came from — limitations said in words, with their counts. */
 @Composable
 private fun SourceStatus(source: SceneSourceKind, download: DownloadedSceneEntry?, resultShown: Boolean) {
-    val limited = download != null && (download.unresolvedCount > 0 || download.warningsCount > 0)
+    val partial = download?.isPartialPreview == true
+    val limited = download != null && (partial || download.unresolvedCount > 0 || download.warningsCount > 0)
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(Space.s),
@@ -285,7 +291,7 @@ private fun SourceStatus(source: SceneSourceKind, download: DownloadedSceneEntry
     ) {
         if (limited) Icon(ShellIcons.caution, contentDescription = null, tint = Palette.InkMuted, modifier = Modifier.size(Sizes.iconSmall))
         Column(Modifier.weight(1f)) {
-            Text(stringResource(statusRes(source, limited)), style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
+            Text(stringResource(if (partial) R.string.house_status_partial else statusRes(source, limited)), style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
             if (limited && download != null) {
                 val unresolved = pluralStringResource(R.plurals.count_unresolved, download.unresolvedCount, download.unresolvedCount)
                 Text(

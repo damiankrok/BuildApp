@@ -1,5 +1,6 @@
 package com.buildplan.preview.analyzer
 
+import com.buildplan.preview.scene.PreviewOutcome
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -242,6 +243,10 @@ data class AnalysisSummary(
     val warnings: List<String> = emptyList(),
     /** 005A: each warning with its severity; absent from an older analyzer. */
     val warningDetails: List<AnalysisWarning> = emptyList(),
+    /** N7-P1: whole reading or partial 3D preview, what is built and missing, what is provisional; absent from an older analyzer (complete). */
+    val preview: PreviewOutcome = PreviewOutcome(),
+    /** N7-P1: the drawing the walls were read from, by hash and size; absent from an older analyzer. */
+    val sourceBasis: SourceBasis? = null,
     val vision: VisionInfo = VisionInfo(),
     val verification: VerificationInfo = VerificationInfo(),
     val analyzer: AnalyzerVersions = AnalyzerVersions(),
@@ -269,3 +274,36 @@ data class AnalysisWarning(val code: String = "", val severity: String = "", val
         const val INFO = "INFO"
     }
 }
+
+/** N7-P1: the plan the walls were reconstructed from (`sourceBasis`, `packages/analysis-service/src/preview.ts`). */
+@Serializable
+data class SourceBasis(
+    val assetId: String = "",
+    val document: String = "",
+    val projection: String = "",
+    val storey: String = "",
+    val annotation: String = "",
+    val variant: SourceVariantInfo = SourceVariantInfo(),
+    val variants: Int = 0,
+    val largestOffered: Boolean = false,
+    val dimensions: SourceDimensions = SourceDimensions(),
+    val scale: SourceScale = SourceScale(),
+)
+
+@Serializable
+data class SourceVariantInfo(val widthPx: Int = 0, val heightPx: Int = 0, val byteLength: Long = 0, val mediaType: String = "", val byteHash: String = "")
+
+@Serializable
+data class SourceDimensions(val chains: Int = 0, val segmentsRead: Int = 0, val evidence: String = "")
+
+@Serializable
+data class SourceScale(
+    val mppX: Double? = null,
+    val mppY: Double? = null,
+    val anchors: Int = 0,
+    val rmsM: Double? = null,
+    val confidence: String = "",
+    val relation: String = "",
+    val independentWitnesses: Int = 0,
+    val verified: Boolean = false,
+)

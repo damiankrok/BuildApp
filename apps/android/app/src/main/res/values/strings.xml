@@ -434,6 +434,21 @@
     <string name="analyzer_copy_code_description">Kopiuj kod diagnostyczny %1$s</string>
     <string name="analyzer_result_ready">Model gotowy</string>
     <string name="analyzer_result_limited">Model gotowy z ograniczeniami</string>
+    <!-- N7-P1: the last valid model when a later object was refused; never called a complete reconstruction -->
+    <string name="analyzer_result_partial">Model częściowy 3D</string>
+    <string name="analyzer_result_partial_body">To nie jest pełna rekonstrukcja. Model zatrzymał się na jednym elemencie; wszystko, co zbudowano przed nim, jest zachowane i sprawdzone, a pominięte elementy są wymienione niżej.</string>
+    <string name="analyzer_open_partial_3d">Otwórz model częściowy 3D</string>
+    <string name="partial_built">Co udało się odtworzyć</string>
+    <string name="partial_built_rows">Bryły (pierścienie ścian): %1$d · ściany: %2$d · stropy: %3$d · dachy: %4$d · otwory: %5$d · pomieszczenia: %6$d</string>
+    <string name="partial_missing">Czego brakuje</string>
+    <string name="partial_failed_at">Na którym elemencie wystąpił błąd</string>
+    <string name="partial_failed_row">Polecenie %1$d · %2$s %3$s · %4$s</string>
+    <string name="partial_provisional">Wymiary i wysokości tymczasowe</string>
+    <string name="partial_provisional_none">Brak: wysokości i skala pochodzą z rysunków.</string>
+    <string name="partial_basis_minimal">Zbudowano tylko stropy i ściany bryły głównej.</string>
+    <string name="partial_checkpoint">Punkt kontrolny: %1$d poleceń, model %2$s</string>
+    <string name="house_status_partial">Z analizy linku · model częściowy 3D</string>
+    <string name="house_status_partial_short">Model częściowy 3D — zobacz, czego brakuje i dlaczego</string>
     <string name="analyzer_result_found">Odczytano: %1$s · %2$s · %3$s</string>
     <string name="analyzer_result_limited_body">Części elementów analiza nie rozstrzygnęła albo zgłosiła ostrzeżenia. Model pokazuje tylko to, co odczytano z rysunków; brakujących elementów nie dopowiada.</string>
     <string name="analyzer_unresolved">Nierozstrzygnięte (słowami analizatora)</string>

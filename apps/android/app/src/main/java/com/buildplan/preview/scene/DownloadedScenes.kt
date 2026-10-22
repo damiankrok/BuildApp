@@ -47,7 +47,12 @@ data class DownloadedSceneEntry(
     val visionMode: String = "",
     /** Where the analysis ran: [AnalysisOrigin.SERVICE] (downloaded) or [AnalysisOrigin.LOCAL] (on this phone). */
     val origin: String = AnalysisOrigin.SERVICE,
-)
+    /** N7-P1: whole reading or partial 3D preview, as the analyzer said; an entry stored earlier has none (complete). */
+    val preview: PreviewOutcome? = null,
+) {
+    /** The model is the last valid part of the house, not a complete reconstruction. */
+    val isPartialPreview: Boolean get() = preview?.isPartial == true
+}
 
 /** Where an analysis was made. Stored as text so an index written by an older build still reads. */
 object AnalysisOrigin {
@@ -80,6 +85,7 @@ data class AnalysisRecord(
     val warningsCount: Int,
     val visionMode: String,
     val origin: String = AnalysisOrigin.SERVICE,
+    val preview: PreviewOutcome? = null,
 )
 
 /** Why a downloaded scene was not kept. Nothing was written in any of these cases. */
@@ -195,6 +201,7 @@ class DownloadedScenes(
                         warningsCount = record.warningsCount,
                         visionMode = record.visionMode,
                         origin = record.origin,
+                        preview = record.preview,
                     )
                     entries.removeAll { it.sceneSha256 == actual }
                     entries.add(entry)
