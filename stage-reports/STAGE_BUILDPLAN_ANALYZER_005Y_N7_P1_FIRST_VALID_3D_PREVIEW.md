@@ -128,7 +128,7 @@ zadań) nie uruchamiano — zgodnie z poleceniem.
 | podpis | ten sam klucz podglądu, cert SHA-256 `6e48fac4afaa3d70e70de5bc608aa4c4194206a9e6bc993dab56382b921ca0da`; `verify-preview-signature.sh`: ok |
 | analizator w APK | `assets/local-analyzer/analyzer.mjs` SHA-256 **`3d57e65a2cfb82f49441494fe027ce785de3b588ee6f6f00af934b3a9a2dc357`** (= `manifest.json`); usługa 1.2.0; kod identyczny z bundlem zbudowanym z HEAD (różnią się tylko komentarze ze ścieżkami esbuild); **ten plik wyjęty z APK** uruchomiony na Slivertonie daje `PARTIAL_3D_PREVIEW`, odmowę 21 i scenę `4ad30210…` = plik w teście Androida |
 
-Instaluje się na 1303 (ten sam podpis, wyższy versionCode). Urządzenia ani emulatora w tej sesji nie było:
+Publikacja jako wydanie GitHub: odmowa tej sesji (`403`, tworzenie wydań niedozwolone) — APK przekazany OWNER-owi bezpośrednio jako plik; tag `owner-preview-latest` nie został zmieniony i nadal wskazuje stare wydanie. Instaluje się na 1303 (ten sam podpis, wyższy versionCode). Urządzenia ani emulatora w tej sesji nie było:
 **ANDROID_3D_NOT_DEVICE_VERIFIED** — scena Filamenta na telefonie nie była oglądana; geometrię modelu częściowego
 obejrzano w przeglądarce (BuildWorld web, Three.js).
 
