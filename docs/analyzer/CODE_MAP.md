@@ -1,6 +1,6 @@
 # Analyzer code map — where each behaviour lives
 
-> Stage 005Y-N6 REV1. A map for an engineer who has to find, change and test one behaviour of the source → model →
+> Stage 005Y-N7 (updated from N6 REV1). A map for an engineer who has to find, change and test one behaviour of the source → model →
 > phone path. Every file named here is real; every function named here can be called from a test on its own.
 > Line counts are from `research/analyzer-005y-n6/function-map.ts` (TypeScript compiler API inventory).
 
@@ -54,8 +54,33 @@ source-package ─► source-analyzer ─► source-metrics ─► reconstructio
 - **Stairs** — `v2/stair-topology.ts`: `findTreadLadders` (strokes → sequences → groups; `splitAtBreaks` takes apart a
   group too wide for one flight), `assembleStair`, `winderTreadLines`; `v2/house-stair.ts` `readHouseStair` and the
   pure `stairSlabHole`; `v2/stair-fit.ts` fits the laid-out stair between its bounding walls.
+- **Balconies that stand proud of the wall** (N7) — `v2/projecting-balcony.ts`: `floorLevelDoorGroups` and
+  `doorSpanCandidates` (the doors a balcony is stepped onto from), `readBalconyOutline` (an edge 0.6–3 m out that spans
+  the doors, closed back to the face by returns and turning there; overhang lines and chains are passed over),
+  `balconyRect`, `balustradePath`. Tests: `test/projecting-balcony-005y-n7.test.ts`.
+- **A covered terrace cut out of a corner** (N7) — `v2/corner-recess.ts` `readCornerNotch` (open wall band along both
+  faces, a thick back wall behind, no labelled room inside) and `v2/corner-pockets.ts` `cornerPocketSpecs` (two pockets
+  whose PASSAGE mouths open through the corner, their back walls, the post). Tests: `test/corner-recess-005y-n7.test.ts`.
+- **A pergola** (N7) — `v2/pergola.ts`: `findPosts` (solid squares outside the walls), `pergolaFromPosts` (≥ 3 corners
+  of a frame against a face), `pergolaBeams`. Tests: `test/pergola-005y-n7.test.ts`.
+- **The model against each view** (N7) — `v2/cross-view.ts` `crossViewResiduals`: residuals per view and per kind, a
+  verdict per view, and what `verify.ts` `repairFromResiduals` applied or refused. Tests: `test/cross-view-005y-n7.test.ts`.
 - **The solver's bookkeeping** — `v2/solver-recorder.ts` `createSolverRecorder`: `step`, `gap`, `record`, `sighting`,
   `feature`, `relate`. Every decision the solver makes goes through one of these, so it shows in the analysis trace.
+
+### Walls the model refuses as overlapping (N7)
+- **The pure geometry** — `v2/wall-reconciliation.ts`: `classifyWallConflict` (END_INTO_BAND, PARALLEL_OVERLAP,
+  HOST_END_INTO_BAND, COINCIDENT_BAND, CROSSING), `proposeWallRepair` (trim to the near face, shift within the
+  tolerance, build a duplicate once, leave a partition out, refuse an exterior wall), `reconcileToleranceM`
+  (`WALL_RECONCILE_PX` = 3 plan px), `ringWallLines`, `moveRingEdge`, `openRingWithout`, `rewriteReferences`,
+  `retargetOpening`.
+- **The driver** — `candidate.ts` `reconcileWallOverlaps` (the only place it may build a model): applies the program
+  command by command, repairs a wall the model refuses for WALLS_OVERLAP only, records `GEOMETRY_RECONCILIATION`,
+  passes any other refusal on to `fitOpeningsToHosts`. It runs only when the first fit fails on WALLS_OVERLAP alone.
+- **What it says** — `v2/wall-reconciliation-report.ts` (`modeOf`: PREVIEW_WITH_ADJUSTMENTS / PARTIAL_SOURCE_GROUNDED /
+  REFUSED; steps, gaps, the refusal's pair in the failure diagnostics); `analysis-service/src/warnings.ts` (LIMITING
+  warnings the phone shows). Tests: `test/wall-reconciliation-005y-n7.test.ts`; corpus stress
+  `research/analyzer-005y-n7/overlap-stress.ts` (111 perturbations of the 8 real programs).
 
 ### Model, scene, phone
 - **Joint audit semantics** — `geometry/src/closure.ts` `relationOf`: which meetings are intended (a stack pierces a roof
@@ -99,3 +124,14 @@ production, no project knowledge in the core).
    that asks for a leaf; it fell through to WINDOW. The plan draws the swing into the room behind.
 4. **Fix without moving the 0.75 m cut.** Below it, `symbols.leaf()` or `symbols.swingDrawn()` makes a DOOR; with
    neither it stays a WINDOW (negative test). Replay: that one opening changes, 7 other models byte-identical.
+
+## Worked debugging example 3 — "the model refused command 41 (createWall): WALLS_OVERLAP"
+
+1. **Read the failure's diagnostics.** Since N7 a refusal that reaches the user carries the pair the reconciliation
+   could not settle: `reconciliation` (the relation), `reconciliationWall` (id and endpoints), `reconciliationAgainst`,
+   `penetrationM`, `toleranceM`.
+2. **Ask which relation it is.** A partition crossing the envelope is left out and named (the model is a partial
+   preview); only an EXTERIOR wall crossing another, or an exterior ring that would have to bend, refuses.
+3. **Reproduce without the house.** Replay with `DUMP_PROGRAM=1`, take `program.json`, and run the case in
+   `research/analyzer-005y-n7/overlap-stress.ts` style: the same wall, the same perturbation. The first bad number is
+   upstream of the emitter (a ring polygon, a return's start); fix it there and the reconciliation records nothing.

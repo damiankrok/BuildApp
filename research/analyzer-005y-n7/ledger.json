@@ -1,0 +1,296 @@
+{
+ "schema": "buildapp.research.005y-n7.ledger",
+ "stage": "BUILDPLAN-ANALYZER-005Y-N7",
+ "base": "cf472b514901b32521db555d8ea94d8205702c95",
+ "branch": "analyzer/005y-n4-general-architectural-understanding-v1",
+ "verdict": "OWNER_VISUAL_PENDING",
+ "hiddenHouse": {
+  "status": "OWNER_ONLY_HIDDEN_REGRESSION",
+  "claim": "MECHANISM_IMPLEMENTED_NOT_REPRODUCED",
+  "why": "the owner house was not available; WALLS_OVERLAP was reproduced synthetically (16 unit cases) and by perturbing the 8 real programs (111 cases); whether it covers the owner house is for the owner to confirm"
+ },
+ "commits": [
+  {
+   "sha": "23544de",
+   "kind": "chore",
+   "what": "replay dumps the emitted program (research)"
+  },
+  {
+   "sha": "419f3fb",
+   "kind": "fix",
+   "what": "A: WALLS_OVERLAP reconciliation within the plan uncertainty; partial preview labels; refusal diagnostics"
+  },
+  {
+   "sha": "7893fb3",
+   "kind": "fix",
+   "what": "C: balconies standing proud of the wall, from the upper plan"
+  },
+  {
+   "sha": "c58dea8",
+   "kind": "fix",
+   "what": "C: covered terrace cut out of a corner of a body"
+  },
+  {
+   "sha": "5414dd9",
+   "kind": "fix",
+   "what": "C: pergola from the posts the ground plan draws"
+  },
+  {
+   "sha": "5473f9b",
+   "kind": "fix",
+   "what": "C: a face's doors read as one span, then as runs between walls"
+  },
+  {
+   "sha": "45b12b5",
+   "kind": "feat",
+   "what": "B: crossViewResiduals per view and per kind"
+  }
+ ],
+ "wallOverlapStress": {
+  "cases": 111,
+  "asExpected": 111,
+  "byOutcome": {
+   "UNCHANGED->UNCHANGED": 8,
+   "REPAIRED->REPAIRED": 68,
+   "PARTIAL->PARTIAL": 24,
+   "REFUSED->REFUSED": 11
+  },
+  "file": "research/analyzer-005y-n7/overlap-stress.ts"
+ },
+ "models": {
+  "a01": {
+   "n6": "c9d774e4",
+   "n7": "a6849073",
+   "change": "pergola west 3.28 x 5.76 m on 7 posts"
+  },
+  "gozd": {
+   "n6": "a21ad79e",
+   "n7": "852c257a",
+   "change": "balcony west, storey 1, 1.71..7.82 x 1.06 m, glass balustrade"
+  },
+  "marcowki": {
+   "n6": "d8ec95cf",
+   "n7": "d8ec95cf",
+   "change": "none"
+  },
+  "ciesz": {
+   "n6": "675c0850",
+   "n7": "5394c17c",
+   "change": "covered rear-west corner terrace 2.65 x 4.71 m, post, two passages open through the corner"
+  },
+  "rary": {
+   "n6": "73969751",
+   "n7": "73969751",
+   "change": "none expected"
+  },
+  "trytomach": {
+   "n6": "1bf237bd",
+   "n7": "d2bf0c03",
+   "change": "rear terrace frame 7.1 x 2.6 m on 6 posts"
+  },
+  "arganiach": {
+   "n6": "34a95a76",
+   "n7": "34a95a76",
+   "change": "none"
+  },
+  "sasankach3": {
+   "n6": "8e4539fd",
+   "n7": "090749f4",
+   "change": "balconies front 1.42..6.32 x 1.09 m and rear 1.09..6.67 x 1.11 m"
+  }
+ },
+ "crossViewResiduals": {
+  "a01": {
+   "views": [
+    {
+     "side": "RIGHT",
+     "verdict": "DISAGREES",
+     "within": 2,
+     "checks": 6
+    }
+   ],
+   "reconciliation": {
+    "iterations": 1,
+    "applied": 0,
+    "refused": 1,
+    "converged": true,
+    "residualsBefore": 4,
+    "residualsAfter": 4
+   }
+  },
+  "gozd": {
+   "views": [],
+   "reconciliation": {
+    "iterations": 1,
+    "applied": 0,
+    "refused": 0,
+    "converged": true,
+    "residualsBefore": 0,
+    "residualsAfter": 0
+   }
+  },
+  "marcowki": {
+   "views": [
+    {
+     "side": "RIGHT",
+     "verdict": "AGREES",
+     "within": 6,
+     "checks": 6
+    },
+    {
+     "side": "LEFT",
+     "verdict": "MIXED",
+     "within": 3,
+     "checks": 4
+    },
+    {
+     "side": "REAR",
+     "verdict": "MIXED",
+     "within": 19,
+     "checks": 27
+    },
+    {
+     "side": "FRONT",
+     "verdict": "MIXED",
+     "within": 26,
+     "checks": 29
+    }
+   ],
+   "reconciliation": {
+    "iterations": 1,
+    "applied": 0,
+    "refused": 9,
+    "converged": true,
+    "residualsBefore": 12,
+    "residualsAfter": 12
+   }
+  },
+  "ciesz": {
+   "views": [],
+   "reconciliation": {
+    "iterations": 1,
+    "applied": 0,
+    "refused": 0,
+    "converged": true,
+    "residualsBefore": 0,
+    "residualsAfter": 0
+   }
+  },
+  "rary": {
+   "views": [
+    {
+     "side": "LEFT",
+     "verdict": "DISAGREES",
+     "within": 1,
+     "checks": 5
+    },
+    {
+     "side": "FRONT",
+     "verdict": "DISAGREES",
+     "within": 2,
+     "checks": 10
+    },
+    {
+     "side": "RIGHT",
+     "verdict": "DISAGREES",
+     "within": 2,
+     "checks": 3
+    },
+    {
+     "side": "REAR",
+     "verdict": "DISAGREES",
+     "within": 1,
+     "checks": 8
+    }
+   ],
+   "reconciliation": {
+    "iterations": 1,
+    "applied": 0,
+    "refused": 7,
+    "converged": true,
+    "residualsBefore": 20,
+    "residualsAfter": 20
+   }
+  },
+  "trytomach": {
+   "views": [
+    {
+     "side": "FRONT",
+     "verdict": "DISAGREES",
+     "within": 3,
+     "checks": 8
+    }
+   ],
+   "reconciliation": {
+    "iterations": 1,
+    "applied": 0,
+    "refused": 0,
+    "converged": true,
+    "residualsBefore": 5,
+    "residualsAfter": 5
+   }
+  },
+  "arganiach": {
+   "views": [
+    {
+     "side": "REAR",
+     "verdict": "DISAGREES",
+     "within": 1,
+     "checks": 6
+    },
+    {
+     "side": "FRONT",
+     "verdict": "DISAGREES",
+     "within": 2,
+     "checks": 6
+    }
+   ],
+   "reconciliation": {
+    "iterations": 1,
+    "applied": 0,
+    "refused": 0,
+    "converged": true,
+    "residualsBefore": 9,
+    "residualsAfter": 9
+   }
+  },
+  "sasankach3": {
+   "views": [
+    {
+     "side": "FRONT",
+     "verdict": "DISAGREES",
+     "within": 5,
+     "checks": 13
+    },
+    {
+     "side": "REAR",
+     "verdict": "DISAGREES",
+     "within": 6,
+     "checks": 13
+    }
+   ],
+   "reconciliation": {
+    "iterations": 2,
+    "applied": 4,
+    "refused": 0,
+    "converged": true,
+    "residualsBefore": 19,
+    "residualsAfter": 15
+   }
+  }
+ },
+ "notImplemented": [
+  {
+   "what": "ENTRANCE_CANOPY",
+   "why": "a reader (plan outline + elevation edge stopping at the outline) was built and removed: no positive case in the corpus passes it (A01 outline shares the paving edge; Rarytasy plan draws no outline); not shipped without a positive"
+  },
+  {
+   "what": "PROJECTED_CORNER_GLAZING (gozd kitchen bay)",
+   "why": "not attempted in N7"
+  },
+  {
+   "what": "gable glazing / timber lamella screen (Marcowki), cladding second layer",
+   "why": "not attempted in N7"
+  }
+ ]
+}
