@@ -1,6 +1,6 @@
 # Analyzer code map — where each behaviour lives
 
-> Stage 005Y-N7 (updated from N6 REV1). A map for an engineer who has to find, change and test one behaviour of the source → model →
+> Stage 005Y-N7-P1 (updated from N7, N6 REV1). A map for an engineer who has to find, change and test one behaviour of the source → model →
 > phone path. Every file named here is real; every function named here can be called from a test on its own.
 > Line counts are from `research/analyzer-005y-n6/function-map.ts` (TypeScript compiler API inventory).
 
@@ -81,6 +81,23 @@ source-package ─► source-analyzer ─► source-metrics ─► reconstructio
   REFUSED; steps, gaps, the refusal's pair in the failure diagnostics); `analysis-service/src/warnings.ts` (LIMITING
   warnings the phone shows). Tests: `test/wall-reconciliation-005y-n7.test.ts`; corpus stress
   `research/analyzer-005y-n7/overlap-stress.ts` (111 perturbations of the 8 real programs).
+
+### The last valid model when a later object is refused (N7-P1)
+- **Cut and refit** — `candidate.ts` `fitPreviewProgram` (what `reconstructV2` calls instead of the plain fit): the
+  plain fit and the N7 reconciliation first; on a refusal after the base, `cutFailedObject` takes the refused object
+  out with its body (an attached body's every storey, its roof; the main body's storeys from that one up) and every
+  later command that names something left out (`rewriteReferences`), and the rest is fitted again, at most
+  `PREVIEW_MAX_CUTS` times. A refusal in the base (header, levels, the main body's lowest floor and walls) is never cut
+  around: `minimalPreviewProgram` keeps the main body's floors and walls alone at storey height, or nothing.
+  `previewCheckpoint` is the base's prefix and the hash of the model it builds. No preview without main body walls.
+- **What it says** — `v2/reconstruct-v2.ts` (`partialPreview`, `heights`: steps, REFUSED/MISSING gaps, the features
+  left unbuilt at L0) → `analysis-service/src/preview.ts` (`previewOf`: `COMPLETE` / `PARTIAL_3D_PREVIEW`, built,
+  missing, provisional `HEIGHT_ASSUMED_FOR_PREVIEW` / `SCALE_NOT_VERIFIED`; `sourceBasisOf`: the plan the walls came
+  from) → `warnings.ts` (`PARTIAL_3D_PREVIEW`, `HEIGHT_ASSUMED_FOR_PREVIEW`) → the phone: `scene/PreviewOutcome.kt`,
+  stored with the scene, shown by `ui/AnalyzerScreen.kt` `PreviewOutcomeDetails`, the source sheet and the workspace row.
+- **Tests** — `reconstruction/test/partial-preview-n7-p1.test.ts`, `analysis-service/test/partial-preview-n7-p1.test.ts`
+  (SLIVERTON end to end), `local-analyzer/test/program.test.ts` (the built bundle), Android `LocalAnalysisTest`; corpus
+  stress `research/analyzer-005y-n7-p1/partial-preview-stress.ts` (44 cases on the 8 real programs).
 
 ### Model, scene, phone
 - **Joint audit semantics** — `geometry/src/closure.ts` `relationOf`: which meetings are intended (a stack pierces a roof
