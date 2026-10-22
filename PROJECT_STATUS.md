@@ -2606,3 +2606,16 @@ Proof: SLIVERTON (synthetic) reproduces the owner's failure signature end to end
 47/47 stress cases on the 8 real programs; 8/8 corpus models byte-identical. APK 1304
 (`e61f50ed…`, analyzer `3d57e65a…`). Not seen on a device (ANDROID_3D_NOT_DEVICE_VERIFIED). P2/P3 not started.
 
+
+## Facades against the plan: openings read on registered elevations (STAGE BUILDPLAN-ANALYZER-005Y-N7-P2)
+
+Status: **OWNER_TEST_PENDING**. Branch `claude/new-session-3kzcgh` from `4155239`; report
+`stage-reports/STAGE_BUILDPLAN_ANALYZER_005Y_N7_P2_SOURCE_REGISTERED_FACADE_ALIGNMENT.md`. `viewAudit` says which
+elevation is used how (and why not, and what that loses); `scanFacadeOpenings` / `measureOpeningOnView` read openings
+on each registered view; `alignFacades` names every plan↔view difference in metres (MISSING/EXTRA_IN_MODEL,
+HORIZONTAL_OFFSET, WIDTH/SILL/HEAD_MISMATCH, WRONG_FACADE, UNREGISTERED_VIEW) and corrects only on consistent
+evidence. On the 8-house corpus one correction passes: Marcówki garage door head 2.75 → 2.25 m (printed 225 picked by
+the ridge-registered front view over an equally scored 275); the other 7 models are byte-identical. Solver 2.4.0.
+APK 1305 (`000ef5f4…`, analyzer `0e46961d…`); its bundle on live Marcówki gives model `8541ca10…` = the replay, and on
+SLIVERTON the same partial preview as 1304. Goździkowce stays unregistered (no anchors). Not seen on a device. P3 not
+started.

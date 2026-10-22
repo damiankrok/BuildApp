@@ -99,6 +99,20 @@ source-package ─► source-analyzer ─► source-metrics ─► reconstructio
   (SLIVERTON end to end), `local-analyzer/test/program.test.ts` (the built bundle), Android `LocalAnalysisTest`; corpus
   stress `research/analyzer-005y-n7-p1/partial-preview-stress.ts` (44 cases on the 8 real programs).
 
+### Facade alignment (N7-P2)
+- **Which views are used** — `reconstruction/src/v2/view-audit.ts` `viewAudit`: one record per elevation/perspective
+  frame (use, side and how it was settled, scale, ground error m/px, heights read or refused, what is lost). A
+  perspective is never an elevation.
+- **Reading openings on a view** — `v2/facade-openings.ts`: `scanFacadeOpenings` (plan-free: wall materials learnt
+  from the plan's solid stretches; slat, balustrade, ragged-blob vetoes; `foreignShare` for plain-wall checks) and
+  `measureOpeningOnView` (plan-seeded jambs, sill, head).
+- **Plan against view, and the correction gate** — `v2/facade-alignment.ts` `alignFacades` (codes in metres; a
+  convention height corrected only when the height-registered view and the plan-free twin agree; a two-way printed
+  height settled only when the view fits exactly one printed reading) and `applyOpeningCorrections`. Wired in
+  `reconstruct-v2.ts` just before `const building`; result fields `facadeAlignment`, `viewAudit`.
+- **Tests / evidence** — `reconstruction/test/facade-alignment-n7-p2.test.ts`; offline replay and before/after overlays
+  (outside the repo) `research/analyzer-005y-n7-p2/replay.ts --overlays`.
+
 ### Model, scene, phone
 - **Joint audit semantics** — `geometry/src/closure.ts` `relationOf`: which meetings are intended (a stack pierces a roof
   or roof plane; walls meet at their ends; …). `test/plane-chimney-closure-005y-n6.test.ts`.
