@@ -1,0 +1,1468 @@
+{
+ "rows": [
+  {
+   "house": "a01",
+   "case": "UNCHANGED",
+   "note": "as emitted",
+   "expect": "UNCHANGED",
+   "outcome": "UNCHANGED",
+   "basis": "CHECKPOINT",
+   "failures": [],
+   "skipped": [],
+   "identicalToPlainFit": true,
+   "wallRings": [
+    "ring-main-0",
+    "ring-main-1"
+   ],
+   "walls": 27,
+   "openings": 21,
+   "roofs": 1,
+   "meshes": 155,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 19,
+    "wallRings": [
+     "ring-main-0",
+     "ring-main-1"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "a01",
+   "case": "SLIVER_ATTACHED",
+   "note": "a sliver body inserted beside ring-main-0 at command 18",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "18 createWallRing ring-attached-9-0 WALLS_OVERLAP"
+   ],
+   "skipped": [
+    "slab-attached-9-0:SAME_BODY",
+    "ring-attached-9-0:FAILED"
+   ],
+   "wallRings": [
+    "ring-main-0",
+    "ring-main-1"
+   ],
+   "walls": 27,
+   "openings": 21,
+   "roofs": 1,
+   "meshes": 155,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 19,
+    "wallRings": [
+     "ring-main-0",
+     "ring-main-1"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "a01",
+   "case": "BAD_WINDOW",
+   "note": "opening-0-front-0-0-unit at command 147 framed 1.5 m deep",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "147 placeWindow opening-0-front-0-0-unit FILL_TOO_LARGE"
+   ],
+   "skipped": [
+    "opening-0-front-0-0-unit:FAILED"
+   ],
+   "wallRings": [
+    "ring-main-0",
+    "ring-main-1"
+   ],
+   "walls": 27,
+   "openings": 21,
+   "roofs": 1,
+   "meshes": 153,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 19,
+    "wallRings": [
+     "ring-main-0",
+     "ring-main-1"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "a01",
+   "case": "BAD_ROOF",
+   "note": "roof-main at command 102 caps an unknown wall",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "102 createRoof roof-main UNKNOWN_WALL"
+   ],
+   "skipped": [
+    "roof-main:FAILED",
+    "chimney-0-pen:DEPENDENT",
+    "chimney-1-pen:DEPENDENT",
+    "chimney-2-pen:DEPENDENT",
+    "rooflight-plan-low-0:DEPENDENT",
+    "rooflight-plan-low-0-unit:DEPENDENT",
+    "rooflight-plan-low-1:DEPENDENT",
+    "rooflight-plan-low-1-unit:DEPENDENT",
+    "rooflight-plan-low-2:DEPENDENT",
+    "rooflight-plan-low-2-unit:DEPENDENT",
+    "rooflight-plan-high-3:DEPENDENT",
+    "rooflight-plan-high-3-unit:DEPENDENT",
+    "rooflight-plan-high-4:DEPENDENT",
+    "rooflight-plan-high-4-unit:DEPENDENT",
+    "rooflight-plan-high-5:DEPENDENT",
+    "rooflight-plan-high-5-unit:DEPENDENT",
+    "rooflight-plan-high-6:DEPENDENT",
+    "rooflight-plan-high-6-unit:DEPENDENT"
+   ],
+   "wallRings": [
+    "ring-main-0",
+    "ring-main-1"
+   ],
+   "walls": 27,
+   "openings": 21,
+   "roofs": 0,
+   "meshes": 130,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 19,
+    "wallRings": [
+     "ring-main-0",
+     "ring-main-1"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "a01",
+   "case": "UPPER_MAIN",
+   "note": "ring-main-1 at command 18 narrowed to 1.5 T",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "18 createWallRing ring-main-1 WALLS_OVERLAP"
+   ],
+   "skipped": [
+    "slab-main-1:SAME_BODY",
+    "ring-main-1:FAILED",
+    "opening-1-east-5-0:DEPENDENT",
+    "opening-1-east-5-0-unit:DEPENDENT",
+    "opening-1-east-5-1:DEPENDENT",
+    "opening-1-east-5-1-unit:DEPENDENT",
+    "opening-1-west-7-0:DEPENDENT",
+    "opening-1-west-7-0-unit:DEPENDENT",
+    "opening-1-west-7-1:DEPENDENT",
+    "opening-1-west-7-1-unit:DEPENDENT"
+   ],
+   "wallRings": [
+    "ring-main-0"
+   ],
+   "walls": 23,
+   "openings": 17,
+   "roofs": 1,
+   "meshes": 138,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 17,
+    "wallRings": [
+     "ring-main-0"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "a01",
+   "case": "MAIN_GROUND",
+   "note": "ring-main-0 at command 16 narrowed to 1.5 T",
+   "expect": "REFUSED",
+   "outcome": "REFUSED",
+   "basis": "CHECKPOINT",
+   "failures": [],
+   "skipped": []
+  },
+  {
+   "house": "gozd",
+   "case": "UNCHANGED",
+   "note": "as emitted",
+   "expect": "UNCHANGED",
+   "outcome": "UNCHANGED",
+   "basis": "CHECKPOINT",
+   "failures": [],
+   "skipped": [],
+   "identicalToPlainFit": true,
+   "wallRings": [
+    "ring-main-0",
+    "ring-main-1"
+   ],
+   "walls": 47,
+   "openings": 29,
+   "roofs": 1,
+   "meshes": 194,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 19,
+    "wallRings": [
+     "ring-main-0",
+     "ring-main-1"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "gozd",
+   "case": "SLIVER_ATTACHED",
+   "note": "a sliver body inserted beside ring-main-0 at command 18",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "18 createWallRing ring-attached-9-0 WALLS_OVERLAP"
+   ],
+   "skipped": [
+    "slab-attached-9-0:SAME_BODY",
+    "ring-attached-9-0:FAILED"
+   ],
+   "wallRings": [
+    "ring-main-0",
+    "ring-main-1"
+   ],
+   "walls": 47,
+   "openings": 29,
+   "roofs": 1,
+   "meshes": 194,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 19,
+    "wallRings": [
+     "ring-main-0",
+     "ring-main-1"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "gozd",
+   "case": "BAD_WINDOW",
+   "note": "opening-0-front-0-0-unit at command 183 framed 1.5 m deep",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "183 placeWindow opening-0-front-0-0-unit FILL_TOO_LARGE"
+   ],
+   "skipped": [
+    "opening-0-front-0-0-unit:FAILED"
+   ],
+   "wallRings": [
+    "ring-main-0",
+    "ring-main-1"
+   ],
+   "walls": 47,
+   "openings": 29,
+   "roofs": 1,
+   "meshes": 192,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 19,
+    "wallRings": [
+     "ring-main-0",
+     "ring-main-1"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "gozd",
+   "case": "BAD_ROOF",
+   "note": "roof-main at command 152 caps an unknown wall",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "152 createRoof roof-main UNKNOWN_WALL"
+   ],
+   "skipped": [
+    "roof-main:FAILED",
+    "chimney-0-pen:DEPENDENT",
+    "rooflight-plan-low-0:DEPENDENT",
+    "rooflight-plan-low-0-unit:DEPENDENT",
+    "rooflight-plan-low-1:DEPENDENT",
+    "rooflight-plan-low-1-unit:DEPENDENT",
+    "rooflight-plan-low-2:DEPENDENT",
+    "rooflight-plan-low-2-unit:DEPENDENT",
+    "rooflight-plan-high-3:DEPENDENT",
+    "rooflight-plan-high-3-unit:DEPENDENT",
+    "rooflight-plan-high-4:DEPENDENT",
+    "rooflight-plan-high-4-unit:DEPENDENT",
+    "rooflight-plan-high-5:DEPENDENT",
+    "rooflight-plan-high-5-unit:DEPENDENT",
+    "rooflight-plan-high-6:DEPENDENT",
+    "rooflight-plan-high-6-unit:DEPENDENT"
+   ],
+   "wallRings": [
+    "ring-main-0",
+    "ring-main-1"
+   ],
+   "walls": 47,
+   "openings": 29,
+   "roofs": 0,
+   "meshes": 171,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 19,
+    "wallRings": [
+     "ring-main-0",
+     "ring-main-1"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "gozd",
+   "case": "UPPER_MAIN",
+   "note": "ring-main-1 at command 18 narrowed to 1.5 T",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "18 createWallRing ring-main-1 WALLS_OVERLAP"
+   ],
+   "skipped": [
+    "slab-main-1:SAME_BODY",
+    "ring-main-1:FAILED",
+    "opening-1-east-5-0:DEPENDENT",
+    "opening-1-east-5-0-unit:DEPENDENT",
+    "opening-1-east-5-1:DEPENDENT",
+    "opening-1-east-5-1-unit:DEPENDENT",
+    "opening-1-east-5-2:DEPENDENT",
+    "opening-1-east-5-2-unit:DEPENDENT",
+    "opening-1-west-7-0:DEPENDENT",
+    "opening-1-west-7-0-leaf:DEPENDENT",
+    "opening-1-west-7-1:DEPENDENT",
+    "opening-1-west-7-1-leaf:DEPENDENT"
+   ],
+   "wallRings": [
+    "ring-main-0"
+   ],
+   "walls": 43,
+   "openings": 24,
+   "roofs": 1,
+   "meshes": 170,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 17,
+    "wallRings": [
+     "ring-main-0"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "gozd",
+   "case": "MAIN_GROUND",
+   "note": "ring-main-0 at command 16 narrowed to 1.5 T",
+   "expect": "REFUSED",
+   "outcome": "REFUSED",
+   "basis": "CHECKPOINT",
+   "failures": [],
+   "skipped": []
+  },
+  {
+   "house": "marcowki",
+   "case": "UNCHANGED",
+   "note": "as emitted",
+   "expect": "UNCHANGED",
+   "outcome": "UNCHANGED",
+   "basis": "CHECKPOINT",
+   "failures": [],
+   "skipped": [],
+   "identicalToPlainFit": true,
+   "wallRings": [
+    "ring-main-0",
+    "ring-main-1",
+    "ring-attached-0-0"
+   ],
+   "walls": 40,
+   "openings": 21,
+   "roofs": 2,
+   "meshes": 164,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 19,
+    "wallRings": [
+     "ring-main-0",
+     "ring-main-1"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "marcowki",
+   "case": "SLIVER_ATTACHED",
+   "note": "ring-attached-0-0 at command 21 narrowed to 1.5 T against the main body",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "21 createWallRing ring-attached-0-0 WALLS_OVERLAP"
+   ],
+   "skipped": [
+    "slab-attached-0-0:SAME_BODY",
+    "ring-attached-0-0:FAILED",
+    "attached-0-iwall-0-x-0:SAME_BODY",
+    "attached-0-room-0-0:SAME_BODY",
+    "roof-attached-0:SAME_BODY",
+    "opening-0-front-8-0:DEPENDENT",
+    "opening-0-front-8-0-leaf:DEPENDENT",
+    "opening-0-rear-10-0:DEPENDENT",
+    "opening-0-rear-10-0-leaf:DEPENDENT"
+   ],
+   "wallRings": [
+    "ring-main-0",
+    "ring-main-1"
+   ],
+   "walls": 35,
+   "openings": 19,
+   "roofs": 1,
+   "meshes": 147,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 19,
+    "wallRings": [
+     "ring-main-0",
+     "ring-main-1"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "marcowki",
+   "case": "SLIVER_OUTER",
+   "note": "ring-attached-0-0 at command 21 narrowed to 1.5 T at its outer face",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "21 createWallRing ring-attached-0-0 WALLS_OVERLAP"
+   ],
+   "skipped": [
+    "slab-attached-0-0:SAME_BODY",
+    "ring-attached-0-0:FAILED",
+    "return-front-0-1:DEPENDENT",
+    "attached-0-iwall-0-x-0:SAME_BODY",
+    "attached-0-room-0-0:SAME_BODY",
+    "roof-attached-0:SAME_BODY",
+    "opening-0-front-8-0:DEPENDENT",
+    "opening-0-front-8-0-leaf:DEPENDENT",
+    "opening-0-rear-10-0:DEPENDENT",
+    "opening-0-rear-10-0-leaf:DEPENDENT"
+   ],
+   "wallRings": [
+    "ring-main-0",
+    "ring-main-1"
+   ],
+   "walls": 34,
+   "openings": 19,
+   "roofs": 1,
+   "meshes": 146,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 19,
+    "wallRings": [
+     "ring-main-0",
+     "ring-main-1"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "marcowki",
+   "case": "BAD_WINDOW",
+   "note": "opening-0-front-0-0-unit at command 162 framed 1.5 m deep",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "162 placeWindow opening-0-front-0-0-unit FILL_TOO_LARGE"
+   ],
+   "skipped": [
+    "opening-0-front-0-0-unit:FAILED"
+   ],
+   "wallRings": [
+    "ring-main-0",
+    "ring-main-1",
+    "ring-attached-0-0"
+   ],
+   "walls": 40,
+   "openings": 21,
+   "roofs": 2,
+   "meshes": 162,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 19,
+    "wallRings": [
+     "ring-main-0",
+     "ring-main-1"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "marcowki",
+   "case": "BAD_ROOF",
+   "note": "roof-main at command 130 caps an unknown wall",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "130 createRoof roof-main UNKNOWN_WALL"
+   ],
+   "skipped": [
+    "roof-main:FAILED",
+    "chimney-0-pen:DEPENDENT",
+    "chimney-1-pen:DEPENDENT",
+    "rooflight-left-0:DEPENDENT",
+    "rooflight-left-0-unit:DEPENDENT",
+    "rooflight-left-1:DEPENDENT",
+    "rooflight-left-1-unit:DEPENDENT",
+    "rooflight-right-0:DEPENDENT",
+    "rooflight-right-0-unit:DEPENDENT"
+   ],
+   "wallRings": [
+    "ring-main-0",
+    "ring-main-1",
+    "ring-attached-0-0"
+   ],
+   "walls": 40,
+   "openings": 21,
+   "roofs": 1,
+   "meshes": 150,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 19,
+    "wallRings": [
+     "ring-main-0",
+     "ring-main-1"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "marcowki",
+   "case": "UPPER_MAIN",
+   "note": "ring-main-1 at command 18 narrowed to 1.5 T",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "18 createWallRing ring-main-1 WALLS_OVERLAP"
+   ],
+   "skipped": [
+    "slab-main-1:SAME_BODY",
+    "ring-main-1:FAILED",
+    "return-front-1-0:DEPENDENT",
+    "return-rear-1-0:DEPENDENT",
+    "opening-1-front-4-0:DEPENDENT",
+    "opening-1-front-4-0-unit:DEPENDENT",
+    "opening-1-rear-6-0:DEPENDENT",
+    "opening-1-rear-6-0-unit:DEPENDENT",
+    "opening-1-rear-6-1:DEPENDENT",
+    "opening-1-rear-6-1-unit:DEPENDENT"
+   ],
+   "wallRings": [
+    "ring-main-0",
+    "ring-attached-0-0"
+   ],
+   "walls": 34,
+   "openings": 18,
+   "roofs": 2,
+   "meshes": 148,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 17,
+    "wallRings": [
+     "ring-main-0"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "marcowki",
+   "case": "MAIN_GROUND",
+   "note": "ring-main-0 at command 16 narrowed to 1.5 T",
+   "expect": "REFUSED",
+   "outcome": "REFUSED",
+   "basis": "CHECKPOINT",
+   "failures": [],
+   "skipped": []
+  },
+  {
+   "house": "ciesz",
+   "case": "UNCHANGED",
+   "note": "as emitted",
+   "expect": "UNCHANGED",
+   "outcome": "UNCHANGED",
+   "basis": "CHECKPOINT",
+   "failures": [],
+   "skipped": [],
+   "identicalToPlainFit": true,
+   "wallRings": [
+    "ring-main-0"
+   ],
+   "walls": 29,
+   "openings": 20,
+   "roofs": 4,
+   "meshes": 102,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 20,
+    "wallRings": [
+     "ring-main-0"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "ciesz",
+   "case": "SLIVER_ATTACHED",
+   "note": "a sliver body inserted beside ring-main-0 at command 21",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "21 createWallRing ring-attached-9-0 WALLS_OVERLAP"
+   ],
+   "skipped": [
+    "slab-attached-9-0:SAME_BODY",
+    "ring-attached-9-0:FAILED"
+   ],
+   "wallRings": [
+    "ring-main-0"
+   ],
+   "walls": 29,
+   "openings": 20,
+   "roofs": 4,
+   "meshes": 102,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 20,
+    "wallRings": [
+     "ring-main-0"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "ciesz",
+   "case": "BAD_WINDOW",
+   "note": "opening-0-front-0-0-unit at command 113 framed 1.5 m deep",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "113 placeWindow opening-0-front-0-0-unit FILL_TOO_LARGE"
+   ],
+   "skipped": [
+    "opening-0-front-0-0-unit:FAILED"
+   ],
+   "wallRings": [
+    "ring-main-0"
+   ],
+   "walls": 29,
+   "openings": 20,
+   "roofs": 4,
+   "meshes": 100,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 20,
+    "wallRings": [
+     "ring-main-0"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "ciesz",
+   "case": "MAIN_GROUND",
+   "note": "ring-main-0 at command 19 narrowed to 1.5 T",
+   "expect": "REFUSED",
+   "outcome": "REFUSED",
+   "basis": "CHECKPOINT",
+   "failures": [],
+   "skipped": []
+  },
+  {
+   "house": "rary",
+   "case": "UNCHANGED",
+   "note": "as emitted",
+   "expect": "UNCHANGED",
+   "outcome": "UNCHANGED",
+   "basis": "CHECKPOINT",
+   "failures": [],
+   "skipped": [],
+   "identicalToPlainFit": true,
+   "wallRings": [
+    "ring-main-0",
+    "ring-attached-0-0"
+   ],
+   "walls": 20,
+   "openings": 20,
+   "roofs": 3,
+   "meshes": 119,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 18,
+    "wallRings": [
+     "ring-main-0"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "rary",
+   "case": "SLIVER_ATTACHED",
+   "note": "ring-attached-0-0 at command 20 narrowed to 1.5 T against the main body",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "20 createWallRing ring-attached-0-0 WALLS_OVERLAP"
+   ],
+   "skipped": [
+    "roof-attached-0-plane-low:SAME_BODY",
+    "roof-attached-0-plane-high:SAME_BODY",
+    "slab-attached-0-0:SAME_BODY",
+    "ring-attached-0-0:FAILED",
+    "attached-0-room-0-0:SAME_BODY",
+    "roof-attached-0-ridge:SAME_BODY",
+    "roof-attached-0-eave-low:SAME_BODY",
+    "roof-attached-0-eave-high:SAME_BODY",
+    "roof-attached-0-verge-low-0:SAME_BODY",
+    "roof-attached-0-verge-high-0:SAME_BODY",
+    "createRelationship:DEPENDENT",
+    "createRelationship:DEPENDENT",
+    "createRelationship:DEPENDENT",
+    "createRelationship:DEPENDENT",
+    "chimney-1-pen-attached-0:DEPENDENT",
+    "opening-0-front-4-0:DEPENDENT",
+    "opening-0-front-4-0-leaf:DEPENDENT",
+    "opening-0-east-5-0:DEPENDENT",
+    "opening-0-east-5-0-leaf:DEPENDENT",
+    "opening-0-west-7-0:DEPENDENT",
+    "opening-0-west-7-0-unit:DEPENDENT"
+   ],
+   "wallRings": [
+    "ring-main-0"
+   ],
+   "walls": 16,
+   "openings": 17,
+   "roofs": 1,
+   "meshes": 99,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 16,
+    "wallRings": [
+     "ring-main-0"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "rary",
+   "case": "SLIVER_OUTER",
+   "note": "ring-attached-0-0 at command 20 narrowed to 1.5 T at its outer face",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "20 createWallRing ring-attached-0-0 WALLS_OVERLAP"
+   ],
+   "skipped": [
+    "roof-attached-0-plane-low:SAME_BODY",
+    "roof-attached-0-plane-high:SAME_BODY",
+    "slab-attached-0-0:SAME_BODY",
+    "ring-attached-0-0:FAILED",
+    "attached-0-room-0-0:SAME_BODY",
+    "roof-attached-0-ridge:SAME_BODY",
+    "roof-attached-0-eave-low:SAME_BODY",
+    "roof-attached-0-eave-high:SAME_BODY",
+    "roof-attached-0-verge-low-0:SAME_BODY",
+    "roof-attached-0-verge-high-0:SAME_BODY",
+    "createRelationship:DEPENDENT",
+    "createRelationship:DEPENDENT",
+    "createRelationship:DEPENDENT",
+    "createRelationship:DEPENDENT",
+    "chimney-1-pen-attached-0:DEPENDENT",
+    "opening-0-front-4-0:DEPENDENT",
+    "opening-0-front-4-0-leaf:DEPENDENT",
+    "opening-0-east-5-0:DEPENDENT",
+    "opening-0-east-5-0-leaf:DEPENDENT",
+    "opening-0-west-7-0:DEPENDENT",
+    "opening-0-west-7-0-unit:DEPENDENT"
+   ],
+   "wallRings": [
+    "ring-main-0"
+   ],
+   "walls": 16,
+   "openings": 17,
+   "roofs": 1,
+   "meshes": 99,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 16,
+    "wallRings": [
+     "ring-main-0"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "rary",
+   "case": "BAD_WINDOW",
+   "note": "opening-0-front-0-2-unit at command 113 framed 1.5 m deep",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "113 placeWindow opening-0-front-0-2-unit FILL_TOO_LARGE"
+   ],
+   "skipped": [
+    "opening-0-front-0-2-unit:FAILED"
+   ],
+   "wallRings": [
+    "ring-main-0",
+    "ring-attached-0-0"
+   ],
+   "walls": 20,
+   "openings": 20,
+   "roofs": 3,
+   "meshes": 117,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 18,
+    "wallRings": [
+     "ring-main-0"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "rary",
+   "case": "BAD_ROOF",
+   "note": "roof-main at command 85 caps an unknown wall",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "85 createRoof roof-main UNKNOWN_WALL"
+   ],
+   "skipped": [
+    "roof-main:FAILED",
+    "createRelationship:DEPENDENT",
+    "createRelationship:DEPENDENT",
+    "chimney-1-pen:DEPENDENT"
+   ],
+   "wallRings": [
+    "ring-main-0",
+    "ring-attached-0-0"
+   ],
+   "walls": 20,
+   "openings": 20,
+   "roofs": 2,
+   "meshes": 117,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 18,
+    "wallRings": [
+     "ring-main-0"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "rary",
+   "case": "MAIN_GROUND",
+   "note": "ring-main-0 at command 17 narrowed to 1.5 T",
+   "expect": "REFUSED",
+   "outcome": "REFUSED",
+   "basis": "CHECKPOINT",
+   "failures": [],
+   "skipped": []
+  },
+  {
+   "house": "trytomach",
+   "case": "UNCHANGED",
+   "note": "as emitted",
+   "expect": "UNCHANGED",
+   "outcome": "UNCHANGED",
+   "basis": "CHECKPOINT",
+   "failures": [],
+   "skipped": [],
+   "identicalToPlainFit": true,
+   "wallRings": [
+    "ring-main-0",
+    "ring-main-1"
+   ],
+   "walls": 28,
+   "openings": 18,
+   "roofs": 1,
+   "meshes": 119,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 19,
+    "wallRings": [
+     "ring-main-0",
+     "ring-main-1"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "trytomach",
+   "case": "SLIVER_ATTACHED",
+   "note": "a sliver body inserted beside ring-main-0 at command 18",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "18 createWallRing ring-attached-9-0 WALLS_OVERLAP"
+   ],
+   "skipped": [
+    "slab-attached-9-0:SAME_BODY",
+    "ring-attached-9-0:FAILED"
+   ],
+   "wallRings": [
+    "ring-main-0",
+    "ring-main-1"
+   ],
+   "walls": 28,
+   "openings": 18,
+   "roofs": 1,
+   "meshes": 119,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 19,
+    "wallRings": [
+     "ring-main-0",
+     "ring-main-1"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "trytomach",
+   "case": "BAD_WINDOW",
+   "note": "opening-0-front-0-2-unit at command 125 framed 1.5 m deep",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "125 placeWindow opening-0-front-0-2-unit FILL_TOO_LARGE"
+   ],
+   "skipped": [
+    "opening-0-front-0-2-unit:FAILED"
+   ],
+   "wallRings": [
+    "ring-main-0",
+    "ring-main-1"
+   ],
+   "walls": 28,
+   "openings": 18,
+   "roofs": 1,
+   "meshes": 117,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 19,
+    "wallRings": [
+     "ring-main-0",
+     "ring-main-1"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "trytomach",
+   "case": "BAD_ROOF",
+   "note": "roof-main at command 95 caps an unknown wall",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "95 createRoof roof-main UNKNOWN_WALL"
+   ],
+   "skipped": [
+    "roof-main:FAILED",
+    "rooflight-plan-high-0:DEPENDENT",
+    "rooflight-plan-high-0-unit:DEPENDENT",
+    "rooflight-front-0:DEPENDENT",
+    "rooflight-front-0-unit:DEPENDENT"
+   ],
+   "wallRings": [
+    "ring-main-0",
+    "ring-main-1"
+   ],
+   "walls": 28,
+   "openings": 18,
+   "roofs": 0,
+   "meshes": 112,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 19,
+    "wallRings": [
+     "ring-main-0",
+     "ring-main-1"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "trytomach",
+   "case": "UPPER_MAIN",
+   "note": "ring-main-1 at command 18 narrowed to 1.5 T",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "18 createWallRing ring-main-1 WALLS_OVERLAP"
+   ],
+   "skipped": [
+    "slab-main-1:SAME_BODY",
+    "ring-main-1:FAILED",
+    "return-west-1-0:DEPENDENT",
+    "return-west-1-2:DEPENDENT",
+    "opening-1-east-5-0:DEPENDENT",
+    "opening-1-east-5-0-unit:DEPENDENT",
+    "opening-1-west-7-0:DEPENDENT",
+    "opening-1-west-7-0-unit:DEPENDENT",
+    "opening-1-west-7-1:DEPENDENT",
+    "opening-1-west-7-1-unit:DEPENDENT"
+   ],
+   "wallRings": [
+    "ring-main-0"
+   ],
+   "walls": 22,
+   "openings": 15,
+   "roofs": 1,
+   "meshes": 103,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 17,
+    "wallRings": [
+     "ring-main-0"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "trytomach",
+   "case": "MAIN_GROUND",
+   "note": "ring-main-0 at command 16 narrowed to 1.5 T",
+   "expect": "REFUSED",
+   "outcome": "REFUSED",
+   "basis": "CHECKPOINT",
+   "failures": [],
+   "skipped": []
+  },
+  {
+   "house": "arganiach",
+   "case": "UNCHANGED",
+   "note": "as emitted",
+   "expect": "UNCHANGED",
+   "outcome": "UNCHANGED",
+   "basis": "CHECKPOINT",
+   "failures": [],
+   "skipped": [],
+   "identicalToPlainFit": true,
+   "wallRings": [
+    "ring-main-0",
+    "ring-attached-0-0"
+   ],
+   "walls": 18,
+   "openings": 16,
+   "roofs": 2,
+   "meshes": 96,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 16,
+    "wallRings": [
+     "ring-main-0"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "arganiach",
+   "case": "SLIVER_ATTACHED",
+   "note": "ring-attached-0-0 at command 18 narrowed to 1.5 T against the main body",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "18 createWallRing ring-attached-0-0 WALLS_OVERLAP"
+   ],
+   "skipped": [
+    "slab-attached-0-0:SAME_BODY",
+    "ring-attached-0-0:FAILED",
+    "attached-0-room-0-0:SAME_BODY",
+    "roof-attached-0:SAME_BODY",
+    "opening-0-front-4-0:DEPENDENT",
+    "opening-0-front-4-0-unit:DEPENDENT",
+    "opening-0-west-7-0:DEPENDENT",
+    "opening-0-west-7-0-unit:DEPENDENT"
+   ],
+   "wallRings": [
+    "ring-main-0"
+   ],
+   "walls": 14,
+   "openings": 14,
+   "roofs": 1,
+   "meshes": 82,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 16,
+    "wallRings": [
+     "ring-main-0"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "arganiach",
+   "case": "SLIVER_OUTER",
+   "note": "ring-attached-0-0 at command 18 narrowed to 1.5 T at its outer face",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "18 createWallRing ring-attached-0-0 WALLS_OVERLAP"
+   ],
+   "skipped": [
+    "slab-attached-0-0:SAME_BODY",
+    "ring-attached-0-0:FAILED",
+    "attached-0-room-0-0:SAME_BODY",
+    "roof-attached-0:SAME_BODY",
+    "opening-0-front-4-0:DEPENDENT",
+    "opening-0-front-4-0-unit:DEPENDENT",
+    "opening-0-west-7-0:DEPENDENT",
+    "opening-0-west-7-0-unit:DEPENDENT"
+   ],
+   "wallRings": [
+    "ring-main-0"
+   ],
+   "walls": 14,
+   "openings": 14,
+   "roofs": 1,
+   "meshes": 82,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 16,
+    "wallRings": [
+     "ring-main-0"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "arganiach",
+   "case": "BAD_WINDOW",
+   "note": "opening-0-front-0-0-unit at command 77 framed 1.5 m deep",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "77 placeWindow opening-0-front-0-0-unit FILL_TOO_LARGE"
+   ],
+   "skipped": [
+    "opening-0-front-0-0-unit:FAILED"
+   ],
+   "wallRings": [
+    "ring-main-0",
+    "ring-attached-0-0"
+   ],
+   "walls": 18,
+   "openings": 16,
+   "roofs": 2,
+   "meshes": 94,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 16,
+    "wallRings": [
+     "ring-main-0"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "arganiach",
+   "case": "BAD_ROOF",
+   "note": "roof-main at command 63 caps an unknown wall",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "63 createRoof roof-main UNKNOWN_WALL"
+   ],
+   "skipped": [
+    "roof-main:FAILED",
+    "rooflight-rear-0:DEPENDENT",
+    "rooflight-rear-0-unit:DEPENDENT",
+    "rooflight-front-0:DEPENDENT",
+    "rooflight-front-0-unit:DEPENDENT",
+    "rooflight-front-1:DEPENDENT",
+    "rooflight-front-1-unit:DEPENDENT"
+   ],
+   "wallRings": [
+    "ring-main-0",
+    "ring-attached-0-0"
+   ],
+   "walls": 18,
+   "openings": 16,
+   "roofs": 1,
+   "meshes": 86,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 16,
+    "wallRings": [
+     "ring-main-0"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "arganiach",
+   "case": "MAIN_GROUND",
+   "note": "ring-main-0 at command 15 narrowed to 1.5 T",
+   "expect": "REFUSED",
+   "outcome": "REFUSED",
+   "basis": "CHECKPOINT",
+   "failures": [],
+   "skipped": []
+  },
+  {
+   "house": "sasankach3",
+   "case": "UNCHANGED",
+   "note": "as emitted",
+   "expect": "UNCHANGED",
+   "outcome": "UNCHANGED",
+   "basis": "CHECKPOINT",
+   "failures": [],
+   "skipped": [],
+   "identicalToPlainFit": true,
+   "wallRings": [
+    "ring-main-0",
+    "ring-main-1"
+   ],
+   "walls": 43,
+   "openings": 20,
+   "roofs": 1,
+   "meshes": 132,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 19,
+    "wallRings": [
+     "ring-main-0",
+     "ring-main-1"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "sasankach3",
+   "case": "SLIVER_ATTACHED",
+   "note": "a sliver body inserted beside ring-main-0 at command 18",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "18 createWallRing ring-attached-9-0 WALLS_OVERLAP"
+   ],
+   "skipped": [
+    "slab-attached-9-0:SAME_BODY",
+    "ring-attached-9-0:FAILED"
+   ],
+   "wallRings": [
+    "ring-main-0",
+    "ring-main-1"
+   ],
+   "walls": 43,
+   "openings": 20,
+   "roofs": 1,
+   "meshes": 132,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 19,
+    "wallRings": [
+     "ring-main-0",
+     "ring-main-1"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "sasankach3",
+   "case": "BAD_WINDOW",
+   "note": "opening-0-front-0-0-unit at command 153 framed 1.5 m deep",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "153 placeWindow opening-0-front-0-0-unit FILL_TOO_LARGE"
+   ],
+   "skipped": [
+    "opening-0-front-0-0-unit:FAILED"
+   ],
+   "wallRings": [
+    "ring-main-0",
+    "ring-main-1"
+   ],
+   "walls": 43,
+   "openings": 20,
+   "roofs": 1,
+   "meshes": 130,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 19,
+    "wallRings": [
+     "ring-main-0",
+     "ring-main-1"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "sasankach3",
+   "case": "BAD_ROOF",
+   "note": "roof-main at command 127 caps an unknown wall",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "127 createRoof roof-main UNKNOWN_WALL"
+   ],
+   "skipped": [
+    "roof-main:FAILED",
+    "chimney-0-pen:DEPENDENT",
+    "rooflight-plan-low-0:DEPENDENT",
+    "rooflight-plan-low-0-unit:DEPENDENT",
+    "rooflight-plan-high-1:DEPENDENT",
+    "rooflight-plan-high-1-unit:DEPENDENT",
+    "rooflight-plan-high-2:DEPENDENT",
+    "rooflight-plan-high-2-unit:DEPENDENT",
+    "rooflight-front-0:DEPENDENT",
+    "rooflight-front-0-unit:DEPENDENT"
+   ],
+   "wallRings": [
+    "ring-main-0",
+    "ring-main-1"
+   ],
+   "walls": 43,
+   "openings": 20,
+   "roofs": 0,
+   "meshes": 135,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 19,
+    "wallRings": [
+     "ring-main-0",
+     "ring-main-1"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "sasankach3",
+   "case": "UPPER_MAIN",
+   "note": "ring-main-1 at command 18 narrowed to 1.5 T",
+   "expect": "PARTIAL",
+   "outcome": "PARTIAL",
+   "basis": "CHECKPOINT",
+   "failures": [
+    "18 createWallRing ring-main-1 WALLS_OVERLAP"
+   ],
+   "skipped": [
+    "slab-main-1:SAME_BODY",
+    "ring-main-1:FAILED",
+    "opening-1-front-4-0:DEPENDENT",
+    "opening-1-front-4-0-leaf:DEPENDENT",
+    "opening-1-east-5-0:DEPENDENT",
+    "opening-1-east-5-0-unit:DEPENDENT",
+    "opening-1-rear-6-0:DEPENDENT",
+    "opening-1-rear-6-0-leaf:DEPENDENT",
+    "opening-1-rear-6-1:DEPENDENT",
+    "opening-1-rear-6-1-leaf:DEPENDENT"
+   ],
+   "wallRings": [
+    "ring-main-0"
+   ],
+   "walls": 39,
+   "openings": 16,
+   "roofs": 1,
+   "meshes": 124,
+   "bundleRoundTrip": true,
+   "replay": true,
+   "checkpoint": {
+    "commands": 17,
+    "wallRings": [
+     "ring-main-0"
+    ],
+    "prefixReplays": true
+   }
+  },
+  {
+   "house": "sasankach3",
+   "case": "MAIN_GROUND",
+   "note": "ring-main-0 at command 16 narrowed to 1.5 T",
+   "expect": "REFUSED",
+   "outcome": "REFUSED",
+   "basis": "CHECKPOINT",
+   "failures": [],
+   "skipped": []
+  }
+ ],
+ "bad": 0
+}

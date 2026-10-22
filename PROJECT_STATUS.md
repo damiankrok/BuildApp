@@ -2590,3 +2590,19 @@ Not done, named: pierless corner glazing (Goździkowce: grey-ring OCR 260/140 �
 over a lighter-hatched wall, and the `OPENING_TOUCHES_WALL_EDGE` contract — design only); winders (`winderRegions` stays
 empty; the analogs with winders fail earlier in `findTreadLadders`, so the ≥ 3 analog stairs gate is NOT met); Rarytasy
 garage extent and phantom 471/71, sidelight, canopy and post; A01 7th rooflight ring; OWNER m3ea NOT_RUN.
+
+## The first valid 3D preview: the last valid model when a later object is refused (STAGE BUILDPLAN-ANALYZER-005Y-N7-P1)
+
+Status: **OWNER_TEST_PENDING**. Branch `claude/new-session-3kzcgh` from `89c88ce`; report
+`stage-reports/STAGE_BUILDPLAN_ANALYZER_005Y_N7_P1_FIRST_VALID_3D_PREVIEW.md`. The owner's house was refused at
+command 21 (`ring-attached-1-0`, `WALLS_OVERLAP` between the ring's own w1 and w3: an attached body read narrower than
+its two walls) after a valid main body. Now `candidate.ts` `fitPreviewProgram` cuts the refused object out atomically
+with its body and dependants, keeps the base checkpoint (levels, main body floors and walls) and delivers
+`PARTIAL_3D_PREVIEW`; a refusal in the base is never cut around (minimal base or refusal, no invented house). The
+result carries `preview` (built / missing / the refusal / provisional `HEIGHT_ASSUMED_FOR_PREVIEW`,
+`SCALE_NOT_VERIFIED`) and `sourceBasis` (the plan the walls came from, by hash). The phone stores it with the scene and
+shows "Model częściowy 3D" / "Otwórz model częściowy 3D" with what was rebuilt, what is missing and why.
+Proof: SLIVERTON (synthetic) reproduces the owner's failure signature end to end through the APK's own `analyzer.mjs`;
+47/47 stress cases on the 8 real programs; 8/8 corpus models byte-identical. APK 1304
+(`e61f50ed…`, analyzer `3d57e65a…`). Not seen on a device (ANDROID_3D_NOT_DEVICE_VERIFIED). P2/P3 not started.
+
