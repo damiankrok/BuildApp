@@ -270,7 +270,7 @@ export function closeBalconies(input: BalconyClosureInput): { balconies: Balcony
   const endsById = new Map<string, [BalconyEnd, BalconyEnd]>()
   const levelOf = (i: number): LevelV2 | undefined => input.levels.find((l) => l.index === i)
   const out = input.balconies.map((b) => {
-    if (b.kind !== 'BALCONY' || !b.side) return b
+    if (b.kind !== 'BALCONY' || !b.side || b.projecting) return b
     const side = b.side
     const ax = alongIsX(side)
     const level = levelOf(b.storeyIndex)

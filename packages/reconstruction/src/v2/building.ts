@@ -157,6 +157,8 @@ export type BalconyV2 = {
   ends?: [EndCondition, EndCondition]
   /** The facade whose zone the slab stands in. */
   side?: 'FRONT' | 'REAR' | 'WEST' | 'EAST'
+  /** 005Y-N7 (C): a slab standing proud of its face (no recess): the recess closure does not apply to it. */
+  projecting?: true
   featureId: string
   provenance: ProvenanceStatus
   why: string

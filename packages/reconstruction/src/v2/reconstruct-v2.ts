@@ -23,6 +23,7 @@ import type { StructuralLayoutHypothesisSet } from '../structural-layout.js'
 import { isWallStripZone, openFacesOf } from '../layout.js'
 import type { PlanReading } from '../layout.js'
 import { fitOpeningsToHosts, reconcileWallOverlaps, sealCandidate } from '../candidate.js'
+import { balconyRect, balustradePath, BALCONY_SLAB_ASSUMED_M, BALUSTRADE_HEIGHT_ASSUMED_M, floorLevelDoorGroups, readBalconyOutline } from './projecting-balcony.js'
 import { planReconcileTolerance, refusalDiagnostics, reportWallReconciliation } from './wall-reconciliation-report.js'
 import type { WallReconciliationReport } from './wall-reconciliation-report.js'
 import type { OpeningFit, ReconstructionCandidate, UnresolvedCandidate, SolverStep, PrimitiveTrace } from '../candidate.js'
@@ -1617,6 +1618,32 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         }
         break
       }
+    }
+  }
+  // 005Y-N7 (C): balconies that stand proud of the wall: the outline the plan of the storey draws beyond a face, in
+  // front of floor-level doors, closed back to the face at both ends (projecting-balcony.ts)
+  for (const [storey, plan] of [...planByStorey].sort(([a], [b]) => a - b)) {
+    const l = levelOf(storey)
+    if (storey === 0 || !l) continue
+    for (const group of floorLevelDoorGroups(openings, storey, l.elevation)) {
+      if (balconies.some((b) => b.storeyIndex === storey && b.side === group.side)) continue
+      const mass = masses.find((m) => m.id === group.massId)
+      if (!mass) continue
+      const wallSpan: [number, number] = group.side === 'FRONT' || group.side === 'REAR' ? [mass.x0, mass.x1] : [mass.z0, mass.z1]
+      const outline = readBalconyOutline(plan.raster, plan.frame, group.side, group.planeAt, group.span, wallSpan, (why) => options.debug?.(`proud-balcony ${group.side} storey ${storey} doors ${group.span.join('..')} face ${group.planeAt}: ${why}`))
+      if (!outline) continue
+      const rect = balconyRect(group.side, group.planeAt, outline)
+      const id = `balcony-${group.side.toLowerCase()}-${storey}-proud`
+      const sids = [sighting(plan.plan.frame, 'balcony outline beyond the face', 0.75)]
+      const featureId = feature('BALCONY', id, { from: { value: outline.from, low: outline.from - 0.05, high: outline.from + 0.05 }, to: { value: outline.to, low: outline.to - 0.05, high: outline.to + 0.05 }, reach: { value: outline.reach, low: outline.reach - 0.05, high: outline.reach + 0.05 } }, sids, 'SOURCE_DERIVED', `${outline.why}; it opens from ${group.openingIds.join(', ')}`, { storeyIndex: storey, uncertaintyM: 0.05, unresolvedProperties: ['slab thickness', 'balustrade height and infill'], parameterProvenance: { thickness: 'ASSUMED_FOR_RENDERING' } })
+      balconies.push({ id, kind: 'BALCONY', side: group.side, storeyIndex: storey, ...rect, topY: l.elevation, thicknessM: BALCONY_SLAB_ASSUMED_M, projecting: true, featureId, provenance: 'SOURCE_DERIVED', why: `${outline.why}; the slab is ${BALCONY_SLAB_ASSUMED_M} m thick and its balustrade ${BALUSTRADE_HEIGHT_ASSUMED_M} m high for viewing (DISPLAY_ASSUMPTION: a plan draws neither)` })
+      const path = balustradePath(group.side, group.planeAt, outline)
+      const rid = `railing-${group.side.toLowerCase()}-${storey}-proud`
+      const rf = feature('RAILING', rid, { height: { value: BALUSTRADE_HEIGHT_ASSUMED_M, low: 0.9, high: 1.2 } }, sids, 'SOURCE_DERIVED', 'the balustrade round the outline’s three free edges', { storeyIndex: storey, hostId: featureId, uncertaintyM: 0.05, unresolvedProperties: ['height (assumed)', 'infill'], parameterProvenance: { height: 'ASSUMED_FOR_RENDERING' } })
+      relate('SUPPORTS', featureId, rf, 'the balustrade stands on the slab')
+      relate('MEETS_HOST', featureId, mass.featureId, 'the slab projects from this body’s face at its floor')
+      railings.push({ id: rid, storeyIndex: storey, start: path[0], end: path[path.length - 1], path, hostId: id, baseY: l.elevation, heightM: BALUSTRADE_HEIGHT_ASSUMED_M, featureId: rf, provenance: 'SOURCE_DERIVED', why: `round the three free edges of ${id}; ${BALUSTRADE_HEIGHT_ASSUMED_M} m high for viewing (DISPLAY_ASSUMPTION)` })
+      step({ stage: 'facade', what: `a balcony standing proud of the ${group.side.toLowerCase()} face, storey ${storey}`, method: 'DIRECT', detail: outline.why, inputs: group.openingIds.length, outputs: 1 })
     }
   }
   // Terraces: the recess floors at the ground storey, and the outlined platform beyond the mouth where the plan draws one.
