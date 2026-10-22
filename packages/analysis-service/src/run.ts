@@ -44,8 +44,9 @@ import { progressEvent } from './stages.js'
 import type { AnalysisProgress, AnalysisStage } from './stages.js'
 import type { LinkAnalysisResult, RecogniserSummary, VisionMode } from './result.js'
 import { warningsOf } from './warnings.js'
+import { previewOf, sourceBasisOf } from './preview.js'
 
-export const ANALYSIS_SERVICE_VERSION = '1.1.0' as const
+export const ANALYSIS_SERVICE_VERSION = '1.2.0' as const
 
 /** What to analyse: a live URL, or a package (and optionally its graph) sealed earlier. */
 export type AnalysisInput = { kind: 'URL'; url: string } | { kind: 'PACKAGE'; pkg: SourcePackage; graph?: SourceObservationGraph }
@@ -430,7 +431,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     const model = reconstruction.model
     const modelText = serializeModel(model)
     const reconstructionMs = lap()
-    trace.record('BUILDING_MODEL', 'SEAL', 'PASSED', { commands: reconstruction.candidate.program.length, masses: reconstruction.building.masses.length, unresolved: reconstruction.unresolved.length })
+    trace.record('BUILDING_MODEL', 'SEAL', reconstruction.partialPreview ? 'DEGRADED' : 'PASSED', { commands: reconstruction.candidate.program.length, masses: reconstruction.building.masses.length, unresolved: reconstruction.unresolved.length, ...(reconstruction.partialPreview ? { partialPreview: true, refusals: reconstruction.partialPreview.failures.length } : {}) }, reconstruction.partialPreview ? { reasonCode: 'PARTIAL_3D_PREVIEW' } : {})
     report('BUILDING_MODEL', 1)
 
     // --- COMPILING_SCENE ----------------------------------------------------
@@ -502,7 +503,11 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
       metric: reconstruction.planDiagnostics.plans.find((p) => p.frameId === reconstruction.planDiagnostics.selectedPlanFrameId)?.metric,
       extentWeak: reconstruction.planDiagnostics.plans.find((p) => p.frameId === reconstruction.planDiagnostics.selectedPlanFrameId)?.extentWeak,
       ...(reconstruction.roofDatum ? { approximateRoofDatum: { ridgeY: reconstruction.roofDatum.ridgeY, buildingHeightM: reconstruction.roofDatum.buildingHeightM } } : {}),
+      ...(reconstruction.partialPreview ? { partialPreview: { failure: reconstruction.partialPreview.failures[0], missing: reconstruction.partialPreview.skipped.filter((x) => x.type !== 'setEvidence').length, basis: reconstruction.partialPreview.basis } } : {}),
+      ...(reconstruction.heights.measured ? {} : { heightAssumedM: reconstruction.heights.assumedStoreyHeightM }),
     })
+    const sourceBasis = sourceBasisOf(pkg, reconstruction.planDiagnostics)
+    const preview = previewOf({ model, ...(reconstruction.partialPreview ? { partial: reconstruction.partialPreview } : {}), heights: reconstruction.heights, source: sourceBasis, ...(reconstruction.roofDatum ? { approximateRoofDatum: reconstruction.roofDatum } : {}) })
 
     const result: LinkAnalysisResult = {
       schema: 'buildapp.link-analysis-result',
@@ -548,6 +553,8 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
       unresolved: reconstruction.unresolved.map((u) => ({ what: u.what, reason: u.reason, status: u.status })),
       warnings: warningDetails.map((w) => w.message),
       warningDetails,
+      preview,
+      sourceBasis,
       vision: { mode: visionMode, provider: visionProvider, attempted: visionAttempted, accepted: visionAccepted },
       ...(recogniser ? { recogniser } : {}),
       verification: {

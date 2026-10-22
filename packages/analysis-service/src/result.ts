@@ -14,6 +14,7 @@ import type { CanonicalBuildingModel } from '@buildapp/model'
 import type { MobileSceneBundle } from '@buildapp/mobile-scene'
 import type { ReconstructionCandidate } from '@buildapp/reconstruction'
 import type { AnalysisWarning } from './warnings.js'
+import type { PreviewSummary, SourceBasis } from './preview.js'
 
 /** Whether a vision provider contributed, stated rather than implied. */
 export type VisionMode = 'DETERMINISTIC_ONLY' | 'LIVE_PROVIDER' | 'REPLAYED_GRAPH'
@@ -96,6 +97,13 @@ export type LinkAnalysisSummary = {
   warnings: string[]
   /** BUILDPLAN-ANALYZER-005A: each warning with its code and whether it limits the result (`warnings.ts`). */
   warningDetails: AnalysisWarning[]
+  /**
+   * N7-P1: whether the model is the whole reading (`COMPLETE`) or the last valid part of it (`PARTIAL_3D_PREVIEW`),
+   * what it builds, what it does not and why, and which of its numbers are provisional (`preview.ts`).
+   */
+  preview: PreviewSummary
+  /** N7-P1: the drawing the walls were read from, by hash and size; null when no plan was read. */
+  sourceBasis: SourceBasis | null
   vision: { mode: VisionMode; provider: string | null; attempted: number; accepted: number }
   /** 005H: present only when an external numeric recogniser read the labels. */
   recogniser?: RecogniserSummary

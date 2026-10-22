@@ -94,6 +94,19 @@ export const HOLLOWAY: SyntheticHouse = {
 }
 
 /**
+ * N7-P1: Holloway with its garage drawn as a sliver 0.45 m wide between 0.30 m walls — narrower than its own two side
+ * walls. Read faithfully, the attached body's ring has its east and west walls in the same plan band, and the model
+ * refuses it with exactly the failure a real house met (`WALLS_OVERLAP` between `ring-attached-0-0-w1` and `-w3`,
+ * command 21) while the main body before it is valid. The fixture a partial 3D preview is proved on, end to end; its
+ * dimensions are invented and it is a reconstruction of nothing.
+ */
+export const SLIVERTON: SyntheticHouse = {
+  ...HOLLOWAY,
+  name: 'Sliverton',
+  wings: [{ name: 'sliver', width: 0.45, depth: 6.0, offsetZ: 4.2, storeys: 1, roof: 'FLAT', openings: [] }],
+}
+
+/**
  * §25's third fixture: a footprint that steps, with a loggia bitten out of
  * the front.
  *

@@ -17,6 +17,8 @@ import type { SourcePackage } from '@buildapp/source-package'
 import { selectedVariant } from '@buildapp/source-package'
 import type { AnalysisFailure } from './errors.js'
 import type { AnalysisTrace } from './trace.js'
+import { sourceBasisOf } from './preview.js'
+import type { SourceBasis } from './preview.js'
 
 export const DIAGNOSTICS_SCHEMA = 'buildapp.analysis-diagnostics' as const
 
@@ -42,6 +44,8 @@ export type AnalysisDiagnostics = {
     planAddressesLost: LostPlanAddress[]
   } | null
   plans: PlanDiagnosticsReport | null
+  /** N7-P1: the plan the walls were read from — role, copy, dimensions read, scale confidence — by hash and size. */
+  sourceBasis?: SourceBasis | null
   trace: AnalysisTrace
 }
 
@@ -147,6 +151,7 @@ export function diagnosticsBundle(options: {
       failure: options.failure,
       source: options.pkg ? sourceSummaryOf(options.pkg) : null,
       plans,
+      sourceBasis: options.pkg && plans ? sourceBasisOf(options.pkg, plans) : null,
       trace: options.trace,
     },
     overlay,
