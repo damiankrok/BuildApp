@@ -229,6 +229,11 @@ fun SourceSheet(preview: PreviewViewModel, analyzer: AnalyzerViewModel, progress
                 SectionHeading(stringResource(R.string.analyzer_result_partial))
                 PreviewOutcomeDetails(outcome)
             }
+            // N7-FIX-01: which analyzer made this model, from the record kept with it (VERSION_UNKNOWN when it has none)
+            if (download != null) {
+                SectionHeading(stringResource(R.string.provenance_title))
+                RunProvenanceDetails(download.provenance)
+            }
             AnalysisLine(analyzer, onAnalyze)
             if (resultShown && completed != null) {
                 SectionHeading(stringResource(R.string.analyzer_details))

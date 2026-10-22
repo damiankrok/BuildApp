@@ -3,6 +3,8 @@ package com.buildplan.preview
 import com.buildplan.preview.analyzer.AnalysisStages
 import com.buildplan.preview.analyzer.AnalysisState
 import com.buildplan.preview.analyzer.AnalyzerFailure
+import com.buildplan.preview.analyzer.AppBuild
+import com.buildplan.preview.analyzer.RunProvenance
 import com.buildplan.preview.analyzer.RetryAction
 import com.buildplan.preview.analyzer.LocalRunReport
 import com.buildplan.preview.analyzer.local.InstalledRuntime
@@ -111,6 +113,8 @@ class LocalAnalysisTest {
 
     private inner class World(
         val installFails: Boolean = false,
+        val manifest: LocalRuntimeManifest = LocalRuntimeManifest(),
+        val app: AppBuild = AppBuild(1307, "0.1307.0-test"),
     ) {
         val root = AnalyzerFixtures.tempDir("local-analysis")
         val kept = DiagnosticsStore(File(root, "analyzer-diagnostics"))
@@ -127,7 +131,7 @@ class LocalAnalysisTest {
             host = host,
             install = {
                 if (installFails) throw IOException("the APK lacks local-analyzer/analyzer.mjs")
-                InstalledRuntime(runtimeDir, File(runtimeDir, "main.mjs"), LocalRuntimeManifest())
+                InstalledRuntime(runtimeDir, File(runtimeDir, "main.mjs"), manifest)
             },
             abi = "arm64-v8a",
             io = { it() },
@@ -135,6 +139,7 @@ class LocalAnalysisTest {
             publish = { states.add(it) },
             onFinished = { finished.add(it) },
             diagnostics = kept,
+            app = app,
         )
 
         val run: FakeRun get() = host.runs.single()
@@ -185,6 +190,56 @@ class LocalAnalysisTest {
             assertTrue("job folders left: ${jobs.jobsDir.list()?.toList()}", jobs.jobsDir.list().isNullOrEmpty())
             assertFalse("journal left", File(jobs.root, LocalJobs.ACTIVE_JOB).exists())
         }
+    }
+
+    // --- N7-FIX-01 (F-2): which analyzer made the result --------------------------------
+
+    private val bundleSha = "c".repeat(64)
+    private val withBundle = LocalRuntimeManifest(entry = "main.mjs", files = mapOf("main.mjs" to LocalRuntimeManifest.FileInfo("d".repeat(64), 10), "analyzer.mjs" to LocalRuntimeManifest.FileInfo(bundleSha, 20)))
+
+    @Test
+    fun `a local result carries its provenance - run id, time, app, mode, solver, bundle hash, model, state - and keeps it after a restart`() {
+        val w = World(manifest = withBundle)
+        w.start()
+        w.hello()
+        w.writeResult()
+        w.done()
+        w.processGone()
+        val completed = w.last as AnalysisState.Completed
+        val p = requireNotNull(completed.entry.provenance)
+        assertEquals(w.run.arg("job"), p.analysisRunId)
+        assertEquals("2026-01-01T00:00:00.000Z", p.analyzedAt)
+        assertEquals(1307L, p.apkVersionCode)
+        assertEquals("0.1307.0-test", p.apkVersionName)
+        assertEquals(AnalysisOrigin.LOCAL, p.mode)
+        assertEquals("2.3.0", p.solverVersion)
+        assertEquals("1.1.0", p.analyzerService)
+        assertEquals(bundleSha, p.analyzerBundleSha256)
+        assertEquals("0f074a7c842b730d3dbb871c354b7e28b351a076128d1b19ab7badf077a72cf3", p.modelHash)
+        assertEquals(RunProvenance.STATE_COMPLETE, p.state)
+        // the finished run's report carries the same record, and so does the stored entry after a restart
+        assertEquals(p, w.finished.single().provenance)
+        assertEquals(bundleSha, w.finished.single().analyzerBundleSha256)
+        assertEquals(p, DownloadedScenes(File(w.root, "analyses")).find(completed.entry.key)?.provenance)
+        // the clipboard text names the run, never the project's address
+        assertFalse(p.copyText().contains("synthetic-publisher"))
+        assertTrue(p.copyText().contains(bundleSha))
+    }
+
+    @Test
+    fun `a failed local run records FAILED with its code and the analyzer it was`() {
+        val w = World(manifest = withBundle)
+        w.start()
+        w.hello()
+        w.line("""{"type":"failed","code":"MODEL_EMISSION_FAILED","message":"the model refused command 21","metrics":{"elapsedMs":1000,"memory":{"rssBytes":1,"peakRssBytes":1,"peakSource":"VmHWM","heapUsedBytes":1,"arrayBuffersBytes":1}}}""")
+        w.processGone()
+        val p = requireNotNull(w.finished.single().provenance)
+        assertEquals(RunProvenance.STATE_FAILED, p.state)
+        assertEquals("MODEL_EMISSION_FAILED", p.failureCode)
+        assertEquals("2.3.0", p.solverVersion)
+        assertEquals(bundleSha, p.analyzerBundleSha256)
+        assertEquals(AnalysisOrigin.LOCAL, p.mode)
+        assertEquals("", p.modelHash)
     }
 
     // --- the happy path ----------------------------------------------------------
@@ -276,6 +331,18 @@ class LocalAnalysisTest {
         assertTrue(kept!!.isPartialPreview)
         assertEquals("ring-attached-0-0", kept.preview?.partial?.failure?.id)
         assertEquals(listOf("slab-attached-0-0", "ring-attached-0-0", "roof-attached-0"), kept.preview?.partial?.missing?.map { it.id })
+        // N7-FIX-01: the refused ring's way back to its reading (from the 2.6.0 bundle) is kept with the scene too
+        val collision = kept.preview?.partial?.ringCollisions?.single()
+        assertEquals("ring-attached-0-0", collision?.ringId)
+        assertEquals(listOf("ring-attached-0-0-w1", "ring-attached-0-0-w3"), collision?.walls)
+        assertEquals(true, collision?.selectedByThinBodies)
+        assertEquals("KEEP_PARTIAL", collision?.decision?.kind)
+        assertEquals(false, collision?.reconciliation?.changedGeometry)
+        assertEquals(true, collision?.removedByPartialPreview)
+        assertTrue(collision?.firstBad.orEmpty().startsWith("SOURCE_CONFLICT"))
+        assertEquals(7, collision?.hypotheses?.size)
+        assertEquals("2.6.0", kept.provenance?.solverVersion)
+        assertEquals(com.buildplan.preview.analyzer.RunProvenance.STATE_PARTIAL, kept.provenance?.state)
         assertTrue(restarted.load(completed.entry.key) is com.buildplan.preview.scene.SceneLoadResult.Ok)
         w.assertNothingLeft()
     }

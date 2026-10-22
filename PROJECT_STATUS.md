@@ -2649,3 +2649,19 @@ includes partitions (B-1), frames sized from the house T (D-3), plan tiles cross
 (C-1), a set-back garage lost silently (C-2), plan copies never reconciled (A-1), opening heights from views with a
 refused ground (E-3). Recommended first fixes (not implemented): thin-body band robust to openings; one wall-thickness
 source plus a ≥ 2t ring check where rings are built; plan decomposition bounded by drawn walls. No APK, no P3.
+
+## Evidence-based wall recovery and run provenance on the phone (STAGE BUILDPLAN N7-COUNCIL-FIX-01)
+
+Status: **OWNER_TEST_PENDING**. Report `stage-reports/STAGE_BUILDPLAN_ANALYZER_N7_COUNCIL_FIX_01_WALL_RECOVERY_AND_RUN_PROVENANCE.md`.
+Solver 2.6.0. Council F-R1: a thin body's far wall is read along its length — masonry pieces with opening-sized gaps,
+each gap explained by the source (glazing drawn across it, or a chain measuring it); posts, a wall that stops and bare
+gaps stay unclosed. D-3: frames take the host wall's thickness. E-1: an elevation corroborates a body only by drawing
+its outline (far corner, top) in columns no other body occupies; trees, hedges and a body behind are NOT_DECISIVE.
+F-2: every result carries `RunProvenance` (run id, time, APK version, LOCAL/SERVICE, solver, SHA-256 of the
+`analyzer.mjs` that ran, model and checkpoint hashes, state), kept with the scene, in the local run log and in
+`analysis-runs/provenance.json`, shown and copyable; older results read VERSION_UNKNOWN. Each ring refused for its own
+walls carries `ringCollisions` (thin-body selection, width/T, far-face ink before/after openings, readings, decision,
+whether reconciliation moved it — first-attempt records now kept — and whether P1 removed it). THINWALL with 2×1.5 m
+windows: before `21 createWallRing ring-attached-0-0 WALLS_OVERLAP`, after COMPLETE with both windows; with 4 windows
+the body lost by the plan decomposition is named (`zoneBodies`), not recovered. 8/8 corpus models byte-identical; P1 on
+SLIVERTON unchanged. APK 1307 (`bbaac49d…`, analyzer `6453937c…`). The owner's benchmark is not claimed fixed.

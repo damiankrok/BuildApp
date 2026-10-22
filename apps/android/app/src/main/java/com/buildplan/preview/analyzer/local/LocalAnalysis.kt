@@ -5,11 +5,13 @@ import com.buildplan.preview.analyzer.AnalysisState
 import com.buildplan.preview.analyzer.AnalysisSummary
 import com.buildplan.preview.analyzer.AnalyzerFailure
 import com.buildplan.preview.analyzer.AnalyzerJson
+import com.buildplan.preview.analyzer.AppBuild
 import com.buildplan.preview.analyzer.CurrentStage
 import com.buildplan.preview.analyzer.JobActivity
 import com.buildplan.preview.analyzer.JobStatus
 import com.buildplan.preview.analyzer.LocalRunReport
 import com.buildplan.preview.analyzer.RetryAction
+import com.buildplan.preview.analyzer.RunProvenance
 import com.buildplan.preview.analyzer.StageRecord
 import com.buildplan.preview.analyzer.recordOf
 import com.buildplan.preview.scene.AnalysisOrigin
@@ -76,6 +78,8 @@ class LocalAnalysis(
     private val program: (InstalledRuntime) -> File = { it.entry },
     /** Where a failed job's diagnostics are kept after its folder is removed (BUILDAPP-03Y2G); null keeps none. */
     private val diagnostics: DiagnosticsStore? = null,
+    /** The app a run's provenance names (N7-FIX-01). */
+    private val app: AppBuild = AppBuild.CURRENT,
 ) {
     private var active: Run? = null
     private var starting = false
@@ -140,7 +144,10 @@ class LocalAnalysis(
     }
 
     private fun begin(runtime: InstalledRuntime, job: LocalJob) {
-        val run = Run(job, LocalRunReport(jobId = job.jobId, sourceUrl = job.sourceUrl, abi = abi, startedAtMs = clock()))
+        // N7-FIX-01: the analyzer this run starts is the bundle `install()` has just checked file by file against its
+        // manifest; its analyzer.mjs hash is the hash of the program that runs
+        val bundleSha256 = runtime.manifest.files[ANALYZER_FILE]?.sha256.orEmpty()
+        val run = Run(job, LocalRunReport(jobId = job.jobId, sourceUrl = job.sourceUrl, abi = abi, startedAtMs = clock(), analyzerBundleSha256 = bundleSha256))
         active = run
         run.publishProgress()
         val request = LocalRunRequest(
@@ -269,10 +276,11 @@ class LocalAnalysis(
                 }
                 val removed = jobs.finish(job)
                 scheduler.post {
+                    val ended = { state: String, code: String -> RunProvenance.failed(job.jobId, AnalysisOrigin.LOCAL, code, app, report.analyzerService, report.analyzerSolver, report.analyzerBundleSha256, state) }
                     val finalReport = when (outcome) {
-                        is AnalysisState.Completed -> report.copy(outcome = LocalRunReport.OUTCOME_COMPLETED)
-                        is AnalysisState.Cancelled -> report.copy(outcome = LocalRunReport.OUTCOME_CANCELLED)
-                        is AnalysisState.Failed -> report.copy(outcome = LocalRunReport.OUTCOME_FAILED, code = codeOf(outcome.failure))
+                        is AnalysisState.Completed -> report.copy(outcome = LocalRunReport.OUTCOME_COMPLETED, provenance = outcome.entry.provenance)
+                        is AnalysisState.Cancelled -> report.copy(outcome = LocalRunReport.OUTCOME_CANCELLED, provenance = ended(RunProvenance.STATE_CANCELLED, "CANCELLED"))
+                        is AnalysisState.Failed -> codeOf(outcome.failure).let { code -> report.copy(outcome = LocalRunReport.OUTCOME_FAILED, code = code, provenance = ended(RunProvenance.STATE_FAILED, code)) }
                         else -> report
                     }
                     report = finalReport
@@ -321,7 +329,8 @@ class LocalAnalysis(
             } catch (e: Exception) {
                 return failed(AnalyzerFailure.StorageFailed("the scene the analyzer wrote could not be read"))
             }
-            val record = recordOf(summary, job.jobId, job.sourceUrl, "", AnalysisOrigin.LOCAL)
+            val provenance = RunProvenance.of(summary, job.jobId, AnalysisOrigin.LOCAL, report.analyzerBundleSha256, app)
+            val record = recordOf(summary, job.jobId, job.sourceUrl, "", AnalysisOrigin.LOCAL, provenance)
             return when (val saved = scenes.save(bytes, null, record)) {
                 is SaveResult.Saved -> AnalysisState.Completed(job.jobId, job.sourceUrl, summary, saved.entry, statusOf(progress, AnalysisStages.COMPLETED))
                 is SaveResult.Rejected -> failed(
@@ -349,6 +358,9 @@ class LocalAnalysis(
     companion object {
         /** How long a cancelled program gets to stop on its own before its process is ended. */
         const val CANCEL_GRACE_MS = 1_500L
+
+        /** The bundle file whose hash names the analyzer a run was (N7-FIX-01). */
+        const val ANALYZER_FILE = "analyzer.mjs"
 
         /** How long to wait for an ended process to be reported gone before cleaning up anyway. */
         const val PROCESS_GONE_WAIT_MS = 3_000L

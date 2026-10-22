@@ -1,0 +1,47 @@
+{
+ "case": "n1",
+ "solver": "2.6.0",
+ "outcome": "COMPLETE",
+ "modelSha256": "dba5a1c8992515f205f58de457710055668d87a69174830a3afc019f06ff2778",
+ "failures": [],
+ "thin": {
+  "decision": "DRAWN_THIN_WALLS",
+  "wallThicknessM": 0.158376,
+  "hypotheses": [
+   "WIDEN:REFUTED",
+   "SHARED_WALL:REFUTED",
+   "DRAWN_THIN_WALLS:SUPPORTED",
+   "SOLID_WALL:REFUTED",
+   "CANOPY_ON_POSTS:REFUTED",
+   "FALSE_STRIP:REFUTED",
+   "RECESS_OF_MAIN:REFUTED"
+  ],
+  "farEdgeInk": 0.483333,
+  "farWall": {
+   "holds": true,
+   "pieceShare": 0.833333,
+   "gaps": [
+    "0.973684m drawn 1"
+   ],
+   "why": "the far face is a 0.16 m wall broken by 1 opening (0.97 m) between piers, reaching both ends of the body; masonry over 83 % of it; 1 drawn with a line across, 0 measured by a printed chain"
+  }
+ },
+ "zoneBodies": 0,
+ "wingRings": [
+  "ring-attached-0-0"
+ ],
+ "wingWalls": [
+  "ring-attached-0-0-w0 t=0.158376",
+  "ring-attached-0-0-w1 t=0.158376",
+  "ring-attached-0-0-w2 t=0.158376",
+  "ring-attached-0-0-w3 t=0.158376"
+ ],
+ "wingOpenings": [
+  "opening-0-east-9-0 WINDOW w=0.97018"
+ ],
+ "wingUnits": [
+  "opening-0-east-9-0-unit"
+ ],
+ "unresolvedOnWing": [],
+ "commands": 63
+}

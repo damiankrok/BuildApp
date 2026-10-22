@@ -1,0 +1,12 @@
+before: 55 commands; after: 66 commands
+before index 21: {"type": "setEvidence", "targetId": "main-iwall-0-x-1", "evidence": {"status": "SOURCE_DERIVED", "interpretation": "2 pieces of partition ink on the plan with 1 door gap", "properties": {"height": "SOURCE_DERIVED"}}}
+after  index 21: {"type": "createWallRing", "id": "ring-attached-0-0", "levelId": "lvl-0", "polygon": [{"x": 8.4, "z": 0}, {"x": 8.9, "z": 0}, {"x": 8.9, "z": 6}, {"x": 8.4, "z": 6}], "thickness": 0.158376, "height": 2.7, "baseOffset": 0, "kind": "EXTERIOR", "cornerOwnership": "ALTERNATE", "materialId": "mat-wall"}
+commands only after:
+  + ('createSlab', 'slab-attached-0-0')
+  + ('createWallRing', 'ring-attached-0-0')
+  + ('createRoof', 'roof-attached-0')
+  + ('cutOpening', 'opening-0-east-9-0')
+  + ('placeWindow', 'opening-0-east-9-0-unit')
+  + ('cutOpening', 'opening-0-east-9-1')
+  + ('placeWindow', 'opening-0-east-9-1-unit')
+commands only before:

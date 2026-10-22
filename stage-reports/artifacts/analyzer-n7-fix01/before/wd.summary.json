@@ -1,0 +1,42 @@
+{
+ "case": "wd",
+ "solver": "2.5.0",
+ "outcome": "PARTIAL_3D_PREVIEW",
+ "modelSha256": "85d886c769f50cfe45a6def6dd5ffee72a5a37ff20fdf1ceab0bbd6f654033d3",
+ "failures": [
+  "61 placeWindow opening-0-east-9-0-unit FILL_TOO_LARGE",
+  "64 placeDoor opening-0-east-9-1-leaf FILL_TOO_LARGE"
+ ],
+ "thin": {
+  "decision": "DRAWN_THIN_WALLS",
+  "wallThicknessM": 0.158376,
+  "hypotheses": [
+   "WIDEN:REFUTED",
+   "SHARED_WALL:REFUTED",
+   "DRAWN_THIN_WALLS:SUPPORTED",
+   "SOLID_WALL:REFUTED",
+   "CANOPY_ON_POSTS:REFUTED",
+   "FALSE_STRIP:REFUTED",
+   "RECESS_OF_MAIN:REFUTED"
+  ],
+  "farEdgeInk": 0.378571,
+  "farWall": null
+ },
+ "zoneBodies": "n/a",
+ "wingRings": [
+  "ring-attached-0-0"
+ ],
+ "wingWalls": [
+  "ring-attached-0-0-w0 t=0.158376",
+  "ring-attached-0-0-w1 t=0.158376",
+  "ring-attached-0-0-w2 t=0.158376",
+  "ring-attached-0-0-w3 t=0.158376"
+ ],
+ "wingOpenings": [
+  "opening-0-east-9-0 WINDOW w=0.97018",
+  "opening-0-east-9-1 DOOR w=0.97018"
+ ],
+ "wingUnits": [],
+ "unresolvedOnWing": [],
+ "commands": 64
+}

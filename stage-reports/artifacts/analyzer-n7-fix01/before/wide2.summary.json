@@ -1,0 +1,36 @@
+{
+ "case": "wide2",
+ "solver": "2.5.0",
+ "outcome": "PARTIAL_3D_PREVIEW",
+ "modelSha256": "aab806163892ebe125f5c54dfd979493790cc76d9132acdf537b9786a541d36f",
+ "failures": [
+  "21 createWallRing ring-attached-0-0 WALLS_OVERLAP"
+ ],
+ "thin": {
+  "decision": "KEEP_PARTIAL",
+  "wallThicknessM": null,
+  "hypotheses": [
+   "WIDEN:REFUTED",
+   "SHARED_WALL:REFUTED",
+   "DRAWN_THIN_WALLS:REFUTED",
+   "SOLID_WALL:REFUTED",
+   "CANOPY_ON_POSTS:SUPPORTED",
+   "FALSE_STRIP:REFUTED",
+   "RECESS_OF_MAIN:REFUTED"
+  ],
+  "farEdgeInk": 0.333333,
+  "farWall": null
+ },
+ "zoneBodies": "n/a",
+ "wingRings": [],
+ "wingWalls": [],
+ "wingOpenings": [],
+ "wingUnits": [],
+ "unresolvedOnWing": [
+  "the body attached-0, 0.50 m across",
+  "createSlab slab-attached-0-0",
+  "createWallRing ring-attached-0-0",
+  "createRoof roof-attached-0"
+ ],
+ "commands": 55
+}

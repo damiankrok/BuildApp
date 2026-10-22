@@ -324,15 +324,24 @@ export function renderGroundPlan(house: SyntheticHouse, options: SheetOptions & 
     c.fill(wx0, wy0 + wd - tw, wx0 + ww, wy0 + wd)
     c.fill(wx0 + ww - tw, wy0, wx0 + ww, wy0 + wd)
     if (wing.ownWallThickness !== undefined) c.fill(wx0 + t, wy0, wx0 + t + tw, wy0 + wd)
+    // N7-FIX-01: a wing's opening drawn as a plan draws one in a wall of the wing's own thickness — the gap, a jamb
+    // line at each end and, for a window, its glazing lines across the gap
     for (const opening of wing.openings ?? []) {
       const at = opening.at * ppm
       const width = opening.width * ppm
       if (opening.side === 'FRONT' || opening.side === 'REAR') {
-        const y = opening.side === 'FRONT' ? wy0 + wd - t : wy0
+        const y = opening.side === 'FRONT' ? wy0 + wd - tw : wy0
         const along = opening.side === 'FRONT' ? ww - at - width : at
-        c.fill(wx0 + along, y, wx0 + along + width, y + t, 255)
+        c.fill(wx0 + along, y, wx0 + along + width, y + tw, 255)
+        c.line(wx0 + along, y, wx0 + along, y + tw, o.lineWeight)
+        c.line(wx0 + along + width, y, wx0 + along + width, y + tw, o.lineWeight)
+        if (opening.kind === 'WINDOW') for (const f of [1 / 3, 2 / 3]) c.line(wx0 + along, y + f * tw, wx0 + along + width, y + f * tw, 1)
       } else if (opening.side === 'RIGHT') {
-        c.fill(wx0 + ww - t, wy0 + at, wx0 + ww, wy0 + at + width, 255)
+        const x = wx0 + ww - tw
+        c.fill(x, wy0 + at, wx0 + ww, wy0 + at + width, 255)
+        c.line(x, wy0 + at, x + tw, wy0 + at, o.lineWeight)
+        c.line(x, wy0 + at + width, x + tw, wy0 + at + width, o.lineWeight)
+        if (opening.kind === 'WINDOW') for (const f of [1 / 3, 2 / 3]) c.line(x + f * tw, wy0 + at, x + f * tw, wy0 + at + width, 1)
       }
     }
   }
@@ -635,11 +644,20 @@ function renderModelPlan(house: SyntheticHouse, options: SheetOptions & { storey
     fillM(wx0, wz1 - T, wx1, wz1)
     fillM(wx0, wz0, wx1, wz0 + T)
     fillM(wx1 - T, wz0, wx1, wz1)
+    // N7-FIX-01: the gap, its jamb lines and a window's glazing lines, as the ring's own openings are drawn below
     for (const opening of wing.openings ?? []) {
       if (opening.side === 'FRONT' || opening.side === 'REAR') {
         const z0 = opening.side === 'FRONT' ? wz0 : wz1 - T
         fillM(opening.at, z0, opening.at + opening.width, z0 + T, 255)
-      } else if (opening.side === 'RIGHT') fillM(wx1 - T, opening.at, wx1, opening.at + opening.width, 255)
+        lineM(opening.at, z0, opening.at, z0 + T, o.lineWeight)
+        lineM(opening.at + opening.width, z0, opening.at + opening.width, z0 + T, o.lineWeight)
+        if (opening.kind === 'WINDOW') for (const f of [1 / 3, 2 / 3]) lineM(opening.at, z0 + f * T, opening.at + opening.width, z0 + f * T, 1)
+      } else if (opening.side === 'RIGHT') {
+        fillM(wx1 - T, opening.at, wx1, opening.at + opening.width, 255)
+        lineM(wx1 - T, opening.at, wx1, opening.at, o.lineWeight)
+        lineM(wx1 - T, opening.at + opening.width, wx1, opening.at + opening.width, o.lineWeight)
+        if (opening.kind === 'WINDOW') for (const f of [1 / 3, 2 / 3]) lineM(wx1 - T + f * T, opening.at, wx1 - T + f * T, opening.at + opening.width, 1)
+      }
     }
   }
 

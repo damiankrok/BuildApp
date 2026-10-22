@@ -65,6 +65,6 @@ for (const c of cases) {
   const widened = r.decision.kind === 'WIDEN'
   const bad = (c.truth === 'NOTHING_BUILT') === widened
   if (bad && c.truth === 'NOTHING_BUILT') wrong += 1
-  console.log(`${bad ? 'WRONG' : 'ok   '} ${c.name}\n      elevations=${JSON.stringify(r.elevations.map((e) => [e.side, e.builtShare, e.verdict]))} decision=${r.decision.kind}${r.decision.after ? ` x1->${r.decision.after.x1}` : ''}`)
+  console.log(`${bad ? 'WRONG' : 'ok   '} ${c.name}\n      elevations=${JSON.stringify(r.elevations.map((e) => [e.side, e.builtShare, e.verdict, (e as any).edges]))} decision=${r.decision.kind}${r.decision.after ? ` x1->${r.decision.after.x1}` : ''}`)
 }
 console.log(`RESULT: ${wrong} case(s) where nothing is built yet the body was WIDENED on the elevation's word`)

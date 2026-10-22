@@ -82,7 +82,7 @@ sealed interface AnalysisState {
  * What the store records for a finished analysis, from its summary: the same
  * for a scene downloaded from the service and one made on this phone.
  */
-fun recordOf(summary: AnalysisSummary, jobId: String, fallbackUrl: String, fallbackCompletedAt: String, origin: String): AnalysisRecord = AnalysisRecord(
+fun recordOf(summary: AnalysisSummary, jobId: String, fallbackUrl: String, fallbackCompletedAt: String, origin: String, provenance: RunProvenance? = null): AnalysisRecord = AnalysisRecord(
     title = summary.title,
     label = summary.label,
     sceneSha256 = summary.sceneSha256,
@@ -100,6 +100,7 @@ fun recordOf(summary: AnalysisSummary, jobId: String, fallbackUrl: String, fallb
     visionMode = summary.vision.mode,
     origin = origin,
     preview = summary.preview,
+    provenance = provenance,
 )
 
 /** The next state, and how long to wait before the next [AnalysisTracker.step]; null once nothing is left to do. */
@@ -129,6 +130,8 @@ class AnalysisTracker(
     private val client: AnalyzerClient,
     private val store: DownloadedScenes,
     private val maxSceneBytes: Long = DownloadedScenes.MAX_SCENE_BYTES,
+    /** The app the provenance of a downloaded result names (N7-FIX-01). */
+    private val app: AppBuild = AppBuild.CURRENT,
 ) {
 
     fun submit(sourceUrl: String): AnalysisState = when (val r = client.submit(sourceUrl)) {
@@ -195,7 +198,9 @@ class AnalysisTracker(
             is Outcome.Ok -> r.value
             is Outcome.Err -> return finishFailure(state, r.failure)
         }
-        val record = recordOf(summary, state.jobId, state.sourceUrl, state.status.completedAt.orEmpty(), AnalysisOrigin.SERVICE)
+        // N7-FIX-01: the service ran the analyzer; its bundle is not something the phone can see, only its versions
+        val provenance = RunProvenance.of(summary, state.jobId, AnalysisOrigin.SERVICE, bundleSha256 = "", app = app)
+        val record = recordOf(summary, state.jobId, state.sourceUrl, state.status.completedAt.orEmpty(), AnalysisOrigin.SERVICE, provenance)
         return when (val saved = store.save(download.bytes, download.headerSha256, record)) {
             is SaveResult.Saved -> Step(AnalysisState.Completed(state.jobId, state.sourceUrl, summary, saved.entry, state.status), null)
             is SaveResult.Rejected -> {

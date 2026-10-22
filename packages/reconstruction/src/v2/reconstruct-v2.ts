@@ -93,15 +93,21 @@ import type { MeasuredOpening } from './facade-alignment.js'
 import { alignFacades, applyOpeningCorrections } from './facade-alignment.js'
 import type { FacadeAlignmentReport } from './facade-alignment.js'
 import type { ViewAuditRecord } from './view-audit.js'
-import { adjudicateThinBody, thinBodies } from './thin-body.js'
-import type { ThinBodyRecord } from './thin-body.js'
+import { adjudicateThinBody, bodyDrawnInZone, thinBodies } from './thin-body.js'
+import type { ThinBodyRecord, ZoneBodyTrace } from './thin-body.js'
+import { ringCollisions } from './ring-collision.js'
+import type { RingCollisionDiagnostic } from './ring-collision.js'
 import type { ApproximateRidge } from './roof-datum.js'
 
 // 2.2.0 (005A): a plan the first reading refuses is re-read by the plan
 // resolver before the run stops (PLAN_RESOLVER_VERSION names its readings).
 // Accepted houses are read exactly as before.
 
-export const SOLVER_V2_VERSION = '2.5.0' as const
+// 2.6.0 (N7-FIX-01): a thin body's far wall is read with the openings the drawing explains (glazing drawn across a gap,
+// or a chain measuring it); an elevation corroborates a body only by drawing its outline; frames take the thickness of
+// the wall that hosts them; a body drawn in a zone the decomposition left open is named. Houses with no thin body are
+// read exactly as before.
+export const SOLVER_V2_VERSION = '2.6.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
@@ -205,6 +211,8 @@ export type ReconstructionV2Result = {
   viewAudit: ViewAuditRecord[]
   /** N7-P2R: every attached body read narrower than its own two walls: what the source says it is, and what was built. */
   thinBodies: ThinBodyRecord[]
+  /** N7-FIX-01: bodies the plan draws in a zone the decomposition left open, that no mass was made of — named, not built. */
+  zoneBodies: ZoneBodyTrace[]
   /**
    * N7-P2R: the openings counted where they come from — read on the plans (facade gaps and doorways between bodies),
    * found on the registered elevations by the plan-free scan alone, built in the model (interior doors included), and
@@ -226,6 +234,8 @@ export type PartialPreviewReport = {
   skipped: PreviewSkipped[]
   /** The base: the program's prefix up to the main body's last floor or walls, and the hash of the model it builds. */
   checkpoint?: { commands: number; modelSha256: string; wallRings: string[]; slabs: string[] }
+  /** N7-FIX-01: every ring refused for its own walls overlapping, with the way back to the reading that made it. */
+  ringCollisions?: RingCollisionDiagnostic[]
 }
 
 
@@ -1036,6 +1046,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // the printed chains on its faces, the elevations that see it — before anything is read on its walls
   // ---------------------------------------------------------------------------
   const thinBodyRecords: ThinBodyRecord[] = []
+  const zoneBodies: ZoneBodyTrace[] = []
   const bandWalls: BandWallV2[] = []
   for (const { mass, axis } of options.diagnostics?.skipThinBodies ? [] : thinBodies(masses, T)) {
     const rec = adjudicateThinBody(mass, axis, {
@@ -1113,6 +1124,16 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         .map((m) => (side === 'FRONT' || side === 'REAR' ? ([m.x0, m.x1] as const) : ([m.z0, m.z1] as const)))
       const topology = scanZoneForReturns(entry.raster, entry.frame, world, { side, from, to, backAt, mouthAt, ...(occupied.length > 0 ? { occupied } : {}) }, index)
       recesses.push(topology)
+      // N7-FIX-01: a zone with no wall of the house's thickness in it may still hold a body drawn with walls of its own
+      // that the decomposition left open (a far wall broken by openings): never built from here, always named
+      if (topology.returns.length === 0 && occupied.length === 0) {
+        const lost = bodyDrawnInZone(entry.raster, entry.frame, { side, backAt, mouthAt, from, to }, index)
+        if (lost) {
+          zoneBodies.push(lost)
+          gap({ what: `a body drawn in the ${lost.depthM.toFixed(2)} m zone on the ${side.toLowerCase()} on the storey ${index} plan, ${side === 'FRONT' || side === 'REAR' ? 'x' : 'z'} ${lost.from.toFixed(2)}–${lost.to.toFixed(2)}`, reason: `${lost.why}; no body was made of it, so it is not built — FIRST_BAD: PLAN_DECOMPOSITION (the cell was read open, the zone as an empty strip)`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: zone.evidenceIds })
+          step({ stage: 'massing', what: `N7-FIX-01: a body drawn in the ${side.toLowerCase()} zone that no mass was made of`, method: 'REFUSED', detail: lost.why, inputs: 1, outputs: 0 })
+        }
+      }
       const sid = sighting(entry.plan.frame, `${side.toLowerCase()} zone on the storey ${index} plan`, topology.confidence, [], undefined)
       const recessFeature = feature('RECESS', `recess-${side.toLowerCase()}-${index}`, { depth: { value: topology.depthM, low: topology.depthM - 0.05, high: topology.depthM + 0.05 }, mouthAt: { value: mouthAt, low: mouthAt - 0.05, high: mouthAt + 0.05 } }, [sid], topology.returns.length > 0 ? 'SOURCE_CORROBORATED' : 'SOURCE_DERIVED', topology.why, { storeyIndex: index, printed: true, uncertaintyM: 0.04, hostId: reaching[0].featureId })
       relate('HOSTED_BY', recessFeature, reaching[0].featureId, 'the recess opens through this body’s face')
@@ -2287,7 +2308,9 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     }
     trace({ phase: 'MODEL', substage: 'PARTIAL_3D_PREVIEW', status: 'DEGRADED', counts: { refusals: previewFailures.length, skipped: objects.length, minimal: previewBasis === 'MINIMAL_BASE' }, reasonCode: 'PARTIAL_3D_PREVIEW' })
     const checkpoint = previewCheckpoint(program, mainMassId, options.label, modelId)
-    partialPreview = { outcome: 'PARTIAL_3D_PREVIEW', basis: previewBasis, failures: previewFailures, skipped: previewSkipped, ...(checkpoint ? { checkpoint } : {}) }
+    const collisions = ringCollisions({ failures: previewFailures, skipped: previewSkipped, history: fitted.reconciliationHistory, masses, thin: thinBodyRecords, houseWallThicknessM: T })
+    for (const c of collisions) step({ stage: 'emission', what: `N7-FIX-01: ${c.ringId} refused for its own walls (${c.walls.join(' / ')})`, method: 'REFUSED', detail: c.why, inputs: 1, outputs: 0 })
+    partialPreview = { outcome: 'PARTIAL_3D_PREVIEW', basis: previewBasis, failures: previewFailures, skipped: previewSkipped, ...(checkpoint ? { checkpoint } : {}), ...(collisions.length > 0 ? { ringCollisions: collisions } : {}) }
   }
   const hypothesisSet: PrimitiveHypothesisSet = {
     schema: HYPOTHESIS_SET_SCHEMA,
@@ -2399,7 +2422,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const violations = { graph: featureGraphViolations(graphDraft), ledger: ledgerViolations(ctx.ledger, [...graph.observations.map((o) => o.id), ...metrics.evidence.map((e) => e.id)]) }
   step({ stage: 'quality', what: 'per-feature quality', method: 'DIRECT', detail: Object.entries(quality.summary).map(([fam, levels]) => `${fam} ${Object.entries(levels).map(([l, n]) => `${l}:${n}`).join('/')}`).join(', '), inputs: ctx.solved.length, outputs: quality.records.length })
 
-  return { layout, building, candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations, closure: closureNotes, planDiagnostics, openingFits: fit.fits, ...(wallReconciliation ? { wallReconciliation } : {}), crossViewResiduals: crossView, ...(roofDatum ? { roofDatum } : {}), ...(partialPreview ? { partialPreview } : {}), facadeAlignment, thinBodies: thinBodyRecords, openingCounts: { plan: openings.length + sharedDoors.length, elevationIndependent: [...facadeRead.values()].reduce((a, r) => a + r.scanned.length, 0), model: model.openings.length, skippedByPartialPreview: (partialPreview?.skipped ?? []).filter((x) => x.type === 'cutOpening').length }, viewAudit: viewAudit({ horizontalOnly: new Map(cornerRegistrations.map((r) => [r.frameId, r])), frames: graph.coordinateFrames.filter((f) => (keep ? keep(f) : true)), first: legacy, firstRefused: legacyRefused, refusals: viewRefusals, registered: elevations, openingsOnly: bandRegistrations, sameSheet: new Set(openingViewOverrides.keys()), heightsRefused: openingHeightRefused, cameras }), heights: levels.measured ? { measured: true } : { measured: false, assumedStoreyHeightM: CONVENTIONS.storeyHeight } }
+  return { layout, building, candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations, closure: closureNotes, planDiagnostics, openingFits: fit.fits, ...(wallReconciliation ? { wallReconciliation } : {}), crossViewResiduals: crossView, ...(roofDatum ? { roofDatum } : {}), ...(partialPreview ? { partialPreview } : {}), facadeAlignment, thinBodies: thinBodyRecords, zoneBodies, openingCounts: { plan: openings.length + sharedDoors.length, elevationIndependent: [...facadeRead.values()].reduce((a, r) => a + r.scanned.length, 0), model: model.openings.length, skippedByPartialPreview: (partialPreview?.skipped ?? []).filter((x) => x.type === 'cutOpening').length }, viewAudit: viewAudit({ horizontalOnly: new Map(cornerRegistrations.map((r) => [r.frameId, r])), frames: graph.coordinateFrames.filter((f) => (keep ? keep(f) : true)), first: legacy, firstRefused: legacyRefused, refusals: viewRefusals, registered: elevations, openingsOnly: bandRegistrations, sameSheet: new Set(openingViewOverrides.keys()), heightsRefused: openingHeightRefused, cameras }), heights: levels.measured ? { measured: true } : { measured: false, assumedStoreyHeightM: CONVENTIONS.storeyHeight } }
 }
 
 /** The columns of a render across which a band of the given rows carries dark tone: the band's along extent. */

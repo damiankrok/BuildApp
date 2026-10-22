@@ -1,5 +1,6 @@
 package com.buildplan.preview.scene
 
+import com.buildplan.preview.analyzer.RunProvenance
 import java.io.File
 import java.io.IOException
 import java.nio.file.AtomicMoveNotSupportedException
@@ -49,6 +50,8 @@ data class DownloadedSceneEntry(
     val origin: String = AnalysisOrigin.SERVICE,
     /** N7-P1: whole reading or partial 3D preview, as the analyzer said; an entry stored earlier has none (complete). */
     val preview: PreviewOutcome? = null,
+    /** N7-FIX-01: which analyzer made it, as the phone knew when the run ended; an entry stored earlier has none (VERSION_UNKNOWN). */
+    val provenance: RunProvenance? = null,
 ) {
     /** The model is the last valid part of the house, not a complete reconstruction. */
     val isPartialPreview: Boolean get() = preview?.isPartial == true
@@ -86,6 +89,7 @@ data class AnalysisRecord(
     val visionMode: String,
     val origin: String = AnalysisOrigin.SERVICE,
     val preview: PreviewOutcome? = null,
+    val provenance: RunProvenance? = null,
 )
 
 /** Why a downloaded scene was not kept. Nothing was written in any of these cases. */
@@ -202,6 +206,7 @@ class DownloadedScenes(
                         visionMode = record.visionMode,
                         origin = record.origin,
                         preview = record.preview,
+                        provenance = record.provenance,
                     )
                     entries.removeAll { it.sceneSha256 == actual }
                     entries.add(entry)

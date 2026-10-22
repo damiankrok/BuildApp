@@ -844,6 +844,12 @@ export type PreviewFit = {
   /** The fit of the program that is built: the whole program, or what is left of it after the cuts. */
   fit: FitResult
   reconciled?: WallReconcileResult
+  /**
+   * N7-FIX-01 (Council D-1): every wall reconciliation of every attempt, in the input program's numbering — the first
+   * attempt's too. `reconciled` is the last attempt's alone: a ring edge moved on the first attempt and refused after
+   * it would otherwise leave no trace that the geometry the validator refused is not the geometry the emitter wrote.
+   */
+  reconciliationHistory: Array<{ attempt: number; record: WallReconciliationRecord }>
   /** Every refusal, in the order met; empty when the whole program was built. */
   failures: PreviewFailure[]
   skipped: PreviewSkipped[]
@@ -876,6 +882,11 @@ export function fitPreviewProgram(program: BuildingCommand[], options: { label: 
   const failures: PreviewFailure[] = []
   const skipped: PreviewSkipped[] = []
   let basis: PreviewFit['basis'] = 'CHECKPOINT'
+  const reconciliationHistory: PreviewFit['reconciliationHistory'] = []
+  const remember = (a: typeof attempt, n: number): void => {
+    for (const r of a.reconciled?.records ?? []) reconciliationHistory.push({ attempt: n, record: { ...r, commandIndex: origin[r.commandIndex] ?? -1 } })
+  }
+  remember(first, 0)
   while (!attempt.fit.ok && failures.length < PREVIEW_MAX_CUTS) {
     const at = attempt.failedInput ?? -1
     const refused = attempt.fit
@@ -903,18 +914,20 @@ export function fitPreviewProgram(program: BuildingCommand[], options: { label: 
     origin = next
     current = cut.program
     attempt = attemptFit(current)
+    remember(attempt, failures.length)
     if (basis === 'MINIMAL_BASE') break
   }
-  if (failures.length === 0) return { fit: first.fit, ...(first.reconciled ? { reconciled: first.reconciled } : {}), failures, skipped, basis }
+  if (failures.length === 0) return { fit: first.fit, ...(first.reconciled ? { reconciled: first.reconciled } : {}), reconciliationHistory, failures, skipped, basis }
   // no preview could be built — or what is left has no main body walls to show: the run refuses exactly as the plain
   // fit would have
   const mainWalls = current.some((c) => c.type === 'createWallRing' && bodyOf(c)?.mass === mainMassId)
-  if (!attempt.fit.ok || !mainWalls) return { fit: first.fit, ...(first.reconciled ? { reconciled: first.reconciled } : {}), failures: [], skipped: [], basis }
+  if (!attempt.fit.ok || !mainWalls) return { fit: first.fit, ...(first.reconciled ? { reconciled: first.reconciled } : {}), reconciliationHistory, failures: [], skipped: [], basis }
   const keptAt = new Map(origin.map((o, k) => [o, k]))
   const fitIndex = attempt.fit.indexMap
   return {
     fit: { ...attempt.fit, indexMap: program.map((_, i) => (keptAt.has(i) ? (fitIndex[keptAt.get(i) as number] ?? -1) : -1)) },
     ...(attempt.reconciled ? { reconciled: attempt.reconciled } : {}),
+    reconciliationHistory,
     failures,
     skipped,
     basis,

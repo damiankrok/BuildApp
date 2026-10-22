@@ -14,6 +14,7 @@ import com.buildplan.preview.analyzer.AnalyzerAddress
 import com.buildplan.preview.analyzer.AnalyzerClient
 import com.buildplan.preview.analyzer.AnalyzerMessages
 import com.buildplan.preview.analyzer.AnalyzerSettings
+import com.buildplan.preview.analyzer.AppBuild
 import com.buildplan.preview.analyzer.CancelOutcome
 import com.buildplan.preview.analyzer.HttpTransport
 import com.buildplan.preview.analyzer.HttpUrlConnectionTransport
@@ -21,6 +22,8 @@ import com.buildplan.preview.analyzer.ProjectLinks
 import com.buildplan.preview.analyzer.AnalyzerFailure
 import com.buildplan.preview.analyzer.LocalRunReport
 import com.buildplan.preview.analyzer.RetryAction
+import com.buildplan.preview.analyzer.RunProvenance
+import com.buildplan.preview.analyzer.RunProvenanceLog
 import com.buildplan.preview.analyzer.local.DiagnosticsStore
 import com.buildplan.preview.analyzer.local.LocalAnalysis
 import com.buildplan.preview.analyzer.local.LocalAvailability
@@ -30,6 +33,7 @@ import com.buildplan.preview.analyzer.local.MainScheduler
 import com.buildplan.preview.analyzer.local.OcrSelfTest
 import com.buildplan.preview.analyzer.local.OcrSelfTestState
 import com.buildplan.preview.analyzer.local.ServiceRuntimeHost
+import com.buildplan.preview.scene.AnalysisOrigin
 import com.buildplan.preview.scene.DownloadedSceneEntry
 import com.buildplan.preview.scene.DownloadedScenes
 import android.util.Log
@@ -70,6 +74,15 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
     private val settings = AnalyzerSettings(application)
     private val transport: HttpTransport = HttpUrlConnectionTransport()
     val store = DownloadedScenes(java.io.File(application.filesDir, ANALYSES_DIR))
+
+    /**
+     * N7-FIX-01 (F-2): which analyzer each run was and how it ended, kept across restarts — a failed service run
+     * included, which leaves nothing else on the phone. A stored scene carries its own record too.
+     */
+    private val provenanceLog = RunProvenanceLog(java.io.File(java.io.File(application.filesDir, RUNS_DIR), RunProvenanceLog.FILE))
+
+    /** The provenance the phone recorded for a run, by its job id; null when it recorded none. */
+    fun provenanceOf(jobId: String): RunProvenance? = provenanceLog.find(jobId)
 
     /** The address compiled into this build (`ANALYZER_API_BASE_URL`), possibly empty. */
     val builtInAddress: String = BuildConfig.ANALYZER_API_BASE_URL
@@ -215,7 +228,9 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
                 code = "INTERRUPTED",
                 abi = localAvailability.abi,
                 startedAtMs = left.startedAtMs,
+                provenance = RunProvenance.failed(left.jobId, AnalysisOrigin.LOCAL, "INTERRUPTED", AppBuild.CURRENT),
             )
+            report.provenance?.let { provenanceLog.record(it) }
             localJobs.record(report)
             if (link.isBlank()) link = left.sourceUrl
             state = AnalysisState.Failed(
@@ -280,6 +295,7 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
     }
 
     private fun onLocalRunFinished(report: LocalRunReport) {
+        report.provenance?.let { provenanceLog.record(it) }
         localJobs.record(report)
         localRuns = localJobs.runs()
         // One line a developer (or CI) can read with `adb logcat -s BuildAppLocalAnalyzer`.
@@ -468,17 +484,24 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
             is AnalysisState.Finishing -> settings.saveActiveJob(ActiveJob(next.jobId, base, next.sourceUrl))
             is AnalysisState.Completed -> {
                 settings.clearActiveJob()
+                next.entry.provenance?.let { provenanceLog.record(it) }
                 refreshDownloads()
                 // The same event in both modes: with no house open it opens, otherwise the workspace offers it.
                 autoOpen = next.entry.key
             }
-            is AnalysisState.Failed, is AnalysisState.Cancelled -> settings.clearActiveJob()
+            is AnalysisState.Failed -> {
+                settings.clearActiveJob()
+                provenanceLog.record(RunProvenance.failed(next.jobId, AnalysisOrigin.SERVICE, LocalAnalysis.codeOf(next.failure), AppBuild.CURRENT))
+            }
+            is AnalysisState.Cancelled -> settings.clearActiveJob()
             else -> Unit
         }
     }
 
     private companion object {
         const val ANALYSES_DIR = "analyses"
+        /** N7-FIX-01: the run provenance log, next to (never inside) the stored analyses. */
+        const val RUNS_DIR = "analysis-runs"
         const val DIAGNOSTICS_DIR = "analyzer-diagnostics"
         /** Under the cache dir; the one folder the FileProvider shares (res/xml/diagnostics_paths.xml). */
         const val SHARED_DIR = "shared-diagnostics"

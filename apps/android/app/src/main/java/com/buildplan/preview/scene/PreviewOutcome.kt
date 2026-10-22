@@ -54,7 +54,50 @@ data class PartialPreview(
     /** The objects the preview does not build. */
     val missing: List<PreviewMissing> = emptyList(),
     val checkpoint: PreviewCheckpoint? = null,
+    /** N7-FIX-01: every ring refused for its own walls overlapping, with the way back to its reading; absent from an older analyzer. */
+    val ringCollisions: List<RingCollision> = emptyList(),
 )
+
+/**
+ * N7-FIX-01: a ring the model refused for its own two walls overlapping, as the analyzer traced it — whether its thin-body
+ * pass read the body, the body's width against its walls, the decision and why, whether the wall reconciliation moved
+ * the ring before the refusal, and whether the partial preview took the body out. Shown, never interpreted.
+ */
+@Serializable
+data class RingCollision(
+    val ringId: String = "",
+    val walls: List<String> = emptyList(),
+    val overlapM2: Double? = null,
+    val massId: String? = null,
+    val selectedByThinBodies: Boolean = false,
+    val notSelectedBecause: String? = null,
+    val widthM: Double? = null,
+    val lengthM: Double? = null,
+    val wallThicknessM: Double? = null,
+    val houseWallThicknessM: Double = 0.0,
+    val farFaceInk: FarFaceInk? = null,
+    val hypotheses: List<RingHypothesis> = emptyList(),
+    val decision: RingDecision? = null,
+    val firstBad: String? = null,
+    val reconciliation: RingReconciliation = RingReconciliation(),
+    val removedByPartialPreview: Boolean = false,
+    val why: String = "",
+)
+
+@Serializable
+data class FarFaceInk(val beforeOpenings: Double = 0.0, val afterOpenings: Double? = null, val openings: Int? = null, val wallWithOpenings: Boolean? = null)
+
+@Serializable
+data class RingHypothesis(val kind: String = "", val status: String = "", val why: String = "")
+
+@Serializable
+data class RingDecision(val kind: String = "", val why: String = "")
+
+@Serializable
+data class RingReconciliation(val changedGeometry: Boolean = false, val records: List<RingRepair> = emptyList())
+
+@Serializable
+data class RingRepair(val attempt: Int = 0, val action: String = "", val moveM: Double = 0.0, val why: String = "")
 
 @Serializable
 data class PreviewFailure(

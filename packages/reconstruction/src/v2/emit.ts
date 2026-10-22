@@ -469,7 +469,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     const l = levelOf(Math.max(...(mass?.storeys ?? [0])))
     // The plate bears into the walls that carry it (to their centreline); the
     // head that edges it over the zone in front is its own fascia member.
-    const half = round6(b.wallThicknessM / 2)
+    const half = round6((mass ? tOf(mass) : b.wallThicknessM) / 2)
     const head = b.portalHeads.find((p) => p.massId === r.massId)
     const fascia = head && mass ? { sides: ['MIN_Z' as const], topOffset: round6(head.y1 - r.slabTopY), height: round6(head.y1 - head.y0), depth: round6(mass.z0 - r.footprint.z0), materialId: MATERIALS_V2.dark } : undefined
     push(
@@ -609,7 +609,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     for (const m of b.masses) {
       for (const storey of m.storeys) {
         const r = rectAt(m, storey)
-        const t = b.wallThicknessM
+        const t = tOf(m)
         for (const side of ['FRONT', 'EAST', 'REAR', 'WEST'] as const) {
           const w = side === 'FRONT' ? { x0: r.x0, x1: r.x1, z0: r.z0, z1: r.z0 + t } : side === 'REAR' ? { x0: r.x0, x1: r.x1, z0: r.z1 - t, z1: r.z1 } : side === 'WEST' ? { x0: r.x0, x1: r.x0 + t, z0: r.z0, z1: r.z1 } : { x0: r.x1 - t, x1: r.x1, z0: r.z0, z1: r.z1 }
           const dx = Math.min(w.x1, c.x1) - Math.max(w.x0, c.x0)
@@ -639,7 +639,9 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
   }
 
   // --- exterior openings ------------------------------------------------------------
-  const cutAndFill = (o: OpeningV2, wallId: string, offset: number, reversed: boolean, l: { elevation: number }): void => {
+  // N7-FIX-01 (D-3): a frame sits in the wall that hosts it — a body built with walls thinner than the house's takes its
+  // frames from its own walls, never from the house's thickness
+  const cutAndFill = (o: OpeningV2, wallId: string, offset: number, reversed: boolean, l: { elevation: number }, hostT: number): void => {
     const sill = round6(Math.max(0, o.sillY - l.elevation))
     const nearIsTall = o.tallEdge === undefined ? true : (o.tallEdge === 'LOW') !== reversed
     const heightNear = round6(Math.max(0.3, (nearIsTall || o.headFarY === undefined ? o.headY : o.headFarY) - o.sillY))
@@ -656,13 +658,13 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     // 005Y-N4 (C): a swing and hinge only from the leaf and arc the plan draws; the wall's u may run against the plan's axis
     const drawnSwing: { swing?: 'IN' | 'OUT'; hingeSide?: 'LEFT' | 'RIGHT' } = o.leaf ? { swing: o.leaf.swing, hingeSide: (o.leaf.hingeAt === 'LOW') !== reversed ? 'LEFT' : 'RIGHT' } : {}
     if (kind === 'WINDOW') {
-      push({ type: 'placeWindow', id: `${o.id}-unit`, openingId: o.id, ...(o.mullions.length > 0 ? { mullions: o.mullions } : {}), ...frameWithinWall('WINDOW', b.wallThicknessM), materialId: MATERIALS_V2.glass }, o.id, 'windows')
+      push({ type: 'placeWindow', id: `${o.id}-unit`, openingId: o.id, ...(o.mullions.length > 0 ? { mullions: o.mullions } : {}), ...frameWithinWall('WINDOW', hostT), materialId: MATERIALS_V2.glass }, o.id, 'windows')
     } else if (o.family === 'GARAGE_DOOR') {
-      push({ type: 'placeDoor', id: `${o.id}-leaf`, openingId: o.id, ...frameWithinWall('DOOR', b.wallThicknessM), assembly: { panels: [{ kind: 'PANEL', fraction: 1 }], mullionWidth: 0.04 } }, o.id, 'doors')
+      push({ type: 'placeDoor', id: `${o.id}-leaf`, openingId: o.id, ...frameWithinWall('DOOR', hostT), assembly: { panels: [{ kind: 'PANEL', fraction: 1 }], mullionWidth: 0.04 } }, o.id, 'doors')
     } else if (o.family === 'GLAZED_DOOR') {
-      push({ type: 'placeDoor', id: `${o.id}-leaf`, openingId: o.id, ...frameWithinWall('DOOR', b.wallThicknessM), ...drawnSwing, assembly: { panels: [{ kind: 'LEAF', fraction: 1, hinge: drawnSwing.hingeSide ?? 'LEFT', glazing: 'FULL' }], mullionWidth: 0.04 }, materialId: MATERIALS_V2.glass }, o.id, 'doors')
+      push({ type: 'placeDoor', id: `${o.id}-leaf`, openingId: o.id, ...frameWithinWall('DOOR', hostT), ...drawnSwing, assembly: { panels: [{ kind: 'LEAF', fraction: 1, hinge: drawnSwing.hingeSide ?? 'LEFT', glazing: 'FULL' }], mullionWidth: 0.04 }, materialId: MATERIALS_V2.glass }, o.id, 'doors')
     } else {
-      push({ type: 'placeDoor', id: `${o.id}-leaf`, openingId: o.id, ...frameWithinWall('DOOR', b.wallThicknessM), ...drawnSwing, materialId: MATERIALS_V2.timber }, o.id, 'doors')
+      push({ type: 'placeDoor', id: `${o.id}-leaf`, openingId: o.id, ...frameWithinWall('DOOR', hostT), ...drawnSwing, materialId: MATERIALS_V2.timber }, o.id, 'doors')
     }
     evidence(o.id, o.provenance.head === 'SOURCE_EXACT' || o.provenance.head === 'SOURCE_CORROBORATED' ? 'SOURCE_CORROBORATED' : o.provenance.head === 'ASSUMED_FOR_RENDERING' ? 'ASSUMED_FOR_RENDERING' : 'SOURCE_DERIVED', o.why, { offset: o.provenance.interval, width: o.provenance.width, sill: o.provenance.sill, height: o.provenance.head, head: o.provenance.profile, kind: o.provenance.family })
   }
@@ -671,7 +673,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     const l = levelOf(o.storeyIndex)
     if (!mass || !l) continue
     const { offset, reversed } = wallOffset(rectAt(mass, o.storeyIndex), o.facade, o.interval)
-    cutAndFill(o, ringWallId(mass.id, o.storeyIndex, o.facade), offset, reversed, l)
+    cutAndFill(o, ringWallId(mass.id, o.storeyIndex, o.facade), offset, reversed, l, tOf(mass))
   }
   // 005Y-N3 (H1): a corner assembly is one relationship between its two openings, written once
   for (const o of b.openings) if (o.cornerWith && o.id < o.cornerWith && b.openings.some((x) => x.id === o.cornerWith)) push({ type: 'createRelationship', kind: 'ALIGNS_WITH', from: o.id, to: o.cornerWith, note: `CORNER_GLAZING: one glazing round the corner of the body, in two walls; no pier drawn between the pieces${o.openEnd ? '; the corner block is open between their common sill and head' : '; the corner square stays wall (the pieces do not share one band)'}` })
@@ -696,7 +698,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       // offsets run from the back wall's start, which is at either end of the mouth
       const startAlong = p.facade === 'FRONT' || p.facade === 'REAR' ? back.start.x : back.start.z
       const reversed = Math.abs(startAlong - p.to) < Math.abs(startAlong - p.from)
-      for (const o of p.backOpenings) cutAndFill(o, back.id, round6(reversed ? p.to - o.interval[1] : o.interval[0] - p.from), reversed, l)
+      for (const o of p.backOpenings) cutAndFill(o, back.id, round6(reversed ? p.to - o.interval[1] : o.interval[0] - p.from), reversed, l, back.thicknessM)
     }
   }
   for (const d of b.sharedDoors) {
@@ -711,9 +713,9 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     // N7-P2R: a body with no wall of its own on the shared side: the door is cut in the one wall there is
     const mineOpen = openIndex(mass) === FACADE_INDEX[d.facade]
     const otherOpen = openIndex(other) === FACADE_INDEX[otherFacade]
-    const host = mineOpen ? { wallId: ringWallId(other.id, d.storeyIndex, otherFacade), offset: otherOffset } : { wallId, offset }
+    const host = mineOpen ? { wallId: ringWallId(other.id, d.storeyIndex, otherFacade), offset: otherOffset, t: tOf(other) } : { wallId, offset, t: tOf(mass) }
     push({ type: 'cutOpening', id: d.id, wallId: host.wallId, kind: 'DOOR', offset: Math.max(0, host.offset), sill: 0, width: d.widthM, height: round6(d.headY - d.sillY), ...(mineOpen || otherOpen ? {} : { leaves: [{ wallId: ringWallId(other.id, d.storeyIndex, otherFacade), offset: Math.max(0, otherOffset) }] }) }, d.id, 'openings')
-    push({ type: 'placeDoor', id: `${d.id}-leaf`, openingId: d.id, ...frameWithinWall('DOOR', b.wallThicknessM), materialId: MATERIALS_V2.timber }, d.id, 'doors')
+    push({ type: 'placeDoor', id: `${d.id}-leaf`, openingId: d.id, ...frameWithinWall('DOOR', host.t), materialId: MATERIALS_V2.timber }, d.id, 'doors')
     evidence(d.id, 'SOURCE_DERIVED', d.why, { height: d.provenance.head })
   }
 

@@ -58,6 +58,8 @@ export type PartialPreviewSummary = {
   /** Objects the preview does not build (evidence records left out with them are not listed). */
   missing: Array<{ type: string; id?: string; cause: string; why: string }>
   checkpoint: PartialPreviewReport['checkpoint'] | null
+  /** N7-FIX-01: every ring refused for its own walls overlapping, with the way back to the reading that made it. */
+  ringCollisions?: NonNullable<PartialPreviewReport['ringCollisions']>
 }
 
 export type PreviewSummary = {
@@ -124,6 +126,7 @@ export function previewOf(input: {
           failures: partial.failures,
           missing: partial.skipped.filter((s) => s.type !== 'setEvidence').map((s) => ({ type: s.type, ...(s.id ? { id: s.id } : {}), cause: s.cause, why: s.why })),
           checkpoint: partial.checkpoint ?? null,
+          ...(partial.ringCollisions ? { ringCollisions: partial.ringCollisions } : {}),
         }
       : null,
   }

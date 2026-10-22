@@ -57,8 +57,21 @@ const chain = (segments: Array<{ from: number; to: number; cm: number }>): Dimen
 const frontView: ElevationFrameV2 = { registration: { frameId: 'front', assetId: 'a-front' } as ElevationFrameV2['registration'], side: 'FRONT', planeAt: 0, alongOf: (px) => (px - OX) / PPM, pxOf: (a) => OX + a * PPM, yOf: (py) => (500 - py) / PPM, pyOf: (y) => 500 - y * PPM }
 const elevation = (builtTo: number): { raster: Raster; sky: { data: Uint8Array; width: number } } => {
   const sky = new Uint8Array(W * H)
-  for (let py = 0; py < H; py += 1) for (let px = 0; px < W; px += 1) if (frontView.alongOf(px) > builtTo || frontView.yOf(py) > 3) sky[py * W + px] = 1
-  return { raster: { width: W, height: H, data: new Uint8ClampedArray(W * H * 4) }, sky: { data: sky, width: W } }
+  // N7-FIX-01 (E-1): the view draws what it shows — wall where it is built, pale sky elsewhere — so its outline can be read
+  const data = new Uint8ClampedArray(W * H * 4)
+  for (let py = 0; py < H; py += 1) {
+    for (let px = 0; px < W; px += 1) {
+      const isSky = frontView.alongOf(px) > builtTo || frontView.yOf(py) > 3
+      if (isSky) sky[py * W + px] = 1
+      const o = (py * W + px) * 4
+      const rgb = isSky ? [170, 200, 235] : [225, 220, 210]
+      data[o] = rgb[0]
+      data[o + 1] = rgb[1]
+      data[o + 2] = rgb[2]
+      data[o + 3] = 255
+    }
+  }
+  return { raster: { width: W, height: H, data }, sky: { data: sky, width: W } }
 }
 
 const input = (raster: Raster, band: MassV2, over: Partial<ThinBodyInput> = {}): ThinBodyInput => ({

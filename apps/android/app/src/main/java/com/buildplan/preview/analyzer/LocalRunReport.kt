@@ -30,6 +30,8 @@ data class LocalRunReport(
     val runtime: LocalRuntimeFacts? = null,
     val analyzerService: String = "",
     val analyzerSolver: String = "",
+    /** N7-FIX-01: SHA-256 of the `analyzer.mjs` this run started, checked against the bundle's manifest just before. */
+    val analyzerBundleSha256: String = "",
     val elapsedMs: Long = 0,
     /** Resident memory of the analyzer process at the last report. */
     val rssBytes: Long = 0,
@@ -49,6 +51,8 @@ data class LocalRunReport(
     val sources: JsonElement? = null,
     /** What each phase cost and its longest silence, as the program reported at its end (protocol 3). */
     val phases: List<LocalPhaseCost> = emptyList(),
+    /** N7-FIX-01: which analyzer the run was and how it ended, set when it ends. */
+    val provenance: RunProvenance? = null,
 ) {
     companion object {
         const val OUTCOME_RUNNING = "RUNNING"

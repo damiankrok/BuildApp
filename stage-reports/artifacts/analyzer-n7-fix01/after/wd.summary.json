@@ -1,0 +1,50 @@
+{
+ "case": "wd",
+ "solver": "2.6.0",
+ "outcome": "COMPLETE",
+ "modelSha256": "0e9195ea5ce66b1fc0c2c6e0f8f43c0d52672ebac860fc16ea047c8d005295b1",
+ "failures": [],
+ "thin": {
+  "decision": "DRAWN_THIN_WALLS",
+  "wallThicknessM": 0.158376,
+  "hypotheses": [
+   "WIDEN:REFUTED",
+   "SHARED_WALL:REFUTED",
+   "DRAWN_THIN_WALLS:SUPPORTED",
+   "SOLID_WALL:REFUTED",
+   "CANOPY_ON_POSTS:REFUTED",
+   "FALSE_STRIP:REFUTED",
+   "RECESS_OF_MAIN:REFUTED"
+  ],
+  "farEdgeInk": 0.378571,
+  "farWall": {
+   "holds": false,
+   "pieceShare": 0.671052,
+   "gaps": [
+    "0.973684m drawn 0",
+    "0.973685m drawn 1"
+   ],
+   "why": "1 of 2 gaps (0.97 m) carries no opening symbol across it and no printed chain measures it: the drawing does not say it is an opening"
+  }
+ },
+ "zoneBodies": 0,
+ "wingRings": [
+  "ring-attached-0-0"
+ ],
+ "wingWalls": [
+  "ring-attached-0-0-w0 t=0.158376",
+  "ring-attached-0-0-w1 t=0.158376",
+  "ring-attached-0-0-w2 t=0.158376",
+  "ring-attached-0-0-w3 t=0.158376"
+ ],
+ "wingOpenings": [
+  "opening-0-east-9-0 WINDOW w=0.97018",
+  "opening-0-east-9-1 DOOR w=0.97018"
+ ],
+ "wingUnits": [
+  "opening-0-east-9-0-unit",
+  "opening-0-east-9-1-leaf"
+ ],
+ "unresolvedOnWing": [],
+ "commands": 66
+}

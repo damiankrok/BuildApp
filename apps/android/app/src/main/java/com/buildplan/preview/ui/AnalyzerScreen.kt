@@ -76,8 +76,10 @@ import com.buildplan.preview.analyzer.AnalyzerMessages
 import com.buildplan.preview.analyzer.JobStatus
 import com.buildplan.preview.analyzer.LocalRunReport
 import com.buildplan.preview.analyzer.RetryAction
+import com.buildplan.preview.analyzer.RunProvenance
 import com.buildplan.preview.analyzer.StageChecklist
 import com.buildplan.preview.analyzer.StageRow
+import com.buildplan.preview.scene.AnalysisOrigin
 import com.buildplan.preview.scene.PreviewOutcome
 import com.buildplan.preview.analyzer.StageState
 import com.buildplan.preview.analyzer.LivenessTracker
@@ -339,6 +341,7 @@ private fun JobSection(model: AnalyzerViewModel, onOpenScene: (String) -> Unit) 
                 retry = state.retry,
                 status = state.status,
                 local = state.local,
+                provenance = state.local?.provenance ?: state.jobId?.let { model.provenanceOf(it) },
                 onRetry = { model.retry() },
                 onDismiss = { model.dismiss() },
                 onShare = share?.let { intent -> { context.startActivity(android.content.Intent.createChooser(intent, chooser)) } },
@@ -556,6 +559,7 @@ private fun Failure(
     retry: RetryAction,
     status: JobStatus?,
     local: LocalRunReport?,
+    provenance: RunProvenance?,
     onRetry: () -> Unit,
     onDismiss: () -> Unit,
     onShare: (() -> Unit)?,
@@ -603,6 +607,7 @@ private fun Failure(
                     }
                 }
             }
+            provenance?.let { RunProvenanceDetails(it) }
             local?.let { LocalCost(it) }
             status?.let { Checklist(StageChecklist.rows(it)) }
         }
@@ -658,6 +663,7 @@ private fun Result(summary: AnalysisSummary, entry: DownloadedSceneEntry, local:
         if (partial || summary.preview.provisional.isNotEmpty()) PreviewOutcomeDetails(summary.preview)
         InkButton(stringResource(if (partial) R.string.analyzer_open_partial_3d else R.string.house_open_3d), onClick = onOpen, icon = ShellIcons.cube, modifier = Modifier.fillMaxWidth())
         Foldout(stringResource(R.string.analyzer_details), open, onToggle = { open = !open }) {
+            RunProvenanceDetails(entry.provenance)
             AnalysisDiagnostics(summary)
             local?.let { LocalCost(it) }
         }
@@ -678,6 +684,24 @@ internal fun PreviewOutcomeDetails(preview: PreviewOutcome) {
                 Body(stringResource(R.string.partial_built_rows, b.wallRings, b.walls, b.slabs, b.roofs + b.roofPlanes, b.openings, b.rooms))
                 if (partial.basis == "MINIMAL_BASE") StatusText(stringResource(R.string.partial_basis_minimal))
                 partial.checkpoint?.let { StatusText(stringResource(R.string.partial_checkpoint, it.commands, it.modelSha256.take(12))) }
+            }
+            if (partial.ringCollisions.isNotEmpty()) {
+                Section(stringResource(R.string.partial_ring_collisions)) {
+                    for (c in partial.ringCollisions) {
+                        Column(Modifier.padding(bottom = Space.s), verticalArrangement = Arrangement.spacedBy(Space.xs)) {
+                            Text(stringResource(R.string.partial_ring_row, c.ringId, c.walls.joinToString(" / ")), style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
+                            StatusText(stringResource(R.string.partial_ring_size, metres(c.widthM), metres(c.lengthM), metres(c.wallThicknessM), metres(c.houseWallThicknessM)))
+                            if (c.selectedByThinBodies) StatusText(stringResource(R.string.partial_ring_selected, listOfNotNull(c.decision?.kind, c.decision?.why).joinToString(": ")))
+                            else StatusText(stringResource(R.string.partial_ring_not_selected, c.notSelectedBecause.orEmpty()))
+                            c.farFaceInk?.let { ink -> StatusText(stringResource(R.string.partial_ring_ink, share(ink.beforeOpenings), ink.afterOpenings?.let { share(it) } ?: "—")) }
+                            for (h in c.hypotheses) StatusText("${h.kind}: ${h.status}")
+                            c.firstBad?.let { StatusText("FIRST_BAD: $it") }
+                            if (c.reconciliation.changedGeometry) StatusText(stringResource(R.string.partial_ring_reconciled, c.reconciliation.records.joinToString(", ") { "${it.action} ${metres(it.moveM)} m" }))
+                            else StatusText(stringResource(R.string.partial_ring_not_reconciled))
+                            if (c.removedByPartialPreview) StatusText(stringResource(R.string.partial_ring_removed))
+                        }
+                    }
+                }
             }
             Section(stringResource(R.string.partial_missing)) {
                 if (partial.missing.isEmpty()) Body(stringResource(R.string.analyzer_none))
@@ -774,6 +798,51 @@ internal fun AnalysisDiagnostics(summary: AnalysisSummary) {
         }
     }
 }
+
+/**
+ * N7-FIX-01 (F-2): which analyzer made a result, as the phone recorded it when the run ended, with one button that copies
+ * it. A result stored before this record existed says so — VERSION_UNKNOWN — and is never given the current build's
+ * versions. Shared with the source sheet, where it is read from the stored entry. No address of the project is shown.
+ */
+@Composable
+internal fun RunProvenanceDetails(provenance: RunProvenance?) {
+    val clipboard = LocalClipboardManager.current
+    var copied by rememberSaveable { mutableStateOf(false) }
+    Section(stringResource(R.string.provenance_title)) {
+        if (provenance == null) {
+            Body(stringResource(R.string.provenance_unknown))
+        } else {
+            DataRow(stringResource(R.string.provenance_run_id), provenance.analysisRunId)
+            DataRow(stringResource(R.string.provenance_analyzed_at), provenance.analyzedAt)
+            DataRow(stringResource(R.string.provenance_apk), "${provenance.apkVersionName} (${provenance.apkVersionCode})")
+            DataRow(stringResource(R.string.provenance_mode), stringResource(if (provenance.mode == AnalysisOrigin.LOCAL) R.string.provenance_mode_local else R.string.provenance_mode_service))
+            DataRow(stringResource(R.string.provenance_solver), "solver ${provenance.solverVersion.ifBlank { "?" }} · service ${provenance.analyzerService.ifBlank { "?" }}")
+            DataRow(stringResource(R.string.provenance_state), if (provenance.failureCode.isBlank()) provenance.state else "${provenance.state} (${provenance.failureCode})")
+            HashRow(stringResource(R.string.provenance_bundle), provenance.analyzerBundleSha256.ifBlank { stringResource(R.string.provenance_bundle_service) })
+            HashRow(stringResource(R.string.provenance_model), provenance.modelHash)
+            if (provenance.checkpointSha256.isNotBlank()) HashRow(stringResource(R.string.provenance_checkpoint), provenance.checkpointSha256)
+        }
+        TextButton(
+            onClick = {
+                clipboard.setText(AnnotatedString(provenance?.copyText() ?: RunProvenance.VERSION_UNKNOWN))
+                copied = true
+            },
+            modifier = Modifier.heightIn(min = Sizes.touch),
+        ) { Text(stringResource(R.string.provenance_copy), color = Palette.Ink) }
+        if (copied) {
+            // A notice nothing waits on: it goes by itself.
+            LaunchedEffect(Unit) {
+                delay(NOTICE_MS)
+                copied = false
+            }
+            StatusText(stringResource(R.string.provenance_copied))
+        }
+    }
+}
+
+private fun metres(m: Double?): String = m?.let { String.format(java.util.Locale.ROOT, "%.2f", it) } ?: "—"
+
+private fun share(s: Double): String = "${(s * 100).roundToInt()} %"
 
 private fun visionText(summary: AnalysisSummary): String = when (summary.vision.mode) {
     "LIVE_PROVIDER" -> "vision provider: ${summary.vision.provider ?: "—"}"

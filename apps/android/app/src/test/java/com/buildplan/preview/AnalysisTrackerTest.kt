@@ -114,6 +114,13 @@ class AnalysisTrackerTest {
         assertEquals(2, entry.unresolvedCount)
         assertEquals(3, entry.warningsCount)
         assertEquals("DETERMINISTIC_ONLY", entry.visionMode)
+        // N7-FIX-01: a downloaded result names the run and the analyzer the service said it was
+        val provenance = requireNotNull(entry.provenance)
+        assertEquals(JOB, provenance.analysisRunId)
+        assertEquals("SERVICE", provenance.mode)
+        assertEquals("2.0.0", provenance.solverVersion)
+        assertEquals("", provenance.analyzerBundleSha256)
+        assertEquals("COMPLETE", provenance.state)
         assertTrue(entry.subtitle.startsWith("Analysed "))
         assertTrue(entry.subtitle.endsWith("candidate ${AnalyzerFixtures.CANDIDATE.take(12)}"))
         assertEquals(listOf("${AnalyzerFixtures.sceneSha256}.json", "index.json"), filesIn(dir))

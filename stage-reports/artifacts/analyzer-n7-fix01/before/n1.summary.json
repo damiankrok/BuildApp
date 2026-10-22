@@ -1,0 +1,40 @@
+{
+ "case": "n1",
+ "solver": "2.5.0",
+ "outcome": "PARTIAL_3D_PREVIEW",
+ "modelSha256": "fa511d9526996587bb1441dbe99210cb3494d4a9eccd7e2448ea55782fd2145a",
+ "failures": [
+  "61 placeWindow opening-0-east-9-0-unit FILL_TOO_LARGE"
+ ],
+ "thin": {
+  "decision": "DRAWN_THIN_WALLS",
+  "wallThicknessM": 0.158376,
+  "hypotheses": [
+   "WIDEN:REFUTED",
+   "SHARED_WALL:REFUTED",
+   "DRAWN_THIN_WALLS:SUPPORTED",
+   "SOLID_WALL:REFUTED",
+   "CANOPY_ON_POSTS:REFUTED",
+   "FALSE_STRIP:REFUTED",
+   "RECESS_OF_MAIN:REFUTED"
+  ],
+  "farEdgeInk": 0.483333,
+  "farWall": null
+ },
+ "zoneBodies": "n/a",
+ "wingRings": [
+  "ring-attached-0-0"
+ ],
+ "wingWalls": [
+  "ring-attached-0-0-w0 t=0.158376",
+  "ring-attached-0-0-w1 t=0.158376",
+  "ring-attached-0-0-w2 t=0.158376",
+  "ring-attached-0-0-w3 t=0.158376"
+ ],
+ "wingOpenings": [
+  "opening-0-east-9-0 WINDOW w=0.97018"
+ ],
+ "wingUnits": [],
+ "unresolvedOnWing": [],
+ "commands": 62
+}

@@ -52,9 +52,9 @@ export type ThinBodyRecord = {
   /** The face it shares with another body, and that body. */
   shared?: { facade: ThinBodyFacade; withMassId: string }
   /** The plan's ink across the band: share of the long-axis samples that are ink, binned outward from the shared face. */
-  profile?: { samples: number; stepM: number; fromS: number; bands: Array<{ fromS: number; toS: number }>; solidShare: number; farEdgeInk: number }
+  profile?: { samples: number; stepM: number; fromS: number; bands: Array<{ fromS: number; toS: number }>; solidShare: number; farEdgeInk: number; farWall?: FarWallReading }
   chains: Array<{ chainId: string; valueCm: number; from: number; to: number; role: 'CORROBORATES' | 'WIDENS' | 'CONFLICTS' | 'UNRELATED'; why: string }>
-  elevations: Array<{ frameId: string; side: string; over: [number, number]; builtShare: number; verdict: 'CORROBORATES' | 'CONTRADICTS' | 'NOT_DECISIVE' }>
+  elevations: Array<{ frameId: string; side: string; over: [number, number]; builtShare: number; verdict: 'CORROBORATES' | 'CONTRADICTS' | 'NOT_DECISIVE'; edges?: { far: number; top: number }; why?: string }>
   hypotheses: Array<{ kind: ThinBodyHypothesisKind; status: 'SUPPORTED' | 'REFUTED' | 'NO_EVIDENCE'; why: string }>
   /** Where the reading that made the ring fail was taken. */
   firstBad: string
@@ -64,6 +64,28 @@ export type ThinBodyRecord = {
 /** A band of ink across the plan, in metres outward from the shared face. */
 type Band = { fromS: number; toS: number }
 
+/**
+ * N7-FIX-01 (F-R1): the body's far face read along its length, as a wall with openings or as something else. A plan
+ * draws a window, a door or a gate as a gap between two pieces of masonry on the wall's line: a wall broken by two
+ * 1 m windows is ink over less than 60 % of its length and is still a wall. A gap closes the wall only where the source
+ * says it is an opening — the plan draws a line across it inside the wall's thickness (glazing, a sill) or a printed
+ * chain measures it from jamb to jamb. A gap between posts says neither; posts are pieces about as long as they are
+ * thick; a wall that stops is a gap reaching the body's end. None of those is closed here.
+ */
+export type FarWallReading = {
+  /** The line read, in metres outward from the shared face. */
+  fromS: number
+  toS: number
+  /** Share of the face's length that is masonry across the line's thickness. */
+  pieceShare: number
+  /** The masonry along the face and the gaps between, in metres from the body's along start. */
+  pieces: Array<[number, number]>
+  /** Each gap with what the source says of it: a line the plan draws across it (glazing, a sill), a chain that measures it. */
+  gaps: Array<{ from: number; to: number; widthM: number; chainIds: string[]; drawnAcross: number }>
+  holds: boolean
+  why: string
+}
+
 /** Plan ink: darker than this luma. The same threshold the outer faces are found with. */
 export const THIN_BODY_INK_LUMA = 90
 /** A position is wall when this share of the samples along the band is ink there (openings break a wall) … */
@@ -72,9 +94,27 @@ export const BAND_INK_SHARE = 0.6
 export const PAPER_INK_SHARE = 0.2
 /** How far past the read face the drawn far wall of a body read too narrow is looked for. */
 export const WIDEN_SEARCH_M = 8
-/** An elevation corroborates a built extent when this share of its storey band is not sky; contradicts at or under the second. */
+/** N7-FIX-01: a gap between two pieces of a wall is an opening when it is this wide or wider and no wider than the second — the bounds the plan's openings are read with (`planGaps`). */
+export const OPENING_MIN_M = 0.5
+export const OPENING_MAX_M = 6.5
+/** N7-FIX-01: a piece of masonry is a pier, not a post, when it runs along the wall at least this many times its thickness … */
+export const PIER_LENGTH_PER_THICKNESS = 1.5
+/** … and a face is a wall with openings only when its pieces carry this share of its length. */
+export const WALL_PIECE_SHARE = 0.25
+/** A gap is drawn as an opening when one line inside the wall's thickness runs across this share of it (glazing, a sill). */
+export const OPENING_SYMBOL_SHARE = 0.8
+/**
+ * An elevation can corroborate a built extent only when at least this share of its storey band is not sky, and
+ * contradicts it only at or under the second. N7-FIX-01 (E-1): not being sky is never enough on its own — a tree, a
+ * hedge or a body standing behind is not sky either. A view corroborates only where it draws the body's own outline:
+ * its far corner as a vertical edge at the column the plan puts it, and its top as a horizontal edge near the storey's
+ * wall top, in columns no other body of the plan stands in.
+ */
 export const ELEVATION_BUILT = 0.6
 export const ELEVATION_EMPTY = 0.2
+/** N7-FIX-01: an outline edge is drawn when this share of its rows (or columns) changes colour by at least the second across it (sum of the three channels' differences). */
+export const ELEVATION_EDGE_SHARE = 0.6
+export const ELEVATION_EDGE_STEP = 30
 
 const facadeOfFace = (axis: 'X' | 'Z', low: boolean): ThinBodyFacade => (axis === 'X' ? (low ? 'WEST' : 'EAST') : low ? 'FRONT' : 'REAR')
 
@@ -92,6 +132,53 @@ export type ThinBodyInput = {
 }
 
 const overlap1 = (a0: number, a1: number, b0: number, b1: number): number => Math.max(0, Math.min(a1, b1) - Math.max(a0, b0))
+
+/** The colour step between two pixels: the sum of the channels' differences (a wall against a pale sky differs in hue more than in luma). */
+const stepBetween = (r: Raster, xa: number, ya: number, xb: number, yb: number): number => {
+  const a = (ya * r.width + xa) * 4
+  const b = (yb * r.width + xb) * 4
+  return Math.abs(r.data[a] - r.data[b]) + Math.abs(r.data[a + 1] - r.data[b + 1]) + Math.abs(r.data[a + 2] - r.data[b + 2])
+}
+
+/**
+ * N7-FIX-01 (E-1): how much of a body's own outline an elevation draws over an extent — the share of the storey band's
+ * rows with a vertical edge at the far corner's column (searched within 0.15 m of it), and the share of the extent's
+ * columns with a horizontal edge near the wall top (from 0.4 m under it to 0.8 m over: a parapet or an eave).
+ */
+export function outlineEdges(raster: Raster, view: ElevationFrameV2, farAlong: number, topY: number, floorY: number, c0: number, c1: number): { far: number; top: number } {
+  const W = raster.width
+  const H = raster.height
+  const mpp = Math.abs(view.pxOf(1) - view.pxOf(0)) > 0 ? 1 / Math.abs(view.pxOf(1) - view.pxOf(0)) : 0.02
+  const rTop = Math.max(1, Math.round(Math.min(view.pyOf(topY - 0.3), view.pyOf(floorY + 0.3))))
+  const rBot = Math.min(H - 2, Math.round(Math.max(view.pyOf(topY - 0.3), view.pyOf(floorY + 0.3))))
+  const cf = Math.round(view.pxOf(farAlong))
+  const reach = Math.max(3, Math.round(0.15 / mpp))
+  let far = 0
+  for (let x = Math.max(1, cf - reach); x <= Math.min(W - 2, cf + reach); x += 1) {
+    let n = 0
+    let e = 0
+    for (let y = rTop; y <= rBot; y += 1) {
+      n += 1
+      if (stepBetween(raster, x + 1, y, x - 1, y) >= ELEVATION_EDGE_STEP) e += 1
+    }
+    if (n > 0) far = Math.max(far, e / n)
+  }
+  const ya = Math.max(1, Math.round(Math.min(view.pyOf(topY - 0.4), view.pyOf(topY + 0.8))))
+  const yb = Math.min(H - 2, Math.round(Math.max(view.pyOf(topY - 0.4), view.pyOf(topY + 0.8))))
+  const x0 = Math.max(0, c0 + 1)
+  const x1 = Math.min(W - 1, c1 - 1)
+  let topShare = 0
+  for (let y = ya; y <= yb; y += 1) {
+    let n = 0
+    let e = 0
+    for (let x = x0; x <= x1; x += 1) {
+      n += 1
+      if (stepBetween(raster, x, y + 1, x, y - 1) >= ELEVATION_EDGE_STEP) e += 1
+    }
+    if (n > 0) topShare = Math.max(topShare, e / n)
+  }
+  return { far: round6(far), top: round6(topShare) }
+}
 
 /** The bodies that would be refused for their own walls overlapping: narrower than two walls on some axis. */
 export function thinBodies(masses: readonly MassV2[], T: number): Array<{ mass: MassV2; axis: 'X' | 'Z' }> {
@@ -210,7 +297,111 @@ export function adjudicateThinBody(mass: MassV2, axis: 'X' | 'Z', input: ThinBod
   const farEdgeInk = round6(meanOver(narrow - Math.min(0.3, narrow / 2), narrow))
   record.profile = { samples: alongs.length, stepM: step, fromS: round6(fromS), bands, solidShare, farEdgeInk }
 
-  const farBand = bands.find((b) => Math.abs(b.toS - narrow) <= tol && b.fromS > 0.02)
+  // --- N7-FIX-01 (F-R1): a far face that is no continuous band is read along its whole length --------------------
+  // Openings break a wall: two 1 m windows in a 6 m wall leave ink over less than 60 % of the samples, and the band
+  // test above sees no wall. The face is read again as the plan draws an opening: masonry pieces on one line, the gaps
+  // between them opening-sized, the pieces piers rather than posts, and the line reaching both ends of the body.
+  const readFarWall = (): FarWallReading | undefined => {
+    const mppAlong = axis === 'X' ? frame.mppY : frame.mppX
+    const da = Math.max(0.01, mppAlong)
+    const nAlong = Math.max(8, Math.floor(long / da))
+    const alongAt = (k: number): number => along0 + ((k + 0.5) * long) / nAlong
+    const inkAt = (s: number, a: number): boolean => (axis === 'X' ? ink(worldOf(s), a) : ink(a, worldOf(s)))
+    // the line: bins near the read far face that carry ink over a fair share of the whole length
+    const s0 = Math.max(0.02, narrow - Math.min(0.5, 0.8 * narrow))
+    const s1 = narrow + tol
+    const cov: Array<{ s: number; c: number }> = []
+    for (let s = s0; s < s1; s += step) {
+      let n = 0
+      for (let k = 0; k < nAlong; k += 1) if (inkAt(s + step / 2, alongAt(k))) n += 1
+      cov.push({ s, c: n / nAlong })
+    }
+    const runs: Band[] = []
+    for (let i = 0; i < cov.length; i += 1) {
+      if (cov[i].c < 0.5 * WALL_PIECE_SHARE) continue
+      let j = i
+      while (j + 1 < cov.length && cov[j + 1].c >= 0.5 * WALL_PIECE_SHARE) j += 1
+      runs.push({ fromS: round6(cov[i].s), toS: round6(cov[j].s + step) })
+      i = j
+    }
+    const line = runs.filter((r) => Math.abs(r.toS - narrow) <= tol && r.fromS > 0.02).sort((a, b) => Math.abs(a.toS - narrow) - Math.abs(b.toS - narrow))[0]
+    if (!line) return undefined
+    const tf = round6(line.toS - line.fromS)
+    // masonry along the line: a position is solid where most of the line's thickness is ink there
+    const across = Math.max(2, Math.round(tf / step))
+    const solid: boolean[] = []
+    for (let k = 0; k < nAlong; k += 1) {
+      let n = 0
+      for (let q = 0; q < across; q += 1) if (inkAt(line.fromS + ((q + 0.5) * tf) / across, alongAt(k))) n += 1
+      solid.push(n / across >= BAND_INK_SHARE)
+    }
+    const at = (k: number): number => round6((k * long) / nAlong)
+    const pieces: Array<[number, number]> = []
+    for (let k = 0; k < nAlong; k += 1) {
+      if (!solid[k]) continue
+      let j = k
+      while (j + 1 < nAlong && solid[j + 1]) j += 1
+      const prev = pieces[pieces.length - 1]
+      // a pixel's break in a drawn wall is the drawing, not a gap
+      if (prev && at(k) - prev[1] <= 2 * (long / nAlong)) prev[1] = at(j + 1)
+      else pieces.push([at(k), at(j + 1)])
+      k = j
+    }
+    const pieceShare = round6(pieces.reduce((a, p) => a + p[1] - p[0], 0) / long)
+    const gaps: FarWallReading['gaps'] = []
+    for (let i = 0; i + 1 < pieces.length; i += 1) {
+      const from = pieces[i][1]
+      const to = pieces[i + 1][0]
+      // a printed chain segment whose two ends fall on this gap's jambs measures it
+      const wFrom = along0 + from
+      const wTo = along0 + to
+      const chainIds: string[] = []
+      for (const c of input.chains) {
+        if (c.frameId !== frame.frameId || c.axis !== (axis === 'X' ? 'VERTICAL' : 'HORIZONTAL')) continue
+        for (const seg of c.segments) {
+          if (seg.valueCm === undefined) continue
+          const w = (px: number): number => (axis === 'X' ? frame.toWorld(frame.originPx.x, px).z : frame.toWorld(px, frame.originPx.y).x)
+          const a = Math.min(w(seg.fromPx), w(seg.toPx))
+          const b = Math.max(w(seg.fromPx), w(seg.toPx))
+          if (Math.abs(a - wFrom) <= tol && Math.abs(b - wTo) <= tol && Math.abs(seg.valueCm / 100 - (to - from)) <= tol) chainIds.push(c.id)
+        }
+      }
+      // a line drawn across the gap inside the wall's thickness (or just either side of it): glazing or a sill, the
+      // symbol a plan draws an opening with — the best share of the gap's length one line of the band covers
+      const nInner = Math.max(4, Math.round((to - from) / da))
+      const inner = Array.from({ length: nInner }, (_, k) => along0 + from + ((to - from) * (k + 0.5)) / nInner).filter((a) => a > along0 + from + da && a < along0 + to - da)
+      let drawnAcross = 0
+      for (let sAt = line.fromS - 0.5 * tf; sAt <= line.toS + 0.5 * tf; sAt += Math.min(step, mppAlong)) {
+        if (inner.length === 0) break
+        let n = 0
+        for (const a of inner) if (inkAt(sAt, a)) n += 1
+        drawnAcross = Math.max(drawnAcross, n / inner.length)
+      }
+      gaps.push({ from: round6(from), to: round6(to), widthM: round6(to - from), chainIds, drawnAcross: round6(drawnAcross) })
+    }
+    const endTol = Math.max(tf, 0.1) + 2 * (long / nAlong)
+    const reachesEnds = pieces.length > 0 && pieces[0][0] <= endTol && pieces[pieces.length - 1][1] >= long - endTol
+    const posts = pieces.slice(1, -1).filter((p) => p[1] - p[0] < PIER_LENGTH_PER_THICKNESS * tf)
+    const unsized = gaps.filter((g) => g.widthM < OPENING_MIN_M || g.widthM > OPENING_MAX_M)
+    const base = { fromS: line.fromS, toS: line.toS, pieceShare, pieces, gaps }
+    const no = (why: string): FarWallReading => ({ ...base, holds: false, why })
+    if (tf < 0.04) return no(`the line at the far face is ${tf.toFixed(2)} m thick: a line, not a wall`)
+    if (gaps.length === 0) return no('no gap between pieces of masonry on the far face')
+    if (!reachesEnds) return no(`the masonry on the far face does not reach both ends of the body (${pieces.length > 0 ? `${pieces[0][0].toFixed(2)}..${pieces[pieces.length - 1][1].toFixed(2)} of ${long.toFixed(2)} m` : 'none'}): a wall that stops, not a wall with openings`)
+    if (unsized.length > 0) return no(`${unsized.map((g) => `${g.widthM.toFixed(2)} m`).join(', ')} between pieces: no opening is ${OPENING_MIN_M}–${OPENING_MAX_M} m`)
+    if (posts.length > 0) return no(`${posts.length} piece${posts.length === 1 ? ' is' : 's are'} shorter than ${PIER_LENGTH_PER_THICKNESS}× the ${tf.toFixed(2)} m line's thickness: posts, not piers`)
+    if (pieceShare < WALL_PIECE_SHARE) return no(`masonry carries ${(pieceShare * 100).toFixed(0)} % of the face, under ${(WALL_PIECE_SHARE * 100).toFixed(0)} %`)
+    const unexplained = gaps.filter((g) => g.drawnAcross < OPENING_SYMBOL_SHARE && g.chainIds.length === 0)
+    if (unexplained.length > 0) return no(`${unexplained.length} of ${gaps.length} gap${gaps.length === 1 ? '' : 's'} (${unexplained.map((g) => `${g.widthM.toFixed(2)} m`).join(', ')}) carr${unexplained.length === 1 ? 'ies' : 'y'} no opening symbol across it and no printed chain measures ${unexplained.length === 1 ? 'it' : 'them'}: the drawing does not say ${unexplained.length === 1 ? 'it is an opening' : 'they are openings'}`)
+    const drawn = gaps.filter((g) => g.drawnAcross >= OPENING_SYMBOL_SHARE).length
+    const measured = gaps.filter((g) => g.chainIds.length > 0).length
+    return { ...base, holds: true, why: `the far face is a ${tf.toFixed(2)} m wall broken by ${gaps.length} opening${gaps.length === 1 ? '' : 's'} (${gaps.map((g) => `${g.widthM.toFixed(2)} m`).join(', ')}) between piers, reaching both ends of the body; masonry over ${(pieceShare * 100).toFixed(0)} % of it; ${drawn} drawn with a line across, ${measured} measured by a printed chain` }
+  }
+  const continuousFar = bands.find((b) => Math.abs(b.toS - narrow) <= tol && b.fromS > 0.02)
+  // read always, for the record (the ink before and after openings); it decides only where the band test found no wall
+  const farWall = readFarWall()
+  if (farWall) record.profile.farWall = farWall
+  const farBand = continuousFar ?? (farWall?.holds ? { fromS: farWall.fromS, toS: farWall.toS } : undefined)
   // the band across the shared face: one wall's thickness is the other body's wall alone (its face read a little off);
   // more is that wall and one of the band's own drawn against it
   const nearBand = bands.find((b) => b.fromS <= tol && b.toS >= -tol && b !== farBand)
@@ -263,8 +454,11 @@ export function adjudicateThinBody(mass: MassV2, axis: 'X' | 'Z', input: ThinBod
   const elevationOver = (s0: number, s1: number): ThinBodyRecord['elevations'] => {
     const w0 = Math.min(worldOf(s0), worldOf(s1))
     const w1 = Math.max(worldOf(s0), worldOf(s1))
+    const wFar = worldOf(s1)
     const out: ThinBodyRecord['elevations'] = []
     if (!Number.isFinite(top) || top - floor < 0.8) return out
+    // N7-FIX-01 (E-1): a body the plan puts in the same columns, in front of or behind the extent, is seen there too
+    const occluder = others.find((m) => overlap1(...(axis === 'X' ? ([m.x0, m.x1] as const) : ([m.z0, m.z1] as const)), w0, w1) > 0.1)
     for (const v of viewsSeeing) {
       const sky = input.skyOf(v.raster)
       const c0 = Math.round(Math.min(v.view.pxOf(w0), v.view.pxOf(w1)))
@@ -281,7 +475,12 @@ export function adjudicateThinBody(mass: MassV2, axis: 'X' | 'Z', input: ThinBod
       }
       if (n < 20) continue
       const builtShare = round6(built / n)
-      out.push({ frameId: v.view.registration.frameId, side: v.view.side, over: [round6(w0), round6(w1)], builtShare, verdict: builtShare >= ELEVATION_BUILT ? 'CORROBORATES' : builtShare <= ELEVATION_EMPTY ? 'CONTRADICTS' : 'NOT_DECISIVE' })
+      const edges = outlineEdges(v.raster, v.view, wFar, top, floor, c0, c1)
+      const entry = { frameId: v.view.registration.frameId, side: v.view.side, over: [round6(w0), round6(w1)] as [number, number], builtShare, edges }
+      if (occluder) out.push({ ...entry, verdict: 'NOT_DECISIVE', why: `${occluder.id} stands in the same columns of the plan: the view cannot tell which body it shows` })
+      else if (builtShare >= ELEVATION_BUILT && edges.far >= ELEVATION_EDGE_SHARE && edges.top >= ELEVATION_EDGE_SHARE) out.push({ ...entry, verdict: 'CORROBORATES', why: `the body's far corner and its top are drawn where the plan puts them (${(edges.far * 100).toFixed(0)} % and ${(edges.top * 100).toFixed(0)} % edge)` })
+      else if (builtShare <= ELEVATION_EMPTY && edges.far < 0.5 * ELEVATION_EDGE_SHARE) out.push({ ...entry, verdict: 'CONTRADICTS', why: `${((1 - builtShare) * 100).toFixed(0)} % of the storey band over the extent is sky and no corner is drawn` })
+      else out.push({ ...entry, verdict: 'NOT_DECISIVE', why: builtShare >= ELEVATION_BUILT ? `not sky, but the outline of a body is not drawn there (far corner ${(edges.far * 100).toFixed(0)} %, top ${(edges.top * 100).toFixed(0)} % edge): a tree, a hedge or something behind is not sky either` : `${(builtShare * 100).toFixed(0)} % of the band is not sky: neither built nor empty` })
     }
     return out
   }
@@ -341,8 +540,8 @@ export function adjudicateThinBody(mass: MassV2, axis: 'X' | 'Z', input: ThinBod
   if (solidShare >= 0.85) H('SOLID_WALL', 'SUPPORTED', `${(solidShare * 100).toFixed(0)} % of the band is drawn as wall across its width: a thick wall, not an enclosed space`)
   else H('SOLID_WALL', 'REFUTED', `only ${(solidShare * 100).toFixed(0)} % of the band is drawn as wall across its width`)
   // never built here, but named
-  if (!farBand && farEdgeInk > 0.05 && farEdgeInk < 0.45 && !beyond) H('CANOPY_ON_POSTS', 'SUPPORTED', `the far face is drawn intermittently (${(farEdgeInk * 100).toFixed(0)} % ink): posts or a parapet, not a wall — not built by this pass`)
-  else H('CANOPY_ON_POSTS', 'REFUTED', farBand ? 'the far face is a continuous drawn wall' : 'no intermittent ink at the far face')
+  if (!farBand && farEdgeInk > 0.05 && farEdgeInk < 0.45 && !beyond) H('CANOPY_ON_POSTS', 'SUPPORTED', `the far face is drawn intermittently (${(farEdgeInk * 100).toFixed(0)} % ink)${farWall ? ` and is no wall with openings (${farWall.why})` : ''}: posts or a parapet, not a wall — not built by this pass`)
+  else H('CANOPY_ON_POSTS', 'REFUTED', continuousFar ? 'the far face is a continuous drawn wall' : farWall?.holds ? farWall.why : 'no intermittent ink at the far face')
   if (!farBand && !beyond && farEdgeInk <= 0.05) H('FALSE_STRIP', 'SUPPORTED', 'the plan draws nothing at the read far face nor beyond it: a strip the cells took for a body — not removed by this pass')
   else H('FALSE_STRIP', 'REFUTED', 'the plan draws a wall at or beyond the read far face')
   const inside = others.find((m) => m.role === 'MAIN' && overlap1(m.x0, m.x1, rect.x0, rect.x1) > 0.5 * (rect.x1 - rect.x0) && overlap1(m.z0, m.z1, rect.z0, rect.z1) > 0.5 * (rect.z1 - rect.z0))
@@ -387,4 +586,107 @@ export function adjudicateThinBody(mass: MassV2, axis: 'X' | 'Z', input: ThinBod
     record.decision = { kind: 'SOLID_WALL', why: buildable[0].why, before: rect, after: rect, wallThicknessM: narrow }
   } else record.decision.why = `${pick} holds but cannot be built here`
   return record
+}
+
+/**
+ * N7-FIX-01: a body the plan draws in a zone the decomposition left open — walls of its own at both ends and a far
+ * face of masonry, with interior between — that no mass was made of. The decomposition reads a cell as open when its
+ * far wall is too broken to close the cell (four windows in a 6 m wall of 0.15 m): the body never becomes a mass, never
+ * reaches `adjudicateThinBody`, and the zone is read as an empty strip. Not built here: named, with what the plan draws.
+ */
+export type ZoneBodyTrace = {
+  side: ThinBodyFacade
+  storeyIndex: number
+  /** The body's extent along the face it stands against, and across the zone, in world metres. */
+  from: number
+  to: number
+  depthM: number
+  /** The drawn thickness of its end walls and of its far face. */
+  endWallsM: [number, number]
+  farWallM: number
+  /** Share of the far face that is masonry. */
+  farPieceShare: number
+  why: string
+}
+
+/** The least thickness a line must have to be taken for one of a body's own walls here (a balustrade is drawn thinner). */
+export const ZONE_BODY_WALL_MIN_M = 0.06
+
+export function bodyDrawnInZone(raster: Raster, frame: PlanFrameV2, zone: { side: ThinBodyFacade; backAt: number; mouthAt: number; from: number; to: number }, storeyIndex: number): ZoneBodyTrace | undefined {
+  const across = zone.side === 'EAST' || zone.side === 'WEST' ? 'X' : 'Z'
+  const depth = Math.abs(zone.mouthAt - zone.backAt)
+  const dir = Math.sign(zone.mouthAt - zone.backAt) || 1
+  if (depth < 0.2 || zone.to - zone.from < 1) return undefined
+  const ink = (s: number, a: number): boolean => {
+    const c = zone.backAt + dir * s
+    const p = across === 'X' ? frame.toPixel(c, a) : frame.toPixel(a, c)
+    const px = Math.round(p.x)
+    const py = Math.round(p.y)
+    if (px < 0 || py < 0 || px >= raster.width || py >= raster.height) return false
+    const o = (py * raster.width + px) * 4
+    return 0.299 * raster.data[o] + 0.587 * raster.data[o + 1] + 0.114 * raster.data[o + 2] < THIN_BODY_INK_LUMA
+  }
+  const da = Math.max(0.01, across === 'X' ? frame.mppY : frame.mppX)
+  const ds = Math.max(0.01, across === 'X' ? frame.mppX : frame.mppY)
+  const nA = Math.max(8, Math.floor((zone.to - zone.from) / da))
+  const aAt = (k: number): number => zone.from + ((k + 0.5) * (zone.to - zone.from)) / nA
+  const nS = Math.max(6, Math.floor((0.9 * depth) / ds))
+  const sSamples = Array.from({ length: nS }, (_, k) => 0.05 * depth + ((k + 0.5) * 0.9 * depth) / nS)
+  // end walls: positions along the face where ink runs right across the zone
+  const crosses: boolean[] = []
+  for (let k = 0; k < nA; k += 1) {
+    let n = 0
+    for (const s of sSamples) if (ink(s, aAt(k))) n += 1
+    crosses.push(n / sSamples.length >= 0.8)
+  }
+  const ends: Array<[number, number]> = []
+  for (let k = 0; k < nA; k += 1) {
+    if (!crosses[k]) continue
+    let j = k
+    while (j + 1 < nA && crosses[j + 1]) j += 1
+    const a0 = zone.from + (k * (zone.to - zone.from)) / nA
+    const a1 = zone.from + ((j + 1) * (zone.to - zone.from)) / nA
+    if (a1 - a0 >= ZONE_BODY_WALL_MIN_M) ends.push([round6(a0), round6(a1)])
+    k = j
+  }
+  for (let i = 0; i + 1 < ends.length; i += 1) {
+    const lo = ends[i][1]
+    const hi = ends[i + 1][0]
+    if (hi - lo < 1) continue
+    const nInner = Math.max(8, Math.floor((hi - lo) / da))
+    const inner = Array.from({ length: nInner }, (_, k) => lo + ((k + 0.5) * (hi - lo)) / nInner)
+    const coverAt = (s: number): number => inner.filter((a) => ink(s, a)).length / inner.length
+    // the far face: the run of rows at the zone's mouth whose ink covers a fair share of the stretch
+    const rows: Array<{ s: number; c: number }> = []
+    for (let s = Math.max(0, depth - 0.4); s <= depth + 0.5 * ds; s += ds) rows.push({ s, c: coverAt(s) })
+    let best: { s0: number; s1: number; c: number } | undefined
+    for (let r = 0; r < rows.length; r += 1) {
+      if (rows[r].c < WALL_PIECE_SHARE) continue
+      let j = r
+      let c = rows[r].c
+      while (j + 1 < rows.length && rows[j + 1].c >= WALL_PIECE_SHARE) {
+        j += 1
+        c = Math.max(c, rows[j].c)
+      }
+      if (!best || rows[j].s + ds - rows[r].s > best.s1 - best.s0) best = { s0: rows[r].s, s1: rows[j].s + ds, c }
+      r = j
+    }
+    if (!best || best.s1 - best.s0 < ZONE_BODY_WALL_MIN_M) continue
+    // interior: paper between the face it stands against and the far face
+    const mid = coverAt(Math.max(0.05 * depth, (best.s0 + Math.min(0.15, best.s0 / 2)) / 2))
+    if (mid > PAPER_INK_SHARE) continue
+    const farWallM = round6(best.s1 - best.s0)
+    return {
+      side: zone.side,
+      storeyIndex,
+      from: lo,
+      to: hi,
+      depthM: round6(depth),
+      endWallsM: [round6(ends[i][1] - ends[i][0]), round6(ends[i + 1][1] - ends[i + 1][0])],
+      farWallM,
+      farPieceShare: round6(best.c),
+      why: `the plan draws walls of its own across the ${depth.toFixed(2)} m zone at both ends (${(ends[i][1] - ends[i][0]).toFixed(2)} and ${(ends[i + 1][1] - ends[i + 1][0]).toFixed(2)} m) and a ${farWallM.toFixed(2)} m far face with masonry over ${(best.c * 100).toFixed(0)} % of it, paper between: an enclosed body ${(hi - lo).toFixed(2)} m long the decomposition left open`,
+    }
+  }
+  return undefined
 }

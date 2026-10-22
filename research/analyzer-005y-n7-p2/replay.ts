@@ -80,6 +80,9 @@ const audit = {
   facadeAlignment: (r as { facadeAlignment?: unknown }).facadeAlignment ?? null,
   crossView: r.crossViewResiduals.views,
   thinBodies: r.thinBodies,
+  // N7-FIX-01: bodies named in an open zone, and how many things the run left unresolved
+  zoneBodies: r.zoneBodies,
+  unresolved: r.unresolved.length,
   openingCounts: r.openingCounts,
   openings: r.building.openings.map((o) => ({ id: o.id, facade: o.facade, storeyIndex: o.storeyIndex, interval: o.interval, sillY: o.sillY, headY: o.headY, provenance: o.provenance, callout: o.callout ?? null, elevation: o.elevation ?? null, why: o.why })),
 }
