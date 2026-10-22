@@ -1,0 +1,138 @@
+{
+ "massId": "attached-0",
+ "storeyIndex": 0,
+ "narrowAxis": "X",
+ "rectM": {
+  "x0": 7.9,
+  "z0": 0.991283,
+  "x1": 8.35,
+  "z1": 8.501283
+ },
+ "narrowM": 0.45,
+ "longM": 7.51,
+ "wallThicknessM": 0.489658,
+ "predictedOverlapM2": 3.456796,
+ "source": {
+  "why": "a region of the base plan enclosed by its own walls: 6 adjacent built cells merged; 75% of its perimeter is drawn as wall; it shares a wall line with the main body",
+  "widthBasis": "MEASURED",
+  "evidenceIds": [
+   "metric-dimension-07b24ca33a"
+  ]
+ },
+ "shared": {
+  "facade": "WEST",
+  "withMassId": "main"
+ },
+ "chains": [
+  {
+   "chainId": "chain-horizontal-46-65a3745113",
+   "valueCm": 790,
+   "from": 0,
+   "to": 7.901374,
+   "role": "UNRELATED",
+   "why": "its other end is another body\u2019s face: it measures more than this body"
+  },
+  {
+   "chainId": "chain-horizontal-46-65a3745113",
+   "valueCm": 415,
+   "from": 7.901374,
+   "to": 12.050256,
+   "role": "WIDENS",
+   "why": "runs from the shared face to a wall the plan draws 4.15 m out, printed 415 cm"
+  }
+ ],
+ "elevations": [
+  {
+   "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+   "side": "REAR",
+   "over": [
+    8.35,
+    12.05
+   ],
+   "builtShare": 1,
+   "verdict": "CORROBORATES"
+  },
+  {
+   "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
+   "side": "FRONT",
+   "over": [
+    8.35,
+    12.05
+   ],
+   "builtShare": 1,
+   "verdict": "CORROBORATES"
+  }
+ ],
+ "hypotheses": [
+  {
+   "kind": "WIDEN",
+   "status": "SUPPORTED",
+   "why": "the read far face has no wall; the plan draws one 3.69..4.14 m out with the body's interior between, and a printed 415 cm chain runs from the shared face to it; the rear and front elevation shows it built"
+  },
+  {
+   "kind": "SHARED_WALL",
+   "status": "REFUTED",
+   "why": "no wall is drawn at the read far face"
+  },
+  {
+   "kind": "DRAWN_THIN_WALLS",
+   "status": "REFUTED",
+   "why": "no wall of the band\u2019s own is drawn on its shared side"
+  },
+  {
+   "kind": "SOLID_WALL",
+   "status": "REFUTED",
+   "why": "only 0 % of the band is drawn as wall across its width"
+  },
+  {
+   "kind": "CANOPY_ON_POSTS",
+   "status": "REFUTED",
+   "why": "no intermittent ink at the far face"
+  },
+  {
+   "kind": "FALSE_STRIP",
+   "status": "REFUTED",
+   "why": "the plan draws a wall at or beyond the read far face"
+  },
+  {
+   "kind": "RECESS_OF_MAIN",
+   "status": "REFUTED",
+   "why": "it stands outside the main body\u2019s walls"
+  }
+ ],
+ "firstBad": "PLAN_DECOMPOSITION: the body's width was read as 0.45 m (measured), stopping at a face the plan draws no wall on",
+ "decision": {
+  "kind": "WIDEN",
+  "why": "the read far face has no wall; the plan draws one 3.69..4.14 m out with the body's interior between, and a printed 415 cm chain runs from the shared face to it; the rear and front elevation shows it built: widened to 4.15 m",
+  "before": {
+   "x0": 7.9,
+   "z0": 0.991283,
+   "x1": 8.35,
+   "z1": 8.501283
+  },
+  "after": {
+   "x0": 7.9,
+   "z0": 0.991283,
+   "x1": 12.05,
+   "z1": 8.501283
+  }
+ },
+ "planFrameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+ "profile": {
+  "samples": 21,
+  "stepM": 0.013213,
+  "fromS": -0.789658,
+  "bands": [
+   {
+    "fromS": -0.459333,
+    "toS": -0.036517
+   },
+   {
+    "fromS": 3.689549,
+    "toS": 4.138791
+   }
+  ],
+  "solidShare": 0,
+  "farEdgeInk": 0.002646
+ }
+}

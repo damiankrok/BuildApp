@@ -1,0 +1,124 @@
+{
+ "A": {
+  "modelSha256": "8541ca10d0534107cfacc56163c9b3af513e5a99ddd3e8594495ee30b0977dcb",
+  "outcome": "COMPLETE",
+  "failure": null,
+  "skipped": [],
+  "masses": [
+   {
+    "id": "main",
+    "x0": 0,
+    "z0": 0.991283,
+    "x1": 7.9,
+    "z1": 13.601283
+   },
+   {
+    "id": "attached-0",
+    "x0": 7.9,
+    "z0": 0.991283,
+    "x1": 12.05,
+    "z1": 8.501283
+   }
+  ],
+  "wallRings": 3,
+  "walls": 40,
+  "openings": 21,
+  "thinBodies": []
+ },
+ "B": {
+  "modelSha256": "55d3fea77d63bdcca15d90f369bd828dc43d614c835927ae33a7a331ddab8222",
+  "outcome": "PARTIAL_3D_PREVIEW",
+  "failure": {
+   "commandIndex": 21,
+   "type": "createWallRing",
+   "id": "ring-attached-0-0",
+   "codes": [
+    "WALLS_OVERLAP"
+   ],
+   "message": "walls ring-attached-0-0-w1 and ring-attached-0-0-w3 share 3.1978 m² of plan area over a common height range; declare a junction (CORNER, BUTT or T) or move one of them",
+   "objectIds": [
+    "ring-attached-0-0-w1"
+   ]
+  },
+  "skipped": [
+   "createSlab slab-attached-0-0",
+   "createWallRing ring-attached-0-0",
+   "setEvidence undefined",
+   "createRoof roof-attached-0",
+   "setEvidence undefined",
+   "cutOpening opening-0-east-9-0",
+   "placeWindow opening-0-east-9-0-unit",
+   "setEvidence undefined"
+  ],
+  "masses": [
+   {
+    "id": "main",
+    "x0": 0,
+    "z0": 0.991283,
+    "x1": 7.9,
+    "z1": 13.601283
+   },
+   {
+    "id": "attached-0",
+    "x0": 7.9,
+    "z0": 0.991283,
+    "x1": 8.35,
+    "z1": 8.501283
+   }
+  ],
+  "wallRings": 2,
+  "walls": 34,
+  "openings": 19,
+  "thinBodies": []
+ },
+ "C": {
+  "modelSha256": "8541ca10d0534107cfacc56163c9b3af513e5a99ddd3e8594495ee30b0977dcb",
+  "outcome": "COMPLETE",
+  "failure": null,
+  "skipped": [],
+  "masses": [
+   {
+    "id": "main",
+    "x0": 0,
+    "z0": 0.991283,
+    "x1": 7.9,
+    "z1": 13.601283
+   },
+   {
+    "id": "attached-0",
+    "x0": 7.9,
+    "z0": 0.991283,
+    "x1": 12.05,
+    "z1": 8.501283
+   }
+  ],
+  "wallRings": 3,
+  "walls": 40,
+  "openings": 21,
+  "thinBodies": [
+   {
+    "massId": "attached-0",
+    "narrowM": 0.45,
+    "decision": "WIDEN",
+    "after": {
+     "x0": 7.9,
+     "z0": 0.991283,
+     "x1": 12.05,
+     "z1": 8.501283
+    },
+    "supported": [
+     "WIDEN"
+    ],
+    "chains": [
+     "790:UNRELATED",
+     "415:WIDENS"
+    ],
+    "elevations": [
+     "REAR:1:CORROBORATES",
+     "FRONT:1:CORROBORATES"
+    ],
+    "firstBad": "PLAN_DECOMPOSITION: the body's width was read as 0.45 m (measured), stopping at a face the plan draws no wall on"
+   }
+  ]
+ }
+}

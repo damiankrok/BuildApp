@@ -2619,3 +2619,16 @@ the ridge-registered front view over an equally scored 275); the other 7 models 
 APK 1305 (`000ef5f4…`, analyzer `0e46961d…`); its bundle on live Marcówki gives model `8541ca10…` = the replay, and on
 SLIVERTON the same partial preview as 1304. Goździkowce stays unregistered (no anchors). Not seen on a device. P3 not
 started.
+
+## A thin attached body adjudicated on the source before the partial preview (STAGE BUILDPLAN-ANALYZER-005Y-N7-P2R)
+
+Status: **OWNER_TEST_PENDING**. Report `stage-reports/STAGE_BUILDPLAN_ANALYZER_005Y_N7_P2R_ATTACHED_GEOMETRY_BEFORE_PARTIAL.md`.
+An attached body narrower than its own two walls (the `WALLS_OVERLAP` w1/w3 refusal at `createWallRing`) is read on
+the plan's ink, its printed chains and the registered elevations (`thin-body.ts`): WIDEN, SHARED_WALL,
+DRAWN_THIN_WALLS or SOLID_WALL is built when exactly one holds and nothing printed or seen contradicts it; otherwise
+the N7-P1 partial preview stands with every reading and FIRST_BAD in `thinBodies`. Proof: Marcówki with its garage
+misread as a 0.45 m strip (research-only injection) is refused without P2R and recovered with it to a model
+byte-identical to the corpus one (`8541ca10…`); synthetic THINWALL and SLIVERTON_DIMENSIONED complete; SLIVERTON (a
+printed dimension contradicting the drawing) stays partial. 8/8 corpus models byte-identical. P2 comparisons now say
+CONFIRMED_MATCH / NOT_OBSERVED / CONFLICT / VIEW_NOT_REGISTERED; WRONG_STOREY (never detected) dropped. Solver 2.5.0.
+APK 1306 (`b6f8f346…`, analyzer `b67d77fa…`). The owner's private benchmark is not claimed fixed. P3 not started.

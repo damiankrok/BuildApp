@@ -113,6 +113,19 @@ source-package ─► source-analyzer ─► source-metrics ─► reconstructio
 - **Tests / evidence** — `reconstruction/test/facade-alignment-n7-p2.test.ts`; offline replay and before/after overlays
   (outside the repo) `research/analyzer-005y-n7-p2/replay.ts --overlays`.
 
+### Thin attached bodies (N7-P2R)
+- **Which bodies** — `reconstruction/src/v2/thin-body.ts` `thinBodies`: attached, not a piece, narrower than 2T.
+- **What the source says** — `adjudicateThinBody`: plan ink profile across the band (from the shared face outward),
+  printed chains on its faces (CORROBORATES / WIDENS / UNRELATED / CONFLICTS), registered elevations (not-sky share);
+  readings WIDEN, SHARED_WALL, DRAWN_THIN_WALLS, SOLID_WALL (buildable) and CANOPY_ON_POSTS, FALSE_STRIP, RECESS_OF_MAIN
+  (named only); one buildable reading, no conflict, no contradicting view → applied, else KEEP_PARTIAL (N7-P1).
+- **Wired** — `reconstruct-v2.ts` before the recesses (G2), after the elevations are registered; result `thinBodies`.
+- **Emission** — `MassV2.openSide` (three `createWall` with ring-ordered CORNER junctions, no ring), `MassV2.wallThicknessM`
+  (`tOf` in `emit.ts`), `BuildingV2.bandWalls`.
+- **Tests / demo** — `reconstruction/test/thin-body-n7-p2r.test.ts`, `analysis-service/test/thin-body-n7-p2r.test.ts`
+  (THINWALL, SLIVERTON_DIMENSIONED, SLIVERTON); `research/analyzer-005y-n7-p2r/corpus-demo.ts` (research-only
+  `diagnostics.narrowMass`).
+
 ### Model, scene, phone
 - **Joint audit semantics** — `geometry/src/closure.ts` `relationOf`: which meetings are intended (a stack pierces a roof
   or roof plane; walls meet at their ends; …). `test/plane-chimney-closure-005y-n6.test.ts`.

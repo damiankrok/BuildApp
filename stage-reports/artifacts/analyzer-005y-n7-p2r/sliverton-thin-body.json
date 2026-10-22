@@ -1,0 +1,123 @@
+[
+ {
+  "massId": "attached-0",
+  "storeyIndex": 0,
+  "narrowAxis": "X",
+  "rectM": {
+   "x0": 8.126042,
+   "z0": 0,
+   "x1": 8.72163,
+   "z1": 6
+  },
+  "narrowM": 0.595588,
+  "longM": 6,
+  "wallThicknessM": 0.316368,
+  "predictedOverlapM2": 0.199383,
+  "source": {
+   "why": "a region of the base plan enclosed by its own walls: 1 adjacent built cell merged; 89% of its perimeter is drawn as wall; it shares a wall line with the main body",
+   "widthBasis": "SCALED",
+   "evidenceIds": [
+    "metric-dimension-042f20f278",
+    "metric-dimension-14fb16a13c",
+    "metric-dimension-56baf9b90b",
+    "metric-dimension-ea8fa68765",
+    "metric-dimension-ff956da5ed"
+   ]
+  },
+  "shared": {
+   "facade": "WEST",
+   "withMassId": "main"
+  },
+  "chains": [
+   {
+    "chainId": "chain-horizontal-46-13a94849b6",
+    "valueCm": 1200,
+    "from": -3.282318,
+    "to": 8.713302,
+    "role": "CONFLICTS",
+    "why": "ends on the band's far face and prints 1200 cm, but its other end (-3.28 m) is on no wall the plan draws: the drawing and its dimension disagree"
+   },
+   {
+    "chainId": "chain-horizontal-86-76c0f8aa59",
+    "valueCm": 360,
+    "from": 5.127798,
+    "to": 8.713302,
+    "role": "CONFLICTS",
+    "why": "ends on the band's far face and prints 360 cm, but its other end (5.13 m) is on no wall the plan draws: the drawing and its dimension disagree"
+   }
+  ],
+  "elevations": [],
+  "hypotheses": [
+   {
+    "kind": "WIDEN",
+    "status": "REFUTED",
+    "why": "the plan draws a wall at the read far face (0.28..0.60 m out): the body ends there"
+   },
+   {
+    "kind": "SHARED_WALL",
+    "status": "SUPPORTED",
+    "why": "the plan draws one wall between the bodies (-0.17..0.15 m, one wall's thickness) and the band's far wall 0.28..0.60 m out, with paper between: the body has three walls of its own"
+   },
+   {
+    "kind": "DRAWN_THIN_WALLS",
+    "status": "REFUTED",
+    "why": "no wall of the band’s own is drawn on its shared side"
+   },
+   {
+    "kind": "SOLID_WALL",
+    "status": "REFUTED",
+    "why": "only 78 % of the band is drawn as wall across its width"
+   },
+   {
+    "kind": "CANOPY_ON_POSTS",
+    "status": "REFUTED",
+    "why": "the far face is a continuous drawn wall"
+   },
+   {
+    "kind": "FALSE_STRIP",
+    "status": "REFUTED",
+    "why": "the plan draws a wall at or beyond the read far face"
+   },
+   {
+    "kind": "RECESS_OF_MAIN",
+    "status": "REFUTED",
+    "why": "it stands outside the main body’s walls"
+   }
+  ],
+  "firstBad": "SOURCE_CONFLICT: a printed dimension on the band contradicts its drawn width",
+  "decision": {
+   "kind": "KEEP_PARTIAL",
+   "why": "printed and drawn disagree: 1200 cm (ends on the band's far face and prints 1200 cm, but its other end (-3.28 m) is on no wall the plan draws: the drawing and its dimension disagree); 360 cm (ends on the band's far face and prints 360 cm, but its other end (5.13 m) is on no wall the plan draws: the drawing and its dimension disagree) — the body is left to the partial preview",
+   "before": {
+    "x0": 8.126042,
+    "z0": 0,
+    "x1": 8.72163,
+    "z1": 6
+   }
+  },
+  "planFrameId": "frame-asset-rzut-parteru-6f19b3857f-fa065b1ad7",
+  "rectPx": {
+   "x0": 433.724928,
+   "y0": 280.676471,
+   "x1": 456.315885,
+   "y1": 509.5
+  },
+  "profile": {
+   "samples": 21,
+   "stepM": 0.013182,
+   "fromS": -0.616368,
+   "bands": [
+    {
+     "fromS": -0.16818,
+     "toS": 0.148188
+    },
+    {
+     "fromS": 0.280008,
+     "toS": 0.596376
+    }
+   ],
+   "solidShare": 0.782609,
+   "farEdgeInk": 1
+  }
+ }
+]
