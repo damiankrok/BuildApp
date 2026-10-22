@@ -2632,3 +2632,20 @@ byte-identical to the corpus one (`8541ca10…`); synthetic THINWALL and SLIVERT
 printed dimension contradicting the drawing) stays partial. 8/8 corpus models byte-identical. P2 comparisons now say
 CONFIRMED_MATCH / NOT_OBSERVED / CONFLICT / VIEW_NOT_REGISTERED; WRONG_STOREY (never detected) dropped. Solver 2.5.0.
 APK 1306 (`b6f8f346…`, analyzer `b67d77fa…`). The owner's private benchmark is not claimed fixed. P3 not started.
+
+## Production pipeline audit by a six-reviewer Council (STAGE BUILDPLAN-ANALYZER-N7-COUNCIL-001)
+
+Status: **AUDIT_DONE, NO CODE CHANGED**. Report `stage-reports/STAGE_BUILDPLAN_ANALYZER_N7_COUNCIL_001_AUDIT.md`,
+artifacts and the six reviews in `stage-reports/artifacts/analyzer-n7-council-001/`, harnesses in
+`research/analyzer-n7-council/`. Six separate reviewers (A source, B metric/thickness, C plan decomposition,
+D emission/repair, E views/verification, F mobile/refutation) audited the path from `runAnalysis` (1332 reachable
+functions) to the phone; F then challenged every finding. The owner's signature (`21 createWallRing
+ring-attached-*-0 WALLS_OVERLAP`, checkpoint 16) implies a single-level house. Three mechanisms reproduce it:
+(1) a thin attached body whose far wall has windows reads as CANOPY_ON_POSTS → KEEP_PARTIAL (F-R1, CONFIRMED
+end-to-end; with 4 windows the body vanishes silently); (2) `repairRing` narrowing a ring below 2t after P2R with the
+record dropped (D-1, CONFIRMED at function level); (3) a result from an older solver, which the phone cannot rule out
+because the stored result drops the analyzer version (F-2). Further confirmed: house-wide T from a median that
+includes partitions (B-1), frames sized from the house T (D-3), plan tiles crossing drawn walls and BLOCKING → COMPLETE
+(C-1), a set-back garage lost silently (C-2), plan copies never reconciled (A-1), opening heights from views with a
+refused ground (E-3). Recommended first fixes (not implemented): thin-body band robust to openings; one wall-thickness
+source plus a ≥ 2t ring check where rings are built; plan decomposition bounded by drawn walls. No APK, no P3.
