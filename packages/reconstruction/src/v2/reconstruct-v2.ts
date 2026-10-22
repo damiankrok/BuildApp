@@ -86,6 +86,13 @@ import { repairFromResiduals, verifyAgainstViews } from './verify.js'
 import type { RepairTrace, SourceViewResidual } from './verify.js'
 import { dominantTone, lumaAt, neutralBands, topNeutralInkRow } from './scan.js'
 import { approximateRidgeDatum } from './roof-datum.js'
+import { viewAudit } from './view-audit.js'
+import { measureOpeningOnView, scanFacadeOpenings } from './facade-openings.js'
+import type { FacadeBand, FacadeView, FacadeOpeningReading, FacadeOpeningRejection } from './facade-openings.js'
+import type { MeasuredOpening } from './facade-alignment.js'
+import { alignFacades, applyOpeningCorrections } from './facade-alignment.js'
+import type { FacadeAlignmentReport } from './facade-alignment.js'
+import type { ViewAuditRecord } from './view-audit.js'
 import type { ApproximateRidge } from './roof-datum.js'
 
 // 2.2.0 (005A): a plan the first reading refuses is re-read by the plan
@@ -113,6 +120,8 @@ export type ReconstructionV2Options = {
   /** Diagnostic lines from the readers, for a developer watching a run; never part of the result. */
   debug?: (message: string) => void
   /** 005Y-N1: diagnostics only (FEATURE_DEBUG): candidate features and why each was kept or dropped. Write-only: the model is the same with it and without. */
+  /** N7-P2, diagnostics only: each facade band's foreign mask, for overlays. Never part of a result. */
+  facadeMaskSink?: (frameId: string, mask: Uint8Array, closed: Uint8Array, box: { c0: number; r0: number; W: number; H: number }) => void
   featureTrace?: (record: Record<string, unknown>) => void
   /** The model's id; defaults to `m-auto-v2-<slug>`. Two sealed candidates of one project side by side need two. */
   modelId?: string
@@ -182,6 +191,10 @@ export type ReconstructionV2Result = {
    * left out with it, and the base checkpoint the preview keeps. Absent when every command the solver emitted is built.
    */
   partialPreview?: PartialPreviewReport
+  /** N7-P2 (C, D): the openings each registered elevation draws against the plan's, the differences and the corrections. */
+  facadeAlignment: FacadeAlignmentReport
+  /** N7-P2 (A): every elevation and perspective frame: whether and how it was registered and read, or why not. */
+  viewAudit: ViewAuditRecord[]
   /** N7-P1: the storey heights were read from a section, or are a convention taken for viewing only. */
   heights: { measured: boolean; assumedStoreyHeightM?: number }
 }
@@ -563,11 +576,19 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const across = (sup.ridgeAxis ?? 'Z') === 'X' ? main.z1 - main.z0 : main.x1 - main.x0
     return readEavesOverhang(raster, across, { pitchDeg: sup.pitchDeg.value, thicknessM: CONVENTIONS.roofThickness }, undefined, options.debug)
   })()
+  /** N7-P2 (A): why an elevation the 03R pass saw was not registered here, by frame. */
+  const viewRefusals = new Map<string, string>()
   for (const r of legacy) {
-    if (!r.side) continue
+    if (!r.side) {
+      viewRefusals.set(r.frameId, `no side could be assigned to it${r.sideWhy ? `: ${r.sideWhy}` : ''}`)
+      continue
+    }
     const frame = frameById.get(r.frameId)
     const raster = frame ? options.raster(frame) : undefined
-    if (!frame || !raster || ridgeY === undefined) continue
+    if (!frame || !raster || ridgeY === undefined) {
+      viewRefusals.set(r.frameId, !raster ? 'its pixels were not available' : 'no ridge datum was read from a section, and an elevation is hung from it')
+      continue
+    }
     let reg = registerElevationV2({ id: r.frameId, assetId: r.assetId }, r.extent, r.side, r.sideConfidence, r.sideWhy, world, ridgeY, sideEaves, terrain, false, sectionEaves?.overhangM)
     options.debug?.(`elevation-registration ${r.side} ${r.frameId} extent ${r.extent.x0},${r.extent.y0}..${r.extent.x1},${r.extent.y1} ridge ${ridgeY} terrain ${terrain} -> ${reg ? `${reg.mpp} m/px ground ${reg.bottomY}` : 'none'}`)
     // 005V-N4: a silhouette that fits no span of the house may take in what stands beside it (a pergola) or a roof's
@@ -604,6 +625,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     }
     if (!reg) {
       gap({ what: `a v2 registration for the ${r.side.toLowerCase()} elevation`, reason: 'its silhouette fits neither the walled nor the characteristic span with the ridge at its apex', status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
+      viewRefusals.set(r.frameId, 'its silhouette fits neither the walled nor the characteristic span with the ridge at its apex, and no wall band of it lands the ground on the terrain')
       continue
     }
     elevations.push(reg)
@@ -623,6 +645,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     if (Math.abs(own.bottomY - median) <= 0.3) continue
     openingOnlyViews.splice(i, 1)
     bandRegistrations.delete(own.frameId)
+    viewRefusals.set(own.frameId, `registered on its walls' band it puts the ground at ${own.bottomY.toFixed(2)} m against ${median.toFixed(2)} m from the house's other views`)
     gap({ what: `the heights of the openings on the ${own.side.toLowerCase()} elevation`, reason: `registered on its walls' band, it puts the ground at ${own.bottomY.toFixed(2)} m where the house's other ${others.length} registered views put it at ${median.toFixed(2)} m: its apex is not on the ridge datum, and the view is not read`, status: 'REFUSED', observationIds: [], evidenceIds: [] })
   }
   // 005Y-N3 (H5): the same ground test for the views the silhouette registered. Hung from the ridge datum at the
@@ -638,6 +661,35 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     openingHeightRefused.add(frameId)
     gap({ what: `the heights of the openings on the ${own.side.toLowerCase()} elevation`, reason: `registered on its silhouette from the ridge datum, ${reason}: its top row is not the ridge, and heights low on its walls are not read (its roof outline and chimneys, near the datum, still are)`, status: 'REFUSED', observationIds: [], evidenceIds: [] })
     options.featureTrace?.({ kind: 'VIEW_OPENING_HEIGHTS_REFUSED', frameId, side: own.side, groundY: own.bottomY, terrainY: terrain ?? null, decision: 'REFUSED', reason })
+  }
+  // N7-P2 (B): without a ridge datum no view is hung vertically. Its horizontal registration still stands on two anchors
+  // the model does not supply: the wall band's two ends are the walled span the plan measures. Such a view is read for
+  // where the openings are along the facade and how wide — never for their heights (its ground row is the drawn terrain
+  // line, the plinth unknown) — and for nothing else.
+  const cornerRegistrations: ElevationRegistrationV2[] = []
+  if (ridgeY === undefined) {
+    for (const r of legacy) {
+      if (!r.side) continue
+      const frame = frameById.get(r.frameId)
+      const raster = frame ? options.raster(frame) : undefined
+      if (!frame || !raster) continue
+      const allBands = neutralBands(raster, r.extent)
+      const band = allBands
+        .filter((b) => b.share >= WALL_BAND_MIN_SHARE && b.x1 - b.x0 >= WALL_BAND_MIN_WIDTH * (r.extent.x1 - r.extent.x0))
+        .sort((a, b) => b.x1 - b.x0 - (a.x1 - a.x0) || a.x0 - b.x0)[0]
+      options.debug?.(`corner-registration ${r.side} ${r.frameId} extent ${r.extent.x0},${r.extent.y0}..${r.extent.x1},${r.extent.y1} bands ${allBands.map((b) => `${b.x0}..${b.x1}@${b.share.toFixed(2)}`).join(' ')} -> ${band ? `${band.x0}..${band.x1}` : 'none'}`)
+      if (!band) {
+        viewRefusals.set(r.frameId, 'no ridge datum to hang it from, and no band of wall across its silhouette to register its walls\u2019 ends on')
+        continue
+      }
+      const frontRear = r.side === 'FRONT' || r.side === 'REAR'
+      const span = frontRear ? { a0: world.walled.x0, a1: world.walled.x1 } : { a0: world.walled.z0, a1: world.walled.z1 }
+      const mpp = round6((span.a1 - span.a0) / (band.x1 - band.x0))
+      const alongSign: 1 | -1 = r.side === 'FRONT' || r.side === 'RIGHT' ? 1 : -1
+      const groundY = terrain ?? 0
+      cornerRegistrations.push({ frameId: r.frameId, assetId: r.assetId, side: r.side, sideConfidence: r.sideConfidence, sideWhy: r.sideWhy, mpp, extent: { ...r.extent, x0: band.x0, x1: band.x1 }, alongAtLeft: round6(alongSign === 1 ? span.a0 : span.a1), alongSign, zeroRow: round6(r.extent.y1 + groundY / mpp), spanM: round6(span.a1 - span.a0), spanWhy: `the ${(span.a1 - span.a0).toFixed(2)} m walled ${frontRear ? 'width' : 'depth'} across the wall band, columns ${band.x0}..${band.x1}`, bottomY: groundY, anisotropyCheck: 0, confidence: round6(Math.min(0.5, r.sideConfidence * 0.6)), why: `no ridge datum: registered on the wall band's two ends (the walled span the plan measures) for positions along the facade only; the ground row is the drawn terrain line, so no height is read` })
+      step({ stage: 'registration', what: `the ${r.side.toLowerCase()} elevation registered on its walls' ends, for positions along the facade only`, method: 'DIRECT', detail: `${mpp} m/px over the ${(span.a1 - span.a0).toFixed(2)} m walled span; no ridge datum, so no height is read on it`, inputs: 1, outputs: 1 })
+    }
   }
   step({ stage: 'registration', what: 'renders registered on the ridge datum', method: 'DIRECT', detail: elevations.map((e) => `${e.side}: ${e.mpp} m/px, ground at ${e.bottomY} (${e.spanWhy})`).join('; ') || 'none', inputs: legacy.length, outputs: elevations.length })
   const viewsOf = (facade: 'FRONT' | 'REAR' | 'WEST' | 'EAST'): Array<{ view: ElevationFrameV2; raster: Raster }> => views.filter((v) => v.view.side === (facade === 'WEST' ? 'LEFT' : facade === 'EAST' ? 'RIGHT' : facade))
@@ -1954,6 +2006,112 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       builtMainRoof = undefined
     }
   }
+  // N7-P2 (C, D): the openings each registered elevation draws, read from the drawing, against the plan's openings; a
+  // height the model took by convention is taken from a view registered for heights where the two agree on the opening
+  const facadeOf = (side: 'FRONT' | 'REAR' | 'LEFT' | 'RIGHT'): 'FRONT' | 'REAR' | 'WEST' | 'EAST' => (side === 'LEFT' ? 'WEST' : side === 'RIGHT' ? 'EAST' : side)
+  const facadeViews: FacadeView[] = []
+  const pxOf = (reg: { mpp: number }): number => reg.mpp
+  for (const v of views) {
+    const reg = elevations.find((e) => e.frameId === v.view.registration.frameId)
+    if (!reg) continue
+    facadeViews.push({ frameId: reg.frameId, facade: facadeOf(reg.side), view: v.view, raster: v.raster, registration: 'SILHOUETTE', heights: !openingHeightRefused.has(reg.frameId) && reg.anisotropyCheck <= 0.35, alongErrorM: round6(2 * pxOf(reg)), heightErrorM: round6(Math.max(0.05, reg.anisotropyCheck / 2)) })
+  }
+  for (const v of openingOnlyViews) {
+    const frameId = v.view.registration.frameId
+    const reg = bandRegistrations.get(frameId)
+    if (!reg || facadeViews.some((f) => f.frameId === frameId)) continue
+    const over = openingViewOverrides.get(frameId)
+    facadeViews.push({ frameId, facade: facadeOf((over ?? v).view.side), view: (over ?? v).view, raster: v.raster, registration: over ? 'SAME_SHEET' : 'WALL_BAND', heights: !openingHeightRefused.has(frameId) && reg.anisotropyCheck <= 0.35, alongErrorM: round6(2 * pxOf(reg)), heightErrorM: round6(Math.max(0.05, reg.anisotropyCheck / 2)) })
+  }
+  for (const reg of cornerRegistrations) {
+    const frame = frameById.get(reg.frameId)
+    const raster = frame ? options.raster(frame) : undefined
+    if (!raster || facadeViews.some((f) => f.frameId === reg.frameId)) continue
+    facadeViews.push({ frameId: reg.frameId, facade: facadeOf(reg.side), view: elevationFrameFromV2(reg, world), raster, registration: 'CORNERS_AND_GROUND', heights: false, alongErrorM: round6(3 * reg.mpp), heightErrorM: 0.5 })
+  }
+  const rank: Record<FacadeView['registration'], number> = { SILHOUETTE: 0, SAME_SHEET: 1, WALL_BAND: 2, CORNERS_AND_GROUND: 3 }
+  facadeViews.sort((a, b) => rank[a.registration] - rank[b.registration] || a.frameId.localeCompare(b.frameId))
+  const facadeRead = new Map<string, { measured: MeasuredOpening[]; candidates: FacadeOpeningReading[]; rejected: FacadeOpeningRejection[]; scanned: FacadeOpeningReading[]; foreignShare: (storeyIndex: number, from: number, to: number) => number | undefined }>()
+  const xs = masses.flatMap((m) => [m.x0, m.x1])
+  const zs = masses.flatMap((m) => [m.z0, m.z1])
+  for (const fv of facadeViews) {
+    const frontRear = fv.facade === 'FRONT' || fv.facade === 'REAR'
+    // the storey bands from the levels; on a gable end the top band runs up under the roof's two slopes
+    const gable = !!mainRoof && (frontRear ? mainRoof.ridgeAxis === 'Z' : mainRoof.ridgeAxis === 'X')
+    const sortedLevels = [...levelsV2].sort((a, b) => a.elevation - b.elevation)
+    // a storey's band covers only the bodies that have that storey, up to the top of their own walls
+    const coversOf = (index: number, topY: number): FacadeBand['covers'] =>
+      masses
+        .filter((m) => m.storeys.includes(index))
+        .map((m) => {
+          const own = Math.max(...m.storeys)
+          const ownTop = levelsV2.find((l) => l.index === own)?.wallTop ?? topY
+          const attachedTop = attachedRoofs.find((r) => r.massId === m.id)
+          return { from: frontRear ? m.x0 : m.z0, to: frontRear ? m.x1 : m.z1, topY: round6(Math.min(topY, own === index ? (attachedTop ? attachedTop.slabSoffitY : ownTop) - 0.05 : topY)) }
+        })
+    const solidsOf = (index: number): Array<[number, number]> => {
+      const out: Array<[number, number]> = []
+      for (const c of coversOf(index, 0) ?? []) {
+        const gaps = openings.filter((o) => o.facade === fv.facade && o.storeyIndex === index).map((o) => o.interval).sort((a, b) => a[0] - b[0])
+        let at = c.from
+        for (const [g0, g1] of gaps) {
+          if (g1 <= at || g0 >= c.to) continue
+          if (g0 > at) out.push([round6(at), round6(g0)])
+          at = Math.max(at, g1)
+        }
+        if (c.to > at) out.push([round6(at), round6(c.to)])
+      }
+      return out
+    }
+    const bands: FacadeBand[] = sortedLevels.map((l, i) => {
+      const next = sortedLevels[i + 1]
+      if (next) {
+        const topY = round6(Math.min(l.wallTop, next.elevation) - 0.05)
+        return { storeyIndex: l.index, floorY: l.elevation, topY, covers: coversOf(l.index, topY), solids: solidsOf(l.index) }
+      }
+      if (gable && mainRoof) {
+        const r = mainRoof
+        const half = (frontRear ? r.footprint.x1 - r.footprint.x0 : r.footprint.z1 - r.footprint.z0) / 2
+        const slope = Math.tan((r.pitchDeg * Math.PI) / 180)
+        const topY = round6(r.ridgeY - 0.1)
+        return { storeyIndex: l.index, floorY: l.elevation, topY, topAt: (a: number) => Math.min(r.ridgeY, r.eaveY + slope * Math.max(0, half - Math.abs(a - r.ridgeAt))) - 0.12, covers: coversOf(l.index, topY), solids: solidsOf(l.index) }
+      }
+      const topY = round6(l.wallTop - 0.05)
+      return { storeyIndex: l.index, floorY: l.elevation, topY, covers: coversOf(l.index, topY), solids: solidsOf(l.index) }
+    })
+    let sky = skyMasks.get(fv.raster)
+    if (!sky) {
+      sky = skyMask(fv.raster)
+      skyMasks.set(fv.raster, sky)
+    }
+    const railingsHere = railings
+      .filter((r) => (frontRear ? Math.abs(r.end.z - r.start.z) < 0.05 : Math.abs(r.end.x - r.start.x) < 0.05))
+      .map((r) => ({ from: frontRear ? Math.min(r.start.x, r.end.x) : Math.min(r.start.z, r.end.z), to: frontRear ? Math.max(r.start.x, r.end.x) : Math.max(r.start.z, r.end.z), baseY: r.baseY, topY: round6(r.baseY + r.heightM) }))
+    // each plan opening of this facade, measured on the view: the plan says where to look, the pixels where its edges are
+    const mppV = Math.abs(fv.view.alongOf(1) - fv.view.alongOf(0))
+    const measured: MeasuredOpening[] = openings
+      .filter((o) => o.facade === fv.facade)
+      .map((o) => {
+        const band = bands.find((b) => b.storeyIndex === o.storeyIndex)
+        if (!band) return { opening: o, reading: null }
+        const mid = (o.interval[0] + o.interval[1]) / 2
+        const cover = band.covers?.find((c) => mid >= c.from && mid <= c.to)
+        const topY = Math.min(cover?.topY ?? band.topY, band.topAt ? band.topAt(mid) : band.topY)
+        const m = measureOpeningOnView(fv.raster, fv.view, o.interval, solidsOf(o.storeyIndex), band.floorY, topY)
+        if (!m) return { opening: o, reading: null }
+        const reading: FacadeOpeningReading = { id: `fm-${o.id}`, facade: fv.facade, frameId: fv.frameId, observationIds: [], storeyIndex: o.storeyIndex, from: m.from, to: m.to, widthM: round6(m.to - m.from), sillY: m.sillY, headY: m.headY, kind: Math.abs(m.sillY - band.floorY) <= 0.15 && m.headY - m.sillY >= 1.8 ? 'GLAZED_DOOR' : 'WINDOW', mullions: [], touchesCorner: null, uncertaintyM: { along: round6(fv.alongErrorM + 2 * mppV), height: round6(fv.heightErrorM + 2 * mppV) }, evidence: { contrast: 0, glassShare: 0, transitionsPerM: 0 }, heightsTrusted: fv.heights }
+        return { opening: o, reading }
+      })
+    const scan = scanFacadeOpenings(fv, bands, { wallSpan: frontRear ? { from: Math.min(...xs), to: Math.max(...xs) } : { from: Math.min(...zs), to: Math.max(...zs) }, levels: levelsV2, wallTopY: Math.max(...levelsV2.map((l) => l.wallTop)), ...(roofRidgeY !== undefined ? { ridgeY: roofRidgeY } : {}), railings: railingsHere }, sky, options.facadeMaskSink ? (m, c, b) => options.facadeMaskSink?.(fv.frameId, m, c, b) : undefined)
+    // an opening the pixels show on their own counts as one only with strong evidence: full, glazed, of an opening's size
+    const strong = scan.readings.filter((r) => r.evidence.glassShare >= STRONG_GLASS_SHARE && r.widthM >= 0.5 && r.headY - r.sillY >= 0.6)
+    facadeRead.set(fv.frameId, { measured, candidates: strong, scanned: scan.readings, foreignShare: scan.foreignShare, rejected: [...scan.rejected, ...scan.readings.filter((r) => !strong.includes(r)).map((r) => ({ observationIds: [], frameId: r.frameId, reason: `not glazed enough to stand as an opening on the pixels alone (glass ${(r.evidence.glassShare * 100).toFixed(0)} %)`, box: { x0: fv.view.pxOf(r.from), x1: fv.view.pxOf(r.to), y0: fv.view.pyOf(r.headY), y1: fv.view.pyOf(r.sillY) } }))] })
+  }
+  const unregisteredFacades = (['FRONT', 'REAR', 'WEST', 'EAST'] as const).filter((f) => !facadeViews.some((v) => v.facade === f)).map((f) => ({ facade: f, why: ridgeY === undefined && legacy.length > 0 ? 'no view of this side was registered: no ridge datum to hang it from, and no side assigned to it on its own' : 'no view of this side was registered (see the view audit)' }))
+  const facadeAlignment: FacadeAlignmentReport = alignFacades({ openings, views: facadeViews, read: facadeRead, levels: levelsV2, unregistered: unregisteredFacades })
+  if (facadeAlignment.corrections.length > 0) openings.splice(0, openings.length, ...applyOpeningCorrections(openings, facadeAlignment.corrections))
+  step({ stage: 'verification', what: 'N7-P2: the openings each elevation draws against the plan’s', method: 'DIRECT', detail: `${facadeViews.length} view${facadeViews.length === 1 ? '' : 's'} read (${facadeViews.map((v) => `${v.facade.toLowerCase()} ${v.registration.toLowerCase().replace(/_/g, ' ')}${v.heights ? '' : ', positions only'}`).join('; ') || 'none'}); ${facadeAlignment.readings.length} openings read, ${facadeAlignment.rejected.length} rectangles rejected; ${Object.entries(facadeAlignment.counts).filter(([, n]) => n > 0).map(([k, n]) => `${k.toLowerCase()} ${n}`).join(', ')}; ${facadeAlignment.corrections.length} height${facadeAlignment.corrections.length === 1 ? '' : 's'} corrected`, inputs: openings.length, outputs: facadeAlignment.corrections.length })
+  for (const c of facadeAlignment.corrections) ctx.traces.push({ objectId: c.openingId, kind: 'repair', hypothesisId: `hyp-${c.openingId}`, evidenceIds: [], observationIds: facadeAlignment.readings.find((r) => r.id === c.readingId)?.observationIds ?? [], rejected: [], why: c.why })
   const building: BuildingV2 = { label: options.label, wallThicknessM: T, slabThicknessM: slabT, levels: levelsV2, masses, mainRoof: builtMainRoof, ...(planeRoofs ? { planeRoofs } : {}), attachedRoofs, pitchedAttachedRoofs, recesses, ...(pockets.length > 0 ? { pockets } : {}), ...(pergolas.length > 0 ? { pergolas } : {}), returns, balconies, railings, portalHeads, verges, terraces, massTones, returnTones, facadeGraph, chimneys, rooflights, openings, sharedDoors, interior, stair, assemblies, surfaceRegions, terrainY: terrain }
   const residualsBefore = verifyAgainstViews({ building, views })
   const repair = repairFromResiduals(building, residualsBefore, 2)
@@ -2174,7 +2332,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const violations = { graph: featureGraphViolations(graphDraft), ledger: ledgerViolations(ctx.ledger, [...graph.observations.map((o) => o.id), ...metrics.evidence.map((e) => e.id)]) }
   step({ stage: 'quality', what: 'per-feature quality', method: 'DIRECT', detail: Object.entries(quality.summary).map(([fam, levels]) => `${fam} ${Object.entries(levels).map(([l, n]) => `${l}:${n}`).join('/')}`).join(', '), inputs: ctx.solved.length, outputs: quality.records.length })
 
-  return { layout, building, candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations, closure: closureNotes, planDiagnostics, openingFits: fit.fits, ...(wallReconciliation ? { wallReconciliation } : {}), crossViewResiduals: crossView, ...(roofDatum ? { roofDatum } : {}), ...(partialPreview ? { partialPreview } : {}), heights: levels.measured ? { measured: true } : { measured: false, assumedStoreyHeightM: CONVENTIONS.storeyHeight } }
+  return { layout, building, candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations, closure: closureNotes, planDiagnostics, openingFits: fit.fits, ...(wallReconciliation ? { wallReconciliation } : {}), crossViewResiduals: crossView, ...(roofDatum ? { roofDatum } : {}), ...(partialPreview ? { partialPreview } : {}), facadeAlignment, viewAudit: viewAudit({ horizontalOnly: new Map(cornerRegistrations.map((r) => [r.frameId, r])), frames: graph.coordinateFrames.filter((f) => (keep ? keep(f) : true)), first: legacy, firstRefused: legacyRefused, refusals: viewRefusals, registered: elevations, openingsOnly: bandRegistrations, sameSheet: new Set(openingViewOverrides.keys()), heightsRefused: openingHeightRefused, cameras }), heights: levels.measured ? { measured: true } : { measured: false, assumedStoreyHeightM: CONVENTIONS.storeyHeight } }
 }
 
 /** The columns of a render across which a band of the given rows carries dark tone: the band's along extent. */
@@ -2216,6 +2374,8 @@ function fasciaExtent(raster: Raster, view: ElevationFrameV2, span: { from: numb
   return { from: round6(Math.min(a, b)), to: round6(Math.max(a, b)) }
 }
 
+/** N7-P2: an opening read from a view's pixels alone, with no plan gap there, needs this share of glass-coloured pixels. */
+const STRONG_GLASS_SHARE = 0.5
 /** 005V-N4: a band of the elevation is a candidate for the walls only when it repeats on this share of the rows … */
 const WALL_BAND_MIN_SHARE = 0.1
 /** … and spans this share of the silhouette's width. */
