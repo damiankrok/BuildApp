@@ -24,6 +24,8 @@ import { isWallStripZone, openFacesOf } from '../layout.js'
 import type { PlanReading } from '../layout.js'
 import { fitOpeningsToHosts, reconcileWallOverlaps, sealCandidate } from '../candidate.js'
 import { cornerPocketSpecs } from './corner-pockets.js'
+import { crossViewResiduals } from './cross-view.js'
+import type { CrossViewResiduals } from './cross-view.js'
 import { findPosts, PERGOLA_BEAM_ASSUMED, PERGOLA_HEIGHT_ASSUMED_M, pergolaFromPosts } from './pergola.js'
 import { readCornerNotch } from './corner-recess.js'
 import { balconyRect, balustradePath, doorSpanCandidates, BALCONY_SLAB_ASSUMED_M, BALUSTRADE_HEIGHT_ASSUMED_M, floorLevelDoorGroups, readBalconyOutline } from './projecting-balcony.js'
@@ -170,6 +172,8 @@ export type ReconstructionV2Result = {
   openingFits: OpeningFit[]
   /** 005T-N3: the main roof's ridge was not printed and was taken approximately (`roof-datum.ts`); absent otherwise. */
   roofDatum?: ApproximateRidge
+  /** 005Y-N7 (B): how the model agrees with each registered view, per kind of check. */
+  crossViewResiduals: CrossViewResiduals
   /** 005Y-N7 (A): walls the model refused as overlapping and what was done; absent when none overlapped. */
   wallReconciliation?: WallReconciliationReport
 }
@@ -1933,6 +1937,9 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const residualsBefore = verifyAgainstViews({ building, views })
   const repair = repairFromResiduals(building, residualsBefore, 2)
   const residuals = verifyAgainstViews({ building, views })
+  // 005Y-N7 (B): the residuals per view and per kind, with what the bounded reconciliation did (cross-view.ts)
+  const crossView = crossViewResiduals(residuals, elevations.map((e) => ({ frameId: e.frameId, side: e.side, mpp: e.mpp, spanM: e.spanM, spanWhy: e.spanWhy })), repair)
+  step({ stage: 'verification', what: 'the model against each registered view', method: 'DIRECT', detail: crossView.views.map((v) => `${v.side.toLowerCase()} ${v.verdict.toLowerCase()} (${v.withinTolerance}/${v.checks})`).join('; ') || 'no view registered', inputs: residuals.length, outputs: crossView.views.length })
   step({ stage: 'verification', what: 'the model projected into the registered views', method: 'DIRECT', detail: `${residuals.length} residuals, ${residuals.filter((r) => !r.withinTolerance).length} outside tolerance after ${repair.iterations.length} repair round${repair.iterations.length === 1 ? '' : 's'} (${repair.iterations.reduce((a, i) => a + i.applied.length, 0)} applied, ${repair.iterations.reduce((a, i) => a + i.refused.length, 0)} refused)`, inputs: residualsBefore.length, outputs: residuals.length })
   for (const it of repair.iterations) for (const op of it.applied) ctx.traces.push({ objectId: op.featureId, kind: 'repair', hypothesisId: `hyp-${op.featureId}`, evidenceIds: [], observationIds: [], rejected: [], why: op.why })
 
@@ -2117,7 +2124,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const violations = { graph: featureGraphViolations(graphDraft), ledger: ledgerViolations(ctx.ledger, [...graph.observations.map((o) => o.id), ...metrics.evidence.map((e) => e.id)]) }
   step({ stage: 'quality', what: 'per-feature quality', method: 'DIRECT', detail: Object.entries(quality.summary).map(([fam, levels]) => `${fam} ${Object.entries(levels).map(([l, n]) => `${l}:${n}`).join('/')}`).join(', '), inputs: ctx.solved.length, outputs: quality.records.length })
 
-  return { layout, building, candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations, closure: closureNotes, planDiagnostics, openingFits: fit.fits, ...(wallReconciliation ? { wallReconciliation } : {}), ...(roofDatum ? { roofDatum } : {}) }
+  return { layout, building, candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations, closure: closureNotes, planDiagnostics, openingFits: fit.fits, ...(wallReconciliation ? { wallReconciliation } : {}), crossViewResiduals: crossView, ...(roofDatum ? { roofDatum } : {}) }
 }
 
 /** The columns of a render across which a band of the given rows carries dark tone: the band's along extent. */

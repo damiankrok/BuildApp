@@ -78,6 +78,8 @@ try {
   const summary = { outcome: 'COMPLETED', steps: r.steps.filter((x) => grep.test(x.what)).map((x) => `${x.what}: ${x.detail}`), modelSha256: createHash('sha256').update(modelText).digest('hex'), chimneys: r.model.chimneys.length, unresolved: r.unresolved.filter((u) => /chimney/i.test(u.what)).map((u) => ({ status: u.status, what: u.what, reason: u.reason })) }
   writeFileSync(join(out, 'summary.json'), JSON.stringify(summary, null, 1) + '\n')
   if (process.env.FEATURE_DEBUG) writeFileSync(join(out, 'feature-trace.jsonl'), features.join('\n') + '\n')
+  // 005Y-N7 (B): the model against each registered view
+  writeFileSync(join(out, 'cross-view.json'), JSON.stringify(r.crossViewResiduals, null, 1) + '\n')
   // 005Y-N7: the emitted program, for corpus-derived overlap stress cases
   if (process.env.DUMP_PROGRAM) writeFileSync(join(out, 'program.json'), JSON.stringify(r.candidate.program) + '\n')
   // 005Y: each elevation's registration (its scale, the span it was matched to, where its ground lands) and the section's
