@@ -8,17 +8,19 @@
  * the test APK only. The project `hangs` never answers for its drawings, so a
  * cancel can be proved while a fetch is outstanding.
  */
-import { HOLLOWAY, LARCHFIELD, syntheticPublisher } from '@buildapp/synthetic-drawings'
+import { HOLLOWAY, LARCHFIELD, SLIVERTON, syntheticPublisher } from '@buildapp/synthetic-drawings'
 
 export type FixtureWiring = { adapters: ReturnType<typeof syntheticPublisher>['adapter'][]; deps: ReturnType<typeof syntheticPublisher>['deps'] }
 
-export const FIXTURE_PROJECTS = { larchfield: 'larchfield-lf01', holloway: 'holloway-hw02', hangs: 'hangs' } as const
+/** N7-P1: `sliverton` is refused at its attached body after a valid main body: the partial 3D preview, end to end. */
+export const FIXTURE_PROJECTS = { larchfield: 'larchfield-lf01', holloway: 'holloway-hw02', sliverton: 'sliverton-sv03', hangs: 'hangs' } as const
 
 export function fixtureWiring(): FixtureWiring {
   const publisher = syntheticPublisher({
     projects: [
       { code: FIXTURE_PROJECTS.larchfield, title: 'Larchfield', house: LARCHFIELD },
       { code: FIXTURE_PROJECTS.holloway, title: 'Holloway', house: HOLLOWAY },
+      { code: FIXTURE_PROJECTS.sliverton, title: 'Sliverton', house: SLIVERTON },
       { code: FIXTURE_PROJECTS.hangs, title: 'Never answers', house: LARCHFIELD },
     ],
     beforeRespond: (url, signal) =>

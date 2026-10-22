@@ -112,6 +112,16 @@ describe('the bundle, run as the phone runs it, gives the desktop pipeline’s b
     await expectParity(FIXTURE_PROJECTS.holloway)
   })
 
+  it('Sliverton (N7-P1): a refused attached body is delivered as the last valid model, every hash equal to the desktop', async () => {
+    const result = await expectParity(FIXTURE_PROJECTS.sliverton)
+    const summary = JSON.parse(readFileSync(join(result.outDir, 'result.json'), 'utf8')) as LinkAnalysisSummary
+    expect(summary.preview.outcome).toBe('PARTIAL_3D_PREVIEW')
+    expect(summary.preview.partial?.failure).toMatchObject({ commandIndex: 21, type: 'createWallRing', id: 'ring-attached-0-0', codes: ['WALLS_OVERLAP'] })
+    expect(summary.preview.built.wallRings).toBe(2)
+    expect(summary.warningDetails.map((w) => w.code)).toContain('PARTIAL_3D_PREVIEW')
+    expect((result.terminal as unknown as { summary: LinkAnalysisSummary }).summary.preview.outcome).toBe('PARTIAL_3D_PREVIEW')
+  })
+
   it('reports hello first, progress that only moves forward, then exactly one terminal event', async () => {
     const result = await host(fixturePageUrl(FIXTURE_PROJECTS.larchfield)).done
     const types = result.events.map((e) => e.type)
