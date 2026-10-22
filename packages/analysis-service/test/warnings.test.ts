@@ -127,3 +127,20 @@ describe('metric and extent warnings (005B): weak metric truth is never silent',
     expect(warningsOf({ visionMode: 'DETERMINISTIC_ONLY', failures: [], ...clean }).some((x) => x.code === 'APPROXIMATE_ROOF_DATUM')).toBe(false)
   })
 })
+
+// 005Y-N7 (A): a model built after walls were reconciled says so, and a partial preview says what it lacks.
+describe('wall reconciliation', () => {
+  const rec = (wallId: string, action: string, moveM: number) => ({ wallId, otherWallId: 'ring-w0', action, moveM })
+  it('walls moved within the plan’s uncertainty limit the result and are named', () => {
+    const w = warningsOf({ visionMode: 'DETERMINISTIC_ONLY', failures: [], ...clean, wallReconciliation: { mode: 'PREVIEW_WITH_ADJUSTMENTS', toleranceM: 0.06, records: [rec('p1', 'TRIMMED_TO_FACE', 0.1), rec('p2', 'SHIFTED_CLEAR', 0.03)], omittedWalls: [], dependents: [] } })
+    expect(w.map((x) => [x.code, x.severity])).toEqual([['DETERMINISTIC_ONLY', 'INFO'], ['PREVIEW_WITH_ADJUSTMENTS', 'LIMITING']])
+    expect(w[1].message).toContain('p1, p2')
+    expect(w[1].message).toContain('largest move 10.0 cm')
+  })
+
+  it('a partition left out makes a partial preview that names it and what went with it', () => {
+    const w = warningsOf({ visionMode: 'DETERMINISTIC_ONLY', failures: [], ...clean, wallReconciliation: { mode: 'PARTIAL_SOURCE_GROUNDED', toleranceM: 0.06, records: [rec('p9', 'OMITTED', 0.5)], omittedWalls: ['p9'], dependents: [{}, {}] } })
+    expect(w.map((x) => x.code)).toEqual(['DETERMINISTIC_ONLY', 'PARTIAL_SOURCE_GROUNDED'])
+    expect(w[1].message).toBe('partial preview: 1 partition the drawings could not place without crossing another wall (p9) and 2 objects that needed a wall left out or moved are not built; everything else is as the drawings give it')
+  })
+})

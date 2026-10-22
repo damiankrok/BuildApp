@@ -69,6 +69,8 @@ export type WarningInputs = {
   extentWeak?: boolean
   /** 005T-N3: the main roof's ridge was not printed and was taken approximately for rendering. */
   approximateRoofDatum?: { ridgeY: number; buildingHeightM: number }
+  /** 005Y-N7 (A): walls reconciled as overlapping; a partition left out makes the model a partial preview. */
+  wallReconciliation?: { mode: string; toleranceM: number; records: ReadonlyArray<{ wallId: string; otherWallId: string; action: string; moveM: number }>; omittedWalls: readonly string[]; dependents: ReadonlyArray<unknown> }
 }
 
 const plural = (n: number, one: string, many: string): string => `${n} ${n === 1 ? one : many}`
@@ -107,6 +109,8 @@ export function warningsOf(input: WarningInputs): AnalysisWarning[] {
   const notBuilt = (input.openingFits ?? []).filter((f) => f.action === 'DROPPED')
   if (notBuilt.length > 0) out.push({ code: 'OPENINGS_NOT_BUILT', severity: 'LIMITING', message: `${plural(notBuilt.length, 'opening the drawings print was', 'openings the drawings print were')} not built: ${notBuilt.map((f) => f.openingId).join(', ')}` })
 
+  out.push(...wallReconciliationWarnings(input.wallReconciliation))
+
   if (input.metric?.confidence === 'WEAK')
     out.push({ code: 'METRIC_SCALE_WEAK', severity: 'LIMITING', message: `the plan's scale rests on ${plural(input.metric.independentWitnesses, 'printed dimension', 'printed dimensions')} read as printed and nothing independent confirms it` })
   else if (input.metric?.confidence === 'INCONCLUSIVE')
@@ -119,6 +123,23 @@ export function warningsOf(input: WarningInputs): AnalysisWarning[] {
   if (input.exteriorJointErrors > 0) out.push({ code: 'EXTERIOR_JOINTS', severity: 'LIMITING', message: `${plural(input.exteriorJointErrors, 'exterior joint finding', 'exterior joint findings')} in the closure audit` })
   if (input.graphViolations + input.ledgerViolations > 0) {
     out.push({ code: 'INVARIANT_VIOLATIONS', severity: 'LIMITING', message: `${input.graphViolations} feature-graph and ${input.ledgerViolations} ledger invariant violations` })
+  }
+  return out
+}
+
+/** 005Y-N7 (A): a model built with walls moved to fit, or without a partition the source could not place. */
+function wallReconciliationWarnings(w: WarningInputs['wallReconciliation']): AnalysisWarning[] {
+  if (!w || w.mode === 'REFUSED') return []
+  const out: AnalysisWarning[] = []
+  const moved = w.records.filter((r) => r.action !== 'OMITTED' && r.action !== 'REFUSED')
+  if (moved.length > 0) {
+    const largest = Math.max(...moved.map((r) => r.moveM))
+    out.push({ code: 'PREVIEW_WITH_ADJUSTMENTS', severity: 'LIMITING', message: `${plural(moved.length, 'wall was', 'walls were')} moved to stop overlapping another (largest move ${(largest * 100).toFixed(1)} cm, within the plan's ${(w.toleranceM * 100).toFixed(1)} cm uncertainty, or a duplicate read of the same wall): ${moved.map((r) => r.wallId).join(', ')}` })
+  }
+  if (w.mode === 'PARTIAL_SOURCE_GROUNDED') {
+    const walls = w.omittedWalls.length > 0 ? `${plural(w.omittedWalls.length, 'partition', 'partitions')} the drawings could not place without crossing another wall (${w.omittedWalls.join(', ')})` : ''
+    const parts = w.dependents.length > 0 ? `${plural(w.dependents.length, 'object', 'objects')} that needed a wall left out or moved` : ''
+    out.push({ code: 'PARTIAL_SOURCE_GROUNDED', severity: 'LIMITING', message: `partial preview: ${[walls, parts].filter((x) => x).join(' and ')} ${w.omittedWalls.length + w.dependents.length === 1 ? 'is' : 'are'} not built; everything else is as the drawings give it` })
   }
   return out
 }

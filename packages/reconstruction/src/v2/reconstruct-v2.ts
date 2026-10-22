@@ -22,7 +22,9 @@ import { ringBounds } from '../structural-layout.js'
 import type { StructuralLayoutHypothesisSet } from '../structural-layout.js'
 import { isWallStripZone, openFacesOf } from '../layout.js'
 import type { PlanReading } from '../layout.js'
-import { fitOpeningsToHosts, sealCandidate } from '../candidate.js'
+import { fitOpeningsToHosts, reconcileWallOverlaps, sealCandidate } from '../candidate.js'
+import { planReconcileTolerance, refusalDiagnostics, reportWallReconciliation } from './wall-reconciliation-report.js'
+import type { WallReconciliationReport } from './wall-reconciliation-report.js'
 import type { OpeningFit, ReconstructionCandidate, UnresolvedCandidate, SolverStep, PrimitiveTrace } from '../candidate.js'
 import { HYPOTHESIS_SET_SCHEMA, HYPOTHESIS_SET_SCHEMA_VERSION } from '../hypotheses.js'
 import type { PrimitiveHypothesisSet } from '../hypotheses.js'
@@ -164,6 +166,8 @@ export type ReconstructionV2Result = {
   openingFits: OpeningFit[]
   /** 005T-N3: the main roof's ridge was not printed and was taken approximately (`roof-datum.ts`); absent otherwise. */
   roofDatum?: ApproximateRidge
+  /** 005Y-N7 (A): walls the model refused as overlapping and what was done; absent when none overlapped. */
+  wallReconciliation?: WallReconciliationReport
 }
 
 
@@ -1855,7 +1859,13 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const modelId = (options.modelId ?? `m-auto-v2-${options.slug}`).replace(/[^A-Za-z0-9_.:-]+/g, '-')
   // The model's own validator decides what fits; only openings it refuses as
   // not fitting their host are shrunk or dropped, and each one is named.
-  const fit = fitOpeningsToHosts(emitted.program, options.label, modelId)
+  // 005Y-N7 (A): a program the model refuses only because two walls overlap is reconciled within the plan's own
+  // uncertainty and fitted again; a program with no overlap takes exactly the path it always took.
+  const firstFit = fitOpeningsToHosts(emitted.program, options.label, modelId)
+  const reconciled = !firstFit.ok && firstFit.errors.every((e) => e.code === 'WALLS_OVERLAP') ? reconcileWallOverlaps(emitted.program, options.label, modelId, { toleranceM: planReconcileTolerance(planFrames) }) : undefined
+  const refit = reconciled?.ok ? fitOpeningsToHosts(reconciled.program, options.label, modelId) : undefined
+  const fit = reconciled && refit ? { ...refit, indexMap: reconciled.indexMap.map((k) => (k >= 0 ? refit.indexMap[k] : -1)) } : reconciled && !reconciled.ok ? { ...firstFit, ...reconciled, fits: [] } : firstFit
+  const wallReconciliation = reconciled ? reportWallReconciliation(reconciled, step, gap, trace) : undefined
   if (!fit.ok) {
     // What the model refused, in enough detail to find the first wrong inference
     // (004A): the command's own id, the objects the validator named, the largest
@@ -1873,6 +1883,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       ...(otherWall ? { walls: `${otherWall[1]},${otherWall[2]}` } : {}),
       ...(measured.length > 0 ? { measured: Math.max(...measured) } : {}),
       ...(fit.errors[0]?.message ? { detail: fit.errors[0].message.slice(0, 200) } : {}),
+      ...(reconciled && !reconciled.ok && reconciled.refusal ? refusalDiagnostics(reconciled.refusal) : {}),
     })
   }
   // 005Y-N4 (D): the stair against the walls that bound its shaft, not in them (a move within the reading's uncertainty)
@@ -2014,7 +2025,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const violations = { graph: featureGraphViolations(graphDraft), ledger: ledgerViolations(ctx.ledger, [...graph.observations.map((o) => o.id), ...metrics.evidence.map((e) => e.id)]) }
   step({ stage: 'quality', what: 'per-feature quality', method: 'DIRECT', detail: Object.entries(quality.summary).map(([fam, levels]) => `${fam} ${Object.entries(levels).map(([l, n]) => `${l}:${n}`).join('/')}`).join(', '), inputs: ctx.solved.length, outputs: quality.records.length })
 
-  return { layout, building, candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations, closure: closureNotes, planDiagnostics, openingFits: fit.fits, ...(roofDatum ? { roofDatum } : {}) }
+  return { layout, building, candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations, closure: closureNotes, planDiagnostics, openingFits: fit.fits, ...(wallReconciliation ? { wallReconciliation } : {}), ...(roofDatum ? { roofDatum } : {}) }
 }
 
 /** The columns of a render across which a band of the given rows carries dark tone: the band's along extent. */

@@ -30,6 +30,8 @@ import type { BuildingCommand, CommandFailure } from '@buildapp/commands'
 import { createEmptyModel, openingHeadRange, physicalCore, resolveWallTopology, serializeModel, wallLength } from '@buildapp/model'
 import type { CanonicalBuildingModel } from '@buildapp/model'
 import { ConstraintClassSchema } from './constraints.js'
+import { classifyWallConflict, createdIdOf, frameOf, moveRingEdge, openRingWithout, proposeWallRepair, rewriteReferences, ringWallLines, startShiftAlong, wallLineOf } from './v2/wall-reconciliation.js'
+import type { ReconciledReferences, WallConflict, WallConflictRelation, WallLine, WallRepairAction } from './v2/wall-reconciliation.js'
 
 export const CANDIDATE_SCHEMA = 'buildapp.reconstruction-candidate' as const
 export const CANDIDATE_SCHEMA_VERSION = '1.1.0' as const
@@ -429,4 +431,196 @@ export function fitOpeningsToHosts(program: readonly BuildingCommand[], label: s
     model = result.model
   }
   return { ok: true, program: out, fits, indexMap }
+}
+
+// ---------------------------------------------------------------------------
+// 005Y-N7 (A): walls the model refuses as overlapping, reconciled within the reading's uncertainty
+// ---------------------------------------------------------------------------
+
+/** One wall the model refused as overlapping another, and what was done about it. */
+export type WallReconciliationRecord = {
+  kind: 'GEOMETRY_RECONCILIATION'
+  /** The program command that stated the wall. */
+  commandIndex: number
+  wallId: string
+  otherWallId: string
+  relation: WallConflictRelation
+  action: WallRepairAction | 'EDGE_MOVED' | 'RING_OPENED'
+  /** Plan area the model measured the two walls sharing, m². */
+  overlapAreaM2: number
+  penetrationM: number
+  /** How far the wall (or the ring edge) moved, m. */
+  moveM: number
+  toleranceM: number
+  withinUncertainty: boolean
+  before: { start: { x: number; z: number }; end: { x: number; z: number } }
+  after?: { start: { x: number; z: number }; end: { x: number; z: number } }
+  why: string
+}
+
+/** A command left out because something it needs was left out. */
+export type ReconciliationDependent = { commandIndex: number; type: string; id?: string; why: string }
+
+export type WallReconcileResult =
+  | { ok: true; program: BuildingCommand[]; indexMap: number[]; records: WallReconciliationRecord[]; dependents: ReconciliationDependent[] }
+  | { ok: false; program: BuildingCommand[]; indexMap: number[]; records: WallReconciliationRecord[]; dependents: ReconciliationDependent[]; failedAt: number; command: BuildingCommand; errors: CommandFailure['errors']; refusal?: WallReconciliationRecord }
+
+/** Repairs one program command may take before it is given up on. */
+export const RECONCILE_MAX_ROUNDS = 6
+
+const OVERLAP_PAIR = /walls (\S+) and (\S+) share ([0-9.]+) m²/
+
+type OverlapPair = { a: string; b: string; area: number }
+
+/** The wall pairs a refusal names, when overlap is all it refuses. */
+function overlapPairsOf(errors: CommandFailure['errors']): OverlapPair[] | null {
+  if (errors.length === 0 || !errors.every((e) => e.code === 'WALLS_OVERLAP')) return null
+  const pairs: OverlapPair[] = []
+  for (const e of errors) {
+    const m = OVERLAP_PAIR.exec(e.message)
+    if (!m) return null
+    pairs.push({ a: m[1], b: m[2], area: Number(m[3]) })
+  }
+  return pairs.sort((p, q) => q.area - p.area || p.a.localeCompare(q.a) || p.b.localeCompare(q.b))
+}
+
+const wallLineIn = (model: CanonicalBuildingModel, id: string): WallLine | undefined => {
+  const w = model.walls.find((x) => x.id === id)
+  return w ? { id: w.id, start: w.start, end: w.end, thickness: w.thickness, kind: w.kind } : undefined
+}
+
+type RepairStep = {
+  commands: BuildingCommand[]
+  record: WallReconciliationRecord
+  omitted: string[]
+  startShift: Array<[string, number]>
+  openedRing?: { id: string; wallIds: string[] }
+  /** A wall left out as another's band: its openings go to that wall. */
+  retarget?: { from: WallLine; to: WallLine }
+  refused: boolean
+}
+
+const baseRecord = (i: number, n: WallLine, e: WallLine, pair: OverlapPair, c: WallConflict, toleranceM: number): Omit<WallReconciliationRecord, 'action' | 'moveM' | 'withinUncertainty' | 'why'> => ({
+  kind: 'GEOMETRY_RECONCILIATION',
+  commandIndex: i,
+  wallId: n.id,
+  otherWallId: e.id,
+  relation: c.relation,
+  overlapAreaM2: pair.area,
+  penetrationM: c.penetrationM,
+  toleranceM,
+  before: { start: n.start, end: n.end },
+})
+
+/** A createWall the model refused: the largest overlap first, the wall moved, trimmed, left out or refused. */
+function repairWall(model: CanonicalBuildingModel, command: Extract<BuildingCommand, { type: 'createWall' }>, pairs: OverlapPair[], toleranceM: number, i: number): RepairStep | null {
+  const n = wallLineOf(command)
+  const pair = pairs.find((p) => p.a === n.id || p.b === n.id)
+  const e = pair && wallLineIn(model, pair.a === n.id ? pair.b : pair.a)
+  if (!pair || !e) return null
+  const conflict = classifyWallConflict(n, e, toleranceM)
+  const repair = proposeWallRepair(n, e, conflict, toleranceM)
+  const record: WallReconciliationRecord = { ...baseRecord(i, n, e, pair, conflict, toleranceM), action: repair.action, moveM: round6(repair.moveM ?? 0), withinUncertainty: repair.withinUncertainty, why: repair.why }
+  if ('wall' in repair) {
+    record.after = { start: repair.wall.start, end: repair.wall.end }
+    return { commands: [{ ...command, start: repair.wall.start, end: repair.wall.end }], record, omitted: [], startShift: [[n.id, startShiftAlong(n, repair.wall)]], refused: false }
+  }
+  if (repair.action === 'REFUSED') return { commands: [], record, omitted: [], startShift: [], refused: true }
+  return { commands: [], record, omitted: [n.id], startShift: [], ...(repair.action === 'DUPLICATE_OMITTED' ? { retarget: { from: n, to: e } } : {}), refused: false }
+}
+
+/**
+ * A ring the model refused. Only an edge parallel to the wall it overlaps is ever moved: within the tolerance, the
+ * edge (both its corners) goes onto that wall's face; an edge that IS that wall's band is left to it and the ring
+ * opens into separate walls. A ring that would have to bend is refused.
+ */
+function repairRing(model: CanonicalBuildingModel, command: Extract<BuildingCommand, { type: 'createWallRing' }>, pairs: OverlapPair[], toleranceM: number, i: number): RepairStep | null {
+  const ringId = command.id
+  if (!ringId) return null
+  const { lines, reversed } = ringWallLines(command, ringId)
+  const candidates = pairs.flatMap((pair) => {
+    const k = lines.findIndex((l) => l.id === pair.a || l.id === pair.b)
+    const e = k >= 0 ? wallLineIn(model, lines[k].id === pair.a ? pair.b : pair.a) : undefined
+    return e ? [{ pair, k, e, conflict: classifyWallConflict(lines[k], e, toleranceM) }] : []
+  })
+  if (candidates.length === 0) return null
+  // a crossing is never moved away; otherwise the edge that moves least, then an edge that is wholly another's band
+  const movable = (c: (typeof candidates)[number]) => c.conflict.relation === 'PARALLEL_OVERLAP' && c.conflict.shiftM !== undefined && Math.abs(c.conflict.shiftM) <= toleranceM
+  const wholeBand = (c: (typeof candidates)[number]) => {
+    const along = c.conflict.alongOverlap
+    const L = Math.hypot(lines[c.k].end.x - lines[c.k].start.x, lines[c.k].end.z - lines[c.k].start.z)
+    return c.conflict.relation === 'COINCIDENT_BAND' && !!along && along.from <= toleranceM && along.to >= L - toleranceM
+  }
+  const chosen = candidates.find((c) => c.conflict.relation === 'CROSSING') ?? candidates.find(movable) ?? candidates.find(wholeBand) ?? candidates[0]
+  const { pair, k, e, conflict } = chosen
+  const n = lines[k]
+  const base = baseRecord(i, n, e, pair, conflict, toleranceM)
+  if (conflict.relation === 'PARALLEL_OVERLAP' && conflict.shiftM !== undefined && Math.abs(conflict.shiftM) <= toleranceM) {
+    const polygon = moveRingEdge(command.polygon, reversed, k, frameOf(e).inward, conflict.shiftM)
+    const moved = ringWallLines({ ...command, polygon }, ringId).lines
+    const record: WallReconciliationRecord = { ...base, action: 'EDGE_MOVED', moveM: round6(Math.abs(conflict.shiftM)), withinUncertainty: true, after: { start: moved[k].start, end: moved[k].end }, why: `${conflict.why}; the ring's edge moved onto the face of ${e.id}, within the plan's ${(toleranceM * 100).toFixed(1)} cm uncertainty` }
+    return { commands: [{ ...command, polygon }], record, omitted: [], startShift: lines.map((l, j) => [l.id, startShiftAlong(l, moved[j])] as [string, number]).filter(([, s]) => s !== 0), refused: false }
+  }
+  if (wholeBand(chosen)) {
+    const open = openRingWithout(command, ringId, k)
+    const record: WallReconciliationRecord = { ...base, action: 'RING_OPENED', moveM: 0, withinUncertainty: true, why: `${conflict.why}: one wall stands there, ${e.id}; the ring's other ${open.walls.length} walls stand on their own and meet it` }
+    return { commands: open.walls, record, omitted: [n.id], startShift: [], openedRing: { id: ringId, wallIds: open.keptIds }, retarget: { from: n, to: e }, refused: false }
+  }
+  const record: WallReconciliationRecord = { ...base, action: 'REFUSED', moveM: conflict.penetrationM, withinUncertainty: false, why: `${conflict.why}; an exterior ring is not bent to fit` }
+  return { commands: [], record, omitted: [], startShift: [], refused: true }
+}
+
+/**
+ * Run a program into a model, reconciling each wall the model refuses as overlapping another: the weaker wall moved
+ * onto the stronger's face within `toleranceM`, an interior wall that cannot be placed left out and named, an exterior
+ * one refused with the pair named. Every repair is a record; nothing is validated less. A program with no overlap
+ * comes back unchanged.
+ */
+export function reconcileWallOverlaps(program: readonly BuildingCommand[], label: string, modelId: string, options: { toleranceM: number }): WallReconcileResult {
+  const out: BuildingCommand[] = []
+  const indexMap: number[] = program.map(() => -1)
+  const records: WallReconciliationRecord[] = []
+  const dependents: ReconciliationDependent[] = []
+  const refs: ReconciledReferences = { omitted: new Set(), startShift: new Map(), openedRings: new Map(), retarget: new Map() }
+  let model = createEmptyModel(modelId, label)
+  for (let i = 0; i < program.length; i += 1) {
+    const pending = rewriteReferences(program[i], refs)
+    if (pending.length === 0) {
+      const id = createdIdOf(program[i])
+      if (id) refs.omitted.add(id)
+      dependents.push({ commandIndex: i, type: program[i].type, ...(id ? { id } : {}), why: 'it needs a wall, or a part of one, that was left out' })
+      continue
+    }
+    let rounds = 0
+    while (pending.length > 0) {
+      const command = pending.shift() as BuildingCommand
+      const result = applyCommand(model, command)
+      if (result.ok) {
+        if (indexMap[i] < 0) indexMap[i] = out.length
+        out.push(command)
+        model = result.model
+        continue
+      }
+      const isWall = command.type === 'createWall' || command.type === 'createWallRing'
+      if (!isWall) {
+        // Only walls are reconciled here. Anything else the model refuses — an opening a trim left touching its wall's
+        // end, the door in it — goes on unapplied to the opening fit, which runs the whole program again and decides.
+        if (indexMap[i] < 0) indexMap[i] = out.length
+        out.push(command)
+        continue
+      }
+      const pairs = overlapPairsOf(result.errors)
+      const step = pairs && rounds < RECONCILE_MAX_ROUNDS ? (command.type === 'createWall' ? repairWall(model, command, pairs, options.toleranceM, i) : command.type === 'createWallRing' ? repairRing(model, command, pairs, options.toleranceM, i) : null) : null
+      if (!step) return { ok: false, program: out, indexMap, records, dependents, failedAt: i, command, errors: result.errors }
+      rounds += 1
+      records.push(step.record)
+      if (step.refused) return { ok: false, program: out, indexMap, records, dependents, failedAt: i, command, errors: result.errors, refusal: step.record }
+      for (const id of step.omitted) refs.omitted.add(id)
+      for (const [id, s] of step.startShift) refs.startShift.set(id, round6((refs.startShift.get(id) ?? 0) + s))
+      if (step.openedRing) refs.openedRings.set(step.openedRing.id, step.openedRing.wallIds)
+      if (step.retarget) refs.retarget.set(step.retarget.from.id, step.retarget)
+      pending.unshift(...step.commands)
+    }
+  }
+  return { ok: true, program: out, indexMap, records, dependents }
 }

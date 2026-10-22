@@ -498,6 +498,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
       ledgerViolations: reconstruction.violations.ledger.length,
       layoutReasons: reconstruction.layout.gate.reasons,
       openingFits: reconstruction.openingFits,
+      ...(reconstruction.wallReconciliation ? { wallReconciliation: reconstruction.wallReconciliation } : {}),
       metric: reconstruction.planDiagnostics.plans.find((p) => p.frameId === reconstruction.planDiagnostics.selectedPlanFrameId)?.metric,
       extentWeak: reconstruction.planDiagnostics.plans.find((p) => p.frameId === reconstruction.planDiagnostics.selectedPlanFrameId)?.extentWeak,
       ...(reconstruction.roofDatum ? { approximateRoofDatum: { ridgeY: reconstruction.roofDatum.ridgeY, buildingHeightM: reconstruction.roofDatum.buildingHeightM } } : {}),
