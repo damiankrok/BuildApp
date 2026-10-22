@@ -273,6 +273,17 @@ export type PocketV2 = {
   why: string
 }
 
+/** 005Y-N7 (C): a pergola: posts at the plan's squares, beams round the frame through them. */
+export type PergolaV2 = {
+  id: string
+  side: 'FRONT' | 'REAR' | 'WEST' | 'EAST'
+  rect: { x0: number; z0: number; x1: number; z1: number }
+  posts: Array<{ x0: number; z0: number; x1: number; z1: number }>
+  topY: number
+  featureId: string
+  why: string
+}
+
 export type BuildingV2 = {
   label: string
   wallThicknessM: number
@@ -288,6 +299,8 @@ export type BuildingV2 = {
   recesses: RecessTopology[]
   /** 005Y-N2: recesses in a body's face (`PocketV2`). */
   pockets?: PocketV2[]
+  /** 005Y-N7 (C): a pergola frame beside the house, from the posts the ground plan draws. */
+  pergolas?: PergolaV2[]
   returns: ReturnWallV2[]
   balconies: BalconyV2[]
   railings: RailingV2[]

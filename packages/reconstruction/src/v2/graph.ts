@@ -49,6 +49,8 @@ export const FeatureFamilySchema = z.enum([
   'SURFACE_REGION',
   'CAMERA',
   'TERRACE',
+  /** 005Y-N7 (C): a pergola frame beside the house. */
+  'PERGOLA',
 ])
 export type FeatureFamily = z.infer<typeof FeatureFamilySchema>
 

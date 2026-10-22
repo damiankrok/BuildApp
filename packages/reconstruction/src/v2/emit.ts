@@ -9,6 +9,7 @@
  * w3 west (z1→z0 at x0).
  */
 import type { PlaneRoofKey } from './plane-roof.js'
+import { pergolaBeams, PERGOLA_BEAM_ASSUMED } from './pergola.js'
 import { round6 } from '@buildapp/source-common'
 import type { BuildingCommand } from '@buildapp/commands'
 import type { EvidenceStatus } from '@buildapp/model'
@@ -522,6 +523,19 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     const hostWallIds = t.massIds.map((mid) => ringWallId(mid, t.storeyIndex, t.side === 'WEST' ? 'WEST' : t.side === 'EAST' ? 'EAST' : t.side))
     push({ type: 'createTerrace', id: t.id, levelId: l.id, polygon: t.polygon, topOffset: round6(t.topY - l.elevation), thickness: t.thicknessM, surface: t.surface, edge: t.edge, hostWallIds, materialId: MATERIALS_V2.terrace }, t.featureId, 'terraces')
     evidence(t.id, t.provenance, t.why, { thickness: b.terrainY === undefined ? 'ASSUMED_FOR_RENDERING' : 'SOURCE_DERIVED' })
+  }
+
+  // 005Y-N7 (C): a pergola: a post at each square the plan draws, beams round the frame through them
+  for (const pg of b.pergolas ?? []) {
+    const l = levelOf(0)
+    if (!l) continue
+    pg.posts.forEach((p, i) => {
+      push({ type: 'createColumn', id: `${pg.id}-post-${i}`, levelId: l.id, role: 'PERGOLA_POST', base: { x: round6((p.x0 + p.x1) / 2), z: round6((p.z0 + p.z1) / 2) }, baseOffset: 0, height: round6(pg.topY - l.elevation), width: round6(Math.max(0.12, p.x1 - p.x0)), depth: round6(Math.max(0.12, p.z1 - p.z0)), materialId: MATERIALS_V2.timber }, pg.featureId, 'linearSolids')
+    })
+    pergolaBeams(pg.rect, pg.topY).forEach((beam, i) => {
+      push({ type: 'createBeam', id: `${pg.id}-beam-${i}`, levelId: l.id, role: 'PERGOLA_BEAM', start: beam.start, end: beam.end, width: PERGOLA_BEAM_ASSUMED.width, depth: PERGOLA_BEAM_ASSUMED.depth, materialId: MATERIALS_V2.timber }, pg.featureId, 'linearSolids')
+    })
+    evidence(`${pg.id}-post-0`, 'SOURCE_DERIVED', pg.why, { height: 'ASSUMED_FOR_RENDERING' })
   }
 
   // --- chimneys and rooflights ---------------------------------------------------

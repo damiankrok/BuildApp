@@ -24,6 +24,7 @@ import { isWallStripZone, openFacesOf } from '../layout.js'
 import type { PlanReading } from '../layout.js'
 import { fitOpeningsToHosts, reconcileWallOverlaps, sealCandidate } from '../candidate.js'
 import { cornerPocketSpecs } from './corner-pockets.js'
+import { findPosts, PERGOLA_BEAM_ASSUMED, PERGOLA_HEIGHT_ASSUMED_M, pergolaFromPosts } from './pergola.js'
 import { readCornerNotch } from './corner-recess.js'
 import { balconyRect, balustradePath, BALCONY_SLAB_ASSUMED_M, BALUSTRADE_HEIGHT_ASSUMED_M, floorLevelDoorGroups, readBalconyOutline } from './projecting-balcony.js'
 import { planReconcileTolerance, refusalDiagnostics, reportWallReconciliation } from './wall-reconciliation-report.js'
@@ -1741,6 +1742,26 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       if (ext) gap({ what: `the platform the plan outlines beyond the ${side.toLowerCase()} wall`, reason: `an outline ${ext.reach.toFixed(2)} m out from the plan's extent (${ext.why}) lies beyond a wall the body was cut short of; it is not built: the wall's outer face it would start from is unresolved`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
     }
   }
+  // 005Y-N7 (C): a pergola beside the house: posts the ground plan draws as solid squares on the corners of a frame
+  // against a face (pergola.ts); its height and beams are assumed for viewing, and named
+  const pergolas: NonNullable<BuildingV2['pergolas']> = []
+  const groundLevel = levelOf(0)
+  const mainGround = masses.find((m) => m.role === 'MAIN' && m.storeys.includes(0))
+  if (groundPlan && groundLevel && mainGround) {
+    const body = rectAt(mainGround, 0)
+    const posts = findPosts(groundPlan.raster, groundPlan.frame, body).filter((p) => !masses.some((m) => m.storeys.includes(0) && (p.x0 + p.x1) / 2 > rectAt(m, 0).x0 - 0.05 && (p.x0 + p.x1) / 2 < rectAt(m, 0).x1 + 0.05 && (p.z0 + p.z1) / 2 > rectAt(m, 0).z0 - 0.05 && (p.z0 + p.z1) / 2 < rectAt(m, 0).z1 + 0.05))
+    options.debug?.(`pergola posts ${posts.map((p) => `${((p.x0 + p.x1) / 2).toFixed(2)},${((p.z0 + p.z1) / 2).toFixed(2)}`).join(' ')}`)
+    const reading = pergolaFromPosts(posts, body)
+    if (reading) {
+      const id = `pergola-${reading.side.toLowerCase()}`
+      const topY = round6(groundLevel.elevation + PERGOLA_HEIGHT_ASSUMED_M)
+      const sids = [sighting(groundPlan.plan.frame, 'pergola posts outside the walls', 0.75)]
+      const featureId = feature('PERGOLA', id, { width: { value: reading.rect.x1 - reading.rect.x0, low: reading.rect.x1 - reading.rect.x0 - 0.1, high: reading.rect.x1 - reading.rect.x0 + 0.1 }, depth: { value: reading.rect.z1 - reading.rect.z0, low: reading.rect.z1 - reading.rect.z0 - 0.1, high: reading.rect.z1 - reading.rect.z0 + 0.1 } }, sids, 'SOURCE_DERIVED', reading.why, { storeyIndex: 0, uncertaintyM: 0.1, unresolvedProperties: ['height (assumed)', 'beam section (assumed)', 'slats or roofing over the frame'], parameterProvenance: { height: 'ASSUMED_FOR_RENDERING' } })
+      relate('MEETS_HOST', featureId, mainGround.featureId, `the frame stands against the ${reading.side.toLowerCase()} face`)
+      pergolas.push({ id, side: reading.side, rect: reading.rect, posts: reading.posts, topY, featureId, why: `${reading.why}; ${PERGOLA_HEIGHT_ASSUMED_M} m high with ${PERGOLA_BEAM_ASSUMED.width} × ${PERGOLA_BEAM_ASSUMED.depth} m beams for viewing (DISPLAY_ASSUMPTION: a plan draws neither)` })
+      step({ stage: 'facade', what: `a pergola against the ${reading.side.toLowerCase()} face`, method: 'DIRECT', detail: reading.why, inputs: posts.length, outputs: reading.posts.length })
+    }
+  }
   step({ stage: 'facade', what: 'verge members, balconies, railings, portal heads', method: 'DISCRETE_SELECTION', detail: `${verges.length} verge members, ${balconies.filter((b) => b.kind === 'BALCONY').length} balconies, ${railings.length} railings, ${portalHeads.length} portal heads, ${assemblies.length} assemblies`, inputs: views.length, outputs: verges.length + balconies.length + railings.length + portalHeads.length })
   // The stripe rule, recorded: every LINEAR_VOLUME_CANDIDATE that no member accounts for is a stripe.
   for (const o of graph.observations.filter((x) => x.kind === 'LINEAR_VOLUME_CANDIDATE')) {
@@ -1908,7 +1929,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       builtMainRoof = undefined
     }
   }
-  const building: BuildingV2 = { label: options.label, wallThicknessM: T, slabThicknessM: slabT, levels: levelsV2, masses, mainRoof: builtMainRoof, ...(planeRoofs ? { planeRoofs } : {}), attachedRoofs, pitchedAttachedRoofs, recesses, ...(pockets.length > 0 ? { pockets } : {}), returns, balconies, railings, portalHeads, verges, terraces, massTones, returnTones, facadeGraph, chimneys, rooflights, openings, sharedDoors, interior, stair, assemblies, surfaceRegions, terrainY: terrain }
+  const building: BuildingV2 = { label: options.label, wallThicknessM: T, slabThicknessM: slabT, levels: levelsV2, masses, mainRoof: builtMainRoof, ...(planeRoofs ? { planeRoofs } : {}), attachedRoofs, pitchedAttachedRoofs, recesses, ...(pockets.length > 0 ? { pockets } : {}), ...(pergolas.length > 0 ? { pergolas } : {}), returns, balconies, railings, portalHeads, verges, terraces, massTones, returnTones, facadeGraph, chimneys, rooflights, openings, sharedDoors, interior, stair, assemblies, surfaceRegions, terrainY: terrain }
   const residualsBefore = verifyAgainstViews({ building, views })
   const repair = repairFromResiduals(building, residualsBefore, 2)
   const residuals = verifyAgainstViews({ building, views })
