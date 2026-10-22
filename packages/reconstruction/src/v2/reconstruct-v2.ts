@@ -22,7 +22,8 @@ import { ringBounds } from '../structural-layout.js'
 import type { StructuralLayoutHypothesisSet } from '../structural-layout.js'
 import { isWallStripZone, openFacesOf } from '../layout.js'
 import type { PlanReading } from '../layout.js'
-import { fitOpeningsToHosts, reconcileWallOverlaps, sealCandidate } from '../candidate.js'
+import { fitPreviewProgram, previewCheckpoint, sealCandidate } from '../candidate.js'
+import type { PreviewFailure, PreviewSkipped } from '../candidate.js'
 import { cornerPocketSpecs } from './corner-pockets.js'
 import { crossViewResiduals } from './cross-view.js'
 import type { CrossViewResiduals } from './cross-view.js'
@@ -176,6 +177,26 @@ export type ReconstructionV2Result = {
   crossViewResiduals: CrossViewResiduals
   /** 005Y-N7 (A): walls the model refused as overlapping and what was done; absent when none overlapped. */
   wallReconciliation?: WallReconciliationReport
+  /**
+   * N7-P1: the model is the last valid one before a later object failed, not the whole house: what failed, what was
+   * left out with it, and the base checkpoint the preview keeps. Absent when every command the solver emitted is built.
+   */
+  partialPreview?: PartialPreviewReport
+  /** N7-P1: the storey heights were read from a section, or are a convention taken for viewing only. */
+  heights: { measured: boolean; assumedStoreyHeightM?: number }
+}
+
+/** N7-P1: what a partial 3D preview is built from, and what it is not. */
+export type PartialPreviewReport = {
+  outcome: 'PARTIAL_3D_PREVIEW'
+  /** CHECKPOINT: everything but the refused objects; MINIMAL_BASE: the main body's floors and walls alone. */
+  basis: 'CHECKPOINT' | 'MINIMAL_BASE'
+  /** Every refusal in the order it happened; the first is the one the run met. */
+  failures: PreviewFailure[]
+  /** Every command of the emitted program the preview does not build, with why. */
+  skipped: PreviewSkipped[]
+  /** The base: the program's prefix up to the main body's last floor or walls, and the hash of the model it builds. */
+  checkpoint?: { commands: number; modelSha256: string; wallRings: string[]; slabs: string[] }
 }
 
 
@@ -1960,10 +1981,15 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // not fitting their host are shrunk or dropped, and each one is named.
   // 005Y-N7 (A): a program the model refuses only because two walls overlap is reconciled within the plan's own
   // uncertainty and fitted again; a program with no overlap takes exactly the path it always took.
-  const firstFit = fitOpeningsToHosts(emitted.program, options.label, modelId)
-  const reconciled = !firstFit.ok && firstFit.errors.every((e) => e.code === 'WALLS_OVERLAP') ? reconcileWallOverlaps(emitted.program, options.label, modelId, { toleranceM: planReconcileTolerance(planFrames) }) : undefined
-  const refit = reconciled?.ok ? fitOpeningsToHosts(reconciled.program, options.label, modelId) : undefined
-  const fit = reconciled && refit ? { ...refit, indexMap: reconciled.indexMap.map((k) => (k >= 0 ? refit.indexMap[k] : -1)) } : reconciled && !reconciled.ok ? { ...firstFit, ...reconciled, fits: [] } : firstFit
+  // N7-P1: a refusal after the base no longer loses the house (`fitPreviewProgram`): the refused object goes out
+  // atomically with its body and what needs it, and the rest is fitted again; nothing accepted is moved and nothing is
+  // validated less. A program the model takes whole takes exactly the path it always took.
+  const mainMassId = masses.find((m) => m.role === 'MAIN')?.id ?? masses[0]?.id ?? 'main'
+  const fitted = fitPreviewProgram(emitted.program, { label: options.label, modelId, mainMassId, toleranceM: planReconcileTolerance(planFrames) })
+  const { fit, reconciled } = fitted
+  const previewFailures = fitted.failures
+  const previewSkipped = fitted.skipped
+  const previewBasis = fitted.basis
   const wallReconciliation = reconciled ? reportWallReconciliation(reconciled, step, gap, trace) : undefined
   if (!fit.ok) {
     // What the model refused, in enough detail to find the first wrong inference
@@ -2013,6 +2039,30 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     solved.quality = 'L0'
     solved.provenance = 'UNRESOLVED'
     solved.unresolvedProperties = [...solved.unresolvedProperties, `not built: ${d.why}`]
+  }
+  // N7-P1: a partial preview names what it is: the refusal that cut it, every command it does not build, and the base
+  // checkpoint it keeps. Nothing of this is set when every emitted command was built, so such a run is unchanged.
+  let partialPreview: PartialPreviewReport | undefined
+  if (previewFailures.length > 0) {
+    const objects = previewSkipped.filter((x) => x.type !== 'setEvidence')
+    for (const f of previewFailures) step({ stage: 'emission', what: `PARTIAL_3D_PREVIEW: ${f.type}${f.id ? ` ${f.id}` : ''} refused`, method: 'REFUSED', detail: `${f.codes.join(', ')}: ${f.message}`, inputs: 1, outputs: 0 })
+    step({ stage: 'emission', what: 'PARTIAL_3D_PREVIEW: the last valid model kept', method: 'DIRECT', detail: `${previewBasis === 'MINIMAL_BASE' ? 'the main body\u2019s floors and walls alone' : 'everything but the refused objects'}; ${objects.length} object${objects.length === 1 ? '' : 's'} left out: ${objects.map((x) => x.id ?? x.type).join(', ')}`, inputs: emitted.program.length, outputs: program.length })
+    for (const x of objects) gap({ what: `${x.type}${x.id ? ` ${x.id}` : ''}`, reason: `left out of this partial 3D preview: ${x.why}`, status: x.cause === 'FAILED' ? 'REFUSED' : 'MISSING', observationIds: [], evidenceIds: [] })
+    // a feature none of whose objects is built is what `dropped` makes it: topology only, unresolved, and saying why
+    const skippedIndex = new Set(previewSkipped.map((x) => x.commandIndex))
+    const stillBound = new Set(bindings.map((b) => b.featureId))
+    for (const b of emitted.bindings) {
+      if (!skippedIndex.has(b.commandIndex)) continue
+      const solved = ctx.solved.find((x) => x.id === b.featureId || x.id === `feat-${b.featureId}`)
+      if (!solved) continue
+      solved.unresolvedProperties = [...solved.unresolvedProperties, `not built in the partial 3D preview: ${b.objectId}`]
+      if (stillBound.has(b.featureId)) continue
+      solved.quality = 'L0'
+      solved.provenance = 'UNRESOLVED'
+    }
+    trace({ phase: 'MODEL', substage: 'PARTIAL_3D_PREVIEW', status: 'DEGRADED', counts: { refusals: previewFailures.length, skipped: objects.length, minimal: previewBasis === 'MINIMAL_BASE' }, reasonCode: 'PARTIAL_3D_PREVIEW' })
+    const checkpoint = previewCheckpoint(program, mainMassId, options.label, modelId)
+    partialPreview = { outcome: 'PARTIAL_3D_PREVIEW', basis: previewBasis, failures: previewFailures, skipped: previewSkipped, ...(checkpoint ? { checkpoint } : {}) }
   }
   const hypothesisSet: PrimitiveHypothesisSet = {
     schema: HYPOTHESIS_SET_SCHEMA,
@@ -2124,7 +2174,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const violations = { graph: featureGraphViolations(graphDraft), ledger: ledgerViolations(ctx.ledger, [...graph.observations.map((o) => o.id), ...metrics.evidence.map((e) => e.id)]) }
   step({ stage: 'quality', what: 'per-feature quality', method: 'DIRECT', detail: Object.entries(quality.summary).map(([fam, levels]) => `${fam} ${Object.entries(levels).map(([l, n]) => `${l}:${n}`).join('/')}`).join(', '), inputs: ctx.solved.length, outputs: quality.records.length })
 
-  return { layout, building, candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations, closure: closureNotes, planDiagnostics, openingFits: fit.fits, ...(wallReconciliation ? { wallReconciliation } : {}), crossViewResiduals: crossView, ...(roofDatum ? { roofDatum } : {}) }
+  return { layout, building, candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations, closure: closureNotes, planDiagnostics, openingFits: fit.fits, ...(wallReconciliation ? { wallReconciliation } : {}), crossViewResiduals: crossView, ...(roofDatum ? { roofDatum } : {}), ...(partialPreview ? { partialPreview } : {}), heights: levels.measured ? { measured: true } : { measured: false, assumedStoreyHeightM: CONVENTIONS.storeyHeight } }
 }
 
 /** The columns of a render across which a band of the given rows carries dark tone: the band's along extent. */

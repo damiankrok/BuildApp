@@ -624,3 +624,299 @@ export function reconcileWallOverlaps(program: readonly BuildingCommand[], label
   }
   return { ok: true, program: out, indexMap, records, dependents }
 }
+
+// ---------------------------------------------------------------------------
+// N7-P1: the last valid model when a later object fails
+// ---------------------------------------------------------------------------
+
+/**
+ * A model the validator refuses at one command used to be no model at all: one sliver of an attached body read
+ * narrower than its two walls (`WALLS_OVERLAP` between the ring's own east and west walls) threw away the main body,
+ * its floors and every wall already accepted before it. The validator is right to refuse the sliver. What it refuses
+ * is that one object.
+ *
+ * So a refused command is taken out ATOMICALLY with what it is part of and what needs it, and the program is fitted
+ * again: nothing already accepted is changed, nothing is validated less, and every command left out is named with
+ * the failure that took it out. The BASE — the building, its levels and the main body's lowest floor and walls — is
+ * the checkpoint: a failure inside it is not cut around (`cutFailedObject` answers null), because a preview without
+ * the main body's walls is not a preview of this house.
+ */
+const HEADER_TYPES = new Set(['setModelName', 'createBuilding', 'defineMaterial', 'createLevel'])
+/** A body's floor or walls on one storey, as `emit.ts` names them: `slab-<mass>-<storey>`, `ring-<mass>-<storey>`. */
+const BODY_COMMAND_ID = /^(slab|ring)-(.+?)-(-?\d+)$/
+
+/** At most this many objects are cut out of one program before the run gives up and refuses as before. */
+export const PREVIEW_MAX_CUTS = 12
+
+export type PreviewFailure = {
+  /** Where the refused command stood in the program the solver emitted. */
+  commandIndex: number
+  type: string
+  id?: string
+  codes: string[]
+  /** The validator's own sentence, which names walls and metres. */
+  message: string
+  objectIds: string[]
+}
+
+export type PreviewSkipped = {
+  /** Where the command stood in the program the solver emitted. */
+  commandIndex: number
+  type: string
+  id?: string
+  /** FAILED: the refused command; SAME_BODY: part of the body it was part of; DEPENDENT: needed something left out; NOT_IN_MINIMAL_PREVIEW: outside the base. */
+  cause: 'FAILED' | 'SAME_BODY' | 'DEPENDENT' | 'NOT_IN_MINIMAL_PREVIEW'
+  why: string
+}
+
+export type PreviewCut = {
+  program: BuildingCommand[]
+  /** `kept[i]` is where input command i landed in `program`, or -1 when it was left out. */
+  kept: number[]
+  skipped: PreviewSkipped[]
+}
+
+const bodyOf = (command: BuildingCommand): { mass: string; storey: number } | undefined => {
+  if (command.type !== 'createSlab' && command.type !== 'createWallRing') return undefined
+  const m = BODY_COMMAND_ID.exec(createdIdOf(command) ?? '')
+  return m ? { mass: m[2], storey: Number(m[3]) } : undefined
+}
+
+/** The ids a command creates: a ring creates its walls too. */
+const createdIdsOf = (command: BuildingCommand): string[] => {
+  const id = createdIdOf(command)
+  if (!id) return []
+  return command.type === 'createWallRing' ? [id, ...command.polygon.map((_, k) => `${id}-w${k}`)] : [id]
+}
+
+/** Is this command part of the base a preview cannot stand without: the header, the levels, the main body's floors and walls? */
+export function isPreviewBase(command: BuildingCommand, mainMassId: string): boolean {
+  if (HEADER_TYPES.has(command.type)) return true
+  return bodyOf(command)?.mass === mainMassId
+}
+
+/** The lowest storey the main body has a floor or walls on, in this program. */
+const lowestMainStorey = (program: readonly BuildingCommand[], mainMassId: string): number | undefined => {
+  const storeys = program.map(bodyOf).filter((b): b is { mass: string; storey: number } => b?.mass === mainMassId).map((b) => b.storey)
+  return storeys.length > 0 ? Math.min(...storeys) : undefined
+}
+
+/**
+ * The program without the object command `failedAt` creates: a body's floor or walls take the rest of that body with
+ * them (an attached body's every storey and its roof; the main body's storeys from that one up), anything else goes
+ * alone; then every later command that names something left out goes too. Null when the failure is in the base.
+ */
+export function cutFailedObject(program: readonly BuildingCommand[], failedAt: number, mainMassId: string, failure: string): PreviewCut | null {
+  const failed = program[failedAt]
+  if (!failed || HEADER_TYPES.has(failed.type)) return null
+  const body = bodyOf(failed)
+  const group = new Set<number>([failedAt])
+  if (body && body.mass === mainMassId) {
+    const lowest = lowestMainStorey(program, mainMassId)
+    if (lowest === undefined || body.storey <= lowest) return null
+    program.forEach((c, i) => {
+      const b = bodyOf(c)
+      if (b && b.mass === mainMassId && b.storey >= body.storey) group.add(i)
+    })
+  } else if (body) {
+    const m = body.mass
+    program.forEach((c, i) => {
+      const id = createdIdOf(c)
+      if (id && (id.startsWith(`slab-${m}-`) || id.startsWith(`ring-${m}-`) || id === `roof-${m}` || id.startsWith(`roof-${m}-`) || id.startsWith(`${m}-`))) group.add(i)
+    })
+  }
+  const named = (i: number): { type: string; id?: string } => {
+    const id = createdIdOf(program[i])
+    return { type: program[i].type, ...(id ? { id } : {}) }
+  }
+  // A body's walls can carry an exterior wall no id ties to it — a return of a recess that ran along its face. Once
+  // the body is out, such a wall meets no wall that stands: it goes too, named, and the pass runs again without it.
+  const leaning = new Map<number, string>()
+  for (let round = 0; round < 4; round += 1) {
+    const refs: ReconciledReferences = { omitted: new Set(), startShift: new Map(), openedRings: new Map(), retarget: new Map() }
+    for (const i of [...group, ...leaning.keys()]) for (const id of createdIdsOf(program[i])) refs.omitted.add(id)
+    const out: BuildingCommand[] = []
+    const kept: number[] = program.map(() => -1)
+    const skipped: PreviewSkipped[] = []
+    program.forEach((c, i) => {
+      if (group.has(i)) {
+        skipped.push({ commandIndex: i, ...named(i), cause: i === failedAt ? 'FAILED' : 'SAME_BODY', why: i === failedAt ? failure : `part of the body ${body?.mass} whose ${failed.type} the model refused` })
+        return
+      }
+      const lean = leaning.get(i)
+      if (lean) {
+        skipped.push({ commandIndex: i, ...named(i), cause: 'DEPENDENT', why: lean })
+        return
+      }
+      const rewritten = rewriteReferences(c, refs)
+      if (rewritten.length !== 1) {
+        for (const id of createdIdsOf(c)) refs.omitted.add(id)
+        skipped.push({ commandIndex: i, ...named(i), cause: 'DEPENDENT', why: 'it needs an object left out of this preview' })
+        return
+      }
+      kept[i] = out.length
+      out.push(rewritten[0])
+    })
+    const before = leaning.size
+    if (body) for (const [i, why] of freeStandingExteriorWalls(program, kept, out)) leaning.set(i, why)
+    if (leaning.size === before) return { program: out, kept, skipped }
+  }
+  return null
+}
+
+/** Segment-to-point distance in plan. */
+const distanceToSegment = (p: { x: number; z: number }, a: { x: number; z: number }, b: { x: number; z: number }): number => {
+  const dx = b.x - a.x
+  const dz = b.z - a.z
+  const L2 = dx * dx + dz * dz
+  const t = L2 > 0 ? Math.max(0, Math.min(1, ((p.x - a.x) * dx + (p.z - a.z) * dz) / L2)) : 0
+  return Math.hypot(p.x - (a.x + t * dx), p.z - (a.z + t * dz))
+}
+
+/**
+ * The exterior walls of a cut program (`createWall`, a recess's returns) neither end of which meets a wall still
+ * standing on its level — within the thicker wall's thickness: what stood against a body that was cut out.
+ */
+function freeStandingExteriorWalls(program: readonly BuildingCommand[], kept: readonly number[], out: readonly BuildingCommand[]): Array<[number, string]> {
+  const linesOf = (commands: readonly BuildingCommand[]): Array<WallLine & { levelId: string }> => {
+    const lines: Array<WallLine & { levelId: string }> = []
+    for (const c of commands) {
+      if (c.type === 'createWallRing' && c.id) lines.push(...ringWallLines(c, c.id).lines.map((l) => ({ ...l, levelId: c.levelId })))
+      else if (c.type === 'createWall' && c.id) lines.push({ ...wallLineOf(c), levelId: c.levelId })
+    }
+    return lines
+  }
+  const standing = linesOf(out)
+  const emitted = linesOf(program)
+  const found: Array<[number, string]> = []
+  program.forEach((c, i) => {
+    if (kept[i] < 0 || c.type !== 'createWall' || (c.kind ?? 'EXTERIOR') !== 'EXTERIOR' || !c.id) return
+    const self = wallLineOf(c)
+    const meets = (lines: typeof standing, p: { x: number; z: number }): boolean => lines.some((l) => l.id !== self.id && l.levelId === c.levelId && distanceToSegment(p, l.start, l.end) <= Math.max(l.thickness, self.thickness) + 0.01)
+    // only a wall the cut left standing alone: one the drawings show free-standing stays as they show it
+    const metBefore = meets(emitted, self.start) || meets(emitted, self.end)
+    if (metBefore && !meets(standing, self.start) && !meets(standing, self.end)) found.push([i, 'it stood against the body left out of this preview: no wall that stands meets either of its ends'])
+  })
+  return found
+}
+
+/**
+ * The smallest preview the source still supports when the base itself is refused with what stands on it: the header,
+ * the levels and the main body's floors and walls alone, the walls at their storey's height instead of following roof
+ * planes that are not built. Null when even that is refused: then there is no preview to give, and none is made up.
+ */
+export function minimalPreviewProgram(program: readonly BuildingCommand[], mainMassId: string, label: string, modelId: string): PreviewCut | null {
+  const heightOf = new Map<string, number>()
+  for (const c of program) if (c.type === 'createLevel' && c.id && c.height !== undefined) heightOf.set(c.id, c.height)
+  const out: BuildingCommand[] = []
+  const kept: number[] = program.map(() => -1)
+  const skipped: PreviewSkipped[] = []
+  program.forEach((c, i) => {
+    if (!isPreviewBase(c, mainMassId)) {
+      const id = createdIdOf(c)
+      skipped.push({ commandIndex: i, type: c.type, ...(id ? { id } : {}), cause: 'NOT_IN_MINIMAL_PREVIEW', why: 'not part of the main body’s floors and walls, which are all this preview could build' })
+      return
+    }
+    kept[i] = out.length
+    if (c.type === 'createWallRing' && c.topProfile) {
+      const { topProfile: _roof, ...walls } = c
+      out.push({ ...walls, height: heightOf.get(c.levelId) ?? c.height })
+    } else out.push(c)
+  })
+  if (!out.some((c) => c.type === 'createWallRing')) return null
+  return programApplies(out, label, modelId) ? { program: out, kept, skipped } : null
+}
+
+/** The model the base of a program builds: its prefix up to the main body's last floor or walls, and that model's hash. */
+export function previewCheckpoint(program: readonly BuildingCommand[], mainMassId: string, label: string, modelId: string): { commands: number; modelSha256: string; wallRings: string[]; slabs: string[] } | undefined {
+  let last = -1
+  program.forEach((c, i) => {
+    if (bodyOf(c)?.mass === mainMassId) last = i
+  })
+  if (last < 0) return undefined
+  const prefix = program.slice(0, last + 1)
+  const applied = applyCommands(createEmptyModel(modelId, label), prefix)
+  if (applied.failedAt !== undefined) return undefined
+  return { commands: prefix.length, modelSha256: sha256Hex(serializeModel(applied.model)), wallRings: applied.model.wallRings.map((r) => r.id), slabs: applied.model.slabs.map((s) => s.id) }
+}
+
+export type PreviewFit = {
+  /** The fit of the program that is built: the whole program, or what is left of it after the cuts. */
+  fit: FitResult
+  reconciled?: WallReconcileResult
+  /** Every refusal, in the order met; empty when the whole program was built. */
+  failures: PreviewFailure[]
+  skipped: PreviewSkipped[]
+  basis: 'CHECKPOINT' | 'MINIMAL_BASE'
+}
+
+/**
+ * Fit a program into a model; when the model refuses a command after the base, take that object out
+ * (`cutFailedObject`) and fit what is left, up to `PREVIEW_MAX_CUTS` times; when it refuses the base, keep at most the
+ * main body's floors and walls (`minimalPreviewProgram`). `fit.indexMap` is always in the input program's numbering.
+ * When no preview can be built, the first refusal comes back exactly as the plain fit returned it.
+ */
+export function fitPreviewProgram(program: BuildingCommand[], options: { label: string; modelId: string; mainMassId: string; toleranceM: number }): PreviewFit {
+  const { label, modelId, mainMassId, toleranceM } = options
+  const attemptFit = (prog: BuildingCommand[]): { fit: FitResult; reconciled?: WallReconcileResult; failedInput?: number } => {
+    const firstFit = fitOpeningsToHosts(prog, label, modelId)
+    const reconciled = !firstFit.ok && firstFit.errors.every((e) => e.code === 'WALLS_OVERLAP') ? reconcileWallOverlaps(prog, label, modelId, { toleranceM }) : undefined
+    const refit = reconciled?.ok ? fitOpeningsToHosts(reconciled.program, label, modelId) : undefined
+    const fit: FitResult = reconciled && refit ? { ...refit, indexMap: reconciled.indexMap.map((k) => (k >= 0 ? refit.indexMap[k] : -1)) } : reconciled && !reconciled.ok ? { ...firstFit, ...reconciled, fits: [] } : firstFit
+    if (fit.ok) return { fit, ...(reconciled ? { reconciled } : {}) }
+    // where the refused command stood in `prog`: a refit refuses in the reconciled program's own numbering
+    const failedInput = reconciled && refit ? reconciled.indexMap.reduce((best, k, i) => (k >= 0 && k <= fit.failedAt ? i : best), -1) : fit.failedAt
+    return { fit, ...(reconciled ? { reconciled } : {}), failedInput }
+  }
+  const first = attemptFit(program)
+  let attempt = first
+  let current = program
+  /** origin[k]: the input command that command k of `current` is */
+  let origin = program.map((_, i) => i)
+  const failures: PreviewFailure[] = []
+  const skipped: PreviewSkipped[] = []
+  let basis: PreviewFit['basis'] = 'CHECKPOINT'
+  while (!attempt.fit.ok && failures.length < PREVIEW_MAX_CUTS) {
+    const at = attempt.failedInput ?? -1
+    const refused = attempt.fit
+    const failure: PreviewFailure = {
+      commandIndex: origin[at] ?? -1,
+      type: refused.command.type,
+      ...('id' in refused.command && typeof refused.command.id === 'string' ? { id: refused.command.id } : {}),
+      codes: [...new Set(refused.errors.map((e) => e.code))],
+      message: (refused.errors[0]?.message ?? '').slice(0, 300),
+      objectIds: [...new Set(refused.errors.map((e) => e.objectId).filter((id): id is string => typeof id === 'string'))],
+    }
+    const why = `the model refused it: ${failure.codes.join(', ')}${failure.message ? ` (${failure.message})` : ''}`
+    let cut = at >= 0 ? cutFailedObject(current, at, mainMassId, why) : null
+    if (!cut) {
+      cut = minimalPreviewProgram(current, mainMassId, label, modelId)
+      if (!cut) break
+      basis = 'MINIMAL_BASE'
+    }
+    failures.push(failure)
+    for (const sk of cut.skipped) skipped.push({ ...sk, commandIndex: origin[sk.commandIndex] ?? -1 })
+    const next: number[] = cut.program.map(() => -1)
+    cut.kept.forEach((k, i) => {
+      if (k >= 0) next[k] = origin[i]
+    })
+    origin = next
+    current = cut.program
+    attempt = attemptFit(current)
+    if (basis === 'MINIMAL_BASE') break
+  }
+  if (failures.length === 0) return { fit: first.fit, ...(first.reconciled ? { reconciled: first.reconciled } : {}), failures, skipped, basis }
+  // no preview could be built — or what is left has no main body walls to show: the run refuses exactly as the plain
+  // fit would have
+  const mainWalls = current.some((c) => c.type === 'createWallRing' && bodyOf(c)?.mass === mainMassId)
+  if (!attempt.fit.ok || !mainWalls) return { fit: first.fit, ...(first.reconciled ? { reconciled: first.reconciled } : {}), failures: [], skipped: [], basis }
+  const keptAt = new Map(origin.map((o, k) => [o, k]))
+  const fitIndex = attempt.fit.indexMap
+  return {
+    fit: { ...attempt.fit, indexMap: program.map((_, i) => (keptAt.has(i) ? (fitIndex[keptAt.get(i) as number] ?? -1) : -1)) },
+    ...(attempt.reconciled ? { reconciled: attempt.reconciled } : {}),
+    failures,
+    skipped,
+    basis,
+  }
+}
