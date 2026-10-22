@@ -32,3 +32,7 @@ const sealed = load('metric-evidence')
 once(sealed, 'AS SEALED')
 const withheld = { ...sealed, coordinateRegistrations: sealed.coordinateRegistrations.filter((r: any) => !String(r.frameId).includes('f7e5dd139a')) }
 once(withheld, 'ATTIC REGISTRATION WITHHELD')
+// the same registration at the ground plan's own sheet scale (both sheets are 853 px of one publisher's set)
+const groundMpp = sealed.coordinateRegistrations.find((r: any) => String(r.frameId).includes('5f20c3d65b'))
+const atGround = { ...sealed, coordinateRegistrations: sealed.coordinateRegistrations.map((r: any) => (String(r.frameId).includes('f7e5dd139a') ? { ...r, metresPerPixelX: groundMpp.metresPerPixelX, metresPerPixelY: groundMpp.metresPerPixelY } : r)) }
+once(atGround, 'ATTIC AT THE GROUND SHEET SCALE')
