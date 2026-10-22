@@ -9,7 +9,7 @@
 import { describe, expect, it } from 'vitest'
 import type { Raster } from '@buildapp/source-cv'
 import type { PlanFrameV2 } from '../src/v2/frame.js'
-import { balconyRect, balustradePath, floorLevelDoorGroups, readBalconyOutline } from '../src/v2/projecting-balcony.js'
+import { balconyRect, balustradePath, doorSpanCandidates, floorLevelDoorGroups, readBalconyOutline } from '../src/v2/projecting-balcony.js'
 
 const MPP = 0.025
 const frame = { frameId: 'f', assetId: 'a', storeyIndex: 1, mppX: MPP, mppY: MPP, originPx: { x: 100, y: 500 }, why: 'synthetic', wallPx: 6, toWorld: (px: number, py: number) => ({ x: (px - 100) * MPP, z: (500 - py) * MPP }), toPixel: (x: number, z: number) => ({ x: 100 + x / MPP, y: 500 - z / MPP }) } as PlanFrameV2
@@ -104,5 +104,13 @@ describe('the doors a balcony is stepped onto from', () => {
   it('floor-level openings of a storey, grouped by face; a window with a sill is not one', () => {
     const groups = floorLevelDoorGroups([opening('d1', 'WEST', [2.6, 3.4], 3.0, 5.2), opening('d2', 'WEST', [4.6, 5.4], 3.02, 5.2), opening('w1', 'EAST', [3, 4], 3.9, 5.2), opening('g0', 'WEST', [1, 2], 0, 2.1)], 1, 3.0)
     expect(groups).toEqual([{ side: 'WEST', massId: 'main', planeAt: 0, span: [2.6, 5.4], openingIds: ['d1', 'd2'] }])
+  })
+})
+
+describe('the spans a face’s doors are read over', () => {
+  it('all together first, then each run of doors with no more than 1.2 m of wall between', () => {
+    const group = { side: 'WEST' as const, massId: 'main', planeAt: 0, span: [0.4, 9.3] as [number, number], openingIds: ['a', 'b', 'c'] }
+    const openings = [{ id: 'a', interval: [0.4, 2.7] as [number, number] }, { id: 'b', interval: [6.8, 7.9] as [number, number] }, { id: 'c', interval: [8.4, 9.3] as [number, number] }]
+    expect(doorSpanCandidates(group, openings).map((g) => g.span)).toEqual([[0.4, 9.3], [0.4, 2.7], [6.8, 9.3]])
   })
 })

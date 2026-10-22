@@ -250,3 +250,23 @@ export function floorLevelDoorGroups(openings: ReadonlyArray<{ id: string; store
 /** What a plan cannot say about a balcony: shown at these, and named as assumed. */
 export const BALCONY_SLAB_ASSUMED_M = 0.2
 export const BALUSTRADE_HEIGHT_ASSUMED_M = 1.1
+
+/** Doors further apart than this along a face open onto different things (a stretch of wall stands between). */
+export const DOOR_CLUSTER_GAP_M = 1.2
+
+/**
+ * The ways a face's floor-level doors can be read: all together first (one balcony in front of several doors),
+ * then each run of doors with no more than `DOOR_CLUSTER_GAP_M` of wall between them.
+ */
+export function doorSpanCandidates(group: FloorDoorGroup, openings: ReadonlyArray<{ id: string; interval: [number, number] }>): FloorDoorGroup[] {
+  const mine = openings.filter((o) => group.openingIds.includes(o.id)).sort((a, b) => a.interval[0] - b.interval[0])
+  const clusters: FloorDoorGroup[] = []
+  for (const o of mine) {
+    const last = clusters[clusters.length - 1]
+    if (last && o.interval[0] - last.span[1] <= DOOR_CLUSTER_GAP_M) {
+      last.span = [last.span[0], Math.max(last.span[1], o.interval[1])]
+      last.openingIds.push(o.id)
+    } else clusters.push({ ...group, span: [o.interval[0], o.interval[1]], openingIds: [o.id] })
+  }
+  return clusters.length > 1 ? [group, ...clusters] : [group]
+}

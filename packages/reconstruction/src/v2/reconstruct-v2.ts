@@ -26,7 +26,7 @@ import { fitOpeningsToHosts, reconcileWallOverlaps, sealCandidate } from '../can
 import { cornerPocketSpecs } from './corner-pockets.js'
 import { findPosts, PERGOLA_BEAM_ASSUMED, PERGOLA_HEIGHT_ASSUMED_M, pergolaFromPosts } from './pergola.js'
 import { readCornerNotch } from './corner-recess.js'
-import { balconyRect, balustradePath, BALCONY_SLAB_ASSUMED_M, BALUSTRADE_HEIGHT_ASSUMED_M, floorLevelDoorGroups, readBalconyOutline } from './projecting-balcony.js'
+import { balconyRect, balustradePath, doorSpanCandidates, BALCONY_SLAB_ASSUMED_M, BALUSTRADE_HEIGHT_ASSUMED_M, floorLevelDoorGroups, readBalconyOutline } from './projecting-balcony.js'
 import { planReconcileTolerance, refusalDiagnostics, reportWallReconciliation } from './wall-reconciliation-report.js'
 import type { WallReconciliationReport } from './wall-reconciliation-report.js'
 import type { OpeningFit, ReconstructionCandidate, UnresolvedCandidate, SolverStep, PrimitiveTrace } from '../candidate.js'
@@ -1670,7 +1670,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   for (const [storey, plan] of [...planByStorey].sort(([a], [b]) => a - b)) {
     const l = levelOf(storey)
     if (storey === 0 || !l) continue
-    for (const group of floorLevelDoorGroups(openings, storey, l.elevation)) {
+    for (const group of floorLevelDoorGroups(openings, storey, l.elevation).flatMap((g) => doorSpanCandidates(g, openings))) {
       if (balconies.some((b) => b.storeyIndex === storey && b.side === group.side)) continue
       const mass = masses.find((m) => m.id === group.massId)
       if (!mass) continue
