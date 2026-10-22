@@ -99,7 +99,7 @@ import type { ApproximateRidge } from './roof-datum.js'
 // resolver before the run stops (PLAN_RESOLVER_VERSION names its readings).
 // Accepted houses are read exactly as before.
 
-export const SOLVER_V2_VERSION = '2.3.0' as const
+export const SOLVER_V2_VERSION = '2.4.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
