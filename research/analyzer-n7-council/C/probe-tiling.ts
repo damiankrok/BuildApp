@@ -13,6 +13,10 @@ import { runAnalysis } from '../../../packages/analysis-service/src/index.js'
 const door = [{ side: 'FRONT' as const, kind: 'DOOR' as const, at: 0.6, width: 2.4, height: 2.1, sill: 0, storey: 0 }]
 const g = (depth: number, offsetZ: number, width = 3.6) => ({ name: 'garage', width, depth, offsetZ, storeys: 1, roof: 'FLAT' as const, openings: door })
 const houses: Record<string, SyntheticHouse> = {
+  'gb-setback-door': { ...HOLLOWAY, name: 'Setback door', chainsZ: [3.9, 6.0, 0.3], wings: [g(6.0, 3.9)] },
+  'gb-setback-nodoor': { ...HOLLOWAY, name: 'Setback nodoor', chainsZ: [3.9, 6.0, 0.3], wings: [{ ...g(6.0, 3.9), openings: [] }] },
+  'gb-setback-door1': { ...HOLLOWAY, name: 'Setback door 1m', chainsZ: [3.9, 6.0, 0.3], wings: [{ ...g(6.0, 3.9), openings: [{ ...door[0], at: 1.2, width: 1.0 }] }] },
+  'gb-flush-door': { ...HOLLOWAY, name: 'Flush door', wings: [g(6.0, 4.2)] },
   't-strip045': { ...HOLLOWAY, name: 'Strip 045', chainsZ: [0.45, 9.75], wings: [g(9.75, 0.45)] },
   't-strip030-rear': { ...HOLLOWAY, name: 'Strip 030 rear', chainsZ: [9.9, 0.3], wings: [g(9.9, 0)] },
   't-strip120': { ...HOLLOWAY, name: 'Strip 120', chainsZ: [1.2, 9.0], wings: [g(9.0, 1.2)] },
