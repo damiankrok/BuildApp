@@ -2665,3 +2665,21 @@ whether reconciliation moved it — first-attempt records now kept — and wheth
 windows: before `21 createWallRing ring-attached-0-0 WALLS_OVERLAP`, after COMPLETE with both windows; with 4 windows
 the body lost by the plan decomposition is named (`zoneBodies`), not recovered. 8/8 corpus models byte-identical; P1 on
 SLIVERTON unchanged. APK 1307 (`bbaac49d…`, analyzer `6453937c…`). The owner's benchmark is not claimed fixed.
+
+## Image-role classification from pixels (STAGE BUILDPLAN IU-01 IMAGE UNDERSTANDING)
+
+Status: **RESEARCH_PARTIAL — not ready for integration.** Report `stage-reports/STAGE_BUILDPLAN_IU_01_IMAGE_UNDERSTANDING.md`,
+code `research/image-understanding/`, numbers `stage-reports/artifacts/iu-01/`. Production analyzer, SourcePackage,
+hashes and reconstruction unchanged; no APK. Audit: roles come only from URL slug, caption and channel
+(`archonRoleClaims` → `mergeRoleClaims` → `normalizeRoles`); no stage looks at pixels; interiors become
+`PERSPECTIVE_RENDER` and reach the exterior camera solver; on the brief's negatives the text path is unsafe in 8/11
+(an interior captioned "elewacja" reaches the facade extractors). Council A-1, A-2/A-6 and A-5 reproduced at `d94b1c1`.
+1352 ARCHON images labelled from anonymised sheets (agent, not OWNER; 15 publisher mislabels confirmed), split by
+project (TRAIN 17 / VAL 10 / TEST 7). Frozen MobileNetV3 + linear head, calibrated on project-grouped out-of-fold
+predictions, fused with metadata and a geometric check (C), plus a post-hoc novelty gate (C2): on 210 TEST images of
+7 unseen ARCHON houses 0 errors, 2 UNKNOWN, interiors separated from exteriors (production: 0/69). Out of the ARCHON
+style it fails: on 177 synthetic images every trained head errs in 44–60 % of accepted cases, often with confidence
+≥ 0.8, and 31/54 synthetic perspectives captioned "elevation" are accepted as elevations. On a blind set of 170
+Wikimedia Commons images (frozen before the first run) C2 routes no perspective or interior to the facade extractor
+but accepts only 46 % and is wrong in 33 % of acceptances (three sections reach the facade route). Recommendation: do not
+integrate; IU-02 = building mask, vanishing-point projection check, a second licensed style in the data.

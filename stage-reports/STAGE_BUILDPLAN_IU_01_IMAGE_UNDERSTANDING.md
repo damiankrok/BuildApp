@@ -18,8 +18,9 @@ Kod: `research/image-understanding/`. Wyniki liczbowe: `stage-reports/artifacts/
    model myli się w 44–60 % zaakceptowanych przypadków, często z pewnością 0,8–1,0; **31 z 54 perspektyw** z podpisem
    „elewacja” przeszłoby do ekstraktora fasad. Model nauczył się stylu wydawcy („fotorealistyczny render = perspektywa”,
    „kreska na białym = rzut”), a nie rzutowania.
-4. Kalibracja i progi z danych ARCHON nie przenoszą się na inny styl, a bramka nowości (podobieństwo do zbioru
-   treningowego) tego nie łapie. Sprawdzenie geometryczne łapie fotorealistyczne perspektywy ARCHON, ale nie płaskie.
+4. Kalibracja i progi z danych ARCHON nie przenoszą się na inny styl. Na ślepym zbiorze 170 obrazów z Wikimedia
+   Commons C2 nie wpuszcza perspektyw ani wnętrz do fasad, ale akceptuje tylko 46 % obrazów i myli się w 33 % akceptacji
+   (3 przekroje skierowane do fasad); na płaskich syntetykach bramka nowości nie łapie nic.
 5. Zalecenie: nie integrować; najpierw prawdziwy drugi wydawca/styl w danych (z licencją), detektor rzutu oparty na
    punktach zbiegu po segmentacji budynku (IU-02) i dopiero potem decyzja o fine-tuningu.
 
@@ -155,7 +156,39 @@ Jedyne podejście bezpieczne na OOD to zero-shot B0 — bo prawie zawsze mówi U
 
 ### 8.3 OOD Commons (ślepe dla C2)
 
-_Uzupełnione w §8.3a po zakończeniu pobierania._
+170 obrazów z Wikimedia Commons na wolnych licencjach (domena publiczna 90, CC0 19, CC BY/BY-SA reszta; miniatury
+500 px poza repozytorium, w repozytorium tylko SHA-256, licencja i adres strony opisu w `data/labels-commons.json`).
+Zbiór zamrożony **przed** pierwszym uruchomieniem modelu; etykiety nadałem z pikseli (agent, nie OWNER): 137
+`CONFIRMED`, 33 `DISPUTED` (np. arkusz „rzut + elewacja” na jednej kartce, rysunek historyczny na granicy klas).
+Ani progi, ani bramka nowości nie były na tym zbiorze strojone — to jedyny naprawdę ślepy test C2.
+Skład: wnętrza 33, inne 31, rzuty 31, perspektywy zewn. 31, elewacje 12, sytuacje 11, przekroje 11, detale 10.
+
+| podejście | pokrycie | ryzyko selekt. (Wilson 95 %) | perspektywa/wnętrze → elewacja (ACCEPT) |
+| --- | --- | --- | --- |
+| A | 0 % (brak metadanych wydawcy) | — | 0 |
+| B0 CLIP zero-shot | 8,8 % | 6,7 % (1,2–29,8) | 0 |
+| B MobileNetV3 | 88,8 % | **50,3 %** (42,5–58,2) | **15** |
+| B DINOv2 | 95,3 % | 63,6 % | 28 |
+| B CLIP | 87,6 % | 84,6 % | 52 |
+| C | 69,4 % | 38,1 % (29,9–47,1) | 0 |
+| C2 | 45,9 % | **33,3 %** (23,9–44,4) | 0 |
+
+C2 per klasa (zaakceptowane poprawnie / n; precyzja): rzut 24/31 (P 0,57), elewacja 5/12 (P 0,42), przekrój 0/11,
+perspektywa zewn. 12/31 (P 1,0), wnętrze 10/33 (P 1,0), sytuacja 1/11, detal 0/10, inne 0/31 (21 UNKNOWN).
+26 z 78 akceptacji jest błędnych, **14 z nich z pewnością ≥ 0,9**. Wzór: wszystko, co jest kreską na białym tle
+(detale, rysunki historyczne, „inne”), staje się rzutem; przekroje i arkusze mieszane — elewacją.
+
+Do ekstraktora fasad C2 skierowałby 12 obrazów, z czego 7 to nie elewacje: 3 przekroje i 1 rzut (`CONFIRMED`), 2 „inne”
+i 1 sytuacja (`DISPUTED`). **Perspektyw ani wnętrz w tej trasie nie ma** — geometria i bramka nowości złapały tu
+widoki z punktem zbiegu (13 × `GEOMETRY_PERSPECTIVE_CONFLICT`, 55 × `OUT_OF_DISTRIBUTION`), ale za cenę pokrycia
+46 %: 23/33 wnętrz i 10/31 perspektyw kończy jako UNKNOWN. Na samych `CONFIRMED`: 63 akceptacje, 13 błędnych
+(ryzyko 20,6 %); na `DISPUTED` 13/15 akceptacji nie zgadza się z etykietą — tych liczb nie należy czytać jako
+błędu modelu, tylko jako miejsca, gdzie klasa jest sporna.
+
+Wniosek dla werdyktu: na ślepym zbiorze innego stylu bramka nowości działa (w przeciwieństwie do 005R — tam style
+były „typowe” dla cech ImageNet), ale klasyfikator **nie jest wiarygodny**: co trzecia akceptacja błędna, a przekroje
+w trasie fasad. Kryterium z §12.6 (0 perspektyw jako elewacja przy pokryciu ≥ 70 %) nie jest spełnione — pokrycie
+46 %. `RESEARCH_PARTIAL` potwierdzony.
 
 ### 8.4 Rozmiar, czas, RAM (zmierzone na CPU x86-64 kontenera, nie na telefonie)
 
