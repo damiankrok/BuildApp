@@ -1,0 +1,6996 @@
+{
+ "postHoc": "C2 (novelty gate) was added after run 1 had shown OOD synthetic failures; TEST_OOD_SYNTH005R is therefore not blind for C2. results-run1-before-novelty-gate.json keeps run 1.",
+ "valSelection": {
+  "mobilenetv3_large_100": {
+   "C": 30,
+   "temperature": 0.5079,
+   "valNll": 0.0014,
+   "valAcc": 1.0,
+   "valMacroF1": 1.0,
+   "valEce": 0.0014,
+   "oofTrainAcc": 0.9973,
+   "oofTrainErrors": 3,
+   "temperatureAtGridEdge": false
+  },
+  "dinov2_vits14": {
+   "C": 30,
+   "temperature": 0.6463,
+   "valNll": 0.0181,
+   "valAcc": 0.9919,
+   "valMacroF1": 0.9838,
+   "valEce": 0.0078,
+   "oofTrainAcc": 0.9946,
+   "oofTrainErrors": 6,
+   "temperatureAtGridEdge": false
+  },
+  "clip_vitb32": {
+   "C": 30,
+   "temperature": 0.4929,
+   "valNll": 0.0004,
+   "valAcc": 1.0,
+   "valMacroF1": 1.0,
+   "valEce": 0.0004,
+   "oofTrainAcc": 0.9991,
+   "oofTrainErrors": 1,
+   "temperatureAtGridEdge": false
+  }
+ },
+ "selectedBackbone": "mobilenetv3_large_100",
+ "thresholds": {
+  "tau": 0.3,
+  "tauElevation": 0.3,
+  "fittedOn": "project-grouped out-of-fold TRAIN + VAL"
+ },
+ "geometry": {
+  "tOrtho": 1.3284,
+  "tPersp": 2.8014,
+  "fittedOn": "TRAIN archon images"
+ },
+ "TEST": {
+  "A_production_rules": {
+   "name": "A",
+   "images": 210,
+   "projects": 7,
+   "accepted": 166,
+   "coverage": 0.7905,
+   "unknown": 44,
+   "review": 0,
+   "unknownShare": 0.2095,
+   "selectiveRisk": 0.2651,
+   "selectiveRiskCI": [
+    0.2038,
+    0.337
+   ],
+   "selectiveRiskProjectBootstrap": [
+    0.1119,
+    0.3854
+   ],
+   "acceptedCorrectShare": 0.581,
+   "acceptedCorrectProjectBootstrap": [
+    0.4457,
+    0.775
+   ],
+   "facadeHazardAccepted": 0,
+   "facadeHazardCases": [],
+   "wrongAccepted": [
+    [
+     "0222793dbc40",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "1206bb0c4f0a",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "15788b3475e0",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "20f81fd587a7",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "2575e38ae248",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "29216c84edae",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "36362df4009d",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "3709cff43a93",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "37550c5ccb38",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "3a66aa971412",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "427aee57c310",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "47929b870440",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "496a002c9622",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "4f5045037302",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "53e7329d41fd",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "57bb0e7f0f6b",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "60faf5bdeb49",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "64bd5d2f4ec1",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "65c8788450de",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "6b9231209f84",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "80f860993692",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "85f4310375ff",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "862aaae24664",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "8685762cb03e",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "902c4325657c",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "9c25bd98c148",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "aad8e9fda871",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "ae63bfa20283",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "b7904197083b",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "ba1e22534a98",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "bf314a30e72f",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "c0735532d955",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "c52fde483c07",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "d18b290fac57",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "d5beaf32121b",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "d6f23d91e4c9",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "dc2cf69d468a",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "de1fe15582cd",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "e12262e95dab",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "e155e7be8e35",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "e4c7e8b8d125",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "eba144dd0386",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "f8c2c2295ae9",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "ff3d7a2a6d70",
+     "INTERIOR_PERSPECTIVE",
+     "EXTERIOR_PERSPECTIVE"
+    ]
+   ],
+   "perClass": {
+    "FLOOR_PLAN": {
+     "n": 26,
+     "acceptedCorrect": 26,
+     "acceptedAsThis": 26,
+     "precision": 1.0,
+     "precisionCI": [
+      0.8713,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.8713,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "ORTHOGRAPHIC_ELEVATION": {
+     "n": 56,
+     "acceptedCorrect": 56,
+     "acceptedAsThis": 56,
+     "precision": 1.0,
+     "precisionCI": [
+      0.9358,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.9358,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "TECHNICAL_SECTION": {
+     "n": 12,
+     "acceptedCorrect": 12,
+     "acceptedAsThis": 12,
+     "precision": 1.0,
+     "precisionCI": [
+      0.7575,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.7575,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "EXTERIOR_PERSPECTIVE": {
+     "n": 40,
+     "acceptedCorrect": 21,
+     "acceptedAsThis": 65,
+     "precision": 0.3231,
+     "precisionCI": [
+      0.222,
+      0.4439
+     ],
+     "recall": 0.525,
+     "recallCI": [
+      0.375,
+      0.6706
+     ],
+     "unknown": 19,
+     "review": 0
+    },
+    "INTERIOR_PERSPECTIVE": {
+     "n": 69,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.0527
+     ],
+     "unknown": 25,
+     "review": 0
+    },
+    "SITE_PLAN": {
+     "n": 7,
+     "acceptedCorrect": 7,
+     "acceptedAsThis": 7,
+     "precision": 1.0,
+     "precisionCI": [
+      0.6457,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.6457,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    }
+   },
+   "confusion": {
+    "FLOOR_PLAN": {
+     "FLOOR_PLAN": 26
+    },
+    "ORTHOGRAPHIC_ELEVATION": {
+     "ORTHOGRAPHIC_ELEVATION": 56
+    },
+    "TECHNICAL_SECTION": {
+     "TECHNICAL_SECTION": 12
+    },
+    "EXTERIOR_PERSPECTIVE": {
+     "EXTERIOR_PERSPECTIVE": 21,
+     "UNKNOWN": 19
+    },
+    "INTERIOR_PERSPECTIVE": {
+     "EXTERIOR_PERSPECTIVE": 44,
+     "UNKNOWN": 25
+    },
+    "SITE_PLAN": {
+     "SITE_PLAN": 7
+    }
+   },
+   "confusionColumns": [
+    "FLOOR_PLAN",
+    "ORTHOGRAPHIC_ELEVATION",
+    "TECHNICAL_SECTION",
+    "EXTERIOR_PERSPECTIVE",
+    "INTERIOR_PERSPECTIVE",
+    "SITE_PLAN",
+    "ARCHITECTURAL_DETAIL",
+    "OTHER",
+    "UNKNOWN",
+    "REVIEW"
+   ]
+  },
+  "B0_clip_zero_shot": {
+   "name": "B0",
+   "images": 210,
+   "projects": 7,
+   "accepted": 35,
+   "coverage": 0.1667,
+   "unknown": 175,
+   "review": 0,
+   "unknownShare": 0.8333,
+   "selectiveRisk": 0.2,
+   "selectiveRiskCI": [
+    0.1004,
+    0.3589
+   ],
+   "selectiveRiskProjectBootstrap": [
+    0.0286,
+    0.4054
+   ],
+   "acceptedCorrectShare": 0.1333,
+   "acceptedCorrectProjectBootstrap": [
+    0.1088,
+    0.1534
+   ],
+   "facadeHazardAccepted": 0,
+   "facadeHazardCases": [],
+   "wrongAccepted": [
+    [
+     "1caef51af5e7",
+     "ORTHOGRAPHIC_ELEVATION",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "44899e720184",
+     "ORTHOGRAPHIC_ELEVATION",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "5871a94e9a30",
+     "ORTHOGRAPHIC_ELEVATION",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "69178ce3ecfb",
+     "ORTHOGRAPHIC_ELEVATION",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "6d0e84aa9827",
+     "ORTHOGRAPHIC_ELEVATION",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "708976795a80",
+     "ORTHOGRAPHIC_ELEVATION",
+     "EXTERIOR_PERSPECTIVE"
+    ],
+    [
+     "97806400429a",
+     "ORTHOGRAPHIC_ELEVATION",
+     "EXTERIOR_PERSPECTIVE"
+    ]
+   ],
+   "perClass": {
+    "FLOOR_PLAN": {
+     "n": 26,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.1287
+     ],
+     "unknown": 26,
+     "review": 0
+    },
+    "ORTHOGRAPHIC_ELEVATION": {
+     "n": 56,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.0642
+     ],
+     "unknown": 49,
+     "review": 0
+    },
+    "TECHNICAL_SECTION": {
+     "n": 12,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.2425
+     ],
+     "unknown": 12,
+     "review": 0
+    },
+    "EXTERIOR_PERSPECTIVE": {
+     "n": 40,
+     "acceptedCorrect": 17,
+     "acceptedAsThis": 24,
+     "precision": 0.7083,
+     "precisionCI": [
+      0.5083,
+      0.8509
+     ],
+     "recall": 0.425,
+     "recallCI": [
+      0.2851,
+      0.5781
+     ],
+     "unknown": 23,
+     "review": 0
+    },
+    "INTERIOR_PERSPECTIVE": {
+     "n": 69,
+     "acceptedCorrect": 5,
+     "acceptedAsThis": 5,
+     "precision": 1.0,
+     "precisionCI": [
+      0.5655,
+      1
+     ],
+     "recall": 0.0725,
+     "recallCI": [
+      0.0313,
+      0.1587
+     ],
+     "unknown": 64,
+     "review": 0
+    },
+    "SITE_PLAN": {
+     "n": 7,
+     "acceptedCorrect": 6,
+     "acceptedAsThis": 6,
+     "precision": 1.0,
+     "precisionCI": [
+      0.6097,
+      1.0
+     ],
+     "recall": 0.8571,
+     "recallCI": [
+      0.4869,
+      0.9743
+     ],
+     "unknown": 1,
+     "review": 0
+    }
+   },
+   "confusion": {
+    "FLOOR_PLAN": {
+     "UNKNOWN": 26
+    },
+    "ORTHOGRAPHIC_ELEVATION": {
+     "UNKNOWN": 49,
+     "EXTERIOR_PERSPECTIVE": 7
+    },
+    "TECHNICAL_SECTION": {
+     "UNKNOWN": 12
+    },
+    "EXTERIOR_PERSPECTIVE": {
+     "UNKNOWN": 23,
+     "EXTERIOR_PERSPECTIVE": 17
+    },
+    "INTERIOR_PERSPECTIVE": {
+     "UNKNOWN": 64,
+     "INTERIOR_PERSPECTIVE": 5
+    },
+    "SITE_PLAN": {
+     "SITE_PLAN": 6,
+     "UNKNOWN": 1
+    }
+   },
+   "confusionColumns": [
+    "FLOOR_PLAN",
+    "ORTHOGRAPHIC_ELEVATION",
+    "TECHNICAL_SECTION",
+    "EXTERIOR_PERSPECTIVE",
+    "INTERIOR_PERSPECTIVE",
+    "SITE_PLAN",
+    "ARCHITECTURAL_DETAIL",
+    "OTHER",
+    "UNKNOWN",
+    "REVIEW"
+   ]
+  },
+  "B_mobilenetv3_large_100": {
+   "name": "B_mobilenetv3_large_100",
+   "images": 210,
+   "projects": 7,
+   "accepted": 210,
+   "coverage": 1.0,
+   "unknown": 0,
+   "review": 0,
+   "unknownShare": 0.0,
+   "selectiveRisk": 0.0,
+   "selectiveRiskCI": [
+    0,
+    0.018
+   ],
+   "selectiveRiskProjectBootstrap": [
+    0.0,
+    0.0
+   ],
+   "acceptedCorrectShare": 1.0,
+   "acceptedCorrectProjectBootstrap": [
+    1.0,
+    1.0
+   ],
+   "facadeHazardAccepted": 0,
+   "facadeHazardCases": [],
+   "wrongAccepted": [],
+   "perClass": {
+    "FLOOR_PLAN": {
+     "n": 26,
+     "acceptedCorrect": 26,
+     "acceptedAsThis": 26,
+     "precision": 1.0,
+     "precisionCI": [
+      0.8713,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.8713,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "ORTHOGRAPHIC_ELEVATION": {
+     "n": 56,
+     "acceptedCorrect": 56,
+     "acceptedAsThis": 56,
+     "precision": 1.0,
+     "precisionCI": [
+      0.9358,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.9358,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "TECHNICAL_SECTION": {
+     "n": 12,
+     "acceptedCorrect": 12,
+     "acceptedAsThis": 12,
+     "precision": 1.0,
+     "precisionCI": [
+      0.7575,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.7575,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "EXTERIOR_PERSPECTIVE": {
+     "n": 40,
+     "acceptedCorrect": 40,
+     "acceptedAsThis": 40,
+     "precision": 1.0,
+     "precisionCI": [
+      0.9124,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.9124,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "INTERIOR_PERSPECTIVE": {
+     "n": 69,
+     "acceptedCorrect": 69,
+     "acceptedAsThis": 69,
+     "precision": 1.0,
+     "precisionCI": [
+      0.9473,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.9473,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "SITE_PLAN": {
+     "n": 7,
+     "acceptedCorrect": 7,
+     "acceptedAsThis": 7,
+     "precision": 1.0,
+     "precisionCI": [
+      0.6457,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.6457,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    }
+   },
+   "confusion": {
+    "FLOOR_PLAN": {
+     "FLOOR_PLAN": 26
+    },
+    "ORTHOGRAPHIC_ELEVATION": {
+     "ORTHOGRAPHIC_ELEVATION": 56
+    },
+    "TECHNICAL_SECTION": {
+     "TECHNICAL_SECTION": 12
+    },
+    "EXTERIOR_PERSPECTIVE": {
+     "EXTERIOR_PERSPECTIVE": 40
+    },
+    "INTERIOR_PERSPECTIVE": {
+     "INTERIOR_PERSPECTIVE": 69
+    },
+    "SITE_PLAN": {
+     "SITE_PLAN": 7
+    }
+   },
+   "confusionColumns": [
+    "FLOOR_PLAN",
+    "ORTHOGRAPHIC_ELEVATION",
+    "TECHNICAL_SECTION",
+    "EXTERIOR_PERSPECTIVE",
+    "INTERIOR_PERSPECTIVE",
+    "SITE_PLAN",
+    "ARCHITECTURAL_DETAIL",
+    "OTHER",
+    "UNKNOWN",
+    "REVIEW"
+   ]
+  },
+  "B_dinov2_vits14": {
+   "name": "B_dinov2_vits14",
+   "images": 210,
+   "projects": 7,
+   "accepted": 210,
+   "coverage": 1.0,
+   "unknown": 0,
+   "review": 0,
+   "unknownShare": 0.0,
+   "selectiveRisk": 0.0048,
+   "selectiveRiskCI": [
+    0.0008,
+    0.0265
+   ],
+   "selectiveRiskProjectBootstrap": [
+    0.0,
+    0.0168
+   ],
+   "acceptedCorrectShare": 0.9952,
+   "acceptedCorrectProjectBootstrap": [
+    0.9832,
+    1.0
+   ],
+   "facadeHazardAccepted": 0,
+   "facadeHazardCases": [],
+   "wrongAccepted": [
+    [
+     "75791a386c56",
+     "ORTHOGRAPHIC_ELEVATION",
+     "EXTERIOR_PERSPECTIVE"
+    ]
+   ],
+   "perClass": {
+    "FLOOR_PLAN": {
+     "n": 26,
+     "acceptedCorrect": 26,
+     "acceptedAsThis": 26,
+     "precision": 1.0,
+     "precisionCI": [
+      0.8713,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.8713,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "ORTHOGRAPHIC_ELEVATION": {
+     "n": 56,
+     "acceptedCorrect": 55,
+     "acceptedAsThis": 55,
+     "precision": 1.0,
+     "precisionCI": [
+      0.9347,
+      1.0
+     ],
+     "recall": 0.9821,
+     "recallCI": [
+      0.9055,
+      0.9968
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "TECHNICAL_SECTION": {
+     "n": 12,
+     "acceptedCorrect": 12,
+     "acceptedAsThis": 12,
+     "precision": 1.0,
+     "precisionCI": [
+      0.7575,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.7575,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "EXTERIOR_PERSPECTIVE": {
+     "n": 40,
+     "acceptedCorrect": 40,
+     "acceptedAsThis": 41,
+     "precision": 0.9756,
+     "precisionCI": [
+      0.874,
+      0.9957
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.9124,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "INTERIOR_PERSPECTIVE": {
+     "n": 69,
+     "acceptedCorrect": 69,
+     "acceptedAsThis": 69,
+     "precision": 1.0,
+     "precisionCI": [
+      0.9473,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.9473,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "SITE_PLAN": {
+     "n": 7,
+     "acceptedCorrect": 7,
+     "acceptedAsThis": 7,
+     "precision": 1.0,
+     "precisionCI": [
+      0.6457,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.6457,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    }
+   },
+   "confusion": {
+    "FLOOR_PLAN": {
+     "FLOOR_PLAN": 26
+    },
+    "ORTHOGRAPHIC_ELEVATION": {
+     "ORTHOGRAPHIC_ELEVATION": 55,
+     "EXTERIOR_PERSPECTIVE": 1
+    },
+    "TECHNICAL_SECTION": {
+     "TECHNICAL_SECTION": 12
+    },
+    "EXTERIOR_PERSPECTIVE": {
+     "EXTERIOR_PERSPECTIVE": 40
+    },
+    "INTERIOR_PERSPECTIVE": {
+     "INTERIOR_PERSPECTIVE": 69
+    },
+    "SITE_PLAN": {
+     "SITE_PLAN": 7
+    }
+   },
+   "confusionColumns": [
+    "FLOOR_PLAN",
+    "ORTHOGRAPHIC_ELEVATION",
+    "TECHNICAL_SECTION",
+    "EXTERIOR_PERSPECTIVE",
+    "INTERIOR_PERSPECTIVE",
+    "SITE_PLAN",
+    "ARCHITECTURAL_DETAIL",
+    "OTHER",
+    "UNKNOWN",
+    "REVIEW"
+   ]
+  },
+  "B_clip_vitb32": {
+   "name": "B_clip_vitb32",
+   "images": 210,
+   "projects": 7,
+   "accepted": 210,
+   "coverage": 1.0,
+   "unknown": 0,
+   "review": 0,
+   "unknownShare": 0.0,
+   "selectiveRisk": 0.0048,
+   "selectiveRiskCI": [
+    0.0008,
+    0.0265
+   ],
+   "selectiveRiskProjectBootstrap": [
+    0.0,
+    0.0168
+   ],
+   "acceptedCorrectShare": 0.9952,
+   "acceptedCorrectProjectBootstrap": [
+    0.9832,
+    1.0
+   ],
+   "facadeHazardAccepted": 0,
+   "facadeHazardCases": [],
+   "wrongAccepted": [
+    [
+     "75791a386c56",
+     "ORTHOGRAPHIC_ELEVATION",
+     "EXTERIOR_PERSPECTIVE"
+    ]
+   ],
+   "perClass": {
+    "FLOOR_PLAN": {
+     "n": 26,
+     "acceptedCorrect": 26,
+     "acceptedAsThis": 26,
+     "precision": 1.0,
+     "precisionCI": [
+      0.8713,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.8713,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "ORTHOGRAPHIC_ELEVATION": {
+     "n": 56,
+     "acceptedCorrect": 55,
+     "acceptedAsThis": 55,
+     "precision": 1.0,
+     "precisionCI": [
+      0.9347,
+      1.0
+     ],
+     "recall": 0.9821,
+     "recallCI": [
+      0.9055,
+      0.9968
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "TECHNICAL_SECTION": {
+     "n": 12,
+     "acceptedCorrect": 12,
+     "acceptedAsThis": 12,
+     "precision": 1.0,
+     "precisionCI": [
+      0.7575,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.7575,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "EXTERIOR_PERSPECTIVE": {
+     "n": 40,
+     "acceptedCorrect": 40,
+     "acceptedAsThis": 41,
+     "precision": 0.9756,
+     "precisionCI": [
+      0.874,
+      0.9957
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.9124,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "INTERIOR_PERSPECTIVE": {
+     "n": 69,
+     "acceptedCorrect": 69,
+     "acceptedAsThis": 69,
+     "precision": 1.0,
+     "precisionCI": [
+      0.9473,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.9473,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "SITE_PLAN": {
+     "n": 7,
+     "acceptedCorrect": 7,
+     "acceptedAsThis": 7,
+     "precision": 1.0,
+     "precisionCI": [
+      0.6457,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.6457,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    }
+   },
+   "confusion": {
+    "FLOOR_PLAN": {
+     "FLOOR_PLAN": 26
+    },
+    "ORTHOGRAPHIC_ELEVATION": {
+     "ORTHOGRAPHIC_ELEVATION": 55,
+     "EXTERIOR_PERSPECTIVE": 1
+    },
+    "TECHNICAL_SECTION": {
+     "TECHNICAL_SECTION": 12
+    },
+    "EXTERIOR_PERSPECTIVE": {
+     "EXTERIOR_PERSPECTIVE": 40
+    },
+    "INTERIOR_PERSPECTIVE": {
+     "INTERIOR_PERSPECTIVE": 69
+    },
+    "SITE_PLAN": {
+     "SITE_PLAN": 7
+    }
+   },
+   "confusionColumns": [
+    "FLOOR_PLAN",
+    "ORTHOGRAPHIC_ELEVATION",
+    "TECHNICAL_SECTION",
+    "EXTERIOR_PERSPECTIVE",
+    "INTERIOR_PERSPECTIVE",
+    "SITE_PLAN",
+    "ARCHITECTURAL_DETAIL",
+    "OTHER",
+    "UNKNOWN",
+    "REVIEW"
+   ]
+  },
+  "C_fusion": {
+   "name": "C",
+   "images": 210,
+   "projects": 7,
+   "accepted": 210,
+   "coverage": 1.0,
+   "unknown": 0,
+   "review": 0,
+   "unknownShare": 0.0,
+   "selectiveRisk": 0.0,
+   "selectiveRiskCI": [
+    0,
+    0.018
+   ],
+   "selectiveRiskProjectBootstrap": [
+    0.0,
+    0.0
+   ],
+   "acceptedCorrectShare": 1.0,
+   "acceptedCorrectProjectBootstrap": [
+    1.0,
+    1.0
+   ],
+   "facadeHazardAccepted": 0,
+   "facadeHazardCases": [],
+   "wrongAccepted": [],
+   "perClass": {
+    "FLOOR_PLAN": {
+     "n": 26,
+     "acceptedCorrect": 26,
+     "acceptedAsThis": 26,
+     "precision": 1.0,
+     "precisionCI": [
+      0.8713,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.8713,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "ORTHOGRAPHIC_ELEVATION": {
+     "n": 56,
+     "acceptedCorrect": 56,
+     "acceptedAsThis": 56,
+     "precision": 1.0,
+     "precisionCI": [
+      0.9358,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.9358,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "TECHNICAL_SECTION": {
+     "n": 12,
+     "acceptedCorrect": 12,
+     "acceptedAsThis": 12,
+     "precision": 1.0,
+     "precisionCI": [
+      0.7575,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.7575,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "EXTERIOR_PERSPECTIVE": {
+     "n": 40,
+     "acceptedCorrect": 40,
+     "acceptedAsThis": 40,
+     "precision": 1.0,
+     "precisionCI": [
+      0.9124,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.9124,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "INTERIOR_PERSPECTIVE": {
+     "n": 69,
+     "acceptedCorrect": 69,
+     "acceptedAsThis": 69,
+     "precision": 1.0,
+     "precisionCI": [
+      0.9473,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.9473,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "SITE_PLAN": {
+     "n": 7,
+     "acceptedCorrect": 7,
+     "acceptedAsThis": 7,
+     "precision": 1.0,
+     "precisionCI": [
+      0.6457,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.6457,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    }
+   },
+   "confusion": {
+    "FLOOR_PLAN": {
+     "FLOOR_PLAN": 26
+    },
+    "ORTHOGRAPHIC_ELEVATION": {
+     "ORTHOGRAPHIC_ELEVATION": 56
+    },
+    "TECHNICAL_SECTION": {
+     "TECHNICAL_SECTION": 12
+    },
+    "EXTERIOR_PERSPECTIVE": {
+     "EXTERIOR_PERSPECTIVE": 40
+    },
+    "INTERIOR_PERSPECTIVE": {
+     "INTERIOR_PERSPECTIVE": 69
+    },
+    "SITE_PLAN": {
+     "SITE_PLAN": 7
+    }
+   },
+   "confusionColumns": [
+    "FLOOR_PLAN",
+    "ORTHOGRAPHIC_ELEVATION",
+    "TECHNICAL_SECTION",
+    "EXTERIOR_PERSPECTIVE",
+    "INTERIOR_PERSPECTIVE",
+    "SITE_PLAN",
+    "ARCHITECTURAL_DETAIL",
+    "OTHER",
+    "UNKNOWN",
+    "REVIEW"
+   ]
+  },
+  "C2_fusion_novelty_gate": {
+   "name": "C2",
+   "images": 210,
+   "projects": 7,
+   "accepted": 208,
+   "coverage": 0.9905,
+   "unknown": 2,
+   "review": 0,
+   "unknownShare": 0.0095,
+   "selectiveRisk": 0.0,
+   "selectiveRiskCI": [
+    0,
+    0.0181
+   ],
+   "selectiveRiskProjectBootstrap": [
+    0.0,
+    0.0
+   ],
+   "acceptedCorrectShare": 0.9905,
+   "acceptedCorrectProjectBootstrap": [
+    0.971,
+    1.0
+   ],
+   "facadeHazardAccepted": 0,
+   "facadeHazardCases": [],
+   "wrongAccepted": [],
+   "perClass": {
+    "FLOOR_PLAN": {
+     "n": 26,
+     "acceptedCorrect": 26,
+     "acceptedAsThis": 26,
+     "precision": 1.0,
+     "precisionCI": [
+      0.8713,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.8713,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "ORTHOGRAPHIC_ELEVATION": {
+     "n": 56,
+     "acceptedCorrect": 56,
+     "acceptedAsThis": 56,
+     "precision": 1.0,
+     "precisionCI": [
+      0.9358,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.9358,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "TECHNICAL_SECTION": {
+     "n": 12,
+     "acceptedCorrect": 12,
+     "acceptedAsThis": 12,
+     "precision": 1.0,
+     "precisionCI": [
+      0.7575,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.7575,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "EXTERIOR_PERSPECTIVE": {
+     "n": 40,
+     "acceptedCorrect": 40,
+     "acceptedAsThis": 40,
+     "precision": 1.0,
+     "precisionCI": [
+      0.9124,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.9124,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "INTERIOR_PERSPECTIVE": {
+     "n": 69,
+     "acceptedCorrect": 67,
+     "acceptedAsThis": 67,
+     "precision": 1.0,
+     "precisionCI": [
+      0.9458,
+      1.0
+     ],
+     "recall": 0.971,
+     "recallCI": [
+      0.9003,
+      0.992
+     ],
+     "unknown": 2,
+     "review": 0
+    },
+    "SITE_PLAN": {
+     "n": 7,
+     "acceptedCorrect": 7,
+     "acceptedAsThis": 7,
+     "precision": 1.0,
+     "precisionCI": [
+      0.6457,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.6457,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    }
+   },
+   "confusion": {
+    "FLOOR_PLAN": {
+     "FLOOR_PLAN": 26
+    },
+    "ORTHOGRAPHIC_ELEVATION": {
+     "ORTHOGRAPHIC_ELEVATION": 56
+    },
+    "TECHNICAL_SECTION": {
+     "TECHNICAL_SECTION": 12
+    },
+    "EXTERIOR_PERSPECTIVE": {
+     "EXTERIOR_PERSPECTIVE": 40
+    },
+    "INTERIOR_PERSPECTIVE": {
+     "INTERIOR_PERSPECTIVE": 67,
+     "UNKNOWN": 2
+    },
+    "SITE_PLAN": {
+     "SITE_PLAN": 7
+    }
+   },
+   "confusionColumns": [
+    "FLOOR_PLAN",
+    "ORTHOGRAPHIC_ELEVATION",
+    "TECHNICAL_SECTION",
+    "EXTERIOR_PERSPECTIVE",
+    "INTERIOR_PERSPECTIVE",
+    "SITE_PLAN",
+    "ARCHITECTURAL_DETAIL",
+    "OTHER",
+    "UNKNOWN",
+    "REVIEW"
+   ]
+  }
+ },
+ "TEST_SYNTHETIC": {
+  "A_production_rules": {
+   "name": "A",
+   "images": 58,
+   "projects": 7,
+   "accepted": 0,
+   "coverage": 0.0,
+   "unknown": 58,
+   "review": 0,
+   "unknownShare": 1.0,
+   "selectiveRisk": 0.0,
+   "selectiveRiskCI": [
+    null,
+    null
+   ],
+   "selectiveRiskProjectBootstrap": [
+    null,
+    null
+   ],
+   "acceptedCorrectShare": 0.0,
+   "acceptedCorrectProjectBootstrap": [
+    0.0,
+    0.0
+   ],
+   "facadeHazardAccepted": 0,
+   "facadeHazardCases": [],
+   "wrongAccepted": [],
+   "perClass": {
+    "ORTHOGRAPHIC_ELEVATION": {
+     "n": 34,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.1015
+     ],
+     "unknown": 34,
+     "review": 0
+    },
+    "OTHER": {
+     "n": 24,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.138
+     ],
+     "unknown": 24,
+     "review": 0
+    }
+   },
+   "confusion": {
+    "ORTHOGRAPHIC_ELEVATION": {
+     "UNKNOWN": 34
+    },
+    "OTHER": {
+     "UNKNOWN": 24
+    }
+   },
+   "confusionColumns": [
+    "FLOOR_PLAN",
+    "ORTHOGRAPHIC_ELEVATION",
+    "TECHNICAL_SECTION",
+    "EXTERIOR_PERSPECTIVE",
+    "INTERIOR_PERSPECTIVE",
+    "SITE_PLAN",
+    "ARCHITECTURAL_DETAIL",
+    "OTHER",
+    "UNKNOWN",
+    "REVIEW"
+   ]
+  },
+  "B0_clip_zero_shot": {
+   "name": "B0",
+   "images": 58,
+   "projects": 7,
+   "accepted": 0,
+   "coverage": 0.0,
+   "unknown": 58,
+   "review": 0,
+   "unknownShare": 1.0,
+   "selectiveRisk": 0.0,
+   "selectiveRiskCI": [
+    null,
+    null
+   ],
+   "selectiveRiskProjectBootstrap": [
+    null,
+    null
+   ],
+   "acceptedCorrectShare": 0.0,
+   "acceptedCorrectProjectBootstrap": [
+    0.0,
+    0.0
+   ],
+   "facadeHazardAccepted": 0,
+   "facadeHazardCases": [],
+   "wrongAccepted": [],
+   "perClass": {
+    "ORTHOGRAPHIC_ELEVATION": {
+     "n": 34,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.1015
+     ],
+     "unknown": 34,
+     "review": 0
+    },
+    "OTHER": {
+     "n": 24,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.138
+     ],
+     "unknown": 24,
+     "review": 0
+    }
+   },
+   "confusion": {
+    "ORTHOGRAPHIC_ELEVATION": {
+     "UNKNOWN": 34
+    },
+    "OTHER": {
+     "UNKNOWN": 24
+    }
+   },
+   "confusionColumns": [
+    "FLOOR_PLAN",
+    "ORTHOGRAPHIC_ELEVATION",
+    "TECHNICAL_SECTION",
+    "EXTERIOR_PERSPECTIVE",
+    "INTERIOR_PERSPECTIVE",
+    "SITE_PLAN",
+    "ARCHITECTURAL_DETAIL",
+    "OTHER",
+    "UNKNOWN",
+    "REVIEW"
+   ]
+  },
+  "B_mobilenetv3_large_100": {
+   "name": "B_mobilenetv3_large_100",
+   "images": 58,
+   "projects": 7,
+   "accepted": 34,
+   "coverage": 0.5862,
+   "unknown": 24,
+   "review": 0,
+   "unknownShare": 0.4138,
+   "selectiveRisk": 0.0,
+   "selectiveRiskCI": [
+    0,
+    0.1015
+   ],
+   "selectiveRiskProjectBootstrap": [
+    0.0,
+    0.0
+   ],
+   "acceptedCorrectShare": 0.5862,
+   "acceptedCorrectProjectBootstrap": [
+    0.4923,
+    0.6667
+   ],
+   "facadeHazardAccepted": 0,
+   "facadeHazardCases": [],
+   "wrongAccepted": [],
+   "perClass": {
+    "ORTHOGRAPHIC_ELEVATION": {
+     "n": 34,
+     "acceptedCorrect": 34,
+     "acceptedAsThis": 34,
+     "precision": 1.0,
+     "precisionCI": [
+      0.8985,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.8985,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "OTHER": {
+     "n": 24,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.138
+     ],
+     "unknown": 24,
+     "review": 0
+    }
+   },
+   "confusion": {
+    "ORTHOGRAPHIC_ELEVATION": {
+     "ORTHOGRAPHIC_ELEVATION": 34
+    },
+    "OTHER": {
+     "UNKNOWN": 24
+    }
+   },
+   "confusionColumns": [
+    "FLOOR_PLAN",
+    "ORTHOGRAPHIC_ELEVATION",
+    "TECHNICAL_SECTION",
+    "EXTERIOR_PERSPECTIVE",
+    "INTERIOR_PERSPECTIVE",
+    "SITE_PLAN",
+    "ARCHITECTURAL_DETAIL",
+    "OTHER",
+    "UNKNOWN",
+    "REVIEW"
+   ]
+  },
+  "B_dinov2_vits14": {
+   "name": "B_dinov2_vits14",
+   "images": 58,
+   "projects": 7,
+   "accepted": 34,
+   "coverage": 0.5862,
+   "unknown": 24,
+   "review": 0,
+   "unknownShare": 0.4138,
+   "selectiveRisk": 0.0,
+   "selectiveRiskCI": [
+    0,
+    0.1015
+   ],
+   "selectiveRiskProjectBootstrap": [
+    0.0,
+    0.0
+   ],
+   "acceptedCorrectShare": 0.5862,
+   "acceptedCorrectProjectBootstrap": [
+    0.4923,
+    0.6667
+   ],
+   "facadeHazardAccepted": 0,
+   "facadeHazardCases": [],
+   "wrongAccepted": [],
+   "perClass": {
+    "ORTHOGRAPHIC_ELEVATION": {
+     "n": 34,
+     "acceptedCorrect": 34,
+     "acceptedAsThis": 34,
+     "precision": 1.0,
+     "precisionCI": [
+      0.8985,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.8985,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "OTHER": {
+     "n": 24,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.138
+     ],
+     "unknown": 24,
+     "review": 0
+    }
+   },
+   "confusion": {
+    "ORTHOGRAPHIC_ELEVATION": {
+     "ORTHOGRAPHIC_ELEVATION": 34
+    },
+    "OTHER": {
+     "UNKNOWN": 24
+    }
+   },
+   "confusionColumns": [
+    "FLOOR_PLAN",
+    "ORTHOGRAPHIC_ELEVATION",
+    "TECHNICAL_SECTION",
+    "EXTERIOR_PERSPECTIVE",
+    "INTERIOR_PERSPECTIVE",
+    "SITE_PLAN",
+    "ARCHITECTURAL_DETAIL",
+    "OTHER",
+    "UNKNOWN",
+    "REVIEW"
+   ]
+  },
+  "B_clip_vitb32": {
+   "name": "B_clip_vitb32",
+   "images": 58,
+   "projects": 7,
+   "accepted": 34,
+   "coverage": 0.5862,
+   "unknown": 24,
+   "review": 0,
+   "unknownShare": 0.4138,
+   "selectiveRisk": 0.0,
+   "selectiveRiskCI": [
+    0,
+    0.1015
+   ],
+   "selectiveRiskProjectBootstrap": [
+    0.0,
+    0.0
+   ],
+   "acceptedCorrectShare": 0.5862,
+   "acceptedCorrectProjectBootstrap": [
+    0.4923,
+    0.6667
+   ],
+   "facadeHazardAccepted": 0,
+   "facadeHazardCases": [],
+   "wrongAccepted": [],
+   "perClass": {
+    "ORTHOGRAPHIC_ELEVATION": {
+     "n": 34,
+     "acceptedCorrect": 34,
+     "acceptedAsThis": 34,
+     "precision": 1.0,
+     "precisionCI": [
+      0.8985,
+      1
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.8985,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "OTHER": {
+     "n": 24,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.138
+     ],
+     "unknown": 24,
+     "review": 0
+    }
+   },
+   "confusion": {
+    "ORTHOGRAPHIC_ELEVATION": {
+     "ORTHOGRAPHIC_ELEVATION": 34
+    },
+    "OTHER": {
+     "UNKNOWN": 24
+    }
+   },
+   "confusionColumns": [
+    "FLOOR_PLAN",
+    "ORTHOGRAPHIC_ELEVATION",
+    "TECHNICAL_SECTION",
+    "EXTERIOR_PERSPECTIVE",
+    "INTERIOR_PERSPECTIVE",
+    "SITE_PLAN",
+    "ARCHITECTURAL_DETAIL",
+    "OTHER",
+    "UNKNOWN",
+    "REVIEW"
+   ]
+  },
+  "C_fusion": {
+   "name": "C",
+   "images": 58,
+   "projects": 7,
+   "accepted": 21,
+   "coverage": 0.3621,
+   "unknown": 24,
+   "review": 13,
+   "unknownShare": 0.4138,
+   "selectiveRisk": 0.0,
+   "selectiveRiskCI": [
+    0,
+    0.1546
+   ],
+   "selectiveRiskProjectBootstrap": [
+    0.0,
+    0.0
+   ],
+   "acceptedCorrectShare": 0.3621,
+   "acceptedCorrectProjectBootstrap": [
+    0.2807,
+    0.4262
+   ],
+   "facadeHazardAccepted": 0,
+   "facadeHazardCases": [],
+   "wrongAccepted": [],
+   "perClass": {
+    "ORTHOGRAPHIC_ELEVATION": {
+     "n": 34,
+     "acceptedCorrect": 21,
+     "acceptedAsThis": 21,
+     "precision": 1.0,
+     "precisionCI": [
+      0.8454,
+      1.0
+     ],
+     "recall": 0.6176,
+     "recallCI": [
+      0.4504,
+      0.761
+     ],
+     "unknown": 0,
+     "review": 13
+    },
+    "OTHER": {
+     "n": 24,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.138
+     ],
+     "unknown": 24,
+     "review": 0
+    }
+   },
+   "confusion": {
+    "ORTHOGRAPHIC_ELEVATION": {
+     "ORTHOGRAPHIC_ELEVATION": 21,
+     "REVIEW": 13
+    },
+    "OTHER": {
+     "UNKNOWN": 24
+    }
+   },
+   "confusionColumns": [
+    "FLOOR_PLAN",
+    "ORTHOGRAPHIC_ELEVATION",
+    "TECHNICAL_SECTION",
+    "EXTERIOR_PERSPECTIVE",
+    "INTERIOR_PERSPECTIVE",
+    "SITE_PLAN",
+    "ARCHITECTURAL_DETAIL",
+    "OTHER",
+    "UNKNOWN",
+    "REVIEW"
+   ]
+  },
+  "C2_fusion_novelty_gate": {
+   "name": "C2",
+   "images": 58,
+   "projects": 7,
+   "accepted": 21,
+   "coverage": 0.3621,
+   "unknown": 24,
+   "review": 13,
+   "unknownShare": 0.4138,
+   "selectiveRisk": 0.0,
+   "selectiveRiskCI": [
+    0,
+    0.1546
+   ],
+   "selectiveRiskProjectBootstrap": [
+    0.0,
+    0.0
+   ],
+   "acceptedCorrectShare": 0.3621,
+   "acceptedCorrectProjectBootstrap": [
+    0.2807,
+    0.4262
+   ],
+   "facadeHazardAccepted": 0,
+   "facadeHazardCases": [],
+   "wrongAccepted": [],
+   "perClass": {
+    "ORTHOGRAPHIC_ELEVATION": {
+     "n": 34,
+     "acceptedCorrect": 21,
+     "acceptedAsThis": 21,
+     "precision": 1.0,
+     "precisionCI": [
+      0.8454,
+      1.0
+     ],
+     "recall": 0.6176,
+     "recallCI": [
+      0.4504,
+      0.761
+     ],
+     "unknown": 0,
+     "review": 13
+    },
+    "OTHER": {
+     "n": 24,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.138
+     ],
+     "unknown": 24,
+     "review": 0
+    }
+   },
+   "confusion": {
+    "ORTHOGRAPHIC_ELEVATION": {
+     "ORTHOGRAPHIC_ELEVATION": 21,
+     "REVIEW": 13
+    },
+    "OTHER": {
+     "UNKNOWN": 24
+    }
+   },
+   "confusionColumns": [
+    "FLOOR_PLAN",
+    "ORTHOGRAPHIC_ELEVATION",
+    "TECHNICAL_SECTION",
+    "EXTERIOR_PERSPECTIVE",
+    "INTERIOR_PERSPECTIVE",
+    "SITE_PLAN",
+    "ARCHITECTURAL_DETAIL",
+    "OTHER",
+    "UNKNOWN",
+    "REVIEW"
+   ]
+  }
+ },
+ "TEST_OOD_SYNTH005R": {
+  "A_production_rules": {
+   "name": "A",
+   "images": 177,
+   "projects": 12,
+   "accepted": 0,
+   "coverage": 0.0,
+   "unknown": 177,
+   "review": 0,
+   "unknownShare": 1.0,
+   "selectiveRisk": 0.0,
+   "selectiveRiskCI": [
+    null,
+    null
+   ],
+   "selectiveRiskProjectBootstrap": [
+    null,
+    null
+   ],
+   "acceptedCorrectShare": 0.0,
+   "acceptedCorrectProjectBootstrap": [
+    0.0,
+    0.0
+   ],
+   "facadeHazardAccepted": 0,
+   "facadeHazardCases": [],
+   "wrongAccepted": [],
+   "perClass": {
+    "FLOOR_PLAN": {
+     "n": 14,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.2153
+     ],
+     "unknown": 14,
+     "review": 0
+    },
+    "ORTHOGRAPHIC_ELEVATION": {
+     "n": 70,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.052
+     ],
+     "unknown": 70,
+     "review": 0
+    },
+    "TECHNICAL_SECTION": {
+     "n": 12,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.2425
+     ],
+     "unknown": 12,
+     "review": 0
+    },
+    "EXTERIOR_PERSPECTIVE": {
+     "n": 54,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0.0,
+      0.0664
+     ],
+     "unknown": 54,
+     "review": 0
+    },
+    "INTERIOR_PERSPECTIVE": {
+     "n": 12,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.2425
+     ],
+     "unknown": 12,
+     "review": 0
+    },
+    "SITE_PLAN": {
+     "n": 13,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.2281
+     ],
+     "unknown": 13,
+     "review": 0
+    },
+    "ARCHITECTURAL_DETAIL": {
+     "n": 2,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.6576
+     ],
+     "unknown": 2,
+     "review": 0
+    }
+   },
+   "confusion": {
+    "FLOOR_PLAN": {
+     "UNKNOWN": 14
+    },
+    "ORTHOGRAPHIC_ELEVATION": {
+     "UNKNOWN": 70
+    },
+    "TECHNICAL_SECTION": {
+     "UNKNOWN": 12
+    },
+    "EXTERIOR_PERSPECTIVE": {
+     "UNKNOWN": 54
+    },
+    "INTERIOR_PERSPECTIVE": {
+     "UNKNOWN": 12
+    },
+    "SITE_PLAN": {
+     "UNKNOWN": 13
+    },
+    "ARCHITECTURAL_DETAIL": {
+     "UNKNOWN": 2
+    }
+   },
+   "confusionColumns": [
+    "FLOOR_PLAN",
+    "ORTHOGRAPHIC_ELEVATION",
+    "TECHNICAL_SECTION",
+    "EXTERIOR_PERSPECTIVE",
+    "INTERIOR_PERSPECTIVE",
+    "SITE_PLAN",
+    "ARCHITECTURAL_DETAIL",
+    "OTHER",
+    "UNKNOWN",
+    "REVIEW"
+   ]
+  },
+  "B0_clip_zero_shot": {
+   "name": "B0",
+   "images": 177,
+   "projects": 12,
+   "accepted": 34,
+   "coverage": 0.1921,
+   "unknown": 143,
+   "review": 0,
+   "unknownShare": 0.8079,
+   "selectiveRisk": 0.0,
+   "selectiveRiskCI": [
+    0,
+    0.1015
+   ],
+   "selectiveRiskProjectBootstrap": [
+    0.0,
+    0.0
+   ],
+   "acceptedCorrectShare": 0.1921,
+   "acceptedCorrectProjectBootstrap": [
+    0.0856,
+    0.3081
+   ],
+   "facadeHazardAccepted": 0,
+   "facadeHazardCases": [],
+   "wrongAccepted": [],
+   "perClass": {
+    "FLOOR_PLAN": {
+     "n": 14,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.2153
+     ],
+     "unknown": 14,
+     "review": 0
+    },
+    "ORTHOGRAPHIC_ELEVATION": {
+     "n": 70,
+     "acceptedCorrect": 32,
+     "acceptedAsThis": 32,
+     "precision": 1.0,
+     "precisionCI": [
+      0.8928,
+      1
+     ],
+     "recall": 0.4571,
+     "recallCI": [
+      0.3457,
+      0.573
+     ],
+     "unknown": 38,
+     "review": 0
+    },
+    "TECHNICAL_SECTION": {
+     "n": 12,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.2425
+     ],
+     "unknown": 12,
+     "review": 0
+    },
+    "EXTERIOR_PERSPECTIVE": {
+     "n": 54,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0.0,
+      0.0664
+     ],
+     "unknown": 54,
+     "review": 0
+    },
+    "INTERIOR_PERSPECTIVE": {
+     "n": 12,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.2425
+     ],
+     "unknown": 12,
+     "review": 0
+    },
+    "SITE_PLAN": {
+     "n": 13,
+     "acceptedCorrect": 2,
+     "acceptedAsThis": 2,
+     "precision": 1.0,
+     "precisionCI": [
+      0.3424,
+      1
+     ],
+     "recall": 0.1538,
+     "recallCI": [
+      0.0433,
+      0.4224
+     ],
+     "unknown": 11,
+     "review": 0
+    },
+    "ARCHITECTURAL_DETAIL": {
+     "n": 2,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.6576
+     ],
+     "unknown": 2,
+     "review": 0
+    }
+   },
+   "confusion": {
+    "FLOOR_PLAN": {
+     "UNKNOWN": 14
+    },
+    "ORTHOGRAPHIC_ELEVATION": {
+     "UNKNOWN": 38,
+     "ORTHOGRAPHIC_ELEVATION": 32
+    },
+    "TECHNICAL_SECTION": {
+     "UNKNOWN": 12
+    },
+    "EXTERIOR_PERSPECTIVE": {
+     "UNKNOWN": 54
+    },
+    "INTERIOR_PERSPECTIVE": {
+     "UNKNOWN": 12
+    },
+    "SITE_PLAN": {
+     "UNKNOWN": 11,
+     "SITE_PLAN": 2
+    },
+    "ARCHITECTURAL_DETAIL": {
+     "UNKNOWN": 2
+    }
+   },
+   "confusionColumns": [
+    "FLOOR_PLAN",
+    "ORTHOGRAPHIC_ELEVATION",
+    "TECHNICAL_SECTION",
+    "EXTERIOR_PERSPECTIVE",
+    "INTERIOR_PERSPECTIVE",
+    "SITE_PLAN",
+    "ARCHITECTURAL_DETAIL",
+    "OTHER",
+    "UNKNOWN",
+    "REVIEW"
+   ]
+  },
+  "B_mobilenetv3_large_100": {
+   "name": "B_mobilenetv3_large_100",
+   "images": 177,
+   "projects": 12,
+   "accepted": 174,
+   "coverage": 0.9831,
+   "unknown": 3,
+   "review": 0,
+   "unknownShare": 0.0169,
+   "selectiveRisk": 0.4655,
+   "selectiveRiskCI": [
+    0.3929,
+    0.5396
+   ],
+   "selectiveRiskProjectBootstrap": [
+    0.3939,
+    0.5353
+   ],
+   "acceptedCorrectShare": 0.5254,
+   "acceptedCorrectProjectBootstrap": [
+    0.4602,
+    0.5897
+   ],
+   "facadeHazardAccepted": 35,
+   "facadeHazardCases": [
+    [
+     "723dadc111b0",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "33bbcca97dbb",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "6e7757c7375c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "13ddf7ff23b6",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8239cf406e54",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "5bc726f7b388",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "a3ef9600b0d8",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "ae48f4d77e88",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "e79f21965981",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d0c7f75a0e6a",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d9843edb1d04",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "e55fb7216f80",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "83049d9941c0",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "295741baf4f5",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b4fa63bdc809",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "16342b3d67eb",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "fa5319ac2649",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "45410fca0779",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "724b84b6eb47",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "7e7c5e924c71",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "939d2cda0e16",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "43f1cb1736aa",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "fb2005ff770c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "98fcddd2e179",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "4057f2e4017e",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d04426a07ba3",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "f0b69afb91b8",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "19863918b121",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "818e5f48f56d",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8261a7e65762",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b545f0066d72",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "3ec5da81669c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "663ba6122233",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "a9265afecc9d",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "93883bb9083c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ]
+   ],
+   "wrongAccepted": [
+    [
+     "4d26beb067d3",
+     "ARCHITECTURAL_DETAIL",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "fbda1ef8565a",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "ae14e4c06757",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "92037f576c5f",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "723dadc111b0",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "33bbcca97dbb",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b2d774d5b25d",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "4397dfd73e41",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "6e7757c7375c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "13ddf7ff23b6",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8239cf406e54",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "62b4e9f45429",
+     "EXTERIOR_PERSPECTIVE",
+     "INTERIOR_PERSPECTIVE"
+    ],
+    [
+     "3f271b70d13d",
+     "EXTERIOR_PERSPECTIVE",
+     "INTERIOR_PERSPECTIVE"
+    ],
+    [
+     "3cdcf34999c2",
+     "EXTERIOR_PERSPECTIVE",
+     "INTERIOR_PERSPECTIVE"
+    ],
+    [
+     "c10779e256ad",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "f143f5d84164",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "47733afceeee",
+     "ORTHOGRAPHIC_ELEVATION",
+     "TECHNICAL_SECTION"
+    ],
+    [
+     "02cf7521215e",
+     "ORTHOGRAPHIC_ELEVATION",
+     "TECHNICAL_SECTION"
+    ],
+    [
+     "1a37c90b5ca7",
+     "EXTERIOR_PERSPECTIVE",
+     "TECHNICAL_SECTION"
+    ],
+    [
+     "34a506473453",
+     "EXTERIOR_PERSPECTIVE",
+     "INTERIOR_PERSPECTIVE"
+    ],
+    [
+     "f63dc384c7d5",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "5bc726f7b388",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "a3ef9600b0d8",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b8a5bbe513d3",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "3e4b7cf47875",
+     "ARCHITECTURAL_DETAIL",
+     "FLOOR_PLAN"
+    ],
+    [
+     "0323e7f6596c",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "46418d3fb341",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "562829301dbe",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "ae48f4d77e88",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "e79f21965981",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d0c7f75a0e6a",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d9843edb1d04",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "bd18ea83bde9",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "e008c2aacf22",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "e55fb7216f80",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "83049d9941c0",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "1793a8c61ca0",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "2cd36dcf5ab8",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "5e68031d5c5f",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "053a4b510eb9",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "8460ebc6e576",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "295741baf4f5",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "9c705b311952",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "1b552b842eb0",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "b4fa63bdc809",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "16342b3d67eb",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "f33556457b1f",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "2d101a407727",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "2175d2134358",
+     "ORTHOGRAPHIC_ELEVATION",
+     "TECHNICAL_SECTION"
+    ],
+    [
+     "fa5319ac2649",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "45410fca0779",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "724b84b6eb47",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "7e7c5e924c71",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "2f7174ff0414",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "939d2cda0e16",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "43f1cb1736aa",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "fb2005ff770c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "98fcddd2e179",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "4d05ee24b699",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "8acff1f01b0d",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "b4fd2f161c10",
+     "ORTHOGRAPHIC_ELEVATION",
+     "TECHNICAL_SECTION"
+    ],
+    [
+     "72a2381637a0",
+     "ORTHOGRAPHIC_ELEVATION",
+     "TECHNICAL_SECTION"
+    ],
+    [
+     "1faa470f57b7",
+     "ORTHOGRAPHIC_ELEVATION",
+     "TECHNICAL_SECTION"
+    ],
+    [
+     "4057f2e4017e",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d04426a07ba3",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8c842a32e628",
+     "EXTERIOR_PERSPECTIVE",
+     "TECHNICAL_SECTION"
+    ],
+    [
+     "410d05dd6c5a",
+     "EXTERIOR_PERSPECTIVE",
+     "TECHNICAL_SECTION"
+    ],
+    [
+     "5aedc9955146",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "6895f2662dd8",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "f0b69afb91b8",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "19863918b121",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "9e6da186a02b",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "818e5f48f56d",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8261a7e65762",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b545f0066d72",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "3ec5da81669c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "eba0e9e7f682",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "663ba6122233",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "a9265afecc9d",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "93883bb9083c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b2e34cdcfdf4",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ]
+   ],
+   "perClass": {
+    "FLOOR_PLAN": {
+     "n": 14,
+     "acceptedCorrect": 14,
+     "acceptedAsThis": 46,
+     "precision": 0.3043,
+     "precisionCI": [
+      0.1908,
+      0.4481
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.7847,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "ORTHOGRAPHIC_ELEVATION": {
+     "n": 70,
+     "acceptedCorrect": 45,
+     "acceptedAsThis": 81,
+     "precision": 0.5556,
+     "precisionCI": [
+      0.4473,
+      0.6588
+     ],
+     "recall": 0.6429,
+     "recallCI": [
+      0.5259,
+      0.745
+     ],
+     "unknown": 1,
+     "review": 0
+    },
+    "TECHNICAL_SECTION": {
+     "n": 12,
+     "acceptedCorrect": 12,
+     "acceptedAsThis": 21,
+     "precision": 0.5714,
+     "precisionCI": [
+      0.3655,
+      0.7553
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.7575,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "EXTERIOR_PERSPECTIVE": {
+     "n": 54,
+     "acceptedCorrect": 10,
+     "acceptedAsThis": 10,
+     "precision": 1.0,
+     "precisionCI": [
+      0.7225,
+      1
+     ],
+     "recall": 0.1852,
+     "recallCI": [
+      0.1038,
+      0.3084
+     ],
+     "unknown": 2,
+     "review": 0
+    },
+    "INTERIOR_PERSPECTIVE": {
+     "n": 12,
+     "acceptedCorrect": 12,
+     "acceptedAsThis": 16,
+     "precision": 0.75,
+     "precisionCI": [
+      0.505,
+      0.8982
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.7575,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "SITE_PLAN": {
+     "n": 13,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.2281
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "ARCHITECTURAL_DETAIL": {
+     "n": 2,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.6576
+     ],
+     "unknown": 0,
+     "review": 0
+    }
+   },
+   "confusion": {
+    "FLOOR_PLAN": {
+     "FLOOR_PLAN": 14
+    },
+    "ORTHOGRAPHIC_ELEVATION": {
+     "FLOOR_PLAN": 18,
+     "ORTHOGRAPHIC_ELEVATION": 45,
+     "TECHNICAL_SECTION": 6,
+     "UNKNOWN": 1
+    },
+    "TECHNICAL_SECTION": {
+     "TECHNICAL_SECTION": 12
+    },
+    "EXTERIOR_PERSPECTIVE": {
+     "ORTHOGRAPHIC_ELEVATION": 35,
+     "EXTERIOR_PERSPECTIVE": 10,
+     "INTERIOR_PERSPECTIVE": 4,
+     "TECHNICAL_SECTION": 3,
+     "UNKNOWN": 2
+    },
+    "INTERIOR_PERSPECTIVE": {
+     "INTERIOR_PERSPECTIVE": 12
+    },
+    "SITE_PLAN": {
+     "FLOOR_PLAN": 13
+    },
+    "ARCHITECTURAL_DETAIL": {
+     "ORTHOGRAPHIC_ELEVATION": 1,
+     "FLOOR_PLAN": 1
+    }
+   },
+   "confusionColumns": [
+    "FLOOR_PLAN",
+    "ORTHOGRAPHIC_ELEVATION",
+    "TECHNICAL_SECTION",
+    "EXTERIOR_PERSPECTIVE",
+    "INTERIOR_PERSPECTIVE",
+    "SITE_PLAN",
+    "ARCHITECTURAL_DETAIL",
+    "OTHER",
+    "UNKNOWN",
+    "REVIEW"
+   ]
+  },
+  "B_dinov2_vits14": {
+   "name": "B_dinov2_vits14",
+   "images": 177,
+   "projects": 12,
+   "accepted": 176,
+   "coverage": 0.9944,
+   "unknown": 1,
+   "review": 0,
+   "unknownShare": 0.0056,
+   "selectiveRisk": 0.4432,
+   "selectiveRiskCI": [
+    0.3718,
+    0.517
+   ],
+   "selectiveRiskProjectBootstrap": [
+    0.4099,
+    0.4728
+   ],
+   "acceptedCorrectShare": 0.5537,
+   "acceptedCorrectProjectBootstrap": [
+    0.523,
+    0.5872
+   ],
+   "facadeHazardAccepted": 60,
+   "facadeHazardCases": [
+    [
+     "2ff9068a8872",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "723dadc111b0",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "33bbcca97dbb",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "0a1d6759c458",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "c86eb3077fe5",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "6e7757c7375c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "13ddf7ff23b6",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8239cf406e54",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "62b4e9f45429",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "3f271b70d13d",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "3cdcf34999c2",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "1a37c90b5ca7",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "34a506473453",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "640d2bcc42d1",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "5bc726f7b388",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "a3ef9600b0d8",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "3808a77e61dd",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "113b52ed9ecd",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "ae48f4d77e88",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "e79f21965981",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d0c7f75a0e6a",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d9843edb1d04",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "e55fb7216f80",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "83049d9941c0",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "9b2da5eceba3",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "295741baf4f5",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8aa0515475ce",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "88c3847a5678",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "9161c72439c1",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "c60831ba87a1",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b4fa63bdc809",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "16342b3d67eb",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "901e625d850a",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "ab9d09ae10bf",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "eef7d0015b2d",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "fa5319ac2649",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "45410fca0779",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "724b84b6eb47",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "7e7c5e924c71",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "939d2cda0e16",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "fb2005ff770c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "98fcddd2e179",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "c44e29df7bc3",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "4057f2e4017e",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d04426a07ba3",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8c842a32e628",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "410d05dd6c5a",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "f0b69afb91b8",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "19863918b121",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b52ba0ea5507",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "76ca76a08b17",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "818e5f48f56d",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8261a7e65762",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b545f0066d72",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "3ec5da81669c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "155f0cddb55f",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "663ba6122233",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "595e6b81b4cb",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "a9265afecc9d",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "93883bb9083c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ]
+   ],
+   "wrongAccepted": [
+    [
+     "4d26beb067d3",
+     "ARCHITECTURAL_DETAIL",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "2ff9068a8872",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "723dadc111b0",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "33bbcca97dbb",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "0a1d6759c458",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "c86eb3077fe5",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b2d774d5b25d",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "6e7757c7375c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "13ddf7ff23b6",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8239cf406e54",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "62b4e9f45429",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "3f271b70d13d",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "3cdcf34999c2",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d39e9de3a05e",
+     "TECHNICAL_SECTION",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "c10779e256ad",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "1a37c90b5ca7",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "34a506473453",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "f63dc384c7d5",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "640d2bcc42d1",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "5bc726f7b388",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "a3ef9600b0d8",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "3808a77e61dd",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "113b52ed9ecd",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b8a5bbe513d3",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "3e4b7cf47875",
+     "ARCHITECTURAL_DETAIL",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "ae48f4d77e88",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "e79f21965981",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d0c7f75a0e6a",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d9843edb1d04",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "bd18ea83bde9",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "e55fb7216f80",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "83049d9941c0",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "9b2da5eceba3",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "295741baf4f5",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8aa0515475ce",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "88c3847a5678",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "9161c72439c1",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "9c705b311952",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "c60831ba87a1",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b4fa63bdc809",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "16342b3d67eb",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "901e625d850a",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "ab9d09ae10bf",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "6c2f04fb39aa",
+     "TECHNICAL_SECTION",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "f33556457b1f",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "eef7d0015b2d",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "fa5319ac2649",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "45410fca0779",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "724b84b6eb47",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "7e7c5e924c71",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "2f7174ff0414",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "939d2cda0e16",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "fb2005ff770c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "98fcddd2e179",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "4d05ee24b699",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "c44e29df7bc3",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "4057f2e4017e",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d04426a07ba3",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8c842a32e628",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "410d05dd6c5a",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "413cbd08d7ce",
+     "TECHNICAL_SECTION",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "5aedc9955146",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "f0b69afb91b8",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "19863918b121",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b52ba0ea5507",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "76ca76a08b17",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "9e6da186a02b",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "818e5f48f56d",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8261a7e65762",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b545f0066d72",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "3ec5da81669c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "eba0e9e7f682",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "155f0cddb55f",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "663ba6122233",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "595e6b81b4cb",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "a9265afecc9d",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "93883bb9083c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b2e34cdcfdf4",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ]
+   ],
+   "perClass": {
+    "FLOOR_PLAN": {
+     "n": 14,
+     "acceptedCorrect": 14,
+     "acceptedAsThis": 27,
+     "precision": 0.5185,
+     "precisionCI": [
+      0.3399,
+      0.6926
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.7847,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "ORTHOGRAPHIC_ELEVATION": {
+     "n": 70,
+     "acceptedCorrect": 70,
+     "acceptedAsThis": 135,
+     "precision": 0.5185,
+     "precisionCI": [
+      0.4349,
+      0.6011
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.948,
+      1.0
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "TECHNICAL_SECTION": {
+     "n": 12,
+     "acceptedCorrect": 9,
+     "acceptedAsThis": 9,
+     "precision": 1.0,
+     "precisionCI": [
+      0.7008,
+      1
+     ],
+     "recall": 0.75,
+     "recallCI": [
+      0.4677,
+      0.9111
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "EXTERIOR_PERSPECTIVE": {
+     "n": 54,
+     "acceptedCorrect": 1,
+     "acceptedAsThis": 1,
+     "precision": 1.0,
+     "precisionCI": [
+      0.2065,
+      1
+     ],
+     "recall": 0.0185,
+     "recallCI": [
+      0.0033,
+      0.0977
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "INTERIOR_PERSPECTIVE": {
+     "n": 12,
+     "acceptedCorrect": 4,
+     "acceptedAsThis": 4,
+     "precision": 1.0,
+     "precisionCI": [
+      0.5101,
+      1
+     ],
+     "recall": 0.3333,
+     "recallCI": [
+      0.1381,
+      0.6094
+     ],
+     "unknown": 1,
+     "review": 0
+    },
+    "SITE_PLAN": {
+     "n": 13,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.2281
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "ARCHITECTURAL_DETAIL": {
+     "n": 2,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.6576
+     ],
+     "unknown": 0,
+     "review": 0
+    }
+   },
+   "confusion": {
+    "FLOOR_PLAN": {
+     "FLOOR_PLAN": 14
+    },
+    "ORTHOGRAPHIC_ELEVATION": {
+     "ORTHOGRAPHIC_ELEVATION": 70
+    },
+    "TECHNICAL_SECTION": {
+     "TECHNICAL_SECTION": 9,
+     "ORTHOGRAPHIC_ELEVATION": 3
+    },
+    "EXTERIOR_PERSPECTIVE": {
+     "ORTHOGRAPHIC_ELEVATION": 53,
+     "EXTERIOR_PERSPECTIVE": 1
+    },
+    "INTERIOR_PERSPECTIVE": {
+     "ORTHOGRAPHIC_ELEVATION": 7,
+     "INTERIOR_PERSPECTIVE": 4,
+     "UNKNOWN": 1
+    },
+    "SITE_PLAN": {
+     "FLOOR_PLAN": 13
+    },
+    "ARCHITECTURAL_DETAIL": {
+     "ORTHOGRAPHIC_ELEVATION": 2
+    }
+   },
+   "confusionColumns": [
+    "FLOOR_PLAN",
+    "ORTHOGRAPHIC_ELEVATION",
+    "TECHNICAL_SECTION",
+    "EXTERIOR_PERSPECTIVE",
+    "INTERIOR_PERSPECTIVE",
+    "SITE_PLAN",
+    "ARCHITECTURAL_DETAIL",
+    "OTHER",
+    "UNKNOWN",
+    "REVIEW"
+   ]
+  },
+  "B_clip_vitb32": {
+   "name": "B_clip_vitb32",
+   "images": 177,
+   "projects": 12,
+   "accepted": 177,
+   "coverage": 1.0,
+   "unknown": 0,
+   "review": 0,
+   "unknownShare": 0.0,
+   "selectiveRisk": 0.6045,
+   "selectiveRiskCI": [
+    0.531,
+    0.6736
+   ],
+   "selectiveRiskProjectBootstrap": [
+    0.5938,
+    0.6154
+   ],
+   "acceptedCorrectShare": 0.3955,
+   "acceptedCorrectProjectBootstrap": [
+    0.3846,
+    0.4062
+   ],
+   "facadeHazardAccepted": 66,
+   "facadeHazardCases": [
+    [
+     "2ff9068a8872",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "723dadc111b0",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "33bbcca97dbb",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "0a1d6759c458",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "c86eb3077fe5",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "6e7757c7375c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "13ddf7ff23b6",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "071e5126f498",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8239cf406e54",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "62b4e9f45429",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "3f271b70d13d",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "3cdcf34999c2",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "1a37c90b5ca7",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "34a506473453",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "640d2bcc42d1",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "5bc726f7b388",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "a3ef9600b0d8",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "3808a77e61dd",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "113b52ed9ecd",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "06dbcdb79998",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "ae48f4d77e88",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "e79f21965981",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d0c7f75a0e6a",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d9843edb1d04",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "e55fb7216f80",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "83049d9941c0",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "9b2da5eceba3",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "295741baf4f5",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8aa0515475ce",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "88c3847a5678",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "9161c72439c1",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "c60831ba87a1",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b4fa63bdc809",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "16342b3d67eb",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "901e625d850a",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "ab9d09ae10bf",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "eef7d0015b2d",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "fa5319ac2649",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "45410fca0779",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "724b84b6eb47",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "7e7c5e924c71",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b07d77971316",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "939d2cda0e16",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "43f1cb1736aa",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "fb2005ff770c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "98fcddd2e179",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "c44e29df7bc3",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "4057f2e4017e",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d04426a07ba3",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8c842a32e628",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "410d05dd6c5a",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "bf5dcd846159",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "f0b69afb91b8",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "19863918b121",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b52ba0ea5507",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "76ca76a08b17",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "73c005067e87",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "818e5f48f56d",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8261a7e65762",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b545f0066d72",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "3ec5da81669c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "155f0cddb55f",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "663ba6122233",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "595e6b81b4cb",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "a9265afecc9d",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "93883bb9083c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ]
+   ],
+   "wrongAccepted": [
+    [
+     "4d26beb067d3",
+     "ARCHITECTURAL_DETAIL",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "2ff9068a8872",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "893bde05d777",
+     "FLOOR_PLAN",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "723dadc111b0",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "33bbcca97dbb",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "0a1d6759c458",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "c86eb3077fe5",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "df1a46262291",
+     "TECHNICAL_SECTION",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b2d774d5b25d",
+     "SITE_PLAN",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "f3ecc7343cbc",
+     "FLOOR_PLAN",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "6e7757c7375c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "13ddf7ff23b6",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "071e5126f498",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "1bf188b810e9",
+     "FLOOR_PLAN",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8239cf406e54",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "62b4e9f45429",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "3f271b70d13d",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "3cdcf34999c2",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d39e9de3a05e",
+     "TECHNICAL_SECTION",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "c10779e256ad",
+     "SITE_PLAN",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "4a8f75c3b4c2",
+     "FLOOR_PLAN",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "1a37c90b5ca7",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "34a506473453",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "f63dc384c7d5",
+     "SITE_PLAN",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "640d2bcc42d1",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "f7e21c362c78",
+     "FLOOR_PLAN",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "5bc726f7b388",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "a3ef9600b0d8",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "3808a77e61dd",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "113b52ed9ecd",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "95e909237452",
+     "TECHNICAL_SECTION",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b8a5bbe513d3",
+     "SITE_PLAN",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "3e4b7cf47875",
+     "ARCHITECTURAL_DETAIL",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "06dbcdb79998",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "f76782fef72d",
+     "FLOOR_PLAN",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "ae48f4d77e88",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "e79f21965981",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d0c7f75a0e6a",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d9843edb1d04",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "4e54907d44c1",
+     "TECHNICAL_SECTION",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "bd18ea83bde9",
+     "SITE_PLAN",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "e55fb7216f80",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "83049d9941c0",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "9b2da5eceba3",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "60300e9ca501",
+     "FLOOR_PLAN",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "295741baf4f5",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8aa0515475ce",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "88c3847a5678",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "9161c72439c1",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "fe22b091f3f8",
+     "TECHNICAL_SECTION",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "9c705b311952",
+     "SITE_PLAN",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "c60831ba87a1",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "42ff362372fd",
+     "FLOOR_PLAN",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b4fa63bdc809",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "16342b3d67eb",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "901e625d850a",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "ab9d09ae10bf",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "6c2f04fb39aa",
+     "TECHNICAL_SECTION",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "f33556457b1f",
+     "SITE_PLAN",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "eef7d0015b2d",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "6586546d93ee",
+     "FLOOR_PLAN",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "fa5319ac2649",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "45410fca0779",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "724b84b6eb47",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "7e7c5e924c71",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "c769ccf8bf2d",
+     "TECHNICAL_SECTION",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "2f7174ff0414",
+     "SITE_PLAN",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b07d77971316",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "5aae75967290",
+     "FLOOR_PLAN",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "939d2cda0e16",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "43f1cb1736aa",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "fb2005ff770c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "98fcddd2e179",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "3d210b6c5a3e",
+     "TECHNICAL_SECTION",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "4d05ee24b699",
+     "SITE_PLAN",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "c44e29df7bc3",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "5003b97a5453",
+     "FLOOR_PLAN",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "4057f2e4017e",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d04426a07ba3",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8c842a32e628",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "410d05dd6c5a",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "413cbd08d7ce",
+     "TECHNICAL_SECTION",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "5aedc9955146",
+     "SITE_PLAN",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "bf5dcd846159",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b1246574699f",
+     "FLOOR_PLAN",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "f0b69afb91b8",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "19863918b121",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b52ba0ea5507",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "76ca76a08b17",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "6b3da7d21a56",
+     "TECHNICAL_SECTION",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "9e6da186a02b",
+     "SITE_PLAN",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "73c005067e87",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d461cfbcba3b",
+     "FLOOR_PLAN",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "818e5f48f56d",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8261a7e65762",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b545f0066d72",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "3ec5da81669c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "334e256e6cb7",
+     "TECHNICAL_SECTION",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "eba0e9e7f682",
+     "SITE_PLAN",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "155f0cddb55f",
+     "INTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b95a76537cd2",
+     "FLOOR_PLAN",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "663ba6122233",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "595e6b81b4cb",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "a9265afecc9d",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "93883bb9083c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "cd11c3db0857",
+     "TECHNICAL_SECTION",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b2e34cdcfdf4",
+     "SITE_PLAN",
+     "ORTHOGRAPHIC_ELEVATION"
+    ]
+   ],
+   "perClass": {
+    "FLOOR_PLAN": {
+     "n": 14,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.2153
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "ORTHOGRAPHIC_ELEVATION": {
+     "n": 70,
+     "acceptedCorrect": 70,
+     "acceptedAsThis": 177,
+     "precision": 0.3955,
+     "precisionCI": [
+      0.3264,
+      0.469
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.948,
+      1.0
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "TECHNICAL_SECTION": {
+     "n": 12,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.2425
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "EXTERIOR_PERSPECTIVE": {
+     "n": 54,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0.0,
+      0.0664
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "INTERIOR_PERSPECTIVE": {
+     "n": 12,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.2425
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "SITE_PLAN": {
+     "n": 13,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.2281
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "ARCHITECTURAL_DETAIL": {
+     "n": 2,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.6576
+     ],
+     "unknown": 0,
+     "review": 0
+    }
+   },
+   "confusion": {
+    "FLOOR_PLAN": {
+     "ORTHOGRAPHIC_ELEVATION": 14
+    },
+    "ORTHOGRAPHIC_ELEVATION": {
+     "ORTHOGRAPHIC_ELEVATION": 70
+    },
+    "TECHNICAL_SECTION": {
+     "ORTHOGRAPHIC_ELEVATION": 12
+    },
+    "EXTERIOR_PERSPECTIVE": {
+     "ORTHOGRAPHIC_ELEVATION": 54
+    },
+    "INTERIOR_PERSPECTIVE": {
+     "ORTHOGRAPHIC_ELEVATION": 12
+    },
+    "SITE_PLAN": {
+     "ORTHOGRAPHIC_ELEVATION": 13
+    },
+    "ARCHITECTURAL_DETAIL": {
+     "ORTHOGRAPHIC_ELEVATION": 2
+    }
+   },
+   "confusionColumns": [
+    "FLOOR_PLAN",
+    "ORTHOGRAPHIC_ELEVATION",
+    "TECHNICAL_SECTION",
+    "EXTERIOR_PERSPECTIVE",
+    "INTERIOR_PERSPECTIVE",
+    "SITE_PLAN",
+    "ARCHITECTURAL_DETAIL",
+    "OTHER",
+    "UNKNOWN",
+    "REVIEW"
+   ]
+  },
+  "C_fusion": {
+   "name": "C",
+   "images": 177,
+   "projects": 12,
+   "accepted": 170,
+   "coverage": 0.9605,
+   "unknown": 3,
+   "review": 4,
+   "unknownShare": 0.0169,
+   "selectiveRisk": 0.4529,
+   "selectiveRiskCI": [
+    0.38,
+    0.528
+   ],
+   "selectiveRiskProjectBootstrap": [
+    0.3691,
+    0.5314
+   ],
+   "acceptedCorrectShare": 0.5254,
+   "acceptedCorrectProjectBootstrap": [
+    0.4602,
+    0.5897
+   ],
+   "facadeHazardAccepted": 31,
+   "facadeHazardCases": [
+    [
+     "723dadc111b0",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "33bbcca97dbb",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "6e7757c7375c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "13ddf7ff23b6",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8239cf406e54",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "5bc726f7b388",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "a3ef9600b0d8",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "ae48f4d77e88",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "e79f21965981",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d0c7f75a0e6a",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d9843edb1d04",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "e55fb7216f80",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "83049d9941c0",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "295741baf4f5",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b4fa63bdc809",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "16342b3d67eb",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "fa5319ac2649",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "45410fca0779",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "724b84b6eb47",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "7e7c5e924c71",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "939d2cda0e16",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "fb2005ff770c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "4057f2e4017e",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d04426a07ba3",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "f0b69afb91b8",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "19863918b121",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "818e5f48f56d",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8261a7e65762",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b545f0066d72",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "3ec5da81669c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "663ba6122233",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ]
+   ],
+   "wrongAccepted": [
+    [
+     "4d26beb067d3",
+     "ARCHITECTURAL_DETAIL",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "fbda1ef8565a",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "ae14e4c06757",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "92037f576c5f",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "723dadc111b0",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "33bbcca97dbb",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b2d774d5b25d",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "4397dfd73e41",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "6e7757c7375c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "13ddf7ff23b6",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8239cf406e54",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "62b4e9f45429",
+     "EXTERIOR_PERSPECTIVE",
+     "INTERIOR_PERSPECTIVE"
+    ],
+    [
+     "3f271b70d13d",
+     "EXTERIOR_PERSPECTIVE",
+     "INTERIOR_PERSPECTIVE"
+    ],
+    [
+     "3cdcf34999c2",
+     "EXTERIOR_PERSPECTIVE",
+     "INTERIOR_PERSPECTIVE"
+    ],
+    [
+     "c10779e256ad",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "f143f5d84164",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "47733afceeee",
+     "ORTHOGRAPHIC_ELEVATION",
+     "TECHNICAL_SECTION"
+    ],
+    [
+     "02cf7521215e",
+     "ORTHOGRAPHIC_ELEVATION",
+     "TECHNICAL_SECTION"
+    ],
+    [
+     "1a37c90b5ca7",
+     "EXTERIOR_PERSPECTIVE",
+     "TECHNICAL_SECTION"
+    ],
+    [
+     "34a506473453",
+     "EXTERIOR_PERSPECTIVE",
+     "INTERIOR_PERSPECTIVE"
+    ],
+    [
+     "f63dc384c7d5",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "5bc726f7b388",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "a3ef9600b0d8",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b8a5bbe513d3",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "3e4b7cf47875",
+     "ARCHITECTURAL_DETAIL",
+     "FLOOR_PLAN"
+    ],
+    [
+     "0323e7f6596c",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "46418d3fb341",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "562829301dbe",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "ae48f4d77e88",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "e79f21965981",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d0c7f75a0e6a",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d9843edb1d04",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "bd18ea83bde9",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "e008c2aacf22",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "e55fb7216f80",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "83049d9941c0",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "1793a8c61ca0",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "2cd36dcf5ab8",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "5e68031d5c5f",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "053a4b510eb9",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "8460ebc6e576",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "295741baf4f5",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "9c705b311952",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "1b552b842eb0",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "b4fa63bdc809",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "16342b3d67eb",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "f33556457b1f",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "2d101a407727",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "2175d2134358",
+     "ORTHOGRAPHIC_ELEVATION",
+     "TECHNICAL_SECTION"
+    ],
+    [
+     "fa5319ac2649",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "45410fca0779",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "724b84b6eb47",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "7e7c5e924c71",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "2f7174ff0414",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "939d2cda0e16",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "fb2005ff770c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "4d05ee24b699",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "8acff1f01b0d",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "b4fd2f161c10",
+     "ORTHOGRAPHIC_ELEVATION",
+     "TECHNICAL_SECTION"
+    ],
+    [
+     "72a2381637a0",
+     "ORTHOGRAPHIC_ELEVATION",
+     "TECHNICAL_SECTION"
+    ],
+    [
+     "1faa470f57b7",
+     "ORTHOGRAPHIC_ELEVATION",
+     "TECHNICAL_SECTION"
+    ],
+    [
+     "4057f2e4017e",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d04426a07ba3",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8c842a32e628",
+     "EXTERIOR_PERSPECTIVE",
+     "TECHNICAL_SECTION"
+    ],
+    [
+     "410d05dd6c5a",
+     "EXTERIOR_PERSPECTIVE",
+     "TECHNICAL_SECTION"
+    ],
+    [
+     "5aedc9955146",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "6895f2662dd8",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "f0b69afb91b8",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "19863918b121",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "9e6da186a02b",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "818e5f48f56d",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8261a7e65762",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b545f0066d72",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "3ec5da81669c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "eba0e9e7f682",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "663ba6122233",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b2e34cdcfdf4",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ]
+   ],
+   "perClass": {
+    "FLOOR_PLAN": {
+     "n": 14,
+     "acceptedCorrect": 14,
+     "acceptedAsThis": 46,
+     "precision": 0.3043,
+     "precisionCI": [
+      0.1908,
+      0.4481
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.7847,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "ORTHOGRAPHIC_ELEVATION": {
+     "n": 70,
+     "acceptedCorrect": 45,
+     "acceptedAsThis": 77,
+     "precision": 0.5844,
+     "precisionCI": [
+      0.4729,
+      0.6879
+     ],
+     "recall": 0.6429,
+     "recallCI": [
+      0.5259,
+      0.745
+     ],
+     "unknown": 1,
+     "review": 0
+    },
+    "TECHNICAL_SECTION": {
+     "n": 12,
+     "acceptedCorrect": 12,
+     "acceptedAsThis": 21,
+     "precision": 0.5714,
+     "precisionCI": [
+      0.3655,
+      0.7553
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.7575,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "EXTERIOR_PERSPECTIVE": {
+     "n": 54,
+     "acceptedCorrect": 10,
+     "acceptedAsThis": 10,
+     "precision": 1.0,
+     "precisionCI": [
+      0.7225,
+      1
+     ],
+     "recall": 0.1852,
+     "recallCI": [
+      0.1038,
+      0.3084
+     ],
+     "unknown": 2,
+     "review": 4
+    },
+    "INTERIOR_PERSPECTIVE": {
+     "n": 12,
+     "acceptedCorrect": 12,
+     "acceptedAsThis": 16,
+     "precision": 0.75,
+     "precisionCI": [
+      0.505,
+      0.8982
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.7575,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "SITE_PLAN": {
+     "n": 13,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.2281
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "ARCHITECTURAL_DETAIL": {
+     "n": 2,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.6576
+     ],
+     "unknown": 0,
+     "review": 0
+    }
+   },
+   "confusion": {
+    "FLOOR_PLAN": {
+     "FLOOR_PLAN": 14
+    },
+    "ORTHOGRAPHIC_ELEVATION": {
+     "FLOOR_PLAN": 18,
+     "ORTHOGRAPHIC_ELEVATION": 45,
+     "TECHNICAL_SECTION": 6,
+     "UNKNOWN": 1
+    },
+    "TECHNICAL_SECTION": {
+     "TECHNICAL_SECTION": 12
+    },
+    "EXTERIOR_PERSPECTIVE": {
+     "ORTHOGRAPHIC_ELEVATION": 31,
+     "EXTERIOR_PERSPECTIVE": 10,
+     "INTERIOR_PERSPECTIVE": 4,
+     "TECHNICAL_SECTION": 3,
+     "UNKNOWN": 2,
+     "REVIEW": 4
+    },
+    "INTERIOR_PERSPECTIVE": {
+     "INTERIOR_PERSPECTIVE": 12
+    },
+    "SITE_PLAN": {
+     "FLOOR_PLAN": 13
+    },
+    "ARCHITECTURAL_DETAIL": {
+     "ORTHOGRAPHIC_ELEVATION": 1,
+     "FLOOR_PLAN": 1
+    }
+   },
+   "confusionColumns": [
+    "FLOOR_PLAN",
+    "ORTHOGRAPHIC_ELEVATION",
+    "TECHNICAL_SECTION",
+    "EXTERIOR_PERSPECTIVE",
+    "INTERIOR_PERSPECTIVE",
+    "SITE_PLAN",
+    "ARCHITECTURAL_DETAIL",
+    "OTHER",
+    "UNKNOWN",
+    "REVIEW"
+   ]
+  },
+  "C2_fusion_novelty_gate": {
+   "name": "C2",
+   "images": 177,
+   "projects": 12,
+   "accepted": 170,
+   "coverage": 0.9605,
+   "unknown": 3,
+   "review": 4,
+   "unknownShare": 0.0169,
+   "selectiveRisk": 0.4529,
+   "selectiveRiskCI": [
+    0.38,
+    0.528
+   ],
+   "selectiveRiskProjectBootstrap": [
+    0.3691,
+    0.5314
+   ],
+   "acceptedCorrectShare": 0.5254,
+   "acceptedCorrectProjectBootstrap": [
+    0.4602,
+    0.5897
+   ],
+   "facadeHazardAccepted": 31,
+   "facadeHazardCases": [
+    [
+     "723dadc111b0",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "33bbcca97dbb",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "6e7757c7375c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "13ddf7ff23b6",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8239cf406e54",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "5bc726f7b388",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "a3ef9600b0d8",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "ae48f4d77e88",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "e79f21965981",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d0c7f75a0e6a",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d9843edb1d04",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "e55fb7216f80",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "83049d9941c0",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "295741baf4f5",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b4fa63bdc809",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "16342b3d67eb",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "fa5319ac2649",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "45410fca0779",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "724b84b6eb47",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "7e7c5e924c71",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "939d2cda0e16",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "fb2005ff770c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "4057f2e4017e",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d04426a07ba3",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "f0b69afb91b8",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "19863918b121",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "818e5f48f56d",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8261a7e65762",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b545f0066d72",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "3ec5da81669c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "663ba6122233",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ]
+   ],
+   "wrongAccepted": [
+    [
+     "4d26beb067d3",
+     "ARCHITECTURAL_DETAIL",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "fbda1ef8565a",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "ae14e4c06757",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "92037f576c5f",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "723dadc111b0",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "33bbcca97dbb",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b2d774d5b25d",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "4397dfd73e41",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "6e7757c7375c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "13ddf7ff23b6",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8239cf406e54",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "62b4e9f45429",
+     "EXTERIOR_PERSPECTIVE",
+     "INTERIOR_PERSPECTIVE"
+    ],
+    [
+     "3f271b70d13d",
+     "EXTERIOR_PERSPECTIVE",
+     "INTERIOR_PERSPECTIVE"
+    ],
+    [
+     "3cdcf34999c2",
+     "EXTERIOR_PERSPECTIVE",
+     "INTERIOR_PERSPECTIVE"
+    ],
+    [
+     "c10779e256ad",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "f143f5d84164",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "47733afceeee",
+     "ORTHOGRAPHIC_ELEVATION",
+     "TECHNICAL_SECTION"
+    ],
+    [
+     "02cf7521215e",
+     "ORTHOGRAPHIC_ELEVATION",
+     "TECHNICAL_SECTION"
+    ],
+    [
+     "1a37c90b5ca7",
+     "EXTERIOR_PERSPECTIVE",
+     "TECHNICAL_SECTION"
+    ],
+    [
+     "34a506473453",
+     "EXTERIOR_PERSPECTIVE",
+     "INTERIOR_PERSPECTIVE"
+    ],
+    [
+     "f63dc384c7d5",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "5bc726f7b388",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "a3ef9600b0d8",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b8a5bbe513d3",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "3e4b7cf47875",
+     "ARCHITECTURAL_DETAIL",
+     "FLOOR_PLAN"
+    ],
+    [
+     "0323e7f6596c",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "46418d3fb341",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "562829301dbe",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "ae48f4d77e88",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "e79f21965981",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d0c7f75a0e6a",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d9843edb1d04",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "bd18ea83bde9",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "e008c2aacf22",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "e55fb7216f80",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "83049d9941c0",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "1793a8c61ca0",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "2cd36dcf5ab8",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "5e68031d5c5f",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "053a4b510eb9",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "8460ebc6e576",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "295741baf4f5",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "9c705b311952",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "1b552b842eb0",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "b4fa63bdc809",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "16342b3d67eb",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "f33556457b1f",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "2d101a407727",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "2175d2134358",
+     "ORTHOGRAPHIC_ELEVATION",
+     "TECHNICAL_SECTION"
+    ],
+    [
+     "fa5319ac2649",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "45410fca0779",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "724b84b6eb47",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "7e7c5e924c71",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "2f7174ff0414",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "939d2cda0e16",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "fb2005ff770c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "4d05ee24b699",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "8acff1f01b0d",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "b4fd2f161c10",
+     "ORTHOGRAPHIC_ELEVATION",
+     "TECHNICAL_SECTION"
+    ],
+    [
+     "72a2381637a0",
+     "ORTHOGRAPHIC_ELEVATION",
+     "TECHNICAL_SECTION"
+    ],
+    [
+     "1faa470f57b7",
+     "ORTHOGRAPHIC_ELEVATION",
+     "TECHNICAL_SECTION"
+    ],
+    [
+     "4057f2e4017e",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "d04426a07ba3",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8c842a32e628",
+     "EXTERIOR_PERSPECTIVE",
+     "TECHNICAL_SECTION"
+    ],
+    [
+     "410d05dd6c5a",
+     "EXTERIOR_PERSPECTIVE",
+     "TECHNICAL_SECTION"
+    ],
+    [
+     "5aedc9955146",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "6895f2662dd8",
+     "ORTHOGRAPHIC_ELEVATION",
+     "FLOOR_PLAN"
+    ],
+    [
+     "f0b69afb91b8",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "19863918b121",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "9e6da186a02b",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "818e5f48f56d",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "8261a7e65762",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b545f0066d72",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "3ec5da81669c",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "eba0e9e7f682",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ],
+    [
+     "663ba6122233",
+     "EXTERIOR_PERSPECTIVE",
+     "ORTHOGRAPHIC_ELEVATION"
+    ],
+    [
+     "b2e34cdcfdf4",
+     "SITE_PLAN",
+     "FLOOR_PLAN"
+    ]
+   ],
+   "perClass": {
+    "FLOOR_PLAN": {
+     "n": 14,
+     "acceptedCorrect": 14,
+     "acceptedAsThis": 46,
+     "precision": 0.3043,
+     "precisionCI": [
+      0.1908,
+      0.4481
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.7847,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "ORTHOGRAPHIC_ELEVATION": {
+     "n": 70,
+     "acceptedCorrect": 45,
+     "acceptedAsThis": 77,
+     "precision": 0.5844,
+     "precisionCI": [
+      0.4729,
+      0.6879
+     ],
+     "recall": 0.6429,
+     "recallCI": [
+      0.5259,
+      0.745
+     ],
+     "unknown": 1,
+     "review": 0
+    },
+    "TECHNICAL_SECTION": {
+     "n": 12,
+     "acceptedCorrect": 12,
+     "acceptedAsThis": 21,
+     "precision": 0.5714,
+     "precisionCI": [
+      0.3655,
+      0.7553
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.7575,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "EXTERIOR_PERSPECTIVE": {
+     "n": 54,
+     "acceptedCorrect": 10,
+     "acceptedAsThis": 10,
+     "precision": 1.0,
+     "precisionCI": [
+      0.7225,
+      1
+     ],
+     "recall": 0.1852,
+     "recallCI": [
+      0.1038,
+      0.3084
+     ],
+     "unknown": 2,
+     "review": 4
+    },
+    "INTERIOR_PERSPECTIVE": {
+     "n": 12,
+     "acceptedCorrect": 12,
+     "acceptedAsThis": 16,
+     "precision": 0.75,
+     "precisionCI": [
+      0.505,
+      0.8982
+     ],
+     "recall": 1.0,
+     "recallCI": [
+      0.7575,
+      1
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "SITE_PLAN": {
+     "n": 13,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.2281
+     ],
+     "unknown": 0,
+     "review": 0
+    },
+    "ARCHITECTURAL_DETAIL": {
+     "n": 2,
+     "acceptedCorrect": 0,
+     "acceptedAsThis": 0,
+     "precision": null,
+     "precisionCI": [
+      null,
+      null
+     ],
+     "recall": 0.0,
+     "recallCI": [
+      0,
+      0.6576
+     ],
+     "unknown": 0,
+     "review": 0
+    }
+   },
+   "confusion": {
+    "FLOOR_PLAN": {
+     "FLOOR_PLAN": 14
+    },
+    "ORTHOGRAPHIC_ELEVATION": {
+     "FLOOR_PLAN": 18,
+     "ORTHOGRAPHIC_ELEVATION": 45,
+     "TECHNICAL_SECTION": 6,
+     "UNKNOWN": 1
+    },
+    "TECHNICAL_SECTION": {
+     "TECHNICAL_SECTION": 12
+    },
+    "EXTERIOR_PERSPECTIVE": {
+     "ORTHOGRAPHIC_ELEVATION": 31,
+     "EXTERIOR_PERSPECTIVE": 10,
+     "INTERIOR_PERSPECTIVE": 4,
+     "TECHNICAL_SECTION": 3,
+     "UNKNOWN": 2,
+     "REVIEW": 4
+    },
+    "INTERIOR_PERSPECTIVE": {
+     "INTERIOR_PERSPECTIVE": 12
+    },
+    "SITE_PLAN": {
+     "FLOOR_PLAN": 13
+    },
+    "ARCHITECTURAL_DETAIL": {
+     "ORTHOGRAPHIC_ELEVATION": 1,
+     "FLOOR_PLAN": 1
+    }
+   },
+   "confusionColumns": [
+    "FLOOR_PLAN",
+    "ORTHOGRAPHIC_ELEVATION",
+    "TECHNICAL_SECTION",
+    "EXTERIOR_PERSPECTIVE",
+    "INTERIOR_PERSPECTIVE",
+    "SITE_PLAN",
+    "ARCHITECTURAL_DETAIL",
+    "OTHER",
+    "UNKNOWN",
+    "REVIEW"
+   ]
+  }
+ },
+ "metamorphic": {
+  "padWhiteVsGray": {
+   "images": 210,
+   "decisionChanged": 0
+  },
+  "resolutionCopies": {
+   "resize1200:same": 210,
+   "resize400:same": 210
+  }
+ },
+ "calibrationTEST": {
+  "eceUncalibrated": 0.0183,
+  "eceTemperature": 0.0011,
+  "nllUncalibrated": 0.019,
+  "nllTemperature": 0.0011
+ },
+ "confidentMistakesTEST": [],
+ "hardTEST": [
+  {
+   "imageId": "087dc2312afccd84",
+   "truth": "EXTERIOR_PERSPECTIVE",
+   "baselineA": "UNKNOWN",
+   "predicted": "EXTERIOR_PERSPECTIVE",
+   "calibratedConfidence": 1.0,
+   "decision": "ACCEPT",
+   "reason": [
+    "CONFIDENT"
+   ],
+   "labelStatus": "CONFIRMED"
+  },
+  {
+   "imageId": "447ed401ecaf71d3",
+   "truth": "EXTERIOR_PERSPECTIVE",
+   "baselineA": "EXTERIOR_PERSPECTIVE",
+   "predicted": "EXTERIOR_PERSPECTIVE",
+   "calibratedConfidence": 0.9999,
+   "decision": "ACCEPT",
+   "reason": [
+    "CONFIDENT"
+   ],
+   "labelStatus": "CONFIRMED"
+  },
+  {
+   "imageId": "5871a94e9a30833c",
+   "truth": "ORTHOGRAPHIC_ELEVATION",
+   "baselineA": "ORTHOGRAPHIC_ELEVATION",
+   "predicted": "ORTHOGRAPHIC_ELEVATION",
+   "calibratedConfidence": 0.9914,
+   "decision": "ACCEPT",
+   "reason": [
+    "CONFIDENT"
+   ],
+   "labelStatus": "CONFIRMED"
+  },
+  {
+   "imageId": "61dbe294fb98895f",
+   "truth": "EXTERIOR_PERSPECTIVE",
+   "baselineA": "EXTERIOR_PERSPECTIVE",
+   "predicted": "EXTERIOR_PERSPECTIVE",
+   "calibratedConfidence": 1.0,
+   "decision": "ACCEPT",
+   "reason": [
+    "CONFIDENT"
+   ],
+   "labelStatus": "CONFIRMED"
+  },
+  {
+   "imageId": "80978085d3028ab3",
+   "truth": "EXTERIOR_PERSPECTIVE",
+   "baselineA": "UNKNOWN",
+   "predicted": "EXTERIOR_PERSPECTIVE",
+   "calibratedConfidence": 0.9996,
+   "decision": "ACCEPT",
+   "reason": [
+    "CONFIDENT"
+   ],
+   "labelStatus": "CONFIRMED"
+  },
+  {
+   "imageId": "97806400429a041c",
+   "truth": "ORTHOGRAPHIC_ELEVATION",
+   "baselineA": "ORTHOGRAPHIC_ELEVATION",
+   "predicted": "ORTHOGRAPHIC_ELEVATION",
+   "calibratedConfidence": 0.9994,
+   "decision": "ACCEPT",
+   "reason": [
+    "CONFIDENT"
+   ],
+   "labelStatus": "CONFIRMED"
+  },
+  {
+   "imageId": "9efa8fb00fa63f2f",
+   "truth": "EXTERIOR_PERSPECTIVE",
+   "baselineA": "UNKNOWN",
+   "predicted": "EXTERIOR_PERSPECTIVE",
+   "calibratedConfidence": 0.9986,
+   "decision": "ACCEPT",
+   "reason": [
+    "CONFIDENT"
+   ],
+   "labelStatus": "CONFIRMED"
+  },
+  {
+   "imageId": "a8c5b03e10f26188",
+   "truth": "EXTERIOR_PERSPECTIVE",
+   "baselineA": "UNKNOWN",
+   "predicted": "EXTERIOR_PERSPECTIVE",
+   "calibratedConfidence": 0.9997,
+   "decision": "ACCEPT",
+   "reason": [
+    "CONFIDENT"
+   ],
+   "labelStatus": "CONFIRMED"
+  },
+  {
+   "imageId": "ade46879917d9daf",
+   "truth": "EXTERIOR_PERSPECTIVE",
+   "baselineA": "UNKNOWN",
+   "predicted": "EXTERIOR_PERSPECTIVE",
+   "calibratedConfidence": 1.0,
+   "decision": "ACCEPT",
+   "reason": [
+    "CONFIDENT"
+   ],
+   "labelStatus": "CONFIRMED"
+  },
+  {
+   "imageId": "c49cd33df7ab237b",
+   "truth": "ORTHOGRAPHIC_ELEVATION",
+   "baselineA": "ORTHOGRAPHIC_ELEVATION",
+   "predicted": "ORTHOGRAPHIC_ELEVATION",
+   "calibratedConfidence": 0.9995,
+   "decision": "ACCEPT",
+   "reason": [
+    "CONFIDENT"
+   ],
+   "labelStatus": "CONFIRMED"
+  },
+  {
+   "imageId": "e1ee8c5f39b84737",
+   "truth": "ORTHOGRAPHIC_ELEVATION",
+   "baselineA": "ORTHOGRAPHIC_ELEVATION",
+   "predicted": "ORTHOGRAPHIC_ELEVATION",
+   "calibratedConfidence": 0.9997,
+   "decision": "ACCEPT",
+   "reason": [
+    "CONFIDENT"
+   ],
+   "labelStatus": "CONFIRMED"
+  },
+  {
+   "imageId": "e265e0bd20742a78",
+   "truth": "EXTERIOR_PERSPECTIVE",
+   "baselineA": "UNKNOWN",
+   "predicted": "EXTERIOR_PERSPECTIVE",
+   "calibratedConfidence": 1.0,
+   "decision": "ACCEPT",
+   "reason": [
+    "CONFIDENT"
+   ],
+   "labelStatus": "CONFIRMED"
+  },
+  {
+   "imageId": "ee9e860dd70c88d8",
+   "truth": "ORTHOGRAPHIC_ELEVATION",
+   "baselineA": "ORTHOGRAPHIC_ELEVATION",
+   "predicted": "ORTHOGRAPHIC_ELEVATION",
+   "calibratedConfidence": 0.9776,
+   "decision": "ACCEPT",
+   "reason": [
+    "CONFIDENT"
+   ],
+   "labelStatus": "CONFIRMED"
+  },
+  {
+   "imageId": "f780bde5428188ad",
+   "truth": "EXTERIOR_PERSPECTIVE",
+   "baselineA": "EXTERIOR_PERSPECTIVE",
+   "predicted": "EXTERIOR_PERSPECTIVE",
+   "calibratedConfidence": 0.999,
+   "decision": "ACCEPT",
+   "reason": [
+    "CONFIDENT"
+   ],
+   "labelStatus": "CONFIRMED"
+  }
+ ],
+ "attributesTEST": {
+  "planAnnotation": {
+   "n": 26,
+   "accuracy": 0.8846,
+   "confusion": {
+    "NO_VISIBLE_DIMENSION_CHAINS->NO_VISIBLE_DIMENSION_CHAINS": 8,
+    "DIMENSIONED->NO_VISIBLE_DIMENSION_CHAINS": 3,
+    "DIMENSIONED->DIMENSIONED": 15
+   }
+  },
+  "elevationStyle": {
+   "n": 90,
+   "accuracy": 1.0,
+   "confusion": {
+    "RENDERED->RENDERED": 56,
+    "SIMPLIFIED->SIMPLIFIED": 34
+   }
+  }
+ },
+ "negatives": [
+  {
+   "case": "interior_captioned_elevation",
+   "brief": "zdj\u0119cie wn\u0119trza podpisane jako elewacja",
+   "n": 69,
+   "facadeRoute": {
+    "A": 69,
+    "B": 0,
+    "C2": 0
+   },
+   "C2_outcomes": {
+    "REVIEW": 67,
+    "UNKNOWN": 2
+   },
+   "pass": true
+  },
+  {
+   "case": "rendered_elevation_with_trees",
+   "brief": "elewacja renderowana z drzewami (\u226550 % ACCEPT jako elewacja, 0 jako perspektywa)",
+   "n": 56,
+   "facadeRoute": {
+    "A": 56,
+    "B": 56,
+    "C2": 56
+   },
+   "C2_outcomes": {
+    "ACCEPT:ORTHOGRAPHIC_ELEVATION": 56
+   },
+   "pass": true
+  },
+  {
+   "case": "near_frontal_perspective",
+   "brief": "perspektywa domu prawie od frontu",
+   "n": 9,
+   "facadeRoute": {
+    "A": 0,
+    "B": 0,
+    "C2": 0
+   },
+   "C2_outcomes": {
+    "ACCEPT:EXTERIOR_PERSPECTIVE": 9
+   },
+   "pass": true
+  },
+  {
+   "case": "all_exterior_perspectives_captioned_elevation",
+   "brief": "perspektywa podpisana jako elewacja",
+   "n": 40,
+   "facadeRoute": {
+    "A": 40,
+    "B": 0,
+    "C2": 0
+   },
+   "C2_outcomes": {
+    "REVIEW": 40
+   },
+   "pass": true
+  },
+  {
+   "case": "section_captioned_elevation",
+   "brief": "przekr\u00f3j przypominaj\u0105cy elewacj\u0119, podpisany jako elewacja",
+   "n": 12,
+   "facadeRoute": {
+    "A": 12,
+    "B": 0,
+    "C2": 0
+   },
+   "C2_outcomes": {
+    "REVIEW": 12
+   },
+   "pass": true
+  },
+  {
+   "case": "collage_2x2_and_1x2",
+   "brief": "kola\u017c 2\u00d72 (nie mo\u017ce by\u0107 ACCEPT jako jeden widok)",
+   "n": 24,
+   "facadeRoute": {
+    "A": 0,
+    "B": 0,
+    "C2": 0
+   },
+   "C2_outcomes": {
+    "UNKNOWN": 24
+   },
+   "pass": true
+  },
+  {
+   "case": "simplified_elevation",
+   "brief": "ta sama elewacja po uproszczeniu (nigdy ACCEPT jako perspektywa)",
+   "n": 34,
+   "facadeRoute": {
+    "A": 0,
+    "B": 34,
+    "C2": 21
+   },
+   "C2_outcomes": {
+    "ACCEPT:ORTHOGRAPHIC_ELEVATION": 21,
+    "REVIEW": 13
+   },
+   "pass": true
+  },
+  {
+   "case": "no_caption_unknown_side",
+   "brief": "brak podpisu i nieznana strona \u2014 strona zostaje UNKNOWN (prototyp: buildingSide.status=UNKNOWN)",
+   "n": 56,
+   "facadeRoute": {
+    "A": 56,
+    "B": 56,
+    "C2": 56
+   },
+   "C2_outcomes": {
+    "ACCEPT:ORTHOGRAPHIC_ELEVATION": 56
+   },
+   "pass": true
+  },
+  {
+   "case": "ood_synthetic_simplified_elevations",
+   "brief": "uproszczone elewacje spoza ARCHON (005R synth): nigdy ACCEPT jako perspektywa",
+   "n": 70,
+   "facadeRoute": {
+    "A": 0,
+    "B": 45,
+    "C2": 45
+   },
+   "C2_outcomes": {
+    "ACCEPT:FLOOR_PLAN": 18,
+    "ACCEPT:ORTHOGRAPHIC_ELEVATION": 45,
+    "ACCEPT:TECHNICAL_SECTION": 6,
+    "UNKNOWN": 1
+   },
+   "pass": true
+  },
+  {
+   "case": "ood_synthetic_renders_captioned_elevation",
+   "brief": "syntetyczne perspektywy podpisane jako elewacja",
+   "n": 54,
+   "facadeRoute": {
+    "A": 54,
+    "B": 35,
+    "C2": 31
+   },
+   "C2_outcomes": {
+    "ACCEPT:ORTHOGRAPHIC_ELEVATION": 31,
+    "REVIEW": 21,
+    "UNKNOWN": 2
+   },
+   "pass": false
+  },
+  {
+   "case": "ood_synthetic_interiors_captioned_elevation",
+   "brief": "syntetyczne wn\u0119trza podpisane jako elewacja",
+   "n": 12,
+   "facadeRoute": {
+    "A": 12,
+    "B": 0,
+    "C2": 0
+   },
+   "C2_outcomes": {
+    "REVIEW": 12
+   },
+   "pass": true
+  },
+  {
+   "case": "ood_synthetic_details",
+   "brief": "detal (klasa nieobecna w treningu): nie mo\u017ce by\u0107 ACCEPT jako inna klasa",
+   "n": 2,
+   "facadeRoute": {
+    "A": 0,
+    "B": 1,
+    "C2": 1
+   },
+   "C2_outcomes": {
+    "ACCEPT:ORTHOGRAPHIC_ELEVATION": 1,
+    "ACCEPT:FLOOR_PLAN": 1
+   },
+   "pass": false
+  },
+  {
+   "case": "attic_plan_captioned_ground",
+   "brief": "rzut poddasza podpisany b\u0142\u0119dnie jako parter",
+   "n": 26,
+   "status": "LIMITATION",
+   "pass": true,
+   "detail": "IU-01 does not read a storey from pixels (no independent evidence on a single plan); the prototype carries the publisher storey as CLAIMED_UNVERIFIED and never as a verified fact. Detecting the swap needs the plan-to-plan comparison of A-1/A-2 (stair position, footprint under the roof), which is outside IU-01."
+  },
+  {
+   "case": "copies_400_and_1200",
+   "brief": "kopie 400 px i 1200 px",
+   "detail": {
+    "resize1200:same": 210,
+    "resize400:same": 210
+   },
+   "pass": true
+  }
+ ]
+}

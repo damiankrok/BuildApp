@@ -1,0 +1,156 @@
+[
+ {
+  "id": "N1",
+  "brief": "zdjęcie wnętrza podpisane na stronie jako elewacja",
+  "truth": "INTERIOR_PERSPECTIVE",
+  "roles": {
+   "document": "ELEVATION",
+   "storey": "NOT_APPLICABLE",
+   "annotation": "UNKNOWN",
+   "view": "FRONT",
+   "projection": "ORTHOGRAPHIC_ELEVATION"
+  },
+  "route": "FACADE_EXTRACTORS",
+  "verdict": "UNSAFE"
+ },
+ {
+  "id": "N1b",
+  "brief": "wnętrze z błędnym slugiem „elewacja”",
+  "truth": "INTERIOR_PERSPECTIVE",
+  "roles": {
+   "document": "ELEVATION",
+   "storey": "NOT_APPLICABLE",
+   "annotation": "UNKNOWN",
+   "view": "REAR",
+   "projection": "ORTHOGRAPHIC_ELEVATION"
+  },
+  "route": "FACADE_EXTRACTORS",
+  "verdict": "UNSAFE"
+ },
+ {
+  "id": "N2",
+  "brief": "perspektywa domu prawie od frontu, nazwana „wizualizacja elewacji frontowej”",
+  "truth": "EXTERIOR_PERSPECTIVE",
+  "roles": {
+   "document": "ELEVATION",
+   "storey": "NOT_APPLICABLE",
+   "annotation": "UNKNOWN",
+   "view": "FRONT",
+   "projection": "ORTHOGRAPHIC_ELEVATION"
+  },
+  "route": "FACADE_EXTRACTORS",
+  "verdict": "UNSAFE"
+ },
+ {
+  "id": "N3",
+  "brief": "perspektywa „widok od frontu”",
+  "truth": "EXTERIOR_PERSPECTIVE",
+  "roles": {
+   "document": "PERSPECTIVE_RENDER",
+   "storey": "NOT_APPLICABLE",
+   "annotation": "UNKNOWN",
+   "view": "UNKNOWN",
+   "projection": "PERSPECTIVE"
+  },
+  "route": "PERSPECTIVE_CAMERA",
+  "verdict": "SAFE"
+ },
+ {
+  "id": "N4",
+  "brief": "wnętrze „wizualizacja salonu” — trafia do solvera kamery zewnętrznej",
+  "truth": "INTERIOR_PERSPECTIVE",
+  "roles": {
+   "document": "PERSPECTIVE_RENDER",
+   "storey": "NOT_APPLICABLE",
+   "annotation": "UNKNOWN",
+   "view": "UNKNOWN",
+   "projection": "PERSPECTIVE"
+  },
+  "route": "PERSPECTIVE_CAMERA",
+  "verdict": "UNSAFE"
+ },
+ {
+  "id": "N5",
+  "brief": "rzut poddasza podpisany błędnie jako parter",
+  "truth": "FLOOR_PLAN/ATTIC",
+  "roles": {
+   "document": "FLOOR_PLAN",
+   "storey": "GROUND",
+   "annotation": "DIMENSIONED",
+   "view": "NOT_APPLICABLE",
+   "projection": "ORTHOGRAPHIC_PLAN"
+  },
+  "route": "FLOOR_PLAN",
+  "verdict": "UNSAFE"
+ },
+ {
+  "id": "N6",
+  "brief": "przekrój podpisany jako elewacja (przypomina elewację)",
+  "truth": "TECHNICAL_SECTION",
+  "roles": {
+   "document": "ELEVATION",
+   "storey": "NOT_APPLICABLE",
+   "annotation": "UNKNOWN",
+   "view": "SIDE_UNSPECIFIED",
+   "projection": "ORTHOGRAPHIC_ELEVATION"
+  },
+  "route": "FACADE_EXTRACTORS",
+  "verdict": "UNSAFE"
+ },
+ {
+  "id": "N7",
+  "brief": "kolaż 2×2 elewacji „elewacje”",
+  "truth": "OTHER (collage)",
+  "roles": {
+   "document": "ELEVATION",
+   "storey": "NOT_APPLICABLE",
+   "annotation": "UNKNOWN",
+   "view": "UNKNOWN",
+   "projection": "ORTHOGRAPHIC_ELEVATION"
+  },
+  "route": "FACADE_EXTRACTORS",
+  "verdict": "UNSAFE"
+ },
+ {
+  "id": "N8",
+  "brief": "plan sytuacyjny",
+  "truth": "SITE_PLAN",
+  "roles": {
+   "document": "FLOOR_PLAN",
+   "storey": "UNKNOWN",
+   "annotation": "DIMENSIONED",
+   "view": "NOT_APPLICABLE",
+   "projection": "ORTHOGRAPHIC_PLAN"
+  },
+  "route": "FLOOR_PLAN",
+  "verdict": "UNSAFE"
+ },
+ {
+  "id": "N9",
+  "brief": "brak podpisu, nieznana strona",
+  "truth": "(any)",
+  "roles": {
+   "document": "UNKNOWN",
+   "storey": "UNKNOWN",
+   "annotation": "UNKNOWN",
+   "view": "UNKNOWN",
+   "projection": "UNKNOWN"
+  },
+  "route": "SKIPPED_UNKNOWN",
+  "verdict": "SAFE"
+ },
+ {
+  "id": "N10",
+  "brief": "detal konstrukcyjny „detal-wiezby” (brak reguły)",
+  "truth": "ARCHITECTURAL_DETAIL",
+  "roles": {
+   "document": "UNKNOWN",
+   "storey": "UNKNOWN",
+   "annotation": "UNKNOWN",
+   "view": "UNKNOWN",
+   "projection": "UNKNOWN"
+  },
+  "route": "SKIPPED_UNKNOWN",
+  "verdict": "SAFE"
+ }
+]

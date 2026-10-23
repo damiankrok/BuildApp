@@ -1,0 +1,3 @@
+{"backbone": "mobilenetv3_large_100", "inputSize": 224, "imageTowerParams": 4202032, "fp32MB": 16.8, "torchMsBatch1Threads1": 24.1, "torchMsBatch1Threads4": 19.2, "peakRssMB": 387.5, "onnx": {"fileMB": 16.8, "ortMsBatch1Threads1": 6.0, "maxAbsDiffVsTorch": 5.334615707397461e-06}}
+{"backbone": "dinov2_vits14", "inputSize": 518, "imageTowerParams": 22056192, "fp32MB": 88.2, "torchMsBatch1Threads1": 993.8, "torchMsBatch1Threads4": 441.1, "peakRssMB": 510.1}
+{"backbone": "clip_vitb32", "inputSize": 224, "imageTowerParams": 87849216, "fp32MB": 351.4, "torchMsBatch1Threads1": 125.6, "torchMsBatch1Threads4": 58.8, "peakRssMB": 1522.8}

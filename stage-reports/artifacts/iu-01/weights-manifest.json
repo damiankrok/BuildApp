@@ -1,0 +1,20 @@
+[
+ {
+  "repo": "timm/mobilenetv3_large_100.ra_in1k",
+  "file": "model.safetensors",
+  "sha256": "f425af34cc1cead2b5d6211f789a1f30b94835dc32f9c0fcc5a916e4fd2dde85",
+  "bytes": 22058321
+ },
+ {
+  "repo": "timm/vit_small_patch14_dinov2.lvd142m",
+  "file": "model.safetensors",
+  "sha256": "04d27f3400d059fc0cfd7d17dd1909a75bf3ea8fb3eeb48b97cb99e57ee20081",
+  "bytes": 88240510
+ },
+ {
+  "repo": "laion/CLIP-ViT-B-32-laion2B-s34B-b79K",
+  "file": "open_clip_model.safetensors",
+  "sha256": "ac4f8c4b88af6d963118cbf40ad93176d092abbedfcb752601ae1866352656e6",
+  "bytes": 605143316
+ }
+]

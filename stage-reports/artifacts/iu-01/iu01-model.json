@@ -1,0 +1,34 @@
+{
+ "typicalityThreshold": 0.3829878866672516,
+ "modelId": "mobilenetv3_large_100+logreg",
+ "modelVersion": "iu01-probe-v1",
+ "backbone": "mobilenetv3_large_100",
+ "classes": [
+  "EXTERIOR_PERSPECTIVE",
+  "FLOOR_PLAN",
+  "INTERIOR_PERSPECTIVE",
+  "ORTHOGRAPHIC_ELEVATION",
+  "OTHER",
+  "SITE_PLAN",
+  "TECHNICAL_SECTION"
+ ],
+ "planClasses": [
+  "DIMENSIONED",
+  "NO_VISIBLE_DIMENSION_CHAINS"
+ ],
+ "styleClasses": [
+  "RENDERED",
+  "SIMPLIFIED"
+ ],
+ "temperature": 0.5079222491205263,
+ "tau": 0.3,
+ "tauElevation": 0.3,
+ "geometry": {
+  "tOrtho": 1.3284,
+  "tPersp": 2.8014,
+  "fittedOn": "TRAIN archon images"
+ },
+ "trainedOn": "TRAIN split (17 ARCHON projects + synthetic derivatives)",
+ "thresholdsFrom": "VAL split (10 ARCHON projects)",
+ "sha256": "85d6e9e4d8aa4360b60389a77bcc2324f3f17f7bcdd0d509a6a8fa95dd71d0b4"
+}

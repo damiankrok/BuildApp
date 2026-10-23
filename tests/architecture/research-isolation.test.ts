@@ -1103,3 +1103,62 @@ describe('005R-EXTERIOR OWNER review pack stays research, offline and pixel-free
     expect([cov.humanTruth, cov.classAccuracy]).toEqual(['NOT_RUN', 'NOT_MEASURED'])
   })
 })
+
+/**
+ * IU-01 IMAGE UNDERSTANDING — the image-role classifier is research (`research/image-understanding/`): Python, frozen
+ * pretrained backbones and a linear head, run offline from a virtual environment outside the repository. Publisher
+ * pixels, Commons pixels, embeddings, weights and the fitted head stay outside Git; the repository keeps code, the
+ * hash-keyed labels and text results. Production may not reach any of it.
+ */
+describe('IU-01 production cannot reach the image-role research, and it commits no pixels or weights', () => {
+  const DIR = 'research/image-understanding/'
+  const tracked = (): string[] => execFileSync('git', ['ls-files', '--cached', '--others', '--exclude-standard', DIR, 'stage-reports/artifacts/iu-01/'], { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(Boolean)
+
+  it('no production source imports research/image-understanding or names its harness', () => {
+    for (const f of productionSources()) {
+      const src = read(f)
+      expect(importsOf(src).filter((i) => i.includes('image-understanding')), f).toEqual([])
+      expect(codeOf(src), f).not.toMatch(/image-understanding|iu_classify|iu01-head/)
+    }
+  })
+
+  it('the harness and its artifacts track only code and text — no image, embedding, weight or archive, each file small', () => {
+    const files = tracked()
+    expect(files.length).toBeGreaterThan(0)
+    for (const f of files) {
+      expect(f, f).toMatch(/\.(py|ts|md|json|csv|txt)$/)
+      expect(statSync(join(ROOT, f)).size, f).toBeLessThan(1_500_000)
+      expect(read(f), f).not.toMatch(/data:image\/|iVBORw0KGgo|\/9j\/4AAQ/)
+    }
+  })
+
+  it('every writer of pixels, embeddings or the fitted head refuses a destination inside the repository', () => {
+    const runs: Array<[string, string[]]> = [
+      ['iu_classify.py', ['--folder', '/nonexistent', '--out', join(ROOT, 'tmp-iu-refused')]],
+      ['geometry_corpus.py', [join(ROOT, 'tmp-iu-refused.json'), '/nonexistent']],
+      ['iu/sheets.py', ['--index', '/nonexistent', '--out', join(ROOT, 'tmp-iu-refused')]],
+      ['data/fetch_commons.py', ['--out', join(ROOT, 'tmp-iu-refused'), '--queries', '[]']],
+    ]
+    for (const [f, args] of runs) {
+      const run = spawnSync('python3', ['-I', join(ROOT, DIR, f), ...args], { cwd: ROOT, encoding: 'utf8' })
+      expect(run.status, f).not.toBe(0)
+      expect(run.stderr + run.stdout, f).toMatch(/REFUSED/)
+    }
+    for (const f of ['evaluate.py', 'build_derived.py', 'embed_corpus.py']) {
+      const run = spawnSync('python3', ['-I', join(ROOT, DIR, f), '--images', '/nonexistent'], { cwd: ROOT, encoding: 'utf8', env: { ...process.env, IU_WORK: join(ROOT, 'tmp-iu-refused') } })
+      expect(run.status, f).not.toBe(0)
+      expect(run.stderr + run.stdout, f).toMatch(/REFUSED/)
+    }
+    expect(existsSync(join(ROOT, 'tmp-iu-refused'))).toBe(false)
+  })
+
+  it('inference runs behind the offline guard and the labels name no URL, caption or slug', () => {
+    for (const f of ['iu_classify.py', 'embed_corpus.py', 'evaluate.py', 'geometry_corpus.py']) expect(read(`${DIR}${f}`), f).toMatch(/offline_guard\(\)/)
+    const labels = read(`${DIR}data/labels-archon.json`)
+    expect(labels).not.toMatch(/https?:\/\/|archon\.pl|\.jpg|\.gif/)
+  })
+
+  it('the Android build packages nothing from IU-01', () => {
+    for (const f of filesUnder('apps/android', /\.gradle\.kts$/)) expect(read(f), f).not.toMatch(/image-understanding|onnx.*mobilenet/i)
+  })
+})

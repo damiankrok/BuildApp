@@ -1,0 +1,32 @@
+{
+ "mobilenetv3_large_100-white": {
+  "images": 1352,
+  "seconds": 26.93,
+  "msPerImageBatch16x4threads": 19.9
+ },
+ "mobilenetv3_large_100-gray": {
+  "images": 1352,
+  "seconds": 26.08,
+  "msPerImageBatch16x4threads": 19.3
+ },
+ "dinov2_vits14-white": {
+  "images": 1352,
+  "seconds": 683.33,
+  "msPerImageBatch16x4threads": 505.4
+ },
+ "dinov2_vits14-gray": {
+  "images": 1352,
+  "seconds": 591.98,
+  "msPerImageBatch16x4threads": 437.9
+ },
+ "clip_vitb32-white": {
+  "images": 1352,
+  "seconds": 51.32,
+  "msPerImageBatch16x4threads": 38.0
+ },
+ "clip_vitb32-gray": {
+  "images": 1352,
+  "seconds": 47.0,
+  "msPerImageBatch16x4threads": 34.8
+ }
+}
