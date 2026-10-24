@@ -1,0 +1,186 @@
+{
+ "FLAT": {
+  "images": 70,
+  "projection": {
+   "ORTHOGRAPHIC_SUPPORTED": 70
+  },
+  "buildingIoU": {
+   "median": 0.9888,
+   "p10": 0.9837,
+   "ci95Median": [
+    0.987,
+    0.989
+   ]
+  },
+  "openings": {
+   "GLASS": {
+    "gt": 193,
+    "kept": 178,
+    "misclassified": 0,
+    "missing": 15,
+    "missingOccluded": 0,
+    "added": 30,
+    "keptShare": 0.922
+   },
+   "DOOR_OR_GATE": {
+    "gt": 84,
+    "kept": 74,
+    "misclassified": 0,
+    "missing": 10,
+    "missingOccluded": 0,
+    "added": 1,
+    "keptShare": 0.881
+   }
+  },
+  "imagesWithExactOpeningSet": 36,
+  "pointShiftPx": {
+   "medianOfImageMedians": 1.58,
+   "ci95": [
+    1.45,
+    1.675
+   ],
+   "medianOfImageP95": 2.48,
+   "worstImageP95": 3.39,
+   "imagesMeetingTarget(med<=2,p95<=5)": 60,
+   "imagesMeasured": 70
+  },
+  "pointShiftP95ShareOfWidth": {
+   "median": 0.0029,
+   "max": 0.00592
+  },
+  "orthographicOnly": {
+   "images": 70,
+   "medianOfImageMedians": 1.58,
+   "medianOfImageP95": 2.48,
+   "meetingTarget": 60
+  },
+  "timingS": {
+   "segmentS": 0.017,
+   "projectionS": 0.035,
+   "cleanS": 1.117
+  }
+ },
+ "LINE": {
+  "images": 70,
+  "projection": {
+   "ORTHOGRAPHIC_SUPPORTED": 70
+  },
+  "buildingIoU": {
+   "median": 0.9885,
+   "p10": 0.9823,
+   "ci95Median": [
+    0.988,
+    0.989
+   ]
+  },
+  "openings": {
+   "GLASS": {
+    "gt": 193,
+    "kept": 151,
+    "misclassified": 22,
+    "missing": 20,
+    "missingOccluded": 0,
+    "added": 103,
+    "keptShare": 0.782
+   },
+   "DOOR_OR_GATE": {
+    "gt": 84,
+    "kept": 80,
+    "misclassified": 0,
+    "missing": 4,
+    "missingOccluded": 0,
+    "added": 1,
+    "keptShare": 0.952
+   }
+  },
+  "imagesWithExactOpeningSet": 9,
+  "pointShiftPx": {
+   "medianOfImageMedians": 1.32,
+   "ci95": [
+    1.235,
+    1.345
+   ],
+   "medianOfImageP95": 2.5,
+   "worstImageP95": 4.01,
+   "imagesMeetingTarget(med<=2,p95<=5)": 55,
+   "imagesMeasured": 70
+  },
+  "pointShiftP95ShareOfWidth": {
+   "median": 0.00299,
+   "max": 0.00709
+  },
+  "orthographicOnly": {
+   "images": 70,
+   "medianOfImageMedians": 1.32,
+   "medianOfImageP95": 2.5,
+   "meetingTarget": 55
+  },
+  "timingS": {
+   "segmentS": 0.017,
+   "projectionS": 0.044,
+   "cleanS": 2.652
+  }
+ },
+ "RENDER": {
+  "images": 70,
+  "projection": {
+   "ORTHOGRAPHIC_SUPPORTED": 54,
+   "INCONCLUSIVE": 16
+  },
+  "buildingIoU": {
+   "median": 0.9032,
+   "p10": 0.8088,
+   "ci95Median": [
+    0.884,
+    0.92
+   ]
+  },
+  "openings": {
+   "GLASS": {
+    "gt": 193,
+    "kept": 107,
+    "misclassified": 3,
+    "missing": 65,
+    "missingOccluded": 18,
+    "added": 38,
+    "keptShare": 0.554
+   },
+   "DOOR_OR_GATE": {
+    "gt": 84,
+    "kept": 27,
+    "misclassified": 6,
+    "missing": 32,
+    "missingOccluded": 19,
+    "added": 67,
+    "keptShare": 0.321
+   }
+  },
+  "imagesWithExactOpeningSet": 3,
+  "pointShiftPx": {
+   "medianOfImageMedians": 1.15,
+   "ci95": [
+    1.09,
+    1.24
+   ],
+   "medianOfImageP95": 3.27,
+   "worstImageP95": 4.5,
+   "imagesMeetingTarget(med<=2,p95<=5)": 68,
+   "imagesMeasured": 70
+  },
+  "pointShiftP95ShareOfWidth": {
+   "median": 0.00408,
+   "max": 0.00804
+  },
+  "orthographicOnly": {
+   "images": 54,
+   "medianOfImageMedians": 1.19,
+   "medianOfImageP95": 3.34,
+   "meetingTarget": 52
+  },
+  "timingS": {
+   "segmentS": 7.063,
+   "projectionS": 0.05,
+   "cleanS": 1.559
+  }
+ }
+}

@@ -19,3 +19,26 @@ Weights used in IU-01 are fetched once by `prepare_models.py` into `$IU_WEIGHTS`
 recorded; every later step runs with `offline_guard()` (socket connect and DNS raise), so a hidden download fails
 loudly. ImageNet-pretrained weights carry the usual caveat that ImageNet's own terms are research-oriented even when
 the weight file is Apache-2.0; that question is for OWNER before any product use.
+
+# IU-02 — segmentation models (geometry-first image understanding)
+
+Read from the Hugging Face model cards on 2026-10-24. Weights live in `$IU_WEIGHTS/iu02/` (outside Git); every IU-02
+inference step runs behind `offline_guard()`. Fetch once, then verify the hashes:
+
+    hf download kornia/mobile_sam mobile_sam.pt --local-dir $IU_WEIGHTS/iu02
+    hf download nvidia/segformer-b0-finetuned-ade-512-512 --local-dir $IU_WEIGHTS/iu02/nvidia_segformer-b0-finetuned-ade-512-512
+    hf download openmmlab/upernet-convnext-tiny --local-dir $IU_WEIGHTS/iu02/openmmlab_upernet-convnext-tiny
+    sha256sum $IU_WEIGHTS/iu02/mobile_sam.pt $IU_WEIGHTS/iu02/*/model.safetensors
+
+(The upstream GitHub raw URL for `mobile_sam.pt` answered 403 through this environment's proxy; the Kornia mirror
+on Hugging Face carries the same Apache-2.0 checkpoint.)
+
+| model | role in IU-02 | licence (card) | params | file | SHA-256 | measured here (x86-64 container, 4 threads, contended) | verdict |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| MobileSAM (`kornia/mobile_sam`, TinyViT encoder) | prompt-based refinement of a coarse building mask | Apache-2.0 | 10.1 M | 40.7 MB | `6dbb9052…` | ~4 s/img at 1024 px incl. encoder | box-prompted refinement raises render IoU slightly but has a worse p95 boundary and collapses on flat drawings; not the default |
+| SegFormer-B0 ADE20K (`nvidia/segformer-b0-finetuned-ade-512-512`) | semantic classes (building, sky, tree, …) | **"other" = NVIDIA Source Code License — non-commercial / research only** | 3.8 M | 15 MB | `6ae39add…` | 2.9 s/img | comparison only; **must not ship** without a licence decision |
+| UperNet ConvNeXt-T ADE20K (`openmmlab/upernet-convnext-tiny`) | default segmenter for renders and photographs | MIT (card); trained on ADE20K, whose images carry their own terms (MIT CSAIL, research-oriented) | 60 M | 230 MB | `cd55b1d3…` | 4.6 s/img | best measured render IoU; size and ADE20K provenance are questions for OWNER before any product use |
+| classical CV (`iu2/seg.py: classic`) | drawings with a light uniform border | own code | — | — | — | 0.02 s/img | exact on line work; fails on renders |
+
+The classifier backbones (MobileNetV3, DINOv2 ViT-S/14, OpenCLIP ViT-B/32) are the IU-01 weights above; no new
+backbone was downloaded. No weight, mask, embedding or fitted head is committed.

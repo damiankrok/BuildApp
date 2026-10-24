@@ -1112,7 +1112,7 @@ describe('005R-EXTERIOR OWNER review pack stays research, offline and pixel-free
  */
 describe('IU-01 production cannot reach the image-role research, and it commits no pixels or weights', () => {
   const DIR = 'research/image-understanding/'
-  const tracked = (): string[] => execFileSync('git', ['ls-files', '--cached', '--others', '--exclude-standard', DIR, 'stage-reports/artifacts/iu-01/'], { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(Boolean)
+  const tracked = (): string[] => execFileSync('git', ['ls-files', '--cached', '--others', '--exclude-standard', DIR, 'stage-reports/artifacts/iu-01/', 'stage-reports/artifacts/iu-02/'], { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(Boolean)
 
   it('no production source imports research/image-understanding or names its harness', () => {
     for (const f of productionSources()) {
@@ -1160,5 +1160,54 @@ describe('IU-01 production cannot reach the image-role research, and it commits 
 
   it('the Android build packages nothing from IU-01', () => {
     for (const f of filesUnder('apps/android', /\.gradle\.kts$/)) expect(read(f), f).not.toMatch(/image-understanding|onnx.*mobilenet/i)
+  })
+})
+
+/**
+ * IU-02 GEOMETRY-FIRST IMAGE UNDERSTANDING — projection test, segmentation bake-off, clean-facade preprocessor and the
+ * fused classifier extend the same research directory. Synthetic renders, LoC/Commons/ARCHON pixels, clean facades,
+ * masks, embeddings, weights and the fitted head stay outside Git; production may not reach `iu2/` or the harness.
+ */
+describe('IU-02 production cannot reach the geometry-first research, and its writers refuse the repository', () => {
+  const DIR = 'research/image-understanding/'
+
+  it('no production source imports iu2 or names the IU-02 harness, head or extractor comparison', () => {
+    for (const f of productionSources()) {
+      const src = read(f)
+      expect(importsOf(src).filter((i) => i.includes('image-understanding') || /(^|\/)iu2(\/|$)/.test(i)), f).toEqual([])
+      expect(codeOf(src), f).not.toMatch(/iu2_train|iu2_final|iu02-head|extractor_compare|clean-facade\.png/)
+    }
+  })
+
+  it('every IU-02 writer of pixels, features, masks, the head or results refuses a destination inside the repository', () => {
+    const bad = join(ROOT, 'tmp-iu02-refused')
+    const runs: Array<[string, string[]]> = [
+      ['geo_features.py', ['--tag', 'x', '--images', '/nonexistent']],
+      ['eval_clean_synth.py', ['--synth', '/nonexistent', '--out', bad]],
+      ['iu2_final.py', ['--sets', 'FINAL_LOC', '--out', join(bad, 'final.json')]],
+      ['iu2_train.py', []],
+      ['iu2/synth3d.py', ['--out', bad, '--prefix', 'x', '--seed', '1', '--houses', '1']],
+      ['data/fetch_loc.py', ['--out', bad, '--queries', '[]']],
+      ['iu2_draw_archon.py', ['0000', '1', `${bad}.json`]],
+    ]
+    for (const [f, args] of runs) {
+      const run = spawnSync('python3', ['-I', join(ROOT, DIR, f), ...args], { cwd: ROOT, encoding: 'utf8', env: { ...process.env, IU_WORK2: bad } })
+      expect(run.status, f).not.toBe(0)
+      expect(run.stderr + run.stdout, f).toMatch(/REFUSED/)
+    }
+    expect(existsSync(bad)).toBe(false)
+    expect(read(`${DIR}iu2/clean.py`)).toMatch(/refuse_inside_repo\(outdir, 'clean facade'\)/)
+    expect(read(`${DIR}extractor_compare.ts`)).toMatch(/REFUSED: comparison outputs never go inside the repository/)
+  })
+
+  it('model fitting and final evaluation run behind the offline guard; LoC labels carry rights, not publisher addresses', () => {
+    for (const f of ['iu2_train.py', 'iu2_final.py', 'eval_clean_synth.py']) expect(read(`${DIR}${f}`), f).toMatch(/offline_guard\(\)/)
+    const loc = JSON.parse(read(`${DIR}data/labels-loc.json`)) as { rows: Array<{ rights: string; labelSource: string }> }
+    expect(loc.rows.length).toBeGreaterThan(0)
+    for (const r of loc.rows) {
+      expect(r.rights).toMatch(/No known restrictions/)
+      expect(r.labelSource).not.toMatch(/MODEL|PREDICT/)
+    }
+    expect(read(`${DIR}data/labels-loc.json`)).not.toMatch(/archon\.pl/)
   })
 })
