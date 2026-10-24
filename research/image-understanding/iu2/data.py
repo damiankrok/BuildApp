@@ -44,7 +44,7 @@ def archon(corpus_dir='/home/user/work005r/corpus/images'):
 
 def synth(dir_, split, tag):
     man = json.load(open(os.path.join(dir_, 'manifest.json')))['rows']
-    return [_row(key=r['id'], tag=tag, source='SYNTH', split=split, project=r['house'], label=r['label'],
+    return [_row(key=r['id'], tag=tag, source='SYNTH', split=split, project='-'.join(r['id'].split('-')[:2]), label=r['label'],
                  multiView=r['label'] == 'OTHER', hard=r.get('perspectiveKind') == 'NEAR_FRONTAL' or r['label'] == 'TECHNICAL_SECTION',
                  path=os.path.join(dir_, r['file']), style=r.get('style'), kind=r.get('perspectiveKind')) for r in man]
 

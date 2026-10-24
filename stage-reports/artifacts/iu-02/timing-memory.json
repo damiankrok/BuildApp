@@ -1,0 +1,12 @@
+{
+ "hardware": "x86-64 container, Intel Xeon @ 2.10GHz, 4 vCPU, PyTorch CPU, shared with other jobs during DEV runs; no phone measured",
+ "perImageMeasured": {
+  "archonElevation1280x597_UPERNET": {"segmentS": [4.16, 4.27, 4.21], "segmentFirstCallS": 10.86, "projectionS": [0.04, 0.05, 0.05], "cleanS": [2.13, 2.30, 2.98], "processMaxRssMB": 1682},
+  "synthFlat1200x1333_CLASSIC": {"segmentS": 0.06, "projectionS": 0.06, "cleanS": 2.18, "processMaxRssMB": 374},
+  "synthLine1600x1777_CLASSIC": {"segmentS": 0.03, "projectionS": 0.09, "cleanS": 11.64, "processMaxRssMB": 374}
+ },
+ "devMedians": {"segmentationBakeoffS": {"CLASSIC": 0.022, "SEGFORMER": 2.873, "UPERNET": 4.645, "SAM_CLASSIC": 4.188, "SAM_UPERNET": 3.804},
+               "cleanSynthDevS": {"FLAT": 1.117, "LINE": 2.652, "RENDER": 1.559}, "renderSegmentUnderContentionS": 7.063},
+ "classifierEmbeddingMsPerImage": {"mobilenetv3_large_100": 16.2, "clip_vitb32": 30.2, "note": "batch 16, 4 threads, 98 FINAL_ARCHON images"},
+ "phone": "PROGNOSIS ONLY: UperNet ConvNeXt-T (60 M params, 230 MB fp32) is not a phone-sized model; clean.py's morphology on >1500 px line drawings takes >10 s even on x86"
+}

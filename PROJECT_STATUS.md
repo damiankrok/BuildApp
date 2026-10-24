@@ -2683,3 +2683,19 @@ style it fails: on 177 synthetic images every trained head errs in 44–60 % of 
 Wikimedia Commons images (frozen before the first run) C2 routes no perspective or interior to the facade extractor
 but accepts only 46 % and is wrong in 33 % of acceptances (three sections reach the facade route). Recommendation: do not
 integrate; IU-02 = building mask, vanishing-point projection check, a second licensed style in the data.
+
+## Geometry-first image understanding and clean facades (STAGE BUILDPLAN IU-02)
+
+Status: **RESEARCH_PARTIAL — gate promising, clean facades not adopted.** Report
+`stage-reports/STAGE_BUILDPLAN_IU_02_GEOMETRY_FIRST_AND_CLEAN_FACADES.md`, code `research/image-understanding/iu2/`,
+numbers `stage-reports/artifacts/iu-02/`, preregistration frozen at `d15abbe` before any FINAL image existed. Production
+analyzer, SourcePackage, solver, reconstruction and Android unchanged; no APK. A projection test (line-family drift with
+uncertainty, radial vanishing point, panels) inside a building mask (classical CV for drawings, UperNet ADE20K for
+renders) plus an OpenCLIP+geometry classifier routes an image to the facade extractor only when both agree. On 890
+FINAL images (LoC HABS/HAER, new synthetic houses, 5 fresh ARCHON families, IU-01 test) it routes 0 perspectives,
+interiors, sections or multi-view sheets (IU-01: 161); top-1 on the independent multi-style set 88 % vs 44 %. Elevation
+coverage 96/160 = 60 % (CI 52–67 %) misses the 70 % bar (ARCHON renders are often INCONCLUSIVE). The deterministic
+clean-facade preprocessor keeps synthetic corners within median 1.2–1.6 px / p95 2.5–3.3 px but loses or invents
+openings outside flat drawings, and the unchanged extractor reads less from clean rasters (36 → 21 readings,
+15 → 11 registered views on 5 DEV houses). Labels of real images are agent labels, not human-verified. SegFormer-B0
+is research-licensed and must not ship.

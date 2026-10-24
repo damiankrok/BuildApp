@@ -1,0 +1,4963 @@
+{
+ "iu02Model": {
+  "modelId": "iu02-EMB+GEO-clip_vitb32-logreg",
+  "headSha256": "016556687dff3d791e37028ddeebcd996d1c8a44360ad837e674091f87a77137",
+  "temperature": 1.146132284837996,
+  "tau": 1.01,
+  "tauElevation": 0.6
+ },
+ "iu01Model": {
+  "modelId": "mobilenetv3_large_100+logreg",
+  "sha256": "85d6e9e4d8aa4360b60389a77bcc2324f3f17f7bcdd0d509a6a8fa95dd71d0b4",
+  "tau": 0.3,
+  "tauElevation": 0.3,
+  "typicalityThreshold": 0.3829878866672516
+ },
+ "missing": [],
+ "sets": {
+  "FINAL_LOC": {
+   "IU01_C2": {
+    "n": 292,
+    "projects": 292,
+    "accepted": 221,
+    "coverage": 0.7568,
+    "coverageWilson": [
+     0.7045,
+     0.8025
+    ],
+    "coverageProjectBootstrap": [
+     0.7055,
+     0.8048
+    ],
+    "review": 2,
+    "unknown": 69,
+    "wrongAccepted": 184,
+    "risk": 0.8326,
+    "riskWilson": [
+     0.7778,
+     0.876
+    ],
+    "riskProjectBootstrap": [
+     0.7807,
+     0.8805
+    ],
+    "facadeRouted": 124,
+    "unsafeRouted": 124,
+    "unsafeByTruth": {
+     "FLOOR_PLAN": 4,
+     "ORTHOGRAPHIC_ELEVATION": 4,
+     "TECHNICAL_SECTION": 5,
+     "EXTERIOR_PERSPECTIVE": 89,
+     "INTERIOR_PERSPECTIVE": 0,
+     "SITE_PLAN": 5,
+     "ARCHITECTURAL_DETAIL": 2,
+     "OTHER": 15,
+     "MULTI_VIEW": 29
+    },
+    "unsafeRateOfNonElevations": 0.4247,
+    "unsafeRateWilson": [
+     0.3693,
+     0.482
+    ],
+    "unsafeRateProjectBootstrap": [
+     0.3699,
+     0.4829
+    ],
+    "singleElevations": 0,
+    "elevationsRouted": 0,
+    "elevationsReview": 0,
+    "elevationsUnknown": 0,
+    "perClass": {
+     "FLOOR_PLAN": {
+      "n": 10,
+      "acceptedCorrect": 6,
+      "acceptedAsThis": 53,
+      "precision": 0.1132,
+      "recall": 0.6,
+      "unknown": 1,
+      "review": 0
+     },
+     "ORTHOGRAPHIC_ELEVATION": {
+      "n": 0,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 124,
+      "precision": 0.0,
+      "recall": null,
+      "unknown": 0,
+      "review": 0
+     },
+     "TECHNICAL_SECTION": {
+      "n": 6,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 7,
+      "precision": 0.0,
+      "recall": 0.0,
+      "unknown": 4,
+      "review": 0
+     },
+     "EXTERIOR_PERSPECTIVE": {
+      "n": 110,
+      "acceptedCorrect": 2,
+      "acceptedAsThis": 2,
+      "precision": 1.0,
+      "recall": 0.0182,
+      "unknown": 15,
+      "review": 2
+     },
+     "INTERIOR_PERSPECTIVE": {
+      "n": 47,
+      "acceptedCorrect": 29,
+      "acceptedAsThis": 31,
+      "precision": 0.9355,
+      "recall": 0.617,
+      "unknown": 18,
+      "review": 0
+     },
+     "SITE_PLAN": {
+      "n": 3,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 4,
+      "precision": 0.0,
+      "recall": 0.0,
+      "unknown": 3,
+      "review": 0
+     },
+     "ARCHITECTURAL_DETAIL": {
+      "n": 15,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 11,
+      "review": 0
+     },
+     "OTHER": {
+      "n": 101,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 17,
+      "review": 0
+     }
+    },
+    "confusion": {
+     "FLOOR_PLAN": {
+      "UNKNOWN": 1,
+      "ORTHOGRAPHIC_ELEVATION": 3,
+      "FLOOR_PLAN": 6
+     },
+     "EXTERIOR_PERSPECTIVE": {
+      "ORTHOGRAPHIC_ELEVATION": 89,
+      "UNKNOWN": 15,
+      "EXTERIOR_PERSPECTIVE": 2,
+      "REVIEW": 2,
+      "TECHNICAL_SECTION": 2
+     },
+     "OTHER": {
+      "ORTHOGRAPHIC_ELEVATION": 30,
+      "TECHNICAL_SECTION": 5,
+      "FLOOR_PLAN": 45,
+      "SITE_PLAN": 4,
+      "UNKNOWN": 17
+     },
+     "TECHNICAL_SECTION": {
+      "UNKNOWN": 4,
+      "ORTHOGRAPHIC_ELEVATION": 1,
+      "FLOOR_PLAN": 1
+     },
+     "INTERIOR_PERSPECTIVE": {
+      "INTERIOR_PERSPECTIVE": 29,
+      "UNKNOWN": 18
+     },
+     "SITE_PLAN": {
+      "UNKNOWN": 3
+     },
+     "ARCHITECTURAL_DETAIL": {
+      "INTERIOR_PERSPECTIVE": 2,
+      "ORTHOGRAPHIC_ELEVATION": 1,
+      "UNKNOWN": 11,
+      "FLOOR_PLAN": 1
+     }
+    },
+    "unsafeCases": [
+     {
+      "key": "007483d547a053fa",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "01d516c4c3a913f6",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "0423bee6355f2e8a",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "08791a212858ec1e",
+      "truth": "SITE_PLAN",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "09c51b3a2e9a2299",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "0db54439bcc2089a",
+      "truth": "FLOOR_PLAN",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "0df2021905f1a4a7",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "14c8c59f8f5d8776",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "157333544059d288",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "1671390a8f15d8ab",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "18706846fa2a3bd0",
+      "truth": "TECHNICAL_SECTION",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "1a319c7543716d47",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "1f9f07943baf11de",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "2334bc32948a383b",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "23878c029f4cae99",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "240336c036daee22",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "28bc9d1eb964abdf",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "2924d6af3e80e08d",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "2adfda19049bcc4d",
+      "truth": "ARCHITECTURAL_DETAIL",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "2cd6177667423fa8",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "2cdaec106e98b93b",
+      "truth": "TECHNICAL_SECTION",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "2db78fa2751955da",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "33910eb5d9834f2b",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "3512527bcc4f4d03",
+      "truth": "TECHNICAL_SECTION",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "38074f945ae6ba67",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "38912eeb42f481dd",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "3b43d3f92bd7b45b",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "3e638f8d04b50cac",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "3f93b5a3e0bf5762",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "420ce0b32278348d",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "4407b2c7d101a9fa",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "450a46774aa52e57",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "46345830472351eb",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "4a1792378bdd43dd",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "4a261617fd70befc",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "4c5ff0ab877cf8b9",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "4d25c2eb16d83a1a",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "4e7521bc83011130",
+      "truth": "SITE_PLAN",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "50c9e259659fb047",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "535b243a832d2361",
+      "truth": "OTHER",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "55b39d9afa3143bd",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "5cac84b157dd6d1e",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "5d82708cc6aea97a",
+      "truth": "FLOOR_PLAN",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "5dbfe1819c30d9e9",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "5dddfb94df39c03c",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "5fa10861bc629d5e",
+      "truth": "SITE_PLAN",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "6011648cbb6f681d",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "60611ad8e723c442",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "63abfda8ab33c1d7",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "64cc276f102cd482",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "69d781936804f601",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "6b73b694233ba6ed",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "6bbaa121032626d6",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "6d53d64c13ecc8a5",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "7034d24c6f44496d",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "70f723ad91cd4000",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "737dfdd8448bb5aa",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "73df65d02d4e4cd6",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "74f14fedde8e60e4",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "76d3d14ebd033239",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "7b20eef699054c13",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "7c82ed947db86531",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "7ecd593ab2d3a1ec",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "7f3f54e3d1125905",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "805d2fd02c1aca27",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "84175e50ebf11a7d",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "86d3aae87eba6bbf",
+      "truth": "ARCHITECTURAL_DETAIL",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "8dae4c730fa20d6b",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "8e49d3504b5e6a8e",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "8e52fb42a9a2325c",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "8f66c0306210e5ad",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "90476afcb46c128a",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "90d2121216678c3b",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "90feed891bfdd3b6",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "9408eb6389ff7fe5",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "94da8d4df90a0191",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "9844af5e7aa714d5",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "98eeb7baa4a2d09a",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "a0f8ac599f51eae6",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "a11ebb8a60af1ddf",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "a62f6e5cf7533645",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "a85acbea937b9388",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "a8d98ad4c378fc75",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "aa73d1dd9946d6a1",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "b7479e0f50910c19",
+      "truth": "SITE_PLAN",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "bcee4edf0bc4f6eb",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "c06d153f31d134d5",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "c2f355764117ecfa",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "c69e0507eb4d156d",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "cb1e5ae1b9feedce",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "ccd79fef995a1604",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "cd18c74f043310f2",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "cd4dcf20239e93b4",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "cf8197b83e3a729a",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "d0280913722b5206",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "d0bafd12301a4518",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "d1b33536a5ce5dcf",
+      "truth": "TECHNICAL_SECTION",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "d49124cc57a62dc6",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "d6578f31407d0524",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "d74a41da0fb0624a",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "d91e26b7d3fc6f07",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "da154142997d76de",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "dbc6b51242f39116",
+      "truth": "TECHNICAL_SECTION",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "dc8a10917d7a5314",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "dde182455c290eed",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "e47e9e25f00000c7",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "e503c091c3828f4b",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "e7c4c447c0c72fe0",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "e83a8dd92511bb82",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "e92299227d55982e",
+      "truth": "SITE_PLAN",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "ebb9ed4934b0d8ea",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "ec537991f553b0a9",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "ed09e488020158c0",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "ed3a87fd15b50199",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "ed8c61c72345f61b",
+      "truth": "FLOOR_PLAN",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "eec34ae726a4e407",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "eef6d8b9e063b5f6",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "f1082a1a7ddd74f0",
+      "truth": "FLOOR_PLAN",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "f2a655c0d3dbaf96",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "f2b0767c4ad7dabc",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "f73a6cb3bba1272a",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "f7f8a8721482ddf8",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "fbc7a9da3797b2f9",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "fe8d9034caa8fec1",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     }
+    ],
+    "wrongCases": [
+     {
+      "key": "007483d547a053fa",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "01d516c4c3a913f6",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "0423bee6355f2e8a",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "044497289b15b4b0",
+      "truth": "OTHER",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "08791a212858ec1e",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "09c51b3a2e9a2299",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "0d3091a4e22ec2c9",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "0d893628cc6791eb",
+      "truth": "OTHER",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "0db54439bcc2089a",
+      "truth": "FLOOR_PLAN",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "0df2021905f1a4a7",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "102c6cd7e2f9d4da",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "113d3ae8c76a9714",
+      "truth": "ARCHITECTURAL_DETAIL",
+      "predicted": "INTERIOR_PERSPECTIVE",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "14c8c59f8f5d8776",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "157333544059d288",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "1671390a8f15d8ab",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "1739972110a9b79d",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "18706846fa2a3bd0",
+      "truth": "TECHNICAL_SECTION",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "1a319c7543716d47",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "1ce2ceacb02b0488",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "1f9f07943baf11de",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "2334bc32948a383b",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "23878c029f4cae99",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "240336c036daee22",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "28bc9d1eb964abdf",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "2924d6af3e80e08d",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "2adfda19049bcc4d",
+      "truth": "ARCHITECTURAL_DETAIL",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "2c29cd570281896d",
+      "truth": "ARCHITECTURAL_DETAIL",
+      "predicted": "INTERIOR_PERSPECTIVE",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "2cd6177667423fa8",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "2cdaec106e98b93b",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "2db78fa2751955da",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "2e59add098e82a39",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "33910eb5d9834f2b",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "3512527bcc4f4d03",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "38074f945ae6ba67",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "38912eeb42f481dd",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "395ba9dbfc0592dd",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "3965fb601b7b6e7e",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "3a057285c6d7a8f4",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "3a879b4ff6dd8bc3",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "3b43d3f92bd7b45b",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "3da1af1d8521ccb6",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "3e638f8d04b50cac",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "3f2d766eafe1d5fa",
+      "truth": "OTHER",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "3f93b5a3e0bf5762",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "420ce0b32278348d",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "424402699c6c7f18",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "43005da6fbf702ea",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "4407b2c7d101a9fa",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "450a46774aa52e57",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "46345830472351eb",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "47ac2b3a8f945c4b",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "49983157fe998fc1",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "49acc159a232d7a0",
+      "truth": "OTHER",
+      "predicted": "SITE_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "4a1792378bdd43dd",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "4a261617fd70befc",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "4aed96e49fb0cd3e",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "4bc156c62e3eb0e7",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "4c5ff0ab877cf8b9",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "4d25c2eb16d83a1a",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "4e7521bc83011130",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "50c9e259659fb047",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "535b243a832d2361",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "546fcd07bd6b5a1d",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "554a769d7ff2c900",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "55b39d9afa3143bd",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "5b58e9da73f8e36c",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "5cac84b157dd6d1e",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "5d82708cc6aea97a",
+      "truth": "FLOOR_PLAN",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "5dbfe1819c30d9e9",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "5dddfb94df39c03c",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "5fa10861bc629d5e",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "6011648cbb6f681d",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "60611ad8e723c442",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "612610ac055a978c",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "635c255ecb4c4b64",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "63abfda8ab33c1d7",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "6497a0d49fc6e0cd",
+      "truth": "OTHER",
+      "predicted": "SITE_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "64cc276f102cd482",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "6757e1ba664695c3",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "68a3c0e8f6927097",
+      "truth": "OTHER",
+      "predicted": "SITE_PLAN",
+      "set": "FINAL_LOC"
+     }
+    ]
+   },
+   "IU02": {
+    "n": 292,
+    "projects": 292,
+    "accepted": 0,
+    "coverage": 0.0,
+    "coverageWilson": [
+     0.0,
+     0.013
+    ],
+    "coverageProjectBootstrap": [
+     0.0,
+     0.0
+    ],
+    "review": 0,
+    "unknown": 292,
+    "wrongAccepted": 0,
+    "risk": null,
+    "riskWilson": [
+     null,
+     null
+    ],
+    "riskProjectBootstrap": [
+     null,
+     null
+    ],
+    "facadeRouted": 0,
+    "unsafeRouted": 0,
+    "unsafeByTruth": {
+     "FLOOR_PLAN": 0,
+     "ORTHOGRAPHIC_ELEVATION": 0,
+     "TECHNICAL_SECTION": 0,
+     "EXTERIOR_PERSPECTIVE": 0,
+     "INTERIOR_PERSPECTIVE": 0,
+     "SITE_PLAN": 0,
+     "ARCHITECTURAL_DETAIL": 0,
+     "OTHER": 0,
+     "MULTI_VIEW": 0
+    },
+    "unsafeRateOfNonElevations": 0.0,
+    "unsafeRateWilson": [
+     0.0,
+     0.013
+    ],
+    "unsafeRateProjectBootstrap": [
+     0.0,
+     0.0
+    ],
+    "singleElevations": 0,
+    "elevationsRouted": 0,
+    "elevationsReview": 0,
+    "elevationsUnknown": 0,
+    "perClass": {
+     "FLOOR_PLAN": {
+      "n": 10,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 10,
+      "review": 0
+     },
+     "ORTHOGRAPHIC_ELEVATION": {
+      "n": 0,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": null,
+      "unknown": 0,
+      "review": 0
+     },
+     "TECHNICAL_SECTION": {
+      "n": 6,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 6,
+      "review": 0
+     },
+     "EXTERIOR_PERSPECTIVE": {
+      "n": 110,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 110,
+      "review": 0
+     },
+     "INTERIOR_PERSPECTIVE": {
+      "n": 47,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 47,
+      "review": 0
+     },
+     "SITE_PLAN": {
+      "n": 3,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 3,
+      "review": 0
+     },
+     "ARCHITECTURAL_DETAIL": {
+      "n": 15,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 15,
+      "review": 0
+     },
+     "OTHER": {
+      "n": 101,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 101,
+      "review": 0
+     }
+    },
+    "confusion": {
+     "FLOOR_PLAN": {
+      "UNKNOWN": 10
+     },
+     "EXTERIOR_PERSPECTIVE": {
+      "UNKNOWN": 110
+     },
+     "OTHER": {
+      "UNKNOWN": 101
+     },
+     "TECHNICAL_SECTION": {
+      "UNKNOWN": 6
+     },
+     "INTERIOR_PERSPECTIVE": {
+      "UNKNOWN": 47
+     },
+     "SITE_PLAN": {
+      "UNKNOWN": 3
+     },
+     "ARCHITECTURAL_DETAIL": {
+      "UNKNOWN": 15
+     }
+    },
+    "unsafeCases": [],
+    "wrongCases": []
+   }
+  },
+  "FINAL_SYNTH": {
+   "IU01_C2": {
+    "n": 290,
+    "projects": 40,
+    "accepted": 209,
+    "coverage": 0.7207,
+    "coverageWilson": [
+     0.6664,
+     0.7692
+    ],
+    "coverageProjectBootstrap": [
+     0.6829,
+     0.7578
+    ],
+    "review": 9,
+    "unknown": 72,
+    "wrongAccepted": 106,
+    "risk": 0.5072,
+    "riskWilson": [
+     0.4399,
+     0.5742
+    ],
+    "riskProjectBootstrap": [
+     0.4589,
+     0.5517
+    ],
+    "facadeRouted": 87,
+    "unsafeRouted": 37,
+    "unsafeByTruth": {
+     "FLOOR_PLAN": 0,
+     "ORTHOGRAPHIC_ELEVATION": 0,
+     "TECHNICAL_SECTION": 0,
+     "EXTERIOR_PERSPECTIVE": 28,
+     "INTERIOR_PERSPECTIVE": 7,
+     "SITE_PLAN": 0,
+     "ARCHITECTURAL_DETAIL": 0,
+     "OTHER": 2,
+     "MULTI_VIEW": 2
+    },
+    "unsafeRateOfNonElevations": 0.2176,
+    "unsafeRateWilson": [
+     0.1622,
+     0.2855
+    ],
+    "unsafeRateProjectBootstrap": [
+     0.1686,
+     0.2679
+    ],
+    "singleElevations": 120,
+    "elevationsRouted": 50,
+    "elevationsReview": 0,
+    "elevationsUnknown": 31,
+    "perClass": {
+     "FLOOR_PLAN": {
+      "n": 20,
+      "acceptedCorrect": 4,
+      "acceptedAsThis": 22,
+      "precision": 0.1818,
+      "recall": 0.2,
+      "unknown": 0,
+      "review": 0
+     },
+     "ORTHOGRAPHIC_ELEVATION": {
+      "n": 120,
+      "acceptedCorrect": 50,
+      "acceptedAsThis": 87,
+      "precision": 0.5747,
+      "recall": 0.4167,
+      "unknown": 31,
+      "review": 0
+     },
+     "TECHNICAL_SECTION": {
+      "n": 40,
+      "acceptedCorrect": 40,
+      "acceptedAsThis": 89,
+      "precision": 0.4494,
+      "recall": 1.0,
+      "unknown": 0,
+      "review": 0
+     },
+     "EXTERIOR_PERSPECTIVE": {
+      "n": 80,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 36,
+      "review": 5
+     },
+     "INTERIOR_PERSPECTIVE": {
+      "n": 20,
+      "acceptedCorrect": 9,
+      "acceptedAsThis": 9,
+      "precision": 1.0,
+      "recall": 0.45,
+      "unknown": 0,
+      "review": 4
+     },
+     "SITE_PLAN": {
+      "n": 0,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 2,
+      "precision": 0.0,
+      "recall": null,
+      "unknown": 0,
+      "review": 0
+     },
+     "ARCHITECTURAL_DETAIL": {
+      "n": 0,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": null,
+      "unknown": 0,
+      "review": 0
+     },
+     "OTHER": {
+      "n": 10,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 5,
+      "review": 0
+     }
+    },
+    "confusion": {
+     "ORTHOGRAPHIC_ELEVATION": {
+      "ORTHOGRAPHIC_ELEVATION": 50,
+      "UNKNOWN": 31,
+      "TECHNICAL_SECTION": 22,
+      "FLOOR_PLAN": 15,
+      "SITE_PLAN": 2
+     },
+     "EXTERIOR_PERSPECTIVE": {
+      "UNKNOWN": 36,
+      "ORTHOGRAPHIC_ELEVATION": 28,
+      "TECHNICAL_SECTION": 10,
+      "REVIEW": 5,
+      "FLOOR_PLAN": 1
+     },
+     "TECHNICAL_SECTION": {
+      "TECHNICAL_SECTION": 40
+     },
+     "INTERIOR_PERSPECTIVE": {
+      "INTERIOR_PERSPECTIVE": 9,
+      "REVIEW": 4,
+      "ORTHOGRAPHIC_ELEVATION": 7
+     },
+     "FLOOR_PLAN": {
+      "FLOOR_PLAN": 4,
+      "TECHNICAL_SECTION": 16
+     },
+     "OTHER": {
+      "ORTHOGRAPHIC_ELEVATION": 2,
+      "FLOOR_PLAN": 2,
+      "TECHNICAL_SECTION": 1,
+      "UNKNOWN": 5
+     }
+    },
+    "unsafeCases": [
+     {
+      "key": "sfin-h001-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h002-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h003-collag",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h005-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h008-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h010-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h010-interi",
+      "truth": "INTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h011-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h012-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h012-interi",
+      "truth": "INTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h013-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h014-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h016-interi",
+      "truth": "INTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h017-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h018-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h018-interi",
+      "truth": "INTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h019-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h020-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h020-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h022-interi",
+      "truth": "INTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h023-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h024-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h024-interi",
+      "truth": "INTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h025-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h027-collag",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h028-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h030-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h031-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h031-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h033-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h034-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h034-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h035-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h037-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h038-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h038-interi",
+      "truth": "INTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h039-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     }
+    ],
+    "wrongCases": [
+     {
+      "key": "sfin-h000-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h001-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h001-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h002-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h002-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h002-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h003-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h003-plan",
+      "truth": "FLOOR_PLAN",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h003-collag",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h005-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h005-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h005-plan",
+      "truth": "FLOOR_PLAN",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h006-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h006-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h007-plan",
+      "truth": "FLOOR_PLAN",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h007-collag",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h008-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h008-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h009-elev-f",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "SITE_PLAN",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h009-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "SITE_PLAN",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h009-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h009-plan",
+      "truth": "FLOOR_PLAN",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h010-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h010-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h010-interi",
+      "truth": "INTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h011-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h011-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h011-plan",
+      "truth": "FLOOR_PLAN",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h011-collag",
+      "truth": "OTHER",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h012-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h012-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h012-interi",
+      "truth": "INTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h013-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h013-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h013-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h013-plan",
+      "truth": "FLOOR_PLAN",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h014-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h014-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h015-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h015-plan",
+      "truth": "FLOOR_PLAN",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h016-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h016-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h016-interi",
+      "truth": "INTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h017-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h017-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h017-plan",
+      "truth": "FLOOR_PLAN",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h018-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h018-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h018-interi",
+      "truth": "INTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h019-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h019-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h019-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h019-plan",
+      "truth": "FLOOR_PLAN",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h020-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h020-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h020-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h021-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h021-plan",
+      "truth": "FLOOR_PLAN",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h022-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h022-interi",
+      "truth": "INTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h023-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h023-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h023-plan",
+      "truth": "FLOOR_PLAN",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h024-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h024-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h024-interi",
+      "truth": "INTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h025-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h025-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h025-plan",
+      "truth": "FLOOR_PLAN",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h026-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h027-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h027-collag",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h028-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h028-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h029-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h029-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h029-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h030-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h030-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h031-elev-l",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_SYNTH"
+     }
+    ]
+   },
+   "IU02": {
+    "n": 290,
+    "projects": 40,
+    "accepted": 78,
+    "coverage": 0.269,
+    "coverageWilson": [
+     0.2212,
+     0.3228
+    ],
+    "coverageProjectBootstrap": [
+     0.2508,
+     0.2807
+    ],
+    "review": 2,
+    "unknown": 210,
+    "wrongAccepted": 0,
+    "risk": 0.0,
+    "riskWilson": [
+     0.0,
+     0.0469
+    ],
+    "riskProjectBootstrap": [
+     0.0,
+     0.0
+    ],
+    "facadeRouted": 78,
+    "unsafeRouted": 0,
+    "unsafeByTruth": {
+     "FLOOR_PLAN": 0,
+     "ORTHOGRAPHIC_ELEVATION": 0,
+     "TECHNICAL_SECTION": 0,
+     "EXTERIOR_PERSPECTIVE": 0,
+     "INTERIOR_PERSPECTIVE": 0,
+     "SITE_PLAN": 0,
+     "ARCHITECTURAL_DETAIL": 0,
+     "OTHER": 0,
+     "MULTI_VIEW": 0
+    },
+    "unsafeRateOfNonElevations": 0.0,
+    "unsafeRateWilson": [
+     0.0,
+     0.0221
+    ],
+    "unsafeRateProjectBootstrap": [
+     0.0,
+     0.0
+    ],
+    "singleElevations": 120,
+    "elevationsRouted": 78,
+    "elevationsReview": 2,
+    "elevationsUnknown": 40,
+    "perClass": {
+     "FLOOR_PLAN": {
+      "n": 20,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 20,
+      "review": 0
+     },
+     "ORTHOGRAPHIC_ELEVATION": {
+      "n": 120,
+      "acceptedCorrect": 78,
+      "acceptedAsThis": 78,
+      "precision": 1.0,
+      "recall": 0.65,
+      "unknown": 40,
+      "review": 2
+     },
+     "TECHNICAL_SECTION": {
+      "n": 40,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 40,
+      "review": 0
+     },
+     "EXTERIOR_PERSPECTIVE": {
+      "n": 80,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 80,
+      "review": 0
+     },
+     "INTERIOR_PERSPECTIVE": {
+      "n": 20,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 20,
+      "review": 0
+     },
+     "SITE_PLAN": {
+      "n": 0,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": null,
+      "unknown": 0,
+      "review": 0
+     },
+     "ARCHITECTURAL_DETAIL": {
+      "n": 0,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": null,
+      "unknown": 0,
+      "review": 0
+     },
+     "OTHER": {
+      "n": 10,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 10,
+      "review": 0
+     }
+    },
+    "confusion": {
+     "ORTHOGRAPHIC_ELEVATION": {
+      "ORTHOGRAPHIC_ELEVATION": 78,
+      "UNKNOWN": 40,
+      "REVIEW": 2
+     },
+     "EXTERIOR_PERSPECTIVE": {
+      "UNKNOWN": 80
+     },
+     "TECHNICAL_SECTION": {
+      "UNKNOWN": 40
+     },
+     "INTERIOR_PERSPECTIVE": {
+      "UNKNOWN": 20
+     },
+     "FLOOR_PLAN": {
+      "UNKNOWN": 20
+     },
+     "OTHER": {
+      "UNKNOWN": 10
+     }
+    },
+    "unsafeCases": [],
+    "wrongCases": []
+   }
+  },
+  "FINAL_ARCHON": {
+   "IU01_C2": {
+    "n": 98,
+    "projects": 5,
+    "accepted": 97,
+    "coverage": 0.9898,
+    "coverageWilson": [
+     0.9444,
+     0.9982
+    ],
+    "coverageProjectBootstrap": [
+     0.9703,
+     1.0
+    ],
+    "review": 0,
+    "unknown": 1,
+    "wrongAccepted": 0,
+    "risk": 0.0,
+    "riskWilson": [
+     0.0,
+     0.0381
+    ],
+    "riskProjectBootstrap": [
+     0.0,
+     0.0
+    ],
+    "facadeRouted": 40,
+    "unsafeRouted": 0,
+    "unsafeByTruth": {
+     "FLOOR_PLAN": 0,
+     "ORTHOGRAPHIC_ELEVATION": 0,
+     "TECHNICAL_SECTION": 0,
+     "EXTERIOR_PERSPECTIVE": 0,
+     "INTERIOR_PERSPECTIVE": 0,
+     "SITE_PLAN": 0,
+     "ARCHITECTURAL_DETAIL": 0,
+     "OTHER": 0,
+     "MULTI_VIEW": 0
+    },
+    "unsafeRateOfNonElevations": 0.0,
+    "unsafeRateWilson": [
+     0.0,
+     0.0621
+    ],
+    "unsafeRateProjectBootstrap": [
+     0.0,
+     0.0
+    ],
+    "singleElevations": 40,
+    "elevationsRouted": 40,
+    "elevationsReview": 0,
+    "elevationsUnknown": 0,
+    "perClass": {
+     "FLOOR_PLAN": {
+      "n": 16,
+      "acceptedCorrect": 16,
+      "acceptedAsThis": 16,
+      "precision": 1.0,
+      "recall": 1.0,
+      "unknown": 0,
+      "review": 0
+     },
+     "ORTHOGRAPHIC_ELEVATION": {
+      "n": 40,
+      "acceptedCorrect": 40,
+      "acceptedAsThis": 40,
+      "precision": 1.0,
+      "recall": 1.0,
+      "unknown": 0,
+      "review": 0
+     },
+     "TECHNICAL_SECTION": {
+      "n": 10,
+      "acceptedCorrect": 10,
+      "acceptedAsThis": 10,
+      "precision": 1.0,
+      "recall": 1.0,
+      "unknown": 0,
+      "review": 0
+     },
+     "EXTERIOR_PERSPECTIVE": {
+      "n": 27,
+      "acceptedCorrect": 26,
+      "acceptedAsThis": 26,
+      "precision": 1.0,
+      "recall": 0.963,
+      "unknown": 1,
+      "review": 0
+     },
+     "INTERIOR_PERSPECTIVE": {
+      "n": 0,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": null,
+      "unknown": 0,
+      "review": 0
+     },
+     "SITE_PLAN": {
+      "n": 5,
+      "acceptedCorrect": 5,
+      "acceptedAsThis": 5,
+      "precision": 1.0,
+      "recall": 1.0,
+      "unknown": 0,
+      "review": 0
+     },
+     "ARCHITECTURAL_DETAIL": {
+      "n": 0,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": null,
+      "unknown": 0,
+      "review": 0
+     },
+     "OTHER": {
+      "n": 0,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": null,
+      "unknown": 0,
+      "review": 0
+     }
+    },
+    "confusion": {
+     "ORTHOGRAPHIC_ELEVATION": {
+      "ORTHOGRAPHIC_ELEVATION": 40
+     },
+     "SITE_PLAN": {
+      "SITE_PLAN": 5
+     },
+     "EXTERIOR_PERSPECTIVE": {
+      "EXTERIOR_PERSPECTIVE": 26,
+      "UNKNOWN": 1
+     },
+     "TECHNICAL_SECTION": {
+      "TECHNICAL_SECTION": 10
+     },
+     "FLOOR_PLAN": {
+      "FLOOR_PLAN": 16
+     }
+    },
+    "unsafeCases": [],
+    "wrongCases": []
+   },
+   "IU02": {
+    "n": 98,
+    "projects": 5,
+    "accepted": 18,
+    "coverage": 0.1837,
+    "coverageWilson": [
+     0.1195,
+     0.2718
+    ],
+    "coverageProjectBootstrap": [
+     0.0737,
+     0.3125
+    ],
+    "review": 22,
+    "unknown": 58,
+    "wrongAccepted": 0,
+    "risk": 0.0,
+    "riskWilson": [
+     0.0,
+     0.1759
+    ],
+    "riskProjectBootstrap": [
+     0.0,
+     0.0
+    ],
+    "facadeRouted": 18,
+    "unsafeRouted": 0,
+    "unsafeByTruth": {
+     "FLOOR_PLAN": 0,
+     "ORTHOGRAPHIC_ELEVATION": 0,
+     "TECHNICAL_SECTION": 0,
+     "EXTERIOR_PERSPECTIVE": 0,
+     "INTERIOR_PERSPECTIVE": 0,
+     "SITE_PLAN": 0,
+     "ARCHITECTURAL_DETAIL": 0,
+     "OTHER": 0,
+     "MULTI_VIEW": 0
+    },
+    "unsafeRateOfNonElevations": 0.0,
+    "unsafeRateWilson": [
+     0.0,
+     0.0621
+    ],
+    "unsafeRateProjectBootstrap": [
+     0.0,
+     0.0
+    ],
+    "singleElevations": 40,
+    "elevationsRouted": 18,
+    "elevationsReview": 22,
+    "elevationsUnknown": 0,
+    "perClass": {
+     "FLOOR_PLAN": {
+      "n": 16,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 16,
+      "review": 0
+     },
+     "ORTHOGRAPHIC_ELEVATION": {
+      "n": 40,
+      "acceptedCorrect": 18,
+      "acceptedAsThis": 18,
+      "precision": 1.0,
+      "recall": 0.45,
+      "unknown": 0,
+      "review": 22
+     },
+     "TECHNICAL_SECTION": {
+      "n": 10,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 10,
+      "review": 0
+     },
+     "EXTERIOR_PERSPECTIVE": {
+      "n": 27,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 27,
+      "review": 0
+     },
+     "INTERIOR_PERSPECTIVE": {
+      "n": 0,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": null,
+      "unknown": 0,
+      "review": 0
+     },
+     "SITE_PLAN": {
+      "n": 5,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 5,
+      "review": 0
+     },
+     "ARCHITECTURAL_DETAIL": {
+      "n": 0,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": null,
+      "unknown": 0,
+      "review": 0
+     },
+     "OTHER": {
+      "n": 0,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": null,
+      "unknown": 0,
+      "review": 0
+     }
+    },
+    "confusion": {
+     "ORTHOGRAPHIC_ELEVATION": {
+      "ORTHOGRAPHIC_ELEVATION": 18,
+      "REVIEW": 22
+     },
+     "SITE_PLAN": {
+      "UNKNOWN": 5
+     },
+     "EXTERIOR_PERSPECTIVE": {
+      "UNKNOWN": 27
+     },
+     "TECHNICAL_SECTION": {
+      "UNKNOWN": 10
+     },
+     "FLOOR_PLAN": {
+      "UNKNOWN": 16
+     }
+    },
+    "unsafeCases": [],
+    "wrongCases": []
+   }
+  },
+  "IU01_TEST": {
+   "IU01_C2": {
+    "n": 210,
+    "projects": 7,
+    "accepted": 208,
+    "coverage": 0.9905,
+    "coverageWilson": [
+     0.9659,
+     0.9974
+    ],
+    "coverageProjectBootstrap": [
+     0.9709,
+     1.0
+    ],
+    "review": 0,
+    "unknown": 2,
+    "wrongAccepted": 0,
+    "risk": 0.0,
+    "riskWilson": [
+     0.0,
+     0.0181
+    ],
+    "riskProjectBootstrap": [
+     0.0,
+     0.0
+    ],
+    "facadeRouted": 56,
+    "unsafeRouted": 0,
+    "unsafeByTruth": {
+     "FLOOR_PLAN": 0,
+     "ORTHOGRAPHIC_ELEVATION": 0,
+     "TECHNICAL_SECTION": 0,
+     "EXTERIOR_PERSPECTIVE": 0,
+     "INTERIOR_PERSPECTIVE": 0,
+     "SITE_PLAN": 0,
+     "ARCHITECTURAL_DETAIL": 0,
+     "OTHER": 0,
+     "MULTI_VIEW": 0
+    },
+    "unsafeRateOfNonElevations": 0.0,
+    "unsafeRateWilson": [
+     0.0,
+     0.0243
+    ],
+    "unsafeRateProjectBootstrap": [
+     0.0,
+     0.0
+    ],
+    "singleElevations": 56,
+    "elevationsRouted": 56,
+    "elevationsReview": 0,
+    "elevationsUnknown": 0,
+    "perClass": {
+     "FLOOR_PLAN": {
+      "n": 26,
+      "acceptedCorrect": 26,
+      "acceptedAsThis": 26,
+      "precision": 1.0,
+      "recall": 1.0,
+      "unknown": 0,
+      "review": 0
+     },
+     "ORTHOGRAPHIC_ELEVATION": {
+      "n": 56,
+      "acceptedCorrect": 56,
+      "acceptedAsThis": 56,
+      "precision": 1.0,
+      "recall": 1.0,
+      "unknown": 0,
+      "review": 0
+     },
+     "TECHNICAL_SECTION": {
+      "n": 12,
+      "acceptedCorrect": 12,
+      "acceptedAsThis": 12,
+      "precision": 1.0,
+      "recall": 1.0,
+      "unknown": 0,
+      "review": 0
+     },
+     "EXTERIOR_PERSPECTIVE": {
+      "n": 40,
+      "acceptedCorrect": 40,
+      "acceptedAsThis": 40,
+      "precision": 1.0,
+      "recall": 1.0,
+      "unknown": 0,
+      "review": 0
+     },
+     "INTERIOR_PERSPECTIVE": {
+      "n": 69,
+      "acceptedCorrect": 67,
+      "acceptedAsThis": 67,
+      "precision": 1.0,
+      "recall": 0.971,
+      "unknown": 2,
+      "review": 0
+     },
+     "SITE_PLAN": {
+      "n": 7,
+      "acceptedCorrect": 7,
+      "acceptedAsThis": 7,
+      "precision": 1.0,
+      "recall": 1.0,
+      "unknown": 0,
+      "review": 0
+     },
+     "ARCHITECTURAL_DETAIL": {
+      "n": 0,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": null,
+      "unknown": 0,
+      "review": 0
+     },
+     "OTHER": {
+      "n": 0,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": null,
+      "unknown": 0,
+      "review": 0
+     }
+    },
+    "confusion": {
+     "EXTERIOR_PERSPECTIVE": {
+      "EXTERIOR_PERSPECTIVE": 40
+     },
+     "INTERIOR_PERSPECTIVE": {
+      "INTERIOR_PERSPECTIVE": 67,
+      "UNKNOWN": 2
+     },
+     "ORTHOGRAPHIC_ELEVATION": {
+      "ORTHOGRAPHIC_ELEVATION": 56
+     },
+     "FLOOR_PLAN": {
+      "FLOOR_PLAN": 26
+     },
+     "SITE_PLAN": {
+      "SITE_PLAN": 7
+     },
+     "TECHNICAL_SECTION": {
+      "TECHNICAL_SECTION": 12
+     }
+    },
+    "unsafeCases": [],
+    "wrongCases": []
+   },
+   "IU02": {
+    "n": 210,
+    "projects": 7,
+    "accepted": 11,
+    "coverage": 0.0524,
+    "coverageWilson": [
+     0.0295,
+     0.0913
+    ],
+    "coverageProjectBootstrap": [
+     0.014,
+     0.104
+    ],
+    "review": 45,
+    "unknown": 154,
+    "wrongAccepted": 0,
+    "risk": 0.0,
+    "riskWilson": [
+     0.0,
+     0.2588
+    ],
+    "riskProjectBootstrap": [
+     0.0,
+     0.0
+    ],
+    "facadeRouted": 11,
+    "unsafeRouted": 0,
+    "unsafeByTruth": {
+     "FLOOR_PLAN": 0,
+     "ORTHOGRAPHIC_ELEVATION": 0,
+     "TECHNICAL_SECTION": 0,
+     "EXTERIOR_PERSPECTIVE": 0,
+     "INTERIOR_PERSPECTIVE": 0,
+     "SITE_PLAN": 0,
+     "ARCHITECTURAL_DETAIL": 0,
+     "OTHER": 0,
+     "MULTI_VIEW": 0
+    },
+    "unsafeRateOfNonElevations": 0.0,
+    "unsafeRateWilson": [
+     0.0,
+     0.0243
+    ],
+    "unsafeRateProjectBootstrap": [
+     0.0,
+     0.0
+    ],
+    "singleElevations": 56,
+    "elevationsRouted": 11,
+    "elevationsReview": 45,
+    "elevationsUnknown": 0,
+    "perClass": {
+     "FLOOR_PLAN": {
+      "n": 26,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 26,
+      "review": 0
+     },
+     "ORTHOGRAPHIC_ELEVATION": {
+      "n": 56,
+      "acceptedCorrect": 11,
+      "acceptedAsThis": 11,
+      "precision": 1.0,
+      "recall": 0.1964,
+      "unknown": 0,
+      "review": 45
+     },
+     "TECHNICAL_SECTION": {
+      "n": 12,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 12,
+      "review": 0
+     },
+     "EXTERIOR_PERSPECTIVE": {
+      "n": 40,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 40,
+      "review": 0
+     },
+     "INTERIOR_PERSPECTIVE": {
+      "n": 69,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 69,
+      "review": 0
+     },
+     "SITE_PLAN": {
+      "n": 7,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 7,
+      "review": 0
+     },
+     "ARCHITECTURAL_DETAIL": {
+      "n": 0,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": null,
+      "unknown": 0,
+      "review": 0
+     },
+     "OTHER": {
+      "n": 0,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": null,
+      "unknown": 0,
+      "review": 0
+     }
+    },
+    "confusion": {
+     "EXTERIOR_PERSPECTIVE": {
+      "UNKNOWN": 40
+     },
+     "INTERIOR_PERSPECTIVE": {
+      "UNKNOWN": 69
+     },
+     "ORTHOGRAPHIC_ELEVATION": {
+      "REVIEW": 45,
+      "ORTHOGRAPHIC_ELEVATION": 11
+     },
+     "FLOOR_PLAN": {
+      "UNKNOWN": 26
+     },
+     "SITE_PLAN": {
+      "UNKNOWN": 7
+     },
+     "TECHNICAL_SECTION": {
+      "UNKNOWN": 12
+     }
+    },
+    "unsafeCases": [],
+    "wrongCases": []
+   }
+  },
+  "ALL": {
+   "IU01_C2": {
+    "n": 890,
+    "projects": 344,
+    "accepted": 735,
+    "coverage": 0.8258,
+    "coverageWilson": [
+     0.7995,
+     0.8493
+    ],
+    "coverageProjectBootstrap": [
+     0.7806,
+     0.8634
+    ],
+    "review": 11,
+    "unknown": 144,
+    "wrongAccepted": 290,
+    "risk": 0.3946,
+    "riskWilson": [
+     0.3599,
+     0.4304
+    ],
+    "riskProjectBootstrap": [
+     0.3026,
+     0.5161
+    ],
+    "facadeRouted": 307,
+    "unsafeRouted": 161,
+    "unsafeByTruth": {
+     "FLOOR_PLAN": 4,
+     "ORTHOGRAPHIC_ELEVATION": 4,
+     "TECHNICAL_SECTION": 5,
+     "EXTERIOR_PERSPECTIVE": 117,
+     "INTERIOR_PERSPECTIVE": 7,
+     "SITE_PLAN": 5,
+     "ARCHITECTURAL_DETAIL": 2,
+     "OTHER": 17,
+     "MULTI_VIEW": 31
+    },
+    "unsafeRateOfNonElevations": 0.2389,
+    "unsafeRateWilson": [
+     0.2082,
+     0.2725
+    ],
+    "unsafeRateProjectBootstrap": [
+     0.1879,
+     0.3043
+    ],
+    "singleElevations": 216,
+    "elevationsRouted": 146,
+    "elevationsReview": 0,
+    "elevationsUnknown": 31,
+    "perClass": {
+     "FLOOR_PLAN": {
+      "n": 72,
+      "acceptedCorrect": 52,
+      "acceptedAsThis": 117,
+      "precision": 0.4444,
+      "recall": 0.7222,
+      "unknown": 1,
+      "review": 0
+     },
+     "ORTHOGRAPHIC_ELEVATION": {
+      "n": 216,
+      "acceptedCorrect": 146,
+      "acceptedAsThis": 307,
+      "precision": 0.4756,
+      "recall": 0.6759,
+      "unknown": 31,
+      "review": 0
+     },
+     "TECHNICAL_SECTION": {
+      "n": 68,
+      "acceptedCorrect": 62,
+      "acceptedAsThis": 118,
+      "precision": 0.5254,
+      "recall": 0.9118,
+      "unknown": 4,
+      "review": 0
+     },
+     "EXTERIOR_PERSPECTIVE": {
+      "n": 257,
+      "acceptedCorrect": 68,
+      "acceptedAsThis": 68,
+      "precision": 1.0,
+      "recall": 0.2646,
+      "unknown": 52,
+      "review": 7
+     },
+     "INTERIOR_PERSPECTIVE": {
+      "n": 136,
+      "acceptedCorrect": 105,
+      "acceptedAsThis": 107,
+      "precision": 0.9813,
+      "recall": 0.7721,
+      "unknown": 20,
+      "review": 4
+     },
+     "SITE_PLAN": {
+      "n": 15,
+      "acceptedCorrect": 12,
+      "acceptedAsThis": 18,
+      "precision": 0.6667,
+      "recall": 0.8,
+      "unknown": 3,
+      "review": 0
+     },
+     "ARCHITECTURAL_DETAIL": {
+      "n": 15,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 11,
+      "review": 0
+     },
+     "OTHER": {
+      "n": 111,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 22,
+      "review": 0
+     }
+    },
+    "confusion": {
+     "FLOOR_PLAN": {
+      "UNKNOWN": 1,
+      "ORTHOGRAPHIC_ELEVATION": 3,
+      "FLOOR_PLAN": 52,
+      "TECHNICAL_SECTION": 16
+     },
+     "EXTERIOR_PERSPECTIVE": {
+      "ORTHOGRAPHIC_ELEVATION": 117,
+      "UNKNOWN": 52,
+      "EXTERIOR_PERSPECTIVE": 68,
+      "REVIEW": 7,
+      "TECHNICAL_SECTION": 12,
+      "FLOOR_PLAN": 1
+     },
+     "OTHER": {
+      "ORTHOGRAPHIC_ELEVATION": 32,
+      "TECHNICAL_SECTION": 6,
+      "FLOOR_PLAN": 47,
+      "SITE_PLAN": 4,
+      "UNKNOWN": 22
+     },
+     "TECHNICAL_SECTION": {
+      "UNKNOWN": 4,
+      "ORTHOGRAPHIC_ELEVATION": 1,
+      "FLOOR_PLAN": 1,
+      "TECHNICAL_SECTION": 62
+     },
+     "INTERIOR_PERSPECTIVE": {
+      "INTERIOR_PERSPECTIVE": 105,
+      "UNKNOWN": 20,
+      "REVIEW": 4,
+      "ORTHOGRAPHIC_ELEVATION": 7
+     },
+     "SITE_PLAN": {
+      "UNKNOWN": 3,
+      "SITE_PLAN": 12
+     },
+     "ARCHITECTURAL_DETAIL": {
+      "INTERIOR_PERSPECTIVE": 2,
+      "ORTHOGRAPHIC_ELEVATION": 1,
+      "UNKNOWN": 11,
+      "FLOOR_PLAN": 1
+     },
+     "ORTHOGRAPHIC_ELEVATION": {
+      "ORTHOGRAPHIC_ELEVATION": 146,
+      "UNKNOWN": 31,
+      "TECHNICAL_SECTION": 22,
+      "FLOOR_PLAN": 15,
+      "SITE_PLAN": 2
+     }
+    },
+    "unsafeCases": [
+     {
+      "key": "007483d547a053fa",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "01d516c4c3a913f6",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "0423bee6355f2e8a",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "08791a212858ec1e",
+      "truth": "SITE_PLAN",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "09c51b3a2e9a2299",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "0db54439bcc2089a",
+      "truth": "FLOOR_PLAN",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "0df2021905f1a4a7",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "14c8c59f8f5d8776",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "157333544059d288",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "1671390a8f15d8ab",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "18706846fa2a3bd0",
+      "truth": "TECHNICAL_SECTION",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "1a319c7543716d47",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "1f9f07943baf11de",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "2334bc32948a383b",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "23878c029f4cae99",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "240336c036daee22",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "28bc9d1eb964abdf",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "2924d6af3e80e08d",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "2adfda19049bcc4d",
+      "truth": "ARCHITECTURAL_DETAIL",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "2cd6177667423fa8",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "2cdaec106e98b93b",
+      "truth": "TECHNICAL_SECTION",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "2db78fa2751955da",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "33910eb5d9834f2b",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "3512527bcc4f4d03",
+      "truth": "TECHNICAL_SECTION",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "38074f945ae6ba67",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "38912eeb42f481dd",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "3b43d3f92bd7b45b",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "3e638f8d04b50cac",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "3f93b5a3e0bf5762",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "420ce0b32278348d",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "4407b2c7d101a9fa",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "450a46774aa52e57",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "46345830472351eb",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "4a1792378bdd43dd",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "4a261617fd70befc",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "4c5ff0ab877cf8b9",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "4d25c2eb16d83a1a",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "4e7521bc83011130",
+      "truth": "SITE_PLAN",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "50c9e259659fb047",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "535b243a832d2361",
+      "truth": "OTHER",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "55b39d9afa3143bd",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "5cac84b157dd6d1e",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "5d82708cc6aea97a",
+      "truth": "FLOOR_PLAN",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "5dbfe1819c30d9e9",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "5dddfb94df39c03c",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "5fa10861bc629d5e",
+      "truth": "SITE_PLAN",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "6011648cbb6f681d",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "60611ad8e723c442",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "63abfda8ab33c1d7",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "64cc276f102cd482",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "69d781936804f601",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "6b73b694233ba6ed",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "6bbaa121032626d6",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "6d53d64c13ecc8a5",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "7034d24c6f44496d",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "70f723ad91cd4000",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "737dfdd8448bb5aa",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "73df65d02d4e4cd6",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "74f14fedde8e60e4",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "76d3d14ebd033239",
+      "truth": "ORTHOGRAPHIC_ELEVATION",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "7b20eef699054c13",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "7c82ed947db86531",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "7ecd593ab2d3a1ec",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "7f3f54e3d1125905",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "805d2fd02c1aca27",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "84175e50ebf11a7d",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "86d3aae87eba6bbf",
+      "truth": "ARCHITECTURAL_DETAIL",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "8dae4c730fa20d6b",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "8e49d3504b5e6a8e",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "8e52fb42a9a2325c",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "8f66c0306210e5ad",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "90476afcb46c128a",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "90d2121216678c3b",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "90feed891bfdd3b6",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "9408eb6389ff7fe5",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "94da8d4df90a0191",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "9844af5e7aa714d5",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "98eeb7baa4a2d09a",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "a0f8ac599f51eae6",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "a11ebb8a60af1ddf",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "a62f6e5cf7533645",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "a85acbea937b9388",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "a8d98ad4c378fc75",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "aa73d1dd9946d6a1",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "b7479e0f50910c19",
+      "truth": "SITE_PLAN",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "bcee4edf0bc4f6eb",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "c06d153f31d134d5",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "c2f355764117ecfa",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "c69e0507eb4d156d",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "cb1e5ae1b9feedce",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "ccd79fef995a1604",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "cd18c74f043310f2",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "cd4dcf20239e93b4",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "cf8197b83e3a729a",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "d0280913722b5206",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "d0bafd12301a4518",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "d1b33536a5ce5dcf",
+      "truth": "TECHNICAL_SECTION",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "d49124cc57a62dc6",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "d6578f31407d0524",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "d74a41da0fb0624a",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "d91e26b7d3fc6f07",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "da154142997d76de",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "dbc6b51242f39116",
+      "truth": "TECHNICAL_SECTION",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "dc8a10917d7a5314",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "dde182455c290eed",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "e47e9e25f00000c7",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "e503c091c3828f4b",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "e7c4c447c0c72fe0",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "e83a8dd92511bb82",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "e92299227d55982e",
+      "truth": "SITE_PLAN",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "ebb9ed4934b0d8ea",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "ec537991f553b0a9",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "ed09e488020158c0",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "ed3a87fd15b50199",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "ed8c61c72345f61b",
+      "truth": "FLOOR_PLAN",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "eec34ae726a4e407",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "eef6d8b9e063b5f6",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "f1082a1a7ddd74f0",
+      "truth": "FLOOR_PLAN",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "f2a655c0d3dbaf96",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "f2b0767c4ad7dabc",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "f73a6cb3bba1272a",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "f7f8a8721482ddf8",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "fbc7a9da3797b2f9",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "fe8d9034caa8fec1",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "sfin-h001-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h002-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h003-collag",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h005-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h008-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h010-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h010-interi",
+      "truth": "INTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h011-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h012-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h012-interi",
+      "truth": "INTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h013-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h014-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h016-interi",
+      "truth": "INTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h017-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h018-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h018-interi",
+      "truth": "INTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h019-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h020-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h020-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h022-interi",
+      "truth": "INTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h023-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h024-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h024-interi",
+      "truth": "INTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h025-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h027-collag",
+      "truth": "OTHER",
+      "multiView": true,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h028-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h030-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h031-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h031-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h033-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h034-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h034-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h035-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h037-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h038-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h038-interi",
+      "truth": "INTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     },
+     {
+      "key": "sfin-h039-persp-",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "multiView": false,
+      "set": "FINAL_SYNTH"
+     }
+    ],
+    "wrongCases": [
+     {
+      "key": "007483d547a053fa",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "01d516c4c3a913f6",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "0423bee6355f2e8a",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "044497289b15b4b0",
+      "truth": "OTHER",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "08791a212858ec1e",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "09c51b3a2e9a2299",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "0d3091a4e22ec2c9",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "0d893628cc6791eb",
+      "truth": "OTHER",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "0db54439bcc2089a",
+      "truth": "FLOOR_PLAN",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "0df2021905f1a4a7",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "102c6cd7e2f9d4da",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "113d3ae8c76a9714",
+      "truth": "ARCHITECTURAL_DETAIL",
+      "predicted": "INTERIOR_PERSPECTIVE",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "14c8c59f8f5d8776",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "157333544059d288",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "1671390a8f15d8ab",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "1739972110a9b79d",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "18706846fa2a3bd0",
+      "truth": "TECHNICAL_SECTION",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "1a319c7543716d47",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "1ce2ceacb02b0488",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "1f9f07943baf11de",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "2334bc32948a383b",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "23878c029f4cae99",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "240336c036daee22",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "28bc9d1eb964abdf",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "2924d6af3e80e08d",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "2adfda19049bcc4d",
+      "truth": "ARCHITECTURAL_DETAIL",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "2c29cd570281896d",
+      "truth": "ARCHITECTURAL_DETAIL",
+      "predicted": "INTERIOR_PERSPECTIVE",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "2cd6177667423fa8",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "2cdaec106e98b93b",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "2db78fa2751955da",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "2e59add098e82a39",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "33910eb5d9834f2b",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "3512527bcc4f4d03",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "38074f945ae6ba67",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "38912eeb42f481dd",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "395ba9dbfc0592dd",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "3965fb601b7b6e7e",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "3a057285c6d7a8f4",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "3a879b4ff6dd8bc3",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "3b43d3f92bd7b45b",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "3da1af1d8521ccb6",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "3e638f8d04b50cac",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "3f2d766eafe1d5fa",
+      "truth": "OTHER",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "3f93b5a3e0bf5762",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "420ce0b32278348d",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "424402699c6c7f18",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "43005da6fbf702ea",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "4407b2c7d101a9fa",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "450a46774aa52e57",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "46345830472351eb",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "47ac2b3a8f945c4b",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "49983157fe998fc1",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "TECHNICAL_SECTION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "49acc159a232d7a0",
+      "truth": "OTHER",
+      "predicted": "SITE_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "4a1792378bdd43dd",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "4a261617fd70befc",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "4aed96e49fb0cd3e",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "4bc156c62e3eb0e7",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "4c5ff0ab877cf8b9",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "4d25c2eb16d83a1a",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "4e7521bc83011130",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "50c9e259659fb047",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "535b243a832d2361",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "546fcd07bd6b5a1d",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "554a769d7ff2c900",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "55b39d9afa3143bd",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "5b58e9da73f8e36c",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "5cac84b157dd6d1e",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "5d82708cc6aea97a",
+      "truth": "FLOOR_PLAN",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "5dbfe1819c30d9e9",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "5dddfb94df39c03c",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "5fa10861bc629d5e",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "6011648cbb6f681d",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "60611ad8e723c442",
+      "truth": "OTHER",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "612610ac055a978c",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "635c255ecb4c4b64",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "63abfda8ab33c1d7",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "6497a0d49fc6e0cd",
+      "truth": "OTHER",
+      "predicted": "SITE_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "64cc276f102cd482",
+      "truth": "EXTERIOR_PERSPECTIVE",
+      "predicted": "ORTHOGRAPHIC_ELEVATION",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "6757e1ba664695c3",
+      "truth": "OTHER",
+      "predicted": "FLOOR_PLAN",
+      "set": "FINAL_LOC"
+     },
+     {
+      "key": "68a3c0e8f6927097",
+      "truth": "OTHER",
+      "predicted": "SITE_PLAN",
+      "set": "FINAL_LOC"
+     }
+    ]
+   },
+   "IU02": {
+    "n": 890,
+    "projects": 344,
+    "accepted": 107,
+    "coverage": 0.1202,
+    "coverageWilson": [
+     0.1005,
+     0.1432
+    ],
+    "coverageProjectBootstrap": [
+     0.094,
+     0.1475
+    ],
+    "review": 69,
+    "unknown": 714,
+    "wrongAccepted": 0,
+    "risk": 0.0,
+    "riskWilson": [
+     0.0,
+     0.0347
+    ],
+    "riskProjectBootstrap": [
+     0.0,
+     0.0
+    ],
+    "facadeRouted": 107,
+    "unsafeRouted": 0,
+    "unsafeByTruth": {
+     "FLOOR_PLAN": 0,
+     "ORTHOGRAPHIC_ELEVATION": 0,
+     "TECHNICAL_SECTION": 0,
+     "EXTERIOR_PERSPECTIVE": 0,
+     "INTERIOR_PERSPECTIVE": 0,
+     "SITE_PLAN": 0,
+     "ARCHITECTURAL_DETAIL": 0,
+     "OTHER": 0,
+     "MULTI_VIEW": 0
+    },
+    "unsafeRateOfNonElevations": 0.0,
+    "unsafeRateWilson": [
+     0.0,
+     0.0057
+    ],
+    "unsafeRateProjectBootstrap": [
+     0.0,
+     0.0
+    ],
+    "singleElevations": 216,
+    "elevationsRouted": 107,
+    "elevationsReview": 69,
+    "elevationsUnknown": 40,
+    "perClass": {
+     "FLOOR_PLAN": {
+      "n": 72,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 72,
+      "review": 0
+     },
+     "ORTHOGRAPHIC_ELEVATION": {
+      "n": 216,
+      "acceptedCorrect": 107,
+      "acceptedAsThis": 107,
+      "precision": 1.0,
+      "recall": 0.4954,
+      "unknown": 40,
+      "review": 69
+     },
+     "TECHNICAL_SECTION": {
+      "n": 68,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 68,
+      "review": 0
+     },
+     "EXTERIOR_PERSPECTIVE": {
+      "n": 257,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 257,
+      "review": 0
+     },
+     "INTERIOR_PERSPECTIVE": {
+      "n": 136,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 136,
+      "review": 0
+     },
+     "SITE_PLAN": {
+      "n": 15,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 15,
+      "review": 0
+     },
+     "ARCHITECTURAL_DETAIL": {
+      "n": 15,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 15,
+      "review": 0
+     },
+     "OTHER": {
+      "n": 111,
+      "acceptedCorrect": 0,
+      "acceptedAsThis": 0,
+      "precision": null,
+      "recall": 0.0,
+      "unknown": 111,
+      "review": 0
+     }
+    },
+    "confusion": {
+     "FLOOR_PLAN": {
+      "UNKNOWN": 72
+     },
+     "EXTERIOR_PERSPECTIVE": {
+      "UNKNOWN": 257
+     },
+     "OTHER": {
+      "UNKNOWN": 111
+     },
+     "TECHNICAL_SECTION": {
+      "UNKNOWN": 68
+     },
+     "INTERIOR_PERSPECTIVE": {
+      "UNKNOWN": 136
+     },
+     "SITE_PLAN": {
+      "UNKNOWN": 15
+     },
+     "ARCHITECTURAL_DETAIL": {
+      "UNKNOWN": 15
+     },
+     "ORTHOGRAPHIC_ELEVATION": {
+      "ORTHOGRAPHIC_ELEVATION": 107,
+      "UNKNOWN": 40,
+      "REVIEW": 69
+     }
+    },
+    "unsafeCases": [],
+    "wrongCases": []
+   }
+  }
+ }
+}

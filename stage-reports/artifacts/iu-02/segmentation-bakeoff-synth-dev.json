@@ -1,0 +1,121 @@
+{
+ "scores": {
+  "CLASSIC/FLAT": {
+   "n": 70,
+   "buildingIoU": 0.989,
+   "boundaryMedianPx": 0.95,
+   "boundaryP95Px": 3.82,
+   "p10buildingIoU": 0.984
+  },
+  "CLASSIC/LINE": {
+   "n": 70,
+   "buildingIoU": 0.989,
+   "boundaryMedianPx": 0.95,
+   "boundaryP95Px": 6.61,
+   "p10buildingIoU": 0.98
+  },
+  "CLASSIC/RENDER": {
+   "n": 70,
+   "buildingIoU": 0.673,
+   "occluderIoU": 0.923,
+   "boundaryMedianPx": 7.39,
+   "boundaryP95Px": 114.12,
+   "p10buildingIoU": 0.606
+  },
+  "SAM_CLASSIC/FLAT": {
+   "n": 70,
+   "buildingIoU": 0.986,
+   "boundaryMedianPx": 1.37,
+   "boundaryP95Px": 63.77,
+   "p10buildingIoU": 0.788
+  },
+  "SAM_CLASSIC/LINE": {
+   "n": 70,
+   "buildingIoU": 0.974,
+   "boundaryMedianPx": 1.91,
+   "boundaryP95Px": 120.6,
+   "p10buildingIoU": 0.74
+  },
+  "SAM_CLASSIC/RENDER": {
+   "n": 70,
+   "buildingIoU": 0.761,
+   "occluderIoU": 0.923,
+   "boundaryMedianPx": 23.41,
+   "boundaryP95Px": 184.75,
+   "p10buildingIoU": 0.618
+  },
+  "SAM_UPERNET/FLAT": {
+   "n": 70,
+   "buildingIoU": 0.0,
+   "boundaryMedianPx": 3.925,
+   "boundaryP95Px": 174.79,
+   "p10buildingIoU": 0.0
+  },
+  "SAM_UPERNET/LINE": {
+   "n": 70,
+   "buildingIoU": 0.636,
+   "boundaryMedianPx": 71.63,
+   "boundaryP95Px": 199.315,
+   "p10buildingIoU": 0.179
+  },
+  "SAM_UPERNET/RENDER": {
+   "n": 70,
+   "buildingIoU": 0.925,
+   "occluderIoU": 0.0,
+   "boundaryMedianPx": 1.91,
+   "boundaryP95Px": 83.11,
+   "p10buildingIoU": 0.762
+  },
+  "SEGFORMER/FLAT": {
+   "n": 70,
+   "buildingIoU": 0.575,
+   "boundaryMedianPx": 48.23,
+   "boundaryP95Px": 209.805,
+   "p10buildingIoU": 0.233
+  },
+  "SEGFORMER/LINE": {
+   "n": 70,
+   "buildingIoU": 0.299,
+   "boundaryMedianPx": 91.68,
+   "boundaryP95Px": 269.63,
+   "p10buildingIoU": 0.052
+  },
+  "SEGFORMER/RENDER": {
+   "n": 70,
+   "buildingIoU": 0.857,
+   "occluderIoU": 0.173,
+   "boundaryMedianPx": 8.6,
+   "boundaryP95Px": 146.115,
+   "p10buildingIoU": 0.624
+  },
+  "UPERNET/FLAT": {
+   "n": 70,
+   "buildingIoU": 0.284,
+   "boundaryMedianPx": 21.49,
+   "boundaryP95Px": 194.82,
+   "p10buildingIoU": 0.024
+  },
+  "UPERNET/LINE": {
+   "n": 70,
+   "buildingIoU": 0.466,
+   "boundaryMedianPx": 66.5,
+   "boundaryP95Px": 229.3,
+   "p10buildingIoU": 0.183
+  },
+  "UPERNET/RENDER": {
+   "n": 70,
+   "buildingIoU": 0.903,
+   "occluderIoU": 0.0,
+   "boundaryMedianPx": 2.74,
+   "boundaryP95Px": 49.745,
+   "p10buildingIoU": 0.808
+  }
+ },
+ "secondsMedian": {
+  "CLASSIC": 0.022,
+  "SEGFORMER": 2.873,
+  "UPERNET": 4.645,
+  "SAM_CLASSIC": 4.188,
+  "SAM_UPERNET": 3.804
+ }
+}

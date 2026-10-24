@@ -1,0 +1,125 @@
+{
+ "note": "existing reconstructV2 unchanged; only elevation rasters swapped for clean-facade.png of identical size",
+ "houses": {
+  "marcowki": {
+   "truthWallOpenings": 12,
+   "elevationsSwapped": 4,
+   "facadeReadings": {
+    "raw": 9,
+    "clean": 6,
+    "cleanGroundLine": 5
+   },
+   "facadeViews": {
+    "raw": 4,
+    "clean": 3,
+    "cleanGroundLine": 2
+   },
+   "modelOpenings": {
+    "raw": 11,
+    "clean": 11,
+    "cleanGroundLine": 11
+   },
+   "sameModel": false,
+   "seconds": {
+    "raw": 13.953,
+    "clean": 11.153
+   }
+  },
+  "ciesz": {
+   "truthWallOpenings": 14,
+   "elevationsSwapped": 4,
+   "facadeReadings": {
+    "raw": 7,
+    "clean": 4,
+    "cleanGroundLine": 7
+   },
+   "facadeViews": {
+    "raw": 3,
+    "clean": 2,
+    "cleanGroundLine": 2
+   },
+   "modelOpenings": {
+    "raw": 11,
+    "clean": 11,
+    "cleanGroundLine": 11
+   },
+   "sameModel": false,
+   "seconds": {
+    "raw": 12.191,
+    "clean": 10.541
+   }
+  },
+  "a01": {
+   "truthWallOpenings": 13,
+   "elevationsSwapped": 4,
+   "facadeReadings": {
+    "raw": 14,
+    "clean": 0,
+    "cleanGroundLine": 0
+   },
+   "facadeViews": {
+    "raw": 4,
+    "clean": 0,
+    "cleanGroundLine": 0
+   },
+   "modelOpenings": {
+    "raw": 13,
+    "clean": 12,
+    "cleanGroundLine": 12
+   },
+   "sameModel": false,
+   "seconds": {
+    "raw": 17.077,
+    "clean": 12.746
+   }
+  },
+  "gozd": {
+   "truthWallOpenings": 16,
+   "elevationsSwapped": 4,
+   "facadeReadings": {
+    "raw": 0,
+    "clean": 3,
+    "cleanGroundLine": 3
+   },
+   "facadeViews": {
+    "raw": 0,
+    "clean": 2,
+    "cleanGroundLine": 2
+   },
+   "modelOpenings": {
+    "raw": 14,
+    "clean": 14,
+    "cleanGroundLine": 14
+   },
+   "sameModel": true,
+   "seconds": {
+    "raw": 10.981,
+    "clean": 12.214
+   }
+  },
+  "rary": {
+   "truthWallOpenings": 11,
+   "elevationsSwapped": 4,
+   "facadeReadings": {
+    "raw": 6,
+    "clean": 8,
+    "cleanGroundLine": 7
+   },
+   "facadeViews": {
+    "raw": 4,
+    "clean": 3,
+    "cleanGroundLine": 3
+   },
+   "modelOpenings": {
+    "raw": 12,
+    "clean": 12,
+    "cleanGroundLine": 12
+   },
+   "sameModel": false,
+   "seconds": {
+    "raw": 18.979,
+    "clean": 16.112
+   }
+  }
+ }
+}
