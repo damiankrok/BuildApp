@@ -1,0 +1,987 @@
+{
+ "schema": "iu02.labels-archon-final/1",
+ "freezeSha": "d15abbe357f805c62dab74d05229242e82db9528",
+ "note": "agent labels from anonymised sheets (index only, no URL/caption/channel), made before the frozen model saw these images; not OWNER-verified",
+ "rows": [
+  {
+   "sha256": "03cfa84496bd8e20706cca8ac4299c4c95abb2830787217b2829f44e8e13fc8a",
+   "file": "03cfa84496bd8e20706cca8ac4299c4c95abb2830787217b2829f44e8e13fc8a.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:8c8f8c8c46",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "0458e006b294a70923a77974ff2aa9c41b46064277645d3304bf95edcfae8ad7",
+   "file": "0458e006b294a70923a77974ff2aa9c41b46064277645d3304bf95edcfae8ad7.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:1c11762c7c",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "05b64cb0e0cd2114c70e2d1ca8751d32901cbfa8b5b94c5cce337aed08380c5a",
+   "file": "05b64cb0e0cd2114c70e2d1ca8751d32901cbfa8b5b94c5cce337aed08380c5a.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:189584edf6",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "08150844f34cd9982730051d764a44925551732f996ee7189fd82bce9ce8a03a",
+   "file": "08150844f34cd9982730051d764a44925551732f996ee7189fd82bce9ce8a03a.jpg",
+   "label": "SITE_PLAN",
+   "project": "archon-final:f52ae7ebd8",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "0ad96380f03c421c3632bd40ae6b4eaabb70388cbde8c1814e61ef0bc740cf5b",
+   "file": "0ad96380f03c421c3632bd40ae6b4eaabb70388cbde8c1814e61ef0bc740cf5b.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:0381490b0a",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "0de6118f687413ee5a2a8b2c7afb3569e54515982be91b4ec3d632bb2f0084b3",
+   "file": "0de6118f687413ee5a2a8b2c7afb3569e54515982be91b4ec3d632bb2f0084b3.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:f52ae7ebd8",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "0f4cfaace920d515e61a5c68f4893b85fe4b7d0c1fad3bf2c27f4d6795dc99fd",
+   "file": "0f4cfaace920d515e61a5c68f4893b85fe4b7d0c1fad3bf2c27f4d6795dc99fd.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:189584edf6",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "13b9102625b9a77a17108dfc3b2ad2ccfda01b1d0fa189e61e65b9f8aa180176",
+   "file": "13b9102625b9a77a17108dfc3b2ad2ccfda01b1d0fa189e61e65b9f8aa180176.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:189584edf6",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "1459cf3aee0ce759a6247868e27dbc3a852d7d1b05e6fe4934e88b0bf6fb5408",
+   "file": "1459cf3aee0ce759a6247868e27dbc3a852d7d1b05e6fe4934e88b0bf6fb5408.jpg",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "project": "archon-final:0381490b0a",
+   "multiView": false,
+   "hard": true,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "15197d8bb09fe36c0ba6129d445d540c27e633b517a62acf03babfe84e83958b",
+   "file": "15197d8bb09fe36c0ba6129d445d540c27e633b517a62acf03babfe84e83958b.jpg",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "project": "archon-final:189584edf6",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "166f507c31e6ff8aefc18c1ad06ed68618cc2ee8c16d3287436c98dd901d1b39",
+   "file": "166f507c31e6ff8aefc18c1ad06ed68618cc2ee8c16d3287436c98dd901d1b39.jpg",
+   "label": "SITE_PLAN",
+   "project": "archon-final:8c8f8c8c46",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "185fa84bb8cb7106fd3c868fc01a8560401a0ff06feff1384fc804a792566c94",
+   "file": "185fa84bb8cb7106fd3c868fc01a8560401a0ff06feff1384fc804a792566c94.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:189584edf6",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "1d3008e625339ec63bb49e069400833c1995b888936f08272b36458db30bb05e",
+   "file": "1d3008e625339ec63bb49e069400833c1995b888936f08272b36458db30bb05e.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:1c11762c7c",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "200b52869a02bd2a90bb9b173669786e383cab97d7349fa29f65a33ab07798c1",
+   "file": "200b52869a02bd2a90bb9b173669786e383cab97d7349fa29f65a33ab07798c1.jpg",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "project": "archon-final:8c8f8c8c46",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "21a2ea4865cf71dfe0876320c835e2111381e19966de27808b88914c9fd66c31",
+   "file": "21a2ea4865cf71dfe0876320c835e2111381e19966de27808b88914c9fd66c31.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:f52ae7ebd8",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "2559b6a6aba8f1b78b15ced847a7e486357759d214740988be75be5f22a5445b",
+   "file": "2559b6a6aba8f1b78b15ced847a7e486357759d214740988be75be5f22a5445b.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:f52ae7ebd8",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "279b5b57cc17d3ef6d31fe1079647b5b98dd0253cd877e183be321e81ba2f897",
+   "file": "279b5b57cc17d3ef6d31fe1079647b5b98dd0253cd877e183be321e81ba2f897.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:8c8f8c8c46",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "2a84e7695fa64c22e47fdb9ade4412224e2869c92e401d20c0aced8b56dc0951",
+   "file": "2a84e7695fa64c22e47fdb9ade4412224e2869c92e401d20c0aced8b56dc0951.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:1c11762c7c",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "2b3d8149892d04b007a900929b08f9a4cf0f0aa3de0156a0d4ac1a15df524788",
+   "file": "2b3d8149892d04b007a900929b08f9a4cf0f0aa3de0156a0d4ac1a15df524788.jpg",
+   "label": "TECHNICAL_SECTION",
+   "project": "archon-final:1c11762c7c",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "2b9971f5e3435c30511298fb6932b5b56495527f629078396e3f3847539b77a7",
+   "file": "2b9971f5e3435c30511298fb6932b5b56495527f629078396e3f3847539b77a7.gif",
+   "label": "FLOOR_PLAN",
+   "project": "archon-final:189584edf6",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "2eb0593d10d154907bf338c1b375288411caa039b84659b4812e2801f38973b4",
+   "file": "2eb0593d10d154907bf338c1b375288411caa039b84659b4812e2801f38973b4.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:f52ae7ebd8",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "2f6b6c0ae63b0967246236eb06de6db5070f76b0b2c3559514a589296b6e49d3",
+   "file": "2f6b6c0ae63b0967246236eb06de6db5070f76b0b2c3559514a589296b6e49d3.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:189584edf6",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "2ff38f763fbcba2eceab855d6ff42cdf3c3db034ff5ec54bae5532a2d6e14bd0",
+   "file": "2ff38f763fbcba2eceab855d6ff42cdf3c3db034ff5ec54bae5532a2d6e14bd0.gif",
+   "label": "FLOOR_PLAN",
+   "project": "archon-final:8c8f8c8c46",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "355e3dbf3982f545d8b35776871eef0ebfefe483b64286efbb209c7386be5767",
+   "file": "355e3dbf3982f545d8b35776871eef0ebfefe483b64286efbb209c7386be5767.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:0381490b0a",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "3759bcdab021b334186a5c169d57704bee179d0025db7b0837502deebbd632a5",
+   "file": "3759bcdab021b334186a5c169d57704bee179d0025db7b0837502deebbd632a5.jpg",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "project": "archon-final:189584edf6",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "38242db2e7ef424b4d4b186b77ca28a107283c3f61fe0124895905107fd655b6",
+   "file": "38242db2e7ef424b4d4b186b77ca28a107283c3f61fe0124895905107fd655b6.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:1c11762c7c",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "38781cb1944faa6c33d0ae70ca948c9b06ca52afdbe81c8280294cd91f996db7",
+   "file": "38781cb1944faa6c33d0ae70ca948c9b06ca52afdbe81c8280294cd91f996db7.jpg",
+   "label": "SITE_PLAN",
+   "project": "archon-final:0381490b0a",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "3a6c91fea554f27811e340e128edab5a78ff160559c4d0b52d6b4098c5e8e76c",
+   "file": "3a6c91fea554f27811e340e128edab5a78ff160559c4d0b52d6b4098c5e8e76c.jpg",
+   "label": "TECHNICAL_SECTION",
+   "project": "archon-final:f52ae7ebd8",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "404950ef1fb324753f8027e9b83f3d68636bce96469c4fd7dade68bb85c298be",
+   "file": "404950ef1fb324753f8027e9b83f3d68636bce96469c4fd7dade68bb85c298be.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:189584edf6",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "41eefe4114b7afd9089a1697ac40e8c08d8a139a880682a4d4722fc8d0513fea",
+   "file": "41eefe4114b7afd9089a1697ac40e8c08d8a139a880682a4d4722fc8d0513fea.jpg",
+   "label": "SITE_PLAN",
+   "project": "archon-final:189584edf6",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "4a13bc1abb74b2828bf8d86fa6f868179cb86aa6b946a863edffdd396107d7e9",
+   "file": "4a13bc1abb74b2828bf8d86fa6f868179cb86aa6b946a863edffdd396107d7e9.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:1c11762c7c",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "4ad9b6e49f9db3c55158455552b0e90126e85dc788b4de810e62f481bc505184",
+   "file": "4ad9b6e49f9db3c55158455552b0e90126e85dc788b4de810e62f481bc505184.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:0381490b0a",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "50e4db971608df7a3437cd144d371c94be5b4782569390fe2053945731b84c59",
+   "file": "50e4db971608df7a3437cd144d371c94be5b4782569390fe2053945731b84c59.gif",
+   "label": "FLOOR_PLAN",
+   "project": "archon-final:8c8f8c8c46",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "54184cfd6008979be3bdc9dfeda7a9bb7e3dec09124e620ae401a30036c9ceca",
+   "file": "54184cfd6008979be3bdc9dfeda7a9bb7e3dec09124e620ae401a30036c9ceca.gif",
+   "label": "FLOOR_PLAN",
+   "project": "archon-final:189584edf6",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "55052fd5f75be3316830ac042720ce988c371548d5198f34443086cf4ce02a78",
+   "file": "55052fd5f75be3316830ac042720ce988c371548d5198f34443086cf4ce02a78.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:f52ae7ebd8",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "563008b2e538e294a80e655c6605bc5f82003062a9395a0f81796fe36d39c588",
+   "file": "563008b2e538e294a80e655c6605bc5f82003062a9395a0f81796fe36d39c588.jpg",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "project": "archon-final:0381490b0a",
+   "multiView": false,
+   "hard": true,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "591a3ab93c9674fc50cf5c90280cf9e55df2519bb8752a054c9762dae3f05a99",
+   "file": "591a3ab93c9674fc50cf5c90280cf9e55df2519bb8752a054c9762dae3f05a99.gif",
+   "label": "FLOOR_PLAN",
+   "project": "archon-final:8c8f8c8c46",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "5f9b8c01487d4027f769b2e6735973b59811c6bec35297205a06163fa93d588a",
+   "file": "5f9b8c01487d4027f769b2e6735973b59811c6bec35297205a06163fa93d588a.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:f52ae7ebd8",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "5fca3d11e65ba7f919d982cb6fd06301269cc6307697c561a3c972ca363db187",
+   "file": "5fca3d11e65ba7f919d982cb6fd06301269cc6307697c561a3c972ca363db187.jpg",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "project": "archon-final:0381490b0a",
+   "multiView": false,
+   "hard": true,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "654eced394aec495fda9bbbe2b20d19ee6fdb3436d72df15e118e14364fc5982",
+   "file": "654eced394aec495fda9bbbe2b20d19ee6fdb3436d72df15e118e14364fc5982.jpg",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "project": "archon-final:1c11762c7c",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "6a75b76abcb2201d5d98174ef89ae69254c91c52d0d3c3305ee873171ff47a7d",
+   "file": "6a75b76abcb2201d5d98174ef89ae69254c91c52d0d3c3305ee873171ff47a7d.jpg",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "project": "archon-final:1c11762c7c",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "6d1c46595b2a591999a7f039955c85dbda910b4c15911e9045241f8c23e4fdf8",
+   "file": "6d1c46595b2a591999a7f039955c85dbda910b4c15911e9045241f8c23e4fdf8.jpg",
+   "label": "TECHNICAL_SECTION",
+   "project": "archon-final:0381490b0a",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "71442516c57ce3017f086258df9b25b673a605a8c6bbdfcc0b246a7fa3781086",
+   "file": "71442516c57ce3017f086258df9b25b673a605a8c6bbdfcc0b246a7fa3781086.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:8c8f8c8c46",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "726c1ac91f65b169b623a3de404562b79f5aeb3e8e90fe178f9da68aa42f7b16",
+   "file": "726c1ac91f65b169b623a3de404562b79f5aeb3e8e90fe178f9da68aa42f7b16.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:8c8f8c8c46",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "734bc14ebbfa7e37017774970b207bc173f41be99e15f49e8b0e6cf2a79de601",
+   "file": "734bc14ebbfa7e37017774970b207bc173f41be99e15f49e8b0e6cf2a79de601.jpg",
+   "label": "TECHNICAL_SECTION",
+   "project": "archon-final:0381490b0a",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "74dc81c13d53b74738e05ef2d76dc6f53996fa3e226b13d4d59047d16da6eba5",
+   "file": "74dc81c13d53b74738e05ef2d76dc6f53996fa3e226b13d4d59047d16da6eba5.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:8c8f8c8c46",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "75c60abbdf2ead19124ad52408e220bbe1e739d5dac96ccd0da25aca814d77d8",
+   "file": "75c60abbdf2ead19124ad52408e220bbe1e739d5dac96ccd0da25aca814d77d8.gif",
+   "label": "FLOOR_PLAN",
+   "project": "archon-final:f52ae7ebd8",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "793249bcce071fdb693217f60e35d984409723cd30597befad72489f16ece9e1",
+   "file": "793249bcce071fdb693217f60e35d984409723cd30597befad72489f16ece9e1.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:1c11762c7c",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "7978f93a136e299897e5bb5e8e0e1a44c1a3b79e581be99f534c88f3f9bfeaab",
+   "file": "7978f93a136e299897e5bb5e8e0e1a44c1a3b79e581be99f534c88f3f9bfeaab.jpg",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "project": "archon-final:0381490b0a",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "805c98ec9221d871c12454197bb1ac00fc16f072024b32da009ac522ecaffb2e",
+   "file": "805c98ec9221d871c12454197bb1ac00fc16f072024b32da009ac522ecaffb2e.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:0381490b0a",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "8b86c0ed1aefcb268a54a47a314f9182496bcb770e3494516af625f7cd6a62b9",
+   "file": "8b86c0ed1aefcb268a54a47a314f9182496bcb770e3494516af625f7cd6a62b9.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:8c8f8c8c46",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "934572f92870b94d374af5c8f8e875ba338b6f25e6006548e5876f85b5178784",
+   "file": "934572f92870b94d374af5c8f8e875ba338b6f25e6006548e5876f85b5178784.jpg",
+   "label": "TECHNICAL_SECTION",
+   "project": "archon-final:1c11762c7c",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "939798343271eaa6089b4bd43d477ef7c9b6c9192e55d5e04d5eba0cbf407715",
+   "file": "939798343271eaa6089b4bd43d477ef7c9b6c9192e55d5e04d5eba0cbf407715.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:0381490b0a",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "9604305ee7fb8136ccbd0c814b8c75f00ffe63a36e46bd70208223fc45cefa88",
+   "file": "9604305ee7fb8136ccbd0c814b8c75f00ffe63a36e46bd70208223fc45cefa88.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:f52ae7ebd8",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "993318539c197c90883b04944a17901cc2f68fab0a65522ab9d4f0644b24712a",
+   "file": "993318539c197c90883b04944a17901cc2f68fab0a65522ab9d4f0644b24712a.jpg",
+   "label": "TECHNICAL_SECTION",
+   "project": "archon-final:8c8f8c8c46",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "9bf0762d2f504dd9f1f2c7b24c96fc1392ff50e12e20d2449d2dd7cfe0c1f87f",
+   "file": "9bf0762d2f504dd9f1f2c7b24c96fc1392ff50e12e20d2449d2dd7cfe0c1f87f.gif",
+   "label": "FLOOR_PLAN",
+   "project": "archon-final:f52ae7ebd8",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "9e17034e2947c94826857b472e3748169a88fe2d485759ae9473051ab42dfd6c",
+   "file": "9e17034e2947c94826857b472e3748169a88fe2d485759ae9473051ab42dfd6c.jpg",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "project": "archon-final:189584edf6",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "9f7797b8e289cb5ed881ba137afecf5f85aba6a216e507eafe3413e4ca5bdbe3",
+   "file": "9f7797b8e289cb5ed881ba137afecf5f85aba6a216e507eafe3413e4ca5bdbe3.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:1c11762c7c",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "a159043d3496dac23494fd77096e6c72451bb3ddef1a43b3d4e0da9b170077ae",
+   "file": "a159043d3496dac23494fd77096e6c72451bb3ddef1a43b3d4e0da9b170077ae.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:0381490b0a",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "a4ad0e88ca2aa5f227d4d2b7a2df706fcd0a0e9fd1f2b27e57e84442c4b76d30",
+   "file": "a4ad0e88ca2aa5f227d4d2b7a2df706fcd0a0e9fd1f2b27e57e84442c4b76d30.jpg",
+   "label": "TECHNICAL_SECTION",
+   "project": "archon-final:189584edf6",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "a56b1a04be222ac221973bee44d578f6bdb340f9bf72eaae32e32593de3f94b3",
+   "file": "a56b1a04be222ac221973bee44d578f6bdb340f9bf72eaae32e32593de3f94b3.jpg",
+   "label": "TECHNICAL_SECTION",
+   "project": "archon-final:8c8f8c8c46",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "ad0c6f84444ed3a6140d7e2d03da5b058435982905756a213095931c147470b8",
+   "file": "ad0c6f84444ed3a6140d7e2d03da5b058435982905756a213095931c147470b8.jpg",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "project": "archon-final:8c8f8c8c46",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "ad49b6292c99904317ff1208ff873142ff5e99be4f5c360128c7e1c7f9064a29",
+   "file": "ad49b6292c99904317ff1208ff873142ff5e99be4f5c360128c7e1c7f9064a29.jpg",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "project": "archon-final:0381490b0a",
+   "multiView": false,
+   "hard": true,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "adb08c5b9cd13a45cf8dd03a3ff0b2fc175d770c25b8e5dfc231da85713aaad0",
+   "file": "adb08c5b9cd13a45cf8dd03a3ff0b2fc175d770c25b8e5dfc231da85713aaad0.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:8c8f8c8c46",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "af2c7813e0f3e2cefd7397c52c1f2f4dd338170ce215418b7791cc2543842895",
+   "file": "af2c7813e0f3e2cefd7397c52c1f2f4dd338170ce215418b7791cc2543842895.jpg",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "project": "archon-final:f52ae7ebd8",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "af4ce61e69c5543a3ca8b8690717c494e552e0ea9c023956297e307b132274c2",
+   "file": "af4ce61e69c5543a3ca8b8690717c494e552e0ea9c023956297e307b132274c2.jpg",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "project": "archon-final:1c11762c7c",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "afc9e8cddfad104552dd25bc54e77a8f0e91499d61a81952e0777e62c30efb84",
+   "file": "afc9e8cddfad104552dd25bc54e77a8f0e91499d61a81952e0777e62c30efb84.jpg",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "project": "archon-final:1c11762c7c",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "b630b0855f3eb37cc3311abd2e660366a2db9c2c87e50a7ea480fb8181bfee4b",
+   "file": "b630b0855f3eb37cc3311abd2e660366a2db9c2c87e50a7ea480fb8181bfee4b.gif",
+   "label": "FLOOR_PLAN",
+   "project": "archon-final:1c11762c7c",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "b7ed96d02e7af6c8f8b55602e36156c44cf6759603a2bd3269c3a83337b22d0e",
+   "file": "b7ed96d02e7af6c8f8b55602e36156c44cf6759603a2bd3269c3a83337b22d0e.jpg",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "project": "archon-final:1c11762c7c",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "b97adfbbeec3c92b2f42204fa96e782979c6dcd560a8a53a11a0ee894b378888",
+   "file": "b97adfbbeec3c92b2f42204fa96e782979c6dcd560a8a53a11a0ee894b378888.jpg",
+   "label": "SITE_PLAN",
+   "project": "archon-final:1c11762c7c",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "bfd1f866184100d20375d541c495a2ded9f0b840ef3873de8bf9189b41fc6835",
+   "file": "bfd1f866184100d20375d541c495a2ded9f0b840ef3873de8bf9189b41fc6835.gif",
+   "label": "FLOOR_PLAN",
+   "project": "archon-final:0381490b0a",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "c23908ae874e93b1b29e89ec6152308aef7952190876287068c064bf06f4d977",
+   "file": "c23908ae874e93b1b29e89ec6152308aef7952190876287068c064bf06f4d977.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:189584edf6",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "ca2702d8eba0587f294888b27dce34107449fe5c5ba8c9b75a2bc9f1dcc02b20",
+   "file": "ca2702d8eba0587f294888b27dce34107449fe5c5ba8c9b75a2bc9f1dcc02b20.gif",
+   "label": "FLOOR_PLAN",
+   "project": "archon-final:0381490b0a",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "cbc933bdad64933a0f37da15bd600c4108bf1572f121f5b51911d6a16754736f",
+   "file": "cbc933bdad64933a0f37da15bd600c4108bf1572f121f5b51911d6a16754736f.gif",
+   "label": "FLOOR_PLAN",
+   "project": "archon-final:0381490b0a",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "cd4ca194df063704079cc34bc4d4a38427c4059c4d6cc5e86c24b3ee13f1f6cf",
+   "file": "cd4ca194df063704079cc34bc4d4a38427c4059c4d6cc5e86c24b3ee13f1f6cf.jpg",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "project": "archon-final:1c11762c7c",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "cd5381eaf345c1bbff7633b1744187f6339536ee56d6bb40789a7abd6ffc43ed",
+   "file": "cd5381eaf345c1bbff7633b1744187f6339536ee56d6bb40789a7abd6ffc43ed.jpg",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "project": "archon-final:0381490b0a",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "ce82c7d81cd01179292a4b670a1272535c844b4a61642b784b39b954e1ee4db8",
+   "file": "ce82c7d81cd01179292a4b670a1272535c844b4a61642b784b39b954e1ee4db8.jpg",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "project": "archon-final:f52ae7ebd8",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "ced18f8e1f12891de434fdf9767a72ec91082ea194b05635c1fa559f61a61477",
+   "file": "ced18f8e1f12891de434fdf9767a72ec91082ea194b05635c1fa559f61a61477.jpg",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "project": "archon-final:8c8f8c8c46",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "d1b8bd8e73408a68052f57e7dc2f567a1db8a018c5ba0c64a3910a9d0f19b6cc",
+   "file": "d1b8bd8e73408a68052f57e7dc2f567a1db8a018c5ba0c64a3910a9d0f19b6cc.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:0381490b0a",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "d46024c4665db3dde8df4c78c25e85da3ac12fcabcc8b0df5596a42bd52ac686",
+   "file": "d46024c4665db3dde8df4c78c25e85da3ac12fcabcc8b0df5596a42bd52ac686.jpg",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "project": "archon-final:189584edf6",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "d4c16343754aa1a6a6f709cb8560709f4ed41a2231c59c2c2df18e155e5730ce",
+   "file": "d4c16343754aa1a6a6f709cb8560709f4ed41a2231c59c2c2df18e155e5730ce.jpg",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "project": "archon-final:8c8f8c8c46",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "d96c3aea95d21f6ed898ccbbee45b4b47e7fd4d1cbb05bcca01a85501c7b53ff",
+   "file": "d96c3aea95d21f6ed898ccbbee45b4b47e7fd4d1cbb05bcca01a85501c7b53ff.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:8c8f8c8c46",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "db8bb25b148a3ad9febb7755e6fcfc8d6fe074b092104d27dcc2662ba7af427f",
+   "file": "db8bb25b148a3ad9febb7755e6fcfc8d6fe074b092104d27dcc2662ba7af427f.gif",
+   "label": "FLOOR_PLAN",
+   "project": "archon-final:f52ae7ebd8",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "dd846475d09ae37093f24a3570c8cd3bae86f825f0c955ff2ad972930cb860e0",
+   "file": "dd846475d09ae37093f24a3570c8cd3bae86f825f0c955ff2ad972930cb860e0.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:f52ae7ebd8",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "e589f4cb1117bff35b21a4e021988a0d4f46cca71039e47b2d58757d2618bed1",
+   "file": "e589f4cb1117bff35b21a4e021988a0d4f46cca71039e47b2d58757d2618bed1.gif",
+   "label": "FLOOR_PLAN",
+   "project": "archon-final:f52ae7ebd8",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "ec7a2f5e29eafef681928a3761acf3c5626241bdf485c7f49ac7641e84ec3ff6",
+   "file": "ec7a2f5e29eafef681928a3761acf3c5626241bdf485c7f49ac7641e84ec3ff6.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:0381490b0a",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "ef68e14f567c2ad6786c55fcc1e55969fb26ba29f0165748e9507102353ea73a",
+   "file": "ef68e14f567c2ad6786c55fcc1e55969fb26ba29f0165748e9507102353ea73a.jpg",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "project": "archon-final:f52ae7ebd8",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "f21552b15f681e6b2f73637cc477d5f8e27fabe48971b14008f9987ed488c8a9",
+   "file": "f21552b15f681e6b2f73637cc477d5f8e27fabe48971b14008f9987ed488c8a9.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:189584edf6",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "f2f2b1865f45e9313f8e4f4fd2b793b6370dbfb0e5d7446fa3f428b22d2b0d60",
+   "file": "f2f2b1865f45e9313f8e4f4fd2b793b6370dbfb0e5d7446fa3f428b22d2b0d60.jpg",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "project": "archon-final:8c8f8c8c46",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "f346419a262cdfadd79014f86edde53eecc01355d3e7ff3693587567e6f92c12",
+   "file": "f346419a262cdfadd79014f86edde53eecc01355d3e7ff3693587567e6f92c12.jpg",
+   "label": "TECHNICAL_SECTION",
+   "project": "archon-final:189584edf6",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "f42966f2bbbad95ae5eebca22db668c681963b2ce8d0d9925ae969b8dc71b850",
+   "file": "f42966f2bbbad95ae5eebca22db668c681963b2ce8d0d9925ae969b8dc71b850.gif",
+   "label": "FLOOR_PLAN",
+   "project": "archon-final:1c11762c7c",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "fa0471b11c59d1da7ee6c6ed78f646254efb0f9cfdef8bd852e8db0cd3c01b00",
+   "file": "fa0471b11c59d1da7ee6c6ed78f646254efb0f9cfdef8bd852e8db0cd3c01b00.jpg",
+   "label": "TECHNICAL_SECTION",
+   "project": "archon-final:f52ae7ebd8",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "fa757fba478400bf2affa81e27898201ac80e94adcc625e0024a135ea43ff48a",
+   "file": "fa757fba478400bf2affa81e27898201ac80e94adcc625e0024a135ea43ff48a.jpg",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "project": "archon-final:1c11762c7c",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "fc6418fb0ab7069021a3ff214916ef457e30805ec24f80d74bcde8f9c952bf72",
+   "file": "fc6418fb0ab7069021a3ff214916ef457e30805ec24f80d74bcde8f9c952bf72.jpg",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "project": "archon-final:189584edf6",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "fc9622cc19b69b1189c81c77848d565f6d1bde1c97b20746197eff500964b1f5",
+   "file": "fc9622cc19b69b1189c81c77848d565f6d1bde1c97b20746197eff500964b1f5.jpg",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "project": "archon-final:1c11762c7c",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "fdc78d2c30f3907ec2a0618e8f8896dc16c596174703b6b5c68a8d5d1326f54b",
+   "file": "fdc78d2c30f3907ec2a0618e8f8896dc16c596174703b6b5c68a8d5d1326f54b.gif",
+   "label": "FLOOR_PLAN",
+   "project": "archon-final:0381490b0a",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "fefc2f246513972e72795057fa889c002f0c609522ec52b6a2d93d941fbc1e45",
+   "file": "fefc2f246513972e72795057fa889c002f0c609522ec52b6a2d93d941fbc1e45.jpg",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "project": "archon-final:1c11762c7c",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  },
+  {
+   "sha256": "ffbae26b43386df8722ec2426b31f8cd5e45e7408d06357c93a3d03b5678571b",
+   "file": "ffbae26b43386df8722ec2426b31f8cd5e45e7408d06357c93a3d03b5678571b.gif",
+   "label": "FLOOR_PLAN",
+   "project": "archon-final:8c8f8c8c46",
+   "multiView": false,
+   "hard": false,
+   "labelStatus": "CONFIRMED",
+   "labelSource": "AGENT_VISUAL_PIXELS_ONLY_ANONYMISED_SHEET"
+  }
+ ]
+}
