@@ -2699,3 +2699,20 @@ clean-facade preprocessor keeps synthetic corners within median 1.2–1.6 px / p
 openings outside flat drawings, and the unchanged extractor reads less from clean rasters (36 → 21 readings,
 15 → 11 registered views on 5 DEV houses). Labels of real images are agent labels, not human-verified. SegFormer-B0
 is research-licensed and must not ship.
+
+## Safe image routing and geometry preservation (STAGE BUILDPLAN IU-03A)
+
+Status: **RESEARCH_PARTIAL — nothing integrated.** Report `stage-reports/STAGE_BUILDPLAN_IU_03A_SAFE_ROUTING_AND_GEOMETRY.md`,
+code `research/image-understanding/iu3/`, numbers `stage-reports/artifacts/iu-03a/`, preregistered at `f468d04` before
+the test set existed (IU-02's 890 FINAL images are development data now). VETO_ONLY keeps the production text route
+and lets the pixels only take an image away from the facade extractor (vanishing point, panels, or P(not elevation) ≥
+0.60 from the IU-02 head); it never adds a route or rewrites roles. On 6 fresh ARCHON houses run through production
+(124 SourcePackage assets) the publisher's roles were all right: LEGACY and VETO_ONLY 24/24 elevations, 0 non-elevations;
+STRICT_IU02 6/24. With every test image deliberately captioned "elevation" (ARCHON + 30 new synthetic houses) LEGACY
+routes 227/227 non-elevations, VETO_ONLY 1/227 at 74 % of elevations kept, STRICT 0/227 at 56 % — the miss and one
+mandatory negative are near-frontal perspectives the unmasked projection test called INCONCLUSIVE. Part B traced why
+clean facades break the solver (a white background is "neutral" to the wall-band scan, the ground line disappears,
+uniform light glass defeats the dark-glass opening reader) and built `FacadeGeometryEvidence` plus a research adapter
+feeding its outline to the unchanged solver as SILHOUETTE: on DEV 40 vs 31 correct readings and 17 vs 15 views, but
+on the test houses 12 vs 15 (the outline's top is a chimney, which the solver takes for the ridge). Labels are agent
+labels; a 124-row human review sample is ready.

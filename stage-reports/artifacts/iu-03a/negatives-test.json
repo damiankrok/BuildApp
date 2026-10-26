@@ -1,0 +1,396 @@
+[
+ {
+  "id": "neg-n1_white_on_white-0",
+  "case": "N1_WHITE_ON_WHITE",
+  "truth": "ORTHOGRAPHIC_ELEVATION",
+  "expect": "NO_INVENTED_OPENING",
+  "pElevation": 0.986,
+  "projectionUnmasked": "ORTHOGRAPHIC_SUPPORTED",
+  "projectionMasked": "ORTHOGRAPHIC_SUPPORTED",
+  "LEGACY": "FACADE",
+  "VETO_ONLY": "FACADE",
+  "vetoDiagnostics": [],
+  "STRICT_IU02": "FACADE",
+  "evidence": {
+   "gtOpenings": 4,
+   "kept": 4,
+   "addedIndependent": 0,
+   "ground": "OBSERVED",
+   "pass": true
+  },
+  "routerKeepsElevation": true
+ },
+ {
+  "id": "neg-n2_tree_before_window-0",
+  "case": "N2_TREE_BEFORE_WINDOW",
+  "truth": "ORTHOGRAPHIC_ELEVATION",
+  "expect": "OCCLUDED_WINDOW_NOT_DETECTED",
+  "pElevation": 0.897,
+  "projectionUnmasked": "ORTHOGRAPHIC_SUPPORTED",
+  "projectionMasked": "ORTHOGRAPHIC_SUPPORTED",
+  "LEGACY": "FACADE",
+  "VETO_ONLY": "FACADE",
+  "vetoDiagnostics": [],
+  "STRICT_IU02": "FACADE",
+  "evidence": {
+   "gtOpenings": 3,
+   "kept": 3,
+   "addedIndependent": 0,
+   "ground": "OBSERVED",
+   "claimedIndependent": 0,
+   "pass": true
+  },
+  "routerKeepsElevation": true
+ },
+ {
+  "id": "neg-n3_tree_reflection-0",
+  "case": "N3_TREE_REFLECTION",
+  "truth": "ORTHOGRAPHIC_ELEVATION",
+  "expect": "ONE_OPENING_NOT_SPLIT",
+  "pElevation": 0.983,
+  "projectionUnmasked": "ORTHOGRAPHIC_SUPPORTED",
+  "projectionMasked": "ORTHOGRAPHIC_SUPPORTED",
+  "LEGACY": "FACADE",
+  "VETO_ONLY": "FACADE",
+  "vetoDiagnostics": [],
+  "STRICT_IU02": "FACADE",
+  "evidence": {
+   "gtOpenings": 4,
+   "kept": 3,
+   "addedIndependent": 0,
+   "ground": "OBSERVED",
+   "piecesInReflectedWindow": 0,
+   "pass": true,
+   "missed": true
+  },
+  "routerKeepsElevation": true
+ },
+ {
+  "id": "neg-n4_garage_gate-0",
+  "case": "N4_GARAGE_GATE",
+  "truth": "ORTHOGRAPHIC_ELEVATION",
+  "expect": "GATE_GROUNDED_NOT_GLASS",
+  "pElevation": 0.97,
+  "projectionUnmasked": "ORTHOGRAPHIC_SUPPORTED",
+  "projectionMasked": "ORTHOGRAPHIC_SUPPORTED",
+  "LEGACY": "FACADE",
+  "VETO_ONLY": "FACADE",
+  "vetoDiagnostics": [],
+  "STRICT_IU02": "FACADE",
+  "evidence": {
+   "gtOpenings": 2,
+   "kept": 1,
+   "addedIndependent": 0,
+   "ground": "OBSERVED",
+   "gateAs": [],
+   "pass": false
+  },
+  "routerKeepsElevation": true
+ },
+ {
+  "id": "neg-n5_dark_on_dark-0",
+  "case": "N5_DARK_ON_DARK",
+  "truth": "ORTHOGRAPHIC_ELEVATION",
+  "expect": "EAVES_AND_OPENINGS_KEPT",
+  "pElevation": 0.928,
+  "projectionUnmasked": "INCONCLUSIVE",
+  "projectionMasked": "INCONCLUSIVE",
+  "LEGACY": "FACADE",
+  "VETO_ONLY": "FACADE",
+  "vetoDiagnostics": [
+   "INCONCLUSIVE_NO_ACTION"
+  ],
+  "STRICT_IU02": "REVIEW_GEOMETRY_INCONCLUSIVE",
+  "evidence": {
+   "gtOpenings": 8,
+   "kept": 8,
+   "addedIndependent": 0,
+   "ground": "OBSERVED",
+   "ridgeErrPx": 1,
+   "eaveErrPx": [
+    357,
+    357
+   ],
+   "eaveStates": [
+    "OBSERVED",
+    "OBSERVED"
+   ],
+   "pass": false
+  },
+  "routerKeepsElevation": true
+ },
+ {
+  "id": "neg-n6_balcony_rail-0",
+  "case": "N6_BALCONY_RAIL",
+  "truth": "ORTHOGRAPHIC_ELEVATION",
+  "expect": "RAIL_NOT_A_WINDOW",
+  "pElevation": 0.981,
+  "projectionUnmasked": "ORTHOGRAPHIC_SUPPORTED",
+  "projectionMasked": "ORTHOGRAPHIC_SUPPORTED",
+  "LEGACY": "FACADE",
+  "VETO_ONLY": "FACADE",
+  "vetoDiagnostics": [],
+  "STRICT_IU02": "FACADE",
+  "evidence": {
+   "gtOpenings": 6,
+   "kept": 5,
+   "addedIndependent": 1,
+   "ground": "OBSERVED",
+   "railAsWindow": 1,
+   "pass": false
+  },
+  "routerKeepsElevation": true
+ },
+ {
+  "id": "neg-n7_near_frontal-0",
+  "case": "N7_NEAR_FRONTAL",
+  "truth": "EXTERIOR_PERSPECTIVE",
+  "expect": "NOT_ROUTED",
+  "pElevation": 0.013,
+  "projectionUnmasked": "PERSPECTIVE_EVIDENT",
+  "projectionMasked": "PERSPECTIVE_EVIDENT",
+  "LEGACY": "FACADE",
+  "VETO_ONLY": "STOP_PERSPECTIVE",
+  "vetoDiagnostics": [
+   "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+  ],
+  "STRICT_IU02": "UNKNOWN",
+  "pass": true
+ },
+ {
+  "id": "neg-n8_section_plus_elev-0",
+  "case": "N8_SECTION_PLUS_ELEV",
+  "truth": "OTHER",
+  "expect": "NOT_ROUTED_AS_ONE_FACADE",
+  "pElevation": 0.022,
+  "projectionUnmasked": "NOT_SINGLE_FACADE",
+  "projectionMasked": "NOT_SINGLE_FACADE",
+  "LEGACY": "FACADE",
+  "VETO_ONLY": "REVIEW_MULTI_VIEW_OR_OTHER",
+  "vetoDiagnostics": [
+   "VETO: panels (NOT_SINGLE_FACADE)"
+  ],
+  "STRICT_IU02": "UNKNOWN",
+  "pass": true
+ },
+ {
+  "id": "neg-n9_ground_missing-0",
+  "case": "N9_GROUND_MISSING",
+  "truth": "ORTHOGRAPHIC_ELEVATION",
+  "expect": "GROUND_NOT_OBSERVED",
+  "pElevation": 0.967,
+  "projectionUnmasked": "ORTHOGRAPHIC_SUPPORTED",
+  "projectionMasked": "ORTHOGRAPHIC_SUPPORTED",
+  "LEGACY": "FACADE",
+  "VETO_ONLY": "FACADE",
+  "vetoDiagnostics": [],
+  "STRICT_IU02": "FACADE",
+  "evidence": {
+   "gtOpenings": 3,
+   "kept": 0,
+   "addedIndependent": 0,
+   "ground": "MISSING",
+   "adapterInjects": false,
+   "pass": true
+  },
+  "routerKeepsElevation": true
+ },
+ {
+  "id": "neg-n1_white_on_white-1",
+  "case": "N1_WHITE_ON_WHITE",
+  "truth": "ORTHOGRAPHIC_ELEVATION",
+  "expect": "NO_INVENTED_OPENING",
+  "pElevation": 0.973,
+  "projectionUnmasked": "ORTHOGRAPHIC_SUPPORTED",
+  "projectionMasked": "ORTHOGRAPHIC_SUPPORTED",
+  "LEGACY": "FACADE",
+  "VETO_ONLY": "FACADE",
+  "vetoDiagnostics": [],
+  "STRICT_IU02": "FACADE",
+  "evidence": {
+   "gtOpenings": 3,
+   "kept": 2,
+   "addedIndependent": 0,
+   "ground": "OBSERVED",
+   "pass": true
+  },
+  "routerKeepsElevation": true
+ },
+ {
+  "id": "neg-n2_tree_before_window-1",
+  "case": "N2_TREE_BEFORE_WINDOW",
+  "truth": "ORTHOGRAPHIC_ELEVATION",
+  "expect": "OCCLUDED_WINDOW_NOT_DETECTED",
+  "pElevation": 0.959,
+  "projectionUnmasked": "ORTHOGRAPHIC_SUPPORTED",
+  "projectionMasked": "ORTHOGRAPHIC_SUPPORTED",
+  "LEGACY": "FACADE",
+  "VETO_ONLY": "FACADE",
+  "vetoDiagnostics": [],
+  "STRICT_IU02": "FACADE",
+  "evidence": {
+   "gtOpenings": 4,
+   "kept": 2,
+   "addedIndependent": 1,
+   "ground": "OBSERVED",
+   "claimedIndependent": 0,
+   "pass": true
+  },
+  "routerKeepsElevation": true
+ },
+ {
+  "id": "neg-n3_tree_reflection-1",
+  "case": "N3_TREE_REFLECTION",
+  "truth": "ORTHOGRAPHIC_ELEVATION",
+  "expect": "ONE_OPENING_NOT_SPLIT",
+  "pElevation": 0.97,
+  "projectionUnmasked": "ORTHOGRAPHIC_SUPPORTED",
+  "projectionMasked": "ORTHOGRAPHIC_SUPPORTED",
+  "LEGACY": "FACADE",
+  "VETO_ONLY": "FACADE",
+  "vetoDiagnostics": [],
+  "STRICT_IU02": "FACADE",
+  "evidence": {
+   "gtOpenings": 8,
+   "kept": 8,
+   "addedIndependent": 0,
+   "ground": "OBSERVED",
+   "piecesInReflectedWindow": 1,
+   "pass": true,
+   "missed": false
+  },
+  "routerKeepsElevation": true
+ },
+ {
+  "id": "neg-n4_garage_gate-1",
+  "case": "N4_GARAGE_GATE",
+  "truth": "ORTHOGRAPHIC_ELEVATION",
+  "expect": "GATE_GROUNDED_NOT_GLASS",
+  "pElevation": 0.937,
+  "projectionUnmasked": "INCONCLUSIVE",
+  "projectionMasked": "ORTHOGRAPHIC_SUPPORTED",
+  "LEGACY": "FACADE",
+  "VETO_ONLY": "FACADE",
+  "vetoDiagnostics": [
+   "INCONCLUSIVE_NO_ACTION"
+  ],
+  "STRICT_IU02": "FACADE",
+  "evidence": {
+   "gtOpenings": 5,
+   "kept": 5,
+   "addedIndependent": 0,
+   "ground": "UNCERTAIN",
+   "gateAs": [
+    "DOOR_OR_GATE"
+   ],
+   "pass": true
+  },
+  "routerKeepsElevation": true
+ },
+ {
+  "id": "neg-n5_dark_on_dark-1",
+  "case": "N5_DARK_ON_DARK",
+  "truth": "ORTHOGRAPHIC_ELEVATION",
+  "expect": "EAVES_AND_OPENINGS_KEPT",
+  "pElevation": 0.966,
+  "projectionUnmasked": "ORTHOGRAPHIC_SUPPORTED",
+  "projectionMasked": "ORTHOGRAPHIC_SUPPORTED",
+  "LEGACY": "FACADE",
+  "VETO_ONLY": "FACADE",
+  "vetoDiagnostics": [],
+  "STRICT_IU02": "FACADE",
+  "evidence": {
+   "gtOpenings": 4,
+   "kept": 1,
+   "addedIndependent": 1,
+   "ground": "MISSING",
+   "ridgeErrPx": 1,
+   "eaveErrPx": [
+    3,
+    2
+   ],
+   "eaveStates": [
+    "OBSERVED",
+    "OBSERVED"
+   ],
+   "pass": false
+  },
+  "routerKeepsElevation": true
+ },
+ {
+  "id": "neg-n6_balcony_rail-1",
+  "case": "N6_BALCONY_RAIL",
+  "truth": "ORTHOGRAPHIC_ELEVATION",
+  "expect": "RAIL_NOT_A_WINDOW",
+  "pElevation": 0.982,
+  "projectionUnmasked": "ORTHOGRAPHIC_SUPPORTED",
+  "projectionMasked": "ORTHOGRAPHIC_SUPPORTED",
+  "LEGACY": "FACADE",
+  "VETO_ONLY": "FACADE",
+  "vetoDiagnostics": [],
+  "STRICT_IU02": "FACADE",
+  "evidence": {
+   "gtOpenings": 4,
+   "kept": 4,
+   "addedIndependent": 0,
+   "ground": "OBSERVED",
+   "railAsWindow": 0,
+   "pass": true
+  },
+  "routerKeepsElevation": true
+ },
+ {
+  "id": "neg-n7_near_frontal-1",
+  "case": "N7_NEAR_FRONTAL",
+  "truth": "EXTERIOR_PERSPECTIVE",
+  "expect": "NOT_ROUTED",
+  "pElevation": 0.501,
+  "projectionUnmasked": "INCONCLUSIVE",
+  "projectionMasked": "PERSPECTIVE_EVIDENT",
+  "LEGACY": "FACADE",
+  "VETO_ONLY": "FACADE",
+  "vetoDiagnostics": [
+   "INCONCLUSIVE_NO_ACTION"
+  ],
+  "STRICT_IU02": "UNKNOWN",
+  "pass": false
+ },
+ {
+  "id": "neg-n8_section_plus_elev-1",
+  "case": "N8_SECTION_PLUS_ELEV",
+  "truth": "OTHER",
+  "expect": "NOT_ROUTED_AS_ONE_FACADE",
+  "pElevation": 0.006,
+  "projectionUnmasked": "NOT_SINGLE_FACADE",
+  "projectionMasked": "NOT_SINGLE_FACADE",
+  "LEGACY": "FACADE",
+  "VETO_ONLY": "REVIEW_MULTI_VIEW_OR_OTHER",
+  "vetoDiagnostics": [
+   "VETO: panels (NOT_SINGLE_FACADE)"
+  ],
+  "STRICT_IU02": "UNKNOWN",
+  "pass": true
+ },
+ {
+  "id": "neg-n9_ground_missing-1",
+  "case": "N9_GROUND_MISSING",
+  "truth": "ORTHOGRAPHIC_ELEVATION",
+  "expect": "GROUND_NOT_OBSERVED",
+  "pElevation": 0.955,
+  "projectionUnmasked": "ORTHOGRAPHIC_SUPPORTED",
+  "projectionMasked": "INCONCLUSIVE",
+  "LEGACY": "FACADE",
+  "VETO_ONLY": "FACADE",
+  "vetoDiagnostics": [],
+  "STRICT_IU02": "REVIEW_GEOMETRY_INCONCLUSIVE",
+  "evidence": {
+   "gtOpenings": 3,
+   "kept": 2,
+   "addedIndependent": 0,
+   "ground": "UNCERTAIN",
+   "adapterInjects": false,
+   "pass": true
+  },
+  "routerKeepsElevation": true
+ }
+]

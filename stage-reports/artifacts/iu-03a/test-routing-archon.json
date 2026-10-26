@@ -1,0 +1,2880 @@
+{
+ "missing": 0,
+ "scenarios": {
+  "REAL_CAPTIONS": {
+   "ALL": {
+    "LEGACY": {
+     "n": 124,
+     "singleElevations": 24,
+     "elevationsRouted": 24,
+     "elevationCoverage": 1.0,
+     "elevationCoverageWilson": [
+      0.862,
+      1.0
+     ],
+     "nonElevations": 100,
+     "nonElevationsRouted": 0,
+     "unsafeRateWilson": [
+      0.0,
+      0.037
+     ],
+     "unsafeByTruth": {},
+     "nearFrontalPerspectives": 2,
+     "nearFrontalRouted": 0,
+     "routes": {
+      "PERSPECTIVE_CAMERA": 44,
+      "OTHER_FLOOR_PLAN": 36,
+      "SKIPPED_UNKNOWN": 8,
+      "FACADE": 24,
+      "OTHER_SECTION": 6,
+      "OTHER_SITE_PLAN": 6
+     },
+     "elevationsLostBy": {}
+    },
+    "STRICT_IU02": {
+     "n": 124,
+     "singleElevations": 24,
+     "elevationsRouted": 6,
+     "elevationCoverage": 0.25,
+     "elevationCoverageWilson": [
+      0.12,
+      0.449
+     ],
+     "nonElevations": 100,
+     "nonElevationsRouted": 0,
+     "unsafeRateWilson": [
+      0.0,
+      0.037
+     ],
+     "unsafeByTruth": {},
+     "nearFrontalPerspectives": 2,
+     "nearFrontalRouted": 0,
+     "routes": {
+      "UNKNOWN": 100,
+      "FACADE": 6,
+      "REVIEW_GEOMETRY_INCONCLUSIVE": 18
+     },
+     "elevationsLostBy": {
+      "REVIEW_GEOMETRY_INCONCLUSIVE": 18
+     }
+    },
+    "VETO_ONLY": {
+     "n": 124,
+     "singleElevations": 24,
+     "elevationsRouted": 24,
+     "elevationCoverage": 1.0,
+     "elevationCoverageWilson": [
+      0.862,
+      1.0
+     ],
+     "nonElevations": 100,
+     "nonElevationsRouted": 0,
+     "unsafeRateWilson": [
+      0.0,
+      0.037
+     ],
+     "unsafeByTruth": {},
+     "nearFrontalPerspectives": 2,
+     "nearFrontalRouted": 0,
+     "routes": {
+      "PERSPECTIVE_CAMERA": 44,
+      "OTHER_FLOOR_PLAN": 36,
+      "SKIPPED_UNKNOWN": 8,
+      "FACADE": 24,
+      "OTHER_SECTION": 6,
+      "OTHER_SITE_PLAN": 6
+     },
+     "elevationsLostBy": {},
+     "diagnostics": {
+      "INCONCLUSIVE_NO_ACTION": 18
+     }
+    }
+   },
+   "bySet": {
+    "TEST_ARCHON": {
+     "LEGACY": {
+      "n": 124,
+      "singleElevations": 24,
+      "elevationsRouted": 24,
+      "elevationCoverage": 1.0,
+      "elevationCoverageWilson": [
+       0.862,
+       1.0
+      ],
+      "nonElevations": 100,
+      "nonElevationsRouted": 0,
+      "unsafeRateWilson": [
+       0.0,
+       0.037
+      ],
+      "unsafeByTruth": {},
+      "nearFrontalPerspectives": 2,
+      "nearFrontalRouted": 0,
+      "routes": {
+       "PERSPECTIVE_CAMERA": 44,
+       "OTHER_FLOOR_PLAN": 36,
+       "SKIPPED_UNKNOWN": 8,
+       "FACADE": 24,
+       "OTHER_SECTION": 6,
+       "OTHER_SITE_PLAN": 6
+      },
+      "elevationsLostBy": {}
+     },
+     "STRICT_IU02": {
+      "n": 124,
+      "singleElevations": 24,
+      "elevationsRouted": 6,
+      "elevationCoverage": 0.25,
+      "elevationCoverageWilson": [
+       0.12,
+       0.449
+      ],
+      "nonElevations": 100,
+      "nonElevationsRouted": 0,
+      "unsafeRateWilson": [
+       0.0,
+       0.037
+      ],
+      "unsafeByTruth": {},
+      "nearFrontalPerspectives": 2,
+      "nearFrontalRouted": 0,
+      "routes": {
+       "UNKNOWN": 100,
+       "FACADE": 6,
+       "REVIEW_GEOMETRY_INCONCLUSIVE": 18
+      },
+      "elevationsLostBy": {
+       "REVIEW_GEOMETRY_INCONCLUSIVE": 18
+      }
+     },
+     "VETO_ONLY": {
+      "n": 124,
+      "singleElevations": 24,
+      "elevationsRouted": 24,
+      "elevationCoverage": 1.0,
+      "elevationCoverageWilson": [
+       0.862,
+       1.0
+      ],
+      "nonElevations": 100,
+      "nonElevationsRouted": 0,
+      "unsafeRateWilson": [
+       0.0,
+       0.037
+      ],
+      "unsafeByTruth": {},
+      "nearFrontalPerspectives": 2,
+      "nearFrontalRouted": 0,
+      "routes": {
+       "PERSPECTIVE_CAMERA": 44,
+       "OTHER_FLOOR_PLAN": 36,
+       "SKIPPED_UNKNOWN": 8,
+       "FACADE": 24,
+       "OTHER_SECTION": 6,
+       "OTHER_SITE_PLAN": 6
+      },
+      "elevationsLostBy": {},
+      "diagnostics": {
+       "INCONCLUSIVE_NO_ACTION": 18
+      }
+     }
+    }
+   },
+   "perImage": [
+    {
+     "key": "01ad0f0a655a5dd7",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "029f9d25ec5fd460",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "054a808b425cdc4b",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "05ae82428bd41fb6",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "06478ec6757416bb",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "0eca336372d0f516",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "129e9c9b044cf973",
+     "set": "TEST_ARCHON",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "133bc0a160c35203",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "SKIPPED_UNKNOWN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "170531e161a0b4f8",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "17adef2656fff946",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "19a2dc0c176fad6f",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "1b84d9060044620b",
+     "set": "TEST_ARCHON",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "1c6a67ad73db51c0",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "1ed2af5b94fcfc2f",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "1fe28834cc561c78",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "224e9f1757184d2f",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "226268a358862f4f",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "2425957452977d00",
+     "set": "TEST_ARCHON",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "2683609a07a09a26",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "29a1fd1c68f9bab1",
+     "set": "TEST_ARCHON",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "2b3556cdd4184d5e",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "2e7c551ba1f7f9dc",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "2f2e186b39e213da",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "2fd2b1dbf4dd96e1",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "340595d999e29272",
+     "set": "TEST_ARCHON",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "3d1b8cb3c6ef118e",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "44258214fcc0eb49",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "4430160e3388ea07",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "46e0c4e67028c21e",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "49badfbad18450f9",
+     "set": "TEST_ARCHON",
+     "truth": "TECHNICAL_SECTION",
+     "hard": false,
+     "veto": "OTHER_SECTION",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "4a47c13d44b10ca3",
+     "set": "TEST_ARCHON",
+     "truth": "TECHNICAL_SECTION",
+     "hard": false,
+     "veto": "OTHER_SECTION",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "4b347dd46259c59e",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "4dbd5b29af3bc6bc",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "4efa339daa851fe6",
+     "set": "TEST_ARCHON",
+     "truth": "TECHNICAL_SECTION",
+     "hard": false,
+     "veto": "OTHER_SECTION",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "4f2d3e9b93a56427",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "4f4e4c95e3080589",
+     "set": "TEST_ARCHON",
+     "truth": "SITE_PLAN",
+     "hard": false,
+     "veto": "OTHER_SITE_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "52ef8aec22dcdd40",
+     "set": "TEST_ARCHON",
+     "truth": "SITE_PLAN",
+     "hard": false,
+     "veto": "OTHER_SITE_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "573c39cacffd10e4",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "58edad2e52483ffc",
+     "set": "TEST_ARCHON",
+     "truth": "TECHNICAL_SECTION",
+     "hard": false,
+     "veto": "OTHER_SECTION",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "5c91ca31f2d7b038",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "5e3766cec768accc",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "60270178863c0f8c",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "60e18176c3714dc6",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "60f47e20470fb2bd",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "623cad0d920dbc0b",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "6305515073246464",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "6453982125336083",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "6581249fea319ae6",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "6612d4402ef1b729",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "690dd58958d3198f",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "6c061dba9ea88001",
+     "set": "TEST_ARCHON",
+     "truth": "TECHNICAL_SECTION",
+     "hard": false,
+     "veto": "OTHER_SECTION",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "6d103e78a58bf5ba",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "6e1fa062f69eeb34",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "6ff63317d5b603ca",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "72570767b53b75bc",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "73138a5ed484d057",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "7473fc2275fd2bf9",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "7509fc6726f34bd6",
+     "set": "TEST_ARCHON",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "7c7e20e8e39523f0",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "7e44396ebb9efbc2",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "84bbccffaae68b5b",
+     "set": "TEST_ARCHON",
+     "truth": "SITE_PLAN",
+     "hard": false,
+     "veto": "OTHER_SITE_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "8542b47018b8e523",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "8594b29930c2e717",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "860dc0a9b339cac3",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "87c7db87f15e4e3c",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "8b78d03e53ed9100",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "8c295a0b6c4c4ec4",
+     "set": "TEST_ARCHON",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "8ed7584cf6809414",
+     "set": "TEST_ARCHON",
+     "truth": "SITE_PLAN",
+     "hard": false,
+     "veto": "OTHER_SITE_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "925f69983f051de3",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "93903e9bbcd2c4d1",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "941da0f763f034b1",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "94b6808835cf50a9",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "963ed59d66f67bf2",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "99aec53f1d5351a7",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "9df133aeabd0f072",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "9ee5353b10b3db80",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "a0f1160d3b78d2c1",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "a31058996aaba46c",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "a4465e8ff3164647",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "a448457e620d709b",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "a4e35b6fb4735a7b",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "aa29a8df7f568f24",
+     "set": "TEST_ARCHON",
+     "truth": "SITE_PLAN",
+     "hard": false,
+     "veto": "OTHER_SITE_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "aac9ba4545e8145f",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "aadf793576a70b77",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "SKIPPED_UNKNOWN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "ab9c6037c1dfb41b",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "abb4fb4232df75ee",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "accdadc922a58f3e",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "acf5e31fe6bfe7b5",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "SKIPPED_UNKNOWN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "b04368b76032c327",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "b5df5d4d7d37b72e",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "SKIPPED_UNKNOWN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "b650bc47f8a48162",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "SKIPPED_UNKNOWN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "b896cf8467cfd781",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "ba33cc585d2d8252",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "bd0023fab988f9f4",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "bd8589021e7a0858",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "c160e6d0bd08909f",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "c215b790665d8979",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "c63ad8a05e992a97",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "SKIPPED_UNKNOWN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "cd3b18c00e8f4c8a",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "cd4a7e293e28cdc2",
+     "set": "TEST_ARCHON",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "cd6d54d690be5e0a",
+     "set": "TEST_ARCHON",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "d0a9ed7576e96b0a",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "d4faa673edaa7af2",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "d5bcc6bf6a3ac09a",
+     "set": "TEST_ARCHON",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "d7f84c555c640d8f",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "d92c545253782e95",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "df424d8ddd254831",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "e21e33182fbad67d",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "SKIPPED_UNKNOWN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "e2e2c7b7b3abd715",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "e4d6ce8665e1bb70",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "e4ea1750afa6e7b0",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "e5fa5a06dcaa6971",
+     "set": "TEST_ARCHON",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "e81590f9d91b35f9",
+     "set": "TEST_ARCHON",
+     "truth": "TECHNICAL_SECTION",
+     "hard": false,
+     "veto": "OTHER_SECTION",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "e952fbace06e642c",
+     "set": "TEST_ARCHON",
+     "truth": "SITE_PLAN",
+     "hard": false,
+     "veto": "OTHER_SITE_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "e9b129e4ee012b7f",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "ee12612adc2d8f51",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "SKIPPED_UNKNOWN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "ef9be3dc71faaca1",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "f17fede1632df8bb",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "f1dce902bb75671c",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "f2f5d979a8edc231",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "f496ec3fc0796a2b",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "f9fb353ce00f0141",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "fec034582a87263a",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "OTHER_FLOOR_PLAN",
+     "facade": false,
+     "diagnostics": []
+    },
+    {
+     "key": "ff1b776ff3721ec9",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "PERSPECTIVE_CAMERA",
+     "facade": false,
+     "diagnostics": []
+    }
+   ]
+  },
+  "ADVERSE_CAPTIONS": {
+   "ALL": {
+    "LEGACY": {
+     "n": 124,
+     "singleElevations": 24,
+     "elevationsRouted": 24,
+     "elevationCoverage": 1.0,
+     "elevationCoverageWilson": [
+      0.862,
+      1.0
+     ],
+     "nonElevations": 100,
+     "nonElevationsRouted": 100,
+     "unsafeRateWilson": [
+      0.963,
+      1.0
+     ],
+     "unsafeByTruth": {
+      "EXTERIOR_PERSPECTIVE": 41,
+      "FLOOR_PLAN": 36,
+      "INTERIOR_PERSPECTIVE": 11,
+      "TECHNICAL_SECTION": 6,
+      "SITE_PLAN": 6
+     },
+     "nearFrontalPerspectives": 2,
+     "nearFrontalRouted": 2,
+     "routes": {
+      "FACADE": 124
+     },
+     "elevationsLostBy": {}
+    },
+    "STRICT_IU02": {
+     "n": 124,
+     "singleElevations": 24,
+     "elevationsRouted": 6,
+     "elevationCoverage": 0.25,
+     "elevationCoverageWilson": [
+      0.12,
+      0.449
+     ],
+     "nonElevations": 100,
+     "nonElevationsRouted": 0,
+     "unsafeRateWilson": [
+      0.0,
+      0.037
+     ],
+     "unsafeByTruth": {},
+     "nearFrontalPerspectives": 2,
+     "nearFrontalRouted": 0,
+     "routes": {
+      "UNKNOWN": 100,
+      "FACADE": 6,
+      "REVIEW_GEOMETRY_INCONCLUSIVE": 18
+     },
+     "elevationsLostBy": {
+      "REVIEW_GEOMETRY_INCONCLUSIVE": 18
+     }
+    },
+    "VETO_ONLY": {
+     "n": 124,
+     "singleElevations": 24,
+     "elevationsRouted": 24,
+     "elevationCoverage": 1.0,
+     "elevationCoverageWilson": [
+      0.862,
+      1.0
+     ],
+     "nonElevations": 100,
+     "nonElevationsRouted": 0,
+     "unsafeRateWilson": [
+      0.0,
+      0.037
+     ],
+     "unsafeByTruth": {},
+     "nearFrontalPerspectives": 2,
+     "nearFrontalRouted": 0,
+     "routes": {
+      "STOP_PERSPECTIVE": 44,
+      "REVIEW_PLAN": 37,
+      "FACADE": 24,
+      "REVIEW_PERSPECTIVE": 6,
+      "REVIEW_SECTION": 5,
+      "REVIEW_SITE_PLAN": 5,
+      "REVIEW_INTERIOR": 3
+     },
+     "elevationsLostBy": {},
+     "diagnostics": {
+      "VETO": 100,
+      "INCONCLUSIVE_NO_ACTION": 18
+     }
+    }
+   },
+   "bySet": {
+    "TEST_ARCHON": {
+     "LEGACY": {
+      "n": 124,
+      "singleElevations": 24,
+      "elevationsRouted": 24,
+      "elevationCoverage": 1.0,
+      "elevationCoverageWilson": [
+       0.862,
+       1.0
+      ],
+      "nonElevations": 100,
+      "nonElevationsRouted": 100,
+      "unsafeRateWilson": [
+       0.963,
+       1.0
+      ],
+      "unsafeByTruth": {
+       "EXTERIOR_PERSPECTIVE": 41,
+       "FLOOR_PLAN": 36,
+       "INTERIOR_PERSPECTIVE": 11,
+       "TECHNICAL_SECTION": 6,
+       "SITE_PLAN": 6
+      },
+      "nearFrontalPerspectives": 2,
+      "nearFrontalRouted": 2,
+      "routes": {
+       "FACADE": 124
+      },
+      "elevationsLostBy": {}
+     },
+     "STRICT_IU02": {
+      "n": 124,
+      "singleElevations": 24,
+      "elevationsRouted": 6,
+      "elevationCoverage": 0.25,
+      "elevationCoverageWilson": [
+       0.12,
+       0.449
+      ],
+      "nonElevations": 100,
+      "nonElevationsRouted": 0,
+      "unsafeRateWilson": [
+       0.0,
+       0.037
+      ],
+      "unsafeByTruth": {},
+      "nearFrontalPerspectives": 2,
+      "nearFrontalRouted": 0,
+      "routes": {
+       "UNKNOWN": 100,
+       "FACADE": 6,
+       "REVIEW_GEOMETRY_INCONCLUSIVE": 18
+      },
+      "elevationsLostBy": {
+       "REVIEW_GEOMETRY_INCONCLUSIVE": 18
+      }
+     },
+     "VETO_ONLY": {
+      "n": 124,
+      "singleElevations": 24,
+      "elevationsRouted": 24,
+      "elevationCoverage": 1.0,
+      "elevationCoverageWilson": [
+       0.862,
+       1.0
+      ],
+      "nonElevations": 100,
+      "nonElevationsRouted": 0,
+      "unsafeRateWilson": [
+       0.0,
+       0.037
+      ],
+      "unsafeByTruth": {},
+      "nearFrontalPerspectives": 2,
+      "nearFrontalRouted": 0,
+      "routes": {
+       "STOP_PERSPECTIVE": 44,
+       "REVIEW_PLAN": 37,
+       "FACADE": 24,
+       "REVIEW_PERSPECTIVE": 6,
+       "REVIEW_SECTION": 5,
+       "REVIEW_SITE_PLAN": 5,
+       "REVIEW_INTERIOR": 3
+      },
+      "elevationsLostBy": {},
+      "diagnostics": {
+       "VETO": 100,
+       "INCONCLUSIVE_NO_ACTION": 18
+      }
+     }
+    }
+   },
+   "perImage": [
+    {
+     "key": "01ad0f0a655a5dd7",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "029f9d25ec5fd460",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "054a808b425cdc4b",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "05ae82428bd41fb6",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.97"
+     ]
+    },
+    {
+     "key": "06478ec6757416bb",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.98"
+     ]
+    },
+    {
+     "key": "0eca336372d0f516",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "129e9c9b044cf973",
+     "set": "TEST_ARCHON",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "133bc0a160c35203",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "170531e161a0b4f8",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "17adef2656fff946",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "19a2dc0c176fad6f",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "1b84d9060044620b",
+     "set": "TEST_ARCHON",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "1c6a67ad73db51c0",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "1ed2af5b94fcfc2f",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.96"
+     ]
+    },
+    {
+     "key": "1fe28834cc561c78",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "224e9f1757184d2f",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "REVIEW_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.98 >= 0.6, most likely EXTERIOR_PERSPECTIVE p=0.97"
+     ]
+    },
+    {
+     "key": "226268a358862f4f",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "2425957452977d00",
+     "set": "TEST_ARCHON",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "2683609a07a09a26",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "29a1fd1c68f9bab1",
+     "set": "TEST_ARCHON",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "2b3556cdd4184d5e",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "2e7c551ba1f7f9dc",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "2f2e186b39e213da",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "2fd2b1dbf4dd96e1",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "340595d999e29272",
+     "set": "TEST_ARCHON",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "3d1b8cb3c6ef118e",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "44258214fcc0eb49",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "4430160e3388ea07",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "46e0c4e67028c21e",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "49badfbad18450f9",
+     "set": "TEST_ARCHON",
+     "truth": "TECHNICAL_SECTION",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.47"
+     ]
+    },
+    {
+     "key": "4a47c13d44b10ca3",
+     "set": "TEST_ARCHON",
+     "truth": "TECHNICAL_SECTION",
+     "hard": false,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely TECHNICAL_SECTION p=0.99"
+     ]
+    },
+    {
+     "key": "4b347dd46259c59e",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.98"
+     ]
+    },
+    {
+     "key": "4dbd5b29af3bc6bc",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "4efa339daa851fe6",
+     "set": "TEST_ARCHON",
+     "truth": "TECHNICAL_SECTION",
+     "hard": false,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely TECHNICAL_SECTION p=0.98"
+     ]
+    },
+    {
+     "key": "4f2d3e9b93a56427",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.98"
+     ]
+    },
+    {
+     "key": "4f4e4c95e3080589",
+     "set": "TEST_ARCHON",
+     "truth": "SITE_PLAN",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "52ef8aec22dcdd40",
+     "set": "TEST_ARCHON",
+     "truth": "SITE_PLAN",
+     "hard": false,
+     "veto": "REVIEW_SITE_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely SITE_PLAN p=1.00"
+     ]
+    },
+    {
+     "key": "573c39cacffd10e4",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "58edad2e52483ffc",
+     "set": "TEST_ARCHON",
+     "truth": "TECHNICAL_SECTION",
+     "hard": false,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely TECHNICAL_SECTION p=0.92"
+     ]
+    },
+    {
+     "key": "5c91ca31f2d7b038",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "5e3766cec768accc",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.98"
+     ]
+    },
+    {
+     "key": "60270178863c0f8c",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.98"
+     ]
+    },
+    {
+     "key": "60e18176c3714dc6",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "60f47e20470fb2bd",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "623cad0d920dbc0b",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "6305515073246464",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "6453982125336083",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "6581249fea319ae6",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "6612d4402ef1b729",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "690dd58958d3198f",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "6c061dba9ea88001",
+     "set": "TEST_ARCHON",
+     "truth": "TECHNICAL_SECTION",
+     "hard": false,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely TECHNICAL_SECTION p=0.85"
+     ]
+    },
+    {
+     "key": "6d103e78a58bf5ba",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "REVIEW_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely EXTERIOR_PERSPECTIVE p=0.98"
+     ]
+    },
+    {
+     "key": "6e1fa062f69eeb34",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "6ff63317d5b603ca",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "72570767b53b75bc",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "73138a5ed484d057",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "7473fc2275fd2bf9",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "7509fc6726f34bd6",
+     "set": "TEST_ARCHON",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "REVIEW_INTERIOR",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely INTERIOR_PERSPECTIVE p=0.98"
+     ]
+    },
+    {
+     "key": "7c7e20e8e39523f0",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "7e44396ebb9efbc2",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "84bbccffaae68b5b",
+     "set": "TEST_ARCHON",
+     "truth": "SITE_PLAN",
+     "hard": false,
+     "veto": "REVIEW_SITE_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely SITE_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "8542b47018b8e523",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "8594b29930c2e717",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "860dc0a9b339cac3",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "87c7db87f15e4e3c",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "8b78d03e53ed9100",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "8c295a0b6c4c4ec4",
+     "set": "TEST_ARCHON",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "REVIEW_INTERIOR",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.97 >= 0.6, most likely INTERIOR_PERSPECTIVE p=0.95"
+     ]
+    },
+    {
+     "key": "8ed7584cf6809414",
+     "set": "TEST_ARCHON",
+     "truth": "SITE_PLAN",
+     "hard": false,
+     "veto": "REVIEW_SITE_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely SITE_PLAN p=0.98"
+     ]
+    },
+    {
+     "key": "925f69983f051de3",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "93903e9bbcd2c4d1",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "941da0f763f034b1",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "94b6808835cf50a9",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.97"
+     ]
+    },
+    {
+     "key": "963ed59d66f67bf2",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "99aec53f1d5351a7",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "9df133aeabd0f072",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "9ee5353b10b3db80",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "a0f1160d3b78d2c1",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "a31058996aaba46c",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "a4465e8ff3164647",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "a448457e620d709b",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.95"
+     ]
+    },
+    {
+     "key": "a4e35b6fb4735a7b",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "aa29a8df7f568f24",
+     "set": "TEST_ARCHON",
+     "truth": "SITE_PLAN",
+     "hard": false,
+     "veto": "REVIEW_SITE_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely SITE_PLAN p=0.97"
+     ]
+    },
+    {
+     "key": "aac9ba4545e8145f",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "aadf793576a70b77",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "ab9c6037c1dfb41b",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "abb4fb4232df75ee",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "accdadc922a58f3e",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "acf5e31fe6bfe7b5",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "b04368b76032c327",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "b5df5d4d7d37b72e",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "b650bc47f8a48162",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "REVIEW_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely EXTERIOR_PERSPECTIVE p=0.96"
+     ]
+    },
+    {
+     "key": "b896cf8467cfd781",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "ba33cc585d2d8252",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "bd0023fab988f9f4",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "bd8589021e7a0858",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "c160e6d0bd08909f",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "c215b790665d8979",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "c63ad8a05e992a97",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "cd3b18c00e8f4c8a",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "cd4a7e293e28cdc2",
+     "set": "TEST_ARCHON",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "cd6d54d690be5e0a",
+     "set": "TEST_ARCHON",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "d0a9ed7576e96b0a",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "d4faa673edaa7af2",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "d5bcc6bf6a3ac09a",
+     "set": "TEST_ARCHON",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "REVIEW_INTERIOR",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely INTERIOR_PERSPECTIVE p=0.96"
+     ]
+    },
+    {
+     "key": "d7f84c555c640d8f",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "d92c545253782e95",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "df424d8ddd254831",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "REVIEW_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely EXTERIOR_PERSPECTIVE p=0.98"
+     ]
+    },
+    {
+     "key": "e21e33182fbad67d",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "e2e2c7b7b3abd715",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "e4d6ce8665e1bb70",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "e4ea1750afa6e7b0",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "REVIEW_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely EXTERIOR_PERSPECTIVE p=0.94"
+     ]
+    },
+    {
+     "key": "e5fa5a06dcaa6971",
+     "set": "TEST_ARCHON",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "e81590f9d91b35f9",
+     "set": "TEST_ARCHON",
+     "truth": "TECHNICAL_SECTION",
+     "hard": false,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely TECHNICAL_SECTION p=0.50"
+     ]
+    },
+    {
+     "key": "e952fbace06e642c",
+     "set": "TEST_ARCHON",
+     "truth": "SITE_PLAN",
+     "hard": false,
+     "veto": "REVIEW_SITE_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely SITE_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "e9b129e4ee012b7f",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "ee12612adc2d8f51",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "REVIEW_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely EXTERIOR_PERSPECTIVE p=0.94"
+     ]
+    },
+    {
+     "key": "ef9be3dc71faaca1",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "f17fede1632df8bb",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "f1dce902bb75671c",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "f2f5d979a8edc231",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "f496ec3fc0796a2b",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "f9fb353ce00f0141",
+     "set": "TEST_ARCHON",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "fec034582a87263a",
+     "set": "TEST_ARCHON",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "ff1b776ff3721ec9",
+     "set": "TEST_ARCHON",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    }
+   ]
+  }
+ },
+ "tVeto": 0.6
+}

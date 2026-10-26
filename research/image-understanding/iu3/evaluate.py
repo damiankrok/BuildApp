@@ -81,7 +81,11 @@ def main():
         rows = json.load(open(arg_value('--rows')))
         real, adverse = load_legacy(arg_value('--legacy-real')), load_legacy(arg_value('--legacy-adverse'))
     rows, P, unm, missing = scores.evidence(rows)
-    masked = scores.masked_cache()
+    # STRICT_IU02 needs the projection inside the building mask for its candidates (IU-02's own rule, computed here
+    # exactly as iu2_final did; cached per image)
+    import iu2_train as T
+    cand = {rows[i]['key'] for i in range(len(rows)) if int(P[i].argmax()) == 1 and P[i][1] >= 0.60}
+    masked = T.masked_state(rows, cand)
     res = {'missing': len(missing), 'scenarios': {}}
     if mode == 'dev':
         grid = {}

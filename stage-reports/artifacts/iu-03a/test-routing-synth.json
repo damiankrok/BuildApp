@@ -1,0 +1,2532 @@
+{
+ "missing": 0,
+ "scenarios": {
+  "REAL_CAPTIONS": {
+   "ALL": {
+    "LEGACY": {
+     "n": 0,
+     "singleElevations": 0,
+     "elevationsRouted": 0,
+     "elevationCoverage": null,
+     "elevationCoverageWilson": null,
+     "nonElevations": 0,
+     "nonElevationsRouted": 0,
+     "unsafeRateWilson": null,
+     "unsafeByTruth": {},
+     "nearFrontalPerspectives": 0,
+     "nearFrontalRouted": 0,
+     "routes": {},
+     "elevationsLostBy": {}
+    },
+    "STRICT_IU02": {
+     "n": 0,
+     "singleElevations": 0,
+     "elevationsRouted": 0,
+     "elevationCoverage": null,
+     "elevationCoverageWilson": null,
+     "nonElevations": 0,
+     "nonElevationsRouted": 0,
+     "unsafeRateWilson": null,
+     "unsafeByTruth": {},
+     "nearFrontalPerspectives": 0,
+     "nearFrontalRouted": 0,
+     "routes": {},
+     "elevationsLostBy": {}
+    },
+    "VETO_ONLY": {
+     "n": 0,
+     "singleElevations": 0,
+     "elevationsRouted": 0,
+     "elevationCoverage": null,
+     "elevationCoverageWilson": null,
+     "nonElevations": 0,
+     "nonElevationsRouted": 0,
+     "unsafeRateWilson": null,
+     "unsafeByTruth": {},
+     "nearFrontalPerspectives": 0,
+     "nearFrontalRouted": 0,
+     "routes": {},
+     "elevationsLostBy": {}
+    }
+   },
+   "bySet": {},
+   "perImage": []
+  },
+  "ADVERSE_CAPTIONS": {
+   "ALL": {
+    "LEGACY": {
+     "n": 217,
+     "singleElevations": 90,
+     "elevationsRouted": 90,
+     "elevationCoverage": 1.0,
+     "elevationCoverageWilson": [
+      0.9591,
+      1.0
+     ],
+     "nonElevations": 127,
+     "nonElevationsRouted": 127,
+     "unsafeRateWilson": [
+      0.9706,
+      1.0
+     ],
+     "unsafeByTruth": {
+      "EXTERIOR_PERSPECTIVE": 60,
+      "TECHNICAL_SECTION": 30,
+      "INTERIOR_PERSPECTIVE": 15,
+      "FLOOR_PLAN": 15,
+      "MULTI_VIEW": 7
+     },
+     "nearFrontalPerspectives": 30,
+     "nearFrontalRouted": 30,
+     "routes": {
+      "FACADE": 217
+     },
+     "elevationsLostBy": {}
+    },
+    "STRICT_IU02": {
+     "n": 217,
+     "singleElevations": 90,
+     "elevationsRouted": 58,
+     "elevationCoverage": 0.6444,
+     "elevationCoverageWilson": [
+      0.5415,
+      0.7356
+     ],
+     "nonElevations": 127,
+     "nonElevationsRouted": 0,
+     "unsafeRateWilson": [
+      0.0,
+      0.0294
+     ],
+     "unsafeByTruth": {},
+     "nearFrontalPerspectives": 30,
+     "nearFrontalRouted": 0,
+     "routes": {
+      "REVIEW_GEOMETRY_INCONCLUSIVE": 2,
+      "UNKNOWN": 157,
+      "FACADE": 58
+     },
+     "elevationsLostBy": {
+      "REVIEW_GEOMETRY_INCONCLUSIVE": 2,
+      "UNKNOWN": 30
+     }
+    },
+    "VETO_ONLY": {
+     "n": 217,
+     "singleElevations": 90,
+     "elevationsRouted": 60,
+     "elevationCoverage": 0.6667,
+     "elevationCoverageWilson": [
+      0.5642,
+      0.7555
+     ],
+     "nonElevations": 127,
+     "nonElevationsRouted": 1,
+     "unsafeRateWilson": [
+      0.0014,
+      0.0433
+     ],
+     "unsafeByTruth": {
+      "EXTERIOR_PERSPECTIVE": 1
+     },
+     "nearFrontalPerspectives": 30,
+     "nearFrontalRouted": 1,
+     "routes": {
+      "FACADE": 61,
+      "REVIEW_MULTI_VIEW_OR_OTHER": 34,
+      "STOP_PERSPECTIVE": 57,
+      "REVIEW_SECTION": 30,
+      "REVIEW_PLAN": 15,
+      "REVIEW_INTERIOR": 4,
+      "REVIEW_PERSPECTIVE": 14,
+      "REVIEW_SITE_PLAN": 1,
+      "REVIEW_DETAIL": 1
+     },
+     "elevationsLostBy": {
+      "REVIEW_MULTI_VIEW_OR_OTHER": 26,
+      "REVIEW_INTERIOR": 3,
+      "REVIEW_SITE_PLAN": 1
+     },
+     "diagnostics": {
+      "INCONCLUSIVE_NO_ACTION": 2,
+      "VETO": 156
+     }
+    }
+   },
+   "bySet": {
+    "TEST_SYNTH": {
+     "LEGACY": {
+      "n": 217,
+      "singleElevations": 90,
+      "elevationsRouted": 90,
+      "elevationCoverage": 1.0,
+      "elevationCoverageWilson": [
+       0.9591,
+       1.0
+      ],
+      "nonElevations": 127,
+      "nonElevationsRouted": 127,
+      "unsafeRateWilson": [
+       0.9706,
+       1.0
+      ],
+      "unsafeByTruth": {
+       "EXTERIOR_PERSPECTIVE": 60,
+       "TECHNICAL_SECTION": 30,
+       "INTERIOR_PERSPECTIVE": 15,
+       "FLOOR_PLAN": 15,
+       "MULTI_VIEW": 7
+      },
+      "nearFrontalPerspectives": 30,
+      "nearFrontalRouted": 30,
+      "routes": {
+       "FACADE": 217
+      },
+      "elevationsLostBy": {}
+     },
+     "STRICT_IU02": {
+      "n": 217,
+      "singleElevations": 90,
+      "elevationsRouted": 58,
+      "elevationCoverage": 0.6444,
+      "elevationCoverageWilson": [
+       0.5415,
+       0.7356
+      ],
+      "nonElevations": 127,
+      "nonElevationsRouted": 0,
+      "unsafeRateWilson": [
+       0.0,
+       0.0294
+      ],
+      "unsafeByTruth": {},
+      "nearFrontalPerspectives": 30,
+      "nearFrontalRouted": 0,
+      "routes": {
+       "REVIEW_GEOMETRY_INCONCLUSIVE": 2,
+       "UNKNOWN": 157,
+       "FACADE": 58
+      },
+      "elevationsLostBy": {
+       "REVIEW_GEOMETRY_INCONCLUSIVE": 2,
+       "UNKNOWN": 30
+      }
+     },
+     "VETO_ONLY": {
+      "n": 217,
+      "singleElevations": 90,
+      "elevationsRouted": 60,
+      "elevationCoverage": 0.6667,
+      "elevationCoverageWilson": [
+       0.5642,
+       0.7555
+      ],
+      "nonElevations": 127,
+      "nonElevationsRouted": 1,
+      "unsafeRateWilson": [
+       0.0014,
+       0.0433
+      ],
+      "unsafeByTruth": {
+       "EXTERIOR_PERSPECTIVE": 1
+      },
+      "nearFrontalPerspectives": 30,
+      "nearFrontalRouted": 1,
+      "routes": {
+       "FACADE": 61,
+       "REVIEW_MULTI_VIEW_OR_OTHER": 34,
+       "STOP_PERSPECTIVE": 57,
+       "REVIEW_SECTION": 30,
+       "REVIEW_PLAN": 15,
+       "REVIEW_INTERIOR": 4,
+       "REVIEW_PERSPECTIVE": 14,
+       "REVIEW_SITE_PLAN": 1,
+       "REVIEW_DETAIL": 1
+      },
+      "elevationsLostBy": {
+       "REVIEW_MULTI_VIEW_OR_OTHER": 26,
+       "REVIEW_INTERIOR": 3,
+       "REVIEW_SITE_PLAN": 1
+      },
+      "diagnostics": {
+       "INCONCLUSIVE_NO_ACTION": 2,
+       "VETO": 156
+      }
+     }
+    }
+   },
+   "perImage": [
+    {
+     "key": "s3t-h000-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "s3t-h000-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.98 >= 0.6, most likely OTHER p=0.41"
+     ]
+    },
+    {
+     "key": "s3t-h000-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h000-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h000-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h000-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely TECHNICAL_SECTION p=0.98"
+     ]
+    },
+    {
+     "key": "s3t-h000-interio",
+     "set": "TEST_SYNTH",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h001-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h001-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.98 >= 0.6, most likely OTHER p=0.30"
+     ]
+    },
+    {
+     "key": "s3t-h001-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h001-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h001-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h001-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely TECHNICAL_SECTION p=0.98"
+     ]
+    },
+    {
+     "key": "s3t-h001-plan",
+     "set": "TEST_SYNTH",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely FLOOR_PLAN p=0.98"
+     ]
+    },
+    {
+     "key": "s3t-h002-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h002-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_INTERIOR",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.93 >= 0.6, most likely INTERIOR_PERSPECTIVE p=0.28"
+     ]
+    },
+    {
+     "key": "s3t-h002-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h002-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h002-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h002-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely TECHNICAL_SECTION p=0.99"
+     ]
+    },
+    {
+     "key": "s3t-h002-interio",
+     "set": "TEST_SYNTH",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h003-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h003-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.97 >= 0.6, most likely OTHER p=0.76"
+     ]
+    },
+    {
+     "key": "s3t-h003-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h003-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h003-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h003-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.98 >= 0.6, most likely TECHNICAL_SECTION p=0.98"
+     ]
+    },
+    {
+     "key": "s3t-h003-plan",
+     "set": "TEST_SYNTH",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "s3t-h003-collage",
+     "set": "TEST_SYNTH",
+     "truth": "MULTI_VIEW",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: panels (NOT_SINGLE_FACADE)"
+     ]
+    },
+    {
+     "key": "s3t-h004-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h004-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.94 >= 0.6, most likely OTHER p=0.48"
+     ]
+    },
+    {
+     "key": "s3t-h004-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h004-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h004-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h004-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely TECHNICAL_SECTION p=0.97"
+     ]
+    },
+    {
+     "key": "s3t-h004-interio",
+     "set": "TEST_SYNTH",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h005-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h005-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.95 >= 0.6, most likely OTHER p=0.76"
+     ]
+    },
+    {
+     "key": "s3t-h005-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h005-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "REVIEW_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.88 >= 0.6, most likely EXTERIOR_PERSPECTIVE p=0.84"
+     ]
+    },
+    {
+     "key": "s3t-h005-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h005-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely TECHNICAL_SECTION p=0.99"
+     ]
+    },
+    {
+     "key": "s3t-h005-plan",
+     "set": "TEST_SYNTH",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.98"
+     ]
+    },
+    {
+     "key": "s3t-h006-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h006-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.98 >= 0.6, most likely OTHER p=0.50"
+     ]
+    },
+    {
+     "key": "s3t-h006-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h006-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h006-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "REVIEW_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely EXTERIOR_PERSPECTIVE p=0.94"
+     ]
+    },
+    {
+     "key": "s3t-h006-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely TECHNICAL_SECTION p=0.99"
+     ]
+    },
+    {
+     "key": "s3t-h006-interio",
+     "set": "TEST_SYNTH",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h007-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h007-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_SITE_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.91 >= 0.6, most likely SITE_PLAN p=0.27"
+     ]
+    },
+    {
+     "key": "s3t-h007-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h007-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h007-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h007-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely TECHNICAL_SECTION p=0.99"
+     ]
+    },
+    {
+     "key": "s3t-h007-plan",
+     "set": "TEST_SYNTH",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely FLOOR_PLAN p=0.95"
+     ]
+    },
+    {
+     "key": "s3t-h007-collage",
+     "set": "TEST_SYNTH",
+     "truth": "MULTI_VIEW",
+     "hard": false,
+     "veto": "REVIEW_INTERIOR",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.98 >= 0.6, most likely INTERIOR_PERSPECTIVE p=0.59"
+     ]
+    },
+    {
+     "key": "s3t-h008-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h008-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.98 >= 0.6, most likely OTHER p=0.54"
+     ]
+    },
+    {
+     "key": "s3t-h008-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h008-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h008-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h008-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely TECHNICAL_SECTION p=0.98"
+     ]
+    },
+    {
+     "key": "s3t-h008-interio",
+     "set": "TEST_SYNTH",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h009-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h009-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.97 >= 0.6, most likely OTHER p=0.67"
+     ]
+    },
+    {
+     "key": "s3t-h009-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h009-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "REVIEW_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.78 >= 0.6, most likely EXTERIOR_PERSPECTIVE p=0.69"
+     ]
+    },
+    {
+     "key": "s3t-h009-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "REVIEW_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely EXTERIOR_PERSPECTIVE p=0.94"
+     ]
+    },
+    {
+     "key": "s3t-h009-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely TECHNICAL_SECTION p=0.99"
+     ]
+    },
+    {
+     "key": "s3t-h009-plan",
+     "set": "TEST_SYNTH",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely FLOOR_PLAN p=0.96"
+     ]
+    },
+    {
+     "key": "s3t-h010-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h010-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.97 >= 0.6, most likely OTHER p=0.48"
+     ]
+    },
+    {
+     "key": "s3t-h010-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h010-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h010-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h010-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely TECHNICAL_SECTION p=1.00"
+     ]
+    },
+    {
+     "key": "s3t-h010-interio",
+     "set": "TEST_SYNTH",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.97 >= 0.6, most likely OTHER p=0.50"
+     ]
+    },
+    {
+     "key": "s3t-h011-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h011-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.94 >= 0.6, most likely OTHER p=0.29"
+     ]
+    },
+    {
+     "key": "s3t-h011-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h011-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h011-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h011-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.98 >= 0.6, most likely TECHNICAL_SECTION p=0.98"
+     ]
+    },
+    {
+     "key": "s3t-h011-plan",
+     "set": "TEST_SYNTH",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.98"
+     ]
+    },
+    {
+     "key": "s3t-h011-collage",
+     "set": "TEST_SYNTH",
+     "truth": "MULTI_VIEW",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: panels (NOT_SINGLE_FACADE)"
+     ]
+    },
+    {
+     "key": "s3t-h012-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h012-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.95 >= 0.6, most likely OTHER p=0.85"
+     ]
+    },
+    {
+     "key": "s3t-h012-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h012-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h012-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h012-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely TECHNICAL_SECTION p=1.00"
+     ]
+    },
+    {
+     "key": "s3t-h012-interio",
+     "set": "TEST_SYNTH",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h013-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h013-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely OTHER p=0.63"
+     ]
+    },
+    {
+     "key": "s3t-h013-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h013-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h013-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h013-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely TECHNICAL_SECTION p=0.99"
+     ]
+    },
+    {
+     "key": "s3t-h013-plan",
+     "set": "TEST_SYNTH",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.96 >= 0.6, most likely FLOOR_PLAN p=0.77"
+     ]
+    },
+    {
+     "key": "s3t-h014-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h014-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.98 >= 0.6, most likely OTHER p=0.80"
+     ]
+    },
+    {
+     "key": "s3t-h014-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h014-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "REVIEW_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.92 >= 0.6, most likely EXTERIOR_PERSPECTIVE p=0.85"
+     ]
+    },
+    {
+     "key": "s3t-h014-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "REVIEW_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely EXTERIOR_PERSPECTIVE p=0.94"
+     ]
+    },
+    {
+     "key": "s3t-h014-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely TECHNICAL_SECTION p=0.98"
+     ]
+    },
+    {
+     "key": "s3t-h014-interio",
+     "set": "TEST_SYNTH",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h015-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h015-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_INTERIOR",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.96 >= 0.6, most likely INTERIOR_PERSPECTIVE p=0.22"
+     ]
+    },
+    {
+     "key": "s3t-h015-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h015-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h015-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h015-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely TECHNICAL_SECTION p=0.96"
+     ]
+    },
+    {
+     "key": "s3t-h015-plan",
+     "set": "TEST_SYNTH",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely FLOOR_PLAN p=0.98"
+     ]
+    },
+    {
+     "key": "s3t-h015-collage",
+     "set": "TEST_SYNTH",
+     "truth": "MULTI_VIEW",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: panels (NOT_SINGLE_FACADE)"
+     ]
+    },
+    {
+     "key": "s3t-h016-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h016-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.97 >= 0.6, most likely OTHER p=0.63"
+     ]
+    },
+    {
+     "key": "s3t-h016-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h016-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h016-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "REVIEW_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.98 >= 0.6, most likely EXTERIOR_PERSPECTIVE p=0.94"
+     ]
+    },
+    {
+     "key": "s3t-h016-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely TECHNICAL_SECTION p=0.99"
+     ]
+    },
+    {
+     "key": "s3t-h016-interio",
+     "set": "TEST_SYNTH",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h017-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h017-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.94 >= 0.6, most likely OTHER p=0.31"
+     ]
+    },
+    {
+     "key": "s3t-h017-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h017-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "REVIEW_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.93 >= 0.6, most likely EXTERIOR_PERSPECTIVE p=0.73"
+     ]
+    },
+    {
+     "key": "s3t-h017-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h017-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely TECHNICAL_SECTION p=0.98"
+     ]
+    },
+    {
+     "key": "s3t-h017-plan",
+     "set": "TEST_SYNTH",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.98"
+     ]
+    },
+    {
+     "key": "s3t-h018-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h018-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.98 >= 0.6, most likely OTHER p=0.80"
+     ]
+    },
+    {
+     "key": "s3t-h018-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h018-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "REVIEW_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.86 >= 0.6, most likely EXTERIOR_PERSPECTIVE p=0.76"
+     ]
+    },
+    {
+     "key": "s3t-h018-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h018-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.98 >= 0.6, most likely TECHNICAL_SECTION p=0.98"
+     ]
+    },
+    {
+     "key": "s3t-h018-interio",
+     "set": "TEST_SYNTH",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.90 >= 0.6, most likely OTHER p=0.34"
+     ]
+    },
+    {
+     "key": "s3t-h019-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h019-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.98 >= 0.6, most likely OTHER p=0.86"
+     ]
+    },
+    {
+     "key": "s3t-h019-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h019-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "REVIEW_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.93 >= 0.6, most likely EXTERIOR_PERSPECTIVE p=0.81"
+     ]
+    },
+    {
+     "key": "s3t-h019-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h019-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely TECHNICAL_SECTION p=1.00"
+     ]
+    },
+    {
+     "key": "s3t-h019-plan",
+     "set": "TEST_SYNTH",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.98"
+     ]
+    },
+    {
+     "key": "s3t-h019-collage",
+     "set": "TEST_SYNTH",
+     "truth": "MULTI_VIEW",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.88 >= 0.6, most likely OTHER p=0.64"
+     ]
+    },
+    {
+     "key": "s3t-h020-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h020-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.98 >= 0.6, most likely OTHER p=0.65"
+     ]
+    },
+    {
+     "key": "s3t-h020-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h020-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h020-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "REVIEW_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely EXTERIOR_PERSPECTIVE p=0.98"
+     ]
+    },
+    {
+     "key": "s3t-h020-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely TECHNICAL_SECTION p=0.99"
+     ]
+    },
+    {
+     "key": "s3t-h020-interio",
+     "set": "TEST_SYNTH",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h021-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h021-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_INTERIOR",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.96 >= 0.6, most likely INTERIOR_PERSPECTIVE p=0.32"
+     ]
+    },
+    {
+     "key": "s3t-h021-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h021-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h021-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h021-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely TECHNICAL_SECTION p=0.99"
+     ]
+    },
+    {
+     "key": "s3t-h021-plan",
+     "set": "TEST_SYNTH",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.98"
+     ]
+    },
+    {
+     "key": "s3t-h022-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h022-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.98 >= 0.6, most likely OTHER p=0.28"
+     ]
+    },
+    {
+     "key": "s3t-h022-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h022-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h022-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "REVIEW_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.89 >= 0.6, most likely EXTERIOR_PERSPECTIVE p=0.87"
+     ]
+    },
+    {
+     "key": "s3t-h022-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.94 >= 0.6, most likely TECHNICAL_SECTION p=0.93"
+     ]
+    },
+    {
+     "key": "s3t-h022-interio",
+     "set": "TEST_SYNTH",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h023-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h023-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.94 >= 0.6, most likely OTHER p=0.50"
+     ]
+    },
+    {
+     "key": "s3t-h023-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h023-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "REVIEW_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.96 >= 0.6, most likely EXTERIOR_PERSPECTIVE p=0.89"
+     ]
+    },
+    {
+     "key": "s3t-h023-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "REVIEW_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.96 >= 0.6, most likely EXTERIOR_PERSPECTIVE p=0.90"
+     ]
+    },
+    {
+     "key": "s3t-h023-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.95 >= 0.6, most likely TECHNICAL_SECTION p=0.89"
+     ]
+    },
+    {
+     "key": "s3t-h023-plan",
+     "set": "TEST_SYNTH",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.98"
+     ]
+    },
+    {
+     "key": "s3t-h023-collage",
+     "set": "TEST_SYNTH",
+     "truth": "MULTI_VIEW",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: panels (NOT_SINGLE_FACADE)"
+     ]
+    },
+    {
+     "key": "s3t-h024-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h024-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely OTHER p=0.79"
+     ]
+    },
+    {
+     "key": "s3t-h024-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h024-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h024-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h024-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely TECHNICAL_SECTION p=0.99"
+     ]
+    },
+    {
+     "key": "s3t-h024-interio",
+     "set": "TEST_SYNTH",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h025-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h025-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.98 >= 0.6, most likely OTHER p=0.43"
+     ]
+    },
+    {
+     "key": "s3t-h025-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h025-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h025-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h025-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely TECHNICAL_SECTION p=0.98"
+     ]
+    },
+    {
+     "key": "s3t-h025-plan",
+     "set": "TEST_SYNTH",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.98"
+     ]
+    },
+    {
+     "key": "s3t-h026-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h026-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.98 >= 0.6, most likely OTHER p=0.36"
+     ]
+    },
+    {
+     "key": "s3t-h026-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h026-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h026-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h026-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.98 >= 0.6, most likely TECHNICAL_SECTION p=0.97"
+     ]
+    },
+    {
+     "key": "s3t-h026-interio",
+     "set": "TEST_SYNTH",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h027-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h027-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.96 >= 0.6, most likely OTHER p=0.63"
+     ]
+    },
+    {
+     "key": "s3t-h027-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h027-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h027-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h027-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely TECHNICAL_SECTION p=0.99"
+     ]
+    },
+    {
+     "key": "s3t-h027-plan",
+     "set": "TEST_SYNTH",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=1.00 >= 0.6, most likely FLOOR_PLAN p=0.99"
+     ]
+    },
+    {
+     "key": "s3t-h027-collage",
+     "set": "TEST_SYNTH",
+     "truth": "MULTI_VIEW",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: panels (NOT_SINGLE_FACADE)"
+     ]
+    },
+    {
+     "key": "s3t-h028-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h028-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely OTHER p=0.50"
+     ]
+    },
+    {
+     "key": "s3t-h028-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h028-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": [
+      "INCONCLUSIVE_NO_ACTION"
+     ]
+    },
+    {
+     "key": "s3t-h028-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h028-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.93 >= 0.6, most likely TECHNICAL_SECTION p=0.91"
+     ]
+    },
+    {
+     "key": "s3t-h028-interio",
+     "set": "TEST_SYNTH",
+     "truth": "INTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "REVIEW_DETAIL",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.83 >= 0.6, most likely ARCHITECTURAL_DETAIL p=0.26"
+     ]
+    },
+    {
+     "key": "s3t-h029-elev-fl",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h029-elev-re",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "REVIEW_MULTI_VIEW_OR_OTHER",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.98 >= 0.6, most likely OTHER p=0.63"
+     ]
+    },
+    {
+     "key": "s3t-h029-elev-li",
+     "set": "TEST_SYNTH",
+     "truth": "ORTHOGRAPHIC_ELEVATION",
+     "hard": false,
+     "veto": "FACADE",
+     "facade": true,
+     "diagnostics": []
+    },
+    {
+     "key": "s3t-h029-persp-n",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": true,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h029-persp-c",
+     "set": "TEST_SYNTH",
+     "truth": "EXTERIOR_PERSPECTIVE",
+     "hard": false,
+     "veto": "STOP_PERSPECTIVE",
+     "facade": false,
+     "diagnostics": [
+      "VETO: vanishing-point evidence (PERSPECTIVE_EVIDENT)"
+     ]
+    },
+    {
+     "key": "s3t-h029-section",
+     "set": "TEST_SYNTH",
+     "truth": "TECHNICAL_SECTION",
+     "hard": true,
+     "veto": "REVIEW_SECTION",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely TECHNICAL_SECTION p=0.98"
+     ]
+    },
+    {
+     "key": "s3t-h029-plan",
+     "set": "TEST_SYNTH",
+     "truth": "FLOOR_PLAN",
+     "hard": false,
+     "veto": "REVIEW_PLAN",
+     "facade": false,
+     "diagnostics": [
+      "VETO: classifier P(not elevation)=0.99 >= 0.6, most likely FLOOR_PLAN p=0.96"
+     ]
+    }
+   ]
+  }
+ },
+ "tVeto": 0.6
+}

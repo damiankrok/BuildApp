@@ -1,0 +1,429 @@
+{
+ "houses": {
+  "t1": {
+   "RAW": {
+    "readings": 7,
+    "correct": 5,
+    "unmatched": 0,
+    "duplicate": 2,
+    "views": 2,
+    "byRegistration": {
+     "SILHOUETTE": 1,
+     "WALL_BAND": 1
+    },
+    "medianCentreErrorM": 0.219,
+    "modelOpenings": 11,
+    "perView": {
+     "e4d835cfc9": {
+      "correct": 4,
+      "unmatched": 0,
+      "duplicate": 2
+     },
+     "afbaff7532": {
+      "correct": 1,
+      "unmatched": 0,
+      "duplicate": 0
+     }
+    }
+   },
+   "CLEAN": {
+    "readings": 6,
+    "correct": 6,
+    "unmatched": 0,
+    "duplicate": 0,
+    "views": 3,
+    "byRegistration": {
+     "SILHOUETTE": 3
+    },
+    "medianCentreErrorM": 0.445,
+    "modelOpenings": 11,
+    "perView": {
+     "afbaff7532": {
+      "correct": 4,
+      "unmatched": 0,
+      "duplicate": 0
+     },
+     "e4d835cfc9": {
+      "correct": 2,
+      "unmatched": 0,
+      "duplicate": 0
+     }
+    }
+   },
+   "ANCHORED": {
+    "readings": 2,
+    "correct": 2,
+    "unmatched": 0,
+    "duplicate": 0,
+    "views": 2,
+    "byRegistration": {
+     "SILHOUETTE": 1,
+     "WALL_BAND": 1
+    },
+    "medianCentreErrorM": 0.683,
+    "modelOpenings": 11,
+    "perView": {
+     "e4d835cfc9": {
+      "correct": 2,
+      "unmatched": 0,
+      "duplicate": 0
+     }
+    }
+   },
+   "RAW_FGE": {
+    "readings": 6,
+    "correct": 4,
+    "unmatched": 0,
+    "duplicate": 2,
+    "views": 2,
+    "byRegistration": {
+     "SILHOUETTE": 2
+    },
+    "medianCentreErrorM": 0.285,
+    "modelOpenings": 11,
+    "perView": {
+     "afbaff7532": {
+      "correct": 1,
+      "unmatched": 0,
+      "duplicate": 0
+     },
+     "e4d835cfc9": {
+      "correct": 3,
+      "unmatched": 0,
+      "duplicate": 2
+     }
+    }
+   },
+   "ANCHORED_FGE": {
+    "readings": 8,
+    "correct": 8,
+    "unmatched": 0,
+    "duplicate": 0,
+    "views": 2,
+    "byRegistration": {
+     "SILHOUETTE": 2
+    },
+    "medianCentreErrorM": 0.168,
+    "modelOpenings": 11,
+    "perView": {
+     "afbaff7532": {
+      "correct": 4,
+      "unmatched": 0,
+      "duplicate": 0
+     },
+     "e4d835cfc9": {
+      "correct": 4,
+      "unmatched": 0,
+      "duplicate": 0
+     }
+    }
+   }
+  },
+  "t3": {
+   "RAW": {
+    "readings": 8,
+    "correct": 6,
+    "unmatched": 1,
+    "duplicate": 1,
+    "views": 2,
+    "byRegistration": {
+     "SILHOUETTE": 2
+    },
+    "medianCentreErrorM": 0.153,
+    "modelOpenings": 23,
+    "perView": {
+     "f676ec0e2a": {
+      "correct": 3,
+      "unmatched": 1,
+      "duplicate": 1
+     },
+     "4db4b2698a": {
+      "correct": 3,
+      "unmatched": 0,
+      "duplicate": 0
+     }
+    }
+   },
+   "CLEAN": {
+    "readings": 0,
+    "correct": 0,
+    "unmatched": 0,
+    "duplicate": 0,
+    "views": 2,
+    "byRegistration": {
+     "WALL_BAND": 2
+    },
+    "medianCentreErrorM": null,
+    "modelOpenings": 23,
+    "perView": {}
+   },
+   "ANCHORED": {
+    "readings": 4,
+    "correct": 3,
+    "unmatched": 1,
+    "duplicate": 0,
+    "views": 3,
+    "byRegistration": {
+     "WALL_BAND": 3
+    },
+    "medianCentreErrorM": 0.225,
+    "modelOpenings": 23,
+    "perView": {
+     "f676ec0e2a": {
+      "correct": 3,
+      "unmatched": 1,
+      "duplicate": 0
+     }
+    }
+   },
+   "RAW_FGE": {
+    "readings": 10,
+    "correct": 8,
+    "unmatched": 2,
+    "duplicate": 0,
+    "views": 4,
+    "byRegistration": {
+     "SILHOUETTE": 4
+    },
+    "medianCentreErrorM": 0.302,
+    "modelOpenings": 23,
+    "perView": {
+     "52bcc6f7e0": {
+      "correct": 1,
+      "unmatched": 0,
+      "duplicate": 0
+     },
+     "f676ec0e2a": {
+      "correct": 4,
+      "unmatched": 1,
+      "duplicate": 0
+     },
+     "4db4b2698a": {
+      "correct": 3,
+      "unmatched": 1,
+      "duplicate": 0
+     }
+    }
+   },
+   "ANCHORED_FGE": {
+    "readings": 3,
+    "correct": 3,
+    "unmatched": 0,
+    "duplicate": 0,
+    "views": 4,
+    "byRegistration": {
+     "SILHOUETTE": 4
+    },
+    "medianCentreErrorM": 0.371,
+    "modelOpenings": 23,
+    "perView": {
+     "52bcc6f7e0": {
+      "correct": 1,
+      "unmatched": 0,
+      "duplicate": 0
+     },
+     "f676ec0e2a": {
+      "correct": 1,
+      "unmatched": 0,
+      "duplicate": 0
+     },
+     "4db4b2698a": {
+      "correct": 1,
+      "unmatched": 0,
+      "duplicate": 0
+     }
+    }
+   }
+  },
+  "t5": {
+   "RAW": {
+    "readings": 4,
+    "correct": 4,
+    "unmatched": 0,
+    "duplicate": 0,
+    "views": 1,
+    "byRegistration": {
+     "WALL_BAND": 1
+    },
+    "medianCentreErrorM": 0.193,
+    "modelOpenings": 26,
+    "perView": {
+     "9aa9af1641": {
+      "correct": 4,
+      "unmatched": 0,
+      "duplicate": 0
+     }
+    }
+   },
+   "CLEAN": {
+    "readings": 0,
+    "correct": 0,
+    "unmatched": 0,
+    "duplicate": 0,
+    "views": 0,
+    "byRegistration": {},
+    "medianCentreErrorM": null,
+    "modelOpenings": 26,
+    "perView": {}
+   },
+   "ANCHORED": {
+    "readings": 0,
+    "correct": 0,
+    "unmatched": 0,
+    "duplicate": 0,
+    "views": 0,
+    "byRegistration": {},
+    "medianCentreErrorM": null,
+    "modelOpenings": 26,
+    "perView": {}
+   },
+   "RAW_FGE": {
+    "readings": 0,
+    "correct": 0,
+    "unmatched": 0,
+    "duplicate": 0,
+    "views": 0,
+    "byRegistration": {},
+    "medianCentreErrorM": null,
+    "modelOpenings": 26,
+    "perView": {}
+   },
+   "ANCHORED_FGE": {
+    "readings": 0,
+    "correct": 0,
+    "unmatched": 0,
+    "duplicate": 0,
+    "views": 0,
+    "byRegistration": {},
+    "medianCentreErrorM": null,
+    "modelOpenings": 26,
+    "perView": {}
+   }
+  },
+  "t6": {
+   "RAW": {
+    "readings": 0,
+    "correct": 0,
+    "unmatched": 0,
+    "duplicate": 0,
+    "views": 0,
+    "byRegistration": {},
+    "medianCentreErrorM": null,
+    "modelOpenings": 17,
+    "perView": {}
+   },
+   "CLEAN": {
+    "readings": 4,
+    "correct": 4,
+    "unmatched": 0,
+    "duplicate": 0,
+    "views": 2,
+    "byRegistration": {
+     "WALL_BAND": 2
+    },
+    "medianCentreErrorM": 0.259,
+    "modelOpenings": 17,
+    "perView": {
+     "c0fcf55e65": {
+      "correct": 2,
+      "unmatched": 0,
+      "duplicate": 0
+     },
+     "f56bd67a14": {
+      "correct": 2,
+      "unmatched": 0,
+      "duplicate": 0
+     }
+    }
+   },
+   "ANCHORED": {
+    "readings": 6,
+    "correct": 5,
+    "unmatched": 0,
+    "duplicate": 1,
+    "views": 2,
+    "byRegistration": {
+     "SILHOUETTE": 2
+    },
+    "medianCentreErrorM": 0.417,
+    "modelOpenings": 17,
+    "perView": {
+     "5eb6106915": {
+      "correct": 1,
+      "unmatched": 0,
+      "duplicate": 0
+     },
+     "c0fcf55e65": {
+      "correct": 4,
+      "unmatched": 0,
+      "duplicate": 1
+     }
+    }
+   },
+   "RAW_FGE": {
+    "readings": 0,
+    "correct": 0,
+    "unmatched": 0,
+    "duplicate": 0,
+    "views": 0,
+    "byRegistration": {},
+    "medianCentreErrorM": null,
+    "modelOpenings": 17,
+    "perView": {}
+   },
+   "ANCHORED_FGE": {
+    "readings": 0,
+    "correct": 0,
+    "unmatched": 0,
+    "duplicate": 0,
+    "views": 0,
+    "byRegistration": {},
+    "medianCentreErrorM": null,
+    "modelOpenings": 17,
+    "perView": {}
+   }
+  }
+ },
+ "total": {
+  "RAW": {
+   "readings": 19,
+   "correct": 15,
+   "unmatched": 1,
+   "duplicate": 3,
+   "views": 5,
+   "modelOpenings": 77
+  },
+  "CLEAN": {
+   "readings": 10,
+   "correct": 10,
+   "unmatched": 0,
+   "duplicate": 0,
+   "views": 7,
+   "modelOpenings": 77
+  },
+  "ANCHORED": {
+   "readings": 12,
+   "correct": 10,
+   "unmatched": 1,
+   "duplicate": 1,
+   "views": 7,
+   "modelOpenings": 77
+  },
+  "RAW_FGE": {
+   "readings": 16,
+   "correct": 12,
+   "unmatched": 2,
+   "duplicate": 2,
+   "views": 6,
+   "modelOpenings": 77
+  },
+  "ANCHORED_FGE": {
+   "readings": 11,
+   "correct": 11,
+   "unmatched": 0,
+   "duplicate": 0,
+   "views": 6,
+   "modelOpenings": 77
+  }
+ }
+}

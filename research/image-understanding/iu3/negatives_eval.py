@@ -71,7 +71,7 @@ def main():
     neg, out, t_veto = arg_value('--neg'), arg_value('--out'), float(arg_value('--t-veto'))
     refuse_inside_repo(out, 'negatives results')
     man = json.load(open(os.path.join(neg, 'manifest.json')))['rows']
-    rows = [data._row(key=r['id'], tag='iu3neg', source='NEG', split='NEG', project=r['id'], label=r['label'], multiView=r['label'] == 'OTHER',
+    rows = [data._row(key=r['id'], tag=arg_value('--tag', 'iu3neg'), source='NEG', split='NEG', project=r['id'], label=r['label'], multiView=r['label'] == 'OTHER',
                       hard=r['case'] == 'N7_NEAR_FRONTAL', path=os.path.join(neg, r['file']), **{k: v for k, v in r.items() if k not in ('label', 'file')}) for r in man]
     keep, P, unm, missing = scores.evidence(rows)
     assert not missing, missing

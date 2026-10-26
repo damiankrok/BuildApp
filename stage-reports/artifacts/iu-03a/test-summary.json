@@ -1,0 +1,98 @@
+{
+ "combinedTest": {
+  "REAL_CAPTIONS/LEGACY": {
+   "elevations": 24,
+   "kept": 24,
+   "keptShare": 1.0,
+   "keptWilson": [
+    0.862,
+    1
+   ],
+   "nonElevations": 100,
+   "routed": 0,
+   "routedWilson": [
+    0,
+    0.037
+   ]
+  },
+  "REAL_CAPTIONS/STRICT_IU02": {
+   "elevations": 24,
+   "kept": 6,
+   "keptShare": 0.25,
+   "keptWilson": [
+    0.12,
+    0.449
+   ],
+   "nonElevations": 100,
+   "routed": 0,
+   "routedWilson": [
+    0,
+    0.037
+   ]
+  },
+  "REAL_CAPTIONS/VETO_ONLY": {
+   "elevations": 24,
+   "kept": 24,
+   "keptShare": 1.0,
+   "keptWilson": [
+    0.862,
+    1
+   ],
+   "nonElevations": 100,
+   "routed": 0,
+   "routedWilson": [
+    0,
+    0.037
+   ]
+  },
+  "ADVERSE_CAPTIONS/LEGACY": {
+   "elevations": 114,
+   "kept": 114,
+   "keptShare": 1.0,
+   "keptWilson": [
+    0.967,
+    1
+   ],
+   "nonElevations": 227,
+   "routed": 227,
+   "routedWilson": [
+    0.983,
+    1
+   ]
+  },
+  "ADVERSE_CAPTIONS/STRICT_IU02": {
+   "elevations": 114,
+   "kept": 64,
+   "keptShare": 0.5614,
+   "keptWilson": [
+    0.47,
+    0.649
+   ],
+   "nonElevations": 227,
+   "routed": 0,
+   "routedWilson": [
+    0,
+    0.017
+   ]
+  },
+  "ADVERSE_CAPTIONS/VETO_ONLY": {
+   "elevations": 114,
+   "kept": 84,
+   "keptShare": 0.7368,
+   "keptWilson": [
+    0.649,
+    0.809
+   ],
+   "nonElevations": 227,
+   "routed": 1,
+   "routedWilson": [
+    0.001,
+    0.025
+   ]
+  }
+ },
+ "negativesTestPass": [
+  13,
+  18
+ ]
+}
