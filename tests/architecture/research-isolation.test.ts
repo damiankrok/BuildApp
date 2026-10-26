@@ -1168,6 +1168,51 @@ describe('IU-01 production cannot reach the image-role research, and it commits 
  * fused classifier extend the same research directory. Synthetic renders, LoC/Commons/ARCHON pixels, clean facades,
  * masks, embeddings, weights and the fitted head stay outside Git; production may not reach `iu2/` or the harness.
  */
+/**
+ * IU-03A SAFE ROUTING + GEOMETRY PRESERVATION — the VETO_ONLY router and FacadeGeometryEvidence (`iu3/`) are research.
+ * The router can only take an image AWAY from the facade extractor and hands the roles it was given back unchanged;
+ * the evidence adapter feeds a research COPY of the observation graph to the unchanged solver. Production may not
+ * reach any of it, and nothing it writes lands in the repository.
+ */
+describe('IU-03A production cannot reach the routing/evidence research, and its writers refuse the repository', () => {
+  const DIR = 'research/image-understanding/'
+
+  it('no production source imports iu3 or names its router, evidence or adapter', () => {
+    for (const f of productionSources()) {
+      const src = read(f)
+      expect(importsOf(src).filter((i) => /(^|\/)iu3(\/|$)/.test(i)), f).toEqual([])
+      expect(codeOf(src), f).not.toMatch(/VETO_ONLY|facade-geometry-evidence|iu03\.|extractor_variants|RESEARCH_IU03/)
+    }
+  })
+
+  it('every IU-03A writer refuses a destination inside the repository', () => {
+    const bad = join(ROOT, 'tmp-iu03-refused')
+    const py: Array<[string, string[]]> = [
+      ['iu3/dev_inputs.py', []],
+      ['iu3/evaluate.py', ['dev', '--out', join(bad, 'x.json')]],
+      ['iu3/facade_variants.py', ['--house', 'x', '--assets', '/nonexistent', '--out', bad]],
+      ['iu3/negatives.py', ['--out', bad]],
+      ['iu3/negatives_eval.py', ['--neg', '/nonexistent', '--t-veto', '0.6', '--out', join(bad, 'x.json')]],
+    ]
+    for (const [f, args] of py) {
+      const run = spawnSync('python3', ['-I', join(ROOT, DIR, f), ...args], { cwd: ROOT, encoding: 'utf8', env: { ...process.env, IU_WORK3: bad } })
+      expect(run.status, f).not.toBe(0)
+      expect(run.stderr + run.stdout, f).toMatch(/REFUSED/)
+    }
+    expect(existsSync(bad)).toBe(false)
+    for (const f of ['iu3/legacy_roles.ts', 'iu3/extractor_variants.ts']) expect(read(`${DIR}${f}`), f).toMatch(/REFUSED: /)
+  })
+
+  it('VETO_ONLY never adds a facade route and never rewrites roles; the adapter never writes the sealed graph', () => {
+    const route = read(`${DIR}iu3/route.py`)
+    expect(route).toMatch(/if legacy_route != 'FACADE':\n(.*\n){0,3}\s+return Decision\(False, legacy_route, roles, diag\)/)
+    expect(read(`${DIR}iu3/evaluate.py`)).toMatch(/assert d\.roles is roles/)
+    const adapter = read(`${DIR}iu3/extractor_variants.ts`)
+    expect(adapter).not.toMatch(/writeFileSync\([^)]*observation-graph/)
+    expect(read(`${DIR}iu3/evidence.py`)).toMatch(/'independentlyDetected': box_occ < OCCLUDED_SHARE/)
+  })
+})
+
 describe('IU-02 production cannot reach the geometry-first research, and its writers refuse the repository', () => {
   const DIR = 'research/image-understanding/'
 

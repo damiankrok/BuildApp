@@ -10,7 +10,9 @@ seed = SHA256(FREEZE_SHA + "BUILDPLAN-IU02-FINAL-ARCHON"); k families drawn with
 successive hashes; one address per family (the first in pool order). FREEZE_SHA must be the pushed commit that
 preregisters IU-02 (head hash, thresholds, this script), and the tree must be clean.
 
-    python3 -I iu2_draw_archon.py <FREEZE_SHA> <k> <out.json outside the repo>
+    python3 -I iu2_draw_archon.py <FREEZE_SHA> <k> <out.json outside the repo> [<salt>]
+
+The salt defaults to IU-02's; IU-03A passes "BUILDPLAN-IU03A-TEST-ARCHON".
 """
 import glob, hashlib, json, os, re, subprocess, sys
 
@@ -67,7 +69,8 @@ def main():
         f = family(slug_of(u))
         if f not in fams:
             fams.append(f)
-    seed = hashlib.sha256((freeze + 'BUILDPLAN-IU02-FINAL-ARCHON').encode()).hexdigest()
+    salt = sys.argv[4] if len(sys.argv) > 4 else 'BUILDPLAN-IU02-FINAL-ARCHON'
+    seed = hashlib.sha256((freeze + salt).encode()).hexdigest()
     picks, h = [], seed
     while len(picks) < k:
         h = hashlib.sha256(h.encode()).hexdigest()
@@ -75,7 +78,7 @@ def main():
         if f not in picks:
             picks.append(f)
     urls = [next(u for u in eligible if family(slug_of(u)) == f) for f in picks]
-    rec = {'freezeSha': freeze, 'seed': seed, 'k': k, 'poolSize': len(pool), 'excludedFamilies': len(excluded), 'eligibleFamilies': len(fams),
+    rec = {'freezeSha': freeze, 'salt': salt, 'seed': seed, 'k': k, 'poolSize': len(pool), 'excludedFamilies': len(excluded), 'eligibleFamilies': len(fams),
            'families': picks, 'urls': urls, 'all': urls}
     json.dump(rec, open(out, 'w'), indent=1)
     print(json.dumps({x: rec[x] for x in ('excludedFamilies', 'eligibleFamilies', 'families')}))
