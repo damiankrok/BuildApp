@@ -705,8 +705,19 @@ internal fun PreviewOutcomeDetails(preview: PreviewOutcome) {
                     }
                 }
             }
+            if (partial.missingBodies.isNotEmpty()) {
+                Section(stringResource(R.string.partial_missing_bodies)) {
+                    for (m in partial.missingBodies) {
+                        Column(Modifier.padding(bottom = Space.s), verticalArrangement = Arrangement.spacedBy(Space.xs)) {
+                            Text(stringResource(R.string.partial_missing_body_row, m.id, metres(m.areaM2), metres(m.rectM.x0), metres(m.rectM.x1), metres(m.rectM.z0), metres(m.rectM.z1)), style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
+                            StatusText(stringResource(R.string.partial_missing_body_walled, share(m.walled), metres(m.coveredM2)))
+                            StatusText(m.why)
+                        }
+                    }
+                }
+            }
             Section(stringResource(R.string.partial_missing)) {
-                if (partial.missing.isEmpty()) Body(stringResource(R.string.analyzer_none))
+                if (partial.missing.isEmpty() && partial.missingBodies.isEmpty()) Body(stringResource(R.string.analyzer_none))
                 for (m in partial.missing) {
                     Column(Modifier.padding(bottom = Space.xs)) {
                         Text(listOfNotNull(m.type, m.id).joinToString(" "), style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)

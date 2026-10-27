@@ -457,6 +457,9 @@
     <string name="partial_ring_not_reconciled">Uzgadnianie ścian nie zmieniło pierścienia.</string>
     <string name="partial_ring_removed">Model częściowy pominął tę bryłę.</string>
     <string name="partial_ring_narrowing_refused">Uzgadnianie nie zwęziło pierścienia z %1$s m do %2$s m (jego ściany potrzebują %3$s m); kolizja z %4$s pozostaje nierozwiązana.</string>
+    <string name="partial_missing_bodies">Bryły narysowane na rzucie, których brakuje w modelu</string>
+    <string name="partial_missing_body_row">%1$s · %2$s m² · x %3$s–%4$s m, z %5$s–%6$s m</string>
+    <string name="partial_missing_body_walled">Obwód narysowany jako ściana: %1$s · model pokrywa %2$s m²</string>
     <string name="partial_ring_pre_emit">Kontrola przed emisją: %1$s · %2$s</string>
     <string name="provenance_title">Pochodzenie analizy</string>
     <string name="provenance_run_id">Identyfikator przebiegu</string>

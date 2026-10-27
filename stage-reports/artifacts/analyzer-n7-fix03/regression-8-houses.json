@@ -1,0 +1,186 @@
+{
+ "base": "e810555 (FIX-02, solver 2.7.0)",
+ "after": "FIX-03 (solver 2.8.0)",
+ "method": "sealed source-package / observation-graph / metric-evidence replayed offline through second-house.ts (byte cache); model.json SHA-256 compared; bodies, gate and completeness from research/analyzer-n7-fix03/probe-house.ts",
+ "houses": [
+  {
+   "house": "a01",
+   "modelSha256Before": "d095c0da90b69a499ea2f0d9db1f47af068829abec0d2f397488edc25ad88002",
+   "modelSha256After": "d095c0da90b69a499ea2f0d9db1f47af068829abec0d2f397488edc25ad88002",
+   "identical": true,
+   "bodies": [
+    "main x 0..10.5 z 0..8.3 s0,1"
+   ],
+   "layoutGate": "STRUCTURAL_LAYOUT_PARTIAL DEGRADING:STOREY_COVERAGE_DISAGREES",
+   "completeness": {
+    "drawnBuiltM2": 87.15,
+    "representedM2": 87.15,
+    "coverage": 1,
+    "areas": [
+     "region-built-0-0 REPRESENTED 87.15m2 [mass-0]"
+    ]
+   },
+   "seamSplits": 0,
+   "gateBays": [],
+   "partialPreview": null
+  },
+  {
+   "house": "gozd",
+   "modelSha256Before": "1a96c20f088efaad9168537b1dc975c0e0ae066145821f0290c906273f61965e",
+   "modelSha256After": "1a96c20f088efaad9168537b1dc975c0e0ae066145821f0290c906273f61965e",
+   "identical": true,
+   "bodies": [
+    "main x 0..13.82 z 0..9.5 s0,1"
+   ],
+   "layoutGate": "STRUCTURAL_LAYOUT_PARTIAL DEGRADING:STOREY_COVERAGE_DISAGREES",
+   "completeness": {
+    "drawnBuiltM2": 127.5,
+    "representedM2": 127.5,
+    "coverage": 1,
+    "areas": [
+     "region-built-0-0 JOINED 114.44m2 [mass-0]",
+     "region-built-0-6 JOINED 6.79m2 [mass-0]",
+     "region-built-3-6 JOINED 6.27m2 [mass-0]"
+    ]
+   },
+   "seamSplits": 0,
+   "gateBays": [],
+   "partialPreview": null
+  },
+  {
+   "house": "marcowki",
+   "modelSha256Before": "8541ca10d0534107cfacc56163c9b3af513e5a99ddd3e8594495ee30b0977dcb",
+   "modelSha256After": "8541ca10d0534107cfacc56163c9b3af513e5a99ddd3e8594495ee30b0977dcb",
+   "identical": true,
+   "bodies": [
+    "main x 0..7.9 z 0.99..13.6 s0,1",
+    "attached-0 x 7.9..12.05 z 0.99..8.5 s0"
+   ],
+   "layoutGate": "STRUCTURAL_LAYOUT_PARTIAL DEGRADING:STOREY_COVERAGE_DISAGREES",
+   "completeness": {
+    "drawnBuiltM2": 130.79,
+    "representedM2": 130.79,
+    "coverage": 1,
+    "areas": [
+     "region-built-0-1 REPRESENTED 99.62m2 [mass-0]",
+     "region-built-6-2 REPRESENTED 31.17m2 [mass-1]"
+    ]
+   },
+   "seamSplits": 0,
+   "gateBays": [],
+   "partialPreview": null
+  },
+  {
+   "house": "ciesz",
+   "modelSha256Before": "5394c17c4ff1c4e515c70067f77cc4aab68005658855930cd96c8e6f1323568f",
+   "modelSha256After": "5394c17c4ff1c4e515c70067f77cc4aab68005658855930cd96c8e6f1323568f",
+   "identical": true,
+   "bodies": [
+    "main x 0..11.7 z 0..16.6 s0"
+   ],
+   "layoutGate": "STRUCTURAL_LAYOUT_PARTIAL DEGRADING:ROOF_EVIDENCE_DISAGREES",
+   "completeness": {
+    "drawnBuiltM2": 192.19,
+    "representedM2": 192.19,
+    "coverage": 1,
+    "areas": [
+     "region-built-0-0 REPRESENTED 184.86m2 [mass-0]",
+     "region-built-0-2 JOINED 3.66m2 [mass-0]",
+     "region-built-6-2 JOINED 3.66m2 [mass-0]"
+    ]
+   },
+   "seamSplits": 0,
+   "gateBays": [],
+   "partialPreview": null
+  },
+  {
+   "house": "rary",
+   "modelSha256Before": "73969751a434e0f6ea56d6f63b64649e9ff7f743a109fde72cb7f6d0ad393c8f",
+   "modelSha256After": "73969751a434e0f6ea56d6f63b64649e9ff7f743a109fde72cb7f6d0ad393c8f",
+   "identical": true,
+   "bodies": [
+    "main x 0..17.21 z 6.2..14.7 s0",
+    "attached-0 x 2.05..8.91 z 0..6.2 s0"
+   ],
+   "layoutGate": "STRUCTURAL_LAYOUT_ACCEPTED",
+   "completeness": {
+    "drawnBuiltM2": 187.61,
+    "representedM2": 187.61,
+    "coverage": 1,
+    "areas": [
+     "region-built-0-0 REPRESENTED 146.28m2 [mass-0]",
+     "region-built-2-6 REPRESENTED 41.33m2 [mass-1]"
+    ]
+   },
+   "seamSplits": 0,
+   "gateBays": [],
+   "partialPreview": null
+  },
+  {
+   "house": "trytomach",
+   "modelSha256Before": "d2bf0c031d4733d38b8f097d55828a5d167187f656998e5086d83478bcb9cc15",
+   "modelSha256After": "d2bf0c031d4733d38b8f097d55828a5d167187f656998e5086d83478bcb9cc15",
+   "identical": true,
+   "bodies": [
+    "main x 0..12.99 z 0..7.25 s0,1 sr 1:0..7.24x0..7.25"
+   ],
+   "layoutGate": "STRUCTURAL_LAYOUT_PARTIAL DEGRADING:STOREY_COVERAGE_DISAGREES,DEGRADING:ROOF_EVIDENCE_DISAGREES",
+   "completeness": {
+    "drawnBuiltM2": 94.17,
+    "representedM2": 94.17,
+    "coverage": 1,
+    "areas": [
+     "region-built-0-0 REPRESENTED 94.17m2 [mass-0]"
+    ]
+   },
+   "seamSplits": 0,
+   "gateBays": [],
+   "partialPreview": null
+  },
+  {
+   "house": "arganiach",
+   "modelSha256Before": "34a95a766d169f39210b6337f031265ee3a6846ac3df0fa67086c0c91465e0eb",
+   "modelSha256After": "34a95a766d169f39210b6337f031265ee3a6846ac3df0fa67086c0c91465e0eb",
+   "identical": true,
+   "bodies": [
+    "main x 0..14.2 z 3.7..12.32 s0",
+    "attached-0 x 7.42..14.2 z 0..3.7 s0"
+   ],
+   "layoutGate": "STRUCTURAL_LAYOUT_PARTIAL DEGRADING:NO_MASS_REACHES_UP,DEGRADING:ROOF_EVIDENCE_DISAGREES",
+   "completeness": {
+    "drawnBuiltM2": 146.79,
+    "representedM2": 146.79,
+    "coverage": 1,
+    "areas": [
+     "region-built-0-0 REPRESENTED 122.43m2 [mass-0]",
+     "region-built-16-16 REPRESENTED 23.52m2 [mass-1]",
+     "region-built-15-19 JOINED 0.83m2 [mass-1]"
+    ]
+   },
+   "seamSplits": 0,
+   "gateBays": [],
+   "partialPreview": null
+  },
+  {
+   "house": "sasankach3",
+   "modelSha256Before": "090749f43fa6b7415041742514b9026e51ce5c19a4f2bfc7372d61be388f2301",
+   "modelSha256After": "090749f43fa6b7415041742514b9026e51ce5c19a4f2bfc7372d61be388f2301",
+   "identical": true,
+   "bodies": [
+    "main x 0..11.6 z 0..10.45 s0,1"
+   ],
+   "layoutGate": "STRUCTURAL_LAYOUT_PARTIAL DEGRADING:STOREY_COVERAGE_DISAGREES,DEGRADING:ROOF_EVIDENCE_DISAGREES",
+   "completeness": {
+    "drawnBuiltM2": 121.22,
+    "representedM2": 121.22,
+    "coverage": 1,
+    "areas": [
+     "region-built-0-0 REPRESENTED 121.22m2 [mass-0]"
+    ]
+   },
+   "seamSplits": 0,
+   "gateBays": [],
+   "partialPreview": null
+  }
+ ]
+}

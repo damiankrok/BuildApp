@@ -56,7 +56,24 @@ data class PartialPreview(
     val checkpoint: PreviewCheckpoint? = null,
     /** N7-FIX-01: every ring refused for its own walls overlapping, with the way back to its reading; absent from an older analyzer. */
     val ringCollisions: List<RingCollision> = emptyList(),
+    /** N7-COUNCIL-FIX-03: bodies the plan draws walled that the model does not build, with the cause; absent from an older analyzer. */
+    val missingBodies: List<MissingBody> = emptyList(),
 )
+
+/** N7-COUNCIL-FIX-03: a drawn body the model lost, as the analyzer weighed it: where, how large, and the step that lost it. */
+@Serializable
+data class MissingBody(
+    val id: String = "",
+    val rectM: MissingBodyRect = MissingBodyRect(),
+    val areaM2: Double = 0.0,
+    val coveredM2: Double = 0.0,
+    val walled: Double = 0.0,
+    val cause: String? = null,
+    val why: String = "",
+)
+
+@Serializable
+data class MissingBodyRect(val x0: Double = 0.0, val z0: Double = 0.0, val x1: Double = 0.0, val z1: Double = 0.0)
 
 /**
  * N7-FIX-01: a ring the model refused for its own two walls overlapping, as the analyzer traced it — whether its thin-body

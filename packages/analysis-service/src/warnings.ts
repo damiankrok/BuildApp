@@ -70,7 +70,7 @@ export type WarningInputs = {
   /** 005T-N3: the main roof's ridge was not printed and was taken approximately for rendering. */
   approximateRoofDatum?: { ridgeY: number; buildingHeightM: number }
   /** N7-P1: the model is the last valid one before a refusal: the refused object, and how many objects are not built. */
-  partialPreview?: { failure: { type: string; id?: string; codes: readonly string[] }; missing: number; basis: string }
+  partialPreview?: { failure: { type: string; id?: string; codes: readonly string[] }; missing: number; basis: string; missingBodies?: readonly string[] }
   /** N7-P1: no section printed the storey levels; every storey is a convention for viewing. */
   heightAssumedM?: number
   /** 005Y-N7 (A): walls reconciled as overlapping; a partition left out makes the model a partial preview. */
@@ -116,7 +116,9 @@ export function warningsOf(input: WarningInputs): AnalysisWarning[] {
   out.push(...wallReconciliationWarnings(input.wallReconciliation))
   if (input.partialPreview) {
     const p = input.partialPreview
-    out.push({ code: 'PARTIAL_3D_PREVIEW', severity: 'LIMITING', message: `partial 3D preview, not a complete reconstruction: the model refused ${p.failure.type}${p.failure.id ? ` ${p.failure.id}` : ''} (${p.failure.codes.join(', ')}); ${p.basis === 'MINIMAL_BASE' ? 'only the main body\u2019s floors and walls are built' : `${plural(p.missing, 'object is', 'objects are')} not built, everything accepted before it is kept`}` })
+    // N7-COUNCIL-FIX-03: a body the plan draws and the model does not build is said as such, not as a refused command
+    if (p.missingBodies && p.missingBodies.length > 0) out.push({ code: 'BODY_MISSING_FROM_MODEL', severity: 'LIMITING', message: `partial 3D preview, not a complete reconstruction: ${plural(p.missingBodies.length, 'body the plan draws walled is', 'bodies the plan draws walled are')} not in the model (${p.missingBodies.join(', ')}); everything built is kept` })
+    if (!p.failure.codes.includes('BODY_MISSING_FROM_MODEL')) out.push({ code: 'PARTIAL_3D_PREVIEW', severity: 'LIMITING', message: `partial 3D preview, not a complete reconstruction: the model refused ${p.failure.type}${p.failure.id ? ` ${p.failure.id}` : ''} (${p.failure.codes.join(', ')}); ${p.basis === 'MINIMAL_BASE' ? 'only the main body\u2019s floors and walls are built' : `${plural(p.missing, 'object is', 'objects are')} not built, everything accepted before it is kept`}` })
   }
   if (input.heightAssumedM !== undefined)
     out.push({ code: 'HEIGHT_ASSUMED_FOR_PREVIEW', severity: 'LIMITING', message: `no section prints the storey levels: every storey is drawn ${input.heightAssumedM.toFixed(2)} m tall, for viewing only` })

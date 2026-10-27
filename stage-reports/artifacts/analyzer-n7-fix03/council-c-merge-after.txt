@@ -1,0 +1,24 @@
+
+=== m-full: bodies main 0.00..8.40x0.00..10.20 s0,1 sr[[1,0,8.419883]] | attached-0 8.40..12.00x0.00..10.20 s0
+  gate STRUCTURAL_LAYOUT_ACCEPTED NOTED:STRUCTURE_PROJECTS,NOTED:DEPTH_CORROBORATED,NOTED:ROOF_BY_CONVENTION,NOTED:NAMED_HOLES
+  rings ring-main-0,ring-main-1,ring-attached-0-0; slabs slab-main-0,slab-main-1,slab-attached-0-0; roofs roof-main,roof-attached-0 planes 0
+  mainRoof {"massId":"main","ridgeAxis":"Z","footprint":{"x0":0,"x1":8.4,"z0":0,"z1":10.2}}; attachedRoofs attached-0
+  walls on x≈8.4: ring-main-0-w1 EXTERIOR t0.342862, ring-main-1-w1 EXTERIOR t0.342862, ring-attached-0-0-w3 EXTERIOR t0.342862; total walls 12
+
+=== m-holloway: bodies main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..12.00x0.00..6.00 s0
+  gate STRUCTURAL_LAYOUT_ACCEPTED NOTED:STRUCTURE_PROJECTS,NOTED:DEPTH_CORROBORATED,NOTED:ROOF_BY_CONVENTION,NOTED:NAMED_HOLES
+  rings ring-main-0,ring-main-1,ring-attached-0-0; slabs slab-main-0,slab-main-1,slab-attached-0-0; roofs roof-main,roof-attached-0 planes 0
+  mainRoof {"massId":"main","ridgeAxis":"Z","footprint":{"x0":0,"x1":8.4,"z0":0,"z1":10.2}}; attachedRoofs attached-0
+  walls on x≈8.4: ring-main-0-w1 EXTERIOR t0.316488, ring-main-1-w1 EXTERIOR t0.316488, ring-attached-0-0-w3 EXTERIOR t0.316488; total walls 16
+
+=== m-deep9: bodies main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..12.00x0.00..9.00 s0
+  gate STRUCTURAL_LAYOUT_ACCEPTED NOTED:STRUCTURE_PROJECTS,NOTED:DEPTH_CORROBORATED,NOTED:ROOF_BY_CONVENTION,NOTED:NAMED_HOLES
+  rings ring-main-0,ring-main-1,ring-attached-0-0; slabs slab-main-0,slab-main-1,slab-attached-0-0; roofs roof-main,roof-attached-0 planes 0
+  mainRoof {"massId":"main","ridgeAxis":"Z","footprint":{"x0":0,"x1":8.4,"z0":0,"z1":10.2}}; attachedRoofs attached-0
+  walls on x≈8.4: ring-main-0-w1 EXTERIOR t0.316488, ring-main-1-w1 EXTERIOR t0.316488, ring-attached-0-0-w3 EXTERIOR t0.316488; total walls 14
+
+=== m-wide6: bodies main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..14.40x0.00..8.00 s0
+  gate STRUCTURAL_LAYOUT_ACCEPTED NOTED:STRUCTURE_PROJECTS,NOTED:DEPTH_CORROBORATED,NOTED:ROOF_BY_CONVENTION,NOTED:NAMED_HOLES
+  rings ring-main-0,ring-main-1,ring-attached-0-0; slabs slab-main-0,slab-main-1,slab-attached-0-0; roofs roof-main,roof-attached-0 planes 0
+  mainRoof {"massId":"main","ridgeAxis":"Z","footprint":{"x0":0,"x1":8.4,"z0":0,"z1":10.2}}; attachedRoofs attached-0
+  walls on x≈8.4: ring-main-0-w1 EXTERIOR t0.316488, ring-main-1-w1 EXTERIOR t0.316488, ring-attached-0-0-w3 EXTERIOR t0.316488; total walls 18

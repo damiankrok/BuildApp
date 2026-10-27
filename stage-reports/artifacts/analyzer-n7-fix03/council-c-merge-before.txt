@@ -1,0 +1,24 @@
+
+=== m-full: bodies main 0.00..12.00x0.00..10.20 s0,1 sr[[1,0,8.419883]]
+  gate STRUCTURAL_LAYOUT_REJECTED BLOCKING:STRUCTURE_SILHOUETTE_DISAGREES,BLOCKING:STRUCTURE_SILHOUETTE_DISAGREES,BLOCKING:STRUCTURE_SILHOUETTE_DISAGREES,BLOCKING:STRUCTURE_SILHOUETTE_DISAGREES,NOTED:DEPTH_CORROBORATED
+  rings ring-main-0,ring-main-1; slabs slab-main-0,slab-main-1; roofs roof-main planes 0
+  mainRoof {"massId":"main","ridgeAxis":"Z","footprint":{"x0":0,"x1":12,"z0":0,"z1":10.2}}; attachedRoofs 
+  walls on x≈8.4: ring-main-1-w1 EXTERIOR t0.342862, main-iwall-0-z-0 INTERIOR t0.314874; total walls 9
+
+=== m-holloway: bodies main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..12.00x0.00..6.00 s0
+  gate STRUCTURAL_LAYOUT_ACCEPTED NOTED:STRUCTURE_PROJECTS,NOTED:DEPTH_CORROBORATED,NOTED:ROOF_BY_CONVENTION,NOTED:NAMED_HOLES
+  rings ring-main-0,ring-main-1,ring-attached-0-0; slabs slab-main-0,slab-main-1,slab-attached-0-0; roofs roof-main,roof-attached-0 planes 0
+  mainRoof {"massId":"main","ridgeAxis":"Z","footprint":{"x0":0,"x1":8.4,"z0":0,"z1":10.2}}; attachedRoofs attached-0
+  walls on x≈8.4: ring-main-0-w1 EXTERIOR t0.316488, ring-main-1-w1 EXTERIOR t0.316488, ring-attached-0-0-w3 EXTERIOR t0.316488; total walls 16
+
+=== m-deep9: bodies main 0.00..12.00x0.00..9.00 s0,1 sr[[1,0,8.420043]] | attached-0 0.00..8.40x9.00..10.20 s0,1
+  gate STRUCTURAL_LAYOUT_REJECTED BLOCKING:STRUCTURE_SILHOUETTE_DISAGREES,BLOCKING:STRUCTURE_SILHOUETTE_DISAGREES,BLOCKING:STRUCTURE_SILHOUETTE_DISAGREES,BLOCKING:STRUCTURE_SILHOUETTE_DISAGREES,NOTED:DEPTH_CORROBORATED,NOTED:EVERY_MASS_FULL_HEIGHT,NOTED:ROOF_BY_CONVENTION,NOTED:NAMED_HOLES
+  rings ring-main-0,ring-main-1,ring-attached-0-0,ring-attached-0-1; slabs slab-main-0,slab-main-1,slab-attached-0-0,slab-attached-0-1; roofs roof-main,roof-attached-0 planes 0
+  mainRoof {"massId":"main","ridgeAxis":"Z","footprint":{"x0":0,"x1":12,"z0":0,"z1":9}}; attachedRoofs attached-0
+  walls on x≈8.4: ring-main-1-w1 EXTERIOR t0.316488, ring-attached-0-0-w1 EXTERIOR t0.316488, ring-attached-0-1-w1 EXTERIOR t0.316488, main-iwall-0-z-0 INTERIOR t0.315684; total walls 17
+
+=== m-wide6: bodies main 0.00..14.40x0.00..8.00 s0,1 sr[[1,0,8.419883]] | attached-0 0.00..8.40x8.00..10.20 s0,1
+  gate STRUCTURAL_LAYOUT_REJECTED BLOCKING:STRUCTURE_SILHOUETTE_DISAGREES,BLOCKING:STRUCTURE_SILHOUETTE_DISAGREES,BLOCKING:STRUCTURE_SILHOUETTE_DISAGREES,BLOCKING:STRUCTURE_SILHOUETTE_DISAGREES,NOTED:DEPTH_CORROBORATED,NOTED:EVERY_MASS_FULL_HEIGHT,NOTED:ROOF_BY_CONVENTION,NOTED:NAMED_HOLES
+  rings ring-main-0,ring-main-1,ring-attached-0-0,ring-attached-0-1; slabs slab-main-0,slab-main-1,slab-attached-0-0,slab-attached-0-1; roofs roof-attached-0 planes 3
+  mainRoof null; attachedRoofs attached-0
+  walls on x≈8.4: ring-main-1-w1 EXTERIOR t0.316488, ring-attached-0-0-w1 EXTERIOR t0.316488, ring-attached-0-1-w1 EXTERIOR t0.316488, main-iwall-0-z-0 INTERIOR t0.314988; total walls 22

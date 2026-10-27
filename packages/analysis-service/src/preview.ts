@@ -60,6 +60,8 @@ export type PartialPreviewSummary = {
   checkpoint: PartialPreviewReport['checkpoint'] | null
   /** N7-FIX-01: every ring refused for its own walls overlapping, with the way back to the reading that made it. */
   ringCollisions?: NonNullable<PartialPreviewReport['ringCollisions']>
+  /** N7-COUNCIL-FIX-03: bodies the plan draws walled that the model does not build, with the cause. */
+  missingBodies?: NonNullable<PartialPreviewReport['missingBodies']>
 }
 
 export type PreviewSummary = {
@@ -127,6 +129,7 @@ export function previewOf(input: {
           missing: partial.skipped.filter((s) => s.type !== 'setEvidence').map((s) => ({ type: s.type, ...(s.id ? { id: s.id } : {}), cause: s.cause, why: s.why })),
           checkpoint: partial.checkpoint ?? null,
           ...(partial.ringCollisions ? { ringCollisions: partial.ringCollisions } : {}),
+          ...(partial.missingBodies ? { missingBodies: partial.missingBodies } : {}),
         }
       : null,
   }

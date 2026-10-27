@@ -121,7 +121,11 @@ const FROZEN: Record<string, Frozen> = {
   'rearFacePair:turn270': { masses: [[0, 0, 17.2, 30]], world: { envelope: { x0: -0.429, z0: 0, x1: 17.2, z1: 30 }, walled: { x0: 0, z0: 0, x1: 17.2, z1: 30 }, zFlip: 30 }, zones: [['zone-min_x', { x0: 59.5, y0: 100, x1: 76, y1: 700 }]], walls: 5, layoutRecesses: [], recessRegions: 0, ring: 'SOURCE_EXACT', terraces: ['terrace-west-0'], recesses: ['WEST:0'] },
   // 15. review round 1 (record.ts --extras)
   'twoBodies:id': { masses: [[0, 0.455, 17, 17.605], [17, 0.455, 30, 8.105]], world: { envelope: { x0: 0, z0: 0, x1: 30, z1: 17.605 }, walled: { x0: 0, z0: 0.455, x1: 30, z1: 17.605 }, zFlip: 17.605 }, zones: [['zone-max_z', { x0: 60, y0: 403, x1: 660, y1: 420.5 }]], walls: 9, layoutRecesses: [], recessRegions: 0, ring: 'SOURCE_EXACT', terraces: ['terrace-front-0'], recesses: ['FRONT:0'], massBasis: ['MEASURED/MEASURED', 'MEASURED/MEASURED'], rings: ['SOURCE_EXACT', 'SOURCE_EXACT'], massFeatures: ['SOURCE_EXACT', 'SOURCE_EXACT'], terraceReach: [null] },
-  'bodyBehind:id': { masses: [[0, 0.455, 30, 10.605], [0, 10.605, 17, 17.605]], world: { envelope: { x0: 0, z0: 0, x1: 30, z1: 17.605 }, walled: { x0: 0, z0: 0.455, x1: 30, z1: 17.605 }, zFlip: 17.605 }, zones: [['zone-max_z', { x0: 60, y0: 403, x1: 660, y1: 420.5 }]], walls: 10, layoutRecesses: [], recessRegions: 0, ring: 'SOURCE_EXACT', terraces: ['terrace-front-0'], recesses: ['FRONT:0'], massBasis: ['MEASURED/SCALED', 'MEASURED/MEASURED'], rings: ['SOURCE_EXACT', 'SOURCE_EXACT'], massFeatures: ['SOURCE_EXACT', 'SOURCE_EXACT'], terraceReach: [null] },
+  // N7-COUNCIL-FIX-03 (C-1): re-recorded. The house's east wall (x 382..400) runs on as the garage's west wall from its
+  // rear face down to the front, so a built rectangle no longer crosses it (`facadeSeams`): the house and the garage are
+  // read as drawn, 17.00 × 17.15 m and 13.00 × 10.15 m, where the largest-first tiling used to cut a 30 m front slab
+  // across both and a body of the house's rear behind it — and a 0.35 m strip before the garage read as its terrace.
+  'bodyBehind:id': { masses: [[0, 0.455, 17, 17.605], [17, 0.455, 30, 10.605]], world: { envelope: { x0: 0, z0: 0, x1: 30, z1: 17.605 }, walled: { x0: 0, z0: 0.455, x1: 30, z1: 17.605 }, zFlip: 17.605 }, zones: [['zone-max_z', { x0: 60, y0: 403, x1: 660, y1: 420.5 }]], walls: 9, layoutRecesses: [], recessRegions: 0, ring: 'SOURCE_DERIVED', terraces: [], recesses: [], massBasis: ['MEASURED/DERIVED', 'MEASURED/SCALED'], rings: ['SOURCE_DERIVED', 'SOURCE_EXACT'], massFeatures: ['SOURCE_DERIVED', 'SOURCE_EXACT'], terraceReach: [] },
   'facePairPlatform:id': { masses: [[0, 0.375, 30, 18.025]], world: { envelope: { x0: 0, z0: 0, x1: 30, z1: 18.025 }, walled: { x0: 0, z0: 0.375, x1: 30, z1: 18.025 }, zFlip: 18.025 }, zones: [['zone-max_z', { x0: 60, y0: 413, x1: 660, y1: 420.5 }]], walls: 6, layoutRecesses: [], recessRegions: 0, ring: 'SOURCE_EXACT', terraces: ['terrace-front-0'], recesses: ['FRONT:0'], massBasis: ['MEASURED/MEASURED'], rings: ['SOURCE_EXACT'], massFeatures: ['SOURCE_EXACT'], terraceReach: [3.95] },
   'thinFrontFloating:id': { masses: [[0, 0.418, 30, 17.718]], world: { envelope: { x0: 0, z0: 0, x1: 30, z1: 17.718 }, walled: { x0: 0, z0: 0.418, x1: 30, z1: 17.718 }, zFlip: 17.718 }, zones: [['zone-max_z', { x0: 60, y0: 406, x1: 660, y1: 425 }]], walls: 6, layoutRecesses: [], recessRegions: 0, ring: 'SOURCE_EXACT', terraces: ['terrace-front-0'], recesses: ['FRONT:0'], massBasis: ['MEASURED/MEASURED'], rings: ['SOURCE_EXACT'], massFeatures: ['SOURCE_EXACT'], terraceReach: [null] },
   'thinFrontFilled:id': { masses: [[0, 0.396, 30, 17.696]], world: { envelope: { x0: 0, z0: 0, x1: 30, z1: 17.696 }, walled: { x0: 0, z0: 0.396, x1: 30, z1: 17.696 }, zFlip: 17.696 }, zones: [['zone-max_z', { x0: 60, y0: 406, x1: 660, y1: 424 }]], walls: 6, layoutRecesses: [], recessRegions: 0, ring: 'SOURCE_EXACT', terraces: ['terrace-front-0'], recesses: ['FRONT:0'], massBasis: ['MEASURED/MEASURED'], rings: ['SOURCE_EXACT'], massFeatures: ['SOURCE_EXACT'], terraceReach: [null] },
@@ -731,25 +735,24 @@ describe('005Q wall strip — 15. review round 1, the overlap bound', () => {
 
 describe('005Q wall strip — 15. review round 1, the bounds the fixes made redundant elsewhere', () => {
   it('(a) the face distance: a body over the covered stretch whose own face is 203 px short of the strip is not open (frozen: both exact, a terrace)', () => {
-    // With the overlap now taken against the stretches the wall ink covers (F1), the L of family 14 no longer holds the
-    // face-distance term: its wing stands beside the ink, not behind it. Here the body behind the open one stands over it.
+    // N7-COUNCIL-FIX-03 (C-1): the fixture no longer yields a front slab across both rings — the house's east wall runs
+    // on between the house and the garage as their common wall, and no built rectangle crosses it. Read as drawn: the
+    // house, cut on its front wall's inner face (its front open), and the garage beside it, whose own front is 1 px
+    // short of the strip and is not open. Nothing is left in front of the garage to call a terrace.
     const { o, f } = run('bodyBehind')
     frameAsFrozen(o, f)
     expect(o.outerFaces).toEqual([OUTER_FACE('front')])
     expect(o.terraces).toEqual([])
     const r = compiled('bodyBehind')
     expect(r.layout.footprintRegions.filter((g) => g.kind === 'BUILT').map((g) => g.pixelRect)).toEqual([
-      { x0: 60, y0: 60, x1: 400, y1: 200 },
-      { x0: 60, y0: 200, x1: 660, y1: 403 },
+      { x0: 60, y0: 60, x1: 400, y1: 403 },
+      { x0: 400, y0: 200, x1: 660, y1: 403 },
     ])
-    // the front slab (the widest body, its depth SCALED, so only its MASS feature and ring can show it) is open
+    // the house (cut on the inner face, so only its MASS feature and ring can show it) is open; the garage is not
     expect(r.layout.masses.map((m) => openFacesOf(m, r.layout.unresolved).map((g) => g.what))).toEqual([[OUTER_FACE('front')], []])
-    expect(o.massFeatures).toEqual(['SOURCE_DERIVED', f.massFeatures?.[1]])
-    expect(o.ringStatuses).toEqual(['SOURCE_DERIVED', f.rings?.[1]])
-    // the body behind it, as frozen
+    expect(o.massFeatures).toEqual(['SOURCE_DERIVED', 'SOURCE_EXACT'])
+    expect(o.ringStatuses).toEqual(['SOURCE_DERIVED', 'SOURCE_EXACT'])
     expect(o.massBasis).toEqual(f.massBasis)
-    expect(o.massBasis[1]).toBe('MEASURED/MEASURED')
-    expect(o.massFeatures[1]).toBe('SOURCE_EXACT')
   })
 
   it('(c) a block crossing the strip as deep as the strip, wall-thick both ways, is not the wall lying along it: two 96 × 99 px blocks in the carport’s 100 px strip name no face (handed to the pass through the sheet cache)', () => {

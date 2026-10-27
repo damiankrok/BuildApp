@@ -69,6 +69,10 @@ import type { SourceConflictReview } from '../plan-resolution.js'
 import { metricSolutionFor, readTintedCallouts } from '@buildapp/source-metrics'
 import type { ResolverProgress } from '../plan-resolution.js'
 import type { PlanSheet } from '../layout.js'
+import { bodyCompleteness } from './body-completeness.js'
+import type { SeamSplit } from '../layout.js'
+import type { GateBay } from '../plan-decomposition.js'
+import type { BodyArea, BodyCompleteness } from './body-completeness.js'
 import type { Checkpoint } from '@buildapp/source-common'
 import type { StructuralPassOptions } from '../structural.js'
 import { rectAt } from './building.js'
@@ -115,7 +119,13 @@ import type { ApproximateRidge } from './roof-datum.js'
 // own faces agree on another wall is built with it, layout and emission gate with that one thickness; the wall
 // reconciliation never narrows a ring below its own two walls; every ring rectangle is checked before emission, and a
 // storey refused over a sound one leaves the storeys below it standing.
-export const SOLVER_V2_VERSION = '2.7.0' as const
+
+// 2.8.0 (N7-COUNCIL-FIX-03): a garage set back from the house's face keeps the corner pier the grid's thinning hid, a
+// gate wider than a door between jambs, with two side walls and a back wall round a car's depth, is a garage's gate,
+// a built rectangle never crosses a facade carried on through the building, a body the storeys above stop short of on
+// a wall is two bodies; every walled area of the base plan is weighed against the model's bodies, and a drawn body the
+// model does not build makes the run a partial preview, named with its cause.
+export const SOLVER_V2_VERSION = '2.8.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
@@ -239,6 +249,13 @@ export type ReconstructionV2Result = {
   openingCounts: { plan: number; elevationIndependent: number; model: number; skippedByPartialPreview: number }
   /** N7-P1: the storey heights were read from a section, or are a convention taken for viewing only. */
   heights: { measured: boolean; assumedStoreyHeightM?: number }
+  /** N7-COUNCIL-FIX-03 (§4): every walled area of the base plan against the bodies the model stands on it. */
+  bodyCompleteness?: BodyCompleteness
+  /**
+   * N7-COUNCIL-FIX-03 (§2/§3): the corrections that kept a drawn body — bodies cut on the wall the storeys above stop at,
+   * and every pocket walled on three sides with a wide mouth, shut as a garage's gate or left open with what was missing.
+   */
+  bodyRecovery: { seamSplits: SeamSplit[]; gateBays: GateBay[] }
 }
 
 /** N7-P1: what a partial 3D preview is built from, and what it is not. */
@@ -254,6 +271,8 @@ export type PartialPreviewReport = {
   checkpoint?: { commands: number; modelSha256: string; wallRings: string[]; slabs: string[] }
   /** N7-FIX-01: every ring refused for its own walls overlapping, with the way back to the reading that made it. */
   ringCollisions?: RingCollisionDiagnostic[]
+  /** N7-COUNCIL-FIX-03 (§4): bodies the plan draws walled that no body of the model stands on, with the cause. */
+  missingBodies?: BodyArea[]
 }
 
 
@@ -2361,6 +2380,37 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     for (const c of collisions) step({ stage: 'emission', what: `N7-FIX-01: ${c.ringId} refused for its own walls (${c.walls.join(' / ')})`, method: 'REFUSED', detail: c.why, inputs: 1, outputs: 0 })
     partialPreview = { outcome: 'PARTIAL_3D_PREVIEW', basis: previewBasis, failures: previewFailures, skipped: previewSkipped, ...(checkpoint ? { checkpoint } : {}), ...(collisions.length > 0 ? { ringCollisions: collisions } : {}) }
   }
+  for (const sp of draft.seamSplits ?? []) step({ stage: 'massing', what: `N7-FIX-03: ${sp.massId} cut at ${sp.axis.toLowerCase()} = ${sp.atM.toFixed(2)} m into ${sp.keptM.toFixed(2)} m and ${sp.newMassId} ${sp.splitM.toFixed(2)} m`, method: 'DIRECT', detail: sp.why, inputs: 1, outputs: 2 })
+  for (const bay of draft.base?.decomposition.gateBays ?? []) step({ stage: 'massing', what: `N7-FIX-03: a pocket ${bay.widthM.toFixed(2)} × ${bay.depthM.toFixed(2)} m behind a ${bay.gapM.toFixed(2)} m mouth ${bay.decision === 'GATE_SHUT' ? 'shut as a garage gate' : 'left open'}`, method: bay.decision === 'GATE_SHUT' ? 'DIRECT' : 'REFUSED', detail: bay.why, inputs: bay.cells.length, outputs: bay.decision === 'GATE_SHUT' ? bay.cells.length : 0 })
+  // N7-COUNCIL-FIX-03 (§4): every area the base plan draws walled, against the bodies the model is built from. A drawn
+  // body no body of the model stands on makes the run a partial preview, named with its cause; the model keeps
+  // everything it built.
+  const completeness = draft.base && draft.frame ? bodyCompleteness({
+    decomposition: draft.base.decomposition,
+    frame: draft.frame,
+    built: layout.masses.filter((m) => masses.some((v) => v.sourceMassId === m.id)).map((m) => ({ id: m.id, ring: m.ring })),
+    dropped: layout.masses
+      .filter((m) => !masses.some((v) => v.sourceMassId === m.id))
+      .map((m) => {
+        // the thin-body pass's own decision (a body read as one solid wall), when it made one: deliberate, on the record
+        const v2Id = m.role === 'MAIN' ? 'main' : `attached-${layout.masses.filter((x) => x.role !== 'MAIN').indexOf(m)}`
+        const rec = thinBodyRecords.find((t) => t.massId === v2Id)
+        return { id: m.id, ring: m.ring, why: rec ? `the thin-body pass decided ${rec.decision.kind}: ${rec.decision.why}` : 'it is not carried into the model', deliberate: !!rec }
+      }),
+    gaps: layout.unresolved.map((g) => ({ id: g.id, what: g.what, reason: g.reason })),
+  }) : undefined
+  for (const a of completeness?.areas ?? []) {
+    if (a.decision === 'REPRESENTED' || a.decision === 'JOINED') continue
+    step({ stage: 'massing', what: `N7-FIX-03: the drawn area ${a.id} (${a.areaM2.toFixed(1)} m²) ${a.decision.toLowerCase()}`, method: a.decision === 'OMITTED' ? 'DIRECT' : 'REFUSED', detail: a.why, inputs: 1, outputs: 0 })
+    if (a.decision !== 'OMITTED') gap({ what: a.decision === 'MISSING' ? `the body the plan draws at x ${a.rectM.x0.toFixed(2)}–${a.rectM.x1.toFixed(2)}, z ${a.rectM.z0.toFixed(2)}–${a.rectM.z1.toFixed(2)} (${a.areaM2.toFixed(1)} m²)` : `what stands at x ${a.rectM.x0.toFixed(2)}–${a.rectM.x1.toFixed(2)}, z ${a.rectM.z0.toFixed(2)}–${a.rectM.z1.toFixed(2)} (${a.areaM2.toFixed(1)} m²)`, reason: a.why, status: a.decision === 'MISSING' ? 'MISSING' : 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
+  }
+  if (completeness && completeness.missing.length > 0) {
+    const failures = completeness.missing.map((a) => ({ commandIndex: -1, type: 'body', id: a.id, codes: ['BODY_MISSING_FROM_MODEL'], message: a.why, objectIds: [] }))
+    trace({ phase: 'MODEL', substage: 'PARTIAL_3D_PREVIEW', status: 'DEGRADED', counts: { missingBodies: completeness.missing.length }, reasonCode: 'BODY_MISSING_FROM_MODEL' })
+    partialPreview = partialPreview
+      ? { ...partialPreview, failures: [...partialPreview.failures, ...failures], missingBodies: completeness.missing }
+      : { outcome: 'PARTIAL_3D_PREVIEW', basis: 'CHECKPOINT', failures, skipped: [], missingBodies: completeness.missing }
+  }
   const hypothesisSet: PrimitiveHypothesisSet = {
     schema: HYPOTHESIS_SET_SCHEMA,
     schemaVersion: HYPOTHESIS_SET_SCHEMA_VERSION,
@@ -2471,7 +2521,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const violations = { graph: featureGraphViolations(graphDraft), ledger: ledgerViolations(ctx.ledger, [...graph.observations.map((o) => o.id), ...metrics.evidence.map((e) => e.id)]) }
   step({ stage: 'quality', what: 'per-feature quality', method: 'DIRECT', detail: Object.entries(quality.summary).map(([fam, levels]) => `${fam} ${Object.entries(levels).map(([l, n]) => `${l}:${n}`).join('/')}`).join(', '), inputs: ctx.solved.length, outputs: quality.records.length })
 
-  return { layout, building, candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations, closure: closureNotes, planDiagnostics, openingFits: fit.fits, ...(wallReconciliation ? { wallReconciliation } : {}), crossViewResiduals: crossView, ...(roofDatum ? { roofDatum } : {}), ...(partialPreview ? { partialPreview } : {}), facadeAlignment, thinBodies: thinBodyRecords, zoneBodies, wallThickness: { houseM: T, house: houseWall, bodies: bodyWalls }, preEmitRings: preEmitRings.filter((c) => c.verdict !== 'HOLDS_TWO_WALLS'), openingCounts: { plan: openings.length + sharedDoors.length, elevationIndependent: [...facadeRead.values()].reduce((a, r) => a + r.scanned.length, 0), model: model.openings.length, skippedByPartialPreview: (partialPreview?.skipped ?? []).filter((x) => x.type === 'cutOpening').length }, viewAudit: viewAudit({ horizontalOnly: new Map(cornerRegistrations.map((r) => [r.frameId, r])), frames: graph.coordinateFrames.filter((f) => (keep ? keep(f) : true)), first: legacy, firstRefused: legacyRefused, refusals: viewRefusals, registered: elevations, openingsOnly: bandRegistrations, sameSheet: new Set(openingViewOverrides.keys()), heightsRefused: openingHeightRefused, cameras }), heights: levels.measured ? { measured: true } : { measured: false, assumedStoreyHeightM: CONVENTIONS.storeyHeight } }
+  return { layout, building, candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations, closure: closureNotes, planDiagnostics, openingFits: fit.fits, ...(wallReconciliation ? { wallReconciliation } : {}), crossViewResiduals: crossView, ...(roofDatum ? { roofDatum } : {}), ...(partialPreview ? { partialPreview } : {}), ...(completeness ? { bodyCompleteness: completeness } : {}), bodyRecovery: { seamSplits: draft.seamSplits ?? [], gateBays: draft.base?.decomposition.gateBays ?? [] }, facadeAlignment, thinBodies: thinBodyRecords, zoneBodies, wallThickness: { houseM: T, house: houseWall, bodies: bodyWalls }, preEmitRings: preEmitRings.filter((c) => c.verdict !== 'HOLDS_TWO_WALLS'), openingCounts: { plan: openings.length + sharedDoors.length, elevationIndependent: [...facadeRead.values()].reduce((a, r) => a + r.scanned.length, 0), model: model.openings.length, skippedByPartialPreview: (partialPreview?.skipped ?? []).filter((x) => x.type === 'cutOpening').length }, viewAudit: viewAudit({ horizontalOnly: new Map(cornerRegistrations.map((r) => [r.frameId, r])), frames: graph.coordinateFrames.filter((f) => (keep ? keep(f) : true)), first: legacy, firstRefused: legacyRefused, refusals: viewRefusals, registered: elevations, openingsOnly: bandRegistrations, sameSheet: new Set(openingViewOverrides.keys()), heightsRefused: openingHeightRefused, cameras }), heights: levels.measured ? { measured: true } : { measured: false, assumedStoreyHeightM: CONVENTIONS.storeyHeight } }
 }
 
 /** The columns of a render across which a band of the given rows carries dark tone: the band's along extent. */

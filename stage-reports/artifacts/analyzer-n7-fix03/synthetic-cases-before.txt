@@ -1,0 +1,186 @@
+
+=== gb-setback-door
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 3.89 10.20
+   B.
+   B.
+  regions region-built-0-0 0.00..8.40x0.00..10.20
+  hyp H0_STRICT_ENCLOSURE* 2, H1_WIDE_OPENING_CONTINUITY 2 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1
+  model rings ring-main-0,ring-main-1; roofs roof-main; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+
+=== gb-setback-nodoor
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 3.89 10.20
+   B.
+   BB
+  regions region-built-0-0 0.00..8.40x0.00..10.20 | region-built-1-1 8.40..12.00x3.89..10.20
+  hyp H0_STRICT_ENCLOSURE* 3, H1_WIDE_OPENING_CONTINUITY 3 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1 | mass-1/ATTACHED 3.60x6.30 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..12.00x0.00..6.30 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+
+=== gb-flush-door
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 4.20 10.20
+   B.
+   BB
+  regions region-built-0-0 0.00..8.40x0.00..10.20 | region-built-1-1 8.40..12.00x4.20..10.20
+  hyp H0_STRICT_ENCLOSURE* 3, H1_WIDE_OPENING_CONTINUITY 3 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1 | mass-1/ATTACHED 3.60x6.00 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..12.00x0.00..6.00 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+
+=== t-strip045
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 10.19
+   BB
+  regions region-built-0-0 0.00..12.00x0.00..10.19
+  hyp H0_STRICT_ENCLOSURE* 2, H1_WIDE_OPENING_CONTINUITY 2 boundary
+  layout mass-0/MAIN 12.00x10.20 s0..1; gate STRUCTURAL_LAYOUT_REJECTED STRUCTURE_SILHOUETTE_DISAGREES: the massing drawn against the front elevation stands up to 5.80 m away from the outline that drawing traces [49 samples across the view, 2.89 m rms: 1 body at 1 height — mass-0 0.00–12.00 m to 8.53 m (the ridge, seen along its length above the eaves)] ; STRUCTURE_SILHOUETTE_DISAGREES: the massing drawn against the rear elevation stands up to 5.80 m away from the outline that drawing traces [49 samples across the view, 2.90 m rms: 1 body at 1 height — mass-0 0.00–12.00 m to 8.53 m (the ridge, seen along its length above the eaves)] ; STRUCTURE_SILHOUETTE_DISAGREES: the massing drawn against the left elevation stands up to 3.28 m away from the outline that drawing traces [49 samples across the view, 1.93 m rms: 1 body at 1 height — mass-0 0.00–10.20 m to 8.53 m (the ridge, seen end on over the gable)] ; STRUCTURE_SILHOUETTE_DISAGREES: the massing drawn against the right elevation stands up to 3.28 m away from the outline that drawing traces [49 samples across the view, 1.93 m rms: 1 body at 1 height — mass-0 0.00–10.20 m to 8.53 m (the ridge, seen end on over the gable)]
+  v2 main 0.00..12.00x0.00..10.20 s0,1 sr1:8.42
+  model rings ring-main-0,ring-main-1; roofs roof-main; mainRoof {"x0":0,"x1":12,"z0":0,"z1":10.2}; outcome COMPLETE
+
+=== t-strip120
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 1.20 10.20
+   B.
+   BB
+  regions region-built-0-1 0.00..12.00x1.20..10.20 | region-built-0-0 0.00..8.40x0.00..1.20
+  hyp H0_STRICT_ENCLOSURE* 3, H1_WIDE_OPENING_CONTINUITY 3 boundary
+  layout mass-0/MAIN 12.00x9.00 s0..1 | mass-1/ATTACHED 8.40x1.20 s0..1; gate STRUCTURAL_LAYOUT_REJECTED STRUCTURE_SILHOUETTE_DISAGREES: the massing drawn against the front elevation stands up to 5.80 m away from the outline that drawing traces [49 samples across the view, 2.89 m rms: 2 bodies at 2 heights — mass-0 0.00–12.00 m to 8.53 m (the ridge, seen along its length above the eaves); mass-1 0.00–8.40 m to 5.25 m (the top of its own walls, with a level roof over them)] ; STRUCTURE_SILHOUETTE_DISAGREES: the massing drawn against the rear elevation stands up to 5.80 m away from the outline that drawing traces [49 samples across the view, 2.90 m rms: 2 bodies at 2 heights — mass-0 0.00–12.00 m to 8.53 m (the ridge, seen along its length above the eaves); mass-1 3.60–12.00 m to 5.25 m (the top of its own walls, with a level roof over them)] ; STRUCTURE_SILHOUETTE_DISAGREES: the massing drawn against the left elevation stands up to 3.28 m away from the outline that drawing traces [49 samples across the view, 2.14 m rms: 2 bodies at 2 heights — mass-0 0.00–9.00 m to 8.53 m (the ridge, seen end on over the gable); mass-1 9.00–10.20 m to 5.25 m (the top of its own walls, with a level roof over them)] ; STRUCTURE_SILHOUETTE_DISAGREES: the massing drawn against the right elevation stands up to 3.28 m away from the outline that drawing traces [49 samples across the view, 2.14 m rms: 2 bodies at 2 heights — mass-1 0.00–1.20 m to 5.25 m (the top of its own walls, with a level roof over them); mass-0 1.20–10.20 m to 8.53 m (the ridge, seen end on over the gable)]
+  v2 main 0.00..12.00x0.00..9.00 s0,1 sr1:8.42 | attached-0 0.00..8.40x9.00..10.20 s0,1
+  model rings ring-main-0,ring-main-1,ring-attached-0-0,ring-attached-0-1; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":12,"z0":0,"z1":9}; outcome COMPLETE
+
+=== m-full
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 10.20
+   BB
+  regions region-built-0-0 0.00..12.00x0.00..10.20
+  hyp H0_STRICT_ENCLOSURE* 2, H1_WIDE_OPENING_CONTINUITY 2 boundary
+  layout mass-0/MAIN 12.00x10.20 s0..1; gate STRUCTURAL_LAYOUT_REJECTED STRUCTURE_SILHOUETTE_DISAGREES: the massing drawn against the front elevation stands up to 5.80 m away from the outline that drawing traces [49 samples across the view, 2.89 m rms: 1 body at 1 height — mass-0 0.00–12.00 m to 8.53 m (the ridge, seen along its length above the eaves)] ; STRUCTURE_SILHOUETTE_DISAGREES: the massing drawn against the rear elevation stands up to 5.80 m away from the outline that drawing traces [49 samples across the view, 2.90 m rms: 1 body at 1 height — mass-0 0.00–12.00 m to 8.53 m (the ridge, seen along its length above the eaves)] ; STRUCTURE_SILHOUETTE_DISAGREES: the massing drawn against the left elevation stands up to 3.28 m away from the outline that drawing traces [49 samples across the view, 1.93 m rms: 1 body at 1 height — mass-0 0.00–10.20 m to 8.53 m (the ridge, seen end on over the gable)] ; STRUCTURE_SILHOUETTE_DISAGREES: the massing drawn against the right elevation stands up to 3.28 m away from the outline that drawing traces [49 samples across the view, 1.93 m rms: 1 body at 1 height — mass-0 0.00–10.20 m to 8.53 m (the ridge, seen end on over the gable)]
+  v2 main 0.00..12.00x0.00..10.20 s0,1 sr1:8.42
+  model rings ring-main-0,ring-main-1; roofs roof-main; mainRoof {"x0":0,"x1":12,"z0":0,"z1":10.2}; outcome COMPLETE
+
+=== m-wide6
+  linesX m 0.00 8.40 14.40
+  linesY m 0.00 2.20 10.20
+   B.
+   BB
+  regions region-built-0-1 0.00..14.40x2.20..10.20 | region-built-0-0 0.00..8.40x0.00..2.20
+  hyp H0_STRICT_ENCLOSURE* 3, H1_WIDE_OPENING_CONTINUITY 3 boundary
+  layout mass-0/MAIN 14.40x8.00 s0..1 | mass-1/ATTACHED 8.40x2.20 s0..1; gate STRUCTURAL_LAYOUT_REJECTED STRUCTURE_SILHOUETTE_DISAGREES: the massing drawn against the front elevation stands up to 5.80 m away from the outline that drawing traces [49 samples across the view, 3.57 m rms: 2 bodies at 2 heights — mass-0 0.00–14.40 m to 8.53 m (the ridge, seen along its length above the eaves); mass-1 0.00–8.40 m to 5.25 m (the top of its own walls, with a level roof over them)] ; STRUCTURE_SILHOUETTE_DISAGREES: the massing drawn against the rear elevation stands up to 5.80 m away from the outline that drawing traces [49 samples across the view, 3.57 m rms: 2 bodies at 2 heights — mass-0 0.00–14.40 m to 8.53 m (the ridge, seen along its length above the eaves); mass-1 6.00–14.40 m to 5.25 m (the top of its own walls, with a level roof over them)] ; STRUCTURE_SILHOUETTE_DISAGREES: the massing drawn against the left elevation stands up to 3.28 m away from the outline that drawing traces [49 samples across the view, 2.29 m rms: 2 bodies at 2 heights — mass-0 0.00–8.00 m to 8.53 m (the ridge, seen end on over the gable); mass-1 8.00–10.20 m to 5.25 m (the top of its own walls, with a level roof over them)] ; STRUCTURE_SILHOUETTE_DISAGREES: the massing drawn against the right elevation stands up to 3.28 m away from the outline that drawing traces [49 samples across the view, 2.29 m rms: 2 bodies at 2 heights — mass-1 0.00–2.20 m to 5.25 m (the top of its own walls, with a level roof over them); mass-0 2.20–10.20 m to 8.53 m (the ridge, seen end on over the gable)]
+  v2 main 0.00..14.40x0.00..8.00 s0,1 sr1:8.42 | attached-0 0.00..8.40x8.00..10.20 s0,1
+  model rings ring-main-0,ring-main-1,ring-attached-0-0,ring-attached-0-1; roofs roof-attached-0; mainRoof none; outcome COMPLETE
+
+=== t-two-strip
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 1.49 2.99 11.99
+   BB
+   BB
+   BR
+  regions region-built-0-0 0.00..8.40x0.00..11.99 | region-recess-1-2 8.40..12.00x2.99..11.99 | region-built-1-0 8.40..12.00x0.00..2.99
+  hyp H0_STRICT_ENCLOSURE* 5, H1_WIDE_OPENING_CONTINUITY 5 boundary
+  layout mass-0/MAIN 8.40x12.00 s0..1 | mass-1/ATTACHED 3.60x3.00 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..12.00 s0,1 | attached-0 8.40..12.00x9.00..12.00 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":12}; outcome COMPLETE
+
+=== g-windows
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 4.20 10.20
+   B.
+   BB
+  regions region-built-0-0 0.00..8.40x0.00..10.20 | region-built-1-1 8.40..12.00x4.20..10.20
+  hyp H0_STRICT_ENCLOSURE* 3, H1_WIDE_OPENING_CONTINUITY 3 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1 | mass-1/ATTACHED 3.60x6.00 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..12.00x0.00..6.00 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+
+=== thin-store
+  linesX m 0.00 8.40 10.00
+  linesY m 0.00 4.20 10.20
+   B.
+   BB
+  regions region-built-0-0 0.00..8.40x0.00..10.20 | region-built-1-1 8.40..10.00x4.20..10.20
+  hyp H0_STRICT_ENCLOSURE* 3, H1_WIDE_OPENING_CONTINUITY 3 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1 | mass-1/ATTACHED 1.60x6.00 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..10.00x0.00..6.00 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+
+=== g-four
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 4.20 10.20
+   B.
+   BB
+  regions region-built-0-0 0.00..8.40x0.00..10.20 | region-built-1-1 8.40..12.00x4.20..10.20
+  hyp H0_STRICT_ENCLOSURE* 3, H1_WIDE_OPENING_CONTINUITY 3 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1 | mass-1/ATTACHED 3.60x6.00 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..12.00x0.00..6.00 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+
+=== g-wide5
+  linesX m 0.00 8.40 8.86 13.91 14.40
+  linesY m 0.00 4.20 10.20
+   B...
+   B..B
+  regions region-built-0-0 0.00..8.40x0.00..10.20 | region-built-3-1 13.91..14.40x4.20..10.20
+  hyp H0_STRICT_ENCLOSURE* 3, H1_WIDE_OPENING_CONTINUITY 3 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1 | mass-1/UNKNOWN 0.50x6.00 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1 | attached-0 13.95..14.45x0.00..6.00 s0
+  model rings ring-main-0,ring-main-1; roofs roof-main; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome PARTIAL_3D_PREVIEW
+
+=== g-gate34
+  linesX m 0.00 8.40 12.60
+  linesY m 0.00 4.20 10.20
+   B.
+   B.
+  regions region-built-0-0 0.00..8.40x0.00..10.20
+  hyp H0_STRICT_ENCLOSURE* 2, H1_WIDE_OPENING_CONTINUITY 2 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1
+  model rings ring-main-0,ring-main-1; roofs roof-main; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+
+=== g-wide5-blank
+  linesX m 0.00 8.40 14.40
+  linesY m 0.00 4.20 10.20
+   B.
+   B.
+  regions region-built-0-0 0.00..8.40x0.00..10.20
+  hyp H0_STRICT_ENCLOSURE* 2, H1_WIDE_OPENING_CONTINUITY 2 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1
+  model rings ring-main-0,ring-main-1; roofs roof-main; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+
+=== portico
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 7.80 10.20
+   B.
+   B.
+  regions region-built-0-0 0.00..8.40x0.00..10.20
+  hyp H0_STRICT_ENCLOSURE* 2, H1_WIDE_OPENING_CONTINUITY 2 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1
+  model rings ring-main-0,ring-main-1; roofs roof-main; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+
+=== open-bay
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 4.20 10.20
+   B.
+   B.
+  regions region-built-0-0 0.00..8.40x0.00..10.20
+  hyp H0_STRICT_ENCLOSURE* 2, H1_WIDE_OPENING_CONTINUITY 2 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1
+  model rings ring-main-0,ring-main-1; roofs roof-main; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+
+=== wing25
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 4.20 10.20
+   B.
+   B.
+  regions region-built-0-0 0.00..8.40x0.00..10.20
+  hyp H0_STRICT_ENCLOSURE* 2, H1_WIDE_OPENING_CONTINUITY 2 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1
+  model rings ring-main-0,ring-main-1; roofs roof-main; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE

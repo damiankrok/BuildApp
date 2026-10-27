@@ -236,6 +236,8 @@ export type StructuralLayoutDraft = {
    * are drawn otherwise, by footprint region id. Absent when there is no base plan to read it from.
    */
   wallThickness?: { house: WallThicknessReading; bodies: Record<string, WallThicknessReading> }
+  /** N7-COUNCIL-FIX-03 (C-1): bodies cut on the wall the storeys above stop at (`splitAtUpperSeams`). */
+  seamSplits?: SeamSplit[]
 }
 
 /** The convention for an exterior wall when a plan gives nothing to read (= `CONVENTIONS.wallThickness`). */
@@ -2018,7 +2020,7 @@ export function inferStructuralLayout(given: StructuralLayoutOptions): Structura
   for (const w of wallStrips) unresolved.push(w.gap)
 
   // --- masses ---------------------------------------------------------------
-  for (const region of footprintRegions.filter((r) => r.storeyId === baseStorey.id && r.kind === 'BUILT')) {
+  const massOf = (region: FootprintRegionHypothesis, id: string): MassHypothesis => {
     const bounds = ringBoundsOf(region.ring)
     const spanX = ladderX.span(region.pixelRect.x0, region.pixelRect.x1)
     const spanZ = ladderZ.span(region.pixelRect.y0, region.pixelRect.y1)
@@ -2034,8 +2036,8 @@ export function inferStructuralLayout(given: StructuralLayoutOptions): Structura
     const facesWhy = open.length > 0 ? `; its ${open.map((w) => w.sideName).join(' and ')} side${open.length === 1 ? '' : 's'} stand${open.length === 1 ? 's' : ''} on a wall's inner face (${open.map((w) => w.gap.id).join(', ')})` : ''
     const basisX = openX && basisOf(spanX) === 'MEASURED' ? 'DERIVED' : basisOf(spanX)
     const basisZ = openZ && basisOf(spanZ) === 'MEASURED' ? 'DERIVED' : basisOf(spanZ)
-    masses.push({
-      id: `mass-${masses.length}`,
+    return {
+      id,
       role: 'UNKNOWN',
       ring: region.ring,
       footprintRegionIds: [region.id],
@@ -2047,8 +2049,9 @@ export function inferStructuralLayout(given: StructuralLayoutOptions): Structura
       evidenceIds: region.evidenceIds,
       confidence: region.confidence,
       why: `a region of the base plan enclosed by its own walls: ${region.why}${facesWhy}`,
-    })
+    }
   }
+  for (const region of footprintRegions.filter((r) => r.storeyId === baseStorey.id && r.kind === 'BUILT')) masses.push(massOf(region, `mass-${masses.length}`))
 
   // --- how far up each mass goes (005L): the storey-support relation --------
   //
@@ -2285,6 +2288,10 @@ export function inferStructuralLayout(given: StructuralLayoutOptions): Structura
     }
   }
 
+  // --- N7-COUNCIL-FIX-03 (Council C-1): a body the storey above stops short of, on a wall --------------------
+  const seamSplits = splitAtUpperSeams({ base, frame, baseStorey, masses, footprintRegions, traces, minSpanM, tolM, massOf })
+  for (const t of seamSplits) options.debug?.(`seam split ${t.massId} -> ${t.newMassId} at ${t.axis} ${t.atM}: ${t.why}`)
+
   // --- roles, attachments and facades --------------------------------------
   assignRoles(masses, !!base.decomposition.envelope?.outline)
   attachments.push(...attachmentsBetween(masses, wallM))
@@ -2309,7 +2316,106 @@ export function inferStructuralLayout(given: StructuralLayoutOptions): Structura
     })
   }
 
-  return { plans, base, frame, alignments, storeys, footprintRegions, masses, attachments, facadePlanes, recesses, alternatives, conflicts, unresolved, traces, skippedPlans, storeyRegistrations, wallThickness: { house: houseWall, bodies: bodyWalls } }
+  return { plans, base, frame, alignments, storeys, footprintRegions, masses, attachments, facadePlanes, recesses, alternatives, conflicts, unresolved, traces, skippedPlans, storeyRegistrations, wallThickness: { house: houseWall, bodies: bodyWalls }, seamSplits }
+}
+
+/** N7-COUNCIL-FIX-03: a base-storey body cut in two on a wall where the storeys above it stop. */
+export type SeamSplit = { massId: string; newMassId: string; axis: 'X' | 'Z'; atM: number; keptM: number; splitM: number; why: string }
+
+/**
+ * N7-COUNCIL-FIX-03 (Council C-1): a body of the base plan the storeys above stand on only in part, where the part they
+ * leave is behind a wall the base plan draws right across the body, is two bodies: the house, and a one-storey garage
+ * or wing against it with a roof of its own.
+ *
+ * The decomposition merges every enclosed cell it can into the largest rectangle (`mergeRegions`); a garage as deep as
+ * the house, flush with both its faces, is one rectangle with it, and nothing on the ground plan alone tells them apart
+ * (`facadeSeams` needs an outside face on the line). The storey above does: it stops on that line. Cut there only when
+ * (a) every storey above the base that stands on the body stops within the registration's tolerance of one grid line of
+ * the base plan, (b) that line crosses the whole body as continuous wall (`facadeSeams`' test: band over half of each
+ * edge, shut over nine tenths with its doors), and (c) what is left beyond it holds two walls and a room. A part of
+ * the storey's footprint beyond the line, or a line drawn as anything less than a wall, leaves the body whole.
+ */
+function splitAtUpperSeams(input: {
+  base: PlanReading
+  frame: WorldFrame
+  baseStorey: StoreyLayoutHypothesis
+  masses: MassHypothesis[]
+  footprintRegions: FootprintRegionHypothesis[]
+  traces: LayoutTrace[]
+  minSpanM: number
+  tolM: number
+  massOf: (region: FootprintRegionHypothesis, id: string) => MassHypothesis
+}): SeamSplit[] {
+  const { base, frame, baseStorey, masses, footprintRegions, traces, minSpanM, tolM, massOf } = input
+  const d = base.decomposition
+  const nx = d.linesX.length - 1
+  const ny = d.linesY.length - 1
+  const cellAt = new Map(d.cells.map((c) => [`${c.ix}:${c.iy}`, c]))
+  const continuous = (e: { wall: number; closure: number } | undefined): boolean => e !== undefined && e.wall >= 0.5 && e.closure >= 0.9
+  const out: SeamSplit[] = []
+  for (const mass of [...masses]) {
+    if (mass.storeySpan.fromIndex !== baseStorey.index || mass.storeySpan.toIndex <= baseStorey.index) continue
+    const own = footprintRegions.find((r) => r.id === mass.footprintRegionIds[0])
+    if (!own || own.storeyId !== baseStorey.id) continue
+    const upper = footprintRegions.filter((r) => r.kind === 'BUILT' && r.storeyId !== baseStorey.id && mass.footprintRegionIds.includes(r.id)).map((r) => ringBoundsOf(r.ring))
+    if (upper.length === 0) continue
+    const u = { x0: Math.min(...upper.map((b) => b.x0)), x1: Math.max(...upper.map((b) => b.x1)), z0: Math.min(...upper.map((b) => b.z0)), z1: Math.max(...upper.map((b) => b.z1)) }
+    const b = ringBoundsOf(own.ring)
+    const px = own.pixelRect
+    // the cut candidates: a side of the body the storeys above stop short of by a body's span or more
+    type Cut = { axis: 'X' | 'Z'; keep: 'LOW' | 'HIGH'; atM: number }
+    const cuts: Cut[] = []
+    if (b.x1 - u.x1 >= minSpanM) cuts.push({ axis: 'X', keep: 'LOW', atM: u.x1 })
+    if (u.x0 - b.x0 >= minSpanM) cuts.push({ axis: 'X', keep: 'HIGH', atM: u.x0 })
+    if (b.z1 - u.z1 >= minSpanM) cuts.push({ axis: 'Z', keep: 'LOW', atM: u.z1 })
+    if (u.z0 - b.z0 >= minSpanM) cuts.push({ axis: 'Z', keep: 'HIGH', atM: u.z0 })
+    for (const cut of cuts.slice(0, 1)) {
+      const lines = cut.axis === 'X' ? d.linesX : d.linesY
+      const toM = (p: number): number => (cut.axis === 'X' ? (frame.x ?? ((q: number) => (q - frame.originPx.x) * frame.metresPerPixelX))(p) : (frame.z ?? ((q: number) => (q - frame.originPx.y) * frame.metresPerPixelY))(p))
+      const lo = cut.axis === 'X' ? px.x0 : px.y0
+      const hi = cut.axis === 'X' ? px.x1 : px.y1
+      const k = lines.findIndex((l) => l.px > lo + 1 && l.px < hi - 1 && Math.abs(toM(l.px) - cut.atM) <= tolM)
+      if (k < 0) continue
+      const linePx = lines[k].px
+      // (b): every edge on the line inside the body is continuous wall
+      const across = cut.axis === 'X' ? d.linesY : d.linesX
+      const a0 = cut.axis === 'X' ? px.y0 : px.x0
+      const a1 = cut.axis === 'X' ? px.y1 : px.x1
+      let edges = 0
+      let walled = 0
+      for (let j = 0; j < (cut.axis === 'X' ? ny : nx); j += 1) {
+        const mid = (across[j].px + across[j + 1].px) / 2
+        if (mid < a0 || mid > a1) continue
+        edges += 1
+        const cell = cut.axis === 'X' ? cellAt.get(`${k}:${j}`) : cellAt.get(`${j}:${k}`)
+        if (k < (cut.axis === 'X' ? nx : ny) && continuous(cell?.edges[cut.axis === 'X' ? 3 : 0])) walled += 1
+      }
+      if (edges === 0 || walled < edges) continue
+      const keptRect = { ...px }
+      const splitRect = { ...px }
+      if (cut.axis === 'X') {
+        if (cut.keep === 'LOW') { keptRect.x1 = linePx; splitRect.x0 = linePx } else { keptRect.x0 = linePx; splitRect.x1 = linePx }
+      } else if (cut.keep === 'LOW') { keptRect.y1 = linePx; splitRect.y0 = linePx } else { keptRect.y0 = linePx; splitRect.y1 = linePx }
+      const keptRing = ringOfRect(keptRect, frame)
+      const splitRing = ringOfRect(splitRect, frame)
+      const kb = ringBoundsOf(keptRing)
+      const sb = ringBoundsOf(splitRing)
+      if (Math.min(sb.x1 - sb.x0, sb.z1 - sb.z0) < minSpanM || Math.min(kb.x1 - kb.x0, kb.z1 - kb.z0) < minSpanM) continue
+      const atM = round6(toM(linePx))
+      const why = `the storey${upper.length === 1 ? '' : 's'} above stand${upper.length === 1 ? 's' : ''} on this body only to ${cut.axis === 'X' ? 'x' : 'z'} = ${atM.toFixed(2)} m, where the base plan draws a continuous wall right across it (${edges} edge${edges === 1 ? '' : 's'} of wall band): beyond it is a one-storey body of its own against the house, not more of the house`
+      const splitRegion: FootprintRegionHypothesis = { ...own, id: `${own.id}-seam`, ring: splitRing, areaM2: round6(ringArea(splitRing)), pixelRect: splitRect, why: `${own.why}; ${why}` }
+      Object.assign(own, { ring: keptRing, areaM2: round6(ringArea(keptRing)), pixelRect: keptRect })
+      footprintRegions.push(splitRegion)
+      baseStorey.footprintRegionIds.push(splitRegion.id)
+      const kept = massOf(own, mass.id)
+      Object.assign(mass, { ring: kept.ring, widthM: kept.widthM, depthM: kept.depthM, why: `${kept.why}; cut on the wall the storeys above stop at` })
+      const added = massOf(splitRegion, `mass-${masses.length}`)
+      masses.push(added)
+      traces.push({ id: stableId('trace', `seam-${splitRegion.id}`, { id: splitRegion.id }), itemId: added.id, what: 'a body cut from another on the wall the storeys above stop at', frameId: base.frame.id, pixelRect: splitRect, observationIds: [], evidenceIds: [], why })
+      out.push({ massId: mass.id, newMassId: added.id, axis: cut.axis, atM, keptM: round6(cut.axis === 'X' ? kb.x1 - kb.x0 : kb.z1 - kb.z0), splitM: round6(cut.axis === 'X' ? sb.x1 - sb.x0 : sb.z1 - sb.z0), why })
+    }
+  }
+  return out
 }
 
 // ---------------------------------------------------------------------------
