@@ -2755,3 +2755,17 @@ a drawn body nothing stands on makes the run `PARTIAL_3D_PREVIEW` / `BODY_MISSIN
 the phone naming it. Eight known houses: models byte-identical. Open: a face set back less than `minCellM` (0.45 m) is
 built to the house's line (C-3); the silhouette gate's BLOCKING still reads COMPLETE. The OWNER's private benchmark
 was not reproduced and is not claimed.
+
+## Set-back precision and honest completeness (STAGE BUILDPLAN N7-FIX-04)
+
+Status: **DONE — APK 1310, solver 2.9.0.** Report `stage-reports/STAGE_BUILDPLAN_N7_FIX_04.md`, numbers
+`stage-reports/artifacts/analyzer-n7-fix04/`. A garage set back 0.15–0.60 m is built to its own face (6.00 m within
+0.03 m) with the house at 10.20 m: the faces the grid thins are kept beside their line (`thinnedPx`, `recoverFaces`,
+inward only), the dimension ladder takes the nearest tick and a landed overall dimension, and a gate pocket reached
+into the strip before it is cut to its walled part. A chosen layout holding an unresolved BLOCKING reason makes the
+preview `PARTIAL_3D_PREVIEW` / `LAYOUT_BLOCKING_UNRESOLVED`, the model kept. `modelCompleteness` separates the
+accepted decomposition's coverage, unresolved areas, walls the plan draws that nothing accounts for, conflicts and
+model refusals into COMPLETE / COMPLETE_WITH_OPEN_QUESTIONS / PARTIAL. Eight known houses: models byte-identical
+(1 COMPLETE, 7 with open questions; Marcówki's 1.0 m wall before the garage named). Open: the silhouette check's
+step sample cannot tell unstated eaves from a misplaced step. The OWNER's private benchmark was not reproduced and is
+not claimed.
