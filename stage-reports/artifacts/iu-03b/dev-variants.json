@@ -1,8 +1,9 @@
 {
- "note": "DEVELOPMENT data only (IU-02 FINAL, IU-03A test sets, synthetic dev, LoC, Commons, IU-03A negatives) \u2014 every image already seen; not a blind result. Agent labels, not human-verified.",
+ "note": "DEVELOPMENT data only (IU-02 FINAL, IU-03A test sets, synthetic dev, LoC, Commons, IU-03A negatives) \u2014 every image already seen; not a blind result. Agent labels, not human-verified. D/D1/D_S and the @D rows are on the 516 dev images that reach stage 2 (plus all negatives).",
  "n": 2258,
  "variants": {
   "A": {
+   "n": 2258,
    "maskedTestRan": 0,
    "total": {
     "non": 1677,
@@ -112,6 +113,7 @@
    ]
   },
   "B": {
+   "n": 2258,
    "maskedTestRan": 509,
    "total": {
     "non": 1677,
@@ -215,6 +217,7 @@
    ]
   },
   "B_S(z4.0,d1.0)": {
+   "n": 2258,
    "maskedTestRan": 509,
    "total": {
     "non": 1677,
@@ -309,6 +312,7 @@
    "leaked": []
   },
   "B_S(z4.0,d1.5)": {
+   "n": 2258,
    "maskedTestRan": 509,
    "total": {
     "non": 1677,
@@ -412,6 +416,7 @@
    ]
   },
   "B_S(z4.0,d2.0)": {
+   "n": 2258,
    "maskedTestRan": 509,
    "total": {
     "non": 1677,
@@ -515,6 +520,7 @@
    ]
   },
   "B_S(z4.0,d3.0)": {
+   "n": 2258,
    "maskedTestRan": 509,
    "total": {
     "non": 1677,
@@ -618,6 +624,7 @@
    ]
   },
   "B_S(z5.0,d1.0)": {
+   "n": 2258,
    "maskedTestRan": 509,
    "total": {
     "non": 1677,
@@ -712,6 +719,7 @@
    "leaked": []
   },
   "B_S(z5.0,d1.5)": {
+   "n": 2258,
    "maskedTestRan": 509,
    "total": {
     "non": 1677,
@@ -815,6 +823,7 @@
    ]
   },
   "B_S(z5.0,d2.0)": {
+   "n": 2258,
    "maskedTestRan": 509,
    "total": {
     "non": 1677,
@@ -918,6 +927,7 @@
    ]
   },
   "B_S(z5.0,d3.0)": {
+   "n": 2258,
    "maskedTestRan": 509,
    "total": {
     "non": 1677,
@@ -1021,6 +1031,7 @@
    ]
   },
   "B_S(z6.0,d1.0)": {
+   "n": 2258,
    "maskedTestRan": 509,
    "total": {
     "non": 1677,
@@ -1115,6 +1126,7 @@
    "leaked": []
   },
   "B_S(z6.0,d1.5)": {
+   "n": 2258,
    "maskedTestRan": 509,
    "total": {
     "non": 1677,
@@ -1218,6 +1230,7 @@
    ]
   },
   "B_S(z6.0,d2.0)": {
+   "n": 2258,
    "maskedTestRan": 509,
    "total": {
     "non": 1677,
@@ -1321,6 +1334,7 @@
    ]
   },
   "B_S(z6.0,d3.0)": {
+   "n": 2258,
    "maskedTestRan": 509,
    "total": {
     "non": 1677,
@@ -1424,6 +1438,7 @@
    ]
   },
   "B1": {
+   "n": 2258,
    "maskedTestRan": 509,
    "total": {
     "non": 1677,
@@ -1526,6 +1541,7 @@
    ]
   },
   "B1_T": {
+   "n": 2258,
    "maskedTestRan": 323,
    "total": {
     "non": 1677,
@@ -1628,6 +1644,7 @@
    ]
   },
   "B_T": {
+   "n": 2258,
    "maskedTestRan": 323,
    "total": {
     "non": 1677,
@@ -1731,6 +1748,7 @@
    ]
   },
   "B_S(z5.0,d1.5)_T": {
+   "n": 2258,
    "maskedTestRan": 323,
    "total": {
     "non": 1677,
@@ -1824,6 +1842,351 @@
     "STOP_PERSPECTIVE_MASKED": 2,
     "REVIEW_SITE_PLAN": 1
    },
+   "leaked": [
+    [
+     "s3t-h028-persp-near_fron",
+     "EXTERIOR_PERSPECTIVE",
+     "IU03A_TEST_SYNTH",
+     "FACADE"
+    ]
+   ]
+  },
+  "D": {
+   "n": 516,
+   "maskedTestRan": 509,
+   "total": {
+    "elev": 507,
+    "elevKept": 507,
+    "non": 9,
+    "nonRouted": 1,
+    "nearFrontal": 5,
+    "nearFrontalRouted": 1
+   },
+   "bySet": {
+    "IU02_FINAL/FINAL_SYNTH": {
+     "elev": 80,
+     "elevKept": 80
+    },
+    "IU02_FINAL/FINAL_ARCHON": {
+     "elev": 39,
+     "elevKept": 39
+    },
+    "IU02_FINAL/IU01_TEST": {
+     "elev": 54,
+     "elevKept": 54
+    },
+    "SYNTH_DEV": {
+     "elev": 210,
+     "elevKept": 210
+    },
+    "IU03A_TEST_SYNTH": {
+     "elev": 60,
+     "elevKept": 60,
+     "non": 1,
+     "nonRouted": 1,
+     "nearFrontal": 1,
+     "nearFrontalRouted": 1
+    },
+    "IU03A_TEST_ARCHON": {
+     "elev": 24,
+     "elevKept": 24
+    },
+    "NEG_iu3neg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3tneg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "COMMONS": {
+     "elev": 12,
+     "elevKept": 12
+    }
+   },
+   "elevLostReasons": {},
+   "leaked": [
+    [
+     "s3t-h028-persp-near_fron",
+     "EXTERIOR_PERSPECTIVE",
+     "IU03A_TEST_SYNTH",
+     "FACADE"
+    ]
+   ]
+  },
+  "D1": {
+   "n": 516,
+   "maskedTestRan": 509,
+   "total": {
+    "elev": 507,
+    "elevKept": 507,
+    "non": 9,
+    "nonRouted": 1,
+    "nearFrontal": 5,
+    "nearFrontalRouted": 1
+   },
+   "bySet": {
+    "IU02_FINAL/FINAL_SYNTH": {
+     "elev": 80,
+     "elevKept": 80
+    },
+    "IU02_FINAL/FINAL_ARCHON": {
+     "elev": 39,
+     "elevKept": 39
+    },
+    "IU02_FINAL/IU01_TEST": {
+     "elev": 54,
+     "elevKept": 54
+    },
+    "SYNTH_DEV": {
+     "elev": 210,
+     "elevKept": 210
+    },
+    "IU03A_TEST_SYNTH": {
+     "elev": 60,
+     "elevKept": 60,
+     "non": 1,
+     "nonRouted": 1,
+     "nearFrontal": 1,
+     "nearFrontalRouted": 1
+    },
+    "IU03A_TEST_ARCHON": {
+     "elev": 24,
+     "elevKept": 24
+    },
+    "NEG_iu3neg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3tneg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "COMMONS": {
+     "elev": 12,
+     "elevKept": 12
+    }
+   },
+   "elevLostReasons": {},
+   "leaked": [
+    [
+     "s3t-h028-persp-near_fron",
+     "EXTERIOR_PERSPECTIVE",
+     "IU03A_TEST_SYNTH",
+     "FACADE"
+    ]
+   ]
+  },
+  "D_S(z5.0,d1.0)": {
+   "n": 516,
+   "maskedTestRan": 509,
+   "total": {
+    "elev": 507,
+    "elevKept": 505,
+    "non": 9,
+    "nearFrontal": 5,
+    "nearFrontalRouted": 0
+   },
+   "bySet": {
+    "IU02_FINAL/FINAL_SYNTH": {
+     "elev": 80,
+     "elevKept": 80
+    },
+    "IU02_FINAL/FINAL_ARCHON": {
+     "elev": 39,
+     "elevKept": 39
+    },
+    "IU02_FINAL/IU01_TEST": {
+     "elev": 54,
+     "elevKept": 53
+    },
+    "SYNTH_DEV": {
+     "elev": 210,
+     "elevKept": 210
+    },
+    "IU03A_TEST_SYNTH": {
+     "elev": 60,
+     "elevKept": 60,
+     "non": 1,
+     "nearFrontal": 1,
+     "nearFrontalRouted": 0
+    },
+    "IU03A_TEST_ARCHON": {
+     "elev": 24,
+     "elevKept": 24
+    },
+    "NEG_iu3neg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3tneg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "COMMONS": {
+     "elev": 12,
+     "elevKept": 11
+    }
+   },
+   "elevLostReasons": {
+    "STOP_PERSPECTIVE_MASKED": 2
+   },
+   "leaked": []
+  },
+  "A@D": {
+   "n": 516,
+   "maskedTestRan": 0,
+   "total": {
+    "elev": 507,
+    "elevKept": 507,
+    "non": 9,
+    "nonRouted": 2,
+    "nearFrontal": 5,
+    "nearFrontalRouted": 2
+   },
+   "bySet": {
+    "IU02_FINAL/FINAL_SYNTH": {
+     "elev": 80,
+     "elevKept": 80
+    },
+    "IU02_FINAL/FINAL_ARCHON": {
+     "elev": 39,
+     "elevKept": 39
+    },
+    "IU02_FINAL/IU01_TEST": {
+     "elev": 54,
+     "elevKept": 54
+    },
+    "SYNTH_DEV": {
+     "elev": 210,
+     "elevKept": 210
+    },
+    "IU03A_TEST_SYNTH": {
+     "elev": 60,
+     "elevKept": 60,
+     "non": 1,
+     "nonRouted": 1,
+     "nearFrontal": 1,
+     "nearFrontalRouted": 1
+    },
+    "IU03A_TEST_ARCHON": {
+     "elev": 24,
+     "elevKept": 24
+    },
+    "NEG_iu3neg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3tneg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 1,
+     "nonRouted": 1
+    },
+    "COMMONS": {
+     "elev": 12,
+     "elevKept": 12
+    }
+   },
+   "elevLostReasons": {},
+   "leaked": [
+    [
+     "s3t-h028-persp-near_fron",
+     "EXTERIOR_PERSPECTIVE",
+     "IU03A_TEST_SYNTH",
+     "FACADE"
+    ],
+    [
+     "neg-n7_near_frontal-1-t",
+     "EXTERIOR_PERSPECTIVE",
+     "NEG_iu3tneg",
+     "FACADE"
+    ]
+   ]
+  },
+  "B1@D": {
+   "n": 516,
+   "maskedTestRan": 509,
+   "total": {
+    "elev": 507,
+    "elevKept": 507,
+    "non": 9,
+    "nonRouted": 1,
+    "nearFrontal": 5,
+    "nearFrontalRouted": 1
+   },
+   "bySet": {
+    "IU02_FINAL/FINAL_SYNTH": {
+     "elev": 80,
+     "elevKept": 80
+    },
+    "IU02_FINAL/FINAL_ARCHON": {
+     "elev": 39,
+     "elevKept": 39
+    },
+    "IU02_FINAL/IU01_TEST": {
+     "elev": 54,
+     "elevKept": 54
+    },
+    "SYNTH_DEV": {
+     "elev": 210,
+     "elevKept": 210
+    },
+    "IU03A_TEST_SYNTH": {
+     "elev": 60,
+     "elevKept": 60,
+     "non": 1,
+     "nonRouted": 1,
+     "nearFrontal": 1,
+     "nearFrontalRouted": 1
+    },
+    "IU03A_TEST_ARCHON": {
+     "elev": 24,
+     "elevKept": 24
+    },
+    "NEG_iu3neg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3tneg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "COMMONS": {
+     "elev": 12,
+     "elevKept": 12
+    }
+   },
+   "elevLostReasons": {},
    "leaked": [
     [
      "s3t-h028-persp-near_fron",

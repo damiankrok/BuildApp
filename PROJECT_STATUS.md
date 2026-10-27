@@ -2716,3 +2716,16 @@ uniform light glass defeats the dark-glass opening reader) and built `FacadeGeom
 feeding its outline to the unchanged solver as SILHOUETTE: on DEV 40 vs 31 correct readings and 17 vs 15 views, but
 on the test houses 12 vs 15 (the outline's top is a chimney, which the solver takes for the ridge). Labels are agent
 labels; a 124-row human review sample is ready.
+
+## Lightweight masked perspective veto (STAGE BUILDPLAN IU-03B)
+
+Status: **RESEARCH_PARTIAL.** Report `stage-reports/STAGE_BUILDPLAN_IU_03B_LIGHTWEIGHT_PERSPECTIVE_VETO.md`, code
+`research/image-understanding/iu3b/`, numbers `stage-reports/artifacts/iu-03b/`, frozen at `88f80cc` before any control
+image existed. Production analyzer, Android, SourcePackage, reconstruction, `views.ts`/`frame.ts` unchanged; no APK.
+After the unchanged IU-03A VETO_ONLY, the IU-02 projection test runs again inside a classical OpenCV sky/foliage-free
+mask (no weights, 165 MB, 0.15 s/img on a desktop core; phone not measured), only on a trigger. On a new control set
+(30 synthetic houses, new negatives, 4 never-seen ARCHON families, agent labels) it cuts near-frontal perspectives
+reaching the facade extractor from 5 to 2 (of 189 non-elevations) with no elevation lost (90/120 under adverse captions,
+16/16 under real ones). The two left are weak-evidence images that no mask — classical, UperNet or ground truth —
+turns into a vanishing point; they are recorded as conflicts, not rerouted. UperNet adds nothing over the classical
+mask; no learned segmenter was needed. FacadeGeometryEvidence integration requirements are written down only.
