@@ -2741,3 +2741,17 @@ named). D-2/C-4/B-3: every ring rectangle is checked before emission, and a stor
 storeys below standing. Eight known houses: 6 byte-identical, A01 (0.427 → 0.447 m) and Goździkowce (0.304 → 0.431 m,
 pseudo-partitions from the outer wall's inner layer gone) changed with the source's faces as the reason. Not fixed
 here: plan decomposition (Council C-1/C-2, next). The OWNER's private benchmark was not reproduced and is not claimed.
+
+## Garages and attached bodies kept (STAGE BUILDPLAN N7-COUNCIL-FIX-03)
+
+Status: **DONE — APK 1309, solver 2.8.0.** Report `stage-reports/STAGE_BUILDPLAN_N7_COUNCIL_FIX_03.md`, numbers
+`stage-reports/artifacts/analyzer-n7-fix03/`. Council C-1/C-2, fixed where the body was lost: a wall crossing a grid
+line is read at the faces the grid thinned into it, a corner pier's ink included (set-back garage); a built rectangle
+never crosses a facade seam (`facadeSeams`); a body the storeys above stop short of on a wall is cut into the house and
+a one-storey body (`splitAtUpperSeams`); a pocket walled on three sides behind jambs, a car deep, with a printed gate
+width, a leaf or a door into the house, is a garage behind its gate (`shutGateBays`), a porch, carport or blank hole
+stays open and named. Every walled area of the base plan is weighed against the model's bodies (`bodyCompleteness`):
+a drawn body nothing stands on makes the run `PARTIAL_3D_PREVIEW` / `BODY_MISSING_FROM_MODEL`, the built model kept and
+the phone naming it. Eight known houses: models byte-identical. Open: a face set back less than `minCellM` (0.45 m) is
+built to the house's line (C-3); the silhouette gate's BLOCKING still reads COMPLETE. The OWNER's private benchmark
+was not reproduced and is not claimed.
