@@ -436,6 +436,8 @@
     <string name="analyzer_result_limited">Model gotowy z ograniczeniami</string>
     <!-- N7-FIX-04 follow-up: COMPLETE_WITH_OPEN_QUESTIONS — built whole, never said as plainly ready -->
     <string name="analyzer_result_open_questions">Model zbudowany, z otwartymi pytaniami</string>
+    <!-- N7-PATCH-04A: the source sheet, for a stored record without a completeness verdict (an older analyzer) -->
+    <string name="house_model_outcome">Stan modelu</string>
     <string name="analyzer_result_open_questions_body">Analiza zbudowała cały odczytany model, ale części rysunku nie rozstrzygnęła. Co pozostało otwarte, opisuje sekcja „Kompletność modelu” niżej.</string>
     <!-- N7-P1: the last valid model when a later object was refused; never called a complete reconstruction -->
     <string name="analyzer_result_partial">Model częściowy 3D</string>

@@ -2,6 +2,15 @@ package com.buildplan.preview
 
 import com.buildplan.preview.AnalyzerFixtures.filesIn
 import com.buildplan.preview.scene.AnalysisRecord
+import com.buildplan.preview.scene.ModelCompleteness
+import com.buildplan.preview.scene.PreviewOutcome
+import com.buildplan.preview.scene.UnexplainedWalls
+import com.buildplan.preview.ui.ResultHeadline
+import com.buildplan.preview.ui.outcomeHeadline
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.jsonObject
 import com.buildplan.preview.scene.BundledScenes
 import com.buildplan.preview.scene.DownloadedScenes
 import com.buildplan.preview.scene.SaveResult
@@ -312,5 +321,49 @@ class DownloadedScenesTest {
         assertTrue(subtitle, subtitle.startsWith("Analysed "))
         assertTrue(subtitle, subtitle.contains("2026"))
         assertTrue(subtitle, subtitle.endsWith(" · candidate ${AnalyzerFixtures.CANDIDATE.take(12)}"))
+    }
+
+    /** Rewrites the stored index's only entry's `preview` as an older build would have written it. */
+    private fun rewritePreview(edit: (JsonObject) -> JsonObject?) {
+        val index = File(dir, "index.json")
+        val root = Json.parseToJsonElement(index.readText()).jsonObject
+        val entries = (root["entries"] as JsonArray).map { e ->
+            val o = e.jsonObject
+            val p = o["preview"]?.jsonObject?.let(edit)
+            JsonObject(if (p == null) o - "preview" else o + ("preview" to p))
+        }
+        index.writeText(JsonObject(root + ("entries" to JsonArray(entries))).toString())
+    }
+
+    @Test
+    fun `records stored by older builds open — without completeness, and with the band length as the only wall length`() {
+        val walls = UnexplainedWalls(count = 1, lengthM = 1.794087, bandLengthM = 9.453752)
+        val withVerdict = record().copy(preview = PreviewOutcome(completeness = ModelCompleteness(verdict = ModelCompleteness.COMPLETE_WITH_OPEN_QUESTIONS, unexplainedWalls = walls)))
+        val entry = saved(store.save(demoBytes, demoSha, withVerdict))
+        assertEquals(walls, DownloadedScenes(dir).list().single().preview?.completeness?.unexplainedWalls)
+
+        // APK 1310 (N7-FIX-04): `unexplainedWalls` was {count, lengthM} and lengthM the whole band
+        rewritePreview { p ->
+            val c = p.getValue("completeness").jsonObject
+            JsonObject(p + ("completeness" to JsonObject(c + ("unexplainedWalls" to Json.parseToJsonElement("""{"count":1,"lengthM":9.453752}""")))))
+        }
+        val fix04 = DownloadedScenes(dir).list().single()
+        assertNull(fix04.preview?.completeness?.unexplainedWalls?.bandLengthM)
+        assertEquals(ResultHeadline.OPEN_QUESTIONS, fix04.preview?.let(::outcomeHeadline))
+        assertTrue(DownloadedScenes(dir).load(entry.key) is SceneLoadResult.Ok)
+
+        // before N7-FIX-04: a preview without `completeness`
+        rewritePreview { p -> JsonObject(p - "completeness") }
+        val p1 = DownloadedScenes(dir).list().single()
+        assertNull(p1.preview?.completeness)
+        assertFalse(p1.preview?.hasDetails ?: true)
+        assertNull(p1.preview?.let(::outcomeHeadline))
+
+        // before N7-P1: no preview at all
+        rewritePreview { null }
+        val old = DownloadedScenes(dir).list().single()
+        assertNull(old.preview)
+        assertFalse(old.isPartialPreview)
+        assertTrue(DownloadedScenes(dir).load(entry.key) is SceneLoadResult.Ok)
     }
 }

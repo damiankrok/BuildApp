@@ -224,9 +224,10 @@ fun SourceSheet(preview: PreviewViewModel, analyzer: AnalyzerViewModel, progress
                 modifier = Modifier.padding(top = Space.s).semantics { heading() },
             )
             SourceStatus(entry?.source ?: SceneSourceKind.BUNDLED, download, resultShown)
-            // N7-P1: a partial model says beside it what it is, from the record kept with the scene
-            download?.preview?.takeIf { it.isPartial }?.let { outcome ->
-                SectionHeading(stringResource(R.string.analyzer_result_partial))
+            // N7-P1: a model says beside it what it is, from the record kept with the scene. N7-PATCH-04A: on the same
+            // condition as the result screen, headed by the record's own verdict; partial only when it is partial
+            download?.preview?.takeIf { it.hasDetails }?.let { outcome ->
+                SectionHeading(stringResource(headlineText(outcomeHeadline(outcome))))
                 PreviewOutcomeDetails(outcome)
             }
             // N7-FIX-01: which analyzer made this model, from the record kept with it (VERSION_UNKNOWN when it has none)

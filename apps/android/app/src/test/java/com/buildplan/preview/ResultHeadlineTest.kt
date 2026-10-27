@@ -2,10 +2,13 @@ package com.buildplan.preview
 
 import com.buildplan.preview.analyzer.AnalysisSummary
 import com.buildplan.preview.scene.ModelCompleteness
+import com.buildplan.preview.scene.PartialPreview
 import com.buildplan.preview.scene.PreviewOutcome
 import com.buildplan.preview.scene.ProvisionalValue
 import com.buildplan.preview.scene.UnexplainedWalls
 import com.buildplan.preview.ui.ResultHeadline
+import com.buildplan.preview.ui.headlineText
+import com.buildplan.preview.ui.outcomeHeadline
 import com.buildplan.preview.ui.resultHeadline
 import kotlinx.serialization.json.Json
 import org.junit.Assert.assertEquals
@@ -59,5 +62,32 @@ class ResultHeadlineTest {
         val now = json.decodeFromString(UnexplainedWalls.serializer(), """{"count":1,"lengthM":1.794087,"bandLengthM":9.453752}""")
         assertEquals(1.794087, now.lengthM, 0.0)
         assertEquals(9.453752, now.bandLengthM ?: 0.0, 0.0)
+    }
+
+    @Test
+    fun `the source sheet shows completeness on the same condition and heads it by the record's own verdict`() {
+        val open = PreviewOutcome(completeness = ModelCompleteness(verdict = ModelCompleteness.COMPLETE_WITH_OPEN_QUESTIONS))
+        assertTrue(open.hasDetails)
+        assertEquals(ResultHeadline.OPEN_QUESTIONS, outcomeHeadline(open))
+        assertEquals(R.string.analyzer_result_open_questions, headlineText(outcomeHeadline(open)))
+        val complete = PreviewOutcome(completeness = ModelCompleteness(verdict = ModelCompleteness.COMPLETE))
+        assertTrue(complete.hasDetails)
+        assertEquals(R.string.analyzer_result_ready, headlineText(outcomeHeadline(complete)))
+        // a model with questions is never said partial; only a partial record is
+        assertFalse(outcomeHeadline(open) == ResultHeadline.PARTIAL)
+        val partial = PreviewOutcome(outcome = PreviewOutcome.PARTIAL_3D_PREVIEW, partial = PartialPreview(), completeness = ModelCompleteness(verdict = ModelCompleteness.PARTIAL))
+        assertEquals(R.string.analyzer_result_partial, headlineText(outcomeHeadline(partial)))
+        assertEquals(ResultHeadline.LIMITED, outcomeHeadline(PreviewOutcome(completeness = ModelCompleteness(verdict = ModelCompleteness.PARTIAL))))
+    }
+
+    @Test
+    fun `a stored record without completeness keeps its old behaviour on the sheet`() {
+        assertFalse(PreviewOutcome().hasDetails)
+        assertNull(outcomeHeadline(PreviewOutcome()))
+        val provisionalOnly = PreviewOutcome(provisional = listOf(ProvisionalValue("ROOF_PITCH", "assumed")))
+        assertTrue(provisionalOnly.hasDetails)
+        assertEquals(R.string.house_model_outcome, headlineText(outcomeHeadline(provisionalOnly)))
+        val oldPartial = PreviewOutcome(outcome = PreviewOutcome.PARTIAL_3D_PREVIEW, partial = PartialPreview())
+        assertEquals(R.string.analyzer_result_partial, headlineText(outcomeHeadline(oldPartial)))
     }
 }

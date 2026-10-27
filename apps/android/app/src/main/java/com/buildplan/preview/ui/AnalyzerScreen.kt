@@ -1,5 +1,6 @@
 package com.buildplan.preview.ui
 
+import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -630,14 +631,7 @@ private fun Result(summary: AnalysisSummary, entry: DownloadedSceneEntry, local:
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Space.s)) {
             Icon(if (headline == ResultHeadline.READY) ShellIcons.check else ShellIcons.caution, null, tint = Palette.Ink, modifier = Modifier.size(Sizes.iconSmall))
             Text(
-                stringResource(
-                    when (headline) {
-                        ResultHeadline.PARTIAL -> R.string.analyzer_result_partial
-                        ResultHeadline.LIMITED -> R.string.analyzer_result_limited
-                        ResultHeadline.OPEN_QUESTIONS -> R.string.analyzer_result_open_questions
-                        ResultHeadline.READY -> R.string.analyzer_result_ready
-                    },
-                ),
+                stringResource(headlineText(headline)),
                 style = MaterialTheme.typography.titleMedium,
                 color = Palette.Ink,
                 // The end of a job minutes long is said as it happens, not found later (cycle 3, C3-06).
@@ -683,15 +677,31 @@ internal enum class ResultHeadline { PARTIAL, LIMITED, OPEN_QUESTIONS, READY }
  * questions the analyzer names and leaves open (`COMPLETE_WITH_OPEN_QUESTIONS`); a completeness verdict of `PARTIAL`
  * on a model delivered whole is at least limited.
  */
-internal fun resultHeadline(summary: AnalysisSummary): ResultHeadline {
-    val preview = summary.preview
-    return when {
-        preview.isPartial -> ResultHeadline.PARTIAL
-        summary.unresolved.isNotEmpty() || summary.limitingWarnings.isNotEmpty() -> ResultHeadline.LIMITED
-        preview.completeness?.verdict == ModelCompleteness.PARTIAL -> ResultHeadline.LIMITED
-        preview.hasOpenQuestions -> ResultHeadline.OPEN_QUESTIONS
-        else -> ResultHeadline.READY
-    }
+internal fun resultHeadline(summary: AnalysisSummary): ResultHeadline = when {
+    summary.preview.isPartial -> ResultHeadline.PARTIAL
+    summary.unresolved.isNotEmpty() || summary.limitingWarnings.isNotEmpty() -> ResultHeadline.LIMITED
+    else -> outcomeHeadline(summary.preview) ?: ResultHeadline.READY
+}
+
+/**
+ * What the stored record alone says the model is, for the source sheet: the same order as [resultHeadline] without
+ * the run's warnings. Null when it says nothing — a record stored before `completeness` that is not partial.
+ */
+internal fun outcomeHeadline(preview: PreviewOutcome): ResultHeadline? = when {
+    preview.isPartial -> ResultHeadline.PARTIAL
+    preview.completeness?.verdict == ModelCompleteness.PARTIAL -> ResultHeadline.LIMITED
+    preview.hasOpenQuestions -> ResultHeadline.OPEN_QUESTIONS
+    preview.completeness?.verdict == ModelCompleteness.COMPLETE -> ResultHeadline.READY
+    else -> null
+}
+
+@StringRes
+internal fun headlineText(headline: ResultHeadline?): Int = when (headline) {
+    ResultHeadline.PARTIAL -> R.string.analyzer_result_partial
+    ResultHeadline.LIMITED -> R.string.analyzer_result_limited
+    ResultHeadline.OPEN_QUESTIONS -> R.string.analyzer_result_open_questions
+    ResultHeadline.READY -> R.string.analyzer_result_ready
+    null -> R.string.house_model_outcome
 }
 
 /**
