@@ -1,0 +1,824 @@
+{
+ "schema": "iu03b.labels-archon-ctrl/1",
+ "freezeSha": "88f80ccc9ad8e7208eeba42f139c482860f21485",
+ "note": "agent labels from anonymised contact sheets (sorted by hash, no captions, no house names), made before any model ran on these images; not human-verified",
+ "rows": [
+  {
+   "sha256": "03aebe1f8e0727967afee24310f4577d27ba1672a2faa85228366c7fdb94aaaf",
+   "file": "03aebe1f8e0727967afee24310f4577d27ba1672a2faa85228366c7fdb94aaaf.gif",
+   "project": "iu3b-ctrl-c2",
+   "label": "FLOOR_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 0
+  },
+  {
+   "sha256": "04207dd666c648de8bef548c1658b3d367fd202ac839088d24c0ce91d5551fe1",
+   "file": "04207dd666c648de8bef548c1658b3d367fd202ac839088d24c0ce91d5551fe1.jpg",
+   "project": "iu3b-ctrl-c4",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 1,
+   "ambiguous": "colour elevation render 1280x529 with trees; hip roof seen as a trapezoid, could be read as a slightly elevated frontal render"
+  },
+  {
+   "sha256": "0b07c79a488b7a0c8214526862dfcb368f07e6ee1b97bdaf2cbc435757adecbe",
+   "file": "0b07c79a488b7a0c8214526862dfcb368f07e6ee1b97bdaf2cbc435757adecbe.jpg",
+   "project": "iu3b-ctrl-c3",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "multiView": false,
+   "hard": true,
+   "nearFrontal": true,
+   "sheetIndex": 2
+  },
+  {
+   "sha256": "0f81931169695c3b00389da2fe7fc31c1edb7ce5e5ca8f2e0e2cc6d1682385ee",
+   "file": "0f81931169695c3b00389da2fe7fc31c1edb7ce5e5ca8f2e0e2cc6d1682385ee.jpg",
+   "project": "iu3b-ctrl-c1",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 3
+  },
+  {
+   "sha256": "10243456f573335f0f12e762db4f4eb5d7ee76bdab2cbfce57776463bdbc8152",
+   "file": "10243456f573335f0f12e762db4f4eb5d7ee76bdab2cbfce57776463bdbc8152.gif",
+   "project": "iu3b-ctrl-c4",
+   "label": "FLOOR_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 4
+  },
+  {
+   "sha256": "136869788f77de74024b09c2d3236315acbcf1c56b0ce14c54eb853fc330ff9b",
+   "file": "136869788f77de74024b09c2d3236315acbcf1c56b0ce14c54eb853fc330ff9b.jpg",
+   "project": "iu3b-ctrl-c3",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 5
+  },
+  {
+   "sha256": "165bdac806c3f300eed1667dd4cc919837ed51b31ffc5bbf75cb3d595de5d367",
+   "file": "165bdac806c3f300eed1667dd4cc919837ed51b31ffc5bbf75cb3d595de5d367.jpg",
+   "project": "iu3b-ctrl-c4",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 6
+  },
+  {
+   "sha256": "176fdde77b469ed671273f333ff3279e088b8ba4008c7abc2f0cf403e28dbe50",
+   "file": "176fdde77b469ed671273f333ff3279e088b8ba4008c7abc2f0cf403e28dbe50.gif",
+   "project": "iu3b-ctrl-c1",
+   "label": "FLOOR_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 7
+  },
+  {
+   "sha256": "239a2cb9eafaf99373e2b5561ccba1610e2eadf16b347004e72a4438bc905a79",
+   "file": "239a2cb9eafaf99373e2b5561ccba1610e2eadf16b347004e72a4438bc905a79.gif",
+   "project": "iu3b-ctrl-c4",
+   "label": "FLOOR_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 8
+  },
+  {
+   "sha256": "23a865631c1c5adcba1e37eb4cc149b82dfcede0834e9169ba6ffb808a5a638d",
+   "file": "23a865631c1c5adcba1e37eb4cc149b82dfcede0834e9169ba6ffb808a5a638d.gif",
+   "project": "iu3b-ctrl-c3",
+   "label": "FLOOR_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 9
+  },
+  {
+   "sha256": "25004737ebded36810451e1613f2821807d08c0862072216e68deec60425d99a",
+   "file": "25004737ebded36810451e1613f2821807d08c0862072216e68deec60425d99a.jpg",
+   "project": "iu3b-ctrl-c4",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 10
+  },
+  {
+   "sha256": "26ee30808f70b3ad7ca820c7938c1c02a3cbe0ccaaed9e6091d30135d8ab6f0a",
+   "file": "26ee30808f70b3ad7ca820c7938c1c02a3cbe0ccaaed9e6091d30135d8ab6f0a.jpg",
+   "project": "iu3b-ctrl-c2",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 11
+  },
+  {
+   "sha256": "282193bfbccb25c1608e4446e46744a3c3dda4c4e9a70bc46f0cba3935d1f893",
+   "file": "282193bfbccb25c1608e4446e46744a3c3dda4c4e9a70bc46f0cba3935d1f893.jpg",
+   "project": "iu3b-ctrl-c1",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 12
+  },
+  {
+   "sha256": "28ca2ec577309ceba19235f765814857f22881eba5e34d0725b6734bf29bf7db",
+   "file": "28ca2ec577309ceba19235f765814857f22881eba5e34d0725b6734bf29bf7db.jpg",
+   "project": "iu3b-ctrl-c4",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 13,
+   "ambiguous": "colour elevation render with trees and reflections"
+  },
+  {
+   "sha256": "2971cfd70242205458e6c775401c3f2e08121081e34bc1240894dba661c15b4e",
+   "file": "2971cfd70242205458e6c775401c3f2e08121081e34bc1240894dba661c15b4e.jpg",
+   "project": "iu3b-ctrl-c4",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "multiView": false,
+   "hard": true,
+   "nearFrontal": true,
+   "sheetIndex": 14,
+   "ambiguous": "200x150 thumbnail of a near-frontal view"
+  },
+  {
+   "sha256": "2cb62e5ada807eda4b1fbaf61eeee1dcb4fd0d3febb602319d864d24dd550eb8",
+   "file": "2cb62e5ada807eda4b1fbaf61eeee1dcb4fd0d3febb602319d864d24dd550eb8.jpg",
+   "project": "iu3b-ctrl-c2",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 15
+  },
+  {
+   "sha256": "30d9d2667e7609ae0384126992efde7ec7372ee69fd20b488ea22a99601aaafa",
+   "file": "30d9d2667e7609ae0384126992efde7ec7372ee69fd20b488ea22a99601aaafa.jpg",
+   "project": "iu3b-ctrl-c3",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 16
+  },
+  {
+   "sha256": "31892ff3624c2cdbd9e988c11bbb8279ec5201ddd1ad504e9a0955a2d2d5d549",
+   "file": "31892ff3624c2cdbd9e988c11bbb8279ec5201ddd1ad504e9a0955a2d2d5d549.gif",
+   "project": "iu3b-ctrl-c1",
+   "label": "FLOOR_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 17
+  },
+  {
+   "sha256": "31d0f2f73effeb176a84f0f4ca84df6c36ed202a5ef4b02693e9293326294f53",
+   "file": "31d0f2f73effeb176a84f0f4ca84df6c36ed202a5ef4b02693e9293326294f53.jpg",
+   "project": "iu3b-ctrl-c3",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "multiView": false,
+   "hard": true,
+   "nearFrontal": true,
+   "sheetIndex": 18
+  },
+  {
+   "sha256": "365eff46a1132401ffecd290494f6df7f50c553f71e12767e655497734fa8b89",
+   "file": "365eff46a1132401ffecd290494f6df7f50c553f71e12767e655497734fa8b89.gif",
+   "project": "iu3b-ctrl-c3",
+   "label": "FLOOR_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 19
+  },
+  {
+   "sha256": "3af400fe7f11360102afad6b7556e1e636a4f20dcdc1c4a226c0bbb36c866274",
+   "file": "3af400fe7f11360102afad6b7556e1e636a4f20dcdc1c4a226c0bbb36c866274.jpg",
+   "project": "iu3b-ctrl-c4",
+   "label": "SITE_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 20
+  },
+  {
+   "sha256": "3b0206877cfe0efa2297f0ab43b6bfbea036d7b868c3cfd6ffe6a4627dd75935",
+   "file": "3b0206877cfe0efa2297f0ab43b6bfbea036d7b868c3cfd6ffe6a4627dd75935.jpg",
+   "project": "iu3b-ctrl-c4",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "multiView": false,
+   "hard": true,
+   "nearFrontal": true,
+   "sheetIndex": 21,
+   "ambiguous": "frontal rear view of a flat-roof villa; perspective visible mainly in the slab soffit"
+  },
+  {
+   "sha256": "3d95f7589583dd185305f7c6a86ce42f0f4a38c61446ffca1e64d9f3f8c04cfd",
+   "file": "3d95f7589583dd185305f7c6a86ce42f0f4a38c61446ffca1e64d9f3f8c04cfd.gif",
+   "project": "iu3b-ctrl-c1",
+   "label": "FLOOR_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 22
+  },
+  {
+   "sha256": "3e275c95ac16a88adfaf9d9e41adb5a4ade7faf9f88d0dafb812265959ea9f10",
+   "file": "3e275c95ac16a88adfaf9d9e41adb5a4ade7faf9f88d0dafb812265959ea9f10.jpg",
+   "project": "iu3b-ctrl-c3",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 23
+  },
+  {
+   "sha256": "448c119ccaa196c781e9651a3b5c1520a27fa6141344913c726ecfd04844975a",
+   "file": "448c119ccaa196c781e9651a3b5c1520a27fa6141344913c726ecfd04844975a.jpg",
+   "project": "iu3b-ctrl-c3",
+   "label": "TECHNICAL_SECTION",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 24
+  },
+  {
+   "sha256": "469ca2369dbc9cb8fdbf49dd2af9ce5c6ac72fae0e4c5f69c818958521745cc3",
+   "file": "469ca2369dbc9cb8fdbf49dd2af9ce5c6ac72fae0e4c5f69c818958521745cc3.jpg",
+   "project": "iu3b-ctrl-c1",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 25
+  },
+  {
+   "sha256": "4735c90a55cd5a05df634e3f80146719a0536a4a9daa6f0460010ab197cf2dfa",
+   "file": "4735c90a55cd5a05df634e3f80146719a0536a4a9daa6f0460010ab197cf2dfa.gif",
+   "project": "iu3b-ctrl-c4",
+   "label": "FLOOR_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 26
+  },
+  {
+   "sha256": "4a1dddc3e08a0ebf74c19445d7651e85e93686bb9020b0c88397599444b9d594",
+   "file": "4a1dddc3e08a0ebf74c19445d7651e85e93686bb9020b0c88397599444b9d594.gif",
+   "project": "iu3b-ctrl-c1",
+   "label": "FLOOR_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 27
+  },
+  {
+   "sha256": "5048150562d211cb6bdb2e71eb9eaeadbc49490ec66f5765e604426e816b37b3",
+   "file": "5048150562d211cb6bdb2e71eb9eaeadbc49490ec66f5765e604426e816b37b3.jpg",
+   "project": "iu3b-ctrl-c3",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 28
+  },
+  {
+   "sha256": "516df9a606f361763be718ff66104b90b22c7e5bc423e1185346ae510e707057",
+   "file": "516df9a606f361763be718ff66104b90b22c7e5bc423e1185346ae510e707057.gif",
+   "project": "iu3b-ctrl-c2",
+   "label": "FLOOR_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 29
+  },
+  {
+   "sha256": "52676425506bd5f576d417266f266666c68c1ea7b963edaca9f47a16f95a1bdd",
+   "file": "52676425506bd5f576d417266f266666c68c1ea7b963edaca9f47a16f95a1bdd.jpg",
+   "project": "iu3b-ctrl-c1",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 30
+  },
+  {
+   "sha256": "57f459d582ae1bdb09ff3244b14fa9f8e300a8a7df14661d75c190c70f1cf331",
+   "file": "57f459d582ae1bdb09ff3244b14fa9f8e300a8a7df14661d75c190c70f1cf331.jpg",
+   "project": "iu3b-ctrl-c1",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 31
+  },
+  {
+   "sha256": "5a44f086644c6046d96488c48e01e1c98825bd2dfafed3cdc3efc2977daa9137",
+   "file": "5a44f086644c6046d96488c48e01e1c98825bd2dfafed3cdc3efc2977daa9137.jpg",
+   "project": "iu3b-ctrl-c1",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 32
+  },
+  {
+   "sha256": "5aa118aaafb4639ac5b844ff3115fa2d7c5332ebf7e4e6257c985a4a872628e5",
+   "file": "5aa118aaafb4639ac5b844ff3115fa2d7c5332ebf7e4e6257c985a4a872628e5.jpg",
+   "project": "iu3b-ctrl-c2",
+   "label": "TECHNICAL_SECTION",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 33
+  },
+  {
+   "sha256": "636174f54ac6155719af977e22c60b5533be0b6e57ce90073a2a821d8b710490",
+   "file": "636174f54ac6155719af977e22c60b5533be0b6e57ce90073a2a821d8b710490.jpg",
+   "project": "iu3b-ctrl-c1",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 34
+  },
+  {
+   "sha256": "6439c0a39605b883c726ec4fa3657ceddc50b6f50d338b033dbf9a0c328161dd",
+   "file": "6439c0a39605b883c726ec4fa3657ceddc50b6f50d338b033dbf9a0c328161dd.gif",
+   "project": "iu3b-ctrl-c4",
+   "label": "FLOOR_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 35
+  },
+  {
+   "sha256": "6a62b5b225e6a6c41d28a559071db96d0b0d232549869b054e58f37cd9d0c56d",
+   "file": "6a62b5b225e6a6c41d28a559071db96d0b0d232549869b054e58f37cd9d0c56d.jpg",
+   "project": "iu3b-ctrl-c1",
+   "label": "TECHNICAL_SECTION",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 36
+  },
+  {
+   "sha256": "74ed757dab15a521694f842dcc74b84321730fad742767645644102a5c07cb89",
+   "file": "74ed757dab15a521694f842dcc74b84321730fad742767645644102a5c07cb89.jpg",
+   "project": "iu3b-ctrl-c2",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 37
+  },
+  {
+   "sha256": "7adc633d368b3c29118a4cd1b50bf4c1e19b6f77af952e6b8ed4cc356f508eac",
+   "file": "7adc633d368b3c29118a4cd1b50bf4c1e19b6f77af952e6b8ed4cc356f508eac.gif",
+   "project": "iu3b-ctrl-c2",
+   "label": "FLOOR_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 38
+  },
+  {
+   "sha256": "7af9cda5b24734429efcb7acf7dbbeeae41df9aa9d7918698432aa785c5eb09f",
+   "file": "7af9cda5b24734429efcb7acf7dbbeeae41df9aa9d7918698432aa785c5eb09f.jpg",
+   "project": "iu3b-ctrl-c4",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 39
+  },
+  {
+   "sha256": "7c210d075fc04d242c5ed3200a8b6fd36bf5fc1e95044fb03d708234156a3e78",
+   "file": "7c210d075fc04d242c5ed3200a8b6fd36bf5fc1e95044fb03d708234156a3e78.gif",
+   "project": "iu3b-ctrl-c2",
+   "label": "FLOOR_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 40
+  },
+  {
+   "sha256": "8b26a1a7ba8d21b660d64704fe472bff7ce0f5d339dd1cd05b9faeda0a333789",
+   "file": "8b26a1a7ba8d21b660d64704fe472bff7ce0f5d339dd1cd05b9faeda0a333789.jpg",
+   "project": "iu3b-ctrl-c2",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 41
+  },
+  {
+   "sha256": "8f6a901b090b2eae6e18784ca0c275a44be3672745b1d057e69ef2d0fafe93da",
+   "file": "8f6a901b090b2eae6e18784ca0c275a44be3672745b1d057e69ef2d0fafe93da.gif",
+   "project": "iu3b-ctrl-c3",
+   "label": "FLOOR_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 42
+  },
+  {
+   "sha256": "8f7ffdd4c363aefc967cf27b2b02dc382e305702ec184cf9b47d8873a67d3151",
+   "file": "8f7ffdd4c363aefc967cf27b2b02dc382e305702ec184cf9b47d8873a67d3151.gif",
+   "project": "iu3b-ctrl-c3",
+   "label": "FLOOR_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 43
+  },
+  {
+   "sha256": "9789b54e4a840105521e7638f4a7e9fba12020652e243a225035c749f769886c",
+   "file": "9789b54e4a840105521e7638f4a7e9fba12020652e243a225035c749f769886c.gif",
+   "project": "iu3b-ctrl-c2",
+   "label": "FLOOR_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 44
+  },
+  {
+   "sha256": "9d200c0d58999d464dfb156bc38cc7901b0bc53946faef4042e9ad9b117c4da8",
+   "file": "9d200c0d58999d464dfb156bc38cc7901b0bc53946faef4042e9ad9b117c4da8.jpg",
+   "project": "iu3b-ctrl-c2",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 45
+  },
+  {
+   "sha256": "a0064fb306475195236adde513bdd8254fd6a36c70119514266926f6168d1e0a",
+   "file": "a0064fb306475195236adde513bdd8254fd6a36c70119514266926f6168d1e0a.jpg",
+   "project": "iu3b-ctrl-c3",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 46
+  },
+  {
+   "sha256": "a2de0b82f85b4dc0bb8cf1b84e61def99e87638753d97ef3b5b5622b66f7b5f3",
+   "file": "a2de0b82f85b4dc0bb8cf1b84e61def99e87638753d97ef3b5b5622b66f7b5f3.jpg",
+   "project": "iu3b-ctrl-c4",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "multiView": false,
+   "hard": true,
+   "nearFrontal": true,
+   "sheetIndex": 47,
+   "ambiguous": "thumbnail-size frontal villa view, weak perspective"
+  },
+  {
+   "sha256": "a39d11a6526b83fef4ce06c9fbf00f7671c9aad1b43a94ae2a5a3d9f111a3f7c",
+   "file": "a39d11a6526b83fef4ce06c9fbf00f7671c9aad1b43a94ae2a5a3d9f111a3f7c.jpg",
+   "project": "iu3b-ctrl-c4",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "multiView": false,
+   "hard": true,
+   "nearFrontal": true,
+   "sheetIndex": 48,
+   "ambiguous": "frontal villa view, weak perspective"
+  },
+  {
+   "sha256": "a799ce552bc057f948722f3f566deb36bae9ea77ab6becf1f21e16086e90e08d",
+   "file": "a799ce552bc057f948722f3f566deb36bae9ea77ab6becf1f21e16086e90e08d.gif",
+   "project": "iu3b-ctrl-c4",
+   "label": "FLOOR_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 49
+  },
+  {
+   "sha256": "ad060021db0b3249d34e6183297440609bbe64cf599aeb34fbb172656753016d",
+   "file": "ad060021db0b3249d34e6183297440609bbe64cf599aeb34fbb172656753016d.jpg",
+   "project": "iu3b-ctrl-c2",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 50
+  },
+  {
+   "sha256": "afd0de8b8c54a486846c6a0c9035c81dac90dfe053c7512996a99f414fdd0aaa",
+   "file": "afd0de8b8c54a486846c6a0c9035c81dac90dfe053c7512996a99f414fdd0aaa.gif",
+   "project": "iu3b-ctrl-c1",
+   "label": "FLOOR_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 51
+  },
+  {
+   "sha256": "b0faf1fbc101f9b78bcfb2e2a1906ce81d6107f7a4014155a457a5e459f0935b",
+   "file": "b0faf1fbc101f9b78bcfb2e2a1906ce81d6107f7a4014155a457a5e459f0935b.jpg",
+   "project": "iu3b-ctrl-c3",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 52
+  },
+  {
+   "sha256": "b6837412eab8a57fefdf945115f67e899f17c73f9bf0c1a6d54269628c301bbe",
+   "file": "b6837412eab8a57fefdf945115f67e899f17c73f9bf0c1a6d54269628c301bbe.jpg",
+   "project": "iu3b-ctrl-c2",
+   "label": "SITE_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 53
+  },
+  {
+   "sha256": "b8f27416659a026244b94d4aa84c381cb587d492f0a57b1a16df7e7c39062ec5",
+   "file": "b8f27416659a026244b94d4aa84c381cb587d492f0a57b1a16df7e7c39062ec5.jpg",
+   "project": "iu3b-ctrl-c3",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 54
+  },
+  {
+   "sha256": "badaf7a387a22225ecef916acc286124f72c8883f816ddfcaf3ae96371ab68c2",
+   "file": "badaf7a387a22225ecef916acc286124f72c8883f816ddfcaf3ae96371ab68c2.gif",
+   "project": "iu3b-ctrl-c1",
+   "label": "FLOOR_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 55
+  },
+  {
+   "sha256": "bcd7cbd44a0be0bb4bcf53da4e3789dd607323e362b9c99620ab7c3851375caa",
+   "file": "bcd7cbd44a0be0bb4bcf53da4e3789dd607323e362b9c99620ab7c3851375caa.jpg",
+   "project": "iu3b-ctrl-c3",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 56
+  },
+  {
+   "sha256": "c1c27ef55c78e650488395aa7552a130ecbde343d4da370b5b5c19ab59df375e",
+   "file": "c1c27ef55c78e650488395aa7552a130ecbde343d4da370b5b5c19ab59df375e.jpg",
+   "project": "iu3b-ctrl-c3",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 57
+  },
+  {
+   "sha256": "c56d6d79bda103985ce7851e540dfc1f44367c00fec79ab763b88ae3f63e72c9",
+   "file": "c56d6d79bda103985ce7851e540dfc1f44367c00fec79ab763b88ae3f63e72c9.jpg",
+   "project": "iu3b-ctrl-c1",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 58
+  },
+  {
+   "sha256": "c700e76c3f16161ba3e26885614de24a019d155daa90f79fe11dbad9897a61b4",
+   "file": "c700e76c3f16161ba3e26885614de24a019d155daa90f79fe11dbad9897a61b4.gif",
+   "project": "iu3b-ctrl-c1",
+   "label": "FLOOR_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 59
+  },
+  {
+   "sha256": "cb15bd22a2f05ca3520e0deec1b13b678983b45bcde07744c29a62e364a9f7a3",
+   "file": "cb15bd22a2f05ca3520e0deec1b13b678983b45bcde07744c29a62e364a9f7a3.jpg",
+   "project": "iu3b-ctrl-c3",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "multiView": false,
+   "hard": true,
+   "nearFrontal": true,
+   "sheetIndex": 60
+  },
+  {
+   "sha256": "ce3f5c777fb42da5c4d92ad88b73bad40eb7901f00a82fc9c64916d65d7c169d",
+   "file": "ce3f5c777fb42da5c4d92ad88b73bad40eb7901f00a82fc9c64916d65d7c169d.jpg",
+   "project": "iu3b-ctrl-c3",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 61
+  },
+  {
+   "sha256": "d1cc86d8a4779fd637c361992727ea19177fb32658706508a0ae1b53aa9653c5",
+   "file": "d1cc86d8a4779fd637c361992727ea19177fb32658706508a0ae1b53aa9653c5.jpg",
+   "project": "iu3b-ctrl-c4",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 62
+  },
+  {
+   "sha256": "d2469eb42071635546eedecd6f5f9addda87379b13e3e1bbf391a0b7982cdbaf",
+   "file": "d2469eb42071635546eedecd6f5f9addda87379b13e3e1bbf391a0b7982cdbaf.jpg",
+   "project": "iu3b-ctrl-c2",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 63
+  },
+  {
+   "sha256": "d64c37a04022b4e9f8b5b8cae9a59a805ea214719292bc02e837fe5fccb38aef",
+   "file": "d64c37a04022b4e9f8b5b8cae9a59a805ea214719292bc02e837fe5fccb38aef.jpg",
+   "project": "iu3b-ctrl-c2",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 64
+  },
+  {
+   "sha256": "d6f5aff4b9c0d7a7b596740c84364981355d7041f2a19263b0f48eedbb16280c",
+   "file": "d6f5aff4b9c0d7a7b596740c84364981355d7041f2a19263b0f48eedbb16280c.jpg",
+   "project": "iu3b-ctrl-c3",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "multiView": false,
+   "hard": true,
+   "nearFrontal": true,
+   "sheetIndex": 65,
+   "ambiguous": "200x150 thumbnail of a near-frontal view"
+  },
+  {
+   "sha256": "dd5b687e87f2db2a5f445cc19d292e2dda33a8d5f9582045ba253307fa17fe62",
+   "file": "dd5b687e87f2db2a5f445cc19d292e2dda33a8d5f9582045ba253307fa17fe62.jpg",
+   "project": "iu3b-ctrl-c1",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 66
+  },
+  {
+   "sha256": "e10e249b014b5dbe658a7ce5d05a1c13be84bc3217463625333b61259d010ffa",
+   "file": "e10e249b014b5dbe658a7ce5d05a1c13be84bc3217463625333b61259d010ffa.gif",
+   "project": "iu3b-ctrl-c2",
+   "label": "FLOOR_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 67
+  },
+  {
+   "sha256": "e2dd28d52cd84e22977742c1dcef1b439bbb432394d138a5d70591f28d3cb8ee",
+   "file": "e2dd28d52cd84e22977742c1dcef1b439bbb432394d138a5d70591f28d3cb8ee.jpg",
+   "project": "iu3b-ctrl-c2",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 68
+  },
+  {
+   "sha256": "e3eeefaa1a200114900b2d949aa90590e8a21bd7765bc341ab6be6cec315787d",
+   "file": "e3eeefaa1a200114900b2d949aa90590e8a21bd7765bc341ab6be6cec315787d.gif",
+   "project": "iu3b-ctrl-c4",
+   "label": "FLOOR_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 69
+  },
+  {
+   "sha256": "e66f540ac53c5c01dd6aca5d36167e4e95291fe7930a054ff3aacb8fbdcadc2e",
+   "file": "e66f540ac53c5c01dd6aca5d36167e4e95291fe7930a054ff3aacb8fbdcadc2e.gif",
+   "project": "iu3b-ctrl-c1",
+   "label": "FLOOR_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 70
+  },
+  {
+   "sha256": "eb69083b66de7a125839fa9abd913cec6c72c58051c7c348f7d45c539c94e808",
+   "file": "eb69083b66de7a125839fa9abd913cec6c72c58051c7c348f7d45c539c94e808.gif",
+   "project": "iu3b-ctrl-c2",
+   "label": "FLOOR_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 71
+  },
+  {
+   "sha256": "eec8286dafbe864e045d66c54a273d41922df5a433965b3c9cd3e54f22d489b8",
+   "file": "eec8286dafbe864e045d66c54a273d41922df5a433965b3c9cd3e54f22d489b8.jpg",
+   "project": "iu3b-ctrl-c1",
+   "label": "SITE_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 72
+  },
+  {
+   "sha256": "f0c3773ce372f4a21e8900fd203e21bf23deb357fdf307376da11ac8ab4a9a25",
+   "file": "f0c3773ce372f4a21e8900fd203e21bf23deb357fdf307376da11ac8ab4a9a25.gif",
+   "project": "iu3b-ctrl-c4",
+   "label": "FLOOR_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 73
+  },
+  {
+   "sha256": "f4a9ccbb189425481cfb0fc31b15d7bd6ab01b5b23f8b4a596240c9d669f4b0f",
+   "file": "f4a9ccbb189425481cfb0fc31b15d7bd6ab01b5b23f8b4a596240c9d669f4b0f.jpg",
+   "project": "iu3b-ctrl-c1",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 74
+  },
+  {
+   "sha256": "f7edef24c20d6ef2270f24032182080f08f86a6b462612066569477de0a257e9",
+   "file": "f7edef24c20d6ef2270f24032182080f08f86a6b462612066569477de0a257e9.gif",
+   "project": "iu3b-ctrl-c4",
+   "label": "FLOOR_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 75
+  },
+  {
+   "sha256": "f8b82a50c933a75ede4e900f414e64a0e044b5e01b11ec617edea13e1b090feb",
+   "file": "f8b82a50c933a75ede4e900f414e64a0e044b5e01b11ec617edea13e1b090feb.jpg",
+   "project": "iu3b-ctrl-c3",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 76
+  },
+  {
+   "sha256": "fa045832629de810c0d96af7655c5e4fefcbdd04443e28ad34f65971583e55bd",
+   "file": "fa045832629de810c0d96af7655c5e4fefcbdd04443e28ad34f65971583e55bd.jpg",
+   "project": "iu3b-ctrl-c2",
+   "label": "ORTHOGRAPHIC_ELEVATION",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 77
+  },
+  {
+   "sha256": "fc8a63d0ff981a59ac9bdadba14b91a805fd86d4f76910e4fdc10b1e33fd0aff",
+   "file": "fc8a63d0ff981a59ac9bdadba14b91a805fd86d4f76910e4fdc10b1e33fd0aff.jpg",
+   "project": "iu3b-ctrl-c3",
+   "label": "SITE_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 78
+  },
+  {
+   "sha256": "fc91152a9ad747eba9fa2d7794f29177e646b08872fc5c5a7aeb86b9ceedff78",
+   "file": "fc91152a9ad747eba9fa2d7794f29177e646b08872fc5c5a7aeb86b9ceedff78.jpg",
+   "project": "iu3b-ctrl-c4",
+   "label": "TECHNICAL_SECTION",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 79
+  },
+  {
+   "sha256": "fd3c5bf6a8a3c4bd4fe0c5eb94937d572822c1e9e72c7cea7ae8ab86f6296640",
+   "file": "fd3c5bf6a8a3c4bd4fe0c5eb94937d572822c1e9e72c7cea7ae8ab86f6296640.gif",
+   "project": "iu3b-ctrl-c2",
+   "label": "FLOOR_PLAN",
+   "multiView": false,
+   "hard": false,
+   "nearFrontal": false,
+   "sheetIndex": 80
+  }
+ ]
+}
