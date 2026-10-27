@@ -17,6 +17,8 @@ data class PreviewOutcome(
     val built: PreviewBuilt = PreviewBuilt(),
     val provisional: List<ProvisionalValue> = emptyList(),
     val partial: PartialPreview? = null,
+    /** N7-FIX-04: completeness kept apart, and one verdict; absent from an older analyzer. */
+    val completeness: ModelCompleteness? = null,
 ) {
     /** A model the analyzer delivered as the last valid part of the house, never as a complete reconstruction. */
     val isPartial: Boolean get() = outcome == PARTIAL_3D_PREVIEW && partial != null
@@ -58,7 +60,44 @@ data class PartialPreview(
     val ringCollisions: List<RingCollision> = emptyList(),
     /** N7-COUNCIL-FIX-03: bodies the plan draws walled that the model does not build, with the cause; absent from an older analyzer. */
     val missingBodies: List<MissingBody> = emptyList(),
+    /** N7-FIX-04: BLOCKING reasons the chosen layout holds unresolved; the model built from it is kept. */
+    val layoutBlocking: List<LayoutBlocking> = emptyList(),
 )
+
+@Serializable
+data class LayoutBlocking(val code: String = "", val what: String = "", val why: String = "")
+
+/**
+ * N7-FIX-04: what the analyzer may say about the model as a whole. `verdict` is `COMPLETE`,
+ * `COMPLETE_WITH_OPEN_QUESTIONS` or `PARTIAL`; the coverage is against the analyzer's own accepted reading of the plan,
+ * never on its own a statement about the source.
+ */
+@Serializable
+data class ModelCompleteness(
+    val verdict: String = "",
+    val decomposition: CompletenessDecomposition = CompletenessDecomposition(),
+    val missingBodies: List<String> = emptyList(),
+    val unresolvedAreas: List<CompletenessArea> = emptyList(),
+    val unexplainedWalls: UnexplainedWalls = UnexplainedWalls(),
+    val conflicts: CompletenessConflicts = CompletenessConflicts(),
+    val modelRefusals: Int = 0,
+    val why: String = "",
+)
+
+@Serializable
+data class CompletenessDecomposition(val coverage: Double = 0.0, val drawnBuiltM2: Double = 0.0, val representedM2: Double = 0.0, val basis: String = "")
+
+@Serializable
+data class CompletenessArea(val id: String = "", val areaM2: Double = 0.0, val why: String = "")
+
+@Serializable
+data class UnexplainedWalls(val count: Int = 0, val lengthM: Double = 0.0)
+
+@Serializable
+data class CompletenessConflicts(val blocking: List<CompletenessConflict> = emptyList(), val degrading: List<CompletenessConflict> = emptyList())
+
+@Serializable
+data class CompletenessConflict(val code: String = "", val what: String = "")
 
 /** N7-COUNCIL-FIX-03: a drawn body the model lost, as the analyzer weighed it: where, how large, and the step that lost it. */
 @Serializable

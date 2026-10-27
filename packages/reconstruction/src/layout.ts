@@ -43,7 +43,7 @@ import type { SourceCoordinateFrame, SourceObservationGraph } from '@buildapp/so
 import type { CoordinateRegistration, DimensionChain, MetricEvidence, MetricEvidenceSet } from '@buildapp/source-metrics'
 import { bodyWallThickness, houseWallThickness, minBodySpanM } from './exterior-walls.js'
 import type { WallThicknessReading } from './exterior-walls.js'
-import { bandWallThickness, decomposePlan, planBodies, planExtent, recutSlivers, walledFirstRegions, wallClusterExtent } from './plan-decomposition.js'
+import { DEFAULT_MIN_CELL_M, bandWallThickness, decomposePlan, planBodies, planExtent, recutSlivers, walledFirstRegions, wallClusterExtent } from './plan-decomposition.js'
 import type { EndSpanDecision, ExtentProvenance, ExtentRefutation, PlanExtent } from './plan-decomposition.js'
 import { wallWitness } from './plan-extent.js'
 import type { WallWitness } from './plan-extent.js'
@@ -1161,7 +1161,7 @@ export type WorldFrame = {
  * The result is a ladder: a metric value for every grid line, built by walking
  * along it and adding the chain's own centimetres wherever they are stated.
  */
-export type AxisSpan = { metres: number; evidenceIds: string[]; chainIds: string[]; stated: boolean; agreed: number; why: string }
+export type AxisSpan = { metres: number; /** N7-FIX-04: the stating chain's ticks land within a pixel of both lines. */ landed: boolean; evidenceIds: string[]; chainIds: string[]; stated: boolean; agreed: number; why: string }
 export type AxisLadder = { at: (px: number) => number; span: (fromPx: number, toPx: number) => AxisSpan }
 
 export function axisLadder(
@@ -1191,11 +1191,14 @@ export function axisLadder(
   }
 
   /** Every chain that states the span between two pixel positions, with the centimetres it states. */
-  const statements = (fromPx: number, toPx: number): Array<{ cm: number; chainId: string; evidenceIds: string[] }> => {
-    const out: Array<{ cm: number; chainId: string; evidenceIds: string[] }> = []
+  const statements = (fromPx: number, toPx: number): Array<{ cm: number; chainId: string; evidenceIds: string[]; offPx: number; overall: boolean }> => {
+    const out: Array<{ cm: number; chainId: string; evidenceIds: string[]; offPx: number; overall: boolean }> = []
     for (const chain of alongAxis) {
       const segments = [...chain.segments].sort((a, b) => a.fromPx - b.fromPx)
-      const first = segments.findIndex((seg) => Math.abs(seg.fromPx - fromPx) <= tolerancePx)
+      // N7-FIX-04: the tick NEAREST each end, not the first within tolerance: a 0.15 m set-back puts two ticks within
+      // half a wall of one face, and the first of them stated the house 0.15 m short
+      let first = -1
+      for (let i = 0; i < segments.length; i += 1) if (Math.abs(segments[i].fromPx - fromPx) <= tolerancePx && (first < 0 || Math.abs(segments[i].fromPx - fromPx) < Math.abs(segments[first].fromPx - fromPx))) first = i
       if (first < 0) continue
       let total = 0
       const ids: string[] = []
@@ -1204,8 +1207,11 @@ export function axisLadder(
         if (value === undefined) break
         total += value
         if (segments[i].evidenceId !== undefined) ids.push(segments[i].evidenceId as string)
-        if (Math.abs(segments[i].toPx - toPx) <= tolerancePx) {
-          out.push({ cm: round6(total), chainId: chain.id, evidenceIds: ids })
+        const next = segments[i + 1]
+        const nearer = next !== undefined && Math.abs(next.fromPx - segments[i].toPx) <= tolerancePx && Math.abs(next.toPx - toPx) < Math.abs(segments[i].toPx - toPx) && valueOf(next) !== undefined
+        if (Math.abs(segments[i].toPx - toPx) <= tolerancePx && !nearer) {
+          const offPx = round6(Math.abs(segments[first].fromPx - fromPx) + Math.abs(segments[i].toPx - toPx))
+          out.push({ cm: round6(total), chainId: chain.id, evidenceIds: ids, offPx, overall: segments.length === 1 && segments[0].origin === 'READ' && offPx < 1 })
           break
         }
         if (segments[i].toPx > toPx + tolerancePx) break
@@ -1219,12 +1225,18 @@ export function axisLadder(
     const said = statements(Math.min(fromPx, toPx), Math.max(fromPx, toPx))
     const pixels = round6(Math.abs(toPx - fromPx) * mpp)
     if (said.length === 0) {
-      return { metres: pixels, evidenceIds: [], chainIds: [], stated: false, agreed: 0, why: `${Math.round(Math.abs(toPx - fromPx))} px at the sheet's own scale of ${mpp} m/px; no chain measures this span` }
+      return { metres: pixels, landed: false, evidenceIds: [], chainIds: [], stated: false, agreed: 0, why: `${Math.round(Math.abs(toPx - fromPx))} px at the sheet's own scale of ${mpp} m/px; no chain measures this span` }
     }
-    const best = [...said].sort((a, b) => b.evidenceIds.length - a.evidenceIds.length || a.chainId.localeCompare(b.chainId))[0]
+    // N7-FIX-04: a chain of one printed number, read, whose ticks land ON the two lines (an overall dimension) states their
+    // span before a sum of segments that ends off them — a detail chain whose 0.15 m end segment was never drawn, or
+    // whose last tick is 1.5 px off the face and whose last segment the chain arithmetic filled in. Otherwise the count
+    // of read segments decides, as before (a detail chain landing on a wall's inner face does not overrule the overall
+    // dimension of the outer faces: that is the wall strip's question, 005Q).
+    const best = [...said].sort((a, b) => Number(b.overall && !said.every((x) => x.overall)) - Number(a.overall && !said.every((x) => x.overall)) || b.evidenceIds.length - a.evidenceIds.length || a.chainId.localeCompare(b.chainId))[0]
     const agreed = said.filter((x) => Math.abs(x.cm - best.cm) <= 2).length
     return {
       metres: round6(best.cm / 100),
+      landed: best.offPx < 1,
       evidenceIds: [...new Set(said.flatMap((x) => x.evidenceIds))].sort(),
       chainIds: said.map((x) => x.chainId).sort(),
       stated: true,
@@ -1248,16 +1260,25 @@ export function axisLadder(
   // are left to the scale, interpolated between their fixed neighbours.
   const metric: number[] = lines.map((l) => round6((l.px - lines[0]?.px) * mpp))
   const fixed = new Array<boolean>(lines.length).fill(false)
-  const claims: Array<{ i: number; j: number; metres: number; length: number }> = []
+  const claims: Array<{ i: number; j: number; metres: number; length: number; landed: boolean }> = []
   for (let i = 0; i < lines.length; i += 1) {
     for (let j = i + 1; j < lines.length; j += 1) {
       const said = span(lines[i].px, lines[j].px)
-      if (said.stated) claims.push({ i, j, metres: said.metres, length: lines[j].px - lines[i].px })
+      if (said.stated) claims.push({ i, j, metres: said.metres, length: lines[j].px - lines[i].px, landed: said.landed })
     }
   }
   claims.sort((a, b) => b.length - a.length || a.i - b.i || a.j - b.j)
-  for (const claim of claims) {
-    if (fixed[claim.i] && fixed[claim.j]) continue
+  for (const given of claims) {
+    if (fixed[given.i] && fixed[given.j]) continue
+    // N7-FIX-04: a statement whose ticks end a pixel or more off its lines (a detail chain whose last tick misses the
+    // face, its last segment filled in by the chain arithmetic) does not place a line that a statement LANDING on it
+    // places from a line already fixed: the landed one is applied in its stead
+    let claim = given
+    if (!given.landed && fixed[given.i] !== fixed[given.j]) {
+      const k = fixed[given.i] ? given.j : given.i
+      const instead = claims.find((c) => c.landed && ((c.i === k && fixed[c.j]) || (c.j === k && fixed[c.i])))
+      if (instead) claim = instead
+    }
     if (!fixed[claim.i] && !fixed[claim.j]) {
       fixed[claim.i] = true
       metric[claim.j] = round6(metric[claim.i] + claim.metres)
@@ -1801,6 +1822,83 @@ function toOuterFaces(region: PlanRegion, bodies: readonly PlanRegion[], plan: P
   return { ...region, rect, why: `${region.why}; its ${moved.join(', ')} side${moved.length === 1 ? '' : 's'}, marked by a wall band alone, taken to the band's outer face` }
 }
 
+/**
+ * N7-FIX-04: the faces within a cell of a grid line that the grid does not keep — the lines thinned into it, and the
+ * ticks a chain along that axis prints there (a tick within half a wall of the line is merged before thinning).
+ */
+function facesNear(line: GridLine, chains: readonly DimensionChain[], axis: 'X' | 'Y', cellPx: number): number[] {
+  const ticks = chains.filter((c) => (c.axis === 'HORIZONTAL') === (axis === 'X')).flatMap((c) => c.ticksPx)
+  return [...new Set([...(line.thinnedPx ?? []), ...ticks.filter((t) => Math.abs(t - line.px) >= 0.5 && Math.abs(t - line.px) < cellPx)].map((t) => round6(t)))].sort((a, b) => a - b)
+}
+
+/** The grid's minimum cell (`minCellM`) in the base plan's pixels. */
+const minCellPxOf = (plan: PlanReading): number => DEFAULT_MIN_CELL_M / Math.max(plan.registration?.metresPerPixelX ?? 1, plan.registration?.metresPerPixelY ?? 1)
+
+/**
+ * N7-FIX-04 (set-back precision): a body whose side lies on a grid line the grid thinned another face into is moved
+ * onto that face when the body's own walls are drawn there and not on the line.
+ *
+ * The grid needs a cell's worth between lines (`minCellM`) and keeps one line for two faces closer than that: a garage
+ * set back 0.30 m from the house's front shares the house's front line, and was built to it — 0.30 m too deep. The
+ * cells keep the grid's line (what is enclosed is decided there); the body's geometry takes the face its own wall
+ * bands draw. For each side on such a line, every candidate face (the line, and each face thinned into it) is weighed
+ * by the length of wall band, along that side and within the body's span, whose OUTER face lies on it; the side moves
+ * to a thinned face only when its own bands are there and none are on the line. A side another body shares is never
+ * moved, and a side only ever moves inward (a face outside the line is a wall strip's, 005Q). Nothing is shortened by a
+ * convention: a face moves to where its wall is drawn, or stays.
+ */
+function recoverFaces(region: PlanRegion, bodies: readonly PlanRegion[], plan: PlanReading, chains: readonly DimensionChain[], cellPx: number): PlanRegion {
+  const { linesX, linesY } = plan.decomposition
+  const lineAt = (lines: readonly GridLine[], px: number): GridLine | undefined => lines.find((l) => Math.abs(l.px - px) < 0.5)
+  const rect = { ...region.rect }
+  const moved: string[] = []
+  const sides: Array<{ key: 'x0' | 'x1' | 'y0' | 'y1'; name: string }> = [
+    { key: 'x0', name: 'min x' },
+    { key: 'x1', name: 'max x' },
+    { key: 'y0', name: 'min z' },
+    { key: 'y1', name: 'max z' },
+  ]
+  for (const { key, name } of sides) {
+    const vertical = key === 'x0' || key === 'x1'
+    const line = lineAt(vertical ? linesX : linesY, region.rect[key])
+    // the faces thinned into the line, and the ticks a chain prints within a cell of it (a 0.15 m set-back's tick is
+    // merged with the line before the grid is thinned, and is a printed face all the same)
+    const thinned = line ? facesNear(line, chains, vertical ? 'X' : 'Y', cellPx) : []
+    if (!line || thinned.length === 0) continue
+    const shared = bodies.some((o) => {
+      if (o.rect === region.rect || o === region) return false
+      const opposite = key === 'x0' ? o.rect.x1 : key === 'x1' ? o.rect.x0 : key === 'y0' ? o.rect.y1 : o.rect.y0
+      const overlap = vertical ? Math.min(region.rect.y1, o.rect.y1) - Math.max(region.rect.y0, o.rect.y0) : Math.min(region.rect.x1, o.rect.x1) - Math.max(region.rect.x0, o.rect.x0)
+      return Math.abs(opposite - region.rect[key]) < 0.5 && overlap > 0
+    })
+    if (shared) continue
+    const [s0, s1] = vertical ? [region.rect.y0, region.rect.y1] : [region.rect.x0, region.rect.x1]
+    const support = (face: number): number => {
+      let len = 0
+      for (const b of plan.bands) {
+        if ((b.axis === 'VERTICAL') !== vertical) continue
+        // the band's outer face on this side: its far edge outward (pixel bounds are inclusive, faces half a pixel out)
+        const outer = key === 'x0' ? b.bounds.x0 - 0.5 : key === 'x1' ? b.bounds.x1 + 0.5 : key === 'y0' ? b.bounds.y0 - 0.5 : b.bounds.y1 + 0.5
+        if (Math.abs(outer - face) > Math.max(2, 0.35 * b.thickness)) continue
+        const [a0, a1] = vertical ? [b.bounds.y0, b.bounds.y1] : [b.bounds.x0, b.bounds.x1]
+        len += Math.max(0, Math.min(a1, s1) - Math.max(a0, s0))
+      }
+      return len
+    }
+    const onLine = support(line.px)
+    // inward only: a set-back face stands INSIDE the line the grid kept (the body is shorter than the grid says). A face
+    // outside it is the outer face of a wall whose inner face the body was cut on — the wall strip's question (005Q),
+    // answered there and not here
+    const inward = (t: number): boolean => (key === 'x0' || key === 'y0' ? t > line.px : t < line.px)
+    const best = thinned.filter(inward).map((t) => ({ t, len: support(t) })).sort((a, b) => b.len - a.len || a.t - b.t)[0]
+    if (!best || best.len <= 0 || onLine > 0) continue
+    rect[key] = best.t
+    moved.push(`${name} side from the grid line at ${line.px.toFixed(1)} px to its own wall's face at ${best.t.toFixed(1)} px (${best.len.toFixed(0)} px of its wall band there, none on the line)`)
+  }
+  if (moved.length === 0 || rect.x1 - rect.x0 <= 0 || rect.y1 - rect.y0 <= 0) return region
+  return { ...region, rect, why: `${region.why}; set-back face recovered: ${moved.join('; ')}` }
+}
+
 /** Which side of a region a given cell edge is, as a plan side. */
 const SIDE_OF_EDGE: PlanSide[] = ['MIN_Z', 'MAX_X', 'MAX_Z', 'MIN_X']
 export const oppositeSide = (side: PlanSide): PlanSide => (side === 'MIN_X' ? 'MAX_X' : side === 'MAX_X' ? 'MIN_X' : side === 'MIN_Z' ? 'MAX_Z' : 'MIN_Z')
@@ -1941,7 +2039,7 @@ export function inferStructuralLayout(given: StructuralLayoutOptions): Structura
   // front reaching its outer face; the pockets left between such strips are recesses in it (`bayStripsOf`).
   // A body outside the envelope the chains measure (an attached garage, a wing) has no chain stating where its walls
   // end; a side of it marked by a wall band alone is that wall's centre line, and the body reaches its outer face.
-  const regionOf = (found: (typeof built)[number]) => ((options.plan?.faces === 'OUTER_FACE' && options.plan.frameId === base.frame.id) || reachesBeyond(found.rect, envelope.rect) ? toOuterFaces(found, built, base) : found)
+  const regionOf = (found: (typeof built)[number]) => recoverFaces((options.plan?.faces === 'OUTER_FACE' && options.plan.frameId === base.frame.id) || reachesBeyond(found.rect, envelope.rect) ? toOuterFaces(found, built, base) : found, built, base, baseChains, minCellPxOf(base))
   const strips = bayStripsOf(built.map(regionOf), base.decomposition, frame, minBodySpanM(exteriorM))
   for (const t of strips.traces) options.debug?.(t)
   for (const found of strips.regions) {

@@ -42,13 +42,28 @@ export type BodyArea = {
 }
 
 export type BodyCompleteness = {
-  /** Drawn built area of the base plan against what the model's bodies cover of it, m². */
+  /**
+   * Drawn built area of the base plan against what the model's bodies cover of it, m². N7-FIX-04: this is completeness
+   * AGAINST THE ACCEPTED DECOMPOSITION — its own BUILT regions — and proves nothing about what the decomposition never
+   * enclosed; `unexplainedWalls` is the check that does not start from it.
+   */
   drawnBuiltM2: number
   representedM2: number
   coverage: number
   areas: BodyArea[]
   missing: BodyArea[]
+  /**
+   * N7-FIX-04: wall bands of the base plan, a metre or longer, that stand neither on a body of the model nor in an
+   * area named above — walls the plan draws and nothing in the reading accounts for (a garden wall, a fence drawn in
+   * wall ink, or a body the decomposition never enclosed). Read from the bands, not from the decomposition.
+   */
+  unexplainedWalls: Array<{ rectM: { x0: number; z0: number; x1: number; z1: number }; rectPx: { x0: number; y0: number; x1: number; y1: number }; lengthM: number; thicknessM: number }>
 }
+
+/** N7-FIX-04: a wall band this long or longer is a wall the reading must account for. */
+const UNEXPLAINED_WALL_MIN_M = 1.0
+/** How far outside a body's footprint its own wall may stand and still be its wall, m. */
+const OWN_WALL_REACH_M = 0.6
 
 /** A body covers an area when it stands on this share of it. */
 const COVERED = 0.9
@@ -65,6 +80,8 @@ export function bodyCompleteness(input: {
   dropped: ReadonlyArray<{ id: string; ring: PlanRing; why: string; deliberate: boolean }>
   /** The layout's gaps: an area named in one was left out on the record. */
   gaps: ReadonlyArray<{ id: string; what: string; reason: string }>
+  /** N7-FIX-04: the base plan's wall bands, in its pixels (absent: no independent check). */
+  bands?: ReadonlyArray<{ bounds: { x0: number; y0: number; x1: number; y1: number }; axis: 'HORIZONTAL' | 'VERTICAL'; thickness: number }>
 }): BodyCompleteness {
   const { decomposition: d, frame } = input
   const areas: BodyArea[] = []
@@ -123,7 +140,91 @@ export function bodyCompleteness(input: {
   }
   const drawnBuiltM2 = round6(areas.filter((a) => a.decision !== 'UNRESOLVED').reduce((a, b) => a + b.areaM2, 0))
   const representedM2 = round6(areas.filter((a) => a.decision === 'REPRESENTED' || a.decision === 'JOINED').reduce((a, b) => a + b.coveredM2, 0))
-  return { drawnBuiltM2, representedM2, coverage: drawnBuiltM2 > 0 ? round6(representedM2 / drawnBuiltM2) : 1, areas, missing: areas.filter((a) => a.decision === 'MISSING') }
+  // N7-FIX-04: the independent check — every wall band inside the plan's dimensioned extent, against the bodies and the
+  // named areas, by the length of it that stands on them (each grown by a wall and a little: a body's own outer wall)
+  const accounted = [...bodies.map((b) => b.rect), ...areas.map((a) => a.rectM)].map((r) => ({ x0: r.x0 - OWN_WALL_REACH_M, z0: r.z0 - OWN_WALL_REACH_M, x1: r.x1 + OWN_WALL_REACH_M, z1: r.z1 + OWN_WALL_REACH_M }))
+  const ext = d.extent
+  const unexplainedWalls: BodyCompleteness['unexplainedWalls'] = []
+  for (const b of input.bands ?? []) {
+    const cx = (b.bounds.x0 + b.bounds.x1) / 2
+    const cy = (b.bounds.y0 + b.bounds.y1) / 2
+    if (cx < ext.x0 || cx > ext.x1 || cy < ext.y0 || cy > ext.y1) continue
+    const r = rectOf(b.bounds)
+    const along = b.axis === 'HORIZONTAL'
+    const lengthM = round6(along ? r.x1 - r.x0 : r.z1 - r.z0)
+    if (lengthM < UNEXPLAINED_WALL_MIN_M) continue
+    // the length of its axis inside the union of the accounted rectangles, sampled every 5 cm
+    const n = Math.max(2, Math.ceil(lengthM / 0.05))
+    let inside = 0
+    for (let k = 0; k <= n; k += 1) {
+      const x = along ? r.x0 + ((r.x1 - r.x0) * k) / n : (r.x0 + r.x1) / 2
+      const z = along ? (r.z0 + r.z1) / 2 : r.z0 + ((r.z1 - r.z0) * k) / n
+      if (accounted.some((a) => x >= a.x0 && x <= a.x1 && z >= a.z0 && z <= a.z1)) inside += 1
+    }
+    const outsideM = lengthM * (1 - inside / (n + 1))
+    if (outsideM < UNEXPLAINED_WALL_MIN_M) continue
+    unexplainedWalls.push({ rectM: { x0: round6(r.x0), z0: round6(r.z0), x1: round6(r.x1), z1: round6(r.z1) }, rectPx: { ...b.bounds }, lengthM, thicknessM: round6(b.thickness * Math.max(frame.metresPerPixelX, frame.metresPerPixelY)) })
+  }
+  return { drawnBuiltM2, representedM2, coverage: drawnBuiltM2 > 0 ? round6(representedM2 / drawnBuiltM2) : 1, areas, missing: areas.filter((a) => a.decision === 'MISSING'), unexplainedWalls }
+}
+
+export type ModelCompletenessVerdict = 'COMPLETE' | 'COMPLETE_WITH_OPEN_QUESTIONS' | 'PARTIAL'
+
+/**
+ * N7-FIX-04: what the run may say about the model as a whole — four questions kept apart, then one verdict.
+ *
+ *   decomposition   every BUILT region of the accepted decomposition stands under a body (`coverage`) — a statement
+ *                   about the reading, never on its own about the source plan
+ *   unresolved      areas named and not built (pockets the drawing does not say are bodies) and walls nothing accounts for
+ *   conflicts       the chosen layout's own gate: what it holds BLOCKING, and what only degrades it
+ *   model           what was emitted and built: a refused object or a missing body makes it partial
+ *
+ * PARTIAL: a body missing, an object the model refused, or a BLOCKING reason the chosen layout never resolved.
+ * COMPLETE_WITH_OPEN_QUESTIONS: built whole, with unresolved areas, unexplained walls or degrading conflicts named.
+ * COMPLETE: none of these.
+ */
+export type ModelCompleteness = {
+  verdict: ModelCompletenessVerdict
+  decomposition: { coverage: number; drawnBuiltM2: number; representedM2: number; basis: 'ACCEPTED_DECOMPOSITION' }
+  missingBodies: string[]
+  unresolvedAreas: Array<{ id: string; areaM2: number; why: string }>
+  unexplainedWalls: { count: number; lengthM: number }
+  conflicts: { blocking: Array<{ code: string; what: string }>; degrading: Array<{ code: string; what: string }> }
+  modelRefusals: number
+  why: string
+}
+
+export function modelCompleteness(input: {
+  body: BodyCompleteness | undefined
+  gateReasons: ReadonlyArray<{ code: string; severity: string; what: string }>
+  modelRefusals: number
+}): ModelCompleteness {
+  const b = input.body
+  const missingBodies = (b?.missing ?? []).map((a) => a.id)
+  const unresolvedAreas = (b?.areas ?? []).filter((a) => a.decision === 'UNRESOLVED' || a.decision === 'OMITTED').map((a) => ({ id: a.id, areaM2: a.areaM2, why: a.why }))
+  const walls = b?.unexplainedWalls ?? []
+  const blocking = input.gateReasons.filter((r) => r.severity === 'BLOCKING').map((r) => ({ code: r.code, what: r.what }))
+  const degrading = input.gateReasons.filter((r) => r.severity === 'DEGRADING').map((r) => ({ code: r.code, what: r.what }))
+  const partial = missingBodies.length > 0 || blocking.length > 0 || input.modelRefusals > 0
+  const open = unresolvedAreas.length > 0 || walls.length > 0 || degrading.length > 0
+  const verdict: ModelCompletenessVerdict = partial ? 'PARTIAL' : open ? 'COMPLETE_WITH_OPEN_QUESTIONS' : 'COMPLETE'
+  const said: string[] = []
+  if (missingBodies.length > 0) said.push(`${missingBodies.length} drawn bod${missingBodies.length === 1 ? 'y' : 'ies'} missing from the model`)
+  if (blocking.length > 0) said.push(`the chosen layout holds ${blocking.map((x) => x.code).join(', ')} BLOCKING, unresolved`)
+  if (input.modelRefusals > 0) said.push(`${input.modelRefusals} object${input.modelRefusals === 1 ? '' : 's'} refused by the model`)
+  if (unresolvedAreas.length > 0) said.push(`${unresolvedAreas.length} area${unresolvedAreas.length === 1 ? '' : 's'} named and not built`)
+  if (walls.length > 0) said.push(`${walls.length} drawn wall${walls.length === 1 ? '' : 's'} (${walls.reduce((a, w) => a + w.lengthM, 0).toFixed(1)} m) no body or named area accounts for`)
+  if (degrading.length > 0) said.push(`degrading: ${[...new Set(degrading.map((x) => x.code))].join(', ')}`)
+  return {
+    verdict,
+    decomposition: { coverage: b?.coverage ?? 0, drawnBuiltM2: b?.drawnBuiltM2 ?? 0, representedM2: b?.representedM2 ?? 0, basis: 'ACCEPTED_DECOMPOSITION' },
+    missingBodies,
+    unresolvedAreas,
+    unexplainedWalls: { count: walls.length, lengthM: round6(walls.reduce((a, w) => a + w.lengthM, 0)) },
+    conflicts: { blocking, degrading },
+    modelRefusals: input.modelRefusals,
+    why: `${b ? `the accepted decomposition is ${Math.round((b.coverage) * 100)}% represented (its own built regions only)` : 'no decomposition to weigh'}${said.length > 0 ? `; ${said.join('; ')}` : '; nothing unresolved, unexplained or in conflict'}`,
+  }
 }
 
 function rectOfBay(d: PlanDecomposition, bay: GateBay): { x0: number; y0: number; x1: number; y1: number } {

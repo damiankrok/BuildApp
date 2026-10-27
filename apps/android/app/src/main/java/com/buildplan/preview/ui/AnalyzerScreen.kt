@@ -705,6 +705,16 @@ internal fun PreviewOutcomeDetails(preview: PreviewOutcome) {
                     }
                 }
             }
+            if (partial.layoutBlocking.isNotEmpty()) {
+                Section(stringResource(R.string.partial_layout_blocking)) {
+                    for (b in partial.layoutBlocking) {
+                        Column(Modifier.padding(bottom = Space.s), verticalArrangement = Arrangement.spacedBy(Space.xs)) {
+                            Text(b.code, style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
+                            StatusText(b.what)
+                        }
+                    }
+                }
+            }
             if (partial.missingBodies.isNotEmpty()) {
                 Section(stringResource(R.string.partial_missing_bodies)) {
                     for (m in partial.missingBodies) {
@@ -730,6 +740,21 @@ internal fun PreviewOutcomeDetails(preview: PreviewOutcome) {
                 Text(stringResource(R.string.partial_failed_row, f.commandIndex, f.type, f.id.orEmpty(), f.codes.joinToString(", ")), style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
                 if (f.message.isNotBlank()) StatusText(f.message)
                 for (other in partial.failures.drop(1)) StatusText(stringResource(R.string.partial_failed_row, other.commandIndex, other.type, other.id.orEmpty(), other.codes.joinToString(", ")))
+            }
+        }
+        preview.completeness?.let { c ->
+            Section(stringResource(R.string.completeness_title)) {
+                val verdict = when (c.verdict) {
+                    "COMPLETE" -> stringResource(R.string.completeness_complete)
+                    "COMPLETE_WITH_OPEN_QUESTIONS" -> stringResource(R.string.completeness_open_questions)
+                    else -> stringResource(R.string.completeness_partial)
+                }
+                Text(verdict, style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
+                StatusText(stringResource(R.string.completeness_decomposition, share(c.decomposition.coverage), metres(c.decomposition.representedM2), metres(c.decomposition.drawnBuiltM2)))
+                if (c.unresolvedAreas.isNotEmpty()) StatusText(stringResource(R.string.completeness_unresolved, c.unresolvedAreas.size))
+                if (c.unexplainedWalls.count > 0) StatusText(stringResource(R.string.completeness_walls, c.unexplainedWalls.count, metres(c.unexplainedWalls.lengthM)))
+                if (c.conflicts.blocking.isNotEmpty()) StatusText(stringResource(R.string.completeness_blocking, c.conflicts.blocking.joinToString(", ") { it.code }))
+                if (c.conflicts.degrading.isNotEmpty()) StatusText(stringResource(R.string.completeness_degrading, c.conflicts.degrading.map { it.code }.distinct().joinToString(", ")))
             }
         }
         Section(stringResource(R.string.partial_provisional)) {

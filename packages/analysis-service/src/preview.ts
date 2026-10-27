@@ -14,7 +14,7 @@
  * Nothing here decides anything about the building: it reads the solver's own records and the model it sealed.
  */
 import type { CanonicalBuildingModel } from '@buildapp/model'
-import type { PartialPreviewReport, PlanDiagnosticsReport } from '@buildapp/reconstruction'
+import type { ModelCompleteness, PartialPreviewReport, PlanDiagnosticsReport } from '@buildapp/reconstruction'
 import type { SourcePackage } from '@buildapp/source-package'
 import { selectedVariant } from '@buildapp/source-package'
 
@@ -62,6 +62,8 @@ export type PartialPreviewSummary = {
   ringCollisions?: NonNullable<PartialPreviewReport['ringCollisions']>
   /** N7-COUNCIL-FIX-03: bodies the plan draws walled that the model does not build, with the cause. */
   missingBodies?: NonNullable<PartialPreviewReport['missingBodies']>
+  /** N7-FIX-04: BLOCKING reasons the chosen layout holds unresolved; the model built from it is kept. */
+  layoutBlocking?: NonNullable<PartialPreviewReport['layoutBlocking']>
 }
 
 export type PreviewSummary = {
@@ -71,6 +73,11 @@ export type PreviewSummary = {
   built: { wallRings: number; walls: number; slabs: number; roofs: number; roofPlanes: number; openings: number; rooms: number; stairs: number }
   provisional: ProvisionalValue[]
   partial: PartialPreviewSummary | null
+  /**
+   * N7-FIX-04: completeness kept apart — against the accepted decomposition, what is unresolved, the conflicts, the
+   * model — and one verdict: COMPLETE, COMPLETE_WITH_OPEN_QUESTIONS or PARTIAL. Absent from a run with no plan reading.
+   */
+  completeness?: ModelCompleteness
 }
 
 /** The plan the bodies were read from, or null when the run read none. */
@@ -111,6 +118,7 @@ export function previewOf(input: {
   heights: { measured: boolean; assumedStoreyHeightM?: number }
   source: SourceBasis | null
   approximateRoofDatum?: { ridgeY: number }
+  completeness?: ModelCompleteness
 }): PreviewSummary {
   const { model, partial } = input
   const provisional: ProvisionalValue[] = []
@@ -130,7 +138,9 @@ export function previewOf(input: {
           checkpoint: partial.checkpoint ?? null,
           ...(partial.ringCollisions ? { ringCollisions: partial.ringCollisions } : {}),
           ...(partial.missingBodies ? { missingBodies: partial.missingBodies } : {}),
+          ...(partial.layoutBlocking ? { layoutBlocking: partial.layoutBlocking } : {}),
         }
       : null,
+    ...(input.completeness ? { completeness: input.completeness } : {}),
   }
 }

@@ -113,6 +113,13 @@ export type GridLine = {
    * body set back less than a cell from this one, whose own corners stop there and not here. Absent when none was.
    */
   mergedPx?: number[]
+  /**
+   * N7-FIX-04: every line the grid thinned into this one (`thinLines`), however far within a cell: the faces of a body
+   * set back up to a cell from this line. Kept apart from `mergedPx` (which also inherits that line's probes) so that a
+   * face is still known where its line is gone — for its corner (`wallIntervals`) and for the body's own face
+   * (`recoverFaces` in the layout). Absent when nothing was thinned into it.
+   */
+  thinnedPx?: number[]
   support: GridLineSupport
   /** 0..1. */
   confidence: number
@@ -392,12 +399,15 @@ export type PlanDecompositionOptions = {
 
 type CoreOptions = Required<Omit<PlanDecompositionOptions, 'sheetWallPx' | 'exteriorTicks' | 'openingAware' | 'checkpoint' | 'extentSides' | 'drawnGapRule'>>
 
+/** The least distance between two grid lines (`PlanDecompositionOptions.minCellM`), metres. */
+export const DEFAULT_MIN_CELL_M = 0.45
+
 const DEFAULTS: CoreOptions = {
   snapPx: 5,
   minBandCoverage: 0.18,
   closureThreshold: 0.62,
   contentInk: 0.02,
-  minCellM: 0.45,
+  minCellM: DEFAULT_MIN_CELL_M,
   fallbackWallPx: 12,
   minLinePx: 18,
   // A garage door is about 2.4 m and the widest domestic one about 3.0. Past
@@ -610,6 +620,7 @@ function thinLines(lines: readonly GridLine[], minGapPx: number, probeGapPx: num
       const merged = [...clash.probesPx, ...line.probesPx.filter((p) => Math.abs(p - clash.px) <= probeGapPx)]
       clash.probesPx = [...new Set(merged.map((p) => round6(p)))].sort((a, b) => a - b)
       if (Math.abs(line.px - clash.px) <= probeGapPx) clash.mergedPx = [...new Set([...(clash.mergedPx ?? []), round6(line.px)])].sort((a, b) => a - b)
+      clash.thinnedPx = [...new Set([...(clash.thinnedPx ?? []), round6(line.px), ...(line.thinnedPx ?? [])])].sort((a, b) => a - b)
       continue
     }
     kept.push({ ...line, probesPx: [...line.probesPx] })
@@ -650,9 +661,12 @@ function wallIntervals(bands: readonly Band[], axis: 'X' | 'Y', line: GridLine, 
     // further than the tolerance — where that stretch is INK, the corner block, and never across blank paper beyond a
     // wall's end. The line's own faces are read as they always were; the gate-bay reader (`shutGateBays`), which
     // asks for much more besides, looks for a corner at every probe of the mouth's line (`EVERY_PROBE`).
-    const faces = [line.px, ...(line.mergedPx ?? [])]
+    // N7-FIX-04: and at every face thinned into it (`thinnedPx`), however far within the cell: a 0.45 m set-back's
+    // line is thinned with no probe inherited, and its corner was read nowhere
+    const thinned = [...(line.mergedPx ?? []), ...(line.thinnedPx ?? [])]
+    const faces = [line.px, ...thinned]
     const near = band.segments.some((g) => faces.some((p) => g.from - tolerance <= p && g.to + tolerance >= p))
-    const cornerProbes = cornersAt === 'MERGED_FACES' ? (line.mergedPx ?? []) : line.probesPx
+    const cornerProbes = cornersAt === 'MERGED_FACES' ? thinned : [...line.probesPx, ...(line.thinnedPx ?? [])]
     const corner = !near && mask !== undefined && band.segments.some((g) => cornerProbes.some((p) => {
       // the stretch beyond the tolerance must be ink: what the tolerance already allows is not looked at again
       const gap: [number, number] | null = p > g.to + tolerance && p <= g.to + tolerance + band.thickness ? [g.to, p - tolerance] : p < g.from - tolerance && p >= g.from - tolerance - band.thickness ? [p + tolerance, g.from] : null
@@ -2488,20 +2502,42 @@ function shutGateBays(input: {
         break
       }
     }
-    // wall band along each side of the rectangle, weighted by length
-    const sideWall = (side: number): number => {
-      let len = 0
-      let wall = 0
-      for (const c of members) {
-        const onSide = side === 0 ? c.iy === iy0 : side === 1 ? c.ix === ix1 : side === 2 ? c.iy === iy1 : c.ix === ix0
-        if (!onSide) continue
-        const l = side % 2 === 0 ? c.rect.x1 - c.rect.x0 : c.rect.y1 - c.rect.y0
-        len += l
-        wall += l * c.edges[side].wall
+    // wall band along each side of a rectangle of the pocket's cells, weighted by length
+    const wallsOf = (bx0: number, bx1: number, by0: number, by1: number): number[] =>
+      [0, 1, 2, 3].map((side) => {
+        let len = 0
+        let wall = 0
+        for (const c of members) {
+          if (c.ix < bx0 || c.ix > bx1 || c.iy < by0 || c.iy > by1) continue
+          const onSide = side === 0 ? c.iy === by0 : side === 1 ? c.ix === bx1 : side === 2 ? c.iy === by1 : c.ix === bx0
+          if (!onSide) continue
+          const l = side % 2 === 0 ? c.rect.x1 - c.rect.x0 : c.rect.y1 - c.rect.y0
+          len += l
+          wall += l * c.edges[side].wall
+        }
+        return len > 0 ? wall / len : 0
+      })
+    const continuousThree = (w: number[]): boolean => w.filter((x) => x >= GATE_BAY_SIDE_WALL).length === 3
+    // N7-FIX-04: the fill reaches through a gate into the open strip in front of it — a garage set back 0.60 m from the
+    // house's face has a cell row of ground before its gate — and the pocket then has no side walls along that strip.
+    // When the whole is not walled on three sides, the pocket is the largest part of it, cut off one side, that is:
+    // the strip stays ground, never part of the garage.
+    if (!continuousThree(wallsOf(ix0, ix1, iy0, iy1))) {
+      let best: { b: [number, number, number, number]; cells: number } | undefined
+      for (let k = 1; k <= ix1 - ix0; k += 1) {
+        for (const b of [[ix0 + k, ix1, iy0, iy1], [ix0, ix1 - k, iy0, iy1]] as Array<[number, number, number, number]>) if (continuousThree(wallsOf(...b)) && (!best || (b[1] - b[0] + 1) * (b[3] - b[2] + 1) > best.cells)) best = { b, cells: (b[1] - b[0] + 1) * (b[3] - b[2] + 1) }
       }
-      return len > 0 ? wall / len : 0
+      for (let k = 1; k <= iy1 - iy0; k += 1) {
+        for (const b of [[ix0, ix1, iy0 + k, iy1], [ix0, ix1, iy0, iy1 - k]] as Array<[number, number, number, number]>) if (continuousThree(wallsOf(...b)) && (!best || (b[1] - b[0] + 1) * (b[3] - b[2] + 1) > best.cells)) best = { b, cells: (b[1] - b[0] + 1) * (b[3] - b[2] + 1) }
+      }
+      if (best) {
+        ;[ix0, ix1, iy0, iy1] = best.b
+        const kept = members.filter((c) => c.ix >= ix0 && c.ix <= ix1 && c.iy >= iy0 && c.iy <= iy1)
+        members.length = 0
+        members.push(...kept)
+      }
     }
-    const walls = [0, 1, 2, 3].map(sideWall)
+    const walls = wallsOf(ix0, ix1, iy0, iy1)
     // weighed (and named) from three sides drawn mostly in wall; shut only with all three continuous
     const walled = walls.filter((w) => w >= GATE_BAY_CANDIDATE_WALL).length
     if (walled !== 3) continue

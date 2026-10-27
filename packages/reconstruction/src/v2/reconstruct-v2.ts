@@ -69,10 +69,10 @@ import type { SourceConflictReview } from '../plan-resolution.js'
 import { metricSolutionFor, readTintedCallouts } from '@buildapp/source-metrics'
 import type { ResolverProgress } from '../plan-resolution.js'
 import type { PlanSheet } from '../layout.js'
-import { bodyCompleteness } from './body-completeness.js'
+import { bodyCompleteness, modelCompleteness } from './body-completeness.js'
 import type { SeamSplit } from '../layout.js'
 import type { GateBay } from '../plan-decomposition.js'
-import type { BodyArea, BodyCompleteness } from './body-completeness.js'
+import type { BodyArea, BodyCompleteness, ModelCompleteness } from './body-completeness.js'
 import type { Checkpoint } from '@buildapp/source-common'
 import type { StructuralPassOptions } from '../structural.js'
 import { rectAt } from './building.js'
@@ -125,7 +125,13 @@ import type { ApproximateRidge } from './roof-datum.js'
 // a built rectangle never crosses a facade carried on through the building, a body the storeys above stop short of on
 // a wall is two bodies; every walled area of the base plan is weighed against the model's bodies, and a drawn body the
 // model does not build makes the run a partial preview, named with its cause.
-export const SOLVER_V2_VERSION = '2.8.0' as const
+
+// 2.9.0 (N7-FIX-04): a body set back less than a grid cell from another's face is built to its own face (the faces the
+// grid thinned away are kept beside it, and the chains place them); a chain whose ticks land on two lines states their
+// span before one that ends off them; a pocket the fill reached through its gate and on into the open strip before it
+// is the garage alone; a layout holding an unresolved BLOCKING reason gives a partial preview, the model kept;
+// completeness is reported in four parts and one verdict, with the plan's own walls weighed against the model.
+export const SOLVER_V2_VERSION = '2.9.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
@@ -256,6 +262,8 @@ export type ReconstructionV2Result = {
    * and every pocket walled on three sides with a wide mouth, shut as a garage's gate or left open with what was missing.
    */
   bodyRecovery: { seamSplits: SeamSplit[]; gateBays: GateBay[] }
+  /** N7-FIX-04: completeness kept apart — the accepted decomposition, what is unresolved, the conflicts, the model. */
+  modelCompleteness: ModelCompleteness
 }
 
 /** N7-P1: what a partial 3D preview is built from, and what it is not. */
@@ -273,6 +281,8 @@ export type PartialPreviewReport = {
   ringCollisions?: RingCollisionDiagnostic[]
   /** N7-COUNCIL-FIX-03 (§4): bodies the plan draws walled that no body of the model stands on, with the cause. */
   missingBodies?: BodyArea[]
+  /** N7-FIX-04: BLOCKING reasons the chosen layout's gate holds and nothing resolved; the model built from it is kept. */
+  layoutBlocking?: Array<{ code: string; what: string; why: string }>
 }
 
 
@@ -2398,6 +2408,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         return { id: m.id, ring: m.ring, why: rec ? `the thin-body pass decided ${rec.decision.kind}: ${rec.decision.why}` : 'it is not carried into the model', deliberate: !!rec }
       }),
     gaps: layout.unresolved.map((g) => ({ id: g.id, what: g.what, reason: g.reason })),
+    bands: draft.base.bands,
   }) : undefined
   for (const a of completeness?.areas ?? []) {
     if (a.decision === 'REPRESENTED' || a.decision === 'JOINED') continue
@@ -2411,6 +2422,21 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       ? { ...partialPreview, failures: [...partialPreview.failures, ...failures], missingBodies: completeness.missing }
       : { outcome: 'PARTIAL_3D_PREVIEW', basis: 'CHECKPOINT', failures, skipped: [], missingBodies: completeness.missing }
   }
+  // N7-FIX-04: the layout the model was built from, as its gate left it. A BLOCKING reason that stops the run (a
+  // refusal code) never reaches here; one the gate carries as a degraded corroboration (the massing against an
+  // elevation's outline) used to reach a COMPLETE model. The model built from that layout is kept, and is not called
+  // complete: the reason is named on the preview. A rival layout the resolver weighed and dropped is not this one.
+  const layoutBlocking = layout.gate.reasons.filter((r) => r.severity === 'BLOCKING')
+  if (layoutBlocking.length > 0) {
+    const failures = layoutBlocking.map((r) => ({ commandIndex: -1, type: 'layout', id: r.code, codes: ['LAYOUT_BLOCKING_UNRESOLVED', r.code], message: `${r.what} — ${r.why}`, objectIds: [...r.itemIds] }))
+    step({ stage: 'massing', what: 'N7-FIX-04: the chosen layout holds BLOCKING reasons its gate did not resolve', method: 'REFUSED', detail: layoutBlocking.map((r) => `${r.code}: ${r.what}`).join('; '), inputs: layoutBlocking.length, outputs: 0 })
+    trace({ phase: 'MODEL', substage: 'PARTIAL_3D_PREVIEW', status: 'DEGRADED', counts: { layoutBlocking: layoutBlocking.length }, reasonCode: 'LAYOUT_BLOCKING_UNRESOLVED' })
+    partialPreview = partialPreview
+      ? { ...partialPreview, failures: [...partialPreview.failures, ...failures], layoutBlocking: layoutBlocking.map((r) => ({ code: r.code, what: r.what, why: r.why })) }
+      : { outcome: 'PARTIAL_3D_PREVIEW', basis: 'CHECKPOINT', failures, skipped: [], layoutBlocking: layoutBlocking.map((r) => ({ code: r.code, what: r.what, why: r.why })) }
+  }
+  const completenessOfModel = modelCompleteness({ body: completeness, gateReasons: layout.gate.reasons, modelRefusals: previewFailures.length })
+  step({ stage: 'massing', what: `N7-FIX-04: model completeness ${completenessOfModel.verdict}`, method: completenessOfModel.verdict === 'PARTIAL' ? 'REFUSED' : 'DIRECT', detail: completenessOfModel.why, inputs: 1, outputs: 1 })
   const hypothesisSet: PrimitiveHypothesisSet = {
     schema: HYPOTHESIS_SET_SCHEMA,
     schemaVersion: HYPOTHESIS_SET_SCHEMA_VERSION,
@@ -2521,7 +2547,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const violations = { graph: featureGraphViolations(graphDraft), ledger: ledgerViolations(ctx.ledger, [...graph.observations.map((o) => o.id), ...metrics.evidence.map((e) => e.id)]) }
   step({ stage: 'quality', what: 'per-feature quality', method: 'DIRECT', detail: Object.entries(quality.summary).map(([fam, levels]) => `${fam} ${Object.entries(levels).map(([l, n]) => `${l}:${n}`).join('/')}`).join(', '), inputs: ctx.solved.length, outputs: quality.records.length })
 
-  return { layout, building, candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations, closure: closureNotes, planDiagnostics, openingFits: fit.fits, ...(wallReconciliation ? { wallReconciliation } : {}), crossViewResiduals: crossView, ...(roofDatum ? { roofDatum } : {}), ...(partialPreview ? { partialPreview } : {}), ...(completeness ? { bodyCompleteness: completeness } : {}), bodyRecovery: { seamSplits: draft.seamSplits ?? [], gateBays: draft.base?.decomposition.gateBays ?? [] }, facadeAlignment, thinBodies: thinBodyRecords, zoneBodies, wallThickness: { houseM: T, house: houseWall, bodies: bodyWalls }, preEmitRings: preEmitRings.filter((c) => c.verdict !== 'HOLDS_TWO_WALLS'), openingCounts: { plan: openings.length + sharedDoors.length, elevationIndependent: [...facadeRead.values()].reduce((a, r) => a + r.scanned.length, 0), model: model.openings.length, skippedByPartialPreview: (partialPreview?.skipped ?? []).filter((x) => x.type === 'cutOpening').length }, viewAudit: viewAudit({ horizontalOnly: new Map(cornerRegistrations.map((r) => [r.frameId, r])), frames: graph.coordinateFrames.filter((f) => (keep ? keep(f) : true)), first: legacy, firstRefused: legacyRefused, refusals: viewRefusals, registered: elevations, openingsOnly: bandRegistrations, sameSheet: new Set(openingViewOverrides.keys()), heightsRefused: openingHeightRefused, cameras }), heights: levels.measured ? { measured: true } : { measured: false, assumedStoreyHeightM: CONVENTIONS.storeyHeight } }
+  return { layout, building, candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations, closure: closureNotes, planDiagnostics, openingFits: fit.fits, ...(wallReconciliation ? { wallReconciliation } : {}), crossViewResiduals: crossView, ...(roofDatum ? { roofDatum } : {}), ...(partialPreview ? { partialPreview } : {}), ...(completeness ? { bodyCompleteness: completeness } : {}), modelCompleteness: completenessOfModel, bodyRecovery: { seamSplits: draft.seamSplits ?? [], gateBays: draft.base?.decomposition.gateBays ?? [] }, facadeAlignment, thinBodies: thinBodyRecords, zoneBodies, wallThickness: { houseM: T, house: houseWall, bodies: bodyWalls }, preEmitRings: preEmitRings.filter((c) => c.verdict !== 'HOLDS_TWO_WALLS'), openingCounts: { plan: openings.length + sharedDoors.length, elevationIndependent: [...facadeRead.values()].reduce((a, r) => a + r.scanned.length, 0), model: model.openings.length, skippedByPartialPreview: (partialPreview?.skipped ?? []).filter((x) => x.type === 'cutOpening').length }, viewAudit: viewAudit({ horizontalOnly: new Map(cornerRegistrations.map((r) => [r.frameId, r])), frames: graph.coordinateFrames.filter((f) => (keep ? keep(f) : true)), first: legacy, firstRefused: legacyRefused, refusals: viewRefusals, registered: elevations, openingsOnly: bandRegistrations, sameSheet: new Set(openingViewOverrides.keys()), heightsRefused: openingHeightRefused, cameras }), heights: levels.measured ? { measured: true } : { measured: false, assumedStoreyHeightM: CONVENTIONS.storeyHeight } }
 }
 
 /** The columns of a render across which a band of the given rows carries dark tone: the band's along extent. */

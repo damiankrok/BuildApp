@@ -43,7 +43,7 @@ const sound = async (p: (typeof runs)['w1']): Promise<void> => {
 /** The thin body built whole: its ring at its own drawn thickness and `n` windows cut in its far wall. */
 const builtWith = async (p: (typeof runs)['w1'], n: number): Promise<void> => {
   const { result, reconstruction } = await p
-  expect(result.preview.outcome).toBe('COMPLETE')
+  builtWhole(result.preview)
   const [t] = reconstruction.thinBodies
   expect(t).toMatchObject({ massId: 'attached-0', decision: { kind: 'DRAWN_THIN_WALLS' } })
   expect(t.hypotheses.find((h) => h.kind === 'CANOPY_ON_POSTS')?.status).toBe('REFUTED')
@@ -56,6 +56,17 @@ const builtWith = async (p: (typeof runs)['w1'], n: number): Promise<void> => {
   expect(units).toHaveLength(n)
   expect(result.unresolved.filter((u) => /FILL_TOO_LARGE|ring-attached-0/.test(`${u.what} ${u.reason}`))).toEqual([])
   await sound(p)
+}
+
+/**
+ * N7-FIX-04: the model built whole, every emitted object standing. The run reads PARTIAL only where the chosen layout
+ * holds a BLOCKING reason its gate did not resolve (here the rear elevation's outline over the thin body, which the
+ * house's unstated eaves oversail): the model is kept, and the preview says so instead of COMPLETE.
+ */
+const builtWhole = (preview: { outcome: string; partial: { failures: Array<{ type: string; codes: string[] }>; missing: unknown[] } | null }): void => {
+  if (preview.outcome === 'COMPLETE') return
+  expect(preview.partial?.missing).toEqual([])
+  for (const f of preview.partial?.failures ?? []) expect(f.codes).toContain('LAYOUT_BLOCKING_UNRESOLVED')
 }
 
 describe('N7-FIX-01 (F-R1, D-3) a thin body with windows in its far wall', () => {
@@ -73,7 +84,7 @@ describe('N7-FIX-01 (F-R1, D-3) a thin body with windows in its far wall', () =>
 
   it('a window and a door: both cut and filled in the body’s own walls, no FILL_TOO_LARGE', async () => {
     const { result } = await runs.wd
-    expect(result.preview.outcome).toBe('COMPLETE')
+    builtWhole(result.preview)
     const cut = result.model.openings.filter((o) => o.wallId.startsWith('ring-attached-0-0-'))
     expect(cut.map((o) => o.kind).sort()).toEqual(['DOOR', 'WINDOW'])
     const doors = result.model.doors.filter((d) => cut.some((o) => o.id === d.openingId))

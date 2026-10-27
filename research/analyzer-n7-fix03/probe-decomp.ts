@@ -41,6 +41,7 @@ for (const code of codes) {
   console.log(`  v2 ${r.building.masses.map((m) => `${m.id} ${f(m.x0)}..${f(m.x1)}x${f(m.z0)}..${f(m.z1)} s${m.storeys.join(',')}${m.storeyRects ? ` sr${m.storeyRects.map((q) => `${q.storey}:${f(q.x1 - q.x0)}`).join(',')}` : ''}`).join(' | ')}`)
   console.log(`  model rings ${result.model.wallRings.map((x) => x.id).join(',')}; roofs ${result.model.roofs.map((x) => x.id).join(',')}; mainRoof ${r.building.mainRoof ? JSON.stringify(r.building.mainRoof.footprint) : 'none'}; outcome ${result.preview.outcome}`)
   for (const b of r.bodyRecovery.gateBays) console.log(`  gateBay ${b.decision} ${b.mouth.side} w${b.widthM} d${b.depthM} gap${b.gapM} jambs ${b.jambsM.join('/')} sides ${b.sideWalls.join('/')}`)
+  console.log(`  model completeness ${r.modelCompleteness.verdict}: ${r.modelCompleteness.why.slice(0, 260)}`)
   const bc = r.bodyCompleteness
   if (bc) console.log(`  completeness drawn ${bc.drawnBuiltM2.toFixed(1)} m2, represented ${bc.representedM2.toFixed(1)} (${bc.coverage.toFixed(3)}); ${bc.areas.map((a) => `${a.id}:${a.decision}`).join(' ')}`)
   for (const a of bc?.areas ?? []) if (a.decision !== 'REPRESENTED' && a.decision !== 'JOINED') console.log(`    ${a.decision} ${a.id}: ${a.why.slice(0, 220)}`)

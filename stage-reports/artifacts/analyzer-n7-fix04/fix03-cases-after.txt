@@ -1,0 +1,229 @@
+
+=== gb-setback-door
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 3.89 10.20
+   B.
+   BB
+  regions region-built-0-0 0.00..8.40x0.00..10.20 | region-built-1-1 8.40..12.00x3.89..10.20
+  hyp H0_STRICT_ENCLOSURE* 3, H1_WIDE_OPENING_CONTINUITY 3 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1 | mass-1/ATTACHED 3.60x5.98 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..12.00x0.32..6.30 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+  model completeness COMPLETE: the accepted decomposition is 99% represented (its own built regions only); nothing unresolved, unexplained or in conflict
+  completeness drawn 108.4 m2, represented 107.2 (0.990); region-built-0-0:REPRESENTED region-built-1-1:REPRESENTED
+
+=== gb-setback-nodoor
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 3.89 10.20
+   B.
+   BB
+  regions region-built-0-0 0.00..8.40x0.00..10.20 | region-built-1-1 8.40..12.00x3.89..10.20
+  hyp H0_STRICT_ENCLOSURE* 3, H1_WIDE_OPENING_CONTINUITY 3 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1 | mass-1/ATTACHED 3.60x5.98 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..12.00x0.32..6.30 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+  model completeness COMPLETE: the accepted decomposition is 99% represented (its own built regions only); nothing unresolved, unexplained or in conflict
+  completeness drawn 108.4 m2, represented 107.2 (0.990); region-built-0-0:REPRESENTED region-built-1-1:REPRESENTED
+
+=== gb-flush-door
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 4.20 10.20
+   B.
+   BB
+  regions region-built-0-0 0.00..8.40x0.00..10.20 | region-built-1-1 8.40..12.00x4.20..10.20
+  hyp H0_STRICT_ENCLOSURE* 3, H1_WIDE_OPENING_CONTINUITY 3 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1 | mass-1/ATTACHED 3.60x6.00 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..12.00x0.00..6.00 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+  model completeness COMPLETE: the accepted decomposition is 100% represented (its own built regions only); nothing unresolved, unexplained or in conflict
+  completeness drawn 107.3 m2, represented 107.3 (1.000); region-built-0-0:REPRESENTED region-built-1-1:REPRESENTED
+
+=== t-strip045
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 10.19
+   BB
+  regions region-built-0-0 0.00..12.00x0.00..10.19
+  hyp H0_STRICT_ENCLOSURE* 2, H1_WIDE_OPENING_CONTINUITY 2 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1 | mass-1/ATTACHED 3.60x10.20 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1 sr1:8.42 | attached-0 8.40..12.00x0.00..10.20 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+  model completeness COMPLETE: the accepted decomposition is 100% represented (its own built regions only); nothing unresolved, unexplained or in conflict
+  completeness drawn 122.4 m2, represented 122.4 (1.000); region-built-0-0:REPRESENTED
+
+=== t-strip120
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 1.20 10.20
+   B.
+   BB
+  regions region-built-0-0 0.00..8.40x0.00..10.20 | region-built-1-1 8.40..12.00x1.20..10.20
+  hyp H0_STRICT_ENCLOSURE* 3, H1_WIDE_OPENING_CONTINUITY 3 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1 | mass-1/ATTACHED 3.60x9.00 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..12.00x0.00..9.00 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+  model completeness COMPLETE: the accepted decomposition is 100% represented (its own built regions only); nothing unresolved, unexplained or in conflict
+  completeness drawn 118.1 m2, represented 118.1 (1.000); region-built-0-0:REPRESENTED region-built-1-1:REPRESENTED
+
+=== m-full
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 10.20
+   BB
+  regions region-built-0-0 0.00..12.00x0.00..10.20
+  hyp H0_STRICT_ENCLOSURE* 2, H1_WIDE_OPENING_CONTINUITY 2 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1 | mass-1/ATTACHED 3.60x10.20 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1 sr1:8.42 | attached-0 8.40..12.00x0.00..10.20 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+  model completeness COMPLETE: the accepted decomposition is 100% represented (its own built regions only); nothing unresolved, unexplained or in conflict
+  completeness drawn 122.4 m2, represented 122.4 (1.000); region-built-0-0:REPRESENTED
+
+=== m-wide6
+  linesX m 0.00 8.40 14.40
+  linesY m 0.00 2.20 10.20
+   B.
+   BB
+  regions region-built-0-0 0.00..8.40x0.00..10.20 | region-built-1-1 8.40..14.40x2.20..10.20
+  hyp H0_STRICT_ENCLOSURE* 3, H1_WIDE_OPENING_CONTINUITY 3 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1 | mass-1/ATTACHED 6.00x8.00 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..14.40x0.00..8.00 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+  model completeness COMPLETE: the accepted decomposition is 100% represented (its own built regions only); nothing unresolved, unexplained or in conflict
+  completeness drawn 133.7 m2, represented 133.7 (1.000); region-built-0-0:REPRESENTED region-built-1-1:REPRESENTED
+
+=== t-two-strip
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 1.49 2.99 11.99
+   BB
+   BB
+   BB
+  regions region-built-0-0 0.00..12.00x0.00..11.99
+  hyp H0_STRICT_ENCLOSURE* 6, H1_WIDE_OPENING_CONTINUITY 6 boundary
+  layout mass-0/MAIN 8.40x12.00 s0..1 | mass-1/ATTACHED 3.60x12.00 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..12.00 s0,1 sr1:8.42 | attached-0 8.40..12.00x0.00..12.00 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":12}; outcome COMPLETE
+  model completeness COMPLETE: the accepted decomposition is 100% represented (its own built regions only); nothing unresolved, unexplained or in conflict
+  completeness drawn 144.0 m2, represented 144.0 (1.000); region-built-0-0:REPRESENTED
+
+=== g-windows
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 4.20 10.20
+   B.
+   BB
+  regions region-built-0-0 0.00..8.40x0.00..10.20 | region-built-1-1 8.40..12.00x4.20..10.20
+  hyp H0_STRICT_ENCLOSURE* 3, H1_WIDE_OPENING_CONTINUITY 3 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1 | mass-1/ATTACHED 3.60x6.00 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..12.00x0.00..6.00 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+  model completeness COMPLETE: the accepted decomposition is 100% represented (its own built regions only); nothing unresolved, unexplained or in conflict
+  completeness drawn 107.3 m2, represented 107.3 (1.000); region-built-0-0:REPRESENTED region-built-1-1:REPRESENTED
+
+=== thin-store
+  linesX m 0.00 8.40 10.00
+  linesY m 0.00 4.20 10.20
+   B.
+   BB
+  regions region-built-0-0 0.00..8.40x0.00..10.20 | region-built-1-1 8.40..10.00x4.20..10.20
+  hyp H0_STRICT_ENCLOSURE* 3, H1_WIDE_OPENING_CONTINUITY 3 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1 | mass-1/ATTACHED 1.60x6.00 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..10.00x0.00..6.00 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+  model completeness COMPLETE: the accepted decomposition is 100% represented (its own built regions only); nothing unresolved, unexplained or in conflict
+  completeness drawn 95.3 m2, represented 95.3 (1.000); region-built-0-0:REPRESENTED region-built-1-1:REPRESENTED
+
+=== g-four
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 4.20 10.20
+   B.
+   BB
+  regions region-built-0-0 0.00..8.40x0.00..10.20 | region-built-1-1 8.40..12.00x4.20..10.20
+  hyp H0_STRICT_ENCLOSURE* 3, H1_WIDE_OPENING_CONTINUITY 3 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1 | mass-1/ATTACHED 3.60x6.00 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..12.00x0.00..6.00 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+  model completeness COMPLETE: the accepted decomposition is 100% represented (its own built regions only); nothing unresolved, unexplained or in conflict
+  completeness drawn 107.3 m2, represented 107.3 (1.000); region-built-0-0:REPRESENTED region-built-1-1:REPRESENTED
+
+=== g-wide5
+  linesX m 0.00 8.40 8.86 13.91 14.40
+  linesY m 0.00 4.20 10.20
+   B...
+   BBBB
+  regions region-built-0-0 0.00..8.40x0.00..10.20 | region-built-1-1 8.40..14.40x4.20..10.20
+  hyp H0_STRICT_ENCLOSURE* 3, H1_WIDE_OPENING_CONTINUITY 3 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1 | mass-1/ATTACHED 6.00x6.00 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..14.40x0.00..6.00 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+  gateBay GATE_SHUT BOTTOM w6.000085 d5.996445 gap5.01106 jambs 0.501106/0.487919 sides 0.945055/0.947253/0.995604
+  model completeness COMPLETE: the accepted decomposition is 100% represented (its own built regions only); nothing unresolved, unexplained or in conflict
+  completeness drawn 121.7 m2, represented 121.7 (1.000); region-built-0-0:REPRESENTED region-built-1-1:REPRESENTED
+
+=== g-gate34
+  linesX m 0.00 8.40 12.60
+  linesY m 0.00 4.20 10.20
+   B.
+   BB
+  regions region-built-0-0 0.00..8.40x0.00..10.20 | region-built-1-1 8.40..12.60x4.20..10.20
+  hyp H0_STRICT_ENCLOSURE* 2, H1_WIDE_OPENING_CONTINUITY 2 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1 | mass-1/ATTACHED 4.20x6.00 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..12.60x0.00..6.00 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+  gateBay GATE_SHUT BOTTOM w4.204899 d5.996445 gap3.42719 jambs 0.395445/0.382264 sides 0.915361/0.995604/0.995604
+  model completeness COMPLETE: the accepted decomposition is 100% represented (its own built regions only); nothing unresolved, unexplained or in conflict
+  completeness drawn 110.9 m2, represented 110.9 (1.000); region-built-0-0:REPRESENTED region-built-1-1:REPRESENTED
+
+=== g-wide5-blank
+  linesX m 0.00 8.40 14.40
+  linesY m 0.00 4.20 10.20
+   B.
+   B.
+  regions region-built-0-0 0.00..8.40x0.00..10.20
+  hyp H0_STRICT_ENCLOSURE* 2, H1_WIDE_OPENING_CONTINUITY 2 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1
+  model rings ring-main-0,ring-main-1; roofs roof-main; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+  gateBay LEFT_OPEN BOTTOM w6.000085 d5.996445 gap5.01106 jambs 0.501106/0.487919 sides 0.945055/0.947253/0.995604
+  model completeness COMPLETE_WITH_OPEN_QUESTIONS: the accepted decomposition is 100% represented (its own built regions only); 1 area named and not built
+  completeness drawn 85.7 m2, represented 85.7 (1.000); region-built-0-0:REPRESENTED pocket-0:UNRESOLVED
+    UNRESOLVED pocket-0: walled on three sides (0.95, 0.95, 1.00), but nothing says its mouth is a gate: no printed width across it, no leaf drawn over it, no door from it into the building — walls round a hole are a loggia’s or a carport’s as m
+
+=== portico
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 7.80 10.20
+   B.
+   B.
+  regions region-built-0-0 0.00..8.40x0.00..10.20
+  hyp H0_STRICT_ENCLOSURE* 2, H1_WIDE_OPENING_CONTINUITY 2 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1
+  model rings ring-main-0,ring-main-1; roofs roof-main; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+  gateBay LEFT_OPEN BOTTOM w3.600051 d2.398305 gap0 jambs 0.026374/0.290114 sides 0.908425/0.725275/0.862637
+  model completeness COMPLETE_WITH_OPEN_QUESTIONS: the accepted decomposition is 100% represented (its own built regions only); 1 area named and not built
+  completeness drawn 85.7 m2, represented 85.7 (1.000); region-built-0-0:REPRESENTED pocket-0:UNRESOLVED
+    UNRESOLVED pocket-0: walled on three sides (0.91, 0.73, 0.86), but no jamb of wall at either end of its mouth beyond the side walls' own ends: open across its front, a carport, a porch or a pergola rather than a gate; 2.40 m deep, less than 
+
+=== open-bay
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 4.20 10.20
+   B.
+   B.
+  regions region-built-0-0 0.00..8.40x0.00..10.20
+  hyp H0_STRICT_ENCLOSURE* 2, H1_WIDE_OPENING_CONTINUITY 2 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1
+  model rings ring-main-0,ring-main-1; roofs roof-main; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+  gateBay LEFT_OPEN BOTTOM w3.600051 d5.996445 gap0 jambs 0.026374/0.290114 sides 0.908425/0.892308/0.945055
+  model completeness COMPLETE_WITH_OPEN_QUESTIONS: the accepted decomposition is 100% represented (its own built regions only); 1 area named and not built
+  completeness drawn 85.7 m2, represented 85.7 (1.000); region-built-0-0:REPRESENTED pocket-0:UNRESOLVED
+    UNRESOLVED pocket-0: walled on three sides (0.91, 0.89, 0.95), but no jamb of wall at either end of its mouth beyond the side walls' own ends: open across its front, a carport, a porch or a pergola rather than a gate; not built and not a con
+
+=== wing25
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 4.20 10.20
+   B.
+   BB
+  regions region-built-0-0 0.00..8.40x0.00..10.20 | region-built-1-1 8.40..12.00x4.20..10.20
+  hyp H0_STRICT_ENCLOSURE* 2, H1_WIDE_OPENING_CONTINUITY 2 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1 | mass-1/ATTACHED 3.60x6.00 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..12.00x0.00..6.00 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+  gateBay GATE_SHUT BOTTOM w3.600051 d5.996445 gap2.360473 jambs 0.632976/0.606602 sides 0.985348/0.995604/0.879121
+  model completeness COMPLETE: the accepted decomposition is 100% represented (its own built regions only); nothing unresolved, unexplained or in conflict
+  completeness drawn 107.3 m2, represented 107.3 (1.000); region-built-0-0:REPRESENTED region-built-1-1:REPRESENTED

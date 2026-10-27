@@ -34,6 +34,9 @@ console.log(JSON.stringify({
   regions: (() => { const b = r.planDiagnostics.plans.find((p) => p.frameId === r.planDiagnostics.selectedPlanFrameId); return b?.regions.map((g) => `${g.id} ${JSON.stringify(g.rect)}`) })(),
   recesses: r.layout.recesses.map((x) => `${x.id} ${x.why.slice(0, 160)}`),
   recovery: (r as { bodyRecovery?: unknown }).bodyRecovery,
+  frame: r.planDiagnostics.selectedPlanFrameId,
+  modelCompleteness: (r as { modelCompleteness?: unknown }).modelCompleteness,
+  unexplainedWalls: (r as { bodyCompleteness?: { unexplainedWalls: unknown } }).bodyCompleteness?.unexplainedWalls,
   completeness: (r as { bodyCompleteness?: never }).bodyCompleteness && { drawn: r.bodyCompleteness.drawnBuiltM2, represented: r.bodyCompleteness.representedM2, coverage: r.bodyCompleteness.coverage, areas: r.bodyCompleteness.areas.map((a) => `${a.id} ${a.decision} ${f(a.areaM2)}m2 [${a.massIds.join(',')}] ${a.decision === 'REPRESENTED' || a.decision === 'JOINED' ? '' : a.why.slice(0, 300)}`) },
   partial: r.partialPreview && { failures: r.partialPreview.failures.map((x) => `${x.type} ${x.id} ${x.codes.join(',')}`) },
 }, null, 1))

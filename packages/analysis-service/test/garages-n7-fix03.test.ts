@@ -61,10 +61,10 @@ const houseIntact = (o: Out): void => {
   expect(main(o)?.storeys).toEqual([0, 1])
   expect(o.reconstruction.building.mainRoof?.footprint.x1).toBeLessThan(8.6)
 }
-const completeAndAccounted = (o: Out): void => {
+const completeAndAccounted = (o: Out, coverage = 1): void => {
   expect(o.result.preview.outcome).toBe('COMPLETE')
   expect(o.reconstruction.bodyCompleteness?.missing).toEqual([])
-  expect(o.reconstruction.bodyCompleteness?.coverage).toBe(1)
+  expect(o.reconstruction.bodyCompleteness?.coverage).toBeGreaterThanOrEqual(coverage)
 }
 
 describe('N7-COUNCIL-FIX-03 (C-2): a garage behind its gate is not ground', () => {
@@ -74,11 +74,12 @@ describe('N7-COUNCIL-FIX-03 (C-2): a garage behind its gate is not ground', () =
     const [g] = attached(o)
     expect(g).toMatchObject({ storeys: [0] })
     expect(g.x1 - g.x0).toBeCloseTo(3.6, 1)
-    // 6.00 m drawn; the grid thins the 0.30 m set-back onto the house's face line (minCellM 0.45): 6.30 m, on the record
-    expect(g.z1 - g.z0).toBeGreaterThan(5.9)
-    expect(g.z1 - g.z0).toBeLessThan(6.4)
+    // N7-FIX-04: 6.00 m drawn and built (the grid thins the 0.30 m set-back onto the house's face line, and the
+    // garage's own face is recovered beside it); the decomposition's region still reaches the line, so 0.30 of its
+    // 6.30 m is not built and its coverage is 6.00 / 6.30 of that region
+    expect(Math.abs(g.z1 - g.z0 - 6.0)).toBeLessThan(0.05)
     expect(o.result.model.roofs.map((r) => r.id).sort()).toEqual(['roof-attached-0', 'roof-main'])
-    completeAndAccounted(o)
+    completeAndAccounted(o, 0.98)
     sound(o)
   })
 

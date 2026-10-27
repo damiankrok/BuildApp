@@ -503,11 +503,11 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
       metric: reconstruction.planDiagnostics.plans.find((p) => p.frameId === reconstruction.planDiagnostics.selectedPlanFrameId)?.metric,
       extentWeak: reconstruction.planDiagnostics.plans.find((p) => p.frameId === reconstruction.planDiagnostics.selectedPlanFrameId)?.extentWeak,
       ...(reconstruction.roofDatum ? { approximateRoofDatum: { ridgeY: reconstruction.roofDatum.ridgeY, buildingHeightM: reconstruction.roofDatum.buildingHeightM } } : {}),
-      ...(reconstruction.partialPreview ? { partialPreview: { failure: reconstruction.partialPreview.failures[0], missing: reconstruction.partialPreview.skipped.filter((x) => x.type !== 'setEvidence').length, basis: reconstruction.partialPreview.basis, ...(reconstruction.partialPreview.missingBodies ? { missingBodies: reconstruction.partialPreview.missingBodies.map((b) => b.id) } : {}) } } : {}),
+      ...(reconstruction.partialPreview ? { partialPreview: { failure: reconstruction.partialPreview.failures[0], missing: reconstruction.partialPreview.skipped.filter((x) => x.type !== 'setEvidence').length, basis: reconstruction.partialPreview.basis, ...(reconstruction.partialPreview.missingBodies ? { missingBodies: reconstruction.partialPreview.missingBodies.map((b) => b.id) } : {}), ...(reconstruction.partialPreview.layoutBlocking ? { layoutBlocking: reconstruction.partialPreview.layoutBlocking.map((b) => b.code) } : {}) } } : {}),
       ...(reconstruction.heights.measured ? {} : { heightAssumedM: reconstruction.heights.assumedStoreyHeightM }),
     })
     const sourceBasis = sourceBasisOf(pkg, reconstruction.planDiagnostics)
-    const preview = previewOf({ model, ...(reconstruction.partialPreview ? { partial: reconstruction.partialPreview } : {}), heights: reconstruction.heights, source: sourceBasis, ...(reconstruction.roofDatum ? { approximateRoofDatum: reconstruction.roofDatum } : {}) })
+    const preview = previewOf({ model, ...(reconstruction.partialPreview ? { partial: reconstruction.partialPreview } : {}), heights: reconstruction.heights, source: sourceBasis, ...(reconstruction.roofDatum ? { approximateRoofDatum: reconstruction.roofDatum } : {}), completeness: reconstruction.modelCompleteness })
 
     const result: LinkAnalysisResult = {
       schema: 'buildapp.link-analysis-result',

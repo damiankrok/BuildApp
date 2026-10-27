@@ -1,0 +1,204 @@
+
+=== s0-door
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 4.20 10.20
+   B.
+   BB
+  regions region-built-0-0 0.00..8.40x0.00..10.20 | region-built-1-1 8.40..12.00x4.20..10.20
+  hyp H0_STRICT_ENCLOSURE* 3, H1_WIDE_OPENING_CONTINUITY 3 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1 | mass-1/ATTACHED 3.60x6.00 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..12.00x0.00..6.00 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+  completeness drawn 107.3 m2, represented 107.3 (1.000); region-built-0-0:REPRESENTED region-built-1-1:REPRESENTED
+
+=== s0-nodoor
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 4.20 10.20
+   B.
+   BB
+  regions region-built-0-0 0.00..8.40x0.00..10.20 | region-built-1-1 8.40..12.00x4.20..10.20
+  hyp H0_STRICT_ENCLOSURE* 3, H1_WIDE_OPENING_CONTINUITY 3 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1 | mass-1/ATTACHED 3.60x6.00 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..12.00x0.00..6.00 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+  completeness drawn 107.3 m2, represented 107.3 (1.000); region-built-0-0:REPRESENTED region-built-1-1:REPRESENTED
+
+=== s15-door
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 4.04 10.19
+   B.
+   BB
+  regions region-built-0-0 0.00..8.40x0.00..10.19 | region-built-1-1 8.40..12.00x4.04..10.19
+  hyp H0_STRICT_ENCLOSURE* 2, H1_WIDE_OPENING_CONTINUITY 2 boundary
+  layout mass-0/MAIN 8.40x10.05 s0..1 | mass-1/ATTACHED 3.60x6.00 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.05 s0,1 | attached-0 8.40..12.00x0.00..6.00 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.05}; outcome COMPLETE
+  gateBay GATE_SHUT BOTTOM w3.600051 d6.148756 gap2.360473 jambs 0.632976/0.606602 sides 0.908425/0.873662/0.972163
+  completeness drawn 106.0 m2, represented 106.0 (1.000); region-built-0-0:REPRESENTED region-built-1-1:REPRESENTED
+
+=== s15-nodoor
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 4.04 10.19
+   B.
+   BB
+  regions region-built-0-0 0.00..8.40x0.00..10.19 | region-built-1-1 8.40..12.00x4.04..10.19
+  hyp H0_STRICT_ENCLOSURE* 3, H1_WIDE_OPENING_CONTINUITY 3 boundary
+  layout mass-0/MAIN 8.40x10.05 s0..1 | mass-1/ATTACHED 3.60x6.00 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.05 s0,1 | attached-0 8.40..12.00x0.00..6.00 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.05}; outcome COMPLETE
+  completeness drawn 106.0 m2, represented 106.0 (1.000); region-built-0-0:REPRESENTED region-built-1-1:REPRESENTED
+
+=== s30-door
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 3.89 10.20
+   B.
+   BB
+  regions region-built-0-0 0.00..8.40x0.00..10.20 | region-built-1-1 8.40..12.00x3.89..10.20
+  hyp H0_STRICT_ENCLOSURE* 3, H1_WIDE_OPENING_CONTINUITY 3 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1 | mass-1/ATTACHED 3.60x6.30 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..12.00x0.00..6.30 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+  completeness drawn 108.4 m2, represented 108.4 (1.000); region-built-0-0:REPRESENTED region-built-1-1:REPRESENTED
+
+=== s30-nodoor
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 3.89 10.20
+   B.
+   BB
+  regions region-built-0-0 0.00..8.40x0.00..10.20 | region-built-1-1 8.40..12.00x3.89..10.20
+  hyp H0_STRICT_ENCLOSURE* 3, H1_WIDE_OPENING_CONTINUITY 3 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1 | mass-1/ATTACHED 3.60x6.30 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..12.00x0.00..6.30 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+  completeness drawn 108.4 m2, represented 108.4 (1.000); region-built-0-0:REPRESENTED region-built-1-1:REPRESENTED
+
+=== s40-door
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 3.79 10.20
+   B.
+   BB
+  regions region-built-0-0 0.00..8.40x0.00..10.20 | region-built-1-1 8.40..12.00x3.79..10.20
+  hyp H0_STRICT_ENCLOSURE* 2, H1_WIDE_OPENING_CONTINUITY 2 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1 | mass-1/ATTACHED 3.60x6.40 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..12.00x0.00..6.40 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+  gateBay GATE_SHUT BOTTOM w3.600051 d6.40305 gap0 jambs 0.632976/0.606602 sides 0.908425/0.884774/0.932099
+  completeness drawn 108.7 m2, represented 108.7 (1.000); region-built-0-0:REPRESENTED region-built-1-1:REPRESENTED
+
+=== s40-nodoor
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 3.79 10.20
+   B.
+   BB
+  regions region-built-0-0 0.00..8.40x0.00..10.20 | region-built-1-1 8.40..12.00x3.79..10.20
+  hyp H0_STRICT_ENCLOSURE* 3, H1_WIDE_OPENING_CONTINUITY 3 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1 | mass-1/ATTACHED 3.60x6.40 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..12.00x0.00..6.40 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+  completeness drawn 108.7 m2, represented 108.7 (1.000); region-built-0-0:REPRESENTED region-built-1-1:REPRESENTED
+
+=== s45-door
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 3.75 10.20
+   B.
+   B.
+  regions region-built-0-0 0.00..8.40x0.00..10.20
+  hyp H0_STRICT_ENCLOSURE* 2, H1_WIDE_OPENING_CONTINUITY 2 boundary
+  layout mass-0/MAIN 8.40x10.17 s0..1; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.17 s0,1
+  model rings ring-main-0,ring-main-1; roofs roof-main; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.17}; outcome COMPLETE
+  gateBay LEFT_OPEN BOTTOM w3.600051 d6.441842 gap2.360473 jambs 0.632976/0.606602 sides 0.908425/0.830266/0.928425
+  completeness drawn 85.4 m2, represented 85.4 (1.000); region-built-0-0:REPRESENTED pocket-0:UNRESOLVED
+    UNRESOLVED pocket-0: walled on three sides (0.91, 0.83, 0.93), but a side or back wall drawn over only 83% of its length, not continuous; not built and not a confirmed body: what stands there is a question for the drawing's reader
+
+=== s45-nodoor
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 3.75 10.20
+   B.
+   BB
+  regions region-built-0-0 0.00..8.40x0.00..10.20 | region-built-1-1 8.40..12.00x3.75..10.20
+  hyp H0_STRICT_ENCLOSURE* 3, H1_WIDE_OPENING_CONTINUITY 3 boundary
+  layout mass-0/MAIN 8.40x10.17 s0..1 | mass-1/ATTACHED 3.60x6.42 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.17 s0,1 | attached-0 8.40..12.00x0.00..6.42 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.17}; outcome COMPLETE
+  completeness drawn 108.5 m2, represented 108.5 (1.000); region-built-0-0:REPRESENTED region-built-1-1:REPRESENTED
+
+=== s60-door
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 3.60 9.60 10.20
+   B.
+   B.
+   B.
+  regions region-built-0-0 0.00..8.40x0.00..10.20
+  hyp H0_STRICT_ENCLOSURE* 3, H1_WIDE_OPENING_CONTINUITY 3 boundary
+  layout mass-0/MAIN 8.40x10.15 s0..1; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.15 s0,1
+  model rings ring-main-0,ring-main-1; roofs roof-main; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.15}; outcome COMPLETE
+  gateBay LEFT_OPEN BOTTOM w3.600051 d6.600675 gap0 jambs 0.632976/0.606602 sides 0.908425/0.810379/0.906188
+  completeness drawn 85.3 m2, represented 85.3 (1.000); region-built-0-0:REPRESENTED pocket-0:UNRESOLVED
+    UNRESOLVED pocket-0: walled on three sides (0.91, 0.81, 0.91), but a side or back wall drawn over only 81% of its length, not continuous; not built and not a confirmed body: what stands there is a question for the drawing's reader
+
+=== s60-nodoor
+  linesX m 0.00 8.40 12.00
+  linesY m 0.00 3.60 9.60 10.20
+   B.
+   BB
+   B.
+  regions region-built-0-0 0.00..8.40x0.00..10.20 | region-built-1-1 8.40..12.00x3.60..9.60
+  hyp H0_STRICT_ENCLOSURE* 4, H1_WIDE_OPENING_CONTINUITY 4 boundary
+  layout mass-0/MAIN 8.40x10.15 s0..1 | mass-1/ATTACHED 3.60x6.00 s0..0; gate STRUCTURAL_LAYOUT_ACCEPTED 
+  v2 main 0.00..8.40x0.00..10.15 s0,1 | attached-0 8.40..12.00x0.55..6.55 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.15}; outcome COMPLETE
+  completeness drawn 106.9 m2, represented 106.9 (1.000); region-built-0-0:REPRESENTED region-built-1-1:REPRESENTED
+
+=== g-wide5
+  linesX m 0.00 8.40 8.86 13.91 14.40
+  linesY m 0.00 4.20 10.20
+   B...
+   BBBB
+  regions region-built-0-0 0.00..8.40x0.00..10.20 | region-built-1-1 8.40..14.40x4.20..10.20
+  hyp H0_STRICT_ENCLOSURE* 3, H1_WIDE_OPENING_CONTINUITY 3 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1 | mass-1/ATTACHED 6.05x6.00 s0..0; gate STRUCTURAL_LAYOUT_REJECTED STRUCTURE_SILHOUETTE_DISAGREES: the massing drawn against the front elevation stands up to 2.60 m away from the outline that drawing traces [49 samples across the view, 0.37 m rms: 2 bodies at 2 heights — mass-0 0.00–8.40 m to 8.53 m (the ridge, seen end on over the gable); mass-1 8.40–14.45 m to 2.70 m (the top of its own walls, with a level roof over them)] ; STRUCTURE_SILHOUETTE_DISAGREES: the massing drawn against the rear elevation stands up to 2.62 m away from the outline that drawing traces [49 samples across the view, 0.38 m rms: 2 bodies at 2 heights — mass-1 0.00–6.05 m to 2.70 m (the top of its own walls, with a level roof over them); mass-0 6.05–14.45 m to 8.53 m (the ridge, seen end on over the gable)]
+  v2 main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..14.45x0.00..6.00 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+  gateBay GATE_SHUT BOTTOM w6.000085 d5.996445 gap5.01106 jambs 0.501106/0.487919 sides 0.945055/0.947253/0.995604
+  completeness drawn 122.0 m2, represented 122.0 (1.000); region-built-0-0:REPRESENTED region-built-1-1:REPRESENTED
+
+=== g-gate34
+  linesX m 0.00 8.40 12.60
+  linesY m 0.00 4.20 10.20
+   B.
+   BB
+  regions region-built-0-0 0.00..8.40x0.00..10.20 | region-built-1-1 8.40..12.60x4.20..10.20
+  hyp H0_STRICT_ENCLOSURE* 2, H1_WIDE_OPENING_CONTINUITY 2 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1 | mass-1/ATTACHED 4.25x6.00 s0..0; gate STRUCTURAL_LAYOUT_REJECTED STRUCTURE_SILHOUETTE_DISAGREES: the massing drawn against the front elevation stands up to 2.60 m away from the outline that drawing traces [49 samples across the view, 0.37 m rms: 2 bodies at 2 heights — mass-0 0.00–8.40 m to 8.53 m (the ridge, seen end on over the gable); mass-1 8.40–12.65 m to 2.70 m (the top of its own walls, with a level roof over them)] ; STRUCTURE_SILHOUETTE_DISAGREES: the massing drawn against the rear elevation stands up to 2.61 m away from the outline that drawing traces [49 samples across the view, 0.37 m rms: 2 bodies at 2 heights — mass-1 0.00–4.25 m to 2.70 m (the top of its own walls, with a level roof over them); mass-0 4.25–12.65 m to 8.53 m (the ridge, seen end on over the gable)]
+  v2 main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..12.65x0.00..6.00 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+  gateBay GATE_SHUT BOTTOM w4.204899 d5.996445 gap3.42719 jambs 0.395445/0.382264 sides 0.915361/0.947253/0.995604
+  completeness drawn 111.2 m2, represented 111.2 (1.000); region-built-0-0:REPRESENTED region-built-1-1:REPRESENTED
+
+=== g-wide5-605
+  linesX m 0.00 8.40 8.91 13.96 14.45
+  linesY m 0.00 4.20 10.20
+   B...
+   BBBB
+  regions region-built-0-0 0.00..8.40x0.00..10.20 | region-built-1-1 8.40..14.45x4.20..10.20
+  hyp H0_STRICT_ENCLOSURE* 3, H1_WIDE_OPENING_CONTINUITY 3 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1 | mass-1/ATTACHED 6.08x6.00 s0..0; gate STRUCTURAL_LAYOUT_REJECTED STRUCTURE_SILHOUETTE_DISAGREES: the massing drawn against the rear elevation stands up to 2.59 m away from the outline that drawing traces [49 samples across the view, 0.37 m rms: 2 bodies at 2 heights — mass-1 0.00–6.08 m to 2.70 m (the top of its own walls, with a level roof over them); mass-0 6.08–14.48 m to 8.53 m (the ridge, seen end on over the gable)]
+  v2 main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..14.48x0.00..6.00 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+  gateBay GATE_SHUT BOTTOM w6.051915 d5.996445 gap5.0103 jambs 0.50103/0.540585 sides 0.945534/0.947253/0.995604
+  completeness drawn 122.2 m2, represented 122.2 (1.000); region-built-0-0:REPRESENTED region-built-1-1:REPRESENTED
+
+=== g-gate34-425
+  linesX m 0.00 8.40 12.65
+  linesY m 0.00 4.20 10.20
+   B.
+   BB
+  regions region-built-0-0 0.00..8.40x0.00..10.20 | region-built-1-1 8.40..12.65x4.20..10.20
+  hyp H0_STRICT_ENCLOSURE* 2, H1_WIDE_OPENING_CONTINUITY 2 boundary
+  layout mass-0/MAIN 8.40x10.20 s0..1 | mass-1/ATTACHED 4.28x6.00 s0..0; gate STRUCTURAL_LAYOUT_REJECTED STRUCTURE_SILHOUETTE_DISAGREES: the massing drawn against the rear elevation stands up to 2.54 m away from the outline that drawing traces [49 samples across the view, 0.36 m rms: 2 bodies at 2 heights — mass-1 0.00–4.28 m to 2.70 m (the top of its own walls, with a level roof over them); mass-0 4.28–12.68 m to 8.53 m (the ridge, seen end on over the gable)]
+  v2 main 0.00..8.40x0.00..10.20 s0,1 | attached-0 8.40..12.68x0.00..6.00 s0
+  model rings ring-main-0,ring-main-1,ring-attached-0-0; roofs roof-main,roof-attached-0; mainRoof {"x0":0,"x1":8.4,"z0":0,"z1":10.2}; outcome COMPLETE
+  gateBay GATE_SHUT BOTTOM w4.256979 d5.996445 gap3.42667 jambs 0.395385/0.434924 sides 0.916409/0.947253/0.995604
+  completeness drawn 111.4 m2, represented 111.4 (1.000); region-built-0-0:REPRESENTED region-built-1-1:REPRESENTED

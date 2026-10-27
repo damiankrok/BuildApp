@@ -1,0 +1,262 @@
+{
+ "base": "b870964 (FIX-03, solver 2.8.0)",
+ "after": "FIX-04 (solver 2.9.0)",
+ "method": "sealed source-package / observation-graph / metric-evidence replayed offline through second-house.ts (byte cache); model.json SHA-256 compared; bodies, gate and completeness from research/analyzer-n7-fix03/probe-house.ts",
+ "houses": [
+  {
+   "house": "a01",
+   "modelSha256Before": "d095c0da90b69a499ea2f0d9db1f47af068829abec0d2f397488edc25ad88002",
+   "modelSha256After": "d095c0da90b69a499ea2f0d9db1f47af068829abec0d2f397488edc25ad88002",
+   "identical": true,
+   "bodies": [
+    "main x 0..10.5 z 0..8.3 s0,1"
+   ],
+   "layoutGate": "STRUCTURAL_LAYOUT_PARTIAL DEGRADING:STOREY_COVERAGE_DISAGREES",
+   "modelCompleteness": {
+    "verdict": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "why": "the accepted decomposition is 100% represented (its own built regions only); degrading: STOREY_COVERAGE_DISAGREES",
+    "decomposition": {
+     "coverage": 1,
+     "drawnBuiltM2": 87.15,
+     "representedM2": 87.15,
+     "basis": "ACCEPTED_DECOMPOSITION"
+    },
+    "unresolvedAreas": 0,
+    "unexplainedWalls": {
+     "count": 0,
+     "lengthM": 0
+    },
+    "blocking": [],
+    "degrading": [
+     "STOREY_COVERAGE_DISAGREES"
+    ]
+   },
+   "unexplainedWallsDetail": []
+  },
+  {
+   "house": "gozd",
+   "modelSha256Before": "1a96c20f088efaad9168537b1dc975c0e0ae066145821f0290c906273f61965e",
+   "modelSha256After": "1a96c20f088efaad9168537b1dc975c0e0ae066145821f0290c906273f61965e",
+   "identical": true,
+   "bodies": [
+    "main x 0..13.82 z 0..9.5 s0,1"
+   ],
+   "layoutGate": "STRUCTURAL_LAYOUT_PARTIAL DEGRADING:STOREY_COVERAGE_DISAGREES",
+   "modelCompleteness": {
+    "verdict": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "why": "the accepted decomposition is 100% represented (its own built regions only); degrading: STOREY_COVERAGE_DISAGREES",
+    "decomposition": {
+     "coverage": 1,
+     "drawnBuiltM2": 127.498338,
+     "representedM2": 127.498338,
+     "basis": "ACCEPTED_DECOMPOSITION"
+    },
+    "unresolvedAreas": 0,
+    "unexplainedWalls": {
+     "count": 0,
+     "lengthM": 0
+    },
+    "blocking": [],
+    "degrading": [
+     "STOREY_COVERAGE_DISAGREES"
+    ]
+   },
+   "unexplainedWallsDetail": []
+  },
+  {
+   "house": "marcowki",
+   "modelSha256Before": "8541ca10d0534107cfacc56163c9b3af513e5a99ddd3e8594495ee30b0977dcb",
+   "modelSha256After": "8541ca10d0534107cfacc56163c9b3af513e5a99ddd3e8594495ee30b0977dcb",
+   "identical": true,
+   "bodies": [
+    "main x 0..7.9 z 0.99..13.6 s0,1",
+    "attached-0 x 7.9..12.05 z 0.99..8.5 s0"
+   ],
+   "layoutGate": "STRUCTURAL_LAYOUT_PARTIAL DEGRADING:STOREY_COVERAGE_DISAGREES",
+   "modelCompleteness": {
+    "verdict": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "why": "the accepted decomposition is 100% represented (its own built regions only); 1 drawn wall (9.5 m) no body or named area accounts for; degrading: STOREY_COVERAGE_DISAGREES",
+    "decomposition": {
+     "coverage": 1,
+     "drawnBuiltM2": 130.7855,
+     "representedM2": 130.7855,
+     "basis": "ACCEPTED_DECOMPOSITION"
+    },
+    "unresolvedAreas": 0,
+    "unexplainedWalls": {
+     "count": 1,
+     "lengthM": 9.453752
+    },
+    "blocking": [],
+    "degrading": [
+     "STOREY_COVERAGE_DISAGREES"
+    ]
+   },
+   "unexplainedWallsDetail": [
+    {
+     "rectM": {
+      "x0": 11.30994,
+      "z0": 5.550335,
+      "x1": 12.05,
+      "z1": 15.004087
+     },
+     "lengthM": 9.453752,
+     "thicknessM": 0.635232
+    }
+   ]
+  },
+  {
+   "house": "ciesz",
+   "modelSha256Before": "5394c17c4ff1c4e515c70067f77cc4aab68005658855930cd96c8e6f1323568f",
+   "modelSha256After": "5394c17c4ff1c4e515c70067f77cc4aab68005658855930cd96c8e6f1323568f",
+   "identical": true,
+   "bodies": [
+    "main x 0..11.7 z 0..16.6 s0"
+   ],
+   "layoutGate": "STRUCTURAL_LAYOUT_PARTIAL DEGRADING:ROOF_EVIDENCE_DISAGREES",
+   "modelCompleteness": {
+    "verdict": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "why": "the accepted decomposition is 100% represented (its own built regions only); degrading: ROOF_EVIDENCE_DISAGREES",
+    "decomposition": {
+     "coverage": 1,
+     "drawnBuiltM2": 192.188,
+     "representedM2": 192.188,
+     "basis": "ACCEPTED_DECOMPOSITION"
+    },
+    "unresolvedAreas": 0,
+    "unexplainedWalls": {
+     "count": 0,
+     "lengthM": 0
+    },
+    "blocking": [],
+    "degrading": [
+     "ROOF_EVIDENCE_DISAGREES"
+    ]
+   },
+   "unexplainedWallsDetail": []
+  },
+  {
+   "house": "rary",
+   "modelSha256Before": "73969751a434e0f6ea56d6f63b64649e9ff7f743a109fde72cb7f6d0ad393c8f",
+   "modelSha256After": "73969751a434e0f6ea56d6f63b64649e9ff7f743a109fde72cb7f6d0ad393c8f",
+   "identical": true,
+   "bodies": [
+    "main x 0..17.21 z 6.2..14.7 s0",
+    "attached-0 x 2.05..8.91 z 0..6.2 s0"
+   ],
+   "layoutGate": "STRUCTURAL_LAYOUT_ACCEPTED",
+   "modelCompleteness": {
+    "verdict": "COMPLETE",
+    "why": "the accepted decomposition is 100% represented (its own built regions only); nothing unresolved, unexplained or in conflict",
+    "decomposition": {
+     "coverage": 1,
+     "drawnBuiltM2": 187.611584,
+     "representedM2": 187.611584,
+     "basis": "ACCEPTED_DECOMPOSITION"
+    },
+    "unresolvedAreas": 0,
+    "unexplainedWalls": {
+     "count": 0,
+     "lengthM": 0
+    },
+    "blocking": [],
+    "degrading": []
+   },
+   "unexplainedWallsDetail": []
+  },
+  {
+   "house": "trytomach",
+   "modelSha256Before": "d2bf0c031d4733d38b8f097d55828a5d167187f656998e5086d83478bcb9cc15",
+   "modelSha256After": "d2bf0c031d4733d38b8f097d55828a5d167187f656998e5086d83478bcb9cc15",
+   "identical": true,
+   "bodies": [
+    "main x 0..12.99 z 0..7.25 s0,1 sr 1:0..7.24x0..7.25"
+   ],
+   "layoutGate": "STRUCTURAL_LAYOUT_PARTIAL DEGRADING:STOREY_COVERAGE_DISAGREES,DEGRADING:ROOF_EVIDENCE_DISAGREES",
+   "modelCompleteness": {
+    "verdict": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "why": "the accepted decomposition is 100% represented (its own built regions only); degrading: STOREY_COVERAGE_DISAGREES, ROOF_EVIDENCE_DISAGREES",
+    "decomposition": {
+     "coverage": 1,
+     "drawnBuiltM2": 94.172556,
+     "representedM2": 94.172556,
+     "basis": "ACCEPTED_DECOMPOSITION"
+    },
+    "unresolvedAreas": 0,
+    "unexplainedWalls": {
+     "count": 0,
+     "lengthM": 0
+    },
+    "blocking": [],
+    "degrading": [
+     "ROOF_EVIDENCE_DISAGREES",
+     "STOREY_COVERAGE_DISAGREES"
+    ]
+   },
+   "unexplainedWallsDetail": []
+  },
+  {
+   "house": "arganiach",
+   "modelSha256Before": "34a95a766d169f39210b6337f031265ee3a6846ac3df0fa67086c0c91465e0eb",
+   "modelSha256After": "34a95a766d169f39210b6337f031265ee3a6846ac3df0fa67086c0c91465e0eb",
+   "identical": true,
+   "bodies": [
+    "main x 0..14.2 z 3.7..12.32 s0",
+    "attached-0 x 7.42..14.2 z 0..3.7 s0"
+   ],
+   "layoutGate": "STRUCTURAL_LAYOUT_PARTIAL DEGRADING:NO_MASS_REACHES_UP,DEGRADING:ROOF_EVIDENCE_DISAGREES",
+   "modelCompleteness": {
+    "verdict": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "why": "the accepted decomposition is 100% represented (its own built regions only); degrading: NO_MASS_REACHES_UP, ROOF_EVIDENCE_DISAGREES",
+    "decomposition": {
+     "coverage": 1,
+     "drawnBuiltM2": 146.787116,
+     "representedM2": 146.787116,
+     "basis": "ACCEPTED_DECOMPOSITION"
+    },
+    "unresolvedAreas": 0,
+    "unexplainedWalls": {
+     "count": 0,
+     "lengthM": 0
+    },
+    "blocking": [],
+    "degrading": [
+     "NO_MASS_REACHES_UP",
+     "ROOF_EVIDENCE_DISAGREES"
+    ]
+   },
+   "unexplainedWallsDetail": []
+  },
+  {
+   "house": "sasankach3",
+   "modelSha256Before": "090749f43fa6b7415041742514b9026e51ce5c19a4f2bfc7372d61be388f2301",
+   "modelSha256After": "090749f43fa6b7415041742514b9026e51ce5c19a4f2bfc7372d61be388f2301",
+   "identical": true,
+   "bodies": [
+    "main x 0..11.6 z 0..10.45 s0,1"
+   ],
+   "layoutGate": "STRUCTURAL_LAYOUT_PARTIAL DEGRADING:STOREY_COVERAGE_DISAGREES,DEGRADING:ROOF_EVIDENCE_DISAGREES",
+   "modelCompleteness": {
+    "verdict": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "why": "the accepted decomposition is 100% represented (its own built regions only); degrading: STOREY_COVERAGE_DISAGREES, ROOF_EVIDENCE_DISAGREES",
+    "decomposition": {
+     "coverage": 1,
+     "drawnBuiltM2": 121.22,
+     "representedM2": 121.22,
+     "basis": "ACCEPTED_DECOMPOSITION"
+    },
+    "unresolvedAreas": 0,
+    "unexplainedWalls": {
+     "count": 0,
+     "lengthM": 0
+    },
+    "blocking": [],
+    "degrading": [
+     "ROOF_EVIDENCE_DISAGREES",
+     "STOREY_COVERAGE_DISAGREES"
+    ]
+   },
+   "unexplainedWallsDetail": []
+  }
+ ]
+}
