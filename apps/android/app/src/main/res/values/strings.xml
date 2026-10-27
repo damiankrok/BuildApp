@@ -434,6 +434,9 @@
     <string name="analyzer_copy_code_description">Kopiuj kod diagnostyczny %1$s</string>
     <string name="analyzer_result_ready">Model gotowy</string>
     <string name="analyzer_result_limited">Model gotowy z ograniczeniami</string>
+    <!-- N7-FIX-04 follow-up: COMPLETE_WITH_OPEN_QUESTIONS — built whole, never said as plainly ready -->
+    <string name="analyzer_result_open_questions">Model zbudowany, z otwartymi pytaniami</string>
+    <string name="analyzer_result_open_questions_body">Analiza zbudowała cały odczytany model, ale części rysunku nie rozstrzygnęła. Co pozostało otwarte, opisuje sekcja „Kompletność modelu” niżej.</string>
     <!-- N7-P1: the last valid model when a later object was refused; never called a complete reconstruction -->
     <string name="analyzer_result_partial">Model częściowy 3D</string>
     <string name="analyzer_result_partial_body">To nie jest pełna rekonstrukcja. Model zatrzymał się na jednym elemencie; wszystko, co zbudowano przed nim, jest zachowane i sprawdzone, a pominięte elementy są wymienione niżej.</string>
@@ -464,7 +467,8 @@
     <string name="completeness_partial">Częściowy: czegoś brakuje albo coś pozostało sprzeczne.</string>
     <string name="completeness_decomposition">Pokrycie odczytanego rzutu: %1$s (%2$s z %3$s m²) — liczone tylko względem regionów, które analizator uznał za zabudowane</string>
     <string name="completeness_unresolved">Obszary nazwane i niezbudowane: %1$d</string>
-    <string name="completeness_walls">Ściany na rzucie bez bryły i bez opisu: %1$d (%2$s m)</string>
+    <string name="completeness_walls">Ściany na rzucie bez bryły i bez opisu: %1$d — niewyjaśnione %2$s m z %3$s m pasma muru</string>
+    <string name="completeness_walls_count">Ściany na rzucie bez bryły i bez opisu: %1$d</string>
     <string name="completeness_blocking">Nierozwiązane błędy blokujące: %1$s</string>
     <string name="completeness_degrading">Rozbieżności źródeł: %1$s</string>
     <string name="partial_missing_bodies">Bryły narysowane na rzucie, których brakuje w modelu</string>

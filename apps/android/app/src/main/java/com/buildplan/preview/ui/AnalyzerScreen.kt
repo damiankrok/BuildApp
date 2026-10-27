@@ -81,6 +81,7 @@ import com.buildplan.preview.analyzer.StageChecklist
 import com.buildplan.preview.analyzer.StageRow
 import com.buildplan.preview.scene.AnalysisOrigin
 import com.buildplan.preview.scene.PreviewOutcome
+import com.buildplan.preview.scene.ModelCompleteness
 import com.buildplan.preview.analyzer.StageState
 import com.buildplan.preview.analyzer.LivenessTracker
 import com.buildplan.preview.analyzer.Liveness
@@ -622,17 +623,19 @@ private fun Failure(
 private fun Result(summary: AnalysisSummary, entry: DownloadedSceneEntry, local: LocalRunReport?, onOpen: () -> Unit) {
     var open by rememberSaveable { mutableStateOf(false) }
     // N7-P1: a partial 3D preview is never said as a ready model, however few warnings it carries
-    val partial = summary.preview.isPartial
-    val limited = partial || summary.unresolved.isNotEmpty() || summary.limitingWarnings.isNotEmpty()
+    val headline = resultHeadline(summary)
+    val partial = headline == ResultHeadline.PARTIAL
+    val limited = headline == ResultHeadline.PARTIAL || headline == ResultHeadline.LIMITED
     Column(verticalArrangement = Arrangement.spacedBy(Space.s)) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Space.s)) {
-            Icon(if (limited) ShellIcons.caution else ShellIcons.check, null, tint = Palette.Ink, modifier = Modifier.size(Sizes.iconSmall))
+            Icon(if (headline == ResultHeadline.READY) ShellIcons.check else ShellIcons.caution, null, tint = Palette.Ink, modifier = Modifier.size(Sizes.iconSmall))
             Text(
                 stringResource(
-                    when {
-                        partial -> R.string.analyzer_result_partial
-                        limited -> R.string.analyzer_result_limited
-                        else -> R.string.analyzer_result_ready
+                    when (headline) {
+                        ResultHeadline.PARTIAL -> R.string.analyzer_result_partial
+                        ResultHeadline.LIMITED -> R.string.analyzer_result_limited
+                        ResultHeadline.OPEN_QUESTIONS -> R.string.analyzer_result_open_questions
+                        ResultHeadline.READY -> R.string.analyzer_result_ready
                     },
                 ),
                 style = MaterialTheme.typography.titleMedium,
@@ -660,13 +663,34 @@ private fun Result(summary: AnalysisSummary, entry: DownloadedSceneEntry, local:
             )
             Body(stringResource(if (partial) R.string.analyzer_result_partial_body else R.string.analyzer_result_limited_body))
         }
-        if (partial || summary.preview.provisional.isNotEmpty()) PreviewOutcomeDetails(summary.preview)
+        if (headline == ResultHeadline.OPEN_QUESTIONS) Body(stringResource(R.string.analyzer_result_open_questions_body))
+        // N7-FIX-04 follow-up: the completeness verdict is shown with every result that carries one, not only a partial one
+        if (summary.preview.hasDetails) PreviewOutcomeDetails(summary.preview)
         InkButton(stringResource(if (partial) R.string.analyzer_open_partial_3d else R.string.house_open_3d), onClick = onOpen, icon = ShellIcons.cube, modifier = Modifier.fillMaxWidth())
         Foldout(stringResource(R.string.analyzer_details), open, onToggle = { open = !open }) {
             RunProvenanceDetails(entry.provenance)
             AnalysisDiagnostics(summary)
             local?.let { LocalCost(it) }
         }
+    }
+}
+
+/** How a finished result is headed: the strongest of what the analyzer reported, never stronger than it. */
+internal enum class ResultHeadline { PARTIAL, LIMITED, OPEN_QUESTIONS, READY }
+
+/**
+ * N7-P1: a partial 3D preview is never said as a ready model. N7-FIX-04 follow-up: nor is a model built whole with
+ * questions the analyzer names and leaves open (`COMPLETE_WITH_OPEN_QUESTIONS`); a completeness verdict of `PARTIAL`
+ * on a model delivered whole is at least limited.
+ */
+internal fun resultHeadline(summary: AnalysisSummary): ResultHeadline {
+    val preview = summary.preview
+    return when {
+        preview.isPartial -> ResultHeadline.PARTIAL
+        summary.unresolved.isNotEmpty() || summary.limitingWarnings.isNotEmpty() -> ResultHeadline.LIMITED
+        preview.completeness?.verdict == ModelCompleteness.PARTIAL -> ResultHeadline.LIMITED
+        preview.hasOpenQuestions -> ResultHeadline.OPEN_QUESTIONS
+        else -> ResultHeadline.READY
     }
 }
 
@@ -745,14 +769,18 @@ internal fun PreviewOutcomeDetails(preview: PreviewOutcome) {
         preview.completeness?.let { c ->
             Section(stringResource(R.string.completeness_title)) {
                 val verdict = when (c.verdict) {
-                    "COMPLETE" -> stringResource(R.string.completeness_complete)
-                    "COMPLETE_WITH_OPEN_QUESTIONS" -> stringResource(R.string.completeness_open_questions)
+                    ModelCompleteness.COMPLETE -> stringResource(R.string.completeness_complete)
+                    ModelCompleteness.COMPLETE_WITH_OPEN_QUESTIONS -> stringResource(R.string.completeness_open_questions)
                     else -> stringResource(R.string.completeness_partial)
                 }
                 Text(verdict, style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
                 StatusText(stringResource(R.string.completeness_decomposition, share(c.decomposition.coverage), metres(c.decomposition.representedM2), metres(c.decomposition.drawnBuiltM2)))
                 if (c.unresolvedAreas.isNotEmpty()) StatusText(stringResource(R.string.completeness_unresolved, c.unresolvedAreas.size))
-                if (c.unexplainedWalls.count > 0) StatusText(stringResource(R.string.completeness_walls, c.unexplainedWalls.count, metres(c.unexplainedWalls.lengthM)))
+                val walls = c.unexplainedWalls
+                if (walls.count > 0) {
+                    val band = walls.bandLengthM
+                    StatusText(if (band != null) stringResource(R.string.completeness_walls, walls.count, metres(walls.lengthM), metres(band)) else stringResource(R.string.completeness_walls_count, walls.count))
+                }
                 if (c.conflicts.blocking.isNotEmpty()) StatusText(stringResource(R.string.completeness_blocking, c.conflicts.blocking.joinToString(", ") { it.code }))
                 if (c.conflicts.degrading.isNotEmpty()) StatusText(stringResource(R.string.completeness_degrading, c.conflicts.degrading.map { it.code }.distinct().joinToString(", ")))
             }

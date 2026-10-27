@@ -57,7 +57,25 @@ export type BodyCompleteness = {
    * area named above — walls the plan draws and nothing in the reading accounts for (a garden wall, a fence drawn in
    * wall ink, or a body the decomposition never enclosed). Read from the bands, not from the decomposition.
    */
-  unexplainedWalls: Array<{ rectM: { x0: number; z0: number; x1: number; z1: number }; rectPx: { x0: number; y0: number; x1: number; y1: number }; lengthM: number; thicknessM: number }>
+  unexplainedWalls: UnexplainedWall[]
+}
+
+/**
+ * N7-FIX-04 follow-up: one wall band and the parts of it nothing accounts for — three numbers that are not the same.
+ * A band running on past a body's front is mostly that body's own wall; only the run beyond the body (and its own wall
+ * reach) is unexplained, and that run, not the band, is what the reading leaves open.
+ */
+export type UnexplainedWall = {
+  /** The whole band, in the layout's frame and in the plan's pixels. */
+  rectM: { x0: number; z0: number; x1: number; z1: number }
+  rectPx: { x0: number; y0: number; x1: number; y1: number }
+  /** The band's whole length along its axis, m — the drawn wall, explained parts included. */
+  bandLengthM: number
+  /** Of it, the length no body or named area accounts for, m: the sum of `fragments`. */
+  unexplainedLengthM: number
+  /** The runs of the band's axis outside every accounted rectangle, each with its own extent and length. */
+  fragments: Array<{ rectM: { x0: number; z0: number; x1: number; z1: number }; rectPx: { x0: number; y0: number; x1: number; y1: number }; lengthM: number }>
+  thicknessM: number
 }
 
 /** N7-FIX-04: a wall band this long or longer is a wall the reading must account for. */
@@ -145,25 +163,57 @@ export function bodyCompleteness(input: {
   const accounted = [...bodies.map((b) => b.rect), ...areas.map((a) => a.rectM)].map((r) => ({ x0: r.x0 - OWN_WALL_REACH_M, z0: r.z0 - OWN_WALL_REACH_M, x1: r.x1 + OWN_WALL_REACH_M, z1: r.z1 + OWN_WALL_REACH_M }))
   const ext = d.extent
   const unexplainedWalls: BodyCompleteness['unexplainedWalls'] = []
+  const toX = frame.x ?? ((px: number): number => (px - frame.originPx.x) * frame.metresPerPixelX)
+  const toZ = frame.z ?? ((px: number): number => (px - frame.originPx.y) * frame.metresPerPixelY)
   for (const b of input.bands ?? []) {
     const cx = (b.bounds.x0 + b.bounds.x1) / 2
     const cy = (b.bounds.y0 + b.bounds.y1) / 2
     if (cx < ext.x0 || cx > ext.x1 || cy < ext.y0 || cy > ext.y1) continue
     const r = rectOf(b.bounds)
     const along = b.axis === 'HORIZONTAL'
-    const lengthM = round6(along ? r.x1 - r.x0 : r.z1 - r.z0)
-    if (lengthM < UNEXPLAINED_WALL_MIN_M) continue
-    // the length of its axis inside the union of the accounted rectangles, sampled every 5 cm
-    const n = Math.max(2, Math.ceil(lengthM / 0.05))
-    let inside = 0
-    for (let k = 0; k <= n; k += 1) {
-      const x = along ? r.x0 + ((r.x1 - r.x0) * k) / n : (r.x0 + r.x1) / 2
-      const z = along ? (r.z0 + r.z1) / 2 : r.z0 + ((r.z1 - r.z0) * k) / n
-      if (accounted.some((a) => x >= a.x0 && x <= a.x1 && z >= a.z0 && z <= a.z1)) inside += 1
+    const bandLengthM = round6(along ? r.x1 - r.x0 : r.z1 - r.z0)
+    if (bandLengthM < UNEXPLAINED_WALL_MIN_M) continue
+    // the band's axis, at its centre line, less every accounted rectangle that line crosses: exact intervals
+    const across = along ? (r.z0 + r.z1) / 2 : (r.x0 + r.x1) / 2
+    const covers = accounted
+      .filter((a) => (along ? across >= a.z0 && across <= a.z1 : across >= a.x0 && across <= a.x1))
+      .map((a) => (along ? [a.x0, a.x1] : [a.z0, a.z1]) as [number, number])
+      .sort((p, q) => p[0] - q[0])
+    const runs: Array<[number, number]> = []
+    let at = along ? r.x0 : r.z0
+    const stop = along ? r.x1 : r.z1
+    for (const [c0, c1] of covers) {
+      if (c1 <= at) continue
+      if (c0 >= stop) break
+      if (c0 > at) runs.push([at, c0])
+      at = Math.max(at, c1)
+      if (at >= stop) break
     }
-    const outsideM = lengthM * (1 - inside / (n + 1))
-    if (outsideM < UNEXPLAINED_WALL_MIN_M) continue
-    unexplainedWalls.push({ rectM: { x0: round6(r.x0), z0: round6(r.z0), x1: round6(r.x1), z1: round6(r.z1) }, rectPx: { ...b.bounds }, lengthM, thicknessM: round6(b.thickness * Math.max(frame.metresPerPixelX, frame.metresPerPixelY)) })
+    if (at < stop) runs.push([at, stop])
+    const unexplainedLengthM = round6(runs.reduce((a, [p, q]) => a + (q - p), 0))
+    if (unexplainedLengthM < UNEXPLAINED_WALL_MIN_M) continue
+    // each run back in the plan's pixels: the frame's metres are monotone in the pixel along the band's axis
+    const pxOf = (m: number): number => {
+      const map = along ? toX : toZ
+      let lo = along ? b.bounds.x0 : b.bounds.y0
+      let hi = along ? b.bounds.x1 : b.bounds.y1
+      const rising = map(hi) >= map(lo)
+      for (let k = 0; k < 40; k += 1) {
+        const mid = (lo + hi) / 2
+        if ((map(mid) < m) === rising) lo = mid
+        else hi = mid
+      }
+      return Math.round(((lo + hi) / 2) * 100) / 100
+    }
+    const fragments = runs.map(([p, q]) => {
+      const [a, c] = [pxOf(p), pxOf(q)].sort((u, v) => u - v)
+      return {
+        rectM: along ? { x0: round6(p), z0: round6(r.z0), x1: round6(q), z1: round6(r.z1) } : { x0: round6(r.x0), z0: round6(p), x1: round6(r.x1), z1: round6(q) },
+        rectPx: along ? { x0: a, y0: b.bounds.y0, x1: c, y1: b.bounds.y1 } : { x0: b.bounds.x0, y0: a, x1: b.bounds.x1, y1: c },
+        lengthM: round6(q - p),
+      }
+    })
+    unexplainedWalls.push({ rectM: { x0: round6(r.x0), z0: round6(r.z0), x1: round6(r.x1), z1: round6(r.z1) }, rectPx: { ...b.bounds }, bandLengthM, unexplainedLengthM, fragments, thicknessM: round6(b.thickness * Math.max(frame.metresPerPixelX, frame.metresPerPixelY)) })
   }
   return { drawnBuiltM2, representedM2, coverage: drawnBuiltM2 > 0 ? round6(representedM2 / drawnBuiltM2) : 1, areas, missing: areas.filter((a) => a.decision === 'MISSING'), unexplainedWalls }
 }
@@ -188,7 +238,8 @@ export type ModelCompleteness = {
   decomposition: { coverage: number; drawnBuiltM2: number; representedM2: number; basis: 'ACCEPTED_DECOMPOSITION' }
   missingBodies: string[]
   unresolvedAreas: Array<{ id: string; areaM2: number; why: string }>
-  unexplainedWalls: { count: number; lengthM: number }
+  /** N7-FIX-04 follow-up: `lengthM` is what nothing accounts for; `bandLengthM` the whole bands it lies on. */
+  unexplainedWalls: { count: number; lengthM: number; bandLengthM: number }
   conflicts: { blocking: Array<{ code: string; what: string }>; degrading: Array<{ code: string; what: string }> }
   modelRefusals: number
   why: string
@@ -213,14 +264,14 @@ export function modelCompleteness(input: {
   if (blocking.length > 0) said.push(`the chosen layout holds ${blocking.map((x) => x.code).join(', ')} BLOCKING, unresolved`)
   if (input.modelRefusals > 0) said.push(`${input.modelRefusals} object${input.modelRefusals === 1 ? '' : 's'} refused by the model`)
   if (unresolvedAreas.length > 0) said.push(`${unresolvedAreas.length} area${unresolvedAreas.length === 1 ? '' : 's'} named and not built`)
-  if (walls.length > 0) said.push(`${walls.length} drawn wall${walls.length === 1 ? '' : 's'} (${walls.reduce((a, w) => a + w.lengthM, 0).toFixed(1)} m) no body or named area accounts for`)
+  if (walls.length > 0) said.push(`${walls.length} drawn wall${walls.length === 1 ? '' : 's'} with ${walls.reduce((a, w) => a + w.unexplainedLengthM, 0).toFixed(1)} m (of ${walls.reduce((a, w) => a + w.bandLengthM, 0).toFixed(1)} m of band) no body or named area accounts for`)
   if (degrading.length > 0) said.push(`degrading: ${[...new Set(degrading.map((x) => x.code))].join(', ')}`)
   return {
     verdict,
     decomposition: { coverage: b?.coverage ?? 0, drawnBuiltM2: b?.drawnBuiltM2 ?? 0, representedM2: b?.representedM2 ?? 0, basis: 'ACCEPTED_DECOMPOSITION' },
     missingBodies,
     unresolvedAreas,
-    unexplainedWalls: { count: walls.length, lengthM: round6(walls.reduce((a, w) => a + w.lengthM, 0)) },
+    unexplainedWalls: { count: walls.length, lengthM: round6(walls.reduce((a, w) => a + w.unexplainedLengthM, 0)), bandLengthM: round6(walls.reduce((a, w) => a + w.bandLengthM, 0)) },
     conflicts: { blocking, degrading },
     modelRefusals: input.modelRefusals,
     why: `${b ? `the accepted decomposition is ${Math.round((b.coverage) * 100)}% represented (its own built regions only)` : 'no decomposition to weigh'}${said.length > 0 ? `; ${said.join('; ')}` : '; nothing unresolved, unexplained or in conflict'}`,

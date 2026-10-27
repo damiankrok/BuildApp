@@ -38,7 +38,8 @@ describe('N7-FIX-04 (C): what the reading does not account for', () => {
     const out = bodyCompleteness({ decomposition: house(), frame, built: [{ id: 'mass-0', ring: rectangleRing(0, 0, 2, 2) }], dropped: [], gaps: [], bands: [band(48, 0, 51, 20, 'VERTICAL')] })
     expect(out.coverage).toBe(1)
     expect(out.unexplainedWalls).toHaveLength(1)
-    expect(out.unexplainedWalls[0].lengthM).toBeCloseTo(2, 6)
+    expect(out.unexplainedWalls[0].bandLengthM).toBeCloseTo(2, 6)
+    expect(out.unexplainedWalls[0].unexplainedLengthM).toBeCloseTo(2, 6)
     const v = modelCompleteness({ body: out, gateReasons: [], modelRefusals: 0 })
     expect(v.verdict).toBe('COMPLETE_WITH_OPEN_QUESTIONS')
     expect(v.why).toContain('no body or named area accounts for')
@@ -47,6 +48,39 @@ describe('N7-FIX-04 (C): what the reading does not account for', () => {
   it("the body's own outer walls, drawn just outside its footprint, and a wall shorter than a metre, are not unexplained", () => {
     const out = bodyCompleteness({ decomposition: house(), frame, built: [{ id: 'mass-0', ring: rectangleRing(0, 0, 2, 2) }], dropped: [], gaps: [], bands: [band(20, 0, 23, 20, 'VERTICAL'), band(0, 20, 20, 23, 'HORIZONTAL'), band(48, 0, 51, 8, 'VERTICAL')] })
     expect(out.unexplainedWalls).toEqual([])
+  })
+
+  it('a body’s wall running on past its front: only the run beyond the body and its wall reach is unexplained, with its coordinates', () => {
+    // the body's east wall (x 2.0–2.3 m) drawn from z 0 to 4.5 m; the body ends at z 2, its own wall reaches 2.6
+    const out = bodyCompleteness({ decomposition: house(), frame, built: [{ id: 'mass-0', ring: rectangleRing(0, 0, 2, 2) }], dropped: [], gaps: [], bands: [band(20, 0, 23, 45, 'VERTICAL')] })
+    expect(out.unexplainedWalls).toHaveLength(1)
+    const w = out.unexplainedWalls[0]
+    expect(w.bandLengthM).toBeCloseTo(4.5, 6)
+    expect(w.unexplainedLengthM).toBeCloseTo(1.9, 6)
+    expect(w.fragments).toHaveLength(1)
+    expect(w.fragments[0].lengthM).toBeCloseTo(1.9, 6)
+    expect(w.fragments[0].rectM.z0).toBeCloseTo(2.6, 6)
+    expect(w.fragments[0].rectM.z1).toBeCloseTo(4.5, 6)
+    expect(w.fragments[0].rectM.x0).toBeCloseTo(2.0, 6)
+    expect(w.fragments[0].rectPx.y0).toBeCloseTo(26, 4)
+    expect(w.fragments[0].rectPx.y1).toBeCloseTo(45, 4)
+    expect(w.fragments[0].rectPx.x0).toBe(20)
+    const v = modelCompleteness({ body: out, gateReasons: [], modelRefusals: 0 })
+    expect(v.unexplainedWalls).toEqual({ count: 1, lengthM: 1.9, bandLengthM: 4.5 })
+    expect(v.why).toContain('1.9 m (of 4.5 m of band)')
+  })
+
+  it('a wall crossing a body: two runs, one each side, their sum the unexplained length; a run under a metre in all is not reported', () => {
+    // a horizontal band at z 1.0 from x -2.0 to 5.5: the body (grown by its reach) covers x -0.6–2.6
+    const two = bodyCompleteness({ decomposition: { ...house(), extent: { x0: -40, y0: 0, x1: 60, y1: 40 } }, frame, built: [{ id: 'mass-0', ring: rectangleRing(0, 0, 2, 2) }], dropped: [], gaps: [], bands: [band(-20, 9, 55, 11, 'HORIZONTAL')] })
+    const w = two.unexplainedWalls[0]
+    expect(w.bandLengthM).toBeCloseTo(7.5, 6)
+    expect(w.fragments.map((f) => [f.rectM.x0, f.rectM.x1])).toEqual([[-2, -0.6], [2.6, 5.5]])
+    expect(w.fragments.map((f) => f.lengthM)).toEqual([1.4, 2.9])
+    expect(w.unexplainedLengthM).toBeCloseTo(4.3, 6)
+    // bands ending just past the reach on each side: 0.5 + 0.6 m outside in all is reported, 0.4 + 0.4 m is not
+    const short = bodyCompleteness({ decomposition: { ...house(), extent: { x0: -40, y0: 0, x1: 60, y1: 40 } }, frame, built: [{ id: 'mass-0', ring: rectangleRing(0, 0, 2, 2) }], dropped: [], gaps: [], bands: [band(-11, 9, 32, 11, 'HORIZONTAL'), band(-10, 15, 30, 17, 'HORIZONTAL')] })
+    expect(short.unexplainedWalls.map((x) => x.unexplainedLengthM)).toEqual([1.1])
   })
 
   it('a wall outside the plan’s dimensioned extent (a title block, a north arrow) is not the reading’s to explain', () => {

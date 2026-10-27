@@ -23,6 +23,12 @@ data class PreviewOutcome(
     /** A model the analyzer delivered as the last valid part of the house, never as a complete reconstruction. */
     val isPartial: Boolean get() = outcome == PARTIAL_3D_PREVIEW && partial != null
 
+    /** Built whole, with something the analyzer names and does not resolve: never said as a plainly ready model. */
+    val hasOpenQuestions: Boolean get() = completeness?.verdict == ModelCompleteness.COMPLETE_WITH_OPEN_QUESTIONS
+
+    /** What to show beside the model: the partial record, the values only for viewing, or the completeness verdict. */
+    val hasDetails: Boolean get() = isPartial || provisional.isNotEmpty() || completeness != null
+
     companion object {
         const val COMPLETE = "COMPLETE"
         const val PARTIAL_3D_PREVIEW = "PARTIAL_3D_PREVIEW"
@@ -82,7 +88,13 @@ data class ModelCompleteness(
     val conflicts: CompletenessConflicts = CompletenessConflicts(),
     val modelRefusals: Int = 0,
     val why: String = "",
-)
+) {
+    companion object {
+        const val COMPLETE = "COMPLETE"
+        const val COMPLETE_WITH_OPEN_QUESTIONS = "COMPLETE_WITH_OPEN_QUESTIONS"
+        const val PARTIAL = "PARTIAL"
+    }
+}
 
 @Serializable
 data class CompletenessDecomposition(val coverage: Double = 0.0, val drawnBuiltM2: Double = 0.0, val representedM2: Double = 0.0, val basis: String = "")
@@ -90,8 +102,13 @@ data class CompletenessDecomposition(val coverage: Double = 0.0, val drawnBuiltM
 @Serializable
 data class CompletenessArea(val id: String = "", val areaM2: Double = 0.0, val why: String = "")
 
+/**
+ * Walls the plan draws that nothing in the reading accounts for. `lengthM` is the part no body or named area explains;
+ * `bandLengthM` is the whole wall bands it lies on. A record from before the two were kept apart has no `bandLengthM`,
+ * and its `lengthM` was the whole band: only its count is shown.
+ */
 @Serializable
-data class UnexplainedWalls(val count: Int = 0, val lengthM: Double = 0.0)
+data class UnexplainedWalls(val count: Int = 0, val lengthM: Double = 0.0, val bandLengthM: Double? = null)
 
 @Serializable
 data class CompletenessConflicts(val blocking: List<CompletenessConflict> = emptyList(), val degrading: List<CompletenessConflict> = emptyList())
