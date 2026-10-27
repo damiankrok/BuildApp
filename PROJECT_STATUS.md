@@ -2769,3 +2769,13 @@ model refusals into COMPLETE / COMPLETE_WITH_OPEN_QUESTIONS / PARTIAL. Eight kno
 (1 COMPLETE, 7 with open questions; Marcówki's 1.0 m wall before the garage named). Open: the silhouette check's
 step sample cannot tell unstated eaves from a misplaced step. The OWNER's private benchmark was not reproduced and is
 not claimed.
+
+## Completeness on every result, unexplained length apart from its band (STAGE BUILDPLAN N7-PATCH-04A)
+
+Status: **DONE — APK 1311, solver 2.9.0.** Report `stage-reports/STAGE_BUILDPLAN_N7_PATCH_04A.md`. The phone shows
+"Kompletność modelu" for every result and stored record that carries `preview.completeness` (`hasDetails`), on the
+result screen and the source sheet alike, headed by the verdict (`COMPLETE_WITH_OPEN_QUESTIONS`: "Model zbudowany, z
+otwartymi pytaniami"; partial only when the record is partial). An unexplained wall carries `bandLengthM`,
+`unexplainedLengthM` and its `fragments`; Marcówki: 1.79 m unexplained of a 9.45 m band (was reported 9.45 m). Eight
+known houses: models byte-identical. Open: the band before Marcówki's garage runs on over a planter (≈ 1.37 m of the
+1.79 m), band extraction untouched.
