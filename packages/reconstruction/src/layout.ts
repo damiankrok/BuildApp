@@ -41,6 +41,8 @@ import { adaptiveInkMask, inkChannel, runLengthBands } from '@buildapp/source-cv
 import type { Band, Mask, Raster } from '@buildapp/source-cv'
 import type { SourceCoordinateFrame, SourceObservationGraph } from '@buildapp/source-observations'
 import type { CoordinateRegistration, DimensionChain, MetricEvidence, MetricEvidenceSet } from '@buildapp/source-metrics'
+import { bodyWallThickness, houseWallThickness, minBodySpanM } from './exterior-walls.js'
+import type { WallThicknessReading } from './exterior-walls.js'
 import { bandWallThickness, decomposePlan, planBodies, planExtent, recutSlivers, walledFirstRegions, wallClusterExtent } from './plan-decomposition.js'
 import type { EndSpanDecision, ExtentProvenance, ExtentRefutation, PlanExtent } from './plan-decomposition.js'
 import { wallWitness } from './plan-extent.js'
@@ -228,7 +230,16 @@ export type StructuralLayoutDraft = {
    * the layout set, whose storeys, masses and footprint regions carry the decision itself.
    */
   storeyRegistrations: StoreyRegistration[]
+  /**
+   * N7-COUNCIL-FIX-02 (B-1/B-2): the exterior wall thickness the bodies were gated with and are to be built with —
+   * the house's, read off its outer faces (or an estimate, said so), and each base-storey body whose own outer faces
+   * are drawn otherwise, by footprint region id. Absent when there is no base plan to read it from.
+   */
+  wallThickness?: { house: WallThicknessReading; bodies: Record<string, WallThicknessReading> }
 }
+
+/** The convention for an exterior wall when a plan gives nothing to read (= `CONVENTIONS.wallThickness`). */
+const CONVENTION_WALL_M = 0.38
 
 /**
  * 005L: how one walled region of another storey's plan stands on one body of the plan below, once registered.
@@ -326,12 +337,11 @@ const DEFAULT_BANDS: Required<PlanBandOptions> = { minThickness: 6, maxThickness
 const MIN_MASS_WALL_FRACTION = 0.35
 
 /**
- * The narrowest a walled body can be, in metres: two of its own walls and a
- * little room between them. A strip narrower than this is the thickness of a
- * wall, a step between two outer faces, or a pier — ring walls on it would
- * meet each other before they met anything else.
+ * The narrowest a walled body can be (`minBodySpanM`, `exterior-walls.ts`): two of its own walls and a little room
+ * between them. A strip narrower than this is the thickness of a wall, a step between two outer faces, or a pier —
+ * ring walls on it would meet each other before they met anything else. N7-COUNCIL-FIX-02 (B-2): measured with the
+ * same exterior wall the emitter builds the body with, not with the plan's drawn-band median.
  */
-const minBodySpanM = (wallM: number): number => Math.max(1, 2 * wallM + 0.2)
 
 const quantity = (value: number, low: number, high: number, unit: LayoutQuantity['unit'], basis: LayoutQuantity['basis'], evidenceIds: string[], why: string): LayoutQuantity => ({
   value: round6(value),
@@ -1845,7 +1855,14 @@ export function inferStructuralLayout(given: StructuralLayoutOptions): Structura
     x: ladderX.at,
     z: ladderZ.at,
   }
+  // the plan's drawn-band median: the measure of the DRAWING's tolerances (how far apart two lines may be and still be
+  // one), not of any wall the model builds
   const wallM = round6(base.wallPx * Math.max(frame.metresPerPixelX, frame.metresPerPixelY))
+  // N7-COUNCIL-FIX-02 (B-1/B-2): the exterior wall the bodies are gated and built with, read off the outer faces
+  const houseWall = houseWallThickness(base.bands, envelope.rect, frame.metresPerPixelX, frame.metresPerPixelY, base.wallPx, base.decomposition.wallThickness.m, CONVENTION_WALL_M)
+  const exteriorM = houseWall.m
+  const bodyWalls: Record<string, WallThicknessReading> = {}
+  options.debug?.(`exterior wall ${exteriorM} (${houseWall.source}: ${houseWall.why}); drawn band ${wallM}`)
   const indices = storeyIndices(plans)
 
   // The bodies of the base plan, wanted twice: once to say which of them each
@@ -1857,7 +1874,7 @@ export function inferStructuralLayout(given: StructuralLayoutOptions): Structura
   // 005C: on a plan cut on its opening-aware outline, a strip the largest-first cut left is joined to the part of the
   // neighbour it lies along. The long-band box's plans are cut as they always were.
   const built = base.decomposition.envelope?.outline
-    ? recutSlivers(bodies, base.decomposition, base.registration, minBodySpanM(wallM), (r) => perimeterWallEvidence(r, base.decomposition, frame).fraction >= MIN_MASS_WALL_FRACTION, 2 * wallM)
+    ? recutSlivers(bodies, base.decomposition, base.registration, minBodySpanM(exteriorM), (r) => perimeterWallEvidence(r, base.decomposition, frame).fraction >= MIN_MASS_WALL_FRACTION, 2 * wallM)
     : bodies
   if (walledFirst && walledFirst.demoted.length > 0) {
     const cellsAt = new Map(base.decomposition.cells.map((c) => [`${c.ix}:${c.iy}`, c]))
@@ -1923,7 +1940,7 @@ export function inferStructuralLayout(given: StructuralLayoutOptions): Structura
   // A body outside the envelope the chains measure (an attached garage, a wing) has no chain stating where its walls
   // end; a side of it marked by a wall band alone is that wall's centre line, and the body reaches its outer face.
   const regionOf = (found: (typeof built)[number]) => ((options.plan?.faces === 'OUTER_FACE' && options.plan.frameId === base.frame.id) || reachesBeyond(found.rect, envelope.rect) ? toOuterFaces(found, built, base) : found)
-  const strips = bayStripsOf(built.map(regionOf), base.decomposition, frame, minBodySpanM(wallM))
+  const strips = bayStripsOf(built.map(regionOf), base.decomposition, frame, minBodySpanM(exteriorM))
   for (const t of strips.traces) options.debug?.(t)
   for (const found of strips.regions) {
     const region = found
@@ -1946,18 +1963,22 @@ export function inferStructuralLayout(given: StructuralLayoutOptions): Structura
     }
     const span = ringBoundsOf(ring)
     const narrow = Math.min(span.x1 - span.x0, span.z1 - span.z0)
+    // N7-COUNCIL-FIX-02: the body's own outer faces, when they are drawn otherwise than the house's
+    const ownWall = bodyWallThickness(base.bands, region.rect, strips.regions.filter((o) => o !== found).map((o) => o.rect), frame.metresPerPixelX, frame.metresPerPixelY, base.wallPx, houseWall)
+    const bodyM = ownWall?.m ?? exteriorM
     // on a plan cut on its outline only: the long-band box's plans are massed as they always were (005C post-review)
-    if (base.decomposition.envelope?.outline && narrow < minBodySpanM(wallM)) {
+    if (base.decomposition.envelope?.outline && narrow < minBodySpanM(bodyM)) {
       unresolved.push({
         id: stableId('gap', `sliver-${region.id}`, { frameId: base.frame.id, region: region.id }),
         what: `whether the ${ringArea(ring).toFixed(2)} m² strip at ${span.x0.toFixed(2)}, ${span.z0.toFixed(2)} is part of the building`,
-        reason: `it is ${narrow.toFixed(2)} m across, less than the ${minBodySpanM(wallM).toFixed(2)} m two ${wallM.toFixed(2)} m walls and a room between them need: a wall's thickness, a step between outer faces or a pier, not a body`,
+        reason: `it is ${narrow.toFixed(2)} m across, less than the ${minBodySpanM(bodyM).toFixed(2)} m two ${bodyM.toFixed(2)} m walls and a room between them need (${ownWall ? ownWall.why : `the house's exterior wall, ${houseWall.source === 'EXTERIOR_FACE_BANDS' ? 'read off its outer faces' : houseWall.why}`}): a wall's thickness, a step between outer faces or a pier, not a body`,
         status: 'AMBIGUOUS',
         frameIds: [base.frame.id],
       })
       continue
     }
     const id = `footprint-${baseStorey.index}-${region.id}`
+    if (ownWall) bodyWalls[id] = ownWall
     footprintRegions.push({
       id,
       storeyId: baseStorey.id,
@@ -2037,7 +2058,7 @@ export function inferStructuralLayout(given: StructuralLayoutOptions): Structura
   // bounding box happens to cover half of it: an envelope takes in a terrace, a void, an eave line, and on a sheet
   // with a mark beside the plan the mark — and an inset storey over a large house covers less than half of it and is
   // still carried by it entirely.
-  const minSpanM = minBodySpanM(wallM)
+  const minSpanM = minBodySpanM(exteriorM)
   const tolM = round6(Math.max(wallM, tolerancePx * Math.max(frame.metresPerPixelX, frame.metresPerPixelY)))
   // the registration's own jitter: half a wall of the plan below (`tolerancePx`), in metres
   const jitterM = round6(tolerancePx * Math.max(frame.metresPerPixelX, frame.metresPerPixelY))
@@ -2288,7 +2309,7 @@ export function inferStructuralLayout(given: StructuralLayoutOptions): Structura
     })
   }
 
-  return { plans, base, frame, alignments, storeys, footprintRegions, masses, attachments, facadePlanes, recesses, alternatives, conflicts, unresolved, traces, skippedPlans, storeyRegistrations }
+  return { plans, base, frame, alignments, storeys, footprintRegions, masses, attachments, facadePlanes, recesses, alternatives, conflicts, unresolved, traces, skippedPlans, storeyRegistrations, wallThickness: { house: houseWall, bodies: bodyWalls } }
 }
 
 // ---------------------------------------------------------------------------

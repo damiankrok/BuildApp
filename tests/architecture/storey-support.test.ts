@@ -35,12 +35,16 @@ const withoutStrings = (code: string): string => code.replace(/`[^`]*`/g, '""').
 const numbersIn = (code: string): string[] => [...new Set([...withoutStrings(code).matchAll(/(?<![\w.])(\d+(?:\.\d+)?)(?!\w)/g)].map((m) => m[1]))].sort()
 
 const LAYOUT = 'packages/reconstruction/src/layout.ts'
+/** N7-COUNCIL-FIX-02: the exterior wall the layout gates bodies with, read off the plan's bands (and `minBodySpanM`, moved there). */
+const EXTERIOR_WALLS = 'packages/reconstruction/src/exterior-walls.ts'
+/** The source a registration function lives in: the layout, or the exterior-wall reader. */
+const sourceOf = (name: string): string => codeOf(read(name === 'minBodySpanM' ? EXTERIOR_WALLS : LAYOUT))
 /** The functions that register a plan onto another and decide what each of its walled regions stands on. */
 const REGISTRATION = ['alignPlans', 'matchedLength', 'axisMatch', 'outerWallAxes', 'largestBuilt', 'minBodySpanM', 'upperBodiesOf', 'storeySupportOf', 'onlySeams', 'sameSupport', 'wallsBeyond', 'layoutOptionsOnly']
 /** The support decision inside the layout pass. */
 const supportSection = (): string => {
   const code = codeOf(read(LAYOUT))
-  return code.slice(code.indexOf('const minSpanM = minBodySpanM(wallM)'), code.indexOf('assignRoles(masses'))
+  return code.slice(code.indexOf('const minSpanM = minBodySpanM(exteriorM)'), code.indexOf('assignRoles(masses'))
 }
 
 /** What a registration or a support decision may never be read from (§14). Matched on code, comments and strings removed. */
@@ -51,14 +55,17 @@ const HOUSES = /gozdzik|cyklamen|marcowk|rarytas|kosac|jarzab|arkadi|azali|helik
 describe('005L §14 registration and support read the drawings only', () => {
   it('the layout pass imports pixel types, the common helpers, the metric shapes and its own reconstruction modules — nothing published', () => {
     const imports = [...new Set(importsOf(read(LAYOUT)))].sort()
-    expect(imports).toEqual(['./boundary-completion.js', './plan-decomposition.js', './plan-extent.js', './structural-layout.js', '@buildapp/source-common', '@buildapp/source-cv', '@buildapp/source-metrics', '@buildapp/source-observations'])
+    expect(imports).toEqual(['./boundary-completion.js', './exterior-walls.js', './plan-decomposition.js', './plan-extent.js', './structural-layout.js', '@buildapp/source-common', '@buildapp/source-cv', '@buildapp/source-metrics', '@buildapp/source-observations'])
+    // N7-COUNCIL-FIX-02: the exterior-wall reader the layout gates bodies with reads bands and pixels only
+    expect([...new Set(importsOf(read(EXTERIOR_WALLS)))].sort()).toEqual(['@buildapp/source-common', '@buildapp/source-cv'])
+    expect(withoutStrings(codeOf(read(EXTERIOR_WALLS))).match(FORBIDDEN)).toBeNull()
+    expect(codeOf(read(EXTERIOR_WALLS)).match(HOUSES)).toBeNull()
   })
 
   it('no registration or support code names a published figure, a room list, a storey count, a verdict or a house (M4)', () => {
-    const code = codeOf(read(LAYOUT))
     for (const name of REGISTRATION) {
-      expect(withoutStrings(bodyOf(code, name)).match(FORBIDDEN), name).toBeNull()
-      expect(bodyOf(code, name).match(HOUSES), name).toBeNull()
+      expect(withoutStrings(bodyOf(sourceOf(name), name)).match(FORBIDDEN), name).toBeNull()
+      expect(bodyOf(sourceOf(name), name).match(HOUSES), name).toBeNull()
     }
     expect(withoutStrings(supportSection()).match(FORBIDDEN)).toBeNull()
     expect(supportSection().match(HOUSES)).toBeNull()
@@ -102,7 +109,7 @@ describe('005L §22 M4/M7 registration and support have no special cases', () =>
       wallsBeyond: ['0', '6'],
       layoutOptionsOnly: [],
     }
-    for (const name of REGISTRATION) expect(numbersIn(bodyOf(code, name)), name).toEqual(frozen[name])
+    for (const name of REGISTRATION) expect(numbersIn(bodyOf(sourceOf(name), name)), name).toEqual(frozen[name])
     expect(numbersIn(supportSection())).toEqual(['0', '0.3', '0.7', '0.9', '1', '2', '4'])
     // the named constants, by value: changing one is a decision the report has to argue
     const constant = (n: string): string => (code.match(new RegExp(`const ${n} = ([\\d.e-]+)`)) ?? [])[1]

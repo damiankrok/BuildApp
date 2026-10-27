@@ -11,9 +11,17 @@ import type { PreviewFailure, PreviewSkipped, WallReconciliationRecord } from '.
 import type { MassV2 } from './building.js'
 import { rectAt } from './building.js'
 import type { ThinBodyRecord } from './thin-body.js'
+import type { PreEmitRingCheck } from './pre-emit.js'
 
 export type RingCollisionDiagnostic = {
   ringId: string
+  /**
+   * OWN_WALLS: the ring's own walls overlap (it is narrower than two of them). BETWEEN_BODIES (N7-COUNCIL-FIX-02): it
+   * overlaps another body's wall and the reconciliation refused to narrow it below its own walls to make room.
+   */
+  kind: 'OWN_WALLS' | 'BETWEEN_BODIES'
+  /** BETWEEN_BODIES: the edge move refused, with the ring's width before, the width it would have had, and its walls' minimum. */
+  narrowing?: { beforeM: number; afterM: number; minM: number; otherWallId: string }
   commandIndex: number
   /** The two walls the model named, and the area it measured them sharing. */
   walls: string[]
@@ -37,6 +45,8 @@ export type RingCollisionDiagnostic = {
   refusal: string
   /** Whether the wall reconciliation moved or opened this ring before (or instead of) the refusal. */
   reconciliation: { changedGeometry: boolean; records: Array<{ attempt: number; action: string; moveM: number; why: string }> }
+  /** N7-COUNCIL-FIX-02: what the check before emission took this ring's rectangle for, when it was not simply wide enough. */
+  preEmit?: { kind: PreEmitRingCheck['kind']; verdict: PreEmitRingCheck['verdict']; why: string }
   /** Whether the partial preview left the body out, and what of it. */
   removedByPartialPreview: boolean
   removedIds: string[]
@@ -64,6 +74,7 @@ export function ringCollisions(input: {
   masses: readonly MassV2[]
   thin: readonly ThinBodyRecord[]
   houseWallThicknessM: number
+  preEmit?: readonly PreEmitRingCheck[]
 }): RingCollisionDiagnostic[] {
   const T = input.houseWallThicknessM
   const out: RingCollisionDiagnostic[] = []
@@ -72,8 +83,12 @@ export function ringCollisions(input: {
     const m = OVERLAP.exec(f.message)
     const walls = m ? [m[1], m[2]] : f.objectIds
     const owner = ringOwner(f.id ?? walls[0] ?? '', input.masses) ?? (walls[0] ? ringOwner(walls[0], input.masses) : undefined)
-    // only a ring refused for its OWN walls: both named walls belong to it
-    if (!owner || !walls.every((w) => w.startsWith(`${owner.ringId}-`) || w === owner.ringId)) continue
+    if (!owner) continue
+    const own = walls.every((w) => w.startsWith(`${owner.ringId}-`) || w === owner.ringId)
+    // N7-COUNCIL-FIX-02: a ring refused against another body's wall is recorded when the reconciliation refused to
+    // narrow it below its own two walls (Council D-1) — the collision it left unresolved, with the numbers
+    const narrowed = own ? undefined : input.history.find((h) => h.record.narrowing && (h.record.wallId === owner.ringId || h.record.wallId.startsWith(`${owner.ringId}-`)))
+    if (!own && !narrowed) continue
     const { mass, storey, ringId } = owner
     const r = rectAt(mass, storey)
     const w = round6(r.x1 - r.x0)
@@ -88,20 +103,25 @@ export function ringCollisions(input: {
           ? `it is a piece of ${mass.pieceOf}: the thin-body pass does not read pieces`
           : mass.storeyRects?.length
             ? 'it has storey rectangles of its own: the thin-body pass does not read them'
-            : Math.min(w, d) >= 2 * T - 1e-6
-              ? `as read it is ${Math.min(w, d).toFixed(2)} m across, not narrower than two ${T.toFixed(2)} m walls: it was not thin when the pass ran`
+            : Math.min(w, d) >= 2 * t - 1e-6
+              ? `as read it is ${Math.min(w, d).toFixed(2)} m across, not narrower than two ${t.toFixed(2)} m walls: it was not thin when the pass ran`
               : 'not recorded'
     const repairs = input.history.filter((h) => h.record.wallId === ringId || h.record.wallId.startsWith(`${ringId}-`))
     const changedGeometry = repairs.some((h) => h.record.action === 'EDGE_MOVED' || h.record.action === 'RING_OPENED')
     const removed = input.skipped.filter((s) => s.id !== undefined && (s.id === ringId || s.id.startsWith(`${ringId}-`) || s.id === `slab-${mass.id}-${storey}` || s.id === `roof-${mass.id}`)).map((s) => s.id as string)
     const fw = rec?.profile?.farWall
+    const n = narrowed?.record.narrowing
     const why = [
+      ...(narrowed && n ? [`the ring would have had to narrow from ${n.beforeM.toFixed(2)} m to ${n.afterM.toFixed(2)} m to clear ${narrowed.record.otherWallId}, below the ${n.minM.toFixed(2)} m its own walls need: not done, and the collision is left unresolved`] : []),
       rec ? `the thin-body pass read ${mass.id} and decided ${rec.decision.kind}${rec.decision.kind === 'KEEP_PARTIAL' ? ` (${rec.decision.why})` : ''}` : `the thin-body pass did not read ${mass.id}: ${notSelectedBecause}`,
       changedGeometry ? `the wall reconciliation changed the ring before it was refused (${repairs.map((h) => `${h.record.action.toLowerCase()} ${h.record.moveM.toFixed(2)} m`).join(', ')})` : 'the wall reconciliation did not change the ring',
       removed.length > 0 ? `the partial preview left out ${removed.length} object${removed.length === 1 ? '' : 's'} of the body` : 'the partial preview did not leave the body out',
     ].join('; ')
+    const pre = input.preEmit?.find((c) => c.massId === mass.id && c.storeyIndex === storey)
     out.push({
       ringId,
+      kind: own ? 'OWN_WALLS' : 'BETWEEN_BODIES',
+      ...(narrowed && n ? { narrowing: { ...n, otherWallId: narrowed.record.otherWallId } } : {}),
       commandIndex: f.commandIndex,
       walls,
       ...(m ? { overlapM2: Number(m[3]) } : {}),
@@ -119,6 +139,7 @@ export function ringCollisions(input: {
       ...(rec ? { decision: { kind: rec.decision.kind, why: rec.decision.why }, firstBad: rec.firstBad } : {}),
       refusal: f.message,
       reconciliation: { changedGeometry, records: repairs.map((h) => ({ attempt: h.attempt, action: h.record.action, moveM: h.record.moveM, why: h.record.why })) },
+      ...(pre ? { preEmit: { kind: pre.kind, verdict: pre.verdict, why: pre.why } } : {}),
       removedByPartialPreview: removed.length > 0,
       removedIds: removed,
       why,

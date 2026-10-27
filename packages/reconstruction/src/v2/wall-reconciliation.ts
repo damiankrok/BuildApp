@@ -417,3 +417,36 @@ export function retargetOpening(c: Extract<BuildingCommand, { type: 'cutOpening'
   const openEnd = c.openEnd && reversed ? (c.openEnd === 'START' ? 'END' : 'START') : c.openEnd
   return { ...c, wallId: to.id, offset: round6(lo), width: round6(hi - lo), ...(openEnd ? { openEnd } : {}) }
 }
+
+/**
+ * N7-COUNCIL-FIX-02 (Council D-1): how far a ring reaches across its edge `k` — the perpendicular distance from that
+ * edge's line to the nearest edge running the other way that faces it along part of its length. For a rectangle it is
+ * the width the ring's own two walls on those sides stand in. `undefined` when no edge faces it.
+ */
+export function ringAcrossEdge(lines: readonly WallLine[], k: number): number | undefined {
+  const e = lines[k]
+  const dx = e.end.x - e.start.x
+  const dz = e.end.z - e.start.z
+  const L = Math.hypot(dx, dz)
+  if (L <= 0) return undefined
+  const ux = dx / L
+  const uz = dz / L
+  let best: number | undefined
+  lines.forEach((o, j) => {
+    if (j === k) return
+    const ox = o.end.x - o.start.x
+    const oz = o.end.z - o.start.z
+    const ol = Math.hypot(ox, oz)
+    if (ol <= 0) return
+    // parallel and running the other way round the ring
+    if (Math.abs(ux * oz - uz * ox) / ol > PARALLEL_SIN || ux * ox + uz * oz >= 0) return
+    const a0 = 0
+    const a1 = L
+    const b0 = (o.start.x - e.start.x) * ux + (o.start.z - e.start.z) * uz
+    const b1 = (o.end.x - e.start.x) * ux + (o.end.z - e.start.z) * uz
+    if (Math.min(a1, Math.max(b0, b1)) - Math.max(a0, Math.min(b0, b1)) <= 1e-6) return
+    const across = Math.abs((o.start.x - e.start.x) * -uz + (o.start.z - e.start.z) * ux)
+    if (best === undefined || across < best) best = across
+  })
+  return best
+}

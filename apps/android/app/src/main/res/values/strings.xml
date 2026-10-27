@@ -447,7 +447,7 @@
     <string name="partial_provisional_none">Brak: wysokości i skala pochodzą z rysunków.</string>
     <string name="partial_basis_minimal">Zbudowano tylko stropy i ściany bryły głównej.</string>
     <string name="partial_checkpoint">Punkt kontrolny: %1$d poleceń, model %2$s</string>
-    <string name="partial_ring_collisions">Pierścienie odrzucone za nakładanie własnych ścian</string>
+    <string name="partial_ring_collisions">Pierścienie odrzucone za nakładanie ścian</string>
     <string name="partial_ring_row">%1$s · ściany %2$s</string>
     <string name="partial_ring_selected">Odczyt cienkiej bryły: %1$s</string>
     <string name="partial_ring_not_selected">Bryła nie była czytana jako cienka: %1$s</string>
@@ -456,6 +456,8 @@
     <string name="partial_ring_reconciled">Uzgadnianie ścian zmieniło pierścień przed odmową: %1$s</string>
     <string name="partial_ring_not_reconciled">Uzgadnianie ścian nie zmieniło pierścienia.</string>
     <string name="partial_ring_removed">Model częściowy pominął tę bryłę.</string>
+    <string name="partial_ring_narrowing_refused">Uzgadnianie nie zwęziło pierścienia z %1$s m do %2$s m (jego ściany potrzebują %3$s m); kolizja z %4$s pozostaje nierozwiązana.</string>
+    <string name="partial_ring_pre_emit">Kontrola przed emisją: %1$s · %2$s</string>
     <string name="provenance_title">Pochodzenie analizy</string>
     <string name="provenance_run_id">Identyfikator przebiegu</string>
     <string name="provenance_analyzed_at">Data i czas analizy</string>

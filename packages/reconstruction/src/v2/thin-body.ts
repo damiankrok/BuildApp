@@ -187,7 +187,8 @@ export function thinBodies(masses: readonly MassV2[], T: number): Array<{ mass: 
     if (m.role !== 'ATTACHED' || m.pieceOf || m.storeyRects?.length) continue
     const w = m.x1 - m.x0
     const d = m.z1 - m.z0
-    if (Math.min(w, d) >= 2 * T - 1e-6) continue
+    // N7-COUNCIL-FIX-02: two of the body's OWN walls (a garage drawn thinner than the house is thin by its own measure)
+    if (Math.min(w, d) >= 2 * (m.wallThicknessM ?? T) - 1e-6) continue
     out.push({ mass: m, axis: w <= d ? 'X' : 'Z' })
   }
   return out

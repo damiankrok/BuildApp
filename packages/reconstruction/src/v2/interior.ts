@@ -93,6 +93,13 @@ export type InteriorReading = {
 }
 
 export type InteriorOptions = {
+  /**
+   * N7-COUNCIL-FIX-02: the plan's drawn-band thickness, m — the scale the partition window and the drawing tolerances
+   * below were set against. The body is inset by the EXTERIOR wall (`wallThicknessM`); what counts as a partition is
+   * measured against how heavily this plan is drawn, not against the outer wall (which can be twice a partition).
+   * Defaults to the exterior wall, as before.
+   */
+  drawnWallM?: number
   /** Thinnest partition, as a fraction of the external wall thickness. */
   minPartitionFraction?: number
   /**
@@ -132,7 +139,7 @@ export type InteriorOptions = {
  */
 export const UNWALLED_SIDE_COVER = 0.05
 
-const DEFAULTS: Required<Omit<InteriorOptions, 'onDebug' | 'extraBarriers' | 'labelArea'>> = { minPartitionFraction: 0.2, maxPartitionFraction: 1.0, thinPartitionFraction: 0.72, minPieceM: 0.55, doorMinM: 0.6, doorMaxM: 1.35, cellM: 0.05 }
+const DEFAULTS: Required<Omit<InteriorOptions, 'onDebug' | 'extraBarriers' | 'labelArea' | 'drawnWallM'>> = { minPartitionFraction: 0.2, maxPartitionFraction: 1.0, thinPartitionFraction: 0.72, minPieceM: 0.55, doorMinM: 0.6, doorMaxM: 1.35, cellM: 0.05 }
 
 /** Neutral dark ink: a wall, not a coloured annotation. */
 const wallInk = (r: Raster, x: number, y: number): boolean => {
@@ -179,7 +186,8 @@ export function readInterior(
   const opt = { ...DEFAULTS, ...options }
   const unresolved: Array<{ what: string; reason: string }> = []
   const mpp = (plan.mppX + plan.mppY) / 2
-  const wallPx = wallThicknessM / mpp
+  const drawnM = options.drawnWallM ?? wallThicknessM
+  const wallPx = drawnM / mpp
   const minThick = Math.max(2, Math.round(wallPx * opt.minPartitionFraction))
   const maxThick = Math.max(minThick + 1, Math.round(wallPx * opt.maxPartitionFraction))
   // 005U-N3: the solid-block rule keeps the thin bound: where two wall-thick partitions cross, the crossing must not
@@ -401,7 +409,7 @@ export function readInterior(
 
   // Junctions: an end within a wall thickness of the body's inner face or of a perpendicular piece.
   const near = (v: number, target: number, tol: number): boolean => Math.abs(v - target) <= tol
-  const tol = wallThicknessM * 0.9
+  const tol = drawnM * 0.9
   for (const w of walls) {
     const perpendicular = walls.filter((o) => o.axis !== w.axis)
     const touches = (end: number): boolean => {
@@ -490,14 +498,14 @@ export function readInterior(
       const lo = axis === 'Z' ? b.x0 : b.z0
       const hi = axis === 'Z' ? b.x1 : b.z1
       for (const w of walls) {
-        if (w.axis !== axis || w.at < lo - wallThicknessM * 0.3 || w.at > hi + wallThicknessM * 0.3) continue
+        if (w.axis !== axis || w.at < lo - drawnM * 0.3 || w.at > hi + drawnM * 0.3) continue
         pseudo.push({ ...w, id: `${b.id}:${axis}`, from: axis === 'Z' ? b.z0 : b.x0, to: axis === 'Z' ? b.z1 : b.x1, ends: { start: 'JUNCTION', end: 'JUNCTION' }, confidence: 0.5, why: `the edge of ${b.id}` })
         break
       }
     }
   }
   for (const w of [...walls, ...pseudo]) {
-    const key = `${w.axis}:${Math.round(w.at / (wallThicknessM * 0.5))}`
+    const key = `${w.axis}:${Math.round(w.at / (drawnM * 0.5))}`
     byAxis.set(key, [...(byAxis.get(key) ?? []), w])
   }
   for (const [, pieces] of byAxis) {
@@ -518,7 +526,7 @@ export function readInterior(
       // A gap between two block edges is a door only when a wall piece is one
       // of its jambs; and no gap is a door where a wall piece runs through it.
       const bothBlocks = a.id.includes(':') && b.id.includes(':')
-      const walled = walls.some((w) => w !== a && w !== b && w.axis === a.axis && Math.abs(w.at - a.at) <= wallThicknessM * 0.5 && w.from < b.from - 0.05 && w.to > a.to + 0.05)
+      const walled = walls.some((w) => w !== a && w !== b && w.axis === a.axis && Math.abs(w.at - a.at) <= drawnM * 0.5 && w.from < b.from - 0.05 && w.to > a.to + 0.05)
       if (gap >= opt.doorMinM && gap <= opt.doorMaxM && jamb(a) && jamb(b) && !crossed && !passage && !bothBlocks && !walled) {
         doors.push({
           id: `idoor-${storeyIndex}-${doors.length}`,
@@ -549,7 +557,7 @@ export function readInterior(
   // A piece that lies along a solid block's edge is the block's outline, not a partition.
   const onBlock = (w: InteriorWallPiece): boolean =>
     blocks.some((b) => {
-      const pad = wallThicknessM * 0.2
+      const pad = drawnM * 0.2
       if (w.axis === 'Z') return w.at >= b.x0 - pad && w.at <= b.x1 + pad && w.from >= b.z0 - pad && w.to <= b.z1 + pad
       return w.at >= b.z0 - pad && w.at <= b.z1 + pad && w.from >= b.x0 - pad && w.to <= b.x1 + pad
     })
@@ -575,7 +583,7 @@ export function readInterior(
     else mark(w.from, w.at - half, w.to, w.at + half)
   }
   for (const d of keptDoors) {
-    const half = Math.max(wallThicknessM * 0.3, cell * 0.6)
+    const half = Math.max(drawnM * 0.3, cell * 0.6)
     if (d.wallAxis === 'Z') mark(d.at - half, d.from, d.at + half, d.to)
     else mark(d.from, d.at - half, d.to, d.at + half)
   }

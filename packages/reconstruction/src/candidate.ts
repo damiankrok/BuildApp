@@ -30,7 +30,7 @@ import type { BuildingCommand, CommandFailure } from '@buildapp/commands'
 import { createEmptyModel, openingHeadRange, physicalCore, resolveWallTopology, serializeModel, wallLength } from '@buildapp/model'
 import type { CanonicalBuildingModel } from '@buildapp/model'
 import { ConstraintClassSchema } from './constraints.js'
-import { classifyWallConflict, createdIdOf, frameOf, moveRingEdge, openRingWithout, proposeWallRepair, rewriteReferences, ringWallLines, startShiftAlong, wallLineOf } from './v2/wall-reconciliation.js'
+import { classifyWallConflict, createdIdOf, frameOf, moveRingEdge, openRingWithout, proposeWallRepair, rewriteReferences, ringAcrossEdge, ringWallLines, startShiftAlong, wallLineOf } from './v2/wall-reconciliation.js'
 import type { ReconciledReferences, WallConflict, WallConflictRelation, WallLine, WallRepairAction } from './v2/wall-reconciliation.js'
 
 export const CANDIDATE_SCHEMA = 'buildapp.reconstruction-candidate' as const
@@ -455,6 +455,11 @@ export type WallReconciliationRecord = {
   withinUncertainty: boolean
   before: { start: { x: number; z: number }; end: { x: number; z: number } }
   after?: { start: { x: number; z: number }; end: { x: number; z: number } }
+  /**
+   * N7-COUNCIL-FIX-02 (Council D-1): an edge move refused because it would have left the ring narrower than its own
+   * two walls: how far the ring reached across that edge, how far it would have, and the least its walls need.
+   */
+  narrowing?: { beforeM: number; afterM: number; minM: number }
   why: string
 }
 
@@ -558,6 +563,16 @@ function repairRing(model: CanonicalBuildingModel, command: Extract<BuildingComm
   if (conflict.relation === 'PARALLEL_OVERLAP' && conflict.shiftM !== undefined && Math.abs(conflict.shiftM) <= toleranceM) {
     const polygon = moveRingEdge(command.polygon, reversed, k, frameOf(e).inward, conflict.shiftM)
     const moved = ringWallLines({ ...command, polygon }, ringId).lines
+    // N7-COUNCIL-FIX-02 (Council D-1): a move within the plan's uncertainty may not take the ring below its own two
+    // walls — a 0.62 m body moved 0.05 m onto its neighbour's face is a 0.57 m body whose walls overlap each other,
+    // refused one round later for a geometry the plan never drew. The collision is named instead, with the numbers.
+    const beforeM = ringAcrossEdge(lines, k)
+    const afterM = ringAcrossEdge(moved, k)
+    const minM = 2 * command.thickness
+    if (beforeM !== undefined && afterM !== undefined && afterM < minM - 1e-6 && afterM < beforeM) {
+      const record: WallReconciliationRecord = { ...base, action: 'REFUSED', moveM: 0, withinUncertainty: true, narrowing: { beforeM: round6(beforeM), afterM: round6(afterM), minM: round6(minM) }, why: `${conflict.why}; moving the ring's edge ${(Math.abs(conflict.shiftM) * 100).toFixed(1)} cm onto the face of ${e.id} would leave the ring ${afterM.toFixed(2)} m across (it is ${beforeM.toFixed(2)} m), less than its own two ${command.thickness.toFixed(2)} m walls need (${minM.toFixed(2)} m): the ring is not narrowed below its walls, and its collision with ${e.id} stays unresolved` }
+      return { commands: [], record, omitted: [], startShift: [], refused: true }
+    }
     const record: WallReconciliationRecord = { ...base, action: 'EDGE_MOVED', moveM: round6(Math.abs(conflict.shiftM)), withinUncertainty: true, after: { start: moved[k].start, end: moved[k].end }, why: `${conflict.why}; the ring's edge moved onto the face of ${e.id}, within the plan's ${(toleranceM * 100).toFixed(1)} cm uncertainty` }
     return { commands: [{ ...command, polygon }], record, omitted: [], startShift: lines.map((l, j) => [l.id, startShiftAlong(l, moved[j])] as [string, number]).filter(([, s]) => s !== 0), refused: false }
   }
@@ -703,8 +718,10 @@ const lowestMainStorey = (program: readonly BuildingCommand[], mainMassId: strin
 
 /**
  * The program without the object command `failedAt` creates: a body's floor or walls take the rest of that body with
- * them (an attached body's every storey and its roof; the main body's storeys from that one up), anything else goes
- * alone; then every later command that names something left out goes too. Null when the failure is in the base.
+ * them (the main body's storeys from that one up; an attached body's every storey and its roof — or, N7-COUNCIL-FIX-02,
+ * when the refused storey stands over a storey of the same body, that storey, the ones above it and the body's roof,
+ * keeping the sound storeys below), anything else goes alone; then every later command that names something left out
+ * goes too. Null when the failure is in the base.
  */
 export function cutFailedObject(program: readonly BuildingCommand[], failedAt: number, mainMassId: string, failure: string): PreviewCut | null {
   const failed = program[failedAt]
@@ -720,9 +737,22 @@ export function cutFailedObject(program: readonly BuildingCommand[], failedAt: n
     })
   } else if (body) {
     const m = body.mass
+    const storeysOf = program.map(bodyOf).filter((b): b is { mass: string; storey: number } => b?.mass === m).map((b) => b.storey)
+    const lowest = storeysOf.length > 0 ? Math.min(...storeysOf) : body.storey
+    // a storey of the body over a sound one: the storeys below stand without it (Council D-2: a storey rectangle too
+    // narrow for its walls took the body's healthy ground storey with it)
+    const fromStorey = body.storey > lowest ? body.storey : undefined
     program.forEach((c, i) => {
       const id = createdIdOf(c)
-      if (id && (id.startsWith(`slab-${m}-`) || id.startsWith(`ring-${m}-`) || id === `roof-${m}` || id.startsWith(`roof-${m}-`) || id.startsWith(`${m}-`))) group.add(i)
+      if (!id) return
+      const roof = id === `roof-${m}` || id.startsWith(`roof-${m}-`)
+      if (fromStorey !== undefined) {
+        // the refused storey, those above it (pieces of them too) and the roof; what hangs on them goes as a dependent
+        const b = bodyOf(c)
+        if (roof || (b && (b.mass === m || b.mass.startsWith(`${m}-s`)) && b.storey >= fromStorey)) group.add(i)
+        return
+      }
+      if (id.startsWith(`slab-${m}-`) || id.startsWith(`ring-${m}-`) || roof || id.startsWith(`${m}-`)) group.add(i)
     })
   }
   const named = (i: number): { type: string; id?: string } => {

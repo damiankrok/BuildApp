@@ -89,18 +89,19 @@ describe('N7-FIX-01 (D-3) a frame in a body built with walls thinner than the ho
 })
 
 describe('N7-FIX-01 a ring refused for its own walls: the way back to the reading', () => {
-  it('a ring the reconciliation narrowed below two walls: its first-attempt move is kept and named', () => {
-    // 0.62 m across (≥ 2T) as emitted, standing 5 cm into the main body's east wall
+  it('a ring the reconciliation would narrow below two walls: the move is refused and the collision named (N7-COUNCIL-FIX-02, D-1)', () => {
+    // 0.62 m across (≥ 2T) as emitted, standing 5 cm into the main body's east wall. FIX-01 kept the record of the move
+    // to 0.57 m and the w1/w3 refusal after it; FIX-02 refuses the move itself: the ring is never narrowed below its walls
     const b = building([mass('main', 'MAIN', 0, 0, 10, 8), mass('attached-0', 'ATTACHED', 3, 8, 7, 11), mass('attached-1', 'ATTACHED', 9.95, 1, 10.57, 7)])
     const fit = fitPreviewProgram(emitBuilding(b, 'fix01').program, { label: 'fix01', modelId: 'm', mainMassId: 'main', toleranceM: 0.06 })
     expect(fit.failures.map((f) => `${f.type} ${f.id} ${f.codes.join(',')}`)).toEqual(['createWallRing ring-attached-1-0 WALLS_OVERLAP'])
-    expect(fit.reconciliationHistory.map((h) => [h.attempt, h.record.action, h.record.wallId])).toEqual([[0, 'EDGE_MOVED', 'ring-attached-1-0-w3']])
+    expect(fit.reconciliationHistory.map((h) => [h.attempt, h.record.action, h.record.wallId])).toEqual([[0, 'REFUSED', 'ring-attached-1-0-w3']])
+    expect(fit.reconciliationHistory[0].record.narrowing).toEqual({ beforeM: 0.62, afterM: 0.57, minM: 0.6 })
     const [c] = ringCollisions({ failures: fit.failures, skipped: fit.skipped, history: fit.reconciliationHistory, masses: b.masses, thin: [], houseWallThicknessM: T })
-    expect(c).toMatchObject({ ringId: 'ring-attached-1-0', walls: ['ring-attached-1-0-w1', 'ring-attached-1-0-w3'], massId: 'attached-1', selectedByThinBodies: false, widthM: 0.62, wallThicknessM: T, removedByPartialPreview: true })
+    expect(c).toMatchObject({ ringId: 'ring-attached-1-0', kind: 'BETWEEN_BODIES', massId: 'attached-1', selectedByThinBodies: false, widthM: 0.62, wallThicknessM: T, removedByPartialPreview: true, narrowing: { beforeM: 0.62, afterM: 0.57, minM: 0.6, otherWallId: 'ring-main-0-w1' } })
     expect(c.notSelectedBecause).toMatch(/not narrower than two 0\.30 m walls/)
-    expect(c.reconciliation.changedGeometry).toBe(true)
-    expect(c.reconciliation.records[0]).toMatchObject({ attempt: 0, action: 'EDGE_MOVED', moveM: 0.05 })
-    expect(c.why).toMatch(/the wall reconciliation changed the ring before it was refused/)
+    expect(c.reconciliation.changedGeometry).toBe(false)
+    expect(c.why).toMatch(/would have had to narrow from 0\.62 m to 0\.57 m/)
   })
 
   it('a refusal between two different bodies is not a ring refused for its own walls', () => {

@@ -698,6 +698,8 @@ internal fun PreviewOutcomeDetails(preview: PreviewOutcome) {
                             c.firstBad?.let { StatusText("FIRST_BAD: $it") }
                             if (c.reconciliation.changedGeometry) StatusText(stringResource(R.string.partial_ring_reconciled, c.reconciliation.records.joinToString(", ") { "${it.action} ${metres(it.moveM)} m" }))
                             else StatusText(stringResource(R.string.partial_ring_not_reconciled))
+                            c.narrowing?.let { n -> StatusText(stringResource(R.string.partial_ring_narrowing_refused, metres(n.beforeM), metres(n.afterM), metres(n.minM), n.otherWallId)) }
+                            c.preEmit?.let { pe -> StatusText(stringResource(R.string.partial_ring_pre_emit, pe.verdict, pe.why)) }
                             if (c.removedByPartialPreview) StatusText(stringResource(R.string.partial_ring_removed))
                         }
                     }

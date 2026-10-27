@@ -66,6 +66,11 @@ data class PartialPreview(
 @Serializable
 data class RingCollision(
     val ringId: String = "",
+    /** N7-COUNCIL-FIX-02: OWN_WALLS (w1/w3 of the ring itself) or BETWEEN_BODIES (a narrowing the reconciliation refused). */
+    val kind: String = "OWN_WALLS",
+    val narrowing: RingNarrowing? = null,
+    /** N7-COUNCIL-FIX-02: what the check before emission took the ring's rectangle for. */
+    val preEmit: RingPreEmit? = null,
     val walls: List<String> = emptyList(),
     val overlapM2: Double? = null,
     val massId: String? = null,
@@ -83,6 +88,12 @@ data class RingCollision(
     val removedByPartialPreview: Boolean = false,
     val why: String = "",
 )
+
+@Serializable
+data class RingNarrowing(val beforeM: Double = 0.0, val afterM: Double = 0.0, val minM: Double = 0.0, val otherWallId: String = "")
+
+@Serializable
+data class RingPreEmit(val kind: String = "", val verdict: String = "", val why: String = "")
 
 @Serializable
 data class FarFaceInk(val beforeOpenings: Double = 0.0, val afterOpenings: Double? = null, val openings: Int? = null, val wallWithOpenings: Boolean? = null)
