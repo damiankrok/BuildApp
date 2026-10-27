@@ -1,0 +1,1837 @@
+{
+ "note": "DEVELOPMENT data only (IU-02 FINAL, IU-03A test sets, synthetic dev, LoC, Commons, IU-03A negatives) \u2014 every image already seen; not a blind result. Agent labels, not human-verified.",
+ "n": 2258,
+ "variants": {
+  "A": {
+   "maskedTestRan": 0,
+   "total": {
+    "non": 1677,
+    "nearFrontal": 486,
+    "nearFrontalRouted": 2,
+    "elev": 581,
+    "elevKept": 507,
+    "nonRouted": 2
+   },
+   "bySet": {
+    "IU02_FINAL/FINAL_LOC": {
+     "non": 292,
+     "nearFrontal": 72,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_SYNTH": {
+     "elev": 120,
+     "elevKept": 80,
+     "non": 170,
+     "nearFrontal": 80,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_ARCHON": {
+     "elev": 40,
+     "elevKept": 39,
+     "non": 58,
+     "nearFrontal": 4,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/IU01_TEST": {
+     "non": 154,
+     "elev": 56,
+     "elevKept": 54,
+     "nearFrontal": 9,
+     "nearFrontalRouted": 0
+    },
+    "SYNTH_DEV": {
+     "elev": 210,
+     "elevKept": 210,
+     "non": 297,
+     "nearFrontal": 140,
+     "nearFrontalRouted": 0
+    },
+    "IU03A_TEST_SYNTH": {
+     "elev": 90,
+     "elevKept": 60,
+     "non": 127,
+     "nearFrontal": 60,
+     "nearFrontalRouted": 1,
+     "nonRouted": 1
+    },
+    "IU03A_TEST_ARCHON": {
+     "non": 100,
+     "elev": 24,
+     "elevKept": 24,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3neg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3tneg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 1,
+     "nonRouted": 1
+    },
+    "LOC_DEV": {
+     "non": 313,
+     "nearFrontal": 78,
+     "nearFrontalRouted": 0,
+     "elev": 1
+    },
+    "COMMONS": {
+     "non": 158,
+     "elev": 12,
+     "elevKept": 12,
+     "nearFrontal": 37,
+     "nearFrontalRouted": 0
+    }
+   },
+   "elevLostReasons": {
+    "REVIEW_MULTI_VIEW_OR_OTHER": 64,
+    "REVIEW_INTERIOR": 6,
+    "STOP_PERSPECTIVE": 3,
+    "REVIEW_SITE_PLAN": 1
+   },
+   "leaked": [
+    [
+     "s3t-h028-persp-near_fron",
+     "EXTERIOR_PERSPECTIVE",
+     "IU03A_TEST_SYNTH",
+     "FACADE"
+    ],
+    [
+     "neg-n7_near_frontal-1-t",
+     "EXTERIOR_PERSPECTIVE",
+     "NEG_iu3tneg",
+     "FACADE"
+    ]
+   ]
+  },
+  "B": {
+   "maskedTestRan": 509,
+   "total": {
+    "non": 1677,
+    "nearFrontal": 486,
+    "nearFrontalRouted": 1,
+    "elev": 581,
+    "elevKept": 506,
+    "nonRouted": 1
+   },
+   "bySet": {
+    "IU02_FINAL/FINAL_LOC": {
+     "non": 292,
+     "nearFrontal": 72,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_SYNTH": {
+     "elev": 120,
+     "elevKept": 80,
+     "non": 170,
+     "nearFrontal": 80,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_ARCHON": {
+     "elev": 40,
+     "elevKept": 39,
+     "non": 58,
+     "nearFrontal": 4,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/IU01_TEST": {
+     "non": 154,
+     "elev": 56,
+     "elevKept": 54,
+     "nearFrontal": 9,
+     "nearFrontalRouted": 0
+    },
+    "SYNTH_DEV": {
+     "elev": 210,
+     "elevKept": 209,
+     "non": 297,
+     "nearFrontal": 140,
+     "nearFrontalRouted": 0
+    },
+    "IU03A_TEST_SYNTH": {
+     "elev": 90,
+     "elevKept": 60,
+     "non": 127,
+     "nearFrontal": 60,
+     "nearFrontalRouted": 1,
+     "nonRouted": 1
+    },
+    "IU03A_TEST_ARCHON": {
+     "non": 100,
+     "elev": 24,
+     "elevKept": 24,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3neg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3tneg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "LOC_DEV": {
+     "non": 313,
+     "nearFrontal": 78,
+     "nearFrontalRouted": 0,
+     "elev": 1
+    },
+    "COMMONS": {
+     "non": 158,
+     "elev": 12,
+     "elevKept": 12,
+     "nearFrontal": 37,
+     "nearFrontalRouted": 0
+    }
+   },
+   "elevLostReasons": {
+    "REVIEW_MULTI_VIEW_OR_OTHER": 64,
+    "REVIEW_INTERIOR": 6,
+    "STOP_PERSPECTIVE": 3,
+    "STOP_PERSPECTIVE_MASKED": 1,
+    "REVIEW_SITE_PLAN": 1
+   },
+   "leaked": [
+    [
+     "s3t-h028-persp-near_fron",
+     "EXTERIOR_PERSPECTIVE",
+     "IU03A_TEST_SYNTH",
+     "FACADE"
+    ]
+   ]
+  },
+  "B_S(z4.0,d1.0)": {
+   "maskedTestRan": 509,
+   "total": {
+    "non": 1677,
+    "nearFrontal": 486,
+    "nearFrontalRouted": 0,
+    "elev": 581,
+    "elevKept": 503
+   },
+   "bySet": {
+    "IU02_FINAL/FINAL_LOC": {
+     "non": 292,
+     "nearFrontal": 72,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_SYNTH": {
+     "elev": 120,
+     "elevKept": 80,
+     "non": 170,
+     "nearFrontal": 80,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_ARCHON": {
+     "elev": 40,
+     "elevKept": 39,
+     "non": 58,
+     "nearFrontal": 4,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/IU01_TEST": {
+     "non": 154,
+     "elev": 56,
+     "elevKept": 53,
+     "nearFrontal": 9,
+     "nearFrontalRouted": 0
+    },
+    "SYNTH_DEV": {
+     "elev": 210,
+     "elevKept": 209,
+     "non": 297,
+     "nearFrontal": 140,
+     "nearFrontalRouted": 0
+    },
+    "IU03A_TEST_SYNTH": {
+     "elev": 90,
+     "elevKept": 60,
+     "non": 127,
+     "nearFrontal": 60,
+     "nearFrontalRouted": 0
+    },
+    "IU03A_TEST_ARCHON": {
+     "non": 100,
+     "elev": 24,
+     "elevKept": 23,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3neg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3tneg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "LOC_DEV": {
+     "non": 313,
+     "nearFrontal": 78,
+     "nearFrontalRouted": 0,
+     "elev": 1
+    },
+    "COMMONS": {
+     "non": 158,
+     "elev": 12,
+     "elevKept": 11,
+     "nearFrontal": 37,
+     "nearFrontalRouted": 0
+    }
+   },
+   "elevLostReasons": {
+    "REVIEW_MULTI_VIEW_OR_OTHER": 64,
+    "REVIEW_INTERIOR": 6,
+    "STOP_PERSPECTIVE": 3,
+    "STOP_PERSPECTIVE_MASKED": 4,
+    "REVIEW_SITE_PLAN": 1
+   },
+   "leaked": []
+  },
+  "B_S(z4.0,d1.5)": {
+   "maskedTestRan": 509,
+   "total": {
+    "non": 1677,
+    "nearFrontal": 486,
+    "nearFrontalRouted": 1,
+    "elev": 581,
+    "elevKept": 503,
+    "nonRouted": 1
+   },
+   "bySet": {
+    "IU02_FINAL/FINAL_LOC": {
+     "non": 292,
+     "nearFrontal": 72,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_SYNTH": {
+     "elev": 120,
+     "elevKept": 80,
+     "non": 170,
+     "nearFrontal": 80,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_ARCHON": {
+     "elev": 40,
+     "elevKept": 39,
+     "non": 58,
+     "nearFrontal": 4,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/IU01_TEST": {
+     "non": 154,
+     "elev": 56,
+     "elevKept": 53,
+     "nearFrontal": 9,
+     "nearFrontalRouted": 0
+    },
+    "SYNTH_DEV": {
+     "elev": 210,
+     "elevKept": 209,
+     "non": 297,
+     "nearFrontal": 140,
+     "nearFrontalRouted": 0
+    },
+    "IU03A_TEST_SYNTH": {
+     "elev": 90,
+     "elevKept": 60,
+     "non": 127,
+     "nearFrontal": 60,
+     "nearFrontalRouted": 1,
+     "nonRouted": 1
+    },
+    "IU03A_TEST_ARCHON": {
+     "non": 100,
+     "elev": 24,
+     "elevKept": 23,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3neg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3tneg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "LOC_DEV": {
+     "non": 313,
+     "nearFrontal": 78,
+     "nearFrontalRouted": 0,
+     "elev": 1
+    },
+    "COMMONS": {
+     "non": 158,
+     "elev": 12,
+     "elevKept": 11,
+     "nearFrontal": 37,
+     "nearFrontalRouted": 0
+    }
+   },
+   "elevLostReasons": {
+    "REVIEW_MULTI_VIEW_OR_OTHER": 64,
+    "REVIEW_INTERIOR": 6,
+    "STOP_PERSPECTIVE": 3,
+    "STOP_PERSPECTIVE_MASKED": 4,
+    "REVIEW_SITE_PLAN": 1
+   },
+   "leaked": [
+    [
+     "s3t-h028-persp-near_fron",
+     "EXTERIOR_PERSPECTIVE",
+     "IU03A_TEST_SYNTH",
+     "FACADE"
+    ]
+   ]
+  },
+  "B_S(z4.0,d2.0)": {
+   "maskedTestRan": 509,
+   "total": {
+    "non": 1677,
+    "nearFrontal": 486,
+    "nearFrontalRouted": 1,
+    "elev": 581,
+    "elevKept": 503,
+    "nonRouted": 1
+   },
+   "bySet": {
+    "IU02_FINAL/FINAL_LOC": {
+     "non": 292,
+     "nearFrontal": 72,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_SYNTH": {
+     "elev": 120,
+     "elevKept": 80,
+     "non": 170,
+     "nearFrontal": 80,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_ARCHON": {
+     "elev": 40,
+     "elevKept": 39,
+     "non": 58,
+     "nearFrontal": 4,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/IU01_TEST": {
+     "non": 154,
+     "elev": 56,
+     "elevKept": 53,
+     "nearFrontal": 9,
+     "nearFrontalRouted": 0
+    },
+    "SYNTH_DEV": {
+     "elev": 210,
+     "elevKept": 209,
+     "non": 297,
+     "nearFrontal": 140,
+     "nearFrontalRouted": 0
+    },
+    "IU03A_TEST_SYNTH": {
+     "elev": 90,
+     "elevKept": 60,
+     "non": 127,
+     "nearFrontal": 60,
+     "nearFrontalRouted": 1,
+     "nonRouted": 1
+    },
+    "IU03A_TEST_ARCHON": {
+     "non": 100,
+     "elev": 24,
+     "elevKept": 23,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3neg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3tneg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "LOC_DEV": {
+     "non": 313,
+     "nearFrontal": 78,
+     "nearFrontalRouted": 0,
+     "elev": 1
+    },
+    "COMMONS": {
+     "non": 158,
+     "elev": 12,
+     "elevKept": 11,
+     "nearFrontal": 37,
+     "nearFrontalRouted": 0
+    }
+   },
+   "elevLostReasons": {
+    "REVIEW_MULTI_VIEW_OR_OTHER": 64,
+    "REVIEW_INTERIOR": 6,
+    "STOP_PERSPECTIVE": 3,
+    "STOP_PERSPECTIVE_MASKED": 4,
+    "REVIEW_SITE_PLAN": 1
+   },
+   "leaked": [
+    [
+     "s3t-h028-persp-near_fron",
+     "EXTERIOR_PERSPECTIVE",
+     "IU03A_TEST_SYNTH",
+     "FACADE"
+    ]
+   ]
+  },
+  "B_S(z4.0,d3.0)": {
+   "maskedTestRan": 509,
+   "total": {
+    "non": 1677,
+    "nearFrontal": 486,
+    "nearFrontalRouted": 1,
+    "elev": 581,
+    "elevKept": 504,
+    "nonRouted": 1
+   },
+   "bySet": {
+    "IU02_FINAL/FINAL_LOC": {
+     "non": 292,
+     "nearFrontal": 72,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_SYNTH": {
+     "elev": 120,
+     "elevKept": 80,
+     "non": 170,
+     "nearFrontal": 80,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_ARCHON": {
+     "elev": 40,
+     "elevKept": 39,
+     "non": 58,
+     "nearFrontal": 4,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/IU01_TEST": {
+     "non": 154,
+     "elev": 56,
+     "elevKept": 54,
+     "nearFrontal": 9,
+     "nearFrontalRouted": 0
+    },
+    "SYNTH_DEV": {
+     "elev": 210,
+     "elevKept": 209,
+     "non": 297,
+     "nearFrontal": 140,
+     "nearFrontalRouted": 0
+    },
+    "IU03A_TEST_SYNTH": {
+     "elev": 90,
+     "elevKept": 60,
+     "non": 127,
+     "nearFrontal": 60,
+     "nearFrontalRouted": 1,
+     "nonRouted": 1
+    },
+    "IU03A_TEST_ARCHON": {
+     "non": 100,
+     "elev": 24,
+     "elevKept": 23,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3neg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3tneg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "LOC_DEV": {
+     "non": 313,
+     "nearFrontal": 78,
+     "nearFrontalRouted": 0,
+     "elev": 1
+    },
+    "COMMONS": {
+     "non": 158,
+     "elev": 12,
+     "elevKept": 11,
+     "nearFrontal": 37,
+     "nearFrontalRouted": 0
+    }
+   },
+   "elevLostReasons": {
+    "REVIEW_MULTI_VIEW_OR_OTHER": 64,
+    "REVIEW_INTERIOR": 6,
+    "STOP_PERSPECTIVE": 3,
+    "STOP_PERSPECTIVE_MASKED": 3,
+    "REVIEW_SITE_PLAN": 1
+   },
+   "leaked": [
+    [
+     "s3t-h028-persp-near_fron",
+     "EXTERIOR_PERSPECTIVE",
+     "IU03A_TEST_SYNTH",
+     "FACADE"
+    ]
+   ]
+  },
+  "B_S(z5.0,d1.0)": {
+   "maskedTestRan": 509,
+   "total": {
+    "non": 1677,
+    "nearFrontal": 486,
+    "nearFrontalRouted": 0,
+    "elev": 581,
+    "elevKept": 505
+   },
+   "bySet": {
+    "IU02_FINAL/FINAL_LOC": {
+     "non": 292,
+     "nearFrontal": 72,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_SYNTH": {
+     "elev": 120,
+     "elevKept": 80,
+     "non": 170,
+     "nearFrontal": 80,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_ARCHON": {
+     "elev": 40,
+     "elevKept": 39,
+     "non": 58,
+     "nearFrontal": 4,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/IU01_TEST": {
+     "non": 154,
+     "elev": 56,
+     "elevKept": 54,
+     "nearFrontal": 9,
+     "nearFrontalRouted": 0
+    },
+    "SYNTH_DEV": {
+     "elev": 210,
+     "elevKept": 209,
+     "non": 297,
+     "nearFrontal": 140,
+     "nearFrontalRouted": 0
+    },
+    "IU03A_TEST_SYNTH": {
+     "elev": 90,
+     "elevKept": 60,
+     "non": 127,
+     "nearFrontal": 60,
+     "nearFrontalRouted": 0
+    },
+    "IU03A_TEST_ARCHON": {
+     "non": 100,
+     "elev": 24,
+     "elevKept": 24,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3neg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3tneg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "LOC_DEV": {
+     "non": 313,
+     "nearFrontal": 78,
+     "nearFrontalRouted": 0,
+     "elev": 1
+    },
+    "COMMONS": {
+     "non": 158,
+     "elev": 12,
+     "elevKept": 11,
+     "nearFrontal": 37,
+     "nearFrontalRouted": 0
+    }
+   },
+   "elevLostReasons": {
+    "REVIEW_MULTI_VIEW_OR_OTHER": 64,
+    "REVIEW_INTERIOR": 6,
+    "STOP_PERSPECTIVE": 3,
+    "STOP_PERSPECTIVE_MASKED": 2,
+    "REVIEW_SITE_PLAN": 1
+   },
+   "leaked": []
+  },
+  "B_S(z5.0,d1.5)": {
+   "maskedTestRan": 509,
+   "total": {
+    "non": 1677,
+    "nearFrontal": 486,
+    "nearFrontalRouted": 1,
+    "elev": 581,
+    "elevKept": 505,
+    "nonRouted": 1
+   },
+   "bySet": {
+    "IU02_FINAL/FINAL_LOC": {
+     "non": 292,
+     "nearFrontal": 72,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_SYNTH": {
+     "elev": 120,
+     "elevKept": 80,
+     "non": 170,
+     "nearFrontal": 80,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_ARCHON": {
+     "elev": 40,
+     "elevKept": 39,
+     "non": 58,
+     "nearFrontal": 4,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/IU01_TEST": {
+     "non": 154,
+     "elev": 56,
+     "elevKept": 54,
+     "nearFrontal": 9,
+     "nearFrontalRouted": 0
+    },
+    "SYNTH_DEV": {
+     "elev": 210,
+     "elevKept": 209,
+     "non": 297,
+     "nearFrontal": 140,
+     "nearFrontalRouted": 0
+    },
+    "IU03A_TEST_SYNTH": {
+     "elev": 90,
+     "elevKept": 60,
+     "non": 127,
+     "nearFrontal": 60,
+     "nearFrontalRouted": 1,
+     "nonRouted": 1
+    },
+    "IU03A_TEST_ARCHON": {
+     "non": 100,
+     "elev": 24,
+     "elevKept": 24,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3neg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3tneg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "LOC_DEV": {
+     "non": 313,
+     "nearFrontal": 78,
+     "nearFrontalRouted": 0,
+     "elev": 1
+    },
+    "COMMONS": {
+     "non": 158,
+     "elev": 12,
+     "elevKept": 11,
+     "nearFrontal": 37,
+     "nearFrontalRouted": 0
+    }
+   },
+   "elevLostReasons": {
+    "REVIEW_MULTI_VIEW_OR_OTHER": 64,
+    "REVIEW_INTERIOR": 6,
+    "STOP_PERSPECTIVE": 3,
+    "STOP_PERSPECTIVE_MASKED": 2,
+    "REVIEW_SITE_PLAN": 1
+   },
+   "leaked": [
+    [
+     "s3t-h028-persp-near_fron",
+     "EXTERIOR_PERSPECTIVE",
+     "IU03A_TEST_SYNTH",
+     "FACADE"
+    ]
+   ]
+  },
+  "B_S(z5.0,d2.0)": {
+   "maskedTestRan": 509,
+   "total": {
+    "non": 1677,
+    "nearFrontal": 486,
+    "nearFrontalRouted": 1,
+    "elev": 581,
+    "elevKept": 505,
+    "nonRouted": 1
+   },
+   "bySet": {
+    "IU02_FINAL/FINAL_LOC": {
+     "non": 292,
+     "nearFrontal": 72,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_SYNTH": {
+     "elev": 120,
+     "elevKept": 80,
+     "non": 170,
+     "nearFrontal": 80,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_ARCHON": {
+     "elev": 40,
+     "elevKept": 39,
+     "non": 58,
+     "nearFrontal": 4,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/IU01_TEST": {
+     "non": 154,
+     "elev": 56,
+     "elevKept": 54,
+     "nearFrontal": 9,
+     "nearFrontalRouted": 0
+    },
+    "SYNTH_DEV": {
+     "elev": 210,
+     "elevKept": 209,
+     "non": 297,
+     "nearFrontal": 140,
+     "nearFrontalRouted": 0
+    },
+    "IU03A_TEST_SYNTH": {
+     "elev": 90,
+     "elevKept": 60,
+     "non": 127,
+     "nearFrontal": 60,
+     "nearFrontalRouted": 1,
+     "nonRouted": 1
+    },
+    "IU03A_TEST_ARCHON": {
+     "non": 100,
+     "elev": 24,
+     "elevKept": 24,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3neg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3tneg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "LOC_DEV": {
+     "non": 313,
+     "nearFrontal": 78,
+     "nearFrontalRouted": 0,
+     "elev": 1
+    },
+    "COMMONS": {
+     "non": 158,
+     "elev": 12,
+     "elevKept": 11,
+     "nearFrontal": 37,
+     "nearFrontalRouted": 0
+    }
+   },
+   "elevLostReasons": {
+    "REVIEW_MULTI_VIEW_OR_OTHER": 64,
+    "REVIEW_INTERIOR": 6,
+    "STOP_PERSPECTIVE": 3,
+    "STOP_PERSPECTIVE_MASKED": 2,
+    "REVIEW_SITE_PLAN": 1
+   },
+   "leaked": [
+    [
+     "s3t-h028-persp-near_fron",
+     "EXTERIOR_PERSPECTIVE",
+     "IU03A_TEST_SYNTH",
+     "FACADE"
+    ]
+   ]
+  },
+  "B_S(z5.0,d3.0)": {
+   "maskedTestRan": 509,
+   "total": {
+    "non": 1677,
+    "nearFrontal": 486,
+    "nearFrontalRouted": 1,
+    "elev": 581,
+    "elevKept": 505,
+    "nonRouted": 1
+   },
+   "bySet": {
+    "IU02_FINAL/FINAL_LOC": {
+     "non": 292,
+     "nearFrontal": 72,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_SYNTH": {
+     "elev": 120,
+     "elevKept": 80,
+     "non": 170,
+     "nearFrontal": 80,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_ARCHON": {
+     "elev": 40,
+     "elevKept": 39,
+     "non": 58,
+     "nearFrontal": 4,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/IU01_TEST": {
+     "non": 154,
+     "elev": 56,
+     "elevKept": 54,
+     "nearFrontal": 9,
+     "nearFrontalRouted": 0
+    },
+    "SYNTH_DEV": {
+     "elev": 210,
+     "elevKept": 209,
+     "non": 297,
+     "nearFrontal": 140,
+     "nearFrontalRouted": 0
+    },
+    "IU03A_TEST_SYNTH": {
+     "elev": 90,
+     "elevKept": 60,
+     "non": 127,
+     "nearFrontal": 60,
+     "nearFrontalRouted": 1,
+     "nonRouted": 1
+    },
+    "IU03A_TEST_ARCHON": {
+     "non": 100,
+     "elev": 24,
+     "elevKept": 24,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3neg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3tneg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "LOC_DEV": {
+     "non": 313,
+     "nearFrontal": 78,
+     "nearFrontalRouted": 0,
+     "elev": 1
+    },
+    "COMMONS": {
+     "non": 158,
+     "elev": 12,
+     "elevKept": 11,
+     "nearFrontal": 37,
+     "nearFrontalRouted": 0
+    }
+   },
+   "elevLostReasons": {
+    "REVIEW_MULTI_VIEW_OR_OTHER": 64,
+    "REVIEW_INTERIOR": 6,
+    "STOP_PERSPECTIVE": 3,
+    "STOP_PERSPECTIVE_MASKED": 2,
+    "REVIEW_SITE_PLAN": 1
+   },
+   "leaked": [
+    [
+     "s3t-h028-persp-near_fron",
+     "EXTERIOR_PERSPECTIVE",
+     "IU03A_TEST_SYNTH",
+     "FACADE"
+    ]
+   ]
+  },
+  "B_S(z6.0,d1.0)": {
+   "maskedTestRan": 509,
+   "total": {
+    "non": 1677,
+    "nearFrontal": 486,
+    "nearFrontalRouted": 0,
+    "elev": 581,
+    "elevKept": 505
+   },
+   "bySet": {
+    "IU02_FINAL/FINAL_LOC": {
+     "non": 292,
+     "nearFrontal": 72,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_SYNTH": {
+     "elev": 120,
+     "elevKept": 80,
+     "non": 170,
+     "nearFrontal": 80,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_ARCHON": {
+     "elev": 40,
+     "elevKept": 39,
+     "non": 58,
+     "nearFrontal": 4,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/IU01_TEST": {
+     "non": 154,
+     "elev": 56,
+     "elevKept": 54,
+     "nearFrontal": 9,
+     "nearFrontalRouted": 0
+    },
+    "SYNTH_DEV": {
+     "elev": 210,
+     "elevKept": 209,
+     "non": 297,
+     "nearFrontal": 140,
+     "nearFrontalRouted": 0
+    },
+    "IU03A_TEST_SYNTH": {
+     "elev": 90,
+     "elevKept": 60,
+     "non": 127,
+     "nearFrontal": 60,
+     "nearFrontalRouted": 0
+    },
+    "IU03A_TEST_ARCHON": {
+     "non": 100,
+     "elev": 24,
+     "elevKept": 24,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3neg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3tneg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "LOC_DEV": {
+     "non": 313,
+     "nearFrontal": 78,
+     "nearFrontalRouted": 0,
+     "elev": 1
+    },
+    "COMMONS": {
+     "non": 158,
+     "elev": 12,
+     "elevKept": 11,
+     "nearFrontal": 37,
+     "nearFrontalRouted": 0
+    }
+   },
+   "elevLostReasons": {
+    "REVIEW_MULTI_VIEW_OR_OTHER": 64,
+    "REVIEW_INTERIOR": 6,
+    "STOP_PERSPECTIVE": 3,
+    "STOP_PERSPECTIVE_MASKED": 2,
+    "REVIEW_SITE_PLAN": 1
+   },
+   "leaked": []
+  },
+  "B_S(z6.0,d1.5)": {
+   "maskedTestRan": 509,
+   "total": {
+    "non": 1677,
+    "nearFrontal": 486,
+    "nearFrontalRouted": 1,
+    "elev": 581,
+    "elevKept": 505,
+    "nonRouted": 1
+   },
+   "bySet": {
+    "IU02_FINAL/FINAL_LOC": {
+     "non": 292,
+     "nearFrontal": 72,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_SYNTH": {
+     "elev": 120,
+     "elevKept": 80,
+     "non": 170,
+     "nearFrontal": 80,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_ARCHON": {
+     "elev": 40,
+     "elevKept": 39,
+     "non": 58,
+     "nearFrontal": 4,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/IU01_TEST": {
+     "non": 154,
+     "elev": 56,
+     "elevKept": 54,
+     "nearFrontal": 9,
+     "nearFrontalRouted": 0
+    },
+    "SYNTH_DEV": {
+     "elev": 210,
+     "elevKept": 209,
+     "non": 297,
+     "nearFrontal": 140,
+     "nearFrontalRouted": 0
+    },
+    "IU03A_TEST_SYNTH": {
+     "elev": 90,
+     "elevKept": 60,
+     "non": 127,
+     "nearFrontal": 60,
+     "nearFrontalRouted": 1,
+     "nonRouted": 1
+    },
+    "IU03A_TEST_ARCHON": {
+     "non": 100,
+     "elev": 24,
+     "elevKept": 24,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3neg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3tneg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "LOC_DEV": {
+     "non": 313,
+     "nearFrontal": 78,
+     "nearFrontalRouted": 0,
+     "elev": 1
+    },
+    "COMMONS": {
+     "non": 158,
+     "elev": 12,
+     "elevKept": 11,
+     "nearFrontal": 37,
+     "nearFrontalRouted": 0
+    }
+   },
+   "elevLostReasons": {
+    "REVIEW_MULTI_VIEW_OR_OTHER": 64,
+    "REVIEW_INTERIOR": 6,
+    "STOP_PERSPECTIVE": 3,
+    "STOP_PERSPECTIVE_MASKED": 2,
+    "REVIEW_SITE_PLAN": 1
+   },
+   "leaked": [
+    [
+     "s3t-h028-persp-near_fron",
+     "EXTERIOR_PERSPECTIVE",
+     "IU03A_TEST_SYNTH",
+     "FACADE"
+    ]
+   ]
+  },
+  "B_S(z6.0,d2.0)": {
+   "maskedTestRan": 509,
+   "total": {
+    "non": 1677,
+    "nearFrontal": 486,
+    "nearFrontalRouted": 1,
+    "elev": 581,
+    "elevKept": 505,
+    "nonRouted": 1
+   },
+   "bySet": {
+    "IU02_FINAL/FINAL_LOC": {
+     "non": 292,
+     "nearFrontal": 72,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_SYNTH": {
+     "elev": 120,
+     "elevKept": 80,
+     "non": 170,
+     "nearFrontal": 80,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_ARCHON": {
+     "elev": 40,
+     "elevKept": 39,
+     "non": 58,
+     "nearFrontal": 4,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/IU01_TEST": {
+     "non": 154,
+     "elev": 56,
+     "elevKept": 54,
+     "nearFrontal": 9,
+     "nearFrontalRouted": 0
+    },
+    "SYNTH_DEV": {
+     "elev": 210,
+     "elevKept": 209,
+     "non": 297,
+     "nearFrontal": 140,
+     "nearFrontalRouted": 0
+    },
+    "IU03A_TEST_SYNTH": {
+     "elev": 90,
+     "elevKept": 60,
+     "non": 127,
+     "nearFrontal": 60,
+     "nearFrontalRouted": 1,
+     "nonRouted": 1
+    },
+    "IU03A_TEST_ARCHON": {
+     "non": 100,
+     "elev": 24,
+     "elevKept": 24,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3neg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3tneg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "LOC_DEV": {
+     "non": 313,
+     "nearFrontal": 78,
+     "nearFrontalRouted": 0,
+     "elev": 1
+    },
+    "COMMONS": {
+     "non": 158,
+     "elev": 12,
+     "elevKept": 11,
+     "nearFrontal": 37,
+     "nearFrontalRouted": 0
+    }
+   },
+   "elevLostReasons": {
+    "REVIEW_MULTI_VIEW_OR_OTHER": 64,
+    "REVIEW_INTERIOR": 6,
+    "STOP_PERSPECTIVE": 3,
+    "STOP_PERSPECTIVE_MASKED": 2,
+    "REVIEW_SITE_PLAN": 1
+   },
+   "leaked": [
+    [
+     "s3t-h028-persp-near_fron",
+     "EXTERIOR_PERSPECTIVE",
+     "IU03A_TEST_SYNTH",
+     "FACADE"
+    ]
+   ]
+  },
+  "B_S(z6.0,d3.0)": {
+   "maskedTestRan": 509,
+   "total": {
+    "non": 1677,
+    "nearFrontal": 486,
+    "nearFrontalRouted": 1,
+    "elev": 581,
+    "elevKept": 505,
+    "nonRouted": 1
+   },
+   "bySet": {
+    "IU02_FINAL/FINAL_LOC": {
+     "non": 292,
+     "nearFrontal": 72,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_SYNTH": {
+     "elev": 120,
+     "elevKept": 80,
+     "non": 170,
+     "nearFrontal": 80,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_ARCHON": {
+     "elev": 40,
+     "elevKept": 39,
+     "non": 58,
+     "nearFrontal": 4,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/IU01_TEST": {
+     "non": 154,
+     "elev": 56,
+     "elevKept": 54,
+     "nearFrontal": 9,
+     "nearFrontalRouted": 0
+    },
+    "SYNTH_DEV": {
+     "elev": 210,
+     "elevKept": 209,
+     "non": 297,
+     "nearFrontal": 140,
+     "nearFrontalRouted": 0
+    },
+    "IU03A_TEST_SYNTH": {
+     "elev": 90,
+     "elevKept": 60,
+     "non": 127,
+     "nearFrontal": 60,
+     "nearFrontalRouted": 1,
+     "nonRouted": 1
+    },
+    "IU03A_TEST_ARCHON": {
+     "non": 100,
+     "elev": 24,
+     "elevKept": 24,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3neg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3tneg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "LOC_DEV": {
+     "non": 313,
+     "nearFrontal": 78,
+     "nearFrontalRouted": 0,
+     "elev": 1
+    },
+    "COMMONS": {
+     "non": 158,
+     "elev": 12,
+     "elevKept": 11,
+     "nearFrontal": 37,
+     "nearFrontalRouted": 0
+    }
+   },
+   "elevLostReasons": {
+    "REVIEW_MULTI_VIEW_OR_OTHER": 64,
+    "REVIEW_INTERIOR": 6,
+    "STOP_PERSPECTIVE": 3,
+    "STOP_PERSPECTIVE_MASKED": 2,
+    "REVIEW_SITE_PLAN": 1
+   },
+   "leaked": [
+    [
+     "s3t-h028-persp-near_fron",
+     "EXTERIOR_PERSPECTIVE",
+     "IU03A_TEST_SYNTH",
+     "FACADE"
+    ]
+   ]
+  },
+  "B1": {
+   "maskedTestRan": 509,
+   "total": {
+    "non": 1677,
+    "nearFrontal": 486,
+    "nearFrontalRouted": 1,
+    "elev": 581,
+    "elevKept": 507,
+    "nonRouted": 1
+   },
+   "bySet": {
+    "IU02_FINAL/FINAL_LOC": {
+     "non": 292,
+     "nearFrontal": 72,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_SYNTH": {
+     "elev": 120,
+     "elevKept": 80,
+     "non": 170,
+     "nearFrontal": 80,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_ARCHON": {
+     "elev": 40,
+     "elevKept": 39,
+     "non": 58,
+     "nearFrontal": 4,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/IU01_TEST": {
+     "non": 154,
+     "elev": 56,
+     "elevKept": 54,
+     "nearFrontal": 9,
+     "nearFrontalRouted": 0
+    },
+    "SYNTH_DEV": {
+     "elev": 210,
+     "elevKept": 210,
+     "non": 297,
+     "nearFrontal": 140,
+     "nearFrontalRouted": 0
+    },
+    "IU03A_TEST_SYNTH": {
+     "elev": 90,
+     "elevKept": 60,
+     "non": 127,
+     "nearFrontal": 60,
+     "nearFrontalRouted": 1,
+     "nonRouted": 1
+    },
+    "IU03A_TEST_ARCHON": {
+     "non": 100,
+     "elev": 24,
+     "elevKept": 24,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3neg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3tneg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "LOC_DEV": {
+     "non": 313,
+     "nearFrontal": 78,
+     "nearFrontalRouted": 0,
+     "elev": 1
+    },
+    "COMMONS": {
+     "non": 158,
+     "elev": 12,
+     "elevKept": 12,
+     "nearFrontal": 37,
+     "nearFrontalRouted": 0
+    }
+   },
+   "elevLostReasons": {
+    "REVIEW_MULTI_VIEW_OR_OTHER": 64,
+    "REVIEW_INTERIOR": 6,
+    "STOP_PERSPECTIVE": 3,
+    "REVIEW_SITE_PLAN": 1
+   },
+   "leaked": [
+    [
+     "s3t-h028-persp-near_fron",
+     "EXTERIOR_PERSPECTIVE",
+     "IU03A_TEST_SYNTH",
+     "FACADE"
+    ]
+   ]
+  },
+  "B1_T": {
+   "maskedTestRan": 323,
+   "total": {
+    "non": 1677,
+    "nearFrontal": 486,
+    "nearFrontalRouted": 1,
+    "elev": 581,
+    "elevKept": 507,
+    "nonRouted": 1
+   },
+   "bySet": {
+    "IU02_FINAL/FINAL_LOC": {
+     "non": 292,
+     "nearFrontal": 72,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_SYNTH": {
+     "elev": 120,
+     "elevKept": 80,
+     "non": 170,
+     "nearFrontal": 80,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_ARCHON": {
+     "elev": 40,
+     "elevKept": 39,
+     "non": 58,
+     "nearFrontal": 4,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/IU01_TEST": {
+     "non": 154,
+     "elev": 56,
+     "elevKept": 54,
+     "nearFrontal": 9,
+     "nearFrontalRouted": 0
+    },
+    "SYNTH_DEV": {
+     "elev": 210,
+     "elevKept": 210,
+     "non": 297,
+     "nearFrontal": 140,
+     "nearFrontalRouted": 0
+    },
+    "IU03A_TEST_SYNTH": {
+     "elev": 90,
+     "elevKept": 60,
+     "non": 127,
+     "nearFrontal": 60,
+     "nearFrontalRouted": 1,
+     "nonRouted": 1
+    },
+    "IU03A_TEST_ARCHON": {
+     "non": 100,
+     "elev": 24,
+     "elevKept": 24,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3neg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3tneg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "LOC_DEV": {
+     "non": 313,
+     "nearFrontal": 78,
+     "nearFrontalRouted": 0,
+     "elev": 1
+    },
+    "COMMONS": {
+     "non": 158,
+     "elev": 12,
+     "elevKept": 12,
+     "nearFrontal": 37,
+     "nearFrontalRouted": 0
+    }
+   },
+   "elevLostReasons": {
+    "REVIEW_MULTI_VIEW_OR_OTHER": 64,
+    "REVIEW_INTERIOR": 6,
+    "STOP_PERSPECTIVE": 3,
+    "REVIEW_SITE_PLAN": 1
+   },
+   "leaked": [
+    [
+     "s3t-h028-persp-near_fron",
+     "EXTERIOR_PERSPECTIVE",
+     "IU03A_TEST_SYNTH",
+     "FACADE"
+    ]
+   ]
+  },
+  "B_T": {
+   "maskedTestRan": 323,
+   "total": {
+    "non": 1677,
+    "nearFrontal": 486,
+    "nearFrontalRouted": 1,
+    "elev": 581,
+    "elevKept": 506,
+    "nonRouted": 1
+   },
+   "bySet": {
+    "IU02_FINAL/FINAL_LOC": {
+     "non": 292,
+     "nearFrontal": 72,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_SYNTH": {
+     "elev": 120,
+     "elevKept": 80,
+     "non": 170,
+     "nearFrontal": 80,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_ARCHON": {
+     "elev": 40,
+     "elevKept": 39,
+     "non": 58,
+     "nearFrontal": 4,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/IU01_TEST": {
+     "non": 154,
+     "elev": 56,
+     "elevKept": 54,
+     "nearFrontal": 9,
+     "nearFrontalRouted": 0
+    },
+    "SYNTH_DEV": {
+     "elev": 210,
+     "elevKept": 209,
+     "non": 297,
+     "nearFrontal": 140,
+     "nearFrontalRouted": 0
+    },
+    "IU03A_TEST_SYNTH": {
+     "elev": 90,
+     "elevKept": 60,
+     "non": 127,
+     "nearFrontal": 60,
+     "nearFrontalRouted": 1,
+     "nonRouted": 1
+    },
+    "IU03A_TEST_ARCHON": {
+     "non": 100,
+     "elev": 24,
+     "elevKept": 24,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3neg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3tneg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "LOC_DEV": {
+     "non": 313,
+     "nearFrontal": 78,
+     "nearFrontalRouted": 0,
+     "elev": 1
+    },
+    "COMMONS": {
+     "non": 158,
+     "elev": 12,
+     "elevKept": 12,
+     "nearFrontal": 37,
+     "nearFrontalRouted": 0
+    }
+   },
+   "elevLostReasons": {
+    "REVIEW_MULTI_VIEW_OR_OTHER": 64,
+    "REVIEW_INTERIOR": 6,
+    "STOP_PERSPECTIVE": 3,
+    "STOP_PERSPECTIVE_MASKED": 1,
+    "REVIEW_SITE_PLAN": 1
+   },
+   "leaked": [
+    [
+     "s3t-h028-persp-near_fron",
+     "EXTERIOR_PERSPECTIVE",
+     "IU03A_TEST_SYNTH",
+     "FACADE"
+    ]
+   ]
+  },
+  "B_S(z5.0,d1.5)_T": {
+   "maskedTestRan": 323,
+   "total": {
+    "non": 1677,
+    "nearFrontal": 486,
+    "nearFrontalRouted": 1,
+    "elev": 581,
+    "elevKept": 505,
+    "nonRouted": 1
+   },
+   "bySet": {
+    "IU02_FINAL/FINAL_LOC": {
+     "non": 292,
+     "nearFrontal": 72,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_SYNTH": {
+     "elev": 120,
+     "elevKept": 80,
+     "non": 170,
+     "nearFrontal": 80,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/FINAL_ARCHON": {
+     "elev": 40,
+     "elevKept": 39,
+     "non": 58,
+     "nearFrontal": 4,
+     "nearFrontalRouted": 0
+    },
+    "IU02_FINAL/IU01_TEST": {
+     "non": 154,
+     "elev": 56,
+     "elevKept": 54,
+     "nearFrontal": 9,
+     "nearFrontalRouted": 0
+    },
+    "SYNTH_DEV": {
+     "elev": 210,
+     "elevKept": 209,
+     "non": 297,
+     "nearFrontal": 140,
+     "nearFrontalRouted": 0
+    },
+    "IU03A_TEST_SYNTH": {
+     "elev": 90,
+     "elevKept": 60,
+     "non": 127,
+     "nearFrontal": 60,
+     "nearFrontalRouted": 1,
+     "nonRouted": 1
+    },
+    "IU03A_TEST_ARCHON": {
+     "non": 100,
+     "elev": 24,
+     "elevKept": 24,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3neg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "NEG_iu3tneg": {
+     "elev": 14,
+     "elevKept": 14,
+     "non": 4,
+     "nearFrontal": 2,
+     "nearFrontalRouted": 0
+    },
+    "LOC_DEV": {
+     "non": 313,
+     "nearFrontal": 78,
+     "nearFrontalRouted": 0,
+     "elev": 1
+    },
+    "COMMONS": {
+     "non": 158,
+     "elev": 12,
+     "elevKept": 11,
+     "nearFrontal": 37,
+     "nearFrontalRouted": 0
+    }
+   },
+   "elevLostReasons": {
+    "REVIEW_MULTI_VIEW_OR_OTHER": 64,
+    "REVIEW_INTERIOR": 6,
+    "STOP_PERSPECTIVE": 3,
+    "STOP_PERSPECTIVE_MASKED": 2,
+    "REVIEW_SITE_PLAN": 1
+   },
+   "leaked": [
+    [
+     "s3t-h028-persp-near_fron",
+     "EXTERIOR_PERSPECTIVE",
+     "IU03A_TEST_SYNTH",
+     "FACADE"
+    ]
+   ]
+  }
+ }
+}

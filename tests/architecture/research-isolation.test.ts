@@ -1213,6 +1213,41 @@ describe('IU-03A production cannot reach the routing/evidence research, and its 
   })
 })
 
+/**
+ * IU-03B LIGHTWEIGHT MASKED PERSPECTIVE VETO — a second look inside a classical (sky/foliage-free) mask, added after
+ * IU-03A's VETO_ONLY (`iu3b/`). Research only: it runs on top of the unchanged IU-03A router, can only take an image
+ * AWAY from the facade extractor, hands the roles back unchanged, and nothing it writes lands in the repository.
+ */
+describe('IU-03B production cannot reach the masked-veto research, and its writers refuse the repository', () => {
+  const DIR = 'research/image-understanding/'
+
+  it('no production source imports iu3b or names its veto, mask or control set', () => {
+    for (const f of productionSources()) {
+      const src = read(f)
+      expect(importsOf(src).filter((i) => /(^|\/)iu3b(\/|$)/.test(i)), f).toEqual([])
+      expect(codeOf(src), f).not.toMatch(/STOP_PERSPECTIVE_MASKED|iu3bsynth|iu3bneg|iu3barchon|labels-archon-iu03b/)
+    }
+  })
+
+  it('every IU-03B writer refuses a destination inside the repository', () => {
+    const bad = join(ROOT, 'tmp-iu03b-refused')
+    for (const f of ['collect.py', 'analyse_dev.py', 'evaluate_control.py', 'control_inputs.py', 'control_synth.py']) {
+      const run = spawnSync('python3', ['-I', join(ROOT, DIR, 'iu3b', f), '--out', join(bad, 'x.json'), '--rows', '/nonexistent'], { cwd: ROOT, encoding: 'utf8' })
+      expect(run.status, f).not.toBe(0)
+      expect(run.stderr + run.stdout, f).toMatch(/REFUSED/)
+    }
+    expect(existsSync(bad)).toBe(false)
+  })
+
+  it('the masked stage runs only after the unchanged IU-03A router keeps the facade, and never adds one', () => {
+    const veto = read(`${DIR}iu3b/veto.py`)
+    expect(veto).toMatch(/v = route\.veto_only\(legacy_route, roles, list\(p\), c\['full'\]\['state'\], t_veto\)/)
+    expect(veto).toMatch(/if not v\.facade or not masked:\n\s+return out/)
+    expect(veto).not.toMatch(/'facade': True/)
+    expect(read(`${DIR}iu3b/evaluate_control.py`)).toMatch(/assert d\['roles'\] is roles/)
+  })
+})
+
 describe('IU-02 production cannot reach the geometry-first research, and its writers refuse the repository', () => {
   const DIR = 'research/image-understanding/'
 
