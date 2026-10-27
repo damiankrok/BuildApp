@@ -1,0 +1,22 @@
+--- east, 5 cm into main, W=0.62 (T=0.3, tolerance 0.06) ---
+PASS  thinBodies does not flag attached-1  — W=0.62 >= 2T=0.6
+  plain: ring-attached-1-0 walls ring-main-0-w1 and ring-attached-1-0-w0 share 0.0150 m² of plan area over a common height range; declare | walls ring-main-0-w1 and ring-attached-1-0-w2 share 0.0150 m² of plan area over a common height range; declare | walls ring-main-0-w1 and ring-attached-1-0-w3 share 0.2700 m² of plan area over a common height range; declare
+  reconciliation records: []
+  preview failures: [{"i":21,"id":"ring-attached-1-0","msg":"walls ring-main-0-w1 and ring-attached-1-0-w0 share 0.0150 m² of plan area over a common height range; declare a junctio"}]
+  skipped: ["20:slab-attached-1-0:SAME_BODY","21:ring-attached-1-0:FAILED","22:undefined:DEPENDENT"]
+  model rings: ring-main-0,ring-attached-0-0  walls 8  slabs slab-main-0,slab-attached-0-0
+--- east, 5 cm into main, W=0.70 (T=0.3, tolerance 0.06) ---
+PASS  thinBodies does not flag attached-1  — W=0.7 >= 2T=0.6
+  plain: ring-attached-1-0 walls ring-main-0-w1 and ring-attached-1-0-w0 share 0.0150 m² of plan area over a common height range; declare | walls ring-main-0-w1 and ring-attached-1-0-w2 share 0.0150 m² of plan area over a common height range; declare | walls ring-main-0-w1 and ring-attached-1-0-w3 share 0.2700 m² of plan area over a common height range; declare
+  reconciliation records: [{"wall":"ring-attached-1-0-w3","other":"ring-main-0-w1","action":"EDGE_MOVED","moveM":0.05,"after":{"start":{"x":10,"z":7},"end":{"x":10,"z":1}}}]
+  preview failures: []
+  skipped: []
+  model rings: ring-main-0,ring-attached-0-0,ring-attached-1-0  walls 12  slabs slab-main-0,slab-attached-0-0,slab-attached-1-0
+--- east, 5 cm gap from main, W=0.62 (T=0.3, tolerance 0.06) ---
+PASS  thinBodies does not flag attached-1  — W=0.62 >= 2T=0.6
+  plain: undefined undefined
+  reconciliation records: []
+  preview failures: []
+  skipped: []
+  model rings: ring-main-0,ring-attached-0-0,ring-attached-1-0  walls 12  slabs slab-main-0,slab-attached-0-0,slab-attached-1-0
+all assertions hold

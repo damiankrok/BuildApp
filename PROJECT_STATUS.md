@@ -2729,3 +2729,15 @@ reaching the facade extractor from 5 to 2 (of 189 non-elevations) with no elevat
 16/16 under real ones). The two left are weak-evidence images that no mask — classical, UperNet or ground truth —
 turns into a vanishing point; they are recorded as conflicts, not rerouted. UperNet adds nothing over the classical
 mask; no learned segmenter was needed. FacadeGeometryEvidence integration requirements are written down only.
+
+## Wall thickness and ring guard (STAGE BUILDPLAN N7-COUNCIL-FIX-02)
+
+Status: **DONE — APK 1308, solver 2.7.0.** Report `stage-reports/STAGE_BUILDPLAN_N7_COUNCIL_FIX_02.md`, numbers
+`stage-reports/artifacts/analyzer-n7-fix02/`. Council B-1/B-2: the exterior wall is read off the bands on each body's
+outer faces (`exterior-walls.ts`), not from the median of every band, and the layout gates bodies with the thickness
+the emitter builds them with; a body whose own faces agree on another wall is built with it; an estimate says it is
+one. Council D-1: the wall reconciliation never narrows a ring below its own two walls (0.62 → 0.57 m is refused and
+named). D-2/C-4/B-3: every ring rectangle is checked before emission, and a storey refused over a sound one leaves the
+storeys below standing. Eight known houses: 6 byte-identical, A01 (0.427 → 0.447 m) and Goździkowce (0.304 → 0.431 m,
+pseudo-partitions from the outer wall's inner layer gone) changed with the source's faces as the reason. Not fixed
+here: plan decomposition (Council C-1/C-2, next). The OWNER's private benchmark was not reproduced and is not claimed.

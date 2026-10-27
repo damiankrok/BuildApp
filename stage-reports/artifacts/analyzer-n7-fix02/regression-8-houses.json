@@ -1,0 +1,580 @@
+{
+ "note": "N7-COUNCIL-FIX-02 regression: the 8 development houses, production second-house runs at 2dadeae (base, byte-identical to FIX-01) and the same sealed evidence replayed through f013cfc. Counts from the canonical models; the house reading is the exterior-wall reader run on the same evidence.",
+ "rows": [
+  {
+   "house": "a01",
+   "modelBefore": "a6849073ad6aa9a3",
+   "modelAfter": "d095c0da90b69a49",
+   "byteIdentical": false,
+   "exteriorWallBeforeM": [
+    0.427
+   ],
+   "exteriorWallAfterM": [
+    0.447
+   ],
+   "houseReading": {
+    "m": 0.44682,
+    "source": "EXTERIOR_FACE_BANDS",
+    "faces": [
+     [
+      "W",
+      0.42651,
+      6.39
+     ],
+     [
+      "E",
+      0.44682,
+      7.32
+     ],
+     [
+      "N",
+      0.44682,
+      6.56
+     ],
+     [
+      "S",
+      0.431588,
+      7.33
+     ]
+    ]
+   },
+   "bodyReadings": [],
+   "before": {
+    "wallRings": 2,
+    "exteriorWalls": 8,
+    "interiorWalls": 19,
+    "slabs": 2,
+    "openings": 21,
+    "windows": 10,
+    "doors": 11,
+    "roofs": 1,
+    "roofPlanes": 0,
+    "rooms": 10,
+    "stairs": 1,
+    "chimneys": 3,
+    "rooflights": 7
+   },
+   "after": {
+    "wallRings": 2,
+    "exteriorWalls": 8,
+    "interiorWalls": 19,
+    "slabs": 2,
+    "openings": 21,
+    "windows": 10,
+    "doors": 11,
+    "roofs": 1,
+    "roofPlanes": 0,
+    "rooms": 10,
+    "stairs": 1,
+    "chimneys": 3,
+    "rooflights": 7
+   },
+   "masses": 1,
+   "outcomeBefore": "COMPLETE"
+  },
+  {
+   "house": "gozd",
+   "modelBefore": "852c257a861192ec",
+   "modelAfter": "1a96c20f088efaad",
+   "byteIdentical": false,
+   "exteriorWallBeforeM": [
+    0.304
+   ],
+   "exteriorWallAfterM": [
+    0.431
+   ],
+   "houseReading": {
+    "m": 0.430848,
+    "source": "EXTERIOR_FACE_BANDS",
+    "faces": [
+     [
+      "W",
+      0.430848,
+      7.46
+     ],
+     [
+      "E",
+      0.430848,
+      5.14
+     ],
+     [
+      "N",
+      0.430848,
+      6.92
+     ],
+     [
+      "S",
+      0.430848,
+      1.9
+     ]
+    ]
+   },
+   "bodyReadings": [],
+   "before": {
+    "wallRings": 2,
+    "exteriorWalls": 11,
+    "interiorWalls": 36,
+    "slabs": 2,
+    "openings": 29,
+    "windows": 8,
+    "doors": 20,
+    "roofs": 1,
+    "roofPlanes": 0,
+    "rooms": 9,
+    "stairs": 1,
+    "chimneys": 1,
+    "rooflights": 7
+   },
+   "after": {
+    "wallRings": 2,
+    "exteriorWalls": 11,
+    "interiorWalls": 32,
+    "slabs": 2,
+    "openings": 28,
+    "windows": 8,
+    "doors": 19,
+    "roofs": 1,
+    "roofPlanes": 0,
+    "rooms": 9,
+    "stairs": 1,
+    "chimneys": 1,
+    "rooflights": 7
+   },
+   "masses": 1,
+   "outcomeBefore": "COMPLETE"
+  },
+  {
+   "house": "marcowki",
+   "modelBefore": "8541ca10d0534107",
+   "modelAfter": "8541ca10d0534107",
+   "byteIdentical": true,
+   "exteriorWallBeforeM": [
+    0.49,
+    0.634,
+    0.645,
+    0.656
+   ],
+   "exteriorWallAfterM": [
+    0.49,
+    0.634,
+    0.645,
+    0.656
+   ],
+   "houseReading": {
+    "m": 0.489658,
+    "source": "EXTERIOR_FACE_BANDS",
+    "faces": [
+     [
+      "W",
+      0.489658,
+      11.67
+     ],
+     [
+      "E",
+      0.635232,
+      7.05
+     ],
+     [
+      "N",
+      0.476424,
+      1.59
+     ],
+     [
+      "S",
+      0.449956,
+      4.65
+     ]
+    ]
+   },
+   "bodyReadings": [],
+   "before": {
+    "wallRings": 3,
+    "exteriorWalls": 20,
+    "interiorWalls": 20,
+    "slabs": 3,
+    "openings": 21,
+    "windows": 8,
+    "doors": 13,
+    "roofs": 2,
+    "roofPlanes": 0,
+    "rooms": 12,
+    "stairs": 1,
+    "chimneys": 2,
+    "rooflights": 3
+   },
+   "after": {
+    "wallRings": 3,
+    "exteriorWalls": 20,
+    "interiorWalls": 20,
+    "slabs": 3,
+    "openings": 21,
+    "windows": 8,
+    "doors": 13,
+    "roofs": 2,
+    "roofPlanes": 0,
+    "rooms": 12,
+    "stairs": 1,
+    "chimneys": 2,
+    "rooflights": 3
+   },
+   "masses": 2,
+   "outcomeBefore": "COMPLETE"
+  },
+  {
+   "house": "ciesz",
+   "modelBefore": "5394c17c4ff1c4e5",
+   "modelAfter": "5394c17c4ff1c4e5",
+   "byteIdentical": true,
+   "exteriorWallBeforeM": [
+    0.459
+   ],
+   "exteriorWallAfterM": [
+    0.459
+   ],
+   "houseReading": {
+    "m": 0.458865,
+    "source": "EXTERIOR_FACE_BANDS",
+    "faces": [
+     [
+      "W",
+      0.458865,
+      9.34
+     ],
+     [
+      "E",
+      0.47277,
+      15.68
+     ],
+     [
+      "N",
+      0.44496,
+      8.16
+     ],
+     [
+      "S",
+      0.44496,
+      1.94
+     ]
+    ]
+   },
+   "bodyReadings": [],
+   "before": {
+    "wallRings": 1,
+    "exteriorWalls": 9,
+    "interiorWalls": 20,
+    "slabs": 1,
+    "openings": 20,
+    "windows": 11,
+    "doors": 6,
+    "roofs": 0,
+    "roofPlanes": 4,
+    "rooms": 4,
+    "stairs": 0,
+    "chimneys": 2,
+    "rooflights": 0
+   },
+   "after": {
+    "wallRings": 1,
+    "exteriorWalls": 9,
+    "interiorWalls": 20,
+    "slabs": 1,
+    "openings": 20,
+    "windows": 11,
+    "doors": 6,
+    "roofs": 0,
+    "roofPlanes": 4,
+    "rooms": 4,
+    "stairs": 0,
+    "chimneys": 2,
+    "rooflights": 0
+   },
+   "masses": 1,
+   "outcomeBefore": "COMPLETE"
+  },
+  {
+   "house": "rary",
+   "modelBefore": "73969751a434e0f6",
+   "modelAfter": "73969751a434e0f6",
+   "byteIdentical": true,
+   "exteriorWallBeforeM": [
+    0.441
+   ],
+   "exteriorWallAfterM": [
+    0.441
+   ],
+   "houseReading": {
+    "m": 0.441264,
+    "source": "EXTERIOR_FACE_BANDS",
+    "faces": [
+     [
+      "W",
+      0.441264,
+      7.57
+     ],
+     [
+      "E",
+      0.441264,
+      4.57
+     ],
+     [
+      "N",
+      0.579159,
+      3.94
+     ],
+     [
+      "S",
+      0.468843,
+      5.46
+     ]
+    ]
+   },
+   "bodyReadings": [],
+   "before": {
+    "wallRings": 2,
+    "exteriorWalls": 8,
+    "interiorWalls": 12,
+    "slabs": 2,
+    "openings": 20,
+    "windows": 7,
+    "doors": 13,
+    "roofs": 1,
+    "roofPlanes": 2,
+    "rooms": 9,
+    "stairs": 0,
+    "chimneys": 2,
+    "rooflights": 0
+   },
+   "after": {
+    "wallRings": 2,
+    "exteriorWalls": 8,
+    "interiorWalls": 12,
+    "slabs": 2,
+    "openings": 20,
+    "windows": 7,
+    "doors": 13,
+    "roofs": 1,
+    "roofPlanes": 2,
+    "rooms": 9,
+    "stairs": 0,
+    "chimneys": 2,
+    "rooflights": 0
+   },
+   "masses": 2,
+   "outcomeBefore": "COMPLETE"
+  },
+  {
+   "house": "trytomach",
+   "modelBefore": "d2bf0c031d4733d3",
+   "modelAfter": "d2bf0c031d4733d3",
+   "byteIdentical": true,
+   "exteriorWallBeforeM": [
+    0.448,
+    1.322,
+    1.407,
+    1.535
+   ],
+   "exteriorWallAfterM": [
+    0.448,
+    1.322,
+    1.407,
+    1.535
+   ],
+   "houseReading": {
+    "m": 0.448287,
+    "source": "EXTERIOR_FACE_BANDS",
+    "faces": [
+     [
+      "W",
+      0.448287,
+      6.35
+     ],
+     [
+      "E",
+      0.448287,
+      3.84
+     ],
+     [
+      "N",
+      0.448287,
+      8.73
+     ],
+     [
+      "S",
+      0.456292,
+      7.47
+     ]
+    ]
+   },
+   "bodyReadings": [],
+   "before": {
+    "wallRings": 2,
+    "exteriorWalls": 11,
+    "interiorWalls": 17,
+    "slabs": 2,
+    "openings": 18,
+    "windows": 10,
+    "doors": 8,
+    "roofs": 1,
+    "roofPlanes": 0,
+    "rooms": 8,
+    "stairs": 1,
+    "chimneys": 0,
+    "rooflights": 2
+   },
+   "after": {
+    "wallRings": 2,
+    "exteriorWalls": 11,
+    "interiorWalls": 17,
+    "slabs": 2,
+    "openings": 18,
+    "windows": 10,
+    "doors": 8,
+    "roofs": 1,
+    "roofPlanes": 0,
+    "rooms": 8,
+    "stairs": 1,
+    "chimneys": 0,
+    "rooflights": 2
+   },
+   "masses": 1,
+   "outcomeBefore": "COMPLETE"
+  },
+  {
+   "house": "arganiach",
+   "modelBefore": "34a95a766d169f39",
+   "modelAfter": "34a95a766d169f39",
+   "byteIdentical": true,
+   "exteriorWallBeforeM": [
+    0.457
+   ],
+   "exteriorWallAfterM": [
+    0.457
+   ],
+   "houseReading": {
+    "m": 0.457164,
+    "source": "EXTERIOR_FACE_BANDS",
+    "faces": [
+     [
+      "W",
+      0.457164,
+      6.82
+     ],
+     [
+      "E",
+      0.457164,
+      11.39
+     ],
+     [
+      "N",
+      0.457164,
+      9.49
+     ]
+    ]
+   },
+   "bodyReadings": [],
+   "before": {
+    "wallRings": 2,
+    "exteriorWalls": 8,
+    "interiorWalls": 10,
+    "slabs": 2,
+    "openings": 16,
+    "windows": 6,
+    "doors": 10,
+    "roofs": 2,
+    "roofPlanes": 0,
+    "rooms": 4,
+    "stairs": 0,
+    "chimneys": 0,
+    "rooflights": 3
+   },
+   "after": {
+    "wallRings": 2,
+    "exteriorWalls": 8,
+    "interiorWalls": 10,
+    "slabs": 2,
+    "openings": 16,
+    "windows": 6,
+    "doors": 10,
+    "roofs": 2,
+    "roofPlanes": 0,
+    "rooms": 4,
+    "stairs": 0,
+    "chimneys": 0,
+    "rooflights": 3
+   },
+   "masses": 2,
+   "outcomeBefore": "COMPLETE"
+  },
+  {
+   "house": "sasankach3",
+   "modelBefore": "090749f43fa6b741",
+   "modelAfter": "090749f43fa6b741",
+   "byteIdentical": true,
+   "exteriorWallBeforeM": [
+    0.43
+   ],
+   "exteriorWallAfterM": [
+    0.43
+   ],
+   "houseReading": {
+    "m": 0.429616,
+    "source": "EXTERIOR_FACE_BANDS",
+    "faces": [
+     [
+      "W",
+      0.449144,
+      9.47
+     ],
+     [
+      "E",
+      0.429616,
+      6.03
+     ],
+     [
+      "N",
+      0.429616,
+      1.93
+     ],
+     [
+      "S",
+      0.449144,
+      2.75
+     ]
+    ]
+   },
+   "bodyReadings": [],
+   "before": {
+    "wallRings": 2,
+    "exteriorWalls": 8,
+    "interiorWalls": 35,
+    "slabs": 2,
+    "openings": 20,
+    "windows": 9,
+    "doors": 11,
+    "roofs": 1,
+    "roofPlanes": 0,
+    "rooms": 8,
+    "stairs": 1,
+    "chimneys": 1,
+    "rooflights": 4
+   },
+   "after": {
+    "wallRings": 2,
+    "exteriorWalls": 8,
+    "interiorWalls": 35,
+    "slabs": 2,
+    "openings": 20,
+    "windows": 9,
+    "doors": 11,
+    "roofs": 1,
+    "roofPlanes": 0,
+    "rooms": 8,
+    "stairs": 1,
+    "chimneys": 1,
+    "rooflights": 4
+   },
+   "masses": 1,
+   "outcomeBefore": "COMPLETE"
+  }
+ ]
+}

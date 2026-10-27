@@ -1,0 +1,14 @@
+--- Q1/Q2: storeyRect narrower than 2T ---
+PASS  thinBodies skips the body with storeyRects  — []
+PASS  rectAt(att,1) is narrower than 2T  — width 0.45 < 0.6
+PASS  plain apply refuses ring-attached-0-1  — ring-attached-0-1 walls ring-attached-0-1-w1 and ring-attached-0-1-w3 share 0.8100 m² of plan area over a common height range; declare a junction (CORNER, BUTT or T) or move one of them
+PASS  preview cut: failure is ring-attached-0-1 WALLS_OVERLAP  — {"commandIndex":23,"type":"createWallRing","id":"ring-attached-0-1","codes":["WALLS_OVERLAP"],"message":"walls ring-attached-0-1-w1 and ring-attached-0-1-w3 share 0.8100 m² of plan area over a common height range; declare a junction (CORNER, BUTT or T) or move one of them","objectIds":["ring-attached-0-1-w1"]}
+PASS  the sound storey-0 ring and slab of the same body are cut with it (SAME_BODY)  — slab-attached-0-0:SAME_BODY,ring-attached-0-0:SAME_BODY
+PASS  even a narrow BASE rect is skipped when storeyRects exist
+--- Q3: a piece narrower than 2T ---
+PASS  thinBodies skips the piece
+PASS  plain apply refuses ring-main-s1-1-1  — ring-main-s1-1-1 walls ring-main-s1-1-1-w1 and ring-main-s1-1-1-w3 share 0.6800 m² of plan area over a common height range; declare a junction (CORNER, BUTT or T) or move one of them
+PASS  preview cut the piece and kept the rest  — ["ring-main-s1-1-1:FAILED","undefined:DEPENDENT"]
+PASS  main rings are not cut along with main's piece  — []
+PASS  thinBodies never checks MAIN
+all assertions hold
