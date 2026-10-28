@@ -17,6 +17,7 @@ import { rectAt } from './building.js'
 import type { BuildingV2, MassV2 } from './building.js'
 import type { ProvenanceStatus } from './graph.js'
 import type { DrawnLeaves, OpeningV2 } from './openings-v2.js'
+import { isValleyCut, mainRoofValleyCut, segmentCrossesNotch } from './valley-cut.js'
 import { CONVENTIONS } from '../solve.js'
 import { planWallTopology } from './wall-topology.js'
 import { partyFarFace, sideSegments } from './party-wall.js'
@@ -151,8 +152,22 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
   const notes: string[] = []
   const dropped: Array<{ featureId: string; why: string }> = []
   const topology: EmitResult['topology'] = { decisions: [], unresolved: [] }
+  /** Each emitted wall's centreline in plan: what a roof's cut is tested against. */
+  const emittedWallLines = new Map<string, { a: { x: number; z: number }; b: { x: number; z: number } }>()
+  /** A wall's centreline: its outer-face line moved half its thickness onto its material (behind `up × u`). */
+  const centreline = (a: { x: number; z: number }, b: { x: number; z: number }, t: number): { a: { x: number; z: number }; b: { x: number; z: number } } => {
+    const len = Math.hypot(b.x - a.x, b.z - a.z) || 1
+    const n = { x: (b.z - a.z) / len, z: -(b.x - a.x) / len }
+    return { a: { x: a.x - (n.x * t) / 2, z: a.z - (n.z * t) / 2 }, b: { x: b.x - (n.x * t) / 2, z: b.z - (n.z * t) / 2 } }
+  }
   const push = (command: BuildingCommand, featureId?: string, objectKind?: string): void => {
     program.push(command)
+    if (command.type === 'createWall' && command.id) emittedWallLines.set(command.id, centreline(command.start, command.end, command.thickness))
+    else if (command.type === 'createWallRing' && command.id) {
+      const ring = command.id
+      const t = command.thickness
+      command.polygon.forEach((p, i) => emittedWallLines.set(`${ring}-w${i}`, centreline(p, command.polygon[(i + 1) % command.polygon.length], t)))
+    }
     if (featureId && objectKind && 'id' in command && typeof command.id === 'string') bindings.push({ featureId, objectId: command.id, objectKind, commandIndex: program.length - 1 })
   }
   const evidence = (targetId: string, status: ProvenanceStatus, interpretation: string, properties?: Record<string, ProvenanceStatus>): void => {
@@ -174,6 +189,10 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
   push({ type: 'defineMaterial', id: MATERIALS_V2.mid, name: 'Grey render', color: '#8e8983' })
 
   for (const m of b.masses) onDebug?.(`mass ${m.id} (${m.role}) x ${m.x0}..${m.x1} z ${m.z0}..${m.z1} storeys ${m.storeys.join(',')} wall ${b.wallThicknessM}`)
+  // N8-03C: the main gable cut where a wing's roof runs over it, or why it is built whole (`valley-cut.ts`)
+  const cutOrRefusal = mainRoofValleyCut(b.mainRoof, b.pitchedAttachedRoofs, b.verges.length, pitchedPlaneIds)
+  const mainCut = cutOrRefusal && isValleyCut(cutOrRefusal) ? cutOrRefusal : undefined
+  const mainCutRefusal = cutOrRefusal && !isValleyCut(cutOrRefusal) && b.pitchedAttachedRoofs.some((r) => r.layout.join.kind === 'VALLEY' && !r.joinRoofId) ? cutOrRefusal.refused : undefined
   const levelId = (index: number): string => b.levels.find((l) => l.index === index)?.id ?? 'lvl-0'
   const levelOf = (index: number) => b.levels.find((l) => l.index === index)
   /** N7-P2R: a body's wall thickness: the house's, unless the plan draws this body's walls thinner (`thin-body.ts`). */
@@ -581,10 +600,33 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     const first = ends[0]
     return { edgeMembers: { verge: { width: first.width, depth: first.depth, materialId: MATERIALS_V2.member, ends } } }
   }
-  if (b.mainRoof) {
+  if (b.mainRoof && mainCut) {
+    // N8-03C: the main gable as its planes, the slope a wing runs over cut back to the wing's valleys (`valley-cut.ts`)
     const roof = b.mainRoof
     const l = levelOf(Math.max(...(b.masses.find((m) => m.id === roof.massId)?.storeys ?? [0])))
     const interiorTop = l ? emittedInteriorByStorey.get(l.index) ?? [] : []
+    for (const pl of mainCut.planes) {
+      push({ type: 'createRoofPlane', id: pl.id, levelId: l?.id ?? 'lvl-0', boundary: pl.boundary, datum: pl.datum, pitchDeg: pl.pitchDeg, downslope: pl.downslope, thickness: pl.thicknessM, materialId: MATERIALS_V2.roof }, roof.featureId, 'roofPlanes')
+      evidence(pl.id, roof.provenance, `one ${pl.side === 'LOW' ? 'low' : 'high'} slope of the ${roof.pitchDeg}° main gable on the authority of ${roof.authority.toLowerCase().replace(/_/g, ' ')}; ${roof.coversZonesWhy}; ${mainCut.why}`, { footprint: roof.coversZones ? 'SOURCE_CORROBORATED' : 'SOURCE_DERIVED', boundary: 'SOURCE_DERIVED' })
+    }
+    // each crease stated with its segment: a wing's plane also runs along the main wall under the main eave
+    for (const r of mainCut.ridges) push({ type: 'connectRoofPlanes', id: r.id, kind: 'RIDGE', planeIds: [r.low, r.high], segment: { start: r.start, end: r.end } }, roof.featureId, 'roofEdges')
+    for (const v of mainCut.valleys) push({ type: 'connectRoofPlanes', id: v.id, kind: 'VALLEY', planeIds: [v.mainPlaneId, v.wingPlaneId], segment: { start: v.start, end: v.end } }, roof.featureId, 'roofEdges')
+    for (const e of mainCut.eaves) push({ type: 'createRoofEdge', id: e.id, kind: 'EAVE', planeId: e.planeId, start: e.start, end: e.end }, roof.featureId, 'roofEdges')
+    for (const e of mainCut.verges) push({ type: 'createRoofEdge', id: e.id, kind: 'VERGE', planeId: e.planeId, start: e.start, end: e.end }, roof.featureId, 'roofEdges')
+    // the walls the gable caps die into its planes; one standing under a wing's cut dies into the wing's planes there
+    const mainIds = mainCut.planes.map((p) => p.id)
+    const wingIds = [...new Set(mainCut.valleys.map((v) => v.massId))].flatMap((id) => pitchedPlaneIds(id))
+    for (const wallId of [...capWallIds, ...interiorTop]) {
+      const w = emittedWallLines.get(wallId)
+      const crosses = !!w && segmentCrossesNotch(w.a, w.b, mainCut)
+      push({ type: 'setProperty', targetId: wallId, property: 'topProfile', value: { kind: 'FOLLOW_ROOF_PLANES', planeIds: crosses ? [...mainIds, ...wingIds] : mainIds } })
+    }
+  } else if (b.mainRoof) {
+    const roof = b.mainRoof
+    const l = levelOf(Math.max(...(b.masses.find((m) => m.id === roof.massId)?.storeys ?? [0])))
+    const interiorTop = l ? emittedInteriorByStorey.get(l.index) ?? [] : []
+    if (mainCutRefusal) notes.push(`the main gable is built whole: ${mainCutRefusal}`)
     push(
       {
         type: 'createRoof',
@@ -663,7 +705,8 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     for (const plane of r.layout.planes) {
       const wall = r.ridgeAxis === 'Z' ? (plane.key === 'LOW' ? `${ring}-w3` : `${ring}-w1`) : plane.key === 'LOW' ? `${ring}-w0` : `${ring}-w2`
       if (wall !== `${ring}-w${openIndex(mass)}` && emittedWalls.has(wall)) push({ type: 'createRelationship', kind: 'SUPPORTED_BY', from: idOf(plane.key), to: wall, note: 'the plane bears on the wall under its eave' })
-      if (r.layout.join.kind === 'VALLEY' && (b.mainRoof || r.joinRoofId)) push({ type: 'createRelationship', kind: 'INTERSECTS', from: idOf(plane.key), to: r.joinRoofId ?? 'roof-main', note: `a valley: ${r.layout.join.why}` })
+      const cutHost = mainCut?.valleys.find((v) => v.wingPlaneId === idOf(plane.key))?.mainPlaneId
+      if (r.layout.join.kind === 'VALLEY' && (b.mainRoof || r.joinRoofId)) push({ type: 'createRelationship', kind: 'INTERSECTS', from: idOf(plane.key), to: r.joinRoofId ?? cutHost ?? 'roof-main', note: `a valley: ${r.layout.join.why}` })
     }
     for (const plane of r.layout.planes) {
       evidence(idOf(plane.key), r.provenance, `${r.form.why}; ${r.layout.join.why}`, { pitchDeg: r.pitchSource === 'STATED' ? 'SOURCE_DERIVED' : 'IMAGE_METRIC_REGISTERED', boundary: 'SOURCE_DERIVED' })
@@ -740,8 +783,12 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       const roof = b.mainRoof
       const across: [number, number] = roof.ridgeAxis === 'Z' ? [c.x0, c.x1] : [c.z0, c.z1]
       const straddles = roof.kind === 'GABLE' && across[0] < roof.ridgeAt + 0.01 && across[1] > roof.ridgeAt - 0.01
+      const cornersOf = [{ x: c.x0, z: c.z0 }, { x: c.x1, z: c.z0 }, { x: c.x1, z: c.z1 }, { x: c.x0, z: c.z1 }]
+      // N8-03C: a main gable stated as planes takes the cut plumb in the one plane that holds the whole stack
+      const cutPlane = mainCut?.planes.find((pl) => cornersOf.every((q) => insidePolygon(q, pl.boundary)))
       if (straddles) notes.push(`${c.id} straddles the ridge at ${roof.ridgeAt}: placed through the roof without a penetration cut, which the model confines to one slope`)
-      else push({ type: 'cutRoofOpening', id: `${c.id}-pen`, roofId: 'roof-main', kind: 'PENETRATION', footprint: { minX: c.x0, maxX: c.x1, minZ: c.z0, maxZ: c.z1 }, throughId: c.id }, c.featureId, 'roofOpenings')
+      else if (mainCut && !cutPlane) notes.push(`${c.id} stands across an edge of the main gable's planes: placed through it without a penetration cut, which a plane confines to itself`)
+      else push({ type: 'cutRoofOpening', id: `${c.id}-pen`, roofId: cutPlane?.id ?? 'roof-main', kind: 'PENETRATION', footprint: { minX: c.x0, maxX: c.x1, minZ: c.z0, maxZ: c.z1 }, ...(cutPlane ? { cut: 'VERTICAL' as const } : {}), throughId: c.id }, c.featureId, 'roofOpenings')
     } else if (planeRoof) {
       // 005Y-N1: under a plane roof the penetration is cut plumb in the one plane that holds the whole stack (a plane
       // takes vertical cuts only); a stack over a hip or the ridge is placed through without a cut, and noted.
@@ -789,7 +836,14 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     const along: [number, number] = [r.alongFrom, r.alongTo]
     const slope: [number, number] = [Math.min(r.slopeFrom, r.slopeTo), Math.max(r.slopeFrom, r.slopeTo)]
     const footprint = b.mainRoof.ridgeAxis === 'Z' ? { minX: slope[0], maxX: slope[1], minZ: along[0], maxZ: along[1] } : { minX: along[0], maxX: along[1], minZ: slope[0], maxZ: slope[1] }
-    push({ type: 'cutRoofOpening', id: r.id, roofId: 'roof-main', kind: 'ROOFLIGHT', footprint, cut: 'NORMAL_TO_ROOF' }, r.featureId, 'roofOpenings')
+    // N8-03C: in a main gable stated as planes, cut plumb in the plane that holds it (a plane takes vertical cuts only)
+    const corners = [{ x: footprint.minX, z: footprint.minZ }, { x: footprint.maxX, z: footprint.minZ }, { x: footprint.maxX, z: footprint.maxZ }, { x: footprint.minX, z: footprint.maxZ }]
+    const cutPlane = mainCut?.planes.find((pl) => corners.every((q) => insidePolygon(q, pl.boundary)))
+    if (mainCut && !cutPlane) {
+      notes.push(`${r.id} lies across an edge of the main gable's planes: not cut`)
+      continue
+    }
+    push({ type: 'cutRoofOpening', id: r.id, roofId: cutPlane?.id ?? 'roof-main', kind: 'ROOFLIGHT', footprint, cut: cutPlane ? 'VERTICAL' : 'NORMAL_TO_ROOF' }, r.featureId, 'roofOpenings')
     push({ type: 'placeRooflight', id: `${r.id}-unit`, roofOpeningId: r.id, materialId: MATERIALS_V2.glass }, r.featureId, 'rooflights')
     evidence(r.id, r.provenance, r.why)
   }

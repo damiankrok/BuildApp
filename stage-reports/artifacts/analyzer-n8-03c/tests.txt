@@ -1,0 +1,34 @@
+ ✓ packages/reconstruction/test/eaves-hip-liveness-005y.test.ts (5 tests) 3595ms
+   ✓ 005Y liveness inside the tinted-callout search > ticks through the search and the reading, and reads exactly what it reads without a checkpoint  3337ms
+ ✓ packages/reconstruction/test/compound-facade-emission.test.ts (5 tests) 3518ms
+   ✓ 005N §23 — compound facades through the production solver > recess + garage door drawn: one enclosed body with the hall and the garage, the garage door on the garage wall, the recess a recess  955ms
+   ✓ 005N §23 — compound facades through the production solver > garage door blank: no garage body is fabricated (the first reading leaves it open), the house and its hall stand  688ms
+   ✓ 005N §23 — compound facades through the production solver > a carport beside the recessed entrance stays outside every mass  449ms
+   ✓ 005N §23 — compound facades through the production solver > §20 non-circularity, executed: a published footprint as the house has it, as a 1.25× decoy, or absent — the same separators, intervals, roles and recess  913ms
+   ✓ 005N council E2 — a compound front on the ground storey of a two-storey house > the ground storey reads its recess and garage, the upper storey (set back 3 m over them) keeps its own ring: two levels, not a copy  507ms
+ ✓ packages/reconstruction/test/photo-roof-openings-005x-n1.test.ts (9 tests) 1526ms
+   ✓ 005X-N1 the roof form from one picture > reads a roof whose top comes down to both ends inside the wall as hipped, and builds it from its planes  345ms
+ ✓ packages/reconstruction/test/glazing-leaves-n8-03b.test.ts (16 tests) 1281ms
+   ✓ leaves drawn shorter than the gap > glazing alone, however wide, holds no leaf  640ms
+ ✓ packages/reconstruction/test/attic-registration-n8-02a.test.ts (8 tests) 1181ms
+   ✓ N8-02A: registering an upper storey on the plan below > an upper sheet drawn at another image scale stands on the body it matches, at its own size  491ms
+ ✓ packages/reconstruction/test/attached-roof-form.test.ts (12 tests) 804ms
+ ✓ packages/reconstruction/test/rooflight-symbol-005y-n5.test.ts (5 tests) 213ms
+ ✓ packages/reconstruction/test/open-contact-n8-03a.test.ts (16 tests) 449ms
+ ✓ packages/reconstruction/test/attic-gable-registration.test.ts (14 tests) 75ms
+ ✓ packages/reconstruction/test/roof-apex-eaves.test.ts (10 tests) 117ms
+ ✓ packages/reconstruction/test/party-wall-n8-02b.test.ts (16 tests) 354ms
+ ✓ packages/reconstruction/test/rooflight-symbol-005y-n4.test.ts (3 tests) 43ms
+ ✓ packages/reconstruction/test/roof-systems.test.ts (23 tests) 50ms
+ ✓ packages/reconstruction/test/openings.test.ts (14 tests) 92ms
+ ✓ packages/reconstruction/test/valley-cut-n8-03c.test.ts (14 tests) 87ms
+ ✓ packages/reconstruction/test/roof-datum.test.ts (8 tests) 28ms
+ ✓ packages/reconstruction/test/opening-reading.test.ts (17 tests) 34ms
+ ✓ packages/reconstruction/test/wing-roof-n8-01.test.ts (11 tests) 26ms
+ ✓ packages/reconstruction/test/plan-first-rooflights-005x-n2.test.ts (3 tests) 20455ms
+   ✓ 005X-N2 rooflights from the plan alone > reads the rooflights the attic plan states, with no render or elevation showing them  9577ms
+   ✓ 005X-N2 rooflights from the plan alone > finds none where the plan states none, and none on a sheet without rings  7381ms
+   ✓ 005X-N2 rooflights from the plan alone > the ring search reads the same with its prefilter as without it  3493ms
+ Test Files  19 passed (19)
+      Tests  209 passed (209)
+   Duration  24.65s (transform 4.61s, setup 225ms, collect 15.57s, tests 33.93s, environment 4ms, prepare 1.72s)

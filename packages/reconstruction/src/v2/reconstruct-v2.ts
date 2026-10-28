@@ -62,6 +62,7 @@ import { attachedGableLayout, readAttachedRoofForm } from './attached-roof-form.
 import { decideSideOrientation, decideSidesByOpenings, gableApexRow, gableOutline, mainTopProfile, roofTopOverBand, sameSheetSideRegistration } from './side-orientation.js'
 import type { PerspectiveCameraV2 } from './camera.js'
 import { emitBuilding, pitchedPlaneIds } from './emit.js'
+import { builtRoofUndersideAt, isValleyCut, mainRoofValleyCut, valleyCutWings } from './valley-cut.js'
 import { fitStairToBoundingWalls, followStairSoffits } from './stair-fit.js'
 import { ReconstructionFailure, planCounts } from '../failure.js'
 import type { PlanDiagnosticsReport } from '../failure.js'
@@ -153,7 +154,11 @@ import type { ApproximateRidge } from './roof-datum.js'
 // than the gap — at one jamb beside a fixed light, or at both jambs meeting — is a door that opens (a terrace door), its
 // fill the leaves and light the plan draws (`drawnLeaves`); the leaf length is searched about a pivot at the wall's face
 // or inside its thickness. One opening stays one opening: the panes divide it, they do not multiply it.
-export const SOLVER_V2_VERSION = '2.14.0' as const
+// 2.15.0 (N8-03C): a main gable a wing's roof runs into along valleys is stated as its planes, the slope under the wing
+// cut back to the wing's valleys (two creases VALLEY between the main plane and the wing's planes; where the valleys
+// meet on the main ridge the slope is two planes); the walls it caps die into those planes, a wall under the cut into
+// the wing's; a doorway in a shared wall the main slope was too low for is decided against the roof as built.
+export const SOLVER_V2_VERSION = '2.15.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
@@ -1466,6 +1471,8 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   /** 005W-N1: band-registered views some wall's gaps confirmed (readWallOpenings' per-wall check). */
   const acceptedBandViews = new Set<string>()
   const sharedDoors: BuildingV2['sharedDoors'] = []
+  /** N8-03C: doorways in a shared wall too tall for the main slope over it, decided once every roof is known. */
+  const underMainSlope: Array<{ door: BuildingV2['sharedDoors'][number]; band: [number, number]; floorY: number; slopeTopY: number; what: string }> = []
   const isGableEnd = (m: MassV2, facade: 'FRONT' | 'REAR' | 'WEST' | 'EAST'): boolean => !!mainRoof && m.id === main.id && ((mainRoof.ridgeAxis === 'Z' && (facade === 'FRONT' || facade === 'REAR')) || (mainRoof.ridgeAxis === 'X' && (facade === 'WEST' || facade === 'EAST')))
   // 005U-N4: a garage room's one open side (`garageMouth`): the room is named a garage by a number read inside it
   // and the publisher's list, never by its area; two open sides, or none, and no gap is made a vehicle door.
@@ -1553,11 +1560,14 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
           // under the main roof's slope the one wall stands as high as the roof's underside over its far face
           const top = underEaves !== undefined && mainRoof ? round6(underEaves + Math.abs(planeAt - partyFarFace(p)) * Math.tan((mainRoof.pitchDeg * Math.PI) / 180)) : undefined
           for (const o of doors) {
+            const door = { ...o, id: `shared-${o.id.replace(/^opening-/, 'party-')}`, family: 'DOOR' as const, headY: round6(o.sillY + CONVENTIONS.doorHeight), otherMassId: p.otherMassId, why: `${o.why.replace(/ in the \w+ wall of \S+/, ` in the ${p.thicknessM.toFixed(2)} m wall ${m.id} shares with ${p.otherMassId}`)}; read on the one band the plan draws between the bodies, so the gap is a doorway between them` }
             if (top !== undefined && o.sillY + CONVENTIONS.doorHeight > top - 0.05) {
-              gap({ what: `the doorway ${o.interval[0].toFixed(2)}..${o.interval[1].toFixed(2)} the storey ${index} plan draws in the wall ${m.id} shares with ${p.otherMassId}`, reason: `under the main roof's slope that wall stands ${(top - l.elevation).toFixed(2)} m above the floor, lower than a ${CONVENTIONS.doorHeight.toFixed(2)} m door: not cut (the main roof is built whole under the roof of ${p.otherMassId})`, status: 'REFUSED', observationIds: [], evidenceIds: [] })
+              // N8-03C: the main slope is not the last word over this wall: a roof attached to the other body may run
+              // over it along valleys, and the main slope is then cut away under it. Decided once the roofs are known.
+              underMainSlope.push({ door, band: [p.band[0], p.band[1]], floorY: l.elevation, slopeTopY: top, what: `the doorway ${o.interval[0].toFixed(2)}..${o.interval[1].toFixed(2)} the storey ${index} plan draws in the wall ${m.id} shares with ${p.otherMassId}` })
               continue
             }
-            sharedDoors.push({ ...o, id: `shared-${o.id.replace(/^opening-/, 'party-')}`, family: 'DOOR', headY: round6(o.sillY + CONVENTIONS.doorHeight), otherMassId: p.otherMassId, why: `${o.why.replace(/ in the \w+ wall of \S+/, ` in the ${p.thicknessM.toFixed(2)} m wall ${m.id} shares with ${p.otherMassId}`)}; read on the one band the plan draws between the bodies, so the gap is a doorway between them` })
+            sharedDoors.push(door)
           }
         }
       }
@@ -1732,7 +1742,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     }
   }
   step({ stage: 'pockets', what: 'recesses inside a body’s face', method: 'DISCRETE_SELECTION', detail: pockets.map((p) => `${p.facade} ${p.from.toFixed(2)}..${p.to.toFixed(2)}, ${Math.abs(p.backAt - p.mouthAt).toFixed(2)} m deep, ${p.backOpenings.length} back openings`).join('; ') || 'none', inputs: layout.recesses.length, outputs: pockets.length })
-  for (const o of [...openings, ...sharedDoors]) {
+  const openingFeature = (o: OpeningV2): void => {
     const entry = planByStorey.get(o.storeyIndex)
     const sids = entry ? [sighting(entry.plan.frame, `wall gap ${o.interval[0].toFixed(2)}..${o.interval[1].toFixed(2)} on the ${o.facade.toLowerCase()} wall`, 0.7, [], o.planGap.pixelRect)] : []
     if (o.elevation) {
@@ -1745,6 +1755,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     if (mass) relate('HOSTED_BY', `feat-${o.id}`, mass.featureId, `an opening in the ${o.facade.toLowerCase()} wall`)
     if (o.callout) record({ evidenceId: o.callout.evidenceId, evidenceKind: 'METRIC', what: `callout ${o.callout.widthCm}/${o.callout.heightCm}`, authority: 'HIGH', featureId: `feat-${o.id}`, disposition: 'USED_IN_MODEL', reason: 'the opening’s printed width and height', stage: 'METRIC_SOLVE' })
   }
+  for (const o of [...openings, ...sharedDoors]) openingFeature(o)
   step({ stage: 'openings', what: 'openings cut from the plans, sized by callouts and elevations', method: 'DISCRETE_SELECTION', detail: `${openings.length} facade openings (${openings.filter((o) => o.callout).length} with a printed callout, ${openings.filter((o) => o.elevation).length} read on an elevation, ${openings.filter((o) => o.profile === 'RAKED_SINGLE').length} raked) and ${sharedDoors.length} doorway${sharedDoors.length === 1 ? '' : 's'} between bodies`, inputs: masses.length * 4, outputs: openings.length + sharedDoors.length })
 
   // ---------------------------------------------------------------------------
@@ -2341,6 +2352,38 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       const layout = planeRoofLayout(body, r.ridgeAxis, r.pitchDeg, eaveY, { min: r.ends!.min, max: r.ends!.max })
       planeRoofs = [{ massId: r.massId, ridgeAxis: r.ridgeAxis, pitchDeg: r.pitchDeg, eaveY, ridgeY: layout.ridgeY, ends: { min: r.ends!.min, max: r.ends!.max }, thicknessM: r.thicknessM, layout, featureId: r.featureId, provenance: r.provenance, why: `${r.pitchDeg}° roof on the authority of ${r.authority.toLowerCase().replace(/_/g, ' ')}; ${r.ends!.why}${r.eaves ? `; eaves ${oh.toFixed(2)} m past the walls on every side: ${r.eaves.why}` : ''}` }]
       builtMainRoof = undefined
+    }
+  }
+  // N8-03C: a doorway in a shared wall the main slope over it was too low for, against the roof as it will be built:
+  // where a roof attached to the other body runs over the main slope along valleys, the slope is cut away under it
+  // (`valley-cut.ts`) and the wall rises to that roof's underside. The door is cut where the built roof leaves room for
+  // it over the whole doorway, both faces of the wall; otherwise it is refused, as before, naming the roof that stops it.
+  if (underMainSlope.length > 0) {
+    const cut = mainRoofValleyCut(builtMainRoof, pitchedAttachedRoofs, verges.length, pitchedPlaneIds)
+    const wings = valleyCutWings(pitchedAttachedRoofs, pitchedPlaneIds)
+    for (const u of underMainSlope) {
+      const o = u.door
+      const alongX = o.facade === 'FRONT' || o.facade === 'REAR'
+      const under: number[] = []
+      if (cut && isValleyCut(cut)) {
+        for (const across of u.band) {
+          for (let i = 0; i <= 10; i++) {
+            const along = o.interval[0] + ((o.interval[1] - o.interval[0]) * i) / 10
+            const y = alongX ? builtRoofUndersideAt(cut, wings, along, across) : builtRoofUndersideAt(cut, wings, across, along)
+            if (y !== undefined) under.push(y)
+          }
+        }
+      }
+      const top = under.length === 22 ? round6(Math.min(...under)) : undefined
+      if (top !== undefined && o.sillY + CONVENTIONS.doorHeight <= top - 0.05) {
+        const why = `${o.why}; under the main slope the wall would stand ${(u.slopeTopY - u.floorY).toFixed(2)} m, but the roof over ${o.otherMassId} runs over that slope along valleys and the slope is cut away under it: over the doorway the wall rises to ${(top - u.floorY).toFixed(2)} m, under that roof`
+        sharedDoors.push({ ...o, why })
+        openingFeature({ ...o, why })
+        step({ stage: 'openings', what: `N8-03C: ${u.what}`, method: 'DISCRETE_SELECTION', detail: why, inputs: 1, outputs: 1 })
+        continue
+      }
+      const stopper = cut && isValleyCut(cut) ? `the roof as built leaves ${top !== undefined ? (top - u.floorY).toFixed(2) : 'no covered'} m over the doorway` : `the main roof is built whole under the roof of ${o.otherMassId}${cut ? ` (${(cut as { refused: string }).refused})` : ''}`
+      gap({ what: u.what, reason: `under the main roof's slope that wall stands ${(u.slopeTopY - u.floorY).toFixed(2)} m above the floor, lower than a ${CONVENTIONS.doorHeight.toFixed(2)} m door: not cut (${stopper})`, status: 'REFUSED', observationIds: [], evidenceIds: [] })
     }
   }
   // N7-P2 (C, D): the openings each registered elevation draws, read from the drawing, against the plan's openings; a

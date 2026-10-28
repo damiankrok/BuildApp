@@ -1,0 +1,840 @@
+{
+ "modelId": "m-analysis-mb292397cb1840",
+ "roofs": [
+  "roof-main"
+ ],
+ "roofPlanes": [
+  "roof-attached-0-plane-high",
+  "roof-attached-0-plane-low"
+ ],
+ "layers": {
+  "gridM": 0.1,
+  "planCells": 12180,
+  "coveredM2": 114.02,
+  "doubleRoofM2": 15.6,
+  "doubled": {
+   "roof-attached-0-plane-low + roof-main": 7.8,
+   "roof-attached-0-plane-high + roof-main": 7.8
+  }
+ },
+ "creases": [
+  {
+   "id": "roof-attached-0-ridge",
+   "kind": "RIDGE",
+   "planes": [
+    "roof-attached-0-plane-low",
+    "roof-attached-0-plane-high"
+   ],
+   "start": {
+    "x": 3.875,
+    "y": 8.52,
+    "z": 5.175
+   },
+   "end": {
+    "x": 11.6,
+    "y": 8.52,
+    "z": 5.175
+   },
+   "worstTopMismatchM": 0.02,
+   "samples": [
+    {
+     "s": 0.1,
+     "edgeY": 8.52,
+     "a": 8.5,
+     "b": 8.5
+    },
+    {
+     "s": 0.2,
+     "edgeY": 8.52,
+     "a": 8.5,
+     "b": 8.5
+    },
+    {
+     "s": 0.3,
+     "edgeY": 8.52,
+     "a": 8.5,
+     "b": 8.5
+    },
+    {
+     "s": 0.4,
+     "edgeY": 8.52,
+     "a": 8.5,
+     "b": 8.5
+    },
+    {
+     "s": 0.5,
+     "edgeY": 8.52,
+     "a": 8.5,
+     "b": 8.5
+    },
+    {
+     "s": 0.6,
+     "edgeY": 8.52,
+     "a": 8.5,
+     "b": 8.5
+    },
+    {
+     "s": 0.7,
+     "edgeY": 8.52,
+     "a": 8.5,
+     "b": 8.5
+    },
+    {
+     "s": 0.8,
+     "edgeY": 8.52,
+     "a": 8.5,
+     "b": 8.5
+    },
+    {
+     "s": 0.9,
+     "edgeY": 8.52,
+     "a": 8.5,
+     "b": 8.5
+    }
+   ]
+  }
+ ],
+ "walls": [
+  {
+   "id": "ring-main-1-w1-party-attached-0",
+   "levelId": "lvl-1",
+   "topProfile": {
+    "kind": "FOLLOW_ROOF",
+    "roofId": "roof-main"
+   },
+   "lengthM": 8.091,
+   "thicknessM": 0.234336,
+   "profile": [
+    {
+     "along": 0.05,
+     "x": 7.557,
+     "z": 1.18,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 0.3,
+     "x": 7.557,
+     "z": 1.43,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 0.55,
+     "x": 7.557,
+     "z": 1.68,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 0.8,
+     "x": 7.557,
+     "z": 1.93,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 1.05,
+     "x": 7.557,
+     "z": 2.18,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 1.3,
+     "x": 7.557,
+     "z": 2.43,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 1.55,
+     "x": 7.557,
+     "z": 2.68,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 1.8,
+     "x": 7.557,
+     "z": 2.93,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 2.05,
+     "x": 7.557,
+     "z": 3.18,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 2.3,
+     "x": 7.557,
+     "z": 3.43,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 2.55,
+     "x": 7.557,
+     "z": 3.68,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 2.8,
+     "x": 7.557,
+     "z": 3.93,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 3.05,
+     "x": 7.557,
+     "z": 4.18,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 3.3,
+     "x": 7.557,
+     "z": 4.43,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 3.55,
+     "x": 7.557,
+     "z": 4.68,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 3.8,
+     "x": 7.557,
+     "z": 4.93,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 4.05,
+     "x": 7.557,
+     "z": 5.18,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 4.3,
+     "x": 7.557,
+     "z": 5.43,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 4.55,
+     "x": 7.557,
+     "z": 5.68,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 4.8,
+     "x": 7.557,
+     "z": 5.93,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 5.05,
+     "x": 7.557,
+     "z": 6.18,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 5.3,
+     "x": 7.557,
+     "z": 6.43,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 5.55,
+     "x": 7.557,
+     "z": 6.68,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 5.8,
+     "x": 7.557,
+     "z": 6.93,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 6.05,
+     "x": 7.557,
+     "z": 7.18,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 6.3,
+     "x": 7.557,
+     "z": 7.43,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 6.55,
+     "x": 7.557,
+     "z": 7.68,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 6.8,
+     "x": 7.557,
+     "z": 7.93,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 7.05,
+     "x": 7.557,
+     "z": 8.18,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 7.3,
+     "x": 7.557,
+     "z": 8.43,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 7.55,
+     "x": 7.557,
+     "z": 8.68,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 7.8,
+     "x": 7.557,
+     "z": 8.93,
+     "outer": 1.652,
+     "inner": 1.866
+    },
+    {
+     "along": 8.05,
+     "x": 7.557,
+     "z": 9.18,
+     "outer": 1.652,
+     "inner": 1.866
+    }
+   ]
+  },
+  {
+   "id": "main-iwall-1-x-0",
+   "levelId": "lvl-1",
+   "topProfile": {
+    "kind": "FOLLOW_ROOF",
+    "roofId": "roof-main"
+   },
+   "lengthM": 3.632,
+   "thicknessM": 0.117039,
+   "profile": [
+    {
+     "along": 0.05,
+     "x": 3.726,
+     "z": 6.66,
+     "outer": 5.175,
+     "inner": 5.175
+    },
+    {
+     "along": 0.3,
+     "x": 3.976,
+     "z": 6.66,
+     "outer": 5.223,
+     "inner": 5.223
+    },
+    {
+     "along": 0.55,
+     "x": 4.226,
+     "z": 6.66,
+     "outer": 4.973,
+     "inner": 4.973
+    },
+    {
+     "along": 0.8,
+     "x": 4.476,
+     "z": 6.66,
+     "outer": 4.723,
+     "inner": 4.723
+    },
+    {
+     "along": 1.05,
+     "x": 4.726,
+     "z": 6.66,
+     "outer": 4.473,
+     "inner": 4.473
+    },
+    {
+     "along": 1.3,
+     "x": 4.976,
+     "z": 6.66,
+     "outer": 4.223,
+     "inner": 4.223
+    },
+    {
+     "along": 1.55,
+     "x": 5.226,
+     "z": 6.66,
+     "outer": 3.973,
+     "inner": 3.973
+    },
+    {
+     "along": 1.8,
+     "x": 5.476,
+     "z": 6.66,
+     "outer": 3.723,
+     "inner": 3.723
+    },
+    {
+     "along": 2.05,
+     "x": 5.726,
+     "z": 6.66,
+     "outer": 3.473,
+     "inner": 3.473
+    },
+    {
+     "along": 2.3,
+     "x": 5.976,
+     "z": 6.66,
+     "outer": 3.223,
+     "inner": 3.223
+    },
+    {
+     "along": 2.55,
+     "x": 6.226,
+     "z": 6.66,
+     "outer": 2.973,
+     "inner": 2.973
+    },
+    {
+     "along": 2.8,
+     "x": 6.476,
+     "z": 6.66,
+     "outer": 2.723,
+     "inner": 2.723
+    },
+    {
+     "along": 3.05,
+     "x": 6.726,
+     "z": 6.66,
+     "outer": 2.473,
+     "inner": 2.473
+    },
+    {
+     "along": 3.3,
+     "x": 6.976,
+     "z": 6.66,
+     "outer": 2.223,
+     "inner": 2.223
+    },
+    {
+     "along": 3.55,
+     "x": 7.226,
+     "z": 6.66,
+     "outer": 1.973,
+     "inner": 1.973
+    }
+   ]
+  },
+  {
+   "id": "main-iwall-1-x-4",
+   "levelId": "lvl-1",
+   "topProfile": {
+    "kind": "FOLLOW_ROOF",
+    "roofId": "roof-main"
+   },
+   "lengthM": 2.68,
+   "thicknessM": 0.117039,
+   "profile": [
+    {
+     "along": 0.05,
+     "x": 4.678,
+     "z": 3.445,
+     "outer": 4.521,
+     "inner": 4.521
+    },
+    {
+     "along": 0.3,
+     "x": 4.928,
+     "z": 3.445,
+     "outer": 4.271,
+     "inner": 4.271
+    },
+    {
+     "along": 0.55,
+     "x": 5.178,
+     "z": 3.445,
+     "outer": 4.021,
+     "inner": 4.021
+    },
+    {
+     "along": 0.8,
+     "x": 5.428,
+     "z": 3.445,
+     "outer": 3.771,
+     "inner": 3.771
+    },
+    {
+     "along": 1.05,
+     "x": 5.678,
+     "z": 3.445,
+     "outer": 3.521,
+     "inner": 3.521
+    },
+    {
+     "along": 1.3,
+     "x": 5.928,
+     "z": 3.445,
+     "outer": 3.271,
+     "inner": 3.271
+    },
+    {
+     "along": 1.55,
+     "x": 6.178,
+     "z": 3.445,
+     "outer": 3.021,
+     "inner": 3.021
+    },
+    {
+     "along": 1.8,
+     "x": 6.428,
+     "z": 3.445,
+     "outer": 2.771,
+     "inner": 2.771
+    },
+    {
+     "along": 2.05,
+     "x": 6.678,
+     "z": 3.445,
+     "outer": 2.521,
+     "inner": 2.521
+    },
+    {
+     "along": 2.3,
+     "x": 6.928,
+     "z": 3.445,
+     "outer": 2.271,
+     "inner": 2.271
+    },
+    {
+     "along": 2.55,
+     "x": 7.178,
+     "z": 3.445,
+     "outer": 2.021,
+     "inner": 2.021
+    }
+   ]
+  },
+  {
+   "id": "ring-main-1-w1-0",
+   "levelId": "lvl-1",
+   "topProfile": {
+    "kind": "FOLLOW_ROOF",
+    "roofId": "roof-main"
+   },
+   "lengthM": 1.13,
+   "thicknessM": 0.429616,
+   "profile": [
+    {
+     "along": 0.05,
+     "x": 7.75,
+     "z": 0.05
+    },
+    {
+     "along": 0.3,
+     "x": 7.75,
+     "z": 0.3
+    },
+    {
+     "along": 0.55,
+     "x": 7.75,
+     "z": 0.55,
+     "outer": 1.459,
+     "inner": 1.869
+    },
+    {
+     "along": 0.8,
+     "x": 7.75,
+     "z": 0.8,
+     "outer": 1.459,
+     "inner": 1.869
+    },
+    {
+     "along": 1.05,
+     "x": 7.75,
+     "z": 1.05,
+     "outer": 1.459,
+     "inner": 1.869
+    }
+   ]
+  },
+  {
+   "id": "ring-main-1-w1-1",
+   "levelId": "lvl-1",
+   "topProfile": {
+    "kind": "FOLLOW_ROOF",
+    "roofId": "roof-main"
+   },
+   "lengthM": 1.23,
+   "thicknessM": 0.429616,
+   "profile": [
+    {
+     "along": 0.05,
+     "x": 7.75,
+     "z": 9.27,
+     "outer": 1.459,
+     "inner": 1.869
+    },
+    {
+     "along": 0.3,
+     "x": 7.75,
+     "z": 9.52,
+     "outer": 1.459,
+     "inner": 1.869
+    },
+    {
+     "along": 0.55,
+     "x": 7.75,
+     "z": 9.77,
+     "outer": 1.459,
+     "inner": 1.869
+    },
+    {
+     "along": 0.8,
+     "x": 7.75,
+     "z": 10.02,
+     "outer": 1.459,
+     "inner": 1.869
+    },
+    {
+     "along": 1.05,
+     "x": 7.75,
+     "z": 10.27
+    }
+   ]
+  }
+ ],
+ "openings": {
+  "total": 22,
+  "cut": 22,
+  "rows": [
+   {
+    "id": "attached-0-idoor-0-0",
+    "wallId": "attached-0-iwall-0-x-0",
+    "kind": "DOOR",
+    "widthM": 0.995928,
+    "heightM": 2.1,
+    "sillM": 0,
+    "cut": true
+   },
+   {
+    "id": "main-idoor-0-0",
+    "wallId": "main-iwall-0-z-3",
+    "kind": "DOOR",
+    "widthM": 0.875205,
+    "heightM": 2.1,
+    "sillM": 0,
+    "cut": true
+   },
+   {
+    "id": "main-idoor-0-1",
+    "wallId": "main-iwall-0-x-5",
+    "kind": "DOOR",
+    "widthM": 0.995928,
+    "heightM": 2.1,
+    "sillM": 0,
+    "cut": true
+   },
+   {
+    "id": "main-idoor-0-2",
+    "wallId": "main-iwall-0-z-3",
+    "kind": "DOOR",
+    "widthM": 0.770933,
+    "heightM": 2.1,
+    "sillM": 0,
+    "cut": true
+   },
+   {
+    "id": "main-idoor-1-0",
+    "wallId": "main-iwall-1-z-0-a",
+    "kind": "DOOR",
+    "widthM": 0.896323,
+    "heightM": 2.1,
+    "sillM": 0,
+    "cut": true
+   },
+   {
+    "id": "main-idoor-1-1",
+    "wallId": "main-iwall-1-z-3",
+    "kind": "DOOR",
+    "widthM": 0.896323,
+    "heightM": 2.1,
+    "sillM": 0,
+    "cut": true
+   },
+   {
+    "id": "main-idoor-1-2",
+    "wallId": "main-iwall-1-x-0",
+    "kind": "DOOR",
+    "widthM": 0.917816,
+    "heightM": 2.1,
+    "sillM": 0,
+    "cut": true
+   },
+   {
+    "id": "opening-0-east-9-0",
+    "wallId": "ring-attached-0-0-w1",
+    "kind": "WINDOW",
+    "widthM": 1.983798,
+    "heightM": 1.3,
+    "sillM": 0.9,
+    "cut": true
+   },
+   {
+    "id": "opening-0-front-0-0",
+    "wallId": "ring-main-0-w0",
+    "kind": "WINDOW",
+    "widthM": 0.9,
+    "heightM": 1.4,
+    "sillM": 0.8,
+    "cut": true
+   },
+   {
+    "id": "opening-0-front-0-1",
+    "wallId": "ring-main-0-w0",
+    "kind": "DOOR",
+    "widthM": 1.05,
+    "heightM": 2.1,
+    "sillM": 0,
+    "cut": true
+   },
+   {
+    "id": "opening-0-front-0-2",
+    "wallId": "ring-main-0-w0",
+    "kind": "WINDOW",
+    "widthM": 0.9,
+    "heightM": 1.4,
+    "sillM": 0.8,
+    "cut": true
+   },
+   {
+    "id": "opening-0-front-8-0",
+    "wallId": "ring-attached-0-0-w0",
+    "kind": "DOOR",
+    "widthM": 2.73392,
+    "heightM": 2.2,
+    "sillM": 0,
+    "cut": true
+   },
+   {
+    "id": "opening-0-rear-10-0",
+    "wallId": "ring-attached-0-0-w2",
+    "kind": "WINDOW",
+    "widthM": 0.9,
+    "heightM": 1.1,
+    "sillM": 1.1,
+    "cut": true
+   },
+   {
+    "id": "opening-0-rear-10-1",
+    "wallId": "ring-attached-0-0-w2",
+    "kind": "DOOR",
+    "widthM": 1.05,
+    "heightM": 2.1,
+    "sillM": 0,
+    "cut": true
+   },
+   {
+    "id": "opening-0-rear-2-0",
+    "wallId": "ring-main-0-w2",
+    "kind": "WINDOW",
+    "widthM": 1.796576,
+    "heightM": 1.561948,
+    "sillM": 0.379409,
+    "cut": true
+   },
+   {
+    "id": "opening-0-rear-2-1",
+    "wallId": "ring-main-0-w2",
+    "kind": "WINDOW",
+    "widthM": 1.796576,
+    "heightM": 1.3,
+    "sillM": 0.9,
+    "cut": true
+   },
+   {
+    "id": "opening-0-west-3-0",
+    "wallId": "ring-main-0-w3",
+    "kind": "WINDOW",
+    "widthM": 1.205838,
+    "heightM": 1.3,
+    "sillM": 0.9,
+    "cut": true
+   },
+   {
+    "id": "opening-1-east-13-0",
+    "wallId": "ring-attached-0-1-w1",
+    "kind": "WINDOW",
+    "widthM": 2.006984,
+    "heightM": 1.3,
+    "sillM": 0.9,
+    "cut": true
+   },
+   {
+    "id": "opening-1-front-4-0",
+    "wallId": "ring-main-1-w0",
+    "kind": "DOOR",
+    "widthM": 1.8,
+    "heightM": 2.3,
+    "sillM": 0,
+    "cut": true
+   },
+   {
+    "id": "opening-1-rear-6-0",
+    "wallId": "ring-main-1-w2",
+    "kind": "DOOR",
+    "widthM": 1,
+    "heightM": 2.3,
+    "sillM": 0,
+    "cut": true
+   },
+   {
+    "id": "opening-1-rear-6-1",
+    "wallId": "ring-main-1-w2",
+    "kind": "DOOR",
+    "widthM": 1,
+    "heightM": 2.3,
+    "sillM": 0,
+    "cut": true
+   },
+   {
+    "id": "shared-party-0-east-1-0",
+    "wallId": "ring-main-0-w1-party-attached-0",
+    "kind": "DOOR",
+    "widthM": 0.875205,
+    "heightM": 2.1,
+    "sillM": 0,
+    "cut": true
+   }
+  ]
+ }
+}

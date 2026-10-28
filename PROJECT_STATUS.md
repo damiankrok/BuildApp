@@ -2871,3 +2871,20 @@ compiler diagnostics, every opening cut. Open: pane division of multi-panel glaz
 one pane, the elevations show two — no source the solver reads gives it, and no single threshold fits the corpus),
 Goździkowce 100/150 still a door (glazing lines at the light-line cut), its side 200/230 and 290/100 unread by the
 reader's gates, its elevations unregistered (no ridge datum).
+
+## Sasanki 3: kosze dachowe i drzwi poddasza (STAGE BUILDPLAN N8-03C)
+
+Status: **DONE — solver 2.15.0, bez APK.** Report `stage-reports/STAGE_BUILDPLAN_N8_03C_ROOF_VALLEYS_AND_ATTIC_DOOR.md`,
+numbers `stage-reports/artifacts/analyzer-n8-03c/`. FIRST_BAD: the wing's planes stopped on correct valleys (N8-01), but
+the main gable was emitted whole as a legacy GABLE (rectangular holes only), so 15.6 m² of the main slope stood inside
+the wing's attic; every wall under it was cut to it (the shared attic wall 1.65 m at the door), and the door gate,
+running before the wing roof is known, measured the main slope only and refused the 0.94 m door to room 8. Fixed
+generally (`v2/valley-cut.ts`): where a wing's roof runs into the main gable along valleys, the gable is stated as its
+planes with the legacy top surface, the slope under the wing cut back to the wing's valleys (two pieces where they meet
+on the main ridge), two VALLEY creases with stated segments; the walls it caps follow its planes, a wall across the cut
+the wing's; refused (gable kept, named) for overhang, edge members or valleys whose ends the two surfaces do not share.
+The shared-wall doorway is decided against the roof as built. Sasanki: no double roof, the shared wall rises under the
+wing roof (3.8–5.1 m at the door), door cut, 23/23 openings. Rarytasy (same cause): 11.45 m² double roof → 0, its
+party wall's top under the garage roof. Six houses byte-identical; all 8 validate, 0 WALLS_OVERLAP, 0 diagnostics.
+Open: main-roof rooflights cut plumb (planes take vertical cuts), the cut refused under an eaves overhang, the attic
+door's 2.10 m height a convention.
