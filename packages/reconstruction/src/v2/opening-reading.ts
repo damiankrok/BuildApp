@@ -8,7 +8,7 @@
 import { round6 } from '@buildapp/source-common'
 import type { ProvenanceStatus } from './graph.js'
 import { CONVENTIONS } from '../solve.js'
-import type { DrawnDoorLeaf, OpeningFamily, OpeningV2, WallHost } from './openings-v2.js'
+import type { DrawnDoorLeaf, DrawnLeaves, OpeningFamily, OpeningV2, WallHost } from './openings-v2.js'
 
 // --- callouts ------------------------------------------------------------------------------------------------------
 
@@ -211,6 +211,8 @@ export type OpeningSymbols = {
   leaf: () => DrawnDoorLeaf | undefined
   /** A swing arc drawn in the room behind the gap. */
   swingDrawn: () => boolean
+  /** N8-03B: leaves drawn shorter than the gap — one beside a fixed light, or two meeting (`drawnLeaves`). */
+  leaves: () => DrawnLeaves | undefined
 }
 
 export type OpeningFamilyFacts = {
@@ -242,6 +244,8 @@ export type OpeningFamilyDecision = {
   /** A vehicle door whose heights nothing read: its sill goes to the floor and its head to the convention. */
   vehicleDoorAssumedHeights?: true
   leaf?: DrawnDoorLeaf
+  /** N8-03B: the leaves of a door wider than one leaf, as drawn. */
+  leaves?: DrawnLeaves
   notes: string[]
 }
 
@@ -267,6 +271,13 @@ export function classifyOpeningFamily(f: OpeningFamilyFacts): OpeningFamilyDecis
   if (f.overheadTracks && !f.heightsAssumed) return { family: 'GARAGE_DOOR', provenance: 'SOURCE_DERIVED', notes: [`a vehicle door: ${f.overheadTracks.why}`] }
   if (f.heightsAssumed) return f.doorBySymbol ? { family: 'DOOR', provenance: f.doorSwing ? 'SOURCE_DERIVED' : 'VISUAL_SEMANTIC', notes: [] } : { family: 'WINDOW', provenance: 'ASSUMED_FOR_RENDERING', notes: [] }
   if (f.attachedSingleStorey && f.storeyIndex === 0 && f.widthM >= VEHICLE_DOOR_MIN_WIDTH_M && onFloorForVehicle) return { family: 'GARAGE_DOOR', notes: [] }
+  // N8-03B: on the ground storey, an opening to the floor wider than one door with a leaf drawn in it shorter than the
+  // gap — a leaf beside a fixed light, or two leaves meeting — is a door that opens: a terrace door, not a screen of
+  // panes, however wide. The count of its panes is not the count of its openings: it stays one opening.
+  if (reachesFloor && f.storeyIndex === 0 && f.widthM > DOOR_MAX_WIDTH_M) {
+    const leaves = f.symbols.leaves()
+    if (leaves) return { family: 'GLAZED_DOOR', provenance: 'SOURCE_DERIVED', leaves, notes: [leaves.why] }
+  }
   if (reachesFloor && f.widthM >= MULTI_PANEL_MIN_WIDTH_M) return { family: 'MULTI_PANEL_GLAZING', notes: [] }
   const glazed = f.symbols.glazed()
   if (reachesFloor && !glazed && doorSized) return { family: 'DOOR', notes: [] }

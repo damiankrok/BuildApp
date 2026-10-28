@@ -71,6 +71,8 @@ export type OpeningV2 = {
   family: OpeningFamily
   /** 005Y-N4 (C): the leaf as the plan draws it — which way it swings and at which end of the gap it hangs — when read. */
   leaf?: DrawnDoorLeaf
+  /** N8-03B: the leaves of a door wider than one leaf — a leaf beside a fixed light, or two leaves — as the plan draws them. */
+  leaves?: DrawnLeaves
   callout?: { widthCm: number; heightCm: number; evidenceId: string; distanceM: number; heightCandidates?: Array<{ cm: number; score: number }>; resolvedBy?: string; widthCorroboratedByPlan?: true }
   elevation?: { frameId: string; sillY: number; headY: number; contrast: number; confidence: number }
   /** Mullion positions as fractions of the width, from stubs the plan draws inside the gap. */
@@ -571,10 +573,12 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
         glazed: () => glazingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM) || glazingLinesDrawn(input.planRaster, plan, host, interval, input.wallThicknessM, bandCentre),
         leaf: () => doorLeafFound(input.planRaster, plan, host, interval, input.wallThicknessM, calloutBoxes, input.trace ? (d) => input.trace?.({ kind: 'DOOR_LEAF_DEBUG', interval: [round6(lo), round6(hi)], facade: host.facade, massId: host.massId, ...d }) : undefined),
         swingDrawn: () => doorSwingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM),
+        leaves: () => drawnLeaves(input.planRaster, plan, host, interval, input.wallThicknessM, calloutBoxes, input.trace ? (d) => input.trace?.({ kind: 'DOOR_LEAVES_DEBUG', interval: [round6(lo), round6(hi)], facade: host.facade, massId: host.massId, ...d }) : undefined),
       },
     })
     const family = decision.family
     const leaf = decision.leaf
+    const leaves = decision.leaves
     if (decision.provenance) prov.family = decision.provenance
     if (decision.vehicleDoorAssumedHeights) {
       sillY = host.floorY
@@ -584,7 +588,7 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
     unresolved.push(...decision.notes)
     const mullions = gap.stubs.map(([s0, s1]) => round6(((s0 + s1) / 2 - interval[0]) / widthM)).filter((f) => f > 0.05 && f < 0.95)
     const confidence = round6(Math.min(0.92, 0.5 + (callout ? 0.2 : 0) + (elevation ? 0.15 : 0) + (callout && elevation && prov.head === 'SOURCE_CORROBORATED' ? 0.07 : 0)))
-    input.trace?.({ kind: 'OPENING_GAP', id: `opening-${host.storeyIndex}-${host.facade.toLowerCase()}-${input.index}-${out.length}`, frameId: plan.frameId, massId: host.massId, storey: host.storeyIndex, facade: host.facade, pixelRect: gap.pixelRect, intervalM: [round6(lo), round6(hi)], widthPlanM: widthPlan, callouts: weighed, callout: callout ? { widthCm: callout.widthCm, heightCm: callout.heightCm, evidenceId: callout.evidenceId } : null, elevation: elevation ? { frameId: elevation.frameId, sillY: elevation.sillY, headY: elevation.headY } : null, family, ...(leaf ? { leaf } : {}), provenanceFamily: prov.family, sillY: round6(sillY), headY: round6(headY), unresolved })
+    input.trace?.({ kind: 'OPENING_GAP', id: `opening-${host.storeyIndex}-${host.facade.toLowerCase()}-${input.index}-${out.length}`, frameId: plan.frameId, massId: host.massId, storey: host.storeyIndex, facade: host.facade, pixelRect: gap.pixelRect, intervalM: [round6(lo), round6(hi)], widthPlanM: widthPlan, callouts: weighed, callout: callout ? { widthCm: callout.widthCm, heightCm: callout.heightCm, evidenceId: callout.evidenceId } : null, elevation: elevation ? { frameId: elevation.frameId, sillY: elevation.sillY, headY: elevation.headY } : null, family, ...(leaf ? { leaf } : {}), ...(leaves ? { leaves } : {}), provenanceFamily: prov.family, sillY: round6(sillY), headY: round6(headY), unresolved })
     out.push({
       id: `opening-${host.storeyIndex}-${host.facade.toLowerCase()}-${input.index}-${out.length}`,
       storeyIndex: host.storeyIndex,
@@ -600,6 +604,7 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
       profile,
       family,
       ...(leaf ? { leaf } : {}),
+      ...(leaves ? { leaves } : {}),
       callout,
       elevation,
       mullions,
@@ -659,85 +664,11 @@ export type DrawnDoorLeaf = { swing: 'IN' | 'OUT'; hingeAt: 'LOW' | 'HIGH' }
 export function doorLeafFound(raster: Raster, plan: PlanFrameV2, host: WallHost, interval: [number, number], wallThicknessM: number, occluders: readonly PixelBox[] = [], debug?: (record: Record<string, unknown>) => void): DrawnDoorLeaf | undefined {
   const w = interval[1] - interval[0]
   const into = host.facade === 'FRONT' || host.facade === 'WEST' ? 1 : -1
-  const alongX = host.facade === 'FRONT' || host.facade === 'REAR'
-  const step = (plan.mppX + plan.mppY) / 2
-  const hidden = (p: { x: number; y: number }): boolean => occluders.some((b) => p.x >= b.x0 && p.x <= b.x1 && p.y >= b.y0 && p.y <= b.y1)
   let found: DrawnDoorLeaf | undefined
   ;[into, -into].some((inward) => {
-    const inner = host.centreAt + (inward * wallThicknessM) / 2
-    const at = (along: number, depth: number): { x: number; y: number } => (alongX ? plan.toPixel(along, inner + inward * depth) : plan.toPixel(inner + inward * depth, along))
-    const ground: number[] = []
-    for (let u = 0.1; u <= 0.9; u += 0.1) {
-      for (let v = 0.1; v <= 0.9; v += 0.1) {
-        const p = at(interval[0] + u * w, v * w)
-        ground.push(lumaOf(raster, Math.round(p.x), Math.round(p.y)))
-      }
-    }
-    ground.sort((a, b) => a - b)
-    const paper = ground[Math.floor(ground.length / 2)]
-    const dark = (p: { x: number; y: number }): boolean => {
-      for (let dy = -1; dy <= 1; dy += 1) for (let dx = -1; dx <= 1; dx += 1) if (lumaOf(raster, Math.round(p.x) + dx, Math.round(p.y) + dy) < paper - 35) return true
-      return false
-    }
-    const share = (from: number, to: number, along: number): number => {
-      let k = 0
-      let n = 0
-      for (let d = from; d <= to; d += step) {
-        if (hidden(at(along, d))) continue
-        n += 1
-        if (dark(at(along, d))) k += 1
-      }
-      return n === 0 ? 0 : k / n
-    }
-    // a leaf is a line: paper a hand's breadth from it on the gap's side, away from the wall (on its other side a
-    // partition may run along it; a row of shrubs in a planter, a hatched or filled area, is ink on both)
-    const thinLeaf = (along: number, towards: 1 | -1): number => {
-      let k = 0
-      let n = 0
-      for (let d = 0.2 * w; d <= 0.9 * w; d += step) {
-        if (!dark(at(along, d)) || hidden(at(along + towards * 0.1, d))) continue
-        n += 1
-        if (!dark(at(along + towards * 0.1, d))) k += 1
-      }
-      return n === 0 ? 0 : k / n
-    }
-    for (const [hinge, towards, hingeAt] of [[interval[0], 1, 'LOW'], [interval[1], -1, 'HIGH']] as const) {
-      // the leaf, at an offset from the jamb up to a leaf's thickness
-      let leafAt: number | undefined
-      for (let off = 0; off <= 0.12 && leafAt === undefined; off += step) {
-        const along = hinge + towards * off
-        if (share(0, 0.9 * w, along) >= 0.8 && share(1.1 * w, 1.3 * w, along) <= 0.3 && thinLeaf(along, towards) >= 0.7) leafAt = along
-      }
-      debug?.({ inward, hingeAt, leafAt: leafAt === undefined ? null : round6(leafAt), leafShares: [0, 0.03, 0.06, 0.09, 0.12].map((off) => { const al = hinge + towards * off; return [round6(share(0, 0.9 * w, al)), round6(share(1.1 * w, 1.3 * w, al)), round6(thinLeaf(al, towards))] }) })
-      if (leafAt === undefined) continue
-      // the arc, its radius the gap's width, inked from 6° to 84° off the wall — reaching the far jamb and the leaf's
-      // tip — and a line, paper a hand's breadth inside and outside it, from 30° on (nearer the wall it runs into the
-      // wall's own ink), about one pivot in the wall's thickness
-      let arc = false
-      for (let pivot = -wallThicknessM; pivot <= 0.1 * w && !arc; pivot += step) {
-        let inked = 0
-        let n = 0
-        let thin = 0
-        let m = 0
-        let samples = 0
-        for (let deg = 6; deg <= 84; deg += 3) {
-          const a = (deg * Math.PI) / 180
-          const on = (r: number): boolean => dark(at(leafAt + towards * r * Math.cos(a), pivot + r * Math.sin(a)))
-          samples += 1
-          if (hidden(at(leafAt + towards * w * Math.cos(a), pivot + w * Math.sin(a)))) continue
-          n += 1
-          if (!on(w)) continue
-          inked += 1
-          if (deg < 30) continue
-          m += 1
-          if (!on(w - 0.1) && !on(w + 0.1)) thin += 1
-        }
-        // unhidden, the arc as before; partly under a callout, a third of it seen and inked nearly throughout
-        const seenEnough = (n >= samples / 2 && inked / n >= 0.6) || (n < samples && n >= samples / 3 && inked / n >= 0.9)
-        arc = seenEnough && m > 0 && thin / m >= 0.5
-        if (debug && inked > 0) debug({ inward, hingeAt, pivot: round6(pivot), samples, seen: n, inked, thin, m })
-      }
-      if (arc) {
+    const probe = leafProbe(raster, plan, host, interval, wallThicknessM, occluders, inward as 1 | -1, debug)
+    for (const hingeAt of ['LOW', 'HIGH'] as const) {
+      if (probe.test(hingeAt, w)) {
         found = { swing: inward === into ? 'IN' : 'OUT', hingeAt }
         return true
       }
@@ -745,6 +676,241 @@ export function doorLeafFound(raster: Raster, plan: PlanFrameV2, host: WallHost,
     return false
   })
   return found
+}
+
+/** N8-03B: a leaf the plan draws shorter than the gap it stands in: which jamb it hangs at, how long it is, which way it swings. */
+export type DrawnPartialLeaf = { hingeAt: 'LOW' | 'HIGH'; lengthM: number; swing: 'IN' | 'OUT' }
+/**
+ * N8-03B: the leaves of a gap wider than any one of them — one leaf beside a fixed light, or two leaves meeting — as
+ * the plan draws them. `leaves` runs from the gap's LOW jamb to its HIGH one.
+ */
+export type DrawnLeaves = { arrangement: 'LEAF_AND_LIGHT' | 'DOUBLE'; leaves: DrawnPartialLeaf[]; why: string }
+
+/** A leaf this short is not drawn for a person to pass (m). */
+export const PARTIAL_LEAF_MIN_M = 0.55
+/** A fixed light beside a leaf is at least this wide (m); a leaf within this of the gap's width is the gap's own leaf. */
+export const SIDELIGHT_MIN_M = 0.25
+/** Two leaves meet when their lengths add up to the gap within this share of its width. */
+export const DOUBLE_LEAF_TOLERANCE = 0.12
+
+/**
+ * N8-03B: the leaves the plan draws in a gap where no leaf as wide as the gap is drawn — `doorLeafFound`'s own test
+ * (a leaf line at a jamb, paper past its tip and beside it, its arc thin and inked), with the leaf's length searched
+ * from `PARTIAL_LEAF_MIN_M` to the gap's width less `SIDELIGHT_MIN_M`, at each jamb and on each side of the wall:
+ *
+ *   - one jamb holds a leaf, the other none: a leaf beside a fixed light, the light the rest of the gap;
+ *   - both jambs hold one, on the same side, the lengths that pass at the two able to add up to the gap
+ *     (`DOUBLE_LEAF_TOLERANCE`): two leaves meeting;
+ *   - anything else (two leaves that overlap or leave a gap between them, or swing to opposite sides): nothing — the
+ *     drawing is not read as either, and the gap stays what it was.
+ *
+ * A length passes when the leaf and its arc pass about a pivot at the wall's face (the leaf as long as the arc's
+ * radius, `doorLeafFound`'s test) or about a pivot inside the wall's thickness (the leaf drawn past the face only by
+ * the radius less the pivot's depth): plans draw the hinge at either. The pass admits a pixel of tolerance either side
+ * of the arc, so a run of lengths passes about the drawn one; the leaf's length is the radius of the circle fitted to
+ * the arc's own ink (`fitArc`), which must fall within the run. Nothing here sizes the opening: the gap is the plan's,
+ * the leaf divides it.
+ */
+export function drawnLeaves(raster: Raster, plan: PlanFrameV2, host: WallHost, interval: [number, number], wallThicknessM: number, occluders: readonly PixelBox[] = [], debug?: (record: Record<string, unknown>) => void): DrawnLeaves | undefined {
+  const w = interval[1] - interval[0]
+  const into = host.facade === 'FRONT' || host.facade === 'WEST' ? 1 : -1
+  const step = (plan.mppX + plan.mppY) / 2
+  const longest = w - SIDELIGHT_MIN_M
+  if (longest < PARTIAL_LEAF_MIN_M) return undefined
+  type Jamb = { hingeAt: 'LOW' | 'HIGH'; run: [number, number]; fit?: { radiusM: number; pivotM: number; points: number }; swing: 'IN' | 'OUT' }
+  const sides: Array<{ inward: 1 | -1; jambs: Jamb[] }> = []
+  for (const inward of [into, -into] as Array<1 | -1>) {
+    const probe = leafProbe(raster, plan, host, interval, wallThicknessM, occluders, inward)
+    const jambs: Jamb[] = []
+    const passed: Record<string, number[]> = {}
+    for (const hingeAt of ['LOW', 'HIGH'] as const) {
+      const passing: number[] = []
+      for (let r = PARTIAL_LEAF_MIN_M; r <= longest + 1e-9; r += step) if (probe.test(hingeAt, r, true) || probe.test(hingeAt, r, false)) passing.push(r)
+      passed[hingeAt] = passing.map(round6)
+      if (passing.length === 0) continue
+      const run: [number, number] = [passing[0], passing[passing.length - 1]]
+      const fit = probe.fitArc(hingeAt, passing[Math.floor((passing.length - 1) / 2)], 0)
+      jambs.push({ hingeAt, run, ...(fit ? { fit } : {}), swing: inward === into ? 'IN' : 'OUT' })
+    }
+    debug?.({ inward, passingLengthsM: passed, fits: Object.fromEntries(jambs.map((j) => [j.hingeAt, j.fit ?? null])) })
+    if (jambs.length > 0) sides.push({ inward, jambs })
+  }
+  if (sides.length !== 1) return undefined
+  const { jambs } = sides[0]
+  if (jambs.length === 1) {
+    // one leaf: its length is the arc's radius fitted to the ink, which must lie within the run that passed (a fit
+    // pulled off it by other ink is no measurement, and the leaf is not read)
+    const [j] = jambs
+    const r = j.fit?.radiusM
+    if (r === undefined || r < j.run[0] - 0.1 || r > j.run[1] + 0.1 || r > longest + 0.05) return undefined
+    const leaf: DrawnPartialLeaf = { hingeAt: j.hingeAt, lengthM: round6(Math.min(r, longest)), swing: j.swing }
+    return { arrangement: 'LEAF_AND_LIGHT', leaves: [leaf], why: `a leaf ${leaf.lengthM.toFixed(2)} m long is drawn at the ${leaf.hingeAt === 'LOW' ? 'low' : 'high'} jamb of the ${w.toFixed(2)} m gap, with its arc; the other ${(w - leaf.lengthM).toFixed(2)} m holds no leaf: a fixed light` }
+  }
+  // two leaves: their arcs meet, and each one's ink is the other's neighbour, so no circle is fitted; the pair stands
+  // when the lengths that pass at the two jambs can add up to the gap, and each leaf takes the length nearest an even
+  // share that does
+  const [lo, hi] = jambs
+  const tol = DOUBLE_LEAF_TOLERANCE * w
+  if (lo.run[0] + hi.run[0] > w + tol || lo.run[1] + hi.run[1] < w - tol) return undefined
+  const r1 = Math.min(Math.max(w / 2, lo.run[0]), lo.run[1])
+  const r2 = Math.min(Math.max(w - r1, hi.run[0]), hi.run[1])
+  const leaves: DrawnPartialLeaf[] = [
+    { hingeAt: 'LOW', lengthM: round6(r1), swing: lo.swing },
+    { hingeAt: 'HIGH', lengthM: round6(r2), swing: hi.swing },
+  ]
+  return { arrangement: 'DOUBLE', leaves, why: `two leaves are drawn from both jambs of the ${w.toFixed(2)} m gap with their arcs, meeting (${leaves[0].lengthM.toFixed(2)} and ${leaves[1].lengthM.toFixed(2)} m): a pair of leaves` }
+}
+
+/**
+ * The leaf-and-arc test of `doorLeafFound` on one side of the wall, for a leaf of a stated length hung at one jamb: the
+ * leaf a line from the jamb (up to a leaf's thickness off it) as long as the leaf, paper past its tip and a hand's
+ * breadth beside it, and the arc of that radius about a pivot in the wall's thickness, inked from 6° to 84° off the
+ * wall. The paper is judged over the whole gap, as `doorLeafFound` always has. With the radius the gap's width this is
+ * `doorLeafFound`'s test exactly.
+ */
+function leafProbe(raster: Raster, plan: PlanFrameV2, host: WallHost, interval: [number, number], wallThicknessM: number, occluders: readonly PixelBox[], inward: 1 | -1, debug?: (record: Record<string, unknown>) => void): { test: (hingeAt: 'LOW' | 'HIGH', radiusM: number, pivotAware?: boolean) => boolean; fitArc: (hingeAt: 'LOW' | 'HIGH', r0: number, p0: number) => { radiusM: number; pivotM: number; points: number } | undefined } {
+  const w = interval[1] - interval[0]
+  const alongX = host.facade === 'FRONT' || host.facade === 'REAR'
+  const step = (plan.mppX + plan.mppY) / 2
+  const hidden = (p: { x: number; y: number }): boolean => occluders.some((b) => p.x >= b.x0 && p.x <= b.x1 && p.y >= b.y0 && p.y <= b.y1)
+  const inner = host.centreAt + (inward * wallThicknessM) / 2
+  const at = (along: number, depth: number): { x: number; y: number } => (alongX ? plan.toPixel(along, inner + inward * depth) : plan.toPixel(inner + inward * depth, along))
+  const ground: number[] = []
+  for (let u = 0.1; u <= 0.9; u += 0.1) {
+    for (let v = 0.1; v <= 0.9; v += 0.1) {
+      const p = at(interval[0] + u * w, v * w)
+      ground.push(lumaOf(raster, Math.round(p.x), Math.round(p.y)))
+    }
+  }
+  ground.sort((a, b) => a - b)
+  const paper = ground[Math.floor(ground.length / 2)]
+  const dark = (p: { x: number; y: number }): boolean => {
+    for (let dy = -1; dy <= 1; dy += 1) for (let dx = -1; dx <= 1; dx += 1) if (lumaOf(raster, Math.round(p.x) + dx, Math.round(p.y) + dy) < paper - 35) return true
+    return false
+  }
+  const share = (from: number, to: number, along: number): number => {
+    let k = 0
+    let n = 0
+    for (let d = from; d <= to; d += step) {
+      if (hidden(at(along, d))) continue
+      n += 1
+      if (dark(at(along, d))) k += 1
+    }
+    return n === 0 ? 0 : k / n
+  }
+  // `pivotAware` (N8-03B, partial leaves): the leaf hangs at a pivot in the wall's thickness, so the part of it drawn
+  // past the wall's inner face is the arc's radius less the pivot's depth in the wall, and the leaf is tested at that
+  // length for each pivot the arc is tried about. Without it — `doorLeafFound`'s test, kept exactly — the leaf is tested
+  // at the radius once, before any pivot.
+  // N8-03B: the arc's own radius, fitted to its ink: every inked point of the ring of half-width `band` about the
+  // trial radius `r0` and pivot `p0`, 15° to 75° off the wall (clear of the leaf and the wall's face), fitted in the
+  // least squares to a circle centred on the jamb's line, `u² + (v − p)² = r²` (u along the wall from the jamb, v the
+  // depth past the face; linear in p and r² − p²), twice, the second time about the first fit
+  const fitArc = (hingeAt: 'LOW' | 'HIGH', r0: number, p0: number): { radiusM: number; pivotM: number; points: number } | undefined => {
+    const [hinge, towards] = hingeAt === 'LOW' ? [interval[0], 1] : [interval[1], -1]
+    let r = r0
+    let p = p0
+    let points = 0
+    for (const band of [0.12, 0.06]) {
+      let sv = 0
+      let s1 = 0
+      let svv = 0
+      let sy = 0
+      let svy = 0
+      points = 0
+      for (let u = 0; u <= r + band; u += step) {
+        for (let v = -wallThicknessM; v <= p + r + band; v += step) {
+          const dist = Math.hypot(u, v - p)
+          if (dist < r - band || dist > r + band) continue
+          const deg = (Math.atan2(v - p, u) * 180) / Math.PI
+          if (deg < 15 || deg > 75) continue
+          const q = at(hinge + towards * u, v)
+          if (hidden(q) || lumaOf(raster, Math.round(q.x), Math.round(q.y)) >= paper - 35) continue
+          const y = u * u + v * v
+          sv += v
+          s1 += 1
+          svv += v * v
+          sy += y
+          svy += v * y
+          points += 1
+        }
+      }
+      // normal equations of y = (2v)·p + c
+      const det = 4 * svv * s1 - 2 * sv * (2 * sv)
+      if (points < 8 || Math.abs(det) < 1e-12) return undefined
+      const pp = (svy * 2 * s1 - 2 * sv * sy) / det
+      const c = (4 * svv * sy - 4 * sv * svy) / det
+      const rr2 = c + pp * pp
+      if (!(rr2 > 0)) return undefined
+      p = pp
+      r = Math.sqrt(rr2)
+    }
+    return { radiusM: round6(r), pivotM: round6(p), points }
+  }
+  const test = (hingeAt: 'LOW' | 'HIGH', r: number, pivotAware = false): boolean => {
+    const [hinge, towards] = hingeAt === 'LOW' ? [interval[0], 1] : [interval[1], -1]
+    // a leaf is a line: paper a hand's breadth from it on the gap's side, away from the wall (on its other side a
+    // partition may run along it; a row of shrubs in a planter, a hatched or filled area, is ink on both)
+    const thinLeaf = (along: number, length: number): number => {
+      let k = 0
+      let n = 0
+      for (let d = 0.2 * length; d <= 0.9 * length; d += step) {
+        if (!dark(at(along, d)) || hidden(at(along + towards * 0.1, d))) continue
+        n += 1
+        if (!dark(at(along + towards * 0.1, d))) k += 1
+      }
+      return n === 0 ? 0 : k / n
+    }
+    // the leaf, at an offset from the jamb up to a leaf's thickness, drawn `length` past the wall's face
+    const leafLine = (length: number): number | undefined => {
+      for (let off = 0; off <= 0.12; off += step) {
+        const along = hinge + towards * off
+        if (share(0, 0.9 * length, along) >= 0.8 && share(1.1 * length, 1.3 * length, along) <= 0.3 && thinLeaf(along, length) >= 0.7) return along
+      }
+      return undefined
+    }
+    // the arc, its radius the leaf's length, inked from 6° to 84° off the wall — reaching the far end of the leaf's
+    // sweep and the leaf's tip — and a line, paper a hand's breadth inside and outside it, from 30° on (nearer the wall
+    // it runs into the wall's own ink), about one pivot in the wall's thickness
+    const arcAbout = (tip: number, pivot: number): boolean => {
+      let inked = 0
+      let n = 0
+      let thin = 0
+      let m = 0
+      let samples = 0
+      for (let deg = 6; deg <= 84; deg += 3) {
+        const a = (deg * Math.PI) / 180
+        const on = (rr: number): boolean => dark(at(tip + towards * rr * Math.cos(a), pivot + rr * Math.sin(a)))
+        samples += 1
+        if (hidden(at(tip + towards * r * Math.cos(a), pivot + r * Math.sin(a)))) continue
+        n += 1
+        if (!on(r)) continue
+        inked += 1
+        if (deg < 30) continue
+        m += 1
+        if (!on(r - 0.1) && !on(r + 0.1)) thin += 1
+      }
+      // unhidden, the arc as before; partly under a callout, a third of it seen and inked nearly throughout
+      const seenEnough = (n >= samples / 2 && inked / n >= 0.6) || (n < samples && n >= samples / 3 && inked / n >= 0.9)
+      if (debug && inked > 0 && !pivotAware) debug({ inward, hingeAt, pivot: round6(pivot), samples, seen: n, inked, thin, m })
+      return seenEnough && m > 0 && thin / m >= 0.5
+    }
+    if (pivotAware) {
+      for (let pivot = -wallThicknessM; pivot <= 0.1 * r; pivot += step) {
+        const length = r + Math.min(0, pivot)
+        if (length < 0.3) continue
+        const tip = leafLine(length)
+        if (tip !== undefined && arcAbout(tip, pivot)) return true
+      }
+      return false
+    }
+    const leafAt = leafLine(r)
+    debug?.({ inward, hingeAt, leafAt: leafAt === undefined ? null : round6(leafAt), leafShares: [0, 0.03, 0.06, 0.09, 0.12].map((off) => { const al = hinge + towards * off; return [round6(share(0, 0.9 * r, al)), round6(share(1.1 * r, 1.3 * r, al)), round6(thinLeaf(al, r))] }) })
+    if (leafAt === undefined) return false
+    for (let pivot = -wallThicknessM; pivot <= 0.1 * r; pivot += step) if (arcAbout(leafAt, pivot)) return true
+    return false
+  }
+  return { test, fitArc }
 }
 
 /** Thin glazing lines drawn across the gap within the wall's thickness: a window or a glazed screen. */

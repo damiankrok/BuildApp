@@ -2851,3 +2851,23 @@ contact, "10 Garaż" 34.53 m² (published 35.06), its rear wall and two doors ba
 and main roof unchanged; 23/23 openings cut and two plan gaps omitted with a reason (opening ledger in five states). The
 other seven houses are byte-identical. Open: gate height assumed, the garage → 9 door cut 0.84 of a 0.92 m reading, the
 flat-roof plate/wall-top flicker (pre-existing).
+
+## Duże przeszklenia i otwory ogrodowe (STAGE BUILDPLAN N8-03B / FIX-06B)
+
+Status: **DONE (częściowo) — solver 2.14.0, czytnik metryk 1.5.0, bez APK.** Report
+`stage-reports/STAGE_BUILDPLAN_N8_03B_GLAZING_AND_GARDEN_OPENINGS.md`, numbers `stage-reports/artifacts/analyzer-n8-03b/`.
+Two causes, two fixes. Rarytasy: widths and positions were right; the plan's door symbols were not read — a leaf
+shorter than its gap (230/230 and both 150/230: leaf ≈0.8 m + fixed light) — so 230/230 was a one-pane window and the
+150s one full-width leaf (`doorLeafFound` tests only an arc of the gap's radius). Goździkowce: the metric reader dropped
+the 300/230 ring (width read, height 230 refused on the mean bound only), so the garden glazing was an assumed
+2.97 × 1.30 window on 0.90; 180/230 had one leaf where two are drawn. Fixed generally: a ring half refused only on
+stability or mean, its other half passing, is read where a sibling ring on the sheet reads that half outright with the
+same text (`corroborateHalfBySibling`); on the ground storey an opening to the floor wider than a door with a leaf drawn
+shorter than the gap — beside a fixed light, or two leaves meeting — is a GLAZED_DOOR filled with the leaves and light
+as drawn (`drawnLeaves`, pivot at the face or in the wall, leaf length fitted to the arc's ink). Rarytasy: three
+terrace doors with leaf + light; Goździkowce: 3.00 × 2.30 glazing from the floor (printed), a pair of leaves. A01: both
+180/220 now pairs (two arcs on the ARCHON plan). Five houses byte-identical; all 8 validate with 0 WALLS_OVERLAP, 0
+compiler diagnostics, every opening cut. Open: pane division of multi-panel glazings (Rarytasy 400, Goździkowce 300:
+one pane, the elevations show two — no source the solver reads gives it, and no single threshold fits the corpus),
+Goździkowce 100/150 still a door (glazing lines at the light-line cut), its side 200/230 and 290/100 unread by the
+reader's gates, its elevations unregistered (no ridge datum).

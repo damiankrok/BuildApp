@@ -164,6 +164,33 @@ export function corroborateBySibling(rings: ReadonlyArray<{ id: string; width: C
   return out
 }
 
+/**
+ * N8-03B: one half of a ring whose other half passed the gate on its own, refused ONLY on the stability bracket or the
+ * mean character probability (its posterior still at the bound, its own greedy answer, two or three digits, every
+ * glyph read, in range: `relaxed`), is accepted when another ring on the same sheet read THAT half — the same role,
+ * width or height — outright with exactly the same text. A sheet prints its sizes in one hand: a `230` the recogniser
+ * reads confidently on one ring is a second, independent read of the same three glyphs on another. The half the gate
+ * passed is never lifted, a half lifted here never lifts another, and a ring with neither half outright stays unread.
+ * `outright` holds the halves of each ring as the gate itself judged them (no sibling lift of any kind).
+ */
+export function corroborateHalfBySibling(
+  rings: ReadonlyArray<{ id: string; width: CalloutHalfVerdict; height: CalloutHalfVerdict; accepted: boolean; relaxed: { width: boolean; height: boolean } }>,
+  outright: ReadonlyArray<{ id: string; width: CalloutHalfVerdict; height: CalloutHalfVerdict }>,
+): Map<string, { width: CalloutHalfVerdict; height: CalloutHalfVerdict }> {
+  const out = new Map<string, { width: CalloutHalfVerdict; height: CalloutHalfVerdict }>()
+  for (const r of rings) {
+    if (r.accepted || r.width.accepted === r.height.accepted) continue
+    const half: 'width' | 'height' = r.width.accepted ? 'height' : 'width'
+    const v = r[half]
+    if (!r.relaxed[half]) continue
+    const sibling = outright.find((k) => k.id !== r.id && k[half].accepted && k[half].text === v.text)
+    if (!sibling) continue
+    const lifted: CalloutHalfVerdict = { ...v, valueCm: Number(v.text), accepted: true, why: `${v.why}, but ${sibling.id} on this sheet reads its ${half} ${sibling[half].text} outright, and the other half of this ring passed on its own` }
+    out.set(r.id, half === 'width' ? { width: lifted, height: r.height } : { width: r.width, height: lifted })
+  }
+  return out
+}
+
 /** The mark a gate-refused width candidate carries in its `why`: the reconstruction may take it only where the plan gap agrees. */
 export const PLAN_CORROBORATED_WIDTH = 'PLAN_CORROBORATED_WIDTH'
 

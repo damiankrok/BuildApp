@@ -149,7 +149,11 @@ import type { ApproximateRidge } from './roof-datum.js'
 // both ends, the contact is open: neither body builds a wall there, the rooms either side are one room, and the gaps on
 // it are no openings; a partition that stops a door's width short of the outer wall keeps its door where the swing is
 // drawn; an overhead door's tracks are read in grey line ink only (a red dimension across one is not its length).
-export const SOLVER_V2_VERSION = '2.13.0' as const
+// 2.14.0 (N8-03B): an opening to the floor on the ground storey, wider than one door, with a leaf drawn in it shorter
+// than the gap — at one jamb beside a fixed light, or at both jambs meeting — is a door that opens (a terrace door), its
+// fill the leaves and light the plan draws (`drawnLeaves`); the leaf length is searched about a pivot at the wall's face
+// or inside its thickness. One opening stays one opening: the panes divide it, they do not multiply it.
+export const SOLVER_V2_VERSION = '2.14.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1

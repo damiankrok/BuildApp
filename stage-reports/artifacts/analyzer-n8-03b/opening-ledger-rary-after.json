@@ -1,0 +1,841 @@
+{
+ "modelId": "m-analysis-m84f2903cb8e14",
+ "modelCompleteness": {
+  "verdict": "COMPLETE",
+  "decomposition": {
+   "coverage": 1,
+   "drawnBuiltM2": 187.611584,
+   "representedM2": 187.611584,
+   "basis": "ACCEPTED_DECOMPOSITION"
+  },
+  "missingBodies": [],
+  "unresolvedAreas": [],
+  "unexplainedWalls": {
+   "count": 0,
+   "lengthM": 0,
+   "bandLengthM": 0
+  },
+  "conflicts": {
+   "blocking": [],
+   "degrading": []
+  },
+  "modelRefusals": 0,
+  "why": "the accepted decomposition is 100% represented (its own built regions only); nothing unresolved, unexplained or in conflict"
+ },
+ "contacts": [
+  {
+   "storeyIndex": 0,
+   "frameId": "frame-asset-rzut-e8520c3ad3-59a406b738",
+   "massIds": [
+    "main",
+    "attached-0"
+   ],
+   "facade": "FRONT",
+   "contactAt": 6.2,
+   "span": [
+    2.051804,
+    8.909234
+   ],
+   "wallsM": [
+    0.441264,
+    0.441264
+   ],
+   "reading": {
+    "samples": 213,
+    "solid": 180,
+    "one": 180,
+    "two": 0,
+    "consistent": 138,
+    "windowM": [
+     5.458736,
+     6.941264
+    ],
+    "bandM": [
+     6.3752,
+     6.6504
+    ],
+    "widthM": 0.2752
+   },
+   "decision": "ONE_WALL",
+   "why": "main|attached-0 on storey 0, 5.46..6.94 across over 2.05..8.91: 180 of 213 positions drawn, 180 one band, 0 two, 138 on one line: one band 0.28 m thick at 6.38..6.65 (both walls would be 0.88 m), on main's side of the contact at 6.20: one wall, built by main; attached-0 builds none over 2.05..8.91",
+   "wall": {
+    "id": "ring-main-0-w0-party-attached-0",
+    "storeyIndex": 0,
+    "hostMassId": "main",
+    "otherMassId": "attached-0",
+    "hostFacade": "FRONT",
+    "contactAt": 6.2,
+    "band": [
+     6.3752,
+     6.6504
+    ],
+    "thicknessM": 0.2752,
+    "span": [
+     2.051804,
+     8.909234
+    ],
+    "ends": [
+     "OTHER_CORNER",
+     "OTHER_CORNER"
+    ],
+    "provenance": "SOURCE_DERIVED",
+    "why": "the plan draws one 0.28 m wall between main and attached-0 (180 of 213 positions drawn, 180 one band, 0 two, 138 on one line), where two walls would be 0.88 m"
+   }
+  }
+ ],
+ "unresolved": [
+  "MISSING: the kind of roof over mass-1: no printed angle, specification line or technical view describes a roof over this body separately from the main one",
+  "REFUSED: the heights of the openings on the left elevation: registered on its silhouette from the ridge datum, it puts the ground at 0.46 m where the section prints the terrain at -0.32 m: its top row is not the ridge, and heights low on its walls are not read (its roof outline and chimneys, near the datum, still are)",
+  "REFUSED: the heights of the openings on the right elevation: registered on its silhouette from the ridge datum, it puts the ground at 0.20 m where the section prints the terrain at -0.32 m: its top row is not the ridge, and heights low on its walls are not read (its roof outline and chimneys, near the datum, still are)",
+  "AMBIGUOUS: the label of room-0-7 (read as 13): its 11.405 m² is 68 % off the published Garaż 35.52 m²; by area it would be 4 Kuchnia 11.51 or 6 Pokój 11.52 or 7 Pokój 11.71 or 8 Pokój 12.63",
+  "AMBIGUOUS: the label of room-0-6 (read as 13): its 11.395 m² is 68 % off the published Garaż 35.52 m²; by area it would be 4 Kuchnia 11.51 or 6 Pokój 11.52 or 7 Pokój 11.71 or 8 Pokój 12.63",
+  "AMBIGUOUS: the number of room-0-0: two numbers (10, 5) are printed inside it",
+  "AMBIGUOUS: the number of room-0-6: two numbers (13, 7) are printed inside it",
+  "AMBIGUOUS: the number of room-0-4: a set-aside upright reading says 5, and 7 other labels on the storey read 5 too: not taken",
+  "AMBIGUOUS: the number of room-0-5: one printed label reads as 8 or 9 alike, each a published room: not chosen",
+  "AMBIGUOUS: the label of room-0-0 (read as 1): its 35.4025 m² is 650 % off the published Wiatrołap 4.72 m²; by area it would be 5 Salon + Jadalnia 31.96 or 13 Garaż 35.52",
+  "AMBIGUOUS: the label of room-0-0 (read as 1): its 35.4025 m² is 650 % off the published Wiatrołap 4.72 m²; by area it would be 5 Salon + Jadalnia 31.96 or 13 Garaż 35.52",
+  "AMBIGUOUS: the label of room-0-0 (read as 1): its 35.4025 m² is 650 % off the published Wiatrołap 4.72 m²; by area it would be 5 Salon + Jadalnia 31.96 or 13 Garaż 35.52",
+  "AMBIGUOUS: the label of room-0-0 (read as 1): its 35.4025 m² is 650 % off the published Wiatrołap 4.72 m²; by area it would be 5 Salon + Jadalnia 31.96 or 13 Garaż 35.52",
+  "AMBIGUOUS: the number of room-0-0: two numbers (1, 13) are printed inside it",
+  "AMBIGUOUS: the eaves projection of the main roof: the section does not draw both eaves past the walls along a slope of the stated pitch, in agreement: the roof ends at the walls",
+  "AMBIGUOUS: the joint between main-iwall-0-x-4 and main-iwall-0-z-0: they share 0.0171 m² of plan area and no junction the plan states explains it; the partition was left out"
+ ],
+ "counts": {
+  "observed": 21,
+  "selected": 20,
+  "emitted": 20,
+  "cut": 20,
+  "emittedNotCut": 0,
+  "selectedNotEmitted": 0,
+  "omitted": 2
+ },
+ "rows": [
+  {
+   "id": "opening-0-front-0-0",
+   "where": "main storey 0 FRONT",
+   "intervalM": [
+    7.432541,
+    8.342648
+   ],
+   "widthPlanM": 0.910107,
+   "observedAs": "DOOR",
+   "heights": {
+    "sillY": 0,
+    "headY": 2.1
+   },
+   "callout": {
+    "widthCm": 100,
+    "heightCm": 210,
+    "evidenceId": "metric-callout-ring-db6024e072"
+   },
+   "elevation": null,
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": false,
+    "EMITTED": false,
+    "CUT_IN_GEOMETRY": false
+   },
+   "state": "OMITTED_WITH_REASON",
+   "omittedBecause": [
+    "no step or gap of the run names this interval"
+   ]
+  },
+  {
+   "id": "opening-0-front-0-1",
+   "where": "main storey 0 FRONT",
+   "intervalM": [
+    8.921807,
+    9.94223
+   ],
+   "widthPlanM": 1.020423,
+   "observedAs": "GLAZED_DOOR",
+   "heights": {
+    "sillY": 0,
+    "headY": 2.1
+   },
+   "callout": {
+    "widthCm": 105,
+    "heightCm": 210,
+    "evidenceId": "metric-callout-ring-7b86278fca"
+   },
+   "elevation": null,
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "modelId": "opening-0-front-0-1",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "DOOR",
+    "wallId": "ring-main-0-w0-1",
+    "widthM": 1.05,
+    "sillM": 0,
+    "heightM": 2.1
+   }
+  },
+  {
+   "id": "opening-0-front-0-2",
+   "where": "main storey 0 FRONT",
+   "intervalM": [
+    12.755288,
+    15.237398
+   ],
+   "widthPlanM": 2.48211,
+   "observedAs": "WINDOW",
+   "heights": {
+    "sillY": 1.055512,
+    "headY": 2.455512
+   },
+   "callout": {
+    "widthCm": 250,
+    "heightCm": 140,
+    "evidenceId": "metric-callout-ring-e4b3bc58c6"
+   },
+   "elevation": {
+    "frameId": "frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elew-5de5935285",
+    "sillY": 1.055512,
+    "headY": 2.221984
+   },
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "modelId": "opening-0-front-0-2",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "WINDOW",
+    "wallId": "ring-main-0-w0-1",
+    "widthM": 2.5,
+    "sillM": 1.055512,
+    "heightM": 1.4
+   }
+  },
+  {
+   "id": "opening-0-east-1-0",
+   "where": "main storey 0 EAST",
+   "intervalM": [
+    10.61328,
+    11.79664
+   ],
+   "widthPlanM": 1.18336,
+   "observedAs": "WINDOW",
+   "heights": {
+    "sillY": 0,
+    "headY": 2.3
+   },
+   "callout": {
+    "widthCm": 120,
+    "heightCm": 230,
+    "evidenceId": "metric-callout-ring-046ba81026"
+   },
+   "elevation": null,
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "modelId": "opening-0-east-1-0",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "WINDOW",
+    "wallId": "ring-main-0-w1",
+    "widthM": 1.2,
+    "sillM": 0,
+    "heightM": 2.3
+   }
+  },
+  {
+   "id": "opening-0-east-1-1",
+   "where": "main storey 0 EAST",
+   "intervalM": [
+    9.09968,
+    10.28304
+   ],
+   "widthPlanM": 1.18336,
+   "observedAs": "WINDOW",
+   "heights": {
+    "sillY": 0,
+    "headY": 2.3
+   },
+   "callout": {
+    "widthCm": 120,
+    "heightCm": 230,
+    "evidenceId": "metric-callout-ring-8efcb10691"
+   },
+   "elevation": null,
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "modelId": "opening-0-east-1-1",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "WINDOW",
+    "wallId": "ring-main-0-w1",
+    "widthM": 1.2,
+    "sillM": 0,
+    "heightM": 2.3
+   }
+  },
+  {
+   "id": "opening-0-rear-2-0",
+   "where": "main storey 0 REAR",
+   "intervalM": [
+    1.006634,
+    3.295691
+   ],
+   "widthPlanM": 2.289057,
+   "observedAs": "GLAZED_DOOR",
+   "heights": {
+    "sillY": 0,
+    "headY": 2.3
+   },
+   "callout": {
+    "widthCm": 230,
+    "heightCm": 230,
+    "evidenceId": "metric-callout-ring-c27d412f41"
+   },
+   "elevation": null,
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "modelId": "opening-0-rear-2-0",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "DOOR",
+    "wallId": "ring-main-0-w2",
+    "widthM": 2.3,
+    "sillM": 0,
+    "heightM": 2.3
+   }
+  },
+  {
+   "id": "opening-0-rear-2-1",
+   "where": "main storey 0 REAR",
+   "intervalM": [
+    5.033168,
+    6.522434
+   ],
+   "widthPlanM": 1.489266,
+   "observedAs": "GLAZED_DOOR",
+   "heights": {
+    "sillY": 0,
+    "headY": 2.3
+   },
+   "callout": {
+    "widthCm": 150,
+    "heightCm": 230,
+    "evidenceId": "metric-callout-ring-7c4b911838"
+   },
+   "elevation": null,
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "modelId": "opening-0-rear-2-1",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "DOOR",
+    "wallId": "ring-main-0-w2",
+    "widthM": 1.5,
+    "sillM": 0,
+    "heightM": 2.3
+   }
+  },
+  {
+   "id": "opening-0-rear-2-2",
+   "where": "main storey 0 REAR",
+   "intervalM": [
+    7.846226,
+    9.335492
+   ],
+   "widthPlanM": 1.489266,
+   "observedAs": "GLAZED_DOOR",
+   "heights": {
+    "sillY": 0,
+    "headY": 2.3
+   },
+   "callout": {
+    "widthCm": 150,
+    "heightCm": 230,
+    "evidenceId": "metric-callout-ring-04ed6567fe"
+   },
+   "elevation": null,
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "modelId": "opening-0-rear-2-2",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "DOOR",
+    "wallId": "ring-main-0-w2",
+    "widthM": 1.5,
+    "sillM": 0,
+    "heightM": 2.3
+   }
+  },
+  {
+   "id": "opening-0-rear-2-3",
+   "where": "main storey 0 REAR",
+   "intervalM": [
+    11.734865,
+    15.73382
+   ],
+   "widthPlanM": 3.998955,
+   "observedAs": "MULTI_PANEL_GLAZING",
+   "heights": {
+    "sillY": 0,
+    "headY": 2.3
+   },
+   "callout": {
+    "widthCm": 400,
+    "heightCm": 230,
+    "evidenceId": "metric-callout-ring-4e850cfbf8"
+   },
+   "elevation": {
+    "frameId": "frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elew-c383df2964",
+    "sillY": 1.000492,
+    "headY": 2.051378
+   },
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "modelId": "opening-0-rear-2-3",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "WINDOW",
+    "wallId": "ring-main-0-w2",
+    "widthM": 4,
+    "sillM": 0,
+    "heightM": 2.3
+   }
+  },
+  {
+   "id": "opening-0-west-3-0",
+   "where": "main storey 0 WEST",
+   "intervalM": [
+    7.2008,
+    8.19152
+   ],
+   "widthPlanM": 0.99072,
+   "observedAs": "WINDOW",
+   "heights": {
+    "sillY": 0.8,
+    "headY": 2.2
+   },
+   "callout": {
+    "widthCm": 100,
+    "heightCm": 140,
+    "evidenceId": "metric-callout-ring-6753277337"
+   },
+   "elevation": null,
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "modelId": "opening-0-west-3-0",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "WINDOW",
+    "wallId": "ring-main-0-w3",
+    "widthM": 1,
+    "sillM": 0.8,
+    "heightM": 1.4
+   }
+  },
+  {
+   "id": "opening-0-front-4-0",
+   "where": "attached-0 storey 0 FRONT",
+   "intervalM": [
+    2.909585,
+    7.901384
+   ],
+   "widthPlanM": 4.991799,
+   "observedAs": "GARAGE_DOOR",
+   "heights": {
+    "sillY": 0,
+    "headY": 2.38
+   },
+   "callout": {
+    "widthCm": 500,
+    "heightCm": 238,
+    "evidenceId": "metric-callout-ring-88e7432a49"
+   },
+   "elevation": {
+    "frameId": "frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elew-5de5935285",
+    "sillY": 1.974471,
+    "headY": 3.542537
+   },
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "modelId": "opening-0-front-4-0",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "DOOR",
+    "wallId": "ring-attached-0-0-w0",
+    "widthM": 5,
+    "sillM": 0,
+    "heightM": 2.38
+   }
+  },
+  {
+   "id": "opening-0-east-5-0",
+   "where": "attached-0 storey 0 EAST",
+   "intervalM": [
+    4.20112,
+    5.19184
+   ],
+   "widthPlanM": 0.99072,
+   "observedAs": "DOOR",
+   "heights": {
+    "sillY": 0,
+    "headY": 2.1
+   },
+   "callout": {
+    "widthCm": 100,
+    "heightCm": 210,
+    "evidenceId": "metric-callout-ring-db6024e072"
+   },
+   "elevation": null,
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "modelId": "opening-0-east-5-0",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "DOOR",
+    "wallId": "ring-attached-0-0-w1",
+    "widthM": 1,
+    "sillM": 0,
+    "heightM": 2.1
+   }
+  },
+  {
+   "id": "opening-0-rear-6-0",
+   "where": "attached-0 storey 0 REAR",
+   "intervalM": [
+    2.449367,
+    8.425385
+   ],
+   "widthPlanM": 5.976018,
+   "observedAs": "WINDOW",
+   "heights": {
+    "sillY": 1.49,
+    "headY": 2.2
+   },
+   "callout": {
+    "widthCm": 571,
+    "heightCm": 71,
+    "evidenceId": "metric-callout-ring-0fc852e6de"
+   },
+   "elevation": null,
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": false,
+    "EMITTED": false,
+    "CUT_IN_GEOMETRY": false
+   },
+   "state": "OMITTED_WITH_REASON",
+   "omittedBecause": [
+    "no step or gap of the run names this interval"
+   ]
+  },
+  {
+   "id": "opening-0-west-7-0",
+   "where": "attached-0 storey 0 WEST",
+   "intervalM": [
+    4.64144,
+    5.63216
+   ],
+   "widthPlanM": 0.99072,
+   "observedAs": "WINDOW",
+   "heights": {
+    "sillY": 0.8,
+    "headY": 2.2
+   },
+   "callout": {
+    "widthCm": 100,
+    "heightCm": 140,
+    "evidenceId": "metric-callout-ring-dbbb0171b6"
+   },
+   "elevation": null,
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "modelId": "opening-0-west-7-0",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "WINDOW",
+    "wallId": "ring-attached-0-0-w3",
+    "widthM": 1,
+    "sillM": 0.8,
+    "heightM": 1.4
+   }
+  },
+  {
+   "id": "main-idoor-0-0",
+   "where": "interior storey 0",
+   "intervalM": [
+    7.11824,
+    7.99888
+   ],
+   "widthPlanM": 0.88064,
+   "observedAs": "INTERIOR_DOOR",
+   "why": "a 0.88 m break between two pieces of the same partition",
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "DOOR",
+    "wallId": "main-iwall-0-z-5",
+    "widthM": 0.88064,
+    "sillM": 0,
+    "heightM": 2.1
+   }
+  },
+  {
+   "id": "main-idoor-0-1",
+   "where": "interior storey 0",
+   "intervalM": [
+    7.39344,
+    8.10896
+   ],
+   "widthPlanM": 0.71552,
+   "observedAs": "INTERIOR_DOOR",
+   "why": "a 0.72 m break between two pieces of the same partition",
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "DOOR",
+    "wallId": "main-iwall-0-z-9",
+    "widthM": 0.71552,
+    "sillM": 0,
+    "heightM": 2.1
+   }
+  },
+  {
+   "id": "main-idoor-0-2",
+   "where": "interior storey 0",
+   "intervalM": [
+    2.882006,
+    3.709375
+   ],
+   "widthPlanM": 0.827369,
+   "observedAs": "INTERIOR_DOOR",
+   "why": "a 0.83 m break between two pieces of the same partition",
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "DOOR",
+    "wallId": "main-iwall-0-x-0",
+    "widthM": 0.827369,
+    "sillM": 0,
+    "heightM": 2.1
+   }
+  },
+  {
+   "id": "main-idoor-0-3",
+   "where": "interior storey 0",
+   "intervalM": [
+    4.757378,
+    5.584748
+   ],
+   "widthPlanM": 0.82737,
+   "observedAs": "INTERIOR_DOOR",
+   "why": "a 0.83 m break between two pieces of the same partition",
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "DOOR",
+    "wallId": "main-iwall-0-x-0",
+    "widthM": 0.82737,
+    "sillM": 0,
+    "heightM": 2.1
+   }
+  },
+  {
+   "id": "main-idoor-0-4",
+   "where": "interior storey 0",
+   "intervalM": [
+    8.756333,
+    9.638861
+   ],
+   "widthPlanM": 0.882528,
+   "observedAs": "INTERIOR_DOOR",
+   "why": "a 0.88 m break between two pieces of the same partition",
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "DOOR",
+    "wallId": "main-iwall-0-x-0",
+    "widthM": 0.882528,
+    "sillM": 0,
+    "heightM": 2.1
+   }
+  },
+  {
+   "id": "main-idoor-0-5",
+   "where": "interior storey 0",
+   "intervalM": [
+    4.371272,
+    5.226221
+   ],
+   "widthPlanM": 0.854949,
+   "observedAs": "INTERIOR_DOOR",
+   "why": "a 0.85 m break between two pieces of the same partition",
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "DOOR",
+    "wallId": "main-iwall-0-x-5",
+    "widthM": 0.854949,
+    "sillM": 0,
+    "heightM": 2.1
+   }
+  },
+  {
+   "id": "main-idoor-0-6",
+   "where": "interior storey 0",
+   "intervalM": [
+    9.004544,
+    9.914651
+   ],
+   "widthPlanM": 0.910107,
+   "observedAs": "INTERIOR_DOOR",
+   "why": "a 0.91 m break between two pieces of the same partition",
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "DOOR",
+    "wallId": "main-iwall-0-x-5",
+    "widthM": 0.910107,
+    "sillM": 0,
+    "heightM": 2.1
+   }
+  },
+  {
+   "id": "shared-party-0-front-0-0",
+   "where": "ring-main-0-w0-party-attached-0",
+   "observedAs": "NOT_TRACED",
+   "states": {
+    "SOURCE_OBSERVED": false,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "DOOR",
+    "wallId": "ring-main-0-w0-party-attached-0",
+    "widthM": 1,
+    "sillM": 0,
+    "heightM": 2.1
+   }
+  }
+ ]
+}

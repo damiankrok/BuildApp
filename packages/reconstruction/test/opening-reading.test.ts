@@ -5,11 +5,13 @@
 import { describe, expect, it } from 'vitest'
 import { classifyOpeningFamily, matchOpeningCallout, preferredElevationExtent, resolveSillAndHead } from '../src/v2/opening-reading.js'
 import type { OpeningFamilyFacts, OpeningSymbols } from '../src/v2/opening-reading.js'
+import type { DrawnLeaves } from '../src/v2/openings-v2.js'
 
-const symbols = (s: Partial<{ glazed: boolean; leaf: boolean; swing: boolean }> = {}): OpeningSymbols => ({
+const symbols = (s: Partial<{ glazed: boolean; leaf: boolean; swing: boolean; leaves: DrawnLeaves }> = {}): OpeningSymbols => ({
   glazed: () => s.glazed ?? false,
   leaf: () => (s.leaf ? { swing: 'IN', hingeAt: 'LOW' } as never : undefined),
   swingDrawn: () => s.swing ?? false,
+  leaves: () => s.leaves,
 })
 const facts = (f: Partial<OpeningFamilyFacts>): OpeningFamilyFacts => ({ storeyIndex: 0, widthM: 1.0, sillAboveFloorM: 0, heightM: 2.1, heightsAssumed: false, doorBySymbol: false, doorSwing: false, attachedSingleStorey: false, symbols: symbols(), ...f })
 

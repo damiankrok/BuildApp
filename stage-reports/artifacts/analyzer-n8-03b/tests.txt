@@ -1,0 +1,72 @@
+ ✓ packages/source-metrics/test/callout-recogniser.test.ts (12 tests) 8981ms
+   ✓ ring halves for the recogniser > cuts each half from the disc, split at the bar, and counts its glyphs  2711ms
+   ✓ the recogniser in the metric reading > a ring both halves of which pass reads what the recogniser read, first among its candidates  2008ms
+   ✓ the recogniser in the metric reading > a ring a half of which fails keeps the template’s reading for that half, leads with the half that passed, and says why on its record (005Y-N5)  2986ms
+   ✓ the recogniser in the metric reading > without a recogniser the set carries no ring records and keeps its version  1246ms
+ ✓ packages/source-metrics/test/recogniser-ensemble.test.ts (20 tests) 14735ms
+   ✓ the metric layer reads the ensemble, and offers the other witness at full strength > without an external witness the lattice functions are unchanged  788ms
+   ✓ the seam: one batch per plan, crops only, and the OFF path unchanged > recogniser: undefined is extractMetricEvidence, byte for byte  1908ms
+   ✓ the seam: one batch per plan, crops only, and the OFF path unchanged > hands the recogniser one batch per plan frame, of crops alone, cut from the pass fields before any scale  2243ms
+   ✓ the seam: one batch per plan, crops only, and the OFF path unchanged > a set the recogniser read in names the reader it was read with  2326ms
+   ✓ the seam: one batch per plan, crops only, and the OFF path unchanged > sends the same crops whatever the chain tolerance and the printed specification (inputs the crops must not depend on)  3793ms
+   ✓ the seam: one batch per plan, crops only, and the OFF path unchanged > records each reading and the decision beside the lattice, which stays the lattice’s own  2707ms
+   ✓ the seam: one batch per plan, crops only, and the OFF path unchanged > a recogniser that fails fails the reading, and a cancelled one stops it  501ms
+ ✓ packages/reconstruction/test/compound-facade-emission.test.ts (5 tests) 8654ms
+   ✓ 005N §23 — compound facades through the production solver > recess + garage door drawn: one enclosed body with the hall and the garage, the garage door on the garage wall, the recess a recess  2244ms
+   ✓ 005N §23 — compound facades through the production solver > garage door blank: no garage body is fabricated (the first reading leaves it open), the house and its hall stand  1432ms
+   ✓ 005N §23 — compound facades through the production solver > a carport beside the recessed entrance stays outside every mass  1457ms
+   ✓ 005N §23 — compound facades through the production solver > §20 non-circularity, executed: a published footprint as the house has it, as a 1.25× decoy, or absent — the same separators, intervals, roles and recess  2548ms
+   ✓ 005N council E2 — a compound front on the ground storey of a two-storey house > the ground storey reads its recess and garage, the upper storey (set back 3 m over them) keeps its own ring: two levels, not a copy  956ms
+ ✓ packages/reconstruction/test/generic-openings-005x.test.ts (8 tests) 6076ms
+   ✓ 005X tinted callout rings > finds a faint ring on a tinted strip and reads its bar  2783ms
+   ✓ 005X tinted callout rings > 005X-N3: the bar gate sends only barred rings to OCR and reads them exactly as without it  1615ms
+   ✓ 005X one picture of a house > reads the wall, the openings in their order and a door to the floor  816ms
+   ✓ 005X one picture of a house > emits a closed model named as indicative, with the openings on its front wall  672ms
+ ✓ packages/reconstruction/test/attic-registration-n8-02a.test.ts (8 tests) 2289ms
+   ✓ N8-02A: registering an upper storey on the plan below > an upper sheet drawn at another image scale stands on the body it matches, at its own size  1015ms
+   ✓ N8-02A: registering an upper storey on the plan below > a storey drawn at another place on its sheet is registered by its walls, not by its pixel position  496ms
+   ✓ N8-02A: registering an upper storey on the plan below > a fit that shrinks the plan onto inner walls below does not beat the placement laying its outline on a body  303ms
+ ✓ packages/reconstruction/test/garage-label-mouth.test.ts (13 tests) 1847ms
+   ✓ 005U-N4 a garage number from a set-aside reading > a label read as two published numbers alike is not chosen  304ms
+   ✓ 005U-N4 a garage number from a set-aside reading > a set-aside reading taken another way up is not a room number  313ms
+   ✓ 005U-N4 a garage number from a set-aside reading > the same number read on another label on the storey makes it one of two, and neither is taken  368ms
+   ✓ 005U-N4 a garage number from a set-aside reading > a number no published room on this storey carries is not taken (another storey, another edition)  442ms
+ ✓ packages/reconstruction/test/elevation-opening-extent.test.ts (11 tests) 5352ms
+   ✓ 005W the opening read as an object against the wall > reads all four openings floor to head: a striped blind, a door leaf, a reflection  340ms
+   ✓ 005W the opening read as an object against the wall > is indifferent to the wall colour: brick, dark render, white render  1544ms
+   ✓ 005W the opening read as an object against the wall > end to end: heights read on the elevation, kinds from the plan symbol (screen, full-height windows, the door)  1176ms
+   ✓ 005W the opening read as an object against the wall > a view registered on the walls band alone stands where the gaps read on it  1516ms
+ ✓ packages/reconstruction/test/glazing-leaves-n8-03b.test.ts (16 tests) 2261ms
+   ✓ leaves drawn shorter than the gap > glazing alone, however wide, holds no leaf  1101ms
+ ✓ packages/reconstruction/test/wide-openings.test.ts (15 tests) 2022ms
+ ✓ packages/reconstruction/test/open-contact-n8-03a.test.ts (16 tests) 1069ms
+ ✓ packages/reconstruction/test/interior-unwalled-side.test.ts (5 tests) 1904ms
+   ✓ 005V-N2 interior: a body registered beyond its drawn walls > positive: a body standing on its drawn walls reads the garage fire wall as thick as the outer wall, and says nothing of its registration  409ms
+   ✓ 005V-N2 interior: a body registered beyond its drawn walls > negative: past the drawn east wall, that wall (inside the interior now) is no partition, and the east side is named  543ms
+   ✓ 005V-N2 interior: a body registered beyond its drawn walls > mirrored: past the drawn west wall, the same, on the west side  438ms
+   ✓ 005V-N2 interior: a body registered beyond its drawn walls > under an uncertain registration a thick wall is not read at all, while a partition thinner than the outer wall still is  510ms
+ ✓ packages/reconstruction/test/elevation-garage-005y-n5.test.ts (14 tests) 592ms
+ ✓ packages/reconstruction/test/facade-alignment-n7-p2.test.ts (14 tests) 651ms
+   ✓ N7-P2 one plan opening measured on the view > reads nothing where the view draws plain wall  350ms
+ ✓ packages/reconstruction/test/party-wall-n8-02b.test.ts (16 tests) 662ms
+ ✓ packages/reconstruction/test/callout-plan-corroboration-005y-n5.test.ts (4 tests) 132ms
+ ✓ packages/reconstruction/test/door-leaf-005y-n2.test.ts (6 tests) 114ms
+ ✓ packages/reconstruction/test/garage-door-005y-n5.test.ts (3 tests) 86ms
+ ✓ packages/reconstruction/test/door-leaf-occluded-005y-n4.test.ts (5 tests) 120ms
+ ✓ packages/reconstruction/test/opening-reading.test.ts (17 tests) 29ms
+ ✓ packages/reconstruction/test/wing-roof-n8-01.test.ts (11 tests) 46ms
+ ✓ packages/reconstruction/test/openings.test.ts (14 tests) 97ms
+ ✓ packages/source-metrics/test/callout-half-sibling-n8-03b.test.ts (6 tests) 14ms
+ ✓ packages/reconstruction/test/vehicle-door-depth.test.ts (1 test) 39ms
+ ✓ packages/source-metrics/test/extract.test.ts (20 tests) 7888ms
+   ✓ the content hash > is the same for two runs over the same bytes  3071ms
+   ✓ the content hash > does not change when the prose changes, and does change when a reading does  1076ms
+   ✓ the content hash > changes when a reader version changes: a different reader is a different reading  1670ms
+   ✓ the content hash > is tied to the exact source bytes and the exact observation graph it was read from  1070ms
+   ✓ the content hash > does not depend on the order things were found in  865ms
+ ✓ packages/source-metrics/test/callouts.test.ts (2 tests) 1780ms
+   ✓ ring callouts > reads the printed pair into each half’s candidate list  1463ms
+   ✓ ring callouts > does not read an empty circle, or one without a bar, as a callout  310ms
+ Test Files  25 passed (25)
+      Tests  262 passed (262)
+   Duration  42.37s (transform 9.04s, setup 580ms, collect 36.29s, tests 67.44s, environment 7ms, prepare 5.44s)

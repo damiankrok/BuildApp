@@ -1,0 +1,169 @@
+{
+ "method": "offline replay of the sealed FIX-04 / ARCHON 1311 inputs (source package + observation graph) through packages/analysis-service/scripts/second-house.ts with --recogniser: the metric evidence RE-READ by this checkout (metric reader 1.5.0) and solved by solver 2.14.0; before = the N8-03A replay (sealed metric evidence, reader 1.4.0, solver 2.13.0). A re-read of Go\u017adzikowce by the N8-03A checkout reproduced its sealed metric evidence (c652969b\u2026) and model (1a96c20f\u2026) byte for byte.",
+ "houses": [
+  {
+   "house": "a01",
+   "before": "d095c0da90b69a499ea2f0d9db1f47af068829abec0d2f397488edc25ad88002",
+   "after": "ed4fe10766c556638b0bdad046796afa19ad1bf1a5af31eb8e1928c0346ac97b",
+   "identical": false,
+   "metricEvidenceAdded": [],
+   "metricEvidenceRemoved": [],
+   "after_validation": {
+    "ok": true,
+    "errors": [],
+    "warnings": 0,
+    "overlaps": 0
+   },
+   "after_compileDiagnostics": 0,
+   "after_openings": {
+    "total": 21,
+    "cut": 21,
+    "notCut": []
+   }
+  },
+  {
+   "house": "gozd",
+   "before": "1a96c20f088efaad9168537b1dc975c0e0ae066145821f0290c906273f61965e",
+   "after": "f3a0ee783d3ae6a24a85dd8a76f826d6e6b69d49681370014678ed909e215154",
+   "identical": false,
+   "metricEvidenceAdded": [
+    "metric-callout-ring-4bb6ff9145"
+   ],
+   "metricEvidenceRemoved": [],
+   "after_validation": {
+    "ok": true,
+    "errors": [],
+    "warnings": 0,
+    "overlaps": 0
+   },
+   "after_compileDiagnostics": 0,
+   "after_openings": {
+    "total": 28,
+    "cut": 28,
+    "notCut": []
+   }
+  },
+  {
+   "house": "marcowki",
+   "before": "bcb151061f8eae396d349bf55de18bfa615b9523eab206a48f8b2ff9a799f7c2",
+   "after": "bcb151061f8eae396d349bf55de18bfa615b9523eab206a48f8b2ff9a799f7c2",
+   "identical": true,
+   "metricEvidenceAdded": [],
+   "metricEvidenceRemoved": [],
+   "after_validation": {
+    "ok": true,
+    "errors": [],
+    "warnings": 0,
+    "overlaps": 0
+   },
+   "after_compileDiagnostics": 0,
+   "after_openings": {
+    "total": 21,
+    "cut": 21,
+    "notCut": []
+   }
+  },
+  {
+   "house": "ciesz",
+   "before": "5394c17c4ff1c4e515c70067f77cc4aab68005658855930cd96c8e6f1323568f",
+   "after": "5394c17c4ff1c4e515c70067f77cc4aab68005658855930cd96c8e6f1323568f",
+   "identical": true,
+   "metricEvidenceAdded": [],
+   "metricEvidenceRemoved": [],
+   "after_validation": {
+    "ok": true,
+    "errors": [],
+    "warnings": 0,
+    "overlaps": 0
+   },
+   "after_compileDiagnostics": 0,
+   "after_openings": {
+    "total": 20,
+    "cut": 20,
+    "notCut": []
+   }
+  },
+  {
+   "house": "rary",
+   "before": "9657ddad9448dd8bccedd3c18dda931d74fc5acfa36adc94a69eb154cf5ee432",
+   "after": "6a23ba6ee0fdf5758b9b0c4f1b9fec377f0d590637911e1843c6cbd57cae96a1",
+   "identical": false,
+   "metricEvidenceAdded": [],
+   "metricEvidenceRemoved": [],
+   "after_validation": {
+    "ok": true,
+    "errors": [],
+    "warnings": 0,
+    "overlaps": 0
+   },
+   "after_compileDiagnostics": 0,
+   "after_openings": {
+    "total": 20,
+    "cut": 20,
+    "notCut": []
+   }
+  },
+  {
+   "house": "trytomach",
+   "before": "ce64cc099c83410d0e6393cb80639f2840059f9249b430d29deb057378c4856c",
+   "after": "ce64cc099c83410d0e6393cb80639f2840059f9249b430d29deb057378c4856c",
+   "identical": true,
+   "metricEvidenceAdded": [],
+   "metricEvidenceRemoved": [],
+   "after_validation": {
+    "ok": true,
+    "errors": [],
+    "warnings": 0,
+    "overlaps": 0
+   },
+   "after_compileDiagnostics": 0,
+   "after_openings": {
+    "total": 20,
+    "cut": 20,
+    "notCut": []
+   }
+  },
+  {
+   "house": "arganiach",
+   "before": "0770f85430f158caf29812fb35ae97d791f1a914b549bc2f393c604521b3ab9b",
+   "after": "0770f85430f158caf29812fb35ae97d791f1a914b549bc2f393c604521b3ab9b",
+   "identical": true,
+   "metricEvidenceAdded": [],
+   "metricEvidenceRemoved": [],
+   "after_validation": {
+    "ok": true,
+    "errors": [],
+    "warnings": 0,
+    "overlaps": 0
+   },
+   "after_compileDiagnostics": 0,
+   "after_openings": {
+    "total": 23,
+    "cut": 23,
+    "notCut": []
+   }
+  },
+  {
+   "house": "sasankach3",
+   "before": "dbb14fdb89a517f206cdb1cca9735729a1f5be45bbfc2b34359a49ad3bd72357",
+   "after": "dbb14fdb89a517f206cdb1cca9735729a1f5be45bbfc2b34359a49ad3bd72357",
+   "identical": true,
+   "metricEvidenceAdded": [
+    "metric-callout-ring-ea10085a6d"
+   ],
+   "metricEvidenceRemoved": [],
+   "after_validation": {
+    "ok": true,
+    "errors": [],
+    "warnings": 0,
+    "overlaps": 0
+   },
+   "after_compileDiagnostics": 0,
+   "after_openings": {
+    "total": 22,
+    "cut": 22,
+    "notCut": []
+   }
+  }
+ ]
+}

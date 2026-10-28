@@ -16,7 +16,7 @@ import type { EvidenceStatus } from '@buildapp/model'
 import { rectAt } from './building.js'
 import type { BuildingV2, MassV2 } from './building.js'
 import type { ProvenanceStatus } from './graph.js'
-import type { OpeningV2 } from './openings-v2.js'
+import type { DrawnLeaves, OpeningV2 } from './openings-v2.js'
 import { CONVENTIONS } from '../solve.js'
 import { planWallTopology } from './wall-topology.js'
 import { partyFarFace, sideSegments } from './party-wall.js'
@@ -67,6 +67,30 @@ export function frameWithinWall(kind: 'WINDOW' | 'DOOR', thicknessM: number): { 
   const frameDepth = round6(Math.min(d.depth, thicknessM * 0.6))
   const frameInset = round6(Math.max(0, Math.min(d.inset, thicknessM - frameDepth - 0.01)))
   return { frameDepth, frameInset, ...(kind === 'DOOR' ? { leafThickness: round6(Math.min(0.045, thicknessM * 0.3)) } : {}) }
+}
+
+/**
+ * N8-03B: the panels of a door the plan draws with more than one part — a leaf beside a fixed light, or two leaves —
+ * across the opening from the wall's near jamb, each panel the share of the width the drawing gives it. A leaf hinges
+ * at the jamb it is drawn from; the fixed light is glazed (the rest of the gap, which no leaf sweeps). The wall's `u`
+ * may run against the plan's axis (`reversed`): the plan's LOW jamb is then the wall's far one.
+ */
+export function drawnLeafAssembly(d: DrawnLeaves, widthM: number, reversed: boolean): { hingeSide: 'LEFT' | 'RIGHT'; swing: 'IN' | 'OUT'; assembly: { panels: Array<{ kind: 'LEAF'; fraction: number; hinge: 'LEFT' | 'RIGHT'; glazing: 'FULL' } | { kind: 'GLAZED'; fraction: number }>; mullionWidth: number } } {
+  type Part = { kind: 'LEAF'; share: number; hingeAt: 'LOW' | 'HIGH' } | { kind: 'GLAZED'; share: number }
+  const parts: Part[] =
+    d.arrangement === 'DOUBLE'
+      ? d.leaves.map((l) => ({ kind: 'LEAF' as const, share: l.lengthM / (d.leaves[0].lengthM + d.leaves[1].lengthM), hingeAt: l.hingeAt }))
+      : d.leaves[0].hingeAt === 'LOW'
+        ? [{ kind: 'LEAF', share: d.leaves[0].lengthM / widthM, hingeAt: 'LOW' }, { kind: 'GLAZED', share: 1 - d.leaves[0].lengthM / widthM }]
+        : [{ kind: 'GLAZED', share: 1 - d.leaves[0].lengthM / widthM }, { kind: 'LEAF', share: d.leaves[0].lengthM / widthM, hingeAt: 'HIGH' }]
+  const ordered = reversed ? [...parts].reverse() : parts
+  // the shares as fractions that sum to exactly 1: every one rounded but the last, which takes the rest
+  const fractions = ordered.map((p) => round6(p.share))
+  fractions[fractions.length - 1] = round6(1 - fractions.slice(0, -1).reduce((a, b) => a + b, 0))
+  const hingeOf = (at: 'LOW' | 'HIGH'): 'LEFT' | 'RIGHT' => ((at === 'LOW') !== reversed ? 'LEFT' : 'RIGHT')
+  const panels = ordered.map((p, i) => (p.kind === 'LEAF' ? { kind: 'LEAF' as const, fraction: fractions[i], hinge: hingeOf(p.hingeAt), glazing: 'FULL' as const } : { kind: 'GLAZED' as const, fraction: fractions[i] }))
+  const firstLeaf = panels.find((p) => p.kind === 'LEAF') as { hinge: 'LEFT' | 'RIGHT' }
+  return { hingeSide: firstLeaf.hinge, swing: d.leaves[0].swing, assembly: { panels, mullionWidth: 0.04 } }
 }
 
 const materialForTone = (tone: string | undefined, fallback: string): string => (tone === 'DARK' ? MATERIALS_V2.dark : tone === 'MID' ? MATERIALS_V2.mid : fallback)
@@ -793,6 +817,8 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       push({ type: 'placeWindow', id: `${o.id}-unit`, openingId: o.id, ...(o.mullions.length > 0 ? { mullions: o.mullions } : {}), ...frameWithinWall('WINDOW', hostT), materialId: MATERIALS_V2.glass }, o.id, 'windows')
     } else if (o.family === 'GARAGE_DOOR') {
       push({ type: 'placeDoor', id: `${o.id}-leaf`, openingId: o.id, ...frameWithinWall('DOOR', hostT), assembly: { panels: [{ kind: 'PANEL', fraction: 1 }], mullionWidth: 0.04 } }, o.id, 'doors')
+    } else if (o.family === 'GLAZED_DOOR' && o.leaves) {
+      push({ type: 'placeDoor', id: `${o.id}-leaf`, openingId: o.id, ...frameWithinWall('DOOR', hostT), ...drawnLeafAssembly(o.leaves, o.widthM, reversed), materialId: MATERIALS_V2.glass }, o.id, 'doors')
     } else if (o.family === 'GLAZED_DOOR') {
       push({ type: 'placeDoor', id: `${o.id}-leaf`, openingId: o.id, ...frameWithinWall('DOOR', hostT), ...drawnSwing, assembly: { panels: [{ kind: 'LEAF', fraction: 1, hinge: drawnSwing.hingeSide ?? 'LEFT', glazing: 'FULL' }], mullionWidth: 0.04 }, materialId: MATERIALS_V2.glass }, o.id, 'doors')
     } else {

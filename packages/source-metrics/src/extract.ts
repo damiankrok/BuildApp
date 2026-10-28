@@ -45,7 +45,7 @@ import type { ExternalReading, LabelCrop, LabelRecogniser } from './recogniser.j
 import { textAxisOf } from './ocr.js'
 import { readOpeningCallouts, readTintedCallouts } from './callouts.js'
 import type { CalloutReading } from './callouts.js'
-import { CALLOUT_RECOGNISER_NAME, CALLOUT_RECOGNISER_VERSION, corroborateBySibling, judgeCalloutHalf, PLAN_CORROBORATED_WIDTH, planCorroborableWidth, ringHalfCrops } from './callout-recogniser.js'
+import { CALLOUT_RECOGNISER_NAME, CALLOUT_RECOGNISER_VERSION, corroborateBySibling, corroborateHalfBySibling, judgeCalloutHalf, PLAN_CORROBORATED_WIDTH, planCorroborableWidth, ringHalfCrops } from './callout-recogniser.js'
 import type { OcrResult, TextToken } from './ocr.js'
 import { parseNumber, readingLattice } from './parse.js'
 import { registerFrame, solveLevelLadder } from './registration.js'
@@ -61,7 +61,8 @@ import type { Association, CalloutRingRecord, ChainRelation, DimensionChain, Dim
 export const TINTED_SEARCH_WITHOUT_SCALE = { minRadiusPx: 6, maxShareOfSheet: 0.026 } as const
 
 /** 1.4.0 (005I): labels are assigned to chains globally, and label-ink marks are no measurement points. */
-export const METRIC_READER_VERSION = '1.4.0' as const
+/** 1.5.0 (N8-03B): a ring half refused only on stability or mean is read where its other half passed and a sibling ring reads that half the same outright. */
+export const METRIC_READER_VERSION = '1.5.0' as const
 
 /** The bytes of one asset variant, decoded. Returning nothing means the variant could not be read, which is recorded as a gap. */
 export type RasterSource = (frame: SourceCoordinateFrame) => Raster | undefined
@@ -708,6 +709,7 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
           const byKey = new Map(readings.map((r) => [r.key, r]))
           const records: CalloutRingRecord[] = []
           const unstableOnly = new Map<string, { width: boolean; height: boolean }>()
+          const relaxed = new Map<string, { width: boolean; height: boolean }>()
           for (const [i, ring] of rings.entries()) {
             const { upper, lower } = cut[i]
             const wr = upper ? byKey.get(upper.crop.key) : undefined
@@ -716,6 +718,8 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
             const height = judgeCalloutHalf(hr, lower?.glyphs ?? 0, 'height')
             // Would the half pass with the bracket's stability granted? (`corroborateBySibling`)
             const passesButStability = (r: ExternalReading | undefined, glyphs: number, half: 'width' | 'height'): boolean => !!r && !r.stable && judgeCalloutHalf({ ...r, stable: true }, glyphs, half).accepted
+            // N8-03B: would it pass with the bracket's stability granted and the mean bound waived? (`corroborateHalfBySibling`)
+            const passesButStabilityOrMean = (r: ExternalReading | undefined, glyphs: number, half: 'width' | 'height'): boolean => !!r && judgeCalloutHalf({ ...r, stable: true, greedy: { ...r.greedy, meanP: 1 } }, glyphs, half).accepted
             const c = ring.reading
             const record: CalloutRingRecord = {
               id: stableId('callout-ring', 'recogniser', { frameId: frame.id, cx: c.circle.cx, cy: c.circle.cy }),
@@ -730,12 +734,17 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
               accepted: width.accepted && height.accepted,
             }
             unstableOnly.set(record.id, { width: passesButStability(wr, upper?.glyphs ?? 0, 'width'), height: passesButStability(hr, lower?.glyphs ?? 0, 'height') })
+            relaxed.set(record.id, { width: passesButStabilityOrMean(wr, upper?.glyphs ?? 0, 'width'), height: passesButStabilityOrMean(hr, lower?.glyphs ?? 0, 'height') })
             records.push(record)
           }
           const lifted = corroborateBySibling(records.map((r) => ({ ...r, unstableOnly: unstableOnly.get(r.id) as { width: boolean; height: boolean } })))
+          const halfLifted = corroborateHalfBySibling(
+            records.filter((r) => !lifted.has(r.id)).map((r) => ({ ...r, relaxed: relaxed.get(r.id) as { width: boolean; height: boolean } })),
+            records,
+          )
           for (const [i, ring] of rings.entries()) {
             const base = records[i]
-            const up = lifted.get(base.id)
+            const up = lifted.get(base.id) ?? halfLifted.get(base.id)
             const record: CalloutRingRecord = up ? { ...base, width: up.width, height: up.height, accepted: true } : base
             calloutRings.push(record)
             for (const m of ring.members) heardRings.set(m, record)

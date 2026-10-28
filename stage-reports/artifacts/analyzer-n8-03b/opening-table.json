@@ -1,0 +1,572 @@
+{
+ "note": "archonPrinted/archonReading: the reviewer’s reading by eye of the ARCHON ground plan and garden/front elevation (current page, the sealed images); before = N8-03A replay (solver 2.13.0), after = N8-03B (reader 1.5.0, solver 2.14.0)",
+ "rows": [
+  {
+   "house": "rary",
+   "id": "opening-0-rear-2-3",
+   "face": "OGRÓD",
+   "archonPrinted": "400/230",
+   "archonReading": "przeszklenie do posadzki bez łuku na rzucie; na elewacji 2 tafle",
+   "before": {
+    "kind": "WINDOW",
+    "width": 4,
+    "sill": 0,
+    "height": 2.3,
+    "fill": "okno, 1 tafla",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 4.00 m gap in the rear wall of main on storey 0, printed 400/230, 1.05 m tall on the elevation",
+    "verdict": "TAK (rodzaj, wymiar); tafle: 1 zamiast 2 — OTWARTE"
+   },
+   "after": {
+    "kind": "WINDOW",
+    "width": 4,
+    "sill": 0,
+    "height": 2.3,
+    "fill": "okno, 1 tafla",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 4.00 m gap in the rear wall of main on storey 0, printed 400/230, 1.05 m tall on the elevation",
+    "verdict": "TAK (rodzaj, wymiar); tafle: 1 zamiast 2 — OTWARTE"
+   }
+  },
+  {
+   "house": "rary",
+   "id": "opening-0-rear-2-2",
+   "face": "OGRÓD",
+   "archonPrinted": "150/230",
+   "archonReading": "drzwi tarasowe: skrzydło ≈0,8 m przy ościeżu zachodnim (LOW) + stałe doświetle",
+   "before": {
+    "kind": "DOOR",
+    "width": 1.5,
+    "sill": 0,
+    "height": 2.3,
+    "fill": "skrzydło 1.00",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 1.49 m gap in the rear wall of main on storey 0, printed 150/230, not read on an elevation",
+    "verdict": "NIE"
+   },
+   "after": {
+    "kind": "DOOR",
+    "width": 1.5,
+    "sill": 0,
+    "height": 2.3,
+    "fill": "doświetle 0.48 + skrzydło 0.52",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 1.49 m gap in the rear wall of main on storey 0, printed 150/230, not read on an elevation",
+    "verdict": "TAK"
+   }
+  },
+  {
+   "house": "rary",
+   "id": "opening-0-rear-2-1",
+   "face": "OGRÓD",
+   "archonPrinted": "150/230",
+   "archonReading": "drzwi tarasowe: skrzydło ≈0,8 m przy ościeżu wschodnim (HIGH) + stałe doświetle",
+   "before": {
+    "kind": "DOOR",
+    "width": 1.5,
+    "sill": 0,
+    "height": 2.3,
+    "fill": "skrzydło 1.00",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 1.49 m gap in the rear wall of main on storey 0, printed 150/230, not read on an elevation",
+    "verdict": "NIE"
+   },
+   "after": {
+    "kind": "DOOR",
+    "width": 1.5,
+    "sill": 0,
+    "height": 2.3,
+    "fill": "skrzydło 0.54 + doświetle 0.46",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 1.49 m gap in the rear wall of main on storey 0, printed 150/230, not read on an elevation",
+    "verdict": "TAK"
+   }
+  },
+  {
+   "house": "rary",
+   "id": "opening-0-rear-2-0",
+   "face": "OGRÓD",
+   "archonPrinted": "230/230",
+   "archonReading": "drzwi tarasowe: skrzydło ≈0,8 m przy ościeżu wschodnim (HIGH) + doświetle ≈1,4 m; na elewacji 2 pola",
+   "before": {
+    "kind": "WINDOW",
+    "width": 2.3,
+    "sill": 0,
+    "height": 2.3,
+    "fill": "okno, 1 tafla",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 2.29 m gap in the rear wall of main on storey 0, printed 230/230, not read on an elevation",
+    "verdict": "NIE"
+   },
+   "after": {
+    "kind": "DOOR",
+    "width": 2.3,
+    "sill": 0,
+    "height": 2.3,
+    "fill": "skrzydło 0.34 + doświetle 0.66",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 2.29 m gap in the rear wall of main on storey 0, printed 230/230, not read on an elevation",
+    "verdict": "TAK"
+   }
+  },
+  {
+   "house": "rary",
+   "id": "opening-0-east-1-0",
+   "face": "BOK (wsch.)",
+   "archonPrinted": "120/230",
+   "archonReading": "okno do posadzki",
+   "before": {
+    "kind": "WINDOW",
+    "width": 1.2,
+    "sill": 0,
+    "height": 2.3,
+    "fill": "okno, 1 tafla",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 1.18 m gap in the east wall of main on storey 0, printed 120/230, not read on an elevation",
+    "verdict": "TAK"
+   },
+   "after": {
+    "kind": "WINDOW",
+    "width": 1.2,
+    "sill": 0,
+    "height": 2.3,
+    "fill": "okno, 1 tafla",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 1.18 m gap in the east wall of main on storey 0, printed 120/230, not read on an elevation",
+    "verdict": "TAK"
+   }
+  },
+  {
+   "house": "rary",
+   "id": "opening-0-east-1-1",
+   "face": "BOK (wsch.)",
+   "archonPrinted": "120/230",
+   "archonReading": "okno do posadzki",
+   "before": {
+    "kind": "WINDOW",
+    "width": 1.2,
+    "sill": 0,
+    "height": 2.3,
+    "fill": "okno, 1 tafla",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 1.18 m gap in the east wall of main on storey 0, printed 120/230, not read on an elevation",
+    "verdict": "TAK"
+   },
+   "after": {
+    "kind": "WINDOW",
+    "width": 1.2,
+    "sill": 0,
+    "height": 2.3,
+    "fill": "okno, 1 tafla",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 1.18 m gap in the east wall of main on storey 0, printed 120/230, not read on an elevation",
+    "verdict": "TAK"
+   }
+  },
+  {
+   "house": "rary",
+   "id": "opening-0-front-0-1",
+   "face": "WEJŚCIE",
+   "archonPrinted": "105/210",
+   "archonReading": "drzwi wejściowe, skrzydło na zewnątrz",
+   "before": {
+    "kind": "DOOR",
+    "width": 1.05,
+    "sill": 0,
+    "height": 2.1,
+    "fill": "skrzydło 1.00",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 1.02 m gap in the front wall of main on storey 0, printed 105/210, not read on an elevation",
+    "verdict": "TAK"
+   },
+   "after": {
+    "kind": "DOOR",
+    "width": 1.05,
+    "sill": 0,
+    "height": 2.1,
+    "fill": "skrzydło 1.00",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 1.02 m gap in the front wall of main on storey 0, printed 105/210, not read on an elevation",
+    "verdict": "TAK"
+   }
+  },
+  {
+   "house": "rary",
+   "id": "opening-0-front-0-2",
+   "face": "WEJŚCIE",
+   "archonPrinted": "250/140",
+   "archonReading": "okno kuchni",
+   "before": {
+    "kind": "WINDOW",
+    "width": 2.5,
+    "sill": 1.055512,
+    "height": 1.4,
+    "fill": "okno, 1 tafla",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 2.48 m gap in the front wall of main on storey 0, printed 250/140, 1.17 m tall on the elevation",
+    "verdict": "TAK"
+   },
+   "after": {
+    "kind": "WINDOW",
+    "width": 2.5,
+    "sill": 1.055512,
+    "height": 1.4,
+    "fill": "okno, 1 tafla",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 2.48 m gap in the front wall of main on storey 0, printed 250/140, 1.17 m tall on the elevation",
+    "verdict": "TAK"
+   }
+  },
+  {
+   "house": "rary",
+   "id": "opening-0-front-4-0",
+   "face": "WEJŚCIE",
+   "archonPrinted": "500/238",
+   "archonReading": "brama garażowa",
+   "before": {
+    "kind": "DOOR",
+    "width": 5,
+    "sill": 0,
+    "height": 2.38,
+    "fill": "panel 1.00",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 4.99 m gap in the front wall of attached-0 on storey 0, printed 500/238, 1.57 m tall on the elevation",
+    "verdict": "TAK"
+   },
+   "after": {
+    "kind": "DOOR",
+    "width": 5,
+    "sill": 0,
+    "height": 2.38,
+    "fill": "panel 1.00",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 4.99 m gap in the front wall of attached-0 on storey 0, printed 500/238, 1.57 m tall on the elevation",
+    "verdict": "TAK"
+   }
+  },
+  {
+   "house": "rary",
+   "id": "opening-0-front-0-0",
+   "face": "WEJŚCIE",
+   "archonPrinted": "100/210",
+   "archonReading": "drzwi (pominięte przez solver z powodem już PRZED)",
+   "before": {
+    "kind": "—",
+    "width": null,
+    "sill": 0,
+    "height": null,
+    "fill": "—",
+    "state": "OMITTED_WITH_REASON",
+    "interpretation": "",
+    "verdict": "pominięte (bez zmian)"
+   },
+   "after": {
+    "kind": "—",
+    "width": null,
+    "sill": 0,
+    "height": null,
+    "fill": "—",
+    "state": "OMITTED_WITH_REASON",
+    "interpretation": "",
+    "verdict": "pominięte (bez zmian)"
+   }
+  },
+  {
+   "house": "gozd",
+   "id": "opening-0-rear-2-0",
+   "face": "OGRÓD",
+   "archonPrinted": "300/230",
+   "archonReading": "przeszklenie do posadzki (przesuwne, bez łuku); na elewacji 2 tafle",
+   "before": {
+    "kind": "WINDOW",
+    "width": 2.965248,
+    "sill": 0.9,
+    "height": 1.3,
+    "fill": "okno, 1 tafla",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 2.97 m gap in the rear wall of main on storey 0, no callout read, not read on an elevation",
+    "verdict": "NIE (wys. ≠ opis)"
+   },
+   "after": {
+    "kind": "WINDOW",
+    "width": 3,
+    "sill": 0,
+    "height": 2.3,
+    "fill": "okno, 1 tafla",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 2.97 m gap in the rear wall of main on storey 0, printed 300/230, not read on an elevation",
+    "verdict": "TAK (rodzaj, wymiar); tafle: 1 zamiast 2 — OTWARTE"
+   }
+  },
+  {
+   "house": "gozd",
+   "id": "opening-0-rear-2-1",
+   "face": "OGRÓD",
+   "archonPrinted": "180/230",
+   "archonReading": "drzwi dwuskrzydłowe: dwa łuki od obu ościeży, spotykają się w osi",
+   "before": {
+    "kind": "DOOR",
+    "width": 1.8,
+    "sill": 0,
+    "height": 2.3,
+    "fill": "skrzydło 1.00",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 1.80 m gap in the rear wall of main on storey 0, printed 180/230, not read on an elevation",
+    "verdict": "NIE"
+   },
+   "after": {
+    "kind": "DOOR",
+    "width": 1.8,
+    "sill": 0,
+    "height": 2.3,
+    "fill": "skrzydło 0.51 + skrzydło 0.49",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 1.80 m gap in the rear wall of main on storey 0, printed 180/230, not read on an elevation",
+    "verdict": "TAK"
+   }
+  },
+  {
+   "house": "gozd",
+   "id": "opening-0-rear-2-2",
+   "face": "OGRÓD",
+   "archonPrinted": "100/150",
+   "archonReading": "okno (pom. 7); na elewacji małe okno nad parapetem",
+   "before": {
+    "kind": "DOOR",
+    "width": 0.988416,
+    "sill": 0,
+    "height": 2.1,
+    "fill": "drzwi pełne (1 skrzydło)",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 0.99 m gap in the rear wall of main on storey 0, no callout read, not read on an elevation",
+    "verdict": "NIE (wys. ≠ opis)"
+   },
+   "after": {
+    "kind": "DOOR",
+    "width": 0.988416,
+    "sill": 0,
+    "height": 2.1,
+    "fill": "drzwi pełne (1 skrzydło)",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 0.99 m gap in the rear wall of main on storey 0, no callout read, not read on an elevation",
+    "verdict": "NIE (wys. ≠ opis)"
+   }
+  },
+  {
+   "house": "gozd",
+   "id": "opening-0-west-3-0",
+   "face": "BOK (zach.)",
+   "archonPrinted": "200/230",
+   "archonReading": "przeszklenie do posadzki (jadalnia)",
+   "before": {
+    "kind": "WINDOW",
+    "width": 1.965522,
+    "sill": 0.9,
+    "height": 1.3,
+    "fill": "okno, 1 tafla",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 1.97 m gap in the west wall of main on storey 0, no callout read, not read on an elevation",
+    "verdict": "NIE (wys. ≠ opis)"
+   },
+   "after": {
+    "kind": "WINDOW",
+    "width": 1.965522,
+    "sill": 0.9,
+    "height": 1.3,
+    "fill": "okno, 1 tafla",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 1.97 m gap in the west wall of main on storey 0, no callout read, not read on an elevation",
+    "verdict": "NIE (wys. ≠ opis)"
+   }
+  },
+  {
+   "house": "gozd",
+   "id": "opening-0-east-1-1",
+   "face": "BOK (wsch.)",
+   "archonPrinted": "290/100",
+   "archonReading": "pas okien garażu",
+   "before": {
+    "kind": "WINDOW",
+    "width": 2.872686,
+    "sill": 0.9,
+    "height": 1.3,
+    "fill": "okno, 1 tafla",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 2.87 m gap in the east wall of main on storey 0, no callout read, not read on an elevation",
+    "verdict": "NIE (wys. ≠ opis)"
+   },
+   "after": {
+    "kind": "WINDOW",
+    "width": 2.872686,
+    "sill": 0.9,
+    "height": 1.3,
+    "fill": "okno, 1 tafla",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 2.87 m gap in the east wall of main on storey 0, no callout read, not read on an elevation",
+    "verdict": "NIE (wys. ≠ opis)"
+   }
+  },
+  {
+   "house": "gozd",
+   "id": "opening-0-front-0-0",
+   "face": "WEJŚCIE",
+   "archonPrinted": "260/140",
+   "archonReading": "okno",
+   "before": {
+    "kind": "WINDOW",
+    "width": 2.6,
+    "sill": 0.8,
+    "height": 1.4,
+    "fill": "okno, 1 tafla",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 2.50 m gap in the front wall of main on storey 0, printed 260/140, not read on an elevation",
+    "verdict": "TAK"
+   },
+   "after": {
+    "kind": "WINDOW",
+    "width": 2.6,
+    "sill": 0.8,
+    "height": 1.4,
+    "fill": "okno, 1 tafla",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 2.50 m gap in the front wall of main on storey 0, printed 260/140, not read on an elevation",
+    "verdict": "TAK"
+   }
+  },
+  {
+   "house": "gozd",
+   "id": "opening-0-front-0-2",
+   "face": "WEJŚCIE",
+   "archonPrinted": "325/225",
+   "archonReading": "brama garażowa",
+   "before": {
+    "kind": "DOOR",
+    "width": 3.25,
+    "sill": 0,
+    "height": 2.25,
+    "fill": "panel 1.00",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 3.22 m gap in the front wall of main on storey 0, printed 325/225, not read on an elevation",
+    "verdict": "TAK"
+   },
+   "after": {
+    "kind": "DOOR",
+    "width": 3.25,
+    "sill": 0,
+    "height": 2.25,
+    "fill": "panel 1.00",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 3.22 m gap in the front wall of main on storey 0, printed 325/225, not read on an elevation",
+    "verdict": "TAK"
+   }
+  },
+  {
+   "house": "gozd",
+   "id": "pocket-main-0-0-opening-0-front-8-1",
+   "face": "WEJŚCIE",
+   "archonPrinted": "105/210",
+   "archonReading": "drzwi wejściowe (we wnęce)",
+   "before": {
+    "kind": "DOOR",
+    "width": 1.05,
+    "sill": 0,
+    "height": 2.1,
+    "fill": "drzwi pełne (1 skrzydło)",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 1.04 m gap in the front wall of main on storey 0, printed 105/210, not read on an elevation",
+    "verdict": "TAK"
+   },
+   "after": {
+    "kind": "DOOR",
+    "width": 1.05,
+    "sill": 0,
+    "height": 2.1,
+    "fill": "drzwi pełne (1 skrzydło)",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 1.04 m gap in the front wall of main on storey 0, printed 105/210, not read on an elevation",
+    "verdict": "TAK"
+   }
+  },
+  {
+   "house": "gozd",
+   "id": "pocket-main-0-0-opening-0-front-8-0",
+   "face": "WEJŚCIE",
+   "archonPrinted": "70/210",
+   "archonReading": "drzwi (we wnęce)",
+   "before": {
+    "kind": "DOOR",
+    "width": 0.7,
+    "sill": 0,
+    "height": 2.1,
+    "fill": "drzwi pełne (1 skrzydło)",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 0.71 m gap in the front wall of main on storey 0, printed 70/210, not read on an elevation",
+    "verdict": "TAK"
+   },
+   "after": {
+    "kind": "DOOR",
+    "width": 0.7,
+    "sill": 0,
+    "height": 2.1,
+    "fill": "drzwi pełne (1 skrzydło)",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 0.71 m gap in the front wall of main on storey 0, printed 70/210, not read on an elevation",
+    "verdict": "TAK"
+   }
+  },
+  {
+   "house": "a01",
+   "id": "opening-0-rear-2-1",
+   "face": "OGRÓD",
+   "archonPrinted": "180/220",
+   "archonReading": "drzwi dwuskrzydłowe (dwa łuki)",
+   "before": {
+    "kind": "DOOR",
+    "width": 1.80759,
+    "sill": 0,
+    "height": 2.118692,
+    "fill": "skrzydło 1.00",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 1.81 m gap in the rear wall of main on storey 0, no callout read, 2.12 m tall on the elevation",
+    "verdict": "NIE (wys. ≠ opis)"
+   },
+   "after": {
+    "kind": "DOOR",
+    "width": 1.80759,
+    "sill": 0,
+    "height": 2.118692,
+    "fill": "skrzydło 0.50 + skrzydło 0.50",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 1.81 m gap in the rear wall of main on storey 0, no callout read, 2.12 m tall on the elevation",
+    "verdict": "NIE (wys. ≠ opis)"
+   }
+  },
+  {
+   "house": "a01",
+   "id": "opening-0-west-3-0",
+   "face": "BOK (zach.)",
+   "archonPrinted": "180/220",
+   "archonReading": "drzwi dwuskrzydłowe (dwa łuki)",
+   "before": {
+    "kind": "DOOR",
+    "width": 1.8,
+    "sill": 0,
+    "height": 2.2,
+    "fill": "skrzydło 1.00",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 1.79 m gap in the west wall of main on storey 0, printed 180/220, not read on an elevation",
+    "verdict": "NIE"
+   },
+   "after": {
+    "kind": "DOOR",
+    "width": 1.8,
+    "sill": 0,
+    "height": 2.2,
+    "fill": "skrzydło 0.50 + skrzydło 0.50",
+    "state": "CUT_IN_GEOMETRY",
+    "interpretation": "a 1.79 m gap in the west wall of main on storey 0, printed 180/220, not read on an elevation",
+    "verdict": "TAK"
+   }
+  }
+ ]
+}
