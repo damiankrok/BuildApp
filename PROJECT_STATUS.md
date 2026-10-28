@@ -2833,3 +2833,21 @@ byte-identical (Trytomach and Arganiach attics unchanged; Arganiach's contact UN
 Marcówki and Rarytasy changed by the rule; all 8 validate and compile with no diagnostics, every opening physically cut.
 Open: Sasanki's attic door into room 8 is read but not cut (under the main roof's slope the shared wall stands 1.64 m;
 the roofs are not cut to each other), the winder's skew edge, 4 cm inner-face step in Marcówki, Arganiach's body split.
+
+## Arganiach: topologia garażu i brama (STAGE BUILDPLAN N8-03A / FIX-06A)
+
+Status: **DONE — solver 2.13.0, bez APK.** Report `stage-reports/STAGE_BUILDPLAN_N8_03A_ARGANIACH_GARAGE_TOPOLOGY.md`,
+numbers `stage-reports/artifacts/analyzer-n8-03a/`. FIRST_BAD: the plan draws no wall where the garage (`attached-0`)
+meets the house (`main`) — the garage room runs on under the upper storey to z≈6.45 — but N8-02B read the contact as
+UNDECIDED (0 of 215 positions inked: "too little") and both bodies built a full exterior wall across the garage; the
+garage room was cut in two, its label withheld (16.38 of 35.06 m²), so the gate and the west door lost their garage, and
+the front elevation's gate heights went to the non-existent contact wall as a 5.92 m "door". Independently, the overhead
+door's east track ran on into the red "595" dimension (3.66 vs 3.01 m), so the tracks were refused and the gate became a
+4.98 × 1.30 window. Fixed generally: a contact with no wall ink and its walls across drawn at both ends is OPEN (no wall
+on either body, rooms either side joined, the gaps on it omitted with the reason); a partition ending a door's width short
+of the outer wall keeps its door where the swing is drawn; tracks are read in grey ink only. Arganiach: no wall on the
+contact, "10 Garaż" 34.53 m² (published 35.06), its rear wall and two doors back, the gate GARAGE_DOOR 4.98 × 2.20
+(width from the plan gap; height assumed — the printed 225 is not read) cut in geometry, the 90/210 door a door; attic
+and main roof unchanged; 23/23 openings cut and two plan gaps omitted with a reason (opening ledger in five states). The
+other seven houses are byte-identical. Open: gate height assumed, the garage → 9 door cut 0.84 of a 0.92 m reading, the
+flat-roof plate/wall-top flicker (pre-existing).

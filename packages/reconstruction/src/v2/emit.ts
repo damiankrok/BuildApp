@@ -226,7 +226,11 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
         if (party) evidence(id, party.provenance, party.why, { thickness: 'SOURCE_DERIVED' })
         else {
           // the body's own walls say what its ring would have said of it, and that it shares a wall
-          const shares = `${Math.abs(a1 - a0).toFixed(2)} m of ${m.id}'s ${SIDES[k].toLowerCase()} wall; the body shares a wall the plan draws once with the body beside it (${[...new Set(SIDES.flatMap((sd) => segs[sd]).map((x) => x.party?.id).filter((x): x is string => !!x))].join(', ')})`
+          const parties = [...new Map(SIDES.flatMap((sd) => segs[sd]).flatMap((x) => (x.party ? [[x.party.id, x.party] as const] : []))).values()]
+          const drawnOnce = parties.filter((p) => !p.open).map((p) => p.id)
+          const open = parties.filter((p) => p.open).map((p) => p.id)
+          // N8-03A: where the plan draws no wall between the bodies the evidence says so, not that one wall is shared
+          const shares = `${Math.abs(a1 - a0).toFixed(2)} m of ${m.id}'s ${SIDES[k].toLowerCase()} wall; ${[...(drawnOnce.length > 0 ? [`the body shares a wall the plan draws once with the body beside it (${drawnOnce.join(', ')})`] : []), ...(open.length > 0 ? [`the body meets the body beside it where the plan draws no wall, and neither builds one there (${open.join(', ')})`] : [])].join('; ')}`
           const own = storeyOwn(m, storey)
           if (own) evidence(id, 'SOURCE_DERIVED', `storey ${storey}'s own walls, ${(own.x1 - own.x0).toFixed(2)} × ${(own.z1 - own.z0).toFixed(2)} m: the walled region of that storey's plan, registered onto the body below; ${shares}`)
           else if (m.outerFacesOpen && m.outerFacesOpen.length > 0) evidence(id, 'SOURCE_DERIVED', `${(m.x1 - m.x0).toFixed(2)} × ${(m.z1 - m.z0).toFixed(2)} m body cut on a wall's inner face; unresolved: ${m.outerFacesOpen.join('; ')}; ${shares}`)

@@ -1,0 +1,70 @@
+{
+ "method": "offline replay of the sealed FIX-04 / ARCHON 1311 inputs through packages/analysis-service/scripts/second-house.ts; before = N8-02B (solver 2.12.0, commit b6c4e00) replay, after = N8-03A working tree (solver 2.13.0)",
+ "houses": [
+  {
+   "house": "a01",
+   "before": "d095c0da90b69a499ea2f0d9db1f47af068829abec0d2f397488edc25ad88002",
+   "after": "d095c0da90b69a499ea2f0d9db1f47af068829abec0d2f397488edc25ad88002",
+   "identical": true
+  },
+  {
+   "house": "gozd",
+   "before": "1a96c20f088efaad9168537b1dc975c0e0ae066145821f0290c906273f61965e",
+   "after": "1a96c20f088efaad9168537b1dc975c0e0ae066145821f0290c906273f61965e",
+   "identical": true
+  },
+  {
+   "house": "marcowki",
+   "before": "bcb151061f8eae396d349bf55de18bfa615b9523eab206a48f8b2ff9a799f7c2",
+   "after": "bcb151061f8eae396d349bf55de18bfa615b9523eab206a48f8b2ff9a799f7c2",
+   "identical": true
+  },
+  {
+   "house": "ciesz",
+   "before": "5394c17c4ff1c4e515c70067f77cc4aab68005658855930cd96c8e6f1323568f",
+   "after": "5394c17c4ff1c4e515c70067f77cc4aab68005658855930cd96c8e6f1323568f",
+   "identical": true
+  },
+  {
+   "house": "rary",
+   "before": "9657ddad9448dd8bccedd3c18dda931d74fc5acfa36adc94a69eb154cf5ee432",
+   "after": "9657ddad9448dd8bccedd3c18dda931d74fc5acfa36adc94a69eb154cf5ee432",
+   "identical": true
+  },
+  {
+   "house": "trytomach",
+   "before": "ce64cc099c83410d0e6393cb80639f2840059f9249b430d29deb057378c4856c",
+   "after": "ce64cc099c83410d0e6393cb80639f2840059f9249b430d29deb057378c4856c",
+   "identical": true
+  },
+  {
+   "house": "sasankach3",
+   "before": "dbb14fdb89a517f206cdb1cca9735729a1f5be45bbfc2b34359a49ad3bd72357",
+   "after": "dbb14fdb89a517f206cdb1cca9735729a1f5be45bbfc2b34359a49ad3bd72357",
+   "identical": true
+  },
+  {
+   "house": "arganiach",
+   "before": "cf9b660ca4f3a2caf82478513dbb122cda6cf08bb80198ff64ca6cfce1759c02",
+   "after": "0770f85430f158caf29812fb35ae97d791f1a914b549bc2f393c604521b3ab9b",
+   "identical": false,
+   "contacts": [
+    {
+     "storey": 0,
+     "bodies": [
+      "main",
+      "attached-0"
+     ],
+     "decision": "OPEN",
+     "why": "main|attached-0 on storey 0, 2.94..4.46 across over 7.42..14.20: 0 of 215 positions drawn, 0 one band, 0 two: the plan draws no wall between the bodies, and the walls across are drawn at both ends (40 % and 38 % of the corners' windows): one space runs from main into attached-0; neither builds a wall over 7.42..14.20"
+    }
+   ],
+   "compileAfter": {
+    "ok": true,
+    "wallsOverlap": 0,
+    "diagnostics": [],
+    "openingsCut": "23/23"
+   }
+  }
+ ]
+}

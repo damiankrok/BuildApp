@@ -1,0 +1,822 @@
+{
+ "modelId": "m-analysis-m32b290f26a4e8",
+ "modelCompleteness": {
+  "verdict": "COMPLETE_WITH_OPEN_QUESTIONS",
+  "decomposition": {
+   "coverage": 1,
+   "drawnBuiltM2": 146.787116,
+   "representedM2": 146.787116,
+   "basis": "ACCEPTED_DECOMPOSITION"
+  },
+  "missingBodies": [],
+  "unresolvedAreas": [],
+  "unexplainedWalls": {
+   "count": 0,
+   "lengthM": 0,
+   "bandLengthM": 0
+  },
+  "conflicts": {
+   "blocking": [],
+   "degrading": [
+    {
+     "code": "ROOF_EVIDENCE_DISAGREES",
+     "what": "the stated 38° pitch over 8.62 m puts the ridge at 6.94 m, and the section's datums put it at 7.94 m"
+    }
+   ]
+  },
+  "modelRefusals": 0,
+  "why": "the accepted decomposition is 100% represented (its own built regions only); degrading: ROOF_EVIDENCE_DISAGREES"
+ },
+ "contacts": [
+  {
+   "storeyIndex": 0,
+   "frameId": "frame-asset-rzut-5f20c3d65b-4e18ac5811",
+   "massIds": [
+    "main",
+    "attached-0"
+   ],
+   "facade": "FRONT",
+   "contactAt": 3.7,
+   "span": [
+    7.41585,
+    14.2
+   ],
+   "wallsM": [
+    0.457164,
+    0.457164
+   ],
+   "reading": {
+    "samples": 215,
+    "solid": 0,
+    "one": 0,
+    "two": 0,
+    "consistent": 0,
+    "windowM": [
+     2.942836,
+     4.457164
+    ]
+   },
+   "decision": "UNDECIDED",
+   "why": "main|attached-0 on storey 0, 2.94..4.46 across over 7.42..14.20: the plan draws wall at 0 of 215 positions drawn, 0 one band, 0 two; too little to say what stands between the bodies, so each keeps its wall"
+  }
+ ],
+ "unresolved": [
+  "AMBIGUOUS: which way the ridge runs over mass-0: neither span reproduces the measured rise at the stated pitch",
+  "MISSING: the kind of roof over mass-1: no printed angle, specification line or technical view describes a roof over this body separately from the main one",
+  "AMBIGUOUS: the exact steps of the stair: the ladders give the topology but riser count: 6 risers over 2.80 m would be 0.467 m each; direction of climb (no arrowhead found); a placeholder is built over the shaft",
+  "AMBIGUOUS: the wall between main and attached-0 on storey 0, 7.42..14.20 along: main|attached-0 on storey 0, 2.94..4.46 across over 7.42..14.20: the plan draws wall at 0 of 215 positions drawn, 0 one band, 0 two; too little to say what stands between the bodies, so each keeps its wall; built as two walls, which the plan may not draw",
+  "AMBIGUOUS: a 0.99 m thin band at x 8.46: meets no wall at either end: fitted furniture or a line, not a partition",
+  "AMBIGUOUS: a 5.81 m thin band at z 6.52: meets no wall at either end: fitted furniture or a line, not a partition",
+  "AMBIGUOUS: the number of room-0-0: two numbers (1, 10) are printed inside it",
+  "AMBIGUOUS: the number of room-0-0: two numbers (1, 11) are printed inside it",
+  "AMBIGUOUS: the number of room-0-0: two numbers (1, 56) are printed inside it",
+  "AMBIGUOUS: wall-thick partitions on storey 0: the body stands on no drawn wall along its top side on this sheet: its registration is uncertain there, and ink as thick as the outer wall inside it may be the outer wall itself, so only partitions thinner than the outer wall are read",
+  "AMBIGUOUS: the label of room-0-0 (read as 10): its 16.38 m² is 53 % off the published Garaż 35.06 m²",
+  "AMBIGUOUS: a 1.39 m thin band at z 6.89: meets no wall at either end: fitted furniture or a line, not a partition",
+  "AMBIGUOUS: the label of room-1-1 (read as 3): its 7.515 m² is 76 % off the published Garderoba 4.26 m²",
+  "AMBIGUOUS: the number of room-1-2: two numbers (1, 97) are printed inside it"
+ ],
+ "counts": {
+  "observed": 23,
+  "selected": 22,
+  "emitted": 22,
+  "cut": 22,
+  "emittedNotCut": 0,
+  "selectedNotEmitted": 0,
+  "omitted": 1
+ },
+ "rows": [
+  {
+   "id": "opening-0-front-0-0",
+   "where": "main storey 0 FRONT",
+   "intervalM": [
+    1.21014,
+    3.711096
+   ],
+   "widthPlanM": 2.500956,
+   "observedAs": "WINDOW",
+   "heights": {
+    "sillY": 0.630004,
+    "headY": 2.178004
+   },
+   "callout": null,
+   "elevation": {
+    "frameId": "frame-asset-gotowy-projekt-dom-w-arganiach-g2e-elewacj-42881dfc86",
+    "sillY": 0.630004,
+    "headY": 2.178004
+   },
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "modelId": "opening-0-front-0-0",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "WINDOW",
+    "wallId": "ring-main-0-w0",
+    "widthM": 2.500956,
+    "sillM": 0.630004,
+    "heightM": 1.548
+   }
+  },
+  {
+   "id": "opening-0-front-0-1",
+   "where": "main storey 0 FRONT",
+   "intervalM": [
+    5.754888,
+    7.26084
+   ],
+   "widthPlanM": 1.505952,
+   "observedAs": "GLAZED_DOOR",
+   "heights": {
+    "sillY": 0,
+    "headY": 2.1
+   },
+   "callout": {
+    "widthCm": 150,
+    "heightCm": 210,
+    "evidenceId": "metric-callout-ring-80afcb9013"
+   },
+   "elevation": null,
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "modelId": "opening-0-front-0-1",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "DOOR",
+    "wallId": "ring-main-0-w0",
+    "widthM": 1.5,
+    "sillM": 0,
+    "heightM": 2.1
+   }
+  },
+  {
+   "id": "opening-0-front-0-2",
+   "where": "main storey 0 FRONT",
+   "intervalM": [
+    7.852464,
+    13.768704
+   ],
+   "widthPlanM": 5.91624,
+   "observedAs": "MULTI_PANEL_GLAZING",
+   "heights": {
+    "sillY": 0,
+    "headY": 2.178004
+   },
+   "callout": null,
+   "elevation": {
+    "frameId": "frame-asset-gotowy-projekt-dom-w-arganiach-g2e-elewacj-42881dfc86",
+    "sillY": 0,
+    "headY": 2.178004
+   },
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "modelId": "shared-opening-0-front-0-2",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "DOOR",
+    "wallId": "ring-main-0-w0",
+    "widthM": 5.91624,
+    "sillM": 0,
+    "heightM": 2.1
+   }
+  },
+  {
+   "id": "opening-0-east-1-0",
+   "where": "main storey 0 EAST",
+   "intervalM": [
+    7.057134,
+    7.970374
+   ],
+   "widthPlanM": 0.91324,
+   "observedAs": "DOOR",
+   "heights": {
+    "sillY": 0,
+    "headY": 2.1
+   },
+   "callout": null,
+   "elevation": null,
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "modelId": "opening-0-east-1-0",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "DOOR",
+    "wallId": "ring-main-0-w1",
+    "widthM": 0.91324,
+    "sillM": 0,
+    "heightM": 2.1
+   }
+  },
+  {
+   "id": "opening-0-east-1-1",
+   "where": "main storey 0 EAST",
+   "intervalM": [
+    4.612874,
+    5.499254
+   ],
+   "widthPlanM": 0.88638,
+   "observedAs": "DOOR",
+   "heights": {
+    "sillY": 0,
+    "headY": 2.1
+   },
+   "callout": null,
+   "elevation": null,
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "modelId": "opening-0-east-1-1",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "DOOR",
+    "wallId": "ring-main-0-w1",
+    "widthM": 0.88638,
+    "sillM": 0,
+    "heightM": 2.1
+   }
+  },
+  {
+   "id": "opening-0-rear-2-0",
+   "where": "main storey 0 REAR",
+   "intervalM": [
+    0.726084,
+    4.006908
+   ],
+   "widthPlanM": 3.280824,
+   "observedAs": "MULTI_PANEL_GLAZING",
+   "heights": {
+    "sillY": 0,
+    "headY": 2.180848
+   },
+   "callout": null,
+   "elevation": {
+    "frameId": "frame-asset-gotowy-projekt-dom-w-arganiach-g2e-elewacj-134561073d",
+    "sillY": 0,
+    "headY": 2.180848
+   },
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "modelId": "opening-0-rear-2-0",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "WINDOW",
+    "wallId": "ring-main-0-w2",
+    "widthM": 3.280824,
+    "sillM": 0,
+    "heightM": 2.180848
+   }
+  },
+  {
+   "id": "opening-0-rear-2-1",
+   "where": "main storey 0 REAR",
+   "intervalM": [
+    5.620428,
+    6.723
+   ],
+   "widthPlanM": 1.102572,
+   "observedAs": "GLAZED_DOOR",
+   "heights": {
+    "sillY": 0,
+    "headY": 2.180848
+   },
+   "callout": null,
+   "elevation": {
+    "frameId": "frame-asset-gotowy-projekt-dom-w-arganiach-g2e-elewacj-134561073d",
+    "sillY": 0,
+    "headY": 2.180848
+   },
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "modelId": "opening-0-rear-2-1",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "DOOR",
+    "wallId": "ring-main-0-w2",
+    "widthM": 1.102572,
+    "sillM": 0,
+    "heightM": 2.180848
+   }
+  },
+  {
+   "id": "opening-0-rear-2-2",
+   "where": "main storey 0 REAR",
+   "intervalM": [
+    10.541664,
+    12.719916
+   ],
+   "widthPlanM": 2.178252,
+   "observedAs": "MULTI_PANEL_GLAZING",
+   "heights": {
+    "sillY": 0,
+    "headY": 2.180848
+   },
+   "callout": null,
+   "elevation": {
+    "frameId": "frame-asset-gotowy-projekt-dom-w-arganiach-g2e-elewacj-134561073d",
+    "sillY": 0,
+    "headY": 2.180848
+   },
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "modelId": "opening-0-rear-2-2",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "WINDOW",
+    "wallId": "ring-main-0-w2",
+    "widthM": 2.178252,
+    "sillM": 0,
+    "heightM": 2.180848
+   }
+  },
+  {
+   "id": "opening-0-west-3-0",
+   "where": "main storey 0 WEST",
+   "intervalM": [
+    7.191434,
+    10.468354
+   ],
+   "widthPlanM": 3.27692,
+   "observedAs": "WINDOW",
+   "heights": {
+    "sillY": 0.9,
+    "headY": 2.2
+   },
+   "callout": null,
+   "elevation": null,
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "modelId": "opening-0-west-3-0",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "WINDOW",
+    "wallId": "ring-main-0-w3",
+    "widthM": 3.27692,
+    "sillM": 0.9,
+    "heightM": 1.3
+   }
+  },
+  {
+   "id": "opening-1-east-5-0",
+   "where": "main storey 1 EAST",
+   "intervalM": [
+    6.973051,
+    9.022033
+   ],
+   "widthPlanM": 2.048982,
+   "observedAs": "WINDOW",
+   "heights": {
+    "sillY": 3.7,
+    "headY": 5
+   },
+   "callout": null,
+   "elevation": null,
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "modelId": "opening-1-east-5-0",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "WINDOW",
+    "wallId": "ring-main-1-w1",
+    "widthM": 2.048982,
+    "sillM": 0.9,
+    "heightM": 1.3
+   }
+  },
+  {
+   "id": "opening-1-west-7-0",
+   "where": "main storey 1 WEST",
+   "intervalM": [
+    8.782542,
+    10.352542
+   ],
+   "widthPlanM": 1.57,
+   "observedAs": "WINDOW",
+   "heights": {
+    "sillY": 3.7,
+    "headY": 5
+   },
+   "callout": null,
+   "elevation": null,
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "modelId": "opening-1-west-7-0",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "WINDOW",
+    "wallId": "ring-main-1-w3",
+    "widthM": 1.57,
+    "sillM": 0.9,
+    "heightM": 1.3
+   }
+  },
+  {
+   "id": "opening-1-west-7-1",
+   "where": "main storey 1 WEST",
+   "intervalM": [
+    5.642542,
+    7.212542
+   ],
+   "widthPlanM": 1.57,
+   "observedAs": "WINDOW",
+   "heights": {
+    "sillY": 3.7,
+    "headY": 5
+   },
+   "callout": null,
+   "elevation": null,
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "modelId": "opening-1-west-7-1",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "WINDOW",
+    "wallId": "ring-main-1-w3",
+    "widthM": 1.57,
+    "sillM": 0.9,
+    "heightM": 1.3
+   }
+  },
+  {
+   "id": "opening-0-front-8-0",
+   "where": "attached-0 storey 0 FRONT",
+   "intervalM": [
+    8.309628,
+    13.284648
+   ],
+   "widthPlanM": 4.97502,
+   "observedAs": "WINDOW",
+   "heights": {
+    "sillY": 0.9,
+    "headY": 2.2
+   },
+   "callout": null,
+   "elevation": null,
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "modelId": "opening-0-front-8-0",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "WINDOW",
+    "wallId": "ring-attached-0-0-w0",
+    "widthM": 4.97502,
+    "sillM": 0.9,
+    "heightM": 1.3
+   }
+  },
+  {
+   "id": "opening-0-rear-10-0",
+   "where": "attached-0 storey 0 REAR",
+   "intervalM": [
+    7.852464,
+    13.768704
+   ],
+   "widthPlanM": 5.91624,
+   "observedAs": "WINDOW",
+   "heights": {
+    "sillY": 0.9,
+    "headY": 2.2
+   },
+   "callout": null,
+   "elevation": null,
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": false,
+    "EMITTED": false,
+    "CUT_IN_GEOMETRY": false
+   },
+   "state": "OMITTED_WITH_REASON",
+   "omittedBecause": [
+    "no step or gap of the run names this interval"
+   ]
+  },
+  {
+   "id": "opening-0-west-11-0",
+   "where": "attached-0 storey 0 WEST",
+   "intervalM": [
+    1.953734,
+    2.840114
+   ],
+   "widthPlanM": 0.88638,
+   "observedAs": "WINDOW",
+   "heights": {
+    "sillY": 0,
+    "headY": 2.1
+   },
+   "callout": {
+    "widthCm": 90,
+    "heightCm": 210,
+    "evidenceId": "metric-callout-ring-af911ded2c"
+   },
+   "elevation": null,
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "modelId": "opening-0-west-11-0",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "WINDOW",
+    "wallId": "ring-attached-0-0-w3",
+    "widthM": 0.9,
+    "sillM": 0,
+    "heightM": 2.1
+   }
+  },
+  {
+   "id": "main-idoor-0-0",
+   "where": "interior storey 0",
+   "intervalM": [
+    4.774034,
+    5.552974
+   ],
+   "widthPlanM": 0.77894,
+   "observedAs": "INTERIOR_DOOR",
+   "why": "a 0.78 m break between two pieces of the same partition",
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "DOOR",
+    "wallId": "main-iwall-0-z-0",
+    "widthM": 0.77894,
+    "sillM": 0,
+    "heightM": 2.1
+   }
+  },
+  {
+   "id": "main-idoor-0-1",
+   "where": "interior storey 0",
+   "intervalM": [
+    6.654234,
+    7.916654
+   ],
+   "widthPlanM": 1.26242,
+   "observedAs": "INTERIOR_DOOR",
+   "why": "a 1.26 m break between two pieces of the same partition",
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "DOOR",
+    "wallId": "main-iwall-0-z-3",
+    "widthM": 1.26242,
+    "sillM": 0,
+    "heightM": 2.1
+   }
+  },
+  {
+   "id": "main-idoor-0-2",
+   "where": "interior storey 0",
+   "intervalM": [
+    7.325734,
+    8.212114
+   ],
+   "widthPlanM": 0.88638,
+   "observedAs": "INTERIOR_DOOR",
+   "why": "a 0.89 m break between two pieces of the same partition",
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "DOOR",
+    "wallId": "main-iwall-0-z-8",
+    "widthM": 0.88638,
+    "sillM": 0,
+    "heightM": 2.1
+   }
+  },
+  {
+   "id": "main-idoor-0-3",
+   "where": "interior storey 0",
+   "intervalM": [
+    8.964194,
+    9.850574
+   ],
+   "widthPlanM": 0.88638,
+   "observedAs": "INTERIOR_DOOR",
+   "why": "a 0.89 m break between two pieces of the same partition",
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "DOOR",
+    "wallId": "main-iwall-0-z-8",
+    "widthM": 0.88638,
+    "sillM": 0,
+    "heightM": 2.1
+   }
+  },
+  {
+   "id": "main-idoor-0-4",
+   "where": "interior storey 0",
+   "intervalM": [
+    4.679208,
+    5.324616
+   ],
+   "widthPlanM": 0.645408,
+   "observedAs": "INTERIOR_DOOR",
+   "why": "a 0.65 m break between two pieces of the same partition",
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "DOOR",
+    "wallId": "main-iwall-0-x-2",
+    "widthM": 0.645408,
+    "sillM": 0,
+    "heightM": 2.1
+   }
+  },
+  {
+   "id": "main-idoor-1-0",
+   "where": "interior storey 1",
+   "intervalM": [
+    8.037457,
+    8.862372
+   ],
+   "widthPlanM": 0.824915,
+   "observedAs": "INTERIOR_DOOR",
+   "why": "a 0.82 m break between two pieces of the same partition",
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "DOOR",
+    "wallId": "main-iwall-1-z-4",
+    "widthM": 0.824915,
+    "sillM": 0,
+    "heightM": 2.1
+   }
+  },
+  {
+   "id": "main-idoor-1-1",
+   "where": "interior storey 1",
+   "intervalM": [
+    3.616981,
+    4.47434
+   ],
+   "widthPlanM": 0.857359,
+   "observedAs": "INTERIOR_DOOR",
+   "why": "a 0.86 m break between two pieces of the same partition",
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "DOOR",
+    "wallId": "main-iwall-1-x-3",
+    "widthM": 0.857359,
+    "sillM": 0,
+    "heightM": 2.1
+   }
+  },
+  {
+   "id": "main-idoor-1-2",
+   "where": "interior storey 1",
+   "intervalM": [
+    6.081887,
+    6.939245
+   ],
+   "widthPlanM": 0.857358,
+   "observedAs": "INTERIOR_DOOR",
+   "why": "a 0.86 m break between two pieces of the same partition",
+   "states": {
+    "SOURCE_OBSERVED": true,
+    "SELECTED_FOR_MODEL": true,
+    "EMITTED": true,
+    "CUT_IN_GEOMETRY": true
+   },
+   "state": "CUT_IN_GEOMETRY",
+   "model": {
+    "emitted": true,
+    "cut": true,
+    "kind": "DOOR",
+    "wallId": "main-iwall-1-x-3",
+    "widthM": 0.857358,
+    "sillM": 0,
+    "heightM": 2.1
+   }
+  }
+ ]
+}

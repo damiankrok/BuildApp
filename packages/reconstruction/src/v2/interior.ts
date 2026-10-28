@@ -89,7 +89,8 @@ export type InteriorReading = {
   doors: InteriorDoorGap[]
   blocks: SolidBlock[]
   rooms: RoomPolygon[]
-  unresolved: Array<{ what: string; reason: string }>
+  /** `roomId`: the room a label was withheld from (N8-03A: settled again when the room is joined to another). */
+  unresolved: Array<{ what: string; reason: string; roomId?: string }>
 }
 
 export type InteriorOptions = {
@@ -184,7 +185,7 @@ export function readInterior(
   options: InteriorOptions = {},
 ): InteriorReading {
   const opt = { ...DEFAULTS, ...options }
-  const unresolved: Array<{ what: string; reason: string }> = []
+  const unresolved: InteriorReading['unresolved'] = []
   const mpp = (plan.mppX + plan.mppY) / 2
   const drawnM = options.drawnWallM ?? wallThicknessM
   const wallPx = drawnM / mpp
@@ -586,6 +587,62 @@ export function readInterior(
     }
   }
 
+  // N8-03A: a door at the end of a partition against the outer wall. A free end of a piece a door's width short of the
+  // body's inner face, nothing of the piece's line between, is the near jamb of a door in that line when the plan draws
+  // the door's swing in the gap and the outer wall's ink at its far jamb: the door is cut there, and the piece is a wall.
+  // Without a drawn swing the gap stays a passage, as before.
+  for (const w of walls) {
+    for (const atStart of [true, false]) {
+      if ((atStart ? w.ends.start : w.ends.end) === 'JUNCTION') continue
+      const lo = w.axis === 'Z' ? inner.z0 : inner.x0
+      const hi = w.axis === 'Z' ? inner.z1 : inner.x1
+      const gap: [number, number] = atStart ? [lo, w.from] : [w.to, hi]
+      const width = gap[1] - gap[0]
+      if (width < opt.doorMinM || width > opt.doorMaxM) continue
+      if (walls.some((x) => x !== w && x.axis === w.axis && Math.abs(x.at - w.at) <= drawnM * 0.5 && x.from < gap[1] - 0.05 && x.to > gap[0] + 0.05)) continue
+      if (doors.some((d) => d.wallAxis === w.axis && Math.abs(d.at - w.at) <= drawnM * 0.5 && d.from < gap[1] - 0.05 && d.to > gap[0] + 0.05)) continue
+      // the outer wall at the far jamb: wall ink over most of the band from half a drawn wall to a drawn wall past the face
+      const face = atStart ? lo : hi
+      const out = atStart ? -1 : 1
+      let n = 0
+      let inked = 0
+      for (let d = drawnM * 0.5; d <= drawnM + 1e-9; d += mpp) {
+        const along = face + out * d
+        const p = w.axis === 'Z' ? plan.toPixel(w.at, along) : plan.toPixel(along, w.at)
+        n += 1
+        if (wallInk(raster, Math.round(p.x), Math.round(p.y))) inked += 1
+      }
+      if (n === 0 || inked < 0.5 * n) continue
+      // a leaf hinges at a face: of the partition (either side) or of the outer wall where the plan draws it, which may
+      // stand a little past the face the body puts it at — the swing is looked for from each
+      let drawnJamb: number | undefined
+      for (let d = -drawnM * 0.5; d <= drawnM + 1e-9; d += mpp) {
+        const along = face + out * d
+        const p = w.axis === 'Z' ? plan.toPixel(w.at, along) : plan.toPixel(along, w.at)
+        if (wallInk(raster, Math.round(p.x), Math.round(p.y))) {
+          drawnJamb = along
+          break
+        }
+      }
+      const spans: Array<[number, number]> = [gap, ...(drawnJamb !== undefined ? [(atStart ? [drawnJamb, gap[1]] : [gap[0], drawnJamb]) as [number, number]] : [])]
+      const swing = spans.some((g) => [w.at, w.at - w.thicknessM / 2, w.at + w.thicknessM / 2].some((line) => swingDrawn(raster, plan, w.axis, line, g)))
+      if (!swing) continue
+      doors.push({
+        id: `idoor-${storeyIndex}-${doors.length}`,
+        storeyIndex,
+        wallAxis: w.axis,
+        at: w.at,
+        from: round6(gap[0]),
+        to: round6(gap[1]),
+        widthM: round6(width),
+        betweenIds: atStart ? [`${w.id}:face`, w.id] : [w.id, `${w.id}:face`],
+        confidence: round6(Math.min(w.confidence, 0.6) * 0.95),
+        why: `a ${width.toFixed(2)} m gap between the end of a partition and the outer wall's inner face, its swing drawn and the outer wall drawn at its far jamb: a door, the outer wall its far jamb`,
+      })
+      jambIds.add(w.id)
+    }
+  }
+
   // A free-standing piece with no junction at either end is a cupboard or a
   // worktop, not a wall — unless a door gap anchors it to a piece that is.
   const anchoredByDoor = new Set([...doors.flatMap((d) => d.betweenIds), ...jambIds])
@@ -703,7 +760,7 @@ export function readInterior(
       room.why += `; numbered ${t.text} = ${published.label} ${published.areaM2} m² published (${((room.areaM2 / published.areaM2 - 1) * 100).toFixed(0)} % off)`
       if (off > 0.4 && !room.openPlan) {
         const byArea = publishedRooms.filter((p) => p.number !== t.text && Math.abs(room.areaM2 - p.areaM2) / p.areaM2 < 0.12)
-        unresolved.push({ what: `the label of ${room.id} (read as ${t.text})`, reason: `its ${room.areaM2} m² is ${(off * 100).toFixed(0)} % off the published ${published.label} ${published.areaM2} m²${byArea.length > 0 ? `; by area it would be ${byArea.map((p) => `${p.number} ${p.label} ${p.areaM2}`).join(' or ')}` : ''}` })
+        unresolved.push({ roomId: room.id, what: `the label of ${room.id} (read as ${t.text})`, reason: `its ${room.areaM2} m² is ${(off * 100).toFixed(0)} % off the published ${published.label} ${published.areaM2} m²${byArea.length > 0 ? `; by area it would be ${byArea.map((p) => `${p.number} ${p.label} ${p.areaM2}`).join(' or ')}` : ''}` })
         // The digit is likelier misread than the plan mis-drawn: the label is withheld, the number kept as a reading.
         room.label = undefined
         room.publishedAreaM2 = undefined
@@ -804,6 +861,86 @@ export function swingDrawn(raster: Raster, plan: PlanFrameV2, axis: 'X' | 'Z', a
     }
   }
   return false
+}
+
+/**
+ * N8-03A: along a room's outline, the stretches of edge on one line (x = `at` for axis 'Z', z = `at` for axis 'X'),
+ * within `tol`: where the room meets a face.
+ */
+export function roomEdgeOn(room: Pick<RoomPolygon, 'polygon'>, axis: 'X' | 'Z', at: number, tol: number): Array<[number, number]> {
+  const out: Array<[number, number]> = []
+  const poly = room.polygon
+  for (let i = 0; i < poly.length; i += 1) {
+    const a = poly[i]
+    const b = poly[(i + 1) % poly.length]
+    if (axis === 'X' && Math.abs(a.z - at) <= tol && Math.abs(b.z - at) <= tol && a.x !== b.x) out.push([Math.min(a.x, b.x), Math.max(a.x, b.x)])
+    if (axis === 'Z' && Math.abs(a.x - at) <= tol && Math.abs(b.x - at) <= tol && a.z !== b.z) out.push([Math.min(a.z, b.z), Math.max(a.z, b.z)])
+  }
+  return out
+}
+
+/**
+ * N8-03A: rooms read on two bodies that are one room — the plan draws no wall where the bodies meet (`party-wall.ts`
+ * OPEN) — joined into one, with the strips between their readings (where each body's reading put the wall it does not
+ * have) as floor: its outline is traced on a grid of `cellM` over the parts and strips, its area counted on that grid.
+ * Its number is the one its parts carry; where they carry two, a number that rooms outside the join carry too (`taken`)
+ * is not this room's — a room's number is printed once on its storey — and with none or more than one left it gets
+ * none, and the clash is named. Its label is the published room of
+ * that number, withheld as `readInterior` withholds it when the joined area is more than 40 % off the published one —
+ * the area checks the number, it never chooses it.
+ */
+export function joinRooms(id: string, parts: readonly RoomPolygon[], strips: ReadonlyArray<{ x0: number; z0: number; x1: number; z1: number }>, publishedRooms: ReadonlyArray<{ number: string; label: string; areaM2: number }>, taken: ReadonlySet<string> = new Set(), cellM = DEFAULTS.cellM): { room: RoomPolygon; unresolved: Array<{ what: string; reason: string }> } {
+  const unresolved: Array<{ what: string; reason: string }> = []
+  const all = [...parts.map((p) => p.bounds), ...strips]
+  const x0 = Math.min(...all.map((b) => b.x0))
+  const z0 = Math.min(...all.map((b) => b.z0))
+  const gx = Math.max(1, Math.round((Math.max(...all.map((b) => b.x1)) - x0) / cellM))
+  const gz = Math.max(1, Math.round((Math.max(...all.map((b) => b.z1)) - z0) / cellM))
+  const cells: Array<[number, number]> = []
+  for (let j = 0; j < gz; j += 1) {
+    for (let i = 0; i < gx; i += 1) {
+      const c = { x: x0 + (i + 0.5) * cellM, z: z0 + (j + 0.5) * cellM }
+      if (parts.some((p) => pointInPolygon(c, p.polygon)) || strips.some((r) => c.x >= r.x0 && c.x <= r.x1 && c.z >= r.z0 && c.z <= r.z1)) cells.push([i, j])
+    }
+  }
+  const polygon = tracePolygon(cells, gx, gz, cellM, x0, z0)
+  const xs = polygon.map((p) => p.x)
+  const zs = polygon.map((p) => p.z)
+  const area = round6(cells.length * cellM * cellM)
+  const carried = [...new Set(parts.map((p) => p.number).filter((n): n is string => !!n))]
+  const own = carried.length > 1 ? carried.filter((n) => !taken.has(n)) : carried
+  const numbers = own.length === 1 ? own : carried
+  const room: RoomPolygon = {
+    id,
+    storeyIndex: parts[0].storeyIndex,
+    polygon,
+    areaM2: area,
+    bounds: { x0: round6(Math.min(...xs)), z0: round6(Math.min(...zs)), x1: round6(Math.max(...xs)), z1: round6(Math.max(...zs)) },
+    doorIds: [...new Set(parts.flatMap((p) => p.doorIds))],
+    openPlan: parts.some((p) => p.openPlan),
+    confidence: round6(Math.min(...parts.map((p) => p.confidence))),
+    why: `one room the plan draws across the meeting of two bodies with no wall between them: ${parts.map((p) => `${p.id} (${p.areaM2.toFixed(2)} m²)`).join(' and ')} with ${strips.length} strip${strips.length === 1 ? '' : 's'} between them, ${area.toFixed(2)} m²`,
+  }
+  if (numbers.length > 1) unresolved.push({ what: `the number of ${id}`, reason: `its parts carry the numbers ${numbers.join(' and ')}${own.length === 0 ? ', each carried by another room of the storey too' : ''}: not chosen` })
+  if (carried.length > 1 && own.length === 1) room.why += `; its parts carry the numbers ${carried.join(' and ')}, and ${carried.filter((n) => taken.has(n)).join(' and ')} is carried by another room of the storey too (a room's number is printed once)`
+  if (numbers.length === 1) {
+    const [number] = numbers
+    room.number = number
+    const published = publishedRooms.find((p) => p.number === number)
+    if (published) {
+      const off = Math.abs(area - published.areaM2) / published.areaM2
+      room.why += `; numbered ${number} = ${published.label} ${published.areaM2} m² published (${((area / published.areaM2 - 1) * 100).toFixed(0)} % off)`
+      if (off > 0.4 && !room.openPlan) {
+        unresolved.push({ what: `the label of ${id} (read as ${number})`, reason: `its ${area} m² is ${(off * 100).toFixed(0)} % off the published ${published.label} ${published.areaM2} m²` })
+        room.confidence = 0.5
+      } else {
+        room.label = published.label
+        room.publishedAreaM2 = published.areaM2
+        room.confidence = round6(Math.min(0.9, 0.6 + (off < 0.15 ? 0.25 : 0)))
+      }
+    }
+  }
+  return { room, unresolved }
 }
 
 function tracePolygon(cells: ReadonlyArray<[number, number]>, gx: number, gz: number, cell: number, x0: number, z0: number): Array<{ x: number; z: number }> {

@@ -112,8 +112,10 @@ describe('N8-02B: the band across a contact decides one wall or two', () => {
     expect(read([house, apart], plan([...ring({ x0: 0, z0: 0, x1: 8, z1: 10 }, T), ...ring({ x0: 9, z0: 1, x1: 13, z1: 9 }, T)]))).toEqual([])
   })
 
-  it('touching is not enough: no wall drawn along the contact leaves both walls, named UNDECIDED', () => {
-    const r = read([house, garage], plan([...ring({ x0: 0, z0: 0, x1: 8, z1: 10 }, T, { east: true }), ...ring({ x0: 8, z0: 1, x1: 12, z1: 9 }, T, { west: true })]))[0]
+  it('touching is not enough: too little wall drawn along the contact leaves both walls, named UNDECIDED', () => {
+    // a 1.2 m pier on the contact and nothing else: some wall, too little to say what stands there (N8-03A: with none
+    // at all the contact is open, `open-contact-n8-03a.test.ts`)
+    const r = read([house, garage], plan([...ring({ x0: 0, z0: 0, x1: 8, z1: 10 }, T, { east: true }), ...ring({ x0: 8, z0: 1, x1: 12, z1: 9 }, T, { west: true }), { x0: 7.6, z0: 4, x1: 8, z1: 5.2 }]))[0]
     expect(r.decision).toBe('UNDECIDED')
     expect(r.why).toMatch(/too little/)
   })

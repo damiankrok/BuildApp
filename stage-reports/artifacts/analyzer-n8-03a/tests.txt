@@ -1,0 +1,42 @@
+
+ RUN  v3.2.7 ~/BuildApp
+
+ ✓ packages/reconstruction/test/photo-roof-openings-005x-n1.test.ts (9 tests) 1552ms
+   ✓ 005X-N1 the roof form from one picture > reads a roof whose top comes down to both ends inside the wall as hipped, and builds it from its planes  312ms
+   ✓ 005X-N1 openings that one brightness threshold misses > reads a gable facing the camera over the front, and the round-headed window in it above the eaves  328ms
+ ✓ packages/reconstruction/test/elevation-opening-extent.test.ts (11 tests) 1797ms
+   ✓ 005W the opening read as an object against the wall > is indifferent to the wall colour: brick, dark render, white render  518ms
+ ✓ packages/reconstruction/test/generic-openings-005x.test.ts (8 tests) 2794ms
+   ✓ 005X tinted callout rings > finds a faint ring on a tinted strip and reads its bar  849ms
+   ✓ 005X tinted callout rings > 005X-N3: the bar gate sends only barred rings to OCR and reads them exactly as without it  1033ms
+   ✓ 005X one picture of a house > reads the wall, the openings in their order and a door to the floor  361ms
+   ✓ 005X one picture of a house > emits a closed model named as indicative, with the openings on its front wall  445ms
+ ✓ packages/reconstruction/test/interior-unwalled-side.test.ts (5 tests) 914ms
+ ✓ packages/reconstruction/test/stair-winders-005y-n5.test.ts (5 tests) 1290ms
+   ✓ 005Y-N5 (C4) winders in the corner square of a turning stair > two tread lines fanning from the newel make a winder of three risers  613ms
+   ✓ 005Y-N5 (C4) winders in the corner square of a turning stair > a stray diagonal that does not radiate from the newel, or lines that split the turn unevenly, decide nothing  456ms
+ ✓ packages/reconstruction/test/wide-openings.test.ts (15 tests) 991ms
+ ✓ packages/reconstruction/test/interior-wall-thick-partition.test.ts (6 tests) 1173ms
+ ✓ packages/reconstruction/test/garage-label-mouth.test.ts (13 tests) 1662ms
+   ✓ 005U-N4 a garage number from a set-aside reading > a number no published room on this storey carries is not taken (another storey, another edition)  308ms
+ ✓ packages/reconstruction/test/elevation-garage-005y-n5.test.ts (14 tests) 346ms
+ ✓ packages/reconstruction/test/open-contact-n8-03a.test.ts (16 tests) 597ms
+ ✓ packages/reconstruction/test/stair-fit-005y-n4.test.ts (10 tests) 142ms
+ ✓ packages/reconstruction/test/party-wall-n8-02b.test.ts (16 tests) 305ms
+ ✓ packages/reconstruction/test/door-leaf-005y-n2.test.ts (6 tests) 65ms
+ ✓ packages/reconstruction/test/door-leaf-occluded-005y-n4.test.ts (5 tests) 50ms
+ ✓ packages/analysis-service/test/partial-preview-n7-p1.test.ts (7 tests) 644ms
+   ✓ what does not change > a page with no plan still refuses: no outline, no house  590ms
+ ✓ packages/reconstruction/test/garage-door-005y-n5.test.ts (3 tests) 59ms
+ ✓ packages/reconstruction/test/openings.test.ts (14 tests) 50ms
+ ✓ packages/analysis-service/test/wall-thickness-n7-fix02.test.ts (3 tests) 96ms
+ ✓ packages/reconstruction/test/opening-reading.test.ts (17 tests) 30ms
+ ✓ packages/reconstruction/test/house-stair.test.ts (3 tests) 23ms
+ ✓ packages/reconstruction/test/vehicle-door-depth.test.ts (1 test) 16ms
+ ✓ packages/analysis-service/test/setback-n7-fix04.test.ts (8 tests) 144ms
+
+ Test Files  22 passed (22)
+      Tests  195 passed (195)
+   Start at  18:43:49
+   Duration  56.90s (transform 4.90s, setup 261ms, collect 28.80s, tests 14.74s, environment 5ms, prepare 2.02s)
+

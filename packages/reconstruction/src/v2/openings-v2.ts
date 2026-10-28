@@ -17,7 +17,7 @@ import { verticalOpeningExtent } from '@buildapp/image-metrology'
 import type { MetricEvidence } from '@buildapp/source-metrics'
 import { PLAN_CORROBORATED_WIDTH } from '@buildapp/source-metrics'
 import type { ElevationFrameV2, PlanFrameV2 } from './frame.js'
-import { bandPieces, gapsBetween, inkFraction, mergeRuns, wallBodyPieces } from './scan.js'
+import { bandPieces, gapsBetween, inkFraction, mergeRuns, rgbAt, wallBodyPieces } from './scan.js'
 import type { ProvenanceStatus } from './graph.js'
 import { CONVENTIONS } from '../solve.js'
 import { DOOR_MAX_WIDTH_M, REACHES_FLOOR_M, VEHICLE_DOOR_MIN_WIDTH_M, classifyOpeningFamily, elevationConfidence, matchOpeningCallout, preferredElevationExtent, resolveSillAndHead } from './opening-reading.js'
@@ -834,6 +834,11 @@ function doorSwingDrawn(raster: Raster, plan: PlanFrameV2, host: WallHost, inter
 
 /** 005Y-N5 (C5): a plan's overhead-door track is a line lighter than wall ink (`GLAZING_LINE_LUMA`) … */
 const TRACK_INK_LUMA = GLAZING_LINE_LUMA
+/**
+ * N8-03A: … and grey: a track is drawn in the plan's neutral line ink, so a pixel more coloured than this (the red of a
+ * dimension printed across the track's far end, and the pink of its antialiasing) is not the track's.
+ */
+const TRACK_MAX_CHROMA = 12
 /** … looked for this far either side of each jamb, along the wall (m) … */
 const TRACK_SEARCH_ALONG_M = 0.3
 /** … starting within this distance of the wall's inner face (m) … */
@@ -862,7 +867,13 @@ export function overheadDoorTracks(raster: Raster, plan: PlanFrameV2, host: Wall
   const mpp = (plan.mppX + plan.mppY) / 2
   const face = host.centreAt + (inward * wallThicknessM) / 2
   const at = (along: number, depth: number): { x: number; y: number } => (alongX ? plan.toPixel(along, face + inward * depth) : plan.toPixel(face + inward * depth, along))
-  const ink = (p: { x: number; y: number }): boolean => lumaOf(raster, Math.round(p.x), Math.round(p.y)) < TRACK_INK_LUMA
+  const ink = (p: { x: number; y: number }): boolean => {
+    const x = Math.round(p.x)
+    const y = Math.round(p.y)
+    if (lumaOf(raster, x, y) >= TRACK_INK_LUMA) return false
+    const [r, g, b] = rgbAt(raster, x, y)
+    return Math.max(r, g, b) - Math.min(r, g, b) <= TRACK_MAX_CHROMA
+  }
   const step = mpp
   const reach = TRACK_MIN_LENGTH_M * 2.5
   const track = (along: number): number | undefined => {

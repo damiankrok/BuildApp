@@ -27,7 +27,8 @@ for (const asset of pkg.assets) {
 const lines: string[] = []
 const debug = (s: string): void => { lines.push(s) }
 const identity = identityOf(pkg, [archonAdapter, genericProjectPageAdapter])
-const r = reconstructV2({ modelId: identity.modelId, label: identity.label, slug: identity.slug, sourcePackageId: pkg.id, sourcePackageHash: pkg.contentHash, graph: load('observation-graph') as never, metrics: load('metric-evidence') as never, raster: (frame: { variantByteHash: string }) => rasters.get(frame.variantByteHash), publishedAreas: pkg.publishedFacts, publishedRooms: pkg.publishedRooms, debug } as never)
+const traces: Array<Record<string, unknown>> = []
+const r = reconstructV2({ featureTrace: (t: Record<string, unknown>) => traces.push(t), modelId: identity.modelId, label: identity.label, slug: identity.slug, sourcePackageId: pkg.id, sourcePackageHash: pkg.contentHash, graph: load('observation-graph') as never, metrics: load('metric-evidence') as never, raster: (frame: { variantByteHash: string }) => rasters.get(frame.variantByteHash), publishedAreas: pkg.publishedFacts, publishedRooms: pkg.publishedRooms, debug } as never)
 const b = r.building as unknown as Record<string, unknown> & { masses: Array<Record<string, unknown>>; interior: Array<{ storeyIndex: number; walls: unknown[]; doors: unknown[] }>; openings: Array<Record<string, unknown>>; sharedDoors: Array<Record<string, unknown>> }
 console.log(JSON.stringify({
   wallThickness: (r as unknown as { wallThickness: unknown }).wallThickness,
@@ -36,7 +37,9 @@ console.log(JSON.stringify({
   partyRecords: (r as unknown as { partyWalls?: unknown }).partyWalls,
   sharedDoors: b.sharedDoors.map((o) => ({ id: o.id, massId: o.massId, otherMassId: o.otherMassId, facade: o.facade, storey: o.storeyIndex, interval: o.interval, why: o.why })),
   facadeOpeningsOnSharedFaces: b.openings.filter((o) => o.facade === 'EAST' || o.facade === 'WEST').map((o) => ({ id: o.id, massId: o.massId, facade: o.facade, storey: o.storeyIndex, interval: o.interval, family: o.family })),
-  interior: b.interior.map((i) => ({ storey: i.storeyIndex, walls: i.walls, doors: i.doors, blocks: (i as unknown as { blocks: unknown[] }).blocks })),
+  interior: b.interior.map((i) => ({ storey: i.storeyIndex, walls: i.walls, doors: i.doors, blocks: (i as unknown as { blocks: unknown[] }).blocks, rooms: (i as unknown as { rooms: Array<Record<string, unknown>> }).rooms.map((x) => ({ id: x.id, number: x.number, label: x.label, bounds: x.bounds, areaM2: x.areaM2 })) })),
+  openingTraces: traces.filter((t) => t.kind === 'OPENING_GAP'),
+  bodyRecovery: (r as unknown as { bodyRecovery: unknown }).bodyRecovery,
   steps: r.steps.filter((s) => /interior|emission|openings|N7-P2R|shared|party/i.test(`${s.stage} ${s.what}`)).map((s) => `${s.stage} | ${s.what} | ${s.detail}`),
   debug: lines.filter((l) => /interior|topology|raw|run |party|shared|mass /.test(l)),
   unresolved: r.unresolved.map((u) => `${u.what}: ${u.reason}`),
