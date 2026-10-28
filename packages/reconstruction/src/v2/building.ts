@@ -15,6 +15,7 @@ import type { ProvenanceStatus } from './graph.js'
 import type { AttachedGableLayout, AttachedRoofForm } from './attached-roof-form.js'
 import type { PlaneRoofLayout, RoofEnd } from './plane-roof.js'
 import type { PartyWallV2 } from './party-wall.js'
+import type { SlabVoid } from './slab-void.js'
 
 export type LevelV2 = { index: number; id: string; elevation: number; height: number; wallTop: number; featureId: string }
 
@@ -326,6 +327,8 @@ export type BuildingV2 = {
   /** Openings that pass through two coincident walls of two bodies. */
   sharedDoors: Array<OpeningV2 & { otherMassId: string }>
   interior: InteriorReading[]
+  /** N8-03D1: voids in the floors of upper storeys, as their plans fill them: holes in that storey's slab beside the stair's. */
+  slabVoids?: SlabVoid[]
   stair?: { hypothesis: StairTopologyHypothesis; emit: 'FLIGHTS' | 'PLACEHOLDER'; fromLevel: number; toLevel: number; slabHole: { x0: number; z0: number; x1: number; z1: number }; featureId: string; provenance: ProvenanceStatus }
   assemblies: FacadeAssemblyHypothesis[]
   surfaceRegions: SurfaceRegionV2[]

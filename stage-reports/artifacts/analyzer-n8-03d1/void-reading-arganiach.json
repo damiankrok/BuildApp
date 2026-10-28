@@ -1,0 +1,79 @@
+{
+ "voids": [
+  {
+   "storeyIndex": 1,
+   "polygon": [
+    {
+     "x": 5.304906,
+     "z": 11.816101
+    },
+    {
+     "x": 5.304906,
+     "z": 8.170508
+    },
+    {
+     "x": 7.367925,
+     "z": 8.170508
+    },
+    {
+     "x": 7.367925,
+     "z": 11.816101
+    }
+   ],
+   "areaM2": 7.520928,
+   "uncertaintyM": 0.026701,
+   "fill": {
+    "luma": 196.945155,
+    "floorLuma": 236,
+    "lumaStd": 0.187185,
+    "solidity": 0.928667,
+    "pixels": 9738
+   },
+   "why": "the storey 1 plan fills a 7.52 m² region (4 corners, x 5.30..7.37, z 8.17..11.82) with one flat tone (197, σ 0.2), 39 grey levels below its floor fill, solid but for the words printed in it (93 %): a void over the storey below, open to it; its edges a pixel (0.027 m) either side of the drawn ones; the words themselves are not read"
+  }
+ ],
+ "stairHole": {
+  "x0": 7.502868,
+  "z0": 7.951828,
+  "x1": 8.47098,
+  "z1": 9.286514
+ },
+ "traces": [
+  {
+   "kind": "SLAB_VOID",
+   "storeyIndex": 1,
+   "polygon": [
+    {
+     "x": 5.304906,
+     "z": 11.816101
+    },
+    {
+     "x": 5.304906,
+     "z": 8.170508
+    },
+    {
+     "x": 7.367925,
+     "z": 8.170508
+    },
+    {
+     "x": 7.367925,
+     "z": 11.816101
+    }
+   ],
+   "areaM2": 7.520928,
+   "uncertaintyM": 0.026701,
+   "fill": {
+    "luma": 196.945155,
+    "floorLuma": 236,
+    "lumaStd": 0.187185,
+    "solidity": 0.928667,
+    "pixels": 9738
+   },
+   "why": "the storey 1 plan fills a 7.52 m² region (4 corners, x 5.30..7.37, z 8.17..11.82) with one flat tone (197, σ 0.2), 39 grey levels below its floor fill, solid but for the words printed in it (93 %): a void over the storey below, open to it; its edges a pixel (0.027 m) either side of the drawn ones; the words themselves are not read"
+  }
+ ],
+ "steps": [
+  "N8-03D1: voids in the floor of storey 1: READ: the storey 1 plan fills a 7.52 m² region (4 corners, x 5.30..7.37, z 8.17..11.82) with one flat tone (197, σ 0.2), 39 grey levels below its floor fill, solid but for the words printed in it (93 %): a void over the storey below, open to it; its edges a pixel (0.027 m) either side of the drawn ones; the words themselves are not read"
+ ],
+ "unresolved": []
+}

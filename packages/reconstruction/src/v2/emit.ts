@@ -18,6 +18,9 @@ import type { BuildingV2, MassV2 } from './building.js'
 import type { ProvenanceStatus } from './graph.js'
 import type { DrawnLeaves, OpeningV2 } from './openings-v2.js'
 import { isValleyCut, mainRoofValleyCut, segmentCrossesNotch } from './valley-cut.js'
+
+/** N8-03D1: a slab void's edge this close to the slab's edge (m) is that edge: the fill stops at the wall's drawn line. */
+export const VOID_SNAP_M = 0.1
 import { CONVENTIONS } from '../solve.js'
 import { planWallTopology } from './wall-topology.js'
 import { partyFarFace, sideSegments } from './party-wall.js'
@@ -312,6 +315,8 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
 
   // --- masses: slab and ring per storey -------------------------------------
   const capWallIds: string[] = []
+  /** N8-03D1: the slab voids cut, and the slab each went into. */
+  const voidsEmitted: Array<{ v: NonNullable<BuildingV2['slabVoids']>[number]; slabId: string }> = []
   const attachedCapIds = new Map<string, string[]>()
   const emittedInteriorByStorey = new Map<number, string[]>()
   for (const m of b.masses) {
@@ -357,9 +362,23 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       const edge = { x0: sharedFace('WEST') ?? round6(m.x0 + inset), z0: sharedFace('FRONT') ?? round6(m.z0 + inset), x1: sharedFace('EAST') ?? round6(m.x1 - inset), z1: sharedFace('REAR') ?? round6(m.z1 - inset) }
       const slabPolygon = inset > 0 ? [{ x: edge.x0, z: edge.z0 }, { x: edge.x1, z: edge.z0 }, { x: edge.x1, z: edge.z1 }, { x: edge.x0, z: edge.z1 }] : polygon
       // A stair void that reaches a wall ends at the wall's inner face: the slab is not there to be cut.
-      const clippedHoles = holes?.map((h) => h.map((p) => ({ x: round6(Math.min(Math.max(p.x, m.x0 + inset), m.x1 - inset)), z: round6(Math.min(Math.max(p.z, m.z0 + inset), m.z1 - inset)) })))
+      const stairHoles = holes?.map((h) => h.map((p) => ({ x: round6(Math.min(Math.max(p.x, m.x0 + inset), m.x1 - inset)), z: round6(Math.min(Math.max(p.z, m.z0 + inset), m.z1 - inset)) })))
+      // N8-03D1: a void the storey's plan fills, a hole beside the stair's; an edge within VOID_SNAP_M of the slab's
+      // edge is that edge (the drawn line between the fill and the wall is the wall's face)
+      const voidHoles = (b.slabVoids ?? [])
+        .filter((v) => v.storeyIndex === storey && !m.pieceOf && v.polygon.every((p) => p.x >= edge.x0 - VOID_SNAP_M && p.x <= edge.x1 + VOID_SNAP_M && p.z >= edge.z0 - VOID_SNAP_M && p.z <= edge.z1 + VOID_SNAP_M))
+        .map((v) => {
+          const snap = (value: number, lo: number, hi: number): number => round6(Math.abs(value - lo) <= VOID_SNAP_M ? lo : Math.abs(value - hi) <= VOID_SNAP_M ? hi : Math.min(Math.max(value, lo), hi))
+          voidsEmitted.push({ v, slabId: `slab-${m.id}-${storey}` })
+          return v.polygon.map((p) => ({ x: snap(p.x, edge.x0, edge.x1), z: snap(p.z, edge.z0, edge.z1) }))
+        })
+      const clippedHoles = stairHoles || voidHoles.length > 0 ? [...(stairHoles ?? []), ...voidHoles] : undefined
       // a piece stands on the floor of the body it is a piece of: no slab of its own (council B5L-5)
       if (!m.pieceOf) push({ type: 'createSlab', id: `slab-${m.id}-${storey}`, levelId: l.id, polygon: slabPolygon, ...(clippedHoles ? { holes: clippedHoles } : {}), topOffset: 0, thickness: b.slabThicknessM, materialId: MATERIALS_V2.slab }, m.featureId, 'slabs')
+      const voidsHere = voidsEmitted.filter((x) => x.slabId === `slab-${m.id}-${storey}`)
+      // the hole is traced from the plan's fill (its outline SOURCE_DERIVED); that the fill means a void is read from its
+      // tone and solidity, not from the words printed in it (VISUAL_SEMANTIC)
+      if (!m.pieceOf && voidsHere.length > 0) evidence(`slab-${m.id}-${storey}`, 'SOURCE_DERIVED', `the floor of storey ${storey}${stairHoles ? ', with the stair hole' : ''}; ${voidsHere.map((x) => x.v.why).join('; ')}; an edge within ${VOID_SNAP_M} m of the slab's edge is taken to it`, { holes: 'SOURCE_DERIVED', 'holes.meaning': 'VISUAL_SEMANTIC' })
       // A single-storey attached body under a flat roof: its walls rise to the parapet where the section draws one.
       // Under its own pitched roof a body's walls die into the roof's planes: the gable ends rise to the ridge.
       const height = planeRoof ? round6(planeRoof.ridgeY - l.elevation + 0.5) : pitched ? round6(pitched.ridgeY - l.elevation + 0.5) : attached && isTop ? round6((attached.parapetTopY ?? attached.slabTopY) - l.elevation) : round6(l.height)

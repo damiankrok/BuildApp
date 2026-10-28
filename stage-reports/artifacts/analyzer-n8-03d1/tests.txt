@@ -1,0 +1,22 @@
+ ✓ packages/reconstruction/test/glazing-leaves-n8-03b.test.ts (16 tests) 1275ms
+   ✓ leaves drawn shorter than the gap > glazing alone, however wide, holds no leaf  713ms
+ ✓ packages/reconstruction/test/attic-registration-n8-02a.test.ts (8 tests) 1147ms
+   ✓ N8-02A: registering an upper storey on the plan below > an upper sheet drawn at another image scale stands on the body it matches, at its own size  511ms
+ ✓ packages/reconstruction/test/stair-winders-005y-n5.test.ts (5 tests) 1352ms
+   ✓ 005Y-N5 (C4) winders in the corner square of a turning stair > two tread lines fanning from the newel make a winder of three risers  611ms
+   ✓ 005Y-N5 (C4) winders in the corner square of a turning stair > a stray diagonal that does not radiate from the newel, or lines that split the turn unevenly, decide nothing  484ms
+ ✓ packages/reconstruction/test/interior-unwalled-side.test.ts (5 tests) 1017ms
+   ✓ 005V-N2 interior: a body registered beyond its drawn walls > negative: past the drawn east wall, that wall (inside the interior now) is no partition, and the east side is named  325ms
+ ✓ packages/reconstruction/test/open-contact-n8-03a.test.ts (16 tests) 566ms
+ ✓ packages/reconstruction/test/interior-wall-thick-partition.test.ts (6 tests) 1222ms
+ ✓ packages/reconstruction/test/slab-void-n8-03d1.test.ts (7 tests) 706ms
+   ✓ N8-03D1: a void in the floor, read from the plan’s fill > refuses, naming why: small, narrow, hatched, overlapping the stair, nothing below  307ms
+ ✓ packages/reconstruction/test/stair-fit-005y-n4.test.ts (10 tests) 249ms
+ ✓ packages/reconstruction/test/attic-gable-registration.test.ts (14 tests) 129ms
+ ✓ packages/reconstruction/test/party-wall-n8-02b.test.ts (16 tests) 380ms
+ ✓ packages/reconstruction/test/house-stair.test.ts (3 tests) 9ms
+ ✓ packages/reconstruction/test/valley-cut-n8-03c.test.ts (14 tests) 63ms
+ ✓ packages/reconstruction/test/roof-apex-eaves.test.ts (10 tests) 88ms
+ Test Files  13 passed (13)
+      Tests  130 passed (130)
+packages/reconstruction (all 97 files): 1181 passed; tsc --noEmit clean

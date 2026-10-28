@@ -1,0 +1,335 @@
+{
+ "method": "offline replay of the sealed ARCHON 1311 inputs with the N8-03B metric evidence (reader 1.5.0) through packages/analysis-service/scripts/second-house.ts; before = the N8-03C models (solver 2.15.0), after = this checkout (solver 2.16.0)",
+ "houses": [
+  {
+   "house": "a01",
+   "before": "ed4fe10766c556638b0bdad046796afa19ad1bf1a5af31eb8e1928c0346ac97b",
+   "after": "ed4fe10766c556638b0bdad046796afa19ad1bf1a5af31eb8e1928c0346ac97b",
+   "identical": true,
+   "changedCollections": [],
+   "after_validation": {
+    "ok": true,
+    "errors": [],
+    "warnings": 0,
+    "overlaps": 0
+   },
+   "after_compile_diagnostics": [],
+   "after_openings": {
+    "total": 21,
+    "cut": 21
+   },
+   "after_slabs": [
+    {
+     "slab": "slab-main-0",
+     "solidM2": 87.15,
+     "openM2": 0,
+     "holes": 0,
+     "raysInHolesHitting": 0,
+     "raysBesideHolesMissing": 0
+    },
+    {
+     "slab": "slab-main-1",
+     "solidM2": 69.94,
+     "openM2": 1.1,
+     "holes": 1,
+     "raysInHolesHitting": 0,
+     "raysBesideHolesMissing": 0
+    }
+   ],
+   "voidsRead": 0,
+   "voidsRefused": 0
+  },
+  {
+   "house": "gozd",
+   "before": "f3a0ee783d3ae6a24a85dd8a76f826d6e6b69d49681370014678ed909e215154",
+   "after": "f3a0ee783d3ae6a24a85dd8a76f826d6e6b69d49681370014678ed909e215154",
+   "identical": true,
+   "changedCollections": [],
+   "after_validation": {
+    "ok": true,
+    "errors": [],
+    "warnings": 0,
+    "overlaps": 0
+   },
+   "after_compile_diagnostics": [],
+   "after_openings": {
+    "total": 28,
+    "cut": 28
+   },
+   "after_slabs": [
+    {
+     "slab": "slab-main-0",
+     "solidM2": 131.1,
+     "openM2": 0,
+     "holes": 0,
+     "raysInHolesHitting": 0,
+     "raysBesideHolesMissing": 0
+    },
+    {
+     "slab": "slab-main-1",
+     "solidM2": 108.418,
+     "openM2": 3.6,
+     "holes": 1,
+     "raysInHolesHitting": 0,
+     "raysBesideHolesMissing": 0
+    }
+   ],
+   "voidsRead": 0,
+   "voidsRefused": 0
+  },
+  {
+   "house": "marcowki",
+   "before": "bcb151061f8eae396d349bf55de18bfa615b9523eab206a48f8b2ff9a799f7c2",
+   "after": "bcb151061f8eae396d349bf55de18bfa615b9523eab206a48f8b2ff9a799f7c2",
+   "identical": true,
+   "changedCollections": [],
+   "after_validation": {
+    "ok": true,
+    "errors": [],
+    "warnings": 0,
+    "overlaps": 0
+   },
+   "after_compile_diagnostics": [],
+   "after_openings": {
+    "total": 21,
+    "cut": 21
+   },
+   "after_slabs": [
+    {
+     "slab": "slab-attached-0-0",
+     "solidM2": 31.125,
+     "openM2": 0,
+     "holes": 0,
+     "raysInHolesHitting": 0,
+     "raysBesideHolesMissing": 0
+    },
+    {
+     "slab": "slab-main-0",
+     "solidM2": 99.54,
+     "openM2": 0,
+     "holes": 0,
+     "raysInHolesHitting": 0,
+     "raysBesideHolesMissing": 0
+    },
+    {
+     "slab": "slab-main-1",
+     "solidM2": 74.61,
+     "openM2": 5.775,
+     "holes": 1,
+     "raysInHolesHitting": 0,
+     "raysBesideHolesMissing": 0
+    }
+   ],
+   "voidsRead": 0,
+   "voidsRefused": 0
+  },
+  {
+   "house": "ciesz",
+   "before": "5394c17c4ff1c4e515c70067f77cc4aab68005658855930cd96c8e6f1323568f",
+   "after": "5394c17c4ff1c4e515c70067f77cc4aab68005658855930cd96c8e6f1323568f",
+   "identical": true,
+   "changedCollections": [],
+   "after_validation": {
+    "ok": true,
+    "errors": [],
+    "warnings": 0,
+    "overlaps": 0
+   },
+   "after_compile_diagnostics": [],
+   "after_openings": {
+    "total": 20,
+    "cut": 20
+   },
+   "after_slabs": [
+    {
+     "slab": "slab-main-0",
+     "solidM2": 194.22,
+     "openM2": 0,
+     "holes": 0,
+     "raysInHolesHitting": 0,
+     "raysBesideHolesMissing": 0
+    }
+   ],
+   "voidsRead": 0,
+   "voidsRefused": 0
+  },
+  {
+   "house": "rary",
+   "before": "6d18d10ca9c4e2aa9e079b6579a0b3f1b71fb363bddd952ffca8837f8f401a0c",
+   "after": "6d18d10ca9c4e2aa9e079b6579a0b3f1b71fb363bddd952ffca8837f8f401a0c",
+   "identical": true,
+   "changedCollections": [],
+   "after_validation": {
+    "ok": true,
+    "errors": [],
+    "warnings": 0,
+    "overlaps": 0
+   },
+   "after_compile_diagnostics": [],
+   "after_openings": {
+    "total": 20,
+    "cut": 20
+   },
+   "after_slabs": [
+    {
+     "slab": "slab-attached-0-0",
+     "solidM2": 42.47,
+     "openM2": 0,
+     "holes": 0,
+     "raysInHolesHitting": 0,
+     "raysBesideHolesMissing": 0
+    },
+    {
+     "slab": "slab-main-0",
+     "solidM2": 146.2,
+     "openM2": 0,
+     "holes": 0,
+     "raysInHolesHitting": 0,
+     "raysBesideHolesMissing": 0
+    }
+   ],
+   "voidsRead": 0,
+   "voidsRefused": 0
+  },
+  {
+   "house": "trytomach",
+   "before": "ce64cc099c83410d0e6393cb80639f2840059f9249b430d29deb057378c4856c",
+   "after": "ce64cc099c83410d0e6393cb80639f2840059f9249b430d29deb057378c4856c",
+   "identical": true,
+   "changedCollections": [],
+   "after_validation": {
+    "ok": true,
+    "errors": [],
+    "warnings": 0,
+    "overlaps": 0
+   },
+   "after_compile_diagnostics": [],
+   "after_openings": {
+    "total": 20,
+    "cut": 20
+   },
+   "after_slabs": [
+    {
+     "slab": "slab-main-0",
+     "solidM2": 94.25,
+     "openM2": 0,
+     "holes": 0,
+     "raysInHolesHitting": 0,
+     "raysBesideHolesMissing": 0
+    },
+    {
+     "slab": "slab-main-1",
+     "solidM2": 75.773,
+     "openM2": 1.063,
+     "holes": 1,
+     "raysInHolesHitting": 0,
+     "raysBesideHolesMissing": 0
+    }
+   ],
+   "voidsRead": 0,
+   "voidsRefused": 0
+  },
+  {
+   "house": "arganiach",
+   "before": "0770f85430f158caf29812fb35ae97d791f1a914b549bc2f393c604521b3ab9b",
+   "after": "abe675d71bd3c9f133a95e69316a80e88e59bd66b08ce1aaba3c12506d31bc05",
+   "identical": false,
+   "changedCollections": [
+    "slabs"
+   ],
+   "after_validation": {
+    "ok": true,
+    "errors": [],
+    "warnings": 0,
+    "overlaps": 0
+   },
+   "after_compile_diagnostics": [],
+   "after_openings": {
+    "total": 23,
+    "cut": 23
+   },
+   "after_slabs": [
+    {
+     "slab": "slab-attached-0-0",
+     "solidM2": 25.16,
+     "openM2": 0,
+     "holes": 0,
+     "raysInHolesHitting": 0,
+     "raysBesideHolesMissing": 0
+    },
+    {
+     "slab": "slab-main-0",
+     "solidM2": 122.12,
+     "openM2": 0,
+     "holes": 0,
+     "raysInHolesHitting": 0,
+     "raysBesideHolesMissing": 0
+    },
+    {
+     "slab": "slab-main-1",
+     "solidM2": 93.543,
+     "openM2": 8.868,
+     "holes": 2,
+     "raysInHolesHitting": 0,
+     "raysBesideHolesMissing": 0
+    }
+   ],
+   "voidsRead": 1,
+   "voidsRefused": 0
+  },
+  {
+   "house": "sasankach3",
+   "before": "8b94d057f8a989963e872b063b4e390f9fb14524eb75b4175ff8edecb29e29c9",
+   "after": "8b94d057f8a989963e872b063b4e390f9fb14524eb75b4175ff8edecb29e29c9",
+   "identical": true,
+   "changedCollections": [],
+   "after_validation": {
+    "ok": true,
+    "errors": [],
+    "warnings": 0,
+    "overlaps": 0
+   },
+   "after_compile_diagnostics": [],
+   "after_openings": {
+    "total": 23,
+    "cut": 23
+   },
+   "after_slabs": [
+    {
+     "slab": "slab-attached-0-0",
+     "solidM2": 34.458,
+     "openM2": 0,
+     "holes": 0,
+     "raysInHolesHitting": 0,
+     "raysBesideHolesMissing": 0
+    },
+    {
+     "slab": "slab-attached-0-1",
+     "solidM2": 29.16,
+     "openM2": 0,
+     "holes": 0,
+     "raysInHolesHitting": 0,
+     "raysBesideHolesMissing": 0
+    },
+    {
+     "slab": "slab-main-0",
+     "solidM2": 80.988,
+     "openM2": 0,
+     "holes": 0,
+     "raysInHolesHitting": 0,
+     "raysBesideHolesMissing": 0
+    },
+    {
+     "slab": "slab-main-1",
+     "solidM2": 65.25,
+     "openM2": 0.99,
+     "holes": 1,
+     "raysInHolesHitting": 0,
+     "raysBesideHolesMissing": 0
+    }
+   ],
+   "voidsRead": 0,
+   "voidsRefused": 0
+  }
+ ]
+}

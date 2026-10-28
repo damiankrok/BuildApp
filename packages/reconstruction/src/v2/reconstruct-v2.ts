@@ -63,6 +63,8 @@ import { decideSideOrientation, decideSidesByOpenings, gableApexRow, gableOutlin
 import type { PerspectiveCameraV2 } from './camera.js'
 import { emitBuilding, pitchedPlaneIds } from './emit.js'
 import { builtRoofUndersideAt, isValleyCut, mainRoofValleyCut, valleyCutWings } from './valley-cut.js'
+import { readSlabVoids } from './slab-void.js'
+import type { SlabVoid } from './slab-void.js'
 import { fitStairToBoundingWalls, followStairSoffits } from './stair-fit.js'
 import { ReconstructionFailure, planCounts } from '../failure.js'
 import type { PlanDiagnosticsReport } from '../failure.js'
@@ -158,7 +160,10 @@ import type { ApproximateRidge } from './roof-datum.js'
 // cut back to the wing's valleys (two creases VALLEY between the main plane and the wing's planes; where the valleys
 // meet on the main ridge the slope is two planes); the walls it caps die into those planes, a wall under the cut into
 // the wing's; a doorway in a shared wall the main slope was too low for is decided against the roof as built.
-export const SOLVER_V2_VERSION = '2.15.0' as const
+// 2.16.0 (N8-03D1): a storey's plan may draw a void in its floor (a uniform mid-grey fill, solid, not hatched, distinct
+// from the floor tone): it is read as its traced outline and cut from that storey's slab beside the stair hole; a patch
+// that is small, narrow, striped, light, overlapping the stair hole or with nothing below it is refused and named
+export const SOLVER_V2_VERSION = '2.16.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
@@ -1411,6 +1416,19 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     }
     step({ stage: 'interior', what: `N8-03A: rooms joined across the open contacts of storey ${index}`, method: 'DISCRETE_SELECTION', detail: pairs.join('; '), inputs: pairs.length, outputs: [...groups.values()].filter((g) => g.length > 1).length })
   }
+  // N8-03D1: a void in the floor of an upper storey, as its plan fills it (`slab-void.ts`)
+  const slabVoids: SlabVoid[] = []
+  for (const [index, entry] of planByStorey) {
+    if (index <= 0) continue
+    const onStorey = masses.filter((x) => x.storeys.includes(index))
+    const below = masses.filter((x) => x.storeys.includes(index - 1)).map((x) => rectAt(x, index - 1))
+    const hole = stair && stair.toLevel === index ? { stairHole: stair.slabHole } : {}
+    const read = readSlabVoids(entry.raster, entry.frame, index, onStorey.map((x) => interiorRect(x, index)), { ...hole, below })
+    for (const v of read.voids) options.featureTrace?.({ kind: 'SLAB_VOID', ...v })
+    for (const v of read.refused) options.featureTrace?.({ kind: 'SLAB_VOID_REFUSED', ...v })
+    slabVoids.push(...read.voids)
+    if (read.voids.length > 0 || read.refused.length > 0) step({ stage: 'interior', what: `N8-03D1: voids in the floor of storey ${index}`, method: 'DISCRETE_SELECTION', detail: [...read.voids.map((v) => `READ: ${v.why}`), ...read.refused.map((v) => `refused: ${v.why}`)].join('; '), inputs: read.voids.length + read.refused.length, outputs: read.voids.length })
+  }
   for (const [index, entry] of planByStorey) {
     // Room labels are read from the page vote's tokens: the other passes' readings are raw evidence for the metric solver (005B).
     // 005U-N4: the readings the orientation vote discarded come along as set-aside candidates (`LabelToken.setAside`).
@@ -2492,7 +2510,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   if (facadeAlignment.corrections.length > 0) openings.splice(0, openings.length, ...applyOpeningCorrections(openings, facadeAlignment.corrections))
   step({ stage: 'verification', what: 'N7-P2: the openings each elevation draws against the plan’s', method: 'DIRECT', detail: `${facadeViews.length} view${facadeViews.length === 1 ? '' : 's'} read (${facadeViews.map((v) => `${v.facade.toLowerCase()} ${v.registration.toLowerCase().replace(/_/g, ' ')}${v.heights ? '' : ', positions only'}`).join('; ') || 'none'}); ${facadeAlignment.readings.length} openings read, ${facadeAlignment.rejected.length} rectangles rejected; ${Object.entries(facadeAlignment.counts).filter(([, n]) => n > 0).map(([k, n]) => `${k.toLowerCase()} ${n}`).join(', ')}; ${facadeAlignment.corrections.length} height${facadeAlignment.corrections.length === 1 ? '' : 's'} corrected`, inputs: openings.length, outputs: facadeAlignment.corrections.length })
   for (const c of facadeAlignment.corrections) ctx.traces.push({ objectId: c.openingId, kind: 'repair', hypothesisId: `hyp-${c.openingId}`, evidenceIds: [], observationIds: facadeAlignment.readings.find((r) => r.id === c.readingId)?.observationIds ?? [], rejected: [], why: c.why })
-  const building: BuildingV2 = { label: options.label, wallThicknessM: T, slabThicknessM: slabT, levels: levelsV2, masses, mainRoof: builtMainRoof, ...(planeRoofs ? { planeRoofs } : {}), attachedRoofs, pitchedAttachedRoofs, recesses, ...(pockets.length > 0 ? { pockets } : {}), ...(pergolas.length > 0 ? { pergolas } : {}), returns, balconies, railings, portalHeads, verges, terraces, massTones, returnTones, facadeGraph, chimneys, rooflights, openings, sharedDoors, interior, stair, assemblies, surfaceRegions, terrainY: terrain, ...(bandWalls.length > 0 ? { bandWalls } : {}), ...(partyWalls.length > 0 ? { partyWalls } : {}) }
+  const building: BuildingV2 = { label: options.label, wallThicknessM: T, slabThicknessM: slabT, levels: levelsV2, masses, mainRoof: builtMainRoof, ...(planeRoofs ? { planeRoofs } : {}), attachedRoofs, pitchedAttachedRoofs, recesses, ...(pockets.length > 0 ? { pockets } : {}), ...(pergolas.length > 0 ? { pergolas } : {}), returns, balconies, railings, portalHeads, verges, terraces, massTones, returnTones, facadeGraph, chimneys, rooflights, openings, sharedDoors, interior, stair, assemblies, surfaceRegions, terrainY: terrain, ...(slabVoids.length > 0 ? { slabVoids } : {}), ...(bandWalls.length > 0 ? { bandWalls } : {}), ...(partyWalls.length > 0 ? { partyWalls } : {}) }
   const residualsBefore = verifyAgainstViews({ building, views })
   const repair = repairFromResiduals(building, residualsBefore, 2)
   const residuals = verifyAgainstViews({ building, views })

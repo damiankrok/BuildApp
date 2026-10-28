@@ -1,0 +1,54 @@
+[
+ {
+  "slab": "slab-attached-0-0",
+  "level": "lvl-0",
+  "top": 0,
+  "solidM2": 25.16,
+  "openM2": 0,
+  "holes": []
+ },
+ {
+  "slab": "slab-main-0",
+  "level": "lvl-0",
+  "top": 0,
+  "solidM2": 122.12,
+  "openM2": 0,
+  "holes": []
+ },
+ {
+  "slab": "slab-main-1",
+  "level": "lvl-1",
+  "top": 2.8,
+  "solidM2": 101.128,
+  "openM2": 1.283,
+  "holes": [
+   {
+    "hole": [
+     [
+      7.503,
+      7.952
+     ],
+     [
+      8.471,
+      7.952
+     ],
+     [
+      8.471,
+      9.287
+     ],
+     [
+      7.503,
+      9.287
+     ]
+    ],
+    "inRays": 408,
+    "inHits": 0,
+    "ringRays": 617,
+    "ringMiss": 0,
+    "othersOverHole": {
+     "ROOM_FLOOR:main-room-1-2": 1.02
+    }
+   }
+  ]
+ }
+]

@@ -2888,3 +2888,16 @@ wing roof (3.8–5.1 m at the door), door cut, 23/23 openings. Rarytasy (same ca
 party wall's top under the garage roof. Six houses byte-identical; all 8 validate, 0 WALLS_OVERLAP, 0 diagnostics.
 Open: main-roof rooflights cut plumb (planes take vertical cuts), the cut refused under an eaves overhang, the attic
 door's 2.10 m height a convention.
+
+## Arganiach: pustka nad salonem (STAGE BUILDPLAN N8-03D1)
+
+Status: **DONE — solver 2.16.0, bez APK.** Report `stage-reports/STAGE_BUILDPLAN_N8_03D1_ARGANIACH_VOID_SLAB.md`,
+numbers `stage-reports/artifacts/analyzer-n8-03d1/`. FIRST_BAD: no solver stage read a void in a floor — the attic
+plan's uniform grey "void over the living room" block (77 × 137 px, 2.06 × 3.66 m) was folded into the hall by the
+interior reading and the slab carried the stair hole only. Fixed generally (`v2/slab-void.ts`): on every upper storey a
+region its plan fills with one flat achromatic tone well below its floor fill, solid but for printed words, ≥ 1.5 m² and
+≥ 0.9 m wide, over a storey below and clear of the stair hole, is read as its traced outline (rectilinear, staircase
+dropped) through the storey frame and cut from that storey's slab beside the stair hole, an edge within 0.1 m of the
+slab edge taken to it; refusals are named. Arganiach: 2.063 × 3.694 m void, vertical rays 0/2808 hit inside, 0/965 miss
+beside; the stair hole unchanged. Seven houses byte-identical; all 8 validate, 0 WALLS_OVERLAP, 0 diagnostics. Open:
+the hall room still spans the void (room division is the next stage), no railing round the void.
