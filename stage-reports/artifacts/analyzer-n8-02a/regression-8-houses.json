@@ -1,0 +1,53 @@
+{
+  "method": "offline replay of the sealed FIX-04 / ARCHON 1311 inputs through packages/analysis-service/scripts/second-house.ts; before = N8-01 (solver 2.10.0) replay, after = N8-02A working tree (solver 2.11.0)",
+  "houses": [
+    {
+      "house": "a01",
+      "before": "d095c0da90b69a499ea2f0d9db1f47af068829abec0d2f397488edc25ad88002",
+      "after": "d095c0da90b69a499ea2f0d9db1f47af068829abec0d2f397488edc25ad88002",
+      "identical": true
+    },
+    {
+      "house": "gozd",
+      "before": "1a96c20f088efaad9168537b1dc975c0e0ae066145821f0290c906273f61965e",
+      "after": "1a96c20f088efaad9168537b1dc975c0e0ae066145821f0290c906273f61965e",
+      "identical": true
+    },
+    {
+      "house": "marcowki",
+      "before": "8541ca10d0534107cfacc56163c9b3af513e5a99ddd3e8594495ee30b0977dcb",
+      "after": "8541ca10d0534107cfacc56163c9b3af513e5a99ddd3e8594495ee30b0977dcb",
+      "identical": true
+    },
+    {
+      "house": "ciesz",
+      "before": "5394c17c4ff1c4e515c70067f77cc4aab68005658855930cd96c8e6f1323568f",
+      "after": "5394c17c4ff1c4e515c70067f77cc4aab68005658855930cd96c8e6f1323568f",
+      "identical": true
+    },
+    {
+      "house": "rary",
+      "before": "07b792a5e320ad6c14bab5cd95216c8c4c50abfb70822bf39cedbac6addbbf2a",
+      "after": "07b792a5e320ad6c14bab5cd95216c8c4c50abfb70822bf39cedbac6addbbf2a",
+      "identical": true
+    },
+    {
+      "house": "trytomach",
+      "before": "d2bf0c031d4733d38b8f097d55828a5d167187f656998e5086d83478bcb9cc15",
+      "after": "ce64cc099c83410d0e6393cb80639f2840059f9249b430d29deb057378c4856c",
+      "identical": false
+    },
+    {
+      "house": "arganiach",
+      "before": "34a95a766d169f39210b6337f031265ee3a6846ac3df0fa67086c0c91465e0eb",
+      "after": "cf9b660ca4f3a2caf82478513dbb122cda6cf08bb80198ff64ca6cfce1759c02",
+      "identical": false
+    },
+    {
+      "house": "sasankach3",
+      "before": "c007ce8bab1689c745cb904dbbd64b07e7c8f7d79edfbdf64bf98005a8b5acc2",
+      "after": "c007ce8bab1689c745cb904dbbd64b07e7c8f7d79edfbdf64bf98005a8b5acc2",
+      "identical": true
+    }
+  ]
+}

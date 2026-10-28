@@ -1,0 +1,572 @@
+{
+  "project": {
+    "name": "Dom w arganiach (G2E)",
+    "archonProjectId": "m32b290f26a4e8",
+    "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-arganiach-g2e-m32b290f26a4e8"
+  },
+  "note": "metricPlanRegistrations = per-sheet scale read from dimension chains (anchors: axis, value / pixel span, residual, weight); storeys = the layout registration of each storey plan onto the base plan; v2Frames = the metres-per-pixel the v2 solver used per storey; steps = its registration steps.",
+  "before": {
+    "metricPlanRegistrations": [
+      {
+        "frameId": "frame-asset-gotowy-projekt-dom-w-arganiach-g2e-rzut-po-7c7ff9bdcf",
+        "mppX": 0.021881,
+        "mppY": 0.022424,
+        "originPx": {
+          "x": 211,
+          "y": 110
+        },
+        "confidence": 0.797401,
+        "anchors": [
+          "X CHAIN_SEGMENT 1.71m/78.5px res -0.007643 w 0.347895 [metric-dimension-11fa730624]",
+          "X CHAIN_SEGMENT 1.17m/52.5px res 0.021258 w 0.286749 [metric-dimension-133f24eb66]",
+          "X CHAIN_SEGMENT 1.17m/53.5px res -0.000623 w 0.233567 [metric-dimension-1833cf6a8f]",
+          "Y CHAIN_SEGMENT 1.11m/49.5px res 0 w 0.286927 [metric-dimension-69abc260ba]"
+        ],
+        "provenance": {
+          "detail": "4 anchors from dimension chains on asset-gotowy-projekt-dom-w-arganiach-g2e-rzut-poddasza-91be4fab38",
+          "extractor": "REGISTRATION",
+          "name": "metrics.axis-aligned-affine@1"
+        }
+      },
+      {
+        "frameId": "frame-asset-gotowy-projekt-dom-w-arganiach-g2e-sytuacj-947ae6ad87",
+        "mppX": 0.038742,
+        "mppY": 0.038806,
+        "originPx": {
+          "x": 129,
+          "y": 119
+        },
+        "confidence": 0.727569,
+        "anchors": [
+          "X CHAIN_SEGMENT 14.5m/374px res 0.010311 w 0.264643 [metric-dimension-7c0caae243]",
+          "X CHAIN_SEGMENT 22.7m/586px res -0.003096 w 0.359049 [metric-dimension-c426d1dbb2]",
+          "Y CHAIN_SEGMENT 13m/335px res 0 w 0.336248 [metric-dimension-cac1325b1b]"
+        ],
+        "provenance": {
+          "detail": "3 anchors from dimension chains on asset-gotowy-projekt-dom-w-arganiach-g2e-sytuacja-61b6b32557",
+          "extractor": "REGISTRATION",
+          "name": "metrics.axis-aligned-affine@1"
+        }
+      },
+      {
+        "frameId": "frame-asset-gotowy-projekt-dom-w-arganiach-g2e-rzut-pa-f0285a3fb1",
+        "mppX": 0.034441,
+        "mppY": 0.035283,
+        "originPx": {
+          "x": 80,
+          "y": 108
+        },
+        "confidence": 0.741602,
+        "anchors": [
+          "X CHAIN_SEGMENT 11.71m/340px res 0 w 0.346904 [metric-dimension-0d69e7826d]",
+          "Y CHAIN_SEGMENT 1.16m/31.5px res 0.048596 w 0.196599 [metric-dimension-2cd8acfd48]",
+          "Y CHAIN_SEGMENT 3.1m/88px res -0.004873 w 0.316227 [metric-dimension-4e15771a42]",
+          "Y CHAIN_SEGMENT 0.52m/13px res 0.061326 w 0.236833 [metric-dimension-57927f466a]"
+        ],
+        "provenance": {
+          "detail": "4 anchors from dimension chains on asset-gotowy-projekt-dom-w-arganiach-g2e-rzut-parteru-ca234e6742",
+          "extractor": "REGISTRATION",
+          "name": "metrics.axis-aligned-affine@1"
+        }
+      },
+      {
+        "frameId": "frame-asset-rzut-be28fcabcf-19cd865e20",
+        "mppX": 0.026894,
+        "mppY": 0.026859,
+        "originPx": {
+          "x": 118,
+          "y": 167
+        },
+        "confidence": 0.797135,
+        "anchors": [
+          "Y CHAIN_SEGMENT 0.5m/19px res -0.010314 w 0.362725 [metric-dimension-08ed14b430]",
+          "Y CHAIN_SEGMENT 3.7m/137px res 0.020368 w 0.286353 [metric-dimension-3c1cc8e450]",
+          "Y CHAIN_SEGMENT 12.3m/458px res -0.00125 w 0.412296 [metric-dimension-a3fd6bf505]",
+          "X CHAIN_SEGMENT 14.2m/528px res 0 w 0.312535 [metric-dimension-cb3ef22e6f]"
+        ],
+        "provenance": {
+          "detail": "4 anchors from dimension chains on asset-rzut-be28fcabcf",
+          "extractor": "REGISTRATION",
+          "name": "metrics.axis-aligned-affine@1"
+        }
+      },
+      {
+        "frameId": "frame-asset-projekt-dom-w-arganiach-g2e-9e1e249413-be7c06bf42",
+        "mppX": 0.024297,
+        "mppY": 0.023897,
+        "originPx": {
+          "x": 59,
+          "y": 78
+        },
+        "confidence": 0.717452,
+        "anchors": [
+          "Y CHAIN_SEGMENT 5.14m/215px res 0.002141 w 0.266709 [metric-dimension-5fdab39826]",
+          "X CHAIN_SEGMENT 3.11m/128px res 0 w 0.171806 [metric-dimension-61ee7dad2c]",
+          "Y CHAIN_SEGMENT 1.51m/64px res -0.019409 w 0.331955 [metric-dimension-f037a0cae6]"
+        ],
+        "provenance": {
+          "detail": "3 anchors from dimension chains on asset-projekt-dom-w-arganiach-g2e-9e1e249413",
+          "extractor": "REGISTRATION",
+          "name": "metrics.axis-aligned-affine@1"
+        }
+      },
+      {
+        "frameId": "frame-asset-rzut-f7e5dd139a-11046876f2",
+        "mppX": 0.008987,
+        "mppY": 0.008936,
+        "originPx": {
+          "x": 324.5,
+          "y": 161
+        },
+        "confidence": 0.66,
+        "anchors": [
+          "X CHAIN_SEGMENT 0.71m/79px res 0 w 0.564249 [metric-dimension-9096abc64a]",
+          "Y CHAIN_SEGMENT 0.42m/47px res 0 w 0.24686 [metric-dimension-f9bac41f27]"
+        ],
+        "provenance": {
+          "detail": "2 anchors from dimension chains on asset-rzut-f7e5dd139a",
+          "extractor": "REGISTRATION",
+          "name": "metrics.axis-aligned-affine@1"
+        }
+      },
+      {
+        "frameId": "frame-asset-rzut-5f20c3d65b-4e18ac5811",
+        "mppX": 0.026892,
+        "mppY": 0.02686,
+        "originPx": {
+          "x": 118,
+          "y": 167
+        },
+        "confidence": 0.830324,
+        "anchors": [
+          "Y CHAIN_SEGMENT 0.56m/23px res -0.057772 w 0.256151 [metric-dimension-02821e85fd]",
+          "Y CHAIN_SEGMENT 3.7m/137px res 0.020225 w 0.28624 [metric-dimension-0f67c21206]",
+          "Y CHAIN_SEGMENT 12.3m/458px res -0.001728 w 0.412749 [metric-dimension-21ff63dfcb]",
+          "X CHAIN_SEGMENT 14.2m/528px res 0.001228 w 0.312339 [metric-dimension-2d9a2f73c8]",
+          "X CHAIN_SEGMENT 3.01m/114px res -0.055644 w 0.147847 [metric-dimension-4d9cdbce1a]",
+          "Y CHAIN_SEGMENT 3.15m/116.5px res 0.020849 w 0.172404 [metric-dimension-a421cc9be2]"
+        ],
+        "provenance": {
+          "detail": "6 anchors from dimension chains on asset-rzut-5f20c3d65b",
+          "extractor": "REGISTRATION",
+          "name": "metrics.axis-aligned-affine@1"
+        }
+      },
+      {
+        "frameId": "frame-asset-rzut-053ad35452-8b5b71dff9",
+        "mppX": 0.019074,
+        "mppY": 0.019074,
+        "originPx": {
+          "x": 324.5,
+          "y": 134.5
+        },
+        "confidence": 0.715714,
+        "anchors": [
+          "Y CHAIN_SEGMENT 0.97m/51px res -0.002783 w 0.287076 [metric-dimension-104704d874]",
+          "Y CHAIN_SEGMENT 0.17m/10px res -0.020742 w 0.407638 [metric-dimension-134e75b0af]",
+          "Y CHAIN_SEGMENT 0.5m/26.636364px res -0.008067 w 0.464246 [metric-dimension-1668aaede2]",
+          "Y CHAIN_SEGMENT 0.17m/10px res -0.020742 w 0.407638 [metric-dimension-1797941bc1]",
+          "Y CHAIN_SEGMENT 0.62m/31px res 0.028701 w 0.267155 [metric-dimension-6580051895]",
+          "Y CHAIN_SEGMENT 0.77m/40.5px res -0.002504 w 0.229562 [metric-dimension-c5a42302e3]"
+        ],
+        "provenance": {
+          "detail": "6 anchors from dimension chains on asset-rzut-053ad35452",
+          "extractor": "REGISTRATION",
+          "name": "metrics.axis-aligned-affine@1"
+        }
+      }
+    ],
+    "storeys": [
+      {
+        "id": "storey-0",
+        "index": 0,
+        "frameIds": [
+          "frame-asset-rzut-5f20c3d65b-4e18ac5811"
+        ],
+        "footprintRegionIds": [
+          "footprint-0-region-built-0-0",
+          "footprint-0-region-built-15-16",
+          "footprint-0-region-recess-15-22",
+          "footprint-0-region-recess-15-18",
+          "footprint-0-region-recess-15-16"
+        ],
+        "confidence": 0.9,
+        "why": "the plan the building's coordinates are taken from: the dimension chains' own span, with 2486 px of the 3051 px of wall found lying inside it",
+        "elevation": {
+          "value": 0,
+          "low": -0.05,
+          "high": 0.05,
+          "unit": "m",
+          "basis": "MEASURED",
+          "evidenceIds": [
+            "metric-level-b868e04b6d",
+            "metric-level-04fa1335db",
+            "metric-level-c40c10a4bf"
+          ],
+          "why": "a level datum printed on the section"
+        },
+        "height": {
+          "value": 3.57,
+          "low": 3.52,
+          "high": 3.62,
+          "unit": "m",
+          "basis": "DERIVED",
+          "evidenceIds": [
+            "metric-level-b868e04b6d",
+            "metric-level-04fa1335db",
+            "metric-level-c40c10a4bf"
+          ],
+          "why": "the gap between this storey’s datum and the next"
+        }
+      },
+      {
+        "id": "storey-1",
+        "index": 1,
+        "frameIds": [
+          "frame-asset-rzut-f7e5dd139a-11046876f2"
+        ],
+        "footprintRegionIds": [],
+        "registeredFrom": "frame-asset-rzut-5f20c3d65b-4e18ac5811",
+        "confidence": 0.918926,
+        "why": "registered onto the plan below: 95% of this plan's wall lands on wall and the two plans share 17% of their long walls at the scale both plans print on their own chains (0.333), centred across x and flush at its min z face of envelope, covering 1% of the building below"
+      }
+    ],
+    "v2Frames": [
+      {
+        "frameId": "frame-asset-rzut-5f20c3d65b-4e18ac5811",
+        "storey": 0,
+        "mppX": 0.026892,
+        "mppY": 0.02686
+      },
+      {
+        "frameId": "frame-asset-rzut-f7e5dd139a-11046876f2",
+        "storey": 1,
+        "mppX": 0.008967,
+        "mppY": 0.008956
+      }
+    ],
+    "masses": [
+      {
+        "id": "main",
+        "role": "MAIN",
+        "x0": 0,
+        "z0": 3.7,
+        "x1": 14.2,
+        "z1": 12.321694,
+        "storeys": [
+          0
+        ],
+        "featureId": "feat-main",
+        "sourceMassId": "mass-0"
+      },
+      {
+        "id": "attached-0",
+        "role": "ATTACHED",
+        "x0": 7.41585,
+        "z0": 0,
+        "x1": 14.2,
+        "z1": 3.7,
+        "storeys": [
+          0
+        ],
+        "featureId": "feat-attached-0",
+        "sourceMassId": "mass-1"
+      }
+    ],
+    "steps": [
+      "registration | storey 0 plan registered | 0.026892 m/px; chain-registered base plan",
+      "registration | storey 1 plan registered | 0.008967 m/px; no outer faces found",
+      "registration | renders registered on the ridge datum | REAR: 0.01709 m/px, ground at -0.177568 (the 14.20 m walled width plus the section's 0.89 m of eaves each side (beats 14.20 m, which would put the ground 0.73 m)); FRONT: 0.0172 m/px, ground at -0.161196 (the 14.20 m walled width plus the section's 0.89 m of eaves each side (beats 14.20 m, which would put the ground 0.74 m))"
+    ],
+    "unresolved": [
+      "which body the attic storey stands on: once registered, none of its 0 walled regions stands on a body found on the plan below over the 1.11 m a room needs on both axes",
+      "wall-thick partitions on storey 0: the body stands on no drawn wall along its top side on this sheet: its registration is uncertain there, and ink as thick as the outer wall inside it may be the outer wall itself, so only partitions thinner than the outer wall are read"
+    ],
+    "conflicts": [
+      "ROOF_EVIDENCE_DISAGREES: the stated 38° pitch over 8.62 m puts the ridge at 6.94 m, and the section's datums put it at 7.94 m"
+    ]
+  },
+  "after": {
+    "metricPlanRegistrations": [
+      {
+        "frameId": "frame-asset-gotowy-projekt-dom-w-arganiach-g2e-rzut-po-7c7ff9bdcf",
+        "mppX": 0.021881,
+        "mppY": 0.022424,
+        "originPx": {
+          "x": 211,
+          "y": 110
+        },
+        "confidence": 0.797401,
+        "anchors": [
+          "X CHAIN_SEGMENT 1.71m/78.5px res -0.007643 w 0.347895 [metric-dimension-11fa730624]",
+          "X CHAIN_SEGMENT 1.17m/52.5px res 0.021258 w 0.286749 [metric-dimension-133f24eb66]",
+          "X CHAIN_SEGMENT 1.17m/53.5px res -0.000623 w 0.233567 [metric-dimension-1833cf6a8f]",
+          "Y CHAIN_SEGMENT 1.11m/49.5px res 0 w 0.286927 [metric-dimension-69abc260ba]"
+        ],
+        "provenance": {
+          "detail": "4 anchors from dimension chains on asset-gotowy-projekt-dom-w-arganiach-g2e-rzut-poddasza-91be4fab38",
+          "extractor": "REGISTRATION",
+          "name": "metrics.axis-aligned-affine@1"
+        }
+      },
+      {
+        "frameId": "frame-asset-gotowy-projekt-dom-w-arganiach-g2e-sytuacj-947ae6ad87",
+        "mppX": 0.038742,
+        "mppY": 0.038806,
+        "originPx": {
+          "x": 129,
+          "y": 119
+        },
+        "confidence": 0.727569,
+        "anchors": [
+          "X CHAIN_SEGMENT 14.5m/374px res 0.010311 w 0.264643 [metric-dimension-7c0caae243]",
+          "X CHAIN_SEGMENT 22.7m/586px res -0.003096 w 0.359049 [metric-dimension-c426d1dbb2]",
+          "Y CHAIN_SEGMENT 13m/335px res 0 w 0.336248 [metric-dimension-cac1325b1b]"
+        ],
+        "provenance": {
+          "detail": "3 anchors from dimension chains on asset-gotowy-projekt-dom-w-arganiach-g2e-sytuacja-61b6b32557",
+          "extractor": "REGISTRATION",
+          "name": "metrics.axis-aligned-affine@1"
+        }
+      },
+      {
+        "frameId": "frame-asset-gotowy-projekt-dom-w-arganiach-g2e-rzut-pa-f0285a3fb1",
+        "mppX": 0.034441,
+        "mppY": 0.035283,
+        "originPx": {
+          "x": 80,
+          "y": 108
+        },
+        "confidence": 0.741602,
+        "anchors": [
+          "X CHAIN_SEGMENT 11.71m/340px res 0 w 0.346904 [metric-dimension-0d69e7826d]",
+          "Y CHAIN_SEGMENT 1.16m/31.5px res 0.048596 w 0.196599 [metric-dimension-2cd8acfd48]",
+          "Y CHAIN_SEGMENT 3.1m/88px res -0.004873 w 0.316227 [metric-dimension-4e15771a42]",
+          "Y CHAIN_SEGMENT 0.52m/13px res 0.061326 w 0.236833 [metric-dimension-57927f466a]"
+        ],
+        "provenance": {
+          "detail": "4 anchors from dimension chains on asset-gotowy-projekt-dom-w-arganiach-g2e-rzut-parteru-ca234e6742",
+          "extractor": "REGISTRATION",
+          "name": "metrics.axis-aligned-affine@1"
+        }
+      },
+      {
+        "frameId": "frame-asset-rzut-be28fcabcf-19cd865e20",
+        "mppX": 0.026894,
+        "mppY": 0.026859,
+        "originPx": {
+          "x": 118,
+          "y": 167
+        },
+        "confidence": 0.797135,
+        "anchors": [
+          "Y CHAIN_SEGMENT 0.5m/19px res -0.010314 w 0.362725 [metric-dimension-08ed14b430]",
+          "Y CHAIN_SEGMENT 3.7m/137px res 0.020368 w 0.286353 [metric-dimension-3c1cc8e450]",
+          "Y CHAIN_SEGMENT 12.3m/458px res -0.00125 w 0.412296 [metric-dimension-a3fd6bf505]",
+          "X CHAIN_SEGMENT 14.2m/528px res 0 w 0.312535 [metric-dimension-cb3ef22e6f]"
+        ],
+        "provenance": {
+          "detail": "4 anchors from dimension chains on asset-rzut-be28fcabcf",
+          "extractor": "REGISTRATION",
+          "name": "metrics.axis-aligned-affine@1"
+        }
+      },
+      {
+        "frameId": "frame-asset-projekt-dom-w-arganiach-g2e-9e1e249413-be7c06bf42",
+        "mppX": 0.024297,
+        "mppY": 0.023897,
+        "originPx": {
+          "x": 59,
+          "y": 78
+        },
+        "confidence": 0.717452,
+        "anchors": [
+          "Y CHAIN_SEGMENT 5.14m/215px res 0.002141 w 0.266709 [metric-dimension-5fdab39826]",
+          "X CHAIN_SEGMENT 3.11m/128px res 0 w 0.171806 [metric-dimension-61ee7dad2c]",
+          "Y CHAIN_SEGMENT 1.51m/64px res -0.019409 w 0.331955 [metric-dimension-f037a0cae6]"
+        ],
+        "provenance": {
+          "detail": "3 anchors from dimension chains on asset-projekt-dom-w-arganiach-g2e-9e1e249413",
+          "extractor": "REGISTRATION",
+          "name": "metrics.axis-aligned-affine@1"
+        }
+      },
+      {
+        "frameId": "frame-asset-rzut-f7e5dd139a-11046876f2",
+        "mppX": 0.008987,
+        "mppY": 0.008936,
+        "originPx": {
+          "x": 324.5,
+          "y": 161
+        },
+        "confidence": 0.66,
+        "anchors": [
+          "X CHAIN_SEGMENT 0.71m/79px res 0 w 0.564249 [metric-dimension-9096abc64a]",
+          "Y CHAIN_SEGMENT 0.42m/47px res 0 w 0.24686 [metric-dimension-f9bac41f27]"
+        ],
+        "provenance": {
+          "detail": "2 anchors from dimension chains on asset-rzut-f7e5dd139a",
+          "extractor": "REGISTRATION",
+          "name": "metrics.axis-aligned-affine@1"
+        }
+      },
+      {
+        "frameId": "frame-asset-rzut-5f20c3d65b-4e18ac5811",
+        "mppX": 0.026892,
+        "mppY": 0.02686,
+        "originPx": {
+          "x": 118,
+          "y": 167
+        },
+        "confidence": 0.830324,
+        "anchors": [
+          "Y CHAIN_SEGMENT 0.56m/23px res -0.057772 w 0.256151 [metric-dimension-02821e85fd]",
+          "Y CHAIN_SEGMENT 3.7m/137px res 0.020225 w 0.28624 [metric-dimension-0f67c21206]",
+          "Y CHAIN_SEGMENT 12.3m/458px res -0.001728 w 0.412749 [metric-dimension-21ff63dfcb]",
+          "X CHAIN_SEGMENT 14.2m/528px res 0.001228 w 0.312339 [metric-dimension-2d9a2f73c8]",
+          "X CHAIN_SEGMENT 3.01m/114px res -0.055644 w 0.147847 [metric-dimension-4d9cdbce1a]",
+          "Y CHAIN_SEGMENT 3.15m/116.5px res 0.020849 w 0.172404 [metric-dimension-a421cc9be2]"
+        ],
+        "provenance": {
+          "detail": "6 anchors from dimension chains on asset-rzut-5f20c3d65b",
+          "extractor": "REGISTRATION",
+          "name": "metrics.axis-aligned-affine@1"
+        }
+      },
+      {
+        "frameId": "frame-asset-rzut-053ad35452-8b5b71dff9",
+        "mppX": 0.019074,
+        "mppY": 0.019074,
+        "originPx": {
+          "x": 324.5,
+          "y": 134.5
+        },
+        "confidence": 0.715714,
+        "anchors": [
+          "Y CHAIN_SEGMENT 0.97m/51px res -0.002783 w 0.287076 [metric-dimension-104704d874]",
+          "Y CHAIN_SEGMENT 0.17m/10px res -0.020742 w 0.407638 [metric-dimension-134e75b0af]",
+          "Y CHAIN_SEGMENT 0.5m/26.636364px res -0.008067 w 0.464246 [metric-dimension-1668aaede2]",
+          "Y CHAIN_SEGMENT 0.17m/10px res -0.020742 w 0.407638 [metric-dimension-1797941bc1]",
+          "Y CHAIN_SEGMENT 0.62m/31px res 0.028701 w 0.267155 [metric-dimension-6580051895]",
+          "Y CHAIN_SEGMENT 0.77m/40.5px res -0.002504 w 0.229562 [metric-dimension-c5a42302e3]"
+        ],
+        "provenance": {
+          "detail": "6 anchors from dimension chains on asset-rzut-053ad35452",
+          "extractor": "REGISTRATION",
+          "name": "metrics.axis-aligned-affine@1"
+        }
+      }
+    ],
+    "storeys": [
+      {
+        "id": "storey-0",
+        "index": 0,
+        "frameIds": [
+          "frame-asset-rzut-5f20c3d65b-4e18ac5811"
+        ],
+        "footprintRegionIds": [
+          "footprint-0-region-built-0-0",
+          "footprint-0-region-built-15-16",
+          "footprint-0-region-recess-15-22",
+          "footprint-0-region-recess-15-18",
+          "footprint-0-region-recess-15-16"
+        ],
+        "confidence": 0.9,
+        "why": "the plan the building's coordinates are taken from: the dimension chains' own span, with 2486 px of the 3051 px of wall found lying inside it",
+        "elevation": {
+          "value": 0,
+          "low": -0.05,
+          "high": 0.05,
+          "unit": "m",
+          "basis": "MEASURED",
+          "evidenceIds": [
+            "metric-level-b868e04b6d",
+            "metric-level-04fa1335db",
+            "metric-level-c40c10a4bf"
+          ],
+          "why": "a level datum printed on the section"
+        },
+        "height": {
+          "value": 3.57,
+          "low": 3.52,
+          "high": 3.62,
+          "unit": "m",
+          "basis": "DERIVED",
+          "evidenceIds": [
+            "metric-level-b868e04b6d",
+            "metric-level-04fa1335db",
+            "metric-level-c40c10a4bf"
+          ],
+          "why": "the gap between this storey’s datum and the next"
+        }
+      },
+      {
+        "id": "storey-1",
+        "index": 1,
+        "frameIds": [
+          "frame-asset-rzut-f7e5dd139a-11046876f2"
+        ],
+        "footprintRegionIds": [
+          "footprint-1-mass-0"
+        ],
+        "registeredFrom": "frame-asset-rzut-5f20c3d65b-4e18ac5811",
+        "confidence": 0.711152,
+        "why": "registered onto the plan below: 60% of this plan's wall lands on wall and the two plans share 43% of their long walls at the plan below's own scale (1.000), with one of its outer walls on one below along x (634 px onto 638 px) and along z (133 px onto 175 px), covering 66% of the building below"
+      }
+    ],
+    "v2Frames": [
+      {
+        "frameId": "frame-asset-rzut-5f20c3d65b-4e18ac5811",
+        "storey": 0,
+        "mppX": 0.026892,
+        "mppY": 0.02686
+      },
+      {
+        "frameId": "frame-asset-rzut-f7e5dd139a-11046876f2",
+        "storey": 1,
+        "mppX": 0.026792,
+        "mppY": 0.02661
+      }
+    ],
+    "masses": [
+      {
+        "id": "main",
+        "role": "MAIN",
+        "x0": 0,
+        "z0": 3.7,
+        "x1": 14.2,
+        "z1": 12.321694,
+        "storeys": [
+          0,
+          1
+        ],
+        "featureId": "feat-main",
+        "sourceMassId": "mass-0"
+      },
+      {
+        "id": "attached-0",
+        "role": "ATTACHED",
+        "x0": 7.41585,
+        "z0": 0,
+        "x1": 14.2,
+        "z1": 3.7,
+        "storeys": [
+          0
+        ],
+        "featureId": "feat-attached-0",
+        "sourceMassId": "mass-1"
+      }
+    ],
+    "steps": [
+      "registration | storey 0 plan registered | 0.026892 m/px; chain-registered base plan",
+      "registration | storey 1 plan registered | 0.026792 m/px; its outer wall faces (px 113..643 × 124..448) put on the 14.20 × 8.62 m body this storey covers; the two axes agree to 0.7 %",
+      "registration | renders registered on the ridge datum | REAR: 0.01709 m/px, ground at -0.177568 (the 14.20 m walled width plus the section's 0.89 m of eaves each side (beats 14.20 m, which would put the ground 0.73 m)); FRONT: 0.0172 m/px, ground at -0.161196 (the 14.20 m walled width plus the section's 0.89 m of eaves each side (beats 14.20 m, which would put the ground 0.74 m))"
+    ],
+    "unresolved": [
+      "wall-thick partitions on storey 0: the body stands on no drawn wall along its top side on this sheet: its registration is uncertain there, and ink as thick as the outer wall inside it may be the outer wall itself, so only partitions thinner than the outer wall are read"
+    ],
+    "conflicts": [
+      "ROOF_EVIDENCE_DISAGREES: the stated 38° pitch over 8.62 m puts the ridge at 6.94 m, and the section's datums put it at 7.94 m"
+    ]
+  }
+}

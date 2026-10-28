@@ -1,0 +1,147 @@
+{
+  "project": {
+    "name": "Dom w arganiach (G2E)",
+    "archonProjectId": "m32b290f26a4e8",
+    "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-arganiach-g2e-m32b290f26a4e8"
+  },
+  "before": {
+    "solver": "2.10.0 (N8-01; model identical to ARCHON 1311, 2.9.0)",
+    "modelSha256": "34a95a766d169f39210b6337f031265ee3a6846ac3df0fa67086c0c91465e0eb",
+    "bodies": [
+      "main x 0..14.2 z 3.7..12.32 s0",
+      "attached-0 x 7.42..14.2 z 0..3.7 s0"
+    ],
+    "layoutGate": "STRUCTURAL_LAYOUT_PARTIAL DEGRADING:NO_MASS_REACHES_UP,DEGRADING:ROOF_EVIDENCE_DISAGREES",
+    "modelCompleteness": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "footprintM2": 146.787116,
+    "counts": {
+      "levels": [
+        [
+          "lvl-0",
+          0,
+          7.94
+        ]
+      ],
+      "wallRings": 2,
+      "walls": 18,
+      "wallsExterior": 8,
+      "roofs": [
+        [
+          "roof-attached-0",
+          "FLAT",
+          "X",
+          {
+            "maxX": 14.2,
+            "maxZ": 3.7,
+            "minX": 7.41585,
+            "minZ": 0
+          },
+          0,
+          "lvl-0",
+          3.57
+        ],
+        [
+          "roof-main",
+          "GABLE",
+          "X",
+          {
+            "maxX": 14.2,
+            "maxZ": 12.321694,
+            "minX": 0,
+            "minZ": 3.7
+          },
+          38,
+          "lvl-0",
+          4.571997
+        ]
+      ],
+      "windows": 6,
+      "doors": 10,
+      "doorsExterior": 5,
+      "rooms": 4,
+      "roomsPerLevel": {
+        "lvl-0": 4
+      },
+      "stairs": 0,
+      "rooflights": 3,
+      "chimneys": 0
+    },
+    "geometryCompiler": {
+      "status": "geometry ok",
+      "diagnostics": []
+    }
+  },
+  "after": {
+    "solver": "2.11.0 (N8-02A)",
+    "modelSha256": "cf9b660ca4f3a2caf82478513dbb122cda6cf08bb80198ff64ca6cfce1759c02",
+    "bodies": [
+      "main x 0..14.2 z 3.7..12.32 s0,1",
+      "attached-0 x 7.42..14.2 z 0..3.7 s0"
+    ],
+    "layoutGate": "STRUCTURAL_LAYOUT_PARTIAL DEGRADING:ROOF_EVIDENCE_DISAGREES",
+    "modelCompleteness": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "footprintM2": 146.787116,
+    "counts": {
+      "levels": [
+        [
+          "lvl-0",
+          0,
+          2.8
+        ],
+        [
+          "lvl-1",
+          2.8,
+          5.14
+        ]
+      ],
+      "wallRings": 3,
+      "walls": 32,
+      "wallsExterior": 12,
+      "roofs": [
+        [
+          "roof-attached-0",
+          "FLAT",
+          "X",
+          {
+            "maxX": 14.2,
+            "maxZ": 3.7,
+            "minX": 7.41585,
+            "minZ": 0
+          },
+          0,
+          "lvl-0",
+          2.8
+        ],
+        [
+          "roof-main",
+          "GABLE",
+          "X",
+          {
+            "maxX": 14.2,
+            "maxZ": 12.321694,
+            "minX": 0,
+            "minZ": 3.7
+          },
+          38,
+          "lvl-1",
+          1.771997
+        ]
+      ],
+      "windows": 9,
+      "doors": 13,
+      "doorsExterior": 5,
+      "rooms": 8,
+      "roomsPerLevel": {
+        "lvl-0": 4,
+        "lvl-1": 4
+      },
+      "stairs": 1,
+      "rooflights": 3,
+      "chimneys": 2
+    },
+    "geometryCompiler": {
+      "status": "geometry ok",
+      "diagnostics": []
+    }
+  }
+}

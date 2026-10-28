@@ -1,0 +1,123 @@
+{
+  "project": {
+    "name": "Dom w trytomach (G)",
+    "archonProjectId": "m6802645623649",
+    "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-trytomach-g-m6802645623649"
+  },
+  "before": {
+    "solver": "2.10.0 (N8-01; model identical to ARCHON 1311, 2.9.0)",
+    "modelSha256": "d2bf0c031d4733d38b8f097d55828a5d167187f656998e5086d83478bcb9cc15",
+    "bodies": [
+      "main x 0..12.99 z 0..7.25 s0,1 sr 1:0..7.24x0..7.25"
+    ],
+    "layoutGate": "STRUCTURAL_LAYOUT_PARTIAL DEGRADING:STOREY_COVERAGE_DISAGREES,DEGRADING:ROOF_EVIDENCE_DISAGREES",
+    "modelCompleteness": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "footprintM2": 94.172556,
+    "counts": {
+      "levels": [
+        [
+          "lvl-0",
+          0,
+          2.46
+        ],
+        [
+          "lvl-1",
+          2.46,
+          5.16
+        ]
+      ],
+      "wallRings": 2,
+      "walls": 28,
+      "wallsExterior": 11,
+      "roofs": [
+        [
+          "roof-main",
+          "GABLE",
+          "X",
+          {
+            "maxX": 13.213462,
+            "maxZ": 7.25,
+            "minX": -0.234817,
+            "minZ": 0
+          },
+          40,
+          "lvl-1",
+          2.118264
+        ]
+      ],
+      "windows": 10,
+      "doors": 8,
+      "doorsExterior": 2,
+      "rooms": 8,
+      "roomsPerLevel": {
+        "lvl-0": 3,
+        "lvl-1": 5
+      },
+      "stairs": 1,
+      "rooflights": 2,
+      "chimneys": 0
+    },
+    "geometryCompiler": {
+      "status": "geometry ok",
+      "diagnostics": []
+    }
+  },
+  "after": {
+    "solver": "2.11.0 (N8-02A)",
+    "modelSha256": "ce64cc099c83410d0e6393cb80639f2840059f9249b430d29deb057378c4856c",
+    "bodies": [
+      "main x 0..12.99 z 0..7.25 s0,1"
+    ],
+    "layoutGate": "STRUCTURAL_LAYOUT_PARTIAL DEGRADING:ROOF_EVIDENCE_DISAGREES",
+    "modelCompleteness": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "footprintM2": 94.172556,
+    "counts": {
+      "levels": [
+        [
+          "lvl-0",
+          0,
+          2.46
+        ],
+        [
+          "lvl-1",
+          2.46,
+          5.16
+        ]
+      ],
+      "wallRings": 2,
+      "walls": 34,
+      "wallsExterior": 14,
+      "roofs": [
+        [
+          "roof-main",
+          "GABLE",
+          "X",
+          {
+            "maxX": 13.213462,
+            "maxZ": 7.25,
+            "minX": -0.234817,
+            "minZ": 0
+          },
+          40,
+          "lvl-1",
+          2.118264
+        ]
+      ],
+      "windows": 11,
+      "doors": 9,
+      "doorsExterior": 2,
+      "rooms": 8,
+      "roomsPerLevel": {
+        "lvl-0": 3,
+        "lvl-1": 5
+      },
+      "stairs": 1,
+      "rooflights": 3,
+      "chimneys": 1
+    },
+    "geometryCompiler": {
+      "status": "geometry ok",
+      "diagnostics": []
+    }
+  }
+}

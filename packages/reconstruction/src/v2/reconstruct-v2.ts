@@ -135,7 +135,11 @@ import type { ApproximateRidge } from './roof-datum.js'
 // face at a corner block is weighed against the plan's wall band; the ridge vote and a wing's top skip the main span's
 // end a wing stands against; a wing reaching the main ridge over an attic storey carries a gable of its own, its eaves
 // below the main eaves, run into the main slope along two valleys; its plan's rooflights are cut in its own planes.
-export const SOLVER_V2_VERSION = '2.10.0' as const
+// 2.11.0 (N8-02A): a plan's extent keeps the walls joined to its chained walls at corners, tees or as end walls broken
+// by openings (not an eaves outline running past them); an upper plan placed with its outer-wall frame on the outer
+// faces of a body below is preferred over a fit onto inner walls unless that fit shares twice the wall, and is weighed
+// only against other placements that lay the frame on a body.
+export const SOLVER_V2_VERSION = '2.11.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1

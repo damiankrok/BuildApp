@@ -971,19 +971,19 @@ export function alignPlans(base: PlanReading, other: PlanReading, options: { max
   // scaled uniformly — the four walls fix the placement. Each hypothesis is named by the walls it pairs and weighed
   // exactly as the fitted ones are. One axis alone is no hypothesis: some pair of walls along one axis lines up with
   // some pair below at almost any scale, and the walls across it then decide nothing.
+  // the lines each plan's decomposition took for its outer walls: its envelope's sides, its largest walled region's
+  const linesOf = (plan: PlanReading, axis: 'VERTICAL' | 'HORIZONTAL'): number[] => {
+    const rects = [plan.decomposition.envelope?.rect, largestBuilt(plan)?.rect].filter((r): r is PixelRect => r !== undefined)
+    return rects.flatMap((r) => (axis === 'VERTICAL' ? [r.x0, r.x1] : [r.y0, r.y1]))
+  }
+  const frameOf = (axis: 'VERTICAL' | 'HORIZONTAL'): [number, number] => {
+    const o = outerWallAxes(otherAxes[axis], other.wallPx, linesOf(other, axis))
+    const all = [...o.lows, ...o.highs]
+    return all.length > 0 ? [Math.min(...all), Math.max(...all)] : axis === 'VERTICAL' ? [source.x0, source.x1] : [source.y0, source.y1]
+  }
+  const otherFrame: PixelRect = { x0: frameOf('VERTICAL')[0], x1: frameOf('VERTICAL')[1], y0: frameOf('HORIZONTAL')[0], y1: frameOf('HORIZONTAL')[1] }
   if (options.wallPairs !== false) {
     const targetWalls = { id: 'walls', rect: envelope }
-    // the lines each plan's decomposition took for its outer walls: its envelope's sides, its largest walled region's
-    const linesOf = (plan: PlanReading, axis: 'VERTICAL' | 'HORIZONTAL'): number[] => {
-      const rects = [plan.decomposition.envelope?.rect, largestBuilt(plan)?.rect].filter((r): r is PixelRect => r !== undefined)
-      return rects.flatMap((r) => (axis === 'VERTICAL' ? [r.x0, r.x1] : [r.y0, r.y1]))
-    }
-    const frameOf = (axis: 'VERTICAL' | 'HORIZONTAL'): [number, number] => {
-      const o = outerWallAxes(otherAxes[axis], other.wallPx, linesOf(other, axis))
-      const all = [...o.lows, ...o.highs]
-      return all.length > 0 ? [Math.min(...all), Math.max(...all)] : axis === 'VERTICAL' ? [source.x0, source.x1] : [source.y0, source.y1]
-    }
-    const otherFrame: PixelRect = { x0: frameOf('VERTICAL')[0], x1: frameOf('VERTICAL')[1], y0: frameOf('HORIZONTAL')[0], y1: frameOf('HORIZONTAL')[1] }
     const spans = (axis: 'VERTICAL' | 'HORIZONTAL'): Array<{ k: number; offset: number; from: number; to: number; why: string }> => {
       const b = outerWallAxes(baseAxes[axis], base.wallPx, linesOf(base, axis))
       const o = outerWallAxes(otherAxes[axis], other.wallPx, linesOf(other, axis))
@@ -1055,6 +1055,13 @@ export function alignPlans(base: PlanReading, other: PlanReading, options: { max
   // still stands wholly over the building, and there the statement stands.
   const stated0 = distinct.find((c) => c.stated)
   const body = largestBuilt(other)?.rect
+  // N8-02A: this plan's outline — the frame of its outer facade walls, the ones a placement by the walls pairs — placed,
+  // on all four sides within a wall of a body below
+  const outline = otherFrame
+  const bodiesBelow = alignmentTargets(base).map((t) => t.rect)
+  const band = Math.max(tolerance, base.wallPx)
+  const outlineOn = (c: PlanAlignment): boolean =>
+    bodiesBelow.some((t) => Math.abs(outline.x0 * c.scale + c.offsetX - t.x0) <= band && Math.abs(outline.x1 * c.scale + c.offsetX - t.x1) <= band && Math.abs(outline.y0 * c.scale + c.offsetY - t.y0) <= band && Math.abs(outline.y1 * c.scale + c.offsetY - t.y1) <= band)
   const insideBelow = (c: PlanAlignment): boolean =>
     body !== undefined && body.x0 * c.scale + c.offsetX >= envelope.x0 - tolerance && body.x1 * c.scale + c.offsetX <= envelope.x1 + tolerance && body.y0 * c.scale + c.offsetY >= envelope.y0 - tolerance && body.y1 * c.scale + c.offsetY <= envelope.y1 + tolerance
   // How finely the walls can tell two placements apart (005L council A5L-7): a wall's ends are read to a pixel, so a
@@ -1064,6 +1071,17 @@ export function alignPlans(base: PlanReading, other: PlanReading, options: { max
     round6((2 * (otherMajor.VERTICAL.length + otherMajor.HORIZONTAL.length)) / Math.max(1e-9, c.scale * otherMajorLength + baseMajorLength) + coverageWeight * (1 / Math.max(1, width(envelope)) + 1 / Math.max(1, height(envelope))))
   if (stated0 && distinct[0] !== stated0 && (stated0.shares >= STATED_HOLDS_SHARE * distinct[0].shares || insideBelow(stated0))) {
     return { best: stated0, considered: [stated0, ...distinct.filter((c) => c !== stated0)], resolution: resolutionOf(stated0), held: { by: 'STATEMENT', over: distinct[0] } }
+  }
+  // N8-02A: a placement that lays this plan's whole outline on the outer faces of one body below, on all four sides,
+  // is a reading of the walls that matter — the storey stands exactly on that body. A fit that lands more wall by
+  // shrinking or stretching the plan onto inner walls is the wrong reading the walls favour, and refutes the outline
+  // only as it would refute a statement: by sharing at least twice the wall.
+  const outlined = (r: PlanAlignmentReading): PlanAlignmentReading => {
+    const best = r.best
+    if (!best || r.held || outlineOn(best)) return r
+    const o0 = distinct.find(outlineOn)
+    if (!o0 || o0.shares < STATED_HOLDS_SHARE * best.shares) return r
+    return { ...r, best: o0, considered: [o0, ...r.considered.filter((c) => c !== o0)], resolution: resolutionOf(o0), outline: { over: best, coincident: distinct.filter(outlineOn) } }
   }
   // 005L (council A5L-1): the scale both plans print, where their offsets are not stated (a plan whose chains measure
   // only its own walls says how large it is, not where it stands). A placement at another scale is the claim that a
@@ -1081,9 +1099,9 @@ export function alignPlans(base: PlanReading, other: PlanReading, options: { max
     if (shareHolds && inside) {
       return { best: printed0, considered: [printed0, ...distinct.filter((c) => c !== printed0)], resolution: resolutionOf(printed0), held: { by: 'PRINTED_SCALE', over: distinct[0] }, printedScale: { ...printedScale, outcome: 'HELD' } }
     }
-    return { best: distinct[0], considered: distinct, resolution: resolutionOf(distinct[0]), printedScale: { ...printedScale, outcome: 'REFUTED' } }
+    return outlined({ best: distinct[0], considered: distinct, resolution: resolutionOf(distinct[0]), printedScale: { ...printedScale, outcome: 'REFUTED' } })
   }
-  return { best: distinct[0], considered: distinct, resolution: distinct[0] ? resolutionOf(distinct[0]) : 0 }
+  return outlined({ best: distinct[0], considered: distinct, resolution: distinct[0] ? resolutionOf(distinct[0]) : 0 })
 }
 
 /** What `alignPlans` found beside its ranking: how finely the walls tell placements apart, and what a held reading was held against (005L). */
@@ -1095,6 +1113,8 @@ export type PlanAlignmentReading = {
   held?: { by: 'STATEMENT' | 'PRINTED_SCALE'; over: PlanAlignment }
   /** Where both plans print a scale and the best fit is at another: whether the printed scale stood, and on what. */
   printedScale?: { k: number; placement: PlanAlignment; sharesAgainstFit: number; bodyInsideBelow: boolean; outcome: 'HELD' | 'REFUTED' }
+  /** N8-02A: a placement laying the plan's whole outline on a body below, chosen over a fit that shares more wall elsewhere. */
+  outline?: { over: PlanAlignment; coincident: PlanAlignment[] }
 }
 
 // ---------------------------------------------------------------------------
@@ -2192,11 +2212,12 @@ export function inferStructuralLayout(given: StructuralLayoutOptions): Structura
     // The rival is the best placement that stands this storey on other bodies, or on the same ones materially
     // differently. A placement that lands the plan on the same walls by another route is the same reading. Where the
     // printed scale was held against a fit at another scale, the rivals are the other placements at the printed scale:
-    // the walls have already been heard against the fit.
+    // the walls have already been heard against the fit. Likewise where the outline was laid on a body below against a
+    // fit that does not (N8-02A), the rivals are the other placements that lay it on a body.
     const atChosenScale = (c: PlanAlignment): boolean => Math.abs(c.scale / alignment.scale - 1) <= WALL_PAIR_SCALE_AGREEMENT
     const rivals = considered
       .slice(1)
-      .filter((c) => (reading?.held?.by === 'PRINTED_SCALE' ? atChosenScale(c) : true) && alignment.score - c.score < STOREY_RIVAL_WINDOW)
+      .filter((c) => (reading?.held?.by === 'PRINTED_SCALE' ? atChosenScale(c) : reading?.outline ? reading.outline.coincident.includes(c) : true) && alignment.score - c.score < STOREY_RIVAL_WINDOW)
       .slice(0, STOREY_RIVALS_WEIGHED)
     const weighed = rivals.map((c) => ({ c, o: outcome(c) }))
     const rival = weighed.find((r) => !sameSupport(chosen, r.o, sameTol))

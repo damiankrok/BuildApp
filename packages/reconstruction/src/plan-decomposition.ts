@@ -1260,12 +1260,77 @@ function planExtentOf(chains: readonly DimensionChain[], bands: readonly Band[],
   // 005N: the walls frame the plan here, and a wall beyond the margin that a wall of the frame runs into is the same
   // building's — a garage or a wing whose far wall happens to lie further from the chains than a third of their span.
   const joined = cornerJoined(nearBands, long, wallPx, chainRect)
-  const wallBox = axisBox([...nearBands, ...joined], wallPx) ?? fromBands
+  // N8-02A: the walls frame the plan, so the frame is the walls joined to it — not the walls near the detail the chains
+  // describe (`wallsJoinedTo`). Followed only from walls whose own run reaches into the chains' rect, the walls joined
+  // to those, and a band the margin let in by its axis on which one of them ends — within a wall of its axis, as a run
+  // stops at the face of the wall it meets: the same wall, its corner cut by an opening. Any other band let in by its
+  // axis alone may be a detached drawing's and carries nothing in.
+  const runOf = (b: Band): [number, number] => (b.axis === 'VERTICAL' ? [b.bounds.y0, b.bounds.y1] : [b.bounds.x0, b.bounds.x1])
+  const reachesChains = (b: Band): boolean => {
+    const [a0, a1] = b.axis === 'VERTICAL' ? [chainRect.y0, chainRect.y1] : [chainRect.x0, chainRect.x1]
+    const [r0, r1] = runOf(b)
+    return r1 >= a0 && r0 <= a1
+  }
+  const anchored = [...nearBands.filter(reachesChains), ...joined]
+  const endsOnAxis = (b: Band): boolean => anchored.some((c) => c.axis !== b.axis && runOf(c).some((end) => Math.abs(end - b.axisPx) <= wallPx))
+  const seed = [...anchored, ...nearBands.filter((b) => !anchored.includes(b) && endsOnAxis(b))]
+  const grown = wallsJoinedTo(seed, long, wallPx).filter((b) => !nearBands.includes(b))
+  const wallBox = axisBox([...nearBands, ...joined, ...grown], wallPx) ?? fromBands
   return {
     rect: widen(chainRect, wallBox),
     weak: true,
-    why: `${Math.round(loose)} px of the ${Math.round(held + loose)} px of wall found lies outside the dimension chains' span, so the chains describe a detail of this plan and not its extent${joined.length > 0 ? `; ${joined.length} long wall${joined.length === 1 ? '' : 's'} beyond their margin ${joined.length === 1 ? 'is' : 'are'} kept, a wall of the frame running into ${joined.length === 1 ? 'its corner' : 'their corners'}` : ''}`,
+    why: `${Math.round(loose)} px of the ${Math.round(held + loose)} px of wall found lies outside the dimension chains' span, so the chains describe a detail of this plan and not its extent${joined.length > 0 ? `; ${joined.length} long wall${joined.length === 1 ? '' : 's'} beyond their margin ${joined.length === 1 ? 'is' : 'are'} kept, a wall of the frame running into ${joined.length === 1 ? 'its corner' : 'their corners'}` : ''}${grown.length > 0 ? `; ${grown.length} more joined to those walls at corners, tees or as end walls (none running past the walls across it at both ends, as an eaves outline does)` : ''}`,
   }
+}
+
+/**
+ * N8-02A: the long walls joined to a set of walls, followed from wall to wall.
+ *
+ * Where a plan's dimension chains describe one detail of it (the rooms of one part, a stair), the walls frame the
+ * plan, and the plan's walls are the ones joined to each other: a wall-thick band joins the set where one of the set
+ * ends on it, it ends on one of the set (a corner or a tee: an end within a wall and a half of the other's axis, and that
+ * axis within its run), or it closes the rectangle of two walls of the set that both end on its axis (an end wall its
+ * doors have cut short). A band that runs on past the walls across it by more than a wall at both of its ends is not a
+ * wall — an eaves or roof outline drawn as heavily as one — and is not taken, nor followed. Repeated until nothing joins.
+ */
+export function wallsJoinedTo(seed: readonly Band[], long: readonly Band[], wallPx: number): Band[] {
+  const thick = (b: Band): boolean => b.thickness >= wallPx * 0.7
+  const run = (b: Band): [number, number] => (b.axis === 'VERTICAL' ? [b.bounds.y0, b.bounds.y1] : [b.bounds.x0, b.bounds.x1])
+  const reach = wallPx * 1.5
+  const members = seed.filter(thick)
+  const endsOn = (c: Band, b: Band): boolean => {
+    const [c0, c1] = run(c)
+    const [b0, b1] = run(b)
+    return (Math.abs(c0 - b.axisPx) <= reach || Math.abs(c1 - b.axisPx) <= reach) && c.axisPx >= b0 - reach && c.axisPx <= b1 + reach
+  }
+  const overhangs = (b: Band, set: readonly Band[]): boolean => {
+    const across = set.filter((c) => c.axis !== b.axis).map((c) => c.axisPx)
+    if (across.length < 2) return false
+    const [b0, b1] = run(b)
+    return b0 < Math.min(...across) - wallPx && b1 > Math.max(...across) + wallPx
+  }
+  const added: Band[] = []
+  for (let changed = true; changed; ) {
+    changed = false
+    for (const b of long) {
+      if (members.includes(b) || !thick(b)) continue
+      const perpendicular = members.filter((c) => c.axis !== b.axis)
+      const corner = perpendicular.some((c) => endsOn(c, b) || endsOn(b, c))
+      const [b0, b1] = run(b)
+      const ending = perpendicular.filter((c) => {
+        const [c0, c1] = run(c)
+        return Math.abs(c0 - b.axisPx) <= reach || Math.abs(c1 - b.axisPx) <= reach
+      })
+      const endWall = ending.some((c) => ending.some((d) => d !== c && Math.abs(d.axisPx - c.axisPx) >= 4 * wallPx && b0 >= Math.min(c.axisPx, d.axisPx) - reach && b1 <= Math.max(c.axisPx, d.axisPx) + reach))
+      if (!corner && !endWall) continue
+      if (overhangs(b, [...members, b])) continue
+      members.push(b)
+      added.push(b)
+      changed = true
+    }
+  }
+  // a band taken before the walls across it were known, that the whole set shows running past them at both ends
+  return added.filter((b) => !overhangs(b, members))
 }
 
 /**
@@ -1278,24 +1343,36 @@ function planExtentOf(chains: readonly DimensionChain[], bands: readonly Band[],
  * and a half of its axis, and its run passes that band's axis: a corner or a T, never two walls merely near each
  * other. One step only: a wall joined to a joined wall is not taken, so a run of garden walls does not walk the frame
  * across the sheet.
+ *
+ * N8-02A: or an end wall: a band its doors and windows have cut short is joined where it closes the rectangle of two
+ * opposite long walls — one of them the frame's own, reaching into the chains' rect — that both end on its axis, and
+ * it stands between them. A detached drawing has no wall of the building's ending on it.
  */
 function cornerJoined(frame: readonly Band[], long: readonly Band[], wallPx: number, anchor: PixelRect): Band[] {
   const thick = (b: Band): boolean => b.thickness >= wallPx * 0.7
   const run = (b: Band): [number, number] => (b.axis === 'VERTICAL' ? [b.bounds.y0, b.bounds.y1] : [b.bounds.x0, b.bounds.x1])
   const reach = wallPx * 1.5
+  const reachesAnchor = (c: Band): boolean => {
+    const [c0, c1] = run(c)
+    const [a0, a1] = c.axis === 'VERTICAL' ? [anchor.y0, anchor.y1] : [anchor.x0, anchor.x1]
+    return !(c1 < a0 || c0 > a1)
+  }
+  const endsAt = (c: Band, b: Band): boolean => {
+    const [c0, c1] = run(c)
+    return Math.abs(c0 - b.axisPx) <= reach || Math.abs(c1 - b.axisPx) <= reach
+  }
   return long
     .filter((b) => !frame.includes(b) && thick(b))
-    .filter((b) =>
-      frame.some((c) => {
-        if (c.axis === b.axis || !thick(c)) return false
-        const [c0, c1] = run(c)
-        const [a0, a1] = c.axis === 'VERTICAL' ? [anchor.y0, anchor.y1] : [anchor.x0, anchor.x1]
-        if (c1 < a0 || c0 > a1) return false
-        const [b0, b1] = run(b)
-        const endsOnIt = Math.abs(c0 - b.axisPx) <= reach || Math.abs(c1 - b.axisPx) <= reach
-        return endsOnIt && c.axisPx >= b0 - reach && c.axisPx <= b1 + reach
-      }),
-    )
+    .filter((b) => {
+      const [b0, b1] = run(b)
+      const corner = frame.some((c) => c.axis !== b.axis && thick(c) && reachesAnchor(c) && endsAt(c, b) && c.axisPx >= b0 - reach && c.axisPx <= b1 + reach)
+      if (corner) return true
+      // N8-02A: an end wall broken by its doors and windows into a short band reaches neither corner, but it closes the
+      // rectangle two opposite long walls make — a wall of the frame reaching into the chains' rect, and one parallel
+      // to it — when both end on its axis and it stands between them
+      const ending = long.filter((c) => c !== b && c.axis !== b.axis && thick(c) && endsAt(c, b))
+      return ending.some((c) => frame.includes(c) && reachesAnchor(c) && ending.some((d) => d !== c && frame.includes(d) && Math.abs(d.axisPx - c.axisPx) >= 4 * wallPx && b0 >= Math.min(c.axisPx, d.axisPx) - reach && b1 <= Math.max(c.axisPx, d.axisPx) + reach))
+    })
 }
 
 /**

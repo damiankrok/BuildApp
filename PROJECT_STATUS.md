@@ -2797,3 +2797,19 @@ gables, the wing's ridge along X, garage door and rear door read, 4 openings cut
 the block read as a chimney is no longer read, the party wall is two exterior walls (attached-body convention), a
 0.54 m pass in it, 2 of 3 left rooflights. Trytomach (attic registered at the ground's scale) and Arganiach (attic scale
 from 2 anchors, no regions) have another cause; not fixed.
+
+## Trytomach i Arganiach: skala i rejestracja poddasza (STAGE BUILDPLAN N8-02A / FIX-05B)
+
+Status: **DONE — solver 2.11.0, bez APK.** Report `stage-reports/STAGE_BUILDPLAN_N8_02A_ATTIC_SCALE_REGISTRATION.md`,
+numbers `stage-reports/artifacts/analyzer-n8-02a/`. Correction of N8-01: Trytomach's attic sheet is at the ground's
+scale (0.0213 m/px; the 0.0297 chain registration pairs right values with wrong pixel spans); its FIRST_BAD was the plan
+extent cut to the chained detail. Arganiach: attic scale 0.0090 from 2 anchors (room 7 "474" spans ≈ 172 px, 0.0275),
+then a wall-pair fit at 0.684 laying the attic on inner walls. Fixed generally: a plan's extent keeps walls joined to the
+chained ones at corners, tees or as end walls broken by openings, not an eaves outline and not a band let in by axis only
+(`wallsJoinedTo`); an upper plan whose outer-wall frame lies on a body's faces below beats a fit onto inner walls unless
+that fit shares twice the wall, and ties are weighed only among such placements. Trytomach: attic on the full
+12.99 × 7.25 m, gables closed; Arganiach: attic on the 14.20 × 8.62 m main body, garage one storey; both "geometry ok",
+coverage conflicts gone. Eight houses: 6 byte-identical (Sasanki c007ce8b). Open: Arganiach's void over the living room
+not cut in the attic slab, attic rooms merged in both, Arganiach's garage door still a window band, its flat garage roof
+height assumed (3.57 → 2.80 m).
+
