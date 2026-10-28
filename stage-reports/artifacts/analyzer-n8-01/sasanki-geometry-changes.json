@@ -1,0 +1,169 @@
+{
+  "project": {
+    "name": "Dom w sasankach 3 (G)",
+    "publisher": "ARCHON",
+    "archonProjectId": "mb292397cb1840",
+    "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-sasankach-3-g-mb292397cb1840",
+    "publishedFootprintM2": 116.22,
+    "publishedBuildingHeightM": 8.84,
+    "printedPitch": "45 st.",
+    "sectionRidgeDatum": 8.52
+  },
+  "before": {
+    "solver": "2.9.0",
+    "modelSha256": "090749f43fa6b7415041742514b9026e51ce5c19a4f2bfc7372d61be388f2301",
+    "bodies": [
+      "main x 0..11.6 z 0..10.45 s0,1"
+    ],
+    "layoutGate": "STRUCTURAL_LAYOUT_PARTIAL DEGRADING:STOREY_COVERAGE_DISAGREES,DEGRADING:ROOF_EVIDENCE_DISAGREES",
+    "modelCompleteness": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "footprintM2": 121.22,
+    "counts": {
+      "levels": 2,
+      "wallRings": 2,
+      "walls": 43,
+      "wallsExterior": 8,
+      "roofsParametric": [
+        [
+          "roof-main",
+          "GABLE",
+          "X",
+          {
+            "maxX": 11.6,
+            "maxZ": 10.45,
+            "minX": 0,
+            "minZ": 0
+          },
+          45
+        ]
+      ],
+      "roofPlanes": [],
+      "windows": 9,
+      "doors": 11,
+      "doorsExterior": 4,
+      "rooms": 8,
+      "rooflights": 4,
+      "chimneys": 1,
+      "balconies": 2,
+      "railings": 2,
+      "roofOpenings": [
+        "chimney-0-pen",
+        "rooflight-front-0",
+        "rooflight-plan-high-1",
+        "rooflight-plan-high-2",
+        "rooflight-plan-low-0"
+      ]
+    },
+    "geometryCompiler": {
+      "status": "4 errors, 4 warnings",
+      "diagnostics": [
+        {
+          "code": "OPENING_ABOVE_WALL_TOP",
+          "severity": "ERROR",
+          "message": "opening main-idoor-1-0 reaches 2.100 m above the base of wall main-iwall-1-z-0-a, whose top is only 1.464 m there; the opening was not cut and not clipped",
+          "objectId": "main-idoor-1-0"
+        },
+        {
+          "code": "FILL_WITHOUT_OPENING",
+          "severity": "WARNING",
+          "message": "the fill of opening main-idoor-1-0 was skipped because the opening was not cut",
+          "objectId": "main-idoor-1-0"
+        },
+        {
+          "code": "OPENING_ABOVE_WALL_TOP",
+          "severity": "ERROR",
+          "message": "opening opening-1-front-4-0 reaches 2.300 m above the base of wall ring-main-1-w0, whose top is only 0.099 m there; the opening was not cut and not clipped",
+          "objectId": "opening-1-front-4-0"
+        },
+        {
+          "code": "FILL_WITHOUT_OPENING",
+          "severity": "WARNING",
+          "message": "the fill of opening opening-1-front-4-0 was skipped because the opening was not cut",
+          "objectId": "opening-1-front-4-0"
+        },
+        {
+          "code": "OPENING_ABOVE_WALL_TOP",
+          "severity": "ERROR",
+          "message": "opening opening-1-rear-6-0 reaches 2.300 m above the base of wall ring-main-1-w2, whose top is only 0.099 m there; the opening was not cut and not clipped",
+          "objectId": "opening-1-rear-6-0"
+        },
+        {
+          "code": "OPENING_ABOVE_WALL_TOP",
+          "severity": "ERROR",
+          "message": "opening opening-1-rear-6-1 reaches 2.300 m above the base of wall ring-main-1-w2, whose top is only 0.099 m there; the opening was not cut and not clipped",
+          "objectId": "opening-1-rear-6-1"
+        },
+        {
+          "code": "FILL_WITHOUT_OPENING",
+          "severity": "WARNING",
+          "message": "the fill of opening opening-1-rear-6-0 was skipped because the opening was not cut",
+          "objectId": "opening-1-rear-6-0"
+        },
+        {
+          "code": "FILL_WITHOUT_OPENING",
+          "severity": "WARNING",
+          "message": "the fill of opening opening-1-rear-6-1 was skipped because the opening was not cut",
+          "objectId": "opening-1-rear-6-1"
+        }
+      ]
+    }
+  },
+  "after": {
+    "solver": "2.10.0",
+    "modelSha256": "c007ce8bab1689c745cb904dbbd64b07e7c8f7d79edfbdf64bf98005a8b5acc2",
+    "bodies": [
+      "main x 0..7.75 z 0..10.45 s0,1",
+      "attached-0 x 7.75..11.6 z 0.7..9.65 s0,1"
+    ],
+    "layoutGate": "STRUCTURAL_LAYOUT_PARTIAL DEGRADING:STOREY_COVERAGE_DISAGREES",
+    "modelCompleteness": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "footprintM2": 115.445,
+    "counts": {
+      "levels": 2,
+      "wallRings": 4,
+      "walls": 31,
+      "wallsExterior": 16,
+      "roofsParametric": [
+        [
+          "roof-main",
+          "GABLE",
+          "Z",
+          {
+            "maxX": 7.75,
+            "maxZ": 10.45,
+            "minX": 0,
+            "minZ": 0
+          },
+          45
+        ]
+      ],
+      "roofPlanes": [
+        [
+          "roof-attached-0-plane-high",
+          5
+        ],
+        [
+          "roof-attached-0-plane-low",
+          5
+        ]
+      ],
+      "windows": 8,
+      "doors": 15,
+      "doorsExterior": 9,
+      "rooms": 10,
+      "rooflights": 3,
+      "chimneys": 0,
+      "balconies": 2,
+      "railings": 2,
+      "roofOpenings": [
+        "rooflight-attached-0-high-0",
+        "rooflight-plan-low-0",
+        "rooflight-plan-low-1"
+      ]
+    },
+    "geometryCompiler": {
+      "status": "geometry ok",
+      "diagnostics": []
+    }
+  }
+}

@@ -59,7 +59,7 @@ import { skyMask, solvePerspectiveCamera } from './camera.js'
 import { attachedGableLayout, readAttachedRoofForm } from './attached-roof-form.js'
 import { decideSideOrientation, decideSidesByOpenings, gableApexRow, gableOutline, mainTopProfile, roofTopOverBand, sameSheetSideRegistration } from './side-orientation.js'
 import type { PerspectiveCameraV2 } from './camera.js'
-import { emitBuilding } from './emit.js'
+import { emitBuilding, pitchedPlaneIds } from './emit.js'
 import { fitStairToBoundingWalls, followStairSoffits } from './stair-fit.js'
 import { ReconstructionFailure, planCounts } from '../failure.js'
 import type { PlanDiagnosticsReport } from '../failure.js'
@@ -131,7 +131,11 @@ import type { ApproximateRidge } from './roof-datum.js'
 // span before one that ends off them; a pocket the fill reached through its gate and on into the open strip before it
 // is the garage alone; a layout holding an unresolved BLOCKING reason gives a partial preview, the model kept;
 // completeness is reported in four parts and one verdict, with the plan's own walls weighed against the model.
-export const SOLVER_V2_VERSION = '2.9.0' as const
+// 2.10.0 (N8-01): a strip narrower than a body that only line work boxes in before a set-back wing is ground; a facade
+// face at a corner block is weighed against the plan's wall band; the ridge vote and a wing's top skip the main span's
+// end a wing stands against; a wing reaching the main ridge over an attic storey carries a gable of its own, its eaves
+// below the main eaves, run into the main slope along two valleys; its plan's rooflights are cut in its own planes.
+export const SOLVER_V2_VERSION = '2.10.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
@@ -831,8 +835,14 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         return y === undefined ? undefined : v.view.yOf(y)
       }
       const mid = at(0.5)
-      const ends = [at(0.15), at(0.85)].filter((y): y is number => y !== undefined)
-      if (mid === undefined || ends.length < 2) continue
+      // N8-01: an attached body against the main one at an end of this span stands in the same columns behind that
+      // end's slope — a wing's roof running up to the ridge — and its top is not the main roof's: that end does not vote,
+      // and the other end alone must show the gable's fall
+      const frontRear = v.view.side === 'FRONT' || v.view.side === 'REAR'
+      const against = (edge: number): boolean => masses.some((m) => m.id !== main.id && Math.abs((frontRear ? (edge === along[0] ? m.x1 : m.x0) : edge === along[0] ? m.z1 : m.z0) - edge) <= 0.05)
+      const ends = [...(against(along[0]) ? [] : [at(0.15)]), ...(against(along[1]) ? [] : [at(0.85)])].filter((y): y is number => y !== undefined)
+      const needed = (against(along[0]) ? 0 : 1) + (against(along[1]) ? 0 : 1)
+      if (mid === undefined || needed === 0 || ends.length < needed) continue
       const peakM = round6(mid - Math.max(...ends))
       // 005Y: a gable end rises at the pitch across the whole span the view sees, so between 15 % and 50 % of it by
       // 0.35 of the span at the pitch. A hipped roof's eaves side rises too, but only by the hip's run, a trapezoid:
@@ -1629,10 +1639,12 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       const stated = mainRoof && mainRoof.authority !== 'CONVENTION' ? mainRoof.pitchDeg : undefined
       const buildUp = mainRoof && mainWallTop !== undefined ? round6(Math.max(0, mainRoof.eaveY - mainWallTop)) : 0
       const occluders = [...masses.filter((x) => x.id !== m.id), ...(mainRoof ? [mainRoof.footprint] : [])]
-      const form = readAttachedRoofForm({ views, body: m, wallTopY: l.wallTop, eaveBuildUpM: buildUp, statedPitchDeg: stated, occluders, ceilingY: (mainRoof?.ridgeY ?? l.wallTop) + 1.5, mainRoof, masks: skyMasks, debug: options.debug })
+      // N8-01: a body whose top storey is the main body's top storey may carry its roof on knee walls, as the main does
+      const sharesTop = Math.max(...whole.storeys) === topStorey && topStorey > 0
+      const form = readAttachedRoofForm({ views, body: m, wallTopY: l.wallTop, eaveBuildUpM: buildUp, statedPitchDeg: stated, occluders, ceilingY: (mainRoof?.ridgeY ?? l.wallTop) + 1.5, mainRoof, masks: skyMasks, debug: options.debug, ...(sharesTop ? { topStoreyFloorY: l.elevation } : {}) })
       step({ stage: 'roof-details', what: `the form of the roof over ${m.id}, read on the elevations`, method: 'DISCRETE_SELECTION', detail: `${form.kind}: ${form.why}${form.readings.length > 0 ? ` [${form.readings.map((r) => `${r.side.toLowerCase()} ${r.profile.toLowerCase()} ${r.riseM.toFixed(2)} m over ${r.samples} columns`).join('; ')}]` : ''}`, inputs: views.length, outputs: form.readings.length })
       if (form.kind === 'GABLE') {
-        const eaveY = round6(l.wallTop + buildUp)
+        const eaveY = form.eaveY ?? round6(l.wallTop + buildUp)
         const layoutOfRoof = attachedGableLayout(m, form.ridgeAxis, form.pitchDeg, eaveY, mainRoof)
         const sids = form.readings.filter((r) => r.profile !== 'LOW').map((r) => frameById.get(r.frameId)).filter((f): f is SourceCoordinateFrame => !!f).map((f) => sighting(f, `pitched roof over ${m.id}`, form.confidence))
         const pitchProvenance: ProvenanceStatus = form.pitchSource === 'STATED' ? 'SOURCE_DERIVED' : 'IMAGE_METRIC_REGISTERED'
@@ -1779,6 +1791,25 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       planRooflights.push(...readPlanRooflights(callouts, topEntry.frame, r, T, { ridgeAxis: mainRoof.ridgeAxis, ridgeAt: mainRoof.ridgeAt, pitchDeg: mainRoof.pitchDeg, eaveY: mainRoof.eaveY }, options.featureTrace, topEntry.raster))
       options.debug?.(`plan-rooflights ${callouts.length} rings, ${planRooflights.length} rooflights, ${renderRooflights.length} render patches`)
       step({ stage: 'roof-details', what: 'rooflights stated by the plan under the roof', method: 'DIRECT', detail: `${callouts.length} callout ring${callouts.length === 1 ? '' : 's'} inside the storey, ${planRooflights.length} read as rooflights`, inputs: callouts.length, outputs: planRooflights.length })
+      // N8-01: a body with a pitched roof of its own over the same top storey: its plan states its rooflights as the main
+      // body's does, and they are cut in its own planes (plumb, as a plane takes them)
+      for (const pr of pitchedAttachedRoofs) {
+        const body = masses.find((m) => m.id === pr.massId)
+        if (!body || Math.max(...body.storeys) !== topStorey) continue
+        const br = rectAt(body, topStorey)
+        const pa = topEntry.frame.toPixel(br.x0, br.z1)
+        const pb = topEntry.frame.toPixel(br.x1, br.z0)
+        const own = withRecognisedHalves(readTintedCallouts(topEntry.raster, { region: { x0: Math.min(pa.x, pb.x), y0: Math.min(pa.y, pb.y), x1: Math.max(pa.x, pb.x), y1: Math.max(pa.y, pb.y) }, frameId: topEntry.frame.frameId, minRadiusPx: Math.max(6, 0.15 / mpp), maxRadiusPx: Math.max(10, 0.45 / mpp), requireBar: true, ...(options.checkpoint ? { checkpoint: options.checkpoint } : {}) }), topEntry.frame.frameId, metrics.calloutRings)
+        const [lowId, highId] = pitchedPlaneIds(pr.massId)
+        const read = readPlanRooflights(own, topEntry.frame, br, T, { ridgeAxis: pr.ridgeAxis, ridgeAt: pr.layout.ridgeAt, pitchDeg: pr.pitchDeg, eaveY: pr.eaveY }, options.featureTrace, topEntry.raster)
+        for (const q of read) {
+          const id = `${q.id.replace('rooflight-plan-', `rooflight-${pr.massId}-`)}`
+          const why = `${q.why}; in the roof of ${pr.massId}, cut plumb in its ${q.slope === 'LOW' ? 'lower' : 'higher'}-coordinate plane`
+          const featureId = feature('ROOFLIGHT', id, { along: { value: q.alongFrom, low: q.alongFrom - 0.1, high: q.alongFrom + 0.1 }, width: { value: q.widthM, low: q.widthM - 0.05, high: q.widthM + 0.05 }, length: { value: q.lengthM, low: q.lengthM - 0.05, high: q.lengthM + 0.05 } }, [sighting(topEntry.plan.frame, 'a rooflight callout inside the storey under the roof', q.confidence)], 'SOURCE_DERIVED', why, { uncertaintyM: 0.1, unresolvedProperties: ['exact position up the slope'] })
+          rooflights.push({ ...q, id, why, featureId, provenance: 'SOURCE_DERIVED', planeId: q.slope === 'LOW' ? lowId : highId, ridgeAxis: pr.ridgeAxis })
+        }
+        step({ stage: 'roof-details', what: `rooflights stated by the plan under the roof of ${pr.massId}`, method: 'DIRECT', detail: `${own.length} callout ring${own.length === 1 ? '' : 's'} inside it, ${read.length} read as rooflights`, inputs: own.length, outputs: read.length })
+      }
     }
     const overlapsAlong = (p: { alongFrom: number; alongTo: number }, q: { alongFrom: number; alongTo: number }): boolean => Math.min(p.alongTo, q.alongTo) - Math.max(p.alongFrom, q.alongFrom) > 0.5 * Math.min(p.alongTo - p.alongFrom, q.alongTo - q.alongFrom)
     const chimneyAt = (r: { alongFrom: number; alongTo: number; slopeFrom: number; slopeTo: number }): boolean =>

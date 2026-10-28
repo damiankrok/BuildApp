@@ -1,0 +1,60 @@
+{
+ "roofSteps": [
+  "roof | the main roof | 45° gable ridge along Z (the rear and front renders show a gable apex (rear +2.23, front +2.51)), eave 4.645, the side renders span the walled depth only",
+  "roof-details | the form of the roof over attached-0, read on the elevations | GABLE: the rear, front views show the body's top level at 8.27 m, the main ridge (8.52 m, within 0.90 m): a gable of its own along X reaching that ridge, at the stated 45° over its 8.95 m span, its eaves derived at 4.04 m — 1.25 m above its top storey's floor, on knee walls, as the main roof's [rear level 2.67 m over 41 columns; front level 2.65 m over 41 columns]",
+  "roof-details | rooflights stated by the plan under the roof | 6 callout rings inside the storey, 2 read as rooflights",
+  "roof-details | attached roofs, chimneys, rooflights | 0 attached roofs (0 from the section), 0 chimneys, 2 rooflights"
+ ],
+ "masses": [
+  {
+   "id": "main",
+   "role": "MAIN",
+   "x0": 0,
+   "z0": 0,
+   "x1": 7.75,
+   "z1": 10.45,
+   "storeys": [
+    0,
+    1
+   ],
+   "featureId": "feat-main",
+   "sourceMassId": "mass-0"
+  },
+  {
+   "id": "attached-0",
+   "role": "ATTACHED",
+   "x0": 7.75,
+   "z0": 0.7,
+   "x1": 11.6,
+   "z1": 9.65,
+   "storeys": [
+    0,
+    1
+   ],
+   "featureId": "feat-attached-0",
+   "sourceMassId": "mass-1"
+  }
+ ],
+ "mainRoof": {
+  "massId": "main",
+  "kind": "GABLE",
+  "pitchDeg": 45,
+  "ridgeAxis": "Z",
+  "ridgeAt": 3.875,
+  "eaveY": 4.645,
+  "ridgeY": 8.52,
+  "footprint": {
+   "x0": 0,
+   "x1": 7.75,
+   "z0": 0,
+   "z1": 10.45
+  },
+  "coversZones": false,
+  "coversZonesWhy": "the side renders span the walled depth only",
+  "buildUpVerticalM": 0.15,
+  "thicknessM": 0.28,
+  "authority": "PUBLISHED_SPECIFICATION",
+  "featureId": "feat-roof-main",
+  "provenance": "SOURCE_EXACT"
+ }
+}

@@ -2779,3 +2779,21 @@ otwartymi pytaniami"; partial only when the record is partial). An unexplained w
 `unexplainedLengthM` and its `fragments`; Marcówki: 1.79 m unexplained of a 9.45 m band (was reported 9.45 m). Eight
 known houses: models byte-identical. Open: the band before Marcówki's garage runs on over a planter (≈ 1.37 m of the
 1.79 m), band extraction untouched.
+
+## Sasanki 3: dach krzyżowy i górne ściany (STAGE BUILDPLAN N8-01 / FIX-05A)
+
+Status: **DONE — solver 2.10.0, bez APK (odniesienie 1311).** Report
+`stage-reports/STAGE_BUILDPLAN_N8_01_SASANKI_ROOF_AND_UPPER_WALLS.md`, numbers `stage-reports/artifacts/analyzer-n8-01/`.
+FIRST_BAD on the plan: the flood shut cells on drawn lines, so the paving before a garage set back 0.70 m and a canopy
+outline behind it 0.80 m were built, the wing went into one 11.60 × 10.45 m rectangle under one gable along X, and the
+attic's front and rear walls became eaves walls 0.099 m tall (4 × `OPENING_ABOVE_WALL_TOP`). Fixed generally: a strip
+narrower than a body that only line work shuts, in front of a wall and running out to the open, with little wall or ink
+in it, is ground (`lineWorkStrips`); a facade face at a corner block is weighed against the plan's wall band; the ridge
+vote and a wing's top skip the main span's end a wing stands against; a wing reaching the main ridge over an attic
+storey carries its own gable (ridge from the section datum, eaves from the stated pitch) run into the main slope along
+two valleys; its plan rooflights are cut in its own planes. Sasanki: two bodies, main ridge along Z with front and rear
+gables, the wing's ridge along X, garage door and rear door read, 4 openings cut, BuildWorld "geometry ok"; footprint
+115.45 m² (ARCHON 116.22). Eight houses: 6 byte-identical, Rarytasy geometry-identical (evidence text only). Worse/open:
+the block read as a chimney is no longer read, the party wall is two exterior walls (attached-body convention), a
+0.54 m pass in it, 2 of 3 left rooflights. Trytomach (attic registered at the ground's scale) and Arganiach (attic scale
+from 2 anchors, no regions) have another cause; not fixed.

@@ -312,6 +312,11 @@ export type PlanDecomposition = {
    * what was decided: GATE_SHUT (built, a garage behind its gate) or LEFT_OPEN (with what evidence was missing).
    */
   gateBays?: GateBay[]
+  /**
+   * N8-01: enclosed strips outside the walls the decomposition put back on the ground (`lineWorkStrips`): too narrow
+   * for a body, shut on the outside only by line work. Absent when none.
+   */
+  lineWorkStrips?: LineWorkStrip[]
 }
 
 /** N7-COUNCIL-FIX-03 (§3): a pocket walled on three sides with a wide mouth, and whether its mouth is a gate. */
@@ -2355,6 +2360,9 @@ function decomposeCore(
       }
     }
   }
+  // N8-01: a strip the flood could not reach because line work boxes it in — paving before a set-back garage, a canopy's
+  // outline over a back door — lies outside the walls, not inside them (`lineWorkStrips`).
+  const lineStrips = lineWorkStrips(cells, nx, ny, { x: Math.max(1, 2 * wallM + 0.2) / mppX, y: Math.max(1, 2 * wallM + 0.2) / mppY }, inside, mask)
   const gateBays = override ? [] : shutGateBays({ mask, cells, byKey, linesX, linesY, inside, tolerance, minJambPx, maxOpeningPx, maxWidePx, mppX, mppY, wallM, wallPx, chains })
   // the drawn thickness of the wall band along each edge, for the seams (`facadeSeams`)
   const edgeThickness = (axis: 'X' | 'Y', line: number, k: number): number => {
@@ -2378,7 +2386,126 @@ function decomposeCore(
   if (regions.filter((r) => r.classification === 'BUILT').length === 0) {
     unresolved.push({ what: 'any built mass on this plan', reason: 'the flood fill reached every cell of the structural grid: no part of the plan is enclosed' })
   }
-  return { frameId: registration.frameId, wallThickness: { px: round6(wallPx), m: wallM }, envelope, linesX, linesY, cells, regions, extent, unresolved, wideOpenings, bays, hypotheses, chosenHypothesis, ...(spans.length > 0 ? { compoundFacades: spans } : {}), ...(gateBays.length > 0 ? { gateBays } : {}) }
+  return { frameId: registration.frameId, wallThickness: { px: round6(wallPx), m: wallM }, envelope, linesX, linesY, cells, regions, extent, unresolved, wideOpenings, bays, hypotheses, chosenHypothesis, ...(spans.length > 0 ? { compoundFacades: spans } : {}), ...(gateBays.length > 0 ? { gateBays } : {}), ...(lineStrips.length > 0 ? { lineWorkStrips: lineStrips } : {}) }
+}
+
+/** N8-01: the share of the rectangles' area in wall bands or solid ink, sampled on a grid of 32 steps a side. */
+function bandShareOf(rects: readonly PixelRect[], bands: readonly Band[], mask?: Mask): number {
+  let hit = 0
+  let total = 0
+  for (const r of rects) {
+    const sx = Math.max(1, (r.x1 - r.x0) / 32)
+    const sy = Math.max(1, (r.y1 - r.y0) / 32)
+    for (let y = r.y0 + sy / 2; y < r.y1; y += sy)
+      for (let x = r.x0 + sx / 2; x < r.x1; x += sx) {
+        total += 1
+        if (bands.some((b) => x >= b.bounds.x0 && x <= b.bounds.x1 && y >= b.bounds.y0 && y <= b.bounds.y1) || (mask && at(mask, Math.round(x), Math.round(y)) === 1)) hit += 1
+      }
+  }
+  return total === 0 ? 0 : hit / total
+}
+
+/** N8-01: a run of enclosed cells along the outside of the plan put back on the ground, and why. */
+export type LineWorkStrip = {
+  side: 'TOP' | 'RIGHT' | 'BOTTOM' | 'LEFT'
+  cells: Array<{ ix: number; iy: number }>
+  /** How deep the strip is across its outside edge, px; less than a body. */
+  depthPx: number
+  /** Share of the strip's inner edge carried by wall band: the wall it stands outside of. */
+  innerWall: number
+  /** Share of the strip's area in wall bands: under `STRIP_WALL_AREA_MAX`. */
+  wallArea: number
+  why: string
+}
+
+/** An outside edge with less wall band, or less opening, than this carries none: it is shut by line work alone. */
+const STRIP_OUTER_MAX = 0.02
+/** A strip more than this share of which is wall band or solid ink is the wall itself (the grid's lines on its two faces). */
+const STRIP_WALL_AREA_MAX = 0.2
+
+/**
+ * N8-01: enclosed cells that lie outside the walls.
+ *
+ * The flood is stopped by a drawn line as by a wall, and so it should be: a plan draws glazing, balustrades and thin
+ * partitions as lines. But a plan also draws the paving in front of a set-back garage and the outline of a canopy over a
+ * back door, and a strip of ground between a wall and such a line, closed at its ends by the house's own walls, is as
+ * enclosed as a room. Merged into the house, it moves the facade out to the line, and the set-back wing is gone into one
+ * rectangle under one roof.
+ *
+ * A run of BUILT cells along the plan's outside is ground when, on every cell, the edge facing outside carries no wall
+ * band and no opening (`STRIP_OUTER_MAX`: line work only), the run is narrower across that edge than a body can be
+ * (`minSpanPx`: two walls and a room, the decomposition's own measure), wall stands along its inner edge — the
+ * building's face it lies in front of — and at one end at least it runs out to the open (a run shut by built cells at
+ * both ends is a notch in the facade, which the recess reading decides), and little of it is wall band or solid ink
+ * (`STRIP_WALL_AREA_MAX`: a strip between the two faces of a wall, a gate between its jambs, is the wall). A glazed
+ * side has jambs, a bay has walls; neither is touched. Cells are taken off from the outside in, until none qualifies.
+ */
+export function lineWorkStrips(cells: PlanCell[], nx: number, ny: number, minSpanPx: { x: number; y: number }, bands: readonly Band[] = [], mask?: Mask): LineWorkStrip[] {
+  const at = new Map(cells.map((c) => [`${c.ix}:${c.iy}`, c]))
+  const built = (ix: number, iy: number): boolean => at.get(`${ix}:${iy}`)?.classification === 'BUILT'
+  const outside = (ix: number, iy: number): boolean => ix < 0 || iy < 0 || ix >= nx || iy >= ny || at.get(`${ix}:${iy}`)?.classification === 'OUTSIDE'
+  const sides = [
+    { side: 'TOP' as const, dx: 0, dy: -1 },
+    { side: 'RIGHT' as const, dx: 1, dy: 0 },
+    { side: 'BOTTOM' as const, dx: 0, dy: 1 },
+    { side: 'LEFT' as const, dx: -1, dy: 0 },
+  ]
+  const strips: LineWorkStrip[] = []
+  for (let changed = true; changed; ) {
+    changed = false
+    for (let s = 0; s < 4; s += 1) {
+      const { side, dx, dy } = sides[s]
+      const horizontal = dy !== 0
+      const qualifies = (c: PlanCell): boolean => {
+        if (c.classification !== 'BUILT' || !outside(c.ix + dx, c.iy + dy)) return false
+        const e = c.edges[s]
+        const depth = horizontal ? c.rect.y1 - c.rect.y0 : c.rect.x1 - c.rect.x0
+        return e.wall <= STRIP_OUTER_MAX && e.opening <= STRIP_OUTER_MAX && depth < (horizontal ? minSpanPx.y : minSpanPx.x)
+      }
+      // runs of qualifying cells along each row (a TOP or BOTTOM side) or column (LEFT, RIGHT)
+      const lanes = horizontal ? ny : nx
+      const along = horizontal ? nx : ny
+      for (let lane = 0; lane < lanes; lane += 1) {
+        for (let k = 0; k < along; ) {
+          const cellAt = (j: number): PlanCell | undefined => at.get(horizontal ? `${j}:${lane}` : `${lane}:${j}`)
+          const first = cellAt(k)
+          if (!first || !qualifies(first)) {
+            k += 1
+            continue
+          }
+          const run: PlanCell[] = []
+          while (k < along) {
+            const c = cellAt(k)
+            if (!c || !qualifies(c)) break
+            run.push(c)
+            k += 1
+          }
+          const opposite = (s + 2) % 4
+          const length = (c: PlanCell): number => (horizontal ? c.rect.x1 - c.rect.x0 : c.rect.y1 - c.rect.y0)
+          const total = run.reduce((a, c) => a + length(c), 0)
+          // the inner edge faces the building: a built cell there, and wall band along it somewhere
+          const inward = run.every((c) => built(c.ix - dx, c.iy - dy))
+          // it runs out to the open at one end at least: a strip in front of a face, not a notch between two built parts
+          // (a pocket's mouth, which the recess reading decides)
+          const [head, tail] = [run[0], run[run.length - 1]]
+          const ends = horizontal ? [[head.ix - 1, lane], [tail.ix + 1, lane]] : [[lane, head.iy - 1], [lane, tail.iy + 1]]
+          const runsOut = ends.some(([x, y]) => !built(x, y))
+          const innerWall = total > 0 ? run.reduce((a, c) => a + length(c) * c.edges[opposite].wall, 0) / total : 0
+          // and it is ground, not the wall: little of it lies in a wall band
+          const wallArea = bandShareOf(run.map((c) => c.rect), bands, mask)
+          if (!inward || !runsOut || innerWall <= 0 || wallArea > STRIP_WALL_AREA_MAX) continue
+          const depthPx = Math.max(...run.map((c) => (horizontal ? c.rect.y1 - c.rect.y0 : c.rect.x1 - c.rect.x0)))
+          for (const c of run) {
+            c.classification = 'OUTSIDE'
+            c.why = `enclosed only by line work: a ${Math.round(depthPx)} px strip outside the wall along its ${side.toLowerCase()} side, its outer edge drawn with no wall band and no opening (N8-01)`
+          }
+          strips.push({ side, cells: run.map((c) => ({ ix: c.ix, iy: c.iy })), depthPx: round6(depthPx), innerWall: round6(innerWall), wallArea: round6(wallArea), why: `${run.length} enclosed cell${run.length === 1 ? '' : 's'} along the ${side.toLowerCase()} of the plan, ${Math.round(depthPx)} px deep — narrower than a body — between a wall (${Math.round(innerWall * 100)} % of the inner edge) and line work: paving or a canopy's outline, not the building` })
+          changed = true
+        }
+      }
+    }
+  }
+  return strips
 }
 
 /**
@@ -2700,7 +2827,7 @@ function mergeRegions(
   const heightPx = (iy: number): number => linesY[iy + 1].px - linesY[iy].px
   // a body holds two walls and a room (`minBodySpanM`), at the plan's own drawn wall
   const minSpanM = Math.max(1, 2 * wallM + 0.2)
-  const seams = facadeSeams(cells, nx, ny, { x: minSpanM / registration.metresPerPixelX, y: minSpanM / registration.metresPerPixelY }, thickness)
+  const seams = facadeSeams(cells, nx, ny, { x: minSpanM / registration.metresPerPixelX, y: minSpanM / registration.metresPerPixelY }, thickness, wallM / Math.max(registration.metresPerPixelX, registration.metresPerPixelY))
 
   for (;;) {
     let best: { ix: number; iy: number; w: number; h: number; area: number; klass: CellClass } | null = null
@@ -2755,6 +2882,8 @@ const SEAM_WALL = 0.5
 const SEAM_CLOSURE = 0.9
 /** The wall a seam carries on is the facade's own: at least this share of the face wall's drawn thickness. */
 const SEAM_SAME_WALL = 0.75
+/** N8-01: … and, from a face at a corner block, at least this share of the plan's own wall band (a partition is less). */
+const SEAM_CORNER_WALL = 0.5
 
 /**
  * N7-COUNCIL-FIX-03 (Council C-1): the edges between two BUILT cells that are a facade carried on through the
@@ -2777,6 +2906,11 @@ export function facadeSeams(
   minSpanPx: { x: number; y: number } = { x: 0, y: 0 },
   /** The thickness, px, of the wall band drawn along an edge (vertical edges on linesX[line] at row k, or horizontal ones on linesY[line] at column k); absent, every wall counts. */
   thickness?: (axis: 'X' | 'Y', line: number, k: number) => number,
+  /**
+   * N8-01: the plan's own wall band thickness, px. At a corner the face's wall is the end of the wall running across it
+   * (a corner block, no band along the face), and its thickness is then this one — never a partition's.
+   */
+  faceWallPx = 0,
 ): { v: Set<string>; h: Set<string> } {
   const at = new Map(cells.map((c) => [`${c.ix}:${c.iy}`, c]))
   const built = (ix: number, iy: number): boolean => at.get(`${ix}:${iy}`)?.classification === 'BUILT'
@@ -2796,7 +2930,7 @@ export function facadeSeams(
   }
   const v = new Set<string>()
   const h = new Set<string>()
-  const walk = (n: number, face: (k: number) => boolean, wall: (k: number) => boolean, length: (k: number) => number, min: number, add: (k: number) => void, band?: (k: number) => number): void => {
+  const walk = (n: number, face: (k: number) => boolean, wall: (k: number) => boolean, length: (k: number) => number, min: number, add: (k: number) => void, band?: (k: number) => number, faceWall?: (k: number) => boolean): void => {
     // from every face, along the line both ways, while the wall carries on between built cells; a run of seam shorter
     // than a body is a wall's junction with another wall (the grid's strip a wall thick), not a body against a facade.
     // The wall that carries on is the FACADE's: a partition collinear with a neighbour's face is drawn thinner than the
@@ -2804,9 +2938,12 @@ export function facadeSeams(
     const on = new Set<number>()
     for (let k = 0; k < n; k += 1) {
       if (!face(k)) continue
-      const own = band ? band(k) : 0
+      // N8-01: a face at a corner block has no band of its own; the wall carried on is then weighed against the plan's
+      // wall band, and a structural wall clears half of it where a partition does not (`SEAM_CORNER_WALL`)
+      const corner = band !== undefined && band(k) <= 0 && faceWallPx > 0 && faceWall?.(k) === true
+      const own = band ? (corner ? faceWallPx : band(k)) : 0
       if (band && own <= 0) continue
-      const same = (j: number): boolean => !band || band(j) >= SEAM_SAME_WALL * own
+      const same = (j: number): boolean => !band || band(j) >= (corner ? SEAM_CORNER_WALL : SEAM_SAME_WALL) * own
       for (const step of [-1, 1]) for (let j = k + step; j >= 0 && j < n && wall(j) && same(j); j += step) on.add(j)
     }
     for (let k = 0; k < n; k += 1) {
@@ -2820,12 +2957,15 @@ export function facadeSeams(
   for (let line = 1; line < nx; line += 1) {
     const face = (iy: number): boolean => (built(line - 1, iy) && outside(line, iy)) || (outside(line - 1, iy) && built(line, iy))
     const wall = (iy: number): boolean => built(line - 1, iy) && built(line, iy) && continuous(at.get(`${line}:${iy}`)?.edges[3]) && reach(line - 1, iy, -1, 0) >= minSpanPx.x && reach(line, iy, 1, 0) >= minSpanPx.x
-    walk(ny, face, wall, (iy) => { const c = at.get(`${line}:${iy}`); return c ? c.rect.y1 - c.rect.y0 : 0 }, minSpanPx.y, (iy) => v.add(`${line}:${iy}`), thickness && ((iy) => thickness('X', line, iy)))
+    // the face edge carries wall band from whichever side is built
+    const faceWall = (iy: number): boolean => ((built(line, iy) ? at.get(`${line}:${iy}`)?.edges[3] : at.get(`${line - 1}:${iy}`)?.edges[1])?.wall ?? 0) >= SEAM_WALL
+    walk(ny, face, wall, (iy) => { const c = at.get(`${line}:${iy}`); return c ? c.rect.y1 - c.rect.y0 : 0 }, minSpanPx.y, (iy) => v.add(`${line}:${iy}`), thickness && ((iy) => thickness('X', line, iy)), faceWall)
   }
   for (let line = 1; line < ny; line += 1) {
     const face = (ix: number): boolean => (built(ix, line - 1) && outside(ix, line)) || (outside(ix, line - 1) && built(ix, line))
     const wall = (ix: number): boolean => built(ix, line - 1) && built(ix, line) && continuous(at.get(`${ix}:${line}`)?.edges[0]) && reach(ix, line - 1, 0, -1) >= minSpanPx.y && reach(ix, line, 0, 1) >= minSpanPx.y
-    walk(nx, face, wall, (ix) => { const c = at.get(`${ix}:${line}`); return c ? c.rect.x1 - c.rect.x0 : 0 }, minSpanPx.x, (ix) => h.add(`${line}:${ix}`), thickness && ((ix) => thickness('Y', line, ix)))
+    const faceWall = (ix: number): boolean => ((built(ix, line) ? at.get(`${ix}:${line}`)?.edges[0] : at.get(`${ix}:${line - 1}`)?.edges[2])?.wall ?? 0) >= SEAM_WALL
+    walk(nx, face, wall, (ix) => { const c = at.get(`${ix}:${line}`); return c ? c.rect.x1 - c.rect.x0 : 0 }, minSpanPx.x, (ix) => h.add(`${line}:${ix}`), thickness && ((ix) => thickness('Y', line, ix)), faceWall)
   }
   return { v, h }
 }

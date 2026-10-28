@@ -1,0 +1,45 @@
+{
+ "roofSteps": [
+  "roof | the main roof | 45° gable ridge along X (no render shows an unmistakable apex (rear 0.00, front 0.00); the layout's axis stands), eave 3.295, the side renders span the walled depth only",
+  "roof-details | rooflights stated by the plan under the roof | 7 callout rings inside the storey, 3 read as rooflights",
+  "roof-details | attached roofs, chimneys, rooflights | 0 attached roofs (0 from the section), 1 chimney, 4 rooflights"
+ ],
+ "masses": [
+  {
+   "id": "main",
+   "role": "MAIN",
+   "x0": 0,
+   "z0": 0,
+   "x1": 11.6,
+   "z1": 10.45,
+   "storeys": [
+    0,
+    1
+   ],
+   "featureId": "feat-main",
+   "sourceMassId": "mass-0"
+  }
+ ],
+ "mainRoof": {
+  "massId": "main",
+  "kind": "GABLE",
+  "pitchDeg": 45,
+  "ridgeAxis": "X",
+  "ridgeAt": 5.225,
+  "eaveY": 3.295,
+  "ridgeY": 8.52,
+  "footprint": {
+   "x0": 0,
+   "x1": 11.6,
+   "z0": 0,
+   "z1": 10.45
+  },
+  "coversZones": false,
+  "coversZonesWhy": "the side renders span the walled depth only",
+  "buildUpVerticalM": 0.15,
+  "thicknessM": 0.28,
+  "authority": "PUBLISHED_SPECIFICATION",
+  "featureId": "feat-roof-main",
+  "provenance": "SOURCE_EXACT"
+ }
+}
