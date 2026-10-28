@@ -14,6 +14,7 @@ import type { FacadeMember, FacadeAssemblyHypothesis } from './facade.js'
 import type { ProvenanceStatus } from './graph.js'
 import type { AttachedGableLayout, AttachedRoofForm } from './attached-roof-form.js'
 import type { PlaneRoofLayout, RoofEnd } from './plane-roof.js'
+import type { PartyWallV2 } from './party-wall.js'
 
 export type LevelV2 = { index: number; id: string; elevation: number; height: number; wallTop: number; featureId: string }
 
@@ -331,6 +332,8 @@ export type BuildingV2 = {
   terrainY?: number
   /** N7-P2R: a band the plan draws solid, read first as a body: one wall of its drawn thickness (`thin-body.ts`). */
   bandWalls?: BandWallV2[]
+  /** N8-02B: walls the plan draws once between two bodies (`party-wall.ts`), each built by its host body alone. */
+  partyWalls?: PartyWallV2[]
 }
 
 /** N7-P2R: a wall the plan draws as a solid band, stated on its outer face line, its material to the left of its run. */

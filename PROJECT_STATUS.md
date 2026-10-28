@@ -2813,3 +2813,23 @@ coverage conflicts gone. Eight houses: 6 byte-identical (Sasanki c007ce8b). Open
 not cut in the attic slab, attic rooms merged in both, Arganiach's garage door still a window band, its flat garage roof
 height assumed (3.57 → 2.80 m).
 
+
+## Jedna wspólna ściana domu i garażu (STAGE BUILDPLAN N8-02B / FIX-05C)
+
+Status: **DONE — solver 2.12.0, bez APK.** Report `stage-reports/STAGE_BUILDPLAN_N8_02B_SHARED_PARTY_WALL.md`,
+numbers `stage-reports/artifacts/analyzer-n8-02b/`. FIRST_BAD: the emitter built a ring per body, so the one band a plan
+draws between a house and a garage became two exterior walls (Sasanki 2 × 0.43 m for a 0.23 m band, Marcówki 2 × 0.49
+for 0.42, Rarytasy 2 × 0.441 for 0.275); the doorways on that face were read on the house wall's centre line at its
+thickness, and the watermark over the band opened two false passes in Sasanki (0.54 and 0.72 m). Fixed generally
+(`v2/party-wall.ts`): every contact between two bodies is read across on the plan — one consistent band thinner than
+both walls is one wall of the drawn thickness on the band, built once by the body on whose side it lies; two bands, or a
+band as thick as both walls, stay two walls; too little or inconsistent ink, or a corner that cannot be closed, stays
+two walls with the conflict named. Bodies sharing a wall are built wall by wall (`body-envelope` tag, read as envelope by
+BuildWorld and the mobile bundle); interiors, slabs and the flat roof reach the band; the shared wall's doorways are read
+on the band. Sasanki's stair partition: the 2.9.0 "2.48 m wall with a 1.11 m door" was a misreading (the winder's skew
+edge); the drawn 1.31 m piece is back with the real door to the store under the stair (a door at a partition's end only
+where its swing is drawn); the garage's 9 → 8 door kept (a block at the wall face is no jamb). Eight houses: 5
+byte-identical (Trytomach and Arganiach attics unchanged; Arganiach's contact UNDECIDED, named — no band drawn), Sasanki,
+Marcówki and Rarytasy changed by the rule; all 8 validate and compile with no diagnostics, every opening physically cut.
+Open: Sasanki's attic door into room 8 is read but not cut (under the main roof's slope the shared wall stands 1.64 m;
+the roofs are not cut to each other), the winder's skew edge, 4 cm inner-face step in Marcówki, Arganiach's body split.

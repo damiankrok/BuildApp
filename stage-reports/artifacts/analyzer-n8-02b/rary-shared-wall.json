@@ -1,0 +1,301 @@
+{
+ "project": {
+  "name": "Dom w rarytasach 5 (G2E)",
+  "archonProjectId": "m84f2903cb8e14",
+  "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14"
+ },
+ "manualPlanMeasurement": {
+  "sheet": "floor-plan-01-ground-archon11815.gif (853×853)",
+  "mPerPx": "≈0.0276 (1720 cm over px 107..730)",
+  "ground": {
+   "houseExposedWallPx": [
+    460,
+    476
+   ],
+   "sharedBandPx": [
+    460,
+    469
+   ],
+   "note": "columns x 200..350 (behind the garage) 460..469, columns 150 and 700 (house front exposed) 460..476; the garage interior from row 470; the door 100/210 in the band"
+  }
+ },
+ "partyWallReading": [
+  {
+   "storeyIndex": 0,
+   "frameId": "frame-asset-rzut-e8520c3ad3-59a406b738",
+   "massIds": [
+    "main",
+    "attached-0"
+   ],
+   "facade": "FRONT",
+   "contactAt": 6.2,
+   "span": [
+    2.051804,
+    8.909234
+   ],
+   "wallsM": [
+    0.441264,
+    0.441264
+   ],
+   "reading": {
+    "samples": 213,
+    "solid": 180,
+    "one": 180,
+    "two": 0,
+    "consistent": 138,
+    "windowM": [
+     5.458736,
+     6.941264
+    ],
+    "bandM": [
+     6.3752,
+     6.6504
+    ],
+    "widthM": 0.2752
+   },
+   "decision": "ONE_WALL",
+   "why": "main|attached-0 on storey 0, 5.46..6.94 across over 2.05..8.91: 180 of 213 positions drawn, 180 one band, 0 two, 138 on one line: one band 0.28 m thick at 6.38..6.65 (both walls would be 0.88 m), on main's side of the contact at 6.20: one wall, built by main; attached-0 builds none over 2.05..8.91",
+   "wall": {
+    "id": "ring-main-0-w0-party-attached-0",
+    "storeyIndex": 0,
+    "hostMassId": "main",
+    "otherMassId": "attached-0",
+    "hostFacade": "FRONT",
+    "contactAt": 6.2,
+    "band": [
+     6.3752,
+     6.6504
+    ],
+    "thicknessM": 0.2752,
+    "span": [
+     2.051804,
+     8.909234
+    ],
+    "ends": [
+     "OTHER_CORNER",
+     "OTHER_CORNER"
+    ],
+    "provenance": "SOURCE_DERIVED",
+    "why": "the plan draws one 0.28 m wall between main and attached-0 (180 of 213 positions drawn, 180 one band, 0 two, 138 on one line), where two walls would be 0.88 m"
+   }
+  }
+ ],
+ "partyWalls": [
+  {
+   "id": "ring-main-0-w0-party-attached-0",
+   "storeyIndex": 0,
+   "hostMassId": "main",
+   "otherMassId": "attached-0",
+   "hostFacade": "FRONT",
+   "contactAt": 6.2,
+   "band": [
+    6.3752,
+    6.6504
+   ],
+   "thicknessM": 0.2752,
+   "span": [
+    2.051804,
+    8.909234
+   ],
+   "ends": [
+    "OTHER_CORNER",
+    "OTHER_CORNER"
+   ],
+   "provenance": "SOURCE_DERIVED",
+   "why": "the plan draws one 0.28 m wall between main and attached-0 (180 of 213 positions drawn, 180 one band, 0 two, 138 on one line), where two walls would be 0.88 m"
+  }
+ ],
+ "before": {
+  "solver": "2.11.0 (N8-02A)",
+  "modelSha256": "07b792a5e320ad6c14bab5cd95216c8c4c50abfb70822bf39cedbac6addbbf2a",
+  "wallsAtContact": [
+   {
+    "id": "ring-attached-0-0-w2",
+    "level": "lvl-0",
+    "kind": "EXTERIOR",
+    "alongM": [
+     2.052,
+     8.909
+    ],
+    "lengthM": 6.857,
+    "thicknessM": 0.441,
+    "facesAcrossM": [
+     5.759,
+     6.2
+    ],
+    "tags": null
+   },
+   {
+    "id": "ring-main-0-w0",
+    "level": "lvl-0",
+    "kind": "EXTERIOR",
+    "alongM": [
+     0,
+     17.21
+    ],
+    "lengthM": 17.21,
+    "thicknessM": 0.441,
+    "facesAcrossM": [
+     6.2,
+     6.641
+    ],
+    "tags": null
+   }
+  ],
+  "openingsAtContact": [
+   {
+    "id": "shared-opening-0-front-0-0",
+    "kind": "DOOR",
+    "wallId": "ring-main-0-w0",
+    "wallThicknessM": 0.441264,
+    "widthM": 1,
+    "heightM": 2.1,
+    "sillM": 0,
+    "centre": {
+     "x": 7.888,
+     "y": 1.05,
+     "z": 6.2
+    },
+    "cut": true
+   }
+  ],
+  "counts": {
+   "walls": 20,
+   "wallsExterior": 8,
+   "wallRings": [
+    "ring-attached-0-0",
+    "ring-main-0"
+   ],
+   "windows": 7,
+   "doors": 13,
+   "rooms": {
+    "lvl-0": 9
+   },
+   "roofs": 1,
+   "roofPlanes": 2,
+   "chimneys": 2
+  },
+  "compile": {
+   "validation": {
+    "ok": true,
+    "errors": [],
+    "warnings": 0,
+    "overlaps": 0
+   },
+   "diagnostics": [],
+   "stats": {
+    "triangleCount": 2880,
+    "meshCount": 119,
+    "objectCount": 83
+   },
+   "openingsCut": "20/20"
+  }
+ },
+ "after": {
+  "solver": "2.12.0 (N8-02B)",
+  "modelSha256": "9657ddad9448dd8bccedd3c18dda931d74fc5acfa36adc94a69eb154cf5ee432",
+  "wallsAtContact": [
+   {
+    "id": "ring-main-0-w0-0",
+    "level": "lvl-0",
+    "kind": "EXTERIOR",
+    "alongM": [
+     0,
+     2.493
+    ],
+    "lengthM": 2.493,
+    "thicknessM": 0.441,
+    "facesAcrossM": [
+     6.2,
+     6.641
+    ],
+    "tags": [
+     "body-envelope"
+    ]
+   },
+   {
+    "id": "ring-main-0-w0-1",
+    "level": "lvl-0",
+    "kind": "EXTERIOR",
+    "alongM": [
+     8.468,
+     17.21
+    ],
+    "lengthM": 8.742,
+    "thicknessM": 0.441,
+    "facesAcrossM": [
+     6.2,
+     6.641
+    ],
+    "tags": [
+     "body-envelope"
+    ]
+   },
+   {
+    "id": "ring-main-0-w0-party-attached-0",
+    "level": "lvl-0",
+    "kind": "EXTERIOR",
+    "alongM": [
+     2.493,
+     8.468
+    ],
+    "lengthM": 5.975,
+    "thicknessM": 0.275,
+    "facesAcrossM": [
+     6.375,
+     6.65
+    ],
+    "tags": [
+     "body-envelope"
+    ]
+   }
+  ],
+  "openingsAtContact": [
+   {
+    "id": "shared-party-0-front-0-0",
+    "kind": "DOOR",
+    "wallId": "ring-main-0-w0-party-attached-0",
+    "wallThicknessM": 0.2752,
+    "widthM": 1,
+    "heightM": 2.1,
+    "sillM": 0,
+    "centre": {
+     "x": 7.888,
+     "y": 1.05,
+     "z": 6.375
+    },
+    "cut": true
+   }
+  ],
+  "counts": {
+   "walls": 21,
+   "wallsExterior": 9,
+   "wallRings": [],
+   "windows": 7,
+   "doors": 13,
+   "rooms": {
+    "lvl-0": 9
+   },
+   "roofs": 1,
+   "roofPlanes": 2,
+   "chimneys": 2
+  },
+  "compile": {
+   "validation": {
+    "ok": true,
+    "errors": [],
+    "warnings": 0,
+    "overlaps": 0
+   },
+   "diagnostics": [],
+   "stats": {
+    "triangleCount": 2840,
+    "meshCount": 119,
+    "objectCount": 84
+   },
+   "openingsCut": "20/20"
+  },
+  "completeness": "COMPLETE",
+  "unresolvedAboutTheWall": []
+ }
+}

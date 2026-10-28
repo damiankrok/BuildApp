@@ -296,7 +296,8 @@ export function sceneFactsOf(model: CanonicalBuildingModel): SceneFacts {
   for (const s of model.linearSolids) if (s.role) facts.memberRole.set(s.id, s.role)
   for (const b of model.balconies) facts.balconyKind.set(b.id, b.kind)
   for (const r of model.railings) facts.railingInfill.set(r.id, r.infill)
-  const inRing = new Set(model.wallRings.flatMap((r) => r.wallIds))
+  // N8-02B: the walls of a body no ring record groups, tagged as its envelope (mirrors `wallFinishes`)
+  const inRing = new Set([...model.wallRings.flatMap((r) => r.wallIds), ...model.walls.filter((w) => w.tags?.includes('body-envelope')).map((w) => w.id)])
   const hasRings = inRing.size > 0
   const exterior = model.walls.filter((w) => w.kind === 'EXTERIOR')
   const area = new Map<string, number>()

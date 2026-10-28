@@ -52,7 +52,10 @@ describe('N7-COUNCIL-FIX-02 (B-1): the exterior wall from the outer faces', () =
     expect(house?.m).toBeGreaterThan(0.41)
     expect(house?.m).toBeLessThan(0.47)
     expect(reconstruction.building.wallThicknessM).toBe(reconstruction.wallThickness.houseM)
-    for (const w of result.model.walls.filter((x) => x.kind === 'EXTERIOR' && x.id.startsWith('ring-'))) expect(w.thickness).toBeCloseTo(house?.m as number, 6)
+    for (const w of result.model.walls.filter((x) => x.kind === 'EXTERIOR' && x.id.startsWith('ring-') && !x.id.includes('-party-'))) expect(w.thickness).toBeCloseTo(house?.m as number, 6)
+    // N8-02B: where the decomposition cut the house into bodies along a 0.20 m partition, the one wall between them is
+    // built at the band's drawn thickness, never at two exterior walls'
+    for (const w of result.model.walls.filter((x) => x.id.includes('-party-'))) expect(w.thickness).toBeLessThan(0.3)
     expect(result.preview.outcome).toBe('COMPLETE')
     await sound(runs.thick43)
   })

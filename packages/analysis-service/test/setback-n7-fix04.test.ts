@@ -78,8 +78,10 @@ describe('N7-FIX-04 (B/C): a chosen layout holding a BLOCKING reason is not comp
     expect(o.result.preview.outcome).toBe('PARTIAL_3D_PREVIEW')
     expect(o.result.preview.partial?.layoutBlocking?.map((b) => b.code)).toEqual(['STRUCTURE_SILHOUETTE_DISAGREES'])
     expect(o.result.preview.partial?.failure.codes).toContain('LAYOUT_BLOCKING_UNRESOLVED')
-    // nothing of the model is taken away: both bodies' rings stand
-    expect(o.result.model.wallRings.map((r) => r.id).sort()).toEqual(['ring-attached-0-0', 'ring-main-0', 'ring-main-1'])
+    // nothing of the model is taken away: both bodies' rings stand (N8-02B: a body sharing the one wall the plan draws
+    // with the other is built wall by wall, its walls tagged as its envelope)
+    const bodies = new Set([...o.result.model.wallRings.map((r) => r.id), ...o.result.model.walls.filter((w) => w.tags?.includes('body-envelope')).map((w) => /^(ring-.+?-\d+)-w\d/.exec(w.id)?.[1] ?? '')])
+    expect([...bodies].sort()).toEqual(['ring-attached-0-0', 'ring-main-0', 'ring-main-1'])
     expect(o.result.preview.partial?.missing).toEqual([])
     expect(o.result.preview.completeness?.verdict).toBe('PARTIAL')
     expect(o.result.preview.completeness?.conflicts.blocking.map((b) => b.code)).toEqual(['STRUCTURE_SILHOUETTE_DISAGREES'])

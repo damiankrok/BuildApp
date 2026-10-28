@@ -18,7 +18,7 @@ import { round6 } from '@buildapp/source-common'
 import type { PixelRect } from '@buildapp/source-common'
 import type { Raster } from '@buildapp/source-cv'
 import type { PlanFrameV2 } from './frame.js'
-import { rgbAt } from './scan.js'
+import { NEUTRAL_INK_CHROMA, lumaAt, rgbAt } from './scan.js'
 
 export type InteriorWallPiece = {
   id: string
@@ -499,6 +499,12 @@ export function readInterior(
       const hi = axis === 'Z' ? b.x1 : b.z1
       for (const w of walls) {
         if (w.axis !== axis || w.at < lo - drawnM * 0.3 || w.at > hi + drawnM * 0.3) continue
+        // N8-02B: a block against the body's inner face that the piece itself runs through end to end — the piece
+        // thickening where it meets the outer wall — is no jamb beside a gap: as one it would stand between the piece
+        // and the piece across a door, and hide the door
+        const [from, to] = axis === 'Z' ? [b.z0, b.z1] : [b.x0, b.x1]
+        const againstFace = Math.min(Math.abs(from - (axis === 'Z' ? inner.z0 : inner.x0)), Math.abs(to - (axis === 'Z' ? inner.z1 : inner.x1))) <= 0.02
+        if (againstFace && w.from <= from + 0.02 && w.to >= to - 0.02) break
         pseudo.push({ ...w, id: `${b.id}:${axis}`, from: axis === 'Z' ? b.z0 : b.x0, to: axis === 'Z' ? b.z1 : b.x1, ends: { start: 'JUNCTION', end: 'JUNCTION' }, confidence: 0.5, why: `the edge of ${b.id}` })
         break
       }
@@ -544,9 +550,45 @@ export function readInterior(
     }
   }
 
+  // N8-02B: a door at the end of a partition. A piece free at both ends whose end stands on the line of a perpendicular
+  // piece, a door's width past that piece's end, is the far jamb of a door in that line when the plan draws the door's
+  // swing in the gap (a quarter arc from either jamb, on either side): the door is cut there, and the piece is a wall.
+  // Without a drawn swing the gap stays a passage or nothing, as before.
+  const jambIds = new Set<string>()
+  for (const w of walls) {
+    if (w.ends.start === 'JUNCTION' || w.ends.end === 'JUNCTION' || doors.some((d) => d.betweenIds.includes(w.id))) continue
+    for (const end of [w.from, w.to]) {
+      for (const o of walls) {
+        if (o === w || o.axis === w.axis || Math.abs(o.at - end) > Math.max(drawnM * 0.5, o.thicknessM)) continue
+        if (!(o.ends.start === 'JUNCTION' || o.ends.end === 'JUNCTION' || o.to - o.from >= 0.45)) continue
+        const near = w.at - w.thicknessM / 2
+        const far = w.at + w.thicknessM / 2
+        const gap: [number, number] | undefined = o.to <= near ? [o.to, near] : o.from >= far ? [far, o.from] : undefined
+        if (!gap || gap[1] - gap[0] < opt.doorMinM || gap[1] - gap[0] > opt.doorMaxM) continue
+        const walled = walls.some((x) => x !== o && x.axis === o.axis && Math.abs(x.at - o.at) <= drawnM * 0.5 && x.from < gap[1] - 0.05 && x.to > gap[0] + 0.05)
+        if (walled || !swingDrawn(raster, plan, o.axis, o.at, gap)) continue
+        doors.push({
+          id: `idoor-${storeyIndex}-${doors.length}`,
+          storeyIndex,
+          wallAxis: o.axis,
+          at: o.at,
+          from: round6(gap[0]),
+          to: round6(gap[1]),
+          widthM: round6(gap[1] - gap[0]),
+          betweenIds: [o.id, `${w.id}:jamb`],
+          confidence: round6(Math.min(o.confidence, 0.6) * 0.95),
+          why: `a ${(gap[1] - gap[0]).toFixed(2)} m gap between the end of a partition and the wall across its line, its swing drawn: a door, the wall across its far jamb`,
+        })
+        jambIds.add(w.id)
+        break
+      }
+      if (jambIds.has(w.id)) break
+    }
+  }
+
   // A free-standing piece with no junction at either end is a cupboard or a
   // worktop, not a wall — unless a door gap anchors it to a piece that is.
-  const anchoredByDoor = new Set(doors.flatMap((d) => d.betweenIds))
+  const anchoredByDoor = new Set([...doors.flatMap((d) => d.betweenIds), ...jambIds])
   const kept = walls.filter((w) => w.ends.start === 'JUNCTION' || w.ends.end === 'JUNCTION' || anchoredByDoor.has(w.id))
   const dropped = walls.filter((w) => !kept.includes(w))
   for (const d of dropped) unresolved.push({ what: `a ${(d.to - d.from).toFixed(2)} m thin band at ${d.axis === 'Z' ? 'x' : 'z'} ${d.at.toFixed(2)}`, reason: 'meets no wall at either end: fitted furniture or a line, not a partition' })
@@ -730,6 +772,40 @@ export function readInterior(
 }
 
 /** Trace the outer boundary of a set of grid cells as a rectilinear polygon (anticlockwise in the x/z plane). */
+/**
+ * N8-02B: whether the plan draws a door's swing in a gap of a wall line: a quarter arc of the gap's radius from either
+ * jamb, on either side of the line, sampled at 12 points; at least 70 % of them on neutral line work (within a pixel).
+ */
+export function swingDrawn(raster: Raster, plan: PlanFrameV2, axis: 'X' | 'Z', at: number, gap: [number, number]): boolean {
+  const width = gap[1] - gap[0]
+  const lineAt = (x: number, y: number): boolean => {
+    for (let dy = -1; dy <= 1; dy += 1) {
+      for (let dx = -1; dx <= 1; dx += 1) {
+        if (lumaAt(raster, x + dx, y + dy) >= 200) continue
+        const [r, g, b] = rgbAt(raster, x + dx, y + dy)
+        if (Math.max(r, g, b) - Math.min(r, g, b) < NEUTRAL_INK_CHROMA) return true
+      }
+    }
+    return false
+  }
+  for (const hinge of [gap[0], gap[1]]) {
+    for (const side of [-1, 1]) {
+      let hit = 0
+      let n = 0
+      for (let deg = 12; deg <= 78; deg += 6) {
+        const t = (deg * Math.PI) / 180
+        const along = hinge + (hinge === gap[0] ? 1 : -1) * width * Math.cos(t)
+        const across = at + side * width * Math.sin(t)
+        const p = axis === 'Z' ? plan.toPixel(across, along) : plan.toPixel(along, across)
+        n += 1
+        if (lineAt(p.x, p.y)) hit += 1
+      }
+      if (hit >= 0.7 * n) return true
+    }
+  }
+  return false
+}
+
 function tracePolygon(cells: ReadonlyArray<[number, number]>, gx: number, gz: number, cell: number, x0: number, z0: number): Array<{ x: number; z: number }> {
   const set = new Set(cells.map(([i, j]) => j * gx + i))
   const inside = (i: number, j: number): boolean => i >= 0 && j >= 0 && i < gx && j < gz && set.has(j * gx + i)

@@ -91,7 +91,8 @@ export function outcomeOf(r: ReturnType<typeof reconstructV2>) {
     modelWalls: r.model.walls.length,
     // review round 1: every body's ring and MASS feature (not only the first), the outlined platform a terrace carries,
     // and the platforms named instead of built
-    ringStatuses: r.model.wallRings.map((w) => w.evidence?.status),
+    // N8-02B: a body that shares a wall the plan draws once has no ring record; its own walls carry its ring's status
+    ringStatuses: r.building.masses.flatMap((m) => m.storeys.map((s) => r.model.wallRings.find((w) => w.id === `ring-${m.id}-${s}`)?.evidence?.status ?? r.model.walls.find((w) => w.id.startsWith(`ring-${m.id}-${s}-w`) && !w.id.includes('-party-'))?.evidence?.status)).filter((x) => x !== undefined),
     massFeatures: r.featureGraph.solved.filter((x) => x.family === 'MASS').map((x) => x.provenance),
     terraceReach: r.building.terraces.map((x) => x.extension?.reach ?? null),
     platforms: r.unresolved.filter((u) => u.what.startsWith('the platform the plan outlines')).map((u) => u.what),

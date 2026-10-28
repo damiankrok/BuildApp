@@ -65,7 +65,8 @@ export function flattenMesh(mesh: CompiledMesh, semanticGroup: SemanticGroup): M
  *   has rings — a return, a fin, a jamb standing out of a body's envelope
  *   to frame a recess. A body's envelope is its ring; what stands outside it
  *   frames it. (1.6.0: walls that follow roof planes, and the walls a
- *   dormer, garage or facade assembly names, are envelope too.)
+ *   dormer, garage or facade assembly names, are envelope too; N8-02B: so
+ *   are the walls tagged `body-envelope`.)
  * - PRIMARY: a ring wall carrying the building's dominant exterior finish,
  *   the material covering the largest ring-wall area (length × height,
  *   openings not subtracted: a finish is chosen for a wall, not for what is
@@ -75,6 +76,9 @@ export function flattenMesh(mesh: CompiledMesh, semanticGroup: SemanticGroup): M
  * Nothing here reads a colour or a name. A model without rings has no
  * members; its walls are PRIMARY or SECONDARY by finish alone.
  */
+/** N8-02B: the tag a producer puts on the walls of a body that no ring record groups (one sharing a wall with another). */
+export const ENVELOPE_TAG = 'body-envelope'
+
 export function wallFinishes(model: CanonicalBuildingModel): Map<string, NonNullable<ObjectFacts['finish']>> {
   // 1.6.0: a wall that follows roof planes, or that a dormer, garage or facade assembly names as its
   // wall, is envelope as surely as a ring wall is — a dormer's front, a wing's walls under their roof
@@ -82,6 +86,9 @@ export function wallFinishes(model: CanonicalBuildingModel): Map<string, NonNull
     ...model.wallRings.flatMap((r) => r.wallIds),
     ...model.walls.filter((w) => w.topProfile?.kind === 'FOLLOW_ROOF_PLANES').map((w) => w.id),
     ...model.assemblies.flatMap((a) => (a.kind === 'DORMER' || a.kind === 'GARAGE' || a.kind === 'FACADE' ? a.wallIds : [])),
+    // N8-02B: a body built wall by wall, sharing one wall with the body beside it, has no ring record; its producer
+    // tags its walls as its envelope
+    ...model.walls.filter((w) => w.tags?.includes(ENVELOPE_TAG)).map((w) => w.id),
   ]
   const inRing = new Set(envelope)
   const hasRings = inRing.size > 0

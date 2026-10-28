@@ -1,0 +1,621 @@
+{
+ "project": {
+  "name": "Dom w sasankach 3 (G)",
+  "archonProjectId": "mb292397cb1840",
+  "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-sasankach-3-g-mb292397cb1840"
+ },
+ "manualPlanMeasurement": {
+  "sheet": "floor-plan-01-ground-archon11815.gif (853×853)",
+  "mPerPx": "≈0.0196 (775 cm over px 92..488)",
+  "ground": {
+   "houseExposedWallPx": [
+    465,
+    487
+   ],
+   "sharedBandPx": [
+    465,
+    476
+   ],
+   "garageInteriorFromPx": 477,
+   "note": "rows 205..616; the \"archon\" watermark tints the band to luma 93..95 at rows 286..336 and 358..376 (no door drawn there); the one door 7→8 at rows 547..589"
+  },
+  "attic": {
+   "sheet": "floor-plan-02-attic-archon11817.gif",
+   "houseExposedWallPx": [
+    471,
+    492
+   ],
+   "sharedBandPx": [
+    471,
+    482
+   ],
+   "note": "a door with its swing drawn at rows ≈314..360 (hall 2 → room 8); watermark over the band elsewhere"
+  }
+ },
+ "partyWallReading": [
+  {
+   "storeyIndex": 0,
+   "frameId": "frame-asset-rzut-0e011b73e9-f8d5d43c86",
+   "massIds": [
+    "main",
+    "attached-0"
+   ],
+   "facade": "EAST",
+   "contactAt": 7.75,
+   "span": [
+    0.7,
+    9.65
+   ],
+   "wallsM": [
+    0.429616,
+    0.429616
+   ],
+   "reading": {
+    "samples": 411,
+    "solid": 366,
+    "one": 330,
+    "two": 30,
+    "consistent": 279,
+    "windowM": [
+     7.020384,
+     8.479616
+    ],
+    "bandM": [
+     7.323,
+     7.557336
+    ],
+    "widthM": 0.234336
+   },
+   "decision": "ONE_WALL",
+   "why": "main|attached-0 on storey 0, 7.02..8.48 across over 0.70..9.65: 366 of 411 positions drawn, 330 one band, 30 two, 279 on one line: one band 0.23 m thick at 7.32..7.56 (both walls would be 0.86 m), on main's side of the contact at 7.75: one wall, built by main; attached-0 builds none over 0.70..9.65",
+   "wall": {
+    "id": "ring-main-0-w1-party-attached-0",
+    "storeyIndex": 0,
+    "hostMassId": "main",
+    "otherMassId": "attached-0",
+    "hostFacade": "EAST",
+    "contactAt": 7.75,
+    "band": [
+     7.323,
+     7.557336
+    ],
+    "thicknessM": 0.234336,
+    "span": [
+     0.7,
+     9.65
+    ],
+    "ends": [
+     "OTHER_CORNER",
+     "OTHER_CORNER"
+    ],
+    "provenance": "SOURCE_DERIVED",
+    "why": "the plan draws one 0.23 m wall between main and attached-0 (366 of 411 positions drawn, 330 one band, 30 two, 279 on one line), where two walls would be 0.86 m"
+   }
+  },
+  {
+   "storeyIndex": 1,
+   "frameId": "frame-asset-rzut-bdcb60b3c7-e9c425fa1f",
+   "massIds": [
+    "main",
+    "attached-0"
+   ],
+   "facade": "EAST",
+   "contactAt": 7.75,
+   "span": [
+    0.7,
+    9.65
+   ],
+   "wallsM": [
+    0.429616,
+    0.429616
+   ],
+   "reading": {
+    "samples": 410,
+    "solid": 364,
+    "one": 330,
+    "two": 22,
+    "consistent": 311,
+    "windowM": [
+     7.020384,
+     8.479616
+    ],
+    "bandM": [
+     7.323,
+     7.557336
+    ],
+    "widthM": 0.234336
+   },
+   "decision": "ONE_WALL",
+   "why": "main|attached-0 on storey 1, 7.02..8.48 across over 0.70..9.65: 364 of 410 positions drawn, 330 one band, 22 two, 311 on one line: one band 0.23 m thick at 7.32..7.56 (both walls would be 0.86 m), on main's side of the contact at 7.75: one wall, built by main; attached-0 builds none over 0.70..9.65",
+   "wall": {
+    "id": "ring-main-1-w1-party-attached-0",
+    "storeyIndex": 1,
+    "hostMassId": "main",
+    "otherMassId": "attached-0",
+    "hostFacade": "EAST",
+    "contactAt": 7.75,
+    "band": [
+     7.323,
+     7.557336
+    ],
+    "thicknessM": 0.234336,
+    "span": [
+     0.7,
+     9.65
+    ],
+    "ends": [
+     "OTHER_CORNER",
+     "OTHER_CORNER"
+    ],
+    "provenance": "SOURCE_DERIVED",
+    "why": "the plan draws one 0.23 m wall between main and attached-0 (364 of 410 positions drawn, 330 one band, 22 two, 311 on one line), where two walls would be 0.86 m"
+   }
+  }
+ ],
+ "partyWalls": [
+  {
+   "id": "ring-main-0-w1-party-attached-0",
+   "storeyIndex": 0,
+   "hostMassId": "main",
+   "otherMassId": "attached-0",
+   "hostFacade": "EAST",
+   "contactAt": 7.75,
+   "band": [
+    7.323,
+    7.557336
+   ],
+   "thicknessM": 0.234336,
+   "span": [
+    0.7,
+    9.65
+   ],
+   "ends": [
+    "OTHER_CORNER",
+    "OTHER_CORNER"
+   ],
+   "provenance": "SOURCE_DERIVED",
+   "why": "the plan draws one 0.23 m wall between main and attached-0 (366 of 411 positions drawn, 330 one band, 30 two, 279 on one line), where two walls would be 0.86 m"
+  },
+  {
+   "id": "ring-main-1-w1-party-attached-0",
+   "storeyIndex": 1,
+   "hostMassId": "main",
+   "otherMassId": "attached-0",
+   "hostFacade": "EAST",
+   "contactAt": 7.75,
+   "band": [
+    7.323,
+    7.557336
+   ],
+   "thicknessM": 0.234336,
+   "span": [
+    0.7,
+    9.65
+   ],
+   "ends": [
+    "OTHER_CORNER",
+    "OTHER_CORNER"
+   ],
+   "provenance": "SOURCE_DERIVED",
+   "why": "the plan draws one 0.23 m wall between main and attached-0 (364 of 410 positions drawn, 330 one band, 22 two, 311 on one line), where two walls would be 0.86 m"
+  }
+ ],
+ "before": {
+  "solver": "2.11.0 (N8-02A)",
+  "modelSha256": "c007ce8bab1689c745cb904dbbd64b07e7c8f7d79edfbdf64bf98005a8b5acc2",
+  "wallsAtContact": [
+   {
+    "id": "ring-main-0-w1",
+    "level": "lvl-0",
+    "kind": "EXTERIOR",
+    "alongM": [
+     0,
+     10.45
+    ],
+    "lengthM": 10.45,
+    "thicknessM": 0.43,
+    "facesAcrossM": [
+     7.32,
+     7.75
+    ],
+    "tags": null
+   },
+   {
+    "id": "ring-attached-0-0-w3",
+    "level": "lvl-0",
+    "kind": "EXTERIOR",
+    "alongM": [
+     0.7,
+     9.65
+    ],
+    "lengthM": 8.95,
+    "thicknessM": 0.43,
+    "facesAcrossM": [
+     7.75,
+     8.18
+    ],
+    "tags": null
+   },
+   {
+    "id": "ring-main-1-w1",
+    "level": "lvl-1",
+    "kind": "EXTERIOR",
+    "alongM": [
+     0,
+     10.45
+    ],
+    "lengthM": 10.45,
+    "thicknessM": 0.43,
+    "facesAcrossM": [
+     7.32,
+     7.75
+    ],
+    "tags": null
+   },
+   {
+    "id": "ring-attached-0-1-w3",
+    "level": "lvl-1",
+    "kind": "EXTERIOR",
+    "alongM": [
+     0.7,
+     9.65
+    ],
+    "lengthM": 8.95,
+    "thicknessM": 0.43,
+    "facesAcrossM": [
+     7.75,
+     8.18
+    ],
+    "tags": null
+   }
+  ],
+  "openingsAtContact": [
+   {
+    "id": "shared-opening-0-east-1-0",
+    "kind": "DOOR",
+    "wallId": "ring-main-0-w1",
+    "wallThicknessM": 0.429616,
+    "widthM": 0.544572,
+    "heightM": 2.1,
+    "sillM": 0,
+    "centre": {
+     "x": 7.75,
+     "y": 1.05,
+     "z": 7.533
+    },
+    "cut": true
+   },
+   {
+    "id": "shared-opening-0-east-1-1",
+    "kind": "DOOR",
+    "wallId": "ring-main-0-w1",
+    "wallThicknessM": 0.429616,
+    "widthM": 0.719613,
+    "heightM": 2.1,
+    "sillM": 0,
+    "centre": {
+     "x": 7.75,
+     "y": 1.05,
+     "z": 6.025
+    },
+    "cut": true
+   },
+   {
+    "id": "shared-opening-0-east-1-2",
+    "kind": "DOOR",
+    "wallId": "ring-main-0-w1",
+    "wallThicknessM": 0.429616,
+    "widthM": 0.875205,
+    "heightM": 2.1,
+    "sillM": 0,
+    "centre": {
+     "x": 7.75,
+     "y": 1.05,
+     "z": 2.116
+    },
+    "cut": true
+   }
+  ],
+  "counts": {
+   "walls": 31,
+   "wallsExterior": 16,
+   "wallRings": [
+    "ring-attached-0-0",
+    "ring-attached-0-1",
+    "ring-main-0",
+    "ring-main-1"
+   ],
+   "windows": 8,
+   "doors": 15,
+   "rooms": {
+    "lvl-0": 5,
+    "lvl-1": 5
+   },
+   "roofs": 1,
+   "roofPlanes": 2,
+   "chimneys": 0
+  },
+  "compile": {
+   "validation": {
+    "ok": true,
+    "errors": [],
+    "warnings": 0,
+    "overlaps": 0
+   },
+   "diagnostics": [],
+   "stats": {
+    "triangleCount": 4136,
+    "meshCount": 153,
+    "objectCount": 105
+   },
+   "openingsCut": "23/23"
+  }
+ },
+ "after": {
+  "solver": "2.12.0 (N8-02B)",
+  "modelSha256": "dbb14fdb89a517f206cdb1cca9735729a1f5be45bbfc2b34359a49ad3bd72357",
+  "wallsAtContact": [
+   {
+    "id": "ring-main-0-w1-0",
+    "level": "lvl-0",
+    "kind": "EXTERIOR",
+    "alongM": [
+     0,
+     1.13
+    ],
+    "lengthM": 1.13,
+    "thicknessM": 0.43,
+    "facesAcrossM": [
+     7.32,
+     7.75
+    ],
+    "tags": [
+     "body-envelope"
+    ]
+   },
+   {
+    "id": "ring-main-0-w1-1",
+    "level": "lvl-0",
+    "kind": "EXTERIOR",
+    "alongM": [
+     9.22,
+     10.45
+    ],
+    "lengthM": 1.23,
+    "thicknessM": 0.43,
+    "facesAcrossM": [
+     7.32,
+     7.75
+    ],
+    "tags": [
+     "body-envelope"
+    ]
+   },
+   {
+    "id": "ring-main-0-w1-party-attached-0",
+    "level": "lvl-0",
+    "kind": "EXTERIOR",
+    "alongM": [
+     1.13,
+     9.22
+    ],
+    "lengthM": 8.091,
+    "thicknessM": 0.234,
+    "facesAcrossM": [
+     7.323,
+     7.557
+    ],
+    "tags": [
+     "body-envelope"
+    ]
+   },
+   {
+    "id": "ring-main-1-w1-0",
+    "level": "lvl-1",
+    "kind": "EXTERIOR",
+    "alongM": [
+     0,
+     1.13
+    ],
+    "lengthM": 1.13,
+    "thicknessM": 0.43,
+    "facesAcrossM": [
+     7.32,
+     7.75
+    ],
+    "tags": [
+     "body-envelope"
+    ]
+   },
+   {
+    "id": "ring-main-1-w1-1",
+    "level": "lvl-1",
+    "kind": "EXTERIOR",
+    "alongM": [
+     9.22,
+     10.45
+    ],
+    "lengthM": 1.23,
+    "thicknessM": 0.43,
+    "facesAcrossM": [
+     7.32,
+     7.75
+    ],
+    "tags": [
+     "body-envelope"
+    ]
+   },
+   {
+    "id": "ring-main-1-w1-party-attached-0",
+    "level": "lvl-1",
+    "kind": "EXTERIOR",
+    "alongM": [
+     1.13,
+     9.22
+    ],
+    "lengthM": 8.091,
+    "thicknessM": 0.234,
+    "facesAcrossM": [
+     7.323,
+     7.557
+    ],
+    "tags": [
+     "body-envelope"
+    ]
+   }
+  ],
+  "openingsAtContact": [
+   {
+    "id": "shared-party-0-east-1-0",
+    "kind": "DOOR",
+    "wallId": "ring-main-0-w1-party-attached-0",
+    "wallThicknessM": 0.234336,
+    "widthM": 0.875205,
+    "heightM": 2.1,
+    "sillM": 0,
+    "centre": {
+     "x": 7.557,
+     "y": 1.05,
+     "z": 2.116
+    },
+    "cut": true
+   }
+  ],
+  "counts": {
+   "walls": 34,
+   "wallsExterior": 18,
+   "wallRings": [],
+   "windows": 8,
+   "doors": 14,
+   "rooms": {
+    "lvl-0": 5,
+    "lvl-1": 5
+   },
+   "roofs": 1,
+   "roofPlanes": 2,
+   "chimneys": 0
+  },
+  "compile": {
+   "validation": {
+    "ok": true,
+    "errors": [],
+    "warnings": 0,
+    "overlaps": 0
+   },
+   "diagnostics": [],
+   "stats": {
+    "triangleCount": 4032,
+    "meshCount": 149,
+    "objectCount": 106
+   },
+   "openingsCut": "22/22"
+  },
+  "completeness": "COMPLETE_WITH_OPEN_QUESTIONS",
+  "unresolvedAboutTheWall": [
+   "the doorway 5.62..6.55 the storey 1 plan draws in the wall main shares with attached-0: under the main roof's slope that wall stands 1.64 m above the floor, lower than a 2.10 m door: not cut (the main roof is built whole under the roof of attached-0)"
+  ]
+ },
+ "stairPartition": {
+  "note": "partitions of the ground storey by the stair (x > 4.5, reaching z > 4)",
+  "before": {
+   "walls": [
+    {
+     "id": "main-iwall-0-x-1",
+     "start": {
+      "x": 6.44424,
+      "z": 5.441744
+     },
+     "end": {
+      "x": 7.305384,
+      "z": 5.441744
+     },
+     "thicknessM": 0.13642,
+     "why": "1 piece of partition ink on the plan"
+    }
+   ],
+   "doors": [
+    {
+     "id": "main-idoor-0-0",
+     "wallId": "main-iwall-0-z-3",
+     "offset": 0.786558,
+     "width": 0.875205,
+     "why": "a 0.88 m break between two pieces of the same partition"
+    },
+    {
+     "id": "main-idoor-0-1",
+     "wallId": "main-iwall-0-x-5",
+     "offset": 1.049434,
+     "width": 0.995928,
+     "why": "a 1.00 m break between two pieces of the same partition"
+    }
+   ]
+  },
+  "after": {
+   "walls": [
+    {
+     "id": "main-iwall-0-x-1",
+     "start": {
+      "x": 6.44424,
+      "z": 5.441744
+     },
+     "end": {
+      "x": 7.308,
+      "z": 5.441744
+     },
+     "thicknessM": 0.13642,
+     "why": "1 piece of partition ink on the plan"
+    },
+    {
+     "id": "main-iwall-0-x-2",
+     "start": {
+      "x": 4.823416,
+      "z": 4.469334
+     },
+     "end": {
+      "x": 6.131792,
+      "z": 4.469334
+     },
+     "thicknessM": 0.097442,
+     "why": "1 piece of partition ink on the plan"
+    },
+    {
+     "id": "main-iwall-0-z-3",
+     "start": {
+      "x": 5.047751,
+      "z": 0.444616
+     },
+     "end": {
+      "x": 5.047751,
+      "z": 4.454334
+     },
+     "thicknessM": 0.233862,
+     "why": "2 pieces of partition ink on the plan with 2 door gaps"
+    }
+   ],
+   "doors": [
+    {
+     "id": "main-idoor-0-0",
+     "wallId": "main-iwall-0-z-3",
+     "offset": 0.786558,
+     "width": 0.875205,
+     "why": "a 0.88 m break between two pieces of the same partition"
+    },
+    {
+     "id": "main-idoor-0-1",
+     "wallId": "main-iwall-0-x-5",
+     "offset": 1.049434,
+     "width": 0.995928,
+     "why": "a 1.00 m break between two pieces of the same partition"
+    },
+    {
+     "id": "main-idoor-0-2",
+     "wallId": "main-iwall-0-z-3",
+     "offset": 3.178785,
+     "width": 0.770933,
+     "why": "a 0.85 m gap between the end of a partition and the wall across its line, its swing drawn: a door, the wall across its far jamb"
+    }
+   ]
+  },
+  "solver290OneBody": "main-iwall-0-x-8 (4.823..7.298 at z 4.469, t 0.097, \"2 pieces with 1 door gap\", door 1.107 m at 6.131..7.238) in the 2.9.0 model 090749f4… (one 11.60 m body)"
+ }
+}

@@ -44,6 +44,8 @@ import type { ElevationFrameV2, ElevationRegistrationV2, PlanFrameV2, WorldFrame
 import { scanZoneForReturns } from './recesses.js'
 import type { RecessTopology, ZoneSide } from './recesses.js'
 import { readInterior } from './interior.js'
+import { OPPOSITE_SIDE, partyFarFace, partyNearFace, partyStretch, readPartyWalls } from './party-wall.js'
+import type { PartyWallRecord, PartyWallV2 } from './party-wall.js'
 import type { InteriorReading, LabelToken } from './interior.js'
 import { assembleStair, findTreadLadders, poolLadders } from './stair-topology.js'
 import { FIRM_CALLOUT_CONFIDENCE, GARAGE_LABEL, commonHeadReading, cornerAssemblies, openCornerBand, elevationExtent, garageMouth, planGaps, readWallOpenings, viewGroundRefusals, wallAppearanceExtent } from './openings-v2.js'
@@ -139,7 +141,11 @@ import type { ApproximateRidge } from './roof-datum.js'
 // by openings (not an eaves outline running past them); an upper plan placed with its outer-wall frame on the outer
 // faces of a body below is preferred over a fit onto inner walls unless that fit shares twice the wall, and is weighed
 // only against other placements that lay the frame on a body.
-export const SOLVER_V2_VERSION = '2.11.0' as const
+// 2.12.0 (N8-02B): where two bodies meet, the plan's band across the contact is read: one band thinner than both walls
+// is one wall of the drawn thickness, on the band, built once by the body on whose side it lies, the other body building
+// none over the shared stretch and running its walls across to the band; two bands, or one as thick as both walls,
+// stay two walls; the shared wall's doorways are read on the band at its own thickness.
+export const SOLVER_V2_VERSION = '2.12.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
@@ -243,6 +249,8 @@ export type ReconstructionV2Result = {
   viewAudit: ViewAuditRecord[]
   /** N7-P2R: every attached body read narrower than its own two walls: what the source says it is, and what was built. */
   thinBodies: ThinBodyRecord[]
+  /** N8-02B: every contact between two bodies on a storey: the band the plan draws across it, and one wall or two. */
+  partyWalls: PartyWallRecord[]
   /** N7-FIX-01: bodies the plan draws in a zone the decomposition left open, that no mass was made of — named, not built. */
   zoneBodies: ZoneBodyTrace[]
   /**
@@ -1292,6 +1300,34 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     }
     return out
   }
+  // ---------------------------------------------------------------------------
+  // G3b. N8-02B: one wall where two bodies meet and the plan draws one band
+  // ---------------------------------------------------------------------------
+  const partyRecords = readPartyWalls({ masses, plans: new Map([...planByStorey].map(([index, entry]) => [index, { raster: entry.raster, frame: entry.frame }])), wallOf: (m) => m.wallThicknessM ?? T })
+  const partyWalls: PartyWallV2[] = partyRecords.flatMap((r) => (r.wall ? [r.wall] : []))
+  for (const r of partyRecords) {
+    step({ stage: 'massing', what: `N8-02B: the contact of ${r.massIds.join(' and ')} on storey ${r.storeyIndex}`, method: r.decision === 'UNDECIDED' ? 'REFUSED' : 'DISCRETE_SELECTION', detail: `${r.decision}: ${r.why}`, inputs: r.reading.samples, outputs: r.decision === 'ONE_WALL' ? 1 : r.decision === 'TWO_WALLS' ? 2 : 0 })
+    if (r.decision === 'UNDECIDED') gap({ what: `the wall between ${r.massIds.join(' and ')} on storey ${r.storeyIndex}, ${r.span[0].toFixed(2)}..${r.span[1].toFixed(2)} along`, reason: `${r.why}; built as two walls, which the plan may not draw`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
+  }
+  /**
+   * N8-02B: the rectangle a body's interior is read inside: where it shares a wall, its inner face on that side is the
+   * band's face (the one wall's, for the host where the band stands deeper than its own wall would; the band's far face
+   * for the other body), so its partitions and rooms are read to the wall that is there.
+   */
+  const interiorRect = (m: MassV2, index: number): { x0: number; z0: number; x1: number; z1: number } => {
+    const r = { ...rectAt(m, index) }
+    const t = m.wallThicknessM ?? T
+    for (const p of partyWalls.filter((x) => x.storeyIndex === index)) {
+      const hostSide = p.hostMassId === m.id ? p.hostFacade : p.otherMassId === m.id ? OPPOSITE_SIDE[p.hostFacade] : undefined
+      if (!hostSide) continue
+      const face = p.hostMassId === m.id ? partyNearFace(p) : partyFarFace(p)
+      if (hostSide === 'EAST') r.x1 = round6(Math.max(r.x1 - t, face) + t)
+      else if (hostSide === 'WEST') r.x0 = round6(Math.min(r.x0 + t, face) - t)
+      else if (hostSide === 'REAR') r.z1 = round6(Math.max(r.z1 - t, face) + t)
+      else r.z0 = round6(Math.min(r.z0 + t, face) - t)
+    }
+    return r
+  }
   const interior: InteriorReading[] = []
   const publishedRooms = options.publishedRooms ?? []
   for (const [index, entry] of planByStorey) {
@@ -1324,7 +1360,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const onStorey = masses.filter((x) => x.storeys.includes(index)).map((x) => rectAt(x, index))
     const labelArea = { x0: Math.min(...onStorey.map((r) => r.x0)), z0: Math.min(...onStorey.map((r) => r.z0)), x1: Math.max(...onStorey.map((r) => r.x1)), z1: Math.max(...onStorey.map((r) => r.z1)) }
     for (const m of masses.filter((x) => x.storeys.includes(index))) {
-      const reading = readInterior(entry.raster, entry.frame, rectAt(m, index), m.wallThicknessM ?? T, index, tokens, rooms, { extraBarriers: barriers, labelArea, drawnWallM: drawnT, onDebug: options.debug ? (info) => options.debug?.(`interior ${m.id} storey ${index}: ${info.axis} band at px ${info.centrePx.toFixed(1)} (${info.axis === 'Z' ? 'x' : 'z'} ${(info.axis === 'Z' ? entry.frame.toWorld(info.centrePx, 0).x : entry.frame.toWorld(0, info.centrePx).z).toFixed(2)}), ${info.thick} px thick: ${info.runsPx.map((r) => `${(info.axis === 'Z' ? entry.frame.toWorld(0, r.to).z : entry.frame.toWorld(r.from, 0).x).toFixed(2)}..${(info.axis === 'Z' ? entry.frame.toWorld(0, r.from).z : entry.frame.toWorld(r.to, 0).x).toFixed(2)}`).join(', ')}`) : undefined })
+      const reading = readInterior(entry.raster, entry.frame, interiorRect(m, index), m.wallThicknessM ?? T, index, tokens, rooms, { extraBarriers: barriers, labelArea, drawnWallM: drawnT, onDebug: options.debug ? (info) => options.debug?.(`interior ${m.id} storey ${index}: ${info.axis} band at px ${info.centrePx.toFixed(1)} (${info.axis === 'Z' ? 'x' : 'z'} ${(info.axis === 'Z' ? entry.frame.toWorld(info.centrePx, 0).x : entry.frame.toWorld(0, info.centrePx).z).toFixed(2)}), ${info.thick} px thick: ${info.runsPx.map((r) => `${(info.axis === 'Z' ? entry.frame.toWorld(0, r.to).z : entry.frame.toWorld(r.from, 0).x).toFixed(2)}..${(info.axis === 'Z' ? entry.frame.toWorld(0, r.from).z : entry.frame.toWorld(r.to, 0).x).toFixed(2)}`).join(', ')}`) : undefined })
       reading.walls = reading.walls.map((w) => ({ ...w, id: `${m.id}-${w.id}` }))
       reading.doors = reading.doors.map((d) => ({ ...d, id: `${m.id}-${d.id}`, betweenIds: [d.betweenIds[0].includes(':') ? d.betweenIds[0] : `${m.id}-${d.betweenIds[0]}`, d.betweenIds[1].includes(':') ? d.betweenIds[1] : `${m.id}-${d.betweenIds[1]}`] as [string, string] }))
       reading.rooms = reading.rooms.map((r) => ({ ...r, id: `${m.id}-${r.id}`, doorIds: r.doorIds.map((d) => `${m.id}-${d}`) }))
@@ -1400,7 +1436,11 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         const underEaves = !gable && mainRoof && m.id === main.id && index === topStorey ? round6(mainRoof.eaveY - mainRoof.thicknessM / Math.cos((mainRoof.pitchDeg * Math.PI) / 180)) : undefined
         const host: WallHost = { massId: m.id, facade, planeAt, from, to, centreAt: round6(planeAt + (inward * T) / 2), storeyIndex: index, ...(gable ? { gable } : {}), ...(underEaves !== undefined ? { eaveTopY: underEaves } : {}), floorY: l.elevation, storeyHeightM: gable ? round6(mainRoof!.ridgeY - l.elevation) : l.height }
         const found = readWallOpenings({ ...(options.featureTrace ? { trace: options.featureTrace } : {}), onBandViewAccepted: (frameId) => acceptedBandViews.add(frameId), plan: entry.frame, planRaster: entry.raster, host, wallThicknessM: m.wallThicknessM ?? T, callouts, views: [...viewsOf(facade).filter((v) => !openingHeightRefused.has(v.view.registration.frameId) || openingViewOverrides.has(v.view.registration.frameId)), ...openingOnlyViews.filter((v) => v.view.side === (facade === 'WEST' ? 'LEFT' : facade === 'EAST' ? 'RIGHT' : facade))].map((v) => openingViewOverrides.get(v.view.registration.frameId) ?? v), attachedSingleStorey: m.role === 'ATTACHED' && m.storeys.length === 1, onRefused: (r) => gap({ what: `the gap ${r.interval[0].toFixed(2)}..${r.interval[1].toFixed(2)} on the ${facade.toLowerCase()} wall of ${m.id}, storey ${index}`, reason: r.why, status: 'REFUSED', observationIds: [], evidenceIds: [] }), ...(vehicleMouths.has(`${m.id}:${facade}`) && index === 0 ? { vehicleMouth: vehicleMouths.get(`${m.id}:${facade}`) } : {}), ...(index === 0 ? { garageRooms: garagesOf(m, r) } : {}), index: hostIndex++ })
+        const faceIndex = hostIndex - 1
+        // N8-02B: over a stretch this face shares as one wall, the gaps are read on that wall (below, or by its host)
+        const shared = partyWalls.filter((p) => p.storeyIndex === index && ((p.hostMassId === m.id && p.hostFacade === facade) || (p.otherMassId === m.id && OPPOSITE_SIDE[p.hostFacade] === facade)))
         for (const o of found) {
+          if (shared.some((p) => o.interval[1] > p.span[0] + 0.01 && o.interval[0] < p.span[1] - 0.01)) continue
           // A gap on a face another body stands against is a door between the two bodies, not a facade opening.
           const other = masses.find((xm) => {
             if (xm.id === m.id || !xm.storeys.includes(index)) return false
@@ -1414,6 +1454,22 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
             continue
           }
           openings.push(o)
+        }
+        // N8-02B: the one wall the plan draws between this body and the one beside it, read on its own band at its own
+        // thickness: its gaps are the doorways between the two bodies
+        for (const p of shared.filter((x) => x.hostMassId === m.id)) {
+          const [from, to] = partyStretch(p, m.wallThicknessM ?? T, masses.find((x) => x.id === p.otherMassId)?.wallThicknessM ?? T)
+          const band: WallHost = { massId: m.id, facade, planeAt: partyFarFace(p), from, to, centreAt: round6((p.band[0] + p.band[1]) / 2), storeyIndex: index, floorY: l.elevation, storeyHeightM: l.height, endsAtFaces: true }
+          const doors = readWallOpenings({ plan: entry.frame, planRaster: entry.raster, host: band, wallThicknessM: p.thicknessM, callouts, views: [], attachedSingleStorey: false, onRefused: (r) => gap({ what: `the gap ${r.interval[0].toFixed(2)}..${r.interval[1].toFixed(2)} in the wall ${m.id} shares with ${p.otherMassId}, storey ${index}`, reason: r.why, status: 'REFUSED', observationIds: [], evidenceIds: [] }), index: faceIndex })
+          // under the main roof's slope the one wall stands as high as the roof's underside over its far face
+          const top = underEaves !== undefined && mainRoof ? round6(underEaves + Math.abs(planeAt - partyFarFace(p)) * Math.tan((mainRoof.pitchDeg * Math.PI) / 180)) : undefined
+          for (const o of doors) {
+            if (top !== undefined && o.sillY + CONVENTIONS.doorHeight > top - 0.05) {
+              gap({ what: `the doorway ${o.interval[0].toFixed(2)}..${o.interval[1].toFixed(2)} the storey ${index} plan draws in the wall ${m.id} shares with ${p.otherMassId}`, reason: `under the main roof's slope that wall stands ${(top - l.elevation).toFixed(2)} m above the floor, lower than a ${CONVENTIONS.doorHeight.toFixed(2)} m door: not cut (the main roof is built whole under the roof of ${p.otherMassId})`, status: 'REFUSED', observationIds: [], evidenceIds: [] })
+              continue
+            }
+            sharedDoors.push({ ...o, id: `shared-${o.id.replace(/^opening-/, 'party-')}`, family: 'DOOR', headY: round6(o.sillY + CONVENTIONS.doorHeight), otherMassId: p.otherMassId, why: `${o.why.replace(/ in the \w+ wall of \S+/, ` in the ${p.thicknessM.toFixed(2)} m wall ${m.id} shares with ${p.otherMassId}`)}; read on the one band the plan draws between the bodies, so the gap is a doorway between them` })
+          }
         }
       }
       // 005Y-N3 (H1): one glazing wrapping a corner of this body on this storey: its two pieces are named one assembly
@@ -2304,7 +2360,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   if (facadeAlignment.corrections.length > 0) openings.splice(0, openings.length, ...applyOpeningCorrections(openings, facadeAlignment.corrections))
   step({ stage: 'verification', what: 'N7-P2: the openings each elevation draws against the plan’s', method: 'DIRECT', detail: `${facadeViews.length} view${facadeViews.length === 1 ? '' : 's'} read (${facadeViews.map((v) => `${v.facade.toLowerCase()} ${v.registration.toLowerCase().replace(/_/g, ' ')}${v.heights ? '' : ', positions only'}`).join('; ') || 'none'}); ${facadeAlignment.readings.length} openings read, ${facadeAlignment.rejected.length} rectangles rejected; ${Object.entries(facadeAlignment.counts).filter(([, n]) => n > 0).map(([k, n]) => `${k.toLowerCase()} ${n}`).join(', ')}; ${facadeAlignment.corrections.length} height${facadeAlignment.corrections.length === 1 ? '' : 's'} corrected`, inputs: openings.length, outputs: facadeAlignment.corrections.length })
   for (const c of facadeAlignment.corrections) ctx.traces.push({ objectId: c.openingId, kind: 'repair', hypothesisId: `hyp-${c.openingId}`, evidenceIds: [], observationIds: facadeAlignment.readings.find((r) => r.id === c.readingId)?.observationIds ?? [], rejected: [], why: c.why })
-  const building: BuildingV2 = { label: options.label, wallThicknessM: T, slabThicknessM: slabT, levels: levelsV2, masses, mainRoof: builtMainRoof, ...(planeRoofs ? { planeRoofs } : {}), attachedRoofs, pitchedAttachedRoofs, recesses, ...(pockets.length > 0 ? { pockets } : {}), ...(pergolas.length > 0 ? { pergolas } : {}), returns, balconies, railings, portalHeads, verges, terraces, massTones, returnTones, facadeGraph, chimneys, rooflights, openings, sharedDoors, interior, stair, assemblies, surfaceRegions, terrainY: terrain, ...(bandWalls.length > 0 ? { bandWalls } : {}) }
+  const building: BuildingV2 = { label: options.label, wallThicknessM: T, slabThicknessM: slabT, levels: levelsV2, masses, mainRoof: builtMainRoof, ...(planeRoofs ? { planeRoofs } : {}), attachedRoofs, pitchedAttachedRoofs, recesses, ...(pockets.length > 0 ? { pockets } : {}), ...(pergolas.length > 0 ? { pergolas } : {}), returns, balconies, railings, portalHeads, verges, terraces, massTones, returnTones, facadeGraph, chimneys, rooflights, openings, sharedDoors, interior, stair, assemblies, surfaceRegions, terrainY: terrain, ...(bandWalls.length > 0 ? { bandWalls } : {}), ...(partyWalls.length > 0 ? { partyWalls } : {}) }
   const residualsBefore = verifyAgainstViews({ building, views })
   const repair = repairFromResiduals(building, residualsBefore, 2)
   const residuals = verifyAgainstViews({ building, views })
@@ -2582,7 +2638,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const violations = { graph: featureGraphViolations(graphDraft), ledger: ledgerViolations(ctx.ledger, [...graph.observations.map((o) => o.id), ...metrics.evidence.map((e) => e.id)]) }
   step({ stage: 'quality', what: 'per-feature quality', method: 'DIRECT', detail: Object.entries(quality.summary).map(([fam, levels]) => `${fam} ${Object.entries(levels).map(([l, n]) => `${l}:${n}`).join('/')}`).join(', '), inputs: ctx.solved.length, outputs: quality.records.length })
 
-  return { layout, building, candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations, closure: closureNotes, planDiagnostics, openingFits: fit.fits, ...(wallReconciliation ? { wallReconciliation } : {}), crossViewResiduals: crossView, ...(roofDatum ? { roofDatum } : {}), ...(partialPreview ? { partialPreview } : {}), ...(completeness ? { bodyCompleteness: completeness } : {}), modelCompleteness: completenessOfModel, bodyRecovery: { seamSplits: draft.seamSplits ?? [], gateBays: draft.base?.decomposition.gateBays ?? [] }, facadeAlignment, thinBodies: thinBodyRecords, zoneBodies, wallThickness: { houseM: T, house: houseWall, bodies: bodyWalls }, preEmitRings: preEmitRings.filter((c) => c.verdict !== 'HOLDS_TWO_WALLS'), openingCounts: { plan: openings.length + sharedDoors.length, elevationIndependent: [...facadeRead.values()].reduce((a, r) => a + r.scanned.length, 0), model: model.openings.length, skippedByPartialPreview: (partialPreview?.skipped ?? []).filter((x) => x.type === 'cutOpening').length }, viewAudit: viewAudit({ horizontalOnly: new Map(cornerRegistrations.map((r) => [r.frameId, r])), frames: graph.coordinateFrames.filter((f) => (keep ? keep(f) : true)), first: legacy, firstRefused: legacyRefused, refusals: viewRefusals, registered: elevations, openingsOnly: bandRegistrations, sameSheet: new Set(openingViewOverrides.keys()), heightsRefused: openingHeightRefused, cameras }), heights: levels.measured ? { measured: true } : { measured: false, assumedStoreyHeightM: CONVENTIONS.storeyHeight } }
+  return { layout, building, candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations, closure: closureNotes, planDiagnostics, openingFits: fit.fits, ...(wallReconciliation ? { wallReconciliation } : {}), crossViewResiduals: crossView, ...(roofDatum ? { roofDatum } : {}), ...(partialPreview ? { partialPreview } : {}), ...(completeness ? { bodyCompleteness: completeness } : {}), modelCompleteness: completenessOfModel, bodyRecovery: { seamSplits: draft.seamSplits ?? [], gateBays: draft.base?.decomposition.gateBays ?? [] }, facadeAlignment, thinBodies: thinBodyRecords, partyWalls: partyRecords, zoneBodies, wallThickness: { houseM: T, house: houseWall, bodies: bodyWalls }, preEmitRings: preEmitRings.filter((c) => c.verdict !== 'HOLDS_TWO_WALLS'), openingCounts: { plan: openings.length + sharedDoors.length, elevationIndependent: [...facadeRead.values()].reduce((a, r) => a + r.scanned.length, 0), model: model.openings.length, skippedByPartialPreview: (partialPreview?.skipped ?? []).filter((x) => x.type === 'cutOpening').length }, viewAudit: viewAudit({ horizontalOnly: new Map(cornerRegistrations.map((r) => [r.frameId, r])), frames: graph.coordinateFrames.filter((f) => (keep ? keep(f) : true)), first: legacy, firstRefused: legacyRefused, refusals: viewRefusals, registered: elevations, openingsOnly: bandRegistrations, sameSheet: new Set(openingViewOverrides.keys()), heightsRefused: openingHeightRefused, cameras }), heights: levels.measured ? { measured: true } : { measured: false, assumedStoreyHeightM: CONVENTIONS.storeyHeight } }
 }
 
 /** The columns of a render across which a band of the given rows carries dark tone: the band's along extent. */

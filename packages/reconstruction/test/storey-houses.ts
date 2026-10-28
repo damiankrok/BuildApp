@@ -62,14 +62,23 @@ export const HOUSE_AND_WING_UP: SyntheticHouse = {
 }
 
 export type Box = [number, number, number, number]
-/** Each level's exterior wall rings, as the boxes their walls span (wall axes), in model metres. */
+/**
+ * Each level's exterior wall rings, as the boxes their walls span (wall axes), in model metres. A body built wall by
+ * wall — one that shares a wall the plan draws once (N8-02B) or has no wall of its own on a side (N7-P2R) — has no
+ * ring record; its walls (`ring-<body>-<storey>-w…`) are its ring here.
+ */
 export function ringsByLevel(model: CanonicalBuildingModel): Map<number, Box[]> {
   const walls = new Map(model.walls.map((w) => [w.id, w]))
   const out = new Map<number, Box[]>()
+  const ringed = new Set(model.wallRings.flatMap((r) => r.wallIds))
+  const loose = new Map<string, string[]>()
+  for (const w of model.walls) {
+    const ring = /^(ring-.+?-\d+)-w\d/.exec(w.id)?.[1]
+    if (ring && w.kind === 'EXTERIOR' && !ringed.has(w.id)) loose.set(ring, [...(loose.get(ring) ?? []), w.id])
+  }
   for (const level of model.levels) {
-    const boxes = model.wallRings
-      .filter((r) => r.levelId === level.id)
-      .map((r) => r.wallIds.map((id) => walls.get(id)).filter((w): w is NonNullable<typeof w> => w !== undefined))
+    const boxes = [...model.wallRings.filter((r) => r.levelId === level.id).map((r) => r.wallIds), ...[...loose.values()].filter((ids) => walls.get(ids[0])?.levelId === level.id)]
+      .map((ids) => ids.map((id) => walls.get(id)).filter((w): w is NonNullable<typeof w> => w !== undefined))
       .filter((ws) => ws.length > 0)
       .map((ws): Box => {
         const xs = ws.flatMap((w) => [w.start.x, w.end.x])

@@ -97,7 +97,9 @@ describe('what does not change', () => {
     expect(reconstruction.partialPreview).toBeUndefined()
     expect(result.warningDetails.map((w) => w.code)).not.toContain('PARTIAL_3D_PREVIEW')
     expect(reconstruction.heights.measured).toBe(true)
-    expect(result.model.wallRings.map((r) => r.id)).toContain('ring-attached-0-0')
+    // the garage is built: as a ring, or (N8-02B: it shares the one wall the plan draws with the house) wall by wall
+    const bodies = [...result.model.wallRings.map((r) => r.id), ...result.model.walls.filter((w) => w.tags?.includes('body-envelope')).map((w) => /^(ring-.+?-\d+)-w\d/.exec(w.id)?.[1])]
+    expect(bodies).toContain('ring-attached-0-0')
   })
 
   it('a page with no plan still refuses: no outline, no house', async () => {
