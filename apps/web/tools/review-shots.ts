@@ -141,6 +141,11 @@ const usage = [
   '  --full               shoot the whole 1400x900 window instead of the viewport canvas',
   '  --settle <ms>        extra wait after a preset before the stillness check (default 300)',
   '  --compose-only       no browser: rebuild the compare sheets and index from shots already in <out>',
+  '  --model-files id=p  research: load model.json files through the Load button (comma-separated id=path pairs)',
+  '  --top-roof-off       add 09-top-roof-off.png (the roof plan with roofs hidden)',
+  '  --chromium <path>    launch this Chromium binary instead of the Playwright download',
+  '  --viewport WxH       window size (default 1400x900)',
+  '  --ortho-dy <n>       orthographic wheel step to use instead of the one this run would fit (e.g. another run\'s)',
   '',
 ].join('\n')
 
@@ -154,10 +159,27 @@ const fail = (msg: string): never => {
   process.exit(2)
 }
 
+/**
+ * Research adapter (visual review 1311): `--model-files id=path[,id=path...]` loads each model.json through the
+ * toolbar's own Load button (`load-input`) instead of the sealed-candidate selector, so a model the analyzer wrote
+ * today is shot with the same cameras. The ids name the output directories; they are added to --candidates.
+ */
+const MODEL_FILES = new Map<string, string>(
+  (value('model-files') ?? '')
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .map((pair) => {
+      const eq = pair.indexOf('=')
+      if (eq <= 0) fail(`--model-files wants id=path pairs, not "${pair}"`)
+      const file = pair.slice(eq + 1)
+      return [pair.slice(0, eq), isAbsolute(file) ? file : resolve(process.cwd(), file)] as [string, string]
+    }),
+)
+for (const [id, file] of MODEL_FILES) if (!existsSync(file)) fail(`--model-files: ${id}: ${file} does not exist`)
 const candidates = [
   ...new Set(
-    (value('candidates') ?? '')
-      .split(',')
+    [...(value('candidates') ?? '').split(','), ...MODEL_FILES.keys()]
       .map((s) => s.trim())
       .filter(Boolean),
   ),
@@ -176,7 +198,17 @@ const BUILD = !flag('no-build') && !URL_GIVEN
 const FULL = flag('full')
 const SETTLE = Number(value('settle') ?? 300)
 const COMPOSE_ONLY = flag('compose-only')
-const VIEWPORT = { width: 1400, height: 900 }
+/** `--chromium <path>`: a Chromium binary to launch instead of the one this Playwright version downloads. */
+const CHROMIUM = value('chromium')
+/**
+ * `--viewport WxH` (research): the window size. A long model name wraps the toolbar onto another row and takes that
+ * many pixels off the canvas; a taller window gives such a model the same canvas as the others.
+ */
+const VIEWPORT = ((v) => {
+  const m = /^(\d+)x(\d+)$/.exec(v ?? '1400x900')
+  if (!m) fail(`--viewport wants WxH, not "${v}"`)
+  return { width: Number(m![1]), height: Number(m![2]) }
+})(value('viewport'))
 
 // --- the camera moves ---------------------------------------------------------
 
@@ -239,7 +271,7 @@ type Shot = {
   orbitDeg?: { azimuth: number; polar: number }
   roofsHidden?: boolean
 }
-const SHOTS: readonly Shot[] = [
+const SHOTS_BASE: readonly Shot[] = [
   { file: '01-front.png', view: 'front', title: 'Front elevation (orthographic)', preset: 'front' },
   { file: '02-rear.png', view: 'rear', title: 'Rear elevation (orthographic)', preset: 'rear' },
   { file: '03-left.png', view: 'left', title: 'Left elevation, from −x (orthographic)', preset: 'left' },
@@ -249,6 +281,10 @@ const SHOTS: readonly Shot[] = [
   { file: '07-top.png', view: 'top', title: 'Roof plan (orthographic, from above)', preset: 'top' },
   { file: '08-roof-off.png', view: 'roof-off', title: 'Front-right three-quarter, roofs hidden (perspective)', preset: 'perspective', wheelDY: PERSPECTIVE_WHEEL_DY, roofsHidden: true },
 ]
+/** `--top-roof-off` adds the roof plan with roofs hidden (the storey below seen from above). */
+const SHOTS: readonly Shot[] = flag('top-roof-off')
+  ? [...SHOTS_BASE, { file: '09-top-roof-off.png', view: 'top-roof-off', title: 'Plan from above, roofs hidden (orthographic)', preset: 'top', roofsHidden: true }]
+  : SHOTS_BASE
 
 type Pose = {
   projection: 'perspective' | 'orthographic'
@@ -699,6 +735,20 @@ async function loadCandidate(page: Page, id: string, style: string, warnings: st
     if (!quiet) log(s)
   }
   const select = page.getByTestId('model-select')
+  const modelFile = MODEL_FILES.get(id)
+  if (modelFile) {
+    const wanted = (JSON.parse(readFileSync(modelFile, 'utf8')) as { id: string }).id
+    say(`\n== ${id}  (file ${modelFile}, model ${wanted})`)
+    // the same model id on screen already would end the wait below at once: put another model up first
+    if ((await handle(page)).id === wanted) {
+      await select.selectOption('demo-house')
+      await waitFor('the demo house', () => handle(page), (h) => h.id === 'demo-house')
+    }
+    const e0 = pageErrors.length
+    await page.getByTestId('load-input').setInputFiles(modelFile)
+    await waitFor(`the viewport to draw ${wanted}`, () => handle(page), (h) => h.id === wanted && h.meshCount > 0 && h.meshCount === h.visible, 60_000, () => (pageErrors.length > e0 ? `the page reported: ${pageErrors.slice(e0).join(' | ')}` : undefined))
+    return finishLoad(page, id, id, style, warnings, quiet, say)
+  }
   const option = select.locator(`option[value="${id}"]`)
   if ((await option.count()) === 0) {
     const values = await select.locator('option').evaluateAll((os) => os.map((o) => (o as HTMLOptionElement).value).filter((v) => v !== '__file'))
@@ -715,6 +765,11 @@ async function loadCandidate(page: Page, id: string, style: string, warnings: st
   const drawn = await waitFor(`the viewport to draw ${id}`, () => handle(page), (h) => h.meshCount > 0 && h.meshCount === h.visible)
   await waitFor(`status-model to read "${drawn.name}"`, () => textOf(page, 'status-model'), (t) => t === drawn.name)
   if (drawn.name !== label) say(`   (the model is named "${drawn.name}", the selector says "${label}")`)
+  return finishLoad(page, id, label, style, warnings, quiet, say)
+}
+
+async function finishLoad(page: Page, id: string, label: string, style: string, warnings: string[], quiet: boolean, say: (s: string) => void): Promise<Loaded> {
+  await waitFor('status-model to name the model', () => Promise.all([textOf(page, 'status-model'), handle(page)]), ([t, h]) => t === h.name)
   let diagnostics = ''
   try {
     diagnostics = await waitFor('status-diagnostics to read "geometry ok"', () => textOf(page, 'status-diagnostics'), (t) => t === 'geometry ok', 15_000)
@@ -1134,7 +1189,7 @@ async function main(): Promise<void> {
     log(`BuildWorld at ${server.url}`)
     let browser: Browser | null = null
     try {
-      browser = await chromium.launch({ headless: true, args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] })
+      browser = await chromium.launch({ headless: true, ...(CHROMIUM ? { executablePath: CHROMIUM } : {}), args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] })
       const context = await browser.newContext({ viewport: VIEWPORT, deviceScaleFactor: 1 })
       const page = await context.newPage()
       const pageErrors: string[] = []
@@ -1172,10 +1227,13 @@ async function main(): Promise<void> {
       const aspect = box.width / box.height
       const fits = measured.filter((m) => m.bounds && m.framing).map((m) => ({ id: m.id, fit: orthoFit(m.bounds!, m.framing!.radius, aspect) }))
       const zoomWanted = Math.max(1, Math.min(ORTHO_ZOOM_CAP, ...fits.map((f) => f.fit)))
-      const dy = wheelForZoom(zoomWanted)
+      // `--ortho-dy <n>` (research): reuse another run's ortho wheel step, so a house shot on its own keeps that run's scale
+      const dy = value('ortho-dy') !== undefined ? Number(value('ortho-dy')) : wheelForZoom(zoomWanted)
       orthoZoom = { dy, zoom: zoomOfWheel(dy), fits: fits.map((f) => ({ id: f.id, fit: round(f.fit, 4) })) }
       log(`orthographic zoom for this run: wheel ΔY=${dy} → ×${orthoZoom.zoom.toFixed(4)} (largest that fits: ${fits.map((f) => `${f.id} ×${f.fit.toFixed(3)}`).join(', ') || 'none'}; cap ×${ORTHO_ZOOM_CAP})`)
-      // Pass 2: shoot.
+      // Pass 2: shoot. With --model-files the layout is recorded at the first shot rather than on the start page, since
+      // the toolbar's height follows the loaded model's name; it must then hold for every shot of the run.
+      if (MODEL_FILES.size) referenceCanvas = null
       for (const m of measured) {
         const n0 = pageErrors.length
         try {
