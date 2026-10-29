@@ -1,0 +1,378 @@
+{
+ "method": "offline replay of the sealed ARCHON 1311 inputs with the N8-03B metric evidence (reader 1.5.0) through packages/analysis-service/scripts/second-house.ts; before = the N8-03D1 models (solver 2.16.0, model schema 1.6.0), after = this checkout (solver 2.17.0, model schema 1.7.0)",
+ "houses": [
+  {
+   "house": "a01",
+   "before": "ed4fe10766c556638b0bdad046796afa19ad1bf1a5af31eb8e1928c0346ac97b",
+   "after": "2f7845d59f435647d48e6cc2e2e75b75ba6eba40ef2a9cc68cdcac72f527d09d",
+   "identical": false,
+   "changedCollections": [
+    "doors",
+    "openings",
+    "rooms",
+    "schemaVersion",
+    "walls"
+   ],
+   "roomsBefore": 10,
+   "roomsAfter": 11,
+   "interiorDoorsBefore": 8,
+   "interiorDoorsAfter": 9,
+   "interiorDoorsLost": 0,
+   "roomsWithHoles": [],
+   "labels": [
+    {
+     "room": "main-room-1-0",
+     "before": "Schody",
+     "after": null
+    },
+    {
+     "room": "main-room-1-2",
+     "before": null,
+     "after": "Korytarz"
+    }
+   ],
+   "protectedUnchanged": true,
+   "after_validation": {
+    "ok": true,
+    "errors": [],
+    "warnings": 0,
+    "overlaps": 0
+   },
+   "after_compile_diagnostics": [],
+   "after_openings": {
+    "total": 22,
+    "cut": 22
+   }
+  },
+  {
+   "house": "gozd",
+   "before": "f3a0ee783d3ae6a24a85dd8a76f826d6e6b69d49681370014678ed909e215154",
+   "after": "edd695e86c5c5174af884d7310773246189e50c8fa9909d180573bc8ef83a6b6",
+   "identical": false,
+   "changedCollections": [
+    "doors",
+    "openings",
+    "rooms",
+    "schemaVersion",
+    "walls"
+   ],
+   "roomsBefore": 9,
+   "roomsAfter": 13,
+   "interiorDoorsBefore": 11,
+   "interiorDoorsAfter": 15,
+   "interiorDoorsLost": 0,
+   "roomsWithHoles": [],
+   "labels": [
+    {
+     "room": "main-room-0-2",
+     "before": null,
+     "after": "Gabinet"
+    },
+    {
+     "room": "main-room-1-0",
+     "before": "Schody",
+     "after": null
+    },
+    {
+     "room": "main-room-1-3",
+     "before": "Pokój",
+     "after": null
+    },
+    {
+     "room": "main-room-1-4",
+     "before": "Garderoba",
+     "after": null
+    },
+    {
+     "room": "main-room-1-5",
+     "before": null,
+     "after": "Pokój"
+    },
+    {
+     "room": "main-room-1-6",
+     "before": null,
+     "after": "Garderoba"
+    },
+    {
+     "room": "main-room-1-7",
+     "before": null,
+     "after": "Łazienka"
+    }
+   ],
+   "protectedUnchanged": true,
+   "after_validation": {
+    "ok": true,
+    "errors": [],
+    "warnings": 0,
+    "overlaps": 0
+   },
+   "after_compile_diagnostics": [],
+   "after_openings": {
+    "total": 32,
+    "cut": 32
+   }
+  },
+  {
+   "house": "marcowki",
+   "before": "bcb151061f8eae396d349bf55de18bfa615b9523eab206a48f8b2ff9a799f7c2",
+   "after": "e89df37953ba702ddfecf988858ddfd0abfe0c6274eb3c86d0a630e51a0c84b7",
+   "identical": false,
+   "changedCollections": [
+    "rooms",
+    "schemaVersion"
+   ],
+   "roomsBefore": 12,
+   "roomsAfter": 12,
+   "interiorDoorsBefore": 9,
+   "interiorDoorsAfter": 9,
+   "interiorDoorsLost": 0,
+   "roomsWithHoles": [],
+   "labels": [],
+   "protectedUnchanged": true,
+   "after_validation": {
+    "ok": true,
+    "errors": [],
+    "warnings": 0,
+    "overlaps": 0
+   },
+   "after_compile_diagnostics": [],
+   "after_openings": {
+    "total": 21,
+    "cut": 21
+   }
+  },
+  {
+   "house": "ciesz",
+   "before": "5394c17c4ff1c4e515c70067f77cc4aab68005658855930cd96c8e6f1323568f",
+   "after": "1f958058ef0eb25e210162c9d8601eef859262fd2920172be17b5c9b2384fbaa",
+   "identical": false,
+   "changedCollections": [
+    "doors",
+    "openings",
+    "rooms",
+    "schemaVersion",
+    "walls"
+   ],
+   "roomsBefore": 4,
+   "roomsAfter": 8,
+   "interiorDoorsBefore": 4,
+   "interiorDoorsAfter": 9,
+   "interiorDoorsLost": 0,
+   "roomsWithHoles": [],
+   "labels": [
+    {
+     "room": "main-room-0-0",
+     "before": "Wiatrołap",
+     "after": "Hol"
+    },
+    {
+     "room": "main-room-0-3",
+     "before": "Kuchnia",
+     "after": "Kotłownia z pralnią"
+    },
+    {
+     "room": "main-room-0-4",
+     "before": null,
+     "after": "Łazienka"
+    }
+   ],
+   "protectedUnchanged": true,
+   "after_validation": {
+    "ok": true,
+    "errors": [],
+    "warnings": 0,
+    "overlaps": 0
+   },
+   "after_compile_diagnostics": [],
+   "after_openings": {
+    "total": 24,
+    "cut": 24
+   }
+  },
+  {
+   "house": "rary",
+   "before": "6d18d10ca9c4e2aa9e079b6579a0b3f1b71fb363bddd952ffca8837f8f401a0c",
+   "after": "11b5dec1bd0f18d0d97af0b3f673c75adcc9a834087882df9833c981f59ffaa4",
+   "identical": false,
+   "changedCollections": [
+    "rooms",
+    "schemaVersion"
+   ],
+   "roomsBefore": 9,
+   "roomsAfter": 9,
+   "interiorDoorsBefore": 7,
+   "interiorDoorsAfter": 7,
+   "interiorDoorsLost": 0,
+   "roomsWithHoles": [],
+   "labels": [
+    {
+     "room": "main-room-0-6",
+     "before": null,
+     "after": "Pokój"
+    }
+   ],
+   "protectedUnchanged": true,
+   "after_validation": {
+    "ok": true,
+    "errors": [],
+    "warnings": 0,
+    "overlaps": 0
+   },
+   "after_compile_diagnostics": [],
+   "after_openings": {
+    "total": 20,
+    "cut": 20
+   }
+  },
+  {
+   "house": "trytomach",
+   "before": "ce64cc099c83410d0e6393cb80639f2840059f9249b430d29deb057378c4856c",
+   "after": "c2884d26d61a538c964bc8c418c4a7bb400607af206e4ff2dbf9b8318fa5db96",
+   "identical": false,
+   "changedCollections": [
+    "doors",
+    "openings",
+    "rooms",
+    "schemaVersion",
+    "walls"
+   ],
+   "roomsBefore": 8,
+   "roomsAfter": 11,
+   "interiorDoorsBefore": 7,
+   "interiorDoorsAfter": 10,
+   "interiorDoorsLost": 0,
+   "roomsWithHoles": [],
+   "labels": [
+    {
+     "room": "main-room-0-1",
+     "before": "Wiatrołap",
+     "after": "Spiżarnia"
+    },
+    {
+     "room": "main-room-1-2",
+     "before": "Łazienka",
+     "after": null
+    },
+    {
+     "room": "main-room-1-3",
+     "before": "Pokój",
+     "after": null
+    },
+    {
+     "room": "main-room-1-5",
+     "before": null,
+     "after": "Pokój"
+    }
+   ],
+   "protectedUnchanged": true,
+   "after_validation": {
+    "ok": true,
+    "errors": [],
+    "warnings": 0,
+    "overlaps": 0
+   },
+   "after_compile_diagnostics": [],
+   "after_openings": {
+    "total": 21,
+    "cut": 21
+   }
+  },
+  {
+   "house": "arganiach",
+   "before": "abe675d71bd3c9f133a95e69316a80e88e59bd66b08ce1aaba3c12506d31bc05",
+   "after": "1e480380d9b9df26d1619fbef57debf0c1bebf5e9c66baf5ef0209ca5bf1ff7b",
+   "identical": false,
+   "changedCollections": [
+    "doors",
+    "openings",
+    "rooms",
+    "schemaVersion",
+    "walls"
+   ],
+   "roomsBefore": 11,
+   "roomsAfter": 14,
+   "interiorDoorsBefore": 10,
+   "interiorDoorsAfter": 13,
+   "interiorDoorsLost": 0,
+   "roomsWithHoles": [
+    "main-room-1-4"
+   ],
+   "labels": [
+    {
+     "room": "main-room-0-2",
+     "before": "Garaż",
+     "after": null
+    },
+    {
+     "room": "main-room-0-3",
+     "before": "Wiatrołap",
+     "after": "Garaż"
+    },
+    {
+     "room": "main-room-1-2",
+     "before": "Hol",
+     "after": null
+    },
+    {
+     "room": "main-room-1-3",
+     "before": "Hol",
+     "after": null
+    }
+   ],
+   "protectedUnchanged": true,
+   "after_validation": {
+    "ok": true,
+    "errors": [],
+    "warnings": 0,
+    "overlaps": 0
+   },
+   "after_compile_diagnostics": [],
+   "after_openings": {
+    "total": 26,
+    "cut": 26
+   }
+  },
+  {
+   "house": "sasankach3",
+   "before": "8b94d057f8a989963e872b063b4e390f9fb14524eb75b4175ff8edecb29e29c9",
+   "after": "17960db2ecbc868be0b0edbc3f78a938af4129f6fd6efe6596b8c98e148134ed",
+   "identical": false,
+   "changedCollections": [
+    "rooms",
+    "schemaVersion"
+   ],
+   "roomsBefore": 10,
+   "roomsAfter": 10,
+   "interiorDoorsBefore": 7,
+   "interiorDoorsAfter": 7,
+   "interiorDoorsLost": 0,
+   "roomsWithHoles": [
+    "main-room-1-1"
+   ],
+   "labels": [
+    {
+     "room": "attached-0-room-0-0",
+     "before": "Wiatrołap",
+     "after": null
+    },
+    {
+     "room": "main-room-1-0",
+     "before": "Schody",
+     "after": null
+    }
+   ],
+   "protectedUnchanged": true,
+   "after_validation": {
+    "ok": true,
+    "errors": [],
+    "warnings": 0,
+    "overlaps": 0
+   },
+   "after_compile_diagnostics": [],
+   "after_openings": {
+    "total": 23,
+    "cut": 23
+   }
+  }
+ ]
+}

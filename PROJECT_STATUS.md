@@ -2901,3 +2901,20 @@ dropped) through the storey frame and cut from that storey's slab beside the sta
 slab edge taken to it; refusals are named. Arganiach: 2.063 × 3.694 m void, vertical rays 0/2808 hit inside, 0/965 miss
 beside; the stair hole unchanged. Seven houses byte-identical; all 8 validate, 0 WALLS_OVERLAP, 0 diagnostics. Open:
 the hall room still spans the void (room division is the next stage), no railing round the void.
+
+## Poddasza: podział pomieszczeń Arganiach i Trytomach (STAGE BUILDPLAN N8-03D2)
+
+Status: **DONE — solver 2.17.0, model schema 1.7.0, bez APK.** Report
+`stage-reports/STAGE_BUILDPLAN_N8_03D2_ATTIC_ROOM_SEGMENTATION.md`, numbers `stage-reports/artifacts/analyzer-n8-03d2/`.
+FIRST_BAD: the partition bands were read; the doors between them were not — a door's leaf drawn shorter than its gap
+(the swing test took the gap as radius), jambs of one door split by a rounding bucket when one piece runs into a
+carcass, a door at a free end of a piece already anchored or already a jamb, a door at a block's side, a door between
+the faces of two parallel partitions whose ends meet; and a room surrounding a slab opening could not leave it out.
+Fixed generally (`v2/interior.ts`): short-leaf swing (arc and a thin leaf line, best fit), band-overlap pairing with the
+furthest-reaching jamb (never a block outline), end doors at any free end and at block sides, staggered-ends doors,
+upright-only room numbers; the stair hole and voids (`voidOnSlab`, the slab's own polygons) bar the flood and become
+`Room.holes` (schema 1.7.0: migration, validation, compiler, reseal, Android bundles regenerated). Arganiach attic
+4 → 6 regions (2+3 and 1+8 have no drawn wall), no room floor over the void or the stair hole; Trytomach attic 5 → 8
+(1+2 open). Roofs, slabs, exterior walls and openings byte-identical in all 8 houses; no interior door lost; A01,
+Goździkowce and Cieszynianka gain rooms the plans draw. Open: attic room numbers mostly unread; labels that came from
+rotated readings are gone; the analyzer contract fixtures stay stale (since solver 2.6.0).

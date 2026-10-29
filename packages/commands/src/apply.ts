@@ -235,7 +235,7 @@ function execute(d: Draft, c: ResolvedCommand): void {
       return
     }
     case 'createRoom':
-      add('rooms', 'room', { id: c.id, ...common(c), levelId: c.levelId, polygon: c.polygon, usage: c.usage })
+      add('rooms', 'room', { id: c.id, ...common(c), levelId: c.levelId, polygon: c.polygon, ...(c.holes && c.holes.length > 0 ? { holes: c.holes } : {}), usage: c.usage })
       return
     case 'createWall': {
       const wallId = add('walls', 'wall', {

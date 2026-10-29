@@ -48,6 +48,8 @@ export type ValidationCode =
   // --- schema 1.3.0: slab holes, stairs, door assemblies, surface regions ---
   | 'SLAB_HOLE_OUTSIDE'
   | 'SLAB_HOLES_OVERLAP'
+  | 'ROOM_HOLE_OUTSIDE'
+  | 'ROOM_HOLES_OVERLAP'
   | 'STAIR_RISE_INVALID'
   | 'STAIR_LAYOUT_INVALID'
   | 'STAIR_OUTSIDE_FOOTPRINT'

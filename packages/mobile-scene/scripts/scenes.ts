@@ -28,6 +28,8 @@ export const ASSET_DIR = join(ROOT, 'apps/android/app/src/main/assets/scenes')
  * the pipeline (`packages/candidates/src/owner-005t/`, numbers and ids only). It ships for the owner's visual
  * review, pinned by the SHA-256 of its canonical serialization: a file that does not reproduce exactly that
  * model is refused here, so the phone never shows a building other than the one the stage reports measured.
+ * N8-03D2: both files restated from schema 1.6.0 to 1.7.0 — the version string alone; with it put back they hash to
+ * the pins sealed under 1.6.0 (jarzmianki 4ced0179…, gożdzikowce a612a399…).
  */
 export function sealedOwnerModel(key: string, sha256: string): CanonicalBuildingModel {
   const model = parseModel(readFileSync(join(ROOT, 'packages/candidates/src/owner-005t', `${key}.model.json`), 'utf8'))
@@ -49,13 +51,13 @@ export const SCENES: readonly SceneSpec[] = [
     key: 'jarzmianki-005t-visual',
     title: 'Dom w jarzmiankach (005T)',
     subtitle: 'MODEL ORIENTACYJNY — nie do kosztorysu, wymaga weryfikacji (6 ostrzeżeń ograniczających)',
-    build: () => sealedOwnerModel('jarzmianki-005t-visual', '4ced017981088d05aa0f2b245b1f80a343c8b338855e14154e3a150040846b54'),
+    build: () => sealedOwnerModel('jarzmianki-005t-visual', 'c65724e9f358a56c417352bff95267ce81ab8da1597e91c4ff36315b4f91e4ee'),
   },
   {
     key: 'gozdzikowce-005t-visual',
     title: 'Dom w goździkowcach (005T)',
     subtitle: 'MODEL ORIENTACYJNY — nie do kosztorysu, wymaga weryfikacji; dach z przybliżonej kalenicy',
-    build: () => sealedOwnerModel('gozdzikowce-005t-visual', 'a612a399e0b2dd25974202fe37982abb1b620b554fcabf7af4603596678fd33f'),
+    build: () => sealedOwnerModel('gozdzikowce-005t-visual', '5ca1594a330cca0ec0e63dbd6797d6cad637e03425fa07486bfa7bb71ba815a4'),
   },
   {
     key: 'marcowki',

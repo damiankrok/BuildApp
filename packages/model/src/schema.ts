@@ -20,9 +20,9 @@ import { EvidenceSchema, EvidenceSourceSchema } from './evidence.js'
 import { PlanPolygonSchema, PlanRectSchema, Vec2Schema, Vec3Schema, finite, nonNegative, positive } from './geometry-types.js'
 
 export const MODEL_SCHEMA_NAME = 'buildapp.canonical-building-model' as const
-export const MODEL_SCHEMA_VERSION = '1.6.0' as const
+export const MODEL_SCHEMA_VERSION = '1.7.0' as const
 /** Versions `validateModel` accepts: the current one, and older ones it migrates explicitly (see migrate.ts). */
-export const SUPPORTED_SCHEMA_VERSIONS = ['1.0.0', '1.1.0', '1.2.0', '1.3.0', '1.4.0', '1.5.0', '1.6.0'] as const
+export const SUPPORTED_SCHEMA_VERSIONS = ['1.0.0', '1.1.0', '1.2.0', '1.3.0', '1.4.0', '1.5.0', '1.6.0', '1.7.0'] as const
 
 /** Stable identifier: letters, digits, `_`, `-`, `.`, `:`. */
 export const IdSchema = z.string().regex(/^[A-Za-z0-9_.:-]+$/, 'ids use letters, digits, _ - . :')
@@ -94,11 +94,17 @@ export const LevelSchema = z
   .strict()
 export type Level = z.infer<typeof LevelSchema>
 
+/**
+ * A room: its outline `polygon` on its level, less zero or more `holes` (1.7.0) — the openings in the floor it
+ * surrounds, a stair hole or a void, which are not its floor. Holes follow the slab's rule: each a simple polygon inside
+ * the outline (it may share part of the outline's boundary), never crossing it or another hole.
+ */
 export const RoomSchema = z
   .object({
     ...base,
     levelId: IdSchema,
     polygon: PlanPolygonSchema,
+    holes: z.array(PlanPolygonSchema).optional(),
     /** Room usage label, free text ("kitchen"). */
     usage: z.string().optional(),
   })

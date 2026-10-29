@@ -1,0 +1,7 @@
+N8-03D2 — targeted tests (vitest), 2026-10-29
+packages/reconstruction/test/attic-rooms-n8-03d2.test.ts: 11 passed (new)
+targeted reconstruction files (slab void, garage label, open contact, party wall, interior, stair, attic registration, valley cut, glazing) + packages model, commands, geometry, candidates, reference-marcowki, architecture, demo, mobile-scene: 57 files / 575 tests passed
+packages/reconstruction + packages/analysis-service + apps/web + packages/editor: 117 files passed, 1 skipped by its own condition (ring-collision-n7-fix01, evidence-dependent); 1351 tests passed, 9 skipped, 0 failed
+tsc --noEmit: clean
+not run: full CI, APK, android unit tests
+known stale before this stage: apps/analyzer-api/test/android-contract.test.ts (analyzer contract fixtures last captured at solver 2.6.0; not recaptured here)

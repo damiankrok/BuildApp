@@ -107,8 +107,30 @@ export function semanticIssues(m: CanonicalBuildingModel): ValidationIssue[] {
 
   for (const r of m.rooms) {
     needLevel(r.id, r.levelId)
-    if (!polygonIsSimple(r.polygon)) err('MALFORMED_POLYGON', `room ${r.id} polygon is not a simple polygon with area`, r.id, 'polygon')
+    const outerOk = polygonIsSimple(r.polygon)
+    if (!outerOk) err('MALFORMED_POLYGON', `room ${r.id} polygon is not a simple polygon with area`, r.id, 'polygon')
     needSources(r.id, r.evidence?.sourceIds)
+    // 1.7.0: the room's holes, as a slab's
+    const holes = r.holes ?? []
+    for (const [i, h] of holes.entries()) {
+      if (!polygonIsSimple(h)) {
+        err('MALFORMED_POLYGON', `room ${r.id} hole ${i} is not a simple polygon with area`, r.id, `holes.${i}`)
+        continue
+      }
+      if (!outerOk) continue
+      const outside = h.filter((q) => !pointInOrOnPolygon(q, r.polygon))
+      const crossing = polygonsEdgesCross(h, r.polygon)
+      if (outside.length > 0 || crossing) {
+        err('ROOM_HOLE_OUTSIDE', `room ${r.id} hole ${i} is not inside the room polygon (${outside.length} vertices outside${crossing ? ', edges crossing the outline' : ''})`, r.id, `holes.${i}`)
+        continue
+      }
+      for (let j = 0; j < i; j++) {
+        const other = holes[j]
+        if (!polygonIsSimple(other)) continue
+        const inside = h.some((q) => pointStrictlyInPolygon(q, other)) || other.some((q) => pointStrictlyInPolygon(q, h))
+        if (inside || polygonsEdgesCross(h, other)) err('ROOM_HOLES_OVERLAP', `room ${r.id} holes ${j} and ${i} overlap`, r.id, `holes.${i}`)
+      }
+    }
   }
 
   for (const w of m.walls) {

@@ -67,6 +67,11 @@ export type RoomPolygon = {
   storeyIndex: number
   /** Rectilinear polygon in world metres, anticlockwise. */
   polygon: Array<{ x: number; z: number }>
+  /**
+   * N8-03D2: the openings in the storey's floor the room surrounds (a stair hole, a void), as their outlines on the
+   * room's grid: not floor, not the room's. Absent when there are none.
+   */
+  holes?: Array<Array<{ x: number; z: number }>>
   areaM2: number
   /** Bounds of the polygon. */
   bounds: { x0: number; z0: number; x1: number; z1: number }
@@ -129,6 +134,11 @@ export type InteriorOptions = {
   labelArea?: { x0: number; z0: number; x1: number; z1: number }
   /** Rectangles that are not floor on this storey (a stair flight, a void), as room barriers. */
   extraBarriers?: ReadonlyArray<{ x0: number; z0: number; x1: number; z1: number }>
+  /**
+   * N8-03D2: the openings cut in this storey's slab (the stair hole, a void — the polygons the slab is cut with): room
+   * barriers, every grid cell they touch; and where a room surrounds one, a hole in the room.
+   */
+  slabOpenings?: ReadonlyArray<ReadonlyArray<{ x: number; z: number }>>
   /** Diagnostics hook. */
   onDebug?: (info: { axis: 'X' | 'Z'; centrePx: number; thick: number; runsPx: Array<{ from: number; to: number }> }) => void
 }
@@ -140,7 +150,7 @@ export type InteriorOptions = {
  */
 export const UNWALLED_SIDE_COVER = 0.05
 
-const DEFAULTS: Required<Omit<InteriorOptions, 'onDebug' | 'extraBarriers' | 'labelArea' | 'drawnWallM'>> = { minPartitionFraction: 0.2, maxPartitionFraction: 1.0, thinPartitionFraction: 0.72, minPieceM: 0.55, doorMinM: 0.6, doorMaxM: 1.35, cellM: 0.05 }
+const DEFAULTS: Required<Omit<InteriorOptions, 'onDebug' | 'extraBarriers' | 'labelArea' | 'drawnWallM' | 'slabOpenings'>> = { minPartitionFraction: 0.2, maxPartitionFraction: 1.0, thinPartitionFraction: 0.72, minPieceM: 0.55, doorMinM: 0.6, doorMaxM: 1.35, cellM: 0.05 }
 
 /** Neutral dark ink: a wall, not a coloured annotation. */
 const wallInk = (r: Raster, x: number, y: number): boolean => {
@@ -490,6 +500,14 @@ export function readInterior(
     }
   }
 
+  // A piece that lies along a solid block's edge is the block's outline, not a partition (it is dropped below).
+  const onBlock = (w: InteriorWallPiece): boolean =>
+    blocks.some((b) => {
+      const pad = drawnM * 0.2
+      if (w.axis === 'Z') return w.at >= b.x0 - pad && w.at <= b.x1 + pad && w.from >= b.z0 - pad && w.to <= b.z1 + pad
+      return w.at >= b.z0 - pad && w.at <= b.z1 + pad && w.from >= b.x0 - pad && w.to <= b.x1 + pad
+    })
+
   // Door gaps: between two collinear pieces on one axis, 0.6..1.35 m apart, where at least one piece is anchored.
   const byAxis = new Map<string, InteriorWallPiece[]>()
   // A solid block standing on a partition's line is a jamb for a door beside it.
@@ -511,14 +529,37 @@ export function readInterior(
       }
     }
   }
-  for (const w of [...walls, ...pseudo]) {
-    const key = `${w.axis}:${Math.round(w.at / (drawnM * 0.5))}`
-    byAxis.set(key, [...(byAxis.get(key) ?? []), w])
+  // N8-03D2: one line is the pieces whose drawn bands overlap across it, as well as those within the old bucket: a piece
+  // that runs into a block or a wardrobe's carcass is measured thicker there, its centre moved off the line by half
+  // the extra, and must still pair with the piece across the door from it
+  {
+    const all = [...walls, ...pseudo]
+    const parent = all.map((_, i) => i)
+    const root = (i: number): number => (parent[i] === i ? i : (parent[i] = root(parent[i])))
+    const bucket = (w: InteriorWallPiece): number => Math.round(w.at / (drawnM * 0.5))
+    for (let i = 0; i < all.length; i += 1) {
+      for (let j = i + 1; j < all.length; j += 1) {
+        const a = all[i]
+        const b = all[j]
+        if (a.axis !== b.axis) continue
+        if (bucket(a) === bucket(b) || Math.abs(a.at - b.at) <= (a.thicknessM + b.thicknessM) / 2) parent[root(j)] = root(i)
+      }
+    }
+    all.forEach((w, i) => {
+      const key = `${w.axis}:${root(i)}`
+      byAxis.set(key, [...(byAxis.get(key) ?? []), w])
+    })
   }
   for (const [, pieces] of byAxis) {
     const sorted = [...pieces].sort((a, b) => a.from - b.from)
+    // N8-03D2: the jamb before a gap is the piece reaching furthest along so far — a block's edge lying inside a wall's
+    // extent is not the end of that wall
+    // and never a block's outline, which is dropped below and would take the door with it
+    let reach = sorted[0]
     for (let i = 0; i + 1 < sorted.length; i += 1) {
-      const a = sorted[i]
+      if (sorted[i].to > reach.to + 1e-9 && !(onBlock(sorted[i]) && !sorted[i].id.includes(':'))) reach = sorted[i]
+      if (onBlock(reach) && !reach.id.includes(':') && !(onBlock(sorted[i]) && !sorted[i].id.includes(':'))) reach = sorted[i]
+      const a = reach
       const b = sorted[i + 1]
       const gap = b.from - a.to
       // Both jambs must be walls in their own right: anchored at an end, or long enough to be more than a stub.
@@ -555,19 +596,32 @@ export function readInterior(
   // piece, a door's width past that piece's end, is the far jamb of a door in that line when the plan draws the door's
   // swing in the gap (a quarter arc from either jamb, on either side): the door is cut there, and the piece is a wall.
   // Without a drawn swing the gap stays a passage or nothing, as before.
+  // N8-03D2: the wall across the line may be a solid block's side (a chimney, a column) as well as a partition; and the
+  // swing may be a leaf shorter than the gap (`doorSwingInGap`)
+  const blockSides: InteriorWallPiece[] = blocks.flatMap((b) => [
+    { ...sidePiece(b, 'X', b.z0, b.x0, b.x1), id: `${b.id}:side-z0` },
+    { ...sidePiece(b, 'X', b.z1, b.x0, b.x1), id: `${b.id}:side-z1` },
+    { ...sidePiece(b, 'Z', b.x0, b.z0, b.z1), id: `${b.id}:side-x0` },
+    { ...sidePiece(b, 'Z', b.x1, b.z0, b.z1), id: `${b.id}:side-x1` },
+  ])
   const jambIds = new Set<string>()
   for (const w of walls) {
-    if (w.ends.start === 'JUNCTION' || w.ends.end === 'JUNCTION' || doors.some((d) => d.betweenIds.includes(w.id))) continue
+    // N8-03D2: any free end, of any piece: a piece anchored at its other end, or the jamb of a door already read, may
+    // still end a door's width short of the wall across its line
     for (const end of [w.from, w.to]) {
-      for (const o of walls) {
-        if (o === w || o.axis === w.axis || Math.abs(o.at - end) > Math.max(drawnM * 0.5, o.thicknessM)) continue
+      if ((end === w.from ? w.ends.start : w.ends.end) === 'JUNCTION') continue
+      for (const o of [...walls, ...blockSides]) {
+        // a block's side is a face, not a band: the piece's end stands on it within the hinge's own slack across
+        if (o === w || o.axis === w.axis || Math.abs(o.at - end) > Math.max(drawnM * 0.5, o.thicknessM, o.id.includes(':side') ? 2 * HINGE_ACROSS_M : 0)) continue
         if (!(o.ends.start === 'JUNCTION' || o.ends.end === 'JUNCTION' || o.to - o.from >= 0.45)) continue
         const near = w.at - w.thicknessM / 2
         const far = w.at + w.thicknessM / 2
         const gap: [number, number] | undefined = o.to <= near ? [o.to, near] : o.from >= far ? [far, o.from] : undefined
         if (!gap || gap[1] - gap[0] < opt.doorMinM || gap[1] - gap[0] > opt.doorMaxM) continue
         const walled = walls.some((x) => x !== o && x.axis === o.axis && Math.abs(x.at - o.at) <= drawnM * 0.5 && x.from < gap[1] - 0.05 && x.to > gap[0] + 0.05)
-        if (walled || !swingDrawn(raster, plan, o.axis, o.at, gap)) continue
+        const already = doors.some((d) => d.wallAxis === o.axis && Math.abs(d.at - o.at) <= drawnM * 0.5 && d.from < gap[1] - 0.05 && d.to > gap[0] + 0.05)
+        const leaf = walled || already ? undefined : doorSwingInGap(raster, plan, o.axis, o.at, gap)
+        if (!leaf) continue
         doors.push({
           id: `idoor-${storeyIndex}-${doors.length}`,
           storeyIndex,
@@ -578,12 +632,12 @@ export function readInterior(
           widthM: round6(gap[1] - gap[0]),
           betweenIds: [o.id, `${w.id}:jamb`],
           confidence: round6(Math.min(o.confidence, 0.6) * 0.95),
-          why: `a ${(gap[1] - gap[0]).toFixed(2)} m gap between the end of a partition and the wall across its line, its swing drawn: a door, the wall across its far jamb`,
+          why: `a ${(gap[1] - gap[0]).toFixed(2)} m gap between the end of a partition and the ${o.id.includes(':side') ? 'side of the solid block' : 'wall'} across its line, its swing drawn${leaf.short ? ` (a ${leaf.radius.toFixed(2)} m leaf, shorter than the gap)` : ''}: a door, the wall across its far jamb`,
         })
         jambIds.add(w.id)
         break
       }
-      if (jambIds.has(w.id)) break
+      // N8-03D2: and on to its other end — a partition between two doors is the jamb of both
     }
   }
 
@@ -625,7 +679,7 @@ export function readInterior(
         }
       }
       const spans: Array<[number, number]> = [gap, ...(drawnJamb !== undefined ? [(atStart ? [drawnJamb, gap[1]] : [gap[0], drawnJamb]) as [number, number]] : [])]
-      const swing = spans.some((g) => [w.at, w.at - w.thicknessM / 2, w.at + w.thicknessM / 2].some((line) => swingDrawn(raster, plan, w.axis, line, g)))
+      const swing = spans.some((g) => [w.at, w.at - w.thicknessM / 2, w.at + w.thicknessM / 2].some((line) => swingDrawn(raster, plan, w.axis, line, g))) || spans.some((g) => !!doorSwingInGap(raster, plan, w.axis, w.at, g))
       if (!swing) continue
       doors.push({
         id: `idoor-${storeyIndex}-${doors.length}`,
@@ -643,6 +697,54 @@ export function readInterior(
     }
   }
 
+  // N8-03D2: a door across the ends of two parallel partitions. Two pieces on parallel lines a door's width apart (face
+  // to face), one ending where the other starts — their free ends at the same place along, the pieces running away from
+  // each other, overlapping by no more than {@link STAGGER_MAX_M} — leave a doorway square to them between their faces:
+  // a door there when the plan draws its swing in it (`doorSwingInGap`). Nothing else stands in the doorway (no wall of
+  // either line between them, no wall across it). The door is a room boundary; it has no wall of its own to be cut in.
+  for (let i = 0; i < walls.length; i += 1) {
+    for (let j = 0; j < walls.length; j += 1) {
+      const a = walls[i]
+      const b = walls[j]
+      // a ends (its `to`) where b starts (its `from`): a runs towards b's start and stops, b runs on from there
+      if (i === j || a.axis !== b.axis || a.ends.end === 'JUNCTION' || b.ends.start === 'JUNCTION') continue
+      const overlap = a.to - b.from
+      if (overlap < 0 || overlap > STAGGER_MAX_M) continue
+      const lowLine = Math.min(a.at, b.at)
+      const highLine = Math.max(a.at, b.at)
+      const lowT = (a.at < b.at ? a : b).thicknessM
+      const highT = (a.at < b.at ? b : a).thicknessM
+      const gap: [number, number] = [round6(lowLine + lowT / 2), round6(highLine - highT / 2)]
+      const width = gap[1] - gap[0]
+      if (width < opt.doorMinM || width > opt.doorMaxM) continue
+      const across: 'X' | 'Z' = a.axis === 'X' ? 'Z' : 'X'
+      // nothing stands in the doorway: no piece parallel to them between their lines over the overlap, none across it
+      const blocked = walls.some((w) => w !== a && w !== b && ((w.axis === a.axis && w.at > gap[0] && w.at < gap[1] && w.from < a.to && w.to > b.from) || (w.axis === across && w.at >= b.from - 0.05 && w.at <= a.to + 0.05 && w.from < gap[1] && w.to > gap[0])))
+      if (blocked) continue
+      let found: { line: number; leaf: NonNullable<ReturnType<typeof doorSwingInGap>> } | undefined
+      for (let line = b.from; line <= a.to + 1e-9 && !found; line += Math.max(mpp, 0.08)) {
+        const leaf = doorSwingInGap(raster, plan, across, line, gap)
+        if (leaf) found = { line, leaf }
+      }
+      if (!found) continue
+      const line = round6((b.from + a.to) / 2)
+      doors.push({
+        id: `idoor-${storeyIndex}-${doors.length}`,
+        storeyIndex,
+        wallAxis: across,
+        at: line,
+        from: gap[0],
+        to: gap[1],
+        widthM: round6(width),
+        betweenIds: [`${a.id}:end`, `${b.id}:start`],
+        confidence: round6(Math.min(a.confidence, b.confidence, 0.6) * 0.95),
+        why: `a ${width.toFixed(2)} m doorway between the faces of two parallel partitions whose ends meet along (${overlap.toFixed(2)} m overlap), its swing drawn${found.leaf.short ? ` (a ${found.leaf.radius.toFixed(2)} m leaf)` : ''}: a door with no wall of its own`,
+      })
+      jambIds.add(a.id)
+      jambIds.add(b.id)
+    }
+  }
+
   // A free-standing piece with no junction at either end is a cupboard or a
   // worktop, not a wall — unless a door gap anchors it to a piece that is.
   const anchoredByDoor = new Set([...doors.flatMap((d) => d.betweenIds), ...jambIds])
@@ -653,13 +755,6 @@ export function readInterior(
   const isPseudo = (id: string): boolean => id.includes(':')
   const keptDoors = doors.filter((d) => (keptIds.has(d.betweenIds[0]) || isPseudo(d.betweenIds[0])) && (keptIds.has(d.betweenIds[1]) || isPseudo(d.betweenIds[1])))
 
-  // A piece that lies along a solid block's edge is the block's outline, not a partition.
-  const onBlock = (w: InteriorWallPiece): boolean =>
-    blocks.some((b) => {
-      const pad = drawnM * 0.2
-      if (w.axis === 'Z') return w.at >= b.x0 - pad && w.at <= b.x1 + pad && w.from >= b.z0 - pad && w.to <= b.z1 + pad
-      return w.at >= b.z0 - pad && w.at <= b.z1 + pad && w.from >= b.x0 - pad && w.to <= b.x1 + pad
-    })
   for (let k = kept.length - 1; k >= 0; k -= 1) if (onBlock(kept[k])) kept.splice(k, 1)
   const finalIds = new Set(kept.map((w) => w.id))
   for (let k = keptDoors.length - 1; k >= 0; k -= 1) if (!(finalIds.has(keptDoors[k].betweenIds[0]) || isPseudo(keptDoors[k].betweenIds[0])) || !(finalIds.has(keptDoors[k].betweenIds[1]) || isPseudo(keptDoors[k].betweenIds[1]))) keptDoors.splice(k, 1)
@@ -688,6 +783,28 @@ export function readInterior(
   }
   for (const b of blocks) mark(b.x0, b.z0, b.x1, b.z1)
   for (const b of options.extraBarriers ?? []) mark(b.x0, b.z0, b.x1, b.z1)
+  // N8-03D2: a slab opening bars every cell it touches (a cell's centre or a corner inside it), so no room's cells lie on it
+  const opening = new Uint8Array(gx * gz)
+  for (const poly of options.slabOpenings ?? []) {
+    const xs = poly.map((p) => p.x)
+    const zs = poly.map((p) => p.z)
+    const i0 = Math.max(0, Math.floor((Math.min(...xs) - inner.x0) / cell))
+    const i1 = Math.min(gx - 1, Math.ceil((Math.max(...xs) - inner.x0) / cell))
+    const j0 = Math.max(0, Math.floor((Math.min(...zs) - inner.z0) / cell))
+    const j1 = Math.min(gz - 1, Math.ceil((Math.max(...zs) - inner.z0) / cell))
+    const e = cell * 1e-3
+    for (let j = j0; j <= j1; j += 1) {
+      for (let i = i0; i <= i1; i += 1) {
+        const x = inner.x0 + i * cell
+        const z = inner.z0 + j * cell
+        const probes = [{ x: x + cell / 2, z: z + cell / 2 }, { x: x + e, z: z + e }, { x: x + cell - e, z: z + e }, { x: x + e, z: z + cell - e }, { x: x + cell - e, z: z + cell - e }]
+        if (probes.some((q) => pointInPolygon(q, poly))) {
+          barrier[j * gx + i] = 1
+          opening[j * gx + i] = 1
+        }
+      }
+    }
+  }
   const label = new Int32Array(gx * gz).fill(-1)
   const rooms: RoomPolygon[] = []
   let next = 0
@@ -712,6 +829,7 @@ export function readInterior(
       const area = cells.length * cell * cell
       if (area < 1.0) continue
       const polygon = tracePolygon(cells, gx, gz, cell, inner.x0, inner.z0)
+      const holes = openingHoles(cells, opening, gx, gz, cell, inner.x0, inner.z0)
       const xs = polygon.map((p) => p.x)
       const zs = polygon.map((p) => p.z)
       const bounds = { x0: round6(Math.min(...xs)), z0: round6(Math.min(...zs)), x1: round6(Math.max(...xs)), z1: round6(Math.max(...zs)) }
@@ -728,7 +846,7 @@ export function readInterior(
         .map((d) => d.id)
       // Open plan: the polygon's area is well above the largest rectangle a single room would be, and it has concave corners.
       const openPlan = polygon.length > 4 && area > 20
-      rooms.push({ id: `room-${storeyIndex}-${rooms.length}`, storeyIndex, polygon, areaM2: round6(area), bounds, doorIds, openPlan, confidence: 0.6, why: `${area.toFixed(2)} m² enclosed by ${polygon.length} wall faces${openPlan ? '; several published rooms may share it (open plan)' : ''}` })
+      rooms.push({ id: `room-${storeyIndex}-${rooms.length}`, storeyIndex, polygon, ...(holes.length > 0 ? { holes } : {}), areaM2: round6(area), bounds, doorIds, openPlan, confidence: 0.6, why: `${area.toFixed(2)} m² enclosed by ${polygon.length} wall faces${holes.length > 0 ? `, less ${holes.length} opening${holes.length === 1 ? '' : 's'} in the floor it surrounds` : ''}${openPlan ? '; several published rooms may share it (open plan)' : ''}` })
     }
   }
 
@@ -738,6 +856,8 @@ export function readInterior(
   const medianHeight = heights.length > 0 ? heights[Math.floor(heights.length / 2)] : 0
   for (const t of keptTokens) {
     if (!/^\d{1,2}$/.test(t.text)) continue
+    // N8-03D2: a room number is printed upright; a reading taken another way up is a dimension or a callout's text
+    if (t.orientation !== undefined && t.orientation !== 'HORIZONTAL') continue
     if (medianHeight > 0 && t.heightPx < medianHeight * 1.15) continue
     const cx = (t.box.x0 + t.box.x1) / 2
     const cy = (t.box.y0 + t.box.y1) / 2
@@ -864,6 +984,101 @@ export function swingDrawn(raster: Raster, plan: PlanFrameV2, axis: 'X' | 'Z', a
 }
 
 /**
+ * N8-03D2: the leaf of a door drawn shorter than the gap it hangs in — a leaf is narrower than its opening by its frame
+ * and the jamb's lining, and on these sheets the gap is measured to the partition's face. The swing is a quarter arc of
+ * the leaf's own length, centred on its hinge, and the leaf is drawn open beside it: a straight line from the hinge,
+ * square to the wall's line, as long as the arc's radius. Both must be on the drawing (arc 70 %, leaf 75 % of their
+ * samples on neutral line work, within a pixel) for one radius between {@link SHORT_LEAF_MIN_FRACTION} of the gap (and
+ * {@link SHORT_LEAF_MIN_M}) and the gap, with the hinge at a jamb or up to {@link HINGE_SLACK_M} inside the gap from it
+ * and up to {@link HINGE_ACROSS_M} either side of the wall's line (the hinge sits on the frame, not on the face or the
+ * centre line the gap is measured to).
+ */
+export const SHORT_LEAF_MIN_FRACTION = 0.7
+export const SHORT_LEAF_MIN_M = 0.55
+export const HINGE_SLACK_M = 0.15
+export const HINGE_ACROSS_M = 0.08
+/** N8-03D2: a leaf is drawn as a line at most this many pixels wide. */
+export const LEAF_MAX_PX = 3
+/** N8-03D2: how far two parallel partitions' ends may pass each other along and still frame one doorway between them. */
+export const STAGGER_MAX_M = 0.4
+
+/**
+ * N8-03D2: whether the plan draws a door's swing in a gap: `swingDrawn` (a leaf as long as the gap) or a shorter leaf
+ * with its arc (`SHORT_LEAF_MIN_FRACTION`). Returns the leaf found, or undefined.
+ */
+export function doorSwingInGap(raster: Raster, plan: PlanFrameV2, axis: 'X' | 'Z', at: number, gap: [number, number]): { hinge: number; radius: number; side: -1 | 1; short: boolean } | undefined {
+  if (swingDrawn(raster, plan, axis, at, gap)) return { hinge: gap[0], radius: gap[1] - gap[0], side: 1, short: false }
+  const width = gap[1] - gap[0]
+  const mpp = (plan.mppX + plan.mppY) / 2
+  const lineAt = (x: number, y: number): boolean => {
+    for (let dy = -1; dy <= 1; dy += 1) {
+      for (let dx = -1; dx <= 1; dx += 1) {
+        if (lumaAt(raster, x + dx, y + dy) >= 200) continue
+        const [r, g, b] = rgbAt(raster, x + dx, y + dy)
+        if (Math.max(r, g, b) - Math.min(r, g, b) < NEUTRAL_INK_CHROMA) return true
+      }
+    }
+    return false
+  }
+  const pt = (along: number, across: number): { x: number; y: number } => (axis === 'Z' ? plan.toPixel(across, along) : plan.toPixel(along, across))
+  // a leaf is a line, not a band: the ink it is drawn with runs at most LEAF_MAX_PX across it (along the wall's line) —
+  // the face of a partition beside the hinge is no leaf
+  const inked = (x: number, y: number): boolean => {
+    if (lumaAt(raster, x, y) >= 200) return false
+    const [r, g, b] = rgbAt(raster, x, y)
+    return Math.max(r, g, b) - Math.min(r, g, b) < NEUTRAL_INK_CHROMA
+  }
+  const thinLineAt = (fx: number, fy: number): boolean => {
+    const x = Math.round(fx)
+    const y = Math.round(fy)
+    for (let d = -1; d <= 1; d += 1) {
+      // the leaf runs across the wall's line: its width is measured along it (x for a wall along x, y for one along z)
+      const cx = axis === 'X' ? x + d : x
+      const cy = axis === 'X' ? y : y + d
+      if (!inked(cx, cy)) continue
+      let run = 1
+      for (let k = 1; k <= LEAF_MAX_PX + 1 && inked(axis === 'X' ? cx - k : cx, axis === 'X' ? cy : cy - k); k += 1) run += 1
+      for (let k = 1; k <= LEAF_MAX_PX + 1 && inked(axis === 'X' ? cx + k : cx, axis === 'X' ? cy : cy + k); k += 1) run += 1
+      if (run <= LEAF_MAX_PX) return true
+    }
+    return false
+  }
+  const shortest = Math.max(SHORT_LEAF_MIN_M, SHORT_LEAF_MIN_FRACTION * width)
+  // every hinge, radius and side: the one whose arc the drawing follows best, its leaf drawn
+  let best: { hinge: number; radius: number; side: -1 | 1; arc: number } | undefined
+  let n = 0
+  for (let deg = 12; deg <= 78; deg += 6) n += 1
+  for (const [jamb, dir] of [[gap[0], 1], [gap[1], -1]] as const) {
+    for (let slack = 0; slack <= HINGE_SLACK_M + 1e-9; slack += mpp) {
+      const hinge = jamb + dir * slack
+      for (let radius = width - slack - mpp; radius >= shortest; radius -= mpp) {
+        for (let off = -HINGE_ACROSS_M; off <= HINGE_ACROSS_M + 1e-9; off += mpp) {
+          const line = at + off
+          for (const side of [-1, 1] as const) {
+            let arc = 0
+            for (let deg = 12; deg <= 78; deg += 6) {
+              const t = (deg * Math.PI) / 180
+              const p = pt(hinge + dir * radius * Math.cos(t), line + side * radius * Math.sin(t))
+              if (lineAt(p.x, p.y)) arc += 1
+            }
+            if (arc < 0.7 * n || (best && arc <= best.arc)) continue
+            let leaf = 0
+            let m = 0
+            for (let f = 0.15; f <= 0.95 + 1e-9; f += 0.1) {
+              const p = pt(hinge, line + side * radius * f)
+              m += 1
+              if (thinLineAt(p.x, p.y)) leaf += 1
+            }
+            if (leaf >= 0.75 * m) best = { hinge: round6(hinge), radius: round6(radius), side, arc }
+          }
+        }
+      }
+    }
+  }
+  return best ? { hinge: best.hinge, radius: best.radius, side: best.side, short: true } : undefined
+}
+
+/**
  * N8-03A: along a room's outline, the stretches of edge on one line (x = `at` for axis 'Z', z = `at` for axis 'X'),
  * within `tol`: where the room meets a face.
  */
@@ -900,6 +1115,8 @@ export function joinRooms(id: string, parts: readonly RoomPolygon[], strips: Rea
   for (let j = 0; j < gz; j += 1) {
     for (let i = 0; i < gx; i += 1) {
       const c = { x: x0 + (i + 0.5) * cellM, z: z0 + (j + 0.5) * cellM }
+      // N8-03D2: a part's holes stay out of the joined floor, and stay its holes
+      if (parts.some((p) => (p.holes ?? []).some((h) => pointInPolygon(c, h)))) continue
       if (parts.some((p) => pointInPolygon(c, p.polygon)) || strips.some((r) => c.x >= r.x0 && c.x <= r.x1 && c.z >= r.z0 && c.z <= r.z1)) cells.push([i, j])
     }
   }
@@ -914,6 +1131,7 @@ export function joinRooms(id: string, parts: readonly RoomPolygon[], strips: Rea
     id,
     storeyIndex: parts[0].storeyIndex,
     polygon,
+    ...(parts.some((p) => (p.holes ?? []).length > 0) ? { holes: parts.flatMap((p) => p.holes ?? []) } : {}),
     areaM2: area,
     bounds: { x0: round6(Math.min(...xs)), z0: round6(Math.min(...zs)), x1: round6(Math.max(...xs)), z1: round6(Math.max(...zs)) },
     doorIds: [...new Set(parts.flatMap((p) => p.doorIds))],
@@ -941,6 +1159,73 @@ export function joinRooms(id: string, parts: readonly RoomPolygon[], strips: Rea
     }
   }
   return { room, unresolved }
+}
+
+/**
+ * N8-03D2: the holes of a flood region that are slab openings: the cells inside the region's outline but not of it,
+ * grouped 4-connected, each group that holds a slab-opening cell traced as its own outline. A group with no opening
+ * cell (a block standing in the room, a wall stub) is not a hole: the room's outline goes over it, as before.
+ */
+function openingHoles(cells: ReadonlyArray<[number, number]>, opening: Uint8Array, gx: number, gz: number, cell: number, x0: number, z0: number): Array<Array<{ x: number; z: number }>> {
+  if (!cells.some(() => true)) return []
+  const own = new Set(cells.map(([i, j]) => j * gx + i))
+  let i0 = gx
+  let i1 = -1
+  let j0 = gz
+  let j1 = -1
+  for (const [i, j] of cells) {
+    i0 = Math.min(i0, i)
+    i1 = Math.max(i1, i)
+    j0 = Math.min(j0, j)
+    j1 = Math.max(j1, j)
+  }
+  // the outside: every non-region cell of the box reachable from the box's border
+  const seen = new Set<number>()
+  const stack: number[] = []
+  for (let i = i0; i <= i1; i += 1) for (const j of [j0, j1]) stack.push(j * gx + i)
+  for (let j = j0; j <= j1; j += 1) for (const i of [i0, i1]) stack.push(j * gx + i)
+  const outside = new Set<number>()
+  while (stack.length > 0) {
+    const k = stack.pop() as number
+    if (own.has(k) || outside.has(k)) continue
+    outside.add(k)
+    const i = k % gx
+    const j = (k - i) / gx
+    for (const [di, dj] of [[1, 0], [-1, 0], [0, 1], [0, -1]] as const) {
+      const ni = i + di
+      const nj = j + dj
+      if (ni >= i0 && ni <= i1 && nj >= j0 && nj <= j1) stack.push(nj * gx + ni)
+    }
+  }
+  const holes: Array<Array<{ x: number; z: number }>> = []
+  for (let j = j0; j <= j1; j += 1) {
+    for (let i = i0; i <= i1; i += 1) {
+      const k = j * gx + i
+      if (own.has(k) || outside.has(k) || seen.has(k)) continue
+      const group: Array<[number, number]> = []
+      const st = [k]
+      seen.add(k)
+      while (st.length > 0) {
+        const q = st.pop() as number
+        const qi = q % gx
+        const qj = (q - qi) / gx
+        group.push([qi, qj])
+        for (const [di, dj] of [[1, 0], [-1, 0], [0, 1], [0, -1]] as const) {
+          const n = (qj + dj) * gx + (qi + di)
+          if (qi + di < i0 || qi + di > i1 || qj + dj < j0 || qj + dj > j1 || own.has(n) || outside.has(n) || seen.has(n)) continue
+          seen.add(n)
+          st.push(n)
+        }
+      }
+      if (group.some(([gi, gj]) => opening[gj * gx + gi])) holes.push(tracePolygon(group, gx, gz, cell, x0, z0))
+    }
+  }
+  return holes
+}
+
+/** N8-03D2: one side of a solid block as a zero-thickness wall piece, a jamb for the doors beside it. */
+function sidePiece(b: SolidBlock, axis: 'X' | 'Z', at: number, from: number, to: number): Omit<InteriorWallPiece, 'id'> {
+  return { storeyIndex: b.storeyIndex, axis, at, from, to, thicknessM: 0, ends: { start: 'JUNCTION', end: 'JUNCTION' }, pixelRect: b.pixelRect, confidence: 0.5, why: `a side of ${b.id}` }
 }
 
 function tracePolygon(cells: ReadonlyArray<[number, number]>, gx: number, gz: number, cell: number, x0: number, z0: number): Array<{ x: number; z: number }> {

@@ -63,7 +63,7 @@ import { decideSideOrientation, decideSidesByOpenings, gableApexRow, gableOutlin
 import type { PerspectiveCameraV2 } from './camera.js'
 import { emitBuilding, pitchedPlaneIds } from './emit.js'
 import { builtRoofUndersideAt, isValleyCut, mainRoofValleyCut, valleyCutWings } from './valley-cut.js'
-import { readSlabVoids } from './slab-void.js'
+import { readSlabVoids, voidOnSlab } from './slab-void.js'
 import type { SlabVoid } from './slab-void.js'
 import { fitStairToBoundingWalls, followStairSoffits } from './stair-fit.js'
 import { ReconstructionFailure, planCounts } from '../failure.js'
@@ -163,7 +163,13 @@ import type { ApproximateRidge } from './roof-datum.js'
 // 2.16.0 (N8-03D1): a storey's plan may draw a void in its floor (a uniform mid-grey fill, solid, not hatched, distinct
 // from the floor tone): it is read as its traced outline and cut from that storey's slab beside the stair hole; a patch
 // that is small, narrow, striped, light, overlapping the stair hole or with nothing below it is refused and named
-export const SOLVER_V2_VERSION = '2.16.0' as const
+// 2.17.0 (N8-03D2): partitions and doors: a door's leaf may be drawn shorter than its gap (arc and leaf both read); a
+// door may stand between a partition's end and a block's side, at either end of a partition, or between the faces of
+// two parallel partitions whose ends meet; the jambs of one door pair by their drawn bands, not a rounding bucket, the
+// furthest-reaching piece being the near jamb; a room number is an upright reading only; the openings the storey's
+// slab is cut with (stair hole, voids — the same polygons) are no room's floor, and a room surrounding one has it as a
+// hole (model schema 1.7.0)
+export const SOLVER_V2_VERSION = '2.17.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
@@ -1458,9 +1464,24 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     for (const p of pocketsOf(layout.recesses)) if (p.index === index && !p.refused) barriers.push(p.rect)
     const onStorey = masses.filter((x) => x.storeys.includes(index)).map((x) => rectAt(x, index))
     const labelArea = { x0: Math.min(...onStorey.map((r) => r.x0)), z0: Math.min(...onStorey.map((r) => r.z0)), x1: Math.max(...onStorey.map((r) => r.x1)), z1: Math.max(...onStorey.map((r) => r.z1)) }
+    // N8-03D2: the openings this storey's slab is cut with — the stair hole and the voids read above, the very polygons
+    // emitted as the slab's holes — are no room's floor
+    // emitted as the slab's holes — are no room's floor: the stair hole kept inside the walls' faces, a void taken to
+    // them (`voidOnSlab`), as `emitBuilding` cuts them
+    const openingsOn = (m: MassV2): Array<Array<{ x: number; z: number }>> => {
+      if (index <= 0) return []
+      const r = interiorRect(m, index)
+      const t = m.wallThicknessM ?? T
+      const edge = { x0: r.x0 + t, z0: r.z0 + t, x1: r.x1 - t, z1: r.z1 - t }
+      const clamp = (v: number, lo: number, hi: number): number => Math.min(Math.max(v, lo), hi)
+      const h = stair && stair.toLevel === index && m.id === main.id ? stair.slabHole : undefined
+      const stairHole = h ? [[{ x: h.x0, z: h.z0 }, { x: h.x1, z: h.z0 }, { x: h.x1, z: h.z1 }, { x: h.x0, z: h.z1 }].map((p) => ({ x: clamp(p.x, edge.x0, edge.x1), z: clamp(p.z, edge.z0, edge.z1) }))] : []
+      return [...stairHole, ...slabVoids.filter((v) => v.storeyIndex === index).map((v) => voidOnSlab(v.polygon, edge)).filter((p): p is Array<{ x: number; z: number }> => !!p)]
+    }
     const readings: Array<{ m: MassV2; reading: InteriorReading }> = []
     for (const m of masses.filter((x) => x.storeys.includes(index))) {
-      const reading = readInterior(entry.raster, entry.frame, interiorRect(m, index), m.wallThicknessM ?? T, index, tokens, rooms, { extraBarriers: barriers, labelArea, drawnWallM: drawnT, onDebug: options.debug ? (info) => options.debug?.(`interior ${m.id} storey ${index}: ${info.axis} band at px ${info.centrePx.toFixed(1)} (${info.axis === 'Z' ? 'x' : 'z'} ${(info.axis === 'Z' ? entry.frame.toWorld(info.centrePx, 0).x : entry.frame.toWorld(0, info.centrePx).z).toFixed(2)}), ${info.thick} px thick: ${info.runsPx.map((r) => `${(info.axis === 'Z' ? entry.frame.toWorld(0, r.to).z : entry.frame.toWorld(r.from, 0).x).toFixed(2)}..${(info.axis === 'Z' ? entry.frame.toWorld(0, r.from).z : entry.frame.toWorld(r.to, 0).x).toFixed(2)}`).join(', ')}`) : undefined })
+      const slabOpenings = openingsOn(m)
+      const reading = readInterior(entry.raster, entry.frame, interiorRect(m, index), m.wallThicknessM ?? T, index, tokens, rooms, { extraBarriers: barriers, slabOpenings, labelArea, drawnWallM: drawnT, onDebug: options.debug ? (info) => options.debug?.(`interior ${m.id} storey ${index}: ${info.axis} band at px ${info.centrePx.toFixed(1)} (${info.axis === 'Z' ? 'x' : 'z'} ${(info.axis === 'Z' ? entry.frame.toWorld(info.centrePx, 0).x : entry.frame.toWorld(0, info.centrePx).z).toFixed(2)}), ${info.thick} px thick: ${info.runsPx.map((r) => `${(info.axis === 'Z' ? entry.frame.toWorld(0, r.to).z : entry.frame.toWorld(r.from, 0).x).toFixed(2)}..${(info.axis === 'Z' ? entry.frame.toWorld(0, r.from).z : entry.frame.toWorld(r.to, 0).x).toFixed(2)}`).join(', ')}`) : undefined })
       reading.walls = reading.walls.map((w) => ({ ...w, id: `${m.id}-${w.id}` }))
       reading.doors = reading.doors.map((d) => ({ ...d, id: `${m.id}-${d.id}`, betweenIds: [d.betweenIds[0].includes(':') ? d.betweenIds[0] : `${m.id}-${d.betweenIds[0]}`, d.betweenIds[1].includes(':') ? d.betweenIds[1] : `${m.id}-${d.betweenIds[1]}`] as [string, string] }))
       reading.rooms = reading.rooms.map((r) => ({ ...r, id: `${m.id}-${r.id}`, doorIds: r.doorIds.map((d) => `${m.id}-${d}`) }))

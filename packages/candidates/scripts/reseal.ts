@@ -44,6 +44,8 @@ const SRC = join(ROOT, 'packages/candidates/src')
 const ADDED_BY: Record<string, { previous: string; collections: Array<keyof CanonicalBuildingModel> }> = {
   '1.5.0': { previous: '1.4.0', collections: ['terraces'] },
   '1.6.0': { previous: '1.5.0', collections: ['roofPlanes', 'roofEdges', 'wallPanels', 'platforms', 'stepRuns', 'assemblies', 'relationships'] },
+  // N8-03D2: an optional field (Room.holes), no collection: a restatement only changes the version string
+  '1.7.0': { previous: '1.6.0', collections: [] },
 }
 
 type LogEntry = { id: string; file: string; fromSchema: string; toSchema: string; from: { id: string; contentHash: string; modelHash: string }; to: { id: string; contentHash: string; modelHash: string }; why: string }

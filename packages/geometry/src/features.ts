@@ -42,6 +42,11 @@ export function compileChimney(c: Chimney, level: Level): Triangle[] {
 /** A thin plate just above the floor, so a room is a selectable object. Not structural. */
 export function compileRoomFloor(r: Room, level: Level): Triangle[] | null {
   const out: Triangle[] = []
+  // 1.7.0: the openings in the floor the room surrounds are not its floor
+  if (r.holes && r.holes.length > 0) {
+    extrudePlanRegion(out, r.polygon, r.holes, level.elevation + 0.005, level.elevation + 0.02)
+    return out.length > 0 ? out : null
+  }
   return extrudePolygon(out, r.polygon, level.elevation + 0.005, level.elevation + 0.02) ? out : null
 }
 

@@ -18,9 +18,7 @@ import type { BuildingV2, MassV2 } from './building.js'
 import type { ProvenanceStatus } from './graph.js'
 import type { DrawnLeaves, OpeningV2 } from './openings-v2.js'
 import { isValleyCut, mainRoofValleyCut, segmentCrossesNotch } from './valley-cut.js'
-
-/** N8-03D1: a slab void's edge this close to the slab's edge (m) is that edge: the fill stops at the wall's drawn line. */
-export const VOID_SNAP_M = 0.1
+import { VOID_SNAP_M, voidOnSlab } from './slab-void.js'
 import { CONVENTIONS } from '../solve.js'
 import { planWallTopology } from './wall-topology.js'
 import { partyFarFace, sideSegments } from './party-wall.js'
@@ -366,11 +364,12 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       // N8-03D1: a void the storey's plan fills, a hole beside the stair's; an edge within VOID_SNAP_M of the slab's
       // edge is that edge (the drawn line between the fill and the wall is the wall's face)
       const voidHoles = (b.slabVoids ?? [])
-        .filter((v) => v.storeyIndex === storey && !m.pieceOf && v.polygon.every((p) => p.x >= edge.x0 - VOID_SNAP_M && p.x <= edge.x1 + VOID_SNAP_M && p.z >= edge.z0 - VOID_SNAP_M && p.z <= edge.z1 + VOID_SNAP_M))
-        .map((v) => {
-          const snap = (value: number, lo: number, hi: number): number => round6(Math.abs(value - lo) <= VOID_SNAP_M ? lo : Math.abs(value - hi) <= VOID_SNAP_M ? hi : Math.min(Math.max(value, lo), hi))
+        .filter((v) => v.storeyIndex === storey && !m.pieceOf)
+        .flatMap((v) => {
+          const cut = voidOnSlab(v.polygon, edge)
+          if (!cut) return []
           voidsEmitted.push({ v, slabId: `slab-${m.id}-${storey}` })
-          return v.polygon.map((p) => ({ x: snap(p.x, edge.x0, edge.x1), z: snap(p.z, edge.z0, edge.z1) }))
+          return [cut]
         })
       const clippedHoles = stairHoles || voidHoles.length > 0 ? [...(stairHoles ?? []), ...voidHoles] : undefined
       // a piece stands on the floor of the body it is a piece of: no slab of its own (council B5L-5)
@@ -599,7 +598,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     }
     for (const room of storey.rooms) {
       if (room.polygon.length < 4) continue
-      push({ type: 'createRoom', id: room.id, levelId: l.id, polygon: room.polygon, ...(room.label ? { usage: room.label } : {}) }, room.id, 'rooms')
+      push({ type: 'createRoom', id: room.id, levelId: l.id, polygon: room.polygon, ...(room.holes && room.holes.length > 0 ? { holes: room.holes } : {}), ...(room.label ? { usage: room.label } : {}) }, room.id, 'rooms')
       evidence(room.id, room.number ? 'SOURCE_CORROBORATED' : 'SOURCE_DERIVED', room.why)
     }
   }

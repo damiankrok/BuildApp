@@ -336,3 +336,17 @@ function polygonArea(p: readonly Vec2[]): number {
   }
   return Math.abs(s) / 2
 }
+
+/** N8-03D1: an edge within this of the slab's edge (m) is that edge: the fill stops at the wall's drawn line. */
+export const VOID_SNAP_M = 0.1
+
+/**
+ * N8-03D1/N8-03D2: a void's outline as it is cut from a slab spanning `edge` (the walls' inner faces): a coordinate
+ * within {@link VOID_SNAP_M} of an edge is taken to it, anything else is kept inside. The slab's hole and the rooms
+ * around it use this one polygon. Undefined when the void does not lie on the slab (beyond the snap).
+ */
+export function voidOnSlab(polygon: readonly Vec2[], edge: PlanRect): Vec2[] | undefined {
+  if (!polygon.every((p) => p.x >= edge.x0 - VOID_SNAP_M && p.x <= edge.x1 + VOID_SNAP_M && p.z >= edge.z0 - VOID_SNAP_M && p.z <= edge.z1 + VOID_SNAP_M)) return undefined
+  const snap = (value: number, lo: number, hi: number): number => round6(Math.abs(value - lo) <= VOID_SNAP_M ? lo : Math.abs(value - hi) <= VOID_SNAP_M ? hi : Math.min(Math.max(value, lo), hi))
+  return polygon.map((p) => ({ x: snap(p.x, edge.x0, edge.x1), z: snap(p.z, edge.z0, edge.z1) }))
+}

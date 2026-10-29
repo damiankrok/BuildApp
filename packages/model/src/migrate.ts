@@ -50,8 +50,13 @@
  * with seven empty collections, every member unclassified, and compiles to
  * exactly the geometry it compiled to before.
  *
+ * 1.6.0 -> 1.7.0 (STAGE BUILDPLAN N8-03D2): rooms gained optional `holes` —
+ * the openings in the floor a room surrounds (a stair hole, a void), which are
+ * not its floor. A 1.6.0 file has none; every room keeps its whole outline as
+ * floor, and it compiles to exactly the geometry it compiled to before.
+ *
  * A file that states an older version but already carries a newer version's
- * collections is refused: it would be a mislabelled newer file.
+ * collections (or fields) is refused: it would be a mislabelled newer file.
  */
 import type { ValidationIssue } from './issues.js'
 import { MODEL_SCHEMA_NAME, MODEL_SCHEMA_VERSION, SUPPORTED_SCHEMA_VERSIONS } from './schema.js'
@@ -80,6 +85,8 @@ export const MIGRATION_NOTE_1_4_0 = 'migrated from schema 1.4.0 to 1.5.0: the fi
 export const MIGRATION_NOTE_1_5_0 =
   'migrated from schema 1.5.0 to 1.6.0: the file carried no roof planes, roof edges, wall panels, platforms, step runs, assemblies or relationships; its members are unclassified'
 
+export const MIGRATION_NOTE_1_6_0 = 'migrated from schema 1.6.0 to 1.7.0: the file carried no room holes; every room keeps its whole outline as floor'
+
 /** The collections schema 1.6.0 added, in the order the migration adds them. */
 export const COLLECTIONS_ADDED_IN_1_6_0 = ['roofPlanes', 'roofEdges', 'wallPanels', 'platforms', 'stepRuns', 'assemblies', 'relationships'] as const
 
@@ -90,6 +97,8 @@ type Step = {
   newCollections: string[]
   note: string
   message: string
+  /** Fields the older version cannot carry: the path of the first one present, if any. */
+  newField?: (o: Record<string, unknown>) => string | undefined
 }
 
 const STEPS: Step[] = [
@@ -135,6 +144,18 @@ const STEPS: Step[] = [
     note: MIGRATION_NOTE_1_5_0,
     message: 'model migrated from schema 1.5.0 to 1.6.0: empty roofPlanes, roofEdges, wallPanels, platforms, stepRuns, assemblies and relationships were added; the building is unchanged',
   },
+  {
+    from: '1.6.0',
+    to: '1.7.0',
+    newCollections: [],
+    note: MIGRATION_NOTE_1_6_0,
+    message: 'model migrated from schema 1.6.0 to 1.7.0: no room carries holes; the building is unchanged',
+    newField: (o) => {
+      const rooms = Array.isArray(o.rooms) ? (o.rooms as unknown[]) : []
+      const i = rooms.findIndex((r) => !!r && typeof r === 'object' && 'holes' in (r as Record<string, unknown>))
+      return i >= 0 ? `rooms.${i}.holes` : undefined
+    },
+  },
 ]
 
 export function migrateModelInput(raw: unknown): MigrationResult {
@@ -163,6 +184,14 @@ export function migrateModelInput(raw: unknown): MigrationResult {
   // step from the stated version onwards introduces collections it cannot have.
   const first = STEPS.findIndex((s) => s.from === version)
   for (const step of STEPS.slice(first)) {
+    const field = step.newField?.(o)
+    if (field) {
+      return {
+        input: raw,
+        migrated: false,
+        issues: [{ code: 'SCHEMA', severity: 'ERROR', message: `a schema ${version} model cannot carry ${field}; state schemaVersion ${step.to} or later`, path: 'schemaVersion' }],
+      }
+    }
     for (const c of step.newCollections) {
       if (c in o) {
         return {

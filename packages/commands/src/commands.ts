@@ -68,6 +68,8 @@ export const CreateRoomSchema = z
     ...withId,
     levelId: IdSchema,
     polygon: PlanPolygonSchema,
+    /** 1.7.0: the openings in the floor the room surrounds. */
+    holes: z.array(PlanPolygonSchema).optional(),
     usage: z.string().optional(),
   })
   .strict()
