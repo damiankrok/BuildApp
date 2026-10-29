@@ -1,0 +1,12 @@
+{
+ "relation": "R1 single roof layer (vertical rays on a 0.1 m grid over the footprint meet at most one roof plate)",
+ "tool": "research/analyzer-n8-03c/roof-probe.ts (read-only), run in N9-00 on sealed models",
+ "classification": "REPLAY_VERIFIED",
+ "results": [
+  { "model": "Sasanki 3 before N8-03C (solver 2.14.0)", "doubleRoofM2": 15.6, "doubled": { "roof-attached-0-plane-low + roof-main": 7.8, "roof-attached-0-plane-high + roof-main": 7.8 }, "relation": "FAIL" },
+  { "model": "Rarytasy 5 before N8-03C (solver 2.14.0)", "doubleRoofM2": 11.45, "doubled": { "roof-attached-0-plane-low + roof-main": 5.95, "roof-attached-0-plane-high + roof-main": 5.5 }, "relation": "FAIL" },
+  { "model": "Sasanki 3 after N8-03D2 (solver 2.17.0)", "doubleRoofM2": 0, "relation": "PASS" },
+  { "model": "Rarytasy 5 after N8-03D2 (solver 2.17.0)", "doubleRoofM2": 0, "relation": "PASS" }
+ ],
+ "note": "both FAIL models passed validation with 0 WALLS_OVERLAP and compiled with no roof diagnostic; their verdicts were COMPLETE_WITH_OPEN_QUESTIONS (Sasanki) and COMPLETE (Rarytasy)"
+}

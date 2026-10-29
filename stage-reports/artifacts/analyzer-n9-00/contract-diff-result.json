@@ -1,0 +1,339 @@
+{
+ "submitted.json": "IDENTICAL",
+ "status-running.json": "IDENTICAL",
+ "status-completed.json": {
+  "bytes": [
+   3337,
+   3337
+  ],
+  "shapeOnlyInCommitted": [],
+  "shapeOnlyInFresh": [],
+  "changedLeaves": 7,
+  "changedSample": [
+   {
+    "path": "$.result.candidateHash",
+    "committed": "e4e26ff0234bbc2d54d62e11fde51e75793466119b7c941b31372929e4196f69",
+    "fresh": "39b1a85d428ab4597106e245090f7147a2d2b32110a725dcb9d35a10fd994dbb"
+   },
+   {
+    "path": "$.result.modelHash",
+    "committed": "0f074a7c842b730d3dbb871c354b7e28b351a076128d1b19ab7badf077a72cf3",
+    "fresh": "18cb69860785d3b5dc6b9bda0933f051f9b2b99a7318bad430f30cce163f47ec"
+   },
+   {
+    "path": "$.result.sceneSha256",
+    "committed": "68b8edfe8b88b6a3cf9ee96c49608e502d897a7859b4ef787575412e4df8fb73",
+    "fresh": "ac79ef364151e73fb9c5935e624d5c0363a4fedc74c15e30a3447bd32cd9d2e3"
+   },
+   {
+    "path": "$.result.sceneContentHash",
+    "committed": "0c1ba245a2b372e60d61add7afffa72ad534133b1453d2167f25b127302db2e4",
+    "fresh": "2319e7524ef40eb5bdecc732ee46d87286efa9a97fb48376034a3571c13400cc"
+   },
+   {
+    "path": "$.result.sceneBytes",
+    "committed": 101719,
+    "fresh": 121022
+   },
+   {
+    "path": "$.result.quality.L1",
+    "committed": 12,
+    "fresh": 18
+   },
+   {
+    "path": "$.result.unresolved",
+    "committed": 6,
+    "fresh": 7
+   }
+  ],
+  "pathsOnlyInCommitted": 0,
+  "pathsOnlyInFresh": 0
+ },
+ "result.json": {
+  "bytes": [
+   4596,
+   6595
+  ],
+  "shapeOnlyInCommitted": [],
+  "shapeOnlyInFresh": [
+   "$.quality.byFamily.INTERIOR_DOOR.L1:number",
+   "$.preview.outcome:string",
+   "$.preview.built.wallRings:number",
+   "$.preview.built.walls:number",
+   "$.preview.built.slabs:number",
+   "$.preview.built.roofs:number",
+   "$.preview.built.roofPlanes:number",
+   "$.preview.built.openings:number",
+   "$.preview.built.rooms:number",
+   "$.preview.built.stairs:number",
+   "$.preview.provisional:array",
+   "$.preview.partial:object",
+   "$.preview.completeness.verdict:string",
+   "$.preview.completeness.decomposition.coverage:number",
+   "$.preview.completeness.decomposition.drawnBuiltM2:number",
+   "$.preview.completeness.decomposition.representedM2:number",
+   "$.preview.completeness.decomposition.basis:string",
+   "$.preview.completeness.missingBodies:array",
+   "$.preview.completeness.unresolvedAreas:array",
+   "$.preview.completeness.unexplainedWalls.count:number",
+   "$.preview.completeness.unexplainedWalls.lengthM:number",
+   "$.preview.completeness.unexplainedWalls.bandLengthM:number",
+   "$.preview.completeness.conflicts.blocking:array",
+   "$.preview.completeness.conflicts.degrading:array",
+   "$.preview.completeness.modelRefusals:number",
+   "$.preview.completeness.why:string",
+   "$.sourceBasis.assetId:string",
+   "$.sourceBasis.document:string",
+   "$.sourceBasis.projection:string",
+   "$.sourceBasis.storey:string",
+   "$.sourceBasis.annotation:string",
+   "$.sourceBasis.variant.widthPx:number",
+   "$.sourceBasis.variant.heightPx:number",
+   "$.sourceBasis.variant.byteLength:number",
+   "$.sourceBasis.variant.mediaType:string",
+   "$.sourceBasis.variant.byteHash:string",
+   "$.sourceBasis.variants:number",
+   "$.sourceBasis.largestOffered:boolean",
+   "$.sourceBasis.dimensions.chains:number",
+   "$.sourceBasis.dimensions.segmentsRead:number"
+  ],
+  "changedLeaves": 15,
+  "changedSample": [
+   {
+    "path": "$.metricEvidenceHash",
+    "committed": "3d74155cd9fd0bcc147b37529656ee242fa33b9bf2d7b2b53c0886890487d8a0",
+    "fresh": "6e1fb29833e729f6a2d26540825e43c3799f587e1b2bb77e72cd58dfd550d870"
+   },
+   {
+    "path": "$.candidateHash",
+    "committed": "e4e26ff0234bbc2d54d62e11fde51e75793466119b7c941b31372929e4196f69",
+    "fresh": "39b1a85d428ab4597106e245090f7147a2d2b32110a725dcb9d35a10fd994dbb"
+   },
+   {
+    "path": "$.modelHash",
+    "committed": "0f074a7c842b730d3dbb871c354b7e28b351a076128d1b19ab7badf077a72cf3",
+    "fresh": "18cb69860785d3b5dc6b9bda0933f051f9b2b99a7318bad430f30cce163f47ec"
+   },
+   {
+    "path": "$.modelSha256",
+    "committed": "0f074a7c842b730d3dbb871c354b7e28b351a076128d1b19ab7badf077a72cf3",
+    "fresh": "18cb69860785d3b5dc6b9bda0933f051f9b2b99a7318bad430f30cce163f47ec"
+   },
+   {
+    "path": "$.sceneContentHash",
+    "committed": "0c1ba245a2b372e60d61add7afffa72ad534133b1453d2167f25b127302db2e4",
+    "fresh": "2319e7524ef40eb5bdecc732ee46d87286efa9a97fb48376034a3571c13400cc"
+   },
+   {
+    "path": "$.sceneSha256",
+    "committed": "68b8edfe8b88b6a3cf9ee96c49608e502d897a7859b4ef787575412e4df8fb73",
+    "fresh": "ac79ef364151e73fb9c5935e624d5c0363a4fedc74c15e30a3447bd32cd9d2e3"
+   },
+   {
+    "path": "$.sceneBytes",
+    "committed": 101719,
+    "fresh": 121022
+   },
+   {
+    "path": "$.counts.commands",
+    "committed": 53,
+    "fresh": 63
+   },
+   {
+    "path": "$.counts.meshes",
+    "committed": 46,
+    "fresh": 50
+   },
+   {
+    "path": "$.counts.triangles",
+    "committed": 916,
+    "fresh": 1132
+   },
+   {
+    "path": "$.quality.levels.L1",
+    "committed": 12,
+    "fresh": 18
+   },
+   {
+    "path": "$.quality.byFamily.INTERIOR_WALL.L1",
+    "committed": 3,
+    "fresh": 7
+   },
+   {
+    "path": "$.verification.closure.interiorFindings",
+    "committed": 15,
+    "fresh": 19
+   },
+   {
+    "path": "$.analyzer.service",
+    "committed": "1.1.0",
+    "fresh": "1.2.0"
+   },
+   {
+    "path": "$.analyzer.solver",
+    "committed": "2.3.0",
+    "fresh": "2.17.0"
+   }
+  ],
+  "pathsOnlyInCommitted": 0,
+  "pathsOnlyInFresh": 52
+ },
+ "scene.json": {
+  "bytes": [
+   101697,
+   120999
+  ],
+  "shapeOnlyInCommitted": [],
+  "shapeOnlyInFresh": [],
+  "changedLeaves": 5986,
+  "changedSample": [
+   {
+    "path": "$.contentHash",
+    "committed": "0c1ba245a2b372e60d61add7afffa72ad534133b1453d2167f25b127302db2e4",
+    "fresh": "2319e7524ef40eb5bdecc732ee46d87286efa9a97fb48376034a3571c13400cc"
+   },
+   {
+    "path": "$.generatedFrom.modelContentHash",
+    "committed": "0f074a7c842b730d3dbb871c354b7e28b351a076128d1b19ab7badf077a72cf3",
+    "fresh": "18cb69860785d3b5dc6b9bda0933f051f9b2b99a7318bad430f30cce163f47ec"
+   },
+   {
+    "path": "$.generatedFrom.modelSchemaVersion",
+    "committed": "1.6.0",
+    "fresh": "1.7.0"
+   },
+   {
+    "path": "$.objects[0].bounds.max.x",
+    "committed": 1.826087,
+    "fresh": 2.385852
+   },
+   {
+    "path": "$.objects[0].bounds.max.y",
+    "committed": 5.322076541642191,
+    "fresh": 2.1
+   },
+   {
+    "path": "$.objects[0].bounds.max.z",
+    "committed": 0.37694300000000003,
+    "fresh": 0.384034
+   },
+   {
+    "path": "$.objects[0].bounds.min.x",
+    "committed": 0.33913,
+    "fresh": 1.22588
+   },
+   {
+    "path": "$.objects[0].bounds.min.y",
+    "committed": 2.8,
+    "fresh": 0
+   },
+   {
+    "path": "$.objects[0].bounds.min.z",
+    "committed": 0.324863,
+    "fresh": 0.331489
+   },
+   {
+    "path": "$.objects[0].evidence.interpretation",
+    "committed": "1 piece of partition ink on the plan",
+    "fresh": "a 1.16 m break between two pieces of the same partition"
+   },
+   {
+    "path": "$.objects[0].facts[0].value",
+    "committed": "Interior",
+    "fresh": "Door"
+   },
+   {
+    "path": "$.objects[0].facts[1].label",
+    "committed": "Length",
+    "fresh": "Width"
+   },
+   {
+    "path": "$.objects[0].facts[1].value",
+    "committed": "1.487 m",
+    "fresh": "1.16 m"
+   },
+   {
+    "path": "$.objects[0].facts[2].label",
+    "committed": "Thickness",
+    "fresh": "Height"
+   },
+   {
+    "path": "$.objects[0].facts[2].value",
+    "committed": "0.052 m",
+    "fresh": "2.1 m"
+   },
+   {
+    "path": "$.objects[0].facts[3].label",
+    "committed": "Height",
+    "fresh": "Sill"
+   },
+   {
+    "path": "$.objects[0].facts[3].value",
+    "committed": "5.12 m",
+    "fresh": "0 m"
+   },
+   {
+    "path": "$.objects[0].id",
+    "committed": "main-iwall-1-x-0",
+    "fresh": "main-idoor-0-0"
+   },
+   {
+    "path": "$.objects[0].kind",
+    "committed": "wall",
+    "fresh": "opening"
+   },
+   {
+    "path": "$.objects[0].kindLabel",
+    "committed": "Wall",
+    "fresh": "Opening"
+   },
+   {
+    "path": "$.objects[0].label",
+    "committed": "Wall main-iwall-1-x-0",
+    "fresh": "Opening main-idoor-0-0"
+   },
+   {
+    "path": "$.objects[0].levelId",
+    "committed": "lvl-1",
+    "fresh": "lvl-0"
+   },
+   {
+    "path": "$.objects[0].levelLabel",
+    "committed": "Level 1",
+    "fresh": "Ground"
+   },
+   {
+    "path": "$.objects[0].parts[0]",
+    "committed": "WALL",
+    "fresh": "WALL_REVEAL"
+   },
+   {
+    "path": "$.objects[0].relations[0].role",
+    "committed": "storey",
+    "fresh": "hosting wall"
+   }
+  ],
+  "pathsOnlyInCommitted": 3269,
+  "pathsOnlyInFresh": 5449
+ },
+ "refusal-unsupported-publisher.json": "IDENTICAL",
+ "not-found.json": "IDENTICAL",
+ "meta.json": {
+  "bytes": [
+   273,
+   273
+  ],
+  "shapeOnlyInCommitted": [],
+  "shapeOnlyInFresh": [],
+  "changedLeaves": 1,
+  "changedSample": [
+   {
+    "path": "$.sceneSha256Header",
+    "committed": "68b8edfe8b88b6a3cf9ee96c49608e502d897a7859b4ef787575412e4df8fb73",
+    "fresh": "ac79ef364151e73fb9c5935e624d5c0363a4fedc74c15e30a3447bd32cd9d2e3"
+   }
+  ],
+  "pathsOnlyInCommitted": 0,
+  "pathsOnlyInFresh": 0
+ }
+}

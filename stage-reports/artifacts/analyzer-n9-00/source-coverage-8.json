@@ -1,0 +1,1468 @@
+{
+ "schema": "buildplan.n9-00.source-coverage",
+ "version": "1.0.0",
+ "method": "offline replay of the sealed ARCHON 1311 inputs (source package, observation graph, N8-03B metric evidence 1.5.0) through reconstructV2 of solver 2.17.0 at 0d03d60 (research/analyzer-n9-00/coverage-probe.ts); counts read from its viewAudit, registrations, crossViewResiduals, facadeAlignment, openingCounts, modelCompleteness and the emitted model; nothing tuned",
+ "classification": "REPLAY_VERIFIED unless a field says NOT_MEASURED",
+ "notMeasured": [
+  "true positives against an independently labelled source truth (no labelled truth exists for these houses: every count below is the analyzer about itself)",
+  "rooms and functional zones drawn vs modelled per storey (only the two N8-03D2 attics were labelled by review: see semantic-space-room-analysis.md)",
+  "chimneys, rooflights and roof openings visible in elevations vs modelled",
+  "section use beyond its datums"
+ ],
+ "houses": {
+  "a01": {
+   "images": {
+    "byRole": {
+     "PERSPECTIVE": 5,
+     "ELEVATION": 4,
+     "SECTION": 1,
+     "PLAN": 8,
+     "SITE_PLAN": 1
+    },
+    "total": 19
+   },
+   "plans": {
+    "framesInGraph": 8,
+    "read": 2,
+    "note": "one plan per storey is read; the rest of the plan frames are copies, other editions or the mirrored variant"
+   },
+   "elevations": {
+    "total": 4,
+    "REGISTERED_FULL(silhouette)": 1,
+    "PARTIAL(OPENINGS_ONLY|POSITIONS_ONLY)": 3,
+    "UNREGISTERED": 0,
+    "DUPLICATE": 0,
+    "whyUnregistered": []
+   },
+   "section": {
+    "framesInGraph": 1,
+    "registeredAsView": true,
+    "note": "the section is read for its level datums by source-metrics; it is never registered or checked as a view (registrations.section absent)"
+   },
+   "perspectives": {
+    "total": 5,
+    "CHECK_ONLY(camera solved, depth order only)": 1,
+    "UNUSED": 4
+   },
+   "metricEvidence": {
+    "total": 154,
+    "byKind": {
+     "ANGLE": 8,
+     "OPENING_CALLOUT": 62,
+     "LINEAR_DIMENSION": 80,
+     "LEVEL_DATUM": 4
+    },
+    "attachedToAFeature": {
+     "OPENING_CALLOUT": 12,
+     "LINEAR_DIMENSION": 80,
+     "LEVEL_DATUM": 4,
+     "ANGLE": 1
+    },
+    "unattached": {
+     "ANGLE": 7,
+     "OPENING_CALLOUT": 50
+    },
+    "readerUnresolved": 23,
+    "readerConflicts": 0,
+    "ocrTokens": {
+     "DISCARDED": 1248,
+     "undefined": 1008,
+     "KEPT": 618
+    }
+   },
+   "openings": {
+    "planOpeningsRead": 13,
+    "elevationIndependentReadings": 7,
+    "modelOpenings": 22,
+    "modelOpeningsByEvidence": {
+     "SOURCE_DERIVED": 12,
+     "SOURCE_CORROBORATED": 9,
+     "ASSUMED": 1
+    },
+    "facadeAlignmentStatus": {
+     "CONFIRMED_MATCH": 7,
+     "NOT_OBSERVED": 2,
+     "CONFLICT": 4,
+     "VIEW_NOT_REGISTERED": 0
+    },
+    "facadeAlignmentCounts": {
+     "PAIRED": 11,
+     "MISSING_IN_MODEL": 0,
+     "EXTRA_IN_MODEL": 0,
+     "HORIZONTAL_OFFSET": 4,
+     "WIDTH_MISMATCH": 2,
+     "SILL_MISMATCH": 0,
+     "HEAD_MISMATCH": 0,
+     "WRONG_FACADE": 0,
+     "UNREGISTERED_VIEW": 0
+    }
+   },
+   "crossViewResiduals": [
+    {
+     "side": "RIGHT",
+     "verdict": "DISAGREES",
+     "checks": 6,
+     "withinTolerance": 2
+    }
+   ],
+   "modelObjectsByEvidence": {
+    "levels": {
+     "NO_EVIDENCE": 2
+    },
+    "rooms": {
+     "SOURCE_CORROBORATED": 5,
+     "SOURCE_DERIVED": 6
+    },
+    "walls": {
+     "NO_EVIDENCE": 8,
+     "SOURCE_DERIVED": 19
+    },
+    "wallJunctions": {
+     "NO_EVIDENCE": 8
+    },
+    "wallRings": {
+     "SOURCE_EXACT": 1,
+     "NO_EVIDENCE": 1
+    },
+    "openings": {
+     "SOURCE_DERIVED": 12,
+     "SOURCE_CORROBORATED": 9,
+     "ASSUMED": 1
+    },
+    "windows": {
+     "NO_EVIDENCE": 10
+    },
+    "doors": {
+     "NO_EVIDENCE": 12
+    },
+    "slabs": {
+     "NO_EVIDENCE": 2
+    },
+    "roofs": {
+     "SOURCE_EXACT": 1
+    },
+    "roofOpenings": {
+     "NO_EVIDENCE": 3,
+     "SOURCE_DERIVED": 5,
+     "SOURCE_CORROBORATED": 2
+    },
+    "rooflights": {
+     "NO_EVIDENCE": 7
+    },
+    "chimneys": {
+     "SOURCE_CORROBORATED": 3
+    },
+    "stairs": {
+     "UNRESOLVED": 1
+    },
+    "linearSolids": {
+     "SOURCE_DERIVED": 1,
+     "NO_EVIDENCE": 10
+    },
+    "relationships": {
+     "NO_EVIDENCE": 1
+    },
+    "materials": {
+     "NO_EVIDENCE": 11
+    }
+   },
+   "verdict": {
+    "modelCompleteness": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "basis": "ACCEPTED_DECOMPOSITION",
+    "coverage": 1,
+    "degrading": [
+     "STOREY_COVERAGE_DISAGREES"
+    ],
+    "blocking": [],
+    "unexplainedWalls": {
+     "count": 0,
+     "lengthM": 0,
+     "bandLengthM": 0
+    }
+   },
+   "unresolvedByStatus": {
+    "AMBIGUOUS": 9,
+    "REFUSED": 1
+   }
+  },
+  "gozd": {
+   "images": {
+    "byRole": {
+     "ELEVATION": 4,
+     "SECTION": 1,
+     "PLAN": 8,
+     "SITE_PLAN": 1,
+     "PERSPECTIVE": 15
+    },
+    "total": 29
+   },
+   "plans": {
+    "framesInGraph": 8,
+    "read": 2,
+    "note": "one plan per storey is read; the rest of the plan frames are copies, other editions or the mirrored variant"
+   },
+   "elevations": {
+    "total": 4,
+    "REGISTERED_FULL(silhouette)": 0,
+    "PARTIAL(OPENINGS_ONLY|POSITIONS_ONLY)": 0,
+    "UNREGISTERED": 4,
+    "DUPLICATE": 0,
+    "whyUnregistered": [
+     "the silhouette is 13.991642 m across, which is 0.171642 m more than the footprint width — the overhang of a roof, on the only axis it can be, but both walls on that axis are already assigned",
+     "no ridge datum to hang it from, and no band of wall across its silhouette to register its walls’ ends on",
+     "the silhouette is 41.611111 m across, which is 27.791111 m more than the footprint width — the overhang of a roof, on the only axis it can be, but both walls on that axis are already assigned",
+     "no ridge datum to hang it from, and no band of wall across its silhouette to register its walls’ ends on"
+    ]
+   },
+   "section": {
+    "framesInGraph": 1,
+    "registeredAsView": false,
+    "note": "the section is read for its level datums by source-metrics; it is never registered or checked as a view (registrations.section absent)"
+   },
+   "perspectives": {
+    "total": 15,
+    "CHECK_ONLY(camera solved, depth order only)": 3,
+    "UNUSED": 12
+   },
+   "metricEvidence": {
+    "total": 173,
+    "byKind": {
+     "ANGLE": 5,
+     "OPENING_CALLOUT": 143,
+     "LINEAR_DIMENSION": 24,
+     "LEVEL_DATUM": 1
+    },
+    "attachedToAFeature": {
+     "ANGLE": 2,
+     "OPENING_CALLOUT": 11,
+     "LINEAR_DIMENSION": 24,
+     "LEVEL_DATUM": 1
+    },
+    "unattached": {
+     "ANGLE": 3,
+     "OPENING_CALLOUT": 132
+    },
+    "readerUnresolved": 29,
+    "readerConflicts": 0,
+    "ocrTokens": {
+     "DISCARDED": 1065,
+     "KEPT": 714,
+     "undefined": 476
+    }
+   },
+   "openings": {
+    "planOpeningsRead": 14,
+    "elevationIndependentReadings": 0,
+    "modelOpenings": 32,
+    "modelOpeningsByEvidence": {
+     "SOURCE_DERIVED": 15,
+     "SOURCE_CORROBORATED": 12,
+     "ASSUMED": 5
+    },
+    "facadeAlignmentStatus": {
+     "CONFIRMED_MATCH": 0,
+     "NOT_OBSERVED": 0,
+     "CONFLICT": 0,
+     "VIEW_NOT_REGISTERED": 14
+    },
+    "facadeAlignmentCounts": {
+     "PAIRED": 0,
+     "MISSING_IN_MODEL": 0,
+     "EXTRA_IN_MODEL": 0,
+     "HORIZONTAL_OFFSET": 0,
+     "WIDTH_MISMATCH": 0,
+     "SILL_MISMATCH": 0,
+     "HEAD_MISMATCH": 0,
+     "WRONG_FACADE": 0,
+     "UNREGISTERED_VIEW": 14
+    }
+   },
+   "crossViewResiduals": [],
+   "modelObjectsByEvidence": {
+    "levels": {
+     "NO_EVIDENCE": 2
+    },
+    "rooms": {
+     "SOURCE_CORROBORATED": 9,
+     "SOURCE_DERIVED": 4
+    },
+    "walls": {
+     "NO_EVIDENCE": 8,
+     "SOURCE_DERIVED": 31
+    },
+    "wallJunctions": {
+     "NO_EVIDENCE": 8
+    },
+    "wallRings": {
+     "SOURCE_EXACT": 1,
+     "NO_EVIDENCE": 1
+    },
+    "openings": {
+     "SOURCE_DERIVED": 15,
+     "SOURCE_CORROBORATED": 12,
+     "ASSUMED": 5
+    },
+    "windows": {
+     "NO_EVIDENCE": 8
+    },
+    "doors": {
+     "NO_EVIDENCE": 23
+    },
+    "slabs": {
+     "NO_EVIDENCE": 2
+    },
+    "roofs": {
+     "SOURCE_DERIVED": 1
+    },
+    "roofOpenings": {
+     "NO_EVIDENCE": 1,
+     "SOURCE_DERIVED": 7
+    },
+    "rooflights": {
+     "NO_EVIDENCE": 7
+    },
+    "balconies": {
+     "SOURCE_DERIVED": 1
+    },
+    "railings": {
+     "SOURCE_DERIVED": 1
+    },
+    "chimneys": {
+     "SOURCE_DERIVED": 1
+    },
+    "stairs": {
+     "UNRESOLVED": 1
+    },
+    "relationships": {
+     "NO_EVIDENCE": 1
+    },
+    "materials": {
+     "NO_EVIDENCE": 11
+    }
+   },
+   "verdict": {
+    "modelCompleteness": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "basis": "ACCEPTED_DECOMPOSITION",
+    "coverage": 1,
+    "degrading": [
+     "STOREY_COVERAGE_DISAGREES"
+    ],
+    "blocking": [],
+    "unexplainedWalls": {
+     "count": 0,
+     "lengthM": 0,
+     "bandLengthM": 0
+    }
+   },
+   "unresolvedByStatus": {
+    "AMBIGUOUS": 18,
+    "MISSING": 1,
+    "REFUSED": 1
+   }
+  },
+  "marcowki": {
+   "images": {
+    "byRole": {
+     "ELEVATION": 4,
+     "SECTION": 1,
+     "PLAN": 8,
+     "SITE_PLAN": 1,
+     "PERSPECTIVE": 4
+    },
+    "total": 18
+   },
+   "plans": {
+    "framesInGraph": 8,
+    "read": 2,
+    "note": "one plan per storey is read; the rest of the plan frames are copies, other editions or the mirrored variant"
+   },
+   "elevations": {
+    "total": 4,
+    "REGISTERED_FULL(silhouette)": 4,
+    "PARTIAL(OPENINGS_ONLY|POSITIONS_ONLY)": 0,
+    "UNREGISTERED": 0,
+    "DUPLICATE": 0,
+    "whyUnregistered": []
+   },
+   "section": {
+    "framesInGraph": 1,
+    "registeredAsView": true,
+    "note": "the section is read for its level datums by source-metrics; it is never registered or checked as a view (registrations.section absent)"
+   },
+   "perspectives": {
+    "total": 4,
+    "CHECK_ONLY(camera solved, depth order only)": 3,
+    "UNUSED": 1
+   },
+   "metricEvidence": {
+    "total": 141,
+    "byKind": {
+     "ANGLE": 7,
+     "OPENING_CALLOUT": 56,
+     "LINEAR_DIMENSION": 74,
+     "LEVEL_DATUM": 4
+    },
+    "attachedToAFeature": {
+     "OPENING_CALLOUT": 13,
+     "LINEAR_DIMENSION": 74,
+     "LEVEL_DATUM": 4,
+     "ANGLE": 1
+    },
+    "unattached": {
+     "ANGLE": 6,
+     "OPENING_CALLOUT": 43
+    },
+    "readerUnresolved": 24,
+    "readerConflicts": 0,
+    "ocrTokens": {
+     "DISCARDED": 858,
+     "undefined": 358,
+     "KEPT": 406
+    }
+   },
+   "openings": {
+    "planOpeningsRead": 12,
+    "elevationIndependentReadings": 2,
+    "modelOpenings": 21,
+    "modelOpeningsByEvidence": {
+     "SOURCE_DERIVED": 10,
+     "SOURCE_CORROBORATED": 11
+    },
+    "facadeAlignmentStatus": {
+     "CONFIRMED_MATCH": 1,
+     "NOT_OBSERVED": 4,
+     "CONFLICT": 6,
+     "VIEW_NOT_REGISTERED": 0
+    },
+    "facadeAlignmentCounts": {
+     "PAIRED": 7,
+     "MISSING_IN_MODEL": 0,
+     "EXTRA_IN_MODEL": 0,
+     "HORIZONTAL_OFFSET": 3,
+     "WIDTH_MISMATCH": 3,
+     "SILL_MISMATCH": 0,
+     "HEAD_MISMATCH": 4,
+     "WRONG_FACADE": 0,
+     "UNREGISTERED_VIEW": 0
+    }
+   },
+   "crossViewResiduals": [
+    {
+     "side": "RIGHT",
+     "verdict": "AGREES",
+     "checks": 6,
+     "withinTolerance": 6
+    },
+    {
+     "side": "LEFT",
+     "verdict": "MIXED",
+     "checks": 4,
+     "withinTolerance": 3
+    },
+    {
+     "side": "REAR",
+     "verdict": "MIXED",
+     "checks": 27,
+     "withinTolerance": 19
+    },
+    {
+     "side": "FRONT",
+     "verdict": "MIXED",
+     "checks": 29,
+     "withinTolerance": 26
+    }
+   ],
+   "modelObjectsByEvidence": {
+    "levels": {
+     "NO_EVIDENCE": 2
+    },
+    "rooms": {
+     "SOURCE_DERIVED": 10,
+     "SOURCE_CORROBORATED": 2
+    },
+    "walls": {
+     "SOURCE_EXACT": 7,
+     "SOURCE_DERIVED": 30,
+     "NO_EVIDENCE": 4
+    },
+    "wallJunctions": {
+     "NO_EVIDENCE": 9
+    },
+    "wallRings": {
+     "NO_EVIDENCE": 1
+    },
+    "openings": {
+     "SOURCE_DERIVED": 10,
+     "SOURCE_CORROBORATED": 11
+    },
+    "windows": {
+     "NO_EVIDENCE": 8
+    },
+    "doors": {
+     "NO_EVIDENCE": 13
+    },
+    "slabs": {
+     "NO_EVIDENCE": 3
+    },
+    "roofs": {
+     "SOURCE_EXACT": 2
+    },
+    "roofOpenings": {
+     "NO_EVIDENCE": 2,
+     "VISUAL_INFERRED": 3
+    },
+    "rooflights": {
+     "NO_EVIDENCE": 3
+    },
+    "balconies": {
+     "VISUAL_INFERRED": 2
+    },
+    "railings": {
+     "VISUAL_INFERRED": 2
+    },
+    "chimneys": {
+     "SOURCE_CORROBORATED": 2
+    },
+    "stairs": {
+     "SOURCE_CORROBORATED": 1
+    },
+    "surfaceRegions": {
+     "VISUAL_INFERRED": 3
+    },
+    "terraces": {
+     "SOURCE_DERIVED": 2
+    },
+    "materials": {
+     "NO_EVIDENCE": 11
+    }
+   },
+   "verdict": {
+    "modelCompleteness": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "basis": "ACCEPTED_DECOMPOSITION",
+    "coverage": 1,
+    "degrading": [
+     "STOREY_COVERAGE_DISAGREES"
+    ],
+    "blocking": [],
+    "unexplainedWalls": {
+     "count": 1,
+     "lengthM": 1.794087,
+     "bandLengthM": 9.453752
+    }
+   },
+   "unresolvedByStatus": {
+    "MISSING": 1,
+    "AMBIGUOUS": 6
+   }
+  },
+  "ciesz": {
+   "images": {
+    "byRole": {
+     "ELEVATION": 4,
+     "PLAN": 4,
+     "SECTION": 1,
+     "SITE_PLAN": 1,
+     "PERSPECTIVE": 18
+    },
+    "total": 28
+   },
+   "plans": {
+    "framesInGraph": 4,
+    "read": 1,
+    "note": "one plan per storey is read; the rest of the plan frames are copies, other editions or the mirrored variant"
+   },
+   "elevations": {
+    "total": 4,
+    "REGISTERED_FULL(silhouette)": 0,
+    "PARTIAL(OPENINGS_ONLY|POSITIONS_ONLY)": 3,
+    "UNREGISTERED": 1,
+    "DUPLICATE": 0,
+    "whyUnregistered": [
+     "registered on its walls' band it puts the ground at 0.79 m against -0.19 m from the house's other views"
+    ]
+   },
+   "section": {
+    "framesInGraph": 1,
+    "registeredAsView": false,
+    "note": "the section is read for its level datums by source-metrics; it is never registered or checked as a view (registrations.section absent)"
+   },
+   "perspectives": {
+    "total": 18,
+    "CHECK_ONLY(camera solved, depth order only)": 1,
+    "UNUSED": 17
+   },
+   "metricEvidence": {
+    "total": 63,
+    "byKind": {
+     "ANGLE": 4,
+     "OPENING_CALLOUT": 25,
+     "LINEAR_DIMENSION": 31,
+     "LEVEL_DATUM": 3
+    },
+    "attachedToAFeature": {
+     "OPENING_CALLOUT": 4,
+     "LINEAR_DIMENSION": 31,
+     "LEVEL_DATUM": 3,
+     "ANGLE": 1
+    },
+    "unattached": {
+     "ANGLE": 3,
+     "OPENING_CALLOUT": 21
+    },
+    "readerUnresolved": 18,
+    "readerConflicts": 0,
+    "ocrTokens": {
+     "DISCARDED": 584,
+     "KEPT": 301,
+     "undefined": 510
+    }
+   },
+   "openings": {
+    "planOpeningsRead": 11,
+    "elevationIndependentReadings": 3,
+    "modelOpenings": 24,
+    "modelOpeningsByEvidence": {
+     "SOURCE_DERIVED": 15,
+     "ASSUMED": 9
+    },
+    "facadeAlignmentStatus": {
+     "CONFIRMED_MATCH": 0,
+     "NOT_OBSERVED": 1,
+     "CONFLICT": 6,
+     "VIEW_NOT_REGISTERED": 4
+    },
+    "facadeAlignmentCounts": {
+     "PAIRED": 6,
+     "MISSING_IN_MODEL": 0,
+     "EXTRA_IN_MODEL": 0,
+     "HORIZONTAL_OFFSET": 3,
+     "WIDTH_MISMATCH": 3,
+     "SILL_MISMATCH": 2,
+     "HEAD_MISMATCH": 1,
+     "WRONG_FACADE": 0,
+     "UNREGISTERED_VIEW": 4
+    }
+   },
+   "crossViewResiduals": [],
+   "modelObjectsByEvidence": {
+    "levels": {
+     "NO_EVIDENCE": 1
+    },
+    "rooms": {
+     "SOURCE_CORROBORATED": 4,
+     "SOURCE_DERIVED": 4
+    },
+    "walls": {
+     "NO_EVIDENCE": 4,
+     "SOURCE_DERIVED": 21
+    },
+    "wallJunctions": {
+     "NO_EVIDENCE": 4
+    },
+    "wallRings": {
+     "SOURCE_EXACT": 1
+    },
+    "openings": {
+     "SOURCE_DERIVED": 15,
+     "ASSUMED": 9
+    },
+    "windows": {
+     "NO_EVIDENCE": 11
+    },
+    "doors": {
+     "NO_EVIDENCE": 10
+    },
+    "slabs": {
+     "NO_EVIDENCE": 1
+    },
+    "roofOpenings": {
+     "NO_EVIDENCE": 1
+    },
+    "chimneys": {
+     "SOURCE_DERIVED": 2
+    },
+    "linearSolids": {
+     "SOURCE_DERIVED": 1
+    },
+    "terraces": {
+     "SOURCE_DERIVED": 1
+    },
+    "roofPlanes": {
+     "SOURCE_EXACT": 4
+    },
+    "roofEdges": {
+     "NO_EVIDENCE": 9
+    },
+    "relationships": {
+     "NO_EVIDENCE": 5
+    },
+    "materials": {
+     "NO_EVIDENCE": 11
+    }
+   },
+   "verdict": {
+    "modelCompleteness": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "basis": "ACCEPTED_DECOMPOSITION",
+    "coverage": 1,
+    "degrading": [
+     "ROOF_EVIDENCE_DISAGREES"
+    ],
+    "blocking": [],
+    "unexplainedWalls": {
+     "count": 0,
+     "lengthM": 0,
+     "bandLengthM": 0
+    }
+   },
+   "unresolvedByStatus": {
+    "REFUSED": 4,
+    "AMBIGUOUS": 10
+   }
+  },
+  "rary": {
+   "images": {
+    "byRole": {
+     "PERSPECTIVE": 25,
+     "ELEVATION": 4,
+     "SECTION": 1,
+     "PLAN": 4,
+     "SITE_PLAN": 1
+    },
+    "total": 35
+   },
+   "plans": {
+    "framesInGraph": 4,
+    "read": 1,
+    "note": "one plan per storey is read; the rest of the plan frames are copies, other editions or the mirrored variant"
+   },
+   "elevations": {
+    "total": 4,
+    "REGISTERED_FULL(silhouette)": 4,
+    "PARTIAL(OPENINGS_ONLY|POSITIONS_ONLY)": 0,
+    "UNREGISTERED": 0,
+    "DUPLICATE": 0,
+    "whyUnregistered": []
+   },
+   "section": {
+    "framesInGraph": 1,
+    "registeredAsView": false,
+    "note": "the section is read for its level datums by source-metrics; it is never registered or checked as a view (registrations.section absent)"
+   },
+   "perspectives": {
+    "total": 25,
+    "CHECK_ONLY(camera solved, depth order only)": 10,
+    "UNUSED": 15
+   },
+   "metricEvidence": {
+    "total": 155,
+    "byKind": {
+     "OPENING_CALLOUT": 85,
+     "LINEAR_DIMENSION": 66,
+     "LEVEL_DATUM": 3,
+     "ANGLE": 1
+    },
+    "attachedToAFeature": {
+     "OPENING_CALLOUT": 11,
+     "LINEAR_DIMENSION": 66,
+     "LEVEL_DATUM": 3,
+     "ANGLE": 1
+    },
+    "unattached": {
+     "OPENING_CALLOUT": 74
+    },
+    "readerUnresolved": 18,
+    "readerConflicts": 0,
+    "ocrTokens": {
+     "DISCARDED": 793,
+     "KEPT": 393,
+     "undefined": 463
+    }
+   },
+   "openings": {
+    "planOpeningsRead": 13,
+    "elevationIndependentReadings": 9,
+    "modelOpenings": 20,
+    "modelOpeningsByEvidence": {
+     "SOURCE_DERIVED": 8,
+     "SOURCE_CORROBORATED": 12
+    },
+    "facadeAlignmentStatus": {
+     "CONFIRMED_MATCH": 0,
+     "NOT_OBSERVED": 7,
+     "CONFLICT": 5,
+     "VIEW_NOT_REGISTERED": 0
+    },
+    "facadeAlignmentCounts": {
+     "PAIRED": 5,
+     "MISSING_IN_MODEL": 0,
+     "EXTRA_IN_MODEL": 0,
+     "HORIZONTAL_OFFSET": 4,
+     "WIDTH_MISMATCH": 3,
+     "SILL_MISMATCH": 1,
+     "HEAD_MISMATCH": 3,
+     "WRONG_FACADE": 0,
+     "UNREGISTERED_VIEW": 0
+    }
+   },
+   "crossViewResiduals": [
+    {
+     "side": "LEFT",
+     "verdict": "DISAGREES",
+     "checks": 5,
+     "withinTolerance": 1
+    },
+    {
+     "side": "FRONT",
+     "verdict": "DISAGREES",
+     "checks": 10,
+     "withinTolerance": 2
+    },
+    {
+     "side": "RIGHT",
+     "verdict": "DISAGREES",
+     "checks": 3,
+     "withinTolerance": 2
+    },
+    {
+     "side": "REAR",
+     "verdict": "DISAGREES",
+     "checks": 8,
+     "withinTolerance": 1
+    }
+   ],
+   "modelObjectsByEvidence": {
+    "levels": {
+     "NO_EVIDENCE": 1
+    },
+    "rooms": {
+     "SOURCE_CORROBORATED": 6,
+     "SOURCE_DERIVED": 3
+    },
+    "walls": {
+     "SOURCE_EXACT": 8,
+     "SOURCE_DERIVED": 13
+    },
+    "wallJunctions": {
+     "NO_EVIDENCE": 6
+    },
+    "openings": {
+     "SOURCE_DERIVED": 8,
+     "SOURCE_CORROBORATED": 12
+    },
+    "windows": {
+     "NO_EVIDENCE": 6
+    },
+    "doors": {
+     "NO_EVIDENCE": 14
+    },
+    "slabs": {
+     "NO_EVIDENCE": 2
+    },
+    "roofOpenings": {
+     "NO_EVIDENCE": 1
+    },
+    "chimneys": {
+     "SOURCE_CORROBORATED": 2
+    },
+    "surfaceRegions": {
+     "VISUAL_INFERRED": 3
+    },
+    "terraces": {
+     "SOURCE_DERIVED": 2
+    },
+    "roofPlanes": {
+     "VISUAL_INFERRED": 2,
+     "SOURCE_EXACT": 2
+    },
+    "roofEdges": {
+     "NO_EVIDENCE": 15
+    },
+    "relationships": {
+     "NO_EVIDENCE": 5
+    },
+    "materials": {
+     "NO_EVIDENCE": 11
+    }
+   },
+   "verdict": {
+    "modelCompleteness": "COMPLETE",
+    "basis": "ACCEPTED_DECOMPOSITION",
+    "coverage": 1,
+    "degrading": [],
+    "blocking": [],
+    "unexplainedWalls": {
+     "count": 0,
+     "lengthM": 0,
+     "bandLengthM": 0
+    }
+   },
+   "unresolvedByStatus": {
+    "MISSING": 1,
+    "REFUSED": 2,
+    "AMBIGUOUS": 10
+   }
+  },
+  "trytomach": {
+   "images": {
+    "byRole": {
+     "PERSPECTIVE": 8,
+     "ELEVATION": 4,
+     "SECTION": 1,
+     "PLAN": 8,
+     "SITE_PLAN": 1
+    },
+    "total": 22
+   },
+   "plans": {
+    "framesInGraph": 8,
+    "read": 2,
+    "note": "one plan per storey is read; the rest of the plan frames are copies, other editions or the mirrored variant"
+   },
+   "elevations": {
+    "total": 4,
+    "REGISTERED_FULL(silhouette)": 1,
+    "PARTIAL(OPENINGS_ONLY|POSITIONS_ONLY)": 1,
+    "UNREGISTERED": 2,
+    "DUPLICATE": 0,
+    "whyUnregistered": [
+     "registered on its walls' band it puts the ground at -0.35 m against 0.47 m from the house's other views",
+     "the silhouette is 19.345603 m across, which is 6.356285 m more than the footprint width — the overhang of a roof, on the only axis it can be, but both walls on that axis are already assigned"
+    ]
+   },
+   "section": {
+    "framesInGraph": 1,
+    "registeredAsView": true,
+    "note": "the section is read for its level datums by source-metrics; it is never registered or checked as a view (registrations.section absent)"
+   },
+   "perspectives": {
+    "total": 8,
+    "CHECK_ONLY(camera solved, depth order only)": 2,
+    "UNUSED": 6
+   },
+   "metricEvidence": {
+    "total": 125,
+    "byKind": {
+     "ANGLE": 5,
+     "OPENING_CALLOUT": 56,
+     "LINEAR_DIMENSION": 61,
+     "LEVEL_DATUM": 3
+    },
+    "attachedToAFeature": {
+     "OPENING_CALLOUT": 9,
+     "LINEAR_DIMENSION": 61,
+     "LEVEL_DATUM": 3,
+     "ANGLE": 1
+    },
+    "unattached": {
+     "ANGLE": 4,
+     "OPENING_CALLOUT": 47
+    },
+    "readerUnresolved": 27,
+    "readerConflicts": 0,
+    "ocrTokens": {
+     "DISCARDED": 926,
+     "KEPT": 477,
+     "undefined": 1008
+    }
+   },
+   "openings": {
+    "planOpeningsRead": 13,
+    "elevationIndependentReadings": 3,
+    "modelOpenings": 21,
+    "modelOpeningsByEvidence": {
+     "SOURCE_DERIVED": 9,
+     "SOURCE_CORROBORATED": 3,
+     "ASSUMED": 9
+    },
+    "facadeAlignmentStatus": {
+     "CONFIRMED_MATCH": 1,
+     "NOT_OBSERVED": 4,
+     "CONFLICT": 1,
+     "VIEW_NOT_REGISTERED": 7
+    },
+    "facadeAlignmentCounts": {
+     "PAIRED": 2,
+     "MISSING_IN_MODEL": 0,
+     "EXTRA_IN_MODEL": 0,
+     "HORIZONTAL_OFFSET": 1,
+     "WIDTH_MISMATCH": 1,
+     "SILL_MISMATCH": 1,
+     "HEAD_MISMATCH": 1,
+     "WRONG_FACADE": 0,
+     "UNREGISTERED_VIEW": 7
+    }
+   },
+   "crossViewResiduals": [
+    {
+     "side": "FRONT",
+     "verdict": "DISAGREES",
+     "checks": 7,
+     "withinTolerance": 3
+    }
+   ],
+   "modelObjectsByEvidence": {
+    "levels": {
+     "NO_EVIDENCE": 2
+    },
+    "rooms": {
+     "SOURCE_DERIVED": 9,
+     "SOURCE_CORROBORATED": 2
+    },
+    "walls": {
+     "NO_EVIDENCE": 8,
+     "SOURCE_DERIVED": 28
+    },
+    "wallJunctions": {
+     "NO_EVIDENCE": 8
+    },
+    "wallRings": {
+     "SOURCE_EXACT": 1,
+     "NO_EVIDENCE": 1
+    },
+    "openings": {
+     "SOURCE_DERIVED": 9,
+     "SOURCE_CORROBORATED": 3,
+     "ASSUMED": 9
+    },
+    "windows": {
+     "NO_EVIDENCE": 11
+    },
+    "doors": {
+     "NO_EVIDENCE": 10
+    },
+    "slabs": {
+     "NO_EVIDENCE": 2
+    },
+    "roofs": {
+     "SOURCE_EXACT": 1
+    },
+    "roofOpenings": {
+     "NO_EVIDENCE": 1,
+     "SOURCE_DERIVED": 2,
+     "VISUAL_INFERRED": 1
+    },
+    "rooflights": {
+     "NO_EVIDENCE": 3
+    },
+    "chimneys": {
+     "SOURCE_DERIVED": 1
+    },
+    "stairs": {
+     "UNRESOLVED": 1
+    },
+    "linearSolids": {
+     "SOURCE_DERIVED": 1,
+     "NO_EVIDENCE": 9
+    },
+    "terraces": {
+     "SOURCE_DERIVED": 2
+    },
+    "relationships": {
+     "NO_EVIDENCE": 1
+    },
+    "materials": {
+     "NO_EVIDENCE": 11
+    }
+   },
+   "verdict": {
+    "modelCompleteness": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "basis": "ACCEPTED_DECOMPOSITION",
+    "coverage": 1,
+    "degrading": [
+     "ROOF_EVIDENCE_DISAGREES"
+    ],
+    "blocking": [],
+    "unexplainedWalls": {
+     "count": 0,
+     "lengthM": 0,
+     "bandLengthM": 0
+    }
+   },
+   "unresolvedByStatus": {
+    "AMBIGUOUS": 10,
+    "REFUSED": 1
+   }
+  },
+  "arganiach": {
+   "images": {
+    "byRole": {
+     "PERSPECTIVE": 16,
+     "ELEVATION": 4,
+     "SECTION": 1,
+     "PLAN": 8,
+     "SITE_PLAN": 1
+    },
+    "total": 30
+   },
+   "plans": {
+    "framesInGraph": 8,
+    "read": 2,
+    "note": "one plan per storey is read; the rest of the plan frames are copies, other editions or the mirrored variant"
+   },
+   "elevations": {
+    "total": 4,
+    "REGISTERED_FULL(silhouette)": 2,
+    "PARTIAL(OPENINGS_ONLY|POSITIONS_ONLY)": 0,
+    "UNREGISTERED": 2,
+    "DUPLICATE": 0,
+    "whyUnregistered": [
+     "the silhouette is 8.850318 m across, shorter than either wall of a 14.2 by 12.321694 m building",
+     "the silhouette is 16.494603 m across, which is 2.294603 m more than the footprint width — the overhang of a roof, on the only axis it can be, but both walls on that axis are already assigned"
+    ]
+   },
+   "section": {
+    "framesInGraph": 1,
+    "registeredAsView": false,
+    "note": "the section is read for its level datums by source-metrics; it is never registered or checked as a view (registrations.section absent)"
+   },
+   "perspectives": {
+    "total": 16,
+    "CHECK_ONLY(camera solved, depth order only)": 7,
+    "UNUSED": 9
+   },
+   "metricEvidence": {
+    "total": 146,
+    "byKind": {
+     "ANGLE": 3,
+     "OPENING_CALLOUT": 71,
+     "LINEAR_DIMENSION": 69,
+     "LEVEL_DATUM": 3
+    },
+    "attachedToAFeature": {
+     "OPENING_CALLOUT": 11,
+     "LINEAR_DIMENSION": 69,
+     "LEVEL_DATUM": 3,
+     "ANGLE": 1
+    },
+    "unattached": {
+     "ANGLE": 2,
+     "OPENING_CALLOUT": 60
+    },
+    "readerUnresolved": 20,
+    "readerConflicts": 0,
+    "ocrTokens": {
+     "KEPT": 611,
+     "DISCARDED": 1194,
+     "undefined": 285
+    }
+   },
+   "openings": {
+    "planOpeningsRead": 13,
+    "elevationIndependentReadings": 3,
+    "modelOpenings": 26,
+    "modelOpeningsByEvidence": {
+     "SOURCE_DERIVED": 17,
+     "SOURCE_CORROBORATED": 2,
+     "ASSUMED": 7
+    },
+    "facadeAlignmentStatus": {
+     "CONFIRMED_MATCH": 1,
+     "NOT_OBSERVED": 2,
+     "CONFLICT": 3,
+     "VIEW_NOT_REGISTERED": 7
+    },
+    "facadeAlignmentCounts": {
+     "PAIRED": 4,
+     "MISSING_IN_MODEL": 0,
+     "EXTRA_IN_MODEL": 0,
+     "HORIZONTAL_OFFSET": 1,
+     "WIDTH_MISMATCH": 3,
+     "SILL_MISMATCH": 0,
+     "HEAD_MISMATCH": 0,
+     "WRONG_FACADE": 0,
+     "UNREGISTERED_VIEW": 7
+    }
+   },
+   "crossViewResiduals": [
+    {
+     "side": "REAR",
+     "verdict": "DISAGREES",
+     "checks": 5,
+     "withinTolerance": 1
+    },
+    {
+     "side": "FRONT",
+     "verdict": "DISAGREES",
+     "checks": 5,
+     "withinTolerance": 2
+    }
+   ],
+   "modelObjectsByEvidence": {
+    "levels": {
+     "NO_EVIDENCE": 2
+    },
+    "rooms": {
+     "SOURCE_CORROBORATED": 3,
+     "SOURCE_DERIVED": 11
+    },
+    "walls": {
+     "SOURCE_EXACT": 7,
+     "NO_EVIDENCE": 4,
+     "SOURCE_DERIVED": 18
+    },
+    "wallJunctions": {
+     "NO_EVIDENCE": 9
+    },
+    "wallRings": {
+     "NO_EVIDENCE": 1
+    },
+    "openings": {
+     "SOURCE_DERIVED": 17,
+     "SOURCE_CORROBORATED": 2,
+     "ASSUMED": 7
+    },
+    "windows": {
+     "NO_EVIDENCE": 7
+    },
+    "doors": {
+     "NO_EVIDENCE": 19
+    },
+    "slabs": {
+     "NO_EVIDENCE": 2,
+     "SOURCE_DERIVED": 1
+    },
+    "roofs": {
+     "SOURCE_EXACT": 1,
+     "ASSUMED": 1
+    },
+    "roofOpenings": {
+     "NO_EVIDENCE": 2,
+     "SOURCE_CORROBORATED": 1,
+     "VISUAL_INFERRED": 2
+    },
+    "rooflights": {
+     "NO_EVIDENCE": 3
+    },
+    "chimneys": {
+     "SOURCE_DERIVED": 2
+    },
+    "stairs": {
+     "UNRESOLVED": 1
+    },
+    "materials": {
+     "NO_EVIDENCE": 11
+    }
+   },
+   "verdict": {
+    "modelCompleteness": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "basis": "ACCEPTED_DECOMPOSITION",
+    "coverage": 1,
+    "degrading": [
+     "ROOF_EVIDENCE_DISAGREES"
+    ],
+    "blocking": [],
+    "unexplainedWalls": {
+     "count": 0,
+     "lengthM": 0,
+     "bandLengthM": 0
+    }
+   },
+   "unresolvedByStatus": {
+    "AMBIGUOUS": 11,
+    "MISSING": 1
+   }
+  },
+  "sasankach3": {
+   "images": {
+    "byRole": {
+     "ELEVATION": 4,
+     "SECTION": 1,
+     "PLAN": 8,
+     "SITE_PLAN": 1,
+     "PERSPECTIVE": 10
+    },
+    "total": 24
+   },
+   "plans": {
+    "framesInGraph": 8,
+    "read": 2,
+    "note": "one plan per storey is read; the rest of the plan frames are copies, other editions or the mirrored variant"
+   },
+   "elevations": {
+    "total": 4,
+    "REGISTERED_FULL(silhouette)": 2,
+    "PARTIAL(OPENINGS_ONLY|POSITIONS_ONLY)": 0,
+    "UNREGISTERED": 2,
+    "DUPLICATE": 0,
+    "whyUnregistered": [
+     "the silhouette is 12.257701 m across, which is 0.657701 m more than the footprint width — the overhang of a roof, on the only axis it can be, but both walls on that axis are already assigned",
+     "the silhouette is 12.147977 m across, which is 0.547977 m more than the footprint width — the overhang of a roof, on the only axis it can be, but both walls on that axis are already assigned"
+    ]
+   },
+   "section": {
+    "framesInGraph": 1,
+    "registeredAsView": true,
+    "note": "the section is read for its level datums by source-metrics; it is never registered or checked as a view (registrations.section absent)"
+   },
+   "perspectives": {
+    "total": 10,
+    "CHECK_ONLY(camera solved, depth order only)": 3,
+    "UNUSED": 7
+   },
+   "metricEvidence": {
+    "total": 117,
+    "byKind": {
+     "ANGLE": 3,
+     "OPENING_CALLOUT": 54,
+     "LINEAR_DIMENSION": 57,
+     "LEVEL_DATUM": 3
+    },
+    "attachedToAFeature": {
+     "OPENING_CALLOUT": 10,
+     "LINEAR_DIMENSION": 57,
+     "LEVEL_DATUM": 3,
+     "ANGLE": 1
+    },
+    "unattached": {
+     "ANGLE": 2,
+     "OPENING_CALLOUT": 44
+    },
+    "readerUnresolved": 28,
+    "readerConflicts": 0,
+    "ocrTokens": {
+     "DISCARDED": 1449,
+     "KEPT": 794,
+     "undefined": 567
+    }
+   },
+   "openings": {
+    "planOpeningsRead": 16,
+    "elevationIndependentReadings": 2,
+    "modelOpenings": 23,
+    "modelOpeningsByEvidence": {
+     "SOURCE_DERIVED": 10,
+     "SOURCE_CORROBORATED": 8,
+     "ASSUMED": 5
+    },
+    "facadeAlignmentStatus": {
+     "CONFIRMED_MATCH": 1,
+     "NOT_OBSERVED": 7,
+     "CONFLICT": 4,
+     "VIEW_NOT_REGISTERED": 3
+    },
+    "facadeAlignmentCounts": {
+     "PAIRED": 4,
+     "MISSING_IN_MODEL": 1,
+     "EXTRA_IN_MODEL": 0,
+     "HORIZONTAL_OFFSET": 2,
+     "WIDTH_MISMATCH": 2,
+     "SILL_MISMATCH": 0,
+     "HEAD_MISMATCH": 0,
+     "WRONG_FACADE": 0,
+     "UNREGISTERED_VIEW": 3
+    }
+   },
+   "crossViewResiduals": [
+    {
+     "side": "FRONT",
+     "verdict": "DISAGREES",
+     "checks": 12,
+     "withinTolerance": 3
+    },
+    {
+     "side": "REAR",
+     "verdict": "DISAGREES",
+     "checks": 18,
+     "withinTolerance": 10
+    }
+   ],
+   "modelObjectsByEvidence": {
+    "levels": {
+     "NO_EVIDENCE": 2
+    },
+    "rooms": {
+     "SOURCE_CORROBORATED": 4,
+     "SOURCE_DERIVED": 6
+    },
+    "walls": {
+     "SOURCE_EXACT": 16,
+     "SOURCE_DERIVED": 18
+    },
+    "wallJunctions": {
+     "NO_EVIDENCE": 12
+    },
+    "openings": {
+     "SOURCE_DERIVED": 10,
+     "SOURCE_CORROBORATED": 8,
+     "ASSUMED": 5
+    },
+    "windows": {
+     "NO_EVIDENCE": 8
+    },
+    "doors": {
+     "NO_EVIDENCE": 15
+    },
+    "slabs": {
+     "NO_EVIDENCE": 4
+    },
+    "roofOpenings": {
+     "SOURCE_DERIVED": 3
+    },
+    "rooflights": {
+     "NO_EVIDENCE": 3
+    },
+    "balconies": {
+     "SOURCE_DERIVED": 2
+    },
+    "railings": {
+     "SOURCE_DERIVED": 2
+    },
+    "stairs": {
+     "UNRESOLVED": 1
+    },
+    "roofPlanes": {
+     "VISUAL_INFERRED": 2,
+     "SOURCE_EXACT": 3
+    },
+    "roofEdges": {
+     "NO_EVIDENCE": 18
+    },
+    "relationships": {
+     "NO_EVIDENCE": 4
+    },
+    "materials": {
+     "NO_EVIDENCE": 11
+    }
+   },
+   "verdict": {
+    "modelCompleteness": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "basis": "ACCEPTED_DECOMPOSITION",
+    "coverage": 1,
+    "degrading": [
+     "STOREY_COVERAGE_DISAGREES"
+    ],
+    "blocking": [],
+    "unexplainedWalls": {
+     "count": 0,
+     "lengthM": 0,
+     "bandLengthM": 0
+    }
+   },
+   "unresolvedByStatus": {
+    "AMBIGUOUS": 14,
+    "MISSING": 1,
+    "REFUSED": 3
+   }
+  }
+ },
+ "totals": {
+  "images": 205,
+  "elevations": 32,
+  "elevFull": 14,
+  "elevPartial": 7,
+  "elevUnreg": 11,
+  "elevDup": 0,
+  "sections": 8,
+  "perspectives": 101,
+  "perspCheck": 30,
+  "metric": 1074,
+  "metricUnattached": 498,
+  "planOpenings": 105,
+  "modelOpenings": 189,
+  "elevOpenings": 29,
+  "modelOpeningsAssumed": 36,
+  "xv_DISAGREES": 10,
+  "xv_AGREES": 1,
+  "xv_MIXED": 3
+ }
+}

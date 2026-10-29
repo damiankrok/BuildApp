@@ -2918,3 +2918,17 @@ upright-only room numbers; the stair hole and voids (`voidOnSlab`, the slab's ow
 (1+2 open). Roofs, slabs, exterior walls and openings byte-identical in all 8 houses; no interior door lost; A01,
 Goździkowce and Cieszynianka gain rooms the plans draw. Open: attic room numbers mostly unread; labels that came from
 rotated readings are gone; the analyzer contract fixtures stay stale (since solver 2.6.0).
+
+## Audyt systemowy po N8 (STAGE BUILDPLAN N9-00)
+
+Status: **DONE — audyt, bez zmian produkcyjnych** (baza `0d03d60`, solver 2.17.0, model 1.7.0, czytnik 1.5.0).
+Report `stage-reports/STAGE_BUILDPLAN_N9_00_SYSTEM_AUDIT.md`, artefakty `stage-reports/artifacts/analyzer-n9-00/`.
+Finding: the formal verdict (`modelCompleteness`) reads only bodies against the analyzer's own decomposition, the
+layout gate and command refusals; every source comparison the solver computes (view audit, cross-view residuals,
+facade alignment, compiler diagnostics) is outside the decision path, and the relations that would catch the N8
+classes (roof layers, wall over blank paper, storey outline, section slabs, room numbers) do not exist. Replay of
+the 8 houses: 11/32 elevations unregistered, 10/14 registered cross-checks DISAGREES, 46 % of metric evidence
+unattached, no house PARTIAL, Rarytasy COMPLETE with 4/4 DISAGREES. Schema 1.7.0: migration idempotent on 22/22
+inputs, candidates replay; the analyzer-contract fixtures are stale since solver 2.3.0 (additive changes only, not
+refreshed). Proposal for the owner's decision (not started): N9-01 technical/fidelity split, SOURCE_UNCHECKED budget,
+and three relations (single roof layer, wall ink support, storey outline).
