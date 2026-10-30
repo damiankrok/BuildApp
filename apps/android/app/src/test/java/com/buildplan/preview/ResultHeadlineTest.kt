@@ -1,6 +1,10 @@
 package com.buildplan.preview
 
 import com.buildplan.preview.analyzer.AnalysisSummary
+import com.buildplan.preview.analyzer.DecompositionCompleteness
+import com.buildplan.preview.analyzer.ModelAssessment
+import com.buildplan.preview.analyzer.SourceFidelity
+import com.buildplan.preview.analyzer.TechnicalValidity
 import com.buildplan.preview.scene.ModelCompleteness
 import com.buildplan.preview.scene.PartialPreview
 import com.buildplan.preview.scene.PreviewOutcome
@@ -90,4 +94,37 @@ class ResultHeadlineTest {
         val oldPartial = PreviewOutcome(outcome = PreviewOutcome.PARTIAL_3D_PREVIEW, partial = PartialPreview())
         assertEquals(R.string.analyzer_result_partial, headlineText(outcomeHeadline(oldPartial)))
     }
+    // --- N9-01: the three assessment axes ---------------------------------------------------------------
+
+    private fun assessed(verdict: String, technical: String, fidelity: String) = AnalysisSummary(
+        preview = PreviewOutcome(completeness = ModelCompleteness(verdict = verdict)),
+        assessment = ModelAssessment(
+            technicalValidity = TechnicalValidity(status = technical),
+            decompositionCompleteness = DecompositionCompleteness(verdict = verdict),
+            sourceFidelity = SourceFidelity(status = fidelity),
+        ),
+    )
+
+    @Test
+    fun `a COMPLETE reading that conflicts with the drawings is never headed as ready`() {
+        assertEquals(ResultHeadline.LIMITED, resultHeadline(assessed(ModelCompleteness.COMPLETE, ModelAssessment.VALID, ModelAssessment.CONFLICT)))
+        assertEquals(ResultHeadline.LIMITED, resultHeadline(assessed(ModelCompleteness.COMPLETE, ModelAssessment.ERRORS, ModelAssessment.PASS)))
+    }
+
+    @Test
+    fun `an unchecked fidelity is not agreement, and only a checked one lets a complete model be ready`() {
+        assertEquals(ResultHeadline.OPEN_QUESTIONS, resultHeadline(assessed(ModelCompleteness.COMPLETE, ModelAssessment.VALID, ModelAssessment.UNCHECKED)))
+        assertEquals(ResultHeadline.READY, resultHeadline(assessed(ModelCompleteness.COMPLETE, ModelAssessment.VALID, ModelAssessment.PASS)))
+    }
+
+    @Test
+    fun `an assessment from the service is read, and an older answer without one stays as it was`() {
+        val json = Json { ignoreUnknownKeys = true }
+        val s = json.decodeFromString(AnalysisSummary.serializer(), """{"preview":{"completeness":{"verdict":"COMPLETE"}},"assessment":{"technicalValidity":{"status":"VALID"},"sourceFidelity":{"status":"CONFLICT","counts":{"PASS":2,"CONFLICT":1,"UNCHECKED":3},"conflicts":["R5: x"]},"sourceUnchecked":{"counts":{"total":4}},"previewAvailable":true}}""")
+        assertEquals(1, s.assessment?.sourceFidelity?.counts?.conflict)
+        assertEquals(3, s.assessment?.sourceFidelity?.counts?.unchecked)
+        assertEquals(ResultHeadline.LIMITED, resultHeadline(s))
+        assertNull(json.decodeFromString(AnalysisSummary.serializer(), """{"preview":{}}""").assessment)
+    }
 }
+

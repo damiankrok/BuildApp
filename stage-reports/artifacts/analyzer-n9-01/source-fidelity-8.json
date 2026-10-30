@@ -1,0 +1,1028 @@
+{
+ "generatedFrom": "two production runAnalysis regressions on the sealed 8-house inputs (pkg + graph)",
+ "rows": [
+  {
+   "house": "a01",
+   "modelHash": "ab0c4f1e8d48500dab567625909784bb8a293743201c62960f3d73912a37b412",
+   "unchanged": {
+    "candidateHash": true,
+    "modelHash": true,
+    "sceneContentHash": true,
+    "sceneSha256": true,
+    "metricEvidenceHash": true
+   },
+   "before": "COMPLETE_WITH_OPEN_QUESTIONS",
+   "technical": {
+    "status": "ERRORS",
+    "errors": 1,
+    "warnings": 37,
+    "byCheck": {
+     "PROGRAM_REFUSALS": "0E/0W",
+     "MODEL_VALIDATION": "0E/0W",
+     "COMPILER": "0E/0W",
+     "CLOSURE": "1E/37W",
+     "REPLAY": "0E/0W"
+    },
+    "firstErrors": [
+     "CLOSURE: EXTERIOR_INTERSECTION pergola-west-beam-1 + ring-main-0-w3"
+    ]
+   },
+   "completeness": "COMPLETE_WITH_OPEN_QUESTIONS",
+   "sourceFidelity": "UNCHECKED",
+   "relations": {
+    "R1_ROOF_LAYERS": {
+     "status": "PASS",
+     "counts": {
+      "CONFLICT": 0,
+      "PASS": 1,
+      "UNCHECKED": 0
+     },
+     "nonPass": []
+    },
+    "R3_WALL_INK": {
+     "status": "UNCHECKED",
+     "counts": {
+      "CONFLICT": 0,
+      "PASS": 2,
+      "UNCHECKED": 1
+     },
+     "nonPass": [
+      {
+       "status": "UNCHECKED",
+       "code": "THIN_LINES_ONLY",
+       "objects": [
+        "ring-main-1-w2"
+       ],
+       "why": "ring-main-1-w2: 9.3 m (the whole wall) stands on thin strokes only (9.3 m) \u2014 glazing, a slab edge or a line of the sheet; R3 cannot tell which"
+      }
+     ]
+    },
+    "R4_STOREY_OUTLINE": {
+     "status": "PASS",
+     "counts": {
+      "CONFLICT": 0,
+      "PASS": 2,
+      "UNCHECKED": 0
+     },
+     "nonPass": []
+    },
+    "R5_REGISTERED_ELEVATIONS": {
+     "status": "UNCHECKED",
+     "counts": {
+      "CONFLICT": 0,
+      "PASS": 0,
+      "UNCHECKED": 4
+     },
+     "nonPass": [
+      {
+       "status": "UNCHECKED",
+       "code": "VIEW_PARTLY_REGISTERED",
+       "objects": [
+        "frame-asset-gotowy-projekt-dom-w-jarzmiankach-elewacja-19da37ded6"
+       ],
+       "why": "REAR elevation frame-asset-gotowy-projekt-dom-w-jarzmiankach-elewacja-19da37ded6: registered on its wall band: read for its facade\u2019s openings, never compared for silhouette or heights (on its walls\u2019 band: 617 px across is the 10.50 m walled width (the walls' drawn span under the roof), so 0.017018 m"
+      },
+      {
+       "status": "UNCHECKED",
+       "code": "DISAGREEMENT_NOT_STABLE",
+       "objects": [
+        "frame-asset-gotowy-projekt-dom-w-jarzmiankach-elewacja-7854cc828b"
+       ],
+       "why": "LEFT elevation frame-asset-gotowy-projekt-dom-w-jarzmiankach-elewacja-7854cc828b: 1 of 4 observed checks outside tolerance on 1 feature \u2014 one feature only: named, not a stable disagreement"
+      },
+      {
+       "status": "UNCHECKED",
+       "code": "VIEW_NOT_REGISTERED",
+       "objects": [
+        "frame-asset-gotowy-projekt-dom-w-jarzmiankach-elewacja-ad8fd1a56b"
+       ],
+       "why": "SIDE_UNSPECIFIED elevation frame-asset-gotowy-projekt-dom-w-jarzmiankach-elewacja-ad8fd1a56b: not registered: nothing on it was compared (the silhouette is 16.1925 m across, which is 5.6925 m more than the footprint width \u2014 the overhang of a roof, on the only axis it can be, but both walls on that a"
+      },
+      {
+       "status": "UNCHECKED",
+       "code": "VIEW_PARTLY_REGISTERED",
+       "objects": [
+        "frame-asset-gotowy-projekt-dom-w-jarzmiankach-elewacja-b74ed2020b"
+       ],
+       "why": "FRONT elevation frame-asset-gotowy-projekt-dom-w-jarzmiankach-elewacja-b74ed2020b: registered on its wall band: read for its facade\u2019s openings, never compared for silhouette or heights (on its walls\u2019 band: 616 px across is the 10.50 m walled width (the walls' drawn span under the roof), so 0.017045 "
+      }
+     ]
+    }
+   },
+   "unchecked": {
+    "byKind": {
+     "ELEVATION": 4,
+     "PERSPECTIVE": 5,
+     "PLAN": 7,
+     "SECTION": 1
+    },
+    "none": 12,
+    "partial": 5,
+    "total": 17
+   }
+  },
+  {
+   "house": "gozd",
+   "modelHash": "58a284c35d51cc0449390e6cc6c0baf11583ed9b71345029358aedc476a86e92",
+   "unchanged": {
+    "candidateHash": true,
+    "modelHash": true,
+    "sceneContentHash": true,
+    "sceneSha256": true,
+    "metricEvidenceHash": true
+   },
+   "before": "COMPLETE_WITH_OPEN_QUESTIONS",
+   "technical": {
+    "status": "VALID",
+    "errors": 0,
+    "warnings": 73,
+    "byCheck": {
+     "PROGRAM_REFUSALS": "0E/0W",
+     "MODEL_VALIDATION": "0E/0W",
+     "COMPILER": "0E/0W",
+     "CLOSURE": "0E/73W",
+     "REPLAY": "0E/0W"
+    },
+    "firstErrors": []
+   },
+   "completeness": "COMPLETE_WITH_OPEN_QUESTIONS",
+   "sourceFidelity": "UNCHECKED",
+   "relations": {
+    "R1_ROOF_LAYERS": {
+     "status": "PASS",
+     "counts": {
+      "CONFLICT": 0,
+      "PASS": 1,
+      "UNCHECKED": 0
+     },
+     "nonPass": []
+    },
+    "R3_WALL_INK": {
+     "status": "UNCHECKED",
+     "counts": {
+      "CONFLICT": 0,
+      "PASS": 2,
+      "UNCHECKED": 4
+     },
+     "nonPass": [
+      {
+       "status": "UNCHECKED",
+       "code": "NOTHING_TO_READ",
+       "objects": [
+        "main-iwall-0-z-7"
+       ],
+       "why": "main-iwall-0-z-7 (0.398682 m) is all openings or shorter than its tolerance: no station to read"
+      },
+      {
+       "status": "UNCHECKED",
+       "code": "NOTHING_TO_READ",
+       "objects": [
+        "main-iwall-0-z-2"
+       ],
+       "why": "main-iwall-0-z-2 (0.37533 m) is all openings or shorter than its tolerance: no station to read"
+      },
+      {
+       "status": "UNCHECKED",
+       "code": "NOTHING_TO_READ",
+       "objects": [
+        "main-iwall-0-x-11"
+       ],
+       "why": "main-iwall-0-x-11 (0.228096 m) is all openings or shorter than its tolerance: no station to read"
+      },
+      {
+       "status": "UNCHECKED",
+       "code": "NOTHING_TO_READ",
+       "objects": [
+        "main-iwall-0-x-5"
+       ],
+       "why": "main-iwall-0-x-5 (0.228096 m) is all openings or shorter than its tolerance: no station to read"
+      }
+     ]
+    },
+    "R4_STOREY_OUTLINE": {
+     "status": "PASS",
+     "counts": {
+      "CONFLICT": 0,
+      "PASS": 2,
+      "UNCHECKED": 0
+     },
+     "nonPass": []
+    },
+    "R5_REGISTERED_ELEVATIONS": {
+     "status": "UNCHECKED",
+     "counts": {
+      "CONFLICT": 0,
+      "PASS": 0,
+      "UNCHECKED": 4
+     },
+     "nonPass": [
+      {
+       "status": "UNCHECKED",
+       "code": "VIEW_NOT_REGISTERED",
+       "objects": [
+        "frame-asset-gotowy-projekt-dom-w-gozdzikowcach-3-elewa-22c3997a33"
+       ],
+       "why": "SIDE_UNSPECIFIED elevation frame-asset-gotowy-projekt-dom-w-gozdzikowcach-3-elewa-22c3997a33: not registered: nothing on it was compared (the silhouette is 13.991642 m across, which is 0.171642 m more than the footprint width \u2014 the overhang of a roof, on the only axis it can be, but both walls on th"
+      },
+      {
+       "status": "UNCHECKED",
+       "code": "VIEW_NOT_REGISTERED",
+       "objects": [
+        "frame-asset-gotowy-projekt-dom-w-gozdzikowcach-3-elewa-9a3be616c4"
+       ],
+       "why": "REAR elevation frame-asset-gotowy-projekt-dom-w-gozdzikowcach-3-elewa-9a3be616c4: not registered: nothing on it was compared (no ridge datum to hang it from, and no band of wall across its silhouette to register its walls\u2019 ends on)"
+      },
+      {
+       "status": "UNCHECKED",
+       "code": "VIEW_NOT_REGISTERED",
+       "objects": [
+        "frame-asset-gotowy-projekt-dom-w-gozdzikowcach-3-elewa-9fc0f059cb"
+       ],
+       "why": "SIDE_UNSPECIFIED elevation frame-asset-gotowy-projekt-dom-w-gozdzikowcach-3-elewa-9fc0f059cb: not registered: nothing on it was compared (the silhouette is 41.611111 m across, which is 27.791111 m more than the footprint width \u2014 the overhang of a roof, on the only axis it can be, but both walls on t"
+      },
+      {
+       "status": "UNCHECKED",
+       "code": "VIEW_NOT_REGISTERED",
+       "objects": [
+        "frame-asset-gotowy-projekt-dom-w-gozdzikowcach-3-elewa-df2d450fd1"
+       ],
+       "why": "FRONT elevation frame-asset-gotowy-projekt-dom-w-gozdzikowcach-3-elewa-df2d450fd1: not registered: nothing on it was compared (no ridge datum to hang it from, and no band of wall across its silhouette to register its walls\u2019 ends on)"
+      }
+     ]
+    }
+   },
+   "unchecked": {
+    "byKind": {
+     "ELEVATION": 4,
+     "PERSPECTIVE": 15,
+     "PLAN": 7,
+     "SECTION": 1
+    },
+    "none": 24,
+    "partial": 3,
+    "total": 27
+   }
+  },
+  {
+   "house": "marcowki",
+   "modelHash": "8cbab3cbc15fc2a306942aa600f106ca946803f5790597b9e45698b413a60fb6",
+   "unchanged": {
+    "candidateHash": true,
+    "modelHash": true,
+    "sceneContentHash": true,
+    "sceneSha256": true,
+    "metricEvidenceHash": true
+   },
+   "before": "COMPLETE_WITH_OPEN_QUESTIONS",
+   "technical": {
+    "status": "ERRORS",
+    "errors": 4,
+    "warnings": 40,
+    "byCheck": {
+     "PROGRAM_REFUSALS": "0E/0W",
+     "MODEL_VALIDATION": "0E/0W",
+     "COMPILER": "0E/0W",
+     "CLOSURE": "4E/40W",
+     "REPLAY": "0E/0W"
+    },
+    "firstErrors": [
+     "CLOSURE: EXTERIOR_COPLANAR_DUPLICATE balcony-front-1 + roof-attached-0:fascia-min-z",
+     "CLOSURE: EXTERIOR_GAP ring-main-0-w1-party-attached-0 + slab-main-1",
+     "CLOSURE: EXTERIOR_GAP ring-main-0-w1-party-attached-0 + slab-attached-0-0"
+    ]
+   },
+   "completeness": "COMPLETE_WITH_OPEN_QUESTIONS",
+   "sourceFidelity": "UNCHECKED",
+   "relations": {
+    "R1_ROOF_LAYERS": {
+     "status": "PASS",
+     "counts": {
+      "CONFLICT": 0,
+      "PASS": 1,
+      "UNCHECKED": 0
+     },
+     "nonPass": []
+    },
+    "R3_WALL_INK": {
+     "status": "UNCHECKED",
+     "counts": {
+      "CONFLICT": 0,
+      "PASS": 2,
+      "UNCHECKED": 1
+     },
+     "nonPass": [
+      {
+       "status": "UNCHECKED",
+       "code": "NOTHING_TO_READ",
+       "objects": [
+        "main-iwall-0-z-3"
+       ],
+       "why": "main-iwall-0-z-3 (0.962729 m) is all openings or shorter than its tolerance: no station to read"
+      }
+     ]
+    },
+    "R4_STOREY_OUTLINE": {
+     "status": "PASS",
+     "counts": {
+      "CONFLICT": 0,
+      "PASS": 2,
+      "UNCHECKED": 0
+     },
+     "nonPass": []
+    },
+    "R5_REGISTERED_ELEVATIONS": {
+     "status": "UNCHECKED",
+     "counts": {
+      "CONFLICT": 0,
+      "PASS": 1,
+      "UNCHECKED": 3
+     },
+     "nonPass": [
+      {
+       "status": "UNCHECKED",
+       "code": "DISAGREEMENT_NOT_STABLE",
+       "objects": [
+        "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c"
+       ],
+       "why": "LEFT elevation frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c: 1 of 4 observed checks outside tolerance on 1 feature \u2014 one feature only: named, not a stable disagreement"
+      },
+      {
+       "status": "UNCHECKED",
+       "code": "DISAGREEMENT_NOT_STABLE",
+       "objects": [
+        "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876"
+       ],
+       "why": "REAR elevation frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876: 8 of 27 observed checks outside tolerance on 5 features \u2014 under the third (0.296296) the cross-view summary calls DISAGREES: named, not a stable disagreement"
+      },
+      {
+       "status": "UNCHECKED",
+       "code": "DISAGREEMENT_NOT_STABLE",
+       "objects": [
+        "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4"
+       ],
+       "why": "FRONT elevation frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4: 3 of 29 observed checks outside tolerance on 2 features \u2014 under the third (0.103448) the cross-view summary calls DISAGREES: named, not a stable disagreement"
+      }
+     ]
+    }
+   },
+   "unchecked": {
+    "byKind": {
+     "ELEVATION": 3,
+     "PERSPECTIVE": 4,
+     "PLAN": 7,
+     "SECTION": 1
+    },
+    "none": 8,
+    "partial": 7,
+    "total": 15
+   }
+  },
+  {
+   "house": "ciesz",
+   "modelHash": "bb05006787f861e368a02320472d2f26abe6ba0cf38773fef54408b119f5ad6c",
+   "unchanged": {
+    "candidateHash": true,
+    "modelHash": true,
+    "sceneContentHash": true,
+    "sceneSha256": true,
+    "metricEvidenceHash": true
+   },
+   "before": "COMPLETE_WITH_OPEN_QUESTIONS",
+   "technical": {
+    "status": "VALID",
+    "errors": 0,
+    "warnings": 26,
+    "byCheck": {
+     "PROGRAM_REFUSALS": "0E/0W",
+     "MODEL_VALIDATION": "0E/0W",
+     "COMPILER": "0E/0W",
+     "CLOSURE": "0E/26W",
+     "REPLAY": "0E/0W"
+    },
+    "firstErrors": []
+   },
+   "completeness": "COMPLETE_WITH_OPEN_QUESTIONS",
+   "sourceFidelity": "UNCHECKED",
+   "relations": {
+    "R1_ROOF_LAYERS": {
+     "status": "PASS",
+     "counts": {
+      "CONFLICT": 0,
+      "PASS": 1,
+      "UNCHECKED": 0
+     },
+     "nonPass": []
+    },
+    "R3_WALL_INK": {
+     "status": "UNCHECKED",
+     "counts": {
+      "CONFLICT": 0,
+      "PASS": 1,
+      "UNCHECKED": 1
+     },
+     "nonPass": [
+      {
+       "status": "UNCHECKED",
+       "code": "NOTHING_TO_READ",
+       "objects": [
+        "pocket-main-0-1-back"
+       ],
+       "why": "pocket-main-0-1-back (2.194383 m) is all openings or shorter than its tolerance: no station to read"
+      }
+     ]
+    },
+    "R4_STOREY_OUTLINE": {
+     "status": "PASS",
+     "counts": {
+      "CONFLICT": 0,
+      "PASS": 1,
+      "UNCHECKED": 0
+     },
+     "nonPass": []
+    },
+    "R5_REGISTERED_ELEVATIONS": {
+     "status": "UNCHECKED",
+     "counts": {
+      "CONFLICT": 0,
+      "PASS": 0,
+      "UNCHECKED": 4
+     },
+     "nonPass": [
+      {
+       "status": "UNCHECKED",
+       "code": "VIEW_NOT_REGISTERED",
+       "objects": [
+        "frame-asset-gotowy-projekt-dom-w-cieszyniankach-12-ge-20f0eef8f3"
+       ],
+       "why": "RIGHT elevation frame-asset-gotowy-projekt-dom-w-cieszyniankach-12-ge-20f0eef8f3: not registered: nothing on it was compared (registered on its walls' band it puts the ground at 0.79 m against -0.17 m from the house's other views)"
+      },
+      {
+       "status": "UNCHECKED",
+       "code": "VIEW_PARTLY_REGISTERED",
+       "objects": [
+        "frame-asset-gotowy-projekt-dom-w-cieszyniankach-12-ge-61de9c3488"
+       ],
+       "why": "REAR elevation frame-asset-gotowy-projekt-dom-w-cieszyniankach-12-ge-61de9c3488: registered on its wall band: read for its facade\u2019s openings, never compared for silhouette or heights (on its walls\u2019 band: 685 px across is the 11.66 m walled width (the walls' drawn span under the roof), so 0.017022 m/"
+      },
+      {
+       "status": "UNCHECKED",
+       "code": "VIEW_PARTLY_REGISTERED",
+       "objects": [
+        "frame-asset-gotowy-projekt-dom-w-cieszyniankach-12-ge-85fbca6930"
+       ],
+       "why": "LEFT elevation frame-asset-gotowy-projekt-dom-w-cieszyniankach-12-ge-85fbca6930: registered on its wall band: read for its facade\u2019s openings, never compared for silhouette or heights (on its walls\u2019 band: 971 px across is the 16.60 m walled depth (the walls' drawn span under the roof), so 0.017096 m/"
+      },
+      {
+       "status": "UNCHECKED",
+       "code": "VIEW_PARTLY_REGISTERED",
+       "objects": [
+        "frame-asset-gotowy-projekt-dom-w-cieszyniankach-12-ge-a35814d452"
+       ],
+       "why": "FRONT elevation frame-asset-gotowy-projekt-dom-w-cieszyniankach-12-ge-a35814d452: registered on its wall band: read for its facade\u2019s openings, never compared for silhouette or heights (on its walls\u2019 band: 686 px across is the 11.66 m walled width (the walls' drawn span under the roof), so 0.016997 m"
+      }
+     ]
+    }
+   },
+   "unchecked": {
+    "byKind": {
+     "ELEVATION": 4,
+     "PERSPECTIVE": 18,
+     "PLAN": 4,
+     "SECTION": 1
+    },
+    "none": 23,
+    "partial": 4,
+    "total": 27
+   }
+  },
+  {
+   "house": "rary",
+   "modelHash": "565dcd94be7bccca7f573a491550b623a14c7ae349edfa58916ef71d4fb31fc8",
+   "unchanged": {
+    "candidateHash": true,
+    "modelHash": true,
+    "sceneContentHash": true,
+    "sceneSha256": true,
+    "metricEvidenceHash": true
+   },
+   "before": "COMPLETE",
+   "technical": {
+    "status": "ERRORS",
+    "errors": 2,
+    "warnings": 23,
+    "byCheck": {
+     "PROGRAM_REFUSALS": "0E/0W",
+     "MODEL_VALIDATION": "0E/0W",
+     "COMPILER": "0E/0W",
+     "CLOSURE": "2E/23W",
+     "REPLAY": "0E/0W"
+    },
+    "firstErrors": [
+     "CLOSURE: EXTERIOR_INTERSECTION ring-main-0-w0-1 + roof-attached-0-plane-high",
+     "CLOSURE: EXTERIOR_INTERSECTION ring-main-0-w0-1 + roof-main-plane-low"
+    ]
+   },
+   "completeness": "COMPLETE",
+   "sourceFidelity": "CONFLICT",
+   "relations": {
+    "R1_ROOF_LAYERS": {
+     "status": "PASS",
+     "counts": {
+      "CONFLICT": 0,
+      "PASS": 1,
+      "UNCHECKED": 0
+     },
+     "nonPass": []
+    },
+    "R3_WALL_INK": {
+     "status": "PASS",
+     "counts": {
+      "CONFLICT": 0,
+      "PASS": 1,
+      "UNCHECKED": 0
+     },
+     "nonPass": []
+    },
+    "R4_STOREY_OUTLINE": {
+     "status": "PASS",
+     "counts": {
+      "CONFLICT": 0,
+      "PASS": 1,
+      "UNCHECKED": 0
+     },
+     "nonPass": []
+    },
+    "R5_REGISTERED_ELEVATIONS": {
+     "status": "CONFLICT",
+     "counts": {
+      "CONFLICT": 3,
+      "PASS": 1,
+      "UNCHECKED": 0
+     },
+     "nonPass": [
+      {
+       "status": "CONFLICT",
+       "code": "ELEVATION_DISAGREES",
+       "objects": [
+        "opening-0-west-7-0",
+        "silhouette-left"
+       ],
+       "why": "LEFT elevation frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elew-1417866f23: 3 of 4 observed checks on 2 features stand outside tolerance (worst OPENING_SILL -0.678186 m): the registered view and the model disagree"
+      },
+      {
+       "status": "CONFLICT",
+       "code": "ELEVATION_DISAGREES",
+       "objects": [
+        "feat-roof-main",
+        "opening-0-front-4-0"
+       ],
+       "why": "FRONT elevation frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elew-5de5935285: 6 of 9 observed checks on 2 features stand outside tolerance (worst OPENING_SILL -1.974471 m): the registered view and the model disagree"
+      },
+      {
+       "status": "CONFLICT",
+       "code": "ELEVATION_DISAGREES",
+       "objects": [
+        "feat-roof-main",
+        "opening-0-rear-2-3"
+       ],
+       "why": "REAR elevation frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elew-c383df2964: 7 of 8 observed checks on 2 features stand outside tolerance (worst OPENING_SILL -1.000492 m): the registered view and the model disagree"
+      }
+     ]
+    }
+   },
+   "unchecked": {
+    "byKind": {
+     "PERSPECTIVE": 25,
+     "PLAN": 4,
+     "SECTION": 1
+    },
+    "none": 20,
+    "partial": 10,
+    "total": 30
+   }
+  },
+  {
+   "house": "trytomach",
+   "modelHash": "c639b29d69e43ace4d71f12362ae320d5f6c97703d4bc00e3b93d5d261871dfc",
+   "unchanged": {
+    "candidateHash": true,
+    "modelHash": true,
+    "sceneContentHash": true,
+    "sceneSha256": true,
+    "metricEvidenceHash": true
+   },
+   "before": "COMPLETE_WITH_OPEN_QUESTIONS",
+   "technical": {
+    "status": "ERRORS",
+    "errors": 2,
+    "warnings": 37,
+    "byCheck": {
+     "PROGRAM_REFUSALS": "0E/0W",
+     "MODEL_VALIDATION": "0E/0W",
+     "COMPILER": "0E/0W",
+     "CLOSURE": "2E/37W",
+     "REPLAY": "0E/0W"
+    },
+    "firstErrors": [
+     "CLOSURE: EXTERIOR_INTERSECTION pergola-rear-beam-0 + pergola-rear-post-3",
+     "CLOSURE: EXTERIOR_INTERSECTION pergola-rear-beam-2 + pergola-rear-post-1"
+    ]
+   },
+   "completeness": "COMPLETE_WITH_OPEN_QUESTIONS",
+   "sourceFidelity": "CONFLICT",
+   "relations": {
+    "R1_ROOF_LAYERS": {
+     "status": "PASS",
+     "counts": {
+      "CONFLICT": 0,
+      "PASS": 1,
+      "UNCHECKED": 0
+     },
+     "nonPass": []
+    },
+    "R3_WALL_INK": {
+     "status": "UNCHECKED",
+     "counts": {
+      "CONFLICT": 0,
+      "PASS": 2,
+      "UNCHECKED": 8
+     },
+     "nonPass": [
+      {
+       "status": "UNCHECKED",
+       "code": "NOTHING_TO_READ",
+       "objects": [
+        "main-iwall-0-x-3"
+       ],
+       "why": "main-iwall-0-x-3 (0.405593 m) is all openings or shorter than its tolerance: no station to read"
+      },
+      {
+       "status": "UNCHECKED",
+       "code": "NOTHING_TO_READ",
+       "objects": [
+        "main-iwall-0-x-0"
+       ],
+       "why": "main-iwall-0-x-0 (0.379982 m) is all openings or shorter than its tolerance: no station to read"
+      },
+      {
+       "status": "UNCHECKED",
+       "code": "NOTHING_TO_READ",
+       "objects": [
+        "return-east-1-0"
+       ],
+       "why": "return-east-1-0 (0.224144 m) is all openings or shorter than its tolerance: no station to read"
+      },
+      {
+       "status": "UNCHECKED",
+       "code": "NOTHING_TO_READ",
+       "objects": [
+        "return-east-1-1"
+       ],
+       "why": "return-east-1-1 (0.224144 m) is all openings or shorter than its tolerance: no station to read"
+      },
+      {
+       "status": "UNCHECKED",
+       "code": "NOTHING_TO_READ",
+       "objects": [
+        "return-east-1-2"
+       ],
+       "why": "return-east-1-2 (0.224144 m) is all openings or shorter than its tolerance: no station to read"
+      },
+      {
+       "status": "UNCHECKED",
+       "code": "NOTHING_TO_READ",
+       "objects": [
+        "return-west-1-0"
+       ],
+       "why": "return-west-1-0 (0.234817 m) is all openings or shorter than its tolerance: no station to read"
+      },
+      {
+       "status": "UNCHECKED",
+       "code": "NOTHING_TO_READ",
+       "objects": [
+        "return-west-1-1"
+       ],
+       "why": "return-west-1-1 (0.234817 m) is all openings or shorter than its tolerance: no station to read"
+      },
+      {
+       "status": "UNCHECKED",
+       "code": "NOTHING_TO_READ",
+       "objects": [
+        "return-west-1-2"
+       ],
+       "why": "return-west-1-2 (0.234817 m) is all openings or shorter than its tolerance: no station to read"
+      }
+     ]
+    },
+    "R4_STOREY_OUTLINE": {
+     "status": "PASS",
+     "counts": {
+      "CONFLICT": 0,
+      "PASS": 2,
+      "UNCHECKED": 0
+     },
+     "nonPass": []
+    },
+    "R5_REGISTERED_ELEVATIONS": {
+     "status": "CONFLICT",
+     "counts": {
+      "CONFLICT": 1,
+      "PASS": 0,
+      "UNCHECKED": 3
+     },
+     "nonPass": [
+      {
+       "status": "UNCHECKED",
+       "code": "VIEW_NOT_REGISTERED",
+       "objects": [
+        "frame-asset-gotowy-projekt-dom-w-trytomach-g-elewacja-4db3572da1"
+       ],
+       "why": "LEFT elevation frame-asset-gotowy-projekt-dom-w-trytomach-g-elewacja-4db3572da1: not registered: nothing on it was compared (registered on its walls' band it puts the ground at -0.35 m against 0.47 m from the house's other views)"
+      },
+      {
+       "status": "CONFLICT",
+       "code": "ELEVATION_DISAGREES",
+       "objects": [
+        "feat-roof-main",
+        "silhouette-front"
+       ],
+       "why": "FRONT elevation frame-asset-gotowy-projekt-dom-w-trytomach-g-elewacja-7b061554b1: 4 of 7 observed checks on 2 features stand outside tolerance (worst ROOF_EDGE -0.603589 m): the registered view and the model disagree"
+      },
+      {
+       "status": "UNCHECKED",
+       "code": "VIEW_PARTLY_REGISTERED",
+       "objects": [
+        "frame-asset-gotowy-projekt-dom-w-trytomach-g-elewacja-957bead831"
+       ],
+       "why": "REAR elevation frame-asset-gotowy-projekt-dom-w-trytomach-g-elewacja-957bead831: registered on its wall band: read for its facade\u2019s openings, never compared for silhouette or heights (on its walls\u2019 band: 884 px across is the 12.99 m walled width (the walls' drawn span under the roof), so 0.014694 m/"
+      },
+      {
+       "status": "UNCHECKED",
+       "code": "VIEW_NOT_REGISTERED",
+       "objects": [
+        "frame-asset-gotowy-projekt-dom-w-trytomach-g-elewacja-a91e112fb3"
+       ],
+       "why": "SIDE_UNSPECIFIED elevation frame-asset-gotowy-projekt-dom-w-trytomach-g-elewacja-a91e112fb3: not registered: nothing on it was compared (the silhouette is 19.345603 m across, which is 6.356285 m more than the footprint width \u2014 the overhang of a roof, on the only axis it can be, but both walls on tha"
+      }
+     ]
+    }
+   },
+   "unchecked": {
+    "byKind": {
+     "ELEVATION": 3,
+     "PERSPECTIVE": 8,
+     "PLAN": 7,
+     "SECTION": 1
+    },
+    "none": 15,
+    "partial": 4,
+    "total": 19
+   }
+  },
+  {
+   "house": "arganiach",
+   "modelHash": "d0b13ea16f77224fafaeda762c0077547c25c72a9b79b5a25f5469abcf7dd55e",
+   "unchanged": {
+    "candidateHash": true,
+    "modelHash": true,
+    "sceneContentHash": true,
+    "sceneSha256": true,
+    "metricEvidenceHash": true
+   },
+   "before": "COMPLETE_WITH_OPEN_QUESTIONS",
+   "technical": {
+    "status": "ERRORS",
+    "errors": 3,
+    "warnings": 36,
+    "byCheck": {
+     "PROGRAM_REFUSALS": "0E/0W",
+     "MODEL_VALIDATION": "0E/0W",
+     "COMPILER": "0E/0W",
+     "CLOSURE": "3E/36W",
+     "REPLAY": "0E/0W"
+    },
+    "firstErrors": [
+     "CLOSURE: EXTERIOR_COPLANAR_DUPLICATE ring-attached-0-0-w0 + roof-attached-0",
+     "CLOSURE: EXTERIOR_COPLANAR_DUPLICATE ring-attached-0-0-w1 + roof-attached-0",
+     "CLOSURE: EXTERIOR_COPLANAR_DUPLICATE ring-attached-0-0-w3 + roof-attached-0"
+    ]
+   },
+   "completeness": "COMPLETE_WITH_OPEN_QUESTIONS",
+   "sourceFidelity": "UNCHECKED",
+   "relations": {
+    "R1_ROOF_LAYERS": {
+     "status": "PASS",
+     "counts": {
+      "CONFLICT": 0,
+      "PASS": 1,
+      "UNCHECKED": 0
+     },
+     "nonPass": []
+    },
+    "R3_WALL_INK": {
+     "status": "PASS",
+     "counts": {
+      "CONFLICT": 0,
+      "PASS": 2,
+      "UNCHECKED": 0
+     },
+     "nonPass": []
+    },
+    "R4_STOREY_OUTLINE": {
+     "status": "PASS",
+     "counts": {
+      "CONFLICT": 0,
+      "PASS": 2,
+      "UNCHECKED": 0
+     },
+     "nonPass": []
+    },
+    "R5_REGISTERED_ELEVATIONS": {
+     "status": "UNCHECKED",
+     "counts": {
+      "CONFLICT": 0,
+      "PASS": 0,
+      "UNCHECKED": 4
+     },
+     "nonPass": [
+      {
+       "status": "UNCHECKED",
+       "code": "DISAGREEMENT_NOT_STABLE",
+       "objects": [
+        "frame-asset-gotowy-projekt-dom-w-arganiach-g2e-elewacj-134561073d"
+       ],
+       "why": "REAR elevation frame-asset-gotowy-projekt-dom-w-arganiach-g2e-elewacj-134561073d: 4 of 5 observed checks outside tolerance on 1 feature \u2014 one feature only: named, not a stable disagreement"
+      },
+      {
+       "status": "UNCHECKED",
+       "code": "VIEW_NOT_REGISTERED",
+       "objects": [
+        "frame-asset-gotowy-projekt-dom-w-arganiach-g2e-elewacj-15d78fb30b"
+       ],
+       "why": "SIDE_UNSPECIFIED elevation frame-asset-gotowy-projekt-dom-w-arganiach-g2e-elewacj-15d78fb30b: not registered: nothing on it was compared (the silhouette is 8.850318 m across, shorter than either wall of a 14.2 by 12.321694 m building)"
+      },
+      {
+       "status": "UNCHECKED",
+       "code": "VIEW_NOT_REGISTERED",
+       "objects": [
+        "frame-asset-gotowy-projekt-dom-w-arganiach-g2e-elewacj-3fca1cf71a"
+       ],
+       "why": "SIDE_UNSPECIFIED elevation frame-asset-gotowy-projekt-dom-w-arganiach-g2e-elewacj-3fca1cf71a: not registered: nothing on it was compared (the silhouette is 16.494603 m across, which is 2.294603 m more than the footprint width \u2014 the overhang of a roof, on the only axis it can be, but both walls on th"
+      },
+      {
+       "status": "UNCHECKED",
+       "code": "DISAGREEMENT_NOT_STABLE",
+       "objects": [
+        "frame-asset-gotowy-projekt-dom-w-arganiach-g2e-elewacj-42881dfc86"
+       ],
+       "why": "FRONT elevation frame-asset-gotowy-projekt-dom-w-arganiach-g2e-elewacj-42881dfc86: 3 of 5 observed checks outside tolerance on 1 feature \u2014 one feature only: named, not a stable disagreement"
+      }
+     ]
+    }
+   },
+   "unchecked": {
+    "byKind": {
+     "ELEVATION": 4,
+     "PERSPECTIVE": 16,
+     "PLAN": 7,
+     "SECTION": 1
+    },
+    "none": 19,
+    "partial": 9,
+    "total": 28
+   }
+  },
+  {
+   "house": "sasankach3",
+   "modelHash": "3a3465ec2dd967cca439e154cb70801a0a33bc6cbe592a7d771e8a529236dce2",
+   "unchanged": {
+    "candidateHash": true,
+    "modelHash": true,
+    "sceneContentHash": true,
+    "sceneSha256": true,
+    "metricEvidenceHash": true
+   },
+   "before": "COMPLETE_WITH_OPEN_QUESTIONS",
+   "technical": {
+    "status": "ERRORS",
+    "errors": 1,
+    "warnings": 33,
+    "byCheck": {
+     "PROGRAM_REFUSALS": "0E/0W",
+     "MODEL_VALIDATION": "0E/0W",
+     "COMPILER": "0E/0W",
+     "CLOSURE": "1E/33W",
+     "REPLAY": "0E/0W"
+    },
+    "firstErrors": [
+     "CLOSURE: EXTERIOR_INTERSECTION ring-main-1-w1-party-attached-0 + roof-main-plane-high-1"
+    ]
+   },
+   "completeness": "COMPLETE_WITH_OPEN_QUESTIONS",
+   "sourceFidelity": "CONFLICT",
+   "relations": {
+    "R1_ROOF_LAYERS": {
+     "status": "PASS",
+     "counts": {
+      "CONFLICT": 0,
+      "PASS": 1,
+      "UNCHECKED": 0
+     },
+     "nonPass": []
+    },
+    "R3_WALL_INK": {
+     "status": "UNCHECKED",
+     "counts": {
+      "CONFLICT": 0,
+      "PASS": 2,
+      "UNCHECKED": 2
+     },
+     "nonPass": [
+      {
+       "status": "UNCHECKED",
+       "code": "NOTHING_TO_READ",
+       "objects": [
+        "ring-attached-0-0-w0"
+       ],
+       "why": "ring-attached-0-0-w0 (3.85 m) is all openings or shorter than its tolerance: no station to read"
+      },
+      {
+       "status": "UNCHECKED",
+       "code": "NOTHING_TO_READ",
+       "objects": [
+        "main-iwall-1-z-0-b"
+       ],
+       "why": "main-iwall-1-z-0-b (0.386391 m) is all openings or shorter than its tolerance: no station to read"
+      }
+     ]
+    },
+    "R4_STOREY_OUTLINE": {
+     "status": "PASS",
+     "counts": {
+      "CONFLICT": 0,
+      "PASS": 2,
+      "UNCHECKED": 0
+     },
+     "nonPass": []
+    },
+    "R5_REGISTERED_ELEVATIONS": {
+     "status": "CONFLICT",
+     "counts": {
+      "CONFLICT": 2,
+      "PASS": 0,
+      "UNCHECKED": 2
+     },
+     "nonPass": [
+      {
+       "status": "UNCHECKED",
+       "code": "VIEW_NOT_REGISTERED",
+       "objects": [
+        "frame-asset-gotowy-projekt-dom-w-sasankach-3-g-elewacj-1c45ae540e"
+       ],
+       "why": "SIDE_UNSPECIFIED elevation frame-asset-gotowy-projekt-dom-w-sasankach-3-g-elewacj-1c45ae540e: not registered: nothing on it was compared (the silhouette is 12.257701 m across, which is 0.657701 m more than the footprint width \u2014 the overhang of a roof, on the only axis it can be, but both walls on th"
+      },
+      {
+       "status": "UNCHECKED",
+       "code": "VIEW_NOT_REGISTERED",
+       "objects": [
+        "frame-asset-gotowy-projekt-dom-w-sasankach-3-g-elewacj-9b7902ddb2"
+       ],
+       "why": "SIDE_UNSPECIFIED elevation frame-asset-gotowy-projekt-dom-w-sasankach-3-g-elewacj-9b7902ddb2: not registered: nothing on it was compared (the silhouette is 12.147977 m across, which is 0.547977 m more than the footprint width \u2014 the overhang of a roof, on the only axis it can be, but both walls on th"
+      },
+      {
+       "status": "CONFLICT",
+       "code": "ELEVATION_DISAGREES",
+       "objects": [
+        "feat-balcony-front-1-proud",
+        "feat-roof-main"
+       ],
+       "why": "FRONT elevation frame-asset-gotowy-projekt-dom-w-sasankach-3-g-elewacj-a66bd73cb2: 8 of 11 observed checks on 2 features stand outside tolerance (worst ROOF_EDGE -0.50104 m): the registered view and the model disagree"
+      },
+      {
+       "status": "CONFLICT",
+       "code": "ELEVATION_DISAGREES",
+       "objects": [
+        "feat-balcony-rear-1-proud",
+        "feat-roof-main",
+        "opening-0-rear-10-0",
+        "opening-0-rear-10-1"
+       ],
+       "why": "REAR elevation frame-asset-gotowy-projekt-dom-w-sasankach-3-g-elewacj-e411b09da9: 8 of 18 observed checks on 4 features stand outside tolerance (worst ROOF_EDGE -0.594864 m): the registered view and the model disagree"
+      }
+     ]
+    }
+   },
+   "unchecked": {
+    "byKind": {
+     "ELEVATION": 2,
+     "PERSPECTIVE": 10,
+     "PLAN": 7,
+     "SECTION": 1
+    },
+    "none": 16,
+    "partial": 4,
+    "total": 20
+   }
+  }
+ ]
+}

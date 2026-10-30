@@ -438,7 +438,7 @@
     <string name="analyzer_result_open_questions">Model zbudowany, z otwartymi pytaniami</string>
     <!-- N7-PATCH-04A: the source sheet, for a stored record without a completeness verdict (an older analyzer) -->
     <string name="house_model_outcome">Stan modelu</string>
-    <string name="analyzer_result_open_questions_body">Analiza zbudowała cały odczytany model, ale części rysunku nie rozstrzygnęła. Co pozostało otwarte, opisuje sekcja „Kompletność modelu” niżej.</string>
+    <string name="analyzer_result_open_questions_body">Analiza zbudowała cały odczytany model, ale części rysunku nie rozstrzygnęła. Co pozostało otwarte, opisują sekcje „Ocena modelu” i „Kompletność odczytu (dekompozycji)” niżej.</string>
     <!-- N7-P1: the last valid model when a later object was refused; never called a complete reconstruction -->
     <string name="analyzer_result_partial">Model częściowy 3D</string>
     <string name="analyzer_result_partial_body">To nie jest pełna rekonstrukcja. Model zatrzymał się na jednym elemencie; wszystko, co zbudowano przed nim, jest zachowane i sprawdzone, a pominięte elementy są wymienione niżej.</string>
@@ -463,7 +463,26 @@
     <string name="partial_ring_removed">Model częściowy pominął tę bryłę.</string>
     <string name="partial_ring_narrowing_refused">Uzgadnianie nie zwęziło pierścienia z %1$s m do %2$s m (jego ściany potrzebują %3$s m); kolizja z %4$s pozostaje nierozwiązana.</string>
     <string name="partial_layout_blocking">Układ konstrukcyjny z nierozstrzygniętym błędem blokującym</string>
-    <string name="completeness_title">Kompletność modelu</string>
+    <!-- N9-01: three axes of the model, kept apart -->
+    <string name="assessment_title">Ocena modelu: trzy osie</string>
+    <string name="assessment_technical_valid">Poprawność techniczna: bez błędów</string>
+    <string name="assessment_technical_errors">Poprawność techniczna: błędy techniczne: %1$d</string>
+    <string name="assessment_technical_check">%1$s: %2$d × %3$s</string>
+    <string name="assessment_technical_note">0 błędów technicznych to nie dowód zgodności z projektem.</string>
+    <string name="assessment_completeness">Kompletność odczytu (dekompozycji): %1$s</string>
+    <string name="assessment_completeness_note">Mówi, ile własnego odczytu analizatora zawiera model — nie, czy model zgadza się z rysunkami.</string>
+    <string name="assessment_fidelity_pass">Zgodność ze źródłem: wszystkie relacje zgodne</string>
+    <string name="assessment_fidelity_conflict">Zgodność ze źródłem: konflikty z rysunkami: %1$d</string>
+    <string name="assessment_fidelity_unchecked">Zgodność ze źródłem: niesprawdzona w całości — brak konfliktu nie oznacza zgodności</string>
+    <string name="assessment_relation">%1$s: %2$s (zgodne %3$d · konflikt %4$d · niesprawdzone %5$d)</string>
+    <string name="assessment_more">…i jeszcze %1$d</string>
+    <string name="assessment_unchecked">Niesprawdzone w źródle: %1$d (bez porównania %2$d · częściowo %3$d)</string>
+    <string name="assessment_preview_kept">Konflikt ze źródłem nie wyłącza podglądu 3D: model jest dostępny z tym ostrzeżeniem.</string>
+    <string name="assessment_not_assessed">nieoceniona</string>
+    <string name="assessment_status_pass">zgodne</string>
+    <string name="assessment_status_conflict">konflikt</string>
+    <string name="assessment_status_unchecked">niesprawdzone</string>
+    <string name="completeness_title">Kompletność odczytu (dekompozycji)</string>
     <string name="completeness_complete">Kompletny: nic nie zostało nierozstrzygnięte.</string>
     <string name="completeness_open_questions">Zbudowany w całości, z otwartymi pytaniami.</string>
     <string name="completeness_partial">Częściowy: czegoś brakuje albo coś pozostało sprzeczne.</string>

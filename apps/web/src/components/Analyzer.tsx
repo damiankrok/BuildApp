@@ -3,6 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useStore } from '../use-store.js'
 import { ANALYSIS_STAGE_IDS, AnalyzerClientError, createAnalyzerClient, describeFailure, isTerminalStatus, normalizeServiceUrl } from '../analyzer/client.js'
 import type { AnalysisSummary, JobStatus } from '../analyzer/client.js'
+import { assessmentLines } from '../analyzer/assessment.js'
 
 /**
  * The Analyze panel: paste a project page, watch the analyzer service work
@@ -273,6 +274,39 @@ export function Analyzer(): JSX.Element {
               {visionText(summary.vision.mode)}
             </span>
           </div>
+          {summary.assessment ? (
+            // N9-01: three axes on their own lines; none of them withholds the model
+            <div className="analyzer-assessment" data-testid="analyzer-assessment">
+              <div className="kv">
+                {assessmentLines(summary.assessment).map((l) => (
+                  <span key={l.axis} style={{ display: 'contents' }}>
+                    <span className="k">{l.label}</span>
+                    <span className="v" data-testid={`analyzer-axis-${l.axis.toLowerCase()}`} data-state={l.state}>
+                      {l.value}
+                    </span>
+                  </span>
+                ))}
+              </div>
+              <details data-testid="analyzer-assessment-details">
+                <summary>why</summary>
+                {assessmentLines(summary.assessment)
+                  .filter((l) => l.detail.length > 0)
+                  .map((l) => (
+                    <div key={l.axis}>
+                      <div className="analyzer-label">{l.label}</div>
+                      <ul>
+                        {l.detail.slice(0, 12).map((d) => (
+                          <li key={d}>{d}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+              </details>
+              <div className="analyzer-detail" data-testid="analyzer-preview-kept">
+                A conflict with the drawings does not withhold the model: it opens below, with these warnings.
+              </div>
+            </div>
+          ) : null}
           <div className="actions">
             <button data-testid="analyzer-open" onClick={() => void openModel()}>
               Open model

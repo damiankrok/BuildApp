@@ -1,0 +1,101 @@
+{
+  "jobId": "0123456789abcdef0123456789abcdef",
+  "status": "COMPLETED",
+  "progress": 1,
+  "stage": null,
+  "stages": [
+    {
+      "id": "ACQUIRING_SOURCE",
+      "label": "Fetching the project page and its drawings",
+      "state": "DONE",
+      "startedAt": "2026-01-01T00:00:00.000Z",
+      "completedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "CLASSIFYING_SOURCES",
+      "label": "Sorting plans, elevations, sections and renders",
+      "state": "DONE",
+      "startedAt": "2026-01-01T00:00:00.000Z",
+      "completedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "EXTRACTING_OBSERVATIONS",
+      "label": "Reading the drawings",
+      "state": "DONE",
+      "startedAt": "2026-01-01T00:00:00.000Z",
+      "completedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "REGISTERING_VIEWS",
+      "label": "Registering the views to one frame",
+      "state": "DONE",
+      "startedAt": "2026-01-01T00:00:00.000Z",
+      "completedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "SOLVING_TOPOLOGY",
+      "label": "Solving bodies, roof, recesses, stair and rooms",
+      "state": "DONE",
+      "startedAt": "2026-01-01T00:00:00.000Z",
+      "completedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "SOLVING_METRICS",
+      "label": "Sizing openings, roof details and facade assemblies",
+      "state": "DONE",
+      "startedAt": "2026-01-01T00:00:00.000Z",
+      "completedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "BUILDING_MODEL",
+      "label": "Building and verifying the model",
+      "state": "DONE",
+      "startedAt": "2026-01-01T00:00:00.000Z",
+      "completedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "COMPILING_SCENE",
+      "label": "Compiling the 3D scene",
+      "state": "DONE",
+      "startedAt": "2026-01-01T00:00:00.000Z",
+      "completedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "VERIFYING",
+      "label": "Checking replay, hashes and joints",
+      "state": "DONE",
+      "startedAt": "2026-01-01T00:00:00.000Z",
+      "completedAt": "2026-01-01T00:00:00.000Z"
+    }
+  ],
+  "sourceUrl": "https://drawings.synthetic-publisher.test/projects/larchfield-lf01",
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "updatedAt": "2026-01-01T00:00:00.000Z",
+  "startedAt": "2026-01-01T00:00:00.000Z",
+  "completedAt": "2026-01-01T00:00:00.000Z",
+  "error": null,
+  "result": {
+    "title": "Larchfield",
+    "label": "Larchfield (analysis)",
+    "candidateHash": "39b1a85d428ab4597106e245090f7147a2d2b32110a725dcb9d35a10fd994dbb",
+    "modelHash": "18cb69860785d3b5dc6b9bda0933f051f9b2b99a7318bad430f30cce163f47ec",
+    "sceneSha256": "ac79ef364151e73fb9c5935e624d5c0363a4fedc74c15e30a3447bd32cd9d2e3",
+    "sceneContentHash": "2319e7524ef40eb5bdecc732ee46d87286efa9a97fb48376034a3571c13400cc",
+    "sceneBytes": 121022,
+    "quality": {
+      "L0": 0,
+      "L1": 18,
+      "L2": 4
+    },
+    "unresolved": 7,
+    "warnings": 2,
+    "vision": "DETERMINISTIC_ONLY"
+  },
+  "links": {
+    "self": "/v1/analyses/0123456789abcdef0123456789abcdef",
+    "result": "/v1/analyses/0123456789abcdef0123456789abcdef/result",
+    "scene": "/v1/analyses/0123456789abcdef0123456789abcdef/scene",
+    "model": "/v1/analyses/0123456789abcdef0123456789abcdef/model",
+    "candidate": "/v1/analyses/0123456789abcdef0123456789abcdef/candidate"
+  }
+}

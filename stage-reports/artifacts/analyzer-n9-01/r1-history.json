@@ -1,0 +1,147 @@
+[
+ {
+  "label": "sasanki-before-N8-03C",
+  "modelId": "m-analysis-mb292397cb1840",
+  "schemaVersion": "1.7.0",
+  "status": "CONFLICT",
+  "counts": {
+   "PASS": 0,
+   "CONFLICT": 2,
+   "UNCHECKED": 0
+  },
+  "items": [
+   {
+    "status": "CONFLICT",
+    "code": "ROOF_INSIDE_ROOF",
+    "objects": [
+     "roof-attached-0-plane-low",
+     "roof-main"
+    ],
+    "measured": {
+     "doubleRoofM2": 4.35,
+     "rawOverlapM2": 7.8,
+     "maxGapM": 3.05402,
+     "layeredM2": 0
+    },
+    "why": "roof-main stands inside the walled storey lvl-1 under roof-attached-0-plane-low, above that storey's floor, over 4.35 m²: a roof inside the volume another roof covers"
+   },
+   {
+    "status": "CONFLICT",
+    "code": "ROOF_INSIDE_ROOF",
+    "objects": [
+     "roof-attached-0-plane-high",
+     "roof-main"
+    ],
+    "measured": {
+     "doubleRoofM2": 4.06,
+     "rawOverlapM2": 7.8,
+     "maxGapM": 3.00402,
+     "layeredM2": 0
+    },
+    "why": "roof-main stands inside the walled storey lvl-1 under roof-attached-0-plane-high, above that storey's floor, over 4.06 m²: a roof inside the volume another roof covers"
+   }
+  ]
+ },
+ {
+  "label": "rarytasy-before-N8-03C",
+  "modelId": "m-analysis-m84f2903cb8e14",
+  "schemaVersion": "1.7.0",
+  "status": "CONFLICT",
+  "counts": {
+   "PASS": 0,
+   "CONFLICT": 2,
+   "UNCHECKED": 0
+  },
+  "items": [
+   {
+    "status": "CONFLICT",
+    "code": "ROOF_INSIDE_ROOF",
+    "objects": [
+     "roof-attached-0-plane-low",
+     "roof-main"
+    ],
+    "measured": {
+     "doubleRoofM2": 2.53,
+     "rawOverlapM2": 5.95,
+     "maxGapM": 1.378826,
+     "layeredM2": 0
+    },
+    "why": "roof-main stands inside the walled storey lvl-0 under roof-attached-0-plane-low, above that storey's floor, over 2.53 m²: a roof inside the volume another roof covers"
+   },
+   {
+    "status": "CONFLICT",
+    "code": "ROOF_INSIDE_ROOF",
+    "objects": [
+     "roof-attached-0-plane-high",
+     "roof-main"
+    ],
+    "measured": {
+     "doubleRoofM2": 1.35,
+     "rawOverlapM2": 5.5,
+     "maxGapM": 1.356331,
+     "layeredM2": 0
+    },
+    "why": "roof-main stands inside the walled storey lvl-0 under roof-attached-0-plane-high, above that storey's floor, over 1.35 m²: a roof inside the volume another roof covers"
+   }
+  ]
+ },
+ {
+  "label": "sasanki-today",
+  "modelId": "m-analysis-mb292397cb1840",
+  "schemaVersion": "1.7.0",
+  "status": "PASS",
+  "counts": {
+   "PASS": 1,
+   "CONFLICT": 0,
+   "UNCHECKED": 0
+  },
+  "items": [
+   {
+    "status": "PASS",
+    "code": "SINGLE_LAYER",
+    "objects": [
+     "roof-attached-0-plane-high",
+     "roof-attached-0-plane-low",
+     "roof-main-plane-high-0",
+     "roof-main-plane-high-1",
+     "roof-main-plane-low"
+    ],
+    "measured": {
+     "plates": 5,
+     "doubleRoofM2": 0,
+     "nearEdgeOverlapM2": 0.03
+    },
+    "why": "5 roof plates; no vertical ray meets two of them apart from their shared edges"
+   }
+  ]
+ },
+ {
+  "label": "rarytasy-today",
+  "modelId": "m-analysis-m84f2903cb8e14",
+  "schemaVersion": "1.7.0",
+  "status": "PASS",
+  "counts": {
+   "PASS": 1,
+   "CONFLICT": 0,
+   "UNCHECKED": 0
+  },
+  "items": [
+   {
+    "status": "PASS",
+    "code": "SINGLE_LAYER",
+    "objects": [
+     "roof-attached-0-plane-high",
+     "roof-attached-0-plane-low",
+     "roof-main-plane-high",
+     "roof-main-plane-low"
+    ],
+    "measured": {
+     "plates": 4,
+     "doubleRoofM2": 0,
+     "nearEdgeOverlapM2": 0
+    },
+    "why": "4 roof plates; no vertical ray meets two of them apart from their shared edges"
+   }
+  ]
+ }
+]

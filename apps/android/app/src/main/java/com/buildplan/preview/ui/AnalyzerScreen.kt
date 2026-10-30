@@ -83,6 +83,7 @@ import com.buildplan.preview.analyzer.StageRow
 import com.buildplan.preview.scene.AnalysisOrigin
 import com.buildplan.preview.scene.PreviewOutcome
 import com.buildplan.preview.scene.ModelCompleteness
+import com.buildplan.preview.analyzer.ModelAssessment
 import com.buildplan.preview.analyzer.StageState
 import com.buildplan.preview.analyzer.LivenessTracker
 import com.buildplan.preview.analyzer.Liveness
@@ -658,6 +659,8 @@ private fun Result(summary: AnalysisSummary, entry: DownloadedSceneEntry, local:
             Body(stringResource(if (partial) R.string.analyzer_result_partial_body else R.string.analyzer_result_limited_body))
         }
         if (headline == ResultHeadline.OPEN_QUESTIONS) Body(stringResource(R.string.analyzer_result_open_questions_body))
+        // N9-01: the three axes, apart, before anything else about the model; none of them withholds the 3D view
+        summary.assessment?.let { AssessmentDetails(it) }
         // N7-FIX-04 follow-up: the completeness verdict is shown with every result that carries one, not only a partial one
         if (summary.preview.hasDetails) PreviewOutcomeDetails(summary.preview)
         InkButton(stringResource(if (partial) R.string.analyzer_open_partial_3d else R.string.house_open_3d), onClick = onOpen, icon = ShellIcons.cube, modifier = Modifier.fillMaxWidth())
@@ -680,7 +683,12 @@ internal enum class ResultHeadline { PARTIAL, LIMITED, OPEN_QUESTIONS, READY }
 internal fun resultHeadline(summary: AnalysisSummary): ResultHeadline = when {
     summary.preview.isPartial -> ResultHeadline.PARTIAL
     summary.unresolved.isNotEmpty() || summary.limitingWarnings.isNotEmpty() -> ResultHeadline.LIMITED
-    else -> outcomeHeadline(summary.preview) ?: ResultHeadline.READY
+    // N9-01: a technical error or a conflict with the drawings is at least limited, whatever the completeness says
+    summary.assessment?.let { it.hasTechnicalErrors || it.hasConflicts } == true -> ResultHeadline.LIMITED
+    else -> (outcomeHeadline(summary.preview) ?: ResultHeadline.READY).let { h ->
+        // N9-01: what no relation compared is not agreement — a model is "ready" only when the drawings were held against it
+        if (h == ResultHeadline.READY && summary.assessment != null && summary.assessment.sourceFidelity.status != ModelAssessment.PASS) ResultHeadline.OPEN_QUESTIONS else h
+    }
 }
 
 /**
@@ -805,6 +813,59 @@ internal fun PreviewOutcomeDetails(preview: PreviewOutcome) {
             }
         }
     }
+}
+
+/**
+ * N9-01: technical validity, reading completeness and fidelity to the drawings, each said on its own line and never
+ * folded into one verdict. UNCHECKED is said as unchecked, not as a pass; a conflict is named with its reason and the
+ * line below it says the 3D model stays available.
+ */
+@Composable
+internal fun AssessmentDetails(a: ModelAssessment) {
+    Section(stringResource(R.string.assessment_title)) {
+        val t = a.technicalValidity
+        Text(
+            if (t.status == ModelAssessment.VALID) stringResource(R.string.assessment_technical_valid) else stringResource(R.string.assessment_technical_errors, t.errors),
+            style = MaterialTheme.typography.bodyMedium,
+            color = Palette.Ink,
+        )
+        for (c in t.checks.filter { it.errors > 0 }) StatusText(stringResource(R.string.assessment_technical_check, c.check, c.errors, c.findings.firstOrNull { it.severity == "ERROR" }?.code.orEmpty()))
+        StatusText(stringResource(R.string.assessment_technical_note))
+        Text(stringResource(R.string.assessment_completeness, completenessText(a.decompositionCompleteness.verdict)), style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
+        StatusText(stringResource(R.string.assessment_completeness_note))
+        val f = a.sourceFidelity
+        Text(
+            when (f.status) {
+                ModelAssessment.CONFLICT -> stringResource(R.string.assessment_fidelity_conflict, f.conflicts.size)
+                ModelAssessment.PASS -> stringResource(R.string.assessment_fidelity_pass)
+                else -> stringResource(R.string.assessment_fidelity_unchecked)
+            },
+            style = MaterialTheme.typography.bodyMedium,
+            color = Palette.Ink,
+        )
+        for (r in f.relations) StatusText(stringResource(R.string.assessment_relation, r.id, statusText(r.status), r.counts.pass, r.counts.conflict, r.counts.unchecked))
+        for (c in f.conflicts.take(6)) StatusText(c)
+        if (f.conflicts.size > 6) StatusText(stringResource(R.string.assessment_more, f.conflicts.size - 6))
+        val u = a.sourceUnchecked.counts
+        Text(stringResource(R.string.assessment_unchecked, u.total, u.none, u.partial), style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
+        for (i in a.sourceUnchecked.items.filter { it.kind != "PERSPECTIVE" }.take(6)) StatusText("${i.kind} · ${i.what}: ${i.why}")
+        StatusText(stringResource(R.string.assessment_preview_kept))
+    }
+}
+
+@Composable
+private fun completenessText(verdict: String): String = when (verdict) {
+    ModelCompleteness.COMPLETE -> stringResource(R.string.completeness_complete)
+    ModelCompleteness.COMPLETE_WITH_OPEN_QUESTIONS -> stringResource(R.string.completeness_open_questions)
+    ModelCompleteness.PARTIAL -> stringResource(R.string.completeness_partial)
+    else -> stringResource(R.string.assessment_not_assessed)
+}
+
+@Composable
+private fun statusText(status: String): String = when (status) {
+    ModelAssessment.PASS -> stringResource(R.string.assessment_status_pass)
+    ModelAssessment.CONFLICT -> stringResource(R.string.assessment_status_conflict)
+    else -> stringResource(R.string.assessment_status_unchecked)
 }
 
 /** Every diagnostic as labelled rows. Never raw JSON. Shared with the source sheet. */

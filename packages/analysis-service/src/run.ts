@@ -17,6 +17,7 @@
 import { stableJson } from '@buildapp/source-common'
 import type { Checkpoint } from '@buildapp/source-common'
 import { createCheckpoint } from './checkpoint.js'
+import { assessModel } from './assessment/index.js'
 import type { AnalysisPhaseId, AnalysisTelemetry, PhaseStats } from './checkpoint.js'
 import { SourcePackageSchema, acquireSourcePackage, decodeImage, publishedSpecificationsHash, selectedVariant } from '@buildapp/source-package'
 import type { FetchDeps, FetchPolicy, SourceAdapter, SourceByteCache, SourcePackage } from '@buildapp/source-package'
@@ -46,7 +47,7 @@ import type { LinkAnalysisResult, RecogniserSummary, VisionMode } from './result
 import { warningsOf } from './warnings.js'
 import { previewOf, sourceBasisOf } from './preview.js'
 
-export const ANALYSIS_SERVICE_VERSION = '1.2.0' as const
+export const ANALYSIS_SERVICE_VERSION = '1.3.0' as const
 
 /** What to analyse: a live URL, or a package (and optionally its graph) sealed earlier. */
 export type AnalysisInput = { kind: 'URL'; url: string } | { kind: 'PACKAGE'; pkg: SourcePackage; graph?: SourceObservationGraph }
@@ -506,6 +507,11 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
       ...(reconstruction.partialPreview ? { partialPreview: { failure: reconstruction.partialPreview.failures[0], missing: reconstruction.partialPreview.skipped.filter((x) => x.type !== 'setEvidence').length, basis: reconstruction.partialPreview.basis, ...(reconstruction.partialPreview.missingBodies ? { missingBodies: reconstruction.partialPreview.missingBodies.map((b) => b.id) } : {}), ...(reconstruction.partialPreview.layoutBlocking ? { layoutBlocking: reconstruction.partialPreview.layoutBlocking.map((b) => b.code) } : {}) } } : {}),
       ...(reconstruction.heights.measured ? {} : { heightAssumedM: reconstruction.heights.assumedStoreyHeightM }),
     })
+    // N9-01: three axes on the delivered model and its compiled scene — technical validity, the solver's own
+    // completeness unchanged, and the model held against the drawings — with what no relation compared.
+    checkpoint.tick({ subphase: { id: 'ASSESSMENT', label: 'holding the model against the drawings' } })
+    const assessment = assessModel({ model, scene, closure, reconstruction, frames: graph.coordinateFrames, raster })
+    trace.record('VERIFYING', 'ASSESSMENT', 'PASSED', { technicalErrors: assessment.technicalValidity.errors, conflicts: assessment.sourceFidelity.conflicts.length, unchecked: assessment.sourceUnchecked.counts.total })
     const sourceBasis = sourceBasisOf(pkg, reconstruction.planDiagnostics)
     const preview = previewOf({ model, ...(reconstruction.partialPreview ? { partial: reconstruction.partialPreview } : {}), heights: reconstruction.heights, source: sourceBasis, ...(reconstruction.roofDatum ? { approximateRoofDatum: reconstruction.roofDatum } : {}), completeness: reconstruction.modelCompleteness })
 
@@ -563,6 +569,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
         residualsOutsideTolerance: outside,
         closure: { exteriorErrors, exteriorFindings: closure.metrics.exteriorFindingCount, interiorFindings: closure.metrics.interiorFindingCount },
       },
+      assessment,
       analyzer: { service: ANALYSIS_SERVICE_VERSION, solver: SOLVER_V2_VERSION },
       startedAt,
       completedAt: now().toISOString(),

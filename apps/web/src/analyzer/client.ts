@@ -44,6 +44,8 @@ export type JobStatus = {
   } | null
 }
 
+import type { AssessmentView } from './assessment.js'
+
 export type AnalysisSummary = {
   title: string
   label: string
@@ -64,6 +66,8 @@ export type AnalysisSummary = {
   warnings: string[]
   vision: { mode: string; provider: string | null }
   verification: { replay: string; residuals: number; residualsOutsideTolerance: number }
+  /** N9-01: technical validity, reading completeness and fidelity to the drawings, apart; absent from an older service. */
+  assessment?: AssessmentView
   completedAt: string
 }
 

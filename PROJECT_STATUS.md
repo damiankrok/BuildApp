@@ -2932,3 +2932,19 @@ unattached, no house PARTIAL, Rarytasy COMPLETE with 4/4 DISAGREES. Schema 1.7.0
 inputs, candidates replay; the analyzer-contract fixtures are stale since solver 2.3.0 (additive changes only, not
 refreshed). Proposal for the owner's decision (not started): N9-01 technical/fidelity split, SOURCE_UNCHECKED budget,
 and three relations (single roof layer, wall ink support, storey outline).
+
+## Systemowy werdykt jakości modelu (STAGE BUILDPLAN N9-01)
+
+Status: **DONE — diagnostyka, bez zmian geometrii** (baza `3a625f1`; solver 2.17.0, model 1.7.0, czytnik 1.5.0
+bez zmian; usługa analizy 1.3.0). Report `stage-reports/STAGE_BUILDPLAN_N9_01_SOURCE_FIDELITY_GATE.md`, artefakty
+`stage-reports/artifacts/analyzer-n9-01/`. Every run now returns `assessment` on three axes kept apart: technical
+validity (program refusals, re-validation, compiler diagnostics, exterior joint errors, replay), the unchanged
+decomposition completeness (labelled "reading completeness" in the UI) and source fidelity — relations R1 roof inside
+roof (compiled geometry), R3 model walls on the plan's ink, R4 drawn storey outline beyond the modelled one, R5
+registered elevations (stable disagreement, model-anchored agreement) — each PASS / CONFLICT / UNCHECKED with its
+measurement and tolerance, plus a SOURCE_UNCHECKED budget. A conflict never withdraws the 3D model. 8 houses through
+production `runAnalysis`: candidate, model and scene hashes identical to the base; Rarytasy (COMPLETE) has 3 elevation
+conflicts, Trytomach 1, Sasanki 2; R1/R3/R4 no conflict today; R1 reports 15.60 m² / 11.45 m² of double roof on the
+pre-N8-03C models. Web panel and Android result screen show the three axes; reviewed contract snapshot
+`analyzer-contract-current/` (legacy 2.3.0 kept), Kotlin JVM contract tests pass; APK and device NOT_RUN; false-alarm
+rate on a real holdout NOT_MEASURED.

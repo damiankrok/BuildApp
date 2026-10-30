@@ -1,0 +1,820 @@
+{
+  "schema": "buildapp.link-analysis-result",
+  "schemaVersion": "1.0.0",
+  "jobId": "0123456789abcdef0123456789abcdef",
+  "sourceUrl": "https://drawings.synthetic-publisher.test/projects/larchfield-lf01",
+  "canonicalUrl": "https://drawings.synthetic-publisher.test/projects/larchfield-lf01",
+  "title": "Larchfield",
+  "label": "Larchfield (analysis)",
+  "modelId": "m-analysis-larchfield-lf01",
+  "publisher": "synthetic-publisher",
+  "adapter": {
+    "id": "synthetic-publisher",
+    "version": "1"
+  },
+  "sourcePackageId": "src-larchfield-lf01-26525596d2",
+  "sourcePackageHash": "4e40736479d51c0e42b2ac5b766c070d28204701cc2fb0850134ff974f7cfe8b",
+  "observationGraphHash": "5f377e03bdfa9c88f3e147564d8f990615ffb0880ffac4d388c0d3687bd245c4",
+  "metricEvidenceHash": "6e1fb29833e729f6a2d26540825e43c3799f587e1b2bb77e72cd58dfd550d870",
+  "candidateHash": "39b1a85d428ab4597106e245090f7147a2d2b32110a725dcb9d35a10fd994dbb",
+  "modelHash": "18cb69860785d3b5dc6b9bda0933f051f9b2b99a7318bad430f30cce163f47ec",
+  "modelSha256": "18cb69860785d3b5dc6b9bda0933f051f9b2b99a7318bad430f30cce163f47ec",
+  "sceneContentHash": "2319e7524ef40eb5bdecc732ee46d87286efa9a97fb48376034a3571c13400cc",
+  "sceneSha256": "ac79ef364151e73fb9c5935e624d5c0363a4fedc74c15e30a3447bd32cd9d2e3",
+  "sceneBytes": 121022,
+  "counts": {
+    "assets": 7,
+    "assetsByDocument": {
+      "ELEVATION": 4,
+      "SECTION": 1,
+      "FLOOR_PLAN": 2
+    },
+    "observations": 149,
+    "frames": 7,
+    "metricEvidence": 20,
+    "callouts": 0,
+    "commands": 63,
+    "masses": 1,
+    "openings": 7,
+    "rooms": 2,
+    "balconies": 0,
+    "terraces": 0,
+    "railings": 0,
+    "chimneys": 0,
+    "rooflights": 0,
+    "meshes": 50,
+    "triangles": 1132
+  },
+  "quality": {
+    "levels": {
+      "L0": 0,
+      "L1": 18,
+      "L2": 4
+    },
+    "byFamily": {
+      "LEVEL": {
+        "L2": 2
+      },
+      "MASS": {
+        "L2": 1
+      },
+      "INTERIOR_DOOR": {
+        "L1": 2
+      },
+      "INTERIOR_WALL": {
+        "L1": 7
+      },
+      "ROOM": {
+        "L1": 2
+      },
+      "OPENING": {
+        "L1": 7
+      },
+      "ROOF": {
+        "L2": 1
+      }
+    }
+  },
+  "unresolved": [
+    {
+      "what": "the pitch of the roof over mass-0",
+      "reason": "no angle is printed on any drawing and no specification states one",
+      "status": "AMBIGUOUS"
+    },
+    {
+      "what": "which way the ridge runs over mass-0",
+      "reason": "neither span reproduces the measured rise at the stated pitch",
+      "status": "AMBIGUOUS"
+    },
+    {
+      "what": "a v2 registration for the left elevation",
+      "reason": "its silhouette fits neither the walled nor the characteristic span with the ridge at its apex",
+      "status": "AMBIGUOUS"
+    },
+    {
+      "what": "a v2 registration for the right elevation",
+      "reason": "its silhouette fits neither the walled nor the characteristic span with the ridge at its apex",
+      "status": "AMBIGUOUS"
+    },
+    {
+      "what": "the stair between the storeys",
+      "reason": "no run of evenly spaced tread lines was found on any plan",
+      "status": "MISSING"
+    },
+    {
+      "what": "a 2.71 m thin band at z 0.35",
+      "reason": "meets no wall at either end: fitted furniture or a line, not a partition",
+      "status": "AMBIGUOUS"
+    },
+    {
+      "what": "the eaves projection of the main roof",
+      "reason": "the section does not draw both eaves past the walls along a slope of the stated pitch, in agreement: the roof ends at the walls",
+      "status": "AMBIGUOUS"
+    }
+  ],
+  "warnings": [
+    "no vision provider ran; every observation is from the deterministic analyzer",
+    "10 of 12 source-view checks outside tolerance"
+  ],
+  "warningDetails": [
+    {
+      "code": "DETERMINISTIC_ONLY",
+      "severity": "INFO",
+      "message": "no vision provider ran; every observation is from the deterministic analyzer"
+    },
+    {
+      "code": "RESIDUALS_OUTSIDE_TOLERANCE",
+      "severity": "LIMITING",
+      "message": "10 of 12 source-view checks outside tolerance"
+    }
+  ],
+  "preview": {
+    "outcome": "COMPLETE",
+    "built": {
+      "wallRings": 2,
+      "walls": 13,
+      "slabs": 2,
+      "roofs": 1,
+      "roofPlanes": 0,
+      "openings": 9,
+      "rooms": 2,
+      "stairs": 0
+    },
+    "provisional": [],
+    "partial": null,
+    "completeness": {
+      "verdict": "COMPLETE",
+      "decomposition": {
+        "coverage": 1,
+        "drawnBuiltM2": 69.12,
+        "representedM2": 69.12,
+        "basis": "ACCEPTED_DECOMPOSITION"
+      },
+      "missingBodies": [],
+      "unresolvedAreas": [],
+      "unexplainedWalls": {
+        "count": 0,
+        "lengthM": 0,
+        "bandLengthM": 0
+      },
+      "conflicts": {
+        "blocking": [],
+        "degrading": []
+      },
+      "modelRefusals": 0,
+      "why": "the accepted decomposition is 100% represented (its own built regions only); nothing unresolved, unexplained or in conflict"
+    }
+  },
+  "sourceBasis": {
+    "assetId": "asset-rzut-parteru-4353f1c5bb",
+    "document": "FLOOR_PLAN",
+    "projection": "ORTHOGRAPHIC_PLAN",
+    "storey": "GROUND",
+    "annotation": "DIMENSIONED",
+    "variant": {
+      "widthPx": 605,
+      "heightPx": 514,
+      "byteLength": 933562,
+      "mediaType": "image/png",
+      "byteHash": "ca0e9bb7987f6e1ad8c050c6d0f293c4cd356e9565574f1c16aa0569e88c939b"
+    },
+    "variants": 1,
+    "largestOffered": true,
+    "dimensions": {
+      "chains": 4,
+      "segmentsRead": 8,
+      "evidence": "DIMENSION_EVIDENCE_INCONCLUSIVE"
+    },
+    "scale": {
+      "mppX": 0.026363,
+      "mppY": 0.026374,
+      "anchors": 8,
+      "rmsM": 0.011723,
+      "confidence": "STRONG",
+      "relation": "CONFIRMED",
+      "independentWitnesses": 7,
+      "verified": true
+    }
+  },
+  "vision": {
+    "mode": "DETERMINISTIC_ONLY",
+    "provider": null,
+    "attempted": 0,
+    "accepted": 0
+  },
+  "verification": {
+    "replay": "BYTE_IDENTICAL",
+    "residuals": 12,
+    "residualsOutsideTolerance": 10,
+    "closure": {
+      "exteriorErrors": 0,
+      "exteriorFindings": 0,
+      "interiorFindings": 19
+    }
+  },
+  "assessment": {
+    "schema": "buildapp.model-assessment",
+    "schemaVersion": "1.0.0",
+    "technicalValidity": {
+      "status": "VALID",
+      "errors": 0,
+      "warnings": 19,
+      "checks": [
+        {
+          "check": "PROGRAM_REFUSALS",
+          "errors": 0,
+          "warnings": 0,
+          "findings": []
+        },
+        {
+          "check": "MODEL_VALIDATION",
+          "errors": 0,
+          "warnings": 0,
+          "findings": []
+        },
+        {
+          "check": "COMPILER",
+          "errors": 0,
+          "warnings": 0,
+          "findings": []
+        },
+        {
+          "check": "CLOSURE",
+          "errors": 0,
+          "warnings": 19,
+          "findings": [
+            {
+              "code": "INTERIOR_GAP",
+              "severity": "WARNING",
+              "auditSeverity": "ERROR",
+              "objectId": "main-iwall-1-x-2 + ring-main-0-w1",
+              "message": "main-iwall-1-x-2 and ring-main-0-w1 stand 0.077 m apart where the model says they meet (walls meet only at their ends): a visible crack"
+            },
+            {
+              "code": "INTERIOR_GAP",
+              "severity": "WARNING",
+              "auditSeverity": "ERROR",
+              "objectId": "main-iwall-1-x-2 + ring-main-1-w1",
+              "message": "main-iwall-1-x-2 and ring-main-1-w1 stand 0.077 m apart where the model says they meet (walls meet only at their ends): a visible crack"
+            },
+            {
+              "code": "INTERIOR_GAP",
+              "severity": "WARNING",
+              "auditSeverity": "ERROR",
+              "objectId": "main-iwall-1-z-0 + ring-main-0-w0",
+              "message": "main-iwall-1-z-0 and ring-main-0-w0 stand 0.075 m apart where the model says they meet (walls meet only at their ends): a visible crack"
+            },
+            {
+              "code": "INTERIOR_GAP",
+              "severity": "WARNING",
+              "auditSeverity": "ERROR",
+              "objectId": "main-iwall-1-z-0 + ring-main-1-w0",
+              "message": "main-iwall-1-z-0 and ring-main-1-w0 stand 0.075 m apart where the model says they meet (walls meet only at their ends): a visible crack"
+            },
+            {
+              "code": "INTERIOR_GAP",
+              "severity": "WARNING",
+              "auditSeverity": "ERROR",
+              "objectId": "main-iwall-1-x-0 + ring-main-0-w3",
+              "message": "main-iwall-1-x-0 and ring-main-0-w3 stand 0.023 m apart where the model says they meet (walls meet only at their ends): a visible crack"
+            },
+            {
+              "code": "INTERIOR_GAP",
+              "severity": "WARNING",
+              "auditSeverity": "ERROR",
+              "objectId": "main-iwall-1-x-0 + ring-main-1-w3",
+              "message": "main-iwall-1-x-0 and ring-main-1-w3 stand 0.023 m apart where the model says they meet (walls meet only at their ends): a visible crack"
+            },
+            {
+              "code": "INTERIOR_GAP",
+              "severity": "WARNING",
+              "auditSeverity": "ERROR",
+              "objectId": "main-iwall-1-z-0 + ring-main-0-w2",
+              "message": "main-iwall-1-z-0 and ring-main-0-w2 stand 0.021 m apart where the model says they meet (walls meet only at their ends): a visible crack"
+            },
+            {
+              "code": "INTERIOR_GAP",
+              "severity": "WARNING",
+              "auditSeverity": "ERROR",
+              "objectId": "main-iwall-1-z-0 + ring-main-1-w2",
+              "message": "main-iwall-1-z-0 and ring-main-1-w2 stand 0.021 m apart where the model says they meet (walls meet only at their ends): a visible crack"
+            },
+            {
+              "code": "INTERIOR_GAP",
+              "severity": "WARNING",
+              "auditSeverity": "ERROR",
+              "objectId": "main-iwall-1-x-2 + main-iwall-1-z-0",
+              "message": "main-iwall-1-x-2 and main-iwall-1-z-0 stand 0.021 m apart where the model says they meet (walls meet only at their ends): a visible crack"
+            },
+            {
+              "code": "INTERIOR_GAP",
+              "severity": "WARNING",
+              "auditSeverity": "ERROR",
+              "objectId": "main-iwall-0-x-0 + ring-main-0-w0",
+              "message": "main-iwall-0-x-0 and ring-main-0-w0 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack"
+            },
+            {
+              "code": "INTERIOR_GAP",
+              "severity": "WARNING",
+              "auditSeverity": "ERROR",
+              "objectId": "main-iwall-0-x-0 + ring-main-0-w3",
+              "message": "main-iwall-0-x-0 and ring-main-0-w3 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack"
+            },
+            {
+              "code": "INTERIOR_GAP",
+              "severity": "WARNING",
+              "auditSeverity": "ERROR",
+              "objectId": "main-iwall-0-x-2 + ring-main-0-w0",
+              "message": "main-iwall-0-x-2 and ring-main-0-w0 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack"
+            }
+          ],
+          "note": "exterior ERROR findings are technical errors; 19 interior findings the audit marks ERROR are counted as warnings (inside the envelope, not seen from outside), with the audit’s severity kept on each"
+        },
+        {
+          "check": "REPLAY",
+          "errors": 0,
+          "warnings": 0,
+          "findings": [],
+          "note": "the sealed candidate replays to this model byte for byte"
+        }
+      ],
+      "note": "technically valid: no validator, compiler or closure ERROR. This is about the model alone, not agreement with the drawings."
+    },
+    "decompositionCompleteness": {
+      "verdict": "COMPLETE",
+      "basis": "ACCEPTED_DECOMPOSITION",
+      "meaning": "completeness of the reading: how much of the analyzer’s own accepted decomposition the model holds — not agreement with the drawings"
+    },
+    "sourceFidelity": {
+      "status": "UNCHECKED",
+      "relations": [
+        {
+          "id": "R1_ROOF_LAYERS",
+          "title": "one roof layer inside each walled storey",
+          "direction": "MODEL_INTERNAL",
+          "status": "PASS",
+          "counts": {
+            "PASS": 1,
+            "CONFLICT": 0,
+            "UNCHECKED": 0
+          },
+          "items": [
+            {
+              "status": "PASS",
+              "objects": [
+                "roof-main"
+              ],
+              "source": null,
+              "measured": {
+                "plates": 1,
+                "doubleRoofM2": 0,
+                "nearEdgeOverlapM2": 0
+              },
+              "tolerance": {
+                "edgeM": 0.2,
+                "gapM": 0.05,
+                "gridM": 0.1
+              },
+              "coverage": {},
+              "code": "SINGLE_LAYER",
+              "why": "1 roof plate; no vertical ray meets two of them apart from their shared edges",
+              "evidence": [
+                "compiled roof triangles of the delivered model"
+              ]
+            }
+          ],
+          "limits": [
+            "compiled roof solids only: a roof the model does not build is not seen, and a roof drawn on the sheets but missing from the model is not R1’s question",
+            "grid 0.1 m; overlaps within 0.2 m of a plate edge are not counted"
+          ]
+        },
+        {
+          "id": "R3_WALL_INK",
+          "title": "model walls stand on drawn walls",
+          "direction": "MODEL_TO_SOURCE",
+          "status": "PASS",
+          "counts": {
+            "PASS": 2,
+            "CONFLICT": 0,
+            "UNCHECKED": 0
+          },
+          "items": [
+            {
+              "status": "PASS",
+              "objects": [
+                "ring-main-0-w0",
+                "ring-main-0-w1",
+                "ring-main-0-w2",
+                "ring-main-0-w3",
+                "main-iwall-0-x-2",
+                "main-iwall-0-x-0"
+              ],
+              "source": {
+                "frameId": "frame-asset-rzut-parteru-4353f1c5bb-1f9ef5604d",
+                "assetId": "asset-rzut-parteru-4353f1c5bb",
+                "document": "FLOOR_PLAN",
+                "storeyIndex": 0
+              },
+              "measured": {
+                "walls": 6,
+                "exteriorSupport": 1,
+                "drawnGapsNotModelled": 0
+              },
+              "tolerance": {
+                "positionM": 0.158244
+              },
+              "coverage": {
+                "stations": 271
+              },
+              "code": "WALLS_ON_INK",
+              "why": "storey 0: 6 walls run on the drawn wall",
+              "evidence": [
+                "the plan raster of this storey, read with the plan reader’s own ink definition",
+                "the walls were read from this sheet: R3 checks what the model built against what is drawn, not an independent survey"
+              ]
+            },
+            {
+              "status": "PASS",
+              "objects": [
+                "ring-main-1-w0",
+                "ring-main-1-w1",
+                "ring-main-1-w2",
+                "ring-main-1-w3",
+                "main-iwall-1-z-0",
+                "main-iwall-1-x-2",
+                "main-iwall-1-x-0"
+              ],
+              "source": {
+                "frameId": "frame-asset-rzut-pietra-bef2823d80-703253c830",
+                "assetId": "asset-rzut-pietra-bef2823d80",
+                "document": "FLOOR_PLAN",
+                "storeyIndex": 1
+              },
+              "measured": {
+                "walls": 7,
+                "exteriorSupport": 1,
+                "drawnGapsNotModelled": 0
+              },
+              "tolerance": {
+                "positionM": 0.158244
+              },
+              "coverage": {
+                "stations": 378
+              },
+              "code": "WALLS_ON_INK",
+              "why": "storey 1: 7 walls run on the drawn wall",
+              "evidence": [
+                "the plan raster of this storey, read with the plan reader’s own ink definition",
+                "the walls were read from this sheet: R3 checks what the model built against what is drawn, not an independent survey"
+              ]
+            }
+          ],
+          "limits": [
+            "walls are compared with the plan they were read from: R3 sees what emission did, not what the reading missed",
+            "a doubled wall inside one drawn band is not detected",
+            "a storey whose own walls do not corroborate its frame is UNCHECKED, never CONFLICT"
+          ]
+        },
+        {
+          "id": "R4_STOREY_OUTLINE",
+          "title": "each storey’s drawn walls lie within the modelled storey",
+          "direction": "SOURCE_TO_MODEL",
+          "status": "PASS",
+          "counts": {
+            "PASS": 2,
+            "CONFLICT": 0,
+            "UNCHECKED": 0
+          },
+          "items": [
+            {
+              "status": "PASS",
+              "objects": [
+                "storey 0"
+              ],
+              "source": {
+                "frameId": "frame-asset-rzut-parteru-4353f1c5bb-1f9ef5604d",
+                "assetId": "asset-rzut-parteru-4353f1c5bb",
+                "document": "FLOOR_PLAN",
+                "storeyIndex": 0
+              },
+              "measured": {
+                "drawnInsideShare": 1,
+                "drawnOutsideM2": 0,
+                "maxDrawnOutsideM": 0,
+                "modelOutlineSupport": 1,
+                "modelExteriorWalls": 4,
+                "modelFootprintM2": 69.283267
+              },
+              "tolerance": {
+                "positionM": 0.316488,
+                "pieceDistanceM": 0.949464,
+                "pieceBandLengthM": 1.265952,
+                "bandThicknessPx": 24,
+                "source": "one exterior wall thickness of the model; band thickness measured on the sheet by the plan reader"
+              },
+              "coverage": {
+                "drawnComponents": 4,
+                "sheet": "605×514 px"
+              },
+              "code": "OUTLINE_WITHIN_TOLERANCE",
+              "why": "storey 0: 100 % of the drawn wall ink lies within 0.316488 m of the modelled storey; nothing drawn stands clear of it",
+              "evidence": [
+                "thick ink of the plan raster connected to the modelled storey",
+                "drawn walls the reading left out are what R4 sees; it does not see a wall the sheet does not draw thick"
+              ]
+            },
+            {
+              "status": "PASS",
+              "objects": [
+                "storey 1"
+              ],
+              "source": {
+                "frameId": "frame-asset-rzut-pietra-bef2823d80-703253c830",
+                "assetId": "asset-rzut-pietra-bef2823d80",
+                "document": "FLOOR_PLAN",
+                "storeyIndex": 1
+              },
+              "measured": {
+                "drawnInsideShare": 1,
+                "drawnOutsideM2": 0,
+                "maxDrawnOutsideM": 0,
+                "modelOutlineSupport": 1,
+                "modelExteriorWalls": 4,
+                "modelFootprintM2": 69.120926
+              },
+              "tolerance": {
+                "positionM": 0.316488,
+                "pieceDistanceM": 0.949464,
+                "pieceBandLengthM": 1.265952,
+                "bandThicknessPx": 24,
+                "source": "one exterior wall thickness of the model; band thickness measured on the sheet by the plan reader"
+              },
+              "coverage": {
+                "drawnComponents": 3,
+                "sheet": "605×514 px"
+              },
+              "code": "OUTLINE_WITHIN_TOLERANCE",
+              "why": "storey 1: 100 % of the drawn wall ink lies within 0.316488 m of the modelled storey; nothing drawn stands clear of it",
+              "evidence": [
+                "thick ink of the plan raster connected to the modelled storey",
+                "drawn walls the reading left out are what R4 sees; it does not see a wall the sheet does not draw thick"
+              ]
+            }
+          ],
+          "limits": [
+            "only ink drawn as thick as half a wall band counts as a drawn wall",
+            "ink not connected to the modelled storey (a detached garage, a garden wall) is not compared",
+            "a storey whose own walls do not corroborate its frame is UNCHECKED, never CONFLICT"
+          ]
+        },
+        {
+          "id": "R5_REGISTERED_ELEVATIONS",
+          "title": "registered elevations agree with the model",
+          "direction": "SOURCE_AND_MODEL",
+          "status": "UNCHECKED",
+          "counts": {
+            "PASS": 0,
+            "CONFLICT": 0,
+            "UNCHECKED": 4
+          },
+          "items": [
+            {
+              "status": "UNCHECKED",
+              "objects": [
+                "frame-asset-elewacja-frontowa-ce68d57053-05070105a3"
+              ],
+              "source": {
+                "frameId": "frame-asset-elewacja-frontowa-ce68d57053-05070105a3",
+                "assetId": "asset-elewacja-frontowa-ce68d57053",
+                "document": "ELEVATION",
+                "side": "FRONT"
+              },
+              "measured": {
+                "checks": 6,
+                "observed": 2,
+                "withinTolerance": 1,
+                "outsideTolerance": 1,
+                "notObserved": 4,
+                "notEmitted": 0,
+                "outsideFeatures": 1,
+                "worst": "ROOF_EDGE feat-roof-main -0.527708 m (tol 0.25)"
+              },
+              "tolerance": {
+                "perCheck": "each feature’s own source uncertainty (openings +0.1 m, roof edge 0.25 m)",
+                "disagreeShare": 0.333333,
+                "stableFeatures": 2
+              },
+              "coverage": {
+                "kindsObserved": "ROOF_EDGE",
+                "facadeOpenings": 5,
+                "facadeOpeningsChecked": 0,
+                "mpp": 0.023821
+              },
+              "code": "DISAGREEMENT_NOT_STABLE",
+              "why": "FRONT elevation frame-asset-elewacja-frontowa-ce68d57053-05070105a3: 1 of 2 observed checks outside tolerance on 1 feature — one feature only: named, not a stable disagreement",
+              "evidence": [
+                "every check searches the view near the model’s prediction (MODEL_ANCHORED): an edge found there is not an independent confirmation",
+                "facade alignment on this view (evidence only, plan-located): 0 CONFIRMED_MATCH, 5 CONFLICT, 0 NOT_OBSERVED, 0 MISSING_IN_MODEL"
+              ]
+            },
+            {
+              "status": "UNCHECKED",
+              "objects": [
+                "frame-asset-elewacja-lewa-edc4129d06-c7ec4b3dfd"
+              ],
+              "source": {
+                "frameId": "frame-asset-elewacja-lewa-edc4129d06-c7ec4b3dfd",
+                "assetId": "asset-elewacja-lewa-edc4129d06",
+                "document": "ELEVATION",
+                "side": "LEFT"
+              },
+              "measured": {
+                "use": "NOT_REGISTERED"
+              },
+              "tolerance": {},
+              "coverage": {
+                "silhouette": "NONE",
+                "heights": "NONE"
+              },
+              "code": "VIEW_NOT_REGISTERED",
+              "why": "LEFT elevation frame-asset-elewacja-lewa-edc4129d06-c7ec4b3dfd: not registered: nothing on it was compared (its silhouette fits neither the walled nor the characteristic span with the ridge at its apex, and no wall band of it lands the ground on the terrain)",
+              "evidence": [
+                "lost: the openings of its facade as this view draws them (widths, sills and heads come from the plan and callouts alone)",
+                "lost: the source-view checks of that facade"
+              ]
+            },
+            {
+              "status": "UNCHECKED",
+              "objects": [
+                "frame-asset-elewacja-prawa-7bcce1b6da-635a23984e"
+              ],
+              "source": {
+                "frameId": "frame-asset-elewacja-prawa-7bcce1b6da-635a23984e",
+                "assetId": "asset-elewacja-prawa-7bcce1b6da",
+                "document": "ELEVATION",
+                "side": "RIGHT"
+              },
+              "measured": {
+                "use": "NOT_REGISTERED"
+              },
+              "tolerance": {},
+              "coverage": {
+                "silhouette": "NONE",
+                "heights": "NONE"
+              },
+              "code": "VIEW_NOT_REGISTERED",
+              "why": "RIGHT elevation frame-asset-elewacja-prawa-7bcce1b6da-635a23984e: not registered: nothing on it was compared (its silhouette fits neither the walled nor the characteristic span with the ridge at its apex, and no wall band of it lands the ground on the terrain)",
+              "evidence": [
+                "lost: the openings of its facade as this view draws them (widths, sills and heads come from the plan and callouts alone)",
+                "lost: the source-view checks of that facade"
+              ]
+            },
+            {
+              "status": "UNCHECKED",
+              "objects": [
+                "frame-asset-elewacja-tylna-99385ddca6-f14d035c06"
+              ],
+              "source": {
+                "frameId": "frame-asset-elewacja-tylna-99385ddca6-f14d035c06",
+                "assetId": "asset-elewacja-tylna-99385ddca6",
+                "document": "ELEVATION",
+                "side": "REAR"
+              },
+              "measured": {
+                "checks": 6,
+                "observed": 2,
+                "withinTolerance": 1,
+                "outsideTolerance": 1,
+                "notObserved": 4,
+                "notEmitted": 0,
+                "outsideFeatures": 1,
+                "worst": "ROOF_EDGE feat-roof-main -0.527708 m (tol 0.25)"
+              },
+              "tolerance": {
+                "perCheck": "each feature’s own source uncertainty (openings +0.1 m, roof edge 0.25 m)",
+                "disagreeShare": 0.333333,
+                "stableFeatures": 2
+              },
+              "coverage": {
+                "kindsObserved": "ROOF_EDGE",
+                "facadeOpenings": 1,
+                "facadeOpeningsChecked": 0,
+                "mpp": 0.023821
+              },
+              "code": "DISAGREEMENT_NOT_STABLE",
+              "why": "REAR elevation frame-asset-elewacja-tylna-99385ddca6-f14d035c06: 1 of 2 observed checks outside tolerance on 1 feature — one feature only: named, not a stable disagreement",
+              "evidence": [
+                "every check searches the view near the model’s prediction (MODEL_ANCHORED): an edge found there is not an independent confirmation",
+                "facade alignment on this view (evidence only, plan-located): 0 CONFIRMED_MATCH, 1 CONFLICT, 0 NOT_OBSERVED, 0 MISSING_IN_MODEL"
+              ]
+            }
+          ],
+          "limits": [
+            "only silhouette-registered views are compared; every check is anchored on the model’s prediction",
+            "an opening the view draws and the model lacks is not measured here (facade alignment lists it as evidence)",
+            "no new registration is attempted: a view without a ridge datum stays UNCHECKED"
+          ]
+        }
+      ],
+      "counts": {
+        "PASS": 3,
+        "CONFLICT": 0,
+        "UNCHECKED": 1
+      },
+      "conflicts": [],
+      "meaning": "relations between the delivered model and the drawings; UNCHECKED is not PASS, and a CONFLICT does not withdraw the model"
+    },
+    "sourceUnchecked": {
+      "items": [
+        {
+          "kind": "ELEVATION",
+          "frameId": "frame-asset-elewacja-frontowa-ce68d57053-05070105a3",
+          "side": "FRONT",
+          "axes": {
+            "along": "FULL",
+            "height": "FULL"
+          },
+          "extent": "PARTIAL",
+          "what": "FRONT elevation (REGISTERED)",
+          "why": "FRONT elevation frame-asset-elewacja-frontowa-ce68d57053-05070105a3: 1 of 2 observed checks outside tolerance on 1 feature — one feature only: named, not a stable disagreement",
+          "couldCheck": "silhouette width and steps, eaves and ridge heights, the opening rows of its facade (MISSING_IN_MODEL / EXTRA_IN_MODEL), roof outline and chimneys"
+        },
+        {
+          "kind": "ELEVATION",
+          "frameId": "frame-asset-elewacja-lewa-edc4129d06-c7ec4b3dfd",
+          "side": "LEFT",
+          "axes": {
+            "along": "NONE",
+            "height": "NONE"
+          },
+          "extent": "NONE",
+          "what": "LEFT elevation (NOT_REGISTERED)",
+          "why": "its silhouette fits neither the walled nor the characteristic span with the ridge at its apex, and no wall band of it lands the ground on the terrain",
+          "couldCheck": "silhouette width and steps, eaves and ridge heights, the opening rows of its facade (MISSING_IN_MODEL / EXTRA_IN_MODEL), roof outline and chimneys"
+        },
+        {
+          "kind": "ELEVATION",
+          "frameId": "frame-asset-elewacja-prawa-7bcce1b6da-635a23984e",
+          "side": "RIGHT",
+          "axes": {
+            "along": "NONE",
+            "height": "NONE"
+          },
+          "extent": "NONE",
+          "what": "RIGHT elevation (NOT_REGISTERED)",
+          "why": "its silhouette fits neither the walled nor the characteristic span with the ridge at its apex, and no wall band of it lands the ground on the terrain",
+          "couldCheck": "silhouette width and steps, eaves and ridge heights, the opening rows of its facade (MISSING_IN_MODEL / EXTRA_IN_MODEL), roof outline and chimneys"
+        },
+        {
+          "kind": "ELEVATION",
+          "frameId": "frame-asset-elewacja-tylna-99385ddca6-f14d035c06",
+          "side": "REAR",
+          "axes": {
+            "along": "FULL",
+            "height": "FULL"
+          },
+          "extent": "PARTIAL",
+          "what": "REAR elevation (REGISTERED)",
+          "why": "REAR elevation frame-asset-elewacja-tylna-99385ddca6-f14d035c06: 1 of 2 observed checks outside tolerance on 1 feature — one feature only: named, not a stable disagreement",
+          "couldCheck": "silhouette width and steps, eaves and ridge heights, the opening rows of its facade (MISSING_IN_MODEL / EXTRA_IN_MODEL), roof outline and chimneys"
+        },
+        {
+          "kind": "SECTION",
+          "frameId": "frame-asset-przekroj-944b93a5fb-4f85c6b583",
+          "axes": {
+            "along": "NONE",
+            "height": "DATUM_ONLY"
+          },
+          "extent": "PARTIAL",
+          "what": "section: level datums read",
+          "why": "its printed level datums set the storey heights; it is not registered as a view, so the slabs, the void and the storey outline along the cut were never compared with the model",
+          "couldCheck": "slab extents and voids along the cut, storey levels, attic knee walls, the roof profile and pitch at the cut"
+        }
+      ],
+      "counts": {
+        "total": 5,
+        "byKind": {
+          "ELEVATION": 4,
+          "SECTION": 1
+        },
+        "none": 2,
+        "partial": 3
+      }
+    },
+    "previewAvailable": true,
+    "summary": "technically valid; reading completeness COMPLETE; source fidelity UNCHECKED: 0 conflict(s), 5 pass, 4 unchecked; 5 source item(s) not compared; the 3D model is shown in every case"
+  },
+  "analyzer": {
+    "service": "1.3.0",
+    "solver": "2.17.0"
+  },
+  "startedAt": "2026-01-01T00:00:00.000Z",
+  "completedAt": "2026-01-01T00:00:00.000Z",
+  "links": {
+    "self": "/v1/analyses/0123456789abcdef0123456789abcdef",
+    "result": "/v1/analyses/0123456789abcdef0123456789abcdef/result",
+    "scene": "/v1/analyses/0123456789abcdef0123456789abcdef/scene",
+    "model": "/v1/analyses/0123456789abcdef0123456789abcdef/model",
+    "candidate": "/v1/analyses/0123456789abcdef0123456789abcdef/candidate"
+  }
+}

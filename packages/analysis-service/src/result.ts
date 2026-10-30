@@ -15,6 +15,7 @@ import type { MobileSceneBundle } from '@buildapp/mobile-scene'
 import type { ReconstructionCandidate } from '@buildapp/reconstruction'
 import type { AnalysisWarning } from './warnings.js'
 import type { PreviewSummary, SourceBasis } from './preview.js'
+import type { ModelAssessment } from './assessment/types.js'
 
 /** Whether a vision provider contributed, stated rather than implied. */
 export type VisionMode = 'DETERMINISTIC_ONLY' | 'LIVE_PROVIDER' | 'REPLAYED_GRAPH'
@@ -113,6 +114,12 @@ export type LinkAnalysisSummary = {
     residualsOutsideTolerance: number
     closure: { exteriorErrors: number; exteriorFindings: number; interiorFindings: number }
   }
+  /**
+   * N9-01: the model on three axes kept apart — technical validity, the reading's completeness (`preview.completeness`
+   * as before) and the model held against the drawings (relations PASS / CONFLICT / UNCHECKED), with every source
+   * item no relation compared. A conflict never withdraws the model.
+   */
+  assessment: ModelAssessment
   analyzer: { service: string; solver: string }
   startedAt: string
   completedAt: string

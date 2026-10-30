@@ -1,0 +1,55 @@
+{
+ "r3": [
+  {
+   "status": "CONFLICT",
+   "code": "WALL_ON_BLANK_PAPER",
+   "objects": [
+    "g-right"
+   ],
+   "why": "g-right: 5.6 m of the wall (the whole wall) stands on paper with no ink at all — more than 0.9 m (two wall thicknesses and the tolerance): the drawing has no wall there"
+  },
+  {
+   "status": "PASS",
+   "code": "WALLS_ON_INK",
+   "objects": [
+    "g-front",
+    "g-left",
+    "g-partition",
+    "g-rear",
+    "gar-front",
+    "gar-rear",
+    "gar-right"
+   ],
+   "why": "storey 0: 7 walls run on the drawn wall"
+  },
+  {
+   "status": "UNCHECKED",
+   "code": "NO_REGISTERED_PLAN",
+   "objects": [
+    "upper"
+   ],
+   "why": "the model builds walls on upper (storey 1) and no plan of that storey was registered: nothing to hold them against"
+  }
+ ],
+ "r4": [
+  {
+   "status": "CONFLICT",
+   "code": "DRAWN_WALLS_BEYOND_STOREY",
+   "measured": {
+    "drawnInsideShare": 0.779929,
+    "drawnOutsideM2": 2.614,
+    "maxDrawnOutsideM": 4,
+    "modelOutlineSupport": 0.83237,
+    "modelExteriorWalls": 7,
+    "modelFootprintM2": 110
+   },
+   "why": "storey 0: 1 drawn wall piece stand up to 4 m outside the modelled storey (8.713333 m of band): drawn parts of the storey the model does not build"
+  },
+  {
+   "status": "UNCHECKED",
+   "code": "NO_REGISTERED_PLAN",
+   "measured": {},
+   "why": "the model builds walls on upper (storey 1) and no plan of that storey was registered: nothing to hold them against"
+  }
+ ]
+}

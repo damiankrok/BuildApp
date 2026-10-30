@@ -249,6 +249,8 @@ data class AnalysisSummary(
     val sourceBasis: SourceBasis? = null,
     val vision: VisionInfo = VisionInfo(),
     val verification: VerificationInfo = VerificationInfo(),
+    /** N9-01: technical validity, reading completeness and fidelity to the drawings, kept apart; absent from an older analyzer. */
+    val assessment: ModelAssessment? = null,
     val analyzer: AnalyzerVersions = AnalyzerVersions(),
     val startedAt: String = "",
     val completedAt: String = "",

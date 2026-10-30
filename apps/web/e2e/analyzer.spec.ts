@@ -55,6 +55,16 @@ test('a project link becomes a building: stages, progress, result, and the model
   await expect(page.getByTestId('analyzer-candidate')).toHaveText(/^[0-9a-f]{12}$/)
   await expect(page.getByTestId('analyzer-quality')).toHaveText(/^L0 \d+ · L1 \d+ · L2 \d+$/)
   await expect(page.getByTestId('analyzer-vision')).toHaveText('deterministic analyzer — no vision provider')
+  // N9-01: three axes, apart; the model opens whatever they say
+  await expect(page.getByTestId('analyzer-assessment')).toBeVisible()
+  await expect(page.getByTestId('analyzer-axis-technical')).toContainText('not evidence of agreement')
+  await expect(page.getByTestId('analyzer-axis-completeness')).toHaveText(/^complete/)
+  await expect(page.getByTestId('analyzer-axis-fidelity')).toHaveAttribute('data-state', /^(OK|WARN|OPEN)$/)
+  await expect(page.getByTestId('analyzer-axis-unchecked')).toContainText('source item')
+  await expect(page.getByTestId('analyzer-preview-kept')).toBeVisible()
+  await expect(page.getByTestId('analyzer-open')).toBeEnabled()
+  await page.getByTestId('analyzer-assessment-details').locator('summary').click()
+  await page.getByTestId('analyzer-assessment').screenshot({ path: resolve(ART, 'web-analyzer-assessment-n9-01.png') })
   // diagnostics are rows, never raw JSON
   await page.getByTestId('analyzer-diagnostics').locator('summary').click()
   await expect(page.getByTestId('analyzer-diagnostics')).toContainText('source package')
