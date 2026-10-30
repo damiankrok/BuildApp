@@ -13,7 +13,7 @@
  */
 import type { ModelCompletenessVerdict } from '@buildapp/reconstruction'
 
-export const MODEL_ASSESSMENT_SCHEMA_VERSION = '1.0.0' as const
+export const MODEL_ASSESSMENT_SCHEMA_VERSION = '1.1.0' as const
 
 export type RelationStatus = 'PASS' | 'CONFLICT' | 'UNCHECKED'
 
@@ -43,8 +43,13 @@ export type DecompositionCompleteness = {
 }
 
 /** One compared object of a relation. */
+/** N9-02A: which axes of an elevation are registered (from `elevationRegistration`), on the items that are about one. */
+export type ViewAxesSummary = { class: 'FULL' | 'ALONG_ONLY' | 'VERTICAL_ONLY' | 'UNREGISTERED'; side: string; along: string; vertical: string; scale: string }
+
 export type RelationItem = {
   status: RelationStatus
+  /** N9-02A, additive: for an elevation item, how far its registration reaches on each axis. */
+  axes?: ViewAxesSummary
   /** What was compared: model object ids, or the storey / view the item is about. */
   objects: string[]
   /** The drawing compared with, when one was. */
@@ -76,6 +81,8 @@ export type RelationResult = {
 
 export type UncheckedItem = {
   kind: 'ELEVATION' | 'SECTION' | 'PLAN' | 'STOREY' | 'PERSPECTIVE' | 'REGISTRATION_AXIS'
+  /** N9-02A, additive: for an elevation, its four-axis registration (`elevationRegistration`). */
+  registration?: ViewAxesSummary
   frameId?: string
   storeyIndex?: number
   side?: string
@@ -113,7 +120,22 @@ export type ModelAssessment = {
   sourceUnchecked: SourceUnchecked
   /** The 3D model is delivered and shown whatever the three axes say. */
   previewAvailable: true
+  /**
+   * N9-02A, additive: every elevation on four axes (SIDE, ALONG, VERTICAL, SCALE) from source evidence only, a
+   * diagnostic that feeds nothing back into the model, with the solver's own use of each view beside it.
+   */
+  elevationRegistration: ElevationRegistrationReport
   summary: string
+}
+
+export type ElevationRegistrationReport = {
+  views: import('./elevation-axes.js').ElevationAxes[]
+  counts: { before: Record<'FULL' | 'ALONG_ONLY' | 'VERTICAL_ONLY' | 'UNREGISTERED', number>; after: Record<'FULL' | 'ALONG_ONLY' | 'VERTICAL_ONLY' | 'UNREGISTERED', number> }
+  /** Checkable feature slots (a facade width, a wall end, an opening's position or height …) the four axes add. */
+  slots: { before: number; after: number }
+  /** Views the solver registered further than this diagnostic does, by frame, with why. */
+  lost: Array<{ frameId: string; before: string; after: string; why: string }>
+  datums: { ridgeY: number | null; terrainY: number | null }
 }
 
 export const FINDINGS_LISTED = 12

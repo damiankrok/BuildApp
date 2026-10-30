@@ -1,0 +1,117 @@
+{
+ "method": "runAnalysis(PACKAGE: source-package + observation-graph) at N9-01 (f113a7b) and at N9-02A, same byte cache; hashes from result-summary.json",
+ "houses": {
+  "a01": {
+   "unchanged": {
+    "candidateHash": true,
+    "modelHash": true,
+    "sceneContentHash": true,
+    "sceneSha256": true,
+    "metricEvidenceHash": true
+   },
+   "service": {
+    "base": "1.3.0",
+    "head": "1.4.0"
+   },
+   "relationsUnchanged": true
+  },
+  "gozd": {
+   "unchanged": {
+    "candidateHash": true,
+    "modelHash": true,
+    "sceneContentHash": true,
+    "sceneSha256": true,
+    "metricEvidenceHash": true
+   },
+   "service": {
+    "base": "1.3.0",
+    "head": "1.4.0"
+   },
+   "relationsUnchanged": true
+  },
+  "marcowki": {
+   "unchanged": {
+    "candidateHash": true,
+    "modelHash": true,
+    "sceneContentHash": true,
+    "sceneSha256": true,
+    "metricEvidenceHash": true
+   },
+   "service": {
+    "base": "1.3.0",
+    "head": "1.4.0"
+   },
+   "relationsUnchanged": true
+  },
+  "ciesz": {
+   "unchanged": {
+    "candidateHash": true,
+    "modelHash": true,
+    "sceneContentHash": true,
+    "sceneSha256": true,
+    "metricEvidenceHash": true
+   },
+   "service": {
+    "base": "1.3.0",
+    "head": "1.4.0"
+   },
+   "relationsUnchanged": true
+  },
+  "rary": {
+   "unchanged": {
+    "candidateHash": true,
+    "modelHash": true,
+    "sceneContentHash": true,
+    "sceneSha256": true,
+    "metricEvidenceHash": true
+   },
+   "service": {
+    "base": "1.3.0",
+    "head": "1.4.0"
+   },
+   "relationsUnchanged": true
+  },
+  "trytomach": {
+   "unchanged": {
+    "candidateHash": true,
+    "modelHash": true,
+    "sceneContentHash": true,
+    "sceneSha256": true,
+    "metricEvidenceHash": true
+   },
+   "service": {
+    "base": "1.3.0",
+    "head": "1.4.0"
+   },
+   "relationsUnchanged": true
+  },
+  "arganiach": {
+   "unchanged": {
+    "candidateHash": true,
+    "modelHash": true,
+    "sceneContentHash": true,
+    "sceneSha256": true,
+    "metricEvidenceHash": true
+   },
+   "service": {
+    "base": "1.3.0",
+    "head": "1.4.0"
+   },
+   "relationsUnchanged": true
+  },
+  "sasankach3": {
+   "unchanged": {
+    "candidateHash": true,
+    "modelHash": true,
+    "sceneContentHash": true,
+    "sceneSha256": true,
+    "metricEvidenceHash": true
+   },
+   "service": {
+    "base": "1.3.0",
+    "head": "1.4.0"
+   },
+   "relationsUnchanged": true
+  }
+ }
+}

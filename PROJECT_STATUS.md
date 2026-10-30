@@ -2948,3 +2948,19 @@ conflicts, Trytomach 1, Sasanki 2; R1/R3/R4 no conflict today; R1 reports 15.60 
 pre-N8-03C models. Web panel and Android result screen show the three axes; reviewed contract snapshot
 `analyzer-contract-current/` (legacy 2.3.0 kept), Kotlin JVM contract tests pass; APK and device NOT_RUN; false-alarm
 rate on a real holdout NOT_MEASURED.
+
+## Rejestracja elewacji na niezależnych osiach (STAGE BUILDPLAN N9-02A)
+
+Status: **PARTIAL — diagnostyka, bez zmian geometrii** (baza `f113a7b`; solver 2.17.0, model 1.7.0, czytnik 1.5.0
+bez zmian; usługa analizy 1.4.0, `assessment` 1.1.0, addytywnie). Report
+`stage-reports/STAGE_BUILDPLAN_N9_02A_ELEVATION_REGISTRATION.md`, artefakty `stage-reports/artifacts/analyzer-n9-02a/`.
+`assessment.elevationRegistration` judges every elevation on SIDE / ALONG / VERTICAL / SCALE apart, from source anchors
+(publisher labels, label elimination, multi-column wall bands with sky/paper excluded and outline-cut bands refused,
+printed ridge datum at the drawn apex with chimneys excluded, drawn ground against terrain or plinth); plan spans and
+the solver's registration are marked shared with the model. FIRST_BAD: F1 side from height-scale width (8 views), F2
+no ridge → one-column band (2), F3 ground failure drops a sound along axis (2), F4 extent is not the building (reported).
+32 elevations: UNREGISTERED 12 → 10, FULL 9 → 10; checkable slots 198 → 196 (+15; −17 for Trytomach FRONT, whose solver
+registration is contradicted 8.5 % by two agreeing bands). Goździkowce 0/4. Frozen controls (Kruszczyki, Lipienniki):
+0 gains, 0 false acceptances; Skalnice fails at the solver. Synthetic Larchfield exposes a −9.5 % solver front/rear
+registration (reported, not fixed). 8-house hashes identical to N9-01; R1–R5 statuses unchanged. Diagnostics do not feed
+the solver; R6 / N9-02B not started. Targeted tests pass; the 12 known TS failures unchanged from the base; APK NOT_RUN.

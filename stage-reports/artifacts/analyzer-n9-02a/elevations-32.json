@@ -1,0 +1,1031 @@
+{
+ "summary": {
+  "views": 32,
+  "before": {
+   "FULL": 9,
+   "ALONG_ONLY": 11,
+   "VERTICAL_ONLY": 0,
+   "UNREGISTERED": 12
+  },
+  "after": {
+   "FULL": 10,
+   "ALONG_ONLY": 12,
+   "VERTICAL_ONLY": 0,
+   "UNREGISTERED": 10
+  },
+  "slots": {
+   "before": 198,
+   "after": 196
+  },
+  "lost": [
+   {
+    "house": "trytomach",
+    "after": "UNREGISTERED",
+    "before": "FULL",
+    "frameId": "frame-asset-gotowy-projekt-dom-w-trytomach-g-elewacja-7b061554b1",
+    "why": "ALONG: contested: the solver's registration gives 0.016046 m/px, but this view's wall band gives 0.014677 m/px (-8.531721 % apart) and the opposite view frame-asset-gotowy-projekt-dom-w-trytomach-g-elewacja-957bead831's band agrees with it (0.014694 m/px): two band readings against one, and neither scale is taken"
+   }
+  ],
+  "hashesUnchanged": true,
+  "relationsUnchanged": true
+ },
+ "houses": [
+  {
+   "house": "a01",
+   "counts": {
+    "after": {
+     "ALONG_ONLY": 4,
+     "FULL": 0,
+     "UNREGISTERED": 0,
+     "VERTICAL_ONLY": 0
+    },
+    "before": {
+     "ALONG_ONLY": 3,
+     "FULL": 0,
+     "UNREGISTERED": 1,
+     "VERTICAL_ONLY": 0
+    }
+   },
+   "slots": {
+    "after": 21,
+    "before": 20
+   },
+   "datums": {
+    "ridgeY": 8.16,
+    "terrainY": -0.72
+   },
+   "unchanged": {
+    "candidateHash": true,
+    "modelHash": true,
+    "sceneContentHash": true,
+    "sceneSha256": true,
+    "metricEvidenceHash": true
+   },
+   "views": [
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-jarzmiankach-elewacja-19da37ded6",
+     "labelled": "REAR",
+     "solverUse": "OPENINGS_ONLY",
+     "before": "ALONG_ONLY",
+     "after": "ALONG_ONLY",
+     "side": "REGISTERED REAR (SOLVER_LABELLED)",
+     "along": {
+      "state": "REGISTERED",
+      "mpp": 0.017018,
+      "anchors": [
+       "SOLVER_REGISTRATION (shared with model)",
+       "PLAN_WALLED_SPAN (shared with model)",
+       "SIBLING_SHEETS"
+      ],
+      "why": "the solver's openings only registration: the 10.50 m walled width (the walls' drawn span under the roof)"
+     },
+     "vertical": {
+      "state": "REFUSED",
+      "groundY": -0.314964,
+      "why": "the ridge datum at the apex and the along scale put the drawn ground at -0.314964 m, 0.405036 m outside 0.3 m of the printed terrain: the apex is not the ridge, or one scale does not serve both axes"
+     },
+     "scale": "REFUSED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-jarzmiankach-elewacja-7854cc828b",
+     "labelled": "SIDE_UNSPECIFIED",
+     "solverUse": "REGISTERED",
+     "before": "ALONG_ONLY",
+     "after": "ALONG_ONLY",
+     "side": "REGISTERED LEFT (SOLVER_FIRST_READING)",
+     "along": {
+      "state": "REGISTERED",
+      "mpp": 0.016133,
+      "anchors": [
+       "SOLVER_REGISTRATION (shared with model)",
+       "PLAN_WALLED_SPAN (shared with model)"
+      ],
+      "why": "the solver's registered registration: the 8.28 m characteristic depth (the roof over the zones) (beats 7.83 m, which would put the ground 0.45 m; 10.21 m, which would put the ground -1.89 m; 10.65 m, which would put the ground -2.33 m)"
+     },
+     "vertical": {
+      "state": "UNCHECKED",
+      "groundY": 0.013019,
+      "why": "the solver hung it from the ridge datum but refused its low heights: its ground lands off the house\u2019s other views"
+     },
+     "scale": "ALONG_ONLY"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-jarzmiankach-elewacja-ad8fd1a56b",
+     "labelled": "SIDE_UNSPECIFIED",
+     "solverUse": "NOT_REGISTERED",
+     "before": "UNREGISTERED",
+     "after": "ALONG_ONLY",
+     "side": "AXIS_ONLY LEFT_OR_RIGHT (LABEL_ELIMINATION)",
+     "along": {
+      "state": "SPAN_ONLY",
+      "mpp": 0.017029,
+      "anchors": [
+       "WALL_BAND_ENDS",
+       "PLAN_WALLED_SPAN (shared with model)",
+       "SIBLING_SHEETS"
+      ],
+      "why": "the band's ends (columns 406..892) are the 8.276042 m characteristic depth at the sheet scale of its sibling views (0.094586 %): 0.017029 m/px; the hand is unknown, so no position along the facade is read"
+     },
+     "vertical": {
+      "state": "REFUSED",
+      "groundY": -0.224244,
+      "why": "the ridge datum at the apex and the along scale put the drawn ground at -0.224244 m, 0.495756 m outside 0.3 m of the printed terrain: the apex is not the ridge, or one scale does not serve both axes"
+     },
+     "scale": "REFUSED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-jarzmiankach-elewacja-b74ed2020b",
+     "labelled": "FRONT",
+     "solverUse": "OPENINGS_ONLY",
+     "before": "ALONG_ONLY",
+     "after": "ALONG_ONLY",
+     "side": "REGISTERED FRONT (SOLVER_LABELLED)",
+     "along": {
+      "state": "REGISTERED",
+      "mpp": 0.017045,
+      "anchors": [
+       "SOLVER_REGISTRATION (shared with model)",
+       "PLAN_WALLED_SPAN (shared with model)",
+       "SIBLING_SHEETS"
+      ],
+      "why": "the solver's openings only registration: the 10.50 m walled width (the walls' drawn span under the roof)"
+     },
+     "vertical": {
+      "state": "REFUSED",
+      "groundY": -0.26023,
+      "why": "the ridge datum at the apex and the along scale put the drawn ground at -0.26023 m, 0.45977 m outside 0.3 m of the printed terrain: the apex is not the ridge, or one scale does not serve both axes"
+     },
+     "scale": "REFUSED"
+    }
+   ]
+  },
+  {
+   "house": "gozd",
+   "counts": {
+    "after": {
+     "ALONG_ONLY": 0,
+     "FULL": 0,
+     "UNREGISTERED": 4,
+     "VERTICAL_ONLY": 0
+    },
+    "before": {
+     "ALONG_ONLY": 0,
+     "FULL": 0,
+     "UNREGISTERED": 4,
+     "VERTICAL_ONLY": 0
+    }
+   },
+   "slots": {
+    "after": 0,
+    "before": 0
+   },
+   "datums": {
+    "ridgeY": null,
+    "terrainY": null
+   },
+   "unchanged": {
+    "candidateHash": true,
+    "modelHash": true,
+    "sceneContentHash": true,
+    "sceneSha256": true,
+    "metricEvidenceHash": true
+   },
+   "views": [
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-gozdzikowcach-3-elewa-22c3997a33",
+     "labelled": "SIDE_UNSPECIFIED",
+     "solverUse": "NOT_REGISTERED",
+     "before": "UNREGISTERED",
+     "after": "UNREGISTERED",
+     "side": "AXIS_ONLY LEFT_OR_RIGHT (LABEL_ELIMINATION)",
+     "along": {
+      "state": "UNCHECKED",
+      "mpp": null,
+      "anchors": [],
+      "why": "no band of wall runs across its silhouette on any of five columns: the walls\u2019 ends cannot be read"
+     },
+     "vertical": {
+      "state": "UNCHECKED",
+      "groundY": null,
+      "why": "no ridge datum is printed on a section: no height is hung on this view (its along axis stands on its own)"
+     },
+     "scale": "UNCHECKED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-gozdzikowcach-3-elewa-9a3be616c4",
+     "labelled": "REAR",
+     "solverUse": "NOT_REGISTERED",
+     "before": "UNREGISTERED",
+     "after": "UNREGISTERED",
+     "side": "REGISTERED REAR (PUBLISHER_LABEL)",
+     "along": {
+      "state": "UNCHECKED",
+      "mpp": null,
+      "anchors": [],
+      "why": "no band of wall runs across its silhouette on any of five columns: the walls\u2019 ends cannot be read"
+     },
+     "vertical": {
+      "state": "UNCHECKED",
+      "groundY": null,
+      "why": "no ridge datum is printed on a section: no height is hung on this view (its along axis stands on its own)"
+     },
+     "scale": "UNCHECKED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-gozdzikowcach-3-elewa-9fc0f059cb",
+     "labelled": "SIDE_UNSPECIFIED",
+     "solverUse": "NOT_REGISTERED",
+     "before": "UNREGISTERED",
+     "after": "UNREGISTERED",
+     "side": "AXIS_ONLY LEFT_OR_RIGHT (LABEL_ELIMINATION)",
+     "along": {
+      "state": "REFUSED",
+      "mpp": null,
+      "anchors": [
+       "SIBLING_SHEETS"
+      ],
+      "why": "its outline is 144 px tall against 536 px for the house on its 3 same-size sibling sheets: the outline is not the building, so no band on it is the walls"
+     },
+     "vertical": {
+      "state": "UNCHECKED",
+      "groundY": null,
+      "why": "no ridge datum is printed on a section: no height is hung on this view (its along axis stands on its own)"
+     },
+     "scale": "UNCHECKED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-gozdzikowcach-3-elewa-df2d450fd1",
+     "labelled": "FRONT",
+     "solverUse": "NOT_REGISTERED",
+     "before": "UNREGISTERED",
+     "after": "UNREGISTERED",
+     "side": "REGISTERED FRONT (PUBLISHER_LABEL)",
+     "along": {
+      "state": "UNCHECKED",
+      "mpp": null,
+      "anchors": [],
+      "why": "no band of wall runs across its silhouette on any of five columns: the walls\u2019 ends cannot be read"
+     },
+     "vertical": {
+      "state": "UNCHECKED",
+      "groundY": null,
+      "why": "no ridge datum is printed on a section: no height is hung on this view (its along axis stands on its own)"
+     },
+     "scale": "UNCHECKED"
+    }
+   ]
+  },
+  {
+   "house": "marcowki",
+   "counts": {
+    "after": {
+     "ALONG_ONLY": 0,
+     "FULL": 4,
+     "UNREGISTERED": 0,
+     "VERTICAL_ONLY": 0
+    },
+    "before": {
+     "ALONG_ONLY": 0,
+     "FULL": 4,
+     "UNREGISTERED": 0,
+     "VERTICAL_ONLY": 0
+    }
+   },
+   "slots": {
+    "after": 53,
+    "before": 53
+   },
+   "datums": {
+    "ridgeY": 7.95,
+    "terrainY": null
+   },
+   "unchanged": {
+    "candidateHash": true,
+    "modelHash": true,
+    "sceneContentHash": true,
+    "sceneSha256": true,
+    "metricEvidenceHash": true
+   },
+   "views": [
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
+     "labelled": "SIDE_UNSPECIFIED",
+     "solverUse": "REGISTERED",
+     "before": "FULL",
+     "after": "FULL",
+     "side": "REGISTERED RIGHT (SOLVER_FIRST_READING)",
+     "along": {
+      "state": "REGISTERED",
+      "mpp": 0.016783,
+      "anchors": [
+       "SOLVER_REGISTRATION (shared with model)",
+       "PLAN_WALLED_SPAN (shared with model)"
+      ],
+      "why": "the solver's registered registration: the 14.60 m characteristic depth (the roof over the zones) (beats 12.61 m, which would put the ground 0.86 m)"
+     },
+     "vertical": {
+      "state": "REGISTERED",
+      "groundY": -0.256928,
+      "why": "the solver hung it from the ridge datum at the silhouette's apex; its ground lands at -0.256928 m"
+     },
+     "scale": "ISOTROPY_PLAUSIBLE"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c",
+     "labelled": "SIDE_UNSPECIFIED",
+     "solverUse": "REGISTERED",
+     "before": "FULL",
+     "after": "FULL",
+     "side": "REGISTERED LEFT (SOLVER_FIRST_READING)",
+     "along": {
+      "state": "REGISTERED",
+      "mpp": 0.016555,
+      "anchors": [
+       "SOLVER_REGISTRATION (shared with model)",
+       "PLAN_WALLED_SPAN (shared with model)"
+      ],
+      "why": "the solver's registered registration: the 14.60 m characteristic depth (the roof over the zones) (beats 12.61 m, which would put the ground 1.04 m)"
+     },
+     "vertical": {
+      "state": "REGISTERED",
+      "groundY": -0.045941,
+      "why": "the solver hung it from the ridge datum at the silhouette's apex; its ground lands at -0.045941 m"
+     },
+     "scale": "ISOTROPY_PLAUSIBLE"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+     "labelled": "REAR",
+     "solverUse": "REGISTERED",
+     "before": "FULL",
+     "after": "FULL",
+     "side": "REGISTERED REAR (SOLVER_LABELLED)",
+     "along": {
+      "state": "REGISTERED",
+      "mpp": 0.016806,
+      "anchors": [
+       "SOLVER_REGISTRATION (shared with model)",
+       "PLAN_WALLED_SPAN (shared with model)"
+      ],
+      "why": "the solver's registered registration: the 12.05 m width of the envelope"
+     },
+     "vertical": {
+      "state": "REGISTERED",
+      "groundY": -0.150558,
+      "why": "the solver hung it from the ridge datum at the silhouette's apex; its ground lands at -0.150558 m"
+     },
+     "scale": "ISOTROPY_PLAUSIBLE"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
+     "labelled": "FRONT",
+     "solverUse": "REGISTERED",
+     "before": "FULL",
+     "after": "FULL",
+     "side": "REGISTERED FRONT (SOLVER_LABELLED)",
+     "along": {
+      "state": "REGISTERED",
+      "mpp": 0.016853,
+      "anchors": [
+       "SOLVER_REGISTRATION (shared with model)",
+       "PLAN_WALLED_SPAN (shared with model)"
+      ],
+      "why": "the solver's registered registration: the 12.05 m width of the envelope"
+     },
+     "vertical": {
+      "state": "REGISTERED",
+      "groundY": -0.223776,
+      "why": "the solver hung it from the ridge datum at the silhouette's apex; its ground lands at -0.223776 m"
+     },
+     "scale": "ISOTROPY_PLAUSIBLE"
+    }
+   ]
+  },
+  {
+   "house": "ciesz",
+   "counts": {
+    "after": {
+     "ALONG_ONLY": 2,
+     "FULL": 2,
+     "UNREGISTERED": 0,
+     "VERTICAL_ONLY": 0
+    },
+    "before": {
+     "ALONG_ONLY": 3,
+     "FULL": 0,
+     "UNREGISTERED": 1,
+     "VERTICAL_ONLY": 0
+    }
+   },
+   "slots": {
+    "after": 29,
+    "before": 16
+   },
+   "datums": {
+    "ridgeY": 7.2,
+    "terrainY": null
+   },
+   "unchanged": {
+    "candidateHash": true,
+    "modelHash": true,
+    "sceneContentHash": true,
+    "sceneSha256": true,
+    "metricEvidenceHash": true
+   },
+   "views": [
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-cieszyniankach-12-ge-20f0eef8f3",
+     "labelled": "SIDE_UNSPECIFIED",
+     "solverUse": "NOT_REGISTERED",
+     "before": "UNREGISTERED",
+     "after": "ALONG_ONLY",
+     "side": "AXIS_ONLY LEFT_OR_RIGHT (LABEL_ELIMINATION)",
+     "along": {
+      "state": "SPAN_ONLY",
+      "mpp": 0.017096,
+      "anchors": [
+       "WALL_BAND_ENDS",
+       "PLAN_WALLED_SPAN (shared with model)",
+       "SIBLING_SHEETS",
+       "SIBLING_SHEETS"
+      ],
+      "why": "the band's ends (columns 171..1142) are the 16.6 m walled depth at the sheet scale of its sibling views (-0.431554 %): 0.017096 m/px; the hand is unknown, so no position along the facade is read"
+     },
+     "vertical": {
+      "state": "REFUSED",
+      "groundY": -0.924846,
+      "why": "the ridge datum at the apex and the along scale put the drawn ground at -0.924846 m, 0.024846 m outside a plinth below \u00b10.00: the apex is not the ridge, or one scale does not serve both axes"
+     },
+     "scale": "REFUSED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-cieszyniankach-12-ge-61de9c3488",
+     "labelled": "REAR",
+     "solverUse": "OPENINGS_ONLY",
+     "before": "ALONG_ONLY",
+     "after": "FULL",
+     "side": "REGISTERED REAR (SOLVER_LABELLED)",
+     "along": {
+      "state": "REGISTERED",
+      "mpp": 0.017022,
+      "anchors": [
+       "SOLVER_REGISTRATION (shared with model)",
+       "PLAN_WALLED_SPAN (shared with model)"
+      ],
+      "why": "the solver's openings only registration: the 11.66 m walled width (the walls' drawn span under the roof)"
+     },
+     "vertical": {
+      "state": "REGISTERED",
+      "groundY": -0.281461,
+      "why": "the ridge datum 7.2 m at the apex (row 176.482851) and the along scale put the drawn ground at -0.281461 m, within a plinth below \u00b10.00 (no terrain printed)"
+     },
+     "scale": "ISOTROPY_PLAUSIBLE"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-cieszyniankach-12-ge-85fbca6930",
+     "labelled": "SIDE_UNSPECIFIED",
+     "solverUse": "OPENINGS_ONLY",
+     "before": "ALONG_ONLY",
+     "after": "ALONG_ONLY",
+     "side": "REGISTERED LEFT (SOLVER_FIRST_READING)",
+     "along": {
+      "state": "REGISTERED",
+      "mpp": 0.017096,
+      "anchors": [
+       "SOLVER_REGISTRATION (shared with model)",
+       "PLAN_WALLED_SPAN (shared with model)"
+      ],
+      "why": "the solver's openings only registration: the 16.60 m walled depth (the walls' drawn span under the roof)"
+     },
+     "vertical": {
+      "state": "REFUSED",
+      "groundY": -0.923708,
+      "why": "the ridge datum at the apex and the along scale put the drawn ground at -0.923708 m, 0.023708 m outside a plinth below \u00b10.00: the apex is not the ridge, or one scale does not serve both axes"
+     },
+     "scale": "REFUSED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-cieszyniankach-12-ge-a35814d452",
+     "labelled": "FRONT",
+     "solverUse": "OPENINGS_ONLY",
+     "before": "ALONG_ONLY",
+     "after": "FULL",
+     "side": "REGISTERED FRONT (SOLVER_LABELLED)",
+     "along": {
+      "state": "REGISTERED",
+      "mpp": 0.016997,
+      "anchors": [
+       "SOLVER_REGISTRATION (shared with model)",
+       "PLAN_WALLED_SPAN (shared with model)"
+      ],
+      "why": "the solver's openings only registration: the 11.66 m walled width (the walls' drawn span under the roof)"
+     },
+     "vertical": {
+      "state": "REGISTERED",
+      "groundY": -0.250987,
+      "why": "the ridge datum 7.2 m at the apex (row 176.629309) and the along scale put the drawn ground at -0.250987 m, within a plinth below \u00b10.00 (no terrain printed)"
+     },
+     "scale": "ISOTROPY_PLAUSIBLE"
+    }
+   ]
+  },
+  {
+   "house": "rary",
+   "counts": {
+    "after": {
+     "ALONG_ONLY": 2,
+     "FULL": 2,
+     "UNREGISTERED": 0,
+     "VERTICAL_ONLY": 0
+    },
+    "before": {
+     "ALONG_ONLY": 2,
+     "FULL": 2,
+     "UNREGISTERED": 0,
+     "VERTICAL_ONLY": 0
+    }
+   },
+   "slots": {
+    "after": 42,
+    "before": 42
+   },
+   "datums": {
+    "ridgeY": 5.7,
+    "terrainY": -0.32
+   },
+   "unchanged": {
+    "candidateHash": true,
+    "modelHash": true,
+    "sceneContentHash": true,
+    "sceneSha256": true,
+    "metricEvidenceHash": true
+   },
+   "views": [
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elew-1417866f23",
+     "labelled": "SIDE_UNSPECIFIED",
+     "solverUse": "REGISTERED",
+     "before": "ALONG_ONLY",
+     "after": "ALONG_ONLY",
+     "side": "REGISTERED LEFT (SOLVER_MOVED)",
+     "along": {
+      "state": "REGISTERED",
+      "mpp": 0.01637,
+      "anchors": [
+       "SOLVER_REGISTRATION (shared with model)",
+       "PLAN_WALLED_SPAN (shared with model)"
+      ],
+      "why": "the solver's registered registration: the 14.70 m characteristic depth (the roof over the zones) (beats 14.70 m, which would put the ground 0.20 m)"
+     },
+     "vertical": {
+      "state": "UNCHECKED",
+      "groundY": 0.199777,
+      "why": "the solver hung it from the ridge datum but refused its low heights: its ground lands off the house\u2019s other views"
+     },
+     "scale": "ALONG_ONLY"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elew-5de5935285",
+     "labelled": "FRONT",
+     "solverUse": "REGISTERED",
+     "before": "FULL",
+     "after": "FULL",
+     "side": "REGISTERED FRONT (SOLVER_LABELLED)",
+     "along": {
+      "state": "REGISTERED",
+      "mpp": 0.016596,
+      "anchors": [
+       "SOLVER_REGISTRATION (shared with model)",
+       "PLAN_WALLED_SPAN (shared with model)"
+      ],
+      "why": "the solver's registered registration: the 17.21 m width of the envelope"
+     },
+     "vertical": {
+      "state": "REGISTERED",
+      "groundY": -0.374118,
+      "why": "the solver hung it from the ridge datum at the silhouette's apex; its ground lands at -0.374118 m"
+     },
+     "scale": "VERIFIED_ISOTROPIC"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elew-8abaf52877",
+     "labelled": "SIDE_UNSPECIFIED",
+     "solverUse": "REGISTERED",
+     "before": "ALONG_ONLY",
+     "after": "ALONG_ONLY",
+     "side": "REGISTERED RIGHT (SOLVER_MOVED)",
+     "along": {
+      "state": "REGISTERED",
+      "mpp": 0.015589,
+      "anchors": [
+       "SOLVER_REGISTRATION (shared with model)",
+       "PLAN_WALLED_SPAN (shared with model)"
+      ],
+      "why": "the solver's registered registration: the 14.70 m characteristic depth (the roof over the zones) (beats 14.70 m, which would put the ground 0.46 m)"
+     },
+     "vertical": {
+      "state": "UNCHECKED",
+      "groundY": 0.462248,
+      "why": "the solver hung it from the ridge datum but refused its low heights: its ground lands off the house\u2019s other views"
+     },
+     "scale": "ALONG_ONLY"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elew-c383df2964",
+     "labelled": "REAR",
+     "solverUse": "REGISTERED",
+     "before": "FULL",
+     "after": "FULL",
+     "side": "REGISTERED REAR (SOLVER_LABELLED)",
+     "along": {
+      "state": "REGISTERED",
+      "mpp": 0.016725,
+      "anchors": [
+       "SOLVER_REGISTRATION (shared with model)",
+       "PLAN_WALLED_SPAN (shared with model)"
+      ],
+      "why": "the solver's registered registration: the 17.21 m width of the envelope"
+     },
+     "vertical": {
+      "state": "REGISTERED",
+      "groundY": -0.404616,
+      "why": "the solver hung it from the ridge datum at the silhouette's apex; its ground lands at -0.404616 m"
+     },
+     "scale": "VERIFIED_ISOTROPIC"
+    }
+   ]
+  },
+  {
+   "house": "trytomach",
+   "counts": {
+    "after": {
+     "ALONG_ONLY": 1,
+     "FULL": 0,
+     "UNREGISTERED": 3,
+     "VERTICAL_ONLY": 0
+    },
+    "before": {
+     "ALONG_ONLY": 1,
+     "FULL": 1,
+     "UNREGISTERED": 2,
+     "VERTICAL_ONLY": 0
+    }
+   },
+   "slots": {
+    "after": 5,
+    "before": 22
+   },
+   "datums": {
+    "ridgeY": 7.62,
+    "terrainY": null
+   },
+   "unchanged": {
+    "candidateHash": true,
+    "modelHash": true,
+    "sceneContentHash": true,
+    "sceneSha256": true,
+    "metricEvidenceHash": true
+   },
+   "views": [
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-trytomach-g-elewacja-4db3572da1",
+     "labelled": "SIDE_UNSPECIFIED",
+     "solverUse": "NOT_REGISTERED",
+     "before": "UNREGISTERED",
+     "after": "UNREGISTERED",
+     "side": "AXIS_ONLY LEFT_OR_RIGHT (LABEL_ELIMINATION)",
+     "along": {
+      "state": "UNCHECKED",
+      "mpp": null,
+      "anchors": [
+       "WALL_BAND_ENDS",
+       "PLAN_WALLED_SPAN (shared with model)"
+      ],
+      "why": "the wall band's ends (columns 430..862) are the 7.25 m walled depth: 0.016782 m/px; the hand is unknown, so the span and scale stand and no position along the facade is read; refused: that is 4.586813 % off the sheet scale 0.016046 m/px of its same-size sibling views"
+     },
+     "vertical": {
+      "state": "UNCHECKED",
+      "groundY": null,
+      "why": "the apex is drawn, but with no along scale and no printed terrain there is one datum and no scale"
+     },
+     "scale": "UNCHECKED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-trytomach-g-elewacja-7b061554b1",
+     "labelled": "FRONT",
+     "solverUse": "REGISTERED",
+     "before": "FULL",
+     "after": "UNREGISTERED",
+     "side": "REGISTERED FRONT (SOLVER_LABELLED)",
+     "along": {
+      "state": "UNCHECKED",
+      "mpp": null,
+      "anchors": [
+       "SOLVER_REGISTRATION (shared with model)",
+       "PLAN_WALLED_SPAN (shared with model)"
+      ],
+      "why": "contested: the solver's registration gives 0.016046 m/px, but this view's wall band gives 0.014677 m/px (-8.531721 % apart) and the opposite view frame-asset-gotowy-projekt-dom-w-trytomach-g-elewacja-957bead831's band agrees with it (0.014694 m/px): two band readings against one, and neither scale i"
+     },
+     "vertical": {
+      "state": "UNCHECKED",
+      "groundY": null,
+      "why": "the roof's apex is not stated: the top outline is neither level over a third of the walls nor two slopes meeting (slopes 0 and 0 px/px)"
+     },
+     "scale": "UNCHECKED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-trytomach-g-elewacja-957bead831",
+     "labelled": "REAR",
+     "solverUse": "OPENINGS_ONLY",
+     "before": "ALONG_ONLY",
+     "after": "ALONG_ONLY",
+     "side": "REGISTERED REAR (SOLVER_LABELLED)",
+     "along": {
+      "state": "REGISTERED",
+      "mpp": 0.014694,
+      "anchors": [
+       "SOLVER_REGISTRATION (shared with model)",
+       "PLAN_WALLED_SPAN (shared with model)"
+      ],
+      "why": "the solver's openings only registration: the 12.99 m walled width (the walls' drawn span under the roof)"
+     },
+     "vertical": {
+      "state": "REFUSED",
+      "groundY": 0.78729,
+      "why": "the ridge datum at the apex and the along scale put the drawn ground at 0.78729 m, 0.68729 m outside a plinth below \u00b10.00: the apex is not the ridge, or one scale does not serve both axes"
+     },
+     "scale": "REFUSED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-trytomach-g-elewacja-a91e112fb3",
+     "labelled": "SIDE_UNSPECIFIED",
+     "solverUse": "NOT_REGISTERED",
+     "before": "UNREGISTERED",
+     "after": "UNREGISTERED",
+     "side": "AXIS_ONLY LEFT_OR_RIGHT (LABEL_ELIMINATION)",
+     "along": {
+      "state": "REFUSED",
+      "mpp": null,
+      "anchors": [
+       "SIBLING_SHEETS"
+      ],
+      "why": "its outline is 232 px tall against 465 px for the house on its 3 same-size sibling sheets: the outline is not the building, so no band on it is the walls"
+     },
+     "vertical": {
+      "state": "UNCHECKED",
+      "groundY": null,
+      "why": "the apex is drawn, but with no along scale and no printed terrain there is one datum and no scale"
+     },
+     "scale": "UNCHECKED"
+    }
+   ]
+  },
+  {
+   "house": "arganiach",
+   "counts": {
+    "after": {
+     "ALONG_ONLY": 0,
+     "FULL": 2,
+     "UNREGISTERED": 2,
+     "VERTICAL_ONLY": 0
+    },
+    "before": {
+     "ALONG_ONLY": 0,
+     "FULL": 2,
+     "UNREGISTERED": 2,
+     "VERTICAL_ONLY": 0
+    }
+   },
+   "slots": {
+    "after": 28,
+    "before": 28
+   },
+   "datums": {
+    "ridgeY": 7.94,
+    "terrainY": null
+   },
+   "unchanged": {
+    "candidateHash": true,
+    "modelHash": true,
+    "sceneContentHash": true,
+    "sceneSha256": true,
+    "metricEvidenceHash": true
+   },
+   "views": [
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-arganiach-g2e-elewacj-134561073d",
+     "labelled": "REAR",
+     "solverUse": "REGISTERED",
+     "before": "FULL",
+     "after": "FULL",
+     "side": "REGISTERED REAR (SOLVER_LABELLED)",
+     "along": {
+      "state": "REGISTERED",
+      "mpp": 0.01709,
+      "anchors": [
+       "SOLVER_REGISTRATION (shared with model)",
+       "PLAN_WALLED_SPAN (shared with model)"
+      ],
+      "why": "the solver's registered registration: the 14.20 m walled width plus the section's 0.89 m of eaves each side (beats 14.20 m, which would put the ground 0.73 m)"
+     },
+     "vertical": {
+      "state": "REGISTERED",
+      "groundY": -0.177568,
+      "why": "the solver hung it from the ridge datum at the silhouette's apex; its ground lands at -0.177568 m"
+     },
+     "scale": "ISOTROPY_PLAUSIBLE"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-arganiach-g2e-elewacj-15d78fb30b",
+     "labelled": "SIDE_UNSPECIFIED",
+     "solverUse": "NOT_REGISTERED",
+     "before": "UNREGISTERED",
+     "after": "UNREGISTERED",
+     "side": "AXIS_ONLY LEFT_OR_RIGHT (LABEL_ELIMINATION)",
+     "along": {
+      "state": "UNCHECKED",
+      "mpp": null,
+      "anchors": [],
+      "why": "no band of wall runs across its silhouette on any of five columns: the walls\u2019 ends cannot be read"
+     },
+     "vertical": {
+      "state": "UNCHECKED",
+      "groundY": null,
+      "why": "the roof's apex is not stated: the two slopes meet at column 338.771831, outside the walls (443..968)"
+     },
+     "scale": "UNCHECKED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-arganiach-g2e-elewacj-3fca1cf71a",
+     "labelled": "SIDE_UNSPECIFIED",
+     "solverUse": "NOT_REGISTERED",
+     "before": "UNREGISTERED",
+     "after": "UNREGISTERED",
+     "side": "AXIS_ONLY LEFT_OR_RIGHT (LABEL_ELIMINATION)",
+     "along": {
+      "state": "UNCHECKED",
+      "mpp": null,
+      "anchors": [],
+      "why": "no band of wall runs across its silhouette on any of five columns: the walls\u2019 ends cannot be read"
+     },
+     "vertical": {
+      "state": "UNCHECKED",
+      "groundY": null,
+      "why": "the apex is drawn, but with no along scale and no printed terrain there is one datum and no scale"
+     },
+     "scale": "UNCHECKED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-arganiach-g2e-elewacj-42881dfc86",
+     "labelled": "FRONT",
+     "solverUse": "REGISTERED",
+     "before": "FULL",
+     "after": "FULL",
+     "side": "REGISTERED FRONT (SOLVER_LABELLED)",
+     "along": {
+      "state": "REGISTERED",
+      "mpp": 0.0172,
+      "anchors": [
+       "SOLVER_REGISTRATION (shared with model)",
+       "PLAN_WALLED_SPAN (shared with model)"
+      ],
+      "why": "the solver's registered registration: the 14.20 m walled width plus the section's 0.89 m of eaves each side (beats 14.20 m, which would put the ground 0.74 m)"
+     },
+     "vertical": {
+      "state": "REGISTERED",
+      "groundY": -0.161196,
+      "why": "the solver hung it from the ridge datum at the silhouette's apex; its ground lands at -0.161196 m"
+     },
+     "scale": "ISOTROPY_PLAUSIBLE"
+    }
+   ]
+  },
+  {
+   "house": "sasankach3",
+   "counts": {
+    "after": {
+     "ALONG_ONLY": 3,
+     "FULL": 0,
+     "UNREGISTERED": 1,
+     "VERTICAL_ONLY": 0
+    },
+    "before": {
+     "ALONG_ONLY": 2,
+     "FULL": 0,
+     "UNREGISTERED": 2,
+     "VERTICAL_ONLY": 0
+    }
+   },
+   "slots": {
+    "after": 18,
+    "before": 17
+   },
+   "datums": {
+    "ridgeY": 8.52,
+    "terrainY": -0.57
+   },
+   "unchanged": {
+    "candidateHash": true,
+    "modelHash": true,
+    "sceneContentHash": true,
+    "sceneSha256": true,
+    "metricEvidenceHash": true
+   },
+   "views": [
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-sasankach-3-g-elewacj-1c45ae540e",
+     "labelled": "SIDE_UNSPECIFIED",
+     "solverUse": "NOT_REGISTERED",
+     "before": "UNREGISTERED",
+     "after": "ALONG_ONLY",
+     "side": "AXIS_ONLY LEFT_OR_RIGHT (LABEL_ELIMINATION)",
+     "along": {
+      "state": "SPAN_ONLY",
+      "mpp": 0.016354,
+      "anchors": [
+       "BUILT_BAND_ENDS",
+       "PLAN_WALLED_SPAN (shared with model)",
+       "SIBLING_SHEETS"
+      ],
+      "why": "the band's ends (columns 280..919) are the 10.45 m walled depth at the sheet scale of its sibling views (-2.835311 %): 0.016354 m/px; the hand is unknown, so no position along the facade is read"
+     },
+     "vertical": {
+      "state": "REFUSED",
+      "groundY": -0.049496,
+      "why": "the ridge datum at the apex and the along scale put the drawn ground at -0.049496 m, 0.520504 m outside 0.3 m of the printed terrain: the apex is not the ridge, or one scale does not serve both axes"
+     },
+     "scale": "REFUSED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-sasankach-3-g-elewacj-9b7902ddb2",
+     "labelled": "SIDE_UNSPECIFIED",
+     "solverUse": "NOT_REGISTERED",
+     "before": "UNREGISTERED",
+     "after": "UNREGISTERED",
+     "side": "AXIS_ONLY LEFT_OR_RIGHT (LABEL_ELIMINATION)",
+     "along": {
+      "state": "UNCHECKED",
+      "mpp": null,
+      "anchors": [
+       "WALL_BAND_ENDS",
+       "PLAN_WALLED_SPAN (shared with model)"
+      ],
+      "why": "the wall band's ends (columns 305..1007) are the 10.45 m walled depth: 0.014886 m/px; the hand is unknown, so the span and scale stand and no position along the facade is read; refused: that is -6.318439 % off the sheet scale 0.01589 m/px of its same-size sibling views"
+     },
+     "vertical": {
+      "state": "REFUSED",
+      "groundY": null,
+      "why": "two printed datums on two drawn rows give 0.017347 m/px up the wall, 9.169289 % off the sheet scale 0.01589 m/px of the solver's same-size registrations: the apex is not the ridge, the ground is not the terrain, or the sheet is not one scale \u2014 no height is read"
+     },
+     "scale": "REFUSED"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-sasankach-3-g-elewacj-a66bd73cb2",
+     "labelled": "FRONT",
+     "solverUse": "REGISTERED",
+     "before": "ALONG_ONLY",
+     "after": "ALONG_ONLY",
+     "side": "REGISTERED FRONT (SOLVER_LABELLED)",
+     "along": {
+      "state": "REGISTERED",
+      "mpp": 0.01589,
+      "anchors": [
+       "SOLVER_REGISTRATION (shared with model)",
+       "PLAN_WALLED_SPAN (shared with model)"
+      ],
+      "why": "the solver's registered registration: the 11.60 m width of the envelope"
+     },
+     "vertical": {
+      "state": "UNCHECKED",
+      "groundY": 0.272877,
+      "why": "the solver hung it from the ridge datum but refused its low heights: its ground lands off the house\u2019s other views"
+     },
+     "scale": "ALONG_ONLY"
+    },
+    {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-sasankach-3-g-elewacj-e411b09da9",
+     "labelled": "REAR",
+     "solverUse": "REGISTERED",
+     "before": "ALONG_ONLY",
+     "after": "ALONG_ONLY",
+     "side": "REGISTERED REAR (SOLVER_LABELLED)",
+     "along": {
+      "state": "REGISTERED",
+      "mpp": 0.015804,
+      "anchors": [
+       "SOLVER_REGISTRATION (shared with model)",
+       "PLAN_WALLED_SPAN (shared with model)"
+      ],
+      "why": "the solver's registered registration: the 11.60 m width of the envelope"
+     },
+     "vertical": {
+      "state": "UNCHECKED",
+      "groundY": 0.238801,
+      "why": "the solver hung it from the ridge datum but refused its low heights: its ground lands off the house\u2019s other views"
+     },
+     "scale": "ALONG_ONLY"
+    }
+   ]
+  }
+ ]
+}

@@ -35,9 +35,9 @@ describe('the Android contract fixtures', () => {
     }
   })
 
-  it('the result carries the three assessment axes and keeps the model it is about', async () => {
+  it('the result carries the three assessment axes (and, N9-02A, the elevation registration) and keeps the model it is about', async () => {
     const result = JSON.parse((await fresh)['result.json']) as Record<string, any>
-    expect(Object.keys(result.assessment).sort()).toEqual(['decompositionCompleteness', 'previewAvailable', 'schema', 'schemaVersion', 'sourceFidelity', 'sourceUnchecked', 'summary', 'technicalValidity'])
+    expect(Object.keys(result.assessment).sort()).toEqual(['decompositionCompleteness', 'elevationRegistration', 'previewAvailable', 'schema', 'schemaVersion', 'sourceFidelity', 'sourceUnchecked', 'summary', 'technicalValidity'])
     expect(result.assessment.previewAvailable).toBe(true)
     expect(result.assessment.decompositionCompleteness.verdict).toBe(result.preview.completeness?.verdict ?? 'NOT_ASSESSED')
     expect(result.links.scene).toBeTruthy()

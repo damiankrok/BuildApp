@@ -848,7 +848,8 @@ internal fun AssessmentDetails(a: ModelAssessment) {
         if (f.conflicts.size > 6) StatusText(stringResource(R.string.assessment_more, f.conflicts.size - 6))
         val u = a.sourceUnchecked.counts
         Text(stringResource(R.string.assessment_unchecked, u.total, u.none, u.partial), style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
-        for (i in a.sourceUnchecked.items.filter { it.kind != "PERSPECTIVE" }.take(6)) StatusText("${i.kind} · ${i.what}: ${i.why}")
+        for (i in a.sourceUnchecked.items.filter { it.kind != "PERSPECTIVE" }.take(6)) StatusText("${i.kind} · ${i.what}${i.registration?.let { r -> " [${r.`class`}: ${r.side}, ALONG ${r.along}, VERTICAL ${r.vertical}]" }.orEmpty()}: ${i.why}")
+        a.elevationRegistration?.counts?.after?.let { c -> StatusText(stringResource(R.string.assessment_elevations, c.full, c.alongOnly, c.verticalOnly, c.unregistered)) }
         StatusText(stringResource(R.string.assessment_preview_kept))
     }
 }

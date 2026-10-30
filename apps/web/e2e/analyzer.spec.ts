@@ -61,6 +61,8 @@ test('a project link becomes a building: stages, progress, result, and the model
   await expect(page.getByTestId('analyzer-axis-completeness')).toHaveText(/^complete/)
   await expect(page.getByTestId('analyzer-axis-fidelity')).toHaveAttribute('data-state', /^(OK|WARN|OPEN)$/)
   await expect(page.getByTestId('analyzer-axis-unchecked')).toContainText('source item')
+  // N9-02A: which axes of the elevations are registered
+  await expect(page.getByTestId('analyzer-axis-elevations')).toHaveText(/^\d+ full · \d+ along only · \d+ vertical only · \d+ unregistered$/)
   await expect(page.getByTestId('analyzer-preview-kept')).toBeVisible()
   await expect(page.getByTestId('analyzer-open')).toBeEnabled()
   await page.getByTestId('analyzer-assessment-details').locator('summary').click()

@@ -31,6 +31,14 @@ describe('the assessment as the Analyze panel says it (N9-01)', () => {
     expect(lines[3].detail).toEqual(['elevation · REAR elevation (NOT_REGISTERED): no ridge datum'])
   })
 
+  it('N9-02A: says which axes of each elevation are registered, when the service sends them', () => {
+    const a = { ...view('UNCHECKED'), elevationRegistration: { counts: { before: { FULL: 1, ALONG_ONLY: 0, VERTICAL_ONLY: 0, UNREGISTERED: 1 }, after: { FULL: 1, ALONG_ONLY: 1, VERTICAL_ONLY: 0, UNREGISTERED: 0 } }, views: [{ frameId: 'e1', class: 'ALONG_ONLY', side: { state: 'AXIS_ONLY', value: 'LEFT_OR_RIGHT' }, along: { state: 'SPAN_ONLY' }, vertical: { state: 'UNCHECKED' }, scale: { state: 'ALONG_ONLY' } }] } }
+    const line = assessmentLines(a).find((l) => l.axis === 'ELEVATIONS')
+    expect(line?.value).toBe('1 full · 1 along only · 0 vertical only · 0 unregistered')
+    expect(line?.detail[0]).toBe('e1: along only — side axis_only left_or_right, along span_only, vertical unchecked, scale along_only')
+    expect(assessmentLines(view('PASS')).some((l) => l.axis === 'ELEVATIONS')).toBe(false)
+  })
+
   it('names technical errors per check', () => {
     expect(assessmentLines(view('PASS', 'ERRORS'))[0]).toMatchObject({ state: 'WARN', value: '2 technical errors', detail: ['COMPILER: 2 errors'] })
   })

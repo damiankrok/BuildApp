@@ -61,7 +61,7 @@ class CurrentServerContractTest {
         assertEquals(sceneHeader, completed.entry.sceneSha256)
 
         val summary = completed.summary
-        assertEquals("1.3.0", summary.analyzer.service)
+        assertEquals("1.4.0", summary.analyzer.service)
         // the older members are all still read
         assertTrue(summary.warningDetails.isNotEmpty())
         assertNotNull(summary.preview.completeness)
@@ -75,6 +75,11 @@ class CurrentServerContractTest {
         assertTrue(a.sourceFidelity.relations.all { it.status in setOf(ModelAssessment.PASS, ModelAssessment.CONFLICT, ModelAssessment.UNCHECKED) })
         assertTrue(a.sourceUnchecked.counts.total == a.sourceUnchecked.items.size)
         assertTrue(a.previewAvailable)
+        // N9-02A: the elevations' four-axis registration, counted before and after
+        val e = requireNotNull(a.elevationRegistration) { "the current server sends the elevation registration" }
+        val after = e.counts.after
+        assertEquals(after.full + after.alongOnly + after.verticalOnly + after.unregistered, e.counts.before.full + e.counts.before.alongOnly + e.counts.before.verticalOnly + e.counts.before.unregistered)
+        assertTrue(a.sourceUnchecked.items.filter { it.kind == "ELEVATION" }.all { it.registration != null })
         // what no relation compared is not agreement: the headline does not say "ready" on an UNCHECKED fidelity
         if (a.sourceFidelity.status != ModelAssessment.PASS) assertTrue(resultHeadline(summary) != ResultHeadline.READY)
 

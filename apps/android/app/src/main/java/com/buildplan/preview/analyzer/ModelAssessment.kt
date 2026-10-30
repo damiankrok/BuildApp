@@ -23,6 +23,8 @@ data class ModelAssessment(
     val sourceFidelity: SourceFidelity = SourceFidelity(),
     val sourceUnchecked: SourceUnchecked = SourceUnchecked(),
     val previewAvailable: Boolean = true,
+    /** N9-02A: every elevation on four axes; absent from a service older than 1.4.0. */
+    val elevationRegistration: ElevationRegistration? = null,
     val summary: String = "",
 ) {
     val hasConflicts: Boolean get() = sourceFidelity.status == CONFLICT
@@ -111,6 +113,8 @@ data class UncheckedCounts(val total: Int = 0, val byKind: Map<String, Int> = em
 @Serializable
 data class UncheckedItem(
     val kind: String = "",
+    /** N9-02A: for an elevation, how far its registration reaches on each axis. */
+    val registration: ViewAxesSummary? = null,
     val frameId: String? = null,
     val storeyIndex: Int? = null,
     val side: String? = null,
@@ -119,3 +123,22 @@ data class UncheckedItem(
     val why: String = "",
     val couldCheck: String = "",
 )
+
+/** N9-02A: one elevation's registration, axis by axis: FULL / ALONG_ONLY / VERTICAL_ONLY / UNREGISTERED. */
+@Serializable
+data class ViewAxesSummary(val `class`: String = "", val side: String = "", val along: String = "", val vertical: String = "", val scale: String = "")
+
+@Serializable
+data class RegistrationCounts(
+    @SerialName("FULL") val full: Int = 0,
+    @SerialName("ALONG_ONLY") val alongOnly: Int = 0,
+    @SerialName("VERTICAL_ONLY") val verticalOnly: Int = 0,
+    @SerialName("UNREGISTERED") val unregistered: Int = 0,
+)
+
+@Serializable
+data class RegistrationBeforeAfter(val before: RegistrationCounts = RegistrationCounts(), val after: RegistrationCounts = RegistrationCounts())
+
+/** The per-view records stay on the server's answer; the phone reads the counts and what each unchecked view lacks. */
+@Serializable
+data class ElevationRegistration(val counts: RegistrationBeforeAfter = RegistrationBeforeAfter())

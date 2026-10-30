@@ -13,11 +13,13 @@ export type AssessmentView = {
   technicalValidity: { status: 'VALID' | 'ERRORS'; errors: number; warnings: number; checks: Array<{ check: string; errors: number; warnings: number }> }
   decompositionCompleteness: { verdict: string; meaning: string }
   sourceFidelity: { status: RelationStatus; relations: Array<{ id: string; title: string; status: RelationStatus; counts: Record<RelationStatus, number> }>; conflicts: string[] }
-  sourceUnchecked: { counts: { total: number; none: number; partial: number }; items: Array<{ kind: string; what: string; why: string }> }
+  sourceUnchecked: { counts: { total: number; none: number; partial: number }; items: Array<{ kind: string; what: string; why: string; registration?: { class: string; side: string; along: string; vertical: string; scale: string } }> }
   previewAvailable: boolean
+  /** N9-02A: every elevation on four axes; absent from a service older than 1.4.0. */
+  elevationRegistration?: { counts: { before: Record<string, number>; after: Record<string, number> }; views: Array<{ frameId: string; class: string; side: { state: string; value: string }; along: { state: string }; vertical: { state: string }; scale: { state: string } }> }
 }
 
-export type AssessmentLine = { axis: 'TECHNICAL' | 'COMPLETENESS' | 'FIDELITY' | 'UNCHECKED'; state: 'OK' | 'WARN' | 'OPEN'; label: string; value: string; detail: string[] }
+export type AssessmentLine = { axis: 'TECHNICAL' | 'COMPLETENESS' | 'FIDELITY' | 'UNCHECKED' | 'ELEVATIONS'; state: 'OK' | 'WARN' | 'OPEN'; label: string; value: string; detail: string[] }
 
 const COMPLETENESS: Record<string, string> = {
   COMPLETE: 'complete',
@@ -57,7 +59,21 @@ export function assessmentLines(a: AssessmentView): AssessmentLine[] {
       state: u.total === 0 ? 'OK' : 'OPEN',
       label: 'not compared with the model',
       value: `${u.total} source item${u.total === 1 ? '' : 's'} (none ${u.none} · partly ${u.partial})`,
-      detail: a.sourceUnchecked.items.filter((i) => i.kind !== 'PERSPECTIVE').map((i) => `${i.kind.toLowerCase()} · ${i.what}: ${i.why}`),
+      detail: a.sourceUnchecked.items.filter((i) => i.kind !== 'PERSPECTIVE').map((i) => `${i.kind.toLowerCase()} · ${i.what}${i.registration ? ` [${i.registration.class.toLowerCase().replace('_', ' ')}: side ${i.registration.side.toLowerCase()}, along ${i.registration.along.toLowerCase()}, vertical ${i.registration.vertical.toLowerCase()}]` : ''}: ${i.why}`),
     },
+    ...(a.elevationRegistration ? [elevationLine(a.elevationRegistration)] : []),
   ]
+}
+
+/** N9-02A: how many elevations are registered on which axes — each view's side, along and vertical axis said apart. */
+function elevationLine(e: NonNullable<AssessmentView['elevationRegistration']>): AssessmentLine {
+  const c = e.counts.after
+  const views = e.views.filter((v) => v.class !== undefined)
+  return {
+    axis: 'ELEVATIONS',
+    state: (c.UNREGISTERED ?? 0) === 0 && (c.ALONG_ONLY ?? 0) === 0 && (c.VERTICAL_ONLY ?? 0) === 0 ? 'OK' : 'OPEN',
+    label: 'elevations registered',
+    value: `${c.FULL ?? 0} full · ${c.ALONG_ONLY ?? 0} along only · ${c.VERTICAL_ONLY ?? 0} vertical only · ${c.UNREGISTERED ?? 0} unregistered`,
+    detail: views.map((v) => `${v.frameId}: ${v.class.toLowerCase().replace('_', ' ')} — side ${v.side.state.toLowerCase()} ${v.side.value.toLowerCase()}, along ${v.along.state.toLowerCase()}, vertical ${v.vertical.state.toLowerCase()}, scale ${v.scale.state.toLowerCase()}`),
+  }
 }
