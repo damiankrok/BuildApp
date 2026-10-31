@@ -47,6 +47,17 @@ export type Anchor = {
 
 export type Alternative = { id: string; value: string; measure: number | null; why: string }
 
+/**
+ * N9-02R: what an axis is worth to a comparison made in it — the one adjudication R5, `elevationRegistration` and
+ * `sourceUnchecked` share.
+ *   VALID        registered on source anchors, nothing measured against it
+ *   SPAN_ONLY    the span and scale stand, the hand and offset do not: no position along the facade
+ *   DISPUTED     a measurement contradicts it (two readings of the scale, a ground off the terrain, the solver's own
+ *                refusal of its heights): a residual computed in it is not evidence about the model
+ *   UNAVAILABLE  nothing registers it (no ridge datum, no apex, no wall end)
+ */
+export type AxisValidity = 'VALID' | 'SPAN_ONLY' | 'DISPUTED' | 'UNAVAILABLE'
+
 export type ElevationAxes = {
   frameId: string
   assetId: string
@@ -55,8 +66,8 @@ export type ElevationAxes = {
   extent: PixelRect | null
   extentWhy: string
   side: { state: 'REGISTERED' | 'AXIS_ONLY' | 'UNKNOWN' | 'REFUSED'; value: Side | 'LEFT_OR_RIGHT' | 'FRONT_OR_REAR' | 'UNKNOWN'; basis: string; confidence: number; why: string; anchors: Anchor[]; alternatives: Alternative[] }
-  along: { state: AxisState; mpp?: number; alongAtLeft?: number; alongSign?: 1 | -1; spanM?: number; bandPx?: { x0: number; x1: number; rows: number }; uncertaintyM?: number; why: string; anchors: Anchor[]; alternatives: Alternative[] }
-  vertical: { state: AxisState; apexRow?: number; groundRow?: number; zeroRow?: number; groundY?: number; groundErrorM?: number; why: string; anchors: Anchor[]; alternatives: Alternative[] }
+  along: { state: AxisState; mpp?: number; alongAtLeft?: number; alongSign?: 1 | -1; spanM?: number; bandPx?: { x0: number; x1: number; rows: number }; uncertaintyM?: number; why: string; anchors: Anchor[]; alternatives: Alternative[]; /** N9-02R: the measurement that contradicts this axis, where one does. */ dispute?: string }
+  vertical: { state: AxisState; apexRow?: number; groundRow?: number; zeroRow?: number; groundY?: number; groundErrorM?: number; why: string; anchors: Anchor[]; alternatives: Alternative[]; dispute?: string }
   scale: { state: 'VERIFIED_ISOTROPIC' | 'ISOTROPY_PLAUSIBLE' | 'ALONG_ONLY' | 'VERTICAL_ONLY' | 'REFUSED' | 'UNCHECKED'; mpp?: number; why: string }
   class: RegistrationClass
   /** What this view can now be checked for, by axis (slots, not checks: the comparison is R5/R6's). */
@@ -65,6 +76,8 @@ export type ElevationAxes = {
   solver: { use: string; side?: string; mpp?: number; openingHeights?: string }
   /** Where both registered it on the along axis: how far apart the two scales are (a consistency check, not evidence). */
   solverAgreement?: { mppRatio: number }
+  /** N9-02R: the shared adjudication of each axis, for every comparison made on this view. */
+  validity: { along: AxisValidity; vertical: AxisValidity; hand: 'KNOWN' | 'UNKNOWN'; why: { along: string; vertical: string } }
 }
 
 /** As the solver's wall-band registration: a band must hold this share of the silhouette's rows and span this share of its width. */
@@ -275,6 +288,7 @@ export function elevationAxes(input: ElevationAxesInput): ElevationAxes[] {
       scale: { state: 'UNCHECKED', why },
       class: 'UNREGISTERED',
       checkable: { along: [], vertical: [], slots: 0 },
+      validity: { along: 'UNAVAILABLE', vertical: 'UNAVAILABLE', hand: 'UNKNOWN', why: { along: why, vertical: why } },
     })
     if (frame.roles.projection !== 'ORTHOGRAPHIC_ELEVATION') {
       out.push(refuseAll(`a ${frame.roles.projection.toLowerCase().replace(/_/g, ' ')} is not an orthographic elevation: no axis is registered on it`))
@@ -358,7 +372,7 @@ export function elevationAxes(input: ElevationAxesInput): ElevationAxes[] {
     }
 
     ctx.set(frame.id, { raster, rect, solverReg, band, axis, extentPlausible })
-    out.push({ ...base, side, along, vertical: { state: 'UNCHECKED', why: '', anchors: [], alternatives: [] }, scale: { state: 'UNCHECKED', why: '' }, class: 'UNREGISTERED', checkable: { along: [], vertical: [], slots: 0 } })
+    out.push({ ...base, side, along, vertical: { state: 'UNCHECKED', why: '', anchors: [], alternatives: [] }, scale: { state: 'UNCHECKED', why: '' }, class: 'UNREGISTERED', checkable: { along: [], vertical: [], slots: 0 }, validity: { along: 'UNAVAILABLE', vertical: 'UNAVAILABLE', hand: 'UNKNOWN', why: { along: '', vertical: '' } } })
   }
 
   // the sheet scale: on sheets of one size, the views whose along scale stands agree on one m/px; a band of built
@@ -383,7 +397,7 @@ export function elevationAxes(input: ElevationAxesInput): ElevationAxes[] {
       continue
     }
     const { mpp: _m, alongAtLeft: _a, alongSign: _s, ...rest } = v.along
-    v.along = { ...rest, state: 'UNCHECKED', why: `contested: the solver's registration gives ${v.solver.mpp} m/px, but this view's wall band gives ${mine} m/px (${round6((mine / v.solver.mpp - 1) * 100)} % apart) and the opposite view ${mate.frameId}'s band agrees with it (${theirs} m/px): two band readings against one, and neither scale is taken` }
+    v.along = { ...rest, state: 'UNCHECKED', dispute: `SOLVER_REGISTRATION_CONTESTED: solver ${v.solver.mpp} m/px against this view's wall band ${mine} m/px and the opposite view's ${theirs} m/px`, why: `contested: the solver's registration gives ${v.solver.mpp} m/px, but this view's wall band gives ${mine} m/px (${round6((mine / v.solver.mpp - 1) * 100)} % apart) and the opposite view ${mate.frameId}'s band agrees with it (${theirs} m/px): two band readings against one, and neither scale is taken` }
   }
   // opposite views of one axis, on sheets of one size: their wall bands must show one span. Judged on the states as
   // they stand (a snapshot), so the order of the views decides nothing: where two disagree, a band the sheet scale
@@ -407,7 +421,7 @@ export function elevationAxes(input: ElevationAxesInput): ElevationAxes[] {
   }
   for (const [v, why] of drop) {
     const { mpp: _m, alongAtLeft: _a, alongSign: _s, ...rest } = v.along
-    v.along = { ...rest, state: 'UNCHECKED', why: `${v.along.why}; but ${why}` }
+    v.along = { ...rest, state: 'UNCHECKED', dispute: `OPPOSITE_VIEWS_DISAGREE: ${why.slice(0, 200)}`, why: `${v.along.why}; but ${why}` }
   }
   // vertical and scale, once every along axis is settled
   const sheetRefOf = (v: ElevationAxes): number | undefined => {
@@ -431,7 +445,7 @@ export function elevationAxes(input: ElevationAxesInput): ElevationAxes[] {
       const groundOk = input.terrainY !== undefined ? err <= GROUND_TOLERANCE_M : solverReg.bottomY >= PLINTH_RANGE_M.low && solverReg.bottomY <= PLINTH_RANGE_M.high
       const refusedHeights = a.openingHeights === 'REFUSED' || !groundOk
       vertical = refusedHeights
-        ? { state: a.openingHeights === 'REFUSED' ? 'UNCHECKED' : 'REFUSED', zeroRow: solverReg.zeroRow, groundY: solverReg.bottomY, groundErrorM: round6(err), why: a.openingHeights === 'REFUSED' ? 'the solver hung it from the ridge datum but refused its low heights: its ground lands off the house’s other views' : `the solver hung it from the ridge datum, but its ground lands at ${solverReg.bottomY} m — ${input.terrainY !== undefined ? `${round6(err)} m from the printed terrain` : 'outside a plinth below ±0.00'} (the solver accepts 0.9 m): the apex is not the ridge, or one scale does not serve both axes`, anchors: [{ kind: 'PRINTED_RIDGE_DATUM', what: 'the section’s highest datum at the silhouette’s apex', ...(input.ridgeY !== undefined ? { m: input.ridgeY } : {}), independentOfModel: true }], alternatives: [] }
+        ? { state: a.openingHeights === 'REFUSED' ? 'UNCHECKED' : 'REFUSED', dispute: a.openingHeights === 'REFUSED' ? 'SOLVER_REFUSED_LOW_HEIGHTS: the solver’s own check put its ground off the house’s other views' : `GROUND_OFF: the ground lands at ${solverReg.bottomY} m`, zeroRow: solverReg.zeroRow, groundY: solverReg.bottomY, groundErrorM: round6(err), why: a.openingHeights === 'REFUSED' ? 'the solver hung it from the ridge datum but refused its low heights: its ground lands off the house’s other views' : `the solver hung it from the ridge datum, but its ground lands at ${solverReg.bottomY} m — ${input.terrainY !== undefined ? `${round6(err)} m from the printed terrain` : 'outside a plinth below ±0.00'} (the solver accepts 0.9 m): the apex is not the ridge, or one scale does not serve both axes`, anchors: [{ kind: 'PRINTED_RIDGE_DATUM', what: 'the section’s highest datum at the silhouette’s apex', ...(input.ridgeY !== undefined ? { m: input.ridgeY } : {}), independentOfModel: true }], alternatives: [] }
         : { state: 'REGISTERED', zeroRow: solverReg.zeroRow, groundY: solverReg.bottomY, groundErrorM: round6(err), why: `the solver hung it from the ridge datum at the silhouette's apex; its ground lands at ${solverReg.bottomY} m`, anchors: [{ kind: 'PRINTED_RIDGE_DATUM', what: 'the section’s highest datum at the silhouette’s apex', ...(input.ridgeY !== undefined ? { m: input.ridgeY } : {}), independentOfModel: true }, { kind: 'DRAWN_GROUND', what: 'the silhouette’s bottom row', px: rect.y1, independentOfModel: true }], alternatives: [] }
       scale = refusedHeights ? (a.openingHeights === 'REFUSED' ? { state: 'ALONG_ONLY', mpp: solverReg.mpp, why: 'one scale, from the span; its heights low on the wall are refused' } : { state: 'REFUSED', mpp: solverReg.mpp, why: 'the span’s scale does not put the ground where it can be' }) : { state: input.terrainY !== undefined ? 'VERIFIED_ISOTROPIC' : 'ISOTROPY_PLAUSIBLE', mpp: solverReg.mpp, why: `the span's scale puts the ground ${input.terrainY !== undefined ? `${round6(err)} m from the printed terrain` : `at ${solverReg.bottomY} m, within a plinth below ±0.00 (no terrain printed)`}` }
     } else if (input.ridgeY === undefined) {
@@ -460,14 +474,14 @@ export function elevationAxes(input: ElevationAxesInput): ElevationAxes[] {
         const zeroRow = round6(apex.row + input.ridgeY / mppA)
         vertical = ok
           ? { state: along.state === 'REGISTERED' || along.state === 'SPAN_ONLY' ? 'REGISTERED' : 'UNCHECKED', apexRow: apex.row, groundRow, zeroRow, groundY, groundErrorM: err, why: `the ridge datum ${input.ridgeY} m at the apex (row ${round6(apex.row)}) and the along scale put the drawn ground at ${groundY} m${input.terrainY !== undefined ? ` against the printed terrain ${input.terrainY} m` : ', within a plinth below ±0.00 (no terrain printed)'}`, anchors, alternatives: [] }
-          : { state: 'REFUSED', apexRow: apex.row, groundRow, groundY, groundErrorM: err, why: `the ridge datum at the apex and the along scale put the drawn ground at ${groundY} m, ${err} m outside ${input.terrainY !== undefined ? `${GROUND_TOLERANCE_M} m of the printed terrain` : 'a plinth below ±0.00'}: the apex is not the ridge, or one scale does not serve both axes`, anchors, alternatives: [] }
+          : { state: 'REFUSED', dispute: `GROUND_OFF: the ground lands at ${groundY} m`, apexRow: apex.row, groundRow, groundY, groundErrorM: err, why: `the ridge datum at the apex and the along scale put the drawn ground at ${groundY} m, ${err} m outside ${input.terrainY !== undefined ? `${GROUND_TOLERANCE_M} m of the printed terrain` : 'a plinth below ±0.00'}: the apex is not the ridge, or one scale does not serve both axes`, anchors, alternatives: [] }
         scale = ok ? { state: input.terrainY !== undefined ? 'VERIFIED_ISOTROPIC' : 'ISOTROPY_PLAUSIBLE', mpp: mppA, why: input.terrainY !== undefined ? 'the along scale puts the drawn ground on the printed terrain' : 'the along scale puts the drawn ground where a plinth can be; no terrain is printed to verify it' } : { state: 'REFUSED', mpp: mppA, why: vertical.why }
       } else if (input.terrainY !== undefined) {
         const mppV = round6((input.ridgeY - input.terrainY) / (groundRow - apex.row))
         // a scale up the wall alone is held to the sheet scale of the solver's registrations of this size, where any
         const ref = sheetRefOf(v)
         if (ref !== undefined && Math.abs(mppV / ref - 1) > OPPOSITE_SPAN_AGREEMENT) {
-          vertical = { state: 'REFUSED', apexRow: apex.row, groundRow, why: `two printed datums on two drawn rows give ${mppV} m/px up the wall, ${round6((mppV / ref - 1) * 100)} % off the sheet scale ${ref} m/px of the solver's same-size registrations: the apex is not the ridge, the ground is not the terrain, or the sheet is not one scale — no height is read`, anchors: [{ kind: 'SIBLING_SHEETS', what: `sheet scale ${ref} m/px`, m: ref, independentOfModel: true }, { kind: 'DRAWN_APEX', what: apex.why, px: apex.row, independentOfModel: true }], alternatives: [] }
+          vertical = { state: 'REFUSED', dispute: `OFF_SHEET_SCALE: ${mppV} m/px up the wall against the sheet scale ${ref} m/px`, apexRow: apex.row, groundRow, why: `two printed datums on two drawn rows give ${mppV} m/px up the wall, ${round6((mppV / ref - 1) * 100)} % off the sheet scale ${ref} m/px of the solver's same-size registrations: the apex is not the ridge, the ground is not the terrain, or the sheet is not one scale — no height is read`, anchors: [{ kind: 'SIBLING_SHEETS', what: `sheet scale ${ref} m/px`, m: ref, independentOfModel: true }, { kind: 'DRAWN_APEX', what: apex.why, px: apex.row, independentOfModel: true }], alternatives: [] }
           scale = { state: 'REFUSED', mpp: mppV, why: vertical.why }
           v.vertical = vertical
           v.scale = scale
@@ -496,6 +510,7 @@ export function elevationAxes(input: ElevationAxesInput): ElevationAxes[] {
     if (vertOk && facade) v.checkable.vertical = ['the eaves and the ridge', `the sills and heads of its ${openings} openings`]
     else if (vertOk) v.checkable.vertical = ['the eaves and the ridge (the facade unknown: no opening)']
     v.checkable.slots = (alongOk ? 3 + openings : spanOk ? 1 : 0) + (vertOk ? 2 + (facade ? 2 * openings : 0) : 0)
+    v.validity = validityOf(v)
     if (v.solver.mpp !== undefined && v.along.alternatives.some((x) => x.id === 'wall-band' && x.measure !== null)) {
       const b = v.along.alternatives.find((x) => x.id === 'wall-band')
       if (b?.measure) v.solverAgreement = { mppRatio: round6(b.measure / v.solver.mpp) }
@@ -532,13 +547,14 @@ function sheetScalePass(out: ElevationAxes[], ctx: Map<string, { raster: Raster;
     const ref = refMpps[Math.floor(refMpps.length / 2)]
     // this stage's own bands are held to that reference: one that puts its span at another scale is not the walls
     for (const v of ownScaled) {
-      if (agreeing.includes(v)) {
+      // held to the reference itself (a band need not be one of the views the reference was taken from)
+      if (agreeing.includes(v) || Math.abs((v.along.mpp as number) / ref - 1) <= SHEET_SCALE_AGREEMENT) {
         if (solverScaled.length > 0) v.along.anchors.push({ kind: 'SIBLING_SHEETS', what: `agrees with the sheet scale ${ref} m/px of the solver's ${agreeing.length} same-size registration(s) to ${round6(((v.along.mpp as number) / ref - 1) * 100)} %`, m: ref, independentOfModel: true })
         continue
       }
       v.along.alternatives.push({ id: 'own-band', value: `${v.along.mpp} m/px`, measure: round6((v.along.mpp as number) / ref - 1), why: `its band puts its span at ${v.along.mpp} m/px against the sheet scale ${ref} m/px of ${agreeing.length} same-size view(s): not the walls` })
       const { mpp: _m, alongAtLeft: _a, alongSign: _s, ...rest } = v.along
-      v.along = { ...rest, state: 'UNCHECKED', why: `${v.along.why}; refused: that is ${round6(((v.along.mpp as number) / ref - 1) * 100)} % off the sheet scale ${ref} m/px of its same-size sibling views` }
+      v.along = { ...rest, state: 'UNCHECKED', dispute: `OFF_SHEET_SCALE: ${v.along.mpp} m/px against the sheet scale ${ref} m/px`, why: `${v.along.why}; refused: that is ${round6(((v.along.mpp as number) / ref - 1) * 100)} % off the sheet scale ${ref} m/px of its same-size sibling views` }
     }
     for (const v of views) {
       if (v.along.state !== 'UNCHECKED') continue
@@ -587,6 +603,18 @@ function sheetScalePass(out: ElevationAxes[], ctx: Map<string, { raster: Raster;
         : { state: 'SPAN_ONLY', mpp, spanM: round6(best.span.a1 - best.span.a0), bandPx: { x0: best.b.x0, x1: best.b.x1, rows: best.b.rows }, uncertaintyM: round6(2 * mpp), why: `the band's ends (columns ${best.b.x0}..${best.b.x1}) are the ${round6(best.span.a1 - best.span.a0)} m ${best.span.what} at the sheet scale of its sibling views (${round6(best.dev * 100)} %): ${mpp} m/px; the hand is unknown, so no position along the facade is read`, anchors, alternatives: [] }
       c.band = { x0: best.b.x0, x1: best.b.x1, rows: best.b.rows }
     }
+  }
+}
+
+/** N9-02R: the shared adjudication of a view's axes (see `AxisValidity`). */
+export function validityOf(v: Pick<ElevationAxes, 'along' | 'vertical' | 'side'>): ElevationAxes['validity'] {
+  const along: AxisValidity = v.along.state === 'REGISTERED' ? 'VALID' : v.along.state === 'SPAN_ONLY' ? 'SPAN_ONLY' : v.along.dispute ? 'DISPUTED' : 'UNAVAILABLE'
+  const vertical: AxisValidity = v.vertical.state === 'REGISTERED' ? 'VALID' : v.vertical.dispute ? 'DISPUTED' : 'UNAVAILABLE'
+  return {
+    along,
+    vertical,
+    hand: isSide(v.side.value) ? 'KNOWN' : 'UNKNOWN',
+    why: { along: v.along.dispute ?? v.along.why.slice(0, 300), vertical: v.vertical.dispute ?? v.vertical.why.slice(0, 300) },
   }
 }
 

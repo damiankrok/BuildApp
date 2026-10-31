@@ -214,7 +214,7 @@
   },
   "assessment": {
     "schema": "buildapp.model-assessment",
-    "schemaVersion": "1.1.0",
+    "schemaVersion": "1.2.0",
     "technicalValidity": {
       "status": "VALID",
       "errors": 0,
@@ -590,14 +590,26 @@
                 "side": "FRONT"
               },
               "measured": {
-                "checks": 6,
-                "observed": 2,
-                "withinTolerance": 1,
-                "outsideTolerance": 1,
-                "notObserved": 4,
+                "rawChecks": 6,
+                "rawObserved": 2,
+                "rawOutsideTolerance": 1,
+                "rawWorst": "ROOF_EDGE -0.527708 m",
+                "excludedDisputed": 2,
+                "excludedUnavailable": 0,
+                "excludedCircular": 0,
+                "along": "DISPUTED",
+                "vertical": "UNAVAILABLE",
+                "hand": "KNOWN",
+                "alongDispute": "SOLVER_REGISTRATION_CONTESTED: solver 0.023821 m/px against this view's wall band 0.026301 m/px and the opposite view's 0.026301 m/px",
+                "solverMpp": 0.023821,
+                "checks": 0,
+                "observed": 0,
+                "withinTolerance": 0,
+                "outsideTolerance": 0,
+                "notObserved": 0,
                 "notEmitted": 0,
-                "outsideFeatures": 1,
-                "worst": "ROOF_EDGE feat-roof-main -0.527708 m (tol 0.25)"
+                "outsideFeatures": 0,
+                "worst": ""
               },
               "tolerance": {
                 "perCheck": "each feature’s own source uncertainty (openings +0.1 m, roof edge 0.25 m)",
@@ -605,15 +617,141 @@
                 "stableFeatures": 2
               },
               "coverage": {
-                "kindsObserved": "ROOF_EDGE",
+                "kindsObserved": "none",
                 "facadeOpenings": 5,
                 "facadeOpeningsChecked": 0,
-                "mpp": 0.023821
+                "mpp": 0.023821,
+                "executed": 0,
+                "independent": 0
               },
-              "code": "DISAGREEMENT_NOT_STABLE",
-              "why": "FRONT elevation frame-asset-elewacja-frontowa-ce68d57053-05070105a3: 1 of 2 observed checks outside tolerance on 1 feature — one feature only: named, not a stable disagreement",
+              "checks": [
+                {
+                  "kind": "ROOF_EDGE",
+                  "featureId": "feat-roof-main",
+                  "objectId": "roof-main",
+                  "requires": [
+                    "SIDE",
+                    "ALONG",
+                    "VERTICAL"
+                  ],
+                  "transform": "SOLVER_REGISTRATION",
+                  "sharedWithModel": true,
+                  "modelAnchored": true,
+                  "validity": "DISPUTED",
+                  "why": "ALONG DISPUTED (the column it is read on is not placed): SOLVER_REGISTRATION_CONTESTED: solver 0.023821 m/px against this view's wall band 0.026301 m/px and the opposite view's 0.026301 m/px",
+                  "observed": false,
+                  "emitted": true,
+                  "withinTolerance": false,
+                  "residualM": 0,
+                  "toleranceM": 0.25
+                },
+                {
+                  "kind": "ROOF_EDGE",
+                  "featureId": "feat-roof-main",
+                  "objectId": "roof-main",
+                  "requires": [
+                    "SIDE",
+                    "ALONG",
+                    "VERTICAL"
+                  ],
+                  "transform": "SOLVER_REGISTRATION",
+                  "sharedWithModel": true,
+                  "modelAnchored": true,
+                  "validity": "DISPUTED",
+                  "why": "ALONG DISPUTED (the column it is read on is not placed): SOLVER_REGISTRATION_CONTESTED: solver 0.023821 m/px against this view's wall band 0.026301 m/px and the opposite view's 0.026301 m/px",
+                  "observed": true,
+                  "emitted": true,
+                  "withinTolerance": false,
+                  "residualM": -0.527708,
+                  "toleranceM": 0.25
+                },
+                {
+                  "kind": "ROOF_EDGE",
+                  "featureId": "feat-roof-main",
+                  "objectId": "roof-main",
+                  "requires": [
+                    "SIDE",
+                    "ALONG",
+                    "VERTICAL"
+                  ],
+                  "transform": "SOLVER_REGISTRATION",
+                  "sharedWithModel": true,
+                  "modelAnchored": true,
+                  "validity": "DISPUTED",
+                  "why": "ALONG DISPUTED (the column it is read on is not placed): SOLVER_REGISTRATION_CONTESTED: solver 0.023821 m/px against this view's wall band 0.026301 m/px and the opposite view's 0.026301 m/px",
+                  "observed": false,
+                  "emitted": true,
+                  "withinTolerance": false,
+                  "residualM": 0,
+                  "toleranceM": 0.25
+                },
+                {
+                  "kind": "ROOF_EDGE",
+                  "featureId": "feat-roof-main",
+                  "objectId": "roof-main",
+                  "requires": [
+                    "SIDE",
+                    "ALONG",
+                    "VERTICAL"
+                  ],
+                  "transform": "SOLVER_REGISTRATION",
+                  "sharedWithModel": true,
+                  "modelAnchored": true,
+                  "validity": "DISPUTED",
+                  "why": "ALONG DISPUTED (the column it is read on is not placed): SOLVER_REGISTRATION_CONTESTED: solver 0.023821 m/px against this view's wall band 0.026301 m/px and the opposite view's 0.026301 m/px",
+                  "observed": true,
+                  "emitted": true,
+                  "withinTolerance": true,
+                  "residualM": 0.055287,
+                  "toleranceM": 0.25
+                },
+                {
+                  "kind": "ROOF_EDGE",
+                  "featureId": "feat-roof-main",
+                  "objectId": "roof-main",
+                  "requires": [
+                    "SIDE",
+                    "ALONG",
+                    "VERTICAL"
+                  ],
+                  "transform": "SOLVER_REGISTRATION",
+                  "sharedWithModel": true,
+                  "modelAnchored": true,
+                  "validity": "DISPUTED",
+                  "why": "ALONG DISPUTED (the column it is read on is not placed): SOLVER_REGISTRATION_CONTESTED: solver 0.023821 m/px against this view's wall band 0.026301 m/px and the opposite view's 0.026301 m/px",
+                  "observed": false,
+                  "emitted": true,
+                  "withinTolerance": false,
+                  "residualM": 0,
+                  "toleranceM": 0.25
+                },
+                {
+                  "kind": "SILHOUETTE_WIDTH",
+                  "featureId": "silhouette-front",
+                  "requires": [
+                    "ALONG"
+                  ],
+                  "transform": "SOLVER_REGISTRATION",
+                  "sharedWithModel": true,
+                  "modelAnchored": true,
+                  "validity": "CIRCULAR",
+                  "why": "the view was registered by setting its wall ends to the plan’s span: the width checks that registration, not the model",
+                  "observed": false,
+                  "emitted": true,
+                  "withinTolerance": false,
+                  "residualM": 0,
+                  "toleranceM": 0.15
+                }
+              ],
+              "adjudication": {
+                "along": "DISPUTED",
+                "vertical": "UNAVAILABLE",
+                "hand": "KNOWN"
+              },
+              "code": "REGISTRATION_DISPUTED",
+              "why": "FRONT elevation frame-asset-elewacja-frontowa-ce68d57053-05070105a3: its along registration is disputed (SOLVER_REGISTRATION_CONTESTED: solver 0.023821 m/px against this view's wall band 0.026301 m/px and the opposite view's 0.026301 m/px): the 2 residual(s) measured in it (1 outside tolerance, worst ROOF_EDGE -0.527708 m) are kept, but are not evidence about the model",
               "evidence": [
-                "every check searches the view near the model’s prediction (MODEL_ANCHORED): an edge found there is not an independent confirmation",
+                "the raw residuals and the solver’s hypothesis are kept on this item (checks, measured.raw*); none is counted as a conflict or a pass",
                 "facade alignment on this view (evidence only, plan-located): 0 CONFIRMED_MATCH, 5 CONFLICT, 0 NOT_OBSERVED, 0 MISSING_IN_MODEL"
               ],
               "axes": {
@@ -641,10 +779,11 @@
               "tolerance": {},
               "coverage": {
                 "silhouette": "NONE",
-                "heights": "NONE"
+                "heights": "NONE",
+                "executed": 0
               },
               "code": "VIEW_NOT_REGISTERED",
-              "why": "LEFT elevation frame-asset-elewacja-lewa-edc4129d06-c7ec4b3dfd: not registered: nothing on it was compared (its silhouette fits neither the walled nor the characteristic span with the ridge at its apex, and no wall band of it lands the ground on the terrain)",
+              "why": "LEFT elevation frame-asset-elewacja-lewa-edc4129d06-c7ec4b3dfd: not registered: nothing on it was compared (its silhouette fits neither the walled nor the characteristic span with the ridge at its apex, and no wall band of it lands the ground on the terrain); its source axes: ALONG_ONLY (ALONG SPAN_ONLY, VERTICAL VALID) — R5 compares only views the solver measured residuals on, so no comparison is executed here",
               "evidence": [
                 "lost: the openings of its facade as this view draws them (widths, sills and heads come from the plan and callouts alone)",
                 "lost: the source-view checks of that facade"
@@ -674,10 +813,11 @@
               "tolerance": {},
               "coverage": {
                 "silhouette": "NONE",
-                "heights": "NONE"
+                "heights": "NONE",
+                "executed": 0
               },
               "code": "VIEW_NOT_REGISTERED",
-              "why": "RIGHT elevation frame-asset-elewacja-prawa-7bcce1b6da-635a23984e: not registered: nothing on it was compared (its silhouette fits neither the walled nor the characteristic span with the ridge at its apex, and no wall band of it lands the ground on the terrain)",
+              "why": "RIGHT elevation frame-asset-elewacja-prawa-7bcce1b6da-635a23984e: not registered: nothing on it was compared (its silhouette fits neither the walled nor the characteristic span with the ridge at its apex, and no wall band of it lands the ground on the terrain); its source axes: ALONG_ONLY (ALONG SPAN_ONLY, VERTICAL VALID) — R5 compares only views the solver measured residuals on, so no comparison is executed here",
               "evidence": [
                 "lost: the openings of its facade as this view draws them (widths, sills and heads come from the plan and callouts alone)",
                 "lost: the source-view checks of that facade"
@@ -702,14 +842,26 @@
                 "side": "REAR"
               },
               "measured": {
-                "checks": 6,
-                "observed": 2,
-                "withinTolerance": 1,
-                "outsideTolerance": 1,
-                "notObserved": 4,
+                "rawChecks": 6,
+                "rawObserved": 2,
+                "rawOutsideTolerance": 1,
+                "rawWorst": "ROOF_EDGE -0.527708 m",
+                "excludedDisputed": 2,
+                "excludedUnavailable": 0,
+                "excludedCircular": 0,
+                "along": "DISPUTED",
+                "vertical": "UNAVAILABLE",
+                "hand": "KNOWN",
+                "alongDispute": "SOLVER_REGISTRATION_CONTESTED: solver 0.023821 m/px against this view's wall band 0.026301 m/px and the opposite view's 0.026301 m/px",
+                "solverMpp": 0.023821,
+                "checks": 0,
+                "observed": 0,
+                "withinTolerance": 0,
+                "outsideTolerance": 0,
+                "notObserved": 0,
                 "notEmitted": 0,
-                "outsideFeatures": 1,
-                "worst": "ROOF_EDGE feat-roof-main -0.527708 m (tol 0.25)"
+                "outsideFeatures": 0,
+                "worst": ""
               },
               "tolerance": {
                 "perCheck": "each feature’s own source uncertainty (openings +0.1 m, roof edge 0.25 m)",
@@ -717,15 +869,141 @@
                 "stableFeatures": 2
               },
               "coverage": {
-                "kindsObserved": "ROOF_EDGE",
+                "kindsObserved": "none",
                 "facadeOpenings": 1,
                 "facadeOpeningsChecked": 0,
-                "mpp": 0.023821
+                "mpp": 0.023821,
+                "executed": 0,
+                "independent": 0
               },
-              "code": "DISAGREEMENT_NOT_STABLE",
-              "why": "REAR elevation frame-asset-elewacja-tylna-99385ddca6-f14d035c06: 1 of 2 observed checks outside tolerance on 1 feature — one feature only: named, not a stable disagreement",
+              "checks": [
+                {
+                  "kind": "ROOF_EDGE",
+                  "featureId": "feat-roof-main",
+                  "objectId": "roof-main",
+                  "requires": [
+                    "SIDE",
+                    "ALONG",
+                    "VERTICAL"
+                  ],
+                  "transform": "SOLVER_REGISTRATION",
+                  "sharedWithModel": true,
+                  "modelAnchored": true,
+                  "validity": "DISPUTED",
+                  "why": "ALONG DISPUTED (the column it is read on is not placed): SOLVER_REGISTRATION_CONTESTED: solver 0.023821 m/px against this view's wall band 0.026301 m/px and the opposite view's 0.026301 m/px",
+                  "observed": false,
+                  "emitted": true,
+                  "withinTolerance": false,
+                  "residualM": 0,
+                  "toleranceM": 0.25
+                },
+                {
+                  "kind": "ROOF_EDGE",
+                  "featureId": "feat-roof-main",
+                  "objectId": "roof-main",
+                  "requires": [
+                    "SIDE",
+                    "ALONG",
+                    "VERTICAL"
+                  ],
+                  "transform": "SOLVER_REGISTRATION",
+                  "sharedWithModel": true,
+                  "modelAnchored": true,
+                  "validity": "DISPUTED",
+                  "why": "ALONG DISPUTED (the column it is read on is not placed): SOLVER_REGISTRATION_CONTESTED: solver 0.023821 m/px against this view's wall band 0.026301 m/px and the opposite view's 0.026301 m/px",
+                  "observed": true,
+                  "emitted": true,
+                  "withinTolerance": false,
+                  "residualM": -0.527708,
+                  "toleranceM": 0.25
+                },
+                {
+                  "kind": "ROOF_EDGE",
+                  "featureId": "feat-roof-main",
+                  "objectId": "roof-main",
+                  "requires": [
+                    "SIDE",
+                    "ALONG",
+                    "VERTICAL"
+                  ],
+                  "transform": "SOLVER_REGISTRATION",
+                  "sharedWithModel": true,
+                  "modelAnchored": true,
+                  "validity": "DISPUTED",
+                  "why": "ALONG DISPUTED (the column it is read on is not placed): SOLVER_REGISTRATION_CONTESTED: solver 0.023821 m/px against this view's wall band 0.026301 m/px and the opposite view's 0.026301 m/px",
+                  "observed": false,
+                  "emitted": true,
+                  "withinTolerance": false,
+                  "residualM": 0,
+                  "toleranceM": 0.25
+                },
+                {
+                  "kind": "ROOF_EDGE",
+                  "featureId": "feat-roof-main",
+                  "objectId": "roof-main",
+                  "requires": [
+                    "SIDE",
+                    "ALONG",
+                    "VERTICAL"
+                  ],
+                  "transform": "SOLVER_REGISTRATION",
+                  "sharedWithModel": true,
+                  "modelAnchored": true,
+                  "validity": "DISPUTED",
+                  "why": "ALONG DISPUTED (the column it is read on is not placed): SOLVER_REGISTRATION_CONTESTED: solver 0.023821 m/px against this view's wall band 0.026301 m/px and the opposite view's 0.026301 m/px",
+                  "observed": true,
+                  "emitted": true,
+                  "withinTolerance": true,
+                  "residualM": 0.055287,
+                  "toleranceM": 0.25
+                },
+                {
+                  "kind": "ROOF_EDGE",
+                  "featureId": "feat-roof-main",
+                  "objectId": "roof-main",
+                  "requires": [
+                    "SIDE",
+                    "ALONG",
+                    "VERTICAL"
+                  ],
+                  "transform": "SOLVER_REGISTRATION",
+                  "sharedWithModel": true,
+                  "modelAnchored": true,
+                  "validity": "DISPUTED",
+                  "why": "ALONG DISPUTED (the column it is read on is not placed): SOLVER_REGISTRATION_CONTESTED: solver 0.023821 m/px against this view's wall band 0.026301 m/px and the opposite view's 0.026301 m/px",
+                  "observed": false,
+                  "emitted": true,
+                  "withinTolerance": false,
+                  "residualM": 0,
+                  "toleranceM": 0.25
+                },
+                {
+                  "kind": "SILHOUETTE_WIDTH",
+                  "featureId": "silhouette-rear",
+                  "requires": [
+                    "ALONG"
+                  ],
+                  "transform": "SOLVER_REGISTRATION",
+                  "sharedWithModel": true,
+                  "modelAnchored": true,
+                  "validity": "CIRCULAR",
+                  "why": "the view was registered by setting its wall ends to the plan’s span: the width checks that registration, not the model",
+                  "observed": false,
+                  "emitted": true,
+                  "withinTolerance": false,
+                  "residualM": 0,
+                  "toleranceM": 0.15
+                }
+              ],
+              "adjudication": {
+                "along": "DISPUTED",
+                "vertical": "UNAVAILABLE",
+                "hand": "KNOWN"
+              },
+              "code": "REGISTRATION_DISPUTED",
+              "why": "REAR elevation frame-asset-elewacja-tylna-99385ddca6-f14d035c06: its along registration is disputed (SOLVER_REGISTRATION_CONTESTED: solver 0.023821 m/px against this view's wall band 0.026301 m/px and the opposite view's 0.026301 m/px): the 2 residual(s) measured in it (1 outside tolerance, worst ROOF_EDGE -0.527708 m) are kept, but are not evidence about the model",
               "evidence": [
-                "every check searches the view near the model’s prediction (MODEL_ANCHORED): an edge found there is not an independent confirmation",
+                "the raw residuals and the solver’s hypothesis are kept on this item (checks, measured.raw*); none is counted as a conflict or a pass",
                 "facade alignment on this view (evidence only, plan-located): 0 CONFIRMED_MATCH, 1 CONFLICT, 0 NOT_OBSERVED, 0 MISSING_IN_MODEL"
               ],
               "axes": {
@@ -740,7 +1018,8 @@
           "limits": [
             "only silhouette-registered views are compared; every check is anchored on the model’s prediction",
             "an opening the view draws and the model lacks is not measured here (facade alignment lists it as evidence)",
-            "no new registration is attempted: a view without a ridge datum stays UNCHECKED"
+            "no new registration is attempted: a view without a ridge datum stays UNCHECKED",
+            "N9-02R: a check counts only on axes the shared adjudication holds valid; a disputed registration makes the view UNCHECKED with its raw residuals kept"
           ]
         }
       ],
@@ -759,12 +1038,12 @@
           "frameId": "frame-asset-elewacja-frontowa-ce68d57053-05070105a3",
           "side": "FRONT",
           "axes": {
-            "along": "FULL",
-            "height": "FULL"
+            "along": "DISPUTED",
+            "height": "NONE"
           },
-          "extent": "PARTIAL",
+          "extent": "NONE",
           "what": "FRONT elevation (REGISTERED)",
-          "why": "FRONT elevation frame-asset-elewacja-frontowa-ce68d57053-05070105a3: 1 of 2 observed checks outside tolerance on 1 feature — one feature only: named, not a stable disagreement",
+          "why": "FRONT elevation frame-asset-elewacja-frontowa-ce68d57053-05070105a3: its along registration is disputed (SOLVER_REGISTRATION_CONTESTED: solver 0.023821 m/px against this view's wall band 0.026301 m/px and the opposite view's 0.026301 m/px): the 2 residual(s) measured in it (1 outside tolerance, worst ROOF_EDGE -0.527708 m) are kept, but are not evidence about the model",
           "couldCheck": "silhouette width and steps, eaves and ridge heights, the opening rows of its facade (MISSING_IN_MODEL / EXTRA_IN_MODEL), roof outline and chimneys",
           "registration": {
             "class": "UNREGISTERED",
@@ -779,8 +1058,8 @@
           "frameId": "frame-asset-elewacja-lewa-edc4129d06-c7ec4b3dfd",
           "side": "LEFT",
           "axes": {
-            "along": "NONE",
-            "height": "NONE"
+            "along": "SPAN_ONLY",
+            "height": "FULL"
           },
           "extent": "NONE",
           "what": "LEFT elevation (NOT_REGISTERED)",
@@ -799,8 +1078,8 @@
           "frameId": "frame-asset-elewacja-prawa-7bcce1b6da-635a23984e",
           "side": "RIGHT",
           "axes": {
-            "along": "NONE",
-            "height": "NONE"
+            "along": "SPAN_ONLY",
+            "height": "FULL"
           },
           "extent": "NONE",
           "what": "RIGHT elevation (NOT_REGISTERED)",
@@ -819,12 +1098,12 @@
           "frameId": "frame-asset-elewacja-tylna-99385ddca6-f14d035c06",
           "side": "REAR",
           "axes": {
-            "along": "FULL",
-            "height": "FULL"
+            "along": "DISPUTED",
+            "height": "NONE"
           },
-          "extent": "PARTIAL",
+          "extent": "NONE",
           "what": "REAR elevation (REGISTERED)",
-          "why": "REAR elevation frame-asset-elewacja-tylna-99385ddca6-f14d035c06: 1 of 2 observed checks outside tolerance on 1 feature — one feature only: named, not a stable disagreement",
+          "why": "REAR elevation frame-asset-elewacja-tylna-99385ddca6-f14d035c06: its along registration is disputed (SOLVER_REGISTRATION_CONTESTED: solver 0.023821 m/px against this view's wall band 0.026301 m/px and the opposite view's 0.026301 m/px): the 2 residual(s) measured in it (1 outside tolerance, worst ROOF_EDGE -0.527708 m) are kept, but are not evidence about the model",
           "couldCheck": "silhouette width and steps, eaves and ridge heights, the opening rows of its facade (MISSING_IN_MODEL / EXTRA_IN_MODEL), roof outline and chimneys",
           "registration": {
             "class": "UNREGISTERED",
@@ -853,8 +1132,8 @@
           "ELEVATION": 4,
           "SECTION": 1
         },
-        "none": 2,
-        "partial": 3
+        "none": 4,
+        "partial": 1
       }
     },
     "previewAvailable": true,
@@ -922,7 +1201,8 @@
                 "measure": 0.026301,
                 "why": "the multi-column wall band, for comparison"
               }
-            ]
+            ],
+            "dispute": "SOLVER_REGISTRATION_CONTESTED: solver 0.023821 m/px against this view's wall band 0.026301 m/px and the opposite view's 0.026301 m/px"
           },
           "vertical": {
             "state": "UNCHECKED",
@@ -947,6 +1227,15 @@
             "along": [],
             "vertical": [],
             "slots": 0
+          },
+          "validity": {
+            "along": "DISPUTED",
+            "vertical": "UNAVAILABLE",
+            "hand": "KNOWN",
+            "why": {
+              "along": "SOLVER_REGISTRATION_CONTESTED: solver 0.023821 m/px against this view's wall band 0.026301 m/px and the opposite view's 0.026301 m/px",
+              "vertical": "the apex is drawn, but with no along scale and no printed terrain there is one datum and no scale"
+            }
           },
           "solverAgreement": {
             "mppRatio": 1.10411
@@ -1078,6 +1367,15 @@
               "the eaves and the ridge (the facade unknown: no opening)"
             ],
             "slots": 3
+          },
+          "validity": {
+            "along": "SPAN_ONLY",
+            "vertical": "VALID",
+            "hand": "UNKNOWN",
+            "why": {
+              "along": "the wall band's ends (columns 120..394) are the 7.2 m walled depth: 0.026277 m/px; the hand is unknown, so the span and scale stand and no position along the facade is read",
+              "vertical": "the ridge datum 7.92 m at the apex (row 119.068182) and the along scale put the drawn ground at -0.013862 m, within a plinth below ±0.00 (no terrain printed)"
+            }
           }
         },
         {
@@ -1206,6 +1504,15 @@
               "the eaves and the ridge (the facade unknown: no opening)"
             ],
             "slots": 3
+          },
+          "validity": {
+            "along": "SPAN_ONLY",
+            "vertical": "VALID",
+            "hand": "UNKNOWN",
+            "why": {
+              "along": "the wall band's ends (columns 120..394) are the 7.2 m walled depth: 0.026277 m/px; the hand is unknown, so the span and scale stand and no position along the facade is read",
+              "vertical": "the ridge datum 7.92 m at the apex (row 119.068182) and the along scale put the drawn ground at -0.013862 m, within a plinth below ±0.00 (no terrain printed)"
+            }
           }
         },
         {
@@ -1270,7 +1577,8 @@
                 "measure": 0.026301,
                 "why": "the multi-column wall band, for comparison"
               }
-            ]
+            ],
+            "dispute": "SOLVER_REGISTRATION_CONTESTED: solver 0.023821 m/px against this view's wall band 0.026301 m/px and the opposite view's 0.026301 m/px"
           },
           "vertical": {
             "state": "UNCHECKED",
@@ -1295,6 +1603,15 @@
             "along": [],
             "vertical": [],
             "slots": 0
+          },
+          "validity": {
+            "along": "DISPUTED",
+            "vertical": "UNAVAILABLE",
+            "hand": "KNOWN",
+            "why": {
+              "along": "SOLVER_REGISTRATION_CONTESTED: solver 0.023821 m/px against this view's wall band 0.026301 m/px and the opposite view's 0.026301 m/px",
+              "vertical": "the apex is drawn, but with no along scale and no printed terrain there is one datum and no scale"
+            }
           },
           "solverAgreement": {
             "mppRatio": 1.10411
@@ -1336,12 +1653,70 @@
       "datums": {
         "ridgeY": 7.92,
         "terrainY": null
+      },
+      "scorecard": {
+        "views": [
+          {
+            "frameId": "frame-asset-elewacja-frontowa-ce68d57053-05070105a3",
+            "potential": 0,
+            "executed": 0,
+            "independent": 0,
+            "excluded": {
+              "DISPUTED": 2,
+              "UNAVAILABLE": 0,
+              "CIRCULAR": 0
+            },
+            "why": "UNCHECKED REGISTRATION_DISPUTED"
+          },
+          {
+            "frameId": "frame-asset-elewacja-lewa-edc4129d06-c7ec4b3dfd",
+            "potential": 3,
+            "executed": 0,
+            "independent": 0,
+            "excluded": {
+              "DISPUTED": 0,
+              "UNAVAILABLE": 0,
+              "CIRCULAR": 0
+            },
+            "why": "UNCHECKED VIEW_NOT_REGISTERED"
+          },
+          {
+            "frameId": "frame-asset-elewacja-prawa-7bcce1b6da-635a23984e",
+            "potential": 3,
+            "executed": 0,
+            "independent": 0,
+            "excluded": {
+              "DISPUTED": 0,
+              "UNAVAILABLE": 0,
+              "CIRCULAR": 0
+            },
+            "why": "UNCHECKED VIEW_NOT_REGISTERED"
+          },
+          {
+            "frameId": "frame-asset-elewacja-tylna-99385ddca6-f14d035c06",
+            "potential": 0,
+            "executed": 0,
+            "independent": 0,
+            "excluded": {
+              "DISPUTED": 2,
+              "UNAVAILABLE": 0,
+              "CIRCULAR": 0
+            },
+            "why": "UNCHECKED REGISTRATION_DISPUTED"
+          }
+        ],
+        "totals": {
+          "potential": 6,
+          "executed": 0,
+          "independent": 0,
+          "rawObserved": 4
+        }
       }
     },
-    "summary": "technically valid; reading completeness COMPLETE; source fidelity UNCHECKED: 0 conflict(s), 5 pass, 4 unchecked; 5 source item(s) not compared; elevations: 0 full, 2 along only, 0 vertical only, 2 unregistered; the 3D model is shown in every case"
+    "summary": "technically valid; reading completeness COMPLETE; source fidelity UNCHECKED: 0 conflict(s), 5 pass, 4 unchecked; 5 source item(s) not compared; elevations: 0 full, 2 along only, 0 vertical only, 2 unregistered; elevation comparisons: 6 potential, 0 executed on valid axes, 0 independent; the 3D model is shown in every case"
   },
   "analyzer": {
-    "service": "1.4.0",
+    "service": "1.5.0",
     "solver": "2.17.0"
   },
   "startedAt": "2026-01-01T00:00:00.000Z",

@@ -1,0 +1,457 @@
+{
+ "summary": {
+  "reader": "n9-02r",
+  "set": "frozen holdout",
+  "TRUE_ACCEPT": 18,
+  "FALSE_ACCEPT": 0,
+  "FALSE_REFUSAL": 0,
+  "TRUE_REFUSAL": 12,
+  "hardFalseAcceptOnRefuse": 0
+ },
+ "rows": [
+  {
+   "id": "pos-white-0",
+   "family": "WHITE_PLASTER",
+   "expected": "ACCEPT",
+   "truth": [
+    474,
+    951
+   ],
+   "reading": [
+    474,
+    951
+   ],
+   "outcome": "TRUE_ACCEPT",
+   "errPx": 0,
+   "why": "wall ends at columns 474 and 951: a vertical edge over 240 rows, standing on the ground and under the eaves; a vertical edge over 240 rows, standing on the ground and under the eaves"
+  },
+  {
+   "id": "pos-colour-0",
+   "family": "COLOURED_FACADE",
+   "expected": "ACCEPT",
+   "truth": [
+    443,
+    975
+   ],
+   "reading": [
+    443,
+    975
+   ],
+   "outcome": "TRUE_ACCEPT",
+   "errPx": 0,
+   "why": "wall ends at columns 443 and 975: a vertical edge over 141 rows, standing on the ground and under the eaves; a vertical edge over 141 rows, standing on the ground and under the eaves"
+  },
+  {
+   "id": "pos-dark-0",
+   "family": "DARK_AND_WHITE",
+   "expected": "ACCEPT",
+   "truth": [
+    497,
+    934
+   ],
+   "reading": [
+    497,
+    934
+   ],
+   "outcome": "TRUE_ACCEPT",
+   "errPx": 0,
+   "why": "wall ends at columns 497 and 934: a vertical edge over 223 rows, standing on the ground and under the eaves; a vertical edge over 223 rows, standing on the ground and under the eaves"
+  },
+  {
+   "id": "pos-gable-0",
+   "family": "GABLE_CHIMNEY",
+   "expected": "ACCEPT",
+   "truth": [
+    564,
+    836
+   ],
+   "reading": [
+    564,
+    836
+   ],
+   "outcome": "TRUE_ACCEPT",
+   "errPx": 0,
+   "why": "wall ends at columns 564 and 836: a vertical edge over 106 rows, standing on the ground and under the eaves; a vertical edge over 106 rows, standing on the ground and under the eaves"
+  },
+  {
+   "id": "pos-tree-mid-0",
+   "family": "TREE_MID_FACADE",
+   "expected": "ACCEPT",
+   "truth": [
+    520,
+    913
+   ],
+   "reading": [
+    520,
+    913
+   ],
+   "outcome": "TRUE_ACCEPT",
+   "errPx": 0,
+   "why": "wall ends at columns 520 and 913: a vertical edge over 97 rows, standing on the ground and under the eaves; a vertical edge over 97 rows, standing on the ground and under the eaves"
+  },
+  {
+   "id": "pos-pergola-0",
+   "family": "PERGOLA_DETACHED",
+   "expected": "ACCEPT",
+   "truth": [
+    424,
+    942
+   ],
+   "reading": [
+    424,
+    942
+   ],
+   "outcome": "TRUE_ACCEPT",
+   "errPx": 0,
+   "why": "wall ends at columns 424 and 942: a vertical edge over 132 rows, standing on the ground and under the eaves; a vertical edge over 301 rows, standing on the ground and under the eaves"
+  },
+  {
+   "id": "pos-balcony-0",
+   "family": "BALCONY_PAST_END",
+   "expected": "ACCEPT",
+   "truth": [
+    488,
+    868
+   ],
+   "reading": [
+    488,
+    868
+   ],
+   "outcome": "TRUE_ACCEPT",
+   "errPx": 0,
+   "why": "wall ends at columns 488 and 868: a vertical edge over 97 rows, standing on the ground and under the eaves; a vertical edge over 198 rows, standing on the ground and under the eaves"
+  },
+  {
+   "id": "pos-drawn-0",
+   "family": "DRAWN_LINES",
+   "expected": "ACCEPT",
+   "truth": [
+    410,
+    999
+   ],
+   "reading": [
+    410,
+    999
+   ],
+   "outcome": "TRUE_ACCEPT",
+   "errPx": 0,
+   "why": "wall ends at columns 410 and 999: a vertical edge over 149 rows, standing on the ground and under the eaves; a vertical edge over 149 rows, standing on the ground and under the eaves"
+  },
+  {
+   "id": "pos-flat-0",
+   "family": "NO_PITCHED_ROOF",
+   "expected": "ACCEPT",
+   "truth": [
+    472,
+    864
+   ],
+   "reading": [
+    472,
+    864
+   ],
+   "outcome": "TRUE_ACCEPT",
+   "errPx": 0,
+   "why": "wall ends at columns 472 and 864: a vertical edge over 214 rows, standing on the ground and under the eaves; a vertical edge over 214 rows, standing on the ground and under the eaves"
+  },
+  {
+   "id": "neg-tree-end-0",
+   "family": "TREE_OVER_END",
+   "expected": "REFUSE",
+   "truth": [
+    443,
+    918
+   ],
+   "reading": null,
+   "outcome": "TRUE_REFUSAL",
+   "errPx": null,
+   "why": "the left end is hidden by vegetation on 237 of 319 rows: OCCLUDED (no other edge qualifies: 1 leaning or uncovered)"
+  },
+  {
+   "id": "neg-white-sky-0",
+   "family": "WHITE_ON_WHITE",
+   "expected": "REFUSE",
+   "truth": [
+    532,
+    902
+   ],
+   "reading": null,
+   "outcome": "TRUE_REFUSAL",
+   "errPx": null,
+   "why": "below row 192 (187 px above the outline's foot) no built run spans the outline's middle: the walls are not separated from the background (a wall of the background's colour with no line drawn at its ends)"
+  },
+  {
+   "id": "neg-screen-0",
+   "family": "PERGOLA_SCREEN_ATTACHED",
+   "expected": "EITHER",
+   "truth": [
+    406,
+    927
+   ],
+   "reading": null,
+   "outcome": "TRUE_REFUSAL",
+   "errPx": null,
+   "why": "no right edge qualifies: column 927 — the edge ends 142 px above the facade's foot (more than a plinth): the top of something standing before or beside the wall — a screen, a balcony, a door — not a wall end; column 1057 — nothing built runs over its top: it stands past the roof (a pergola post, a screen, a fence), not under it; column 873 — the edge leans 1.056 columns per row over 141 rows: not an orthographic wall end (a perspective)"
+  },
+  {
+   "id": "neg-crop-0",
+   "family": "CUT_BY_SHEET",
+   "expected": "REFUSE",
+   "truth": [
+    403,
+    984
+   ],
+   "reading": null,
+   "outcome": "TRUE_REFUSAL",
+   "errPx": null,
+   "why": "on 237 of 238 wall rows the sheet's left and right margins are two different backgrounds: the sheet is cut or pasted on one side, so an end against it may be the cut"
+  },
+  {
+   "id": "neg-persp-0",
+   "family": "PERSPECTIVE",
+   "expected": "REFUSE",
+   "truth": [
+    529,
+    931
+   ],
+   "reading": null,
+   "outcome": "TRUE_REFUSAL",
+   "errPx": null,
+   "why": "no right edge qualifies: column 885 — the edge leans 0.951 columns per row over 144 rows: not an orthographic wall end (a perspective); column 937 — the edge leans -0.096 columns per row over 73 rows: not an orthographic wall end (a perspective)"
+  },
+  {
+   "id": "neg-hidden-0",
+   "family": "MOSTLY_OCCLUDED",
+   "expected": "REFUSE",
+   "truth": [
+    447,
+    924
+   ],
+   "reading": null,
+   "outcome": "TRUE_REFUSAL",
+   "errPx": null,
+   "why": "the left end is hidden by vegetation on 175 of 335 rows: OCCLUDED (no other edge qualifies: 1 leaning or uncovered); the right end is hidden by vegetation on 182 of 335 rows: OCCLUDED (no other edge qualifies: 1 leaning or uncovered)"
+  },
+  {
+   "id": "pos-white-1",
+   "family": "WHITE_PLASTER",
+   "expected": "ACCEPT",
+   "truth": [
+    526,
+    921
+   ],
+   "reading": [
+    526,
+    921
+   ],
+   "outcome": "TRUE_ACCEPT",
+   "errPx": 0,
+   "why": "wall ends at columns 526 and 921: a vertical edge over 99 rows, standing on the ground and under the eaves; a vertical edge over 99 rows, standing on the ground and under the eaves"
+  },
+  {
+   "id": "pos-colour-1",
+   "family": "COLOURED_FACADE",
+   "expected": "ACCEPT",
+   "truth": [
+    461,
+    1048
+   ],
+   "reading": [
+    461,
+    1048
+   ],
+   "outcome": "TRUE_ACCEPT",
+   "errPx": 0,
+   "why": "wall ends at columns 461 and 1048: a vertical edge over 175 rows, standing on the ground and under the eaves; a vertical edge over 175 rows, standing on the ground and under the eaves"
+  },
+  {
+   "id": "pos-dark-1",
+   "family": "DARK_AND_WHITE",
+   "expected": "ACCEPT",
+   "truth": [
+    478,
+    937
+   ],
+   "reading": [
+    478,
+    937
+   ],
+   "outcome": "TRUE_ACCEPT",
+   "errPx": 0,
+   "why": "wall ends at columns 478 and 937: a vertical edge over 116 rows, standing on the ground and under the eaves; a vertical edge over 116 rows, standing on the ground and under the eaves"
+  },
+  {
+   "id": "pos-gable-1",
+   "family": "GABLE_CHIMNEY",
+   "expected": "ACCEPT",
+   "truth": [
+    454,
+    885
+   ],
+   "reading": [
+    454,
+    885
+   ],
+   "outcome": "TRUE_ACCEPT",
+   "errPx": 0,
+   "why": "wall ends at columns 454 and 885: a vertical edge over 142 rows, standing on the ground and under the eaves; a vertical edge over 142 rows, standing on the ground and under the eaves"
+  },
+  {
+   "id": "pos-tree-mid-1",
+   "family": "TREE_MID_FACADE",
+   "expected": "ACCEPT",
+   "truth": [
+    445,
+    922
+   ],
+   "reading": [
+    445,
+    922
+   ],
+   "outcome": "TRUE_ACCEPT",
+   "errPx": 0,
+   "why": "wall ends at columns 445 and 922: a vertical edge over 117 rows, standing on the ground and under the eaves; a vertical edge over 117 rows, standing on the ground and under the eaves"
+  },
+  {
+   "id": "pos-pergola-1",
+   "family": "PERGOLA_DETACHED",
+   "expected": "ACCEPT",
+   "truth": [
+    489,
+    852
+   ],
+   "reading": [
+    489,
+    852
+   ],
+   "outcome": "TRUE_ACCEPT",
+   "errPx": 0,
+   "why": "wall ends at columns 489 and 852: a vertical edge over 88 rows, standing on the ground and under the eaves; a vertical edge over 199 rows, standing on the ground and under the eaves"
+  },
+  {
+   "id": "pos-balcony-1",
+   "family": "BALCONY_PAST_END",
+   "expected": "ACCEPT",
+   "truth": [
+    406,
+    954
+   ],
+   "reading": [
+    406,
+    954
+   ],
+   "outcome": "TRUE_ACCEPT",
+   "errPx": 0,
+   "why": "wall ends at columns 406 and 954: a vertical edge over 130 rows, standing on the ground and under the eaves; a vertical edge over 265 rows, standing on the ground and under the eaves"
+  },
+  {
+   "id": "pos-drawn-1",
+   "family": "DRAWN_LINES",
+   "expected": "ACCEPT",
+   "truth": [
+    512,
+    947
+   ],
+   "reading": [
+    512,
+    947
+   ],
+   "outcome": "TRUE_ACCEPT",
+   "errPx": 0,
+   "why": "wall ends at columns 512 and 947: a vertical edge over 107 rows, standing on the ground and under the eaves; a vertical edge over 107 rows, standing on the ground and under the eaves"
+  },
+  {
+   "id": "pos-flat-1",
+   "family": "NO_PITCHED_ROOF",
+   "expected": "ACCEPT",
+   "truth": [
+    542,
+    879
+   ],
+   "reading": [
+    542,
+    879
+   ],
+   "outcome": "TRUE_ACCEPT",
+   "errPx": 0,
+   "why": "wall ends at columns 542 and 879: a vertical edge over 200 rows, standing on the ground and under the eaves; a vertical edge over 200 rows, standing on the ground and under the eaves"
+  },
+  {
+   "id": "neg-tree-end-1",
+   "family": "TREE_OVER_END",
+   "expected": "REFUSE",
+   "truth": [
+    342,
+    975
+   ],
+   "reading": null,
+   "outcome": "TRUE_REFUSAL",
+   "errPx": null,
+   "why": "the left end is hidden by vegetation on 193 of 369 rows: OCCLUDED (no other edge qualifies: 1 leaning or uncovered)"
+  },
+  {
+   "id": "neg-white-sky-1",
+   "family": "WHITE_ON_WHITE",
+   "expected": "REFUSE",
+   "truth": [
+    427,
+    926
+   ],
+   "reading": null,
+   "outcome": "TRUE_REFUSAL",
+   "errPx": null,
+   "why": "below row 253 (214 px above the outline's foot) no built run spans the outline's middle: the walls are not separated from the background (a wall of the background's colour with no line drawn at its ends)"
+  },
+  {
+   "id": "neg-screen-1",
+   "family": "PERGOLA_SCREEN_ATTACHED",
+   "expected": "EITHER",
+   "truth": [
+    393,
+    1092
+   ],
+   "reading": null,
+   "outcome": "TRUE_REFUSAL",
+   "errPx": null,
+   "why": "no left edge qualifies: column 393 — the edge ends 141 px above the facade's foot (more than a plinth): the top of something standing before or beside the wall — a screen, a balcony, a door — not a wall end; column 264 — nothing built runs over its top: it stands past the roof (a pergola post, a screen, a fence), not under it; column 466 — the edge leans -1.019 columns per row over 182 rows: not an orthographic wall end (a perspective)"
+  },
+  {
+   "id": "neg-crop-1",
+   "family": "CUT_BY_SHEET",
+   "expected": "REFUSE",
+   "truth": [
+    409,
+    946
+   ],
+   "reading": null,
+   "outcome": "TRUE_REFUSAL",
+   "errPx": null,
+   "why": "on 171 of 172 wall rows the sheet's left and right margins are two different backgrounds: the sheet is cut or pasted on one side, so an end against it may be the cut"
+  },
+  {
+   "id": "neg-persp-1",
+   "family": "PERSPECTIVE",
+   "expected": "REFUSE",
+   "truth": [
+    388,
+    970
+   ],
+   "reading": null,
+   "outcome": "TRUE_REFUSAL",
+   "errPx": null,
+   "why": "no right edge qualifies: column 983 — the edge leans -0.082 columns per row over 253 rows: not an orthographic wall end (a perspective); column 945 — the edge leans 1.035 columns per row over 135 rows: not an orthographic wall end (a perspective)"
+  },
+  {
+   "id": "neg-hidden-1",
+   "family": "MOSTLY_OCCLUDED",
+   "expected": "REFUSE",
+   "truth": [
+    501,
+    959
+   ],
+   "reading": null,
+   "outcome": "TRUE_REFUSAL",
+   "errPx": null,
+   "why": "the left end is hidden by vegetation on 141 of 244 rows: OCCLUDED (no other edge qualifies: 1 leaning or uncovered); the right end is hidden by vegetation on 133 of 244 rows: OCCLUDED (no other edge qualifies: 1 leaning or uncovered)"
+  }
+ ]
+}

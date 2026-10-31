@@ -2964,3 +2964,19 @@ registration is contradicted 8.5 % by two agreeing bands). Goździkowce 0/4. Fro
 0 gains, 0 false acceptances; Skalnice fails at the solver. Synthetic Larchfield exposes a −9.5 % solver front/rear
 registration (reported, not fixed). 8-house hashes identical to N9-01; R1–R5 statuses unchanged. Diagnostics do not feed
 the solver; R6 / N9-02B not started. Targeted tests pass; the 12 known TS failures unchanged from the base; APK NOT_RUN.
+
+## Kotwice fasady i spójność R5 (STAGE BUILDPLAN N9-02R)
+
+Status: **PARTIAL — spójność R5 naprawiona, ekstraktor badawczy nie wdrożony** (baza `10bdce8`; solver 2.17.0, model
+1.7.0, czytnik 1.5.0 bez zmian; usługa analizy 1.5.0, `assessment` 1.2.0, addytywnie). Report
+`stage-reports/STAGE_BUILDPLAN_N9_02R_FACADE_SOURCE_ANCHORS_AND_R5.md`, artefakty `stage-reports/artifacts/analyzer-n9-02r/`.
+R5, `elevationRegistration` and `sourceUnchecked` now share one adjudication of each elevation's axes (VALID / SPAN_ONLY
+/ DISPUTED / UNAVAILABLE, with the contradicting measurement). Every R5 check declares the axes it needs; a disputed
+required axis makes the view UNCHECKED / REGISTRATION_DISPUTED with its raw residuals kept, and the width check is
+CIRCULAR on span-registered views. 32 elevations: R5 CONFLICT 6 → 2 (Trytomach FRONT, Rarytasy LEFT, Sasanki FRONT/REAR
+stood on disputed axes; Rarytasy FRONT/REAR keep genuine conflicts), comparisons executed on valid axes 85 (of 139 raw),
+independent 0. 8-house hashes identical; classes, R1/R3/R4, technical validity and completeness unchanged. The research
+facade-anchor reader (`assessment/facade-anchors.ts`, not wired) scored 18/0/0/12 on a fresh frozen synthetic holdout
+(N9-02A band reader 8/3/10/9) but refused 44/44 real ARCHON views (background trees, white clouds), so it is not in
+production. Web and Android show the comparison counts; e2e opens the model under CONFLICT and UNCHECKED. N9-02B / R6
+not started; APK NOT_RUN.

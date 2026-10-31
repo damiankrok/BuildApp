@@ -7,6 +7,7 @@
 import type { ViewAuditRecord } from '@buildapp/reconstruction'
 import type { SourceCoordinateFrame } from '@buildapp/source-observations'
 import type { RelationResult, SourceUnchecked, UncheckedItem } from './types.js'
+import type { ViewAdjudication } from './elevations.js'
 
 const AXES: Record<string, UncheckedItem['axes']> = {
   OPENINGS_ONLY: { along: 'FULL', height: 'NONE' },
@@ -26,6 +27,8 @@ export function sourceUncheckedOf(input: {
   sectionFrameId?: string
   heightsMeasured: boolean
   relations: readonly RelationResult[]
+  /** N9-02R: the shared adjudication of each elevation's axes; an elevation's axes are told from it. */
+  adjudication?: ReadonlyMap<string, ViewAdjudication>
 }): SourceUnchecked {
   const items: UncheckedItem[] = []
   const audit = new Map(input.viewAudit.map((v) => [v.frameId, v]))
@@ -39,12 +42,18 @@ export function sourceUncheckedOf(input: {
       if (!v || v.use === 'DUPLICATE') continue
       const r5item = r5?.items.find((i) => i.source?.frameId === f.id)
       if (v.use === 'REGISTERED' && r5item && r5item.status !== 'UNCHECKED') continue
-      const none = v.use === 'NOT_REGISTERED'
+      const adj = input.adjudication?.get(f.id)
+      // N9-02R: a view the solver registered whose R5 comparisons were all set aside (a disputed axis) was compared on nothing
+      const executed = Number(r5item?.coverage.executed ?? 0)
+      const none = v.use === 'NOT_REGISTERED' || (v.use === 'REGISTERED' && r5item !== undefined && executed === 0)
+      const axes: UncheckedItem['axes'] = adj
+        ? { along: adj.along === 'VALID' ? 'FULL' : adj.along === 'SPAN_ONLY' ? 'SPAN_ONLY' : adj.along === 'DISPUTED' ? 'DISPUTED' : 'NONE', height: adj.vertical === 'VALID' ? 'FULL' : adj.vertical === 'DISPUTED' ? 'DISPUTED' : 'NONE' }
+        : (AXES[v.use] ?? { along: 'NONE', height: 'NONE' })
       items.push({
         kind: 'ELEVATION',
         frameId: f.id,
         ...(v.side ? { side: v.side } : {}),
-        axes: AXES[v.use] ?? { along: 'NONE', height: 'NONE' },
+        axes,
         extent: none ? 'NONE' : 'PARTIAL',
         what: `${v.side ?? v.labelledView} elevation (${v.use})`,
         why: v.use === 'REGISTERED' ? (r5item?.why ?? 'registered, nothing observed') : v.why.slice(0, 240),

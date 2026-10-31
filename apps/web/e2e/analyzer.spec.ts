@@ -100,3 +100,28 @@ test('a service that cannot be reached is reported as such', async ({ page }) =>
   await expect(page.getByTestId('analyzer-error')).toHaveAttribute('data-code', 'NETWORK')
   await expect(page.getByTestId('analyzer-error')).toContainText('cannot be reached')
 })
+
+// N9-02R: whatever the source fidelity says — a conflict, or nothing comparable — the model stays openable. The
+// service's own answer is taken and only its fidelity status is set, so the panel and the viewer are the real ones.
+for (const status of ['CONFLICT', 'UNCHECKED'] as const) {
+  test(`the model opens under a source fidelity of ${status}`, async ({ page }) => {
+    await page.route(`${SERVICE}/v1/analyses/*/result`, async (route) => {
+      const res = await route.fetch()
+      const body = (await res.json()) as { assessment: { sourceFidelity: { status: string; conflicts: string[] } } }
+      body.assessment.sourceFidelity.status = status
+      body.assessment.sourceFidelity.conflicts = status === 'CONFLICT' ? ['R5_REGISTERED_ELEVATIONS: the registered view and the model disagree'] : []
+      await route.fulfill({ response: res, json: body })
+    })
+    await page.getByTestId('analyzer-service-input').fill(SERVICE)
+    await page.getByTestId('analyzer-service-save').click()
+    await page.getByTestId('analyzer-url').fill(PROJECT)
+    await page.getByTestId('analyzer-submit').click()
+    await expect(page.getByTestId('analyzer-status')).toHaveText('COMPLETED', { timeout: 60_000 })
+    await expect(page.getByTestId('analyzer-axis-fidelity')).toHaveAttribute('data-state', status === 'CONFLICT' ? 'WARN' : 'OPEN')
+    await expect(page.getByTestId('analyzer-preview-kept')).toBeVisible()
+    await expect(page.getByTestId('analyzer-open')).toBeEnabled()
+    await page.getByTestId('analyzer-open').click()
+    await expect(page.getByTestId('status-model')).toHaveText('Larchfield (analysis)')
+    expect(Number(await page.getByTestId('status-triangles').textContent())).toBeGreaterThan(100)
+  })
+}

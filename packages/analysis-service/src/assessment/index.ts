@@ -12,6 +12,7 @@ import { roofLayersRelation } from './roof-layers.js'
 import { planRelations } from './plan-ink.js'
 import type { PlanRelations, PlanSheetInput } from './plan-ink.js'
 import { elevationRelation } from './elevations.js'
+import type { ViewAdjudication } from './elevations.js'
 import { sourceUncheckedOf } from './unchecked.js'
 import { elevationAxes, solverClass } from './elevation-axes.js'
 import type { ElevationAxes } from './elevation-axes.js'
@@ -25,10 +26,11 @@ export { roofLayersRelation, ROOF_GRID_M, EDGE_TOLERANCE_M, GAP_TOLERANCE_M } fr
 export type { RoofCellClass } from './roof-layers.js'
 export { planRelations, readStoreyInk, storeyOutline, thickInk, storeyPolygons, REGISTRATION_SUPPORT_MIN } from './plan-ink.js'
 export type { PlanRelations, PlanSheetInput, StoreyInk, StoreyOutline, WallInkReading } from './plan-ink.js'
-export { elevationRelation, classifyResidual, emittedIds, DISAGREE_SHARE, STABLE_FEATURES } from './elevations.js'
+export { elevationRelation, classifyResidual, emittedIds, checkValidity, DISAGREE_SHARE, STABLE_FEATURES } from './elevations.js'
+export type { ViewAdjudication } from './elevations.js'
 export { sourceUncheckedOf } from './unchecked.js'
-export { elevationAxes, solverClass, wallBands, apexOf, WALL_BAND_MIN_SHARE, WALL_BAND_MIN_WIDTH, GROUND_TOLERANCE_M, PLINTH_RANGE_M, OPPOSITE_SPAN_AGREEMENT, EXTENT_HEIGHT_MIN_SHARE, SHEET_SCALE_AGREEMENT, NARROW_SPIKE_M } from './elevation-axes.js'
-export type { ElevationAxes, Anchor, AxisState, RegistrationClass } from './elevation-axes.js'
+export { elevationAxes, solverClass, validityOf, wallBands, apexOf, WALL_BAND_MIN_SHARE, WALL_BAND_MIN_WIDTH, GROUND_TOLERANCE_M, PLINTH_RANGE_M, OPPOSITE_SPAN_AGREEMENT, EXTENT_HEIGHT_MIN_SHARE, SHEET_SCALE_AGREEMENT, NARROW_SPIKE_M } from './elevation-axes.js'
+export type { ElevationAxes, Anchor, AxisState, AxisValidity, RegistrationClass } from './elevation-axes.js'
 export { printedDatumsOf, terrainDatumOf } from './elevation-inputs.js'
 
 export type AssessmentInput = {
@@ -56,15 +58,18 @@ export function assessModelDetailed(input: AssessmentInput, options: { keepMasks
     return { frameId: p.frameId, assetId: p.assetId, storeyIndex: p.storeyIndex, mppX: p.mppX, mppY: p.mppY, wallPx: p.wallPx, toPixel: p.toPixel, raster: frame ? input.raster(frame) : undefined }
   })
   const plans = planRelations(model, sheets, options)
+  // N9-02R: the four-axis adjudication comes first, and R5 and the unchecked budget are judged on it
+  const elevationRegistration = elevationRegistrationOf(input)
+  const adjudication = new Map(elevationRegistration.views.map((v) => [v.frameId, adjudicationOf(v)]))
   const relations: RelationResult[] = [
     roofLayersRelation(model, input.scene),
     plans.r3,
     plans.r4,
-    elevationRelation({ model, viewAudit: r.viewAudit, residuals: r.residuals, crossView: r.crossViewResiduals, facadeAlignment: r.facadeAlignment, openings: r.building.openings }),
+    elevationRelation({ model, viewAudit: r.viewAudit, residuals: r.residuals, crossView: r.crossViewResiduals, facadeAlignment: r.facadeAlignment, openings: r.building.openings, adjudication }),
   ]
   const conflicts = relations.flatMap((rel) => rel.items.filter((i) => i.status === 'CONFLICT').map((i) => `${rel.id}: ${i.why}`))
   const sourceFidelity: SourceFidelity = { status: combineStatus(relations), relations, counts: countStatuses(relations), conflicts, meaning: FIDELITY_MEANING }
-  const elevationRegistration = elevationRegistrationOf(input)
+  elevationRegistration.scorecard = scorecardOf(elevationRegistration, relations.find((x) => x.id === 'R5_REGISTERED_ELEVATIONS'))
   const axesOf = new Map(elevationRegistration.views.map((v) => [v.frameId, summaryOfAxes(v)]))
   for (const i of relations.find((x) => x.id === 'R5_REGISTERED_ELEVATIONS')?.items ?? []) {
     const axes = i.source ? axesOf.get(i.source.frameId) : undefined
@@ -78,6 +83,7 @@ export function assessModelDetailed(input: AssessmentInput, options: { keepMasks
     ...(r.registrations.section ? { sectionFrameId: r.registrations.section.frameId } : {}),
     heightsMeasured: r.heights.measured,
     relations,
+    adjudication,
   })
   for (const i of sourceUnchecked.items) {
     const axes = i.kind === 'ELEVATION' && i.frameId ? axesOf.get(i.frameId) : undefined
@@ -91,6 +97,7 @@ export function assessModelDetailed(input: AssessmentInput, options: { keepMasks
     `source fidelity ${sourceFidelity.status}: ${items.filter((i) => i.status === 'CONFLICT').length} conflict(s), ${items.filter((i) => i.status === 'PASS').length} pass, ${items.filter((i) => i.status === 'UNCHECKED').length} unchecked`,
     `${sourceUnchecked.counts.total} source item(s) not compared`,
     `elevations: ${elevationRegistration.counts.after.FULL} full, ${elevationRegistration.counts.after.ALONG_ONLY} along only, ${elevationRegistration.counts.after.VERTICAL_ONLY} vertical only, ${elevationRegistration.counts.after.UNREGISTERED} unregistered`,
+    `elevation comparisons: ${elevationRegistration.scorecard.totals.potential} potential, ${elevationRegistration.scorecard.totals.executed} executed on valid axes, ${elevationRegistration.scorecard.totals.independent} independent`,
     'the 3D model is shown in every case',
   ].join('; ')
   return {
@@ -115,6 +122,33 @@ export function assessModel(input: AssessmentInput): ModelAssessment {
 
 const CLASSES = ['FULL', 'ALONG_ONLY', 'VERTICAL_ONLY', 'UNREGISTERED'] as const
 const RANK: Record<(typeof CLASSES)[number], number> = { UNREGISTERED: 0, VERTICAL_ONLY: 1, ALONG_ONLY: 1, FULL: 2 }
+
+/** N9-02R: one view's adjudication, as R5 and the unchecked budget read it. */
+export function adjudicationOf(v: ElevationAxes): ViewAdjudication {
+  return { ...v.validity, class: v.class, alongAnchorsShared: v.along.anchors.some((a) => !a.independentOfModel) }
+}
+
+/** N9-02R: the three denominators per view — potential slots, comparisons executed on valid axes, independent ones. */
+export function scorecardOf(reg: ElevationRegistrationReport, r5: RelationResult | undefined): ElevationRegistrationReport['scorecard'] {
+  const views = reg.views.filter((v) => v.solver.use !== 'DUPLICATE').map((v) => {
+    const item = r5?.items.find((i) => i.source?.frameId === v.frameId)
+    const checks = item?.checks ?? []
+    const counted = (val: string): number => checks.filter((c) => c.validity === val && c.observed && c.emitted).length
+    const executed = counted('VALID')
+    // every R5 check is located near the model's prediction (MODEL_ANCHORED): none is independent
+    const independent = checks.filter((c) => c.validity === 'VALID' && c.observed && c.emitted && !c.modelAnchored && !c.sharedWithModel).length
+    return {
+      frameId: v.frameId,
+      potential: v.checkable.slots,
+      executed,
+      independent,
+      excluded: { DISPUTED: counted('DISPUTED'), UNAVAILABLE: counted('UNAVAILABLE'), CIRCULAR: counted('CIRCULAR') },
+      why: item ? `${item.status} ${item.code}` : 'no R5 item',
+    }
+  })
+  const rawObserved = (r5?.items ?? []).reduce((a, i) => a + (i.checks ?? []).filter((c) => c.observed && c.emitted).length, 0)
+  return { views, totals: { potential: views.reduce((a, v) => a + v.potential, 0), executed: views.reduce((a, v) => a + v.executed, 0), independent: views.reduce((a, v) => a + v.independent, 0), rawObserved } }
+}
 
 export function summaryOfAxes(v: ElevationAxes): ViewAxesSummary {
   return { class: v.class, side: `${v.side.state} ${v.side.value}`, along: v.along.state, vertical: v.vertical.state, scale: v.scale.state }
@@ -145,5 +179,6 @@ export function elevationRegistrationOf(input: Pick<AssessmentInput, 'model' | '
     slots: { before: slotsBefore, after: counted.reduce((a, v) => a + v.checkable.slots, 0) },
     lost,
     datums: { ridgeY: input.datums.ridgeY ?? null, terrainY: input.datums.terrainY ?? null },
+    scorecard: { views: [], totals: { potential: 0, executed: 0, independent: 0, rawObserved: 0 } },
   }
 }

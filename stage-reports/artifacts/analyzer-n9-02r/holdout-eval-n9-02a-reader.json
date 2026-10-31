@@ -1,0 +1,435 @@
+{
+ "summary": {
+  "reader": "n9-02a",
+  "TRUE_ACCEPT": 8,
+  "FALSE_ACCEPT": 3,
+  "FALSE_REFUSAL": 10,
+  "TRUE_REFUSAL": 9,
+  "hardFalseAcceptOnRefuse": 3
+ },
+ "rows": [
+  {
+   "id": "pos-white-0",
+   "family": "WHITE_PLASTER",
+   "expected": "ACCEPT",
+   "truth": [
+    474,
+    951
+   ],
+   "reading": null,
+   "outcome": "FALSE_REFUSAL",
+   "errPx": null,
+   "why": "no unclipped neutral band"
+  },
+  {
+   "id": "pos-colour-0",
+   "family": "COLOURED_FACADE",
+   "expected": "ACCEPT",
+   "truth": [
+    443,
+    975
+   ],
+   "reading": null,
+   "outcome": "FALSE_REFUSAL",
+   "errPx": null,
+   "why": "no unclipped neutral band"
+  },
+  {
+   "id": "pos-dark-0",
+   "family": "DARK_AND_WHITE",
+   "expected": "ACCEPT",
+   "truth": [
+    497,
+    934
+   ],
+   "reading": [
+    499,
+    931
+   ],
+   "outcome": "TRUE_ACCEPT",
+   "errPx": 3,
+   "why": "band over 178 rows"
+  },
+  {
+   "id": "pos-gable-0",
+   "family": "GABLE_CHIMNEY",
+   "expected": "ACCEPT",
+   "truth": [
+    564,
+    836
+   ],
+   "reading": [
+    565,
+    834
+   ],
+   "outcome": "TRUE_ACCEPT",
+   "errPx": 2,
+   "why": "band over 67 rows"
+  },
+  {
+   "id": "pos-tree-mid-0",
+   "family": "TREE_MID_FACADE",
+   "expected": "ACCEPT",
+   "truth": [
+    520,
+    913
+   ],
+   "reading": null,
+   "outcome": "FALSE_REFUSAL",
+   "errPx": null,
+   "why": "no unclipped neutral band"
+  },
+  {
+   "id": "pos-pergola-0",
+   "family": "PERGOLA_DETACHED",
+   "expected": "ACCEPT",
+   "truth": [
+    424,
+    942
+   ],
+   "reading": null,
+   "outcome": "FALSE_REFUSAL",
+   "errPx": null,
+   "why": "no unclipped neutral band"
+  },
+  {
+   "id": "pos-balcony-0",
+   "family": "BALCONY_PAST_END",
+   "expected": "ACCEPT",
+   "truth": [
+    488,
+    868
+   ],
+   "reading": null,
+   "outcome": "FALSE_REFUSAL",
+   "errPx": null,
+   "why": "no unclipped neutral band"
+  },
+  {
+   "id": "pos-drawn-0",
+   "family": "DRAWN_LINES",
+   "expected": "ACCEPT",
+   "truth": [
+    410,
+    999
+   ],
+   "reading": [
+    412,
+    996
+   ],
+   "outcome": "TRUE_ACCEPT",
+   "errPx": 3,
+   "why": "band over 110 rows"
+  },
+  {
+   "id": "pos-flat-0",
+   "family": "NO_PITCHED_ROOF",
+   "expected": "ACCEPT",
+   "truth": [
+    472,
+    864
+   ],
+   "reading": null,
+   "outcome": "FALSE_REFUSAL",
+   "errPx": null,
+   "why": "no unclipped neutral band"
+  },
+  {
+   "id": "neg-tree-end-0",
+   "family": "TREE_OVER_END",
+   "expected": "REFUSE",
+   "truth": [
+    443,
+    918
+   ],
+   "reading": null,
+   "outcome": "TRUE_REFUSAL",
+   "errPx": null,
+   "why": "no unclipped neutral band"
+  },
+  {
+   "id": "neg-white-sky-0",
+   "family": "WHITE_ON_WHITE",
+   "expected": "REFUSE",
+   "truth": [
+    532,
+    902
+   ],
+   "reading": null,
+   "outcome": "TRUE_REFUSAL",
+   "errPx": null,
+   "why": "no unclipped neutral band"
+  },
+  {
+   "id": "neg-screen-0",
+   "family": "PERGOLA_SCREEN_ATTACHED",
+   "expected": "EITHER",
+   "truth": [
+    406,
+    927
+   ],
+   "reading": null,
+   "outcome": "TRUE_REFUSAL",
+   "errPx": null,
+   "why": "no unclipped neutral band"
+  },
+  {
+   "id": "neg-crop-0",
+   "family": "CUT_BY_SHEET",
+   "expected": "REFUSE",
+   "truth": [
+    403,
+    984
+   ],
+   "reading": null,
+   "outcome": "TRUE_REFUSAL",
+   "errPx": null,
+   "why": "no unclipped neutral band"
+  },
+  {
+   "id": "neg-persp-0",
+   "family": "PERSPECTIVE",
+   "expected": "REFUSE",
+   "truth": [
+    529,
+    931
+   ],
+   "reading": null,
+   "outcome": "TRUE_REFUSAL",
+   "errPx": null,
+   "why": "no unclipped neutral band"
+  },
+  {
+   "id": "neg-hidden-0",
+   "family": "MOSTLY_OCCLUDED",
+   "expected": "REFUSE",
+   "truth": [
+    447,
+    924
+   ],
+   "reading": [
+    519,
+    832
+   ],
+   "outcome": "FALSE_ACCEPT",
+   "errPx": 92,
+   "why": "band over 27 rows"
+  },
+  {
+   "id": "pos-white-1",
+   "family": "WHITE_PLASTER",
+   "expected": "ACCEPT",
+   "truth": [
+    526,
+    921
+   ],
+   "reading": null,
+   "outcome": "FALSE_REFUSAL",
+   "errPx": null,
+   "why": "no unclipped neutral band"
+  },
+  {
+   "id": "pos-colour-1",
+   "family": "COLOURED_FACADE",
+   "expected": "ACCEPT",
+   "truth": [
+    461,
+    1048
+   ],
+   "reading": [
+    462,
+    1046
+   ],
+   "outcome": "TRUE_ACCEPT",
+   "errPx": 2,
+   "why": "band over 40 rows"
+  },
+  {
+   "id": "pos-dark-1",
+   "family": "DARK_AND_WHITE",
+   "expected": "ACCEPT",
+   "truth": [
+    478,
+    937
+   ],
+   "reading": null,
+   "outcome": "FALSE_REFUSAL",
+   "errPx": null,
+   "why": "no unclipped neutral band"
+  },
+  {
+   "id": "pos-gable-1",
+   "family": "GABLE_CHIMNEY",
+   "expected": "ACCEPT",
+   "truth": [
+    454,
+    885
+   ],
+   "reading": null,
+   "outcome": "FALSE_REFUSAL",
+   "errPx": null,
+   "why": "no unclipped neutral band"
+  },
+  {
+   "id": "pos-tree-mid-1",
+   "family": "TREE_MID_FACADE",
+   "expected": "ACCEPT",
+   "truth": [
+    445,
+    922
+   ],
+   "reading": null,
+   "outcome": "FALSE_REFUSAL",
+   "errPx": null,
+   "why": "no unclipped neutral band"
+  },
+  {
+   "id": "pos-pergola-1",
+   "family": "PERGOLA_DETACHED",
+   "expected": "ACCEPT",
+   "truth": [
+    489,
+    852
+   ],
+   "reading": [
+    490,
+    850
+   ],
+   "outcome": "TRUE_ACCEPT",
+   "errPx": 2,
+   "why": "band over 115 rows"
+  },
+  {
+   "id": "pos-balcony-1",
+   "family": "BALCONY_PAST_END",
+   "expected": "ACCEPT",
+   "truth": [
+    406,
+    954
+   ],
+   "reading": [
+    408,
+    951
+   ],
+   "outcome": "TRUE_ACCEPT",
+   "errPx": 3,
+   "why": "band over 64 rows"
+  },
+  {
+   "id": "pos-drawn-1",
+   "family": "DRAWN_LINES",
+   "expected": "ACCEPT",
+   "truth": [
+    512,
+    947
+   ],
+   "reading": [
+    511,
+    947
+   ],
+   "outcome": "TRUE_ACCEPT",
+   "errPx": 1,
+   "why": "band over 80 rows"
+  },
+  {
+   "id": "pos-flat-1",
+   "family": "NO_PITCHED_ROOF",
+   "expected": "ACCEPT",
+   "truth": [
+    542,
+    879
+   ],
+   "reading": [
+    542,
+    879
+   ],
+   "outcome": "TRUE_ACCEPT",
+   "errPx": 0,
+   "why": "band over 157 rows"
+  },
+  {
+   "id": "neg-tree-end-1",
+   "family": "TREE_OVER_END",
+   "expected": "REFUSE",
+   "truth": [
+    342,
+    975
+   ],
+   "reading": [
+    453,
+    975
+   ],
+   "outcome": "FALSE_ACCEPT",
+   "errPx": 111,
+   "why": "band over 26 rows"
+  },
+  {
+   "id": "neg-white-sky-1",
+   "family": "WHITE_ON_WHITE",
+   "expected": "REFUSE",
+   "truth": [
+    427,
+    926
+   ],
+   "reading": null,
+   "outcome": "TRUE_REFUSAL",
+   "errPx": null,
+   "why": "no unclipped neutral band"
+  },
+  {
+   "id": "neg-screen-1",
+   "family": "PERGOLA_SCREEN_ATTACHED",
+   "expected": "EITHER",
+   "truth": [
+    393,
+    1092
+   ],
+   "reading": null,
+   "outcome": "TRUE_REFUSAL",
+   "errPx": null,
+   "why": "no unclipped neutral band"
+  },
+  {
+   "id": "neg-crop-1",
+   "family": "CUT_BY_SHEET",
+   "expected": "REFUSE",
+   "truth": [
+    409,
+    946
+   ],
+   "reading": [
+    409,
+    855
+   ],
+   "outcome": "FALSE_ACCEPT",
+   "errPx": 91,
+   "why": "band over 61 rows"
+  },
+  {
+   "id": "neg-persp-1",
+   "family": "PERSPECTIVE",
+   "expected": "REFUSE",
+   "truth": [
+    388,
+    970
+   ],
+   "reading": null,
+   "outcome": "TRUE_REFUSAL",
+   "errPx": null,
+   "why": "no unclipped neutral band"
+  },
+  {
+   "id": "neg-hidden-1",
+   "family": "MOSTLY_OCCLUDED",
+   "expected": "REFUSE",
+   "truth": [
+    501,
+    959
+   ],
+   "reading": null,
+   "outcome": "TRUE_REFUSAL",
+   "errPx": null,
+   "why": "no unclipped neutral band"
+  }
+ ]
+}

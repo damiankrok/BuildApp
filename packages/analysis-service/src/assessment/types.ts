@@ -13,7 +13,7 @@
  */
 import type { ModelCompletenessVerdict } from '@buildapp/reconstruction'
 
-export const MODEL_ASSESSMENT_SCHEMA_VERSION = '1.1.0' as const
+export const MODEL_ASSESSMENT_SCHEMA_VERSION = '1.2.0' as const
 
 export type RelationStatus = 'PASS' | 'CONFLICT' | 'UNCHECKED'
 
@@ -46,10 +46,37 @@ export type DecompositionCompleteness = {
 /** N9-02A: which axes of an elevation are registered (from `elevationRegistration`), on the items that are about one. */
 export type ViewAxesSummary = { class: 'FULL' | 'ALONG_ONLY' | 'VERTICAL_ONLY' | 'UNREGISTERED'; side: string; along: string; vertical: string; scale: string }
 
+/**
+ * N9-02R: one source↔model check of an elevation, with the axes it needs and whether the shared adjudication holds
+ * them: VALID (counted), DISPUTED (a measurement contradicts an axis it needs), UNAVAILABLE (an axis it needs is not
+ * registered), CIRCULAR (it checks the registration it was made in, not the model). Every R5 check is MODEL_ANCHORED:
+ * it looks for the edge near the model's prediction.
+ */
+export type CheckRecord = {
+  kind: string
+  featureId: string
+  objectId?: string
+  requires: Array<'SIDE' | 'ALONG' | 'VERTICAL'>
+  transform: 'SOLVER_REGISTRATION'
+  sharedWithModel: boolean
+  modelAnchored: boolean
+  validity: 'VALID' | 'DISPUTED' | 'UNAVAILABLE' | 'CIRCULAR'
+  why: string
+  observed: boolean
+  emitted: boolean
+  withinTolerance: boolean
+  residualM: number
+  toleranceM: number
+}
+
 export type RelationItem = {
   status: RelationStatus
   /** N9-02A, additive: for an elevation item, how far its registration reaches on each axis. */
   axes?: ViewAxesSummary
+  /** N9-02R, additive: for an R5 item, every check with its axis requirements and validity (raw residuals kept). */
+  checks?: CheckRecord[]
+  /** N9-02R, additive: the adjudicated validity of the view's axes the item was judged on. */
+  adjudication?: { along: string; vertical: string; hand: string }
   /** What was compared: model object ids, or the storey / view the item is about. */
   objects: string[]
   /** The drawing compared with, when one was. */
@@ -86,8 +113,11 @@ export type UncheckedItem = {
   frameId?: string
   storeyIndex?: number
   side?: string
-  /** For a view: how far its registration went on each axis. */
-  axes?: { along: 'FULL' | 'ENDS_ONLY' | 'NONE'; height: 'FULL' | 'DATUM_ONLY' | 'NONE' }
+  /**
+   * For a view: how far its registration went on each axis. N9-02R: for an elevation, from the shared adjudication —
+   * SPAN_ONLY (span and scale, no position) and DISPUTED (a measurement contradicts it) added.
+   */
+  axes?: { along: 'FULL' | 'ENDS_ONLY' | 'SPAN_ONLY' | 'DISPUTED' | 'NONE'; height: 'FULL' | 'DATUM_ONLY' | 'DISPUTED' | 'NONE' }
   /** FULL: compared as far as N9-01 compares; PARTIAL: some of what it shows was compared; NONE: nothing was. */
   extent: 'PARTIAL' | 'NONE'
   what: string
@@ -136,6 +166,14 @@ export type ElevationRegistrationReport = {
   /** Views the solver registered further than this diagnostic does, by frame, with why. */
   lost: Array<{ frameId: string; before: string; after: string; why: string }>
   datums: { ridgeY: number | null; terrainY: number | null }
+  /**
+   * N9-02R: three denominators, per view and in total, never folded into one:
+   *   potential    feature slots checkable under the adjudicated axes (N9-02A's `slots`)
+   *   executed     source↔model comparisons R5 actually made on valid axes
+   *   independent  of those, comparisons whose source feature was found without the model and whose transform is
+   *                anchored apart from the model and from that feature
+   */
+  scorecard: { views: Array<{ frameId: string; potential: number; executed: number; independent: number; excluded: { DISPUTED: number; UNAVAILABLE: number; CIRCULAR: number }; why: string }>; totals: { potential: number; executed: number; independent: number; rawObserved: number } }
 }
 
 export const FINDINGS_LISTED = 12

@@ -42,4 +42,11 @@ describe('the assessment as the Analyze panel says it (N9-01)', () => {
   it('names technical errors per check', () => {
     expect(assessmentLines(view('PASS', 'ERRORS'))[0]).toMatchObject({ state: 'WARN', value: '2 technical errors', detail: ['COMPILER: 2 errors'] })
   })
+
+  it('N9-02R: says how many comparisons stood on valid axes and that a disputed axis is disputed', () => {
+    const a = { ...view('UNCHECKED'), elevationRegistration: { counts: { before: { FULL: 1 }, after: { UNREGISTERED: 1 } }, views: [{ frameId: 'e1', class: 'UNREGISTERED', side: { state: 'REGISTERED', value: 'FRONT' }, along: { state: 'UNCHECKED' }, vertical: { state: 'UNCHECKED' }, scale: { state: 'UNCHECKED' }, validity: { along: 'DISPUTED', vertical: 'UNAVAILABLE' } }], scorecard: { totals: { potential: 12, executed: 4, independent: 0, rawObserved: 11 } } } }
+    const line = assessmentLines(a).find((l) => l.axis === 'ELEVATIONS')
+    expect(line?.detail[0]).toBe('comparisons: 12 potential · 4 executed on valid axes · 0 independent of the model (11 measured in all)')
+    expect(line?.detail[1]).toContain('along unchecked (disputed), vertical unchecked (unavailable)')
+  })
 })

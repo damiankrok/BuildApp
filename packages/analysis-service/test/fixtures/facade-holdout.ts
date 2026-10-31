@@ -344,8 +344,8 @@ function draw(spec: Spec, seed: number): HoldoutCase {
  * The frozen case list. Families are drawn at several scales and offsets from the seed; every family states what a
  * correct reader must do. Positive and negative cases are interleaved so neither can be tuned alone.
  */
-export function holdoutSpecs(): Spec[] {
-  const r = rng(HOLDOUT_SEED)
+export function holdoutSpecs(seed = HOLDOUT_SEED): Spec[] {
+  const r = rng(seed)
   const pick = <T>(xs: readonly T[]): T => xs[Math.floor(r() * xs.length)]
   const mppOf = (): number => Math.round((0.016 + r() * 0.014) * 1e6) / 1e6
   const out: Spec[] = []
@@ -397,4 +397,13 @@ export function holdoutSpecs(): Spec[] {
 
 export function holdoutCases(): HoldoutCase[] {
   return holdoutSpecs().map((s, i) => draw(s, HOLDOUT_SEED + 1 + i))
+}
+
+/**
+ * A development set: the same families drawn from another seed. Readers are developed on this set only; the frozen
+ * holdout above is evaluated once (added after the freeze — the holdout's rasters and their hashes are unchanged).
+ */
+export function developmentCases(seed: number): HoldoutCase[] {
+  if (seed === HOLDOUT_SEED) throw new Error('the development set must not be the holdout')
+  return holdoutSpecs(seed).map((s, i) => draw(s, seed + 1 + i))
 }

@@ -850,6 +850,7 @@ internal fun AssessmentDetails(a: ModelAssessment) {
         Text(stringResource(R.string.assessment_unchecked, u.total, u.none, u.partial), style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
         for (i in a.sourceUnchecked.items.filter { it.kind != "PERSPECTIVE" }.take(6)) StatusText("${i.kind} · ${i.what}${i.registration?.let { r -> " [${r.`class`}: ${r.side}, ALONG ${r.along}, VERTICAL ${r.vertical}]" }.orEmpty()}: ${i.why}")
         a.elevationRegistration?.counts?.after?.let { c -> StatusText(stringResource(R.string.assessment_elevations, c.full, c.alongOnly, c.verticalOnly, c.unregistered)) }
+        a.elevationRegistration?.scorecard?.totals?.let { t -> StatusText(stringResource(R.string.assessment_comparisons, t.potential, t.executed, t.independent)) }
         StatusText(stringResource(R.string.assessment_preview_kept))
     }
 }

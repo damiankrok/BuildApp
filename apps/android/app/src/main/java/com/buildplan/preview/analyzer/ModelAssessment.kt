@@ -139,6 +139,16 @@ data class RegistrationCounts(
 @Serializable
 data class RegistrationBeforeAfter(val before: RegistrationCounts = RegistrationCounts(), val after: RegistrationCounts = RegistrationCounts())
 
+/**
+ * N9-02R: the three denominators of the elevation comparisons — what could be compared, what was compared on axes the
+ * service holds valid, and how much of that is independent of the model. Absent from a service older than 1.5.0.
+ */
+@Serializable
+data class ComparisonTotals(val potential: Int = 0, val executed: Int = 0, val independent: Int = 0, val rawObserved: Int = 0)
+
+@Serializable
+data class ComparisonScorecard(val totals: ComparisonTotals = ComparisonTotals())
+
 /** The per-view records stay on the server's answer; the phone reads the counts and what each unchecked view lacks. */
 @Serializable
-data class ElevationRegistration(val counts: RegistrationBeforeAfter = RegistrationBeforeAfter())
+data class ElevationRegistration(val counts: RegistrationBeforeAfter = RegistrationBeforeAfter(), val scorecard: ComparisonScorecard? = null)

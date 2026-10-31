@@ -6,3 +6,5 @@ manifest: holdout-manifest.json (sha256 52edd5ac7e79d176fdc844872015b105e1f642fa
 cases: 30 (ACCEPT 18, REFUSE 10, EITHER 2), seed 92021
 state: frozen BEFORE any facade-anchor extractor code was written; no extractor threshold may be changed after the first
 evaluation on these sheets, and the sheets are not changed to suit an extractor.
+extractor sha256 at first holdout evaluation: 3ead1407f9bce78ce79ff4e30bf89243efc328251655d14b448c665242959d09 (2026-10-31T11:22:11Z)
+first and only holdout evaluation: n9-02r reader TRUE_ACCEPT 18, FALSE_ACCEPT 0, FALSE_REFUSAL 0, TRUE_REFUSAL 12 (hard false accepts on REFUSE: 0); n9-02a reader on the same sheets: 8 / 3 / 10 / 9 (hard false accepts: 3)

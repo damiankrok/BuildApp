@@ -15,8 +15,15 @@ export type AssessmentView = {
   sourceFidelity: { status: RelationStatus; relations: Array<{ id: string; title: string; status: RelationStatus; counts: Record<RelationStatus, number> }>; conflicts: string[] }
   sourceUnchecked: { counts: { total: number; none: number; partial: number }; items: Array<{ kind: string; what: string; why: string; registration?: { class: string; side: string; along: string; vertical: string; scale: string } }> }
   previewAvailable: boolean
-  /** N9-02A: every elevation on four axes; absent from a service older than 1.4.0. */
-  elevationRegistration?: { counts: { before: Record<string, number>; after: Record<string, number> }; views: Array<{ frameId: string; class: string; side: { state: string; value: string }; along: { state: string }; vertical: { state: string }; scale: { state: string } }> }
+  /**
+   * N9-02A: every elevation on four axes; absent from a service older than 1.4.0. N9-02R (1.5.0): each view's axes
+   * adjudicated (valid / span only / disputed / unavailable) and the three denominators of the comparisons.
+   */
+  elevationRegistration?: {
+    counts: { before: Record<string, number>; after: Record<string, number> }
+    views: Array<{ frameId: string; class: string; side: { state: string; value: string }; along: { state: string }; vertical: { state: string }; scale: { state: string }; validity?: { along: string; vertical: string } }>
+    scorecard?: { totals: { potential: number; executed: number; independent: number; rawObserved: number } }
+  }
 }
 
 export type AssessmentLine = { axis: 'TECHNICAL' | 'COMPLETENESS' | 'FIDELITY' | 'UNCHECKED' | 'ELEVATIONS'; state: 'OK' | 'WARN' | 'OPEN'; label: string; value: string; detail: string[] }
@@ -74,6 +81,10 @@ function elevationLine(e: NonNullable<AssessmentView['elevationRegistration']>):
     state: (c.UNREGISTERED ?? 0) === 0 && (c.ALONG_ONLY ?? 0) === 0 && (c.VERTICAL_ONLY ?? 0) === 0 ? 'OK' : 'OPEN',
     label: 'elevations registered',
     value: `${c.FULL ?? 0} full · ${c.ALONG_ONLY ?? 0} along only · ${c.VERTICAL_ONLY ?? 0} vertical only · ${c.UNREGISTERED ?? 0} unregistered`,
-    detail: views.map((v) => `${v.frameId}: ${v.class.toLowerCase().replace('_', ' ')} — side ${v.side.state.toLowerCase()} ${v.side.value.toLowerCase()}, along ${v.along.state.toLowerCase()}, vertical ${v.vertical.state.toLowerCase()}, scale ${v.scale.state.toLowerCase()}`),
+    detail: [
+      // N9-02R: what could be compared, what was compared on valid axes, and what of that is independent of the model
+      ...(e.scorecard ? [`comparisons: ${e.scorecard.totals.potential} potential · ${e.scorecard.totals.executed} executed on valid axes · ${e.scorecard.totals.independent} independent of the model (${e.scorecard.totals.rawObserved} measured in all)`] : []),
+      ...views.map((v) => `${v.frameId}: ${v.class.toLowerCase().replace('_', ' ')} — side ${v.side.state.toLowerCase()} ${v.side.value.toLowerCase()}, along ${v.along.state.toLowerCase()}${v.validity ? ` (${v.validity.along.toLowerCase().replace('_', ' ')})` : ''}, vertical ${v.vertical.state.toLowerCase()}${v.validity ? ` (${v.validity.vertical.toLowerCase().replace('_', ' ')})` : ''}, scale ${v.scale.state.toLowerCase()}`),
+    ],
   }
 }

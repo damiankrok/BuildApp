@@ -47,7 +47,7 @@ import type { LinkAnalysisResult, RecogniserSummary, VisionMode } from './result
 import { warningsOf } from './warnings.js'
 import { previewOf, sourceBasisOf } from './preview.js'
 
-export const ANALYSIS_SERVICE_VERSION = '1.4.0' as const
+export const ANALYSIS_SERVICE_VERSION = '1.5.0' as const
 
 /** What to analyse: a live URL, or a package (and optionally its graph) sealed earlier. */
 export type AnalysisInput = { kind: 'URL'; url: string } | { kind: 'PACKAGE'; pkg: SourcePackage; graph?: SourceObservationGraph }
