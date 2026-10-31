@@ -1,0 +1,8 @@
+N9-02R synthetic facade holdout — freeze record
+frozen at: 2026-10-31T11:13:38Z
+base commit: 10bdce8d9f5d641a5862ae3f65188168c110e862
+generator: packages/analysis-service/test/fixtures/facade-holdout.ts (sha256 4e0c1648bf34d3c07069cb84587683a1b00c8fe2af82fa44a02debc6aa267b15)
+manifest: holdout-manifest.json (sha256 52edd5ac7e79d176fdc844872015b105e1f642fad2db4459c4188265c99deb21)
+cases: 30 (ACCEPT 18, REFUSE 10, EITHER 2), seed 92021
+state: frozen BEFORE any facade-anchor extractor code was written; no extractor threshold may be changed after the first
+evaluation on these sheets, and the sheets are not changed to suit an extractor.

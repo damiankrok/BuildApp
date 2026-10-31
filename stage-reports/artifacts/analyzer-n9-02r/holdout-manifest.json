@@ -1,0 +1,1759 @@
+{
+ "version": "n9-02r-holdout-1",
+ "seed": 92021,
+ "generator": "packages/analysis-service/test/fixtures/facade-holdout.ts",
+ "cases": [
+  {
+   "id": "pos-white-0",
+   "family": "WHITE_PLASTER",
+   "expected": "ACCEPT",
+   "why": "white plaster against a sky, eaves overhang",
+   "view": "FRONT",
+   "wallX0": 474,
+   "wallX1": 951,
+   "wallM": 10.8,
+   "mpp": 0.022589,
+   "eaveRow": 319,
+   "apexRow": 133,
+   "groundRow": 567,
+   "openings": [
+    {
+     "x0": 532,
+     "x1": 575,
+     "y0": 470,
+     "y1": 527
+    },
+    {
+     "x0": 532,
+     "x1": 575,
+     "y0": 350,
+     "y1": 408
+    },
+    {
+     "x0": 691,
+     "x1": 734,
+     "y0": 470,
+     "y1": 527
+    },
+    {
+     "x0": 691,
+     "x1": 734,
+     "y0": 350,
+     "y1": 408
+    },
+    {
+     "x0": 850,
+     "x1": 893,
+     "y0": 470,
+     "y1": 527
+    },
+    {
+     "x0": 850,
+     "x1": 893,
+     "y0": 350,
+     "y1": 408
+    }
+   ],
+   "outline": {
+    "x0": 439,
+    "y0": 133,
+    "x1": 986,
+    "y1": 567
+   },
+   "distractors": [
+    "EAVE_OVERHANG"
+   ],
+   "size": {
+    "width": 1400,
+    "height": 675
+   },
+   "sha256": "10f24b50b4e6e536a5cfbf48f0ca7f1fb2bc1176b60440b93808d8a7e54b0c5c"
+  },
+  {
+   "id": "pos-colour-0",
+   "family": "COLOURED_FACADE",
+   "expected": "ACCEPT",
+   "why": "a coloured facade of one or two finishes: no neutral band spans it",
+   "view": "FRONT",
+   "wallX0": 443,
+   "wallX1": 975,
+   "wallM": 10.8,
+   "mpp": 0.02026,
+   "eaveRow": 349,
+   "apexRow": 142,
+   "groundRow": 497,
+   "openings": [
+    {
+     "x0": 507,
+     "x1": 556,
+     "y0": 388,
+     "y1": 453
+    },
+    {
+     "x0": 685,
+     "x1": 733,
+     "y0": 388,
+     "y1": 453
+    },
+    {
+     "x0": 862,
+     "x1": 911,
+     "y0": 388,
+     "y1": 453
+    }
+   ],
+   "outline": {
+    "x0": 404,
+    "y0": 142,
+    "x1": 1014,
+    "y1": 497
+   },
+   "distractors": [
+    "EAVE_OVERHANG"
+   ],
+   "size": {
+    "width": 1400,
+    "height": 592
+   },
+   "sha256": "faaece92c40f3424cca6904454c71bf2f09c14ac82ccd52dacec3f60ca382625"
+  },
+  {
+   "id": "pos-dark-0",
+   "family": "DARK_AND_WHITE",
+   "expected": "ACCEPT",
+   "why": "anthracite and white walls side by side, one facade",
+   "view": "FRONT",
+   "wallX0": 497,
+   "wallX1": 934,
+   "wallM": 10.7,
+   "mpp": 0.024445,
+   "eaveRow": 226,
+   "apexRow": 120,
+   "groundRow": 455,
+   "openings": [
+    {
+     "x0": 550,
+     "x1": 589,
+     "y0": 255,
+     "y1": 308
+    },
+    {
+     "x0": 696,
+     "x1": 735,
+     "y0": 365,
+     "y1": 418
+    },
+    {
+     "x0": 696,
+     "x1": 735,
+     "y0": 255,
+     "y1": 308
+    },
+    {
+     "x0": 842,
+     "x1": 881,
+     "y0": 365,
+     "y1": 418
+    },
+    {
+     "x0": 842,
+     "x1": 881,
+     "y0": 255,
+     "y1": 308
+    },
+    {
+     "x0": 522,
+     "x1": 627,
+     "y0": 365,
+     "y1": 455
+    }
+   ],
+   "outline": {
+    "x0": 481,
+    "y0": 120,
+    "x1": 950,
+    "y1": 455
+   },
+   "distractors": [
+    "EAVE_OVERHANG"
+   ],
+   "size": {
+    "width": 1400,
+    "height": 542
+   },
+   "sha256": "0e440e7430860d492a840941fbd19460d8c4a11803aee0f4aaca17514ebf6c77"
+  },
+  {
+   "id": "pos-gable-0",
+   "family": "GABLE_CHIMNEY",
+   "expected": "ACCEPT",
+   "why": "a gable end with a chimney over the apex and eaves overhang",
+   "view": "SIDE",
+   "wallX0": 564,
+   "wallX1": 836,
+   "wallM": 7.2,
+   "mpp": 0.026354,
+   "eaveRow": 236,
+   "apexRow": 107,
+   "groundRow": 350,
+   "openings": [
+    {
+     "x0": 613,
+     "x1": 650,
+     "y0": 267,
+     "y1": 316
+    },
+    {
+     "x0": 750,
+     "x1": 787,
+     "y0": 267,
+     "y1": 316
+    }
+   ],
+   "outline": {
+    "x0": 541,
+    "y0": 65,
+    "x1": 859,
+    "y1": 350
+   },
+   "distractors": [
+    "CHIMNEY",
+    "EAVE_OVERHANG"
+   ],
+   "size": {
+    "width": 1400,
+    "height": 417
+   },
+   "sha256": "8fc4ea754ec1f7e9088f98328e01ed6204952abccfd13d21f851cdf27024ed80"
+  },
+  {
+   "id": "pos-tree-mid-0",
+   "family": "TREE_MID_FACADE",
+   "expected": "ACCEPT",
+   "why": "a tree before the middle of the facade; both wall ends are clear",
+   "view": "FRONT",
+   "wallX0": 520,
+   "wallX1": 913,
+   "wallM": 11.6,
+   "mpp": 0.029421,
+   "eaveRow": 241,
+   "apexRow": 98,
+   "groundRow": 343,
+   "openings": [
+    {
+     "x0": 569,
+     "x1": 602,
+     "y0": 268,
+     "y1": 312
+    },
+    {
+     "x0": 700,
+     "x1": 733,
+     "y0": 268,
+     "y1": 312
+    },
+    {
+     "x0": 831,
+     "x1": 864,
+     "y0": 268,
+     "y1": 312
+    }
+   ],
+   "outline": {
+    "x0": 506,
+    "y0": 98,
+    "x1": 927,
+    "y1": 343
+   },
+   "distractors": [
+    "EAVE_OVERHANG",
+    "TREE"
+   ],
+   "size": {
+    "width": 1400,
+    "height": 408
+   },
+   "sha256": "9f206f3acb98f787e76303f464d7da0c67539c7121a460a759451e7c59b7d411"
+  },
+  {
+   "id": "pos-pergola-0",
+   "family": "PERGOLA_DETACHED",
+   "expected": "ACCEPT",
+   "why": "a pergola off one end, its posts clear of the wall: the pergola is not wall",
+   "view": "FRONT",
+   "wallX0": 424,
+   "wallX1": 942,
+   "wallM": 9.4,
+   "mpp": 0.018121,
+   "eaveRow": 305,
+   "apexRow": 162,
+   "groundRow": 614,
+   "openings": [
+    {
+     "x0": 483,
+     "x1": 537,
+     "y0": 493,
+     "y1": 564
+    },
+    {
+     "x0": 483,
+     "x1": 537,
+     "y0": 344,
+     "y1": 415
+    },
+    {
+     "x0": 656,
+     "x1": 710,
+     "y0": 493,
+     "y1": 564
+    },
+    {
+     "x0": 656,
+     "x1": 710,
+     "y0": 344,
+     "y1": 415
+    },
+    {
+     "x0": 829,
+     "x1": 883,
+     "y0": 493,
+     "y1": 564
+    },
+    {
+     "x0": 829,
+     "x1": 883,
+     "y0": 344,
+     "y1": 415
+    }
+   ],
+   "outline": {
+    "x0": 192,
+    "y0": 162,
+    "x1": 986,
+    "y1": 614
+   },
+   "distractors": [
+    "PERGOLA",
+    "EAVE_OVERHANG"
+   ],
+   "size": {
+    "width": 1400,
+    "height": 731
+   },
+   "sha256": "90c7ac8e6e751d7c3a2c7985d7bce3812a4f153b0e8c1c11b01b68b7ee0fdd7d"
+  },
+  {
+   "id": "pos-balcony-0",
+   "family": "BALCONY_PAST_END",
+   "expected": "ACCEPT",
+   "why": "a balcony slab and railing running 1.2 m past a wall end",
+   "view": "FRONT",
+   "wallX0": 488,
+   "wallX1": 868,
+   "wallM": 10.5,
+   "mpp": 0.027575,
+   "eaveRow": 231,
+   "apexRow": 108,
+   "groundRow": 434,
+   "openings": [
+    {
+     "x0": 533,
+     "x1": 569,
+     "y0": 354,
+     "y1": 401
+    },
+    {
+     "x0": 533,
+     "x1": 569,
+     "y0": 256,
+     "y1": 303
+    },
+    {
+     "x0": 660,
+     "x1": 696,
+     "y0": 354,
+     "y1": 401
+    },
+    {
+     "x0": 660,
+     "x1": 696,
+     "y0": 256,
+     "y1": 303
+    },
+    {
+     "x0": 787,
+     "x1": 823,
+     "y0": 354,
+     "y1": 401
+    },
+    {
+     "x0": 787,
+     "x1": 823,
+     "y0": 256,
+     "y1": 303
+    }
+   ],
+   "outline": {
+    "x0": 444,
+    "y0": 108,
+    "x1": 890,
+    "y1": 434
+   },
+   "distractors": [
+    "BALCONY",
+    "EAVE_OVERHANG"
+   ],
+   "size": {
+    "width": 1400,
+    "height": 517
+   },
+   "sha256": "fe634d78c99f096fe88563c6e6a5bd9ac481869a7a48337f0f5443ce02e68888"
+  },
+  {
+   "id": "pos-drawn-0",
+   "family": "DRAWN_LINES",
+   "expected": "ACCEPT",
+   "why": "a line drawing on paper: white walls, but the wall ends are drawn",
+   "view": "FRONT",
+   "wallX0": 410,
+   "wallX1": 999,
+   "wallM": 11.3,
+   "mpp": 0.019164,
+   "eaveRow": 281,
+   "apexRow": 145,
+   "groundRow": 438,
+   "openings": [
+    {
+     "x0": 482,
+     "x1": 533,
+     "y0": 323,
+     "y1": 391
+    },
+    {
+     "x0": 679,
+     "x1": 730,
+     "y0": 323,
+     "y1": 391
+    },
+    {
+     "x0": 876,
+     "x1": 927,
+     "y0": 323,
+     "y1": 391
+    }
+   ],
+   "outline": {
+    "x0": 379,
+    "y0": 145,
+    "x1": 1030,
+    "y1": 438
+   },
+   "distractors": [
+    "EAVE_OVERHANG"
+   ],
+   "size": {
+    "width": 1400,
+    "height": 522
+   },
+   "sha256": "5c779fbd9c2dcddbf37595feff1f778634af92203d899c43877da2aa1c6fb716"
+  },
+  {
+   "id": "pos-flat-0",
+   "family": "NO_PITCHED_ROOF",
+   "expected": "ACCEPT",
+   "why": "a flat roof: no ridge, no apex; the wall ends still stand",
+   "view": "FRONT",
+   "wallX0": 472,
+   "wallX1": 864,
+   "wallM": 10,
+   "mpp": 0.025474,
+   "eaveRow": 110,
+   "apexRow": 110,
+   "groundRow": 330,
+   "openings": [
+    {
+     "x0": 518,
+     "x1": 556,
+     "y0": 244,
+     "y1": 295
+    },
+    {
+     "x0": 518,
+     "x1": 556,
+     "y0": 138,
+     "y1": 189
+    },
+    {
+     "x0": 649,
+     "x1": 687,
+     "y0": 244,
+     "y1": 295
+    },
+    {
+     "x0": 649,
+     "x1": 687,
+     "y0": 138,
+     "y1": 189
+    },
+    {
+     "x0": 780,
+     "x1": 818,
+     "y0": 244,
+     "y1": 295
+    },
+    {
+     "x0": 780,
+     "x1": 818,
+     "y0": 138,
+     "y1": 189
+    }
+   ],
+   "outline": {
+    "x0": 460,
+    "y0": 90,
+    "x1": 876,
+    "y1": 330
+   },
+   "distractors": [
+    "EAVE_OVERHANG"
+   ],
+   "size": {
+    "width": 1400,
+    "height": 393
+   },
+   "sha256": "391991c4ecf7c5ad85fa61c5966a712000a0e646c2b8e300071e70b3023ad6b4"
+  },
+  {
+   "id": "neg-tree-end-0",
+   "family": "TREE_OVER_END",
+   "expected": "REFUSE",
+   "why": "a tree crown and trunk stand over one wall end, from eaves to ground",
+   "view": "FRONT",
+   "wallX0": 443,
+   "wallX1": 918,
+   "wallM": 12.2,
+   "mpp": 0.025645,
+   "eaveRow": 216,
+   "apexRow": 115,
+   "groundRow": 434,
+   "openings": [
+    {
+     "x0": 483,
+     "x1": 521,
+     "y0": 348,
+     "y1": 399
+    },
+    {
+     "x0": 483,
+     "x1": 521,
+     "y0": 243,
+     "y1": 294
+    },
+    {
+     "x0": 602,
+     "x1": 640,
+     "y0": 348,
+     "y1": 399
+    },
+    {
+     "x0": 602,
+     "x1": 640,
+     "y0": 243,
+     "y1": 294
+    },
+    {
+     "x0": 721,
+     "x1": 759,
+     "y0": 348,
+     "y1": 399
+    },
+    {
+     "x0": 721,
+     "x1": 759,
+     "y0": 243,
+     "y1": 294
+    },
+    {
+     "x0": 840,
+     "x1": 878,
+     "y0": 348,
+     "y1": 399
+    },
+    {
+     "x0": 840,
+     "x1": 878,
+     "y0": 243,
+     "y1": 294
+    }
+   ],
+   "outline": {
+    "x0": 301,
+    "y0": 115,
+    "x1": 941,
+    "y1": 434
+   },
+   "distractors": [
+    "EAVE_OVERHANG",
+    "TREE"
+   ],
+   "size": {
+    "width": 1400,
+    "height": 517
+   },
+   "sha256": "e696a69b4991a9d5208b0b1ff394e78d510445a47331fd8a80f74c10154160ce"
+  },
+  {
+   "id": "neg-white-sky-0",
+   "family": "WHITE_ON_WHITE",
+   "expected": "REFUSE",
+   "why": "a white wall on a white sky, no outline drawn: its ends are not decidable",
+   "view": "FRONT",
+   "wallX0": 532,
+   "wallX1": 902,
+   "wallM": 10.9,
+   "mpp": 0.029377,
+   "eaveRow": 188,
+   "apexRow": 99,
+   "groundRow": 379,
+   "openings": [
+    {
+     "x0": 577,
+     "x1": 610,
+     "y0": 304,
+     "y1": 348
+    },
+    {
+     "x0": 577,
+     "x1": 610,
+     "y0": 212,
+     "y1": 256
+    },
+    {
+     "x0": 700,
+     "x1": 734,
+     "y0": 304,
+     "y1": 348
+    },
+    {
+     "x0": 700,
+     "x1": 734,
+     "y0": 212,
+     "y1": 256
+    },
+    {
+     "x0": 824,
+     "x1": 857,
+     "y0": 304,
+     "y1": 348
+    },
+    {
+     "x0": 824,
+     "x1": 857,
+     "y0": 212,
+     "y1": 256
+    }
+   ],
+   "outline": {
+    "x0": 532,
+    "y0": 99,
+    "x1": 902,
+    "y1": 379
+   },
+   "distractors": [],
+   "size": {
+    "width": 1400,
+    "height": 451
+   },
+   "sha256": "a01aeb52c0c086a99eee481940b5149afa64a5692c20314d49153f1746dfbf53"
+  },
+  {
+   "id": "neg-screen-0",
+   "family": "PERGOLA_SCREEN_ATTACHED",
+   "expected": "EITHER",
+   "why": "a timber screen fills a pergola against a timber-clad end: below the screen top, wall and screen are one run past the roof",
+   "view": "FRONT",
+   "wallX0": 406,
+   "wallX1": 927,
+   "wallM": 9.6,
+   "mpp": 0.018398,
+   "eaveRow": 301,
+   "apexRow": 160,
+   "groundRow": 605,
+   "openings": [
+    {
+     "x0": 466,
+     "x1": 519,
+     "y0": 485,
+     "y1": 556
+    },
+    {
+     "x0": 466,
+     "x1": 519,
+     "y0": 339,
+     "y1": 409
+    },
+    {
+     "x0": 640,
+     "x1": 693,
+     "y0": 485,
+     "y1": 556
+    },
+    {
+     "x0": 640,
+     "x1": 693,
+     "y0": 339,
+     "y1": 409
+    },
+    {
+     "x0": 814,
+     "x1": 867,
+     "y0": 485,
+     "y1": 556
+    },
+    {
+     "x0": 814,
+     "x1": 867,
+     "y0": 339,
+     "y1": 409
+    }
+   ],
+   "outline": {
+    "x0": 384,
+    "y0": 160,
+    "x1": 1057,
+    "y1": 605
+   },
+   "distractors": [
+    "PERGOLA_SCREEN",
+    "EAVE_OVERHANG"
+   ],
+   "size": {
+    "width": 1400,
+    "height": 720
+   },
+   "sha256": "7f3c9b3774dbddc82204cb92231d207e7c7c553fe808c23947abca604025770e"
+  },
+  {
+   "id": "neg-crop-0",
+   "family": "CUT_BY_SHEET",
+   "expected": "REFUSE",
+   "why": "the sheet cuts the facade: its right end is not drawn",
+   "view": "FRONT",
+   "wallX0": 403,
+   "wallX1": 984,
+   "wallM": 9.6,
+   "mpp": 0.016504,
+   "eaveRow": 327,
+   "apexRow": 169,
+   "groundRow": 509,
+   "openings": [
+    {
+     "x0": 470,
+     "x1": 529,
+     "y0": 376,
+     "y1": 454
+    },
+    {
+     "x0": 664,
+     "x1": 723,
+     "y0": 376,
+     "y1": 454
+    },
+    {
+     "x0": 858,
+     "x1": 917,
+     "y0": 376,
+     "y1": 454
+    }
+   ],
+   "outline": {
+    "x0": 355,
+    "y0": 169,
+    "x1": 892,
+    "y1": 509
+   },
+   "distractors": [
+    "EAVE_OVERHANG"
+   ],
+   "size": {
+    "width": 1400,
+    "height": 606
+   },
+   "sha256": "151f6d21d022af8ed4a7efa422f703c5ffc050d33cb0939823a04950d99761c0"
+  },
+  {
+   "id": "neg-persp-0",
+   "family": "PERSPECTIVE",
+   "expected": "REFUSE",
+   "why": "a near-frontal perspective: the far wall end leans, so the view is not orthographic",
+   "view": "FRONT",
+   "wallX0": 529,
+   "wallX1": 931,
+   "wallM": 11.7,
+   "mpp": 0.029054,
+   "eaveRow": 244,
+   "apexRow": 99,
+   "groundRow": 347,
+   "openings": [
+    {
+     "x0": 579,
+     "x1": 612,
+     "y0": 271,
+     "y1": 316
+    },
+    {
+     "x0": 713,
+     "x1": 747,
+     "y0": 271,
+     "y1": 316
+    },
+    {
+     "x0": 848,
+     "x1": 881,
+     "y0": 271,
+     "y1": 316
+    }
+   ],
+   "outline": {
+    "x0": 515,
+    "y0": 99,
+    "x1": 955,
+    "y1": 347
+   },
+   "distractors": [
+    "EAVE_OVERHANG"
+   ],
+   "size": {
+    "width": 1400,
+    "height": 413
+   },
+   "sha256": "44cb48da3c960a1110d58e97b776541e548106674a01768783ee41a6714f49a3"
+  },
+  {
+   "id": "neg-hidden-0",
+   "family": "MOSTLY_OCCLUDED",
+   "expected": "REFUSE",
+   "why": "trees hide both wall ends",
+   "view": "FRONT",
+   "wallX0": 447,
+   "wallX1": 924,
+   "wallM": 9.9,
+   "mpp": 0.020695,
+   "eaveRow": 342,
+   "apexRow": 139,
+   "groundRow": 487,
+   "openings": [
+    {
+     "x0": 503,
+     "x1": 550,
+     "y0": 381,
+     "y1": 444
+    },
+    {
+     "x0": 662,
+     "x1": 709,
+     "y0": 381,
+     "y1": 444
+    },
+    {
+     "x0": 821,
+     "x1": 868,
+     "y0": 381,
+     "y1": 444
+    }
+   ],
+   "outline": {
+    "x0": 334,
+    "y0": 139,
+    "x1": 1043,
+    "y1": 487
+   },
+   "distractors": [
+    "EAVE_OVERHANG",
+    "TREE",
+    "TREE"
+   ],
+   "size": {
+    "width": 1400,
+    "height": 580
+   },
+   "sha256": "2a1e743e7960f54f1fbb83cd099bf876c679c45ff9464da8ee0cbaadf90467c7"
+  },
+  {
+   "id": "pos-white-1",
+   "family": "WHITE_PLASTER",
+   "expected": "ACCEPT",
+   "why": "white plaster against a sky, eaves overhang",
+   "view": "FRONT",
+   "wallX0": 526,
+   "wallX1": 921,
+   "wallM": 11.4,
+   "mpp": 0.028816,
+   "eaveRow": 187,
+   "apexRow": 97,
+   "groundRow": 291,
+   "openings": [
+    {
+     "x0": 575,
+     "x1": 608,
+     "y0": 215,
+     "y1": 260
+    },
+    {
+     "x0": 707,
+     "x1": 740,
+     "y0": 215,
+     "y1": 260
+    },
+    {
+     "x0": 839,
+     "x1": 872,
+     "y0": 215,
+     "y1": 260
+    }
+   ],
+   "outline": {
+    "x0": 498,
+    "y0": 97,
+    "x1": 949,
+    "y1": 291
+   },
+   "distractors": [
+    "EAVE_OVERHANG"
+   ],
+   "size": {
+    "width": 1400,
+    "height": 347
+   },
+   "sha256": "264bbdbff3bab188b182a30d5707438857eebb03b24fbf9f8068b531753293a1"
+  },
+  {
+   "id": "pos-colour-1",
+   "family": "COLOURED_FACADE",
+   "expected": "ACCEPT",
+   "why": "a coloured facade of one or two finishes: no neutral band spans it",
+   "view": "FRONT",
+   "wallX0": 461,
+   "wallX1": 1048,
+   "wallM": 9.6,
+   "mpp": 0.016336,
+   "eaveRow": 433,
+   "apexRow": 176,
+   "groundRow": 617,
+   "openings": [
+    {
+     "x0": 528,
+     "x1": 589,
+     "y0": 482,
+     "y1": 562
+    },
+    {
+     "x0": 724,
+     "x1": 785,
+     "y0": 482,
+     "y1": 562
+    },
+    {
+     "x0": 920,
+     "x1": 981,
+     "y0": 482,
+     "y1": 562
+    }
+   ],
+   "outline": {
+    "x0": 437,
+    "y0": 176,
+    "x1": 1072,
+    "y1": 617
+   },
+   "distractors": [
+    "EAVE_OVERHANG"
+   ],
+   "size": {
+    "width": 1400,
+    "height": 735
+   },
+   "sha256": "568da8dd7b733ecbaa7b87ab8aff9e15c132539c8d2dfb94e0344b5ad28dfaa1"
+  },
+  {
+   "id": "pos-dark-1",
+   "family": "DARK_AND_WHITE",
+   "expected": "ACCEPT",
+   "why": "anthracite and white walls side by side, one facade",
+   "view": "FRONT",
+   "wallX0": 478,
+   "wallX1": 937,
+   "wallM": 11.3,
+   "mpp": 0.024541,
+   "eaveRow": 254,
+   "apexRow": 115,
+   "groundRow": 376,
+   "openings": [
+    {
+     "x0": 688,
+     "x1": 727,
+     "y0": 286,
+     "y1": 339
+    },
+    {
+     "x0": 841,
+     "x1": 881,
+     "y0": 286,
+     "y1": 339
+    },
+    {
+     "x0": 502,
+     "x1": 607,
+     "y0": 286,
+     "y1": 376
+    }
+   ],
+   "outline": {
+    "x0": 454,
+    "y0": 115,
+    "x1": 961,
+    "y1": 376
+   },
+   "distractors": [
+    "EAVE_OVERHANG"
+   ],
+   "size": {
+    "width": 1400,
+    "height": 448
+   },
+   "sha256": "faab95c34044f3cbc2d433e0b3f55f0ba8b7f656bb5236531e3d262fa8d6296c"
+  },
+  {
+   "id": "pos-gable-1",
+   "family": "GABLE_CHIMNEY",
+   "expected": "ACCEPT",
+   "why": "a gable end with a chimney over the apex and eaves overhang",
+   "view": "SIDE",
+   "wallX0": 454,
+   "wallX1": 885,
+   "wallM": 8.5,
+   "mpp": 0.019694,
+   "eaveRow": 318,
+   "apexRow": 145,
+   "groundRow": 470,
+   "openings": [
+    {
+     "x0": 537,
+     "x1": 586,
+     "y0": 358,
+     "y1": 424
+    },
+    {
+     "x0": 753,
+     "x1": 802,
+     "y0": 358,
+     "y1": 424
+    }
+   ],
+   "outline": {
+    "x0": 434,
+    "y0": 89,
+    "x1": 905,
+    "y1": 470
+   },
+   "distractors": [
+    "CHIMNEY",
+    "EAVE_OVERHANG"
+   ],
+   "size": {
+    "width": 1400,
+    "height": 559
+   },
+   "sha256": "06483e139c3f3464a159998acde9c9d581bbea502e0a6c98b0e5bd4480f40210"
+  },
+  {
+   "id": "pos-tree-mid-1",
+   "family": "TREE_MID_FACADE",
+   "expected": "ACCEPT",
+   "why": "a tree before the middle of the facade; both wall ends are clear",
+   "view": "FRONT",
+   "wallX0": 445,
+   "wallX1": 922,
+   "wallM": 11.7,
+   "mpp": 0.024483,
+   "eaveRow": 289,
+   "apexRow": 117,
+   "groundRow": 412,
+   "openings": [
+    {
+     "x0": 504,
+     "x1": 544,
+     "y0": 322,
+     "y1": 375
+    },
+    {
+     "x0": 664,
+     "x1": 703,
+     "y0": 322,
+     "y1": 375
+    },
+    {
+     "x0": 823,
+     "x1": 863,
+     "y0": 322,
+     "y1": 375
+    }
+   ],
+   "outline": {
+    "x0": 429,
+    "y0": 117,
+    "x1": 938,
+    "y1": 412
+   },
+   "distractors": [
+    "EAVE_OVERHANG",
+    "TREE"
+   ],
+   "size": {
+    "width": 1400,
+    "height": 490
+   },
+   "sha256": "40d8edc86ea7a2ec3d5c0426be8f3478464d65e8e9f137a39e6c60002fff1f62"
+  },
+  {
+   "id": "pos-pergola-1",
+   "family": "PERGOLA_DETACHED",
+   "expected": "ACCEPT",
+   "why": "a pergola off one end, its posts clear of the wall: the pergola is not wall",
+   "view": "FRONT",
+   "wallX0": 489,
+   "wallX1": 852,
+   "wallM": 10,
+   "mpp": 0.027496,
+   "eaveRow": 201,
+   "apexRow": 106,
+   "groundRow": 405,
+   "openings": [
+    {
+     "x0": 531,
+     "x1": 567,
+     "y0": 325,
+     "y1": 372
+    },
+    {
+     "x0": 531,
+     "x1": 567,
+     "y0": 227,
+     "y1": 274
+    },
+    {
+     "x0": 653,
+     "x1": 688,
+     "y0": 325,
+     "y1": 372
+    },
+    {
+     "x0": 653,
+     "x1": 688,
+     "y0": 227,
+     "y1": 274
+    },
+    {
+     "x0": 774,
+     "x1": 810,
+     "y0": 325,
+     "y1": 372
+    },
+    {
+     "x0": 774,
+     "x1": 810,
+     "y0": 227,
+     "y1": 274
+    }
+   ],
+   "outline": {
+    "x0": 336,
+    "y0": 106,
+    "x1": 867,
+    "y1": 405
+   },
+   "distractors": [
+    "PERGOLA",
+    "EAVE_OVERHANG"
+   ],
+   "size": {
+    "width": 1400,
+    "height": 482
+   },
+   "sha256": "8a83cdfd5c0ca1bc5c75a4eeca39ab695af35a3092855553569cccca56c08f41"
+  },
+  {
+   "id": "pos-balcony-1",
+   "family": "BALCONY_PAST_END",
+   "expected": "ACCEPT",
+   "why": "a balcony slab and railing running 1.2 m past a wall end",
+   "view": "FRONT",
+   "wallX0": 406,
+   "wallX1": 954,
+   "wallM": 11.3,
+   "mpp": 0.020576,
+   "eaveRow": 350,
+   "apexRow": 146,
+   "groundRow": 622,
+   "openings": [
+    {
+     "x0": 473,
+     "x1": 521,
+     "y0": 515,
+     "y1": 578
+    },
+    {
+     "x0": 473,
+     "x1": 521,
+     "y0": 384,
+     "y1": 447
+    },
+    {
+     "x0": 656,
+     "x1": 704,
+     "y0": 515,
+     "y1": 578
+    },
+    {
+     "x0": 656,
+     "x1": 704,
+     "y0": 384,
+     "y1": 447
+    },
+    {
+     "x0": 839,
+     "x1": 887,
+     "y0": 515,
+     "y1": 578
+    },
+    {
+     "x0": 839,
+     "x1": 887,
+     "y0": 384,
+     "y1": 447
+    }
+   ],
+   "outline": {
+    "x0": 348,
+    "y0": 146,
+    "x1": 993,
+    "y1": 622
+   },
+   "distractors": [
+    "BALCONY",
+    "EAVE_OVERHANG"
+   ],
+   "size": {
+    "width": 1400,
+    "height": 741
+   },
+   "sha256": "3d39940fd2358fae1da42da44eb4f56cda6d714f2931e5b665d12925b9a7c0de"
+  },
+  {
+   "id": "pos-drawn-1",
+   "family": "DRAWN_LINES",
+   "expected": "ACCEPT",
+   "why": "a line drawing on paper: white walls, but the wall ends are drawn",
+   "view": "FRONT",
+   "wallX0": 512,
+   "wallX1": 947,
+   "wallM": 11.6,
+   "mpp": 0.026626,
+   "eaveRow": 203,
+   "apexRow": 105,
+   "groundRow": 316,
+   "openings": [
+    {
+     "x0": 566,
+     "x1": 602,
+     "y0": 233,
+     "y1": 282
+    },
+    {
+     "x0": 711,
+     "x1": 748,
+     "y0": 233,
+     "y1": 282
+    },
+    {
+     "x0": 857,
+     "x1": 893,
+     "y0": 233,
+     "y1": 282
+    }
+   ],
+   "outline": {
+    "x0": 482,
+    "y0": 105,
+    "x1": 977,
+    "y1": 316
+   },
+   "distractors": [
+    "EAVE_OVERHANG"
+   ],
+   "size": {
+    "width": 1400,
+    "height": 376
+   },
+   "sha256": "70f934687ccbc5bc632b1561c088007f7e7bfa988c63fadfafbd40acc1872d12"
+  },
+  {
+   "id": "pos-flat-1",
+   "family": "NO_PITCHED_ROOF",
+   "expected": "ACCEPT",
+   "why": "a flat roof: no ridge, no apex; the wall ends still stand",
+   "view": "FRONT",
+   "wallX0": 542,
+   "wallX1": 879,
+   "wallM": 9.2,
+   "mpp": 0.027205,
+   "eaveRow": 103,
+   "apexRow": 103,
+   "groundRow": 309,
+   "openings": [
+    {
+     "x0": 580,
+     "x1": 616,
+     "y0": 228,
+     "y1": 276
+    },
+    {
+     "x0": 580,
+     "x1": 616,
+     "y0": 129,
+     "y1": 177
+    },
+    {
+     "x0": 693,
+     "x1": 728,
+     "y0": 228,
+     "y1": 276
+    },
+    {
+     "x0": 693,
+     "x1": 728,
+     "y0": 129,
+     "y1": 177
+    },
+    {
+     "x0": 805,
+     "x1": 841,
+     "y0": 228,
+     "y1": 276
+    },
+    {
+     "x0": 805,
+     "x1": 841,
+     "y0": 129,
+     "y1": 177
+    }
+   ],
+   "outline": {
+    "x0": 531,
+    "y0": 85,
+    "x1": 890,
+    "y1": 309
+   },
+   "distractors": [
+    "EAVE_OVERHANG"
+   ],
+   "size": {
+    "width": 1400,
+    "height": 368
+   },
+   "sha256": "01854890f8ed4010d20971fd04d2f8f8d7ed65be221bf7528957d929c116a1b0"
+  },
+  {
+   "id": "neg-tree-end-1",
+   "family": "TREE_OVER_END",
+   "expected": "REFUSE",
+   "why": "a tree crown and trunk stand over one wall end, from eaves to ground",
+   "view": "FRONT",
+   "wallX0": 342,
+   "wallX1": 975,
+   "wallM": 12.4,
+   "mpp": 0.01957,
+   "eaveRow": 362,
+   "apexRow": 147,
+   "groundRow": 515,
+   "openings": [
+    {
+     "x0": 396,
+     "x1": 446,
+     "y0": 403,
+     "y1": 469
+    },
+    {
+     "x0": 554,
+     "x1": 604,
+     "y0": 403,
+     "y1": 469
+    },
+    {
+     "x0": 713,
+     "x1": 763,
+     "y0": 403,
+     "y1": 469
+    },
+    {
+     "x0": 871,
+     "x1": 921,
+     "y0": 403,
+     "y1": 469
+    }
+   ],
+   "outline": {
+    "x0": 218,
+    "y0": 147,
+    "x1": 1006,
+    "y1": 515
+   },
+   "distractors": [
+    "EAVE_OVERHANG",
+    "TREE"
+   ],
+   "size": {
+    "width": 1400,
+    "height": 613
+   },
+   "sha256": "263cbf5c40d9324de73c1c97249fa350c8b376092fd8a3334103db58bea611a8"
+  },
+  {
+   "id": "neg-white-sky-1",
+   "family": "WHITE_ON_WHITE",
+   "expected": "REFUSE",
+   "why": "a white wall on a white sky, no outline drawn: its ends are not decidable",
+   "view": "FRONT",
+   "wallX0": 427,
+   "wallX1": 926,
+   "wallM": 12.8,
+   "mpp": 0.025616,
+   "eaveRow": 248,
+   "apexRow": 115,
+   "groundRow": 467,
+   "openings": [
+    {
+     "x0": 470,
+     "x1": 508,
+     "y0": 381,
+     "y1": 432
+    },
+    {
+     "x0": 470,
+     "x1": 508,
+     "y0": 276,
+     "y1": 326
+    },
+    {
+     "x0": 595,
+     "x1": 633,
+     "y0": 381,
+     "y1": 432
+    },
+    {
+     "x0": 595,
+     "x1": 633,
+     "y0": 276,
+     "y1": 326
+    },
+    {
+     "x0": 720,
+     "x1": 758,
+     "y0": 381,
+     "y1": 432
+    },
+    {
+     "x0": 720,
+     "x1": 758,
+     "y0": 276,
+     "y1": 326
+    },
+    {
+     "x0": 845,
+     "x1": 883,
+     "y0": 381,
+     "y1": 432
+    },
+    {
+     "x0": 845,
+     "x1": 883,
+     "y0": 276,
+     "y1": 326
+    }
+   ],
+   "outline": {
+    "x0": 427,
+    "y0": 115,
+    "x1": 926,
+    "y1": 467
+   },
+   "distractors": [],
+   "size": {
+    "width": 1400,
+    "height": 556
+   },
+   "sha256": "60bec18883b2b2e690423abe59fc71cc105d638ff883004eb9359c270c00abf3"
+  },
+  {
+   "id": "neg-screen-1",
+   "family": "PERGOLA_SCREEN_ATTACHED",
+   "expected": "EITHER",
+   "why": "a timber screen fills a pergola against a timber-clad end: below the screen top, wall and screen are one run past the roof",
+   "view": "FRONT",
+   "wallX0": 393,
+   "wallX1": 1092,
+   "wallM": 13,
+   "mpp": 0.018571,
+   "eaveRow": 342,
+   "apexRow": 159,
+   "groundRow": 644,
+   "openings": [
+    {
+     "x0": 454,
+     "x1": 506,
+     "y0": 526,
+     "y1": 596
+    },
+    {
+     "x0": 454,
+     "x1": 506,
+     "y0": 380,
+     "y1": 450
+    },
+    {
+     "x0": 629,
+     "x1": 681,
+     "y0": 526,
+     "y1": 596
+    },
+    {
+     "x0": 629,
+     "x1": 681,
+     "y0": 380,
+     "y1": 450
+    },
+    {
+     "x0": 804,
+     "x1": 856,
+     "y0": 526,
+     "y1": 596
+    },
+    {
+     "x0": 804,
+     "x1": 856,
+     "y0": 380,
+     "y1": 450
+    },
+    {
+     "x0": 979,
+     "x1": 1031,
+     "y0": 526,
+     "y1": 596
+    },
+    {
+     "x0": 979,
+     "x1": 1031,
+     "y0": 380,
+     "y1": 450
+    }
+   ],
+   "outline": {
+    "x0": 264,
+    "y0": 159,
+    "x1": 1114,
+    "y1": 644
+   },
+   "distractors": [
+    "PERGOLA_SCREEN",
+    "EAVE_OVERHANG"
+   ],
+   "size": {
+    "width": 1400,
+    "height": 767
+   },
+   "sha256": "8855a00bf77acdf6594da1ac593b2f2e530abccd79dde3461d730d7475630555"
+  },
+  {
+   "id": "neg-crop-1",
+   "family": "CUT_BY_SHEET",
+   "expected": "REFUSE",
+   "why": "the sheet cuts the facade: its right end is not drawn",
+   "view": "FRONT",
+   "wallX0": 409,
+   "wallX1": 946,
+   "wallM": 12.2,
+   "mpp": 0.022669,
+   "eaveRow": 238,
+   "apexRow": 123,
+   "groundRow": 370,
+   "openings": [
+    {
+     "x0": 454,
+     "x1": 497,
+     "y0": 273,
+     "y1": 330
+    },
+    {
+     "x0": 589,
+     "x1": 632,
+     "y0": 273,
+     "y1": 330
+    },
+    {
+     "x0": 723,
+     "x1": 766,
+     "y0": 273,
+     "y1": 330
+    },
+    {
+     "x0": 858,
+     "x1": 901,
+     "y0": 273,
+     "y1": 330
+    }
+   ],
+   "outline": {
+    "x0": 391,
+    "y0": 123,
+    "x1": 879,
+    "y1": 370
+   },
+   "distractors": [
+    "EAVE_OVERHANG"
+   ],
+   "size": {
+    "width": 1400,
+    "height": 441
+   },
+   "sha256": "7ae071bd3fcfbdd75e8d217ddf691c3eb116c5c7dfd5caa7f726de70ab460f29"
+  },
+  {
+   "id": "neg-persp-1",
+   "family": "PERSPECTIVE",
+   "expected": "REFUSE",
+   "why": "a near-frontal perspective: the far wall end leans, so the view is not orthographic",
+   "view": "FRONT",
+   "wallX0": 388,
+   "wallX1": 970,
+   "wallM": 11.2,
+   "mpp": 0.01922,
+   "eaveRow": 288,
+   "apexRow": 153,
+   "groundRow": 579,
+   "openings": [
+    {
+     "x0": 459,
+     "x1": 510,
+     "y0": 465,
+     "y1": 532
+    },
+    {
+     "x0": 459,
+     "x1": 510,
+     "y0": 324,
+     "y1": 392
+    },
+    {
+     "x0": 653,
+     "x1": 705,
+     "y0": 465,
+     "y1": 532
+    },
+    {
+     "x0": 653,
+     "x1": 705,
+     "y0": 324,
+     "y1": 392
+    },
+    {
+     "x0": 848,
+     "x1": 899,
+     "y0": 465,
+     "y1": 532
+    },
+    {
+     "x0": 848,
+     "x1": 899,
+     "y0": 324,
+     "y1": 392
+    }
+   ],
+   "outline": {
+    "x0": 366,
+    "y0": 153,
+    "x1": 1016,
+    "y1": 579
+   },
+   "distractors": [
+    "EAVE_OVERHANG"
+   ],
+   "size": {
+    "width": 1400,
+    "height": 689
+   },
+   "sha256": "70c8f44b289f19fd65925b650b1dc5da0e9a6dd621ee32a89fc7f787a997b381"
+  },
+  {
+   "id": "neg-hidden-1",
+   "family": "MOSTLY_OCCLUDED",
+   "expected": "REFUSE",
+   "why": "trees hide both wall ends",
+   "view": "FRONT",
+   "wallX0": 501,
+   "wallX1": 959,
+   "wallM": 12.1,
+   "mpp": 0.026341,
+   "eaveRow": 237,
+   "apexRow": 108,
+   "groundRow": 351,
+   "openings": [
+    {
+     "x0": 539,
+     "x1": 576,
+     "y0": 267,
+     "y1": 317
+    },
+    {
+     "x0": 654,
+     "x1": 691,
+     "y0": 267,
+     "y1": 317
+    },
+    {
+     "x0": 769,
+     "x1": 806,
+     "y0": 267,
+     "y1": 317
+    },
+    {
+     "x0": 884,
+     "x1": 921,
+     "y0": 267,
+     "y1": 317
+    }
+   ],
+   "outline": {
+    "x0": 408,
+    "y0": 108,
+    "x1": 1055,
+    "y1": 351
+   },
+   "distractors": [
+    "EAVE_OVERHANG",
+    "TREE",
+    "TREE"
+   ],
+   "size": {
+    "width": 1400,
+    "height": 418
+   },
+   "sha256": "b0070a30f40d15fa5d9cd1009ee542fb848187e4e84eab7a89574b2a53990cbb"
+  }
+ ],
+ "counts": {
+  "total": 30,
+  "accept": 18,
+  "refuse": 10,
+  "either": 2
+ }
+}
