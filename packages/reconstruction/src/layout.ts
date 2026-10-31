@@ -71,7 +71,11 @@ export const LAYOUT_INFERENCE_NAME = 'structural-layout'
 // 1.2.0 (005Q): a strip between the walled envelope and the extent that is the building's own exterior wall is named as
 // an unresolved outer face (`wallStripsOf`): no recess, return or terrace is read in it, and the body cut on the wall's
 // inner face is not MEASURED across it.
-export const LAYOUT_INFERENCE_VERSION = '1.2.0'
+// 1.3.0 (LINK-F1): the base plan takes one scale for both axes unless its anchors prove the sheet stretched beyond their
+// pixel uncertainty (`sheetScale`); its chain ladders pin a line only with a printed statement that agrees with the longer
+// statements to within its pixel uncertainty (two tick localisations, the ticks' miss of the lines, the print's rounding); a span summed over a
+// DERIVED segment pins nothing; a statement it contradicts is kept as a rejected anchor with its residual.
+export const LAYOUT_INFERENCE_VERSION = '1.3.0'
 
 /** Where a storey sits relative to the others. Ground is the datum; the rest are counted off it. */
 export const STOREY_RANK: Record<string, number> = { BASEMENT: -1, GROUND: 0, UPPER: 1, ATTIC: 2, ROOF: 3 }
@@ -1165,6 +1169,8 @@ export type WorldFrame = {
   /** Pixels to metres along each axis, through the chains where the chains state a span. */
   x?: (px: number) => number
   z?: (px: number) => number
+  /** LINK-F1: the two ladders themselves, with every statement they weighed (pinned or rejected, and the residual). */
+  ladders?: { x: AxisLadder; z: AxisLadder }
 }
 
 /**
@@ -1181,8 +1187,76 @@ export type WorldFrame = {
  * The result is a ladder: a metric value for every grid line, built by walking
  * along it and adding the chain's own centimetres wherever they are stated.
  */
-export type AxisSpan = { metres: number; /** N7-FIX-04: the stating chain's ticks land within a pixel of both lines. */ landed: boolean; evidenceIds: string[]; chainIds: string[]; stated: boolean; agreed: number; why: string }
-export type AxisLadder = { at: (px: number) => number; span: (fromPx: number, toPx: number) => AxisSpan }
+/** LINK-F1: a tick and a grid line are each located to half a pixel, so one end of a stated span may miss by a pixel. */
+export const LADDER_TICK_PX = 1
+/** LINK-F1: a printed dimension is a whole centimetre: half a centimetre of rounding per printed number. */
+export const LADDER_PRINT_ROUNDING_M = 0.005
+/**
+ * LINK-F1: one sheet, one scale — unless the sheet itself proves otherwise. The registration fits each pixel axis on its
+ * own anchors, so an axis measured only by short spans states an "anisotropy" that is its pixel rounding: two 30 px
+ * anchors locate a scale to ±7 %, and 1 % between the axes is no evidence that the sheet was stretched. The axes keep
+ * their own scales only where they differ by more than both axes' uncertainty together — two tick localisations
+ * (`LADDER_TICK_PX` each) over each axis's longest anchor; otherwise the sheet takes one scale, each axis weighted by
+ * how well it is measured (an axis measured by nothing takes the other's).
+ */
+export function sheetScale(registration: Pick<CoordinateRegistration, 'metresPerPixelX' | 'metresPerPixelY' | 'anchors'>): { mppX: number; mppY: number; isotropic: boolean; why: string } {
+  const longest = (axis: 'X' | 'Y'): number => Math.max(0, ...registration.anchors.filter((a) => a.axis === axis).map((a) => a.pixelSpan))
+  const lx = longest('X')
+  const ly = longest('Y')
+  const x = registration.metresPerPixelX
+  const y = registration.metresPerPixelY
+  if (!(lx > 0) || !(ly > 0)) return { mppX: x, mppY: y, isotropic: x === y, why: 'one axis is measured; the registration already gives the sheet one scale' }
+  const sx = (2 * LADDER_TICK_PX) / lx
+  const sy = (2 * LADDER_TICK_PX) / ly
+  const apart = Math.abs(x / y - 1)
+  const allowed = Math.hypot(sx, sy)
+  if (apart > allowed) return { mppX: x, mppY: y, isotropic: false, why: `the axes differ by ${(apart * 100).toFixed(2)} %, beyond the ${(allowed * 100).toFixed(2)} % their longest anchors (${lx} and ${ly} px) can locate: the sheet is scaled per axis` }
+  const wx = 1 / (sx * sx)
+  const wy = 1 / (sy * sy)
+  const one = round6((x * wx + y * wy) / (wx + wy))
+  return { mppX: one, mppY: one, isotropic: true, why: `the axes differ by ${(apart * 100).toFixed(2)} %, within the ${(allowed * 100).toFixed(2)} % their longest anchors (${lx} and ${ly} px) can locate: one scale, ${one} m/px` }
+}
+
+export type AxisSpan = {
+  metres: number
+  /** N7-FIX-04: the stating chain's ticks land within a pixel of both lines. */
+  landed: boolean
+  evidenceIds: string[]
+  chainIds: string[]
+  stated: boolean
+  agreed: number
+  why: string
+  /** LINK-F1: how far the stating chain's ticks miss the two lines, in pixels (0 where nothing states the span). */
+  offPx?: number
+  /** LINK-F1: how many of the stating segments carry a printed number, and how many are DERIVED (the chain's scale times their pixels). */
+  printed?: number
+  derived?: number
+}
+
+/**
+ * LINK-F1: one chain statement the ladder weighed, and what it did with it. A statement that pins its lines is an anchor
+ * of the shared frame; one that would move a line by more than its own pixel uncertainty is a measurement in conflict
+ * with the stronger anchors and is kept here, with its residual, instead of bending the frame.
+ */
+export type LadderAnchor = {
+  fromPx: number
+  toPx: number
+  metres: number
+  /** The stated metres minus what the frame already fixed predicts for the same two lines, in pixels of the frame. */
+  residualPx: number
+  /** What the statement may miss by and still pin: two tick localisations, its ticks' miss of the lines, the print's rounding. */
+  allowedPx: number
+  disposition: 'PINNED' | 'REJECTED_RESIDUAL' | 'NOT_PRINTED'
+  chainIds: string[]
+  evidenceIds: string[]
+}
+
+export type AxisLadder = {
+  at: (px: number) => number
+  span: (fromPx: number, toPx: number) => AxisSpan
+  /** LINK-F1: every statement the ladder weighed, pinned or rejected, with its residual. */
+  anchors: LadderAnchor[]
+}
 
 export function axisLadder(
   lines: readonly GridLine[],
@@ -1211,8 +1285,16 @@ export function axisLadder(
   }
 
   /** Every chain that states the span between two pixel positions, with the centimetres it states. */
-  const statements = (fromPx: number, toPx: number): Array<{ cm: number; chainId: string; evidenceIds: string[]; offPx: number; overall: boolean }> => {
-    const out: Array<{ cm: number; chainId: string; evidenceIds: string[]; offPx: number; overall: boolean }> = []
+  // LINK-F1: a DERIVED segment prints nothing — its value is the chain's own scale times its pixels — so it carries the
+  // span's pixels, not a statement about them (the registration does not take it as an anchor either).
+  const isPrinted = (segment: DimensionChain['segments'][number]): boolean => {
+    if (segment.origin === 'DERIVED') return false
+    const cited = segment.evidenceId !== undefined ? byId.get(segment.evidenceId) : undefined
+    return cited?.origin !== 'DERIVED'
+  }
+  type Statement = { cm: number; chainId: string; evidenceIds: string[]; offPx: number; overall: boolean; printed: number; derived: number }
+  const statements = (fromPx: number, toPx: number): Statement[] => {
+    const out: Statement[] = []
     for (const chain of alongAxis) {
       const segments = [...chain.segments].sort((a, b) => a.fromPx - b.fromPx)
       // N7-FIX-04: the tick NEAREST each end, not the first within tolerance: a 0.15 m set-back puts two ticks within
@@ -1221,17 +1303,21 @@ export function axisLadder(
       for (let i = 0; i < segments.length; i += 1) if (Math.abs(segments[i].fromPx - fromPx) <= tolerancePx && (first < 0 || Math.abs(segments[i].fromPx - fromPx) < Math.abs(segments[first].fromPx - fromPx))) first = i
       if (first < 0) continue
       let total = 0
+      let printed = 0
+      let derived = 0
       const ids: string[] = []
       for (let i = first; i < segments.length; i += 1) {
         const value = valueOf(segments[i])
         if (value === undefined) break
         total += value
+        if (isPrinted(segments[i])) printed += 1
+        else derived += 1
         if (segments[i].evidenceId !== undefined) ids.push(segments[i].evidenceId as string)
         const next = segments[i + 1]
         const nearer = next !== undefined && Math.abs(next.fromPx - segments[i].toPx) <= tolerancePx && Math.abs(next.toPx - toPx) < Math.abs(segments[i].toPx - toPx) && valueOf(next) !== undefined
         if (Math.abs(segments[i].toPx - toPx) <= tolerancePx && !nearer) {
           const offPx = round6(Math.abs(segments[first].fromPx - fromPx) + Math.abs(segments[i].toPx - toPx))
-          out.push({ cm: round6(total), chainId: chain.id, evidenceIds: ids, offPx, overall: segments.length === 1 && segments[0].origin === 'READ' && offPx < 1 })
+          out.push({ cm: round6(total), chainId: chain.id, evidenceIds: ids, offPx, overall: segments.length === 1 && segments[0].origin === 'READ' && offPx < 1, printed, derived })
           break
         }
         if (segments[i].toPx > toPx + tolerancePx) break
@@ -1257,6 +1343,9 @@ export function axisLadder(
     return {
       metres: round6(best.cm / 100),
       landed: best.offPx < 1,
+      offPx: best.offPx,
+      printed: best.printed,
+      derived: best.derived,
       evidenceIds: [...new Set(said.flatMap((x) => x.evidenceIds))].sort(),
       chainIds: said.map((x) => x.chainId).sort(),
       stated: true,
@@ -1278,16 +1367,40 @@ export function axisLadder(
   // spans are applied LONGEST FIRST — the overall dimension pins the ends, the
   // dimensions inside it pin the breaks, and only the lines nothing measures
   // are left to the scale, interpolated between their fixed neighbours.
+  //
+  // LINK-F1: and each statement pins only what it can say. The bodies are placed through this ladder, while the v2
+  // solver maps the same sheet's walls, gaps, openings, stairs and partitions through its linear scale: a statement that
+  // bends the ladder puts the bodies off everything read inside them (0.10–0.17 m on the sealed houses, where a chain's
+  // DERIVED fill-ins or a tick on the wrong line pinned it). A statement pins its lines when it agrees with
+  // what the longer statements already fixed to within its own pixel uncertainty: a pixel at each end for locating a
+  // tick and a grid line, the pixels its ticks miss the lines by (the statement is about its ticks: where they are not
+  // on the lines, the lines it implies are that much less certain), and half a centimetre for each printed number. A
+  // longer statement it contradicts by more is the stronger one; it is kept as a rejected anchor with its residual
+  // (a conflict of measure — every line stays where the drawing has it). A span whose sum includes a DERIVED segment
+  // (nothing printed; the chain's own scale times its pixels) is not a statement of that span and pins nothing.
   const metric: number[] = lines.map((l) => round6((l.px - lines[0]?.px) * mpp))
   const fixed = new Array<boolean>(lines.length).fill(false)
-  const claims: Array<{ i: number; j: number; metres: number; length: number; landed: boolean }> = []
+  const claims: Array<{ i: number; j: number; metres: number; length: number; landed: boolean; offPx: number; printed: number; derived: number; chainIds: string[]; evidenceIds: string[] }> = []
   for (let i = 0; i < lines.length; i += 1) {
     for (let j = i + 1; j < lines.length; j += 1) {
       const said = span(lines[i].px, lines[j].px)
-      if (said.stated) claims.push({ i, j, metres: said.metres, length: lines[j].px - lines[i].px, landed: said.landed })
+      if (said.stated) claims.push({ i, j, metres: said.metres, length: lines[j].px - lines[i].px, landed: said.landed, offPx: said.offPx ?? 0, printed: said.printed ?? 0, derived: said.derived ?? 0, chainIds: said.chainIds, evidenceIds: said.evidenceIds })
     }
   }
   claims.sort((a, b) => b.length - a.length || a.i - b.i || a.j - b.j)
+  /** Where the lines fixed so far put line k: itself, between its fixed neighbours, or beyond them at the sheet's scale. */
+  const predicted = (k: number): number | undefined => {
+    if (fixed[k]) return metric[k]
+    let before = -1
+    let after = -1
+    for (let q = k - 1; q >= 0; q -= 1) if (fixed[q]) { before = q; break }
+    for (let q = k + 1; q < lines.length; q += 1) if (fixed[q]) { after = q; break }
+    if (before >= 0 && after >= 0) return metric[before] + ((lines[k].px - lines[before].px) / Math.max(1e-9, lines[after].px - lines[before].px)) * (metric[after] - metric[before])
+    if (before >= 0) return metric[before] + (lines[k].px - lines[before].px) * mpp
+    if (after >= 0) return metric[after] - (lines[after].px - lines[k].px) * mpp
+    return undefined
+  }
+  const anchors: LadderAnchor[] = []
   for (const given of claims) {
     if (fixed[given.i] && fixed[given.j]) continue
     // N7-FIX-04: a statement whose ticks end a pixel or more off its lines (a detail chain whose last tick misses the
@@ -1299,7 +1412,20 @@ export function axisLadder(
       const instead = claims.find((c) => c.landed && ((c.i === k && fixed[c.j]) || (c.j === k && fixed[c.i])))
       if (instead) claim = instead
     }
+    const allowedPx = round6(2 * LADDER_TICK_PX + claim.offPx + (LADDER_PRINT_ROUNDING_M * claim.printed) / mpp)
+    const pi = predicted(claim.i)
+    const pj = predicted(claim.j)
+    const residualPx = pi !== undefined && pj !== undefined ? round6((claim.metres - (pj - pi)) / mpp) : round6(claim.metres / mpp - claim.length)
+    const record = (disposition: LadderAnchor['disposition']): void => {
+      anchors.push({ fromPx: lines[claim.i].px, toPx: lines[claim.j].px, metres: claim.metres, residualPx, allowedPx, disposition, chainIds: claim.chainIds, evidenceIds: claim.evidenceIds })
+    }
+    if (claim.derived > 0) { record('NOT_PRINTED'); continue }
+    // The first (longest) statement sets the scale, as it always has: nothing is fixed yet for it to disagree with, and
+    // the sheet's fitted scale is a fit over these same chains (a misread overall is the registration's outlier).
+    if (pi !== undefined && pj !== undefined && Math.abs(residualPx) > allowedPx) { record('REJECTED_RESIDUAL'); continue }
+    record('PINNED')
     if (!fixed[claim.i] && !fixed[claim.j]) {
+      metric[claim.i] = round6(pi ?? metric[claim.i])
       fixed[claim.i] = true
       metric[claim.j] = round6(metric[claim.i] + claim.metres)
       fixed[claim.j] = true
@@ -1315,15 +1441,8 @@ export function axisLadder(
   // fixed lines either side, and at the sheet's scale beyond the last of them.
   for (let i = 0; i < lines.length; i += 1) {
     if (fixed[i]) continue
-    let before = -1
-    let after = -1
-    for (let k = i - 1; k >= 0; k -= 1) if (fixed[k]) { before = k; break }
-    for (let k = i + 1; k < lines.length; k += 1) if (fixed[k]) { after = k; break }
-    if (before >= 0 && after >= 0) {
-      const t = (lines[i].px - lines[before].px) / Math.max(1e-9, lines[after].px - lines[before].px)
-      metric[i] = round6(metric[before] + t * (metric[after] - metric[before]))
-    } else if (before >= 0) metric[i] = round6(metric[before] + (lines[i].px - lines[before].px) * mpp)
-    else if (after >= 0) metric[i] = round6(metric[after] - (lines[after].px - lines[i].px) * mpp)
+    const p = predicted(i)
+    if (p !== undefined) metric[i] = round6(p)
   }
   let zeroAt = 0
   for (let i = 0; i < lines.length; i += 1) if (Math.abs(lines[i].px - originPx) < Math.abs(lines[zeroAt].px - originPx)) zeroAt = i
@@ -1342,7 +1461,7 @@ export function axisLadder(
     }
     return round6((px - originPx) * mpp)
   }
-  return { at, span }
+  return { at, span, anchors }
 }
 
 // ---------------------------------------------------------------------------
@@ -1966,14 +2085,18 @@ export function inferStructuralLayout(given: StructuralLayoutOptions): Structura
   }
   const baseChains = options.metrics.chains.filter((c) => c.frameId === base.frame.id)
   const tolerancePx = Math.max(2, base.wallPx / 2)
-  const ladderX = axisLadder(base.decomposition.linesX, baseChains, options.metrics.evidence, 'X', base.registration.metresPerPixelX, envelope.rect.x0, tolerancePx)
-  const ladderZ = axisLadder(base.decomposition.linesY, baseChains, options.metrics.evidence, 'Y', base.registration.metresPerPixelY, envelope.rect.y0, tolerancePx)
+  // LINK-F1: the sheet's scale, one for both axes unless the anchors prove the sheet was stretched
+  const sheet = sheetScale(base.registration)
+  options.debug?.(`sheet scale: ${sheet.why}`)
+  const ladderX = axisLadder(base.decomposition.linesX, baseChains, options.metrics.evidence, 'X', sheet.mppX, envelope.rect.x0, tolerancePx)
+  const ladderZ = axisLadder(base.decomposition.linesY, baseChains, options.metrics.evidence, 'Y', sheet.mppY, envelope.rect.y0, tolerancePx)
   const frame: WorldFrame = {
-    metresPerPixelX: base.registration.metresPerPixelX,
-    metresPerPixelY: base.registration.metresPerPixelY,
+    metresPerPixelX: sheet.mppX,
+    metresPerPixelY: sheet.mppY,
     originPx: { x: envelope.rect.x0, y: envelope.rect.y0 },
     x: ladderX.at,
     z: ladderZ.at,
+    ladders: { x: ladderX, z: ladderZ },
   }
   // the plan's drawn-band median: the measure of the DRAWING's tolerances (how far apart two lines may be and still be
   // one), not of any wall the model builds

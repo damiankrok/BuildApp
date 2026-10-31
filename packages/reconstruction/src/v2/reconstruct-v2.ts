@@ -169,7 +169,12 @@ import type { ApproximateRidge } from './roof-datum.js'
 // furthest-reaching piece being the near jamb; a room number is an upright reading only; the openings the storey's
 // slab is cut with (stair hole, voids — the same polygons) are no room's floor, and a room surrounding one has it as a
 // hole (model schema 1.7.0)
-export const SOLVER_V2_VERSION = '2.17.0' as const
+// 2.18.0 (LINK-F1): the base plan has one scale for both axes unless its anchors prove the sheet stretched beyond their
+// pixel uncertainty, and the bodies' chain ladders (layout 1.3.0) bend only for printed statements that agree with the
+// longer ones to within their pixel uncertainty, so the bodies and the linear plan frame the walls, gaps, openings,
+// stairs and partitions are mapped through agree to within that uncertainty; the ladders' anchors, pinned and rejected
+// with their residuals, are a registration step
+export const SOLVER_V2_VERSION = '2.18.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
@@ -691,6 +696,14 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     planFrames.push(frame)
     planByStorey.set(index, { plan, frame, raster })
     step({ stage: 'registration', what: `storey ${index} plan registered`, method: 'DIRECT', detail: `${frame.mppX} m/px; ${why}`, inputs: 1, outputs: 1 })
+    // LINK-F1: the anchors of the one frame the base plan is mapped through, and the statements it would not bend for
+    const ladders = isBase ? draft.frame?.ladders : undefined
+    if (ladders) {
+      const axes = [['X', ladders.x], ['Z', ladders.z]] as const
+      const counted = axes.map(([a, l]) => `${a}: ${l.anchors.filter((x) => x.disposition === 'PINNED').length} pinned, ${l.anchors.filter((x) => x.disposition.startsWith('REJECTED')).length} rejected, ${l.anchors.filter((x) => x.disposition === 'NOT_PRINTED').length} not printed`)
+      const rejected = axes.flatMap(([a, l]) => l.anchors.filter((x) => x.disposition.startsWith('REJECTED')).map((x) => `${a} ${x.metres} m over px ${x.fromPx}..${x.toPx} (${x.chainIds.join(',')}): ${x.residualPx} px against the longer statements, ${x.allowedPx} px allowed (${x.disposition})`))
+      step({ stage: 'registration', what: 'the base plan’s shared frame (chain ladders)', method: 'DIRECT', detail: `sheet scale ${draft.frame?.metresPerPixelX} × ${draft.frame?.metresPerPixelY} m/px (registration ${plan.registration?.metresPerPixelX} × ${plan.registration?.metresPerPixelY}); ${counted.join('; ')}${rejected.length > 0 ? `; rejected: ${rejected.join('; ')}` : ''}`, inputs: axes.reduce((n, [, l]) => n + l.anchors.length, 0), outputs: axes.reduce((n, [, l]) => n + l.anchors.filter((x) => x.disposition === 'PINNED').length, 0) })
+    }
   }
 
   trace({ phase: 'REGISTRATION', substage: 'PLAN_REGISTRATION', status: planFrames.length === draft.plans.length ? 'PASSED' : 'DEGRADED', counts: { plans: draft.plans.length, registered: planFrames.length }, ...(planFrames.length === draft.plans.length ? {} : { reasonCode: 'PLAN_STOREY_ALIGNMENT_FAILED' }) })
