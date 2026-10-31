@@ -1,0 +1,1409 @@
+{
+ "note": "LINK-F1, the variant NOT adopted: the base plan v2 frame mapped through the chain ladders (one literal map for bodies, walls, gaps, openings, stairs; storeys composed) — variant-shared-frame.diff — together with the ladder gate (without the sheet-scale rule). One regression pass on the same eight sealed inputs; per house against ed4008c. It removed Goździkowce's two phantom partitions on the east wall and Rarytasy's mass/opening offsets, but flipped half-pixel readers: Sasanki garage gate DOOR→WINDOW, two 5 mm GAP errors, Arganiach a door/window swap, Trytomy roof sliver warnings, Jarzmianki attic door lost.",
+ "houses": {
+  "a01": {
+   "modelHash": [
+    "ab0c4f1e8d48",
+    "4d039275f036"
+   ],
+   "same": false,
+   "walls": [
+    27,
+    27
+   ],
+   "openings": [
+    {
+     "DOOR": 10,
+     "WINDOW": 13
+    },
+    {
+     "DOOR": 9,
+     "WINDOW": 13
+    }
+   ],
+   "rooms": [
+    11,
+    10
+   ],
+   "closure": [
+    {
+     "exteriorErrors": 1,
+     "exteriorFindings": 3,
+     "interiorFindings": 35
+    },
+    {
+     "exteriorErrors": 1,
+     "exteriorFindings": 1,
+     "interiorFindings": 34
+    }
+   ],
+   "residualsOut": [
+    3,
+    3
+   ],
+   "replay": [
+    "BYTE_IDENTICAL",
+    "BYTE_IDENTICAL"
+   ],
+   "refusals": [
+    0,
+    0
+   ],
+   "previewMode": [
+    null,
+    null
+   ],
+   "wallsMoved": [
+    [
+     "main-iwall-0-x-0",
+     0.008
+    ],
+    [
+     "main-iwall-0-x-3",
+     0.016
+    ],
+    [
+     "main-iwall-0-x-5",
+     0.016
+    ],
+    [
+     "main-iwall-0-z-0",
+     0.016
+    ],
+    [
+     "main-iwall-0-z-2",
+     0.008
+    ],
+    [
+     "main-iwall-0-z-3",
+     0.016
+    ],
+    [
+     "main-iwall-0-z-5",
+     0.016
+    ],
+    [
+     "main-iwall-1-x-0",
+     0.005
+    ],
+    [
+     "main-iwall-1-x-2",
+     0.005
+    ],
+    [
+     "main-iwall-1-x-3",
+     0.946
+    ],
+    [
+     "main-iwall-1-x-6",
+     0.012
+    ],
+    [
+     "main-iwall-1-z-2",
+     0.016
+    ],
+    [
+     "main-iwall-1-z-4",
+     0.016
+    ],
+    [
+     "main-iwall-1-z-6",
+     0.013
+    ],
+    [
+     "ring-main-0-w1",
+     0.012
+    ],
+    [
+     "ring-main-0-w2",
+     0.012
+    ],
+    [
+     "ring-main-0-w3",
+     0.012
+    ],
+    [
+     "ring-main-1-w1",
+     0.012
+    ],
+    [
+     "ring-main-1-w2",
+     0.012
+    ],
+    [
+     "ring-main-1-w3",
+     0.012
+    ]
+   ],
+   "openingsMoved": [
+    [
+     "main-idoor-0-3",
+     0.013
+    ],
+    [
+     "main-idoor-0-4",
+     0.013
+    ],
+    [
+     "main-idoor-1-2",
+     0.012
+    ],
+    [
+     "main-idoor-1-3",
+     0.951
+    ],
+    [
+     "main-idoor-1-5",
+     "REMOVED"
+    ],
+    [
+     "opening-0-front-0-2",
+     0.014
+    ],
+    [
+     "opening-0-front-0-3",
+     0.022
+    ],
+    [
+     "opening-0-rear-2-2",
+     0.024
+    ],
+    [
+     "opening-0-west-3-0",
+     0.007
+    ],
+    [
+     "opening-0-west-3-1",
+     0.011
+    ],
+    [
+     "opening-1-east-5-0",
+     0.006
+    ],
+    [
+     "opening-1-west-7-0",
+     0.006
+    ],
+    [
+     "opening-1-west-7-1",
+     0.009
+    ]
+   ]
+  },
+  "gozd": {
+   "modelHash": [
+    "58a284c35d51",
+    "48b30fb2ca50"
+   ],
+   "same": false,
+   "walls": [
+    39,
+    37
+   ],
+   "openings": [
+    {
+     "DOOR": 19,
+     "PASSAGE": 1,
+     "WINDOW": 12
+    },
+    {
+     "DOOR": 18,
+     "PASSAGE": 1,
+     "WINDOW": 12
+    }
+   ],
+   "rooms": [
+    13,
+    13
+   ],
+   "closure": [
+    {
+     "exteriorErrors": 0,
+     "exteriorFindings": 0,
+     "interiorFindings": 73
+    },
+    {
+     "exteriorErrors": 0,
+     "exteriorFindings": 0,
+     "interiorFindings": 69
+    }
+   ],
+   "residualsOut": [
+    0,
+    0
+   ],
+   "replay": [
+    "BYTE_IDENTICAL",
+    "BYTE_IDENTICAL"
+   ],
+   "refusals": [
+    0,
+    0
+   ],
+   "previewMode": [
+    null,
+    null
+   ],
+   "wallsMoved": [
+    [
+     "main-iwall-0-x-0",
+     0.091
+    ],
+    [
+     "main-iwall-0-x-10",
+     0.022
+    ],
+    [
+     "main-iwall-0-x-11",
+     0.02
+    ],
+    [
+     "main-iwall-0-x-15",
+     0.048
+    ],
+    [
+     "main-iwall-0-x-2",
+     0.026
+    ],
+    [
+     "main-iwall-0-x-4",
+     0.022
+    ],
+    [
+     "main-iwall-0-x-5",
+     0.02
+    ],
+    [
+     "main-iwall-0-x-8",
+     0.021
+    ],
+    [
+     "main-iwall-0-z-0",
+     0.025
+    ],
+    [
+     "main-iwall-0-z-11",
+     0.019
+    ],
+    [
+     "main-iwall-0-z-13",
+     "REMOVED"
+    ],
+    [
+     "main-iwall-0-z-15",
+     "REMOVED"
+    ],
+    [
+     "main-iwall-0-z-2",
+     0.017
+    ],
+    [
+     "main-iwall-0-z-3",
+     0.017
+    ],
+    [
+     "main-iwall-0-z-4",
+     0.026
+    ],
+    [
+     "main-iwall-0-z-7",
+     0.022
+    ],
+    [
+     "pocket-main-0-0-back",
+     0.054
+    ],
+    [
+     "pocket-main-0-0-return-high",
+     0.022
+    ],
+    [
+     "pocket-main-0-0-return-low",
+     0.054
+    ]
+   ],
+   "openingsMoved": [
+    [
+     "main-idoor-0-0",
+     0.017
+    ],
+    [
+     "main-idoor-0-1",
+     "HOST/KIND",
+     "main-iwall-0-z-13",
+     "main-iwall-0-x-0",
+     "DOOR",
+     "DOOR"
+    ],
+    [
+     "main-idoor-0-2",
+     "HOST/KIND",
+     "main-iwall-0-x-0",
+     "main-iwall-0-x-2",
+     "DOOR",
+     "DOOR"
+    ],
+    [
+     "main-idoor-0-3",
+     "REMOVED"
+    ],
+    [
+     "opening-0-east-1-0",
+     0.031
+    ],
+    [
+     "opening-0-east-1-1",
+     0.014
+    ],
+    [
+     "opening-0-front-0-0",
+     0.011
+    ],
+    [
+     "opening-0-front-0-2",
+     0.026
+    ],
+    [
+     "opening-0-rear-2-0",
+     0.018
+    ],
+    [
+     "opening-0-rear-2-1",
+     0.017
+    ],
+    [
+     "opening-0-rear-2-2",
+     0.049
+    ],
+    [
+     "opening-0-west-3-0",
+     0.025
+    ],
+    [
+     "pocket-main-0-0-mouth",
+     0.076
+    ],
+    [
+     "pocket-main-0-0-opening-0-front-8-0",
+     0.032
+    ],
+    [
+     "pocket-main-0-0-opening-0-front-8-1",
+     0.034
+    ]
+   ]
+  },
+  "marcowki": {
+   "modelHash": [
+    "8cbab3cbc15f",
+    "3a7efe23f3a6"
+   ],
+   "same": false,
+   "walls": [
+    41,
+    41
+   ],
+   "openings": [
+    {
+     "DOOR": 13,
+     "WINDOW": 8
+    },
+    {
+     "DOOR": 13,
+     "WINDOW": 8
+    }
+   ],
+   "rooms": [
+    12,
+    12
+   ],
+   "closure": [
+    {
+     "exteriorErrors": 4,
+     "exteriorFindings": 4,
+     "interiorFindings": 40
+    },
+    {
+     "exteriorErrors": 4,
+     "exteriorFindings": 4,
+     "interiorFindings": 39
+    }
+   ],
+   "residualsOut": [
+    12,
+    12
+   ],
+   "replay": [
+    "BYTE_IDENTICAL",
+    "BYTE_IDENTICAL"
+   ],
+   "refusals": [
+    0,
+    0
+   ],
+   "previewMode": [
+    null,
+    null
+   ],
+   "wallsMoved": [
+    [
+     "attached-0-iwall-0-x-0",
+     0.01
+    ],
+    [
+     "attached-0-iwall-0-x-1",
+     0.01
+    ],
+    [
+     "main-iwall-0-x-0",
+     0.009
+    ],
+    [
+     "main-iwall-0-x-1",
+     0.008
+    ],
+    [
+     "main-iwall-0-x-2",
+     0.008
+    ],
+    [
+     "main-iwall-0-x-3",
+     0.007
+    ],
+    [
+     "main-iwall-0-x-4",
+     0.006
+    ],
+    [
+     "main-iwall-0-x-5",
+     0.006
+    ],
+    [
+     "main-iwall-0-z-0",
+     0.007
+    ],
+    [
+     "main-iwall-0-z-10",
+     0.008
+    ],
+    [
+     "main-iwall-0-z-3",
+     0.009
+    ],
+    [
+     "main-iwall-0-z-5",
+     0.006
+    ],
+    [
+     "main-iwall-1-x-0",
+     0.005
+    ],
+    [
+     "main-iwall-1-x-1",
+     0.005
+    ],
+    [
+     "main-iwall-1-z-2",
+     0.009
+    ],
+    [
+     "main-iwall-1-z-6",
+     0.006
+    ],
+    [
+     "return-rear-0-0",
+     0.009
+    ],
+    [
+     "return-rear-0-1",
+     0.009
+    ],
+    [
+     "return-rear-1-0",
+     0.009
+    ],
+    [
+     "return-rear-1-1",
+     0.009
+    ],
+    [
+     "ring-main-0-w1-0",
+     0.009
+    ],
+    [
+     "ring-main-0-w2",
+     0.009
+    ],
+    [
+     "ring-main-0-w3",
+     0.009
+    ],
+    [
+     "ring-main-1-w1",
+     0.009
+    ],
+    [
+     "ring-main-1-w2",
+     0.009
+    ],
+    [
+     "ring-main-1-w3",
+     0.009
+    ]
+   ],
+   "openingsMoved": [
+    [
+     "main-idoor-0-1",
+     0.005
+    ],
+    [
+     "opening-0-front-8-0",
+     0.012
+    ],
+    [
+     "opening-0-rear-10-0",
+     0.028
+    ],
+    [
+     "opening-0-west-3-0",
+     0.015
+    ],
+    [
+     "opening-0-west-3-1",
+     0.017
+    ]
+   ]
+  },
+  "ciesz": {
+   "modelHash": [
+    "bb05006787f8",
+    "daeb9cf8e48e"
+   ],
+   "same": false,
+   "walls": [
+    25,
+    25
+   ],
+   "openings": [
+    {
+     "DOOR": 10,
+     "PASSAGE": 3,
+     "WINDOW": 11
+    },
+    {
+     "DOOR": 10,
+     "PASSAGE": 3,
+     "WINDOW": 11
+    }
+   ],
+   "rooms": [
+    8,
+    8
+   ],
+   "closure": [
+    {
+     "exteriorErrors": 0,
+     "exteriorFindings": 0,
+     "interiorFindings": 26
+    },
+    {
+     "exteriorErrors": 0,
+     "exteriorFindings": 0,
+     "interiorFindings": 26
+    }
+   ],
+   "residualsOut": [
+    0,
+    0
+   ],
+   "replay": [
+    "BYTE_IDENTICAL",
+    "BYTE_IDENTICAL"
+   ],
+   "refusals": [
+    0,
+    0
+   ],
+   "previewMode": [
+    null,
+    null
+   ],
+   "wallsMoved": [
+    [
+     "main-iwall-0-x-1",
+     0.013
+    ],
+    [
+     "main-iwall-0-x-10",
+     0.022
+    ],
+    [
+     "main-iwall-0-x-12",
+     0.022
+    ],
+    [
+     "main-iwall-0-x-13",
+     0.106
+    ],
+    [
+     "main-iwall-0-x-15-a",
+     0.022
+    ],
+    [
+     "main-iwall-0-x-17",
+     0.105
+    ],
+    [
+     "main-iwall-0-x-3",
+     0.056
+    ],
+    [
+     "main-iwall-0-x-6",
+     0.022
+    ],
+    [
+     "main-iwall-0-x-8",
+     0.022
+    ],
+    [
+     "main-iwall-0-z-11",
+     0.013
+    ],
+    [
+     "main-iwall-0-z-13",
+     0.022
+    ],
+    [
+     "main-iwall-0-z-18",
+     0.022
+    ],
+    [
+     "main-iwall-0-z-3",
+     0.107
+    ],
+    [
+     "main-iwall-0-z-8",
+     0.005
+    ],
+    [
+     "main-iwall-0-z-9",
+     0.005
+    ],
+    [
+     "pocket-main-0-0-back",
+     0.056
+    ],
+    [
+     "pocket-main-0-0-return-high",
+     0.056
+    ],
+    [
+     "pocket-main-0-1-back",
+     0.056
+    ],
+    [
+     "pocket-main-0-2-back",
+     0.056
+    ]
+   ],
+   "openingsMoved": [
+    [
+     "main-idoor-0-6",
+     0.007
+    ],
+    [
+     "main-idoor-0-7",
+     0.016
+    ],
+    [
+     "opening-0-front-0-0",
+     0.051
+    ],
+    [
+     "opening-0-front-0-2",
+     0.022
+    ],
+    [
+     "opening-0-rear-2-1",
+     0.026
+    ],
+    [
+     "opening-0-rear-2-2",
+     0.021
+    ],
+    [
+     "pocket-main-0-0-mouth",
+     0.056
+    ],
+    [
+     "pocket-main-0-0-opening-0-front-4-0",
+     0.01
+    ],
+    [
+     "pocket-main-0-1-mouth",
+     0.056
+    ],
+    [
+     "pocket-main-0-1-opening-0-rear-5-0",
+     0.045
+    ]
+   ]
+  },
+  "rary": {
+   "modelHash": [
+    "565dcd94be7b",
+    "0c7c21163464"
+   ],
+   "same": false,
+   "walls": [
+    21,
+    22
+   ],
+   "openings": [
+    {
+     "DOOR": 14,
+     "WINDOW": 6
+    },
+    {
+     "DOOR": 15,
+     "WINDOW": 7
+    }
+   ],
+   "rooms": [
+    9,
+    9
+   ],
+   "closure": [
+    {
+     "exteriorErrors": 2,
+     "exteriorFindings": 2,
+     "interiorFindings": 23
+    },
+    {
+     "exteriorErrors": 1,
+     "exteriorFindings": 1,
+     "interiorFindings": 26
+    }
+   ],
+   "residualsOut": [
+    19,
+    19
+   ],
+   "replay": [
+    "BYTE_IDENTICAL",
+    "BYTE_IDENTICAL"
+   ],
+   "refusals": [
+    0,
+    0
+   ],
+   "previewMode": [
+    null,
+    null
+   ],
+   "wallsMoved": [
+    [
+     "main-iwall-0-x-0",
+     0.031
+    ],
+    [
+     "main-iwall-0-x-12",
+     "ADDED"
+    ],
+    [
+     "main-iwall-0-x-5",
+     0.048
+    ],
+    [
+     "main-iwall-0-x-8",
+     0.029
+    ],
+    [
+     "main-iwall-0-x-9",
+     "ADDED"
+    ],
+    [
+     "main-iwall-0-z-0",
+     0.031
+    ],
+    [
+     "main-iwall-0-z-1",
+     0.041
+    ],
+    [
+     "main-iwall-0-z-2",
+     0.116
+    ],
+    [
+     "main-iwall-0-z-3",
+     0.116
+    ],
+    [
+     "main-iwall-0-z-4",
+     0.031
+    ],
+    [
+     "main-iwall-0-z-5",
+     0.116
+    ],
+    [
+     "main-iwall-0-z-7",
+     0.031
+    ],
+    [
+     "main-iwall-0-z-8",
+     0.125
+    ],
+    [
+     "main-iwall-0-z-9",
+     0.125
+    ],
+    [
+     "ring-attached-0-0-w0",
+     0.149
+    ],
+    [
+     "ring-attached-0-0-w1",
+     0.087
+    ],
+    [
+     "ring-attached-0-0-w2",
+     "ADDED"
+    ],
+    [
+     "ring-attached-0-0-w3",
+     0.149
+    ],
+    [
+     "ring-main-0-w0",
+     "ADDED"
+    ],
+    [
+     "ring-main-0-w0-0",
+     "REMOVED"
+    ],
+    [
+     "ring-main-0-w0-1",
+     "REMOVED"
+    ],
+    [
+     "ring-main-0-w0-party-attached-0",
+     "REMOVED"
+    ]
+   ],
+   "openingsMoved": [
+    [
+     "main-idoor-0-0",
+     0.051
+    ],
+    [
+     "main-idoor-0-1",
+     0.067
+    ],
+    [
+     "main-idoor-0-2",
+     0.023
+    ],
+    [
+     "main-idoor-0-3",
+     0.021
+    ],
+    [
+     "main-idoor-0-4",
+     0.006
+    ],
+    [
+     "main-idoor-0-5",
+     0.037
+    ],
+    [
+     "main-idoor-0-6",
+     0.03
+    ],
+    [
+     "main-idoor-0-7",
+     "ADDED"
+    ],
+    [
+     "main-idoor-0-8",
+     "ADDED"
+    ],
+    [
+     "opening-0-east-1-0",
+     0.021
+    ],
+    [
+     "opening-0-east-1-1",
+     0.029
+    ],
+    [
+     "opening-0-east-5-0",
+     0.091
+    ],
+    [
+     "opening-0-front-0-1",
+     "HOST/KIND",
+     "ring-main-0-w0-1",
+     "ring-main-0-w0",
+     "DOOR",
+     "WINDOW"
+    ],
+    [
+     "opening-0-front-0-2",
+     "HOST/KIND",
+     "ring-main-0-w0-1",
+     "ring-main-0-w0",
+     "WINDOW",
+     "WINDOW"
+    ],
+    [
+     "opening-0-front-4-0",
+     0.128
+    ],
+    [
+     "opening-0-rear-2-0",
+     0.02
+    ],
+    [
+     "opening-0-rear-2-1",
+     0.008
+    ],
+    [
+     "opening-0-rear-2-2",
+     0.016
+    ],
+    [
+     "opening-0-west-3-0",
+     0.052
+    ],
+    [
+     "opening-0-west-7-0",
+     0.093
+    ],
+    [
+     "shared-opening-0-front-0-0",
+     "ADDED"
+    ],
+    [
+     "shared-party-0-front-0-0",
+     "REMOVED"
+    ]
+   ]
+  },
+  "trytomach": {
+   "modelHash": [
+    "c639b29d69e4",
+    "30759bd90d53"
+   ],
+   "same": false,
+   "walls": [
+    36,
+    36
+   ],
+   "openings": [
+    {
+     "DOOR": 10,
+     "WINDOW": 11
+    },
+    {
+     "DOOR": 10,
+     "WINDOW": 11
+    }
+   ],
+   "rooms": [
+    11,
+    11
+   ],
+   "closure": [
+    {
+     "exteriorErrors": 2,
+     "exteriorFindings": 2,
+     "interiorFindings": 37
+    },
+    {
+     "exteriorErrors": 2,
+     "exteriorFindings": 4,
+     "interiorFindings": 37
+    }
+   ],
+   "residualsOut": [
+    4,
+    6
+   ],
+   "replay": [
+    "BYTE_IDENTICAL",
+    "BYTE_IDENTICAL"
+   ],
+   "refusals": [
+    0,
+    0
+   ],
+   "previewMode": [
+    null,
+    null
+   ],
+   "wallsMoved": [
+    [
+     "main-iwall-1-x-3",
+     0.016
+    ],
+    [
+     "main-iwall-1-x-4",
+     0.006
+    ],
+    [
+     "return-east-1-0",
+     0.016
+    ],
+    [
+     "return-east-1-1",
+     0.016
+    ],
+    [
+     "return-east-1-2",
+     0.016
+    ],
+    [
+     "ring-main-0-w0",
+     0.016
+    ],
+    [
+     "ring-main-0-w1",
+     0.016
+    ],
+    [
+     "ring-main-0-w2",
+     0.016
+    ],
+    [
+     "ring-main-1-w0",
+     0.016
+    ],
+    [
+     "ring-main-1-w1",
+     0.016
+    ],
+    [
+     "ring-main-1-w2",
+     0.016
+    ]
+   ],
+   "openingsMoved": [
+    [
+     "main-idoor-0-0",
+     0.012
+    ],
+    [
+     "main-idoor-1-0",
+     0.014
+    ],
+    [
+     "main-idoor-1-3",
+     0.008
+    ],
+    [
+     "opening-0-east-1-0",
+     0.006
+    ],
+    [
+     "opening-0-front-0-3",
+     0.011
+    ],
+    [
+     "opening-0-rear-2-0",
+     0.014
+    ],
+    [
+     "opening-0-rear-2-1",
+     0.011
+    ],
+    [
+     "opening-0-west-3-1",
+     0.006
+    ],
+    [
+     "opening-1-east-5-0",
+     0.02
+    ],
+    [
+     "opening-1-east-5-1",
+     0.055
+    ],
+    [
+     "opening-1-west-7-1",
+     0.011
+    ]
+   ]
+  },
+  "arganiach": {
+   "modelHash": [
+    "d0b13ea16f77",
+    "7a868d73a707"
+   ],
+   "same": false,
+   "walls": [
+    29,
+    29
+   ],
+   "openings": [
+    {
+     "DOOR": 18,
+     "WINDOW": 8
+    },
+    {
+     "DOOR": 19,
+     "WINDOW": 7
+    }
+   ],
+   "rooms": [
+    14,
+    14
+   ],
+   "closure": [
+    {
+     "exteriorErrors": 3,
+     "exteriorFindings": 3,
+     "interiorFindings": 36
+    },
+    {
+     "exteriorErrors": 3,
+     "exteriorFindings": 3,
+     "interiorFindings": 36
+    }
+   ],
+   "residualsOut": [
+    7,
+    9
+   ],
+   "replay": [
+    "BYTE_IDENTICAL",
+    "BYTE_IDENTICAL"
+   ],
+   "refusals": [
+    0,
+    0
+   ],
+   "previewMode": [
+    null,
+    null
+   ],
+   "wallsMoved": [
+    [
+     "main-iwall-0-x-0",
+     0.027
+    ],
+    [
+     "main-iwall-0-x-2",
+     0.037
+    ],
+    [
+     "main-iwall-0-x-5",
+     0.051
+    ],
+    [
+     "main-iwall-0-z-0",
+     0.049
+    ],
+    [
+     "main-iwall-0-z-11",
+     "ADDED"
+    ],
+    [
+     "main-iwall-0-z-11-b",
+     "REMOVED"
+    ],
+    [
+     "main-iwall-0-z-2",
+     0.051
+    ],
+    [
+     "main-iwall-0-z-3",
+     0.047
+    ],
+    [
+     "main-iwall-0-z-5",
+     0.038
+    ],
+    [
+     "main-iwall-0-z-8",
+     "ADDED"
+    ],
+    [
+     "main-iwall-0-z-8-b",
+     "REMOVED"
+    ]
+   ],
+   "openingsMoved": [
+    [
+     "main-idoor-0-0",
+     0.018
+    ],
+    [
+     "main-idoor-0-2",
+     "HOST/KIND",
+     "main-iwall-0-z-8-b",
+     "main-iwall-0-z-8",
+     "DOOR",
+     "DOOR"
+    ],
+    [
+     "main-idoor-0-3",
+     "HOST/KIND",
+     "main-iwall-0-z-8-b",
+     "main-iwall-0-z-8",
+     "DOOR",
+     "DOOR"
+    ],
+    [
+     "main-idoor-0-4",
+     0.015
+    ],
+    [
+     "main-idoor-0-5",
+     0.01
+    ],
+    [
+     "main-idoor-0-6",
+     0.024
+    ],
+    [
+     "main-idoor-0-7",
+     0.03
+    ],
+    [
+     "opening-0-east-1-0",
+     0.02
+    ],
+    [
+     "opening-0-east-1-1",
+     0.016
+    ],
+    [
+     "opening-0-front-0-0",
+     0.035
+    ],
+    [
+     "opening-0-front-0-1",
+     0.05
+    ],
+    [
+     "opening-0-front-8-0",
+     0.035
+    ],
+    [
+     "opening-0-rear-2-0",
+     0.04
+    ],
+    [
+     "opening-0-rear-2-1",
+     0.044
+    ],
+    [
+     "opening-0-rear-2-2",
+     "HOST/KIND",
+     "ring-main-0-w2",
+     "ring-main-0-w2",
+     "WINDOW",
+     "DOOR"
+    ],
+    [
+     "opening-0-west-3-0",
+     0.021
+    ]
+   ]
+  },
+  "sasankach3": {
+   "modelHash": [
+    "3a3465ec2dd9",
+    "a515e0be1a7d"
+   ],
+   "same": false,
+   "walls": [
+    34,
+    34
+   ],
+   "openings": [
+    {
+     "DOOR": 15,
+     "WINDOW": 8
+    },
+    {
+     "DOOR": 14,
+     "WINDOW": 9
+    }
+   ],
+   "rooms": [
+    11,
+    11
+   ],
+   "closure": [
+    {
+     "exteriorErrors": 1,
+     "exteriorFindings": 1,
+     "interiorFindings": 33
+    },
+    {
+     "exteriorErrors": 3,
+     "exteriorFindings": 3,
+     "interiorFindings": 32
+    }
+   ],
+   "residualsOut": [
+    17,
+    17
+   ],
+   "replay": [
+    "BYTE_IDENTICAL",
+    "BYTE_IDENTICAL"
+   ],
+   "refusals": [
+    0,
+    0
+   ],
+   "previewMode": [
+    null,
+    null
+   ],
+   "wallsMoved": [
+    [
+     "attached-0-iwall-0-z-0",
+     0.015
+    ],
+    [
+     "main-iwall-0-x-1",
+     0.009
+    ],
+    [
+     "main-iwall-0-x-2",
+     0.007
+    ]
+   ],
+   "openingsMoved": [
+    [
+     "attached-0-idoor-0-0",
+     0.024
+    ],
+    [
+     "opening-0-front-0-2",
+     0.006
+    ],
+    [
+     "opening-0-front-8-0",
+     "HOST/KIND",
+     "ring-attached-0-0-w0",
+     "ring-attached-0-0-w0",
+     "DOOR",
+     "WINDOW"
+    ],
+    [
+     "opening-0-rear-10-1",
+     0.031
+    ],
+    [
+     "opening-0-rear-2-1",
+     0.01
+    ]
+   ]
+  }
+ }
+}

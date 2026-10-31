@@ -1,0 +1,1188 @@
+{
+ "note": "LINK-F1 regression: production runAnalysis (packages/analysis-service/scripts/second-house.ts) on the eight sealed DEV inputs (/home/user/workfix02/base/<house>: source-package.json + observation-graph.json + byte cache) — one pass. BEFORE = the N9-02R run at ed4008c (same inputs), AFTER = this stage. The editions are the ones the sealed packages carry (canonicalUrl, contentHash, pageHash below).",
+ "houses": {
+  "a01": {
+   "name": "Jarzmianki",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-jarzmiankach-m60124f28f071a",
+   "sealed": {
+    "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-jarzmiankach-m60124f28f071a",
+    "contentHash": "019e70a1dcd30bf289f9fcd01071686fd87d519e9e98c46990e928365808ec3f",
+    "pageHash": "9dfe02b74a9437366c75ff2e0c715ca4249c878e25d5183ccd8a6a7b3a4cd3aa"
+   },
+   "modelSha256": {
+    "before": "ab0c4f1e8d48500dab567625909784bb8a293743201c62960f3d73912a37b412",
+    "after": "7c0d735543576a0a0dc10f8ca2dd0cd16685f8f31b73367584b91d38f66001ae"
+   },
+   "solver": {
+    "service": "1.5.0",
+    "solver": "2.18.0"
+   },
+   "modelHash": [
+    "ab0c4f1e8d48",
+    "7c0d73554357"
+   ],
+   "same": false,
+   "walls": [
+    27,
+    27
+   ],
+   "openings": [
+    {
+     "DOOR": 10,
+     "WINDOW": 13
+    },
+    {
+     "DOOR": 10,
+     "WINDOW": 13
+    }
+   ],
+   "rooms": [
+    11,
+    11
+   ],
+   "closure": [
+    {
+     "exteriorErrors": 1,
+     "exteriorFindings": 3,
+     "interiorFindings": 35
+    },
+    {
+     "exteriorErrors": 1,
+     "exteriorFindings": 1,
+     "interiorFindings": 35
+    }
+   ],
+   "residualsOut": [
+    3,
+    3
+   ],
+   "replay": [
+    "BYTE_IDENTICAL",
+    "BYTE_IDENTICAL"
+   ],
+   "refusals": [
+    0,
+    0
+   ],
+   "previewMode": [
+    null,
+    null
+   ],
+   "wallsMoved": [
+    [
+     "main-iwall-0-z-2",
+     0.005
+    ]
+   ],
+   "openingsMoved": [
+    [
+     "opening-1-east-5-0",
+     0.005
+    ]
+   ]
+  },
+  "gozd": {
+   "name": "Goździkowce 3",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-gozdzikowcach-3-m79923e950094d",
+   "sealed": {
+    "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-gozdzikowcach-3-m79923e950094d",
+    "contentHash": "37be1543b0a9ae16b522ab864efd83f09653641c58bb308713c434d42541ad12",
+    "pageHash": "96796053ccbb5f33f1120eeb2a413982f1072d31499748e8767f394bf35a1e87"
+   },
+   "modelSha256": {
+    "before": "58a284c35d51cc0449390e6cc6c0baf11583ed9b71345029358aedc476a86e92",
+    "after": "058d8348e3710a6a59cf2f372b58a3e4fba3616e83362c6cdaf40b0798f32412"
+   },
+   "solver": {
+    "service": "1.5.0",
+    "solver": "2.18.0"
+   },
+   "modelHash": [
+    "58a284c35d51",
+    "058d8348e371"
+   ],
+   "same": false,
+   "walls": [
+    39,
+    39
+   ],
+   "openings": [
+    {
+     "DOOR": 19,
+     "PASSAGE": 1,
+     "WINDOW": 12
+    },
+    {
+     "DOOR": 19,
+     "PASSAGE": 1,
+     "WINDOW": 12
+    }
+   ],
+   "rooms": [
+    13,
+    13
+   ],
+   "closure": [
+    {
+     "exteriorErrors": 0,
+     "exteriorFindings": 0,
+     "interiorFindings": 73
+    },
+    {
+     "exteriorErrors": 0,
+     "exteriorFindings": 0,
+     "interiorFindings": 72
+    }
+   ],
+   "residualsOut": [
+    0,
+    0
+   ],
+   "replay": [
+    "BYTE_IDENTICAL",
+    "BYTE_IDENTICAL"
+   ],
+   "refusals": [
+    0,
+    0
+   ],
+   "previewMode": [
+    null,
+    null
+   ],
+   "wallsMoved": [
+    [
+     "main-iwall-0-x-0",
+     0.025
+    ],
+    [
+     "main-iwall-0-x-10",
+     0.029
+    ],
+    [
+     "main-iwall-0-x-11",
+     0.029
+    ],
+    [
+     "main-iwall-0-x-15",
+     0.023
+    ],
+    [
+     "main-iwall-0-x-2",
+     0.017
+    ],
+    [
+     "main-iwall-0-x-4",
+     0.024
+    ],
+    [
+     "main-iwall-0-x-5",
+     0.024
+    ],
+    [
+     "main-iwall-0-x-8",
+     0.025
+    ],
+    [
+     "main-iwall-0-z-0",
+     0.014
+    ],
+    [
+     "main-iwall-0-z-11",
+     0.016
+    ],
+    [
+     "main-iwall-0-z-13",
+     0.013
+    ],
+    [
+     "main-iwall-0-z-15",
+     0.035
+    ],
+    [
+     "main-iwall-0-z-2",
+     0.024
+    ],
+    [
+     "main-iwall-0-z-3",
+     0.029
+    ],
+    [
+     "main-iwall-0-z-4",
+     0.013
+    ],
+    [
+     "main-iwall-0-z-7",
+     0.029
+    ],
+    [
+     "pocket-main-0-0-back",
+     0.022
+    ],
+    [
+     "pocket-main-0-0-return-high",
+     0.022
+    ]
+   ],
+   "openingsMoved": [
+    [
+     "main-idoor-0-0",
+     0.021
+    ],
+    [
+     "opening-0-east-1-0",
+     0.009
+    ],
+    [
+     "opening-0-east-1-1",
+     0.024
+    ],
+    [
+     "opening-0-front-0-2",
+     0.017
+    ],
+    [
+     "opening-0-rear-2-0",
+     0.008
+    ],
+    [
+     "opening-0-rear-2-1",
+     0.015
+    ],
+    [
+     "opening-0-rear-2-2",
+     0.023
+    ],
+    [
+     "opening-0-west-3-0",
+     0.014
+    ],
+    [
+     "opening-0-west-3-1",
+     0.016
+    ],
+    [
+     "pocket-main-0-0-mouth",
+     0.025
+    ],
+    [
+     "pocket-main-0-0-opening-0-front-8-0",
+     0.014
+    ],
+    [
+     "pocket-main-0-0-opening-0-front-8-1",
+     0.016
+    ]
+   ]
+  },
+  "marcowki": {
+   "name": "Marcówki (GE)",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+   "sealed": {
+    "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+    "contentHash": "753709900c02b84211ee5c6088ef84f9ff2c93a2b4560318ca0fd0e222eef8d0",
+    "pageHash": "3eaa9e727eeaeadcaffc87021479ab0b403302039546137b3bd4b4326527934d"
+   },
+   "modelSha256": {
+    "before": "8cbab3cbc15fc2a306942aa600f106ca946803f5790597b9e45698b413a60fb6",
+    "after": "e14fcc39445960c32827eb05d6e3a27c96c86bc426162445f9aa9408e7ecb151"
+   },
+   "solver": {
+    "service": "1.5.0",
+    "solver": "2.18.0"
+   },
+   "modelHash": [
+    "8cbab3cbc15f",
+    "e14fcc394459"
+   ],
+   "same": false,
+   "walls": [
+    41,
+    41
+   ],
+   "openings": [
+    {
+     "DOOR": 13,
+     "WINDOW": 8
+    },
+    {
+     "DOOR": 13,
+     "WINDOW": 8
+    }
+   ],
+   "rooms": [
+    12,
+    12
+   ],
+   "closure": [
+    {
+     "exteriorErrors": 4,
+     "exteriorFindings": 4,
+     "interiorFindings": 40
+    },
+    {
+     "exteriorErrors": 4,
+     "exteriorFindings": 4,
+     "interiorFindings": 43
+    }
+   ],
+   "residualsOut": [
+    12,
+    12
+   ],
+   "replay": [
+    "BYTE_IDENTICAL",
+    "BYTE_IDENTICAL"
+   ],
+   "refusals": [
+    0,
+    0
+   ],
+   "previewMode": [
+    null,
+    null
+   ],
+   "wallsMoved": [
+    [
+     "main-iwall-1-x-0",
+     0.006
+    ],
+    [
+     "main-iwall-1-x-1",
+     0.006
+    ],
+    [
+     "main-iwall-1-z-2",
+     0.009
+    ],
+    [
+     "main-iwall-1-z-6",
+     0.007
+    ],
+    [
+     "return-rear-0-0",
+     0.01
+    ],
+    [
+     "return-rear-0-1",
+     0.01
+    ],
+    [
+     "return-rear-1-0",
+     0.01
+    ],
+    [
+     "return-rear-1-1",
+     0.01
+    ],
+    [
+     "ring-main-0-w1-0",
+     0.01
+    ],
+    [
+     "ring-main-0-w2",
+     0.01
+    ],
+    [
+     "ring-main-0-w3",
+     0.01
+    ],
+    [
+     "ring-main-1-w1",
+     0.01
+    ],
+    [
+     "ring-main-1-w2",
+     0.01
+    ],
+    [
+     "ring-main-1-w3",
+     0.01
+    ]
+   ],
+   "openingsMoved": [
+    [
+     "opening-0-east-1-0",
+     0.008
+    ],
+    [
+     "opening-0-west-3-1",
+     0.007
+    ]
+   ]
+  },
+  "ciesz": {
+   "name": "Cieszynianki 12 (GE)",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-cieszyniankach-12-ge-m43d25c0636969",
+   "sealed": {
+    "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-cieszyniankach-12-ge-m43d25c0636969",
+    "contentHash": "63034b633b353f90f9a7f6dad38f47f993ffba78500f4b803c267a26e22c2324",
+    "pageHash": "55a9de87de9ed3ce3daf13bf44291d4a7ae61c0a28a466af9871769818ac6587"
+   },
+   "modelSha256": {
+    "before": "bb05006787f861e368a02320472d2f26abe6ba0cf38773fef54408b119f5ad6c",
+    "after": "d29bb7ea590837a0efbd558ce5c18d707e0f856cf62496977b374dcd7afa7a80"
+   },
+   "solver": {
+    "service": "1.5.0",
+    "solver": "2.18.0"
+   },
+   "modelHash": [
+    "bb05006787f8",
+    "d29bb7ea5908"
+   ],
+   "same": false,
+   "walls": [
+    25,
+    25
+   ],
+   "openings": [
+    {
+     "DOOR": 10,
+     "PASSAGE": 3,
+     "WINDOW": 11
+    },
+    {
+     "DOOR": 10,
+     "PASSAGE": 3,
+     "WINDOW": 11
+    }
+   ],
+   "rooms": [
+    8,
+    8
+   ],
+   "closure": [
+    {
+     "exteriorErrors": 0,
+     "exteriorFindings": 0,
+     "interiorFindings": 26
+    },
+    {
+     "exteriorErrors": 0,
+     "exteriorFindings": 0,
+     "interiorFindings": 25
+    }
+   ],
+   "residualsOut": [
+    0,
+    0
+   ],
+   "replay": [
+    "BYTE_IDENTICAL",
+    "BYTE_IDENTICAL"
+   ],
+   "refusals": [
+    0,
+    0
+   ],
+   "previewMode": [
+    null,
+    null
+   ],
+   "wallsMoved": [
+    [
+     "main-iwall-0-x-1",
+     0.025
+    ],
+    [
+     "main-iwall-0-x-10",
+     0.036
+    ],
+    [
+     "main-iwall-0-x-12",
+     0.031
+    ],
+    [
+     "main-iwall-0-x-13",
+     0.023
+    ],
+    [
+     "main-iwall-0-x-15-a",
+     0.03
+    ],
+    [
+     "main-iwall-0-x-17",
+     0.019
+    ],
+    [
+     "main-iwall-0-x-3",
+     0.025
+    ],
+    [
+     "main-iwall-0-x-6",
+     0.031
+    ],
+    [
+     "main-iwall-0-x-8",
+     0.036
+    ],
+    [
+     "main-iwall-0-z-11",
+     0.025
+    ],
+    [
+     "main-iwall-0-z-13",
+     0.031
+    ],
+    [
+     "main-iwall-0-z-18",
+     0.036
+    ],
+    [
+     "main-iwall-0-z-3",
+     0.014
+    ],
+    [
+     "main-iwall-0-z-7",
+     0.02
+    ],
+    [
+     "main-iwall-0-z-8",
+     0.022
+    ],
+    [
+     "main-iwall-0-z-9",
+     0.022
+    ],
+    [
+     "pocket-main-0-0-back",
+     0.056
+    ],
+    [
+     "pocket-main-0-0-return-high",
+     0.056
+    ],
+    [
+     "pocket-main-0-0-return-low",
+     0.055
+    ],
+    [
+     "pocket-main-0-1-back",
+     0.009
+    ],
+    [
+     "pocket-main-0-2-back",
+     0.009
+    ]
+   ],
+   "openingsMoved": [
+    [
+     "main-idoor-0-7",
+     0.007
+    ],
+    [
+     "opening-0-front-0-0",
+     0.008
+    ],
+    [
+     "opening-0-front-0-2",
+     0.033
+    ],
+    [
+     "opening-0-rear-2-1",
+     0.024
+    ],
+    [
+     "opening-0-rear-2-2",
+     0.041
+    ],
+    [
+     "pocket-main-0-0-mouth",
+     0.055
+    ],
+    [
+     "pocket-main-0-0-opening-0-front-4-0",
+     0.031
+    ],
+    [
+     "pocket-main-0-2-mouth",
+     0.009
+    ]
+   ]
+  },
+  "rary": {
+   "name": "Rarytasy 5 (G2E)",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+   "sealed": {
+    "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+    "contentHash": "02963768a63b99eb20005d533569950aafd52168ffa73e00070662e379553135",
+    "pageHash": "7caa49ab46a1578243c1a8fd3e3626ca7b156d2a321b92b2a16c6a582e5edf61"
+   },
+   "modelSha256": {
+    "before": "565dcd94be7bccca7f573a491550b623a14c7ae349edfa58916ef71d4fb31fc8",
+    "after": "4e323c07b9a3ea782d41e392aa3bc30be38c96599561c072a20ddff9e4a57805"
+   },
+   "solver": {
+    "service": "1.5.0",
+    "solver": "2.18.0"
+   },
+   "modelHash": [
+    "565dcd94be7b",
+    "4e323c07b9a3"
+   ],
+   "same": false,
+   "walls": [
+    21,
+    21
+   ],
+   "openings": [
+    {
+     "DOOR": 14,
+     "WINDOW": 6
+    },
+    {
+     "DOOR": 14,
+     "WINDOW": 6
+    }
+   ],
+   "rooms": [
+    9,
+    9
+   ],
+   "closure": [
+    {
+     "exteriorErrors": 2,
+     "exteriorFindings": 2,
+     "interiorFindings": 23
+    },
+    {
+     "exteriorErrors": 2,
+     "exteriorFindings": 2,
+     "interiorFindings": 23
+    }
+   ],
+   "residualsOut": [
+    19,
+    21
+   ],
+   "replay": [
+    "BYTE_IDENTICAL",
+    "BYTE_IDENTICAL"
+   ],
+   "refusals": [
+    0,
+    0
+   ],
+   "previewMode": [
+    null,
+    null
+   ],
+   "wallsMoved": [
+    [
+     "main-iwall-0-x-0",
+     0.009
+    ],
+    [
+     "main-iwall-0-x-5",
+     0.012
+    ],
+    [
+     "main-iwall-0-x-8",
+     0.013
+    ],
+    [
+     "main-iwall-0-z-0",
+     0.012
+    ],
+    [
+     "main-iwall-0-z-1",
+     0.009
+    ],
+    [
+     "main-iwall-0-z-2",
+     0.017
+    ],
+    [
+     "main-iwall-0-z-3",
+     0.017
+    ],
+    [
+     "main-iwall-0-z-4",
+     0.009
+    ],
+    [
+     "main-iwall-0-z-5",
+     0.012
+    ],
+    [
+     "main-iwall-0-z-7",
+     0.009
+    ],
+    [
+     "main-iwall-0-z-8",
+     0.012
+    ],
+    [
+     "main-iwall-0-z-9",
+     0.012
+    ],
+    [
+     "ring-attached-0-0-w0",
+     0.149
+    ],
+    [
+     "ring-attached-0-0-w1",
+     0.087
+    ],
+    [
+     "ring-attached-0-0-w3",
+     0.149
+    ],
+    [
+     "ring-main-0-w0-0",
+     0.149
+    ],
+    [
+     "ring-main-0-w0-1",
+     0.087
+    ],
+    [
+     "ring-main-0-w0-party-attached-0",
+     0.149
+    ]
+   ],
+   "openingsMoved": [
+    [
+     "main-idoor-0-0",
+     0.007
+    ],
+    [
+     "main-idoor-0-1",
+     0.015
+    ],
+    [
+     "opening-0-east-1-0",
+     0.007
+    ],
+    [
+     "opening-0-east-1-1",
+     0.011
+    ],
+    [
+     "opening-0-east-5-0",
+     0.021
+    ],
+    [
+     "opening-0-front-0-1",
+     0.087
+    ],
+    [
+     "opening-0-front-0-2",
+     0.087
+    ],
+    [
+     "opening-0-front-4-0",
+     0.149
+    ],
+    [
+     "opening-0-west-3-0",
+     0.015
+    ],
+    [
+     "opening-0-west-7-0",
+     0.02
+    ],
+    [
+     "shared-party-0-front-0-0",
+     0.149
+    ]
+   ]
+  },
+  "trytomach": {
+   "name": "Trytomy (G)",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-trytomach-g-m6802645623649",
+   "sealed": {
+    "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-trytomach-g-m6802645623649",
+    "contentHash": "de2296125305456274a1e1b013c75055af8990722ba0f81a425388b2726804e2",
+    "pageHash": "07c60d37cd657b9182f524288867e78fd58b4824a48fd2b8ae3735cf8bed3006"
+   },
+   "modelSha256": {
+    "before": "c639b29d69e43ace4d71f12362ae320d5f6c97703d4bc00e3b93d5d261871dfc",
+    "after": "82a44fe82ffc14fccbd521b063b3e5b803aaa4b34f24a7d2e3808625e26d94d1"
+   },
+   "solver": {
+    "service": "1.5.0",
+    "solver": "2.18.0"
+   },
+   "modelHash": [
+    "c639b29d69e4",
+    "82a44fe82ffc"
+   ],
+   "same": false,
+   "walls": [
+    36,
+    36
+   ],
+   "openings": [
+    {
+     "DOOR": 10,
+     "WINDOW": 11
+    },
+    {
+     "DOOR": 10,
+     "WINDOW": 11
+    }
+   ],
+   "rooms": [
+    11,
+    11
+   ],
+   "closure": [
+    {
+     "exteriorErrors": 2,
+     "exteriorFindings": 2,
+     "interiorFindings": 37
+    },
+    {
+     "exteriorErrors": 2,
+     "exteriorFindings": 4,
+     "interiorFindings": 37
+    }
+   ],
+   "residualsOut": [
+    4,
+    6
+   ],
+   "replay": [
+    "BYTE_IDENTICAL",
+    "BYTE_IDENTICAL"
+   ],
+   "refusals": [
+    0,
+    0
+   ],
+   "previewMode": [
+    null,
+    null
+   ],
+   "wallsMoved": [
+    [
+     "main-iwall-0-x-3",
+     0.006
+    ],
+    [
+     "main-iwall-0-x-6",
+     0.008
+    ],
+    [
+     "main-iwall-0-z-0",
+     0.006
+    ],
+    [
+     "main-iwall-0-z-4",
+     0.006
+    ],
+    [
+     "main-iwall-0-z-5",
+     0.006
+    ],
+    [
+     "main-iwall-0-z-6",
+     0.007
+    ],
+    [
+     "main-iwall-0-z-7",
+     0.008
+    ],
+    [
+     "main-iwall-1-x-0",
+     0.006
+    ],
+    [
+     "main-iwall-1-x-3",
+     0.02
+    ],
+    [
+     "main-iwall-1-x-6",
+     0.009
+    ],
+    [
+     "main-iwall-1-z-4",
+     0.006
+    ],
+    [
+     "main-iwall-1-z-5",
+     0.006
+    ],
+    [
+     "main-iwall-1-z-6",
+     0.008
+    ],
+    [
+     "main-iwall-1-z-7",
+     0.008
+    ],
+    [
+     "main-iwall-1-z-9",
+     0.01
+    ],
+    [
+     "return-east-1-0",
+     0.021
+    ],
+    [
+     "return-east-1-1",
+     0.021
+    ],
+    [
+     "return-east-1-2",
+     0.021
+    ],
+    [
+     "ring-main-0-w0",
+     0.02
+    ],
+    [
+     "ring-main-0-w1",
+     0.02
+    ],
+    [
+     "ring-main-0-w2",
+     0.02
+    ],
+    [
+     "ring-main-1-w0",
+     0.02
+    ],
+    [
+     "ring-main-1-w1",
+     0.02
+    ],
+    [
+     "ring-main-1-w2",
+     0.02
+    ]
+   ],
+   "openingsMoved": [
+    [
+     "opening-0-front-0-1",
+     0.005
+    ],
+    [
+     "opening-0-front-0-2",
+     0.008
+    ],
+    [
+     "opening-0-front-0-3",
+     0.01
+    ],
+    [
+     "opening-0-rear-2-0",
+     0.016
+    ],
+    [
+     "opening-0-rear-2-1",
+     0.01
+    ]
+   ]
+  },
+  "arganiach": {
+   "name": "Argania (G2E)",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-arganiach-g2e-m32b290f26a4e8",
+   "sealed": {
+    "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-arganiach-g2e-m32b290f26a4e8",
+    "contentHash": "167a3f3c8407196304722accccdc2b89bffe0ed52d6dd66dfd9a0c88f2920a11",
+    "pageHash": "d7351b919c91eb02211253f4807e373d6a2560ef126c1715d488ce5ee2ec7419"
+   },
+   "modelSha256": {
+    "before": "d0b13ea16f77224fafaeda762c0077547c25c72a9b79b5a25f5469abcf7dd55e",
+    "after": "7b501aa5f768fbbe273be0d886eca6c852acd2380f79630a7c98e6b1c4d9ff2c"
+   },
+   "solver": {
+    "service": "1.5.0",
+    "solver": "2.18.0"
+   },
+   "modelHash": [
+    "d0b13ea16f77",
+    "7b501aa5f768"
+   ],
+   "same": false,
+   "walls": [
+    29,
+    30
+   ],
+   "openings": [
+    {
+     "DOOR": 18,
+     "WINDOW": 8
+    },
+    {
+     "DOOR": 18,
+     "WINDOW": 8
+    }
+   ],
+   "rooms": [
+    14,
+    15
+   ],
+   "closure": [
+    {
+     "exteriorErrors": 3,
+     "exteriorFindings": 3,
+     "interiorFindings": 36
+    },
+    {
+     "exteriorErrors": 3,
+     "exteriorFindings": 3,
+     "interiorFindings": 36
+    }
+   ],
+   "residualsOut": [
+    7,
+    7
+   ],
+   "replay": [
+    "BYTE_IDENTICAL",
+    "BYTE_IDENTICAL"
+   ],
+   "refusals": [
+    0,
+    0
+   ],
+   "previewMode": [
+    null,
+    null
+   ],
+   "wallsMoved": [
+    [
+     "main-iwall-0-x-0",
+     0.005
+    ],
+    [
+     "main-iwall-0-z-11-b",
+     0.006
+    ],
+    [
+     "main-iwall-0-z-3",
+     0.018
+    ],
+    [
+     "main-iwall-0-z-6",
+     "ADDED"
+    ],
+    [
+     "main-iwall-0-z-8-b",
+     0.018
+    ],
+    [
+     "main-iwall-1-z-1",
+     0.006
+    ],
+    [
+     "main-iwall-1-z-4",
+     0.006
+    ],
+    [
+     "ring-main-0-w1",
+     0.006
+    ],
+    [
+     "ring-main-0-w2",
+     0.006
+    ],
+    [
+     "ring-main-0-w3",
+     0.006
+    ],
+    [
+     "ring-main-1-w1",
+     0.006
+    ],
+    [
+     "ring-main-1-w2",
+     0.006
+    ],
+    [
+     "ring-main-1-w3",
+     0.006
+    ]
+   ],
+   "openingsMoved": [
+    [
+     "main-idoor-0-7",
+     0.007
+    ],
+    [
+     "opening-0-rear-2-2",
+     0.007
+    ]
+   ]
+  },
+  "sasankach3": {
+   "name": "Sasanki 3 (G)",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-sasankach-3-g-mb292397cb1840",
+   "sealed": {
+    "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-sasankach-3-g-mb292397cb1840",
+    "contentHash": "cb2e8c3b20fd2aa720e3c65145b34f34896c4730dbc8d55e85b7f22fa873c14e",
+    "pageHash": "c349f6587546664ca77524f9547876d3d20193cf4012b4748bde384a38e4553d"
+   },
+   "modelSha256": {
+    "before": "3a3465ec2dd967cca439e154cb70801a0a33bc6cbe592a7d771e8a529236dce2",
+    "after": "3aa678d8a59f211ff63f4904594b880f2131a3c5d9a1193c8b79ff7f8541a36b"
+   },
+   "solver": {
+    "service": "1.5.0",
+    "solver": "2.18.0"
+   },
+   "modelHash": [
+    "3a3465ec2dd9",
+    "3aa678d8a59f"
+   ],
+   "same": false,
+   "walls": [
+    34,
+    34
+   ],
+   "openings": [
+    {
+     "DOOR": 15,
+     "WINDOW": 8
+    },
+    {
+     "DOOR": 15,
+     "WINDOW": 8
+    }
+   ],
+   "rooms": [
+    11,
+    11
+   ],
+   "closure": [
+    {
+     "exteriorErrors": 1,
+     "exteriorFindings": 1,
+     "interiorFindings": 33
+    },
+    {
+     "exteriorErrors": 3,
+     "exteriorFindings": 3,
+     "interiorFindings": 33
+    }
+   ],
+   "residualsOut": [
+    17,
+    17
+   ],
+   "replay": [
+    "BYTE_IDENTICAL",
+    "BYTE_IDENTICAL"
+   ],
+   "refusals": [
+    0,
+    0
+   ],
+   "previewMode": [
+    null,
+    null
+   ],
+   "wallsMoved": [
+    [
+     "attached-0-iwall-0-z-0",
+     0.009
+    ]
+   ],
+   "openingsMoved": []
+  }
+ }
+}

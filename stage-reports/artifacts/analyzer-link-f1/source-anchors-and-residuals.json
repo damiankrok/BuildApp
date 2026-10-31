@@ -1,0 +1,3524 @@
+{
+ "note": "LINK-F1: the base plan of each sealed house — the registration, the sheet scale chosen, every chain statement the ladders weighed (pinned / rejected with residual in px and the px allowed / not printed), and each grid line where the ladder (bodies) and the linear v2 frame (walls, gaps, openings) disagreed BEFORE and AFTER. BEFORE = ed4008c, AFTER = this stage.",
+ "houses": {
+  "a01": {
+   "name": "Jarzmianki",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-jarzmiankach-m60124f28f071a",
+   "baseFrame": "frame-asset-rzut-3db285e128-e3f3f41d03",
+   "registration": {
+    "mppX": 0.02031,
+    "mppY": 0.020108,
+    "anchors": [
+     "Y CHAIN_SEGMENT 0.55m/28.5px res -0.023086 w 0.109179",
+     "X CHAIN_SEGMENT 1.17m/58px res -0.007984 w 0.242706",
+     "X CHAIN_SEGMENT 10.5m/517px res -0.000306 w 0.582628",
+     "X CHAIN_SEGMENT 2.6m/126px res 0.040931 w 0.119728",
+     "X CHAIN_SEGMENT 1.1m/55.5px res -0.027209 w 0.28212",
+     "Y CHAIN_SEGMENT 0.77m/38px res 0.005885 w 0.240926"
+    ],
+    "rejected": 0
+   },
+   "extent": {
+    "x0": 228,
+    "y0": 149,
+    "x1": 745,
+    "y1": 557
+   },
+   "axes": {
+    "X": {
+     "linesBefore": [
+      {
+       "px": 228,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 304,
+       "ladderM": 1.5436,
+       "linearM": 1.5436,
+       "dCm": 0
+      },
+      {
+       "px": 340,
+       "ladderM": 2.2747,
+       "linearM": 2.2747,
+       "dCm": 0
+      },
+      {
+       "px": 353.107143,
+       "ladderM": 2.5409,
+       "linearM": 2.5409,
+       "dCm": 0
+      },
+      {
+       "px": 390,
+       "ladderM": 3.2902,
+       "linearM": 3.2902,
+       "dCm": 0
+      },
+      {
+       "px": 423.5,
+       "ladderM": 3.9706,
+       "linearM": 3.9706,
+       "dCm": 0
+      },
+      {
+       "px": 481.5,
+       "ladderM": 5.1406,
+       "linearM": 5.1486,
+       "dCm": 0.8
+      },
+      {
+       "px": 535.5,
+       "ladderM": 6.2419,
+       "linearM": 6.2453,
+       "dCm": 0.3
+      },
+      {
+       "px": 543,
+       "ladderM": 6.3949,
+       "linearM": 6.3976,
+       "dCm": 0.3
+      },
+      {
+       "px": 564,
+       "ladderM": 6.8231,
+       "linearM": 6.8242,
+       "dCm": 0.1
+      },
+      {
+       "px": 576,
+       "ladderM": 7.0679,
+       "linearM": 7.0679,
+       "dCm": 0
+      },
+      {
+       "px": 623.875,
+       "ladderM": 8.0558,
+       "linearM": 8.0402,
+       "dCm": -1.6
+      },
+      {
+       "px": 659,
+       "ladderM": 8.7806,
+       "linearM": 8.7536,
+       "dCm": -2.7
+      },
+      {
+       "px": 669,
+       "ladderM": 8.9869,
+       "linearM": 8.9567,
+       "dCm": -3
+      },
+      {
+       "px": 702,
+       "ladderM": 9.6679,
+       "linearM": 9.6269,
+       "dCm": -4.1
+      },
+      {
+       "px": 745,
+       "ladderM": 10.5,
+       "linearM": 10.5003,
+       "dCm": 0
+      }
+     ],
+     "linesAfter": [
+      {
+       "px": 228,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 304,
+       "ladderM": 1.5435,
+       "linearM": 1.5435,
+       "dCm": 0.0
+      },
+      {
+       "px": 340,
+       "ladderM": 2.2747,
+       "linearM": 2.2746,
+       "dCm": -0.0
+      },
+      {
+       "px": 353.107143,
+       "ladderM": 2.5409,
+       "linearM": 2.5408,
+       "dCm": -0.0
+      },
+      {
+       "px": 390,
+       "ladderM": 3.2901,
+       "linearM": 3.2901,
+       "dCm": 0.0
+      },
+      {
+       "px": 423.5,
+       "ladderM": 3.9705,
+       "linearM": 3.9704,
+       "dCm": -0.0
+      },
+      {
+       "px": 481.5,
+       "ladderM": 5.1405,
+       "linearM": 5.1483,
+       "dCm": 0.8
+      },
+      {
+       "px": 535.5,
+       "ladderM": 6.2418,
+       "linearM": 6.245,
+       "dCm": 0.3
+      },
+      {
+       "px": 543,
+       "ladderM": 6.3947,
+       "linearM": 6.3973,
+       "dCm": 0.3
+      },
+      {
+       "px": 564,
+       "ladderM": 6.823,
+       "linearM": 6.8238,
+       "dCm": 0.1
+      },
+      {
+       "px": 576,
+       "ladderM": 7.0677,
+       "linearM": 7.0675,
+       "dCm": -0.0
+      },
+      {
+       "px": 623.875,
+       "ladderM": 8.0556,
+       "linearM": 8.0398,
+       "dCm": -1.6
+      },
+      {
+       "px": 659,
+       "ladderM": 8.7804,
+       "linearM": 8.7532,
+       "dCm": -2.7
+      },
+      {
+       "px": 669,
+       "ladderM": 8.9867,
+       "linearM": 8.9563,
+       "dCm": -3.0
+      },
+      {
+       "px": 702,
+       "ladderM": 9.6677,
+       "linearM": 9.6265,
+       "dCm": -4.1
+      },
+      {
+       "px": 745,
+       "ladderM": 10.5,
+       "linearM": 10.4998,
+       "dCm": -0.0
+      }
+     ],
+     "maxAbsDcmBefore": 4.1,
+     "maxAbsDcmAfter": 4.1,
+     "anchors": [
+      {
+       "fromPx": 228,
+       "toPx": 745,
+       "metres": 10.5,
+       "residualPx": 0.012162,
+       "allowedPx": 2.246196,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-horizontal-696-1bdc3576b8"
+       ]
+      },
+      {
+       "fromPx": 576,
+       "toPx": 702,
+       "metres": 2.6,
+       "residualPx": 2.019095,
+       "allowedPx": 2.246196,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-horizontal-224-e5df08bc95"
+       ]
+      },
+      {
+       "fromPx": 423.5,
+       "toPx": 481.5,
+       "metres": 1.17,
+       "residualPx": -0.391436,
+       "allowedPx": 2.246196,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-horizontal-200-6a23b7d069"
+       ]
+      }
+     ],
+     "notPrinted": 0
+    },
+    "Y": {
+     "linesBefore": [
+      {
+       "px": 149,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 171,
+       "ladderM": 0.4424,
+       "linearM": 0.4463,
+       "dCm": 0.4
+      },
+      {
+       "px": 200,
+       "ladderM": 1.0313,
+       "linearM": 1.0345,
+       "dCm": 0.3
+      },
+      {
+       "px": 224,
+       "ladderM": 1.5188,
+       "linearM": 1.5213,
+       "dCm": 0.3
+      },
+      {
+       "px": 242.5,
+       "ladderM": 1.8936,
+       "linearM": 1.8966,
+       "dCm": 0.3
+      },
+      {
+       "px": 262,
+       "ladderM": 2.2888,
+       "linearM": 2.2921,
+       "dCm": 0.3
+      },
+      {
+       "px": 291,
+       "ladderM": 2.8778,
+       "linearM": 2.8804,
+       "dCm": 0.3
+      },
+      {
+       "px": 306,
+       "ladderM": 3.1824,
+       "linearM": 3.1847,
+       "dCm": 0.2
+      },
+      {
+       "px": 314.5,
+       "ladderM": 3.355,
+       "linearM": 3.3571,
+       "dCm": 0.2
+      },
+      {
+       "px": 324.5,
+       "ladderM": 3.5581,
+       "linearM": 3.5599,
+       "dCm": 0.2
+      },
+      {
+       "px": 336,
+       "ladderM": 3.7917,
+       "linearM": 3.7932,
+       "dCm": 0.2
+      },
+      {
+       "px": 349,
+       "ladderM": 4.0557,
+       "linearM": 4.0569,
+       "dCm": 0.1
+      },
+      {
+       "px": 364,
+       "ladderM": 4.3603,
+       "linearM": 4.3612,
+       "dCm": 0.1
+      },
+      {
+       "px": 375.5,
+       "ladderM": 4.5939,
+       "linearM": 4.5944,
+       "dCm": 0.1
+      },
+      {
+       "px": 384,
+       "ladderM": 4.7665,
+       "linearM": 4.7668,
+       "dCm": 0
+      },
+      {
+       "px": 390,
+       "ladderM": 4.8884,
+       "linearM": 4.8885,
+       "dCm": 0
+      },
+      {
+       "px": 396,
+       "ladderM": 5.0102,
+       "linearM": 5.0103,
+       "dCm": 0
+      },
+      {
+       "px": 411,
+       "ladderM": 5.3149,
+       "linearM": 5.3145,
+       "dCm": 0
+      },
+      {
+       "px": 418,
+       "ladderM": 5.4571,
+       "linearM": 5.4565,
+       "dCm": -0.1
+      },
+      {
+       "px": 431,
+       "ladderM": 5.7211,
+       "linearM": 5.7202,
+       "dCm": -0.1
+      },
+      {
+       "px": 441.5,
+       "ladderM": 6.0359,
+       "linearM": 5.9332,
+       "dCm": -10.3
+      },
+      {
+       "px": 451,
+       "ladderM": 6.0359,
+       "linearM": 6.1259,
+       "dCm": 9
+      },
+      {
+       "px": 459.5,
+       "ladderM": 6.243,
+       "linearM": 6.2983,
+       "dCm": 5.5
+      },
+      {
+       "px": 473.5,
+       "ladderM": 6.5842,
+       "linearM": 6.5823,
+       "dCm": -0.2
+      },
+      {
+       "px": 482,
+       "ladderM": 6.7569,
+       "linearM": 6.7547,
+       "dCm": -0.2
+      },
+      {
+       "px": 489,
+       "ladderM": 6.899,
+       "linearM": 6.8967,
+       "dCm": -0.2
+      },
+      {
+       "px": 501,
+       "ladderM": 7.1427,
+       "linearM": 7.1401,
+       "dCm": -0.3
+      },
+      {
+       "px": 511.263158,
+       "ladderM": 7.3512,
+       "linearM": 7.3483,
+       "dCm": -0.3
+      },
+      {
+       "px": 518,
+       "ladderM": 7.488,
+       "linearM": 7.485,
+       "dCm": -0.3
+      },
+      {
+       "px": 529,
+       "ladderM": 7.7114,
+       "linearM": 7.7081,
+       "dCm": -0.3
+      },
+      {
+       "px": 537,
+       "ladderM": 7.8739,
+       "linearM": 7.8704,
+       "dCm": -0.4
+      },
+      {
+       "px": 548,
+       "ladderM": 8.0951,
+       "linearM": 8.0935,
+       "dCm": -0.2
+      },
+      {
+       "px": 557,
+       "ladderM": 8.276,
+       "linearM": 8.276,
+       "dCm": 0
+      }
+     ],
+     "linesAfter": [
+      {
+       "px": 149,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 171,
+       "ladderM": 0.4468,
+       "linearM": 0.4468,
+       "dCm": 0.0
+      },
+      {
+       "px": 200,
+       "ladderM": 1.0358,
+       "linearM": 1.0358,
+       "dCm": 0.0
+      },
+      {
+       "px": 224,
+       "ladderM": 1.5232,
+       "linearM": 1.5232,
+       "dCm": 0.0
+      },
+      {
+       "px": 242.5,
+       "ladderM": 1.898,
+       "linearM": 1.8989,
+       "dCm": 0.1
+      },
+      {
+       "px": 262,
+       "ladderM": 2.2932,
+       "linearM": 2.2949,
+       "dCm": 0.2
+      },
+      {
+       "px": 291,
+       "ladderM": 2.8821,
+       "linearM": 2.8839,
+       "dCm": 0.2
+      },
+      {
+       "px": 306,
+       "ladderM": 3.1868,
+       "linearM": 3.1885,
+       "dCm": 0.2
+      },
+      {
+       "px": 314.5,
+       "ladderM": 3.3594,
+       "linearM": 3.3611,
+       "dCm": 0.2
+      },
+      {
+       "px": 324.5,
+       "ladderM": 3.5625,
+       "linearM": 3.5642,
+       "dCm": 0.2
+      },
+      {
+       "px": 336,
+       "ladderM": 3.796,
+       "linearM": 3.7978,
+       "dCm": 0.2
+      },
+      {
+       "px": 349,
+       "ladderM": 4.0601,
+       "linearM": 4.0618,
+       "dCm": 0.2
+      },
+      {
+       "px": 364,
+       "ladderM": 4.3647,
+       "linearM": 4.3664,
+       "dCm": 0.2
+      },
+      {
+       "px": 375.5,
+       "ladderM": 4.5982,
+       "linearM": 4.6,
+       "dCm": 0.2
+      },
+      {
+       "px": 384,
+       "ladderM": 4.7709,
+       "linearM": 4.7726,
+       "dCm": 0.2
+      },
+      {
+       "px": 390,
+       "ladderM": 4.8927,
+       "linearM": 4.8945,
+       "dCm": 0.2
+      },
+      {
+       "px": 396,
+       "ladderM": 5.0146,
+       "linearM": 5.0163,
+       "dCm": 0.2
+      },
+      {
+       "px": 411,
+       "ladderM": 5.3192,
+       "linearM": 5.321,
+       "dCm": 0.2
+      },
+      {
+       "px": 418,
+       "ladderM": 5.4614,
+       "linearM": 5.4631,
+       "dCm": 0.2
+      },
+      {
+       "px": 431,
+       "ladderM": 5.7254,
+       "linearM": 5.7271,
+       "dCm": 0.2
+      },
+      {
+       "px": 441.5,
+       "ladderM": 5.9386,
+       "linearM": 5.9404,
+       "dCm": 0.2
+      },
+      {
+       "px": 451,
+       "ladderM": 6.1316,
+       "linearM": 6.1333,
+       "dCm": 0.2
+      },
+      {
+       "px": 459.5,
+       "ladderM": 6.3042,
+       "linearM": 6.3059,
+       "dCm": 0.2
+      },
+      {
+       "px": 473.5,
+       "ladderM": 6.5885,
+       "linearM": 6.5903,
+       "dCm": 0.2
+      },
+      {
+       "px": 482,
+       "ladderM": 6.7612,
+       "linearM": 6.7629,
+       "dCm": 0.2
+      },
+      {
+       "px": 489,
+       "ladderM": 6.9033,
+       "linearM": 6.9051,
+       "dCm": 0.2
+      },
+      {
+       "px": 501,
+       "ladderM": 7.147,
+       "linearM": 7.1488,
+       "dCm": 0.2
+      },
+      {
+       "px": 511.263158,
+       "ladderM": 7.3555,
+       "linearM": 7.3572,
+       "dCm": 0.2
+      },
+      {
+       "px": 518,
+       "ladderM": 7.4923,
+       "linearM": 7.494,
+       "dCm": 0.2
+      },
+      {
+       "px": 529,
+       "ladderM": 7.7157,
+       "linearM": 7.7174,
+       "dCm": 0.2
+      },
+      {
+       "px": 537,
+       "ladderM": 7.8781,
+       "linearM": 7.8799,
+       "dCm": 0.2
+      },
+      {
+       "px": 548,
+       "ladderM": 8.1015,
+       "linearM": 8.1033,
+       "dCm": 0.2
+      },
+      {
+       "px": 557,
+       "ladderM": 8.2843,
+       "linearM": 8.2861,
+       "dCm": 0.2
+      }
+     ],
+     "maxAbsDcmBefore": 10.3,
+     "maxAbsDcmAfter": 0.2,
+     "anchors": [
+      {
+       "fromPx": 224,
+       "toPx": 262,
+       "metres": 0.77,
+       "residualPx": -0.085775,
+       "allowedPx": 2.246196,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-vertical-304-c389e11be5"
+       ]
+      }
+     ],
+     "notPrinted": 89
+    }
+   }
+  },
+  "gozd": {
+   "name": "Goździkowce 3",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-gozdzikowcach-3-m79923e950094d",
+   "baseFrame": "frame-asset-rzut-01d4b6474c-64bd1e0f2f",
+   "registration": {
+    "mppX": 0.025344,
+    "mppY": 0.025199,
+    "anchors": [
+     "X CHAIN_SEGMENT 5.14m/205px res -0.055533 w 0.21792",
+     "Y CHAIN_SEGMENT 9.5m/377px res -0.000114 w 0.170194",
+     "X CHAIN_SEGMENT 1.83m/72.5px res -0.007445 w 0.253418",
+     "Y CHAIN_SEGMENT 0.55m/20.5px res 0.033416 w 0.195605",
+     "X CHAIN_SEGMENT 13.82m/545px res 0.007485 w 0.245148",
+     "X CHAIN_SEGMENT 3.11m/123px res -0.00732 w 0.2394"
+    ],
+    "rejected": 0
+   },
+   "extent": {
+    "x0": 96,
+    "x1": 639,
+    "y0": 221,
+    "y1": 598
+   },
+   "axes": {
+    "X": {
+     "linesBefore": [
+      {
+       "px": 96,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 311,
+       "ladderM": 5.57,
+       "linearM": 5.449,
+       "dCm": -12.1
+      },
+      {
+       "px": 345,
+       "ladderM": 6.4297,
+       "linearM": 6.3107,
+       "dCm": -11.9
+      },
+      {
+       "px": 434,
+       "ladderM": 8.68,
+       "linearM": 8.5663,
+       "dCm": -11.4
+      },
+      {
+       "px": 639,
+       "ladderM": 13.82,
+       "linearM": 13.7618,
+       "dCm": -5.8
+      }
+     ],
+     "linesAfter": [
+      {
+       "px": 96,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 311,
+       "ladderM": 5.472,
+       "linearM": 5.4389,
+       "dCm": -3.3
+      },
+      {
+       "px": 345,
+       "ladderM": 6.3317,
+       "linearM": 6.299,
+       "dCm": -3.3
+      },
+      {
+       "px": 434,
+       "ladderM": 8.582,
+       "linearM": 8.5504,
+       "dCm": -3.2
+      },
+      {
+       "px": 639,
+       "ladderM": 13.82,
+       "linearM": 13.7363,
+       "dCm": -8.4
+      }
+     ],
+     "maxAbsDcmBefore": 12.1,
+     "maxAbsDcmAfter": 8.4,
+     "anchors": [
+      {
+       "fromPx": 96,
+       "toPx": 639,
+       "metres": 13.82,
+       "residualPx": 3.309839,
+       "allowedPx": 4.197652,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-horizontal-747-fcc98a90c7"
+       ]
+      },
+      {
+       "fromPx": 311,
+       "toPx": 639,
+       "metres": 8.25,
+       "residualPx": -3.873686,
+       "allowedPx": 2.395304,
+       "disposition": "REJECTED_RESIDUAL",
+       "chainIds": [
+        "chain-horizontal-722-686523194d"
+       ]
+      },
+      {
+       "fromPx": 434,
+       "toPx": 639,
+       "metres": 5.14,
+       "residualPx": -3.063422,
+       "allowedPx": 2.197652,
+       "disposition": "REJECTED_RESIDUAL",
+       "chainIds": [
+        "chain-horizontal-722-686523194d"
+       ]
+      },
+      {
+       "fromPx": 311,
+       "toPx": 434,
+       "metres": 3.11,
+       "residualPx": -0.810264,
+       "allowedPx": 2.197652,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-horizontal-722-686523194d"
+       ]
+      }
+     ],
+     "notPrinted": 0
+    },
+    "Y": {
+     "linesBefore": [
+      {
+       "px": 221,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 268.5,
+       "ladderM": 1.197,
+       "linearM": 1.197,
+       "dCm": 0
+      },
+      {
+       "px": 289,
+       "ladderM": 1.747,
+       "linearM": 1.7135,
+       "dCm": -3.3
+      },
+      {
+       "px": 335.5,
+       "ladderM": 2.9137,
+       "linearM": 2.8853,
+       "dCm": -2.8
+      },
+      {
+       "px": 357.5,
+       "ladderM": 3.4657,
+       "linearM": 3.4397,
+       "dCm": -2.6
+      },
+      {
+       "px": 513,
+       "ladderM": 7.3673,
+       "linearM": 7.3581,
+       "dCm": -0.9
+      },
+      {
+       "px": 549.40905,
+       "ladderM": 8.2808,
+       "linearM": 8.2756,
+       "dCm": -0.5
+      },
+      {
+       "px": 598,
+       "ladderM": 9.5,
+       "linearM": 9.5,
+       "dCm": 0
+      }
+     ],
+     "linesAfter": [
+      {
+       "px": 221,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 268.5,
+       "ladderM": 1.1969,
+       "linearM": 1.2016,
+       "dCm": 0.5
+      },
+      {
+       "px": 289,
+       "ladderM": 1.747,
+       "linearM": 1.7202,
+       "dCm": -2.7
+      },
+      {
+       "px": 335.5,
+       "ladderM": 2.9137,
+       "linearM": 2.8965,
+       "dCm": -1.7
+      },
+      {
+       "px": 357.5,
+       "ladderM": 3.4657,
+       "linearM": 3.453,
+       "dCm": -1.3
+      },
+      {
+       "px": 513,
+       "ladderM": 7.3673,
+       "linearM": 7.3867,
+       "dCm": 1.9
+      },
+      {
+       "px": 549.40905,
+       "ladderM": 8.2808,
+       "linearM": 8.3078,
+       "dCm": 2.7
+      },
+      {
+       "px": 598,
+       "ladderM": 9.5,
+       "linearM": 9.537,
+       "dCm": 3.7
+      }
+     ],
+     "maxAbsDcmBefore": 3.3,
+     "maxAbsDcmAfter": 3.7,
+     "anchors": [
+      {
+       "fromPx": 221,
+       "toPx": 598,
+       "metres": 9.5,
+       "residualPx": -1.461399,
+       "allowedPx": 2.197652,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-vertical-720-369dd2c60f"
+       ]
+      },
+      {
+       "fromPx": 268.5,
+       "toPx": 289,
+       "metres": 0.55,
+       "residualPx": 1.321174,
+       "allowedPx": 2.197652,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-vertical-497-4f9ed8d8f0"
+       ]
+      }
+     ],
+     "notPrinted": 0
+    }
+   }
+  },
+  "marcowki": {
+   "name": "Marcówki (GE)",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+   "baseFrame": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+   "registration": {
+    "mppX": 0.026426,
+    "mppY": 0.026468,
+    "anchors": [
+     "X CHAIN_SEGMENT 4.15m/157px res 0.001135 w 0.414661",
+     "Y CHAIN_SEGMENT 1m/38px res -0.0058 w 0.654394",
+     "X CHAIN_SEGMENT 1.55m/57px res 0.043724 w 0.121722",
+     "X CHAIN_SEGMENT 7.9m/299px res -0.001341 w 0.386041",
+     "Y CHAIN_SEGMENT 1.57m/58px res 0.034832 w 0.141878",
+     "X CHAIN_SEGMENT 12.05m/456px res -0.000206 w 0.514627",
+     "X CHAIN_SEGMENT 3.01m/113.5px res 0.010662 w 0.286763",
+     "Y CHAIN_SEGMENT 7.51m/283.5px res 0.006204 w 0.337175",
+     "Y CHAIN_SEGMENT 5.1m/193px res -0.008404 w 0.572652"
+    ],
+    "rejected": 0
+   },
+   "extent": {
+    "x0": 58,
+    "x1": 514,
+    "y0": 259,
+    "y1": 735.5
+   },
+   "axes": {
+    "X": {
+     "linesBefore": [
+      {
+       "px": 58,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 94,
+       "ladderM": 0.9513,
+       "linearM": 0.9513,
+       "dCm": 0
+      },
+      {
+       "px": 128.5,
+       "ladderM": 1.863,
+       "linearM": 1.863,
+       "dCm": 0
+      },
+      {
+       "px": 177.5,
+       "ladderM": 3.1578,
+       "linearM": 3.1579,
+       "dCm": 0
+      },
+      {
+       "px": 213.5,
+       "ladderM": 4.1091,
+       "linearM": 4.1092,
+       "dCm": 0
+      },
+      {
+       "px": 327,
+       "ladderM": 7.1191,
+       "linearM": 7.1086,
+       "dCm": -1.1
+      },
+      {
+       "px": 357,
+       "ladderM": 7.9,
+       "linearM": 7.9014,
+       "dCm": 0.1
+      },
+      {
+       "px": 408.5,
+       "ladderM": 9.2623,
+       "linearM": 9.2623,
+       "dCm": 0
+      },
+      {
+       "px": 465.5,
+       "ladderM": 10.8123,
+       "linearM": 10.7686,
+       "dCm": -4.4
+      },
+      {
+       "px": 514,
+       "ladderM": 12.05,
+       "linearM": 12.0503,
+       "dCm": 0
+      }
+     ],
+     "linesAfter": [
+      {
+       "px": 58,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 94,
+       "ladderM": 0.9512,
+       "linearM": 0.9518,
+       "dCm": 0.1
+      },
+      {
+       "px": 128.5,
+       "ladderM": 1.8627,
+       "linearM": 1.8639,
+       "dCm": 0.1
+      },
+      {
+       "px": 177.5,
+       "ladderM": 3.1574,
+       "linearM": 3.1593,
+       "dCm": 0.2
+      },
+      {
+       "px": 213.5,
+       "ladderM": 4.1085,
+       "linearM": 4.1111,
+       "dCm": 0.3
+      },
+      {
+       "px": 327,
+       "ladderM": 7.1185,
+       "linearM": 7.1118,
+       "dCm": -0.7
+      },
+      {
+       "px": 357,
+       "ladderM": 7.9,
+       "linearM": 7.905,
+       "dCm": 0.5
+      },
+      {
+       "px": 408.5,
+       "ladderM": 9.2613,
+       "linearM": 9.2665,
+       "dCm": 0.5
+      },
+      {
+       "px": 465.5,
+       "ladderM": 10.8113,
+       "linearM": 10.7735,
+       "dCm": -3.8
+      },
+      {
+       "px": 514,
+       "ladderM": 12.05,
+       "linearM": 12.0557,
+       "dCm": 0.6
+      }
+     ],
+     "maxAbsDcmBefore": 4.4,
+     "maxAbsDcmAfter": 3.8,
+     "anchors": [
+      {
+       "fromPx": 58,
+       "toPx": 514,
+       "metres": 12.05,
+       "residualPx": -0.216658,
+       "allowedPx": 2.189122,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-horizontal-26-746c5336c5",
+        "chain-horizontal-46-65a3745113"
+       ]
+      },
+      {
+       "fromPx": 58,
+       "toPx": 357,
+       "metres": 7.9,
+       "residualPx": -0.045621,
+       "allowedPx": 2.189122,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-horizontal-46-65a3745113"
+       ]
+      },
+      {
+       "fromPx": 213.5,
+       "toPx": 327,
+       "metres": 3.01,
+       "residualPx": 0.422519,
+       "allowedPx": 2.189122,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-horizontal-310-121d616b4c"
+       ]
+      },
+      {
+       "fromPx": 408.5,
+       "toPx": 465.5,
+       "metres": 1.55,
+       "residualPx": 1.638252,
+       "allowedPx": 2.189122,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-horizontal-666-d1b9f8e0a1"
+       ]
+      }
+     ],
+     "notPrinted": 9
+    },
+    "Y": {
+     "linesBefore": [
+      {
+       "px": 221,
+       "ladderM": -1,
+       "linearM": -1.0058,
+       "dCm": -0.6
+      },
+      {
+       "px": 259,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 452,
+       "ladderM": 5.1,
+       "linearM": 5.1083,
+       "dCm": 0.8
+      },
+      {
+       "px": 523.5,
+       "ladderM": 6.9941,
+       "linearM": 7.0008,
+       "dCm": 0.7
+      },
+      {
+       "px": 735.5,
+       "ladderM": 12.61,
+       "linearM": 12.612,
+       "dCm": 0.2
+      },
+      {
+       "px": 773,
+       "ladderM": 13.6013,
+       "linearM": 13.6046,
+       "dCm": 0.3
+      }
+     ],
+     "linesAfter": [
+      {
+       "px": 221,
+       "ladderM": -1.01,
+       "linearM": -1.0046,
+       "dCm": 0.5
+      },
+      {
+       "px": 259,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 452,
+       "ladderM": 5.09,
+       "linearM": 5.1025,
+       "dCm": 1.3
+      },
+      {
+       "px": 523.5,
+       "ladderM": 6.9841,
+       "linearM": 6.9929,
+       "dCm": 0.9
+      },
+      {
+       "px": 735.5,
+       "ladderM": 12.6,
+       "linearM": 12.5977,
+       "dCm": -0.2
+      },
+      {
+       "px": 773,
+       "ladderM": 13.5914,
+       "linearM": 13.5891,
+       "dCm": -0.2
+      }
+     ],
+     "maxAbsDcmBefore": 0.8,
+     "maxAbsDcmAfter": 1.3,
+     "anchors": [
+      {
+       "fromPx": 221,
+       "toPx": 735.5,
+       "metres": 13.61,
+       "residualPx": 0.289318,
+       "allowedPx": 2.567365,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-vertical-547-41bf80a9f8"
+       ]
+      },
+      {
+       "fromPx": 259,
+       "toPx": 735.5,
+       "metres": 12.6,
+       "residualPx": -0.181219,
+       "allowedPx": 2.189122,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-vertical-547-41bf80a9f8",
+        "chain-vertical-568-c6fdb5a6f3"
+       ]
+      },
+      {
+       "fromPx": 452,
+       "toPx": 735.5,
+       "metres": 7.51,
+       "residualPx": 0.50922,
+       "allowedPx": 2.189122,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-vertical-547-41bf80a9f8"
+       ]
+      }
+     ],
+     "notPrinted": 4
+    }
+   }
+  },
+  "ciesz": {
+   "name": "Cieszynianki 12 (GE)",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-cieszyniankach-12-ge-m43d25c0636969",
+   "baseFrame": "frame-asset-rzut-ebb40feeba-0459d5961d",
+   "registration": {
+    "mppX": 0.027744,
+    "mppY": 0.02781,
+    "anchors": [
+     "X CHAIN_SEGMENT 2.5m/91px res -0.024687 w 0.424989",
+     "Y CHAIN_SEGMENT 16.6m/597px res -0.002329 w 0.502931",
+     "Y CHAIN_SEGMENT 0.8m/29px res -0.006478 w 0.509759",
+     "X CHAIN_SEGMENT 4.58m/165px res 0.002271 w 0.49284",
+     "Y CHAIN_SEGMENT 11.1m/399px res 0.003971 w 0.660605",
+     "Y CHAIN_SEGMENT 4.7m/169px res 0.000178 w 0.507264",
+     "X CHAIN_SEGMENT 2.4m/86.5px res 0.00016 w 0.467648",
+     "X CHAIN_SEGMENT 2.45m/88px res 0.008544 w 0.390641",
+     "X CHAIN_SEGMENT 4.58m/165px res 0.002271 w 0.485439"
+    ],
+    "rejected": 0
+   },
+   "extent": {
+    "x0": 193,
+    "x1": 614,
+    "y0": 81,
+    "y1": 678
+   },
+   "axes": {
+    "X": {
+     "linesBefore": [
+      {
+       "px": 193,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 231,
+       "ladderM": 1.1651,
+       "linearM": 1.0543,
+       "dCm": -11.1
+      },
+      {
+       "px": 296,
+       "ladderM": 2.8889,
+       "linearM": 2.8576,
+       "dCm": -3.1
+      },
+      {
+       "px": 321.5,
+       "ladderM": 3.5651,
+       "linearM": 3.5651,
+       "dCm": 0
+      },
+      {
+       "px": 358,
+       "ladderM": 4.58,
+       "linearM": 4.5778,
+       "dCm": -0.2
+      },
+      {
+       "px": 409.5,
+       "ladderM": 6.0151,
+       "linearM": 6.0066,
+       "dCm": -0.9
+      },
+      {
+       "px": 449,
+       "ladderM": 7.08,
+       "linearM": 7.1025,
+       "dCm": 2.2
+      },
+      {
+       "px": 504,
+       "ladderM": 8.636,
+       "linearM": 8.6284,
+       "dCm": -0.8
+      },
+      {
+       "px": 574.5,
+       "ladderM": 10.5913,
+       "linearM": 10.5843,
+       "dCm": -0.7
+      },
+      {
+       "px": 614,
+       "ladderM": 11.66,
+       "linearM": 11.6802,
+       "dCm": 2
+      }
+     ],
+     "linesAfter": [
+      {
+       "px": 193,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 231,
+       "ladderM": 1.0548,
+       "linearM": 1.0499,
+       "dCm": -0.5
+      },
+      {
+       "px": 296,
+       "ladderM": 2.7785,
+       "linearM": 2.8459,
+       "dCm": 6.7
+      },
+      {
+       "px": 321.5,
+       "ladderM": 3.4548,
+       "linearM": 3.5505,
+       "dCm": 9.6
+      },
+      {
+       "px": 358,
+       "ladderM": 4.58,
+       "linearM": 4.5589,
+       "dCm": -2.1
+      },
+      {
+       "px": 409.5,
+       "ladderM": 5.9948,
+       "linearM": 5.9819,
+       "dCm": -1.3
+      },
+      {
+       "px": 449,
+       "ladderM": 7.08,
+       "linearM": 7.0733,
+       "dCm": -0.7
+      },
+      {
+       "px": 504,
+       "ladderM": 8.6067,
+       "linearM": 8.5929,
+       "dCm": -1.4
+      },
+      {
+       "px": 574.5,
+       "ladderM": 10.5636,
+       "linearM": 10.5408,
+       "dCm": -2.3
+      },
+      {
+       "px": 614,
+       "ladderM": 11.66,
+       "linearM": 11.6322,
+       "dCm": -2.8
+      }
+     ],
+     "maxAbsDcmBefore": 11.1,
+     "maxAbsDcmAfter": 9.6,
+     "anchors": [
+      {
+       "fromPx": 193,
+       "toPx": 614,
+       "metres": 11.66,
+       "residualPx": -1.650962,
+       "allowedPx": 2.539471,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-horizontal-778-aa42d37bef"
+       ]
+      },
+      {
+       "fromPx": 193,
+       "toPx": 449,
+       "metres": 7.08,
+       "residualPx": -0.365627,
+       "allowedPx": 2.359648,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-horizontal-778-aa42d37bef"
+       ]
+      },
+      {
+       "fromPx": 358,
+       "toPx": 614,
+       "metres": 7.08,
+       "residualPx": -0.601286,
+       "allowedPx": 2.359648,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-horizontal-778-aa42d37bef"
+       ]
+      },
+      {
+       "fromPx": 231,
+       "toPx": 321.5,
+       "metres": 2.4,
+       "residualPx": -4.030232,
+       "allowedPx": 6.179824,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-horizontal-621-e02ff95df2"
+       ]
+      },
+      {
+       "fromPx": 321.5,
+       "toPx": 409.5,
+       "metres": 2.45,
+       "residualPx": -3.238524,
+       "allowedPx": 2.179824,
+       "disposition": "REJECTED_RESIDUAL",
+       "chainIds": [
+        "chain-horizontal-147-ecdd722a7c"
+       ]
+      }
+     ],
+     "notPrinted": 5
+    },
+    "Y": {
+     "linesBefore": [
+      {
+       "px": 81,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 250,
+       "ladderM": 4.7,
+       "linearM": 4.6999,
+       "dCm": 0
+      },
+      {
+       "px": 649,
+       "ladderM": 15.8,
+       "linearM": 15.7961,
+       "dCm": -0.4
+      },
+      {
+       "px": 678,
+       "ladderM": 16.6,
+       "linearM": 16.6026,
+       "dCm": 0.3
+      }
+     ],
+     "linesAfter": [
+      {
+       "px": 81,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 250,
+       "ladderM": 4.7,
+       "linearM": 4.699,
+       "dCm": -0.1
+      },
+      {
+       "px": 649,
+       "ladderM": 15.8,
+       "linearM": 15.7932,
+       "dCm": -0.7
+      },
+      {
+       "px": 678,
+       "ladderM": 16.6,
+       "linearM": 16.5996,
+       "dCm": -0.0
+      }
+     ],
+     "maxAbsDcmBefore": 0.4,
+     "maxAbsDcmAfter": 0.7,
+     "anchors": [
+      {
+       "fromPx": 81,
+       "toPx": 678,
+       "metres": 16.6,
+       "residualPx": 0.014925,
+       "allowedPx": 2.179824,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-vertical-52-040ccdb201",
+        "chain-vertical-92-b455b6f7a1"
+       ]
+      },
+      {
+       "fromPx": 81,
+       "toPx": 649,
+       "metres": 15.8,
+       "residualPx": 0.228921,
+       "allowedPx": 2.359648,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-vertical-92-b455b6f7a1"
+       ]
+      },
+      {
+       "fromPx": 250,
+       "toPx": 678,
+       "metres": 11.9,
+       "residualPx": 0.037991,
+       "allowedPx": 2.359648,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-vertical-92-b455b6f7a1"
+       ]
+      }
+     ],
+     "notPrinted": 0
+    }
+   }
+  },
+  "rary": {
+   "name": "Rarytasy 5 (G2E)",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+   "baseFrame": "frame-asset-rzut-e8520c3ad3-59a406b738",
+   "registration": {
+    "mppX": 0.027579,
+    "mppY": 0.02752,
+    "anchors": [
+     "X CHAIN_SEGMENT 2.15m/78.5px res -0.014917 w 0.359184",
+     "X CHAIN_SEGMENT 0.71m/25.5px res 0.006747 w 0.203476",
+     "Y CHAIN_SEGMENT 1.17m/43px res -0.013362 w 0.234369",
+     "X CHAIN_SEGMENT 1.14m/41px res 0.009279 w 0.228487",
+     "Y CHAIN_SEGMENT 1.6m/58px res 0.003838 w 0.514629",
+     "X CHAIN_SEGMENT 1.11m/40.5px res -0.006932 w 0.205513",
+     "X CHAIN_SEGMENT 1m/37px res -0.020407 w 0.348316",
+     "X CHAIN_SEGMENT 1.74m/65px res -0.052607 w 0.225323",
+     "Y CHAIN_SEGMENT 1.65m/60px res -0.001202 w 0.197244",
+     "X CHAIN_SEGMENT 17.21m/624px res 0.000976 w 0.23857"
+    ],
+    "rejected": 0
+   },
+   "extent": {
+    "x0": 106.5,
+    "x1": 730.5,
+    "y0": 167.5,
+    "y1": 479.5
+   },
+   "axes": {
+    "X": {
+     "linesBefore": [
+      {
+       "px": 106.5,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 146.5,
+       "ladderM": 1.1032,
+       "linearM": 1.1032,
+       "dCm": 0
+      },
+      {
+       "px": 175.5,
+       "ladderM": 2.0518,
+       "linearM": 1.903,
+       "dCm": -14.9
+      },
+      {
+       "px": 205,
+       "ladderM": 2.7244,
+       "linearM": 2.7165,
+       "dCm": -0.8
+      },
+      {
+       "px": 240.5,
+       "ladderM": 3.7918,
+       "linearM": 3.6956,
+       "dCm": -9.6
+      },
+      {
+       "px": 271.5,
+       "ladderM": 4.6442,
+       "linearM": 4.5505,
+       "dCm": -9.4
+      },
+      {
+       "px": 350,
+       "ladderM": 6.7942,
+       "linearM": 6.7155,
+       "dCm": -7.9
+      },
+      {
+       "px": 366.5,
+       "ladderM": 7.2479,
+       "linearM": 7.1705,
+       "dCm": -7.7
+      },
+      {
+       "px": 402,
+       "ladderM": 8.224,
+       "linearM": 8.1496,
+       "dCm": -7.4
+      },
+      {
+       "px": 420,
+       "ladderM": 8.7174,
+       "linearM": 8.646,
+       "dCm": -7.1
+      },
+      {
+       "px": 442.5,
+       "ladderM": 9.334,
+       "linearM": 9.2665,
+       "dCm": -6.8
+      },
+      {
+       "px": 461,
+       "ladderM": 9.8427,
+       "linearM": 9.7768,
+       "dCm": -6.6
+      },
+      {
+       "px": 487,
+       "ladderM": 10.5577,
+       "linearM": 10.4938,
+       "dCm": -6.4
+      },
+      {
+       "px": 511,
+       "ladderM": 11.2176,
+       "linearM": 11.1557,
+       "dCm": -6.2
+      },
+      {
+       "px": 547,
+       "ladderM": 12.2075,
+       "linearM": 12.1486,
+       "dCm": -5.9
+      },
+      {
+       "px": 570.5,
+       "ladderM": 12.8537,
+       "linearM": 12.7967,
+       "dCm": -5.7
+      },
+      {
+       "px": 594.5,
+       "ladderM": 13.5136,
+       "linearM": 13.4586,
+       "dCm": -5.5
+      },
+      {
+       "px": 620.5,
+       "ladderM": 14.3385,
+       "linearM": 14.1756,
+       "dCm": -16.3
+      },
+      {
+       "px": 670.5,
+       "ladderM": 15.6033,
+       "linearM": 15.5546,
+       "dCm": -4.9
+      },
+      {
+       "px": 693,
+       "ladderM": 16.3408,
+       "linearM": 16.1751,
+       "dCm": -16.6
+      },
+      {
+       "px": 730.5,
+       "ladderM": 17.21,
+       "linearM": 17.2093,
+       "dCm": -0.1
+      }
+     ],
+     "linesAfter": [
+      {
+       "px": 106.5,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 146.5,
+       "ladderM": 1.1032,
+       "linearM": 1.1031,
+       "dCm": -0.0
+      },
+      {
+       "px": 175.5,
+       "ladderM": 1.903,
+       "linearM": 1.9029,
+       "dCm": -0.0
+      },
+      {
+       "px": 205,
+       "ladderM": 2.6927,
+       "linearM": 2.7164,
+       "dCm": 2.4
+      },
+      {
+       "px": 240.5,
+       "ladderM": 3.643,
+       "linearM": 3.6955,
+       "dCm": 5.3
+      },
+      {
+       "px": 271.5,
+       "ladderM": 4.5507,
+       "linearM": 4.5504,
+       "dCm": -0.0
+      },
+      {
+       "px": 350,
+       "ladderM": 6.7007,
+       "linearM": 6.7152,
+       "dCm": 1.4
+      },
+      {
+       "px": 366.5,
+       "ladderM": 7.1564,
+       "linearM": 7.1703,
+       "dCm": 1.4
+      },
+      {
+       "px": 402,
+       "ladderM": 8.1369,
+       "linearM": 8.1493,
+       "dCm": 1.2
+      },
+      {
+       "px": 420,
+       "ladderM": 8.6303,
+       "linearM": 8.6457,
+       "dCm": 1.5
+      },
+      {
+       "px": 442.5,
+       "ladderM": 9.2469,
+       "linearM": 9.2662,
+       "dCm": 1.9
+      },
+      {
+       "px": 461,
+       "ladderM": 9.7585,
+       "linearM": 9.7764,
+       "dCm": 1.8
+      },
+      {
+       "px": 487,
+       "ladderM": 10.4773,
+       "linearM": 10.4934,
+       "dCm": 1.6
+      },
+      {
+       "px": 511,
+       "ladderM": 11.1409,
+       "linearM": 11.1553,
+       "dCm": 1.4
+      },
+      {
+       "px": 547,
+       "ladderM": 12.1363,
+       "linearM": 12.1481,
+       "dCm": 1.2
+      },
+      {
+       "px": 570.5,
+       "ladderM": 12.7861,
+       "linearM": 12.7962,
+       "dCm": 1.0
+      },
+      {
+       "px": 594.5,
+       "ladderM": 13.4497,
+       "linearM": 13.4581,
+       "dCm": 0.8
+      },
+      {
+       "px": 620.5,
+       "ladderM": 14.1686,
+       "linearM": 14.1751,
+       "dCm": 0.7
+      },
+      {
+       "px": 670.5,
+       "ladderM": 15.551,
+       "linearM": 15.554,
+       "dCm": 0.3
+      },
+      {
+       "px": 693,
+       "ladderM": 16.261,
+       "linearM": 16.1745,
+       "dCm": -8.7
+      },
+      {
+       "px": 730.5,
+       "ladderM": 17.21,
+       "linearM": 17.2087,
+       "dCm": -0.1
+      }
+     ],
+     "maxAbsDcmBefore": 16.6,
+     "maxAbsDcmAfter": 8.7,
+     "anchors": [
+      {
+       "fromPx": 106.5,
+       "toPx": 730.5,
+       "metres": 17.21,
+       "residualPx": 0.048154,
+       "allowedPx": 2.181304,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-horizontal-781-02b024f369"
+       ]
+      },
+      {
+       "fromPx": 271.5,
+       "toPx": 350,
+       "metres": 2.15,
+       "residualPx": -0.545365,
+       "allowedPx": 2.181304,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-horizontal-208-afad7a6a99"
+       ]
+      },
+      {
+       "fromPx": 175.5,
+       "toPx": 240.5,
+       "metres": 1.74,
+       "residualPx": -1.911243,
+       "allowedPx": 2.181304,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-horizontal-208-afad7a6a99"
+       ]
+      },
+      {
+       "fromPx": 402,
+       "toPx": 442.5,
+       "metres": 1.11,
+       "residualPx": -0.3117,
+       "allowedPx": 2.181304,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-horizontal-208-afad7a6a99"
+       ]
+      },
+      {
+       "fromPx": 670.5,
+       "toPx": 693,
+       "metres": 0.71,
+       "residualPx": 3.186822,
+       "allowedPx": 5.181304,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-horizontal-433-b85b2bb9a1"
+       ]
+      }
+     ],
+     "notPrinted": 112
+    },
+    "Y": {
+     "linesBefore": [
+      {
+       "px": 167.5,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 210.5,
+       "ladderM": 1.1834,
+       "linearM": 1.1834,
+       "dCm": 0
+      },
+      {
+       "px": 270.5,
+       "ladderM": 2.8334,
+       "linearM": 2.8346,
+       "dCm": 0.1
+      },
+      {
+       "px": 322.5,
+       "ladderM": 4.2656,
+       "linearM": 4.2656,
+       "dCm": 0
+      },
+      {
+       "px": 380.5,
+       "ladderM": 5.8656,
+       "linearM": 5.8618,
+       "dCm": -0.4
+      },
+      {
+       "px": 463,
+       "ladderM": 8.1322,
+       "linearM": 8.1322,
+       "dCm": 0
+      },
+      {
+       "px": 479.5,
+       "ladderM": 8.5,
+       "linearM": 8.5862,
+       "dCm": 8.6
+      },
+      {
+       "px": 522.5,
+       "ladderM": 9.7555,
+       "linearM": 9.7696,
+       "dCm": 1.4
+      },
+      {
+       "px": 702,
+       "ladderM": 14.7,
+       "linearM": 14.7094,
+       "dCm": 0.9
+      }
+     ],
+     "linesAfter": [
+      {
+       "px": 167.5,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 210.5,
+       "ladderM": 1.1715,
+       "linearM": 1.1859,
+       "dCm": 1.4
+      },
+      {
+       "px": 270.5,
+       "ladderM": 2.8215,
+       "linearM": 2.8405,
+       "dCm": 1.9
+      },
+      {
+       "px": 322.5,
+       "ladderM": 4.2343,
+       "linearM": 4.2746,
+       "dCm": 4.0
+      },
+      {
+       "px": 380.5,
+       "ladderM": 5.8343,
+       "linearM": 5.8741,
+       "dCm": 4.0
+      },
+      {
+       "px": 463,
+       "ladderM": 8.0557,
+       "linearM": 8.1493,
+       "dCm": 9.4
+      },
+      {
+       "px": 479.5,
+       "ladderM": 8.5,
+       "linearM": 8.6043,
+       "dCm": 10.4
+      },
+      {
+       "px": 522.5,
+       "ladderM": 9.67,
+       "linearM": 9.7902,
+       "dCm": 12.0
+      },
+      {
+       "px": 702,
+       "ladderM": 14.7,
+       "linearM": 14.7404,
+       "dCm": 4.0
+      }
+     ],
+     "maxAbsDcmBefore": 8.6,
+     "maxAbsDcmAfter": 12.0,
+     "anchors": [
+      {
+       "fromPx": 167.5,
+       "toPx": 702,
+       "metres": 14.7,
+       "residualPx": -1.466423,
+       "allowedPx": 2.181304,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-vertical-49-2fc5fc5478",
+        "chain-vertical-70-7233fc8bd9"
+       ]
+      },
+      {
+       "fromPx": 167.5,
+       "toPx": 479.5,
+       "metres": 8.5,
+       "residualPx": -2.927321,
+       "allowedPx": 5.681304,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-vertical-70-7233fc8bd9"
+       ]
+      },
+      {
+       "fromPx": 210.5,
+       "toPx": 270.5,
+       "metres": 1.65,
+       "residualPx": 0.557858,
+       "allowedPx": 2.181304,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-vertical-164-d81df082ad"
+       ]
+      },
+      {
+       "fromPx": 322.5,
+       "toPx": 380.5,
+       "metres": 1.6,
+       "residualPx": 0.875376,
+       "allowedPx": 2.181304,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-vertical-144-b55ce7cf5b"
+       ]
+      },
+      {
+       "fromPx": 479.5,
+       "toPx": 522.5,
+       "metres": 1.17,
+       "residualPx": -1.022636,
+       "allowedPx": 2.181304,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-vertical-217-60e9212a08"
+       ]
+      }
+     ],
+     "notPrinted": 2
+    }
+   }
+  },
+  "trytomach": {
+   "name": "Trytomy (G)",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-trytomach-g-m6802645623649",
+   "baseFrame": "frame-asset-rzut-de83490b21-31713159fc",
+   "registration": {
+    "mppX": 0.021347,
+    "mppY": 0.021324,
+    "anchors": [
+     "Y CHAIN_SEGMENT 1.08m/50px res 0.013816 w 0.342685",
+     "Y CHAIN_SEGMENT 0.74m/33px res 0.036319 w 0.103499",
+     "Y CHAIN_SEGMENT 1.17m/55px res -0.002802 w 0.231759",
+     "Y CHAIN_SEGMENT 7.25m/340px res -0.000049 w 0.414019",
+     "X CHAIN_SEGMENT 3.51m/164.5px res -0.001662 w 0.367434",
+     "X CHAIN_SEGMENT 1.18m/54.5px res 0.016562 w 0.335984",
+     "Y CHAIN_SEGMENT 2.13m/100px res -0.002367 w 0.490961"
+    ],
+    "rejected": 0
+   },
+   "extent": {
+    "x0": 120,
+    "x1": 728,
+    "y0": 219,
+    "y1": 559
+   },
+   "axes": {
+    "X": {
+     "linesBefore": [
+      {
+       "px": 120,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 156,
+       "ladderM": 0.7676,
+       "linearM": 0.7685,
+       "dCm": 0.1
+      },
+      {
+       "px": 198.5,
+       "ladderM": 1.6738,
+       "linearM": 1.6757,
+       "dCm": 0.2
+      },
+      {
+       "px": 298.5,
+       "ladderM": 3.8075,
+       "linearM": 3.8104,
+       "dCm": 0.3
+      },
+      {
+       "px": 363,
+       "ladderM": 5.1838,
+       "linearM": 5.1873,
+       "dCm": 0.4
+      },
+      {
+       "px": 431.5,
+       "ladderM": 6.6623,
+       "linearM": 6.6496,
+       "dCm": -1.3
+      },
+      {
+       "px": 470.5,
+       "ladderM": 7.4939,
+       "linearM": 7.4821,
+       "dCm": -1.2
+      },
+      {
+       "px": 494.5,
+       "ladderM": 8.0056,
+       "linearM": 7.9945,
+       "dCm": -1.1
+      },
+      {
+       "px": 527.5,
+       "ladderM": 8.7092,
+       "linearM": 8.6989,
+       "dCm": -1
+      },
+      {
+       "px": 728,
+       "ladderM": 12.9893,
+       "linearM": 12.979,
+       "dCm": -1
+      }
+     ],
+     "linesAfter": [
+      {
+       "px": 120,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 156,
+       "ladderM": 0.7678,
+       "linearM": 0.7678,
+       "dCm": 0.0
+      },
+      {
+       "px": 198.5,
+       "ladderM": 1.6742,
+       "linearM": 1.6742,
+       "dCm": 0.0
+      },
+      {
+       "px": 298.5,
+       "ladderM": 3.808,
+       "linearM": 3.807,
+       "dCm": -0.1
+      },
+      {
+       "px": 363,
+       "ladderM": 5.1842,
+       "linearM": 5.1827,
+       "dCm": -0.2
+      },
+      {
+       "px": 431.5,
+       "ladderM": 6.6452,
+       "linearM": 6.6437,
+       "dCm": -0.2
+      },
+      {
+       "px": 470.5,
+       "ladderM": 7.477,
+       "linearM": 7.4755,
+       "dCm": -0.2
+      },
+      {
+       "px": 494.5,
+       "ladderM": 7.9889,
+       "linearM": 7.9873,
+       "dCm": -0.2
+      },
+      {
+       "px": 527.5,
+       "ladderM": 8.6927,
+       "linearM": 8.6912,
+       "dCm": -0.2
+      },
+      {
+       "px": 728,
+       "ladderM": 12.969,
+       "linearM": 12.9674,
+       "dCm": -0.2
+      }
+     ],
+     "maxAbsDcmBefore": 1.3,
+     "maxAbsDcmAfter": 0.2,
+     "anchors": [
+      {
+       "fromPx": 198.5,
+       "toPx": 363,
+       "metres": 3.51,
+       "residualPx": 0.072393,
+       "allowedPx": 2.234434,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-horizontal-268-6f18edc8ea"
+       ]
+      }
+     ],
+     "notPrinted": 27
+    },
+    "Y": {
+     "linesBefore": [
+      {
+       "px": 219,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 265,
+       "ladderM": 0.9809,
+       "linearM": 0.9809,
+       "dCm": 0
+      },
+      {
+       "px": 289.5,
+       "ladderM": 1.5033,
+       "linearM": 1.5033,
+       "dCm": 0
+      },
+      {
+       "px": 342,
+       "ladderM": 2.6216,
+       "linearM": 2.6229,
+       "dCm": 0.1
+      },
+      {
+       "px": 389.5,
+       "ladderM": 3.6333,
+       "linearM": 3.6357,
+       "dCm": 0.2
+      },
+      {
+       "px": 419.5,
+       "ladderM": 4.2755,
+       "linearM": 4.2755,
+       "dCm": 0
+      },
+      {
+       "px": 456.5,
+       "ladderM": 5.0798,
+       "linearM": 5.0644,
+       "dCm": -1.5
+      },
+      {
+       "px": 506.5,
+       "ladderM": 6.1598,
+       "linearM": 6.1307,
+       "dCm": -2.9
+      },
+      {
+       "px": 559,
+       "ladderM": 7.25,
+       "linearM": 7.2502,
+       "dCm": 0
+      }
+     ],
+     "linesAfter": [
+      {
+       "px": 219,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 265,
+       "ladderM": 0.9809,
+       "linearM": 0.9811,
+       "dCm": 0.0
+      },
+      {
+       "px": 289.5,
+       "ladderM": 1.5033,
+       "linearM": 1.5036,
+       "dCm": 0.0
+      },
+      {
+       "px": 342,
+       "ladderM": 2.6216,
+       "linearM": 2.6233,
+       "dCm": 0.2
+      },
+      {
+       "px": 389.5,
+       "ladderM": 3.6333,
+       "linearM": 3.6364,
+       "dCm": 0.3
+      },
+      {
+       "px": 419.5,
+       "ladderM": 4.2734,
+       "linearM": 4.2763,
+       "dCm": 0.3
+      },
+      {
+       "px": 456.5,
+       "ladderM": 5.0629,
+       "linearM": 5.0654,
+       "dCm": 0.3
+      },
+      {
+       "px": 506.5,
+       "ladderM": 6.1429,
+       "linearM": 6.1318,
+       "dCm": -1.1
+      },
+      {
+       "px": 559,
+       "ladderM": 7.25,
+       "linearM": 7.2515,
+       "dCm": 0.2
+      }
+     ],
+     "maxAbsDcmBefore": 2.9,
+     "maxAbsDcmAfter": 1.1,
+     "anchors": [
+      {
+       "fromPx": 219,
+       "toPx": 559,
+       "metres": 7.25,
+       "residualPx": -0.071268,
+       "allowedPx": 2.234434,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-vertical-60-c86864d4f9"
+       ]
+      },
+      {
+       "fromPx": 289.5,
+       "toPx": 389.5,
+       "metres": 2.13,
+       "residualPx": -0.110322,
+       "allowedPx": 2.234434,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-vertical-363-01566c36b7"
+       ]
+      },
+      {
+       "fromPx": 456.5,
+       "toPx": 506.5,
+       "metres": 1.08,
+       "residualPx": 0.615599,
+       "allowedPx": 2.234434,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-vertical-363-9355a1cc83",
+        "chain-vertical-576-3d1e102f5a"
+       ]
+      }
+     ],
+     "notPrinted": 2
+    }
+   }
+  },
+  "arganiach": {
+   "name": "Argania (G2E)",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-arganiach-g2e-m32b290f26a4e8",
+   "baseFrame": "frame-asset-rzut-5f20c3d65b-4e18ac5811",
+   "registration": {
+    "mppX": 0.026892,
+    "mppY": 0.02686,
+    "anchors": [
+     "Y CHAIN_SEGMENT 0.56m/23px res -0.057772 w 0.256151",
+     "Y CHAIN_SEGMENT 3.7m/137px res 0.020225 w 0.28624",
+     "Y CHAIN_SEGMENT 12.3m/458px res -0.001728 w 0.412749",
+     "X CHAIN_SEGMENT 14.2m/528px res 0.001228 w 0.312339",
+     "X CHAIN_SEGMENT 3.01m/114px res -0.055644 w 0.147847",
+     "Y CHAIN_SEGMENT 3.15m/116.5px res 0.020849 w 0.172404"
+    ],
+    "rejected": 0
+   },
+   "extent": {
+    "x0": 118,
+    "y0": 167,
+    "x1": 646,
+    "y1": 625
+   },
+   "axes": {
+    "X": {
+     "linesBefore": [
+      {
+       "px": 118,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 127,
+       "ladderM": 0.242,
+       "linearM": 0.242,
+       "dCm": 0
+      },
+      {
+       "px": 141.5,
+       "ladderM": 0.632,
+       "linearM": 0.632,
+       "dCm": 0
+      },
+      {
+       "px": 185,
+       "ladderM": 1.8018,
+       "linearM": 1.8018,
+       "dCm": 0
+      },
+      {
+       "px": 209,
+       "ladderM": 2.4354,
+       "linearM": 2.4472,
+       "dCm": 1.2
+      },
+      {
+       "px": 262.5,
+       "ladderM": 3.848,
+       "linearM": 3.8859,
+       "dCm": 3.8
+      },
+      {
+       "px": 272,
+       "ladderM": 4.0989,
+       "linearM": 4.1414,
+       "dCm": 4.2
+      },
+      {
+       "px": 286,
+       "ladderM": 4.4685,
+       "linearM": 4.5179,
+       "dCm": 4.9
+      },
+      {
+       "px": 292.5,
+       "ladderM": 4.6401,
+       "linearM": 4.6927,
+       "dCm": 5.3
+      },
+      {
+       "px": 299,
+       "ladderM": 4.8118,
+       "linearM": 4.8675,
+       "dCm": 5.6
+      },
+      {
+       "px": 314,
+       "ladderM": 5.2176,
+       "linearM": 5.2708,
+       "dCm": 5.3
+      },
+      {
+       "px": 329,
+       "ladderM": 5.6234,
+       "linearM": 5.6742,
+       "dCm": 5.1
+      },
+      {
+       "px": 337.5,
+       "ladderM": 5.8534,
+       "linearM": 5.9028,
+       "dCm": 4.9
+      },
+      {
+       "px": 360,
+       "ladderM": 6.4621,
+       "linearM": 6.5079,
+       "dCm": 4.6
+      },
+      {
+       "px": 374,
+       "ladderM": 6.8409,
+       "linearM": 6.8844,
+       "dCm": 4.3
+      },
+      {
+       "px": 395.25,
+       "ladderM": 7.4158,
+       "linearM": 7.4558,
+       "dCm": 4
+      },
+      {
+       "px": 411,
+       "ladderM": 7.842,
+       "linearM": 7.8794,
+       "dCm": 3.7
+      },
+      {
+       "px": 426,
+       "ladderM": 8.2478,
+       "linearM": 8.2827,
+       "dCm": 3.5
+      },
+      {
+       "px": 433,
+       "ladderM": 8.4372,
+       "linearM": 8.471,
+       "dCm": 3.4
+      },
+      {
+       "px": 441,
+       "ladderM": 8.6536,
+       "linearM": 8.6861,
+       "dCm": 3.2
+      },
+      {
+       "px": 454,
+       "ladderM": 9.0054,
+       "linearM": 9.0357,
+       "dCm": 3
+      },
+      {
+       "px": 473,
+       "ladderM": 9.5194,
+       "linearM": 9.5467,
+       "dCm": 2.7
+      },
+      {
+       "px": 486.5,
+       "ladderM": 9.8847,
+       "linearM": 9.9097,
+       "dCm": 2.5
+      },
+      {
+       "px": 499.5,
+       "ladderM": 10.2364,
+       "linearM": 10.2593,
+       "dCm": 2.3
+      },
+      {
+       "px": 528,
+       "ladderM": 11.0075,
+       "linearM": 11.0257,
+       "dCm": 1.8
+      },
+      {
+       "px": 538,
+       "ladderM": 11.278,
+       "linearM": 11.2946,
+       "dCm": 1.7
+      },
+      {
+       "px": 546.5,
+       "ladderM": 11.508,
+       "linearM": 11.5232,
+       "dCm": 1.5
+      },
+      {
+       "px": 562,
+       "ladderM": 11.9273,
+       "linearM": 11.94,
+       "dCm": 1.3
+      },
+      {
+       "px": 576.5,
+       "ladderM": 12.3196,
+       "linearM": 12.33,
+       "dCm": 1
+      },
+      {
+       "px": 583.5,
+       "ladderM": 12.509,
+       "linearM": 12.5182,
+       "dCm": 0.9
+      },
+      {
+       "px": 610,
+       "ladderM": 13.226,
+       "linearM": 13.2309,
+       "dCm": 0.5
+      },
+      {
+       "px": 646,
+       "ladderM": 14.2,
+       "linearM": 14.199,
+       "dCm": -0.1
+      }
+     ],
+     "linesAfter": [
+      {
+       "px": 118,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 127,
+       "ladderM": 0.242,
+       "linearM": 0.2419,
+       "dCm": -0.0
+      },
+      {
+       "px": 141.5,
+       "ladderM": 0.632,
+       "linearM": 0.6316,
+       "dCm": -0.0
+      },
+      {
+       "px": 185,
+       "ladderM": 1.8019,
+       "linearM": 1.8008,
+       "dCm": -0.1
+      },
+      {
+       "px": 209,
+       "ladderM": 2.4356,
+       "linearM": 2.4459,
+       "dCm": 1.0
+      },
+      {
+       "px": 262.5,
+       "ladderM": 3.8482,
+       "linearM": 3.8839,
+       "dCm": 3.6
+      },
+      {
+       "px": 272,
+       "ladderM": 4.099,
+       "linearM": 4.1392,
+       "dCm": 4.0
+      },
+      {
+       "px": 286,
+       "ladderM": 4.4686,
+       "linearM": 4.5155,
+       "dCm": 4.7
+      },
+      {
+       "px": 292.5,
+       "ladderM": 4.6403,
+       "linearM": 4.6902,
+       "dCm": 5.0
+      },
+      {
+       "px": 299,
+       "ladderM": 4.8119,
+       "linearM": 4.8649,
+       "dCm": 5.3
+      },
+      {
+       "px": 314,
+       "ladderM": 5.2177,
+       "linearM": 5.2681,
+       "dCm": 5.0
+      },
+      {
+       "px": 329,
+       "ladderM": 5.6235,
+       "linearM": 5.6713,
+       "dCm": 4.8
+      },
+      {
+       "px": 337.5,
+       "ladderM": 5.8535,
+       "linearM": 5.8997,
+       "dCm": 4.6
+      },
+      {
+       "px": 360,
+       "ladderM": 6.4623,
+       "linearM": 6.5045,
+       "dCm": 4.2
+      },
+      {
+       "px": 374,
+       "ladderM": 6.841,
+       "linearM": 6.8808,
+       "dCm": 4.0
+      },
+      {
+       "px": 395.25,
+       "ladderM": 7.4159,
+       "linearM": 7.4519,
+       "dCm": 3.6
+      },
+      {
+       "px": 411,
+       "ladderM": 7.8421,
+       "linearM": 7.8753,
+       "dCm": 3.3
+      },
+      {
+       "px": 426,
+       "ladderM": 8.2479,
+       "linearM": 8.2784,
+       "dCm": 3.0
+      },
+      {
+       "px": 433,
+       "ladderM": 8.4373,
+       "linearM": 8.4666,
+       "dCm": 2.9
+      },
+      {
+       "px": 441,
+       "ladderM": 8.6537,
+       "linearM": 8.6816,
+       "dCm": 2.8
+      },
+      {
+       "px": 454,
+       "ladderM": 9.0054,
+       "linearM": 9.031,
+       "dCm": 2.6
+      },
+      {
+       "px": 473,
+       "ladderM": 9.5195,
+       "linearM": 9.5417,
+       "dCm": 2.2
+      },
+      {
+       "px": 486.5,
+       "ladderM": 9.8847,
+       "linearM": 9.9045,
+       "dCm": 2.0
+      },
+      {
+       "px": 499.5,
+       "ladderM": 10.2364,
+       "linearM": 10.254,
+       "dCm": 1.8
+      },
+      {
+       "px": 528,
+       "ladderM": 11.0075,
+       "linearM": 11.02,
+       "dCm": 1.2
+      },
+      {
+       "px": 538,
+       "ladderM": 11.2781,
+       "linearM": 11.2888,
+       "dCm": 1.1
+      },
+      {
+       "px": 546.5,
+       "ladderM": 11.508,
+       "linearM": 11.5172,
+       "dCm": 0.9
+      },
+      {
+       "px": 562,
+       "ladderM": 11.9274,
+       "linearM": 11.9338,
+       "dCm": 0.6
+      },
+      {
+       "px": 576.5,
+       "ladderM": 12.3197,
+       "linearM": 12.3236,
+       "dCm": 0.4
+      },
+      {
+       "px": 583.5,
+       "ladderM": 12.5091,
+       "linearM": 12.5117,
+       "dCm": 0.3
+      },
+      {
+       "px": 610,
+       "ladderM": 13.226,
+       "linearM": 13.224,
+       "dCm": -0.2
+      },
+      {
+       "px": 646,
+       "ladderM": 14.2,
+       "linearM": 14.1916,
+       "dCm": -0.8
+      }
+     ],
+     "maxAbsDcmBefore": 5.6,
+     "maxAbsDcmAfter": 5.3,
+     "anchors": [
+      {
+       "fromPx": 118,
+       "toPx": 646,
+       "metres": 14.2,
+       "residualPx": 0.313119,
+       "allowedPx": 2.186026,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-horizontal-769-3fff9af2f2"
+       ]
+      },
+      {
+       "fromPx": 185,
+       "toPx": 299,
+       "metres": 3.01,
+       "residualPx": -2.080106,
+       "allowedPx": 2.186026,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-horizontal-222-07cfefd20d"
+       ]
+      }
+     ],
+     "notPrinted": 0
+    },
+    "Y": {
+     "linesBefore": [
+      {
+       "px": 167,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 215.352941,
+       "ladderM": 1.2988,
+       "linearM": 1.2988,
+       "dCm": 0
+      },
+      {
+       "px": 222.5,
+       "ladderM": 1.4907,
+       "linearM": 1.4907,
+       "dCm": 0
+      },
+      {
+       "px": 243,
+       "ladderM": 2.0414,
+       "linearM": 2.0414,
+       "dCm": 0
+      },
+      {
+       "px": 271.5,
+       "ladderM": 2.812,
+       "linearM": 2.8069,
+       "dCm": -0.5
+      },
+      {
+       "px": 286.5,
+       "ladderM": 3.2175,
+       "linearM": 3.2098,
+       "dCm": -0.8
+      },
+      {
+       "px": 296.625,
+       "ladderM": 3.4913,
+       "linearM": 3.4817,
+       "dCm": -1
+      },
+      {
+       "px": 309,
+       "ladderM": 3.8259,
+       "linearM": 3.8141,
+       "dCm": -1.2
+      },
+      {
+       "px": 315.666667,
+       "ladderM": 4.0062,
+       "linearM": 3.9932,
+       "dCm": -1.3
+      },
+      {
+       "px": 330.5,
+       "ladderM": 4.4072,
+       "linearM": 4.3916,
+       "dCm": -1.6
+      },
+      {
+       "px": 359.5,
+       "ladderM": 5.1914,
+       "linearM": 5.1706,
+       "dCm": -2.1
+      },
+      {
+       "px": 377,
+       "ladderM": 5.6406,
+       "linearM": 5.6406,
+       "dCm": 0
+      },
+      {
+       "px": 400,
+       "ladderM": 6.2006,
+       "linearM": 6.2584,
+       "dCm": 5.8
+      },
+      {
+       "px": 419,
+       "ladderM": 6.7233,
+       "linearM": 6.7687,
+       "dCm": 4.5
+      },
+      {
+       "px": 447,
+       "ladderM": 7.4937,
+       "linearM": 7.5208,
+       "dCm": 2.7
+      },
+      {
+       "px": 471,
+       "ladderM": 8.154,
+       "linearM": 8.1654,
+       "dCm": 1.1
+      },
+      {
+       "px": 488,
+       "ladderM": 8.6217,
+       "linearM": 8.6221,
+       "dCm": 0
+      },
+      {
+       "px": 496,
+       "ladderM": 8.8378,
+       "linearM": 8.8369,
+       "dCm": -0.1
+      },
+      {
+       "px": 507,
+       "ladderM": 9.1348,
+       "linearM": 9.1324,
+       "dCm": -0.2
+      },
+      {
+       "px": 515.5,
+       "ladderM": 9.3644,
+       "linearM": 9.3607,
+       "dCm": -0.4
+      },
+      {
+       "px": 536,
+       "ladderM": 9.918,
+       "linearM": 9.9113,
+       "dCm": -0.7
+      },
+      {
+       "px": 551.5,
+       "ladderM": 10.3367,
+       "linearM": 10.3277,
+       "dCm": -0.9
+      },
+      {
+       "px": 588,
+       "ladderM": 11.3224,
+       "linearM": 11.3081,
+       "dCm": -1.4
+      },
+      {
+       "px": 625,
+       "ladderM": 12.3217,
+       "linearM": 12.3019,
+       "dCm": -2
+      }
+     ],
+     "linesAfter": [
+      {
+       "px": 167,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 215.352941,
+       "ladderM": 1.2996,
+       "linearM": 1.2996,
+       "dCm": 0.0
+      },
+      {
+       "px": 222.5,
+       "ladderM": 1.4917,
+       "linearM": 1.4917,
+       "dCm": 0.0
+      },
+      {
+       "px": 243,
+       "ladderM": 2.0427,
+       "linearM": 2.0427,
+       "dCm": 0.0
+      },
+      {
+       "px": 271.5,
+       "ladderM": 2.8133,
+       "linearM": 2.8088,
+       "dCm": -0.4
+      },
+      {
+       "px": 286.5,
+       "ladderM": 3.2189,
+       "linearM": 3.2119,
+       "dCm": -0.7
+      },
+      {
+       "px": 296.625,
+       "ladderM": 3.4927,
+       "linearM": 3.4841,
+       "dCm": -0.9
+      },
+      {
+       "px": 309,
+       "ladderM": 3.8273,
+       "linearM": 3.8167,
+       "dCm": -1.1
+      },
+      {
+       "px": 315.666667,
+       "ladderM": 4.0075,
+       "linearM": 3.9959,
+       "dCm": -1.2
+      },
+      {
+       "px": 330.5,
+       "ladderM": 4.4086,
+       "linearM": 4.3946,
+       "dCm": -1.4
+      },
+      {
+       "px": 359.5,
+       "ladderM": 5.1927,
+       "linearM": 5.174,
+       "dCm": -1.9
+      },
+      {
+       "px": 377,
+       "ladderM": 5.6605,
+       "linearM": 5.6444,
+       "dCm": -1.6
+      },
+      {
+       "px": 400,
+       "ladderM": 6.2205,
+       "linearM": 6.2626,
+       "dCm": 4.2
+      },
+      {
+       "px": 419,
+       "ladderM": 6.7403,
+       "linearM": 6.7733,
+       "dCm": 3.3
+      },
+      {
+       "px": 447,
+       "ladderM": 7.5063,
+       "linearM": 7.5258,
+       "dCm": 1.9
+      },
+      {
+       "px": 471,
+       "ladderM": 8.1628,
+       "linearM": 8.1709,
+       "dCm": 0.8
+      },
+      {
+       "px": 488,
+       "ladderM": 8.6278,
+       "linearM": 8.6278,
+       "dCm": 0.0
+      },
+      {
+       "px": 496,
+       "ladderM": 8.8439,
+       "linearM": 8.8429,
+       "dCm": -0.1
+      },
+      {
+       "px": 507,
+       "ladderM": 9.141,
+       "linearM": 9.1385,
+       "dCm": -0.2
+      },
+      {
+       "px": 515.5,
+       "ladderM": 9.3705,
+       "linearM": 9.367,
+       "dCm": -0.3
+      },
+      {
+       "px": 536,
+       "ladderM": 9.9242,
+       "linearM": 9.918,
+       "dCm": -0.6
+      },
+      {
+       "px": 551.5,
+       "ladderM": 10.3428,
+       "linearM": 10.3346,
+       "dCm": -0.8
+      },
+      {
+       "px": 588,
+       "ladderM": 11.3286,
+       "linearM": 11.3156,
+       "dCm": -1.3
+      },
+      {
+       "px": 625,
+       "ladderM": 12.3278,
+       "linearM": 12.3101,
+       "dCm": -1.8
+      }
+     ],
+     "maxAbsDcmBefore": 5.8,
+     "maxAbsDcmAfter": 4.2,
+     "anchors": [
+      {
+       "fromPx": 488,
+       "toPx": 625,
+       "metres": 3.7,
+       "residualPx": 0.659052,
+       "allowedPx": 2.186026,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-vertical-73-dc041cc85d"
+       ]
+      },
+      {
+       "fromPx": 243,
+       "toPx": 359.5,
+       "metres": 3.15,
+       "residualPx": 0.69622,
+       "allowedPx": 2.186026,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-vertical-185-1ac7d41317"
+       ]
+      },
+      {
+       "fromPx": 377,
+       "toPx": 400,
+       "metres": 0.56,
+       "residualPx": -2.040501,
+       "allowedPx": 2.186026,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-vertical-185-1ac7d41317"
+       ]
+      }
+     ],
+     "notPrinted": 2
+    }
+   }
+  },
+  "sasankach3": {
+   "name": "Sasanki 3 (G)",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-sasankach-3-g-mb292397cb1840",
+   "baseFrame": "frame-asset-rzut-0e011b73e9-f8d5d43c86",
+   "registration": {
+    "mppX": 0.019528,
+    "mppY": 0.01954,
+    "anchors": [
+     "Y CHAIN_SEGMENT 0.8m/41px res -0.001151 w 0.176849",
+     "X CHAIN_SEGMENT 2.14m/109px res 0.011456 w 0.279664",
+     "Y CHAIN_SEGMENT 2.47m/127px res -0.011613 w 0.17964",
+     "Y CHAIN_SEGMENT 8.95m/458px res 0.000563 w 0.306279",
+     "Y CHAIN_SEGMENT 0.7m/36px res -0.003449 w 0.483344",
+     "X CHAIN_SEGMENT 3.85m/197px res 0.002998 w 0.351296",
+     "X CHAIN_SEGMENT 7.75m/397px res -0.002588 w 0.547353",
+     "X CHAIN_SEGMENT 2.61m/131.5px res 0.042077 w 0.19834"
+    ],
+    "rejected": 0
+   },
+   "extent": {
+    "x0": 90,
+    "x1": 684,
+    "y0": 140,
+    "y1": 675
+   },
+   "axes": {
+    "X": {
+     "linesBefore": [
+      {
+       "px": 90,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 214.5,
+       "ladderM": 2.4312,
+       "linearM": 2.4312,
+       "dCm": 0
+      },
+      {
+       "px": 238.5,
+       "ladderM": 2.8999,
+       "linearM": 2.8999,
+       "dCm": 0
+      },
+      {
+       "px": 322,
+       "ladderM": 4.5301,
+       "linearM": 4.5305,
+       "dCm": 0
+      },
+      {
+       "px": 431,
+       "ladderM": 6.6701,
+       "linearM": 6.659,
+       "dCm": -1.1
+      },
+      {
+       "px": 487,
+       "ladderM": 7.75,
+       "linearM": 7.7526,
+       "dCm": 0.3
+      },
+      {
+       "px": 514.5,
+       "ladderM": 8.2896,
+       "linearM": 8.2896,
+       "dCm": 0
+      },
+      {
+       "px": 646,
+       "ladderM": 10.8996,
+       "linearM": 10.8576,
+       "dCm": -4.2
+      },
+      {
+       "px": 684,
+       "ladderM": 11.6,
+       "linearM": 11.5996,
+       "dCm": 0
+      }
+     ],
+     "linesAfter": [
+      {
+       "px": 90,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 214.5,
+       "ladderM": 2.4304,
+       "linearM": 2.4321,
+       "dCm": 0.2
+      },
+      {
+       "px": 238.5,
+       "ladderM": 2.8989,
+       "linearM": 2.9009,
+       "dCm": 0.2
+      },
+      {
+       "px": 322,
+       "ladderM": 4.529,
+       "linearM": 4.5321,
+       "dCm": 0.3
+      },
+      {
+       "px": 431,
+       "ladderM": 6.669,
+       "linearM": 6.6614,
+       "dCm": -0.8
+      },
+      {
+       "px": 487,
+       "ladderM": 7.75,
+       "linearM": 7.7554,
+       "dCm": 0.5
+      },
+      {
+       "px": 514.5,
+       "ladderM": 8.2874,
+       "linearM": 8.2926,
+       "dCm": 0.5
+      },
+      {
+       "px": 646,
+       "ladderM": 10.8974,
+       "linearM": 10.8615,
+       "dCm": -3.6
+      },
+      {
+       "px": 684,
+       "ladderM": 11.6,
+       "linearM": 11.6038,
+       "dCm": 0.4
+      }
+     ],
+     "maxAbsDcmBefore": 4.2,
+     "maxAbsDcmAfter": 3.6,
+     "anchors": [
+      {
+       "fromPx": 90,
+       "toPx": 684,
+       "metres": 11.6,
+       "residualPx": -0.194011,
+       "allowedPx": 2.511902,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-horizontal-781-132d3d027a"
+       ]
+      },
+      {
+       "fromPx": 90,
+       "toPx": 487,
+       "metres": 7.75,
+       "residualPx": -0.146504,
+       "allowedPx": 2.255951,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-horizontal-781-132d3d027a"
+       ]
+      },
+      {
+       "fromPx": 514.5,
+       "toPx": 646,
+       "metres": 2.61,
+       "residualPx": 2.051505,
+       "allowedPx": 2.255951,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-horizontal-291-b33477686b"
+       ]
+      },
+      {
+       "fromPx": 322,
+       "toPx": 431,
+       "metres": 2.14,
+       "residualPx": 0.622792,
+       "allowedPx": 2.255951,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-horizontal-618-fb6dc8c021"
+       ]
+      }
+     ],
+     "notPrinted": 2
+    },
+    "Y": {
+     "linesBefore": [
+      {
+       "px": 140,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 181,
+       "ladderM": 0.8,
+       "linearM": 0.8011,
+       "dCm": 0.1
+      },
+      {
+       "px": 315.5,
+       "ladderM": 3.4286,
+       "linearM": 3.4293,
+       "dCm": 0.1
+      },
+      {
+       "px": 500.5,
+       "ladderM": 7.0442,
+       "linearM": 7.0442,
+       "dCm": 0
+      },
+      {
+       "px": 536,
+       "ladderM": 7.7379,
+       "linearM": 7.7378,
+       "dCm": 0
+      },
+      {
+       "px": 639,
+       "ladderM": 9.75,
+       "linearM": 9.7505,
+       "dCm": 0
+      },
+      {
+       "px": 675,
+       "ladderM": 10.45,
+       "linearM": 10.4539,
+       "dCm": 0.4
+      }
+     ],
+     "linesAfter": [
+      {
+       "px": 140,
+       "ladderM": 0,
+       "linearM": 0,
+       "dCm": 0
+      },
+      {
+       "px": 181,
+       "ladderM": 0.8,
+       "linearM": 0.8009,
+       "dCm": 0.1
+      },
+      {
+       "px": 315.5,
+       "ladderM": 3.4283,
+       "linearM": 3.4284,
+       "dCm": 0.0
+      },
+      {
+       "px": 500.5,
+       "ladderM": 7.0435,
+       "linearM": 7.0424,
+       "dCm": -0.1
+      },
+      {
+       "px": 536,
+       "ladderM": 7.7372,
+       "linearM": 7.7359,
+       "dCm": -0.1
+      },
+      {
+       "px": 639,
+       "ladderM": 9.75,
+       "linearM": 9.748,
+       "dCm": -0.2
+      },
+      {
+       "px": 675,
+       "ladderM": 10.45,
+       "linearM": 10.4512,
+       "dCm": 0.1
+      }
+     ],
+     "maxAbsDcmBefore": 0.4,
+     "maxAbsDcmAfter": 0.2,
+     "anchors": [
+      {
+       "fromPx": 140,
+       "toPx": 675,
+       "metres": 10.45,
+       "residualPx": -0.062708,
+       "allowedPx": 2.767853,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-vertical-778-ae73f87664"
+       ]
+      },
+      {
+       "fromPx": 140,
+       "toPx": 639,
+       "metres": 9.75,
+       "residualPx": 0.16266,
+       "allowedPx": 2.511902,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-vertical-778-ae73f87664"
+       ]
+      },
+      {
+       "fromPx": 181,
+       "toPx": 675,
+       "metres": 9.65,
+       "residualPx": 0.056422,
+       "allowedPx": 2.511902,
+       "disposition": "PINNED",
+       "chainIds": [
+        "chain-vertical-778-ae73f87664"
+       ]
+      }
+     ],
+     "notPrinted": 1
+    }
+   }
+  }
+ }
+}

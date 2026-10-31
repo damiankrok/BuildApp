@@ -1,0 +1,71 @@
+diff --git a/packages/reconstruction/src/v2/frame.ts b/packages/reconstruction/src/v2/frame.ts
+index ff0f5e1..3ba1f87 100644
+--- a/packages/reconstruction/src/v2/frame.ts
++++ b/packages/reconstruction/src/v2/frame.ts
+@@ -141,24 +141,40 @@ export function planFrameV2(plan: PlanReading, storeyIndex: number, world: World
+   const facesY = extent && basePlan ? outerFacesAlong(basePlan.bands, 'Y', extent.y0, extent.y1) : undefined
+   const baseMppX = extent ? faceToFaceMetresPerPixel(base.x, extent.x0, extent.x1, facesX, base.metresPerPixelX) : base.metresPerPixelX
+   const baseMppY = extent ? faceToFaceMetresPerPixel(base.z, extent.y0, extent.y1, facesY, base.metresPerPixelY) : base.metresPerPixelY
++  // LINK-F1: the base plan's pixels go to metres through the SAME ladders the 03R layout placed the bodies with, so a
++  // wall, a gap, an opening, a stair or a partition read off this sheet lands where the body it belongs to was put. A
++  // linear map here beside the ladder there was two frames for one sheet: they parted by up to 0.17 m on the sealed
++  // houses, and every object read through the linear one stood off its body by that much. Without ladders (a frame
++  // the layout scaled without chains), the sheet's linear scale stands.
++  const ladderX = base.ladders?.x
++  const ladderZ = base.ladders?.z
++  const baseToWorld = (px: number, py: number): { x: number; z: number } => ({
++    x: round6(ladderX ? ladderX.at(px) : (px - base.originPx.x) * baseMppX),
++    z: round6(world.zFlip - (ladderZ ? ladderZ.at(py) : (py - base.originPx.y) * baseMppY)),
++  })
++  const baseToPixel = (x: number, z: number): { x: number; y: number } => ({
++    x: round6(ladderX ? ladderX.px(x) : base.originPx.x + x / baseMppX),
++    y: round6(ladderZ ? ladderZ.px(world.zFlip - z) : base.originPx.y + (world.zFlip - z) / baseMppY),
++  })
+   let mppX = baseMppX
+   let mppY = baseMppY
+-  let ox = base.originPx.x
+-  let oy = base.originPx.y
+-  let why = 'the base plan, through the chain-registered world frame of the 03R layout'
++  let toWorld = baseToWorld
++  let toPixel = baseToPixel
++  let why = `the base plan, through the chain-registered world frame of the 03R layout${ladderX && ladderZ ? ' (its chain ladders: one frame with the bodies)' : ''}`
+   if (!isBase) {
+     const alignment = draft.alignments.get(plan.frame.id)
+     if (!alignment) return undefined
+     // base_px = other_px * scale + offset  ⇒  other_px = (base_px − offset) / scale
+-    mppX = baseMppX * alignment.scale
+-    mppY = baseMppY * alignment.scale
+-    ox = (base.originPx.x - alignment.offsetX) / alignment.scale
+-    oy = (base.originPx.y - alignment.offsetY) / alignment.scale
++    const { scale, offsetX, offsetY } = alignment
++    mppX = baseMppX * scale
++    mppY = baseMppY * scale
++    toWorld = (px, py) => baseToWorld(px * scale + offsetX, py * scale + offsetY)
++    toPixel = (x, z) => {
++      const p = baseToPixel(x, z)
++      return { x: round6((p.x - offsetX) / scale), y: round6((p.y - offsetY) / scale) }
++    }
+     why = `aligned onto the base plan by its walls (${alignment.why})`
+   }
+-  // 03R: x = (px − ox) · mppX ; z_old = (py − oy) · mppY ; v2: z = zFlip − z_old.
+-  const toWorld = (px: number, py: number): { x: number; z: number } => ({ x: round6((px - ox) * mppX), z: round6(world.zFlip - (py - oy) * mppY) })
+-  const toPixel = (x: number, z: number): { x: number; y: number } => ({ x: round6(ox + x / mppX), y: round6(oy + (world.zFlip - z) / mppY) })
+   const origin = toPixel(0, 0)
+   return { frameId: plan.frame.id, assetId: plan.frame.assetId, storeyIndex, mppX: round6(mppX), mppY: round6(mppY), originPx: origin, why, toWorld, toPixel, wallPx: plan.wallPx }
+ }
+diff --git a/packages/reconstruction/src/v2/interior.ts b/packages/reconstruction/src/v2/interior.ts
+index 853402b..1ec1d9c 100644
+--- a/packages/reconstruction/src/v2/interior.ts
++++ b/packages/reconstruction/src/v2/interior.ts
+@@ -477,7 +477,10 @@ export function readInterior(
+         const push = (r: { minX: number; maxX: number; minY: number; maxY: number }, fillOf: number, how: string, into: 'blocks' | 'cores'): void => {
+           const a = plan.toWorld(px0 + r.minX, py0 + r.maxY + 1)
+           const b = plan.toWorld(px0 + r.maxX + 1, py0 + r.minY)
+-          const block = { storeyIndex, x0: round6(a.x), z0: round6(a.z), x1: round6(b.x), z1: round6(b.z), pixelRect: { x0: px0 + r.minX, y0: py0 + r.minY, x1: px0 + r.maxX + 1, y1: py0 + r.maxY + 1 }, why: `a ${((r.maxX - r.minX + 1) * mpp).toFixed(2)} × ${((r.maxY - r.minY + 1) * mpp).toFixed(2)} m block of solid ink (${Math.round(fillOf * 100)} % filled)${how}` }
++          // LINK-F1: the window was cut to whole pixels inside the inner faces, and a block's far edge is one past its last
++          // pixel: it may reach up to a pixel into the external wall it stands against. It is read inside the body, so
++          // it ends at the inner faces.
++          const block = { storeyIndex, x0: round6(Math.max(a.x, inner.x0)), z0: round6(Math.max(a.z, inner.z0)), x1: round6(Math.min(b.x, inner.x1)), z1: round6(Math.min(b.z, inner.z1)), pixelRect: { x0: px0 + r.minX, y0: py0 + r.minY, x1: px0 + r.maxX + 1, y1: py0 + r.maxY + 1 }, why: `a ${((r.maxX - r.minX + 1) * mpp).toFixed(2)} × ${((r.maxY - r.minY + 1) * mpp).toFixed(2)} m block of solid ink (${Math.round(fillOf * 100)} % filled)${how}` }
+           if (into === 'blocks') blocks.push({ id: `block-${storeyIndex}-${blocks.length}`, ...block })
+           else cores.push(block)
+         }

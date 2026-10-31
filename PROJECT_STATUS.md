@@ -2980,3 +2980,25 @@ facade-anchor reader (`assessment/facade-anchors.ts`, not wired) scored 18/0/0/1
 (N9-02A band reader 8/3/10/9) but refused 44/44 real ARCHON views (background trees, white clouds), so it is not in
 production. Web and Android show the comparison counts; e2e opens the model under CONFLICT and UNCHECKED. N9-02B / R6
 not started; APK NOT_RUN.
+
+## Wspólna rama i tolerancje (STAGE BUILDPLAN LINK-F1)
+
+Status: **PARTIAL** (baza `ed4008c`; layout 1.2.0 → **1.3.0**, solver v2 2.17.0 → **2.18.0**; model 1.7.0, czytnik
+1.5.0, usługa analizy 1.5.0, `assessment` 1.2.0 bez zmian). Report
+`stage-reports/STAGE_BUILDPLAN_LINK_F1_SHARED_FRAME_AND_TOLERANCES.md`, artefakty `stage-reports/artifacts/analyzer-link-f1/`.
+The base plan was mapped two ways: bodies through the 03R chain ladder, walls/gaps/openings/stairs through the linear v2
+frame; they parted by up to 0.17 m (Rarytasy X), 0.12 (Goździkowce X), 0.10 (Jarzmianki Y). FIRST_BAD: the ladder
+pinned lines with DERIVED chain fill-ins (the chain's own scale × pixels, nothing printed), with a tick 5.5 px off its
+line, and with weak corrected readings contradicting the overall dimension by 3–4 px; and Jarzmianki's Y registration
+stated a 1 % anisotropy from two 30 px anchors. Change: `axisLadder` pins a line only with a printed statement that
+agrees with the longer ones to within its pixel uncertainty (2 tick localisations + the tick's miss of the line + 0.5 cm
+per printed number), else it is a REJECTED anchor with its residual (`WorldFrame.ladders`, registration step);
+`sheetScale` gives the sheet one scale unless the anchors prove a stretch beyond both axes' uncertainty. 8 houses through
+production `runAnalysis`: Rarytasy's garage moves onto its drawn faces (−0.149 / −0.087 m) with its party wall and front
+openings; Goździkowce's recess consistent with the frame; Jarzmianki's ladder no longer collapses a wall; Arganiach gains
+one real drawn partition; openings counts and hosts unchanged in 8/8, replay byte-identical, 0 refusals; NEW: Sasanki
+2 × GAP 5.4 mm party wall ↔ slab (the pre-existing class Marcówki already shows at 2.5–4.2 cm), Trytomach +2 roof mesh
+warnings, +2 elevation comparisons out of tolerance in Trytomach and Rarytasy. The literal one-map variant (v2 through
+the ladders) was measured and NOT adopted: it flips half-pixel readers (Sasanki garage gate → window, Arganiach
+door/window, Jarzmianki attic door). Targeted tests: reconstruction 1205/1205, analysis-service 199/199; app and
+architecture failures identical to the base. F2 / N9-02S not started; APK NOT_RUN.

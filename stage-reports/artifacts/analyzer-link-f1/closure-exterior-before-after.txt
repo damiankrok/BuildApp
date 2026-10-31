@@ -1,0 +1,56 @@
+## a01
+BEFORE a01/model.json {
+  "ERROR INTERSECTION pergola-west-beam-1 + ring-main-0-w3 0.0269 m3: pergola-west-beam-1 and ring-main-0-w3 share 0.027 m³; the model intends separation (a member is not hosted by this wall)",
+  "WARNING SLIVER_TRIANGLES roof-main 112 count: roof-main carries 112 sliver triangles (area under 1 mm² or an edge under 0.5 mm)",
+  "WARNING NON_MANIFOLD roof-main 46 count: roof-main has 46 edges not shared by exactly two triangles"
+AFTER a01/model.json {
+  "ERROR INTERSECTION pergola-west-beam-1 + ring-main-0-w3 0.0269 m3: pergola-west-beam-1 and ring-main-0-w3 share 0.027 m³; the model intends separation (a member is not hosted by this wall)"
+## gozd
+BEFORE gozd/model.json {
+AFTER gozd/model.json {
+## marcowki
+BEFORE marcowki/model.json {
+  "ERROR COPLANAR_DUPLICATE balcony-front-1 + roof-attached-0:fascia-min-z 0.0433 m2: balcony-front-1 and roof-attached-0:fascia-min-z draw 0.043 m² of face in one plane facing the same way: a viewer flickers there",
+  "ERROR GAP ring-main-0-w1-party-attached-0 + slab-main-1 0.0418 m: ring-main-0-w1-party-attached-0 and slab-main-1 stand 0.042 m apart where the model says they meet (a slab bears into the walls under it and the walls above stand on it): a visible crack",
+  "ERROR GAP ring-main-0-w1-party-attached-0 + slab-attached-0-0 0.0251 m: ring-main-0-w1-party-attached-0 and slab-attached-0-0 stand 0.025 m apart where the model says they meet (a slab bears into the walls under it and the walls above stand on it): a visible crack",
+  "ERROR INTERSECTION balcony-front-1 + roof-attached-0:fascia-min-z 0.0184 m3: balcony-front-1 and roof-attached-0:fascia-min-z share 0.018 m³; the model intends contact (a roof edge meets a balcony slab end to end)"
+AFTER marcowki/model.json {
+  "ERROR GAP ring-main-0-w1-party-attached-0 + slab-main-1 0.0446 m: ring-main-0-w1-party-attached-0 and slab-main-1 stand 0.045 m apart where the model says they meet (a slab bears into the walls under it and the walls above stand on it): a visible crack",
+  "ERROR COPLANAR_DUPLICATE balcony-front-1 + roof-attached-0:fascia-min-z 0.0372 m2: balcony-front-1 and roof-attached-0:fascia-min-z draw 0.037 m² of face in one plane facing the same way: a viewer flickers there",
+  "ERROR GAP ring-main-0-w1-party-attached-0 + slab-attached-0-0 0.0215 m: ring-main-0-w1-party-attached-0 and slab-attached-0-0 stand 0.021 m apart where the model says they meet (a slab bears into the walls under it and the walls above stand on it): a visible crack",
+  "ERROR INTERSECTION balcony-front-1 + roof-attached-0:fascia-min-z 0.0157 m3: balcony-front-1 and roof-attached-0:fascia-min-z share 0.016 m³; the model intends contact (a roof edge meets a balcony slab end to end)"
+## ciesz
+BEFORE ciesz/model.json {
+AFTER ciesz/model.json {
+## rary
+BEFORE rary/model.json {
+  "ERROR INTERSECTION ring-main-0-w0-1 + roof-attached-0-plane-high 0.0047 m3: ring-main-0-w0-1 and roof-attached-0-plane-high share 0.005 m³; the model intends contact (the wall top follows the plane underside)",
+  "ERROR INTERSECTION ring-main-0-w0-1 + roof-main-plane-low 0.0038 m3: ring-main-0-w0-1 and roof-main-plane-low share 0.004 m³; the model intends contact (the wall top follows the plane underside)"
+AFTER rary/model.json {
+  "ERROR INTERSECTION ring-main-0-w0-1 + roof-attached-0-plane-high 0.0047 m3: ring-main-0-w0-1 and roof-attached-0-plane-high share 0.005 m³; the model intends contact (the wall top follows the plane underside)",
+  "ERROR INTERSECTION ring-main-0-w0-1 + roof-main-plane-low 0.0038 m3: ring-main-0-w0-1 and roof-main-plane-low share 0.004 m³; the model intends contact (the wall top follows the plane underside)"
+## trytomach
+BEFORE trytomach/model.json {
+  "ERROR INTERSECTION pergola-rear-beam-0 + pergola-rear-post-3 0.0035 m3: pergola-rear-beam-0 and pergola-rear-post-3 share 0.003 m³; the model intends contact (members of one frame meet end to end)",
+  "ERROR INTERSECTION pergola-rear-beam-2 + pergola-rear-post-1 0.0035 m3: pergola-rear-beam-2 and pergola-rear-post-1 share 0.003 m³; the model intends contact (members of one frame meet end to end)"
+AFTER trytomach/model.json {
+  "ERROR INTERSECTION pergola-rear-beam-0 + pergola-rear-post-3 0.0035 m3: pergola-rear-beam-0 and pergola-rear-post-3 share 0.003 m³; the model intends contact (members of one frame meet end to end)",
+  "ERROR INTERSECTION pergola-rear-beam-2 + pergola-rear-post-1 0.0035 m3: pergola-rear-beam-2 and pergola-rear-post-1 share 0.003 m³; the model intends contact (members of one frame meet end to end)",
+  "WARNING SLIVER_TRIANGLES roof-main 76 count: roof-main carries 76 sliver triangles (area under 1 mm² or an edge under 0.5 mm)",
+  "WARNING NON_MANIFOLD roof-main 40 count: roof-main has 40 edges not shared by exactly two triangles"
+## arganiach
+BEFORE arganiach/model.json {
+  "ERROR COPLANAR_DUPLICATE ring-attached-0-0-w0 + roof-attached-0 1.4462 m2: ring-attached-0-0-w0 and roof-attached-0 draw 1.446 m² of face in one plane facing the same way: a viewer flickers there",
+  "ERROR COPLANAR_DUPLICATE ring-attached-0-0-w1 + roof-attached-0 0.7413 m2: ring-attached-0-0-w1 and roof-attached-0 draw 0.741 m² of face in one plane facing the same way: a viewer flickers there",
+  "ERROR COPLANAR_DUPLICATE ring-attached-0-0-w3 + roof-attached-0 0.7413 m2: ring-attached-0-0-w3 and roof-attached-0 draw 0.741 m² of face in one plane facing the same way: a viewer flickers there"
+AFTER arganiach/model.json {
+  "ERROR COPLANAR_DUPLICATE ring-attached-0-0-w0 + roof-attached-0 1.4455 m2: ring-attached-0-0-w0 and roof-attached-0 draw 1.446 m² of face in one plane facing the same way: a viewer flickers there",
+  "ERROR COPLANAR_DUPLICATE ring-attached-0-0-w1 + roof-attached-0 0.7409 m2: ring-attached-0-0-w1 and roof-attached-0 draw 0.741 m² of face in one plane facing the same way: a viewer flickers there",
+  "ERROR COPLANAR_DUPLICATE ring-attached-0-0-w3 + roof-attached-0 0.7409 m2: ring-attached-0-0-w3 and roof-attached-0 draw 0.741 m² of face in one plane facing the same way: a viewer flickers there"
+## sasankach3
+BEFORE sasankach3/model.json {
+  "ERROR INTERSECTION ring-main-1-w1-party-attached-0 + roof-main-plane-high-1 0.0042 m3: ring-main-1-w1-party-attached-0 and roof-main-plane-high-1 share 0.004 m³; the model intends contact (the wall top follows the plane underside)"
+AFTER sasankach3/model.json {
+  "ERROR GAP ring-main-0-w1-party-attached-0 + slab-main-1 0.0054 m: ring-main-0-w1-party-attached-0 and slab-main-1 stand 0.005 m apart where the model says they meet (a slab bears into the walls under it and the walls above stand on it): a visible crack",
+  "ERROR GAP ring-main-1-w1-party-attached-0 + slab-main-1 0.0054 m: ring-main-1-w1-party-attached-0 and slab-main-1 stand 0.005 m apart where the model says they meet (a slab bears into the walls under it and the walls above stand on it): a visible crack",
+  "ERROR INTERSECTION ring-main-1-w1-party-attached-0 + roof-main-plane-high-1 0.0042 m3: ring-main-1-w1-party-attached-0 and roof-main-plane-high-1 share 0.004 m³; the model intends contact (the wall top follows the plane underside)"
