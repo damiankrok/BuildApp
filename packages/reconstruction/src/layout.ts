@@ -1246,6 +1246,8 @@ export type LadderAnchor = {
   residualPx: number
   /** What the statement may miss by and still pin: two tick localisations, its ticks' miss of the lines, the print's rounding. */
   allowedPx: number
+  /** LINK-F1B: how far the statement's ticks miss the two lines, in pixels: a line pinned by it is that much less certain. */
+  offPx: number
   disposition: 'PINNED' | 'REJECTED_RESIDUAL' | 'NOT_PRINTED'
   chainIds: string[]
   evidenceIds: string[]
@@ -1256,6 +1258,12 @@ export type AxisLadder = {
   span: (fromPx: number, toPx: number) => AxisSpan
   /** LINK-F1: every statement the ladder weighed, pinned or rejected, with its residual. */
   anchors: LadderAnchor[]
+  /**
+   * LINK-F1B: the ladder as an invertible map (no snapping; `map(line) === at(line)`), present only when the metres rise
+   * strictly along the lines — a ladder that does not is no map, and its sheet keeps the linear frame.
+   */
+  map?: (px: number) => number
+  px?: (metres: number) => number
 }
 
 export function axisLadder(
@@ -1417,7 +1425,7 @@ export function axisLadder(
     const pj = predicted(claim.j)
     const residualPx = pi !== undefined && pj !== undefined ? round6((claim.metres - (pj - pi)) / mpp) : round6(claim.metres / mpp - claim.length)
     const record = (disposition: LadderAnchor['disposition']): void => {
-      anchors.push({ fromPx: lines[claim.i].px, toPx: lines[claim.j].px, metres: claim.metres, residualPx, allowedPx, disposition, chainIds: claim.chainIds, evidenceIds: claim.evidenceIds })
+      anchors.push({ fromPx: lines[claim.i].px, toPx: lines[claim.j].px, metres: claim.metres, residualPx, allowedPx, offPx: round6(claim.offPx), disposition, chainIds: claim.chainIds, evidenceIds: claim.evidenceIds })
     }
     if (claim.derived > 0) { record('NOT_PRINTED'); continue }
     // The first (longest) statement sets the scale, as it always has: nothing is fixed yet for it to disagree with, and
@@ -1461,7 +1469,31 @@ export function axisLadder(
     }
     return round6((px - originPx) * mpp)
   }
-  return { at, span, anchors }
+  // LINK-F1B: the same ladder as a map one can go back through. `at` snaps a pixel within half a pixel of a grid line to
+  // that line's metres (a region's integer edge is the line it was cut on); a map other objects are read through and
+  // projected back onto the sheet must not have such steps. `map` is the plain interpolation — equal to `at` on every
+  // line — and `px` its inverse: the metres rise strictly with the pixels (the anchor gate keeps every pinned gap within
+  // a few pixels of the drawing), and beyond the outermost lines both run at the sheet's scale.
+  const rising = lines.every((l, i) => i === 0 || (l.px > lines[i - 1].px && metric[i] > metric[i - 1]))
+  const map = (px: number): number => {
+    if (lines.length === 0) return round6((px - originPx) * mpp)
+    if (px <= lines[0].px) return round6(metric[0] - (lines[0].px - px) * mpp)
+    const last = lines.length - 1
+    if (px >= lines[last].px) return round6(metric[last] + (px - lines[last].px) * mpp)
+    let i = 0
+    while (i + 1 < last && px > lines[i + 1].px) i += 1
+    return round6(metric[i] + ((px - lines[i].px) / (lines[i + 1].px - lines[i].px)) * (metric[i + 1] - metric[i]))
+  }
+  const px = (m: number): number => {
+    if (lines.length === 0) return round6(originPx + m / mpp)
+    if (m <= metric[0]) return round6(lines[0].px - (metric[0] - m) / mpp)
+    const last = lines.length - 1
+    if (m >= metric[last]) return round6(lines[last].px + (m - metric[last]) / mpp)
+    let i = 0
+    while (i + 1 < last && m > metric[i + 1]) i += 1
+    return round6(lines[i].px + ((m - metric[i]) / (metric[i + 1] - metric[i])) * (lines[i + 1].px - lines[i].px))
+  }
+  return { at, span, anchors, ...(rising ? { map, px } : {}) }
 }
 
 // ---------------------------------------------------------------------------
