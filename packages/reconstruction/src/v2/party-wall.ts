@@ -80,6 +80,8 @@ export type PartyWallRecord = {
   /** The first body's side facing the second. */
   facade: PartySide
   contactAt: number
+  /** LINK-F1B: the contact line's own uncertainty the band was allowed (`PartyWallInput.contactSlackM`). */
+  contactSlackM?: number
   span: [number, number]
   wallsM: [number, number]
   reading: PartyBandReading
@@ -245,6 +247,12 @@ export type PartyWallInput = {
   plans: ReadonlyMap<number, { raster: Raster; frame: PlanFrameV2 }>
   /** A body's wall thickness on the plan. */
   wallOf: (m: MassV2) => number
+  /**
+   * LINK-F1B: how uncertain the contact line itself is, in metres (the plan's line the two bodies were cut on, pinned
+   * by a dimension whose tick misses it by some pixels): the band may lie that much further from it and still be the
+   * wall on it. 0 (the default) where nothing makes the line less certain than the drawing.
+   */
+  contactSlackM?: (axis: 'X' | 'Z', at: number) => number
 }
 
 /**
@@ -285,6 +293,8 @@ export function readPartyWalls(input: PartyWallInput): PartyWallRecord[] {
             kept.cornersInk = [cornerInk(plan.raster, plan.frame, point(span[0]), PARTY_CORNER_WINDOW_M), cornerInk(plan.raster, plan.frame, point(span[1]), PARTY_CORNER_WINDOW_M)]
           }
           const record: PartyWallRecord = { storeyIndex: storey, frameId: plan.frame.frameId, massIds: [a.id, b.id], facade: side, contactAt: round6(contact), span, wallsM: [round6(ta), round6(tb)], reading: kept, decision: 'UNDECIDED', why: '' }
+          const slack = input.contactSlackM?.(side === 'EAST' || side === 'WEST' ? 'X' : 'Z', contact) ?? 0
+          if (slack > 0) record.contactSlackM = round6(slack)
           decide(record, a, b, ra, rb, out)
           out.push(record)
         }
@@ -331,8 +341,9 @@ function decide(record: PartyWallRecord, a: MassV2, b: MassV2, ra: Rect, rb: Rec
   const side = record.facade
   const aLow = side === 'EAST' || side === 'REAR'
   const [lowT, highT] = aLow ? [ta, tb] : [tb, ta]
-  if (b0 < c - lowT - 0.05 || b1 > c + highT + 0.05) {
-    record.why = `${where}: the band at ${b0.toFixed(2)}..${b1.toFixed(2)} lies outside both bodies' walls about the contact at ${c.toFixed(2)}, so each keeps its wall`
+  const slackM = 0.05 + (record.contactSlackM ?? 0)
+  if (b0 < c - lowT - slackM || b1 > c + highT + slackM) {
+    record.why = `${where}: the band at ${b0.toFixed(2)}..${b1.toFixed(2)} lies outside both bodies' walls about the contact at ${c.toFixed(2)}${record.contactSlackM ? ` (the contact line itself uncertain by ${record.contactSlackM.toFixed(2)} m)` : ''}, so each keeps its wall`
     return
   }
   // the host is the body on whose side the band lies; a band across the contact is the main body's (or the first's)

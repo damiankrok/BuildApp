@@ -195,11 +195,59 @@ const N2_POCKET_WALLS_EXPECTED: Readonly<Record<string, { walls: number; why: st
   'entrance:id': { walls: 11, why: '005Y-N2: the recess is a pocket: its returns and back wall are its own, and the two partitions on the returns\' lines carry on past it' },
   'entranceFacePair:id': { walls: 7, why: '005Y-N2: the recess inside the body is a pocket: its two returns and its back wall are walls of their own' },
 }
+/**
+ * LINK-F1B: the walls and returns over the frozen record once the plan is read through one map. These fixtures print
+ * their chains at 5 cm/px over a 0.026 m/px registration, so the frozen solver placed the bodies by the chains and read
+ * every wall, gap and zone inside them at the registration's scale: the partition drawn 40 % across the house came out
+ * 21 % across it and the half of it past its doorway fell outside the body, and the zone scanner looked at pixels short
+ * of the strip it was given. Through the one map (the bodies' own chain ladders) the partition stands where it is drawn,
+ * in its two drawn pieces either side of the doorway; a misread band across the house is gone; and the zone scanner sees
+ * the strip as drawn, reading what stands across it (the carport's side walls, the stall walls, the pier, the posts)
+ * as returns, as the frozen solver already did on the redraws where its two scales happened to agree. Generated from the
+ * current reader, one entry per fixture and redraw that differs; the frozen record is untouched.
+ */
+const LINK_F1B_EXPECTED: Readonly<Record<string, { walls: number; returns: string[]; terraces?: string[]; recesses?: string[] }>> = {
+  'bodyBehind:id': { walls: 10, returns: [] },
+  'carport:id': { walls: 8, returns: ['return-front-0-0', 'return-front-0-1'], terraces: ['terrace-front-0', 'terrace-front-1790', 'terrace-front-2590'], recesses: ['FRONT:2'] },
+  'ell:id': { walls: 10, returns: [] },
+  'entranceFacePair:id': { walls: 11, returns: [] },
+  'facePair:id': { walls: 6, returns: [] },
+  'facePair:mirrorX': { walls: 6, returns: [] },
+  'facePair:mirrorY': { walls: 6, returns: [] },
+  'facePair:turn270': { walls: 6, returns: [] },
+  'facePair:turn90': { walls: 6, returns: [] },
+  'facePairAniso:id': { walls: 6, returns: [] },
+  'facePairAnisoTurned:turn270': { walls: 6, returns: [] },
+  'garageDoor:id': { walls: 6, returns: [] },
+  'garageDoorOuterOnly:id': { walls: 6, returns: [] },
+  'inward10:id': { walls: 6, returns: [] },
+  'inward9:id': { walls: 6, returns: [] },
+  'longPier:id': { walls: 6, returns: [] },
+  'openTerrace:id': { walls: 6, returns: [] },
+  'outerOnly:id': { walls: 6, returns: [] },
+  'pergola:id': { walls: 6, returns: [] },
+  'porchPosts:id': { walls: 6, returns: [] },
+  'postsInStrip:id': { walls: 9, returns: ['return-front-0-0', 'return-front-0-1', 'return-front-0-2'], terraces: ['terrace-front-80', 'terrace-front-1540'], recesses: ['FRONT:3'] },
+  'rearFacePair:id': { walls: 6, returns: [] },
+  'rearFacePair:mirrorX': { walls: 6, returns: [] },
+  'rearFacePair:mirrorY': { walls: 6, returns: [] },
+  'rearFacePair:turn270': { walls: 6, returns: [] },
+  'rearFacePair:turn90': { walls: 6, returns: [] },
+  'rearStripFrontTerrace:id': { walls: 6, returns: [] },
+  'shortPier:id': { walls: 7, returns: ['return-front-0-0'], terraces: ['terrace-front-0', 'terrace-front-1400'], recesses: ['FRONT:1'] },
+  'stalls:id': { walls: 15, returns: ['return-front-0-0', 'return-front-0-1', 'return-front-0-2', 'return-front-0-3', 'return-front-0-4', 'return-front-0-5', 'return-front-0-6', 'return-front-0-7', 'return-front-0-8'], terraces: ['terrace-front-0', 'terrace-front-290', 'terrace-front-605', 'terrace-front-920', 'terrace-front-1230', 'terrace-front-1545', 'terrace-front-1860', 'terrace-front-2175', 'terrace-front-2485', 'terrace-front-2800'], recesses: ['FRONT:9'] },
+  'stepAbove:id': { walls: 6, returns: [] },
+  'stepBelow:id': { walls: 6, returns: [] },
+  'thickWalls:id': { walls: 6, returns: [] },
+  'ticksDown:id': { walls: 6, returns: [] },
+  'ticksUp:id': { walls: 6, returns: [] },
+  'twoBodies:id': { walls: 10, returns: [] },
+}
 const frozenKeyOf = new Map<Frozen, string>(Object.entries(FROZEN).map(([k, v]) => [v, k]))
 /** The wall count the current reader is held to: the frozen record's, unless this exact fixture and redraw has a versioned delta. */
 const wallsExpected = (f: Frozen): number => {
   const key = frozenKeyOf.get(f)
-  const delta = key === undefined ? undefined : (N2_POCKET_WALLS_EXPECTED[key] ?? N3_THICK_INTERIOR_WALLS_EXPECTED[key])
+  const delta = key === undefined ? undefined : (LINK_F1B_EXPECTED[key] ?? N2_POCKET_WALLS_EXPECTED[key] ?? N3_THICK_INTERIOR_WALLS_EXPECTED[key])
   return delta === undefined ? f.walls : delta.walls
 }
 
@@ -211,7 +259,8 @@ function frameAsFrozen(o: Outcome, f: Frozen): void {
   expect(o.modelWalls).toBe(wallsExpected(f))
   expect(o.layoutRecesses).toEqual(f.layoutRecesses)
   expect(o.recessRegions).toBe(f.recessRegions)
-  expect(o.returns).toEqual([])
+  const key = frozenKeyOf.get(f)
+  expect(o.returns).toEqual((key === undefined ? undefined : LINK_F1B_EXPECTED[key]?.returns) ?? [])
 }
 
 /** N1 fires: the face is named, the ring says the body was cut on a wall's inner face, no floor is read in the strip. */
@@ -238,9 +287,12 @@ function holdsFrozen(o: Outcome, f: Frozen): void {
   expect(o.ringStatus).toBe(f.ring)
   expect(o.ringStatus).toBe('SOURCE_EXACT')
   expect(o.ringWhy).toMatch(/ m body from the plan's printed chains and wall bands$/)
-  expect(o.terraces).toEqual(f.terraces)
-  expect(o.modelTerraces).toBe(f.terraces.length)
-  expect(o.recesses).toEqual(f.recesses)
+  // LINK-F1B: where the zone scanner now reads returns across the strip, the terrace is laid between them
+  const delta = LINK_F1B_EXPECTED[frozenKeyOf.get(f) ?? '']
+  const terraces = delta?.terraces ?? f.terraces
+  expect(o.terraces).toEqual(terraces)
+  expect(o.modelTerraces).toBe(terraces.length)
+  expect(o.recesses).toEqual(delta?.recesses ?? f.recesses)
   expect(o.massBasis).toEqual(['MEASURED/MEASURED'])
 }
 
@@ -465,9 +517,10 @@ describe('005Q wall strip — 12. a recessed entrance with its back wall (005N)'
     // no wall inside the ring that answers no drawn wall
     expect(interior.length + pocket.length).toBe(matchedBy.size)
     expect(r.model.walls.length).toBe(N2_POCKET_WALLS_EXPECTED['entrance:id'].walls)
-    // correctly registered: no side of the body stands off its drawn walls (the 39 misregistered redraws all do)
+    // correctly registered: no side of the body stands off its drawn walls; LINK-F1B: nor, through the one map, does
+    // the face pair's (its walls were misregistered by the second scale the frozen solver read them at)
     expect(r.unresolved.filter((u) => u.what.startsWith('wall-thick partitions'))).toEqual([])
-    expect(compiled('facePair').unresolved.some((u) => u.what.startsWith('wall-thick partitions'))).toBe(true)
+    expect(compiled('facePair').unresolved.some((u) => u.what.startsWith('wall-thick partitions'))).toBe(false)
   })
 
   it('005V-N2: the versioned delta is this one fixture and redraw, and the historical record is untouched', () => {
@@ -546,7 +599,9 @@ describe('005Q wall strip — 14. one side, one body, one direction (the mutatio
   it('nine wall-thick stall walls crossing a 5 m strip (27 % of its length in their thickness): they cross it, they do not lie along it — no gap, as frozen', () => {
     const { o, f } = run('stalls')
     holdsFrozen(o, f)
-    expect(o.terraces).toEqual(['terrace-front-0'])
+    // LINK-F1B: no gap still; the stall walls are read as the strip's returns, the terrace laid between them
+    expect(o.terraces).toEqual(LINK_F1B_EXPECTED['stalls:id'].terraces)
+    expect(o.outerFaces).toEqual([])
   })
 
   it('wall-thick pieces each shorter than 2.5 walls, covering 40 % of the strip, are no wall: handed to the pass through the sheet cache, they name no face', () => {

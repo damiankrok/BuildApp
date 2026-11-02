@@ -141,24 +141,41 @@ export function planFrameV2(plan: PlanReading, storeyIndex: number, world: World
   const facesY = extent && basePlan ? outerFacesAlong(basePlan.bands, 'Y', extent.y0, extent.y1) : undefined
   const baseMppX = extent ? faceToFaceMetresPerPixel(base.x, extent.x0, extent.x1, facesX, base.metresPerPixelX) : base.metresPerPixelX
   const baseMppY = extent ? faceToFaceMetresPerPixel(base.z, extent.y0, extent.y1, facesY, base.metresPerPixelY) : base.metresPerPixelY
+  // LINK-F1B: the base plan's pixels go to metres through the SAME chain ladders the 03R layout placed the bodies with
+  // (their invertible `map`/`px`), so a wall, a gap, an opening, a stair, a block or a storey registered onto this sheet
+  // lands where the body it belongs to was put, and a body's face projects back onto the ink it was read from. A ladder
+  // that is no strictly rising map (or none at all) leaves the axis on the sheet's linear scale.
+  const lx = base.ladders?.x
+  const lz = base.ladders?.z
+  const mapX = lx?.map && lx.px ? { to: lx.map, back: lx.px } : undefined
+  const mapZ = lz?.map && lz.px ? { to: lz.map, back: lz.px } : undefined
+  const baseToWorld = (px: number, py: number): { x: number; z: number } => ({
+    x: round6(mapX ? mapX.to(px) : (px - base.originPx.x) * baseMppX),
+    z: round6(world.zFlip - (mapZ ? mapZ.to(py) : (py - base.originPx.y) * baseMppY)),
+  })
+  const baseToPixel = (x: number, z: number): { x: number; y: number } => ({
+    x: round6(mapX ? mapX.back(x) : base.originPx.x + x / baseMppX),
+    y: round6(mapZ ? mapZ.back(world.zFlip - z) : base.originPx.y + (world.zFlip - z) / baseMppY),
+  })
   let mppX = baseMppX
   let mppY = baseMppY
-  let ox = base.originPx.x
-  let oy = base.originPx.y
-  let why = 'the base plan, through the chain-registered world frame of the 03R layout'
+  let toWorld = baseToWorld
+  let toPixel = baseToPixel
+  let why = `the base plan, through the chain-registered world frame of the 03R layout${mapX && mapZ ? ' (its chain ladders: one map with the bodies)' : ''}`
   if (!isBase) {
     const alignment = draft.alignments.get(plan.frame.id)
     if (!alignment) return undefined
     // base_px = other_px * scale + offset  ⇒  other_px = (base_px − offset) / scale
-    mppX = baseMppX * alignment.scale
-    mppY = baseMppY * alignment.scale
-    ox = (base.originPx.x - alignment.offsetX) / alignment.scale
-    oy = (base.originPx.y - alignment.offsetY) / alignment.scale
+    const { scale, offsetX, offsetY } = alignment
+    mppX = baseMppX * scale
+    mppY = baseMppY * scale
+    toWorld = (px, py) => baseToWorld(px * scale + offsetX, py * scale + offsetY)
+    toPixel = (x, z) => {
+      const p = baseToPixel(x, z)
+      return { x: round6((p.x - offsetX) / scale), y: round6((p.y - offsetY) / scale) }
+    }
     why = `aligned onto the base plan by its walls (${alignment.why})`
   }
-  // 03R: x = (px − ox) · mppX ; z_old = (py − oy) · mppY ; v2: z = zFlip − z_old.
-  const toWorld = (px: number, py: number): { x: number; z: number } => ({ x: round6((px - ox) * mppX), z: round6(world.zFlip - (py - oy) * mppY) })
-  const toPixel = (x: number, z: number): { x: number; y: number } => ({ x: round6(ox + x / mppX), y: round6(oy + (world.zFlip - z) / mppY) })
   const origin = toPixel(0, 0)
   return { frameId: plan.frame.id, assetId: plan.frame.assetId, storeyIndex, mppX: round6(mppX), mppY: round6(mppY), originPx: origin, why, toWorld, toPixel, wallPx: plan.wallPx }
 }

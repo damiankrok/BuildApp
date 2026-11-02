@@ -490,7 +490,17 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
     const widthPlan = round6(hi - lo)
     const centre = (lo + hi) / 2
     // The drawn wall band the gap was read on, across the wall, in sheet pixels.
-    const bandCentre = along === 'X' ? (gap.pixelRect.y0 + gap.pixelRect.y1) / 2 : (gap.pixelRect.x0 + gap.pixelRect.x1) / 2
+    const predictedBand = along === 'X' ? (gap.pixelRect.y0 + gap.pixelRect.y1) / 2 : (gap.pixelRect.x0 + gap.pixelRect.x1) / 2
+    // LINK-F1B: the symbols in a gap (leaf, swing, glazing, tracks) are read from the wall band the plan DRAWS beside the
+    // gap, found within one wall's thickness of where the host predicts it; the host's predicted faces are a search
+    // window, not ink. Where no consistent band is drawn beside both jambs, the prediction stands.
+    // The symbols are drawn at the sheet's scale, whatever the chain ladder makes of the metres between its lines: they
+    // are read in the sheet's scale about the gap (`symbolFrame`), the gap placed where the shared map puts it.
+    const ink = drawnWallBand(input.planRaster, plan, host, [lo, hi], input.wallThicknessM)
+    const symHost: WallHost = ink ? { ...host, centreAt: ink.centreAt } : host
+    const symT = input.wallThicknessM
+    const symPlan = symbolFrame(plan, along === 'X' ? { x: (lo + hi) / 2, z: symHost.centreAt } : { x: symHost.centreAt, z: (lo + hi) / 2 })
+    const bandCentre = ink ? ink.centrePx : predictedBand
     const unresolved: string[] = []
     const matched = matchOpeningCallout({ centre, widthM: widthPlan }, host, nearby, opt.calloutReachM, !!input.trace)
     const weighed = matched.weighed
@@ -519,9 +529,9 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
       // the kind and the heights are named as assumed. A gap a door's width with no glazing drawn across it is a door
       // on the ground storey (an entrance); above it, where an outside door needs a balcony, only a drawn swing makes one.
       heightsAssumed = true
-      doorSwing = doorSwingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM)
+      doorSwing = doorSwingDrawn(input.planRaster, symPlan, symHost, interval, symT)
       // Glazing is either symbol — dark ink or the light lines a frame and glass are drawn with.
-      doorBySymbol = widthM <= DOOR_MAX_WIDTH_M && !glazingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM) && !glazingLinesDrawn(input.planRaster, plan, host, interval, input.wallThicknessM, bandCentre) && (doorSwing || host.storeyIndex === 0)
+      doorBySymbol = widthM <= DOOR_MAX_WIDTH_M && !glazingDrawn(input.planRaster, symPlan, symHost, interval, symT) && !glazingLinesDrawn(input.planRaster, symPlan, symHost, interval, symT, bandCentre) && (doorSwing || host.storeyIndex === 0)
       sillY = doorBySymbol ? host.floorY : round6(host.floorY + CONVENTIONS.windowSill)
       headY = round6(host.floorY + (doorBySymbol ? ASSUMED_DOOR_HEAD_M : CONVENTIONS.openingHead))
       prov.sill = 'ASSUMED_FOR_RENDERING'
@@ -553,9 +563,9 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
     }
     // --- family
     const mouth = input.vehicleMouth
-    const mouthGap = !!mouth && host.storeyIndex === 0 && Math.min(hi, mouth.to) - Math.max(lo, mouth.from) >= 0.8 * Math.max(widthPlan, mouth.to - mouth.from) && !glazingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM)
+    const mouthGap = !!mouth && host.storeyIndex === 0 && Math.min(hi, mouth.to) - Math.max(lo, mouth.from) >= 0.8 * Math.max(widthPlan, mouth.to - mouth.from) && !glazingDrawn(input.planRaster, symPlan, symHost, interval, symT)
     const reachesFloor = sillY - host.floorY < REACHES_FLOOR_M
-    const tracks = host.storeyIndex === 0 && widthPlan >= VEHICLE_DOOR_MIN_WIDTH_M && (heightsAssumed || reachesFloor) ? overheadDoorTracks(input.planRaster, plan, host, [lo, hi], input.wallThicknessM) : undefined
+    const tracks = host.storeyIndex === 0 && widthPlan >= VEHICLE_DOOR_MIN_WIDTH_M && (heightsAssumed || reachesFloor) ? overheadDoorTracks(input.planRaster, symPlan, symHost, [lo, hi], symT) : undefined
     const garageRoom = (input.garageRooms ?? []).find((g) => garageRoomHolds(g.bounds, host, [lo, hi], input.wallThicknessM))
     const decision = classifyOpeningFamily({
       storeyIndex: host.storeyIndex,
@@ -570,10 +580,10 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
       attachedSingleStorey: input.attachedSingleStorey,
       ...(garageRoom ? { garageRoom: { why: garageRoom.why } } : {}),
       symbols: {
-        glazed: () => glazingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM) || glazingLinesDrawn(input.planRaster, plan, host, interval, input.wallThicknessM, bandCentre),
-        leaf: () => doorLeafFound(input.planRaster, plan, host, interval, input.wallThicknessM, calloutBoxes, input.trace ? (d) => input.trace?.({ kind: 'DOOR_LEAF_DEBUG', interval: [round6(lo), round6(hi)], facade: host.facade, massId: host.massId, ...d }) : undefined),
-        swingDrawn: () => doorSwingDrawn(input.planRaster, plan, host, interval, input.wallThicknessM),
-        leaves: () => drawnLeaves(input.planRaster, plan, host, interval, input.wallThicknessM, calloutBoxes, input.trace ? (d) => input.trace?.({ kind: 'DOOR_LEAVES_DEBUG', interval: [round6(lo), round6(hi)], facade: host.facade, massId: host.massId, ...d }) : undefined),
+        glazed: () => glazingDrawn(input.planRaster, symPlan, symHost, interval, symT) || glazingLinesDrawn(input.planRaster, symPlan, symHost, interval, symT, bandCentre),
+        leaf: () => doorLeafFound(input.planRaster, symPlan, symHost, interval, symT, calloutBoxes, input.trace ? (d) => input.trace?.({ kind: 'DOOR_LEAF_DEBUG', interval: [round6(lo), round6(hi)], facade: host.facade, massId: host.massId, ...d }) : undefined),
+        swingDrawn: () => doorSwingDrawn(input.planRaster, symPlan, symHost, interval, symT),
+        leaves: () => drawnLeaves(input.planRaster, symPlan, symHost, interval, symT, calloutBoxes, input.trace ? (d) => input.trace?.({ kind: 'DOOR_LEAVES_DEBUG', interval: [round6(lo), round6(hi)], facade: host.facade, massId: host.massId, ...d }) : undefined),
       },
     })
     const family = decision.family
@@ -1032,51 +1042,69 @@ export function overheadDoorTracks(raster: Raster, plan: PlanFrameV2, host: Wall
   const alongX = host.facade === 'FRONT' || host.facade === 'REAR'
   const mpp = (plan.mppX + plan.mppY) / 2
   const face = host.centreAt + (inward * wallThicknessM) / 2
-  const at = (along: number, depth: number): { x: number; y: number } => (alongX ? plan.toPixel(along, face + inward * depth) : plan.toPixel(face + inward * depth, along))
+  const world = (along: number, depth: number): { x: number; z: number } => (alongX ? { x: along, z: face + inward * depth } : { x: face + inward * depth, z: along })
+  // LINK-F1B: the frame only places the search — the face's pixel row (column) and the jambs' pixel columns (rows); the
+  // dashed tracks are then read on the raster's own pixel grid. Stepping in metres and rounding each sample to a pixel
+  // made the reading depend on the sub-pixel phase of the frame: a 0.3 px shift of the map hit other pixels of a dashed
+  // line, and a garage gate's tracks came and went with the registration.
+  const facePx = plan.toPixel(world(interval[0], 0).x, world(interval[0], 0).z)
+  const deepPx = plan.toPixel(world(interval[0], 1).x, world(interval[0], 1).z)
+  const across = alongX ? Math.round(facePx.y) : Math.round(facePx.x)
+  const dir = Math.sign(alongX ? deepPx.y - facePx.y : deepPx.x - facePx.x) || 1
+  const pxAlong = (along: number): number => {
+    const p = plan.toPixel(world(along, 0).x, world(along, 0).z)
+    return alongX ? p.x : p.y
+  }
+  const pixel = (c: number, k: number): { x: number; y: number } => (alongX ? { x: c, y: across + dir * k } : { x: across + dir * k, y: c })
   const ink = (p: { x: number; y: number }): boolean => {
-    const x = Math.round(p.x)
-    const y = Math.round(p.y)
-    if (lumaOf(raster, x, y) >= TRACK_INK_LUMA) return false
-    const [r, g, b] = rgbAt(raster, x, y)
+    if (lumaOf(raster, p.x, p.y) >= TRACK_INK_LUMA) return false
+    const [r, g, b] = rgbAt(raster, p.x, p.y)
     return Math.max(r, g, b) - Math.min(r, g, b) <= TRACK_MAX_CHROMA
   }
-  const step = mpp
-  const reach = TRACK_MIN_LENGTH_M * 2.5
-  const track = (along: number): number | undefined => {
+  /** Metres into the room at depth k pixels from the face, through the frame (not a mean scale). */
+  const depthM = (c: number, k: number): number => {
+    const p = pixel(c, k)
+    const w = plan.toWorld(p.x, p.y)
+    return Math.abs((alongX ? w.z : w.x) - face)
+  }
+  const reachPx = Math.ceil((TRACK_MIN_LENGTH_M * 2.5) / mpp)
+  const sidePx = 3
+  const track = (c: number): number | undefined => {
     let first: number | undefined
     let last: number | undefined
     let inked = 0
     let swing = 0
     let prev: number | undefined
     let thin = 0
-    for (let d = 0; d <= reach; d += step) {
-      if (!ink(at(along, d))) {
-        if (last !== undefined && d - last > TRACK_DASH_GAP_M) break
-        if (first === undefined && d > TRACK_START_M) return undefined
+    for (let k = 0; k <= reachPx; k += 1) {
+      const p = pixel(c, k)
+      if (!ink(p)) {
+        if (last !== undefined && depthM(c, k) - depthM(c, last) > TRACK_DASH_GAP_M) break
+        if (first === undefined && depthM(c, k) > TRACK_START_M) return undefined
         continue
       }
-      if (first === undefined) first = d
-      last = d
+      if (first === undefined) first = k
+      last = k
       inked += 1
-      const p = at(along, d)
-      const l = lumaOf(raster, Math.round(p.x), Math.round(p.y))
+      const l = lumaOf(raster, p.x, p.y)
       if (prev !== undefined) swing += Math.abs(l - prev)
       prev = l
-      const side = 3 * mpp
-      if (!ink(at(along - side, d)) && !ink(at(along + side, d))) thin += 1
+      if (!ink(pixel(c - sidePx, k)) && !ink(pixel(c + sidePx, k))) thin += 1
     }
     if (first === undefined || last === undefined) return undefined
-    const length = last - first
-    const samples = length / step + 1
+    const length = depthM(c, last) - depthM(c, first)
+    const samples = last - first + 1
     // Broken: gaps along it, or — a fine dotted line drawn soft — ink that alternates dark and grey; a partition is neither.
     const broken = inked / samples <= TRACK_INK_SHARE[1] || (inked > 1 && swing / (inked - 1) >= TRACK_DOT_SWING_LUMA)
     if (length < TRACK_MIN_LENGTH_M || inked / samples < TRACK_INK_SHARE[0] || !broken || thin < 0.8 * inked) return undefined
     return length
   }
   const atJamb = (jamb: number): number | undefined => {
+    const from = Math.ceil(Math.min(pxAlong(jamb - TRACK_SEARCH_ALONG_M), pxAlong(jamb + TRACK_SEARCH_ALONG_M)))
+    const to = Math.floor(Math.max(pxAlong(jamb - TRACK_SEARCH_ALONG_M), pxAlong(jamb + TRACK_SEARCH_ALONG_M)))
     let best: number | undefined
-    for (let o = -TRACK_SEARCH_ALONG_M; o <= TRACK_SEARCH_ALONG_M; o += step) {
-      const l = track(jamb + o)
+    for (let c = from; c <= to; c += 1) {
+      const l = track(c)
       if (l !== undefined && (best === undefined || l > best)) best = l
     }
     return best
@@ -1231,4 +1259,81 @@ export function viewGroundRefusals(views: ReadonlyArray<{ frameId: string; botto
     if (best && best.n >= 2 && best.n > mine) out.push({ frameId: own.frameId, reason: `it puts the ground at ${own.bottomY.toFixed(2)} m where ${best.n} of the house's other registered views agree on ${best.y.toFixed(2)} m` })
   }
   return out
+}
+
+
+/**
+ * LINK-F1B: how far either side of the jambs the drawn wall band is sampled, in pixels (a short stretch of the wall
+ * itself): three pixels clear of the jamb's frame and leaf lines, plus the two pixels the jamb's mapped position is
+ * uncertain by (two tick localisations of the chain it was placed by), so a sample never lands in the jamb's own ink.
+ */
+const BAND_SAMPLE_PX: readonly number[] = [5, 6, 7, 8, 9, 10]
+
+/**
+ * LINK-F1B: the wall band the plan draws beside a gap — just past each jamb, across the wall — as the faces symbol
+ * readers measure from. The host's predicted faces bound the search to one wall thickness either side; in each sampled
+ * column the dark run between half a wall and two walls thick nearest the prediction is the wall. Most columns must agree (their faces
+ * within a pixel of the median): a wall that is drawn, not a piece of furniture or a neighbouring gap. Undefined where
+ * that is not found, and the prediction stands.
+ */
+export function drawnWallBand(raster: Raster, plan: PlanFrameV2, host: WallHost, interval: [number, number], wallThicknessM: number): { centreAt: number; thicknessM: number; centrePx: number } | undefined {
+  const alongX = host.facade === 'FRONT' || host.facade === 'REAR'
+  const px = (along: number, across: number): { x: number; y: number } => (alongX ? plan.toPixel(along, across) : plan.toPixel(across, along))
+  const A = (p: { x: number; y: number }): number => (alongX ? p.x : p.y)
+  const C = (p: { x: number; y: number }): number => (alongX ? p.y : p.x)
+  const f0 = C(px(interval[0], host.centreAt - wallThicknessM / 2))
+  const f1 = C(px(interval[0], host.centreAt + wallThicknessM / 2))
+  const lo = Math.min(f0, f1)
+  const hi = Math.max(f0, f1)
+  const tPx = hi - lo
+  if (!(tPx >= 2)) return undefined
+  const mid = (lo + hi) / 2
+  const a0 = A(px(interval[0], host.centreAt))
+  const a1 = A(px(interval[1], host.centreAt))
+  const dir = a1 >= a0 ? 1 : -1
+  const cols = [...BAND_SAMPLE_PX.map((d) => Math.round(a0 - dir * d)), ...BAND_SAMPLE_PX.map((d) => Math.round(a1 + dir * d))]
+  // wall ink: neutral and darker than the paper by the margin the other plan readers use (walls are grey on some sheets)
+  const dark = (a: number, c: number): boolean => lumaOf(raster, alongX ? a : c, alongX ? c : a) < 200
+  const runs: Array<[number, number]> = []
+  for (const a of cols) {
+    let best: [number, number] | undefined
+    for (let c = Math.floor(lo - tPx); c <= Math.ceil(hi + tPx); c += 1) {
+      if (!dark(a, c) || dark(a, c - 1)) continue
+      let e = c
+      while (e + 1 <= Math.ceil(hi + 2 * tPx) && dark(a, e + 1)) e += 1
+      // a run longer than two walls is a wall across the line (or a fill), not this wall's band
+      if (e - c + 1 >= 0.5 * tPx && e - c + 1 <= 2 * tPx && (!best || Math.abs((c + e) / 2 - mid) < Math.abs((best[0] + best[1]) / 2 - mid))) best = [c, e]
+    }
+    if (best) runs.push(best)
+  }
+  if (runs.length < cols.length / 2) return undefined
+  const med = (v: number[]): number => [...v].sort((p, q) => p - q)[Math.floor(v.length / 2)]
+  const s = med(runs.map((r) => r[0]))
+  const e = med(runs.map((r) => r[1]))
+  if (runs.filter((r) => Math.abs(r[0] - s) <= 1 && Math.abs(r[1] - e) <= 1).length < cols.length / 2) return undefined
+  const centrePx = (s + e + 1) / 2
+  if (Math.abs(centrePx - mid) > tPx) return undefined
+  const at = (c: number): number => {
+    const w = alongX ? plan.toWorld(a0, c) : plan.toWorld(c, a0)
+    return alongX ? w.z : w.x
+  }
+  const faceA = at(s)
+  const faceB = at(e + 1)
+  return { centreAt: round6((faceA + faceB) / 2), thicknessM: round6(Math.abs(faceB - faceA)), centrePx: round6(centrePx) }
+}
+
+
+/**
+ * LINK-F1B: the frame a gap's symbols are read in — the plan's frame at the gap (the point given lands on the very pixel
+ * the shared map puts it on) and the sheet's own scale about it. The chain ladder may stretch the metres between two of
+ * its lines by a few per cent to honour a printed number; a door's leaf, its arc, a garage's tracks are drawn at the
+ * drawing's scale all the same, and measured in the ladder's they are a pixel or two too long or too short.
+ */
+export function symbolFrame(plan: PlanFrameV2, at: { x: number; z: number }): PlanFrameV2 {
+  const p0 = plan.toPixel(at.x, at.z)
+  const sx = Math.sign(plan.toPixel(at.x + 1, at.z).x - p0.x) || 1
+  const sz = Math.sign(plan.toPixel(at.x, at.z + 1).y - p0.y) || -1
+  const toPixel = (x: number, z: number): { x: number; y: number } => ({ x: round6(p0.x + (sx * (x - at.x)) / plan.mppX), y: round6(p0.y + (sz * (z - at.z)) / plan.mppY) })
+  const toWorld = (px: number, py: number): { x: number; z: number } => ({ x: round6(at.x + (sx * (px - p0.x)) * plan.mppX), z: round6(at.z + (sz * (py - p0.y)) * plan.mppY) })
+  return { ...plan, toPixel, toWorld, originPx: toPixel(0, 0) }
 }

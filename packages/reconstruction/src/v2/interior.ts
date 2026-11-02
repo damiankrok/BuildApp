@@ -371,6 +371,22 @@ export function readInterior(
             const pieceThick = medianOf(pieceCounts)
             const centre = medianOf(centres)
             if (pieceThick < minThick - 1 || pieceThick > capAcross(vertical, centre)) continue
+            // LINK-F1B: a piece flush against the window's edge whose ink runs on across that edge into the outer wall
+            // beyond it (dark just outside the window along most of the piece) is that wall's own ink — drawn thicker
+            // than the model's wall, or the body cut on a line beside its face — not a partition beside it. A partition
+            // standing in the room has paper between it and the wall.
+            const lowEdge = i <= 1
+            const highEdge = j >= n - 2
+            if (lowEdge || highEdge) {
+              let joined = 0
+              for (let t = run.from; t <= run.to; t += 1) {
+                const k = lowEdge ? -1 : n
+                const xw = vertical ? px0 + k : px0 + t
+                const yw = vertical ? py0 + t : py0 + k
+                if (lumaAt(raster, xw, yw) < 200) joined += 1
+              }
+              if (joined >= 0.8 * (run.to - run.from + 1)) continue
+            }
             axes.push({ centre, thick: pieceThick, runs: [run] })
           }
         }
@@ -477,7 +493,9 @@ export function readInterior(
         const push = (r: { minX: number; maxX: number; minY: number; maxY: number }, fillOf: number, how: string, into: 'blocks' | 'cores'): void => {
           const a = plan.toWorld(px0 + r.minX, py0 + r.maxY + 1)
           const b = plan.toWorld(px0 + r.maxX + 1, py0 + r.minY)
-          const block = { storeyIndex, x0: round6(a.x), z0: round6(a.z), x1: round6(b.x), z1: round6(b.z), pixelRect: { x0: px0 + r.minX, y0: py0 + r.minY, x1: px0 + r.maxX + 1, y1: py0 + r.maxY + 1 }, why: `a ${((r.maxX - r.minX + 1) * mpp).toFixed(2)} × ${((r.maxY - r.minY + 1) * mpp).toFixed(2)} m block of solid ink (${Math.round(fillOf * 100)} % filled)${how}` }
+          // LINK-F1B: the window was cut to whole pixels inside the inner faces and a block's far edge is one past its last
+          // pixel, so it may reach up to a pixel into the external wall it stands against; it is read inside the body
+          const block = { storeyIndex, x0: round6(Math.max(a.x, inner.x0)), z0: round6(Math.max(a.z, inner.z0)), x1: round6(Math.min(b.x, inner.x1)), z1: round6(Math.min(b.z, inner.z1)), pixelRect: { x0: px0 + r.minX, y0: py0 + r.minY, x1: px0 + r.maxX + 1, y1: py0 + r.maxY + 1 }, why: `a ${((r.maxX - r.minX + 1) * mpp).toFixed(2)} × ${((r.maxY - r.minY + 1) * mpp).toFixed(2)} m block of solid ink (${Math.round(fillOf * 100)} % filled)${how}` }
           if (into === 'blocks') blocks.push({ id: `block-${storeyIndex}-${blocks.length}`, ...block })
           else cores.push(block)
         }
@@ -954,7 +972,6 @@ export function readInterior(
  * jamb, on either side of the line, sampled at 12 points; at least 70 % of them on neutral line work (within a pixel).
  */
 export function swingDrawn(raster: Raster, plan: PlanFrameV2, axis: 'X' | 'Z', at: number, gap: [number, number]): boolean {
-  const width = gap[1] - gap[0]
   const lineAt = (x: number, y: number): boolean => {
     for (let dy = -1; dy <= 1; dy += 1) {
       for (let dx = -1; dx <= 1; dx += 1) {
@@ -965,22 +982,49 @@ export function swingDrawn(raster: Raster, plan: PlanFrameV2, axis: 'X' | 'Z', a
     }
     return false
   }
-  for (const hinge of [gap[0], gap[1]]) {
+  // LINK-F1B: the quarter arc is traced on the raster's pixel grid — hinge and wall line rounded to a pixel once, the
+  // radius the gap's own pixel width between its two transformed jambs — so the frame's sub-pixel phase moves no sample
+  const g = gapOnGrid(plan, axis, at, gap)
+  for (const [hingeA, dir] of [[g.a0, g.dir], [g.a1, -g.dir]] as const) {
     for (const side of [-1, 1]) {
       let hit = 0
       let n = 0
       for (let deg = 12; deg <= 78; deg += 6) {
         const t = (deg * Math.PI) / 180
-        const along = hinge + (hinge === gap[0] ? 1 : -1) * width * Math.cos(t)
-        const across = at + side * width * Math.sin(t)
-        const p = axis === 'Z' ? plan.toPixel(across, along) : plan.toPixel(along, across)
+        const p = g.pixel(Math.round(hingeA) + dir * g.widthPx * Math.cos(t), g.line + side * g.across * g.widthPx * Math.sin(t))
         n += 1
-        if (lineAt(p.x, p.y)) hit += 1
+        if (lineAt(Math.round(p.x), Math.round(p.y))) hit += 1
       }
       if (hit >= 0.7 * n) return true
     }
   }
   return false
+}
+
+/**
+ * LINK-F1B: a door gap on its wall's line in the raster's pixels: the two jambs along the line (`a0` at gap[0], `a1` at
+ * gap[1]), which way along the sheet the gap runs (`dir`) and which way across it the world's + side lies (`across`),
+ * the wall line's pixel row (column), rounded once, the gap's width in pixels between its two transformed ends and the
+ * metres per pixel along it that width gives (not the frame's mean scale), and the pixel of an (along, across) pair.
+ */
+export function gapOnGrid(plan: PlanFrameV2, axis: 'X' | 'Z', at: number, gap: [number, number]): { a0: number; a1: number; dir: 1 | -1; across: 1 | -1; line: number; widthPx: number; mppAlong: number; pixel: (along: number, across: number) => { x: number; y: number }; alongM: (along: number) => number } {
+  const pt = (along: number, acrossM: number): { x: number; y: number } => (axis === 'Z' ? plan.toPixel(acrossM, along) : plan.toPixel(along, acrossM))
+  const A = (p: { x: number; y: number }): number => (axis === 'X' ? p.x : p.y)
+  const C = (p: { x: number; y: number }): number => (axis === 'X' ? p.y : p.x)
+  const j0 = pt(gap[0], at)
+  const j1 = pt(gap[1], at)
+  const a0 = A(j0)
+  const a1 = A(j1)
+  const dir: 1 | -1 = a1 >= a0 ? 1 : -1
+  const across: 1 | -1 = C(pt(gap[0], at + 1)) >= C(j0) ? 1 : -1
+  const widthPx = Math.abs(a1 - a0)
+  const mppAlong = (gap[1] - gap[0]) / Math.max(1e-9, widthPx)
+  const pixel = (alongPx: number, acrossPx: number): { x: number; y: number } => (axis === 'X' ? { x: alongPx, y: acrossPx } : { x: acrossPx, y: alongPx })
+  const alongM = (alongPx: number): number => {
+    const w = plan.toWorld(axis === 'X' ? alongPx : C(j0), axis === 'X' ? C(j0) : alongPx)
+    return axis === 'X' ? w.x : w.z
+  }
+  return { a0, a1, dir, across, line: Math.round(C(j0)), widthPx, mppAlong, pixel, alongM }
 }
 
 /**
@@ -999,6 +1043,12 @@ export const HINGE_SLACK_M = 0.15
 export const HINGE_ACROSS_M = 0.08
 /** N8-03D2: a leaf is drawn as a line at most this many pixels wide. */
 export const LEAF_MAX_PX = 3
+/**
+ * LINK-F1B: how far past its bounds, in pixels, a door's hinge, the far end of its arc and the wall's line may still be
+ * drawn — the jambs' and the line's pixels are the map's predictions of where the partitions end and run, located to
+ * within two tick localisations of the chain they were placed by (2 × LADDER_TICK_PX).
+ */
+export const JAMB_PHASE_PX = 2
 /** N8-03D2: how far two parallel partitions' ends may pass each other along and still frame one doorway between them. */
 export const STAGGER_MAX_M = 0.4
 
@@ -1044,32 +1094,53 @@ export function doorSwingInGap(raster: Raster, plan: PlanFrameV2, axis: 'X' | 'Z
     return false
   }
   const shortest = Math.max(SHORT_LEAF_MIN_M, SHORT_LEAF_MIN_FRACTION * width)
-  // every hinge, radius and side: the one whose arc the drawing follows best, its leaf drawn
-  let best: { hinge: number; radius: number; side: -1 | 1; arc: number } | undefined
+  // LINK-F1B: every hinge, radius and side on the raster's own pixel grid — hinges at whole pixels from each jamb into
+  // the gap, wall lines at whole pixels either side of the drawn one, radii in whole pixels — with the slack, the reach
+  // across and the shortest leaf in pixels at the gap's own scale (its width between its two transformed jambs). Stepping
+  // the hypotheses in metres made the set of pixels tried depend on the frame's sub-pixel phase: the same drawn arc was
+  // found in 10 of 49 phases of a ±2 px shift.
+  const g = gapOnGrid(plan, axis, at, gap)
+  const slackPx = Math.round(HINGE_SLACK_M / g.mppAlong)
+  const acrossPx = Math.round(HINGE_ACROSS_M / g.mppAlong)
+  const shortestPx = shortest / g.mppAlong
+  let best: { hinge: number; radius: number; side: -1 | 1; arc: number; exact: number } | undefined
   let n = 0
   for (let deg = 12; deg <= 78; deg += 6) n += 1
-  for (const [jamb, dir] of [[gap[0], 1], [gap[1], -1]] as const) {
-    for (let slack = 0; slack <= HINGE_SLACK_M + 1e-9; slack += mpp) {
-      const hinge = jamb + dir * slack
-      for (let radius = width - slack - mpp; radius >= shortest; radius -= mpp) {
-        for (let off = -HINGE_ACROSS_M; off <= HINGE_ACROSS_M + 1e-9; off += mpp) {
-          const line = at + off
+  for (const [jamb, other, dir] of [[g.a0, g.a1, g.dir], [g.a1, g.a0, -g.dir]] as const) {
+    // the hinge within the slack first, then up to JAMB_PHASE_PX further in and outside the jamb; radii shorter than the
+    // gap first, then up to the far jamb and JAMB_PHASE_PX past it (and the hinge's own rounding to a whole pixel); the wall's line within HINGE_ACROSS_M first, then up to
+    // JAMB_PHASE_PX further either side: every bound measured from a pixel the map predicts is that much uncertain, and
+    // on a tie the reading within the bounds as mapped is kept
+    const slacks = [...Array.from({ length: slackPx + 1 }, (_, k) => k), ...Array.from({ length: JAMB_PHASE_PX }, (_, k) => slackPx + k + 1), ...Array.from({ length: JAMB_PHASE_PX }, (_, k) => -(k + 1))]
+    const offsets = [...Array.from({ length: 2 * acrossPx + 1 }, (_, k) => k - acrossPx), ...Array.from({ length: JAMB_PHASE_PX }, (_, k) => [-(acrossPx + k + 1), acrossPx + k + 1]).flat()]
+    for (const slack of slacks) {
+      const hingeA = Math.round(jamb) + dir * slack
+      const within = Math.floor(Math.abs(other - hingeA)) - 1
+      const radii = [...Array.from({ length: Math.max(0, within - Math.ceil(shortestPx) + 1) }, (_, k) => within - k), ...Array.from({ length: JAMB_PHASE_PX + 2 }, (_, k) => within + k + 1)]
+      for (const radius of radii) {
+        if (radius < shortestPx) continue
+        for (const off of offsets) {
+          const line = g.line + off
           for (const side of [-1, 1] as const) {
+            // the arc's samples within a pixel of ink, and (to choose between hypotheses within that pixel of each
+            // other) those on ink exactly
             let arc = 0
+            let exact = 0
             for (let deg = 12; deg <= 78; deg += 6) {
               const t = (deg * Math.PI) / 180
-              const p = pt(hinge + dir * radius * Math.cos(t), line + side * radius * Math.sin(t))
-              if (lineAt(p.x, p.y)) arc += 1
+              const p = g.pixel(hingeA + dir * radius * Math.cos(t), line + side * g.across * radius * Math.sin(t))
+              if (lineAt(Math.round(p.x), Math.round(p.y))) arc += 1
+              if (inked(Math.round(p.x), Math.round(p.y))) exact += 1
             }
-            if (arc < 0.7 * n || (best && arc <= best.arc)) continue
+            if (arc < 0.7 * n || (best && (arc < best.arc || (arc === best.arc && exact <= best.exact)))) continue
             let leaf = 0
             let m = 0
             for (let f = 0.15; f <= 0.95 + 1e-9; f += 0.1) {
-              const p = pt(hinge, line + side * radius * f)
+              const p = g.pixel(hingeA, line + side * g.across * radius * f)
               m += 1
               if (thinLineAt(p.x, p.y)) leaf += 1
             }
-            if (leaf >= 0.75 * m) best = { hinge: round6(hinge), radius: round6(radius), side, arc }
+            if (leaf >= 0.75 * m) best = { hinge: round6(g.alongM(hingeA)), radius: round6(radius * g.mppAlong), side, arc, exact }
           }
         }
       }

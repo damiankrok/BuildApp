@@ -174,7 +174,13 @@ import type { ApproximateRidge } from './roof-datum.js'
 // longer ones to within their pixel uncertainty, so the bodies and the linear plan frame the walls, gaps, openings,
 // stairs and partitions are mapped through agree to within that uncertainty; the ladders' anchors, pinned and rejected
 // with their residuals, are a registration step
-export const SOLVER_V2_VERSION = '2.18.0' as const
+// 2.19.0 (LINK-F1B): one invertible plan map — the base plan's walls, gaps, openings, stairs, blocks and the storeys
+// aligned onto it go through the same chain ladders as the bodies (strictly rising, inverted for pixel lookups, the
+// sheet's scale beyond the outer lines); the symbol readers (tracks, door leaves and arcs, glazing) work on the
+// raster's own pixel grid about the wall band the plan draws beside the gap, so the map's sub-pixel phase and local
+// scale no longer change a family; a party wall's contact allows the pixel uncertainty of the anchors pinning its line;
+// outer-wall ink beyond a modelled face is not read as a partition; slabs end on the face of the wall that carries them
+export const SOLVER_V2_VERSION = '2.19.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
@@ -1342,7 +1348,16 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // ---------------------------------------------------------------------------
   // G3b. N8-02B: one wall where two bodies meet and the plan draws one band
   // ---------------------------------------------------------------------------
-  const partyRecords = readPartyWalls({ masses, plans: new Map([...planByStorey].map(([index, entry]) => [index, { raster: entry.raster, frame: entry.frame }])), wallOf: (m) => m.wallThicknessM ?? T })
+  // LINK-F1B: a contact on a base-plan line pinned by a dimension whose tick misses the line is that many pixels less certain
+  const contactSlackM = (axis: 'X' | 'Z', at: number): number => {
+    const l = axis === 'X' ? draft.frame?.ladders?.x : draft.frame?.ladders?.z
+    if (!l?.px) return 0
+    const px = l.px(axis === 'X' ? at : world.zFlip - at)
+    const mpp = axis === 'X' ? draft.frame?.metresPerPixelX ?? 0 : draft.frame?.metresPerPixelY ?? 0
+    const off = Math.max(0, ...l.anchors.filter((a) => a.disposition === 'PINNED' && (Math.abs(a.fromPx - px) < 0.5 || Math.abs(a.toPx - px) < 0.5)).map((a) => a.offPx))
+    return round6(off * mpp)
+  }
+  const partyRecords = readPartyWalls({ masses, plans: new Map([...planByStorey].map(([index, entry]) => [index, { raster: entry.raster, frame: entry.frame }])), wallOf: (m) => m.wallThicknessM ?? T, contactSlackM })
   const partyWalls: PartyWallV2[] = partyRecords.flatMap((r) => (r.wall ? [r.wall] : []))
   for (const r of partyRecords) {
     step({ stage: 'massing', what: `N8-02B: the contact of ${r.massIds.join(' and ')} on storey ${r.storeyIndex}`, method: r.decision === 'UNDECIDED' ? 'REFUSED' : 'DISCRETE_SELECTION', detail: `${r.decision}: ${r.why}`, inputs: r.reading.samples, outputs: r.decision === 'ONE_WALL' ? 1 : r.decision === 'TWO_WALLS' ? 2 : 0 })
@@ -1362,10 +1377,13 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       const hostSide = p.hostMassId === m.id ? p.hostFacade : p.otherMassId === m.id ? OPPOSITE_SIDE[p.hostFacade] : undefined
       if (!hostSide) continue
       const face = p.hostMassId === m.id ? partyNearFace(p) : partyFarFace(p)
-      if (hostSide === 'EAST') r.x1 = round6(Math.max(r.x1 - t, face) + t)
-      else if (hostSide === 'WEST') r.x0 = round6(Math.min(r.x0 + t, face) - t)
-      else if (hostSide === 'REAR') r.z1 = round6(Math.max(r.z1 - t, face) + t)
-      else r.z0 = round6(Math.min(r.z0 + t, face) - t)
+      // LINK-F1B: the interior is read up to the face of the wall that stands there — the shared wall's own face,
+      // nearer or further than the house wall's thickness from the contact — so its ink is not read as a partition
+      // or merged into a block beside it
+      if (hostSide === 'EAST') r.x1 = round6(face + t)
+      else if (hostSide === 'WEST') r.x0 = round6(face - t)
+      else if (hostSide === 'REAR') r.z1 = round6(face + t)
+      else r.z0 = round6(face - t)
     }
     return r
   }

@@ -22,7 +22,7 @@ import { VOID_SNAP_M, voidOnSlab } from './slab-void.js'
 import { CONVENTIONS } from '../solve.js'
 import { planWallTopology } from './wall-topology.js'
 import { partyFarFace, sideSegments } from './party-wall.js'
-import type { PartySide, SideSegment } from './party-wall.js'
+import type { PartySide, PartyWallV2, SideSegment } from './party-wall.js'
 import type { HostBand, PlanDecision, WallTopologyPlan } from './wall-topology.js'
 
 export type Binding = { featureId: string; objectId: string; objectKind: string; commandIndex: number }
@@ -358,7 +358,21 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
         return p ? partyFarFace(p) : undefined
       }
       const edge = { x0: sharedFace('WEST') ?? round6(m.x0 + inset), z0: sharedFace('FRONT') ?? round6(m.z0 + inset), x1: sharedFace('EAST') ?? round6(m.x1 - inset), z1: sharedFace('REAR') ?? round6(m.z1 - inset) }
-      const slabPolygon = inset > 0 ? [{ x: edge.x0, z: edge.z0 }, { x: edge.x1, z: edge.z0 }, { x: edge.x1, z: edge.z1 }, { x: edge.x0, z: edge.z1 }] : polygon
+      // LINK-F1B: where this body itself builds the shared wall (PARTY), its slab meets that wall's own face — the face the
+      // emitted wall has, not the house wall's thickness in from the outline: above the lowest storey the face toward the
+      // body, on the lowest storey (both bodies' floors meet under it) its far face, where the other body's floor starts.
+      // The rest of each side keeps its own edge, so a side half party, half own wall gets a step.
+      // the walls that carry a slab are the storey's below it: their shared wall, where this body builds one, is where
+      // its floor bears (a body may share a wall on the ground storey only and carry its upper floor on it)
+      const below = bearsOnWalls ? Math.max(...m.storeys.filter((x) => x < storey)) : undefined
+      const carrying = below !== undefined ? segmentsOf(m, below) ?? segs : segs
+      const hostBuilds = (p: PartyWallV2): Array<[number, number]> => {
+        const host = b.masses.find((x) => x.id === p.hostMassId)
+        const hs = host ? segmentsOf(host, storey) : undefined
+        return (hs?.[p.hostFacade] ?? []).filter((x) => x.party?.id === p.id && (x.kind === 'PARTY' || x.kind === 'CORNER')).map((x) => [x.from, x.to])
+      }
+      const supported = carrying ? supportedSlab(carrying, bearsOnWalls ? edge : { x0: r.x0, z0: r.z0, x1: r.x1, z1: r.z1 }, bearsOnWalls, !bearsOnWalls, hostBuilds) : undefined
+      const slabPolygon = supported ?? (inset > 0 ? [{ x: edge.x0, z: edge.z0 }, { x: edge.x1, z: edge.z0 }, { x: edge.x1, z: edge.z1 }, { x: edge.x0, z: edge.z1 }] : polygon)
       // A stair void that reaches a wall ends at the wall's inner face: the slab is not there to be cut.
       const stairHoles = holes?.map((h) => h.map((p) => ({ x: round6(Math.min(Math.max(p.x, m.x0 + inset), m.x1 - inset)), z: round6(Math.min(Math.max(p.z, m.z0 + inset), m.z1 - inset)) })))
       // N8-03D1: a void the storey's plan fills, a hole beside the stair's; an edge within VOID_SNAP_M of the slab's
@@ -1029,4 +1043,109 @@ function insidePolygon(p: { x: number; z: number }, poly: ReadonlyArray<{ x: num
     if (a.z > p.z !== b.z > p.z && p.x < ((b.x - a.x) * (p.z - a.z)) / (b.z - a.z) + a.x) inside = !inside
   }
   return inside
+}
+
+/** LINK-F1B: the face of a shared wall toward its host, as `emitSplitBody` builds it (line on the far face, thickness inward). */
+export function partyHostFace(p: PartyWallV2): number {
+  const inward = p.hostFacade === 'EAST' || p.hostFacade === 'REAR' ? -1 : 1
+  return round6(partyFarFace(p) + inward * p.thicknessM)
+}
+
+/**
+ * LINK-F1B: a slab's outline over a body that shares a wall, each stretch of each side ending on the face of the wall
+ * that actually carries it. Own walls (and the corners they own) keep the slab's own edge (`edge`); a stretch where this
+ * body builds the shared wall (PARTY) ends on that wall's face toward it (`bears`: above the lowest storey) or on its far
+ * face (the lowest storey, where the other body's floor begins under the same wall); a stretch where the other body
+ * builds it (NONE, the wall drawn once) ends on its far face on every storey — on the lowest only where the contact has
+ * a wall at all (an OPEN contact keeps the outline); on the lowest storey the host's corner stretches of the contact end
+ * there too, so the two floors meet along the whole contact without overlapping. Undefined where nothing differs from `edge`, or where the steps
+ * would not make one rectilinear outline (the caller keeps its rectangle).
+ */
+export function supportedSlab(
+  segs: Record<PartySide, SideSegment[]>,
+  edge: { x0: number; z0: number; x1: number; z1: number },
+  bears: boolean,
+  lowest: boolean,
+  /** On the lowest storey, where the host of a shared wall builds it (its PARTY and CORNER stretches) along the contact. */
+  hostBuilds?: (p: PartyWallV2) => Array<[number, number]>,
+): Array<{ x: number; z: number }> | undefined {
+  const base: Record<PartySide, number> = { FRONT: edge.z0, EAST: edge.x1, REAR: edge.z1, WEST: edge.x0 }
+  const span: Record<PartySide, [number, number]> = { FRONT: [edge.x0, edge.x1], REAR: [edge.x0, edge.x1], EAST: [edge.z0, edge.z1], WEST: [edge.z0, edge.z1] }
+  const pieces = (side: PartySide): Array<{ a: number; b: number; e: number }> => {
+    const out: Array<{ a: number; b: number; e: number }> = []
+    // on the lowest storey the other body's floor reaches the shared wall's far face only where the host builds that
+    // wall (or the corner of it); past it the host's own wall runs on, and the floor starts at its own outline
+    const split = (sg: SideSegment): SideSegment[] => {
+      if (!(lowest && sg.kind === 'NONE' && sg.party && !sg.party.open && hostBuilds)) return [sg]
+      const cover = hostBuilds(sg.party).map(([a, b]) => [Math.max(a, sg.from), Math.min(b, sg.to)] as [number, number]).filter(([a, b]) => b - a > 1e-6).sort((p, q) => p[0] - q[0])
+      const parts: SideSegment[] = []
+      let at = sg.from
+      for (const [a, b] of cover) {
+        if (a > at + 1e-6) parts.push({ kind: 'OWN', from: at, to: a })
+        parts.push({ ...sg, from: Math.max(a, at), to: b })
+        at = Math.max(at, b)
+      }
+      if (sg.to > at + 1e-6) parts.push({ kind: 'OWN', from: at, to: sg.to })
+      return parts
+    }
+    for (const sg of segs[side].flatMap(split)) {
+      const e =
+        sg.kind === 'PARTY' && sg.party ? (bears ? partyHostFace(sg.party) : partyFarFace(sg.party))
+        // on the lowest storey the two floors meet along the whole contact, the host's corners included
+        : sg.kind === 'CORNER' && sg.party && lowest && !sg.party.open ? partyFarFace(sg.party)
+        : sg.kind === 'NONE' && sg.party && (!lowest || !sg.party.open) ? partyFarFace(sg.party)
+        : base[side]
+      const a = Math.max(span[side][0], sg.from)
+      const b = Math.min(span[side][1], sg.to)
+      if (b - a <= 1e-6) continue
+      const last = out[out.length - 1]
+      if (last && Math.abs(last.e - e) <= 1e-6 && Math.abs(last.b - a) <= 1e-6) last.b = b
+      else out.push({ a, b, e })
+    }
+    // stretches no segment covers keep the side's own edge
+    const filled: Array<{ a: number; b: number; e: number }> = []
+    let at = span[side][0]
+    for (const q of out) {
+      if (q.a > at + 1e-6) filled.push({ a: at, b: q.a, e: base[side] })
+      filled.push(q)
+      at = q.b
+    }
+    if (span[side][1] > at + 1e-6) filled.push({ a: at, b: span[side][1], e: base[side] })
+    return filled
+  }
+  const sides = { FRONT: pieces('FRONT'), EAST: pieces('EAST'), REAR: pieces('REAR'), WEST: pieces('WEST') }
+  if ((Object.keys(sides) as PartySide[]).every((sd) => sides[sd].every((q) => Math.abs(q.e - base[sd]) <= 1e-6))) return undefined
+  const pts: Array<{ x: number; z: number }> = []
+  const push = (x: number, z: number): void => {
+    const p = { x: round6(x), z: round6(z) }
+    const last = pts[pts.length - 1]
+    if (!last || last.x !== p.x || last.z !== p.z) pts.push(p)
+  }
+  for (const q of sides.FRONT) { push(q.a, q.e); push(q.b, q.e) }
+  for (const q of sides.EAST) { push(q.e, q.a); push(q.e, q.b) }
+  for (const q of [...sides.REAR].reverse()) { push(q.b, q.e); push(q.a, q.e) }
+  for (const q of [...sides.WEST].reverse()) { push(q.e, q.b); push(q.e, q.a) }
+  if (pts.length > 1 && pts[0].x === pts[pts.length - 1].x && pts[0].z === pts[pts.length - 1].z) pts.pop()
+  // a corner where a side's edge moved inward runs back along the side beside it: drop every point between two edges
+  // on one line (straight on, or turning back along it)
+  for (let changed = true; changed && pts.length > 3; ) {
+    changed = false
+    for (let i = 0; i < pts.length; i += 1) {
+      const a = pts[(i + pts.length - 1) % pts.length]
+      const m = pts[i]
+      const c = pts[(i + 1) % pts.length]
+      if ((a.x === m.x && m.x === c.x) || (a.z === m.z && m.z === c.z)) {
+        pts.splice(i, 1)
+        changed = true
+        break
+      }
+    }
+  }
+  // rectilinear and simple: every edge axis-aligned
+  for (let i = 0; i < pts.length; i += 1) {
+    const a = pts[i]
+    const c = pts[(i + 1) % pts.length]
+    if (a.x !== c.x && a.z !== c.z) return undefined
+  }
+  return pts.length >= 4 ? pts : undefined
 }
