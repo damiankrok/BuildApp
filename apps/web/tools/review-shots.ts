@@ -798,6 +798,10 @@ async function shootCandidate(page: Page, id: string, style: string, ortho: { dy
   // this run's shots replace the last run's; a candidate that fails below leaves none behind to be mistaken for current
   for (const s of SHOTS) rmSync(resolve(dir, s.file), { force: true })
   const c = await loadCandidate(page, id, style, warnings, pageErrors)
+  // LINK-F1B: a model whose status banner takes a line (a long name, a partial-preview notice) moves the canvas down the
+  // page; the shots are the canvas's own drawing buffer, so its page position is irrelevant to them, and the layout check
+  // holds within one candidate's shots: its reference is taken again once it is loaded
+  referenceCanvas = null
   const shots: ShotResult[] = []
 
   for (const s of SHOTS) {

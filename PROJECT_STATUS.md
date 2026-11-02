@@ -3002,3 +3002,28 @@ warnings, +2 elevation comparisons out of tolerance in Trytomach and Rarytasy. T
 the ladders) was measured and NOT adopted: it flips half-pixel readers (Sasanki garage gate → window, Arganiach
 door/window, Jarzmianki attic door). Targeted tests: reconstruction 1205/1205, analysis-service 199/199; app and
 architecture failures identical to the base. F2 / N9-02S not started; APK NOT_RUN.
+
+## Bezpieczne domknięcie wspólnej ramy (STAGE BUILDPLAN LINK-F1B)
+
+Status: **PARTIAL** (baza `514f96a`; solver v2 2.18.0 → **2.19.0**; layout 1.3.0, model 1.7.0, usługa analizy,
+`assessment` bez zmian). Report `stage-reports/STAGE_BUILDPLAN_LINK_F1B_SAFE_SHARED_FRAME.md`, artefakty
+`stage-reports/artifacts/analyzer-link-f1b/`. One invertible plan map: `AxisLadder.map/.px` (strictly rising,
+sheet scale beyond the outer lines) carries the base plan's walls, gaps, openings, stairs, blocks and the aligned
+storeys, the same ladders as the bodies (round trip ≤ 1 µm on all 16 plan frames). FIRST_BAD reproduced with a 49-phase
+probe (±2 px): the overhead-door tracks reader stepped in metres at a mean mpp (Sasanki gate 21/49 phases on the
+shared map), the door-arc reader iterated hypotheses in metres (Jarzmianki attic door 6/49 even in the base), the leaf
+reader sampled the host's predicted band ~10 px off the drawn one (Rarytasy front door 0/49), and the slab edge used
+the house wall's face where the party wall carries it (Sasanki 5.4 mm × 2, Marcówki 44.6 / 21.5 mm). Fix: readers on
+the raster's pixel grid about the drawn wall band (`drawnWallBand`, `symbolFrame`), bounds from mapped pixels widened by
+their 2 px uncertainty only after the in-bound hypotheses; party contact slack from the anchors' tick miss; interior
+read to the party wall's own face; outer-wall ink beyond a modelled face is no partition; `supportedSlab` ends a slab
+on the face of the wall that carries it. All probed gaps 49/49 phases. 8 houses, production `runAnalysis`, one pass:
+gate, attic doors and Rarytasy door stay doors, Arganiach `rear-2-2` WINDOW → DOOR (leaf and arc drawn), Goździkowce
+−4 phantom doors / −8 phantom walls, party↔slab GAPs closed; replay byte-identical, 0 refusals; exterior ERROR 17 → 13
+but **2 new** (Cieszynianki pocket coplanar 0.58 m², Rarytasy party wall ↔ attached roof 0.003 m³) — criterion
+"no new technical ERROR" not met. Also: Jarzmianki roof sliver/non-manifold WARNINGs (rooflight edges 1 µm apart, the
+same mechanism as Trytomach's), Rarytasy `chimney-1` no longer confirmed on a render (block now on its drawn place),
+a new R5 CONFLICT in Arganiach (rear-2-1 now paired with the elevation's window). Tests: reconstruction and
+analysis-service all green (wall-strip 005Q: versioned delta, the frozen record untouched); one new red app test
+(Android legacy-member: Larchfield's phantom `INTERIOR_WALL` family is gone — OWNER decision). F2 / N9-02S not started;
+APK NOT_RUN.

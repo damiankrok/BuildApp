@@ -1,0 +1,1251 @@
+{
+ "base": "514f96a9c0916c0517703ad92b463d3f9005b118",
+ "before": "LINK-F1 (514f96a), production runAnalysis (packages/analysis-service/scripts/second-house.ts), sealed DEV inputs",
+ "after": "LINK-F1B (this branch, solver v2 2.19.0), production runAnalysis, the same sealed inputs and byte cache",
+ "note": "Rarytasy is DEV m84f2903cb8e14, not a holdout. Closure: geometryClosureAudit defaults, exterior scope.",
+ "houses": [
+  {
+   "key": "a01",
+   "name": "Jarzmianki",
+   "before": {
+    "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-jarzmiankach-m60124f28f071a",
+    "sourcePackageHash": "019e70a1dcd30bf289f9fcd01071686fd87d519e9e98c46990e928365808ec3f",
+    "modelHash": "7c0d735543576a0a0dc10f8ca2dd0cd16685f8f31b73367584b91d38f66001ae",
+    "replay": "BYTE_IDENTICAL",
+    "commands": 186,
+    "walls": 27,
+    "interiorWalls": 19,
+    "openings": {
+     "DOOR": 10,
+     "WINDOW": 13
+    },
+    "rooms": 11,
+    "chimneys": 3,
+    "terraces": 0,
+    "exteriorClosure": [
+     "ERROR INTERSECTION pergola-west-beam-1 + ring-main-0-w3 0.0269 m3"
+    ],
+    "residuals": 6,
+    "residualsOutsideTolerance": 3,
+    "unresolved": 17,
+    "technical": {
+     "PROGRAM_REFUSALS": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "MODEL_VALIDATION": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "COMPILER": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "CLOSURE": {
+      "errors": 1,
+      "warnings": 35
+     },
+     "REPLAY": {
+      "errors": 0,
+      "warnings": 0
+     }
+    },
+    "decomposition": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "summary": "1 technical error; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 5 pass, 5 unchecked; 17 source item(s) not compared; elevations: 0 full, 4 along only, 0 vertical only, 0 unregistered; elevation comparisons: 21 potential, 0 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": []
+   },
+   "after": {
+    "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-jarzmiankach-m60124f28f071a",
+    "sourcePackageHash": "019e70a1dcd30bf289f9fcd01071686fd87d519e9e98c46990e928365808ec3f",
+    "modelHash": "94605d809c6d1076df6eb73c63ea99821ce9826fa138041c1bfeee75061106b7",
+    "replay": "BYTE_IDENTICAL",
+    "commands": 184,
+    "walls": 27,
+    "interiorWalls": 19,
+    "openings": {
+     "DOOR": 10,
+     "WINDOW": 13
+    },
+    "rooms": 11,
+    "chimneys": 3,
+    "terraces": 0,
+    "exteriorClosure": [
+     "ERROR INTERSECTION pergola-west-beam-1 + ring-main-0-w3 0.0269 m3",
+     "WARNING SLIVER_TRIANGLES roof-main 112 count",
+     "WARNING NON_MANIFOLD roof-main 45 count"
+    ],
+    "residuals": 6,
+    "residualsOutsideTolerance": 3,
+    "unresolved": 17,
+    "technical": {
+     "PROGRAM_REFUSALS": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "MODEL_VALIDATION": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "COMPILER": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "CLOSURE": {
+      "errors": 1,
+      "warnings": 37
+     },
+     "REPLAY": {
+      "errors": 0,
+      "warnings": 0
+     }
+    },
+    "decomposition": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "summary": "1 technical error; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 5 pass, 5 unchecked; 17 source item(s) not compared; elevations: 0 full, 4 along only, 0 vertical only, 0 unregistered; elevation comparisons: 21 potential, 0 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": []
+   },
+   "openingChanges": []
+  },
+  {
+   "key": "gozd",
+   "name": "Goździkowce 3",
+   "before": {
+    "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-gozdzikowcach-3-m79923e950094d",
+    "sourcePackageHash": "37be1543b0a9ae16b522ab864efd83f09653641c58bb308713c434d42541ad12",
+    "modelHash": "058d8348e3710a6a59cf2f372b58a3e4fba3616e83362c6cdaf40b0798f32412",
+    "replay": "BYTE_IDENTICAL",
+    "commands": 211,
+    "walls": 39,
+    "interiorWalls": 28,
+    "openings": {
+     "DOOR": 19,
+     "WINDOW": 12,
+     "PASSAGE": 1
+    },
+    "rooms": 13,
+    "chimneys": 1,
+    "terraces": 0,
+    "exteriorClosure": [],
+    "residuals": 0,
+    "residualsOutsideTolerance": 0,
+    "unresolved": 22,
+    "technical": {
+     "PROGRAM_REFUSALS": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "MODEL_VALIDATION": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "COMPILER": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "CLOSURE": {
+      "errors": 0,
+      "warnings": 72
+     },
+     "REPLAY": {
+      "errors": 0,
+      "warnings": 0
+     }
+    },
+    "decomposition": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "summary": "technically valid; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 5 pass, 8 unchecked; 27 source item(s) not compared; elevations: 0 full, 0 along only, 0 vertical only, 4 unregistered; elevation comparisons: 0 potential, 0 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": []
+   },
+   "after": {
+    "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-gozdzikowcach-3-m79923e950094d",
+    "sourcePackageHash": "37be1543b0a9ae16b522ab864efd83f09653641c58bb308713c434d42541ad12",
+    "modelHash": "4101d72838dcf58f2a03e6bbfa15cc65066b04e0f573448dedeff044eacd3bcf",
+    "replay": "BYTE_IDENTICAL",
+    "commands": 183,
+    "walls": 31,
+    "interiorWalls": 20,
+    "openings": {
+     "DOOR": 15,
+     "WINDOW": 12,
+     "PASSAGE": 1
+    },
+    "rooms": 13,
+    "chimneys": 1,
+    "terraces": 0,
+    "exteriorClosure": [],
+    "residuals": 0,
+    "residualsOutsideTolerance": 0,
+    "unresolved": 18,
+    "technical": {
+     "PROGRAM_REFUSALS": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "MODEL_VALIDATION": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "COMPILER": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "CLOSURE": {
+      "errors": 0,
+      "warnings": 38
+     },
+     "REPLAY": {
+      "errors": 0,
+      "warnings": 0
+     }
+    },
+    "decomposition": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "summary": "technically valid; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 5 pass, 8 unchecked; 27 source item(s) not compared; elevations: 0 full, 0 along only, 0 vertical only, 4 unregistered; elevation comparisons: 0 potential, 0 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": []
+   },
+   "openingChanges": [
+    {
+     "id": "main-idoor-0-0",
+     "before": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-0-z-11",
+      "offset": 2.169,
+      "width": 0.885,
+      "sill": 0
+     },
+     "after": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-0-z-9",
+      "offset": 2.175,
+      "width": 0.878,
+      "sill": 0
+     }
+    },
+    {
+     "id": "main-idoor-0-1",
+     "before": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-0-z-13",
+      "offset": 0.885,
+      "width": 1.037,
+      "sill": 0
+     },
+     "after": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-0-x-0",
+      "offset": 2.248,
+      "width": 0.996,
+      "sill": 0
+     }
+    },
+    {
+     "id": "main-idoor-0-2",
+     "before": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-0-x-0",
+      "offset": 2.224,
+      "width": 0.987,
+      "sill": 0
+     },
+     "after": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-0-x-2",
+      "offset": 0.28,
+      "width": 0.886,
+      "sill": 0
+     }
+    },
+    {
+     "id": "main-idoor-0-3",
+     "before": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-0-x-2",
+      "offset": 0.278,
+      "width": 0.885,
+      "sill": 0
+     },
+     "after": null
+    },
+    {
+     "id": "main-idoor-1-0",
+     "before": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-1-z-3",
+      "offset": 3.217,
+      "width": 0.894,
+      "sill": 0
+     },
+     "after": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-1-z-0",
+      "offset": 3.283,
+      "width": 0.894,
+      "sill": 0
+     }
+    },
+    {
+     "id": "main-idoor-1-1",
+     "before": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-1-z-3",
+      "offset": 4.392,
+      "width": 0.894,
+      "sill": 0
+     },
+     "after": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-1-z-0",
+      "offset": 4.458,
+      "width": 0.894,
+      "sill": 0
+     }
+    },
+    {
+     "id": "main-idoor-1-10",
+     "before": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-1-x-4",
+      "offset": 6.653,
+      "width": 0.892,
+      "sill": 0
+     },
+     "after": null
+    },
+    {
+     "id": "main-idoor-1-2",
+     "before": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-1-z-8",
+      "offset": 0.917,
+      "width": 0.817,
+      "sill": 0
+     },
+     "after": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-1-z-5",
+      "offset": 0.917,
+      "width": 0.817,
+      "sill": 0
+     }
+    },
+    {
+     "id": "main-idoor-1-3",
+     "before": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-1-z-12",
+      "offset": 1.915,
+      "width": 1.124,
+      "sill": 0
+     },
+     "after": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-1-x-0",
+      "offset": 0.686,
+      "width": 0.892,
+      "sill": 0
+     }
+    },
+    {
+     "id": "main-idoor-1-4",
+     "before": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-1-z-12",
+      "offset": 3.677,
+      "width": 1.124,
+      "sill": 0
+     },
+     "after": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-1-x-0",
+      "offset": 7.29,
+      "width": 0.892,
+      "sill": 0
+     }
+    },
+    {
+     "id": "main-idoor-1-5",
+     "before": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-1-z-12",
+      "offset": 5.49,
+      "width": 1.098,
+      "sill": 0
+     },
+     "after": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-1-x-4",
+      "offset": 1.094,
+      "width": 0.892,
+      "sill": 0
+     }
+    },
+    {
+     "id": "main-idoor-1-6",
+     "before": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-1-x-0",
+      "offset": 0.686,
+      "width": 0.892,
+      "sill": 0
+     },
+     "after": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-1-x-4",
+      "offset": 3.644,
+      "width": 0.892,
+      "sill": 0
+     }
+    },
+    {
+     "id": "main-idoor-1-7",
+     "before": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-1-x-0",
+      "offset": 7.29,
+      "width": 0.892,
+      "sill": 0
+     },
+     "after": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-1-x-4",
+      "offset": 6.653,
+      "width": 0.892,
+      "sill": 0
+     }
+    },
+    {
+     "id": "main-idoor-1-8",
+     "before": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-1-x-4",
+      "offset": 1.094,
+      "width": 0.892,
+      "sill": 0
+     },
+     "after": null
+    },
+    {
+     "id": "main-idoor-1-9",
+     "before": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-1-x-4",
+      "offset": 3.644,
+      "width": 0.892,
+      "sill": 0
+     },
+     "after": null
+    },
+    {
+     "id": "opening-0-rear-2-2",
+     "before": {
+      "kind": "DOOR",
+      "wallId": "ring-main-0-w2",
+      "offset": 1.247,
+      "width": 0.987,
+      "sill": 0
+     },
+     "after": {
+      "kind": "DOOR",
+      "wallId": "ring-main-0-w2",
+      "offset": 1.175,
+      "width": 0.996,
+      "sill": 0
+     }
+    },
+    {
+     "id": "pocket-main-0-0-mouth",
+     "before": {
+      "kind": "PASSAGE",
+      "wallId": "ring-main-0-w0",
+      "offset": 5.421,
+      "width": 3.161,
+      "sill": 0
+     },
+     "after": {
+      "kind": "PASSAGE",
+      "wallId": "ring-main-0-w0",
+      "offset": 5.472,
+      "width": 3.11,
+      "sill": 0
+     }
+    }
+   ]
+  },
+  {
+   "key": "marcowki",
+   "name": "Marcówki GE",
+   "before": {
+    "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+    "sourcePackageHash": "753709900c02b84211ee5c6088ef84f9ff2c93a2b4560318ca0fd0e222eef8d0",
+    "modelHash": "e14fcc39445960c32827eb05d6e3a27c96c86bc426162445f9aa9408e7ecb151",
+    "replay": "BYTE_IDENTICAL",
+    "commands": 219,
+    "walls": 41,
+    "interiorWalls": 21,
+    "openings": {
+     "DOOR": 13,
+     "WINDOW": 8
+    },
+    "rooms": 12,
+    "chimneys": 2,
+    "terraces": 2,
+    "exteriorClosure": [
+     "ERROR GAP ring-main-0-w1-party-attached-0 + slab-main-1 0.0446 m",
+     "ERROR COPLANAR_DUPLICATE balcony-front-1 + roof-attached-0:fascia-min-z 0.0372 m2",
+     "ERROR GAP ring-main-0-w1-party-attached-0 + slab-attached-0-0 0.0215 m",
+     "ERROR INTERSECTION balcony-front-1 + roof-attached-0:fascia-min-z 0.0157 m3"
+    ],
+    "residuals": 66,
+    "residualsOutsideTolerance": 12,
+    "unresolved": 7,
+    "technical": {
+     "PROGRAM_REFUSALS": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "MODEL_VALIDATION": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "COMPILER": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "CLOSURE": {
+      "errors": 4,
+      "warnings": 43
+     },
+     "REPLAY": {
+      "errors": 0,
+      "warnings": 0
+     }
+    },
+    "decomposition": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "summary": "4 technical errors; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 7 pass, 3 unchecked; 14 source item(s) not compared; elevations: 4 full, 0 along only, 0 vertical only, 0 unregistered; elevation comparisons: 53 potential, 62 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": []
+   },
+   "after": {
+    "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+    "sourcePackageHash": "753709900c02b84211ee5c6088ef84f9ff2c93a2b4560318ca0fd0e222eef8d0",
+    "modelHash": "28877080d79f589d9dd39dea9accbd01dfb49a4a2543322808097e0232df247c",
+    "replay": "BYTE_IDENTICAL",
+    "commands": 215,
+    "walls": 39,
+    "interiorWalls": 19,
+    "openings": {
+     "DOOR": 13,
+     "WINDOW": 8
+    },
+    "rooms": 12,
+    "chimneys": 2,
+    "terraces": 2,
+    "exteriorClosure": [
+     "ERROR COPLANAR_DUPLICATE balcony-front-1 + roof-attached-0:fascia-min-z 0.0451 m2",
+     "ERROR INTERSECTION balcony-front-1 + roof-attached-0:fascia-min-z 0.0191 m3"
+    ],
+    "residuals": 66,
+    "residualsOutsideTolerance": 12,
+    "unresolved": 7,
+    "technical": {
+     "PROGRAM_REFUSALS": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "MODEL_VALIDATION": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "COMPILER": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "CLOSURE": {
+      "errors": 2,
+      "warnings": 35
+     },
+     "REPLAY": {
+      "errors": 0,
+      "warnings": 0
+     }
+    },
+    "decomposition": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "summary": "2 technical errors; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 7 pass, 3 unchecked; 14 source item(s) not compared; elevations: 4 full, 0 along only, 0 vertical only, 0 unregistered; elevation comparisons: 53 potential, 62 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": []
+   },
+   "openingChanges": []
+  },
+  {
+   "key": "ciesz",
+   "name": "Cieszynianki 12 GE",
+   "before": {
+    "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-cieszyniankach-12-ge-m43d25c0636969",
+    "sourcePackageHash": "63034b633b353f90f9a7f6dad38f47f993ffba78500f4b803c267a26e22c2324",
+    "modelHash": "d29bb7ea590837a0efbd558ce5c18d707e0f856cf62496977b374dcd7afa7a80",
+    "replay": "BYTE_IDENTICAL",
+    "commands": 175,
+    "walls": 25,
+    "interiorWalls": 16,
+    "openings": {
+     "DOOR": 10,
+     "WINDOW": 11,
+     "PASSAGE": 3
+    },
+    "rooms": 8,
+    "chimneys": 2,
+    "terraces": 1,
+    "exteriorClosure": [],
+    "residuals": 0,
+    "residualsOutsideTolerance": 0,
+    "unresolved": 14,
+    "technical": {
+     "PROGRAM_REFUSALS": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "MODEL_VALIDATION": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "COMPILER": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "CLOSURE": {
+      "errors": 0,
+      "warnings": 25
+     },
+     "REPLAY": {
+      "errors": 0,
+      "warnings": 0
+     }
+    },
+    "decomposition": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "summary": "technically valid; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 3 pass, 5 unchecked; 27 source item(s) not compared; elevations: 2 full, 2 along only, 0 vertical only, 0 unregistered; elevation comparisons: 29 potential, 0 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": []
+   },
+   "after": {
+    "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-cieszyniankach-12-ge-m43d25c0636969",
+    "sourcePackageHash": "63034b633b353f90f9a7f6dad38f47f993ffba78500f4b803c267a26e22c2324",
+    "modelHash": "851d7b0362e5d3fd05dd056396c3849f3c185d033e6a7fc274d3365cf62fb818",
+    "replay": "BYTE_IDENTICAL",
+    "commands": 175,
+    "walls": 25,
+    "interiorWalls": 16,
+    "openings": {
+     "DOOR": 10,
+     "WINDOW": 11,
+     "PASSAGE": 3
+    },
+    "rooms": 8,
+    "chimneys": 2,
+    "terraces": 1,
+    "exteriorClosure": [
+     "ERROR COPLANAR_DUPLICATE pocket-main-0-1-back + pocket-main-0-2-back 0.5793 m2",
+     "WARNING SLIVER_TRIANGLES pocket-main-0-1-back 16 count"
+    ],
+    "residuals": 0,
+    "residualsOutsideTolerance": 0,
+    "unresolved": 13,
+    "technical": {
+     "PROGRAM_REFUSALS": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "MODEL_VALIDATION": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "COMPILER": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "CLOSURE": {
+      "errors": 1,
+      "warnings": 27
+     },
+     "REPLAY": {
+      "errors": 0,
+      "warnings": 0
+     }
+    },
+    "decomposition": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "summary": "1 technical error; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 3 pass, 5 unchecked; 27 source item(s) not compared; elevations: 2 full, 2 along only, 0 vertical only, 0 unregistered; elevation comparisons: 29 potential, 0 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": []
+   },
+   "openingChanges": [
+    {
+     "id": "pocket-main-0-0-mouth",
+     "before": {
+      "kind": "PASSAGE",
+      "wallId": "ring-main-0-w0",
+      "offset": 4.525,
+      "width": 2.555,
+      "sill": 0
+     },
+     "after": {
+      "kind": "PASSAGE",
+      "wallId": "ring-main-0-w0",
+      "offset": 4.58,
+      "width": 2.5,
+      "sill": 0
+     }
+    },
+    {
+     "id": "pocket-main-0-1-mouth",
+     "before": {
+      "kind": "PASSAGE",
+      "wallId": "ring-main-0-w2",
+      "offset": 9.012,
+      "width": 2.598,
+      "sill": 0
+     },
+     "after": {
+      "kind": "PASSAGE",
+      "wallId": "ring-main-0-w2",
+      "offset": 9.067,
+      "width": 2.543,
+      "sill": 0
+     }
+    }
+   ]
+  },
+  {
+   "key": "rary",
+   "name": "Rarytasy 5 G2E (DEV m84f2903cb8e14)",
+   "before": {
+    "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+    "sourcePackageHash": "02963768a63b99eb20005d533569950aafd52168ffa73e00070662e379553135",
+    "modelHash": "4e323c07b9a3ea782d41e392aa3bc30be38c96599561c072a20ddff9e4a57805",
+    "replay": "BYTE_IDENTICAL",
+    "commands": 199,
+    "walls": 21,
+    "interiorWalls": 12,
+    "openings": {
+     "DOOR": 14,
+     "WINDOW": 6
+    },
+    "rooms": 9,
+    "chimneys": 2,
+    "terraces": 2,
+    "exteriorClosure": [
+     "ERROR INTERSECTION ring-main-0-w0-1 + roof-attached-0-plane-high 0.0047 m3",
+     "ERROR INTERSECTION ring-main-0-w0-1 + roof-main-plane-low 0.0038 m3"
+    ],
+    "residuals": 28,
+    "residualsOutsideTolerance": 21,
+    "unresolved": 14,
+    "technical": {
+     "PROGRAM_REFUSALS": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "MODEL_VALIDATION": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "COMPILER": {
+      "errors": 0,
+      "warnings": 1
+     },
+     "CLOSURE": {
+      "errors": 2,
+      "warnings": 23
+     },
+     "REPLAY": {
+      "errors": 0,
+      "warnings": 0
+     }
+    },
+    "decomposition": "COMPLETE",
+    "summary": "2 technical errors; reading completeness COMPLETE; source fidelity CONFLICT: 2 conflict(s), 3 pass, 2 unchecked; 32 source item(s) not compared; elevations: 2 full, 2 along only, 0 vertical only, 0 unregistered; elevation comparisons: 42 potential, 15 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": [
+     "R5_REGISTERED_ELEVATIONS: FRONT elevation frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elew-5de5935285: 6 of 8 observed checks on 2 features stand outside tolerance (worst OPENING_SILL -1.974471 m): the registered view and the model disagree",
+     "R5_REGISTERED_ELEVATIONS: REAR elevation frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elew-c383df2964: 7 of 7 observed checks on 2 features stand outside tolerance (worst OPENING_SILL -1.000492 m): the registered view and the model disagree"
+    ]
+   },
+   "after": {
+    "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+    "sourcePackageHash": "02963768a63b99eb20005d533569950aafd52168ffa73e00070662e379553135",
+    "modelHash": "2ebdffe9b9453128834040484e415348ff608e92f2ed99e171077bd9230b8216",
+    "replay": "BYTE_IDENTICAL",
+    "commands": 195,
+    "walls": 21,
+    "interiorWalls": 12,
+    "openings": {
+     "DOOR": 14,
+     "WINDOW": 6
+    },
+    "rooms": 9,
+    "chimneys": 1,
+    "terraces": 2,
+    "exteriorClosure": [
+     "ERROR INTERSECTION ring-main-0-w0-1 + roof-attached-0-plane-high 0.0047 m3",
+     "ERROR INTERSECTION ring-main-0-w0-1 + roof-main-plane-low 0.0038 m3",
+     "ERROR INTERSECTION ring-main-0-w0-party-attached-0 + roof-attached-0-plane-high 0.0028 m3"
+    ],
+    "residuals": 26,
+    "residualsOutsideTolerance": 19,
+    "unresolved": 13,
+    "technical": {
+     "PROGRAM_REFUSALS": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "MODEL_VALIDATION": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "COMPILER": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "CLOSURE": {
+      "errors": 3,
+      "warnings": 23
+     },
+     "REPLAY": {
+      "errors": 0,
+      "warnings": 0
+     }
+    },
+    "decomposition": "COMPLETE",
+    "summary": "3 technical errors; reading completeness COMPLETE; source fidelity CONFLICT: 2 conflict(s), 3 pass, 2 unchecked; 32 source item(s) not compared; elevations: 2 full, 2 along only, 0 vertical only, 0 unregistered; elevation comparisons: 42 potential, 15 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": [
+     "R5_REGISTERED_ELEVATIONS: FRONT elevation frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elew-5de5935285: 6 of 8 observed checks on 2 features stand outside tolerance (worst OPENING_SILL -1.974504 m): the registered view and the model disagree",
+     "R5_REGISTERED_ELEVATIONS: REAR elevation frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elew-c383df2964: 7 of 7 observed checks on 2 features stand outside tolerance (worst OPENING_SILL -1.000492 m): the registered view and the model disagree"
+    ]
+   },
+   "openingChanges": [
+    {
+     "id": "opening-0-east-5-0",
+     "before": {
+      "kind": "DOOR",
+      "wallId": "ring-attached-0-0-w1",
+      "offset": 4.175,
+      "width": 1,
+      "sill": 0
+     },
+     "after": {
+      "kind": "DOOR",
+      "wallId": "ring-attached-0-0-w1",
+      "offset": 4.288,
+      "width": 1,
+      "sill": 0
+     }
+    },
+    {
+     "id": "opening-0-west-3-0",
+     "before": {
+      "kind": "WINDOW",
+      "wallId": "ring-main-0-w3",
+      "offset": 6.519,
+      "width": 1,
+      "sill": 0.8
+     },
+     "after": {
+      "kind": "WINDOW",
+      "wallId": "ring-main-0-w3",
+      "offset": 6.452,
+      "width": 1,
+      "sill": 0.8
+     }
+    },
+    {
+     "id": "opening-0-west-7-0",
+     "before": {
+      "kind": "WINDOW",
+      "wallId": "ring-attached-0-0-w3",
+      "offset": 0.583,
+      "width": 1,
+      "sill": 0.8
+     },
+     "after": {
+      "kind": "WINDOW",
+      "wallId": "ring-attached-0-0-w3",
+      "offset": 0.47,
+      "width": 1,
+      "sill": 0.8
+     }
+    }
+   ]
+  },
+  {
+   "key": "trytomach",
+   "name": "Trytomy G",
+   "before": {
+    "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-trytomach-g-m6802645623649",
+    "sourcePackageHash": "de2296125305456274a1e1b013c75055af8990722ba0f81a425388b2726804e2",
+    "modelHash": "82a44fe82ffc14fccbd521b063b3e5b803aaa4b34f24a7d2e3808625e26d94d1",
+    "replay": "BYTE_IDENTICAL",
+    "commands": 193,
+    "walls": 36,
+    "interiorWalls": 22,
+    "openings": {
+     "DOOR": 10,
+     "WINDOW": 11
+    },
+    "rooms": 11,
+    "chimneys": 1,
+    "terraces": 2,
+    "exteriorClosure": [
+     "ERROR INTERSECTION pergola-rear-beam-0 + pergola-rear-post-3 0.0035 m3",
+     "ERROR INTERSECTION pergola-rear-beam-2 + pergola-rear-post-1 0.0035 m3",
+     "WARNING SLIVER_TRIANGLES roof-main 76 count",
+     "WARNING NON_MANIFOLD roof-main 40 count"
+    ],
+    "residuals": 9,
+    "residualsOutsideTolerance": 6,
+    "unresolved": 11,
+    "technical": {
+     "PROGRAM_REFUSALS": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "MODEL_VALIDATION": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "COMPILER": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "CLOSURE": {
+      "errors": 2,
+      "warnings": 39
+     },
+     "REPLAY": {
+      "errors": 0,
+      "warnings": 0
+     }
+    },
+    "decomposition": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "summary": "2 technical errors; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 5 pass, 12 unchecked; 20 source item(s) not compared; elevations: 0 full, 1 along only, 0 vertical only, 3 unregistered; elevation comparisons: 5 potential, 0 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": []
+   },
+   "after": {
+    "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-trytomach-g-m6802645623649",
+    "sourcePackageHash": "de2296125305456274a1e1b013c75055af8990722ba0f81a425388b2726804e2",
+    "modelHash": "4009d4eee6e9c85716d98c8b89424c28fade4115c728ac4cddcbcdac27466c73",
+    "replay": "BYTE_IDENTICAL",
+    "commands": 193,
+    "walls": 36,
+    "interiorWalls": 22,
+    "openings": {
+     "DOOR": 10,
+     "WINDOW": 11
+    },
+    "rooms": 11,
+    "chimneys": 1,
+    "terraces": 2,
+    "exteriorClosure": [
+     "ERROR INTERSECTION pergola-rear-beam-0 + pergola-rear-post-3 0.0035 m3",
+     "ERROR INTERSECTION pergola-rear-beam-2 + pergola-rear-post-1 0.0035 m3",
+     "WARNING SLIVER_TRIANGLES roof-main 76 count",
+     "WARNING NON_MANIFOLD roof-main 21 count"
+    ],
+    "residuals": 9,
+    "residualsOutsideTolerance": 6,
+    "unresolved": 11,
+    "technical": {
+     "PROGRAM_REFUSALS": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "MODEL_VALIDATION": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "COMPILER": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "CLOSURE": {
+      "errors": 2,
+      "warnings": 39
+     },
+     "REPLAY": {
+      "errors": 0,
+      "warnings": 0
+     }
+    },
+    "decomposition": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "summary": "2 technical errors; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 5 pass, 12 unchecked; 20 source item(s) not compared; elevations: 0 full, 1 along only, 0 vertical only, 3 unregistered; elevation comparisons: 5 potential, 0 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": []
+   },
+   "openingChanges": []
+  },
+  {
+   "key": "arganiach",
+   "name": "Arganiach G2E",
+   "before": {
+    "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-arganiach-g2e-m32b290f26a4e8",
+    "sourcePackageHash": "167a3f3c8407196304722accccdc2b89bffe0ed52d6dd66dfd9a0c88f2920a11",
+    "modelHash": "7b501aa5f768fbbe273be0d886eca6c852acd2380f79630a7c98e6b1c4d9ff2c",
+    "replay": "BYTE_IDENTICAL",
+    "commands": 201,
+    "walls": 30,
+    "interiorWalls": 19,
+    "openings": {
+     "DOOR": 18,
+     "WINDOW": 8
+    },
+    "rooms": 15,
+    "chimneys": 2,
+    "terraces": 0,
+    "exteriorClosure": [
+     "ERROR COPLANAR_DUPLICATE ring-attached-0-0-w0 + roof-attached-0 1.4455 m2",
+     "ERROR COPLANAR_DUPLICATE ring-attached-0-0-w1 + roof-attached-0 0.7409 m2",
+     "ERROR COPLANAR_DUPLICATE ring-attached-0-0-w3 + roof-attached-0 0.7409 m2"
+    ],
+    "residuals": 10,
+    "residualsOutsideTolerance": 7,
+    "unresolved": 11,
+    "technical": {
+     "PROGRAM_REFUSALS": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "MODEL_VALIDATION": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "COMPILER": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "CLOSURE": {
+      "errors": 3,
+      "warnings": 36
+     },
+     "REPLAY": {
+      "errors": 0,
+      "warnings": 0
+     }
+    },
+    "decomposition": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "summary": "3 technical errors; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 5 pass, 4 unchecked; 28 source item(s) not compared; elevations: 2 full, 0 along only, 0 vertical only, 2 unregistered; elevation comparisons: 28 potential, 8 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": []
+   },
+   "after": {
+    "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-arganiach-g2e-m32b290f26a4e8",
+    "sourcePackageHash": "167a3f3c8407196304722accccdc2b89bffe0ed52d6dd66dfd9a0c88f2920a11",
+    "modelHash": "266ba3d87874068f0a75841c8b3174595e6efb3629f59dda3ee4f3a273bffb35",
+    "replay": "BYTE_IDENTICAL",
+    "commands": 201,
+    "walls": 30,
+    "interiorWalls": 19,
+    "openings": {
+     "DOOR": 19,
+     "WINDOW": 7
+    },
+    "rooms": 15,
+    "chimneys": 2,
+    "terraces": 0,
+    "exteriorClosure": [
+     "ERROR COPLANAR_DUPLICATE ring-attached-0-0-w0 + roof-attached-0 1.4455 m2",
+     "ERROR COPLANAR_DUPLICATE ring-attached-0-0-w1 + roof-attached-0 0.7409 m2",
+     "ERROR COPLANAR_DUPLICATE ring-attached-0-0-w3 + roof-attached-0 0.7409 m2"
+    ],
+    "residuals": 12,
+    "residualsOutsideTolerance": 9,
+    "unresolved": 10,
+    "technical": {
+     "PROGRAM_REFUSALS": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "MODEL_VALIDATION": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "COMPILER": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "CLOSURE": {
+      "errors": 3,
+      "warnings": 36
+     },
+     "REPLAY": {
+      "errors": 0,
+      "warnings": 0
+     }
+    },
+    "decomposition": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "summary": "3 technical errors; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity CONFLICT: 1 conflict(s), 5 pass, 3 unchecked; 27 source item(s) not compared; elevations: 2 full, 0 along only, 0 vertical only, 2 unregistered; elevation comparisons: 28 potential, 10 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": [
+     "R5_REGISTERED_ELEVATIONS: REAR elevation frame-asset-gotowy-projekt-dom-w-arganiach-g2e-elewacj-134561073d: 6 of 6 observed checks on 2 features stand outside tolerance (worst OPENING_HEAD 0.830306 m): the registered view and the model disagree"
+    ]
+   },
+   "openingChanges": [
+    {
+     "id": "main-idoor-0-2",
+     "before": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-0-z-8-b",
+      "offset": 0.644,
+      "width": 0.887,
+      "sill": 0
+     },
+     "after": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-0-z-8",
+      "offset": 0.629,
+      "width": 0.892,
+      "sill": 0
+     }
+    },
+    {
+     "id": "main-idoor-0-3",
+     "before": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-0-z-8-b",
+      "offset": 2.283,
+      "width": 0.887,
+      "sill": 0
+     },
+     "after": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-0-z-8",
+      "offset": 2.279,
+      "width": 0.892,
+      "sill": 0
+     }
+    },
+    {
+     "id": "opening-0-rear-2-2",
+     "before": {
+      "kind": "WINDOW",
+      "wallId": "ring-main-0-w2",
+      "offset": 1.487,
+      "width": 2.177,
+      "sill": 0
+     },
+     "after": {
+      "kind": "DOOR",
+      "wallId": "ring-main-0-w2",
+      "offset": 1.488,
+      "width": 2.191,
+      "sill": 0
+     }
+    }
+   ]
+  },
+  {
+   "key": "sasankach3",
+   "name": "Sasanki 3 G",
+   "before": {
+    "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-sasankach-3-g-mb292397cb1840",
+    "sourcePackageHash": "cb2e8c3b20fd2aa720e3c65145b34f34896c4730dbc8d55e85b7f22fa873c14e",
+    "modelHash": "3aa678d8a59f211ff63f4904594b880f2131a3c5d9a1193c8b79ff7f8541a36b",
+    "replay": "BYTE_IDENTICAL",
+    "commands": 243,
+    "walls": 34,
+    "interiorWalls": 18,
+    "openings": {
+     "DOOR": 15,
+     "WINDOW": 8
+    },
+    "rooms": 11,
+    "chimneys": 0,
+    "terraces": 0,
+    "exteriorClosure": [
+     "ERROR GAP ring-main-0-w1-party-attached-0 + slab-main-1 0.0054 m",
+     "ERROR GAP ring-main-1-w1-party-attached-0 + slab-main-1 0.0054 m",
+     "ERROR INTERSECTION ring-main-1-w1-party-attached-0 + roof-main-plane-high-1 0.0042 m3"
+    ],
+    "residuals": 30,
+    "residualsOutsideTolerance": 17,
+    "unresolved": 18,
+    "technical": {
+     "PROGRAM_REFUSALS": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "MODEL_VALIDATION": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "COMPILER": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "CLOSURE": {
+      "errors": 3,
+      "warnings": 33
+     },
+     "REPLAY": {
+      "errors": 0,
+      "warnings": 0
+     }
+    },
+    "decomposition": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "summary": "3 technical errors; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 5 pass, 6 unchecked; 22 source item(s) not compared; elevations: 0 full, 3 along only, 0 vertical only, 1 unregistered; elevation comparisons: 18 potential, 0 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": []
+   },
+   "after": {
+    "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-sasankach-3-g-mb292397cb1840",
+    "sourcePackageHash": "cb2e8c3b20fd2aa720e3c65145b34f34896c4730dbc8d55e85b7f22fa873c14e",
+    "modelHash": "98cf970ca89479e6b608ee32d0b9ecb6a2cef8c6b13e3d2ffbec42a3774fc81e",
+    "replay": "BYTE_IDENTICAL",
+    "commands": 241,
+    "walls": 33,
+    "interiorWalls": 17,
+    "openings": {
+     "DOOR": 15,
+     "WINDOW": 8
+    },
+    "rooms": 11,
+    "chimneys": 0,
+    "terraces": 0,
+    "exteriorClosure": [
+     "ERROR INTERSECTION ring-main-1-w1-party-attached-0 + roof-main-plane-high-1 0.0041 m3"
+    ],
+    "residuals": 30,
+    "residualsOutsideTolerance": 17,
+    "unresolved": 16,
+    "technical": {
+     "PROGRAM_REFUSALS": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "MODEL_VALIDATION": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "COMPILER": {
+      "errors": 0,
+      "warnings": 0
+     },
+     "CLOSURE": {
+      "errors": 1,
+      "warnings": 32
+     },
+     "REPLAY": {
+      "errors": 0,
+      "warnings": 0
+     }
+    },
+    "decomposition": "COMPLETE_WITH_OPEN_QUESTIONS",
+    "summary": "1 technical error; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 5 pass, 6 unchecked; 22 source item(s) not compared; elevations: 0 full, 3 along only, 0 vertical only, 1 unregistered; elevation comparisons: 18 potential, 0 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": []
+   },
+   "openingChanges": [
+    {
+     "id": "main-idoor-0-1",
+     "before": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-0-x-5",
+      "offset": 1.05,
+      "width": 0.996,
+      "sill": 0
+     },
+     "after": {
+      "kind": "DOOR",
+      "wallId": "main-iwall-0-x-4",
+      "offset": 1.049,
+      "width": 0.996,
+      "sill": 0
+     }
+    }
+   ]
+  }
+ ]
+}

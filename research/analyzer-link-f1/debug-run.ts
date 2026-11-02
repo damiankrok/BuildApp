@@ -1,6 +1,6 @@
 /**
  * LINK-F1 (research only): reconstructV2 on a sealed run with the solver's debug stream, filtered by a regex.
- *   npx vite-node research/analyzer-link-f1/debug-run.ts -- --run <dir> --cache <dir> --grep <regex>
+ *   npx vite-node research/analyzer-link-f1/debug-run.ts -- --run <dir> --cache <dir> --grep <regex> [--residuals] [--dump-model <file>] [--dump-program <file>]
  */
 import { existsSync, readFileSync } from 'node:fs'
 import { gunzipSync } from 'node:zlib'
@@ -22,6 +22,16 @@ for (const asset of pkg.assets) {
   if (got) try { rasters.set(variant.byteHash, decodeImage(got.bytes)) } catch { rasters.set(variant.byteHash, undefined) }
 }
 const identity = identityOf(pkg, [archonAdapter, genericProjectPageAdapter])
-const r = reconstructV2({ modelId: identity.modelId, label: identity.label, slug: identity.slug, sourcePackageId: pkg.id, sourcePackageHash: pkg.contentHash, graph: load('observation-graph') as never, metrics: load('metric-evidence') as never, raster: (frame: { variantByteHash: string }) => rasters.get(frame.variantByteHash), publishedAreas: pkg.publishedFacts, publishedRooms: pkg.publishedRooms, debug: (s: string) => { if (re.test(s)) console.log(s) } } as never)
+const r = reconstructV2({ modelId: identity.modelId, label: identity.label, slug: identity.slug, sourcePackageId: pkg.id, sourcePackageHash: pkg.contentHash, graph: load('observation-graph') as never, metrics: load('metric-evidence') as never, raster: (frame: { variantByteHash: string }) => rasters.get(frame.variantByteHash), publishedAreas: pkg.publishedFacts, publishedRooms: pkg.publishedRooms, debug: (s: string) => { if (re.test(s)) console.log(s) }, featureTrace: (t: Record<string, unknown>) => { const line = JSON.stringify(t); if (re.test(String(t.kind))) console.log(`TRACE ${line.slice(0, 6000)}`) } } as never)
 for (const s of r.steps) if (re.test(`${s.what} ${s.detail}`)) console.log(`STEP ${s.stage} | ${s.what} | ${s.detail}`)
 if (process.argv.includes('--residuals')) for (const x of (r as unknown as { residuals: Array<Record<string, unknown>> }).residuals) console.log(`RES ${JSON.stringify(x).slice(0, 400)}`)
+if (process.argv.includes('--dump-model')) {
+  const { writeFileSync } = await import('node:fs')
+  const { serializeModel } = await import('@buildapp/model')
+  writeFileSync(value('dump-model'), serializeModel((r as unknown as { model: never }).model))
+}
+if (process.argv.includes('--dump-program')) {
+  const { writeFileSync } = await import('node:fs')
+  const c = (r as unknown as { candidate: { program: unknown; modelHash: string } }).candidate
+  writeFileSync(value('dump-program'), `${JSON.stringify({ modelHash: c.modelHash, program: c.program }, null, 1)}\n`)
+}
