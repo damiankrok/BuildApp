@@ -533,8 +533,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     const sourceBasis = sourceBasisOf(pkg, reconstruction.planDiagnostics)
     const preview = previewOf({ model, ...(reconstruction.partialPreview ? { partial: reconstruction.partialPreview } : {}), heights: reconstruction.heights, source: sourceBasis, ...(reconstruction.roofDatum ? { approximateRoofDatum: reconstruction.roofDatum } : {}), completeness: reconstruction.modelCompleteness })
 
-    const r2 = reconstruction as unknown as { ledger: Array<{ evidenceId: string; disposition: string; featureId?: string; reason: string }>; viewAudit: Array<{ assetId: string; frameId: string; use: string; side?: string; sideBasis?: string; why: string }>; registrations: { plans: Array<{ frameId: string }>; cameras: Array<{ frameId: string; solved: boolean; why: string }> } }
-    const sources = sourceInspectionOf({ pkg, graph, metrics, ledger: r2.ledger, viewAudit: r2.viewAudit, planFrameIds: new Set(r2.registrations.plans.map((p) => p.frameId)), cameras: r2.registrations.cameras, content: contentVerdicts, skipped: skippedAssets, classifier: contentClassifier })
+    const sources = sourceInspectionOf({ pkg, graph, metrics, ledger: reconstruction.ledger.records, viewAudit: reconstruction.viewAudit, planFrameIds: new Set(reconstruction.registrations.plans.map((p) => p.frameId)), cameras: reconstruction.registrations.cameras, content: contentVerdicts, skipped: skippedAssets, classifier: contentClassifier })
     const result: LinkAnalysisResult = {
       schema: 'buildapp.link-analysis-result',
       schemaVersion: '1.0.0',

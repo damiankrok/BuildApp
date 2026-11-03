@@ -8,6 +8,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { IMAGE_ROLE, inlineImageEmbedder, openImageRoleEngine, workerImageEmbedder, workspaceImageRolePaths } from '../src/index.js'
+// @ts-expect-error — a plain ES module without type declarations
 import { bundleImageRoleWorker } from '../build.mjs'
 
 const tensor = (seed: number): Float32Array => {

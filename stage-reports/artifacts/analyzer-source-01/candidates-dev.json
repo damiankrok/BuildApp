@@ -1,0 +1,14 @@
+{
+  "schema": "source-01.candidate-study/1",
+  "how": "DEV only (818 images, 24 house families + the eight regression houses), grouped 5-fold CV by family, multinomial logistic regression on standardised features, class_weight=balanced; research/analyzer-source-01/study.py (torch/timm preprocessing, research only)",
+  "classes": ["FLOOR_PLAN", "ORTHOGRAPHIC_ELEVATION", "TECHNICAL_SECTION", "SITE_PLAN", "EXTERIOR_PERSPECTIVE", "INTERIOR_PERSPECTIVE"],
+  "candidates": [
+    { "id": "handmade-24", "what": "24 hand-made pixel features (colour, white/dark share, hue bands, sky/ground bands, edge orientation, red ink)", "weights": "none (a few hundred numbers)", "license": "own code", "errors": 29, "n": 818, "interiorAsExterior": 11, "exteriorAsInterior": 7, "elevationAsExterior": 8 },
+    { "id": "mobilenetv3_small_100.lamb_in1k", "params": "1.5 M trunk", "license": "Apache-2.0", "errors": 4, "n": 818, "interiorAsExterior": 0, "exteriorAsInterior": 1 },
+    { "id": "mobilenetv4_conv_small.e2400_r224_in1k", "params": "2.49 M trunk, ONNX fp32 9.9 MB, ops Conv/Relu/Add/GlobalAveragePool", "license": "Apache-2.0", "errors": 2, "n": 818, "interiorAsExterior": 0, "exteriorAsInterior": 0, "chosen": true },
+    { "id": "mobilenetv3_large_100.ra_in1k", "params": "4.2 M trunk, ~17 MB", "license": "Apache-2.0", "errors": 1, "n": 818, "interiorAsExterior": 0, "exteriorAsInterior": 0 },
+    { "id": "MobileCLIP2-S0 / MobileCLIP-S0", "license": "apple-amlr (research use)", "evaluated": false, "why": "licence not shippable in the app without an OWNER/legal decision" },
+    { "id": "small VLM", "evaluated": false, "why": "classification already separates the six kinds on held-out houses; free text is not the goal; size and runtime on the phone out of proportion" }
+  ],
+  "choice": "MobileNetV4-conv-small: one error more than MobileNetV3-large on DEV but 60 % of its size, a plain op set, and no interior/exterior confusion; then re-measured on the PRODUCTION path (TypeScript decode + area resampling + ONNX Runtime Web): 0 errors in grouped CV (head-cv-dev.json) and 0 of 270 on the ten TEST houses"
+}
