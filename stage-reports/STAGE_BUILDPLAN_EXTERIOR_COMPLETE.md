@@ -1,8 +1,8 @@
 # STAGE BUILDPLAN EXTERIOR-COMPLETE — rozpoznawalny cały dom (raport roboczy)
 
 Status: **WORK_IN_PROGRESS.** Kryterium odbioru nie jest spełnione (§3); kampania trwa. Ten raport opisuje stan po
-dostawie testowej 1315 i jest aktualizowany przy kolejnych dostawach. Dziennik punktów kontrolnych:
-`stage-reports/EXTERIOR_COMPLETE_LOG.md` (E0–E5).
+dostawie testowej 1316 i jest aktualizowany przy kolejnych dostawach. Dziennik punktów kontrolnych:
+`stage-reports/EXTERIOR_COMPLETE_LOG.md` (E0–E6).
 
 ## 1. Zamrożona ocena (przed strojeniem)
 
@@ -107,7 +107,15 @@ poprawiony w E4 z tym uzasadnieniem. Typecheck zielony. Testy jednostkowe Androi
   koniec 314 s, 129 zdarzeń, 32 arkusze, 121 kopii zweryfikowanych po SHA-256, 0 niezgodnych, kopie usunięte; hash
   modelu `db38772602a0828a` = bieg desktopowy; szczyt RSS 888 MB (host).
 - **Interfejs Androida: NOT_VERIFIED** (brak urządzenia). Czasy telefonu niezmierzone.
-- E4–E5 nie mają jeszcze APK: następna dostawa je zbierze.
+
+**APK 1316** (dostawa testowa z E4–E5, commit `53d49021893580fc92b8603d1ab4f05bd1feb1cf`):
+- `BuildPlan-owner-preview-1316.apk`, `com.buildplan.preview`, versionCode 1316, `0.1316.0-owner`, arm64-v8a,
+  49 419 503 B, SHA-256 `2feb7e8e5067ecff3dcc4efc5448edc14f3758a9b09b081410f99e77d4d3f72f`; ten sam podpis;
+- analizator `analyzer.mjs` `8c275584d5f84193baa998796a6facb34ce83bafdb9a7ea0acf92fbbbb7675e9`, usługa 1.8.0,
+  solver 2.24.0; 10/10 plików manifestu zgodnych;
+- próba na żywo (Bratki, host Node x64, **nie telefon**): pierwszy arkusz 13,4 s, koniec 281 s, 116 kopii
+  zweryfikowanych, 0 niezgodnych, hash modelu = bieg desktopowy; szczyt RSS 868 MB (host);
+- sprawdzarka 35/70; prywatny ZIP 1316: 798 plików, SHA-256 `0ec3138e…d5fbfe`.
 
 **Prywatna dostawa 1315** (poza Git i publicznym CI): `BuildPlan-EXTERIOR-COMPLETE-Private-1315.zip`, 792 pliki,
 SHA-256 `e3754813cd7d959cea78f676f42e1d0dd6faff0a5874626de548d27bbf328cbe` — oryginały z hashami, listy elementów,

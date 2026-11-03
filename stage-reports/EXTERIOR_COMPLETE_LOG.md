@@ -176,3 +176,21 @@ Next action: read rec1; then the four failed plans; then balconies (Willa Maja, 
   a strip, neutral glass is not a leaf). Solver 2.24.0.
 - Not yet: Bratki's thin glass canopy over the doors; Miniaturka's "canopy" is a small gabled timber porch roof ~0.8 m over the door head — a
   different element from a plate, not read.
+
+## E6 — test delivery 1316 (E4 + E5)
+
+- Commit `53d49021893580fc92b8603d1ab4f05bd1feb1cf`. `BuildPlan-owner-preview-1316.apk`, `com.buildplan.preview`,
+  versionCode 1316, `0.1316.0-owner`, arm64-v8a, 49 419 503 B, SHA-256
+  `2feb7e8e5067ecff3dcc4efc5448edc14f3758a9b09b081410f99e77d4d3f72f`; signer
+  `6e48fac4afaa3d70e70de5bc608aa4c4194206a9e6bc993dab56382b921ca0da` (unchanged); embedded `analyzer.mjs`
+  `8c275584d5f84193baa998796a6facb34ce83bafdb9a7ea0acf92fbbbb7675e9` (service 1.8.0, solver 2.24.0, protocol 3);
+  10/10 asset manifest entries match.
+- Live smoke on the APK's assets (Bratki live page; host Node x64 — not a phone): first sheet 13.4 s, done 281 s,
+  124 events, 27 sheets, 116 copies SHA-verified, 0 mismatched, copies removed; model hash `f5d5402a…3be2` equal to
+  the desktop run; peak RSS of the process tree 868 MB (host).
+- E4–E5 change the solver only, so the desktop solver on the full-run evidence is the production result: checker
+  35/70 (PRZED 26/70, 1315 32/70).
+- Private delivery outside Git: `BuildPlan-EXTERIOR-COMPLETE-Private-1316.zip`, 798 files, SHA-256
+  `0ec3138e901fc7a87d997584e027c3b058734c2f2100b49f4d9dd5bc85d5fbfe` (PO models, programs and all-sides renders at
+  solver 2.24.0, boards PRZED/PO, acceptance per house, live-smoke evidence, build log, limits).
+- Android UI NOT_VERIFIED (no device).
