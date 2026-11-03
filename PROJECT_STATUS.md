@@ -3070,3 +3070,33 @@ byte-identical, interior cameras 10 → 0, 60 pictures refused, 0 wrong. `thin-b
 (DERIVED/origin-less → NOT_PRINTED). `result.sources` + web/Android "Arkusze źródłowe": the real sheet, claim vs
 pixels, outcome and why, every number with crop, line, read/accepted value, printed/derived, use and model element.
 Limits: agent labels, ARCHON only, phone cost not measured, wall thickness not its own kind, sides not re-evaluated.
+
+### Bryły, dach i podgląd odczytu na żywo (STAGE BUILDPLAN SHAPE-LIVE-01)
+
+Status: **DONE — APK 1314 (`0.1314.0-owner`, commit `80d5612`), usługa 1.7.0, solver 2.21.0.**
+- Report `stage-reports/STAGE_BUILDPLAN_SHAPE_LIVE_01.md`; numbers in `stage-reports/artifacts/analyzer-shape-live-01/`.
+- **First wrong decision** on three attic houses: the highest datum the reader managed to read (the eaves or the attic
+  floor; the ridge label refused by the OCR gates) was taken for the ridge, so the roof sank below the walls.
+- **Fixes:**
+  - a datum with the section's drawn roof standing above it is not the ridge, and never becomes a storey;
+  - the ridge is measured where the section draws it (two flanks at the stated pitch, on the printed datums' scale,
+    `SOURCE_DERIVED`): 8.23/8.25/7.30 m against unread 8.29/8.26/7.33;
+  - the ridge axis is taken from the views' rise when nothing else decides (Willa Maja: pyramid → hip);
+  - a top-storey return outside every roof is no longer capped into a spike.
+- **Results:**
+  - DEV Arlety, Jabłonki, Miniaturka, Willa Maja fixed;
+  - holdout Lipienniki (never diagnosed): eaves −2.05 → 3.22 m;
+  - holdout Aurory and Kostrzewy unchanged;
+  - 8 DEV houses byte-identical.
+- **Live preview:**
+  - `source.v1` events: the sheet by the SHA-256 of the run's bytes, marks CANDIDATE/READ/ACCEPTED/REJECTED, real
+    element ids, and counts;
+  - the job-private copy of each sheet is removed with the run;
+  - Android: a fixed source panel, paged readings, crop zoom, "Pokaż w modelu", and pictures shown only on a SHA match;
+  - on the APK assets on a live page: first sheet at 13.4 s, done at 282 s, 129/129 copies verified.
+- **Android visual and update install: NOT_VERIFIED** (no device).
+- **Remaining:**
+  - Dalie's front door, window and canopy (the gate is a DOOR);
+  - Jabłonki's rear gable wing (its returns float);
+  - overlapping rooflight readings (Miniaturka and Jabłonki now PARTIAL);
+  - Aurory's ridge axis and gate.

@@ -1,0 +1,38 @@
+{
+ "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-arletach-3-e-oze-m504267f869cbe",
+ "exit": 0,
+ "terminal": "done",
+ "terminalAtMs": 282116,
+ "sourceEvents": 137,
+ "firstSheetAtMs": 13374,
+ "firstSheetStep": "CONTENT_CHECK",
+ "sheetsShown": 35,
+ "verified": 129,
+ "mismatched": 0,
+ "copyGoneAfterRun": true,
+ "steps": [
+  "FETCHING",
+  "CONTENT_CHECK",
+  "CONTENT_REFUSED",
+  "READING_DRAWING",
+  "DRAWING_READ",
+  "READING_NUMBERS",
+  "NUMBERS_READ",
+  "SOLVING",
+  "BUILT_FROM",
+  "COMPILING",
+  "VERIFYING"
+ ],
+ "lastCounts": {
+  "images": 35,
+  "imagesRead": 19,
+  "imagesRefused": 14,
+  "ocrCandidates": 2680,
+  "measurementsRead": 154,
+  "measurementsUsed": 29,
+  "openingsBuilt": 10,
+  "elementsFromReadings": 12,
+  "hypotheses": 65
+ },
+ "bundle": "the APK 1314 assets (assets/local-analyzer, analyzer.mjs sha256 289e765b12b5a93ea0141b0c0d494dce59dca89842645b1521b5c41a8ec2e3e0), run by run-host on a Node host \u2014 not a phone"
+}
