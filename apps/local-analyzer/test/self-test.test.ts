@@ -122,7 +122,7 @@ describe('the committed answer is what the sources give', () => {
 
 describe('the bundle, as the phone runs it', () => {
   it('ships the worker, the WebAssembly, the model and the self-test beside the analyzer — and the analyzer carries none of them', () => {
-    for (const f of ['main.mjs', 'analyzer.mjs', 'ocr-worker.mjs', 'ocr-self-test.mjs', WASM_FILE, `models/${MODEL.file}`]) expect(existsSync(join(bundleDir, f)), f).toBe(true)
+    for (const f of ['main.mjs', 'analyzer.mjs', 'ocr-worker.mjs', 'ocr-self-test.mjs', WASM_FILE, `models/${MODEL.file}`, 'image-role-worker.mjs', 'models/image-role-mnv4s.onnx']) expect(existsSync(join(bundleDir, f)), f).toBe(true)
     const analyzer = readFileSync(join(bundleDir, 'analyzer.mjs'), 'utf8')
     expect(analyzer).not.toContain(OCR_PARITY_CORPUS.name)
     expect(analyzer).not.toContain('InferenceSession')

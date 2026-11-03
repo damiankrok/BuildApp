@@ -6,5 +6,5 @@ export { RecogniserTimeout, WATCHDOG, recogniserIdentity, workerRecogniser } fro
 export type { BatchStats, OrtRecogniser } from './client.js'
 export { MANIFEST, MODEL, RECOGNISER_ID, RECOGNISER_RUNTIME, WASM_FILE, WASM_LOADER_FILE, assetsPresent, bundledAssetPaths, sha256Hex } from './manifest.js'
 export type { RecogniserAssetPaths } from './manifest.js'
-export { IMAGE_ROLE, IMAGE_ROLE_RUNTIME, bundledImageRolePaths, workerImageEmbedder } from './image-role.js'
-export type { ImageRolePaths, OrtImageEmbedder } from './image-role.js'
+export { IMAGE_ROLE, IMAGE_ROLE_RUNTIME, bundledImageRolePaths, workerImageEmbedder } from './image-role-client.js'
+export type { ImageRolePaths, OrtImageEmbedder } from './image-role-client.js'

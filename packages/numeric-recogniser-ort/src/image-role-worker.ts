@@ -4,7 +4,7 @@
  */
 import { parentPort, workerData } from 'node:worker_threads'
 import { openImageRoleEngine } from './image-role.js'
-import type { ImageRolePaths, ImageRoleWorkerReply } from './image-role.js'
+import type { ImageRolePaths, ImageRoleWorkerReply } from './image-role-client.js'
 
 /** As the recogniser's worker: a `fetch` anywhere in it fails at once, by name (not imported from `worker.ts`, whose
  * import would start the recogniser's own server on this worker's data). */
