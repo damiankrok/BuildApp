@@ -19,7 +19,7 @@ import { NO_CHECKPOINT } from '@buildapp/source-common'
 import type { Checkpoint } from '@buildapp/source-common'
 import { ObservationGraphBuilder } from '@buildapp/source-observations'
 import type { ExtractorHandle, SourceCoordinateFrame, SourceObservation, SourceObservationGraph } from '@buildapp/source-observations'
-import { selectedVariant } from '@buildapp/source-package'
+import { decodeImage, selectedVariant } from '@buildapp/source-package'
 import type { SourceAsset, SourcePackage } from '@buildapp/source-package'
 import { VisionResponseRejected, VisionUnavailable, applyVisionResponse, extractorNameFor, extractorVersionFor, readsAsFacade, tasksForRoles } from '@buildapp/source-vision'
 import type { VisionContextFact, VisionReasoner, VisionTask, VisionTrace } from '@buildapp/source-vision'
@@ -32,6 +32,8 @@ import type { PlanHandles, PlanResult } from './extractors/plan.js'
 import { SECTION_EXTRACTORS, extractSection } from './extractors/section.js'
 import type { SectionHandles, SectionResult } from './extractors/section.js'
 import { IDENTITY_EXTRACTOR, relateAcrossViews } from './identity.js'
+import { CONTENT_HEAD, contentProbabilities, contentTensor, contentVerdict } from './content.js'
+import type { ContentVerdict, ImageEmbedder } from './content.js'
 
 /** Where the analyzer gets the bytes a package refers to. Offline by construction: it never fetches. */
 export type ByteSource = (url: string) => Promise<{ bytes: Uint8Array; mediaType: string } | null>
@@ -60,6 +62,14 @@ export type AnalyzeOptions = {
    * segments are released as soon as its extractors are done with them.
    */
   retainPrepared?: boolean
+  /**
+   * SOURCE-01: the image encoder that reads what each picture shows (`content.ts`). With one, an asset whose pixels
+   * surely show something its role's reader must not read (an interior sent to the exterior camera, a perspective
+   * captioned as an elevation) is kept as a source and given to no reader. Without one, roles decide alone, as before.
+   */
+  content?: ImageEmbedder
+  /** Cancels the content pass's worker. */
+  signal?: AbortSignal
 }
 
 export type AssetAnalysis = {
@@ -92,6 +102,10 @@ export type AnalysisResult = {
   traces: VisionTrace[]
   /** Assets the package holds that this analyzer had no extractor for. */
   skipped: Array<{ assetId: string; reason: string }>
+  /** SOURCE-01: what each asset's pixels show and what was done with it, one per asset (NOT_CLASSIFIED without an encoder). */
+  content: ContentVerdict[]
+  /** The encoder and head that read them, or null when none ran. */
+  contentClassifier: { id: string; modelSha256: string; headVersion: string } | null
 }
 
 const contextFactsFor = (pkg: SourcePackage): VisionContextFact[] => pkg.publishedFacts.map((f) => ({ label: f.label, value: f.value, unit: f.unit }))
@@ -118,6 +132,32 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
   const ordered = [...pkg.assets].sort((a, b) => a.id.localeCompare(b.id)).slice(0, options.maxAssets ?? pkg.assets.length)
 
   const checkpoint = options.checkpoint ?? NO_CHECKPOINT
+
+  // ---- SOURCE-01: what each picture shows, before any reader sees it ------
+  const verdicts = new Map<string, ContentVerdict>()
+  if (options.content) {
+    const ids: string[] = []
+    const tensors: Float32Array[] = []
+    for (const asset of ordered) {
+      checkpoint.tick({ subphase: { id: 'CONTENT', label: 'what each picture shows' } })
+      const fetched = await options.bytes(selectedVariant(asset).url)
+      if (!fetched) continue
+      try {
+        tensors.push(contentTensor(decodeImage(fetched.bytes)))
+        ids.push(asset.id)
+      } catch (err) {
+        if ((err as { name?: unknown }).name === 'AbortError') throw err
+        // an undecodable picture is named by the reader that would have read it, below
+      }
+    }
+    const embeddings = await options.content.embed(tensors, options.signal)
+    for (const [i, id] of ids.entries()) {
+      const asset = ordered.find((a) => a.id === id) as SourceAsset
+      verdicts.set(id, contentVerdict(id, asset.roles, contentProbabilities(embeddings[i])))
+    }
+  }
+  const content = ordered.map((a) => verdicts.get(a.id) ?? contentVerdict(a.id, a.roles, undefined))
+
   for (const [index, asset] of ordered.entries()) {
     options.onAsset?.(index, ordered.length, asset.id)
     checkpoint.tick({ done: index, total: ordered.length, assetIndex: index + 1, assetTotal: ordered.length, subphase: { id: asset.roles.document, label: asset.roles.document.toLowerCase().replace(/_/g, ' ') } })
@@ -125,6 +165,12 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
     const document = asset.roles.document
     if (document === 'CHROME' || document === 'UNKNOWN') {
       skipped.push({ assetId: asset.id, reason: `document role ${document}: not a drawing this analyzer reads` })
+      continue
+    }
+    const verdict = verdicts.get(asset.id)
+    if (verdict?.decision === 'VETOED') {
+      builder.unresolved(`the ${document.toLowerCase().replace(/_/g, ' ')} reading of asset ${asset.id}`, verdict.why, 'NOT_ATTEMPTED', asset.id)
+      skipped.push({ assetId: asset.id, reason: `content: ${verdict.why}` })
       continue
     }
     const fetched = await options.bytes(variant.url)
@@ -250,5 +296,5 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
 
   if (!options.vision) builder.unresolved('a vision pass over this package', 'no vision provider was configured for this run; every observation in this graph is from a deterministic extractor', 'NOT_ATTEMPTED')
 
-  return { graph: builder.seal(), assets, vision, traces, skipped }
+  return { graph: builder.seal(), assets, vision, traces, skipped, content, contentClassifier: options.content ? { id: options.content.id, modelSha256: options.content.modelSha256, headVersion: CONTENT_HEAD.version } : null }
 }

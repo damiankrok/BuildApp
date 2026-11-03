@@ -45,6 +45,8 @@ export type RecogniserSummary = {
   releaseFailure?: string
 }
 
+import type { SourceInspection } from './sources.js'
+
 export type LinkAnalysisSummary = {
   schema: 'buildapp.link-analysis-result'
   schemaVersion: '1.0.0'
@@ -120,6 +122,11 @@ export type LinkAnalysisSummary = {
    * item no relation compared. A conflict never withdraws the model.
    */
   assessment: ModelAssessment
+  /**
+   * SOURCE-01: every published picture — the publisher's claim, what its pixels show, what was done with it and why,
+   * and each number read off it with its crop, its line, printed or derived, and its use in the model. Read-only.
+   */
+  sources?: SourceInspection
   analyzer: { service: string; solver: string }
   startedAt: string
   completedAt: string

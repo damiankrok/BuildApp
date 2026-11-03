@@ -4,6 +4,7 @@ import { useStore } from '../use-store.js'
 import { ANALYSIS_STAGE_IDS, AnalyzerClientError, createAnalyzerClient, describeFailure, isTerminalStatus, normalizeServiceUrl } from '../analyzer/client.js'
 import type { AnalysisSummary, JobStatus } from '../analyzer/client.js'
 import { assessmentLines } from '../analyzer/assessment.js'
+import { SourceSheets } from './SourceSheets.js'
 
 /**
  * The Analyze panel: paste a project page, watch the analyzer service work
@@ -307,6 +308,7 @@ export function Analyzer(): JSX.Element {
               </div>
             </div>
           ) : null}
+          {summary.sources ? <SourceSheets sources={summary.sources} /> : null}
           <div className="actions">
             <button data-testid="analyzer-open" onClick={() => void openModel()}>
               Open model

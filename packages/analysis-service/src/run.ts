@@ -22,6 +22,9 @@ import type { AnalysisPhaseId, AnalysisTelemetry, PhaseStats } from './checkpoin
 import { SourcePackageSchema, acquireSourcePackage, decodeImage, publishedSpecificationsHash, selectedVariant } from '@buildapp/source-package'
 import type { FetchDeps, FetchPolicy, SourceAdapter, SourceByteCache, SourcePackage } from '@buildapp/source-package'
 import { analyzeSourcePackage } from '@buildapp/source-analyzer'
+import type { ContentVerdict, ImageEmbedder } from '@buildapp/source-analyzer'
+import { sourceInspectionOf } from './sources.js'
+import type { SourceInspection } from './sources.js'
 import type { SourceObservationGraph } from '@buildapp/source-observations'
 import { nullVisionReasoner } from '@buildapp/source-vision'
 import type { VisionReasoner } from '@buildapp/source-vision'
@@ -47,7 +50,7 @@ import type { LinkAnalysisResult, RecogniserSummary, VisionMode } from './result
 import { warningsOf } from './warnings.js'
 import { previewOf, sourceBasisOf } from './preview.js'
 
-export const ANALYSIS_SERVICE_VERSION = '1.5.0' as const
+export const ANALYSIS_SERVICE_VERSION = '1.6.0' as const
 
 /** What to analyse: a live URL, or a package (and optionally its graph) sealed earlier. */
 export type AnalysisInput = { kind: 'URL'; url: string } | { kind: 'PACKAGE'; pkg: SourcePackage; graph?: SourceObservationGraph }
@@ -71,6 +74,13 @@ export type AnalysisOptions = {
    * before reconstruction begins, and the result says which recogniser read and what it decided.
    */
   recogniser?: LabelRecogniser
+  /**
+   * SOURCE-01: the image encoder that reads what each published picture shows (`source-analyzer/content.ts`). With
+   * one, a picture whose pixels surely show what its role's reader must not read (an interior in the gallery of
+   * visualisations, a perspective captioned as an elevation) is kept as a source and given to no reader. Absent, the
+   * publisher's roles decide alone, as before; the result's `sources` says which was the case.
+   */
+  content?: ImageEmbedder
   /**
    * BUILDPLAN-ANALYZER-005K, experimental: the boundary's drawn-gap rule. Absent or OFF — the default, and all the
    * product ever runs — the boundary reads exactly as before; the research harness asks for ON to measure the rule.
@@ -280,6 +290,9 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     let visionProvider: string | null = null
     let visionAttempted = 0
     let visionAccepted = 0
+    let contentVerdicts: ContentVerdict[] = []
+    let skippedAssets: Array<{ assetId: string; reason: string }> = []
+    let contentClassifier: SourceInspection['classifier'] = null
     if (input.kind === 'PACKAGE' && input.graph) {
       graph = input.graph
       visionMode = 'REPLAYED_GRAPH'
@@ -292,12 +305,17 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
         bytes: bytesFor,
         vision,
         checkpoint,
+        ...(options.content ? { content: options.content } : {}),
+        ...(signal ? { signal } : {}),
         // only the graph is used from here on: release each drawing's masks as soon as it is read
         retainPrepared: false,
         // reading the drawings is about two thirds of this stage, the printed dimensions the rest
         onAsset: (index, total) => report('EXTRACTING_OBSERVATIONS', total === 0 ? 0.65 : (0.65 * index) / total, index < total ? `drawing ${index + 1} of ${total}` : undefined),
       })
       graph = analysis.graph
+      contentVerdicts = analysis.content
+      skippedAssets = analysis.skipped
+      contentClassifier = analysis.contentClassifier
       const live = vision.provider.id !== 'vision.none' && vision.available() && analysis.vision.attempted > 0
       // a request the null provider declined is not an attempt worth reporting
       visionAttempted = live ? analysis.vision.attempted : 0
@@ -515,6 +533,8 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     const sourceBasis = sourceBasisOf(pkg, reconstruction.planDiagnostics)
     const preview = previewOf({ model, ...(reconstruction.partialPreview ? { partial: reconstruction.partialPreview } : {}), heights: reconstruction.heights, source: sourceBasis, ...(reconstruction.roofDatum ? { approximateRoofDatum: reconstruction.roofDatum } : {}), completeness: reconstruction.modelCompleteness })
 
+    const r2 = reconstruction as unknown as { ledger: Array<{ evidenceId: string; disposition: string; featureId?: string; reason: string }>; viewAudit: Array<{ assetId: string; frameId: string; use: string; side?: string; sideBasis?: string; why: string }>; registrations: { plans: Array<{ frameId: string }>; cameras: Array<{ frameId: string; solved: boolean; why: string }> } }
+    const sources = sourceInspectionOf({ pkg, graph, metrics, ledger: r2.ledger, viewAudit: r2.viewAudit, planFrameIds: new Set(r2.registrations.plans.map((p) => p.frameId)), cameras: r2.registrations.cameras, content: contentVerdicts, skipped: skippedAssets, classifier: contentClassifier })
     const result: LinkAnalysisResult = {
       schema: 'buildapp.link-analysis-result',
       schemaVersion: '1.0.0',
@@ -570,6 +590,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
         closure: { exteriorErrors, exteriorFindings: closure.metrics.exteriorFindingCount, interiorFindings: closure.metrics.interiorFindingCount },
       },
       assessment,
+      sources,
       analyzer: { service: ANALYSIS_SERVICE_VERSION, solver: SOLVER_V2_VERSION },
       startedAt,
       completedAt: now().toISOString(),

@@ -29,6 +29,7 @@ import type { AnalysisFiles, AnalysisProgress, AnalysisRun, AnalysisTelemetry, A
 import { fileByteCache } from '@buildapp/source-package'
 import type { FetchDeps, FetchPolicy, SourceAdapter } from '@buildapp/source-package'
 import type { LabelRecogniser } from '@buildapp/source-metrics'
+import type { ImageEmbedder } from '@buildapp/source-analyzer'
 import { memorySample } from './memory.js'
 import type { MemorySample } from './memory.js'
 
@@ -36,7 +37,10 @@ import type { MemorySample } from './memory.js'
  * What a local runtime registers: the publishers it trusts, the external numeric recogniser it ships (005H; a factory,
  * one per job) and, in tests only, a network seam. No vision provider.
  */
-export type LocalWiring = { adapters: readonly SourceAdapter[]; deps?: FetchDeps; policy?: FetchPolicy; recogniser?: () => LocalRecogniser }
+export type LocalWiring = { adapters: readonly SourceAdapter[]; deps?: FetchDeps; policy?: FetchPolicy; recogniser?: () => LocalRecogniser; content?: () => LocalContent }
+
+/** SOURCE-01: the image-content encoder a bundle ships (a factory, one per job), with what its batches cost. */
+export type LocalContent = ImageEmbedder & { stats?: () => unknown[]; release?: () => Promise<void> }
 
 /** A recogniser that can say what its batches cost (the worker recogniser does): for the performance record only. */
 export type LocalRecogniser = LabelRecogniser & { stats?: () => unknown[] }
@@ -48,6 +52,8 @@ export type LocalAnalysisRequest = {
   wiring: LocalWiring
   /** 005H: this job's recogniser, made from `wiring.recogniser` by the caller (so it can name it before the run). */
   recogniser?: LocalRecogniser
+  /** SOURCE-01: this job's image-content encoder, made from `wiring.content` by the caller. */
+  content?: LocalContent
   signal?: AbortSignal
   progress?: (event: AnalysisProgress) => void
   /** Phase, counts and heartbeat from inside the long loops (protocol 3). */
@@ -90,6 +96,7 @@ export async function runLocalAnalysis(request: LocalAnalysisRequest): Promise<L
         onPhaseStats: request.onPhaseStats,
         rss: () => process.memoryUsage.rss(),
         recogniser: request.recogniser,
+        ...(request.content ? { content: request.content } : {}),
       },
     )
     return { run, files: analysisFilesOf(run), timings: run.timings, memory: memorySample() }

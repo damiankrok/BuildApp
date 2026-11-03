@@ -661,6 +661,8 @@ private fun Result(summary: AnalysisSummary, entry: DownloadedSceneEntry, local:
         if (headline == ResultHeadline.OPEN_QUESTIONS) Body(stringResource(R.string.analyzer_result_open_questions_body))
         // N9-01: the three axes, apart, before anything else about the model; none of them withholds the 3D view
         summary.assessment?.let { AssessmentDetails(it) }
+        // SOURCE-01: which pictures were read, which refused by their pixels, and each number read off them
+        summary.sources?.let { SourceSheetsDetails(it) }
         // N7-FIX-04 follow-up: the completeness verdict is shown with every result that carries one, not only a partial one
         if (summary.preview.hasDetails) PreviewOutcomeDetails(summary.preview)
         InkButton(stringResource(if (partial) R.string.analyzer_open_partial_3d else R.string.house_open_3d), onClick = onOpen, icon = ShellIcons.cube, modifier = Modifier.fillMaxWidth())
@@ -1113,7 +1115,7 @@ private fun megabytes(bytes: Long, decimals: Int = 0): String =
 
 /** A folded section: its title is the button, its state is said in words. */
 @Composable
-private fun Foldout(title: String, open: Boolean, onToggle: () -> Unit, content: @Composable () -> Unit) {
+internal fun Foldout(title: String, open: Boolean, onToggle: () -> Unit, content: @Composable () -> Unit) {
     val state = stringResource(if (open) R.string.state_expanded else R.string.state_collapsed)
     Column(Modifier.fillMaxWidth()) {
         Box(Modifier.fillMaxWidth().padding(top = Space.s).height(1.dp).background(Palette.Hairline))

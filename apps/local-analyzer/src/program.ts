@@ -300,7 +300,9 @@ export async function runProgram(argv: readonly string[], wiring: LocalWiring, o
   // What each phase cost, beside the trace: never hashed, kept on failures and cancels too.
   // 005H: this job's external recogniser (one per job; its worker exists only while a batch is read).
   const recogniser = wiring.recogniser?.()
-  const performanceRecord = (): Record<string, unknown> => ({ node: process.version, arch: arch(), elapsedMs: elapsed(), memory: memorySample(), phases: phaseStats, ...(recogniser?.stats ? { recogniser: { id: recogniser.id, batches: recogniser.stats() } } : {}) })
+  // SOURCE-01: this job's image-content encoder (its worker exists only while the pictures are read).
+  const content = wiring.content?.()
+  const performanceRecord = (): Record<string, unknown> => ({ node: process.version, arch: arch(), elapsedMs: elapsed(), memory: memorySample(), phases: phaseStats, ...(recogniser?.stats ? { recogniser: { id: recogniser.id, batches: recogniser.stats() } } : {}), ...(content?.stats ? { content: { id: content.id, batches: content.stats() } } : {}) })
 
   try {
     // before any analyzer code runs: ICU's text behaviour where the runtime lacks ICU (src/text.ts)
@@ -311,6 +313,7 @@ export async function runProgram(argv: readonly string[], wiring: LocalWiring, o
       workDir: args.workDir,
       wiring,
       recogniser,
+      ...(content ? { content } : {}),
       jobId: args.jobId,
       signal: controller.signal,
       now: options.now,
@@ -361,6 +364,7 @@ export async function runProgram(argv: readonly string[], wiring: LocalWiring, o
   } finally {
     stopListening()
     await recogniser?.release?.()
+    await content?.release?.()
   }
 }
 

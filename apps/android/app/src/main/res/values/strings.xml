@@ -620,4 +620,43 @@
         <item quantity="many">%d elementów nierozstrzygniętych</item>
         <item quantity="other">%d elementu nierozstrzygniętego</item>
     </plurals>
+
+    <!-- SOURCE-01: arkusze źródłowe -->
+    <string name="sources_title">Arkusze źródłowe: %1$d obrazów, odczytane %2$d, odrzucone po treści %3$d</string>
+    <string name="sources_numbers">Liczby z rysunków: %1$d (wydrukowane i użyte %2$d, wyliczone %3$d)</string>
+    <string name="sources_classifier">Treść obrazów rozpoznana lokalnie (%1$s). Rozpoznanie może tylko odebrać obraz czytnikowi, nigdy nie dodaje nowego zastosowania.</string>
+    <string name="sources_no_classifier">Treści obrazów nie rozpoznawano: o zastosowaniu zdecydowały same podpisy wydawcy.</string>
+    <string name="sources_pixels">treść: %1$s %2$d %%</string>
+    <string name="sources_publisher">Wydawca: %1$s</string>
+    <string name="sources_side">Strona: %1$s (%2$s)</string>
+    <string name="sources_picture">Arkusz źródłowy z zaznaczonymi odczytami</string>
+    <string name="sources_picture_loading">Wczytywanie arkusza…</string>
+    <string name="sources_picture_failed">Nie udało się wczytać arkusza z adresu źródła.</string>
+    <string name="sources_doc_plan">rzut</string>
+    <string name="sources_doc_elevation">elewacja</string>
+    <string name="sources_doc_section">przekrój</string>
+    <string name="sources_doc_site">plan sytuacyjny</string>
+    <string name="sources_doc_render">wizualizacja</string>
+    <string name="sources_doc_unknown">nieokreślony</string>
+    <string name="sources_content_exterior">widok zewnętrzny</string>
+    <string name="sources_content_interior">wnętrze</string>
+    <string name="sources_outcome_read">odczytany</string>
+    <string name="sources_outcome_refused">odrzucony: treść przeczy podpisowi</string>
+    <string name="sources_outcome_source_only">tylko jako źródło</string>
+    <string name="sources_outcome_not_read">nieodczytany</string>
+    <string name="sources_reading_printed">%1$s: wydrukowane „%2$s” → %3$s %4$s</string>
+    <string name="sources_reading_derived">%1$s: wyliczone (niewydrukowane) → %2$s %3$s</string>
+    <string name="sources_measure_overall">wymiar całkowity</string>
+    <string name="sources_measure_segment">odcinek łańcucha</string>
+    <string name="sources_measure_opening">otwór</string>
+    <string name="sources_measure_level">rzędna</string>
+    <string name="sources_measure_angle">kąt</string>
+    <string name="sources_measure_area">powierzchnia</string>
+    <string name="sources_measure_dimension">wymiar</string>
+    <string name="sources_use_model">użyte w modelu</string>
+    <string name="sources_use_check">użyte do sprawdzenia</string>
+    <string name="sources_use_conflict">sprzeczne z modelem</string>
+    <string name="sources_use_refused">odrzucone z powodem</string>
+    <string name="sources_use_none">nieużyte</string>
+    <string name="sources_use_element">%1$s → element %2$s</string>
 </resources>

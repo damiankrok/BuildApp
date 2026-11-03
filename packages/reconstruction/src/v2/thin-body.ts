@@ -27,6 +27,14 @@
 import { round6 } from '@buildapp/source-common'
 import type { Raster } from '@buildapp/source-cv'
 import type { DimensionChain } from '@buildapp/source-metrics'
+
+type ChainSegment = DimensionChain['segments'][number]
+/**
+ * SOURCE-01: a segment's value is PRINTED only when a number was read on the drawing there (`READ`), possibly
+ * re-read against its chain (`CHAIN_CORRECTED`). A `DERIVED` value carries an evidence id too — the chain's own
+ * arithmetic — and must never be described or weighed as a printed dimension.
+ */
+export const printedSegment = (seg: ChainSegment): boolean => seg.valueCm !== undefined && !!seg.evidenceId && (seg.origin === 'READ' || seg.origin === 'CHAIN_CORRECTED')
 import type { MassV2 } from './building.js'
 import type { ElevationFrameV2, PlanFrameV2 } from './frame.js'
 
@@ -53,7 +61,12 @@ export type ThinBodyRecord = {
   shared?: { facade: ThinBodyFacade; withMassId: string }
   /** The plan's ink across the band: share of the long-axis samples that are ink, binned outward from the shared face. */
   profile?: { samples: number; stepM: number; fromS: number; bands: Array<{ fromS: number; toS: number }>; solidShare: number; farEdgeInk: number; farWall?: FarWallReading }
-  chains: Array<{ chainId: string; valueCm: number; from: number; to: number; role: 'CORROBORATES' | 'WIDENS' | 'CONFLICTS' | 'UNRELATED'; why: string }>
+  /**
+   * SOURCE-01: every valued segment that ends on the band, with where its value came from. Only a value printed on the
+   * drawing (`READ`, `CHAIN_CORRECTED`) may corroborate, widen or conflict; a `DERIVED` value is the chain's own
+   * arithmetic over pixels and is listed as `NOT_PRINTED`, never quoted as "prints".
+   */
+  chains: Array<{ chainId: string; valueCm: number; from: number; to: number; origin: string; role: 'CORROBORATES' | 'WIDENS' | 'CONFLICTS' | 'UNRELATED' | 'NOT_PRINTED'; why: string }>
   elevations: Array<{ frameId: string; side: string; over: [number, number]; builtShare: number; verdict: 'CORROBORATES' | 'CONTRADICTS' | 'NOT_DECISIVE'; edges?: { far: number; top: number }; why?: string }>
   hypotheses: Array<{ kind: ThinBodyHypothesisKind; status: 'SUPPORTED' | 'REFUTED' | 'NO_EVIDENCE'; why: string }>
   /** Where the reading that made the ring fail was taken. */
@@ -360,7 +373,7 @@ export function adjudicateThinBody(mass: MassV2, axis: 'X' | 'Z', input: ThinBod
       for (const c of input.chains) {
         if (c.frameId !== frame.frameId || c.axis !== (axis === 'X' ? 'VERTICAL' : 'HORIZONTAL')) continue
         for (const seg of c.segments) {
-          if (seg.valueCm === undefined) continue
+          if (seg.valueCm === undefined || !printedSegment(seg)) continue
           const w = (px: number): number => (axis === 'X' ? frame.toWorld(frame.originPx.x, px).z : frame.toWorld(px, frame.originPx.y).x)
           const a = Math.min(w(seg.fromPx), w(seg.toPx))
           const b = Math.max(w(seg.fromPx), w(seg.toPx))
@@ -418,6 +431,7 @@ export function adjudicateThinBody(mass: MassV2, axis: 'X' | 'Z', input: ThinBod
     if (c.frameId !== frame.frameId || c.axis !== (axis === 'X' ? 'HORIZONTAL' : 'VERTICAL')) continue
     for (const seg of c.segments) {
       if (seg.valueCm === undefined || !seg.evidenceId) continue
+      const origin = seg.origin ?? 'UNKNOWN'
       const at = (px: number): number => (axis === 'X' ? frame.toWorld(px, frame.originPx.y).x : frame.toWorld(frame.originPx.x, px).z)
       const a = round6(Math.min(at(seg.fromPx), at(seg.toPx)))
       const b = round6(Math.max(at(seg.fromPx), at(seg.toPx)))
@@ -426,23 +440,27 @@ export function adjudicateThinBody(mass: MassV2, axis: 'X' | 'Z', input: ThinBod
       const farFace = near + dir * narrow
       const farEnd = Math.abs(a - farFace) <= tol ? a : Math.abs(b - farFace) <= tol ? b : undefined
       if (nearEnd === undefined && farEnd === undefined) continue
+      if (!printedSegment(seg)) {
+        record.chains.push({ chainId: c.id, valueCm: seg.valueCm, from: a, to: b, origin, role: 'NOT_PRINTED', why: `${seg.valueCm} cm is the chain's ${origin.toLowerCase()} value, not a number printed on the drawing: it neither corroborates nor contradicts the band` })
+        continue
+      }
       if (nearEnd !== undefined && farEnd !== undefined) {
-        record.chains.push({ chainId: c.id, valueCm: seg.valueCm, from: a, to: b, role: Math.abs(value - narrow) <= tol ? 'CORROBORATES' : 'CONFLICTS', why: `ends on both faces of the band and prints ${seg.valueCm} cm against the ${narrow.toFixed(2)} m read` })
+        record.chains.push({ chainId: c.id, valueCm: seg.valueCm, from: a, to: b, origin, role: Math.abs(value - narrow) <= tol ? 'CORROBORATES' : 'CONFLICTS', why: `ends on both faces of the band and prints ${seg.valueCm} cm against the ${narrow.toFixed(2)} m read` })
         continue
       }
       const other = nearEnd !== undefined ? (nearEnd === a ? b : a) : farEnd === a ? b : a
       const otherS = dir * (other - near)
       if (otherFaces.some((f) => Math.abs(f - other) <= tol)) {
-        record.chains.push({ chainId: c.id, valueCm: seg.valueCm, from: a, to: b, role: 'UNRELATED', why: 'its other end is another body’s face: it measures more than this body' })
+        record.chains.push({ chainId: c.id, valueCm: seg.valueCm, from: a, to: b, origin, role: 'UNRELATED', why: 'its other end is another body’s face: it measures more than this body' })
         continue
       }
       // a segment from the shared face outward, past the read far face, to a wall the plan draws there: the body is wider
       const onBand = bands.find((x) => Math.abs(x.toS - otherS) <= tol)
       if (nearEnd !== undefined && otherS > narrow + tol && onBand) {
-        record.chains.push({ chainId: c.id, valueCm: seg.valueCm, from: a, to: b, role: 'WIDENS', why: `runs from the shared face to a wall the plan draws ${otherS.toFixed(2)} m out, printed ${seg.valueCm} cm` })
+        record.chains.push({ chainId: c.id, valueCm: seg.valueCm, from: a, to: b, origin, role: 'WIDENS', why: `runs from the shared face to a wall the plan draws ${otherS.toFixed(2)} m out, printed ${seg.valueCm} cm` })
         continue
       }
-      if (Math.abs(value - narrow) > tol) record.chains.push({ chainId: c.id, valueCm: seg.valueCm, from: a, to: b, role: 'CONFLICTS', why: `ends on the band's ${nearEnd !== undefined ? 'shared' : 'far'} face and prints ${seg.valueCm} cm, but its other end (${other.toFixed(2)} m) is on no wall the plan draws: the drawing and its dimension disagree` })
+      if (Math.abs(value - narrow) > tol) record.chains.push({ chainId: c.id, valueCm: seg.valueCm, from: a, to: b, origin, role: 'CONFLICTS', why: `ends on the band's ${nearEnd !== undefined ? 'shared' : 'far'} face and prints ${seg.valueCm} cm, but its other end (${other.toFixed(2)} m) is on no wall the plan draws: the drawing and its dimension disagree` })
     }
   }
   const conflicts = record.chains.filter((c) => c.role === 'CONFLICTS')

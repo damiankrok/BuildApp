@@ -50,8 +50,10 @@ function plan(strokes: Stroke[]): Raster {
 
 const mass = (id: string, role: 'MAIN' | 'ATTACHED', x0: number, x1: number): MassV2 => ({ id, role, x0, z0: 0, x1, z1: 8, storeys: [0], featureId: `f-${id}`, sourceMassId: `mass-${id}` })
 const main = mass('main', 'MAIN', 0, 8)
-const chain = (segments: Array<{ from: number; to: number; cm: number }>): DimensionChain =>
-  ({ id: 'chain-h', frameId: 'plan-0', assetId: 'asset-plan', axis: 'HORIZONTAL', baselinePx: 10, ticksPx: [], segments: segments.map((s, i) => ({ index: i, fromPx: OX + s.from * PPM, toPx: OX + s.to * PPM, pixelLength: (s.to - s.from) * PPM, evidenceId: `e${i}`, valueCm: s.cm, confidence: 0.9 })), closes: true, observationIds: [], ocrTokenIds: [] }) as DimensionChain
+// SOURCE-01: a segment says where its value came from, as every valued segment of real metric evidence does; `READ`
+// unless a test asks for the chain's own arithmetic (`DERIVED`).
+const chain = (segments: Array<{ from: number; to: number; cm: number; origin?: 'READ' | 'CHAIN_CORRECTED' | 'DERIVED' }>): DimensionChain =>
+  ({ id: 'chain-h', frameId: 'plan-0', assetId: 'asset-plan', axis: 'HORIZONTAL', baselinePx: 10, ticksPx: [], segments: segments.map((s, i) => ({ index: i, fromPx: OX + s.from * PPM, toPx: OX + s.to * PPM, pixelLength: (s.to - s.from) * PPM, evidenceId: `e${i}`, valueCm: s.cm, origin: s.origin ?? 'READ', confidence: 0.9 })), closes: true, observationIds: [], ocrTokenIds: [] }) as DimensionChain
 
 /** A front view at the plan's scale: x along, the ground at row 500; sky above the drawn built extent. */
 const frontView: ElevationFrameV2 = { registration: { frameId: 'front', assetId: 'a-front' } as ElevationFrameV2['registration'], side: 'FRONT', planeAt: 0, alongOf: (px) => (px - OX) / PPM, pxOf: (a) => OX + a * PPM, yOf: (py) => (500 - py) / PPM, pyOf: (y) => 500 - y * PPM }
@@ -185,6 +187,42 @@ describe('N7-P2R the body is left to the partial preview when the source does no
     const band = mass('band', 'ATTACHED', 8, 8.5)
     const r = adjudicateThinBody(band, 'X', input(plan([{ from: 7.7, to: 8 }, { from: 8.3, to: 8.5, dash: 0.6 }]), band))
     expect(supported(r)).toEqual(['CANOPY_ON_POSTS'])
+    expect(r.decision.kind).toBe('KEEP_PARTIAL')
+  })
+})
+
+describe('SOURCE-01 only a printed value is a printed dimension', () => {
+  it('a DERIVED segment from the shared face to the drawn wall does not widen the body, and is not described as printed', () => {
+    const band = mass('band', 'ATTACHED', 8, 8.45)
+    const raster = plan([{ from: 7.7, to: 8 }, { from: 11.7, to: 12 }])
+    const r = adjudicateThinBody(band, 'X', input(raster, band, { chains: [chain([{ from: 8, to: 12, cm: 400, origin: 'DERIVED' }])] }))
+    expect(r.chains.map((c) => `${c.valueCm}:${c.role}:${c.origin}`)).toEqual(['400:NOT_PRINTED:DERIVED'])
+    expect(r.chains[0].why).not.toMatch(/prints|printed 400/)
+    expect(r.hypotheses.find((h) => h.kind === 'WIDEN')?.status).toBe('NO_EVIDENCE')
+    expect(r.decision.kind).toBe('KEEP_PARTIAL')
+  })
+
+  it('the same segment, printed, widens it (control)', () => {
+    const band = mass('band', 'ATTACHED', 8, 8.45)
+    const raster = plan([{ from: 7.7, to: 8 }, { from: 11.7, to: 12 }])
+    const r = adjudicateThinBody(band, 'X', input(raster, band, { chains: [chain([{ from: 8, to: 12, cm: 400, origin: 'CHAIN_CORRECTED' }])] }))
+    expect(r.chains.map((c) => `${c.valueCm}:${c.role}`)).toEqual(['400:WIDENS'])
+    expect(r.decision.kind).toBe('WIDEN')
+  })
+
+  it('a DERIVED value that disagrees with the drawing is no source conflict', () => {
+    const band = mass('band', 'ATTACHED', 8, 8.6)
+    const r = adjudicateThinBody(band, 'X', input(plan([{ from: 7.7, to: 8 }, { from: 8.3, to: 8.6 }]), band, { chains: [chain([{ from: 5, to: 8.6, cm: 360, origin: 'DERIVED' }])] }))
+    expect(r.chains[0].role).toBe('NOT_PRINTED')
+    expect(r.firstBad).not.toMatch(/^SOURCE_CONFLICT/)
+  })
+
+  it('a segment of unknown origin is not taken as printed either', () => {
+    const band = mass('band', 'ATTACHED', 8, 8.45)
+    const c = chain([{ from: 8, to: 12, cm: 400 }])
+    delete (c.segments[0] as { origin?: string }).origin
+    const r = adjudicateThinBody(band, 'X', input(plan([{ from: 7.7, to: 8 }, { from: 11.7, to: 12 }]), band, { chains: [c] }))
+    expect(r.chains[0].role).toBe('NOT_PRINTED')
     expect(r.decision.kind).toBe('KEEP_PARTIAL')
   })
 })

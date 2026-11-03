@@ -68,7 +68,44 @@ export type AnalysisSummary = {
   verification: { replay: string; residuals: number; residualsOutsideTolerance: number }
   /** N9-01: technical validity, reading completeness and fidelity to the drawings, apart; absent from an older service. */
   assessment?: AssessmentView
+  /** SOURCE-01: every published picture, what was done with it, and each number read off it; absent before service 1.6.0. */
+  sources?: SourceInspectionView
   completedAt: string
+}
+
+/** SOURCE-01: `packages/analysis-service/src/sources.ts`, as the client reads it. */
+export type SourceReadingView = {
+  id: string
+  measure: string
+  rawText: string
+  value: number
+  unit: string
+  printed: boolean
+  origin: string
+  box?: { x0: number; y0: number; x1: number; y1: number }
+  line?: { x0: number; y0: number; x1: number; y1: number }
+  use: string
+  featureId?: string
+  why: string
+}
+export type SourceSheetView = {
+  assetId: string
+  url: string
+  width: number
+  height: number
+  claimed: { document: string; storey: string; view: string; annotation: string; projection: string; basis: string }
+  content: { top: string; probability: number; projection: string; decision: string } | null
+  outcome: string
+  reader: string
+  side?: string
+  sideBasis?: string
+  why: string
+  readings: SourceReadingView[]
+}
+export type SourceInspectionView = {
+  classifier: { id: string; modelSha256: string; headVersion: string } | null
+  sheets: SourceSheetView[]
+  counts: { sheets: number; read: number; refusedByContent: number; readings: number; printedUsed: number; derived: number }
 }
 
 export const isTerminalStatus = (status: string): boolean => status === 'COMPLETED' || status === 'FAILED' || status === 'CANCELLED'

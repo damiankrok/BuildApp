@@ -22,6 +22,9 @@ export const MANIFEST = JSON.parse(await readFile(join(here, 'models', 'manifest
 const MODEL = MANIFEST.models[MANIFEST.default]
 
 export const WORKER_FILE = 'ocr-worker.mjs'
+/** SOURCE-01: the image-content encoder's worker and its committed, pinned model. */
+export const IMAGE_ROLE_WORKER_FILE = 'image-role-worker.mjs'
+export const IMAGE_ROLE = JSON.parse(await readFile(join(here, 'models', 'image-role.json'), 'utf8'))
 const BANNER = "import { createRequire as __createRequire } from 'node:module'; const require = __createRequire(import.meta.url);"
 const sha256 = (bytes) => createHash('sha256').update(bytes).digest('hex')
 
@@ -29,11 +32,11 @@ const sha256 = (bytes) => createHash('sha256').update(bytes).digest('hex')
  * The worker as one ES module for Node 18 (the phone's runtime). Returns esbuild's metafile. Written beside the target
  * and renamed onto it, so a run starting a worker from the same path never reads a half-written file.
  */
-export async function bundleRecogniserWorker(outfile) {
+export async function bundleRecogniserWorker(outfile, entry = 'worker.ts') {
   const target = resolve(outfile)
   const partial = `${target}.${process.pid}.${Date.now()}.partial.mjs`
   const result = await build({
-    entryPoints: [join(here, 'src', 'worker.ts')],
+    entryPoints: [join(here, 'src', entry)],
     outfile: partial,
     bundle: true,
     platform: 'node',
@@ -49,6 +52,9 @@ export async function bundleRecogniserWorker(outfile) {
   return result.metafile
 }
 
+/** SOURCE-01: the image encoder's worker, bundled exactly as the recogniser's. */
+export const bundleImageRoleWorker = (outfile) => bundleRecogniserWorker(outfile, 'image-role-worker.ts')
+
 /** The runtime files and the model, verified against the manifest, as `{ published path: source path }`. */
 export function recogniserAssetSources() {
   return {
@@ -56,6 +62,7 @@ export function recogniserAssetSources() {
     'ort-wasm-simd-threaded.mjs': { from: require.resolve('onnxruntime-web/ort-wasm-simd-threaded.mjs'), pin: MANIFEST.runtime.files['ort-wasm-simd-threaded.mjs'] },
     [`models/${MODEL.file}`]: { from: join(here, 'models', MODEL.file), pin: { sha256: MODEL.sha256, bytes: MODEL.bytes } },
     [`models/${MODEL.dictionary.file}`]: { from: join(here, 'models', MODEL.dictionary.file), pin: { sha256: MODEL.dictionary.sha256 } },
+    [`models/${IMAGE_ROLE.file}`]: { from: join(here, 'models', IMAGE_ROLE.file), pin: { sha256: IMAGE_ROLE.sha256, bytes: IMAGE_ROLE.bytes } },
   }
 }
 

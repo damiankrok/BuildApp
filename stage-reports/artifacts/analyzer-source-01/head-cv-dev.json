@@ -1,0 +1,33 @@
+{
+ "chosenC": 1.0,
+ "grid": {
+  "0.01": {
+   "errors": 0,
+   "n": 818,
+   "wronglyVetoedWhenCaptionRight": 0,
+   "adversarialVetoed": "3265/3489",
+   "belowConfidence": 45
+  },
+  "0.05": {
+   "errors": 0,
+   "n": 818,
+   "wronglyVetoedWhenCaptionRight": 0,
+   "adversarialVetoed": "3409/3489",
+   "belowConfidence": 17
+  },
+  "0.2": {
+   "errors": 0,
+   "n": 818,
+   "wronglyVetoedWhenCaptionRight": 0,
+   "adversarialVetoed": "3433/3489",
+   "belowConfidence": 12
+  },
+  "1.0": {
+   "errors": 0,
+   "n": 818,
+   "wronglyVetoedWhenCaptionRight": 0,
+   "adversarialVetoed": "3459/3489",
+   "belowConfidence": 6
+  }
+ }
+}

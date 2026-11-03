@@ -38,3 +38,6 @@ packages/numeric-recogniser-ort/models/*.partial
 # BUILDPLAN-ANALYZER-005I: Python bytecode from the research harness; never committed.
 __pycache__/
 *.pyc
+
+# SOURCE-01: the image-content encoder is a committed, pinned conversion (no upstream ONNX exists)
+!packages/numeric-recogniser-ort/models/image-role-mnv4s.onnx

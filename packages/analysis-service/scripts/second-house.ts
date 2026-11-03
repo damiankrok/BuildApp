@@ -64,10 +64,11 @@ import { ANALYSIS_SERVICE_VERSION } from '../src/index.js'
 import { EVIDENCE_PACK_VERSION } from '../../evidence-pack/src/index.js'
 import { packRunDir } from '../../evidence-pack/scripts/run-dir.js'
 import { pathToFileURL } from 'node:url'
-import { workerRecogniser, workspaceAssetPaths } from '@buildapp/numeric-recogniser-ort'
+import { workerImageEmbedder, workerRecogniser, workspaceAssetPaths, workspaceImageRolePaths } from '@buildapp/numeric-recogniser-ort'
+import type { OrtImageEmbedder } from '@buildapp/numeric-recogniser-ort'
 import type { OrtRecogniser } from '@buildapp/numeric-recogniser-ort'
 // @ts-expect-error — a plain ES module without type declarations
-import { bundleRecogniserWorker } from '../../numeric-recogniser-ort/build.mjs'
+import { bundleImageRoleWorker, bundleRecogniserWorker } from '../../numeric-recogniser-ort/build.mjs'
 
 const value = (argv: readonly string[], name: string): string | undefined => {
   const i = argv.indexOf(`--${name}`)
@@ -178,6 +179,13 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
     await bundleRecogniserWorker(worker)
     recogniser = workerRecogniser({ workerUrl: pathToFileURL(worker), paths: workspaceAssetPaths() })
   }
+  // SOURCE-01: the image-content encoder, as the phone runs it (a worker per batch), when asked for.
+  let content: OrtImageEmbedder | undefined
+  if (argv.includes('--content')) {
+    const worker = join(process.cwd(), '.cache', 'numeric-recogniser-ort', `image-role-worker-${process.pid}.mjs`)
+    await bundleImageRoleWorker(worker)
+    content = workerImageEmbedder({ workerUrl: pathToFileURL(worker), paths: workspaceImageRolePaths() })
+  }
   const t0 = performance.now()
   const writePerformance = (): void => {
     write('performance.json', {
@@ -190,6 +198,7 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
       maxTelemetryGapMs: telemetry.reduce((m, e, i) => (i === 0 ? 0 : Math.max(m, e.elapsedMs - telemetry[i - 1].elapsedMs)), 0),
       phases,
       ...(recogniser ? { recogniser: { id: recogniser.id, batches: recogniser.stats() } } : {}),
+      ...(content ? { content: { id: content.id, batches: content.stats() } } : {}),
     })
     if (process.env.TELEMETRY) writeFileSync(join(out, 'telemetry.ndjson'), telemetry.map((e) => JSON.stringify(e)).join('\n') + '\n')
   }
@@ -204,6 +213,7 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
         phases = s
       },
       recogniser,
+      ...(content ? { content } : {}),
       ...(drawnGapRule === 'ON' ? { drawnGapRule } : {}),
       // no identity override: the model is named from its package exactly as the
       // phone and the service name it, so their hashes can be compared with these

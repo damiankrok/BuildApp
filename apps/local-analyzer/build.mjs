@@ -32,7 +32,7 @@
  * minified, so the phone runs the same readable code the server does.
  */
 import { build } from 'esbuild'
-import { bundleRecogniserWorker, layOutRecogniserAssets, WORKER_FILE } from '../../packages/numeric-recogniser-ort/build.mjs'
+import { bundleImageRoleWorker, bundleRecogniserWorker, IMAGE_ROLE_WORKER_FILE, layOutRecogniserAssets, WORKER_FILE } from '../../packages/numeric-recogniser-ort/build.mjs'
 import { createHash } from 'node:crypto'
 import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises'
 import { dirname, join, resolve } from 'node:path'
@@ -82,10 +82,12 @@ export async function bundleLocalAnalyzer(outdir = join(here, 'dist'), { fixture
   await copyFile(join(here, 'runtime/main.mjs'), join(outdir, 'main.mjs'))
   // 005H: the recogniser's worker and its verified runtime and model; a missing or unpinned file fails the build.
   const workerMeta = await bundleRecogniserWorker(join(outdir, WORKER_FILE))
+  // SOURCE-01: the image-content encoder's worker; its model is laid out with the recogniser's files below.
+  await bundleImageRoleWorker(join(outdir, IMAGE_ROLE_WORKER_FILE))
   const selfTestMeta = await bundleOne(join(here, 'src/self-test-entry.ts'), join(outdir, 'ocr-self-test.mjs'))
   const recogniserFiles = await layOutRecogniserAssets(outdir)
   const files = {}
-  for (const name of ['analyzer.mjs', 'main.mjs', WORKER_FILE, 'ocr-self-test.mjs']) {
+  for (const name of ['analyzer.mjs', 'main.mjs', WORKER_FILE, IMAGE_ROLE_WORKER_FILE, 'ocr-self-test.mjs']) {
     const bytes = await readFile(join(outdir, name))
     files[name] = { sha256: sha256(bytes), bytes: bytes.length }
   }

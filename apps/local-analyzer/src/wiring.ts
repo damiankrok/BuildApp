@@ -15,7 +15,7 @@
 import { existsSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
-import { bundledAssetPaths, workerRecogniser } from '@buildapp/numeric-recogniser-ort/client'
+import { IMAGE_ROLE, bundledAssetPaths, bundledImageRolePaths, workerImageEmbedder, workerRecogniser } from '@buildapp/numeric-recogniser-ort/client'
 import { archonAdapter, genericProjectPageAdapter } from '@buildapp/source-package'
 import type { LocalWiring } from './local.js'
 
@@ -32,9 +32,19 @@ export function bundledRecogniser(dir: string = dirname(fileURLToPath(import.met
   return () => workerRecogniser({ workerUrl: pathToFileURL(worker), paths: bundledAssetPaths(dir) })
 }
 
+/** SOURCE-01: the image-content encoder's worker, beside the analyzer bundle. */
+export const IMAGE_ROLE_WORKER_FILE = 'image-role-worker.mjs' as const
+
+/** The image-content encoder a bundle in `dir` ships, as a factory (one per job); undefined without its worker and model. */
+export function bundledContent(dir: string = dirname(fileURLToPath(import.meta.url))): LocalWiring['content'] {
+  const worker = join(dir, IMAGE_ROLE_WORKER_FILE)
+  if (!existsSync(worker) || !existsSync(join(dir, 'models', IMAGE_ROLE.file))) return undefined
+  return () => workerImageEmbedder({ workerUrl: pathToFileURL(worker), paths: bundledImageRolePaths(dir) })
+}
+
 /**
  * Specialists first, the generic project-page reader last (BUILDPLAN-
  * INTEGRATION-004A): a known publisher is read by its own adapter, and an
  * unknown public page is inspected rather than refused by its host name.
  */
-export const localWiring = (): LocalWiring => ({ adapters: [archonAdapter, genericProjectPageAdapter], recogniser: bundledRecogniser() })
+export const localWiring = (): LocalWiring => ({ adapters: [archonAdapter, genericProjectPageAdapter], recogniser: bundledRecogniser(), content: bundledContent() })
