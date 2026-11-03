@@ -8,6 +8,7 @@ import type { Raster } from '@buildapp/source-cv'
 import type { MetricEvidence, MetricEvidenceSet } from '@buildapp/source-metrics'
 import { levelsFrom } from '../src/index.js'
 import { readDrawnApex, readTopDatum } from '../src/v2/section-datums.js'
+import { topDatumBelowPublishedHeight } from '../src/v2/roof-datum.js'
 import { metricsOf } from './plan.js'
 
 const PPM = 60 // pixels per metre on the sheet
@@ -16,7 +17,7 @@ const H = 700
 const ZERO_ROW = 620
 const rowOf = (m: number): number => Math.round(ZERO_ROW - m * PPM)
 
-function sheet(withRoof: boolean, chimneyOnly = false): Raster {
+function sheet(withRoof: boolean, chimneyOnly = false, pitchDeg = 40): Raster {
   const data = new Uint8ClampedArray(W * H * 4).fill(255)
   const ink = (x: number, y: number): void => {
     if (x < 0 || y < 0 || x >= W || y >= H) return
@@ -36,11 +37,11 @@ function sheet(withRoof: boolean, chimneyOnly = false): Raster {
   rect(wallL, ZERO_ROW, wallR, ZERO_ROW + 20)
   rect(wallL, rowOf(2.95), wallR, rowOf(2.95) + 16)
   if (withRoof) {
-    // a 40° gable from eave tips 0.6 m past the walls up to the ridge at mid span
+    // a gable (40° unless given) from eave tips 0.6 m past the walls up to the ridge at mid span
     const e0 = wallL - 36
     const e1 = wallR + 36
     const mid = (e0 + e1) / 2
-    const tan = Math.tan((40 * Math.PI) / 180)
+    const tan = Math.tan((pitchDeg * Math.PI) / 180)
     for (let x = e0; x <= e1; x += 1) {
       const y = Math.round(rowOf(3.3) - (Math.min(x - e0, e1 - x) * tan))
       rect(x, y, x, y + 4)
@@ -133,5 +134,43 @@ describe('the ridge measured where the section draws it', () => {
   })
   it('the wrong pitch finds no two flanks to agree on', () => {
     expect(readDrawnApex(sheet(true), datums, 15)).toBeUndefined()
+  })
+})
+
+describe('EXTERIOR-COMPLETE: a low roof over an eave mark, refused by the published height the drawing agrees with', () => {
+  // an 18° gable over 10 m of walls rises 5.6 m · tan 18° ≈ 1.82 m above the eaves: under the 1.5 m the drawing check
+  // asks of 30% of the width, so the drawing alone does not refuse the eave mark
+  const rise = 5.6 * Math.tan((18 * Math.PI) / 180)
+  const datums = [
+    { id: 'zero', value: 0, row: ZERO_ROW },
+    { id: 'eaves', value: 3.3, row: rowOf(3.3) },
+  ]
+  const height = (H: number) => [{ key: 'building_height', value: H, unit: 'm' }]
+  it('the drawing alone does not refuse it, but measures the rise it carries across the building', () => {
+    const top = readTopDatum(sheet(true, false, 18), datums)
+    expect(top?.belowDrawnRoof).toBe(false)
+    expect(top?.riseAtShare).toBeGreaterThan(0.9)
+    expect(top?.riseAtShare).toBeLessThan(rise)
+  })
+  it('a published height well above the eave mark, with the drawing agreeing, refuses it as the ridge', () => {
+    const top = readTopDatum(sheet(true, false, 18), datums)
+    const why = topDatumBelowPublishedHeight({ topDatum: 3.3, drawnRise: top?.riseAtShare, publishedFacts: height(3.3 + rise + 0.3), printedTerrainY: -0.3 })
+    expect(why).toMatch(/not the ridge/)
+  })
+  it('the ridge is then measured where the drawing puts it', () => {
+    const apex = readDrawnApex(sheet(true, false, 18), datums, 18, { topRefused: true })
+    expect(apex?.ridgeY).toBeCloseTo(3.3 + rise, 1)
+  })
+  it('a published height alone never refuses a datum the drawing shows nothing over (a chimney is narrow)', () => {
+    const top = readTopDatum(sheet(false, true), datums)
+    expect(topDatumBelowPublishedHeight({ topDatum: 3.3, drawnRise: top?.riseAtShare, publishedFacts: height(5.8), printedTerrainY: -0.3 })).toBeUndefined()
+  })
+  it('a published height the top datum already explains (terrain and roof build-up) refuses nothing', () => {
+    expect(topDatumBelowPublishedHeight({ topDatum: 7.67, drawnRise: 2, publishedFacts: height(7.97), printedTerrainY: -0.3 })).toBeUndefined()
+    expect(topDatumBelowPublishedHeight({ topDatum: 7.4, drawnRise: 2, publishedFacts: height(8.4) })).toBeUndefined()
+  })
+  it('without a published height, or with two, nothing is refused', () => {
+    expect(topDatumBelowPublishedHeight({ topDatum: 3.3, drawnRise: 2, publishedFacts: [] })).toBeUndefined()
+    expect(topDatumBelowPublishedHeight({ topDatum: 3.3, drawnRise: 2, publishedFacts: [...height(6), ...height(7)] })).toBeUndefined()
   })
 })

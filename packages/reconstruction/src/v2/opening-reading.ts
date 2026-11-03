@@ -328,10 +328,18 @@ export function classifyOpeningFamily(f: OpeningFamilyFacts): OpeningFamilyDecis
  * drawings mirrors sky and trees, so along a row it is anything but flat and a good part of it is coloured; timber is
  * coloured throughout. Measured inside the opening with a margin off the frame.
  */
-export type OpeningFace = { kind: 'OPAQUE_PANEL' | 'GLAZED' | 'CLAD' | 'UNCLEAR'; neutralShare: number; alongRowStd: number; meanSaturation: number }
+export type OpeningFace = { kind: 'OPAQUE_PANEL' | 'GLAZED' | 'CLAD' | 'UNCLEAR'; neutralShare: number; alongRowStd: number; meanSaturation: number; toneChangesPerRow: number }
 /** Thresholds, from the pixels of drawn gates against drawn glass (EXTERIOR-COMPLETE §gate): gates 0.98 / 1.8 / 8, glass 0.51–0.58 / 13–26 / 19–26, timber 0.03 / 18 / 55. */
 export const OPAQUE_PANEL_MIN_NEUTRAL = 0.85
 export const OPAQUE_PANEL_MAX_ROW_STD = 6
+/**
+ * A panel is one tone down its height as well, but for its grooves, the shadow under its lintel and its frame. Glass
+ * behind a blind is flat along each row too, but its slats swing row after row far either side of the median tone. A
+ * row whose mean is more than PANEL_ROW_TONE_LUMA off the median row's is off the tone; a panel's rows go on and off it
+ * at most PANEL_MAX_TONE_CHANGES_PER_ROW times per row (sections ~0.55 m high give ~0.05; slats a few pixels high ~0.3).
+ */
+export const PANEL_ROW_TONE_LUMA = 24
+export const PANEL_MAX_TONE_CHANGES_PER_ROW = 0.12
 export const CLAD_MIN_SATURATION = 40
 /** Timber's mean red-over-blue (measured on a published front elevation: timber +54, its glass −20 and −14). */
 export const CLAD_MIN_WARMTH = 30
@@ -348,6 +356,7 @@ export function openingFace(raster: Raster, box: { x0: number; y0: number; x1: n
   let satSum = 0
   let warmSum = 0
   const rowStds: number[] = []
+  const rowMeans: number[] = []
   for (let y = y0; y <= y1; y += 1) {
     let sum = 0
     let sq = 0
@@ -368,13 +377,21 @@ export function openingFace(raster: Raster, box: { x0: number; y0: number; x1: n
       k += 1
     }
     rowStds.push(Math.sqrt(Math.max(0, sq / k - (sum / k) ** 2)))
+    rowMeans.push(sum / k)
   }
   rowStds.sort((a, b) => a - b)
+  const medianTone = [...rowMeans].sort((a, b) => a - b)[Math.floor(rowMeans.length / 2)]
+  // a panel's tone changes at its grooves, its lintel's shadow and its frame — a few times over its height; a blind's
+  // slats change it every few rows
+  const off = rowMeans.map((m) => Math.abs(m - medianTone) > PANEL_ROW_TONE_LUMA)
+  let changes = 0
+  for (let i = 1; i < off.length; i += 1) if (off[i] !== off[i - 1]) changes += 1
+  const toneChangesPerRow = changes / rowMeans.length
   const neutralShare = neutral / n
   const alongRowStd = rowStds[Math.floor(rowStds.length / 2)]
   const meanSaturation = satSum / n
   // timber is warm (red well above blue); glass mirroring sky is cool however saturated
   const warm = warmSum / n >= CLAD_MIN_WARMTH
-  const kind: OpeningFace['kind'] = neutralShare >= OPAQUE_PANEL_MIN_NEUTRAL && alongRowStd <= OPAQUE_PANEL_MAX_ROW_STD ? 'OPAQUE_PANEL' : meanSaturation >= CLAD_MIN_SATURATION && warm ? 'CLAD' : neutralShare < 0.75 && alongRowStd > 10 ? 'GLAZED' : 'UNCLEAR'
-  return { kind, neutralShare: Math.round(neutralShare * 1000) / 1000, alongRowStd: Math.round(alongRowStd * 10) / 10, meanSaturation: Math.round(meanSaturation * 10) / 10 }
+  const kind: OpeningFace['kind'] = neutralShare >= OPAQUE_PANEL_MIN_NEUTRAL && alongRowStd <= OPAQUE_PANEL_MAX_ROW_STD && toneChangesPerRow <= PANEL_MAX_TONE_CHANGES_PER_ROW ? 'OPAQUE_PANEL' : meanSaturation >= CLAD_MIN_SATURATION && warm ? 'CLAD' : neutralShare < 0.75 && alongRowStd > 10 ? 'GLAZED' : 'UNCLEAR'
+  return { kind, neutralShare: Math.round(neutralShare * 1000) / 1000, alongRowStd: Math.round(alongRowStd * 10) / 10, meanSaturation: Math.round(meanSaturation * 10) / 10, toneChangesPerRow: Math.round(toneChangesPerRow * 1000) / 1000 }
 }

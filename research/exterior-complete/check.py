@@ -58,7 +58,15 @@ def check(run):
         d = (side or big)[0]['downslope']
         ridge = 'PARALLEL' if abs(d['z']) > abs(d['x']) else 'ACROSS'; kind = 'HIP' if ends else 'GABLE'
     asm = [a.get('kind') for a in m.get('assemblies', [])]
-    posts = [l for l in m['linearSolids'] if l.get('role') in ('POST', 'COLUMN')]
+    # EC-E3 checker correction: a pergola's posts are posts (role PERGOLA_POST), and posts/canopies are judged on their
+    # side, like balconies (the first version counted any POST/COLUMN anywhere and no pergola at all)
+    posts = [l for l in m['linearSolids'] if l.get('role') in ('POST', 'COLUMN', 'PERGOLA_POST')]
+    def lside(l):
+        b = l.get('base') or l.get('start') or {'x': 0, 'z': 0}
+        return box_side({'minX': b['x'], 'maxX': b['x'], 'minZ': b['z'], 'maxZ': b['z']}, bb)
+    pergolas = {}
+    for l in m['linearSolids']:
+        if l.get('role') == 'PERGOLA_POST': pergolas.setdefault(l['id'].split('-post-')[0], []).append(lside(l))
     rings = sorted(set(w['id'].split('-w')[0] for w in m['walls'] if w['id'].startswith('ring-') and w['levelId'] == m['levels'][0]['id']))
     has = {}
     has['ridge'] = ridge; has['roofKind'] = kind
@@ -69,8 +77,8 @@ def check(run):
     has['balcony'] = [box_side(b['footprint'], bb) for b in m['balconies']]
     has['railing'] = [side_of(r['start']['x'], r['start']['z'], r['end']['x'], r['end']['z'], (bb[0] - 3, bb[1] - 3, bb[2] + 3, bb[3] + 3), tol=4) for r in m['railings']]
     has['dormer'] = asm.count('DORMER') + sum(1 for r in m['roofs'] if 'dormer' in r['id'])
-    has['canopy'] = [a for a in asm if a in ('CANOPY', 'PERGOLA', 'CARPORT', 'ENTRANCE')]
-    has['posts'] = len(posts)
+    has['canopy'] = [a for a in asm if a in ('CANOPY', 'PERGOLA', 'CARPORT', 'ENTRANCE')] + [max(set(v), key=v.count) for v in pergolas.values()]
+    has['posts'] = [lside(l) for l in posts]
     has['wing'] = rings
     has['rooflights'] = len(m['rooflights']); has['chimneys'] = len(m['chimneys'])
     out['has'] = has
@@ -82,8 +90,8 @@ def check(run):
         elif c == 'frontWindow': ok = has['frontWindow']
         elif c in ('balcony', 'railing'): ok = v in has[c]
         elif c == 'dormer': ok = has['dormer'] > 0
-        elif c == 'canopy': ok = len(has['canopy']) > 0
-        elif c == 'posts': ok = has['posts'] > 0
+        elif c == 'canopy': ok = any(x == v or x in ('CANOPY', 'PERGOLA', 'CARPORT', 'ENTRANCE') for x in has['canopy'])
+        elif c == 'posts': ok = v in has['posts']
         elif c == 'wing': ok = len(rings) > 1
         elif c in ('rooflights', 'chimneys'): ok = has[c] >= v
         else: ok = False

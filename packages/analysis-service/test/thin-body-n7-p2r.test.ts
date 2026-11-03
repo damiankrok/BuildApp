@@ -80,7 +80,8 @@ describe('N7-P2R a thin attached body the source does not decide', () => {
   it('a printed dimension contradicting the drawing: every reading recorded, the partial preview of N7-P1 kept', async () => {
     const { result, reconstruction } = await conflicting
     expect(result.preview.outcome).toBe('PARTIAL_3D_PREVIEW')
-    expect(result.preview.partial?.failure).toMatchObject({ commandIndex: 21, id: 'ring-attached-0-0', codes: ['WALLS_OVERLAP'] })
+    // EXTERIOR-COMPLETE: one more material (the gate's, `mat-gate`) is defined before the rings: 21 → 22
+    expect(result.preview.partial?.failure).toMatchObject({ commandIndex: 22, id: 'ring-attached-0-0', codes: ['WALLS_OVERLAP'] })
     const [t] = reconstruction.thinBodies
     expect(t.decision.kind).toBe('KEEP_PARTIAL')
     expect(t.firstBad).toMatch(/^SOURCE_CONFLICT/)

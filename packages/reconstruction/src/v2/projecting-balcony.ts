@@ -247,6 +247,35 @@ export function floorLevelDoorGroups(openings: ReadonlyArray<{ id: string; store
   return [...groups.values()].sort((a, b) => (a.massId + a.side < b.massId + b.side ? -1 : 1))
 }
 
+/**
+ * EXTERIOR-COMPLETE: the highest an elevation reads the sill of a French window standing behind a balustrade — the
+ * balustrade's top (`BALUSTRADE_HEIGHT_ASSUMED_M`) and a little over — and the least its head stands above the floor.
+ */
+export const BEHIND_BALUSTRADE_SILL_MAX_M = 1.2
+export const FRENCH_WINDOW_HEAD_MIN_M = 2.0
+
+/**
+ * EXTERIOR-COMPLETE: an upper storey's openings that may be French windows behind a balustrade: an elevation reads a
+ * glass or barred balustrade in front of the lower part of the glazing as wall, so the sill it reads is the
+ * balustrade's top, while the head stands at a door's height. Grouped per face like `floorLevelDoorGroups`; only the
+ * plan's outline of a balcony in front of them (`readBalconyOutline`) makes them a balcony's doors.
+ */
+export function behindBalustradeGroups(openings: ReadonlyArray<{ id: string; storeyIndex: number; massId: string; facade: BalconySide; planeAt: number; interval: [number, number]; sillY: number; headY: number }>, storey: number, floorY: number): FloorDoorGroup[] {
+  const groups = new Map<string, FloorDoorGroup>()
+  for (const o of openings) {
+    if (o.storeyIndex !== storey) continue
+    const sill = o.sillY - floorY
+    if (sill <= FLOOR_SILL_M || sill > BEHIND_BALUSTRADE_SILL_MAX_M || o.headY - floorY < FRENCH_WINDOW_HEAD_MIN_M) continue
+    const key = `${o.massId}|${o.facade}|${o.planeAt}`
+    const g = groups.get(key)
+    if (g) {
+      g.span = [Math.min(g.span[0], o.interval[0]), Math.max(g.span[1], o.interval[1])]
+      g.openingIds.push(o.id)
+    } else groups.set(key, { side: o.facade, massId: o.massId, planeAt: o.planeAt, span: [o.interval[0], o.interval[1]], openingIds: [o.id] })
+  }
+  return [...groups.values()].sort((a, b) => (a.massId + a.side < b.massId + b.side ? -1 : 1))
+}
+
 /** What a plan cannot say about a balcony: shown at these, and named as assumed. */
 export const BALCONY_SLAB_ASSUMED_M = 0.2
 export const BALUSTRADE_HEIGHT_ASSUMED_M = 1.1

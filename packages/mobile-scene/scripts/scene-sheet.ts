@@ -19,7 +19,11 @@ const hex = (c: string | undefined): V3 => {
   return [(n >> 16) & 255, (n >> 8) & 255, n & 255]
 }
 
-export function renderSceneSheet(bundle: MobileSceneBundle, tile = 480): PNG {
+/**
+ * `layout`: FOUR (front, right, top, front-right axonometric: the sheet CI keeps) or ALL — every side, the top and the
+ * four corner axonometrics, for the EXTERIOR-COMPLETE before/after boards (the same cameras on every run).
+ */
+export function renderSceneSheet(bundle: MobileSceneBundle, tile = 480, layout: 'FOUR' | 'ALL' = 'FOUR'): PNG {
   const colours = new Map<string, V3>()
   for (const m of (bundle as unknown as { materials?: Array<{ id: string; color?: string }> }).materials ?? []) colours.set(m.id, hex(m.color))
   const b = bundle.scene.bounds
@@ -28,28 +32,43 @@ export function renderSceneSheet(bundle: MobileSceneBundle, tile = 480): PNG {
   const cz = b ? (b.min.z + b.max.z) / 2 : 0
   const ay = (35 * Math.PI) / 180
   const ax = (30 * Math.PI) / 180
-  const views: View[] = [
-    // screen x, screen y (up), depth (towards the viewer is larger)
-    { name: 'front', project: ([x, y, z]) => [x - cx, y - cy, -(z - cz)] },
-    { name: 'right', project: ([x, y, z]) => [z - cz, y - cy, x - cx] },
-    { name: 'top', project: ([x, y, z]) => [x - cx, -(z - cz), y - cy] },
-    {
-      name: 'axonometric',
-      project: ([x, y, z]) => {
-        const X = x - cx
-        const Y = y - cy
-        const Z = -(z - cz)
-        const x1 = X * Math.cos(ay) + Z * Math.sin(ay)
-        const z1 = -X * Math.sin(ay) + Z * Math.cos(ay)
-        return [x1, Y * Math.cos(ax) - z1 * Math.sin(ax), Y * Math.sin(ax) + z1 * Math.cos(ax)]
-      },
+  const axo = (name: string, turn: number): View => ({
+    name,
+    project: ([x, y, z]) => {
+      const X = x - cx
+      const Y = y - cy
+      const Z = -(z - cz)
+      const x1 = X * Math.cos(turn) + Z * Math.sin(turn)
+      const z1 = -X * Math.sin(turn) + Z * Math.cos(turn)
+      return [x1, Y * Math.cos(ax) - z1 * Math.sin(ax), Y * Math.sin(ax) + z1 * Math.cos(ax)]
     },
-  ]
-  const png = new PNG({ width: tile * 2, height: tile * 2 })
+  })
+  // screen x, screen y (up), depth (towards the viewer is larger)
+  const front: View = { name: 'front', project: ([x, y, z]) => [x - cx, y - cy, -(z - cz)] }
+  const right: View = { name: 'right', project: ([x, y, z]) => [z - cz, y - cy, x - cx] }
+  const top: View = { name: 'top', project: ([x, y, z]) => [x - cx, -(z - cz), y - cy] }
+  const views: View[] =
+    layout === 'FOUR'
+      ? [front, right, top, axo('axonometric', ay)]
+      : [
+          front,
+          right,
+          { name: 'rear', project: ([x, y, z]) => [-(x - cx), y - cy, z - cz] },
+          { name: 'left', project: ([x, y, z]) => [-(z - cz), y - cy, -(x - cx)] },
+          top,
+          axo('front-right', ay),
+          axo('front-left', -ay),
+          axo('rear-left', ay + Math.PI),
+          axo('rear-right', Math.PI - ay),
+        ]
+  const cols = layout === 'FOUR' ? 2 : 5
+  const rows = Math.ceil(views.length / cols)
+  const W = tile * cols
+  const png = new PNG({ width: W, height: tile * rows })
   png.data.fill(255)
   views.forEach((view, vi) => {
-    const ox = (vi % 2) * tile
-    const oy = Math.floor(vi / 2) * tile
+    const ox = (vi % cols) * tile
+    const oy = Math.floor(vi / cols) * tile
     const tris: Array<{ p: V3[]; c: V3 }> = []
     let lo = [Infinity, Infinity]
     let hi = [-Infinity, -Infinity]
@@ -95,7 +114,7 @@ export function renderSceneSheet(bundle: MobileSceneBundle, tile = 480): PNG {
           const k = y * tile + x
           if (z <= depth[k]) continue
           depth[k] = z
-          const o = ((oy + y) * tile * 2 + ox + x) * 4
+          const o = ((oy + y) * W + ox + x) * 4
           png.data[o] = Math.min(255, t.c[0] * shade)
           png.data[o + 1] = Math.min(255, t.c[1] * shade)
           png.data[o + 2] = Math.min(255, t.c[2] * shade)
@@ -106,7 +125,7 @@ export function renderSceneSheet(bundle: MobileSceneBundle, tile = 480): PNG {
     // tile border
     for (let i = 0; i < tile; i += 1) {
       for (const [x, y] of [[ox + i, oy], [ox + i, oy + tile - 1], [ox, oy + i], [ox + tile - 1, oy + i]]) {
-        const o = (y * tile * 2 + x) * 4
+        const o = (y * W + x) * 4
         png.data[o] = png.data[o + 1] = png.data[o + 2] = 180
       }
     }

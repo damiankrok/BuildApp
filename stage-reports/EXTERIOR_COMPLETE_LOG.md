@@ -58,3 +58,59 @@ Bratki), canopies/posts (Azalie, Aurory, Kostrzewy, Modrzewnica, Bratki, Miniatu
   to see whether the APK path reads the plans the desktop path refused.
 
 Next action: read rec1; then the four failed plans; then balconies (Willa Maja, Bratki), canopies/posts, dormers, wings.
+
+### E2 — Muraje and Kostrzewy get a model; Muraje's ridge and levels; a blind is not a panel
+
+- Dimension lines (`source-metrics/dimension-lines.ts`, `joinOccludedLines`): two collinear runs on one baseline and of
+  one thickness, separated by ≤ 40 px that something drawn over the line covers (≥ 80 % non-paper), are one line; the
+  facing marks were the occluder's edges, not ticks. A logo over Muraje's 1020 overall bound it to 412 px instead of
+  660 px; Kostrzewy's plan read the same way. Both houses now produce a model (were PLAN_RESOLUTION_INCONCLUSIVE).
+- Ridge datum (`roof-datum.ts`, `topDatumBelowPublishedHeight`; `section-datums.ts`, `riseAtShare`): the highest datum
+  read is not the ridge when the published building height leaves more than a roof build-up above it AND the section
+  draws ink at least half that high above it across 30 % of the building's width (a chimney is narrow and refuses
+  nothing). Muraje's +5.50 eaves had been the ridge (the 30° roof rises 2.17 m: under the 1.5 m × 30 % drawing test);
+  now levels 0 / 2.88, ridge measured on the drawing ≈ 7.58 m (source +7.67), ridge parallel to the front.
+- Vertical text orientation (`metric-solution.ts`, rule vii): a chain nothing decided takes the way up the sheet's
+  other vertical chains were decided on (≥ 2, 3 : 1), through the other axis's scale and marked as depending on it.
+  Muraje's 740 overall depth (read 740, p 0.9999) had stayed UNDECIDED because 476 px at the X scale misses by 2.8 px
+  on a sheet scaled 0.6 % unevenly; its depth came from an interior 410 chain (6.63 m instead of 7.40 m).
+- Opening face: a panel must be one tone down its height too (≤ 25 % of rows > 24 luma off the median row): glass
+  behind a striped blind is flat along each row and had read as an opaque door leaf (005W fixture caught it).
+- Solver loop renders: `second-house.ts --views` compiles the solver-only model with the production compiler and
+  writes the four-camera sheet and the compile diagnostics.
+- Open on Muraje after this: the entrance door and the gate stand under the overhanging upper floor, recessed ~0.45 m;
+  the plan's front wall there is read as a 5.27 m gap (a strip window), and the callouts (105/210, 275/225, upper
+  110/210, 180/210 French windows with railings) are not read.
+
+### E3 — recessed entrances, balconies behind a balustrade, every camera, checker vocabulary (dev loop `dv4`/`dv5`)
+
+- Recessed entrance with an empty mouth (`compound-facade.ts` 1.1.0): a facade gap with no wall ink inside it was "one
+  gap", and a line drawn across it (the floor's or roof's edge over the porch) made it an opening in a wall that carries
+  on — the porch was built over as a room with a 4 m window. The whole gap is now tested as one interval by the 005N
+  recess rule (returns at both jambs, a set-back wall behind); otherwise the incumbent reading stands unchanged.
+  Kostrzewy: window / door / window in the porch's back wall instead of one 4 m glass pane; Lipienniki: the porch.
+- Porch cells (`plan-decomposition.ts`): in a recess no deeper than `PORCH_MAX_DEPTH_M` (2 m, no room fits), a cell
+  wholly between the mouth and the back wall is the recess even when ink across its front (step, callout ring) sealed
+  it; never a garage (4.5 m deep), never the facade wall's own band. Lipienniki's porch now spans its whole 4.19 m mouth
+  (it had lost the 105 door).
+- Back-wall openings are read on the face's elevation (orthographic: the back wall's openings are drawn where they are
+  along it).
+- Balconies behind a balustrade (`projecting-balcony.ts`, `behindBalustradeGroups`): upper French windows whose sill the
+  elevation reads at the balustrade's top (≤ 1.2 m) and whose head stands at a door's (≥ 2 m) are tried for the plan's
+  balcony outline, and confirmed by a balustrade the face's elevation draws across them; they then reach the floor.
+  Willa Maja: rear balcony + railing (6/6); Bratki: rear balcony; Dalie: the gable balcony on the side (on its source list).
+- Renders: `scene-all-sides.png` (front, right, rear, left, top, four corner axonometrics) beside the four-camera sheet;
+  `board2.py` (private) puts source exteriors + every elevation over the PRZED and PO sheets.
+- Checker correction (`check.py`, stated here because it changes a count): posts are any supporting post (`POST`,
+  `COLUMN`, `PERGOLA_POST`) and posts/canopies are judged on their side; the first version counted no pergola. Azalie's
+  side pergola on posts was in the model and was failed by the checker.
+- Two analysis-service tests had been broken by E1 (`commandIndex` 21 → 22: the gate material is one more command);
+  the expectation is updated with that reason.
+- Versions: service 1.8.0, solver 2.22.0, metric reader 1.6.0 (dimension topology 1.3.0, metric solver 1.5.0),
+  compound facade 1.1.0.
+- Dev loop (solver on saved evidence): 31 → 32/70 with the corrected checker. Full production path at E2 code: 29/70.
+- Open and found: Muraje's 740 depth is still refused (isotropy assumed; 6.63 m instead of 7.40 m) and its door + gate
+  stand in a corner notch no reader takes; Kostrzewy's middle back-wall opening reads as glazing (the door); Aurory's
+  ridge axis (the section's rise fits both spans once the eave datum is the overhang's lip); Arlety's rooflight ring
+  (printed 78/140) is misread 217/140 and refused; Rary's front 105/210 now reads as a floor-length window (a callout
+  newly read on a gap the plan draws glazed) — to be checked against the elevation before delivery.

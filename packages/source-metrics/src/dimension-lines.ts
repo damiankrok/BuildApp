@@ -27,7 +27,8 @@ import type { PixelRect } from '@buildapp/source-common'
 /** 005D: the reader that measures each crossing mark against its line and classifies it. */
 export const DIMENSION_TOPOLOGY_NAME = 'metrics.dimension-topology' as const
 /** 1.1.0 (005I): a mark that is only label ink beside the line is `TEXT_INK` (`markLabelInk`); 1.2.0: a stroke reaching the line between labels is not (post-review A2), and only text running along the line is label ink. */
-export const DIMENSION_TOPOLOGY_VERSION = '1.2.0' as const
+/** 1.3.0 (EXTERIOR-COMPLETE): collinear runs a drawing covers (a logo over the line) are joined (`joinOccludedLines`). */
+export const DIMENSION_TOPOLOGY_VERSION = '1.3.0' as const
 
 export type DimensionLineAxis = 'HORIZONTAL' | 'VERTICAL'
 
@@ -177,7 +178,63 @@ function crosses(mask: Mask, axis: DimensionLineAxis, along: number, baseline: n
 export function findDimensionLines(mask: Mask, options: DimensionLineOptions = {}): DimensionLine[] {
   // A chain needs at least two marks: one mark measures nothing, and a run
   // with none is a level line, a leader, a wall edge or a sheet border.
-  return findStraightRuns(mask, options).filter((l) => l.ticksPx.length >= 2 && l.fill > 0.9)
+  return joinOccludedLines(findStraightRuns(mask, options), options.raster).filter((l) => l.ticksPx.length >= 2 && l.fill > 0.9)
+}
+
+/** EXTERIOR-COMPLETE: the widest gap a block drawn over a line may leave in it, and the paper's luma. */
+export const OCCLUSION_MAX_GAP_PX = 40
+const PAPER_LUMA = 230
+
+/**
+ * EXTERIOR-COMPLETE: one line under a block drawn over it. A sheet's logo, stamp or label box printed across a
+ * dimension line hides a stretch of it; the run-finder then ends the line at the block's edge, and that edge — lighter
+ * than the line, or of another colour — becomes a mark, so the label printed over the whole line is bound to a piece of
+ * it and the sheet's scale comes out wrong. Two runs on the same baseline and thickness, whose gap is covered by drawn
+ * (non-paper) pixels and whose facing marks are not ticks of the line, are one line: the facing marks are the block's
+ * edges and are dropped. A gap of bare paper is a real end and is never bridged; a true tick at the gap keeps it apart.
+ */
+export function joinOccludedLines(lines: readonly DimensionLine[], raster: Raster | undefined): DimensionLine[] {
+  if (!raster) return [...lines]
+  const luma = (x: number, y: number): number => {
+    const xi = Math.min(raster.width - 1, Math.max(0, Math.round(x)))
+    const yi = Math.min(raster.height - 1, Math.max(0, Math.round(y)))
+    const o = (yi * raster.width + xi) * 4
+    return 0.299 * raster.data[o] + 0.587 * raster.data[o + 1] + 0.114 * raster.data[o + 2]
+  }
+  const sorted = [...lines].sort((a, b) => a.axis.localeCompare(b.axis) || a.baselinePx - b.baselinePx || a.fromPx - b.fromPx)
+  const out: DimensionLine[] = []
+  const markAt = (l: DimensionLine, at: number) => l.marks?.find((m) => Math.abs(m.atPx - at) < 0.5)
+  for (const l of sorted) {
+    const prev = out[out.length - 1]
+    if (prev && prev.axis === l.axis && Math.abs(prev.baselinePx - l.baselinePx) <= 1 && Math.abs(prev.thicknessPx - l.thicknessPx) <= 1 && l.fromPx > prev.toPx && l.fromPx - prev.toPx <= OCCLUSION_MAX_GAP_PX && prev.ticksPx.length > 0 && l.ticksPx.length > 0) {
+      const lastPrev = prev.ticksPx[prev.ticksPx.length - 1]
+      const firstNext = l.ticksPx[0]
+      const facingPrev = markAt(prev, lastPrev)
+      const facingNext = markAt(l, firstNext)
+      let covered = 0
+      let n = 0
+      for (let a = Math.ceil(prev.toPx) + 1; a < Math.floor(l.fromPx); a += 1) {
+        n += 1
+        if ((l.axis === 'HORIZONTAL' ? luma(a, l.baselinePx) : luma(l.baselinePx, a)) < PAPER_LUMA) covered += 1
+      }
+      const notTicks = !!facingPrev && facingPrev.class !== 'TICK' && !!facingNext && facingNext.class !== 'TICK'
+      if (n > 0 && covered / n >= 0.8 && notTicks) {
+        const keep = (m: { atPx: number }): boolean => Math.abs(m.atPx - lastPrev) >= 0.5 && Math.abs(m.atPx - firstNext) >= 0.5
+        const len = l.toPx - prev.fromPx + 1
+        out[out.length - 1] = {
+          ...prev,
+          toPx: l.toPx,
+          ticksPx: [...prev.ticksPx.slice(0, -1), ...l.ticksPx.slice(1)],
+          fill: round6(Math.min(1, (prev.fill * (prev.toPx - prev.fromPx + 1) + l.fill * (l.toPx - l.fromPx + 1) + covered) / len)),
+          ...(prev.marks || l.marks ? { marks: [...(prev.marks ?? []).filter(keep), ...(l.marks ?? []).filter(keep)] } : {}),
+          ...(prev.reference ? { reference: prev.reference } : {}),
+        }
+        continue
+      }
+    }
+    out.push(l)
+  }
+  return out
 }
 
 /**

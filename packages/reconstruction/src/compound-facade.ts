@@ -33,7 +33,7 @@ import { gapSignature, gapStrokes, patternAcross, readWallLine } from './boundar
 import type { LinePiece, SolidLayer, WallLineOptions } from './boundary-evidence.js'
 import type { OpeningEvidence, PlanCallout } from './plan-decomposition.js'
 
-export const COMPOUND_FACADE_VERSION = '1.0.0' as const
+export const COMPOUND_FACADE_VERSION = '1.1.0' as const
 
 /**
  * The deepest a recess can be: a car's length. A mouth whose set-back wall lies further in is the front of a garage
@@ -357,7 +357,8 @@ function calloutsOf(ctx: CompoundContext, parent: ParentGap, from: number, to: n
 
 /**
  * Read one wide gap's facade-local topology. Where the drawing puts no separator inside it, the span comes back whole —
- * no intervals, with what was found and refused — and the gap is then exactly what the incumbent reader says it is.
+ * no intervals, with what was found and refused — and the gap is then exactly what the incumbent reader says it is;
+ * unless (EXTERIOR-COMPLETE) the whole gap is itself a recess's mouth, which comes back as its one interval.
  */
 export function compoundSpanOf(ctx: CompoundContext, parent: ParentGap): CompoundFacadeSpan {
   const t = ctx.wallPx
@@ -383,23 +384,11 @@ export function compoundSpanOf(ctx: CompoundContext, parent: ParentGap): Compoun
   if (to - from < 2 * Math.max(MIN_INTERVAL_M / mpp, t)) return whole([], `the jambs' ink leaves ${round6((to - from) * mpp).toFixed(2)} m between them, no room for two mouths: one gap`)
   // wall-thick ink strictly inside the gap
   const inside = facade.pieces.filter((p) => p.from > from + 1 && p.to < to - 1).sort((p, q) => p.from - q.from || p.to - q.to)
-  if (inside.length === 0) return whole([], 'no wall-thick ink inside the gap: one gap')
   // more candidates than the bound: the gap is not read at all, never read in part — which part would follow the order
   // the line is drawn in (council D3)
-  if (inside.length > COMPOUND_BOUNDS.separators) return whole([], `${inside.length} pieces of wall-thick ink inside the gap, more than ${COMPOUND_BOUNDS.separators} are read: one gap, as the incumbent reads it`)
-  const separators = inside.map((p) => separatorOf(ctx, { ...parent, fromPx: from, toPx: to }, p))
+  const tooMany = inside.length > COMPOUND_BOUNDS.separators
+  const separators = inside.length === 0 || tooMany ? [] : inside.map((p) => separatorOf(ctx, { ...parent, fromPx: from, toPx: to }, p))
   const accepted = separators.filter((s) => s.accepted)
-  if (accepted.length === 0) return whole(separators, `${separators.length} piece${separators.length === 1 ? '' : 's'} of wall-thick ink inside the gap, none a return or a pier: one gap`)
-  // the intervals between the span's jambs and its separators
-  const cuts: Array<{ from: number; to: number; bounds: FacadeInterval['bounds'] }> = []
-  let start = from
-  let startBound: 'JAMB' | 'SEPARATOR' = 'JAMB'
-  for (const s of accepted) {
-    cuts.push({ from: start, to: s.fromPx, bounds: [startBound, 'SEPARATOR'] })
-    start = s.toPx
-    startBound = 'SEPARATOR'
-  }
-  cuts.push({ from: start, to, bounds: [startBound, 'JAMB'] })
   // the ink pieces standing at each cut's ends, for reading what is drawn across it
   const pieceAt = (px: number, side: 'LEFT' | 'RIGHT'): LinePiece | undefined => facade.pieces.find((p) => (side === 'LEFT' ? Math.abs(p.to - px) <= 1 : Math.abs(p.from - px) <= 1))
   // whether the gap beyond a jamb piece, on its far side, is a window of its own, glazed between its jambs
@@ -415,7 +404,7 @@ export function compoundSpanOf(ctx: CompoundContext, parent: ParentGap): Compoun
     const s = accepted.find((x) => x.fromPx === px || x.toPx === px)
     return s ? s.returnM / mppIn : 0
   }
-  const intervals: FacadeInterval[] = cuts.map((c, k) => {
+  const intervalOf = (c: { from: number; to: number; bounds: FacadeInterval['bounds'] }, k: number): FacadeInterval => {
     const widthM = round6((c.to - c.from) * mpp)
     const id = `${spanId}/i${k}`
     const infill = round6(ctx.infill(parent.axis, c.from, c.to, parent.bandLo, parent.bandHi))
@@ -473,7 +462,28 @@ export function compoundSpanOf(ctx: CompoundContext, parent: ParentGap): Compoun
       return { ...common, role: 'OPEN_SIDE', why: `a ${widthM.toFixed(2)} m mouth drawn across (${Math.round(infill * 100)}%), but with no wall-thick ink at ${jambInk[0] ? 'its far' : 'its near'} end on the facade line: not a hole between two pieces of wall` }
     }
     return { ...common, role: 'OPEN_SIDE', why: infillRunsPast ? `a ${widthM.toFixed(2)} m mouth whose one line across (${Math.round(infill * 100)}%) runs on past its jambs — a slab edge, a kerb, a terrace outline, not a door — and no set-back wall closing it within ${RECESS_MAX_DEPTH_M} m` : `a ${widthM.toFixed(2)} m mouth with only ${Math.round(infill * 100)}% of it drawn across and no set-back wall closing it within ${RECESS_MAX_DEPTH_M} m` }
-  })
+  }
+  if (inside.length === 0 || tooMany || accepted.length === 0) {
+    const why = inside.length === 0 ? 'no wall-thick ink inside the gap: one gap' : tooMany ? `${inside.length} pieces of wall-thick ink inside the gap, more than ${COMPOUND_BOUNDS.separators} are read: one gap, as the incumbent reads it` : `${separators.length} piece${separators.length === 1 ? '' : 's'} of wall-thick ink inside the gap, none a return or a pier: one gap`
+    // EXTERIOR-COMPLETE: a gap with nothing standing in it is still the mouth of a recess when its jambs' walls turn
+    // inward and a set-back wall closes it behind them — a recessed entrance whose door and windows stand in the back
+    // wall, under the floor or the roof above. Read as the one interval it is, by the same test as a mouth between
+    // separators; anything else stays the one gap the incumbent reads.
+    const one = tooMany ? undefined : intervalOf({ from, to, bounds: ['JAMB', 'JAMB'] }, 0)
+    if (one?.role === 'RECESS_MOUTH') return { ...whole(separators, why), intervals: [one], why: `${why}, but its mouth is a recess's: ${one.why}` }
+    return whole(separators, why)
+  }
+  // the intervals between the span's jambs and its separators
+  const cuts: Array<{ from: number; to: number; bounds: FacadeInterval['bounds'] }> = []
+  let start = from
+  let startBound: 'JAMB' | 'SEPARATOR' = 'JAMB'
+  for (const s of accepted) {
+    cuts.push({ from: start, to: s.fromPx, bounds: [startBound, 'SEPARATOR'] })
+    start = s.toPx
+    startBound = 'SEPARATOR'
+  }
+  cuts.push({ from: start, to, bounds: [startBound, 'JAMB'] })
+  const intervals: FacadeInterval[] = cuts.map(intervalOf)
   return {
     id: spanId,
     axis: parent.axis,

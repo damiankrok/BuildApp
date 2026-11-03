@@ -43,6 +43,12 @@ export type TopDatumReading = {
   mPerPx: number
   /** The share of the building's width with ink at least ABOVE_TOP_DATUM_M above the top datum. */
   shareAbove: number
+  /**
+   * EXTERIOR-COMPLETE: how high above the top datum the drawing still carries ink across ABOVE_TOP_DATUM_SHARE of the
+   * building's width, in metres on the sheet's scale. A roof drawn above an eave mark rises across the span; a chimney
+   * or a label over a ridge mark is narrow and leaves this near nothing.
+   */
+  riseAtShare: number
   why: string
 }
 
@@ -93,6 +99,20 @@ export function readTopDatum(raster: Raster, datums: ReadonlyArray<SectionDatum>
     }
   }
   const shareAbove = above / width
+  // the height of the top-most ink above the datum, column by column; the value ABOVE_TOP_DATUM_SHARE of them reach
+  const rises: number[] = []
+  for (let x = x0; x <= x1; x += 1) {
+    let rise = 0
+    for (let y = 0; y < Math.round(top.row); y += 1) {
+      if (lumaAt(raster, x, y) < DARK) {
+        rise = (top.row - y) * mPerPx
+        break
+      }
+    }
+    rises.push(rise)
+  }
+  rises.sort((a, b) => b - a)
+  const riseAtShare = Math.round((rises[Math.min(rises.length - 1, Math.floor(rises.length * ABOVE_TOP_DATUM_SHARE))] ?? 0) * 1000) / 1000
   const belowDrawnRoof = shareAbove >= ABOVE_TOP_DATUM_SHARE
   // a slab on the datum's row: the longest dark run near that row, against the building's width
   let longest = 0
@@ -110,11 +130,13 @@ export function readTopDatum(raster: Raster, datums: ReadonlyArray<SectionDatum>
   const why = belowDrawnRoof
     ? `the section draws ink at least ${ABOVE_TOP_DATUM_M} m above its highest datum read (${label}, on the ${mPerPx.toFixed(4)} m/px its datums give) across ${(shareAbove * 100).toFixed(0)}% of the building's width: a roof stands above that datum, so it is not the ridge; ${onSlab ? 'a slab runs along its row: the slab under the roof, the top of the walls below it' : 'no slab runs along its row: an eave or a wall-head mark'}`
     : `nothing is drawn far above the highest datum read (${label}): ${(shareAbove * 100).toFixed(0)}% of the building's width carries ink ${ABOVE_TOP_DATUM_M} m above it`
-  return { belowDrawnRoof, onSlab, mPerPx, shareAbove, why }
+  return { belowDrawnRoof, onSlab, mPerPx, shareAbove, riseAtShare, why }
 }
 
 export type DrawnApex = { ridgeY: number; row: number; column: number; supportLeft: number; supportRight: number; why: string }
 
+/** EXTERIOR-COMPLETE: the least rise of a drawn apex over a datum refused as the ridge by another source. */
+export const ROOF_APEX_MIN_RISE_M = 0.5
 /** The share of the building's width each flank of the drawn roof must support, at the stated pitch. */
 const FLANK_SUPPORT_SHARE = 0.1
 
@@ -124,10 +146,14 @@ const FLANK_SUPPORT_SHARE = 0.1
  * through it at that pitch would cross the sheet's left edge (`row + x·tan`, `row − x·tan`); the flanks are the two
  * intercepts most columns agree on, so a chimney, a label over the apex or a flat part are outvoted, not averaged in.
  * Undefined when the sheet gives no scale, or a flank is not drawn over enough of the building to be one.
+ * The apex must stand above the top datum by at least the rise the drawing carries across the building
+ * (`riseAtShare`) and never less than ROOF_APEX_MIN_RISE_M: a label over a ridge mark is not a roof.
  */
-export function readDrawnApex(raster: Raster, datums: ReadonlyArray<SectionDatum>, pitchDeg: number): DrawnApex | undefined {
+export function readDrawnApex(raster: Raster, datums: ReadonlyArray<SectionDatum>, pitchDeg: number, options: { topRefused?: boolean } = {}): DrawnApex | undefined {
   const top = readTopDatum(raster, datums)
-  if (!top || !top.belowDrawnRoof || !(pitchDeg > 5 && pitchDeg < 70)) return undefined
+  // the top datum is refused either by the drawing itself or, with `topRefused`, by another source (a published
+  // building height the drawing agrees with: `roof-datum.ts`); the flanks below are measured the same way
+  if (!top || !(top.belowDrawnRoof || options.topRefused === true) || !(pitchDeg > 5 && pitchDeg < 70)) return undefined
   const sorted = [...datums].sort((a, b) => a.value - b.value)
   const low = sorted[0]
   const zeroRow = low.row + low.value / top.mPerPx
@@ -182,7 +208,7 @@ export function readDrawnApex(raster: Raster, datums: ReadonlyArray<SectionDatum
   if (column <= x0 || column >= x1 || row <= 0) return undefined
   const ridgeY = Math.round((zeroRow - row) * top.mPerPx * 1000) / 1000
   const label = `${highest.value >= 0 ? '+' : ''}${highest.value.toFixed(2)}`
-  if (!(ridgeY > highest.value + ABOVE_TOP_DATUM_M)) return undefined
+  if (!(ridgeY > highest.value + (options.topRefused ? Math.max(ROOF_APEX_MIN_RISE_M, top.riseAtShare) : ABOVE_TOP_DATUM_M))) return undefined
   const why = `the ridge's label was not read; the section draws its roof's two flanks at the stated ${pitchDeg}° (${L.n} and ${R.n} of the building's ${width} columns agree on each), meeting at row ${row.toFixed(0)}, which the sheet's datums (up to ${label}, ${top.mPerPx.toFixed(4)} m/px) put at ${ridgeY.toFixed(2)} m — measured on the drawing, not printed`
   return { ridgeY, row, column, supportLeft: L.n, supportRight: R.n, why }
 }

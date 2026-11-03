@@ -57,7 +57,8 @@ import type { ChainRelation, DimensionObservation, FrameMetricSolution, MetricCo
 
 export const METRIC_SOLVER_NAME = 'metrics.independent-scale' as const
 /** 1.4.0 (005I): labels meet chains through the global assignment (`assignLabels`), on measurement chains. */
-export const METRIC_SOLVER_VERSION = '1.4.0' as const
+/** 1.5.0 (EXTERIOR-COMPLETE): a vertical chain nothing decided takes the sheet's way up, through the other axis's scale (rule vii). */
+export const METRIC_SOLVER_VERSION = '1.5.0' as const
 
 /**
  * Counts, never a clock, so a phone reaches the answer a server does. Two
@@ -854,6 +855,20 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
     const merit = (o: TextOrientation): number => entriesOn(c, o).reduce((s, e) => s + tokenMerit(e.token), 0)
     const fallback = legacyOrientations.length === 1 ? legacyOrientations[0] : merit(a) >= merit(b) ? a : b
     choices[c] = { orientation: fallback, decidedBy: 'UNDECIDED', why: 'no evidence settles which way up its labels are; the page vote’s reading is kept and witnesses nothing' }
+  }
+  // (vii) EXTERIOR-COMPLETE: a sheet sets its vertical text one way (iv), and the chains the other axis's scale decided
+  // (v) say which way too — but only through that scale, so a chain they decide for depends on it as theirs do. A long
+  // overall dimension is the one most often left undecided by (v): its residual against the other axis grows with its
+  // span (a sheet resized a fraction unevenly), not with any doubt about which way up it reads.
+  const byOtherAxis = (o: TextOrientation): number => verticalChains.filter((c) => choices[c].orientation === o && choices[c].decidedBy !== 'UNDECIDED' && choices[c].decidedBy !== 'SINGLE_READING').length
+  const [cwAll, ccwAll] = [byOtherAxis('ROTATED_CW'), byOtherAxis('ROTATED_CCW')]
+  const sheetWay: TextOrientation | undefined = cwAll + ccwAll >= 2 && cwAll >= 3 * Math.max(1, ccwAll) ? 'ROTATED_CW' : cwAll + ccwAll >= 2 && ccwAll >= 3 * Math.max(1, cwAll) ? 'ROTATED_CCW' : undefined
+  if (sheetWay && !majority) {
+    for (const c of verticalChains) {
+      if (choices[c].decidedBy !== 'UNDECIDED') continue
+      const [a] = VERTICAL_PAIR
+      choices[c] = { orientation: sheetWay, decidedBy: 'OTHER_AXIS_SCALE', why: `${Math.max(cwAll, ccwAll)} chains on this sheet read ${sheetWay === a ? 'bottom to top' : 'top to bottom'} (some at the horizontal labels' scale), and ${Math.min(cwAll, ccwAll)} the other way; a sheet sets its vertical text one way, so this chain is taken to read so too — through that scale, so its readings witness nothing about isotropy` }
+    }
   }
 
   const decisions: OrientationDecision[] = chains

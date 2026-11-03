@@ -17,6 +17,7 @@ import type { MetricEvidenceSet } from '@buildapp/source-metrics'
 import type { Mask, Raster } from '@buildapp/source-cv'
 import type { CanonicalBuildingModel } from '@buildapp/model'
 import { CONVENTIONS, SOLVER_NAME, levelsFrom, registerElevationFrames } from '../solve.js'
+import type { TopDatumCheck } from '../solve.js'
 import { composeStructuralLayout } from '../structural.js'
 import type { PublishedArea } from '../layout-gate.js'
 import { ringBounds } from '../structural-layout.js'
@@ -33,7 +34,7 @@ import { crossViewResiduals } from './cross-view.js'
 import type { CrossViewResiduals } from './cross-view.js'
 import { findPosts, PERGOLA_BEAM_ASSUMED, PERGOLA_HEIGHT_ASSUMED_M, pergolaFromPosts } from './pergola.js'
 import { readCornerNotch } from './corner-recess.js'
-import { balconyRect, balustradePath, doorSpanCandidates, BALCONY_SLAB_ASSUMED_M, BALUSTRADE_HEIGHT_ASSUMED_M, floorLevelDoorGroups, readBalconyOutline } from './projecting-balcony.js'
+import { balconyRect, balustradePath, behindBalustradeGroups, doorSpanCandidates, BALCONY_SLAB_ASSUMED_M, BALUSTRADE_HEIGHT_ASSUMED_M, floorLevelDoorGroups, readBalconyOutline } from './projecting-balcony.js'
 import { planReconcileTolerance, refusalDiagnostics, reportWallReconciliation } from './wall-reconciliation-report.js'
 import type { WallReconciliationReport } from './wall-reconciliation-report.js'
 import type { OpeningFit, ReconstructionCandidate, UnresolvedCandidate, SolverStep, PrimitiveTrace } from '../candidate.js'
@@ -98,7 +99,7 @@ import type { FeatureQualityReport } from './quality.js'
 import { repairFromResiduals, verifyAgainstViews } from './verify.js'
 import type { RepairTrace, SourceViewResidual } from './verify.js'
 import { dominantTone, lumaAt, neutralBands, topNeutralInkRow } from './scan.js'
-import { approximateRidgeDatum } from './roof-datum.js'
+import { approximateRidgeDatum, topDatumBelowPublishedHeight } from './roof-datum.js'
 import { viewAudit } from './view-audit.js'
 import { measureOpeningOnView, scanFacadeOpenings } from './facade-openings.js'
 import type { FacadeBand, FacadeView, FacadeOpeningReading, FacadeOpeningRejection } from './facade-openings.js'
@@ -185,7 +186,7 @@ import type { ApproximateRidge } from './roof-datum.js'
 // a face keeps a stated 5 cm jamb there (the model needs wall on both sides of an opening; a sub-millimetre sliver put
 // its reveal into the other wall's face). The compiler, unversioned, also changed in this stage: a wall top over a
 // valley crossing its thickness takes the lowest underside across the wall; roof cut lines closer than 0.1 mm are one
-export const SOLVER_V2_VERSION = '2.21.0' as const
+export const SOLVER_V2_VERSION = '2.22.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
@@ -369,7 +370,17 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const sectionFrame = graph.coordinateFrames.find((f) => f.roles.projection === 'ORTHOGRAPHIC_SECTION' && (keep ? keep(f) : true))
   // SHAPE-LIVE-01: the section's drawing says whether its highest datum read is the top of the building
   const sectionRaster = sectionFrame ? options.raster(sectionFrame) : undefined
-  const levels = levelsFrom(metrics, sectionFrame?.id, sectionRaster ? (datums) => readTopDatum(sectionRaster, datums) : undefined)
+  // EXTERIOR-COMPLETE: or the published building height says so, and the drawing agrees (`roof-datum.ts`)
+  const printedTerrainY = metrics.evidence.filter((e) => e.kind === 'LEVEL_DATUM' && e.value < 0 && e.value > -1.5).sort((a, b) => b.confidence - a.confidence)[0]?.value
+  const topCheck: TopDatumCheck | undefined = sectionRaster
+    ? (datums) => {
+        const drawn = readTopDatum(sectionRaster, datums)
+        if (!drawn || drawn.belowDrawnRoof) return drawn
+        const why = topDatumBelowPublishedHeight({ topDatum: Math.max(...datums.map((d) => d.value)), drawnRise: drawn.riseAtShare, publishedFacts: options.publishedAreas ?? [], ...(printedTerrainY !== undefined ? { printedTerrainY } : {}) })
+        return why ? { ...drawn, belowDrawnRoof: true, why } : drawn
+      }
+    : undefined
+  const levels = levelsFrom(metrics, sectionFrame?.id, topCheck)
   if (levels.topRefused) {
     gap({ what: 'the ridge datum of the section', reason: `the highest datum read, ${levels.topRefused.value.toFixed(2)} m, is not the ridge: ${levels.topRefused.why}; the ridge's own label was not read`, status: 'MISSING', observationIds: [], evidenceIds: levels.evidenceIds })
     step({ stage: 'levels', what: 'the highest datum read refused as the ridge', method: 'DIRECT', detail: levels.topRefused.why, inputs: levels.evidenceIds.length, outputs: 0 })
@@ -631,7 +642,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const pitchSupport = layout.roofSupports.find((r) => r.massId === main.sourceMassId)
   const drawnApex =
     levels.topDatum === undefined && levels.topRefused && sectionRaster && pitchSupport?.pitchDeg && (pitchSupport.authority === 'PUBLISHED_SPECIFICATION' || pitchSupport.authority === 'PRINTED_ANGLE') && pitchSupport.kind !== 'FLAT' && pitchSupport.kind !== 'UNKNOWN'
-      ? readDrawnApex(sectionRaster, levels.topRefused.datums, pitchSupport.pitchDeg.value)
+      ? readDrawnApex(sectionRaster, levels.topRefused.datums, pitchSupport.pitchDeg.value, { topRefused: true })
       : undefined
   if (drawnApex) step({ stage: 'roof', what: 'the ridge datum, measured on the section drawing', method: 'DIRECT', detail: drawnApex.why, inputs: levels.topRefused?.datums.length ?? 0, outputs: 1 })
   const ridgeY = levels.topDatum ?? drawnApex?.ridgeY
@@ -658,7 +669,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     topFloorPrinted: levels.measured && groundAt + topStorey < levels.floors.length,
     metrics,
     publishedFacts: options.publishedAreas ?? [],
-    printedTerrainY: metrics.evidence.filter((e) => e.kind === 'LEVEL_DATUM' && e.value < 0 && e.value > -1.5).sort((a, b) => b.confidence - a.confidence)[0]?.value,
+    printedTerrainY,
   })
   const roofDatum = approximateRidge.ok ? approximateRidge.datum : undefined
   const roofRidgeY = ridgeY ?? roofDatum?.ridgeY
@@ -1810,7 +1821,9 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     ]
     const callouts = metrics.evidence.filter((e) => e.kind === 'OPENING_CALLOUT' && e.frameId === entry.plan.frame.id)
     const backHost: WallHost = { massId: host.id, facade, planeAt: round6(backFace), from: round6(lowFace), to: round6(highFace), centreAt: round6(backFace + (inward * T) / 2), storeyIndex: index, floorY: l.elevation, storeyHeightM: l.height, endsAtFaces: true }
-    const backOpenings = readWallOpenings({ ...(options.featureTrace ? { trace: options.featureTrace } : {}), plan: entry.frame, planRaster: entry.raster, host: backHost, wallThicknessM: T, callouts, views: [], attachedSingleStorey: false, onRefused: (r) => gap({ what: `the gap ${r.interval[0].toFixed(2)}..${r.interval[1].toFixed(2)} on the back wall of the recess in ${host.id}'s ${facade.toLowerCase()} face`, reason: r.why, status: 'REFUSED', observationIds: [], evidenceIds: [] }), index: hostIndex++ }).map((o) => ({ ...o, id: `${id}-${o.id}` }))
+    // EXTERIOR-COMPLETE: the back wall stands parallel to the face it is set back from, so the face's elevation draws its
+    // openings at their places along it (an orthographic view keeps no depth): their heights and faces are read there
+    const backOpenings = readWallOpenings({ ...(options.featureTrace ? { trace: options.featureTrace } : {}), plan: entry.frame, planRaster: entry.raster, host: backHost, wallThicknessM: T, callouts, views: viewsOf(facade), attachedSingleStorey: false, onRefused: (r) => gap({ what: `the gap ${r.interval[0].toFixed(2)}..${r.interval[1].toFixed(2)} on the back wall of the recess in ${host.id}'s ${facade.toLowerCase()} face`, reason: r.why, status: 'REFUSED', observationIds: [], evidenceIds: [] }), index: hostIndex++ }).map((o) => ({ ...o, id: `${id}-${o.id}` }))
     const why = `${rec.why}; its mouth ${lowFace.toFixed(2)}..${highFace.toFixed(2)} m between the returns' faces the plan's ink gives, on the ${facade.toLowerCase()} face is a passage${read ? `, its head read on the ${read.elevation?.frameId} elevation` : ', its head the storey\'s ceiling (assumed: the elevation does not read it)'}, and ${backOpenings.length} opening${backOpenings.length === 1 ? '' : 's'} stand in its back wall`
     const sid = sighting(entry.plan.frame, `a recess in the ${facade.toLowerCase()} face on the storey ${index} plan`, rec.confidence, [], region.pixelRect)
     const featureId = feature('RECESS', id, { depth: { value: Math.abs(backFace - mouthAt), low: Math.abs(backFace - mouthAt) - 0.05, high: Math.abs(backFace - mouthAt) + 0.05 }, width: { value: highFace - lowFace, low: highFace - lowFace - 0.05, high: highFace - lowFace + 0.05 }, headY: { value: headY, low: headY - 0.1, high: headY + 0.1 } }, [sid], 'SOURCE_DERIVED', why, { storeyIndex: index, hostId: host.featureId, uncertaintyM: 0.05, parameterProvenance: { headY: read ? 'IMAGE_METRIC_REGISTERED' : 'ASSUMED_FOR_RENDERING' } })
@@ -2225,13 +2238,22 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   for (const [storey, plan] of [...planByStorey].sort(([a], [b]) => a - b)) {
     const l = levelOf(storey)
     if (storey === 0 || !l) continue
-    for (const group of floorLevelDoorGroups(openings, storey, l.elevation).flatMap((g) => doorSpanCandidates(g, openings))) {
+    // EXTERIOR-COMPLETE: then, on a face that has no balcony yet, the French windows an elevation read behind a
+    // balustrade (`behindBalustradeGroups`): the plan's outline in front of them is what makes them a balcony's doors
+    const passes = [
+      ...floorLevelDoorGroups(openings, storey, l.elevation).flatMap((g) => doorSpanCandidates(g, openings)).map((group) => ({ group, behind: false })),
+      ...behindBalustradeGroups(openings, storey, l.elevation).flatMap((g) => doorSpanCandidates(g, openings)).map((group) => ({ group, behind: true })),
+    ]
+    for (const { group, behind } of passes) {
       if (balconies.some((b) => b.storeyIndex === storey && b.side === group.side)) continue
       const mass = masses.find((m) => m.id === group.massId)
       if (!mass) continue
       const wallSpan: [number, number] = group.side === 'FRONT' || group.side === 'REAR' ? [mass.x0, mass.x1] : [mass.z0, mass.z1]
       const outline = readBalconyOutline(plan.raster, plan.frame, group.side, group.planeAt, group.span, wallSpan, (why) => options.debug?.(`proud-balcony ${group.side} storey ${storey} doors ${group.span.join('..')} face ${group.planeAt}: ${why}`))
       if (!outline) continue
+      // EXTERIOR-COMPLETE: French windows a balustrade stands in front of only where the face's elevation draws one
+      // across them, above the floor
+      if (behind && !viewsOf(group.side).some((v) => readRailing(v.raster, v.view, { along0: group.span[0], along1: group.span[1] }, l.elevation, group.planeAt))) continue
       const rect = balconyRect(group.side, group.planeAt, outline)
       const id = `balcony-${group.side.toLowerCase()}-${storey}-proud`
       const sids = [sighting(plan.plan.frame, 'balcony outline beyond the face', 0.75)]
@@ -2244,6 +2266,17 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       relate('MEETS_HOST', featureId, mass.featureId, 'the slab projects from this body’s face at its floor')
       railings.push({ id: rid, storeyIndex: storey, start: path[0], end: path[path.length - 1], path, hostId: id, baseY: l.elevation, heightM: BALUSTRADE_HEIGHT_ASSUMED_M, featureId: rf, provenance: 'SOURCE_DERIVED', why: `round the three free edges of ${id}; ${BALUSTRADE_HEIGHT_ASSUMED_M} m high for viewing (DISPLAY_ASSUMPTION)` })
       step({ stage: 'facade', what: `a balcony standing proud of the ${group.side.toLowerCase()} face, storey ${storey}`, method: 'DIRECT', detail: outline.why, inputs: group.openingIds.length, outputs: 1 })
+      if (behind) {
+        // its doors reach the floor: what the elevation read as their sill is the balustrade's top
+        for (const o of openings) {
+          if (!group.openingIds.includes(o.id)) continue
+          const readSill = round6(o.sillY - l.elevation)
+          o.sillY = l.elevation
+          o.provenance = { ...o.provenance, sill: 'SOURCE_DERIVED' }
+          if (o.family === 'WINDOW') o.family = 'GLAZED_DOOR'
+          o.unresolved = [...o.unresolved, `a French window onto ${id}: its sill is the balcony floor (the elevation read ${readSill.toFixed(2)} m, the balustrade's top in front of it)`]
+        }
+      }
     }
   }
   // Terraces: the recess floors at the ground storey, and the outlined platform beyond the mouth where the plan draws one.

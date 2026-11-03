@@ -55,6 +55,8 @@ import { AnalysisError, PHASE_STAGE, diagnosticsBundle, encodePng, hashesOf, ide
 import type { AnalysisTelemetry, AnalysisTrace, PhaseStats } from '../src/index.js'
 import { renderSceneSheet } from '../../mobile-scene/scripts/scene-sheet.js'
 import { PNG } from 'pngjs'
+import { compileBuilding } from '@buildapp/geometry'
+import { buildMobileSceneBundle } from '@buildapp/mobile-scene'
 import { execFileSync } from 'node:child_process'
 import { basename } from 'node:path'
 import { AXIS_TOPOLOGY_VERSION, METRIC_EVIDENCE_TOPOLOGY_SCHEMA_VERSION, METRIC_READER_VERSION, METRIC_SOLVER_VERSION, DIMENSION_TOPOLOGY_VERSION } from '@buildapp/source-metrics'
@@ -148,6 +150,13 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
       writeFileSync(join(out, 'model.json'), serializeModel(r.model))
       write('program.json', r.candidate.program)
       writeOverlays(out, r.planDiagnostics, rasterOf)
+      // EXTERIOR-COMPLETE: the same four cameras as a full run, on the scene the production compiler makes of the model
+      if (argv.includes('--views')) {
+        const scene = compileBuilding(r.model)
+        writeFileSync(join(out, 'scene-views.png'), PNG.sync.write(renderSceneSheet(buildMobileSceneBundle(r.model, { scene }))))
+        writeFileSync(join(out, 'scene-all-sides.png'), PNG.sync.write(renderSceneSheet(buildMobileSceneBundle(r.model, { scene }), 360, 'ALL')))
+        write('compile-diagnostics.json', scene.diagnostics)
+      }
       log(`solver on the given evidence: completed, model ${r.candidate.modelHash.slice(0, 16)}`)
       return 'COMPLETED'
     } catch (error) {
@@ -230,6 +239,7 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
     writeFileSync(join(out, 'model.json'), serializeModel(run.result.model))
     writeOverlays(out, run.planDiagnostics, rasterOf)
     writeFileSync(join(out, 'scene-views.png'), PNG.sync.write(renderSceneSheet(run.result.scene)))
+    writeFileSync(join(out, 'scene-all-sides.png'), PNG.sync.write(renderSceneSheet(run.result.scene, 360, 'ALL')))
     writePerformance()
     for (const [k, h] of Object.entries(hashesOf(run.result))) log(`  ${k.padEnd(22)} ${h}`)
     log(`completed: ${run.result.counts.masses} masses, ${run.result.counts.openings} openings, ${run.result.counts.commands} commands, ${run.result.counts.meshes} meshes, ${run.timings.totalMs} ms`)

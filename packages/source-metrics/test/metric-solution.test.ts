@@ -235,6 +235,31 @@ describe('orientation decisions from scale-free evidence', () => {
   })
 })
 
+describe('EXTERIOR-COMPLETE: a sheet sets its vertical text one way', () => {
+  // horizontal 1100 over 550 px: 2.00 cm/px. Three short vertical chains (too short to decide a scale) fit it read
+  // bottom to top, and are decided by it. The long overall one, on a sheet resized a fraction unevenly (2.018 cm/px down
+  // the sheet), misses the horizontal scale by more than the tolerance either way up, so that scale alone leaves it
+  // undecided; the sheet's way up decides it, through the same scale.
+  const chains = [hChain(760, [100, 650]), vChain(300, [100, 150]), vChain(400, [200, 250]), vChain(500, [300, 350]), vChain(700, [50, 496])]
+  const cw = [vLabel('100', 300, 100, 150, 'ROTATED_CW'), vLabel('100', 400, 200, 250, 'ROTATED_CW'), vLabel('100', 500, 300, 350, 'ROTATED_CW'), vLabel('900', 700, 50, 496, 'ROTATED_CW')]
+  const ccw = [vLabel('700', 300, 100, 150, 'ROTATED_CCW'), vLabel('700', 400, 200, 250, 'ROTATED_CCW'), vLabel('700', 500, 300, 350, 'ROTATED_CCW'), vLabel('600', 700, 50, 496, 'ROTATED_CCW')]
+  const across = hLabel('1100', 760, 100, 650)
+  it('the chains the other axis decided decide for the long one, and it depends on that scale as theirs do', () => {
+    const { solution } = solve(chains, [across, ...cw], [across, ...cw, ...ccw])
+    const ys = solution.orientationDecisions.filter((d) => d.axis === 'Y')
+    expect(ys.map((d) => d.chosen)).toEqual(['ROTATED_CW', 'ROTATED_CW', 'ROTATED_CW', 'ROTATED_CW'])
+    expect(ys.every((d) => d.decidedBy === 'OTHER_AXIS_SCALE')).toBe(true)
+  })
+  it('with the sheet split between the two ways, nothing decides for it', () => {
+    // one short chain reads top to bottom at the horizontal scale: 2 against 1 is no way up for the sheet
+    const split = [cw[0], cw[1], vLabel('100', 500, 300, 350, 'ROTATED_CCW'), cw[3]]
+    const other = [ccw[0], ccw[1], vLabel('700', 500, 300, 350, 'ROTATED_CW'), ccw[3]]
+    const { solution } = solve(chains, [across, ...split], [across, ...split, ...other])
+    const long = solution.orientationDecisions.find((d) => d.axis === 'Y' && d.chainId === ids(chains)[4])
+    expect(long?.decidedBy).toBe('UNDECIDED')
+  })
+})
+
 describe('the chain graph', () => {
   it('a total over exactly what a finer chain divides is its TOTAL_OF, with the sum recorded and not forced', () => {
     const total = hChain(100, [100, 650])

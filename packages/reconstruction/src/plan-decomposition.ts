@@ -128,6 +128,12 @@ export type GridLine = {
 
 export type CellClass = 'BUILT' | 'RECESS' | 'OUTSIDE'
 
+/**
+ * EXTERIOR-COMPLETE: a recess no deeper than this (from its mouth's face to its set-back wall) holds no room behind an
+ * open mouth — rooms are deeper — so it is an entrance porch or a niche; a garage's mouth (a car's length) is far deeper.
+ */
+export const PORCH_MAX_DEPTH_M = 2
+
 /** How shut one edge of one cell is, and what shuts it. */
 export type EdgeClosure = {
   /** Fraction covered by wall bands. */
@@ -2421,19 +2427,29 @@ function decomposeCore(
 
   // 005N: a recess the facade's own topology establishes — two returns and a set-back wall behind a mouth — is a
   // recess whichever cells the grid happens to cut it into: a cell of it the outside reaches is RECESS, not ground,
-  // even when the grid splits the pocket so that no one cell is shut on three sides. Never a built cell.
+  // even when the grid splits the pocket so that no one cell is shut on three sides.
+  // EXTERIOR-COMPLETE: in a recess too shallow to hold a room (PORCH_MAX_DEPTH_M: an entrance porch), a cell lying WHOLLY
+  // inside the mouth's span, between the mouth's line and the set-back wall, is in front of the wall that closes the
+  // building there, so it is the recess too, even when ink drawn across its front (an entrance step, a callout ring
+  // before the door) kept the flood out and left it enclosed. A cell reaching past the mouth's ends or the back wall,
+  // the facade wall's own band, and anything behind a deeper mouth (a garage) are never taken.
   for (const span of spans) {
     for (const interval of span.intervals) {
       if (interval.role !== 'RECESS_MOUTH' || !interval.recess) continue
       const back = interval.recess.gridLinePx ?? interval.recess.backWallPx
       const [a0, a1] = [Math.min(back, span.linePx), Math.max(back, span.linePx)]
       for (const cell of cells) {
-        if (cell.classification !== 'OUTSIDE') continue
+        if (cell.classification === 'RECESS') continue
         const [u0, u1, v0, v1] = span.axis === 'Y' ? [cell.rect.x0, cell.rect.x1, cell.rect.y0, cell.rect.y1] : [cell.rect.y0, cell.rect.y1, cell.rect.x0, cell.rect.x1]
         const within = (u0 + u1) / 2 > interval.fromPx && (u0 + u1) / 2 < interval.toPx && (v0 + v1) / 2 > a0 && (v0 + v1) / 2 < a1
         if (!within) continue
+        // the grid runs on the walls' axes: a cell of the recess reaches half a wall into its returns and its back wall
+        const slack = wallPx / 2 + 2
+        // (a built strip no deeper than a wall band is the facade wall's own band, which the wall-strip pass reads)
+        if (cell.classification === 'BUILT' && (interval.recess.depthM > PORCH_MAX_DEPTH_M || v1 - v0 <= 1.5 * wallPx || !(u0 >= interval.fromPx - slack && u1 <= interval.toPx + slack && v0 >= a0 - slack && v1 <= a1 + slack))) continue
+        const was = cell.classification
         cell.classification = 'RECESS'
-        cell.why = `inside the recess behind ${interval.id}: returns at both ends and a set-back wall ${interval.recess.depthM.toFixed(2)} m behind its mouth`
+        cell.why = `inside the recess behind ${interval.id}: returns at both ends and a set-back wall ${interval.recess.depthM.toFixed(2)} m behind its mouth${was === 'BUILT' ? ' (enclosed by ink drawn across its front, but wholly in front of the wall that closes the building)' : ''}`
       }
     }
   }

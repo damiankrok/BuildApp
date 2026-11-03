@@ -10,7 +10,7 @@ import type { OpeningFamilyFacts, OpeningSymbols } from '../src/v2/opening-readi
 
 const W = 200
 const H = 160
-function face(kind: 'panel' | 'glass' | 'timber'): Raster {
+function face(kind: 'panel' | 'glass' | 'timber' | 'blind'): Raster {
   const data = new Uint8ClampedArray(W * H * 4)
   for (let y = 0; y < H; y += 1) {
     for (let x = 0; x < W; x += 1) {
@@ -18,6 +18,7 @@ function face(kind: 'panel' | 'glass' | 'timber'): Raster {
       let c: [number, number, number]
       if (kind === 'panel') c = y % 30 < 2 ? [60, 62, 66] : [88, 90, 94] // sections and their grooves, one tone along a row
       else if (kind === 'glass') c = (x * 7 + y * 3) % 50 < 20 ? [70, 96, 74] : [150, 166, 182] // sky and leaves mirrored, as drawn
+      else if (kind === 'blind') c = y % 8 === 0 ? [128, 128, 130] : Math.floor(y / 3) % 2 === 0 ? [212, 216, 222] : [88, 94, 100] // glass behind a striped blind
       else c = [180 + ((x * 13) % 20), 120, 70] // timber
       data.set([...c, 255], o)
     }
@@ -33,6 +34,18 @@ describe('the face of an opening on the elevation', () => {
     expect(openingFace(face('panel'), box)?.kind).toBe('OPAQUE_PANEL')
     expect(openingFace(face('glass'), box)?.kind).toBe('GLAZED')
     expect(openingFace(face('timber'), box)?.kind).toBe('CLAD')
+  })
+  it('glass behind a striped blind is flat along each row but not one tone down it: no panel', () => {
+    const blind = openingFace(face('blind'), box)
+    expect(blind?.kind).not.toBe('OPAQUE_PANEL')
+    expect(blind?.toneChangesPerRow).toBeGreaterThan(0.12)
+    expect(openingFace(face('panel'), box)?.toneChangesPerRow).toBeLessThanOrEqual(0.12)
+  })
+  it('a shadow under the lintel across the top of a panel is one run at its edge, not a slat: still a panel', () => {
+    const shaded = face('panel')
+    // the wall above the head (white), a frame line, then the lintel's shadow fading into the panel
+    for (let y = 0; y < 50; y += 1) for (let x = 0; x < W; x += 1) shaded.data.set(y < 22 ? [250, 250, 250, 255] : y === 22 ? [100, 100, 100, 255] : [45 + y / 2, 47 + y / 2, 49 + y / 2, 255], (y * W + x) * 4)
+    expect(openingFace(shaded, box)?.kind).toBe('OPAQUE_PANEL')
   })
   it('a box too small to read gives no face', () => {
     expect(openingFace(face('panel'), { x0: 0, y0: 0, x1: 5, y1: 5 })).toBeUndefined()

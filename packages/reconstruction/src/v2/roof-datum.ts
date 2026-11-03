@@ -102,3 +102,34 @@ export function approximateRidgeDatum(input: ApproximateRidgeInput): Approximate
     `the published building height ${H} m leaves ${margin} m for terrain${input.printedTerrainY === undefined ? ' (not read)' : ''} and roof build-up (assumed nil at the eaves), which is consistent — an approximate datum for rendering, not a printed one`
   return { ok: true, datum: { ridgeY, eaveY, kneeWallM: knee.m, buildingHeightM: H, halfSpanM: half, heightMarginM: margin, evidenceIds: [knee.id, ...(pitchId ? [pitchId] : [])], why } }
 }
+
+/**
+ * EXTERIOR-COMPLETE: whether the published building height says the highest datum a section reader managed to read is
+ * NOT the ridge. A building H tall above the terrain has its ridge at about H − d (d the terrain depth below ±0.00,
+ * printed or within ROOF_DATUM_TERRAIN_DEPTH_M) less the roof's build-up over the ridge datum. A top datum lower than
+ * that by more than the build-up is an eave or a slab mark whose ridge label went unread — taking it for the ridge sinks
+ * the roof to the eaves.
+ *
+ * The height alone does not refuse it: some pages measure to a chimney's top. The section must agree — its drawing has
+ * to carry ink across part of the building's width (`riseAtShare`, `section-datums.ts`) at least half as high above the
+ * datum as the height leaves — so a narrow chimney over a true ridge mark never refuses it. Returns the reason, or
+ * undefined when the height and the drawing do not both say so.
+ */
+export function topDatumBelowPublishedHeight(input: {
+  topDatum: number
+  /** The drawing's rise above the top datum across part of the building's width (m), when the sheet gives a scale. */
+  drawnRise: number | undefined
+  publishedFacts: ReadonlyArray<{ key: string; value: number; unit: string }>
+  printedTerrainY?: number
+}): string | undefined {
+  const heights = input.publishedFacts.filter((f) => f.key === 'building_height' && f.unit === 'm')
+  if (heights.length !== 1 || input.drawnRise === undefined) return undefined
+  const H = heights[0].value
+  if (!(H >= 3 && H <= 20)) return undefined
+  const depth = input.printedTerrainY !== undefined ? -input.printedTerrainY : ROOF_DATUM_TERRAIN_DEPTH_M.max
+  const left = round6(H - depth - input.topDatum)
+  if (!(left > CONVENTIONS.roofThickness + PRINTED_TERRAIN_TOLERANCE_M)) return undefined
+  if (!(input.drawnRise >= left / 2)) return undefined
+  const terrain = input.printedTerrainY !== undefined ? `the printed terrain ${input.printedTerrainY} m` : `a terrain at most ${ROOF_DATUM_TERRAIN_DEPTH_M.max} m below ±0.00`
+  return `the published building height ${H} m over ${terrain} leaves ${left} m above the highest datum read (+${input.topDatum.toFixed(2)}), more than a roof build-up of ${CONVENTIONS.roofThickness} m, and the section draws ink ${input.drawnRise.toFixed(2)} m above that datum across part of the building's width: a roof stands above it, so it is not the ridge`
+}

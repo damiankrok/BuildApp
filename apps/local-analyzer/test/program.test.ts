@@ -116,7 +116,8 @@ describe('the bundle, run as the phone runs it, gives the desktop pipeline’s b
     const result = await expectParity(FIXTURE_PROJECTS.sliverton)
     const summary = JSON.parse(readFileSync(join(result.outDir, 'result.json'), 'utf8')) as LinkAnalysisSummary
     expect(summary.preview.outcome).toBe('PARTIAL_3D_PREVIEW')
-    expect(summary.preview.partial?.failure).toMatchObject({ commandIndex: 21, type: 'createWallRing', id: 'ring-attached-0-0', codes: ['WALLS_OVERLAP'] })
+    // EXTERIOR-COMPLETE: one more material (the gate's, `mat-gate`) is defined before the rings: 21 → 22
+    expect(summary.preview.partial?.failure).toMatchObject({ commandIndex: 22, type: 'createWallRing', id: 'ring-attached-0-0', codes: ['WALLS_OVERLAP'] })
     expect(summary.preview.built.wallRings).toBe(2)
     expect(summary.warningDetails.map((w) => w.code)).toContain('PARTIAL_3D_PREVIEW')
     expect((result.terminal as unknown as { summary: LinkAnalysisSummary }).summary.preview.outcome).toBe('PARTIAL_3D_PREVIEW')
