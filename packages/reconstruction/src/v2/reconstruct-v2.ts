@@ -1593,6 +1593,8 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const isGableEnd = (m: MassV2, facade: 'FRONT' | 'REAR' | 'WEST' | 'EAST'): boolean => !!mainRoof && m.id === main.id && ((mainRoof.ridgeAxis === 'Z' && (facade === 'FRONT' || facade === 'REAR')) || (mainRoof.ridgeAxis === 'X' && (facade === 'WEST' || facade === 'EAST')))
   // 005U-N4: a garage room's one open side (`garageMouth`): the room is named a garage by a number read inside it
   // and the publisher's list, never by its area; two open sides, or none, and no gap is made a vehicle door.
+  // EXTERIOR-COMPLETE: the publisher states a garage for this house (its area among the published facts)
+  const garageStated = (options.publishedAreas ?? []).some((f) => f.key === 'garage_area' && f.value > 0)
   const vehicleMouths = new Map<string, { from: number; to: number; roomId: string; why: string }>()
   // 005Y-N5 (C3): the garage rooms the publisher's list names, for the doors in their walls
   const garageRooms: Array<{ massId: string; bounds: { x0: number; z0: number; x1: number; z1: number }; why: string }> = []
@@ -1642,7 +1644,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         // 005V: a top-storey wall of the main body parallel to the ridge stops where the roof's underside meets it.
         const underEaves = !gable && mainRoof && m.id === main.id && index === topStorey ? round6(mainRoof.eaveY - mainRoof.thicknessM / Math.cos((mainRoof.pitchDeg * Math.PI) / 180)) : undefined
         const host: WallHost = { massId: m.id, facade, planeAt, from, to, centreAt: round6(planeAt + (inward * T) / 2), storeyIndex: index, ...(gable ? { gable } : {}), ...(underEaves !== undefined ? { eaveTopY: underEaves } : {}), floorY: l.elevation, storeyHeightM: gable ? round6(mainRoof!.ridgeY - l.elevation) : l.height }
-        const found = readWallOpenings({ ...(options.featureTrace ? { trace: options.featureTrace } : {}), onBandViewAccepted: (frameId) => acceptedBandViews.add(frameId), plan: entry.frame, planRaster: entry.raster, host, wallThicknessM: m.wallThicknessM ?? T, callouts, views: [...viewsOf(facade).filter((v) => !openingHeightRefused.has(v.view.registration.frameId) || openingViewOverrides.has(v.view.registration.frameId)), ...openingOnlyViews.filter((v) => v.view.side === (facade === 'WEST' ? 'LEFT' : facade === 'EAST' ? 'RIGHT' : facade))].map((v) => openingViewOverrides.get(v.view.registration.frameId) ?? v), attachedSingleStorey: m.role === 'ATTACHED' && m.storeys.length === 1, onRefused: (r) => gap({ what: `the gap ${r.interval[0].toFixed(2)}..${r.interval[1].toFixed(2)} on the ${facade.toLowerCase()} wall of ${m.id}, storey ${index}`, reason: r.why, status: 'REFUSED', observationIds: [], evidenceIds: [] }), ...(vehicleMouths.has(`${m.id}:${facade}`) && index === 0 ? { vehicleMouth: vehicleMouths.get(`${m.id}:${facade}`) } : {}), ...(index === 0 ? { garageRooms: garagesOf(m, r) } : {}), index: hostIndex++ })
+        const found = readWallOpenings({ ...(options.featureTrace ? { trace: options.featureTrace } : {}), onBandViewAccepted: (frameId) => acceptedBandViews.add(frameId), plan: entry.frame, planRaster: entry.raster, host, wallThicknessM: m.wallThicknessM ?? T, callouts, views: [...viewsOf(facade).filter((v) => !openingHeightRefused.has(v.view.registration.frameId) || openingViewOverrides.has(v.view.registration.frameId)), ...openingOnlyViews.filter((v) => v.view.side === (facade === 'WEST' ? 'LEFT' : facade === 'EAST' ? 'RIGHT' : facade))].map((v) => openingViewOverrides.get(v.view.registration.frameId) ?? v), attachedSingleStorey: m.role === 'ATTACHED' && m.storeys.length === 1, onRefused: (r) => gap({ what: `the gap ${r.interval[0].toFixed(2)}..${r.interval[1].toFixed(2)} on the ${facade.toLowerCase()} wall of ${m.id}, storey ${index}`, reason: r.why, status: 'REFUSED', observationIds: [], evidenceIds: [] }), ...(vehicleMouths.has(`${m.id}:${facade}`) && index === 0 ? { vehicleMouth: vehicleMouths.get(`${m.id}:${facade}`) } : {}), ...(index === 0 ? { garageRooms: garagesOf(m, r) } : {}), ...(garageStated ? { garageStated: true } : {}), faceViews: viewsOf(facade).filter((v) => openingHeightRefused.has(v.view.registration.frameId)), index: hostIndex++ })
         const faceIndex = hostIndex - 1
         // N8-02B: over a stretch this face shares as one wall, the gaps are read on that wall (below, or by its host)
         const shared = partyWalls.filter((p) => p.storeyIndex === index && ((p.hostMassId === m.id && p.hostFacade === facade) || (p.otherMassId === m.id && OPPOSITE_SIDE[p.hostFacade] === facade)))
@@ -2095,9 +2097,19 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         const across = mainRoof.ridgeAxis === 'Z' ? [c.x0, c.x1] : [c.z0, c.z1]
         return Math.min(along[1], r.alongTo) - Math.max(along[0], r.alongFrom) > 0 && Math.min(across[1], Math.max(r.slopeFrom, r.slopeTo)) - Math.max(across[0], Math.min(r.slopeFrom, r.slopeTo)) > 0
       })
+    // EXTERIOR-COMPLETE: two readings whose footprints meet on the same slope are one rooflight (or a rooflight and the
+    // chimney it cannot share the roof with), however far their centres drifted between the readers: one object, the
+    // later reading kept as a sighting of it, never a second cut through the same tiles.
+    const across = (r: { slopeFrom: number; slopeTo: number }): [number, number] => [Math.min(r.slopeFrom, r.slopeTo), Math.max(r.slopeFrom, r.slopeTo)]
+    const meets = (p: { alongFrom: number; alongTo: number; slopeFrom: number; slopeTo: number }, q: { alongFrom: number; alongTo: number; slopeFrom: number; slopeTo: number }): boolean => {
+      const [a0, a1] = across(p)
+      const [b0, b1] = across(q)
+      return Math.min(p.alongTo, q.alongTo) - Math.max(p.alongFrom, q.alongFrom) > -0.05 && Math.min(a1, b1) - Math.max(a0, b0) > -0.05
+    }
     // Plan rooflights, each confirmed where a render shows a patch on the same slope over the same stretch of ridge.
     for (const p of planRooflights) {
       if (chimneyAt(p)) continue
+      if (rooflights.some((q) => q.slope === p.slope && meets(p, q))) continue
       const seen = renderRooflights.filter((r) => r.slope === p.slope && overlapsAlong(p, r))
       const sids = [sighting((topEntry as NonNullable<typeof topEntry>).plan.frame, 'a rooflight callout inside the storey under the roof', p.confidence)]
       for (const r of seen) {
@@ -2111,7 +2123,8 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     }
     // A patch no plan rooflight explains stays what it was: a rooflight read on a render alone.
     for (const r of renderRooflights) {
-      if (rooflights.some((p) => p.slope === r.slope && overlapsAlong(p, r))) continue
+      if (rooflights.some((p) => p.slope === r.slope && (overlapsAlong(p, r) || meets(p, r)))) continue
+      if (chimneyAt(r)) continue
       const frame = frameById.get(r.frameId)
       const sid = frame ? [sighting(frame, 'a light patch in the roof plane', r.confidence)] : []
       const widthM = round6(r.alongTo - r.alongFrom)

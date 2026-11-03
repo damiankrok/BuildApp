@@ -1,0 +1,121 @@
+{
+  "note": "Characteristic exterior elements per DEV house, written from the publisher's renders, elevations and section BEFORE any model was judged (EXTERIOR-COMPLETE §2). Source: E=elevation, R=exterior render, S=section, P=plan. Sides as the publisher's elevation captions say (front/rear/side). Each item is an acceptance check: present, kind, side, rough size/relation.",
+  "houses": {
+    "arletach-3-e-oze": [
+      {"id": "body", "check": "one rectangular body, ground + usable attic", "src": "E,S"},
+      {"id": "roof", "check": "40° gable, ridge across the front (gable ends front/rear), ridge +8.29, eaves +3.34", "src": "S,E"},
+      {"id": "garage-gate", "check": "single sectional gate on the front gable, left", "src": "E front,R"},
+      {"id": "entrance", "check": "front door with timber-clad panel to its right, front", "src": "E front,R"},
+      {"id": "front-attic-windows", "check": "two tall windows in the front gable", "src": "E front"},
+      {"id": "rear-glazing", "check": "large terrace doors ground rear, two attic windows rear", "src": "E rear"},
+      {"id": "rooflight", "check": "rooflight(s) on a side slope", "src": "R"},
+      {"id": "chimney", "check": "one chimney through the slope", "src": "E,S"},
+      {"id": "palette", "check": "white render, dark grey plinth/garage zone, timber panel, anthracite roof", "src": "R"}
+    ],
+    "jablonkach-22": [
+      {"id": "body", "check": "main body ground + attic", "src": "E,S"},
+      {"id": "roof", "check": "40° gable ridge parallel to the front, ridge +8.26, eaves +3.27", "src": "S,E"},
+      {"id": "front-dormer", "check": "front wall dormer / cross-gable over the entrance with a French balcony window", "src": "E front,R"},
+      {"id": "rear-gable-wing", "check": "rear single-storey wing with its own gable roof perpendicular to the main ridge, timber-clad gable, large glazing", "src": "E rear,S"},
+      {"id": "garage-gate", "check": "single gate front left", "src": "E front"},
+      {"id": "entrance", "check": "front door with timber panel under the dormer", "src": "E front"},
+      {"id": "rooflights", "check": "two rooflights rear slope", "src": "E rear"},
+      {"id": "chimney", "check": "chimney through the rear slope", "src": "E"},
+      {"id": "palette", "check": "white render, timber, grey roof", "src": "R"}
+    ],
+    "miniaturka-2-ver-3": [
+      {"id": "body", "check": "main body ground + attic, garage part under the same roof line", "src": "E,S"},
+      {"id": "roof", "check": "40° gable ridge parallel to the front, half-hipped (jerkin) ends, ridge +7.33, eaves +2.68", "src": "S,E,R"},
+      {"id": "entrance-porch", "check": "small gabled porch roof over the front door (timber frame)", "src": "E front,R"},
+      {"id": "garage-gate", "check": "single gate front left (timber-coloured)", "src": "E front"},
+      {"id": "rooflights", "check": "rooflights front (3) and rear (3-4)", "src": "E,R"},
+      {"id": "chimneys", "check": "two chimneys", "src": "E,S"},
+      {"id": "shutters", "check": "timber shutters on windows (surface detail, may be colour)", "src": "R"},
+      {"id": "palette", "check": "white render, timber gate/shutters, dark stone plinth, anthracite roof", "src": "R"}
+    ],
+    "willa-maja-r2": [
+      {"id": "body", "check": "semi-detached pair, two full storeys, one rectangular block", "src": "E"},
+      {"id": "roof", "check": "22° hip roof, ridge along the long front, ridge +7.98", "src": "E,S"},
+      {"id": "rear-balconies", "check": "two rear balconies with glass railings on a projecting slab over the ground-floor terrace", "src": "E rear,R"},
+      {"id": "front-entrances", "check": "two front doors in a timber-clad recess under a canopy line", "src": "E front"},
+      {"id": "front-band", "check": "dark panel band between upper windows front", "src": "E front"},
+      {"id": "chimneys", "check": "several chimneys", "src": "E"},
+      {"id": "palette", "check": "white render, timber, anthracite roof, grey panels", "src": "R"}
+    ],
+    "daliach-5-ge": [
+      {"id": "body", "check": "main body ground + attic with a single-storey dark front zone (garage + entrance) projecting under a flat roof", "src": "E,R"},
+      {"id": "roof", "check": "42° gable ridge parallel to the front, steep, long eaves", "src": "E,S"},
+      {"id": "garage-gate", "check": "single gate front right", "src": "E front,R"},
+      {"id": "entrance-frame", "check": "dark entrance frame/canopy projecting around the timber-clad door, front centre", "src": "E front,R"},
+      {"id": "front-window", "check": "large window front left", "src": "E front"},
+      {"id": "gable-balcony", "check": "glazed gable with balcony/railing on a side", "src": "R"},
+      {"id": "rear-glazing", "check": "large terrace glazing + timber panels rear, two rooflights rear", "src": "E rear"},
+      {"id": "palette", "check": "white upper render, anthracite ground zone, timber, dark roof", "src": "R"}
+    ],
+    "azaliach-3": [
+      {"id": "body", "check": "ground + attic, 40° gable", "src": "E,S"},
+      {"id": "pergola", "check": "pergola/canopy on posts over a side terrace (open, posts not walls)", "src": "E,R"},
+      {"id": "entrance-canopy", "check": "flat entrance canopy with vertical slat screen, front", "src": "E front,R"},
+      {"id": "french-balconies", "check": "French balconies (glass) on the gable windows", "src": "E side,R"},
+      {"id": "rooflights", "check": "rooflights front 1, rear 2", "src": "E"},
+      {"id": "palette", "check": "white render, timber cladding ground floor, grey roof", "src": "R"}
+    ],
+    "bratkach-26-r2be": [
+      {"id": "body", "check": "semi-detached pair, two storeys, 30° gable ridge along the long side", "src": "E,S"},
+      {"id": "rear-balcony", "check": "rear balcony with railing on a projecting slab", "src": "E rear,R"},
+      {"id": "front-canopy", "check": "thin entrance canopy over front doors", "src": "E front,R"},
+      {"id": "dark-panels", "check": "dark grey vertical panels between windows", "src": "R"},
+      {"id": "palette", "check": "white render, dark panels, timber, anthracite roof", "src": "R"}
+    ],
+    "pod-milorzebem-21-gb": [
+      {"id": "body", "check": "one half of a semi-detached pair, ground + attic, 35° gable, ridge +8.97", "src": "E,S"},
+      {"id": "front-dormer", "check": "front cross-gable dormer with two windows", "src": "E front,R"},
+      {"id": "garage-gate", "check": "single gate front", "src": "E front"},
+      {"id": "rear-balcony", "check": "rear balcony with glass railing on a slab under a rear dormer", "src": "E rear,R"},
+      {"id": "dark-plinth-band", "check": "dark ground-floor band", "src": "R"},
+      {"id": "palette", "check": "white upper, anthracite ground floor, timber entrance, grey roof", "src": "R"}
+    ],
+    "modrzewnicy-10-g2e-oze": [
+      {"id": "body", "check": "long main body ground + attic, 35° gable, ridge +7.80, eaves +3.36", "src": "E,S"},
+      {"id": "garage", "check": "attached double garage with a flat roof in front of one gable end, wide gate", "src": "E front,R"},
+      {"id": "open-canopy", "check": "flat open canopy on posts at the other end (side), carport/terrace, posts not walls", "src": "E side,R"},
+      {"id": "glazed-gables", "check": "large glazed gable triangles front and rear", "src": "E,R"},
+      {"id": "rear-recess", "check": "recessed covered terrace under the rear gable", "src": "R"},
+      {"id": "rooflights", "check": "rooflights on the long slope", "src": "E side"},
+      {"id": "palette", "check": "white render, timber accents, anthracite roof/gate", "src": "R"}
+    ],
+    "murajach": [
+      {"id": "body", "check": "compact two-storey box, 30° gable, ridge +7.67, eaves +5.50", "src": "E,S"},
+      {"id": "garage-gate", "check": "built-in single gate front right", "src": "E front"},
+      {"id": "band", "check": "white band at the first-floor line separating grey upper/white lower", "src": "E,R"},
+      {"id": "timber-panels", "check": "timber cladding panels upper front and rear", "src": "E"},
+      {"id": "french-balconies", "check": "glass French balconies on upper windows", "src": "E,R"},
+      {"id": "palette", "check": "grey upper render, white lower, timber, dark roof", "src": "R"}
+    ],
+    "lipiennikach-5": [
+      {"id": "body", "check": "bungalow, one rectangular body", "src": "E"},
+      {"id": "roof", "check": "hip roof, ridge along the long front", "src": "E"},
+      {"id": "entrance", "check": "front door with timber-clad panel, centre", "src": "E front"},
+      {"id": "rear-recess", "check": "rear terrace recess with timber cladding and large glazing", "src": "E rear"},
+      {"id": "chimneys", "check": "two/three chimneys", "src": "E"},
+      {"id": "palette", "check": "white render, timber, anthracite roof", "src": "E"}
+    ],
+    "aurorach-26-g": [
+      {"id": "body", "check": "ground + attic, one body", "src": "E"},
+      {"id": "roof", "check": "gable ridge PARALLEL to the front (front and rear are eaves sides)", "src": "E front,E rear"},
+      {"id": "garage-gate", "check": "single gate front left in a dark frame", "src": "E front"},
+      {"id": "entrance", "check": "front door with timber panel next to the gate", "src": "E front"},
+      {"id": "rear-pergola", "check": "rear pergola/frame on posts over terrace glazing", "src": "E rear"},
+      {"id": "rooflights", "check": "two rooflights rear", "src": "E rear"},
+      {"id": "palette", "check": "white render, anthracite garage zone, timber, grey roof", "src": "E"}
+    ],
+    "kostrzewach-4": [
+      {"id": "body", "check": "bungalow, one rectangular body", "src": "E,S"},
+      {"id": "roof", "check": "30° gable ridge parallel to the front, ridge +6.53, eaves +3.04", "src": "S,E"},
+      {"id": "entrance-frame", "check": "grey entrance frame with timber-clad door, front centre", "src": "E front"},
+      {"id": "rear-pergola", "check": "rear pergola on posts beside the timber-clad terrace glazing", "src": "E side,E rear"},
+      {"id": "chimney", "check": "one chimney", "src": "E"},
+      {"id": "palette", "check": "cream render, grey frame, timber, grey-blue roof", "src": "E"}
+    ]
+  }
+}

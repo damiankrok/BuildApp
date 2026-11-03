@@ -20,7 +20,8 @@ import type { ElevationFrameV2, PlanFrameV2 } from './frame.js'
 import { bandPieces, gapsBetween, inkFraction, mergeRuns, rgbAt, wallBodyPieces } from './scan.js'
 import type { ProvenanceStatus } from './graph.js'
 import { CONVENTIONS } from '../solve.js'
-import { DOOR_MAX_WIDTH_M, REACHES_FLOOR_M, VEHICLE_DOOR_MIN_WIDTH_M, classifyOpeningFamily, elevationConfidence, matchOpeningCallout, preferredElevationExtent, resolveSillAndHead } from './opening-reading.js'
+import { DOOR_MAX_WIDTH_M, REACHES_FLOOR_M, VEHICLE_DOOR_MIN_WIDTH_M, classifyOpeningFamily, elevationConfidence, matchOpeningCallout, openingFace, preferredElevationExtent, resolveSillAndHead } from './opening-reading.js'
+import type { OpeningFace } from './opening-reading.js'
 import type { NearbyCallout } from './opening-reading.js'
 
 export type Facade = 'FRONT' | 'REAR' | 'WEST' | 'EAST'
@@ -74,7 +75,7 @@ export type OpeningV2 = {
   /** N8-03B: the leaves of a door wider than one leaf — a leaf beside a fixed light, or two leaves — as the plan draws them. */
   leaves?: DrawnLeaves
   callout?: { widthCm: number; heightCm: number; evidenceId: string; distanceM: number; heightCandidates?: Array<{ cm: number; score: number }>; resolvedBy?: string; widthCorroboratedByPlan?: true }
-  elevation?: { frameId: string; sillY: number; headY: number; contrast: number; confidence: number }
+  elevation?: { frameId: string; sillY: number; headY: number; contrast: number; confidence: number; face?: OpeningFace }
   /** Mullion positions as fractions of the width, from stubs the plan draws inside the gap. */
   mullions: number[]
   planGap: { frameId: string; pixelRect: PixelRect }
@@ -427,6 +428,10 @@ export type OpeningReadingInput = {
    * drawing, its heights assumed unless something reads them. Absent everywhere else.
    */
   vehicleMouth?: { from: number; to: number; roomId: string; why: string }
+  /** EXTERIOR-COMPLETE: the publisher states a garage for this house (a published garage area). */
+  garageStated?: boolean
+  /** EXTERIOR-COMPLETE: the facade's registered views refused for opening heights, used only to read what fills an opening. */
+  faceViews?: Array<{ view: ElevationFrameV2; raster: Raster }>
   /** 005V: a gap not built as an opening, and why — reported by the caller as a refusal, never dropped silently. */
   onRefused?: (refusal: { interval: [number, number]; why: string }) => void
   /** 005Y-N1: diagnostics only (FEATURE_DEBUG): every gap, every callout weighed for it and why, and what it became. Write-only. */
@@ -455,7 +460,13 @@ function readOpeningOnViews(views: OpeningReadingInput['views'], interval: [numb
     const ext = preferredElevationExtent(byObject, byContrast)
     if (!ext) continue
     const confidence = elevationConfidence(ext.contrast)
-    if (!elevation || confidence > elevation.confidence) elevation = { frameId: view.registration.frameId, sillY: ext.sillY, headY: ext.headY, contrast: ext.contrast, confidence }
+    if (!elevation || confidence > elevation.confidence) {
+      // EXTERIOR-COMPLETE: what fills it, read inside the extent the elevation gives it
+      const xa = view.pxOf(interval[0])
+      const xb = view.pxOf(interval[1])
+      const face = openingFace(raster, { x0: Math.min(xa, xb), x1: Math.max(xa, xb), y0: view.pyOf(ext.headY), y1: view.pyOf(ext.sillY) })
+      elevation = { frameId: view.registration.frameId, sillY: ext.sillY, headY: ext.headY, contrast: ext.contrast, confidence, ...(face ? { face } : {}) }
+    }
   }
   return elevation
 }
@@ -619,6 +630,20 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
       ...(tracks ? { overheadTracks: { why: tracks.why } } : {}),
       attachedSingleStorey: input.attachedSingleStorey,
       ...(garageRoom ? { garageRoom: { why: garageRoom.why } } : {}),
+      ...(() => {
+        // EXTERIOR-COMPLETE: the face, from the elevation's own extent; or, when heights came from a callout and no
+        // extent was fitted, inside the resolved interval and heights on the facade's registered views
+        if (elevation?.face) return { face: elevation.face }
+        // a view refused for heights still places an opening along its wall, and the face is read well inside it
+        for (const { view, raster } of [...views, ...(input.faceViews ?? [])]) {
+          const xa = view.pxOf(lo)
+          const xb = view.pxOf(hi)
+          const face = openingFace(raster, { x0: Math.min(xa, xb), x1: Math.max(xa, xb), y0: view.pyOf(headY), y1: view.pyOf(sillY) })
+          if (face) return { face }
+        }
+        return {}
+      })(),
+      ...(input.garageStated ? { garageStated: true } : {}),
       symbols: {
         glazed: () => glazingDrawn(input.planRaster, symPlan, symHost, interval, symT) || glazingLinesDrawn(input.planRaster, symPlan, symHost, interval, symT, bandCentre),
         leaf: () => doorLeafFound(input.planRaster, symPlan, symHost, interval, symT, calloutBoxes, input.trace ? (d) => input.trace?.({ kind: 'DOOR_LEAF_DEBUG', interval: [round6(lo), round6(hi)], facade: host.facade, massId: host.massId, ...d }) : undefined),

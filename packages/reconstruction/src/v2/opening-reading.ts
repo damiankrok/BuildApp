@@ -6,6 +6,7 @@
  * Units: metres along and above the storey's world frame; callout sizes in centimetres as printed.
  */
 import { round6 } from '@buildapp/source-common'
+import type { Raster } from '@buildapp/source-cv'
 import type { ProvenanceStatus } from './graph.js'
 import { CONVENTIONS } from '../solve.js'
 import type { DrawnDoorLeaf, DrawnLeaves, OpeningFamily, OpeningV2, WallHost } from './openings-v2.js'
@@ -234,6 +235,10 @@ export type OpeningFamilyFacts = {
   attachedSingleStorey: boolean
   /** The wall belongs to a room the publisher's list names a garage. */
   garageRoom?: { why: string }
+  /** EXTERIOR-COMPLETE: what fills the opening on the elevation that read it, when one did. */
+  face?: OpeningFace
+  /** The publisher states a garage for this house (its area in the published facts): a vehicle door has a place to be. */
+  garageStated?: boolean
   symbols: OpeningSymbols
 }
 
@@ -251,6 +256,8 @@ export type OpeningFamilyDecision = {
 
 /** The width from which a ground-storey gap can be a vehicle door. */
 export const VEHICLE_DOOR_MIN_WIDTH_M = 2.2
+/** EXTERIOR-COMPLETE: a vehicle door is not taller than this (m); a taller flat face is a wall panel or a screen. */
+export const VEHICLE_DOOR_MAX_HEIGHT_M = 3.2
 
 /**
  * What kind of opening a gap is. A vehicle door, a door or a full-height screen needs a sill something READ: an
@@ -271,6 +278,18 @@ export function classifyOpeningFamily(f: OpeningFamilyFacts): OpeningFamilyDecis
   if (f.overheadTracks && !f.heightsAssumed) return { family: 'GARAGE_DOOR', provenance: 'SOURCE_DERIVED', notes: [`a vehicle door: ${f.overheadTracks.why}`] }
   if (f.heightsAssumed) return f.doorBySymbol ? { family: 'DOOR', provenance: f.doorSwing ? 'SOURCE_DERIVED' : 'VISUAL_SEMANTIC', notes: [] } : { family: 'WINDOW', provenance: 'ASSUMED_FOR_RENDERING', notes: [] }
   if (f.attachedSingleStorey && f.storeyIndex === 0 && f.widthM >= VEHICLE_DOOR_MIN_WIDTH_M && onFloorForVehicle) return { family: 'GARAGE_DOOR', notes: [] }
+  // EXTERIOR-COMPLETE: on the ground storey of a house whose publisher states a garage, an opening to the floor at least
+  // a vehicle door wide whose elevation face is one neutral flat panel — no sky or trees in it, no timber — is the
+  // garage door, read on the drawing, not glazing however wide it is.
+  if (reachesFloor && f.storeyIndex === 0 && f.widthM >= VEHICLE_DOOR_MIN_WIDTH_M && f.heightM <= VEHICLE_DOOR_MAX_HEIGHT_M && f.garageStated && f.face?.kind === 'OPAQUE_PANEL') {
+    return { family: 'GARAGE_DOOR', provenance: 'VISUAL_SEMANTIC', notes: [`a vehicle door by its face on the elevation: ${(f.face.neutralShare * 100).toFixed(0)} % neutral, ${f.face.alongRowStd} luma spread along a row (a flat panel, not glass), in a house the publisher states a garage for`] }
+  }
+  // EXTERIOR-COMPLETE: on the ground storey, a door-sized opening to the floor whose elevation face is a leaf — one
+  // opaque panel, or timber — and not glass is a door, whatever lines the plan draws across its gap (a threshold, a
+  // leaf's sidelight): a French window shows sky and trees in its panes, a door does not.
+  if (reachesFloor && f.storeyIndex === 0 && doorSized && f.widthM >= 0.75 && (f.face?.kind === 'OPAQUE_PANEL' || f.face?.kind === 'CLAD')) {
+    return { family: 'DOOR', provenance: 'VISUAL_SEMANTIC', notes: [`a door by its face on the elevation: ${f.face.kind === 'CLAD' ? `a clad leaf (saturation ${f.face.meanSaturation})` : `one opaque leaf (${(f.face.neutralShare * 100).toFixed(0)} % neutral, ${f.face.alongRowStd} spread along a row)`}, not glass`] }
+  }
   // N8-03B: on the ground storey, an opening to the floor wider than one door with a leaf drawn in it shorter than the
   // gap — a leaf beside a fixed light, or two leaves meeting — is a door that opens: a terrace door, not a screen of
   // panes, however wide. The count of its panes is not the count of its openings: it stays one opening.
@@ -301,4 +320,61 @@ export function classifyOpeningFamily(f: OpeningFamilyFacts): OpeningFamilyDecis
     if (leaf || f.symbols.swingDrawn()) return { family: 'DOOR', provenance: 'SOURCE_DERIVED', ...(leaf ? { leaf } : {}), notes: [`a door ${f.widthM.toFixed(2)} m wide: its ${leaf ? 'leaf' : 'swing'} is drawn, so the lines across the gap are its threshold, not glass`] }
   }
   return { family: 'WINDOW', notes: [] }
+}
+
+/**
+ * EXTERIOR-COMPLETE: what fills an opening on a registered elevation, read from its pixels. A vehicle door's panel is a
+ * neutral, flat face — every row of it one tone (only the grooves between panels change it, row to row); glass in these
+ * drawings mirrors sky and trees, so along a row it is anything but flat and a good part of it is coloured; timber is
+ * coloured throughout. Measured inside the opening with a margin off the frame.
+ */
+export type OpeningFace = { kind: 'OPAQUE_PANEL' | 'GLAZED' | 'CLAD' | 'UNCLEAR'; neutralShare: number; alongRowStd: number; meanSaturation: number }
+/** Thresholds, from the pixels of drawn gates against drawn glass (EXTERIOR-COMPLETE §gate): gates 0.98 / 1.8 / 8, glass 0.51–0.58 / 13–26 / 19–26, timber 0.03 / 18 / 55. */
+export const OPAQUE_PANEL_MIN_NEUTRAL = 0.85
+export const OPAQUE_PANEL_MAX_ROW_STD = 6
+export const CLAD_MIN_SATURATION = 40
+/** Timber's mean red-over-blue (measured on a published front elevation: timber +54, its glass −20 and −14). */
+export const CLAD_MIN_WARMTH = 30
+export function openingFace(raster: Raster, box: { x0: number; y0: number; x1: number; y1: number }): OpeningFace | undefined {
+  const mx = Math.max(2, Math.round((box.x1 - box.x0) * 0.08))
+  const my = Math.max(2, Math.round((box.y1 - box.y0) * 0.08))
+  const x0 = Math.max(0, Math.round(box.x0) + mx)
+  const x1 = Math.min(raster.width - 1, Math.round(box.x1) - mx)
+  const y0 = Math.max(0, Math.round(box.y0) + my)
+  const y1 = Math.min(raster.height - 1, Math.round(box.y1) - my)
+  if (x1 - x0 < 6 || y1 - y0 < 6) return undefined
+  let neutral = 0
+  let n = 0
+  let satSum = 0
+  let warmSum = 0
+  const rowStds: number[] = []
+  for (let y = y0; y <= y1; y += 1) {
+    let sum = 0
+    let sq = 0
+    let k = 0
+    for (let x = x0; x <= x1; x += 1) {
+      const o = (y * raster.width + x) * 4
+      const r = raster.data[o]
+      const g = raster.data[o + 1]
+      const b = raster.data[o + 2]
+      const sat = Math.max(r, g, b) - Math.min(r, g, b)
+      if (sat < 22) neutral += 1
+      satSum += sat
+      warmSum += r - b
+      n += 1
+      const l = 0.299 * r + 0.587 * g + 0.114 * b
+      sum += l
+      sq += l * l
+      k += 1
+    }
+    rowStds.push(Math.sqrt(Math.max(0, sq / k - (sum / k) ** 2)))
+  }
+  rowStds.sort((a, b) => a - b)
+  const neutralShare = neutral / n
+  const alongRowStd = rowStds[Math.floor(rowStds.length / 2)]
+  const meanSaturation = satSum / n
+  // timber is warm (red well above blue); glass mirroring sky is cool however saturated
+  const warm = warmSum / n >= CLAD_MIN_WARMTH
+  const kind: OpeningFace['kind'] = neutralShare >= OPAQUE_PANEL_MIN_NEUTRAL && alongRowStd <= OPAQUE_PANEL_MAX_ROW_STD ? 'OPAQUE_PANEL' : meanSaturation >= CLAD_MIN_SATURATION && warm ? 'CLAD' : neutralShare < 0.75 && alongRowStd > 10 ? 'GLAZED' : 'UNCLEAR'
+  return { kind, neutralShare: Math.round(neutralShare * 1000) / 1000, alongRowStd: Math.round(alongRowStd * 10) / 10, meanSaturation: Math.round(meanSaturation * 10) / 10 }
 }

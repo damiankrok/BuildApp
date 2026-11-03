@@ -51,6 +51,7 @@ export const MATERIALS_V2 = {
   chimney: 'mat-chimney',
   terrace: 'mat-terrace',
   mid: 'mat-render-mid',
+  gate: 'mat-gate',
 } as const
 
 /** The material a broad tone read off the renders stands for. */
@@ -188,6 +189,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
   push({ type: 'defineMaterial', id: MATERIALS_V2.chimney, name: 'Chimney', color: '#6d6a66' })
   push({ type: 'defineMaterial', id: MATERIALS_V2.terrace, name: 'Terrace paving', color: '#a49c92' })
   push({ type: 'defineMaterial', id: MATERIALS_V2.mid, name: 'Grey render', color: '#8e8983' })
+  push({ type: 'defineMaterial', id: MATERIALS_V2.gate, name: 'Garage door', color: '#55585c' })
 
   for (const m of b.masses) onDebug?.(`mass ${m.id} (${m.role}) x ${m.x0}..${m.x1} z ${m.z0}..${m.z1} storeys ${m.storeys.join(',')} wall ${b.wallThicknessM}`)
   // N8-03C: the main gable cut where a wing's roof runs over it, or why it is built whole (`valley-cut.ts`)
@@ -913,7 +915,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     if (kind === 'WINDOW') {
       push({ type: 'placeWindow', id: `${o.id}-unit`, openingId: o.id, ...(o.mullions.length > 0 ? { mullions: o.mullions } : {}), ...frameWithinWall('WINDOW', hostT), materialId: MATERIALS_V2.glass }, o.id, 'windows')
     } else if (o.family === 'GARAGE_DOOR') {
-      push({ type: 'placeDoor', id: `${o.id}-leaf`, openingId: o.id, ...frameWithinWall('DOOR', hostT), assembly: { panels: [{ kind: 'PANEL', fraction: 1 }], mullionWidth: 0.04 } }, o.id, 'doors')
+      push({ type: 'placeDoor', id: `${o.id}-leaf`, openingId: o.id, ...frameWithinWall('DOOR', hostT), assembly: { panels: [{ kind: 'PANEL', fraction: 1 }], mullionWidth: 0.04 }, usage: 'GARAGE', materialId: MATERIALS_V2.gate }, o.id, 'doors')
     } else if (o.family === 'GLAZED_DOOR' && o.leaves) {
       push({ type: 'placeDoor', id: `${o.id}-leaf`, openingId: o.id, ...frameWithinWall('DOOR', hostT), ...drawnLeafAssembly(o.leaves, o.widthM, reversed), materialId: MATERIALS_V2.glass }, o.id, 'doors')
     } else if (o.family === 'GLAZED_DOOR') {

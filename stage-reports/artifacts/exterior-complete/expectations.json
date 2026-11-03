@@ -1,0 +1,18 @@
+{
+  "note": "Machine-checkable form of source-elements.json, fixed before tuning. ridge: PARALLEL = main ridge parallel to the front facade (model x), ACROSS = gable on the front. Counts are minimums from the sources; sides: front/rear/side. A check that the model vocabulary cannot express yet is still listed and fails until it can.",
+  "houses": {
+    "arletach-3-e-oze": {"ridge": "ACROSS", "gate": "front", "entrance": "front", "rooflights": 1, "chimneys": 1},
+    "jablonkach-22": {"ridge": "PARALLEL", "gate": "front", "entrance": "front", "dormer": "front", "wing": "rear", "rooflights": 2, "chimneys": 1},
+    "miniaturka-2-ver-3": {"ridge": "PARALLEL", "gate": "front", "entrance": "front", "canopy": "front", "rooflights": 4, "chimneys": 2},
+    "willa-maja-r2": {"ridge": "PARALLEL", "roofKind": "HIP", "entrance": "front", "balcony": "rear", "railing": "rear", "chimneys": 2},
+    "daliach-5-ge": {"ridge": "PARALLEL", "gate": "front", "entrance": "front", "frontWindow": true, "canopy": "front", "wing": "front", "rooflights": 2},
+    "azaliach-3": {"ridge": "PARALLEL", "entrance": "front", "canopy": "front", "posts": "side", "rooflights": 2},
+    "bratkach-26-r2be": {"ridge": "PARALLEL", "entrance": "front", "balcony": "rear", "railing": "rear", "canopy": "front"},
+    "pod-milorzebem-21-gb": {"ridge": "PARALLEL", "gate": "front", "entrance": "front", "dormer": "front", "balcony": "rear", "railing": "rear"},
+    "modrzewnicy-10-g2e-oze": {"ridge": "ACROSS", "gate": "front", "wing": "front", "posts": "side", "canopy": "side", "rooflights": 1},
+    "murajach": {"ridge": "PARALLEL", "gate": "front", "entrance": "front", "railing": "front"},
+    "lipiennikach-5": {"ridge": "PARALLEL", "roofKind": "HIP", "entrance": "front", "chimneys": 2},
+    "aurorach-26-g": {"ridge": "PARALLEL", "gate": "front", "entrance": "front", "posts": "rear", "rooflights": 2},
+    "kostrzewach-4": {"ridge": "PARALLEL", "entrance": "front", "posts": "rear", "chimneys": 1}
+  }
+}

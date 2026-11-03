@@ -17,6 +17,10 @@ import { polygonSignedArea } from '@buildapp/model'
 import { extrudeLocalRegion } from './region.js'
 import { cross, dot, scale, add, type GeometryPart, type Triangle, type Vec3 } from './types.js'
 
+/** EXTERIOR-COMPLETE: the height of one section of a sectional vehicle door, and the groove between two (m). */
+const GARAGE_SECTION_M = 0.55
+const GARAGE_GROOVE_M = 0.03
+
 export type FillPiece = { part: GeometryPart; triangles: Triangle[] }
 
 /** An axis-aligned box in wall-local coordinates. */
@@ -366,6 +370,17 @@ export function compileDoorFill(door: Door, opening: Opening, f: WallFrame): { p
       } else if (p.kind === 'GLAZED') {
         const gc = c0 + door.frameDepth / 2 - DOOR_GLASS_THICKNESS / 2
         localBox(glass, f, la0, la1, bottom, b1 - fw, gc, gc + DOOR_GLASS_THICKNESS)
+      } else if (door.usage === 'GARAGE') {
+        // EXTERIOR-COMPLETE: a vehicle door is a stack of horizontal sections; the grooves between them are geometry
+        // (a recess over a backing plate), so the door reads as a sectional gate and not as one flat leaf.
+        const pc = c0 + door.frameDepth / 2 - door.leafThickness / 2
+        const top = b1 - fw
+        const sections = Math.max(2, Math.round((top - bottom) / GARAGE_SECTION_M))
+        const h = (top - bottom) / sections
+        localBox(panel, f, la0, la1, bottom, top, pc + door.leafThickness * 0.6, pc + door.leafThickness)
+        for (let k = 0; k < sections; k += 1) {
+          localBox(panel, f, la0, la1, bottom + k * h + GARAGE_GROOVE_M / 2, bottom + (k + 1) * h - GARAGE_GROOVE_M / 2, pc, pc + door.leafThickness * 0.6)
+        }
       } else {
         const pc = c0 + door.frameDepth / 2 - door.leafThickness / 2
         localBox(panel, f, la0, la1, bottom, b1 - fw, pc, pc + door.leafThickness)
