@@ -1,0 +1,7 @@
+{
+ "schema": "source-01.label-audit/1",
+ "note": "blind relabel of 40 TEST images (sample by sha256(\"audit|\"+hash)) from anonymised sheets, compared afterwards with the inherited IU labels",
+ "agree": 40,
+ "total": 40,
+ "disagreements": []
+}

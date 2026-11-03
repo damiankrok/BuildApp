@@ -1,0 +1,431 @@
+{
+ "schema": "source-01.labels/1",
+ "note": "agent labels from anonymised contact sheets (index and pixel size only; no URL, caption, house or production role), made before any SOURCE-01 classifier or threshold existed; not OWNER-verified",
+ "rows": [
+  {
+   "sha256": "0252c87aee1c58d99ec80a55d93dcfd3ba77b2ccd95e0618b69a26810d99a29b",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 0
+  },
+  {
+   "sha256": "03ad042de57ad72304886ccdd8ddd3e00eb6262855123843fea861697e5b98f6",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 1
+  },
+  {
+   "sha256": "078ee1496610952de27e030f2123282f745120cbca7b1aea3006ef07ff569928",
+   "label": "SITE_PLAN",
+   "sheetIndex": 2
+  },
+  {
+   "sha256": "0803c60a0e602f74a084e649c8030beea6269dc850a28402ce17ad1dd5ed71e9",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 3
+  },
+  {
+   "sha256": "0d66703955209220b9ba44bb5bfe6c1fca0ea097a5e9c1850b260849f2f979d9",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 4
+  },
+  {
+   "sha256": "0fb4a4c53bc4b0688669868bcca410f32ace382a031bac758f943519de7efdb3",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 5
+  },
+  {
+   "sha256": "0fbf31c0e9bd65989e6c762a86c7244707fa37679521264efedaf28270f3e05b",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 6
+  },
+  {
+   "sha256": "1125043a0f8f072999e3d2483c0385f9c73715ffbddd18d2c9263bab28c5f5d1",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 7
+  },
+  {
+   "sha256": "11d25fc619785d408669f135fd155380de18381e76314430bd7f75e3cbcaf2f5",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 8
+  },
+  {
+   "sha256": "1b2014d07c0b41bf68c59b72bdf88f83a0b93cc615c93bc427280e41960e0083",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 9
+  },
+  {
+   "sha256": "1cc5c74906675c25f77e0713c815ff694c88eb43c3a6f2b2301808c7158a8dbb",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 10
+  },
+  {
+   "sha256": "1dd48af2bdc23198c188429ce36870084d755a2c6206ee6aadbbf04a5c806219",
+   "label": "SITE_PLAN",
+   "sheetIndex": 11
+  },
+  {
+   "sha256": "1eaafc89ec67456135ea9614d6d0d02b506f8fffa14c1132026ba08e007aedca",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 12
+  },
+  {
+   "sha256": "2b4856d5bd393cfca908026860a21745e6668b701d2eea2a35b516a0bcfbdde5",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 13
+  },
+  {
+   "sha256": "2d10e30c45201525ec78de8d502e53267ad04d3bb3152385a44634a3b4afb9e0",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 14
+  },
+  {
+   "sha256": "33ca8a954e2761a87c59db784273fc9588aaca5088fce26e7abf8343e8b281b7",
+   "label": "SITE_PLAN",
+   "sheetIndex": 15
+  },
+  {
+   "sha256": "3923f1f84d1800c386582857cf947f6ca1ddd3179f9f818250f46170080f2a99",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 16
+  },
+  {
+   "sha256": "3ea86369dd7cbe0bbcaf659b2dc61a5a1de3882d3723416a20f74909372af085",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 17
+  },
+  {
+   "sha256": "3ef09eae092870b6347519510a9ceb14a2b82a1d1607bdd5fe08bff62a0f03e7",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 18
+  },
+  {
+   "sha256": "44307529863c1e32f811165609be5d8f67315c45b88d2ee89cd419a8c3385840",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 19
+  },
+  {
+   "sha256": "45a77c662256f0902416904e840a3792493a05b4d03a824e0a12d7cebf782290",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 20
+  },
+  {
+   "sha256": "499577db45ea5e1d102eb26731cce161bfc79d34f83d78978f993035a587b0eb",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 21
+  },
+  {
+   "sha256": "4a1acea874756ddf0034895c6de352b5eb84d25a279c014a4fd951c5bbe2b820",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 22
+  },
+  {
+   "sha256": "4cc59176a30b4564d99b8a6798fd7d1783a196d7de8e0c72c5cedc1b94566833",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 23
+  },
+  {
+   "sha256": "56b2787618b073f30b8e3eac20c27f7d81c0bc33d9ce2fb6fe9390849139a25b",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 24
+  },
+  {
+   "sha256": "5b1fd8eb752af344fe4750808c3844d75d66c095a1bad7d2082eab879c27ff57",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 25
+  },
+  {
+   "sha256": "5d0f897205a9707d15b97d9718bd8f46b67126434307aaecd3644bebd8b9483d",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 26
+  },
+  {
+   "sha256": "5ddfdcc2718e409c004ca09446d3001121d077adc46edfe38cdd1d36e372a5fb",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 27
+  },
+  {
+   "sha256": "6a33fa6c14e609cff7c44a3ee11c516f8c71de8a004415c9af97482a8104d2c2",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 28
+  },
+  {
+   "sha256": "6ef64987549bd35b0b4f3154ab634c323d4c5b25fc59a52f15c3f98e905523b8",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 29
+  },
+  {
+   "sha256": "6f99f2a5da5b4d3c4cbb074fbffbce846b4e206494cef5bfb979a5fef4c9a452",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 30
+  },
+  {
+   "sha256": "71c434ea7b0b1738eb667b30feb78d9ccd562e51d93db0a8e51ac36b9d6c433f",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 31
+  },
+  {
+   "sha256": "72a7fc21e46b2a55e31ca8129e3189bd5e965c8bb20dc9dcc4aadd662e754e07",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 32
+  },
+  {
+   "sha256": "74b2d709d6aa349806f28196882e32051f87c16ecb145088841d3092dbf352b8",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 33
+  },
+  {
+   "sha256": "78119d3ca1e0d768b1079b29e84e4399fc349675682d6d2b9b073da84b7747e7",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 34
+  },
+  {
+   "sha256": "78b27d1a4038492c1d1f0c16b39480f5e7ed6c37358fbe4851908899bd21ea4c",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 35
+  },
+  {
+   "sha256": "7994293adb5c633dd5464ce562682699fc2b4633c261711501eaeaca7ca58c7f",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 36
+  },
+  {
+   "sha256": "7d24113f1dde3e36be0019134a0e9cf8f7335172a4ec76036abc512171106142",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 37
+  },
+  {
+   "sha256": "7ea879e607dcb04ebee6dcce766f90be9dcb7af9edb106161b637291e65690b1",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 38
+  },
+  {
+   "sha256": "7ee829b205fe5d07b15e646a333284c7aa4d88f77d2030ebd5e60bf7796ca4f0",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 39
+  },
+  {
+   "sha256": "83c5bb44d47f2271fc45b91c152ba2870fe0639d92c1248ab3269c852e0bc698",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 40
+  },
+  {
+   "sha256": "8450adfc5ef8038c14260ad3b0d39ecb073cfc770dcc07a78118b962021518c6",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 41
+  },
+  {
+   "sha256": "8fcded46f6fdfb9f56c73ddd049310f68478017338fb2353fa6c15e1216c5b4d",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 42
+  },
+  {
+   "sha256": "906667b3e1b9912cac4f564da07b0d3c27c05d35bf4870c2aa82732873180f82",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 43
+  },
+  {
+   "sha256": "916f5456ce099c755a486de809ce5897161d31c2f0bffa8180e477bf157a0ccb",
+   "label": "SITE_PLAN",
+   "sheetIndex": 44
+  },
+  {
+   "sha256": "92edd3ca7c171e5069362b5a3319ddf7fc10abeead34bde0c2926da1c945c8ce",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 45
+  },
+  {
+   "sha256": "930d0cf99448d006ad83049a572eea30128e893a2c20065d8420d71df5a6631b",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 46
+  },
+  {
+   "sha256": "95346a45c292fa55c52e9b4ffd488621aec32ea65bf802764966940743a0e821",
+   "label": "SITE_PLAN",
+   "sheetIndex": 47
+  },
+  {
+   "sha256": "9b242b273c9ffd92792c30eda6e7ecde003fcaf603f036340929c1117f21a680",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 48
+  },
+  {
+   "sha256": "9cb0148ba280df0dbbbc9d5eac5f5434d33ca380ab0859a756526910cbfd608a",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 49
+  },
+  {
+   "sha256": "a0d8c6262f29aabf028e5a2c28ed44e5c3067b5d6341c9e1fdea7b0c054c50a7",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 50
+  },
+  {
+   "sha256": "a186dc5de4ad1a8e13523de6e13887d9e44fc8b76ba57bb6c6273aa880281c96",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 51
+  },
+  {
+   "sha256": "a3a7e07ea376fc017deca79c9af48f5dd46d1616a7f2b672204cdac5e1284298",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 52
+  },
+  {
+   "sha256": "a75872bc9cedc4ee436020debb7451041010461186c2adeeda66812d79b4d8fb",
+   "label": "SITE_PLAN",
+   "sheetIndex": 53
+  },
+  {
+   "sha256": "acda6c94bcc4e1992ec1430f788fdd555ef395708e44d2ad5db909a4f54a3c38",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 54
+  },
+  {
+   "sha256": "b36646e0da67708387a7b376cde84d1e3833f28142dde8057d5ee58fdc0e024f",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 55
+  },
+  {
+   "sha256": "b4e2db463f511e0a76801712404c4bd3f9f4eb0cd4a0ea9eb206a2c036f25801",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 56
+  },
+  {
+   "sha256": "b7a2b482bf9f2425da85107697705209615981d3b2e4caa2640af44969640ddf",
+   "label": "SITE_PLAN",
+   "sheetIndex": 57
+  },
+  {
+   "sha256": "ba421932ce1e7fa7d2b5458d5e96798403914de3e413771bb5195a374ada5a8a",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 58
+  },
+  {
+   "sha256": "badf5fc7ab9852f0edc863bfdc001be34796933a82927384e71a8a7a37ae7288",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 59
+  },
+  {
+   "sha256": "bd1f30c6ff38595939375ad91ceec4f5afddfd6e84f4801505b217eb8f6ddab8",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 60
+  },
+  {
+   "sha256": "bd311aa7841ecbc3a664c054e79246a178ca9efdc44d5651a7cd2a6484162de2",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 61
+  },
+  {
+   "sha256": "bd7c6c9326f105ec2daf5e998a98e9b0c04519c638277fe1768b63be4a6f5662",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 62
+  },
+  {
+   "sha256": "bfb76c12623b5acae04a8c275a49188a29cd2055d4f22c3853d813198646a4da",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 63
+  },
+  {
+   "sha256": "c3ade6ea7fc85732c694d6748ad56bf1fdead70606920dc3b21f16da3025757b",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 64
+  },
+  {
+   "sha256": "c76b4cacd967d83c7f2d8a018d0878930092ec8410802c798bf6e1e87b7547fa",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 65
+  },
+  {
+   "sha256": "d04bf1e25e1495dd2deea83d6b61962e0c34f477ca1d00fd3429cf28c6dc62d5",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 66
+  },
+  {
+   "sha256": "d05b3f3ab5e0a6f5e9b2986040c9b14cc7217b171233284d9a1699c1ca485e14",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 67
+  },
+  {
+   "sha256": "d26da1cf07ac76418fc121ef30fef362ac88ba72b4201251c1c81da032bfa657",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 68
+  },
+  {
+   "sha256": "d84df79c9d04dd49e1be156ef04aead6a5ba2d0a956292c1050ad9ec42b7ebf6",
+   "label": "SITE_PLAN",
+   "sheetIndex": 69
+  },
+  {
+   "sha256": "d8d5c9891bde55064102deae8a8278beb67ff4ac62cc30b2c1939d5a3629f20e",
+   "label": "SITE_PLAN",
+   "sheetIndex": 70
+  },
+  {
+   "sha256": "da2c788299fc5be423f56d8cfde029c220e0da356e7bfd737c21797f6715f031",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 71
+  },
+  {
+   "sha256": "dcfc9ba01cf05025e23cd1f7f6eb8812bf171e0cc7db34c7fdac536ff2a1bcae",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 72
+  },
+  {
+   "sha256": "ddb21ad6614cd30a10214e0838375f6e125377167aff206129d0eaa6676e90ff",
+   "label": "SITE_PLAN",
+   "sheetIndex": 73
+  },
+  {
+   "sha256": "dec0d122b5a28cccdf6f6268140afb532256ad272dea315aa9fc58887129c770",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 74
+  },
+  {
+   "sha256": "deeb64cb55a66678b6950e0a85e915be6199322a43addb83f76363d46a71b489",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 75
+  },
+  {
+   "sha256": "e2c23d5ad99b5a93e2de6f31abb5c3ca3ccceab6cab287b7d77d4486ac69a96a",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 76
+  },
+  {
+   "sha256": "e5f544557073601ead7525c10ccc5c2030dcd9c4e5243b8f181ff9362474b000",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 77
+  },
+  {
+   "sha256": "ec8ade9906db0bf5ba8032c3d6e094829cf4c6d43ff43c58c5ef17316525c012",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 78
+  },
+  {
+   "sha256": "ed975608028144da690a7972edad0ab8123b4c2f5351e0132d537ab5c6169e0f",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 79
+  },
+  {
+   "sha256": "ee00fc6191f43321c99e4f8897d6abf8ac8f577ce00a2d5b115953a718e23a94",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 80
+  },
+  {
+   "sha256": "ef7b864dd5e5e9f2b9dd25850ab27028bad24bf326f0038b23547411f2d5f7e8",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 81
+  },
+  {
+   "sha256": "f71c280d0c7b0f39131a9697910c00ff1f88c9c27d1dda75fd101fd1c5b3e10b",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 82
+  },
+  {
+   "sha256": "fb5bfa876d11d09be78b6f852c6bf6f036cf24c5ec313e3c22b26e8a9ca98c52",
+   "label": "EXTERIOR_PERSPECTIVE",
+   "sheetIndex": 83
+  },
+  {
+   "sha256": "feadcfbcbbc7923214309e76ef2d0a4a8585a4ae7140d7b229038796d13e137a",
+   "label": "FLOOR_PLAN",
+   "sheetIndex": 84
+  }
+ ]
+}

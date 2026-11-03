@@ -1,0 +1,72 @@
+{
+ "schema": "source-01.split/1",
+ "rule": "families sorted by sha256(\"source-01-split|\"+family); the first 10 not among the eight regression houses are TEST; frozen before any classifier or threshold existed",
+ "test": [
+  {
+   "family": "archon:dom-miniaturka",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-miniaturka-2-ver-3-m4c723a6c22f61"
+  },
+  {
+   "family": "archon:dom-pod-milorzebem",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-pod-milorzebem-21-gb-mdab2497c5cb47"
+  },
+  {
+   "family": "archon:dom-w-arletach",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-arletach-3-e-oze-m504267f869cbe"
+  },
+  {
+   "family": "archon:dom-w-azaliach",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e"
+  },
+  {
+   "family": "archon:dom-w-bratkach",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-bratkach-26-r2be-m953292c7d56c7"
+  },
+  {
+   "family": "archon:dom-w-daliach",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-daliach-5-ge-me3c2885945467"
+  },
+  {
+   "family": "archon:dom-w-jablonkach",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18"
+  },
+  {
+   "family": "archon:dom-w-modrzewnicy",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-modrzewnicy-10-g2e-oze-m8a12761847734"
+  },
+  {
+   "family": "archon:dom-w-murajach",
+   "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-murajach-mfc224c195bead"
+  },
+  {
+   "family": "archon:willa-maja",
+   "url": "https://www.archon.pl/projekty-domow/projekt-willa-maja-r2-mcc7297f3e22da"
+  }
+ ],
+ "dev": [
+  "archon:dom-pod-jarzabem",
+  "archon:dom-w-akebiach",
+  "archon:dom-w-arkadiach",
+  "archon:dom-w-cieszyniankach",
+  "archon:dom-w-cyklamenach",
+  "archon:dom-w-czosnkach",
+  "archon:dom-w-dabecjach",
+  "archon:dom-w-glogownikach",
+  "archon:dom-w-goldstarach",
+  "archon:dom-w-gozdzikowcach",
+  "archon:dom-w-helikoniach",
+  "archon:dom-w-jarzmiankach",
+  "archon:dom-w-kosaccach",
+  "archon:dom-w-krasnokwiatach",
+  "archon:dom-w-ligolach",
+  "archon:dom-w-marcowkach",
+  "archon:dom-w-modrzykach",
+  "archon:dom-w-morelach",
+  "archon:dom-w-rarytasach",
+  "archon:dom-w-tunbergiach",
+  "archon:dom-w-tymianku",
+  "archon:dom-w-zurawkach",
+  "archon:dom-we-wrzosach",
+  "archon:willa-miranda"
+ ]
+}

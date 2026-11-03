@@ -1,0 +1,636 @@
+{
+ "assets": 270,
+ "unlabelled": 0,
+ "correctUse": 198,
+ "wronglyAdmitted": 54,
+ "wronglyRefused": 18,
+ "unknownRole": 18,
+ "coverage": {
+  "FACADE": "40/40",
+  "SECTION": "10/10",
+  "PLAN": "80/80",
+  "SITE": "10/10",
+  "EXTERIOR_CAMERA": "58/76",
+  "NONE": "0/54"
+ },
+ "confusion": {
+  "ORTHOGRAPHIC_ELEVATION": {
+   "ELEVATION": 40
+  },
+  "TECHNICAL_SECTION": {
+   "SECTION": 10
+  },
+  "FLOOR_PLAN": {
+   "FLOOR_PLAN": 80
+  },
+  "SITE_PLAN": {
+   "SITE_PLAN": 10
+  },
+  "EXTERIOR_PERSPECTIVE": {
+   "PERSPECTIVE_RENDER": 58,
+   "UNKNOWN": 18
+  },
+  "INTERIOR_PERSPECTIVE": {
+   "PERSPECTIVE_RENDER": 54
+  }
+ },
+ "routing": {
+  "FACADE": {
+   "FACADE": 40
+  },
+  "SECTION": {
+   "SECTION": 10
+  },
+  "PLAN": {
+   "PLAN": 80
+  },
+  "SITE": {
+   "SITE": 10
+  },
+  "EXTERIOR_CAMERA": {
+   "EXTERIOR_CAMERA": 58,
+   "NONE": 18
+  },
+  "NONE": {
+   "EXTERIOR_CAMERA": 54
+  }
+ },
+ "errors": [
+  {
+   "kind": "WRONGLY_REFUSED",
+   "house": "projekt-dom-miniaturka-2-ver-3-m4c723a6c22f61",
+   "sha256": "0d66703955209220b9ba44bb5bfe6c1fca0ea097a5e9c1850b260849f2f979d9",
+   "truth": "EXTERIOR_PERSPECTIVE",
+   "role": "UNKNOWN",
+   "use": "NONE"
+  },
+  {
+   "kind": "WRONGLY_REFUSED",
+   "house": "projekt-dom-pod-milorzebem-21-gb-mdab2497c5cb47",
+   "sha256": "fb5bfa876d11d09be78b6f852c6bf6f036cf24c5ec313e3c22b26e8a9ca98c52",
+   "truth": "EXTERIOR_PERSPECTIVE",
+   "role": "UNKNOWN",
+   "use": "NONE"
+  },
+  {
+   "kind": "WRONGLY_REFUSED",
+   "house": "projekt-dom-w-arletach-3-e-oze-m504267f869cbe",
+   "sha256": "525b698d05f0f802737a9db012174015bfa81f6dea2b041aac68fabe356c0cb0",
+   "truth": "EXTERIOR_PERSPECTIVE",
+   "role": "UNKNOWN",
+   "use": "NONE"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-arletach-3-e-oze-m504267f869cbe",
+   "sha256": "a2b79611481784f47189d6c4263397d1f3c971995aa264621efc638533a10343",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-arletach-3-e-oze-m504267f869cbe",
+   "sha256": "f83300af1eee982775ff64b01d8a64d2d5e10d2bc1e7deb41bc99c357e91b7c2",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-arletach-3-e-oze-m504267f869cbe",
+   "sha256": "e38c501756b8d1de3ab9c22f7f3a447adb2b6f6605ba13093ed90d7f3ee425a4",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_REFUSED",
+   "house": "projekt-dom-w-arletach-3-e-oze-m504267f869cbe",
+   "sha256": "9b242b273c9ffd92792c30eda6e7ecde003fcaf603f036340929c1117f21a680",
+   "truth": "EXTERIOR_PERSPECTIVE",
+   "role": "UNKNOWN",
+   "use": "NONE"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-arletach-3-e-oze-m504267f869cbe",
+   "sha256": "c308bd1db1367621e0f478ee70eadba630291351152aa76ee0dab4dd6d9dc96b",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-arletach-3-e-oze-m504267f869cbe",
+   "sha256": "a05932b102ce707329f69be6fd0bdbd122b4ef1e53780b107fcfc2b73facf60e",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-arletach-3-e-oze-m504267f869cbe",
+   "sha256": "f7482db912084e05caffb76c1c8d05d868d6cd53e995cbdcec9aaf00b0eb559c",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-arletach-3-e-oze-m504267f869cbe",
+   "sha256": "8721477342980aee386770c886ac60c63ca1687429b6397307adff752727fb94",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-arletach-3-e-oze-m504267f869cbe",
+   "sha256": "e5b79dfa25aed59ec69c2afddd84d594dcc90e2da2492a8e0fef760d9f84e9a9",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-arletach-3-e-oze-m504267f869cbe",
+   "sha256": "5907de3a53ef4772750f9a7b4b572f19b96108757af489b93dc0e9049f871f61",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-arletach-3-e-oze-m504267f869cbe",
+   "sha256": "ecdaabbc43079ba18d6d8da3c5cd25b191edc1f1eccc4a6234d4c3192a727e41",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-arletach-3-e-oze-m504267f869cbe",
+   "sha256": "23b7d3ef080eb19948c0dc878bd06d7dc1511ed693b7091ae1276e45a7603f90",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-arletach-3-e-oze-m504267f869cbe",
+   "sha256": "f42718860607230288546c64d4de6dc9b458980e4dfc7a226bbb1f384b54d548",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-arletach-3-e-oze-m504267f869cbe",
+   "sha256": "3348988d9fdd7eb4a36eb4c7a279d53b58fb9e7f27ac55c20ae95fbbefa50e12",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-arletach-3-e-oze-m504267f869cbe",
+   "sha256": "92c4c2e596040a1fb002801558e541b455b8c9165a43dc2784e72e6bed467a05",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_REFUSED",
+   "house": "projekt-dom-w-azaliach-3-ma6726144fab3e",
+   "sha256": "0fa50cf04076500fda751f81a5b223c166dfd858cc828476287765c133a0f202",
+   "truth": "EXTERIOR_PERSPECTIVE",
+   "role": "UNKNOWN",
+   "use": "NONE"
+  },
+  {
+   "kind": "WRONGLY_REFUSED",
+   "house": "projekt-dom-w-azaliach-3-ma6726144fab3e",
+   "sha256": "0803c60a0e602f74a084e649c8030beea6269dc850a28402ce17ad1dd5ed71e9",
+   "truth": "EXTERIOR_PERSPECTIVE",
+   "role": "UNKNOWN",
+   "use": "NONE"
+  },
+  {
+   "kind": "WRONGLY_REFUSED",
+   "house": "projekt-dom-w-bratkach-26-r2be-m953292c7d56c7",
+   "sha256": "b5f3c16b4cd0a9ab1ad1a7d07f5864ae9ae4028fa1ab74aad92446fe5cd4dc8a",
+   "truth": "EXTERIOR_PERSPECTIVE",
+   "role": "UNKNOWN",
+   "use": "NONE"
+  },
+  {
+   "kind": "WRONGLY_REFUSED",
+   "house": "projekt-dom-w-bratkach-26-r2be-m953292c7d56c7",
+   "sha256": "78119d3ca1e0d768b1079b29e84e4399fc349675682d6d2b9b073da84b7747e7",
+   "truth": "EXTERIOR_PERSPECTIVE",
+   "role": "UNKNOWN",
+   "use": "NONE"
+  },
+  {
+   "kind": "WRONGLY_REFUSED",
+   "house": "projekt-dom-w-daliach-5-ge-me3c2885945467",
+   "sha256": "42db2355cf07fe1adb27bbc768b8fc18cbac9eafe8d039f5f4ae614ee2362be0",
+   "truth": "EXTERIOR_PERSPECTIVE",
+   "role": "UNKNOWN",
+   "use": "NONE"
+  },
+  {
+   "kind": "WRONGLY_REFUSED",
+   "house": "projekt-dom-w-daliach-5-ge-me3c2885945467",
+   "sha256": "bd311aa7841ecbc3a664c054e79246a178ca9efdc44d5651a7cd2a6484162de2",
+   "truth": "EXTERIOR_PERSPECTIVE",
+   "role": "UNKNOWN",
+   "use": "NONE"
+  },
+  {
+   "kind": "WRONGLY_REFUSED",
+   "house": "projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+   "sha256": "2d10e30c45201525ec78de8d502e53267ad04d3bb3152385a44634a3b4afb9e0",
+   "truth": "EXTERIOR_PERSPECTIVE",
+   "role": "UNKNOWN",
+   "use": "NONE"
+  },
+  {
+   "kind": "WRONGLY_REFUSED",
+   "house": "projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+   "sha256": "62c34ecc4a93113c39f99d173c636588f17f56f57e44c9ee9241e7f7862c0cd3",
+   "truth": "EXTERIOR_PERSPECTIVE",
+   "role": "UNKNOWN",
+   "use": "NONE"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+   "sha256": "1df4b8a7a811bacbad3058a450187147a7c31b6b8ed4ec835a62e34f4d70ba84",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+   "sha256": "a02974a370b4046aef2e886b98de438c899695c9356a11f51015185e929bfd1c",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+   "sha256": "cfb87d6ae30ec6468e14c16dacaa69e53bc5cf70a6eba6fc6532dbf9f2b06b3a",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+   "sha256": "694f6e572ebacc7327679e97fe279de399087b1d61ca9cf58d9bbd2baef7aa9e",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+   "sha256": "f424a691f85ff67e603abdd0ef55f5c9f0ce6753e9b185029747d3f77713de8d",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+   "sha256": "41a6db71fc5f90d7b8bc51667d4038e2c9351e762a3e4b4f3264b1817a6b7f59",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+   "sha256": "51be65c450d121086e9233d448137ece2dd157cf65f6e2d41a7fdcf7473f64be",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+   "sha256": "15c78be1dfb9613116e1d489ddde4b4066a4b57349f86eab5481f984ca076de3",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+   "sha256": "58d6b1072126060f85e2f4156ec0272bbb018476e4e4c71cd19abf9574fcee05",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+   "sha256": "20e02b72778783ed3ac6c88624060b699103b20809abcb8d02101ef96b82b532",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+   "sha256": "ad6e9621093675bef6a70ee4a4a22654c493923184ee7b9480ac2a7edd12f232",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+   "sha256": "8f53b9db8241d5d7444a1c2ea96ff76be2c923501fa53c12c414ab343db2a5c8",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+   "sha256": "1b2362bfafcbd3b2dc4542a0765f99b2e4d6acb52ea2f3237baf0d7e5e40b6bd",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+   "sha256": "85303432cee9dc468124b6ab74d6cec3f5d8e3730361001854b3a8a3773fada1",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_REFUSED",
+   "house": "projekt-dom-w-modrzewnicy-10-g2e-oze-m8a12761847734",
+   "sha256": "1eaafc89ec67456135ea9614d6d0d02b506f8fffa14c1132026ba08e007aedca",
+   "truth": "EXTERIOR_PERSPECTIVE",
+   "role": "UNKNOWN",
+   "use": "NONE"
+  },
+  {
+   "kind": "WRONGLY_REFUSED",
+   "house": "projekt-dom-w-modrzewnicy-10-g2e-oze-m8a12761847734",
+   "sha256": "d05861b5f52da0a55df0e45cc10348103519ce045c66f61bd27d89bfab618324",
+   "truth": "EXTERIOR_PERSPECTIVE",
+   "role": "UNKNOWN",
+   "use": "NONE"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-murajach-mfc224c195bead",
+   "sha256": "3dc935cfe857f571a0453387aa18b261c6ad7445de3fb9b25ed98c21cc5fee78",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-murajach-mfc224c195bead",
+   "sha256": "b5bc8100ba8b10701b572d328a5a2236e58d28309558557034316c86df59c078",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-murajach-mfc224c195bead",
+   "sha256": "80674c90208dcb153fbd22ed6fcfd6af87a2f06497d7d71b23bcd6b20a33d6b2",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-murajach-mfc224c195bead",
+   "sha256": "2ec2cf7037657a5f060d6f989f66aaf65bda679498d2b52edc896015ec5b01af",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_REFUSED",
+   "house": "projekt-dom-w-murajach-mfc224c195bead",
+   "sha256": "ba421932ce1e7fa7d2b5458d5e96798403914de3e413771bb5195a374ada5a8a",
+   "truth": "EXTERIOR_PERSPECTIVE",
+   "role": "UNKNOWN",
+   "use": "NONE"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-murajach-mfc224c195bead",
+   "sha256": "0e4b1e1687a3be366af421bd8183cdf51827ca042d8dae0400b701db89b732b2",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-murajach-mfc224c195bead",
+   "sha256": "45c60ca8240994f75595947562db6fac4a1d1e3be88f988eb5c37099396764db",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-murajach-mfc224c195bead",
+   "sha256": "e3735c4b0824b7a629e24f35ec955027860826d2fddd89f19c16f4b95fa7734a",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-murajach-mfc224c195bead",
+   "sha256": "b2609fb02d5fd979782969e33b38f43d5b00c921d92cc78636057a324df910f9",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-murajach-mfc224c195bead",
+   "sha256": "fab003cb015e1c473bf3c6a8e51307e0fb0b39526091e2170420b9ba044a0c63",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-murajach-mfc224c195bead",
+   "sha256": "14b6d7a975f9e0605eb5b4abcf41cde4a963a8d7ff2aace29259fb8b04d7f0a5",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-murajach-mfc224c195bead",
+   "sha256": "a987dcdf6d06e131ca8dbb8c06d8f1595c8cea29b9ea35320a42ca153a85063c",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_REFUSED",
+   "house": "projekt-dom-w-murajach-mfc224c195bead",
+   "sha256": "78b27d1a4038492c1d1f0c16b39480f5e7ed6c37358fbe4851908899bd21ea4c",
+   "truth": "EXTERIOR_PERSPECTIVE",
+   "role": "UNKNOWN",
+   "use": "NONE"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-dom-w-murajach-mfc224c195bead",
+   "sha256": "ae635d3e5ed2d77b375b827e166e7f4d229277421bc5f770e6e3e1e1b42e52d9",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_REFUSED",
+   "house": "projekt-willa-maja-r2-mcc7297f3e22da",
+   "sha256": "5186994260f0dee1fde89ce94363949d062d665fa72134c5ea128dca248532b6",
+   "truth": "EXTERIOR_PERSPECTIVE",
+   "role": "UNKNOWN",
+   "use": "NONE"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-willa-maja-r2-mcc7297f3e22da",
+   "sha256": "2e73588d4303b0ecb61ddef053c3e917464ff1f0389ca237a27178b1c71a6c92",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-willa-maja-r2-mcc7297f3e22da",
+   "sha256": "7c5a72bd717e992a06c6f9db5fde03c5f062f96c3cf1f5217e20efd52196bfd9",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-willa-maja-r2-mcc7297f3e22da",
+   "sha256": "53ce1f55ff0ebfc132cdb7c01cf13bf3e3f872390647af7bc366bd4ed6b4cd09",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_REFUSED",
+   "house": "projekt-willa-maja-r2-mcc7297f3e22da",
+   "sha256": "f71c280d0c7b0f39131a9697910c00ff1f88c9c27d1dda75fd101fd1c5b3e10b",
+   "truth": "EXTERIOR_PERSPECTIVE",
+   "role": "UNKNOWN",
+   "use": "NONE"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-willa-maja-r2-mcc7297f3e22da",
+   "sha256": "3b1a8e27a1e51c8e204f162021cb32ca9b098879d7754c36c5af5d7df76891a8",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-willa-maja-r2-mcc7297f3e22da",
+   "sha256": "228a19c0ad5dcdc20beb4730f77dc0c418b54ceb529e47c6e174a2d2b0d7ea35",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-willa-maja-r2-mcc7297f3e22da",
+   "sha256": "cd8a6fafbaceb1aa536a1466cdc2f03487c09c682a2e48ff23a319fd1df6d35b",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-willa-maja-r2-mcc7297f3e22da",
+   "sha256": "9448af4922de20a8709ca16b98fd0eedaff209b5e03ca8279ad378d8968fc39a",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-willa-maja-r2-mcc7297f3e22da",
+   "sha256": "a2ddc68eddb1cbf218a8c39973e5df24358041b2bee3bf0a4c3e92fb64194a17",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-willa-maja-r2-mcc7297f3e22da",
+   "sha256": "f2a9ac5f5d8ee438c57ad1a59aa3558ffaa4e486a4d3f0d3c95b9c8949ace644",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-willa-maja-r2-mcc7297f3e22da",
+   "sha256": "797b7d56b068149198fc679333a8ff86bdabad0448d7e1bc00ed49151acf1e6c",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-willa-maja-r2-mcc7297f3e22da",
+   "sha256": "82b038a99c5161bb9d202c7e1a2a40ab1e422b465f19fce360242246b19073ac",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-willa-maja-r2-mcc7297f3e22da",
+   "sha256": "9b19f458ae7f8d55803986a04123994bc852475232cd9c28cd2e9a849cfe8908",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-willa-maja-r2-mcc7297f3e22da",
+   "sha256": "de0a19b4696e122e3e5271410728750503e7f61393fee696fd9c50ddb61d93ab",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  },
+  {
+   "kind": "WRONGLY_ADMITTED",
+   "house": "projekt-willa-maja-r2-mcc7297f3e22da",
+   "sha256": "99041e6938f282b18073f63b3acd3b1a7a77ca53dd73af7040fc62ed691b6560",
+   "truth": "INTERIOR_PERSPECTIVE",
+   "role": "PERSPECTIVE_RENDER",
+   "use": "EXTERIOR_CAMERA"
+  }
+ ]
+}
